@@ -4,119 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F9ACA0FF9
-	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D9D5CA0FF9
+	for <u-boot@archiver.kernel.org>; Fri, 29 Aug 2025 14:32:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3E8A8382A;
-	Fri, 29 Aug 2025 16:29:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 2429183835;
+	Fri, 29 Aug 2025 16:29:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AAB7834E5; Fri, 29 Aug 2025 08:10:22 +0200 (CEST)
-Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
- (mail-bjschn02on20706.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4440:2::706])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 545DF83487
- for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 08:10:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Qv+NpVDQq80xguQ/SMJA091XeugrK/kIznieJQzHKDwMGrrXz4DTGlOzQAOdk4ZWKvhgpkjVQeyV4QAF0sG7fdV5/Df6jJ3pzOJhKmjrCVDONdJZt2oqCRHK2LERVeLt4sIf/e1tGnlf/viPe1u6j/pUWL0AMB25X6+4MmUyb5YbaZaY+EYsNInDk+yTXR45TvPgSUh4p42xd0oBFn66Nfju+2lf9Ec6pe0ke5Llxbm6ovi+IBGcUkH3zQWlC+WXxgV8IS+vf83rHFjhbgyhFi0NIWY4+HuU1QnreCESdArgxB0t1nIfStRQgt5+cPV73PPCbEJOW9p/dSr0XemWjA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JRJ4ds8m5XqnKQS8h1oI4GGwbbZaDqwULaZU2FUIkOk=;
- b=fHYw4BjrwCJgbr0hcUTivsQ46xS47w0vYYaK7pfQp0teNHyYtlW0l/Uwv7dBsuBcihdh+hvqbA4wnfehwPZroMVMiUIjzKoSc9OkNlbAhe4I0DHiiEIrGNM0H+Jvh+yVhEheOd23lVUCFx8yjbIm40QLq5R9s2wf7MhKPHyutxkwuQAOSlTK60Hm36ld5/DVgwyA3Cs0rWN22OH9vmV7tJrkoXRUpqab5edSPdaOqJAfr6QAnXokgJHoY8yY2UuZUwk8b6w0eGMwbsYJm2MSEChr5CoYmMqXvyAZ3Divpm0a7RQyc8y3kAPPpeuS+fHrXTKl9VX5CCGsp/Py4yB3HA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1257.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:11::13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.25; Fri, 29 Aug
- 2025 06:10:15 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7%6]) with mapi id 15.20.9052.024; Fri, 29 Aug 2025
- 06:10:15 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- E Shattow <e@freeshell.de>
-Cc: Hal Feng <hal.feng@starfivetech.com>,
-	u-boot@lists.denx.de
-Subject: [RFC 10/10] board: starfive: visionfive2: Add VisionFive 2 Lite fdt
- selection
-Date: Fri, 29 Aug 2025 14:09:31 +0800
-Message-ID: <20250829060931.79940-11-hal.feng@starfivetech.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20250829060931.79940-1-hal.feng@starfivetech.com>
-References: <20250829060931.79940-1-hal.feng@starfivetech.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SHXPR01CA0018.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c311:1b::27) To ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14)
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EH03h3U7";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 4BFC5834AD; Fri, 29 Aug 2025 08:47:12 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EDE2283447
+ for <u-boot@lists.denx.de>; Fri, 29 Aug 2025 08:47:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sidharthseela@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-61c51f57224so2555082a12.2
+ for <u-boot@lists.denx.de>; Thu, 28 Aug 2025 23:47:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1756450029; x=1757054829; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=WajDkOhraTUlQnlRA0tcn3M0TZSAYLWGQOjpBf79nis=;
+ b=EH03h3U7HDDANf2QnJZ2RcT8uDvifVL6DlBxzuLh8RlUtEZL2zuVlBE8ueE1sDsd6L
+ M8te9luAKUb62pJ1kV7kwFSDgtaj73M7WW1kLcwbKcl9X/IBNX5ew2D+MdZk/3bZ0Sx3
+ VpPsmBnrZa/jAuzUgautg1LiMNN7rpt5mCYR07GaN9BzRfQzYAC0TtmNqtA/QV/OHwXA
+ 4xxukqTDEiXL+Qy2OZITyV5CpeAUHEQtup9z2eeN3NtBUpINwNEvkD6q7yPVl8xq2vcd
+ hylgcBLYpNscPxRN5skp1puzrO/PTpNBps6xzXn08ADQy1lNdrjR/Um5BjpBnCgOZOt9
+ Z/ZA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756450029; x=1757054829;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=WajDkOhraTUlQnlRA0tcn3M0TZSAYLWGQOjpBf79nis=;
+ b=bjoBLkAhGzbFKh/qbN6mqSxpUjcSxsVSiSRA/sW7rv7JL8OkEG4I2GXl0ezbanpK/e
+ D0ZAr3jJfCd0ygsbgjQC27SnQxGsY7aaA+FuVt7WJfhoPPE/En2oeI9/DL+dVACzaPAz
+ TzryYgots0xQwZJCv+aIEBaDT7ulUPoerMaIu4psPK0rRskJMqz+m0gpzUruUN+h9dhB
+ Ux5THgjfX15Bm1+CjbqgOQDiToZ2ohBUEw0VpRA/buYt3qAqxLj9rBP2V4ecbMhULg5y
+ zN2onZDsm+aPHtKPMhcpIb7OfKhshNeORG3zvYRH1H0wsH/Tgz6VUh/egYzip8DLJs4c
+ EhgA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV3k9KXUy/GBb+rM6+5A4VEib6PKpfvX18WU+fGZUj5nDYPDtcaXNa/X2D/iA4KCTA9OSDmKjQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YydPB+trWAltvvEj7gkYRjHoTIj6hxovYLFsX8WZn+5hUaXCCBp
+ xfOnYEAtiRZkpmfTDX/WgAkB27KHekZYdeY3SDtWTDOa2JynPiTJeVANIy09EbMHbg9VYXutKU2
+ vJiV5km/lnEcaopv4TMtcdoL7ed7mo55z5JSvrqg=
+X-Gm-Gg: ASbGncvlja9TDOrLdn3tw+1WjoMyPV4yxe2RfKRcDARXQXCjZkRFQ8NSrcVxDC6Dfv0
+ 909Q4RXKhuEtZxHrJciF2uvzlHLBZIDrqOR2TYvtFKi193TZXx/+cOs87SwxZYeuTRpD5kscxxi
+ uReXWFyHIS+ILznLIsFen1ksz9xjgbgF0wTATlJAxerXYgtEndkHW7+KMZQSOxA3b5nGbkrPPY+
+ 7EL5c5OYiovFL7tOw==
+X-Google-Smtp-Source: AGHT+IFfjTmN8PPc/0464BayeZUy0J5RSbBqE0yJqvL2FL98e00oJUw71t7DzV4LfQ9GAypJM5hNsdONNdKzb7HhqAU=
+X-Received: by 2002:a05:6402:5208:b0:61c:78dc:9fc6 with SMTP id
+ 4fb4d7f45d1cf-61c78dcb23cmr12375692a12.4.1756450029116; Thu, 28 Aug 2025
+ 23:47:09 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1257:EE_
-X-MS-Office365-Filtering-Correlation-Id: cba10cac-997a-4bc4-1651-08dde6c2b8a8
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|366016|41320700013|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: Ws2tLB7cB+KmBWPc4dT1mcI0NZzxqLgG8m++MdP+WR9RlchlRjyyGUA/zZwpYQtcWiFSkZdvy4kK8sD+qq4+oLnBWrBxNQa48B59kDBE/NoXFzrF65Tcd9YTCFkKAPBkua3xgxni2F+WP0gcgYg7LujMO2gNb9/JxqCoPKzgMIm4p58TUL4RExGeIXJwPb1g7rt06GXzKiYBGd3uHxuHUxdi8lQ9JhI0UrcwqAdV7C4pas/V9mBc2CqkIsvRod+r5Y+/3Tm+s+HG+G1pbEpAoifdaXvNM/Eo14FVqipIai86NBEXg6wNK2GVIAJu9CX8ao0x2CrMT8FShBfbjCdTzjrwEXbNAN9tPU863lxhV7AJgJBCFdUiXLSKUGqg6mHO7g82YpvaO8oAasH9uRQ2/gWyYPRDYrIGOl8aBYbwrL98TwlPym0g/ARRJF1X94Mk/ivO7DcapYIBMWG7YN1+M0ONQ5h0YF5DGGTPHp5qd4sncFUZiH/jbQuqdMHpGHl5m2kpdTUTgOcqwXTw2b0nWvRSt1Rmozrt+HNaU+51mMQS2PkHoL5z8PR47kiWiyxM5yQAfZOhohUwfthzAEy1u5SUA1Fvgh7Ay+vkHpO942k=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE;
- SFS:(13230040)(52116014)(366016)(41320700013)(1800799024)(38350700014);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?aB2eqkFawDa6kYVwqAXRyK6pkfEgwY5Gsy4+Amgppr6CyTsuzoIOtev4P5He?=
- =?us-ascii?Q?exQD+nCJ3QYArGwxwJClpKVKjgNYj9erlipS9EDL/Bk+OCfrbtO1TEw9bCLa?=
- =?us-ascii?Q?0xuo43jTF9wkPFiL3vyHZ2wFC4Q5ffieCoqNOJzr8yAeuRpfJ4fEemKO7Lhb?=
- =?us-ascii?Q?5r9HyuEW11bquj16B6mTnTVyOOYY6Allgka9qpMQf5wf6U/WFdhdRh0WBPIq?=
- =?us-ascii?Q?T5Hs8Ew/CWB7Cl/wUhoDbq9bOfqzdCQS5nwwAN/Lb34IKnWZXZsvI7CpBkQh?=
- =?us-ascii?Q?ssuuY4kEovthF7O19GjDRErcnGn51EaTM4CWCDn3FTuNeA3rPKLjw0E5T+c7?=
- =?us-ascii?Q?iTSGmt+N1oknEiyCo1n3t0WjCrWlstZdeHcOdSbzLNNp/KLMPTMkBDKlXqnT?=
- =?us-ascii?Q?F8tGAZMDL8hW3F4Pn5zyFSOq3VOcgJyU65PXIwsVvan/59CxbVGBoNMRpL7a?=
- =?us-ascii?Q?GTHyxjiiZ8XKTA++E7lW8wTRpZZdw3HLvK/c7un9qtrwtVaKGB9xyVpQiq4c?=
- =?us-ascii?Q?stsCzsNg6Yz3KAayVvmcoVsNi1V2rkhsKdEGvRFDg2px01pBhKMoydK3zldz?=
- =?us-ascii?Q?84Ppkjzdhwkt+pgXwILw7O79vD6VaDIMwk103HMzTwh6tmEhDABcbWeZtGuA?=
- =?us-ascii?Q?LNloHnfMg00uMq+htf8quHop3igisiGkEQf9mPWXlTFFQZ5Ovq9uESLa0VBn?=
- =?us-ascii?Q?NhvsngLbivHJzN6S9uddLNKYjPkjOjqsLrpnBg6dM7n5uF2HvvOV1ix0PGKJ?=
- =?us-ascii?Q?H3+g/3eDWFLRSCgNbhNW1cJ2C9r+VShCtnDkD6528ku0ODtKfYkoW6R2gTOO?=
- =?us-ascii?Q?LDVuSuYq0BuzmBB8AP/0oflZjtBRDFK6lzK59hmSMY+2xKViXCdNJmmmyLXL?=
- =?us-ascii?Q?EmiJhK7LpRmUC2ftF7XIsBxaAcZ49FvgSeSpL+7/zjVWVjxseQ40oaix59eD?=
- =?us-ascii?Q?eObxncIFRkcmRniUPI/yAMB0pSANpe8NotL+RrZkTBWHAtRMgDseVpuqo2Tc?=
- =?us-ascii?Q?f8OAu+LN+iYA/c8qU0dTsEP5hH2bamHdqmNDVdFj2MC/TmfuUKrGDsRN41Zy?=
- =?us-ascii?Q?48YTRZjtq537kb3NeRU6mlOVSvtWEP08f00t9VxPsN+GzRTU5AbMUVrGh9Ci?=
- =?us-ascii?Q?oZNzEWiL7KzWTxCs8nPKzcSfZQ6o0GTZ6SIdRvZZQFjtOU259LTQ9TwU62jY?=
- =?us-ascii?Q?pdgi6953Bd5eeqbYvO/drl3nt1LUA9jHjUA3FY+YPrxuAIKYsO2XPS6/Tbpt?=
- =?us-ascii?Q?RereM8rxece7A3bKBe5cjGEtQyseiV4YApOxgiTL9EYhquffoqseQF8x+hcK?=
- =?us-ascii?Q?xXyRcav/ky++N5bWKhQAXdILD8jd2CM5cTm4jrf2tIH5BlVIhMY5Am6g+gPx?=
- =?us-ascii?Q?7FPyXZBja2Qmr2CI14UjE8+C15Vhp6TCRITqIBYMK6ycn8v3SDqzKfc+M0Hk?=
- =?us-ascii?Q?vY3MPapcIHtoILvm7iF06W/jXPmZOZzqOkdie3KAER2b9sPQ1StS+A3KN61K?=
- =?us-ascii?Q?fNdbbZ0Ai1cR5ddCj/qOjDe+2Ese8muBEfuLRmPaIzVPcKPWkcqG5w/Qz33L?=
- =?us-ascii?Q?TqBpVEL+gHOWS4+TTnuE5Oobjl8sZpTTxdemKnMkTUBfbdN3DRjPCq7VxEU7?=
- =?us-ascii?Q?YQ=3D=3D?=
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cba10cac-997a-4bc4-1651-08dde6c2b8a8
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Aug 2025 06:10:15.3986 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ad9jAdtOBgFWumxVesUxh11n6f/2g+/wq4JqHUZYfPuFns01LT9E0DVjFEb+GQT0D5/KGr74sNtKDW+BCpmTLoKO2ERuWBSSPWdasaYsAyQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1257
+From: Sidharth Seela <sidharthseela@gmail.com>
+Date: Fri, 29 Aug 2025 12:16:57 +0530
+X-Gm-Features: Ac12FXyGA1nPWJJbcoDMAQztR6rEo5EBvXA6_7jTMoLC4dXWQ9YPKqCfK0DVqC8
+Message-ID: <CAJE-K+AQucBKAUODYnw1xQkOKcXU17VgDVrGtzOEjTRtSTsmaw@mail.gmail.com>
+Subject: Falcon on bb-black: SPL jumps to 'u-boot.img',
+ although 'args' file exists.
+To: "trini@konsulko.com" <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Fri, 29 Aug 2025 16:29:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -134,26 +90,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set $fdtfile to the VisionFive 2 Lite DTB if the board is matched.
+Greetings Tom,
+Requesting a tiny help.
+A have read u-boots documentation on FALCON, and also consulted
+doc/board/ti/am335x_evm.rst and some examples from bootlin doc on falcon[1].
 
-Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
----
- board/starfive/visionfive2/starfive_visionfive2.c | 2 ++
- 1 file changed, 2 insertions(+)
+I am unable to understand why falcon_image_file and
+falcon_args_file are not being loaded, I have boot_os=yes. I have followed the
+FAT SD cards section of your Documentation, yet I am finding that SPL is
+loading u-boot.img from SD-card.
 
-diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
-index f38433e94ac..912e8cb967a 100644
---- a/board/starfive/visionfive2/starfive_visionfive2.c
-+++ b/board/starfive/visionfive2/starfive_visionfive2.c
-@@ -65,6 +65,8 @@ static void set_fdtfile(void)
- 	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110B", 7) ||
- 		   !strncmp(get_product_id_from_eeprom(), "VF7110b", 7)) {
- 		fdtfile = "starfive/jh7110-starfive-visionfive-2-v1.3b.dtb";
-+	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110SL", 8)) {
-+		fdtfile = "starfive/jh7110s-starfive-visionfive-2-lite.dtb";
- 	} else {
- 		log_err("Unknown product\n");
- 		return;
+My config is as follows:
+CONFIG_ARM=y
+CONFIG_ARCH_CPU_INIT=y
+CONFIG_ARCH_OMAP2PLUS=y
+CONFIG_TI_COMMON_CMD_OPTIONS=y
+CONFIG_SF_DEFAULT_SPEED=24000000
+CONFIG_DEFAULT_DEVICE_TREE="am335x-evm"
+CONFIG_AM33XX=y
+CONFIG_CLOCK_SYNTHESIZER=y
+CONFIG_AM335X_USB0=y
+CONFIG_AM335X_USB0_PERIPHERAL=y
+CONFIG_AM335X_USB1=y
+CONFIG_SYS_BOOTM_LEN=0x1000000
+CONFIG_SPL=y
+CONFIG_TIMESTAMP=y
+CONFIG_FIT_SIGNATURE=y
+CONFIG_FIT_VERBOSE=y
+CONFIG_SPL_LOAD_FIT=y
+CONFIG_DISTRO_DEFAULTS=y
+CONFIG_OF_BOARD_SETUP=y
+CONFIG_BOOTCOMMAND="run findfdt; run init_console; run finduuid; run
+distro_bootcmd"
+CONFIG_LOGLEVEL=3
+CONFIG_SYS_CONSOLE_INFO_QUIET=y
+CONFIG_SPL_SYS_MALLOC=y
+CONFIG_SPL_SYS_MALLOC_SIZE=0x800000
+CONFIG_SPL_FIT_IMAGE_TINY=y
+CONFIG_SPL_ETH=y
+# CONFIG_SPL_FS_EXT4 is not set
+CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+CONFIG_SPL_MTD=y
+CONFIG_SPL_MUSB_NEW=y
+CONFIG_SPL_NAND_DRIVERS=y
+CONFIG_SPL_NAND_ECC=y
+CONFIG_SPL_NAND_BASE=y
+CONFIG_SPL_NET=y
+CONFIG_SPL_NET_VCI_STRING="AM335x U-Boot SPL"
+CONFIG_SPL_OS_BOOT=y
+CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x200000
+CONFIG_SPL_FALCON_BOOT_MMCSD=y
+CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x1500
+CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS=0x200
+CONFIG_CMD_EXTENSION=y
+CONFIG_CMD_SPL=y
+CONFIG_CMD_SPL_NAND_OFS=0x00080000
+CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+CONFIG_CMD_NAND=y
+# CONFIG_CMD_SETEXPR is not set
+CONFIG_BOOTP_DNS2=y
+CONFIG_CMD_MTDPARTS=y
+CONFIG_MTDIDS_DEFAULT="nand0=nand.0"
+CONFIG_MTDPARTS_DEFAULT="mtdparts=nand.0:128k(NAND.SPL),128k(NAND.SPL.backup1),128k(NAND.SPL.backup2),128k(NAND.SPL.backup3),256k(NAND.u-boot-spl-os),1m(NAND.u-boot),128k(NAND.u-boot-env),128k(NAND.u-boot-env.backup1),8m(NAND.kernel),-(NAND.file-system)"
+# CONFIG_SPL_EFI_PARTITION is not set
+CONFIG_OF_CONTROL=y
+CONFIG_OF_LIST="am335x-evm am335x-bone am335x-sancloud-bbe
+am335x-sancloud-bbe-lite am335x-sancloud-bbe-extended-wifi
+am335x-boneblack am335x-evmsk am335x-bonegreen am335x-icev2
+am335x-pocketbeagle am335x-bonegreen-eco"
+CONFIG_ENV_OVERWRITE=y
+CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+CONFIG_SPL_ENV_IS_NOWHERE=y
+CONFIG_VERSION_VARIABLE=y
+CONFIG_NET_RETRY_COUNT=10
+CONFIG_BOOTP_SEND_HOSTNAME=y
+CONFIG_BOOTCOUNT_LIMIT=y
+CONFIG_SYS_BOOTCOUNT_BE=y
+CONFIG_CLK=y
+CONFIG_CLK_CDCE9XX=y
+CONFIG_CLK_TI_CTRL=y
+CONFIG_DFU_TFTP=y
+CONFIG_DFU_MMC=y
+CONFIG_DFU_NAND=y
+CONFIG_DFU_RAM=y
+CONFIG_USB_FUNCTION_FASTBOOT=y
+CONFIG_FASTBOOT_FLASH=y
+CONFIG_FASTBOOT_FLASH_MMC_DEV=1
+CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+CONFIG_DM_I2C=y
+CONFIG_MISC=y
+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+# CONFIG_MMC_HW_PARTITIONING is not set
+CONFIG_MMC_OMAP_HS=y
+CONFIG_MTD=y
+CONFIG_MTD_RAW_NAND=y
+CONFIG_SYS_NAND_BLOCK_SIZE=0x20000
+CONFIG_SYS_NAND_ONFI_DETECTION=y
+CONFIG_SYS_NAND_PAGE_SIZE=0x800
+CONFIG_SYS_NAND_OOBSIZE=0x40
+CONFIG_SYS_NAND_U_BOOT_LOCATIONS=y
+CONFIG_SYS_NAND_U_BOOT_OFFS=0xc0000
+CONFIG_DM_SPI_FLASH=y
+CONFIG_SPI_FLASH_STMICRO=y
+CONFIG_SPI_FLASH_WINBOND=y
+CONFIG_PHY_ATHEROS=y
+CONFIG_PHY_SMSC=y
+CONFIG_PHY_TI_DP83867=y
+CONFIG_PHY_GIGE=y
+CONFIG_MII=y
+CONFIG_DRIVER_TI_CPSW=y
+CONFIG_DM_PMIC=y
+# CONFIG_SPL_DM_PMIC is not set
+CONFIG_PMIC_TPS65217=y
+CONFIG_SPL_POWER_TPS65910=y
+CONFIG_SPI=y
+CONFIG_DM_SPI=y
+CONFIG_OMAP3_SPI=y
+CONFIG_TIMER=y
+CONFIG_OMAP_TIMER=y
+CONFIG_USB=y
+CONFIG_DM_USB_GADGET=y
+CONFIG_SPL_DM_USB_GADGET=y
+CONFIG_USB_MUSB_HOST=y
+CONFIG_USB_MUSB_GADGET=y
+CONFIG_USB_MUSB_TI=y
+CONFIG_USB_GADGET=y
+CONFIG_SPL_USB_GADGET=y
+CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+CONFIG_USB_GADGET_PRODUCT_NUM=0xd022
+CONFIG_USB_ETHER=y
+CONFIG_SPL_USB_ETHER=y
+CONFIG_WDT=y
+# CONFIG_SPL_WDT is not set
+CONFIG_DYNAMIC_CRC_TABLE=y
+CONFIG_LZO=y
+
+Refs:
+[1] https://bootlin.com/pub/conferences/2021/lee/opdenacker-understanding-u-boot-falcon-mode/opdenacker-understanding-u-boot-falcon-mode.pdf
 -- 
-2.43.2
-
+Thanks,
+Sidharth Seela
