@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2E6CA0FFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:27:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD05CA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:27:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7442083903;
-	Sat, 30 Aug 2025 17:27:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6135783914;
+	Sat, 30 Aug 2025 17:27:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OKg22+AL";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OHVjCyRA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84C13838E7; Sat, 30 Aug 2025 17:27:47 +0200 (CEST)
-Received: from mail-m3298.qiye.163.com (mail-m3298.qiye.163.com
- [220.197.32.98])
+ id F2AC683914; Sat, 30 Aug 2025 17:27:56 +0200 (CEST)
+Received: from mail-m1973191.qiye.163.com (mail-m1973191.qiye.163.com
+ [220.197.31.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4907836B2
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:27:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52750838E7
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:27:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123f98f7;
- Sat, 30 Aug 2025 23:27:41 +0800 (GMT+08:00)
-Message-ID: <737bbaf9-8d2f-4a6b-8564-82eb1f7c0dda@rock-chips.com>
-Date: Sat, 30 Aug 2025 23:27:40 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123f98fa;
+ Sat, 30 Aug 2025 23:27:50 +0800 (GMT+08:00)
+Message-ID: <07f0b889-3666-4d18-9470-83027956f23f@rock-chips.com>
+Date: Sat, 30 Aug 2025 23:27:49 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] arm64: dts: rockchip: force PMIC reset behavior to
- restart PMU on RK3588 Tiger
+Subject: Re: [PATCH v2 5/5] power: rk8xx: allow to customize RK806 reset mode
 To: Quentin Schulz <foss+uboot@0leil.net>,
  Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
- Heiko Stuebner <heiko@sntech.de>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
 References: <20250813-rk8xx-rst-fun-v2-0-a2223e17cb2c@cherry.de>
- <20250813-rk8xx-rst-fun-v2-4-a2223e17cb2c@cherry.de>
+ <20250813-rk8xx-rst-fun-v2-5-a2223e17cb2c@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250813-rk8xx-rst-fun-v2-4-a2223e17cb2c@cherry.de>
+In-Reply-To: <20250813-rk8xx-rst-fun-v2-5-a2223e17cb2c@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb976b9f03afkunm3ce7e664416393
+X-HM-Tid: 0a98fb978d8f03afkunm1110e510416435
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaTx9KVk5PSkofH0xLSx8ZHlYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSEhNVk5IT0lOTEhNTB5PTFYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0hKSkJMVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=OKg22+ALQs4eho94mrPpoc/G31/5gycpl/28+yMPLrXRkSvIQhF5s7apgqBxUx/nQK3lIyVk298+NwDg95Xx3jdAZZEyF3QsV132Ft4PBpHMaszoiCgIjClpXl/ejr1JAdKanrJfajRDIOJKAtvJuKtlS9oaB8CjvXO5y7rTrJs=;
+ b=OHVjCyRAzCNZE7sxk1mfQ9Ak+8EiAJBvKv86jkqWZAMY4s0magb34liTyY18/fAqLEFHTTq2huLzWNV7itGbLYz65o3juxY0AMcBAQbRbOGfgJhHpT3Q4w6HKKtwr/UeNHWAYWm3SrLA5WKu3qKzHpY0vqlgkw/AY8uPA46EuAg=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=aNZBluzzxRdupHoJPmYT0/hYEZ1dEwy4YUDJUh1fLsk=;
+ bh=D0Q/o9QNpTsPd0lu4gwB7XSQvKU+V2yhsqSS5+Ws+yE=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,51 +78,104 @@ X-Virus-Status: Clean
 On 2025/8/13 22:07, Quentin Schulz wrote:
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> The bootloader for RK3588 Tiger currently forces the PMIC reset behavior
-> (stored in RST_FUN bitfield in register SYS_CFG3 of the PMIC) to 0b1X
-> which is incorrect for our devices.
+> The RK806 PMIC has a bitfield for configuring the restart/reset behavior
+> (which I assume Rockchip calls "function") whenever the PMIC is reset
+> either programmatically (c.f. DEV_RST in the datasheet) or via PWRCTRL
+> or RESETB pins.
 >
-> It is required to restart the PMU as otherwise the companion
-> microcontroller cannot detect the PMIC (and by extension the full
-> product and main SoC) being rebooted which is an issue as that is used
-> to reset a few things like the PWM beeper and watchdogs.
+> For RK806, the following values are possible for RST_FUN:
 >
-> Let's add the new rockchip,reset-mode property to make sure the PMIC
-> reset behavior is the expected one.
+> 0b00 means "Restart PMU"
+> 0b01 means "Reset all the power off reset registers, forcing
+> 	the state to switch to ACTIVE mode"
+> 0b10 means "Reset all the power off reset registers, forcing
+> 	the state to switch to ACTIVE mode, and simultaneously
+> 	pull down the RESETB PIN for 5mS before releasing"
+> 0b11 means the same as for 0b10 just above.
+>
+> This adds the appropriate logic in the driver to parse the new
+> rockchip,reset-mode DT property to pass this information. It just
+> happens that the values in the binding match the values to write in the
+> bitfield so no mapping is necessary.
+>
+> For backward compatibility reasons, if the property is missing we set it
+> to 0b10 (i.e. BIT(7)) like before this commit was merged instead of
+> leaving it untouched like in the kernel driver.
+>
+> Note that this does nothing useful for U-Boot at the moment as the ways
+> to reset the device (e.g. via `reset` command) doesn't interact with the
+> RK8xx PMIC and simply does a CPU reset.
+> Considering the upstream Linux kernel left this register untouched until
+> (assumed) v6.17[1], this is useful for cases in which the U-Boot
+> bootloader has this patch (and running with a DT with
+> rockchip,reset-mode property set) and running an upstream kernel before
+> (assumed) v6.17, or alternatively later without the property in the
+> kernel DT.
+>
+> [1] https://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git/commit/?id=87b48d86b77686013f5c2a8866ed299312b671db
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Link: https://lore.kernel.org/r/20250627-rk8xx-rst-fun-v4-5-ce05d041b45f@cherry.de
-> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
->
-> [ upstream commit: e82f642b9821384045915dc30e73df7de8424827 ]
->
-> (cherry picked from commit d9c568906be166834f4f977bc7f704176bac5b8a)
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi | 2 ++
->   1 file changed, 2 insertions(+)
+>   drivers/power/pmic/rk8xx.c | 21 ++++++++++++---------
+>   include/power/rk8xx_pmic.h |  2 ++
+>   2 files changed, 14 insertions(+), 9 deletions(-)
 >
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
-> index c4933a08dd1e3c92f3e0747135faf97c5eeca906..b44e89e1bb1599ee70b921598c2eb6fd54614f55 100644
-> --- a/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
-> +++ b/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
-> @@ -6,6 +6,7 @@
->   #include <dt-bindings/gpio/gpio.h>
->   #include <dt-bindings/leds/common.h>
->   #include <dt-bindings/pinctrl/rockchip.h>
-> +#include "rk8xx.h"
->   #include "rk3588.dtsi"
+> diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
+> index 3bc696d4caaa68f87fd49810682616c34bafb23b..d11f7a7886e8074e7b7833c8a51ea24d77fede34 100644
+> --- a/drivers/power/pmic/rk8xx.c
+> +++ b/drivers/power/pmic/rk8xx.c
+> @@ -89,11 +89,6 @@ void rk8xx_off_for_plugin(struct udevice *dev)
+>   	}
+>   }
 >   
->   / {
-> @@ -440,6 +441,7 @@
->   		vcc13-supply = <&vcc_1v1_nldo_s3>;
->   		vcc14-supply = <&vcc_1v1_nldo_s3>;
->   		vcca-supply = <&vcc5v0_sys>;
-> +		rockchip,reset-mode = <RK806_RESTART>;
+> -static struct reg_data rk806_init_reg[] = {
+> -	/* RST_FUN */
+> -	{ RK806_REG_SYS_CFG3, BIT(7), GENMASK(7, 6)},
+> -};
+> -
+>   static struct reg_data rk817_init_reg[] = {
+>   /* enable the under-voltage protection,
+>    * the under-voltage protection will shutdown the LDO3 and reset the PMIC
+> @@ -306,12 +301,20 @@ static int rk8xx_probe(struct udevice *dev)
+>   		value = (power_en2 & 0x0f) | ((power_en3 & 0x0f) << 4);
+>   		pmic_reg_write(dev, RK817_POWER_EN_SAVE1, value);
+>   		break;
+> -	case RK806_ID:
+> +	case RK806_ID: {
+> +		u32 rst_fun = 2;
+> +
+>   		on_source = RK806_ON_SOURCE;
+>   		off_source = RK806_OFF_SOURCE;
+> -		init_data = rk806_init_reg;
+> -		init_data_num = ARRAY_SIZE(rk806_init_reg);
+> -		break;
+> +
+> +		ret = dev_read_u32(dev, "rockchip,reset-mode", &rst_fun);
+> +		if (ret)
+> +			debug("rockchip,reset-mode property missing, defaulting to %d\n",
+> +			      rst_fun);
+> +
+> +		pmic_clrsetbits(dev, RK806_REG_SYS_CFG3, RK806_RST_FUN_MSK,
+> +				FIELD_PREP(RK806_RST_FUN_MSK, rst_fun));
+> +		break; }
+>   	default:
+>   		printf("Unknown PMIC: RK%x!!\n", show_variant);
+>   		return -EINVAL;
+> diff --git a/include/power/rk8xx_pmic.h b/include/power/rk8xx_pmic.h
+> index 31221aa46b60cf995fd02f5894b3ee97a7475f8a..913b6ebe6d96e08bcfab509cff5db7da8358784a 100644
+> --- a/include/power/rk8xx_pmic.h
+> +++ b/include/power/rk8xx_pmic.h
+> @@ -212,6 +212,8 @@ enum {
+>   #define RK817_POWER_EN_SAVE0	0x99
+>   #define RK817_POWER_EN_SAVE1	0xa4
 >   
->   		rk806_dvs1_null: dvs1-null-pins {
->   			pins = "gpio_pwrctrl1";
+> +#define RK806_RST_FUN_MSK	GENMASK(7, 6)
+> +
+>   #define RK806_POWER_EN(x)			(0x00 + (x))
+>   /* POWER_ENx register lower 4 bits are write-protected unless the associated top bit is set */
+>   #define RK806_POWER_EN_CLRSETBITS(bit, val)	(((val) << (bit)) | (1 << ((bit) + 4)))
 >
