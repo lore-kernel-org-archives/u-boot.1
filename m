@@ -4,54 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A698CA0EFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF88CCA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:36:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A97E483043;
-	Sat, 30 Aug 2025 16:34:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3930883826;
+	Sat, 30 Aug 2025 16:36:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CPiXXmdc";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="fdRAhjMW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 724E98380E; Sat, 30 Aug 2025 16:34:52 +0200 (CEST)
-Received: from mail-m49233.qiye.163.com (mail-m49233.qiye.163.com
- [45.254.49.233])
+ id 13CBE83826; Sat, 30 Aug 2025 16:36:09 +0200 (CEST)
+Received: from mail-m49248.qiye.163.com (mail-m49248.qiye.163.com
+ [45.254.49.248])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AA4B82E34
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:34:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82D1282E34
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:36:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123985b7;
- Sat, 30 Aug 2025 22:34:45 +0800 (GMT+08:00)
-Message-ID: <dcc14a6b-7e20-48d3-9549-4f8b12545206@rock-chips.com>
-Date: Sat, 30 Aug 2025 22:34:44 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123985ec;
+ Sat, 30 Aug 2025 22:36:03 +0800 (GMT+08:00)
+Message-ID: <7916509d-8d21-495f-93e2-1f98a1a74793@rock-chips.com>
+Date: Sat, 30 Aug 2025 22:36:03 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rk3288: add fdtoverlay_addr_r to default env
-To: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>
-References: <20250611110454.23428-1-m95d+git@psihoexpert.ro>
+Subject: Re: [PATCH] board: rockchip: unblock CAN bus in spl_board_init on
+ Jaguar
+To: Jakob Unterwurzacher <jakobunt@gmail.com>,
+ Klaus Goger <klaus.goger@cherry.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
+Cc: Heiko Stuebner <heiko@sntech.de>, u-boot@lists.denx.de
+References: <20250617084253.1756035-1-jakob.unterwurzacher@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250611110454.23428-1-m95d+git@psihoexpert.ro>
+In-Reply-To: <20250617084253.1756035-1-jakob.unterwurzacher@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb66f40303afkunm3907eeeb406e4d
+X-HM-Tid: 0a98fb68256803afkunm9ef22770407422
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDQh0aVkpMTEJJGh5PSxkeTVYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGBpPVkxNSkgdTE0ZQhkdHVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=CPiXXmdcENX7EhA+J8yh+prvYdUJvsoRfnsb1Lz0pFWIcS69UkP6Prvuh4V33FopbYPL2ijZ3INx5tb9qp69f22rKY9FckVZ73AOExtsbJ6RlhqvviQU8lQyP7vEftMX0OVoX1IYe1pOELbSjoxKf2viHsUd8zqNNQrCi6t16Pk=;
+ b=fdRAhjMWe0JYB+ZR9f1SIjVSDvsYfVlcGa9zqgfRv7IXCBe7Kidd9LmjxgksY9DfbEd8KXWITrDhbHuFJRc9cOK6bRvS7yGsQvmPIUlRrEigmVvF/Vj2ij/aXUJ4dx9PCjg2gjj9V0895aBPKCK8ZWkztGtUyE4BuG12ns6VE+Q=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=cpxUlUcWoSXMSjRwP+D6n8AEbmkymq2YqtVYo0fnQiM=;
+ bh=bxwBJvFayoor3xi1UXG5VA42OJJns9peioNMwragAYU=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,34 +76,65 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/6/11 19:04, Marius Dinu wrote:
-> rk3288 is missing fdtoverlay_addr_r.
-> The new addresses match those used by rk3308.
-> Tested on Asus TinkerBoard S.
+On 2025/6/17 16:42, Jakob Unterwurzacher wrote:
+> GPIO0_B7 is routed to TXI of the on-board CAN transceiver. The
+> line has a pull-down per SoC default.
 >
-> Signed-off-by: Marius Dinu <m95d+git@psihoexpert.ro>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-> Cc: Kever Yang <kever.yang@rock-chips.com>
+> This means the CAN transceiver transmits a dominant zero
+> and blocks the CAN bus until Linux boots and reconfigures the pin.
+>
+> Let's switch to pull-up as soon as we can (i.e. in SPL).
+> This cuts down the "bus is blocked" time from 10 seconds to < 1 second.
+>
+> Of course, to this needs CONFIG_SPL_BOARD_INIT, so enable it
+> the Jaguar defconfig.
+>
+> Signed-off-by: Jakob Unterwurzacher <jakob.unterwurzacher@cherry.de>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   include/configs/rk3288_common.h | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
+>   .../jaguar_rk3588/jaguar_rk3588.c             | 19 +++++++++++++++++++
+>   configs/jaguar-rk3588_defconfig               |  1 +
+>   2 files changed, 20 insertions(+)
 >
-> diff --git a/include/configs/rk3288_common.h b/include/configs/rk3288_common.h
-> index 0c449e31099..52c3695ff8e 100644
-> --- a/include/configs/rk3288_common.h
-> +++ b/include/configs/rk3288_common.h
-> @@ -18,7 +18,8 @@
->   #define ENV_MEM_LAYOUT_SETTINGS \
->   	"scriptaddr=0x00000000\0" \
->   	"pxefile_addr_r=0x00100000\0" \
-> -	"fdt_addr_r=0x01f00000\0" \
-> +	"fdt_addr_r=0x01e00000\0" \
-> +	"fdtoverlay_addr_r=0x01f00000\0" \
->   	"kernel_addr_r=0x02000000\0" \
->   	"ramdisk_addr_r=0x04000000\0"
+> diff --git a/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
+> index a6d44f10db3..3f484646701 100644
+> --- a/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
+> +++ b/board/theobroma-systems/jaguar_rk3588/jaguar_rk3588.c
+> @@ -51,3 +51,22 @@ int rockchip_early_misc_init_r(void)
 >   
+>   	return 0;
+>   }
+> +
+> +#define GPIO0B7_PU_EN BIT(15)
+> +
+> +void spl_board_init(void)
+> +{
+> +	/*
+> +	 * GPIO0_B7 is routed to CAN TX. This SoC pin has a pull-down per default.
+> +	 * So on power-up, we block the CAN bus with a dominant zero. We want to keep
+> +	 * this blocking time to a minimum, so we want to get this pin high in SPL.
+> +	 *
+> +	 * The CAN driver in Linux disables the pull-down and sets the pin to
+> +	 * output high. We don't have a CAN driver in U-Boot and don't need one,
+> +	 * so we just use the easiest way to get the pin high, which is setting a
+> +	 * pull-up.
+> +	 */
+> +	struct rk3588_pmu2_ioc * const ioc = (void *)PMU2_IOC_BASE;
+> +
+> +	rk_setreg(&ioc->gpio0b_p, GPIO0B7_PU_EN);
+> +}
+> diff --git a/configs/jaguar-rk3588_defconfig b/configs/jaguar-rk3588_defconfig
+> index 03d38274b15..272f1ca8ded 100644
+> --- a/configs/jaguar-rk3588_defconfig
+> +++ b/configs/jaguar-rk3588_defconfig
+> @@ -27,6 +27,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-jaguar.dtb"
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>   CONFIG_CYCLIC=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_BOARD_INIT=y
+>   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>   CONFIG_SPL_ATF=y
+>   # CONFIG_BOOTM_NETBSD is not set
