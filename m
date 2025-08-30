@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95224CA0EFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:27:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E2E6CA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:27:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26230838F0;
-	Sat, 30 Aug 2025 17:27:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7442083903;
+	Sat, 30 Aug 2025 17:27:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XaSFICKO";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OKg22+AL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8517E838FA; Sat, 30 Aug 2025 17:27:37 +0200 (CEST)
-Received: from mail-m3291.qiye.163.com (mail-m3291.qiye.163.com
- [220.197.32.91])
+ id 84C13838E7; Sat, 30 Aug 2025 17:27:47 +0200 (CEST)
+Received: from mail-m3298.qiye.163.com (mail-m3298.qiye.163.com
+ [220.197.32.98])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD24E8341A
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:27:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4907836B2
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:27:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123f98f2;
- Sat, 30 Aug 2025 23:27:31 +0800 (GMT+08:00)
-Message-ID: <884d0a37-7aa0-4041-bab9-5959166c5659@rock-chips.com>
-Date: Sat, 30 Aug 2025 23:27:30 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123f98f7;
+ Sat, 30 Aug 2025 23:27:41 +0800 (GMT+08:00)
+Message-ID: <737bbaf9-8d2f-4a6b-8564-82eb1f7c0dda@rock-chips.com>
+Date: Sat, 30 Aug 2025 23:27:40 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] arm64: dts: rockchip: force PMIC reset behavior to
- restart PMU on RK3588 Jaguar
+Subject: Re: [PATCH v2 4/5] arm64: dts: rockchip: force PMIC reset behavior to
+ restart PMU on RK3588 Tiger
 To: Quentin Schulz <foss+uboot@0leil.net>,
  Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>,
@@ -43,22 +43,22 @@ To: Quentin Schulz <foss+uboot@0leil.net>,
 Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>,
  Heiko Stuebner <heiko@sntech.de>
 References: <20250813-rk8xx-rst-fun-v2-0-a2223e17cb2c@cherry.de>
- <20250813-rk8xx-rst-fun-v2-3-a2223e17cb2c@cherry.de>
+ <20250813-rk8xx-rst-fun-v2-4-a2223e17cb2c@cherry.de>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250813-rk8xx-rst-fun-v2-3-a2223e17cb2c@cherry.de>
+In-Reply-To: <20250813-rk8xx-rst-fun-v2-4-a2223e17cb2c@cherry.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb97435103afkunme969694c4162c1
+X-HM-Tid: 0a98fb976b9f03afkunm3ce7e664416393
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCThhMVkxPHk5NSU1MH0lIQlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaTx9KVk5PSkofH0xLSx8ZHlYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=XaSFICKOdSTERndOP47u5fDeWi+7avUgtTwBKPdUhILtDL7iGAdfc46tl+y5yons/lP4Xo2B4prqr+u54mWbqkXHu3RCXj9jduciqlHYUv+MtB6RpgRqjqlDe7mKeIakXPkOpSJssVbpt+Bz/jQUuK7TUP5TXSkWArL1JyaVdaU=;
+ b=OKg22+ALQs4eho94mrPpoc/G31/5gycpl/28+yMPLrXRkSvIQhF5s7apgqBxUx/nQK3lIyVk298+NwDg95Xx3jdAZZEyF3QsV132Ft4PBpHMaszoiCgIjClpXl/ejr1JAdKanrJfajRDIOJKAtvJuKtlS9oaB8CjvXO5y7rTrJs=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=vjfIn0BrHDfEB/FD7dXCh1GIfKisVvxNvvNyZIbzze8=;
+ bh=aNZBluzzxRdupHoJPmYT0/hYEZ1dEwy4YUDJUh1fLsk=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,9 +80,9 @@ X-Virus-Status: Clean
 On 2025/8/13 22:07, Quentin Schulz wrote:
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> The bootloader for RK3588 Jaguar currently forces the PMIC reset
-> behavior (stored in RST_FUN bitfield in register SYS_CFG3 of the PMIC)
-> to 0b1X which is incorrect for our devices.
+> The bootloader for RK3588 Tiger currently forces the PMIC reset behavior
+> (stored in RST_FUN bitfield in register SYS_CFG3 of the PMIC) to 0b1X
+> which is incorrect for our devices.
 >
 > It is required to restart the PMU as otherwise the companion
 > microcontroller cannot detect the PMIC (and by extension the full
@@ -93,33 +93,33 @@ On 2025/8/13 22:07, Quentin Schulz wrote:
 > reset behavior is the expected one.
 >
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> Link: https://lore.kernel.org/r/20250627-rk8xx-rst-fun-v4-4-ce05d041b45f@cherry.de
+> Link: https://lore.kernel.org/r/20250627-rk8xx-rst-fun-v4-5-ce05d041b45f@cherry.de
 > Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 >
-> [ upstream commit: ee907113430aa02a8202c91bb574c385ecc28aa2 ]
+> [ upstream commit: e82f642b9821384045915dc30e73df7de8424827 ]
 >
-> (cherry picked from commit 8bd14566b75f9409de703a0d2f9a0704b71a7ebe)
+> (cherry picked from commit d9c568906be166834f4f977bc7f704176bac5b8a)
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts | 2 ++
+>   dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi | 2 ++
 >   1 file changed, 2 insertions(+)
 >
-> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts b/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
-> index ebe77cdd24e803b00fb848dc81258909472290f1..176925d0a1a809d1e2500f5e5efbbfa6a6d0bd42 100644
-> --- a/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
-> +++ b/dts/upstream/src/arm64/rockchip/rk3588-jaguar.dts
-> @@ -10,6 +10,7 @@
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi b/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
+> index c4933a08dd1e3c92f3e0747135faf97c5eeca906..b44e89e1bb1599ee70b921598c2eb6fd54614f55 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3588-tiger.dtsi
+> @@ -6,6 +6,7 @@
+>   #include <dt-bindings/gpio/gpio.h>
+>   #include <dt-bindings/leds/common.h>
 >   #include <dt-bindings/pinctrl/rockchip.h>
->   #include <dt-bindings/soc/rockchip,vop2.h>
->   #include <dt-bindings/usb/pd.h>
 > +#include "rk8xx.h"
 >   #include "rk3588.dtsi"
 >   
 >   / {
-> @@ -693,6 +694,7 @@
+> @@ -440,6 +441,7 @@
 >   		vcc13-supply = <&vcc_1v1_nldo_s3>;
 >   		vcc14-supply = <&vcc_1v1_nldo_s3>;
 >   		vcca-supply = <&vcc5v0_sys>;
