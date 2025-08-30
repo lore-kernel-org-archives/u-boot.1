@@ -4,54 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 626F1CA0FFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4273ECA0EFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:43:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF8CF83855;
-	Sat, 30 Aug 2025 16:39:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65519836B2;
+	Sat, 30 Aug 2025 16:43:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="NKXxowM0";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gnkgg+wz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 163B78384C; Sat, 30 Aug 2025 16:39:26 +0200 (CEST)
-Received: from mail-m1973177.qiye.163.com (mail-m1973177.qiye.163.com
- [220.197.31.77])
+ id 52F6B83837; Sat, 30 Aug 2025 16:43:18 +0200 (CEST)
+Received: from mail-m32110.qiye.163.com (mail-m32110.qiye.163.com
+ [220.197.32.110])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B42958384E
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:39:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B59AB8341A
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:43:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 21239866f
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 22:39:20 +0800 (GMT+08:00)
-Message-ID: <719db069-7bc5-4f0f-afc8-1d1bcb18ed7f@rock-chips.com>
-Date: Sat, 30 Aug 2025 22:39:19 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 21239872a;
+ Sat, 30 Aug 2025 22:43:12 +0800 (GMT+08:00)
+Message-ID: <d6986cdf-3591-44bc-8747-6d0c6e245670@rock-chips.com>
+Date: Sat, 30 Aug 2025 22:43:12 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] rockchip: puma-rk3399: enable "env erase" command
-To: u-boot@lists.denx.de
-References: <20250627-tsd-eraseenv-v1-0-46b69659f879@cherry.de>
- <20250627-tsd-eraseenv-v1-4-46b69659f879@cherry.de>
+Subject: Re: [PATCH v2 1/6] arm64: dts: rockchip: add RK3576 RNG node
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: u-boot@lists.denx.de,
+ Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
+ Heiko Stuebner <heiko@sntech.de>
+References: <20250711222132.204344-1-jonas@kwiboo.se>
+ <20250711222132.204344-2-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250627-tsd-eraseenv-v1-4-46b69659f879@cherry.de>
+In-Reply-To: <20250711222132.204344-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb6b272203afkunme14dda66408338
+X-HM-Tid: 0a98fb6eb19a03afkunm074d49d2409578
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZSElJVktJTB8ZGE5IS08eGVYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDQ00aVkofSRhNH0xIGEJMSFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=NKXxowM0q7BavcWuISfIFJDPMea9rlGyhWvPVpADAuGo2ckn9vKLpPVZx5Ig4w065YO3J6WfHdjIubH0yEKQNgasUyyd6ubCZnT6ZSOoH1ACnQzerBVBFajkYCjJzlBd3VEljE/23xk9dUgCBoFsG4q1qRBD7Xo9acUfzf1g1yA=;
+ b=gnkgg+wzTKY/EWeRmMTvZEf7jNBjodGk+Ym6xOqvZamfM/aoTRup1ZSSUqdJToX3PG3CCmLsVuNeRtrr5xuzp8Zcr/OA36Aig4itlwTRBRY5DI8k1f4zGqwb/ioaa55KVlVPJO0/9NH2m6eECGo0Y/ewnr4jBKmM8Ob4S2rjaBE=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=XqmJYxwLfR6SRICVWmg7qiBU2etyH0exPMJgRFuHgl8=;
+ bh=p3qsAG1nR2V8kadQr75E0rpJ9K18EKU57II5yQ0onrA=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -70,32 +75,47 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/6/27 21:30, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 2025/7/12 06:21, Jonas Karlman wrote:
+> From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 >
-> Erasing the environment to start from scratch is actually very useful
-> and "env erase" is the proper way to do it instead of using "env
-> default -a && env save", so let's enable support for it.
+> The RK3576 has a hardware random number generator IP built into the SoC.
 >
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> Add it to the SoC's .dtsi, now that there's a binding and driver for it.
+>
+> Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> Link: https://lore.kernel.org/r/20250430-rk3576-hwrng-v1-3-480c15b5843e@collabora.com
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>
+> [ upstream commit: 5268f3b5d29887480011b44567bcbf0d422cda94 ]
+>
+> (cherry picked from commit 25cfcb091747900639f2b5df297d26b3a6ca3989)
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   configs/puma-rk3399_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+> v2: New patch
+> ---
+>   dts/upstream/src/arm64/rockchip/rk3576.dtsi | 8 ++++++++
+>   1 file changed, 8 insertions(+)
 >
-> diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-> index 4e8cee06775aa020a14c656ce2f810f38354613b..8c0bd3d83daf3d263196e25a5452b943d974be3f 100644
-> --- a/configs/puma-rk3399_defconfig
-> +++ b/configs/puma-rk3399_defconfig
-> @@ -36,6 +36,7 @@ CONFIG_TPL_GPIO=y
->   # CONFIG_BOOTM_RTEMS is not set
->   # CONFIG_CMD_VBE is not set
->   # CONFIG_BOOTM_VXWORKS is not set
-> +CONFIG_CMD_ERASEENV=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_I2C=y
->
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3576.dtsi b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
+> index ebb5fc8bb8b1..50332ec6e0de 100644
+> --- a/dts/upstream/src/arm64/rockchip/rk3576.dtsi
+> +++ b/dts/upstream/src/arm64/rockchip/rk3576.dtsi
+> @@ -1419,6 +1419,14 @@
+>   			status = "disabled";
+>   		};
+>   
+> +		rng: rng@2a410000 {
+> +			compatible = "rockchip,rk3576-rng";
+> +			reg = <0x0 0x2a410000 0x0 0x200>;
+> +			clocks = <&cru HCLK_TRNG_NS>;
+> +			interrupts = <GIC_SPI 181 IRQ_TYPE_LEVEL_HIGH>;
+> +			resets = <&cru SRST_H_TRNG_NS>;
+> +		};
+> +
+>   		otp: otp@2a580000 {
+>   			compatible = "rockchip,rk3576-otp";
+>   			reg = <0x0 0x2a580000 0x0 0x400>;
