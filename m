@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BCA6CA0FFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 16:46:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C07B6CA0EFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 16:47:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B86D8392C;
-	Sat, 30 Aug 2025 18:46:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB998838EE;
+	Sat, 30 Aug 2025 18:47:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="MZ/iOaW7";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GpE23ZKe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C18F68391B; Sat, 30 Aug 2025 18:46:53 +0200 (CEST)
-Received: from mail-m17194.xmail.ntesmail.com (mail-m17194.xmail.ntesmail.com
- [45.195.17.194])
+ id 52401838F8; Sat, 30 Aug 2025 18:47:16 +0200 (CEST)
+Received: from mail-m254101.xmail.ntesmail.com
+ (mail-m254101.xmail.ntesmail.com [103.129.254.101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14187838EC
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 18:46:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8645A838EC
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 18:47:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2124a6261;
- Sun, 31 Aug 2025 00:46:47 +0800 (GMT+08:00)
-Message-ID: <49b6c317-cc7d-45df-90a9-3d84b6f89857@rock-chips.com>
-Date: Sun, 31 Aug 2025 00:46:46 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2124a626d;
+ Sun, 31 Aug 2025 00:47:10 +0800 (GMT+08:00)
+Message-ID: <054ab651-530b-4111-b4df-2cdd56ecdbcd@rock-chips.com>
+Date: Sun, 31 Aug 2025 00:47:09 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 07/10] phy: rockchip: typec: Fix improper use of UCLASS_PHY
+Subject: Re: [PATCH 08/10] rockchip: rk3588: Disable USB3OTG U3 ports early
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250721220734.1617117-1-jonas@kwiboo.se>
- <20250721220734.1617117-8-jonas@kwiboo.se>
+ <20250721220734.1617117-9-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250721220734.1617117-8-jonas@kwiboo.se>
+In-Reply-To: <20250721220734.1617117-9-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fbdfd57f03afkunm9d5c8c5942d0b1
+X-HM-Tid: 0a98fbe02f6a03afkunma81f98ff42d1f3
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHxlKVh9MHU1LSRpLTkxDGFYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDHR1NVk5NSEIdSE9PH09CTFYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=MZ/iOaW7tHPW2EFIsOQ815Mzm+rmjmnnJ4XBONhbiAp2c1YcPRfj5N+zB5hiaZgF/FSevDW5GTMXapPPmES2P90YQ+tCPxUeKlYYIcF7wV6dBzh5i8U612EqQ/8xpDx3YvJOAG8lAJV2GTLT4F0suV8mdl//sTyn312p2cEQj7g=;
+ b=GpE23ZKeORSFRMXkPrWjXKo7tmgZur2aCpHuti5VVlmypBKE18Jp41LSmKp8KvM1Hizq6BVIR8t5jthgg9I4VCIso8L7zCI6PiAmpvqadEOV72Sd4/ZEsAHoDCzMeHuyAxhw8kuest4EvQYoXV3NUwJSaUiNzU+wWLxEjv7CoVc=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=OolPvSjOLvpHg4gNzzoLbBwRMcppiWZoLpAcmSMs73Q=;
+ bh=VAdqz/lJVnOZdKvaUpR6Fnwr/S+No/9Ii98i+MMjdiQ=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,13 +73,16 @@ X-Virus-Status: Clean
 
 
 On 2025/7/22 06:07, Jonas Karlman wrote:
-> The Rockchip TypeC glue driver improperly present itself as a UCLASS_PHY
-> driver, without ever implementing the required phy_ops.
+> The RK3588 SoC comes with USB OTG support using a DWC3 controller with
+> a USB2 PHY and a USB3 PHY (USBDP PHY).
 >
-> This is something that in special circumstances can lead to a NULL
-> pointer dereference followed by a SError crash.
+> Some board designs may not use the USBDP PHY for USB3 purpose. For these
+> board to use USB OTG the input clock source must change to use UTMI clk
+> instead of PIPE clk.
 >
-> Change the glue driver to use UCLASS_NOP to fix this.
+> Change to always disable the USB3OTG U3 ports early and leave it to the
+> USBDP PHY driver to re-enable the U3 port when a usb3-phy is described
+> in the board device tree.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -87,19 +90,32 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   drivers/phy/rockchip/phy-rockchip-typec.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   arch/arm/mach-rockchip/rk3588/rk3588.c | 8 ++++++++
+>   1 file changed, 8 insertions(+)
 >
-> diff --git a/drivers/phy/rockchip/phy-rockchip-typec.c b/drivers/phy/rockchip/phy-rockchip-typec.c
-> index c48a5cd52676..66d1d32d25cb 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-typec.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-typec.c
-> @@ -788,7 +788,7 @@ U_BOOT_DRIVER(rockchip_tcphy_usb3_port) = {
+> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> index e2278ff792b4..c01a40020896 100644
+> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> @@ -15,6 +15,10 @@
+>   #include <asm/arch-rockchip/hardware.h>
+>   #include <asm/arch-rockchip/ioc_rk3588.h>
 >   
->   U_BOOT_DRIVER(rockchip_typec_phy) = {
->   	.name	= "rockchip_typec_phy",
-> -	.id	= UCLASS_PHY,
-> +	.id	= UCLASS_NOP,
->   	.of_match = rockchip_typec_phy_ids,
->   	.probe = rockchip_tcphy_probe,
->   	.bind = rockchip_tcphy_bind,
+> +#define USB_GRF_BASE			0xfd5ac000
+> +#define USB3OTG0_CON1			0x001c
+> +#define USB3OTG1_CON1			0x0034
+> +
+>   #define FIREWALL_DDR_BASE		0xfe030000
+>   #define FW_DDR_MST5_REG			0x54
+>   #define FW_DDR_MST13_REG		0x74
+> @@ -184,6 +188,10 @@ int arch_cpu_init(void)
+>   	/* Disable JTAG exposed on SDMMC */
+>   	rk_clrreg(&sys_grf->soc_con[6], SYS_GRF_FORCE_JTAG);
+>   #endif
+> +
+> +	/* Disable USB3OTG U3 ports, later enabled by USBDP PHY driver */
+> +	writel(0xffff0188, USB_GRF_BASE + USB3OTG0_CON1);
+> +	writel(0xffff0188, USB_GRF_BASE + USB3OTG1_CON1);
+>   #endif
+>   
+>   	return 0;
