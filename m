@@ -4,64 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4964FCA0FF0
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 00:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8A2ECA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:22:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF05A83542;
-	Sat, 30 Aug 2025 02:00:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id EC010836B2;
+	Sat, 30 Aug 2025 16:22:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oGgtWcw2";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="AuYVzy2t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6C76835EA; Sat, 30 Aug 2025 02:00:48 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id F085C836CE; Sat, 30 Aug 2025 16:22:39 +0200 (CEST)
+Received: from mail-m32122.qiye.163.com (mail-m32122.qiye.163.com
+ [220.197.32.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CA9383526
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 02:00:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8B8C83542
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:22:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cDFdm2mnXz9shw;
- Sat, 30 Aug 2025 02:00:44 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756512044;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=QRJThMGoyz3v+LFkZ5/dVh7GlOmqY2do1D2AB+fGjzk=;
- b=oGgtWcw2Nqpcrr+zcmRueFzZNZxT/FOgW6jcn8oz67EVAVqGD3lvPC/NoFuYe8C/gmTe+E
- xCCiMXStYuWHfy58WKtApzJIxX1pI9O2seH7zfR6XcHFvyaEvzjGnTmwJ140p1xrNnFuuU
- gwUKA4wESkKWy67hb+wSBCBirdLXmuueWobiKOX3RDVTE8MthBLu4moWvVrnZbuZzcJcmR
- n6Rj3ZVUYntCPprlMgmqsGiiAn698aKP83KIOpMZjXq+f5OGGU/VWM88GXUY26GL7X1Wkm
- m8TS62A5lrMiT2DAjqiX4Njd9WLLgv8SycSC8nAiaQjDDhEo+rGUfEJSlfmfdg==
-Message-ID: <e3107726-6980-4330-aabf-aef1ec9f5562@mailbox.org>
-Date: Sat, 30 Aug 2025 02:00:43 +0200
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.1.64] (unknown [121.204.19.91])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 212376850;
+ Sat, 30 Aug 2025 22:22:31 +0800 (GMT+08:00)
+Message-ID: <203dac55-43e2-4872-a653-0132714ab6d6@rock-chips.com>
+Date: Sat, 30 Aug 2025 22:22:31 +0800
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/4] configs: Increase USB Hub debounce timeout in Agilex5
-To: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>,
- u-boot@lists.denx.de
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
- <20250808100412.9320-4-nareshkumar.ravulapalli@altera.com>
- <7cfaf6cb-38b9-4932-8904-ce7be12a5098@mailbox.org>
- <69597595-6c7e-441a-952b-16b80fd60aca@altera.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] rockchip: rockchip-inno-usb2: Fix Synchronous Abort on
+ usb start
+To: Alex Shumsky <alexthreed@gmail.com>, u-boot@lists.denx.de
+Cc: Jonas Karlman <jonas@kwiboo.se>, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250703060517.3909695-1-alexthreed@gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <69597595-6c7e-441a-952b-16b80fd60aca@altera.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20250703060517.3909695-1-alexthreed@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 5df740eb1546888ab21
-X-MBO-RS-META: fmc57afag13yhnma65tikmtwef9ztaye
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a98fb5bc17403afkunme5396daa40346d
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCSExDVktNSB9PQkxPHUlPSVYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
+ VKQktLWQY+
+DKIM-Signature: a=rsa-sha256;
+ b=AuYVzy2tc4bW9IVhbHd4oBHzCeY5M2kRzbWt5fV/A0pgmC0Vp32+SAW6HxeWAwaEiRTwQQTX6rriQB1vhkiyQ1YkW3wEUkrsR6oG03rZIsPmuFDBsDJgnmwoYn2o5NxNuIS4Us9naL6dQ94uoVICQ01Zz8hikO7jAgfGp0d4Nvs=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=vuBfGHfNqooYlZddG6yI+RKdFUWVYzFJ503FnMTmsx8=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,28 +73,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/29/25 6:19 PM, Ravulapalli, Naresh Kumar wrote:
-> Hi Marek
-> 
-> On 29-Aug-25 2:11 PM, Marek Vasut wrote:
->>
->> On 8/8/25 12:04 PM, Naresh Kumar Ravulapalli wrote:
->>> Some USB devices need more time to be initialized. Hence,
->>> increasing the default USB Hub debounce timeout value for
->>> devices to be discovered, connected to Agilex5 boards.
->> Is this really hub debounce timeout or usb_pgood_delay ?
->>
->> Which devices are those, include that in the commit message.
-> 
-> Yes, timeout is related to USB connect/disconnect signal bounces not 
-> about bus stability during init.
-> 
-> Issue was mainly observed with legacy flash drives. Maybe I will change 
-> commit text from "Some USB devices need more time to be initialized..." 
-> to "Some old USB flash drives need more time to be initialized during 
-> connect or disconnect events ..."?
-> 
-> Note that I am not modifying the default Kconfig value in general; 
-> change is only made for an SoCFPGA devkit we tested.
-Does this same issue go away if you set usb_pgood_delay to 2000 or 
-higher too ?
+
+On 2025/7/3 14:04, Alex Shumsky wrote:
+> Fix NULL pointer dereference that happen when rockchip-inno-usb2 clock
+> enabled before device probe. This early clock enable call happen in process
+> of parent clock activation added in ac30d90f3367.
+>
+> Fixes: 229218373c22 ("phy: rockchip-inno-usb2: Add support for clkout_ctl_phy").
+> Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting")
+> Co-authored-by: Jonas Karlman <jonas@kwiboo.se>
+> Signed-off-by: Alex Shumsky <alexthreed@gmail.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+Thanks,
+- Kever
+> ---
+>
+> Changes in v2:
+> - rework patch (add NULL check to code instead of dts modification)
+>
+>   drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 19 ++++++++++++++-----
+>   1 file changed, 14 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> index 88b33de1b2..3cc5956aed 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
+> @@ -167,20 +167,27 @@ static struct phy_ops rockchip_usb2phy_ops = {
+>   	.of_xlate = rockchip_usb2phy_of_xlate,
+>   };
+>   
+> -static void rockchip_usb2phy_clkout_ctl(struct clk *clk, struct regmap **base,
+> -					const struct usb2phy_reg **clkout_ctl)
+> +static int rockchip_usb2phy_clkout_ctl(struct clk *clk, struct regmap **base,
+> +				       const struct usb2phy_reg **clkout_ctl)
+>   {
+>   	struct udevice *parent = dev_get_parent(clk->dev);
+>   	struct rockchip_usb2phy *priv = dev_get_priv(parent);
+>   	const struct rockchip_usb2phy_cfg *phy_cfg = priv->phy_cfg;
+>   
+> -	if (priv->phy_cfg->clkout_ctl_phy.enable) {
+> +	// phy_cfg can be NULL if this function called before probe (when parent
+> +	// clocks are enabled)
+> +	if (!phy_cfg)
+> +		return -EINVAL;
+> +
+> +	if (phy_cfg->clkout_ctl_phy.enable) {
+>   		*base = priv->phy_base;
+>   		*clkout_ctl = &phy_cfg->clkout_ctl_phy;
+>   	} else {
+>   		*base = priv->reg_base;
+>   		*clkout_ctl = &phy_cfg->clkout_ctl;
+>   	}
+> +
+> +	return 0;
+>   }
+>   
+>   /**
+> @@ -206,7 +213,8 @@ int rockchip_usb2phy_clk_enable(struct clk *clk)
+>   	const struct usb2phy_reg *clkout_ctl;
+>   	struct regmap *base;
+>   
+> -	rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
+> +	if (rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl))
+> +		return -ENOSYS;
+>   
+>   	/* turn on 480m clk output if it is off */
+>   	if (!property_enabled(base, clkout_ctl)) {
+> @@ -230,7 +238,8 @@ int rockchip_usb2phy_clk_disable(struct clk *clk)
+>   	const struct usb2phy_reg *clkout_ctl;
+>   	struct regmap *base;
+>   
+> -	rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl);
+> +	if (rockchip_usb2phy_clkout_ctl(clk, &base, &clkout_ctl))
+> +		return -ENOSYS;
+>   
+>   	/* turn off 480m clk output */
+>   	property_enable(base, clkout_ctl, false);
+
+-- 
+Thanks & Best regards,
+   Kever Yang
+**************************************************************************************************
+杨凯  市场部             Kever Yang      Marketing Department
+瑞芯微电子股份有限公司                Rockchip Electronics Co.，Ltd。
+地址：福建省福州市铜盘路软件大道89号软件园A区18号楼 (350003)
+Addr : No.18 Building，A District，No.89，Fuzhou Software Boulevard，Fuzhou，Fujian，PRC
+
