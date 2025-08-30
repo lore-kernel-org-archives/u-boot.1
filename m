@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9035FCA0EFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6853BCA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:14:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFD938380E;
-	Sat, 30 Aug 2025 17:14:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8775783868;
+	Sat, 30 Aug 2025 17:14:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EftIW4bY";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="EOOnO+MS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDF5A83826; Sat, 30 Aug 2025 17:14:05 +0200 (CEST)
-Received: from mail-m1973171.qiye.163.com (mail-m1973171.qiye.163.com
- [220.197.31.71])
+ id 8177583868; Sat, 30 Aug 2025 17:14:14 +0200 (CEST)
+Received: from mail-m1973173.qiye.163.com (mail-m1973173.qiye.163.com
+ [220.197.31.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 671F5836B2
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:14:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF2508383F
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:14:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4f1b;
- Sat, 30 Aug 2025 23:13:58 +0800 (GMT+08:00)
-Message-ID: <b87797f1-e26b-41a5-8d66-7a80a7a9f95f@rock-chips.com>
-Date: Sat, 30 Aug 2025 23:13:58 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4f1e;
+ Sat, 30 Aug 2025 23:14:07 +0800 (GMT+08:00)
+Message-ID: <212344ea-bdd0-4862-a073-4f723fba1183@rock-chips.com>
+Date: Sat, 30 Aug 2025 23:14:06 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/17] rockchip: odroid-go2: Use appropriate bootph props
+Subject: Re: [PATCH 05/17] rockchip: odroid-go2: Move SoC common overrides
+ into a SoC u-boot.dtsi
 To: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner
  <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250713233429.1376172-1-jonas@kwiboo.se>
- <20250713233429.1376172-5-jonas@kwiboo.se>
+ <20250713233429.1376172-6-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250713233429.1376172-5-jonas@kwiboo.se>
+In-Reply-To: <20250713233429.1376172-6-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb8addcd03afkunmcab4ea3441248b
+X-HM-Tid: 0a98fb8afe2c03afkunma62bcda74124f5
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDS0tCVkpLTkhDSUlITktPGVYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDT0JCVktOSR0aTklPSBgdSVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=EftIW4bYMjSEozlNyY5qbo9Ysyc+7fClgroKFdkbLQGvMScTeX3Md6KlZopNFttZw3QfvRGiMZXfpJi9V70N545xsk2ViupqZq0/ZNcYQZ5Ia9z1R7TyBTCJT8P6fYYK7KJX+3ktZxroPtNNR9szzcCc7mrW5vxqP3Yfz2cg1V8=;
+ b=EOOnO+MScusJqUoBd7votEqndkpg96/r/KDZDSg7l3VbtF9v9Cu7dINsHjbJsl5szrbQZE0Nvywgd8T0RY1Gpf8gcaBiRX6dKTRN8zJLJ5kOCzz8O5rsjffghUz8IjDCx/YlNVq9LwhF1aPgTDttXcCajWPHlbIJJj7jp1KA6eI=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=l6TXq9Vn9bblvr8NqD8TUcHKRN3ze91vbQwSMjk8D24=;
+ bh=oAhsIqi7QWDfUO9Xidlh8Rs2Lcz2KFY/buvmA7yoLRk=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,10 +75,11 @@ X-Virus-Status: Clean
 
 
 On 2025/7/14 07:33, Jonas Karlman wrote:
-> GPIO devices are needed in U-Boot proper phase, sdmmc and sfc devices
-> are needed in SPL and pre-reloc phase.
+> Add a new common rk3326-u-boot.dtsi and move the SoC common overrides
+> into it.
 >
-> Update bootph- props to match what boot phase devices are needed at.
+> This should not contain any changes other than a possible reorder of
+> nodes and props.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -85,69 +87,190 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 16 +++++++---------
->   1 file changed, 7 insertions(+), 9 deletions(-)
+>   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 78 ++--------------------
+>   arch/arm/dts/rk3326-u-boot.dtsi            | 76 +++++++++++++++++++++
+>   2 files changed, 81 insertions(+), 73 deletions(-)
+>   create mode 100644 arch/arm/dts/rk3326-u-boot.dtsi
 >
 > diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> index df21747fad78..a27994e450c0 100644
+> index a27994e450c0..06e2c190b1f9 100644
 > --- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
 > +++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> @@ -27,22 +27,18 @@
->   };
+> @@ -3,56 +3,7 @@
+>    * Copyright (c) 2020 Theobroma Systems Design und Consulting GmbH
+>    */
 >   
->   &gpio0 {
+> -#include "rockchip-u-boot.dtsi"
+> -
+> -/ {
+> -	chosen {
+> -		u-boot,spl-boot-order = &sdmmc;
+> -	};
+> -
+> -	dmc {
+> -		bootph-all;
+> -		compatible = "rockchip,px30-dmc", "syscon";
+> -		reg = <0x0 0xff2a0000 0x0 0x1000>;
+> -	};
+> -
+> -	rng: rng@ff0b0000 {
+> -		compatible = "rockchip,cryptov2-rng";
+> -		reg = <0x0 0xff0b0000 0x0 0x4000>;
+> -	};
+> -};
+> -
+> -&cru {
 > -	bootph-all;
->   	gpio-ranges = <&pinctrl 0 0 32>;
->   };
->   
->   &gpio1 {
+> -};
+> -
+> -&gpio0 {
+> -	gpio-ranges = <&pinctrl 0 0 32>;
+> -};
+> -
+> -&gpio1 {
+> -	gpio-ranges = <&pinctrl 0 32 32>;
+> -};
+> -
+> -&gpio2 {
+> -	gpio-ranges = <&pinctrl 0 64 32>;
+> -};
+> -
+> -&gpio3 {
+> -	gpio-ranges = <&pinctrl 0 96 32>;
+> -};
+> -
+> -&grf {
 > -	bootph-all;
->   	gpio-ranges = <&pinctrl 0 32 32>;
->   };
->   
->   &gpio2 {
+> -};
+> -
+> -&pmucru {
 > -	bootph-all;
->   	gpio-ranges = <&pinctrl 0 64 32>;
->   };
->   
->   &gpio3 {
+> -};
+> -
+> -&pmugrf {
 > -	bootph-all;
->   	gpio-ranges = <&pinctrl 0 96 32>;
+> -};
+> +#include "rk3326-u-boot.dtsi"
+>   
+>   &rk817 {
+>   	regulators {
+> @@ -73,33 +24,14 @@
+>   	bootph-all;
 >   };
 >   
-> @@ -78,28 +74,30 @@
->   };
->   
->   &sdmmc {
-> -	bootph-all;
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
->   
->   	/* mmc to sram can't do dma, prevent aborts transferring TF-A parts */
->   	u-boot,spl-fifo-mode;
->   };
->   
+> -&sdmmc {
+> -	bootph-pre-ram;
+> -	bootph-some-ram;
+> -
+> -	/* mmc to sram can't do dma, prevent aborts transferring TF-A parts */
+> -	u-boot,spl-fifo-mode;
+> -};
+> -
 >   &sfc {
-> -	bootph-all;
-> +	bootph-some-ram;
->   };
->   
->   &{/spi@ff3a0000/flash@0} {
-> -	bootph-all;
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
+> -	bootph-some-ram;
+> -};
+> -
+> -&{/spi@ff3a0000/flash@0} {
+> -	bootph-pre-ram;
+> -	bootph-some-ram;
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
 >   };
 >   
 >   &uart1 {
-> -	clock-frequency = <24000000>;
 >   	bootph-all;
-> +	clock-frequency = <24000000>;
+>   	clock-frequency = <24000000>;
 >   };
->   
->   &uart2 {
+> -
+> -&uart2 {
+> -	bootph-all;
 > -	clock-frequency = <24000000>;
->   	bootph-all;
+> -};
+> -
+> -&xin24m {
+> -	bootph-all;
+> -};
+> diff --git a/arch/arm/dts/rk3326-u-boot.dtsi b/arch/arm/dts/rk3326-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..2894133cfe6d
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3326-u-boot.dtsi
+> @@ -0,0 +1,76 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2020 Theobroma Systems Design und Consulting GmbH
+> + */
+> +
+> +#include "rockchip-u-boot.dtsi"
+> +
+> +/ {
+> +	chosen {
+> +		u-boot,spl-boot-order = &sdmmc;
+> +	};
+> +
+> +	dmc {
+> +		compatible = "rockchip,px30-dmc", "syscon";
+> +		reg = <0x0 0xff2a0000 0x0 0x1000>;
+> +		bootph-all;
+> +	};
+> +
+> +	rng: rng@ff0b0000 {
+> +		compatible = "rockchip,cryptov2-rng";
+> +		reg = <0x0 0xff0b0000 0x0 0x4000>;
+> +	};
+> +};
+> +
+> +&cru {
+> +	bootph-all;
+> +};
+> +
+> +&gpio0 {
+> +	gpio-ranges = <&pinctrl 0 0 32>;
+> +};
+> +
+> +&gpio1 {
+> +	gpio-ranges = <&pinctrl 0 32 32>;
+> +};
+> +
+> +&gpio2 {
+> +	gpio-ranges = <&pinctrl 0 64 32>;
+> +};
+> +
+> +&gpio3 {
+> +	gpio-ranges = <&pinctrl 0 96 32>;
+> +};
+> +
+> +&grf {
+> +	bootph-all;
+> +};
+> +
+> +&pmucru {
+> +	bootph-all;
+> +};
+> +
+> +&pmugrf {
+> +	bootph-all;
+> +};
+> +
+> +&sdmmc {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +
+> +	/* mmc to sram can't do dma, prevent aborts transferring TF-A parts */
+> +	u-boot,spl-fifo-mode;
+> +};
+> +
+> +&sfc {
+> +	bootph-some-ram;
+> +};
+> +
+> +&uart2 {
+> +	bootph-all;
 > +	clock-frequency = <24000000>;
->   };
->   
->   &xin24m {
+> +};
+> +
+> +&xin24m {
+> +	bootph-all;
+> +};
