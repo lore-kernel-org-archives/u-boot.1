@@ -4,59 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CEA9CA0FFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:12:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44975CA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:12:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB90C83837;
-	Sat, 30 Aug 2025 17:12:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2887183857;
+	Sat, 30 Aug 2025 17:12:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="PgS61Qhr";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Z11JGFp1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38D8E8383A; Sat, 30 Aug 2025 17:12:11 +0200 (CEST)
-Received: from mail-m49234.qiye.163.com (mail-m49234.qiye.163.com
- [45.254.49.234])
+ id F1A008380E; Sat, 30 Aug 2025 17:12:16 +0200 (CEST)
+Received: from mail-m49236.qiye.163.com (mail-m49236.qiye.163.com
+ [45.254.49.236])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3155C8380E
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:12:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8338983857
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:12:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4ece;
- Sat, 30 Aug 2025 23:12:02 +0800 (GMT+08:00)
-Message-ID: <cd38d27b-6dd4-4a7a-8fb7-9091fde75b62@rock-chips.com>
-Date: Sat, 30 Aug 2025 23:12:02 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4ed4;
+ Sat, 30 Aug 2025 23:12:11 +0800 (GMT+08:00)
+Message-ID: <cfa7fa2c-a517-40b5-9d8e-a9a3cf57500a@rock-chips.com>
+Date: Sat, 30 Aug 2025 23:12:11 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/17] clk: px30: Allow use of GPU and WIFI_PMU in
- assigned-clocks
+Subject: Re: [PATCH 02/17] rockchip: odroid-go2: Remove cru assigned-clocks
+ override
 To: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner
  <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250713233429.1376172-1-jonas@kwiboo.se>
- <20250713233429.1376172-2-jonas@kwiboo.se>
+ <20250713233429.1376172-3-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250713233429.1376172-2-jonas@kwiboo.se>
+In-Reply-To: <20250713233429.1376172-3-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb8917b703afkunm338f69eb411baf
+X-HM-Tid: 0a98fb8939b403afkunm5e3ab6df411c0b
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCTE1JVh5OGEhITB5JH0gdT1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTUtDVk0YTElLSUpJHktMGlYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=PgS61QhrYoIjk/dOK9ej4nDSrmjBHdDo6yUub6VkejCeAo63MtZcG95hNrKvn0g8DqR1tuPFJqefdhZP4Qfo8uZcJSa81cXPuIS64LnEeQq36tcWOCyN8jW1LQN28tR6FxCtnPSDDOT43T5OYE9FvJ0AL3cXFSVV8VHumb3a29Y=;
+ b=Z11JGFp1iQJ/sW5Te6GKQI7FNpRKBqFTsKnuWO3sQEZZhNB1lkQnCya/lB8uc3lBewkE2v/7Jwl1KbRLV5RegNWEQQj5UlVetAKgfbWGVbOpo6j7Ud5b3nGyRnpGnrOUfa+JXlbi2RE6oklWMwOzCNVtB5ROgTsOwQlF8ObFhA8=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=Hrj+xdzu2BYgUSmjTLVbTS1fDLu5uJwx17d7ehaIqEU=;
+ bh=QPv9SUhIUcp6J3IanlkF0NzTZ/G4N6WP2qOuwHtIq6E=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,8 +75,8 @@ X-Virus-Status: Clean
 
 
 On 2025/7/14 07:33, Jonas Karlman wrote:
-> Add dummy implementation of set_rate for SCLK_GPU and SCLK_WIFI_PMU to
-> allow use of dts/upstream assigned-clocks in cru and pmucru nodes.
+> Remove the cru assigned-clocks override now that SCLK_GPU is supported
+> by the clock driver.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -85,30 +84,29 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   drivers/clk/rockchip/clk_px30.c | 6 ++++++
->   1 file changed, 6 insertions(+)
+>   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 10 ----------
+>   1 file changed, 10 deletions(-)
 >
-> diff --git a/drivers/clk/rockchip/clk_px30.c b/drivers/clk/rockchip/clk_px30.c
-> index ad7e1c0f2460..b5054e84c326 100644
-> --- a/drivers/clk/rockchip/clk_px30.c
-> +++ b/drivers/clk/rockchip/clk_px30.c
-> @@ -1360,6 +1360,9 @@ static ulong px30_clk_set_rate(struct clk *clk, ulong rate)
->   	case SCLK_GMAC_RMII:
->   		ret = px30_mac_set_speed_clk(priv, rate);
->   		break;
-> +	/* Might occur in cru assigned-clocks, can be ignored here */
-> +	case SCLK_GPU:
-> +		break;
->   #endif
->   	default:
->   		return -ENOENT;
-> @@ -1726,6 +1729,9 @@ static ulong px30_pmuclk_set_rate(struct clk *clk, ulong rate)
->   	case SCLK_UART0_PMU:
->   		ret = px30_pmu_uart0_set_clk(priv, rate);
->   		break;
-> +	/* Might occur in pmucru assigned-clocks, can be ignored here */
-> +	case SCLK_WIFI_PMU:
-> +		break;
->   	default:
->   		return -ENOENT;
->   	}
+> diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
+> index a0ab8b69f2e4..f37daa893c79 100644
+> --- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
+> @@ -32,18 +32,8 @@
+>   	};
+>   };
+>   
+> -/* U-Boot clk driver for px30 cannot set GPU_CLK */
+>   &cru {
+>   	bootph-all;
+> -	assigned-clocks = <&cru PLL_NPLL>,
+> -		<&cru ACLK_BUS_PRE>, <&cru ACLK_PERI_PRE>,
+> -		<&cru HCLK_BUS_PRE>, <&cru HCLK_PERI_PRE>,
+> -		<&cru PCLK_BUS_PRE>, <&cru PLL_CPLL>;
+> -
+> -	assigned-clock-rates = <1188000000>,
+> -		<200000000>, <200000000>,
+> -		<150000000>, <150000000>,
+> -		<100000000>, <17000000>;
+>   };
+>   
+>   &gpio0 {
