@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C160CA0EFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:57:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15854CA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9F54838B7;
-	Sat, 30 Aug 2025 16:57:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C36B838A5;
+	Sat, 30 Aug 2025 16:57:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="UgyzWXo8";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="TpkL76N2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B5A38380E; Sat, 30 Aug 2025 16:57:09 +0200 (CEST)
-Received: from mail-m49210.qiye.163.com (mail-m49210.qiye.163.com
- [45.254.49.210])
+ id 5EF138388E; Sat, 30 Aug 2025 16:57:16 +0200 (CEST)
+Received: from mail-m49212.qiye.163.com (mail-m49212.qiye.163.com
+ [45.254.49.212])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5594D838BB
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:57:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB52A8388E
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:57:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4c6a;
- Sat, 30 Aug 2025 22:57:01 +0800 (GMT+08:00)
-Message-ID: <414c2843-d26c-446d-aad9-622c2edff264@rock-chips.com>
-Date: Sat, 30 Aug 2025 22:57:01 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4c74;
+ Sat, 30 Aug 2025 22:57:10 +0800 (GMT+08:00)
+Message-ID: <810c3424-df41-4869-8619-a7c121fa151e@rock-chips.com>
+Date: Sat, 30 Aug 2025 22:57:10 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 7/8] phy: rockchip-inno-usb2: Add support for RK3576
+Subject: Re: [PATCH v3 8/8] phy: rockchip: usbdp: Add support for RK3576
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Frank Wang <frank.wang@rock-chips.com>
 References: <20250801203255.2590535-1-jonas@kwiboo.se>
- <20250801203255.2590535-8-jonas@kwiboo.se>
+ <20250801203255.2590535-9-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250801203255.2590535-8-jonas@kwiboo.se>
+In-Reply-To: <20250801203255.2590535-9-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb7b57fb03afkunm78bbb62a40d616
+X-HM-Tid: 0a98fb7b7ce403afkunmef49efd040d6a4
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTkweVk4YH0hIGBhIGEJMT1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDGhoeVktMGh5NGh9OS0hNSVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=UgyzWXo8q0yyRvr2ICoT3g4WBwHXggrbnUJM+MBxDqmGpQhuE5f9FS6vtRPXZ7dU3wa6ekvR3P0yiSwaBjcLD7xHHPCtARB4wmJZcQG/bIByicxNhMA6BUd+Lo/yGN7NqHhLzgJcXNSqpHmYqCvna3l22JJ8R+IKutNx3HeaSRw=;
+ b=TpkL76N2M4TodsipPjU2WROIXM9TssUd2Q8AgyKByGIBvQl9OMCIWspWbjC/JdxzNxS+CDSCs+MAf+FgbOAllXxZ4yUTPqozoP8sgeCUnYDPl3H01FCvbg/a7nzPSG0n0AJZrjZ0PZHw12aDHFcZiZ0oIeK12UWq4okNKJUX2Cs=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=L19IcjvaYqKDq03Jh5WHGa70r2xs6z75GhVULW+re4I=;
+ bh=6bBRcajDRmM/5pWPHgpDDwjMqVuMdBGqV0BbD8T1UlE=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,7 +75,7 @@ X-Virus-Status: Clean
 On 2025/8/2 04:32, Jonas Karlman wrote:
 > From: Frank Wang <frank.wang@rock-chips.com>
 >
-> Add support for the USB2.0 PHYs used in the RK3576 SoC.
+> Add support for the USB3.0+DP PHY used in the RK3576 SoC.
 >
 > Config values are taken from vendor U-Boot linux-6.1-stan-rkr5 tag.
 >
@@ -88,50 +88,50 @@ Thanks,
 > ---
 > v3: New patch
 > ---
->   drivers/phy/rockchip/phy-rockchip-inno-usb2.c | 26 +++++++++++++++++++
+>   drivers/phy/rockchip/phy-rockchip-usbdp.c | 26 +++++++++++++++++++++++
 >   1 file changed, 26 insertions(+)
 >
-> diff --git a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-> index a3222138b9d0..4ea6600ce7f5 100644
-> --- a/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-> +++ b/drivers/phy/rockchip/phy-rockchip-inno-usb2.c
-> @@ -465,6 +465,28 @@ static const struct rockchip_usb2phy_cfg rk3568_phy_cfgs[] = {
->   	{ /* sentinel */ }
+> diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+> index 6cfbef02b4ac..cca67dd3611d 100644
+> --- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
+> +++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+> @@ -762,6 +762,28 @@ static const char * const rk3588_udphy_rst_l[] = {
+>   	"init", "cmn", "lane", "pcs_apb", "pma_apb"
 >   };
 >   
-> +static const struct rockchip_usb2phy_cfg rk3576_phy_cfgs[] = {
-> +	{
-> +		.reg		= 0x0000,
-> +		.clkout_ctl	= { 0x0008, 0, 0, 1, 0 },
-> +		.port_cfgs	= {
-> +			[USB2PHY_PORT_OTG] = {
-> +				.phy_sus	= { 0x0000, 1, 0, 2, 1 },
-> +			}
-> +		},
+> +static const struct rockchip_udphy_cfg rk3576_udphy_cfgs = {
+> +	.num_phys = 1,
+> +	.phy_ids = {
+> +		0x2b010000,
 > +	},
-> +	{
-> +		.reg		= 0x2000,
-> +		.clkout_ctl	= { 0x2008, 0, 0, 1, 0 },
-> +		.port_cfgs	= {
-> +			[USB2PHY_PORT_OTG] = {
-> +				.phy_sus	= { 0x2000, 1, 0, 2, 1 },
-> +			}
-> +		},
+> +	.num_rsts = ARRAY_SIZE(rk3588_udphy_rst_l),
+> +	.rst_list = rk3588_udphy_rst_l,
+> +	.grfcfg	= {
+> +		/* u2phy-grf */
+> +		.bvalid_phy_con		= { 0x0010, 1, 0, 0x2, 0x3 },
+> +		.bvalid_grf_con		= { 0x0000, 15, 14, 0x1, 0x3 },
+> +
+> +		/* usb-grf */
+> +		.usb3otg0_cfg		= { 0x0030, 15, 0, 0x1100, 0x0188 },
+> +
+> +		/* usbdpphy-grf */
+> +		.low_pwrn		= { 0x0004, 13, 13, 0, 1 },
+> +		.rx_lfps		= { 0x0004, 14, 14, 0, 1 },
 > +	},
-> +	{ /* sentinel */ }
+> +	.combophy_init = rk3588_udphy_init,
 > +};
 > +
->   static const struct rockchip_usb2phy_cfg rk3588_phy_cfgs[] = {
->   	{
->   		.reg		= 0x0000,
-> @@ -526,6 +548,10 @@ static const struct udevice_id rockchip_usb2phy_ids[] = {
->   		.compatible = "rockchip,rk3568-usb2phy",
->   		.data = (ulong)&rk3568_phy_cfgs,
->   	},
+>   static const struct rockchip_udphy_cfg rk3588_udphy_cfgs = {
+>   	.num_phys = 2,
+>   	.phy_ids = {
+> @@ -787,6 +809,10 @@ static const struct rockchip_udphy_cfg rk3588_udphy_cfgs = {
+>   };
+>   
+>   static const struct udevice_id rockchip_udphy_dt_match[] = {
 > +	{
-> +		.compatible = "rockchip,rk3576-usb2phy",
-> +		.data = (ulong)&rk3576_phy_cfgs,
+> +		.compatible = "rockchip,rk3576-usbdp-phy",
+> +		.data = (ulong)&rk3576_udphy_cfgs
 > +	},
 >   	{
->   		.compatible = "rockchip,rk3588-usb2phy",
->   		.data = (ulong)&rk3588_phy_cfgs,
+>   		.compatible = "rockchip,rk3588-usbdp-phy",
+>   		.data = (ulong)&rk3588_udphy_cfgs
