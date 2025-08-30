@@ -4,59 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAD05CA0FFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EC2DCA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 15:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6135783914;
-	Sat, 30 Aug 2025 17:27:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F3228383A;
+	Sat, 30 Aug 2025 17:33:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OHVjCyRA";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OWXMOU6S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2AC683914; Sat, 30 Aug 2025 17:27:56 +0200 (CEST)
-Received: from mail-m1973191.qiye.163.com (mail-m1973191.qiye.163.com
- [220.197.31.91])
+ id 0D68883893; Sat, 30 Aug 2025 17:33:12 +0200 (CEST)
+Received: from mail-m49207.qiye.163.com (mail-m49207.qiye.163.com
+ [45.254.49.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52750838E7
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:27:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3A918341A
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 17:33:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123f98fa;
- Sat, 30 Aug 2025 23:27:50 +0800 (GMT+08:00)
-Message-ID: <07f0b889-3666-4d18-9470-83027956f23f@rock-chips.com>
-Date: Sat, 30 Aug 2025 23:27:49 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123f99b1
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 23:33:05 +0800 (GMT+08:00)
+Message-ID: <bd680dec-17fe-493a-b3bc-0b97b5c854b5@rock-chips.com>
+Date: Sat, 30 Aug 2025 23:33:05 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] power: rk8xx: allow to customize RK806 reset mode
-To: Quentin Schulz <foss+uboot@0leil.net>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- Sumit Garg <sumit.garg@kernel.org>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-References: <20250813-rk8xx-rst-fun-v2-0-a2223e17cb2c@cherry.de>
- <20250813-rk8xx-rst-fun-v2-5-a2223e17cb2c@cherry.de>
+Subject: Re: [PATCH] board: rockchip: Add Xunlong Orange Pi 5 Ultra
+To: u-boot@lists.denx.de
+References: <20250723042217.4821-1-zhihong@nzhnb.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250813-rk8xx-rst-fun-v2-5-a2223e17cb2c@cherry.de>
+In-Reply-To: <20250723042217.4821-1-zhihong@nzhnb.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb978d8f03afkunm1110e510416435
+X-HM-Tid: 0a98fb9c5c7f03afkunm1f1a61a4417bdd
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSEhNVk5IT0lOTEhNTB5PTFYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDSxgdVhkeQkxKHk5JHUMYQ1YVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0hKSkJMVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=OHVjCyRAzCNZE7sxk1mfQ9Ak+8EiAJBvKv86jkqWZAMY4s0magb34liTyY18/fAqLEFHTTq2huLzWNV7itGbLYz65o3juxY0AMcBAQbRbOGfgJhHpT3Q4w6HKKtwr/UeNHWAYWm3SrLA5WKu3qKzHpY0vqlgkw/AY8uPA46EuAg=;
+ b=OWXMOU6STW/gh+Lk9kGnzmn5KNou4T24DER34gytllkTcGpcpIP0c+VgLOEzkNAs4sqpO8ip26DrGTQZtoEPvX2p8kWKIfpPnboseIzMCYK6Pf9eIOkdZUBN1FvmQHw14MPcGff+yjXZ03bifZtf4ISm/ozMqnD4Ji8lppIr+14=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=D0Q/o9QNpTsPd0lu4gwB7XSQvKU+V2yhsqSS5+Ws+yE=;
+ bh=Vvy9a/WmPW2TPBKUVsaZ1aAgMWkCqiMksY+0zT8j4tg=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,107 +69,214 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2025/8/13 22:07, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@cherry.de>
+On 2025/7/23 12:22, Niu Zhihong wrote:
+> The Orange Pi 5 Ultra is another board in the Orange Pi 5 family.
 >
-> The RK806 PMIC has a bitfield for configuring the restart/reset behavior
-> (which I assume Rockchip calls "function") whenever the PMIC is reset
-> either programmatically (c.f. DEV_RST in the datasheet) or via PWRCTRL
-> or RESETB pins.
+> Orange Pi 5 Ultra uses Rockchip RK3588,
+> a new generation of octa-core 64-bit ARM processor,
+> which includes quad-core A76 and quad-core A55.
 >
-> For RK806, the following values are possible for RST_FUN:
+> Features tested on a Orange Pi 5 Ultra 16GB:
+> - SD-card boot
+> - eMMC boot
 >
-> 0b00 means "Restart PMU"
-> 0b01 means "Reset all the power off reset registers, forcing
-> 	the state to switch to ACTIVE mode"
-> 0b10 means "Reset all the power off reset registers, forcing
-> 	the state to switch to ACTIVE mode, and simultaneously
-> 	pull down the RESETB PIN for 5mS before releasing"
-> 0b11 means the same as for 0b10 just above.
+> ROCKCHIP_TPL:
+> https://github.com/rockchip-linux/rkbin/tree/master/bin/rk35/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.18.bin
 >
-> This adds the appropriate logic in the driver to parse the new
-> rockchip,reset-mode DT property to pass this information. It just
-> happens that the values in the binding match the values to write in the
-> bitfield so no mapping is necessary.
+> BL31:
+> https://github.com/rockchip-linux/rkbin/tree/master/bin/rk35/rk3588_bl31_v1.48.elf
 >
-> For backward compatibility reasons, if the property is missing we set it
-> to 0b10 (i.e. BIT(7)) like before this commit was merged instead of
-> leaving it untouched like in the kernel driver.
->
-> Note that this does nothing useful for U-Boot at the moment as the ways
-> to reset the device (e.g. via `reset` command) doesn't interact with the
-> RK8xx PMIC and simply does a CPU reset.
-> Considering the upstream Linux kernel left this register untouched until
-> (assumed) v6.17[1], this is useful for cases in which the U-Boot
-> bootloader has this patch (and running with a DT with
-> rockchip,reset-mode property set) and running an upstream kernel before
-> (assumed) v6.17, or alternatively later without the property in the
-> kernel DT.
->
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/lee/mfd.git/commit/?id=87b48d86b77686013f5c2a8866ed299312b671db
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> Signed-off-by: Niu Zhihong <zhihong@nzhnb.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   drivers/power/pmic/rk8xx.c | 21 ++++++++++++---------
->   include/power/rk8xx_pmic.h |  2 ++
->   2 files changed, 14 insertions(+), 9 deletions(-)
+>   .../dts/rk3588-orangepi-5-ultra-u-boot.dtsi   | 20 +++++
+>   board/rockchip/evb_rk3588/MAINTAINERS         |  6 ++
+>   board/xunlong/orangepi-5-ultra-rk3588/Kconfig | 12 +++
+>   .../orangepi-5-ultra-rk3588/MAINTAINERS       |  6 ++
+>   configs/orangepi-5-ultra-rk3588_defconfig     | 88 +++++++++++++++++++
+>   doc/board/rockchip/rockchip.rst               |  1 +
+>   6 files changed, 133 insertions(+)
+>   create mode 100644 arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+>   create mode 100644 board/xunlong/orangepi-5-ultra-rk3588/Kconfig
+>   create mode 100644 board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+>   create mode 100644 configs/orangepi-5-ultra-rk3588_defconfig
 >
-> diff --git a/drivers/power/pmic/rk8xx.c b/drivers/power/pmic/rk8xx.c
-> index 3bc696d4caaa68f87fd49810682616c34bafb23b..d11f7a7886e8074e7b7833c8a51ea24d77fede34 100644
-> --- a/drivers/power/pmic/rk8xx.c
-> +++ b/drivers/power/pmic/rk8xx.c
-> @@ -89,11 +89,6 @@ void rk8xx_off_for_plugin(struct udevice *dev)
->   	}
->   }
->   
-> -static struct reg_data rk806_init_reg[] = {
-> -	/* RST_FUN */
-> -	{ RK806_REG_SYS_CFG3, BIT(7), GENMASK(7, 6)},
-> -};
-> -
->   static struct reg_data rk817_init_reg[] = {
->   /* enable the under-voltage protection,
->    * the under-voltage protection will shutdown the LDO3 and reset the PMIC
-> @@ -306,12 +301,20 @@ static int rk8xx_probe(struct udevice *dev)
->   		value = (power_en2 & 0x0f) | ((power_en3 & 0x0f) << 4);
->   		pmic_reg_write(dev, RK817_POWER_EN_SAVE1, value);
->   		break;
-> -	case RK806_ID:
-> +	case RK806_ID: {
-> +		u32 rst_fun = 2;
+> diff --git a/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..1ab31a4ec5a
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+> @@ -0,0 +1,20 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 > +
->   		on_source = RK806_ON_SOURCE;
->   		off_source = RK806_OFF_SOURCE;
-> -		init_data = rk806_init_reg;
-> -		init_data_num = ARRAY_SIZE(rk806_init_reg);
-> -		break;
+> +#include "rk3588-u-boot.dtsi"
 > +
-> +		ret = dev_read_u32(dev, "rockchip,reset-mode", &rst_fun);
-> +		if (ret)
-> +			debug("rockchip,reset-mode property missing, defaulting to %d\n",
-> +			      rst_fun);
+> +&fspim1_pins {
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
 > +
-> +		pmic_clrsetbits(dev, RK806_REG_SYS_CFG3, RK806_RST_FUN_MSK,
-> +				FIELD_PREP(RK806_RST_FUN_MSK, rst_fun));
-> +		break; }
->   	default:
->   		printf("Unknown PMIC: RK%x!!\n", show_variant);
->   		return -EINVAL;
-> diff --git a/include/power/rk8xx_pmic.h b/include/power/rk8xx_pmic.h
-> index 31221aa46b60cf995fd02f5894b3ee97a7475f8a..913b6ebe6d96e08bcfab509cff5db7da8358784a 100644
-> --- a/include/power/rk8xx_pmic.h
-> +++ b/include/power/rk8xx_pmic.h
-> @@ -212,6 +212,8 @@ enum {
->   #define RK817_POWER_EN_SAVE0	0x99
->   #define RK817_POWER_EN_SAVE1	0xa4
->   
-> +#define RK806_RST_FUN_MSK	GENMASK(7, 6)
+> +&sdhci {
+> +	cap-mmc-highspeed;
+> +	mmc-hs200-1_8v;
+> +};
 > +
->   #define RK806_POWER_EN(x)			(0x00 + (x))
->   /* POWER_ENx register lower 4 bits are write-protected unless the associated top bit is set */
->   #define RK806_POWER_EN_CLRSETBITS(bit, val)	(((val) << (bit)) | (1 << ((bit) + 4)))
->
+> +&sfc {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+> index 1232f05a387..379c85f48a4 100644
+> --- a/board/rockchip/evb_rk3588/MAINTAINERS
+> +++ b/board/rockchip/evb_rk3588/MAINTAINERS
+> @@ -48,3 +48,9 @@ S:	Maintained
+>   F:	configs/orangepi-5-plus-rk3588_defconfig
+>   F:	arch/arm/dts/rk3588-orangepi-5-plus.dts
+>   F:	arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
+> +
+> +ORANGEPI-5-RK3588-ULTRA
+> +M:	Niu Zhihong <zhihong@nzhnb.com>
+> +S:	Maintained
+> +F:	configs/orangepi-5-ultra-rk3588_defconfig
+> +F:	arch/arm/dts/rk3588-orangepi-5-ultra-u-boot.dtsi
+> diff --git a/board/xunlong/orangepi-5-ultra-rk3588/Kconfig b/board/xunlong/orangepi-5-ultra-rk3588/Kconfig
+> new file mode 100644
+> index 00000000000..43fc96b04c0
+> --- /dev/null
+> +++ b/board/xunlong/orangepi-5-ultra-rk3588/Kconfig
+> @@ -0,0 +1,12 @@
+> +if TARGET_ORANGEPI_5_ULTRA_RK3588
+> +
+> +config SYS_BOARD
+> +	default "orangepi-5-ultra-rk3588"
+> +
+> +config SYS_VENDOR
+> +	default "xunlong"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "evb_rk3588"
+> +
+> +endif
+> diff --git a/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+> new file mode 100644
+> index 00000000000..be9c93f6b9d
+> --- /dev/null
+> +++ b/board/xunlong/orangepi-5-ultra-rk3588/MAINTAINERS
+> @@ -0,0 +1,6 @@
+> +ORANGEPI-5-RK3588-ULTRA
+> +M:	Niu Zhihong <zhihong@nzhnb.com>
+> +S:	Maintained
+> +F:	board/xunlong/orangepi-5-rk3588-ultra
+> +F:	configs/orangepi-5-ultra-rk3588_defconfig
+> +F:	arch/arm/dts/rk3588-orangepi-5-ultra.dts
+> diff --git a/configs/orangepi-5-ultra-rk3588_defconfig b/configs/orangepi-5-ultra-rk3588_defconfig
+> new file mode 100644
+> index 00000000000..f3274325922
+> --- /dev/null
+> +++ b/configs/orangepi-5-ultra-rk3588_defconfig
+> @@ -0,0 +1,88 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_SPEED=80000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-orangepi-5-ultra"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_TARGET_EVB_RK3588=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_SF_DEFAULT_BUS=5
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-ultra.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_AHCI_PCI=y
+> +CONFIG_DWC_AHCI=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_XMC=y
+> +CONFIG_PHYLIB=y
+> +CONFIG_RTL8169=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_SCSI=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index b88299cbba2..4f2eea09e06 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -161,6 +161,7 @@ List of mainline supported Rockchip boards:
+>        - Xunlong Orange Pi 5 (orangepi-5-rk3588s)
+>        - Xunlong Orange Pi 5 Max (orangepi-5-max-rk3588)
+>        - Xunlong Orange Pi 5 Plus (orangepi-5-plus-rk3588)
+> +     - Xunlong Orange Pi 5 Ultra (orangepi-5-ultra-rk3588)
+>        - Yanyi Tech CoolPi 4 Model B (coolpi-4b-rk3588s)
+>        - Yanyi Tech CoolPi CM5 EVB (coolpi-cm5-evb-rk3588)
+>        - Yanyi Tech CoolPi CM5 GenBook (coolpi-cm5-genbook-rk3588)
