@@ -4,59 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE20ECA0FFF
-	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:56:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24985CA0FFF
+	for <u-boot@archiver.kernel.org>; Sat, 30 Aug 2025 14:56:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 572828380E;
-	Sat, 30 Aug 2025 16:56:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A455F8388E;
+	Sat, 30 Aug 2025 16:56:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Z1df7jDA";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XE2PgF4g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1369883857; Sat, 30 Aug 2025 16:56:34 +0200 (CEST)
-Received: from mail-m19731118.qiye.163.com (mail-m19731118.qiye.163.com
- [220.197.31.118])
+ id 4B2FB8385B; Sat, 30 Aug 2025 16:56:45 +0200 (CEST)
+Received: from mail-m4921.qiye.163.com (mail-m4921.qiye.163.com [45.254.49.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7FED8341A
- for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:56:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D15F083890
+ for <u-boot@lists.denx.de>; Sat, 30 Aug 2025 16:56:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [121.204.19.91])
- by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4c56;
- Sat, 30 Aug 2025 22:56:27 +0800 (GMT+08:00)
-Message-ID: <4e8df0f7-a718-4297-b896-bce0e6d6d186@rock-chips.com>
-Date: Sat, 30 Aug 2025 22:56:26 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 2123c4c5a;
+ Sat, 30 Aug 2025 22:56:39 +0800 (GMT+08:00)
+Message-ID: <8b83f854-399e-4ec5-b1d5-1713c3764545@rock-chips.com>
+Date: Sat, 30 Aug 2025 22:56:39 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/8] rockchip: Add default USB_GADGET_PRODUCT_NUM for
- RK3576
+Subject: Re: [PATCH v3 4/8] rockchip: rk3576: Implement checkboard() to print
+ SoC variant
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250801203255.2590535-1-jonas@kwiboo.se>
- <20250801203255.2590535-3-jonas@kwiboo.se>
+ <20250801203255.2590535-5-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250801203255.2590535-3-jonas@kwiboo.se>
+In-Reply-To: <20250801203255.2590535-5-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Tid: 0a98fb7ad23803afkunm6350952a40d39a
+X-HM-Tid: 0a98fb7b026703afkunm7118c6c340d496
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDQ0lJVkhDS0xMTx5CS08dTVYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCGklDVhlCHkoaT00ZSEIdGVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUJKWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=Z1df7jDAON/Af3Wczrvhdc1plwx8wmlveuDOUDsxS0Qs84NtgNU484dohRwg+iIZsOepEaRtanj4KDCLjXbDQjqmI1VdWXT33+Y8E3mvEV4tcxaumlkTfCl17pFSG8O6JselRFQzvb484syOX8AWHvvxF7S6wgphxRlt0mGT/Wg=;
+ b=XE2PgF4gwqBtLDgxO9+xJ8nUYDY43YAGSEdIVV9v6wQ/To1UGOhb0GuWg4qhEzs+92Fp09usLOPoRRqzh4LQyUHGBCy9UYAvOpGLM+T1PpFSnTr2p54j2soxmd8KMhdJjEbGoMTJwlyfWFPWXRVV1VKbHKZrQyOiUzNjPxMVf3o=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=BwtVc7YflIXE5E3PBdaCaXECBPCA0BdT/dub7p/mcUA=;
+ bh=y+xL7FEzSIRiYKUF4AlHadxdL4cHtRtlwbQtufgQvjc=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -76,31 +73,88 @@ X-Virus-Status: Clean
 
 
 On 2025/8/2 04:32, Jonas Karlman wrote:
-> Use 0x350e as the default USB Product ID for Rockchip RK3576, same PID
-> being used by the BootROM when the device is in MASKROM mode.
+> Implement checkboard() to print current SoC model used by a board when
+> U-Boot proper is running.
+>
+>    U-Boot 2025.04 (Apr 22 2025 - 20:43:17 +0000)
+>
+>    Model: Generic RK3576
+>    SoC:   RK3576
+>    DRAM:  8 GiB
+>
+> Information about the SoC model and variant is read from OTP.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> v3: Collect r-b tag
-> v2: New patch
+> v3: No change
 > ---
->   drivers/usb/gadget/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
+>   arch/arm/mach-rockchip/rk3576/rk3576.c | 48 ++++++++++++++++++++++++++
+>   1 file changed, 48 insertions(+)
 >
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index 46a83141481f..bab88567ea62 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -86,6 +86,7 @@ config USB_GADGET_PRODUCT_NUM
->   	default 0x350a if ROCKCHIP_RK3568
->   	default 0x350b if ROCKCHIP_RK3588
->   	default 0x350c if ROCKCHIP_RK3528
-> +	default 0x350e if ROCKCHIP_RK3576
->   	default 0x0
->   	help
->   	  Product ID of the USB device emulated, reported to the host device.
+> diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
+> index dc53941ab2f5..a6c2fbdc4840 100644
+> --- a/arch/arm/mach-rockchip/rk3576/rk3576.c
+> +++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
+> @@ -3,6 +3,10 @@
+>    * Copyright (c) 2024 Rockchip Electronics Co., Ltd
+>    */
+>   
+> +#define LOG_CATEGORY LOGC_ARCH
+> +
+> +#include <dm.h>
+> +#include <misc.h>
+>   #include <asm/armv8/mmu.h>
+>   #include <asm/arch-rockchip/bootrom.h>
+>   #include <asm/arch-rockchip/hardware.h>
+> @@ -159,3 +163,47 @@ int arch_cpu_init(void)
+>   
+>   	return 0;
+>   }
+> +
+> +#define RK3576_OTP_CPU_CODE_OFFSET		0x02
+> +#define RK3576_OTP_SPECIFICATION_OFFSET		0x08
+> +
+> +int checkboard(void)
+> +{
+> +	u8 cpu_code[2], specification;
+> +	struct udevice *dev;
+> +	char suffix[2];
+> +	int ret;
+> +
+> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_OTP) || !CONFIG_IS_ENABLED(MISC))
+> +		return 0;
+> +
+> +	ret = uclass_get_device_by_driver(UCLASS_MISC,
+> +					  DM_DRIVER_GET(rockchip_otp), &dev);
+> +	if (ret) {
+> +		log_debug("Could not find otp device, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	/* cpu-code: SoC model, e.g. 0x35 0x76 */
+> +	ret = misc_read(dev, RK3576_OTP_CPU_CODE_OFFSET, cpu_code, 2);
+> +	if (ret < 0) {
+> +		log_debug("Could not read cpu-code, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +
+> +	/* specification: SoC variant, e.g. 0xA for RK3576J */
+> +	ret = misc_read(dev, RK3576_OTP_SPECIFICATION_OFFSET, &specification, 1);
+> +	if (ret < 0) {
+> +		log_debug("Could not read specification, ret=%d\n", ret);
+> +		return 0;
+> +	}
+> +	specification &= 0x1f;
+> +
+> +	/* for RK3576J i.e. '@' + 0xA = 'J' */
+> +	suffix[0] = specification > 1 ? '@' + specification : '\0';
+> +	suffix[1] = '\0';
+> +
+> +	printf("SoC:   RK%02x%02x%s\n", cpu_code[0], cpu_code[1], suffix);
+> +
+> +	return 0;
+> +}
