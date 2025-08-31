@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F16CBCA0FF2
-	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 16:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E71DCA0FE8
+	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 16:50:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27A9D83443;
-	Sun, 31 Aug 2025 18:50:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 703CC83929;
+	Sun, 31 Aug 2025 18:50:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="gSBWOkgs";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="K0EaGszs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A65183447; Sun, 31 Aug 2025 18:50:30 +0200 (CEST)
+ id 2998883937; Sun, 31 Aug 2025 18:50:35 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1855D8341A
- for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 18:50:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B0B0A83930
+ for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 18:50:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=b2fe=3M=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1756659026;
- bh=jC/9PJruI4m1q4MdB9A+yKoVwbdw1UkUFR2wzcu/aT4=;
- b=gSBWOkgs6RUi2Q56FcMoi4TYsVgVQpDuJmiwvV9iFT4AF+2ZuF86L2NWyW0DUePWzY8oNwwnD
- T39C1RYW2UwW5PX4kv980GdKAK5uwfXyb4VSL0q9Et40nDctKO/+korH34Lk6ZNg0ZEC/Y0oisc
- cWFXNOAcSRKpOvg7nZS4dVRgXr+hJLq2LU11YnpaKsZikxZWONK6kGZYAA39fm4h3olNTQnEjpT
- 0LwcRyUKDyIrP5enb36tBGUCgFyCtjXs0USGq8JpMKv4Sr9bkGs2JkPlSNfcmSM3KA2QlosRhro
- uyZC0v/G04hqad83G03CueLsuq6GDCQx4UiBfP3a8PXg==
-X-Forward-Email-ID: 68b47d4d7f68b507ca9c3996
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1756659031; bh=6Xd9DuAFFpN/79F1f5ODz9e6OHcq6/hWNwKUTBkDhzQ=;
+ b=K0EaGszsVJ1rgnFaoanrR82VFpPQUP9DwykA2g4wzl6UiMFUkSFhbuvHp6ReDPLknne7xviTB
+ 8rcLQSUT0qvFi7vpN4c50Jh79+lqxQ4TvIf8uVFgfazJRsqqazLkJe18jiPD3pDOjfiEC0F6Sfz
+ aOqcUyytFwTxxB36/omLeDC2bzmPfWedEzvgCz1yWqoZ0B2Mqbi2+2Ley7Ttcb4TTcJKhTSD8Z9
+ 8tA6DgcD1OE0oCpVGKM+XTJDwJOVXmrJDMRZ1BcRdCQG5MxrBVqOjHV6mfvVaGnTaKZ4bV2nHuL
+ 6DFCiICSoS+ecGeeddjg0KY96fJreldP/h/dJsir3QGw==
+X-Forward-Email-ID: 68b47d557f68b507ca9c39cc
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.2.11
@@ -45,14 +45,17 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>,
  Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 00/18] rockchip: odroid-go2: Add support for SPI flash boot
- and more 
-Date: Sun, 31 Aug 2025 16:49:17 +0000
-Message-ID: <20250831165001.2749711-1-jonas@kwiboo.se>
+	Quentin Schulz <quentin.schulz@cherry.de>
+Subject: [PATCH v2 02/18] rockchip: odroid-go2: Remove cru assigned-clocks
+ override
+Date: Sun, 31 Aug 2025 16:49:19 +0000
+Message-ID: <20250831165001.2749711-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250831165001.2749711-1-jonas@kwiboo.se>
+References: <20250831165001.2749711-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,81 +74,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series update ODROID-GO Advance/Super to support SPI flash boot,
-adds pinctrl in SPL, enable use of checksum validation for FIT images,
-include FDT for each board variant in FIT and more.
+Remove the cru assigned-clocks override now that SCLK_GPU is supported
+by the clock driver.
 
-Each patch in this series has been tested on a ODROID-GO Super:
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+---
+v2: Collect r-b tags
+---
+ arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 10 ----------
+ 1 file changed, 10 deletions(-)
 
-  DDR3, 333MHz
-  BW=32 Col=10 Bk=8 CS0 Row=15 CS=1 Die BW=16 Size=1024MB
-  out
-  
-  U-Boot SPL 2025.07 (Jul 13 2025 - 10:07:16 +0000)
-  Trying to boot from MMC1
-  ## Checking hash(es) for config config-3 ... OK
-  ## Checking hash(es) for Image atf-1 ... sha256+ OK
-  ## Checking hash(es) for Image u-boot ... sha256+ OK
-  ## Checking hash(es) for Image fdt-3 ... sha256+ OK
-  ## Checking hash(es) for Image atf-2 ... sha256+ OK
-  ## Checking hash(es) for Image atf-3 ... sha256+ OK
-  ## Checking hash(es) for Image atf-4 ... sha256+ OK
-  ## Checking hash(es) for Image atf-5 ... sha256+ OK
-  
-  U-Boot 2025.07 (Jul 13 2025 - 10:07:16 +0000)
-  
-  Model: ODROID-GO Super
-  SoC:   RK3326
-  DRAM:  1 GiB (total 1022 MiB)
-  PMIC:  RK817 (on=0x80, off=0x08)
-  Core:  283 devices, 26 uclasses, devicetree: separate
-  MMC:   mmc@ff370000: 0
-  Loading Environment from MMC... Reading from MMC(0)... OK
-  In:    serial@ff160000
-  Out:   serial@ff160000
-  Err:   serial@ff160000
-  Net:   No ethernet found.
-  Hit any key to stop autoboot:  0
-  =>
-
-Changes in v2:
-- Split out fix for incorrect re-defined spi0 alias into separate patch
-- Collect r-b tags
-
-Jonas Karlman (18):
-  clk: px30: Allow use of GPU and WIFI_PMU in assigned-clocks
-  rockchip: odroid-go2: Remove cru assigned-clocks override
-  rockchip: odroid-go2: Remove incorrect re-defined spi0 alias
-  rockchip: odroid-go2: Remove u-boot.dtsi props already defined
-  rockchip: odroid-go2: Use appropriate bootph props
-  rockchip: odroid-go2: Move SoC common overrides into a SoC u-boot.dtsi
-  rockchip: odroid-go2: Remove unsupported Kconfig options
-  rockchip: odroid-go2: Update Kconfig options for SPL
-  rockchip: odroid-go2: Include pinctrl for sdmmc, sfc and uart in SPL
-  rockchip: odroid-go2: Use power off at power plug-in event
-  rockchip: odroid-go2: Add support for SPI flash boot
-  rockchip: odroid-go2: Select board FDT from FIT in SPL
-  rockchip: odroid-go2: Use env from same storage FIT was loaded from
-  rockchip: odroid-go2: Enable RockUSB, button, LED and RNG support
-  rockchip: odroid-go2: Turn on the blue LED at boot
-  rockchip: odroid-go2: Enable more commands
-  rockchip: odroid-go2: Add myself as a reviewer
-  arm: dts: rockchip: Include OTP in U-Boot pre-reloc phase for RK3326
-
- arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi    | 111 +++----------
- .../arm/dts/rk3326-odroid-go2-v11-u-boot.dtsi |   3 +
- arch/arm/dts/rk3326-odroid-go3-u-boot.dtsi    |   3 +
- arch/arm/dts/rk3326-u-boot.dtsi               | 154 ++++++++++++++++++
- board/hardkernel/odroid_go2/Kconfig           |   7 +
- board/hardkernel/odroid_go2/MAINTAINERS       |   2 +
- board/hardkernel/odroid_go2/go2.c             |  88 ++++++++--
- configs/odroid-go2_defconfig                  |  63 ++++---
- drivers/clk/rockchip/clk_px30.c               |   6 +
- 9 files changed, 315 insertions(+), 122 deletions(-)
- create mode 100644 arch/arm/dts/rk3326-odroid-go2-v11-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3326-odroid-go3-u-boot.dtsi
- create mode 100644 arch/arm/dts/rk3326-u-boot.dtsi
-
+diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
+index a0ab8b69f2e4..f37daa893c79 100644
+--- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
++++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
+@@ -32,18 +32,8 @@
+ 	};
+ };
+ 
+-/* U-Boot clk driver for px30 cannot set GPU_CLK */
+ &cru {
+ 	bootph-all;
+-	assigned-clocks = <&cru PLL_NPLL>,
+-		<&cru ACLK_BUS_PRE>, <&cru ACLK_PERI_PRE>,
+-		<&cru HCLK_BUS_PRE>, <&cru HCLK_PERI_PRE>,
+-		<&cru PCLK_BUS_PRE>, <&cru PLL_CPLL>;
+-
+-	assigned-clock-rates = <1188000000>,
+-		<200000000>, <200000000>,
+-		<150000000>, <150000000>,
+-		<100000000>, <17000000>;
+ };
+ 
+ &gpio0 {
 -- 
 2.51.0
 
