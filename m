@@ -4,55 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76486CA1002
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 11:33:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 231F3CA1002
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 13:15:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E845B839DE;
-	Mon,  1 Sep 2025 13:33:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 5B5FD83965;
+	Mon,  1 Sep 2025 15:15:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=skothe.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36F2F839E2; Mon,  1 Sep 2025 13:33:14 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 0F7E783931; Sun, 31 Aug 2025 17:17:33 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08113839A1
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 13:33:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1747D83447
+ for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 17:17:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [216.234.200.243])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 3ECD7B2202B3;
- Mon,  1 Sep 2025 13:33:08 +0200 (CEST)
-Message-ID: <d7bae62a-2e53-458e-9b7e-76087379c064@freeshell.de>
-Date: Mon, 1 Sep 2025 04:33:06 -0700
+ dmarc=fail (p=reject dis=none) header.from=skothe.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=steffen.kothe@skothe.net
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cFFx50hPbz9tX0;
+ Sun, 31 Aug 2025 17:17:29 +0200 (CEST)
+Authentication-Results: outgoing_mbo_mout; dkim=none;
+ spf=pass (outgoing_mbo_mout: domain of steffen.kothe@skothe.net designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=steffen.kothe@skothe.net
+From: Steffen Kothe <steffen.kothe@skothe.net>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com
+Subject: [PATCH 0/2] arm: mach-k3: am64x: Add reset cause for cpuinfo
+Date: Sun, 31 Aug 2025 15:17:04 +0000
+Message-ID: <20250831151706.404373-1-steffen.kothe@skothe.net>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: introduce CONFIG_DNS
-To: Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: U-Boot mailing list <u-boot@lists.denx.de>,
- Adriano Cordova <adrianox@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tim Harvey <tharvey@gateworks.com>
-References: <20250718104852.724720-1-jerome.forissier@linaro.org>
- <20250827145550.GA644866@bill-the-cat>
- <1d6f9df7-e89f-4ede-acd4-bb87b5ee1360@linaro.org>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <1d6f9df7-e89f-4ede-acd4-bb87b5ee1360@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4cFFx50hPbz9tX0
+X-Mailman-Approved-At: Mon, 01 Sep 2025 15:15:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,48 +55,35 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: steffen.kothe@skothe.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi together,
 
+AM64X hereby receives support for reset reason printing during boot.
 
-On 9/1/25 00:32, Jerome Forissier wrote:
-> Hi Tom,
-> 
-> On 8/27/25 16:55, Tom Rini wrote:
->> On Fri, Jul 18, 2025 at 12:48:48PM +0200, Jerome Forissier wrote:
->>
->>> Introduce the DNS Kconfig symbol so that various network commands may
->>> use host names without the dns command (CMD_DNS) being selected.
->>>
->>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->>> CC: E Shattow <e@freeshell.de>
->>
->> After talking with E Shattow on IRC, lets take this now for master to
->> fix the regression
-> 
-> That patch was in my pull request net-20250818 [1] which you merged
-> into master the same day.
-> 
-> [1] https://lists.denx.de/pipermail/u-boot/2025-August/596830.html
-> 
->> and in the next branch move forward with more
->> aggressive renaming / correcting of Kconfig symbol names (and introduce
->> as needed new splits between library functionality and cmd
->> functionality, which in turn might also mean needing to move some
->> argument validation out of cmd and in to library code). Thanks!
-> 
-> Sounds good.
-> 
-> Thanks,
+Unfortunately does the AM64X register mapping slighlty differ from
+the AM62X. WDT and PORZ are not part of the reset source register, but
+the mapping remains the same for all other causes.
 
-Acknowledged. I failed to notice this was merged, sorry for the noise.
+To prevent ifdef/else constructs, I decided to follow a simple
+copy/paste approach and adjusted the logic accordingly.
 
-I have sent a patch to enable this new symbol in the board config I am
-concerned with. [1]
+Cheers,
+  Steffen Kothe
 
-1: https://lore.kernel.org/u-boot/20250901112748.676541-1-e@freeshell.de
+Steffen Kothe (2):
+  arm: mach-k3: am64_hardware.h: Add CTRLMMR_MCU_RST_SRC reset cause bit
+    mappings
+  arm: mach-k3: am64x: Implement get_reset_reason()
 
--E
+ arch/arm/mach-k3/am64x/boot.c                 | 36 +++++++++++++++++++
+ arch/arm/mach-k3/include/mach/am64_hardware.h | 20 +++++++++++
+ 2 files changed, 56 insertions(+)
+
+-- 
+2.51.0
+
