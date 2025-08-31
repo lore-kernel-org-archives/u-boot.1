@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAA16CA0FF2
-	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 11:22:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45F50CA0FF2
+	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 11:22:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD1CF83965;
-	Sun, 31 Aug 2025 13:21:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F35CA83957;
+	Sun, 31 Aug 2025 13:21:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="YW7lFbQ6";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nMOgF7fd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B71B83929; Sun, 31 Aug 2025 13:21:36 +0200 (CEST)
+ id 35D528395B; Sun, 31 Aug 2025 13:21:41 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 821D483966
- for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 13:21:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87F0483957
+ for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 13:21:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1756639292; bh=cFnPnlwQOh343SqXyUn2C+hZwibJ2gCgru4Y91Dl94M=;
- b=YW7lFbQ6dMkEFVh99IWaJ4RmK4TblFGqnMiI+jJhfG6ZcLBarqOuZzxdowIzFaWUzbM1rScPW
- T0R7MU0QjudiVOin+wGPMyxzXJnry/VEHixsKeZE/nCmsAZwRsXYHOJSmeWdntxdGhGte94wqin
- viTIzEmNU3mOC3fk2YQRmqv4VkqRRZOTS22narAkdNqa8GsnweUayFIk2C1RmdmcHR6RsEU2O2M
- llUaODwk1e6xk20H9PzfKzDDfVJOg7IN34srZpM2D3mwgNGX/IoLoeLhdCuCT2m+qWOSJHlSohT
- tt2/TvLIv2+yC/ASRW3RoNAGkOmYrDrToF+PKoeVItKQ==
-X-Forward-Email-ID: 68b4303a32f03f9a5e9086e1
+ t=1756639297; bh=9qeRAL5FD/m9DXj2cUzK5T50sHn+ls+RZp5j/tgrtGI=;
+ b=nMOgF7fdkpadJOpwzVl9p5TtCSSLpk9ZhQNFhh1QyvMd/h0tO6RtHW0qz8SgZ+O2W/BZYcmsd
+ dU8mhNxguLYW3ZL+r4zlylGSjQP25Ch2MxlAr41bSf4qFbpkq87PRnOefGbpo81GHmH+OT3LL7c
+ Y+cC+4kyopln8fo5g50ESrse05KU5jYqezfgeY9tDB2PJt9fwEBIgiUE7sKAHEx6DhDQmp9/ZQw
+ /kvoN7YK9OA+9VIudO5FwnW5QZrATb/N1YwdtMw92DLdhkPZY7qRpC3tJtA0bL+cD/d2INkGQA/
+ tHnQfjXtb8BttQBhXdL5x7WDk4FIpOV1ULf/x5dLkm5g==
+X-Forward-Email-ID: 68b4303e32f03f9a5e9086fc
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.2.11
@@ -50,10 +50,9 @@ Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>,
  Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
  Heiko Stuebner <heiko@sntech.de>
-Subject: [PATCH v3 08/10] arm64: dts: rockchip: adjust dcin regulator on ROCK
- 4D
-Date: Sun, 31 Aug 2025 11:20:29 +0000
-Message-ID: <20250831112046.2642363-9-jonas@kwiboo.se>
+Subject: [PATCH v3 09/10] arm64: dts: rockchip: complete USB nodes on ROCK 4D
+Date: Sun, 31 Aug 2025 11:20:30 +0000
+Message-ID: <20250831112046.2642363-10-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250831112046.2642363-1-jonas@kwiboo.se>
 References: <20250831112046.2642363-1-jonas@kwiboo.se>
@@ -77,69 +76,104 @@ X-Virus-Status: Clean
 
 From: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
 
-The ROCK 4D's actual DC input is 5V, and the schematic names it as being
-5V as well.
+The ROCK 4D uses both USB controllers, and both of which in host mode.
+However, it still names one of the supplies for them "OTG" in the
+schematic.
 
-Rename the regulator, and change the voltage it claims to be at.
-Furthermore, fix vcc_1v1_nldo_s3's vin-supply as coming from
-vcc_5v0_sys, and not the DCIN, as per the schematic. This makes no
-functional change; both regulators are always on, and one feeds into the
-other.
+Fix the "host" supply's input, and add the "otg" supply. Enable the
+remaining USB PHY nodes, and the first controller node as well.
 
 Signed-off-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
-Link: https://lore.kernel.org/r/20250630-rock4d-reg-usb-wifi-v1-1-1057f412d98c@collabora.com
+Link: https://lore.kernel.org/r/20250630-rock4d-reg-usb-wifi-v1-2-1057f412d98c@collabora.com
 Signed-off-by: Heiko Stuebner <heiko@sntech.de>
 
-[ upstream commit: 9a625a284bfdb902f27f2949063731d189adda3c ]
+[ upstream commit: 787595b423d855bfcbf724822fd1e663ad368d08 ]
 
-(cherry picked from commit ac5675c9dfaebe141256577306a0a455e481048a)
+(cherry picked from commit 7200ec33cb5697124c76de28535354f0eef6a28a)
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v3: New patch
 ---
- dts/upstream/src/arm64/rockchip/rk3576-rock-4d.dts | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ .../src/arm64/rockchip/rk3576-rock-4d.dts     | 41 ++++++++++++++++++-
+ 1 file changed, 39 insertions(+), 2 deletions(-)
 
 diff --git a/dts/upstream/src/arm64/rockchip/rk3576-rock-4d.dts b/dts/upstream/src/arm64/rockchip/rk3576-rock-4d.dts
-index 62712c90c83d..ee0822cd4f35 100644
+index ee0822cd4f35..87bc9004fca1 100644
 --- a/dts/upstream/src/arm64/rockchip/rk3576-rock-4d.dts
 +++ b/dts/upstream/src/arm64/rockchip/rk3576-rock-4d.dts
-@@ -57,13 +57,13 @@
- 		};
- 	};
- 
--	vcc_12v0_dcin: regulator-vcc-12v0-dcin {
-+	vcc_5v0_dcin: regulator-vcc-5v0-dcin {
- 		compatible = "regulator-fixed";
- 		regulator-always-on;
- 		regulator-boot-on;
--		regulator-min-microvolt = <12000000>;
--		regulator-max-microvolt = <12000000>;
--		regulator-name = "vcc_12v0_dcin";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-name = "vcc_5v0_dcin";
- 	};
- 
- 	vcc_1v1_nldo_s3: regulator-vcc-1v1-nldo-s3 {
-@@ -166,7 +166,7 @@
+@@ -180,7 +180,21 @@
  		regulator-min-microvolt = <5000000>;
  		regulator-max-microvolt = <5000000>;
- 		regulator-name = "vcc_5v0_device";
--		vin-supply = <&vcc_12v0_dcin>;
+ 		regulator-name = "vcc5v0_host";
+-		vin-supply = <&vcc_5v0_device>;
++		vin-supply = <&vcc_5v0_sys>;
++	};
++
++	vcc_5v0_otg: regulator-vcc-5v0-otg {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpios = <&gpio2 RK_PD2 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&usb_otg_pwren>;
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <5000000>;
++		regulator-max-microvolt = <5000000>;
++		regulator-name = "vcc5v0_otg";
 +		vin-supply = <&vcc_5v0_sys>;
  	};
  
- 	vcc_5v0_host: regulator-vcc-5v0-host {
-@@ -190,7 +190,7 @@
- 		regulator-min-microvolt = <5000000>;
- 		regulator-max-microvolt = <5000000>;
- 		regulator-name = "vcc_5v0_sys";
--		vin-supply = <&vcc_12v0_dcin>;
-+		vin-supply = <&vcc_5v0_dcin>;
+ 	vcc_5v0_sys: regulator-vcc-5v0-sys {
+@@ -699,7 +713,11 @@
+ 
+ 	usb {
+ 		usb_host_pwren: usb-host-pwren {
+-			rockchip,pins = <0 RK_PD3 RK_FUNC_GPIO &pcfg_pull_none>;
++			rockchip,pins = <0 RK_PD3 RK_FUNC_GPIO &pcfg_pull_down>;
++		};
++		usb_otg_pwren: usb-otg-pwren {
++			rockchip,pins = <2 RK_PD2 RK_FUNC_GPIO &pcfg_pull_down>;
++
+ 		};
  	};
  };
+@@ -738,10 +756,20 @@
+ 	status = "okay";
+ };
  
++&u2phy0_otg {
++	phy-supply = <&vcc_5v0_otg>;
++	status = "okay";
++};
++
+ &u2phy1 {
+ 	status = "okay";
+ };
+ 
++&u2phy1_otg {
++	phy-supply = <&vcc_5v0_host>;
++	status = "okay";
++};
++
+ &uart0 {
+ 	pinctrl-0 = <&uart0m0_xfer>;
+ 	status = "okay";
+@@ -751,6 +779,15 @@
+ 	status = "okay";
+ };
+ 
++&usbdp_phy {
++	status = "okay";
++};
++
++&usb_drd0_dwc3 {
++	dr_mode = "host";
++	status = "okay";
++};
++
+ &usb_drd1_dwc3 {
+ 	dr_mode = "host";
+ 	status = "okay";
 -- 
 2.51.0
 
