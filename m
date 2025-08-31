@@ -4,37 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF459CA0FF2
-	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 11:21:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EFCBCA0FF2
+	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 11:21:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1275F838E6;
-	Sun, 31 Aug 2025 13:21:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6A09683487;
+	Sun, 31 Aug 2025 13:21:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="FOIUx2sx";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nFDUDh41";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9BA3838AA; Sun, 31 Aug 2025 13:21:06 +0200 (CEST)
+ id B948183906; Sun, 31 Aug 2025 13:21:10 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4434E83447
- for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 13:21:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB2DF83447
+ for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 13:21:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=SRS0=0b89=3L=kwiboo.se=jonas@fe-bounces.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1756639262;
- bh=xid4gAPH9hPSmeNjMJ+7ip3dIlvtZswRCpmx7ev8Oqs=;
- b=FOIUx2sxoyapihbwkWyL5IwkPYh7UzDAM63BAS5esfFkoUutwW42O3zSkfxgVZ7MQOLsg9Yhs
- XJk7Cid7ecaiiepUV6g7H44gRlAo93C78HknpLWb42eUxdgxGAgbvfeRkQLjiBM1N3DM7Y/8OcT
- YRQTA5yu2hvJLGEzjV164MTbOaHd/XsfimCedaC+XkaOZpz4xQies1+PDo9Fpbhx43w/GuAQr8l
- gtmISXOZ337vesqe7CW4P5sRJZRKbSBSdU5ZLXd5KRWvnOec4+LcrqE/nrdLbga4hPbuVlVXm/W
- BRkljoUFAB0xY7Bqy1Q94MSJi4qoaJR9e8UpAM+w7nIQ==
-X-Forward-Email-ID: 68b4301c32f03f9a5e9085d9
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1756639266; bh=YEEId1Y0S+HJRAmhF1+1IXep9XihM+KsRdcuIQc2LGc=;
+ b=nFDUDh41+xvEU26ERgqfzSTOjQeWliheyQCDBZ7SMJUooXYdAd4S3TKo1bpI/8rDsz/AMgt95
+ bzL220b6B0/wNhJW0bbpunK+U1nbpxp5NtnWVMgn4I9w9rziyWQHkQt6RgTCe+VX9U/NjcDAHfd
+ YcSgaXGq3WFUiD5i6MQZWhV7HzNToDWMPZNAaj+xm4UFeLnPYA5WgFh7Xid0VXNiA9kEaR6/4k8
+ lbzacb5oKDGsgr5e3R8NxertAQnEAeug+X+d1eikehnt8JXHjjetokXqVvz8RIN0WTml/lmMKK3
+ 1p5Etmlea2hN0jwp7pwecbCZSi/Z5Jarrr46dpyk6h6g==
+X-Forward-Email-ID: 68b4302032f03f9a5e9085f4
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 1.2.11
@@ -44,13 +44,16 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v3 00/10] board: rockchip: Add Radxa ROCK 4D
-Date: Sun, 31 Aug 2025 11:20:21 +0000
-Message-ID: <20250831112046.2642363-1-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>, Jon Lin <jon.lin@rock-chips.com>
+Subject: [PATCH v3 01/10] spi: rockchip_sfc: Support sclk_x2 version
+Date: Sun, 31 Aug 2025 11:20:22 +0000
+Message-ID: <20250831112046.2642363-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250831112046.2642363-1-jonas@kwiboo.se>
+References: <20250831112046.2642363-1-jonas@kwiboo.se>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,64 +72,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series add initial support for the Raxda ROCK 4D board, running
-from SPI flash, booting OS from SD-card and using Ethernet has been
-tested.
+From: Jon Lin <jon.lin@rock-chips.com>
 
-It also adds a helper function to read and translate the new bootsource
-ids reported by the BootROM of RK3576 to help support booting from SPI
-flash.
+SFC after version 8 supports dtr mode, so the IO is the binary output of
+the controller clock.
 
-Kconfig options for PCIe, NVMe and USB has been enabled and is now
-working with the picked DT commits from the v6.17-rc1-dts tag.
+Signed-off-by: Jon Lin <jon.lin@rock-chips.com>
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+v3: No change
+v2: No change
+---
+ drivers/spi/rockchip_sfc.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-Changes in v3:
-- Implement read_brom_bootsource_id() for RK3528
-- Add a short code comment about the re-mapping of bootsource id
-- Add fspi1m1 pinctrl bootph- props to SoC u-boot.dtsi
-- Drop the incomplete support for FSPI1_M0
-- Pick related DT changes that now have landed in v6.17-rc1-dts tag
-- Drop the now unneeded reset-gpios prop rename workaround
-- Rebase on top of u-boot-rockchip-20250831 tag
-
-Change in v2:
-- Add comment about the reset-gpios prop rename in board u-boot.dtsi
-
-Detlev Casanova (1):
-  arm64: dts: rockchip: Add UFS support on the ROCK 4D
-
-Jon Lin (1):
-  spi: rockchip_sfc: Support sclk_x2 version
-
-Jonas Karlman (4):
-  rockchip: spl: Add a read_brom_bootsource_id() helper
-  rockchip: rk3528: Implement read_brom_bootsource_id()
-  rockchip: rk3576: Add SPI Flash boot support
-  board: rockchip: Add Radxa ROCK 4D
-
-Nicolas Frattaroli (3):
-  arm64: dts: rockchip: enable PCIe on ROCK 4D
-  arm64: dts: rockchip: adjust dcin regulator on ROCK 4D
-  arm64: dts: rockchip: complete USB nodes on ROCK 4D
-
-Sebastian Reichel (1):
-  arm64: dts: rockchip: fix PHY handling for ROCK 4D
-
- arch/arm/dts/rk3576-rock-4d-u-boot.dtsi       | 10 +++
- arch/arm/dts/rk3576-u-boot.dtsi               | 46 +++++++++++
- arch/arm/include/asm/arch-rockchip/bootrom.h  |  2 +
- arch/arm/mach-rockchip/rk3528/rk3528.c        | 15 ++++
- arch/arm/mach-rockchip/rk3576/MAINTAINERS     |  6 ++
- arch/arm/mach-rockchip/rk3576/rk3576.c        | 25 ++++++
- arch/arm/mach-rockchip/spl.c                  |  7 +-
- configs/rock-4d-rk3576_defconfig              | 68 ++++++++++++++++
- doc/board/rockchip/rockchip.rst               |  1 +
- drivers/spi/rockchip_sfc.c                    | 13 +++-
- .../src/arm64/rockchip/rk3576-rock-4d.dts     | 78 ++++++++++++++++---
- 11 files changed, 259 insertions(+), 12 deletions(-)
- create mode 100644 arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
- create mode 100644 configs/rock-4d-rk3576_defconfig
-
+diff --git a/drivers/spi/rockchip_sfc.c b/drivers/spi/rockchip_sfc.c
+index 73738ab26d33..60e74117057a 100644
+--- a/drivers/spi/rockchip_sfc.c
++++ b/drivers/spi/rockchip_sfc.c
+@@ -108,6 +108,7 @@
+ #define  SFC_VER_3			0x3
+ #define  SFC_VER_4			0x4
+ #define  SFC_VER_5			0x5
++#define  SFC_VER_8			0x8
+ 
+ /* Delay line controller resiter */
+ #define SFC_DLL_CTRL0			0x3C
+@@ -589,6 +590,16 @@ static int rockchip_sfc_adjust_op_size(struct spi_slave *mem, struct spi_mem_op
+ 	return 0;
+ }
+ 
++#if CONFIG_IS_ENABLED(CLK)
++static int rockchip_sfc_clk_set_rate(struct rockchip_sfc *sfc, uint speed)
++{
++	if (sfc->version >= SFC_VER_8)
++		return clk_set_rate(&sfc->clk, speed * 2);
++	else
++		return clk_set_rate(&sfc->clk, speed);
++}
++#endif
++
+ static int rockchip_sfc_set_speed(struct udevice *bus, uint speed)
+ {
+ 	struct rockchip_sfc *sfc = dev_get_plat(bus);
+@@ -600,7 +611,7 @@ static int rockchip_sfc_set_speed(struct udevice *bus, uint speed)
+ 		return 0;
+ 
+ #if CONFIG_IS_ENABLED(CLK)
+-	int ret = clk_set_rate(&sfc->clk, speed);
++	int ret = rockchip_sfc_clk_set_rate(sfc, speed);
+ 
+ 	if (ret < 0) {
+ 		dev_err(sfc->dev, "set_freq=%dHz fail, check if it's the cru support level\n",
 -- 
 2.51.0
 
