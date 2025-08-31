@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA80CA0FF2
-	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 16:51:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71546CA0FF2
+	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 16:52:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB34983979;
-	Sun, 31 Aug 2025 18:51:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 50EA3839A1;
+	Sun, 31 Aug 2025 18:51:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="f+XsD80m";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tVEAPw97";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6069B8399D; Sun, 31 Aug 2025 18:51:05 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id EC4288397A; Sun, 31 Aug 2025 18:51:05 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4F1D83955
- for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 18:51:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9955983981
+ for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 18:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1756659059; bh=YQy3TyQwOXM+YtL2n/FA82CYuUSZtRn2zJtrxSQ/LqM=;
- b=f+XsD80mtr3HjB84bLIiyaAo0KAPabxmz5rYuWeT0+jU0UQMJh/P54XzKb2dULI0gdH38VgiA
- 7/+Cut7ZEoRD4A0fNqAJqVtsgiLI+hqRFv+zJS72MeRZRloFd3qEukBYGZjkpwyhMMGTIqG1OTg
- V/ricxXx4eOS/73IEhvzBLVffV9KyFYqRqZDSGcB33u2FY8QGRmlM+sORqRI56UeL0iWrWytQx7
- xYF08a9qFR2a2OXoU2Ho6uEmXqjKSrwxsyfV18KY7YcVGkPYSebrL6sJJA/d1epJXRkPvV7/Ec7
- 5SbY0pWSiaPrhzDNMuvZgS+FzSUW9kjsPt2f1mZrbUvg==
-X-Forward-Email-ID: 68b47d707f68b507ca9c3a89
+ t=1756659062; bh=y7j9PAfnsSR0gTd+2hMqJPR2ZAca5H2965aDsCUpcjM=;
+ b=tVEAPw97i/EMcwoS1haa+JNrK+w7UCIXDecJAXiNmDKCCOaX2JH2B5gNeU7FuvpZDyyJGP24C
+ rrR+pSD3QSgvanXR+9FKZBeHtlhHa17gaOcvUFMesXMVR4CnEV59DSXGVEy9Djmof/dIZjCGCLu
+ pICPL2llFwL6vSjFkGD+66FgY/O6TY5cVYWAGhfh6+CjuhB4Gmcg0ZchR9Y5h7oFuzDZuYM7cub
+ 0qZtZ2RmhOILLAtt4Ct7O7RrKsozxTY6qcRWzYVFckdlwVMSLfwvbPlBBARUAg6k1V/1ElXjUmS
+ SaAkSnMkUxFAjD5GOTw/9pboDtsRWCelpmXAbo/JxqJQ==
+X-Forward-Email-ID: 68b47d737f68b507ca9c3aa9
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 121.127.44.73
 X-Forward-Email-Version: 1.2.11
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -48,10 +48,10 @@ To: Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Jonas Karlman <jonas@kwiboo.se>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 09/18] rockchip: odroid-go2: Include pinctrl for sdmmc,
- sfc and uart in SPL
-Date: Sun, 31 Aug 2025 16:49:26 +0000
-Message-ID: <20250831165001.2749711-10-jonas@kwiboo.se>
+Subject: [PATCH v2 10/18] rockchip: odroid-go2: Use power off at power plug-in
+ event
+Date: Sun, 31 Aug 2025 16:49:27 +0000
+Message-ID: <20250831165001.2749711-11-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250831165001.2749711-1-jonas@kwiboo.se>
 References: <20250831165001.2749711-1-jonas@kwiboo.se>
@@ -73,134 +73,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include pinctrl nodes and props for sdmmc, sfc and uart in SPL to ensure
-pins are configured according to the device tree.
+Include the RK817 PMIC in SPL and enable Kconfig options to power off
+the handheld gaming device when it was powered on due to a power cable
+plug-in event:
+
+  DDR3, 333MHz
+  BW=32 Col=10 Bk=8 CS0 Row=15 CS=1 Die BW=16 Size=1024MB
+  out
+  Power Off due to plug-in event
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: No change
 ---
- arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 10 ++++
- arch/arm/dts/rk3326-u-boot.dtsi            | 58 ++++++++++++++++++++++
- configs/odroid-go2_defconfig               |  2 +-
- 3 files changed, 69 insertions(+), 1 deletion(-)
+ arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 18 ++++++++++++++++++
+ configs/odroid-go2_defconfig               |  3 +++
+ 2 files changed, 21 insertions(+)
 
 diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-index 06e2c190b1f9..6f40654d5e84 100644
+index 6f40654d5e84..6c6efa964d80 100644
 --- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
 +++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-@@ -35,3 +35,13 @@
- 	bootph-all;
- 	clock-frequency = <24000000>;
- };
-+
-+&uart1_cts {
-+	bootph-pre-sram;
-+	bootph-pre-ram;
-+};
-+
-+&uart1_xfer {
-+	bootph-pre-sram;
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/dts/rk3326-u-boot.dtsi b/arch/arm/dts/rk3326-u-boot.dtsi
-index 2894133cfe6d..196604a9987c 100644
---- a/arch/arm/dts/rk3326-u-boot.dtsi
-+++ b/arch/arm/dts/rk3326-u-boot.dtsi
-@@ -46,6 +46,24 @@
- 	bootph-all;
- };
+@@ -5,8 +5,26 @@
  
-+&pcfg_pull_none {
-+	bootph-all;
-+};
-+
-+&pcfg_pull_none_8ma {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&pcfg_pull_up {
-+	bootph-all;
-+};
-+
-+&pcfg_pull_up_8ma {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
- &pmucru {
- 	bootph-all;
- };
-@@ -62,15 +80,55 @@
- 	u-boot,spl-fifo-mode;
- };
+ #include "rk3326-u-boot.dtsi"
  
-+&sdmmc_bus4 {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sdmmc_clk {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sdmmc_cmd {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sdmmc_det {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
- &sfc {
- 	bootph-some-ram;
- };
- 
-+&sfc_bus2 {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sfc_clk {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&sfc_cs0 {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
- &uart2 {
- 	bootph-all;
- 	clock-frequency = <24000000>;
- };
- 
-+&uart2m1_xfer {
-+	bootph-pre-sram;
++&i2c0_xfer {
 +	bootph-pre-ram;
 +};
 +
- &xin24m {
- 	bootph-all;
- };
++&i2s1_2ch_mclk {
++	bootph-pre-ram;
++};
++
++&pcfg_pull_none_smt {
++	bootph-pre-ram;
++};
++
++&pmic_int {
++	bootph-pre-ram;
++};
++
+ &rk817 {
+ 	regulators {
++		bootph-pre-ram;
++
+ 		vcc_cam: LDO_REG9 {
+ 			regulator-name = "vcc_cam";
+ 			regulator-min-microvolt = <3000000>;
 diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
-index 6bc0d12440c9..b0947fe2c8b2 100644
+index b0947fe2c8b2..a6d02baa520f 100644
 --- a/configs/odroid-go2_defconfig
 +++ b/configs/odroid-go2_defconfig
-@@ -51,7 +51,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_REGMAP=y
+@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=0x4000
+ CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3326-odroid-go2"
+ CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_PX30=y
++CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
+ CONFIG_TARGET_ODROID_GO2=y
+ CONFIG_DEBUG_UART_CHANNEL=1
+ CONFIG_SYS_LOAD_ADDR=0x800800
+@@ -42,6 +43,7 @@ CONFIG_CMD_GPT=y
+ # CONFIG_CMD_LOADB is not set
+ # CONFIG_CMD_LOADS is not set
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ # CONFIG_CMD_ITEST is not set
+@@ -73,6 +75,7 @@ CONFIG_SPL_PINCTRL=y
+ CONFIG_DM_PMIC=y
+ CONFIG_PMIC_RK8XX=y
+ CONFIG_SPL_PMIC_RK8XX=y
++CONFIG_SPL_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_REGULATOR_RK8XX=y
+ CONFIG_PWM_ROCKCHIP=y
 -- 
 2.51.0
 
