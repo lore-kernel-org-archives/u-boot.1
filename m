@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48456CA0FE8
-	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 16:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB9FECA0FF2
+	for <u-boot@archiver.kernel.org>; Sun, 31 Aug 2025 16:53:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B782839D6;
+	by phobos.denx.de (Postfix) with ESMTP id AE182839E4;
 	Sun, 31 Aug 2025 18:51:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iyjkAEoU";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="SrF1qdQc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A2C8839E2; Sun, 31 Aug 2025 18:51:37 +0200 (CEST)
+ id BB4D3839B1; Sun, 31 Aug 2025 18:51:37 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBB10839B1
- for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 18:51:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 722C6839D7
+ for <u-boot@lists.denx.de>; Sun, 31 Aug 2025 18:51:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1756659093; bh=2aXhbH2/T3Q6TZB4AyatyBekyzA3U4EaVNZ6rWzj8rY=;
- b=iyjkAEoUhXugQqV3y8FJIQdqsI83T4l2hYpVY9Th85T3oq2RfgHkydmylF8ZSJBFMxLpUjaIw
- mv2NrYIzDloaJOqA+WAuHBT83Gl7sFpRVHD2RydhbS5mZ87c7mtHODzfY88KZjWMVnGo+2Z3RXv
- fKHxahz8KWgFwl4n3AdFaeBllse7JugMfXA/rcDOw/7LmeHOV993FMWULHkZi26lH4uaAyabu++
- 4uvLaA4Vqs+ZC1aprm8PxsrGjs9UKv3/G3C/QIX+A4lGEBUU037DvdnspPXGwVQwqigWh3G7j7y
- KiLcoetoyHmuR1QyTG0epaXAiMZPt343m67rEip00Mwg==
-X-Forward-Email-ID: 68b47d927f68b507ca9c3bb6
+ t=1756659094; bh=2JHAj5YHT1nGPn2TIRIcakHgJoeiGh3RaZ2F6O9MaVc=;
+ b=SrF1qdQcGEgbsb2vK9Te0fuU+Cx757cB2utTNutjBMokG8QGBLEsM5EKv6z1PR1nzwqZ4nPxP
+ OmctveoGkKCUJYfCRGzuwMtPYVj3PZQwviEP8ceiltRofmlDfW2ZGuYXSGAEVt+8MYuUZGMrTki
+ +mcKQX/nilUcFhIUxJi+4TEYnRHjgik7q7G47GKjwqwIRhdEaGEOKj5TNglsXx/tz2+HhvA3Xw9
+ Bdj3ENjLHMZvB9cR2JwaHt7c5nBz1nuRHfAGlCxf3Sna6jppXuB7mfPjXYLNzJT7Aag9LM6G2+H
+ cQ21X7I2uztWClmRe9GNpeuZrAcVWL2y4oPaLeaJDa8Q==
+X-Forward-Email-ID: 68b47d8e7f68b507ca9c3b9b
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.2.11
@@ -45,13 +45,12 @@ X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>,
  Heiko Stuebner <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 18/18] arm: dts: rockchip: Include OTP in U-Boot pre-reloc
- phase for RK3326
-Date: Sun, 31 Aug 2025 16:49:35 +0000
-Message-ID: <20250831165001.2749711-19-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2 17/18] rockchip: odroid-go2: Add myself as a reviewer
+Date: Sun, 31 Aug 2025 16:49:34 +0000
+Message-ID: <20250831165001.2749711-18-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250831165001.2749711-1-jonas@kwiboo.se>
 References: <20250831165001.2749711-1-jonas@kwiboo.se>
@@ -73,38 +72,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update rk3326-u-boot.dtsi to include OTP in U-Boot pre-reloc phase for
-checkboard() to be able to read information about the running SoC model
-and variant from OTP and print it during boot:
-
-  U-Boot 2025.07 (Jul 13 2025 - 10:07:16 +0000)
-
-  Model: ODROID-GO Super
-  SoC:   RK3326
-  DRAM:  1 GiB (total 1022 MiB)
+I have the ORDOID-GO Super variant of this board. Add myself as a
+reviewer to help review future patches targeting this device.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: No change
 ---
- arch/arm/dts/rk3326-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+ board/hardkernel/odroid_go2/MAINTAINERS | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/rk3326-u-boot.dtsi b/arch/arm/dts/rk3326-u-boot.dtsi
-index be1dd4f91c1b..6503a9382b9c 100644
---- a/arch/arm/dts/rk3326-u-boot.dtsi
-+++ b/arch/arm/dts/rk3326-u-boot.dtsi
-@@ -61,6 +61,10 @@
- 	bootph-all;
- };
- 
-+&otp {
-+	bootph-some-ram;
-+};
-+
- &pcfg_pull_none {
- 	bootph-all;
- };
+diff --git a/board/hardkernel/odroid_go2/MAINTAINERS b/board/hardkernel/odroid_go2/MAINTAINERS
+index 9e83bc9452c8..ee06c2fa6518 100644
+--- a/board/hardkernel/odroid_go2/MAINTAINERS
++++ b/board/hardkernel/odroid_go2/MAINTAINERS
+@@ -1,6 +1,8 @@
+ GO2
+ M:      Heiko Stuebner <heiko.stuebner@cherry.de>
++R:      Jonas Karlman <jonas@kwiboo.se>
+ S:      Maintained
+ F:      board/hardkernel/odroid_go2/
+ F:      include/configs/odroid_go2.h
++F:      arch/arm/dts/rk3326-odroid-go*
+ F:      configs/odroid-go2_defconfig
 -- 
 2.51.0
 
