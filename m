@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B351CA0FF0
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 17:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33E0FCA1000
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 18:24:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 566D283A37;
-	Mon,  1 Sep 2025 19:48:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6CB2783A13;
+	Mon,  1 Sep 2025 20:24:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sCQwoBL4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eKgK245p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 904DC83A28; Mon,  1 Sep 2025 19:48:07 +0200 (CEST)
-Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
- [IPv6:2607:f8b0:4864:20::a32])
+ id E99FE83A1A; Mon,  1 Sep 2025 20:24:16 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 989B183A31
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 19:48:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD53283990
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 20:24:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-vk1-xa32.google.com with SMTP id
- 71dfb90a1353d-5449432a9d7so1161522e0c.3
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 10:48:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-30cce872d9cso3631862fac.1
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 11:24:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756748883; x=1757353683; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=74Xw4ABbwHlDyA4a1zIhFa2yyUJXri7vkKRKHBkVSgU=;
- b=sCQwoBL4A8tNaS2AFAUh6wZLEqfusMnI4rDFjH2JJ00sUXCfAeQ1vJGf1FikBkDtY7
- L1+uxXIEiEEGLL+DrvxPvvT7Qt3f/cJzvLOWu9I5KcSDve6K0AlItwjT3VSLgdYr6w5G
- CpSdvo46azDXix5aRdliMNKkGM9/AHslsOP8pCgRnRvvMaD1nE841I8He+bLDO4qQnvg
- j/i4h9JtI26F/vl619wrj/F8dwZqW7erlV6fabjsH0zmaHXGdeuf7VDbcwG5W+73nhH/
- JyB+NmQtw+2tADlvq25BLzk9Fp8VKix6km9nMEJlSiKy/hkKOPtFUmrJ+Ed7uTSxUhoy
- tlBQ==
+ d=konsulko.com; s=google; t=1756751053; x=1757355853; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DzpuHVYYGHN9+l3qKrVUbrMACZ6hpkw8zGincYDiq64=;
+ b=eKgK245pnM42LlYg4x6AHQtZV0KO1X1xDBnCoEiT5ntMOnP3ZTrqPyZwDX1FsEl80/
+ 9xmRVwONKhdWUlfiLxQM8HS6pSMbDO1Ip1WQfFk9vGLREVdtO0Lwm0wZWHD+6S1hWgXk
+ xkFXDUlWITzNYY2LiqLtiK4Rt1cK/2AUPvwPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756748883; x=1757353683;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=74Xw4ABbwHlDyA4a1zIhFa2yyUJXri7vkKRKHBkVSgU=;
- b=HdjEes3Jtn+Cd0h/gJBQGL3g632fcKmWaWTRN6EiyO4AsvShjyz0PyAB4z9N2BTC8c
- IEXjZ96C4x0/u1hwKmkEDcsPK9Qlvwlk7CAcj+QXs6tjiYaiwjYiiqPZCN7QgG9q2HaQ
- QMI0BOAMQEGda1+wt7OkAfrPlbJkrrmoFcEJ/07AojIU7SMfnFA3TVnFTJpHVDZMhrdF
- gViPcCj1yKwXcmM1ciOgRBjaUJsAz19HM1wQZwjLOKml708CDqP8u5i1oO9cFSRNBTpB
- 42H5b+y4Z3UcUujvh5HRbAx6qpGLwAg9eqgaH0UwnwAuNq81hLRbEh4FdSFfsvrkOQzU
- 9hPA==
-X-Gm-Message-State: AOJu0YzK0+jb2zHwX7Iuy/MwSfLECJZOLrsdEVSZsmc/NTiPlvEvbGCh
- dZndOOjgz5vIyIJ3OIqqvmIzYrfbZFAmh2n2779fPaGQpd3UuAvhksiSKOJq/ATW2VSOnoHRroE
- CWUWj
-X-Gm-Gg: ASbGncsrOgq6GBtCkEIMyUGto4EC4CUnTt+iDb0YVLqsY9TjDCEOSMReH9lsCKA0WXa
- hnmcmXBPa6F+R3ZQXvzFJUEVVUFawxQ16SjoPEbty9GxSxqAbhJWZeQLXDAsQbOAgrgsHG5IkED
- Uxzs5VF/l5ltL1fiETUTppHjOVAds0Rm5vLmucjcfyhUwykEajrpFanyCs+B5f2DMdwVEYnqcQL
- FMhT4gFXfo9pVlat9Q7v8n0c9RAuPQMVWucDQ4de6SuWvrlyARctoCD2+TxquxZTC7XeyHmIXa/
- IIrg7+QiTPcuVxLGAVOAhu4CSg86yT0AVd8iIiv+SIDIHzLpvqjhNnVBMqsJEqzEZeJP4ReUZeD
- UtGzqa+F8IueVJ5fQxuXvn61aX6uFXo+lMgIQIMNaC8OhXJ4h
-X-Google-Smtp-Source: AGHT+IFmS6guWhWUlM4GgjzmiOW5hh3j6cdZoZnFiUZVcqbyAvzHiDFE7YmA0oxIMVzv+qSNHhE/NQ==
-X-Received: by 2002:a05:6122:1792:b0:544:7364:ffc3 with SMTP id
- 71dfb90a1353d-544a016e145mr2052734e0c.5.1756748883204; 
- Mon, 01 Sep 2025 10:48:03 -0700 (PDT)
-Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.181])
- by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-54491464aebsm4670495e0c.14.2025.09.01.10.48.02
+ d=1e100.net; s=20230601; t=1756751053; x=1757355853;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DzpuHVYYGHN9+l3qKrVUbrMACZ6hpkw8zGincYDiq64=;
+ b=mV9TnU4ACnFdw+75843p5qA8e8iAWknjq1A7QZczdrLbz14coBQSOCm0BncvGjH3+H
+ 4OrldvDSb5+jykxcsOkE3/Ea4GxOSmd+j7/f3ALzd9saxRASsxNyHs2Fx2aONx9hCvGX
+ /Lh8dpXUHYltTquf6YSIGUYdg/CKjEIAHVI/IEZLu48197tyI/Ckk2Q02r+hDoVR4TtZ
+ VOlupfTZz9HBEwuRYwkw5In1gFSGHqJwMCqIgMyVDeE2ApFe1/3AKPHAVBM7jWAeD0k6
+ muFCsP1qU/bVDVNbP+mnxgg34i8u9dnAnwc0pj4l8MabCMsexqlIKoABJsOfMVD6WvV5
+ +lhg==
+X-Gm-Message-State: AOJu0YyIYAshvGyZqCPFWzEMo3zUzPfFzfcPdt2YOV9pTc9GTe1UO5s6
+ KYYUyn241XkLclzJ1OtLYwRaUcsJKL4t2Ou4i8SW1eqdwmuoCmdAiH5Mv2rzkphgVT0=
+X-Gm-Gg: ASbGncsOKUzASL5UzsRAfAr9nzg3zWyD7Oqxnxd3dr4t0JjErXxGClEMWZtUMK1ZkmJ
+ fk6jQ14W5jKL2LXTAHqSTGVRLMlsFfc+03ALKVcp1pGVTFcw3G8qTroKj2XAfEE/tCPXe5Cwcwo
+ UxBGQ1TcJxfrnjtQgqbGTqD8SquW8HljZXeDhMXBicPXk468uvYQ9bI8mVmzYDMOOU2Wo3qtG/d
+ sG5hnWVAgnfN3ohKb5yMNWQMaZUH+F0X6GTVXOoV2eQP23E0YrisN9mEAfLVFcbuW9M2yu8tash
+ Vsj9zbcgTRoOat5Cmulyl8ZBbFJmL4jKez6JPBchikKTP9TcuB/f59uAPfYVGm+mQKI8numkJ8l
+ CeRe+NhPgLQ+CRMblDU05g3qfryuPNmbCFJ2yw+5DON4oPufrLp/a4g5v
+X-Google-Smtp-Source: AGHT+IHptyVYpunS5tyWiU7KIdlG3+kLOMULwfdefRltrynUQe7RIubuJ9jdMwlLaLi2V/gThabLog==
+X-Received: by 2002:a05:6808:3442:b0:437:e23b:e70e with SMTP id
+ 5614622812f47-437f7e414edmr3634513b6e.51.1756751053234; 
+ Mon, 01 Sep 2025 11:24:13 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-43800093005sm993143b6e.28.2025.09.01.11.24.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 10:48:02 -0700 (PDT)
-From: Javier Tia <javier.tia@linaro.org>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 v2 4/4] doc: Update U-Boot coding style guide with
- clang-format usage
-Date: Mon,  1 Sep 2025 11:47:55 -0600
-Message-ID: <20250901174757.166162-5-javier.tia@linaro.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250901174757.166162-1-javier.tia@linaro.org>
-References: <20250901174757.166162-1-javier.tia@linaro.org>
+ Mon, 01 Sep 2025 11:24:12 -0700 (PDT)
+Date: Mon, 1 Sep 2025 12:24:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Maarten Brock <Maarten.Brock@sttls.nl>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] ti: Do not try to read the mac address if no NET is
+ enabled
+Message-ID: <20250901182409.GC124814@bill-the-cat>
+References: <DB6PR05MB45518EE72CE8B05405F3439A8307A@DB6PR05MB4551.eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ag3jnGYriN1+D7J5"
+Content-Disposition: inline
+In-Reply-To: <DB6PR05MB45518EE72CE8B05405F3439A8307A@DB6PR05MB4551.eurprd05.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,79 +99,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The U-Boot coding style guide has been updated to include information
-about using the `.clang-format` configuration file for automatic code
-formatting. This ensures consistent formatting across the entire
-codebase and aligns with Linux kernel coding standards.
 
-The guide now includes basic usage instructions for single and multiple
-files, integration with Git, and examples of editor integrations. This
-enhancement will help maintainers and contributors to easily adhere to
-U-Boot coding standards.
+--ag3jnGYriN1+D7J5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
----
- doc/develop/codingstyle.rst | 40 +++++++++++++++++++++++++++++++++++--
- 1 file changed, 38 insertions(+), 2 deletions(-)
+On Mon, Sep 01, 2025 at 04:06:04PM +0000, Maarten Brock wrote:
 
-diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
-index bc18b2ebb7b..77d8061faca 100644
---- a/doc/develop/codingstyle.rst
-+++ b/doc/develop/codingstyle.rst
-@@ -12,8 +12,9 @@ or only minimal changes.
- The following rules apply:
- 
- * All contributions to U-Boot should conform to the `Linux kernel
--  coding style <https://www.kernel.org/doc/html/latest/process/coding-style.html>`_
--  and the `Lindent script <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/scripts/Lindent>`_.
-+  coding style <https://www.kernel.org/doc/html/latest/process/coding-style.html>`_.
-+  U-Boot includes a `.clang-format` configuration file that can be used to
-+  automatically format code according to these standards.
-   * The exception for net files to the `multi-line comment
-   <https://www.kernel.org/doc/html/latest/process/coding-style.html#commenting>`_
-   applies only to Linux, not to U-Boot. Only large hunks which are copied
-@@ -23,6 +24,41 @@ The following rules apply:
-   <https://peps.python.org/pep-0008/>`_. Use `pylint
-   <https://github.com/pylint-dev/pylint>`_ for checking the code.
- 
-+Code Formatting with clang-format
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+U-Boot provides a `.clang-format` configuration file based on the Linux kernel
-+configuration to help maintain consistent code formatting. Here are common ways
-+to use clang-format:
-+
-+**Basic usage for single files:**
-+
-+.. code-block:: bash
-+
-+   clang-format -style=file -i <file>
-+
-+**Format multiple files:**
-+
-+.. code-block:: bash
-+
-+   find . -name '*.c' -o -name '*.h' | xargs clang-format -style=file -i
-+
-+**Integration with git (format only staged changes):**
-+
-+.. code-block:: bash
-+
-+   git clang-format
-+
-+**Editor integration examples:**
-+
-+* **Vim/Neovim:** Install vim-clang-format plugin
-+* **Emacs:** Use clang-format.el
-+* **VSCode:** Install "Clang-Format" extension
-+* **Most IDEs:** Have built-in or plugin support for clang-format
-+
-+The `.clang-format` file in the repository root ensures consistent formatting
-+across the entire codebase and aligns with Linux kernel coding standards.
-+
- * Use patman to send your patches (``tools/patman/patman -H`` for full
-   instructions). With a few tags in your commits this will check your patches
-   and take care of emailing them.
--- 
-2.51.0
+> It is pointless to fetch the mac address if it will never be used.
+>=20
+> Signed-off-by: Maarten Brock <maarten.brock@sttls.nl>
+> ---
+>=20
+>  board/ti/am335x/board.c | 72 ++++++++++++++++++++---------------------
+>  1 file changed, 36 insertions(+), 36 deletions(-)
 
+The problem with doing this is I believe that we pass this information
+on to the linux kernel, which at least in the past has assumed it would
+be provided correctly by us, even if U-Boot didn't use the networking.
+These fuses will always be populated so it's not a problem to be reading
+them.
+
+--=20
+Tom
+
+--ag3jnGYriN1+D7J5
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLXkxgAKCRAr4qD1Cr/k
+CpPBAP0UQ8pSE+1oQvHjjyRSJpJBjL0o+lpDlYXK0zQj5A34tgEA7DBqP22Tjk4W
+AFlxd/esUxYWyfEMF0cwqA5uBHwjlAE=
+=VvcX
+-----END PGP SIGNATURE-----
+
+--ag3jnGYriN1+D7J5--
