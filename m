@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27FB1CA0FF0
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 05:11:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 499C5CA0FF0
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 05:34:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4159C833AD;
-	Mon,  1 Sep 2025 07:11:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1DDD3833AD;
+	Mon,  1 Sep 2025 07:34:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="GSxwD96y";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="BwVu+lkC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46F55833E9; Mon,  1 Sep 2025 07:11:57 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
+ id 0A727833E9; Mon,  1 Sep 2025 07:34:05 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 046B1831B4
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 07:11:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DB1C831B4
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 07:34:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A3AA3105B5C; Mon,  1 Sep 2025 07:11:52 +0200 (CEST)
+ with ESMTPSA id 3AE91105B27; Mon,  1 Sep 2025 07:34:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1756703514;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ s=dkim; t=1756704841;
+ h=from:subject:date:message-id:to:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=horQr0wbksBK44wa2YB+8qzb8PBXvvrqj7k113McF1M=;
- b=GSxwD96yzAjAColrGQSvSR6CmdOOgsLNR9NPK11lgIgBJO9xDilcQyfxdT7Vu5cuCuysog
- i3VQESGLWNPKewjdoNZK9B2XdRHRKtOqNHyUts7hbi2sCc24GRRHPkXFpztpl6yo4XUtVq
- tGPqUZ4CmLuo7InwIpVp2ehsdBqFXrCCV2I/lJUzw+zKORpqZVfd/rD3i3WYrhRUJWhb4Z
- 08K8fAu8d6aBXL8WzMA4pMlnlIFAT8JRvn8IUDPrjkJuRuGB0rEbUj39WNGwzmfT+bWNMx
- bcWtA3ABGUPOBqCd3b6sQj8rAs0BtJYrJBDq3PrIcBXq6AN1HisGjvrcirZfwA==
-Message-ID: <4c31c2d1-f8dc-e04c-003b-5e0f78290628@nabladev.com>
-Date: Mon, 1 Sep 2025 07:12:24 +0200
+ bh=3PsVSSYSm1tQjiIBQ42qKyLzkxrTZbtvl8f2KKZeHMA=;
+ b=BwVu+lkCvMpWr2z/Hc6r1+7BLmHcL5MIm5SAOZjQxESJKYYReUFnZl9Wc1AVQuO8bfpRGd
+ JcATgA/ARNG6aqBWGflzYhXO913ItW8o60pM9kPdMXmcUBoZzJDuHDJyfOTW4uc5GLrjzs
+ XjfbY1IEVSDMLSFhaH5TdO6GvFzjzkh72vLOFIqpOYXGkPeCq3TzmypDQ9LXTn9xh4MKcn
+ Ao4sOF947EtT0WITKVDbn5slGoZEjGn/WvwFc27ICrT5Bh8BkoI2+/egDbKwDcc715JTCw
+ tEFx9W2vL54lSlOQ3LZUE/OFHKj3zk8Q1P7ulyloBAB5s+3iqInhzwwjBbE3Ug==
+Message-ID: <300fe3e3-d21d-3b92-b054-c5c231cdbc1d@nabladev.com>
+Date: Mon, 1 Sep 2025 07:34:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH] cmd: Remove default prompt from output
+Subject: Re: [PATCH] tools: Drop meaningless comment from Makefile
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Daniel Schultz <d.schultz@phytec.de>
-Cc: holger.brunck@hitachienergy.com, sjg@chromium.org,
- jh80.chung@samsung.com, u-boot@lists.denx.de, upstream@lists.phytec.de
-References: <20250815160635.3575367-1-d.schultz@phytec.de>
- <20250815161237.GT124814@bill-the-cat>
+To: Jan Kiszka <jan.kiszka@siemens.com>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <ae9c0d66-01ee-4d58-adc4-66ea36e62cc3@siemens.com>
 From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20250815161237.GT124814@bill-the-cat>
+In-Reply-To: <ae9c0d66-01ee-4d58-adc4-66ea36e62cc3@siemens.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -69,52 +68,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+Hello Jan,
 
-On 15.08.25 18:12, Tom Rini wrote:
-> On Fri, Aug 15, 2025 at 09:06:35AM -0700, Daniel Schultz wrote:
+On 23.08.25 13:29, Jan Kiszka wrote:
+> From: Jan Kiszka <jan.kiszka@siemens.com>
 > 
->> Some commands include the U-Boot prompt (=>) in their output,
->> which can interfere with tools like labgrid that rely on prompt
->> detection to determine when a command has completed. This may cause
->> such tools to misinterpret partial output.
->>
->> To avoid this issue, it's better to update the command output itself
->> rather than modifying the actual U-Boot prompt. Changing the prompt
->> is not acceptable in many cases, as some boards have used the default
->> prompt (=>) for years, and altering it - especially just for testing -
->> could lead to inconsistencies or unintended side effects.
->> Instead, replace instances of the prompt that appear within command
->> output (not the real prompt) with an alternative like -> to ensure
->> correct parsing by tools that rely on prompt recognition.
->>
->> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
->> ---
->>   cmd/i2c.c      |  2 +-
->>   cmd/mtdparts.c | 12 ++++++------
->>   common/hash.c  |  6 +++---
->>   3 files changed, 10 insertions(+), 10 deletions(-)
+> Introduced by 245b1029e1af, probably a debug left-over.
 > 
-> This is two cases, and I'm not sure I like the proposal here, sorry. For
-> cmd/mtdparts.c, it's debug statements. We can change them, but are they
-> also enabled by default in anything? The other cases, we're changing
-> output along the lines of:
-> 
->> -	printf ("CRC32 for %08lx ... %08lx ==> ", addr, addr + count - 1);
->> +	printf("CRC32 for %08lx ... %08lx --> ", addr, addr + count - 1);
-> 
-> In each case, and I'm surprised there's not testing that globs on that
-> today. I see the wget case that uses "==>" and we do have a test that
-> checks it, today. Is your testing framework not able to handle "=>" in
-> the middle of a line? Thanks.
+> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+> ---
+>   tools/Makefile | 1 -
+>   1 file changed, 1 deletion(-)
 
-That would be exactly also my question ... fix the tool instead?
+Good catch, thanks!
 
-Changing this output may breaks automated tests with other tools...
-
-for example tbot handles this case:
-
-https://tbot.tools/modules/machine_channel.html#tbot.machine.channel.Channel.read_until_prompt
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
 bye,
 Heiko
