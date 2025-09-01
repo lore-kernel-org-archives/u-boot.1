@@ -4,188 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99312CA0FFF
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 16:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F86ECA0FF0
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 16:58:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BC0A83A32;
-	Mon,  1 Sep 2025 18:31:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sttls.nl
+	by phobos.denx.de (Postfix) with ESMTP id 9B42D83990;
+	Mon,  1 Sep 2025 18:58:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sttls.nl header.i=@sttls.nl header.b="rcJF5nmG";
+	dkim=pass (2048-bit key; unprotected) header.d=kontron.de header.i=@kontron.de header.b="d3sYa7JI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B823583A1B; Mon,  1 Sep 2025 18:06:17 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 2CF7383A1A; Mon,  1 Sep 2025 18:58:22 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7AB283990
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 18:06:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E74FA838C1
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 18:58:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sttls.nl
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Maarten.Brock@sttls.nl
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DMeqbUgNr7EchV322b7eMkae7hPKh3dvUAbAs9YqXussufW/oqN6yC+faz8VdBfDlSFhPK4MYzhgQWCTQuRax8V2p3RvaKZ7X+1XqfVstuQrGe/JKdrWz0xXf9BW2+//s3QSosdCUf5OHr6Ug/aSTpF3EzdnpB9ZccH1Vs7LuMvGN1HkX91oL3NUSUvxNthn/8LDuZg3d9+EdyRy9xWB3JkYzpQDSFcYa9n9ojLzBp+owAtIQZ7oVTwbOuD9W8D6+hkkZ716r1KYQXAK081TocA/ZYe8zFce8rhaQJj1oAJY/MXytzI6rgqi1mynPbeXMH9dkLNCTbOEeBWtHctuWQ==
+ b=AmEAwbvKWumHgK6DnOhTxArdnsSJaQ++AlzIfxBZ8001POPsctSyvZvsVnoaRTbGBaSE3YCZ3ymzo9CONbrKaCRTrArntQKg7GKgLrh+k8QybklYGhX8aezCav+JPDhp3wbVstDqW2PtjRR/yD8CcN2b3hRywCuYjSVmoijUZomSlQXeqhK07p6Q2TRAe5zMzMD76qoC7v2i3JhKsscgjvbRnFo/EJEBJBlsBEUAuv1bLmcj8ucJZG+NX8XnOCjW/uLBfTVQv4Mr8qPAQn2WKUQl/PjUOmJIQRpaoy/ID4beBwbn/gTZeTbCXP2FyClvODxi2mUVZxfolPKVxjrEKg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W9Cy0zv3FTjiJOVwAjoO2NPOvMNDL5nKWMBFAxm7/30=;
- b=RihoJtbhBklIQ8UCknfFqbqOekR8RaNKm7f4uwbDxA86AgouAXa75Nvfrc6/M8CoNcGdrYIp/eZ+wDJn3BC4cgZi9Kz6t5VUq3PRjZkBlU6OyJMQftF5wWkb4opdFms6yp7BDuUja93rYzSMeG2AjB+wAO5spyNSxse7i/z4dKSBgqJHZdqDU6BkgIaNi48g2PJA7+EKSmakziJUprrNMdiuKKeqhvoUUJplWsYNHeWfQI/hqENkyRFDx+E7wO+wFcS4Ictx/1YjLlxCt535Rlj/wiM2cicAVc4J+48kgCtaRt4q56IzEU94jYfCM/0ehbO/RJvKL1+WBUDgBsUHHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 20.93.157.195) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=sttls.nl;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=sttls.nl;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sttls.nl; s=selector1; 
+ bh=WzWPI/3/1otgIjj4rptjPvS+pQ42MnlhALAihfS+y8E=;
+ b=CG7DuCj9ZrQgJFH0hjLKs1ukW7HfVCtuW9NjzD9Hcb3IVJu2veSU63CZDsYFPalUd+shg6Ab7bzeGnScARmnDsnA03MP3sOi15SyT0w3St131GC1YX8see970INS0vwjPRjHWXtAq/TJMkeNtIt2y3hXjAz6fuju0vuU76tsmc9Ct0SWdUMHCLrqjlB7QxebTLPafVhJfieUtTgqBlqTsVTQs9gTA2oeJaecSDf6adX0aZCBwkvxeDe8wk6Q4S6PVIPOTzPg66Gju2dhtbJocqlaqnP6TMh4HiPAIels2W5ELZAzj+LunSzjt/aUZ+RFmSYASfPVqsWBuSEra22nTQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kontron.de;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W9Cy0zv3FTjiJOVwAjoO2NPOvMNDL5nKWMBFAxm7/30=;
- b=rcJF5nmGTGrkMnNZwqDHn79OOcsbjfA231cT5ftFaIYqzSfA7MNHV3gjExvgblgc/YAyIHnQRyH/tqU0mdvWeVmwOohxzAHE74xF+tktuBmWq97rPyf2NozZFISOW6mYYxlXbvAjZCgrLwmMk4Is8Zamf1QXviKSVadRrNdo+dodQFSwbT7hQT8cj37m4Y5JtvWAmR9sqpjLRpw9fkMFa2fnLSDtiLFT8C5Z8neu38rKRt6igSHykhiNfgptI35sTmCjt/VJIJOWZjoX+Pendg9z5FDTk6boUxGMJ7P89kqF7dIdp16Idg/u4GuRo/tKeOJJWCLArzvUpXbQcbyLzA==
-Received: from DU2PR04CA0069.eurprd04.prod.outlook.com (2603:10a6:10:232::14)
- by DB9PR05MB9549.eurprd05.prod.outlook.com (2603:10a6:10:301::13)
+ bh=WzWPI/3/1otgIjj4rptjPvS+pQ42MnlhALAihfS+y8E=;
+ b=d3sYa7JIjZDX5jPUs0xIVuZ1cyJ9O2C+y5RJYeDmVOabVlZM2d4aEMy7PFw911H8pIHolGcTaCuhzJMZ9gBWc8/JC+d0C+eNLAJUx/ig+Ap0N+z4U87ZQ8HqDqCtLyEt8OwCmMB+1NfoHVUSTwSUWyuQIygaim3l7yYFSQNzHDj/q1GRY35N7J+fKTUzr+kwpADxzdKoNcAOR7/aPMbQnHC43gkkjVASnPqSb4McPsOOK/GLbeGb4FK63T3DyaTJ/Sy1BaSxbFyNfY6hgrCISJBh5LpvPbKqNNgtoNOwrTnvGZzWGbDa6IizAIf20YQBnTgBN8vsE2V4iOzqVjm35Q==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
+ by PA4PR10MB5561.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:272::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.20; Mon, 1 Sep
- 2025 16:06:08 +0000
-Received: from DU6PEPF0000A7E1.eurprd02.prod.outlook.com
- (2603:10a6:10:232:cafe::38) by DU2PR04CA0069.outlook.office365.com
- (2603:10a6:10:232::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9073.26 via Frontend Transport; Mon,
- 1 Sep 2025 16:06:08 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.93.157.195)
- smtp.mailfrom=sttls.nl; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=sttls.nl;
-Received-SPF: Pass (protection.outlook.com: domain of sttls.nl designates
- 20.93.157.195 as permitted sender) receiver=protection.outlook.com;
- client-ip=20.93.157.195; helo=westeu11-emailsignatures-cloud.codetwo.com;
- pr=C
-Received: from westeu11-emailsignatures-cloud.codetwo.com (20.93.157.195) by
- DU6PEPF0000A7E1.mail.protection.outlook.com (10.167.8.40) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9094.14 via Frontend Transport; Mon, 1 Sep 2025 16:06:08 +0000
-Received: from DU2PR03CU002.outbound.protection.outlook.com (40.93.64.30) by
- westeu11-emailsignatures-cloud.codetwo.com with CodeTwo SMTP Server (TLS12)
- via SMTP; Mon, 01 Sep 2025 16:06:07 +0000
-Received: from DB6PR05MB4551.eurprd05.prod.outlook.com (2603:10a6:6:4a::24) by
- AM0PR05MB6739.eurprd05.prod.outlook.com (2603:10a6:20b:145::12) with
- Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Mon, 1 Sep
- 2025 16:06:05 +0000
-Received: from DB6PR05MB4551.eurprd05.prod.outlook.com
- ([fe80::f854:dcd:a8dc:bc53]) by DB6PR05MB4551.eurprd05.prod.outlook.com
- ([fe80::f854:dcd:a8dc:bc53%4]) with mapi id 15.20.9052.019; Mon, 1 Sep 2025
- 16:06:04 +0000
-From: Maarten Brock <Maarten.Brock@sttls.nl>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
- <jerome.forissier@linaro.org>, Kory Maincent <kory.maincent@bootlin.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Maarten Brock
- <Maarten.Brock@sttls.nl>
-Subject: [PATCH 1/2] ti: Do not try to read the mac address if no NET is
- enabled
-Thread-Topic: [PATCH 1/2] ti: Do not try to read the mac address if no NET is
- enabled
-Thread-Index: AQHcG1luYjYkdek/hUmbiEPbAi/qCw==
-Date: Mon, 1 Sep 2025 16:06:04 +0000
-Message-ID: <DB6PR05MB45518EE72CE8B05405F3439A8307A@DB6PR05MB4551.eurprd05.prod.outlook.com>
-Accept-Language: en-US, nl-NL
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=sttls.nl;
-x-ms-traffictypediagnostic: DB6PR05MB4551:EE_|AM0PR05MB6739:EE_|DU6PEPF0000A7E1:EE_|DB9PR05MB9549:EE_
-X-MS-Office365-Filtering-Correlation-Id: 713a38c7-2f31-4e6f-5f5a-08dde9717651
+ 2025 16:58:17 +0000
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b854:7611:1533:2a19]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::b854:7611:1533:2a19%4]) with mapi id 15.20.9031.018; Mon, 1 Sep 2025
+ 16:58:16 +0000
+Message-ID: <d320ef0e-2711-4f86-9881-6aabdf6766c2@kontron.de>
+Date: Mon, 1 Sep 2025 18:58:14 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] power: regulator: tps65910: Cannot test unsigned for
+ being negative
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Paul Barker
+ <paul@pbarker.dev>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: u-boot@lists.denx.de
+References: <20250807-pwr_regulator-v1-0-42a4105336ec@linaro.org>
+ <20250807-pwr_regulator-v1-5-42a4105336ec@linaro.org>
+ <78a0767b-2508-4602-a37a-eb4e72b37120@kontron.de>
+ <b44654c2-de9e-4bd6-96a8-aa338435048a@linaro.org>
+Content-Language: en-US, de-DE
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <b44654c2-de9e-4bd6-96a8-aa338435048a@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR4P281CA0142.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:b8::6) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:102:263::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|PA4PR10MB5561:EE_
+X-MS-Office365-Filtering-Correlation-Id: ba13c279-cd47-4cb7-f0b6-08dde978be97
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;
- ARA:13230040|1800799024|376014|366016|38070700018; 
-X-Microsoft-Antispam-Message-Info-Original: =?iso-8859-1?Q?3j8EAuwON2gFE8zJMuoDUx59uvXG+rIYMBTuTddjhp7ib9rgBDcqb78Ynb?=
- =?iso-8859-1?Q?ajdtDFr/5pmIr/Q05O+G3tUgmBMM+NSlOg3jeP2t82Y3fe9hz1UUgVqkBX?=
- =?iso-8859-1?Q?kcKJskBq8DIduwfFEBiu5pe98k7ESYq9zOsAv9oIH8aH+D4L68Oes/Lg0a?=
- =?iso-8859-1?Q?fbPzTLucJ0w/SoGfBsyH8M6sxGqZcK6wKIJzOHGatT5uYEbZTQV7eh2vY/?=
- =?iso-8859-1?Q?G6EDNqz9ycrODOVzNbX3hFJBmpS34/jjwLOPmskGTpSDJ9DA19t2fuJMQE?=
- =?iso-8859-1?Q?HXSZc6psH9OcxhqaJjX4+F0np/i0x+CmaCXOKtCPvnO1PtWmeXMcRJU+eM?=
- =?iso-8859-1?Q?cXuLFIUs3ubDxfcMpLieta2SW+R1VinEyG/SyJSIovqX12wPT5s+C7lo5Y?=
- =?iso-8859-1?Q?PcZseti0RqhrezhGS4cWrK4EoTIWtO+XIe/Wf3/eG1RyBDWohK8SxUxDJt?=
- =?iso-8859-1?Q?0EJyyWByZvZ8viBjvI4rNTUDywsyibzpHoLXCCqPWPImOjSwnvEGvMSya6?=
- =?iso-8859-1?Q?3bcFdFKJOh3RmUvNXimL49bz+mrwlr2WEfoxic7zfqf6Nm6fC5NHIIZxT7?=
- =?iso-8859-1?Q?vR3+Z/KQ6P7DJG6cEZsSoG87RB8Boa7YduZ/n9Wcd8x6tsMPAqceW2z2g9?=
- =?iso-8859-1?Q?C/VOlvLbjnicBHthkEDR2jyhh92D/MUO6w9zVKo0kg7/uO/XAtmvPu/N2F?=
- =?iso-8859-1?Q?QMYP9+mGeo2OEn7LBWhuxlgJs7Jgxc4gLNLEooudu7KgUvDg3+iiAwJQgI?=
- =?iso-8859-1?Q?e3KxyAphkskJS+n5BWO7pdvn/NsLCkOr3TZfpD4vmGwIAtrwBU7oYc04Yw?=
- =?iso-8859-1?Q?fi17JVyB8DsjalHdrNJrPtHUE2u7mj7M06eJookqWxS76FktbWJYeugYH/?=
- =?iso-8859-1?Q?1qPU3pmVyTdZqKacqvVsFooOWUhtVaEwoVftFA1d81DgkVE4EDVldH7Hwv?=
- =?iso-8859-1?Q?1pVMr/IUii4++FX0Cq+2E/G5k/9RNFTRE0Qo0RWCZCVpIn63T/Cbrib1sN?=
- =?iso-8859-1?Q?jHxcdXWWGRQMlu1cZLhMTBpNjRc37WDkj1MnLD9G+rrzPLoa9zXondD9OE?=
- =?iso-8859-1?Q?+PXwS523O/Qv4sljsm8YKcUwxSKSrXNBXGtLUs5qXcMpUJJx5/3UnY239L?=
- =?iso-8859-1?Q?Nuq0gjcUnqei1+G2Gs6ONwIN/kynmBdBOyDV9wc3g7cbkT0NWyRUl+iefz?=
- =?iso-8859-1?Q?N6NA/8ASVl1dHMOmBHEVS+LEbiWxTAmVHLOb0LzAnhTlptBCzhmNIL0ic2?=
- =?iso-8859-1?Q?RQ9ktByPyf8W6Fm4MU+gTJyBcZTuJde1qAJ0AFsjJZsJg7aRWmohE5ycpb?=
- =?iso-8859-1?Q?p2j4Wh53ULcRQW6yzR2njlXKbxYuciJ9R2kmeCXO2OybZe2iFz64WxfU7h?=
- =?iso-8859-1?Q?IBcxxWDCUaxVn4/1j/jleTPBTs0ebdfM4x1oF6PvSfd53D4QJRoc1P1wvG?=
- =?iso-8859-1?Q?DzYIIY46a+fr73QRKyLLw+beL+heMcttyK8fcZW+TYHwNDzDeFdauGvMUR?=
- =?iso-8859-1?Q?my4CvaZzOYLbmgvmz11fWC1EUUicshZbtJtqIKlsRg5g=3D=3D?=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DB6PR05MB4551.eurprd05.prod.outlook.com;
- PTR:; CAT:NONE; SFS:(13230040)(1800799024)(376014)(366016)(38070700018);
- DIR:OUT; SFP:1102; 
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR05MB6739
-X-CodeTwo-MessageID: 6f6d52e4-837e-4da0-9396-02985ef956b5.20250901160607@westeu11-emailsignatures-cloud.codetwo.com
-X-CodeTwoProcessed: true
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DU6PEPF0000A7E1.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: 9af5b226-2d43-4bd9-0ee4-08dde97173fd
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|35042699022|36860700013|376014|14060799003;
-X-Microsoft-Antispam-Message-Info: =?iso-8859-1?Q?WGo+aKv/NEENczUZEWxFIrmgDm+QkgnnBUVLGnjbumLhAFUO4+bMJkZs1b?=
- =?iso-8859-1?Q?6LdislXBLEPJN2SzUAGQHuayHGQFmD+sB03VOSmv2e53+nFdqH6U5VXntL?=
- =?iso-8859-1?Q?dRLjkMnnhNAokxXbhkiEtOaUASs+nEvsS/RNzaGyjK5yH9DsMr0Ss92rZF?=
- =?iso-8859-1?Q?jXlbOYN9/IIm72Ga/2ohnFdJeiipFeNfQikVC0zTG1yP04vMqvfIzq78F+?=
- =?iso-8859-1?Q?lkivwH9B+vOJlBVTyABlN2lb70LjfDTG4RLwHTafV/LCMH5tOqqxdMbccE?=
- =?iso-8859-1?Q?Sq2c80gBpjsKFBf/6IXzhAGe8Fj8Gr4cs8rpUUAXTd9ij+gzcXHuOMxHVI?=
- =?iso-8859-1?Q?IDQdve1IBSeIT4brvHSPlQMY/d710+g8NszCi11iiamlZsP0TEHXXVWLE+?=
- =?iso-8859-1?Q?k+onxciH+wnV6dsnigjmFWhGCEge/ENRYE8JANUJmGOXMkDJl1Sf//05Nq?=
- =?iso-8859-1?Q?gncvMGYlLtYVuGlilP8yHmcG9RZd9RNeaxEnEkNUdk62RHmVeFf12cl1L7?=
- =?iso-8859-1?Q?jlTenJnAu/THqs0B2Y18ZR0pWWS9snllWsvfpU73Cyp6uDX/amtJF6wYhc?=
- =?iso-8859-1?Q?njNgYc8G3HRydfob/xoofOv6/IQnWmwGjZL+H+3xuI9ume3xcC2rX/92ZB?=
- =?iso-8859-1?Q?vOwcc+As2OsggKTMwK3PNZvpSAxFtbInBOS0IDPLsUKX9uFLpEzdJfygsA?=
- =?iso-8859-1?Q?2lmQUcHUoVRkbJapqijlsfZxiuDJbKnj8Puf9xEqzHnY1PgKs6brtB5P/B?=
- =?iso-8859-1?Q?kjXrxU1EP++SKfZfsdC07rOlt44pf7qwVWj3YTALAZpmkPVoXYqoYbHKoq?=
- =?iso-8859-1?Q?ZC4Ac3mm+758TGfcmmzxiscpDQV/kvVqlfRkh5w8Ppgez3G0DnEDyRppEt?=
- =?iso-8859-1?Q?Yw8n8YUjbou6WtsYP+MeWU9oQfsYP7zrVz8SSNcg6mDYjCbsCciSo++XlO?=
- =?iso-8859-1?Q?vy7iXPUxktYtGvn7NgOO174mSTo2HOW2kY04tlEMvarg516tnbTSYBCdrB?=
- =?iso-8859-1?Q?B8td+Xa0bZTeSqcLXBMiUg/4dBgCnJ9uO5aC4Sj0iAB6wHrHV1pEmsGZbG?=
- =?iso-8859-1?Q?jpWT/V0a8lrejvExjvg43Sh7RtwnM8YmJ0c9ox8bp2LOvrTDe847QAbCQB?=
- =?iso-8859-1?Q?Lj+usXsA8hOjtssX7aQWbxfaMGuFobLxY71qdfNx8JUWy+GROqcZJn7/UQ?=
- =?iso-8859-1?Q?hBfgiZesjvO+JEU+kuPiXmddiEs5ocvgvzFizciub8F4SXNKFpr2N8eC2z?=
- =?iso-8859-1?Q?t5iQYD5NIvPGUY5jOPKZSsK84C53CvjfHlA9IlnDHYfc9KK+BVo8ZruHfQ?=
- =?iso-8859-1?Q?J5SXU7/oOxzG7u+KZhOZG2Z5jJi8xhW3PtIgigSGlQsomsPQuGrirNp0jr?=
- =?iso-8859-1?Q?lsk/d2gU+j48D3DS/S6xBSeqa9Og/drit2EFgcQ0pPKsY+eH+czgeNT3ca?=
- =?iso-8859-1?Q?Hekkbuqm9Y3MdCMKRhxxf3iU6JWI9Qvy+eioPpOMIlHPy5gk5o894NaVWN?=
- =?iso-8859-1?Q?NUHD970HCWF/CIBsldGcHMRwBcTLWFPkbHOZmgFDTtdP2Q3tNt9KO2EueX?=
- =?iso-8859-1?Q?gD1fbHC/WGE5N06NnKD97tph2HiP?=
-X-Forefront-Antispam-Report: CIP:20.93.157.195; CTRY:NL; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:westeu11-emailsignatures-cloud.codetwo.com;
- PTR:westeu11-emailsignatures-cloud.codetwo.com; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(35042699022)(36860700013)(376014)(14060799003);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: sttls.nl
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2025 16:06:08.1028 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 713a38c7-2f31-4e6f-5f5a-08dde9717651
-X-MS-Exchange-CrossTenant-Id: 86583a9a-af49-4f90-b51f-a573c9641d6a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=86583a9a-af49-4f90-b51f-a573c9641d6a; Ip=[20.93.157.195];
- Helo=[westeu11-emailsignatures-cloud.codetwo.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF0000A7E1.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR05MB9549
-X-Mailman-Approved-At: Mon, 01 Sep 2025 18:31:50 +0200
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NzlRVUcvZWkxNkhFK003VlFLU1I5UzhaOGQrcXdacUZ2OERjK0VadE50NjhL?=
+ =?utf-8?B?a2s2ZFdUdFRFWi9ZS042WmNUTlFqQWhlRURBdU8ydWJ1bHh6dG1rcDFwc0No?=
+ =?utf-8?B?ZDQ1SU9PWjFvRDYwY1ZDdWFTdDVRUUtGVFB5TWNhbmE5WWdFdWU2TGplUlp6?=
+ =?utf-8?B?SEZsT2pMVHVTejhLRE1xcEdCMmhIVXNMaWJtaTl2OE1zRTRjbmEvTjRMZ2p1?=
+ =?utf-8?B?RmxwNmk3TVRXSGMvNm9OaHJRbHFiNWR4MUxCd2x6T2xjYXFaOVZZZTl4a3RS?=
+ =?utf-8?B?MUoycHo2ZXJqSWpJdUhTSFJ0U0prQ3VhL3REU2laK2VWSEdzc1pQWVpQMlNE?=
+ =?utf-8?B?Nzc3RGViczBaTmhKWkZqcmFweVdJQTJtbEZpYnA5ZE5aSHpXelk0YzBLdkJI?=
+ =?utf-8?B?b1RBc0xkNGczck80T1lsSGQ2cHNiTmhFbjVJdzF1Tis3N2UycStoUnU4Tzk1?=
+ =?utf-8?B?ancreGVwYkdTczJ4Zmgzeks2UkVQbEtsSlVSUUNGMWZNdi9qUHNZRmVhOVpv?=
+ =?utf-8?B?czF5L29zRExSTlhTZlpwbzllbEZ0Y1RZY2c2UTUrTXF5dXFCUDdOd1BvM0Vl?=
+ =?utf-8?B?eFRUS0ZpaUNGQUlraEZ0b2RYNHFFQXVvUEdvcUpUcHY2d1U2ZjAvYUpGb0Rr?=
+ =?utf-8?B?NkRRQlU3alhoWlhVY2I4dWhBL2QwS1N4M3NaZHAreXVVN1hEOEhOVmYzb1BF?=
+ =?utf-8?B?anJrU1pnVTRjTDdVSSttQitRTGJobXpWbEhzNWd2R1owWG1zUkd2SXBxNWdZ?=
+ =?utf-8?B?L1BPMUVVZmlZczZtZmhwOUpidHdHUzFScUVoVjZtSkdCUlRTVG1BL0FHdUpy?=
+ =?utf-8?B?VDlocHRMUjcyTzFsY25YNDVyTlhDQjNKMmJ5b1U0OW5JV2VQRXlrak9yVW5s?=
+ =?utf-8?B?aE8xWmNOSlZheXViM0xqRUlOck1VUXJUdHNqOVFXYU5wTDR0VmV3UEhaNFdM?=
+ =?utf-8?B?YUIya0dhWWU1NVMzRVZQbzJpU3dLWE1oKzlwaW1WUjlhYVNkNDBzV3Nnc0lx?=
+ =?utf-8?B?QTZIUDhCT0VLQXRoNGNtTjV5QThwaHF4NmVDd2taWUhCVWZ4U2UrRHczUWpk?=
+ =?utf-8?B?djRXakFZSjg2cERUSkhSNW13Vjd0VHpTcjNzTUlQYitmYzZldGpzTm9Bbm1E?=
+ =?utf-8?B?QVhHUGk0WnFYOFJrdCtDV3VieTN5RWcrK0VqRXZCaVZpNzZLUVpZKzdBWHNx?=
+ =?utf-8?B?WVY3Mjcvd2NCWk9kMTZIL0xVTEVlYk1iYUR1VWdWTzNCY2RKeXdVRmh2aEUy?=
+ =?utf-8?B?RDdqOU9CUjJSUGRPV0tHbnlKVnlZUFpXd0cvSitXRzRyOXBnOGdueGxZZHZy?=
+ =?utf-8?B?bTB1Wk5WUXBBeCtNR1hWUXI0TTdFbGVjSEZMM2FCczJQdW9sZmtsZm9kaEpJ?=
+ =?utf-8?B?bjE1NWpuTW82eDFPS2VvekhYRU5tK3VNVkhibnZoNTkvdVZFSlpseDVOb2g5?=
+ =?utf-8?B?TThTUFROMGc3cTJsY2IxWU9lNFpIN3FmamMrb2wvYWRvRlJ4cGkxaENDVVVi?=
+ =?utf-8?B?NjBWYTdheSt2V0tIUXEvQ1FoOFJ4OXFobkJZSFJYOW81Qlg4enl6K00zbGxy?=
+ =?utf-8?B?eXhWdEc2TEFuNVdhR21BaDdNSkNiTncrNHRDYVJIVUR3aXltaGhwUGpocGtr?=
+ =?utf-8?B?NW41TVdQRFI2QkdJQVlvZ2t2aWg3Ryt2WTJHdDdnaS9kcEJmeTJsY2xPcDZW?=
+ =?utf-8?B?aVRIZ3ZtMUR1eDZ6STVMcHlJVTJhNEtxL042VDdKUGYvWUtDZU9xUU4zalZI?=
+ =?utf-8?B?VDIzQTRKVkdhZ3h5TlBrblZQSkMwQVhXNFdqK1Y2OWNaZWZ1akRObGpYYUl1?=
+ =?utf-8?B?aHhMYWFqSkZ6c1VxUnQrN2MwM0V0TUMwWG9kNnBJTjZyZ1F2UnltZ0tSL2E1?=
+ =?utf-8?B?bUpneTZlOUdmNXgxUStLNWVsaW82ai92VDRoYWpyNjlucHByYzNHZWtzbGRh?=
+ =?utf-8?Q?yAbe4DcEpnA=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MFpaS0kyREdVOTBZWkR1Wmt4ZlVUM2NGbmVDOTRFcFZUazZMb25ZRGhrakhU?=
+ =?utf-8?B?ZVU0cG1JZ1lQeEYrMG1SUnNFTUNnNWVvaXNyOTI2THZQbHlxNVNUQkdUSXBa?=
+ =?utf-8?B?ZEtxRW9CMnJaa3pzejB2cEpxbzF2em5Fd2hXWVdNT25YZlZqd29leUh0ZWoy?=
+ =?utf-8?B?R0U2cFVVVVdSUUhsaVFRZ2t0ZWlyaE1MRm05M21UdHRCQVVaYkZBalJhUU5n?=
+ =?utf-8?B?c1lNSXpLYldvYW5OZmJkUWFwZVBhaGwwRmVDdzFUbkpsanBmMzdvR3VCN1VC?=
+ =?utf-8?B?blRRaVhyYWRkbk55TEF0b1Y0aWo2cXdzemlMUnpsakoxVXdSWFViNldSSmF6?=
+ =?utf-8?B?Q0RUR243c3REeUhZK0d4RFRWdWpHRytqVk9WbTU0by9pRFZDTlZtcGpWZ2Ev?=
+ =?utf-8?B?UFBKeG5GK2crS3Rvd0dZdGN5eXIvTDNERWVnMTViRjgxNFk0clA1cE5qaVFO?=
+ =?utf-8?B?RWowdVNLdEh6ZXJISFV4YlBQMndtcWJUK0V5LzRWQ2pGbWNaTGNSYlJwdzlx?=
+ =?utf-8?B?ODRLOXhURDROQXRkdHpBVXE1N3Z3c1U5ZVJwdUxqUjNyUWxUZ1B2QXZ2QlhN?=
+ =?utf-8?B?M01JTW5JTGVXRGJXYzVZRWpTQWZrY2RBd3ZURmgwOGVXQ3hEM2NMTHI3Z0hL?=
+ =?utf-8?B?bnlyWXdGVmFyaFdBbGpOdlZ3dlhJQk90TjRROGRVRmZlZ2YrWFZLeThweW1w?=
+ =?utf-8?B?QTc5U1FseGdtMFQzZkRscndISXhiTi9MRFQ2a3ROYlBWNE9vSUtaNDJuVXdI?=
+ =?utf-8?B?K1RhZFJOZC9iZHZSUndsSm9ySmN2eThURytEU01GVXR1WjRERHk3K2kvK2pq?=
+ =?utf-8?B?cktKRkRLWGNMVzdwT1dOb3ZKSG9Ca3hRZFVEUk1pU3lSSyswVE9la0tIWThP?=
+ =?utf-8?B?QjF2OElKSUltalNVYkVDakpnMUY5d1VRRDlOWlo2MGg3VHJURXJNUHZXS1B5?=
+ =?utf-8?B?ei9ndTN4eTZvY1J1SGQ2TkU4WlRIejJkbDdUdW03b3cvWHA2UEo2a0k2OEMx?=
+ =?utf-8?B?MXh0YUZ1U2g5WEhMbWN4Y0t4bTZldnB2TkkwWXNkRVlyNW56RFU2dVF3U0Za?=
+ =?utf-8?B?bkw0aTRtTWUvUUUvUmpjWGdBbjIyU1AzRWdCOGtuNkEvbGx1ek1tNXYrbXVj?=
+ =?utf-8?B?TTJlcE9sVS9sSzJiT3ZTejdHb1Vrdlo3a09YMGgzeXpOUUJuenY5UEZ6VDV5?=
+ =?utf-8?B?aWRWdmNPc3lSZHN3LzkrQ3Zaa0lOM05CdWtZNkh1MEV1dE9WM0lHYzZyc2VB?=
+ =?utf-8?B?aFVvOUlwZG5OMStQcnZtUnp3Vi9oc2VvT3RoVkZPWG5oQllnSHlmcVE3M3M5?=
+ =?utf-8?B?Uk82ajVZWm9ubzFwRU1wS1hDN2MrTTI1Y2t6NzJXQTRVYk5JMGlkcEV1azY2?=
+ =?utf-8?B?ZWNJRXE0NTZ1dWhMVzFZSnJlbEM4K05mTS9abGZtYVF5LzFobVpnVzFGUGtO?=
+ =?utf-8?B?bUl1SG1lRFhxWWptdStUVGlLMkduTjZVS2IxY3RoU2JtbWtDUS9yMlNOdllo?=
+ =?utf-8?B?OU1Zb29YbnZJVWgxZ3U4TWFUWDY0Rkx6cjNjT2pwaTFMalBlYmtyenlhVVZl?=
+ =?utf-8?B?UlQrU0FHMW5NclhBVlBicGFSMGNXYm5Lb2RqQmdjZ1NFcUJseDZLL2ZPUWpS?=
+ =?utf-8?B?UXdQbmlIRS9vOFBBTmNyMk9YOVZ1blVnL1JUWDRybEpINXFjODdhWnY4a0Zt?=
+ =?utf-8?B?eGwrVWNqbThLcTJQV1crYlBMZGVZVzB3NGtKeEtjRjBWUllZTytWYy9VMmZU?=
+ =?utf-8?B?aXhERnduaEVlNlkxKzNERkwwVFpYWEtXaGxHT0x3eW5YbHF4c0g4eGFWdnM0?=
+ =?utf-8?B?ZkViNmxiMFNRdC9STU4yVi9QTDBzdmZYa1ppZXRIUDFEak9WaEloU0I3R3hF?=
+ =?utf-8?B?QnIwNjVKQ3FzSVF2WExIM2VBaHo0RGVZQjUyaGJkcFhXVVdUVHRVQWhqeU1u?=
+ =?utf-8?B?YklMMkRCQUlkUTJMcVJjTkdaa3BTcFNRTkl3OTNuVlpHTUlvMFdEdG1WZnRT?=
+ =?utf-8?B?cU9ZVzVNYWxyaDhSczd1RmMvUDhXcXlxSGdRUmtwVzJ0ZkFwMDlScEN5Wldo?=
+ =?utf-8?B?UUt4K1o2STVLWHhUU2p5SEIwall3dnpMMU4vM3pqaEhMVStiZ2ZQNExXcDY0?=
+ =?utf-8?B?UEVnZUZFcFM2MVlwRzlWOGQ1VmhqN3hGQ0U5NlFxb3lhbHRtbEt2UVFQdDBr?=
+ =?utf-8?B?TVE9PQ==?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: ba13c279-cd47-4cb7-f0b6-08dde978be97
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Sep 2025 16:58:16.1641 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 4rwP28G1iu2FkmLviBu0oEDO1QQgWyB3ReSLtrrsZYtT1f+aY2R9j05MhVXZHr61Hu3LrkrCPY0tuD/TSMnPLMMW4TOhngZaGXc7zXA8ZRY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR10MB5561
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -202,108 +182,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is pointless to fetch the mac address if it will never be used.=0A=
-=0A=
-Signed-off-by: Maarten Brock <maarten.brock@sttls.nl>=0A=
----=0A=
-=0A=
- board/ti/am335x/board.c | 72 ++++++++++++++++++++---------------------=0A=
- 1 file changed, 36 insertions(+), 36 deletions(-)=0A=
-=0A=
-diff --git a/board/ti/am335x/board.c b/board/ti/am335x/board.c=0A=
-index 4ada8b534c1..739b23b8554 100644=0A=
---- a/board/ti/am335x/board.c=0A=
-+++ b/board/ti/am335x/board.c=0A=
-@@ -801,10 +801,6 @@ int board_init(void)=0A=
- int board_late_init(void)=0A=
- {=0A=
- 	struct udevice *dev;=0A=
--#if !defined(CONFIG_XPL_BUILD)=0A=
--	uint8_t mac_addr[6];=0A=
--	uint32_t mac_hi, mac_lo;=0A=
--#endif=0A=
- =0A=
- #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=0A=
- 	char *name =3D NULL;=0A=
-@@ -852,40 +848,44 @@ int board_late_init(void)=0A=
- 		env_set("boot_fit", "1");=0A=
- #endif=0A=
- =0A=
--#if !defined(CONFIG_XPL_BUILD)=0A=
--	/* try reading mac address from efuse */=0A=
--	mac_lo =3D readl(&cdev->macid0l);=0A=
--	mac_hi =3D readl(&cdev->macid0h);=0A=
--	mac_addr[0] =3D mac_hi & 0xFF;=0A=
--	mac_addr[1] =3D (mac_hi & 0xFF00) >> 8;=0A=
--	mac_addr[2] =3D (mac_hi & 0xFF0000) >> 16;=0A=
--	mac_addr[3] =3D (mac_hi & 0xFF000000) >> 24;=0A=
--	mac_addr[4] =3D mac_lo & 0xFF;=0A=
--	mac_addr[5] =3D (mac_lo & 0xFF00) >> 8;=0A=
--=0A=
--	if (!env_get("ethaddr")) {=0A=
--		printf("<ethaddr> not set. Validating first E-fuse MAC\n");=0A=
--=0A=
--		if (is_valid_ethaddr(mac_addr))=0A=
--			eth_env_set_enetaddr("ethaddr", mac_addr);=0A=
--	}=0A=
-+	if ((CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)) &&=0A=
-+	    !IS_ENABLED(CONFIG_XPL_BUILD)) {=0A=
-+		uint8_t mac_addr[6];=0A=
-+		uint32_t mac_hi, mac_lo;=0A=
-+=0A=
-+		/* try reading mac address from efuse */=0A=
-+		mac_lo =3D readl(&cdev->macid0l);=0A=
-+		mac_hi =3D readl(&cdev->macid0h);=0A=
-+		mac_addr[0] =3D mac_hi & 0xFF;=0A=
-+		mac_addr[1] =3D (mac_hi & 0xFF00) >> 8;=0A=
-+		mac_addr[2] =3D (mac_hi & 0xFF0000) >> 16;=0A=
-+		mac_addr[3] =3D (mac_hi & 0xFF000000) >> 24;=0A=
-+		mac_addr[4] =3D mac_lo & 0xFF;=0A=
-+		mac_addr[5] =3D (mac_lo & 0xFF00) >> 8;=0A=
-+=0A=
-+		if (!env_get("ethaddr")) {=0A=
-+			printf("<ethaddr> not set. Validating first E-fuse MAC\n");=0A=
-+=0A=
-+			if (is_valid_ethaddr(mac_addr))=0A=
-+				eth_env_set_enetaddr("ethaddr", mac_addr);=0A=
-+		}=0A=
- =0A=
--	mac_lo =3D readl(&cdev->macid1l);=0A=
--	mac_hi =3D readl(&cdev->macid1h);=0A=
--	mac_addr[0] =3D mac_hi & 0xFF;=0A=
--	mac_addr[1] =3D (mac_hi & 0xFF00) >> 8;=0A=
--	mac_addr[2] =3D (mac_hi & 0xFF0000) >> 16;=0A=
--	mac_addr[3] =3D (mac_hi & 0xFF000000) >> 24;=0A=
--	mac_addr[4] =3D mac_lo & 0xFF;=0A=
--	mac_addr[5] =3D (mac_lo & 0xFF00) >> 8;=0A=
--=0A=
--	if (!env_get("eth1addr")) {=0A=
--		if (is_valid_ethaddr(mac_addr))=0A=
--			eth_env_set_enetaddr("eth1addr", mac_addr);=0A=
--	}=0A=
-+		mac_lo =3D readl(&cdev->macid1l);=0A=
-+		mac_hi =3D readl(&cdev->macid1h);=0A=
-+		mac_addr[0] =3D mac_hi & 0xFF;=0A=
-+		mac_addr[1] =3D (mac_hi & 0xFF00) >> 8;=0A=
-+		mac_addr[2] =3D (mac_hi & 0xFF0000) >> 16;=0A=
-+		mac_addr[3] =3D (mac_hi & 0xFF000000) >> 24;=0A=
-+		mac_addr[4] =3D mac_lo & 0xFF;=0A=
-+		mac_addr[5] =3D (mac_lo & 0xFF00) >> 8;=0A=
-+=0A=
-+		if (!env_get("eth1addr")) {=0A=
-+			if (is_valid_ethaddr(mac_addr))=0A=
-+				eth_env_set_enetaddr("eth1addr", mac_addr);=0A=
-+		}=0A=
- =0A=
--	env_set("ice_mii", prueth_is_mii ? "mii" : "rmii");=0A=
--#endif=0A=
-+		env_set("ice_mii", prueth_is_mii ? "mii" : "rmii");=0A=
-+	}=0A=
- =0A=
- 	if (!env_get("serial#")) {=0A=
- 		char *board_serial =3D env_get("board_serial");=0A=
--- =0A=
-2.34.1=0A=
-=0A=
-base-commit: e4c8b32d03d7ecffd586b7d33336603ad639d7c0=0A=
-branch: am335x-no-net=0A=
+Hi Andrew,
+
+Am 01.09.25 um 18:26 schrieb Andrew Goodbody:
+> On 27/08/2025 08:54, Frieder Schrempf wrote:
+>> Am 07.08.25 um 18:35 schrieb Andrew Goodbody:
+>>> The code in tps65910_regulator.c treats the field supply in struct
+>>> tps65910_regulator_pdata as an int and even tests the value for being
+>>> negative so change it from a u32 to int so that the code all works as
+>>> expected.
+>>
+>> I'm not sure if this is the best solution. The supply field holds a
+>> voltage value in uV and u32 seems like a reasonable type to use.
+>>
+>> I would argue that the driver should be changed to not use int and
+>> remove the negative value check.
+> 
+> Hi Frieder,
+> 
+> I would offer the counter argument that the TPS65910 has an absolute
+> maximum rating of 7V so any advantage of being able to use all 32 bits
+> vs 'only' 31 bits to hold a value in uV, when 23 bits would be enough,
+> is somewhat lost.
+> 
+> As I say in the commit message all the rest of the code in this driver
+> treats this field as an int and declares int variables to hold its value
+> so using a u32 throughout this driver would just mean changes being made
+> with no benefit. Removing the negative value check leaves the code open
+> to unexpected behaviour and hard to find bugs.
+> 
+> More than that the field is being assigned to from the function
+> regulator_get_value() which is in the regulator uclass and returns an
+> int. So following your suggestion to its logical conclusion would mean
+> changing the uclass and then that would lead to changes also being made
+> to all other clients. This would turn into a major project which I am
+> not very keen to take on as I do not see any benefit to it.
+> 
+> So yes, simply changing one field in a struct from u32 to int does seem
+> to me to be the best solution. It achieves the aim of fixing the code
+> with the minimum of effort and I see no downside to it.
+
+Thanks for the reply. I totally missed the fact that
+regulator_get_value() returns an int. When I was looking at the code, I
+assumed that there are only positive values ever used.
+
+You are right. Sorry for the noise. The patch is fine.
+
+Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+
+Thanks
+Frieder
