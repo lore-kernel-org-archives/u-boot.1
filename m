@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8305CA0FFD
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 09:00:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA061CA0FFD
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 09:00:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 116BE833AD;
-	Mon,  1 Sep 2025 11:00:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D59948399C;
+	Mon,  1 Sep 2025 11:00:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ckuLb8mA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OKan69dd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F8908397D; Mon,  1 Sep 2025 11:00:45 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 21A0E839A1; Mon,  1 Sep 2025 11:00:47 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C7C583192
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 11:00:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CD8B833E9
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 11:00:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-affc2eb83c5so309685266b.2
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 02:00:43 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-61cb4370e7bso6122548a12.3
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 02:00:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756717243; x=1757322043; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JxikSnTMmvTfdliW7HdZAdKrm1iGT036cuI3cc8GuBE=;
- b=ckuLb8mAMDWze1I7FpPretc5q4RQLho4ZUTwi70/jqB0OQrd4B4oFGWAcfRhKD2Usj
- xQ/H2Vt8opTWjRLVucN1AbelD5J8a/0AzCjvqMA4hlk1+6I/Xaf7GuHF40DV+FD/ia8j
- BcpgduUdpgEkI+d+ENkFM8dV5VuZlN7PGiSmOodzFYb2SpWtNDfBmF1CgmO4mFXGuwZ5
- YLAGnwsaH7GaAs2hESd49ynwzpFg/HbE4qmK9FhIkIhQGeQOD0eiZQgbR6DrdlfCRgPd
- Ut6palvD0fu+4QqBHUiRWSRn7IaqxuMjFDoIIinulpc7HNIbkE8sRH9Tgq+NiKOK3jol
- PBtg==
+ d=gmail.com; s=20230601; t=1756717244; x=1757322044; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kSMMfpsNgiLfAFrAc+gdlRH9sEDPCLbgyUapSOqkMjA=;
+ b=OKan69ddMxFmeutPq0KHFguvSZCdb9hJVarCNBbLkU3W7JIcdrclBXBXQHbSSix+IL
+ 3v1gouHt264/orWU3zQYynKBUfqCFNB9UdCABxbqmVlBaQEj0l9kG085lprxIJ8wu/IR
+ GHuFE/vObAnOc43gmAXn8Py/tcail2v1MvfdCyCFeBijwifqj0DN5A4UCTF2bp/uOPQZ
+ odIpqdqgcg6saP05AXGkC4ACtyx5xu2q1IsuQMVWX3p7RZ6un6xwtRHRwfMcdKbmWaXR
+ DrLEctKeHzNV2K5jtuCwtUt0AeN3H52qcHU70e/+0ALSg+tvcMRx0HPQeKG+d2kqLHJ3
+ Lp/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756717243; x=1757322043;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JxikSnTMmvTfdliW7HdZAdKrm1iGT036cuI3cc8GuBE=;
- b=BcPvI6dYNuZp3Ln3qjIHi0GikOqFwX2IIQzNMSIr4h1frDu6adkHywiG4KkcPUQzXn
- 0Sz3guXdikumm1V1gffZOZ/kWG2Vp2k/Hv3KAVtwLE8UqoKyrKQpVjLrYwUpc/yzz/IC
- ToiXK6TzJK80DCnZJNXVGoqoqhOEUayAg2XlwLVUA2j7Ia5RA2hK1hrCWRxm5H7IKLS8
- Xs9wLHgcH+woXeUhsv3yFz3Qfjc2tiAMfmsMWs57Ebn7k+CM8V8Xu+SuRuI3uD9ZIG0P
- 64egzq/0PfC2dd8ejdiaOBHhesFz+zvqGDGhv0NPMRB6sUsv8oFPgPqePeLSK+y7LJH2
- cgGg==
-X-Gm-Message-State: AOJu0Yw0ZImi3hu5JzzEcSvO3ME5j4uH3SvqUZLVWXsKJPcKDBJHAaVK
- jFNINzoVLAWY4pO71ZoM6+4HNXSMhxsRVL+z+NN+8qhVq9W6qFaAVVSp
-X-Gm-Gg: ASbGncv1dZLtPTx0YUW7TZGaRg34IC65NoGMqcOUJ/QiuhROtxCrQdyJmS5NpVj20TT
- Uz+D6r8XWp4G19JV83XrSqmAbAjoTxUZMFV5tW6Y1DkILlCfibugzIaO7KIfhwFSdZDaRtvaVJK
- VTPs3wdeQaWkIYDpXiCdpVJKx3t84NUZI204wxyzZn5b+5pk5+K9UlO9EZUhRx8ksWJjBtDVKp9
- KWh+2da0dpW5xzpBEfg2fl1Qijvn+vCAMhX87cjWpE0JgNMyIOQc7N2ChDvDvtHRU94T/bNkbNj
- L7Ijld98z4pODxTN08D77D4ITgSYOqMAT6O9PKXj5mJ3nxpy785/Bo/c6vF4Ot3D6M4bg5Pz0AW
- /PqEkAzpXJwL1NA==
-X-Google-Smtp-Source: AGHT+IGDV9Ps9NeK/SB4EW4ykAARWtRhz8WmSPPAY6uM70gIYc6gCjsbi20+8L3c0edQNKkq6OyPDw==
-X-Received: by 2002:a17:907:3f95:b0:afe:677e:a61d with SMTP id
- a640c23a62f3a-b01d8a32731mr655101666b.6.1756717242659; 
- Mon, 01 Sep 2025 02:00:42 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1756717244; x=1757322044;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=kSMMfpsNgiLfAFrAc+gdlRH9sEDPCLbgyUapSOqkMjA=;
+ b=nHafahWviB/wdVKxXXU/hZ1zHTfvFu7T4xMK0dwD3MolJOQN8q0V9BQeBlCqggXkYb
+ j4J7D47jmwbAzDsmogvXCFavDrK7oUjxg7FoYbRHqlrk9ukvB77gDr8LkpVfEp/F7GhM
+ f9S4ndNLyC7Q0DqQzpv0BQiCIWA1tVg2mRAq3YCc/VlbhFo+Hp03s53siKAe5WTNZX3T
+ WHiViHZB1TZBKKTAqetExsM2uayb+06OIXGvAgbhNICUQsCMqlcHMc6ffWUroOQLXIJQ
+ OfraDuovqpZhxS1FMPiyzxX1h803EKcRHPXfJBLglZHclWLdrHH+W9i5rm7gP7lcUr5F
+ gynA==
+X-Gm-Message-State: AOJu0Yx6YBLRI7v3Pz/ZAUr3z4NHSPEi4jts9/MlvjF21lEdNPRkk4M/
+ 4EVH86CrCg3lzGmkPXTiG/+JGuszOarX65tCvAWETULOn8YdHv2J5v+G
+X-Gm-Gg: ASbGnctrgR3mfX09b/s/uH42HGjADkCYCXryoZtp39j5KvyqGs7LaUc8pTrWTiuW3ym
+ VKkpivkbFmXHtT80Yaf8N9ygAtZACN7Tqxo76vj5LldYCo808avTNc11TBWQo825fUdwSeyVZ9f
+ Bi5KocEaeLtJFQVM7blWTHQxeWtz3YZ2AdhwNLLip+FVCV/yG/rCebxW/qVmk54/0fGNoWPvbix
+ 2uQ3TIkaruJ+5jJBTNmLAh39bQdXXhRibFQj2pbaca8KGgsVM4mc1pq/sm9pJfVlq8UKjx9l7kr
+ CmxyJQwqJEhvbndcqXMFHFXfYsRQslr95dQlPpbKH4FPt3FCoz66lYox8H5CogIno7GMfy/6Fz0
+ 5RYBOCbAkRelc/UgMxWIxG/Nh
+X-Google-Smtp-Source: AGHT+IGLZseQ8uUrZ7dRe+SZxplWHx2t3GT5+LDhRdgZTPm1aDWM6pehVfDpsUN6T/SEf4riSQ6yPQ==
+X-Received: by 2002:a17:907:e916:b0:afe:ae6c:411c with SMTP id
+ a640c23a62f3a-b01f2113c64mr628381866b.64.1756717244330; 
+ Mon, 01 Sep 2025 02:00:44 -0700 (PDT)
 Received: from xeon.. ([188.163.112.70]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b0428f88a61sm215152566b.70.2025.09.01.02.00.41
+ a640c23a62f3a-b0428f88a61sm215152566b.70.2025.09.01.02.00.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 02:00:41 -0700 (PDT)
+ Mon, 01 Sep 2025 02:00:43 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
  Tom Rini <trini@konsulko.com>, Ion Agorria <ion@agorria.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 0/2] Tegra20: sl101: fix Hall sensor behavior
-Date: Mon,  1 Sep 2025 12:00:17 +0300
-Message-ID: <20250901090019.11930-1-clamor95@gmail.com>
+Subject: [PATCH v1 1/2] ARM: tegra20: transformer: fix Hall sensor behavior
+Date: Mon,  1 Sep 2025 12:00:18 +0300
+Message-ID: <20250901090019.11930-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250901090019.11930-1-clamor95@gmail.com>
+References: <20250901090019.11930-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,19 +102,88 @@ TF101 or TF101G, it is used to detect if keyboard slider is out. To address
 this, lets move Lid sensor switch into TF101/G trees and add Tablet mode
 switch into SL101 tree.
 
-Svyatoslav Ryhel (2):
-  ARM: tegra20: transformer: fix Hall sensor behavior
-  board: transformer-t20: add separate env for SL101
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+---
+ arch/arm/dts/tegra20-asus-sl101.dts        | 10 ++++++++++
+ arch/arm/dts/tegra20-asus-tf101.dts        | 10 ++++++++++
+ arch/arm/dts/tegra20-asus-tf101g.dts       | 10 ++++++++++
+ arch/arm/dts/tegra20-asus-transformer.dtsi |  6 ------
+ 4 files changed, 30 insertions(+), 6 deletions(-)
 
- arch/arm/dts/tegra20-asus-sl101.dts             | 10 ++++++++++
- arch/arm/dts/tegra20-asus-tf101.dts             | 10 ++++++++++
- arch/arm/dts/tegra20-asus-tf101g.dts            | 10 ++++++++++
- arch/arm/dts/tegra20-asus-transformer.dtsi      |  6 ------
- board/asus/transformer-t20/configs/sl101.config |  1 +
- board/asus/transformer-t20/sl101.env            | 15 +++++++++++++++
- 6 files changed, 46 insertions(+), 6 deletions(-)
- create mode 100644 board/asus/transformer-t20/sl101.env
-
+diff --git a/arch/arm/dts/tegra20-asus-sl101.dts b/arch/arm/dts/tegra20-asus-sl101.dts
+index b4709c3e9a4..9f78b0febf3 100644
+--- a/arch/arm/dts/tegra20-asus-sl101.dts
++++ b/arch/arm/dts/tegra20-asus-sl101.dts
+@@ -6,4 +6,14 @@
+ / {
+ 	model = "ASUS EeePad Slider SL101";
+ 	compatible = "asus,sl101", "nvidia,tegra20";
++
++	extcon-keys {
++		compatible = "gpio-keys";
++
++		switch-tablet-mode {
++			label = "Tablet Mode";
++			gpios = <&gpio TEGRA_GPIO(S, 4) GPIO_ACTIVE_LOW>;
++			linux,code = <SW_TABLET_MODE>;
++		};
++	};
+ };
+diff --git a/arch/arm/dts/tegra20-asus-tf101.dts b/arch/arm/dts/tegra20-asus-tf101.dts
+index 7c734fb5b19..03ba78c5dc2 100644
+--- a/arch/arm/dts/tegra20-asus-tf101.dts
++++ b/arch/arm/dts/tegra20-asus-tf101.dts
+@@ -6,4 +6,14 @@
+ / {
+ 	model = "ASUS EeePad Transformer TF101";
+ 	compatible = "asus,tf101", "nvidia,tegra20";
++
++	extcon-keys {
++		compatible = "gpio-keys";
++
++		switch-dock-hall-sensor {
++			label = "Lid sensor";
++			gpios = <&gpio TEGRA_GPIO(S, 4) GPIO_ACTIVE_LOW>;
++			linux,code = <SW_LID>;
++		};
++	};
+ };
+diff --git a/arch/arm/dts/tegra20-asus-tf101g.dts b/arch/arm/dts/tegra20-asus-tf101g.dts
+index f49a358a267..44d5fdfc2b5 100644
+--- a/arch/arm/dts/tegra20-asus-tf101g.dts
++++ b/arch/arm/dts/tegra20-asus-tf101g.dts
+@@ -6,4 +6,14 @@
+ / {
+ 	model = "ASUS EeePad Transformer TF101G";
+ 	compatible = "asus,tf101g", "nvidia,tegra20";
++
++	extcon-keys {
++		compatible = "gpio-keys";
++
++		switch-dock-hall-sensor {
++			label = "Lid sensor";
++			gpios = <&gpio TEGRA_GPIO(S, 4) GPIO_ACTIVE_LOW>;
++			linux,code = <SW_LID>;
++		};
++	};
+ };
+diff --git a/arch/arm/dts/tegra20-asus-transformer.dtsi b/arch/arm/dts/tegra20-asus-transformer.dtsi
+index 61b1cea6e90..df078a6fcdc 100644
+--- a/arch/arm/dts/tegra20-asus-transformer.dtsi
++++ b/arch/arm/dts/tegra20-asus-transformer.dtsi
+@@ -497,12 +497,6 @@
+ 			gpios = <&gpio TEGRA_GPIO(Q, 5) GPIO_ACTIVE_LOW>;
+ 			linux,code = <KEY_UP>;
+ 		};
+-
+-		switch-dock-hall-sensor {
+-			label = "Lid sensor";
+-			gpios = <&gpio TEGRA_GPIO(S, 4) GPIO_ACTIVE_LOW>;
+-			linux,code = <SW_LID>;
+-		};
+ 	};
+ 
+ 	panel: panel {
 -- 
 2.48.1
 
