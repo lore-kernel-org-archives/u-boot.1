@@ -4,99 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 202C8CA0FFF
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 15:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0EA4CA0FF0
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 15:48:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F7CB83965;
-	Mon,  1 Sep 2025 17:17:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id E652B83990;
+	Mon,  1 Sep 2025 17:48:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VkrrXNWV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pdhMXP/f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D56B7839F3; Mon,  1 Sep 2025 17:17:47 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9FA60839F3; Mon,  1 Sep 2025 17:48:19 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6D2A831B4
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 17:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 343AE83965
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 17:48:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 6CA7F3F284
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 15:17:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1756739865;
- bh=Vm8K/xrI0NjNXkRHzjgBkT4FxnD19BMYWfAppajUhwo=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=VkrrXNWVihgO6rhUOMMcBv+3DBMVYesyKtHbHFpbKXdKgO7H6esZJcvh3jMMyCuu4
- HQ/EETf3gapzuaf0yB/7keueXglVaTDhGMQOoPjOhg/GCgQimnGejnLz/cTIb1nA1m
- ETk+SlJd1Ocefpvh0pSKir2gxHcVsXBZGZPLapObTTaugPTYIqbJMS+U9w3UYzJ0j0
- K13LQeQEj/69N9W7TlbZpJgZ8RridpP6F8hpH1hcTlSj3IltpLbhFzUbG4wH8VIIUs
- qIZqXxo6w5Eh16y/P9o7Ry5nlVbQVM+1SAXr3qLmJMYCTJCkUSaciuLoHtGtBpFmFO
- S0NwAXunDAEBA==
-Received: by mail-wm1-f70.google.com with SMTP id
- 5b1f17b1804b1-45b8af0b8deso7557465e9.0
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 08:17:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-61e110cbcd0so838384eaf.3
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 08:48:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1756741696; x=1757346496; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=j7/Rs1KmeH+/Et+YMITHYJj5hbIJxj8+GS6V3iJAf9k=;
+ b=pdhMXP/ftUnT5/MOUllWwcf68Vs0ehpAgSIRAFHNRPJjq6mEOa1kXbZvWEFuJLf7oK
+ Cx/L3yX5q75LBMFTG42VjRjM4kmRXOBQNkEmhL0UMYP2gDnKdhNEs/EdM9feGJaUgYym
+ j4Yve7vUjkiv8SGT5DClXkSKAtJI6CxeVxQ78=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756739865; x=1757344665;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Vm8K/xrI0NjNXkRHzjgBkT4FxnD19BMYWfAppajUhwo=;
- b=gSZF714//QI+Gf3KpYEe0d8jg9uPUaaTJdLl3t3joSmW8TvE9gFcDCkLBv7p6kEyn0
- PtadxNp7GHsA6/XJzy0vsIg9AIc7KHgxeaJqG+saf0A0x1G6AVQXd0/5tDzkdmLO/ruo
- /zykX3ug4C8FxC+zdmq+yrYfYZ2s7HBNXvi1lzTGoIUta0ajFOg6y8XX7UXL1jtf7qU4
- z8eB4YYJFjqAnGakToSNHM72NvTWZqe2vMqFdnlRqaytAiqv0tupN5RDkagDEvSZE1j/
- PeBqNXDddBbve7A4m68cEUnuLVs9h/osaRvVFVV3ux716rYMESrOsBRtOWU1P8GC7TxP
- JVJg==
+ d=1e100.net; s=20230601; t=1756741696; x=1757346496;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=j7/Rs1KmeH+/Et+YMITHYJj5hbIJxj8+GS6V3iJAf9k=;
+ b=AOjkaab8KxT+fPLgUzKJYDJUiL8JSkahk3khwzfdkj4WCXAEM02PsLx9NG0n+N7QnE
+ 7+Zljip9S4kYnXNi7EkSWmwJ9RugEp5hf3l+RS1qmn7dVgn6fMRcN+5G9cr1IWOpcgEn
+ 1XOEajH08685M86mxRjWjgG+xSg23krt/vyi2Wxu/dP6Ag5pdGmNnEZCMUUBTPDw/j4Q
+ D8a8lKlCUKBMN9MUeSS1B61qzM5HsBvCrgKcnTuDcK2oG+PL1EjV2sXEuQ14MoYZFjkh
+ ylvtZtnx1Kf586z7izd9BSKufeDH+bMSl112Idq+3/YQlaMdyROu5CoLn2/DNRzojmNS
+ sPSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLnvKCjgy8yMiLTzxKQfWtZkpOfhjZeiuswABss/5ElOqkyWWzmVKUg2xeaW6fCMVjXvISoFw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwaPq/33CYkkl84IOCwUPfQkF+HrxidGIyn92sit0n0QjeqN5IX
- VuWp//mUtcCPzV6DJymLVH87D1GqEJ4GfLjM89bT7kUoIXOa98FluDMEeUPum1ICFeTLeRoMGng
- T/4ZqbqKOx8ML6t43mgZI5PCgz9xzaULu008Ps9KfI5HORSzOpV1TUKTFYFcc1BYVjEfKk7s=
-X-Gm-Gg: ASbGncsvHcBggc6cZXG941KNIEIXxgqT2rla3K+uDPvmyP8YRoixTD0MUMPbm19DifE
- cKM/4jiJC5fvkN5FylTvBPzQooHlP0QV/YH8UwHPTcoQImCgF8LgbDq0CJrO8xJF6hGJy9FrfLn
- EbzjJNoZAlzmpBHvZ7YuBIwhFfnQVzS3PWr8zaup3C4hcedAgihsqHU3oAlV9DRO+dhTSfYp84B
- C8BRbSUP3zYksZisNKWhv89b8OR/ut0nBusOtGnfNCbJPPvu+mPUkaVEs675ChiYeUvS1IasHA6
- RyXuv6yjbuQcyujIH7jCnu21LSNrxkk/OHup+U4ZMkqNI7ScB2BeHoMOALzNpQpsVQ+bJ2wjvhI
- 0IcdZwDTEkLNHSUgZx8OBQThwhr6RPJw=
-X-Received: by 2002:a05:600c:4452:b0:455:f187:6203 with SMTP id
- 5b1f17b1804b1-45b855983cfmr58127625e9.27.1756739864893; 
- Mon, 01 Sep 2025 08:17:44 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE/+2wAn+lwmtkkSHnsMZ/9atH4naZUL7CflOTfU7eOonH9pyP9q/2Qduv3y++h+AzXU0OUaw==
-X-Received: by 2002:a05:600c:4452:b0:455:f187:6203 with SMTP id
- 5b1f17b1804b1-45b855983cfmr58127415e9.27.1756739864503; 
- Mon, 01 Sep 2025 08:17:44 -0700 (PDT)
-Received: from workstation5 (ip-005-147-080-091.um06.pools.vodafone-ip.de.
- [5.147.80.91]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b838ddbe5sm137175855e9.16.2025.09.01.08.17.43
+ AJvYcCUmhCIsZUPTAgiEXE0VYa7qCsSNqhcufFUz33TLcQk3kIVLBroO49H794o7ZisvflAsAGik4wY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJjrusPyMWfI04K3uOYpkUMXBXJfmGK1TmyDluPClB6QbFqTq0
+ Dy3Cw8afHfqIPMvxXUWLVbb/+33E4zOMT2YoE76ONXL/sDJOUoJH0g9myb9871ZP5ZM=
+X-Gm-Gg: ASbGncupu0ufdO7KzOq+5om+i7VXtgP9wIapvWxLaaq/GD3+noZl74xMvgE9KiNmdVF
+ Fu77oCFxSEa3r6sI9VkqjCPjI+sN5ZhcxzZm/pZJRvPojsfHZFcF08Hzf37k0X6f1OJ7MdrspMD
+ 9072W+EDfE7E8CglNPolisxTQM6Ou3KIAOiL528biy2bPgu0zZHGZ7FHaBbez/0GETu3nz0A2pg
+ WhTVtMzYA3MMyblIuFtK0mdu3hsnlUH/ht0ZXzlcL3cc1GiQo+6bb8GfOMwBRAt8zGq/3aJ+/oS
+ 017mR2XwpKVgQAwHUYweEEi+MkiKwVgbs4AqmZVofcXzixz34wTbWowuXVUL+NNeXjgw5sFXGm2
+ qXda9+x6v6xRXLqQ3TqL8enrUkXgA6qTSYAlV1Y5BlGSXX/TBRAND7objvzDa5yACYpA=
+X-Google-Smtp-Source: AGHT+IGlLRBmvgv0OuZKBjikCNQIBdjhwzTiFHN0k8p/iU2p9e+P+ZaVBD5vkCdurDLoFkYay8shPw==
+X-Received: by 2002:a05:6808:1923:b0:435:7863:9a85 with SMTP id
+ 5614622812f47-437f7d74d66mr4584041b6e.26.1756741695703; 
+ Mon, 01 Sep 2025 08:48:15 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-43800023229sm932116b6e.21.2025.09.01.08.48.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 08:17:43 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Harrison Mutai <harrison.mutai@arm.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] bloblist: use correct types for physical addresses
-Date: Mon,  1 Sep 2025 17:16:35 +0200
-Message-ID: <20250901151635.654928-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.50.1
+ Mon, 01 Sep 2025 08:48:14 -0700 (PDT)
+Date: Mon, 1 Sep 2025 09:48:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anurag Dutta <a-dutta@ti.com>
+Cc: n-francis@ti.com, u-kumar1@ti.com, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/4] AM57 boot fixes
+Message-ID: <20250901154812.GB124814@bill-the-cat>
+References: <20250901061659.986164-1-a-dutta@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="20T64v2Qe014HPU/"
+Content-Disposition: inline
+In-Reply-To: <20250901061659.986164-1-a-dutta@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,29 +97,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is expected that bloblists are stored in high memory beyond 2 GiB.
-We must not use int as data type for these addresses but phys_addr_t.
 
-Fixes: f9ef9fb033d5 ("bloblist: Handle alignment with a void entry")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- common/bloblist.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+--20T64v2Qe014HPU/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 6e4f020d7c4..d5fa62249a9 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -149,7 +149,8 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
- {
- 	struct bloblist_hdr *hdr = gd->bloblist;
- 	struct bloblist_rec *rec;
--	int data_start, aligned_start, new_alloced;
-+	phys_addr_t data_start, aligned_start;
-+	phys_size_t new_alloced;
- 
- 	if (!align_log2)
- 		align_log2 = BLOBLIST_BLOB_ALIGN_LOG2;
--- 
-2.50.1
+On Mon, Sep 01, 2025 at 11:46:55AM +0530, Anurag Dutta wrote:
 
+> Hi all
+> This patch series migrates from .h to .env format for am57xx/dra7xx.
+> Also, we do relevant changes so that the fdtfile can be set from C code.
+>=20
+> logs : https://gist.github.com/anuragdutta731/82560cc9bc958ca70a25a95a703=
+1eeea
+>=20
+> Changelog: v1:
+> 1. Converted to plain text environment for am57 and dra7
+> 2. Added dra7 support as well
+>=20
+> Link to v1:
+> https://lore.kernel.org/all/20250425053431.1622267-1-a-dutta@ti.com/
+
+Is this a fixes that needs to come in for v2025.10 or a cleanup for
+v2026.01? Thanks.
+
+--=20
+Tom
+
+--20T64v2Qe014HPU/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLXAOQAKCRAr4qD1Cr/k
+CikyAP4jOarUFYLEDxk65H4aKH1HoQixLNk5GYwGfHlZDkuzDgD/WksXiRwQxRBW
+yNrIAINu0Qo6/OCIi8aHUElRqeNBtAE=
+=tOX1
+-----END PGP SIGNATURE-----
+
+--20T64v2Qe014HPU/--
