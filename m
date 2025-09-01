@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 822E1CA0FFD
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 09:01:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F245CA0FFD
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 09:29:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32194839AC;
-	Mon,  1 Sep 2025 11:00:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BC0FA83965;
+	Mon,  1 Sep 2025 11:29:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TmmbHi0n";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H3IVD4E7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF4BF833E9; Mon,  1 Sep 2025 11:00:48 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 8054483977; Mon,  1 Sep 2025 11:29:17 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2F7F8399C
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 11:00:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D4A6833AD
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 11:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b043a33b060so45567566b.1
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 02:00:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=promsoft@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-336c2194a65so15729591fa.2
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 02:29:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756717246; x=1757322046; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/TiN0WCYaQau3pmUs0C8QsaWA69p/U+KnHLZC8ERWuk=;
- b=TmmbHi0nzBQdKkHy2Rfog1PQrlRzYrpzzclFEijzmF1B3c1pnO2fiSDN0ZM3487Msr
- 7IvZtRj06BVvGKqJqy9Qfayu30evD9oQkOJ2HgGd7v2qqPht5QCuIWTfMPqZQF4LeQZb
- 8Ftc1PZkHcBj54HmP3ak0jTriahWxTuhAZrrcLxIGAAukkckUai4PmIe6etQIuAuomBx
- /pEb/DGBHPJh5q5LOcHweCmpY9eCnbkjukCIcKzWxcN0XG/O5Jm8rwuchB8sRi30YwVv
- Depmlkc5GEC2MxME4JaDPQH1aiX3RGhS+ujFrHDIJIHp42JR7ib50VW7mqqyixLkA98O
- Z3Gg==
+ d=gmail.com; s=20230601; t=1756718955; x=1757323755; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=r30i74moFDbqFvKQYbMiE0j6/eOJ4ax4VlbuMCUDTj8=;
+ b=H3IVD4E7Ca2duEvDaBIIZxOemFOHhyV6vospCEqal8bVt4DqtgHtaBZNPxEw6Jn1cQ
+ I7Mti2FicfsaXvVgnmAqRolpIx0eVxZwFYbDeElNGRXHXoEJxRuvDbsCJiRwfct2ihR1
+ s+Q6bKCONeJg4qbvQrr5NEwG22DcRsO17PvvUIzpSQu9r0g0Cn44B571A+yzoxajlCTk
+ IeOxfxX4YyWTdZn0dBwkM1H5NRDEOkQUb3aLchpaT6wDIDOvuJkIUKia1Skyu9fvCvEE
+ T3PwdILiU0fNZWkXt6er52bV0SiakNoBUUGMS8p1xQRLQ/Yw5uyoxfjhtmsUhl28ubjE
+ 9etw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756717246; x=1757322046;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=/TiN0WCYaQau3pmUs0C8QsaWA69p/U+KnHLZC8ERWuk=;
- b=vS+3feL8KkDEu7+zaAdHNeg2s9TcprZQwa1qtlZrq8fKUb6BWacVN9Bgfwfgi997hB
- V+nqit+xAT9AMtD6HkE5Dr2d45M1St8YmW1v1GraJ2CmBC7K+kF3unaTq8AwsIEikJdD
- tdQMqn2LORArpQbHR+6ENRjhM1cYrPs/ucPgHJYhCOgin77OQKKp+yNhWq5Z8kDIHw8N
- ES6kJJvTNf8sUUdodWQ9o0TBtXUpXcmZL32tMnqD+Pq6Tg4aWcKzOGfhqxHTauZGqSiU
- LOgsCqlLDFr2lCJnXTffNbpd6mYDtFn/6HUIN9tNOZWZmo/MRlQLwtRRq1qBw9tpV+wo
- lVWw==
-X-Gm-Message-State: AOJu0Ywck9tYS6ZRQoLRo+cdkW5tCLlFFhql8745zkuYplrgGH4aAKc9
- jiM5hqJqAuxYVuBDU3tCL+oZGq3Ld33+vJITB9vkVUhruLChE7zvyH1O
-X-Gm-Gg: ASbGncsZkiRl5ZKfeGFgQPQcHujDIzX5AhPs2OV7gMfog/J9a5gVW5sJXVBcfQr/s72
- /y5ziVvrpAq+LW2laeryCfPD03PtxQvVEew/6dnaBwKW0KPn8okaiCwV1cDXI8XMu4xgr6qdkDy
- n0PgDXRwsVG3q96ggrTNXXj9mcFROHiFWi8EdWOVjRqFOikv9zi9zJPpWvdrnrwfJlLnQr2Z4F7
- nUjb5CC6d8MjLbV7siocl65AEuOG38AnJ46ICV7vPVSsXitY/4B2tIXZT2o3f+/C7PWoG6uAlDl
- 4g2/Up3mpVIIrlZxjD5igyzIklZGsZzQjSARxTZlFMOxFMBOdh+2pf8EbL2+TszQzwrW4EJt4fP
- uEvmm8sVXYD+/6g==
-X-Google-Smtp-Source: AGHT+IF1y8iRe7bPzRiJOP1LLTuWTYtBC7JbztjWUQdd4ObK9cVt9ToIZ3reUVPKLn+B48fW3nbdMg==
-X-Received: by 2002:a17:906:e86:b0:b04:155a:c139 with SMTP id
- a640c23a62f3a-b04155ac1fdmr379693366b.4.1756717245861; 
- Mon, 01 Sep 2025 02:00:45 -0700 (PDT)
-Received: from xeon.. ([188.163.112.70]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b0428f88a61sm215152566b.70.2025.09.01.02.00.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 02:00:44 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Thierry Reding <treding@nvidia.com>,
- Tom Rini <trini@konsulko.com>, Ion Agorria <ion@agorria.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/2] board: transformer-t20: add separate env for SL101
-Date: Mon,  1 Sep 2025 12:00:19 +0300
-Message-ID: <20250901090019.11930-3-clamor95@gmail.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250901090019.11930-1-clamor95@gmail.com>
-References: <20250901090019.11930-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1756718955; x=1757323755;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=r30i74moFDbqFvKQYbMiE0j6/eOJ4ax4VlbuMCUDTj8=;
+ b=u20IwEy7dSvMus0U/rlDZ9z4sJXvvltog7VSysZxQz0pKdmp+RbNSpOx5/d6G8GvUT
+ AGM9K5jqRlaxWpW4ghCbfwmq2pMG0WOiXwkIsubqE+Z2shL7wWNXGJE38wNm63ChJLgD
+ /ym9+tUg4aMGkPjoU8nEumTcF405AhLJ/JGa3xLepab2TMg/SxPssOnbTy5qC06NUdT6
+ 56f3EW5SK6kJiXKaSHJqDDJ96P5Mf5T2njox0GSIfNNSrPZeSRQphfQa1zZIO/QgUDEw
+ fmSZD5uhyVh+HMGMCzTUeMAMqPc7+n7jBeZiLoQu1E6ZL4FksjojB6bYd14fqDCiql5D
+ 452Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEtHCBmcleP+JLmUixpZGfKrLxxbJxWk4kSyApTjVZ0bdmW75kVFiY/jOVmXJDupSVcyqc0W0=@lists.denx.de
+X-Gm-Message-State: AOJu0YylVWOhzF+DNeix/c6zGuWgVqc9CsNVU1mBFP5rwoDTIBtiW7fP
+ +DWMiFLf5g+vQ1266JQ8B+vy+pZZ4ZJ33nLlmCfxg792QXSkfkSfM9mtn2OCGAENxHR0QxUBWyA
+ FIMdlKQYuVt/V9lxBUa9Jtxl+dynL27Y=
+X-Gm-Gg: ASbGncsNdoURs8mxd5n78WqfNJ8XPva+pNUywelEHm7zQgM88RrsalwfcHrC6fWVSdn
+ jA0vRoufCh/lIHsMmx4bO3+HIyQbVL3F3REqGM2jzCOhiV5Tl0/o41zIr48MENOfl9e2keQzZLp
+ EXqVzMXvQuZEtbiDJY35TnSXy91ENDhpBgs2h5Hu6ycvHzHNQ26SL4hmrSkLpZ3KiAFbPsdsfcw
+ i05+lM5pK1BGHMBDWS+t7rn7MiPF8cDv7bsCLnG
+X-Google-Smtp-Source: AGHT+IE834s+nduu+MvXwLw67tbcDR0Y/Qpj2GLS0AmJo6vT8SOFHzJHqLxxH2EtFybnQAcHsW8EWHWkMCUvRnReatQ=
+X-Received: by 2002:a2e:a590:0:b0:336:e32f:7a4d with SMTP id
+ 38308e7fff4ca-336e32f8084mr10814071fa.5.1756718953913; Mon, 01 Sep 2025
+ 02:29:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250723-clk_exynos-v1-1-fcedf6be444b@linaro.org>
+ <da609352-e4de-4958-a257-66eb76d801ee@linaro.org>
+In-Reply-To: <da609352-e4de-4958-a257-66eb76d801ee@linaro.org>
+From: Minkyu Kang <promsoft@gmail.com>
+Date: Mon, 1 Sep 2025 18:29:01 +0900
+X-Gm-Features: Ac12FXx28Qt1Htz6ne2mIb7vbmwDL9mfyRVjoi2E_hWsnwmf0gJ1HbOI9FGOJp4
+Message-ID: <CALrBrZ30j0k72ZnSR=wgQYMg5_BxET=xDpd74oT5rGO3h0WytQ@mail.gmail.com>
+Subject: Re: [PATCH] clk: exynos: Fix always true test
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,44 +96,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SL101 unlike TF101/G has no Lid sensor, so lets add a separate env for
-SL101 without Lid sensor used.
+Hi,
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- board/asus/transformer-t20/configs/sl101.config |  1 +
- board/asus/transformer-t20/sl101.env            | 15 +++++++++++++++
- 2 files changed, 16 insertions(+)
- create mode 100644 board/asus/transformer-t20/sl101.env
 
-diff --git a/board/asus/transformer-t20/configs/sl101.config b/board/asus/transformer-t20/configs/sl101.config
-index 4f639e1b412..87c6f7a216d 100644
---- a/board/asus/transformer-t20/configs/sl101.config
-+++ b/board/asus/transformer-t20/configs/sl101.config
-@@ -1 +1,2 @@
-+CONFIG_ENV_SOURCE_FILE="sl101"
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-asus-sl101"
-diff --git a/board/asus/transformer-t20/sl101.env b/board/asus/transformer-t20/sl101.env
-new file mode 100644
-index 00000000000..f2bf298a997
---- /dev/null
-+++ b/board/asus/transformer-t20/sl101.env
-@@ -0,0 +1,15 @@
-+#include <env/nvidia/prod_upd.env>
-+
-+button_cmd_0_name=Volume Down
-+button_cmd_0=bootmenu
-+partitions=name=emmc,start=0,size=-,uuid=${uuid_gpt_rootfs}
-+boot_dev=1
-+
-+bootmenu_0=mount internal storage=usb start && ums 0 mmc 0; bootmenu
-+bootmenu_1=mount external storage=usb start && ums 0 mmc 1; bootmenu
-+bootmenu_2=fastboot=echo Starting Fastboot protocol ...; fastboot usb 0; bootmenu
-+bootmenu_3=update bootloader=run flash_uboot
-+bootmenu_4=reboot RCM=enterrcm
-+bootmenu_5=reboot=reset
-+bootmenu_6=power off=poweroff
-+bootmenu_delay=-1
--- 
-2.48.1
+2025=EB=85=84 8=EC=9B=94 8=EC=9D=BC (=EA=B8=88) 00:28, Andrew Goodbody <and=
+rew.goodbody@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
+> On 23/07/2025 17:04, Andrew Goodbody wrote:
+> > In exynos7420_peric1_get_rate the variable ret is declared as an
+> > 'unsigned int' but is then used to receive the return value of
+> > clk_get_by_index which returns an int. The value of ret is then tested
+> > for being less than 0 which will always fail for an unsigned variable.
+> > Fix this by declaring ret as an 'int' so that the test for the error
+> > condition is valid.
+> >
+> > This issue was found by Smatch.
+> >
+> > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> > ---
+> >   drivers/clk/exynos/clk-exynos7420.c | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/clk/exynos/clk-exynos7420.c
+> b/drivers/clk/exynos/clk-exynos7420.c
+> > index 3aa751bf4e4..7de4e688f03 100644
+> > --- a/drivers/clk/exynos/clk-exynos7420.c
+> > +++ b/drivers/clk/exynos/clk-exynos7420.c
+> > @@ -192,7 +192,7 @@ static int exynos7420_clk_top0_probe(struct udevice
+> *dev)
+> >   static ulong exynos7420_peric1_get_rate(struct clk *clk)
+> >   {
+> >       struct clk in_clk;
+> > -     unsigned int ret;
+> > +     int ret;
+> >       unsigned long freq =3D 0;
+> >
+> >       switch (clk->id) {
+> >
+> > ---
+> > base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
+> > change-id: 20250723-clk_exynos-b8ac6765f510
+> >
+> > Best regards,
+>
+> Are there any comments on this patch please?
+
+
+applied to u-boot-samsung.
+
+Thanks.
+Minkyu Kang.
+
+
+>
+> Thanks,
+> Andrew
+>
