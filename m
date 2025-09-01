@@ -4,100 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE52ACA0FF0
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 07:56:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3DBCA0FFD
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 07:56:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C5C1833AD;
-	Mon,  1 Sep 2025 09:56:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C519783977;
+	Mon,  1 Sep 2025 09:56:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jk60HuPl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kRkW09eU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05BA5833AD; Mon,  1 Sep 2025 09:56:28 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 1E08B831B4; Mon,  1 Sep 2025 09:56:36 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BCF8831B4
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 09:56:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BFF88397D
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 09:56:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-45b8b02dd14so4602105e9.1
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 00:56:25 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-45b84c9775cso8281475e9.0
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 00:56:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756713384; x=1757318184; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1756713393; x=1757318193; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=4IkkFhmsk5rz1xAmy9qL8t9MYPOp8fJNmTW3RhGYfz8=;
- b=jk60HuPl4qXQBt15ZUFhCfh+W5ZyUja1L+UEirBVhyurd7xzJ62mhA4L7Cx+zgY4Xl
- Tr0vLEj58Sr2CyF6mqLrvG1r8agAp3wkQhwcEc+7lTN9HSYpOZs26iwDUaC25VaLDpqj
- R2GZSByPqMR5MwqXFDO0089dpwjEcqe1XumGTl2DpERQGUA+k/sUnNNujTNsIYsV9KlP
- 6Qrvs9zv64Tg9maooHzHExUUTXFfHDJmtb+SfLn56YCgFea9AaLiddCEbLrMF3DjbWyQ
- 5O0LzgXW/G2XxDCUjsmcijSLruKxolhvqX4D0dMAMfVnp3WyLcEVCoHZ5K1Te9dZ3yue
- Qnog==
+ :reply-to; bh=oWIDjCHALa/FgUFQRgDOtTgSQeLOGRDmCxXqWlcZVgw=;
+ b=kRkW09eUqtZyxt2aysfDo5FYi0t358WiJnc8hFmiJg+LxFFIoR/GsxMJWAYNz/s8md
+ 4nMjhdYW33ENR7BexQ7iYB/wxip0lRM7ciwRz3JjDmr0Z2p8QGMZBFO5Q09UXebDeoTI
+ QEiOz/ZfjxwLRJANB+7vHgjr8G+NX51Q2O8uaaEZPuX5aI9UhKOkPPzRZP4/CKrNRA1T
+ 77ftSx3UzAm7VWYgQsnWKDBg0pUzNE11GOQqSmQ4VTgpolTopshwlmzEwFvMTZ6gY4Gf
+ FB5RIGRfardmu7bEpqjLtZyDEtXZSmaVEvH+W9S2j0TDDxfxw06g28cRXvmLU/8iSR8z
+ 2VsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756713384; x=1757318184;
+ d=1e100.net; s=20230601; t=1756713393; x=1757318193;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=4IkkFhmsk5rz1xAmy9qL8t9MYPOp8fJNmTW3RhGYfz8=;
- b=QwuNYjgzYrfDRfqVB1ua7UlDKOVN4aJTNJ0K7k58mrr8yxdSDA8g+yyiae8AoyUJRV
- C0F7zzjXx9JTMbkXH6FsgHZ0l0Jpu8FGynYppFZpeifSOBkXGMd2LpWJJxS/rIwsvfG7
- b81GY9SHHq+HYC+JF+UDBKku1IuhTudzH6otcIp7qrZVE9P8w4bZj6h7lwlpLnzjPkDa
- mgifZ5eyqk2ibMcbh3WGcpJAHHkr98hc/B+nCxcTZiWCeuBE+gPBo7bHZb4cuO3vr+h9
- JyP1CyR7YQkL7X/iZ1hOQau+ZvDjSO/sTQMA3pQSaVdXGtbh3uQPphMUWArWpiTnBiCj
- M5AA==
+ bh=oWIDjCHALa/FgUFQRgDOtTgSQeLOGRDmCxXqWlcZVgw=;
+ b=HkOGBRmzo89Gv7PkzhhF9o/6HpnVRChzRoeleROigr8m1ashJKvYoBw+PGPIpUkyEk
+ LIwrSWj3KoyH9PRlpNiKWXl/feqmUGr1uxhut3E794+JUQ69Y+7AH4FUMPzz91t3Isid
+ XxwUasMxMcdYLFgvaZu9MHCnI7WP7/we3QbeRvu0tiEa3p6SAA1xCyTF44ZygYT5Xluv
+ lC7mZLgU3Vb9iM5+mZn1D7a4M8f9t0ONQHd+j2y4Rqv0iG2tpMyJDQaVKc0AINy2SgY1
+ tgSDEiaRpnemm0OBaJhrBWNA7R2ItmMzRD/vOsyOh0NauU73ZRZlTIKCk1z2MI3yU+hH
+ OAXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW954cDLdxxJHfHzVviS/vYgG/iM8rtfWTymLRgQSZ+q/yv8JuNAATjI0CAo6r6PtYKRpx63z0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy77OA/wdK4bQstRvhpl5n8Anqzvv0AxmqZzDjfp/RIlzGyLoFM
- NgVKjipkGouaokDGwCC0PCWWjZXfvaF92CV9UV/sL40srMmqdql5hTFiH4ubCbH8vz0=
-X-Gm-Gg: ASbGncsxWgDxS2Yfr/x6JGaHg+Q6m22UTqFKAlZNl2bGloUHQDO+svT29cZTMBSXkMI
- qD2O+HMhwDHax4o8xei2EPLzMYBlQqI2qJEcdYVsz10Dj7lcGpo3USjknKvg0W+eoLOF9Z95DS/
- nOPVwUHAAS+ocK3Ygp9wuNL84PynhsGb7qJrN/3iN8okVLpZMo8X1eF6ukXtFgJTraNqEQLqF1S
- OqW9xKUdBD28BZ5hD5cX9OjO+KFk9mI6pRcRIgpry9l3cIKYCNIqbaX9C2IHFlhycPfhe+J0WbL
- wIrQJ195EaEfV7T5FcUXhg7a2bnKfJOAlqdLiYIq/RxBwIy4SYOXGcrGv8dcJcMuP8cs1QYE4/8
- +ESezWfDQqMEEX09AwKRuwscdT5vdEMrgGDKp9XMzx8WUnyb1eNmG9cDnsl+NPg2FsT5I2zpuPs
- yModg5UV4=
-X-Google-Smtp-Source: AGHT+IFL9juVnCZ7OPFP1T5K2rE6ggdFwiKJbRsGqqO0dxyKp1SnCc+R3WFjg3Bdk1bykjxnwG/xAw==
-X-Received: by 2002:a05:600c:1387:b0:45b:615c:cd2 with SMTP id
- 5b1f17b1804b1-45b85525da3mr64841745e9.8.1756713384320; 
- Mon, 01 Sep 2025 00:56:24 -0700 (PDT)
+ AJvYcCUyNQ6mc65Jv5FlHcCg7Yh3YpJqvE4FYklDB2fTqiuZF5b9m1fwlx/GMjiVS9Y9UkopsI3hLG0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzx+8pKKRJaAF3i9RPSzelGoK4iRq4FQ5vkByafn+bzrB2Th4As
+ fTLeTRD+Sqg9wx7sIakasEc9npilO9ybZcFkzlKKB8WWo7u1pTlJruIVZKSyJc+U4L8=
+X-Gm-Gg: ASbGncsu+VPMKfo0CxaTrim0km7mIx3bJ+8meKr5cmfTjHIacTxTaws9C6GQEL+B0NF
+ 2SJnZ8H/NJ6MDF/FhOkzd9BRMsHTf6oQ6T9V8gXRZXyCoBqOT/RoIKRG/+LTmHnPfn8tnUfBKjl
+ SQjPdCHCDCDLTy6QQ4qIqL5Yn9oGyyZyNxt8JM0xqHp759hQ73Co0y+I2Wtdw2efKlHJ0vrlstW
+ /qIyJ9OrOYEz2ZEeD5AgYPX/NyxzuY4CGQiakOM1sWgISqx25DG4CJuOy8H4Wbyg3kigsP1MfjW
+ XfM8dr/r7VNBW7KX5sxOO1G8HPX1ieaEHjYr3NDBA9aUzjHR/4tN7/FVlaYF5W4CfHXQhWhNGGc
+ jf78KajGZBRQCHlgjielXQ8k5wdfD6IqXpztpOd7BZuJjcEwJh4QoqU8LI3Yrzqg7fkERkZ2t
+X-Google-Smtp-Source: AGHT+IHz5Afb1NGLW3O4r+Wj9LE6K8kbgvXrLvcnBAC0j4KRChsxUlS+Q3Dv73PBAMFhZ9/wGOfiWw==
+X-Received: by 2002:a05:6000:288e:b0:3d6:5e37:804e with SMTP id
+ ffacd0b85a97d-3d65e56084cmr2695337f8f.5.1756713392680; 
+ Mon, 01 Sep 2025 00:56:32 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:881c:7d0e:ad0a:d9a?
  ([2a01:e0a:3d9:2080:881c:7d0e:ad0a:d9a])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b814da51esm124755005e9.8.2025.09.01.00.56.23
+ 5b1f17b1804b1-45b7e92a42asm143206255e9.20.2025.09.01.00.56.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Sep 2025 00:56:23 -0700 (PDT)
-Message-ID: <9223b2c7-5318-4f31-9df6-61a0463bc357@linaro.org>
-Date: Mon, 1 Sep 2025 09:56:22 +0200
+ Mon, 01 Sep 2025 00:56:32 -0700 (PDT)
+Message-ID: <d0f14af7-3d0a-45c5-b4c3-e921178fcdf7@linaro.org>
+Date: Mon, 1 Sep 2025 09:56:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/4] phy: qcom-qmp-ufs: Import SM7150 tables from Linux
-To: Jens Reidel <adrian@mainlining.org>,
- Casey Connolly <casey.connolly@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Julius Lehmann <lehmanju@devpi.de>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Alexey Minnekhanov <alexeymin@postmarketos.org>
-Cc: Danila Tikhonov <danila@jiaxyga.com>, Luca Weiss <luca@lucaweiss.eu>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250831004602.699953-1-adrian@mainlining.org>
- <20250831004602.699953-4-adrian@mainlining.org>
+Subject: Re: [PATCH 1/2] ufs: Add support for sending UFS attribute requests
+To: Jared McArthur <j-mcarthur@ti.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Tom Rini <trini@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>
+References: <20250827185056.954640-1-j-mcarthur@ti.com>
+ <20250827185056.954640-2-j-mcarthur@ti.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -124,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250831004602.699953-4-adrian@mainlining.org>
+In-Reply-To: <20250827185056.954640-2-j-mcarthur@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -144,102 +132,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 31/08/2025 02:46, Jens Reidel wrote:
-> From: Danila Tikhonov <danila@jiaxyga.com>
+On 27/08/2025 20:50, Jared McArthur wrote:
+> Some UFS attributes must be set before a UFS device is initialized.
+> Add ufshcd_query_attr and ufshcd_query_attr_retry to send UFS
+> attribute requests.
 > 
-> Import the init sequence for the UFS on SM7150.
+> Taken from Linux Kernel v6.17 (drivers/ufs/core/ufshcd.c) and ported
+> to U-Boot.
 > 
-> Signed-off-by: Danila Tikhonov <danila@jiaxyga.com>
-> Signed-off-by: Jens Reidel <adrian@mainlining.org>
+> Signed-off-by: Jared McArthur <j-mcarthur@ti.com>
 > ---
->   drivers/phy/qcom/phy-qcom-qmp-ufs.c | 61 +++++++++++++++++++++++++++++
->   1 file changed, 61 insertions(+)
+>   drivers/ufs/ufs.c | 95 +++++++++++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 95 insertions(+)
 > 
-> diff --git a/drivers/phy/qcom/phy-qcom-qmp-ufs.c b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> index f3c606847fb..a2a0e226f0c 100644
-> --- a/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> +++ b/drivers/phy/qcom/phy-qcom-qmp-ufs.c
-> @@ -221,6 +221,36 @@ static const struct qmp_ufs_init_tbl sm8150_ufsphy_hs_g4_rx[] = {
->   	QMP_PHY_INIT_CFG(QSERDES_V4_RX_RX_MODE_01_HIGH4, 0x3c),
->   };
+> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> index 91f6ad3bfef..9e67dd86232 100644
+> --- a/drivers/ufs/ufs.c
+> +++ b/drivers/ufs/ufs.c
+> @@ -1107,6 +1107,101 @@ static int ufshcd_query_flag_retry(struct ufs_hba *hba,
+>   	return ret;
+>   }
 >   
-> +static const struct qmp_ufs_init_tbl sm7150_ufsphy_rx[] = {
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_SIGDET_LVL, 0x24),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_SIGDET_CNTRL, 0x0f),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_SIGDET_DEGLITCH_CNTRL, 0x1e),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_INTERFACE_MODE, 0x40),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_FASTLOCK_FO_GAIN, 0x0b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_TERM_BW, 0x5b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL2, 0x06),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL3, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_EQU_ADAPTOR_CNTRL4, 0x1b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_SVS_SO_GAIN_HALF, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_SVS_SO_GAIN_QUARTER, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_SVS_SO_GAIN, 0x04),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_SO_SATURATION_AND_ENABLE, 0x5b),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_PI_CONTROLS, 0x81),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_UCDR_FASTLOCK_COUNT_LOW, 0x80),
-> +	QMP_PHY_INIT_CFG(QSERDES_V3_RX_RX_MODE_00, 0x59),
-> +};
+> +/**
+> + * ufshcd_query_attr - API function for sending attribute requests
+> + * @hba: per-adapter instance
+> + * @opcode: attribute opcode
+> + * @idn: attribute idn to access
+> + * @index: index field
+> + * @selector: selector field
+> + * @attr_val: the attribute value after the query request completes
+> + *
+> + * Return: 0 for success, non-zero in case of failure.
+> + */
+> +int ufshcd_query_attr(struct ufs_hba *hba, enum query_opcode opcode,
+> +		      enum attr_idn idn, u8 index, u8 selector, u32 *attr_val)
+> +{
+> +	struct ufs_query_req *request = NULL;
+> +	struct ufs_query_res *response = NULL;
+> +	int err;
 > +
-> +static const struct qmp_ufs_init_tbl sm7150_ufsphy_pcs[] = {
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_RX_SIGDET_CTRL2, 0x6f),
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_TX_LARGE_AMP_DRV_LVL, 0x0f),
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_TX_SMALL_AMP_DRV_LVL, 0x02),
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_RX_SYM_RESYNC_CTRL, 0x03),
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_TX_MID_TERM_CTRL1, 0x43),
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_RX_SIGDET_CTRL1, 0x0f),
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_RX_MIN_HIBERN8_TIME, 0xff),
-> +	QMP_PHY_INIT_CFG(QPHY_V3_PCS_UFS_MULTI_LANE_CTRL1, 0x02),
-> +};
+> +	if (!attr_val) {
+> +		dev_err(hba->dev,
+> +			"%s: attribute value required for opcode 0x%x\n",
+> +			__func__, opcode);
+> +		return -EINVAL;
+> +	}
 > +
->   static const struct qmp_ufs_init_tbl sm8150_ufsphy_serdes[] = {
->   	QMP_PHY_INIT_CFG(QSERDES_V4_COM_SYSCLK_EN_SEL, 0xd9),
->   	QMP_PHY_INIT_CFG(QSERDES_V4_COM_HSCLK_SEL, 0x11),
-> @@ -1018,6 +1048,36 @@ static const struct qmp_ufs_cfg sm8150_ufsphy_cfg = {
->   	.no_pcs_sw_reset	= false,
->   };
->   
-> +static const struct qmp_ufs_cfg sm7150_ufsphy_cfg = {
-> +	.lanes			= 1,
+> +	ufshcd_init_query(hba, &request, &response, opcode, idn, index, selector);
 > +
-> +	.offsets		= &qmp_ufs_offsets,
+> +	switch (opcode) {
+> +	case UPIU_QUERY_OPCODE_WRITE_ATTR:
+> +		request->query_func = UPIU_QUERY_FUNC_STANDARD_WRITE_REQUEST;
+> +		request->upiu_req.value = cpu_to_be32(*attr_val);
+> +		break;
+> +	case UPIU_QUERY_OPCODE_READ_ATTR:
+> +		request->query_func = UPIU_QUERY_FUNC_STANDARD_READ_REQUEST;
+> +		break;
+> +	default:
+> +		dev_err(hba->dev,
+> +			"%s: Expected query attr opcode but got = 0x%.2x\n",
+> +			__func__, opcode);
+> +		err = -EINVAL;
+> +		goto out;
+> +	}
 > +
-> +	.tbls = {
-> +		.serdes		= sdm845_ufsphy_serdes,
-> +		.serdes_num	= ARRAY_SIZE(sdm845_ufsphy_serdes),
-> +		.tx		= sdm845_ufsphy_tx,
-> +		.tx_num		= ARRAY_SIZE(sdm845_ufsphy_tx),
-> +		.rx		= sm7150_ufsphy_rx,
-> +		.rx_num		= ARRAY_SIZE(sm7150_ufsphy_rx),
-> +		.pcs		= sm7150_ufsphy_pcs,
-> +		.pcs_num	= ARRAY_SIZE(sm7150_ufsphy_pcs),
-> +	},
-> +	.tbls_hs_b = {
-> +		.serdes		= sdm845_ufsphy_hs_b_serdes,
-> +		.serdes_num	= ARRAY_SIZE(sdm845_ufsphy_hs_b_serdes),
-> +	},
-> +	.clk_list		= sdm845_ufs_phy_clk_l,
-> +	.num_clks		= ARRAY_SIZE(sdm845_ufs_phy_clk_l),
-> +	.vreg_list		= qmp_ufs_vreg_l,
-> +	.num_vregs		= ARRAY_SIZE(qmp_ufs_vreg_l),
-> +	.reset_list		= qmp_ufs_reset_l,
-> +	.num_resets		= ARRAY_SIZE(qmp_ufs_reset_l),
-> +	.regs			= ufsphy_v3_regs_layout,
+> +	err = ufshcd_exec_dev_cmd(hba, DEV_CMD_TYPE_QUERY, QUERY_REQ_TIMEOUT);
 > +
-> +	.no_pcs_sw_reset	= true,
-> +};
+> +	if (err) {
+> +		dev_err(hba->dev,
+> +			"%s: opcode 0x%.2x for idn %d failed, index %d, err = %d\n",
+> +			__func__, opcode, idn, index, err);
+> +		goto out;
+> +	}
 > +
->   static const struct qmp_ufs_cfg sm8250_ufsphy_cfg = {
->   	.lanes			= 2,
->   
-> @@ -1593,6 +1653,7 @@ static struct phy_ops qmp_ufs_ops = {
->   static const struct udevice_id qmp_ufs_ids[] = {
->   	{ .compatible = "qcom,sa8775p-qmp-ufs-phy", .data = (ulong)&sa8775p_ufsphy_cfg, },
->   	{ .compatible = "qcom,sdm845-qmp-ufs-phy", .data = (ulong)&sdm845_ufsphy_cfg },
-> +	{ .compatible = "qcom,sm7150-qmp-ufs-phy", .data = (ulong)&sm7150_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8150-qmp-ufs-phy", .data = (ulong)&sm8150_ufsphy_cfg },
->   	{ .compatible = "qcom,sm8250-qmp-ufs-phy", .data = (ulong)&sm8250_ufsphy_cfg },
->   	{ .compatible = "qcom,qcs8300-qmp-ufs-phy", .data = (ulong)&sa8775p_ufsphy_cfg },
+> +	*attr_val = be32_to_cpu(response->upiu_res.value);
+> +
+> +out:
+> +	return err;
+> +}
+> +
+> +/**
+> + * ufshcd_query_attr_retry() - API function for sending query
+> + * attribute with retries
+> + * @hba: per-adapter instance
+> + * @opcode: attribute opcode
+> + * @idn: attribute idn to access
+> + * @index: index field
+> + * @selector: selector field
+> + * @attr_val: the attribute value after the query request
+> + * completes
+> + *
+> + * Return: 0 for success, non-zero in case of failure.
+> + */
+> +int ufshcd_query_attr_retry(struct ufs_hba *hba, enum query_opcode opcode,
+> +			    enum attr_idn idn, u8 index, u8 selector,
+> +			    u32 *attr_val)
+> +{
+> +	int ret = 0;
+> +	u32 retries;
+> +
+> +	for (retries = QUERY_REQ_RETRIES; retries > 0; retries--) {
+> +		ret = ufshcd_query_attr(hba, opcode, idn, index, selector, attr_val);
+> +		if (ret)
+> +			dev_dbg(hba->dev,
+> +				"%s: failed with error %d, retries %d\n",
+> +				__func__, ret, retries);
+> +		else
+> +			break;
+> +	}
+> +
+> +	if (ret)
+> +		dev_err(hba->dev,
+> +			"%s: query attribute, idn %d, failed with error %d after %d retries\n",
+> +			__func__, idn, ret, QUERY_REQ_RETRIES);
+> +	return ret;
+> +}
+> +
+>   static int __ufshcd_query_descriptor(struct ufs_hba *hba,
+>   				     enum query_opcode opcode,
+>   				     enum desc_idn idn, u8 index, u8 selector,
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
