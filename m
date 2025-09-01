@@ -4,56 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBAA6CA1007
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 23:49:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4613CA1007
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 23:51:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C86AB83A1A;
-	Tue,  2 Sep 2025 01:49:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C48183965;
+	Tue,  2 Sep 2025 01:51:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="E8pApxGl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WRhOEJrm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BABA083A41; Tue,  2 Sep 2025 01:49:28 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7135583A1A; Tue,  2 Sep 2025 01:51:47 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1E0383443
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 01:49:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49CCB83443
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 01:51:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT03.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
- [5.147.80.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 197C53F9ED; 
- Mon,  1 Sep 2025 23:49:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1756770566;
- bh=TjrbMPNSaKsT8gvmfWWb9UOdErcL9BYJv5Moq2lkEm0=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=E8pApxGlAVW931gy7WbLAu2KX3cKxQ8SO2Dg5zu+zx09I+1BCXryLz7N87raqq09U
- u9gzgWXwtW4D/3bK94Hug/wh+ikct0+F1Jfh+vRo+p8fRShLgz+hLrLyjQuOAVq1k9
- 24PRZwcUvWe4ilhojkPxW2S9u294PyogOTkD/TKmiu9Wi0NN6pCostCemjPY0CQbEb
- O9xJFx52vDPdbZauAtGhsHHYX83rYJoxE/E/agV+g8T6E+iZbeepGUt86RPDrjNV1F
- V1pCOXFILfVOfVvibAt+mXrUzShtDEB3W4JmEjAezq8KafoEXb7W2ZH8QKklkQinNP
- BykogjQPja3fA==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [TESTHOOKS PATCH 1/1] travis-ci: add qemu-riscv64_smode* test
- environments
-Date: Tue,  2 Sep 2025 01:49:21 +0200
-Message-ID: <20250901234921.35642-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-31533486f07so3559416fac.0
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 16:51:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1756770704; x=1757375504; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i2v33EDRWHAB2yodLIdVsRmJuh7vD3UITBmhMCDziic=;
+ b=WRhOEJrmgrz/abx9EBWQmvcG76eqrHAl2+d2adU0PDFpuV5jIroJVa1A1h1VP6T50u
+ 530P75ACT2k8+xV7OQpwoSXQZibujAb5yuK/WKli+/aLmZtqmddH+/QGrcakA6B1mRWA
+ 4NvBkVPIBeM2Tn7hP8+cmhWLsipdOKaAE+gIc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756770704; x=1757375504;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=i2v33EDRWHAB2yodLIdVsRmJuh7vD3UITBmhMCDziic=;
+ b=cRvDdEC9v/lSOlTXC1J3dsukadjQ41QnTLHbdxWVFWR+Bni1xRvVPFBGt5DHHxywKR
+ Im4eLzDS9Mw4jzJ3o+s4jo+Y1dnR3RrmE79eIZN6/iNB5TreJ5mlpNpPHqOJMnMXiQnx
+ BGxivnYl1viyyG0VIas86G62HQTvamAm60uRmEda0lmZYpOhcXciBsmNfA3CSm5jEF5z
+ 6hvUtMsAyJNDdCeW72RcJno+2bEGmheiUowZHF6X4bpUGAs+sQSYz+z8EgV0g32tviRj
+ 4aVlIM3w9xWmeFedoMXL5vq2REhkHTjlcFXDBltJjUQb6ccnuvQzBLMF3TxAoOyzKNT1
+ BCPg==
+X-Gm-Message-State: AOJu0YzpI/kx9qN5Fim9ufj4g0rLExZEcBtL1wL8meq26N1oWUjb6p5D
+ 21l7Fb0qGKRLlStOPjYZBnt74IEIS8T5BAWHy6J+J8F2c6CVHXhTH+poo45Gb98jnhfFVozy40t
+ il+KL2Cg=
+X-Gm-Gg: ASbGncuIAPz9/6jlK/Qg928hv/sHoP1pyGcCClXUghxY5mCDESpYlmVWBakbxZDOZD0
+ M3hkJtGUzV01NfFfQhTvFfMT0iZv3+Jy07oJ4rZ+qJeLQiX9IKs5lvkcmLgk/bt8aD7XLAPhFHS
+ /XugvVFMff6P9+qNhxfmCIPdK3DAarEDg4ZWbKjEMBXSyGC+rrkN9O4rvO/rlytmhJbVCqMx0Hr
+ vRaBk520+O+xwl1/5eKyZRt9WdFvRmreIpxMVycAjP9gyw0RsRC43pIJ9Ke2FEuY1NE1vouR4ki
+ N1TF8JGJzQSEYzEGoCsMrd0msnNFGUyYx+rRHdFIJa6fW0tLF5H9LS6UG27PDGuhJw/5z6NIB31
+ Vt/2/odhhZIL+I8RMEYSLiGor088WX07UJcOzaSSH7Mykj+N73osqE1LlZlUa/Apl5A==
+X-Google-Smtp-Source: AGHT+IFOsL/e9SIUo2TVg5FcOf6cfUPtg6NLdInFiIS/+5Lc7FyuXqeARFpgiudpfNhvfV1QYbCxlQ==
+X-Received: by 2002:a05:6870:9610:b0:30b:9a9c:72 with SMTP id
+ 586e51a60fabf-31962d4b892mr4298986fac.0.1756770703932; 
+ Mon, 01 Sep 2025 16:51:43 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-745742a6716sm1292171a34.14.2025.09.01.16.51.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Sep 2025 16:51:43 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250901050359.GA31200@nxa18884-linux.ap.freescale.net>
+References: <20250901050359.GA31200@nxa18884-linux.ap.freescale.net>
+Subject: Re: [GIT PULL] Please pull mmc-power-next-2025-09-01
+Message-Id: <175677070255.3222815.16676627703082250620.b4-ty@konsulko.com>
+Date: Mon, 01 Sep 2025 17:51:42 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,57 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide test environments for running
-qemu-riscv64_smode and qemu-riscv64_smode_acpi.
+On Mon, 01 Sep 2025 13:03:59 +0800, Peng Fan wrote:
 
-These use the OpenSBI implementation provided by QEMU and
-pass main u-boot as -kernel parameter.
+> Please pull mmc-power-next-2025-09-01
+> 
+> ----------------------------------------------------------------
+> Update compatibles for PMICs used by exynos devices
+> Support system reset and reset status for pca9450
+> Fix for pca9450 LDO5 registers and drop deprecated sd-vsel-gpios
+> Two minor fixes found by smatch
+> ----------------------------------------------------------------
+> 
+> [...]
 
-ACPI is enabled for both boards. We still expect the boards to use
-QEMU's device-tree as control device-tree.
+Merged into u-boot/next, thanks!
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- bin/travis-ci/conf.qemu-riscv64_smode_acpi_na | 11 +++++++++++
- bin/travis-ci/conf.qemu-riscv64_smode_na      | 11 +++++++++++
- 2 files changed, 22 insertions(+)
- create mode 100644 bin/travis-ci/conf.qemu-riscv64_smode_acpi_na
- create mode 100644 bin/travis-ci/conf.qemu-riscv64_smode_na
-
-diff --git a/bin/travis-ci/conf.qemu-riscv64_smode_acpi_na b/bin/travis-ci/conf.qemu-riscv64_smode_acpi_na
-new file mode 100644
-index 0000000..ff5ecfb
---- /dev/null
-+++ b/bin/travis-ci/conf.qemu-riscv64_smode_acpi_na
-@@ -0,0 +1,11 @@
-+# SPDX-License-Identifier: MIT
-+#
-+# Copyright (c) 2025 Heinrich Schuchardt
-+
-+console_impl=qemu
-+qemu_machine="virt,acpi=on"
-+qemu_binary="qemu-system-riscv64"
-+qemu_extra_args="-cpu rva23s64 -m 1G -nographic -netdev user,id=net0,tftp=${UBOOT_TRAVIS_BUILD_DIR} -device virtio-net-device,netdev=net0 -netdev user,id=net1,tftp=${UBOOT_TRAVIS_BUILD_DIR} -device virtio-net-device,netdev=net1 -device virtio-rng-device"
-+qemu_kernel_args="-kernel ${U_BOOT_BUILD_DIR}/u-boot"
-+reset_impl=none
-+flash_impl=none
-diff --git a/bin/travis-ci/conf.qemu-riscv64_smode_na b/bin/travis-ci/conf.qemu-riscv64_smode_na
-new file mode 100644
-index 0000000..ff5ecfb
---- /dev/null
-+++ b/bin/travis-ci/conf.qemu-riscv64_smode_na
-@@ -0,0 +1,11 @@
-+# SPDX-License-Identifier: MIT
-+#
-+# Copyright (c) 2025 Heinrich Schuchardt
-+
-+console_impl=qemu
-+qemu_machine="virt,acpi=on"
-+qemu_binary="qemu-system-riscv64"
-+qemu_extra_args="-cpu rva23s64 -m 1G -nographic -netdev user,id=net0,tftp=${UBOOT_TRAVIS_BUILD_DIR} -device virtio-net-device,netdev=net0 -netdev user,id=net1,tftp=${UBOOT_TRAVIS_BUILD_DIR} -device virtio-net-device,netdev=net1 -device virtio-rng-device"
-+qemu_kernel_args="-kernel ${U_BOOT_BUILD_DIR}/u-boot"
-+reset_impl=none
-+flash_impl=none
 -- 
-2.51.0
+Tom
+
 
