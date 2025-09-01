@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F245CA0FFD
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 09:29:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34787CA0FF0
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 09:29:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC0FA83965;
-	Mon,  1 Sep 2025 11:29:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74C5383965;
+	Mon,  1 Sep 2025 11:29:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H3IVD4E7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IvLFQ0Sc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8054483977; Mon,  1 Sep 2025 11:29:17 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id EFDCF8399C; Mon,  1 Sep 2025 11:29:50 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D4A6833AD
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 11:29:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B803D833AD
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 11:29:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-336c2194a65so15729591fa.2
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 02:29:15 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-55f6bdcc195so2131054e87.0
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 02:29:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756718955; x=1757323755; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1756718988; x=1757323788; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=r30i74moFDbqFvKQYbMiE0j6/eOJ4ax4VlbuMCUDTj8=;
- b=H3IVD4E7Ca2duEvDaBIIZxOemFOHhyV6vospCEqal8bVt4DqtgHtaBZNPxEw6Jn1cQ
- I7Mti2FicfsaXvVgnmAqRolpIx0eVxZwFYbDeElNGRXHXoEJxRuvDbsCJiRwfct2ihR1
- s+Q6bKCONeJg4qbvQrr5NEwG22DcRsO17PvvUIzpSQu9r0g0Cn44B571A+yzoxajlCTk
- IeOxfxX4YyWTdZn0dBwkM1H5NRDEOkQUb3aLchpaT6wDIDOvuJkIUKia1Skyu9fvCvEE
- T3PwdILiU0fNZWkXt6er52bV0SiakNoBUUGMS8p1xQRLQ/Yw5uyoxfjhtmsUhl28ubjE
- 9etw==
+ bh=ZQN9MBG+UIwqvT5oVWOMfhIOeeHXdG9nNDRMKEtWnls=;
+ b=IvLFQ0ScN9kj6t8wDMH1l6sFXwxRH/5TZh7wDG/wI+1Ow5RLRSDnluAQyCPqUS2p06
+ 3bwRol0beBWQB9gZkNL9HIrzSDuck9U3dN3+CSXvRtv7wn1UlocHUoqNDCUBA6kZMTtZ
+ Lkr0K6vrAlZG/ik9k/L3Hr6Fdvpud4Bvz3xN3muVdqqiWjEodQ28cbIqS22bEfBJ9hC6
+ hPss/P41XI7y7tUULEXYWoE4qnN9ZOVuQcO9mpKeDW04ATy3nkrOhovMigfp3fLgf9Q/
+ dORh9ICgiKi+cQUXr9UMdPB/P2j9roiXL9N45jUHLBGRYZ0XmIpWyXDrJT64UoSQQuSg
+ 82Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756718955; x=1757323755;
+ d=1e100.net; s=20230601; t=1756718988; x=1757323788;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=r30i74moFDbqFvKQYbMiE0j6/eOJ4ax4VlbuMCUDTj8=;
- b=u20IwEy7dSvMus0U/rlDZ9z4sJXvvltog7VSysZxQz0pKdmp+RbNSpOx5/d6G8GvUT
- AGM9K5jqRlaxWpW4ghCbfwmq2pMG0WOiXwkIsubqE+Z2shL7wWNXGJE38wNm63ChJLgD
- /ym9+tUg4aMGkPjoU8nEumTcF405AhLJ/JGa3xLepab2TMg/SxPssOnbTy5qC06NUdT6
- 56f3EW5SK6kJiXKaSHJqDDJ96P5Mf5T2njox0GSIfNNSrPZeSRQphfQa1zZIO/QgUDEw
- fmSZD5uhyVh+HMGMCzTUeMAMqPc7+n7jBeZiLoQu1E6ZL4FksjojB6bYd14fqDCiql5D
- 452Q==
+ bh=ZQN9MBG+UIwqvT5oVWOMfhIOeeHXdG9nNDRMKEtWnls=;
+ b=ezhwGPQE876oTPGrE2AM+aozo+gZqslvvxd9eFvUfBre8Bcy/EH3dJ7+yLD0AxNWWY
+ jDU6BLcaSMD/ocZ2DN5k8mAnbuh9vC7EuTZ17W1Uatv4UAHb6EQN4i43QBAdEx8vEusm
+ l0ya0ilA4hwWe6njRYdu1+4b+P9nbgPX5luRpyuquA5Oa8Ni0JbdtIWcwPc/BNfnOCXX
+ qeYoq+AJ9DC0FXTBO1T4+8T3+J677q0ZKgwCveh1k7fplLShk5qeuafDVBgqZSIdvS+M
+ f6b2t0HJz+doe7wiEU53UoMSRXXoyh0rW2jZCC8bZ+6ROe6adNlMtBtLrwr3DKHeQjct
+ tR2w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEtHCBmcleP+JLmUixpZGfKrLxxbJxWk4kSyApTjVZ0bdmW75kVFiY/jOVmXJDupSVcyqc0W0=@lists.denx.de
-X-Gm-Message-State: AOJu0YylVWOhzF+DNeix/c6zGuWgVqc9CsNVU1mBFP5rwoDTIBtiW7fP
- +DWMiFLf5g+vQ1266JQ8B+vy+pZZ4ZJ33nLlmCfxg792QXSkfkSfM9mtn2OCGAENxHR0QxUBWyA
- FIMdlKQYuVt/V9lxBUa9Jtxl+dynL27Y=
-X-Gm-Gg: ASbGncsNdoURs8mxd5n78WqfNJ8XPva+pNUywelEHm7zQgM88RrsalwfcHrC6fWVSdn
- jA0vRoufCh/lIHsMmx4bO3+HIyQbVL3F3REqGM2jzCOhiV5Tl0/o41zIr48MENOfl9e2keQzZLp
- EXqVzMXvQuZEtbiDJY35TnSXy91ENDhpBgs2h5Hu6ycvHzHNQ26SL4hmrSkLpZ3KiAFbPsdsfcw
- i05+lM5pK1BGHMBDWS+t7rn7MiPF8cDv7bsCLnG
-X-Google-Smtp-Source: AGHT+IE834s+nduu+MvXwLw67tbcDR0Y/Qpj2GLS0AmJo6vT8SOFHzJHqLxxH2EtFybnQAcHsW8EWHWkMCUvRnReatQ=
-X-Received: by 2002:a2e:a590:0:b0:336:e32f:7a4d with SMTP id
- 38308e7fff4ca-336e32f8084mr10814071fa.5.1756718953913; Mon, 01 Sep 2025
- 02:29:13 -0700 (PDT)
+ AJvYcCWnUqgi5253DGo+zOtazwWLWJUlMOFD162MiWdJ11valbWMH2Hq2LaAQUoEJGF4hDKn0YSHbbc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwgZetHSToHsN5wMK0oeSH1P5hzZAHugyvsCMP0dHbunDtlnt/h
+ 0ePzH2JXoP9ZipRPm5FkXBRrdHjAnBBTEGK+7fWcLKZBqzyADEY1feX+h0RBsh5046F3GaIDyg3
+ 52Jzn6JDaNsTa8JSTsK8FEQ32ViQQDV4=
+X-Gm-Gg: ASbGncuystlJnYFSsDdX3DxzyfUXYDb8XzzLAcivcR/inYmJKHCSqf1Gfybu1/GcWRW
+ p4lGXRymhnxgIXQiCnhZ4KhKlhY1yfuVRGj2htULPxr3seNqkFE3jC4j7cbCDMcGLbfG8pA1Oqh
+ M72CfZ7XAK6JiVo/EuVVq7a9RQHoCdfaYBZKkTfTjvEl+SOIzev2t4U4JZXYYFe0GWJ6ce40pRN
+ NH/o9xe6lGJ8YCFlZV+t10QisNN1iLYHjp6jFhuuR/Br/TvG2w=
+X-Google-Smtp-Source: AGHT+IE/tXSMXHHCWpbWepZ3R1EK514SSMWYSqeFeZJCRk3nPs7fRMUlzlRG507+oLFnuPZSrMz8pePQGI5JUC+tUHQ=
+X-Received: by 2002:a2e:a9a7:0:b0:333:951f:6dd7 with SMTP id
+ 38308e7fff4ca-336ca900989mr18589941fa.3.1756718987759; Mon, 01 Sep 2025
+ 02:29:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250723-clk_exynos-v1-1-fcedf6be444b@linaro.org>
- <da609352-e4de-4958-a257-66eb76d801ee@linaro.org>
-In-Reply-To: <da609352-e4de-4958-a257-66eb76d801ee@linaro.org>
+References: <20250806222710.23773-1-semen.protsenko@linaro.org>
+ <CANAwSgSC4Af-kO9sFjd9Xugh4SxBmC_cvLhAK=xX7kQvk4avTw@mail.gmail.com>
+ <CAPLW+4nSNLNW8TWi5OSb-UZzYGbC1GBX3HbV-9C=FgqW6qO0Zg@mail.gmail.com>
+ <CANAwSgTSuE8yg9YCxMLfCgdLVR0dxnvO=SaSTpCpRu0jG0GoHw@mail.gmail.com>
+In-Reply-To: <CANAwSgTSuE8yg9YCxMLfCgdLVR0dxnvO=SaSTpCpRu0jG0GoHw@mail.gmail.com>
 From: Minkyu Kang <promsoft@gmail.com>
-Date: Mon, 1 Sep 2025 18:29:01 +0900
-X-Gm-Features: Ac12FXx28Qt1Htz6ne2mIb7vbmwDL9mfyRVjoi2E_hWsnwmf0gJ1HbOI9FGOJp4
-Message-ID: <CALrBrZ30j0k72ZnSR=wgQYMg5_BxET=xDpd74oT5rGO3h0WytQ@mail.gmail.com>
-Subject: Re: [PATCH] clk: exynos: Fix always true test
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Date: Mon, 1 Sep 2025 18:29:34 +0900
+X-Gm-Features: Ac12FXxXdmeLdBe19xy_ni5zEDsZxnBGeA48i7v2pX96cV-ic5o6h0jJK_WSqV0
+Message-ID: <CALrBrZ3HzQAnP0pycVZiL0-6unstERC31L7V+B3ZnRZRMA3Hug@mail.gmail.com>
+Subject: Re: [PATCH 00/10] samsung: e850-96: Enable USB host and Ethernet
+To: Anand Moon <linux.amoon@gmail.com>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>,
+ Minkyu Kang <mk7.kang@samsung.com>, 
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -96,50 +102,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi
 
 
-2025=EB=85=84 8=EC=9B=94 8=EC=9D=BC (=EA=B8=88) 00:28, Andrew Goodbody <and=
-rew.goodbody@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+2025=EB=85=84 8=EC=9B=94 30=EC=9D=BC (=ED=86=A0) 00:48, Anand Moon <linux.a=
+moon@gmail.com>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
 
-> On 23/07/2025 17:04, Andrew Goodbody wrote:
-> > In exynos7420_peric1_get_rate the variable ret is declared as an
-> > 'unsigned int' but is then used to receive the return value of
-> > clk_get_by_index which returns an int. The value of ret is then tested
-> > for being less than 0 which will always fail for an unsigned variable.
-> > Fix this by declaring ret as an 'int' so that the test for the error
-> > condition is valid.
-> >
-> > This issue was found by Smatch.
-> >
-> > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> > ---
-> >   drivers/clk/exynos/clk-exynos7420.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/clk/exynos/clk-exynos7420.c
-> b/drivers/clk/exynos/clk-exynos7420.c
-> > index 3aa751bf4e4..7de4e688f03 100644
-> > --- a/drivers/clk/exynos/clk-exynos7420.c
-> > +++ b/drivers/clk/exynos/clk-exynos7420.c
-> > @@ -192,7 +192,7 @@ static int exynos7420_clk_top0_probe(struct udevice
-> *dev)
-> >   static ulong exynos7420_peric1_get_rate(struct clk *clk)
-> >   {
-> >       struct clk in_clk;
-> > -     unsigned int ret;
-> > +     int ret;
-> >       unsigned long freq =3D 0;
-> >
-> >       switch (clk->id) {
-> >
-> > ---
-> > base-commit: bd0ade7d090a334b3986936d63a34001d99722ad
-> > change-id: 20250723-clk_exynos-b8ac6765f510
-> >
-> > Best regards,
+> Hi Sam,
 >
-> Are there any comments on this patch please?
+>
+> On Wed, 27 Aug 2025 at 01:15, Sam Protsenko <semen.protsenko@linaro.org>
+> wrote:
+> >
+> > On Sun, Aug 24, 2025 at 8:22=E2=80=AFAM Anand Moon <linux.amoon@gmail.c=
+om>
+> wrote:
+> > >
+> > > Hi Sam
+> > >
+> >
+> > Hi Anand,
+> >
+> > > On Thu, 7 Aug 2025 at 03:57, Sam Protsenko <semen.protsenko@linaro.or=
+g>
+> wrote:
+> > > >
+> > > > The E850-96 board has a LAN9514 chip which acts as a USB hub and
+> > > > Ethernet controller. It's connected to the SoC via USB lines. In
+> order
+> > > > to make this chip functional the USB controller in Exynos850 SoC ha=
+s
+> to
+> > > > be configured in the host role, and the corresponding power regulat=
+or
+> > > > has to be enabled as well.
+> > > >
+> > > > This patch series enables USB host and network support on the
+> E850-96 by
+> > > > making use of the LAN9514 chip. While at it, enable all power
+> regulators
+> > > > (LDO) in the PMIC chip which can be useful in the bootloader and
+> kernel,
+> > > > including the regulator used for LAN9514.
+> > > >
+> > > > Sam Protsenko (10):
+> > > >   usb: host: dwc3-of-simple: Add exynos850 compatible
+> > > >   board: samsung: e850-96: Set ethaddr
+> > > >   board: samsung: e850-96: Add ACPM code
+> > > >   board: samsung: e850-96: Add PMIC code
+> > > >   board: samsung: e850-96: Configure PMIC regulators
+> > > >   board: samsung: e850-96: Extract device info from fw loading code
+> > > >   board: samsung: e850-96: Add bootdev var to choose boot device
+> > > >   configs: e850-96: Disable CONFIG_DEFAULT_FDT_FILE
+> > > >   configs: e850-96: Enable USB host support
+> > > >   configs: e850-96: Enable Ethernet
+> > > >
+> > > >  board/samsung/e850-96/Makefile    |   2 +-
+> > > >  board/samsung/e850-96/acpm.c      | 169
+> ++++++++++++++++++++++++++++++
+> > > >  board/samsung/e850-96/acpm.h      |  27 +++++
+> > > >  board/samsung/e850-96/e850-96.c   |  97 +++++++++++++++--
+> > > >  board/samsung/e850-96/e850-96.env |   2 +-
+> > > >  board/samsung/e850-96/fw.c        |  45 ++++----
+> > > >  board/samsung/e850-96/fw.h        |   4 +-
+> > > >  board/samsung/e850-96/pmic.c      | 144 +++++++++++++++++++++++++
+> > > >  board/samsung/e850-96/pmic.h      |  14 +++
+> > > >  configs/e850-96_defconfig         |  10 +-
+> > > >  drivers/usb/host/dwc3-of-simple.c |   1 +
+> > > >  11 files changed, 482 insertions(+), 33 deletions(-)
+> > > >  create mode 100644 board/samsung/e850-96/acpm.c
+> > > >  create mode 100644 board/samsung/e850-96/acpm.h
+> > > >  create mode 100644 board/samsung/e850-96/pmic.c
+> > > >  create mode 100644 board/samsung/e850-96/pmic.h
+> > > >
+> > > Can you move pmic to drivers/power/pmic/ ?
+> > >
+> >
+> > Thank you for the review! This PMIC code is not really a driver, at
+> > least not yet. It's an ad-hoc solution, which is very specific to
+> > E850-96 board, and in its current form can't be used (even in theory)
+> > for different platforms. It also doesn't conform to U-Boot's Driver
+> > Model -- and I'd like to avoid reworking in such a way, please see the
+> > explanation below. At the moment it's very minimal and only needed to
+> > make Ethernet functional.
+> >
+> > The plan for proper PMIC enablement is to do that first in Linux kernel=
+,
+> i.e.:
+> >   - implement S2MPU12 driver
+> >   - define ACPM bus in device tree
+> >   - define PMIC node in device tree and describe all needed LDO
+> regulators
+> >
+> > and then porting all that into U-Boot. But that effort might take
+> > quite a long time to implement, as I'm the only engineer working on
+> > the E850-96 enablement at the moment. So I really think it's better to
+> > keep the PMIC code as a part of the board code for now, hope you're ok
+> > with that?
+> >
+> Ok, Thanks for this input.
 
 
 applied to u-boot-samsung.
@@ -149,6 +210,6 @@ Minkyu Kang.
 
 
 >
-> Thanks,
-> Andrew
+> Thanks
+> -Anand
 >
