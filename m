@@ -4,78 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89FE5CA0FF0
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 06:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94261CA0FF0
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 06:17:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E42C833E9;
-	Mon,  1 Sep 2025 08:10:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id D6DDE83966;
+	Mon,  1 Sep 2025 08:17:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tq-group.com header.i=@tq-group.com header.b="axJ6nAGB";
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="CKCkg7bw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XzqCykJu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8E68838AA; Mon,  1 Sep 2025 08:10:41 +0200 (CEST)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65006833AD
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 08:10:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ew.tq-group.com
+ id AA39D83965; Mon,  1 Sep 2025 08:17:07 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 27E16833AD
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 08:17:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=max.merchel@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
- t=1756707039; x=1788243039;
- h=message-id:date:mime-version:subject:to:references:from:
- in-reply-to:content-transfer-encoding;
- bh=jgKqet3aMaydwRJX9R2cGtm136EdWHgiJUvI2pNmNwA=;
- b=axJ6nAGBr6xCSFgTjkDNtQS2CvodP2xe6H0RQMaO07OTCSJvshP6R+EK
- uVsZXyY+ATHGwnY59Bm+xIuq5iNbGlP4PUr7VeoUsgBHJg7aQQT+6JDma
- DPQh6OfLCNJwIj3KELKpoGi08pD1HYybEOOKF8+qB3HvyaMBEcGfkY8me
- 36r50EUt6cXD/x9raLX7591aTLT4rwxXiA0R6Dpx03tbhK2pVntkD1NGT
- 7SG90L+qSDmmD0ra3AtpFXM14YNTwklzWvoQINo8zc6cQBtfHNw39ptJn
- nYB8WlWczzXTNb0ivMdsV0OoLhLKUEINdx71NYvbHtW5MpLgfCd6yFp3H Q==;
-X-CSE-ConnectionGUID: iprRSsXBQza/KPLHIri4lw==
-X-CSE-MsgGUID: uegQ0qcTTs6A4NkyRzL33Q==
-X-IronPort-AV: E=Sophos;i="6.18,225,1751234400"; d="scan'208";a="45997717"
-X-URL-LookUp-ScanningError: 1
-Received: from vmailcow01.tq-net.de ([10.150.86.48])
- by mx1.tq-group.com with ESMTP; 01 Sep 2025 08:10:37 +0200
-X-CheckPoint: {68B538DD-34-9821D066-F5C64F68}
-X-MAIL-CPID: 37A4E22FED801978B2636470C1E4B3F7_2
-X-Control-Analysis: str=0001.0A002116.68B53911.0053, ss=1, re=0.000, recu=0.000,
- reip=0.000, cl=1, cld=1, fgs=0
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id ED88C1613D9; Mon,  1 Sep 2025 08:10:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
- s=dkim; t=1756707033;
- h=from:subject:date:message-id:to:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=jgKqet3aMaydwRJX9R2cGtm136EdWHgiJUvI2pNmNwA=;
- b=CKCkg7bwPmz5sJj54VJzw/zou8/WTVx8qclWlkXy27c+FtzX3Yq3yeyfXWpy+0xCnXnNch
- ZQn/SsuH2hBM0cWx/P0PHwCl4o2ANft0tm80OSuP4xrzwU5SXqydVbAnPWxyYAN5YOBpe3
- WoISPl5lbb3F6TRbhx8Ee9XqMVxEqdWPPpomjHCc+YAP3l3lqYewNr61J83b2MGGVCz62p
- JAfGQC/FcI0As5fOp7OLFBM3Kby7XiaWs/A+ZaM/vTn0kCS/VDqE5K/N+NQ1FFnh17qbib
- 7xLCGVnHVx54tI9FXT64SZ9Ql4fryldB8xXgaSLt6m7JgBJa+gOIMIRtox7lIQ==
-Message-ID: <8ae341fe-3018-4256-bd6c-af5425f9f416@ew.tq-group.com>
-Date: Mon, 1 Sep 2025 08:09:29 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5816H3Ax2745378;
+ Mon, 1 Sep 2025 01:17:03 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756707423;
+ bh=gfKuTzByVCTGG0ISZpq6as5/bgAaHyol/liOGxD9KIA=;
+ h=From:To:CC:Subject:Date;
+ b=XzqCykJuvU+NURYjSEBhkpY4bhy3n3PUE0GZnsCuhCJz9GXx6GEhE0Is7U9Klue50
+ JAO7OqbK0PwFIwEyguznEok5rjzkgKlpKqGU+UU+cjrJIJI+8y/Iwr1rjNYEKTbJgg
+ Fsuviz+PQw09InBeMiRvDdRdJs5yBEo4LZEItuxc=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5816H3F11904062
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 1 Sep 2025 01:17:03 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 1
+ Sep 2025 01:17:02 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 1 Sep 2025 01:17:02 -0500
+Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [10.24.68.237])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5816H0GR1998362;
+ Mon, 1 Sep 2025 01:17:00 -0500
+From: Anurag Dutta <a-dutta@ti.com>
+To: <trini@konsulko.com>, <n-francis@ti.com>
+CC: <u-kumar1@ti.com>, <u-boot@lists.denx.de>, <a-dutta@ti.com>
+Subject: [PATCH v2 0/4] AM57 boot fixes
+Date: Mon, 1 Sep 2025 11:46:55 +0530
+Message-ID: <20250901061659.986164-1-a-dutta@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 4/4] tools: zynqmp_psu_init_minimize.sh: Switch to
- clang-format
-To: Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de,
- Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
-References: <20250829233951.547352-1-javier.tia@linaro.org>
- <20250829233951.547352-5-javier.tia@linaro.org>
-Content-Language: en-US
-From: Max Merchel <max.merchel@ew.tq-group.com>
-In-Reply-To: <20250829233951.547352-5-javier.tia@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,43 +76,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 30.08.25 um 01:39 schrieb Javier Tia:
+Hi all
+This patch series migrates from .h to .env format for am57xx/dra7xx.
+Also, we do relevant changes so that the fdtfile can be set from C code.
 
-> Replace the use of scripts/Lindent with clang-format in
-> zynqmp_psu_init_minimize.sh. This change is made to align with the rest
-> of the codebase that uses clang-format for code formatting. This ensures
-> consistency across all scripts in terms of code style and formatting.
-> 
-> Signed-off-by: Javier Tia <javier.tia@linaro.org>
-> ---
->   tools/zynqmp_psu_init_minimize.sh | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/tools/zynqmp_psu_init_minimize.sh b/tools/zynqmp_psu_init_minimize.sh
-> index 5c8b73703bf..f8b729ebc97 100755
-> --- a/tools/zynqmp_psu_init_minimize.sh
-> +++ b/tools/zynqmp_psu_init_minimize.sh
-> @@ -82,7 +82,7 @@ for i in $FUNCS_TO_REMOVE; do
->   sed -i "/$i/,/^}$/d" ${OUT}
->   done
->   
-> -scripts/Lindent ${OUT}
-> +clang-format -i -style=file ${OUT}
->   
->   # Prepend 'static' to internal functions
->   sed -i 's/^.*data(void)$/static &/g' ${OUT}
+logs : https://gist.github.com/anuragdutta731/82560cc9bc958ca70a25a95a7031eeea
 
-This Commit must be made before
-[PATCH v1 2/4] Lindent: Remove wrapper around indent tool
+Changelog: v1:
+1. Converted to plain text environment for am57 and dra7
+2. Added dra7 support as well
 
-First switch to clang-format and then delete scripts/Lindent.
+Link to v1:
+https://lore.kernel.org/all/20250425053431.1622267-1-a-dutta@ti.com/
 
-Best regards,
-Max
+Anurag Dutta (4):
+  include: env: ti: Use .env for environment variables
+  board: ti: am57xx: Change to using .env
+  board: ti: am57xx: Set fdtfile from C code instead of findfdt script
+  board: ti: dra7xx: Set fdtfile from C code instead of findfdt script
+
+ board/ti/am57xx/Kconfig           |  12 ++
+ board/ti/am57xx/am57xx.env        | 162 +++++++++++++++++++++
+ board/ti/am57xx/board.c           |  14 ++
+ board/ti/dra7xx/evm.c             |  11 ++
+ include/configs/am57xx_evm.h      |  19 +--
+ include/configs/dra7xx_evm.h      |  24 ----
+ include/configs/ti_omap5_common.h | 228 ------------------------------
+ include/env/ti/dfu.env            |  53 +++++++
+ 8 files changed, 253 insertions(+), 270 deletions(-)
+ create mode 100644 board/ti/am57xx/am57xx.env
+ create mode 100644 include/env/ti/dfu.env
 
 -- 
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
+2.34.1
 
