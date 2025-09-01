@@ -4,85 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51427CA0FF0
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 15:49:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6ADCCA0FFF
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 16:26:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 942D783990;
-	Mon,  1 Sep 2025 17:49:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id EF18A83965;
+	Mon,  1 Sep 2025 18:26:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BO4MaNlD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jadkIdNT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A077983A13; Mon,  1 Sep 2025 17:49:43 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 0902383990; Mon,  1 Sep 2025 18:26:30 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FC3483965
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 17:49:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8E8583145
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 18:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-30ccec59b4bso4011509fac.3
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 08:49:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3cbb0df3981so2220839f8f.3
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 09:26:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756741780; x=1757346580; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=52EB6Z0jKZUsV1eLz0Ry0hFx/FyhW8emWvABSQtmrRA=;
- b=BO4MaNlDozCAJYL7kHaz1C3R8Yrc7Ed9jOL0bR0SA01Lgw4vdUfcG3xkP95ZJxpUrD
- VF6OlZdz2koU7hrr3PszwnnhVmuCj3LrCZELAL6keF8ju8lyuYG8IxlKEt2oiVgc6x89
- tZKgL+J8/MYmIda2eyOIyyr93AJRsCYbCmAjk=
+ d=linaro.org; s=google; t=1756743987; x=1757348787; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aSciuMpKuhN2On+gj7iiPD6+VDTsCIOxxfURbEsZf2s=;
+ b=jadkIdNTJ4yhwrs9C5NVkWjQi/QV++LiHTtweNiq6ZSlM091OgJOqmn/vcqR7UpPRT
+ ZVFoANGNh+kWlEQO9IpgksoLjJHBWuHzx3a3V6lI5HXdsmWf2Iwq/8Eebpe0N+bfVC/6
+ DsZkvCTijwzzh4yjiPnWGigzcLvXMv0HaYweo5WOch3YXyQbHa84pEMdxb2GIbAKsDk7
+ maz/W/FEmiLekhqbvX9/BrifT+eGUvqDHNzlAG1GS4r/urugdM/SVptRL4H3MAh025Dc
+ b+EuuDHVpMkmFNcctRazY9d5FhrmmKmOsOPT1tajnGpxlUukKk6q+hwmO3i7O2P2qbmq
+ 75TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756741780; x=1757346580;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=52EB6Z0jKZUsV1eLz0Ry0hFx/FyhW8emWvABSQtmrRA=;
- b=fgNhoihXOtmJ5RTN15nB/NOAjfLCqsySUd4+13laO1PTReZjPp/BNzja7gL8C7z6VH
- 8xWHY5BUC9OLORC0fzZgJFlZPbOWh67p7QgOQfhHYzsf1wp2vilygKbDY+ZFCPv4dcYJ
- xCIgqQAhjflkuAusDENjjOGagAenhsTzkrbSBCUxUN8g9XoxU6yDHWp2PadIASbqb4+r
- vm6rLy7y7knGQchFMI5KtKyr668007vDPj+Rw4z/O1O4Zms0MWqrYTkfiY8Ld/61yJnH
- r98kYJqMlCWOW1wca4/3spfvLVJwG4P9hyeIzqxCkzyoobAVoi9gmnteMyaRsKklJ4yw
- VcLQ==
-X-Gm-Message-State: AOJu0YzHUf6ilc12Iel66vqHEl5NbdABf4kIXKzCH93xGOAp8PHVmITu
- nFeWF1CUKB8Oz59RIOl9OBZnECbhn2Eaq9lQRmvdAekDVoWad4cVVYe37UVYAJHCGstKgMP0gb/
- 3mAn3jX8=
-X-Gm-Gg: ASbGncv6WpH1xB+8OQjKAs5UsodyVWdwBX1VhJkKMaK6BBa0FdyjdZdekmSoDV6/IsK
- phv0y4CmpH0XBgk8N3+Lp2/b3xx3J+BnWiEgR13U6RgMlaDB7pKM8D2xG5sU7y/UM1cnlt1q4aM
- JfzgEAvnX/cnfP0hGXwlG6NJKeUMPVwnjGMwf6GJLYmDRpmAfBBSAVxXgXxrl/ONQMZB9bPaIZZ
- V1l845M0NC1aF95ce2ezhzYc2axytUMgSLxFSNdzyk+59g1q8lWmUHX+NfpaeVHicPsr1EoeXFf
- A/nBYN29LngU3x7WuUU7Aht10Dg1lrb8Ai7QSTPP8fhNPfR1gdxKc/lO48wssT3+hJUxSe3lzts
- 2aUrHmYraY0mW5ODBxuqw5sRiH4cBovLCIkDtxVR1JS/yNrC8v/434v4=
-X-Google-Smtp-Source: AGHT+IHs5jSqWDo7a1slTOGTlENvAf005EjtmQCgacBkxqtDlfuQJ/O6Ze15Gk2d6I8D3sRL3b21WQ==
-X-Received: by 2002:a05:6871:b0d:b0:315:8edd:2be3 with SMTP id
- 586e51a60fabf-3196306a37emr3586825fac.3.1756741779870; 
- Mon, 01 Sep 2025 08:49:39 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ d=1e100.net; s=20230601; t=1756743987; x=1757348787;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aSciuMpKuhN2On+gj7iiPD6+VDTsCIOxxfURbEsZf2s=;
+ b=BiTZ0/d+Rp8RVpezim47pxyAPM2mwjtOx1BTYDfVHLFoRFvppxSYsua0M8sExbtwxJ
+ Twq+QSFWwo8eJ1jwKiPgmpgCedDIrmHBhCWrUJ0ongvgPJHitCpA2EN27TCphzC/Ed6j
+ IIqJju8QhqDcX7oWT4t58mQ6YF7kOeUUfejL8WL0mXpwW5KQapkiRJ+aX8GAManvOIeL
+ Tv5sSv2W3OssTl4cTR0V/H5lph/L90cxb4nedvbMZn1Mh5JZWlbS0LWLc6c+e2qYma9F
+ tYr732FQt0VUpnGFgETfn2Eb+QksvNtjfWfMvPO14wm13uUNDk+8clpTcyk2QXPN2Bsu
+ GRlw==
+X-Gm-Message-State: AOJu0Yw+pcU8YU5dgYsclrjfneAimQVauPHxvG4aGk4JZKiYpJZr+yWE
+ a007jwh9MCqyxHo8VohV/VmdIQrI/vA+geazP+TEZ+kH6yJzLZKhntPrgSZYZRcqZWQ=
+X-Gm-Gg: ASbGncu9q7wLw3GFpwvbptNqUS9dfhx2t/kazGqPhxmaGOo3pcXvrdIkcEPEUzZBDeX
+ 63KAueP1jJB7yNB9sUkie9vfby+rarYWJ9ehU4wRIbj/5y2iv+8pApyY8SaMNdDhaOz83tQ0gtT
+ Y20c+0ZSDs2MfEU/Ueh26JHwXVCUNDjMl6CnqBqIPGXVmeLKz9lqyiUqC/O+gwo7l6xqGUi8+qm
+ NH7KbvHjOfF/GrNJpl5xW5NutiiDyxVhhlTQle0gNOSGbIyaDCOb5wguvgzEKq570gZSdBIki5d
+ iCXpV2vt3hc/O0F562u+ELkJ8Gy1mN54UC3VHglA4eUG/MlI9hsWMw1LWSZCzFgEDUh52AWcEJn
+ Z4pN8e63dURMOtod78lFXWAYclOKOGsT6LIEgiSIWObDZKFPzHfKfk8ViFo/zCqyQezSSiPGE5I
+ 5iY++aobaILbmbtIjQ9YgdXGI=
+X-Google-Smtp-Source: AGHT+IHIbCUWhP8lX0Tfax70C8Z+cTMF/FGZdkBkQf0VBv5CtDAe6Q0Nw/JlCJNf7cyg2Hro1HS1Iw==
+X-Received: by 2002:a05:6000:188f:b0:3d5:2c3f:99c0 with SMTP id
+ ffacd0b85a97d-3d52c3fa1a5mr4363111f8f.5.1756743987044; 
+ Mon, 01 Sep 2025 09:26:27 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:d654:76cd:40eb:b986?
+ ([2a0a:ef40:f9e:3c01:d654:76cd:40eb:b986])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-74574388519sm1077588a34.21.2025.09.01.08.49.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 08:49:39 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Adriano Carvalho <adrianocarvalho.pt@gmail.com>, 
- Jan Kiszka <jan.kiszka@siemens.com>, Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-In-Reply-To: <a70fe45c-e278-41b0-8911-cc6dffc8263c@gmx.de>
-References: <a70fe45c-e278-41b0-8911-cc6dffc8263c@gmx.de>
-Subject: Re: [MASTER] Pull request efi-2025-10-rc4
-Message-Id: <175674177889.3082043.16250993259336493976.b4-ty@konsulko.com>
-Date: Mon, 01 Sep 2025 09:49:38 -0600
+ ffacd0b85a97d-3d0a7691340sm15036291f8f.39.2025.09.01.09.26.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 01 Sep 2025 09:26:26 -0700 (PDT)
+Message-ID: <b44654c2-de9e-4bd6-96a8-aa338435048a@linaro.org>
+Date: Mon, 1 Sep 2025 17:26:25 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] power: regulator: tps65910: Cannot test unsigned for
+ being negative
+To: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Paul Barker
+ <paul@pbarker.dev>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: u-boot@lists.denx.de
+References: <20250807-pwr_regulator-v1-0-42a4105336ec@linaro.org>
+ <20250807-pwr_regulator-v1-5-42a4105336ec@linaro.org>
+ <78a0767b-2508-4602-a37a-eb4e72b37120@kontron.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <78a0767b-2508-4602-a37a-eb4e72b37120@kontron.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,23 +107,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 30 Aug 2025 22:33:49 +0200, Heinrich Schuchardt wrote:
-
-> The following changes since commit e4c8b32d03d7ecffd586b7d33336603ad639d7c0:
+On 27/08/2025 08:54, Frieder Schrempf wrote:
+> Am 07.08.25 um 18:35 schrieb Andrew Goodbody:
+>> The code in tps65910_regulator.c treats the field supply in struct
+>> tps65910_regulator_pdata as an int and even tests the value for being
+>> negative so change it from a u32 to int so that the code all works as
+>> expected.
 > 
->    Merge branch 'master' of git://source.denx.de/u-boot-usb (2025-08-29
-> 14:58:45 -0600)
+> I'm not sure if this is the best solution. The supply field holds a
+> voltage value in uV and u32 seems like a reasonable type to use.
 > 
-> are available in the Git repository at:
+> I would argue that the driver should be changed to not use int and
+> remove the negative value check.
+
+Hi Frieder,
+
+I would offer the counter argument that the TPS65910 has an absolute 
+maximum rating of 7V so any advantage of being able to use all 32 bits 
+vs 'only' 31 bits to hold a value in uV, when 23 bits would be enough, 
+is somewhat lost.
+
+As I say in the commit message all the rest of the code in this driver 
+treats this field as an int and declares int variables to hold its value 
+so using a u32 throughout this driver would just mean changes being made 
+with no benefit. Removing the negative value check leaves the code open 
+to unexpected behaviour and hard to find bugs.
+
+More than that the field is being assigned to from the function 
+regulator_get_value() which is in the regulator uclass and returns an 
+int. So following your suggestion to its logical conclusion would mean 
+changing the uclass and then that would lead to changes also being made 
+to all other clients. This would turn into a major project which I am 
+not very keen to take on as I do not see any benefit to it.
+
+So yes, simply changing one field in a struct from u32 to int does seem 
+to me to be the best solution. It achieves the aim of fixing the code 
+with the minimum of effort and I see no downside to it.
+
+Andrew
+
+>> This issue was found by Smatch.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   include/power/tps65910_pmic.h | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/include/power/tps65910_pmic.h b/include/power/tps65910_pmic.h
+>> index 2026ec2f426..8fa02f33ab1 100644
+>> --- a/include/power/tps65910_pmic.h
+>> +++ b/include/power/tps65910_pmic.h
+>> @@ -123,7 +123,7 @@ enum {
+>>   
+>>   /* platform data */
+>>   struct tps65910_regulator_pdata {
+>> -	u32 supply;	/* regulator supply voltage in uV */
+>> +	int supply;	/* regulator supply voltage in uV */
+>>   	uint unit;	/* unit-address according to DT */
+>>   };
+>>   
+>>
 > 
->    https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2025-10-rc4
-> 
-> [...]
-
-Merged into u-boot/master, thanks!
-
--- 
-Tom
-
 
