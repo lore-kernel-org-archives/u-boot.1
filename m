@@ -4,72 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4236CA1007
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 19:41:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E230ECA1005
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 20:20:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE11E83A13;
-	Mon,  1 Sep 2025 21:41:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0EEA183A13;
+	Mon,  1 Sep 2025 22:20:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uBb8kabL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NO+W2Zor";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2AA783A1A; Mon,  1 Sep 2025 21:41:11 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9B49A83A13; Mon,  1 Sep 2025 22:20:08 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BC5E83990
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 21:41:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AC8F83990
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 22:20:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cFzkq05qqz9scL;
- Mon,  1 Sep 2025 21:41:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756755667;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=X1qfVvl+ID4bkTE6eZCZ+mT5G6j0wyRSn+ayqFWKJks=;
- b=uBb8kabLX0PmiWjyo9xPrd3J4Nm1712gxyhyjphT3hk9qNfEgI33DC4iPPQFOOC9hTKffw
- WV6VBX05cNPjuDlzV9GT2iKm3mwANT2wMrEgeN6I05Nk0LPRZV35Iacly3QCpjiXNw89/s
- lt14qgnqEQ14u20b45zJ6EtfJIeThJDBszFRsK04ooKXAc6yDjKNsjmbrhP1YRjVz6/9c+
- D6dI6M/sCe4Ksu3xb4bOH7lC/c+vDklpBMnT4LE/x/8U2o7f9SdXrN1l5Y2P6oP4AmnZXX
- 6Whd9thCB4vs85hjughbRDILKUPO6WJgKmblXO0+OPF01d+9+L2YIP59qEBICA==
-Message-ID: <536f87e8-2da9-4169-9575-a1a1e9d2a2ea@mailbox.org>
-Date: Mon, 1 Sep 2025 21:41:03 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7456d2b49f5so831346a34.0
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 13:20:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1756758005; x=1757362805; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HTWMBI2kieWXPpORTBefAm+g1K92cNskeh0A3Iu0BBo=;
+ b=NO+W2ZorHQvUza195nOF4pi0AcYOVxRE1tAsgE4u97W6PPzeGZTrw7fo/5LeZlO+aP
+ qpRuqo4OqEXOIYJuDghrpcd1wVeTI6pJSW8EOvbkesioVYNbqIUsux7sJxaS8YadlqNu
+ keFI4OLQCCODnFJHVDycmvXSQ1Rc09dMiYReI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756758005; x=1757362805;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HTWMBI2kieWXPpORTBefAm+g1K92cNskeh0A3Iu0BBo=;
+ b=GcF3JmnrkljI2qtWOqwHk3ZrBc+GtS2pQfjThf915SiIPLxFtJosWMjHNcA0KnvpZJ
+ I2KwsYKLCo6HU1e69QBnZhM1FhO/Aac6oMw6fPBMsYi6wXdq8bAAGMM4i8Waufjq3MFq
+ Dpt30P8NFGYtoFPriStpoA7Hq5wDeaU+aDhCTLkJL+e+KgcUOB+wa4oYvaS1hs7pN1cV
+ 8JvLBTJb/91dI67KuDrfV8RJBYXtFrcB5+KqulESDup+8fAFNXdPKbz1fRuNLDs9eS56
+ jfpfkorx8RG9fJlBbAxbThkuKNJnmhl9589tzPjHRhf/P+By8Nk7Gj3SNTbCaCrj6xna
+ m2qQ==
+X-Gm-Message-State: AOJu0Yxwmvw+ghbKaoNbWJGGJK/Pz4/OU0AhohdtoR6FtrGVAkq9OtwL
+ x+/O4SqENQ/w3anmZUALr2DpAi/GNMJkekcyuLdbx1ldZDNBsz0hXocvawrrrVzGsDVBdjiRiSJ
+ fmLxIqVA=
+X-Gm-Gg: ASbGncslnUfrggbDoVqOO/chpX68JFKuL9FklIxAOisijqUgJ23C/8pX/j513npvNhg
+ wsWlw9TyxUXTzeMjYc+oRh3V03DfhFjPxGVu0plzRM4AGbwazcTpcGXVwUZMVbknXoTRCVcN4fn
+ B133FMg0RveoKCXAvqarZWcOc6KXvNF0DlHLwZSW0vBd+9AJSJSTFeP0mL3S3/D2CNlDUzK8cJs
+ go4sq8vyzen4eW2QFOQyfOu33kh7mFM8wUQrtXEOXqYJ8MKcCuDHPt4rHg7dMKTkaHHgxfZ3elV
+ SwtJjHsQisW0QAX4od6ESUY581Q4XGqk3GRNb9apzH6fjQ6o24IFAlgCdWkOW0mAjSeIRV8nY7c
+ ul05XurznrQR71VzfQJ4FvxyS45Sn65yZLBgjEnn3fHktJCbbwAqzRb9B25Tky4QfsQ==
+X-Google-Smtp-Source: AGHT+IEM0RVm9tblCL2Tl8u6HBIfDROzMdSUlp5v494dJZHEL/WAwSSLtifDtoG4PScmjIexcn1ZIg==
+X-Received: by 2002:a05:6808:244f:b0:437:b83d:de82 with SMTP id
+ 5614622812f47-437f7dc3b90mr5075710b6e.48.1756758005001; 
+ Mon, 01 Sep 2025 13:20:05 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-437ffea7a4asm1032834b6e.2.2025.09.01.13.20.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Sep 2025 13:20:04 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250831011115.463678-1-kever.yang@rock-chips.com>
+References: <20250831011115.463678-1-kever.yang@rock-chips.com>
+Subject: Re: Pull request: u-boot-rockchip-20250831
+Message-Id: <175675800378.3107606.1634783263143595098.b4-ty@konsulko.com>
+Date: Mon, 01 Sep 2025 14:20:03 -0600
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 1/3] Image size checks: Remove HAS_BOARD_SIZE_LIMIT
-To: Philip Oberfichtner <pro@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michael Walle <michael@walle.cc>, Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
-References: <20250807102436.452691-1-pro@denx.de>
- <20250807102436.452691-2-pro@denx.de>
- <eac8672f-e90b-42e9-9efd-d94fcc8c1f17@mailbox.org>
- <20250807162115.GZ124814@bill-the-cat>
- <06dd9037-af3d-48a3-974e-80db481c7121@mailbox.org>
- <20250807201142.GC124814@bill-the-cat>
- <4813ce12-ad82-4170-999c-e5f816a42708@mailbox.org>
- <20250807232421.GD124814@bill-the-cat> <aJmuxlTEFT4R7HR_@antares>
- <83fd6db4-dc76-4f5d-9abf-9673b81eea14@mailbox.org>
- <aLVpfP1anv7UJzzQ@pollux.denx.de>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <aLVpfP1anv7UJzzQ@pollux.denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: dyyxr7qp9n5wdj1ucskjiak1opf8ao4b
-X-MBO-RS-ID: c4079d5e3c244721beb
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,19 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/25 11:38 AM, Philip Oberfichtner wrote:
-> On Thu, Aug 28, 2025 at 11:44:50PM +0200, Marek Vasut wrote:
->> On 8/11/25 10:50 AM, Philip Oberfichtner wrote:
+On Sun, 31 Aug 2025 09:11:15 +0800, Kever Yang wrote:
+
+> Please pull the updates for rockchip platform:
+> - New Board support:
+>   rk3588 Xunlong Orange Pi 5 Ultra;
+>   rk3588s GameForce Ace;
+>   rk3576 ArmSoM Sige5;
+> 
+> - rk3328 soc fixes;
+> - usb controller and phy fixes;
+> - new rk3328 ddr timing;
+> - other board level updates;
+> 
 > [...]
->>> 	CONFIG_HAS_UBOOT_WITH_SPL_SIZE_LIMIT
->>
->> What does this one do ?
-> 
-> UBOOT_WITH_SPL_SIZE_LIMIT will be required for my currently pending mips
-> board support, see here:
-> https://patchwork.ozlabs.org/project/uboot/list/?series=468232.
-> 
-> In the next version, I'll include all size limit related patches in THIS
-> series. Sorry for the confusion.
-Do it the other way around, finalize this series as a clean up only, and 
-do additional features in follow up patches .
+
+Merged into u-boot/master, thanks!
+
+-- 
+Tom
+
+
