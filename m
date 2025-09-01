@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3B5FCA0FF0
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 17:48:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13815CA0FF0
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 17:48:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FE6583A3A;
-	Mon,  1 Sep 2025 19:48:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BA7683A13;
+	Mon,  1 Sep 2025 19:48:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KXLQyQ70";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b5Jmr4BE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC7B183A28; Mon,  1 Sep 2025 19:48:02 +0200 (CEST)
-Received: from mail-vk1-xa2e.google.com (mail-vk1-xa2e.google.com
- [IPv6:2607:f8b0:4864:20::a2e])
+ id 4D39583990; Mon,  1 Sep 2025 19:48:05 +0200 (CEST)
+Received: from mail-vk1-xa35.google.com (mail-vk1-xa35.google.com
+ [IPv6:2607:f8b0:4864:20::a35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50F7E83990
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 19:48:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35F5A83990
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 19:48:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-vk1-xa2e.google.com with SMTP id
- 71dfb90a1353d-544b58831c8so308776e0c.0
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 10:48:00 -0700 (PDT)
+Received: by mail-vk1-xa35.google.com with SMTP id
+ 71dfb90a1353d-544bd485420so335475e0c.2
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 10:48:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756748879; x=1757353679; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=aabHYnN18Kr36Ervx3AMxVKBnnaeqGQPKgWA307VgzU=;
- b=KXLQyQ70pZ2YkD0VXhhOyjyFvAHzKwY4kcFNcLh604IXqzQvUUysZKQVn2jmBVtIkY
- /Ng6A77+VEhJxPIPkhtOh/37GnTSlURbpZc1ca+bqksl+8gSPG2+6aulEYpvvVlTmhMm
- 65doHFlqPBUEdTQpOsSpKZapco4poWIpBPrGqXAXwzGyAup7MRe1U7EPeHrZbNax9Lht
- Yc+TVrNTbNNabOF1BumZYnyWm3LojfxLuKyrSDJiHJMe+dg31Xh0lz/Top70oRpQLetn
- T47xhKJygor7mgE2MAofNpTI3y6QEHzg+ge/3AZtQgOFuGI0oIhs/a6feSEChPTe4nAV
- jltg==
+ d=linaro.org; s=google; t=1756748881; x=1757353681; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=EafLMbEkLM/zahQku3M0Wk0FyM36qwWWXx5zP0f9ySM=;
+ b=b5Jmr4BEmjNDEJhunMJKHMt1FvLTtNWJC42ymUtm50tHFJzC8lnxKoJYdcbj00mEQZ
+ fllM5C7u0PFqKwtxOd4Kv/fOnW8SPIIDPpfjFAV+iz2TkDV0mUXLFNrm5u/IOx++AMY3
+ J/xS/DIRqXdqqlukvfFaQQ2VmDWiCQveELrdQMDW6dNHPc4DFBePUcjUp+DoSpRrHu1A
+ /EIV2fAJZypdANWXK2HGHnCaMytosMhYkUrVbS5hrKzjZjUbMZZPHzkhS3dGqPlktznC
+ J+ZztcV8MzQVuCxpqvB+/F59S52Lz/oRgJ1C6LW4wAVvmT0kK5niIRGQzvOV2oXWdYcd
+ R80A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756748879; x=1757353679;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=aabHYnN18Kr36Ervx3AMxVKBnnaeqGQPKgWA307VgzU=;
- b=KzZeafjML6TQEPyNlMX4mTb/6ZN48a+G52xIZ6Kl1pDSQlnq+zx7scV1Q0j1RMvBE0
- 4IVV+y9WxcoNBbo38PbHld1tR0LZa+ODSdJ8eYcK27UdAFWxsYK+s1OWjf3AHA+fuiyj
- u1jKnMKmTDo27BnkWpDK8UfDt9K3gcykhLRfX/d1QrCelDGR0Cqli4H4F5JTt2NH2e+r
- GtslkW4CgRb354MdxV9VaWR/2Ll/Enva9AG3BNPnhAF1H9SaKpOy6q0hdMi4AbbLODBr
- Ng4I7BFiSdTEn+r/tiEGhUntC4tox8XiwS13QznUG5T5qeTjH8vaLUKc746w1PkkFmRX
- mDaQ==
-X-Gm-Message-State: AOJu0YwQXqAz6K2T9p8rI6x8+Z2ULZH44jLSrkQ+xBaQXdnRiayaYhXO
- wZeWbo3+vQFidZT7TDzIQPLGK4SchuEYCePwXucrP4GaJJDtkKITkuhRSCJbmuLCC+2Rbwj9PrI
- d6XaX
-X-Gm-Gg: ASbGncsuhDRp9/r5rItgjUV8RqlTbYUJ+OfSkbmgTrjfj5fAXXFp9ERSGyH+ykwXBid
- MD9xMGbbBQ7l01cxEjYOD6CZhaXm8NgRqjGyjXMgegL5LMT73Iimxs05WbpReq1xixMis88izQe
- y5g8SVsGrFgQR06wvARrKMts4nCXyesozuD39iE5dORXMI09r4BpUV9143S+fq9/ApV7WmsdXeZ
- wfF8bzIEAYipNsv0aYnk6CTVeMlULaO/0nPURNc4bUw7wIitPM50NptmUvfqQ9JuHTWb0daWfsD
- fo+xYl3Okeq6Dl5eAIfx3wgUXvttmbsm+abYc5ai9p48gPcLT5sVLQDl0m/5j2dsuZqS9kV8/ZT
- H9J/lEbxbTczfjVs8MQI6Hc940nMfcJczm2kV2mhhsldT/p+T
-X-Google-Smtp-Source: AGHT+IFmmEaHMxuHk6h9xkk+H6voQQOuFCARVqRdA5zD+dsdQesOZtRwr0umE0/+FPat0XHsJh7RaQ==
-X-Received: by 2002:a05:6122:1789:b0:542:2912:664f with SMTP id
- 71dfb90a1353d-544a028d9c2mr2547954e0c.10.1756748878907; 
- Mon, 01 Sep 2025 10:47:58 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1756748881; x=1757353681;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EafLMbEkLM/zahQku3M0Wk0FyM36qwWWXx5zP0f9ySM=;
+ b=wCeOKYGKobgeDf46GJgldWBHiMw7NEY82yfxRZ2BTW+HZUplCVyQtp73uQbbwF02Qn
+ 7glYHQASTN6VXhqb6J7Lx0yEjVITs7JTTh9aA1FsBVfa44cscNfkd7FjPGpR1hltf/Ku
+ nS0l6wD1hNjD/GnExEiss4oSTrR5RqwghSHYgrHtCyS0MXbU2evvuLQkQnroc2r0f5TN
+ JePuwAFlLpaMUJg9UyrFjNHySpgYC9qHKIeu7NRURmdp/f0Zl6+ooQdhZcN+W7IfXK+i
+ hB6TGNlwi/yKrXTjI8u3Y3LU86vkHgkS7Y0B2uZhQJfQyrIO53kO9Yn1zSp58LY8bIdf
+ ACQQ==
+X-Gm-Message-State: AOJu0YxmBF+NAcLqa9ZvRiPL53BWUwvRa/OHoG0FbNZbP/SzQwsY3Zrt
+ tsBM7lUhU30L5/ArJrKfTwZbtykhL7A5M+0QnWufPUsUJHbE9T+knl7uvEbtQ3Fc3mUbhZSLuu0
+ bE22T
+X-Gm-Gg: ASbGnct6b+DmrXbjFtphQYVP81jd/PuhQpoyd+WxjR/Fvmr3g1fIHpUxEIqkvujnj7b
+ FnvlkQzKzOj4zrUJw7mGulCD/ZVb4/0FfE6kXnDkRV/fSsi20sJ/nc/4LJ7ZGYL1IHnO6IaIW2a
+ 88ddoU2Kx7gW4ZDzPYZyh9QlyYAO6n2LxivIOG4XEGoU8UlCGYZSDcYPhxNpqL+zJRZuCm2N87R
+ +mnmoJ56dry+weeFXvDSDsr3Fh93TzxdPrTc5v3MA8AZDUDcQt2gNiCofOVFNIWKtg+fRVjzMkf
+ S5Oi7zxH6cAbgisSv6avXppxjBQGwn/WkMzhaYkKYcql4bg3+bU48OKLMpY8ccvUFqrtJ+ZY1gx
+ 9fzfraGD2P0T7fPJq2pSGz6OKuDzLFu0ZYTZ+Tgq+yqc1QV04
+X-Google-Smtp-Source: AGHT+IEdmz3WjLqabqNWt2VURgKHfW0zMhojvze1XXXLi5HuTk1WeAoZw8Vwi/1iMSaY4EtWSSrY2Q==
+X-Received: by 2002:a05:6122:a1f:b0:53c:6d68:1cd0 with SMTP id
+ 71dfb90a1353d-544a02e1a0bmr2163571e0c.14.1756748881171; 
+ Mon, 01 Sep 2025 10:48:01 -0700 (PDT)
 Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.181])
  by smtp.gmail.com with ESMTPSA id
- 71dfb90a1353d-54491464aebsm4670495e0c.14.2025.09.01.10.47.58
- for <u-boot@lists.denx.de>
+ 71dfb90a1353d-54491464aebsm4670495e0c.14.2025.09.01.10.48.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 10:47:58 -0700 (PDT)
+ Mon, 01 Sep 2025 10:48:00 -0700 (PDT)
 From: Javier Tia <javier.tia@linaro.org>
-To: u-boot@lists.denx.de
-Subject: [PATCH v1 v2 0/4] Modernize U-Boot code formatting with clang-format
-Date: Mon,  1 Sep 2025 11:47:51 -0600
-Message-ID: <20250901174757.166162-1-javier.tia@linaro.org>
+To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 v2 2/4] tools: zynqmp_psu_init_minimize.sh: Switch to
+ clang-format
+Date: Mon,  1 Sep 2025 11:47:53 -0600
+Message-ID: <20250901174757.166162-3-javier.tia@linaro.org>
 X-Mailer: git-send-email 2.51.0
-Content-Type: text/plain; charset="utf-8"
+In-Reply-To: <20250901174757.166162-1-javier.tia@linaro.org>
+References: <20250901174757.166162-1-javier.tia@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,39 +98,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series modernizes U-Boot's code formatting infrastructure by
-transitioning from the legacy scripts/Lindent tool to clang-format, aligning
-with current Linux kernel practices and providing a more robust and
-comprehensive formatting solution.
+Replace the use of scripts/Lindent with clang-format in
+zynqmp_psu_init_minimize.sh. This change is made to align with the rest
+of the codebase that uses clang-format for code formatting. This ensures
+consistency across all scripts in terms of code style and formatting.
 
-Changes in v2:
+Signed-off-by: Javier Tia <javier.tia@linaro.org>
+---
+ tools/zynqmp_psu_init_minimize.sh | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-- Replace Lindent with clang-format before remove it
-
-v1: https://lore.kernel.org/u-boot/20250829233951.547352-1-javier.tia@linaro.org/
-
-- Removal of the obsolete scripts/Lindent wrapper
-- Documentation updates for the coding style guide
-- Migration of existing tools to use clang-format
-- Copy .clang-format from Linux kernel v6.16 tag
-
-v0: https://lore.kernel.org/u-boot/20250829190058.GY124814@bill-the-cat/
-
-Javier Tia (4):
-  clang-format: Add configuration file
-  tools: zynqmp_psu_init_minimize.sh: Switch to clang-format
-  Lindent: Remove wrapper around indent tool
-  doc: Update U-Boot coding style guide with clang-format usage
-
- .clang-format                     | 804 ++++++++++++++++++++++++++++++
- .gitignore                        |   1 +
- doc/develop/codingstyle.rst       |  40 +-
- scripts/Lindent                   |  18 -
- tools/zynqmp_psu_init_minimize.sh |   2 +-
- 5 files changed, 844 insertions(+), 21 deletions(-)
- create mode 100644 .clang-format
- delete mode 100755 scripts/Lindent
-
+diff --git a/tools/zynqmp_psu_init_minimize.sh b/tools/zynqmp_psu_init_minimize.sh
+index 5c8b73703bf..f8b729ebc97 100755
+--- a/tools/zynqmp_psu_init_minimize.sh
++++ b/tools/zynqmp_psu_init_minimize.sh
+@@ -82,7 +82,7 @@ for i in $FUNCS_TO_REMOVE; do
+ sed -i "/$i/,/^}$/d" ${OUT}
+ done
+ 
+-scripts/Lindent ${OUT}
++clang-format -i -style=file ${OUT}
+ 
+ # Prepend 'static' to internal functions
+ sed -i 's/^.*data(void)$/static &/g' ${OUT}
 -- 
 2.51.0
 
