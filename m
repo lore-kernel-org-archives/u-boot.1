@@ -4,84 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C030DCA0FF0
-	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 14:55:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9E7FCA0FF0
+	for <u-boot@archiver.kernel.org>; Mon,  1 Sep 2025 14:59:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C97C083965;
-	Mon,  1 Sep 2025 16:55:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC8C183965;
+	Mon,  1 Sep 2025 16:59:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="esBgtuT+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ppBm7+8a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 735EF831B4; Mon,  1 Sep 2025 16:55:04 +0200 (CEST)
-Received: from mail-oi1-x235.google.com (mail-oi1-x235.google.com
- [IPv6:2607:f8b0:4864:20::235])
+ id 73F16839DE; Mon,  1 Sep 2025 16:59:43 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 876C283990
- for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 16:55:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B733831B4
+ for <u-boot@lists.denx.de>; Mon,  1 Sep 2025 16:59:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x235.google.com with SMTP id
- 5614622812f47-437f7046a7fso1129907b6e.0
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 07:55:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-45b82a21eeeso26335545e9.2
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 07:59:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756738500; x=1757343300; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VFFRBoxau+8v3EEsFwar98E6f32uKP64xIjGKO/Ua2s=;
- b=esBgtuT+xf0lxw4mNRqN63RKU9WwzlnPgsDn2/cOrKn5z+PtBOvekfjpWpX7LF+KrP
- NudifZklD2FTQLgk7X09PZYa54pe0oStNIBYYts4J4dcdVfZwO/iVMfMgNTFGVwZWPW4
- AbThG7nlcAvRtlg1i3rbXRe2IShekHIKKhGak=
+ d=linaro.org; s=google; t=1756738780; x=1757343580; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=yzvblgIvPd86SHoFWmZAwZnZsP8Aw2iZmZyYMjybNs0=;
+ b=ppBm7+8aUu+cu2wgH9Y1JaXOh0F6AJHIiZQUEiKWzMsHguODrZPk3jcYYzuXh+S9BD
+ I32PMg4xU9qtyN+agETQiADQ1hplARQdAwCo/+JuIvmMdeXFYwpWYjHC7up/zgitaZ3l
+ SVb20j1JZnJru1KIzfoqwMmU7z3B2ZmRL67nsQ1L1r928jMNPcV/s3ColqYOP8wDmx+q
+ gDFrO3sHj+UrncXGYfiCA9vMg44uSSzC/D52Kb9XOaB7i20xC2tYPY1F0H7xKqBvbwVk
+ ZVe+/4olx5Hv5IwaNFX73E8o0G+qBTXxDcGBEQfqyAGiJJiB09wqOVKFNi2kzOHog6/z
+ bA3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756738500; x=1757343300;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VFFRBoxau+8v3EEsFwar98E6f32uKP64xIjGKO/Ua2s=;
- b=HlhJY0lifj/ZicMgfH2dhlP035K0DN9E7F4qe4PRuK83489nwgzC/as+Vbn/boGiZd
- CFzXAvBioUa+oXJig8F3YsntjZeo5+iFtBPjZ2ER5AaT+iuA5gYjU0Zhr/zemZ5kogZ+
- hzmkHYwIpZPqXzc+gK6vsWGkqgwjpzts2WepiXOk66DYce4DfgrZZwc7kIZF5an+KRE+
- 2oowWd0TISb/CWv7833yvdrOekSr2FnNYt2zUSS6YDb5W0h/JGOThM0ENwpV8a2etsnQ
- vaLsGWdsQbMzweV6g1T4BshTcqkTXimhNazV8/uJOcpXVVrxGC7UeWLyTGdCY6eKTD9u
- B3Pg==
+ d=1e100.net; s=20230601; t=1756738780; x=1757343580;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=yzvblgIvPd86SHoFWmZAwZnZsP8Aw2iZmZyYMjybNs0=;
+ b=ELRfXSF5O6k4F6GXAx2K2pV/pnnxrcbxISJW+fe4q+/uXy60Zl3GRuLB722ql+SgLO
+ TYQdrF6Xr+FnMe6zTfEb8Fgw8ABIKk2+82H+Q/W2Q5WryZIe+n58/TLz+9TG6ywizv1I
+ /704P/BpPHy7aWSSOgutdftqsGk9/nx62XZ6T7zf1KwHYJFasjxRreMdJ3KIjO+RuK8c
+ o7Iyns9Kd5pQFzjDpB9t6Wk0N8omrvk2u+S8QIKX8NuQje1yhARNZvt0rz8Obi/nJcmI
+ FmPQx8vRXWLhRIQkW/7CQmfJeNk1rH/xT+QJh6GLTfy8I86pE24ndRX8tomTYx/WosNL
+ /l+g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU3hQ1Ll8W/tIGkdsLX3mkg7FBpcS3ugrvm06ftncuq3sjJVgjF5g8DgWHXvscjZJ/Rl1eJO5Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywn9ZbcEd0wuVSp7/B5rk880I6fessBuDdIC/9Vo/RndAls3Kgq
- 5Sl4cr0iSOocY80ZXkLUu+6FixsD3aql24SVm3DhflEi2oEQljwQf/LEV4nQTbfz1MY=
-X-Gm-Gg: ASbGncsjihQ4qjBn0M+3jXHv7lGTF8+HdmH46S3v0atYP0SZ4oHeFqh5ySUcKlyOBOL
- UkPY10SEogbX4hoIILIF++MoXCB/uv07lR4CyMBG3S6rR9+bPl3ICU1dU5LBlQ4Une1wxwKZObl
- nxtWEY+sTUP8W6hBaRmB8nKy/9pN9wbEstXz9cl4fX+5aEtsNwcmNHZ9X/bl3Q4GyhgStoVKq8T
- XT8RdEQg4HfcbzIbLN0NwWzMaabhkhNqThzCgbJpSUHAc4UcpbSCX4FGxvMBbC+aEMmRaYF0RcQ
- /0UAYAs8B8L4EN2nQ6QDnbEtfcULFOYJxJz5Y1Tj3VnfmLc/eeEAT28SyN4KSFYcPh5bqDZn7TS
- EM3m+MK4Fz1eyKuN3JNJXrf/KNGW63IwvdHHEoNSXNxqRAl4k4kg9VRuN
-X-Google-Smtp-Source: AGHT+IGBcG9Bsp6hoRUcSfRz8eVFbiOUwE+/CIC22z5s8LiGj+bxkuDKvNShzmPKUl6+xA8XyO3M4g==
-X-Received: by 2002:a05:6808:2f0d:b0:434:ecc:a922 with SMTP id
- 5614622812f47-437f7cd7470mr3498872b6e.6.1756738500074; 
- Mon, 01 Sep 2025 07:55:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-437ffea7d07sm919834b6e.1.2025.09.01.07.54.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 07:54:58 -0700 (PDT)
-Date: Mon, 1 Sep 2025 08:54:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: Frieder Schrempf <frieder.schrempf@kontron.de>, u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull mmc-power-next-2025-09-01
-Message-ID: <20250901145456.GA124814@bill-the-cat>
-References: <20250901050359.GA31200@nxa18884-linux.ap.freescale.net>
- <6c8ae3a7-858c-4d1c-8e05-9f7ad766bd93@kontron.de>
+ AJvYcCU05CCLEO77OAzbBP3HOKR7bDdPQpRkVWnuzXL9z8HfaRZxfxZ3EffNDbG4Zz5L3mQ+AUkKRw0=@lists.denx.de
+X-Gm-Message-State: AOJu0YyjPAfhr6TZ9UTNfSuFlwJ9Aa1HCcFkOPXSaLPQDCIbiQCUb/cb
+ T9S2NWUB78g/ISqb/vuZcrWiZtZPf390277KxDk+MuiGrgfKxZYBB8RVCHDCo25Gwd4=
+X-Gm-Gg: ASbGncvdY8fwc81nBgrakerAAMmiMitD8d2J1yU2MdxrkH8qq5Qyt6hUrm3ZmaaNzfI
+ 8K3UgYKQB6wL1gZHu8qdYd4uuQcdzJQXLHzL9DFJ7LOCwzvc9mGtd+Kg0jpTeC/YnXKJHX3thCK
+ jSITE7rsfS/xaopXvpZ/wVvSw+sTlPUIVSzPiXI0L4N1zN9TReAJe4zBX+DJ8Z9fuOG3Q9uewDi
+ XlttWOqV1rolQeoMEBGuQifj+VvbkRIC2G5z0kij5ioGFmr9lEDKbQzFccsAEgJQG55oNRxhpB7
+ BzowCqhUK+ezEKztwOGeHXagqUn5DodZHrjmJfpCN7Dd10pTGAUsgDEqgsi4E74GmThAzkOTkyW
+ Dz21o6HhTDzA6D2tQkvutx9IT1/N21UYjnzSU9jrjhwErQ67b1UFYlmBuxfBOWideugjbjyQq8D
+ 2+cQ==
+X-Google-Smtp-Source: AGHT+IFNk9OHS56qa/TaAiW++8SLO+0x9uf6r7+VVCjuVJKcJ3yAOTaNJ6gkUkGyREDz61hOCWTU2w==
+X-Received: by 2002:a05:600c:4e8c:b0:459:df25:b839 with SMTP id
+ 5b1f17b1804b1-45b855be07dmr61892435e9.33.1756738779796; 
+ Mon, 01 Sep 2025 07:59:39 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:d654:76cd:40eb:b986?
+ ([2a0a:ef40:f9e:3c01:d654:76cd:40eb:b986])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45b87632365sm103431615e9.16.2025.09.01.07.59.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 01 Sep 2025 07:59:39 -0700 (PDT)
+Message-ID: <7ca32b7e-4f28-4dad-9112-5772985f9be0@linaro.org>
+Date: Mon, 1 Sep 2025 15:59:38 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nn6qvs2mTttiP2O2"
-Content-Disposition: inline
-In-Reply-To: <6c8ae3a7-858c-4d1c-8e05-9f7ad766bd93@kontron.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] power: regulator: Fix incorrect use of binary and
+To: Tom Rini <trini@konsulko.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+References: <20250703-regulator_uclass_fix-v1-1-8bce90b7e07a@linaro.org>
+ <20250830184537.GA2585979@bill-the-cat>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250830184537.GA2585979@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,73 +104,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 30/08/2025 19:45, Tom Rini wrote:
+> On Thu, Jul 03, 2025 at 12:53:42PM +0100, Andrew Goodbody wrote:
+> 
+>> In regulator_list_autoset there is a test for ret being non-zero and
+>> error being zero but it uses the binary '&' instead of the logical '&&'
+>> which could well lead to unexpected results. Correct this to use the
+>> logical '&&' instead.
+>>
+>> This issue found by Smatch.
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   drivers/power/regulator/regulator-uclass.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+>> index 09567eb9dbb..fbd1f69ac72 100644
+>> --- a/drivers/power/regulator/regulator-uclass.c
+>> +++ b/drivers/power/regulator/regulator-uclass.c
+>> @@ -389,7 +389,7 @@ int regulator_list_autoset(const char *list_platname[],
+>>   		ret = regulator_autoset_by_name(list_platname[i], &dev);
+>>   		if (ret != -EMEDIUMTYPE && verbose)
+>>   			regulator_show(dev, ret);
+>> -		if (ret & !error)
+>> +		if (ret && !error)
+>>   			error = ret;
+>>   
+>>   		if (list_devp)
+>>
+> 
+> This leads to the testcase failing:
+> https://source.denx.de/u-boot/u-boot/-/jobs/1234999#L272
+> which should be fixed in the same commit.
 
---nn6qvs2mTttiP2O2
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Ah, sorry I did not pick that up. The old incorrect code would ignore 
+all even error returns. A couple of the regulators in the list returned 
+-EALREADY (-114) which was quietly ignored. The corrected code picked 
+this up and returned it, which I think is wrong in this specific case.
 
-On Mon, Sep 01, 2025 at 08:52:32AM +0200, Frieder Schrempf wrote:
-> Am 01.09.25 um 07:03 schrieb Peng Fan:
-> > Hi Tom,
-> >=20
-> > Please pull mmc-power-next-2025-09-01
-> >=20
-> > ----------------------------------------------------------------
-> > Update compatibles for PMICs used by exynos devices
-> > Support system reset and reset status for pca9450
-> > Fix for pca9450 LDO5 registers and drop deprecated sd-vsel-gpios
-> > Two minor fixes found by smatch
-> > ----------------------------------------------------------------
-> >=20
-> > CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/275=
-36
-> >=20
-> > Thanks,
-> > Peng
-> >=20
-> > The following changes since commit c9ffeefeb3efedd754e3ffa3440bfeb15cea=
-00c3:
-> >=20
-> >   test: Update logic for video test (2025-08-31 09:32:17 -0600)
-> >=20
-> > are available in the Git repository at:
-> >=20
-> >   https://source.denx.de/u-boot/custodians/u-boot-mmc.git tags/mmc-powe=
-r-next-2025-09-01
-> >=20
-> > for you to fetch changes up to 140562d3a2b447079499d773a7d21ec1728692cb:
-> >=20
-> >   mmc: core: drop space before newline in trace printf (2025-09-01 10:3=
-3:10 +0800)
-> >=20
-> > ----------------------------------------------------------------
-> > Andrew Goodbody (2):
-> >       power: regulator: tps65910: Cannot test unsigned for being negati=
-ve
->=20
-> The change above has unresolved review comments and IMHO it shouldn't be
-> applied as is. In patchwork the status is correctly set to "Changes
-> Requested", therefore I would expect it to not be included here.
+V2 coming to ignore -EALREADY.
 
-Yes, sorry Peng, I was just expecting a PR of power-related changes for
-NXP (layerscape and iMX) related things, not everything that's
-outstanding in Jaehoon's queue. I went through it over the weekend too
-and marked that one as Changed Requested but applied the rest of the
-series, for example.
-
---=20
-Tom
-
---nn6qvs2mTttiP2O2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLWzvQAKCRAr4qD1Cr/k
-CoctAP0ZdeYpVvL8bvdYTgKrD5Cvu5YfMmranp8ASCQvrNVnVwD+KNiyKffuTkMX
-vt9dM/+3cuVF7QRVqjKdtI0UZCiR/gA=
-=GvSq
------END PGP SIGNATURE-----
-
---nn6qvs2mTttiP2O2--
+Andrew
