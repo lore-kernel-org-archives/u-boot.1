@@ -4,70 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55328CA0FFE
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 13:00:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1AA1CA0FFE
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 13:31:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21F2F83AEF;
-	Tue,  2 Sep 2025 14:59:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id C2D2A832DD;
+	Tue,  2 Sep 2025 15:31:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="Ow93M7pm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eKc4UQ2F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31EB583A91; Tue,  2 Sep 2025 12:08:43 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8463883A6A
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 12:08:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=333b0acd5=Jamie.Gibbons@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1756807720; x=1788343720;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=NwmDpWp9M9KmKjmep34FoTNujruG5oAna2HU3QVYwfw=;
- b=Ow93M7pmLieLbwNYOyMTltJleGqJnWrVHS4PY09y7rAlziDOY8fjjJol
- iwl5pKZiYvNBbzYjd2lfkpnjBSRQXEzTRrPmsh9d4KyVJEOkU0wzfS07u
- 1PJ2wZQLTl8MsIb4V0LkFI+Z8NME9Q6xAs14QjHfWHT0qF+62JT92eoEl
- 8mQxys09Lf0FNCc/AqcZsopZk/VQ7G9cE9DaMC/GjPJUdBlsRHSYEfhVH
- ai0ucAWHQdVZ7bQQMBjOy4CMyYNzGa2pBvCvYHz33gL6La4Rb7aa7s5Zi
- 8jb2lgZFjMK6dlWYunHvdu/shoz0XfHuQ/zUseC5Im47bxIlx+Ap6iDtI Q==;
-X-CSE-ConnectionGUID: dAoXEF20Sg+QcJeUFj1LGA==
-X-CSE-MsgGUID: m2fBVo9TRLqWwD95+sMYCA==
-X-IronPort-AV: E=Sophos;i="6.18,230,1751266800"; d="scan'208";a="45375671"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 02 Sep 2025 03:08:38 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.44; Tue, 2 Sep 2025 03:07:34 -0700
-Received: from jamie-dev.microchip.com (10.10.85.11) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.44 via Frontend Transport; Tue, 2 Sep 2025 03:07:32 -0700
-From: Jamie Gibbons <jamie.gibbons@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
- <valentina.fernandezalanis@microchip.com>, Cyril Jean
- <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>, Leo Yu-Chi Liang
- <ycliang@andestech.com>, <jamie.gibbons@microchip.com>
-Subject: [PATCH 4/6] doc: microchip: add mpfs_video.rst
-Date: Tue, 2 Sep 2025 11:11:01 +0100
-Message-ID: <20250902101105.3218793-5-jamie.gibbons@microchip.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250902101105.3218793-1-jamie.gibbons@microchip.com>
-References: <20250902101105.3218793-1-jamie.gibbons@microchip.com>
+ id 860D5832EB; Tue,  2 Sep 2025 15:31:12 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AC85832BC
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 15:31:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 582DV4uM2594440;
+ Tue, 2 Sep 2025 08:31:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756819864;
+ bh=mqSlyEPQPh/WDVDAS54IzR/8TfckMjaHV/MHGWiTbHw=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=eKc4UQ2FX/T1yt5xJdrxQ1CAy5722GnC/rPdVkXti4jss89RJnUP0iGRB0XY9BTp/
+ vC4/FP5t+2uHjjvmUG16SclBIumylhnxgU8elcBmi3/2ve+Z5C+M+FD6usozfsY7Rg
+ 4aNj9toQYbaR5KxVqO0vkhNM0CrShkkM2iZ/LifM=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 582DV3bm2768816
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 2 Sep 2025 08:31:04 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 2
+ Sep 2025 08:31:03 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 2 Sep 2025 08:31:03 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 582DUwpU3853425;
+ Tue, 2 Sep 2025 08:31:01 -0500
+Message-ID: <a3ee7787-dc4a-4c69-8d72-e7b7052909e6@ti.com>
+Date: Tue, 2 Sep 2025 19:00:46 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Mailman-Approved-At: Tue, 02 Sep 2025 14:59:00 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/3] configs: j721e_evm_r5: Enable HBMC and MUX_MMIO at
+ SPL
+To: Anurag Dutta <a-dutta@ti.com>, <trini@konsulko.com>, <n-francis@ti.com>
+CC: <u-boot@lists.denx.de>
+References: <20250902102000.1388848-1-a-dutta@ti.com>
+ <20250902102000.1388848-3-a-dutta@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20250902102000.1388848-3-a-dutta@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,135 +81,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation to support the addition of the MPFS Video Kit.
 
-Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
----
- doc/board/microchip/index.rst      |   1 +
- doc/board/microchip/mpfs_video.rst | 105 +++++++++++++++++++++++++++++
- 2 files changed, 106 insertions(+)
- create mode 100644 doc/board/microchip/mpfs_video.rst
+On 9/2/2025 3:49 PM, Anurag Dutta wrote:
+> Commit 0e198ff1a911 ("configs: Resync with savedefconfig") removed
+> the necessary configs required to boot HyperFlash successfully, due to
+> missing Kconfig dependencies. Now that the Kconfig dependencies have
+> been added, re-enable the HBMC and MUX_MMIO configs in the SPL stage.
+>
+> Fixes: 0e198ff1a911 ("configs: Resync with savedefconfig")
+> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+> ---
 
-diff --git a/doc/board/microchip/index.rst b/doc/board/microchip/index.rst
-index affc5a9e014..571b8877f08 100644
---- a/doc/board/microchip/index.rst
-+++ b/doc/board/microchip/index.rst
-@@ -7,3 +7,4 @@ Microchip
-    :maxdepth: 2
- 
-    mpfs_icicle
-+   mpfs_video
-diff --git a/doc/board/microchip/mpfs_video.rst b/doc/board/microchip/mpfs_video.rst
-new file mode 100644
-index 00000000000..25df63ff14b
---- /dev/null
-+++ b/doc/board/microchip/mpfs_video.rst
-@@ -0,0 +1,105 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Microchip PolarFire SoC Video Kit
-+==================================
-+
-+RISC-V PolarFire SoC
-+--------------------
-+
-+The PolarFire SoC is the 4+1 64-bit RISC-V SoC from Microchip.
-+
-+The Video Kit development platform is based on PolarFire SoC and capable
-+of running Linux.
-+
-+Mainline support
-+----------------
-+
-+The support for following drivers are already enabled:
-+
-+1. NS16550 UART Driver.
-+2. Microchip Clock Driver.
-+3. Cadence MACB ethernet driver for networking support.
-+4. Cadence MMC Driver for eMMC/SD support.
-+5. Microchip I2C Driver.
-+
-+.. include:: mpfs_build_boot.rst
-+
-+Microchip boot-flow
-+~~~~~~~~~~~~~~~~~~~
-+
-+HSS with OpenSBI (M-Mode) -> U-Boot (S-Mode) -> Linux (S-Mode)
-+
-+Build the HSS (Hart Software Services) - Microchip boot-flow
-+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-+
-+(Note: HSS git repo is at https://github.com/polarfire-soc/hart-software-services)
-+
-+1. Configure
-+
-+.. code-block:: none
-+
-+   make BOARD=mpfs-video-kit config
-+
-+Alternatively, copy the default config for Microchip boot-flow.
-+
-+.. code-block:: none
-+
-+   cp boards/mpfs-video-kit/def_config .config
-+
-+2. make BOARD=mpfs-video-kit
-+3. In the Default subdirectory, the standard build will create hss.elf and
-+   various binary formats (hss.hex and hss.bin).
-+
-+The FPGA design will use the hss.hex or hss.bin.
-+
-+.. include:: mpfs_design_hss.rst
-+
-+Custom boot-flow
-+~~~~~~~~~~~~~~~~
-+
-+HSS without OpenSBI (M-Mode) -> OpenSBI (M-Mode) -> U-Boot (S-Mode) -> Linux (S-Mode)
-+
-+Build OpenSBI
-+'''''''''''''
-+
-+1. Get the OpenSBI source
-+
-+.. code-block:: none
-+
-+   git clone https://github.com/riscv/opensbi.git
-+   cd opensbi
-+
-+2. Build
-+
-+.. code-block:: none
-+
-+   make PLATFORM=generic FW_PAYLOAD_PATH=<u-boot-directory>/u-boot.bin
-+   FW_FDT_PATH=<u-boot-directory>/dts/upstream/src/riscv/microchip/mpfs-sev-kit-.dtb
-+
-+3. Output "fw_payload.bin" file available at
-+   "<opensbi-directory>/build/platform/generic/firmware/fw_payload.bin"
-+
-+Build the HSS (Hart Software Services)- Custom boot-flow
-+''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-+
-+(Note: HSS git repo is at https://github.com/polarfire-soc/hart-software-services)
-+
-+1. Configure
-+
-+.. code-block:: none
-+
-+   make BOARD=mpfs-video-kit config
-+
-+Alternatively, copy the default custom config for Custom boot-flow.
-+
-+.. code-block:: none
-+
-+   cp boards/mpfs-video-kit/def_config_custom .config
-+
-+2. make BOARD=mpfs-video-kit
-+3. In the Default subdirectory, the standard build will create hss.elf and
-+   various binary formats (hss.hex and hss.bin).
-+
-+The FPGA design will use the hss.hex or hss.bin.
-+
-+.. include:: mpfs_common.rst
--- 
-2.43.0
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 
+
+>   configs/j721e_evm_r5_defconfig | 2 ++
+>   1 file changed, 2 insertions(+)
+>
+> diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
+> index ceb2e273b54..52290722686 100644
+> --- a/configs/j721e_evm_r5_defconfig
+> +++ b/configs/j721e_evm_r5_defconfig
+> @@ -124,6 +124,7 @@ CONFIG_CFI_FLASH=y
+>   CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
+>   CONFIG_FLASH_CFI_MTD=y
+>   CONFIG_SYS_FLASH_CFI=y
+> +CONFIG_HBMC_AM654=y
+>   CONFIG_DM_SPI_FLASH=y
+>   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>   CONFIG_SPI_FLASH_SOFT_RESET=y
+> @@ -133,6 +134,7 @@ CONFIG_SPI_FLASH_S28HX_T=y
+>   CONFIG_SPI_FLASH_STMICRO=y
+>   CONFIG_SPI_FLASH_MT35XU=y
+>   CONFIG_MULTIPLEXER=y
+> +CONFIG_SPL_MUX_MMIO=y
+>   CONFIG_PINCTRL=y
+>   # CONFIG_PINCTRL_GENERIC is not set
+>   CONFIG_SPL_PINCTRL=y
