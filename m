@@ -4,88 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2D20CA0FFE
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 16:13:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 387F4CA0FFE
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 16:17:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2749D832EB;
-	Tue,  2 Sep 2025 18:13:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 822EA832EB;
+	Tue,  2 Sep 2025 18:17:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q+tDqRnZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2ADA8338C; Tue,  2 Sep 2025 18:13:04 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 18E328331C; Tue,  2 Sep 2025 18:17:48 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F6298329B
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 18:13:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A37083290
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 18:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-743814bcca2so36234a34.0
- for <u-boot@lists.denx.de>; Tue, 02 Sep 2025 09:13:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756829581; x=1757434381; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GGNceT3zXp4er8l1UewG4N7NTXGOVLGN6tgfqYSpZfU=;
- b=Q+tDqRnZO11KqelhsWnryhVqNpaIkt4hZyp4ANXCON005m9NIOK58IcmadogEzHcP3
- 3ZpVtLbytduNC48R4vvMl3bIGK6LRFzWrgoNu7GoxhXQA21TMPwIYI1x7hTgZ3dY1GYo
- VIHbsqycjf92NCKxY/2X5O8jdEdm0322TGTq8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756829581; x=1757434381;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GGNceT3zXp4er8l1UewG4N7NTXGOVLGN6tgfqYSpZfU=;
- b=FsrGz71OXEUTW6DLgY21BnfHBfbw1mZ54VAwPzOwTPIQ+5ddcqB+XkENR3NFFLTxlt
- DKbx70VQQbs4ZjzdOsWeTKOEcqWxcFdZBi09MLd9yPoBTuVtkXBnWKVMdoA+ISyg+QxK
- H5wplcXUaVLrRbJH8qA5BXg/bxTbw0Me0AQLhseMSV78jwLOHCEq1CE9Yocc2xH8jOvo
- H1dpIN0ujxx70KqKOJV9zg/9x35RG9PhwzaYF+i/ltVbdq1BFX7WEhgOFrUy/ISsgnov
- 4E/tWKKxvsPmvgcnbRWn5fbk0Zcly1T3Sm8U25CAFaXxkuOovFUFKCJGC67mFOnKpQEa
- ubYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVhuaOorDCB5ccMXMCpTasgFZNuFSXFqaW4zM+Vjl1KQa2+0893kyjJwJN4oKCpLdGfHIFnisY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwrXoIlG+ox+tPywGgU2TiJCrpRXox5myQLGIi3NeE25uS/I12W
- 8MpBNerhR+4HpwohyvRmrRfuUrrjc256YuMqmkepS8vGX/xEd515v2nqagK1P7MUZ5VnRxtqcKp
- U/OO8jbw=
-X-Gm-Gg: ASbGncvmktrrqJkLor52wIVMZ6Xhp2s1WiDtQCLU+FCTStbc5lgtQhuKMWNwQalB9nf
- e1U1qeOkZ9t2WjO26CyZ0I4ZkVvYqrHAoxVNtw5xUxWcQw/Oqmb+6awPIg+qXUvi7VOCIwBi9IE
- gvAP9QWzFF8qbtWHwyZ0k7x6JlH+aJEvAzJykJDcCWazidqpSbVVEN39P02TCp9IaNxjiSpaXFn
- TB4H8SXXGR6iiJKXPgaBepVIH92rRU9h7aZ7qOoo8hqy9dR4V1YmjFMA5WscwsOMitmdKz/WyZC
- PgSMu9Bgj6QfbtvoXKqJA3fyajpfMEBIf3ravsl5nanGnkXwWzsw8u4cKUYg5W3zt75AhDU0FvL
- 4YWuEglHNSjjmI4d0/umIj7pmOvXVhzklQ6iEaNTaY23iiY86NE0vLa1lT/x+opkfBcw=
-X-Google-Smtp-Source: AGHT+IGdVqskniGGaTTswkZKxSMDI7eUB612L1kHJQXnOOiOhBEy9WN/Bos+BsPMQHxSRkYtmbUcnA==
-X-Received: by 2002:a05:6830:7101:b0:73e:9fea:f2a5 with SMTP id
- 46e09a7af769-74569d9deb9mr8440136a34.4.1756829581157; 
- Tue, 02 Sep 2025 09:13:01 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7457438a622sm1664374a34.28.2025.09.02.09.12.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Sep 2025 09:13:00 -0700 (PDT)
-Date: Tue, 2 Sep 2025 10:12:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-Cc: Anurag Dutta <a-dutta@ti.com>, n-francis@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 2/3] configs: j721e_evm_r5: Enable HBMC and MUX_MMIO
- at SPL
-Message-ID: <20250902161257.GF124814@bill-the-cat>
-References: <20250902102000.1388848-1-a-dutta@ti.com>
- <20250902102000.1388848-3-a-dutta@ti.com>
- <20250902154656.GE124814@bill-the-cat>
- <5fec7216-9e0a-4d97-af23-60953cc1ef75@ti.com>
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [216.234.200.243])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 4C112B220079;
+ Tue,  2 Sep 2025 18:17:43 +0200 (CEST)
+Message-ID: <01a5ff2b-bc20-4670-93ce-2b66df408b96@freeshell.de>
+Date: Tue, 2 Sep 2025 09:17:41 -0700
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GWzU4sjEzIdJVeLE"
-Content-Disposition: inline
-In-Reply-To: <5fec7216-9e0a-4d97-af23-60953cc1ef75@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 01/10] riscv: dts: starfive: jh7110-common: Move out some
+ nodes to the board dts
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>
+References: <20250829060931.79940-1-hal.feng@starfivetech.com>
+ <20250829060931.79940-2-hal.feng@starfivetech.com>
+ <f8ed3792-70ca-498f-9ce7-65040860db07@canonical.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <f8ed3792-70ca-498f-9ce7-65040860db07@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,75 +61,387 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Hal, and Heinrich,
 
---GWzU4sjEzIdJVeLE
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 8/29/25 00:19, Heinrich Schuchardt wrote:
+> On 29.08.25 08:09, Hal Feng wrote:
+>> Some node in this file are not used by the upcoming VisionFive 2 Lite
+>> board. Move them to the board dts to prepare for adding the new
+>> VisionFive 2 Lite device tree.
+>>
+>> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> 
+> LGTM
+> 
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> 
 
-On Tue, Sep 02, 2025 at 09:36:25PM +0530, Kumar, Udit wrote:
-> Hi Tom
->=20
-> On 9/2/2025 9:16 PM, Tom Rini wrote:
-> > On Tue, Sep 02, 2025 at 03:49:59PM +0530, Anurag Dutta wrote:
-> >=20
-> > > Commit 0e198ff1a911 ("configs: Resync with savedefconfig") removed
-> > > the necessary configs required to boot HyperFlash successfully, due to
-> > > missing Kconfig dependencies. Now that the Kconfig dependencies have
-> > > been added, re-enable the HBMC and MUX_MMIO configs in the SPL stage.
-> > >=20
-> > > Fixes: 0e198ff1a911 ("configs: Resync with savedefconfig")
-> > > Signed-off-by: Anurag Dutta <a-dutta@ti.com>
-> > Please note that this means it never worked to start with.
-> > "savedefconfig" does the equivalent of "make foo_defconfig" and then
->=20
->=20
-> It was working before but due to some boot issues , due to DT sync
->=20
-> we disabled HBMC with commit id 5b2671594b80af116e259313d48bcd580d71f462 .
->=20
->=20
-> Instead of saying Fixes: 0e198ff1a91,
->=20
-> This patch is fixing sha id=A05b2671594b80af116e259313d48bcd580d71f462 by=
- kind
-> of revert.
->=20
-> my bad to give R/B , overlooked on sha id of fixes tag.
+NAK
 
-Again, no, that's not quite how it works. When we do a defconfig resync
-like this we're just making the defconfigs reflect the present reality.
-If you checkout 5b2671594b80af116e259313d48bcd580d71f462^ and then look
-at the resulting defconfig, that option will be off. Doing a git blame
-on drivers/mtd/Kconfig the right fixes tag is for:
-commit 8f71d37838ba0b0bfa047f5133877092ee9d1110
-Author: Anurag Dutta <a-dutta@ti.com>
-Date:   Fri Nov 29 17:01:36 2024 +0530
+Better to drop jh7110-common-u-boot.dtsi from U-Boot [1]. Also we can
+drop jh7110-u-boot.dtsi file but that does require some additional work:
 
-    mtd: Kconfig: Change HBMC driver's dependency to MULTIPLEXER and MUX_MM=
-IO
-   =20
-    The HBMC_AM654 driver was dependent on SYSCON because syscon APIs were
-    being used to select the multiplexer state. Change the dependency to
-    MULTIPLEXER and MUX_MMIO because mux APIs are now being used to
-    select mux state.
-   =20
-    Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+- upstream dt-binding memory-controllers/starfive,jh7110-dmc.yaml [2]
+- upstream devicetree changes adding memory controller [3]
+- upstream bootph-pre-ram hints [4]
+- implement cpufreq driver
+- refactor drivers/ram/starfive/starfive_ddr.c to use common clock
+framework and delete 'clock-frequency = <2133>' in dts
 
-As that's what changed the dependencies for the option.
+I am not interested in writing U-Boot drivers. Hal, can you make the
+needed improvements in U-Boot for cpufreq and memory controller drivers?
 
---=20
-Tom
+1: https://lore.kernel.org/u-boot/20250815050315.62956-1-e@freeshell.de/
+2: https://lore.kernel.org/lkml/20250823100159.203925-2-e@freeshell.de/
+3: https://lore.kernel.org/lkml/20250823100159.203925-3-e@freeshell.de/
+4: https://lore.kernel.org/lkml/20250823100159.203925-4-e@freeshell.de/
 
---GWzU4sjEzIdJVeLE
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks,  -E Shattow
 
------BEGIN PGP SIGNATURE-----
+>> ---
+>>   .../src/riscv/starfive/jh7110-common.dtsi     | 22 ---------
+>>   .../jh7110-deepcomputing-fml13v01.dts         | 49 +++++++++++++++++++
+>>   .../src/riscv/starfive/jh7110-milkv-mars.dts  | 49 +++++++++++++++++++
+>>   .../riscv/starfive/jh7110-pine64-star64.dts   | 49 +++++++++++++++++++
+>>   .../jh7110-starfive-visionfive-2.dtsi         | 46 +++++++++++++++++
+>>   dts/upstream/src/riscv/starfive/jh7110.dtsi   | 16 ------
+>>   6 files changed, 193 insertions(+), 38 deletions(-)
+>>
+>> diff --git a/dts/upstream/src/riscv/starfive/jh7110-common.dtsi b/dts/
+>> upstream/src/riscv/starfive/jh7110-common.dtsi
+>> index 4baeb981d4d..9d3d03ad2ed 100644
+>> --- a/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
+>> +++ b/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
+>> @@ -272,15 +272,9 @@
+>>       assigned-clock-rates = <50000000>;
+>>       bus-width = <8>;
+>>       bootph-pre-ram;
+>> -    cap-mmc-highspeed;
+>> -    mmc-ddr-1_8v;
+>> -    mmc-hs200-1_8v;
+>> -    cap-mmc-hw-reset;
+>>       post-power-on-delay-ms = <200>;
+>>       pinctrl-names = "default";
+>>       pinctrl-0 = <&mmc0_pins>;
+>> -    vmmc-supply = <&vcc_3v3>;
+>> -    vqmmc-supply = <&emmc_vdd>;
+>>       status = "okay";
+>>   };
+>>   @@ -290,12 +284,7 @@
+>>       assigned-clock-rates = <50000000>;
+>>       bus-width = <4>;
+>>       bootph-pre-ram;
+>> -    no-sdio;
+>> -    no-mmc;
+>> -    cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+>> -    disable-wp;
+>>       cap-sd-highspeed;
+>> -    post-power-on-delay-ms = <200>;
+>>       pinctrl-names = "default";
+>>       pinctrl-0 = <&mmc1_pins>;
+>>       status = "okay";
+>> @@ -439,17 +428,6 @@
+>>       };
+>>         mmc0_pins: mmc0-0 {
+>> -         rst-pins {
+>> -            pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+>> -                          GPOEN_ENABLE,
+>> -                          GPI_NONE)>;
+>> -            bias-pull-up;
+>> -            drive-strength = <12>;
+>> -            input-disable;
+>> -            input-schmitt-disable;
+>> -            slew-rate = <0>;
+>> -        };
+>> -
+>>           mmc-pins {
+>>               pinmux = <PINMUX(PAD_SD0_CLK, 0)>,
+>>                    <PINMUX(PAD_SD0_CMD, 0)>,
+>> diff --git a/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-
+>> fml13v01.dts b/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-
+>> fml13v01.dts
+>> index f2857d021d6..5a2a41a7e8c 100644
+>> --- a/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
+>> +++ b/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
+>> @@ -11,6 +11,55 @@
+>>       compatible = "deepcomputing,fml13v01", "starfive,jh7110";
+>>   };
+>>   +&cpu_opp {
+>> +    opp-375000000 {
+>> +        opp-hz = /bits/ 64 <375000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-500000000 {
+>> +        opp-hz = /bits/ 64 <500000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-750000000 {
+>> +        opp-hz = /bits/ 64 <750000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-1500000000 {
+>> +        opp-hz = /bits/ 64 <1500000000>;
+>> +        opp-microvolt = <1040000>;
+>> +    };
+>> +};
+>> +
+>> +&mmc0 {
+>> +    cap-mmc-highspeed;
+>> +    cap-mmc-hw-reset;
+>> +    mmc-ddr-1_8v;
+>> +    mmc-hs200-1_8v;
+>> +    vmmc-supply = <&vcc_3v3>;
+>> +    vqmmc-supply = <&emmc_vdd>;
+>> +};
+>> +
+>> +&mmc0_pins {
+>> +    rst-pins {
+>> +        pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+>> +                      GPOEN_ENABLE,
+>> +                      GPI_NONE)>;
+>> +        bias-pull-up;
+>> +        drive-strength = <12>;
+>> +        input-disable;
+>> +        input-schmitt-disable;
+>> +        slew-rate = <0>;
+>> +    };
+>> +};
+>> +
+>> +&mmc1 {
+>> +    no-sdio;
+>> +    no-mmc;
+>> +    cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+>> +    disable-wp;
+>> +    post-power-on-delay-ms = <200>;
+>> +};
+>> +
+>>   &pcie1 {
+>>       perst-gpios = <&sysgpio 21 GPIO_ACTIVE_LOW>;
+>>       phys = <&pciephy1>;
+>> diff --git a/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts b/
+>> dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+>> index 3bd62ab7852..0c90facc4ee 100644
+>> --- a/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+>> +++ b/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+>> @@ -11,6 +11,25 @@
+>>       compatible = "milkv,mars", "starfive,jh7110";
+>>   };
+>>   +&cpu_opp {
+>> +    opp-375000000 {
+>> +        opp-hz = /bits/ 64 <375000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-500000000 {
+>> +        opp-hz = /bits/ 64 <500000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-750000000 {
+>> +        opp-hz = /bits/ 64 <750000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-1500000000 {
+>> +        opp-hz = /bits/ 64 <1500000000>;
+>> +        opp-microvolt = <1040000>;
+>> +    };
+>> +};
+>> +
+>>   &gmac0 {
+>>       starfive,tx-use-rgmii-clk;
+>>       assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
+>> @@ -22,6 +41,36 @@
+>>       status = "okay";
+>>   };
+>>   +&mmc0 {
+>> +    cap-mmc-highspeed;
+>> +    cap-mmc-hw-reset;
+>> +    mmc-ddr-1_8v;
+>> +    mmc-hs200-1_8v;
+>> +    vmmc-supply = <&vcc_3v3>;
+>> +    vqmmc-supply = <&emmc_vdd>;
+>> +};
+>> +
+>> +&mmc0_pins {
+>> +    rst-pins {
+>> +        pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+>> +                      GPOEN_ENABLE,
+>> +                      GPI_NONE)>;
+>> +        bias-pull-up;
+>> +        drive-strength = <12>;
+>> +        input-disable;
+>> +        input-schmitt-disable;
+>> +        slew-rate = <0>;
+>> +    };
+>> +};
+>> +
+>> +&mmc1 {
+>> +    no-sdio;
+>> +    no-mmc;
+>> +    cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+>> +    disable-wp;
+>> +    post-power-on-delay-ms = <200>;
+>> +};
+>> +
+>>   &pcie0 {
+>>       status = "okay";
+>>   };
+>> diff --git a/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+>> b/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+>> index 31e825be206..c9677aef9ff 100644
+>> --- a/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+>> +++ b/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+>> @@ -14,6 +14,25 @@
+>>       };
+>>   };
+>>   +&cpu_opp {
+>> +    opp-375000000 {
+>> +        opp-hz = /bits/ 64 <375000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-500000000 {
+>> +        opp-hz = /bits/ 64 <500000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-750000000 {
+>> +        opp-hz = /bits/ 64 <750000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-1500000000 {
+>> +        opp-hz = /bits/ 64 <1500000000>;
+>> +        opp-microvolt = <1040000>;
+>> +    };
+>> +};
+>> +
+>>   &gmac0 {
+>>       starfive,tx-use-rgmii-clk;
+>>       assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
+>> @@ -44,6 +63,36 @@
+>>       status = "okay";
+>>   };
+>>   +&mmc0 {
+>> +    cap-mmc-highspeed;
+>> +    cap-mmc-hw-reset;
+>> +    mmc-ddr-1_8v;
+>> +    mmc-hs200-1_8v;
+>> +    vmmc-supply = <&vcc_3v3>;
+>> +    vqmmc-supply = <&emmc_vdd>;
+>> +};
+>> +
+>> +&mmc0_pins {
+>> +    rst-pins {
+>> +        pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+>> +                      GPOEN_ENABLE,
+>> +                      GPI_NONE)>;
+>> +        bias-pull-up;
+>> +        drive-strength = <12>;
+>> +        input-disable;
+>> +        input-schmitt-disable;
+>> +        slew-rate = <0>;
+>> +    };
+>> +};
+>> +
+>> +&mmc1 {
+>> +    no-sdio;
+>> +    no-mmc;
+>> +    cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+>> +    disable-wp;
+>> +    post-power-on-delay-ms = <200>;
+>> +};
+>> +
+>>   &pcie1 {
+>>       status = "okay";
+>>   };
+>> diff --git a/dts/upstream/src/riscv/starfive/jh7110-starfive-
+>> visionfive-2.dtsi b/dts/upstream/src/riscv/starfive/jh7110-starfive-
+>> visionfive-2.dtsi
+>> index 5f14afb2c24..d1e4206f125 100644
+>> --- a/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+>> +++ b/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+>> @@ -13,6 +13,25 @@
+>>       };
+>>   };
+>>   +&cpu_opp {
+>> +    opp-375000000 {
+>> +        opp-hz = /bits/ 64 <375000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-500000000 {
+>> +        opp-hz = /bits/ 64 <500000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-750000000 {
+>> +        opp-hz = /bits/ 64 <750000000>;
+>> +        opp-microvolt = <800000>;
+>> +    };
+>> +    opp-1500000000 {
+>> +        opp-hz = /bits/ 64 <1500000000>;
+>> +        opp-microvolt = <1040000>;
+>> +    };
+>> +};
+>> +
+>>   &gmac0 {
+>>       status = "okay";
+>>   };
+>> @@ -38,9 +57,36 @@
+>>   };
+>>     &mmc0 {
+>> +    cap-mmc-highspeed;
+>> +    cap-mmc-hw-reset;
+>> +    mmc-ddr-1_8v;
+>> +    mmc-hs200-1_8v;
+>> +    vmmc-supply = <&vcc_3v3>;
+>> +    vqmmc-supply = <&emmc_vdd>;
+>>       non-removable;
+>>   };
+>>   +&mmc0_pins {
+>> +    rst-pins {
+>> +        pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+>> +                      GPOEN_ENABLE,
+>> +                      GPI_NONE)>;
+>> +        bias-pull-up;
+>> +        drive-strength = <12>;
+>> +        input-disable;
+>> +        input-schmitt-disable;
+>> +        slew-rate = <0>;
+>> +    };
+>> +};
+>> +
+>> +&mmc1 {
+>> +    no-sdio;
+>> +    no-mmc;
+>> +    cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+>> +    disable-wp;
+>> +    post-power-on-delay-ms = <200>;
+>> +};
+>> +
+>>   &pcie0 {
+>>       status = "okay";
+>>   };
+>> diff --git a/dts/upstream/src/riscv/starfive/jh7110.dtsi b/dts/
+>> upstream/src/riscv/starfive/jh7110.dtsi
+>> index 0ba74ef0467..d2463399b95 100644
+>> --- a/dts/upstream/src/riscv/starfive/jh7110.dtsi
+>> +++ b/dts/upstream/src/riscv/starfive/jh7110.dtsi
+>> @@ -200,22 +200,6 @@
+>>       cpu_opp: opp-table-0 {
+>>               compatible = "operating-points-v2";
+>>               opp-shared;
+>> -            opp-375000000 {
+>> -                    opp-hz = /bits/ 64 <375000000>;
+>> -                    opp-microvolt = <800000>;
+>> -            };
+>> -            opp-500000000 {
+>> -                    opp-hz = /bits/ 64 <500000000>;
+>> -                    opp-microvolt = <800000>;
+>> -            };
+>> -            opp-750000000 {
+>> -                    opp-hz = /bits/ 64 <750000000>;
+>> -                    opp-microvolt = <800000>;
+>> -            };
+>> -            opp-1500000000 {
+>> -                    opp-hz = /bits/ 64 <1500000000>;
+>> -                    opp-microvolt = <1040000>;
+>> -            };
+>>       };
+>>         thermal-zones {
+> 
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLcXfQAKCRAr4qD1Cr/k
-Cm36AQCOpS8/XLrPeFUEICRmiy9LAqvpAwxOlI/5xw80cTrpagD/TFLgEoJ4sHFa
-jdbNdiT3SY/NRQHAxNLyIj1LyUav4gw=
-=ehyh
------END PGP SIGNATURE-----
-
---GWzU4sjEzIdJVeLE--
