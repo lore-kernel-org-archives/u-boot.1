@@ -4,82 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3557CA0FFE
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 09:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA71CA1005
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 09:13:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0EB683290;
-	Tue,  2 Sep 2025 11:12:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F55483A91;
+	Tue,  2 Sep 2025 11:12:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JoIH7iCw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TmSMrhYX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC9DE83A5C; Tue,  2 Sep 2025 07:07:46 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E37B83443
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 07:07:44 +0200 (CEST)
+ id 0D43C83A62; Tue,  2 Sep 2025 08:07:15 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F23D83A1A
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 08:07:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhimeswararao.matsa@gmail.com
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-7723bf02181so1809419b3a.1
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 22:07:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756789662; x=1757394462; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=o7B9uBaCrr7SNjgxvU5qZD+bI79Bcq7N6HNEUQ7DaUo=;
- b=JoIH7iCwpxlfSI7k2dC1M/l72rjfxYd8Gp2qHtJVKTsCOlDS0prPhja21xktO/qh/I
- aSVAxAoO8gAt7TcA30cX2+G5iUIWL+9eQZBZJbQJJ5p51RmHzVIOR+XPZFUMPsyHCR75
- AYgpVA2DJzgfAkKWx3sbBuG8HhNqWLx4KXE6r6pGB6SOeu7er2ctgpE/KNSPnyYNY1kf
- +4x1tRuijUFiNziGo8qqguIIohXomBaX7VM0ofb5ulDftdJOWr+YeIpOwJxsiGVMsyQU
- 62l1QVBMsSBSUzoR6hFbFsulmKPk7wI2/5Hre0+1AN5X1ffYFQc0EOFbrliR6Df9zRwo
- et5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756789662; x=1757394462;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=o7B9uBaCrr7SNjgxvU5qZD+bI79Bcq7N6HNEUQ7DaUo=;
- b=C0xp5vU1vIsMnSbROHuu8x6o0/ZmeqEBAC4ZE01vzSWWNefG8YJcy7RPDi7J6JCy/H
- YK1ugVaciMhDk3jbCm46Yzz8i5Neo/+lkU82FX96zBzvG9VrXsFrTMRfcMVtEfYztqeH
- WzSUnh1GQPv9dgYOmqebEKBjODRMiAL2UdTWhL5LqbqUhsw58CWkQA6cjQM+q1qC++2C
- m5KUPxnVvPBoDDokeKEjDd4ngL6NJ/tLzE9FPGzzP0+buioh9hZP5U0BkiBrlC3LVSbE
- WT6XfYIhk8TfMzKRMBtMkOhGfD8kvF4IlmyRf+xqsSwpCV1s+TtM0e+YQ6krmuV6RNSQ
- OnBQ==
-X-Gm-Message-State: AOJu0YwRyqEARLfxeqADTabW081HKwlwzons4qAmqhJVM1V7XjS8TXet
- bVlW+kOGDlAGc8x45Ibjc7lJzXZmqygs9VWbgDKWq3XR6Jr8/PVIKehVfuD+lw==
-X-Gm-Gg: ASbGnctoFKVRPvIV+t4aAwKC93XLKofodWbLnVmkRPl2IL2G2P59eU4rg2UM0i47Cwt
- eKznp3czWtA+ap+Pz9GIzNrbwsZva4GxY4FtqSMZyJm3muJFtW3b1mT8f7YLJ5RB8T83Iu3WYbP
- 3lXOOASRdAI73GqDks03mb4TvDNlTwdCOBO+Y0AFYfVGIn9WcyeeLKIsTVqYvfUwlazIoy0C/9n
- RvFi7A09iSysPj0E2JhqWb2BDbahytkimc/uHQGG66v2AAb59vSdDi3S/jypYvE0yFXra//mEW+
- 2hthHDxzO2IJBT1Y4u3teXtRQb173/fmsXChy6sXI921gPPcXj7g3qohaCjicIvslR3xzbK3LZg
- U0mU4dSCMjX7MaZiCt9T05JDdwoMhKneJpPhuhiOSl8LJoO284Be+bXpynzjKPHu8OF9KfDFrEK
- 2YuhECFFR4zw==
-X-Google-Smtp-Source: AGHT+IH6y6+BHfgVdCT/b5OlMyOUC3Pu4hZR+gvjfW2mzGmiEBzQZaszWHMWm4k8Wxl/udhRRpgqBQ==
-X-Received: by 2002:a05:6a00:1a87:b0:772:114c:bcbb with SMTP id
- d2e1a72fcca58-7723e1f1804mr14769895b3a.4.1756789662195; 
- Mon, 01 Sep 2025 22:07:42 -0700 (PDT)
-Received: from kumara-Inspiron-15-3530.. ([49.207.220.140])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7722a501a94sm12248012b3a.93.2025.09.01.22.07.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Sep 2025 22:07:41 -0700 (PDT)
-From: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
-Subject: [PATCH] doc: add README.pmic guide for PMIC/regulator framework
-Date: Tue,  2 Sep 2025 10:37:18 +0530
-Message-ID: <20250902050730.5289-1-bhimeswararao.matsa@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58267BT12917364
+ for <u-boot@lists.denx.de>; Tue, 2 Sep 2025 01:07:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756793231;
+ bh=z+43MmXH2p7jWrc9fzy9G23g/1NLb7ULt1Av5q3CZ2k=;
+ h=From:To:CC:Subject:Date;
+ b=TmSMrhYXTyuyQLMBb9ow1k3NfukuUlmbGCxi04wMmuilbYhIPcKQ7TvN+0/W2+i08
+ vM2oQzAhzlYEsALnj+mZ/TS8/gKAo21aLho/KH3U9WRZAF8zokBDauWE3Q5LG55gVQ
+ q6LzgiCxqNUCpiP4uvcsIZyVtbx7/tBJ5CTfov9k=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58267Bkq2521368
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
+ for <u-boot@lists.denx.de>; Tue, 2 Sep 2025 01:07:11 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 2
+ Sep 2025 01:07:10 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 2 Sep 2025 01:07:11 -0500
+Received: from localhost (ula0502350.dhcp.ti.com [172.24.233.249])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 582679uL3318378;
+ Tue, 2 Sep 2025 01:07:10 -0500
+From: Paresh Bhagat <p-bhagat@ti.com>
+To: <vigneshr@ti.com>, <praneeth@ti.com>, <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <bb@ti.com>, <khasim@ti.com>, <v-singh1@ti.com>,
+ <afd@ti.com>, <anshuld@ti.com>
+Subject: [RFC PATCH 0/5] Add initial support for AM62D2-EVM
+Date: Tue, 2 Sep 2025 11:36:58 +0530
+Message-ID: <20250902060703.191688-1-p-bhagat@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-Mailman-Approved-At: Tue, 02 Sep 2025 11:12:53 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,368 +78,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This document introduces a developer guide for PMIC and regulator
-support in U-Boot. It covers subsystem architecture, Kconfig options,
-Device Tree integration, SPL considerations, and debugging methods,
-using TPS65219 + BeaglePlay as an example.
+The AM62D2 SoC, part of the K3 architecture, is built for high-performance
+DSP tasks in automotive audio, pro audio, radar, sonar, and medical
+imaging. It features up to four Cortex-A53 cores (1.4GHz), two Cortex-R5F
+cores, and a C7x DSP with 2 TOPS MMA. Key interfaces include multi-channel
+McASP audio, TSN-capable Gigabit Ethernet, and a range of peripherals
+(UART, SPI, I2C, CAN, USB, eMMC/SD, OSPI, CSI). It supports LPDDR4/DDR4,
+secure boot with hardware security, and low-power modes with
+CAN/GPIO/UART wakeup.
 
-Signed-off-by: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
----
- doc/README.pmic | 345 ++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 345 insertions(+)
- create mode 100644 doc/README.pmic
+AM62D2-EVM evaluation module (EVM) is a low-cost expandable platform
+board designed for AM62D2 SoC from TI. It supports the following
+interfaces:
 
-diff --git a/doc/README.pmic b/doc/README.pmic
-new file mode 100644
-index 00000000000..f7c7ef629b9
---- /dev/null
-+++ b/doc/README.pmic
-@@ -0,0 +1,345 @@
-+# U‑Boot PMIC & Regulator Mini‑Guide (README.pmic)
-+
-+> A concise, practical guide to understanding and extending PMIC + regulator support in U‑Boot. Target audience: BSP/Board bring‑up engineers.
-+
-+---
-+
-+## 0) TL;DR
-+
-+* **Code paths:** `drivers/power/pmic/` (PMIC bus + register access) and `drivers/power/regulator/` (voltage rails).
-+* **Device Tree:** Describe PMIC node (I²C/SPI), child regulator nodes with `regulator-` properties.
-+* **Kconfig:** Enable the PMIC driver (e.g., `CONFIG_PMIC_TPS65219`) and the regulator framework (`CONFIG_DM_REGULATOR*`).
-+* **SPL vs U‑Boot proper:** Decide where rails must be on (e.g., for DDR/IP). Mirror minimal regulator config in SPL (size‑conscious).
-+* **Debug:** Use `i2c dev`, `i2c md`, regulator debug prints, and `log level`.
-+
-+---
-+
-+## 1) Architecture Overview
-+
-+### 1.1 Subsystems
-+
-+* **PMIC layer (`drivers/power/pmic/`)**
-+
-+  * Abstracts low‑level register operations on a given chip (read/write, init, IRQ masks, sequencing registers, etc.).
-+  * Typically binds to an **I²C** or **SPI** bus via a devicetree node.
-+* **Regulator layer (`drivers/power/regulator/`)**
-+
-+  * Presents each rail (BUCK/SMPS, LDO, switch) as a `regulator` device.
-+  * Methods: `enable/disable`, `set_value/get_value` (µV), `set_current` (µA), `get_status`.
-+* **Consumers**
-+
-+  * Other drivers (MMC, USB, PHY, PCIe, camera, etc.) request rails via phandles or use fixed supplies.
-+
-+### 1.2 Typical Call Flow
-+
-+U‑Boot start → dm_init → ofnode parse PMIC → PMIC probe → create regulator children
-+→ Early/SPL: board code sets essential rails (DDR, core) → Later: drivers request rails as needed
-+
-+---
-+
-+## 2) Kconfig & Build
-+
-+Enable core frameworks:
-+
-+CONFIG_DM=y
-+CONFIG_DM_I2C=y               # or DM_SPI for SPI PMICs
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_UCLASS=y
-+CONFIG_SPL_DM=y               # if using SPL with DM
-+CONFIG_SPL_DM_REGULATOR=y
-+
-+Enable a specific PMIC (example, TI TPS65219):
-+
-+CONFIG_PMIC_TPS65219=y
-+CONFIG_DM_REGULATOR_TPS65219=y   # if split, or enable generic DM_REGULATOR helpers
-+
-+Optional helpers:
-+
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_REGULATOR=y            # if available on your tree
-+CONFIG_LOG=y
-+CONFIG_LOGLEVEL=6                 # verbose logs
-+
-+---
-+
-+## 3) Device Tree Basics
-+
-+### 3.1 PMIC Node (I²C example)
-+
-+&i2c0 {
-+    status = "okay";
-+    pmic: tps65219@24 {
-+        compatible = "ti,tps65219";
-+        reg = <0x24>;                  // I²C address
-+        /* Optional: IRQ, GPIOs, power‑on config */
-+        interrupt-parent = <&gpio1>;
-+        interrupts = <12 IRQ_TYPE_LEVEL_LOW>;
-+
-+        /* Child regulators */
-+        buck1: buck1 {
-+            regulator-name = "vdd_core";
-+            regulator-min-microvolt = <700000>;
-+            regulator-max-microvolt = <1100000>;
-+            regulator-always-on;
-+            regulator-boot-on;
-+        };
-+
-+        buck2: buck2 {
-+            regulator-name = "vdd_ddr";
-+            regulator-min-microvolt = <900000>;
-+            regulator-max-microvolt = <1000000>;
-+            regulator-boot-on;
-+        };
-+
-+        ldo1: ldo1 {
-+            regulator-name = "vdda_pll";
-+            regulator-min-microvolt = <1800000>;
-+            regulator-max-microvolt = <1800000>;
-+            regulator-allow-bypass;
-+        };
-+    };
-+};
-+
-+### 3.2 Consumers referencing regulators
-+
-+&mmc1 {
-+    vmmc-supply = <&buck2>;      // card supply
-+    vqmmc-supply = <&ldo1>;      // IO voltage
-+};
-+
-+&usbss0 {
-+    vbus-supply = <&buck1>;
-+};
-+
-+**Notes**
-+
-+* Use chip‑specific child node names if the driver expects them (some drivers match by `regulator-name` or by order/index).
-+* `regulator-boot-on` ensures the framework enables the rail during init if safe.
-+* For **fixed rails** not controlled by PMIC, use `regulator-fixed` nodes under `fixedregulator@…` in DTS.
-+
-+---
-+
-+## 4) Adding/Porting a PMIC Driver
-+
-+### 4.1 Skeleton (PMIC layer)
-+
-+// drivers/power/pmic/pmic_foo.c
-+#include <dm.h>
-+#include <power/pmic.h>
-+#include <i2c.h>
-+
-+struct foo_priv { struct udevice *dev; /* cached addr, etc. */ };
-+
-+static int foo_read(struct udevice *dev, uint reg, u8 *val)
-+{ return dm_i2c_read(dev, reg, val, 1); }
-+
-+static int foo_write(struct udevice *dev, uint reg, const u8 *val)
-+{ return dm_i2c_write(dev, reg, *val, 1); }
-+
-+static int foo_probe(struct udevice *dev)
-+{
-+    // Optionally: unlock, set default pages, mask IRQs, sanity checks
-+    return 0;
-+}
-+
-+static const struct udevice_id foo_ids[] = {
-+    { .compatible = "vendor,foo1234" },
-+    { }
-+};
-+
-+U_BOOT_DRIVER(pmic_foo) = {
-+    .name = "pmic_foo",
-+    .id = UCLASS_PMIC,
-+    .of_match = foo_ids,
-+    .probe = foo_probe,
-+};
-+```
-+
-+### 4.2 Per‑regulator ops (Regulator layer)
-+
-+// drivers/power/regulator/foo_reg.c
-+#include <dm.h>
-+#include <power/regulator.h>
-+
-+static int foo_reg_enable(struct udevice *dev, bool enable)
-+{ /* read reg; set/clear enable bit; write back */ return 0; }
-+
-+static int foo_reg_set_value(struct udevice *dev, int uV)
-+{ /* map uV → selector → register field */ return 0; }
-+
-+static const struct dm_regulator_ops foo_reg_ops = {
-+    .enable = foo_reg_enable,
-+    .set_value = foo_reg_set_value,
-+    .get_value = dm_regulator_common_get_value, // or custom
-+};
-+
-+U_BOOT_DRIVER(foo_buck) = {
-+    .name = "foo_buck",
-+    .id = UCLASS_REGULATOR,
-+    .ops = &foo_reg_ops,
-+    .of_match = foo_buck_ids,
-+};
-+
-+### 4.3 Kconfig/Makefile
-+
-+config PMIC_FOO
-+    bool "PMIC Foo1234 support"
-+    depends on DM_I2C && DM_REGULATOR
-+
-+obj-$(CONFIG_PMIC_FOO) += pmic_foo.o
-+obj-$(CONFIG_PMIC_FOO) += foo_reg.o
-+
-+---
-+
-+## 5) SPL Considerations
-+
-+* **Goal:** Bring up only the rails required for DDR init, boot storage (eMMC/SD), and console.
-+* Enable minimal configs: `CONFIG_SPL_DM_REGULATOR`, `CONFIG_SPL_I2C`, `CONFIG_SPL_OF_CONTROL`.
-+* **Shrink tips:**
-+
-+  * Avoid complex features (interrupts/OTPs) in SPL unless mandatory.
-+  * Hard‑code essential voltage selectors if DT parsing in SPL is too heavy; keep U‑Boot proper fully DT‑driven.
-+* **Mirroring:** Ensure voltages set in SPL match what Linux expects later (handoff harmony).
-+
-+---
-+
-+## 6) Runtime Control & Sequencing
-+
-+* **Power‑on sequence:** Many PMICs have programmable sequences (buck → ldo delays). U‑Boot typically leaves factory OTP; use minimal tweaks only if required by board.
-+* **Regulator constraints:** Honour `min/max µV`, `always‑on`, `boot‑on`. Error if request violates limits.
-+* **DVFS:** If CPU frequency scaling at early boot is needed, expose a CPU rail regulator and provide OPP‑safe transitions.
-+
-+---
-+
-+## 7) Debugging Playbook
-+
-+1. **Confirm bus & probe**
-+
-+```sh
-+=> i2c bus          # list buses
-+=> i2c dev 0        # select bus
-+=> i2c probe        # scan addresses; ensure PMIC addr shows up
-+```
-+
-+2. **Peek registers**
-+
-+```sh
-+=> i2c md 0x24 0x00 0x10   # dump first 16 regs (TPS65219 example)
-+```
-+
-+3. **Regulator ops (if command present)**
-+
-+```sh
-+=> regulator list
-+=> regulator dev <n>
-+=> regulator read
-+=> regulator set value 1000000
-+=> regulator enable
-+```
-+
-+4. **Logs**
-+
-+```sh
-+=> setenv loglevel 7; saveenv
-+```
-+
-+5. **Scope & DMM**: Verify rails physically (bring up issues often are voltage/seq mismatches).
-+
-+**Common Pitfalls**
-+
-+* PMIC **variant mismatch**: OTP differs (missing rail in DTS → peripherals fail; e.g., USB not detected).
-+* Wrong **I²C address** or bus number in DTS.
-+* Missing `regulator-boot-on` for rails needed before their consumers probe.
-+* Using `regulator-always-on` on rails that must be toggled for reset/PM suspend (stuck devices).
-+* Not mirroring SPL/U‑Boot‑proper settings → surprise voltage switch later.
-+
-+---
-+
-+## 8) Example: TI TPS65219 + BeaglePlay‑like Board
-+
-+### 8.1 DTS (excerpt)
-+
-+&i2c2 {
-+    status = "okay";
-+    pmic: tps65219@24 {
-+        compatible = "ti,tps65219";
-+        reg = <0x24>;
-+
-+        buck1: buck1 { /* VDD_CORE */
-+            regulator-name = "vdd_core";
-+            regulator-min-microvolt = <700000>;
-+            regulator-max-microvolt = <1100000>;
-+            regulator-boot-on;
-+            regulator-always-on;
-+        };
-+        buck2: buck2 { /* VDD_DDR */
-+            regulator-name = "vdd_ddr";
-+            regulator-min-microvolt = <900000>;
-+            regulator-max-microvolt = <1000000>;
-+            regulator-boot-on;
-+        };
-+        ldo1: ldo1 { /* VDDA_PLL */
-+            regulator-name = "vdda_pll";
-+            regulator-min-microvolt = <1800000>;
-+            regulator-max-microvolt = <1800000>;
-+        };
-+    };
-+};
-+
-+&dwc3_0 { vbus-supply = <&buck1>; };
-+&mmc0   { vmmc-supply = <&buck2>; vqmmc-supply = <&ldo1>; };
-+```
-+
-+### 8.2 Board code (optional guardrails)
-+
-+int board_init(void)
-+{
-+    struct udevice *reg;
-+    if (!uclass_get_device_by_name(UCLASS_REGULATOR, "vdd_ddr", &reg))
-+        regulator_set_value(reg, 950000);
-+    return 0;
-+}
-+
-+---
-+
-+## 9) Checklists
-+
-+### 9.1 New Board Bring‑up
-+
-+* [ ] PMIC bus verified (I²C/SPI, pull‑ups, address, reset line)
-+* [ ] DTS PMIC node + child regulators authored
-+* [ ] Rails mapped to consumers (MMC/USB/PHY/PCIe/CSI/eth)
-+* [ ] SPL minimal rails configured
-+* [ ] Boot to shell; validate `regulator list`
-+* [ ] Measure voltages; confirm within tolerance under load
-+* [ ] Exercise suspend/resume (if used) and warm reset
-+
-+### 9.2 New PMIC Driver
-+
-+* [ ] Read/write helpers done
-+* [ ] ID/OTP/version readout
-+* [ ] Regulator enumerate + ops (enable, set/get µV)
-+* [ ] DT bindings documented (yaml in Linux style if upstreaming)
-+* [ ] Kconfig/Makefile wired
-+* [ ] Tested on real hardware; provide scope captures for critical rails
-+
-+---
-+
-+## 10) Upstreaming Tips
-+
-+* Mirror **Linux bindings** (names, properties) to ease review.
-+* Keep **per‑rail tables** (selector↔µV) static‑const; avoid magic numbers.
-+* Add **`dev_dbg()` breadcrumbs** for probe, set\_value, enable.
-+* Provide `MAINTAINERS` entry and `doc/` note pointing here.
-+
-+---
-+
-+## 11) References & Useful Pointers
-+
-+* `drivers/power/pmic/` and `drivers/power/regulator/` examples in U‑Boot tree (TPS, RK8xx, MAX77xxx, PMIC for NXP, etc.)
-+* Linux kernel `Documentation/devicetree/bindings/regulator/*` for property patterns.
-+* Datasheet/OTP app notes for your PMIC (voltage tables, sequencing, reset behavior).
-+
-+---
-+
-+
+* 4 GB LPDDR4 RAM
+* x2 Gigabit Ethernet expansion connectors
+* x4 3.5mm TRS Audio Jack Line In
+* x4 3.5mm TRS Audio Jack Line Out
+* x2 Audio expansion connectors
+* x1 Type-A USB 2.0, x1 Type-C dual-role device (DRD) USB 2.0
+* x1 UHS-1 capable micro SD card slot
+* 32 GB eMMC Flash
+* 512 Mb OSPI NOR flash
+* x4 UARTs via USB 2.0-B
+* XDS110 for onboard JTAG debug using USB
+* Temperature sensors, user push buttons and LEDs
+
+Also resuse Soc specific files from AM62A. A key distinction from AM62A
+is that the AM62D does not include multimedia components such as the
+video encoder/decoder, MJPEG encoder, Vision Processing Accelerator
+(VPAC) for image signal processing, or the display subsystem.
+Additionally, the AM62D has a different pin configuration compared to
+the AM62A.
+
+Technical Reference Manual - https://www.ti.com/lit/pdf/sprujd4
+Schematics Link - https://www.ti.com/lit/zip/sprcal5
+
+Branch used-next
+
+Kernel Patch
+https://lore.kernel.org/all/20250708085839.1498505-1-p-bhagat@ti.com/
+
+Boot Logs
+https://gist.github.com/paresh-bhagat12/6e169340c222427c7648b1ef3ca5067f
+
+Paresh Bhagat (5):
+  board: ti: Introduce the basic files needed to support am62d
+  board: ti: am62dx: Add board configs for am62d
+  configs: Introduce configs for the AM62D2-EVM
+  arch: mach-k3: Introduce support for AM62D2-EVM
+  arm: dts: Introduce AM62D2-EVM dtbs
+
+ arch/arm/dts/Makefile                        |    2 +
+ arch/arm/dts/k3-am62d-ddr-1866mhz-32bit.dtsi | 2802 ++++++++++++++++++
+ arch/arm/dts/k3-am62d-evm-binman.dtsi        |  359 +++
+ arch/arm/dts/k3-am62d2-evm-u-boot.dtsi       |   14 +
+ arch/arm/dts/k3-am62d2-r5-evm.dts            |   82 +
+ arch/arm/mach-k3/am62ax/Kconfig              |   25 +
+ board/ti/am62dx/Kconfig                      |   26 +
+ board/ti/am62dx/MAINTAINERS                  |    8 +
+ board/ti/am62dx/Makefile                     |    7 +
+ board/ti/am62dx/am62dx.env                   |   21 +
+ board/ti/am62dx/board-cfg.yaml               |   36 +
+ board/ti/am62dx/evm.c                        |   37 +
+ board/ti/am62dx/pm-cfg.yaml                  |   12 +
+ board/ti/am62dx/rm-cfg.yaml                  | 1047 +++++++
+ board/ti/am62dx/sec-cfg.yaml                 |  379 +++
+ board/ti/am62dx/tifs-rm-cfg.yaml             |  903 ++++++
+ configs/am62dx_evm_a53_defconfig             |   22 +
+ configs/am62dx_evm_r5_defconfig              |   20 +
+ 18 files changed, 5802 insertions(+)
+ create mode 100644 arch/arm/dts/k3-am62d-ddr-1866mhz-32bit.dtsi
+ create mode 100644 arch/arm/dts/k3-am62d-evm-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-am62d2-evm-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-am62d2-r5-evm.dts
+ create mode 100644 board/ti/am62dx/Kconfig
+ create mode 100644 board/ti/am62dx/MAINTAINERS
+ create mode 100644 board/ti/am62dx/Makefile
+ create mode 100644 board/ti/am62dx/am62dx.env
+ create mode 100644 board/ti/am62dx/board-cfg.yaml
+ create mode 100644 board/ti/am62dx/evm.c
+ create mode 100644 board/ti/am62dx/pm-cfg.yaml
+ create mode 100644 board/ti/am62dx/rm-cfg.yaml
+ create mode 100644 board/ti/am62dx/sec-cfg.yaml
+ create mode 100644 board/ti/am62dx/tifs-rm-cfg.yaml
+ create mode 100644 configs/am62dx_evm_a53_defconfig
+ create mode 100644 configs/am62dx_evm_r5_defconfig
+
 -- 
-2.43.0
+2.34.1
 
