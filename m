@@ -4,86 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0915ACA1007
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 04:58:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32EC3CA0FFE
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 04:58:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 608EC83443;
-	Tue,  2 Sep 2025 06:58:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BAE1A83A57;
+	Tue,  2 Sep 2025 06:58:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="keF+ivWo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C63QFzZ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 215FF83965; Tue,  2 Sep 2025 06:58:01 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFE3782AE1
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 06:57:58 +0200 (CEST)
+ id 5FFDF83A5A; Tue,  2 Sep 2025 06:58:34 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 46D6D83443
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 06:58:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-71d6051afbfso41310377b3.2
- for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 21:57:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1756789077; x=1757393877; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zvHo94BQ9Kw2yCqBHxTXWH15DkfSR3lsnYq7dIVx/fo=;
- b=keF+ivWoqTtq1mydKYk+TJ/rlF95QfQqJFMc4dPF+8xiFrxrKTtllVw4y0LzthVCP4
- Hpl7eGYo01Cx67HLa8nc9Ah2wyceRFdITz+DFm7TvXN4tSk0kN31vu1GqVgdhF1nW1vx
- 2CCrygVphvl6EiBnVW8zYznulJUyt+xcGTIqOBaXMdA9evUAnM9n7J8NpiF9NR505caD
- YS8GYS8BMGEwZn7VWch/DZQlQszp/vcR7LRAiPaXV5Td9eHiaglKBO20PuF/P4YBfbZ6
- EDldfUoYZE0uZvWx7/PlszIDcyP5ek0NSRkHw7hsGGxmbsKQSF25p7kwigJrqjwcdE7k
- u3hg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756789077; x=1757393877;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=zvHo94BQ9Kw2yCqBHxTXWH15DkfSR3lsnYq7dIVx/fo=;
- b=Arm8RbyYsBTNKfeIkZZhfQiaQ46+b/muchx+QUtA0X6WZzujsFakKgHE2JDkEcSa+d
- StTtuTAZvuP1ArqzZfCJuBtd1lrW7Hv0mEB6uSxXkv3Od44LpEj23BfCeqBe1sBUgQQ4
- OPybNKxpkmlbgTsQXPsDdwQONQcPUk5Kc4fQngpkjIDYtommP10Yivp/FVnxRpHPyieX
- mpo4Qrb+67O78HXtrFGGSka24gGBNLf9gXIGKezdwDtxegpOEjEtEOULzsUkrKuwKt3e
- wste8+KBuFuoRxm8jJjWYh1ykZKG+QLl3VZridhTvjZSI9yzaE1+8GFWCpl1srg6bXut
- ZfoA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVBQNPMsnL1oE40HaBY7UZV1gDhl6aZK9Mhr5ICbTZ+hqDWJxU3wJj24HbJC1pJ1JCR8ciyDno=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8P9KGWLuRakPyWl8blorJbTSl6tYVxqA0bMtRbYmn8sZrtNUt
- b38D/GiNiVqWv3EmbTaDU93jzpMTiAsUBbb/7EQ7HjupFIfaiyYHo/qJgRF6QPUpBoTbpS3gMH4
- hPlh7EEQFlyuVDFDTVPiFC2Nd/hr1Cvp2aaxxCPABCw==
-X-Gm-Gg: ASbGncsQKlp/1OdH5CK35gFWEmm7LdcKdsIIQ40nOE0WJzOs3+WzR/kYlmvQR6PSODK
- sO6Kb1FWeVaO+p7JGG/n8iSmzd16lnEfJDIr5KANth1MQQIwkRmUUhvXd2/1ot3E6MXAmoDlru1
- QCJTvSsM9qlqpIlXVEHhyr1wGS3lIr0ktgCF/aRflsb6Zd4VjeqJjDRm6lzjKWa5OtRbqhxZJH1
- hdjcD3nakQeQSxPrgAHCK7N9a6P2fxLqzeQKQ/OnH0wdlqcz9q85CqtTWlnCZZ87RuIMDdqIIyC
- xoaNt8EEG7iE3vHSNWK8ngJf2yowKOVj2w4BTwhrtxgOTwRV7hwNqyJbdY0MrXrCSVEyTjT9KEC
- lxZxxXS8=
-X-Google-Smtp-Source: AGHT+IHY6r3+HnbSaaASaE0tAE5tDjPqDo/q0XaVAC3B3iEtlITrZDHzng4b4V2EnrmtYwoZ4Ts7BLICLiwbU4PFwF0=
-X-Received: by 2002:a05:690c:368e:b0:71f:f359:6ca2 with SMTP id
- 00721157ae682-72276580a11mr114975677b3.52.1756789077408; Mon, 01 Sep 2025
- 21:57:57 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5824wU2r2506898;
+ Mon, 1 Sep 2025 23:58:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1756789110;
+ bh=K+04NbGDu/Yh+mgqf7oAtH1Ly46WKRVv+wPqq5kMcp0=;
+ h=From:To:CC:Subject:Date;
+ b=C63QFzZ2QA93na+UDE2/LrrjQo1wBm71fhhObOKsEqrKsKVAwh2dK05RsbfQUMCg9
+ 8S1iG/cHStLF/IoT/q4jRjMhVwh4mQIwGUBvG78wVhSQWH0BwTHpgaWyALjvrvM1t3
+ E3Is+IN2NBu8wDOW0GavnIPMpxKmA/ccplEsj7as=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5824wU212026144
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 1 Sep 2025 23:58:30 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 1
+ Sep 2025 23:58:30 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 1 Sep 2025 23:58:30 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5824wTlW3507629;
+ Mon, 1 Sep 2025 23:58:29 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH v1] board: ti: common: Kconfig: add CMD_MEMINFO
+Date: Tue, 2 Sep 2025 10:27:07 +0530
+Message-ID: <20250902045708.1328550-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-References: <20250901151635.654928-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250901151635.654928-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 2 Sep 2025 07:57:21 +0300
-X-Gm-Features: Ac12FXyLOr70iwzsE-Z42Ld7MpXwE7iDeiZ4VlQ6BG7CaqvI6V-PFFGY2xPA6Lg
-Message-ID: <CAC_iWjLkdcFomO8iETm0dkjAcvYe9aOmxC_24BFT4SSOQneAcA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] bloblist: use correct types for physical addresses
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Simon Glass <sjg@chromium.org>, 
- Raymond Mao <raymond.mao@linaro.org>, Harrison Mutai <harrison.mutai@arm.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,34 +76,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 1 Sept 2025 at 18:17, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> It is expected that bloblists are stored in high memory beyond 2 GiB.
-> We must not use int as data type for these addresses but phys_addr_t.
->
-> Fixes: f9ef9fb033d5 ("bloblist: Handle alignment with a void entry")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  common/bloblist.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/common/bloblist.c b/common/bloblist.c
-> index 6e4f020d7c4..d5fa62249a9 100644
-> --- a/common/bloblist.c
-> +++ b/common/bloblist.c
-> @@ -149,7 +149,8 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
->  {
->         struct bloblist_hdr *hdr = gd->bloblist;
->         struct bloblist_rec *rec;
-> -       int data_start, aligned_start, new_alloced;
-> +       phys_addr_t data_start, aligned_start;
-> +       phys_size_t new_alloced;
->
->         if (!align_log2)
->                 align_log2 = BLOBLIST_BLOB_ALIGN_LOG2;
-> --
-> 2.50.1
->
+Add CMD_MEMINFO and CMD_MEMINFO_MAP to list of configs implied by
+TI_COMMON_CMD_OPTIONS. This allows users to easily view the memory
+configuration and the memory maps at runtime.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ board/ti/common/Kconfig | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
+index 2de4212d9b8..f481812247c 100644
+--- a/board/ti/common/Kconfig
++++ b/board/ti/common/Kconfig
+@@ -40,6 +40,8 @@ config TI_COMMON_CMD_OPTIONS
+ 	imply CMD_GPIO
+ 	imply CMD_GPT
+ 	imply CMD_I2C
++	imply CMD_MEMINFO
++	imply CMD_MEMINFO_MAP
+ 	imply CMD_MII
+ 	imply CMD_MMC
+ 	imply CMD_MMC_REG
+-- 
+2.50.1
+
