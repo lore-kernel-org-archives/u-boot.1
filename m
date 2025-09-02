@@ -4,147 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E06CFCA1005
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 08:55:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3557CA0FFE
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 09:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 465D483AA9;
-	Tue,  2 Sep 2025 10:54:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E0EB683290;
+	Tue,  2 Sep 2025 11:12:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="0qzRAfd4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JoIH7iCw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3714783AA9; Tue,  2 Sep 2025 10:54:51 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20607.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::607])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DC9DE83A5C; Tue,  2 Sep 2025 07:07:46 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AEA883AC5
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 10:54:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E37B83443
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 07:07:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=lNrLSUYgfeHCq9Qr0O8/Xbyg7A/grb/D6cXJO3a2ziNc81YUJwJAF510kr6RkHcMdeADPrNz4wUsTGagdxC1xNCvNyguMa/U2OZPPmFKZlmYtRNHDsew+ej/qQcNyD7SfPQF97vc3mw9e4uinYwgEvbI35dBeAFYArEOyVzg/PD7HTnU5hWCOan4z97GrUegOYGmsoIDUrW7418hNcjULbeFejGh6wUU0bHFPHPXZiEpNbS0pqUTOqCb9gEzXoBB46LpcoaGrNfqu0R8legJfku+6XA6Z26HC3GIFZRuU18AOs5rVaj+fsy4bqKx4AD1DjLbYvgqyKL95YbeswolFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+1Px2WjcFLXADyz3KqAvHEV5q/qU22igIydcilGewA0=;
- b=HgQQJ+OjfOTvbWFFcqd5l2rkUJjAcsvGX4tdB+7DKiZeN584Zq5vEDjpz9vKWS/UAu3cm7+VYuE7wtKoOITebKiuv5rlDNpJd8ko/57RG+5luPRDSCJJUhv8uK2SNul+P60lAR0NkX7nW9ITpt9u7eYz0FrY6cVddBEtCdYTKN0Cblv4LooWBuyHsEyXhMvueR3w+rM6N5rfZQ4dPrfatAH8ZOx5sYluFXCg42xmN5llrbR5dZFHgxu6sP5xkyi1LdvVkDa16EGXf5MSho7YyUYHbAh+chnPpTny4RnsuioUmxx8ob8+0HbtzsOhWHOgR0+4Ij6sEmEjTWXiHyTlaw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+1Px2WjcFLXADyz3KqAvHEV5q/qU22igIydcilGewA0=;
- b=0qzRAfd4I7G9r64Jd6g8fMnDncGN93Cnep2x9hTjkdt78XzA4QKzjqEci7UOrVRof5ZVd4+ba+bjV5B0IOVttwo8n4d+rGdYDpEClFdmZbKNNlQQrNNdv1qb3cfhX+JGDVI8xqCA+1rgcBNX8Dx7RzIPSKb+/B6re3S75XxO6iw=
-Received: from PH1PEPF000132F7.NAMP220.PROD.OUTLOOK.COM (2603:10b6:518:1::3c)
- by MN2PR12MB4189.namprd12.prod.outlook.com (2603:10b6:208:1d8::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Tue, 2 Sep
- 2025 08:54:45 +0000
-Received: from CY4PEPF0000EDD5.namprd03.prod.outlook.com
- (2a01:111:f403:f912::1) by PH1PEPF000132F7.outlook.office365.com
- (2603:1036:903:47::3) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.16 via Frontend Transport; Tue,
- 2 Sep 2025 08:54:44 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CY4PEPF0000EDD5.mail.protection.outlook.com (10.167.241.201) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9073.11 via Frontend Transport; Tue, 2 Sep 2025 08:54:43 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 2 Sep
- 2025 03:54:42 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 2 Sep
- 2025 03:54:40 -0500
-Received: from localhost (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Tue, 2 Sep 2025 03:54:40 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Paul Alvin <alvin.paulp@amd.com>, Srinivas Goud <srinivas.goud@amd.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 12/12] arm64: zynqmp: Add pmw_fan label to k26
-Date: Tue, 2 Sep 2025 10:53:34 +0200
-Message-ID: <7a392d79685e5b122528e8fe7617475c4f6fabab.1756803198.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=bhimeswararao.matsa@gmail.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-7723bf02181so1809419b3a.1
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 22:07:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1756789662; x=1757394462; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=o7B9uBaCrr7SNjgxvU5qZD+bI79Bcq7N6HNEUQ7DaUo=;
+ b=JoIH7iCwpxlfSI7k2dC1M/l72rjfxYd8Gp2qHtJVKTsCOlDS0prPhja21xktO/qh/I
+ aSVAxAoO8gAt7TcA30cX2+G5iUIWL+9eQZBZJbQJJ5p51RmHzVIOR+XPZFUMPsyHCR75
+ AYgpVA2DJzgfAkKWx3sbBuG8HhNqWLx4KXE6r6pGB6SOeu7er2ctgpE/KNSPnyYNY1kf
+ +4x1tRuijUFiNziGo8qqguIIohXomBaX7VM0ofb5ulDftdJOWr+YeIpOwJxsiGVMsyQU
+ 62l1QVBMsSBSUzoR6hFbFsulmKPk7wI2/5Hre0+1AN5X1ffYFQc0EOFbrliR6Df9zRwo
+ et5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756789662; x=1757394462;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=o7B9uBaCrr7SNjgxvU5qZD+bI79Bcq7N6HNEUQ7DaUo=;
+ b=C0xp5vU1vIsMnSbROHuu8x6o0/ZmeqEBAC4ZE01vzSWWNefG8YJcy7RPDi7J6JCy/H
+ YK1ugVaciMhDk3jbCm46Yzz8i5Neo/+lkU82FX96zBzvG9VrXsFrTMRfcMVtEfYztqeH
+ WzSUnh1GQPv9dgYOmqebEKBjODRMiAL2UdTWhL5LqbqUhsw58CWkQA6cjQM+q1qC++2C
+ m5KUPxnVvPBoDDokeKEjDd4ngL6NJ/tLzE9FPGzzP0+buioh9hZP5U0BkiBrlC3LVSbE
+ WT6XfYIhk8TfMzKRMBtMkOhGfD8kvF4IlmyRf+xqsSwpCV1s+TtM0e+YQ6krmuV6RNSQ
+ OnBQ==
+X-Gm-Message-State: AOJu0YwRyqEARLfxeqADTabW081HKwlwzons4qAmqhJVM1V7XjS8TXet
+ bVlW+kOGDlAGc8x45Ibjc7lJzXZmqygs9VWbgDKWq3XR6Jr8/PVIKehVfuD+lw==
+X-Gm-Gg: ASbGnctoFKVRPvIV+t4aAwKC93XLKofodWbLnVmkRPl2IL2G2P59eU4rg2UM0i47Cwt
+ eKznp3czWtA+ap+Pz9GIzNrbwsZva4GxY4FtqSMZyJm3muJFtW3b1mT8f7YLJ5RB8T83Iu3WYbP
+ 3lXOOASRdAI73GqDks03mb4TvDNlTwdCOBO+Y0AFYfVGIn9WcyeeLKIsTVqYvfUwlazIoy0C/9n
+ RvFi7A09iSysPj0E2JhqWb2BDbahytkimc/uHQGG66v2AAb59vSdDi3S/jypYvE0yFXra//mEW+
+ 2hthHDxzO2IJBT1Y4u3teXtRQb173/fmsXChy6sXI921gPPcXj7g3qohaCjicIvslR3xzbK3LZg
+ U0mU4dSCMjX7MaZiCt9T05JDdwoMhKneJpPhuhiOSl8LJoO284Be+bXpynzjKPHu8OF9KfDFrEK
+ 2YuhECFFR4zw==
+X-Google-Smtp-Source: AGHT+IH6y6+BHfgVdCT/b5OlMyOUC3Pu4hZR+gvjfW2mzGmiEBzQZaszWHMWm4k8Wxl/udhRRpgqBQ==
+X-Received: by 2002:a05:6a00:1a87:b0:772:114c:bcbb with SMTP id
+ d2e1a72fcca58-7723e1f1804mr14769895b3a.4.1756789662195; 
+ Mon, 01 Sep 2025 22:07:42 -0700 (PDT)
+Received: from kumara-Inspiron-15-3530.. ([49.207.220.140])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7722a501a94sm12248012b3a.93.2025.09.01.22.07.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Sep 2025 22:07:41 -0700 (PDT)
+From: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
+Subject: [PATCH] doc: add README.pmic guide for PMIC/regulator framework
+Date: Tue,  2 Sep 2025 10:37:18 +0530
+Message-ID: <20250902050730.5289-1-bhimeswararao.matsa@gmail.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1756803198.git.michal.simek@amd.com>
-References: <cover.1756803198.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=689; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=dItEQme4QaTi9ts4bvl3d0wB7GDj6O9YaVU1PBj78L0=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRs29CfLza1Qi/twj1BrfO9FzT2BPqutl7hxLjmwL+VP
- wptrtj3d5SyMIhxMMiKKbJMZ9JxWPPt2lKx5ZH5MHNYmUCGMHBxCsBEPpxn+Ct0f8FHT9us3/8j
- 7IT0qqLe7uFss3uqd3blXn+jdzdZg6IZ/vDrPV4ZfMGw8fXEXbuuJoa9KkyoLzE7E/bAj3ebVYJ
- BJRMA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB05.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD5:EE_|MN2PR12MB4189:EE_
-X-MS-Office365-Filtering-Correlation-Id: 062196ee-991e-49e2-cc57-08dde9fe5c4f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?16/lb/zlZOVyfRL7bm0r6jgVReLYa+gC+7ck99aQvY6cCxSwywfXej1LlR53?=
- =?us-ascii?Q?PVYDtxOi9FrbVn4fuylB8gDvjp8EmGCXxlGv3t+DXeAKJaEL1dWqMKFM0qno?=
- =?us-ascii?Q?v+Vo5ePUJY+q44AeGNMa00O0DYXSIHtZGAUPxjahkxpXseqCTVRYNIaGfmLT?=
- =?us-ascii?Q?MXCSPHbI/H2hxsf6tMGz88Bf3fSHWJ6doTl3Et/sfXx4c6WjkUD5SaV/ph23?=
- =?us-ascii?Q?D7KfZgxeluoSqflX+nIvvtXt5/vY9IhIQc1OnypQBXMmWs1t+1WMO+GCbaik?=
- =?us-ascii?Q?MFcQs1kcCzQgIUenW1jJSEM2L7ccNBgfm66nZFEJSbYmJ0ngZIov+I+A7t+P?=
- =?us-ascii?Q?jgBE+91g8QASVK4MycoBlBX3FEM9S/JH5iBUetg+ls1bGJklqe+miQTB+LL1?=
- =?us-ascii?Q?6Qb3f9vSh2eUIsEzHqBd7WGRiSF/sLKmHh1W3oF7lUlJy5lFB8icWEp6Hzz2?=
- =?us-ascii?Q?XRJhxhkP4ihtMxJdOsfMB4imH5fNTrglha1Ue25OmtWJ3vCxw1T6GHSXIzUM?=
- =?us-ascii?Q?vJ2hQtBgO4NopEIEnpdEQ+V+XM/TxcxCoJjr8SarlCCm3SWhygisEwKAB5Tj?=
- =?us-ascii?Q?gd0LEQam4B9//wPgEg5FGi30Mt8QFjoJd3Y4VUdl20YuhhySVPsxWNSsPvL/?=
- =?us-ascii?Q?78qwjFctP7Pn+ImIpRjdkKGf8HZTRx1xih6rQaonvquPLg6GfJi0MtqAWdew?=
- =?us-ascii?Q?2fgpbp9KZyQYaBdBhzc5hf53a+URJ0Oe7N73wO07UaNA4WlEitkI1LI+97Rq?=
- =?us-ascii?Q?BailqqShS/B+t+6kPquNIpc0c/ielzbJdJ728eFVBNje5LeUrUVP7njiL+E4?=
- =?us-ascii?Q?OmU76+9WQRr+fYXsG6SWNPdCQVNn2tU0Dggg7b4+StxcK/c1HUwWYOJJVod9?=
- =?us-ascii?Q?Zay1Uf9eAIQxuu5n0+XQ0d1vAuTC8GIz25rMDmw0dfs1dQg1Vkev9p6/SvXs?=
- =?us-ascii?Q?zS5l2pb3RCljr1wn+Et6cGe6qHeBKBPmsuegul63B32T0AsPCqYaZBAtY5ZD?=
- =?us-ascii?Q?DjTfXqu3nBt9CdANvwEhxuABdoOVAIHJBZWkHA6kPtVZgqX7f0cX4PXlhGno?=
- =?us-ascii?Q?NkcwTFxDqIi+LMZwziwznNeE6SEP+6D9StRrHucYKQSUi1qMM+/XBy0JmCjW?=
- =?us-ascii?Q?52rr2pKo+Iy8EjDEic3gh+RngyKkiXs0qV54zU/3NuODE84fGYlm+VJ7Ds+j?=
- =?us-ascii?Q?/3Q9wpuYeGCqmymF/c90rHOhpCqFepclSJNQihRicLQ2+IgnHOi4jI7VwsFb?=
- =?us-ascii?Q?wDScHfx/Xy/cVDCj//q8T4kPMAnGOtDCfsT6vFeYi3ngFGWNkKan1Hsqm/kl?=
- =?us-ascii?Q?WFsoNc4Kzg1Qkdk/U76wDFThUqSZx8dDkuvqydnfce2gcBeCrW0FAiGeZjI2?=
- =?us-ascii?Q?kW0jBjh/oXyBzMVNXs3so9cIct1p80FgiAoLdTko+pB/UOQ/J1NeY/4lUzzx?=
- =?us-ascii?Q?wrlZPBp+wL2kKhN9fkjY3wsxTkv+pWRN/UkdzUPnIVhvojC0uL1tLYFax1Vp?=
- =?us-ascii?Q?vF2i8jNWrSfOnkCBINb1bAoeHeHgI5GskRKf?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(1800799024)(376014); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Sep 2025 08:54:43.5296 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 062196ee-991e-49e2-cc57-08dde9fe5c4f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD5.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4189
+X-Mailman-Approved-At: Tue, 02 Sep 2025 11:12:53 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,29 +97,368 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some boards/designs with System Controller which are using SOMs need to
-change PWM signal polarity that's why create label to be able to reference
-them.
+This document introduces a developer guide for PMIC and regulator
+support in U-Boot. It covers subsystem architecture, Kconfig options,
+Device Tree integration, SPL considerations, and debugging methods,
+using TPS65219 + BeaglePlay as an example.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
 ---
+ doc/README.pmic | 345 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 345 insertions(+)
+ create mode 100644 doc/README.pmic
 
- arch/arm/dts/zynqmp-sm-k26-revA.dts | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/arch/arm/dts/zynqmp-sm-k26-revA.dts b/arch/arm/dts/zynqmp-sm-k26-revA.dts
-index a614d835b518..0abec77b3f3a 100644
---- a/arch/arm/dts/zynqmp-sm-k26-revA.dts
-+++ b/arch/arm/dts/zynqmp-sm-k26-revA.dts
-@@ -90,7 +90,7 @@
- 		};
- 	};
- 
--	pwm-fan {
-+	pwm_fan: pwm-fan {
- 		compatible = "pwm-fan";
- 		status = "okay";
- 		pwms = <&ttc0 2 40000 1>;
+diff --git a/doc/README.pmic b/doc/README.pmic
+new file mode 100644
+index 00000000000..f7c7ef629b9
+--- /dev/null
++++ b/doc/README.pmic
+@@ -0,0 +1,345 @@
++# U‑Boot PMIC & Regulator Mini‑Guide (README.pmic)
++
++> A concise, practical guide to understanding and extending PMIC + regulator support in U‑Boot. Target audience: BSP/Board bring‑up engineers.
++
++---
++
++## 0) TL;DR
++
++* **Code paths:** `drivers/power/pmic/` (PMIC bus + register access) and `drivers/power/regulator/` (voltage rails).
++* **Device Tree:** Describe PMIC node (I²C/SPI), child regulator nodes with `regulator-` properties.
++* **Kconfig:** Enable the PMIC driver (e.g., `CONFIG_PMIC_TPS65219`) and the regulator framework (`CONFIG_DM_REGULATOR*`).
++* **SPL vs U‑Boot proper:** Decide where rails must be on (e.g., for DDR/IP). Mirror minimal regulator config in SPL (size‑conscious).
++* **Debug:** Use `i2c dev`, `i2c md`, regulator debug prints, and `log level`.
++
++---
++
++## 1) Architecture Overview
++
++### 1.1 Subsystems
++
++* **PMIC layer (`drivers/power/pmic/`)**
++
++  * Abstracts low‑level register operations on a given chip (read/write, init, IRQ masks, sequencing registers, etc.).
++  * Typically binds to an **I²C** or **SPI** bus via a devicetree node.
++* **Regulator layer (`drivers/power/regulator/`)**
++
++  * Presents each rail (BUCK/SMPS, LDO, switch) as a `regulator` device.
++  * Methods: `enable/disable`, `set_value/get_value` (µV), `set_current` (µA), `get_status`.
++* **Consumers**
++
++  * Other drivers (MMC, USB, PHY, PCIe, camera, etc.) request rails via phandles or use fixed supplies.
++
++### 1.2 Typical Call Flow
++
++U‑Boot start → dm_init → ofnode parse PMIC → PMIC probe → create regulator children
++→ Early/SPL: board code sets essential rails (DDR, core) → Later: drivers request rails as needed
++
++---
++
++## 2) Kconfig & Build
++
++Enable core frameworks:
++
++CONFIG_DM=y
++CONFIG_DM_I2C=y               # or DM_SPI for SPI PMICs
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_UCLASS=y
++CONFIG_SPL_DM=y               # if using SPL with DM
++CONFIG_SPL_DM_REGULATOR=y
++
++Enable a specific PMIC (example, TI TPS65219):
++
++CONFIG_PMIC_TPS65219=y
++CONFIG_DM_REGULATOR_TPS65219=y   # if split, or enable generic DM_REGULATOR helpers
++
++Optional helpers:
++
++CONFIG_CMD_I2C=y
++CONFIG_CMD_REGULATOR=y            # if available on your tree
++CONFIG_LOG=y
++CONFIG_LOGLEVEL=6                 # verbose logs
++
++---
++
++## 3) Device Tree Basics
++
++### 3.1 PMIC Node (I²C example)
++
++&i2c0 {
++    status = "okay";
++    pmic: tps65219@24 {
++        compatible = "ti,tps65219";
++        reg = <0x24>;                  // I²C address
++        /* Optional: IRQ, GPIOs, power‑on config */
++        interrupt-parent = <&gpio1>;
++        interrupts = <12 IRQ_TYPE_LEVEL_LOW>;
++
++        /* Child regulators */
++        buck1: buck1 {
++            regulator-name = "vdd_core";
++            regulator-min-microvolt = <700000>;
++            regulator-max-microvolt = <1100000>;
++            regulator-always-on;
++            regulator-boot-on;
++        };
++
++        buck2: buck2 {
++            regulator-name = "vdd_ddr";
++            regulator-min-microvolt = <900000>;
++            regulator-max-microvolt = <1000000>;
++            regulator-boot-on;
++        };
++
++        ldo1: ldo1 {
++            regulator-name = "vdda_pll";
++            regulator-min-microvolt = <1800000>;
++            regulator-max-microvolt = <1800000>;
++            regulator-allow-bypass;
++        };
++    };
++};
++
++### 3.2 Consumers referencing regulators
++
++&mmc1 {
++    vmmc-supply = <&buck2>;      // card supply
++    vqmmc-supply = <&ldo1>;      // IO voltage
++};
++
++&usbss0 {
++    vbus-supply = <&buck1>;
++};
++
++**Notes**
++
++* Use chip‑specific child node names if the driver expects them (some drivers match by `regulator-name` or by order/index).
++* `regulator-boot-on` ensures the framework enables the rail during init if safe.
++* For **fixed rails** not controlled by PMIC, use `regulator-fixed` nodes under `fixedregulator@…` in DTS.
++
++---
++
++## 4) Adding/Porting a PMIC Driver
++
++### 4.1 Skeleton (PMIC layer)
++
++// drivers/power/pmic/pmic_foo.c
++#include <dm.h>
++#include <power/pmic.h>
++#include <i2c.h>
++
++struct foo_priv { struct udevice *dev; /* cached addr, etc. */ };
++
++static int foo_read(struct udevice *dev, uint reg, u8 *val)
++{ return dm_i2c_read(dev, reg, val, 1); }
++
++static int foo_write(struct udevice *dev, uint reg, const u8 *val)
++{ return dm_i2c_write(dev, reg, *val, 1); }
++
++static int foo_probe(struct udevice *dev)
++{
++    // Optionally: unlock, set default pages, mask IRQs, sanity checks
++    return 0;
++}
++
++static const struct udevice_id foo_ids[] = {
++    { .compatible = "vendor,foo1234" },
++    { }
++};
++
++U_BOOT_DRIVER(pmic_foo) = {
++    .name = "pmic_foo",
++    .id = UCLASS_PMIC,
++    .of_match = foo_ids,
++    .probe = foo_probe,
++};
++```
++
++### 4.2 Per‑regulator ops (Regulator layer)
++
++// drivers/power/regulator/foo_reg.c
++#include <dm.h>
++#include <power/regulator.h>
++
++static int foo_reg_enable(struct udevice *dev, bool enable)
++{ /* read reg; set/clear enable bit; write back */ return 0; }
++
++static int foo_reg_set_value(struct udevice *dev, int uV)
++{ /* map uV → selector → register field */ return 0; }
++
++static const struct dm_regulator_ops foo_reg_ops = {
++    .enable = foo_reg_enable,
++    .set_value = foo_reg_set_value,
++    .get_value = dm_regulator_common_get_value, // or custom
++};
++
++U_BOOT_DRIVER(foo_buck) = {
++    .name = "foo_buck",
++    .id = UCLASS_REGULATOR,
++    .ops = &foo_reg_ops,
++    .of_match = foo_buck_ids,
++};
++
++### 4.3 Kconfig/Makefile
++
++config PMIC_FOO
++    bool "PMIC Foo1234 support"
++    depends on DM_I2C && DM_REGULATOR
++
++obj-$(CONFIG_PMIC_FOO) += pmic_foo.o
++obj-$(CONFIG_PMIC_FOO) += foo_reg.o
++
++---
++
++## 5) SPL Considerations
++
++* **Goal:** Bring up only the rails required for DDR init, boot storage (eMMC/SD), and console.
++* Enable minimal configs: `CONFIG_SPL_DM_REGULATOR`, `CONFIG_SPL_I2C`, `CONFIG_SPL_OF_CONTROL`.
++* **Shrink tips:**
++
++  * Avoid complex features (interrupts/OTPs) in SPL unless mandatory.
++  * Hard‑code essential voltage selectors if DT parsing in SPL is too heavy; keep U‑Boot proper fully DT‑driven.
++* **Mirroring:** Ensure voltages set in SPL match what Linux expects later (handoff harmony).
++
++---
++
++## 6) Runtime Control & Sequencing
++
++* **Power‑on sequence:** Many PMICs have programmable sequences (buck → ldo delays). U‑Boot typically leaves factory OTP; use minimal tweaks only if required by board.
++* **Regulator constraints:** Honour `min/max µV`, `always‑on`, `boot‑on`. Error if request violates limits.
++* **DVFS:** If CPU frequency scaling at early boot is needed, expose a CPU rail regulator and provide OPP‑safe transitions.
++
++---
++
++## 7) Debugging Playbook
++
++1. **Confirm bus & probe**
++
++```sh
++=> i2c bus          # list buses
++=> i2c dev 0        # select bus
++=> i2c probe        # scan addresses; ensure PMIC addr shows up
++```
++
++2. **Peek registers**
++
++```sh
++=> i2c md 0x24 0x00 0x10   # dump first 16 regs (TPS65219 example)
++```
++
++3. **Regulator ops (if command present)**
++
++```sh
++=> regulator list
++=> regulator dev <n>
++=> regulator read
++=> regulator set value 1000000
++=> regulator enable
++```
++
++4. **Logs**
++
++```sh
++=> setenv loglevel 7; saveenv
++```
++
++5. **Scope & DMM**: Verify rails physically (bring up issues often are voltage/seq mismatches).
++
++**Common Pitfalls**
++
++* PMIC **variant mismatch**: OTP differs (missing rail in DTS → peripherals fail; e.g., USB not detected).
++* Wrong **I²C address** or bus number in DTS.
++* Missing `regulator-boot-on` for rails needed before their consumers probe.
++* Using `regulator-always-on` on rails that must be toggled for reset/PM suspend (stuck devices).
++* Not mirroring SPL/U‑Boot‑proper settings → surprise voltage switch later.
++
++---
++
++## 8) Example: TI TPS65219 + BeaglePlay‑like Board
++
++### 8.1 DTS (excerpt)
++
++&i2c2 {
++    status = "okay";
++    pmic: tps65219@24 {
++        compatible = "ti,tps65219";
++        reg = <0x24>;
++
++        buck1: buck1 { /* VDD_CORE */
++            regulator-name = "vdd_core";
++            regulator-min-microvolt = <700000>;
++            regulator-max-microvolt = <1100000>;
++            regulator-boot-on;
++            regulator-always-on;
++        };
++        buck2: buck2 { /* VDD_DDR */
++            regulator-name = "vdd_ddr";
++            regulator-min-microvolt = <900000>;
++            regulator-max-microvolt = <1000000>;
++            regulator-boot-on;
++        };
++        ldo1: ldo1 { /* VDDA_PLL */
++            regulator-name = "vdda_pll";
++            regulator-min-microvolt = <1800000>;
++            regulator-max-microvolt = <1800000>;
++        };
++    };
++};
++
++&dwc3_0 { vbus-supply = <&buck1>; };
++&mmc0   { vmmc-supply = <&buck2>; vqmmc-supply = <&ldo1>; };
++```
++
++### 8.2 Board code (optional guardrails)
++
++int board_init(void)
++{
++    struct udevice *reg;
++    if (!uclass_get_device_by_name(UCLASS_REGULATOR, "vdd_ddr", &reg))
++        regulator_set_value(reg, 950000);
++    return 0;
++}
++
++---
++
++## 9) Checklists
++
++### 9.1 New Board Bring‑up
++
++* [ ] PMIC bus verified (I²C/SPI, pull‑ups, address, reset line)
++* [ ] DTS PMIC node + child regulators authored
++* [ ] Rails mapped to consumers (MMC/USB/PHY/PCIe/CSI/eth)
++* [ ] SPL minimal rails configured
++* [ ] Boot to shell; validate `regulator list`
++* [ ] Measure voltages; confirm within tolerance under load
++* [ ] Exercise suspend/resume (if used) and warm reset
++
++### 9.2 New PMIC Driver
++
++* [ ] Read/write helpers done
++* [ ] ID/OTP/version readout
++* [ ] Regulator enumerate + ops (enable, set/get µV)
++* [ ] DT bindings documented (yaml in Linux style if upstreaming)
++* [ ] Kconfig/Makefile wired
++* [ ] Tested on real hardware; provide scope captures for critical rails
++
++---
++
++## 10) Upstreaming Tips
++
++* Mirror **Linux bindings** (names, properties) to ease review.
++* Keep **per‑rail tables** (selector↔µV) static‑const; avoid magic numbers.
++* Add **`dev_dbg()` breadcrumbs** for probe, set\_value, enable.
++* Provide `MAINTAINERS` entry and `doc/` note pointing here.
++
++---
++
++## 11) References & Useful Pointers
++
++* `drivers/power/pmic/` and `drivers/power/regulator/` examples in U‑Boot tree (TPS, RK8xx, MAX77xxx, PMIC for NXP, etc.)
++* Linux kernel `Documentation/devicetree/bindings/regulator/*` for property patterns.
++* Datasheet/OTP app notes for your PMIC (voltage tables, sequencing, reset behavior).
++
++---
++
++
 -- 
 2.43.0
 
