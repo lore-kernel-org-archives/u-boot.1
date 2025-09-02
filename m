@@ -4,67 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D70CA1007
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 18:18:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CCDCA1007
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 20:03:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FADB8331C;
-	Tue,  2 Sep 2025 20:18:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A71968329B;
+	Tue,  2 Sep 2025 22:03:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="LJ2laqDO";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 644158331D; Tue,  2 Sep 2025 20:18:45 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 9DFFA832AD; Tue,  2 Sep 2025 22:03:15 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF2E7832EB
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 20:18:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BDBB83290
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 22:03:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cGYsD3BQMz9t9B;
- Tue,  2 Sep 2025 20:18:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756837120;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=MR6EE1kjKa0e11ol8aakADxwX3i89OniXPGgVg6+JXk=;
- b=LJ2laqDO32FZxLi1JGrukdeaFZ8owjzoAiSspFCVWQOGWMq6K+mg1NuFxBGlwMQd6NgrNG
- V8azLSKg5w4bHpHniszVMceMqqGbuTeD8hh7gjVmNzLw6FEldsz3hkY8WZixeikuoxP5fI
- aWv5GxP3qIfUlg51P8qjb1QCq06bbcZ6qFbhqgvy4brtfoCrAgBx9avJWw9NDuOcOSqiAY
- w7e0D4l69y+x85v2hke7DEkruchNQP38RahiEahivm1Ii5UPVMYnbkS2ff7996oUm+OQTY
- rxBBrXHElFgLLROT6e1DfFymdUuSs+PwhsNQ759ZWz/LkmF2Ar7mK6/NsA2YNg==
-Message-ID: <ea637053-8f40-40c5-b257-e582dbbc3c1b@mailbox.org>
-Date: Tue, 2 Sep 2025 20:18:38 +0200
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [216.234.200.243])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 04F5FB2204BF;
+ Tue,  2 Sep 2025 22:03:10 +0200 (CEST)
+Message-ID: <3b75e20f-261e-4a23-b2b6-d4f4596b5fb3@freeshell.de>
+Date: Tue, 2 Sep 2025 13:03:09 -0700
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/4] configs: Increase USB Hub debounce timeout in Agilex5
-To: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>,
- u-boot@lists.denx.de
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
- <20250808100412.9320-4-nareshkumar.ravulapalli@altera.com>
- <7cfaf6cb-38b9-4932-8904-ce7be12a5098@mailbox.org>
- <69597595-6c7e-441a-952b-16b80fd60aca@altera.com>
- <e3107726-6980-4330-aabf-aef1ec9f5562@mailbox.org>
- <bff0c320-35bd-4129-9e19-4ef4103ba923@altera.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 02/10] riscv: dts: starfive: Add VisionFive 2 Lite board
+ device tree
+To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+References: <20250829060931.79940-1-hal.feng@starfivetech.com>
+ <20250829060931.79940-3-hal.feng@starfivetech.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <bff0c320-35bd-4129-9e19-4ef4103ba923@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250829060931.79940-3-hal.feng@starfivetech.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ao3bmab8j6r58fwb396tj7a3q67grfck
-X-MBO-RS-ID: 85c98edd8c5ab0a7119
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,67 +60,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/2/25 9:52 AM, Ravulapalli, Naresh Kumar wrote:
+Hi Hal,
+
+On 8/28/25 23:09, Hal Feng wrote:
+> VisionFive 2 Lite is a mini SBC based on the StarFive JH7110S SoC.
 > 
+> Board features:
+> - JH7110S SoC
+> - 2/4/8 GiB LPDDR4 DRAM
+> - AXP15060 PMIC
+> - 40 pin GPIO header
+> - 1x USB 3.0 host port
+> - 3x USB 2.0 host port
+> - 1x M.2 M-Key (size: 2242)
+> - 1x MicroSD slot (optional non-removable eMMC)
+> - 1x QSPI Flash
+> - 1x I2C EEPROM
+> - 1x 1Gbps Ethernet port
+> - SDIO-based Wi-Fi & UART-based Bluetooth
+> - 1x HDMI port
+> - 1x 2-lane DSI
+> - 1x 2-lane CSI
 > 
-> On 30-Aug-25 5:30 AM, Marek Vasut wrote:
->>
->> On 8/29/25 6:19 PM, Ravulapalli, Naresh Kumar wrote:
->>> Hi Marek
->>>
->>> On 29-Aug-25 2:11 PM, Marek Vasut wrote:
->>>>
->>>> On 8/8/25 12:04 PM, Naresh Kumar Ravulapalli wrote:
->>>>> Some USB devices need more time to be initialized. Hence,
->>>>> increasing the default USB Hub debounce timeout value for
->>>>> devices to be discovered, connected to Agilex5 boards.
->>>> Is this really hub debounce timeout or usb_pgood_delay ?
->>>>
->>>> Which devices are those, include that in the commit message.
->>>
->>> Yes, timeout is related to USB connect/disconnect signal bounces not
->>> about bus stability during init.
->>>
->>> Issue was mainly observed with legacy flash drives. Maybe I will change
->>> commit text from "Some USB devices need more time to be initialized..."
->>> to "Some old USB flash drives need more time to be initialized during
->>> connect or disconnect events ..."?
->>>
->>> Note that I am not modifying the default Kconfig value in general;
->>> change is only made for an SoCFPGA devkit we tested.
->> Does this same issue go away if you set usb_pgood_delay to 2000 or
->> higher too ?
+
+Prefer to see subject line and URL of recent upstream discussion or git
+web commit for the new or modified dts changes from upstream of
+devicetree-rebasing in this commit and not just in the cover letter.
+
++ From upstream LKML discussion "[RFC 3/3] riscv: dts: starfive: Add
+VisionFive 2 Lite board device tree" [1].
++ 1:
+https://lore.kernel.org/all/20250821100930.71404-4-hal.feng@starfivetech.com/
+
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  .../jh7110s-starfive-visionfive-2-lite.dts    | 152 ++++++++++++++++++
+>  1 file changed, 152 insertions(+)
+>  create mode 100644 dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
 > 
-> No, changing USB HUB debounce timeout is working for us.
-Look at this code:
+> diff --git a/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
+> new file mode 100644
+> index 00000000000..a0cb9912eb8
+> --- /dev/null
+> +++ b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
 
-https://source.denx.de/u-boot/u-boot/-/blob/master/common/usb_hub.c?ref_type=heads#L199
+No, do not directly add or modify upstream dts in dts/upstream/src
+subtree. We are not permitted in U-Boot to merge out-of-band devicetree
+changes to the devicetree-rebasing subtree as this creates more work for
+Tom, if I understand correctly?
 
-"
-#if CONFIG_IS_ENABLED(ENV_SUPPORT)
-	env = env_get("usb_pgood_delay");
-	if (env)
-		pgood_delay = max(pgood_delay,
-			          (unsigned)simple_strtol(env, NULL, 0));
-#endif
-	debug("pgood_delay=%dms\n", pgood_delay);
+Instead add or modify this dts as
+arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi filename.
 
-	/*
-	 * Do a minimum delay of the larger value of 100ms or pgood_delay
-	 * so that the power can stablize before the devices are queried
-	 */
-	hub->query_delay = get_timer(0) + max(100, (int)pgood_delay);
+Note: Locally for development purpose I would like to extend U-Boot to
+choose a Linux source tree path for location of devicetree. Today
+OF_UPSTREAM support in U-Boot build system assumes to use the
+devicetree-rebasing subtree and the path is not meant to be changed. The
+devicetree-rebasing scripts assume only to merge from regular Linux
+release version tags and not arbitrary commit IDs. As a workaround I do
+something like git recursive remove the
+dts/upstream/src/$(ARCH)/$(VENDOR) and replace with symbolic link to the
+Linux source tree arch/$(ARCH)/boot/dts/$(VENDOR) for development. I
+would like better if it was simply an environment flag for make system
+where Linux or devicetree-rebasing source tree is located, but that is
+for a different discussion not in this series.
 
-	/*
-	 * Record the power-on timeout here. The max. delay (timeout)
-	 * will be done based on this value in the USB port loop in
-	 * usb_hub_configure() later.
-	 */
-	hub->connect_timeout = hub->query_delay + HUB_DEBOUNCE_TIMEOUT;
-	debug("devnum=%d poweron: query_delay=%d connect_timeout=%d\n",
-	      dev->devnum, max(100, (int)pgood_delay),
-	      max(100, (int)pgood_delay) + HUB_DEBOUNCE_TIMEOUT);
-"
+> @@ -0,0 +1,152 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +/*
+> + * Copyright (C) 2025 StarFive Technology Co., Ltd.
+> + * Copyright (C) 2025 Hal Feng <hal.feng@starfivetech.com>
+> + */
+> +
+> +/dts-v1/;
+> +#include "jh7110-common.dtsi"
+> +
+> +/ {
+> +	model = "StarFive VisionFive 2 Lite";
+> +	compatible = "starfive,visionfive-2-lite", "starfive,jh7110s";
+> +};
+> +
+> +&cpu_opp {
+> +	opp-312500000 {
+> +		opp-hz = /bits/ 64 <312500000>;
+> +		opp-microvolt = <800000>;
+> +	};
+> +	opp-417000000 {
+> +		opp-hz = /bits/ 64 <417000000>;
+> +		opp-microvolt = <800000>;
+> +	};
+> +	opp-625000000 {
+> +		opp-hz = /bits/ 64 <625000000>;
+> +		opp-microvolt = <800000>;
+> +	};
+> +	opp-1250000000 {
+> +		opp-hz = /bits/ 64 <1250000000>;
+> +		opp-microvolt = <1000000>;
+> +	};
+> +};
+> +
+> +&gmac0 {
+> +	starfive,tx-use-rgmii-clk;
+> +	assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
+> +	assigned-clock-parents = <&aoncrg JH7110_AONCLK_GMAC0_RMII_RTX>;
+> +	status = "okay";
+> +};
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +};
+> +
+> +&mmc0 {
+> +	bus-width = <4>;
+> +	no-sdio;
+> +	no-mmc;
+> +	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_HIGH>;
+> +	disable-wp;
+> +	cap-sd-highspeed;
+> +};
+> +
+> +&mmc1 {
+> +	max-frequency = <50000000>;
+> +	keep-power-in-suspend;
+> +	non-removable;
+> +};
+> +
+> +&pcie1 {
+> +	enable-gpios = <&sysgpio 27 GPIO_ACTIVE_HIGH>;
+> +	status = "okay";
+> +};
+> +
+> +&phy0 {
+> +	motorcomm,tx-clk-adj-enabled;
+> +	motorcomm,tx-clk-100-inverted;
+> +	motorcomm,tx-clk-1000-inverted;
+> +	motorcomm,rx-clk-drv-microamp = <3970>;
+> +	motorcomm,rx-data-drv-microamp = <2910>;
+> +	rx-internal-delay-ps = <1500>;
+> +	tx-internal-delay-ps = <1500>;
+> +};
+> +
+> +&pwm {
+> +	status = "okay";
+> +};
+> +
+> +&spi0 {
+> +	status = "okay";
+> +};
+> +
+> +&syscrg {
+> +	assigned-clock-rates = <0>, <0>, <0>, <0>, <500000000>, <1250000000>;
+> +};
+> +
+> +&sysgpio {
+> +	uart1_pins: uart1-0 {
+> +		tx-pins {
+> +			pinmux = <GPIOMUX(22, GPOUT_SYS_UART1_TX,
+> +					      GPOEN_ENABLE,
+> +					      GPI_NONE)>;
+> +			bias-disable;
+> +			drive-strength = <12>;
+> +			input-disable;
+> +			input-schmitt-disable;
+> +			slew-rate = <0>;
+> +		};
+> +
+> +		rx-pins {
+> +			pinmux = <GPIOMUX(23, GPOUT_LOW,
+> +					      GPOEN_DISABLE,
+> +					      GPI_SYS_UART1_RX)>;
+> +			bias-pull-up;
+> +			drive-strength = <2>;
+> +			input-enable;
+> +			input-schmitt-enable;
+> +			slew-rate = <0>;
+> +		};
+> +
+> +		cts-pins {
+> +			pinmux = <GPIOMUX(24, GPOUT_LOW,
+> +					      GPOEN_DISABLE,
+> +					      GPI_SYS_UART1_CTS)>;
+> +			input-enable;
+> +		};
+> +
+> +		rts-pins {
+> +			pinmux = <GPIOMUX(25, GPOUT_SYS_UART1_RTS,
+> +					      GPOEN_ENABLE,
+> +					      GPI_NONE)>;
+> +			input-enable;
+> +		};
+> +	};
+> +
+> +	usb0_pins: usb0-0 {
+> +		power-pins {
+> +			pinmux = <GPIOMUX(26, GPOUT_HIGH,
+> +					      GPOEN_ENABLE,
+> +					      GPI_NONE)>;
+> +			input-disable;
+> +		};
+> +	};
+> +};
+> +
+> +&uart1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart1_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&usb0 {
+> +	dr_mode = "host";
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&usb0_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&usb_cdns3 {
+> +	phys = <&usbphy0>, <&pciephy0>;
+> +	phy-names = "cdns3,usb2-phy", "cdns3,usb3-phy";
+> +};
 
-Changing both usb_pgood_delay or (CONFIG_USB_)HUB_DEBOUNCE_TIMEOUT 
-should have the same effect. How come it does not ?
+Append the last line of this file an '#include' statement corresponding
+with the next automatic dtsi inclusion order [1] as appropriate,
+currently when we drop file jh7110-common-u-boot.dtsi from U-Boot:
+
++ #include "jh7110-u-boot.dtsi"
+
+Or better approach in future for last line of the file would be if when
+CONFIG_NAME is added to the search order [2], then this include would
+instead be a hyphenated form of $(CONFIG_SYS_CONFIG_NAME)-u-boot.dtsi:
+
++ #include "starfive-visionfive2-u-boot.dtsi"
+
+And drop all dts/riscv/jh7110*{.dts,.dtsi} not existing in
+dts/upstream/src subtree.
+
+Anyways I discover the build system is not working correctly for '$<'
+symbol [3] and this breaks our assumption that
+arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi would be
+automatically included. It is needed to fix the situation separate from
+this series.
+
+1: https://docs.u-boot.org/en/latest/develop/devicetree/control.html
+2: https://lore.kernel.org/u-boot/20250826214708.309271-1-e@freeshell.de/
+3: https://lore.kernel.org/u-boot/20250901094506.647427-1-e@freeshell.de/
+
+-E
