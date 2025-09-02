@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CCDCA1007
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 20:03:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0A1CA1005
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 21:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A71968329B;
-	Tue,  2 Sep 2025 22:03:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E295C832EB;
+	Tue,  2 Sep 2025 23:28:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DFFA832AD; Tue,  2 Sep 2025 22:03:15 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ id 1CAB68334A; Tue,  2 Sep 2025 23:28:12 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BDBB83290
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 22:03:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21CD7832AD
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 23:28:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 Received: from [192.168.2.54] (unknown [216.234.200.243])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 04F5FB2204BF;
- Tue,  2 Sep 2025 22:03:10 +0200 (CEST)
-Message-ID: <3b75e20f-261e-4a23-b2b6-d4f4596b5fb3@freeshell.de>
-Date: Tue, 2 Sep 2025 13:03:09 -0700
+ by freeshell.de (Postfix) with ESMTPSA id 10987B2203BD;
+ Tue,  2 Sep 2025 23:28:07 +0200 (CEST)
+Message-ID: <b1a0ad61-f844-408a-81e9-078fd3b52462@freeshell.de>
+Date: Tue, 2 Sep 2025 14:28:06 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 02/10] riscv: dts: starfive: Add VisionFive 2 Lite board
- device tree
-To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
+Subject: Re: [RFC 03/10] eeprom: starfive: Simplify get_ddr_size_from_eeprom()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Sumit Garg <sumit.garg@kernel.org>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>
 References: <20250829060931.79940-1-hal.feng@starfivetech.com>
- <20250829060931.79940-3-hal.feng@starfivetech.com>
+ <20250829060931.79940-4-hal.feng@starfivetech.com>
+ <3f7547d9-5abb-42d9-9bf8-02329ced4364@canonical.com>
 Content-Language: en-US
 From: E Shattow <e@freeshell.de>
-In-Reply-To: <20250829060931.79940-3-hal.feng@starfivetech.com>
+In-Reply-To: <3f7547d9-5abb-42d9-9bf8-02329ced4364@canonical.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,248 +60,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hal,
 
-On 8/28/25 23:09, Hal Feng wrote:
-> VisionFive 2 Lite is a mini SBC based on the StarFive JH7110S SoC.
+On 8/29/25 00:33, Heinrich Schuchardt wrote:
+> On 29.08.25 08:09, Hal Feng wrote:
+>> Directly return the DDR size instead of the field of 'DxxxExxx'.
+>> Move the function description to the header file.
+>>
+>> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
+>> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+>> ---
+>>   arch/riscv/cpu/jh7110/spl.c                     |  2 +-
+>>   arch/riscv/include/asm/arch-jh7110/eeprom.h     |  8 +++++++-
+>>   .../visionfive2/visionfive2-i2c-eeprom.c        | 17 +++--------------
+>>   3 files changed, 11 insertions(+), 16 deletions(-)
+>>
+>> diff --git a/arch/riscv/cpu/jh7110/spl.c b/arch/riscv/cpu/jh7110/spl.c
+>> index 87aaf865246..3aece7d995b 100644
+>> --- a/arch/riscv/cpu/jh7110/spl.c
+>> +++ b/arch/riscv/cpu/jh7110/spl.c
+>> @@ -41,7 +41,7 @@ int spl_dram_init(void)
+>>       /* Read the definition of the DDR size from eeprom, and if not,
+>>        * use the definition in DT
+>>        */
+>> -    size = (get_ddr_size_from_eeprom() >> 16) & 0xFF;
+>> +    size = get_ddr_size_from_eeprom();
+>>       if (check_ddr_size(size))
+>>           gd->ram_size = size << 30;
+>>   diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h b/arch/
+>> riscv/include/asm/arch-jh7110/eeprom.h
+>> index 45ad2a5f7bc..6d0a0ba0c4a 100644
+>> --- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
+>> +++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+>> @@ -10,7 +10,13 @@
+>>   #include <linux/types.h>
+>>     u8 get_pcb_revision_from_eeprom(void);
+>> -u32 get_ddr_size_from_eeprom(void);
+>> +
+>> +/**
+>> + * get_ddr_size_from_eeprom() - read DDR size from EEPROM
+>> + *
+>> + * @return: size in GiB or 0xFF on error.
+
+No. This is not consistent with get_mmc_size_from_eeprom() return value
+which uses 0 as short-circuit return value if read_eeprom() fails.
+
+It is not important to make the distinction here if eeprom read failed
+or the data was not a valid size (i.e. zero from successful eeprom read).
+
+>> + */
+>> +u8 get_ddr_size_from_eeprom(void);
+>>     /**
+>>    * get_mmc_size_from_eeprom() - read eMMC size from EEPROM
+>> diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/
+>> board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+>> index 17a44020bcf..3866d07f9d4 100644
+>> --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+>> +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+>> @@ -550,23 +550,12 @@ u8 get_pcb_revision_from_eeprom(void)
+>>       return pbuf.eeprom.atom1.data.pstr[6];
+>>   }
+>>   -/**
+>> - * get_ddr_size_from_eeprom - get the DDR size
+>> - * pstr:  VF7110A1-2228-D008E000-00000001
+>> - * VF7110A1/VF7110B1 : VisionFive JH7110A /VisionFive JH7110B
+>> - * D008: 8GB LPDDR4
+>> - * E000: No emmc device, ECxx: include emmc device, xx: Capacity
+>> size[GB]
+>> - * return: the field of 'D008E000'
+>> - */
+>> -
+>> -u32 get_ddr_size_from_eeprom(void)
+>> +u8 get_ddr_size_from_eeprom(void)
+>>   {
+>> -    u32 pv = 0xFFFFFFFF;
+>> -
+>>       if (read_eeprom())
+>> -        return pv;
+>> +        return 0xFF;
+
+No, inverted logic, see above return of 0xFF as an error condition is
+suspect.
+
 > 
-> Board features:
-> - JH7110S SoC
-> - 2/4/8 GiB LPDDR4 DRAM
-> - AXP15060 PMIC
-> - 40 pin GPIO header
-> - 1x USB 3.0 host port
-> - 3x USB 2.0 host port
-> - 1x M.2 M-Key (size: 2242)
-> - 1x MicroSD slot (optional non-removable eMMC)
-> - 1x QSPI Flash
-> - 1x I2C EEPROM
-> - 1x 1Gbps Ethernet port
-> - SDIO-based Wi-Fi & UART-based Bluetooth
-> - 1x HDMI port
-> - 1x 2-lane DSI
-> - 1x 2-lane CSI
+> Let's assume somebody cleared the EEPROM and the SPI flash.
+> 
+> Would it make sense to assume the minimum encodable RAM size (1 GiB) in
+> this case, just to let the board boot to the console to allow writing
+> the EEPROM with valid data again?
+> 
+> The current patch to simplify the code looks correct.
+> 
+> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> 
+>>   -    return hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL);
+>> +    return (hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL) >> 16) &
+>> 0xFF;
+>>   }
+>>     u32 get_mmc_size_from_eeprom(void)
 > 
 
-Prefer to see subject line and URL of recent upstream discussion or git
-web commit for the new or modified dts changes from upstream of
-devicetree-rebasing in this commit and not just in the cover letter.
+Yes, later fallback to 2G size configuration makes sense. Compatible
+products with less than 2G do not exist and probably never will; there
+may be some developer boards with 1G but none I have ever heard of
+directly in conversations since 2023. The other common situation with
+zero or uninitialized EEPROM would be a failed read of eeprom i.e. RTC
+module at same i2c address or missing devicetree nodes at SPL phase.
 
-+ From upstream LKML discussion "[RFC 3/3] riscv: dts: starfive: Add
-VisionFive 2 Lite board device tree" [1].
-+ 1:
-https://lore.kernel.org/all/20250821100930.71404-4-hal.feng@starfivetech.com/
+1. DDR size detection heuristic should happen first without need of
+eeprom, if possible.
 
-> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> ---
->  .../jh7110s-starfive-visionfive-2-lite.dts    | 152 ++++++++++++++++++
->  1 file changed, 152 insertions(+)
->  create mode 100644 dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-> 
-> diff --git a/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-> new file mode 100644
-> index 00000000000..a0cb9912eb8
-> --- /dev/null
-> +++ b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
+2. Else warn DDR detection failed and read size from eeprom config
 
-No, do not directly add or modify upstream dts in dts/upstream/src
-subtree. We are not permitted in U-Boot to merge out-of-band devicetree
-changes to the devicetree-rebasing subtree as this creates more work for
-Tom, if I understand correctly?
-
-Instead add or modify this dts as
-arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi filename.
-
-Note: Locally for development purpose I would like to extend U-Boot to
-choose a Linux source tree path for location of devicetree. Today
-OF_UPSTREAM support in U-Boot build system assumes to use the
-devicetree-rebasing subtree and the path is not meant to be changed. The
-devicetree-rebasing scripts assume only to merge from regular Linux
-release version tags and not arbitrary commit IDs. As a workaround I do
-something like git recursive remove the
-dts/upstream/src/$(ARCH)/$(VENDOR) and replace with symbolic link to the
-Linux source tree arch/$(ARCH)/boot/dts/$(VENDOR) for development. I
-would like better if it was simply an environment flag for make system
-where Linux or devicetree-rebasing source tree is located, but that is
-for a different discussion not in this series.
-
-> @@ -0,0 +1,152 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2025 StarFive Technology Co., Ltd.
-> + * Copyright (C) 2025 Hal Feng <hal.feng@starfivetech.com>
-> + */
-> +
-> +/dts-v1/;
-> +#include "jh7110-common.dtsi"
-> +
-> +/ {
-> +	model = "StarFive VisionFive 2 Lite";
-> +	compatible = "starfive,visionfive-2-lite", "starfive,jh7110s";
-> +};
-> +
-> +&cpu_opp {
-> +	opp-312500000 {
-> +		opp-hz = /bits/ 64 <312500000>;
-> +		opp-microvolt = <800000>;
-> +	};
-> +	opp-417000000 {
-> +		opp-hz = /bits/ 64 <417000000>;
-> +		opp-microvolt = <800000>;
-> +	};
-> +	opp-625000000 {
-> +		opp-hz = /bits/ 64 <625000000>;
-> +		opp-microvolt = <800000>;
-> +	};
-> +	opp-1250000000 {
-> +		opp-hz = /bits/ 64 <1250000000>;
-> +		opp-microvolt = <1000000>;
-> +	};
-> +};
-> +
-> +&gmac0 {
-> +	starfive,tx-use-rgmii-clk;
-> +	assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
-> +	assigned-clock-parents = <&aoncrg JH7110_AONCLK_GMAC0_RMII_RTX>;
-> +	status = "okay";
-> +};
-> +
-> +&i2c0 {
-> +	status = "okay";
-> +};
-> +
-> +&mmc0 {
-> +	bus-width = <4>;
-> +	no-sdio;
-> +	no-mmc;
-> +	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_HIGH>;
-> +	disable-wp;
-> +	cap-sd-highspeed;
-> +};
-> +
-> +&mmc1 {
-> +	max-frequency = <50000000>;
-> +	keep-power-in-suspend;
-> +	non-removable;
-> +};
-> +
-> +&pcie1 {
-> +	enable-gpios = <&sysgpio 27 GPIO_ACTIVE_HIGH>;
-> +	status = "okay";
-> +};
-> +
-> +&phy0 {
-> +	motorcomm,tx-clk-adj-enabled;
-> +	motorcomm,tx-clk-100-inverted;
-> +	motorcomm,tx-clk-1000-inverted;
-> +	motorcomm,rx-clk-drv-microamp = <3970>;
-> +	motorcomm,rx-data-drv-microamp = <2910>;
-> +	rx-internal-delay-ps = <1500>;
-> +	tx-internal-delay-ps = <1500>;
-> +};
-> +
-> +&pwm {
-> +	status = "okay";
-> +};
-> +
-> +&spi0 {
-> +	status = "okay";
-> +};
-> +
-> +&syscrg {
-> +	assigned-clock-rates = <0>, <0>, <0>, <0>, <500000000>, <1250000000>;
-> +};
-> +
-> +&sysgpio {
-> +	uart1_pins: uart1-0 {
-> +		tx-pins {
-> +			pinmux = <GPIOMUX(22, GPOUT_SYS_UART1_TX,
-> +					      GPOEN_ENABLE,
-> +					      GPI_NONE)>;
-> +			bias-disable;
-> +			drive-strength = <12>;
-> +			input-disable;
-> +			input-schmitt-disable;
-> +			slew-rate = <0>;
-> +		};
-> +
-> +		rx-pins {
-> +			pinmux = <GPIOMUX(23, GPOUT_LOW,
-> +					      GPOEN_DISABLE,
-> +					      GPI_SYS_UART1_RX)>;
-> +			bias-pull-up;
-> +			drive-strength = <2>;
-> +			input-enable;
-> +			input-schmitt-enable;
-> +			slew-rate = <0>;
-> +		};
-> +
-> +		cts-pins {
-> +			pinmux = <GPIOMUX(24, GPOUT_LOW,
-> +					      GPOEN_DISABLE,
-> +					      GPI_SYS_UART1_CTS)>;
-> +			input-enable;
-> +		};
-> +
-> +		rts-pins {
-> +			pinmux = <GPIOMUX(25, GPOUT_SYS_UART1_RTS,
-> +					      GPOEN_ENABLE,
-> +					      GPI_NONE)>;
-> +			input-enable;
-> +		};
-> +	};
-> +
-> +	usb0_pins: usb0-0 {
-> +		power-pins {
-> +			pinmux = <GPIOMUX(26, GPOUT_HIGH,
-> +					      GPOEN_ENABLE,
-> +					      GPI_NONE)>;
-> +			input-disable;
-> +		};
-> +	};
-> +};
-> +
-> +&uart1 {
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&uart1_pins>;
-> +	status = "okay";
-> +};
-> +
-> +&usb0 {
-> +	dr_mode = "host";
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&usb0_pins>;
-> +	status = "okay";
-> +};
-> +
-> +&usb_cdns3 {
-> +	phys = <&usbphy0>, <&pciephy0>;
-> +	phy-names = "cdns3,usb2-phy", "cdns3,usb3-phy";
-> +};
-
-Append the last line of this file an '#include' statement corresponding
-with the next automatic dtsi inclusion order [1] as appropriate,
-currently when we drop file jh7110-common-u-boot.dtsi from U-Boot:
-
-+ #include "jh7110-u-boot.dtsi"
-
-Or better approach in future for last line of the file would be if when
-CONFIG_NAME is added to the search order [2], then this include would
-instead be a hyphenated form of $(CONFIG_SYS_CONFIG_NAME)-u-boot.dtsi:
-
-+ #include "starfive-visionfive2-u-boot.dtsi"
-
-And drop all dts/riscv/jh7110*{.dts,.dtsi} not existing in
-dts/upstream/src subtree.
-
-Anyways I discover the build system is not working correctly for '$<'
-symbol [3] and this breaks our assumption that
-arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi would be
-automatically included. It is needed to fix the situation separate from
-this series.
-
-1: https://docs.u-boot.org/en/latest/develop/devicetree/control.html
-2: https://lore.kernel.org/u-boot/20250826214708.309271-1-e@freeshell.de/
-3: https://lore.kernel.org/u-boot/20250901094506.647427-1-e@freeshell.de/
+3. Else warn eeprom memory config invalid and set size set to default 2G.
 
 -E
