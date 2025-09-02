@@ -4,77 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 992A8CA1005
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 22:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDF4ACA1005
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 22:13:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC0BE832AD;
-	Wed,  3 Sep 2025 00:10:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 62700832AD;
+	Wed,  3 Sep 2025 00:13:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aQn6O/QC";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dSKPmGbs";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E2C4D832EB; Wed,  3 Sep 2025 00:10:10 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 8C9C4833C6; Wed,  3 Sep 2025 00:13:00 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0D9583252
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 00:10:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 777CC83252
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 00:12:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cGg0H4Wb6z9sqs;
- Wed,  3 Sep 2025 00:10:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756851007;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xGTya9ESJkp4RSWdP4C82j0KaMR6sZSPLr2IlFRnWg8=;
- b=aQn6O/QCqHte6+NtCicl81CWwHAtiWGKtjgdn5ykBjoguFheHWZEG5ep14Gxfm9OhxznQI
- aGHY7ZuIRO/CZuHb/TY7TtSIXFttzp0gtnEad/cJkUOceozfAecnRvf1QL7fETqeVg41rf
- In649dzPHFFqqB8/20zjSZryuxeasnnocFum/rg93O4TN69MMdg78/LDjnWR6VBQvtqfMU
- 6VXkIUTAtl4clYHG3xcPI7guMdMy4EXYuszOcFyYQ+NvLrIVvdFGWNJVAnmFwxZtrObY7a
- 24s8ngIZ9qVQnx8gGNUISPxqmWS9iLmh/fgj6dAFLOVQIbk9qR6Rj6fUhF0DzA==
-Message-ID: <2e147ca2-2588-41ac-9dcc-c4c7f016f4e4@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756851005;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xGTya9ESJkp4RSWdP4C82j0KaMR6sZSPLr2IlFRnWg8=;
- b=dSKPmGbsyStfjiooe9Ij0BlDieoWNxZNxH5HtghsFftw5aVb/ZvsX/VNOpPFovHVlg3TLm
- ySW8we5Z3Jydyx0zH81yLc1citF99Vihh44eAGI/oX+z/G2Uewa/mxMjjDC5UnsEoMzSZf
- /KoGzrtZXc1TA6pmTV0wbHmlXLYaEsU1H0lMVY9TBhGF2hUzrAFl609SETfdJsIB+TtW2T
- uIDnscuAke6f2KehwkEKgvp75KIYzU0jmkDDvHphYTACsYzTDh4p7vUPzB5GcKQEbfRdsi
- pkaz/bB9rWToHDc+tbeFjUl+U4fIi/hwpAgRe5UEXUvMsdtBJYb5/cMf5N4ygA==
-Date: Wed, 3 Sep 2025 00:10:03 +0200
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [216.234.200.243])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 63278B22028D;
+ Wed,  3 Sep 2025 00:12:56 +0200 (CEST)
+Message-ID: <7f46fbd8-00bf-4a05-af78-a089332e55d6@freeshell.de>
+Date: Tue, 2 Sep 2025 15:12:54 -0700
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] pinctrl: rzg2l: Variable may not have been assigned to
-To: Paul Barker <paul@pbarker.dev>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250807-pinctrl_renesas-v2-1-5453d989573e@linaro.org>
- <ecde7d398f0ff89cc8fb20a7e3473afe38f215bd.camel@pbarker.dev>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC 04/10] eeprom: starfive: Correct
+ get_pcb_revision_from_eeprom()
+To: Hal Feng <hal.feng@starfivetech.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Leo
+ <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>
+References: <20250829060931.79940-1-hal.feng@starfivetech.com>
+ <20250829060931.79940-5-hal.feng@starfivetech.com>
+ <7c0bdef3-69df-4536-bddf-e2912ce71eed@canonical.com>
+ <ZQ2PR01MB1307D97D2C9566B8EE443812E6062@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <ecde7d398f0ff89cc8fb20a7e3473afe38f215bd.camel@pbarker.dev>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <ZQ2PR01MB1307D97D2C9566B8EE443812E6062@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: uyusj68dtkitzgsnskqbn1f41k9wjch9
-X-MBO-RS-ID: ef14b3a0a0212e49214
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,21 +62,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/1/25 9:15 PM, Paul Barker wrote:
-> On Thu, 2025-08-07 at 15:41 +0100, Andrew Goodbody wrote:
->> In rzg2l_pinconf_set and rzg2l_get_pin_muxing if the call to
->> rzg2l_selector_decode fails then the variable pin may not have been
->> assigned to. Remove the use of pin from the error message. Also update
->> the error message to show the invalid selector used instead of port
->> which will be the error code returned.
->>
->> This issue was found by Smatch.
->>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> 
-> This fell off my radar, sorry!
-> 
-> Reviewed-by: Paul Barker <paul@pbarker.dev>
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Thanks !
+On 9/2/25 00:44, Hal Feng wrote:
+>> On 29.08.25 15:44, Heinrich Schuchardt wrote:
+>> On 29.08.25 08:09, Hal Feng wrote:
+>>> pcb_revision is stored in the pcb_revision field of ATOM4. Correct it.
+>>> Move the function description to the header file.
+>>> Remove the function calls in board/starfive/visionfive2/.
+>>>
+>>> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
+>>> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+>>> ---
+>>>   arch/riscv/include/asm/arch-jh7110/eeprom.h   |  5 +++++
+>>>   board/starfive/visionfive2/spl.c              | 18 ++++++-----------
+>>>   .../visionfive2/starfive_visionfive2.c        | 20 ++++++-------------
+>>>   .../visionfive2/visionfive2-i2c-eeprom.c      | 11 ++--------
+>>>   4 files changed, 19 insertions(+), 35 deletions(-)
+>>>
+>>> diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h
+>> b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+>>> index 6d0a0ba0c4a..025f1d32c49 100644
+>>> --- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
+>>> +++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+>>> @@ -9,6 +9,11 @@
+>>>
+>>>   #include <linux/types.h>
+>>>
+>>> +/**
+>>> + * get_pcb_revision_from_eeprom() - get the PCB revision
+>>> + *
+>>> + * @return: the PCB revision or 0xFF on error.
+>>> + */
+
+No. Inverted logic. See below comment about body of function.
+
+>>>   u8 get_pcb_revision_from_eeprom(void);
+>>>
+>>>   /**
+>>> diff --git a/board/starfive/visionfive2/spl.c
+>> b/board/starfive/visionfive2/spl.c
+>>> index 3dfa931b655..901e7b58f36 100644
+>>> --- a/board/starfive/visionfive2/spl.c
+>>> +++ b/board/starfive/visionfive2/spl.c
+>>> @@ -126,19 +126,13 @@ int board_fit_config_name_match(const char
+>> *name)
+>>>   		    !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
+>>>   		return 0;
+>>>   	} else if (!strcmp(name, "starfive/jh7110-starfive-visionfive-2-v1.2a")
+>> &&
+>>> -		    !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+>>> -		switch (get_pcb_revision_from_eeprom()) {
+>>> -		case 'a':
+>>> -		case 'A':
+>>> -			return 0;
+>>> -		}
+>>> +		   (!strncmp(get_product_id_from_eeprom(), "VF7110A", 7)
+>> ||
+>>> +		    !strncmp(get_product_id_from_eeprom(), "VF7110a", 7)))
+>> {
+>>> +		return 0;
+>>>   	} else if (!strcmp(name, "starfive/jh7110-starfive-visionfive-2-v1.3b")
+>> &&
+>>> -		    !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+>>> -		switch (get_pcb_revision_from_eeprom()) {
+>>> -		case 'b':
+>>> -		case 'B':
+>>> -			return 0;
+>>> -		}
+>>> +		   (!strncmp(get_product_id_from_eeprom(), "VF7110B", 7)
+>> ||
+>>> +		    !strncmp(get_product_id_from_eeprom(), "VF7110b", 7)))
+>> {
+>>> +		return 0;
+>>>   	}
+>>>
+>>>   	return -EINVAL;
+
+I agree it is good to delete the case statement and drop lowercase
+compare as suggested, also...
+
+>>> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c
+>> b/board/starfive/visionfive2/starfive_visionfive2.c
+>>> index bfbb11a2ee7..f38433e94ac 100644
+>>> --- a/board/starfive/visionfive2/starfive_visionfive2.c
+>>> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+>>> @@ -59,20 +59,12 @@ static void set_fdtfile(void)
+>>>   		fdtfile = "starfive/jh7110-milkv-mars.dtb";
+>>>   	} else if (!strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
+>>>   		fdtfile = "starfive/jh7110-pine64-star64.dtb";
+>>> -	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+>>> -		switch (get_pcb_revision_from_eeprom()) {
+>>> -		case 'a':
+>>> -		case 'A':
+>>> -			fdtfile = "starfive/jh7110-starfive-visionfive-2-
+>> v1.2a.dtb";
+>>> -			break;
+>>> -		case 'b':
+>>> -		case 'B':
+>>> -			fdtfile = "starfive/jh7110-starfive-visionfive-2-
+>> v1.3b.dtb";
+>>> -			break;
+>>> -		default:
+>>> -			log_err("Unknown revision\n");
+>>> -			return;
+>>> -		}
+>>> +	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110A", 7) ||
+>>> +		   !strncmp(get_product_id_from_eeprom(), "VF7110a", 7)) {
+>>
+>> Where boards both with 'a' and 'b' ever shipped?
+>> I have only seen 'A' and 'B' in pbuf.eeprom.atom1.data.pstr[6].
+> 
+> You're right. There are no boards marked "VF7110a" or "VF7110b". Let's remove
+> the comparison of "VF7110a" and "VF7110b".
+> 
+> Best regards,
+> Hal
+
+... again here too delete the case statement and drop lowercase compare.
+Thanks.
+
+> 
+>>
+>> The change looks technically correct.
+>>
+>> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>
+>>> +		fdtfile = "starfive/jh7110-starfive-visionfive-2-v1.2a.dtb";
+>>> +	} else if (!strncmp(get_product_id_from_eeprom(), "VF7110B", 7) ||
+>>> +		   !strncmp(get_product_id_from_eeprom(), "VF7110b", 7)) {
+>>> +		fdtfile = "starfive/jh7110-starfive-visionfive-2-v1.3b.dtb";
+>>>   	} else {
+>>>   		log_err("Unknown product\n");
+>>>   		return;
+
+>>> diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+>> b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+>>> index 3866d07f9d4..43b8af4fc59 100644
+>>> --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+>>> +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+>>> @@ -535,19 +535,12 @@ int mac_read_from_eeprom(void)
+>>>   	return 0;
+>>>   }
+>>>
+>>> -/**
+>>> - * get_pcb_revision_from_eeprom - get the PCB revision
+>>> - *
+>>> - * 1.2A return 'A'/'a', 1.3B return 'B'/'b',other values are illegal
+>>> - */
+>>>   u8 get_pcb_revision_from_eeprom(void)
+>>>   {
+>>> -	u8 pv = 0xFF;
+>>> -
+>>>   	if (read_eeprom())
+>>> -		return pv;
+>>> +		return 0xFF;
+>>>
+>>> -	return pbuf.eeprom.atom1.data.pstr[6];
+>>> +	return pbuf.eeprom.atom4.data.pcb_revision;
+>>>   }
+>>>
+>>>   u8 get_ddr_size_from_eeprom(void)
+> 
+
+No. I do not want to have to guess what error does "0xFF" have the
+meaning of, it makes the code annoying to read every function header
+documentation to learn this information.
+
+Since we remove all users of mac_read_from_eeprom() it is certainly not
+a problem we care about now anymore. Default PCB revision in case of
+error may be zero. It is not important to make distinction of additional
+failure detection, this is already resolved by read_eeprom() where any
+error message may be presented to the user.
+
+I appreciate the effort to be more technically correct and have a unique
+error value but with u8 return value 0xFF it is an additional layer of
+complication not needed. If you insist on this approach then the return
+value should be arbitrarily defined as a compiler macro, say
+CMD_EEPROM_FAIL (255) and consistently used. In fact I would not
+complain if it improved code readability.
+
+-E
