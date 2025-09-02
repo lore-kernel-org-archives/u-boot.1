@@ -4,65 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48F73CA0FFE
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 10:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EF17CA1005
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 12:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4027E83A6A;
-	Tue,  2 Sep 2025 12:54:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C283C8329F;
+	Tue,  2 Sep 2025 14:59:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="seDMxpkA";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ltTMDpnL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 796C083A7A; Tue,  2 Sep 2025 12:54:05 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 971088329B
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 12:54:01 +0200 (CEST)
+ id F323C83A7A; Tue,  2 Sep 2025 11:19:55 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DCA3983253
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 11:19:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 582Arxfi2511284;
- Tue, 2 Sep 2025 05:53:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1756810439;
- bh=FAX93KBULWjG8T2vqa2cdK8fAHCBQo5hNYW6hJYrB68=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=seDMxpkAQ7c93M1mt37L2IlNv4Ppu/3+5omQOf0gE6NEmKi62RIg1f7xxJLETwRFi
- hP4WTxFplWEfs/fA2BORVrC3DeaDlwPRWnm0ZCSCsMTLo5j8QH1pINlh7OMm2MI3E/
- XQig6rCklNjAf5iTDzZA2Oz8gQvn/qUqlcLZAHX8=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 582ArxxG2782763
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 2 Sep 2025 05:53:59 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 2
- Sep 2025 05:53:58 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 2 Sep 2025 05:53:58 -0500
-Received: from localhost (prasanth-server.dhcp.ti.com [172.24.235.150])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 582ArvLk3954233;
- Tue, 2 Sep 2025 05:53:58 -0500
-Date: Tue, 2 Sep 2025 16:23:56 +0530
-From: Prasanth Mantena <p-mantena@ti.com>
-To: Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <u-kumar1@ti.com>
-Subject: Re: [PATCH v2 1/2] dma: ti: k3-udma: fix dma_addr_t typecasts
-Message-ID: <20250902105356.jvg5n33sfqiawjdl@prasanth-server>
-References: <20250902094037.2121393-1-anshuld@ti.com>
- <20250902094037.2121393-2-anshuld@ti.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250902094037.2121393-2-anshuld@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=emil.renner.berthing@canonical.com
+Received: from mail-vk1-f197.google.com (mail-vk1-f197.google.com
+ [209.85.221.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id ED7463F2AD
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 09:19:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1756804791;
+ bh=+EGTooI1tNaOrvXJ4WFfV8tnEZQjhnvZBm4T0sjacO0=;
+ h=From:In-Reply-To:References:Mime-Version:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=ltTMDpnL7uYEgCDBmWPhyerHDesNf5v8qs1AsYFrGN/edWcGAW4Iv75+OthIz7F0w
+ Lv9RO5R9V7zF5Lti7Vc5lG8U5gtpDG1bo1LaGaBaVuuwQGEf0POAAya0/7wazqV7Df
+ 92cRqWmI+I0fTjTQ24ErRc/9p2uVlou/VFNOea+mR+BXKB4EcJkclUof2XSerDZX+s
+ p/Ra7hlnTyp33QfkYVmgeWhxMwno6MA6/ECcqBbH/DXIBI0N8ki2HGQN8lpWjF0yHl
+ Jj+4sbPuIh+mVkwIXIoOaSlVrjKzxoxNR4jKdxgC8d2v0RehrmTTqvNlLkVWLm3DvI
+ lVAGjlqMk7aPA==
+Received: by mail-vk1-f197.google.com with SMTP id
+ 71dfb90a1353d-544b20274deso665738e0c.0
+ for <u-boot@lists.denx.de>; Tue, 02 Sep 2025 02:19:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756804791; x=1757409591;
+ h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+EGTooI1tNaOrvXJ4WFfV8tnEZQjhnvZBm4T0sjacO0=;
+ b=FcSyIah/RFuC39Jbhh9pzx8pi55KkCjBQ/he79MSCajrLyj0LSnAFN9D9q+69azdVw
+ 9gJQM2Q6uAt1vwArYYNP9t2ijm/XQPJOoJ2J1MQcCio9iD3AzTa6u3FdptZYkfInT+Bk
+ ViMubLTOmHdkDz0NC8mx9WJqCVrHvqUpmmTtP4LctueBUTJgPx92R+Tip/BW3HNyBBt5
+ s9LWwfZW/2CSU4/U9B6Mh+GyDg/BJS96jOI1rTtDioSV0UavUJ+cA2mdlmdTLd0lwai+
+ az9P0kQky+FhyCwU7lxGKYvwpHm3L8s3ktKftvMsz7Oruk9Y3xQXG92iYW4BvS2O8UQx
+ erHw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXs3tc33Ok+TzpUpCpRuYMh5CF3XK2fxOJtUgKd5sZ4MnXYVwJg0N1nuT0BAlPQBlWFtkvXHk4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyi7I6VKPoejWZDIId5Ru28frciUXUrEf8JeKtfrU74A3qnIXA9
+ a/3PLfxGquoDBqXwhzExMybJP+ChNu+jzPSCltAegY8MmrsLAO9hzWKDbQnwc+aEK0n4ic2El/G
+ VAqwByJEx7Kt/HDqE1s24IktoH8BWfIZ2rpgS7Tx0hbogVULe3a2q8PZsD0TOohgGmPtUcCRQlH
+ ucJEkf8p9hOnCEkTXapzcxecT7OSurAhsr3IzkDtEZZn0YGQ==
+X-Gm-Gg: ASbGncta0o/u8baMd4BjM4ta85C4QBoYpFOyfFnADYHL5Nd1jHECgAlhqbhfFkzUbCG
+ 9e47iVD5jJWeov7ZzlLg62zJWAUY0qADsuyM77pSCDn8PS3i97sCVDea/mZFLuJN7VBp5oieV7E
+ iwmbpg8s/nxlwcVy7ZKy8d
+X-Received: by 2002:a05:6102:6446:b0:520:a44f:3ddf with SMTP id
+ ada2fe7eead31-52b19e6f244mr3177702137.10.1756804790972; 
+ Tue, 02 Sep 2025 02:19:50 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEEc7S1/mZpsLWQYZZyPMetNhLKZ6b0lCdUAYXjRQqCBBpJviilRpyW6M5gwtnVgUXIdvRK+yht+1MTq38SmPc=
+X-Received: by 2002:a05:6102:6446:b0:520:a44f:3ddf with SMTP id
+ ada2fe7eead31-52b19e6f244mr3177692137.10.1756804790635; Tue, 02 Sep 2025
+ 02:19:50 -0700 (PDT)
+Received: from 348282803490 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 2 Sep 2025 02:19:49 -0700
+Received: from 348282803490 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 2 Sep 2025 02:19:49 -0700
+From: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+In-Reply-To: <20250830203954.25775-1-heinrich.schuchardt@canonical.com>
+References: <20250830203954.25775-1-heinrich.schuchardt@canonical.com>
+Mime-Version: 1.0
+Date: Tue, 2 Sep 2025 02:19:49 -0700
+X-Gm-Features: Ac12FXwoOKzkoh-U2KRIijHcWZQSM7Woah9vfSfxRD1vDdrz0Qg0XGKuth3ysp0
+Message-ID: <CAJM55Z9z2ePCrLCo4qaRM=eLitnbcO1x5qhcy=8_4fpNk1H-JQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] virtio: blk: support block sizes exceeding 512
+ bytes
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Bin Meng <bmeng.cn@gmail.com>
+Cc: Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Tom Rini <trini@konsulko.com>, Cody Schuffelen <schuffelen@google.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Tue, 02 Sep 2025 14:59:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,84 +111,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul,
-On 15:10, Anshul Dalal wrote:
-> With the change to dma_addr_t from u32 to u64 in the next patch, the
+Heinrich Schuchardt wrote:
+> QEMU allows to specify the logical block size via parameter
+> logical_block_size of a virtio-blk-device.
+>
+> The communication channel via virtqueues remains based on 512 byte blocks
+> even if the logical_block_size is larger.
+>
+> Consider the logical block size in the block device driver.
+>
+> Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-This feels little odd honestly. Can we make the commit description in a
-generic way instead of using "next patch" terms in the description.
-And, still this patch fixes something that comes from applying the next
-patch. Not really sure, if this is ok this way.
+Thanks!
 
-Regards,
-Prasanth
-
-> existing typecasts from void* to int or vice-versa will cause the
-> compiler to throw a "cast from pointer to integer of different size".
-> 
-> Therefore this patch changes the casts to a uintptr_t which is
-> guaranteed to hold a pointer value on the given arch, thus preventing
-> the compiler warning when enabling DMA_ADDR_T_64BIT for the R5 SPL.
-> 
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
->  drivers/dma/ti/k3-udma.c | 6 +++---
->  drivers/usb/dwc3/ep0.c   | 4 ++--
->  2 files changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-> index 723265ab2e5..01824310995 100644
-> --- a/drivers/dma/ti/k3-udma.c
-> +++ b/drivers/dma/ti/k3-udma.c
-> @@ -2327,7 +2327,7 @@ static int udma_send(struct dma *dma, void *src, size_t len, void *metadata)
->  {
->  	struct udma_dev *ud = dev_get_priv(dma->dev);
->  	struct cppi5_host_desc_t *desc_tx;
-> -	dma_addr_t dma_src = (dma_addr_t)src;
-> +	dma_addr_t dma_src = (uintptr_t)src;
->  	struct ti_udma_drv_packet_data packet_data = { 0 };
->  	dma_addr_t paddr;
->  	struct udma_chan *uc;
-> @@ -2426,7 +2426,7 @@ static int udma_receive(struct dma *dma, void **dst, void *metadata)
->  
->  	cppi5_desc_get_tags_ids(&desc_rx->hdr, &port_id, NULL);
->  
-> -	*dst = (void *)buf_dma;
-> +	*dst = (void *)(uintptr_t)buf_dma;
->  	uc->num_rx_bufs--;
->  
->  	return pkt_len;
-> @@ -2518,7 +2518,7 @@ int udma_prepare_rcv_buf(struct dma *dma, void *dst, size_t size)
->  
->  	desc_num = uc->desc_rx_cur % UDMA_RX_DESC_NUM;
->  	desc_rx = uc->desc_rx + (desc_num * uc->config.hdesc_size);
-> -	dma_dst = (dma_addr_t)dst;
-> +	dma_dst = (uintptr_t)dst;
->  
->  	cppi5_hdesc_reset_hbdesc(desc_rx);
->  
-> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-> index 531f0b522af..c656cbe25ce 100644
-> --- a/drivers/usb/dwc3/ep0.c
-> +++ b/drivers/usb/dwc3/ep0.c
-> @@ -380,7 +380,7 @@ static int dwc3_ep0_handle_status(struct dwc3 *dwc,
->  	dep = dwc->eps[0];
->  	dwc->ep0_usb_req.dep = dep;
->  	dwc->ep0_usb_req.request.length = sizeof(*response_pkt);
-> -	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
-> +	dwc->ep0_usb_req.request.buf = (void *)(uintptr_t)dwc->setup_buf_addr;
->  	dwc->ep0_usb_req.request.complete = dwc3_ep0_status_cmpl;
->  
->  	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
-> @@ -662,7 +662,7 @@ static int dwc3_ep0_set_sel(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
->  	dep = dwc->eps[0];
->  	dwc->ep0_usb_req.dep = dep;
->  	dwc->ep0_usb_req.request.length = dep->endpoint.maxpacket;
-> -	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
-> +	dwc->ep0_usb_req.request.buf = (void *)(uintptr_t)dwc->setup_buf_addr;
->  	dwc->ep0_usb_req.request.complete = dwc3_ep0_set_sel_cmpl;
->  
->  	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
-> -- 
-> 2.50.1
-> 
+Tested-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
