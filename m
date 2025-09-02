@@ -4,149 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C30DACA1007
-	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 04:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0915ACA1007
+	for <u-boot@archiver.kernel.org>; Tue,  2 Sep 2025 04:58:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF4EC83965;
-	Tue,  2 Sep 2025 06:43:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 608EC83443;
+	Tue,  2 Sep 2025 06:58:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="RG+2pBFm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="keF+ivWo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86DD083A1A; Tue,  2 Sep 2025 05:00:24 +0200 (CEST)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20615.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2408::615])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 215FF83965; Tue,  2 Sep 2025 06:58:01 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64C3383443
- for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 05:00:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFE3782AE1
+ for <u-boot@lists.denx.de>; Tue,  2 Sep 2025 06:57:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tR/GiYONEy3aNGRc3P7VnHjY4c6i6wB/OVHU5rUZK8BBA1mJuqzR8SOBmNc/q+2jOW6EL/90QjEKWEsZwheDLJye62rYvaMKbfzsQ4CGXQty5OZ3mNaAtVgV80c8Bu1JCk5T10wQoqmckuCpbj8IKSUAlu+D7nzyJ6G1Ryp7bbJWhcysGjT2oRmQ/MVroS/CHOAoYEEFGkICVoLum55OU+Jg+nnGEmH12pTu6eQuD0xrFIR+F6OzWrMTJUSrUUVIYsZvDD4lgucKmlx4yhbgPgfeE/zvZJudygc3CcXoOIrTzL/vzyyGVeKRwManhH76J6ZSLII2X8bHVwMf7QJ6JA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RvQVkZF8Tfpzc1X86LZVYwh+A84pn9vBLGSuBqSB6GU=;
- b=MOszlC7qQuMgzrTmikjjpZ0TF9gt6XrvkaOxOYGlAB52lVt+rrT7gM6gj8hzK5t0HLJHs33yst/Xv2k6v7M1wStggvaCVpvrmTklAGyncohtaTqWWERDgqN66KYgXW2iuzBc1D8Vhy44GbMSYLl0jRlwe2rpxF8EhKHKIq9P+WN53QHNpQIMSURGu0h7MYbV8OQzkReWzKQaLsEKr+D7OEEGuC+MqSiOJ1blqAXDJBad0D0u9mFP0b+rHeCo6CbgD1uDddqRpxJV6whK/oKw6WcAijtrq/jO9bVt79h7j773FWu1z1MuXOLIltrLD7YZB9IBhtdTTfYnyRO5zzQoHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RvQVkZF8Tfpzc1X86LZVYwh+A84pn9vBLGSuBqSB6GU=;
- b=RG+2pBFmEn9eApQGw9GS6TPPYrSrAK2IwDsfLwI3GXwMr1hPOU+uvow4xZhvvGzuWJJVqueKUyQ+hZBATvJZt8oTrSM/UnJoWf8/usb66m13/IzPdOHXmBeQWWoeejguykPWFgYM4nhUlg/8ccOzmajAvfqoj/1O2ctach+JyZtxlG/aA2BvjNaG9NB4V178PdqI2XwHdp6BgD4quqZLrCzht8iwtZS6iFXkZWIqzn1geKFYzkvIPjgPJz4+3P4TU/+gtvc+8itPvLJGgSyxXO4F2thNTfr6PwypNFj050jAJhCvx+P3z0OOxzl7srAm01RImjiGvTstANIiVzG6JQ==
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by DS7PR03MB8035.namprd03.prod.outlook.com (2603:10b6:8:251::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9073.27; Tue, 2 Sep
- 2025 03:00:19 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::3145:43b1:92d7:f7a4]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::3145:43b1:92d7:f7a4%6]) with mapi id 15.20.9094.015; Tue, 2 Sep 2025
- 03:00:19 +0000
-From: "Ng, Boon Khai" <boon.khai.ng@altera.com>
-To: Nikunj Kela <nikunj.kela@sima.ai>, "joe.hershberger@ni.com"
- <joe.hershberger@ni.com>, "rfried.dev@gmail.com" <rfried.dev@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: [PATCH v3] net: xgmac: Augment mdio read/write with cl-45 format
- support
-Thread-Topic: [PATCH v3] net: xgmac: Augment mdio read/write with cl-45 format
- support
-Thread-Index: AQHcGJsqNCZCo+aUvEi012yWWlvwT7R/Odug
-Date: Tue, 2 Sep 2025 03:00:19 +0000
-Message-ID: <SA3PR03MB7187A45D6B0588067C348FDAB406A@SA3PR03MB7187.namprd03.prod.outlook.com>
-References: <20250829041232.1160655-1-nikunj.kela@sima.ai>
-In-Reply-To: <20250829041232.1160655-1-nikunj.kela@sima.ai>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA3PR03MB7187:EE_|DS7PR03MB8035:EE_
-x-ms-office365-filtering-correlation-id: 0667e461-0fef-41ca-6047-08dde9ccd9fb
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|376014|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?wdMrPjBl4qd9Rk2EcNKPZxqetaPy5Ep7gKZ9nytH4/2CpK7XWn6B2kkP8yFX?=
- =?us-ascii?Q?Fq+S3OAlgqfyV6YT749l/jB9RGYvODNCSbSKZAvubPaBmRXo0dpZzGeFwcsP?=
- =?us-ascii?Q?nEhR0lPXIZlXguXjlsZN+Ag1KXlT4Z/0B8PNmQvyAutFjNVaNvLQ8ZnEKsi5?=
- =?us-ascii?Q?aszSF/UN88M24swU/9Ti9Il5cFYC949IFJegauTAivrtUDSHCv5W4xFEvcyb?=
- =?us-ascii?Q?1b5p4jTF0wLobziN/9ySuoNxJcZM55Gjn8DnqERyKs6/UUgrW8u/OsdpaFql?=
- =?us-ascii?Q?EpJvLh/j7V3uDPUuEpCj+L41RJDIpb3Z6CpWSE+pAl5a0FFbOM80hXv5WNBR?=
- =?us-ascii?Q?1VFAN1kBaMF9Mmv7gbke5Kt2JPu3WEZ7rGTIED4zOpfl1ivqSMS+LMjUiOwG?=
- =?us-ascii?Q?wbLZMOh6WHYr/14Cg5sYQlYdkDJ2vk1OGu/QRIIZU172rN/l62Hcyl2XlUdC?=
- =?us-ascii?Q?/+BWWnyNCHarAo5c0QLO74jOPY4SD1+7UIR0FNDhpabg/fqA66n71gf3211z?=
- =?us-ascii?Q?Fo+epUdB1CK441S/+53HUaIznsEG0wvxNnvfoUnmGvz4t/IFT5vnHqtXht3P?=
- =?us-ascii?Q?oyW7fCSOxPjxLD5Ia0Y4kpU5MC9qUwdn0rh+lt3injfExGQjxTkq//BrbV3l?=
- =?us-ascii?Q?zksmIKZOsL6OndjZCNbSbT5ckC9W8DcHoBCjqXX06EVMCgmB8K4CRp6jIXlB?=
- =?us-ascii?Q?eBZ78PflJzrpZ85HiAt1z8woai7Hb7LF7hfuGj7bqznKUXzjs0zqZG8x9DAX?=
- =?us-ascii?Q?CIXYhxT+ilOEw1195VF4TTl/FKI1a62lDd2W5Kp2L7hdTt3rnf/0d6EvSJH3?=
- =?us-ascii?Q?oriwg46xostCmyl2ewTsyHP2VbpLyIZJRs74VioSWppXXYdrsTYMJ4zXuTMY?=
- =?us-ascii?Q?xDQi53IuqbpdSpNwgl2tlbTyprFuHzVCbrmkH18hI1NSyxifhyhkmr3ihz5Y?=
- =?us-ascii?Q?QOd06tPwSHwd+O3jyk5FGEAh/kFf6D4LlfjmGsG//ty+UQ+wVkgPzEts1Lzc?=
- =?us-ascii?Q?weio0fQD4IGl7+HY7GVXsQD5y13BZYLaPb9Xmwzlo2k3LplW8omPJ6VuRjeB?=
- =?us-ascii?Q?w/VvzrIWOn1PazTk0H9dP9u5PccUM4FWjhYjdmHwifr9mpRPrhxkv4k+g9XJ?=
- =?us-ascii?Q?BgD29N5p0dKqQQs2HZ6EPzz1qo5orOLNdlpBX3ll7Xqef5nGRgR/XGfoLXsR?=
- =?us-ascii?Q?slnieea3TbL0RThyr41CJu4SV7K3pExSQym6TH8vD/s5v77vid4LMNF4XiP5?=
- =?us-ascii?Q?+llTEs5HwkQIEuKoinJJXrHnrjCeCNgWNSi6bSKCKnmwNKQbsuJ2fGAXBxp8?=
- =?us-ascii?Q?WrrJVw0v/UIqgyElF3edtD77vYI2VX9z+kYR7X2HDAVjTafLyJFF8KWahFHC?=
- =?us-ascii?Q?gu9x2ajXVPP96CqUmXhY/ojwPyPQBunaNaL/SppdAr9aZMZuw3yJNZiChhwW?=
- =?us-ascii?Q?mnpDGsp4h75rewD1wwQeSkKoTU3u4WAOXopAson0lDYJFWc7uGeoZg=3D=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?dz5bwLXHQjLtyG0jc79j/0lf9nNMlvdFWezTDrd8SNxYpQbeuDyyQtFwtVo9?=
- =?us-ascii?Q?OKNR8Av+1R8BH1FQvLezV6QU9ri0HldIAeWym7qxADlDUGRlSBT2eOi22115?=
- =?us-ascii?Q?ZyLN/UFARDye0/r6lUdfghwphEmI7pPBSCaDZhVYl853FIE0Mz6MnG1airjS?=
- =?us-ascii?Q?liwsejkKDBP5fUDUBumBydfVkSRgboFoEVlHswCAdfxFNy+Nse6VM92iUw9s?=
- =?us-ascii?Q?Cc8aahP3OC738s94xrxgPF9eG3i5Ue7FyrydEVMGRy2W6O2ySK5+i6EHrViZ?=
- =?us-ascii?Q?DaMiWkjODZQLvEzBGoIMliN/qSH7k2aZheTJPtm6eJhAp6PuCe6orhW0qTDa?=
- =?us-ascii?Q?DurcvtdY26zPyhTt1dSj0HTjSTByym3n6ehHaTP6+ay0rxVpAZ9dGtH19tgk?=
- =?us-ascii?Q?0qYxhvfLFNgoi/XXD6q+RNjxCcrVsefKgYQC5AJigtGKVXNMeSpXrxlRYK2t?=
- =?us-ascii?Q?ExGs0cY7jXnDYPCTMRSMmD+Ne02odexq2VsU7EzrdktwYmtJ8LFeKYcQ0tea?=
- =?us-ascii?Q?r5fz3q0Sn8ZQkyUbTpIbznhOLzHF1uO++SV7k54oQCaIjAUF84XeU2ndutpG?=
- =?us-ascii?Q?Z1dBKklpr/oAS1UDdNJRJjaSsuQjSmWeIzk9oc7z6WKeSLq5EFWHVdtmJXIY?=
- =?us-ascii?Q?REmMAMhZXIMi5yeQcZrW08bScxtO11HFKVt5xnjw6QNFagb0oZilti1TnGNw?=
- =?us-ascii?Q?s5fPDiHxTYwanDXPf9atlLskMFiq9123PQhy1a3I+QimMTmsag3dxAGHWXGo?=
- =?us-ascii?Q?m04OGAU11lsHTWE3vJakY0Bu1DImGcW0hZuYcVxYU2Jo2+xxMDgEQk178AwZ?=
- =?us-ascii?Q?sl8bmRNHhI+2++b5aAfqp9aK0GfgMkYj6jdHEIf6/LtVWqSvIok7i7tkwkuT?=
- =?us-ascii?Q?fTtcVckFJhPqWpBhBN3TXNsvFm35C0xvcaRPHe6CPI4bsWNzRCl3oo2Bv4g8?=
- =?us-ascii?Q?yGiXllyHomVtBJgNivHsh2x89O2IkLKxx6gj2IPYO3M6/za0bxSQhyAiwZq4?=
- =?us-ascii?Q?4QY80Aw064s5A7wFdWKJsWntll/dF3caFyELBIWMm+UduWOtU59UM3HDyiWe?=
- =?us-ascii?Q?P8VPk3Xol7KnS/DPj40LxShC9C70pguGOplH5XdCmwZ75UeIUusEycEwMAs1?=
- =?us-ascii?Q?BC11lMp+V0Q2VYcsEEg7/Tc06dKgoDXinyDYK5FcjRgRNaNW+ZKRQ+BXAZvF?=
- =?us-ascii?Q?f59e/LNRlr2+CDGXqIkg53ynTk0WG5M+MyCBbYdnu0JQ6H44Sv3oVhfcenPP?=
- =?us-ascii?Q?FD86sfIHm8HoMi9QxHvKUGdGyErBYl3mdRHEeyXr9O6JuLYjGvgSqCtokXbj?=
- =?us-ascii?Q?R6OWkEVBHG4hXmMg/UUT7Tly5xl9C1VgFVBE/16VbseWWKt3du1ucQRwYwc8?=
- =?us-ascii?Q?6Zqoyydy+RrbtNbxYDUN4ZvPTrt1YjidlIyh4eGPcS1SnZEVNJN8jJwUSYpO?=
- =?us-ascii?Q?UQ4BXAGXhTsVVpnZrSzqhoTRNFM9ZHm5sM7SxF2rvAls8XSirPIVq0mbuJ9l?=
- =?us-ascii?Q?z0Il6G4e+Nt0CQ9SZWcxqAmlPvH3TyFkYE9HPGy7ls3rOTfwzY1bWBCUmaG3?=
- =?us-ascii?Q?5zxVw9dZNnSNp+XvHo7b/Y+2sQGImxZPsstohudS?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-71d6051afbfso41310377b3.2
+ for <u-boot@lists.denx.de>; Mon, 01 Sep 2025 21:57:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1756789077; x=1757393877; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zvHo94BQ9Kw2yCqBHxTXWH15DkfSR3lsnYq7dIVx/fo=;
+ b=keF+ivWoqTtq1mydKYk+TJ/rlF95QfQqJFMc4dPF+8xiFrxrKTtllVw4y0LzthVCP4
+ Hpl7eGYo01Cx67HLa8nc9Ah2wyceRFdITz+DFm7TvXN4tSk0kN31vu1GqVgdhF1nW1vx
+ 2CCrygVphvl6EiBnVW8zYznulJUyt+xcGTIqOBaXMdA9evUAnM9n7J8NpiF9NR505caD
+ YS8GYS8BMGEwZn7VWch/DZQlQszp/vcR7LRAiPaXV5Td9eHiaglKBO20PuF/P4YBfbZ6
+ EDldfUoYZE0uZvWx7/PlszIDcyP5ek0NSRkHw7hsGGxmbsKQSF25p7kwigJrqjwcdE7k
+ u3hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756789077; x=1757393877;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zvHo94BQ9Kw2yCqBHxTXWH15DkfSR3lsnYq7dIVx/fo=;
+ b=Arm8RbyYsBTNKfeIkZZhfQiaQ46+b/muchx+QUtA0X6WZzujsFakKgHE2JDkEcSa+d
+ StTtuTAZvuP1ArqzZfCJuBtd1lrW7Hv0mEB6uSxXkv3Od44LpEj23BfCeqBe1sBUgQQ4
+ OPybNKxpkmlbgTsQXPsDdwQONQcPUk5Kc4fQngpkjIDYtommP10Yivp/FVnxRpHPyieX
+ mpo4Qrb+67O78HXtrFGGSka24gGBNLf9gXIGKezdwDtxegpOEjEtEOULzsUkrKuwKt3e
+ wste8+KBuFuoRxm8jJjWYh1ykZKG+QLl3VZridhTvjZSI9yzaE1+8GFWCpl1srg6bXut
+ ZfoA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVBQNPMsnL1oE40HaBY7UZV1gDhl6aZK9Mhr5ICbTZ+hqDWJxU3wJj24HbJC1pJ1JCR8ciyDno=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8P9KGWLuRakPyWl8blorJbTSl6tYVxqA0bMtRbYmn8sZrtNUt
+ b38D/GiNiVqWv3EmbTaDU93jzpMTiAsUBbb/7EQ7HjupFIfaiyYHo/qJgRF6QPUpBoTbpS3gMH4
+ hPlh7EEQFlyuVDFDTVPiFC2Nd/hr1Cvp2aaxxCPABCw==
+X-Gm-Gg: ASbGncsQKlp/1OdH5CK35gFWEmm7LdcKdsIIQ40nOE0WJzOs3+WzR/kYlmvQR6PSODK
+ sO6Kb1FWeVaO+p7JGG/n8iSmzd16lnEfJDIr5KANth1MQQIwkRmUUhvXd2/1ot3E6MXAmoDlru1
+ QCJTvSsM9qlqpIlXVEHhyr1wGS3lIr0ktgCF/aRflsb6Zd4VjeqJjDRm6lzjKWa5OtRbqhxZJH1
+ hdjcD3nakQeQSxPrgAHCK7N9a6P2fxLqzeQKQ/OnH0wdlqcz9q85CqtTWlnCZZ87RuIMDdqIIyC
+ xoaNt8EEG7iE3vHSNWK8ngJf2yowKOVj2w4BTwhrtxgOTwRV7hwNqyJbdY0MrXrCSVEyTjT9KEC
+ lxZxxXS8=
+X-Google-Smtp-Source: AGHT+IHY6r3+HnbSaaASaE0tAE5tDjPqDo/q0XaVAC3B3iEtlITrZDHzng4b4V2EnrmtYwoZ4Ts7BLICLiwbU4PFwF0=
+X-Received: by 2002:a05:690c:368e:b0:71f:f359:6ca2 with SMTP id
+ 00721157ae682-72276580a11mr114975677b3.52.1756789077408; Mon, 01 Sep 2025
+ 21:57:57 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0667e461-0fef-41ca-6047-08dde9ccd9fb
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Sep 2025 03:00:19.5841 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Du+9fNS2aLI+1HRzBVqoK+S9jCr4/5peRpUNi12W0MFrBpr6mtH7OPRFGs30RzfjpMcGpX19kHXHBK8mDH0P/w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB8035
-X-Mailman-Approved-At: Tue, 02 Sep 2025 06:43:37 +0200
+References: <20250901151635.654928-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250901151635.654928-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 2 Sep 2025 07:57:21 +0300
+X-Gm-Features: Ac12FXyLOr70iwzsE-Z42Ld7MpXwE7iDeiZ4VlQ6BG7CaqvI6V-PFFGY2xPA6Lg
+Message-ID: <CAC_iWjLkdcFomO8iETm0dkjAcvYe9aOmxC_24BFT4SSOQneAcA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] bloblist: use correct types for physical addresses
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Harrison Mutai <harrison.mutai@arm.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,10 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Changes in v3:
-> 	- replaced tab with space
->=20
+On Mon, 1 Sept 2025 at 18:17, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> It is expected that bloblists are stored in high memory beyond 2 GiB.
+> We must not use int as data type for these addresses but phys_addr_t.
+>
+> Fixes: f9ef9fb033d5 ("bloblist: Handle alignment with a void entry")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  common/bloblist.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 6e4f020d7c4..d5fa62249a9 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -149,7 +149,8 @@ static int bloblist_addrec(uint tag, int size, int align_log2,
+>  {
+>         struct bloblist_hdr *hdr = gd->bloblist;
+>         struct bloblist_rec *rec;
+> -       int data_start, aligned_start, new_alloced;
+> +       phys_addr_t data_start, aligned_start;
+> +       phys_size_t new_alloced;
+>
+>         if (!align_log2)
+>                 align_log2 = BLOBLIST_BLOB_ALIGN_LOG2;
+> --
+> 2.50.1
+>
 
-Reviewed-by: Boon Khai Ng <boon.khai.ng@altera.com>
-Tested-by: Boon Khai Ng <boon.khai.ng@altera.com>
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
