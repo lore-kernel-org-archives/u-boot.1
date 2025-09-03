@@ -4,65 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 037DDCA0FF2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 04:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AC6CCA1007
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 04:28:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29AFF83420;
-	Wed,  3 Sep 2025 06:08:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81B6B83420;
+	Wed,  3 Sep 2025 06:28:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="p8ZAP3Be";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tqxDjeED";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A01F83438; Wed,  3 Sep 2025 06:08:41 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id A5C8A83438; Wed,  3 Sep 2025 06:28:41 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDC5983403
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 06:08:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74E1E83403
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 06:28:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=vigneshr@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58348bL53176629
- for <u-boot@lists.denx.de>; Tue, 2 Sep 2025 23:08:37 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5834Sbgb3142219;
+ Tue, 2 Sep 2025 23:28:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1756872517;
- bh=qRTR1e3RJgIVe1WwNxssJpE9cacDdsOcBAKeb5fnj2c=;
+ s=ti-com-17Q1; t=1756873717;
+ bh=JrRbrWLEBCudPnG4GUcxK7I0Ja6AKLT5uyfxqCM7Br4=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=p8ZAP3BeWFTz8D9efzRveGHtGhAIaOBnrvVwEahLz4fuGTpDXHeH1VxESjTddnWVM
- EgZkT0WbLol82qXMGPGzwHGcZ4dlaeND5Pg5ygcHP96VY2u0RLndq5BWqHNg2G2qQ5
- RDYNbKDlZl8+RDULcrswlXLuYG9cc6qABqmmWfF8=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58348bWi3990354
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
- for <u-boot@lists.denx.de>; Tue, 2 Sep 2025 23:08:37 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ b=tqxDjeEDry0KtO11YIE4yfFLUuRQhcon0OU4ruKAm3E9cCsVq3ROmuZ16qszSy40Z
+ SjmfgfuNWwvMpYcg5IrxR0Oz57eN6xOBzs4zqcfxmpCvjwz2Qc2TQ3IkEFw1Mwxi8Q
+ qV2amPOs+XT/4xjojJpOr0nkfj31e9TbERI3JHfI=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5834Sbo03329521
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 2 Sep 2025 23:28:37 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 2
- Sep 2025 23:08:37 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 23:28:36 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Tue, 2 Sep 2025 23:08:37 -0500
-Received: from [172.24.17.2] (lt5cg1457vgj.dhcp.ti.com [172.24.17.2])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58348Xsw664239;
- Tue, 2 Sep 2025 23:08:34 -0500
-Message-ID: <3a89ef19-a612-49b3-96d4-92cf096e76b7@ti.com>
-Date: Wed, 3 Sep 2025 09:38:33 +0530
+ Frontend Transport; Tue, 2 Sep 2025 23:28:36 -0500
+Received: from [172.24.20.139] (lt5cd2489kgj.dhcp.ti.com [172.24.20.139])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5834SYeW685193;
+ Tue, 2 Sep 2025 23:28:35 -0500
+Message-ID: <380dd6dd-8751-4843-936e-e9da577f376f@ti.com>
+Date: Wed, 3 Sep 2025 09:58:34 +0530
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [RFC PATCH 0/5] Add initial support for AM62D2-EVM
-To: Paresh Bhagat <p-bhagat@ti.com>, <praneeth@ti.com>, <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <bb@ti.com>, <khasim@ti.com>, <v-singh1@ti.com>,
- <afd@ti.com>, <anshuld@ti.com>
-References: <20250902060703.191688-1-p-bhagat@ti.com>
-From: "Raghavendra, Vignesh" <vigneshr@ti.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/3] configs: j721e_evm_r5: Enable HBMC and MUX_MMIO at
+ SPL
+To: Tom Rini <trini@konsulko.com>
+CC: Anurag Dutta <a-dutta@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>
+References: <20250902102000.1388848-1-a-dutta@ti.com>
+ <20250902102000.1388848-3-a-dutta@ti.com>
+ <20250902154656.GE124814@bill-the-cat>
+ <5fec7216-9e0a-4d97-af23-60953cc1ef75@ti.com>
+ <20250902161257.GF124814@bill-the-cat>
 Content-Language: en-US
-In-Reply-To: <20250902060703.191688-1-p-bhagat@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20250902161257.GF124814@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,31 +84,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tom,
 
-On 9/2/2025 11:36 AM, Paresh Bhagat wrote:
+On 9/2/2025 9:42 PM, Tom Rini wrote:
+> On Tue, Sep 02, 2025 at 09:36:25PM +0530, Kumar, Udit wrote:
+>> Hi Tom
+>>
+>> On 9/2/2025 9:16 PM, Tom Rini wrote:
+>>> On Tue, Sep 02, 2025 at 03:49:59PM +0530, Anurag Dutta wrote:
+>>>
+>>>> Commit 0e198ff1a911 ("configs: Resync with savedefconfig") removed
+>>>> the necessary configs required to boot HyperFlash successfully, due to
+>>>> missing Kconfig dependencies. Now that the Kconfig dependencies have
+>>>> been added, re-enable the HBMC and MUX_MMIO configs in the SPL stage.
+>>>>
+>>>> Fixes: 0e198ff1a911 ("configs: Resync with savedefconfig")
+>>>> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+>>> Please note that this means it never worked to start with.
+>>> "savedefconfig" does the equivalent of "make foo_defconfig" and then
+>>
+>> It was working before but due to some boot issues , due to DT sync
+>>
+>> we disabled HBMC with commit id 5b2671594b80af116e259313d48bcd580d71f462 .
+>>
+>>
+>> Instead of saying Fixes: 0e198ff1a91,
+>>
+>> This patch is fixing sha id 5b2671594b80af116e259313d48bcd580d71f462 by kind
+>> of revert.
+>>
+>> my bad to give R/B , overlooked on sha id of fixes tag.
+> Again, no, that's not quite how it works. When we do a defconfig resync
+> like this we're just making the defconfigs reflect the present reality.
 
-[...]
+would need your suggestion here, what should be fixes tag,
 
-> 
-> Branch used-next
-> 
-> Kernel Patch
-> https://lore.kernel.org/all/20250708085839.1498505-1-p-bhagat@ti.com/
-> 
-> Boot Logs
-> https://gist.github.com/paresh-bhagat12/6e169340c222427c7648b1ef3ca5067f
-> 
-> Paresh Bhagat (5):
->   board: ti: Introduce the basic files needed to support am62d
->   board: ti: am62dx: Add board configs for am62d
->   configs: Introduce configs for the AM62D2-EVM
->   arch: mach-k3: Introduce support for AM62D2-EVM
->   arm: dts: Introduce AM62D2-EVM dtbs
+My comments were not related to defconfig sync
 
-Whats your rational for choosing above patch order?
-
-Regards
-Vignesh
+> If you checkout 5b2671594b80af116e259313d48bcd580d71f462^ and then look
+> at the resulting defconfig, that option will be off. Doing a git blame
+> on drivers/mtd/Kconfig the right fixes tag is for:
 
 
+If you look at sha id d7ef2ef7c87528c359e110d7170e01a98aaecf14 (configs: 
+j721e_evm_defconfig: Add HBMC related configs)
+
+is adding support for HBMC. So it was functional before.
+
+
+Later due to DT sync and HBMC was broken so we disabled HBMC with sha id 
+5b2671594b80af116e259313d48bcd580d71f462.
+
+
+After that there was attempt to enable HBMC via below sha ids
+
+8f71d37838ba0b0bfa047f5133877092ee9d1110 (mtd: Kconfig: Change HBMC 
+driver's dependency to MULTIPLEXER and MUX_MMIO)
+
+fd7fcd4098d5c1ba9e20dbd72aa5f9a74f0cbe42 (configs: 
+j721e_evm_*_defconfig: Add configs for Hyperflash boot)
+
+c9df79ee64d0885277d5061a9426744920c4d6a5 (arm: dts: k3-j721e-r5-common: 
+Add HBMC overrides for R5 SPL)
+
+a42b8b0b3fe0ffe69ffb932bf3e709a62ff34a23 (mtd: HBMC-AM654: Changed 
+syscon API to mux APIs)
+
+f0558f3a89fe0fa900b162ae2758772e37f72739 (mux: Makefile: Add config for 
+mux drivers)
+
+
+
+> commit 8f71d37838ba0b0bfa047f5133877092ee9d1110
+> Author: Anurag Dutta <a-dutta@ti.com>
+> Date:   Fri Nov 29 17:01:36 2024 +0530
+>
+>      mtd: Kconfig: Change HBMC driver's dependency to MULTIPLEXER and MUX_MMIO
+>      
+>      The HBMC_AM654 driver was dependent on SYSCON because syscon APIs were
+>      being used to select the multiplexer state. Change the dependency to
+>      MULTIPLEXER and MUX_MMIO because mux APIs are now being used to
+>      select mux state.
+>      
+>      Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+>
+> As that's what changed the dependencies for the option.
+>
