@@ -4,61 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A4CBCA1007
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 01:51:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA0DCA1005
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 02:01:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7829683AEE;
-	Wed,  3 Sep 2025 03:51:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4D6883403;
+	Wed,  3 Sep 2025 04:01:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Fqhyhuth";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="RIl6xo3w";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="vh/zEPUa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D69BF83390; Wed,  3 Sep 2025 03:51:02 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 8A7C083420; Wed,  3 Sep 2025 04:01:07 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC58283AA8
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 03:50:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D53F833D0
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 04:01:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cGlv55l6hz9tLk;
- Wed,  3 Sep 2025 03:50:57 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cGm6n06lgz9tFr;
+ Wed,  3 Sep 2025 04:01:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756864257;
+ s=mail20150812; t=1756864865;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=/iHG44iqSQDEWnq3+3w4HnQj1i1ZVPl/UM1WaHpXQlM=;
- b=FqhyhuthX7CzOMxYR1z/zLix9KRfMCcSBCbDUnVCLa26ogc2jpd21UR7cFQ2bKb1P9+sso
- RrJPSKzRp9vsRz5WFLOCetIEBXHCaAR3zXhhYrqUXihhimZcZTNbzr4WmSP+objvqj47dZ
- Yx5yphIv2ToUiuQqBz2ZQMcjchMeZbLaliLqe0r4c86Y8ztlCaW+znnPm7AtUrmIn3TrPH
- RsaL/1bmlm+x7k37QWmErPH00GlfcIQVJv1jx2cp40KsuCzHFLF6bPSyOBre7x6vR7Ceap
- Ggu++dme8oaEMN0RTkgao6QimLWl0u9zFCA3gp6F/LoEpvbltDg0omoAF3VRYg==
-Message-ID: <63f1e637-bf6f-4298-9cba-ac55dbc90e07@mailbox.org>
-Date: Wed, 3 Sep 2025 03:48:39 +0200
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=AH+X8wcIxBM6mm71RpZdG4wMEoMRYocgLXgzGpsUpWE=;
+ b=RIl6xo3wZanvdadYchE8qeHjbxyVuqI3FuIYdu3dAgUVhTxJFjhXiNPJZBI52h2zRp7XIK
+ JlSA/QCVSQMDR8BiMARjtLpbi28FAU2aU9Bve0iZ3Z239oDJDIUsEFxbosxsFic7wOXPuz
+ iiWOvf/BWNB4UV7lA9OYy5lTeblxeRKkp4NAtSSY35Kc11QtKkgKNGkBmco0tPo9TUcC8O
+ AlthVkqnKVydvJ7AmZG5sfPK0AKNSMVkziPG0SFBrBizerrCRqHB2NvuxHm3qo0RI3g+CY
+ gjPPNUwywHDatyOb3kO/b7kE/bMrLRXrL1Gu48C9GrGm0nrAzF3vp9pNyk47XQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1756864862;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=AH+X8wcIxBM6mm71RpZdG4wMEoMRYocgLXgzGpsUpWE=;
+ b=vh/zEPUac+S/X7FEG+/hNoX+o44Te/EBqkAUIGeMa7P6X+2V+j9cD8FPEp2aGiTzrVFXLY
+ 5FHqhzgZg1PfSpIyClxhOmycu7i/Z/4ol2wtiuCRMGRCi3LiZEdOoj84WQqrG2UdqmRfvW
+ Iq/kONNRnP8AdAMsVfP2fvOe/VPkpwOSbfcc5VGmvU8fmcGVGEIElOP7xYngpXb4D/MOz2
+ rGz+mIH0Ipnd3kZ1MDLUIgE+JGbfshFqqX2uGL+fdtAJi7Wy+z5W83tZ9ZoF1jFE8b/UXt
+ S0Z6gfe5EL2L069pmTsnEqTdCIdOMfP3YuBOoWgiEpuARd+cgNqev3UZX3qIaA==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [PULL] u-boot-sh/master
+Date: Wed,  3 Sep 2025 04:00:26 +0200
+Message-ID: <20250903020045.878082-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH 6/7] usb: host: Tighten USB musb-new host glue driver
- dependencies
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20250806145601.1664563-1-trini@konsulko.com>
- <20250806145601.1664563-6-trini@konsulko.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250806145601.1664563-6-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: b31zgfyrtpqu5kmy1gu6j4ew7ajnsrkb
-X-MBO-RS-ID: 14748090c781f0c3230
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 64b21d7f5c6f552e85c
+X-MBO-RS-META: jubufxr1pxdjgstjpjriyioiiwk1qpth
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,10 +82,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/6/25 4:56 PM, Tom Rini wrote:
-> A few of the USB musb-new host glue drivers cannot build without access
-> to some platform specific header files. Express those requirements in
-> Kconfig as well.
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+The following changes since commit d367be2b13a388fdb0dc2720f66c30ddcec8a4fd:
+
+  Merge tag 'u-boot-rockchip-20250831' of https://source.denx.de/u-boot/custodians/u-boot-rockchip (2025-09-01 09:50:01 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+
+for you to fetch changes up to 8705ee4b6d3665f096017aaef5c1496ba7c74cc3:
+
+  pinctrl: rzg2l: Variable may not have been assigned to (2025-09-03 02:45:08 +0200)
+
+----------------------------------------------------------------
+Andrew Goodbody (1):
+      pinctrl: rzg2l: Variable may not have been assigned to
+
+ drivers/pinctrl/renesas/rzg2l-pfc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
