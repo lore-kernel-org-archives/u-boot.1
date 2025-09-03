@@ -4,75 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E611CA0FF2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 10:58:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 778CDCA0FF2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 11:07:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C992B835B3;
-	Wed,  3 Sep 2025 12:57:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 86CC5834E5;
+	Wed,  3 Sep 2025 13:07:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1756897063;
-	bh=lh0dZeQ5rR64YEC3Tu6ADEbhyOC8incpiXN8Bv7H8VA=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=azuVegTzB6zZELZvg9zAY1nJBZUFR4AkN9bQ+ItDw60J8ICBFfp49D4cZAdWkyuio
-	 lg+lxVVr6/FDWMFJViiyOcuQXVNrMyAcleeaE9dkGx+EFAo69paQAuH+XVoMKPD7Yv
-	 65hxquehXt7r4XhhcqEjIpNugtA9IgfZGgFsaMUuoZ7R391pSy84urqz0JZ9LrLt8S
-	 ns8sYMHr/qODiAqCe2qBvWiGjgJJLQ3Qt9lvoUaUksUcab9pbmPzJCQLAQ68W6BB7G
-	 KbJH39z1ZKQ0S6L4o2l9makexxDbkiTqBsOsewuDdWYx+eotGMU9Y+gBL6DWVo06aQ
-	 beKLe6b5MXKdA==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PegXu+gV";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E18B835B9; Wed,  3 Sep 2025 12:57:42 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 159748350A; Wed,  3 Sep 2025 13:07:29 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2457835B2
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 12:57:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DC21833C6
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 13:07:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="hbvgil2P"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1026E10246D8B; 
- Wed,  3 Sep 2025 12:57:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1756897060; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=lh0dZeQ5rR64YEC3Tu6ADEbhyOC8incpiXN8Bv7H8VA=;
- b=hbvgil2PmETeWEOsj4pLBKjYjRCaaGrjvjnKIVDot1ucIszsDAjusYHZ3RVCl4xsGmCZlN
- FKpdiVbzlH+VFrCIB0j4b0NMFquTetdGUNAZypUz84S4lwArBq9EYdzz9iIvr+7MRB5Cv2
- dyRiHadcGq8eWHs31LljXdZWrCOPEhAmOCVRXtmQaq63lGArDhNfIuUGDIcJjPUGIGQ84F
- wz3bzyjASJewXVxJDVppKBq09r7bezYRe8yNuJrB8B23uYNeueRIKn6e+Lp1ZPTgB7pNKb
- LzNL9qb1NM+cx/btPHvEZp/NEpwItglkrIN8ETLdPS84OuAwFjy4n1qF6jsKxA==
-From: Philip Oberfichtner <pro@denx.de>
-To: u-boot@lists.denx.de
-Cc: Philip Oberfichtner <pro@denx.de>, Andre Przywara <andre.przywara@arm.com>,
- Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
+ spf=pass smtp.mailfrom=sumit.garg@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 91889436C6;
+ Wed,  3 Sep 2025 11:07:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BD8DC4CEF0;
+ Wed,  3 Sep 2025 11:07:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1756897644;
+ bh=X0YhmhI8LdJjVkjnoLiNWHw4e9pLt/zcfsSC2YmBnyA=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=PegXu+gVtmRvYMG0fkjEMXKr9arUkXnN268o/KgB3VAfSORvyXT8HyxNjmf0rDU1R
+ eLKBHvf3EabBqyC9wIQafUw3tNmiOUblIqzgpBtLbRHiCk7eUWdiwz00L2vgM9l8V+
+ WWmMUwouAcpJTMYfDtbb8hOv9y9C/1BCA4j7ZCrGN0J4GPnw3az1R6Ewj8Tsk3/44Y
+ /s9EuD59cSLs2aW3iV+fDU6+mXgpq0EDvf21pJlEaHkHpjfdwD9dJXAjFJBXISuXzM
+ XGmaNm0l2CiO5IxxBNNnpamGKZ7hhT3OTLiGIt4ippibx9T/TLkst2Ml1g3/iXpg3y
+ O9+KZwBIATh6g==
+Date: Wed, 3 Sep 2025 16:37:17 +0530
+From: Sumit Garg <sumit.garg@kernel.org>
+To: E Shattow <e@freeshell.de>
+Cc: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v3 5/5] Image size checks: Simplify SPL_SIZE_LIMIT logic
-Date: Wed,  3 Sep 2025 12:56:53 +0200
-Message-Id: <20250903105653.335417-6-pro@denx.de>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20250903105653.335417-1-pro@denx.de>
-References: <20250903105653.335417-1-pro@denx.de>
+ u-boot@lists.denx.de
+Subject: Re: [RFC 02/10] riscv: dts: starfive: Add VisionFive 2 Lite board
+ device tree
+Message-ID: <aLghZaUyZZpUHOzP@sumit-X1>
+References: <20250829060931.79940-1-hal.feng@starfivetech.com>
+ <20250829060931.79940-3-hal.feng@starfivetech.com>
+ <3b75e20f-261e-4a23-b2b6-d4f4596b5fb3@freeshell.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3b75e20f-261e-4a23-b2b6-d4f4596b5fb3@freeshell.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,27 +75,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simplify the depends-on logic for SPL_SIZE_LIMIT. No functional change.
+On Tue, Sep 02, 2025 at 01:03:09PM -0700, E Shattow wrote:
+> Hi Hal,
+> 
+> On 8/28/25 23:09, Hal Feng wrote:
+> > VisionFive 2 Lite is a mini SBC based on the StarFive JH7110S SoC.
+> > 
+> > Board features:
+> > - JH7110S SoC
+> > - 2/4/8 GiB LPDDR4 DRAM
+> > - AXP15060 PMIC
+> > - 40 pin GPIO header
+> > - 1x USB 3.0 host port
+> > - 3x USB 2.0 host port
+> > - 1x M.2 M-Key (size: 2242)
+> > - 1x MicroSD slot (optional non-removable eMMC)
+> > - 1x QSPI Flash
+> > - 1x I2C EEPROM
+> > - 1x 1Gbps Ethernet port
+> > - SDIO-based Wi-Fi & UART-based Bluetooth
+> > - 1x HDMI port
+> > - 1x 2-lane DSI
+> > - 1x 2-lane CSI
+> > 
+> 
+> Prefer to see subject line and URL of recent upstream discussion or git
+> web commit for the new or modified dts changes from upstream of
+> devicetree-rebasing in this commit and not just in the cover letter.
+> 
+> + From upstream LKML discussion "[RFC 3/3] riscv: dts: starfive: Add
+> VisionFive 2 Lite board device tree" [1].
+> + 1:
+> https://lore.kernel.org/all/20250821100930.71404-4-hal.feng@starfivetech.com/
+> 
+> > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> > ---
+> >  .../jh7110s-starfive-visionfive-2-lite.dts    | 152 ++++++++++++++++++
+> >  1 file changed, 152 insertions(+)
+> >  create mode 100644 dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
+> > 
+> > diff --git a/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
+> > new file mode 100644
+> > index 00000000000..a0cb9912eb8
+> > --- /dev/null
+> > +++ b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
+> 
+> No, do not directly add or modify upstream dts in dts/upstream/src
+> subtree. We are not permitted in U-Boot to merge out-of-band devicetree
+> changes to the devicetree-rebasing subtree as this creates more work for
+> Tom, if I understand correctly?
+> 
+> Instead add or modify this dts as
+> arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi filename.
 
-Signed-off-by: Philip Oberfichtner <pro@denx.de>
----
- Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+That's right. dts/upstream subtree isn't allowed to be directly patched
+but it is rather synced regularly with devicetree-rebasing. So please
+follow documentation documentation here [1].
 
-diff --git a/Kconfig b/Kconfig
-index aa00669ba20..343299eed50 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -588,8 +588,8 @@ config HAS_SPL_SIZE_LIMIT
- config SPL_SIZE_LIMIT
- 	hex "Maximum size of SPL image in bytes"
- 	depends on HAS_SPL_SIZE_LIMIT
--	default 0x11000 if ARCH_MX6 && !MX6_OCRAM_256KB
- 	default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
-+	default 0x11000 if ARCH_MX6
- 	default 0x30000 if ARCH_MVEBU && ARMADA_32BIT
- 	help
- 	  Maximum size of the SPL image. When defined, the build system checks
--- 
-2.39.5
+[1] https://docs.u-boot.org/en/latest/develop/devicetree/control.html#resyncing-with-devicetree-rebasing
 
+-Sumit
