@@ -4,62 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47352CA0FF2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 11:18:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE42CA1009
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 11:22:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6380834E5;
-	Wed,  3 Sep 2025 13:18:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2AF53834E5;
+	Wed,  3 Sep 2025 13:22:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M4PPdDP0";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yehFdTss";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DCr3v4o0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 573A183510; Wed,  3 Sep 2025 13:18:31 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E335833C6
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 13:18:28 +0200 (CEST)
+ id 03A1783564; Wed,  3 Sep 2025 13:22:45 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D6455833C6
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 13:22:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 583BIQ1e2756781;
- Wed, 3 Sep 2025 06:18:26 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1756898306;
- bh=ctLAFiGSkWMXel7cQ6jCS6O4G/25i0Nq0fyeQLHXqKs=;
- h=From:To:CC:Subject:Date;
- b=M4PPdDP0cmtwmJXfUbctmNPz5jqc3W0gL1rqDz6/QnV5QqGA0Kw+U12n/EFzBRH1n
- j/2swf+CNVIn21UjLLl28JjupjPucTzNKXDVRwudLVcPXZ8JVjYzIqJ6YfXqtLZXQT
- eJHRmv1LKQMHV0XHl6rv0FGo6+Zrk8fDFTF8xQeQ=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 583BIQIO3479356
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 3 Sep 2025 06:18:26 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 3
- Sep 2025 06:18:26 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 3 Sep 2025 06:18:25 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 583BIONI1192424;
- Wed, 3 Sep 2025 06:18:25 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
-Subject: [PATCH v1] mach-k3: fix reading size and addr from fdt on R5
-Date: Wed, 3 Sep 2025 16:47:02 +0530
-Message-ID: <20250903111704.530700-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.50.1
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cH0Zp4qL9z9tj8;
+ Wed,  3 Sep 2025 13:22:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1756898562;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=v2H7GtTM4a7xeh7vekYuhxGVlkcFS2XCJp9rCuP+u+w=;
+ b=yehFdTssyFTN2NsRcSI5dCd67rAYEIrAIvgXCdVXOjbC14zs+FNdBlwrtwEzHFUD9h+piN
+ mlhBRO+m48ZbxYL8CC9R71EBWxVhzyaOCHQeaLE1Eu8tb8/rpEF1jCuufPENqCBLUt+FBw
+ N4O8RIv81qVEsBIheDJ+CMATq6Y3U1OdrmuTaJQ8Jw4f91gLkf2M+gNN9pE3thMA9HAa3v
+ mKWpJ2KciOjsB+Rwnj/VUUeXHHkOygUCpILg+YOJBLtP+Ji3RzrXWRxVLArY50/fK4CmPp
+ YH/P5v65CTEKjAYbW/32ffq6PuzN/irguWc/MqSr1z00BQ5RggGMpubjNcydtw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1756898560;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=v2H7GtTM4a7xeh7vekYuhxGVlkcFS2XCJp9rCuP+u+w=;
+ b=DCr3v4o04zf6lgXw138KBxMq70aGQGKFmVu8a6TcWPgrLmVR8XTbz+Hyj59r/tbusK8rhO
+ KjFXiF+hkceewBxjklTquPEemoxFZFTfL9b/QNJ/6x/Av20gN4As+BbKY8TqIwnM4nD34I
+ UdLVjBG915in7fteAeXPuvdOmuMeQtyTS6rdWcYbwaDCFDYklo3dpz3hANQWvsW8VbSJZM
+ Pd7GIfg2s6QLJuwEF/k6va7dxe+JKcz3JVPEtyQyXlDt5z1/hqco4CavQL9I/c298BiTaJ
+ Bx4nz6WJr8mDAvgrzxpp4so93iCD0VB6LcQrohErxUduBXTbxjjpfxDUhTWLcw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] env: Remove usb_ignorelist and env_fdt_path from ifdef
+ CONFIG_ENV_VARS_UBOOT_CONFIG
+Date: Wed,  3 Sep 2025 13:22:06 +0200
+Message-ID: <20250903112228.48224-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MBO-RS-ID: e8187cdc7a10b391270
+X-MBO-RS-META: id3tw6iuk5h1tdajym9xnfuiymz49u84
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,34 +85,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fdtdec_get_addr_size uses architecture dependent datatypes which causes
-the 32-bit R5 to fail when reading the 64-bit size and addr fields of
-reg nodes from the fdt.
+The CONFIG_ENV_VARS_UBOOT_CONFIG should protect only U-Boot
+configuration variables in environment, those are arch, cpu,
+board, board_name, vendor, soc. It should certainly not hide
+usb_ignorelist or env_fdt_path from the environment. Fix it.
 
-Therefore change it to a common api for both 64 and 32 bit platforms to
-allow for fdt fixups from R5.
-
-Fixes: 8b0fc29de0e3 ("arm: mach-k3: am62: Fixup TF-A/OP-TEE reserved-memory node in FDT")
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- arch/arm/mach-k3/common_fdt.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ include/env_default.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
-index 2777354c6ab..1e6786f6c20 100644
---- a/arch/arm/mach-k3/common_fdt.c
-+++ b/arch/arm/mach-k3/common_fdt.c
-@@ -140,7 +140,9 @@ int fdt_fixup_reserved(void *blob, const char *name,
- 			return -EINVAL;
- 		if (!strncmp(node_name, name, strlen(name))) {
- 			/* Read out old size first */
--			addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
-+			addr = fdtdec_get_addr_size_auto_parent(
-+				blob, nodeoffset, subnode, "reg", 0, &size,
-+				false);
- 			if (addr == FDT_ADDR_T_NONE)
- 				return -EINVAL;
- 			new_size = size;
+diff --git a/include/env_default.h b/include/env_default.h
+index 9caf22cdd1d..7f8dc1c35a7 100644
+--- a/include/env_default.h
++++ b/include/env_default.h
+@@ -79,10 +79,10 @@ const char default_environment[] = {
+ #ifdef CONFIG_USE_BOOTFILE
+ 	"bootfile="	CONFIG_BOOTFILE			"\0"
+ #endif
+-#ifdef	CONFIG_SYS_LOAD_ADDR
++#ifdef CONFIG_SYS_LOAD_ADDR
+ 	"loadaddr="	__stringify(CONFIG_SYS_LOAD_ADDR)"\0"
+ #endif
+-#ifdef	CONFIG_ENV_VARS_UBOOT_CONFIG
++#ifdef CONFIG_ENV_VARS_UBOOT_CONFIG
+ 	"arch="		CONFIG_SYS_ARCH			"\0"
+ #ifdef CONFIG_SYS_CPU
+ 	"cpu="		CONFIG_SYS_CPU			"\0"
+@@ -97,6 +97,7 @@ const char default_environment[] = {
+ #ifdef CONFIG_SYS_SOC
+ 	"soc="		CONFIG_SYS_SOC			"\0"
+ #endif
++#endif
+ #ifdef CONFIG_USB_HOST
+ 	"usb_ignorelist="
+ #ifdef CONFIG_USB_KEYBOARD
+@@ -111,7 +112,6 @@ const char default_environment[] = {
+ #ifdef CONFIG_ENV_IMPORT_FDT
+ 	"env_fdt_path="	CONFIG_ENV_FDT_PATH		"\0"
+ #endif
+-#endif
+ #if defined(CONFIG_BOOTCOUNT_BOOTLIMIT) && (CONFIG_BOOTCOUNT_BOOTLIMIT > 0)
+ 	"bootlimit="	__stringify(CONFIG_BOOTCOUNT_BOOTLIMIT)"\0"
+ #endif
 -- 
 2.50.1
 
