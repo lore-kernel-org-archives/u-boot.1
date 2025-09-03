@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C502CA0FF2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 08:38:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68E99CA0FF2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 08:39:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A3598313F;
-	Wed,  3 Sep 2025 10:38:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF74283544;
+	Wed,  3 Sep 2025 10:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="mdv3Bvoh";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="kP4QOdkw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66D098353A; Wed,  3 Sep 2025 10:38:49 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ id 84E7583403; Wed,  3 Sep 2025 10:38:58 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F13858313F
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 10:38:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B632583564
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 10:38:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 646d8a8288a111f0bd5779446731db89-20250903
+X-UUID: 6a28965688a111f0b33aeb1e7f16c2b6-20250903
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=OnwnqbYOtVCOSs3Mt50l/Ww+2EwVkAs9FjaxeznfSvU=; 
- b=mdv3BvohbIQgaDg2xvVsFLJS7YH0qxpjvLs3k3zUMX8abqV64PcbuBFOm6ZnHMNr7/4/sYVrY069aaTpgchXZd1uvGcMVooSsn3bS0nggzDTy21wdcsTL24SjlV0chTpNzQRZm1cr+9G0DtgIK6Eg/Pu9Uf0EebsDXbRkvwTGHA=;
+ bh=EOQ4ebrnMQlbdnigx+YJe57u1ShgQ02iy7zBeMHjh7g=; 
+ b=kP4QOdkwFX8QLBMKb6NC6rVlt7rZIqeeqccjJRvxoG6Fah73lN14NdMb/LSKSK8HDdM2uhLjD3QdiKAuHhqvdCjTqcY5ISeLWjjceablbjG4PZCAMtB4IRVTF0RHmFZZrxLL424zQUPEtEs1s/O7DL2b7822cQFzuDZWfxTcFKE=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.3, REQID:3307a7a4-1c65-4369-bde6-98903c802ab6, IP:0,
+X-CID-O-INFO: VERSION:1.3.3, REQID:463e29ec-2ab1-4423-bb16-c5e6746411e5, IP:0,
  UR
  L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
  elease,TS:0
-X-CID-META: VersionHash:f1326cf, CLOUDID:e7bfe5f7-ebfe-43c9-88c9-80cb93f22ca4,
+X-CID-META: VersionHash:f1326cf, CLOUDID:79c0e5f7-ebfe-43c9-88c9-80cb93f22ca4,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:-5,Content:0|15|50,EDM:
  -3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,
@@ -45,27 +45,26 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 646d8a8288a111f0bd5779446731db89-20250903
-Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+X-UUID: 6a28965688a111f0b33aeb1e7f16c2b6-20250903
+Received: from mtkmbs09n1.mediatek.inc [(172.21.101.35)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 876631804; Wed, 03 Sep 2025 16:38:40 +0800
+ with ESMTP id 861312466; Wed, 03 Sep 2025 16:38:50 +0800
 Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Wed, 3 Sep 2025 16:38:38 +0800
+ 15.2.1258.39; Wed, 3 Sep 2025 16:38:48 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Wed, 3 Sep 2025 16:38:38 +0800
+ 15.2.1258.39 via Frontend Transport; Wed, 3 Sep 2025 16:38:48 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
- <rfried.dev@gmail.com>, Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v3 3/5] net: mediatek: associate PHY device with dts node
- specified by phy-handle
-Date: Wed, 3 Sep 2025 16:38:35 +0800
-Message-ID: <628bc8a74542324e678119174295cf9e2efa8d5a.1756885599.git.weijie.gao@mediatek.com>
+ <trini@konsulko.com>, Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH v3 5/5] MAINTAINERS: update ethernet-related file list for
+ MediaTek ARM platform
+Date: Wed, 3 Sep 2025 16:38:47 +0800
+Message-ID: <b726784c1ef69b0d2221e87b8f953fb9548e2abe.1756885599.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1756885599.git.weijie.gao@mediatek.com>
 References: <cover.1756885599.git.weijie.gao@mediatek.com>
@@ -88,47 +87,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Associate PHY device with its device node specified by phy-handle
-property. This makes it possible for PHY drivers to read dedicated
-information to configure the PHY device.
+Update ethernet-related files for MediaTek ARM platform
 
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
 Changes in v3: none
 Changes in v2: none
 ---
- drivers/net/mtk_eth/mtk_eth.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ MAINTAINERS | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/mtk_eth/mtk_eth.c b/drivers/net/mtk_eth/mtk_eth.c
-index b172838ba3a..a35754ccd1f 100644
---- a/drivers/net/mtk_eth/mtk_eth.c
-+++ b/drivers/net/mtk_eth/mtk_eth.c
-@@ -100,6 +100,7 @@ struct mtk_eth_priv {
- 	bool pn_swap;
- 
- 	struct phy_device *phydev;
-+	ofnode phy_node;
- 	int phy_interface;
- 	int phy_addr;
- 
-@@ -572,6 +573,7 @@ static int mtk_phy_probe(struct udevice *dev)
- 	if (!phydev)
- 		return -ENODEV;
- 
-+	phydev->node = priv->phy_node;
- 	phydev->supported &= PHY_GBIT_FEATURES;
- 	phydev->advertising = phydev->supported;
- 
-@@ -1458,6 +1460,8 @@ static int mtk_eth_of_to_plat(struct udevice *dev)
- 			return ret;
- 		}
- 
-+		priv->phy_node = args.node;
-+
- 		priv->phy_addr = ofnode_read_s32_default(args.node, "reg", -1);
- 		if (priv->phy_addr < 0) {
- 			printf("error: phy address is not specified\n");
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 3fb163aa1db..065834246de 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -423,6 +423,8 @@ F:	drivers/clk/mediatek/
+ F:	drivers/cpu/mtk_cpu.c
+ F:	drivers/i2c/mtk_i2c.c
+ F:	drivers/mmc/mtk-sd.c
++F:	drivers/net/mtk_eth/
++F:	drivers/net/phy/mediatek/
+ F:	drivers/phy/phy-mtk-*
+ F:	drivers/pinctrl/mediatek/
+ F:	drivers/power/domain/mtk-power-domain.c
+@@ -437,8 +439,6 @@ F:	drivers/timer/mtk_timer.c
+ F:	drivers/usb/host/xhci-mtk.c
+ F:	drivers/usb/mtu3/
+ F:	drivers/watchdog/mtk_wdt.c
+-F:	drivers/net/mtk_eth.c
+-F:	drivers/net/mtk_eth.h
+ F:	drivers/reset/reset-mediatek.c
+ F:	drivers/serial/serial_mtk.c
+ F:	include/dt-bindings/clock/mediatek,*
 -- 
 2.34.1
 
