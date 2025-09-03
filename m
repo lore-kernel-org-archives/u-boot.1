@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A309CA1009
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 08:38:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE316CA1009
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 08:38:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C68B98350A;
-	Wed,  3 Sep 2025 10:38:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B0AB834E5;
+	Wed,  3 Sep 2025 10:38:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="sHVrOGnJ";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="MdeECq7f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AFFD8350A; Wed,  3 Sep 2025 10:38:35 +0200 (CEST)
+ id 687738312A; Wed,  3 Sep 2025 10:38:46 +0200 (CEST)
 Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD7AB8312A
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 10:38:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1A2583403
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 10:38:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 5d6a263c88a111f0b33aeb1e7f16c2b6-20250903
+X-UUID: 617ba53488a111f0b33aeb1e7f16c2b6-20250903
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
  s=dk; 
  h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From;
- bh=B95tKerbOa936bRSWRJzB7YZydFpD1ZQWPwQnIbZcnM=; 
- b=sHVrOGnJMB009Zd221H8K7aX8NvKmfkzZRLyf+9Pghc4Y7cBH/JcEnFW4J4kYTbqn8DzUfgUyZpKdODZe+zyQu3XO036uY8vtzKpnthCcxgzwkTIArCVCIA338F73op7cHvMEud3tK2WsCBCWpSRYfvzPtlhrLxnsJ7LBtH7wU0=;
+ bh=i7fAduQ4phhYJXhGl2ybMUzyI8y56rTz3nwqKEl4/P8=; 
+ b=MdeECq7fvs+PsVOlvd0B+kth1bN6mXfHoX7NwpSBPPf46RfnyVhWs2RV+BD/GocpGNjTqt2ZhjX82La7lsvc1r7/mnV8FM22zQwycY08dAgzy2bquTbLqCCpPoasF5UYQtSwjSt0Z6dKiaakqpZ9t3oadsDWB9Gmy8rmKKwCewE=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.3, REQID:f3debe7a-5ba7-4480-bbf7-43e03b8bf49c, IP:0,
+X-CID-O-INFO: VERSION:1.3.3, REQID:7262e603-fbcf-4304-b45e-de6bdf291cee, IP:0,
  UR
  L:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
  release,TS:-5
-X-CID-META: VersionHash:f1326cf, CLOUDID:47fb6284-5317-4626-9d82-238d715c253f,
+X-CID-META: VersionHash:f1326cf, CLOUDID:befb6284-5317-4626-9d82-238d715c253f,
  B
  ulkID:nil,BulkQuantity:0,Recheck:0,SF:81|82|102,TC:-5,Content:0|15|50,EDM:
  -3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,
@@ -45,27 +45,27 @@ X-CID-BVR: 2,SSN|SDN
 X-CID-BAS: 2,SSN|SDN,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
 X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 5d6a263c88a111f0b33aeb1e7f16c2b6-20250903
-Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by
+X-UUID: 617ba53488a111f0b33aeb1e7f16c2b6-20250903
+Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
  mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
  (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 1617244332; Wed, 03 Sep 2025 16:38:28 +0800
+ with ESMTP id 752198820; Wed, 03 Sep 2025 16:38:35 +0800
 Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
+ mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Wed, 3 Sep 2025 16:38:18 +0800
+ 15.2.1258.39; Wed, 3 Sep 2025 16:38:33 +0800
 Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
  mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Wed, 3 Sep 2025 16:38:18 +0800
+ 15.2.1258.39 via Frontend Transport; Wed, 3 Sep 2025 16:38:33 +0800
 From: Weijie Gao <weijie.gao@mediatek.com>
 To: <u-boot@lists.denx.de>
 CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
  <trini@konsulko.com>, "Lucien . Jheng" <lucienzx159@gmail.com>, Weijie Gao
  <weijie.gao@mediatek.com>
-Subject: [PATCH v3 1/5] misc: fs_loader: allow returning actual firmware data
- size in request_firmware_into_buf_via_script()
-Date: Wed, 3 Sep 2025 16:38:14 +0800
-Message-ID: <9ded02581f5ccd985470239f31dc2f2fdd6aea80.1756885599.git.weijie.gao@mediatek.com>
+Subject: [PATCH v3 2/5] misc: fs_loader: allow using long script name in
+ request_firmware_into_buf_via_script()
+Date: Wed, 3 Sep 2025 16:38:30 +0800
+Message-ID: <038e8258c903367dccd9c7cd1adb51bcf2bdf307.1756885599.git.weijie.gao@mediatek.com>
 X-Mailer: git-send-email 2.17.0
 In-Reply-To: <cover.1756885599.git.weijie.gao@mediatek.com>
 References: <cover.1756885599.git.weijie.gao@mediatek.com>
@@ -88,60 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It's important to return the actual firmware data size as some
-firmware files may have no checksum and need the size as the only
-way for firmware validation check.
+Use cmd_process() to remove the length limit of script name used for
+run_command().
 
 Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
- drivers/misc/fs_loader.c | 6 +++++-
- include/fs_loader.h      | 4 +++-
- 2 files changed, 8 insertions(+), 2 deletions(-)
+ drivers/misc/fs_loader.c | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
-index 60296d55f23..87acd385e23 100644
+index 87acd385e23..6a6796c1931 100644
 --- a/drivers/misc/fs_loader.c
 +++ b/drivers/misc/fs_loader.c
-@@ -229,7 +229,8 @@ int request_firmware_into_buf(struct udevice *dev,
- }
- 
- int request_firmware_into_buf_via_script(void **buf, size_t max_size,
--					 const char *script_name)
-+					 const char *script_name,
-+					 size_t *retsize)
+@@ -232,18 +232,15 @@ int request_firmware_into_buf_via_script(void **buf, size_t max_size,
+ 					 const char *script_name,
+ 					 size_t *retsize)
  {
++	char *args[2] = { (char *)"run", (char *)script_name };
++	int ret, repeatable;
  	ulong addr, size;
- 	int ret;
-@@ -269,6 +270,9 @@ int request_firmware_into_buf_via_script(void **buf, size_t max_size,
- 		return -E2BIG;
- 	}
+-	int ret;
+-	char cmd[32];
  
-+	if (retsize)
-+		*retsize = size;
-+
- 	memcpy(*buf, (void *)addr, size);
+ 	if (!buf || !script_name || !max_size)
+ 		return -EINVAL;
  
- 	return 0;
-diff --git a/include/fs_loader.h b/include/fs_loader.h
-index a433be1eb99..1cf6d6dd05f 100644
---- a/include/fs_loader.h
-+++ b/include/fs_loader.h
-@@ -71,6 +71,7 @@ int get_fs_loader(struct udevice **dev);
-  * @buf: Pointer to a pointer where the firmware buffer will be stored.
-  * @max_size: Maximum allowed size for the firmware to be loaded.
-  * @script_name: Name of the U-Boot script to execute for firmware loading.
-+ * @retsize: Return the actual firmware data size (optional).
-  *
-  * Executes a U-Boot script (@script_name) that loads firmware into
-  * memory and sets the environment variables 'fw_addr' (address) and
-@@ -87,5 +88,6 @@ int get_fs_loader(struct udevice **dev);
-  * Return: 0 on success, negative value on error.
-  */
- int request_firmware_into_buf_via_script(void **buf, size_t max_size,
--					 const char *script_name);
-+					 const char *script_name,
-+					 size_t *retsize);
- #endif
+-	/* Create command to run the firmware loading script */
+-	snprintf(cmd, sizeof(cmd), "run %s", script_name);
+-
+ 	/* Run the firmware loading script */
+-	ret = run_command_list(cmd, -1, 0);
++	ret = cmd_process(0, 2, args, &repeatable, NULL);
+ 	if (ret) {
+ 		log_err("Firmware loading script '%s' not defined or failed.\n",
+ 			script_name);
 -- 
 2.34.1
 
