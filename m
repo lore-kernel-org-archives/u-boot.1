@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F293CA0FF2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 15:17:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D181CA1009
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 15:17:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A75008323A;
-	Wed,  3 Sep 2025 17:17:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 00D7E833C6;
+	Wed,  3 Sep 2025 17:17:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T2KSUv/s";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cLGs9ct6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E779683280; Wed,  3 Sep 2025 17:17:14 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 1BF3E831EA; Wed,  3 Sep 2025 17:17:21 +0200 (CEST)
+Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
+ [IPv6:2001:4860:4864:20::30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EFC8831EA
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 17:17:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01774833C6
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 17:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-31d6e39817fso15765fac.3
- for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 08:17:11 -0700 (PDT)
+Received: by mail-oa1-x30.google.com with SMTP id
+ 586e51a60fabf-319c2a87a5aso12999fac.1
+ for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 08:17:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756912630; x=1757517430; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1756912638; x=1757517438; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=dokRrz3USD/bVEsfx18fjpY6tEkEqwKf/l4TxU83j58=;
- b=T2KSUv/sJB+RJNgUOP7U2ppn7LdQ1lva1lIRcvjdi+5qQJPehXV0tGwdmyiBDGz2Se
- D/xiIGc/zsyr1BrcM/5P5a+T6sm0M0Gpp6ZxYez20rL4O+2qopt+mE743eCe0qTUXW9e
- ttpWjlzjdor8/6NBkAGqzmRMx0FzookjUndzk=
+ bh=Jk/moh8nNuNc+cBMAguPxWCa8cn7d7HFqqKuwst7ZBI=;
+ b=cLGs9ct67DkwLTnAssKCugxC1STpURJVuyGkEk0WyJSIfa2a6nFImzAwZOVP9UzO72
+ ADGOAAe+RWLtbU62sXIVn6TPgpLWLCLF66mqv/iR4xrIK+oyVnQn6t70XH6ZZWr64ZiC
+ JC7y1ePl6+prrGUAj7G9B0yL19j/vNXDOuZ5o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756912630; x=1757517430;
+ d=1e100.net; s=20230601; t=1756912638; x=1757517438;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dokRrz3USD/bVEsfx18fjpY6tEkEqwKf/l4TxU83j58=;
- b=MrctfRGHwOaEaI+jnZLimDrLH4B7VSs6NPIDcnSjgY0vcM4cMS5EwwYauheMUApFwM
- VyyVd52okPx0dd/FsM+p91jXm8ijBD+cuVEPcs+aJ4puo+8/tWwEuTD6XsEhj+Sz7M6c
- Ozjb2zXN2BwU4YnR5yrf8Pc6eR2taGIcbto+q8KMWu1ajwgWaUGWd5CCko4vPz2w7ddW
- RioYTelwtfHGx1/wX5t9VsKcQDQRF4PCyc890jC+z/+gTqIEOzQZDHdUbMP7ufPLHr0V
- R0xxK3t4qYQ6t0GTs3gKSSwRImH+r02dAYX2p8KGiQ5wN3VNjQkg+LTkFREd4ktjgbLh
- 0sFw==
-X-Gm-Message-State: AOJu0YxXQY0TK934HTVTlPi3AoR2D9b8ZX/Mp9HtO/AH/beQMOyxz7Xk
- /CkpFOCPsH3wTDShloddn7zZPtWcOkZWwt8QkjSi57Ti3tuurEApe3N/JEbTJK3SPbY=
-X-Gm-Gg: ASbGncs51Z7zMlqKd6Ng0WVjVfcxrRD/Y1Bnv/im1QRCMAp4GL5kYcSjcDfu1rjsARo
- 9dz7l9oJ/CPCIU6AM2bzUtLezqtK/QuL69u0M/GWOPcoJzOSx+tkijnqVA/Fc2ngy6o+bc+IXIF
- yKla3JyJhhocqeh20PUPZMH/jWjOAECNH7N8VM5qMNN04sOEiPtrodOliNEjaZwmU/2LPUCBkrE
- wlO1rPGNanzcK30/huBuhBpV6IglRZyQomEf1/Mg0h3V+YuYX074r3uoTcXqVPzoAo+AdLZyE8m
- zINGA7kHcDKlg6uehpDBRfItqihkkTIuqcXy+LHQRTBVyEABZ5L1ShGw9Wouu5rdQt2qLydCnFz
- 5y5rkTb302Iy36g9k1SfenMpqctj+VRd4xA4e6dUioEfyiEmwyszElSO0
-X-Google-Smtp-Source: AGHT+IHFtcDHFwgmS9SfCaFvvGsaMfJCS1JUUuS7yJN0l4idBheuQ3oS2Y3BIjMC1XQJFs+GCYv6TA==
-X-Received: by 2002:a05:6870:82a3:b0:30b:bb5b:8d8b with SMTP id
- 586e51a60fabf-3196306aademr9879958fac.4.1756912630034; 
- Wed, 03 Sep 2025 08:17:10 -0700 (PDT)
+ bh=Jk/moh8nNuNc+cBMAguPxWCa8cn7d7HFqqKuwst7ZBI=;
+ b=apPIsjn9eLNqLN7XLgRRp99eC/tdkXKJ4nLsD6EDw/blDmFA4MymmGOfY2EKoE7Qat
+ g+w8Y60qM+wm8Fm+dbuefty9qnadICvhN0K8yFG3q968FBTyui0GVFhpfu/7EfGrFTkb
+ hAELYByjXnSqnpqh58srw58R2/E8ukMQ8e6y8KnZFDHc+mWTt39DKLowxrPQsTRiN7CN
+ bcjNJ/5/d18dS0zetKCVbCDx7WP1yUInPfv3+pDW5a9adE62sQ8AEhCk0iJtup/kPBgK
+ 66xXuS/B8n4HBPl8LkXN+9h4lJFrH9zAM/0wxQ/effHW8XeRLaQOWd/dC3shRcPIP0BR
+ Lqmg==
+X-Gm-Message-State: AOJu0YzqKYxVBqVZwVceGdusqlErVirEdCIMpi1YdkbX1BTiG5eHVYHf
+ 5L9l0q09lMZ8B/x+hZNWGAHG64XEflgQlibq03XFGFRYxcL6O6VHl4JH0oMuUmuj+ec=
+X-Gm-Gg: ASbGncuLr5Pb/yA92nSGT3nq1le99MKUQB2Jvx8f8TyE+Pio1vnciMVaikD55ZiUtC/
+ d+vAyVARKxqpCEV2lRD+SlFmcWP57zBLtLRawjv03qfApkdOvlYldLrLJYhY0U8EuWrjVAosUCz
+ 4HdI7HQZuwG8L2X10k8N55kBiFHMQnka497Ru/y4vNoy9TYKXiz+VFDYShvlAJsHU0uXXPgXURP
+ VLZRHcz3R9zmSh7+MYUSusa6ah7qp/CAHT8OGwVfPWHsKkpgIf/dhjgqXv5GWWl3uoN6dcNhy8j
+ zR9dafmSlqPMhMLSfZXSCuyGxG3ONVgtaNQ6wcPvn/2YqC5y3mW9y4SgJAxR8vIZk9iQflxzlMw
+ 7STgQBxOqI/bUjKjuCHG2EG2sPxvbcO+cWk2oBaRPbI4ngQpGlh/t1rVJ
+X-Google-Smtp-Source: AGHT+IEBD4wc+LSVnL7i2/JnAcE4RnDAVpyV0xa8Rg7YH0X0Q+40gSCwwEMOqryFZOS/dOi1m9jYrg==
+X-Received: by 2002:a05:6870:b313:b0:31d:655c:4ac4 with SMTP id
+ 586e51a60fabf-31d655c79aamr1171213fac.19.1756912636652; 
+ Wed, 03 Sep 2025 08:17:16 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-31d6b4c05ecsm317368fac.17.2025.09.03.08.17.08
+ 46e09a7af769-7457438a327sm2304127a34.22.2025.09.03.08.17.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Sep 2025 08:17:09 -0700 (PDT)
-Date: Wed, 3 Sep 2025 09:17:07 -0600
+ Wed, 03 Sep 2025 08:17:15 -0700 (PDT)
+Date: Wed, 3 Sep 2025 09:17:13 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: Re: [PATCH v2] env: Remove usb_ignorelist and env_fdt_path from
- ifdef CONFIG_ENV_VARS_UBOOT_CONFIG
-Message-ID: <20250903151707.GG124814@bill-the-cat>
-References: <20250903142101.90350-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v2] env: Fix up indent
+Message-ID: <20250903151713.GH124814@bill-the-cat>
+References: <20250903142245.90689-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8XCidOvr9EtnMS1Q"
+ protocol="application/pgp-signature"; boundary="YCLzKIKuJ8uSsCD7"
 Content-Disposition: inline
-In-Reply-To: <20250903142101.90350-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250903142245.90689-1-marek.vasut+renesas@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,17 +97,15 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8XCidOvr9EtnMS1Q
+--YCLzKIKuJ8uSsCD7
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 03, 2025 at 04:20:52PM +0200, Marek Vasut wrote:
+On Wed, Sep 03, 2025 at 04:22:26PM +0200, Marek Vasut wrote:
 
-> The CONFIG_ENV_VARS_UBOOT_CONFIG should protect only U-Boot
-> configuration variables in environment, those are arch, cpu,
-> board, board_name, vendor, soc. It should certainly not hide
-> usb_ignorelist or env_fdt_path from the environment. Fix it.
+> Replace #define<TAB> with #define<space> to be consistent in
+> the entire file. No functional change.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
@@ -117,15 +114,15 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---8XCidOvr9EtnMS1Q
+--YCLzKIKuJ8uSsCD7
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLhb7wAKCRAr4qD1Cr/k
-CjjBAQD1eOK9scbXtS7PYZpefj+oxafrZEslTaHdBG066Nf2xAD+K+mB7Kg2QXyN
-DoUGG45a+14D7PIB4rF7fD713L0NhwA=
-=58Dy
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLhb+QAKCRAr4qD1Cr/k
+Ci4dAP4sunGiG/awXJy7epquru6sgqsfqhEsM/bRVdUNkDQCSwD/ZglqZYzGcHhS
+o+xwwVqZVRLsAVINtzK4h/VNuW+Hmw4=
+=P944
 -----END PGP SIGNATURE-----
 
---8XCidOvr9EtnMS1Q--
+--YCLzKIKuJ8uSsCD7--
