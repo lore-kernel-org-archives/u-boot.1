@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 292ACCA0FF2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 14:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F293CA0FF2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 15:17:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A85883559;
-	Wed,  3 Sep 2025 16:23:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A75008323A;
+	Wed,  3 Sep 2025 17:17:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wSty5T5S";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="J7RvLEHQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T2KSUv/s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75CCF835C9; Wed,  3 Sep 2025 16:23:05 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E779683280; Wed,  3 Sep 2025 17:17:14 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5255C834AD
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 16:23:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EFC8831EA
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 17:17:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cH4Zs6nyyz9sp7;
- Wed,  3 Sep 2025 16:23:01 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756909382;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=oX5NF80I3FjdIM8X7tl1b8FjPKyC1e0B7y6RhtJtUis=;
- b=wSty5T5SYSQ4MrmRtyyT9128bvVJrsmHPRA1cK57SGICB6KDJTOYS3ya9f/y+qK9tD/b34
- IxK6kkbWRgnWh3PyHpjDIw3W0F1TUrfn/Hm4bJiFcBt06JDrqYdDiByUvSx+sKmSmWLi4b
- Q7Y1GKQyaPOsFiep/wdxcjR4s+ZO+ci6+qvy8ZYRcruIVocgRDJsosU5YIvTIVVXaMY1lL
- L5y5aVUL6SENfhMDGgXzISvfu243G8jkomGTIcO59GzsQY0VxCOVwCXw0o5fwK0lNAmNZl
- cmJXsaoS/VjHSNXTsByh2vDKbM/9nsECKwezSTWexrvYcmLOlQn2mnw3dAxTow==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756909380;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=oX5NF80I3FjdIM8X7tl1b8FjPKyC1e0B7y6RhtJtUis=;
- b=J7RvLEHQAv185fG3oHvzhj5VdTQ7DW1p9G1WdkojaDbXK+cU09xsIsfwj0DSWx/iqZ7hSy
- rQUMiVP8cEeW9wuSFzWrRbmZ3F65nZwfnGYImMSdZpZxG1eu+CQJMc6T2LZYMlDYpAqh7T
- arq3GM0kw5XjDrBK/q6C5r6cpf/EUHwPFLIDKa1dpXtcx8FHT7xd1Aj1LreuQtS5yv2606
- HEXF2vb4OM58ujn6F93U7vWj8IscVsXiPrsqlGREAGebFsuITXwbt564uEfYuymJg7vZex
- ujlgk9XpXxS3Cq3o3AZNNNxI9OVLwD6Jte/nInLj2Sa1viWTaPhdZ+G+xPdxCQ==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] env: Fix up indent
-Date: Wed,  3 Sep 2025 16:22:26 +0200
-Message-ID: <20250903142245.90689-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-31d6e39817fso15765fac.3
+ for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 08:17:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1756912630; x=1757517430; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dokRrz3USD/bVEsfx18fjpY6tEkEqwKf/l4TxU83j58=;
+ b=T2KSUv/sJB+RJNgUOP7U2ppn7LdQ1lva1lIRcvjdi+5qQJPehXV0tGwdmyiBDGz2Se
+ D/xiIGc/zsyr1BrcM/5P5a+T6sm0M0Gpp6ZxYez20rL4O+2qopt+mE743eCe0qTUXW9e
+ ttpWjlzjdor8/6NBkAGqzmRMx0FzookjUndzk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1756912630; x=1757517430;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dokRrz3USD/bVEsfx18fjpY6tEkEqwKf/l4TxU83j58=;
+ b=MrctfRGHwOaEaI+jnZLimDrLH4B7VSs6NPIDcnSjgY0vcM4cMS5EwwYauheMUApFwM
+ VyyVd52okPx0dd/FsM+p91jXm8ijBD+cuVEPcs+aJ4puo+8/tWwEuTD6XsEhj+Sz7M6c
+ Ozjb2zXN2BwU4YnR5yrf8Pc6eR2taGIcbto+q8KMWu1ajwgWaUGWd5CCko4vPz2w7ddW
+ RioYTelwtfHGx1/wX5t9VsKcQDQRF4PCyc890jC+z/+gTqIEOzQZDHdUbMP7ufPLHr0V
+ R0xxK3t4qYQ6t0GTs3gKSSwRImH+r02dAYX2p8KGiQ5wN3VNjQkg+LTkFREd4ktjgbLh
+ 0sFw==
+X-Gm-Message-State: AOJu0YxXQY0TK934HTVTlPi3AoR2D9b8ZX/Mp9HtO/AH/beQMOyxz7Xk
+ /CkpFOCPsH3wTDShloddn7zZPtWcOkZWwt8QkjSi57Ti3tuurEApe3N/JEbTJK3SPbY=
+X-Gm-Gg: ASbGncs51Z7zMlqKd6Ng0WVjVfcxrRD/Y1Bnv/im1QRCMAp4GL5kYcSjcDfu1rjsARo
+ 9dz7l9oJ/CPCIU6AM2bzUtLezqtK/QuL69u0M/GWOPcoJzOSx+tkijnqVA/Fc2ngy6o+bc+IXIF
+ yKla3JyJhhocqeh20PUPZMH/jWjOAECNH7N8VM5qMNN04sOEiPtrodOliNEjaZwmU/2LPUCBkrE
+ wlO1rPGNanzcK30/huBuhBpV6IglRZyQomEf1/Mg0h3V+YuYX074r3uoTcXqVPzoAo+AdLZyE8m
+ zINGA7kHcDKlg6uehpDBRfItqihkkTIuqcXy+LHQRTBVyEABZ5L1ShGw9Wouu5rdQt2qLydCnFz
+ 5y5rkTb302Iy36g9k1SfenMpqctj+VRd4xA4e6dUioEfyiEmwyszElSO0
+X-Google-Smtp-Source: AGHT+IHFtcDHFwgmS9SfCaFvvGsaMfJCS1JUUuS7yJN0l4idBheuQ3oS2Y3BIjMC1XQJFs+GCYv6TA==
+X-Received: by 2002:a05:6870:82a3:b0:30b:bb5b:8d8b with SMTP id
+ 586e51a60fabf-3196306aademr9879958fac.4.1756912630034; 
+ Wed, 03 Sep 2025 08:17:10 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-31d6b4c05ecsm317368fac.17.2025.09.03.08.17.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Sep 2025 08:17:09 -0700 (PDT)
+Date: Wed, 3 Sep 2025 09:17:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Subject: Re: [PATCH v2] env: Remove usb_ignorelist and env_fdt_path from
+ ifdef CONFIG_ENV_VARS_UBOOT_CONFIG
+Message-ID: <20250903151707.GG124814@bill-the-cat>
+References: <20250903142101.90350-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: k39hzezxjzxhsmzayzs1nqpghx5oxwrg
-X-MBO-RS-ID: 6f90deb63af221e377b
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8XCidOvr9EtnMS1Q"
+Content-Disposition: inline
+In-Reply-To: <20250903142101.90350-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,38 +97,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace #define<TAB> with #define<space> to be consistent in
-the entire file. No functional change.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
-V2: Split from env: Remove usb_ignorelist and env_fdt_path from ifdef CONFIG_ENV_VARS_UBOOT_CONFIG
----
- include/env_default.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+--8XCidOvr9EtnMS1Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/include/env_default.h b/include/env_default.h
-index b36aacea90c..7f8dc1c35a7 100644
---- a/include/env_default.h
-+++ b/include/env_default.h
-@@ -79,10 +79,10 @@ const char default_environment[] = {
- #ifdef CONFIG_USE_BOOTFILE
- 	"bootfile="	CONFIG_BOOTFILE			"\0"
- #endif
--#ifdef	CONFIG_SYS_LOAD_ADDR
-+#ifdef CONFIG_SYS_LOAD_ADDR
- 	"loadaddr="	__stringify(CONFIG_SYS_LOAD_ADDR)"\0"
- #endif
--#ifdef	CONFIG_ENV_VARS_UBOOT_CONFIG
-+#ifdef CONFIG_ENV_VARS_UBOOT_CONFIG
- 	"arch="		CONFIG_SYS_ARCH			"\0"
- #ifdef CONFIG_SYS_CPU
- 	"cpu="		CONFIG_SYS_CPU			"\0"
--- 
-2.50.1
+On Wed, Sep 03, 2025 at 04:20:52PM +0200, Marek Vasut wrote:
 
+> The CONFIG_ENV_VARS_UBOOT_CONFIG should protect only U-Boot
+> configuration variables in environment, those are arch, cpu,
+> board, board_name, vendor, soc. It should certainly not hide
+> usb_ignorelist or env_fdt_path from the environment. Fix it.
+>=20
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--8XCidOvr9EtnMS1Q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLhb7wAKCRAr4qD1Cr/k
+CjjBAQD1eOK9scbXtS7PYZpefj+oxafrZEslTaHdBG066Nf2xAD+K+mB7Kg2QXyN
+DoUGG45a+14D7PIB4rF7fD713L0NhwA=
+=58Dy
+-----END PGP SIGNATURE-----
+
+--8XCidOvr9EtnMS1Q--
