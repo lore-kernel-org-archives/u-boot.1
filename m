@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D306CA1009
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 11:54:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C56CA0FF2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 11:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6E5D8350A;
-	Wed,  3 Sep 2025 13:54:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E1EF835CD;
+	Wed,  3 Sep 2025 13:54:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Fee7CLGx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ceYZMgSn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 281C5835C1; Wed,  3 Sep 2025 13:54:20 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 27F7E835C9; Wed,  3 Sep 2025 13:54:22 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F158A83510
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 13:54:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB330834E5
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 13:54:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 583BsGh12822358;
- Wed, 3 Sep 2025 06:54:16 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 583BsIZn3254943;
+ Wed, 3 Sep 2025 06:54:18 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1756900456;
- bh=dtwQzxULoU28www7YKeN51ZUXtR8jnh3mRylnwGlh/8=;
+ s=ti-com-17Q1; t=1756900458;
+ bh=pEyl3qZCeKdwcwEeEreTS0qFA4fWU1zIW6ys3KAU76A=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Fee7CLGxgzpCLMEYVvO602VG86ydUwLppOm4wsRf+27yvyKHx+o0296cKLfi007n9
- C4YLkEvmiEOLcu51MOlfCGM/84l2ccHK1S0fmnzGILpn7q4GqWRtnawgVTlUWwZvjQ
- r619CX+BO1TB8OM+EeQYyVMiItNFmUriHaLfge80=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 583BsG8S3573983
+ b=ceYZMgSnNmIvhCu5sfrlLAOY9tjVHN5tqJSQQMm5RfwvjyAbW3pteLzKfzDOSywPS
+ J0ofyuDp7n/UEQTFqqTBDlsy+FSwWVG409S1L8LvUUYKduvO+u8UFkSvp1/+KNyaDk
+ 0eO/LM2xSN8ptuC1IrnbadNsHy4PpguR+pkiHv0A=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 583BsItg3017763
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 3 Sep 2025 06:54:16 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 3 Sep 2025 06:54:18 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 3
- Sep 2025 06:54:15 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE112.ent.ti.com
+ Sep 2025 06:54:17 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE112.ent.ti.com
  (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Wed, 3 Sep 2025 06:54:15 -0500
+ Frontend Transport; Wed, 3 Sep 2025 06:54:17 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 583BsErA1230114;
- Wed, 3 Sep 2025 06:54:15 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 583BsG0d1516746;
+ Wed, 3 Sep 2025 06:54:17 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <u-kumar1@ti.com>, <p-mantena@ti.com>
-Subject: [PATCH v3 1/2] dma: ti: k3-udma: fix dma_addr_t typecasts
-Date: Wed, 3 Sep 2025 17:22:05 +0530
-Message-ID: <20250903115207.572304-2-anshuld@ti.com>
+Subject: [PATCH v3 2/2] config: arch: k3: enable DMA_ADDR_T_64BIT
+Date: Wed, 3 Sep 2025 17:22:06 +0530
+Message-ID: <20250903115207.572304-3-anshuld@ti.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250903115207.572304-1-anshuld@ti.com>
 References: <20250903115207.572304-1-anshuld@ti.com>
@@ -79,78 +79,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-dma_addr_t is used to store any valid DMA address which might not
-necessarily be the same size as host architecture's word size. Though
-various typecasts in k3's dma and usb driver expect dma_addr_t to be the
-same size as the word size.
+ARCH_K3 encompasses both 32 and 64-bit cores on the same SoC, though the
+DMA addresses are always 64-bit in size.
 
-This leads the compiler to throw a "cast from pointer to integer of
-different size" warning when the condition is not met, for example when
-enabling CONFIG_DMA_ADDR_T_64BIT for the R5 core.
+With the current implementation, the R5 SPL uses a u32 for dma_addr_t
+which leads to data overflow when functions such as k3_nav_*_pop_mem try
+to write a 64-bit address to dma_addr_t variable.
 
-Therefore this patch fixes the typecasts by using 'uintptr_t' as an
-intermediary type which is guaranteed to be the same size as void* on
-the host architecture. Thus, eliminating the compiler warning.
+In certain cases it leads to stack corruption which manifest as boot
+failures on certain compilers, such as SPI boot on GCC 14.2 or 13.3.
 
+Therefore this patch selects CONFIG_DMA_ADDR_T_64BIT for all ARCH_K3.
+
+Fixes: ffcc66e8fec5 ("dma: ti: add driver to K3 UDMA")
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- drivers/dma/ti/k3-udma.c | 6 +++---
- drivers/usb/dwc3/ep0.c   | 4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
+ arch/arm/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-index 723265ab2e5..01824310995 100644
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -2327,7 +2327,7 @@ static int udma_send(struct dma *dma, void *src, size_t len, void *metadata)
- {
- 	struct udma_dev *ud = dev_get_priv(dma->dev);
- 	struct cppi5_host_desc_t *desc_tx;
--	dma_addr_t dma_src = (dma_addr_t)src;
-+	dma_addr_t dma_src = (uintptr_t)src;
- 	struct ti_udma_drv_packet_data packet_data = { 0 };
- 	dma_addr_t paddr;
- 	struct udma_chan *uc;
-@@ -2426,7 +2426,7 @@ static int udma_receive(struct dma *dma, void **dst, void *metadata)
- 
- 	cppi5_desc_get_tags_ids(&desc_rx->hdr, &port_id, NULL);
- 
--	*dst = (void *)buf_dma;
-+	*dst = (void *)(uintptr_t)buf_dma;
- 	uc->num_rx_bufs--;
- 
- 	return pkt_len;
-@@ -2518,7 +2518,7 @@ int udma_prepare_rcv_buf(struct dma *dma, void *dst, size_t size)
- 
- 	desc_num = uc->desc_rx_cur % UDMA_RX_DESC_NUM;
- 	desc_rx = uc->desc_rx + (desc_num * uc->config.hdesc_size);
--	dma_dst = (dma_addr_t)dst;
-+	dma_dst = (uintptr_t)dst;
- 
- 	cppi5_hdesc_reset_hbdesc(desc_rx);
- 
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index 531f0b522af..c656cbe25ce 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -380,7 +380,7 @@ static int dwc3_ep0_handle_status(struct dwc3 *dwc,
- 	dep = dwc->eps[0];
- 	dwc->ep0_usb_req.dep = dep;
- 	dwc->ep0_usb_req.request.length = sizeof(*response_pkt);
--	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
-+	dwc->ep0_usb_req.request.buf = (void *)(uintptr_t)dwc->setup_buf_addr;
- 	dwc->ep0_usb_req.request.complete = dwc3_ep0_status_cmpl;
- 
- 	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
-@@ -662,7 +662,7 @@ static int dwc3_ep0_set_sel(struct dwc3 *dwc, struct usb_ctrlrequest *ctrl)
- 	dep = dwc->eps[0];
- 	dwc->ep0_usb_req.dep = dep;
- 	dwc->ep0_usb_req.request.length = dep->endpoint.maxpacket;
--	dwc->ep0_usb_req.request.buf = (void *)dwc->setup_buf_addr;
-+	dwc->ep0_usb_req.request.buf = (void *)(uintptr_t)dwc->setup_buf_addr;
- 	dwc->ep0_usb_req.request.complete = dwc3_ep0_set_sel_cmpl;
- 
- 	return __dwc3_gadget_ep0_queue(dep, &dwc->ep0_usb_req);
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 40368abc297..16db046f4b8 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -833,6 +833,7 @@ config ARCH_K3
+ 	select FIT
+ 	select REGEX
+ 	select FIT_SIGNATURE if ARM64
++	select DMA_ADDR_T_64BIT
+ 	select LTO
+ 	imply TI_SECURE_DEVICE
+ 	imply DM_RNG if ARM64
 -- 
 2.50.1
 
