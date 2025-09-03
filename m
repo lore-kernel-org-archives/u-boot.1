@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E3EFCA0FF2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 10:34:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0834CA0FF2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 10:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4683C833BF;
-	Wed,  3 Sep 2025 12:34:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 53DB2833BF;
+	Wed,  3 Sep 2025 12:57:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ISWvbcT5";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1756897031;
+	bh=/GT9eoA3cPs83DmwzrlxO5jraqHW6Y6thMFhnsF9zS4=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=IO/32zg0ciKe0dwwELYiRIsQMgfr41oB8NVkdonKEJI+R47dP/MLG6mdUviaK0pSl
+	 TqdstUvEcgdS6MqmkFe1g/aG3YjgeUeITlknNwtR77IDyISbPhMvpE+hSOv6bOODv+
+	 IwDcQxYDNeaCoGqbWQuIydB2lj81q0KROlv2Kr3hIp/fbD1YIMRv+DJRC12tbAHCct
+	 hLyoJyTc9zC3GR+kGA/sLW3ZLlzwfjtdMaq0SrOpnQb4VAcNwfdsM9cHzLmHUecRHX
+	 sNgwJaP6Ww3lYGLQKqBEgLl9Lt1xpF9Zg27Yj1i36MhwfZCZiJkGeb4G6dqfTG23UF
+	 +LEy3rqatokoQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62128833C6; Wed,  3 Sep 2025 12:34:07 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BCD2D833C6; Wed,  3 Sep 2025 12:57:09 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D6F383390
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 12:34:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BB2383390
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 12:57:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=promsoft@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-337e5daf5f5so6921651fa.0
- for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 03:34:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756895644; x=1757500444; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vmgpjr/CtZa+4IRvXXm62bX7Xt8ucE0+FLK7ni4OAEA=;
- b=ISWvbcT5CuOla1VYnwf9sxAMg922JNAC2OMV1U2OTWJNCYH9z0LDgKi/dDNFJvqw1i
- +MhZbflgsnGUMJ2+AX6JbvzKj3WMm+tk66zKqGT81ko9Ke6oKRGTM1CLYbrxnr1kqz+t
- wq2nyUdXnJIMkU+LBNV9ihm5gTHls1iuhg/SDesfZnS79UFTcBlsEDfV5pXOScZ56d8R
- M9rrKuxSkr4Nrj3xEpEs/j3YNc0zVBE351P2JvSoLg738xlZDnl6XskQZqOV9o8hy8z6
- 57X9feqeYanGBBDEi13YwIa9nxM2wrdrq5+uXkVDkSv0mu+SFO57aJeE0aoYxnvHyh77
- NGmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756895644; x=1757500444;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vmgpjr/CtZa+4IRvXXm62bX7Xt8ucE0+FLK7ni4OAEA=;
- b=FnFkyGdUEcjb+CitEM4xKQmfxZxMhmy4F34lTMRItRuapQflY3niT0LzBnKQYUBhUA
- OdJHMpYHV9cMHnRl9v0lSrLCHpTH8fB0hgHWsbHr8liL2CR6/FZC4pRw+rE2AuC5jk1Q
- 1q7BUy2CsOMSge6DfBF2NrUgvxO+HJOHMjAmbz6IfATvBDQAvozIwJWnCpsnGN7s2mtx
- kS8CzGbSzVweFIfUrmXk93BvQO1Yb9KOBSdzf6TNumuNh4I/qRMCCw5KouE89BMXj8GH
- 6aImJMJf9/Jb7rAZt7hLMJt4Oj1gQrcIbQT0tfq5PTiSzFEb5Wxf8KzaFsovglHIknH7
- qvIw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWpWFzQMbcmFCf+nrMd+PQYyk25y/nmy0YTzYvzur1kyN/3RCB7PhTQzQxYkcrnPRjV921dnXI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyPCCkQqUOGOE3iXq1bemgO81WieyrvIeLfy+ytzIqmTjLMz6YB
- HFam8t74VhTeh9A6IsvkS3JzYoz4OZpmg0VtZphpr8idvoyEU9Fedsbi3YWlR08V+FHLkW/I5Ip
- oLh7blzSL5hUldnyAGH6ukSCrwNT94rU=
-X-Gm-Gg: ASbGncvtWRZekvxQPVpNuLM+YPmVkorUT8vw3MgJw47Z2EMFwGcdH4POS3zz+MrrlJ3
- STBJl1nyIYEKhZFSBMSh0G9hywM/ekwXe+xxsGOiblYNO63rswnl4TzeuBtCsJnXe37e8JcZM3R
- cc0JOY+RO6g+TCIdKchsrONMrY6tnBGd0WGJPsRUiMCKce9NG861CmI8w1hcpx+L+fKpicOqYPR
- wiZcCNeGeEkgh2Hk2gGGJYLdNK4XDlofCxJ/++p
-X-Google-Smtp-Source: AGHT+IF3DOoscRT+bEsWufoGr3Qsw0lx27UWY1Qr52xHxiKdyl4TbG8AVElzCiDIt0rrlS1bquB3KRnr6qjIK4mMfIg=
-X-Received: by 2002:a2e:b887:0:b0:337:e2c3:c080 with SMTP id
- 38308e7fff4ca-337e2c3cca3mr30609591fa.16.1756895643291; Wed, 03 Sep 2025
- 03:34:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="a87/EuO8"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 43C691038C103; 
+ Wed,  3 Sep 2025 12:57:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1756897025; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=/GT9eoA3cPs83DmwzrlxO5jraqHW6Y6thMFhnsF9zS4=;
+ b=a87/EuO8YIMTzST78Gr5ieLBj7i6lQw64hQNZUqry/K48DUC3YMnNQuSjadUm9e3zg+JRS
+ if9q/JviihPZP/TWbsfiMMIfMrHw+C7bFx3ZdmfiorW+fVHVZ6o4/+pGorTA0X8hBJG8DC
+ dQPjmxhC6hOlNjwf0p270nEwoCceBwlmfImrW1ddThHTR/E926UD9alyWFAlgjwP6tmx0+
+ WML2/3Ic35thYlRYke5XbP7wPaDIUwJoIV/uzi3ll9NL4jbTzP3+phLwU+lmaCanjA/fVM
+ V9C81YZVtjyI5okrePJqTIU6LHCyfNaaJ0RU92c4jNoO2ilGwBG5Q7ms6/GMDQ==
+From: Philip Oberfichtner <pro@denx.de>
+To: u-boot@lists.denx.de
+Cc: Philip Oberfichtner <pro@denx.de>, Andre Przywara <andre.przywara@arm.com>,
+ Anshul Dalal <anshuld@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH v3 0/5] Simplify image size checks
+Date: Wed,  3 Sep 2025 12:56:48 +0200
+Message-Id: <20250903105653.335417-1-pro@denx.de>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-References: <20250812-exynos_spi-v2-1-b467d4b75167@linaro.org>
-In-Reply-To: <20250812-exynos_spi-v2-1-b467d4b75167@linaro.org>
-From: Minkyu Kang <promsoft@gmail.com>
-Date: Wed, 3 Sep 2025 19:33:51 +0900
-X-Gm-Features: Ac12FXy1UOyv_4TJEcqx0vF4n1fF8BIf9Sfz_Iptxtvw1l7NuuR9pphgtZbsSdA
-Message-ID: <CALrBrZ1vkpb-F_EdEc+vFpy5VBe69b0cwRSMHZL0+T6mtF3ZwA@mail.gmail.com>
-Subject: Re: [PATCH v2] spi: exynos: Remove extra term from test
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,87 +85,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+This patch series aims at simplifying and harmonizing image size checks,
+which are currently represented by the following Kconfig symbols:
 
-2025=EB=85=84 9=EC=9B=94 2=EC=9D=BC (=ED=99=94) 00:23, Andrew Goodbody <and=
-rew.goodbody@linaro.org>=EB=8B=98=EC=9D=B4 =EC=9E=91=EC=84=B1:
+	CONFIG_HAS_BOARD_SIZE_LIMIT
+	CONFIG_BOARD_SIZE_LIMIT
+	CONFIG_SPL_SIZE_LIMIT
+	CONFIG_TPL_SIZE_LIMIT
+	CONFIG_VPL_SIZE_LIMIT
 
-> In spi_rx_tx there comes a test for execution of a code block that
-> allows execution if rxp is not NULL or stopping is true. However all the
-> code in this block relies on rxp being valid so allowing entry just if
-> stopping is true does not make sense. So remove this from the test
-> expression leaving just a NULL check for rxp.
->
-> This issue was found by Smatch.
->
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
-> Changes in v2:
-> - Remove the stopping variable which is now not useful
-> - Link to v1:
-> https://lore.kernel.org/r/20250812-exynos_spi-v1-1-bd0813ff6593@linaro.or=
-g
-> ---
->  drivers/spi/exynos_spi.c | 10 ++--------
->  1 file changed, 2 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/spi/exynos_spi.c b/drivers/spi/exynos_spi.c
-> index 1b9bf004b7c..7f2965f8321 100644
-> --- a/drivers/spi/exynos_spi.c
-> +++ b/drivers/spi/exynos_spi.c
-> @@ -105,14 +105,10 @@ static int spi_rx_tx(struct exynos_spi_priv *priv,
-> int todo,
->         uint out_bytes, in_bytes;
->         int toread;
->         unsigned start =3D get_timer(0);
-> -       int stopping;
->         int step;
->
->         out_bytes =3D in_bytes =3D todo;
->
-> -       stopping =3D priv->skip_preamble && (flags & SPI_XFER_END) &&
-> -                                       !(priv->mode & SPI_SLAVE);
-> -
->         /*
->          * Try to transfer words if we can. This helps read performance a=
-t
->          * SPI clock speeds above about 20MHz.
-> @@ -161,12 +157,10 @@ static int spi_rx_tx(struct exynos_spi_priv *priv,
-> int todo,
->                         while (rx_lvl >=3D step) {
->                                 temp =3D readl(&regs->rx_data);
->                                 if (priv->skip_preamble) {
-> -                                       if (temp =3D=3D SPI_PREAMBLE_END_=
-BYTE)
-> {
-> +                                       if (temp =3D=3D SPI_PREAMBLE_END_=
-BYTE)
->                                                 priv->skip_preamble =3D 0=
-;
-> -                                               stopping =3D 0;
-> -                                       }
->                                 } else {
-> -                                       if (rxp || stopping) {
-> +                                       if (rxp) {
->                                                 if (step =3D=3D 4)
->                                                         *(uint32_t *)rxp =
-=3D
-> temp;
->                                                 else
->
-> ---
-> base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
-> change-id: 20250812-exynos_spi-8172ecb31a83
->
-> Best regards,
-> --
-> Andrew Goodbody <andrew.goodbody@linaro.org>
->
+After this series, we would have
+	- Less code duplication in the toplevel Makefile
+	- Consistent logic for all the different CONFIGS
+	- All related options in one place
 
-applied to u-boot-samsung.
+Changes in v3:
+	V3 is a complete remake of the series. In the discussions on V2 we
+	decided to follow the approach of using CONFIG_HAS_XXX_SIZE_LIMIT
+	instead of my initial proposal, which was to disable a size check
+	by setting its limit to zero.
 
-Thanks.
-Minkyu Kang.
+Changes in v2:
+	- Rebase on current master
+	- Rebase on my pending mips patch series (linked above)
+	- Incorporated Heinrich's Review
 
+Philip Oberfichtner (5):
+  Image size checks: Move all configs in one place
+  Image size checks: Use HAS_SIZE_LIMIT consistently
+  Image size checks: Use consistent help texts
+  Image size checks: Deduplicate Makefile
+  Image size checks: Simplify SPL_SIZE_LIMIT logic
 
->
+ Kconfig                                   | 73 ++++++++++++++++++++++-
+ Makefile                                  | 45 ++++----------
+ arch/arm/mach-socfpga/Kconfig             |  5 +-
+ arch/mips/mach-mtmips/Kconfig             |  5 +-
+ arch/x86/cpu/apollolake/Kconfig           |  5 +-
+ common/spl/Kconfig                        | 38 ------------
+ common/spl/Kconfig.tpl                    |  7 ---
+ common/spl/Kconfig.vpl                    |  7 ---
+ configs/am62ax_evm_r5_defconfig           |  1 +
+ configs/am62px_evm_r5_defconfig           |  1 +
+ configs/am62x_beagleplay_a53_defconfig    |  1 +
+ configs/am62x_beagleplay_r5_defconfig     |  1 +
+ configs/am62x_evm_a53_defconfig           |  1 +
+ configs/am62x_evm_a53_ethboot_defconfig   |  1 +
+ configs/am62x_evm_r5_defconfig            |  1 +
+ configs/am64x_evm_r5_defconfig            |  1 +
+ configs/am65x_evm_r5_defconfig            |  1 +
+ configs/am65x_evm_r5_usbmsc_defconfig     |  1 +
+ configs/am67a_beagley_ai_r5_defconfig     |  1 +
+ configs/brcp150_defconfig                 |  1 +
+ configs/brcp170_defconfig                 |  1 +
+ configs/brcp1_1r_defconfig                |  1 +
+ configs/brcp1_1r_switch_defconfig         |  1 +
+ configs/brcp1_2r_defconfig                |  1 +
+ configs/brsmarc2_defconfig                |  1 +
+ configs/evb-ast2600_defconfig             |  1 +
+ configs/evb-rk3288_defconfig              |  1 +
+ configs/firefly-rk3288_defconfig          |  1 +
+ configs/ibex-ast2700_defconfig            |  1 +
+ configs/ibm-sbp1_defconfig                |  1 +
+ configs/imx28_btt3_defconfig              |  1 +
+ configs/imx28_xea_defconfig               |  1 +
+ configs/imx6q_bosch_acc_defconfig         |  1 +
+ configs/imxrt1020-evk_defconfig           |  1 +
+ configs/imxrt1050-evk_defconfig           |  1 +
+ configs/imxrt1050-evk_fspi_defconfig      |  1 +
+ configs/imxrt1170-evk_defconfig           |  1 +
+ configs/j721e_beagleboneai64_r5_defconfig |  1 +
+ configs/j721e_evm_r5_defconfig            |  1 +
+ configs/j721s2_evm_r5_defconfig           |  1 +
+ configs/j722s_evm_r5_defconfig            |  1 +
+ configs/j784s4_evm_r5_defconfig           |  1 +
+ configs/kontron_sl28_defconfig            |  1 +
+ configs/phycore_am62ax_r5_defconfig       |  1 +
+ configs/phycore_am62x_a53_defconfig       |  1 +
+ configs/phycore_am62x_r5_defconfig        |  1 +
+ configs/phycore_am64x_r5_defconfig        |  1 +
+ configs/stm32746g-eval_spl_defconfig      |  1 +
+ configs/stm32f746-disco_spl_defconfig     |  1 +
+ configs/stm32f769-disco_spl_defconfig     |  1 +
+ configs/tinker-rk3288_defconfig           |  1 +
+ configs/tinker-s-rk3288_defconfig         |  1 +
+ configs/verdin-am62_a53_defconfig         |  1 +
+ configs/verdin-am62_r5_defconfig          |  1 +
+ configs/verdin-am62p_a53_defconfig        |  1 +
+ configs/verdin-am62p_r5_defconfig         |  1 +
+ configs/xilinx_mbv32_defconfig            |  1 +
+ configs/xilinx_mbv32_smode_defconfig      |  1 +
+ configs/xilinx_mbv64_defconfig            |  1 +
+ configs/xilinx_mbv64_smode_defconfig      |  1 +
+ configs/xilinx_zynqmp_kria_defconfig      |  1 +
+ configs/xilinx_zynqmp_virt_defconfig      |  1 +
+ tools/spl_size_limit.c                    |  4 +-
+ 63 files changed, 151 insertions(+), 92 deletions(-)
+
+-- 
+2.39.5
+
