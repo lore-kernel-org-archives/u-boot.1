@@ -4,96 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8116CCA1007
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 04:34:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15DCCA1007
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 05:39:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1ED983420;
-	Wed,  3 Sep 2025 06:34:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C41E783420;
+	Wed,  3 Sep 2025 07:39:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="mFpPZ5Gk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fN2uLPlv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6122783AB2; Wed,  3 Sep 2025 06:34:35 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CE05C8346A; Wed,  3 Sep 2025 07:39:47 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 275F683403
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 06:34:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 715A583390
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 07:39:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com
- [209.85.214.199])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 77C703F284
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 04:34:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1756874072;
- bh=h4WMGu2VPb7retWkUV48e/gOa0qGcoWPwLuhS5jw9S8=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=mFpPZ5Gk60zMreAGaZLxirgK/5YTOVZypLdMFYm8APkfF456tahkVNV9j9di3tmvw
- +DeymkWnMO/+Qg9jgvCOgwaI0h0c0B7JlSeLpDWf2+PS5jDzkBPDsi6ar90Ztrsftl
- nVigPSiXUzm1rGlzsMC7moLm112LtNAIW9F5WzT+GS0haZqYNz5IKLgCotOXwuNv8e
- 3lzSUwZjvNZbTN6rTbWACdRjWB9vVQW6OQ2aBzQrO5cyYEWg3MHB83NWOx+AOpuMyu
- Pm3JKDlCoJfW+XsL87sTpJYHPPS8Q8010tieQa3avD6xU4zjANkfOaa0WeuD73WbLk
- +3LJ8jCSObO8w==
-Received: by mail-pl1-f199.google.com with SMTP id
- d9443c01a7336-24ae30bd2d0so24959805ad.3
- for <u-boot@lists.denx.de>; Tue, 02 Sep 2025 21:34:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-5607c2f1598so2513399e87.3
+ for <u-boot@lists.denx.de>; Tue, 02 Sep 2025 22:39:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1756877985; x=1757482785; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=o6Cu/Wl5Ft4/jLQsHrx2J6klmEefWJrWeK7PH9/9oZA=;
+ b=fN2uLPlvcb0mj1Xd1pzqP3L8488qxPqdRNstHsHVWGtYxFKanx6LvkvEAJXiXhOGMu
+ EkIy2qqlaxIYbY03N0owNA1uSRODFYKf/9wMkjcryrfJAEnevR+NY6SYLYAklZgS5ZIr
+ FQBAZZN+UpIgpzlJSE7jc5Ndr5kzeLWpvZVBc+TPX7AnsASYTz75JnV26StGsEPfB79U
+ k/FOqnR0qqQIER4OyarO/+OaXLWb531wv+QAxZMI5SerEJwjiBWXP+rdQfkR9C+AEqII
+ GH9YB+UjhiPwl71vCUzYza4UsPchwIqxJxzze0uerAQPs2W81RQkPPVKLlAWmk9yp+Fy
+ OnVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756874071; x=1757478871;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1756877985; x=1757482785;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=h4WMGu2VPb7retWkUV48e/gOa0qGcoWPwLuhS5jw9S8=;
- b=eub77z5mGjmuzaH0NjiHbDUoHuhgF5Lkyw1+7MsAq8kNa8NEOWEqvzxdeHThT85QkU
- SICVkpJkzMwvbDC5jNH46zVDjiIMfeN7axByqr6H6VOMGrjS0ydn8CBdIBIAAiv34LFs
- lf4aYC4uFQd1oBwX7tEMhjBiVSfF8nx1yBSXP3X01+28q3lV8HlM5tiaG+WVhevPGpN/
- KQH7R9ibEHAV4UrzAHDGBDJHCGXeok+HOV6n5eVnc37HWWTHF+TFwMyOYwXWVaF6FlHE
- WyH+LT4P1wvaprlSJzKSCtvjYXRgq7NKY55pcOzhDOAbNUp3oR9bxVtMgL67TslOJDLi
- WnYA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUpOjiaK/cO/ytsENv0f7VtVbm2EytQpK7o2RS6uPFI25P9K+u4nC58iCjPHz2BVJTXGEMTEqg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6+oCLUVziObMuGysl7vGpvpe2K5mCzT/OI0Wt6dO3iWXTcymE
- rESm1wTjvVSP8BaNxslK+eA3isDP3B2IEKRCjaR2stfbUfgRHM6tmCfnmTiQi3xj+XBmSdpkIiD
- oSUOXbY87SmFdsw1nXOEEEMf5jzmUmssQQqTyrykau5IYg9Hd6FUvNgxlfl0OJ2UkEQ2CLuP4VJ
- xilJ6rxyPUZMDrAYTrt4JA3/hC5AcROGRRlMIN/XZ8jkN4ow==
-X-Gm-Gg: ASbGnctOudxpBtA2YsrwAj7/i8/OOVdMUmMJaZwxFHdDgE2s1hpCb/HwUOT/iZGMrlc
- p/gut5bxqhBNFvMsgbnzLPV5K4eHmPCvaKJh/zSrwsrAUd51TVbTxd0yE5NyC0jbjm6OgKF0yS9
- iv7muw3y+lEUQ86jm2ug==
-X-Received: by 2002:a17:903:2450:b0:24c:786a:d7ac with SMTP id
- d9443c01a7336-24c786adf5cmr34814725ad.47.1756874071026; 
- Tue, 02 Sep 2025 21:34:31 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGB5bntVmWTeh/oD+j6g1+imjc6Io+xOdLbQEpaYVhtcDHOEELDfIch0qwW5gVx4VeVOrJ9DWcJJSEbG+eRIzU=
-X-Received: by 2002:a17:903:2450:b0:24c:786a:d7ac with SMTP id
- d9443c01a7336-24c786adf5cmr34814375ad.47.1756874070517; Tue, 02 Sep 2025
- 21:34:30 -0700 (PDT)
+ bh=o6Cu/Wl5Ft4/jLQsHrx2J6klmEefWJrWeK7PH9/9oZA=;
+ b=N90rSHVHet1UyBMy9x/HmPzQ1wfucLR4Y2zzOUU/3Fr02joZshxQCeEiq8JAoGsOql
+ wvq8kJTlWdoJSyXN8vvporxkDjib5UTynYlnUacebPB5nN+6vRi35a30CSwNqI4lXGsm
+ jFrp1MD9wMnE0mPdG0A/iuEVcyXJDbWgWvP8hJJ88D5Q0NF6+0FSCCUM2jhaWgdyHOvc
+ VctVbPhFMFutB6Ve6xsb2cW54iKsa0FDJOM7r2swJeI3bDszUA4NpppA2e5PX2vxYaJb
+ HMYIQLFasC36H2srgHr6faMSrDyLYorkc5uGCJFlLh3zAxkdAfMmdTg+3wHASDAd8oTp
+ XGCQ==
+X-Gm-Message-State: AOJu0YyATemDQ8jlrXCUKg+lEC9Hj09VpFNpY/E8T0bfqSfaYWF9WbzS
+ 0kq7tGSwjWKp8tw+7c4oAD0eDV/Zif61lPLBe6ZLSq+hsG6pAkIrm7AG
+X-Gm-Gg: ASbGncuqZ6WPoBHTjsIRXziwuHEIVwqLNt3cktIa3o0xMQI/eOWc+l7Z6mS0Mi3xWGm
+ p0mXqEgmF3OA77ACq9jWjPdtuM0UW+XVQ87B4URh9OXI0o2ZN32uwMUFNpQ+FdLSm6kCe/ARvi9
+ UK6i2hSYnwez2+LVQ0+lK8Utg40QvgMrkULjPlYc+Nxt7iZdYp8+FPNwdVH+e9j8hfgxovxWdae
+ yiZ09gTFL6FYsern5rxG+IUDGezv5Rw94K4TtPyaBkBEYGD5jE5TL2f3GL1lBDSlb5bdd1PR+pl
+ MIK7aJmrmvwDuIiX8nlFcI4KbRLQNlt5Aq4W83oLt7nwmeIq4yRX46Yvk4xvifV1uIbwO5ZaGk4
+ 1+eTIBIlEOqKfxA==
+X-Google-Smtp-Source: AGHT+IHQ5avqObXz9wpnQJoSOaO7dyMxDKOwsOtY3YQuutLHmdBriPrDBgwgBx8anayqqGjRknw0ZA==
+X-Received: by 2002:a05:6512:2212:b0:55f:3f00:a831 with SMTP id
+ 2adb3069b0e04-55f7089c26emr4287919e87.9.1756877984359; 
+ Tue, 02 Sep 2025 22:39:44 -0700 (PDT)
+Received: from xeon.. ([188.163.112.70]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5608ab5e28csm284649e87.17.2025.09.02.22.39.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 02 Sep 2025 22:39:43 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Please pull u-boot-tegra staging
+Date: Wed,  3 Sep 2025 08:39:24 +0300
+Message-ID: <20250903053925.6190-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250829060931.79940-1-hal.feng@starfivetech.com>
- <20250829060931.79940-11-hal.feng@starfivetech.com>
- <52aad19a-0188-4bba-9f06-a0d7d6ff0c38@freeshell.de>
-In-Reply-To: <52aad19a-0188-4bba-9f06-a0d7d6ff0c38@freeshell.de>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Wed, 3 Sep 2025 06:34:19 +0200
-X-Gm-Features: Ac12FXyO3ApZLtwZOKmtVXbAiR46-eaX5CTJuqevdt4Au46X-nb4XE1nYfJciMo
-Message-ID: <CAM=mAOkhWah9S95FdWjkD416gMp=5R5RsMK44ViPU4ebs6Wrxg@mail.gmail.com>
-Subject: Re: [RFC 10/10] board: starfive: visionfive2: Add VisionFive 2 Lite
- fdt selection
-To: E Shattow <e@freeshell.de>
-Cc: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>, 
- Sumit Garg <sumit.garg@kernel.org>, 
- Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,56 +95,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-E Shattow <e@freeshell.de> schrieb am Mi., 3. Sept. 2025, 02:26:
+Dear Tom,
 
->
->
-> On 8/28/25 23:09, Hal Feng wrote:
-> > Set $fdtfile to the VisionFive 2 Lite DTB if the board is matched.
-> >
-> > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> > ---
-> >  board/starfive/visionfive2/starfive_visionfive2.c | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/board/starfive/visionfive2/starfive_visionfive2.c
-> b/board/starfive/visionfive2/starfive_visionfive2.c
-> > index f38433e94ac..912e8cb967a 100644
-> > --- a/board/starfive/visionfive2/starfive_visionfive2.c
-> > +++ b/board/starfive/visionfive2/starfive_visionfive2.c
-> > @@ -65,6 +65,8 @@ static void set_fdtfile(void)
-> >       } else if (!strncmp(get_product_id_from_eeprom(), "VF7110B", 7) ||
-> >                  !strncmp(get_product_id_from_eeprom(), "VF7110b", 7)) {
-> >               fdtfile =
-> "starfive/jh7110-starfive-visionfive-2-v1.3b.dtb";
-> > +     } else if (!strncmp(get_product_id_from_eeprom(), "VF7110SL", 8)) {
-> > +             fdtfile =
-> "starfive/jh7110s-starfive-visionfive-2-lite.dtb";
-> >       } else {
-> >               log_err("Unknown product\n");
-> >               return;
->
-> I continue to think it is silly we are setting $fdtfile env variable
-> past the moment since adopting OF_UPSTREAM. That is a discussion for
-> somewhere else, however.
->
+The following changes since commit 54fbdd408873413af86d86de03a490c5abf280f1:
 
-Do not expect an old kernel to boot with a newer dtb. Linux broke such
-expectations repeatedly.
+  Merge tag 'net-20250818' of https://source.denx.de/u-boot/custodians/u-boot-net (2025-08-18 10:54:44 -0600)
 
-Do not assume that users upgrade U-Boot to keep it in sync with the kernel
-they use.
+are available in the Git repository at:
 
-Debian/Ubuntu packages flash-kernel and u-boot-menu rely on $fdtfile being
-present.
+  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
 
-Best regards
+for you to fetch changes up to 392b5b426cfc40f94803688fe63f72d83d0a5e70:
 
-Heinrich
+  board: transformer-t20: add separate env for SL101 (2025-09-01 11:35:54 +0300)
 
+----------------------------------------------------------------
+Jonas Schwöbel (1):
+      board: microsoft: add Microsoft Surface 2 support
 
-> Anyhow the sorting is correct and new code follows the existing code
-> pattern.
->
-> Reviewed-by: E Shattow <e@freeshell.de>
->
+Peter Robinson (2):
+      configs: p3450: reduce size of Jetson Nano u-boot.bin
+      ARM: tegra210: p3450: fix Jetson Nano SPI flash
+
+Svyatoslav Ryhel (2):
+      ARM: tegra20: transformer: fix Hall sensor behavior
+      board: transformer-t20: add separate env for SL101
+
+ arch/arm/dts/Makefile                                 |   2 +
+ arch/arm/dts/tegra114-microsoft-surface-2-0b.dts      |  10 +
+ arch/arm/dts/tegra114-microsoft-surface-2-13.dts      |  10 +
+ arch/arm/dts/tegra114-microsoft-surface-2-common.dtsi | 905 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/tegra20-asus-sl101.dts                   |  10 +
+ arch/arm/dts/tegra20-asus-tf101.dts                   |  10 +
+ arch/arm/dts/tegra20-asus-tf101g.dts                  |  10 +
+ arch/arm/dts/tegra20-asus-transformer.dtsi            |   6 -
+ arch/arm/dts/tegra210-p3450-0000.dts                  |   9 +-
+ arch/arm/dts/tegra210.dtsi                            |   6 +-
+ arch/arm/mach-tegra/tegra114/Kconfig                  |   5 +
+ board/asus/transformer-t20/configs/sl101.config       |   1 +
+ board/asus/transformer-t20/sl101.env                  |  15 +
+ board/microsoft/surface-2/Kconfig                     |  13 +
+ board/microsoft/surface-2/MAINTAINERS                 |   7 +
+ board/microsoft/surface-2/Makefile                    |   6 +
+ board/microsoft/surface-2/board-info.c                |  71 +++++
+ board/microsoft/surface-2/surface-2-spl.c             |  42 +++
+ board/microsoft/surface-2/surface-2.env               |   8 +
+ configs/p3450-0000_defconfig                          |   9 +-
+ configs/surface-2_defconfig                           |  82 +++++
+ doc/board/microsoft/index.rst                         |   1 +
+ doc/board/microsoft/surface-2.rst                     |  41 +++
+ 23 files changed, 1268 insertions(+), 11 deletions(-)
+ create mode 100644 arch/arm/dts/tegra114-microsoft-surface-2-0b.dts
+ create mode 100644 arch/arm/dts/tegra114-microsoft-surface-2-13.dts
+ create mode 100644 arch/arm/dts/tegra114-microsoft-surface-2-common.dtsi
+ create mode 100644 board/asus/transformer-t20/sl101.env
+ create mode 100644 board/microsoft/surface-2/Kconfig
+ create mode 100644 board/microsoft/surface-2/MAINTAINERS
+ create mode 100644 board/microsoft/surface-2/Makefile
+ create mode 100644 board/microsoft/surface-2/board-info.c
+ create mode 100644 board/microsoft/surface-2/surface-2-spl.c
+ create mode 100644 board/microsoft/surface-2/surface-2.env
+ create mode 100644 configs/surface-2_defconfig
+ create mode 100644 doc/board/microsoft/surface-2.rst
+
+Branch contains minor improvents for ASUS SL101 and Jetson Nano along with
+support for Microsoft Surface 2 tablet.
+
+Thank you,
+Svyatoslav Ryhel.
