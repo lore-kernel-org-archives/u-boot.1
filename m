@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15DCCA1007
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 05:39:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784F8CA100B
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 07:03:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C41E783420;
-	Wed,  3 Sep 2025 07:39:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D1F54833C6;
+	Wed,  3 Sep 2025 09:03:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fN2uLPlv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ycwvRtFp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE05C8346A; Wed,  3 Sep 2025 07:39:47 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 473D6832AD; Wed,  3 Sep 2025 09:02:59 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 715A583390
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 07:39:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B0DC832AD
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 09:02:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5607c2f1598so2513399e87.3
- for <u-boot@lists.denx.de>; Tue, 02 Sep 2025 22:39:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-71d603acc23so51646237b3.1
+ for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 00:02:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756877985; x=1757482785; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=o6Cu/Wl5Ft4/jLQsHrx2J6klmEefWJrWeK7PH9/9oZA=;
- b=fN2uLPlvcb0mj1Xd1pzqP3L8488qxPqdRNstHsHVWGtYxFKanx6LvkvEAJXiXhOGMu
- EkIy2qqlaxIYbY03N0owNA1uSRODFYKf/9wMkjcryrfJAEnevR+NY6SYLYAklZgS5ZIr
- FQBAZZN+UpIgpzlJSE7jc5Ndr5kzeLWpvZVBc+TPX7AnsASYTz75JnV26StGsEPfB79U
- k/FOqnR0qqQIER4OyarO/+OaXLWb531wv+QAxZMI5SerEJwjiBWXP+rdQfkR9C+AEqII
- GH9YB+UjhiPwl71vCUzYza4UsPchwIqxJxzze0uerAQPs2W81RQkPPVKLlAWmk9yp+Fy
- OnVw==
+ d=linaro.org; s=google; t=1756882975; x=1757487775; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LPdI3YI0TA1wXwsXS0yxRI8E6fl7s0wPhu068XzOGzw=;
+ b=ycwvRtFpcgderwxiNfIJTJOnF/U8vDC1yYlZuZMiPEogHsqeydD3M78dmAZFd3IDHi
+ su4r1xL0fqkFBOGfMvEVlEEc/U8e8TV9Q8ksVwL4iftaDWo3gRDiJIGMKA+u0tK+7hx9
+ ZtCj+i+A1MT43mmLBnY4ZTiCtCQuEmhgbMyR1qZj1GqrAhgCuvimZTc0Zyy+2eCOMecM
+ h1rOzn3dRcYYXIWTa8Gq7CxlO641Nk4SIGg1pVL46NL0dgt3grMQCxONCcQAJFpJmh01
+ xeAquZREQ8CnS6DCOn1fzxVFcyv334UlRsiLJLAGfD/ZgErcgYD5UjO9j5fRj51SJhhk
+ YkjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756877985; x=1757482785;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1756882975; x=1757487775;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=o6Cu/Wl5Ft4/jLQsHrx2J6klmEefWJrWeK7PH9/9oZA=;
- b=N90rSHVHet1UyBMy9x/HmPzQ1wfucLR4Y2zzOUU/3Fr02joZshxQCeEiq8JAoGsOql
- wvq8kJTlWdoJSyXN8vvporxkDjib5UTynYlnUacebPB5nN+6vRi35a30CSwNqI4lXGsm
- jFrp1MD9wMnE0mPdG0A/iuEVcyXJDbWgWvP8hJJ88D5Q0NF6+0FSCCUM2jhaWgdyHOvc
- VctVbPhFMFutB6Ve6xsb2cW54iKsa0FDJOM7r2swJeI3bDszUA4NpppA2e5PX2vxYaJb
- HMYIQLFasC36H2srgHr6faMSrDyLYorkc5uGCJFlLh3zAxkdAfMmdTg+3wHASDAd8oTp
- XGCQ==
-X-Gm-Message-State: AOJu0YyATemDQ8jlrXCUKg+lEC9Hj09VpFNpY/E8T0bfqSfaYWF9WbzS
- 0kq7tGSwjWKp8tw+7c4oAD0eDV/Zif61lPLBe6ZLSq+hsG6pAkIrm7AG
-X-Gm-Gg: ASbGncuqZ6WPoBHTjsIRXziwuHEIVwqLNt3cktIa3o0xMQI/eOWc+l7Z6mS0Mi3xWGm
- p0mXqEgmF3OA77ACq9jWjPdtuM0UW+XVQ87B4URh9OXI0o2ZN32uwMUFNpQ+FdLSm6kCe/ARvi9
- UK6i2hSYnwez2+LVQ0+lK8Utg40QvgMrkULjPlYc+Nxt7iZdYp8+FPNwdVH+e9j8hfgxovxWdae
- yiZ09gTFL6FYsern5rxG+IUDGezv5Rw94K4TtPyaBkBEYGD5jE5TL2f3GL1lBDSlb5bdd1PR+pl
- MIK7aJmrmvwDuIiX8nlFcI4KbRLQNlt5Aq4W83oLt7nwmeIq4yRX46Yvk4xvifV1uIbwO5ZaGk4
- 1+eTIBIlEOqKfxA==
-X-Google-Smtp-Source: AGHT+IHQ5avqObXz9wpnQJoSOaO7dyMxDKOwsOtY3YQuutLHmdBriPrDBgwgBx8anayqqGjRknw0ZA==
-X-Received: by 2002:a05:6512:2212:b0:55f:3f00:a831 with SMTP id
- 2adb3069b0e04-55f7089c26emr4287919e87.9.1756877984359; 
- Tue, 02 Sep 2025 22:39:44 -0700 (PDT)
-Received: from xeon.. ([188.163.112.70]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-5608ab5e28csm284649e87.17.2025.09.02.22.39.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Sep 2025 22:39:43 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Please pull u-boot-tegra staging
-Date: Wed,  3 Sep 2025 08:39:24 +0300
-Message-ID: <20250903053925.6190-1-clamor95@gmail.com>
-X-Mailer: git-send-email 2.48.1
+ bh=LPdI3YI0TA1wXwsXS0yxRI8E6fl7s0wPhu068XzOGzw=;
+ b=XzMWUW1DlFeZMzJCCNOC1Op8AMQQ0kEfP73uLZEhC5iWTwKJxzdhF8oN0E9GszQnsy
+ biZBOZjILrEwqr5UGv3lt3P/EFv26dUQbsYwJxRGmTBtjSA9fvlfVWy8Nqjd1B9WzNrt
+ lhqaojhymysHhMsMt7mPCXTUT0krKA70wB3GvPyaH2sUpRUQidXcyRI592zaYy7lU1el
+ PVlRn2ESXzBaBGXYF8HMf3oiVM12oJxk0378zMon7IwaXDE+Vk8vaE3Za7qPc6lXwa6l
+ 6RNyXOO87cQCh1DiDEjrRUsTdeK82yRhWJuvPkJhzI7zzC0Ss/RcJTs1O3JRghRJt+CR
+ sJSw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXyrgh3hSewP2Uf7M7TQLp2pgJ+7KN+9AxcVINpXYGDMuO1Avb4U4YJOIY8Jswgkm3zgM7iv3I=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHgFdYchEApZECtAIYMUDAUjKcL53Rk8AmolQWEfI6Wqg7WVIq
+ wIjoM4iZuYlQE+QQNcr1ZoFl0d8kBt9eo3OgZP/ZClZEBcGxG1Vlit2dDEK0tBVFQbx33WYI7k6
+ AqsdDIcRrNDt62wEtCN9E16QV+JtqqTn8NyF69143RXgXfCQ6aVmU
+X-Gm-Gg: ASbGnctEME+FF3ALdWKZkqNqCKlVjZGiEZe5sq+vIWLK5gJYRDL79GsdiKkysZS1bHN
+ tsJITDHKLSXGq1zr8aZ9chmsSvMgvUPF99Qw/zrgXLhxEInEF1fr4GZMvsJl8t2OC/XM0jonSfT
+ b3GHbenili9zXXs+RUgZSwsONLA6W1vQxHR+SLKHtI5mePVVzgUHvgavpT6FjCbvK7ilh/tMvQk
+ A1bQ3vcWQ/kl2/+D3BXg5jNGuZcSibySCunAhR6fVtFeF1ZILi9l5VWQ6mLKB0uehGHfED4f2FZ
+ 6nc4cYAtMHhIShGGuRe5UiIYjsgqadsxvjmSwKrB3qR1wOhHk5kJ/8nI4zSutA==
+X-Google-Smtp-Source: AGHT+IH0i5Yos4wHWTWIJ/FLPls+CW0r7wrqWodXnrwsz5tI9FMRltCzFLqR8EB/nEIBep4luaJ7i5Btc6jDqtmZDJw=
+X-Received: by 2002:a05:690c:380f:b0:723:aeee:e516 with SMTP id
+ 00721157ae682-723aeeee7ebmr51053857b3.18.1756882974834; Wed, 03 Sep 2025
+ 00:02:54 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250902060813.2481257-1-ilias.apalodimas@linaro.org>
+ <uh5aatnz6vsinpsbturhhrolndxme7d2jdhnsyxqzeubyw34tw@2olttyn4kxah>
+In-Reply-To: <uh5aatnz6vsinpsbturhhrolndxme7d2jdhnsyxqzeubyw34tw@2olttyn4kxah>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 3 Sep 2025 10:02:18 +0300
+X-Gm-Features: Ac12FXza_7AL-XypdXvM3xU-lTTS6POd7Q7-3rB2GqEVkMAS98Lspj0NoVr3fqs
+Message-ID: <CAC_iWjK3BSE9p8w5VU6FkrHDVjzLHfNwtWCzJA31ntpqpOeoXg@mail.gmail.com>
+Subject: Re: [PATCH] arm64: Properly clear BSS
+To: "brock.zheng" <yzheng@techyauld.com>
+Cc: trini@konsulko.com, heinrich.schuchardt@canonical.com, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,71 +96,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Hi Brock
 
-The following changes since commit 54fbdd408873413af86d86de03a490c5abf280f1:
+On Tue, 2 Sept 2025 at 09:57, brock.zheng <yzheng@techyauld.com> wrote:
+>
+> i am glad to see my patch been reviewed.
+>
+> I can not access the international network easily.
+> so any of you can fix / rewrite / change that patch.
 
-  Merge tag 'net-20250818' of https://source.denx.de/u-boot/custodians/u-boot-net (2025-08-18 10:54:44 -0600)
+No worries, I fixed up the comments.
 
-are available in the Git repository at:
+>
+> If I can see the fixup in the offical git repo, I will be very very glad.
 
-  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
+Tom, I know this is late in the cycle, but this is an obvious bug fix.
+Any chance we can pull it early in -master so people can test?
 
-for you to fetch changes up to 392b5b426cfc40f94803688fe63f72d83d0a5e70:
-
-  board: transformer-t20: add separate env for SL101 (2025-09-01 11:35:54 +0300)
-
-----------------------------------------------------------------
-Jonas Schwöbel (1):
-      board: microsoft: add Microsoft Surface 2 support
-
-Peter Robinson (2):
-      configs: p3450: reduce size of Jetson Nano u-boot.bin
-      ARM: tegra210: p3450: fix Jetson Nano SPI flash
-
-Svyatoslav Ryhel (2):
-      ARM: tegra20: transformer: fix Hall sensor behavior
-      board: transformer-t20: add separate env for SL101
-
- arch/arm/dts/Makefile                                 |   2 +
- arch/arm/dts/tegra114-microsoft-surface-2-0b.dts      |  10 +
- arch/arm/dts/tegra114-microsoft-surface-2-13.dts      |  10 +
- arch/arm/dts/tegra114-microsoft-surface-2-common.dtsi | 905 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- arch/arm/dts/tegra20-asus-sl101.dts                   |  10 +
- arch/arm/dts/tegra20-asus-tf101.dts                   |  10 +
- arch/arm/dts/tegra20-asus-tf101g.dts                  |  10 +
- arch/arm/dts/tegra20-asus-transformer.dtsi            |   6 -
- arch/arm/dts/tegra210-p3450-0000.dts                  |   9 +-
- arch/arm/dts/tegra210.dtsi                            |   6 +-
- arch/arm/mach-tegra/tegra114/Kconfig                  |   5 +
- board/asus/transformer-t20/configs/sl101.config       |   1 +
- board/asus/transformer-t20/sl101.env                  |  15 +
- board/microsoft/surface-2/Kconfig                     |  13 +
- board/microsoft/surface-2/MAINTAINERS                 |   7 +
- board/microsoft/surface-2/Makefile                    |   6 +
- board/microsoft/surface-2/board-info.c                |  71 +++++
- board/microsoft/surface-2/surface-2-spl.c             |  42 +++
- board/microsoft/surface-2/surface-2.env               |   8 +
- configs/p3450-0000_defconfig                          |   9 +-
- configs/surface-2_defconfig                           |  82 +++++
- doc/board/microsoft/index.rst                         |   1 +
- doc/board/microsoft/surface-2.rst                     |  41 +++
- 23 files changed, 1268 insertions(+), 11 deletions(-)
- create mode 100644 arch/arm/dts/tegra114-microsoft-surface-2-0b.dts
- create mode 100644 arch/arm/dts/tegra114-microsoft-surface-2-13.dts
- create mode 100644 arch/arm/dts/tegra114-microsoft-surface-2-common.dtsi
- create mode 100644 board/asus/transformer-t20/sl101.env
- create mode 100644 board/microsoft/surface-2/Kconfig
- create mode 100644 board/microsoft/surface-2/MAINTAINERS
- create mode 100644 board/microsoft/surface-2/Makefile
- create mode 100644 board/microsoft/surface-2/board-info.c
- create mode 100644 board/microsoft/surface-2/surface-2-spl.c
- create mode 100644 board/microsoft/surface-2/surface-2.env
- create mode 100644 configs/surface-2_defconfig
- create mode 100644 doc/board/microsoft/surface-2.rst
-
-Branch contains minor improvents for ASUS SL101 and Jetson Nano along with
-support for Microsoft Surface 2 tablet.
-
-Thank you,
-Svyatoslav Ryhel.
+Thanks
+/Ilias
+>
+>
+> On 2025-09-02 09:08:12, Ilias Apalodimas wrote:
+> > Date: Tue,  2 Sep 2025 09:08:12 +0300
+> > From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > To: trini@konsulko.com
+> > Cc: heinrich.schuchardt@canonical.com,  Ilias Apalodimas
+> >  <ilias.apalodimas@linaro.org>, brock_zheng <yzheng@techyauld.com>,  Simon
+> >  Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+> >   u-boot@lists.denx.de
+> > Subject: [PATCH] arm64: Properly clear BSS
+> > X-Mailer: git-send-email 2.50.1
+> >
+> > Brock reports a breakage on an RK3568 SoC. His patch is
+> > correct but he never followed up on the requested changes.
+> >
+> > We currently use ldr to calculate the address of __bss_start and
+> > __bss_end. However the absolute addresses of the literal pool are never
+> > relocated and we end up clearing the wrong memory section. Use
+> > PC-relative addressing instead.
+> >
+> > Link: https://lore.kernel.org/u-boot/zfknlzcemnnaka5w2er5wjwefwoidrpndc4gjhx6d5xr6nlcjr@pasfayjiutii/
+> >
+> > Suggested-by: brock_zheng <yzheng@techyauld.com>
+> > Reported-by: brock_zheng <yzheng@techyauld.com>
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  arch/arm/lib/crt0_64.S | 6 ++++--
+> >  1 file changed, 4 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
+> > index f3f279f2c39c..3e7627aa389b 100644
+> > --- a/arch/arm/lib/crt0_64.S
+> > +++ b/arch/arm/lib/crt0_64.S
+> > @@ -158,8 +158,10 @@ relocation_return:
+> >  /*
+> >   * Clear BSS section
+> >   */
+> > -     ldr     x0, =__bss_start                /* this is auto-relocated! */
+> > -     ldr     x1, =__bss_end                  /* this is auto-relocated! */
+> > +     adrp    x0, __bss_start
+> > +     add     x0, x0, #:lo12:__bss_start
+> > +     adrp    x1, __bss_end
+> > +     add     x1, x1, #:lo12:__bss_end
+> >  clear_loop:
+> >       str     xzr, [x0], #8
+> >       cmp     x0, x1
+> > --
+> > 2.50.1
+> >
+> >
+> >
+>
+> --
+> Brock Zheng <yzheng@techyauld.com>
+>
+>
