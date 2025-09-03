@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 414E7CA1012
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 22:53:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EA60CA1010
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 22:54:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41D4A83616;
-	Thu,  4 Sep 2025 00:53:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3CA083616;
+	Thu,  4 Sep 2025 00:54:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xm8bx7r6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FgXoK4WN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C4CA83621; Thu,  4 Sep 2025 00:53:26 +0200 (CEST)
+ id 2CEE483655; Thu,  4 Sep 2025 00:54:31 +0200 (CEST)
 Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
  [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AADA7835C1
- for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 00:53:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D027835C1
+ for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 00:54:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-74382041c9eso312961a34.3
- for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 15:53:23 -0700 (PDT)
+ 46e09a7af769-7454cf6abf9so238146a34.1
+ for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 15:54:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1756940002; x=1757544802; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1756940067; x=1757544867; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NCCrJTI+5OS0PefrVG9EHLYZvaBWGmHHv7JoJb4OMdw=;
- b=Xm8bx7r6oUMR/pAFcPsjjwPAJXmW2UsLV+LFik6jgbOs20jcU6R4APv0flkyvAyU62
- U6K9whFHs4DEEZik+r5jxX95QzOkBC0fFZZgS7koRIqjBo635Jd/ScQz0HKw2q5K5l1h
- N56hi2ZVHc7mpgdnnq6xHFvJsjdESWGS26W5Y=
+ bh=XztytljZvLN1eLKN19yiSNm8tVklL8gnqgVxbRS0eGs=;
+ b=FgXoK4WN0RUlrAr2fz4shsZ8Dbnze3vK/ehG3DtYdSuCnCDBuZmcqKuilDm22dPzwI
+ Qbv8K1F0sl537sCbzltqbNs4x8M5jcKZkVRcVIDNvP9DQ8EObI1+UQ0e80DjocIwCuiw
+ bqrcYhrUEauki9FFdhRfrf18zjUqSoZ+bUCrg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756940002; x=1757544802;
+ d=1e100.net; s=20230601; t=1756940067; x=1757544867;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NCCrJTI+5OS0PefrVG9EHLYZvaBWGmHHv7JoJb4OMdw=;
- b=HU6t+Cm4pQnX+z6RKJA5xCfWPCB/Qz+OC6asp0E6Nma0ngQGfkRYFcTwpk3Lq1v8st
- O9Sje8VNSD7RshE+jatf37yF/8rBLcwVE934jv52KGbP9HJaEx6rnCt3JsOzcPIpAR2z
- OEWR+hYXPsNjosIWvpNqqjQ6gL1rJm3sXkfl1ys8+N4Y611v1WzpchLrU4NnsonEraov
- xxbe5OqHTwy4MmUjhf98wisPVZiUvr9DpF4Zeo9QqRHooyUkVsNxI9Zls6NOR2/uR849
- hUFXqFHeIkiVPY4sO4tBhO/r1wdXpI0StDwi5tAxVZJmzebwPIZJaLtTsD7t/plCP9hS
- ukIg==
-X-Gm-Message-State: AOJu0YyjgA2AGddFH6O6AD69xy/Md5XiAISaLRy8alGzTw5uSQKf3xeP
- qDl5L5kvx36sU2/bRAHZoRIZjW5b7n/O3GPaw73nJXojSgFYtZf29mg1iIL3jAnFO14=
-X-Gm-Gg: ASbGncvDMt4LTljWtTOBJR4g5Ck2MrHw1/pUcSBZ1sFemi2cz/r7nyv+ksG+6dPZpO/
- qq+0aa+pym/yhYJDDBgFqnG3MWsVQzFun1sJ9VKWpVfiLuXQKlFhpEkZduPzGyGPCow7s1Ub4bl
- P2z10FIrlkn7OeIQjAE3xKrvpz52Rhbrg8qwtS8zxsEHatTu/49AVanbOxgheVSu5BfjDJVrVbD
- KbpW6uzBMoTDUtJkCPCxEFFThcij4BFHYYk3SV49k2zn2PguRgssyHr7TzND+ZAhHYbe+fHIk/W
- Sjbcri80jr9naptCptszY7m43FUisnqHmyYI9m9LFahJgIxUjHw4k/NLIVA0K2ZGb0dkVfhlekW
- fyq5ZDyTW03OQXSLtbGlkzoAiFWrDzRF4E/Ioo4qF8ksvnwPgkPKNmU8sitWI3WvI/A==
-X-Google-Smtp-Source: AGHT+IEBgJc89DCKA4EaeDdGKywQiPyeGC8iH1kdkjI0Y/MFQgaygVSRB/oL7gl++xA94cLeliRBHQ==
-X-Received: by 2002:a05:6808:180f:b0:437:df55:7fd9 with SMTP id
- 5614622812f47-437f7d891a1mr6338358b6e.36.1756940002361; 
- Wed, 03 Sep 2025 15:53:22 -0700 (PDT)
+ bh=XztytljZvLN1eLKN19yiSNm8tVklL8gnqgVxbRS0eGs=;
+ b=GsisyPqV9GtppyRohW/1kySQFUshY5DRzrcmcbV9unWDbCR88wh+0BF4vKBP2cSNb3
+ 0KbyNC1Jl+dFlVoPCoFliTfR1ArvUyVJB8dDX0UtgImdyKtkIZhB9F/sz5f5XhO8xsCs
+ lLZC2V8A36oNoHxUor3DQwJ1/eRyHHICYvVVRXAX7tCkG+5V5dVH/NQJXfF2DmPyHA2a
+ 0YTFXlWJV4oilFoY7IgOASKSiVIN1CfupMYFH5xd8m8XBkUOAnDaSP2TiH/CuIRpcnkx
+ nMMfl/neacR9kU78gNiyIgp2r2rcmKpFkA+ysoLD69Jo2rzF/y37IBdyHstQZshzSy15
+ D9mw==
+X-Gm-Message-State: AOJu0YyCCC+fSZ1HhjAy374hJZT5qPlreln7E0Gg2bZZKsb1j/OtJkfm
+ 4XoK+xBSQ6z5sUsLjla9uyW2uhLvTTEToJYalg5bsIi6jlsSJvGQLGhLBuyRVfXo0WE=
+X-Gm-Gg: ASbGncuxPcA2iqOfNGSHwLzhPuu7sUnLBVwC784K4OZattPXjY12LHD5krawl/kYoSx
+ oTAAgl2udgAU3SvR8Wss4eZqW5bXbSI48xl+Rp2IXiaFHJbQQUW5bMRv8AeOLros9qEd82EwyIX
+ fOykkHdG3QymLvvHZbblC8Hd7S60r+/sjORUSCPbL+c9wnQkinHHHgg5JJ1e9HQZy8vJJLQKpWJ
+ PtJuLGG09rH+6ZFJL5cX6iLUlfZUesWFWZskfbsdeqV+o4RUMDBOGGvXFcFykCrqQGvVgmoOgxr
+ PsZNaQbNv2uTLk6SygQqYejGQlIrlZ7MVmjpiWEgCJq//OZKcKoy5+IAxzzarpZN4fxsED/5woi
+ j7EeSbVl+6td9m0qk4fEALtXJh6vKynelCFIrk35xKhhehKjsOIoGEnU=
+X-Google-Smtp-Source: AGHT+IFiYa+HXTrJ6I/RNsOPeon/9czKKTQiUsMz/vNc/pWFb+ACvMc5EJBVjkJxflxlkUePIa6HHA==
+X-Received: by 2002:a05:6808:4f27:b0:438:2907:2eb7 with SMTP id
+ 5614622812f47-43829072f56mr1530074b6e.15.1756940067046; 
+ Wed, 03 Sep 2025 15:54:27 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7457428c2a5sm2461471a34.2.2025.09.03.15.53.21
+ 5614622812f47-437ffea70c5sm2164834b6e.4.2025.09.03.15.54.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Sep 2025 15:53:21 -0700 (PDT)
+ Wed, 03 Sep 2025 15:54:26 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20250903020045.878082-1-marek.vasut+renesas@mailbox.org>
-References: <20250903020045.878082-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <175694000141.3532179.2594852899650711124.b4-ty@konsulko.com>
-Date: Wed, 03 Sep 2025 16:53:21 -0600
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250903053925.6190-1-clamor95@gmail.com>
+References: <20250903053925.6190-1-clamor95@gmail.com>
+Subject: Re: Please pull u-boot-tegra staging
+Message-Id: <175694006583.3532389.12858561752911987960.b4-ty@konsulko.com>
+Date: Wed, 03 Sep 2025 16:54:25 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,15 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 03 Sep 2025 04:00:26 +0200, Marek Vasut wrote:
+On Wed, 03 Sep 2025 08:39:24 +0300, Svyatoslav Ryhel wrote:
 
-> The following changes since commit d367be2b13a388fdb0dc2720f66c30ddcec8a4fd:
+> The following changes since commit 54fbdd408873413af86d86de03a490c5abf280f1:
 > 
->   Merge tag 'u-boot-rockchip-20250831' of https://source.denx.de/u-boot/custodians/u-boot-rockchip (2025-09-01 09:50:01 -0600)
+>   Merge tag 'net-20250818' of https://source.denx.de/u-boot/custodians/u-boot-net (2025-08-18 10:54:44 -0600)
 > 
 > are available in the Git repository at:
 > 
->   https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+>   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
 > 
 > [...]
 
