@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE42CA1009
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 11:22:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58D6BCA1009
+	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 11:23:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AF53834E5;
-	Wed,  3 Sep 2025 13:22:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C8389834E5;
+	Wed,  3 Sep 2025 13:23:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yehFdTss";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DCr3v4o0";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="INzVc0zC";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wdDqv1sT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03A1783564; Wed,  3 Sep 2025 13:22:45 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 0078A8350A; Wed,  3 Sep 2025 13:23:53 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6455833C6
- for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 13:22:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E0DC833C6
+ for <u-boot@lists.denx.de>; Wed,  3 Sep 2025 13:23:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cH0Zp4qL9z9tj8;
- Wed,  3 Sep 2025 13:22:42 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cH0c66XHYz9st3;
+ Wed,  3 Sep 2025 13:23:50 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756898562;
+ s=mail20150812; t=1756898630;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=v2H7GtTM4a7xeh7vekYuhxGVlkcFS2XCJp9rCuP+u+w=;
- b=yehFdTssyFTN2NsRcSI5dCd67rAYEIrAIvgXCdVXOjbC14zs+FNdBlwrtwEzHFUD9h+piN
- mlhBRO+m48ZbxYL8CC9R71EBWxVhzyaOCHQeaLE1Eu8tb8/rpEF1jCuufPENqCBLUt+FBw
- N4O8RIv81qVEsBIheDJ+CMATq6Y3U1OdrmuTaJQ8Jw4f91gLkf2M+gNN9pE3thMA9HAa3v
- mKWpJ2KciOjsB+Rwnj/VUUeXHHkOygUCpILg+YOJBLtP+Ji3RzrXWRxVLArY50/fK4CmPp
- YH/P5v65CTEKjAYbW/32ffq6PuzN/irguWc/MqSr1z00BQ5RggGMpubjNcydtw==
+ bh=veQqT1YkkaGdnVYrPrABIiYF45LtBV3LFhHS0TWjhlM=;
+ b=INzVc0zCDvPTKxaYAo+GksnQ/W6XEspAhkOTw3HtJF6UhApqx/InjhcFCCDbcIYe1mE0pM
+ gFsX+0gc4Dhk4OZKkP5gkSM3HN+Lhl6T1HFcNJp2GyldKT1fsKyGoS6MSsD7GrQ6r6EGcJ
+ eobMLiwSxQNjA1xYLBKYgwsN3r39s+DhRILelgWDY5MJqjNqe1AglKfOK4ZpwKQeW0ahg6
+ p7thG00o0PSVauZIwkV6RpTWxMmd6DKnijIXuG+Kyo3kT/sBubNhxyARQaHCFI/QIqCwoi
+ mIYGOj+LaA6tpXRAyaRa5JSawBludRIxmpvK/gabBjJKQSkFuJWUevdsEEIlNA==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=wdDqv1sT;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1756898560;
+ s=mail20150812; t=1756898629;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=v2H7GtTM4a7xeh7vekYuhxGVlkcFS2XCJp9rCuP+u+w=;
- b=DCr3v4o04zf6lgXw138KBxMq70aGQGKFmVu8a6TcWPgrLmVR8XTbz+Hyj59r/tbusK8rhO
- KjFXiF+hkceewBxjklTquPEemoxFZFTfL9b/QNJ/6x/Av20gN4As+BbKY8TqIwnM4nD34I
- UdLVjBG915in7fteAeXPuvdOmuMeQtyTS6rdWcYbwaDCFDYklo3dpz3hANQWvsW8VbSJZM
- Pd7GIfg2s6QLJuwEF/k6va7dxe+JKcz3JVPEtyQyXlDt5z1/hqco4CavQL9I/c298BiTaJ
- Bx4nz6WJr8mDAvgrzxpp4so93iCD0VB6LcQrohErxUduBXTbxjjpfxDUhTWLcw==
+ bh=veQqT1YkkaGdnVYrPrABIiYF45LtBV3LFhHS0TWjhlM=;
+ b=wdDqv1sTGngF6Yzcax99zHU4bldvxbAxceEfwQ7KIIvFTbp0mR3eWK1fOWNJJ/aoH/2c8N
+ qY95+FLFyBay0YWMtb1/fHZfuyVnqdI4jqLBFXRLwfBM9Vnz39OqRyZSYjDY1b5ZU5VWZE
+ WYUJRy3zg+rMqZ91QHPJT4M9Qo39ap2N7ZS95RS5QtrsbCIm/GtiSPoNBouvY3IK30EhZ5
+ 0L79wgTOa544P5PmD3d8fEVH72DeSjfwCveVU6qqDPWkjZOjlBJgtS1sctFhnOaKFLknFV
+ +1t3MwrtUaTpi1BTbrTq926VduNM1JCgQBaJb5PrEjqTJFS9dNp1QdWuIcbWYA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] env: Remove usb_ignorelist and env_fdt_path from ifdef
- CONFIG_ENV_VARS_UBOOT_CONFIG
-Date: Wed,  3 Sep 2025 13:22:06 +0200
-Message-ID: <20250903112228.48224-1-marek.vasut+renesas@mailbox.org>
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: renesas: r8a779g3: Use $loadaddr in bootcmd on
+ Retronix R-Car V4H Sparrow Hawk board
+Date: Wed,  3 Sep 2025 13:23:23 +0200
+Message-ID: <20250903112338.48545-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: e8187cdc7a10b391270
-X-MBO-RS-META: id3tw6iuk5h1tdajym9xnfuiymz49u84
+X-MBO-RS-META: fwg35kqgnriew3ahcjfwarimm7nxgfep
+X-MBO-RS-ID: 4d6a7169d7956170f68
+X-Rspamd-Queue-Id: 4cH0c66XHYz9st3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,54 +91,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CONFIG_ENV_VARS_UBOOT_CONFIG should protect only U-Boot
-configuration variables in environment, those are arch, cpu,
-board, board_name, vendor, soc. It should certainly not hide
-usb_ignorelist or env_fdt_path from the environment. Fix it.
+Avoid use of hard-coded address in boot command, instead use $loadaddr
+which is the default load address. This improves consistency of the
+environment on this board.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- include/env_default.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ configs/r8a779g3_sparrowhawk_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/env_default.h b/include/env_default.h
-index 9caf22cdd1d..7f8dc1c35a7 100644
---- a/include/env_default.h
-+++ b/include/env_default.h
-@@ -79,10 +79,10 @@ const char default_environment[] = {
- #ifdef CONFIG_USE_BOOTFILE
- 	"bootfile="	CONFIG_BOOTFILE			"\0"
- #endif
--#ifdef	CONFIG_SYS_LOAD_ADDR
-+#ifdef CONFIG_SYS_LOAD_ADDR
- 	"loadaddr="	__stringify(CONFIG_SYS_LOAD_ADDR)"\0"
- #endif
--#ifdef	CONFIG_ENV_VARS_UBOOT_CONFIG
-+#ifdef CONFIG_ENV_VARS_UBOOT_CONFIG
- 	"arch="		CONFIG_SYS_ARCH			"\0"
- #ifdef CONFIG_SYS_CPU
- 	"cpu="		CONFIG_SYS_CPU			"\0"
-@@ -97,6 +97,7 @@ const char default_environment[] = {
- #ifdef CONFIG_SYS_SOC
- 	"soc="		CONFIG_SYS_SOC			"\0"
- #endif
-+#endif
- #ifdef CONFIG_USB_HOST
- 	"usb_ignorelist="
- #ifdef CONFIG_USB_KEYBOARD
-@@ -111,7 +112,6 @@ const char default_environment[] = {
- #ifdef CONFIG_ENV_IMPORT_FDT
- 	"env_fdt_path="	CONFIG_ENV_FDT_PATH		"\0"
- #endif
--#endif
- #if defined(CONFIG_BOOTCOUNT_BOOTLIMIT) && (CONFIG_BOOTCOUNT_BOOTLIMIT > 0)
- 	"bootlimit="	__stringify(CONFIG_BOOTCOUNT_BOOTLIMIT)"\0"
- #endif
+diff --git a/configs/r8a779g3_sparrowhawk_defconfig b/configs/r8a779g3_sparrowhawk_defconfig
+index 9cee4d287ef..2d1abf6f26d 100644
+--- a/configs/r8a779g3_sparrowhawk_defconfig
++++ b/configs/r8a779g3_sparrowhawk_defconfig
+@@ -18,7 +18,7 @@ CONFIG_SYS_BARGSIZE=2048
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_BAUDRATE=921600
+ CONFIG_BINMAN=y
+-CONFIG_BOOTCOMMAND="tftp 0x50000000 fitImage && bootm 0x50000000"
++CONFIG_BOOTCOMMAND="tftp ${loadaddr} fitImage && bootm ${loadaddr}"
+ CONFIG_DEFAULT_FDT_FILE="r8a779g3-sparrow-hawk.dtb"
+ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_GPIO_HOG=y
 -- 
 2.50.1
 
