@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 092B7CA1012
-	for <u-boot@archiver.kernel.org>; Thu,  4 Sep 2025 09:58:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B579CCA1002
+	for <u-boot@archiver.kernel.org>; Thu,  4 Sep 2025 09:58:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 843B183B21;
-	Thu,  4 Sep 2025 11:57:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 45C1283B30;
+	Thu,  4 Sep 2025 11:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q/Qi6pcy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o2WWd823";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D89C83B03; Thu,  4 Sep 2025 11:57:38 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 3562B83804; Thu,  4 Sep 2025 11:57:39 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E082083804
+ by phobos.denx.de (Postfix) with ESMTPS id 5C3FB83B0B
  for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 11:57:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-45b9814efbcso13712965e9.0
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-45b87bc67a4so6052825e9.3
  for <u-boot@lists.denx.de>; Thu, 04 Sep 2025 02:57:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1756979855; x=1757584655; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uH9lIj4KRAqS5ZvNAtgqdZC1DHLKUcfxSY8W3+02R1Q=;
- b=q/Qi6pcyhGqLs5NV+kPMSCzaTlHHFWZUPWmQz9gp4sKs/p88BN8jROI9LkgpwBpBRh
- 9lm4v0a20utDkKJ59vN/VfzkOQNcr7fC+7imtrS+0dzlgDXWavXsIXSKr+K4n+Jc2qVe
- 9PlFCb2iCaKn/xSuM/u8GUs7QLU4KPurCQlnTVUGEvTQDcQgZa/dSmP/x9drjBksZcnT
- LS+gA5GvKQmCOj8JtNXdyirgUsfNb9nD0Rsei/l5vxaTJvV8laP90OMUx7lqZnkUCp9G
- JIdEYYtu3zRDbvB299X5vWBqOxKr8t5EDgYb+sSDclzdVy7DMmlz+jspVFx1T5mnRrVR
- KtRg==
+ bh=BW9GR1OXI/HYSnp0eAHqnGmVpsFbE+gHYYFWS03EpO8=;
+ b=o2WWd823X6iTrFFzWNgTsVNsHbtshUqsXE/rsgJD9dRJk3r9hksyHv5I6xV1sXT0EG
+ h4ksllFlEjFgdsu3BG09OQnpVepi9xglkLcEr6SvP4ziCGvFRf4K2ispo+1mRiLuH1AM
+ cacbVusnLlzchrYYfBdfnmtjnQUMpMJQAdzR+JQnJS6d7l51rrwdL1ZKGVS4mDhUppCp
+ cPQ97W112dwIdUS2HzmApNhdrab0o7LpeotjLlEEtiemNzzT8oGy+4IwwiIEU/ANpsT0
+ b5uR4KR0RkxvpYngLilzpgfGXqo2ZCHulXWF9jUJwYZd7JUdXrGwxwRq4/AnqHLCxjSh
+ CDzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1756979855; x=1757584655;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uH9lIj4KRAqS5ZvNAtgqdZC1DHLKUcfxSY8W3+02R1Q=;
- b=uqYKXSgZe2+dlEfuT5Q7U56r4eBacSQn2Dvb8JC7YhpNFwLFKs3Qao5HRoSI0OPQhc
- bgCySQ39DgiK6beLzb2dBjcjKxeVb1/3dJFDN2CTetO7G8XcIlHe6piVbAfbk+4GuOLB
- 5iLlMePCtPgWNPDJOUAluDKqitMtkw+w+uHrSEyEEQhfl+4Js4OSiLMUkBbuJcw+4pqR
- FkjYpyIsuQZFT5TCS7oFrnbAalGBjef1eoyRDvrkF9YqFR24GKTKtKGp5r9SU1CeKLDR
- DbXUnPYdP61rVtBSays3UkYbOAmTN/P49rgs1+ZG2M3lccoXW49UwndJeRdNr/KYm8J+
- bAcg==
+ bh=BW9GR1OXI/HYSnp0eAHqnGmVpsFbE+gHYYFWS03EpO8=;
+ b=K/vmu69uyF7jmcWNgmyXdXZpbq3eDs/PvdJn5YbF0h91PTaEoOpA4b7MjnzUDW34a1
+ 8pIDsYU14xB9pDA6KgWs6SGlrTc17AlHLUMzZtKLjlYNk61YERKXHBOluhnT6b3sXuWF
+ 0d36rBf59yudR7Lm3zckb8UgFGCTnlcjuQJnTyyUpCP4aKKXMKZF6tU4A1RGoJpkbG64
+ iOVmCGeYPBTaz6ASBCPBwvQCoh1KirSEzu42OtXvTlbbRJ7qvFD0LAV6vUnr3s0XGaO4
+ LO9f8XNKpl9pxIDQRJeVFyurdOuvCE+q1eyJ9/FXC4cs/dPYAhWYBec7qgj4AwuhACzK
+ WXcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOIZAohbmkjfZZ22nr8E/LnyM/hLS3I3bJ7ie5+Wq6DPMfCG06j9AqP1hqIRb6obKhp6ERNFQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YxbRsigzyuPqlj4CLVm3Un6najLLSfgLJLvuJkiH0Z1onWqoeKG
- itmWlL9VK4RenreJxUzSaXlkCSQdLOXGADSELNLP1T5bzdt1vZwqGLYgdR2Sa7HxxQo=
-X-Gm-Gg: ASbGncv1L/9baFEMa3enoOMS0coXWYEG4zKKp+LK982Ye20GMfWE+R0wKdDrRAW2O8n
- 2my6yGNt67FA/ZbvF5Kw9Ahi5RSmiZDgwxCWhdq/7J9PYPUmslpgUrf76KvBzSA7HJxIdWYePsK
- QWIRCJ0H32ul5/DUAXi5Tbw8fqBZ2yOi5rbl3GoGCHANt9PRt6rZPYSmabe1+ReQAypV3XHiJc5
- 5GVp1B+qkSdOkYY/9vFpva+XSvN33D3cK3FFh9FU7mMBdY37L7XIG7kJc69A1xhEkkGnaZ3kWdA
- nNNdzIaILd2if9mbuTes5Y6RMTfDYVA+o6HY+EhTTnP/7Kgpu1Kll6qGmB5vJsTM4HXlw08AiY3
- K7fN6vob+lSDfJjZ0vPkUDIEoXjNn7o4qkxcHm0sGuLXGIxhFte05mD6e4bNlHg50
-X-Google-Smtp-Source: AGHT+IFIk6M2M5TKdRkOb/L9hpPVHuyMbk0VSo4H8rCXu1yZelD4gDeFgiNyU7Vn57/zD0V39TXQtg==
-X-Received: by 2002:a05:600c:a45:b0:456:2139:456a with SMTP id
- 5b1f17b1804b1-45b85599135mr158530685e9.15.1756979855330; 
- Thu, 04 Sep 2025 02:57:35 -0700 (PDT)
+ AJvYcCUy0X60kAJQ/qbtCUONNqlnNKg3R7WOBUFRtli8u5Skq7ZIgxIEE3InvdkijGKt4W7V2vqN9YA=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywe+FuAzB3a61kKeRRZ+ZGuJIJlMyWPR6T6XivYSbKXD/hTJBbM
+ ptmjbQjeyqckNkGlDPEkAiCifKheWlJiPFwAe3ZfgjnEa7hjMW83aYAvDjdY/3C/G8JqYcHpGhQ
+ EuNqPZ1boxg==
+X-Gm-Gg: ASbGncsrEC76SerdXvkeymG54+XJ5YuxQZ0J/uT4WUzFgIkbaBztYlfbply/qFKaIvt
+ rqmmtABql3PBM1o8GRjRK+wf9BIcroQfvseldMX9i2V+YeWJmuUC3Zr0eDxCV7aQfh0VetGqvCK
+ 6f7yPjQYyQyfLy/MW4UbNC47ChGZKsayvbCKl9K85q/5UZVIZ9jOus824T+9Hioq/0R5hDHVN4K
+ qvuj09XB6UDoaplmZ5UI0Hr8iLIzKOawENlJu1jzOtJH7mQ2Nwlch9Il3jS8wpjPIwHCrDkSD2g
+ bV/zaOnioD6zcipJ2/o9HuuUbM6rkFWnMMWj18+8iQgnqfbRpGC2Fuf4u3U0ioyFJ3JAw/MhqjF
+ g8fXPeh3GCYLtrpyrzTSyeyrcGatyrQIKX05lNbkzVeA=
+X-Google-Smtp-Source: AGHT+IFYbAixbM1wVWTJlgcR6aO0Ycb4yKRrBUZ/Kil6ZJ83vUgQccd90ULtifC08XYCmtQ2ihxX9A==
+X-Received: by 2002:a05:600c:4514:b0:45b:7cad:7ac7 with SMTP id
+ 5b1f17b1804b1-45b85525dc1mr142140075e9.2.1756979854764; 
+ Thu, 04 Sep 2025 02:57:34 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-45b6f0c6b99sm359057585e9.4.2025.09.04.02.57.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 02:57:35 -0700 (PDT)
+ Thu, 04 Sep 2025 02:57:34 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20250808-pwm_meson-v1-1-cddb7e5f76bd@linaro.org>
-References: <20250808-pwm_meson-v1-1-cddb7e5f76bd@linaro.org>
-Subject: Re: [PATCH] pwm: meson: Stop premature exit from for loop
-Message-Id: <175697985489.2904655.1249756606342116521.b4-ty@linaro.org>
+In-Reply-To: <20250723-clk_meson-v1-1-8cd6e73145a4@linaro.org>
+References: <20250723-clk_meson-v1-1-8cd6e73145a4@linaro.org>
+Subject: Re: [PATCH] clk: meson: Remove unreachable code
+Message-Id: <175697985412.2904655.13465537088051195075.b4-ty@linaro.org>
 Date: Thu, 04 Sep 2025 11:57:34 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -103,20 +104,18 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Fri, 08 Aug 2025 10:34:43 +0100, Andrew Goodbody wrote:
-> In meson_pwm_probe the for loop attempts to get the name of a clock but
-> the following if..else statements only perform useful work if -ENODATA
-> is returned from clk_get_by_name. If clk_get_by_name simply succeeds
-> then this results in a premature exit from the for loop and the
-> following code can never be reached. Make the else clause only apply for
-> an error return from clk_get_by_name.
+On Wed, 23 Jul 2025 17:37:24 +0100, Andrew Goodbody wrote:
+> A second return following the first return is unreachable code so remove
+> it.
 > 
-> [...]
+> This issue was found by Smatch.
+> 
+> 
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
 
-[1/1] pwm: meson: Stop premature exit from for loop
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/dfa8b39a6addc09697399c5204766958eb0dfb51
+[1/1] clk: meson: Remove unreachable code
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/09887c69c1745829b6c004518265df4519a9f6a3
 
 -- 
 Neil
