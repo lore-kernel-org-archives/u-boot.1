@@ -4,91 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 886B9CA1012
-	for <u-boot@archiver.kernel.org>; Wed,  3 Sep 2025 23:43:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0612DCA1012
+	for <u-boot@archiver.kernel.org>; Thu,  4 Sep 2025 00:23:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A6B083678;
-	Thu,  4 Sep 2025 01:43:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EDC5834E5;
+	Thu,  4 Sep 2025 02:23:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ktdcU9Jd";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="DBZjtvFH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C49A083695; Thu,  4 Sep 2025 01:43:34 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B0C87834E5; Thu,  4 Sep 2025 02:23:44 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E09A83678
- for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 01:43:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DDFE8835FE
+ for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 02:23:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-71d60110772so5363027b3.0
- for <u-boot@lists.denx.de>; Wed, 03 Sep 2025 16:43:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1756943009; x=1757547809; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kJdf8QSC74anMCp2ms4NF/MROGdh7lLpYPucdHeJCLQ=;
- b=ktdcU9JdBhJXtZMTcay6m7DFaP4P+SHoj1EKYS3EZ/EHQ/Duz59wxxHMuodFts6yPw
- YOcpp0fmjWo/VD8rMIVFwOXYLk9Em3wCB5NG0MfHQ6QWQd2XsX6S5xklhMxz4uxTcU0g
- IPLLr0vVvD9vl/xqv8G0WcAYKpsXxiq29bV2h2co+3tA1klU+A6HBVEAljdcKj7gV7cn
- JBtjUOZLRVAZGdwB9J0JTYrI52vCTkgyWNwrOVfkZAAGGM0lnr+WGlp/Zei03vIU//4B
- GOPQbQZYEPgGxvk9UkcbDCaQPJ0vDfrpkGIHmAUY0OOVSU7eUtK33z1hdlv8IJ9pQh6n
- MRHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1756943009; x=1757547809;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kJdf8QSC74anMCp2ms4NF/MROGdh7lLpYPucdHeJCLQ=;
- b=UOYHHGViQtSNESoKMVtp19ZsDxfOq3NPJ/n6x15xDs46e0mUu6OMLPkRH7yl2JVhJx
- JpIDOmroCk48MOBe3tySrPShRKfTdlkElpF4AYAt2kDG2MTUaTyDcpB4DTYVmHz7drj+
- WIKeTW01ikbMkYaeWSXK6UAKpeOxcZaAdNU1ia1VZP8LE/dWqpfQoZP43sGZo/ghlME4
- YzFIq1cHuum1V3hf7J5I5FuzL2/LSZLxm/2Qy+sor0CA42I8yd/kWjtj8Gcd7Sj35ABa
- 4N8MKgRL0YEursQjGsiy0pd6zZt4TuuJPnh/zphNgy020FSBg3SOraPeDmGXWH1XtAc/
- o0jw==
-X-Gm-Message-State: AOJu0YwAG+cDoowIO45jby1OazoExfVAFMLqqYUWGVpAlaNv2YyFEvaA
- L/m7osJaWXMu1aDjQ8U0LChdLvTq+SnVaVOkXBa+iCPpyaFb/uxc0242L7QF
-X-Gm-Gg: ASbGncui1XoNLjFgfAE6pkQlF6Q95Ocvtv0GPOp+gjCzBejgoaeTvHViYYukL8fvIpC
- rfyiXp1LKewWcYn0/cjs72XlrhKRQ7IgVbCpoS41KZBR78zJ9Zbn742R/OUXXWXTQZpZYBPl4yV
- pLPpuqI1k1TywuSgoCblFkO5q4/4tNNRo/AiQJcDVITh9a+wzPj5RINp0gTW/jm16wt5yTs49L1
- 7Uzu9JVMEhrhHtdyTS7Zm6hC/6Hvhl5+9UkfHx+8/pDdbM3fNmMxfin+anwz7npZZE43AH6Hn5+
- ZbHOFRQSDaye2NOcIGC6lyzjwFiJtFCwU//3z1cb/d6SmZReJWVj2lbReFJTNvPvGVWh+i5Hot4
- 4QMLloLCk4W/VLJ0eDTV9a3wv8LMHJebfhYQx1FoasYkerGVr
-X-Google-Smtp-Source: AGHT+IGVCXcI+RI+0+HRJI94ZYLjRhErMPpWfp25ivl/3EJgC5NJ4rCe8z+4zMC/4hv8uSKwhEyr2A==
-X-Received: by 2002:a05:690c:b96:b0:71f:d94a:3feb with SMTP id
- 00721157ae682-7227640ad15mr208682337b3.24.1756943009502; 
- Wed, 03 Sep 2025 16:43:29 -0700 (PDT)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-723a8503a61sm17044997b3.38.2025.09.03.16.43.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Sep 2025 16:43:29 -0700 (PDT)
-From: Greg Malysa <malysagreg@gmail.com>
-To: u-boot@lists.denx.de
-Cc: philip.molloy@analog.com, adsp-linux@analog.com,
- Greg Malysa <malysagreg@gmail.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-Subject: [PATCH 2/2] mmc: adi_sdhci: Update headers
-Date: Wed,  3 Sep 2025 19:42:02 -0400
-Message-ID: <20250903234205.26787-3-malysagreg@gmail.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250903234205.26787-1-malysagreg@gmail.com>
-References: <20250903234205.26787-1-malysagreg@gmail.com>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 622f1ee6892511f0bd5779446731db89-20250904
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=vVsuPmY7slncSS3vHxfRV1GrdH9uC20hYx2BuJuqQGY=; 
+ b=DBZjtvFHHS+bEw0PoqYPNJB0XipHRZqHIGSt1PM4rv71EUqz2LVh583JNmebhm5cPA7rRWmYbQn8YjUfYRsVOwXdw8CX3GcwYFI5PJNokCzfVgxen0Ff9yOl0u6KUmHe25ksotHU8ir+VP/Ol0UUqOZ+WLk/fuVb4V9p3YwdqoE=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.3, REQID:fba61159-ab02-418a-826e-605258348569, IP:0,
+ UR
+ L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
+ elease,TS:0
+X-CID-META: VersionHash:f1326cf, CLOUDID:a2492c6c-8443-424b-b119-dc42e68239b0,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102,TC:-5,Content:0|15|5
+ 0,EDM:-3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,
+ OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 622f1ee6892511f0bd5779446731db89-20250904
+Received: from mtkmbs11n1.mediatek.inc [(172.21.101.185)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 2031475666; Thu, 04 Sep 2025 08:23:30 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
+ MTKMBS09N1.mediatek.inc (172.21.101.35) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.39; Thu, 4 Sep 2025 08:23:27 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1258.39 via Frontend Transport; Thu, 4 Sep 2025 08:23:27 +0800
+Message-ID: <5ada4f98b8d09bd78915bef278dee780de5d7fa2.camel@mediatek.com>
+Subject: Re: [PATCH v3 2/5] misc: fs_loader: allow using long script name in
+ request_firmware_into_buf_via_script()
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: Lothar =?ISO-8859-1?Q?Wa=DFmann?= <LW@KARO-electronics.de>
+CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini <trini@konsulko.com>, "Lucien
+ . Jheng" <lucienzx159@gmail.com>
+Date: Thu, 4 Sep 2025 08:23:28 +0800
+In-Reply-To: <20250903133600.52169228@karo-electronics.de>
+References: <cover.1756885599.git.weijie.gao@mediatek.com>
+ <038e8258c903367dccd9c7cd1adb51bcf2bdf307.1756885599.git.weijie.gao@mediatek.com>
+ <20250903133600.52169228@karo-electronics.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,29 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As part of the header dependency cleanup between 2025.07 and 2025.10, an
-implicit route to obtain SZ_128M from linux/sizes.h was removed. This
-adds an explicit reference to linux/sizes.h to fix build failures for
-this driver.
+On Wed, 2025-09-03 at 13:36 +0200, Lothar Waßmann wrote:
+> External email : Please do not click links or open attachments until
+> you have verified the sender or the content.
+> 
+> 
+> Hi,
+> 
+> On Wed, 3 Sep 2025 16:38:30 +0800 Weijie Gao wrote:
+> > Use cmd_process() to remove the length limit of script name used
+> > for
+> > run_command().
+> > 
+> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > ---
+> >  drivers/misc/fs_loader.c | 9 +++------
+> >  1 file changed, 3 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+> > index 87acd385e23..6a6796c1931 100644
+> > --- a/drivers/misc/fs_loader.c
+> > +++ b/drivers/misc/fs_loader.c
+> > @@ -232,18 +232,15 @@ int request_firmware_into_buf_via_script(void
+> > **buf, size_t max_size,
+> >                                        const char *script_name,
+> >                                        size_t *retsize)
+> >  {
+> > +     char *args[2] = { (char *)"run", (char *)script_name };
+> > 
+> 
+> const char *args[2] = { "run", script_name };
+> does not work?
+> 
+> I don't see any need for a non-const 'args' here.
 
-Signed-off-by: Greg Malysa <malysagreg@gmail.com>
----
+We'll get compiler warning if using const char *[]:
 
- drivers/mmc/adi_sdhci.c | 1 +
- 1 file changed, 1 insertion(+)
+  CC      drivers/misc/fs_loader.o
+drivers/misc/fs_loader.c: In function
+'request_firmware_into_buf_via_script':
+drivers/misc/fs_loader.c:243:33: warning: passing argument 3 of
+'cmd_process' from incompatible pointer type [-Wincompatible-pointer-
+types]
+  243 |         ret = cmd_process(0, 2, args, &repeatable, NULL);
+      |                                 ^~~~
+      |                                 |
+      |                                 const char **
+In file included from include/image.h:35,
+                 from include/spl.h:17,
+                 from drivers/misc/fs_loader.c:22:
+include/command.h:278:64: note: expected 'char * const*' but argument
+is of type 'const char **'
+  278 | enum command_ret_t cmd_process(int flag, int argc, char *const
+argv[],
+      |                                                    ~~~~~~~~~~~~
+^~~~~~
 
-diff --git a/drivers/mmc/adi_sdhci.c b/drivers/mmc/adi_sdhci.c
-index 65a22cefb71..f58897b5218 100644
---- a/drivers/mmc/adi_sdhci.c
-+++ b/drivers/mmc/adi_sdhci.c
-@@ -15,6 +15,7 @@
- #include <malloc.h>
- #include <sdhci.h>
- #include <asm/cache.h>
-+#include <linux/sizes.h>
- 
- /* 400KHz is max freq for card ID etc. Use that as min */
- #define EMMC_MIN_FREQ	400000
--- 
-2.45.2
+> 
+> 
+> Lothar Waßmann
 
