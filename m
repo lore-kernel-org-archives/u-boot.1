@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF404CA1012
-	for <u-boot@archiver.kernel.org>; Thu,  4 Sep 2025 09:57:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02CFBCA1002
+	for <u-boot@archiver.kernel.org>; Thu,  4 Sep 2025 09:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CDA583A7A;
-	Thu,  4 Sep 2025 11:57:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A09EE83829;
+	Thu,  4 Sep 2025 11:57:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ft7n2Z2c";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qJ/+MC5e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE22583B0E; Thu,  4 Sep 2025 11:57:35 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 6E05C83A7A; Thu,  4 Sep 2025 11:57:36 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A08C83804
- for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 11:57:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17FBE83A7A
+ for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 11:57:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-45cb5492350so5550715e9.1
- for <u-boot@lists.denx.de>; Thu, 04 Sep 2025 02:57:33 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3d3ff4a4d6fso670885f8f.0
+ for <u-boot@lists.denx.de>; Thu, 04 Sep 2025 02:57:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1756979853; x=1757584653; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qriw3O9jv6SzmswlG3TH2WS4BvvX0d0naBUrpjbGrRs=;
- b=Ft7n2Z2ciB5N6NUDVqSC7lV/+ccOmVwnqwOPI7i/OHLTkz+KGFW03pm6m0AviUb/6X
- vps/8Jkx5a6aYj2c9JiccyjbI9YK4ydwBrn4jaCvLB7r8Jxe1XR+ifQ3j46cVRqe8+bx
- 1LXelGYy8H2J5oWHJ1tWWi1PFs2VBnTpZsL9O5rA+8EI8dDka6t27+XYiJ0aMzGI3Hy+
- bbMZ2nzWbbURtVPUaLtG0auacX+8z7AUsv5bn+8gxZvd9p6rk8kUmMfk8TtGUjCW+VEq
- T5KpGUeN0xbrMDACkiroV98ZAC0DWxqVdRmqIyISV2bisGxF0/pxixnHBXmQ/gwceV4q
- nH7g==
+ bh=G2UswoCgddvlGcR9+Xfr5ukOpj5bLKzFXFzWUra3lT0=;
+ b=qJ/+MC5esv9+faMNksFPm4pJItJglifTexpvNHgBwispH0jFtHaHsplvlXrVnHw/NY
+ PIwiW/Fq56IyCuHobgIilRb93QA4Cos6JfnHv+Di2lh3x5cS3WK/MNb0YdDZ/sLzqyES
+ /vU7+ybP/0Pk6+0VldMWDN9hPd5tiLgW+20rHKJ+UhQV6TKvH27EI0ZcfU2FDfafBJYl
+ iZHBIF5Kc1ItWi98ehjQmIzPczTC7Whi6b7Jq2X3djqcxZgz1t4AHj0lTVVYFNM5bZ4c
+ dsbhK+zuV0sNV/u33Qad5ggLeMCqfmFRjHNLS2V80a7Z2CaKZquP+rWcRVJEBYNPDVjG
+ E/GQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1756979853; x=1757584653;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=qriw3O9jv6SzmswlG3TH2WS4BvvX0d0naBUrpjbGrRs=;
- b=GorzO7GUR5How8S+AZ5//roo5ReW+EwtBoqUcD9Mf4Imoxa0oEBb7daZqWMEhWo/rY
- P97W9Q/JpbL+dRpGbvhKevJC+anZ3GMMuBS6ULXYPFzSJTgDhZ19/HZMlQr4mv8G7IvF
- 2MT+3Ssp7eLo2GlLmYl8VC9BNFswkz97eCIDE8UOdFvl/jPTtx+xlllztCXtiKqwDC38
- Dnh+pp/DatSWgGZ/mmtkLXh4jaPyomdNnd3UGEuewcOkmRgn63ET9TFh6FtfJgnAZ9Q1
- +eglT7DT/F1Jgq3TopyvqXutwvysY7RmI2EPYqyzSkOKmC8StNc8pTlQINBJ1ZQxY6mk
- 6a8w==
+ bh=G2UswoCgddvlGcR9+Xfr5ukOpj5bLKzFXFzWUra3lT0=;
+ b=FJF7WPWaH6a+zFO2IQ3noIS3j4PbEwRZB/l9cAZ/rFZh3X3MhT1yDx1Uc4by9EnRGC
+ pdde/rafKbm1hONIA/kuS1yGzvHWrjAtAi49DzpdkrkxvtNcWfFub/wPpladye4X/Vax
+ V9DfpYCiUzYC+J16bGAxyEfqnRDuZM+uFdRs4kslHsEQ9SY1rinVEQ2UtddnNjt7azxn
+ EEaLinQzrUsEgaUhmKlcsCd0MJaQH0e7Oc++TloFce8dKFK8PytKRNRxk8wejxO8CN4x
+ XaLVFG7G7N+XyN9COeUZzfhr6MAlKf1DGlDn60/yE9kG74UH7RHP68LCS2m1N+6td34O
+ c7bw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEqzFSvbmsh58jMWi3MQEjn7zkqz/mTDLQpxHR5CJ4UwfqpYA4RPSnEZNCqeQdS4ARCv2dm2o=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTC2GF/Akb3HByy5jSoe7v/yrDavP11l1znx/3pkoVfgcHwefh
- qkc2iAlFcB2hrRVDdzHEwX2W5H9HE7UtEnmCq2AdJ5NdnIy1Mgo/rMn3P/A5m6VNWro=
-X-Gm-Gg: ASbGncuBrVlKscfDgKg3pYf7Gs/FhEnMokZizpoBQkq4Ph44jj/fwDLfmcMWB4uNO28
- AtZthibcjn/TBCjdNjvx6t5xuqLMshUI0W3Io7sr23Ing/pcjXc1zSxvc972EhWIldf5OIMdfTP
- tNZLNm/tszT3dSYNtyt2acC0cRmWQIp8GxqToPDRSoNszFuu3w5ehsQeqEHb2kMbc6yu12TtBEh
- QJVBMSP7ihkdNnncZYOD3GbNiQUhlmY8zRyW+dsFleTj1D4Ypvh+vpzxMOktIaubI2BGxGrXDX4
- IkMgtMVMVPd1HBXWfUAIYYP4awY4MwlbBoY/5tvs38QcQ9qw0lgmeHkIqHNJ9BRWOoFUZVYceN7
- 4u2z88eQHxvh2helKIFmmtUmPG4oR6gkWLWmaj5wio6wziSQrgkjfrw==
-X-Google-Smtp-Source: AGHT+IF2oG0zSMsVL4egB1hpvh/hVmUPz+hah20E9sacYPeBHTU0yUS2aXu6TWdj2kNJcl/z04xqDw==
-X-Received: by 2002:a05:600c:4f08:b0:45b:8866:510e with SMTP id
- 5b1f17b1804b1-45b886652abmr131776455e9.25.1756979852730; 
- Thu, 04 Sep 2025 02:57:32 -0700 (PDT)
+ AJvYcCUSK0mpLMIH9anfaDJY0LlqoPttBkIgSd6hzKcY6ewmmg9NqWeMW7z9vxFt9/nrvKg6jWLso70=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOT2hjIOesVeONkLQuDah72ykZy2yNM92G3hASN7iT7FIemRCS
+ i4aqeNgxNltgr33oonwpJtTDzwRSUeEwCCY7v6KBI0yHKW0SeJYpSFJQB1lDDGVnG70=
+X-Gm-Gg: ASbGncuk/Ud81wNylbJqpIz7NxfX+qQgCDNjBM7osci5dia6q83dLMGMZNFP6LmTcrz
+ QUAkuQgcgqP8kfnKqcmYvDGLQjQ4xfuqifXvkiPcjXJpmUU3M2/Lv1VhTYcWYHQRGSa55MVsyoc
+ +JdktW0B+xE8MiD03c6Xl3hTRRe1M21rWJVmfJwtmJIezZVCTjSR/Wz0jm9IOasRPCZIwmio9A5
+ OYG+d2gkbP1Fx5s6GHhKWF5SsaCcugCGeDWBYemA/CWct0mhbytCsTOVzgHVCe0lzOtJ77dlScA
+ Pk2BiufZMPUoQrzMKkVSHCIqlFrCM+S+gvIusTrt6USBQVuZGXQDicWn6eq1G3GIj1YyrB6SJVk
+ LXGSR9awo9wWtbDITXsv78uRXwCuWOw5RE3JVOyr4JPnwFa6moGpdng==
+X-Google-Smtp-Source: AGHT+IHPEY54lbfVYVFgJjUQFyGmOaplufleuH58d+hZfQ1VzD4iDODmJ8BUOIvxwiUdhj1jqC2E6Q==
+X-Received: by 2002:a05:6000:2185:b0:3d1:e1b1:9645 with SMTP id
+ ffacd0b85a97d-3d1e1b19cd7mr12386791f8f.43.1756979853412; 
+ Thu, 04 Sep 2025 02:57:33 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b6f0c6b99sm359057585e9.4.2025.09.04.02.57.31
+ 5b1f17b1804b1-45b6f0c6b99sm359057585e9.4.2025.09.04.02.57.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 02:57:32 -0700 (PDT)
+ Thu, 04 Sep 2025 02:57:33 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, Da Xue <da@libre.computer>
-In-Reply-To: <20250502-u-boot-topic-mdio-mux-gxl-bit28-v1-1-399f6c3db154@linaro.org>
-References: <20250502-u-boot-topic-mdio-mux-gxl-bit28-v1-1-399f6c3db154@linaro.org>
-Subject: Re: [PATCH] net: mdio: mux-meson-gxl: set reversed bit when using
- internal phy
-Message-Id: <175697985196.2904655.5277786859587885672.b4-ty@linaro.org>
-Date: Thu, 04 Sep 2025 11:57:31 +0200
+To: Tom Rini <trini@konsulko.com>, Beniamino Galvani <b.galvani@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Yang Xiwen <forbidden405@outlook.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20250617-meson_ppinctrl-v3-1-218d9321a8d2@outlook.com>
+References: <20250617-meson_ppinctrl-v3-1-218d9321a8d2@outlook.com>
+Subject: Re: [PATCH v3] pinctrl: meson: support gpio toggle command
+Message-Id: <175697985281.2904655.15316444778435911414.b4-ty@linaro.org>
+Date: Thu, 04 Sep 2025 11:57:32 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,21 +103,21 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Fri, 02 May 2025 08:51:45 +0200, Neil Armstrong wrote:
-> This bit is necessary to receive packets from the internal PHY.
-> Without this bit set, no activity occurs on the interface.
+On Tue, 17 Jun 2025 01:01:17 +0800, Yang Xiwen wrote:
+> meson_gpio_get() always assumes gpio is configured to input mode. This
+> is incorrect and breaks `gpio toggle` command:
 > 
-> Normally u-boot sets this bit, but if u-boot is compiled without
-> net support, the interface will be up but without any activity.
+> gpio: pin aobus-banks2 (gpio 2) value is 0
+>    Warning: value of pin is still 1
 > 
-> The vendor SDK sets this bit along with the PHY_ID bits.
+> Fix it by adding the logic to handle both input and output mode.
 > 
 > [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
 
-[1/1] net: mdio: mux-meson-gxl: set reversed bit when using internal phy
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/92a2699789a8a9e093e2b10db0476d202c1bcad2
+[1/1] pinctrl: meson: support gpio toggle command
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/879cde9383621ea05f73d1103e4e0eaa8346a562
 
 -- 
 Neil
