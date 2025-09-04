@@ -4,54 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A182CA1015
-	for <u-boot@archiver.kernel.org>; Thu,  4 Sep 2025 07:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BEA9CA1015
+	for <u-boot@archiver.kernel.org>; Thu,  4 Sep 2025 07:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA01083642;
-	Thu,  4 Sep 2025 09:00:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0241D836C1;
+	Thu,  4 Sep 2025 09:02:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="NYRTBVNd";
-	dkim=pass (1024-bit key; unprotected) header.d=stmicroelectronics.onmicrosoft.com header.i=@stmicroelectronics.onmicrosoft.com header.b="UaXvcS5c";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="eOJxY8sH";
+	dkim=pass (1024-bit key; unprotected) header.d=stmicroelectronics.onmicrosoft.com header.i=@stmicroelectronics.onmicrosoft.com header.b="K8mJ+jJo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1B2C836A6; Thu,  4 Sep 2025 09:00:21 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id BF11283642; Thu,  4 Sep 2025 09:02:47 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A33E783642
- for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 09:00:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E27F483616
+ for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 09:02:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=13429524db=yannick.fertre@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5846kVxn020171;
- Thu, 4 Sep 2025 09:00:05 +0200
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58469FxE024981;
+ Thu, 4 Sep 2025 09:02:39 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  cc:content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=selector1; bh=
- /HQHcq75KSDwjLQ6Wrue1E+QtSSlND3P2363NI5NcdI=; b=NYRTBVNdJbitWRVr
- GYdzyBS1fGWGurWDU1NENrTizdniCBhPp+3eFkK80wQUnji+HZfVVDxsw/jcSfpm
- 98YDXBDP2Fpv/O1viMRWB5CBJqsL/uJ/fiatIEtIiX2aL1DNgKAFd4ATh7zjsDA4
- orP2sfbDZQZREnyVWdHOYvK0r6T/qiGVXir4soXAm0qJlWvWwvVhoLZDTv6wHOpl
- XV8aN/msl2ag0l9BSAUYNd+Gsh27eCu6rCdFNyiy8TBnGxpW6x6YCMNBC3Bw7Lm6
- LE7g5gvWWeXgo6ugv3ldcDVSe0ta+DeQ5XrIsROiXgUxidJTgzMR9W5wg0Bbsbxg
- p0sMuQ==
-Received: from du2pr03cu002.outbound.protection.outlook.com
- (mail-northeuropeazon11011007.outbound.protection.outlook.com [52.101.65.7])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48upe7m0nr-1
+ PTrHExTJLucYJ+VvmfJOGaHXMQftISp9pV+zRQZPJ/E=; b=eOJxY8sHJF1isEJD
+ IwzQQZGOL5qm6L6h2ds3e73fa+d2fCDpR/SMwZS6lc3+Ua7xlWUetMmGURbg9KTs
+ 09IBI+JaMdvCIh2zBFknGZbJP8TH6sw1ZdEvZpasBrcSZ5bciakkfaY+u4ShfEpl
+ svaX+jvDUDV6Z9YBf+S42vwE/Xa4+c/NQ/V9o7gbLfBqm1CpXqY6vSXyVsbYsyNB
+ Z1eBUgVCwHNTXi1iSdSHcNH40TzyCAg41wBnuQEcEyFjcl/ati1OWQ1LCZ47hrmD
+ iqlygHZlEaq3NmuQEmgCwnbAQjMmWzwLE5yD9amWv48qZLLCRXqqCuM22zINpEOv
+ 4CBcww==
+Received: from mrwpr03cu001.outbound.protection.outlook.com
+ (mail-francesouthazon11011026.outbound.protection.outlook.com
+ [40.107.130.26])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 48vc8m9hhd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 04 Sep 2025 09:00:05 +0200 (MEST)
+ Thu, 04 Sep 2025 09:02:39 +0200 (MEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N69MyPIL2HpeYn3G24k1HBi/tlQNZ8Wcx9QTYE7hMGtV9DJR8VH26EYUR41b9m1JSK4NvCGCqCMkkHkg1jc36TImWXFJBaYn+oC/skHpx3rWYXIr2sVo4aJ6yi85UAcwwgF8Kg5PgQoPnUPM5xjXl2o427Uj9POopen9E8M9k534NRjTWio0eitEEhbp34CnHfumcXodzCPA2iIIxvQiCOk5enD9USh3fz3out+WyhYv72mgcK345S/kyuzV42r2WKIueK7LTom8xOjWDFLdCz+X5VQGKoj0NkO8+VFM+0hnaKQza7j44E01R7ji6mc/dqa6I9Py8QdTzB9Fic7oSQ==
+ b=KftJtrA1Yqg7AQK/af5oCOs000N2kkcMRHq/KWsbvIqjETRZvd6awCjTlgQpJp7HjaEc4Iv4wWtLsMX66TTfRYmItApavla46zGuuYbldyeQ7ZE5AbB0CR9IXFnxBuGbcYGVkgAshuWAwZ7+DsiTq1FeMjJ7DayfINBrWN07VoheEy4kbXaHkvNbdrrccQSD7KdICIFiUIv8/CdhzvYLnx/noxM12QZ01gUjpHwil1t3VYqYDhnyEBZyyF0RJWAwqC4bvEBHVqgXTAT9VpcgcovGQjAp2En2k93uFXHbOqVO8TbXIpelzbnGwY/SSo1Gweu46UcoXJTHM1AlhKhfhg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/HQHcq75KSDwjLQ6Wrue1E+QtSSlND3P2363NI5NcdI=;
- b=gQ3ERImStR/m7ZReg6Rp8mqC8tizU7a8nswnwu/zcJ6jrMiLwBMWK6JqowIaPOjl7g/Y3z/z5cfwn+lFObL9ZHpHCBz0Ro9PkZjKTQZoTANyoibfDWMBDO6e/n7UOSmAUE5VCiB1IEi/Ca44Q3cxS+YSJDELJsmvbFWAke9uqoIIZOlTAoo0XkAX1fvr7//cYyXdzc37pClidUOW5+No+cqwPlAiJIzxe4RD6UWnIX+/5cOUf2E+0hK4JOkWHlGp9ELJ1LrbtMJ5dMqaTrCi1LcX/A/hgG1KEjMWLDdOOX+4ocqY0MR3FUSeogbjq6efVBx68FoQ3tcSSyaT3YZLng==
+ bh=PTrHExTJLucYJ+VvmfJOGaHXMQftISp9pV+zRQZPJ/E=;
+ b=NZmJhLwWC0tv4vLbWs065IZUqOcxY7cPyItsR9vchnPENkdLXGtNhRqE/y3sq59qQgx7mQDuz4Cdv9VbvMk186HM6u5Jtoic6NMEGpq+JOPSvQkcvUjKJ4O2IKtHATPkqk6t9HeRl8cutz5jq34kIzU2z3kUbNjdzn9xjqn56oi/XFSaaaknPUiwsV+iJv2VVKDA7pBuyfgmcRevRWc3Wmbb7gnv3fXRyv9lNXJ2LdmrEhZx2wxsVImBhX9hwX1RYbvdFDeSNzch/b5msWjZRjw677KNiWGtVAXkjN7EpyNP0SaQrLb6uU9vye51ND7hdRlDy9GnimuiNAQDkTyA2w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  164.130.1.44) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
@@ -60,18 +61,18 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=stmicroelectronics.onmicrosoft.com;
  s=selector2-stmicroelectronics-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/HQHcq75KSDwjLQ6Wrue1E+QtSSlND3P2363NI5NcdI=;
- b=UaXvcS5ckbZhWFz/j7xQzUpHkE8L9C6PPJn5vNbDFBmptT01pCtQavx7DZG2yqWi3nYN/MwHzHnUeugX42BDe2hYxlcmJ2IjxvFPa8V8dQX+FGwApyi2bdGk49WY9p9izzGC7LwQP3HroPhB4zPYOoVRBxEwY1u2epPpPKCiLqc=
-Received: from DU6P191CA0017.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:540::28)
- by DB4PR10MB7541.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3ce::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.21; Thu, 4 Sep
- 2025 07:00:03 +0000
-Received: from DB1PEPF000509E7.eurprd03.prod.outlook.com
- (2603:10a6:10:540:cafe::56) by DU6P191CA0017.outlook.office365.com
- (2603:10a6:10:540::28) with Microsoft SMTP Server (version=TLS1_3,
+ bh=PTrHExTJLucYJ+VvmfJOGaHXMQftISp9pV+zRQZPJ/E=;
+ b=K8mJ+jJo6QoEtx5erJBt2k6QcBDXmeyliy7vGQZJp3CUCfJu5IiLR4w/FL+abYamf/XVbg9KuB8mj/quKvhzhRL3JAhS5SQjO0hBNtzGCZok1h5u3up/5a8hBh3g0GTjnjdMrhDJUYdp44lVGlfoQ5kIP1PqSYCGADydKipMN2M=
+Received: from AS4P250CA0018.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:5e3::13)
+ by AS4PR10MB7943.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:4fa::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9052.29; Thu, 4 Sep
+ 2025 07:02:33 +0000
+Received: from AM3PEPF0000A791.eurprd04.prod.outlook.com
+ (2603:10a6:20b:5e3:cafe::c3) by AS4P250CA0018.outlook.office365.com
+ (2603:10a6:20b:5e3::13) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.18 via Frontend Transport; Thu,
- 4 Sep 2025 07:00:03 +0000
+ 4 Sep 2025 07:02:32 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.44)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
@@ -79,23 +80,22 @@ Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
  designate 164.130.1.44 as permitted sender) receiver=protection.outlook.com;
  client-ip=164.130.1.44; helo=smtpO365.st.com;
 Received: from smtpO365.st.com (164.130.1.44) by
- DB1PEPF000509E7.mail.protection.outlook.com (10.167.242.57) with Microsoft
+ AM3PEPF0000A791.mail.protection.outlook.com (10.167.16.120) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9094.14 via Frontend Transport; Thu, 4 Sep 2025 07:00:02 +0000
+ 15.20.9094.14 via Frontend Transport; Thu, 4 Sep 2025 07:02:32 +0000
 Received: from SHFDAG1NODE3.st.com (10.75.129.71) by smtpO365.st.com
  (10.250.44.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 4 Sep
- 2025 08:52:48 +0200
+ 2025 08:55:18 +0200
 Received: from [10.48.87.178] (10.48.87.178) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 4 Sep
- 2025 09:00:01 +0200
-Message-ID: <bd1f00f3-5221-4825-b793-5bf3682e4108@foss.st.com>
-Date: Thu, 4 Sep 2025 08:59:59 +0200
+ 2025 09:02:31 +0200
+Message-ID: <bbd82b57-cda7-4c09-b26d-c44b8031b3b7@foss.st.com>
+Date: Thu, 4 Sep 2025 09:02:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/7] ofnode: support panel-timings in
- ofnode_decode_display_timing
+Subject: Re: [PATCH v2 3/7] video: stm32: STM32 driver support for LVDS
 To: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, Tom Rini
  <trini@konsulko.com>, Kamil Lulko <kamil.lulko@gmail.com>, Patrice Chotard
  <patrice.chotard@foss.st.com>, Dillon Min <dillon.minfei@gmail.com>,
@@ -104,10 +104,10 @@ To: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>, Tom Rini
  <sumit.garg@kernel.org>, Philippe Cornu <philippe.cornu@foss.st.com>
 CC: <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20250903-master-v2-0-5cdf73bff42c@foss.st.com>
- <20250903-master-v2-1-5cdf73bff42c@foss.st.com>
+ <20250903-master-v2-3-5cdf73bff42c@foss.st.com>
 Content-Language: en-US
 From: Yannick FERTRE <yannick.fertre@foss.st.com>
-In-Reply-To: <20250903-master-v2-1-5cdf73bff42c@foss.st.com>
+In-Reply-To: <20250903-master-v2-3-5cdf73bff42c@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.48.87.178]
@@ -115,87 +115,87 @@ X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509E7:EE_|DB4PR10MB7541:EE_
-X-MS-Office365-Filtering-Correlation-Id: 06c26793-42e4-4add-b9c6-08ddeb80abe1
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A791:EE_|AS4PR10MB7943:EE_
+X-MS-Office365-Filtering-Correlation-Id: a3965b3f-dbb5-4d23-24ed-08ddeb810546
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|82310400026|1800799024|36860700013|376014|921020; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?YnFjcW1kWWY1K214ZWVDWFNTenQ0UGo0ZjA5bmRPR0UrVjQ5ckNsSG9hSWMw?=
- =?utf-8?B?TlpxQVhqK28vMGZxYWxqQmVlOVgvM3JaMFMydTlxWDZBZmNoSExpYXdpTjF6?=
- =?utf-8?B?YVd6K0NHYW9rZ0Z3RjRVQUMzZTZRcE96MUlxd3o1QXNlYTFpOEhHRGYxV2hG?=
- =?utf-8?B?dVROQTNBV2x6TGlybUpmb01mTkhKMzlNaXlNZnAxY1FqSWdqT2wvazg1NGNJ?=
- =?utf-8?B?OCtRaFBVWWJMQ0c0TTRnYzNYdkVhVjVsWHNDMzRBRHlJeTUrU2p6THpxTi9N?=
- =?utf-8?B?K0hVRUJVcGxZNXhSNFFENUh5eTdLU1dpZlJyWkx1WmEzcjg3NkhUNE1xQnJQ?=
- =?utf-8?B?VEZnUlBwOHZDODA0Y2V3MGZVZHBLZW82bmdPZG0xaE5qZ0ZtNktab1o3OU9t?=
- =?utf-8?B?NHdkL2tBUjAxdWtPTUdxVnBXTzhNRnJDeEQvR1o1U1ZmSGp3czUxVFVTZEk4?=
- =?utf-8?B?citRejhLNTFoOFRzRURxNmRNVjFXKytWVGZxYTFLazBQZEVneDNuYWVsQzZH?=
- =?utf-8?B?V3JMcDIxU2ovRzB1emtjTWF0bHBwSFJzSkNscVRNTXZINFJrVG1TVzZtSUZq?=
- =?utf-8?B?YTI3eUVWeXFsbG4za28rUnFCb0llLytFTUZSS3FsNDAvVDB3R0hqUWFpTmNE?=
- =?utf-8?B?M3JtZHRuM3BqQW9NN25haDcvaDArWFN1ZzREZ0NEL1lHTlNrQ3I5N1FTM04v?=
- =?utf-8?B?RkJ4SUF1bVRmalVyRlp5cFlTb2ZqaTFqQTdjTjVNQXU4blZTOUwrTnJleE9n?=
- =?utf-8?B?aExQNzc1WWl3TWpKNnRHOWdoR2RZM1gwZ0VyMURtcVRkVGFCZVRrTWNLcmpJ?=
- =?utf-8?B?c1BYYmF5OThKNEtMOHVHUlJTNVhDV244MUZJOFRGNThuV1IxekduZUZsWFhy?=
- =?utf-8?B?V0JUMGduKzlrQ0hlSkY2VU9xS3hZbWhwemhYMVpoQ25hQnBPcUtUbHBaS21R?=
- =?utf-8?B?OGVMQ0g0bTRNK05tSXRoMHB1eHV4ZFJjQ0JmcG9WeHhuVmlCVEU5dzFxb291?=
- =?utf-8?B?eUxWbjRtcTNJRHBhNjZKSC9oKy9uY0NJL1pLb0NvbVpnRFpwV2tCdHBidkdo?=
- =?utf-8?B?elZmaEV1bUpySi8rRUNzREdPUzIwRElaeXB6eVVWeEtOMGRwZUhoL2tYNE1h?=
- =?utf-8?B?STcveVJZMjhBV0cyY2xreFdGT3ZYelF1R2U5ajlPUEJZeW1CTnIreTBiV2Jj?=
- =?utf-8?B?L3czOTY3b3lDVVR4dmV1cE8zSXZOaWJmQjZRVFJma0dIZ0JFeUNUZGhSL3lB?=
- =?utf-8?B?N3Jra0FDYUU2UHBzQ0crOFIvUS9uT1RjRmNKSUNyMVVuL2k5QnFQWm94NFNm?=
- =?utf-8?B?NzZ2RmFwRVBSOWxNTTVJR3RDcGdqNUh5V2RxcHRpSy8vTUp5M0Vid2xJcjFi?=
- =?utf-8?B?Q09CYlRHcFVmQytTYk5kZFlSaVZxSW84TXlKK0M0T0lyREI3MkNUZmpTVWRj?=
- =?utf-8?B?OWdEQzhzdzlvTlJ6MVNDdzFqMERIWmdMTWNaMXBMektwb2g5N3cvNWtRMTFh?=
- =?utf-8?B?YUlnUmN4cUZkVFJvMDFYNkxuTW1VM3diUEhyMFkvQzkzWk94dnkzZkJDUlVl?=
- =?utf-8?B?dnBmYmh4YkNHV3lNRUU2ZkVvZFZiM0FzcEdjRmpxdVFUTFQ3OW1XS1hDem8r?=
- =?utf-8?B?UE9STVNaU2dVWG1vRkppbEwyQkZ4dTJoZFZnTmpMN1JmMXpDOXJ0cy9yTm55?=
- =?utf-8?B?M0NwTm1NUGpKdGpQSDdlZG5naXIxQzZRd3lNNzRLSmRuODQ1TmV1NVM2UEpC?=
- =?utf-8?B?T1FCbTJXVmc0QnNhcjg4YkxFcjRnWW9vc1FkRElnbSttb2w2QjhCd0NCcWJl?=
- =?utf-8?B?RzhSME0rbmdxdnAzNksySk4xSTV4R1dOblZ1Sy9jRzQrRExZdkQzamV4a0E2?=
- =?utf-8?B?NTA0UHZ2T1Z6VDcvcXBVejd3RVVZNENtS3JhbDJuV2RGSlVuMkFqTzJPT3Iy?=
- =?utf-8?B?bTNRRHA5SXRmMUZuMEMveWI4cmswcTROb1hQQ3N6ZjhET2FqRWYydEZ5ZkNx?=
- =?utf-8?B?RDZoWW9wK00wY2kvcG5Tb2hyeXd3VzVwbnl3cXBkOUQxMEtMTzJyUDA3RGhZ?=
- =?utf-8?B?MXlLNFFwQnQ0NnBJSFl5cUNMNUYwR3k3RWhXUT09?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MzFhOEcydkFZR2RVU3pMVzFGTWlHenRvZzYrU3BRQitQeTVxREhKSm5SbHlF?=
+ =?utf-8?B?M241dTZxVkJySE1LL0RLOFpsUlNFRUxkc21PKyszckRldVB6Y04ydW1wQjlB?=
+ =?utf-8?B?TTRpaTN4N3ZMeGh5SENtMDFEQmNGRXNtSXQxeTg1Q2E1VE5iMWphQksrWVhH?=
+ =?utf-8?B?ZjhlNFExK0kxMUFGMElidlhzNCsxV0ZuL0J1V2hkWEtqVTJWL0VhbFJ4bytk?=
+ =?utf-8?B?VnhHZzEvT0hNREVBM3dlM3Vad01MSzdab0VYT3lLVGdjWUVVWWFzWEhUVUdY?=
+ =?utf-8?B?QVFpRy96Q3E3QTNtZk9NcE9ONmh2YVdoSHpUdGRGZkk4NnJ0Z2laMTFIbkR5?=
+ =?utf-8?B?NHpnS0hMam1wcWp2dFo0TTBjODRzQnVjWDREeDRmM3JCQ1ZHb1ArQnZjZmNP?=
+ =?utf-8?B?NnVnRlQwN1VOWUdEcVdGL2Fzb29OeWcxQlgvbzkrUWY1S2JDdUNmQzNaWVYx?=
+ =?utf-8?B?YUQzWUhRRTltb3p2TUorN1dpN0ZnT0lWZUF6MlY2SGtWWkxnMHVMZkNmK1hr?=
+ =?utf-8?B?cGlSWnJaWGJqcFJJeEZoQ1g4ZVkvVzc5dzVnNUQxcGU5MnNRdjNDS0lGTkpa?=
+ =?utf-8?B?aE5kTmtFU0JLWjNuMGcxd0c5T1JxRFBHQkVlQ2hIeWtoS0JpUTAvOEJydTA1?=
+ =?utf-8?B?VVA3VFZuTlFtb3dsVnl6MnRQM29iN2dVTWhtRGJUbGZzRGViWUNQTDgzek5Q?=
+ =?utf-8?B?OEZ6ZzN6M1l2UVFYZUoyOWh0ZURaa2UrY2wwY1NUV2pVM2cvZnV3QmRSY3RG?=
+ =?utf-8?B?Mnp2aE0rTnJ3U2J3VnhGMFRCRjNIbjZUQytGVXVzM09Cd0N6OWU1TEV0N2s5?=
+ =?utf-8?B?cDZUWkE5QTNSOWhTRHA2ZitSdDNwTzRLQkk3SlVDOVJKRmVFTkNOTDBOV08v?=
+ =?utf-8?B?cjZFdE1OS0dCdWY3SVF0OUhUdWwvRHhHb1BpTm9kYTdVdlZ1NTJ1Z1pWU3lQ?=
+ =?utf-8?B?eDNpeTlVY1ZQOUx4WEMyS0xSYTBZM1I2OGl5S1FJdXJFQWJZTlhjVnJPWXJw?=
+ =?utf-8?B?cmhwVitOM2dwWU1hMzRWSnpjc3M4YjJ4ZGI1M2JjaG80QkQ5V2JrRDlQc0p2?=
+ =?utf-8?B?MTBRVUkvbHllVHJJYnpjOUJnL2RjMlQyZ2xsdjlsSFZpc0pjRXdmdmxraEdy?=
+ =?utf-8?B?eVE3TW85WWdJMC9zb0FkVjNBbFlLcFo2N0FjRDRadVA3aHhSWmZKRlh6L3VL?=
+ =?utf-8?B?d3Jobmt2Tzg5SEFkRU4xK24yTjZTdVlsR0Rqbk9tK2d6NUdhMTRtd0E2bTFj?=
+ =?utf-8?B?U0VOVnhxbmxKdExqamRlOTcwUVA0eEN6aWorYnVNNEljV3o3elJML3o4dHhR?=
+ =?utf-8?B?bk5aRTZpL1FVb1ZydGR6VFUvbWluWm1DUkdFL0lHMm5vUDlCY2NuVy83ZGVN?=
+ =?utf-8?B?UGVLUXlkd2VBTUh2bTdTMVZ0cTIybWNQdTl5bUtuMnhNWjA0bWkzN3RpNXpF?=
+ =?utf-8?B?QnVpVUZpdFBvb3ZiTjNmanNJZGFReXdFNVExSDd1WUJ4a0c4bkR4bDJlNTMz?=
+ =?utf-8?B?RmdjcGIrTUZvZnJJN2VyUU1lZ2dzTWhqQWhodlJJemQ4aVhlazFjRnc1UmlE?=
+ =?utf-8?B?aGNoM1QwK05lV0FISFVKcGNTak96eTU2NVdkV20remlCUDFiOGd5ZVNHNW9T?=
+ =?utf-8?B?eGtNS2ZTbGs1bVBMeDRqR2ZCTHMvNTkzRVVFd2ZiT01QVWlGbG1nQUdGVklm?=
+ =?utf-8?B?NmI1S29JVC9hS1VRbW1qZHZJd2tWVlVTZHhiU1BrR05PWmRIMWFsMUpISjFT?=
+ =?utf-8?B?ZzNvTlNPeE5RMk9pOWQzOGZHVnpOenlWeFcyOG1BWE9pV3Q0NWpIdVpOYmV6?=
+ =?utf-8?B?dit2cm1uUkR3Yitpd1Vvbm10bFA0KzlSa1ArMVN4bGV5QnZqTVZWU3FEY2gw?=
+ =?utf-8?B?NjdvbHJRaVVhb1dUQkMyaWJTOFpFcVZaUmp5SXJidlZHQTJRVHlLK1NTSnRF?=
+ =?utf-8?B?dnE3MkVZTEVYeXhQRVYxakZGTmF4NTdlTFdGanVpNFcrZU9WUU9PUVh5VFM1?=
+ =?utf-8?B?UnVLSmlMWnc2MmVvNnNHTmhueS9xS3REU09lbklsMVFEUjBNUG1jOU5ZT0Zp?=
+ =?utf-8?B?WCs3eGVZaVlGT0tDY0pkQXBxVEFMdHdUS0g3QT09?=
 X-Forefront-Antispam-Report: CIP:164.130.1.44; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014)(921020); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 07:00:02.7241 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06c26793-42e4-4add-b9c6-08ddeb80abe1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Sep 2025 07:02:32.7427 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a3965b3f-dbb5-4d23-24ed-08ddeb810546
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.44];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509E7.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A791.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR10MB7541
-X-Proofpoint-GUID: zChTg-Sy_-Y9J0Ni1P9R3dt6u4R_TkZ0
-X-Proofpoint-ORIG-GUID: zChTg-Sy_-Y9J0Ni1P9R3dt6u4R_TkZ0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODI5MDIyMCBTYWx0ZWRfXx2HZMOWX8zRT
- 4ysuiOln7PbYTwyk/PoEmszGfDGglgz3+DyBCWMWKu2SM3ylroiOmqF7oEFlcdrb0sHSN1IJaVc
- 3G/k8f1CtLQRCC6uADJzYyx33TD3X9pYWlLXrA25CmRNNRUOARvKIAmLKqGj3tL84TuB0I/Obql
- Y6nBKyPv6W4SoSBJqHb4S52TffGknT4FXSCWYucGa75v1oRRezYD7iOQDAPbbIxxvQrWR39h1Ok
- 1AAGplZ22fe9BfyuQoIdo+EZer21Bc/DLQmwQ8vlYlZZUc5gRUq3fC/0YKC3CySudTvAXH5OAaX
- HRJR9QQo91Y4n7pTIRIAJKLNgqo+iwuddTdem1Z9BsED7LOTXVmKTR59I6/ZurO6yZpebKAd/dR
- kcT2J3ao
-X-Authority-Analysis: v=2.4 cv=Vq0jA/2n c=1 sm=1 tr=0 ts=68b938f5 cx=c_pps
- a=AeQ0znSE+p+lBnVhk+Jsqw==:117 a=Tm9wYGWyy1fMlzdxM1lUeQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR10MB7943
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwODMxMDAwNyBTYWx0ZWRfXyav0ov9ZnWFr
+ fWoP25uevkljxgvRwJpsn8Na38bSb6rbHxj2ab9fNmmfmorX9O6hNhsBrpbYjoqnr9Rr/Xc+9HY
+ OEyxLDIt8W5wjpTtcXCY8YNKEwVIVBg2z+exrrkVlyVvs6wCQ/x2qdEtTpxMGPfZZg5HVo89Yve
+ 98nZ7pHpBv3C/P5iaVGZc1bD+kwBl9TdumdbGu4I3B44FXGzegqQxF5xSFEzU9HVs2V49CliCqf
+ m0802bT30xgGgBU9VSBEs97Ap3LrVRXOn+LIynIE/Pk/E42wzm0cfQdoWyfIDD1VhiE3VyODgjm
+ rDCTtWw3pXawyvUBjdKt5TOdOO72/OH1drA1JAP22U9nglX2r4tJydNEo6/07ScrQ8ovIO2VXNd
+ LEccb1yM
+X-Proofpoint-GUID: inmqUNIxl-Dal_WJtd02BYNNTF58dHq7
+X-Authority-Analysis: v=2.4 cv=ZeMdNtVA c=1 sm=1 tr=0 ts=68b9398f cx=c_pps
+ a=eE+qLHXDGUwwSs2WNjMcQQ==:117 a=Tm9wYGWyy1fMlzdxM1lUeQ==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=h8e1o3o8w34MuCiiGQrqVE4VwXA=:19
  a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
  a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=P2A4Zi-lJHsA:10 a=IkcTkHD0fZMA:10
  a=yJojWOMRYYMA:10 a=s63m1ICgrNkA:10 a=FUbXzq8tPBIA:10 a=8b9GpE9nAAAA:8
- a=5-UEqyCUgD__VgFuBE0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=gzjdqEZbSzeJtWtnvPQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
  a=T3LWEMljR5ZiDmsYVIUa:22
+X-Proofpoint-ORIG-GUID: inmqUNIxl-Dal_WJtd02BYNNTF58dHq7
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-04_02,2025-08-28_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- impostorscore=0 spamscore=0 suspectscore=0 adultscore=0 clxscore=1011
- bulkscore=0 phishscore=0 classifier=typeunknown authscore=0 authtc=
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ priorityscore=1501
+ adultscore=0 clxscore=1015 impostorscore=0 bulkscore=0 phishscore=0
+ malwarescore=0 suspectscore=0 classifier=typeunknown authscore=0 authtc=
  authcc= route=outbound adjust=0 reason=mlx scancount=1
- engine=8.19.0-2507300000 definitions=main-2508290220
+ engine=8.19.0-2507300000 definitions=main-2508310007
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -219,47 +219,779 @@ Thanks for the patch.
 Acked-by: Yannick Fertre<yannick.fertre@foss.st.com>
 
 Le 03/09/2025 à 14:25, Raphael Gallais-Pou a écrit :
-> The "Display Timings" in panel-common.yaml can be provided by 2 properties
-> - panel-timing: when display panels are restricted to a single resolution
->                  the "panel-timing" node expresses the required timings.
-> - display-timings: several resolutions with different timings are supported
->                     with several timing subnode of "display-timings" node
+> The LVDS Display Interface Transmitter handles the LVDS protocol:
+> it maps the pixels received from the upstream Pixel-DMA (LTDC)
+> onto the LVDS PHY.
 >
-> This patch update the parsing function to handle this 2 possibility
-> when index = 0.
+> The LVDS controller driver supports the following high-level features:
+>          • FDP-Link-I and OpenLDI (v0.95) protocols
+>          • Single-Link or Dual-Link operation
+>          • Single-Display or Double-Display (with the same content
+>            duplicated on both)
+>          • Flexible Bit-Mapping, including JEIDA and VESA
+>          • RGB888 or RGB666 output
+>          • Synchronous design, with one input pixel per clock cycle
+>          • No resolution limitation.
 >
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > Signed-off-by: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
 > ---
->   drivers/core/ofnode.c | 17 ++++++++++-------
->   1 file changed, 10 insertions(+), 7 deletions(-)
+>   MAINTAINERS                      |   1 +
+>   doc/board/st/st-dt.rst           |   1 +
+>   drivers/video/stm32/Kconfig      |   9 +
+>   drivers/video/stm32/Makefile     |   1 +
+>   drivers/video/stm32/stm32_lvds.c | 693 +++++++++++++++++++++++++++++++++++++++
+>   5 files changed, 705 insertions(+)
 >
-> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> index e040e3f2806ffe74c58dcd82f36307351acd5a99..5a721b46e5a3214e7bd437739776362c2d22a3c9 100644
-> --- a/drivers/core/ofnode.c
-> +++ b/drivers/core/ofnode.c
-> @@ -1221,13 +1221,16 @@ int ofnode_decode_display_timing(ofnode parent, int index,
->   	int ret = 0;
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 3fb163aa1db1dba249e60b40ab3e785db4fde5d3..604ba4ca04c1079b14cd8f4c1fff4c12da0e278d 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -728,6 +728,7 @@ F:	drivers/serial/serial_stm32.*
+>   F:	drivers/spi/stm32_qspi.c
+>   F:	drivers/spi/stm32_spi.c
+>   F:	drivers/video/stm32/stm32_ltdc.c
+> +F:	drivers/video/stm32/stm32_lvds.c
+>   F:	drivers/watchdog/stm32mp_wdt.c
+>   F:	include/dt-bindings/clock/stm32fx-clock.h
+>   F:	include/dt-bindings/clock/stm32mp*
+> diff --git a/doc/board/st/st-dt.rst b/doc/board/st/st-dt.rst
+> index 2a285c81807ee26924948d8c2497f11dfe45b6e6..28cada97e72da711408a1aaaa928ad3faa51162e 100644
+> --- a/doc/board/st/st-dt.rst
+> +++ b/doc/board/st/st-dt.rst
+> @@ -25,6 +25,7 @@ kernel binding directory = Documentation/devicetree/bindings/
+>   * display
+>   	- display/st,stm32-dsi.yaml
+>   	- display/st,stm32-ltdc.yaml
+> +        - display/st,stm32mp25-lvds.yaml
+>   * gpio
+>   	- pinctrl/st,stm32-pinctrl.yaml
+>   * hwlock
+> diff --git a/drivers/video/stm32/Kconfig b/drivers/video/stm32/Kconfig
+> index c354c402c288b4c004bd2b5cc74a4d00beef2773..4cb8a841caf51aaba5115b9fcddb967f73a3d9b4 100644
+> --- a/drivers/video/stm32/Kconfig
+> +++ b/drivers/video/stm32/Kconfig
+> @@ -23,6 +23,15 @@ config VIDEO_STM32_DSI
+>   	  This option enables support DSI internal bridge which can be used on
+>   	  devices which have DSI devices connected.
 >   
->   	timings = ofnode_find_subnode(parent, "display-timings");
-> -	if (!ofnode_valid(timings))
-> -		return -EINVAL;
-> -
-> -	i = 0;
-> -	ofnode_for_each_subnode(node, timings) {
-> -		if (i++ == index)
-> -			break;
-> +	if (ofnode_valid(timings)) {
-> +		i = 0;
-> +		ofnode_for_each_subnode(node, timings) {
-> +			if (i++ == index)
-> +				break;
+> +config VIDEO_STM32_LVDS
+> +	bool "Enable STM32 LVDS video support"
+> +	depends on VIDEO_STM32
+> +	select VIDEO_BRIDGE
+> +	select VIDEO_DW_MIPI_DSI
+> +	help
+> +	  This enables Low Voltage Differential Signaling (LVDS) display
+> +	  support.
+> +
+>   config VIDEO_STM32_MAX_XRES
+>   	int "Maximum horizontal resolution (for memory allocation purposes)"
+>   	depends on VIDEO_STM32
+> diff --git a/drivers/video/stm32/Makefile b/drivers/video/stm32/Makefile
+> index f8b42d1a4d126a31aa11ce820e829b133ca3bb2d..059d9000c1d7762d06bff36d5408143a34848227 100644
+> --- a/drivers/video/stm32/Makefile
+> +++ b/drivers/video/stm32/Makefile
+> @@ -7,3 +7,4 @@
+>   
+>   obj-${CONFIG_VIDEO_STM32} = stm32_ltdc.o
+>   obj-${CONFIG_VIDEO_STM32_DSI} += stm32_dsi.o
+> +obj-${CONFIG_VIDEO_STM32_LVDS} += stm32_lvds.o
+> diff --git a/drivers/video/stm32/stm32_lvds.c b/drivers/video/stm32/stm32_lvds.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..7e12d4f6c15b3460326ea99324c701a18309f16e
+> --- /dev/null
+> +++ b/drivers/video/stm32/stm32_lvds.c
+> @@ -0,0 +1,693 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Copyright (C) 2025 STMicroelectronics - All Rights Reserved
+> + * Author(s): Raphaël Gallais-Pou <raphael.gallais-pou@foss.st.com> for STMicroelectronics.
+> + *
+> + * This Low Voltage Differential Signal controller driver is based on the Linux Kernel driver from
+> + * drivers/gpu/drm/stm/ltdc.c
+> + */
+> +
+> +#define LOG_CATEGORY UCLASS_VIDEO_BRIDGE
+> +
+> +#include <clk.h>
+> +#include <dm.h>
+> +#include <log.h>
+> +#include <media_bus_format.h>
+> +#include <panel.h>
+> +#include <reset.h>
+> +#include <video.h>
+> +#include <video_bridge.h>
+> +#include <asm/io.h>
+> +#include <dm/device_compat.h>
+> +#include <dm/ofnode.h>
+> +#include <linux/iopoll.h>
+> +
+> +/* LVDS Host registers */
+> +#define LVDS_CR		0x0000  /* configuration register */
+> +#define LVDS_DMLCR0	0x0004  /* data mapping lsb configuration register 0	*/
+> +#define LVDS_DMMCR0	0x0008  /* data mapping msb configuration register 0	*/
+> +#define LVDS_DMLCR1	0x000C  /* data mapping lsb configuration register 1	*/
+> +#define LVDS_DMMCR1	0x0010  /* data mapping msb configuration register 1	*/
+> +#define LVDS_DMLCR2	0x0014  /* data mapping lsb configuration register 2	*/
+> +#define LVDS_DMMCR2	0x0018  /* data mapping msb configuration register 2	*/
+> +#define LVDS_DMLCR3	0x001C  /* data mapping lsb configuration register 3	*/
+> +#define LVDS_DMMCR3	0x0020  /* data mapping msb configuration register 3	*/
+> +#define LVDS_DMLCR4	0x0024  /* data mapping lsb configuration register 4	*/
+> +#define LVDS_DMMCR4	0x0028  /* data mapping msb configuration register 4	*/
+> +#define LVDS_DMLCR(id)	(LVDS_DMLCR0 + 8U * (id))
+> +#define LVDS_DMMCR(id)	(LVDS_DMMCR0 + 8U * (id))
+> +#define LVDS_CDL1CR	0x002C  /* channel distrib link 1 configuration register	*/
+> +#define LVDS_CDL2CR	0x0030  /* channel distrib link 2 configuration register	*/
+> +
+> +#define CDL1CR_DEFAULT	0x4321
+> +#define CDL2CR_DEFAULT	0x59876
+> +
+> +/* LVDS Host registers */
+> +#define LVDS_PHY_MASTER	0x0
+> +#define LVDS_PHY_SLAVE	0x100
+> +
+> +/* phy parameter can only be one of those two above */
+> +#define LVDS_PXGCR(phy)		((phy) + 0x1000)   /* Global Control Register	*/
+> +#define LVDS_PXCMCR1(phy)	((phy) + 0x100C)   /* Current Mode Control Register 1 */
+> +#define LVDS_PXCMCR2(phy)	((phy) + 0x1010)  /* Current Mode Control Register 2 */
+> +#define LVDS_PXSCR(phy)		((phy) + 0x1020)  /* Serial Control Register	*/
+> +#define LVDS_PXBCR1(phy)	((phy) + 0x102C)  /* Bias Control Register 1	*/
+> +#define LVDS_PXBCR2(phy)	((phy) + 0x1030)  /* Bias Control Register 2	*/
+> +#define LVDS_PXBCR3(phy)	((phy) + 0x1034)  /* Bias Control Register 3	*/
+> +#define LVDS_PXMPLCR(phy)	((phy) + 0x1064)  /* Monitor PLL Lock Control Register */
+> +#define LVDS_PXDCR(phy)		((phy) + 0x1084)  /* Debug Control Register	*/
+> +#define LVDS_PXSSR1(phy)	((phy) + 0x1088)  /* Spare Status Register 1	*/
+> +#define LVDS_PXCFGCR(phy)	((phy) + 0x10A0)  /* Configuration Control Register */
+> +#define LVDS_PXPLLCR1(phy)	((phy) + 0x10C0)  /* PLL_MODE 1 Control Register	*/
+> +#define LVDS_PXPLLCR2(phy)	((phy) + 0x10C4)  /* PLL_MODE 2 Control Register	*/
+> +#define LVDS_PXPLLSR(phy)	((phy) + 0x10C8)  /* PLL Status Register	*/
+> +#define LVDS_PXPLLSDCR1(phy)	((phy) + 0x10CC)  /* PLL_SD_1 Control Register	*/
+> +#define LVDS_PXPLLSDCR2(phy)	((phy) + 0x10D0)  /* PLL_SD_2 Control Register	*/
+> +#define LVDS_PXPLLTWGCR1(phy)	((phy) + 0x10D4)  /* PLL_TWG_1 Control Register	*/
+> +#define LVDS_PXPLLTWGCR2(phy)	((phy) + 0x10D8)  /* PLL_TWG_2 Control Register	*/
+> +#define LVDS_PXPLLCPCR(phy)	((phy) + 0x10E0)  /* PLL_CP Control Register	*/
+> +#define LVDS_PXPLLTESTCR(phy)	((phy) + 0x10E8)  /* PLL_TEST Control Register	*/
+> +
+> +/* LVDS Wrapper registers */
+> +#define LVDS_WCLKCR	0x11B0  /* Wrapper clock control register */
+> +#define LVDS_HWCFGR	0x1FF0  /* HW configuration register	*/
+> +#define LVDS_VERR	0x1FF4  /* Version register	*/
+> +#define LVDS_IPIDR	0x1FF8  /* Identification register	*/
+> +#define LVDS_SIDR	0x1FFC  /* Size Identification register	*/
+> +
+> +#define CR_LVDSEN	BIT(0)  /* LVDS PHY Enable */
+> +#define CR_HSPOL	BIT(1)  /* HS Polarity (horizontal sync) */
+> +#define CR_VSPOL	BIT(2)  /* VS Polarity (vertical sync) */
+> +#define CR_DEPOL	BIT(3)  /* DE Polarity (data enable) */
+> +#define CR_CI		BIT(4)  /* Control Internal (software controlled bit) */
+> +#define CR_LKMOD	BIT(5)  /* Link Mode, for both Links */
+> +#define CR_LKPHA	BIT(6)  /* Link Phase, for both Links */
+> +#define CR_LK1POL	GENMASK(20, 16)  /* Link-1 output Polarity */
+> +#define CR_LK2POL	GENMASK(25, 21)  /* Link-2 output Polarity */
+> +
+> +#define DMMCRX_MAP0	GENMASK(4, 0)
+> +#define DMMCRX_MAP1	GENMASK(9, 5)
+> +#define DMMCRX_MAP2	GENMASK(14, 10)
+> +#define DMMCRX_MAP3	GENMASK(19, 15)
+> +#define DMLCRX_MAP4	GENMASK(4, 0)
+> +#define DMLCRX_MAP5	GENMASK(9, 5)
+> +#define DMLCRX_MAP6	GENMASK(14, 10)
+> +
+> +#define CDLCRX_DISTR0	GENMASK(3, 0)
+> +#define CDLCRX_DISTR1	GENMASK(7, 4)
+> +#define CDLCRX_DISTR2	GENMASK(11, 8)
+> +#define CDLCRX_DISTR3	GENMASK(15, 12)
+> +#define CDLCRX_DISTR4	GENMASK(19, 16)
+> +
+> +#define FREF_INDEX	0
+> +#define NDIV_INDEX	1
+> +#define FPFD_INDEX	2
+> +#define MDIV_INDEX	3
+> +#define FVCO_INDEX	4
+> +#define BDIV_INDEX	5
+> +#define FBIT_INDEX	6
+> +#define FLS_INDEX	7
+> +#define FDP_INDEX	8
+> +
+> +#define PXGCR_BIT_CLK_OUT	BIT(0)
+> +#define PXGCR_LS_CLK_OUT	BIT(4)
+> +#define PXGCR_DP_CLK_OUT	BIT(8)
+> +#define PXGCR_RSTZ		BIT(24)
+> +#define PXGCR_DIV_RSTN		BIT(25)
+> +
+> +#define PXCMCR1_CM_EN_DL	(BIT(28) | BIT(20) | BIT(12) | BIT(4))
+> +#define PXCMCR2_CM_EN_DL4	BIT(4)
+> +#define PXSCR_SER_DATA_OK	BIT(16)
+> +#define PXBCR1_EN_BIAS_DL	(BIT(16) | BIT(12) | BIT(8) | BIT(4) | BIT(0))
+> +#define PXBCR2_BIAS_EN		BIT(28)
+> +#define PXBCR3_VM_EN_DL		(BIT(16) | BIT(12) | BIT(8) | BIT(4) | BIT(0))
+> +#define PXDCR_POWER_OK		BIT(12)
+> +#define PXCFGCR_EN_DIG_DL	GENMASK(4, 0)
+> +
+> +#define PXPLLCR1_PLL_EN		BIT(0)
+> +#define PxPLLCR1_SD_EN		BIT(1)
+> +#define PXPLLCR1_TWG_EN		BIT(2)
+> +#define PXPLLCR1_PLL_DIVIDERS_EN	BIT(8)
+> +#define PXPLLCR2_NDIV		GENMASK(25, 16)
+> +#define PXPLLCR2_BDIV		GENMASK(9, 0)
+> +#define PXPLLSR_PLL_LOCK	BIT(0)
+> +#define PXPLLSDCR1_MDIV		GENMASK(9, 0)
+> +#define PXPLLCPCR_CPCTRL_DEFAULT	0x1
+> +#define PXPLLTESTCR_PLL_TEST_CLK_EN	BIT(0)
+> +#define PXPLLTESTCR_PLL_TDIV_EN		BIT(8)
+> +#define PXPLLTESTCR_TDIV	GENMASK(25, 16)
+> +#define PXPLLTESTCR_TDIV_VALUE	70
+> +
+> +#define WCLKCR_SLV_CLKPIX_SEL	BIT(0)
+> +#define WCLKCR_SRCSEL		BIT(8)
+> +
+> +/* Sleep & timeout for pll lock/unlock */
+> +#define SLEEP_US	1000
+> +#define TIMEOUT_US	20000000
+> +
+> +#define PHY_SLV_OFS	0x100
+> +
+> +/* PLL parameters */
+> +#define NDIV_MIN	2
+> +#define NDIV_MAX	6
+> +#define BDIV_MIN	2
+> +#define BDIV_MAX	6
+> +#define MDIV_MIN	1
+> +#define MDIV_MAX	1023
+> +
+> +struct stm32_lvds_plat {
+> +	void __iomem *base;
+> +	struct udevice *panel;
+> +	struct reset_ctl rst;
+> +	struct clk pclk;
+> +	struct clk refclk;
+> +};
+> +
+> +struct stm32_lvds_priv {
+> +	struct display_timing timings;
+> +	u32 refclk_rate;
+> +	int dual_link;
+> +	int bus_format;
+> +};
+> +
+> +/*
+> + * enum lvds_pixels_order - Pixel order of an LVDS connection
+> + * @LVDS_DUAL_LINK_EVEN_ODD_PIXELS: Even pixels are expected to be generated
+> + *    from the first port, odd pixels from the second port
+> + * @LVDS_DUAL_LINK_ODD_EVEN_PIXELS: Odd pixels are expected to be generated
+> + *    from the first port, even pixels from the second port
+> + */
+> +enum lvds_pixels_order {
+> +	LVDS_DUAL_LINK_EVEN_ODD_PIXELS = BIT(0),
+> +	LVDS_DUAL_LINK_ODD_EVEN_PIXELS = BIT(1),
+> +};
+> +
+> +enum lvds_pixel {
+> +	PIX_R_0		= 0x00,
+> +	PIX_R_1		= 0x01,
+> +	PIX_R_2		= 0x02,
+> +	PIX_R_3		= 0x03,
+> +	PIX_R_4		= 0x04,
+> +	PIX_R_5		= 0x05,
+> +	PIX_R_6		= 0x06,
+> +	PIX_R_7		= 0x07,
+> +	PIX_G_0		= 0x08,
+> +	PIX_G_1		= 0x09,
+> +	PIX_G_2		= 0x0A,
+> +	PIX_G_3		= 0x0B,
+> +	PIX_G_4		= 0x0C,
+> +	PIX_G_5		= 0x0D,
+> +	PIX_G_6		= 0x0E,
+> +	PIX_G_7		= 0x0F,
+> +	PIX_B_0		= 0x10,
+> +	PIX_B_1		= 0x11,
+> +	PIX_B_2		= 0x12,
+> +	PIX_B_3		= 0x13,
+> +	PIX_B_4		= 0x14,
+> +	PIX_B_5		= 0x15,
+> +	PIX_B_6		= 0x16,
+> +	PIX_B_7		= 0x17,
+> +	PIX_H_S		= 0x18,
+> +	PIX_V_S		= 0x19,
+> +	PIX_D_E		= 0x1A,
+> +	PIX_C_E		= 0x1B,
+> +	PIX_C_I		= 0x1C,
+> +	PIX_TOG		= 0x1D,
+> +	PIX_ONE		= 0x1E,
+> +	PIX_ZER		= 0x1F,
+> +};
+> +
+> +/*
+> + * Expected JEIDA-RGB888 data to be sent in LSB format
+> + *	    bit6 ............................bit0
+> + */
+> +const enum lvds_pixel lvds_bitmap_jeida_rgb888[5][7] = {
+> +	{ PIX_ONE, PIX_ONE, PIX_ZER, PIX_ZER, PIX_ZER, PIX_ONE, PIX_ONE },
+> +	{ PIX_G_2, PIX_R_7, PIX_R_6, PIX_R_5, PIX_R_4, PIX_R_3, PIX_R_2 },
+> +	{ PIX_B_3, PIX_B_2, PIX_G_7, PIX_G_6, PIX_G_5, PIX_G_4, PIX_G_3 },
+> +	{ PIX_D_E, PIX_V_S, PIX_H_S, PIX_B_7, PIX_B_6, PIX_B_5, PIX_B_4 },
+> +	{ PIX_C_E, PIX_B_1, PIX_B_0, PIX_G_1, PIX_G_0, PIX_R_1, PIX_R_0 }
+> +};
+> +
+> +/*
+> + * Expected VESA-RGB888 data to be sent in LSB format
+> + *	    bit6 ............................bit0
+> + */
+> +const enum lvds_pixel lvds_bitmap_vesa_rgb888[5][7] = {
+> +	{ PIX_ONE, PIX_ONE, PIX_ZER, PIX_ZER, PIX_ZER, PIX_ONE, PIX_ONE },
+> +	{ PIX_G_0, PIX_R_5, PIX_R_4, PIX_R_3, PIX_R_2, PIX_R_1, PIX_R_0 },
+> +	{ PIX_B_1, PIX_B_0, PIX_G_5, PIX_G_4, PIX_G_3, PIX_G_2, PIX_G_1 },
+> +	{ PIX_D_E, PIX_V_S, PIX_H_S, PIX_B_5, PIX_B_4, PIX_B_3, PIX_B_2 },
+> +	{ PIX_C_E, PIX_B_7, PIX_B_6, PIX_G_7, PIX_G_6, PIX_R_7, PIX_R_6 }
+> +};
+> +
+> +static inline void lvds_writel(void __iomem *base, u32 reg, u32 val)
+> +{
+> +	writel(val, base + reg);
+> +}
+> +
+> +static inline u32 lvds_readl(void __iomem *base, u32 reg)
+> +{
+> +	return readl(base + reg);
+> +}
+> +
+> +static inline void lvds_set(void __iomem *base, u32 reg, u32 mask)
+> +{
+> +	lvds_writel(base, reg, lvds_readl(base, reg) | mask);
+> +}
+> +
+> +static inline void lvds_clear(void __iomem *base, u32 reg, u32 mask)
+> +{
+> +	lvds_writel(base, reg, lvds_readl(base, reg) & ~mask);
+> +}
+> +
+> +static u32 pll_get_clkout_khz(u32 clkin_khz, u32 bdiv, u32 mdiv, u32 ndiv)
+> +{
+> +	int divisor = ndiv * bdiv;
+> +
+> +	/* Prevents from division by 0 */
+> +	if (!divisor)
+> +		return 0;
+> +
+> +	return clkin_khz * mdiv / divisor;
+> +}
+> +
+> +static int lvds_pll_get_params(u32 clkin_khz, u32 clkout_khz,
+> +			       u32 *bdiv, u32 *mdiv, u32 *ndiv)
+> +{
+> +	u32 i, o, n;
+> +	u32 delta, best_delta; /* all in khz */
+> +
+> +	/* Early checks preventing division by 0 & odd results */
+> +	if (clkin_khz == 0 || clkout_khz == 0)
+> +		return -EINVAL;
+> +
+> +	best_delta = 1000000; /* big started value (1000000khz) */
+> +
+> +	for (i = NDIV_MIN; i <= NDIV_MAX; i++) {
+> +		for (o = BDIV_MIN; o <= BDIV_MAX; o++) {
+> +			n = DIV_ROUND_CLOSEST(i * o * clkout_khz, clkin_khz);
+> +			/* Check ndiv according to vco range */
+> +			if (n < MDIV_MIN || n > MDIV_MAX)
+> +				continue;
+> +			/* Check if new delta is better & saves parameters */
+> +			delta = abs(pll_get_clkout_khz(clkin_khz, i, n, o) - clkout_khz);
+> +			if (delta < best_delta) {
+> +				*ndiv = i;
+> +				*mdiv = n;
+> +				*bdiv = o;
+> +				best_delta = delta;
+> +			}
+> +			/* fast return in case of "perfect result" */
+> +			if (!delta)
+> +				return 0;
 > +		}
-> +	} else {
-> +		if (index != 0)
-> +			return -EINVAL;
-> +		node = ofnode_find_subnode(parent, "panel-timing");
->   	}
->   
->   	if (!ofnode_valid(node))
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_lvds_pll_enable(struct udevice *dev,
+> +				 int phy)
+> +{
+> +	struct stm32_lvds_plat *plat = dev_get_plat(dev);
+> +	struct stm32_lvds_priv *priv = dev_get_priv(dev);
+> +	struct display_timing timings = priv->timings;
+> +	u32 pll_in_khz, bdiv = 0, mdiv = 0, ndiv = 0;
+> +	int ret, val, multiplier;
+> +
+> +	/* Release PHY from reset */
+> +	lvds_set(plat->base, LVDS_PXGCR(phy), PXGCR_DIV_RSTN | PXGCR_RSTZ);
+> +
+> +	/* lvds_pll_config */
+> +	/* Set PLL Slv & Mst configs and timings */
+> +	pll_in_khz = priv->refclk_rate / 1000;
+> +
+> +	if (priv->dual_link)
+> +		multiplier = 2;
+> +	else
+> +		multiplier = 1;
+> +
+> +	ret = lvds_pll_get_params(pll_in_khz, timings.pixelclock.typ * 7 / 1000 / multiplier,
+> +				  &bdiv, &mdiv, &ndiv);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Set PLL parameters */
+> +	lvds_writel(plat->base, LVDS_PXPLLCR2(phy), (ndiv << 16) | bdiv);
+> +	lvds_writel(plat->base, LVDS_PXPLLSDCR1(phy), mdiv);
+> +	lvds_writel(plat->base, LVDS_PXPLLTESTCR(phy), PXPLLTESTCR_TDIV_VALUE << 16);
+> +
+> +	/* Disable TWG and SD: for now, PLL just need to be in integer mode */
+> +	lvds_clear(plat->base, LVDS_PXPLLCR1(phy), PXPLLCR1_TWG_EN | PxPLLCR1_SD_EN);
+> +
+> +	/* Power up bias and PLL dividers */
+> +	lvds_set(plat->base, LVDS_PXDCR(phy), PXDCR_POWER_OK);
+> +
+> +	lvds_set(plat->base, LVDS_PXCMCR1(phy), PXCMCR1_CM_EN_DL);
+> +	lvds_set(plat->base, LVDS_PXCMCR2(phy), PXCMCR2_CM_EN_DL4);
+> +
+> +	lvds_set(plat->base, LVDS_PXPLLCPCR(phy), PXPLLCPCR_CPCTRL_DEFAULT);
+> +	lvds_set(plat->base, LVDS_PXBCR3(phy), PXBCR3_VM_EN_DL);
+> +	lvds_set(plat->base, LVDS_PXBCR1(phy), PXBCR1_EN_BIAS_DL);
+> +	lvds_set(plat->base, LVDS_PXCFGCR(phy), PXCFGCR_EN_DIG_DL);
+> +
+> +	/* lvds_pll_enable */
+> +	/* PLL lock timing control for the monitor unmask after startup (pll_en) */
+> +	/* Adjust the value so that the masking window is opened at start-up */
+> +	/* MST_MON_PLL_LOCK_UNMASK_TUNE */
+> +	lvds_writel(plat->base, LVDS_PXMPLCR(phy), (0x200 - 0x160) << 16);
+> +
+> +	lvds_writel(plat->base, LVDS_PXBCR2(phy), PXBCR2_BIAS_EN);
+> +
+> +	lvds_set(plat->base, LVDS_PXGCR(phy),
+> +		 PXGCR_DP_CLK_OUT | PXGCR_LS_CLK_OUT | PXGCR_BIT_CLK_OUT);
+> +
+> +	lvds_set(plat->base, LVDS_PXPLLTESTCR(phy), PXPLLTESTCR_PLL_TDIV_EN);
+> +	lvds_set(plat->base, LVDS_PXPLLCR1(phy), PXPLLCR1_PLL_DIVIDERS_EN);
+> +	lvds_set(plat->base, LVDS_PXSCR(phy), PXSCR_SER_DATA_OK);
+> +
+> +	/* Enable the LVDS PLL & wait for its lock */
+> +	lvds_set(plat->base, LVDS_PXPLLCR1(phy), PXPLLCR1_PLL_EN);
+> +	ret = readl_poll_sleep_timeout(plat->base + LVDS_PXPLLSR(phy),
+> +				       val, val & PXPLLSR_PLL_LOCK, SLEEP_US, TIMEOUT_US);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Select MST PHY clock as pixel clock for the LDITX instead of FREF */
+> +	/* WCLKCR_SLV_CLKPIX_SEL is for dual link */
+> +	lvds_writel(plat->base, LVDS_WCLKCR, WCLKCR_SLV_CLKPIX_SEL);
+> +
+> +	lvds_set(plat->base, LVDS_PXPLLTESTCR(phy), PXPLLTESTCR_PLL_TEST_CLK_EN);
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_lvds_enable(struct udevice *dev)
+> +{
+> +	struct stm32_lvds_plat *plat = dev_get_plat(dev);
+> +	struct stm32_lvds_priv *priv = dev_get_priv(dev);
+> +	struct display_timing timings = priv->timings;
+> +	u32 lvds_cdl1cr = 0;
+> +	u32 lvds_cdl2cr = 0;
+> +	u32 lvds_dmlcr = 0;
+> +	u32 lvds_dmmcr = 0;
+> +	u32 lvds_cr = 0;
+> +	int i;
+> +
+> +	lvds_clear(plat->base, LVDS_CDL1CR, CDLCRX_DISTR0 | CDLCRX_DISTR1 | CDLCRX_DISTR2
+> +					| CDLCRX_DISTR3 | CDLCRX_DISTR4);
+> +	lvds_clear(plat->base, LVDS_CDL2CR, CDLCRX_DISTR0 | CDLCRX_DISTR1 | CDLCRX_DISTR2
+> +					| CDLCRX_DISTR3 | CDLCRX_DISTR4);
+> +
+> +	/* Set channel distribution */
+> +	lvds_cr &= ~CR_LKMOD;
+> +	lvds_cdl1cr = CDL1CR_DEFAULT;
+> +
+> +	if (priv->dual_link) {
+> +		lvds_cr |= CR_LKMOD;
+> +		lvds_cdl2cr = CDL2CR_DEFAULT;
+> +	}
+> +
+> +	/* Set signal polarity */
+> +	if (timings.flags & DISPLAY_FLAGS_DE_LOW)
+> +		lvds_cr |= CR_DEPOL;
+> +
+> +	if (timings.flags & DISPLAY_FLAGS_HSYNC_LOW)
+> +		lvds_cr |= CR_HSPOL;
+> +
+> +	if (timings.flags & DISPLAY_FLAGS_VSYNC_LOW)
+> +		lvds_cr |= CR_VSPOL;
+> +
+> +	/* Set link phase */
+> +	switch (priv->dual_link) {
+> +	case LVDS_DUAL_LINK_EVEN_ODD_PIXELS: /* LKPHA = 0 */
+> +		lvds_cr &= ~CR_LKPHA;
+> +		break;
+> +	case LVDS_DUAL_LINK_ODD_EVEN_PIXELS: /* LKPHA = 1 */
+> +		lvds_cr |= CR_LKPHA;
+> +		break;
+> +	default:
+> +		dev_dbg(dev, "No phase precised, setting default\n");
+> +		lvds_cr &= ~CR_LKPHA;
+> +		break;
+> +	}
+> +
+> +	/* Set Data Mapping */
+> +	switch (priv->bus_format) {
+> +	case MEDIA_BUS_FMT_RGB888_1X7X4_SPWG: /* VESA-RGB888 */
+> +		for (i = 0; i < 5; i++) {
+> +			lvds_dmlcr = ((lvds_bitmap_vesa_rgb888[i][0])
+> +				      + (lvds_bitmap_vesa_rgb888[i][1] << 5)
+> +				      + (lvds_bitmap_vesa_rgb888[i][2] << 10)
+> +				      + (lvds_bitmap_vesa_rgb888[i][3] << 15));
+> +			lvds_dmmcr = ((lvds_bitmap_vesa_rgb888[i][4])
+> +				      + (lvds_bitmap_vesa_rgb888[i][5] << 5)
+> +				      + (lvds_bitmap_vesa_rgb888[i][6] << 10));
+> +
+> +			/* Write registers at the end of computations */
+> +			lvds_writel(plat->base, LVDS_DMLCR(i), lvds_dmlcr);
+> +			lvds_writel(plat->base, LVDS_DMMCR(i), lvds_dmmcr);
+> +		}
+> +		break;
+> +	case MEDIA_BUS_FMT_RGB888_1X7X4_JEIDA: /* JEIDA-RGB888 */
+> +		for (i = 0; i < 5; i++) {
+> +			lvds_dmlcr = ((lvds_bitmap_jeida_rgb888[i][0])
+> +				      + (lvds_bitmap_jeida_rgb888[i][1] << 5)
+> +				      + (lvds_bitmap_jeida_rgb888[i][2] << 10)
+> +				      + (lvds_bitmap_jeida_rgb888[i][3] << 15));
+> +			lvds_dmmcr = ((lvds_bitmap_jeida_rgb888[i][4])
+> +				      + (lvds_bitmap_jeida_rgb888[i][5] << 5)
+> +				      + (lvds_bitmap_jeida_rgb888[i][6] << 10));
+> +
+> +			/* Write registers at the end of computations */
+> +			lvds_writel(plat->base, LVDS_DMLCR(i), lvds_dmlcr);
+> +			lvds_writel(plat->base, LVDS_DMMCR(i), lvds_dmmcr);
+> +		}
+> +		break;
+> +	default:
+> +		dev_dbg(dev, "Unsupported LVDS bus format 0x%04x\n", priv->bus_format);
+> +	}
+> +
+> +	/* Turn the output on */
+> +	lvds_cr |= CR_LVDSEN;
+> +
+> +	/* Commit config to registers */
+> +	lvds_set(plat->base, LVDS_CR, lvds_cr);
+> +	lvds_writel(plat->base, LVDS_CDL1CR, lvds_cdl1cr);
+> +	lvds_writel(plat->base, LVDS_CDL2CR, lvds_cdl2cr);
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_lvds_attach(struct udevice *dev)
+> +{
+> +	struct stm32_lvds_plat *plat = dev_get_plat(dev);
+> +	struct stm32_lvds_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = panel_get_display_timing(plat->panel, &priv->timings);
+> +	if (ret) {
+> +		ret = ofnode_decode_display_timing(dev_ofnode(plat->panel),
+> +						   0, &priv->timings);
+> +		if (ret) {
+> +			dev_err(dev, "decode display timing error %d\n", ret);
+> +			return ret;
+> +		}
+> +	}
+> +
+> +	ret = stm32_lvds_enable(dev);
+> +
+> +	return ret;
+> +}
+> +
+> +static int stm32_lvds_set_backlight(struct udevice *dev, int percent)
+> +{
+> +	struct stm32_lvds_plat *plat = dev_get_plat(dev);
+> +	int ret;
+> +
+> +	ret = panel_enable_backlight(plat->panel);
+> +	if (ret) {
+> +		dev_err(dev, "panel %s enable backlight error %d\n",
+> +			plat->panel->name, ret);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int lvds_handle_pixel_order(struct stm32_lvds_plat *plat)
+> +{
+> +	ofnode parent, panel_port0, panel_port1;
+> +	bool even_pixels, odd_pixels;
+> +	int port0, port1;
+> +
+> +	/*
+> +	 * In case we are operating in single link,
+> +	 * there is only one port linked to the LVDS.
+> +	 * Check whether we are in this case and exit if yes.
+> +	 */
+> +	parent = ofnode_find_subnode(dev_ofnode(plat->panel), "ports");
+> +	if (!ofnode_valid(parent))
+> +		return 0;
+> +
+> +	panel_port0 = ofnode_first_subnode(parent);
+> +	if (!ofnode_valid(panel_port0))
+> +		return -EPIPE;
+> +
+> +	even_pixels = ofnode_read_bool(panel_port0, "dual-lvds-even-pixels");
+> +	odd_pixels = ofnode_read_bool(panel_port0, "dual-lvds-odd-pixels");
+> +	if (even_pixels && odd_pixels)
+> +		return -EINVAL;
+> +
+> +	port0 = even_pixels ? LVDS_DUAL_LINK_EVEN_ODD_PIXELS :
+> +		LVDS_DUAL_LINK_ODD_EVEN_PIXELS;
+> +
+> +	panel_port1 = ofnode_next_subnode(panel_port0);
+> +	if (!ofnode_valid(panel_port1))
+> +		return -EPIPE;
+> +
+> +	even_pixels = ofnode_read_bool(panel_port1, "dual-lvds-even-pixels");
+> +	odd_pixels = ofnode_read_bool(panel_port1, "dual-lvds-odd-pixels");
+> +	if (even_pixels && odd_pixels)
+> +		return -EINVAL;
+> +
+> +	port1 = even_pixels ? LVDS_DUAL_LINK_EVEN_ODD_PIXELS :
+> +		LVDS_DUAL_LINK_ODD_EVEN_PIXELS;
+> +
+> +	/*
+> +	 * A valid dual-LVDS bus is found when one port is marked with
+> +	 * "dual-lvds-even-pixels", and the other port is marked with
+> +	 * "dual-lvds-odd-pixels", bail out if the markers are not right.
+> +	 */
+> +	if (port0 + port1 != LVDS_DUAL_LINK_EVEN_ODD_PIXELS + LVDS_DUAL_LINK_ODD_EVEN_PIXELS)
+> +		return -EINVAL;
+> +
+> +	return port0;
+> +}
+> +
+> +static int stm32_lvds_of_to_plat(struct udevice *dev)
+> +{
+> +	struct stm32_lvds_plat *plat = dev_get_plat(dev);
+> +	struct stm32_lvds_priv *priv = dev_get_priv(dev);
+> +	const char *data_mapping;
+> +	int ret;
+> +
+> +	plat->base = dev_read_addr_ptr(dev);
+> +	if ((fdt_addr_t)plat->base == FDT_ADDR_T_NONE) {
+> +		dev_err(dev, "Unable to read LVDS base address\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	ret = clk_get_by_name(dev, "pclk", &plat->pclk);
+> +	if (ret) {
+> +		dev_err(dev, "Unable to get peripheral clock: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = clk_get_by_name(dev, "ref", &plat->refclk);
+> +	if (ret) {
+> +		dev_err(dev, "Unable to get reference clock: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = reset_get_by_index(dev, 0, &plat->rst);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to get LVDS reset: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = uclass_get_device_by_driver(UCLASS_PANEL,
+> +					  DM_DRIVER_GET(simple_panel), &plat->panel);
+> +	if (ret) {
+> +		dev_err(dev, "panel device error %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = panel_get_display_timing(plat->panel, &priv->timings);
+> +	if (ret) {
+> +		ret = ofnode_decode_display_timing(dev_ofnode(plat->panel),
+> +						   0, &priv->timings);
+> +		if (ret) {
+> +			dev_err(dev, "decode display timing error %d\n", ret);
+> +			return ret;
+> +		}
+> +	}
+> +
+> +	data_mapping = ofnode_read_string(dev_ofnode(plat->panel), "data-mapping");
+> +	if (!strcmp(data_mapping, "vesa-24"))
+> +		priv->bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG;
+> +	else if (!strcmp(data_mapping, "jeida-24"))
+> +		priv->bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_JEIDA;
+> +	else
+> +		priv->bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG;
+> +
+> +	return 0;
+> +}
+> +
+> +static int stm32_lvds_probe(struct udevice *dev)
+> +{
+> +	struct stm32_lvds_plat *plat = dev_get_plat(dev);
+> +	struct stm32_lvds_priv *priv = dev_get_priv(dev);
+> +	int ret;
+> +
+> +	ret = clk_enable(&plat->pclk);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to enable peripheral clock: %d\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	ret = clk_enable(&plat->refclk);
+> +	if (ret) {
+> +		dev_err(dev, "Failed to enable reference clock: %d\n", ret);
+> +		goto err_clk;
+> +	}
+> +
+> +	priv->refclk_rate = (unsigned int)clk_get_rate(&plat->refclk);
+> +
+> +	reset_deassert(&plat->rst);
+> +
+> +	/* Handle dual link config */
+> +	priv->dual_link = lvds_handle_pixel_order(plat);
+> +	if (priv->dual_link < 0)
+> +		goto err_rst;
+> +
+> +	if (priv->dual_link > 0) {
+> +		ret = stm32_lvds_pll_enable(dev, LVDS_PHY_SLAVE);
+> +		if (ret)
+> +			goto err_rst;
+> +	}
+> +
+> +	ret = stm32_lvds_pll_enable(dev, LVDS_PHY_MASTER);
+> +	if (ret)
+> +		goto err_rst;
+> +
+> +	return 0;
+> +
+> +err_rst:
+> +	clk_disable(&plat->refclk);
+> +err_clk:
+> +	clk_disable(&plat->pclk);
+> +
+> +	return ret;
+> +}
+> +
+> +static const struct video_bridge_ops stm32_lvds_ops = {
+> +	.attach = stm32_lvds_attach,
+> +	.set_backlight = stm32_lvds_set_backlight,
+> +};
+> +
+> +static const struct udevice_id stm32_lvds_ids[] = {
+> +	{.compatible = "st,stm32mp25-lvds"},
+> +	{}
+> +};
+> +
+> +U_BOOT_DRIVER(stm32_lvds) = {
+> +	.name		= "stm32-display-lvds",
+> +	.id		= UCLASS_VIDEO_BRIDGE,
+> +	.of_match	= stm32_lvds_ids,
+> +	.ops		= &stm32_lvds_ops,
+> +	.of_to_plat	= stm32_lvds_of_to_plat,
+> +	.probe		= stm32_lvds_probe,
+> +	.plat_auto	= sizeof(struct stm32_lvds_plat),
+> +	.priv_auto	= sizeof(struct stm32_lvds_priv),
+> +};
 >
