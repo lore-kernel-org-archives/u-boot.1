@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9616ACA0FED
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 16:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 749FACA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 17:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9F8A838EF;
-	Fri,  5 Sep 2025 18:45:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8C45B834D4;
+	Fri,  5 Sep 2025 19:24:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ckqGMx26";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sPSFm1Rr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1518838F3; Fri,  5 Sep 2025 18:45:02 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id 1E5D783526; Fri,  5 Sep 2025 19:24:13 +0200 (CEST)
+Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
+ [IPv6:2607:f8b0:4864:20::a2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2254832F9
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 18:44:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE3E83487
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 19:24:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-439fa5a0672so71404b6e.0
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 09:44:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=javier.tia@linaro.org
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-5449432a9d7so1336795e0c.3
+ for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 10:24:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757090698; x=1757695498; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ZoavphyfBYPgWuVJrID/FnjsrsqaMg/D9TOLXBbwIhw=;
- b=ckqGMx26q2s2HgKP9LNh3sjdxiD+1wCKxgBVHb/fAum75pheiJ73PvTy91lr0T0x1N
- lm9qObPRXsQQX1UeEkJ9zcOHRXUsalGKKhX0w/8QXbkWTmEBsk8321q/QgROCTYzf7f/
- xzRRfQ0h+i9l9bmzJ4Az9/QTs6LZLfztblYJM=
+ d=linaro.org; s=google; t=1757093049; x=1757697849; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UD7oPktF/9ZMQhHeLLanx96U/J8TJIUTn6+kdv4BxIw=;
+ b=sPSFm1RrZF37iNJyy0OtucsFU5d8Vi+FRlKiY5twhupv7FXRIU8++hgbAW/t2ZAl2n
+ S6rxsKbfltDUJIDsE0cOW+5K8SDJNJdHu9HrPksN7UqJ4bpw6bUzW+dxWCEr1RMxdp/N
+ wq/HwaxyXsqPnM2LT5Vry+vNCTHD4Y16tLY4ZEkW0j6Xg9hTT2caGtQmswz697dO4qPi
+ 7mZoJiNE2jgGjPfq28e/aL+2YDm+ZT2mtY9QuRKG/MuTgqhLn8BcH6UeSNBIFOUkS5tR
+ 7uQun5D/qMtFVa0GKnk5DVgDaBbGmmfhL2Gyz8pE/+8+A2sDGeZdTB8g+4V5SCoQ2U+/
+ 7Zsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757090698; x=1757695498;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZoavphyfBYPgWuVJrID/FnjsrsqaMg/D9TOLXBbwIhw=;
- b=UVQm6HkZWDlJRlCmHUhQGm1ytpDFoUvY+soJo6PFs6pGpjrKKMZBLmBm8ieMINcaCq
- cI47UYkzCGDqxH/I9Apo6nLQ2yqVncZHJLVnkK04BsKZiQ3Ebqz08OII1UVvSfLYssyS
- om8rKRlofgc97OsSmjZt3A21qP1KT1T5P4KuWW4ILGWEFZXXVrK6eLudUJygf9MzeKYR
- QPccfKdSnvrlY1DlqjQrx088/ycj1T/DnJ/wqpYOXNpdTGTpU4hAqxxPrC9DYUEsG0OK
- r1ueNApar17r3aO9v7UJQcd/7mne9icQgUbrGsZD3srLHWTlm0wMwu/wgJcQ0cYWVrL8
- UyVA==
-X-Gm-Message-State: AOJu0YwKBYcu33o+HfeOLr4yR/lxEfNT9Cx2XqU8gf1lkdBBxLWFQ0EC
- WZvP6TQ8A6+AJloQtk4aTdKM5RXu1h7DI2lHpO+UqzmxTGjTTb6nwvOtVan2UcVgMwU1V9KtIdS
- 9a3Bio0w=
-X-Gm-Gg: ASbGncvrUdrrs01Or/nWxhI405OftCQf+KmuMZpbns29F3kYOPW6Y1BXKqOYjF6kr02
- /F+rj8zsBx41gHO0UcGQG56aY9dFznnjfaCLAtbn/621qnYEgzL7Hch+w6dSRqpxR7QjXBj1iLU
- jjIe3+KtH8z1gDqfvLvcTM/wnBFP2IMvZX41aKkYV8kL4NfM8PWE2XEB89V50EUo+3Yt3APwnET
- AWFaFSbLEoVKqEq+hSij7pJxjk/Id/zFjfime7SgJxZ10eUwCP+OCKrAuDixLGb/gyYFHKoZxor
- thbkWwfvAZP6UJlSrXwHiLiqyxONwpLcu50BCDAVt229toFA+K4TdBiHgoWveD70JQHcFfIqcX+
- SZyMshqCAiWe7PzGiOIEuBthf0vY3RsnXEZJNywDkTKwTLWmePKSdkb8=
-X-Google-Smtp-Source: AGHT+IEnGZS9XuExJygE7pkicId+TsRrAu+eDX4Q3kVFLMyS7eDHVs2VCZ5lNMBgj5whu7MWpSxl2g==
-X-Received: by 2002:a05:6808:895b:b0:438:2440:a594 with SMTP id
- 5614622812f47-4382440a7camr3955865b6e.47.1757090698332; 
- Fri, 05 Sep 2025 09:44:58 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ d=1e100.net; s=20230601; t=1757093049; x=1757697849;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=UD7oPktF/9ZMQhHeLLanx96U/J8TJIUTn6+kdv4BxIw=;
+ b=sNV7ySRSV4zFffDdGBIWjILp7BEwJMaBX5t5r9UJIHK7ik3Qtjo3VAEV/AaUE08+CK
+ tqjn8Fply3tTqZDl/CcAaprDDiqp3+ffecK//OW9uNkwB6YBZMa/hTcOXEPwAF5qfojW
+ bXOMzZabc63XPXAmu/nxvgQIkFK6CVOh00GyjZ9ELnqCvvM7nFttsh6HO16s/0a1Y1Ah
+ Dsmh4+zA1+5K6YQzFNywTE1NRlvqVf56V1Nb2n4dMtrFojEXy50IfwkTu4aik1iW8CQL
+ PMZrIenBkLUFnM9MBQOC6L7+X1uPTHcA7aft1MkTvHB7mncgLW1qX2MDxSjgmSbK9Ik1
+ O2rQ==
+X-Gm-Message-State: AOJu0YxHmrtg46YGs6BhAKB6AC8JA5c4FAX6LuvUGe9HAaGNLcvtYh9G
+ k6uKKQ+R1hnqz4ijJSFHwpk2aa4qeNj3sZlcw+9A07S7QmQdGxbV6Rv+R4vvuLvFaMeFIShEC8i
+ psYJ+
+X-Gm-Gg: ASbGnctCVdbua2N9Sjxx5dGkWOhGpSA6RYztsjErb5roADYg1U0DB8L+RUYNc38kCIh
+ mJARhLeSu2U/pUj3QruZyccr13joOYq0QyJMdW5xBdQUeDdl+UZC+QIUTUOD9/nIMRA1xxDge07
+ hJYoSTml9M2u9CKh+UE0jl2L/jmTkjnN778cxl/cdy5Go1L0JptuwFJAr4Lx3oVtttihEbMLOUK
+ oUKDV0ofOao1MwwapebJ9g1Cklxkef+Y03c4RWooun2EouQ1KUjigX7gaJTDU49Ki/Bzldxusbe
+ QkM0+JodDMwZDXXSLh/eq03d4PwKB8P4DidrTPU3EL/PvdbaeuZg6Zv+lL6YQQYLNCfbhDkrbph
+ hZb3aR6LYauUd8QiuHIl8b9/T3C7QHAn0lRqUkbmwNNfTNi3a8X0hOJG1nMo=
+X-Google-Smtp-Source: AGHT+IHxjW7BAvdCgoBsfNLumkwUv0tBKHSbQipioXxahs288+VskwzqHftVmOc7lq9p7KgaHMbs6Q==
+X-Received: by 2002:a05:6122:1792:b0:544:7364:ffc3 with SMTP id
+ 71dfb90a1353d-544a016e145mr7320230e0c.5.1757093048602; 
+ Fri, 05 Sep 2025 10:24:08 -0700 (PDT)
+Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.181])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-62173821315sm165089eaf.12.2025.09.05.09.44.57
+ 71dfb90a1353d-544a1f09810sm8216154e0c.22.2025.09.05.10.24.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 09:44:57 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>
-In-Reply-To: <CALrBrZ3u3hGubrjAowRzuR0G2x=EOxPzoC0ezskJbi06YC_nmw@mail.gmail.com>
-References: <CALrBrZ3u3hGubrjAowRzuR0G2x=EOxPzoC0ezskJbi06YC_nmw@mail.gmail.com>
-Subject: Re: please pull u-boot-samsung master
-Message-Id: <175709069745.3789037.12002219409703096408.b4-ty@konsulko.com>
-Date: Fri, 05 Sep 2025 10:44:57 -0600
+ Fri, 05 Sep 2025 10:24:08 -0700 (PDT)
+From: Javier Tia <javier.tia@linaro.org>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH v5] disk: efi_loader: Improve disk image detection in
+ efi_bootmgr
+Date: Fri,  5 Sep 2025 11:23:30 -0600
+Message-ID: <20250905172330.135550-1-javier.tia@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,21 +96,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 05 Sep 2025 15:39:27 +0900, Minkyu Kang wrote:
+Enhances the process for identifying disk images within the EFI boot
+manager. Utilize part_driver_lookup_type() to verify the validity of a
+downloaded file as a disk image, rather than depending on file
+extensions.
 
-> The following changes since commit 3dc5e9a0108bb114175b6362f9cb22367402f624:
-> 
->   Merge tag 'u-boot-stm32-20250825' of
-> https://source.denx.de/u-boot/custodians/u-boot-stm (2025-08-26 08:33:10
-> -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
+part_driver_lookup_type() is now used in the prepare_loaded_image()
+function in the EFI boot manager to detect partitions on a block device
+created from a downloaded image. This allows the boot manager to boot
+from any disk image that can be recognized by a partition driver, not
+just ISO and IMG images.
 
-Merged into u-boot/master, thanks!
+Update prepare_loaded_image() to create the ramdisk block device
+internally, obtain the blk_desc and use part_driver_lookup_type() to
+detect a valid partition table.
 
+In try_load_from_uri_path(), try prepare_loaded_image() first to detect
+disk images, and fall back to PE-COFF detection only if that fails.
+
+Include part.h in the EFI loader and export part_driver_lookup_type and
+add its prototype and documentation in include/part.h. This makes the
+partition-driver lookup available to other code paths that need to
+detect partition tables on a block descriptor.
+
+Signed-off-by: Javier Tia <javier.tia@linaro.org>
+
+---
+Changes in v5:
+- Reverted error label renaming from 'err_cleanup_blkdev' back to 'err'
+- Restored original error messages without cosmetic modifications
+- Removed unnecessary comments that were obvious from code context
+
+- v4 link: https://lore.kernel.org/u-boot/20250903214417.431985-1-javier.tia@linaro.org/
+- v3 link: https://lore.kernel.org/u-boot/20250829155415.90634-1-javier.tia@linaro.org/
+- v2 link: https://lore.kernel.org/u-boot/20250808213627.649669-1-javier.tia@linaro.org/
+- v1 link: https://lore.kernel.org/u-boot/20250805162158.117876-1-javier.tia@linaro.org/
+
+Signed-off-by: Javier Tia <javier.tia@linaro.org>
+---
+ disk/part.c                  |  2 +-
+ include/part.h               | 18 +++++++++++++
+ lib/efi_loader/efi_bootmgr.c | 51 +++++++++++++++++++++++++-----------
+ 3 files changed, 55 insertions(+), 16 deletions(-)
+
+diff --git a/disk/part.c b/disk/part.c
+index 66e2b3a7219..f0c6866e210 100644
+--- a/disk/part.c
++++ b/disk/part.c
+@@ -63,7 +63,7 @@ static struct part_driver *part_driver_get_type(int part_type)
+  * @dev_desc: Device descriptor
+  * Return: Driver found, or NULL if none
+  */
+-static struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
++struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
+ {
+ 	struct part_driver *drv =
+ 		ll_entry_start(struct part_driver, part_driver);
+diff --git a/include/part.h b/include/part.h
+index b772fb34c8a..3fc3186f4c4 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -727,6 +727,24 @@ int part_get_type_by_name(const char *name);
+  */
+ int part_get_bootable(struct blk_desc *desc);
+ 
++/**
++ * part_driver_lookup_type() - Look up the partition driver for a blk device
++ *
++ * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each partition driver
++ * against the blk device to see if there is a valid partition table acceptable
++ * to that driver.
++ *
++ * If @desc->part_type is already set, it just returns the driver for that
++ * type, without testing if the driver can find a valid partition on the
++ * descriptor.
++ *
++ * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
++ *
++ * @desc: Device descriptor
++ * Return: Driver found, or NULL if none
++ */
++struct part_driver *part_driver_lookup_type(struct blk_desc *desc);
++
+ #else
+ static inline int part_driver_get_count(void)
+ { return 0; }
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index 662993fb809..9ae11d4ebf0 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -17,6 +17,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <net.h>
++#include <part.h>
+ #include <efi_loader.h>
+ #include <efi_variable.h>
+ #include <asm/unaligned.h>
+@@ -347,6 +348,9 @@ static efi_status_t fill_default_file_path(struct udevice *blk,
+  * @dp:		pointer to default file device path
+  * @blk:	pointer to created blk udevice
+  * Return:	status code
++ *
++ * This function handles device creation internally and performs cleanup
++ * on error paths.
+  */
+ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
+ 					 struct efi_device_path **dp,
+@@ -355,10 +359,31 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
+ 	u64 pages;
+ 	efi_status_t ret;
+ 	struct udevice *ramdisk_blk;
++	struct blk_desc *desc;
++	struct part_driver *part_drv;
+ 
++	/* Create the ramdisk block device internally */
+ 	ramdisk_blk = mount_image(label, addr, size);
+-	if (!ramdisk_blk)
+-		return EFI_LOAD_ERROR;
++	if (!ramdisk_blk) {
++		log_err("Failed to create ramdisk block device\n");
++		return EFI_DEVICE_ERROR;
++	}
++
++	/* Get the block descriptor and detect partitions */
++	desc = dev_get_uclass_plat(ramdisk_blk);
++	if (!desc) {
++		log_err("Failed to get block descriptor\n");
++		ret = EFI_DEVICE_ERROR;
++		goto err;
++	}
++
++	/* Use part_driver_lookup_type for comprehensive partition detection */
++	part_drv = part_driver_lookup_type(desc);
++	if (!part_drv) {
++		log_err("Image is not a valid disk image\n");
++		ret = EFI_INVALID_PARAMETER;
++		goto err;
++	}
+ 
+ 	ret = fill_default_file_path(ramdisk_blk, dp);
+ 	if (ret != EFI_SUCCESS) {
+@@ -389,7 +414,6 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
+ err:
+ 	if (blkmap_destroy(ramdisk_blk->parent))
+ 		log_err("Destroying blkmap failed\n");
+-
+ 	return ret;
+ }
+ 
+@@ -407,7 +431,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
+ 	if (!ctx)
+ 		return ret;
+ 
+-	/* cleanup for iso or img image */
++	/* cleanup for disk image */
+ 	if (ctx->ramdisk_blk_dev) {
+ 		ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
+ 					 EFI_CONVENTIONAL_MEMORY);
+@@ -452,6 +476,7 @@ static void EFIAPI efi_bootmgr_http_return(struct efi_event *event,
+ 	EFI_EXIT(ret);
+ }
+ 
++
+ /**
+  * try_load_from_uri_path() - Handle the URI device path
+  *
+@@ -466,7 +491,6 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ {
+ 	char *s;
+ 	int err;
+-	int uri_len;
+ 	efi_status_t ret;
+ 	void *source_buffer;
+ 	efi_uintn_t source_size;
+@@ -516,18 +540,15 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 	image_size = ALIGN(image_size, SZ_2M);
+ 
+ 	/*
+-	 * If the file extension is ".iso" or ".img", mount it and try to load
+-	 * the default file.
+-	 * If the file is PE-COFF image, load the downloaded file.
++	 * Check if the downloaded file is a disk image or PE-COFF image.
++	 * Try disk image detection first using prepare_loaded_image().
+ 	 */
+-	uri_len = strlen(uridp->uri);
+-	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+-	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+-		ret = prepare_loaded_image(lo_label, image_addr, image_size,
+-					   &loaded_dp, &blk);
+-		if (ret != EFI_SUCCESS)
+-			goto err;
+ 
++	/* First, try to treat the image as a disk image */
++	ret = prepare_loaded_image(lo_label, image_addr, image_size,
++				   &loaded_dp, &blk);
++	if (ret == EFI_SUCCESS) {
++		/* Image is a disk image, set up for disk boot */
+ 		source_buffer = NULL;
+ 		source_size = 0;
+ 	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
 -- 
-Tom
-
+2.51.0
 
