@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD99CCA1013
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 13:28:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCE07CA1013
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 13:29:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6A4783816;
-	Fri,  5 Sep 2025 15:28:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 481FD8382A;
+	Fri,  5 Sep 2025 15:29:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wp3zw1B8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jHfsEt5c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36C1983826; Fri,  5 Sep 2025 15:28:45 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 94B618383A; Fri,  5 Sep 2025 15:29:22 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60B7983622
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 15:28:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD90183622
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 15:29:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-55f7ad815ceso2390812e87.3
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 06:28:43 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-336dd55aae1so20123381fa.1
+ for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 06:29:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757078923; x=1757683723; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1757078960; x=1757683760; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CF+mOFJ9biQHq0ZLUsv9ARlS7Tp45P3Zkwch31mUQuA=;
- b=Wp3zw1B8tQLrg/iGYrSSWt2epBiB+94skwjCb5GkX5f3be8AKsYqGeLyasL4VvUqIS
- Swp7z5QtwaOzeTB9wt7dLNfsGyc4kdikKx3F4yaoktUmOKVfVWRo8IlDnCm1KHYO+kkO
- bjF/yfEd59NfLcYT4kqhVrFWEXS4HwQYKWm8xjHBEiWTlEgcyv9ZhH1BNCj0XKsyQmtm
- HW+i0+tGGtooGGeEY9dP3x6En+wfV90KnoWpv8bCgTUSxO+lF/Jf9aFB+Wrqk18KmbvR
- I7Zk/5ONClhmk2evmIJ2aqm6pWXW5oMQnQYkz58DA+VYOVv/jOtXGp3hbLW0mu8Cg88z
- ALyw==
+ bh=ApXx7rtbF88fqb2sxIz7SP+xnOVtEIArHlOxkreDArs=;
+ b=jHfsEt5cHmZQQj/eK3A68L+VbUcH2s/GCqNfPAyXOWCVtEF3dAlp7SrktKDDdpK0yu
+ Ar9X9JddROpc4VfFIoGnbMUCGodhHZ6+0i1CwUH03w/79vreYGwr6oLT13VMGTJla6U0
+ uYlC4Bang05bGdVyrX+g10+lfnWUnHuU3sscKYebrbXFxlfSRa/Tg2+yOq0B9i+tJ8Va
+ mlPIHTU9mNmFWKGwEIlk/7306sy9LJQX1ZD6CxqShCAImpZAcZPiVNhi1f7F5pw7/12s
+ uHgVPTMOGe0j0SsHcl2CXiOPSqUcDmUHxot5rp6K3lLtx2HUZB2306SFf0PYkrzopTCo
+ t6cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757078923; x=1757683723;
+ d=1e100.net; s=20230601; t=1757078960; x=1757683760;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CF+mOFJ9biQHq0ZLUsv9ARlS7Tp45P3Zkwch31mUQuA=;
- b=YjRTwJ7gF57fcpy5PE7GIA+ph3trfny1Qx3RUBn1H88VE0z6GITNNgSMFs45BZkuf3
- z5yWgRzE1sIG2Wsyzmo5dBCfrEX3nn7x06yn3LLcuaQvr1CrckW7l0TxaublKAAfblie
- yz1u4/wa4282ICKJY/zhxsJH+FF5BSkSTEPAkJIntU7w/AVsJlP2LumwR+fpuVBYWqPE
- ZUH251Agn2wLtOJOT3UE4ebENt7q3rK9MDw2pznJwuk3OAw3aAztwBLqEtErZrLTb82n
- 7olrDacHwnkQFSRo+MXVAaHB0lS76dOJpwo3W2tTv/4+ssvT7KhAGNtyQ/TH0xONgUwo
- prFQ==
+ bh=ApXx7rtbF88fqb2sxIz7SP+xnOVtEIArHlOxkreDArs=;
+ b=qhHpQ0zka2Ue0k0y2mgFNer2VuIV5TKjeq/5oc/Sh4jM2NuAVXVZMovz5xYlwL1B6P
+ m9/WUtnLp8WHOcgJ1FCXxuOgNML4JtrxKfKNS8dXvkdhBW0+fP7F4w8j9HdftNah8aeu
+ Mxg9lRrF7GYk5rGWhIpXmVXMXQXwNUKBeLFy/G4Mety30vsEYeKvJsA3eTcUEwpfiqNm
+ qoMHYw1FBKckmvZCMqbXmarCFQsZXEmxwHiHt3VxcB4AkphS7F8cq+IsgJcKEWO1amUW
+ AqStNUjSifMUcHCODyGGkhFW7Yprg2dtPaO2vyZr4lk1yJDcha7eohBOeckHM28WMaRo
+ hZ2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVbIU3VczSN69EHNMJiJsu4BaMgq8YDcTzDYtL7ip+PqUT8hJDrdydg7tpLWEiRD3Nu1HBebFM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxwFPG/anmINr5PLd9Q0P1qj9uQtHC2QxpgwR5HM5jkvI2I/TD0
- XvaXZ666qxLu/F5MJEHjRZpKX0aTpuOFUt0S8Z34ONFSTJ4xYG7n1nEHP4Rv5Kd6+WJG6LbVTJq
- XjpoE2dOQqs6dL7QZmhFTkw/9IIp/LRk=
-X-Gm-Gg: ASbGncsC/kAjt0XkdXELLKh7n2Kl+m3hsIjbIk2emEZ00an0hm3ajO11Dy3nVrCrFD1
- HHtlTDayYTr+CPAINn/CGh7hjL/lsThDsAdhtVSKdwh08jckJzx6DPWYbQaxVnfQhIVhBaW2DOp
- yViGJDvx19OtBPDReNE+N7Wd+oH0RcD4C73XES/PiWNklO09J3pnzWcCoUbSjDIGIptRvbtyFBn
- 1m1PJb7ABOeonyUFO2FESC/sZtC3Bq1BFCK2nwgBLdhkoHN3g==
-X-Google-Smtp-Source: AGHT+IHZThLrUtoQOdUUJjmBSbxgco5fs98tCy84qsUFNpYdpSxa6B+urLV4By9dCoAzJtE6B7MzFbtnQ8Cer8YOdS8=
-X-Received: by 2002:a05:6512:b24:b0:55f:4ac2:a5a8 with SMTP id
- 2adb3069b0e04-55f708bce0bmr5327550e87.13.1757078922254; Fri, 05 Sep 2025
- 06:28:42 -0700 (PDT)
+ AJvYcCUrgSp50aaNTKoS45vfA6la0sHrEf2jlT7+gVP28hudAvI5efwXjPMUAeo4no90zEry3mVemL0=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywyhj+p/Jn+IPuwP2O5fhtJo7HL5RPYCPQtYyuBWfjy9OxnJXbY
+ LYKMdre+nyZOVLbdnEygcuygl3xkde/L5HSH2iX/ge22/c0FEhrHm8ZJGfB3LQtfLXPLrYdLU0S
+ ME0gsdfqC2Bfc9I7X37GfQvh6ruvbuBo=
+X-Gm-Gg: ASbGncvDCqr2cxfxp4xy6ctgiX1s/kKReh6iXam/evnuDvl248BALqRWNHgtxEZy1zD
+ b6hoGJKsiNIAafLqJwP1qGoKR+ww5qopfedggd7X0XbpibWA+NJaQDvxaNdGLxrgedTgi6xtIlf
+ aVjOui3tLXqXIjMi7mqJm1h5TsBeA07hWRxR+rRmPTLDbLbpUnofG6gnPOZAHmP9J4xEg5bU3f4
+ EFJu7NBD4pMcmqBxzDcQG4kll+w8zJqCqN6T6c=
+X-Google-Smtp-Source: AGHT+IE2TzTyNkz2+tWAROvZ/OpRD/G6fMGImivoDTC32zw2E4hs1oHSmCYj4/3hxdF9GjkRFNYt4q/McvsQRQ7mGus=
+X-Received: by 2002:a2e:a590:0:b0:336:e32f:7a4d with SMTP id
+ 38308e7fff4ca-336e32f8084mr58717271fa.5.1757078959736; Fri, 05 Sep 2025
+ 06:29:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250812060807.1224861-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20250812060807.1224861-1-ilias.apalodimas@linaro.org>
+References: <20250821064614.2644332-1-primoz.fiser@norik.com>
+In-Reply-To: <20250821064614.2644332-1-primoz.fiser@norik.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 5 Sep 2025 10:28:30 -0300
-X-Gm-Features: Ac12FXxE3LlkVKdLUQ7VmmX5eKIp_04mVN7c0MYIQ6twpJ57TFPijADxd-ynj3o
-Message-ID: <CAOMZO5Bq0y2yD=8+fvR=o3n97OKfBhbGvYkgkRfHHy0408cN6Q@mail.gmail.com>
-Subject: Re: [PATCH] tools: imx8image: Make imx8image_check_params() static
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: trini@konsulko.com, Peng Fan <peng.fan@nxp.com>,
- Heiko Schocher <hs@nabladev.com>, 
- Alice Guo <alice.guo@nxp.com>, Fabio Estevam <festevam@denx.de>, 
- Gary Bisson <bisson.gary@gmail.com>, Maks Mishin <maks.mishinfz@gmail.com>,
- u-boot@lists.denx.de
+Date: Fri, 5 Sep 2025 10:29:08 -0300
+X-Gm-Features: Ac12FXyF06vZlhfKJBkOterYcxMSGkZs2-4_yKA5Q9Kh3OjiOLCMtP-wI6lVMa4
+Message-ID: <CAOMZO5AF=jfD-sFhnkJ3+D87Zy4wAThZ5HmPew+zpbtQ7BSiXw@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: imx93-phyboard-segin-u-boot: Clean-up already
+ upstream nodes
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Stefano Babic <sbabic@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ uboot-imx@nxp.com, u-boot@lists.denx.de, upstream@lists.phytec.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -98,12 +98,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Aug 12, 2025 at 3:23=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, Aug 21, 2025 at 3:46=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
+m> wrote:
 >
-> We are trying to enable -Wmissing-prototypes and this functiion is only
-> used locally. Mark it as static.
+> Clean-up "imx93-phyboard-segin-u-boot.dtsi" internal device-tree from
+> nodes already part of the upstream device-tree since commit 79f3e77133bd
+> ("Subtree merge tag 'v6.16-dts' of dts repo [1] into dts/upstream"). No
+> functional change is made with this commit.
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 
 Applied to next, thanks.
