@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 769ECCA1015
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFFB5CA1015
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA189838E5;
-	Fri,  5 Sep 2025 10:19:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D355838FD;
+	Fri,  5 Sep 2025 10:19:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tbzQ/aXw";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YFpKQZz+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26A45838FD; Fri,  5 Sep 2025 10:19:24 +0200 (CEST)
+ id 12D0F83903; Fri,  5 Sep 2025 10:19:26 +0200 (CEST)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3208838C8
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57C2A838D5
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858JFDf3211778;
- Fri, 5 Sep 2025 03:19:15 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858JGT13211782;
+ Fri, 5 Sep 2025 03:19:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757060355;
- bh=64GX/TyB8/0R2NLW3PHe0v+VvxuGN6/vpmmYJ5fvM5M=;
+ s=ti-com-17Q1; t=1757060356;
+ bh=ZWjHpcjgcpllwq8JWrHVhIAx3QpH7CTeqiEuvTE0D8E=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=tbzQ/aXwl9WXv5Q50uVV0AMmz0InbDlj4+DXnNa24yDsq9FsujrIBB4i91pX3w+lj
- H19UGZNQjDCfOIvCQ0k74O4eNEAHf8Z7fxqcFQxzGAAnbTOh95Fq+Idy3mDfv8lkAc
- Jyn8aA38Q/hMOonRAYsphOKtm1Yyx82vbQg0g/oM=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858JF7m752712
+ b=YFpKQZz+Ioqr8nXwaGXLVSMLuMgg6Ajq0oH4EJVhPFw+t1k3HgUy0mPfRAfZYQPrO
+ +LlCE5R+AU8KSn1oQhr+ye3MWaQ3DAO6oysg2bVAN7QYbx9iE6LGkAyNDsJ3Iz/KxI
+ QoEeGKxPgMIUZPWulK3eh9Es0YfmZ6rOynfW+fE4=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858JGkh230744
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 5 Sep 2025 03:19:15 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 5 Sep 2025 03:19:16 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 5
- Sep 2025 03:19:14 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 03:19:16 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 5 Sep 2025 03:19:14 -0500
+ Frontend Transport; Fri, 5 Sep 2025 03:19:16 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858JDMX445308;
- Fri, 5 Sep 2025 03:19:13 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858JFJF152032;
+ Fri, 5 Sep 2025 03:19:15 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,9 +57,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
  <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
-Subject: [PATCH -next v6 05/10] arm: armv8: mmu: add mem_map_fix_dram_banks
-Date: Fri, 5 Sep 2025 13:48:56 +0530
-Message-ID: <20250905081902.489345-6-anshuld@ti.com>
+Subject: [PATCH -next v6 06/10] mach-k3: map all banks using
+ mem_map_fix_dram_banks
+Date: Fri, 5 Sep 2025 13:48:57 +0530
+Message-ID: <20250905081902.489345-7-anshuld@ti.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250905081902.489345-1-anshuld@ti.com>
 References: <20250905081902.489345-1-anshuld@ti.com>
@@ -83,85 +84,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
-the MMU as part of mmu_setup.
+The static memory map for K3 (k3_mem_map) only maps the first DRAM bank
+and therefore doesn't scale for platforms with multiple memory banks.
 
-But since the exact configuration of memory banks might not be known at
-build time, many platforms such as imx9, versal2 etc. utilize
-gd->bd->bi_dram to configure the static map at runtime.
-
-Therefore this patch adds a new API mem_map_fix_dram_banks that modifies
-the static map in a similar way. Allowing for anyone to map all dram
-banks by just passing the index to last entry in their mem_map and it's
-length.
+This patch modifies enable_caches to add mem_map_fix_dram_banks which
+appends all the memory banks to k3_mem_map before calling mmu_setup.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/cpu/armv8/cache_v8.c    | 27 +++++++++++++++++++++++++++
- arch/arm/include/asm/armv8/mmu.h | 10 ++++++++++
- 2 files changed, 37 insertions(+)
+ arch/arm/mach-k3/arm64/arm64-mmu.c     | 5 +++--
+ arch/arm/mach-k3/common.c              | 9 +++++++++
+ arch/arm/mach-k3/include/mach/k3-ddr.h | 6 ++++++
+ 3 files changed, 18 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 6e662395a83..edb895da1f2 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -58,6 +58,33 @@ static int get_effective_el(void)
- 	return el;
- }
+diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+index 79650a7e346..479451452a2 100644
+--- a/arch/arm/mach-k3/arm64/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+@@ -12,8 +12,9 @@
+ #include <asm/system.h>
+ #include <asm/armv8/mmu.h>
+ #include <linux/sizes.h>
++#include <mach/k3-ddr.h>
  
-+int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs)
-+{
-+	unsigned int i;
-+	int ret = fdtdec_setup_memory_banksize();
-+
-+	if (ret) {
-+		printf("%s: Failed to setup dram banks\n", __func__);
-+		return ret;
-+	}
-+
-+	if (index + CONFIG_NR_DRAM_BANKS >= len) {
-+		printf("%s: Not sufficient space in memory map\n", __func__);
-+		return -ENOMEM;
-+	}
-+
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		mem_map[index].virt = gd->bd->bi_dram[i].start;
-+		mem_map[index].phys = gd->bd->bi_dram[i].start;
-+		mem_map[index].size = gd->bd->bi_dram[i].size;
-+		mem_map[index].attrs = attrs;
-+		index++;
-+	}
-+
-+	mem_map[index] = (const struct mm_region){ 0 };
-+
-+	return 0;
-+}
- u64 get_tcr(u64 *pips, u64 *pva_bits)
+-struct mm_region k3_mem_map[] = {
++struct mm_region k3_mem_map[K3_MEM_MAP_LEN] = {
+ 	{ /* SoC Peripherals */
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+@@ -28,7 +29,7 @@ struct mm_region k3_mem_map[] = {
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, { /* First DRAM Bank of size 2G */
++	}, [K3_MEM_MAP_FIRST_BANK_IDX] = { /* First DRAM Bank of size 2G */
+ 		.virt = CFG_SYS_SDRAM_BASE,
+ 		.phys = CFG_SYS_SDRAM_BASE,
+ 		.size = SZ_2G,
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index e9b48b528d6..abf4169d6b7 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -31,6 +31,7 @@
+ #include <dm/uclass-internal.h>
+ #include <dm/device-internal.h>
+ #include <asm/armv8/mmu.h>
++#include <mach/k3-ddr.h>
+ 
+ #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
+ #define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
+@@ -262,6 +263,14 @@ void board_prep_linux(struct bootm_headers *images)
+ 
+ void enable_caches(void)
  {
- 	int el = get_effective_el();
-diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-index 3807c702fb6..257352f216e 100644
---- a/arch/arm/include/asm/armv8/mmu.h
-+++ b/arch/arm/include/asm/armv8/mmu.h
-@@ -194,8 +194,18 @@ struct mm_region {
- 	u64 attrs;
- };
- 
-+/* Used as the memory map for MMU configuration by mmu_setup */
- extern struct mm_region *mem_map;
- void setup_pgtables(void);
++	int ret;
 +
-+/**
-+ * mem_map_fix_dram_banks() - Populate mem_map with entries corresponding to
-+ * dram banks as per the gd. This should be called prior to mmu_setup.
-+ *
-+ * @index: The entry in mem_map to start the over-write
-+ * @len: The size of mem_map
-+ */
-+int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs);
- u64 get_tcr(u64 *pips, u64 *pva_bits);
++	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
++				     PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++					     PTE_BLOCK_INNER_SHARE);
++	if (ret)
++		debug("%s: Failed to setup dram banks\n", __func__);
++
+ 	mmu_setup();
  
- /**
+ 	icache_enable();
+diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+index 39e6725bb9b..94028593cea 100644
+--- a/arch/arm/mach-k3/include/mach/k3-ddr.h
++++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
+@@ -8,6 +8,12 @@
+ 
+ #include <spl.h>
+ 
++/* We need 3 extra entries for:
++ *   SoC peripherals, flash and the sentinel value.
++ */
++#define K3_MEM_MAP_LEN ((CONFIG_NR_DRAM_BANKS) + 3)
++#define K3_MEM_MAP_FIRST_BANK_IDX 2
++
+ int dram_init(void);
+ int dram_init_banksize(void);
+ 
 -- 
 2.50.1
 
