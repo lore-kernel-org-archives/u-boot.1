@@ -4,90 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B92E3CA0FED
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 23:09:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17CB3CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 23:12:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD44183942;
-	Sat,  6 Sep 2025 01:09:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 82FCA83995;
+	Sat,  6 Sep 2025 01:12:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="smCWjyzo";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WrBqCP55";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F38E483956; Sat,  6 Sep 2025 01:09:35 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id BF1508399B; Sat,  6 Sep 2025 01:12:05 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C557D8391E
- for <u-boot@lists.denx.de>; Sat,  6 Sep 2025 01:09:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B3A18391E
+ for <u-boot@lists.denx.de>; Sat,  6 Sep 2025 01:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-30cceb749d7so1277959fac.2
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 16:09:33 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-319c2a87a5aso1060647fac.1
+ for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 16:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757113772; x=1757718572; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757113922; x=1757718722; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SzTB43iOrrPmB7sbuRfCDLsTJpfvQ/SRFesPXXv4ud0=;
- b=smCWjyzoevoU5mObXO/v2rQHt3MxfSGMLdg0VMQKCD3mX5H+WHPXkr5Dsp99SMPdcs
- m/gCRfDbqGAIXe55cDDHsg8Rc+sp3Iq7uwP1Pt+ijrI/bTw2g2Pt3DaHT7pjAhYQQvZM
- iyQ4nT6Wy5K7L/9MlIVKSAVMqS69spViOYmBI=
+ bh=P0vXM/Z3zlAQBx4109tGtDof7Kuwxsht+cA/ZBIwvYo=;
+ b=WrBqCP55r5N2EFSwrsNS4aAMmAVz/O3YnRkWFgFqupI7O9XCqJHvADxCHGDBwolT1i
+ NaBw1qQvc8a4xghC4IkSl2bMynDvgDIYO5rtAu8693VrHEQxz6prr42HtmjxBczVe8hm
+ Mflw12FOSqBVwRKgJQD31xWRY29JTKWpMKVgw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757113772; x=1757718572;
+ d=1e100.net; s=20230601; t=1757113922; x=1757718722;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SzTB43iOrrPmB7sbuRfCDLsTJpfvQ/SRFesPXXv4ud0=;
- b=ME7yDHAdxPhvoq5e0Z18O3wRHbvnLGLlaXFM7N+Ns9Zoc8F+tiWR2inb5hrmnc6PUU
- Fm1n7hfwN67vBdgdIktcU/kLzW4f/EgFFbCF1VHT1tN1/GRm5AQ+moofC6mxBoVee+cQ
- wmBuTurQw6Gh93EvAdc4176w0nYAaj1VHIGwz5UWSwtLHNGV2nN+9Dc1BMbatXPdqv2y
- gwd7sIT7ddzTeFV2EE5407yW6XtixFA7VWsBMuuW7VwXXMkHnzhKR16zXbXO9FRCblk6
- BCcPEp6y4Z7tr0uU/ucN3pSnOMLtQI1g2fC8lPY4zQ/cUsL1RG11kUv9+U7klW+KFhLk
- G7QA==
-X-Gm-Message-State: AOJu0YzGh1QO0XhYILdbh1EuxUwZenE4G1mWyJ1vya05Z9t7O+R4oGps
- 4kj8vABXLpjmJFlsp9hiZNHV3pL8vico2Vw0HRdXo4SQl7kb+WgLzJJ9kdLgTkvzPvg=
-X-Gm-Gg: ASbGnctau/tpvoOzmgF2FpD57zRD2h4alxleaQQLqH1H/Jj/wK7l3IiBvWhJt6sJW/J
- ibVjnGBIHn0jcX7NNavnN7gAAS1yIiSNuX8xFxghzH5jQxDprK7PnV20lTPUlsLAe2eypzfik5p
- CZKDgp6Nhco+QsQnSSaWE/VrUog4wOQbKSu/b+q8OgF2GNs60RrjrMbboWHn6E1D2IS9lHeOHCq
- jPsG8im9jy4OGxGd8wuI74gvbzjR/R+ZKAevpP60uC6C9LdRo73dkmDyTv9F0P0X0Z1pY9UmzQR
- EKI2e2T/yfACbjrYuGKwfINv5gfE4i7RetukNw9iPvysjssoWcGpRvg9H/EPyo6nWEHutCRwkuq
- DQcjNsKK30bZE1yQ2bjPLocyCWWjvu0cENJfEdHPh9A/R4HK6V3+xsmr3
-X-Google-Smtp-Source: AGHT+IEJpOK0jwlIKBL7OhwqXYG7Iyu9dNLvB9AL4NFVsgS0j+NuSPOQFe3IrcL1PtQSfhI9i5R+pQ==
-X-Received: by 2002:a05:6871:341f:b0:315:a12c:f0cf with SMTP id
- 586e51a60fabf-3226553626fmr152715fac.50.1757113772390; 
- Fri, 05 Sep 2025 16:09:32 -0700 (PDT)
+ bh=P0vXM/Z3zlAQBx4109tGtDof7Kuwxsht+cA/ZBIwvYo=;
+ b=KCCCNM+md7AcTbwa/bXEZqNWmkMkOpPM5CmYBVDGfnF7gjd3qRdEnfMAj9DVuJ57Vr
+ 9UbMTpcpayuakbnhxodMjFeiHJ6DbYrAcb6iRGCYNhwhj1rE9v4pU08O9vRJttaDtQVO
+ nOjG71eWsJ1rQzHA1T3PAKYNms3OhO18Pb3IzlDkCd8SpRrX4CjgqvF5SSLvp2wu642Q
+ YSO4Wa5Smpvr5N3rTs+OBOgK7LxCYh354aP9ks8oKBjGK7gI4jjhCSkDxgcmnBtbocqy
+ gdK9aKtBR8b3Yx3hAnKhoRv7NH+FU6TCWfy7/1P3dNCfnFqUMZL+2ZTYlPH8Sn2GMKYm
+ S1hA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVK9DMO2Ae5heH2o9iJc+vDSpA0/C6F12jgifu2rBuuLsxIgdbJNaDGgP/PtXtSH7WnbxGD0ak=@lists.denx.de
+X-Gm-Message-State: AOJu0YzLBd+VR2enCUrFKdAgXdD1yPRTLbV3vII7eiKI7/N0iKlZzd5p
+ b5XkOKSzAAMDtRuWg0x9rT4Gl9cHb4be4dwO5nRYPJKJ/nUSspSmwMO62darJSeVDWo=
+X-Gm-Gg: ASbGncsc59NDXB6pV0d6BKp8oFC86fSiFp9VFucabWsmra0S8Hd5fFuRKqzl291GNQl
+ 3wLmkpZ38xJZnEbWNr4rCkAZIHnMMZC/5wikqRk835QbMU8X+uRqTe60sKXzzM/jfCRFCyxpjyj
+ UCHgIqyfaEJAmTcu4IjQENXEdo/7RV14Ok0aSwSJm+w22Tpdjk0AGxeODsOomr67Ga8gjyf4rRw
+ OjupVVbuj/hUEdUI7Hp2rBuVJANhcuVMxKS4EvnJGUYiyHIrv1+yPbf+4GRh8PXl8p0wM2odHR1
+ 9o57FQauy6uorJyk49YCjU4JoMxQZfQtKuYEPvGsROAAj3XfrqnqbDVm3Qnt/pbIViYHOXZyy1c
+ UuTiA2krVV7Tsw21Uk1TlKnIqW00wpWFRCWf7AXj5Gy9qmfdjQ67yHYV3
+X-Google-Smtp-Source: AGHT+IG4/8L10rAX34vP27OrFERBX4smaO2x1/3niHghCKngSmD5dA5S6a7gnPUqQ0ZhpnCCKgfzKQ==
+X-Received: by 2002:a05:6870:8884:b0:322:4c04:dd94 with SMTP id
+ 586e51a60fabf-32262d8eed3mr141388fac.18.1757113921713; 
+ Fri, 05 Sep 2025 16:12:01 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-31d69e6e9c8sm3203964fac.1.2025.09.05.16.09.31
+ 586e51a60fabf-32128eaef7bsm1216330fac.26.2025.09.05.16.12.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 16:09:31 -0700 (PDT)
-Date: Fri, 5 Sep 2025 17:09:29 -0600
+ Fri, 05 Sep 2025 16:12:00 -0700 (PDT)
+Date: Fri, 5 Sep 2025 17:11:59 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Neha Malcom Francis <n-francis@ti.com>
-Subject: Re: [PATCH 4/7] doc: make pdfdocs: Ensure SVG files are converted to
- PDF before the compilation of *.tex files
-Message-ID: <20250905230929.GN124814@bill-the-cat>
-References: <20250825224459.682403-1-adrianocarvalho.pt@gmail.com>
- <20250825224459.682403-5-adrianocarvalho.pt@gmail.com>
- <20250825230044.GB124814@bill-the-cat>
- <CACAHuLCyX_32AQozgt-Wf18b7ia5m3nRJZ7bA=M9oM1mwh-OXA@mail.gmail.com>
- <20250827002317.GF124814@bill-the-cat>
- <CACAHuLB0uwUjnR58qgeoOcHO-PC5geYFuBKF4Mw+=UFjT9urRQ@mail.gmail.com>
- <CACAHuLDZzgF1a7wG8fwNZ1YnUruPgyd9MifY2COS1kQFsqXsTw@mail.gmail.com>
- <CACAHuLDp5COeBue8jt8U3s59UsTnzjFH33ThXVFXk7-XLCF1BQ@mail.gmail.com>
+To: Patrick Rudolph <patrick.rudolph@9elements.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] configs: Fix crash on coreboot x86
+Message-ID: <20250905231159.GO124814@bill-the-cat>
+References: <20250903070502.136681-1-patrick.rudolph@9elements.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dPFRaoSnEzaiOPyg"
+ protocol="application/pgp-signature"; boundary="NFYe5ZWbDbjScQ6g"
 Content-Disposition: inline
-In-Reply-To: <CACAHuLDp5COeBue8jt8U3s59UsTnzjFH33ThXVFXk7-XLCF1BQ@mail.gmail.com>
+In-Reply-To: <20250903070502.136681-1-patrick.rudolph@9elements.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,66 +98,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---dPFRaoSnEzaiOPyg
+--NFYe5ZWbDbjScQ6g
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 04, 2025 at 02:24:57AM +0100, Adriano Carvalho wrote:
-> On Wed, 3 Sept 2025 at 02:14, Adriano Carvalho
-> <adrianocarvalho.pt@gmail.com> wrote:
-> > [...]
-> > So, in principle, we "only" need to replace all ".. image" with "..
-> > kernel-image" (65 occurrences / 17 files). However, I did that, and
-> > got:
-> >
-> > sphinx.errors.ExtensionError: Handler <bound method
-> > ImageCollector.process_doc of
-> > <sphinx.environment.collectors.asset.ImageCollector object at
-> > 0x79380051bbe0>> for event 'doctree-read' threw an exception
-> > (exception: 'uri')
-> > [...]
+On Wed, Sep 03, 2025 at 09:05:01AM +0200, Patrick Rudolph wrote:
+> Booting u-boot as payload with coreboot's main branch is currently broken
+> since commit [1] on x86 as U-boot assumes the active GDT matches what
+> U-Boot would have installed in start16.S.
 >=20
-> Actually, the right approach is to use ".. kernel-figure" not "..
-> kernel-image". The latter is never used in the kernel.
+> Make no assumptions and always load the GDT when building as coreboot
+> payload to make sure the segment registers are actually matching the GDT.
 >=20
-> Using ".. kernel-figure" it works fine. The remaining patches are
-> still required though.
+> Fixes #GP seen when booting U-Boot as coreboot payload.
 >=20
-> So, if you intend to remain aligned with Linux in the way the
-> Documentation is built, instead of this patch a new one is required
-> that replaces all instances of ".. image" with ".. kernel-image" (65
-> ccurrences / 17 files).
->=20
-> Please let me know how you'd like me to proceed.
+> 1: https://review.coreboot.org/c/coreboot/+/87255
+> Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 
-We should switch to "kernel-image" and update our checkpatch.pl to
-complain (and this might be acceptable to the linux kernel too, are
-there instances of ".. image" ? I assume they too should be
-kernel-image) so that we don't regress in easy to catch ways.
+Glad to see this. We should likely update coreboot in CI more often.
 
-And then yes, getting the correct non-zero SVG for the TI example needs
-to be done.
-
-> Moreover, the infrastructure to build the Documentation is a bit
-> behind that of Linux. Not a lot but quite a few changes. Should I try
-> to issue a patch series to place U-Boot as in sync as possible with
-> Linux?
-
-This is a question for Heinrich. Thanks again for digging here!
+Link: https://review.coreboot.org/c/coreboot/+/87255
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---dPFRaoSnEzaiOPyg
+--NFYe5ZWbDbjScQ6g
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLttpgAKCRAr4qD1Cr/k
-ChjnAQCFyKuDHb+Sf5wMcinLuYAC4383Se0ac1JKaOFG2Hjz9QD/c28rfr1KYr0Z
-BAdIYTcA3Gsu6d9TLaCqD2YqBXcF3Ak=
-=E0EJ
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLtuPgAKCRAr4qD1Cr/k
+Cs3vAP4oMnd1LtkueN504BbO9VMXfQBqFeO1tfCWUhFkg02RGAEAtO9Cb/ezae6g
+gOzZJEYwNFuWTPjpiO43isQUloPwPwM=
+=uhGZ
 -----END PGP SIGNATURE-----
 
---dPFRaoSnEzaiOPyg--
+--NFYe5ZWbDbjScQ6g--
