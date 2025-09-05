@@ -4,79 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 512DCCA1002
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 01:26:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FA74CA1002
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 01:33:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61FFA83816;
-	Fri,  5 Sep 2025 03:26:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 1294183807;
+	Fri,  5 Sep 2025 03:33:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="ZzyVmRK2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QsI9Fs6l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37AD48381D; Fri,  5 Sep 2025 03:26:20 +0200 (CEST)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A56AE83807; Fri,  5 Sep 2025 03:33:03 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBEE783807
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 03:26:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id CD8D4836B2
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 03:33:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 4c38ac4289f711f0bd5779446731db89-20250905
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=FiOdaZwJJLO8i8MbDpitdWv6Es3eYlAaJOsM0myjQMo=; 
- b=ZzyVmRK2fZ0bQvs/cwUi+0XL/gWPQnpAcVWKELkDuvqJyUOYvfmiJnWnquzbyNKn1kP6E7hCS+5o5cev7c49vIeJSm84+hB9aLtUqCv3aUrkdDg5WcFJfH5IhvwPSW2UWFkTkq+k4/AhLYhKOnOz/Oeq37IutyqL+wArIHrffGU=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.3, REQID:7c8239cc-2b69-4783-a5cc-61bc9e032063, IP:0,
- UR
- L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
- elease,TS:0
-X-CID-META: VersionHash:f1326cf, CLOUDID:6789376c-8443-424b-b119-dc42e68239b0,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102,TC:-5,Content:0|15|5
- 0,EDM:-3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,
- OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: 4c38ac4289f711f0bd5779446731db89-20250905
-Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 247871670; Fri, 05 Sep 2025 09:26:07 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.39; Fri, 5 Sep 2025 09:26:07 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.39 via Frontend Transport; Fri, 5 Sep 2025 09:26:03 +0800
-Message-ID: <3af4ba436c9d890096d679766cf3d6d6b0b65e71.camel@mediatek.com>
-Subject: Re: [PATCH v3 2/5] misc: fs_loader: allow using long script name in
- request_firmware_into_buf_via_script()
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Lothar =?ISO-8859-1?Q?Wa=DFmann?= <LW@KARO-electronics.de>
-CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini <trini@konsulko.com>, "Lucien
- . Jheng" <lucienzx159@gmail.com>
-Date: Fri, 5 Sep 2025 09:26:05 +0800
-In-Reply-To: <20250904112811.5a104f4d@karo-electronics.de>
-References: <cover.1756885599.git.weijie.gao@mediatek.com>
- <038e8258c903367dccd9c7cd1adb51bcf2bdf307.1756885599.git.weijie.gao@mediatek.com>
- <20250903133600.52169228@karo-electronics.de>
- <5ada4f98b8d09bd78915bef278dee780de5d7fa2.camel@mediatek.com>
- <20250904112811.5a104f4d@karo-electronics.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-31d6aa3e73fso1145645fac.0
+ for <u-boot@lists.denx.de>; Thu, 04 Sep 2025 18:33:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1757035979; x=1757640779; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Dw41xImHbhSCIw+PEzPWHIo4wH8UuhXs+pO2qcMnYhQ=;
+ b=QsI9Fs6lE3+m3V6DJzh5tux+Qo6vLVWBSXd1Ty+Fh6/f6rLcjaug2xQA7IYJ8JgZn5
+ ijOHnNizwjVr6NQpOGKmk4UItkCCuVtCOAIEwvv7b+22Aqi3xqaI+Vi3SNSCuvpcSTkp
+ drNcfLvsj7mEsvNRVBfn7JvFxMf7nlHLUA0XU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757035979; x=1757640779;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Dw41xImHbhSCIw+PEzPWHIo4wH8UuhXs+pO2qcMnYhQ=;
+ b=qf2HnyGiOGiZxsyC5LfBO/n5c3w7O6aFVoyVkIt7m79QpYhi/Lz+bYFKkEiCiznvtQ
+ TuDatR8uK6v/fyMF8m0U39GAMpv8oX1Qrz78FNdjX6+BTQ9GzV5uGPyMgUmiwWkOHv8/
+ ceAn/Ia+CrpxhwpbB1IRCwTZ101w96h7f5WT1snTStZ0UA+2HWAQzRCn9ZMPYmtpXAob
+ MUQToXhMnioJZlXvObheYC79ZQsDJJs3/zYAbTOeIMN7lJ/EsGX58ReLAqkcGlBVQ7/a
+ gtsKF8+NiXQMHMYdeSPvVNPJsQTcUIY4bfU/bLRL089mBYnJncSvkZUg0OHWcEA7sfRZ
+ UGJQ==
+X-Gm-Message-State: AOJu0YyWxFpc+xi0GxygecmMYgn99iYqmmBUxOZuv217m+qFttbKolhB
+ pcagxA9jE6v74UMY/tVZOVrHg3ZSiQaKqRQIrISaxqtdsaQEkHNVuJnXtwTWmWOtnrhqLj5VE6L
+ ybpfCobI=
+X-Gm-Gg: ASbGnct093GRa721H4eajRam0DrEPV+yUXCPvzPnbZbE9F6asuovMLm7sFL2qpfcnJ1
+ Qvqx0kXgleGYEoiU81ukC2dwi1vIayw1NDveD7IM17HdnQHKThysWWYYEsUpfnkrrno7tRb5N2K
+ pKOfclC+85lYR7Y0HNJnROYFZaQHjZK/hGabsx9aUF1l7XHYlGOxPL3eNG2kPG1ZPaaL2BoemK4
+ u2bRKrmTSePuHW8VsTLT3+xKun18VQZHfiP4vM9Fou9cgb77fVDHVODk0ScWajyHB7QnzHMGlMl
+ TnjJSmhQ3Z+EeF7rqel05urXK2zRr2JSB3Sx9A+mghCLPrTYLlDeDEjyL0pDQZHxNIz+DYpaM/e
+ x6ujmbIvqGQFG8FzBLM6AqxG4uwIhlTurN89+CiqVmLSj7ZsFrRsa+yTaX1wtGYXFWtE=
+X-Google-Smtp-Source: AGHT+IFzcB42otTSA0Jqrt+2YKvC84yTcD2MqKVNRomFxZu76/44jZepeFJ43SlyRvz+WHFJ+ba+pg==
+X-Received: by 2002:a05:6871:5214:b0:30b:9a9c:72 with SMTP id
+ 586e51a60fabf-31f14f8b0ddmr1014175fac.0.1757035979476; 
+ Thu, 04 Sep 2025 18:32:59 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-319b6063050sm3167482fac.25.2025.09.04.18.32.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Sep 2025 18:32:58 -0700 (PDT)
+Date: Thu, 4 Sep 2025 19:32:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Maarten Brock <Maarten.Brock@sttls.nl>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 2/2] ti: Do not remove ft_board_setup for CONFIG_NO_NET
+Message-ID: <20250905013256.GI124814@bill-the-cat>
+References: <DB6PR05MB45517FBC403C54F9589F03878307A@DB6PR05MB4551.eurprd05.prod.outlook.com>
+ <20250901182549.GD124814@bill-the-cat>
+ <DB6PR05MB4551C8F51246AD5EEA64F4498300A@DB6PR05MB4551.eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MTK: N
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lYABbdkwCunxSiL/"
+Content-Disposition: inline
+In-Reply-To: <DB6PR05MB4551C8F51246AD5EEA64F4498300A@DB6PR05MB4551.eurprd05.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,87 +101,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Thu, 2025-09-04 at 11:28 +0200, Lothar Waßmann wrote:
-> External email : Please do not click links or open attachments until
-> you have verified the sender or the content.
-> 
-> 
-> Hi,
-> 
-> On Thu, 4 Sep 2025 08:23:28 +0800 Weijie Gao wrote:
-> > On Wed, 2025-09-03 at 13:36 +0200, Lothar Waßmann wrote:
-> > > External email : Please do not click links or open attachments
-> > > until
-> > > you have verified the sender or the content.
-> > > 
-> > > 
-> > > Hi,
-> > > 
-> > > On Wed, 3 Sep 2025 16:38:30 +0800 Weijie Gao wrote:
-> > > > Use cmd_process() to remove the length limit of script name
-> > > > used
-> > > > for
-> > > > run_command().
-> > > > 
-> > > > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-> > > > ---
-> > > >  drivers/misc/fs_loader.c | 9 +++------
-> > > >  1 file changed, 3 insertions(+), 6 deletions(-)
-> > > > 
-> > > > diff --git a/drivers/misc/fs_loader.c
-> > > > b/drivers/misc/fs_loader.c
-> > > > index 87acd385e23..6a6796c1931 100644
-> > > > --- a/drivers/misc/fs_loader.c
-> > > > +++ b/drivers/misc/fs_loader.c
-> > > > @@ -232,18 +232,15 @@ int
-> > > > request_firmware_into_buf_via_script(void
-> > > > **buf, size_t max_size,
-> > > >                                        const char *script_name,
-> > > >                                        size_t *retsize)
-> > > >  {
-> > > > +     char *args[2] = { (char *)"run", (char *)script_name };
-> > > > 
-> > > 
-> > > const char *args[2] = { "run", script_name };
-> > > does not work?
-> > > 
-> > > I don't see any need for a non-const 'args' here.
-> > 
-> > We'll get compiler warning if using const char *[]:
-> > 
-> >   CC      drivers/misc/fs_loader.o
-> > drivers/misc/fs_loader.c: In function
-> > 'request_firmware_into_buf_via_script':
-> > drivers/misc/fs_loader.c:243:33: warning: passing argument 3 of
-> > 'cmd_process' from incompatible pointer type [-Wincompatible-
-> > pointer-
-> > types]
-> >   243 |         ret = cmd_process(0, 2, args, &repeatable, NULL);
-> >       |                                 ^~~~
-> >       |                                 |
-> >       |                                 const char **
-> > 
-> 
-> OK. But at least:
->         char *args[2] = { "run", (char *)script_name };
-> should work...
+--lYABbdkwCunxSiL/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You're right. I thought string literals are always const.
+On Thu, Sep 04, 2025 at 01:19:26PM +0000, Maarten Brock wrote:
+> From: Tom Rini
+>=20
+> > On Mon, Sep 01, 2025 at 04:06:10PM +0000, Maarten Brock wrote:
+> >=20
+> > > Even when CONFIG_NO_NET is selected there is still need for a
+> > > definition of ft_board_setup(). Thus move the checks for
+> > > CONFIG_DM_ETH and CONFIG_DRIVER_TI_CPSW inside the function.
+> > >
+> > > Signed-off-by: Maarten Brock <maarten.brock@sttls.nl>
+> >=20
+> > Shouldn't OF_BOARD_SETUP be disabled in that case?
+> >=20
+> > --
+> > Tom
+>=20
+> Had there also been non-NET-related fixups in this ft_board_setup(),
+> would that also have been your answer?
+> I don't see why disabling NET drivers would have to impact anything else.
 
-> 
-> 
-> NB: The right fix would be to change the argument type of
-> cmd_process()
-> (and all functions with similar semantics...) to
-> "const char *const argv[]", since cmd_process() need not and should
-> not
-> be able to modify any of the strings within argv[].
+Yes it would have been my answer. And because not all dependencies are
+easily expressible in Kconfig.
 
-I agree. But this should be sent in another patch series.
+--=20
+Tom
 
-> 
-> 
-> Lothar Waßmann
+--lYABbdkwCunxSiL/
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLo9xAAKCRAr4qD1Cr/k
+CpzBAQC6Xrsrb9Mj32Zo57ZxgSnQMsl3OEi1CiWGVYNOMRp1VAEAngUnym3QvsZ5
+Zm2r4aTZNxOIg3SzfTqoYEtWQn9yFQY=
+=DJ/f
+-----END PGP SIGNATURE-----
+
+--lYABbdkwCunxSiL/--
