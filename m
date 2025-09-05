@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B49CA0FED
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 20:54:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A81ACA1017
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 21:43:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B44BD83959;
-	Fri,  5 Sep 2025 22:54:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B647B83931;
+	Fri,  5 Sep 2025 23:43:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y6gCjWJW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IUXNp0fj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D68378392E; Fri,  5 Sep 2025 22:53:59 +0200 (CEST)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id 6479383935; Fri,  5 Sep 2025 23:43:50 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61DFF8391E
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 22:53:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 334CB803F5
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 23:43:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-52912c1c805so1462496137.2
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 13:53:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-61e45eb42ccso906324eaf.3
+ for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 14:43:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757105636; x=1757710436; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=UizvHU+Mo4Eja0G/Jbt5lteUugv97BEZ9bguedPHiPk=;
- b=Y6gCjWJWtiaO3cPAKJiwX+Tw4hQNQnjDz36qun04XuU+kZzb9+Ns7XO92/YUG75J1r
- 85ZmxupHxWuThQmWkkGYGDcjHdZMskHEv1Ymt/NNCAC2GgJ6DHC79XAFzVDh+mS5W4+Y
- OhMn6K7jFzvkZhFboEFhJ5OjUSxtxld+ArKsJEUB0C9vUUVhdQD2PYN1/PoVp+NQzlUi
- oRFC++gC4hYO57qcGBYZ/4+XCBdCokwVF1kKxRCkCQPSjXL/ZUzT5FQ6oceRqDkP5QFT
- JAM7rl2zI5GKhz82u9e2JkB2dMaamgJf0eEDFU8K284TDL+PrX7YezRvVUcX+rrYC7AD
- ubuw==
+ d=konsulko.com; s=google; t=1757108627; x=1757713427; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=GdLh+qfua5P4sqJG2Dk6NvcxF1mlaXGhXe5DWOE0mLw=;
+ b=IUXNp0fjU1/Gdqi7FEZhixY54qvrrv5ijGDlGkHGx+QKkyyIaVmAwdh2fJ54ZFDV+v
+ qc3UAe4ItZLfCyACLZuVD0xXdkBpsVZQBTsV940eeIAxHX9omzBICIn9SWhwCeiudiQ7
+ sgeWp0zYDPBbgQlTMsyKSJRw6LdJWACPYkvqw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757105636; x=1757710436;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UizvHU+Mo4Eja0G/Jbt5lteUugv97BEZ9bguedPHiPk=;
- b=e+K1cVKK9jAFUlzEkv+s47LVWGVe6nQcwQvc+HMSuRteukd6Qp72UYUNUEn4p3MQaQ
- W1bgJxFOOvcM95nmE89pgjM73mARepWHkwUdtGjV+s2bEX/imxlrFE8tT91eEl97QV0W
- uQqvqCAMRsDXe45+QjJJcTUvVxgLpCfYCfc6QUb1SvGfVoncm5zKN8f7NY7sFngtw5sC
- /t/1KjiZ1BTWk344R1y/AsQ1MMz6VlScyCQIQ3oKHe9wMfyZn3rbK1dyKH8jxKjVr2Oz
- aeBVzgg+v+I1kAe5PBFGxLuI+7IDcxgvWlaUfulHb4RLdzJL48g7XMx4fHwWwx6nBuoi
- SluQ==
-X-Gm-Message-State: AOJu0YxySz6MwFj8DDwa91o5RQFPGI9/uGhIUMWP32NYu26pf7GVqGrY
- wUQHQzw3r+FPSdByMjtVzJ4M5mejTdrCzEtXhHtggWg2OjCdUiV8Lxai4jfIFWKKXXOW1ck9hJi
- 345XI
-X-Gm-Gg: ASbGncsboMzB8pJQ7fTYcC1hXoLjBl9D3oEq15gEQb4YIdZesQzTrxoENNukUBEhSCB
- fXepK0J8snCmWrXT8E/B3OVZ2kePOg5GBNKuIpDEJMHLevZF+NG/NbcCXl7OVmN4hU3tNYTm8Rd
- MSG9N/gsFBFquXDVaePhoVomqA/WUTFGmOd2mJnFiI9/E4wxYL8f5H3BG/4rXr4C1D+wbo7sOLd
- uSZZAWzfM4Mg/loP/GjiKvpjUNBLxQoZfy2g+kQnvRK5A2to3KZ3Foo1NAaKDMzdhPfzFOP0207
- 59B7yvodtK63f0b4YthsJEsaAK7dmq/ySFwENSuhvgxph5i/OKYLIX3j0StLnjASH4zZ79ktO+J
- +OS8ty1ziy7/4QLMtf+odJ8lOjNS20SvM+nvuLg+Cw+6xxf2xILpFWy6nU2U=
-X-Google-Smtp-Source: AGHT+IE0Od9r1MVzhc2ORf3CH68jRspJ7G19xml83n7hLfrwvUOOkn657SlnfrCxnGN07Epcb9KCXQ==
-X-Received: by 2002:a05:6102:2923:b0:523:d0d7:b963 with SMTP id
- ada2fe7eead31-53d218dd0fcmr111136137.22.1757105635951; 
- Fri, 05 Sep 2025 13:53:55 -0700 (PDT)
-Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.181])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-52aef459c9asm8395330137.1.2025.09.05.13.53.54
+ d=1e100.net; s=20230601; t=1757108627; x=1757713427;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GdLh+qfua5P4sqJG2Dk6NvcxF1mlaXGhXe5DWOE0mLw=;
+ b=noczuXlbUEQgjrzH0O64vYVxzU63qFZBG3Wvhku9TCYor1HX5ByDfc6rnO/2mKeCr8
+ 1OXscf2/PXlahDh1FWrjM/3h5bcHfZrS3WSMv1CDY0tkiD932DXVOLU0QlJze6W3oHYa
+ lIBS2AuVDmzANUTzjufGzEhWow8YB3yOjM7qu8xhZctJpAgw457IXcI6mDG/hL3x1wXg
+ W3LXlInXfl+04bSfEPyP4XGACchM70i0zA5LKG+3NItqX+y1Y+7maUwBQqp4EjLle8b2
+ Xj62sSIBMYMCwEr5JclewV+xkBsGp4BSYxrAf0xorqLk8W4uwD7SDO6uqRIAXER7N8mk
+ jjrQ==
+X-Gm-Message-State: AOJu0YyvoJP0i6A3VCwBGEDRC2FNcu+847nd0UaJaD3680OypjvG0RSh
+ dwO3AYwi8ixHxhsDawU52+glFvI+sWVL8Ed/sxV2e6d/zuK1jc7zwc/oDHTxvIRMHOl5+VolVZY
+ 4agegCVY=
+X-Gm-Gg: ASbGncsHWQoacznROGc4uVu3x2XakQB8bKAOo0GFU/dkv7ngQruiUHhrbaDFR5bO3+r
+ sXDaESST/QzoufOb8vqWRPeOE0b11PIba3QmJr2E96v4B2OcqsIqEUgrQsksEGdFPe7X3oS8oVj
+ kCb990XvxEWxWn0qpHHKknejDgUhKwtwCyaFkqszWaef2WY4d5P3/MmtNdDf3tNuyZZvt/Z6KeM
+ J3kkYjRg11e2hhL+eo42QcHBAT1GIzd2Ci84b03pk9EGBNCnYro29SDZRhXaIbRuaThKdoNA3On
+ +OzjKp759d5afsIm6mKwQfka7v7jxEKSesVjOO4yILDZlfPxVQUxS/RpvaUWjbRQzpwsrEd2wDp
+ BndiYi5ybLlVXa5gUQ1pPM+3kkw04B94HfD9jKV9NkwMAPI4VaeLg6kNG
+X-Google-Smtp-Source: AGHT+IEAPReS7+x1Mv039nM+PKxLxqoYdEBktU9dutI+7vFS5c6tfjwBa9qDpJQ2En0SMZP+TRW2tw==
+X-Received: by 2002:a05:6808:22a1:b0:439:b491:4018 with SMTP id
+ 5614622812f47-43b29a2203fmr130318b6e.9.1757108626725; 
+ Fri, 05 Sep 2025 14:43:46 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-62171226bd2sm394334eaf.4.2025.09.05.14.43.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 13:53:55 -0700 (PDT)
-From: Javier Tia <javier.tia@linaro.org>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 4/4] doc: Update U-Boot coding style guide with
- clang-format usage
-Date: Fri,  5 Sep 2025 14:53:47 -0600
-Message-ID: <20250905205349.127333-5-javier.tia@linaro.org>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250905205349.127333-1-javier.tia@linaro.org>
-References: <20250905205349.127333-1-javier.tia@linaro.org>
+ Fri, 05 Sep 2025 14:43:45 -0700 (PDT)
+Date: Fri, 5 Sep 2025 15:43:43 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Maarten Brock <Maarten.Brock@sttls.nl>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 2/2] ti: Do not remove ft_board_setup for CONFIG_NO_NET
+Message-ID: <20250905214343.GM124814@bill-the-cat>
+References: <DB6PR05MB45517FBC403C54F9589F03878307A@DB6PR05MB4551.eurprd05.prod.outlook.com>
+ <20250901182549.GD124814@bill-the-cat>
+ <DB6PR05MB4551C8F51246AD5EEA64F4498300A@DB6PR05MB4551.eurprd05.prod.outlook.com>
+ <20250905013256.GI124814@bill-the-cat>
+ <DB6PR05MB4551C55FB367824AB9AF8FFB8303A@DB6PR05MB4551.eurprd05.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uTdvBoBpaXM27D5N"
+Content-Disposition: inline
+In-Reply-To: <DB6PR05MB4551C55FB367824AB9AF8FFB8303A@DB6PR05MB4551.eurprd05.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,128 +103,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The U-Boot coding style guide has been updated to include information
-about using the `.clang-format` configuration file for automatic code
-formatting. This ensures consistent formatting across the entire
-codebase and aligns with Linux kernel coding standards. The goal with
-introducing a predefined coding style is consistency rather than
-personal preference.
 
-The .clang-format file is copied directly from the Linux kernel without
-any modifications, ensuring complete compatibility with kernel coding
-standards.
+--uTdvBoBpaXM27D5N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Include comprehensive best practices for using clang-format,
-specifically guidance on formatting only changed blocks versus entire
-files, creating separate formatting-only commits for better code review,
-and leveraging git clang-format for targeted formatting. Add examples of
-editor integrations. This enhancement will help maintainers and
-contributors to easily adhere to U-Boot coding standards.
+On Fri, Sep 05, 2025 at 10:06:10AM +0000, Maarten Brock wrote:
+> From: Tom Rini
+> > On Thu, Sep 04, 2025 at 01:19:26PM +0000, Maarten Brock wrote:
+> > > From: Tom Rini
+> > >
+> > > > On Mon, Sep 01, 2025 at 04:06:10PM +0000, Maarten Brock wrote:
+> > > >
+> > > > > Even when CONFIG_NO_NET is selected there is still need for a
+> > > > > definition of ft_board_setup(). Thus move the checks for
+> > > > > CONFIG_DM_ETH and CONFIG_DRIVER_TI_CPSW inside the function.
+> > > > >
+> > > > > Signed-off-by: Maarten Brock <maarten.brock@sttls.nl>
+> > > >
+> > > > Shouldn't OF_BOARD_SETUP be disabled in that case?
+> > > >
+> > > > --
+> > > > Tom
+> > >
+> > > Had there also been non-NET-related fixups in this ft_board_setup(),
+> > > would that also have been your answer?
+> > > I don't see why disabling NET drivers would have to impact anything e=
+lse.
+> >=20
+> > Yes it would have been my answer. And because not all dependencies are
+> > easily expressible in Kconfig.
+>=20
+> If this is your opinion then I propose to remove the checks for DM_ETH and
+> DRIVER_TI_CPSW alltogether. They obviously serve no purpose as one is
+> required to deselect OF_BOARD_SETUP when NO_NET is selected.
+>=20
+> -#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_CONTROL) && \
+> -	defined(CONFIG_DM_ETH) && defined(CONFIG_DRIVER_TI_CPSW)
+> +#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_CONTROL)
+>=20
+> I must hope that there will never be the need for other fixups for e.g.
+> the RTC or the user is left with either choosing both RTC and NET or neit=
+her.
 
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
----
- doc/develop/codingstyle.rst | 81 ++++++++++++++++++++++++++++++++++++-
- 1 file changed, 79 insertions(+), 2 deletions(-)
+Well, those checks (or similar ones) were first put in 13-14 years ago
+maybe? So yes, some restructuring might well make sense at this point,
+given what the codebase looks like now. We can deal with what the future
+brings, in the future. Your logs in the other patch show that the kernel
+has again changed its mind about where the MAC must come from as I would
+have sworn that there was a window of time where no, the kernel wouldn't
+read the fuses.
 
-diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
-index bc18b2ebb7b..10bfa747c6c 100644
---- a/doc/develop/codingstyle.rst
-+++ b/doc/develop/codingstyle.rst
-@@ -12,8 +12,9 @@ or only minimal changes.
- The following rules apply:
- 
- * All contributions to U-Boot should conform to the `Linux kernel
--  coding style <https://www.kernel.org/doc/html/latest/process/coding-style.html>`_
--  and the `Lindent script <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/scripts/Lindent>`_.
-+  coding style <https://www.kernel.org/doc/html/latest/process/coding-style.html>`_.
-+  U-Boot includes a `.clang-format` configuration file that can be used to
-+  automatically format code according to these standards.
-   * The exception for net files to the `multi-line comment
-   <https://www.kernel.org/doc/html/latest/process/coding-style.html#commenting>`_
-   applies only to Linux, not to U-Boot. Only large hunks which are copied
-@@ -23,6 +24,82 @@ The following rules apply:
-   <https://peps.python.org/pep-0008/>`_. Use `pylint
-   <https://github.com/pylint-dev/pylint>`_ for checking the code.
- 
-+Code Formatting with clang-format
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+U-Boot provides a `.clang-format` configuration file that was copied directly
-+from the Linux kernel without any modifications, ensuring complete compatibility
-+with kernel coding standards. Here are common ways to use clang-format:
-+
-+**Basic usage for single files:**
-+
-+.. code-block:: bash
-+
-+   clang-format -style=file -i <file>
-+
-+**Format multiple files:**
-+
-+.. code-block:: bash
-+
-+   find . -name '*.c' -o -name '*.h' | xargs clang-format -style=file -i
-+
-+**Integration with git (format only staged changes):**
-+
-+.. code-block:: bash
-+
-+   git clang-format
-+
-+**Editor integration examples:**
-+
-+* **Vim/Neovim:** Install vim-clang-format plugin
-+* **Emacs:** Use clang-format.el
-+* **VSCode:** Install "Clang-Format" extension
-+* **Most IDEs:** Have built-in or plugin support for clang-format
-+
-+The `.clang-format` file in the repository root ensures consistent formatting
-+across the entire codebase and aligns with Linux kernel coding standards.
-+
-+**Disabling clang-format for specific code blocks:**
-+
-+In some cases, you may want to disable automatic formatting for specific code
-+sections, such as carefully formatted tables, assembly code, or imported code
-+from other projects. Use the following comments to control formatting:
-+
-+.. code-block:: c
-+
-+   // clang-format off
-+   static const struct register_config regs[] = {
-+       { 0x1000, 0x12345678 },  // Base address register
-+       { 0x1004, 0xabcdef00 },  // Control register
-+       { 0x1008, 0x00000001 },  // Status register
-+   };
-+   // clang-format on
-+
-+**Controversial aspects of coding style enforcement:**
-+
-+Coding style enforcement can be controversial, and it's difficult to have one
-+configuration that satisfies everyone's personal preferences. The goal of using
-+clang-format is consistency across the codebase rather than accommodating
-+individual preferences. While some developers may disagree with specific
-+formatting choices, maintaining a uniform style throughout the project makes
-+code more readable and maintainable for the entire development community.
-+
-+**Best practices for formatting:**
-+
-+When using clang-format to format code, consider these best practices:
-+
-+* **Format only changed blocks:** It's preferred to format only the blocks of
-+  code that have been modified rather than entire files. This keeps diffs
-+  focused on actual changes and makes code reviews easier.
-+
-+* **Separate formatting commits:** If you need to format entire files, create
-+  a separate commit containing only formatting changes. This allows reviewers
-+  to easily distinguish between functional changes and pure formatting updates.
-+
-+* **Use git clang-format:** The ``git clang-format`` command is particularly
-+  useful as it formats only the lines that have been modified in your current
-+  changes, avoiding unnecessary formatting of unchanged code.
-+
- * Use patman to send your patches (``tools/patman/patman -H`` for full
-   instructions). With a few tags in your commits this will check your patches
-   and take care of emailing them.
--- 
-2.51.0
+--=20
+Tom
 
+--uTdvBoBpaXM27D5N
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLtZjAAKCRAr4qD1Cr/k
+CpluAQCmVr4LNuf/9Fn6hrO8at5prasrcIv29rlZnvlkJux3EQD/bhMXNvrZGQK+
+c5AVY+TdVchuDnAUAPxuCTkt2XYwwQk=
+=7Ebw
+-----END PGP SIGNATURE-----
+
+--uTdvBoBpaXM27D5N--
