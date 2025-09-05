@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A81ACA1017
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 21:43:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A51CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 21:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B647B83931;
-	Fri,  5 Sep 2025 23:43:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 826BA8393C;
+	Fri,  5 Sep 2025 23:53:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IUXNp0fj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EQZGOFVF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6479383935; Fri,  5 Sep 2025 23:43:50 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id BDA8C83942; Fri,  5 Sep 2025 23:53:30 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 334CB803F5
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 23:43:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C42F83885
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 23:53:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-61e45eb42ccso906324eaf.3
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 14:43:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-55f7ad815ceso2885938e87.3
+ for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 14:53:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757108627; x=1757713427; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GdLh+qfua5P4sqJG2Dk6NvcxF1mlaXGhXe5DWOE0mLw=;
- b=IUXNp0fjU1/Gdqi7FEZhixY54qvrrv5ijGDlGkHGx+QKkyyIaVmAwdh2fJ54ZFDV+v
- qc3UAe4ItZLfCyACLZuVD0xXdkBpsVZQBTsV940eeIAxHX9omzBICIn9SWhwCeiudiQ7
- sgeWp0zYDPBbgQlTMsyKSJRw6LdJWACPYkvqw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757108627; x=1757713427;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1757109208; x=1757714008; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GdLh+qfua5P4sqJG2Dk6NvcxF1mlaXGhXe5DWOE0mLw=;
- b=noczuXlbUEQgjrzH0O64vYVxzU63qFZBG3Wvhku9TCYor1HX5ByDfc6rnO/2mKeCr8
- 1OXscf2/PXlahDh1FWrjM/3h5bcHfZrS3WSMv1CDY0tkiD932DXVOLU0QlJze6W3oHYa
- lIBS2AuVDmzANUTzjufGzEhWow8YB3yOjM7qu8xhZctJpAgw457IXcI6mDG/hL3x1wXg
- W3LXlInXfl+04bSfEPyP4XGACchM70i0zA5LKG+3NItqX+y1Y+7maUwBQqp4EjLle8b2
- Xj62sSIBMYMCwEr5JclewV+xkBsGp4BSYxrAf0xorqLk8W4uwD7SDO6uqRIAXER7N8mk
- jjrQ==
-X-Gm-Message-State: AOJu0YyvoJP0i6A3VCwBGEDRC2FNcu+847nd0UaJaD3680OypjvG0RSh
- dwO3AYwi8ixHxhsDawU52+glFvI+sWVL8Ed/sxV2e6d/zuK1jc7zwc/oDHTxvIRMHOl5+VolVZY
- 4agegCVY=
-X-Gm-Gg: ASbGncsHWQoacznROGc4uVu3x2XakQB8bKAOo0GFU/dkv7ngQruiUHhrbaDFR5bO3+r
- sXDaESST/QzoufOb8vqWRPeOE0b11PIba3QmJr2E96v4B2OcqsIqEUgrQsksEGdFPe7X3oS8oVj
- kCb990XvxEWxWn0qpHHKknejDgUhKwtwCyaFkqszWaef2WY4d5P3/MmtNdDf3tNuyZZvt/Z6KeM
- J3kkYjRg11e2hhL+eo42QcHBAT1GIzd2Ci84b03pk9EGBNCnYro29SDZRhXaIbRuaThKdoNA3On
- +OzjKp759d5afsIm6mKwQfka7v7jxEKSesVjOO4yILDZlfPxVQUxS/RpvaUWjbRQzpwsrEd2wDp
- BndiYi5ybLlVXa5gUQ1pPM+3kkw04B94HfD9jKV9NkwMAPI4VaeLg6kNG
-X-Google-Smtp-Source: AGHT+IEAPReS7+x1Mv039nM+PKxLxqoYdEBktU9dutI+7vFS5c6tfjwBa9qDpJQ2En0SMZP+TRW2tw==
-X-Received: by 2002:a05:6808:22a1:b0:439:b491:4018 with SMTP id
- 5614622812f47-43b29a2203fmr130318b6e.9.1757108626725; 
- Fri, 05 Sep 2025 14:43:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-62171226bd2sm394334eaf.4.2025.09.05.14.43.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 14:43:45 -0700 (PDT)
-Date: Fri, 5 Sep 2025 15:43:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Maarten Brock <Maarten.Brock@sttls.nl>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Kory Maincent <kory.maincent@bootlin.com>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 2/2] ti: Do not remove ft_board_setup for CONFIG_NO_NET
-Message-ID: <20250905214343.GM124814@bill-the-cat>
-References: <DB6PR05MB45517FBC403C54F9589F03878307A@DB6PR05MB4551.eurprd05.prod.outlook.com>
- <20250901182549.GD124814@bill-the-cat>
- <DB6PR05MB4551C8F51246AD5EEA64F4498300A@DB6PR05MB4551.eurprd05.prod.outlook.com>
- <20250905013256.GI124814@bill-the-cat>
- <DB6PR05MB4551C55FB367824AB9AF8FFB8303A@DB6PR05MB4551.eurprd05.prod.outlook.com>
+ bh=Db3UdhF75jvXFbWknXGaQgPV8QOv36wfoS5ErEFSlZE=;
+ b=EQZGOFVFiDTaZwoB8FTskCVDmEzY3h4btomvDuzLEy4cUMkSH/2W8OBZWbKZrKviXE
+ fE5iklwNwVvoBw8nI3Cxd2qBHkv+7gionwXelsblnAXmSxkY/cIFas0KasVqZZHyimC2
+ wsuoNe5oLD4BqdHw8wHKiWX9rCtSyqZ14pSAUA8eNhcs3k5u0IoP7vYbRVqYdP/vApVq
+ M5mEGSYreAKG0NwW6EyrAEMFXi+DjFa8CErQq0YQ6XWd0Z7Dlx3Pq2pGIUD+Daalmt/3
+ Tnif6e6kAZWCcaUFbhrrd73wHyDHRs+eiXTa/2xOeFCcymbDp/H1KllziinqXmYozcHU
+ bXQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757109208; x=1757714008;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Db3UdhF75jvXFbWknXGaQgPV8QOv36wfoS5ErEFSlZE=;
+ b=jaLZvz6RsVst/tEwxpdECoOkvOLALXn/tRJaDpmbSotTPK7uRQTJoTHWJvDFYiHHsI
+ DAQDwDstfT91EskZ0PHQnxMnN1MI5yQHXktNdvy0ywIlcTpw1yU/H7Xu1nJLSOLdws+4
+ bVDZiSI2yq57ohinilmPKPjB+exTNzZ4GeA3w70sitT2BtZzkke8qlGi8ugJ/vzpvXUN
+ o1Gkhko+3zKyyEHEH3GPFbk0rMVPvlAG5r3mxCTxH08wcny/syO/0rDLXq+toCxk3jdq
+ ZbTZ+7Xu5lnXiSWl0VKeljyCRvel4s2uxU3PDzTphn8s45eUG1EeWREjhqQtlbfxRLXm
+ AmXA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbDuhKDQYbLkkNjeNJ3F6R8JZM8v1ifUatYN6gnwV/Cp/+/HaEZS96NZaskiZi/ggL1h+HHGI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzeNJX1Onh8XrgKQUX4EakNUZ9+YE1IdeVNG0wLcFsqJGyTSXxu
+ JMwBUmY7DCiGeXqLT0ngf1+rwf3Wito2RyMInhPvRqb8TVpdSJbCbRcjyNPR2LnCIplIMbWjLz5
+ sy4CpT7X5baTkXD/tPDWymyn0ERNc3dI=
+X-Gm-Gg: ASbGncvmXxXDxwr2jc6XDP0OeaoJLq5TcEWmvf+rSoHCSI51KCa7Q+3QS19Zbv/ZpuK
+ hrCPnl8UbCn44ibiep0uLBkatgNJRx/FAR52iTzI86/aoDG6rTMOquV2x5F5NYPONF5lSF+dkf+
+ 3tlDPjWNfzlRXp7x2P14MR/SdV4cUbxsu92tYUfN74LI4Lk/GE/5nDh5ylsOZ6m0V0tM5qM70JQ
+ +p5GeTHDh8h3UgH4AEaFfSA2EiSjA2i8DpGNkE=
+X-Google-Smtp-Source: AGHT+IGlH2BZ4bcCCVOxXbO3pv/U09PFl+jKwLYQXtT0FzsI9oHGmQD+/s8nDzpfZsrquStT2iYFEPiwQemIdqF6S4M=
+X-Received: by 2002:a05:6512:e9b:b0:55c:d62b:d0fc with SMTP id
+ 2adb3069b0e04-5625f62abcfmr86686e87.10.1757109207328; Fri, 05 Sep 2025
+ 14:53:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uTdvBoBpaXM27D5N"
-Content-Disposition: inline
-In-Reply-To: <DB6PR05MB4551C55FB367824AB9AF8FFB8303A@DB6PR05MB4551.eurprd05.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250818-imx95-v1-0-f68a19fe30b6@oss.nxp.com>
+ <20250818-imx95-v1-1-f68a19fe30b6@oss.nxp.com>
+In-Reply-To: <20250818-imx95-v1-1-f68a19fe30b6@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 5 Sep 2025 18:53:16 -0300
+X-Gm-Features: Ac12FXzWuUPmVPekBgvC0lOJJ_zcI2WbQLZ_7aKgN3JUdhfijBTGjDwM5bq__5Y
+Message-ID: <CAOMZO5C=ROcrsS256shQNP4Dfz9ca_55tT1hQNHUM=kOrxnVUg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/2] binman: add a new entry type to support .bin file
+ generation for the i.MX95 platform
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alice Guo <alice.guo@nxp.com>, 
+ Marek Vasut <marek.vasut@mailbox.org>, Tim Harvey <tharvey@gateworks.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,70 +101,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Aug 27, 2025 at 4:06=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
+>
+> From: Alice Guo <alice.guo@nxp.com>
+>
+> To support passing specific commands defined in enum imx8image_cmd to
+> the imx8image_copy_image() function, this patch introduces a new entry
+> type nxp-imx9image. This entry generates a plain text data file
+> containing the relevant commands, enabling flexible configuration during
+> image creation.
+>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
 
---uTdvBoBpaXM27D5N
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+I'm getting CI failures:
 
-On Fri, Sep 05, 2025 at 10:06:10AM +0000, Maarten Brock wrote:
-> From: Tom Rini
-> > On Thu, Sep 04, 2025 at 01:19:26PM +0000, Maarten Brock wrote:
-> > > From: Tom Rini
-> > >
-> > > > On Mon, Sep 01, 2025 at 04:06:10PM +0000, Maarten Brock wrote:
-> > > >
-> > > > > Even when CONFIG_NO_NET is selected there is still need for a
-> > > > > definition of ft_board_setup(). Thus move the checks for
-> > > > > CONFIG_DM_ETH and CONFIG_DRIVER_TI_CPSW inside the function.
-> > > > >
-> > > > > Signed-off-by: Maarten Brock <maarten.brock@sttls.nl>
-> > > >
-> > > > Shouldn't OF_BOARD_SETUP be disabled in that case?
-> > > >
-> > > > --
-> > > > Tom
-> > >
-> > > Had there also been non-NET-related fixups in this ft_board_setup(),
-> > > would that also have been your answer?
-> > > I don't see why disabling NET drivers would have to impact anything e=
-lse.
-> >=20
-> > Yes it would have been my answer. And because not all dependencies are
-> > easily expressible in Kconfig.
->=20
-> If this is your opinion then I propose to remove the checks for DM_ETH and
-> DRIVER_TI_CPSW alltogether. They obviously serve no purpose as one is
-> required to deselect OF_BOARD_SETUP when NO_NET is selected.
->=20
-> -#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_CONTROL) && \
-> -	defined(CONFIG_DM_ETH) && defined(CONFIG_DRIVER_TI_CPSW)
-> +#if defined(CONFIG_OF_BOARD_SETUP) && defined(CONFIG_OF_CONTROL)
->=20
-> I must hope that there will never be the need for other fixups for e.g.
-> the RTC or the user is left with either choosing both RTC and NET or neit=
-her.
++/binman/m33-oei-ddrfw/oei-m33-ddr (oei-m33-ddr.bin):
++/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-imem (lpddr5_imem_v202409.bin):
++/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-dmem (lpddr5_dmem_v202409.bin):
++/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-imem-qb
+(lpddr5_imem_qb_v202409.bin):
++/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-dmem-qb
+(lpddr5_dmem_qb_v202409.bin):
++Image 'm33-oei-ddrfw' has faked external blobs and is non-functional:
+oei-m33-ddr.bin lpddr5_imem_v202409.bin lpddr5_dmem_v202409.bin
+lpddr5_imem_qb_v202409.bin lpddr5_dmem_qb_v202409.bin
++binman: Error 1 running 'mkimage -d ./imx9image.imx-boot.spl -n
+./spl/u-boot-spl.cfgout -T imx8image ./imx9image-out.imx-boot.spl':
+Fail open first container file mx95b0-ahab-container.img
++make[1]: *** [Makefile:1339: .binman_stamp] Error 1
++make: *** [Makefile:198: sub-make] Error 2
++binman: Error 1 running 'mkimage -d ./imx9image.imx-boot.spl -n
+./spl/u-boot-spl.cfgout -T imx8image ./imx9image-out.imx-boot.spl':
+Fail open first container file mx95a0-ahab-container.img
 
-Well, those checks (or similar ones) were first put in 13-14 years ago
-maybe? So yes, some restructuring might well make sense at this point,
-given what the codebase looks like now. We can deal with what the future
-brings, in the future. Your logs in the other patch show that the kernel
-has again changed its mind about where the MAC must come from as I would
-have sworn that there was a window of time where no, the kernel wouldn't
-read the fuses.
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1238965
 
---=20
-Tom
-
---uTdvBoBpaXM27D5N
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaLtZjAAKCRAr4qD1Cr/k
-CpluAQCmVr4LNuf/9Fn6hrO8at5prasrcIv29rlZnvlkJux3EQD/bhMXNvrZGQK+
-c5AVY+TdVchuDnAUAPxuCTkt2XYwwQk=
-=7Ebw
------END PGP SIGNATURE-----
-
---uTdvBoBpaXM27D5N--
+To reinforce what I asked you before: for v5, please make sure that
+you send me a link showing that CI has passed.
