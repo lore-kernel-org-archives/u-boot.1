@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A30CA1002
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 00:56:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 512DCCA1002
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 01:26:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E33583734;
-	Fri,  5 Sep 2025 02:56:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 61FFA83816;
+	Fri,  5 Sep 2025 03:26:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V2HIx7Sy";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="ZzyVmRK2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47D31837F2; Thu,  4 Sep 2025 22:27:13 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 37AD48381D; Fri,  5 Sep 2025 03:26:20 +0200 (CEST)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05AF0836A4
- for <u-boot@lists.denx.de>; Thu,  4 Sep 2025 22:27:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBEE783807
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 03:26:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=benjamin.doron00@gmail.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-4b5e35453acso7540661cf.2
- for <u-boot@lists.denx.de>; Thu, 04 Sep 2025 13:27:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757017629; x=1757622429; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=65Di6B08i7KXjMJZE+CJ65TO2UwYFQujfH+Gfjs8dvQ=;
- b=V2HIx7Sy8iWdprNXVRhngqSEqIYPx/xNXiaetJjsE69vNZ/jQR4UPnHYvkOYf6um5O
- utKYBtmgqTIf3TbCKkUFpGAWGIzaX9McOBC2ZP+3voxPE4mMgXZHspA4U2z6qRtyukcZ
- VvSAzvUBRa7i93JYtxl2g4MaDLd4mU5YlxLHhi6vbBMPXk/DaOmrXYXyh1RWWwG0QT0y
- 8kIoSPTwmuX9tBTGwCsK9lQvoXi5WjJVX8wYVtiUXiA7X2G2ML2mBm5gkY418T6qbylb
- A0g09Kmb7Z/kHaBqyXqlx2KzO3O220K9M2wa7pQ8fvW6g0zDxhyznTlkZujK0l8NXUA9
- VC5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757017629; x=1757622429;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=65Di6B08i7KXjMJZE+CJ65TO2UwYFQujfH+Gfjs8dvQ=;
- b=RMlI9xMmTLNAkY9Zjgaqy7pw+NGRATEWdwywhI7UlzIKRi82hptFyK+LNFOzLx/Eo0
- aSheeu74osTFFA2bnvhbInAtSB8O6rR9X+NQnj2/8end0MWN4s5LypCR5L/CA2GGfVLi
- m44CHmogbxxOXAIlGKnKH58Nb5mnzSsJBpj0splrdBltuCt1oOw/xFdj8GdUKPwp/LVD
- bIFkvzem7uvx514/mbbR41/n0QdqZfW+v4llBHOM+e7xEwUFpu6S+XbGLzuH0KagICgD
- qZLhkFO0K4QfDm5/Kdt7vIf7Q/PYeUgV8XxCPFPwj0GM6iPLokTJ3Rl9nqZ22fiLSdZB
- dpDg==
-X-Gm-Message-State: AOJu0Yz77YviM6Qk/avONlpWWTvwc0TY9sL8jTkMdrmyUKSjyU5BFWa1
- seTHeT4DPyr5lc15qqxOhuiSSD0fkuDClRqlX3aql68Gg5mGK1GbAMNkTKKN2A==
-X-Gm-Gg: ASbGnct7DO1jh5jm+VzHKpPvlm3uvZjgE14Ln8qZgIYBr6jfJmTluuCOIPjkk26ZI+V
- UdjRj3sHEwiUoqWu28cjpAYuU279U8B9oFGRcoiikBy6PTq7NxGNkEot/3HYmtaKWXkd5oAanCm
- OMfhTNPpY5CG5VnYluHsxeXtSzZ90UHfIt5btk2HeBy0UsxxW6eZqSzhaDruTpX42YLkWcQo489
- OdRW84Fp+FWwbhnK9+0JZBRflWDsyqsvQcvnj7XtRBo2tianbUCCNM09Zdw/yFNIKwt52mrbUPB
- 1rjpKwlgB6C5dR9HEvphmn7SkX5LSJwt06tSKjEqDCD//fkIW4maHzUZLXFJPEHsUd4cib36Bq7
- cLlJS3XFb/S8xOzJSey8xp4DGrjg1yre8T7BzkojedlrR2c6aq4C+CTlH0b0wSRVtPMn/wY8rvJ
- i32RhkOuw7oBE2YJpKiSI3aIwkofpEqpmRxoQ=
-X-Google-Smtp-Source: AGHT+IFQam9hWMyzuCW/jQcYH+Ivib2b6oIC3VQR/qLiPiDZvTvkHnjpFedUizHQoOn9yK8x4gUEoQ==
-X-Received: by 2002:a05:622a:1a94:b0:4b5:e871:23ff with SMTP id
- d75a77b69052e-4b5e8712e52mr8729871cf.62.1757017629372; 
- Thu, 04 Sep 2025 13:27:09 -0700 (PDT)
-Received: from itsturtles.sec.9e.network
- (pool-173-33-154-235.cpe.net.cable.rogers.com. [173.33.154.235])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4b48f635cbesm34722511cf.5.2025.09.04.13.27.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Sep 2025 13:27:09 -0700 (PDT)
-From: Benjamin Doron <benjamin.doron00@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Benjamin Doron <benjamin.doron@9elements.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH] configs/coreboot_defconfig: Set X86_LOAD_FROM_32_BIT to use
- own GDT
-Date: Thu,  4 Sep 2025 16:26:37 -0400
-Message-ID: <20250904202649.272566-1-benjamin.doron00@gmail.com>
-X-Mailer: git-send-email 2.51.0
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: 4c38ac4289f711f0bd5779446731db89-20250905
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
+ bh=FiOdaZwJJLO8i8MbDpitdWv6Es3eYlAaJOsM0myjQMo=; 
+ b=ZzyVmRK2fZ0bQvs/cwUi+0XL/gWPQnpAcVWKELkDuvqJyUOYvfmiJnWnquzbyNKn1kP6E7hCS+5o5cev7c49vIeJSm84+hB9aLtUqCv3aUrkdDg5WcFJfH5IhvwPSW2UWFkTkq+k4/AhLYhKOnOz/Oeq37IutyqL+wArIHrffGU=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.3, REQID:7c8239cc-2b69-4783-a5cc-61bc9e032063, IP:0,
+ UR
+ L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
+ elease,TS:0
+X-CID-META: VersionHash:f1326cf, CLOUDID:6789376c-8443-424b-b119-dc42e68239b0,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102,TC:-5,Content:0|15|5
+ 0,EDM:-3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,
+ OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: 4c38ac4289f711f0bd5779446731db89-20250905
+Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 247871670; Fri, 05 Sep 2025 09:26:07 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.39; Fri, 5 Sep 2025 09:26:07 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1258.39 via Frontend Transport; Fri, 5 Sep 2025 09:26:03 +0800
+Message-ID: <3af4ba436c9d890096d679766cf3d6d6b0b65e71.camel@mediatek.com>
+Subject: Re: [PATCH v3 2/5] misc: fs_loader: allow using long script name in
+ request_firmware_into_buf_via_script()
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: Lothar =?ISO-8859-1?Q?Wa=DFmann?= <LW@KARO-electronics.de>
+CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
+ <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini <trini@konsulko.com>, "Lucien
+ . Jheng" <lucienzx159@gmail.com>
+Date: Fri, 5 Sep 2025 09:26:05 +0800
+In-Reply-To: <20250904112811.5a104f4d@karo-electronics.de>
+References: <cover.1756885599.git.weijie.gao@mediatek.com>
+ <038e8258c903367dccd9c7cd1adb51bcf2bdf307.1756885599.git.weijie.gao@mediatek.com>
+ <20250903133600.52169228@karo-electronics.de>
+ <5ada4f98b8d09bd78915bef278dee780de5d7fa2.camel@mediatek.com>
+ <20250904112811.5a104f4d@karo-electronics.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 05 Sep 2025 02:56:15 +0200
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,35 +93,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Doron <benjamin.doron@9elements.com>
+Hi,
 
-It appears that coreboot's GDT has changed recently, as the latest
-U-Boot builds throw general protection faults early in the entrypoint
-(arch/x86/cpu/start.S) while attempting to setup the segments.
+On Thu, 2025-09-04 at 11:28 +0200, Lothar Waßmann wrote:
+> External email : Please do not click links or open attachments until
+> you have verified the sender or the content.
+> 
+> 
+> Hi,
+> 
+> On Thu, 4 Sep 2025 08:23:28 +0800 Weijie Gao wrote:
+> > On Wed, 2025-09-03 at 13:36 +0200, Lothar Waßmann wrote:
+> > > External email : Please do not click links or open attachments
+> > > until
+> > > you have verified the sender or the content.
+> > > 
+> > > 
+> > > Hi,
+> > > 
+> > > On Wed, 3 Sep 2025 16:38:30 +0800 Weijie Gao wrote:
+> > > > Use cmd_process() to remove the length limit of script name
+> > > > used
+> > > > for
+> > > > run_command().
+> > > > 
+> > > > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+> > > > ---
+> > > >  drivers/misc/fs_loader.c | 9 +++------
+> > > >  1 file changed, 3 insertions(+), 6 deletions(-)
+> > > > 
+> > > > diff --git a/drivers/misc/fs_loader.c
+> > > > b/drivers/misc/fs_loader.c
+> > > > index 87acd385e23..6a6796c1931 100644
+> > > > --- a/drivers/misc/fs_loader.c
+> > > > +++ b/drivers/misc/fs_loader.c
+> > > > @@ -232,18 +232,15 @@ int
+> > > > request_firmware_into_buf_via_script(void
+> > > > **buf, size_t max_size,
+> > > >                                        const char *script_name,
+> > > >                                        size_t *retsize)
+> > > >  {
+> > > > +     char *args[2] = { (char *)"run", (char *)script_name };
+> > > > 
+> > > 
+> > > const char *args[2] = { "run", script_name };
+> > > does not work?
+> > > 
+> > > I don't see any need for a non-const 'args' here.
+> > 
+> > We'll get compiler warning if using const char *[]:
+> > 
+> >   CC      drivers/misc/fs_loader.o
+> > drivers/misc/fs_loader.c: In function
+> > 'request_firmware_into_buf_via_script':
+> > drivers/misc/fs_loader.c:243:33: warning: passing argument 3 of
+> > 'cmd_process' from incompatible pointer type [-Wincompatible-
+> > pointer-
+> > types]
+> >   243 |         ret = cmd_process(0, 2, args, &repeatable, NULL);
+> >       |                                 ^~~~
+> >       |                                 |
+> >       |                                 const char **
+> > 
+> 
+> OK. But at least:
+>         char *args[2] = { "run", (char *)script_name };
+> should work...
 
-When this config symbol is unset, U-Boot relies on the GDT loaded by
-start16.s. However, this is never compiled into coreboot builds, so instead,
-it uses whichever GDT was loaded by coreboot. This is subject to change.
+You're right. I thought string literals are always const.
 
-Selecting this config symbol makes the 32-bit entrypoint code
-load a GDT that matches U-Boot's expectations, fixing this issue.
+> 
+> 
+> NB: The right fix would be to change the argument type of
+> cmd_process()
+> (and all functions with similar semantics...) to
+> "const char *const argv[]", since cmd_process() need not and should
+> not
+> be able to modify any of the strings within argv[].
 
-Cc: Simon Glass <sjg@chromium.org>
-Signed-off-by: Benjamin Doron <benjamin.doron@9elements.com>
----
- configs/coreboot_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+I agree. But this should be sent in another patch series.
 
-diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-index dfb97a3d302c..fbf6a4fea088 100644
---- a/configs/coreboot_defconfig
-+++ b/configs/coreboot_defconfig
-@@ -1,4 +1,5 @@
- CONFIG_X86=y
-+CONFIG_X86_LOAD_FROM_32_BIT=y
- CONFIG_TEXT_BASE=0x1110000
- CONFIG_SYS_MALLOC_LEN=0x2000000
- CONFIG_NR_DRAM_BANKS=8
--- 
-2.51.0
+> 
+> 
+> Lothar Waßmann
 
