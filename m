@@ -4,75 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94696CA0FED
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17304CA1015
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:19:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF04583807;
-	Fri,  5 Sep 2025 10:15:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 84E7A838A0;
+	Fri,  5 Sep 2025 10:19:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1757060146;
-	bh=UxzCuuz7JjUgyLKAnpbJKlsGqpacZPPv8fuwnfGnSrM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=FMtdt9QjtNv/HJvcTW5ZEYyr08ltBcdDTbixb0aeJslbTLB4vjdcuJRQWKodp12/c
-	 ulLWxtKA0jX+7O5cDQppDmcVMuPWZ9HBey/yx8i+zPMmHzuTu8rwnp0IQe0PRB3+XP
-	 yc2deePeVDnrg37mWfJbszpymUs73x2TbQHPwYWJlsM5hZ/Gy/aMeCZKwayKBSGB2g
-	 /gFhSKi5+vKC97132JqJ23DovjHSZ7Scy2SHUKXWx5GQYb6rHpNrsfYFOz6wT80DyN
-	 NIuY60gzvvWEUIjoqG2xPnegBM9n3N+0AikXI629WwteVZ9TeELafXTlYS6I5Zhccg
-	 998YwqkvvZQYw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CB1C383870; Fri,  5 Sep 2025 10:15:44 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E990883390
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:15:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="BSP7LhZF"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 04CCD1026E167; 
- Fri,  5 Sep 2025 10:15:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1757060142; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=UxzCuuz7JjUgyLKAnpbJKlsGqpacZPPv8fuwnfGnSrM=;
- b=BSP7LhZFtkjWugFrZV9aM9sQy7I3nZfUYQPkV2M9z6xevrQiUO6Riz+Cc9WbrppVXdCJeG
- grQWsbnJj3+Eia8A4OhOgQ/4HgF34ygwv3YxyptNOY28BCro+lIpUHXzX58tfzLFnACiDd
- lITreIEd1xBESOSuI9mG6+1nG24CT0l2kub9xoVJloe/wj1jlxG4XmgsURC2lkWjPmlTMP
- +KinHY5zdvooC6+wcQmXhOhceGbuyMS0jWbBpqwbLPKiprQ2W6+/1OhQbIlPPSM2LRoJvo
- G1zGgdP/MGNpSmm7wlpfVYq7NpbqCskrpXNG0knxvkBWcqAGZ1EBAOM3oElaHw==
-Date: Fri, 5 Sep 2025 10:15:38 +0200
-From: Philip Oberfichtner <pro@denx.de>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
- Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
- Ye Li <ye.li@nxp.com>
-Subject: Re: [PATCH v3 2/5] Image size checks: Use HAS_SIZE_LIMIT consistently
-Message-ID: <aLqcKkrCryVNCAQX@aristophanes>
-References: <20250903105653.335417-1-pro@denx.de>
- <20250903105653.335417-3-pro@denx.de>
- <d1b371f3-df96-421d-8f26-635ac0382666@mailbox.org>
- <aLlLdkRkqrfLm2FY@aristophanes>
- <7826abc2-ef93-4b76-9478-f4be1dd05246@mailbox.org>
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nGGx3lc7";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 215D583390; Fri,  5 Sep 2025 10:19:14 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E53F283390
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858J9dJ3710708;
+ Fri, 5 Sep 2025 03:19:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757060349;
+ bh=30Ij8pxP+QsFKCtyEKCgjp7QzoHCHeb4Uef2I8ULcX0=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=nGGx3lc7d7PVxNS2+5rlZkrzMYVWq+58wWItyFTSWHEMHOMEcJ4WRJ8NNQr72Jlns
+ 1m9OZC05Wp/BgIT2xfZmBgj2J6apSQimeE3fGBk9m3bDEOZ1BCNszYYFeSX46AeROK
+ QT5myP63MgjB0rF0ZXS07jXIQarfeWLgPHzOiaQg=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858J90X230673
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 5 Sep 2025 03:19:09 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 5
+ Sep 2025 03:19:08 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 5 Sep 2025 03:19:08 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858J74I445193;
+ Fri, 5 Sep 2025 03:19:08 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
+Subject: [PATCH -next v6 02/10] mach-k3: use custom enable_cache
+Date: Fri, 5 Sep 2025 13:48:53 +0530
+Message-ID: <20250905081902.489345-3-anshuld@ti.com>
+X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250905081902.489345-1-anshuld@ti.com>
+References: <20250905081902.489345-1-anshuld@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7826abc2-ef93-4b76-9478-f4be1dd05246@mailbox.org>
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,29 +83,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 04, 2025 at 03:56:26PM +0200, Marek Vasut wrote:
-> On 9/4/25 10:19 AM, Philip Oberfichtner wrote:
-> > On Wed, Sep 03, 2025 at 02:51:44PM +0200, Marek Vasut wrote:
-> > > On 9/3/25 12:56 PM, Philip Oberfichtner wrote:
-> > > 
-> > > > diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-> > > > index 05853317fea..dfac96379ce 100644
-> > > > --- a/configs/am62x_beagleplay_a53_defconfig
-> > > > +++ b/configs/am62x_beagleplay_a53_defconfig
-> > > > @@ -20,6 +20,7 @@ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> > > >    CONFIG_SPL_BSS_START_ADDR=0x80c80000
-> > > >    CONFIG_SPL_BSS_MAX_SIZE=0x80000
-> > > >    CONFIG_SPL_STACK_R=y
-> > > > +CONFIG_HAS_SPL_SIZE_LIMIT=y
-> > > How much of this massive config file patching can be done using some
-> > > "select" in Kconfig file ?
-> > 
-> > I'm not following you here. I'm only adding CONFIG_HAS_XXX_SIZE_LIMIT
-> > wherever there already was an explicit CONFIG_XXX_SIZE_LIMIT in the
-> > defconfig before. I'm not changing anything here. Can you please
-> > elaborate on what it is that your asking for?
-> 
-> Can this massive configs/ update be avoided by using a default value /
-> select / imply in some Kconfig file ?
+U-Boot's provided enable_caches enforces the following sequence:
+icache_enable -> mmu_setup (as part of dcache_enable) -> dcache_enable
 
-No, I'm afraid it cannot ...
+Whereas for K3 devices, we would like to add entries to the provided
+static array (k3_mem_map) as per gd->bd->bi_dram and then call mmu_setup
+to configure the MMU but also create carveouts for TFA/TEE before we
+enable caches to prevent speculative accesses to the region. Thus the
+following desired sequence:
+
+add dram banks -> mmu_setup -> carveout TFA/TEE -> icache/dcache enable
+
+Therefore this patch adds K3's own implementation of enable_cache for
+ARM64, allowing for greater control over the cache enablement sequence.
+
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ arch/arm/mach-k3/common.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index f8c53b286eb..9d6c6fea451 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -258,6 +258,12 @@ void board_prep_linux(struct bootm_headers *images)
+ 				 ROUND(images->os.end,
+ 				       CONFIG_SYS_CACHELINE_SIZE));
+ }
++
++void enable_caches(void)
++{
++	icache_enable();
++	dcache_enable();
++}
+ #endif
+ 
+ void spl_enable_cache(void)
+-- 
+2.50.1
+
