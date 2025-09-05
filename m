@@ -4,48 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C41D6CA1013
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 11:25:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23319CA1013
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 11:25:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEE4A838C7;
-	Fri,  5 Sep 2025 13:25:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8246783B8C;
+	Fri,  5 Sep 2025 13:25:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="OhH/Xkok";
+	dkim=pass (2048-bit key; secure) header.d=philipmolloy.com header.i=@philipmolloy.com header.b="MMFKbtSX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A762838D2; Fri,  5 Sep 2025 13:25:12 +0200 (CEST)
-Received: from mail-10627.protonmail.ch (mail-10627.protonmail.ch
- [79.135.106.27])
+ id 6126883B8C; Fri,  5 Sep 2025 13:25:22 +0200 (CEST)
+Received: from mail-4317.protonmail.ch (mail-4317.protonmail.ch [185.70.43.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F07D2838C5
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 13:25:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3427083B83
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 13:25:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=philipmolloy.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=philip@philipmolloy.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=philipmolloy.com;
- s=protonmail3; t=1757071508; x=1757330708;
- bh=xDNxSpYVWdPsamlJe15+/6uLFHBY7QH/ppgM+hqu/+U=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=OhH/XkokfWor//+1/e2zmqsf6tJCqPYoUlPPZxc497vlOJk1hhy4pkuVTZdALTBea
- G4HJ4VxcMj9gmPionGXNY19P9xIqKg2+qNZDIE3tQ1+9wGnYjjNMbfc/Ouy3eN8+kS
- zT4by9pZNy8k2u6/dyDZN0hmOOI1+AYhrz9YxCDNSpqgrHEOA+kQY6a629lPlX9Wq+
- tV/YehVTEWfhBrzUbKYeuVe2RRYB4VwozJ1MdH0Hc7Rofq2F1s9DDsr6Wu3BF4uhDy
- lU6TKTjDdKz7ztD4iyJNZFM/xLoucGfsNqgVS90zth/uggqc13Ys0S3h48kPXaCoM8
- caXK11Kc1KXNw==
-Date: Fri, 05 Sep 2025 11:25:03 +0000
+ s=protonmail3; t=1757071518; x=1757330718;
+ bh=c1+4obkJgVdNWwf2pOe11U0hgBP9GWI3IecY78fRhfQ=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=MMFKbtSXVhdslZbihE0jZjE+x3Nz8a+2WivD4jmeUPvQ1PosYeTDy0GYvlE1L4AuU
+ 402rF8AgV/yEqlXa6qa+zUECTIR9p5iHwV3bIfLngCHX62xrl+DTVhA47pT4JKreov
+ d+TuKyUqmwfziPOxzacg51LuwiL11lDpQ5z4fVC4yOcjbWTkl+fB1wemfm7nXOwxfq
+ yDJ2d+So7AhbaaAvcQLKL+/yWiioRqcT+ibph1ZaRTziyVKMh6J5vVSLVt8yJdVYx4
+ n05suUigWjwTUKA+8kKMTVT/pG7jZdctdn5jT9mOo0Nd5Yj890XvUQ5ftrQY2KTdFL
+ ep7/gaxlDsw3g==
+Date: Fri, 05 Sep 2025 11:25:13 +0000
 To: u-boot@lists.denx.de
 From: Philip Molloy <philip@philipmolloy.com>
 Cc: Michael Hennerich <michael.hennerich@analog.com>,
- Philip Molloy <philip.molloy@analog.com>
-Subject: [PATCH 0/1] Add compatible for ADP5587
-Message-ID: <20250905112509.2443775-1-philip@philipmolloy.com>
+ Philip Molloy <philip.molloy@analog.com>,
+ Philip Molloy <philip@philipmolloy.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Tom Rini <trini@konsulko.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ adsp-linux@analog.com
+Subject: [PATCH 1/1] gpio: adp5588: Add ADP5587 as compatible
+Message-ID: <20250905112509.2443775-2-philip@philipmolloy.com>
+In-Reply-To: <20250905112509.2443775-1-philip@philipmolloy.com>
+References: <20250905112509.2443775-1-philip@philipmolloy.com>
 Feedback-ID: 9117015:user:proton
-X-Pm-Message-ID: 7a8a2a929d70657d6d2f7bd176b1bcc9ac288bb5
+X-Pm-Message-ID: ee9001bd076e5c0e04fc186a8a6751bd43f4abae
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -65,28 +75,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Philip Molloy <philip.molloy@analog.com>
+The ADP5587 is a simpler version of the ADP5588. The ADP5588 can
+configure two pins, C8 and C9, as GPIOs or light sensors. The ADP5587
+does not include the light sensors.
 
-Rev E of the ADI EV-SC598-SOM[1] replaced a GPIO expander with the ADP5587.
-This patch is necessary for the mainlining effort to support ADI ADSP-SC5xx
-based boards.[2] Since it is generic we're submitting this separately, also=
- to
-reduce the size of the series.
-
-Note that this compatible string is already in the Linux bindings.[3]
-
-[1]: https://www.analog.com/en/resources/evaluation-hardware-and-software/e=
-valuation-boards-kits/ev-sc598-som.html
-[2]: https://github.com/analogdevicesinc/u-boot/pull/10
-[3]: https://elixir.bootlin.com/linux/v6.17-rc4/source/Documentation/device=
-tree/bindings/input/adi,adp5588.yaml#L23
-
-Philip Molloy (1):
-  gpio: adp5588: Add ADP5587 as compatible
-
+Signed-off-by: Philip Molloy <philip@philipmolloy.com>
+---
  drivers/gpio/adp5588_gpio.c | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
+diff --git a/drivers/gpio/adp5588_gpio.c b/drivers/gpio/adp5588_gpio.c
+index d081e169897..36304e48893 100644
+--- a/drivers/gpio/adp5588_gpio.c
++++ b/drivers/gpio/adp5588_gpio.c
+@@ -168,7 +168,7 @@ static int adp5588_ofdata_platdata(struct udevice *dev)
+=20
+ =09revid =3D ret & ID_MASK;
+=20
+-=09printf("ADP5588 Detected: Rev %x, Rev ID %x\n", ret, revid);
++=09printf("ADP558x Detected: Rev %x, Rev ID %x\n", ret, revid);
+=20
+ =09for (i =3D 0, ret =3D 0; i <=3D ADP5588_BANK(ADP5588_MAXGPIO); i++) {
+ =09=09plat->dat_out[i] =3D adp5588_gpio_read(dev, GPIO_DAT_OUT1 + i);
+@@ -194,6 +194,7 @@ static const struct dm_gpio_ops adp5588_ops =3D {
+=20
+ static const struct udevice_id adp5588_of_match_list[] =3D {
+ =09{ .compatible =3D "adi,adp5588"},
++=09{ .compatible =3D "adi,adp5587"},
+ =09{ /* sentinel */ }
+ };
+=20
 --=20
 2.50.1
 
