@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594C0CA1017
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 20:54:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE61CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 20:54:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE64A838C5;
-	Fri,  5 Sep 2025 22:53:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4197C8392E;
+	Fri,  5 Sep 2025 22:54:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jJiQttbj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cIw+e8en";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3CB18391E; Fri,  5 Sep 2025 22:53:56 +0200 (CEST)
-Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
- [IPv6:2607:f8b0:4864:20::92d])
+ id DBE9583959; Fri,  5 Sep 2025 22:53:57 +0200 (CEST)
+Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
+ [IPv6:2607:f8b0:4864:20::a31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB10783930
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 22:53:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1CA9838C5
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 22:53:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-8972e215df9so718048241.1
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 13:53:54 -0700 (PDT)
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-53b174ca9bdso1756346e0c.2
+ for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 13:53:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757105633; x=1757710433; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1757105634; x=1757710434; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=6A59u5+J80G2FT4HMGbgN+1muuphaz6EBi3mpQ1vmK4=;
- b=jJiQttbjxVm0XWsBZ7mWZirfdNRK1EnxGOZMwF/olemrftwn83qA/PExQjTfvgl84e
- 4vM6gPRqgMHuSdcHsLQvmlqssjVH4EDZN2tFWrSBaEt7Vq7POOq0/r/Wu3YOCAqdWgFL
- W6rJJHqaEYOin4HBjciz1Aq/dRNDE+4JuxPvnULb2wDmXtXcMdo2pJXjmZoTMy4reYI7
- ILc1xGTH6Aqcw29w1NROsw+8UjyFl4VnzNTFFio8pwCkABUkahJitzrJ6mLFzbVH1Qg0
- NXi1soEZOP50v4Ev6zIPaY+TJzMYZUKOuaVslwL8PLbvQBGqI5wofQupfHl0nVmVDs1V
- 4GSQ==
+ :reply-to; bh=ZjcY5ChSGfKiO0gAO5mQT0PmflBTBoZd2Q8ODRhRqeI=;
+ b=cIw+e8enoLSDfpAZvFOqRK8r0jtG7NZUER85sIGZ1E2orb4YnEKuTUZsXEqWq0M349
+ DshFHYHOL1RI1laAdyYE7fQbC03NIwaMG48WhArGaCOc7DsZEYGFejBItaCQSppgfK12
+ g0/Igj7qiTxudRU2v92rINpZQnNMFu27OQiOIKq31K6VMBzMRsboP/WKT1NAgyLJnCho
+ l3hQ5MvW2NlmD5p6LwQqGDF/zOzO4unACTA1osPhmk/3HAUUDMQS0mM9Cykn+FO6T1JB
+ hjq6hk191IiQQN9rKiypWj/B7AmAOtCXtJ3r+TvUyIE2GB7Qs9lTt4arCpucrf5a1Orf
+ R+Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757105633; x=1757710433;
+ d=1e100.net; s=20230601; t=1757105634; x=1757710434;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6A59u5+J80G2FT4HMGbgN+1muuphaz6EBi3mpQ1vmK4=;
- b=LK1AkMi49IyQatI37/+zndttZxxaYtR5TSN8TTirLdcAkgUvzR6quT89FQJ2ocRpaU
- 86n8rmEObxW0hRGkiM0somO9Mz1CKZOzwh21CqHdLC592jwbcjXgBWNeKUlcmkRmYiqs
- l0lZbuckaDe0c6poZL7zyj+iGzBX+tktxj/iOcCdZn/dBoZ0mmRy4AQESdhkfgNIWVqn
- CH8tKpKLh8iM06y/1UeZYjoUUqzeFk02bKky0En3PNdpfngh4jTi0LvyJnJhd1jL6R0v
- ocOW1sYFj4MB1yBHVZcdlQG0S0ssEaQCl1lFhQa6rNXGQI6he+OMiQXNaAjY4E0j9b1U
- nbQg==
-X-Gm-Message-State: AOJu0YyiacHgr9kCAI9Hmp+NoTa6W9mK4tUGBOLIjzoJR9dpZ2gAW3DN
- YB5RTmRsp8IqFFFUkJtc22ZDNcTFTIXArbvbuhN67BrurxOrvT4XVw7LlfQKHUQN41OTe+1bl+f
- 7lZO1
-X-Gm-Gg: ASbGncsSDbRlHpfWGH1ZInAwE10UyotMXj7jrAR8tVLCSEmqIlHWyhc0Kt8+DgwrNw4
- FVIfrB405bD3AzooIgoVvmPcZmHu9qSr4keydoeiL3DwWXuGSxvVXXks8pQQAEAlm175hdsv2gx
- M2kij2OW3gGzppf9mnnRZH5kJfU3gf8izBNWCFaIE+WI7ONe2vkWPy5zrsrHH0qY9833tnYOykV
- +NtRPLpoHZqqrYbIJOAl+OvSm4YT2musIcpZLNrO0s+OwZHrH4a8eftGhpd0ZY3txYiAZe6TKK+
- zDwViLFg9OkkhiuOfFBR6VbhrofDI+VC6f067ANtpQ9AYldZs9e5mLHalm204UH8IpPnpDSPaNj
- szivFaIBv2vacKkRJZR7AO19OtN5cIUMwyGbatdUmEgV7pxfopeRbTxGtmHs=
-X-Google-Smtp-Source: AGHT+IHtvHRmxnzUpWiDxcdeCCms2lPKokVQw1roU5qE67y9+Lc1FM/Kf1RRr1IGQ2OrcZvyz0Y/0g==
-X-Received: by 2002:a05:6102:4a95:b0:523:712d:4499 with SMTP id
- ada2fe7eead31-53d150735f1mr131010137.26.1757105633313; 
- Fri, 05 Sep 2025 13:53:53 -0700 (PDT)
+ bh=ZjcY5ChSGfKiO0gAO5mQT0PmflBTBoZd2Q8ODRhRqeI=;
+ b=P674hcvCZgd+4TWh5TviK2LXs52zXkGoOsC+eXsIkkU76UpIVZtqBbpyW8ZWQqW1s+
+ Y+nlWQwRMuvKo3CpsxfquMt4lixJoTl5Rs8K7vwt9KznssrkJKwdcYwQIRHrpM9TPfIx
+ nLfKsgN+vq/t6loTnIuM3s0UsHeZPr2nvJVPtoSN2oCur6SNYmZPfner+i67Sf6Jyy1L
+ RsGhwOrBw8BuUJeYJDkQigGkv6a736Xqt4Wu7/uikU7zMQ5JFt2OoyXHV6DBsBADZtZv
+ 3ZhZob0MDZxE4X7vwKuueHosJj9QZzXz7Pu7maFK0PLzGC5fryrcMVxoyNQDK1r9CDgQ
+ Zw3g==
+X-Gm-Message-State: AOJu0Yy3tfpYQvGW4WQ6RGLet5KE9fa7WjTnFs6R25iHmKPLU60DQqWg
+ Llh6xLnsbCRbuX5xk962RsgMz4/LICkUUvRugt/qZnsFeLcj+ky0+mCFAs//ROF0XidELYUJ6xN
+ Zk9sJ
+X-Gm-Gg: ASbGncv7fIU51Ne9bbGXGBIFNNYxr/5XPF4uCCokvSs/tr45PEavEX0RKEGh+6MG1Ta
+ Ks8GD/AYA1s+eJKchpg7R25Qyqr5iwCHWSAGw90DOMbayDo1x5Es717N2UsbCwGbKuzhScyENbp
+ egywPg4DOdRw91/PCneAdcdDoitQYvT+D10w4flRPpWYIq9U7en6AHzI+FXy0qArkBrNwurclmR
+ 6vOn+8+Pyq5Ay647lNG1fjUflwJb/SrBio0RO8Ph3qHNMAHuelMen5Zn9eQIVFkz9b/eKXT/Vfq
+ 5HtpKeYFTh4KrRZy12zCZiqWL05LKzl3W8QMzr16iQnaOG5/J5M7GOKWnfrZCK/vxfKzz9FgoyT
+ wtKl002xR4O7PoBWo4FACTpp7diI8Zl7oKjokpF9+7ckQ9wHs
+X-Google-Smtp-Source: AGHT+IE3SUhT52ODVZAA5inCWEr31FMy/DGu6kBtW6jJ/8HubmYojYsDOdsEbaDFANR6m/UBNXNbIA==
+X-Received: by 2002:a05:6102:160e:b0:520:6893:380a with SMTP id
+ ada2fe7eead31-53d1357a2c6mr138287137.16.1757105634434; 
+ Fri, 05 Sep 2025 13:53:54 -0700 (PDT)
 Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.181])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-52aef459c9asm8395330137.1.2025.09.05.13.53.52
+ ada2fe7eead31-52aef459c9asm8395330137.1.2025.09.05.13.53.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Sep 2025 13:53:52 -0700 (PDT)
+ Fri, 05 Sep 2025 13:53:54 -0700 (PDT)
 From: Javier Tia <javier.tia@linaro.org>
-To: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 2/4] tools: zynqmp_psu_init_minimize.sh: Switch to
- clang-format
-Date: Fri,  5 Sep 2025 14:53:45 -0600
-Message-ID: <20250905205349.127333-3-javier.tia@linaro.org>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 3/4] Lindent: Remove wrapper around indent tool
+Date: Fri,  5 Sep 2025 14:53:46 -0600
+Message-ID: <20250905205349.127333-4-javier.tia@linaro.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250905205349.127333-1-javier.tia@linaro.org>
 References: <20250905205349.127333-1-javier.tia@linaro.org>
@@ -98,30 +97,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the use of scripts/Lindent with clang-format in
-zynqmp_psu_init_minimize.sh. This change is made to align with the rest
-of the codebase that uses clang-format for code formatting. This ensures
-consistency across all scripts in terms of code style and formatting.
+The Linux kernel has not maintained the same script since 2017-11-01,
+and with clang-format included in U-Boot, it is not required anymore.
 
-Tested-by: Michal Simek <michal.simek@amd.com>
 Signed-off-by: Javier Tia <javier.tia@linaro.org>
 ---
- tools/zynqmp_psu_init_minimize.sh | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ scripts/Lindent | 18 ------------------
+ 1 file changed, 18 deletions(-)
+ delete mode 100755 scripts/Lindent
 
-diff --git a/tools/zynqmp_psu_init_minimize.sh b/tools/zynqmp_psu_init_minimize.sh
-index 5c8b73703bf..f8b729ebc97 100755
---- a/tools/zynqmp_psu_init_minimize.sh
-+++ b/tools/zynqmp_psu_init_minimize.sh
-@@ -82,7 +82,7 @@ for i in $FUNCS_TO_REMOVE; do
- sed -i "/$i/,/^}$/d" ${OUT}
- done
- 
--scripts/Lindent ${OUT}
-+clang-format -i -style=file ${OUT}
- 
- # Prepend 'static' to internal functions
- sed -i 's/^.*data(void)$/static &/g' ${OUT}
+diff --git a/scripts/Lindent b/scripts/Lindent
+deleted file mode 100755
+index 9c4b3e2b709..00000000000
+--- a/scripts/Lindent
++++ /dev/null
+@@ -1,18 +0,0 @@
+-#!/bin/sh
+-PARAM="-npro -kr -i8 -ts8 -sob -l80 -ss -ncs -cp1"
+-RES=`indent --version`
+-V1=`echo $RES | cut -d' ' -f3 | cut -d'.' -f1`
+-V2=`echo $RES | cut -d' ' -f3 | cut -d'.' -f2`
+-V3=`echo $RES | cut -d' ' -f3 | cut -d'.' -f3`
+-if [ $V1 -gt 2 ]; then
+-  PARAM="$PARAM -il0"
+-elif [ $V1 -eq 2 ]; then
+-  if [ $V2 -gt 2 ]; then
+-    PARAM="$PARAM -il0";
+-  elif [ $V2 -eq 2 ]; then
+-    if [ $V3 -ge 10 ]; then
+-      PARAM="$PARAM -il0"
+-    fi
+-  fi
+-fi
+-indent $PARAM "$@"
 -- 
 2.51.0
 
