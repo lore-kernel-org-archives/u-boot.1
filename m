@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E89CA1015
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:20:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5398CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:20:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4341B838E7;
-	Fri,  5 Sep 2025 10:19:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 893F283807;
+	Fri,  5 Sep 2025 10:19:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PHNq+jch";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IVT8XV2A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BC16838E7; Fri,  5 Sep 2025 10:19:29 +0200 (CEST)
+ id 0528B83390; Fri,  5 Sep 2025 10:19:33 +0200 (CEST)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F64783390
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD66E83900
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858JKHM3211786;
- Fri, 5 Sep 2025 03:19:20 -0500
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858JOmr3211794;
+ Fri, 5 Sep 2025 03:19:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757060360;
- bh=mz9TdPOAyOXYce93aJkCrmheoIRVxdHNLUzFeWeHME0=;
+ s=ti-com-17Q1; t=1757060364;
+ bh=jZhv0Kh+PNcNRgetONtmT6IUGunxtYzvacE8pXtiCFg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=PHNq+jchRYJhB6I4ImFaitdlnDFks98pcyN/veb68EX16dUmwpX/U4lzue0d0IL7k
- QtsiqMNjL/fb9vCQPLZhlp/g+Xi/BCcOgnaGcgLDc4HuXt4swuuCzT6oOG9T/Qd7vL
- GWLqzGbGQ/XZmyQu+YQIOxJaTIUYachOyqQUJqsc=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858JKtD1502282
+ b=IVT8XV2AG/NReaRTfZH7A+Jj8r+OIyK5qByToFCbsAR9kGcOPxvRojzuimM/e6HrH
+ uWNViXK1LDx4x+rytGljbushT0co9CO8rrRnilQxe8PVpcM9O5gf+KltHukWTuxvog
+ ZlgLXHvD/cysbnQOJliX28zLZ28zPPdCAR6u3Yjo=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858JO1Z1502299
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 5 Sep 2025 03:19:20 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 5 Sep 2025 03:19:24 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 5
- Sep 2025 03:19:20 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 03:19:23 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 5 Sep 2025 03:19:20 -0500
+ Frontend Transport; Fri, 5 Sep 2025 03:19:23 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858JIlA152066;
- Fri, 5 Sep 2025 03:19:19 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858JMBH445408;
+ Fri, 5 Sep 2025 03:19:23 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,10 +57,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
  <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
-Subject: [PATCH -next v6 08/10] spl: split spl_board_fixups to arch/board
- specific
-Date: Fri, 5 Sep 2025 13:48:59 +0530
-Message-ID: <20250905081902.489345-9-anshuld@ti.com>
+Subject: [PATCH -next v6 10/10] mach-k3: add carveouts for TFA and optee
+Date: Fri, 5 Sep 2025 13:49:01 +0530
+Message-ID: <20250905081902.489345-11-anshuld@ti.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250905081902.489345-1-anshuld@ti.com>
 References: <20250905081902.489345-1-anshuld@ti.com>
@@ -84,321 +83,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current spl_board_fixups API allows for modification of spl_image
-before the SPL jumps to it. This can be used to modify the DT for the
-next boot stage, however the current API only allows either the machine
-arch or the board to use it.
+K3 platforms have reserved memory regions for TFA and OPTEE which should
+be unmapped for U-Boot.
 
-This limits the utility of the API as there might be certain fixups that
-should be applied to all boards sharing the same machine architecture
-with others being board specific.
-
-For TI's K3 specifically, this prevents us from performing architecture
-level fixups since a lot of TI boards are already making use of the
-spl_board_fixups API.
-
-Therefore this patch splits the API into two to allow both board and the
-architecture specific fixups. The order is kept as arch then board to
-give board specific fixups the precedence.
+Therefore this patch adds the necessary fdt fixups to properly set the
+load address for TFA/OPTEE and unmaps both by mmu_unmap_reserved_mem.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/cpu/armv7m/cpu.c                  |  2 +-
- arch/arm/mach-rockchip/spl-boot-order.c    |  2 +-
- arch/arm/mach-socfpga/spl_soc64.c          |  2 +-
- board/beagle/beagley-ai/beagley-ai.c       |  2 +-
- board/dhelectronics/dh_stm32mp1/board.c    |  2 +-
- board/phytec/phycore_am62x/phycore-am62x.c |  2 +-
- board/phytec/phycore_am64x/phycore-am64x.c |  2 +-
- board/renesas/sparrowhawk/sparrowhawk.c    |  2 +-
- board/starfive/visionfive2/spl.c           |  2 +-
- board/ti/am62ax/evm.c                      |  2 +-
- board/ti/am62px/evm.c                      |  2 +-
- board/ti/am62x/evm.c                       |  2 +-
- board/ti/am64x/evm.c                       |  2 +-
- board/ti/j721e/evm.c                       |  2 +-
- board/ti/j721s2/evm.c                      |  2 +-
- board/ti/j722s/evm.c                       |  2 +-
- board/ti/j784s4/evm.c                      |  2 +-
- common/spl/spl.c                           | 12 +++++++++---
- include/spl.h                              | 12 +++++++++---
- 19 files changed, 35 insertions(+), 23 deletions(-)
+ arch/arm/mach-k3/common.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/arch/arm/cpu/armv7m/cpu.c b/arch/arm/cpu/armv7m/cpu.c
-index b4440d3f3f8..bea0e1d3263 100644
---- a/arch/arm/cpu/armv7m/cpu.c
-+++ b/arch/arm/cpu/armv7m/cpu.c
-@@ -57,7 +57,7 @@ void reset_cpu(void)
- 		| V7M_AIRCR_SYSRESET, &V7M_SCB->aircr);
- }
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index 9c2fe92cf25..71fc7d31abe 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -31,6 +31,7 @@
+ #include <dm/uclass-internal.h>
+ #include <dm/device-internal.h>
+ #include <asm/armv8/mmu.h>
++#include <mach/k3-common-fdt.h>
+ #include <mach/k3-ddr.h>
  
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_arch_fixups(struct spl_image_info *spl_image)
- {
- 	spl_image->entry_point |= 0x1;
- }
-diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-index 3dce9b30898..cd550ad143c 100644
---- a/arch/arm/mach-rockchip/spl-boot-order.c
-+++ b/arch/arm/mach-rockchip/spl-boot-order.c
-@@ -240,7 +240,7 @@ int spl_decode_boot_device(u32 boot_device, char *buf, size_t buflen)
- #endif
- }
+ #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
+@@ -263,6 +264,7 @@ void board_prep_linux(struct bootm_headers *images)
  
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_arch_fixups(struct spl_image_info *spl_image)
+ void enable_caches(void)
  {
- 	void *blob = spl_image_fdt_addr(spl_image);
- 	char boot_ofpath[512];
-diff --git a/arch/arm/mach-socfpga/spl_soc64.c b/arch/arm/mach-socfpga/spl_soc64.c
-index 651d9fc9cb8..fa7b1506ce6 100644
---- a/arch/arm/mach-socfpga/spl_soc64.c
-+++ b/arch/arm/mach-socfpga/spl_soc64.c
-@@ -130,7 +130,7 @@ u32 spl_boot_mode(const u32 boot_device)
- #endif
- 
- /* board specific function prior loading SSBL / U-Boot */
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_arch_fixups(struct spl_image_info *spl_image)
- {
++	void *fdt = (void *)gd->fdt_blob;
  	int ret;
- 	struct udevice *dev;
-diff --git a/board/beagle/beagley-ai/beagley-ai.c b/board/beagle/beagley-ai/beagley-ai.c
-index 26fa54e27bb..500cc3060c3 100644
---- a/board/beagle/beagley-ai/beagley-ai.c
-+++ b/board/beagle/beagley-ai/beagley-ai.c
-@@ -32,7 +32,7 @@ int dram_init_banksize(void)
- }
  
- #if defined(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-index f7347bbb826..2c79303f5cd 100644
---- a/board/dhelectronics/dh_stm32mp1/board.c
-+++ b/board/dhelectronics/dh_stm32mp1/board.c
-@@ -776,7 +776,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- #endif
+ 	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
+@@ -273,6 +275,30 @@ void enable_caches(void)
  
- #if defined(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	dh_stm32_ks8851_fixup(spl_image_fdt_addr(spl_image));
- }
-diff --git a/board/phytec/phycore_am62x/phycore-am62x.c b/board/phytec/phycore_am62x/phycore-am62x.c
-index 51da864aa80..3cdcbf2ecc9 100644
---- a/board/phytec/phycore_am62x/phycore-am62x.c
-+++ b/board/phytec/phycore_am62x/phycore-am62x.c
-@@ -199,7 +199,7 @@ int do_board_detect(void)
- #endif
+ 	mmu_setup();
  
- #if IS_ENABLED(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS) && IS_ENABLED(CONFIG_K3_INLINE_ECC))
- 		fixup_ddr_driver_for_ecc(spl_image);
-diff --git a/board/phytec/phycore_am64x/phycore-am64x.c b/board/phytec/phycore_am64x/phycore-am64x.c
-index 33c39376ceb..114aa217023 100644
---- a/board/phytec/phycore_am64x/phycore-am64x.c
-+++ b/board/phytec/phycore_am64x/phycore-am64x.c
-@@ -118,7 +118,7 @@ int do_board_detect(void)
- #endif
- 
- #if IS_ENABLED(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS) && IS_ENABLED(CONFIG_K3_INLINE_ECC))
- 		fixup_ddr_driver_for_ecc(spl_image);
-diff --git a/board/renesas/sparrowhawk/sparrowhawk.c b/board/renesas/sparrowhawk/sparrowhawk.c
-index 58de7f25cbd..29a67dae34e 100644
---- a/board/renesas/sparrowhawk/sparrowhawk.c
-+++ b/board/renesas/sparrowhawk/sparrowhawk.c
-@@ -134,7 +134,7 @@ unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
- 	return CONFIG_SYS_SPI_U_BOOT_OFFS;
- }
- 
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	void *blob = spl_image_fdt_addr(spl_image);
- 	int err, offs;
-diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
-index 3dfa931b655..180b397051d 100644
---- a/board/starfive/visionfive2/spl.c
-+++ b/board/starfive/visionfive2/spl.c
-@@ -20,7 +20,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define JH7110_CLK_CPU_ROOT_SHIFT		24
- #define JH7110_CLK_CPU_ROOT_MASK		GENMASK(29, 24)
- 
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	/* Update the memory size which read from eeprom or DT */
- 	fdt_fixup_memory(spl_image->fdt_addr, 0x40000000, gd->ram_size);
-diff --git a/board/ti/am62ax/evm.c b/board/ti/am62ax/evm.c
-index a445f983255..da6c31176cd 100644
---- a/board/ti/am62ax/evm.c
-+++ b/board/ti/am62ax/evm.c
-@@ -17,7 +17,7 @@
- #include "../common/fdt_ops.h"
- 
- #if defined(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
-index 2e85363cf5f..0ce724b2dff 100644
---- a/board/ti/am62px/evm.c
-+++ b/board/ti/am62px/evm.c
-@@ -42,7 +42,7 @@ struct efi_capsule_update_info update_info = {
- };
- 
- #if defined(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-index d7b07a0d34d..c2c7a0216b9 100644
---- a/board/ti/am62x/evm.c
-+++ b/board/ti/am62x/evm.c
-@@ -91,7 +91,7 @@ void spl_board_init(void)
- 
- }
- 
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
-index 8e89b3b15df..f9bb593e4c6 100644
---- a/board/ti/am64x/evm.c
-+++ b/board/ti/am64x/evm.c
-@@ -98,7 +98,7 @@ static int fixup_usb_boot(const void *fdt_blob)
- }
- #endif
- 
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 1527eaf1e16..e030fe7dc87 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -127,7 +127,7 @@ static void __maybe_unused detect_enable_hyperflash(void *blob)
- 
- #if defined(CONFIG_XPL_BUILD) && (defined(CONFIG_TARGET_J7200_A72_EVM) || defined(CONFIG_TARGET_J7200_R5_EVM) || \
- 					defined(CONFIG_TARGET_J721E_A72_EVM) || defined(CONFIG_TARGET_J721E_R5_EVM))
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	detect_enable_hyperflash(spl_image->fdt_addr);
- }
-diff --git a/board/ti/j721s2/evm.c b/board/ti/j721s2/evm.c
-index 5d3b84607d8..b6d1964146d 100644
---- a/board/ti/j721s2/evm.c
-+++ b/board/ti/j721s2/evm.c
-@@ -40,7 +40,7 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
- }
- 
- #if defined(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/board/ti/j722s/evm.c b/board/ti/j722s/evm.c
-index d2b94913c12..ac0924d6545 100644
---- a/board/ti/j722s/evm.c
-+++ b/board/ti/j722s/evm.c
-@@ -16,7 +16,7 @@
- #include "../common/fdt_ops.h"
- 
- #if defined(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-index 6335676081a..cabb3017ee1 100644
---- a/board/ti/j784s4/evm.c
-+++ b/board/ti/j784s4/evm.c
-@@ -42,7 +42,7 @@ struct efi_capsule_update_info update_info = {
- };
- 
- #if defined(CONFIG_XPL_BUILD)
--void spl_perform_fixups(struct spl_image_info *spl_image)
-+void spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- 	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
- 		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 55ad497c86d..2b321284b59 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -120,8 +120,13 @@ int __weak booti_setup(ulong image, ulong *relocated_addr, ulong *size, bool for
- }
- #endif
- 
--/* Weak default function for arch/board-specific fixups to the spl_image_info */
--void __weak spl_perform_fixups(struct spl_image_info *spl_image)
-+/* Weak default function for arch specific fixups to the spl_image_info */
-+void __weak spl_perform_arch_fixups(struct spl_image_info *spl_image)
-+{
-+}
++	if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
++		ret = fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
++					 0x80000);
++		if (ret)
++			debug("%s: Failed to perform tfa fixups (%s)\n",
++			      __func__, fdt_strerror(ret));
++		ret = mmu_unmap_reserved_mem("tfa");
++		if (ret)
++			debug("%s: Failed to unmap tfa rsvd mem (%s)\n",
++			      __func__, fdt_strerror(ret));
++	}
 +
-+/* Weak default function for board specific fixups to the spl_image_info */
-+void __weak spl_perform_board_fixups(struct spl_image_info *spl_image)
- {
- }
- 
-@@ -775,7 +780,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		hang();
- 	}
- 
--	spl_perform_fixups(&spl_image);
-+	spl_perform_arch_fixups(&spl_image);
-+	spl_perform_board_fixups(&spl_image);
- 
- 	os = spl_image.os;
- 	if (os == IH_OS_U_BOOT) {
-diff --git a/include/spl.h b/include/spl.h
-index 7c10c7f792e..cf45d411ecb 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -1116,10 +1116,16 @@ int board_return_to_bootrom(struct spl_image_info *spl_image,
- ulong board_spl_fit_size_align(ulong size);
- 
- /**
-- * spl_perform_fixups() - arch/board-specific callback before processing
-- *                        the boot-payload
-+ * spl_perform_arch_fixups() - arch specific callback before processing the
-+ *                        boot-payload
-  */
--void spl_perform_fixups(struct spl_image_info *spl_image);
-+void spl_perform_arch_fixups(struct spl_image_info *spl_image);
++	if (CONFIG_K3_OPTEE_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
++		ret = fdt_fixup_reserved(fdt, "optee",
++					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
++		if (ret)
++			debug("%s: Failed to perform optee fixups (%s)\n",
++			      __func__, fdt_strerror(ret));
++		ret = mmu_unmap_reserved_mem("optee");
++		if (ret)
++			debug("%s: Failed to unmap optee rsvd mem (%s)\n",
++			      __func__, fdt_strerror(ret));
++	}
 +
-+/**
-+ * spl_perform_board_fixups() - board specific callback before processing the
-+ *                        boot-payload
-+ */
-+void spl_perform_board_fixups(struct spl_image_info *spl_image);
- 
- /*
-  * spl_get_load_buffer() - get buffer for loading partial image data
+ 	icache_enable();
+ 	dcache_enable();
+ }
 -- 
 2.50.1
 
