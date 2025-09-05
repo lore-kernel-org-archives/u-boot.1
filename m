@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F1BCA0FED
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 13:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 036A6CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 13:32:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11F1A83622;
-	Fri,  5 Sep 2025 15:31:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79A8883873;
+	Fri,  5 Sep 2025 15:32:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dqgYX3iu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NiAoN8mT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C10AD8386F; Fri,  5 Sep 2025 15:31:34 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id B596983885; Fri,  5 Sep 2025 15:32:25 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE49C834D4
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 15:31:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA05F834D4
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 15:32:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-55f76454f69so2027610e87.0
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 06:31:32 -0700 (PDT)
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-55f72452a8eso2587923e87.3
+ for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 06:32:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757079092; x=1757683892; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1757079143; x=1757683943; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DiYCq4WPRDF55dw8dmkCcnklz6OPmQbmq5aMpzcWKe8=;
- b=dqgYX3iuPQS80ihsMe2kqaYEq7E9viTTj9KREW98huzcPDozaVwgMLnDKOgsXX0xax
- o7G0nnRAloJYn5KMelrvwzjBz+9hjudL6KL1DRmCZugsp/CL2qeEDzsksNJ0SDiv64P6
- jGW4VfzR84EZhSfTgXxyOaxEflTp1Nkz4RVw1wmierSOlV9F/TvVnXJf4rRvWRrj4qfu
- jo9FL0SAhOFI1wF7/zBlfmh6wTBJl3+gO5Md3d+uLL/GNGTgEEIJKtk4DgmCrScSs4Qt
- qqhai2RoD0+pqmKf/Fhonu/Lqcu0jEtcX12j4znku+bCgZ3p3D/aN8qPLih0YWB77yMf
- tTwQ==
+ bh=Gl23jjm73AgZrJjev+kywN4JjoIJWOP7/2p69+GGmW4=;
+ b=NiAoN8mTJt0xVJZEGzSvPh3ER1jPthmJV1MOPQ9z0b3nLn7HMinIKSvOLdLyI5bE8w
+ a79WbZ8rwzgq5UTnG3cXbzC2AgvftRoJfyjiARM19HVh2+x5G2l6CxH2hcMHW+9izS7L
+ G4Aul2RjuGBuECorSWF/q57Lc3wd90m1xsONkBZP1Qlv5CfcGZNLE50b7OCTHfGlL992
+ Sa/ATchZEesYgOWpw1LFPqtTLUl/pugSw5n44sY1OsQMdeHedGWgIi+wpdpeHjbkFIQX
+ 3rUD6LoY1VgHjDcWhIy8g6ol5X7XKfypPHCZIXUEisgNuRUnTCX6F7AGTPQWDcemg028
+ KCBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757079092; x=1757683892;
+ d=1e100.net; s=20230601; t=1757079143; x=1757683943;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DiYCq4WPRDF55dw8dmkCcnklz6OPmQbmq5aMpzcWKe8=;
- b=oAD3kdjuz9nXhyaR6b0FMuGq+xaMi29yZd6m3EQ201+zLQnDmllvx/EbKdcGM8jLGi
- 96bR90AAIwyBVP1FCix2lNx54mcWVzZoyTpLMl9DuXd5F7LSqVun3sYLC4NRLCzOI+lG
- S8924a1BAnBgARPEMDEYZIzRF1F3RqgKxnCHsT71VIrTQfZLIig4pevRYx67baUEIu7v
- 9V+soQ4D4Y1q3Ni0H7i+VUYKxlOgsEM0741s/k/gecyYmdg/2S4cg5NE6nex7wf1a+IK
- itxxpt6m8iyFWGhj3yqRhJiVsxGQkKVQbZ2uYnRrkSSzN8I5J+qDv37eJuXTWgG1iWhJ
- 9Hlw==
+ bh=Gl23jjm73AgZrJjev+kywN4JjoIJWOP7/2p69+GGmW4=;
+ b=D5vJvw9FYrA6W3Wgni/q7Al/7jL9UxnVcYXBU//rcs8PK6M84bcXTVSDAoCfc8JQCz
+ kcUfXR1m8VUkFbAh5eRgbK0Du9cwfPIswh/6bkHTsEy2cuPvfSpfkuXXwZChd6UponcZ
+ mnzYtn1kN9hgqAeiygqQ3Knngg82agNaoFYFESC9cuAYYxlya2+pVflnrqAfavjMXMUQ
+ yFD+L0dVBqsqncBpAQI2rC/FHXLi79zdUrb7lZLDGvznsaWvdgUfyMTGHmwwji5G5khI
+ lI9eqgNEmMHQoZRjhwiRoUMhWp3zelbrppXQWq1IzJ5ozx7QNb5iRmFz9lM01XoilWcf
+ sRZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDS80fj5rs1LVu5SnmiKPR1cY8BYeK4kr/MYi5u8IjcLu/bQLe6WeHGjEZ/hTyvYxuR8lcA/s=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzxp1o+MMV0as6rtfaPfXxhhWwS2CuNMVmhsL1QKszDwdYcHRuk
- rYCkS58dp9cNGsoTE2zVfNuIe3UoKdRvZtyePtKiv1Wc9vgdcuRJYWKa1krPfdSJSlLR2tPHdLd
- 9LM+MHT+vqxrYcfK65aW3gW6rfECcPsWl7w==
-X-Gm-Gg: ASbGncvudHp1z3zDSsp17b7hIliZUTAp5IAGv2CmVbi4jRG5gSeQ/3y7aHwjOXzdc85
- oZh7FLCvbik9XXaTTYbSPqYTKi0NIUy8oTeI8p5Tfs4V0YChsPWtLqzUlObbg1ejOYf8N8hb8uz
- BQMHYu3lo5/Rs641hT/4PF6N8VOkiAdZWDDKfho3bj7thTVdQo5BmQ/2pOm5Dm4yMKBfsXZMzIq
- mdeQCjqzNoiIMz3PKBnVpnwLNDOl6joW1Dvp8A=
-X-Google-Smtp-Source: AGHT+IFVD39vIU36Np4M3+7fD0cXkEwSnkj3GJjo/WWn2/po6ErHxw2Patx00IeKrmyN6hRG1TzUlkpq7r2MJQGp2s0=
-X-Received: by 2002:a05:6512:2513:b0:55f:6a72:5679 with SMTP id
- 2adb3069b0e04-55f70906104mr6806140e87.34.1757079091986; Fri, 05 Sep 2025
- 06:31:31 -0700 (PDT)
+ AJvYcCU/dG/vcxSq20ZA0m2mQHmeHVwOv5vOndrnfJHPFNe82w1FfUfRInx6U2ehg+6kS24WTFP2SkA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRZCOqBDm94EkvC8khMCZYQxqH1xX3aAmGGEcbfVG/1999QTgA
+ 4VIkFZUYyFqM8d5NmSVkpv2cPmD203xv0Omwf3/r46C/Y6pYU0LfJYdhEhdmgMN68DmIs/yovrt
+ 8iZnJb53s4EH2sTwhGS1nunUySVHaChvneA==
+X-Gm-Gg: ASbGncuvr54VKTELQiTX233g/dBbB9Cmbcv+EMpB17DgaoRZvXL2cvL4eEWugK7/8w0
+ p0nITTpI0QYHG4MloYqWfpvTbnJ/1Gi71L1mMAUcHUZt2yKTMpSnFXVd7QXUukknNlCo5KBwqQO
+ FjaNc+V8iBH3Upne5zk7MVM9oews/uJfk6n1iDAVY8YEuR79Uj9no75tf8/bCxRok9vtaC+8U8w
+ Ht2C9Xf9/O4yuJELFKaJIvHFYPzhJPAmjBr/+tj94FSoXUGNQ==
+X-Google-Smtp-Source: AGHT+IEQc6Ok60pvQZf6NJbAsC9wi4v6QPClUSa7QzuVIPv4QeNrCeUFargX1DEGxtMQp6e6Qbta9vi5sjAk/jIB2lE=
+X-Received: by 2002:a05:6512:3b8b:b0:55f:4031:436f with SMTP id
+ 2adb3069b0e04-55f708a2b94mr6953177e87.7.1757079143021; Fri, 05 Sep 2025
+ 06:32:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250825135504.193004-1-frieder@fris.de>
- <20250825135504.193004-12-frieder@fris.de>
-In-Reply-To: <20250825135504.193004-12-frieder@fris.de>
+References: <20250828082008.2978900-1-primoz.fiser@norik.com>
+ <fa4d9eb8b7333c5871b79acf9d09f6c10f74c438.camel@phytec.de>
+In-Reply-To: <fa4d9eb8b7333c5871b79acf9d09f6c10f74c438.camel@phytec.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 5 Sep 2025 10:31:19 -0300
-X-Gm-Features: Ac12FXzwZUySwTTca7j2T0UPkskF92iegnEXYI2nbwMEs_en0XNPTxfDU2MSONM
-Message-ID: <CAOMZO5CuypDzi+vLgLoLzEdO5CHYODprCmaFr5tknwbZE5MXiQ@mail.gmail.com>
-Subject: Re: [PATCH 11/11] imx: kontron-sl-mx6ul: Switch to OF_UPSTREAM
-To: Frieder Schrempf <frieder@fris.de>
-Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
- Stefano Babic <sbabic@nabladev.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Annette Kobou <annette.kobou@kontron.de>,
- Eberhard Stoll <eberhard.stoll@kontron.de>, 
- Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Oualid Derouiche <oualid.derouiche@kontron.de>, Peng Fan <peng.fan@nxp.com>
+Date: Fri, 5 Sep 2025 10:32:11 -0300
+X-Gm-Features: Ac12FXzVoJ9ayMAoFrJz_3P4xxqlyOdPgU20HlAMMemvJgQldEMwtiKkPTgwONw
+Message-ID: <CAOMZO5C3acTbY+T+Vk53-J_c6h20QNMiyoETebL5O5D+QuA16w@mail.gmail.com>
+Subject: Re: [Upstream] [PATCH 1/2] configs: imx93-phycore_defconfig: Disable
+ CONFIG_AHAB_BOOT
+To: Martin Schwan <m.schwan@phytec.de>
+Cc: Christoph Stoidner <c.stoidner@phytec.de>,
+ Primoz Fiser <primoz.fiser@norik.com>, 
+ "m.othacehe@gmail.com" <m.othacehe@gmail.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -101,16 +101,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 25, 2025 at 10:55=E2=80=AFAM Frieder Schrempf <frieder@fris.de>=
- wrote:
+On Thu, Aug 28, 2025 at 6:33=E2=80=AFAM Martin Schwan <m.schwan@phytec.de> =
+wrote:
 >
-> From: Frieder Schrempf <frieder.schrempf@kontron.de>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA512
 >
-> Use the upstream devicetrees instead of the local ones.
->
-> Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+> Reviewed-by: Martin Schwan <m.schwan@phytec.de>
 
-There was a build failure because the in-tree DTBs were not removed
-from the Makefile.
-
-I fixed it and applied for next, thanks.
+Applied both for next, thanks.
