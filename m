@@ -4,69 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5398CA0FED
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC860CA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 893F283807;
-	Fri,  5 Sep 2025 10:19:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B01C83734;
+	Fri,  5 Sep 2025 10:19:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IVT8XV2A";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1757060396;
+	bh=BmRz50A//B5ez36P0GZfnGwdEuG2hSZN5MQKwcbnL/Q=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=MVkSY6p5F5iRE2vF7bAXOemsXA7+u6Djz0+bAlyluKlKrYp9ySugvuPzVkg0BEkL9
+	 QrfcsfOAF12kBKFJkVLb/UfjvCZXovwkSBfiieefCsmGLiQLbhcvQaoqOi2H4nzJAw
+	 r9PaNWqXkLPbGbMT5BKURWFuo1ANwAusgWr7LAzEPlDm9qANxHviMB8t3itUB0jKOY
+	 qeVw/zn8IktRDILJwRG7Gfn2lDGx9NC30ozGa/7u3Kb64Kz4h3biBxCsEJkDGoQdRS
+	 q8Sqqk7ESFkyux7CIHs9Ra7F8ymksx2IDjfFTihei5lDlgvR+vvboVafoLovyP+UEb
+	 1Dz7QzHaAv/OQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0528B83390; Fri,  5 Sep 2025 10:19:33 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD66E83900
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:30 +0200 (CEST)
+ id 26FE9838CC; Fri,  5 Sep 2025 10:19:56 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 46AC483390
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858JOmr3211794;
- Fri, 5 Sep 2025 03:19:24 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757060364;
- bh=jZhv0Kh+PNcNRgetONtmT6IUGunxtYzvacE8pXtiCFg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=IVT8XV2AG/NReaRTfZH7A+Jj8r+OIyK5qByToFCbsAR9kGcOPxvRojzuimM/e6HrH
- uWNViXK1LDx4x+rytGljbushT0co9CO8rrRnilQxe8PVpcM9O5gf+KltHukWTuxvog
- ZlgLXHvD/cysbnQOJliX28zLZ28zPPdCAR6u3Yjo=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858JO1Z1502299
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 5 Sep 2025 03:19:24 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 5
- Sep 2025 03:19:23 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 5 Sep 2025 03:19:23 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858JMBH445408;
- Fri, 5 Sep 2025 03:19:23 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
- <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
- <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
-Subject: [PATCH -next v6 10/10] mach-k3: add carveouts for TFA and optee
-Date: Fri, 5 Sep 2025 13:49:01 +0530
-Message-ID: <20250905081902.489345-11-anshuld@ti.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20250905081902.489345-1-anshuld@ti.com>
-References: <20250905081902.489345-1-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Oo8hxdgn"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 532E41026E167; 
+ Fri,  5 Sep 2025 10:19:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1757060392; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=BmRz50A//B5ez36P0GZfnGwdEuG2hSZN5MQKwcbnL/Q=;
+ b=Oo8hxdgnU9ucYYFL6iK9OcKt9qBtjjq+4uhKxcGjrTzGhwmxdHzkfz+CBMY/ZGcE0v0nLH
+ 1Z3dW1e8ENswQtmCjjn/U9wCJBk9Fki/fspdqxxBSdeT58hCT6kTV9sC+Uwa8R6xwfwJ74
+ +XH04OH3gdQlLjXTIEpfy1BFy4j0TViAi7DQ6QtEb+FzGIZmxxLyflwuLY2BhYnjqJfqpw
+ 6L6hdXMgsgVLkemsP6h/AZ0W0utk56Rfg9hO5aAzD1RQUA7aReX5jPJyUSMI2gdZzGZYG8
+ 3p9tu4FuwMmHGaVx3D0I0UKfBU9Auz4NtpjMg9I+Vr6G0/jhajZOCgKYbChZtA==
+Date: Fri, 5 Sep 2025 10:19:48 +0200
+From: Philip Oberfichtner <pro@denx.de>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Andre Przywara <andre.przywara@arm.com>, Anshul Dalal <anshuld@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Trevor Woerner <twoerner@gmail.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: Re: [PATCH v3 5/5] Image size checks: Simplify SPL_SIZE_LIMIT logic
+Message-ID: <aLqdJLy-FsgZD4H2@aristophanes>
+References: <20250903105653.335417-1-pro@denx.de>
+ <20250903105653.335417-6-pro@denx.de>
+ <21adca4e-834f-479d-a944-e4369c1b8c5e@mailbox.org>
+ <aLlMjQb0Qs-VkiaX@aristophanes>
+ <1c505e20-74e4-4525-bba9-1f1d74ce6b6f@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1c505e20-74e4-4525-bba9-1f1d74ce6b6f@mailbox.org>
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,68 +89,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-K3 platforms have reserved memory regions for TFA and OPTEE which should
-be unmapped for U-Boot.
+On Thu, Sep 04, 2025 at 05:02:30PM +0200, Marek Vasut wrote:
+> On 9/4/25 10:23 AM, Philip Oberfichtner wrote:
+> > On Wed, Sep 03, 2025 at 02:59:01PM +0200, Marek Vasut wrote:
+> > > On 9/3/25 12:56 PM, Philip Oberfichtner wrote:
+> > > > Simplify the depends-on logic for SPL_SIZE_LIMIT. No functional change.
+> > > > 
+> > > > Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> > > > ---
+> > > >    Kconfig | 2 +-
+> > > >    1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > 
+> > > > diff --git a/Kconfig b/Kconfig
+> > > > index aa00669ba20..343299eed50 100644
+> > > > --- a/Kconfig
+> > > > +++ b/Kconfig
+> > > > @@ -588,8 +588,8 @@ config HAS_SPL_SIZE_LIMIT
+> > > >    config SPL_SIZE_LIMIT
+> > > >    	hex "Maximum size of SPL image in bytes"
+> > > >    	depends on HAS_SPL_SIZE_LIMIT
+> > > > -	default 0x11000 if ARCH_MX6 && !MX6_OCRAM_256KB
+> > > >    	default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
+> > > > +	default 0x11000 if ARCH_MX6
+> > > This makes it less obvious what the other case (!256 kiB SRAM SoCs) covers,
+> > > why is that an improvement ?
+> > 
+> > This was originally Heinrich's idea. I personally find it better this
+> > way, but I won't argue about it.
+> 
+> Why do you send a patch which you cannot even argue is correct ?
+> 
+> > Can you please find a consensus the two of you?
+> 
+> No, you should be able to clarify why this patch should be applied, do not
+> shift this onus to other participants.
 
-Therefore this patch adds the necessary fdt fixups to properly set the
-load address for TFA/OPTEE and unmaps both by mmu_unmap_reserved_mem.
-
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/mach-k3/common.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
-
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 9c2fe92cf25..71fc7d31abe 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -31,6 +31,7 @@
- #include <dm/uclass-internal.h>
- #include <dm/device-internal.h>
- #include <asm/armv8/mmu.h>
-+#include <mach/k3-common-fdt.h>
- #include <mach/k3-ddr.h>
- 
- #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
-@@ -263,6 +264,7 @@ void board_prep_linux(struct bootm_headers *images)
- 
- void enable_caches(void)
- {
-+	void *fdt = (void *)gd->fdt_blob;
- 	int ret;
- 
- 	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
-@@ -273,6 +275,30 @@ void enable_caches(void)
- 
- 	mmu_setup();
- 
-+	if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-+		ret = fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
-+					 0x80000);
-+		if (ret)
-+			debug("%s: Failed to perform tfa fixups (%s)\n",
-+			      __func__, fdt_strerror(ret));
-+		ret = mmu_unmap_reserved_mem("tfa");
-+		if (ret)
-+			debug("%s: Failed to unmap tfa rsvd mem (%s)\n",
-+			      __func__, fdt_strerror(ret));
-+	}
-+
-+	if (CONFIG_K3_OPTEE_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-+		ret = fdt_fixup_reserved(fdt, "optee",
-+					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
-+		if (ret)
-+			debug("%s: Failed to perform optee fixups (%s)\n",
-+			      __func__, fdt_strerror(ret));
-+		ret = mmu_unmap_reserved_mem("optee");
-+		if (ret)
-+			debug("%s: Failed to unmap optee rsvd mem (%s)\n",
-+			      __func__, fdt_strerror(ret));
-+	}
-+
- 	icache_enable();
- 	dcache_enable();
- }
--- 
-2.50.1
-
+I prefer conciseness over verbosity. That's all. But I'm okay to step
+back on this one. There may be different view points.
