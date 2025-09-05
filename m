@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33DECCA0FED
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43728CA1015
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 08:19:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A32A838D7;
-	Fri,  5 Sep 2025 10:19:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9EC3B838F0;
+	Fri,  5 Sep 2025 10:19:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="behGpGOU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RFmVzGse";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20F2D83390; Fri,  5 Sep 2025 10:19:17 +0200 (CEST)
+ id 37E75838D5; Fri,  5 Sep 2025 10:19:22 +0200 (CEST)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3401C838AB
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F97983390
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 10:19:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858J7hM3668898;
- Fri, 5 Sep 2025 03:19:07 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5858JD4v3668926;
+ Fri, 5 Sep 2025 03:19:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757060347;
- bh=xYyFJXoxiaCTI+auO78Tcaq5djRiguopdEPhbh3JRMM=;
+ s=ti-com-17Q1; t=1757060353;
+ bh=3eGO5qk9KSey8Nflz+0xLVVqmIr3r+CtMbaLT2JtDSM=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=behGpGOUHJjCRL969Y/18KP11PHRw8NDVHswu0D0tZ3i/eKTQWrjlsJKJ7SWd1jsS
- zgQBn5bvMZ1OQu74JWGiK6VfbZanr11bHVwT20D/sokhJMXHx9ftgSoSVdTF/xqusa
- OoHlK+MSvx66cDQ1HIn886vWbiQ3/LJ048Z+9jkk=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858J7Zu752508
+ b=RFmVzGsesvxIyPsAarWQkhPAddMtTwqX4P8qjPUKAssymxYX6ZKee2CJBPobYGOTj
+ FNaOgWOpzoPQe3oDTusAxO8yuEeR6GOuc/XUir+hyjhiQ1aYsaRh3VFyNEMafqDRkE
+ JhOJP12vWQwwNELYDZWk3DYdXTUOhx7ORKMO9x8k=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5858JDP61502085
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 5 Sep 2025 03:19:07 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 5 Sep 2025 03:19:13 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 5
- Sep 2025 03:19:06 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 03:19:12 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Fri, 5 Sep 2025 03:19:06 -0500
+ Frontend Transport; Fri, 5 Sep 2025 03:19:12 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858J5mt151826;
- Fri, 5 Sep 2025 03:19:06 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5858JBAk445287;
+ Fri, 5 Sep 2025 03:19:11 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,9 +57,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
  <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
-Subject: [PATCH -next v6 01/10] mach-k3: use minimal memory map for all K3
-Date: Fri, 5 Sep 2025 13:48:52 +0530
-Message-ID: <20250905081902.489345-2-anshuld@ti.com>
+Subject: [PATCH -next v6 04/10] arm: armv8: invalidate dcache entries on
+ dcache_enable
+Date: Fri, 5 Sep 2025 13:48:55 +0530
+Message-ID: <20250905081902.489345-5-anshuld@ti.com>
 X-Mailer: git-send-email 2.50.1
 In-Reply-To: <20250905081902.489345-1-anshuld@ti.com>
 References: <20250905081902.489345-1-anshuld@ti.com>
@@ -83,76 +84,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The K3 family of SoCs encompasses a wide variety of devices with varying
-DDR configurations and memory carveout requirements, the current static
-memory map provides basic support for TI EVMs but does not scale well
-for newer platforms (such as AM62SiP with 512MiB of RAM).
+In dcache_enable, currently the dcache entries are only invalidated when
+the MMU is not enabled. This causes issues when dcache_enable is called
+with the MMU already configured, in such cases the existing dcache
+entries are not flushed which might result in un-expected behavior.
 
-Therefore this patch replaces the existing memory map with a minimal
-one, that could be more easily modified at runtime.
+This patch invalidates the cache entries on every call of dcache_enable
+before enabling dcache (by setting CR_C). This makes dcache_enable
+behave similar to icache_enable as well.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/mach-k3/arm64/arm64-mmu.c | 32 ++++++++++--------------------
- 1 file changed, 10 insertions(+), 22 deletions(-)
+ arch/arm/cpu/armv8/cache_v8.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
-index 0e07b1b7ce0..79650a7e346 100644
---- a/arch/arm/mach-k3/arm64/arm64-mmu.c
-+++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
-@@ -11,42 +11,30 @@
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 1c1e33bec24..6e662395a83 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -830,16 +830,15 @@ void flush_dcache_range(unsigned long start, unsigned long stop)
+ void dcache_enable(void)
+ {
+ 	/* The data cache is not active unless the mmu is enabled */
+-	if (!(get_sctlr() & CR_M)) {
+-		invalidate_dcache_all();
+-		__asm_invalidate_tlb_all();
++	if (!mmu_status())
+ 		mmu_setup();
+-	}
  
- #include <asm/system.h>
- #include <asm/armv8/mmu.h>
-+#include <linux/sizes.h>
+ 	/* Set up page tables only once (it is done also by mmu_setup()) */
+ 	if (!gd->arch.tlb_fillptr)
+ 		setup_all_pgtables();
  
- struct mm_region k3_mem_map[] = {
--	{
-+	{ /* SoC Peripherals */
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
- 		.size = 0x80000000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		.virt = 0x80000000UL,
--		.phys = 0x80000000UL,
--		.size = 0x1e780000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
--			 PTE_BLOCK_INNER_SHARE
--	}, {
--		.virt = 0xa0000000UL,
--		.phys = 0xa0000000UL,
--		.size = 0x60000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
--			 PTE_BLOCK_INNER_SHARE
--	}, {
--		.virt = 0x880000000UL,
--		.phys = 0x880000000UL,
--		.size = 0x80000000UL,
--		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
--			 PTE_BLOCK_INNER_SHARE
--	}, {
-+	}, { /* Flash Peripherals */
- 		.virt = 0x500000000UL,
- 		.phys = 0x500000000UL,
- 		.size = 0x380000000UL,
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, {
--		/* List terminator */
-+	}, { /* First DRAM Bank of size 2G */
-+		.virt = CFG_SYS_SDRAM_BASE,
-+		.phys = CFG_SYS_SDRAM_BASE,
-+		.size = SZ_2G,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+			 PTE_BLOCK_INNER_SHARE
-+	}, { /* List terminator */
- 		0,
- 	}
- };
++	invalidate_dcache_all();
++	__asm_invalidate_tlb_all();
+ 	set_sctlr(get_sctlr() | CR_C);
+ }
+ 
 -- 
 2.50.1
 
