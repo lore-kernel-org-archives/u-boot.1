@@ -4,73 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC463CA1010
-	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 17:45:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4993ECA0FED
+	for <u-boot@archiver.kernel.org>; Fri,  5 Sep 2025 19:00:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 313B683807;
-	Fri,  5 Sep 2025 19:45:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DABF83903;
+	Fri,  5 Sep 2025 21:00:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Oc7OLVch";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xEEckskR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F2A583826; Fri,  5 Sep 2025 19:45:36 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8BDB837B6
- for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 19:45:33 +0200 (CEST)
+ id 85B1783906; Fri,  5 Sep 2025 21:00:45 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 01331838F3
+ for <u-boot@lists.denx.de>; Fri,  5 Sep 2025 21:00:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-61e74d0539bso556422eaf.3
- for <u-boot@lists.denx.de>; Fri, 05 Sep 2025 10:45:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1757094332; x=1757699132; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=pC8+Q2pNIBGda1e2END3mT1EK9fEi0R2eTT1oWJ0LM4=;
- b=Oc7OLVchQxblQPmuCtZ8uMJ7La8XlHSHVMMyPH0xRjLXTdOkxWC6FCD5Wahs8SjoOl
- 72fFkgNmSTjYfpRPHJCou3COWDmKL//igth6jDdClQTisj8qkN1Hh/Pqhbbj8yV4LI7+
- 3NwCCh3XPOdCYqnaP5tMlzqYR0l4M3GeK1V829i++1NIjaCz0fFnhTEguMxXu/AcLOKw
- CXnUbZ/Q2z8XVNhU/57w4d34cDJlLL4v+dXCbKWBTc1Bf3wbq4C6L5E56GGXl1ey4+dl
- v4PKwxOnUqpa6DJnKqtdhOOQwDAlDOdn+JYl3wkapCS5KMSTUZP3f3kHMOi76nLc8lBl
- lKBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757094332; x=1757699132;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=pC8+Q2pNIBGda1e2END3mT1EK9fEi0R2eTT1oWJ0LM4=;
- b=YaJQNV2n9KouOHqL/8cyBXgnS8ZFdyZxmw8HhIkOuItaVWcSZy1YnTTDRpK98jMVZB
- 9Kj7G7Nq3AtdLtLxNhKa7w8MYhgaaIL728xd5yBEOLZK40bV1SVhXfpYqQ+r+E/k3SOm
- cKTJjXF88TFfBYZJIzs0g79ezdo/MEzxhq6y8/SrjsiRXtegcIaRNKi2u2mFrvoiMjVd
- X7xrgGQ7uIK3dBNK5LnKpLdTnaD+2u4GIfy39NejKUSH4pilIYMe8aUaJn5+ELuQOE0f
- suDBOSQFKkqExESuZUKxFd/OAYR+7/TaYGA34s/Qg2Znhr9TvxpEX3JqcoAn/iJp/y5w
- BpXw==
-X-Gm-Message-State: AOJu0YyA2PdbPQbi1V3jHvG1Xyn8e2hFXLaFHqzmPPXbSDpvu3a/XVry
- BGM5v31eNDJ7f5hCDVZicxkaISBgSGW7O0xSi2WrMBW1Ynmqo1tz4QPc1QPDjVs0d8CYt40kBWt
- 6Daya7LI48hD0yA7eX7rY2oKsFGHowgS4mebg+fmwYH3w4EMUfWI0pKA=
-X-Gm-Gg: ASbGncvfjv1BKokFSmXldDsQKmEwA0msa4khU1D/MuC7Qgio87CUOYVTs1CbAk0M34U
- LsUg3DcD0jVx9M/u1gRzxi2hDQnPd31M6ogdoOdo7Xy3Lo9bd816UH2Lgb/V2Wb6LLQ1+XqJRBF
- R7wGJdEPpsxf2DrjMWkVZ1G2bScPpdihS7OkVxXZCt2WBuLFbZ0GQMJ4EM64OdlLKicqcrdLrwX
- qzN6/k=
-X-Google-Smtp-Source: AGHT+IEA323LgKfRuk80iWHfJmmgxSEGX/RBQP4Q3aV6wcrZxJNIYdOZGz1L3dqLbdmBC5tAwo6TLFEXFYB/A1jrhGk=
-X-Received: by 2002:a05:6820:1609:b0:621:7234:99ce with SMTP id
- 006d021491bc7-6217234a05fmr870804eaf.8.1757094332131; Fri, 05 Sep 2025
- 10:45:32 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 585J0fmH3385206;
+ Fri, 5 Sep 2025 14:00:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757098841;
+ bh=sV2uFZIglWuEMzLT9tHnfGyQVgdtlx2fgBS18+sDuOk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=xEEckskRFA1UDdF7JAboNbddNyMeQnEcPE1ZkZCqUKRsXRddHdB2MFxbrhSk9Wwnd
+ AOiASZGLwM3KgLvEovXJh0DkuTZhLn2xQinkpy8nmoPHYW4Mc9vBus3tKgUZeoYLE4
+ bbkIwyjTOyJvTW5OjQgfld4Ynrp5fa0cEHQjmstM=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 585J0eXh562134
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 5 Sep 2025 14:00:41 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 5
+ Sep 2025 14:00:40 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Fri, 5 Sep 2025 14:00:40 -0500
+Received: from localhost (lcpd911.dhcp.ti.com [172.24.233.130])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 585J0dQj888497;
+ Fri, 5 Sep 2025 14:00:40 -0500
+Date: Sat, 6 Sep 2025 00:30:38 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: Re: [PATCH v1] mach-k3: fix reading size and addr from fdt on R5
+Message-ID: <20250905190038.vmttonz6lcv7icsr@lcpd911>
+References: <20250903111704.530700-1-anshuld@ti.com>
 MIME-Version: 1.0
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 5 Sep 2025 10:45:20 -0700
-X-Gm-Features: Ac12FXy0r_vdiGnIeRpVqYEv3gnkfZ3Tmw5qcr9nsx8kjzhURxdDbm7LoqUHvVE
-Message-ID: <CAJ+vNU38CyNjp96wH5m4FH022WxHghaASxU-gG=Uuc=ni7fYPQ@mail.gmail.com>
-Subject: LWIP buffer alignment
-To: u-boot <u-boot@lists.denx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250903111704.530700-1-anshuld@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,17 +77,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+On Sep 03, 2025 at 16:47:02 +0530, Anshul Dalal wrote:
+> fdtdec_get_addr_size uses architecture dependent datatypes which causes
+> the 32-bit R5 to fail when reading the 64-bit size and addr fields of
+> reg nodes from the fdt.
+> 
+> Therefore change it to a common api for both 64 and 32 bit platforms to
+> allow for fdt fixups from R5.
+> 
+> Fixes: 8b0fc29de0e3 ("arm: mach-k3: am62: Fixup TF-A/OP-TEE reserved-memory node in FDT")
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>  arch/arm/mach-k3/common_fdt.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
+> index 2777354c6ab..1e6786f6c20 100644
+> --- a/arch/arm/mach-k3/common_fdt.c
+> +++ b/arch/arm/mach-k3/common_fdt.c
+> @@ -140,7 +140,9 @@ int fdt_fixup_reserved(void *blob, const char *name,
+>  			return -EINVAL;
+>  		if (!strncmp(node_name, name, strlen(name))) {
+>  			/* Read out old size first */
+> -			addr = fdtdec_get_addr_size(blob, subnode, "reg", &size);
+> +			addr = fdtdec_get_addr_size_auto_parent(
+> +				blob, nodeoffset, subnode, "reg", 0, &size,
+> +				false);
 
-I'm working with a board that has an IMX ENETC MAC on it
-drivers/net/fsl_enetc.c and when configured for LWIP it fails and
-warns about RX buffers not being 64B aligned:
-WARNING at drivers/net/fsl_enetc.c:776/enetc_setup_rx_bdr()!
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-I tried changing MEM_ALIGNMENT to 64 in lib/lwip/u-boot/lwipopts.h but
-that did not align the buffers to 64B. Where are the lwip buffers
-created and do you have any suggestions for working around this?
-
-Best Regards,
-
-Tim
+-- 
+Best regards,
+Dhruva Gole
+Texas Instruments Incorporated
