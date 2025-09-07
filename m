@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06DDBCA1002
-	for <u-boot@archiver.kernel.org>; Sat,  6 Sep 2025 23:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 492B9CA0FED
+	for <u-boot@archiver.kernel.org>; Sun,  7 Sep 2025 01:01:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4522583929;
-	Sun,  7 Sep 2025 01:03:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 306B9838C1;
+	Sun,  7 Sep 2025 03:01:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="x/o/EWEr";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nvGfM2K5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZUj1zpni";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LRvchaf9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BCC48393E; Sun,  7 Sep 2025 01:03:12 +0200 (CEST)
+ id 087E88394E; Sun,  7 Sep 2025 03:01:33 +0200 (CEST)
 Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0866E83327
- for <u-boot@lists.denx.de>; Sun,  7 Sep 2025 01:03:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFAB8837B9
+ for <u-boot@lists.denx.de>; Sun,  7 Sep 2025 03:01:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cK7zd5Zxhz9sRk;
- Sun,  7 Sep 2025 01:03:09 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cKBcB4VtDz9tK1;
+ Sun,  7 Sep 2025 03:01:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757199789;
+ s=mail20150812; t=1757206890;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=y+O5RgdIRd/uMBnLSG95SsybuMM4EDkKJ8FCU/lIX7g=;
- b=x/o/EWErUYBaKy5OH+tBSWdDgtPydd8M/UuiDG47PWz0SiiN+RlTN3OWCDT12c/0uPmmxC
- nkMSONxYCYBiHYx1D4k/bbg4icrk1G5H07+yMIuxlGUhi8pWcQReB7DSQ0pL8cE4HDaL6F
- SxGa32usACFTErrXV/eWVLNh9rBn9h8RpYJflUfyJ5VCT+KodqnhGMNwl0SLyNT/RGmccL
- cExBWxepTlh/vS+Uir1iRgYcdUrKtzxdlsIPMBCBdsuevVoFszsXC3sUKNuosc1x4Y51c8
- Q6f7lnyJ2tVl9QMgr7xQVOh56DDVW3Pg4qvUIx0jilTP2u/ip/3VkJPWCYnt6A==
+ bh=2ubiSFdT/P7SYbkoVGusgxRitmEPfh+5mwnBmTQBSH0=;
+ b=ZUj1zpniDxlhsy+X9wuyX4UmAIBKuhvlWKW9AznmkpbSaA6YsbcUcWVwQp73+TXVl9dUPT
+ +cx0EOnXMJtKTpRpqyfqdAEjfeiB9Qg0qxowWKQAyRYo0MejzC8E/S9QguZGaYoKa4cRUv
+ ozPE9hzA4wMfexvs2GLfcKXH3lKW3vxLm/VHSVa+ELoFDld/ZKxO6MeuJZpXnUzmBo1woG
+ d9hbuvMtCv06pyEUMiYn/HrDscVpYWdJ/hADRO14eKifBi8X76/1LpLpyAXemBncmq3oHw
+ mtbYW0GFbv76ni4KATlReOBECFmF+3VEP3UfLY2KpMltMKQd0KO6RepErWBhQw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=LRvchaf9;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
 From: Marek Vasut <marek.vasut@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757199787;
+ s=mail20150812; t=1757206888;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=y+O5RgdIRd/uMBnLSG95SsybuMM4EDkKJ8FCU/lIX7g=;
- b=nvGfM2K5TxiST9aTteops1FdNqHqLUxQHWZ9+r7HGjo1En+Nl+NH2sF2MigsD4NXlNSgc4
- AUVJBUXQmP0W80u1cjWH1ZcF3uwW0hO4S+NHUjSKPlxyi1IT6ta7vWgDBA7u1IQ/ioQeuy
- av1EQPFLZO7EhEesVyb6TQQvTGPh4XbEXku0KGy6Fo0QRBooyeYM5O23Xepbedl8j2nVk+
- UWYiXSBr2FwcCo181M65qVwa7MHgNf3r5eH7L7RUj6XNbGWono09LDq07+0mzwc25so8DX
- yei+Ez722jJX3mOGKvSVh82y4dbLsFRhSxZZTpAX/TwHjs6qI5aS80VC1pVfZw==
+ bh=2ubiSFdT/P7SYbkoVGusgxRitmEPfh+5mwnBmTQBSH0=;
+ b=LRvchaf9DdLAOgS8kP1wJhwVLHPMxIv40Xet9ZUHUD+ClIXlOrDg7Ma1qU+9ppS+RBwSPN
+ t3csSgsuV8yb9w/n09ty+jsjVjppfqn1Gt1QoZSf6hnYFCf3iBNvnon6kOyaB0YzWI5rfs
+ gHWVQz/l1T1h54neojHYmMmjyQeB7AylU/jHlPcFv8kDpf9UiPwMPqkZLvID6g9MBYNuN1
+ S6CMPhq6oEg35WKAwUye9KNVJ77m1pAmXqIYUVnYVxvB9M5DCU4jSMOC9FnaSPIpjHtU12
+ VSgw1rxl3jp99xXQVJDH0gzVrz7AebkdQ9RuxfaxL3r1PI/+8ntOzMksKg0aYg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut@mailbox.org>,
- Christophe Roullier <christophe.roullier@foss.st.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] net: dwc_eth_qos: Fix support for stm32mp2 platform
-Date: Sun,  7 Sep 2025 01:02:33 +0200
-Message-ID: <20250906230258.582840-1-marek.vasut@mailbox.org>
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] board: dhelectronics: Check pointer before access in
+ dh_get_value_from_eeprom_buffer()
+Date: Sun,  7 Sep 2025 03:00:46 +0200
+Message-ID: <20250907010103.667681-1-marek.vasut@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 40567213a527f6ecc4c
-X-MBO-RS-META: epgw87f9n8f3shwopwof9znikhq1nd9u
+X-MBO-RS-ID: fabf295522fba346cee
+X-MBO-RS-META: 3m47j87begzxjkiyhyp6t6oqdtbcm3g3
+X-Rspamd-Queue-Id: 4cKBcB4VtDz9tK1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,92 +90,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The layout of SYSCFG_ETHnCR on STM32MP25xx is slightly different yet again.
-Add missing swizzling to program the correct register with the correct content.
+The eip pointer in dh_get_value_from_eeprom_buffer() might be NULL.
+The current NULL pointer check happens too late, after the eip was
+accessed in variable assignment. Reorder the two, so the NULL pointer
+check happens first, and any access second, otherwise the access may
+trigger a hang or other undefined behavior.
 
-Fixes: 20afca89ed53 ("net: dwc_eth_qos: add support of stm32mp2 platform")
 Signed-off-by: Marek Vasut <marek.vasut@mailbox.org>
 ---
-Cc: Christophe Roullier <christophe.roullier@foss.st.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
+Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- drivers/net/dwc_eth_qos_stm32.c | 42 ++++++++++++++++++++++++++-------
- 1 file changed, 34 insertions(+), 8 deletions(-)
+ board/dhelectronics/common/dh_common.c | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
-index 7a28f2a3e83..e12039c9661 100644
---- a/drivers/net/dwc_eth_qos_stm32.c
-+++ b/drivers/net/dwc_eth_qos_stm32.c
-@@ -137,13 +137,15 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
- 	const bool eth_ref_clk_sel = dev_read_bool(dev, "st,eth-ref-clk-sel");
- 	/* SoC is STM32MP13xx with two ethernet MACs */
- 	const bool is_mp13 = device_is_compatible(dev, "st,stm32mp13-dwmac");
-+	/* SoC is STM32MP25xx with two ethernet MACs */
-+	const bool is_mp2 = device_is_compatible(dev, "st,stm32mp25-dwmac");
- 	/* Gigabit Ethernet 125MHz clock selection. */
- 	const bool eth_clk_sel = dev_read_bool(dev, "st,eth-clk-sel");
- 	/* Ethernet clock source is RCC. */
- 	const bool ext_phyclk = dev_read_bool(dev, "st,ext-phyclk");
- 	struct regmap *regmap;
- 	u32 regmap_mask;
--	u32 value;
-+	u32 reg, value;
+diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
+index 9f8e5754d8c..aeabd617374 100644
+--- a/board/dhelectronics/common/dh_common.c
++++ b/board/dhelectronics/common/dh_common.c
+@@ -131,14 +131,17 @@ int dh_read_eeprom_id_page(u8 *eeprom_buffer, const char *alias)
+ int dh_get_value_from_eeprom_buffer(enum eip_request_values request, u8 *data, int data_len,
+ 				    struct eeprom_id_page *eip)
+ {
+-	const char fin_chr = (eip->pl.item_prefix & DH_ITEM_PREFIX_FIN_BIT) ?
+-			     DH_ITEM_PREFIX_FIN_FLASHED_CHR : DH_ITEM_PREFIX_FIN_HALF_CHR;
+-	const u8 soc_coded = eip->pl.item_prefix & 0xf;
++	char fin_chr;
++	u8 soc_coded;
+ 	char soc_chr;
  
- 	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscon");
- 	if (IS_ERR(regmap))
-@@ -213,15 +215,39 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
+ 	if (!eip)
  		return -EINVAL;
- 	}
  
--	/* Shift value at correct ethernet MAC offset in SYSCFG_PMCSETR */
--	value <<= ffs(regmap_mask) - ffs(SYSCFG_PMCSETR_ETH1_MASK);
-+	if (is_mp2) {
-+		/*
-+		 * STM32MP25xx SYSCFG EthernetN control register
-+		 * has ETHn_CLK_SEL and ETHn_REF_CLK_SEL bits
-+		 * swapped, swizzle them back in place. Bitfield
-+		 * ETHn_SEL is shifted by 1 right, fix this up.
-+		 */
-+		value = ((value & SYSCFG_PMCSETR_ETH_SEL_MASK) >> 1) |
-+			((value & SYSCFG_PMCSETR_ETH_CLK_SEL) << 1) |
-+			((value & SYSCFG_PMCSETR_ETH_REF_CLK_SEL) >> 1);
++	fin_chr = (eip->pl.item_prefix & DH_ITEM_PREFIX_FIN_BIT) ?
++		  DH_ITEM_PREFIX_FIN_FLASHED_CHR : DH_ITEM_PREFIX_FIN_HALF_CHR;
++	soc_coded = eip->pl.item_prefix & 0xf;
 +
-+		/*
-+		 * STM32MP25xx SYSCFG EthernetN control register
-+		 * bits always start at bit shift 0 and there is
-+		 * one register for each MAC, shift the register
-+		 * content in place.
-+		 */
-+		value >>= ffs(SYSCFG_PMCSETR_ETH1_MASK) - 1;
-+
-+		reg = dev_read_u32_index_default(dev, "st,syscon", 1, 0);
- 
--	/* Update PMCCLRR (clear register) */
--	regmap_write(regmap, is_mp13 ?
--			     SYSCFG_PMCCLRR_MP13 : SYSCFG_PMCCLRR_MP15,
--			     regmap_mask);
-+		return regmap_write(regmap, reg, value);
-+	} else {
-+		/* Shift value at correct ethernet MAC offset in SYSCFG_PMCSETR */
-+		value <<= ffs(regmap_mask) - ffs(SYSCFG_PMCSETR_ETH1_MASK);
- 
--	return regmap_update_bits(regmap, SYSCFG_PMCSETR, regmap_mask, value);
-+		/* Update PMCCLRR (clear register) */
-+		regmap_write(regmap, is_mp13 ?
-+				     SYSCFG_PMCCLRR_MP13 : SYSCFG_PMCCLRR_MP15,
-+				     regmap_mask);
-+
-+		return regmap_update_bits(regmap, SYSCFG_PMCSETR, regmap_mask, value);
-+	}
- }
- 
- static int eqos_probe_resources_stm32(struct udevice *dev)
+ 	/* Copy requested data */
+ 	switch (request) {
+ 	case DH_MAC0:
 -- 
 2.50.1
 
