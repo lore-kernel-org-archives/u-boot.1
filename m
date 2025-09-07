@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F41DCA101F
-	for <u-boot@archiver.kernel.org>; Sun,  7 Sep 2025 19:17:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1AEECA1017
+	for <u-boot@archiver.kernel.org>; Sun,  7 Sep 2025 20:22:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F314D802C1;
-	Sun,  7 Sep 2025 21:17:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BACC3802C1;
+	Sun,  7 Sep 2025 22:22:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ikq2z9QD";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mTk/TnsB";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="CavwH35d";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZqfY3QIY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D09EF803F5; Sun,  7 Sep 2025 21:16:59 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id B6B32803CC; Sun,  7 Sep 2025 22:22:50 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F6B8800D7
- for <u-boot@lists.denx.de>; Sun,  7 Sep 2025 21:16:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 386B8800D7
+ for <u-boot@lists.denx.de>; Sun,  7 Sep 2025 22:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cKfw90wVNz9tJh;
- Sun,  7 Sep 2025 21:16:57 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cKhN76jrXz9shj;
+ Sun,  7 Sep 2025 22:22:47 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757272617;
+ s=mail20150812; t=1757276568;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=oyS1rqhtn92HA8/dWy9CzsGLBavkxGH9DNeU8J2IlsY=;
- b=ikq2z9QDxwZS7T7/20QiEjPnMRdBmSZUu6neTTbjCyNhwq+ZNQt8COG86KHeobGOZpdvF+
- qRqOsiC/tYyK2EEhBXrT94eDEokRErVxGNQ+B5tnFH2GCgRUA9/tlEPWwPB6Kqhm/DC8w0
- DgNZ4bFmvNwyOWBj8gzFGqZJKO4xHQLofFCUfQIVWFsBgrZ34ZIjSjWfbPUhuBvATALhds
- 2mkUcjkrtwLmWBWJdGcMY5Z+vpZlrgzV/NblVrni4i4A2Ow06QS/XIoKVXjOJY+SiPQS5T
- LN/DA5kLkYWej4+PajgroLb2MtdbDBuA7vkgdch0SaDB6j8b6tp4Ny95xCW2Bw==
+ bh=qCa3xEfT0xn0ki7mTaDrOQh+ltsC7mWcqFhjI+e2Xv8=;
+ b=CavwH35ds3B64AIx5dhL4aydbqii0yqCTbYrtOl0NgZqMvU4rqjpK+rsQ6V/1f+GA/YUEJ
+ MHFCG4Xszm3QfWBo/WdKTUWHMAX94YkTQk2MEYU/WXFN9nezh3+TJRTroRm64fsklet3ch
+ R+4FFObFKCZTFAHxrUXk3lA0caaxzpsgDe0kyfd33BCXizkCMjxmORnKZfMzgbkQv4Qshe
+ EfmMUwr5sAKg8+b57JY1bSmNZJQ16jzHPZCTNzz9lv1EeFtrzMyXE6AH/wZx0Sf5ySXnkS
+ vR3zvZAjHIOlaBfYfXCNpn108mvn+XFaKn9fKV3RkruntFM8OVZleIJ9KIhDuw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757272615;
+ s=mail20150812; t=1757276565;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=oyS1rqhtn92HA8/dWy9CzsGLBavkxGH9DNeU8J2IlsY=;
- b=mTk/TnsBbnPOTXnr4pO18Jqge2U5txIU/4+6UCra3I2mMsQLIbZvkcMsbJ919TcOJOjs1M
- yaLyHtbHbS+cdGbRTB8MCWAFdgRMtj+Ajpg4yyJd6wAiVHxKTqfoSY8WG1iFaKBPzd1d7J
- Di5HxKYB5gAbuuajRH/kQHUE6Y1IUkXRLdmcinFq6rTmcH14l8AlLHEo3CXalU5NKELX4c
- 7odYrF5+PjoTfVa+p0TlmvcCOLgSxraPcvSFYMiniiQBtvL5fBHRcanaTuR3ROMZExm39s
- Vcqchdt0NORbiCJedhxmRKc5M6T+c9uB6y7zf6hZ3ibXSLnhxlP3FJiHcBtRqw==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] serial: sh: Handle HSCIF RX FIFO overflow
-Date: Sun,  7 Sep 2025 21:16:27 +0200
-Message-ID: <20250907191645.331925-1-marek.vasut+renesas@mailbox.org>
+ bh=qCa3xEfT0xn0ki7mTaDrOQh+ltsC7mWcqFhjI+e2Xv8=;
+ b=ZqfY3QIYikSAXRa1sHv1ZKDy9qOQqiaunKtCXc8QDrwoCUv5qcc5B3EPBKhiyxi12YVqvj
+ gD91gx22XWwK47Z0GNpJ5OroGYa9eBjCwb7P4TlokbwlIbfIK9xW5BhIebtVNztWaQtpwz
+ Q9GWCsquX/AzodE/yeI3kR5clZ5hQsjcYg6o8daLtbShQKe6ihg8YVso1rZmXCag5VN6ZK
+ GMTGEi18P1gPCHbkHKw2qcDJ26QfOyfksfBjzpZ9zTM+S7GjK0jMTgNFsJRaXxHSxxIL20
+ weI/bFo6dVyKfcwnqrVcw1kS//LHGzUtASpyWtjLlB9aVkDtU9SlCoom75Cc/Q==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Sun,  7 Sep 2025 22:21:57 +0200
+Message-ID: <20250907202229.385685-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 9wewo5o5ndgszfhtkcrrduw7nn65o9ry
-X-MBO-RS-ID: 42bdb9e14c6d328605c
+X-MBO-RS-ID: 7ad6cb9ffd2f08b435e
+X-MBO-RS-META: 7kkxqzo4jzdpqbr84cahuu176xzhemak
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,48 +81,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The HSCIF RX FIFO may overflow when data are streaming from remote end
-into the HSCIF while U-Boot is still starting up. In that case, HSFSR
-bit RDF is set, but HSFDR field R is zero. This confuses .tstc callback
-into considering RX FIFO to be empty, which leads to .getc to be never
-invoked, even when user attempts to pass more input onto the command
-line.
+Trivial last minute fix ups.
 
-Fix this by considering the RDF flag in serial_rx_fifo_level(), which
-is called from .tstc in case of no errors. If RDF flag is set, trigger
-the .getc callback and let it clear the RX FIFO.
+The following changes since commit 328747974a0620d0996113fe2b3906b06e96de00:
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/serial/serial_sh.c | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+  Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boot-samsung (2025-09-05 08:15:16 -0600)
 
-diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
-index e4cc4ee4260..7ab62e0e90b 100644
---- a/drivers/serial/serial_sh.c
-+++ b/drivers/serial/serial_sh.c
-@@ -112,7 +112,16 @@ static int serial_raw_putc(struct uart_port *port, const char c)
- 
- static int serial_rx_fifo_level(struct uart_port *port)
- {
--	return scif_rxfill(port);
-+	int ret;
-+
-+	ret = scif_rxfill(port);
-+	if (ret)
-+		return ret;
-+
-+	if (sci_in(port, SCxSR) & SCxSR_RDxF(port))
-+		return 1;
-+
-+	return 0;
- }
- 
- static int sh_serial_tstc_generic(struct uart_port *port)
--- 
-2.51.0
+are available in the Git repository at:
 
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+
+for you to fetch changes up to b5294efd21369db75cf2176fdce93d14cd8485ca:
+
+  arm64: renesas: r8a779g3: Use $loadaddr in bootcmd on Retronix R-Car V4H Sparrow Hawk board (2025-09-07 20:29:50 +0200)
+
+----------------------------------------------------------------
+Marek Vasut (2):
+      ARM: renesas: Enable CONFIG_ENV_VARS_UBOOT_CONFIG on all boards
+      arm64: renesas: r8a779g3: Use $loadaddr in bootcmd on Retronix R-Car V4H Sparrow Hawk board
+
+ configs/r8a779g3_sparrowhawk_defconfig | 2 +-
+ configs/renesas_rcar.config            | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
