@@ -4,63 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 320E2CA101F
-	for <u-boot@archiver.kernel.org>; Sun,  7 Sep 2025 16:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F41DCA101F
+	for <u-boot@archiver.kernel.org>; Sun,  7 Sep 2025 19:17:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 558F7802C1;
-	Sun,  7 Sep 2025 18:13:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F314D802C1;
+	Sun,  7 Sep 2025 21:17:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GKnMB1it";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ikq2z9QD";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mTk/TnsB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03A84803CC; Sun,  7 Sep 2025 18:13:39 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id D09EF803F5; Sun,  7 Sep 2025 21:16:59 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBBF2800D7
- for <u-boot@lists.denx.de>; Sun,  7 Sep 2025 18:13:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6B8800D7
+ for <u-boot@lists.denx.de>; Sun,  7 Sep 2025 21:16:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cKZrZ6yLDz9sqs;
- Sun,  7 Sep 2025 18:13:34 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cKfw90wVNz9tJh;
+ Sun,  7 Sep 2025 21:16:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757261615;
+ s=mail20150812; t=1757272617;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6tG+fRVpEbiNlEonTMA7rRUWYhTSRydeDLUIeRBh1qI=;
- b=GKnMB1itljbTZaQCoplkZdiR78s3CNBOlxyg8C7P8juSuVE8nS+YBtyWaPXil/TvcKloOk
- d5q5foxP4A4FdKG1FqUM9ic3ATf9iTTHbMPgnvHrFNdYkS0esoK4DhrfeBIHygvDz4Rapz
- mFItneUECrRRGopiFvk1Adm22yj1GiEow4jO9/aq2U7DkqVfuRtLTVPi/nPtg9fjoTVCkx
- GXr+JTackc5iLnzISzGLs8bu54wp7Rzyvmy/eIP/M2ptRswDaIXDUQjL/hUz2HERB4SB1l
- 2nq4KOpF1TXj/Yk2JKrD3aevKc/JkEOqk6oiGjcBPhfbv6kzLy8FXpiQy8gvJw==
-Message-ID: <b06616ae-4472-4512-938c-ab76a189b3d0@mailbox.org>
-Date: Sun, 7 Sep 2025 18:13:33 +0200
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=oyS1rqhtn92HA8/dWy9CzsGLBavkxGH9DNeU8J2IlsY=;
+ b=ikq2z9QDxwZS7T7/20QiEjPnMRdBmSZUu6neTTbjCyNhwq+ZNQt8COG86KHeobGOZpdvF+
+ qRqOsiC/tYyK2EEhBXrT94eDEokRErVxGNQ+B5tnFH2GCgRUA9/tlEPWwPB6Kqhm/DC8w0
+ DgNZ4bFmvNwyOWBj8gzFGqZJKO4xHQLofFCUfQIVWFsBgrZ34ZIjSjWfbPUhuBvATALhds
+ 2mkUcjkrtwLmWBWJdGcMY5Z+vpZlrgzV/NblVrni4i4A2Ow06QS/XIoKVXjOJY+SiPQS5T
+ LN/DA5kLkYWej4+PajgroLb2MtdbDBuA7vkgdch0SaDB6j8b6tp4Ny95xCW2Bw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1757272615;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=oyS1rqhtn92HA8/dWy9CzsGLBavkxGH9DNeU8J2IlsY=;
+ b=mTk/TnsBbnPOTXnr4pO18Jqge2U5txIU/4+6UCra3I2mMsQLIbZvkcMsbJ919TcOJOjs1M
+ yaLyHtbHbS+cdGbRTB8MCWAFdgRMtj+Ajpg4yyJd6wAiVHxKTqfoSY8WG1iFaKBPzd1d7J
+ Di5HxKYB5gAbuuajRH/kQHUE6Y1IUkXRLdmcinFq6rTmcH14l8AlLHEo3CXalU5NKELX4c
+ 7odYrF5+PjoTfVa+p0TlmvcCOLgSxraPcvSFYMiniiQBtvL5fBHRcanaTuR3ROMZExm39s
+ Vcqchdt0NORbiCJedhxmRKc5M6T+c9uB6y7zf6hZ3ibXSLnhxlP3FJiHcBtRqw==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] serial: sh: Handle HSCIF RX FIFO overflow
+Date: Sun,  7 Sep 2025 21:16:27 +0200
+Message-ID: <20250907191645.331925-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] phy: Reset init count on phy exit failure
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Roger Quadros <rogerq@kernel.org>, Tom Rini <trini@konsulko.com>
-References: <20250906230052.582621-1-marek.vasut@mailbox.org>
- <0924d46e-9275-461b-bdad-7341f844aea4@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <0924d46e-9275-461b-bdad-7341f844aea4@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 0f64b5332effb0ef4e2
-X-MBO-RS-META: pczq5ri8xb4st6hpub79dho41k8hk3my
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 9wewo5o5ndgszfhtkcrrduw7nn65o9ry
+X-MBO-RS-ID: 42bdb9e14c6d328605c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,38 +82,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/7/25 9:18 AM, Siddharth Vadapalli wrote:
+The HSCIF RX FIFO may overflow when data are streaming from remote end
+into the HSCIF while U-Boot is still starting up. In that case, HSFSR
+bit RDF is set, but HSFDR field R is zero. This confuses .tstc callback
+into considering RX FIFO to be empty, which leads to .getc to be never
+invoked, even when user attempts to pass more input onto the command
+line.
 
-Hi,
+Fix this by considering the RDF flag in serial_rx_fifo_level(), which
+is called from .tstc in case of no errors. If RDF flag is set, trigger
+the .getc callback and let it clear the RX FIFO.
 
->> diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
->> index 714be123856..f8d4fb3b41b 100644
->> --- a/drivers/phy/phy-uclass.c
->> +++ b/drivers/phy/phy-uclass.c
->> @@ -274,7 +274,7 @@ int generic_phy_exit(struct phy *phy)
->>   {
->>   	struct phy_counts *counts;
->>   	struct phy_ops const *ops;
->> -	int ret;
->> +	int ret = 0;
->>   
->>   	if (!generic_phy_valid(phy))
->>   		return 0;
->> @@ -292,12 +292,11 @@ int generic_phy_exit(struct phy *phy)
->>   		if (ret) {
->>   			dev_err(phy->dev, "PHY: Failed to exit %s: %d.\n",
->>   				phy->dev->name, ret);
->> -			return ret;
-> 
-> I assume that a generic_phy_reset() may be required for generic_phy_init()
-> to succeed after generic_phy_exit() has failed.
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/serial/serial_sh.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-Likely, that's up to the driver(s).
+diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
+index e4cc4ee4260..7ab62e0e90b 100644
+--- a/drivers/serial/serial_sh.c
++++ b/drivers/serial/serial_sh.c
+@@ -112,7 +112,16 @@ static int serial_raw_putc(struct uart_port *port, const char c)
+ 
+ static int serial_rx_fifo_level(struct uart_port *port)
+ {
+-	return scif_rxfill(port);
++	int ret;
++
++	ret = scif_rxfill(port);
++	if (ret)
++		return ret;
++
++	if (sci_in(port, SCxSR) & SCxSR_RDxF(port))
++		return 1;
++
++	return 0;
+ }
+ 
+ static int sh_serial_tstc_generic(struct uart_port *port)
+-- 
+2.51.0
 
-> While I understand that
-> the current patch allows retrying, this may not be complete in allowing
-> users to make use of the change being brought about by this patch.
-> Nevertheless, the change being proposed in this patch looks good to me.
-This only corrects the inability to retry on failure due to refcount not 
-being decremented. Recovery action of the PHY is up to the 
-user/driver/consumer .
