@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDEBCA1013
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 08:13:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11023CA1013
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 08:14:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10A7E82AE9;
-	Mon,  8 Sep 2025 10:13:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 92A2F82A9E;
+	Mon,  8 Sep 2025 10:14:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VLwzgmnz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IQHYaGPX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 043D382DA1; Mon,  8 Sep 2025 10:13:40 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 4FA2D800B6; Mon,  8 Sep 2025 10:14:18 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F26FF800B6
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 10:13:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADD438304F
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 10:14:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3e2fdddd01dso509621f8f.2
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 01:13:37 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-3dce6eed889so3439645f8f.0
+ for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 01:14:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757319217; x=1757924017; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1757319254; x=1757924054; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=9iBapWgwRqiXRlt0vE5a+EpSdNZ2hubF+RfUp2joKM4=;
- b=VLwzgmnzLX7Zgibx4GI3KgYlhByRVg9UQ1lyYzg4ys8gWzlTZGcLAb/pNPZlZNakrx
- pqTuNZmMZDjcDQyx50B/GIhsTuBz9x0tohWBdmvmSKu3AknI+pM2ZEaNTfqkyxEVjOVQ
- huQ3Y+S+ostmz+sGlyJNIPa2BdBtvMtZWmT//B42J910LU2Xml+kb6bQJ/Owq6xYuJlu
- fF7I7Ci4oilkSdRMKYqbMhICZaw3UYbBCKgC7nqu8UlEdbar3oyHepOhvPJ6ErsgYGUl
- xjkmLO41bgQJcBBZoLuqm3BjKzLc0HnwfOwoeTzS8DnKSRmwUms9k2/9CCXsfXBKd9k9
- kgFA==
+ :reply-to; bh=NM4Rxl7DqxDVxdEdqKM+hPbHynu1pPjxSy/EbaxJIFI=;
+ b=IQHYaGPX7ylSDFGSP4X5bUZ2li95LZ9o3pdyl744uwGdcRZZHw7tbV+t7S2W5BanWG
+ FvsXj4rCDJ9gybw1BIGjSFAFAZr154TaPyZguhJ8xfhrHbEBPA/8WOIINzMMxRliil6J
+ zIpVhfMU1LoJmBpSGzthQCXEDEDmiehtOQ6JzOJ+io5peHGaXCtaAyTjBHeYPRlSJ/db
+ Qkm1chvSGrHBVPWJ8fKwtksd7QsPcYpqOKJ1lNlIxdTD0zXTrD/ToaLmgfq2JtfCFQWm
+ RQ8ZZr6s5/qTFBNNKFb8vVwSw0iOfD8l9M1T6DswD0BUHLVqi7q0cRdJj31mFaxkucyh
+ Dprg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757319217; x=1757924017;
+ d=1e100.net; s=20230601; t=1757319254; x=1757924054;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=9iBapWgwRqiXRlt0vE5a+EpSdNZ2hubF+RfUp2joKM4=;
- b=OH0FqccKeRpYV1ur1jHk7aObMJIzfjkyT917fWd0uI55xiAXtvte8ti9gRwlNhQJWN
- Exm2qlxo3B9/IYO6qzN0L1dYLlaBur9sOCQjGQjMEe4w6mL1BLtGLF2a047BV5VcGV4L
- neSq0hTDd5Enmq+5gjGjO9Q0SQImT045VO2gc3dMggf34qFgvYqJjzI6h0DrMdz/ZraT
- 9jqXz6GC7KJsrFVmAFi8W7Ia40zD+aj861ocujsNlGc/NiCblWmokpxXnqo8JpL/H5Tj
- UVl5VOUuiIFNsUPvhFLmUf+dZy0kXfoOBP5f8qWI9qa+axLsH/zbhtxs6cCkaOvOntk9
- GXHA==
+ bh=NM4Rxl7DqxDVxdEdqKM+hPbHynu1pPjxSy/EbaxJIFI=;
+ b=Adxzc/OAuN9Qju4gfyePw4jdd0bHg71L9bSIoogkMK8b1erLqGeKE6wIFw9ps66D2D
+ EYoVS6aK4WvRc5x4Nmxkp+IA2HMx+FMAGU+UGh/e+IM5GMe3d4/Y/DdW0oCbBowRKK4V
+ 29wpMb/Zd3ggu5OglzDmSAREbC/GqZ3r27VlaeWJ77PZ22ySVywvy2gQb1FHw34wXQDm
+ bo62nFjw+0gnAVCoXVLqxPENxNOEtCCE7EZw3X86CsqhRxPxFMlXZZqFirJylb8N1aNm
+ 16wAlXGzk7G7zrbtzFk9QaWzW1HjOsOdSCUOb/L1G8Eu8alIkQdxtl9lXbaEYGyfVcg5
+ zVwQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX9XLxo6RtjyfSw8dMH9Wvej3HvglfS9PSGRIX76sdH3gl6fsmyBGAGFOHUqtaZf4SUVTlfWOw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNrYb8Xfm17+HB3NVBGKXZJnUj7RwXTnwW3S9R+OkGLNHaEaWK
- yWwfDSiQGKVxpJxjKgYcjcV/Ci0bL070tLNyjqIZbiMLpAKgTfQv9i2i9h+PuE0QbAI=
-X-Gm-Gg: ASbGnctflom7fMqURRXllCb9h57kHZzLRZNNYCZRVP623d6KxvdFrjMl8ym7fDWyKNz
- dnRnJdjaRBTeFNS4lefgj9MiFvdwkRzYfQqqMiwU/zgPUSpFT3h0o7INkDy28Ag4pv2XzoDnfaF
- DnSbUJPFRYW2absBjoOTsEpujbw/y6Z1Dh0C/AlVup+iAkfoeuwH3sZrXmb7F/FtNQwZtAXf3vp
- s07AX5T71Tzfc/ImSLKULZKDudHBPTPAYo+nItu8OBP9M2Khdc7ggHZ401Khtd3+NAFUuwZVtlh
- Jv9Bof1PCD1d9beUSJlD/eOAFt3wqQr0v6/rFDIyb9GrJ8NMXNBevk37whcctktdgo+u6svXWPf
- YOVvrtvrNmD4DjV1d/FRAFS78w+9pu2vYPF/S1OaB1ShKFbMVwKZReuYgt0FyGGxz3riAk0bDa7
- kHkARjMP6Itg==
-X-Google-Smtp-Source: AGHT+IGpGvDX2X6HzO8xX/1OyGYK377MG/5Bb72VAJMjVsH10CJgGS4eMQppVkujYzI62FieuvBsdw==
-X-Received: by 2002:a05:6000:3106:b0:3e6:116a:8fed with SMTP id
- ffacd0b85a97d-3e64bde97a5mr5530130f8f.45.1757319217286; 
- Mon, 08 Sep 2025 01:13:37 -0700 (PDT)
+ AJvYcCUe6+GRI9uN06ZxzvCd8l9uMXF/aE85xZ14bKkTa1TznBJbGn47IPjH/OJmNZao+LwFwkahs0U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyG2Cj0uLDtWIEgcLYuleMFq3PiLj4nzftn54luG+tZAHzL3Gry
+ KrtGBUtfRPFZhyDiMzDTn0Jb7EiOo7V8v0rZfLRr+86T3z/48d3F2+E4Lbw5/RXufQU=
+X-Gm-Gg: ASbGncv26s5OqSuTbe4hzqfWkNC+/ne7ipFZn1l9yf/XnjSWbU2EVhwubq5oqtMD/Fy
+ X0sxjeUtAqTWAzWl5/+xCiQmoTZ3XmDLEXZqQU52L89hYXF66DeF9e/lTFLgSP1IxQZCPMVOxY7
+ Y4C3VxXrebMpjJp/lhpLje/LM25SUqU3J6i5rwayzxzikTQ91ggz2JYCl7E9w4dmKqqQZYxeu1p
+ N5yDsA4RGb3KCy9l11pez9Hw8chU4oyCMSQ2UIOYcaeTPhlt5u5X2fmZzAIgMaICrieW20tWDwc
+ SJcm2KSYQLr53OYiuYHOLSoznJbui83bahryuxCvVUD2QzEWpScb8QrfPYix9i+K1PN1Kx04hxP
+ evnrQk8V/Fzjjf6cJJdJG3fhkWgRWddwHJ6ABDxDhtQgrvnh5AiRm/rWreEjhG7Re97p55lkiDb
+ LYK9FYhlOmZQ==
+X-Google-Smtp-Source: AGHT+IGCCh1yMeCjGS+g1djYBDYmR060GW/NgY+2zDUdYn7ooNPts98l3UQPUoP6SAkLFXsPe7BCXQ==
+X-Received: by 2002:a5d:5f82:0:b0:3e7:42ae:d3dd with SMTP id
+ ffacd0b85a97d-3e742aed713mr3577686f8f.53.1757319253941; 
+ Mon, 08 Sep 2025 01:14:13 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:61c1:5d31:4427:381b?
  ([2a01:e0a:3d9:2080:61c1:5d31:4427:381b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-45b9c5c89f2sm245164025e9.14.2025.09.08.01.13.36
+ ffacd0b85a97d-3d690f2ebb9sm31008901f8f.20.2025.09.08.01.14.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Sep 2025 01:13:36 -0700 (PDT)
-Message-ID: <ac3a7c41-92d1-4045-a258-c09f80432c9c@linaro.org>
-Date: Mon, 8 Sep 2025 10:13:36 +0200
+ Mon, 08 Sep 2025 01:14:13 -0700 (PDT)
+Message-ID: <76c5f608-a5fa-4922-b786-c987035ba6f9@linaro.org>
+Date: Mon, 8 Sep 2025 10:14:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFC 8/9] board: amlogic: add kconfig fragments for SPL
+Subject: Re: [PATCH RFC 7/9] arm: dts: meson-gx-u-boot: add binman
+ configuration for U-Boot SPL
 To: Ferass El Hafidi <funderscore@postmarketos.org>,
  Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -89,7 +90,7 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  ~postmarketos/upstreaming@lists.sr.ht
 References: <20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org>
- <20250907-spl-gx-v1-8-37395d9ff5af@postmarketos.org>
+ <20250907-spl-gx-v1-7-37395d9ff5af@postmarketos.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -116,7 +117,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250907-spl-gx-v1-8-37395d9ff5af@postmarketos.org>
+In-Reply-To: <20250907-spl-gx-v1-7-37395d9ff5af@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -137,192 +138,178 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 07/09/2025 16:36, Ferass El Hafidi wrote:
-> Add kconfig fragments for building SPL binaries for:
->   · ODROID-C2
->   · Videostrong KII Pro
->   · Libre Computer LePotato (1 GB and 2 GB variants)
+> Add binman configuration to meson-gx-u-boot.dtsi to automate building
+> bootable images using amlimage.
 > 
-> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 > ---
->   board/amlogic/p200/spl-odroid-c2.config           | 37 ++++++++++++++++++++++
->   board/amlogic/p200/spl-videostrong-kii-pro.config | 38 +++++++++++++++++++++++
->   board/amlogic/p212/spl-libretech-cc-1gb.config    | 36 +++++++++++++++++++++
->   board/amlogic/p212/spl-libretech-cc-2gb.config    | 38 +++++++++++++++++++++++
->   4 files changed, 149 insertions(+)
+>   arch/arm/dts/meson-gx-u-boot.dtsi | 142 ++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 142 insertions(+)
 > 
-> diff --git a/board/amlogic/p200/spl-odroid-c2.config b/board/amlogic/p200/spl-odroid-c2.config
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..d5ea295bc6d281f3d7770cc841ccbae5aee468a4
-> --- /dev/null
-> +++ b/board/amlogic/p200/spl-odroid-c2.config
-> @@ -0,0 +1,37 @@
-> +#
-> +# U-Boot SPL fragment for odroid-c2
-> +#
+> diff --git a/arch/arm/dts/meson-gx-u-boot.dtsi b/arch/arm/dts/meson-gx-u-boot.dtsi
+> index 9e0620f395e81048273690af4cee4b196ee7b0a7..d05f869c06ebefa08f5480327e4a72bbaa9a5e94 100644
+> --- a/arch/arm/dts/meson-gx-u-boot.dtsi
+> +++ b/arch/arm/dts/meson-gx-u-boot.dtsi
+> @@ -2,6 +2,7 @@
+>   /*
+>    * Copyright (c) 2019 BayLibre, SAS.
+>    * Author: Maxime Jourdan <mjourdan@baylibre.com>
+> + * Copyright (c) 2023 Ferass El Hafidi <funderscore@postmarketos.org>
+>    */
+>   
+>   / {
+> @@ -15,6 +16,16 @@
+>   	soc {
+>   		bootph-all;
+>   	};
 > +
-> +CONFIG_SPL=y
-> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_SPL_TEXT_BASE=0xd9001000
-> +CONFIG_SPL_STACK=0xd9013000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
-> +CONFIG_SPL_HAVE_INIT_STACK=y
-> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
-> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +# CONFIG_SPL_SERIAL_PRESENT is not set
-> +# CONFIG_SPL_SHA1 is not set
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
 > +
-> +# Enable MMC and serial drivers
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SPL_DRIVERS_MISC=y
-> +CONFIG_SPL_MMC=y
-> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
+> +#if defined(CONFIG_BINMAN)
+> +	binman: binman {
+> +		multiple-images;
+> +	};
+> +#endif
+>   };
+>   
+>   &vpu {
+> @@ -30,3 +41,134 @@
+>   	      <0x0 0xc883c000 0x0 0x1000>;
+>   	reg-names = "hdmitx", "hhi";
+>   };
 > +
-> +# Image things
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
-> +CONFIG_SPL_MAX_SIZE=0xb000
-> +CONFIG_SPL_PAD_TO=0x1fe00
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +# DRAM configuration
-> +CONFIG_DRAM_SIZE=2048
-> +CONFIG_DRAM_2T_MODE=y
-> +CONFIG_DRAM_TWO_IDENTICAL_RANKS=y
-> diff --git a/board/amlogic/p200/spl-videostrong-kii-pro.config b/board/amlogic/p200/spl-videostrong-kii-pro.config
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..5b3ba9d990840411ef3cef3db3c6aa9d7085b3ef
-> --- /dev/null
-> +++ b/board/amlogic/p200/spl-videostrong-kii-pro.config
-> @@ -0,0 +1,38 @@
-> +#
-> +# U-Boot SPL fragment for videostrong-kii-pro
-> +#
+> +#if defined(CONFIG_MESON_GX) && defined(CONFIG_BINMAN)
+> +/* binman configuration on GXBB and GXL */
 > +
-> +CONFIG_SPL=y
-> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_SPL_TEXT_BASE=0xd9001000
-> +CONFIG_SPL_STACK=0xd9013000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
-> +CONFIG_SPL_HAVE_INIT_STACK=y
-> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
-> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +# CONFIG_SPL_SERIAL_PRESENT is not set
-> +# CONFIG_SPL_SHA1 is not set
+> +#if defined(CONFIG_MESON_GXBB)
+> +#define BL31_ADDR 0x10100000
+> +#else /* GXL */
+> +#define BL31_ADDR 0x05100000
+> +#endif
 > +
-> +# Enable MMC and serial drivers
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SPL_DRIVERS_MISC=y
-> +CONFIG_SPL_MMC=y
-> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
+> +/*
+> + * On GXBB the base address of the SCP firmware doesn't matter as SPL will
+> + * send the firmware to the SCP anyway, and can get the base address from the
+> + * FIT. On GXL it matters, as BL31 is supposed to send the firmware, so set the
+> + * base address to what GXL BL2 would load the binary to.
+> + */
+> +#define  SCP_ADDR 0x13c0000
 > +
-> +# Image things
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
-> +CONFIG_SPL_MAX_SIZE=0xb000
-> +CONFIG_SPL_PAD_TO=0x1fe00
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +# DRAM configuration
-> +CONFIG_DRAM_SIZE=2048
-> +CONFIG_DRAM_2T_MODE=y
-> +CONFIG_DRAM_TWO_DIFF_RANKS=y
+> +&binman {
+> +	u-boot-amlogic {
+> +		filename = "u-boot-meson-with-spl.bin";
+> +		pad-byte = <0xff>;
 > +
-> diff --git a/board/amlogic/p212/spl-libretech-cc-1gb.config b/board/amlogic/p212/spl-libretech-cc-1gb.config
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..f58bb69325980d582d2d826ebbf28e4700965dfb
-> --- /dev/null
-> +++ b/board/amlogic/p212/spl-libretech-cc-1gb.config
-> @@ -0,0 +1,36 @@
-> +#
-> +# U-Boot SPL fragment for libretech-cc (1 GB variant)
-> +#
+> +		mkimage {
+> +			filename = "spl/u-boot-spl-signed.bin";
+> +#if defined(CONFIG_MESON_GXBB)
+> +			args = "-n", "gxbb", "-T", "amlimage";
+> +#elif defined(CONFIG_MESON_GXL)
+> +			args = "-n", "gxl", "-T", "amlimage";
+> +#endif
 > +
-> +CONFIG_SPL=y
-> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_SPL_TEXT_BASE=0xd9001000
-> +CONFIG_SPL_STACK=0xd9013000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
-> +CONFIG_SPL_HAVE_INIT_STACK=y
-> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
-> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +# CONFIG_SPL_SERIAL_PRESENT is not set
-> +# CONFIG_SPL_SHA1 is not set
+> +			blob {
+> +				size = <0xb000>; /* The BootROM loads 48K max (header is 4K) */
+> +				filename = "spl/u-boot-spl.bin";
+> +			};
+> +		};
 > +
-> +# Enable MMC and serial drivers
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SPL_DRIVERS_MISC=y
-> +CONFIG_SPL_MMC=y
-> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
+> +		fit: fit {
+> +			description = "ATF and U-Boot images";
+> +			#address-cells = <1>;
+> +			fit,fdt-list = "of-list";
+> +			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+> +			fit,align = <512>;
+> +			offset = <CONFIG_SPL_PAD_TO>;
 > +
-> +# Image things
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
-> +CONFIG_SPL_MAX_SIZE=0xb000
-> +CONFIG_SPL_PAD_TO=0x1fe00
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +# DRAM configuration
-> +CONFIG_DRAM_2T_MODE=y
-> +CONFIG_DRAM_DQS_CORR=y
-> diff --git a/board/amlogic/p212/spl-libretech-cc-2gb.config b/board/amlogic/p212/spl-libretech-cc-2gb.config
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..65d700558e65ca8d819f397a0153be8bf07ae702
-> --- /dev/null
-> +++ b/board/amlogic/p212/spl-libretech-cc-2gb.config
-> @@ -0,0 +1,38 @@
-> +#
-> +# U-Boot SPL fragment for libretech-cc (2 GB variant)
-> +#
+> +			images {
+> +				u-boot {
+> +					description = "U-Boot";
+> +					type = "standalone";
+> +					os = "u-boot";
+> +					arch = "arm64";
+> +					compression = "none";
+> +					load = <CONFIG_TEXT_BASE>;
+> +					entry = <CONFIG_TEXT_BASE>;
 > +
-> +CONFIG_SPL=y
-> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_SPL_TEXT_BASE=0xd9001000
-> +CONFIG_SPL_STACK=0xd9013000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
-> +CONFIG_SPL_HAVE_INIT_STACK=y
-> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
-> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +# CONFIG_SPL_SERIAL_PRESENT is not set
-> +# CONFIG_SPL_SHA1 is not set
+> +					u-boot-nodtb {
+> +					};
+> +				};
 > +
-> +# Enable MMC and serial drivers
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SPL_DRIVERS_MISC=y
-> +CONFIG_SPL_MMC=y
-> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
+> +				atf {
+> +					description = "ARM Trusted Firmware";
+> +					type = "firmware";
+> +					os = "arm-trusted-firmware";
+> +					arch = "arm64";
+> +					compression = "none";
+> +					load = <BL31_ADDR>;
+> +					entry = <BL31_ADDR>;
 > +
-> +# Image things
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
-> +CONFIG_SPL_MAX_SIZE=0xb000
-> +CONFIG_SPL_PAD_TO=0x1fe00
-> +CONFIG_SPL_ATF=y
-> +CONFIG_SPL_OF_CONTROL=y
-> +# DRAM configuration
-> +CONFIG_DRAM_SIZE=2048
-> +CONFIG_DRAM_2T_MODE=y
-> +CONFIG_DRAM_DQS_CORR=y
-> +CONFIG_DRAM_TWO_IDENTICAL_RANKS=y
+> +					atf-bl31 {
+> +						filename = "bl31.bin";
+> +					};
+> +					hash {
+> +						algo = "sha256";
+> +					};
+> +				};
+> +
+> +				scp {
+> +					description = "SCP firmware";
+> +					type = "scp";
+> +					arch = "arm"; /* The Cortex-M core is used as SCP */
+> +					compression = "none";
+> +					load = <SCP_ADDR>;
+> +
+> +					scp {
+> +						filename = "scp.bin";
+> +					};
+> +					hash {
+> +						/*
+> +						 * The hash is used by the SCP and passed to it
+> +						 * by U-Boot SPL.
+> +						 */
+> +						algo = "sha256";
+> +					};
+> +				};
+> +
+> +				@fdt-SEQ {
+> +					description = "NAME";
+> +					type = "flat_dt";
+> +					compression = "none";
+> +				};
+> +
+> +			};
+> +			configurations {
+> +				default = "@config-DEFAULT-SEQ";
+> +				@config-SEQ {
+> +					description = "NAME.dtb";
+> +					fdt = "fdt-SEQ";
+> +					firmware = "atf";
+> +					loadables = "scp", "u-boot";
+> +				};
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&vpu {
+> +	/delete-property/ bootph-all;
+> +};
+> +
+> +&apb {
+> +	bootph-all;
+> +};
+> +
+> +&sd_emmc_b {
+> +	bootph-all;
+> +};
+> +
+> +&sd_emmc_c {
+> +	bootph-all;
+> +};
+> +#endif
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
