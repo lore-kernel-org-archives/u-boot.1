@@ -4,88 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F91ACAC586
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 14:21:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E44F1CA1016
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 14:35:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AADA809A5;
-	Mon,  8 Sep 2025 16:21:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 426A0809A5;
+	Mon,  8 Sep 2025 16:35:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wyIY33/8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XHDDWEpE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 818FC83106; Mon,  8 Sep 2025 16:21:44 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 3C7DB82AE9; Mon,  8 Sep 2025 16:35:13 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8C5C80077
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 16:21:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9926B80077
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 16:35:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b04271cfc3eso610275166b.3
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 07:21:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-30cceb749d7so2031933fac.2
+ for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 07:35:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757341301; x=1757946101; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=MepRDTpHqsngoaBvwHrGr8xpIC3LP1GAZ6rFsICMahM=;
- b=wyIY33/8nvXTKfVJeNFJ7gqfaRokMatwHp1ooHzW01X6MMbtsH+nyUuxbr2eZFGcGy
- RMbPqDfBWDvLBpxVqOjZvYQI6/rDSe/u0dUCyEIWVYmJ3O4Y7w8cch3R7U/v9y37w3h8
- OtH9wnwC5DuxOZZeM5aP+xAPllesia6PpD4E+YfIbQM+VOnbmEDqtmMK4A269ImgUHWg
- VsjlLNwU/v1g0yIpQJ87KxEEdRwh2mIUGQuiYYyBxSufFnaW2sGJyy0DyJDAAbS+8eNR
- cvA+mCwkgnh8zD6ooKl2qeymvVhc+10GHPGcZsu7MoWumUvinoqgJOSDEf0JW82Akrz5
- u+ng==
+ d=konsulko.com; s=google; t=1757342108; x=1757946908; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VlqNad0UperfnHepWzo+ZApDPgjO+hYCk7RGa0opfNQ=;
+ b=XHDDWEpEwAjUuQOT/A4y8ITx0Gp7ekWR0tRqOLCGKRyJcwn4ieUSiJl8aF3vWI1w4I
+ j1W+X8p4w8dYMuHkgsr+tCpHChhqp6Q0gowdirPD46G+9M8ULIto/paYbw8lJs1Df/5V
+ 2f5FqGFd6PE0USQ8eoSDwTIo34vT9XKMNHhKA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757341301; x=1757946101;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MepRDTpHqsngoaBvwHrGr8xpIC3LP1GAZ6rFsICMahM=;
- b=ZoZ1tRZXUo2Ma87YZX1PpWPd4FcVbmPZ6W3nNE2U39MuFEb192iqYIe2LY+AVtGlD1
- zRmp6uZJMF/no26jP2UMnoIHQUo/ncVlQzrlk13bLhM+bjiUIocx39wR7abnr6TDEF8T
- LnQQWm0TioUogNsJSY7XcG6hvw7n4e9ig+c1jI7fOIU6KD70PdR0+T7YxGX+g3nwIrj/
- 8oRZiDe06JIY2TN1zVctpLBJe7pvyf1T1Q6D3iuJ3FBpbYKDRQM2iaBrYzzT3l5hE15C
- ssuTf7omn64cQChuWxu+HmVswO6Awqd2DMMp2VjdCqulTpVGqkdylfHRkeGlGryDrDY9
- OGjQ==
+ d=1e100.net; s=20230601; t=1757342108; x=1757946908;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VlqNad0UperfnHepWzo+ZApDPgjO+hYCk7RGa0opfNQ=;
+ b=c2C0yyKaaLEQF6Sfo39xWas4t7PPAvw2rU9q9FgHdnHMPjfwQSpb0kVe3tf/uGX25A
+ 6/Ily0Es6jUpCV8cpR5YGv6xUOkBmgUFZR7jtonNMzCZ9msfHcfAqjJHm6grwohq93Dk
+ Yh3IbvfiYjVSLUQJtQtkYUI6EOJM+NlZeTQYzf2Ye8jf6blffpPVbqaSwY/5tQ8RKIBx
+ 6RoILyiCbw4GsNDgUT2neJB8juwIAuY4v9Ak+dg8CQn4tLXNpTL4jdwa8P+Fbv6QLt4h
+ l0dxT/5hmW9HqFfMa8aw5DFxye7o7ucJNsddmT27IHJ6HH17DSwf+BKqIEy8fJfJcVRu
+ O4Cg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/qr1TGhRpindE+gMIMJPTt+sTSTH391kmFbNw6j903Ck7j+HFz86oKf8x0DBeOx9FeLL96MQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyedy/segtq/mvotOADCcSzzlXyKlsOVw9Wr7/mmsV3FGWHy+9A
- gjuGM37LzJbU+W6wZgKDUSnNnqUOGFpwBgRhu6/UO6kepKjmABlyY2XXgG+FfueXDR8=
-X-Gm-Gg: ASbGnct4B9NSsssIZ/3bPCt9L4ET79+tbGtc87jFoXuMV8znKA5agu8XSRQRooXr2nU
- GBD55ggklD4xGaV9RudzL7WoVMvlY10CqyGCS2WLoMWLLGnnYFGQnoNFGnhFHgM3CGeD9sh8OSO
- 8Mv+ne9hQHXNwWB161J0hXrrxjfrpAGNOmee9FZnewH9CDIAK+LZjHSAbH7+VFGlz7yJfBMbPOZ
- iHDKLnxEa8fU4pen630Z1QW/6RJvkBU4VzU4dcijw7RZBPiGuagJmxHtTXxgSHIeF5RouAp5diI
- Hf4p13UkTd/qCsalWQOjcoLv5xT/N9QBQP6+z2zJkXeG5W7XTfxEm3wL1Ij1mBkETf4iRouyvIP
- afuCEm4EeaYsHMybSGagWC3IHnJ8n/Ux8j1nAmYENkcxLijYefVGORNatbsPJ0j68IwbGgLNN02
- 6Nr/8gjXhV40U8WNZRNp+gwns=
-X-Google-Smtp-Source: AGHT+IE5sU+2haUYTYxD848n7T8Ip6kiSPmcOk25rfo0pbrKC4OamK0saHHmIad7UMfK4ao6aQrFCQ==
-X-Received: by 2002:a17:907:6093:b0:b04:5e57:6d0d with SMTP id
- a640c23a62f3a-b04b1714547mr827388466b.50.1757341301062; 
- Mon, 08 Sep 2025 07:21:41 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:dbbf:dd29:d7ea:be02?
- ([2a01:e0a:3cb:7bb0:dbbf:dd29:d7ea:be02])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b041800e89esm2052288266b.30.2025.09.08.07.21.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Sep 2025 07:21:40 -0700 (PDT)
-Message-ID: <e0c32dde-f265-42b5-ba4d-29a3deaa7eaf@linaro.org>
-Date: Mon, 8 Sep 2025 16:21:39 +0200
+ AJvYcCWeDc2SxzqRPQlWzIyxObMMas4AWM27exl6QjFLkbxFmYPnaiOg+yMDd3imYiUJYL/vt1nRrRo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzws2u4lYk9gHgSNWKgQGxFU6Xp4laEuRfyjDSICN+pRtIQheub
+ yEdXV2zyOlqr+e9LhYtGm4nobUCvKDpM7gxBKUDWh9ZGAuv7McCdfWM8NCPpr5CoWlE=
+X-Gm-Gg: ASbGncuWSUgddziectTf/XItXsy+SUrmspAMzgZZpmNtnj07ANb1LTYrPF2mjud08az
+ ZbDlBBfolGVVdouFr/9kekqUPyhRqCc5S/N2p0K5knSVcMQxa6lqbvY9Fst13apZmDae+cyFGmd
+ Ti8NU9t4jxq49momvWrUMEnB6eVwfDvizkzKG+IesX1+xgYh5lEg5HtWgw8HbYzNPQestW4QV25
+ 3cYvjL4K4W4a8xvyzTKd2G6wWtaO0LONtdeOInWmB4eilPo7in7mC8cMTrhaho/oWFUgWP699P9
+ I0czLYMH/OtdO1lYBpltqUVGB30bwf/WMsWSR8YXxYALQ8wvGIrzGSm8byuuJRtG+oSfi0gaaBm
+ scKBs9KfGTg80cGhHE7izjX2mlZqhrVLBfaf+oJ5FyRbz0djfkdcNM9+T
+X-Google-Smtp-Source: AGHT+IFtk4SyaufqeLPJ/hEgB7oHbqr7yrdRIOt1Lkg24pzeojsUeTeOEKXrm1Rec4t6craGvH1cEA==
+X-Received: by 2002:a05:6870:d0c7:b0:31a:e9e8:3018 with SMTP id
+ 586e51a60fabf-3226274aa69mr3247186fac.5.1757342107846; 
+ Mon, 08 Sep 2025 07:35:07 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-319c704f44csm6070306fac.2.2025.09.08.07.35.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 08 Sep 2025 07:35:06 -0700 (PDT)
+Date: Mon, 8 Sep 2025 08:35:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: =?utf-8?B?5Zue5aSNOiBbUEFUQ0ggdjQgMS8y?=
+ =?utf-8?Q?=5D_binman=3A_add_a_new_entr?= =?utf-8?Q?y?= type to support .bin
+ file generation for the i.MX95 platform
+Message-ID: <20250908143503.GQ124814@bill-the-cat>
+References: <20250818-imx95-v1-0-f68a19fe30b6@oss.nxp.com>
+ <20250818-imx95-v1-1-f68a19fe30b6@oss.nxp.com>
+ <CAOMZO5C=ROcrsS256shQNP4Dfz9ca_55tT1hQNHUM=kOrxnVUg@mail.gmail.com>
+ <PAXPR04MB964427E6CFEFCC51D44D046AE20CA@PAXPR04MB9644.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: LWIP buffer alignment
-To: Tim Harvey <tharvey@gateworks.com>, u-boot <u-boot@lists.denx.de>
-References: <CAJ+vNU38CyNjp96wH5m4FH022WxHghaASxU-gG=Uuc=ni7fYPQ@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAJ+vNU38CyNjp96wH5m4FH022WxHghaASxU-gG=Uuc=ni7fYPQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GFPv0Hud9i7MKXol"
+Content-Disposition: inline
+In-Reply-To: <PAXPR04MB964427E6CFEFCC51D44D046AE20CA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,28 +108,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
 
-On 9/5/25 19:45, Tim Harvey wrote:
-> Hi Jerome,
-> 
-> I'm working with a board that has an IMX ENETC MAC on it
-> drivers/net/fsl_enetc.c and when configured for LWIP it fails and
-> warns about RX buffers not being 64B aligned:
-> WARNING at drivers/net/fsl_enetc.c:776/enetc_setup_rx_bdr()!
-> 
-> I tried changing MEM_ALIGNMENT to 64 in lib/lwip/u-boot/lwipopts.h but
-> that did not align the buffers to 64B. Where are the lwip buffers
-> created and do you have any suggestions for working around this?
+--GFPv0Hud9i7MKXol
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The LwIP RX buffers are created in net-lwip.c. See eth_init_rings().
-You might have PKTSIZE_ALIGN and/or PKTALIGN set wrongly.
+On Mon, Sep 08, 2025 at 03:40:32AM +0000, Alice Guo (OSS) wrote:
+> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Fabio Estevam <festevam@gmail.com>
+> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B49=E6=9C=886=E6=97=A5=
+ 5:53
+> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>
+> > =E6=8A=84=E9=80=81: Tom Rini <trini@konsulko.com>; Simon Glass <sjg@chr=
+omium.org>; Alper
+> > Nebi Yasak <alpernebiyasak@gmail.com>; Stefano Babic
+> > <sbabic@nabladev.com>; dl-uboot-imx <uboot-imx@nxp.com>; Alice Guo
+> > <alice.guo@nxp.com>; Marek Vasut <marek.vasut@mailbox.org>;
+> > tharvey@gateworks.com; u-boot@lists.denx.de
+> > =E4=B8=BB=E9=A2=98: Re: [PATCH v4 1/2] binman: add a new entry type to =
+support .bin file
+> > generation for the i.MX95 platform
+> >=20
+> > On Wed, Aug 27, 2025 at 4:06=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.=
+nxp.com>
+> > wrote:
+> > >
+> > > From: Alice Guo <alice.guo@nxp.com>
+> > >
+> > > To support passing specific commands defined in enum imx8image_cmd to
+> > > the imx8image_copy_image() function, this patch introduces a new entry
+> > > type nxp-imx9image. This entry generates a plain text data file
+> > > containing the relevant commands, enabling flexible configuration
+> > > during image creation.
+> > >
+> > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> >=20
+> > I'm getting CI failures:
+> >=20
+> > +/binman/m33-oei-ddrfw/oei-m33-ddr (oei-m33-ddr.bin):
+> > +/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-imem
+> > (lpddr5_imem_v202409.bin):
+> > +/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-dmem
+> > (lpddr5_dmem_v202409.bin):
+> > +/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-imem-qb
+> > (lpddr5_imem_qb_v202409.bin):
+> > +/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-dmem-qb
+> > (lpddr5_dmem_qb_v202409.bin):
+> > +Image 'm33-oei-ddrfw' has faked external blobs and is non-functional:
+> > oei-m33-ddr.bin lpddr5_imem_v202409.bin lpddr5_dmem_v202409.bin
+> > lpddr5_imem_qb_v202409.bin lpddr5_dmem_qb_v202409.bin
+> > +binman: Error 1 running 'mkimage -d ./imx9image.imx-boot.spl -n
+> > ./spl/u-boot-spl.cfgout -T imx8image ./imx9image-out.imx-boot.spl':
+> > Fail open first container file mx95b0-ahab-container.img
+> > +make[1]: *** [Makefile:1339: .binman_stamp] Error 1
+> > +make: *** [Makefile:198: sub-make] Error 2
+> > +binman: Error 1 running 'mkimage -d ./imx9image.imx-boot.spl -n
+> > ./spl/u-boot-spl.cfgout -T imx8image ./imx9image-out.imx-boot.spl':
+> > Fail open first container file mx95a0-ahab-container.img
+> >=20
+> > https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1238965
+> >=20
+> > To reinforce what I asked you before: for v5, please make sure that you=
+ send me
+> > a link showing that CI has passed.
+>=20
+> Hi Fabio,
+>=20
+> Thank you for your message. I am currently using Azure Pipelines (free ve=
+rsion), but recently the world_build stage has failed to run properly. I wi=
+ll try alternative way to run the CI pipeline to ensure everything is prope=
+rly checked before posting.
 
-Regards,
--- 
-Jerome
+What problems do you see with the world build pipeline? I don't wait for
+it to complete every time I push (due to how long it takes) but it
+should never be broken.
 
-> 
-> Best Regards,
-> 
-> Tim
+--=20
+Tom
+
+--GFPv0Hud9i7MKXol
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaL7pgQAKCRAr4qD1Cr/k
+Csi0AP9XVCie4DZF4i5Lsk/WnnsRi5qjnEuBARJuvlNCVsy/nAD6AvD8rquta0cC
+WO5rfcKm2NO7NZictzECBeuuJggb5g8=
+=UiXH
+-----END PGP SIGNATURE-----
+
+--GFPv0Hud9i7MKXol--
