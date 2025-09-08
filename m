@@ -4,82 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 695C8CA1016
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 21:58:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E6BCAC582
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 23:02:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93BE882B20;
-	Mon,  8 Sep 2025 23:58:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 859FC80422;
+	Tue,  9 Sep 2025 01:02:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l6TlRjVr";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nwmttymr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8FDD83045; Mon,  8 Sep 2025 23:58:31 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CA66C82A9E; Tue,  9 Sep 2025 01:02:43 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAEFE82A9E
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 23:58:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B720800B6
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 01:02:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-30cce8c3afaso3459179fac.1
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 14:58:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757368708; x=1757973508; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NKoF5M6J61GD4CBoCx0LqR96NbyDQom1WMQBdRqCSRY=;
- b=l6TlRjVrt6jIGDlnI+/b4/H+Ui7PLCCNBZ5vuyStCju9RZAWhJhcbr+I06W7g9bTn9
- oxRodURL3MOBOmxTnxd0hEVYSSOQ8qX7oUZLAHGwqUOHpcU/3bkreyoHaYxgtGzhFVij
- qBHCSoTE6xEMSKOk5LTYiyBSBVxc9XNXdr820=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757368708; x=1757973508;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NKoF5M6J61GD4CBoCx0LqR96NbyDQom1WMQBdRqCSRY=;
- b=LiskoJRIBQ61sp6uwe3AfUTbpKeEzE20sm2ZwVf0959AmzPJZz/5pm3UgOAJNSdnPo
- P8z3Fp58VBb6a9fxrUCICGnRpM1VFap1MvhvMd+ddydo1L9qnSntcREsmFJiBbhcuNXj
- JHg0BjJZOXHnHZGZ/JfyTXNM5We4LQUy3lu1Uar0AozVDXPawF7ZNfkJSXmUX/S6kCIM
- SCJrgvC2Mlzj7zuI0bWAjeTksYkBHnX7KEkvIyYo10DNfpcjC5iDhWHlCleRy6CT+oZj
- 5dZn+kujApL53ndC7sGilBOHFvPXsU76OEdJFvU7b6OJei0Non2cyklJbXX3DEHsjmde
- M99w==
-X-Gm-Message-State: AOJu0YzACnDHl+QYe0EVbYs5d/TTGLQoZ6ojFfFXusbbAA0PX+uRNmh2
- Wc4jR8qlcGDeQe+PQmYxdtsuasWEPBNhN7srLJmUJOrjl1ShWE15IdguoTxBiPId4b4=
-X-Gm-Gg: ASbGncs2oX1Fy0GhRw4jhhH8ylC4Al54X9wqf4ha1naFrLZ8auSM+krWtQ8kBqgGrL+
- qbbqWa2/P3X7QDTRkIY5TfSfB7TSAW1rcTbPH8lsSXZpP6AoZSYTEgCkT1XddbO80NKFNaWhmec
- pMSKyHaoP9HUIhc1T99HafFJ/5wfY9/PpI/uej4MUE7ztsOz4UowKIZ5OBBp5IsbO5h+W9gauGt
- BDlU5xjrCfpEj13hdA8G1gOWI4qg8Caga05i5D7wduuDoGs0j3mogqJxe0DJcQLWFlFYAegQ/Kv
- 0TJ2Oyb/N1wFEQj/ArscdC2AvtUOzetKfUanOuEyXing99reVmqX4a42NR/IQXyxMyahnTGbOpI
- 8WhCw5pv33wFrfuitpVc20kuuhukxLxJJlo86k+1x3nTDjVkOHX57Hkr1YD/pimjxSAw=
-X-Google-Smtp-Source: AGHT+IFYkgmX6X05Dp/ZbkqWTIg9VGaHzc7iBJeG7dWv5eVgfKH9S7DOXv7mn9dS+mcVnOaFLMGBYw==
-X-Received: by 2002:a05:6808:5249:b0:437:d3cf:4b39 with SMTP id
- 5614622812f47-43b299f6cd8mr4685024b6e.2.1757368708361; 
- Mon, 08 Sep 2025 14:58:28 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43b2a4183b1sm1828095b6e.11.2025.09.08.14.58.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Sep 2025 14:58:27 -0700 (PDT)
-Date: Mon, 8 Sep 2025 15:58:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sidharth Seela <sidharthseela@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1] doc: board: ti: am335x_evm: Add documentation
-Message-ID: <20250908215825.GT124814@bill-the-cat>
-References: <20250903202043.285746-1-sidharthseela@gmail.com>
- <20250908055429.598536-1-sidharthseela@gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cLMt65cLNz9swp;
+ Tue,  9 Sep 2025 01:02:38 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1757372558;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=dEu5ekoXkTtBquCs6tXdG9WeSp+mTbkWRYY/HxhD/wQ=;
+ b=nwmttymrIHLSP9cxI2+NzP4NDKdgRfgdnv2AYkLNWjmb+slF2+BIilJcvwBDqaK0hZ7VPc
+ TiHKTpB6UBztclWQ9ZQHX0sEjb4duHs41xpU+izH0uXFt9zHoBO6TZ5eUqCEFXwaTDhkZT
+ sXrdRn33D62MrPnNEqt9nul7EZnLRP+tLlxP9R5/iumzkEIrChJL9Xrgs9kDURgnnHYNg2
+ 3BAzT/X0fop/RtNGInkCqNeSw87f/+dSq2+UrC/BvlpmdttuQ/zpLuRy67ZbDYSBNul4it
+ NfYfty0zCLb1Cx3CmuZvpadRzUD0EzGjiENyNza66HB8Khfbf2BLHs41t8F6mQ==
+Message-ID: <74c4935c-1f8e-4fbd-a595-37fdc5c6ac3a@mailbox.org>
+Date: Tue, 9 Sep 2025 01:02:37 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="joaMLJxnFe3zRXNa"
-Content-Disposition: inline
-In-Reply-To: <20250908055429.598536-1-sidharthseela@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH 3/4] configs: Increase USB Hub debounce timeout in Agilex5
+To: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>,
+ u-boot@lists.denx.de
+Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
+References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
+ <20250808100412.9320-4-nareshkumar.ravulapalli@altera.com>
+ <7cfaf6cb-38b9-4932-8904-ce7be12a5098@mailbox.org>
+ <69597595-6c7e-441a-952b-16b80fd60aca@altera.com>
+ <e3107726-6980-4330-aabf-aef1ec9f5562@mailbox.org>
+ <bff0c320-35bd-4129-9e19-4ef4103ba923@altera.com>
+ <ea637053-8f40-40c5-b257-e582dbbc3c1b@mailbox.org>
+ <3168323f-8cd4-45a9-914e-fb79cd346d67@altera.com>
+ <c5b7a8b4-2674-4857-a9f0-0576c1602f86@mailbox.org>
+ <0c103ea7-07af-4d01-a1e4-3d4d4819657c@altera.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <0c103ea7-07af-4d01-a1e4-3d4d4819657c@altera.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: fb428ab0be9de07cc97
+X-MBO-RS-META: jxqxwumajpomfcrp36rkgxin8g7bagct
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,33 +84,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 9/8/25 3:41 PM, Ravulapalli, Naresh Kumar wrote:
+> 
+> 
+> On 08-Sep-25 6:32 PM, Marek Vasut wrote:
+>>
+>> On 9/8/25 10:44 AM, Ravulapalli, Naresh Kumar wrote:
+>>> Hi Marek
+>>>
+>>> On 02-Sep-25 11:48 PM, Marek Vasut wrote:
+>>>> [CAUTION: This email is from outside your organization. Unless you
+>>>> trust the sender, do not click on links or open attachments as it may
+>>>> be a fraudulent email attempting to steal your information and/or
+>>>> compromise your computer.]
+>>>>
+>>>> On 9/2/25 9:52 AM, Ravulapalli, Naresh Kumar wrote:
+>>>>>
+>>>>>
+>>>>> On 30-Aug-25 5:30 AM, Marek Vasut wrote:
+>>>>>>
+>>>>>> On 8/29/25 6:19 PM, Ravulapalli, Naresh Kumar wrote:
+>>>>>>> Hi Marek
+>>>>>>>
+>>>>>>> On 29-Aug-25 2:11 PM, Marek Vasut wrote:
+>>>>>>>>
+>>>>>>>> On 8/8/25 12:04 PM, Naresh Kumar Ravulapalli wrote:
+>>>>>>>>> Some USB devices need more time to be initialized. Hence,
+>>>>>>>>> increasing the default USB Hub debounce timeout value for
+>>>>>>>>> devices to be discovered, connected to Agilex5 boards.
+>>>>>>>> Is this really hub debounce timeout or usb_pgood_delay ?
+>>>>>>>>
+>>>>>>>> Which devices are those, include that in the commit message.
+>>>>>>>
+>>>>>>> Yes, timeout is related to USB connect/disconnect signal bounces not
+>>>>>>> about bus stability during init.
+>>>>>>>
+>>>>>>> Issue was mainly observed with legacy flash drives. Maybe I will
+>>>>>>> change
+>>>>>>> commit text from "Some USB devices need more time to be
+>>>>>>> initialized..."
+>>>>>>> to "Some old USB flash drives need more time to be initialized 
+>>>>>>> during
+>>>>>>> connect or disconnect events ..."?
+>>>>>>>
+>>>>>>> Note that I am not modifying the default Kconfig value in general;
+>>>>>>> change is only made for an SoCFPGA devkit we tested.
+>>>>>> Does this same issue go away if you set usb_pgood_delay to 2000 or
+>>>>>> higher too ?
+>>>>>
+>>>>> No, changing USB HUB debounce timeout is working for us.
+>>>> Look at this code:
+>>>>
+>>>> https://source.denx.de/u-boot/u-boot/-/blob/master/common/usb_hub.c?
+>>>> ref_type=heads#L199
+>>>>
+>>>> "
+>>>> #if CONFIG_IS_ENABLED(ENV_SUPPORT)
+>>>>         env = env_get("usb_pgood_delay");
+>>>>         if (env)
+>>>>                 pgood_delay = max(pgood_delay,
+>>>>                                   (unsigned)simple_strtol(env, NULL, 
+>>>> 0));
+>>>> #endif
+>>>>         debug("pgood_delay=%dms\n", pgood_delay);
+>>>>
+>>>>         /*
+>>>>          * Do a minimum delay of the larger value of 100ms or 
+>>>> pgood_delay
+>>>>          * so that the power can stablize before the devices are 
+>>>> queried
+>>>>          */
+>>>>         hub->query_delay = get_timer(0) + max(100, (int)pgood_delay);
+>>>>
+>>>>         /*
+>>>>          * Record the power-on timeout here. The max. delay (timeout)
+>>>>          * will be done based on this value in the USB port loop in
+>>>>          * usb_hub_configure() later.
+>>>>          */
+>>>>         hub->connect_timeout = hub->query_delay + HUB_DEBOUNCE_TIMEOUT;
+>>>>         debug("devnum=%d poweron: query_delay=%d connect_timeout=%d\n",
+>>>>               dev->devnum, max(100, (int)pgood_delay),
+>>>>               max(100, (int)pgood_delay) + HUB_DEBOUNCE_TIMEOUT);
+>>>> "
+>>>>
+>>>> Changing both usb_pgood_delay or (CONFIG_USB_)HUB_DEBOUNCE_TIMEOUT
+>>>> should have the same effect. How come it does not ?
+>>>
+>>> CONFIG_USB_HUB_DEBOUNCE_TIMEOUT and pgood_delay are used for different
+>>> purposes. If I am not mistaken I think I explained this in my earlier
+>>> comments.
+>>>
+>>> Anyway, to further elaborate, CONFIG_USB_HUB_DEBOUNCE_TIMEOUT is used
+>>> for debounce timeouts during device connect events and pgood_delay is
+>>> used during initial VBus stabilization.
+>>>
+>>> You would be able to see this difference in the link below, where
+>>> pgood_delay which is populated into "hub->query_delay" is used for
+>>> voltages to stabilize before initiating communication and "hub-
+>>>  >connect_timeout" where "HUB_DEBOUNCE_TIMEOUT" is populated is used
+>>> after getting the port status.
+>>>
+>>> https://github.com/u-boot/u-boot/ 
+>>> blob/328747974a0620d0996113fe2b3906b06e96de00/common/usb_hub.c#L455
+>>>
+>>> Also, the change made as part of the comment is not applicable to the
+>>> USB stack in general; it is only for our devkit defconfig.
+>> But none of this answers my question, looking at the aforementioned code
+>> -- Changing both usb_pgood_delay or (CONFIG_USB_)HUB_DEBOUNCE_TIMEOUT
+>> should have the same effect. How come it does not in your case ?
+> 
+> Maybe I wasn't explicit in my earlier comment, "No, changing USB HUB 
+> debounce timeout is working for us."
 
---joaMLJxnFe3zRXNa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+USB_HUB_DEBOUNCE_TIMEOUT is basically the hard-coded-into-U-Boot-binary 
+version of "usb_pgood_delay" . The upside of "usb_pgood_delay" is that 
+users can change the value at runtime, which helps in case users need to 
+use some broken USB storage device which takes more than 
+"usb_pgood_delay" ms to start up. You cannot do that with 
+USB_HUB_DEBOUNCE_TIMEOUT .
 
-On Mon, Sep 08, 2025 at 11:24:29AM +0530, Sidharth Seela wrote:
-> I am confused on where to place this information of the
-> configs. As the new configurations need to be added to the default
-> am335x_evm_defconfig, as well as some unused configs need to go to make
-> space; to enable falcon booting.
+Since the commit description talks about "Some USB devices need more 
+time to be initialized." , this looks more like "usb_pgood_delay" type 
+of issue.
 
-I think just documenting it as per your patch is fine at this point.
-It's not the default way to use a platform.
+> What I meant is I didn't want to modify usb_pgood_delay as my issue was 
+> with HUB_DEBOUNCE_TIMEOUT, so modifying this value worked for us.
 
---=20
-Tom
-
---joaMLJxnFe3zRXNa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaL9RfgAKCRAr4qD1Cr/k
-CrSsAPwMV4+MPBOGpvzNtoWYZWa57X7zegf/9LJLoce61WjvlgD+P8sDCw/B7c7p
-k6P/DsDF03bPT/1ajKR8YMysUovlTQo=
-=h1hJ
------END PGP SIGNATURE-----
-
---joaMLJxnFe3zRXNa--
+Does it also work if you modify usb_pgood_delay instead ?
