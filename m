@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EA3CAC586
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 11:32:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 732F5CAC586
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 11:32:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF51382AE9;
-	Mon,  8 Sep 2025 13:31:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2972183045;
+	Mon,  8 Sep 2025 13:31:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qk10pcOW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F83R5SBD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CCDF83145; Mon,  8 Sep 2025 13:31:49 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id A2787809A5; Mon,  8 Sep 2025 13:31:49 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A24E3809A5
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 13:31:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3065283071
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 13:31:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-61d143aa4acso6811550a12.2
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 04:31:47 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-62733e779bbso647077a12.1
+ for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 04:31:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757331107; x=1757935907; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1757331106; x=1757935906; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LI2UCi++izr1qq+ZKC51YUnkPm4Y7O0SrEPMFcdKEfo=;
- b=qk10pcOWimANl4DvbOBTDqIeFU3sPi4gQhsPVkcCAJRgTiovXMKmwADssCNyHYhtZJ
- PGy32nVPAgQcyfkJqJeRtNFZhgr7UBTopKe79KBm79b6fgRQ4tqnryI0CUX6ReMgTSrF
- wovhvvYu6v1xbK7iSYhC/9+1iRVRYbyK5klkgPUbP0k7OcfMwUIZhRJLqo7C4ttPdUQc
- qahQuuxPoGnce+zckM5Ae7BNMV7IRcO5I+by4XHEVe+mL34o8ih2FdJXGOLB+q1dkoIm
- 7zCOyOxUkoyiFrQKiDxvKGfYCVm/8j18uzoOG7+9t5oF4qRfk7eMgCaVoZnF015QrNhO
- YT1g==
+ :reply-to; bh=5giRhbRYt++lepoyzIiUO0KYvtbU1tZ9fOFD193nKXI=;
+ b=F83R5SBDtTZjxYwB943f0zYfukGOB4T1cHssh1sedwR4Jhqb1gkf7Ffmg650I9AcDl
+ z1grflMRJhWod/lLJc4hwSEOBhFYEpf19Y/WSVAAr/U3YbfoAZ7EmxhqC11OYrNm+Orj
+ wr6TzBMF/nK7xSwS5oi/MXEU/OItcRwN85wcwEKXz1Mvdmaux+Lpx40Gpych+3J4/jHz
+ 45uvTxx0k1h1qdPD+xsSz7u2UdWHFpkqPcDyR13QeUR2MBvSmyE3vss/UlD6qqcji96H
+ 6SpIg+I74gZgjNYzrJdWg7+TkPrdXeVjXXtF4r5LJ7TaLoyhhhCB1YT3IsAjYRq6pSiP
+ LDBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757331107; x=1757935907;
+ d=1e100.net; s=20230601; t=1757331106; x=1757935906;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LI2UCi++izr1qq+ZKC51YUnkPm4Y7O0SrEPMFcdKEfo=;
- b=idmbHMaW3fWeCN0QZo3fg+MOLMfoGnLNHzgxqZM58q1QNI8CgPfLmzBxxbR6a1DGEV
- v0IRoGhP4MaBAs4tNDwyWoK/bY1ogali+zrVwh/BiehieDeiISTYNHIRCjcxlDvPBs+U
- rfvinlbtB4Ffh42dyxOdYk3LK5hX01O/xFX+OFntFXPHOi8USkwtxRsGwjkIFTTVJPE1
- q/rDiyjZ1H0lU7eRPiVjjSp/48ipyrhXSxn1QjXdSttBzcpwtxMi3ZpelyQ2cRkBX091
- ZOIqHDadj/k2l+uhEF3Y7v63O+NcxZis3YMAmswR0HtThGXBrBh4P5Ihve2HfI1pIMCx
- 1+SQ==
+ bh=5giRhbRYt++lepoyzIiUO0KYvtbU1tZ9fOFD193nKXI=;
+ b=hFdsoKZBED3vtr/8g3CiySQ6GY1hETEXsTOlbD6/21BdB5vfBxelX0/1YnSRr0sgTi
+ 5FAw7IIW/0laQrtcWYA7GpYdDx+aiQtHfYUaJRAm+w50CRNAO9P0ur+DEnyhXgyXE+XZ
+ j7oGcxs4yGlFDgZHNRC47V9T4KK2bCAwzuGCfW3yLDy5+YQ4e3iZ1/oQ1CS5DWsFw7Y8
+ /CdcJqNBwOCPxwAXl7xyKV3QXwD/DRvrdhiBRbazOQwTwNZTqGCM+CVZPEw7U07RkIpc
+ 9BNi/fqGsbjff3qVuAXJTJqjVsqWf5zf16LJPhoV/HQ7le6XhpoHBlV7oCeqoOb08RMU
+ n/Dg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdxuc8inaBAfYiQzj8k4TYscayT3v99wCpEYE67bryOctXSyqeeZLMC/Gc1XHj2X5ZT5oRdjk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0EWdX6eDTqeNIqjxogU8irrA5uhcGnykNWPGcrhdYNQUncpcS
- v6OvmeUt3o5y/ql6xrCNYHNRVQgXiMkdEQJXGq6UCxUys5J78uQ0/ZqdJ7tp82TpP6E=
-X-Gm-Gg: ASbGncuIIwY4F6SpylSHyN7ffQ+J5CguiTNotLrDfH0495AiDHFoUCqz1coMko/iPap
- 8ag0VFQhzyHGzav0kiJ53OYXhIPsbe9xboZMaMZTZkq3ZXZJ8Cm35cAZUpBIIffpIptVmLUFRWn
- JpuW3cOM58DtCwR8yfoULV8kk9slVM89FbUx5zZDybpSyC9TiqePGi+cOpbZrby6at8ndeBnkjz
- yJ82QnwIAN52kSsKr0nucroAx3TbMs2AGsDYZ2XDREDn2p6viINDZ5Gxez+StZVXS6B2iWtuFQK
- UyfG5QY5ugAsH/iqD5wCooU/JdqV5LsCIPEOS4iUxvQobgX4k1URtev6o520gmjQBzHDqBLLG5q
- Vw7Zi7Z49rcl1fwv+jTvLYWIki6j0gkpurg==
-X-Google-Smtp-Source: AGHT+IH8/4ahpw50tNVjpLqjrQ7qciz3hQrHc11cUCMxQLPCJc3DK6sC5E26Vas3XwoVrHVnwqQyxQ==
-X-Received: by 2002:a05:6402:1d50:b0:61d:1d36:a7d5 with SMTP id
- 4fb4d7f45d1cf-6237ebc9354mr7386475a12.19.1757331106328; 
- Mon, 08 Sep 2025 04:31:46 -0700 (PDT)
+ AJvYcCUEGvgK22a13tZEfc+If52Q0KhfBafqDE4BPEPLLwLIffmJ7Q1QDUcTNWhAzRLw+Sw1KUjBqiQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzP9WaOSbU0Qr7hChtQEs7BEH4tXOk+u/ga8AjuGACGuE8w+rVj
+ V3uSqLRqgI+yGOOkbzHwoItzHE+3M66OymoJBPzVHVAkF3FmxxhPHMpMWQfNbg8dfro=
+X-Gm-Gg: ASbGncvgDMM1Wkz267M/MorwwrVRzfHgzurh7twI8T+NXvrYsR3Yv9PJt/LNtnzJAO/
+ Bk4NLKLe+Kc/9bZuxTac3O8T5CN+fXlhgFekQ6nEmyxABW6eJAdF6jpFX2iIr0jPrTndTfMUThK
+ xub5OM50cwiYvBdwaEuomU3R0q+heu20jvuNUv20wvlH3za79YW8YpjTKeGc2H/iOWdDTCWWCUm
+ xGyuqPuMUhKdtOVqDOR5Lyu8C1KGDNRyzD4Qn03c3ZI3Pc+Ylb6bFyHIzWYcLDa7QbH7FzUa/Dz
+ ytuQo/2mXEg1vl3W8Aw2SClTiVX22Wr9VVuW+Tdn94iPW4894ugl1NZpVinDm0M11pRi/MgFqC2
+ wvVPFimHtYbyUlzYIS+J4jPHsyeBlztHYiw==
+X-Google-Smtp-Source: AGHT+IEQagq2YvwHLfbwZXRELCPzZ6DVnCTkwo/dIFBtTlQFK4kDwZ+atocBzjKGiXutungAHjIrhQ==
+X-Received: by 2002:a05:6402:84e:b0:623:47a9:de2 with SMTP id
+ 4fb4d7f45d1cf-6237ebc9372mr6868055a12.17.1757331105572; 
+ Mon, 08 Sep 2025 04:31:45 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:30:60d4:28a5:7729:b0b6])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc214bb7sm21251501a12.13.2025.09.08.04.31.45
+ 4fb4d7f45d1cf-61cfc214bb7sm21251501a12.13.2025.09.08.04.31.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 08 Sep 2025 04:31:45 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Mon, 08 Sep 2025 13:31:24 +0200
-Subject: [PATCH v2 4/6] serial: msm: Reset after writing to DMEN
+Date: Mon, 08 Sep 2025 13:31:23 +0200
+Subject: [PATCH v2 3/6] serial: msm: Cleanup register naming
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250908-db410c-autoboot-fixes-v2-4-316ed98e0143@linaro.org>
+Message-Id: <20250908-db410c-autoboot-fixes-v2-3-316ed98e0143@linaro.org>
 References: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
 In-Reply-To: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
 To: Casey Connolly <casey.connolly@linaro.org>
@@ -101,38 +101,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to the documentation of the UART controller in the APQ8016E TRM,
-clearing bits inside UARTDM_DMEN requires resetting the transmitter and/or
-receiver. We do reset inside uart_dm_init(), but before writing to
-UARTDM_DMEN. This doesn't seem to cause problems in practice, but let's
-move the reset to the end of uart_dm_init() to better match the
-recommendations in the documentation.
+Some of the register definitions are inconsistently named (likely copied
+as-is from Qualcomm's Little Kernel/LK bootloader, which uses the
+MSM_BOOT_UART naming scheme). Rename them to be in line with the other
+register definitions and move them up to be next to the related register.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+No functional change.
+
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
- drivers/serial/serial_msm.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ drivers/serial/serial_msm.c | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-index aa4d10e7c5138f919978272e4967ece8293073b3..5523ec4afe17f242d61bc2ec4b4534b5b974434c 100644
+index c8df91fca589433e57cd4c25a18d09548715c840..aa4d10e7c5138f919978272e4967ece8293073b3 100644
 --- a/drivers/serial/serial_msm.c
 +++ b/drivers/serial/serial_msm.c
-@@ -219,11 +219,12 @@ static void uart_dm_init(struct msm_serial_data *priv)
+@@ -29,7 +29,9 @@
+ #define UARTDM_RXFS_BUF_SHIFT   0x7  /* Number of bytes in the packing buffer */
+ #define UARTDM_RXFS_BUF_MASK    0x7
+ #define UARTDM_MR1				 0x00
++#define UARTDM_MR1_RX_RDY_CTL			 BIT(7)
+ #define UARTDM_MR2				 0x04
++#define UARTDM_MR2_8_N_1_MODE			 0x34
+ /*
+  * This is documented on page 1817 of the apq8016e technical reference manual.
+  * section 6.2.5.3.26
+@@ -48,6 +50,8 @@
+ #define UARTDM_SR_UART_OVERRUN   (1 << 4) /* Receive overrun */
+ 
+ #define UARTDM_CR                         0xA8 /* Command register */
++#define UARTDM_CR_CMD_RESET_RX            (1 << 4) /* Reset receiver */
++#define UARTDM_CR_CMD_RESET_TX            (2 << 4) /* Reset transmitter */
+ #define UARTDM_CR_CMD_RESET_ERR           (3 << 4) /* Clear overrun error */
+ #define UARTDM_CR_CMD_RESET_STALE_INT     (8 << 4) /* Clears stale irq */
+ #define UARTDM_CR_CMD_RESET_TX_READY      (3 << 8) /* Clears TX Ready irq*/
+@@ -61,11 +65,6 @@
+ #define UARTDM_TF               0x100 /* UART Transmit FIFO register */
+ #define UARTDM_RF               0x140 /* UART Receive FIFO register */
+ 
+-#define MSM_BOOT_UART_DM_8_N_1_MODE	0x34
+-#define MSM_BOOT_UART_DM_CMD_RESET_RX	0x10
+-#define MSM_BOOT_UART_DM_CMD_RESET_TX	0x20
+-#define MSM_UART_MR1_RX_RDY_CTL		BIT(7)
+-
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ struct msm_serial_data {
+@@ -218,10 +217,10 @@ static void uart_dm_init(struct msm_serial_data *priv)
+ 
+ 	writel(bitrate, priv->base + UARTDM_CSR);
  	/* Enable RS232 flow control to support RS232 db9 connector */
- 	writel(UARTDM_MR1_RX_RDY_CTL, priv->base + UARTDM_MR1);
- 	writel(UARTDM_MR2_8_N_1_MODE, priv->base + UARTDM_MR2);
--	writel(UARTDM_CR_CMD_RESET_RX, priv->base + UARTDM_CR);
--	writel(UARTDM_CR_CMD_RESET_TX, priv->base + UARTDM_CR);
+-	writel(MSM_UART_MR1_RX_RDY_CTL, priv->base + UARTDM_MR1);
+-	writel(MSM_BOOT_UART_DM_8_N_1_MODE, priv->base + UARTDM_MR2);
+-	writel(MSM_BOOT_UART_DM_CMD_RESET_RX, priv->base + UARTDM_CR);
+-	writel(MSM_BOOT_UART_DM_CMD_RESET_TX, priv->base + UARTDM_CR);
++	writel(UARTDM_MR1_RX_RDY_CTL, priv->base + UARTDM_MR1);
++	writel(UARTDM_MR2_8_N_1_MODE, priv->base + UARTDM_MR2);
++	writel(UARTDM_CR_CMD_RESET_RX, priv->base + UARTDM_CR);
++	writel(UARTDM_CR_CMD_RESET_TX, priv->base + UARTDM_CR);
  
  	/* Make sure BAM/single character mode is disabled */
  	writel(0x0, priv->base + UARTDM_DMEN);
-+
-+	writel(UARTDM_CR_CMD_RESET_RX, priv->base + UARTDM_CR);
-+	writel(UARTDM_CR_CMD_RESET_TX, priv->base + UARTDM_CR);
- }
- static int msm_serial_probe(struct udevice *dev)
- {
 
 -- 
 2.50.1
