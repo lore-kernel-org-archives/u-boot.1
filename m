@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55B8CAC586
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 11:32:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA905CAC586
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 11:34:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71D8D83192;
-	Mon,  8 Sep 2025 13:31:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 49A3B82AE9;
+	Mon,  8 Sep 2025 13:34:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nG2PjdEq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Au7YNJyR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C12F830A0; Mon,  8 Sep 2025 13:31:52 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 76CD882DA1; Mon,  8 Sep 2025 13:34:35 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAD6B8312A
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 13:31:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39F50809A5
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 13:34:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-62733e779bbso647243a12.1
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 04:31:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cnsztl@gmail.com
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-b4d5886f825so3732392a12.0
+ for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 04:34:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757331108; x=1757935908; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mSiCavOsrO8SrIb0Ta83SI1ubJNTPwyDzBozjQsmKUk=;
- b=nG2PjdEq410KUcWNwNoHpecDoAeOTG/cdn2RZF2O+pmhFw2QzebmafzNaOjvuOMwfr
- BvrJH4Vko8G1SKDo6QzTZEWYtYI2weLlw/4kEQSRGu4pYfOLNe9lT8XqWuxOV1NG7QQc
- H0tjw4wPYiQwHO0oNwBJuAEFZFw9oRpmjuev4mVs0n8Sy1cKuyL5On7AJovxI0nSkLxK
- U3RCefVdJThXDjkFzqVrBvnuUHbeiLZMqPfry7kY5oWsxsYqDkvO7ysD/v4JkUNZteGZ
- udr11QpaA4DS39CgKul7XPOQ92DOoD/SkWZZ4d9XqZZAOTGdkU6EnrvUkYm2HvsOIISM
- 54kQ==
+ d=gmail.com; s=20230601; t=1757331272; x=1757936072; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nCrPWOh4Wgn11tNEeKOlvr/Pj98Mut7l+0c/7utaQ9c=;
+ b=Au7YNJyRW3OeWf2RuGKewl3Jt6Zck79ok2OQxdu2ECM4Jqvg8wA4eNi0EaZRudel0H
+ oCbAYZRfvPxNHoxkmgw4MERCDBJ/CXmlydFro9rr/iAnsbkUqf2O6byjhJF8zSjTqEUx
+ p7sVIyBtzRUX6Dcuq9F/2pT8g63HzdhmpsCmXFgADjQkJ2v7+5H2XwUnjdra1iE3egdI
+ sI5vl0EWrEmPCOVN0uzdMaQ246r0UbamMM8X2LpnU4OMNhfI8+EOk38z8LeEhCNZQRVL
+ ZYDztBwLFSoJcHjcy0IXg73Gf/HL3mms2X4Q1ThPksPdZiNG4bLRMCnxqJzwmkIUa6nS
+ 5btQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757331108; x=1757935908;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mSiCavOsrO8SrIb0Ta83SI1ubJNTPwyDzBozjQsmKUk=;
- b=ggDAbJUS2aQiwwWVBTHmdumuTGRo5PwyEvnw4QSIsAojsWOglQ93I9wsMUjeTsFIhS
- mB9Y9ILirkS2qhz6XlGCqylZniDG0mzqiCImZbyVUAV+32Qk33h93KFcDi7pGK9SxYgp
- QBScGYJnUaSl6Kf+pMVe/nl/DAIKFHYcIsnuD74LTArQrVLJivtGX/q0A+UKL8M2QIms
- 6CipHmNeDl3wRoj8iO1VL7uuU+PD9dBm1tAPoRafY9xg2aKxT70Ouni7WNWsLonnGwJ4
- ItzLe8LX9nt11uWqGYdMqmxdxgQNgb/ZYn7LXbwvdZqGpHvc2DZXphlrl3TsJuvpQox/
- BHUw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV83wkNPr4qGmFXVa/mBezhAzpCds5bCAI1fjsJLlygoC7Z2CLItAfgb2GSXbuwVviPknzZ/Bw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGKnrxe2Hy6HfMDcwvzQVAcBIbvageO0Tym4GgbLUH/Y8Y7pct
- CJAym9pr5UMYgPgduZZn8mOtjmDuvvtwtkgj9odMwFEgii+gKxfGJ1CvjGVc4aGEYqw=
-X-Gm-Gg: ASbGncvDQWbG7Skj9OZAeUxxsGKYhxG1rpj/my5ssm/vvWepgMxqIaSFOyQlLC+08+Z
- TUWCDzp9UE/Tkx/rWULL/p3Gg5nW+xDXUsI3XvaMkB9JpoAnG03TD6qI0pSuKsaYBrQ4gE7kK62
- zzz4enPbbkbp3Ikp+Z4iaVozmuiDz/EIZ3S+zIJgVOf5BIvi5eCBsiuCIIIESrhN722dxVqB1Fo
- zqBvEPlnO15KAzjJ6MEmah8JBChKP2YmszWLUTvmsOhyZk36XOhOB2KDcKJin1kj870+fJqy5KD
- 5a3eXljTYtYrj9ObiZMsTlOn30h0ONDc+D6/123avh8teIjkFu7uy16ZvQzKZxN2xBLxBIidDVx
- Kdf8X5D2VtkU1aIiLqqM6lPdeeqsuFQdkTw==
-X-Google-Smtp-Source: AGHT+IEIYeFrS/3jPDwl/7Zx7VV/uAB4j4h9UK4ptRY4JHbD4TjUgExkG63VxyC/9XL6IOY3YF6aRw==
-X-Received: by 2002:a05:6402:234a:b0:626:f217:e751 with SMTP id
- 4fb4d7f45d1cf-626f2272d69mr4898426a12.25.1757331108019; 
- Mon, 08 Sep 2025 04:31:48 -0700 (PDT)
-Received: from [127.0.0.2] ([2a02:2454:ff21:30:60d4:28a5:7729:b0b6])
+ d=1e100.net; s=20230601; t=1757331272; x=1757936072;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nCrPWOh4Wgn11tNEeKOlvr/Pj98Mut7l+0c/7utaQ9c=;
+ b=lZsPQRdSZQyi0RwPu2sCS82H+J5m1JHwqa/N9cDD+8UuMUcTw6GP063JdI/ShROK2a
+ GwfHhN5qTS7bYDACM1enlv2vlcLs2wFZdx/Cr3C4roA2uW90k+wb6K271eVIgil78xaw
+ iGgkdslTr/mfhEnikZEEeUajXkJ7QBKeEuKn07mh2RCKvY7s6rLcqdRU2nSbWqk0wAUY
+ NNyzRrIlHAJhQgHRj+CJSX66Gx1W68W0eVITzWcq4THaMv9qHyxBofV+4poMvsyMN8f0
+ te3JRjhip/ovSR9PlcvI2TpQLB07DFLbS0zmbBF0V33HNnPTMtszMgLVHWfoOAU/jETe
+ AKGw==
+X-Gm-Message-State: AOJu0YyOkyGs3FUdET+6Q0IcZd0BgN2j2SDg6Cgd4bVl5a7MtKuGDwrG
+ Ly7Sdq9NZtKsZtnwUJZIv3Tx3GChdzWmMDN3pXn3R6aHYzWOFaGtiJUNanjAPA==
+X-Gm-Gg: ASbGncvgMk2HHubewfShq4Mvd9xeniED99zUy5VwAtG6OMt/dKbP1v1mC87OVc0ObwP
+ 4GODphvizwG0gbDleqqLw6ehUNwzYfwkZHl/oyafMSFh6r6R4pob3chdurx+j5ugumw6AkfT6lg
+ y93AN8oP5rdRnatIepOmoYIZiygTIMjTIsiAXyEYNZcy/eAIas0qZaNYvwCOG7W9WsUcUhgSdEX
+ +SsYZCPeycvF5PuRsjOWD7KC/LhXbVFLJAY0qU3NPhNNur24afPyC5D4rW4/rHLTDrNLoFhfs+0
+ OeEMpBWc1hopwAG8CN7zxxIhME738B1fVz2VT5b4kBxy4bgRreyBNnhPuASuWUdgVfg/aQO2zat
+ yzvNSHsryBF0UyjCd6ETSbgBpd/tu+ZS96hvJTAKq
+X-Google-Smtp-Source: AGHT+IGMs5CtfZPBYmNdY/2gqAiCDHRQEqScXdWeDrIhA2W6tu1g5l2FJgwe1nliJzyB+Qg2HxizTQ==
+X-Received: by 2002:a17:903:234a:b0:24b:1d30:5b09 with SMTP id
+ d9443c01a7336-2516e4afbacmr89616915ad.13.1757331271068; 
+ Mon, 08 Sep 2025 04:34:31 -0700 (PDT)
+Received: from CNSZTL-DEB.lan ([27.9.156.128])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc214bb7sm21251501a12.13.2025.09.08.04.31.47
+ d9443c01a7336-24b1d2d5a66sm167622125ad.125.2025.09.08.04.34.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Sep 2025 04:31:47 -0700 (PDT)
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Date: Mon, 08 Sep 2025 13:31:26 +0200
-Subject: [PATCH v2 6/6] serial: msm: Use single character mode
+ Mon, 08 Sep 2025 04:34:30 -0700 (PDT)
+From: Tianling Shen <cnsztl@gmail.com>
+To: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] board: rockchip: add Lunzn FastRhino R66S
+Date: Mon,  8 Sep 2025 19:32:18 +0800
+Message-ID: <20250908113218.4102764-1-cnsztl@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250908-db410c-autoboot-fixes-v2-6-316ed98e0143@linaro.org>
-References: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
-In-Reply-To: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
-To: Casey Connolly <casey.connolly@linaro.org>
-Cc: Sumit Garg <sumit.garg@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Sam Day <me@samcday.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,227 +95,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The UART DM controller supports different channel data packing modes,
-either the 4-character packing mode (where 32-bit are read/written at once)
-or the single-character mode (where only a single character is read/written
-at a time). The 4-character mode can be more efficient, but the
-single-character mode is much easier to implement.
+Lunzn Fastrhino R66S is a high-performance mini router.
 
-At the moment, serial_msm uses the 4-character mode. Since the
-dm_serial_ops operate on one character at the time, the code goes through
-quite some hoops in order to break this down to single characters. This
-code is prone to race conditions (e.g. priv->chars_cnt is read from the
-registers, then a command is issued, what if another char came in
-inbetween?). It also seems to cause another subtle issue with autoboot:
+Specification:
+- Rockchip RK3568
+- 1/2GB LPDDR4 RAM
+- SD card slot
+- 2x USB 3.0 Port
+- 2x 2500 Base-T (PCIe, r8125b)
+- 12v DC Jack
 
-Unlike the previous autoboot failures that happened when UART was
-disconnected, this problem occurs when UART is connected and open in a
-terminal: For EFI boot, the console size is queried in efi_console.c
-query_console_serial() by sending an ANSI escape code via UART. For some
-reason, with the current driver we get yet another 0x00 byte (UART break
-event?) when reading the reply from serial input. Because of that, reading
-the console size fails in efi_console.c, the actual reply remains in the
-UART buffer, and later the boot flow aborts because it detects input after
-printing a prompt.
-
-Rather than trying to fix the issue in the current complicated approach,
-switch the driver to use the single-character mode. This is simple and
-straightforward to implement without race conditions:
-
- - We write one character at a time to UARTDM_TF, as long as the TX FIFO
-   has space available (TX_READY). To flush the console before starting
-   Linux, we wait for TX_EMPTY.
-
- - We read one character at a time from UARTDM_RF and strip off the
-   additional error information (assuming there is something in the
-   RX FIFO, as indicated by RX_READY).
-
-In this mode, querying the serial console size works and autoboot is no
-longer interrupted. The overall code is also much shorter.
-
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+Signed-off-by: Tianling Shen <cnsztl@gmail.com>
 ---
- drivers/serial/serial_msm.c | 102 +++++++-------------------------------------
- 1 file changed, 16 insertions(+), 86 deletions(-)
+ .../arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi |  3 +
+ board/rockchip/evb_rk3568/MAINTAINERS         |  7 ++
+ configs/fastrhino-r66s-rk3568_defconfig       | 64 +++++++++++++++++++
+ doc/board/rockchip/rockchip.rst               |  1 +
+ 4 files changed, 75 insertions(+)
+ create mode 100644 arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi
+ create mode 100644 configs/fastrhino-r66s-rk3568_defconfig
 
-diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-index 2c08a84b02773663f3c3a11eddaaa7a8bab2b4a1..18d15b7b15b3aeb2e8fd1da1aa49967d55c943ab 100644
---- a/drivers/serial/serial_msm.c
-+++ b/drivers/serial/serial_msm.c
-@@ -21,13 +21,9 @@
+diff --git a/arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi b/arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi
+new file mode 100644
+index 000000000000..a2b60da65865
+--- /dev/null
++++ b/arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi
+@@ -0,0 +1,3 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++
++#include "rk356x-u-boot.dtsi"
+diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/evb_rk3568/MAINTAINERS
+index 6cf568ad1507..030cdbe6f3db 100644
+--- a/board/rockchip/evb_rk3568/MAINTAINERS
++++ b/board/rockchip/evb_rk3568/MAINTAINERS
+@@ -14,6 +14,13 @@ F:	configs/evb-rk3568_defconfig
+ F:	arch/arm/dts/rk3568-evb-u-boot.dtsi
+ F:	arch/arm/dts/rk3568-evb.dts
  
- /* Serial registers - this driver works in uartdm mode*/
- 
--#define UARTDM_DMRX             0x34 /* Max RX transfer length */
--#define UARTDM_DMEN             0x3C /* DMA/data-packing mode */
--#define UARTDM_NCF_TX           0x40 /* Number of chars to TX */
-+#define UARTDM_DMEN			0x3C /* DMA/data-packing mode */
-+#define UARTDM_DMEN_TXRX_SC_ENABLE	(BIT(4) | BIT(5))
- 
--#define UARTDM_RXFS             0x50 /* RX channel status register */
--#define UARTDM_RXFS_BUF_SHIFT   0x7  /* Number of bytes in the packing buffer */
--#define UARTDM_RXFS_BUF_MASK    0x7
- #define UARTDM_MR1				 0x00
- #define UARTDM_MR1_RX_RDY_CTL			 BIT(7)
- #define UARTDM_MR2				 0x04
-@@ -45,118 +41,56 @@
- #define UARTDM_CSR				 0xA0
- 
- #define UARTDM_SR                0xA4 /* Status register */
--#define UARTDM_SR_RX_READY       (1 << 0) /* Word is the receiver FIFO */
-+#define UARTDM_SR_RX_READY       (1 << 0) /* Receiver FIFO has data */
-+#define UARTDM_SR_TX_READY       (1 << 2) /* Transmitter FIFO has space */
- #define UARTDM_SR_TX_EMPTY       (1 << 3) /* Transmitter underrun */
--#define UARTDM_SR_UART_OVERRUN   (1 << 4) /* Receive overrun */
- 
- #define UARTDM_CR                         0xA8 /* Command register */
- #define UARTDM_CR_RX_ENABLE               (1 << 0) /* Enable receiver */
- #define UARTDM_CR_TX_ENABLE               (1 << 2) /* Enable transmitter */
- #define UARTDM_CR_CMD_RESET_RX            (1 << 4) /* Reset receiver */
- #define UARTDM_CR_CMD_RESET_TX            (2 << 4) /* Reset transmitter */
--#define UARTDM_CR_CMD_RESET_ERR           (3 << 4) /* Clear overrun error */
--#define UARTDM_CR_CMD_RESET_STALE_INT     (8 << 4) /* Clears stale irq */
--#define UARTDM_CR_CMD_RESET_TX_READY      (3 << 8) /* Clears TX Ready irq*/
--#define UARTDM_CR_CMD_FORCE_STALE         (4 << 8) /* Causes stale event */
--#define UARTDM_CR_CMD_STALE_EVENT_DISABLE (6 << 8) /* Disable stale event */
--
--#define UARTDM_IMR                0xB0 /* Interrupt mask register */
--#define UARTDM_ISR                0xB4 /* Interrupt status register */
--#define UARTDM_ISR_TX_READY       0x80 /* TX FIFO empty */
- 
- #define UARTDM_TF               0x100 /* UART Transmit FIFO register */
- #define UARTDM_RF               0x140 /* UART Receive FIFO register */
-+#define UARTDM_RF_CHAR          0xff /* higher bits contain error information */
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
- struct msm_serial_data {
- 	phys_addr_t base;
--	unsigned chars_cnt; /* number of buffered chars */
--	uint32_t chars_buf; /* buffered chars */
- 	uint32_t clk_rate; /* core clock rate */
- };
- 
--static int msm_serial_fetch(struct udevice *dev)
--{
--	struct msm_serial_data *priv = dev_get_priv(dev);
--	unsigned sr;
--
--	if (priv->chars_cnt)
--		return priv->chars_cnt;
--
--	/* Clear error in case of buffer overrun */
--	if (readl(priv->base + UARTDM_SR) & UARTDM_SR_UART_OVERRUN)
--		writel(UARTDM_CR_CMD_RESET_ERR, priv->base + UARTDM_CR);
--
--	/* We need to fetch new character */
--	sr = readl(priv->base + UARTDM_SR);
--
--	if (sr & UARTDM_SR_RX_READY) {
--		/* There are at least 4 bytes in fifo */
--		priv->chars_buf = readl(priv->base + UARTDM_RF);
--		priv->chars_cnt = 4;
--	} else {
--		/* Check if there is anything in fifo */
--		priv->chars_cnt = readl(priv->base + UARTDM_RXFS);
--		/* Extract number of characters in UART packing buffer*/
--		priv->chars_cnt = (priv->chars_cnt >>
--				   UARTDM_RXFS_BUF_SHIFT) &
--				  UARTDM_RXFS_BUF_MASK;
--		if (!priv->chars_cnt)
--			return 0;
--
--		/* There is at least one charcter, move it to fifo */
--		writel(UARTDM_CR_CMD_FORCE_STALE,
--		       priv->base + UARTDM_CR);
--
--		priv->chars_buf = readl(priv->base + UARTDM_RF);
--		writel(UARTDM_CR_CMD_RESET_STALE_INT,
--		       priv->base + UARTDM_CR);
--		writel(0x7, priv->base + UARTDM_DMRX);
--	}
--
--	return priv->chars_cnt;
--}
--
- static int msm_serial_getc(struct udevice *dev)
- {
- 	struct msm_serial_data *priv = dev_get_priv(dev);
--	char c;
- 
--	if (!msm_serial_fetch(dev))
-+	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_RX_READY))
- 		return -EAGAIN;
- 
--	c = priv->chars_buf & 0xFF;
--	priv->chars_buf >>= 8;
--	priv->chars_cnt--;
--
--	return c;
-+	return readl(priv->base + UARTDM_RF) & UARTDM_RF_CHAR;
- }
- 
- static int msm_serial_putc(struct udevice *dev, const char ch)
- {
- 	struct msm_serial_data *priv = dev_get_priv(dev);
- 
--	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
--	    !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
-+	if (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_READY))
- 		return -EAGAIN;
- 
--	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
--
--	writel(1, priv->base + UARTDM_NCF_TX);
- 	writel(ch, priv->base + UARTDM_TF);
--
- 	return 0;
- }
- 
- static int msm_serial_pending(struct udevice *dev, bool input)
- {
--	if (input) {
--		if (msm_serial_fetch(dev))
--			return 1;
--	}
-+	struct msm_serial_data *priv = dev_get_priv(dev);
- 
--	return 0;
-+	if (input)
-+		return !!(readl(priv->base + UARTDM_SR) & UARTDM_SR_RX_READY);
-+	else
-+		return !(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY);
- }
- 
- static const struct dm_serial_ops msm_serial_ops = {
-@@ -222,8 +156,8 @@ static void uart_dm_init(struct msm_serial_data *priv)
- 	writel(UARTDM_MR1_RX_RDY_CTL, priv->base + UARTDM_MR1);
- 	writel(UARTDM_MR2_8_N_1_MODE, priv->base + UARTDM_MR2);
- 
--	/* Make sure BAM/single character mode is disabled */
--	writel(0x0, priv->base + UARTDM_DMEN);
-+	/* Enable single character mode */
-+	writel(UARTDM_DMEN_TXRX_SC_ENABLE, priv->base + UARTDM_DMEN);
- 
- 	writel(UARTDM_CR_CMD_RESET_RX, priv->base + UARTDM_CR);
- 	writel(UARTDM_CR_CMD_RESET_TX, priv->base + UARTDM_CR);
-@@ -320,13 +254,9 @@ static inline void _debug_uart_putc(int ch)
- {
- 	struct msm_serial_data *priv = &init_serial_data;
- 
--	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_EMPTY) &&
--	       !(readl(priv->base + UARTDM_ISR) & UARTDM_ISR_TX_READY))
-+	while (!(readl(priv->base + UARTDM_SR) & UARTDM_SR_TX_READY))
- 		;
- 
--	writel(UARTDM_CR_CMD_RESET_TX_READY, priv->base + UARTDM_CR);
--
--	writel(1, priv->base + UARTDM_NCF_TX);
- 	writel(ch, priv->base + UARTDM_TF);
- }
- 
-
++FASTRHINO-R66S-RK3568
++M:	Tianling Shen <cnsztl@gmail.com>
++R:	Jonas Karlman <jonas@kwiboo.se>
++S:	Maintained
++F:	configs/fastrhino-r66s-rk3568_defconfig
++F:	arch/arm/dts/rk3568-fastrhino-r66s-u-boot.dtsi
++
+ GENERIC-RK3568
+ M:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+diff --git a/configs/fastrhino-r66s-rk3568_defconfig b/configs/fastrhino-r66s-rk3568_defconfig
+new file mode 100644
+index 000000000000..70b20720ecab
+--- /dev/null
++++ b/configs/fastrhino-r66s-rk3568_defconfig
+@@ -0,0 +1,64 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_SYS_HAS_NONCACHED_MEMORY=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3568-fastrhino-r66s"
++CONFIG_ROCKCHIP_RK3568=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SYS_LOAD_ADDR=0xc00800
++CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_SPL_FIT_SIGNATURE=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_LEGACY_IMAGE_FORMAT=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-fastrhino-r66s.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_ATF=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_PMIC=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_LIVE=y
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_CLK=y
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_MISC=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_RTL8169=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_PWM_ROCKCHIP=y
++CONFIG_SPL_RAM=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index de3aa79cb5c9..21cc6922e177 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -128,6 +128,7 @@ List of mainline supported Rockchip boards:
+      - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
+      - Generic RK3566/RK3568 (generic-rk3568)
+      - Hardkernel ODROID-M1 (odroid-m1-rk3568)
++     - Lunzn FastRhino R66S (fastrhino-r66s-rk3568)
+      - QNAP TS-433 (qnap-ts433-rk3568)
+      - Radxa E25 Carrier Board (radxa-e25-rk3568)
+      - Radxa ROCK 3A (rock-3a-rk3568)
 -- 
-2.50.1
+2.51.0
 
