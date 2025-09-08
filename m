@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2DC6CAC581
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 11:31:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B95AACAC586
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 11:31:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55DB8830B3;
+	by phobos.denx.de (Postfix) with ESMTP id 97F4883106;
 	Mon,  8 Sep 2025 13:31:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pv/Vt1uq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xMi9gqbZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBF35830A0; Mon,  8 Sep 2025 13:31:46 +0200 (CEST)
-Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com
- [IPv6:2a00:1450:4864:20::542])
+ id 0A587809A5; Mon,  8 Sep 2025 13:31:47 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C639B809A5
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 13:31:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1302182C84
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 13:31:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stephan.gerhold@linaro.org
-Received: by mail-ed1-x542.google.com with SMTP id
- 4fb4d7f45d1cf-62205eb63f9so4214957a12.3
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 04:31:43 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-6188b5ad681so5813742a12.0
+ for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 04:31:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757331103; x=1757935903; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=K1UhJEGy5ofyaJAVIIeo11LM8yUjXMG7NSsk7U0XHyo=;
- b=Pv/Vt1uqWGGhbacctZa4V8ZVdSfFWpyUEF+uHjDoxWQ05O6uIsMgiPNvzZNVixAIGn
- nQWT6WWTWiH6RAKz8JW9Z+zLfxZkgmH4bvJu8IKJFYKUiwxnFUzyy1JatOXceLJ4OAzd
- ieHi2UopEh7JPi8+tihgNqgsLDhJaedrPVUr8Vue+ZN64wWXGKdGeG/wBxDrOtYIFd8G
- 6eSUA8SP/FoBaePgFYYSLRzgTCbX/9wLfDPnst8m8OzgbrvyRLdF71nDmtIQeDBFCilN
- iiEM0XzB5HHAwrYKRGC0KOKI/ahGorO8t79lh4mZopZp2j5UyYNScvatog7mFPmMp4HM
- xuBg==
+ d=linaro.org; s=google; t=1757331104; x=1757935904; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=/XmBYbsnZNuDAkpIPP4YOuurzMBTWZPPPkyb94xar88=;
+ b=xMi9gqbZhlMHeBQgO9slP9JdgH7xJ3HSjhq3kjbENbw1FkkIlRXwQkImhEuKiym9pr
+ mbfREgIh+U7ruMqlvZ3+nGNjKmIGXSl/gUHmQsxnpNtRCie8fpVqdsywbMaw5LcAYPRg
+ u8u8bI51DieJGY2CBUcuBug8Y9vrMjdh1j12PgU/TiRBIbZg79bf6Zip8g2bcx0zFcDp
+ 2IkhPJX69aiNoSGDgejz0tm4ZwICELaNQjfwfmfLZAaekbt9i858WAaRro0jt0ZPPt3/
+ AtOT8UkI/PuerwwQRdKcnkjhfy9KuRYVZ914oXBZwrVBlfDT+VvNwMVxdYJTIVu2KClL
+ BPkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757331103; x=1757935903;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=K1UhJEGy5ofyaJAVIIeo11LM8yUjXMG7NSsk7U0XHyo=;
- b=T6yh7Q1PtPtGiVC3ciJoXNVaUnPwS1pz7ehBQMjvCv5hsMkdfnMjzl4C88jGP+Na+G
- aIuWr59Yjl5/ANlQQd9IOAZu2CnKEdAyFj7HttCa3vLmUurGwcSpFVOeuAu2Z8TbNCZh
- xi2iPfQ+yPIDmZW+1ADK6lWHyN/795+TzkRiHKa0bWcHgylbbu3pX20AOc7L8SfDl5Uk
- /oibA6fWXWOjEiuEGn2v7r+LkI5KzDMRImc5odr5GE3xJ4mIihyNfxLYtJTR4EyRNw83
- u4raLF9MfzGW8V0CozUk1U8HyNMEvSVhn9+7nYC5xCZGney/N73UeYENZzXzSIwQecVc
- G2QQ==
+ d=1e100.net; s=20230601; t=1757331104; x=1757935904;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/XmBYbsnZNuDAkpIPP4YOuurzMBTWZPPPkyb94xar88=;
+ b=Gftv+yZpOujXa94KKO5S3c5GkhPhAZgvZNRKuitRBtplDAADES3+lRqU+U8waVjvsS
+ kRizcivwbCGwXn3Tj5zLBsr7vfz/sGSRNtL6XZMlQYnJdDMteQ/t5d+7N9GkJ7cYBj17
+ KXRSeNqcqKw59KscN5xHi+ofEB/Wc8GpIqjsP4OjFB5OX8gEvrWbMh7OvnndweKtM8ul
+ 7XnoE4J9fonW/uh3/b/vwE9ERdV/Gxxe0NKV2jpQTxPnqk9xSjpIHIA24Bs5uWD8IVRD
+ 5po+srew0yGUYJcqNCWohTOALMFTUdpr23Co9AfRmxJ6zMClO4wka6YCizfcD1FJtOVg
+ /ePw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVYbg5OZsuVpvMtC808AWxBActOP5s/Se+6jjUyaYR3nx//hhYvTr54/Did42XzlsxW8AfH2xc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzFYDZZWlVNBEB06TKebqOtryCFRF2Ij1CdUe3/LRziN2SC+QnC
- bHTbIMgjpBf0SgdgB+pQRyZ5mWKD0LWksyjyY7C2rfoaYIQ36RTEgYOVSq/uH657X+w=
-X-Gm-Gg: ASbGncspfxrRfhDc/9XkJDlD3XXDmOyN2OyiVBa2zLM/f9eZj3aYOSQkRIrQlTwP67q
- OtyGUirWUZ9PAx/MEKhUQRIovQHTzAFd+3yT+dgEoH4QbRqtdZN8P+rwJd/eujKCDAw2Hefl3wl
- oZSAitwm4bzAliQ6wZXSAYI2AbnoaJTfasOUjcIbgOrDnSmQ+mFbT1UURpdizLms6SN5kpX2XYs
- j9FS8Ua+BRd8RySA6lXwqEhSs5K1r5xvoLSIrN5ZCRLuaINktDnNCxZC52Kz4MCYdTpI5uSZj7L
- X81CWSflNRCFc/V89XUMDzcG1xEkZf2nZEnOTPfbSio1a1ZbI6H4z+EB/j9LchxJpv5azGjvOdx
- IveDDInuw1QhG1Wltd3pCju6pDI1My/sv9w==
-X-Google-Smtp-Source: AGHT+IEg++r34+9TKGDwDlkG8AGM1nt8wa0Hbrt/awntJqZ3Dj617Cr4kD2/jEbgz5CyMXmNPSAn2Q==
-X-Received: by 2002:a05:6402:847:b0:615:78c6:7aed with SMTP id
- 4fb4d7f45d1cf-62378c0cc57mr7181167a12.32.1757331103106; 
+ AJvYcCXKEU1Ia+uozzj0OVGdg9nmjCrvM6VeFwYpIbAce+W+GQVZ44hJ7ff6/N9elCI0d97YrM3kLus=@lists.denx.de
+X-Gm-Message-State: AOJu0YwEf59avxBoNWdjsqWhOPpD6D5uUDhLHWYS5euYDe6xjjmiKRAL
+ 1q065+bX07jLBJaTuEnzaZ4h0BnTGkqC7W/FV29rWe8Y1cGiFom5FKPU7sd5qqnFmhA=
+X-Gm-Gg: ASbGnctUVljPA5BkscjmvoJcBNJo8Q+Y8SCUfVCVaeDdZK6JJ+HQxB7apvqyx20KNc6
+ GJNaXgLCabVLbb5cA122aEWBGEYH2FFGLvqi8EmboSlAAQljhYWudNZYpWk2W062pnbtIan3FEN
+ a1EOm8BvG23iKKTj6O6lEQZMBQCaIfGd4JxOjtLkBjra5Jw+031dG+KVMPHOQHZMOt80dM7HgVh
+ L+xGfp9AEB5ImbPVRUly82s5RGHwgoFS06kiZIg1rYxKqb5Reoq3Xd5culH+aOQVhmW4vfF15pw
+ abWUGdo6KvhYpFYPQaz/tuBMOH2YSqktpsVJFStItuqpjZa/XRnsFzNMU83+nSbR7djahS0s55h
+ YgKNUuEtscZdtiPQ6Zxfc4Qm22I7TS09YjjEGB/ESks3V
+X-Google-Smtp-Source: AGHT+IHRlwcebEUoyUJ+GHezfx1krBeohzmcvSmcDtypx0XScnx93NdBVeJg7r/4NZeSuuK4O/GAwg==
+X-Received: by 2002:a05:6402:23d5:b0:628:e8e3:ada with SMTP id
+ 4fb4d7f45d1cf-628e8e30dc7mr2225166a12.27.1757331103936; 
  Mon, 08 Sep 2025 04:31:43 -0700 (PDT)
 Received: from [127.0.0.2] ([2a02:2454:ff21:30:60d4:28a5:7729:b0b6])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-61cfc214bb7sm21251501a12.13.2025.09.08.04.31.42
+ 4fb4d7f45d1cf-61cfc214bb7sm21251501a12.13.2025.09.08.04.31.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Sep 2025 04:31:42 -0700 (PDT)
+ Mon, 08 Sep 2025 04:31:43 -0700 (PDT)
 From: Stephan Gerhold <stephan.gerhold@linaro.org>
-Subject: [PATCH v2 0/6] Fix UART autoboot issues on DragonBoard 410c
-Date: Mon, 08 Sep 2025 13:31:20 +0200
-Message-Id: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
+Date: Mon, 08 Sep 2025 13:31:21 +0200
+Subject: [PATCH v2 1/6] board: dragonboard410c: Drop now unneeded
+ bootph-all for console
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIi+vmgC/3WNwQ6CMBBEf4Xs2TVtLWA9+R+GQ6ELbGJY0yLRE
- P7dimePbyZvZoVEkSnBpVgh0sKJZcpgDgV0o58GQg6ZwShTKqsdhtZq1aF/ztKKzNjzixL6UPe
- 2L1198mfI7iPSXmT11mQeOc0S3/vNor/pb7Ey9s/iolFhcFXnak9WB3298+SjHCUO0Gzb9gFW3
- 6c6uwAAAA==
-X-Change-ID: 20250419-db410c-autoboot-fixes-ad7f4f5973a8
+Message-Id: <20250908-db410c-autoboot-fixes-v2-1-316ed98e0143@linaro.org>
+References: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
+In-Reply-To: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
 To: Casey Connolly <casey.connolly@linaro.org>
 Cc: Sumit Garg <sumit.garg@kernel.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, 
@@ -104,52 +102,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There have been issues with autoboot on DB410c for years, where autoboot
-gets interrupted by spurious input on the UART console. I've tried fixing
-this back in 2021, but it turned out this fix was not enough. Looking into
-it further, there are two separate issues to fix:
-
- - Spurious input with UART disconnected: The RX pin is floating in this
-   case, resulting in garbage or a UART break event (0x00 byte). This is
-   interpreted as input in the autoboot prompt. Fix this by adding
-   bias-pull-up for the RX pin. I've made this change upstream in Linux
-   6.16 for all MSM8916/MSM8939 devices and it has already landed in U-Boot
-   through the recent subtree update of dts/upstream.
-
- - Spurious input when querying console size with UART connected: It's
-   unclear why this happens, but it seems to be some issue in the overly
-   complex implementation of 4-character packing mode in the serial_msm
-   driver. Fix this by switching the driver to use the more simple
-   single-character mode, which doesn't have this issue.
-
-With these patches, autoboot is finally working reliably on DragonBoard
-410c (and hopefully will remain so for the future :-)).
+This is applied for all devices upstream in Linux now (when using the
+console-specific pinctrl templates).
 
 Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
 ---
-Changes in v2:
-- Rebase on top of U-Boot master and fix conflicts
-- Drop backported upstream DT changes (already landed through recent
-  subtree merge of DT changes in Linux 6.16)
-- Link to v1: https://lore.kernel.org/r/20250624-db410c-autoboot-fixes-v1-0-d96c97ae41d1@linaro.org
+ arch/arm/dts/apq8016-sbc-u-boot.dtsi | 9 ---------
+ 1 file changed, 9 deletions(-)
 
----
-Stephan Gerhold (6):
-      board: dragonboard410c: Drop now unneeded bootph-all for console
-      Revert "serial: serial_msm: Delay initialization to let pins stabilize"
-      serial: msm: Cleanup register naming
-      serial: msm: Reset after writing to DMEN
-      serial: msm: Re-enable after resetting
-      serial: msm: Use single character mode
+diff --git a/arch/arm/dts/apq8016-sbc-u-boot.dtsi b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
+index 26d4506815ea28cc667d3fbb211bfef33b43d013..de77a31cf1152e869c7c2bcc6433772ffb01591c 100644
+--- a/arch/arm/dts/apq8016-sbc-u-boot.dtsi
++++ b/arch/arm/dts/apq8016-sbc-u-boot.dtsi
+@@ -9,12 +9,3 @@
+ 		reg = <0 0x80000000 0 0x40000000>;
+ 	};
+ };
+-
+-/*
+- * When running as a first-stage bootloader, we need to re-configure the UART pins
+- * because SBL de-initialises them. Indicate that the UART pins should be configured
+- * during all boot stages.
+- */
+-&blsp_uart2_console_default {
+-	bootph-all;
+-};
 
- arch/arm/dts/apq8016-sbc-u-boot.dtsi |   9 ---
- drivers/serial/serial_msm.c          | 127 ++++++++---------------------------
- 2 files changed, 29 insertions(+), 107 deletions(-)
----
-base-commit: 328747974a0620d0996113fe2b3906b06e96de00
-change-id: 20250419-db410c-autoboot-fixes-ad7f4f5973a8
-
-Best regards,
 -- 
-Stephan Gerhold <stephan.gerhold@linaro.org>
+2.50.1
 
