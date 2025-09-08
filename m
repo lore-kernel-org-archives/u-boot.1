@@ -4,63 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68B45CA1016
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 16:44:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC0D3CA1016
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 16:44:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF73E82C84;
-	Mon,  8 Sep 2025 18:44:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 82595830A0;
+	Mon,  8 Sep 2025 18:44:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="lun+wqbe";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="McHEGo6S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29B8F83045; Mon,  8 Sep 2025 18:44:10 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 39683830A0; Mon,  8 Sep 2025 18:44:30 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9559809A5
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 18:44:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3527B809A5
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 18:44:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 1DEFA1A0E26;
- Mon,  8 Sep 2025 16:44:07 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id E9E9A6061A;
- Mon,  8 Sep 2025 16:44:06 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id BBCBC102F2968; 
- Mon,  8 Sep 2025 18:43:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1757349846; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=aquzqg8rUorc8l3oRTF1a8uA/sjMgfbBMos/WkjEUSU=;
- b=lun+wqbeeGG7VIaGY0WVpul5uwSB1opuI+ZXoxyD9EOVjkQpSTDuXDxzwBlzgq2fu+8+S3
- bL42f6OQ05aKOSSESxkUUa1+lxkjeBVJcG0CIytVF+NOHdOG2BKnb4n0YuywtLY0YSLp5K
- UJEvcK0sBjYnhiA3/DrZwFLqD0/FvW+Dq+fUPC26yONbwMv0/MQ9vjWfD6ychfUaLMXBtJ
- mQw+lktHZvWfqW5Die9Oh3zH9ZB4XcTSfaVOs6jEMyR8ot77TOG5a57PV5a95cYlr10loT
- l5OTctnyL4ydlfgOASqZopxWkUzoDecCHyBO0yKQQ0GVwEmjJ3sWDYt9N37hbA==
-Date: Mon, 8 Sep 2025 18:43:42 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Maarten Brock <Maarten.Brock@sttls.nl>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
- "jerome.forissier@linaro.org" <jerome.forissier@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>, "trini@konsulko.com"
- <trini@konsulko.com>
-Subject: Re: [PATCH 1/1] board: ti: am335x: Do not call disabled PMIC functions
-Message-ID: <20250908184342.7ec9500b@kmaincent-XPS-13-7390>
-In-Reply-To: <DB6PR05MB4551D31271569EC04E8EC60F830CA@DB6PR05MB4551.eurprd05.prod.outlook.com>
-References: <DB6PR05MB4551D31271569EC04E8EC60F830CA@DB6PR05MB4551.eurprd05.prod.outlook.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-74382041c9eso3352945a34.3
+ for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 09:44:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1757349866; x=1757954666; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WDYlx+o9bTq3yM5q/u/yVi7vtUss6EzD5PwoYvUJX7w=;
+ b=McHEGo6Sv0GUSx4QcYWahjjjbDtmDEzlV7KC7JA696DI8NfaiBLeKN74dw7dPpvfDS
+ qspxPVhr2qpREg8XcVYjRnC4AaMg+excZbXzWEY0ZFYCxJ4HO9QUWBcjC9mrJDU5AXRq
+ JEOuWoDou576zXK9y1IReJkjM7FvuIdwj0FmFGxKQvoba5T4eCUxpiFIwYg7P5CwS/fj
+ s4Wi7Qkb/+KjvOSmUJZkaisj2IgvzYSw4VMQyceFPxwfUUkMG0y7JEVOcdG8EQWb+FeT
+ mkPr5nYAtjfMX1hnXetBg6xOnIZ1EnSOCsY+1cSIK0Sn1YSnzjkjLpQz6VM28wCAG89A
+ IqVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757349866; x=1757954666;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WDYlx+o9bTq3yM5q/u/yVi7vtUss6EzD5PwoYvUJX7w=;
+ b=ucdfp2+mhHokPa9u7HvnqMgfuQbdzI9fYl1SfPHJanJlXrqJrE45YHS8/YV0x2ddOx
+ XoFqmuswKLy6Nj7EcTnVVp+40cMRD8h2cP9bFha7VJ++FhQZ21OT67SygU0NrCpDTArQ
+ WzqnKQaxzYisQ2DeIxGF64lwqcSxfx6uftd3ePX9sHKHuxHMN4NP0paZ/z+zdBkXfMkr
+ JWuEl+gqjE/AFzeoXAe/TmeMxpykAZmmue8Lffr6oxHWm3FrTqT0butaRvHk1jE7ry0Q
+ 7LBT4UtV/YN+Ms9qzP7AJARw8FiEpcbfpguK0qTZP/O+lDNb4hyFEURiTJ24YAMK343G
+ w1Mw==
+X-Gm-Message-State: AOJu0YwtzM/gdJZ5a5Qh3WFtNlJOm9K9ClmDUxIEhkr1WLaE7BgH9VPB
+ yQuMi8+HoPR/Bb1fNvqeoAOoB3O3DraGz52ndcWQCe3hSk2ljAM+ePAoOScMtPyeoApEgGZemPo
+ wpCBtt7mTBlg7BikUX9Wx7wKo9WBku33nXtrP4VNbxAE2XsXJYJNUKBo=
+X-Gm-Gg: ASbGnct0yiWiySQpL0mkcsQ3aHyPj0d9CPHSdNec7zJcriWIUk1om0XcIcdzpiH9I8C
+ QdTaumQTQzeAKzNuJTUNX80xkpnCKW0ibHwOBvB7XsOk6Ie/M8MXgrLqbqWYfgs8p61Fu9XqMm8
+ M1YSgDXwquIE+wa6pT59ahLokpDYKt2b/t8LEl40kzYsM9NLaI9BY5lQAguj39BtM9cpx53zisf
+ 1EfQ8be6NfsZsvemg==
+X-Google-Smtp-Source: AGHT+IEt/UKr6zY3sWQ81qx5lmk8tcU+ZV3xwi+t5PidKKVRrSF8roNMCfArAzQHBBRi/KRKR/oqEpgE4hyDUEKlNLs=
+X-Received: by 2002:a05:6830:3590:b0:744:f0db:a19f with SMTP id
+ 46e09a7af769-74c790bac31mr4743758a34.35.1757349865881; Mon, 08 Sep 2025
+ 09:44:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <CAJ+vNU38CyNjp96wH5m4FH022WxHghaASxU-gG=Uuc=ni7fYPQ@mail.gmail.com>
+ <e0c32dde-f265-42b5-ba4d-29a3deaa7eaf@linaro.org>
+In-Reply-To: <e0c32dde-f265-42b5-ba4d-29a3deaa7eaf@linaro.org>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 8 Sep 2025 09:44:15 -0700
+X-Gm-Features: Ac12FXzbeuU-Rk5xOiDoFPedMhHhZMzYqhBlzhXrLFquKK2HOFe5UdJp12vFsE0
+Message-ID: <CAJ+vNU3qmhCJhWbfoRFrSimOJpKxnRjx3sxKAUxqZ6tEX=FP5w@mail.gmail.com>
+Subject: Re: LWIP buffer alignment
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,24 +93,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 8 Sep 2025 16:05:04 +0000
-Maarten Brock <Maarten.Brock@sttls.nl> wrote:
-
-> When PMIC drivers are disabled their functions should not be called.
+On Mon, Sep 8, 2025 at 7:21=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> Signed-off-by: Maarten Brock <maarten.brock@sttls.nl>
+> Hi Tim,
+>
+> On 9/5/25 19:45, Tim Harvey wrote:
+> > Hi Jerome,
+> >
+> > I'm working with a board that has an IMX ENETC MAC on it
+> > drivers/net/fsl_enetc.c and when configured for LWIP it fails and
+> > warns about RX buffers not being 64B aligned:
+> > WARNING at drivers/net/fsl_enetc.c:776/enetc_setup_rx_bdr()!
+> >
+> > I tried changing MEM_ALIGNMENT to 64 in lib/lwip/u-boot/lwipopts.h but
+> > that did not align the buffers to 64B. Where are the lwip buffers
+> > created and do you have any suggestions for working around this?
+>
+> The LwIP RX buffers are created in net-lwip.c. See eth_init_rings().
+> You might have PKTSIZE_ALIGN and/or PKTALIGN set wrongly.
+>
 
-There is already board check with board_is_bone or board_is_beaglebonex cal=
-l.
-Is it not sufficient? Why would we disable the PMIC support if we are using
-one of these boards?
+Hi Jerome,
 
-Maybe the only relevant return would be in scale_vcores_generic, as it matc=
-hes
-the case where the board is not known.
+Thanks for pointing me to eth_init_rings(). This function uses
+net_pkt_buf as the base for the net_rx_packets array which is a static
+global and not aligned.
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Looks like we need:
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 660ceb10cbe..aec05d55de6 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -30,7 +30,7 @@ void (*push_packet)(void *, int len) =3D 0;
+ static int net_try_count;
+ static int net_restarted;
+ int net_restart_wrap;
+-static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
++static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN]
+__attribute__((aligned(PKTALIGN)));
+ uchar *net_rx_packets[PKTBUFSRX];
+ uchar *net_rx_packet;
+ const u8 net_bcast_ethaddr[6] =3D { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+
+If you agree I'll submit that. This does resolve the issue I see with
+the enetc driver using LwIP.
+
+Best Regards,
+
+Tim
