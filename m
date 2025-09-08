@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC0D3CA1016
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 16:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD3FECA1016
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 16:54:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82595830A0;
-	Mon,  8 Sep 2025 18:44:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id F40F782C84;
+	Mon,  8 Sep 2025 18:54:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="McHEGo6S";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="m06U+Frj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39683830A0; Mon,  8 Sep 2025 18:44:30 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 24C9583045; Mon,  8 Sep 2025 18:54:07 +0200 (CEST)
+Received: from out-186.mta0.migadu.com (out-186.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::ba])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3527B809A5
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 18:44:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58452809A5
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 18:54:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-74382041c9eso3352945a34.3
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 09:44:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1757349866; x=1757954666; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WDYlx+o9bTq3yM5q/u/yVi7vtUss6EzD5PwoYvUJX7w=;
- b=McHEGo6Sv0GUSx4QcYWahjjjbDtmDEzlV7KC7JA696DI8NfaiBLeKN74dw7dPpvfDS
- qspxPVhr2qpREg8XcVYjRnC4AaMg+excZbXzWEY0ZFYCxJ4HO9QUWBcjC9mrJDU5AXRq
- JEOuWoDou576zXK9y1IReJkjM7FvuIdwj0FmFGxKQvoba5T4eCUxpiFIwYg7P5CwS/fj
- s4Wi7Qkb/+KjvOSmUJZkaisj2IgvzYSw4VMQyceFPxwfUUkMG0y7JEVOcdG8EQWb+FeT
- mkPr5nYAtjfMX1hnXetBg6xOnIZ1EnSOCsY+1cSIK0Sn1YSnzjkjLpQz6VM28wCAG89A
- IqVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757349866; x=1757954666;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WDYlx+o9bTq3yM5q/u/yVi7vtUss6EzD5PwoYvUJX7w=;
- b=ucdfp2+mhHokPa9u7HvnqMgfuQbdzI9fYl1SfPHJanJlXrqJrE45YHS8/YV0x2ddOx
- XoFqmuswKLy6Nj7EcTnVVp+40cMRD8h2cP9bFha7VJ++FhQZ21OT67SygU0NrCpDTArQ
- WzqnKQaxzYisQ2DeIxGF64lwqcSxfx6uftd3ePX9sHKHuxHMN4NP0paZ/z+zdBkXfMkr
- JWuEl+gqjE/AFzeoXAe/TmeMxpykAZmmue8Lffr6oxHWm3FrTqT0butaRvHk1jE7ry0Q
- 7LBT4UtV/YN+Ms9qzP7AJARw8FiEpcbfpguK0qTZP/O+lDNb4hyFEURiTJ24YAMK343G
- w1Mw==
-X-Gm-Message-State: AOJu0YwtzM/gdJZ5a5Qh3WFtNlJOm9K9ClmDUxIEhkr1WLaE7BgH9VPB
- yQuMi8+HoPR/Bb1fNvqeoAOoB3O3DraGz52ndcWQCe3hSk2ljAM+ePAoOScMtPyeoApEgGZemPo
- wpCBtt7mTBlg7BikUX9Wx7wKo9WBku33nXtrP4VNbxAE2XsXJYJNUKBo=
-X-Gm-Gg: ASbGnct0yiWiySQpL0mkcsQ3aHyPj0d9CPHSdNec7zJcriWIUk1om0XcIcdzpiH9I8C
- QdTaumQTQzeAKzNuJTUNX80xkpnCKW0ibHwOBvB7XsOk6Ie/M8MXgrLqbqWYfgs8p61Fu9XqMm8
- M1YSgDXwquIE+wa6pT59ahLokpDYKt2b/t8LEl40kzYsM9NLaI9BY5lQAguj39BtM9cpx53zisf
- 1EfQ8be6NfsZsvemg==
-X-Google-Smtp-Source: AGHT+IEt/UKr6zY3sWQ81qx5lmk8tcU+ZV3xwi+t5PidKKVRrSF8roNMCfArAzQHBBRi/KRKR/oqEpgE4hyDUEKlNLs=
-X-Received: by 2002:a05:6830:3590:b0:744:f0db:a19f with SMTP id
- 46e09a7af769-74c790bac31mr4743758a34.35.1757349865881; Mon, 08 Sep 2025
- 09:44:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAJ+vNU38CyNjp96wH5m4FH022WxHghaASxU-gG=Uuc=ni7fYPQ@mail.gmail.com>
- <e0c32dde-f265-42b5-ba4d-29a3deaa7eaf@linaro.org>
-In-Reply-To: <e0c32dde-f265-42b5-ba4d-29a3deaa7eaf@linaro.org>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 8 Sep 2025 09:44:15 -0700
-X-Gm-Features: Ac12FXzbeuU-Rk5xOiDoFPedMhHhZMzYqhBlzhXrLFquKK2HOFe5UdJp12vFsE0
-Message-ID: <CAJ+vNU3qmhCJhWbfoRFrSimOJpKxnRjx3sxKAUxqZ6tEX=FP5w@mail.gmail.com>
-Subject: Re: LWIP buffer alignment
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+Mime-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1757350441;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xoaLtuKH5fNjX+ouJkpkgIf0EXpjE0xgMU/8sEdbAr4=;
+ b=m06U+FrjuJ8s1dTuQfB32eW3UnWL2ybHnxU1M2LY3IDQTFYIvsmPLCuwqJQQXV8yyzqBgu
+ hLkBx5VgtXJP/TNW+BpJcRDNgWGur8Jkh3I+ivaH4VUy0p9U8bJikfdiApDnDhvaVD4RjZ
+ NnafAHJMjfAQGBGKvdA1Yx7WOp/LLGFwOiiZUaWTHmoVZesguWS16Kl2RTGCzMQEgWwvAu
+ 6JqrHo5Cm+hOp9VSro7MO1prIhbadHVq7hvpPzNH63wEHP8U1ZYNet/2N8GsRR6oruE3IA
+ 5L+csCSOQzGAq+3TlZs7vZgnDiFLFNCVkQjpYNygb7+1KGYzvKqqCfyQWkvpeg==
 Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 08 Sep 2025 16:53:57 +0000
+Message-Id: <DCNKQM04PWE0.35QSN1T1Z5CEZ@postmarketos.org>
+Cc: "Jonas Karlman" <jonas@kwiboo.se>, "Simon Glass" <sjg@chromium.org>,
+ <u-boot@lists.denx.de>, <~postmarketos/upstreaming@lists.sr.ht>
+Subject: Re: [PATCH RFC 5/9] arm: meson: initial u-boot SPL support for GX SoCs
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: "Ferass El Hafidi" <funderscore@postmarketos.org>
+To: <u-boot-amlogic@groups.io>, <neil.armstrong@linaro.org>, "Ferass El
+ Hafidi" <funderscore@postmarketos.org>, "Tom Rini" <trini@konsulko.com>,
+ "Peng Fan" <peng.fan@nxp.com>, "Jaehoon Chung" <jh80.chung@samsung.com>,
+ "Beniamino Galvani" <b.galvani@gmail.com>
+References: <20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org>
+ <20250907-spl-gx-v1-5-37395d9ff5af@postmarketos.org>
+ <b6d9c116-f37d-4793-ba53-f94ed95130dd@linaro.org>
+In-Reply-To: <b6d9c116-f37d-4793-ba53-f94ed95130dd@linaro.org>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,52 +74,349 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 8, 2025 at 7:21=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
+On Mon Sep 8, 2025 at 8:24 AM UTC, Neil Armstrong via groups.io wrote:
+> On 07/09/2025 16:36, Ferass El Hafidi wrote:
+>> Add initial boilerplate for U-Boot SPL support on Amlogic.
+>>=20
+>> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+>> ---
+>>   arch/arm/include/asm/arch-meson/clock-gx.h |   1 +
+>>   arch/arm/include/asm/arch-meson/gx.h       |  36 ++++
+>>   arch/arm/mach-meson/Kconfig                |  42 ++++-
+>>   arch/arm/mach-meson/Makefile               |   5 +
+>>   arch/arm/mach-meson/board-common.c         |  11 ++
+>>   arch/arm/mach-meson/spl-gx.c               | 278 +++++++++++++++++++++=
+++++++++
+>>   arch/arm/mach-meson/spl.c                  | 123 +++++++++++++
+>>   7 files changed, 495 insertions(+), 1 deletion(-)
+>>=20
+> <...>
+>> diff --git a/arch/arm/mach-meson/spl-gx.c b/arch/arm/mach-meson/spl-gx.c
+>> new file mode 100644
+>> index 0000000000000000000000000000000000000000..65b301bc9ed89b7ca2156b7f=
+a672ed4ef3f8633b
+>> --- /dev/null
+>> +++ b/arch/arm/mach-meson/spl-gx.c
+>> @@ -0,0 +1,278 @@
+>> +// SPDX-License-Identifier: GPL-2.0+
+>> +/*
+>> + * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
+>> + * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
+>> + */
+>> +#include <hang.h>
+>> +#include <image.h>
+>> +#include <spl.h>
+>> +#include <vsprintf.h>
+>> +#include <asm/io.h>
+>> +#include <asm/arch/boot.h>
+>> +#include <asm/arch/clock-gx.h>
+>> +#include <asm/arch/gx.h>
+>> +#include <linux/delay.h>
+>> +
+>> +/* Meson GX SPL code */
+>> +
+>> +#if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
+>> +#if defined(CONFIG_MESON_GXBB)
 >
-> Hi Tim,
->
-> On 9/5/25 19:45, Tim Harvey wrote:
-> > Hi Jerome,
-> >
-> > I'm working with a board that has an IMX ENETC MAC on it
-> > drivers/net/fsl_enetc.c and when configured for LWIP it fails and
-> > warns about RX buffers not being 64B aligned:
-> > WARNING at drivers/net/fsl_enetc.c:776/enetc_setup_rx_bdr()!
-> >
-> > I tried changing MEM_ALIGNMENT to 64 in lib/lwip/u-boot/lwipopts.h but
-> > that did not align the buffers to 64B. Where are the lwip buffers
-> > created and do you have any suggestions for working around this?
->
-> The LwIP RX buffers are created in net-lwip.c. See eth_init_rings().
-> You might have PKTSIZE_ALIGN and/or PKTALIGN set wrongly.
+> I think you should indicate why it's only needed for GXBB
 >
 
-Hi Jerome,
+Sure!  I will also explain here to clarify.
+Basically this is sending the SCP firmware (aka. bl30/bl301) to the SCP.
+Historically (in GXBB) this was done by bl2.bin, but (to save space?) it
+was moved to BL31 in GXL:
 
-Thanks for pointing me to eth_init_rings(). This function uses
-net_pkt_buf as the base for the net_rx_packets array which is a static
-global and not aligned.
+- https://git.trustedfirmware.org/plugins/gitiles/TF-A/trusted-firmware-a/+=
+/refs/heads/master/plat/amlogic/gxl/gxl_bl31_setup.c#129
 
-Looks like we need:
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 660ceb10cbe..aec05d55de6 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -30,7 +30,7 @@ void (*push_packet)(void *, int len) =3D 0;
- static int net_try_count;
- static int net_restarted;
- int net_restart_wrap;
--static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
-+static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN]
-__attribute__((aligned(PKTALIGN)));
- uchar *net_rx_packets[PKTBUFSRX];
- uchar *net_rx_packet;
- const u8 net_bcast_ethaddr[6] =3D { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+and BL2 would give image info for bl30/bl301 to BL31.  I patched this
+upstream so we don't have to do that in SPL:
 
-If you agree I'll submit that. This does resolve the issue I see with
-the enetc driver using LwIP.
+- https://git.trustedfirmware.org/plugins/gitiles/TF-A/trusted-firmware-a/+=
+/refs/heads/master/plat/amlogic/gxl/gxl_bl31_setup.c#105
 
-Best Regards,
+Whether we can move SCP fw loading to BL31 on GXBB is .. an interesting
+thing that could be considered.  That way we could possibly also save
+some space in U-Boot SPL.
 
-Tim
+>> +inline void send_scp(void *addr, size_t size, const uint8_t *sha2,
+>> +	uint32_t sha2_length)
+>> +{
+>> +	int i;
+>> +
+>> +	puts("Trying to send the SCP firmware\n");
+>> +	writel(size, GX_MB_SRAM_BASE);
+>> +
+>> +	udelay(500);
+>> +
+>> +	writel(GX_MB_CMD_DATA_LEN, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+>> +	while (readl(GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4))
+>> +		;
+>> +	udelay(500);
+>> +
+>> +	memcpy((void *)GX_MB_SRAM_BASE, (const void *)sha2, sha2_length);
+>> +	writel(GX_MB_CMD_SHA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+>> +	while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
+>> +		;
+>> +	udelay(500);
+>> +
+>> +	for (i =3D 0; i < size; i +=3D 1024) {
+>> +		if (size >=3D i + 1024)
+>> +			memcpy((void *)GX_MB_SRAM_BASE,
+>> +			       (const void *)(unsigned long)(addr + i), 1024);
+>> +		else if (size > i)
+>> +			memcpy((void *)GX_MB_SRAM_BASE,
+>> +			       (const void *)(unsigned long)(addr + i), (size - i));
+>> +
+>> +		writel(GX_MB_CMD_DATA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+>> +		while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
+>> +			;
+>> +	}
+>> +	writel(GX_MB_CMD_OP_SHA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+>> +
+>> +	while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
+>> +		;
+>> +	udelay(500);
+>> +
+>> +	/* We transferred all of the SCP firmware. Running it */
+>> +	writel(GX_MB_CMD_END, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+>> +}
+>> +#endif
+>> +
+>> +void board_fit_image_post_process(const void *fit, int node, void **p_i=
+mage, size_t *p_size)
+>> +{
+>> +#if defined(CONFIG_MESON_GXBB)
+>> +	const char *name =3D fit_get_name(fit, node, NULL);
+>> +	int noffset =3D 0, value_len;
+>> +	u8 *value;
+>> +
+>> +	if (strcmp("scp", name) && strcmp("bl301", name))
+>> +		return;
+>> +
+>> +	fdt_for_each_subnode(noffset, fit, node) {
+>> +		if (strncmp(fit_get_name(fit, noffset, NULL),
+>> +			    FIT_HASH_NODENAME, strlen(FIT_HASH_NODENAME)))
+>> +			continue;
+>> +
+>> +		if (fit_image_hash_get_value(fit, noffset, &value, &value_len))
+>> +			continue;
+>> +
+>> +		/* Send the SCP firmware to the SCP */
+>> +		send_scp(*p_image, *p_size, value, value_len);
+>> +		break;
+>> +	}
+>> +#endif
+>> +}
+>> +#endif
+>> +
+>> +inline void cpu_pll_switch_to(int mode)
+>> +{
+>> +	u32 reg;
+>> +
+>> +	reg =3D readl(GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
+>> +
+>> +	while (reg & (1 << 28))
+>> +		reg =3D readl(GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
+>> +
+>> +	reg |=3D (1 << 26);
+>> +
+>> +	if (mode =3D=3D 1) {
+>> +		/* Switch to System PLL */
+>> +		reg |=3D (1 << 11);
+>> +	} else {
+>> +		if (reg & (1 << 10)) {
+>> +			reg =3D (reg & ~((1 << 10) | (0x3f << 4) | (1 << 2) |
+>> +				(0x3 << 0)));
+>> +		} else {
+>> +			reg =3D (reg & ~((1 << 10) | (0x3f << 20) |
+>> +				(1 << 18) | (0x3 << 16))) | (1 << 10);
+>> +		}
+>> +		/* Select dynamic mux */
+>> +		reg =3D reg & ~(1 << 11);
+>> +	}
+>> +	writel(reg, GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
+>
+> I know it's a lot, but it would nbe mush better if you had defines
+> for all those PLL register bits.
+>
+> Or perhaps you can use the `struct parm` & PARM_GET/PARM_SET from
+> drivers/clk/meson/clk_meson.h to define and set all the PLL parameters
+>
+
+ACK.
+
+>> +}
+>> +
+>> +int meson_pll_init(void)
+>> +{
+>> +	clrbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL, 1 << 8);
+>> +	cpu_pll_switch_to(0);
+>> +
+>> +	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL6, 1 << 26);
+>> +	udelay(100);
+>> +
+>> +	while (!((readl(GX_HIU_BASE + HHI_SYS_PLL_CNTL) >> 31) & 1)) {
+>> +		if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+>> +			setbits_32(GX_HIU_BASE + HHI_SYS_PLL_CNTL, 1 << 29);
+>> +			writel(0x5ac80000, GX_HIU_BASE + HHI_SYS_PLL_CNTL2);
+>> +			writel(0x8e452015, GX_HIU_BASE + HHI_SYS_PLL_CNTL3);
+>> +			writel(0x401d40c, GX_HIU_BASE + HHI_SYS_PLL_CNTL4);
+>> +			writel(0x870, GX_HIU_BASE + HHI_SYS_PLL_CNTL5);
+>> +			writel((1 << 30) | (1 << 29) |
+>> +				((0 << 16) | (1 << 9) |
+>> +				(1536 / 24)), /* 1.5 GHz */
+>> +				GX_HIU_BASE + HHI_SYS_PLL_CNTL);
+>> +			clrbits_32(GX_HIU_BASE + HHI_SYS_PLL_CNTL, 1 << 29);
+>> +		} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
+>> +			writel(0xc4258100, GX_HIU_BASE + HHI_SYS_PLL_CNTL1);
+>> +			writel(0xb7400000, GX_HIU_BASE + HHI_SYS_PLL_CNTL2);
+>> +			writel(0xa59a288, GX_HIU_BASE + HHI_SYS_PLL_CNTL3);
+>> +			writel(0x40002d, GX_HIU_BASE + HHI_SYS_PLL_CNTL4);
+>> +			writel(0x7c700007, GX_HIU_BASE + HHI_SYS_PLL_CNTL5);
+>> +			writel((1 << 30) | ((1 << 9) |
+>> +				(1200 / 24)), /* 1.2 GHz */
+>> +				GX_HIU_BASE + HHI_SYS_PLL_CNTL);
+>> +		}
+>> +		udelay(20);
+>> +	}
+>> +	cpu_pll_switch_to(1); /* Hook the CPU to the PLL divider output */
+>> +
+>> +	if (IS_ENABLED(CONFIG_MESON_GXBB))
+>> +		writel(0x10007, GX_HIU_BASE + HHI_MPLL_CNTL4);
+>> +	else if (IS_ENABLED(CONFIG_MESON_GXL))
+>> +		writel(0x10006, GX_HIU_BASE + HHI_MPLL_CNTL4);
+>> +
+>> +	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+>> +	udelay(200);
+>> +
+>> +	writel(0x59C80000, GX_HIU_BASE + HHI_MPLL_CNTL2);
+>> +	writel(0xCA45B822, GX_HIU_BASE + HHI_MPLL_CNTL3);
+>> +
+>> +	if (IS_ENABLED(CONFIG_MESON_GXBB))
+>> +		writel(0xB5500E1A, GX_HIU_BASE + HHI_MPLL_CNTL5);
+>> +	else if (IS_ENABLED(CONFIG_MESON_GXL))
+>> +		writel(0x95520E1A, GX_HIU_BASE + HHI_MPLL_CNTL5);
+>> +
+>> +	writel(0xFC454545, GX_HIU_BASE + HHI_MPLL_CNTL6);
+>> +
+>> +	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+>> +		writel((1 << 30) | (1 << 29) | (3 << 9) | (250 << 0), GX_HIU_BASE + H=
+HI_MPLL_CNTL);
+>> +		clrbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+>> +	} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
+>> +		writel((1 << 30) | (3 << 9) | (250 << 0), GX_HIU_BASE + HHI_MPLL_CNTL=
+);
+>> +	}
+>> +	udelay(800);
+>> +
+>> +	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL4, 1 << 14);
+>> +
+>> +	while (!((readl(GX_HIU_BASE + HHI_MPLL_CNTL) >> 31) & 1)) {
+>> +		if ((readl(GX_HIU_BASE + HHI_MPLL_CNTL) & (1 << 31)) !=3D 0)
+>> +			break;
+>> +		setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+>> +		udelay(1000);
+>> +		clrbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+>> +		udelay(1000);
+>> +	}
+>> +
+>> +	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+>> +		writel(0xFFF << 16, GX_HIU_BASE + HHI_MPLL_CNTL10);
+>> +		writel(((7 << 16) | (1 << 15) | (1 << 14) | (4681 << 0)),
+>> +		       GX_HIU_BASE + HHI_MPLL_CNTL7);
+>> +		writel(((readl(GX_HIU_BASE + HHI_MPEG_CLK_CNTL) & (~((0x7 << 12) | (1=
+ << 7) |
+>> +			(0x7F << 0)))) | ((5 << 12) | (1 << 7)	| (2 << 0))),
+>> +			GX_HIU_BASE + HHI_MPEG_CLK_CNTL);
+>> +		setbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL, 1 << 8);
+>> +		writel(((5 << 16) | (1 << 15) | (1 << 14) | (12524 << 0)),
+>> +		       GX_HIU_BASE + HHI_MPLL_CNTL8);
+>> +	} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
+>> +		writel((1 << 12) | 3, GX_HIU_BASE + HHI_MPLL_CNTL10);
+>> +		writel(0x5edb7, GX_HIU_BASE + HHI_MPLL_CNTL7);
+>> +		clrbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL,
+>> +			   (3 << 13) | (1 << 12) | (15 << 4) | 15);
+>> +		setbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL,
+>> +			   (1 << 14) | (1 << 12) | (1 << 8) | (2 << 6) | (1 << 1));
+>> +		writel((4 << 16) | (7 << 13) | (1 << 8) | (5 << 4) | 10,
+>> +		       GX_HIU_BASE + HHI_MPLL_CNTL8);
+>> +	}
+>> +
+>> +	udelay(200);
+>> +
+>> +	/* TODO: Some error handling and timeouts... */
+>> +	return 0;
+>> +}
+>> +
+> <...>
+>> +void meson_power_init(void)
+>> +{
+>> +	/* TODO: Support more voltages */
+>> +
+>> +	/* Init PWM B */
+>> +	clrsetbits_32(GX_PWM_MISC_REG_AB, 0x7f << 16, (1 << 23) | (1 << 1));
+>> +
+>> +	/* Set voltage */
+>> +	if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1120MV))
+>> +		writel(0x02001a, GX_PWM_PWM_B);
+>> +	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1100MV))
+>> +		writel(0x040018, GX_PWM_PWM_B);
+>> +	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1000MV))
+>> +		writel(0x0e000e, GX_PWM_PWM_B);
+>> +
+>> +	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+>> +		clrbits_32(GX_PIN_MUX_REG7, 1 << 22);
+>> +		clrsetbits_32(GX_PIN_MUX_REG3, 1 << 22, 1 << 21);
+>> +	} else {
+>> +		clrbits_32(GX_PIN_MUX_REG1, 1 << 10);
+>> +		clrsetbits_32(GX_PIN_MUX_REG2, 1 << 5, 1 << 11);
+>> +	}
+>> +
+>> +	/* Init PWM D */
+>> +	clrsetbits_32(GX_PWM_MISC_REG_CD, 0x7f << 16, (1 << 23) | (1 << 1));
+>> +
+>> +	/* Set voltage */
+>> +	if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1100MV))
+>> +		writel(0x040018, GX_PWM_PWM_B);
+>> +	else if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1000MV))
+>> +		writel(0x0e000e, GX_PWM_PWM_B);
+>> +
+>> +	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+>> +		clrbits_32(GX_PIN_MUX_REG7, 1 << 23);
+>> +		setbits_32(GX_PIN_MUX_REG3, 1 << 20);
+>> +	} else {
+>> +		clrbits_32(GX_PIN_MUX_REG1, (1 << 9) | (1 << 11));
+>> +		setbits_32(GX_PIN_MUX_REG2, 1 << 12);
+>> +	}
+>> +}
+>
+> Seems much of the code is duplicated between GXBB and GXL, so I wonder if=
+ it would'nt
+> be cleaner to have spl-gxbb an spl-gxl ?
+>
+
+You mean separate power init functions (meson_power_init_gxbb/gxl)?  Should=
+ be doable.
+
+> <...>
+>
+> Anyway it's really clean !
+>
+> Thanks!
+> Neil
+>
+
+Thank you!
+
+>
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+> Groups.io Links: You receive all messages sent to this group.
+> View/Reply Online (#2757): https://groups.io/g/u-boot-amlogic/message/275=
+7
+> Mute This Topic: https://groups.io/mt/115113902/8399868
+> Group Owner: u-boot-amlogic+owner@groups.io
+> Unsubscribe: https://groups.io/g/u-boot-amlogic/unsub [funderscore@postma=
+rketos.org]
+> -=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-=3D-
+
