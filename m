@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5670CA1013
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 08:12:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDEBCA1013
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 08:13:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DF0182AE9;
-	Mon,  8 Sep 2025 10:12:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 10A7E82AE9;
+	Mon,  8 Sep 2025 10:13:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qu8FrF7z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VLwzgmnz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FC1D82CF8; Mon,  8 Sep 2025 10:12:04 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 043D382DA1; Mon,  8 Sep 2025 10:13:40 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5481E800B6
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 10:12:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F26FF800B6
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 10:13:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3e2055ce7b3so2497042f8f.0
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 01:12:01 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3e2fdddd01dso509621f8f.2
+ for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 01:13:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757319121; x=1757923921; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1757319217; x=1757924017; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=dxut2mr22fMNLLRFpScCkRI3WvncvzduqUsDFZJ917o=;
- b=qu8FrF7z/6/4INUIq+G5wLoct75amXXKCuSuvQKNrnYNWIiDH61i6LduLZq0Q0Kr3X
- sz5N2OHWSH9hCocGAHgsBfuYsHcEEXZPSzU449uJ1yKG6RLiGaC5iIjfh5YArOeda5Xs
- IMpp6Hm8KDkqpBbu2JF7J5Y2Q68kp0581m6FZ+JTDTr6X3LO/MrauFDjcJfckD9bTTUV
- xRyX2jWl0iyAznT50dm9X9ORtWYniIZYJPNWdXglVuREFi/ZpSKOJ0IiN+UEnpdVPl0A
- YIscdk9q5C5jXKHwfsPz/1J2e/abf8c9tUD0LCnQ/doMkvLtmMEnNHYMBki9EpVvKWOz
- YY3w==
+ :reply-to; bh=9iBapWgwRqiXRlt0vE5a+EpSdNZ2hubF+RfUp2joKM4=;
+ b=VLwzgmnzLX7Zgibx4GI3KgYlhByRVg9UQ1lyYzg4ys8gWzlTZGcLAb/pNPZlZNakrx
+ pqTuNZmMZDjcDQyx50B/GIhsTuBz9x0tohWBdmvmSKu3AknI+pM2ZEaNTfqkyxEVjOVQ
+ huQ3Y+S+ostmz+sGlyJNIPa2BdBtvMtZWmT//B42J910LU2Xml+kb6bQJ/Owq6xYuJlu
+ fF7I7Ci4oilkSdRMKYqbMhICZaw3UYbBCKgC7nqu8UlEdbar3oyHepOhvPJ6ErsgYGUl
+ xjkmLO41bgQJcBBZoLuqm3BjKzLc0HnwfOwoeTzS8DnKSRmwUms9k2/9CCXsfXBKd9k9
+ kgFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757319121; x=1757923921;
+ d=1e100.net; s=20230601; t=1757319217; x=1757924017;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=dxut2mr22fMNLLRFpScCkRI3WvncvzduqUsDFZJ917o=;
- b=BvDqwvpHwCmXf1dmj8GgXXcPvO/AbvIDbcWqZY00OMMDxNNkwP1+PdU+0UXuRlmomR
- ihgPoA7A0BKQ8UzQLuIOkp7c6wgz6GInLMNw0sMOYqplH3M764qYlv8+b93T6pzIRQhn
- vrYJCMazwVkoIirQ2zlmHn3jnb1CRag7cDXerJZso45baLEvrEcPMCyYwZuKPZxOw8UL
- AcfAZ1BhukRLcZVmpVo5WP9KNFi0PfYZSzQG0hB/7EJx3Rnz9fEbV2on6/WeZ3xUkuIl
- JD9vGvMyAIdm8BMDyNAwPLOcMkC6PMK0GowHQ7u1kM+Iz+5MtD36i8Bdvm33PQbICTC/
- WNNA==
+ bh=9iBapWgwRqiXRlt0vE5a+EpSdNZ2hubF+RfUp2joKM4=;
+ b=OH0FqccKeRpYV1ur1jHk7aObMJIzfjkyT917fWd0uI55xiAXtvte8ti9gRwlNhQJWN
+ Exm2qlxo3B9/IYO6qzN0L1dYLlaBur9sOCQjGQjMEe4w6mL1BLtGLF2a047BV5VcGV4L
+ neSq0hTDd5Enmq+5gjGjO9Q0SQImT045VO2gc3dMggf34qFgvYqJjzI6h0DrMdz/ZraT
+ 9jqXz6GC7KJsrFVmAFi8W7Ia40zD+aj861ocujsNlGc/NiCblWmokpxXnqo8JpL/H5Tj
+ UVl5VOUuiIFNsUPvhFLmUf+dZy0kXfoOBP5f8qWI9qa+axLsH/zbhtxs6cCkaOvOntk9
+ GXHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBmTRi7i+u8tv/vaaIFxxheSuIav/0Xdz5wvBxo0mZkX4RWo2d4hBjcc/EwfqlBW44fPKICQc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwYgBY/KjbhO/Uz/JRqNS8g/4x18CDocaQ/nDtxsq47H67hGAOw
- GlYCQorm8To0PxDz7YFw23Bf+YfacNedMjCNiJfy9VJhWbbcn3YM6XsifSMcrYtt/Iw=
-X-Gm-Gg: ASbGnctdOXJQcZ/wZDfmmXHADC6DPO7JY1Q1CHPYUne6QZNKqS5J1DbFvuVGz3siRwv
- HGzSf2/8HRzjYF/glngLqiTCho2x30dkGNYfrRyhEUCgRKRq/IGhc0F4KHunhtmagrOtKUvBsSz
- 1NkuBiaTdSogoMlWFMeTCyFUQ7Og6Sq9u/gzYeIM5FhheaSGu2NBRHkTUaKnGYfAMUBvbi3LmEa
- sVqXN4PuVwiXIpZQYoNobvTWejcCm+y2XIgPoibaThd6y7otnNUEvXRBYLL/zHZgNPZcOvk1J/L
- TvmlhhG13eHncxAsSHpWerufO523QDxWnS3u0UXVjBSiob3JrbBC/QeSqbPseTiGhE2Xt9zqdwf
- wm4o6SsUm1SYzs3td6zlc0Z7m6xNoO505Ug7Tcgu/cPlfsOndVsjHvncXnNJLLVsFM77A4VSCXb
- qV48OLqIj7vg==
-X-Google-Smtp-Source: AGHT+IGbcjTrU8k26Mz7v0DR0hcSqrxSHpOMhC6jZ0m+ei0dgoXG1N+GIW6njo5BybsksmmQU+INlA==
-X-Received: by 2002:adf:b350:0:b0:3e7:41ac:45f8 with SMTP id
- ffacd0b85a97d-3e741ac4939mr2933540f8f.55.1757319120653; 
- Mon, 08 Sep 2025 01:12:00 -0700 (PDT)
+ AJvYcCX9XLxo6RtjyfSw8dMH9Wvej3HvglfS9PSGRIX76sdH3gl6fsmyBGAGFOHUqtaZf4SUVTlfWOw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNrYb8Xfm17+HB3NVBGKXZJnUj7RwXTnwW3S9R+OkGLNHaEaWK
+ yWwfDSiQGKVxpJxjKgYcjcV/Ci0bL070tLNyjqIZbiMLpAKgTfQv9i2i9h+PuE0QbAI=
+X-Gm-Gg: ASbGnctflom7fMqURRXllCb9h57kHZzLRZNNYCZRVP623d6KxvdFrjMl8ym7fDWyKNz
+ dnRnJdjaRBTeFNS4lefgj9MiFvdwkRzYfQqqMiwU/zgPUSpFT3h0o7INkDy28Ag4pv2XzoDnfaF
+ DnSbUJPFRYW2absBjoOTsEpujbw/y6Z1Dh0C/AlVup+iAkfoeuwH3sZrXmb7F/FtNQwZtAXf3vp
+ s07AX5T71Tzfc/ImSLKULZKDudHBPTPAYo+nItu8OBP9M2Khdc7ggHZ401Khtd3+NAFUuwZVtlh
+ Jv9Bof1PCD1d9beUSJlD/eOAFt3wqQr0v6/rFDIyb9GrJ8NMXNBevk37whcctktdgo+u6svXWPf
+ YOVvrtvrNmD4DjV1d/FRAFS78w+9pu2vYPF/S1OaB1ShKFbMVwKZReuYgt0FyGGxz3riAk0bDa7
+ kHkARjMP6Itg==
+X-Google-Smtp-Source: AGHT+IGpGvDX2X6HzO8xX/1OyGYK377MG/5Bb72VAJMjVsH10CJgGS4eMQppVkujYzI62FieuvBsdw==
+X-Received: by 2002:a05:6000:3106:b0:3e6:116a:8fed with SMTP id
+ ffacd0b85a97d-3e64bde97a5mr5530130f8f.45.1757319217286; 
+ Mon, 08 Sep 2025 01:13:37 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:61c1:5d31:4427:381b?
  ([2a01:e0a:3d9:2080:61c1:5d31:4427:381b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3cf34493b8csm39799320f8f.59.2025.09.08.01.11.59
+ 5b1f17b1804b1-45b9c5c89f2sm245164025e9.14.2025.09.08.01.13.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Sep 2025 01:12:00 -0700 (PDT)
-Message-ID: <199ecb7b-4c18-40fc-992a-af7535251112@linaro.org>
-Date: Mon, 8 Sep 2025 10:11:59 +0200
+ Mon, 08 Sep 2025 01:13:36 -0700 (PDT)
+Message-ID: <ac3a7c41-92d1-4045-a258-c09f80432c9c@linaro.org>
+Date: Mon, 8 Sep 2025 10:13:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFC 4/9] serial: serial_meson: add minimal non-DM driver
+Subject: Re: [PATCH RFC 8/9] board: amlogic: add kconfig fragments for SPL
 To: Ferass El Hafidi <funderscore@postmarketos.org>,
  Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -89,7 +89,7 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  ~postmarketos/upstreaming@lists.sr.ht
 References: <20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org>
- <20250907-spl-gx-v1-4-37395d9ff5af@postmarketos.org>
+ <20250907-spl-gx-v1-8-37395d9ff5af@postmarketos.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -116,9 +116,9 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250907-spl-gx-v1-4-37395d9ff5af@postmarketos.org>
+In-Reply-To: <20250907-spl-gx-v1-8-37395d9ff5af@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -137,177 +137,192 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 07/09/2025 16:36, Ferass El Hafidi wrote:
-> It is very limited and minimal, only implements putc/puts.
-> This minimal driver is intended to be used in SPL, and other
-> size-constrained situations.
+> Add kconfig fragments for building SPL binaries for:
+>   · ODROID-C2
+>   · Videostrong KII Pro
+>   · Libre Computer LePotato (1 GB and 2 GB variants)
 > 
 > Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 > ---
->   drivers/serial/serial.c       |   2 +
->   drivers/serial/serial_meson.c | 112 +++++++++++++++++++++++++++++++++++++++++-
->   2 files changed, 113 insertions(+), 1 deletion(-)
+>   board/amlogic/p200/spl-odroid-c2.config           | 37 ++++++++++++++++++++++
+>   board/amlogic/p200/spl-videostrong-kii-pro.config | 38 +++++++++++++++++++++++
+>   board/amlogic/p212/spl-libretech-cc-1gb.config    | 36 +++++++++++++++++++++
+>   board/amlogic/p212/spl-libretech-cc-2gb.config    | 38 +++++++++++++++++++++++
+>   4 files changed, 149 insertions(+)
 > 
-> diff --git a/drivers/serial/serial.c b/drivers/serial/serial.c
-> index e10ca6eef768502ea32bf39a41ae2e3ccd168c66..c0b1eb3056181b95e1861f1ce08fcd82ff81eb71 100644
-> --- a/drivers/serial/serial.c
-> +++ b/drivers/serial/serial.c
-> @@ -129,6 +129,7 @@ serial_initfunc(pxa_serial_initialize);
->   serial_initfunc(smh_serial_initialize);
->   serial_initfunc(sh_serial_initialize);
->   serial_initfunc(mtk_serial_initialize);
-> +serial_initfunc(meson_serial_initialize);
->   
->   /**
->    * serial_register() - Register serial driver with serial driver core
-> @@ -167,6 +168,7 @@ int serial_initialize(void)
->   	smh_serial_initialize();
->   	sh_serial_initialize();
->   	mtk_serial_initialize();
-> +	meson_serial_initialize();
->   
->   	serial_assign(default_serial_console()->name);
->   
-> diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
-> index bb79b9729579a661084425d6b3c5357da31dc3c0..981ea5e159062b7d13885325e17b833145281158 100644
-> --- a/drivers/serial/serial_meson.c
-> +++ b/drivers/serial/serial_meson.c
-> @@ -3,9 +3,11 @@
->    * (C) Copyright 2016 Beniamino Galvani <b.galvani@gmail.com>
->    */
->   
-> +#if CONFIG_IS_ENABLED(DM_SERIAL)
->   #include <dm.h>
-> -#include <errno.h>
->   #include <fdtdec.h>
-> +#endif
-> +#include <errno.h>
->   #include <linux/kernel.h>
->   #include <linux/bitops.h>
->   #include <linux/compiler.h>
-> @@ -51,6 +53,7 @@ struct meson_serial_plat {
->   #define AML_UART_REG5_USE_NEW_BAUD	BIT(23) /* default 1 (use new baud rate register) */
->   #define AML_UART_REG5_BAUD_MASK		0x7fffff
->   
-> +#if CONFIG_IS_ENABLED(DM_SERIAL)
->   static u32 meson_calc_baud_divisor(ulong src_rate, u32 baud)
->   {
->   	/*
-> @@ -245,6 +248,113 @@ U_BOOT_DRIVER(serial_meson) = {
->   	.plat_auto	= sizeof(struct meson_serial_plat),
->   };
->   
-> +DM_DRIVER_ALIAS(serial_meson, amlogic_meson_gx_uart);
-
-Why is this needed ?
-
+> diff --git a/board/amlogic/p200/spl-odroid-c2.config b/board/amlogic/p200/spl-odroid-c2.config
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..d5ea295bc6d281f3d7770cc841ccbae5aee468a4
+> --- /dev/null
+> +++ b/board/amlogic/p200/spl-odroid-c2.config
+> @@ -0,0 +1,37 @@
+> +#
+> +# U-Boot SPL fragment for odroid-c2
+> +#
 > +
-> +#else
+> +CONFIG_SPL=y
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_SPL_TEXT_BASE=0xd9001000
+> +CONFIG_SPL_STACK=0xd9013000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
+> +CONFIG_SPL_HAVE_INIT_STACK=y
+> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
+> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +# CONFIG_SPL_SERIAL_PRESENT is not set
+> +# CONFIG_SPL_SHA1 is not set
 > +
-> +static int meson_serial_init(void)
-> +{
-> +	struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
-> +	u32 val;
+> +# Enable MMC and serial drivers
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_DRIVERS_MISC=y
+> +CONFIG_SPL_MMC=y
+> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
+> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
 > +
-> +	val = readl(&uart->control);
-> +	val |= (AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
-> +	writel(val, &uart->control);
-> +	val &= ~(AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
-> +	writel(val, &uart->control);
-> +	val |= (AML_UART_RX_EN | AML_UART_TX_EN);
-> +	writel(val, &uart->control);
+> +# Image things
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
+> +CONFIG_SPL_MAX_SIZE=0xb000
+> +CONFIG_SPL_PAD_TO=0x1fe00
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SPL_OF_CONTROL=y
+> +# DRAM configuration
+> +CONFIG_DRAM_SIZE=2048
+> +CONFIG_DRAM_2T_MODE=y
+> +CONFIG_DRAM_TWO_IDENTICAL_RANKS=y
+> diff --git a/board/amlogic/p200/spl-videostrong-kii-pro.config b/board/amlogic/p200/spl-videostrong-kii-pro.config
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..5b3ba9d990840411ef3cef3db3c6aa9d7085b3ef
+> --- /dev/null
+> +++ b/board/amlogic/p200/spl-videostrong-kii-pro.config
+> @@ -0,0 +1,38 @@
+> +#
+> +# U-Boot SPL fragment for videostrong-kii-pro
+> +#
 > +
-> +	return 0;
-> +}
+> +CONFIG_SPL=y
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_SPL_TEXT_BASE=0xd9001000
+> +CONFIG_SPL_STACK=0xd9013000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
+> +CONFIG_SPL_HAVE_INIT_STACK=y
+> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
+> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +# CONFIG_SPL_SERIAL_PRESENT is not set
+> +# CONFIG_SPL_SHA1 is not set
 > +
-> +static int meson_serial_stop(void)
-> +{
-> +	return 0;
-> +}
+> +# Enable MMC and serial drivers
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_DRIVERS_MISC=y
+> +CONFIG_SPL_MMC=y
+> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
+> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
 > +
-> +static void meson_serial_setbrg(void)
-> +{
-> +}
+> +# Image things
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
+> +CONFIG_SPL_MAX_SIZE=0xb000
+> +CONFIG_SPL_PAD_TO=0x1fe00
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SPL_OF_CONTROL=y
+> +# DRAM configuration
+> +CONFIG_DRAM_SIZE=2048
+> +CONFIG_DRAM_2T_MODE=y
+> +CONFIG_DRAM_TWO_DIFF_RANKS=y
 > +
-> +static void meson_serial_putc(const char ch)
-> +{
-> +	struct meson_uart *uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
+> diff --git a/board/amlogic/p212/spl-libretech-cc-1gb.config b/board/amlogic/p212/spl-libretech-cc-1gb.config
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..f58bb69325980d582d2d826ebbf28e4700965dfb
+> --- /dev/null
+> +++ b/board/amlogic/p212/spl-libretech-cc-1gb.config
+> @@ -0,0 +1,36 @@
+> +#
+> +# U-Boot SPL fragment for libretech-cc (1 GB variant)
+> +#
 > +
-> +	/* On '\n' also do '\r' */
-> +	if (ch == '\n')
-> +		meson_serial_putc('\r');
+> +CONFIG_SPL=y
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_SPL_TEXT_BASE=0xd9001000
+> +CONFIG_SPL_STACK=0xd9013000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
+> +CONFIG_SPL_HAVE_INIT_STACK=y
+> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
+> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +# CONFIG_SPL_SERIAL_PRESENT is not set
+> +# CONFIG_SPL_SHA1 is not set
 > +
-> +	while (readl(&uart->status) & AML_UART_TX_FULL)
-> +		;
+> +# Enable MMC and serial drivers
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_DRIVERS_MISC=y
+> +CONFIG_SPL_MMC=y
+> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
+> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
 > +
-> +	writel(ch, &uart->wfifo);
-> +}
+> +# Image things
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
+> +CONFIG_SPL_MAX_SIZE=0xb000
+> +CONFIG_SPL_PAD_TO=0x1fe00
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SPL_OF_CONTROL=y
+> +# DRAM configuration
+> +CONFIG_DRAM_2T_MODE=y
+> +CONFIG_DRAM_DQS_CORR=y
+> diff --git a/board/amlogic/p212/spl-libretech-cc-2gb.config b/board/amlogic/p212/spl-libretech-cc-2gb.config
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..65d700558e65ca8d819f397a0153be8bf07ae702
+> --- /dev/null
+> +++ b/board/amlogic/p212/spl-libretech-cc-2gb.config
+> @@ -0,0 +1,38 @@
+> +#
+> +# U-Boot SPL fragment for libretech-cc (2 GB variant)
+> +#
 > +
-> +static void meson_serial_puts(const char *s)
-> +{
-> +	while (*s)
-> +		meson_serial_putc(*s++);
-> +}
+> +CONFIG_SPL=y
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_SPL_TEXT_BASE=0xd9001000
+> +CONFIG_SPL_STACK=0xd9013000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0xd900c000
+> +CONFIG_SPL_HAVE_INIT_STACK=y
+> +CONFIG_SPL_BSS_MAX_SIZE=0x1000
+> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +# CONFIG_SPL_SERIAL_PRESENT is not set
+> +# CONFIG_SPL_SHA1 is not set
 > +
-> +static int meson_serial_getc(void)
-> +{
-> +	struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
-> +	uint32_t status = readl(&uart->status);
+> +# Enable MMC and serial drivers
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_DRIVERS_MISC=y
+> +CONFIG_SPL_MMC=y
+> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
+> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
+> +# CONFIG_SYS_MMCSD_FS_BOOT is not set
 > +
-> +	if (status & AML_UART_RX_EMPTY)
-> +		return -EAGAIN;
-> +
-> +	if (status & AML_UART_ERR) {
-> +		u32 val = readl(&uart->control);
-> +
-> +		/* Clear error */
-> +		val |= AML_UART_CLR_ERR;
-> +		writel(val, &uart->control);
-> +		val &= ~AML_UART_CLR_ERR;
-> +		writel(val, &uart->control);
-> +
-> +		/* Remove spurious byte from fifo */
-> +		readl(&uart->rfifo);
-> +		return -EIO;
-> +	}
-> +
-> +	return readl(&uart->rfifo) & 0xff;
-> +}
-> +
-> +static int meson_serial_tstc(void)
-> +{
-> +	struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
-> +	uint32_t status = readl(&uart->status);
-> +
-> +	if (status & AML_UART_RX_EMPTY)
-> +		return 0;
-> +	return 1;
-> +}
-> +
-> +struct serial_device meson_serial_device = {
-> +	.name	= "meson_serial",
-> +	.start	= meson_serial_init,
-> +	.stop	= meson_serial_stop,
-> +	.setbrg	= meson_serial_setbrg,
-> +	.getc	= meson_serial_getc,
-> +	.tstc	= meson_serial_tstc,
-> +	.putc	= meson_serial_putc,
-> +	.puts	= meson_serial_puts,
-> +};
-> +
-> +void meson_serial_initialize(void)
-> +{
-> +	serial_register(&meson_serial_device);
-> +}
-> +
-> +__weak struct serial_device *default_serial_console(void)
-> +{
-> +	return &meson_serial_device;
-> +}
-> +
-> +#endif
-> +
->   #ifdef CONFIG_DEBUG_UART_MESON
->   
->   #include <debug_uart.h>
+> +# Image things
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
+> +CONFIG_SPL_MAX_SIZE=0xb000
+> +CONFIG_SPL_PAD_TO=0x1fe00
+> +CONFIG_SPL_ATF=y
+> +CONFIG_SPL_OF_CONTROL=y
+> +# DRAM configuration
+> +CONFIG_DRAM_SIZE=2048
+> +CONFIG_DRAM_2T_MODE=y
+> +CONFIG_DRAM_DQS_CORR=y
+> +CONFIG_DRAM_TWO_IDENTICAL_RANKS=y
 > 
 
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
