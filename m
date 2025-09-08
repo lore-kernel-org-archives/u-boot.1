@@ -4,56 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B909CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 04:23:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95264CA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 04:36:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DFA880422;
-	Tue,  9 Sep 2025 06:23:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0429C80422;
+	Tue,  9 Sep 2025 06:36:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="syJYxzG9";
+	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="kElZeM55";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="olBpgmdw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 352FC80422; Tue,  9 Sep 2025 06:23:16 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id D030F82A9E; Tue,  9 Sep 2025 01:39:42 +0200 (CEST)
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9376A82A9E
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 06:23:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id B23B3800B6
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 01:39:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=mainlining.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6F2916013C;
- Tue,  9 Sep 2025 04:23:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 747E9C4CEF4;
- Tue,  9 Sep 2025 04:23:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1757391791;
- bh=8UQai/vt5N0MEUKyCFKhGVGeYmm7Rc6zTesgUdxh0go=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=syJYxzG9gCN3+GT0pS7Ssz3wlxzJkEkZmBNTGtOg5jt4+YGR1yMA0KB4Gnf8rhpmS
- VGeY+168c+oBqa4lxFfpeC27Dq7smt0P5rh9AdJnVqR5c96LubQ6TmMRM1cavASxSk
- Uun+bE3iVjzbkq/2hsVc25uv9Cc8YRBEAx7dXq4cp3j6OC2uJurifeRbNmIKnsOpzp
- t14IixBnkNB84DScdqjl79IexijnPuH2vCGaR4s1el8WUXQUbzl6oGltflAywiqpQK
- iUqp+pcLLTgb1KrzTvos7DdHDRKCyqkQmxh42DEXyIj9FQ9iRnGVPRKyE+bBHbqL0r
- 6MP14A+k/c2GQ==
-Date: Tue, 9 Sep 2025 09:53:04 +0530
-From: Sumit Garg <sumit.garg@kernel.org>
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Tom Rini <trini@konsulko.com>, Sam Day <me@samcday.com>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/6] Fix UART autoboot issues on DragonBoard 410c
-Message-ID: <aL-rqObot0iTQiHC@sumit-X1>
-References: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
+ spf=pass smtp.mailfrom=adrian@mainlining.org
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=From:To:Subject:Date:Message-ID; t=1757374375; bh=07QapfHa7jdpdk6vAoY0xe3
+ 78E9+kgfpbR1pz1qS9Kc=; b=kElZeM55rUJ5U8oIiJi8ilTn5wUhgcbQEc8w9hNYAIE84tFGvG
+ ljT97AGPQkh76vyAgfGqubgrX0/rl1jXFQJibVUfbmbfJ44BfOuLETkM3HEqHOUQnhbuz6nVTNr
+ yZeBOWsU8PMOFjPPp0ENGQ2u5BvHxDTqwo60E0RaOm0ICw4XFFcwlWy78+TArdy9K0+cM2HSFvu
+ 6r/+phzbITQTxBGmG4htPxsPrX4xsXkYEDIeWVOpvkZNjFahKCJ/MDOeGaCEZqJsi4JxuVwYTBY
+ URjcI8aTmI11j6oMaL5OXw0p60/rLvxAu9LFyZPTfLPHNpEG8n8yZC9BGa0GrIAdV3w==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=From:To:Subject:Date:Message-ID; t=1757374375; bh=07QapfHa7jdpdk6vAoY0xe3
+ 78E9+kgfpbR1pz1qS9Kc=; b=olBpgmdwoxVR9E/hriMDZsANKXdZpD0D2tGmrK7YjIGr8WFjIF
+ dH13l2fO3ETvibmcD+8lRMth4tQdqjxk6xDw==;
+Message-ID: <b6e82030-303d-4f10-933d-7267da3b8558@mainlining.org>
+Date: Tue, 9 Sep 2025 01:32:53 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] pinctrl: qcom: add SM7150 pinctrl driver
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
+ Julius Lehmann <lehmanju@devpi.de>,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Alexey Minnekhanov <alexeymin@postmarketos.org>
+Cc: Danila Tikhonov <danila@jiaxyga.com>, Luca Weiss <luca@lucaweiss.eu>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250831004602.699953-1-adrian@mainlining.org>
+ <20250831004602.699953-3-adrian@mainlining.org>
+ <0343bb3c-f13f-4cc9-a972-e9fae200f476@linaro.org>
+Content-Language: en-US
+From: Jens Reidel <adrian@mainlining.org>
+In-Reply-To: <0343bb3c-f13f-4cc9-a972-e9fae200f476@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Tue, 09 Sep 2025 06:36:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,60 +84,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 08, 2025 at 01:31:20PM +0200, Stephan Gerhold wrote:
-> There have been issues with autoboot on DB410c for years, where autoboot
-> gets interrupted by spurious input on the UART console. I've tried fixing
-> this back in 2021, but it turned out this fix was not enough. Looking into
-> it further, there are two separate issues to fix:
+On 9/4/25 3:53 PM, Casey Connolly wrote:
 > 
->  - Spurious input with UART disconnected: The RX pin is floating in this
->    case, resulting in garbage or a UART break event (0x00 byte). This is
->    interpreted as input in the autoboot prompt. Fix this by adding
->    bias-pull-up for the RX pin. I've made this change upstream in Linux
->    6.16 for all MSM8916/MSM8939 devices and it has already landed in U-Boot
->    through the recent subtree update of dts/upstream.
 > 
->  - Spurious input when querying console size with UART connected: It's
->    unclear why this happens, but it seems to be some issue in the overly
->    complex implementation of 4-character packing mode in the serial_msm
->    driver. Fix this by switching the driver to use the more simple
->    single-character mode, which doesn't have this issue.
+> On 31/08/2025 02:46, Jens Reidel wrote:
+>> From: Danila Tikhonov <danila@jiaxyga.com>
+>>
+>> This SoC features a pinctrl block with north, south, and west tiles
+>> accessible to the AP.
+>>
+>> Signed-off-by: Danila Tikhonov <danila@jiaxyga.com>
+>> Co-developed-by: Jens Reidel <adrian@mainlining.org>
+>> Signed-off-by: Jens Reidel <adrian@mainlining.org>
+>> ---
+>>   drivers/pinctrl/qcom/Kconfig          |   7 ++
+>>   drivers/pinctrl/qcom/Makefile         |   1 +
+>>   drivers/pinctrl/qcom/pinctrl-sm7150.c | 142 ++++++++++++++++++++++++++
+>>   3 files changed, 150 insertions(+)
+>>   create mode 100644 drivers/pinctrl/qcom/pinctrl-sm7150.c
+>>
+>> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+>> index 21f81b66099..d83ede21c75 100644
+>> --- a/drivers/pinctrl/qcom/Kconfig
+>> +++ b/drivers/pinctrl/qcom/Kconfig
+>> @@ -89,6 +89,13 @@ config PINCTRL_QCOM_SM6115
+>>   	  Say Y here to enable support for pinctrl on the Snapdragon SM6115 SoC,
+>>   	  as well as the associated GPIO driver.
+>>   
+>> +config PINCTRL_QCOM_SM7150
+>> +	bool "Qualcomm SM7150 GCC"
+>> +	select PINCTRL_QCOM
+>> +	help
+>> +	  Say Y here to enable support for pinctrl on the Snapdragon SM7150 SoC,
+>> +	  as well as the associated GPIO driver.
+>> +
+>>   config PINCTRL_QCOM_SM8150
+>>   	bool "Qualcomm SM8150 Pinctrl"
+>>   	select PINCTRL_QCOM
+>> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+>> index 6cb53838e71..73c08a02a3d 100644
+>> --- a/drivers/pinctrl/qcom/Makefile
+>> +++ b/drivers/pinctrl/qcom/Makefile
+>> @@ -15,6 +15,7 @@ obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
+>>   obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
+>>   obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+>>   obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+>> +obj-$(CONFIG_PINCTRL_QCOM_SM7150) += pinctrl-sm7150.o
+>>   obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+>>   obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
+>>   obj-$(CONFIG_PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
+>> diff --git a/drivers/pinctrl/qcom/pinctrl-sm7150.c b/drivers/pinctrl/qcom/pinctrl-sm7150.c
+>> new file mode 100644
+>> index 00000000000..435ba39b1db
+>> --- /dev/null
+>> +++ b/drivers/pinctrl/qcom/pinctrl-sm7150.c
+>> @@ -0,0 +1,142 @@
+>> +// SPDX-License-Identifier: BSD-3-Clause
+>> +/*
+>> + * Pinctrl driver for Qualcomm SM7150
+>> + *
+>> + * (C) Copyright 2025 Danila Tikhonov <danila@jiaxyga.com>
+>> + * (C) Copyright 2025 Jens Reidel <adrian@mainlining.org>
+>> + *
+>> + * Based on Linux Kernel driver
+>> + */
+>> +
+>> +#include <dm.h>
+>> +
+>> +#include "pinctrl-qcom.h"
+>> +
+>> +#define WEST	0x00000000
+>> +#define NORTH	0x00400000
+>> +#define SOUTH	0x00800000
+>> +
+>> +#define MAX_PIN_NAME_LEN 32
+>> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
+>> +
+>> +static const struct pinctrl_function msm_pinctrl_functions[] = {
+>> +	{ "qup12", 1 },
+>> +	{ "gpio",  0 },
+>> +	{ "sdc2_clk", 0 } /* special pin GPIO124 */
+>> +};
+>> +
+>> +#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
+>> +	{						\
+>> +		.name = pg_name,			\
+>> +		.ctl_reg = ctl,				\
+>> +		.io_reg = 0,				\
+>> +		.pull_bit = pull,			\
+>> +		.drv_bit = drv,				\
+>> +		.oe_bit = -1,				\
+>> +		.in_bit = -1,				\
+>> +		.out_bit = -1,				\
+>> +	}
+>> +
+>> +#define UFS_RESET(pg_name, offset)			\
+>> +	{						\
+>> +		.name = pg_name,			\
+>> +		.ctl_reg = offset,			\
+>> +		.io_reg = offset + 0x4,			\
+>> +		.pull_bit = 3,				\
+>> +		.drv_bit = 0,				\
+>> +		.oe_bit = -1,				\
+>> +		.in_bit = -1,				\
+>> +		.out_bit = 0,				\
+>> +	}
+>> +
+>> +static const struct msm_special_pin_data msm_special_pins_data[] = {
+>> +	[0] = UFS_RESET("ufs_reset", 0x9f000),
+>> +	[1] = SDC_QDSD_PINGROUP("sdc1_rclk", WEST + 0x9a000, 15, 0),
+>> +	[2] = SDC_QDSD_PINGROUP("sdc1_clk", WEST + 0x9a000, 13, 6),
+>> +	[3] = SDC_QDSD_PINGROUP("sdc1_cmd", WEST + 0x9a000, 11, 3),
+>> +	[4] = SDC_QDSD_PINGROUP("sdc1_data", WEST + 0x9a000, 9, 0),
+>> +	[5] = SDC_QDSD_PINGROUP("sdc2_clk", SOUTH + 0x98000, 14, 6),
+>> +	[6] = SDC_QDSD_PINGROUP("sdc2_cmd", SOUTH + 0x98000, 11, 3),
+>> +	[7] = SDC_QDSD_PINGROUP("sdc2_data", SOUTH + 0x98000, 9, 0),
+>> +};
+>> +
+>> +static const unsigned int sm7150_pin_offsets[] = {
+>> +	[0] = SOUTH,	[1] = SOUTH,	[2] = SOUTH,	[3] = SOUTH,
+>> +	[4] = NORTH,	[5] = NORTH,	[6] = NORTH,	[7] = NORTH,
+>> +	[8] = NORTH,	[9] = NORTH,	[10] = NORTH,	[11] = NORTH,
+>> +	[12] = SOUTH,	[13] = SOUTH,	[14] = SOUTH,	[15] = SOUTH,
+>> +	[16] = SOUTH,	[17] = SOUTH,	[18] = SOUTH,	[19] = SOUTH,
+>> +	[20] = SOUTH,	[21] = SOUTH,	[22] = SOUTH,	[23] = SOUTH,
+>> +	[24] = SOUTH,	[25] = SOUTH,	[26] = SOUTH,	[27] = SOUTH,
+>> +	[28] = SOUTH,	[29] = NORTH,	[30] = SOUTH,	[31] = WEST,
+>> +	[32] = NORTH,	[33] = NORTH,	[34] = SOUTH,	[35] = SOUTH,
+>> +	[36] = SOUTH,	[37] = SOUTH,	[38] = SOUTH,	[39] = SOUTH,
+>> +	[40] = SOUTH,	[41] = SOUTH,	[42] = NORTH,	[43] = NORTH,
+>> +	[44] = NORTH,	[45] = NORTH,	[46] = NORTH,	[47] = NORTH,
+>> +	[48] = WEST,	[49] = WEST,	[50] = WEST,	[51] = WEST,
+>> +	[52] = WEST,	[53] = WEST,	[54] = WEST,	[55] = WEST,
+>> +	[56] = WEST,	[57] = WEST,	[58] = WEST,	[59] = NORTH,
+>> +	[60] = NORTH,	[61] = NORTH,	[62] = NORTH,	[63] = NORTH,
+>> +	[64] = NORTH,	[65] = NORTH,	[66] = NORTH,	[67] = NORTH,
+>> +	[68] = NORTH,	[69] = NORTH,	[70] = NORTH,	[71] = NORTH,
+>> +	[72] = NORTH,	[73] = NORTH,	[74] = WEST,	[75] = WEST,
+>> +	[76] = WEST,	[77] = WEST,	[78] = WEST,	[79] = WEST,
+>> +	[80] = WEST,	[81] = WEST,	[82] = WEST,	[83] = WEST,
+>> +	[84] = WEST,	[85] = WEST,	[86] = NORTH,	[87] = NORTH,
+>> +	[88] = NORTH,	[89] = NORTH,	[90] = NORTH,	[91] = NORTH,
+>> +	[92] = NORTH,	[93] = NORTH,	[94] = SOUTH,	[95] = WEST,
+>> +	[96] = WEST,	[97] = WEST,	[98] = WEST,	[99] = WEST,
+>> +	[100] = WEST,	[101] = NORTH,	[102] = NORTH,	[103] = NORTH,
+>> +	[104] = WEST,	[105] = NORTH,	[106] = NORTH,	[107] = WEST,
+>> +	[108] = SOUTH,	[109] = SOUTH,	[110] = NORTH,	[111] = NORTH,
+>> +	[112] = NORTH,	[113] = NORTH,	[114] = NORTH,	[115] = NORTH,
+>> +	[116] = NORTH,	[117] = NORTH,	[118] = NORTH,
+>> +};
+>> +
+>> +static const char *sm7150_get_function_name(struct udevice *dev, unsigned int selector)
+>> +{
+>> +	return msm_pinctrl_functions[selector].name;
+>> +}
+>> +
+>> +static const char *sm7150_get_pin_name(struct udevice *dev,
+>> +				       unsigned int selector)
+>> +{
+>> +	if (selector >= 119 && selector <= 126)
 > 
-> With these patches, autoboot is finally working reliably on DragonBoard
-> 410c (and hopefully will remain so for the future :-)).
+> This should be && select <= 127, since there are 8 special pins.
+> We should really update all the drivers to use ARRAY_LENGTH macros
+> rather than doing all the maths by hand since so many have had errors at
+> this point ahaha
 > 
-> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
-> ---
-> Changes in v2:
-> - Rebase on top of U-Boot master and fix conflicts
-> - Drop backported upstream DT changes (already landed through recent
->   subtree merge of DT changes in Linux 6.16)
-> - Link to v1: https://lore.kernel.org/r/20250624-db410c-autoboot-fixes-v1-0-d96c97ae41d1@linaro.org
+> Kind regards,
 
-Nice fixes and cleanup, FWIW:
+Are you sure? I think this is correct, since start and end of the
+range are inclusive, so 119-126 are 8 GPIOs in total. The total
+pin count is also 126.
 
-Acked-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Best regards,
+Jens
 
--Sumit
+>> +		snprintf(pin_name, MAX_PIN_NAME_LEN,
+>> +			 msm_special_pins_data[selector - 119].name);
+>> +	else
+>> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>> +
+>> +	return pin_name;
+>> +}
+>> +
+>> +static int sm7150_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
+>> +{
+>> +	return msm_pinctrl_functions[selector].val;
+>> +}
+>> +
+>> +static struct msm_pinctrl_data sm7150_data = {
+>> +	.pin_data = {
+>> +		.pin_offsets = sm7150_pin_offsets,
+>> +		.pin_count = 126,
+>> +		.special_pins_start = 119,
+>> +		.special_pins_data = msm_special_pins_data,
+>> +	},
+>> +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
+>> +	.get_function_name = sm7150_get_function_name,
+>> +	.get_function_mux = sm7150_get_function_mux,
+>> +	.get_pin_name = sm7150_get_pin_name,
+>> +};
+>> +
+>> +static const struct udevice_id msm_pinctrl_ids[] = {
+>> +	{ .compatible = "qcom,sm7150-tlmm", .data = (ulong)&sm7150_data },
+>> +	{ /* sentinel */ }
+>> +};
+>> +
+>> +U_BOOT_DRIVER(pinctrl_sm7150) = {
+>> +	.name		= "pinctrl_sm7150",
+>> +	.id		= UCLASS_NOP,
+>> +	.of_match	= msm_pinctrl_ids,
+>> +	.ops		= &msm_pinctrl_ops,
+>> +	.bind		= msm_pinctrl_bind,
+>> +};
+> 
 
-> 
-> ---
-> Stephan Gerhold (6):
->       board: dragonboard410c: Drop now unneeded bootph-all for console
->       Revert "serial: serial_msm: Delay initialization to let pins stabilize"
->       serial: msm: Cleanup register naming
->       serial: msm: Reset after writing to DMEN
->       serial: msm: Re-enable after resetting
->       serial: msm: Use single character mode
-> 
->  arch/arm/dts/apq8016-sbc-u-boot.dtsi |   9 ---
->  drivers/serial/serial_msm.c          | 127 ++++++++---------------------------
->  2 files changed, 29 insertions(+), 107 deletions(-)
-> ---
-> base-commit: 328747974a0620d0996113fe2b3906b06e96de00
-> change-id: 20250419-db410c-autoboot-fixes-ad7f4f5973a8
-> 
-> Best regards,
-> -- 
-> Stephan Gerhold <stephan.gerhold@linaro.org>
-> 
