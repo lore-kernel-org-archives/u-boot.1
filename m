@@ -4,81 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4E4DCA1013
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 08:52:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AEE3CAC581
+	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 09:01:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 394B2809A5;
-	Mon,  8 Sep 2025 10:52:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D6742809A5;
+	Mon,  8 Sep 2025 11:01:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gZQUYG7K";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="mU78cvxl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30D0982C84; Mon,  8 Sep 2025 10:52:52 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 934F182AE9; Mon,  8 Sep 2025 11:01:55 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 323A9800B6
- for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 10:52:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 851C5800B6
+ for <u-boot@lists.denx.de>; Mon,  8 Sep 2025 11:01:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=heiko.thiery@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-3380787b30eso36758771fa.2
- for <u-boot@lists.denx.de>; Mon, 08 Sep 2025 01:52:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757321569; x=1757926369; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=N1c/Ii3muJus7dl/hrzhHwRFBFt+eBuArJKt441WINk=;
- b=gZQUYG7K0lu5Dhg8Q5azPwuMMa7QucS7e54PSiUiQ3lTqZzQQiRkds7+V3pWflE74n
- bT+wy9pXSRR7EHw+Pf+kFSPDi5KQcTjLjb6rW24YyyJM0QdXBVsk4/a6f9+MEEWhYpCO
- HMZFn/DilJtVk0KMFL8N11BI4hO1P7ZJ4hTuJleN1F4mSjzvl+yuMVlwWB898LXgjjvY
- bCPoccKQljsXabWuwf6KPczFY+rxlc0SYMlRX5RTtHuZqbQSlD30MuqDlXdbJa+NuHNF
- pN2QzrlAi8tIyT6mLWf+LrUOGX+NahZWGkGTXFksFPTrKYBCPQmRYcyW0SzFHvgvDwMw
- AySA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757321569; x=1757926369;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=N1c/Ii3muJus7dl/hrzhHwRFBFt+eBuArJKt441WINk=;
- b=T/4H9oMTqDfPcgPiC4VqPFVREAVQaCID2MSHr14+cJN2hZEyZKOeKA8CKQCo3nIuzY
- jijYvtLwSxcd9G9hj2JOGWo/PeI4odYhveFzj4LogSpk5WPOpnXKRMJ6kEfxb3mvQfiv
- YwoEjgb3UVIrSOplaLPfro9c1WUyREZOO8rW8cLR7Js142loTNJrWdVCXC6Gv77Wdm5o
- RzdXJtiaci8g/DvZe95d9VRzAS4cpZ6E6yBN97WoC00U2/qm9VRk65AlRNey6/jCtuq4
- bUY5fRJtM1MvffwAJIbkPtN34ysbBmYhm0L6JdaG88+q1v+inJQAhsqQEHCbrWSbi1RA
- pWVQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXcIRLZvfpkdOXuXYQAGmkY7RLt2j4xMHvhHJZC1t11Zf3VZC5g3wytTM05sL1EYJpa1GOzHno=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCBdMrLQ4828MNX9Jr+K2+zoOAB3mzA/rU5LKnLQKCsf4JqZL3
- XmlcyOzGWtCmjC12A93pEylBNL/rkEhVsZkv9vGJhmOoozW3BSOUQ5+MlVorjdOY2ScH+mH4dPz
- GIYe9FAAd2zmSChUVw7PdUJqgVSGPlx0=
-X-Gm-Gg: ASbGncvqV1Y3iQSDwm/DZ8OtxvUW8fM97ji0VNXLJXGJmZNITtzTIYzvYrU9L2l/Y2Z
- Xu8GyQ2MS05VAVuIXzS2sX5gSokE2jacHDWQavgcRya+yL0DEfCvqMSW/B8I6I4QrSL0io9AA2p
- SHDvsTyn8tn3v4DIb4KF4REYNdr1d+M9dP7ItmS5zdmgy6cqET91EguoXMXcBYUr2FnBYsH2gdB
- U7TbpexHFTeqfGUkuk=
-X-Google-Smtp-Source: AGHT+IFd8QBP+kpjE9vntvOOI3zbNNcYe3LDIJunWA23ZZWsye0euT7IuJrWW3kkIPeo+PB38pbgk9qWAFAvYunbOhY=
-X-Received: by 2002:a05:651c:2221:b0:336:8267:c1fa with SMTP id
- 38308e7fff4ca-33b4dab7931mr16543441fa.19.1757321569129; Mon, 08 Sep 2025
- 01:52:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=peIW3BlKJhEopNG1mNkWg25jT0ZRrAddgXLldgVvS83mu3R5hjn6dPIJsbxHy7EV2E0BZ8k/OLtuqROseJKCzIk4+HtYbZqk73Uo0kwNZAuD2NJAUM/YobQz0mJ/M4rodV2tszfSezycTcNnROLxfyabs+vD1CRRH7GMOHqtxEYmgb+2y5t4RxLzJJZNeKdHHXPqJDwbMB+iekLThfez5fX2BvefXN5Ttd0mUGNY3S/J9U0lsIboFN30Od0HSnfDLRlbfgW1Jn/KONXGZEjjBPwgsPH5JNpkqCUnRp0ufTWr3TOKOx9S+kpwSOzScyoli/TnofH101P+9uSjjxpGsw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=A+RbdPzLMMItHZx9PPZs0N02/XPXZFA1/FT0jHJ4RII=;
+ b=rvAnPNkUzUczpefIa6I1nqWMUhBXE2cVvJUKAUOHSxIHbyaNxMkALTIiKL6zcNQX4BWCeDnte8YJDPn7sbbb59yagS8iIfFp4qerkBpFhh8aYHAS/UDwD+csgBfKRFd65DKTN4LGzmp1xj2Uhz0bESwhrV1Cs1Bz4z/vN6OrDG5NHxeNszOttiKXBIsYUMUamZgzCWkeDR3Cu41f+uo7EtpZWyDkJ1rgQkWZUThcvtELDBB8St5VCJI716HLhDqOLSAyOEyq9owx5dC3wG7oBHWDmnPmE5GPZ+tTn99jIpVr9HtlnPtbvBuSaqAfTXmEFJ6t2/mnAvUbuhDVmMFPJA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=A+RbdPzLMMItHZx9PPZs0N02/XPXZFA1/FT0jHJ4RII=;
+ b=mU78cvxlSklEg/lv5x9zQlhxvhBMUComicdp/h6JW4wm6eiUEpQ2Jr2LDY5GwMoHEWkuzIoU7M/fqkCgLlflgTp8evJr0PL5DCD3CdFQ/DworXYMMOZQ/RzsoWD3YbOH0j7v1irBbgl9oho66e7+ORlk6M5vH4uKDtPTYSGJvNk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DU2PR04MB8759.eurprd04.prod.outlook.com (2603:10a6:10:2e2::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.14; Mon, 8 Sep
+ 2025 09:01:50 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9115.010; Mon, 8 Sep 2025
+ 09:01:50 +0000
+Message-ID: <bf02f69e-7385-4046-ba2c-3aeca132c744@cherry.de>
+Date: Mon, 8 Sep 2025 11:01:48 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: add README.pmic guide for PMIC/regulator framework
+To: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>, u-boot@lists.denx.de
+References: <20250902050730.5289-1-bhimeswararao.matsa@gmail.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250902050730.5289-1-bhimeswararao.matsa@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR3P281CA0179.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a0::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-References: <20250416125643.2234165-1-s-vadapalli@ti.com>
-In-Reply-To: <20250416125643.2234165-1-s-vadapalli@ti.com>
-From: Heiko Thiery <heiko.thiery@gmail.com>
-Date: Mon, 8 Sep 2025 10:52:37 +0200
-X-Gm-Features: Ac12FXxsqsHMcpp5PooWx-Io40O5mblbqERr9WkGa9m_8OLcEYXikMQjHbb7lDg
-Message-ID: <CAEyMn7ZhsU9vBeSHcPY_oJZXbA51BU50T5HXVRg=6-Ocac4ywg@mail.gmail.com>
-Subject: Re: [PATCH] net: ti: am65-cpsw-nuss: invoke phy_config() in driver's
- .start callback
-To: Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: trini@konsulko.com, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- matthias.schiffer@ew.tq-group.com, richard.genoud@bootlin.com, 
- c-vankar@ti.com, u-boot@lists.denx.de, srk@ti.com
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU2PR04MB8759:EE_
+X-MS-Office365-Filtering-Correlation-Id: eeba0815-c924-4448-9fce-08ddeeb658c5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aW5ZbklwU2N2Z0w1MittK051WkxPYjhGZkZpeXRBT29uY1NzVi92TnBuaXlk?=
+ =?utf-8?B?NWJxL3dqa0dMZmt0aXVacEVsSmNqTnBadnNQSjZURzlBNWEwcWlJZFM2U2tR?=
+ =?utf-8?B?UFpNOVhHeldoWWxWVktxOVVrQzBNekVrY0pIMGt4VW5TM2xXZGJBM0RBZjcw?=
+ =?utf-8?B?Q2pFYWZYQzVmMkpVWDRtdUFJTjlWV0xhUG02WUsraFF1VFlFRi9LNC9MVUZs?=
+ =?utf-8?B?YVg4RVZZbFkzNTRxNmhOMFJMZi9oWDNYZUpHTUxPSmJvTGdod00rR0J2UXkv?=
+ =?utf-8?B?MVZuOEJ4MmVJUWMwbCtMMm5GQjZITVpkVlBTTmxES1Jxa3g3bUNYRUtuS0c5?=
+ =?utf-8?B?dGNCUHBDV3pSRU9RNkNlWU9HWk1Tb21IbzMwVnE0MHZ2aGhMc3F0bmx6blRp?=
+ =?utf-8?B?Y2ZVVFFCRU0veVEybnQyQUYreG95SkhRaG9JS25kdTR2YUhwY3Z0Y1kxcnhK?=
+ =?utf-8?B?MkNCKzc3TlUxNk5ZajVhajNhTEIwNWtVbnE3OFJ5QUdQY0h3TW1VeWtwNFJS?=
+ =?utf-8?B?OVRudk1ZVkJUcUR5U0hWTzAxL1VaRUNnbHNYdkdzeldwS3VCWTBZempVQnpa?=
+ =?utf-8?B?YmVGdUxqTkw5a2tseG5SWk0xcDN1QXRxZ2hPVTdHdm9sNE03M2xZdy9QU1pa?=
+ =?utf-8?B?WlRtajFmVFR3RHF0YjBieHIxeThxOEFQNU9Dak9RYUNxVzc1anhYV0puMGJu?=
+ =?utf-8?B?WEVjMlUxbjFmcXZtdDBCWXl0RUpYbzd2WFVSbkM0MHlHSzBXWDZiOHBtT1VY?=
+ =?utf-8?B?VWN6TXViSDRjOGZUYVBNZVdJOEV0NVVrbHRqVlVvM1oyM1d6VnVteENFQ015?=
+ =?utf-8?B?dXhmTUtWMGEyTXVBek5GaXVMbDF4T2Rxb1NQK3JIdi9lK1lIa2c0WVZiNExn?=
+ =?utf-8?B?WlBVK2FaRXY2VSt6eFVtWDBqWDhSYUJaWG5TWkZGZzcwMG5taE02bjFCak5u?=
+ =?utf-8?B?cFNOeVNPbDkwYU00cXNnZW5aNTFYbUJtdWVSQ2lveUV6ajBLN2cvRUdESWVu?=
+ =?utf-8?B?emNHNXlOVW5vU25ESWsxa21uL096dm9WSWpFaTVsOURpNWFzOW5idk5Pc1hp?=
+ =?utf-8?B?ZkZQZXhnY2Y3TCt1Z1hsek1oU0gxdGFWQnNWNTF2NkVjVkdBQmp1dFV0clpX?=
+ =?utf-8?B?NEJkSG9Fd0lsRlNSeDlETnVlaGdDdmJHMHBTYTB6TVZWYTFGNW0xTHlLRnBO?=
+ =?utf-8?B?UG9SMEtLOTNiOU9kQmlldzVrZng5eUJ1TEdYUmVLUTBFa3l2RkZIbHU4YXlJ?=
+ =?utf-8?B?L2Fib0FuazIva3VvZ1QySzBmVWp6a1Z2c3loWVhZc3dCSTVXbHhJVk4zWG01?=
+ =?utf-8?B?cDFmTUh5NjlwMzU5SWJyeElFMDIyQ0JHc1FEVmRxOE1WMjhKUENlVnk4M1Y0?=
+ =?utf-8?B?cGtkczNPMmN0Q0FWbXlDcndCdnN6RFlQb1YxcFJ6S05iS0NSY1lBQjRGWmc3?=
+ =?utf-8?B?OWFOUTMxUFR5Y0xLZlBvTEQxNkZ0RVhtRjEwWVRHV1c0ekhSM1FPNS9CTDBw?=
+ =?utf-8?B?WTBlaHVpVmNmbm1VTTd5Ym8zU3Y5OUxkZEw0UmtsT2V4UnRPTUswQnVNNm5W?=
+ =?utf-8?B?OXBEeGVMYWFwYUZsNXVTWnRQQy9CcU1YZk9HbDBMOHJZV0tYV2dHVEh6WHdN?=
+ =?utf-8?B?VFJKTlhBWG9BSkk5bHJDWS9uM0lBaFlCRHhlZ3BkMnFqVkF2ZEYreXdoSm9w?=
+ =?utf-8?B?OUJlemczeUxJaHNkcCsvbGozYlpXOXNMY3pYSVhyQ0FtS1d4VXlmVWZQU3Nk?=
+ =?utf-8?B?ZDIwVnN5ZEhKdWRyK0oyS1B3cGZVc3pqcFI1Q2kvNUdOMTNkaTBmQkpvT1pz?=
+ =?utf-8?B?SDNHaE1sQVNyTUdHaE1YNXcrYWdTMEUxSjdsS1F2eC9oNnVCdVhYUnB6WFA1?=
+ =?utf-8?B?OXI0cVRTdThId3RLb3FseWQvbzN5MWg0bzR5UUYrZ0dKNjEyWFNiK0FOZkx3?=
+ =?utf-8?Q?DK1ma499eiI=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UFFMTnF0VkRZcTQ4Z3RFczZyNXRzWUVJbTlySmVFa01RUFdwT0ZCVFhyNmJD?=
+ =?utf-8?B?V0QwQ2lndk5ubDZsQVZSTXcwcUNwZ09FTHpEWUsrZWowNzZvVVEwV1pnQ2xW?=
+ =?utf-8?B?SDVHN3lIVGNMYkNydDdxS0Q5M0E4dDlleG5XM0p3a29na0M0NlB0UXdQc2xB?=
+ =?utf-8?B?Z0xjb0xzU09nbk4xV2tPbmZWOFBEbHREdXJOQ2d2OEwwZTFWdWJZRjc2aVp0?=
+ =?utf-8?B?UVI0QjJ3Wmg1ckZHdlpMYVBXK2pKWUxTR0p6TGJIQTVHdmU4VDVqZm9kblZO?=
+ =?utf-8?B?UEdzdGJTQkxiQStKbGZ3KzZLaFZ0eXRHMTYralpNYmxRemtZSEFITXdzOENM?=
+ =?utf-8?B?KzJwTTN0aGtBZ1RLeFQ5ckJjSVErWllmajJHYW1PWjU4Y0dEWEFwMlAybnJK?=
+ =?utf-8?B?ZzZZb3BVeGMrdFhZU3B4UnMxTSs2eVJrTjZoSWs3TUhlamkrenFqRzFNNjh1?=
+ =?utf-8?B?UGI1d1c1TDI0ZzJzWEI2TVF3RjliVjNybFRaR0pWQnF6OVBjOGFVY0s5UThu?=
+ =?utf-8?B?eldYT3ZyZEZMWVpyeGJPWFNDbXFiVXJlZ2l5SlV6dmZkUGdVREVPOFZUbE1r?=
+ =?utf-8?B?U1k5b3F5ZU1GOUFSSk51QXJVTUJQcWU5RFRzajNkU0VrWEFsZEs5bnNndzgx?=
+ =?utf-8?B?MFlJS2JnSTYyRHhpRlVJd2dFSFhxbkFxckVFdUR3ek4vMlNOZHpKT3lyd09G?=
+ =?utf-8?B?eUlwZjFTalhXVytqRktIZzNMa2p0NEs2YlBseGJtTDJEYmhOWXduUzJ5eGda?=
+ =?utf-8?B?NzJxdTVMNSs2SVJVWkZpVHFidmNhQjVoSjhsTmZLc3NXTmkrVlNKWGwzQkk1?=
+ =?utf-8?B?UzBKWTh6ZG90QmlERlhia2xPTTUyK2RVLzNSa3lkS0JjYzhvMUZndGRXSk56?=
+ =?utf-8?B?OFVOeFRaWXdoY1p6Ty9wL3RndCtxVmwyUENaM3MxMWFxd0k2ZnRMR2xXU2xi?=
+ =?utf-8?B?M0dtZk4rbEhYV3ZnQ1UvSjdNOU82UTVkZkVCZ1JxWDBYVTRtYW5WMk9PRHNy?=
+ =?utf-8?B?WXN2R3BTZDEySGNDWHZlUS9acDQwZldXc0NRMWFKdGtZbVliYW1tS05MQkpM?=
+ =?utf-8?B?cjRsQkh1U0szTkMvWGdJdFZ5R1M1R01ycmxjd3piMnJ0K0Q4VlhmbEIrWWlv?=
+ =?utf-8?B?UXEwcE1IN2dYQTdTckFsZEs0YWRndHFOR0QxbmtBQURXYUxJRlNvSkxTaUNU?=
+ =?utf-8?B?aCtNdjBIY1IxTzFjakFhYUtMRyt5c1dBR1dvRHBKQTJQS2tDU0h6bi9GQUJI?=
+ =?utf-8?B?SXBtR2hhcUZEbGpFbmRqVzdEWC9jaVZxVUFkankxbWFjU2gzQ2hYLzhVakNs?=
+ =?utf-8?B?UUJkSlYybHVPdVdVdDRKQVB3U1dJUGtCYlVZL0xyWEdLWlFWbnI4c1JDTWFZ?=
+ =?utf-8?B?dFoycmNiem4ybkV2aUh4U2x4c0F6UHY3WHhua095Vkp3cGJuMnRKTHpPQWE1?=
+ =?utf-8?B?WjFUQnFvVWNXUDgrU21pNU1NQktjVjFpeGp6cmZrYi9GaXgrWldRUkRFNERH?=
+ =?utf-8?B?R2pkb0J3T0pxNVhldjR3ZG0yaUpYbnNIRFJJRFBrdWI4VEs4QkkyS3VJQXdQ?=
+ =?utf-8?B?T1MrUXRiU3RBS1dNQTRyRWFVYkFtbnVNYlFoNHdyMUNHTlB0MktjRWxWbUJq?=
+ =?utf-8?B?eGQyT1diRFRjaFlZNno4NUFOTlZLU2lxdWFHMTN5RDhZWXByQ3BNRFFvMmFU?=
+ =?utf-8?B?czJoVEQ2RVpHN2kyWFNiTHNweDVPbEhUaE8veHhOWkVRSjAydm83YUZHN3JG?=
+ =?utf-8?B?U1Z4aVNnQzZTRmUwR0lWejRFKzc3ZGREMW4wUVRqeVRBc29Qd0ozOHpjL0JK?=
+ =?utf-8?B?RHBTOWlFTjVDRVBMZXNVSXpyeUFiVDZxdTZycExYdGpVclRTY3VvQWhzUnlK?=
+ =?utf-8?B?VkZhK2V2ZTUvUnU4ZFhrUTN5bVBlREh1S0haRVBocmQ5Ui8xNG50T2NUeHZY?=
+ =?utf-8?B?TUdQWFdyWmtBQVpLa29VdTBNZGhMV3BQZUxoRkxFeUpDc2c4TnMyNG15VzEx?=
+ =?utf-8?B?eCtmekRFZXJJMDJNckpNRWgwNlAvMDdRMXRXeGtSbUY1WnoyQzVsZkRiYnZ0?=
+ =?utf-8?B?RkFuTWtPNnQzRTZwTUVyMHp2bm1yNVY3YVBMTE1BZjZJNUNGemZMRGJMSU1s?=
+ =?utf-8?B?S0dPRkgyMGdWNzhqbzlPTUlpRVljTjUycHJxTnB6K2JBQk5pZjRvdkJFQVU1?=
+ =?utf-8?B?Ymc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: eeba0815-c924-4448-9fce-08ddeeb658c5
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2025 09:01:49.8833 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tqDXMSsf70AgpSZhOZfPqC4e8R1X+sSO4oeP5MOulocbHfvrogfOf98hQnUHEwqhggzkOTPYG9+T+dM8L8qOoeoCxLKpO2T+ne8BLXBQn+s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8759
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,100 +173,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Siddhardth,
+Hi Bhimeswararao,
 
-Am Mi., 16. Apr. 2025 um 14:57 Uhr schrieb Siddharth Vadapalli
-<s-vadapalli@ti.com>:
->
-> Currently, the phy_config() API is invoked by the driver only once since it
-> has been probed. While this works in general, it doesn't allow the driver
-> to bring the PHY back to its default reset state. As a result, the driver
-> might not be able to recover the PHY from a bad state. To address this,
-> move phy_config() into the driver's start callback (am65_cpsw_start()).
->
-> Apart from providing the means to recover the PHY in the event of failure,
-> the implementation is in line with the idea of "reset and configure" that
-> is already followed by am65_cpsw_start() when it comes to programming the
-> CPSW MAC.
->
-
-I do not know if this is the same issue here, but I see that in case
-no cable is connected and I try to do a dhcp command the board/network
-stack of a J722S EVM stays in a broken state. After plugging a cable
-it is not possible to do a successful dhcp. It requires a reset to get
-a working network again. Same issue can be reproduced when unterrupt a
-running dhcp task with CTRL-C.
-
-----
-U-Boot 2025.07-rc3-g259a4765c26b (Sep 08 2025 - 10:44:20 +0200)
-
-SoC:   J722S SR1.0 HS-FS
-Model: Texas Instruments J722S EVM
-DRAM:  2 GiB (total 8 GiB)
-Core:  91 devices, 29 uclasses, devicetree: separate
-MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-Loading Environment from nowhere... OK
-In:    serial@2800000
-Out:   serial@2800000
-Err:   serial@2800000
-Net:   eth0: ethernet@8000000port@1
-Hit any key to stop autoboot:  0
-=> dhcp
-ethernet@8000000port@1 Waiting for PHY auto negotiation to
-complete......... TIMEOUT !
-am65_cpsw_nuss_port ethernet@8000000port@1: phy_startup failed
-am65_cpsw_nuss_port ethernet@8000000port@1: am65_cpsw_start end error
-BOOTP broadcast 1
-
-----
-
-Do you have an idea what is going on here?
-
-> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+On 9/2/25 7:07 AM, Bhimeswararao Matsa wrote:
+> This document introduces a developer guide for PMIC and regulator
+> support in U-Boot. It covers subsystem architecture, Kconfig options,
+> Device Tree integration, SPL considerations, and debugging methods,
+> using TPS65219 + BeaglePlay as an example.
+> 
+> Signed-off-by: Bhimeswararao Matsa <bhimeswararao.matsa@gmail.com>
 > ---
->
-> Hello,
->
-> This patch is based on commit
-> f892a7f397a Revert "Merge patch series "pxe: Precursor series for supporting read_all() in extlinux / PXE""
-> of the next branch of U-Boot.
->
-> Regards,
-> Siddharth.
->
->  drivers/net/ti/am65-cpsw-nuss.c | 9 ++++++---
->  1 file changed, 6 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
-> index 3c62fc0b428..9b69f36d04d 100644
-> --- a/drivers/net/ti/am65-cpsw-nuss.c
-> +++ b/drivers/net/ti/am65-cpsw-nuss.c
-> @@ -438,6 +438,12 @@ static int am65_cpsw_start(struct udevice *dev)
->                        port->port_sgmii_base + AM65_CPSW_SGMII_CONTROL_REG);
->         }
->
-> +       ret = phy_config(priv->phydev);
-> +       if (ret < 0) {
-> +               dev_err(dev, "phy_config failed: %d", ret);
-> +               goto err_dis_rx;
-> +       }
-> +
->         ret = phy_startup(priv->phydev);
->         if (ret) {
->                 dev_err(dev, "phy_startup failed\n");
-> @@ -639,9 +645,6 @@ static int am65_cpsw_phy_init(struct udevice *dev)
->         phydev->advertising = phydev->supported;
->
->         priv->phydev = phydev;
-> -       ret = phy_config(phydev);
-> -       if (ret < 0)
-> -               dev_err(dev, "phy_config() failed: %d", ret);
->
->         return ret;
->  }
-> --
-> 2.34.1
->
+>   doc/README.pmic | 345 ++++++++++++++++++++++++++++++++++++++++++++++++
 
-BR,
-Heiko
+Thanks for the patch!
+
+We're trying to avoid new files like those which aren't properly exposed 
+in our docs and would rather see rST/sphinx documents instead. Maybe 
+doc/develop/pmic.rst would be a good place for that new file? (I do not 
+know).
+
+Then run
+
+make htmldocs
+
+from the root directory and check the output from any browser by opening 
+the index.html.
+
+You need to run this command from within a Python virtual environment so 
+you have all the required dependencies, hopefully 
+doc/sphinx/requirements.txt should contain everything required to setup 
+the env.
+
+Cheers,
+Quentin
