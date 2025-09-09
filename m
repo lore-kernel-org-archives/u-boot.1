@@ -4,156 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFC32CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 14:06:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55891CAC583
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 14:09:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 855B4830B4;
-	Tue,  9 Sep 2025 16:06:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id C51AE830B4;
+	Tue,  9 Sep 2025 16:09:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="O3SqDWuB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g3wfnjeb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 841D983214; Tue,  9 Sep 2025 16:06:26 +0200 (CEST)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20715.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::715])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D20AB8313B; Tue,  9 Sep 2025 16:09:34 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40D058309E
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 16:06:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=Y.Moog@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VQTdgc20733HrRXNl+ph3F9ZFQ/hwgQWOWz4iYxJMapodjXXOGEXb32weCQUAmAqjNSVd1h2I/ouWqHGvgCnWdqCfip6RPOvQj4dMc/W6+Rpcvz5ZOLcThtDqOBPBbbQw1+tBUJGOeifg/awkvrkxXGUfhi8vpdlMq5xgiU5URMx+TfXnyZmr5Pu/zSvbfHffz5m4XYYaBnTLUG5AIzvhpTdvDCOI1Y9QsrxILBE7gx1RlK1fQFeAYztOefpKfzcu8sWtaGxR8gIrpq2kVLXP3/ka9VKYq8ttcuh5O2/eky4QYn/pe9avlYEJfHxN7wJZQCWJ2FK9X111gddEPTHIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ydm1doN89B8UIGoWxy9iDsX4WGLUuSnfJSVGnRGq/XU=;
- b=T87qhFXUySFIIgzkxQ57Zmckh088HesMlBq+dbc6nafY2Gyrio8w/kKsJ1tIvQwco8RyTWu2wi5UoK5trTVUsCwq5f8dp5y4kpxm+zkVwr6k48t/RVeAxHLn10EVQc+IDf1OnAvxnJj0Xl+1Ea2UuGdLNDLx1Kxzxb75O4umbWK1MX63cYiMdR+iimj3MhRGOJ93UmDo4PoBQO21XGlh9hTJ3VvMU9WnXCxE8S2XddrQpQ9jpJtWYrNOvA6MuxGeCVSuDTwU3Q4r/Sh0o0bTthnl6iThHyXFNcweeSZ1/qcJ8h3wYJyJM4yNCHzdHWc+hjCzIBgmfHs3VeZnbG3jVA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ydm1doN89B8UIGoWxy9iDsX4WGLUuSnfJSVGnRGq/XU=;
- b=O3SqDWuBzCP+pnK3IgtdoPuLg308R/o6yIiLYSIhw2AOpbMEiFA2mRkfQOml1wfcL/1Yo+YaWdaF5CF8BkqlHs6YK+oj2KleXDQzrFciodGuHBczO/qMQId0eK2Ba42mVb55dEf7QkLM/sJEC+UOwv4Q9j/mP2TSSufkci15dJbTkL642x3pQYog6hT2c+N0SW3vA5sADkP94dPlQZs+TOKDafaKp/xxdc/Rt9IKtQnHcWP1vBqMjHN7Kb9hISnkEIlUNH4HKXnLYhelfo4EyI4HAiNXgxH15/IVtgnevgLv7MI75iFiRc39zW7Wxkg4eiGLgPT1sts93iuYlTKrmw==
-Received: from AM0PR07CA0018.eurprd07.prod.outlook.com (2603:10a6:208:ac::31)
- by AS8P195MB1334.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:3c8::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Tue, 9 Sep
- 2025 14:06:11 +0000
-Received: from AMS0EPF00000193.eurprd05.prod.outlook.com
- (2603:10a6:208:ac:cafe::7c) by AM0PR07CA0018.outlook.office365.com
- (2603:10a6:208:ac::31) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.15 via Frontend Transport; Tue,
- 9 Sep 2025 14:06:08 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AMS0EPF00000193.mail.protection.outlook.com (10.167.16.212) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.9115.13 via Frontend Transport; Tue, 9 Sep 2025 14:06:11 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Tue, 9 Sep
- 2025 16:06:11 +0200
-Received: from [192.168.2.142] (172.25.39.168) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Tue, 9 Sep
- 2025 16:06:10 +0200
-From: Yannic Moog <y.moog@phytec.de>
-Subject: [PATCH v4 0/3] PHYTEC imx8m boards: enable OP-TEE as default
-Date: Tue, 9 Sep 2025 16:05:38 +0200
-Message-ID: <20250909-imx8m-optee-enable-v4-0-6dfe494cc939@phytec.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 2DE948309E
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 16:09:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-4079c655e50so16310195ab.1
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 07:09:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1757426971; x=1758031771; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PkEhHfDwkLd1/9U8PBLTfoMHtKVLBL17FR0V5QMOV44=;
+ b=g3wfnjeb52uqBkGtISlryQgBO52JcdFJAHkbap9dyvNTERwOrAT4wx6XYWXnD8WhBO
+ mRAgq7/c4ao2TEh/ktjgGSs6MbjhRSjKiTm6mgkU4vFm9yX2mBMsw+wvNY651sbyaJ6Q
+ E/szr5IfFhKJr4BPGleLYRo1tnM0iBCIDMPSY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757426971; x=1758031771;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PkEhHfDwkLd1/9U8PBLTfoMHtKVLBL17FR0V5QMOV44=;
+ b=UbOTcfMXtiiRGBIcbhqN9YvGcAhBerKgZSM1AjrmXgCjp+JIolQhD4iKn8VISv6otq
+ 7GjokAzkev2Z/Su/62jVkJ68cMIBpAp47ONYyFIW6bBwpmFFCYd2EKVL2e87UKUgTjqR
+ MbRuCoc/kLjSVQ8JcQjc0H1GPqWxuI07gs31hwlppKdHmt3AQ2AawvwfmPX88LtiVwg+
+ JHJ2UyFh1C7nzLsiEmt7fZdOvOBeB6OLz91SboofD1ZPSMDvK2i+JQUgZDDgANaDtAsy
+ I9wrg6N5zhCUpzvX8yk14a+hCKgT/U+261s5Sy5Da3q5ooTaHHObCuI2ypGVdxbhnGD8
+ XDpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXWhuhKhveIK+yDQkA16Jhq+c+XfcXSUNiQko8YGd6/eyYHutS6J3PW+BMEi14dGnHpxRVwihY=@lists.denx.de
+X-Gm-Message-State: AOJu0YyfyPsES0Z/1gDAT5EfOGUhhPRJFk3bvEXcMr8YlZPNTgGunuvH
+ 8C3mmJYFNfB6/XPDJiL+YF86IGcPVlbIfXin7XIZ5bITKAMMYl4Z9QGq73UDzFycfqc=
+X-Gm-Gg: ASbGncuimOWTeuaPDTb8LT4f5+M/kG01vvNNhGQYALRJRaYf3c/5YZ6vv45rBY8fkfa
+ sQ3LtzhbzHt/nfeMWwdLj8F9mVuJT1K8Orz0NwFhFEoomluV7+mriNfNiTjkyYqp5ZZ+LHfM8rD
+ ej5CS0QHluL/GrhKRA0W7DzanwtiL/ye3JHEN0EqWPf//aq5ZPMPATs5L3L5mgbaMB+eq9HZNxs
+ krULrh4ng1AYjnwgx96J9s99WETTVp1I131UoAMpoqxjRBRIkg9fDRR3AFilr+UtRMGtdmA+XK6
+ LjUaGRlP40rhLIl+I32ZLzAfNhycBv0GdSlKGH1/v6zJIQx4D39kt0hEIXyOWIrbMwkRM1yMcQM
+ U30mcNu8KLYOWWlpzTHUzWPgSapm0Gci5+45gSFkuZiwug0Zm8hdOGKERxaHPwaj08BvgzA+Uum
+ iqyA==
+X-Google-Smtp-Source: AGHT+IGog7TL+AW9Titebj+7ugEfbhua6CfsEonm/p9fS1rFIEJVYObh8dmS7lYKAI4QsLLSdUOALg==
+X-Received: by 2002:a05:6e02:1d82:b0:3f6:55e5:18fd with SMTP id
+ e9e14a558f8ab-3fdfaf2e3e1mr178927385ab.3.1757426967870; 
+ Tue, 09 Sep 2025 07:09:27 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-414edd65957sm809015ab.29.2025.09.09.07.09.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Sep 2025 07:09:27 -0700 (PDT)
+Date: Tue, 9 Sep 2025 08:09:24 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Stefano Babic <sbabic@nabladev.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: =?utf-8?B?5Zue5aSNOiDlm57lpI06IFtQQVRD?=
+ =?utf-8?Q?H_v4_1=2F2=5D_binman=3A_add_a_new_entr?= =?utf-8?Q?y?= type to
+ support .bin file generation for the i.MX95 platform
+Message-ID: <20250909140924.GU124814@bill-the-cat>
+References: <20250818-imx95-v1-0-f68a19fe30b6@oss.nxp.com>
+ <20250818-imx95-v1-1-f68a19fe30b6@oss.nxp.com>
+ <CAOMZO5C=ROcrsS256shQNP4Dfz9ca_55tT1hQNHUM=kOrxnVUg@mail.gmail.com>
+ <PAXPR04MB964427E6CFEFCC51D44D046AE20CA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+ <20250908143503.GQ124814@bill-the-cat>
+ <PAXPR04MB96448DB6FB2EF55C97A528E8E20FA@PAXPR04MB9644.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIADI0wGgC/23NSwqDMBSF4a1Ixk3J08SOuo/SgUluaqA+iCKKu
- PdGO6gUh/+B+90F9RAD9OiWLSjCGPrQNinEJUO2KpsX4OBSI0aYJIoTHOpJ17jtBgAMTWnegJ1
- j2nAiaa4ApcMugg/Tjj6eqavQD22c9x8j3dYvpyk/40aKCTbGe8Y9EQrkvavmAezVAdq4kR0Jc
- UqwRFihC6cKWQJR/wT/EQXRpwRPBBXGAxOF4TY/Euu6fgAx1MKFOgEAAA==
-X-Change-ID: 20250730-imx8m-optee-enable-dd28b305167e
-To: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, "Teresa
- Remmet" <t.remmet@phytec.de>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>, Benjamin Hahn
- <b.hahn@phytec.de>, Yashwanth Varakala <y.varakala@phytec.de>, Jan Remmet
- <j.remmet@phytec.de>, Yannic Moog <y.moog@phytec.de>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1757426770; l=2144;
- i=y.moog@phytec.de; s=20250509; h=from:subject:message-id;
- bh=gnBknDE1xYPRMpED3PMwU0a0wLsZRD0blVmKkH5hFEU=;
- b=YXD9+xrXYsBxw5I16iYb+3CvnEjdXnL+YFWToNmfRK/0S/B6Hem0VXQqGAEdvcNLaep+ukxQX
- obyaG1G36BSDrGwothNUcMK3e4c1KYGXxTdR1nNzn52/hkDzizG1mDm
-X-Developer-Key: i=y.moog@phytec.de; a=ed25519;
- pk=rpKoEJ4E7nD9qsrU/rfKVwMTWNWYaTBylZuJUXUiFr8=
-X-Originating-IP: [172.25.39.168]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF00000193:EE_|AS8P195MB1334:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2deea20f-013e-4781-e75d-08ddefaa0801
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|36860700013|82310400026|376014|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?V1gxN0RRK2pwSlFYZEZHMGk2elRNNXoyZGpEYllvSHdZazF4dSt6NFhiMUl4?=
- =?utf-8?B?TXc1M3hZVVgvajBldW1jUnZwUHVxcnRlS1JJTCtRUmp3VzkzVlRaRjlsNU54?=
- =?utf-8?B?UGNHMGtnajdUaVEvTFUralhRY1lTMStYV2J2OHJXZzB0Tlg5ZnNPRDZHRjVi?=
- =?utf-8?B?NEMyNmlROWhUWXUyOFowdFZPb1J0NmdOMGwxQ0tIbEdRVzVJYnh5ZVBKMFRO?=
- =?utf-8?B?aEdEK3Q1WjZJTndDb3pKV3VFM09BSTJ2elc2WkdlK3puTWhyOFQySkRuVGdy?=
- =?utf-8?B?Rzd0L0VsNGY2bnlyeVYxcDdpTytrZDBZL2FmQ1Y5SHkxaFJEeGJHQkNyV1k2?=
- =?utf-8?B?M0o3WHlBSzlLWmErbWJLSkRTNTFkekI1ci9pRk1QVFcyT1RxdDVHZzlWSUFT?=
- =?utf-8?B?MENEcTFWbmFycVhVbFdVSEg5T3hJcXNIUTBPYStLS1RjdzhuRFgzTlN5bVIy?=
- =?utf-8?B?SndpN1VVSW1jOTFXR0IyT1AycURvQ1l5VUZJR0N1UzRDVkRsblRoUXVmRVFn?=
- =?utf-8?B?M3lBQWdHVTRJRXoxMDA5Qm4xWURjWjJhZldzOU84SlZOWnNLWkM1cWJXOWJ5?=
- =?utf-8?B?WHVkVjFFSjlEY2FocjAzWnQ5M2ZSTUdiZ2R0V01IeGRxbWhHNVI1QTByNDlQ?=
- =?utf-8?B?TFk0cFhiMjYvTXVlRDF6ZjhQbW9BdDE2NGplL1BhNmx2VlI3ZnZOamVzQ0Z4?=
- =?utf-8?B?TGtMZWI5ODQxb3orUFBSTFgyMzErRFFTK3dYZXRMNFJHV0pZWVB3UmR5V0dr?=
- =?utf-8?B?cjN5RnQ3Q0JzVjV2Q1NSOWl1SlVBQTV4RE9ON01NRDhzSldYcVEzQm4xZ2V3?=
- =?utf-8?B?RWVWNmNnSEo3OExhWnBUZlorZjFkUXZjTWVyVnJ1aEkwV25LUG9UTVpTcmx2?=
- =?utf-8?B?VHhGVnNTWWR0cm40UFpLem1CYjU5bXVxTEhBeU9Eanp3aHlnRjBNNlhvNlg0?=
- =?utf-8?B?WjNEeUdvL0d3ZUdxdHRZTDcraEdQd2RFUjhuKzR5a3NlUXhaL2phUTFmRWVl?=
- =?utf-8?B?UE9WTnhBeHcvMFBkRjlWVVAwcmZYUFYyaU5SU3ZOMHdjdVNOZVdtR2l3cVhK?=
- =?utf-8?B?bTU4bW51MWhmRDVLTkZURCtQMWZtU1BVS2FCTHZVbWlqOGZ1MlIyTTI2ZmhJ?=
- =?utf-8?B?ZFpNVFlMdXFaVm5vdmxCR21HU0dRek1DWEV1RmswSmE0T2NsM0YxUTYvQ0V0?=
- =?utf-8?B?eU1KeHhUTHlqNG9yL04yMUZyT2pQYnFKOXV0NlRUODgrSFAzMGxVWGRRaEJ4?=
- =?utf-8?B?VkVvOWJSZUlEbHN6M2xkZ2huWkxsNTRwc1BZRE9zNzJpVTJFOEltUG0zKzVL?=
- =?utf-8?B?Si9HNXJ1RTAzMVIvSHJUUXh1ZTR6TmtUN0JqL1h2MVFqdHFRd1NzWkhHZkRt?=
- =?utf-8?B?NTlMTlBmdWF6em9GR2U1TlFOTFhmQzRHMi82Tnl2bU5OYnBhOWNUekl6T01l?=
- =?utf-8?B?RldoTUc1RlI1Q2VlUVRoeHhEL1N0a0JzWFFCaGtXT3dhMHBicHloWlRvZnVQ?=
- =?utf-8?B?WkdTalc4N05CTFMxMVR0aFBXQTRxSkxpR3BNNlVCQ2lwajZqR0VCNHQyQjY5?=
- =?utf-8?B?U3J3L2c5NnFOamFGaytjNmZZb0ZoQUlsQS9rZzFMTUJidHREVEtVRXFrZDd5?=
- =?utf-8?B?a1VuaCtCZmhORjkzWVdSQ2x1a1dmQ3RwWDVhakVMRzVRdnZjb2xuNEZLS3pq?=
- =?utf-8?B?SmRUZllOVHFyTmUyUkpKakRuaW9CUFJkZ1ZZYWFXNTlvZlNhd2FzWG41YWRY?=
- =?utf-8?B?MU1hblI3bnFCTEE2bXQ2OHVIUDdBUzVoSGxnbVQxVXE0ZjBvejE1QkRiT0F3?=
- =?utf-8?B?WW1EdElUNGp4YjZ3bjc5TEJlTXR2eXJiN3FQcitadlJOQnh2N2xrak9TbnEr?=
- =?utf-8?B?dVhmRGo2aU9ocFo4aHhMdG50VllnYTFjQ3lKSWVobzRkNUp5cGo4YmloQ0tM?=
- =?utf-8?B?NGNxWGZ6VVVqUTdLQ2pSeTNPUzgxUHR5RE0zeTQrY1Izb25HaU5WQi8zVHdS?=
- =?utf-8?B?UnVKTmc2L3NrM2wwUVJXcVhWMUw4UGl4SjU0UjFXZk9wSUNpc2MzN1BlSi91?=
- =?utf-8?B?TDFGRkpyTlNCNHFwNDVOVzFoZXhzRW5SU1Y0QT09?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014)(13003099007);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 14:06:11.3835 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2deea20f-013e-4781-e75d-08ddefaa0801
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF00000193.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB1334
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="AqsGRY2JnErGYMZm"
+Content-Disposition: inline
+In-Reply-To: <PAXPR04MB96448DB6FB2EF55C97A528E8E20FA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,53 +111,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-OPTEE config was unset by default and the doc for the boards was not
-quite accurate as TEE configs must be enabled first in order to be able
-to build with OP-TEE support.
-This series enables the config by default, i.e. when wanting to build
-without OP-TEE now, configs need to be modified.
-Update and clean up the documentation:
-Change instructions on how to build bootable image with the new OP-TEE
-related changes.
 
----
-Changes in v4:
-- rebase onto next (to get imx8mp-libra)
-- remove OP-TEE benchmark cfg from board docs
-- Link to v3: https://lore.kernel.org/r/20250908-imx8m-optee-enable-v3-0-14bfe249b3c6@phytec.de
+--AqsGRY2JnErGYMZm
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v3:
-- extract doc style changes into separate commit
-- fix commit message -> phycore-imx8mm sets OP-TEE at end of 1GiB ram
-- Link to v2: https://lore.kernel.org/r/20250814-imx8m-optee-enable-v2-0-c489d795ae07@phytec.de
+On Tue, Sep 09, 2025 at 03:26:18AM +0000, Alice Guo (OSS) wrote:
+> > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > =E5=8F=91=E4=BB=B6=E4=BA=BA: Tom Rini <trini@konsulko.com>
+> > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B49=E6=9C=888=E6=97=A5=
+ 22:35
+> > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>
+> > =E6=8A=84=E9=80=81: Fabio Estevam <festevam@gmail.com>; Simon Glass
+> > <sjg@chromium.org>; Alper Nebi Yasak <alpernebiyasak@gmail.com>; Stefano
+> > Babic <sbabic@nabladev.com>; dl-uboot-imx <uboot-imx@nxp.com>; Alice
+> > Guo <alice.guo@nxp.com>; Marek Vasut <marek.vasut@mailbox.org>;
+> > tharvey@gateworks.com; u-boot@lists.denx.de
+> > =E4=B8=BB=E9=A2=98: Re: =E5=9B=9E=E5=A4=8D: [PATCH v4 1/2] binman: add =
+a new entry type to support .bin
+> > file generation for the i.MX95 platform
+> >=20
+> > On Mon, Sep 08, 2025 at 03:40:32AM +0000, Alice Guo (OSS) wrote:
+> > > > -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+> > > > =E5=8F=91=E4=BB=B6=E4=BA=BA: Fabio Estevam <festevam@gmail.com>
+> > > > =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B49=E6=9C=886=E6=
+=97=A5 5:53
+> > > > =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>
+> > > > =E6=8A=84=E9=80=81: Tom Rini <trini@konsulko.com>; Simon Glass <sjg=
+@chromium.org>;
+> > > > Alper Nebi Yasak <alpernebiyasak@gmail.com>; Stefano Babic
+> > > > <sbabic@nabladev.com>; dl-uboot-imx <uboot-imx@nxp.com>; Alice Guo
+> > > > <alice.guo@nxp.com>; Marek Vasut <marek.vasut@mailbox.org>;
+> > > > tharvey@gateworks.com; u-boot@lists.denx.de
+> > > > =E4=B8=BB=E9=A2=98: Re: [PATCH v4 1/2] binman: add a new entry type=
+ to support .bin
+> > > > file generation for the i.MX95 platform
+> > > >
+> > > > On Wed, Aug 27, 2025 at 4:06=E2=80=AFAM Alice Guo (OSS)
+> > > > <alice.guo@oss.nxp.com>
+> > > > wrote:
+> > > > >
+> > > > > From: Alice Guo <alice.guo@nxp.com>
+> > > > >
+> > > > > To support passing specific commands defined in enum imx8image_cmd
+> > > > > to the imx8image_copy_image() function, this patch introduces a
+> > > > > new entry type nxp-imx9image. This entry generates a plain text
+> > > > > data file containing the relevant commands, enabling flexible
+> > > > > configuration during image creation.
+> > > > >
+> > > > > Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> > > >
+> > > > I'm getting CI failures:
+> > > >
+> > > > +/binman/m33-oei-ddrfw/oei-m33-ddr (oei-m33-ddr.bin):
+> > > > +/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-imem
+> > > > (lpddr5_imem_v202409.bin):
+> > > > +/binman/m33-oei-ddrfw/imx-lpddr/imx-lpddr-dmem
+> > > > (lpddr5_dmem_v202409.bin):
+> > > > +/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-imem-qb
+> > > > (lpddr5_imem_qb_v202409.bin):
+> > > > +/binman/m33-oei-ddrfw/imx-lpddr-qb/imx-lpddr-dmem-qb
+> > > > (lpddr5_dmem_qb_v202409.bin):
+> > > > +Image 'm33-oei-ddrfw' has faked external blobs and is non-function=
+al:
+> > > > oei-m33-ddr.bin lpddr5_imem_v202409.bin lpddr5_dmem_v202409.bin
+> > > > lpddr5_imem_qb_v202409.bin lpddr5_dmem_qb_v202409.bin
+> > > > +binman: Error 1 running 'mkimage -d ./imx9image.imx-boot.spl -n
+> > > > ./spl/u-boot-spl.cfgout -T imx8image ./imx9image-out.imx-boot.spl':
+> > > > Fail open first container file mx95b0-ahab-container.img
+> > > > +make[1]: *** [Makefile:1339: .binman_stamp] Error 1
+> > > > +make: *** [Makefile:198: sub-make] Error 2
+> > > > +binman: Error 1 running 'mkimage -d ./imx9image.imx-boot.spl -n
+> > > > ./spl/u-boot-spl.cfgout -T imx8image ./imx9image-out.imx-boot.spl':
+> > > > Fail open first container file mx95a0-ahab-container.img
+> > > >
+> > > > https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1238965
+> > > >
+> > > > To reinforce what I asked you before: for v5, please make sure that
+> > > > you send me a link showing that CI has passed.
+> > >
+> > > Hi Fabio,
+> > >
+> > > Thank you for your message. I am currently using Azure Pipelines (free
+> > version), but recently the world_build stage has failed to run properly=
+=2E I will try
+> > alternative way to run the CI pipeline to ensure everything is properly=
+ checked
+> > before posting.
+> >=20
+> > What problems do you see with the world build pipeline? I don't wait fo=
+r it to
+> > complete every time I push (due to how long it takes) but it should nev=
+er be
+> > broken.
+>=20
+> Hi Tom,
+>=20
+> The message appears in the logs: =E2=80=9CThis can happen when the job is=
+ cancelled or times out.=E2=80=9D I am using a free Azure DevOps account wi=
+th a private project and private repository. The maximum allowed runtime on=
+ Microsoft-hosted agents is 60 minutes. This limitation seems to be the cau=
+se of the issue.
 
-Changes in v2:
-- Use proper board PLATFORM for OP-TEE since boards have been merged to
-  master on optee_os (https://github.com/OP-TEE/optee_os/pull/7487)
-- add -j $(nproc) to make commands
-- Link to v1: https://lore.kernel.org/r/20250813-imx8m-optee-enable-v1-0-bbff23f047e5@phytec.de
+Ah. This is also configurable, and you need to bump it to whatever the
+maximum is, which might be 4 hours. Updating the documentation to
+explain this after you do it would be good.
 
----
-Yannic Moog (3):
-      phytec-imx8m boards: enable OP-TEE for KASLR
-      doc: phytec: update imx8m docs for optee builds
-      doc: phytec: imx8m: Style and firmware update
+> I would like to inquire if there are any alternative solutions available=
+=E2=80=94preferably free=E2=80=94that could run a U-Boot CI pipeline.
 
- board/phytec/phycore_imx8mm/MAINTAINERS     |  1 -
- configs/imx8mm-phygate-tauri-l_defconfig    |  5 +++-
- configs/phycore-imx8mm_defconfig            |  5 +++-
- configs/phycore-imx8mp_defconfig            |  4 +++
- doc/board/phytec/imx8mm-optee-build.rsti    | 14 ---------
- doc/board/phytec/imx8mm-phygate-tauri-l.rst | 42 ++++++++++++++++++---------
- doc/board/phytec/imx8mp-libra-fpsc.rst      |  1 -
- doc/board/phytec/phycore-imx8mm.rst         | 43 +++++++++++++++++++---------
- doc/board/phytec/phycore-imx8mp.rst         | 44 +++++++++++++++--------------
- 9 files changed, 92 insertions(+), 67 deletions(-)
----
-base-commit: 28d6f787b0deb3f66118857297a855233eba18d1
-change-id: 20250730-imx8m-optee-enable-dd28b305167e
+We can add contributor repositories on source.denx.de, but we're also a
+bit short on fast runners sometimes, can NXP help out with that perhaps?
+Thanks!
 
-Best regards,
--- 
-Yannic Moog <y.moog@phytec.de>
+--=20
+Tom
 
+--AqsGRY2JnErGYMZm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMA1EQAKCRAr4qD1Cr/k
+CrR3AQCG3dEPL0pp8BK84sENbnrlwfbbMTIZcV4mrk5ShUhQcAEAt3joOZUxzFJg
+nqzRXpEz164U0dgFGjBGW3fqm3FmUQk=
+=itPJ
+-----END PGP SIGNATURE-----
+
+--AqsGRY2JnErGYMZm--
