@@ -4,64 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3207CAC581
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 04:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E42CA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 05:11:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DE3580422;
-	Tue,  9 Sep 2025 06:48:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C2101830B4;
+	Tue,  9 Sep 2025 07:11:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="s8qvFRbg";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="AS1UnHl8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B34582A9E; Tue,  9 Sep 2025 06:48:26 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A64D3800B6
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 06:48:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5894mL3d207837;
- Mon, 8 Sep 2025 23:48:21 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757393301;
- bh=xdVmX+RbT8KpfWs04siOPkDaGYubLGGxr5LJAKs3e9U=;
- h=From:To:CC:Subject:Date;
- b=s8qvFRbgupE5yhBIRAG7wP+zpNRQztY9woy1ncT14/32ynyt/LI0hj1q77gtAeMlO
- 61Ngbz1zKKmB83qJZrBZ/zFhx32fqReDcnx31NdiIJwVb7nDzPU0msm9EbBmYsmBiV
- G0Ig7NL2ZF6nbHTqCy+EWiRnSkRfY6tuTMdunKGg=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5894mLIr092116
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 8 Sep 2025 23:48:21 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 8
- Sep 2025 23:48:20 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
- Frontend Transport; Mon, 8 Sep 2025 23:48:20 -0500
-Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [172.24.231.84])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id
- 5894mGmC1722904; Mon, 8 Sep 2025 23:48:17 -0500
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: <trini@konsulko.com>, <a-dutta@ti.com>, <marek.vasut+renesas@mailbox.org>, 
- <afd@ti.com>, <n-francis@ti.com>, <jm@ti.com>, <p-mantena@ti.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH] configs: j7200_evm_a72_defconfig: Enable DP83867 Ethernet PHY
-Date: Tue, 9 Sep 2025 10:18:15 +0530
-Message-ID: <20250909044816.1670246-1-s-vadapalli@ti.com>
-X-Mailer: git-send-email 2.43.0
+ id A5E8383106; Tue,  9 Sep 2025 07:11:36 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A784280422
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 07:11:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D44CA106195; Tue,  9 Sep 2025 07:11:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1757394693;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=aiXBdgdp6PgX3uv+TBVl4dEDolBGMQCwBw2o0Dd+ql4=;
+ b=AS1UnHl8gYeaOeGq72CeP0BagVO00s/3MOoh0gUn9BfcY3MuSUoZ/ETSBpU94jaXDYuIZF
+ iVeWSRvxCJAxP+Niaorcdpeg8YwkWjRQKVNwj4TqOUHG/u5P3AkgwzSQzVqWEFYGnO5oWD
+ zOzFNiMX0f2BD8oEEhIyACDmoR54IaUDdsprbtpyg8J3SMvfkDWy3tyoZBLz/qGA+bKRrX
+ kCeICSSs/dd6hET3c36IyDH3ZhyV1BpV6bUpRe2yh6EJ4dPqbjhzBcVuX+ljtuNmkQJNVv
+ MzxsePcNbWjCxUSmQKFM9v/twwA9ftF6KPgoW5nNoMkuipsKnJQ4KFqq9G9F7w==
+Message-ID: <beb59699-9497-3f87-7c57-94da6d3df6be@nabladev.com>
+Date: Tue, 9 Sep 2025 07:11:53 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v3] imx8: Add ahab_commit command
+Content-Language: en-US
+To: John Ripple <john.ripple@keysight.com>, peng.fan@oss.nxp.com
+Cc: alexander.sverdlin@siemens.com, andrej.valek@siemens.com,
+ festevam@gmail.com, hs@denx.de, peng.fan@nxp.com, sbabic@nabladev.com,
+ sr@denx.de, trini@konsulko.com, u-boot@lists.denx.de, uboot-imx@nxp.com
+References: <20250818043344.GB13772@nxa18884-linux.ap.freescale.net>
+ <20250908211838.3772709-1-john.ripple@keysight.com>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20250908211838.3772709-1-john.ripple@keysight.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,48 +71,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The MCU Ethernet Interface on J7200-EVM uses the DP83867 Ethernet PHY as
-described in the section '4.9 MCU Ethernet Interface' of the J7200-EVM
-User-Guide [0]. Since the config corresponding to the DP83867 PHY has not
-been enabled, the Generic PHY driver is used. As a result, the RGMII delays
-do not take effect leading to packet losses.
+Hello John,
 
-Fix this by enabling the config for the DP83867 Ethernet PHY.
+On 08.09.25 23:18, John Ripple wrote:
+> The ahab_commit command allows the user to commit into the SECO fuses
+> that control the SRK key revocation information. This is used to Revoke
+> compromised SRK keys.
+> 
+> To use ahab_commit, the boot container must be built with an SRK
+> revocation bit mask that is not 0x0. For the SPSDK provided by NXP, this
+> means setting the 'srk_revoke_mask' option in the config file used to
+> sign the boot container. The 'ahab_commit 0x10' can then be used to commit
+> the SRK revocation information into the SECO fuses.
+> 
+> Signed-off-by: John Ripple <john.ripple@keysight.com>
+> ---
+> Changes in v2:
+> - Changed patch name to have imx8.
+> 
+> Changes in v3:
+> - Changed patch name to only have imx8 at the start.
+> - Add error checking for sc_seco_commit message.
+> ---
+> 
+>   arch/arm/mach-imx/imx8/ahab.c  | 27 +++++++++++++++++++++++++++
+>   drivers/misc/imx8/scu_api.c    | 30 ++++++++++++++++++++++++++++++
+>   include/firmware/imx/sci/sci.h |  6 ++++++
+>   3 files changed, 63 insertions(+)
 
-[0]: https://www.ti.com/lit/ug/spruiw7a/spruiw7a.pdf
-Fixes: f8c1e893c82f ("configs: j7200_evm_a72: Add Initial support")
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
----
+Thanks!
 
-Hello,
+Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
-This patch is based on commit
-7a4f3c56521 Prepare v2025.10-rc4
-of Mainline U-Boot.
+just a nitpick...
 
-Logs without patch applied:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/e016dc8a1bc6a3bad0af395e0c5910a8
-Logs with patch applied:
-https://gist.github.com/Siddharth-Vadapalli-at-TI/92c841b195f24f01c3542654a6e144c8
+[...]
+> diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+> index 8985ab6584d..0337525774e 100644
+> --- a/drivers/misc/imx8/scu_api.c
+> +++ b/drivers/misc/imx8/scu_api.c
+> @@ -1286,3 +1286,33 @@ int sc_seco_secvio_dgo_config(sc_ipc_t ipc, u8 id, u8 access, u32 *data)
+>   
+>   	return ret;
+>   }
+> +
+> +int sc_seco_commit(sc_ipc_t ipc, u32 *info)
+> +{
+> +	struct udevice *dev = gd->arch.scu_dev;
+> +	struct sc_rpc_msg_s msg;
+> +	int size = sizeof(struct sc_rpc_msg_s);
+> +	int ret;
+> +
+> +	/* Fill in header */
+> +	RPC_VER(&msg) = SC_RPC_VERSION;
+> +	RPC_SIZE(&msg) = 2U;
+> +	RPC_SVC(&msg) = (u8)SC_RPC_SVC_SECO;
+> +	RPC_FUNC(&msg) = (u8)SECO_FUNC_COMMIT;
+> +
+> +	/* Fill in send message */
+> +	RPC_U32(&msg, 0U) = *info;
+> +
+> +	/* Call RPC */
+> +	ret = misc_call(dev, SC_FALSE, &msg, size, &msg, size);
+> +
+> +	/* Copy out result */
+> +	ret = (int)RPC_R8(&msg);
+> +
+> +	/* Copy out receive message */
+> +	if (!ret)
+> +		*info = RPC_U32(&msg, 0U);
+> +
+> +	/* Return result */
 
-Regards,
-Siddharth.
+Do we really need this comment?
 
- configs/j7200_evm_a72_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+> +	return ret;
+> +}
 
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index 36274804881..69b77ad5285 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -144,6 +144,7 @@ CONFIG_SPI_FLASH_MTD=y
- CONFIG_MULTIPLEXER=y
- CONFIG_SPL_MUX_MMIO=y
- CONFIG_MUX_MMIO=y
-+CONFIG_PHY_TI_DP83867=y
- CONFIG_PHY_TI_DP83869=y
- CONFIG_PHY_FIXED=y
- CONFIG_TI_AM65_CPSW_NUSS=y
+bye,
+Heiko
 -- 
-2.43.0
-
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
