@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84AE6CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 21:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 102D9CAC582
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 22:03:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED65B831A4;
-	Tue,  9 Sep 2025 23:56:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 513D58319C;
+	Wed, 10 Sep 2025 00:03:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iDKPS9jx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NYfdYk2K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49E828319C; Tue,  9 Sep 2025 23:56:07 +0200 (CEST)
+ id 84FF6831A4; Wed, 10 Sep 2025 00:03:19 +0200 (CEST)
 Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
  [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4049483192
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 23:55:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5905183192
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 00:03:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-88c347db574so85921939f.0
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 14:55:56 -0700 (PDT)
+ ca18e2360f4ac-889b846c568so246190339f.1
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 15:03:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757454951; x=1758059751; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757455396; x=1758060196; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=43bmXtztE+jcGF7Ve6fgripKzHQ9FqmOSmCIX7idYS0=;
- b=iDKPS9jxpBvzC6fvTJoY5W//XyXtDv6jeByrMrYsKq+M43Fo2xjb5awK4/x1haFAf/
- elttTwXOfUtc+0gzqus1DvD/40DpGfYAuikTMuCodwK7/+fVdXlmrxyQS9z/Vefna6vN
- 8RriglOD0J1QrsbSYARPgPNpypx42sebTgqfY=
+ bh=x1mwFbFnkF4bAlzxDn9G1oavs5Igqe0iYmt7M8aqT18=;
+ b=NYfdYk2KdMschhYkxuflAakh5s7TARlQI8m4NOGmr/8ULnrINlRsRK+rrB59Gnvb01
+ 8/If+zA9ZGVm69sPKgFYdo9nk4cgtRiTrcnXYyPZSTZptdrnnfApuQaClqnT0A+i+fbw
+ PC93L9n3fu52bHiM25Ns/S/HHBCFLB6jQwygU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757454951; x=1758059751;
+ d=1e100.net; s=20230601; t=1757455396; x=1758060196;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=43bmXtztE+jcGF7Ve6fgripKzHQ9FqmOSmCIX7idYS0=;
- b=Cl1PTJW9iVncjZmk9u3Eik1+Imli0S1mdh3vkBY1HYBu4UnGjIFMA9vgfsbVCgs7KN
- Ur1cC0RwPdbStQE/rjhdT8tjE4Vj4VejaywL3EPmpge8ZmrXLcrtAOC47dibpcMFhBrK
- VKOWgjD2ccCXnFt4/Bpwhi+2sAtvkQMzxK3A1/6RlKo6i8MSd7lNclgguhtOcIfNjaL+
- 8v+yQl0JuWFH0Q0/C2py3w+Drcqw1t83jzyUsXs+PrTCw4wA0WKwOAxL4eRxsGx8FVla
- pyvw0zdHclU8ajQMTw+n7vLrHgRzxd0ir510fmPD55EFQ+GUCdx0TXz7SpslZVsDVKxA
- oMBw==
-X-Gm-Message-State: AOJu0YyWuKcvDTI0Sj85lFAPLg+NSHSJbk5Jp5vt5HGn7MIPXXUmLac2
- qHEsYmXeVanfndaNgtaEhe82yQ2cCuuVQdgPlJhvLLZaX/Ik8Mz1drDOUZDOPT1EpDXldmL+gfm
- R5rMW6IY=
-X-Gm-Gg: ASbGncvuaCBmgtzvdQrr2J7xYzezFZJUT+h4agQQvhKpb00U4KBbs68xEz4DX5H3lOO
- 1JSdSCY7D7XQ19beaFwXek9y1/j/5UMq9qIdEHuruY1wUaaEf4UvwuX6/EpmnJk9MSRa9kLa+0U
- mMa/qwpMKSSUCZejl0sySwA/Jc718veu6j5q0278iodFGCfKBuFzs89GHTDkWaMRhj2HrVlGMEE
- kHM77OwVEK1rC0XifmxO1r0QuoywZ/Omm+WennFCCygIOXEjrMSbX6yC9XpFY6GUhxpihSuVq4A
- hPb4MoNKoH8AagT5xlMyZ6FTHzGH2EcdK2M/UMl4Bltpt/iPFZmQ0Udkk3TsHEEI2n2Gn6mWL/Z
- eQlUOasRKP7/6CVttBfl0EnV7+BIJRE63DA9ycJ4Xcf9SHjFVtGj2ezy6Hg93RRcL1Ig=
-X-Google-Smtp-Source: AGHT+IGa9vDSi+nArgme2dt0/ViyPHNyt6qT5d6gadkR5WV6uPO/wOywmD7nrAohIy47rBxDgrOjqg==
-X-Received: by 2002:a05:6602:2dc7:b0:887:37c8:56ac with SMTP id
- ca18e2360f4ac-8877765bfc3mr2371664839f.4.1757454950626; 
- Tue, 09 Sep 2025 14:55:50 -0700 (PDT)
+ bh=x1mwFbFnkF4bAlzxDn9G1oavs5Igqe0iYmt7M8aqT18=;
+ b=Qfdm6EaXHIpjoUKy4AEmYAr4ak2YEGuQIW/OsUb4TrmHvncI7JLVAFe0sXdEM1rr1j
+ mqoGwQW2uE11GijUC3+fx6vl31Cv1Bw4w7GeZio4K3ohsAEzjmCswkpZ1lJXV7y2luGL
+ kHNSDVjmtdx6vIRDWsSQc0qmP/dtO1lYFAUgHwqkzEf2c+OlpKlCMm9M56ENbbKuZ34F
+ r79pJTMOk912hAoBGNJ0jVn/iJFIfKUzlNAgkQpczYuEq8c3QAJA68U35E7waB2xhXJR
+ OhAdFZahAucaf6BZSM6vwrryWkCkAwteaagPCsucQ1RMm96NAUxa4SSV1XMpWKdNisNS
+ CfFA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVGGyvTC6hh6WLI0mTKXnCarathqudygqf+y7At8yy5Om7viUe17zjlbg6IB9qdKm3bCMSb6zE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwTTwrmY5WRRtE5lATUvEsU++2N02h9Z32hHy3EtUYh+mLvzuKd
+ RE8V8qGMclte+ictRQ/ixuqsPHiGrs35GrNUbQTfVzKJgf74MSoCWwlcBITthUxthn8=
+X-Gm-Gg: ASbGncsYkBPCYOeS72y02ueuJPSvrp7KPDvWP6DSnvV3RdL/ht3UfGcVURBlVspn/U3
+ AfB+6mhdSDKODuaohCip2xvwCJoJveNwj29A8Tpiozgfx46259kuZeFCFDKMTeE2iY3wYwCzn6g
+ CycygpsAc6EKLJFH23tRB3ms19wf593+iywNCwaGAAb+3mEC6Xe00NexDdYZwd4afTyF6vj6UOH
+ 9IoDt79do3CjAjbrew/oRsFpaHc7l2gz4D8oMjtroJtwVl7Db4ygVsjv5eOJq3C4o1KeqYvDo4p
+ +sqvEouZesxlah5D7pXWWbGUR65RBy8XD2KyB98MDpJVjSZEFuTbUpDT246sz5u8Wd1QkmccdIZ
+ DhCBen6rFLox7yE7N3mj7nudLErJ2gQYayNrkB58ivmMMvHbIOo4idlLf
+X-Google-Smtp-Source: AGHT+IHTssjrCcaZu2EKpqQ9fGgVWue4vf1+ld0yryMYbh4Nk0X+u8d3zpnyVpgEjnFwRWvda6cZxw==
+X-Received: by 2002:a05:6602:29cb:b0:873:47c7:6ff3 with SMTP id
+ ca18e2360f4ac-88777540282mr2198735339f.7.1757455396077; 
+ Tue, 09 Sep 2025 15:03:16 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-889b50482ffsm306076939f.19.2025.09.09.14.55.48
+ ca18e2360f4ac-88c31dee466sm192175539f.7.2025.09.09.15.03.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Sep 2025 14:55:49 -0700 (PDT)
-Date: Tue, 9 Sep 2025 15:55:46 -0600
+ Tue, 09 Sep 2025 15:03:14 -0700 (PDT)
+Date: Tue, 9 Sep 2025 16:03:12 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: Re: [ANN] U-Boot v2025.10-rc4 released
-Message-ID: <20250909215546.GC124814@bill-the-cat>
-References: <20250908162046.GS124814@bill-the-cat>
+To: Paresh Bhagat <p-bhagat@ti.com>
+Cc: vigneshr@ti.com, praneeth@ti.com, nm@ti.com, u-boot@lists.denx.de,
+ bb@ti.com, khasim@ti.com, v-singh1@ti.com, afd@ti.com, anshuld@ti.com
+Subject: Re: [RFC PATCH v2 0/5] Add initial support for AM62D2-EVM
+Message-ID: <20250909220312.GD124814@bill-the-cat>
+References: <20250909053429.444854-1-p-bhagat@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Qbox7nuSYT0tLB9D"
+ protocol="application/pgp-signature"; boundary="y5OVnBuvRQS0VN0Q"
 Content-Disposition: inline
-In-Reply-To: <20250908162046.GS124814@bill-the-cat>
+In-Reply-To: <20250909053429.444854-1-p-bhagat@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,67 +99,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Qbox7nuSYT0tLB9D
+--y5OVnBuvRQS0VN0Q
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 08, 2025 at 10:20:46AM -0600, Tom Rini wrote:
+On Tue, Sep 09, 2025 at 11:04:24AM +0530, Paresh Bhagat wrote:
+> The AM62D2 SoC, part of the K3 architecture, is built for high-performance
+> DSP tasks in automotive audio, pro audio, radar, sonar, and medical
+> imaging. It features up to four Cortex-A53 cores (1.4GHz), two Cortex-R5F
+> cores, and a C7x DSP with 2 TOPS MMA. Key interfaces include multi-channel
+> McASP audio, TSN-capable Gigabit Ethernet, and a range of peripherals
+> (UART, SPI, I2C, CAN, USB, eMMC/SD, OSPI, CSI). It supports LPDDR4/DDR4,
+> secure boot with hardware security, and low-power modes with
+> CAN/GPIO/UART wakeup.
+[snip]
+>  arch/arm/dts/Makefile                        |    2 +
+>  arch/arm/dts/k3-am62d-ddr-1866mhz-32bit.dtsi | 2802 ++++++++++++++++++
+>  arch/arm/dts/k3-am62d-evm-binman.dtsi        |  262 ++
+>  arch/arm/dts/k3-am62d2-evm-u-boot.dtsi       |   14 +
+>  arch/arm/dts/k3-am62d2-r5-evm.dts            |   82 +
+>  arch/arm/mach-k3/am62ax/Kconfig              |   25 +
+>  board/ti/am62dx/Kconfig                      |   26 +
+>  board/ti/am62dx/MAINTAINERS                  |    8 +
+>  board/ti/am62dx/Makefile                     |    7 +
+>  board/ti/am62dx/am62dx.env                   |   21 +
+>  board/ti/am62dx/board-cfg.yaml               |   36 +
+>  board/ti/am62dx/evm.c                        |   37 +
+>  board/ti/am62dx/pm-cfg.yaml                  |   12 +
+>  board/ti/am62dx/rm-cfg.yaml                  | 1047 +++++++
+>  board/ti/am62dx/sec-cfg.yaml                 |  379 +++
+>  board/ti/am62dx/tifs-rm-cfg.yaml             |  903 ++++++
+>  configs/am62dx_evm_a53_defconfig             |   22 +
+>  configs/am62dx_evm_r5_defconfig              |   20 +
+>  18 files changed, 5705 insertions(+)
+>  create mode 100644 arch/arm/dts/k3-am62d-ddr-1866mhz-32bit.dtsi
+>  create mode 100644 arch/arm/dts/k3-am62d-evm-binman.dtsi
+>  create mode 100644 arch/arm/dts/k3-am62d2-evm-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/k3-am62d2-r5-evm.dts
+>  create mode 100644 board/ti/am62dx/Kconfig
+>  create mode 100644 board/ti/am62dx/MAINTAINERS
+>  create mode 100644 board/ti/am62dx/Makefile
+>  create mode 100644 board/ti/am62dx/am62dx.env
+>  create mode 100644 board/ti/am62dx/board-cfg.yaml
+>  create mode 100644 board/ti/am62dx/evm.c
+>  create mode 100644 board/ti/am62dx/pm-cfg.yaml
+>  create mode 100644 board/ti/am62dx/rm-cfg.yaml
+>  create mode 100644 board/ti/am62dx/sec-cfg.yaml
+>  create mode 100644 board/ti/am62dx/tifs-rm-cfg.yaml
+>  create mode 100644 configs/am62dx_evm_a53_defconfig
+>  create mode 100644 configs/am62dx_evm_r5_defconfig
 
-> Hey all,
->=20
-> It's release day and I have tagged and pushed things out and will merge
-> this to next and push once CI completes. One thing I should mention up
-> front is that in terms of project organization, we're moving ahead with
-> SFC and they'll be joining us on the community call that follows the
-> v2025.10 release itself. I would strongly encourage anyone with
-> questions or concerns to join and speak up, or reach out privately if
-> desired. If anyone knows of regression fixes that need to be picked up
-> still please reach out.
->=20
-> We're continuing with a community meeting following the release
-> and once again this is the same time as the previous meeting. The
-> meeting details itself are:
-> https://meet.google.com/btj-wgcg-euw
-> September 9th, 2025. 9am (GMT -06:00)
->=20
-> To join by phone:
-> https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
-
-Brief call summary:
-- -rc4 is out, please test and report any regressions / outstanding
-  regression fixes (I've pushed two today).
-- Talked about the move to Software Freedom Conservancy (SFC) a bit
-  about why we're doing this and what it will help with.
-- Confirmed that the clang-format series should come to -next in a few
-  weeks.
-- Confirmed that we use the GNU11 C standard, and if some things aren't
-  compiled with that flag, it's a bug, In turn, for C formatting, GNU11
-  features are allowed and generally don't conflict with
-  style/preference things. But some of us (myself for sure at times)
-  haven't changed our mental templates on what's allowed or not.
-- Talked about standard boot and overlays. Andre pointed out his older
-  series at
-  https://lore.kernel.org/u-boot/20230210110213.2531190-1-andre.przywara@ar=
-m.com/
-  and I noted systemd has also adopted a solution in this area.
-- Talked a little about needing to better document using b4 or git
-  publish and less emphasis on patman as it has issues currently. Other
-  documentation clarifications in general are also likely needed and
-  welcomed.
+This isn't architecture and board, it's just a board, it should be a
+single patch. In that some of these yaml files are big, it would be good
+to figure out as a generic problem how to reduce that if possible (I
+don't know if it is).
 
 --=20
 Tom
 
---Qbox7nuSYT0tLB9D
+--y5OVnBuvRQS0VN0Q
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMCiWwAKCRAr4qD1Cr/k
-Cj63AP99NypBjQrWW2HEy4fNJ8qolWR3Ea+yuwSg7dhdvjdZ8AEAotrjY2tI+v+H
-jZjNqldJ6XRjmta03WUwjS5YwEVhDQw=
-=9oCi
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMCkIAAKCRAr4qD1Cr/k
+CiBIAQC6z+L1Hu7419d6Iw+oLgSNn4GMMaE6cy/cAc/cmfXy/QEAhVzerxfwgI6o
+cZjSnBWB0qijnogSBAZh3W1s+XN1UwE=
+=ky1r
 -----END PGP SIGNATURE-----
 
---Qbox7nuSYT0tLB9D--
+--y5OVnBuvRQS0VN0Q--
