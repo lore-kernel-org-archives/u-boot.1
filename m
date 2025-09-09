@@ -4,68 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D294CAC583
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 13:01:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75795CA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 13:20:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FBC2832BC;
-	Tue,  9 Sep 2025 14:59:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D82083106;
+	Tue,  9 Sep 2025 15:20:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=munisense.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="EgyM85Rm";
+	dkim=pass (2048-bit key; secure) header.d=munisense.com header.i=@munisense.com header.b="Wefcg/vS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78685830B4; Tue,  9 Sep 2025 14:54:17 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 316CF8312A; Tue,  9 Sep 2025 15:20:10 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0BB1830B4
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 14:54:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29619830B4
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 15:20:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=340b2dd98=Eoin.Dickson@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1757422455; x=1788958455;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=yy/tdbSzGY3X5GvAzF7HNlizv70GJOegz/fHxNUO4WU=;
- b=EgyM85RmLCcyM8gkdZu2ZKG0+5Q1WVMeRmuCsXiTk6nna9bq2CvaILnt
- SNt4OLqZ7pPuXmQaRSO27qFbZVZdzwUi1lXBGWIDdEyToWDCIdiRlJGSc
- vruzX1/U55ZrXKxevg26LCJDVT6qUxEFF5B+MAViYCUJj+UpjqsqmIHrR
- Y/+yqUpvKKBtM/+tpnXro9rdH8ItgqvHSIsHrU3IzB6NEDS4KsT5ZqJ6v
- QG6OrZP8Pfsp1xZXrx+lJ544Zxi7+rIuzn8K7Mi8/vXiV+T0Ct5MzVc+W
- TwxmdgsT1TmCnwDT5EhWkwWg3brdUqFBb+65qCrcGhogBkn1btx+lcLCO A==;
-X-CSE-ConnectionGUID: lh5HRUMnQm+ev2peYQx0uw==
-X-CSE-MsgGUID: hSF54+z8SiKLsOLjmuOSLg==
-X-IronPort-AV: E=Sophos;i="6.18,251,1751266800"; d="scan'208";a="277635562"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 09 Sep 2025 05:54:13 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Tue, 9 Sep 2025 05:53:52 -0700
-Received: from IRD-DK-FPGA01.microchip.com (10.10.85.11) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Tue, 9 Sep 2025 05:53:50 -0700
-From: Eoin Dickson <Eoin.Dickson@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: <rick@andestech.com>, <ycliang@andestech.com>,
- <Conor.Dooley@microchip.com>, <Jamie.Gibbons@microchip.com>,
- <Praveen.Kumar@microchip.com>, <Eoin.Dickson@microchip.com>,
- <Cyril.Jean@microchip.com>, <jagan@amarulasolutions.com>
-Subject: [PATCH] gpio: mpfs_gpio: fix compilation warnings
-Date: Tue, 9 Sep 2025 18:23:47 +0530
-Message-ID: <20250909125347.2847130-1-Eoin.Dickson@microchip.com>
-X-Mailer: git-send-email 2.34.1
+ header.from=munisense.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gijs.peskens@munisense.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-b046f6fb230so176893766b.1
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 06:20:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=munisense.com; s=c12e0d22-ac12-44f1-aa93-b49ab5265a0e; t=1757424005;
+ x=1758028805; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=5+oQLsEhFRvHTkKH6zMT2EQaRJC6n+el7Z94lWPnyoo=;
+ b=Wefcg/vSt4jaGBM8LwXSw+B20PSQnq6HemBRRHhARskyy9cOZJAOh6RrIUS2OOWV8U
+ VnI0ORrZZgVzYNJ5xBE+V6zI9rjcXC//7aZ2gMhwfUDCwQLiFEOcXU52q4R+vXanm6ep
+ J7ELAK6tyd4DnLecc7oLDynbTfc0zY0n+bQLkEV/6DdzVQzXCJvW5+Ju1bzqMSH2Q1SD
+ 8fBAxOMd0XcJjbPeaAS1gux+R5kHqg0gIx2VIGvWAf2DwjqQV+dugLpTIwuvRQ/FvWG4
+ V0r+3/IABxds+riLWlETwPZTsOsc6zVl+UqQjnyoatBZ89fePGGKJskN16dtKojldFnr
+ gEzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757424005; x=1758028805;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5+oQLsEhFRvHTkKH6zMT2EQaRJC6n+el7Z94lWPnyoo=;
+ b=Tq+TRWC569N+JLY3VJKuOtTL7xjEyqNLL/ZuCvdd2dENmVK4DGh+4jKPKo2BKj+2Qu
+ OIECDF7+nvSs3vTfhc0Tm7naGY8+q2hb8WeqLbLTP4NXh8hoIEa2BXAvNgQSPq4pdujb
+ Qs1nDBnQIPtHvEq5epP1Q8WBCZ0kQdPkhy/dreQVsBHoDK3oWY/Uxnb/fGiZu4QAPFVo
+ xtmkEsC9AtjutOl9ByFxcb0MH9Ckjq6NdOMTTqKZQ6/ntK9c2uCacEE0LwgLUtHI+cBI
+ Sf7eLRyzvdbCIH+NjukS7NNaxpCZdKHYuNDLKYpt8yn7dtX7DZqjnIb210kEVi9bPZxq
+ oIfg==
+X-Gm-Message-State: AOJu0Yyt0XFt/V8NSrStAWV+PdacUhC5KnSkuahBml3iuUbVQ0PPCXb5
+ W+Nyl7Lhi/4b04kuUnXg4wYZAnDnmVaAEgLJX694RXcq8679SND5M2doStmIlF6sBE64z/ssUds
+ aImFM
+X-Gm-Gg: ASbGncvp72mgHAAH53AhnTQZGfRXlQfz9AtNC2ZPZPnQtXZXpKb+SKa4mznHnr1G0Ei
+ +/ugILUzkm5URYNQpBSQ6atcmEh2vKiDidPL1UCheOsOYGW8V2n9WR2ic4uezf2qx0/4+2QizZc
+ qQn8tvTPPnoYw+MH9aNMgkwzaiA6YjPDcz9TNZIk8IBTI3kMEx6GT0SZH+JH2aM5glrblPv/AoM
+ 9F5LiHu5cuBTEkg5zru/k82xbwUKmuS1Aw0C3jSUsV/mWEvuTY0KRbMdVck8Cxn1BOM5ZHtHM/I
+ 7QiirXULOerysX2iF0z6E7Ihl8+oaeB7XHtAGgjUPofhn8/EaD5VMAVXgI+/7Z2wDEsHiSqKmdv
+ +AYezFOZJH7L4MH60HD32diTGduVs7t/695zmF0gR1cCFCBQ8rqUwfsKh/FMSPM60CsZr7SCJz5
+ h3Mh7JuSo0M+APSg==
+X-Google-Smtp-Source: AGHT+IECB7aiN0plszdSZnuh0w+LWDzrONmPTaE0rvY35t8LK8aLekNwPJuPPjtDSY1XpJ30JccYGQ==
+X-Received: by 2002:a17:907:724a:b0:b04:1957:8e71 with SMTP id
+ a640c23a62f3a-b0493245e11mr1610789866b.25.1757424005264; 
+ Tue, 09 Sep 2025 06:20:05 -0700 (PDT)
+Received: from ?IPV6:2a00:1708:3ba6:500:9fed:9c57:d5ba:9f44?
+ ([2a00:1708:3ba6:500:9fed:9c57:d5ba:9f44])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b04279a59ffsm2131199366b.60.2025.09.09.06.20.04
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Sep 2025 06:20:04 -0700 (PDT)
+Message-ID: <8c41c1dd-6d96-4bc6-aab4-38a8e3ccc078@munisense.com>
+Date: Tue, 9 Sep 2025 15:20:04 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: No console output on Raspberry Pi Compute Module 5
+To: u-boot@lists.denx.de
+References: <a09a51134c3d66a9644d2aadb15c99558ce5e7e7.camel@opensuse.org>
+ <CALeDE9NwpDJ4_to1Z6L+N1WqL4L_UgegyHqShDvTYTc7Cc8tnw@mail.gmail.com>
+ <c0daca70b93929d62a90b2e51a935d4b3e91456b.camel@opensuse.org>
+Content-Language: en-US
+From: Gijs Peskens <gijs.peskens@munisense.com>
+In-Reply-To: <c0daca70b93929d62a90b2e51a935d4b3e91456b.camel@opensuse.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Mailman-Approved-At: Tue, 09 Sep 2025 14:59:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,51 +105,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Eoin Dickson <eoin.dickson@microchip.com>
+On 06-09-2025 01:20, Jonas Kvinge wrote:
+> On Thu, 2025-08-28 at 12:05 +0100, Peter Robinson wrote:
+>> Hi,
+>>
+>>> I'm using a Raspberry Pi 5 Compute Module with a sourcekit.io
+>>> board.
+>>> I'm not getting any output from u-boot to the console, I get this
+>>> with
+>>> CM4 with the same setup.
+>>> Do I need to change anything to get console output on RPI5?
+>> Well at least on the RPi5 the console has moved to ttyAMA10 from
+>> ttyS0
+>> so you'll likely have to update something, it will depend on how that
+>> carrier board pins out the UART, but it works fine for me on the RPi5
+>> so I suspect it's something config based.
+>>
+>>> I've added the following patch for RPI5 which I found on the list:
+>>> https://github.com/jonaski/u-boot/commit/2f60b5d80b3a08d480074e8230ada543bfa42401
+>> The rpi5 is supported with the rpi_arm64_defconfig so that's not
+>> needed.
+>>
+>> You also don't report what version of U-Boot you're using. There was
+>> an issue with the serial console on rpi5 producing gunk on the output
+>> but that was fixed with 2025.07 release.
+>>
+>>> My config is here:
+>>> https://raw.githubusercontent.com/jonaski/u-boot/refs/heads/rpi5/.config
+>>>
+>>> Jonas
+> The series of patches for Raspberry Pi 5 support
+> from https://lists.denx.de/pipermail/u-boot/2025-February/579540.html
+> aren't in the master branch, are you saying RPI5 is supported without
+> them? Does the GPIO and console work for you without any patches?
+UART console (on the debug UART, not the GPIO works), at least on my 
+CM5. Anything living on the RP1 chip (USB3, GPIO, Ethernet) doesn't 
+inside of U-Boot.
+I believe PCI-E also doesn't work (i.e. NVME), but I'm not sure on that.
 
-mchp_gpio_get_value() should return int instead of bool, and some casts
-are needed.
-
-Signed-off-by: Eoin Dickson <eoin.dickson@microchip.com>
----
- drivers/gpio/mpfs_gpio.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/gpio/mpfs_gpio.c b/drivers/gpio/mpfs_gpio.c
-index 9bbeada4ef5..35eed596c10 100644
---- a/drivers/gpio/mpfs_gpio.c
-+++ b/drivers/gpio/mpfs_gpio.c
-@@ -75,7 +75,7 @@ static int mchp_gpio_direction_output(struct udevice *dev, u32 offset, int value
- 	return 0;
- }
- 
--static bool mchp_gpio_get_value(struct udevice *dev, u32 offset)
-+static int mchp_gpio_get_value(struct udevice *dev, u32 offset)
- {
- 	struct mchp_gpio_plat *plat = dev_get_plat(dev);
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-@@ -136,7 +136,7 @@ static int mchp_gpio_probe(struct udevice *dev)
- 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
- 	char name[18], *str;
- 
--	plat->regs = dev_get_driver_data(dev);
-+	plat->regs = (struct mpfs_gpio_reg_offsets *)dev_get_driver_data(dev);
- 	sprintf(name, "gpio@%4lx_", (uintptr_t)plat->base);
- 	str = strdup(name);
- 	if (!str)
-@@ -160,10 +160,10 @@ static const struct mpfs_gpio_reg_offsets coregpio_reg_offsets = {
- static const struct udevice_id mchp_gpio_match[] = {
- 	{
- 		.compatible = "microchip,mpfs-gpio",
--		.data = &mpfs_reg_offsets,
-+		.data = (unsigned long)&mpfs_reg_offsets,
- 	}, {
- 		.compatible = "microchip,coregpio-rtl-v3",
--		.data = &coregpio_reg_offsets,
-+		.data = (unsigned long)&coregpio_reg_offsets,
- 	},
- 	{ /* end of list */ }
- };
--- 
-2.34.1
-
+For my own testing I've rebased the patches to v2025.01, which enabled 
+GPIO en Ethernet for me (haven't tested beyond that), you shouldn't need 
+it though if you want to just boot from the sdcard.
+> I used the latest version of u-boot from git master at the time of
+> testing.
+>
+> Jonas
