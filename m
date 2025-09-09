@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E6BCAC582
-	for <u-boot@archiver.kernel.org>; Mon,  8 Sep 2025 23:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30986CA1016
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 01:56:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 859FC80422;
-	Tue,  9 Sep 2025 01:02:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3E9FD80422;
+	Tue,  9 Sep 2025 03:56:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nwmttymr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l6Hzity+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA66C82A9E; Tue,  9 Sep 2025 01:02:43 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B720800B6
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 01:02:41 +0200 (CEST)
+ id 5675282A9E; Tue,  9 Sep 2025 03:56:47 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B519800B6
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 03:56:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cLMt65cLNz9swp;
- Tue,  9 Sep 2025 01:02:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757372558;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dEu5ekoXkTtBquCs6tXdG9WeSp+mTbkWRYY/HxhD/wQ=;
- b=nwmttymrIHLSP9cxI2+NzP4NDKdgRfgdnv2AYkLNWjmb+slF2+BIilJcvwBDqaK0hZ7VPc
- TiHKTpB6UBztclWQ9ZQHX0sEjb4duHs41xpU+izH0uXFt9zHoBO6TZ5eUqCEFXwaTDhkZT
- sXrdRn33D62MrPnNEqt9nul7EZnLRP+tLlxP9R5/iumzkEIrChJL9Xrgs9kDURgnnHYNg2
- 3BAzT/X0fop/RtNGInkCqNeSw87f/+dSq2+UrC/BvlpmdttuQ/zpLuRy67ZbDYSBNul4it
- NfYfty0zCLb1Cx3CmuZvpadRzUD0EzGjiENyNza66HB8Khfbf2BLHs41t8F6mQ==
-Message-ID: <74c4935c-1f8e-4fbd-a595-37fdc5c6ac3a@mailbox.org>
-Date: Tue, 9 Sep 2025 01:02:37 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5891ugWk229483;
+ Mon, 8 Sep 2025 20:56:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757383002;
+ bh=hE5XncioyMiy9QROH/GzNQiUY/QPgiT8S7GGrgofKgE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=l6Hzity+zKM1nA9tIQJzc6tc4Nv2ndNvGWp2FIz04U25M50HtAuM8MgPrQwHLaxtS
+ aJSwdCZdbzg73hCcqI0N4WUYsHpb3F44srUXKqdgnf3jSxV2C/1OMm9ldRpAiiF+Ux
+ oizV9ZrBuMQWZva7BEk5Kaq1uylJkiIvxklqjSOs=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5891ugx92814781
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 8 Sep 2025 20:56:42 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 8
+ Sep 2025 20:56:42 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Mon, 8 Sep 2025 20:56:42 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5891uepj1530336;
+ Mon, 8 Sep 2025 20:56:40 -0500
+Message-ID: <9b9c1d53-e0ca-455b-b798-447344c9d569@ti.com>
+Date: Tue, 9 Sep 2025 07:26:39 +0530
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/4] configs: Increase USB Hub debounce timeout in Agilex5
-To: "Ravulapalli, Naresh Kumar" <nareshkumar.ravulapalli@altera.com>,
- u-boot@lists.denx.de
-Cc: Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>
-References: <20250808100412.9320-1-nareshkumar.ravulapalli@altera.com>
- <20250808100412.9320-4-nareshkumar.ravulapalli@altera.com>
- <7cfaf6cb-38b9-4932-8904-ce7be12a5098@mailbox.org>
- <69597595-6c7e-441a-952b-16b80fd60aca@altera.com>
- <e3107726-6980-4330-aabf-aef1ec9f5562@mailbox.org>
- <bff0c320-35bd-4129-9e19-4ef4103ba923@altera.com>
- <ea637053-8f40-40c5-b257-e582dbbc3c1b@mailbox.org>
- <3168323f-8cd4-45a9-914e-fb79cd346d67@altera.com>
- <c5b7a8b4-2674-4857-a9f0-0576c1602f86@mailbox.org>
- <0c103ea7-07af-4d01-a1e4-3d4d4819657c@altera.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/3] configs: j721e_evm_r5: Enable HBMC and MUX_MMIO at
+ SPL
+To: Tom Rini <trini@konsulko.com>
+CC: Anurag Dutta <a-dutta@ti.com>, <n-francis@ti.com>, <u-boot@lists.denx.de>
+References: <20250902102000.1388848-1-a-dutta@ti.com>
+ <20250902102000.1388848-3-a-dutta@ti.com>
+ <20250902154656.GE124814@bill-the-cat>
+ <5fec7216-9e0a-4d97-af23-60953cc1ef75@ti.com>
+ <20250902161257.GF124814@bill-the-cat>
+ <380dd6dd-8751-4843-936e-e9da577f376f@ti.com>
+ <20250908162020.GR124814@bill-the-cat>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <0c103ea7-07af-4d01-a1e4-3d4d4819657c@altera.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20250908162020.GR124814@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: fb428ab0be9de07cc97
-X-MBO-RS-META: jxqxwumajpomfcrp36rkgxin8g7bagct
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,130 +86,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/8/25 3:41 PM, Ravulapalli, Naresh Kumar wrote:
-> 
-> 
-> On 08-Sep-25 6:32 PM, Marek Vasut wrote:
+Thanks Tom,
+
+On 9/8/2025 9:50 PM, Tom Rini wrote:
+> On Wed, Sep 03, 2025 at 09:58:34AM +0530, Kumar, Udit wrote:
+>> Hi Tom,
 >>
->> On 9/8/25 10:44 AM, Ravulapalli, Naresh Kumar wrote:
->>> Hi Marek
->>>
->>> On 02-Sep-25 11:48 PM, Marek Vasut wrote:
->>>> [CAUTION: This email is from outside your organization. Unless you
->>>> trust the sender, do not click on links or open attachments as it may
->>>> be a fraudulent email attempting to steal your information and/or
->>>> compromise your computer.]
+>> On 9/2/2025 9:42 PM, Tom Rini wrote:
+>>> On Tue, Sep 02, 2025 at 09:36:25PM +0530, Kumar, Udit wrote:
+>>>> Hi Tom
 >>>>
->>>> On 9/2/25 9:52 AM, Ravulapalli, Naresh Kumar wrote:
+>>>> On 9/2/2025 9:16 PM, Tom Rini wrote:
+>>>>> On Tue, Sep 02, 2025 at 03:49:59PM +0530, Anurag Dutta wrote:
 >>>>>
->>>>>
->>>>> On 30-Aug-25 5:30 AM, Marek Vasut wrote:
+>>>>>> Commit 0e198ff1a911 ("configs: Resync with savedefconfig") removed
+>>>>>> the necessary configs required to boot HyperFlash successfully, due to
+>>>>>> missing Kconfig dependencies. Now that the Kconfig dependencies have
+>>>>>> been added, re-enable the HBMC and MUX_MMIO configs in the SPL stage.
 >>>>>>
->>>>>> On 8/29/25 6:19 PM, Ravulapalli, Naresh Kumar wrote:
->>>>>>> Hi Marek
->>>>>>>
->>>>>>> On 29-Aug-25 2:11 PM, Marek Vasut wrote:
->>>>>>>>
->>>>>>>> On 8/8/25 12:04 PM, Naresh Kumar Ravulapalli wrote:
->>>>>>>>> Some USB devices need more time to be initialized. Hence,
->>>>>>>>> increasing the default USB Hub debounce timeout value for
->>>>>>>>> devices to be discovered, connected to Agilex5 boards.
->>>>>>>> Is this really hub debounce timeout or usb_pgood_delay ?
->>>>>>>>
->>>>>>>> Which devices are those, include that in the commit message.
->>>>>>>
->>>>>>> Yes, timeout is related to USB connect/disconnect signal bounces not
->>>>>>> about bus stability during init.
->>>>>>>
->>>>>>> Issue was mainly observed with legacy flash drives. Maybe I will
->>>>>>> change
->>>>>>> commit text from "Some USB devices need more time to be
->>>>>>> initialized..."
->>>>>>> to "Some old USB flash drives need more time to be initialized 
->>>>>>> during
->>>>>>> connect or disconnect events ..."?
->>>>>>>
->>>>>>> Note that I am not modifying the default Kconfig value in general;
->>>>>>> change is only made for an SoCFPGA devkit we tested.
->>>>>> Does this same issue go away if you set usb_pgood_delay to 2000 or
->>>>>> higher too ?
->>>>>
->>>>> No, changing USB HUB debounce timeout is working for us.
->>>> Look at this code:
+>>>>>> Fixes: 0e198ff1a911 ("configs: Resync with savedefconfig")
+>>>>>> Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+>>>>> Please note that this means it never worked to start with.
+>>>>> "savedefconfig" does the equivalent of "make foo_defconfig" and then
+>>>> It was working before but due to some boot issues , due to DT sync
 >>>>
->>>> https://source.denx.de/u-boot/u-boot/-/blob/master/common/usb_hub.c?
->>>> ref_type=heads#L199
+>>>> we disabled HBMC with commit id 5b2671594b80af116e259313d48bcd580d71f462 .
 >>>>
->>>> "
->>>> #if CONFIG_IS_ENABLED(ENV_SUPPORT)
->>>>         env = env_get("usb_pgood_delay");
->>>>         if (env)
->>>>                 pgood_delay = max(pgood_delay,
->>>>                                   (unsigned)simple_strtol(env, NULL, 
->>>> 0));
->>>> #endif
->>>>         debug("pgood_delay=%dms\n", pgood_delay);
 >>>>
->>>>         /*
->>>>          * Do a minimum delay of the larger value of 100ms or 
->>>> pgood_delay
->>>>          * so that the power can stablize before the devices are 
->>>> queried
->>>>          */
->>>>         hub->query_delay = get_timer(0) + max(100, (int)pgood_delay);
+>>>> Instead of saying Fixes: 0e198ff1a91,
 >>>>
->>>>         /*
->>>>          * Record the power-on timeout here. The max. delay (timeout)
->>>>          * will be done based on this value in the USB port loop in
->>>>          * usb_hub_configure() later.
->>>>          */
->>>>         hub->connect_timeout = hub->query_delay + HUB_DEBOUNCE_TIMEOUT;
->>>>         debug("devnum=%d poweron: query_delay=%d connect_timeout=%d\n",
->>>>               dev->devnum, max(100, (int)pgood_delay),
->>>>               max(100, (int)pgood_delay) + HUB_DEBOUNCE_TIMEOUT);
->>>> "
+>>>> This patch is fixing sha id 5b2671594b80af116e259313d48bcd580d71f462 by kind
+>>>> of revert.
 >>>>
->>>> Changing both usb_pgood_delay or (CONFIG_USB_)HUB_DEBOUNCE_TIMEOUT
->>>> should have the same effect. How come it does not ?
->>>
->>> CONFIG_USB_HUB_DEBOUNCE_TIMEOUT and pgood_delay are used for different
->>> purposes. If I am not mistaken I think I explained this in my earlier
->>> comments.
->>>
->>> Anyway, to further elaborate, CONFIG_USB_HUB_DEBOUNCE_TIMEOUT is used
->>> for debounce timeouts during device connect events and pgood_delay is
->>> used during initial VBus stabilization.
->>>
->>> You would be able to see this difference in the link below, where
->>> pgood_delay which is populated into "hub->query_delay" is used for
->>> voltages to stabilize before initiating communication and "hub-
->>>  >connect_timeout" where "HUB_DEBOUNCE_TIMEOUT" is populated is used
->>> after getting the port status.
->>>
->>> https://github.com/u-boot/u-boot/ 
->>> blob/328747974a0620d0996113fe2b3906b06e96de00/common/usb_hub.c#L455
->>>
->>> Also, the change made as part of the comment is not applicable to the
->>> USB stack in general; it is only for our devkit defconfig.
->> But none of this answers my question, looking at the aforementioned code
->> -- Changing both usb_pgood_delay or (CONFIG_USB_)HUB_DEBOUNCE_TIMEOUT
->> should have the same effect. How come it does not in your case ?
-> 
-> Maybe I wasn't explicit in my earlier comment, "No, changing USB HUB 
-> debounce timeout is working for us."
+>>>> my bad to give R/B , overlooked on sha id of fixes tag.
+>>> Again, no, that's not quite how it works. When we do a defconfig resync
+>>> like this we're just making the defconfigs reflect the present reality.
+>> would need your suggestion here, what should be fixes tag,
+>>
+>> My comments were not related to defconfig sync
+> Ah, yes, sorry, I mis-matched the hashes here.
+>
+>>> If you checkout 5b2671594b80af116e259313d48bcd580d71f462^ and then look
+>>> at the resulting defconfig, that option will be off. Doing a git blame
+>>> on drivers/mtd/Kconfig the right fixes tag is for:
+>>
+>> If you look at sha id d7ef2ef7c87528c359e110d7170e01a98aaecf14 (configs:
+>> j721e_evm_defconfig: Add HBMC related configs)
+>>
+>> is adding support for HBMC. So it was functional before.
+> Yes, I see that now, that's good.
+>
+>> Later due to DT sync and HBMC was broken so we disabled HBMC with sha id
+>> 5b2671594b80af116e259313d48bcd580d71f462.
+>>
+>>
+>> After that there was attempt to enable HBMC via below sha ids
+>>
+>> 8f71d37838ba0b0bfa047f5133877092ee9d1110 (mtd: Kconfig: Change HBMC driver's
+>> dependency to MULTIPLEXER and MUX_MMIO)
+>>
+>> fd7fcd4098d5c1ba9e20dbd72aa5f9a74f0cbe42 (configs: j721e_evm_*_defconfig:
+>> Add configs for Hyperflash boot)
+>>
+>> c9df79ee64d0885277d5061a9426744920c4d6a5 (arm: dts: k3-j721e-r5-common: Add
+>> HBMC overrides for R5 SPL)
+>>
+>> a42b8b0b3fe0ffe69ffb932bf3e709a62ff34a23 (mtd: HBMC-AM654: Changed syscon
+>> API to mux APIs)
+>>
+>> f0558f3a89fe0fa900b162ae2758772e37f72739 (mux: Makefile: Add config for mux
+>> drivers)
+> I guess my main frustration now is just that it's unclear where along
+> the way what was submitted was or wasn't fully tested. We have both
+> Kconfig dependency changes and dts additions (but not binding changes).
 
-USB_HUB_DEBOUNCE_TIMEOUT is basically the hard-coded-into-U-Boot-binary 
-version of "usb_pgood_delay" . The upside of "usb_pgood_delay" is that 
-users can change the value at runtime, which helps in case users need to 
-use some broken USB storage device which takes more than 
-"usb_pgood_delay" ms to start up. You cannot do that with 
-USB_HUB_DEBOUNCE_TIMEOUT .
+I understand your frustration,
 
-Since the commit description talks about "Some USB devices need more 
-time to be initialized." , this looks more like "usb_pgood_delay" type 
-of issue.
+we will take care of testing part.
 
-> What I meant is I didn't want to modify usb_pgood_delay as my issue was 
-> with HUB_DEBOUNCE_TIMEOUT, so modifying this value worked for us.
 
-Does it also work if you modify usb_pgood_delay instead ?
+>
+> At the end of the day however, we don't yet have a linux kernel style
+> "backport changes to eveywhere a fixes tag exists in old but supported
+> releases" work flow, so we can just drop the fixes tag if it's too
+> tricky to see where things did / didn't work. Alternatively, with the
+> list of commits above and a board to test on, checkout the tree at the
+> commit prior to that, test, then test the commit and see what the
+> functional change is.
+>
