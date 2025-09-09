@@ -4,89 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E00ECA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 09:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4288CA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 10:03:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ED0A83106;
-	Tue,  9 Sep 2025 11:58:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3621783106;
+	Tue,  9 Sep 2025 12:03:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gi1xxvyV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x9Wvjlka";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9116B8312A; Tue,  9 Sep 2025 11:58:15 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC733830B4
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 11:58:10 +0200 (CEST)
+ id 739338313B; Tue,  9 Sep 2025 12:03:25 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CD0C830B4
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 12:03:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3e5190bca95so1887580f8f.0
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 02:58:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757411890; x=1758016690; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=iBJWc++0ecoCD4GUH2IBkXGYDDPgTvO0Ubrae8Czmlc=;
- b=gi1xxvyVlcFhIJQJ90FFcNu3Xi1UFMwZXtHWN3XDM2fpk8o753EWzynq9kKYsaySUA
- xHOPJhKIL4POp5+PovBGIKTVo6djCygLJTQcUzPo4oFS300VtndCyUcjV3bi1p2sNLB+
- B21pLiY7BKY0i955YhpEggMry/rf9xSPC2yjctuPI5pf+BLwb8Ha67zOLEX4FpdBAa9X
- yGXSzxOqrWjzlkKOOTRbslmT8z8RpstyLITeJZB7IEosl2ZmsnMXe7af5ssezw1Vk+ot
- RgCH6IxIJaCdLibtDlGhUn/crk6lQ+6EG3cpuZGz53YX301LaboL5C1QeZ8k1iuNRJW2
- 7jeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757411890; x=1758016690;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iBJWc++0ecoCD4GUH2IBkXGYDDPgTvO0Ubrae8Czmlc=;
- b=vAZJ+f9fx63lU86rApT7FOroKmbIpABaPepwhVABfRY/aAijG790EzSOx/obyia1pR
- oUliZ7pBGROFjJVkVo5qkETyD8/YkU1vYKOjv87Tr0vZiRfwh6nbjzbyf6G/Mvjp/f3Q
- drMunvZYXZ1BwDotanMLJZJ5gO9DmM4YpRM8iC2nb5WVVeUWWNFouU5+ppmUTS6+c0W7
- 4miZHuy782sYMmgdD8Xg2q79bn7adK6lSgfkC2TDTwSnxCfk9/A7Ivx0+PFNE58eLc8V
- iF9XCyJaIub2b9XN9kc4s2WGXfmcuhvuGyUt6weH5KAl/tlFqfmnmrtNAe5SF7jfkGdD
- 4TTQ==
-X-Gm-Message-State: AOJu0YweAIpJsM+3AdrUVXVGrL/NZ5rblbBWIcjEEvfCICkJxajyaJaR
- 2NJGl7hvZYTBD2j3tBAP51O+4nmeh2rY+kT5+aGICLPK1wwlJgOaaVRjXt2jiUkLvNI=
-X-Gm-Gg: ASbGncvzVbuIclcXWIwsHgmc06DR6cpOHhRfE/fZSAN8kTxbh+yCsjgBW72wvpbvldG
- ICatgAbCaCsxHtjVel9DJkaAHdPz2UJJz+IkyPfaMMC14Q8UwG+wD/3TSToiIjSLYpFxfJU3DlK
- bTn2swIEHf85d3Xb03+80OvUBAqcxAjFamPrTrMDhg7NibgbtZYuuMiccDNhqZAdIN9J3vjxskE
- 8+kFHF5/R+0LBrrjjAKKpsggI2xWnEA5wdKTTd+p4g2rdgly/c1k2MJquQN8vFPY152IwyOG8f9
- AHvmOFdQD+Q4ii5pjN64wvG1wYYoTzB8QzjybBt3puGeb/oYSTPnZ2GhDKbqnHL2XMgSZbLHeNw
- wMp+4aNEcLZB9QjUAk6kIonIgsl8AeycrWIE=
-X-Google-Smtp-Source: AGHT+IGhuv6aVlG6+RNvpg46z+89g/Wch4CyERXnvRL8OWI4O//Dk2t/UH4/vybQxFRU6el5raEXUQ==
-X-Received: by 2002:a05:6000:22c4:b0:3e7:47c7:9cf with SMTP id
- ffacd0b85a97d-3e747c70e38mr6167641f8f.4.1757411889705; 
- Tue, 09 Sep 2025 02:58:09 -0700 (PDT)
-Received: from [192.168.7.92] ([212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3e7522562d1sm1905808f8f.63.2025.09.09.02.58.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Sep 2025 02:58:09 -0700 (PDT)
-Message-ID: <c2da0d18-9ce0-4c0f-8495-977ad7d8ca5b@linaro.org>
-Date: Tue, 9 Sep 2025 11:58:08 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 589A3B244003108;
+ Tue, 9 Sep 2025 05:03:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757412191;
+ bh=h87AaxkMZS6c+IWDH+OvDXTqMRcDBVOGp1K8vRM/NJA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=x9WvjlkahhCQ9U6YlfNA6wHaY7d6QTjjwf4UfvmfZ/vVkFtUaLk9PHrevtlpCFutD
+ u8BiURAjAg7IfOL6aEEW3kqaRwGYkspXaZO1bNqPOU40bbpy2UqjyYRKsJkNEwN2rz
+ zYWrzn7q1YKyiwottq3MGM3g44XHyVuQkpRgEoAw=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 589A3B8M3076857
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 9 Sep 2025 05:03:11 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 9
+ Sep 2025 05:03:11 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 9 Sep 2025 05:03:11 -0500
+Received: from localhost (lcpd911.dhcp.ti.com [172.24.233.130])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 589A39xu2465716;
+ Tue, 9 Sep 2025 05:03:10 -0500
+Date: Tue, 9 Sep 2025 15:33:09 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Kamlesh Gurudasani <kamlesh@ti.com>
+CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Tom
+ Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, Ye Li
+ <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 1/2] clk: scmi: fix set_parent support when CCF is not
+ being used
+Message-ID: <20250909100309.mhufqwh4gwksrmoz@lcpd911>
+References: <20250819-b4-scmi-v1-v3-0-360145076b3b@ti.com>
+ <20250819-b4-scmi-v1-v3-1-360145076b3b@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] doc: phytec: imx8m: Style and firmware update
-To: Yannic Moog <y.moog@phytec.de>, Tom Rini <trini@konsulko.com>,
- Fabio Estevam <festevam@gmail.com>, Teresa Remmet <t.remmet@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de,
- Benjamin Hahn <b.hahn@phytec.de>, Yashwanth Varakala <y.varakala@phytec.de>,
- Jan Remmet <j.remmet@phytec.de>
-References: <20250908-imx8m-optee-enable-v3-0-14bfe249b3c6@phytec.de>
- <20250908-imx8m-optee-enable-v3-3-14bfe249b3c6@phytec.de>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250908-imx8m-optee-enable-v3-3-14bfe249b3c6@phytec.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250819-b4-scmi-v1-v3-1-360145076b3b@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,238 +81,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yannic,
-
-On 9/8/25 08:34, Yannic Moog wrote:
-> Use single make command for compiling blobs and U-Boot.
-> Update the imx firmware version.
+On Aug 19, 2025 at 13:03:26 +0530, Kamlesh Gurudasani wrote:
+> When not using Common clock framework(CCF), calls to
+> scmi_clk_set_parent returns -ENOTSUPP, which should not be the case.
+> Fix that.
 > 
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
+> Fixes: 15fdfef6642c ("clk: scmi: check the clock state/parent/rate
+> control permissions)
+> 
+> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
 > ---
->  doc/board/phytec/imx8mm-phygate-tauri-l.rst | 27 ++++++++++++++--------
->  doc/board/phytec/phycore-imx8mm.rst         | 28 ++++++++++++++--------
->  doc/board/phytec/phycore-imx8mp.rst         | 36 +++++++++++++++++------------
->  3 files changed, 56 insertions(+), 35 deletions(-)
-> 
-> diff --git a/doc/board/phytec/imx8mm-phygate-tauri-l.rst b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
-> index 7efc9392361b4a867ce2bc18db11aacf31208800..4dd82cd9785fa585ed216664a25f593d4e723dbb 100644
-> --- a/doc/board/phytec/imx8mm-phygate-tauri-l.rst
-> +++ b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
-> @@ -21,9 +21,13 @@ Build the ARM Trusted firmware binary
->  
->     $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
->     $ cd trusted-firmware-a
-> -   $ export CROSS_COMPILE=aarch64-linux-gnu-
-> -   $ export IMX_BOOT_UART_BASE=0x30880000
-> -   $ make PLAT=imx8mm BL32_BASE=0xbe000000 SPD=opteed bl31
-> +   $ make -j $(nproc) \
-> +          CROSS_COMPILE=aarch64-linux-gnu- \
-> +          PLAT=imx8mm \
-> +          IMX_BOOT_UART_BASE=0x30880000 \
-> +          BL32_BASE=0xbe000000 \
-> +          SPD=opteed \
-> +          bl31
->  
->  Build the OP-TEE binary
->  -----------------------
-> @@ -32,8 +36,9 @@ Build the OP-TEE binary
->  
->     $ git clone https://github.com/OP-TEE/optee_os.git
->     $ cd optee_os
-> -   $ make CFG_TEE_BENCHMARK=n \
-> +   $ make -j $(nproc) \
->            CROSS_COMPILE=aarch64-linux-gnu- \
-> +          CFG_TEE_BENCHMARK=n \
 
-This CFG has been removed from optee_os since 4.2.0 and has never been enabled
-by default, so I would think there is no need to set it to n here.
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-Thanks,
 -- 
-Jerome
-
->            O=out/arm \
->            PLATFORM=imx-mx8mm_phygate_tauri_l
->  
-> @@ -42,9 +47,9 @@ Get the ddr firmware
->  
->  .. code-block:: bash
->  
-> -   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.23.bin
-> -   $ chmod +x firmware-imx-8.23.bin
-> -   $ ./firmware-imx-8.23.bin
-> +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.28-994fa14.bin
-> +   $ chmod +x firmware-imx-8.28-994fa14.bin
-> +   $ ./firmware-imx-8.28-994fa14.bin
->  
->  Build U-Boot for SD card
->  ------------------------
-> @@ -56,15 +61,17 @@ Copy binaries
->  
->     $ cp <TF-A dir>/build/imx8mm/release/bl31.bin .
->     $ cp <OP-TEE dir>/out/arm/core/tee-raw.bin tee.bin
-> -   $ cp firmware-imx-8.23/firmware/ddr/synopsys/lpddr4*.bin .
-> +   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr4*.bin .
->  
->  Build U-Boot
->  ^^^^^^^^^^^^
->  
->  .. code-block:: bash
->  
-> -   $ make imx8mm-phygate-tauri-l_defconfig
-> -   $ make flash.bin
-> +   $ make -j $(nproc)
-> +          CROSS_COMPILE=aarch64-linux-gnu- \
-> +          imx8mm-phygate-tauri-l_defconfig \
-> +          flash.bin
->  
->  Flash SD card
->  ^^^^^^^^^^^^^
-> diff --git a/doc/board/phytec/phycore-imx8mm.rst b/doc/board/phytec/phycore-imx8mm.rst
-> index ba6299a968ae9980d583b87b46dcccba5aa4a186..d5edbc91474e95f677dd12e5fcc6c16092dea1cd 100644
-> --- a/doc/board/phytec/phycore-imx8mm.rst
-> +++ b/doc/board/phytec/phycore-imx8mm.rst
-> @@ -21,9 +21,13 @@ Build the ARM Trusted firmware binary
->  
->     $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
->     $ cd trusted-firmware-a
-> -   $ export CROSS_COMPILE=aarch64-linux-gnu-
-> -   $ export IMX_BOOT_UART_BASE=0x30880000
-> -   $ make PLAT=imx8mm BL32_BASE=0x7e000000 SPD=opteed bl31
-> +   $ make -j $(nproc) \
-> +          CROSS_COMPILE=aarch64-linux-gnu- \
-> +          PLAT=imx8mm \
-> +          IMX_BOOT_UART_BASE=0x30880000 \
-> +          BL32_BASE=0x7e000000 \
-> +          SPD=opteed \
-> +          bl31
->  
->  Build the OP-TEE binary
->  -----------------------
-> @@ -32,8 +36,9 @@ Build the OP-TEE binary
->  
->     $ git clone https://github.com/OP-TEE/optee_os.git
->     $ cd optee_os
-> -   $ make CFG_TEE_BENCHMARK=n \
-> +   $ make -j $(nproc) \
->            CROSS_COMPILE=aarch64-linux-gnu- \
-> +          CFG_TEE_BENCHMARK=n \
->            O=out/arm \
->            PLATFORM=imx-mx8mm_phyboard_polis
->  
-> @@ -42,9 +47,9 @@ Get the ddr firmware
->  
->  .. code-block:: bash
->  
-> -   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.19.bin
-> -   $ chmod +x firmware-imx-8.19.bin
-> -   $ ./firmware-imx-8.19.bin
-> +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.28-994fa14.bin
-> +   $ chmod +x firmware-imx-8.28-994fa14.bin
-> +   $ ./firmware-imx-8.28-994fa14.bin
->  
->  Build U-Boot for SD card
->  ------------------------
-> @@ -55,15 +60,18 @@ Copy binaries
->  .. code-block:: bash
->  
->     $ cp <TF-A dir>/build/imx8mm/release/bl31.bin .
-> -   $ cp firmware-imx-8.19/firmware/ddr/synopsys/lpddr4*.bin .
-> +   $ cp <OP-TEE dir>/out/arm/core/tee-raw.bin tee.bin
-> +   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr4*.bin .
->  
->  Build U-Boot
->  ^^^^^^^^^^^^
->  
->  .. code-block:: bash
->  
-> -   $ make phycore-imx8mm_defconfig
-> -   $ make flash.bin
-> +   $ make -j $(nproc) \
-> +          CROSS_COMPILE=aarch64-linux-gnu- \
-> +          phycore-imx8mm_defconfig \
-> +          flash.bin
->  
->  Flash SD card
->  ^^^^^^^^^^^^^
-> diff --git a/doc/board/phytec/phycore-imx8mp.rst b/doc/board/phytec/phycore-imx8mp.rst
-> index e1385be25e1a862db7021e29cd5d0d3ba68cc01b..8995a2965328dc645fd29ad979e399bf7652106c 100644
-> --- a/doc/board/phytec/phycore-imx8mp.rst
-> +++ b/doc/board/phytec/phycore-imx8mp.rst
-> @@ -3,7 +3,7 @@
->  phyCORE-i.MX 8M Plus
->  ====================
->  
-> -The phyCORE-i.MX 8M Plus with 2GB of main memory is supported.
-> +The phyCORE-i.MX 8M Plus with 1,2,4GB of main memory is supported.
->  
->  Quick Start
->  -----------
-> @@ -21,9 +21,13 @@ Build the ARM Trusted firmware binary
->  
->     $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
->     $ cd trusted-firmware-a
-> -   $ export CROSS_COMPILE=aarch64-linux-gnu-
-> -   $ export IMX_BOOT_UART_BASE=0x30860000
-> -   $ make PLAT=imx8mp BL32_BASE=0x7e000000 SPD=opteed bl31
-> +   $ make -j $(nproc) \
-> +          CROSS_COMPILE=aarch64-linux-gnu- \
-> +          PLAT=imx8mp \
-> +          IMX_BOOT_UART_BASE=0x30860000 \
-> +          BL32_BASE=0x7e000000 \
-> +          SPD=opteed \
-> +          bl31
->  
->  Build the OP-TEE binary
->  -----------------------
-> @@ -32,20 +36,20 @@ Build the OP-TEE binary
->  
->     $ git clone https://github.com/OP-TEE/optee_os.git
->     $ cd optee_os
-> -   $ make CFG_TEE_BENCHMARK=n \
-> -     CROSS_COMPILE=aarch64-linux-gnu- \
-> -     O=out/arm \
-> -     PLATFORM=imx-mx8mp_phyboard_pollux \
-> -     CFG_TZDRAM_START=0x7e000000
-> +   $ make -j $(nproc) \
-> +          CROSS_COMPILE=aarch64-linux-gnu- \
-> +          CFG_TEE_BENCHMARK=n \
-> +          O=out/arm \
-> +          PLATFORM=imx-mx8mp_phyboard_pollux
->  
->  Get the ddr firmware
->  --------------------
->  
->  .. code-block:: bash
->  
-> -   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.19.bin
-> -   $ chmod +x firmware-imx-8.19.bin
-> -   $ ./firmware-imx-8.19.bin
-> +   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.28-994fa14.bin
-> +   $ chmod +x firmware-imx-8.28-994fa14.bin
-> +   $ ./firmware-imx-8.28-994fa14.bin
->  
->  Build U-Boot for SD card
->  ------------------------
-> @@ -57,15 +61,17 @@ Copy binaries
->  
->     $ cp <TF-A dir>/build/imx8mp/release/bl31.bin .
->     $ cp <OP-TEE dir>/out/arm/core/tee-raw.bin tee.bin
-> -   $ cp firmware-imx-8.19/firmware/ddr/synopsys/lpddr4*.bin .
-> +   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr4*.bin .
->  
->  Build U-Boot
->  ^^^^^^^^^^^^
->  
->  .. code-block:: bash
->  
-> -   $ make phycore-imx8mp_defconfig
-> -   $ make flash.bin
-> +   $ make -j $(nproc) \
-> +          CROSS_COMPILE=aarch64-linux-gnu- \
-> +          phycore-imx8mp_defconfig \
-> +          flash.bin
->  
->  Flash SD card
->  ^^^^^^^^^^^^^
-> 
+Best regards,
+Dhruva Gole
+Texas Instruments Incorporated
