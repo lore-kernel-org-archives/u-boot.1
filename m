@@ -4,92 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35044CAC583
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 11:16:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91ECCCA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 11:26:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFB5483106;
-	Tue,  9 Sep 2025 13:16:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8158883106;
+	Tue,  9 Sep 2025 13:26:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yzM8xZl4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jb2aL3QJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2688F8313B; Tue,  9 Sep 2025 13:16:12 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id CFE788313B; Tue,  9 Sep 2025 13:26:33 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0222F830B4
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 13:16:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7EED830B4
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 13:26:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3e34dbc38easo2338988f8f.1
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 04:16:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3e7428c4cbdso1580222f8f.0
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 04:26:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757416568; x=1758021368; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=RII/C/evaQNkvtmegimO82rN+7nStGrRen3/b4S2a+w=;
- b=yzM8xZl4OG119VUMXqXk6SyqwgWZQiJJpDX5y187idEd7G1ziMho5IsR1HSZqm4N6o
- eNlzEJ8rCTV4zGjWNtIL96YskyA/cdEgrUME5vEeuyezsutW7BfqRojiG/fcMQiOnCwv
- TKE+Uq3Gr5Nd9RgaCgWKX7rNb6cQVjA7VDEqbqbDu+cUX/Rr2fX5uDpkXXS13Fz+rWrW
- 6qyknETex6Ol8aMj+zvG1dBoJyepYKSmUKqAKHdVnSayPVi+HAAbJvdRybM2Av3/AD6B
- FyrlrHAdOAJQEVCf880qfLvmbcMsAW3W304m5MH8Fwg3TNY6loMB8Bxpa+US8+vaBW/Z
- G5CQ==
+ d=gmail.com; s=20230601; t=1757417191; x=1758021991; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SYBosi4Ond0DYdGOwqVwxQ8HT5ER+bj9kB9+FsbHuTE=;
+ b=Jb2aL3QJ6jipy+s/Rd64wNAYG7O0QM+JJe4ywWcPAoPhODtPDR2p+IENsk4CqzrpIe
+ xmz34cmtcxy81CgF7v6lgTt/LH0bd8g4Qjkk6d2J3+QyEp+R8aten3tQg0eNdbpFH6sr
+ GSN4AaRa6trYe5S0KtHYdGP9gvEgNJJvmrJt3gzXhYRmUyOH1MHxmuXcF40KTrrbAHCx
+ JxmAkQCp3rUAohJOXtx1lJ9zhI/X7FXKz55Cchy67hPdQJ63kpzwQnjSTDOalqa1BFCu
+ mDqe5NURO4QwYr0zKu2/H7xldoWHL4Mp0WgPUs7h4uaw9eVHpmtNk40gMznvpT3DrYZj
+ z91g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757416568; x=1758021368;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RII/C/evaQNkvtmegimO82rN+7nStGrRen3/b4S2a+w=;
- b=r7/ukCwnPeaZEFacxgpSoX5nT6bSObCJVhviQO4eJToXDl7LtzcW9v+IJn/iEYTdn9
- IN4E1UZ8YTJWRTO/LAxTduvwzd058sYvm14ku1pjStuDe3R/WRxTr+x6zjYJdvL7uZ7h
- M9POZEwZw/z56C2W+TuF/VoztmKS4iiFy9PNUxFwcBrBHPF0y94mJFIngij/qR6fENjD
- k+qOjPPuBldpJTarToTk9e0rWHnSH3o2D3gsO8OlTqWsnspOhLbw9ERBhAafL1k867Lf
- FlrMuYZuOY4lXczxHxFCVDwIYdx8fyfhqF9sHvlFPOOqjjkhAdLL5iosDNM3syYJeyLa
- vMww==
-X-Gm-Message-State: AOJu0YxRakk1B9iTssSBCE6ojxfL3Vz40nzzAU27urjuRILs99n+q0P/
- k8JXLAP89X9yLEPrMp/8yweoGYkbwJ0nTXqE3Y1V5phfPqsEl/c9ivGCOEN4Vr5OgQU=
-X-Gm-Gg: ASbGncuOi19VDCwIlGX6y29t+pJCqt1UXBLTsXLnrEFVxBTnTJygT5mCS0DgnpL6rlD
- DZ/XepeBNr2Qrs3ll+6rJrlu/bx/nuL2M6B0LnHXMBAMAJlhiMWZX0PX2xCr3IvAtDeenA+ki/Z
- 1ugNo1wXVkimwnJpplYRNmRCbkT3ISxmjBR0gRXLlxiJsaKJR1yk1qrsbXkkcaWWHcunVJGrH5y
- ZfdlRfY8IW523c7QPf0ZjigSah9qovLs+N1WR3Oo+IIumYZ9KIiqcJ69a710qc6M861JQL45QRh
- w1SoFZ0NiPNS6uQ1JWmzZpLjH8jZqodxj0FKH9hfaSvhs6XrqOAxzlJ+1KUtJhU4tQKiQN/U3D9
- CLWxor3Gi2/hDfzTXxYoYdGDTUkKtNo4DNTg/T/bMCPxCc8+VVUM2FjYt
-X-Google-Smtp-Source: AGHT+IEglz54tUTxA/x3hJpLtoZd08pR42o7QjDZ89F8b7hiaSAsfrm5+VwyeIgXkSJwtFYq2a4ENg==
-X-Received: by 2002:a05:6000:2312:b0:3dc:2f0e:5e2d with SMTP id
- ffacd0b85a97d-3e62a305f39mr8111805f8f.0.1757416568155; 
- Tue, 09 Sep 2025 04:16:08 -0700 (PDT)
-Received: from [192.168.7.92] ([212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3e7522387acsm2226284f8f.40.2025.09.09.04.16.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Sep 2025 04:16:07 -0700 (PDT)
-Message-ID: <0f65b701-c8d6-4f7d-8124-65d5b5477f35@linaro.org>
-Date: Tue, 9 Sep 2025 13:16:07 +0200
+ d=1e100.net; s=20230601; t=1757417191; x=1758021991;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=SYBosi4Ond0DYdGOwqVwxQ8HT5ER+bj9kB9+FsbHuTE=;
+ b=og2DpxG0OlXS8t+Yq59QdWdXOwAf26PdpZW/9IdKpop4GeMyuRWzyUwrBiT8REHujf
+ xMdi0k/DU5GlmyNy1sd30Ka9B4oW8srVwHqXGsPpx2m939it5rgIy6o3EzL3bmtIOFVx
+ Yt/jkGbXq6uhAPzO45w50c/khkBoAFikxbfR/m+Jsk6jQpmhlhMRmVwDa4yVBmfCI6+s
+ Us4dGUy4yenB7vjeh0231QRIMr3DnfWw/aWkiZ2XjxNDPmWjRwYF8blAgvlpmoB8WwT/
+ b2UIWi1FLEP9PDXGqYOIFcOnijfYKIOlKdwiVCxAY+lryefntf+d69dO3xOl6/d5JRI/
+ 9wxQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXTgNQGKJUXCa2Eu915o5AqIud2sPiGmNwiffvTcpNwBCFwq9EfqmLiTT8AG3Xyl5WTDjGq8RQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6Pik+6IUgiSlQ8q5KDBnU5htMNbEtsY3xGaI3edkoC1ok51xD
+ WnZr4GXACg/Rk/TLDDMcoQWWDAHLH8+wC1k3ejxEZkw+WQ6XtqXsZ6biMpKpC/g7F1I7+vO/vEH
+ bReai3LSWwzVWBMxJIwUZHtjQCRgvPn8=
+X-Gm-Gg: ASbGncutGypHT+O2E0QYam9/HlfHvO6Lpv+KVT14A0do+aPd31oQ/NX/GNzZElB5oYs
+ I88u6jG0hDXp0Pxm2mPknSvchKDM0+eR0fBP5A8QZ2gPOg6CJYRtqqDIXJ7MHEwPdpcqXr3Njie
+ R4R5nbQEf2SR5KXZok8Zy8A2KOYYpLFTauRG05dK9v8EFDzaE5K3ChKJ688TASLFywAwUPRu6Xs
+ MjaA9LX
+X-Google-Smtp-Source: AGHT+IGqKRuqWYxNJflgcGhznIyCCOJ7UH3VCtnzwaJEthw6JT0+PPx8iKH2V3EiQ3L1A2APr8YsvTysLL3isNQvEm8=
+X-Received: by 2002:a05:6000:22c3:b0:3cb:e47c:5e4e with SMTP id
+ ffacd0b85a97d-3e634aede67mr10170598f8f.24.1757417191013; Tue, 09 Sep 2025
+ 04:26:31 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] doc: phytec: imx8m: Style and firmware update
-To: Yannic Moog <Y.Moog@phytec.de>, Tom Rini <trini@konsulko.com>,
- Fabio Estevam <festevam@gmail.com>, Teresa Remmet <T.Remmet@phytec.de>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- Benjamin Hahn <B.Hahn@phytec.de>, Yashwanth Varakala <Y.Varakala@phytec.de>,
- Jan Remmet <J.Remmet@phytec.de>
-References: <20250908-imx8m-optee-enable-v3-0-14bfe249b3c6@phytec.de>
- <20250908-imx8m-optee-enable-v3-3-14bfe249b3c6@phytec.de>
- <c2da0d18-9ce0-4c0f-8495-977ad7d8ca5b@linaro.org>
- <bd26f72ce7e0676c81d829aaef335aa4e60f582a.camel@phytec.de>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <bd26f72ce7e0676c81d829aaef335aa4e60f582a.camel@phytec.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250826093936.3521235-1-lukma@nabladev.com>
+ <CAPVz0n3wpLtXB=1ZS4WiihVkDPTza75dXDKMjD63OyeSQwACRQ@mail.gmail.com>
+ <20250908144107.10bcb8a1@wsk>
+ <CAPVz0n3XoeMmGO7YpVPrej-R2m-vR1T_D1GsEbxJM+iJVGhAfQ@mail.gmail.com>
+ <20250909121537.1c2a95b1@wsk>
+In-Reply-To: <20250909121537.1c2a95b1@wsk>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Tue, 9 Sep 2025 14:26:19 +0300
+X-Gm-Features: AS18NWAPRXdy-ShQmDghCncCT6Y48qwmw9tKTcKOABhvGUnG_tVeMA2YLXrp_dQ
+Message-ID: <CAPVz0n3M-GQCO=bpD9pMBsaW90xSqYRZZjsFpZp4p7-BF5MrTw@mail.gmail.com>
+Subject: Re: [PATCH 1/2] timer: tegra: Bind watchdog driver when timer node is
+ processed
+To: =?UTF-8?Q?=C5=81ukasz_Majewski?= <lukma@nabladev.com>
+Cc: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ u-boot@lists.denx.de, 
+ Tom Warren <twarren@nvidia.com>, Stephen Warren <swarren@nvidia.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,77 +101,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+=D0=B2=D1=82, 9 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 13:15 =C5=
+=81ukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> Hi Svyatoslav,
+>
+> > =D0=BF=D0=BD, 8 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 15:41 =
+=C5=81ukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> > >
+> > > Hi Svyatoslav,
+> > >
+> > > > =D0=B2=D1=82, 26 =D1=81=D0=B5=D1=80=D0=BF. 2025=E2=80=AF=D1=80. =D0=
+=BE 12:39 Lukasz Majewski <lukma@nabladev.com>
+> > > > =D0=BF=D0=B8=D1=88=D0=B5:
+> > > > >
+> > > > > The Tegra30 SoC is a bit special, as it doesn't have the
+> > > > > separate IP block to provide watchdog functionality.
+> > > > >
+> > > > > Instead, timer IP block allows such functionality when properly
+> > > > > configured.
+> > > > >
+> > > > > As in the tegra30.dtsi there is a timer node, which "covers" all
+> > > > > timers, with 'nvidia,tegra30-timer' compatibility it was
+> > > > > necessary to manually bind U-Boot's WDT driver (based on
+> > > > > WDT_UCLASS).
+> > > > >
+> > > > > Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
+> > > > > ---
+> > > > >  drivers/timer/tegra-timer.c | 18 ++++++++++++++++++
+> > > > >  1 file changed, 18 insertions(+)
+> > > > >
+> > > >
+> > > > What is the practical application for this diver in therms of
+> > > > Tegra and U-Boot overall?
+> > >
+> > > You have the WDT functionality working. It uses the same DTS
+> > > bindings as ones used in Linux.
+> >
+> > Why do we need WDT for Tegra in U-Boot at all?
+>
+> Can you correct me if I draw wrong conclusion - you ask why Tegra needs
+> to support watchdog in u-boot bootloader ?
+>
+> > It is not used and has
+> > no practical application.
+> >
+>
+> Yes, it has ...
+>
+> Customer has number of Tegra30 colibri modules in the field. They want
+> to switch to u-boot + linux kernel BSP.
+>
+> For their application - it would be welcome if the device could reboot
+> and start emergency procedure in the case of not being able to start
+> Linux.
+>
+> The procedure is that we start Watchdog at very early boot - then we do
+> have for example 30 seconds to "feed" the Watchdog in Linux
+>
+> When we fail, after watchdog reboot, we can switch to another rootfs
+> partition (the A/B scheme of booting) or start emergency system.
+>
 
-
-On 9/9/25 13:12, Yannic Moog wrote:
-> Hi Jerome,
-> 
-> Am Dienstag, dem 09.09.2025 um 11:58 +0200 schrieb Jerome Forissier:
->> Hi Yannic,
->>
->> On 9/8/25 08:34, Yannic Moog wrote:
->>> Use single make command for compiling blobs and U-Boot.
->>> Update the imx firmware version.
->>>
->>> Signed-off-by: Yannic Moog <y.moog@phytec.de>
->>> ---
->>>  doc/board/phytec/imx8mm-phygate-tauri-l.rst | 27 ++++++++++++++--------
->>>  doc/board/phytec/phycore-imx8mm.rst         | 28 ++++++++++++++--------
->>>  doc/board/phytec/phycore-imx8mp.rst         | 36 +++++++++++++++++---------
->>> ---
->>>  3 files changed, 56 insertions(+), 35 deletions(-)
->>>
->>> diff --git a/doc/board/phytec/imx8mm-phygate-tauri-l.rst
->>> b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
->>> index
->>> 7efc9392361b4a867ce2bc18db11aacf31208800..4dd82cd9785fa585ed216664a25f593d4e
->>> 723dbb 100644
->>> --- a/doc/board/phytec/imx8mm-phygate-tauri-l.rst
->>> +++ b/doc/board/phytec/imx8mm-phygate-tauri-l.rst
->>> @@ -21,9 +21,13 @@ Build the ARM Trusted firmware binary
->>>  
->>>     $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
->>>     $ cd trusted-firmware-a
->>> -   $ export CROSS_COMPILE=aarch64-linux-gnu-
->>> -   $ export IMX_BOOT_UART_BASE=0x30880000
->>> -   $ make PLAT=imx8mm BL32_BASE=0xbe000000 SPD=opteed bl31
->>> +   $ make -j $(nproc) \
->>> +          CROSS_COMPILE=aarch64-linux-gnu- \
->>> +          PLAT=imx8mm \
->>> +          IMX_BOOT_UART_BASE=0x30880000 \
->>> +          BL32_BASE=0xbe000000 \
->>> +          SPD=opteed \
->>> +          bl31
->>>  
->>>  Build the OP-TEE binary
->>>  -----------------------
->>> @@ -32,8 +36,9 @@ Build the OP-TEE binary
->>>  
->>>     $ git clone https://github.com/OP-TEE/optee_os.git
->>>     $ cd optee_os
->>> -   $ make CFG_TEE_BENCHMARK=n \
->>> +   $ make -j $(nproc) \
->>>            CROSS_COMPILE=aarch64-linux-gnu- \
->>> +          CFG_TEE_BENCHMARK=n \
->>
->> This CFG has been removed from optee_os since 4.2.0 and has never been enabled
->> by default, so I would think there is no need to set it to n here.
-> 
-> Thanks for the info, will remove it.
-> Should we remove it from the optee doc as well then?
-> https://optee.readthedocs.io/en/latest/building/gits/optee_os.html#build-using-gnu-make
-
-Yes, good catch. I will submit a PR to the docs project [1]
-
-[1] https://github.com/OP-TEE/optee_docs
-
-Thanks,
--- 
-Jerome
-
-> 
-> Yannic
-> 
-> 
->>
->> Thanks,
+So when are you going to submit this board variant? If driver has no
+users, it is removed.
