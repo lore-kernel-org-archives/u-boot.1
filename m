@@ -4,58 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E7D8CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 13:00:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EF1CA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 13:00:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3164831EA;
-	Tue,  9 Sep 2025 14:59:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 5167783252;
+	Tue,  9 Sep 2025 14:59:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="jRxfHLuk";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="q6YLPBgt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6E0F8312A; Tue,  9 Sep 2025 12:15:47 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 457488312A; Tue,  9 Sep 2025 14:07:38 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 932E2830B4
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 12:15:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ by phobos.denx.de (Postfix) with ESMTPS id EE188830B4
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 14:07:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukma@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id DC19D1001AC; Tue,  9 Sep 2025 12:15:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1757412944;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=vojCgNnMdDSt0nNaYgnSkt8rS/9Txkst+Zku1GgxHFI=;
- b=jRxfHLukyadfj0lsfmwdKMG8efNGjzi6qvseiKa6U+CnHDy9EOy/p2664NKAonQ9ru0bnK
- 5lFvg8QvJgs+Ugsk51h1dKxgDUIpz8R6w/tgdpl1TWbHx3xfs2sRwaDkXTRWa9U+sqQVyz
- wBGdCK3QhGf+HjOLFA9uKoQSgdrE0n9NrqjylMRz235PUxlAfWsv4gmRblodjEkoAvs4tY
- jv2nUSa/kHuPjtIvSLVBJGScMEcc7J8s1vMQVdRvwZ7K9vUJW38h4LS4Xe3Z3LVf+jPiw8
- zNx33XgVmIlh3C/XuSrL5qzLn9PJC2j/BwkAM10sZwNzzmZrI096aF5CnMcw0A==
-Date: Tue, 9 Sep 2025 12:15:42 +0200
-From: =?UTF-8?B?xYF1a2Fzeg==?= Majewski <lukma@nabladev.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: Thierry Reding <treding@nvidia.com>, u-boot@lists.denx.de, Tom Warren
- <twarren@nvidia.com>, Stephen Warren <swarren@nvidia.com>
-Subject: Re: [PATCH 1/2] timer: tegra: Bind watchdog driver when timer node
- is processed
-Message-ID: <20250909121537.1c2a95b1@wsk>
-In-Reply-To: <CAPVz0n3XoeMmGO7YpVPrej-R2m-vR1T_D1GsEbxJM+iJVGhAfQ@mail.gmail.com>
-References: <20250826093936.3521235-1-lukma@nabladev.com>
- <CAPVz0n3wpLtXB=1ZS4WiihVkDPTza75dXDKMjD63OyeSQwACRQ@mail.gmail.com>
- <20250908144107.10bcb8a1@wsk>
- <CAPVz0n3XoeMmGO7YpVPrej-R2m-vR1T_D1GsEbxJM+iJVGhAfQ@mail.gmail.com>
-Organization: Nabla
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=jagan@amarulasolutions.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-55f6f434c96so5255476e87.2
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 05:07:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1757419655; x=1758024455;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZZ4BJHVbfFbd0vmhcFRGG7sk9aRYLaAwmWmnQe5BUh8=;
+ b=q6YLPBgtiZWOGX/77VQgiDJoJk2G5vesoQRIFEVV6LtMdvfzmIIORvZgQKM+IrOlX7
+ eQNowdE1/8HK/L00czIDIraGIbPl9RpvLsprCBTZ0Utt7KqUn8yz27cb+mbxcE++TvNy
+ lXNBlJLPZ8AlaEzK5ZgAVb3QreB725o22Ie5o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757419655; x=1758024455;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZZ4BJHVbfFbd0vmhcFRGG7sk9aRYLaAwmWmnQe5BUh8=;
+ b=XuyYLDnYJ1uACE5QU5gPfNuMfriOvPKaZrRCMScsREN2pqZ4dM4q3CQSDs4c1kM6CJ
+ 6DmdUGNDSi0eSnlyZHVq1ZkUK7QlscxKOPCH5q5Jc3/leoPO0h1sH8aDgE6b48L8DfCH
+ YpzkbdMM6rNUafgHW/DxO3IRwtlIXksd6TGIlSR0eYyiJ/PYwX60vmRbF2/ea5IIPcHs
+ pHNaIoFmBOj+7lUq+zDfLotnl6KmEMQpwLTFK3jHjcBZq+UP4Do674IwTIXuD/cEepyJ
+ lDCsvBu7wDp90tPqOUHbsglHujwwx9fKNUilOjIp5B/4d57BQM3DeTR/pJFD3Nd5K9oY
+ geBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVR+hSTZhtkXSn78b88PHBTew3Om3o1DzAMG+rTiS4N6+iPvsYXxHiyg2aM0t0tEG3p+iINFTU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxJO96PFYeavaub/avmK09LD4A+0c4/m9gbt+UbcMw9/zQ/d8T6
+ merdBTrLlMg26+HQc7XTDxHuTeMWRVwfuMWAPh9DNK0kKq5PTZ0gu1wcvMvFNa3ZUqatWeUKGXQ
+ GhQSUPs3eaf4PvWF2AFZG8I3csCTmU4HQi05ZjYACXg==
+X-Gm-Gg: ASbGncsQHxLje9ouZkhAYaDMAZVwAaYDFqb72OggIKjt0xtWlMoaTrvASFkspG/qxRn
+ kXdv9/ELqGNcm+DoaA2y7NmxAJVeak0HS8Dclngd4WgLxF8SCzJSxQVp/6hQs1fSfWxyWJJMEA7
+ wUUyS+qy05R/nRuxFTfjPOnUVIgenWtnsvWCFDwdoThWVQl3nR8HEP/qVt0HIDsReRHpuSV2HIp
+ UfBNb3FXJB3rGOorAwJYdGc3UotedZ0dxSpEQHK
+X-Google-Smtp-Source: AGHT+IGmPTHpHLMu+0+dQ2/sKeXWVk3G/tbxu+ifqXN4v6YdyDl/aJcGJzR1gePqA9R4qnwWsf3gk7Yb/cabH/um+GI=
+X-Received: by 2002:a05:6512:1507:10b0:562:d04d:fa0a with SMTP id
+ 2adb3069b0e04-562d04dfb44mr3532749e87.31.1757419655115; Tue, 09 Sep 2025
+ 05:07:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+References: <20250702092313.970234-1-miquel.raynal@bootlin.com>
+ <87a534exwc.fsf@bootlin.com>
+In-Reply-To: <87a534exwc.fsf@bootlin.com>
+From: Jagan Teki <jagan@amarulasolutions.com>
+Date: Tue, 9 Sep 2025 17:37:24 +0530
+X-Gm-Features: AS18NWCT6-w5JYcINTFKnh9kC0pPzHJynF6eb8cyIzgyiGVujUOwTkY5avPgx7c
+Message-ID: <CAMty3ZDG=MtRbzNPaRs=dz9AUkcTA5cHX+0=wgqyEbMqPhyxrQ@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,
+ 02}jv behave correctly
+To: Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Vignesh R <vigneshr@ti.com>, Steam Lin <stlin2@winbond.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Tue, 09 Sep 2025 14:59:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,126 +97,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Svyatoslav,
-
-> =D0=BF=D0=BD, 8 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 15:41 =C5=
-=81ukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
+On Tue, Sep 9, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@bootlin=
+.com> wrote:
+>
+> Hello,
+>
+> On 02/07/2025 at 11:23:13 +02, Miquel Raynal <miquel.raynal@bootlin.com> =
+wrote:
+>
+> > These chips are internally made of two/four dies with linear addressing
+> > capabilities to make it transparent to the user that two/four dies were
+> > used. There is one drawback however, the read status operation is racy
+> > as the status bit only gives the active die status and not the status o=
+f
+> > the other die. For commands affecting the two dies, it means if another
+> > command is sent too fast after the first die has returned a valid
+> > status (deviation can be up to 200us), the chip will get corrupted/in a=
+n
+> > unstable state.
 > >
-> > Hi Svyatoslav,
-> > =20
-> > > =D0=B2=D1=82, 26 =D1=81=D0=B5=D1=80=D0=BF. 2025=E2=80=AF=D1=80. =D0=
-=BE 12:39 Lukasz Majewski <lukma@nabladev.com>
-> > > =D0=BF=D0=B8=D1=88=D0=B5: =20
-> > > >
-> > > > The Tegra30 SoC is a bit special, as it doesn't have the
-> > > > separate IP block to provide watchdog functionality.
-> > > >
-> > > > Instead, timer IP block allows such functionality when properly
-> > > > configured.
-> > > >
-> > > > As in the tegra30.dtsi there is a timer node, which "covers" all
-> > > > timers, with 'nvidia,tegra30-timer' compatibility it was
-> > > > necessary to manually bind U-Boot's WDT driver (based on
-> > > > WDT_UCLASS).
-> > > >
-> > > > Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
-> > > > ---
-> > > >  drivers/timer/tegra-timer.c | 18 ++++++++++++++++++
-> > > >  1 file changed, 18 insertions(+)
-> > > > =20
-> > >
-> > > What is the practical application for this diver in therms of
-> > > Tegra and U-Boot overall? =20
+> > The solution adopted here is to iterate manually over all internal
+> > dies (which takes about 30us per die) until all are ready. This approac=
+h
+> > will always be faster than a blind delay which represents the maximum
+> > deviation, while also being totally safe.
 > >
-> > You have the WDT functionality working. It uses the same DTS
-> > bindings as ones used in Linux. =20
->=20
-> Why do we need WDT for Tegra in U-Boot at all?=20
-
-Can you correct me if I draw wrong conclusion - you ask why Tegra needs
-to support watchdog in u-boot bootloader ?
-
-> It is not used and has
-> no practical application.
->=20
-
-Yes, it has ...
-
-Customer has number of Tegra30 colibri modules in the field. They want
-to switch to u-boot + linux kernel BSP.
-
-For their application - it would be welcome if the device could reboot
-and start emergency procedure in the case of not being able to start
-Linux.
-
-The procedure is that we start Watchdog at very early boot - then we do
-have for example 30 seconds to "feed" the Watchdog in Linux
-
-When we fail, after watchdog reboot, we can switch to another rootfs
-partition (the A/B scheme of booting) or start emergency system.
-
-
-> > > Where is can be used so that existing means of
-> > > U-Boot cannot handle such case? =20
+> > A flash-specific hook for the status register read had to be
+> > implemented. Testing with the flash_speed benchmark in Linux shown no
+> > difference with the existing performances (using the regular status rea=
+d
+> > core function).
 > >
-> > Currently u-boot for Tegra 30 doesn't support Watchdog at all... =20
->=20
-> Yes, and it does not affect or break anything.
-
-Could you be more specific?
-
->=20
-> > You have for example collibri T30 modules without WDT functionality
-> > support. =20
->=20
-> Correct and? ALL Tegra devices work perfectly fine WITHOUT WDT
-
-They will not fulfil requirements of my customer's use case...
-
->=20
-> > After adding those patches you can use WDT class (and wdt command)
-> > to control WDT.
-> > =20
->=20
-> And what is the benefit? To have a driver for the sake of having a
-> driver?
-
-The benefit is simple - WDT support in u-boot allows my customer to
-switch to open source BSP.
-
-Many other SoCs (like NXP) do support Watchdog.
-
->=20
-> > Do you have more specific questions?
+> > As the presence of multiple dies is not filled in these chips SFDP
+> > tables (the table containing the crucial information is optional), we
+> > need to manually wire the hook.
 > >
+> > This change is adapted from Linux.
 > >
-> > It is strange, but I've just noticed your reply (caused probably by
-> > my "work" mail switch), so I would like to apologize for a late
-> > reply.
-> >
-> >
-> > --
-> > Best regards,
-> >
-> > Lukasz Majewski
-> >
-> > --
-> > Nabla Software Engineering GmbH
-> > HRB 40522 Augsburg
-> > Phone: +49 821 45592596
-> > E-Mail: office@nabladev.com
-> > Geschftsfhrer : Stefano Babic =20
+> > Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-volatil=
+e-bit-v3-1-735363f8cc7d@bootlin.com/
+> > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>
+> Same question for this one, no feedback for the past 2 months, I'm not
+> sure who's supposed to take these, Jagan and Vignesh you are marked M:
+> in maintainers, any chances this can get it?
 
+Unfortunately, I was off quite some-time. Need little bit of time.
+Vighnesh is off for years. In the meantime, Michael will help in
+review but need help on testing.
 
-
---=20
-Best regards,
-
-Lukasz Majewski
-
---
-Nabla Software Engineering GmbH
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschftsfhrer : Stefano Babic
+Thanks,
+Jagan.
