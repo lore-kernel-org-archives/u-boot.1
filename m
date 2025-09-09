@@ -4,39 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B0ECAC589
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 07:41:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D771CA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 08:17:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59AAA830B4;
-	Tue,  9 Sep 2025 09:41:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id A537B830B4;
+	Tue,  9 Sep 2025 10:17:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6470E83106; Tue,  9 Sep 2025 09:41:42 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BF3080422;
- Tue,  9 Sep 2025 09:41:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [98.97.63.30]) (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id AF397B22003F;
- Tue,  9 Sep 2025 09:41:38 +0200 (CEST)
-Message-ID: <5291c19d-c200-4f56-b180-62b705b23b38@freeshell.de>
-Date: Tue, 9 Sep 2025 00:41:36 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G4R/cayK";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 37F8583106; Tue,  9 Sep 2025 10:17:40 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CB38F80422
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 10:17:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5898HZmE4059922;
+ Tue, 9 Sep 2025 03:17:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757405855;
+ bh=KGlmUEgPNELDBUiBPSVg3frNLdjKOOc7iSKNm4Q20vo=;
+ h=From:To:CC:Subject:Date;
+ b=G4R/cayKajZSbCq72GOyftkxnvnH+dE0Cd9rL6Wj3MdA9pILFRgNip/TU9vkzGkYa
+ zlUbUhWmXnFGi3ShDmwhcnkGP6mW0NjMWGa24a0cPeGEVzt1OGPElGffW74EHdXumm
+ X+grqM6jhspMuS3bS/ft9IfY1XhaluS3EY34OE/A=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5898HZoG211165
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 9 Sep 2025 03:17:35 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 9
+ Sep 2025 03:17:34 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55 via
+ Frontend Transport; Tue, 9 Sep 2025 03:17:34 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5898HX4i2032665;
+ Tue, 9 Sep 2025 03:17:34 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>
+Subject: [PATCH -master v1] spl: spi: fix falcon mode for spi boot
+Date: Tue, 9 Sep 2025 13:47:30 +0530
+Message-ID: <20250909081731.2625363-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [ANN] U-Boot v2025.10-rc4 released
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-References: <20250908162046.GS124814@bill-the-cat>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20250908162046.GS124814@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,55 +76,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+spl_start_uboot is a board overridable function that switches to falcon
+boot mode on return value of 0.
 
-On 9/8/25 09:20, Tom Rini wrote:
-> Hey all,
-> 
-> It's release day and I have tagged and pushed things out and will merge
-> this to next and push once CI completes. One thing I should mention up
-> front is that in terms of project organization, we're moving ahead with
-> SFC and they'll be joining us on the community call that follows the
-> v2025.10 release itself. I would strongly encourage anyone with
-> questions or concerns to join and speak up, or reach out privately if
-> desired. If anyone knows of regression fixes that need to be picked up
-> still please reach out.
-> 
-> We're continuing with a community meeting following the release
-> and once again this is the same time as the previous meeting. The
-> meeting details itself are:
-> https://meet.google.com/btj-wgcg-euw
-> September 9th, 2025. 9am (GMT -06:00)
-> 
-> To join by phone:
-> https://meet.google.com/tel/btj-wgcg-euw?pin=1307528552322&hs=1
-> 
-> In terms of a rough changelog:
-> - Enhancements, improvements, fixes and new platforms on atmel, tegra,
->   rockchip, stm32, renesas, samsung and TI.
-> - Documentation cleanups
-> 
-> I continue to plan to do an rc release every two weeks and the final
-> release will be 06 October 2025.
-> 
-> Thanks all!
-> 
+Though for SPI, the falcon boot mode was being enabled on return value
+of 1 which is not the correct behaviour. Therefore this patch fixes it
+to the expected boot flow.
 
-Hi Tom,
+Fixes: 14509a28aa20 ("spl: spi: Consolidate spi_load_image_os into spl_spi_load_image")
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+ common/spl/spl_spi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Please merge
-https://lore.kernel.org/u-boot/20250901112748.676541-1-e@freeshell.de/
-"[PATCH v1] configs: starfive: Add visionfive2 CONFIG_DNS enabled". This
-fixes the regression in DNS functionality for that board only. If there
-are other LwIP users they should possibly add this to defconfig(s) as
-well. The regression is that with LwIP enabled previously DNS was
-working when enabled; after the LwIP DNS code refactor this
-functionality would have required to enable CMD_DNS so we have since
-merged the new functionality for adding CONFIG_DNS symbol; This
-improvement alone does not solve the matter it must also be turned on in
-each board config that is affected.
+diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
+index 00dbd3011f0..c2b188371c2 100644
+--- a/common/spl/spl_spi.c
++++ b/common/spl/spl_spi.c
+@@ -80,7 +80,7 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
+ 	spl_load_init(&load, spl_spi_fit_read, flash, 1);
+ 
+ #if CONFIG_IS_ENABLED(OS_BOOT)
+-	if (spl_start_uboot()) {
++	if (!spl_start_uboot()) {
+ 		int err = spl_load(spl_image, bootdev, &load, 0,
+ 				   CONFIG_SYS_SPI_KERNEL_OFFS);
+ 
+-- 
+2.51.0
 
-I don't know what other boards (if any) are affected that would need
-CONFIG_DNS added. At least for StarFive VisionFive2 this restores the
-missing functionality.
-
--E Shattow
