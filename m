@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D7BCA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 22:57:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F1E9CAC582
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 22:57:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68EEC831A4;
+	by phobos.denx.de (Postfix) with ESMTP id AE9C983214;
 	Wed, 10 Sep 2025 00:57:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iU3L99fB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CAEb1VGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CAE882B20; Wed, 10 Sep 2025 00:57:41 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 4FEA3831BE; Wed, 10 Sep 2025 00:57:43 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82FE282B20
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 00:57:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22B8B831A4
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 00:57:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-88735894d29so221875139f.1
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 15:57:38 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-88776dcac7aso89476539f.1
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 15:57:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757458657; x=1758063457; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757458659; x=1758063459; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZCbQiZMLhu4q1cCLhoHMRFArITtY4D1bIApHnYaXz/c=;
- b=iU3L99fBq74vfiNV2BuPRG0gG8UqoBue0Oa+XWvpqT8IbfLz+PpmW1pAxOFRTKNgwx
- MA88RA9fqrqVt6carj4mXGnfWISM9pUwrb9HDJHLeNK7hz8t1HjZbBfQU9lG3pvLnGWe
- 0AVbgj446X0wVEyHvRH/JsznK4tqiS6yEMm/0=
+ bh=5XCXgK4Be9SePxaV/RrOy+ZtjEG6cJiCFRsiWTkQp28=;
+ b=CAEb1VGiS511lHjsZmhSNMtQo9GlsOc7lEAuS1jnHNUPE3pHwBN5nsNwDfEN+k4RMK
+ oy6RYXrTmIOnec4stATinRtyYiIX1d4Bhu69dm/ZNeq6UjBGii6Hpg0X7xVsTAxlAs3E
+ QLJqvmKwFPeeu4U2ge1SBwE6zseo87qt+4soU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757458657; x=1758063457;
+ d=1e100.net; s=20230601; t=1757458659; x=1758063459;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZCbQiZMLhu4q1cCLhoHMRFArITtY4D1bIApHnYaXz/c=;
- b=cpHvkp3s59rq51RUqHOzHvkD22VqJZ62rIhL9Qk4boEKEAbhrbUA0SY6lYAirBBUcs
- mGpQGkOpEMZEQndBfMMgOuGYSfcS7wP93VaHQrfTZ6DKsNkNRZiBN6kPTuCeKTy3DaHS
- vO0zWKxT3tpJsq96XlM0BqPjQD4xEUMZ4LVhkWw4Wv7wAIhCjMlhJY+OIJNuhmQKqnI3
- wlG6w85hVjLIfP7WnYbjAcaGy/z7QSwgKjxnKg4q0aK3IzlSc9IzBJwglG8vlAQjV/w8
- vzp2JDtz6lWw3CQl2KSNU2xH+z4gtdSRllFU5I9HlYxRYRLRscgy4Oqs2VhZa0ZqQWnY
- A6uA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU8cdasD6KtQIjBGJGt1Yok7coOuAUonyMxiTdDrToIfmbeengIqnxvcYslVlSHFgVvhOUYDJA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRib0so0oimomhlUwZWLk8fAsx51bScy+sWlJrJS1xwq8h/UBq
- 3jgKZxGBTZHjJ6Fu61c6Jm2DmtPHfkDx3A76XRcyz8JJgd8Qn+SWPU69SnyjrMfzT09ssr4POrk
- XS7UocpU=
-X-Gm-Gg: ASbGnctCrhACpwYgbjIYIf1oLs+yFoa/hCy0YOh0tZmEEC3JaSRRxFQM0ZWC52ZoYdu
- vii3FfsDGrIbtxrB1BnysoGWnPaB2qYxKfWOPt4ph7oJoMxT31QR7PvXBZYZ2/FLC7Hwmd7yZcX
- CgtYuL2+Sb7ETUe7XTKuVURyYcQZiJj3D2qrubIfmIocyWMuSjQroGapZ7Kv4F+Xi1RsEeg5e0p
- zdQxTz1URE98HsoRC5bj3quQqH1MuvSF9xYtNNUVMLTsbXED6wi3McADTwbw5SoOQsCVSBNGvU1
- ZN2E/3pq+082PsV5XArEHsfHKfDeo497kq2RmGEf0pb5RrpJ1LGaubrDGaLGPxV8hF7Ss+Az/x4
- OB5vWSBdmIIzk+UfGyeVyNMO6N2VAuQ3PhmStAf5q49pRcsTZbbgxHSxuRrY3LspqHQ==
-X-Google-Smtp-Source: AGHT+IGpLxi37gOhrvb4OX8Rsqee/NMCDDzFVLLFCCsmJThJ15wbVQXVExfU1ry7HgEQv2yN2cZ6aw==
-X-Received: by 2002:a05:6602:4a0d:b0:889:b536:779b with SMTP id
- ca18e2360f4ac-889b53679ecmr1913939239f.7.1757458657210; 
- Tue, 09 Sep 2025 15:57:37 -0700 (PDT)
+ bh=5XCXgK4Be9SePxaV/RrOy+ZtjEG6cJiCFRsiWTkQp28=;
+ b=P2tJPq0JJpQtNNosBDtmxJbas22eU6geirdmPubdWRaLiXt1JcA7dAUgteh0NSaMNn
+ ljlk7zIGenhEPt+z98c7LdHSZQF37s6+dBfDBAOcX+pYaXwtSftA4k7PYYpUO1SXecPR
+ OIzTI9PbHd1/fuxO2jGGdiRett0Mlpo9tPNZiSUqOk8ffJsL+VNOJhLg8zN9X+mjZ+t3
+ V8cPvlGgbCNd7/pSA/CfYmd/raEg/fgKU1jCTXvQfzJl0jrAsJsBmAvVeB6Bwc5pDPpl
+ HlTFSF0s3G4VkyrycqJkWgJ/IWZBxFe/5jzQk2wJeltXxbkHAohmgvngBWvpkyG5iCZR
+ rWsA==
+X-Gm-Message-State: AOJu0YzImux8u7HCqxgafHb+agOBViXafWcoVRluQF021Iuu8RpOXTll
+ DWRfnQcW88TCHA31Bcjj7ZUQSZTLhzxcTu/oILrtM8bZZUSvkHeZvP/jc/4CA4CZVG8=
+X-Gm-Gg: ASbGncuoijVyQ3e+D9LjVIpJ/Wy1V3Tw1kHbNgB4rKlJSMyaWO8hlLn2Eq26T9ZNWxN
+ blMk2qBZsnTpXN6NT9DT9ykHZHH0O9wAn+JdKK9XdlxcH5b73BCwveGq32felgB7qy4t2vqRkFm
+ CWL6Du9DIaJ1zotNknuYV+50WCMHR5I6PfoHxAuLyyoASFjTQm8uWaYpd1D4+zxgqkTbC8Yygou
+ sNdQqHbxnidDHpelR3ZDwmZoocKAdN5KqUQIQQuQX4cG1Rdng4Z64h2c87oC6N3xiK6pt4JgBhK
+ jW9ygJd0Ym4Cdl+bjboEOuliu5TcBVwp5RzxjQqS1Zv89KxaNzLroWF/2W/MccNOUN83rUCnU7e
+ w/PrJgLNI1eVFGzE9baflDTv/b3ZrYSaZDD5aZAPtHzBu3UEgWS9aq6Ih1DZx79SeVw==
+X-Google-Smtp-Source: AGHT+IE1zBgBZZAAU6bsS81qyOcmzQz+hepKmI5GYyXGFNVm8oPBR9oBfuA1c3Tio5Hx+GctXYRC8A==
+X-Received: by 2002:a05:6602:6b8b:b0:884:477c:b4ca with SMTP id
+ ca18e2360f4ac-887774d9c70mr2059795739f.3.1757458658810; 
+ Tue, 09 Sep 2025 15:57:38 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-88c31dee466sm195844039f.7.2025.09.09.15.57.35
+ ca18e2360f4ac-88c31dee466sm195844039f.7.2025.09.09.15.57.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Sep 2025 15:57:36 -0700 (PDT)
+ Tue, 09 Sep 2025 15:57:38 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: brock_zheng <yzheng@techyauld.com>, Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250902060813.2481257-1-ilias.apalodimas@linaro.org>
-References: <20250902060813.2481257-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] arm64: Properly clear BSS
-Message-Id: <175745865543.1836956.16485088449985739797.b4-ty@konsulko.com>
-Date: Tue, 09 Sep 2025 16:57:35 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <20250903142245.90689-1-marek.vasut+renesas@mailbox.org>
+References: <20250903142245.90689-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v2] env: Fix up indent
+Message-Id: <175745865734.1836956.12416722573331603889.b4-ty@konsulko.com>
+Date: Tue, 09 Sep 2025 16:57:37 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,22 +96,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 02 Sep 2025 09:08:12 +0300, Ilias Apalodimas wrote:
+On Wed, 03 Sep 2025 16:22:26 +0200, Marek Vasut wrote:
 
-> Brock reports a breakage on an RK3568 SoC. His patch is
-> correct but he never followed up on the requested changes.
+> Replace #define<TAB> with #define<space> to be consistent in
+> the entire file. No functional change.
 > 
-> We currently use ldr to calculate the address of __bss_start and
-> __bss_end. However the absolute addresses of the literal pool are never
-> relocated and we end up clearing the wrong memory section. Use
-> PC-relative addressing instead.
 > 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm64: Properly clear BSS
-      commit: 5d01a971804e3f7f7d320870acf5418bd8497535
+[1/1] env: Fix up indent
+      commit: c9d4e82670ec4e4bab5681710de4240a3fb42fe8
 -- 
 Tom
 
