@@ -4,91 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1D60CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 22:58:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07DFCCA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 22:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F26B983252;
-	Wed, 10 Sep 2025 00:57:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7560E83290;
+	Wed, 10 Sep 2025 00:58:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZFFjsgXl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QDZ9rEPh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D9583252; Wed, 10 Sep 2025 00:57:44 +0200 (CEST)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 1B72983287; Wed, 10 Sep 2025 00:58:06 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38B3F82B20
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 00:57:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 13F748319C
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 00:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-88432a1ed9aso1091939f.1
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 15:57:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-45b9853e630so56479495e9.0
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 15:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757458661; x=1758063461; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rVEGpiNVOqXSGUmePlTg+wy/2KG/8tyCVCcTKk/INeQ=;
- b=ZFFjsgXlohMKFeQRh93AxgmR4fzJiqM9GANffF8CPPU6uGPC8qLw932b8oQh/5HFEP
- mlPGdG5IvFjwzIB9wRbngTEaQQMzRp9XKdkzb1SstMSIs4vJ079gOxALZJHNVjlSbT34
- bhxIUlAfPhjg8FdkDiGvWj6OmFdGO0EGKNtyo=
+ d=gmail.com; s=20230601; t=1757458681; x=1758063481; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=maD3VuBKc4lPPoCkh51cbMn11eG3qUyKd5NgnYtlnRU=;
+ b=QDZ9rEPh9KqQPkKKfHMQLZesQPDHUMwLrFfxUfZMdhLM8jDvFT5dycmEFmtSdF2A6S
+ 4DXc8zVGLABDnvAQKFPOvAKMc1B+TH/uWxJ6pT3a8wU+6ADq7pthmT2dMMdwIG9gnF9U
+ +PFnj6BdYu/aa2LIclXNlJNjMiE0ZLUVLt2RqvGVfEToG8WVuQeJ1mR0oquDmaLVvOsf
+ vWEA5D4LuToXJ2GOxVyvIRsdtLaW/C/nvyWOcH0GohsxCaBOF1uaH/bvPOwGiYJRqR8M
+ yDmWKQGbF3N68C+g/m7V5DPW2Ak7KwUQ05nXUSduwAn+sqHRXpgREapCywNBdhqoSzDV
+ Bg5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757458661; x=1758063461;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rVEGpiNVOqXSGUmePlTg+wy/2KG/8tyCVCcTKk/INeQ=;
- b=lY0gIE4dE5KmXmrA5FKjeJqQ06mm+E/OCbSYOKYwFi090fW9sPhrQ0s1AOXCWSuVqT
- VnAMVIx6X3baVsshiaSCk7DrzRTCkCXEHD6HAD8BtiF3yZ8B0lhY+V+pkR9Nl1VanRVr
- NYQ4lsD0ecsIjl1mZCAvQdMX6ZDDnGFjrX0XFFE1NsELOzVO2UfFXrXzBedZTVSokDao
- tpz2gWtfxvykSAiWBp3Gjrj3ZyWRvYxzDH9mNDnh3AtVaOREPCmUBxp+XcevDb6woXAD
- HWGS26qImWB7DidbIe0zXO+3AtSMEhcWuAO65dW4mprTRR5CMDF5o9VruQ48OfCfZa94
- fSKg==
+ d=1e100.net; s=20230601; t=1757458681; x=1758063481;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=maD3VuBKc4lPPoCkh51cbMn11eG3qUyKd5NgnYtlnRU=;
+ b=KgQGWykGaT37vnW+O/R6/o6h3KrdLUXwjDOFi7lE9waDRjVNwCuYGvxvb5e8Sm3Xe/
+ +wRkmBKY4SYM9HwHMtFWn8GFOTkarUpuaX86XR+diaN5LJxyW+pRfP/LRCMLVmjbTuRm
+ PcEmb8u3khw7fIOw/sqzDHDpcRev8w21iX5wIaVgCkZuHtx46U2QhFuaR4+GR0/xSAuM
+ cp98/vuMhyk12XHAGMrBu2oF+Njnju6nd+5MV/FaEoXFPxlPbmzgAtrseI13nFnOeyjp
+ ozMUuNViR3LyXoumgnnAf9VjKctoM1gKEtOmjHVWwzDzaBy5N5/FbNIPOu0YpKIXX9cA
+ lipg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUra89hfYk3FF37h9bNTIneteF38Asd9YNnqusGaXPHXgg7CYsekpywon94kLN77LjFtF3RJpw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxo2NB1kFwzu+7zXqtl5iM7WXZL3b/kkklflUh2TzKxAdwUku++
- QCzWuIVU0lZvdZTQxQOnK5rxZrzbg6ZXUUDZMi5nRrXmYseiAvJIxdvWzO17EZOUMzo=
-X-Gm-Gg: ASbGnctXhtnHHDCjUBGtYjE3WbLVbwtZCy14S995Ensq1WFr6YhLbL03k1jlbiJvkPS
- bvXg5mJCb5JvZS1AMcP8tfHjGFkjWHmdLp6vd/l3bHQUrhYul/AKf9n4A3dMvZD7IK25B026fOQ
- xBVHIJS4TdVCZK8RaglJnijlFnMgXHA7bnkFzip+hh+eUvVGuAuS9q3ftSCeOwN92VUXfagrobr
- sr7BS4jtfYLqXMvUEHU/8cP/NRU1jxxZ4KnLdiD92ISsHmB6mi9FoCE3VT1WZO+RN3tGrfN9Jjq
- Um3qCdn9eIHv0hgKkqK2kz3NsslIdsvhzD5+GLI1tcjPL6SvxreDlEo75sW8MLlSs9dLlcrr+00
- G/T5sCCIxcsCVe4fx84M2CPst2PMZJK6YCId0+z8NRmRX8749iLsQcWO+4GhoEWHxEw==
-X-Google-Smtp-Source: AGHT+IGL3aUoKVwO41lQfYUbq26ABbnMXnky12PLC16pY7scynIWkGxTnBBW1jc01dtp8CAv+zDhZA==
-X-Received: by 2002:a05:6602:1505:b0:881:8a24:5598 with SMTP id
- ca18e2360f4ac-8877797b029mr2137521839f.1.1757458660926; 
- Tue, 09 Sep 2025 15:57:40 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-88c31dee466sm195844039f.7.2025.09.09.15.57.39
+ AJvYcCUPFsbnmo6aPui1LUw2ggRdl9Hz4LfO5qc24jad/WtMzGLsRDi6sUc8J0acqvVWZOCR42vXHOE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxzhIZ17HRiEPEw2oWEaX8YC+CJqtzVPdO5KJf/Eo+HkcJDfLyL
+ uLjhjFessGgxcfKM6djaMdElr9p5c1cRNo+ohlV2aUVb0ziIYfmqZ0Fq
+X-Gm-Gg: ASbGncsbG3tQIzMYFK94mTF3TWAxhXTqKxXLtuD/9pRYjVxQCuG6oSMQRs5BfSFNPPm
+ u1Ua1Z4vE2bQCnK3DI1HSBZ2u7OfxcyTbVr0zf+j5Tv83ZelkKtMXT9Lz6447sSGbmUOTkgjnA/
+ Te8RLK+MxMW9cnEuImRpGaINsGTepQ612qPJafKq0VWZ/n6hKyx1W3P8lITLLth/tuLvn7MGbs+
+ CFrqFX+dIp6YOMvvJ80baClIxjVBtq2yjMPkqOY1RIairPI/JT/TL8aLB5M+5hXx9cqKTpxFpPa
+ ZLVNgC9T0l0Dx7BTFtNbgPeKMG8Wy4/SnMvcz1Z7fl73MZ5e/9wmEQgWEPf3Ea75mlfKfDRGfMP
+ g0Pl6ZWP51cNkZZ9MmPENDpVuNsBexOdVp5bWBDTawC7v7RfD1z2eG7Duhmab18HO/BaEPoky9I
+ Veb6xfrw==
+X-Google-Smtp-Source: AGHT+IFI6HTg5aVX9j0J4NzmDpcbvezWJs1Gb1+sDDbK2XlU7Iy9tJLQLDJD+DeovHiYwt7fowin5A==
+X-Received: by 2002:a05:6000:400f:b0:3dc:eb5:501e with SMTP id
+ ffacd0b85a97d-3e63736fc36mr10526448f8f.18.1757458681296; 
+ Tue, 09 Sep 2025 15:58:01 -0700 (PDT)
+Received: from Ansuel-XPS24 (host-95-249-236-54.retail.telecomitalia.it.
+ [95.249.236.54]) by smtp.googlemail.com with ESMTPSA id
+ 5b1f17b1804b1-45df81cbce6sm4570245e9.5.2025.09.09.15.57.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Sep 2025 15:57:40 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Daniel Golle <daniel@makrotopia.org>, Maks Mishin <maks.mishinfz@gmail.com>, 
- Aristo Chen <jj251510319013@gmail.com>, 
- =?utf-8?q?Carlos_L=C3=B3pez?= <carlos.lopezr4096@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Yifeng Zhao <yifeng.zhao@rock-chips.com>, 
- Heiko Stuebner <heiko@sntech.de>, Xuhui Lin <xuhui.lin@rock-chips.com>, 
- u-boot@lists.denx.de
-In-Reply-To: <20250829081628.2327372-1-ilias.apalodimas@linaro.org>
-References: <20250829081628.2327372-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 1/8] tools: fdtgrep: Mark util_version() as static
-Message-Id: <175745865900.1836956.17213981524531035967.b4-ty@konsulko.com>
-Date: Tue, 09 Sep 2025 16:57:39 -0600
+ Tue, 09 Sep 2025 15:58:00 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, u-boot@lists.denx.de
+Subject: [PATCH v2] airoha: rework RAM size handling to support multiple RAM
+ size
+Date: Wed, 10 Sep 2025 00:57:31 +0200
+Message-ID: <20250909225751.19544-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,32 +97,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 29 Aug 2025 11:16:15 +0300, Ilias Apalodimas wrote:
+There are multiple version of the same reference board with different
+RAM size and it's not enough to base the RAM size entirely from DT. To
+better support it use the get_ram_size way to scan for the actual RAM
+size of Airoha SoC and increase the size of the memory map.
 
-> The function is only used locally. Enabling -Wmissing-prototypes
-> triggers a warning. Mark it as static.
-> 
-> 
+Also rework the memory map to account for 2 memyro map. The first one of
+2GB for 32bit DMA and for safe usage of U-Boot. The second one for the
+rest of the RAM since up to 8GB are supported.
 
-Applied to u-boot/next, thanks!
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+---
+Changes v2:
+- Add memory map to support full 8GB
+- Assign 2gb to first memory map for U-Boot
 
-[1/8] tools: fdtgrep: Mark util_version() as static
-      commit: 3c34fd46b6efd0501662ba3f0aeff2aeac9a584d
-[2/8] tools: fdtgrep: Mark util_usage() as static
-      commit: 9fe4e088f3d2ba15323ae4bff7f6b592152e326c
-[3/8] tools: mkimage: Mark copy_datafile() as static
-      commit: 867d762bc515850b00245cbcf21cf2b2d39a2a5d
-[4/8] tools: rkcommon: Mark rkcommon_is_header_v2() as static
-      commit: 3ae031135da1f21ec22e20fac5d7ba9776487166
-[5/8] tool: fit_info: Mark usage() as static
-      commit: 5ab15814e8f051968a4da8c96339ff0c80c5f811
-[6/8] tools: fit_check_sign: Mark usage() as static
-      commit: 39f7af39bb2e7e03ea4621e57a976d41dcaaf0a6
-[7/8] tools: imx8mimage: Mark build_image() as static
-      commit: f006837eada06cdf41b9935eb6c73618e4ae0bf0
-[8/8] tools: imx8image: Mark imx8mimage_check_params() as static
-      commit: 1e73651a71d1cf2a718b9a8250a794d626b9eecb
+ arch/arm/mach-airoha/an7581/init.c | 40 +++++++++++++++++++++++++-----
+ 1 file changed, 34 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm/mach-airoha/an7581/init.c b/arch/arm/mach-airoha/an7581/init.c
+index d149e0ee3c8..11992027d92 100644
+--- a/arch/arm/mach-airoha/an7581/init.c
++++ b/arch/arm/mach-airoha/an7581/init.c
+@@ -2,10 +2,16 @@
+ 
+ #include <fdtdec.h>
+ #include <init.h>
++#include <linux/sizes.h>
+ #include <sysreset.h>
+ #include <asm/armv8/mmu.h>
++#include <asm/global_data.h>
+ #include <asm/system.h>
+ 
++#define CFG_MAX_MEM_MAPPED  SZ_2G
++
++DECLARE_GLOBAL_DATA_PTR;
++
+ int print_cpuinfo(void)
+ {
+ 	printf("CPU:   Airoha AN7581\n");
+@@ -14,12 +20,28 @@ int print_cpuinfo(void)
+ 
+ int dram_init(void)
+ {
+-	return fdtdec_setup_mem_size_base();
++	int ret;
++
++	ret = fdtdec_setup_mem_size_base();
++	if (ret)
++		return ret;
++
++	gd->ram_size = get_ram_size((void *)gd->ram_base, SZ_8G);
++
++	return 0;
+ }
+ 
+ int dram_init_banksize(void)
+ {
+-	return fdtdec_setup_memory_banksize();
++	gd->bd->bi_dram[0].start = gd->ram_base;
++	gd->bd->bi_dram[0].size = get_effective_memsize();
++
++	if (gd->ram_size > SZ_2G) {
++		gd->bd->bi_dram[1].start = gd->ram_base + SZ_2G;
++		gd->bd->bi_dram[1].size = gd->ram_size - SZ_2G;
++	}
++
++	return 0;
+ }
+ 
+ void reset_cpu(void)
+@@ -29,20 +51,26 @@ void reset_cpu(void)
+ 
+ static struct mm_region an7581_mem_map[] = {
+ 	{
+-		/* DDR */
++		/* DDR, 32-bit area */
+ 		.virt = 0x80000000UL,
+ 		.phys = 0x80000000UL,
+-		.size = 0x80000000UL,
++		.size = SZ_2G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
++	}, {
++		/* DDR, 64-bit area */
++		.virt = 0x100000000UL,
++		.phys = 0x100000000UL,
++		.size = SZ_4G + SZ_2G,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_OUTER_SHARE,
+ 	}, {
+ 		.virt = 0x00000000UL,
+ 		.phys = 0x00000000UL,
+-		.size = 0x20000000UL,
++		.size = 0x40000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+ 	}, {
+-		0,
++		/* List terminator */
+ 	}
+ };
+ struct mm_region *mem_map = an7581_mem_map;
 -- 
-Tom
-
+2.51.0
 
