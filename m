@@ -4,82 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30EF1CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 13:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C38A7CAC587
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 13:00:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5167783252;
+	by phobos.denx.de (Postfix) with ESMTP id 9243B83281;
 	Tue,  9 Sep 2025 14:59:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="q6YLPBgt";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="A3JgBOUJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 457488312A; Tue,  9 Sep 2025 14:07:38 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 59C048312A; Tue,  9 Sep 2025 14:31:09 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE188830B4
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 14:07:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 7F75C830B4
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 14:31:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jagan@amarulasolutions.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-55f6f434c96so5255476e87.2
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 05:07:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1757419655; x=1758024455;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZZ4BJHVbfFbd0vmhcFRGG7sk9aRYLaAwmWmnQe5BUh8=;
- b=q6YLPBgtiZWOGX/77VQgiDJoJk2G5vesoQRIFEVV6LtMdvfzmIIORvZgQKM+IrOlX7
- eQNowdE1/8HK/L00czIDIraGIbPl9RpvLsprCBTZ0Utt7KqUn8yz27cb+mbxcE++TvNy
- lXNBlJLPZ8AlaEzK5ZgAVb3QreB725o22Ie5o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757419655; x=1758024455;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZZ4BJHVbfFbd0vmhcFRGG7sk9aRYLaAwmWmnQe5BUh8=;
- b=XuyYLDnYJ1uACE5QU5gPfNuMfriOvPKaZrRCMScsREN2pqZ4dM4q3CQSDs4c1kM6CJ
- 6DmdUGNDSi0eSnlyZHVq1ZkUK7QlscxKOPCH5q5Jc3/leoPO0h1sH8aDgE6b48L8DfCH
- YpzkbdMM6rNUafgHW/DxO3IRwtlIXksd6TGIlSR0eYyiJ/PYwX60vmRbF2/ea5IIPcHs
- pHNaIoFmBOj+7lUq+zDfLotnl6KmEMQpwLTFK3jHjcBZq+UP4Do674IwTIXuD/cEepyJ
- lDCsvBu7wDp90tPqOUHbsglHujwwx9fKNUilOjIp5B/4d57BQM3DeTR/pJFD3Nd5K9oY
- geBw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVR+hSTZhtkXSn78b88PHBTew3Om3o1DzAMG+rTiS4N6+iPvsYXxHiyg2aM0t0tEG3p+iINFTU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJO96PFYeavaub/avmK09LD4A+0c4/m9gbt+UbcMw9/zQ/d8T6
- merdBTrLlMg26+HQc7XTDxHuTeMWRVwfuMWAPh9DNK0kKq5PTZ0gu1wcvMvFNa3ZUqatWeUKGXQ
- GhQSUPs3eaf4PvWF2AFZG8I3csCTmU4HQi05ZjYACXg==
-X-Gm-Gg: ASbGncsQHxLje9ouZkhAYaDMAZVwAaYDFqb72OggIKjt0xtWlMoaTrvASFkspG/qxRn
- kXdv9/ELqGNcm+DoaA2y7NmxAJVeak0HS8Dclngd4WgLxF8SCzJSxQVp/6hQs1fSfWxyWJJMEA7
- wUUyS+qy05R/nRuxFTfjPOnUVIgenWtnsvWCFDwdoThWVQl3nR8HEP/qVt0HIDsReRHpuSV2HIp
- UfBNb3FXJB3rGOorAwJYdGc3UotedZ0dxSpEQHK
-X-Google-Smtp-Source: AGHT+IGmPTHpHLMu+0+dQ2/sKeXWVk3G/tbxu+ifqXN4v6YdyDl/aJcGJzR1gePqA9R4qnwWsf3gk7Yb/cabH/um+GI=
-X-Received: by 2002:a05:6512:1507:10b0:562:d04d:fa0a with SMTP id
- 2adb3069b0e04-562d04dfb44mr3532749e87.31.1757419655115; Tue, 09 Sep 2025
- 05:07:35 -0700 (PDT)
-MIME-Version: 1.0
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 83707C6B39C;
+ Tue,  9 Sep 2025 12:30:49 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 26A2160630;
+ Tue,  9 Sep 2025 12:31:05 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 10D78102F2584; 
+ Tue,  9 Sep 2025 14:30:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1757421064; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=5/jAsB29MXBmz/TVEmKVVIANML2jfhPxfNkxA543e7s=;
+ b=A3JgBOUJHGfhBvUhbdgK2K/DVsvsydAjNTG34g8Gmp/b1fnk6HcwguQXhrVLsWP9Aq9yhh
+ nvscm9EclOuvo2tkX47R6PUlGXc3jB9nAHCNpFstPpHjSlpUBKx6L8iutBhc72/U4ju1Z0
+ pBXYtczDAimM7ayohytllr3Aura2afvGTdX3uAq5fKROLGpLJ9GGTjrnOB1LibLUfzBCS5
+ hv2UNhFOM3mrVpt1RN79iQCNUyJ5FcScB1rx9jqOIMON83ZQvhnKBxEvNWPxHz/7Jmc5ge
+ Wk3UXnWj4nYs8ALPOIfGTc0IjPUDIX/nIlgQp0U3GSvbO5XkzIaLxC0jXbHLWw==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Tom Rini <trini@konsulko.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Vignesh R <vigneshr@ti.com>,  Steam Lin
+ <stlin2@winbond.com>,  Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,02}jv behave
+ correctly
+In-Reply-To: <CAMty3ZDG=MtRbzNPaRs=dz9AUkcTA5cHX+0=wgqyEbMqPhyxrQ@mail.gmail.com>
+ (Jagan Teki's message of "Tue, 9 Sep 2025 17:37:24 +0530")
 References: <20250702092313.970234-1-miquel.raynal@bootlin.com>
  <87a534exwc.fsf@bootlin.com>
-In-Reply-To: <87a534exwc.fsf@bootlin.com>
-From: Jagan Teki <jagan@amarulasolutions.com>
-Date: Tue, 9 Sep 2025 17:37:24 +0530
-X-Gm-Features: AS18NWCT6-w5JYcINTFKnh9kC0pPzHJynF6eb8cyIzgyiGVujUOwTkY5avPgx7c
-Message-ID: <CAMty3ZDG=MtRbzNPaRs=dz9AUkcTA5cHX+0=wgqyEbMqPhyxrQ@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,
- 02}jv behave correctly
-To: Miquel Raynal <miquel.raynal@bootlin.com>, Tom Rini <trini@konsulko.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Cc: Vignesh R <vigneshr@ti.com>, Steam Lin <stlin2@winbond.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <CAMty3ZDG=MtRbzNPaRs=dz9AUkcTA5cHX+0=wgqyEbMqPhyxrQ@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 30.1
+Date: Tue, 09 Sep 2025 14:30:56 +0200
+Message-ID: <874itbg64f.fsf@bootlin.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-Mailman-Approved-At: Tue, 09 Sep 2025 14:59:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,54 +80,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 9, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@bootlin=
-.com> wrote:
->
-> Hello,
->
-> On 02/07/2025 at 11:23:13 +02, Miquel Raynal <miquel.raynal@bootlin.com> =
-wrote:
->
-> > These chips are internally made of two/four dies with linear addressing
-> > capabilities to make it transparent to the user that two/four dies were
-> > used. There is one drawback however, the read status operation is racy
-> > as the status bit only gives the active die status and not the status o=
-f
-> > the other die. For commands affecting the two dies, it means if another
-> > command is sent too fast after the first die has returned a valid
-> > status (deviation can be up to 200us), the chip will get corrupted/in a=
-n
-> > unstable state.
-> >
-> > The solution adopted here is to iterate manually over all internal
-> > dies (which takes about 30us per die) until all are ready. This approac=
-h
-> > will always be faster than a blind delay which represents the maximum
-> > deviation, while also being totally safe.
-> >
-> > A flash-specific hook for the status register read had to be
-> > implemented. Testing with the flash_speed benchmark in Linux shown no
-> > difference with the existing performances (using the regular status rea=
-d
-> > core function).
-> >
-> > As the presence of multiple dies is not filled in these chips SFDP
-> > tables (the table containing the crucial information is optional), we
-> > need to manually wire the hook.
-> >
-> > This change is adapted from Linux.
-> >
-> > Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-volatil=
-e-bit-v3-1-735363f8cc7d@bootlin.com/
-> > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
->
-> Same question for this one, no feedback for the past 2 months, I'm not
-> sure who's supposed to take these, Jagan and Vignesh you are marked M:
-> in maintainers, any chances this can get it?
+Hello,
 
-Unfortunately, I was off quite some-time. Need little bit of time.
-Vighnesh is off for years. In the meantime, Michael will help in
-review but need help on testing.
+On 09/09/2025 at 17:37:24 +0530, Jagan Teki <jagan@amarulasolutions.com> wr=
+ote:
+
+> On Tue, Sep 9, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@bootl=
+in.com> wrote:
+>>
+>> Hello,
+>>
+>> On 02/07/2025 at 11:23:13 +02, Miquel Raynal <miquel.raynal@bootlin.com>=
+ wrote:
+>>
+>> > These chips are internally made of two/four dies with linear addressing
+>> > capabilities to make it transparent to the user that two/four dies were
+>> > used. There is one drawback however, the read status operation is racy
+>> > as the status bit only gives the active die status and not the status =
+of
+>> > the other die. For commands affecting the two dies, it means if another
+>> > command is sent too fast after the first die has returned a valid
+>> > status (deviation can be up to 200us), the chip will get corrupted/in =
+an
+>> > unstable state.
+>> >
+>> > The solution adopted here is to iterate manually over all internal
+>> > dies (which takes about 30us per die) until all are ready. This approa=
+ch
+>> > will always be faster than a blind delay which represents the maximum
+>> > deviation, while also being totally safe.
+>> >
+>> > A flash-specific hook for the status register read had to be
+>> > implemented. Testing with the flash_speed benchmark in Linux shown no
+>> > difference with the existing performances (using the regular status re=
+ad
+>> > core function).
+>> >
+>> > As the presence of multiple dies is not filled in these chips SFDP
+>> > tables (the table containing the crucial information is optional), we
+>> > need to manually wire the hook.
+>> >
+>> > This change is adapted from Linux.
+>> >
+>> > Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-volati=
+le-bit-v3-1-735363f8cc7d@bootlin.com/
+>> > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>>
+>> Same question for this one, no feedback for the past 2 months, I'm not
+>> sure who's supposed to take these, Jagan and Vignesh you are marked M:
+>> in maintainers, any chances this can get it?
+>
+> Unfortunately, I was off quite some-time. Need little bit of time.
+> Vighnesh is off for years. In the meantime, Michael will help in
+> review but need help on testing.
+
+I didn't add Michael because he was not listed for this change, perhaps
+he should be added to the MAINTAINERS file? (or maybe I used an old
+version without noticing)
+
+I don't know if testing each every change carefully makes sense in this
+context. There have been many contributions probably worth the try (not
+mine, Mikhail's) which are hard if not impossible to test by a single
+person, while quite relevant. Reviewing seems quicker and more relevant?
 
 Thanks,
-Jagan.
+Miqu=C3=A8l
