@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23A26CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 10:37:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8819CAC583
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 10:37:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9433083106;
-	Tue,  9 Sep 2025 12:37:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CBA7830B4;
+	Tue,  9 Sep 2025 12:37:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="iiMb2w6b";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="a0A51SYP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 123688319C; Tue,  9 Sep 2025 12:37:13 +0200 (CEST)
+ id 56143830B4; Tue,  9 Sep 2025 12:37:13 +0200 (CEST)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20720.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::720])
+ (mail-db8eur05on20715.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::715])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 150EE830B4
+ by phobos.denx.de (Postfix) with ESMTPS id 6C8D28318E
  for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 12:37:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fYQIzT0qRsgqnRzN8JxSBoDrEXx3zayIKu6CbQIc84tXZczPztfjqK9BAKG1ypSueV7bw/Xt9stHY2N9btmxAgnHjkXFgeR66p2H86RQWkIxB7pNbWb+UWL5yb/rMx8/xbdrgtKs/Rspxp/EE2ToA5lPtl2tidk88MGBIf/wGmpnBe+P/pa6KjPwp9cXuXGrSOSpf9Jzq1hU+1EuADClZWvb0f8OhWtWIt+qiYB7GtqjxheYpe200CXtvC0/XUWFkpf5mvYYRdJTQie0uJZ8PVWRyi4NCnoGYJ3ex+d1rVVSJb5YWhNF2nKRMGBwjNd4shPeHA17tUChgQvPReHdtw==
+ b=tRpOORJO27FMdQ5rg0+XDGH6ECv+XpQlv5zebe5UMVR8pCdPICFeTEqdHxe5eY0qWEY3LdnKZSyhP7K1sptqcZSUu3F67nyGuB7xkJXTCOp8elSkVnQWT/Ih3kChA/Z0zLm0zn734LWdlUQQ+ALO2zemPjh9HT4liL8+57lxcA7JlEQvEM8yZKqqBQMVmPtqoNehWtAfX4NVk780SebNAHmD2IweoY7eK9Q8fwncm80CLcmyL1a/Z5kvA07rAvzGobnZPw6MzJZ6eRC1hPW9LnPN4cv0JBvyTaqpCjSjvh2qFRQ725mAhaxogngiUCq8y5+d0utN4SPbKAmEQic+tw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=e1BBPRQlyTWkZ2jmPwQG8QkxuEuSvKzXSO2so1PNf2U=;
- b=bC4pU56cRqP6EtgFs5DUZIQx0qMI8AFJAF1z6Rl9DEkHxSODGmFNvz+QQtnLGvtcfhA4qISGk1PX6pMnpEWC+Ob6ehnRlNtzMj7EJ/GxhdYjLVY4rVFq+iI6963z9y2IyT4Mku/EWsuGKUrRUUeVmPh2VAnYqBVyI4N/IEv2J3Yi0PS1YV3wTiWFh6POvVOri15NMZeS+t2nt4ZoQRI3Mv8FL6yPzQu4yJIVitxBf9CBK/7BVlTdSdGrhpJTQp+iBrdpY9Y14L1L8pIRUz50H8XaMAhdUkRCrHFwq3vE9jChkvwVdZ1MtGEksszAb1c02mr98M44CgEQrYMvT8ljcQ==
+ bh=up9dvaB/euPWwBrQDJw0oq06iT5QIK1niusS8qPxzws=;
+ b=l4qcXL4wzoQOY29obKMEcXyK8ev8266bT2gY+8gb7d5PK+KtmPHp6KopNsPAQpi65WtC7M4DFmVBekbfCU53DoYOspJdAXDL/ewlNt1qSLxtsCPUBQtRCbMMdqItlSXFIJGDGZErgkpr+3UQDCnEQUHXW1qRyHrru2cyj4C31S4LHnlV4qKhbx/R8FqeFdakVeZ6tBWk142iSqLMZU7bdGkM9nZlONMdKtK7Nhb+trdzUlFbzjAKkQP46APAY07sPRRpGjsUXLep1ERT+rJtAmLGr3PKclfsyW6uRckatwQjONbijckJONPZy+LYujZ4rLWFRpIAUXqTJfUY/UTOEg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=e1BBPRQlyTWkZ2jmPwQG8QkxuEuSvKzXSO2so1PNf2U=;
- b=iiMb2w6bvsmMmp4FnAuSWV/V7tefLaiyX0ZstpN6zBBzJLiUswN9AwyYeccoRf80VQXBV1eUkHx5j98ctmqKx3SZm0TZobuFSSiB2+ehPqXEJoQ5OjRRrLjpQOHe5b3ZdJvjUz6TeWHnM2cfXTHnZrm580MFTSxj7W73oEZoFahnJmv8V/ORgz0l613b8HQNXfIBRsd/vpR+JqlTvudyBeyqUWNONWz/u9Ep7b2JDSmJ/HjzPLX80ffHa/bjex5bofRPx8MEwPT6Yi1H1KmxoCJimlrV5DVmlAd3En44uvhoC7ShoWBC2awFeoEx8PVciccYrXp1YQOq0po6ZwTlhQ==
-Received: from DU2PR04CA0059.eurprd04.prod.outlook.com (2603:10a6:10:234::34)
- by AS8P195MB2042.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:52b::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.18; Tue, 9 Sep
+ bh=up9dvaB/euPWwBrQDJw0oq06iT5QIK1niusS8qPxzws=;
+ b=a0A51SYPWjz+E9wpH4pORI7mYOtI5aDIs2ZMIWHZqmYtDFyvA3/dDqJ35GlW0d6daQoRbnjL07BHrHZ3Zc9K3gauOEeWsBf3AErMZkxOMC6t4JpPOYSR8/ra3PHeLOXJdwE3MhLPdiR/5WHVNzfW/fI79IEwbAE06Y5ykiZ6WENupwf1L0Bz5Ni3v5muj5ZU6iWQt7SkoMRTpCAQu7O9iwZfg0W8aq+wWC+H9pgEpLgeRav9SlPYcxtskzA8uWMD7JMX8fdabcSuq4qLWu99geIbiLOXRdGtV5utGpEJXR+BpWrEbPnsjVF90Dleg++QzwhB+YiLZqmBYCZdg58oOA==
+Received: from DU2PR04CA0046.eurprd04.prod.outlook.com (2603:10a6:10:234::21)
+ by VI1P195MB0478.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:145::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Tue, 9 Sep
  2025 10:37:07 +0000
 Received: from DB1PEPF000509FB.eurprd03.prod.outlook.com
- (2603:10a6:10:234:cafe::b) by DU2PR04CA0059.outlook.office365.com
- (2603:10a6:10:234::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9094.23 via Frontend Transport; Tue,
- 9 Sep 2025 10:36:37 +0000
+ (2603:10a6:10:234:cafe::cc) by DU2PR04CA0046.outlook.office365.com
+ (2603:10a6:10:234::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.15 via Frontend Transport; Tue,
+ 9 Sep 2025 10:37:07 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -73,11 +73,13 @@ Received: from phytec.de (172.25.0.51) by Florix.phytec.de (172.25.0.13) with
 From: Wadim Egorov <w.egorov@phytec.de>
 To: <ggiordano@phytec.com>, <trini@konsulko.com>, <d.schultz@phytec.de>
 CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH 1/2] configs: phycore_am62ax_r5_defconfig: eMMC boot from raw
+Subject: [PATCH 2/2] configs: phycore_am62ax_a53_defconfig: eMMC boot from raw
  offsets
-Date: Tue, 9 Sep 2025 12:36:53 +0200
-Message-ID: <20250909103654.3341398-1-w.egorov@phytec.de>
+Date: Tue, 9 Sep 2025 12:36:54 +0200
+Message-ID: <20250909103654.3341398-2-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250909103654.3341398-1-w.egorov@phytec.de>
+References: <20250909103654.3341398-1-w.egorov@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -86,52 +88,52 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509FB:EE_|AS8P195MB2042:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2115daf9-c4d0-49dc-1e96-08ddef8cd32a
+X-MS-TrafficTypeDiagnostic: DB1PEPF000509FB:EE_|VI1P195MB0478:EE_
+X-MS-Office365-Filtering-Correlation-Id: abebf6d6-2386-4af8-43d6-08ddef8cd367
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?nC+1hOWVBZ6kWjvnutk3JhbK0VhY2D+52BgnWzYx9jAMrOM05ESgUPuQ8BMB?=
- =?us-ascii?Q?LFyECLn7spoMq6uHV94aLCzi12YIcKgCNs8jD7Qi3dRlfonvf7N4ndt+J+Gy?=
- =?us-ascii?Q?bzEBCb4BlUQIRkHn2D6fcHa4dpFOOpmek2urwDVIHTUG44bJLPYO823brAJb?=
- =?us-ascii?Q?SYWyfJGCwGPOnCDdV4zvY1h38WVBfARDXhNRz6eAWKlI2sbBZ3CAMUsdu+uU?=
- =?us-ascii?Q?4AjJMYsmYpSMqNXjd4gIzN4fE0Nvdaufr5/akoeGsKCzJqLPe9kCvv7u95bz?=
- =?us-ascii?Q?ZuOaS/QCRIDYwmwFlLKPiPdzPEV5z1NJdvJ0CTctnPI41a8DBKFibBcAiEG/?=
- =?us-ascii?Q?RYG8taCqskfZppnxqCcwUVSj/XZBK47eoDuDCM8jFDeUnEZe4ETzi70p5W2/?=
- =?us-ascii?Q?htpxjVtheYpbSpuaQ6zsTQI3v/Cpg0mzfD02UZrBwaoTF9geYd9GIzPeOObW?=
- =?us-ascii?Q?gWVluihbxWYVdsGwTyQLvov+QhxWsVZb8m2e2dK0dYmqMdjs7pCZJfFRVqTl?=
- =?us-ascii?Q?r7wMqkWCisyfqV97LNljv/xSu6cr2n0i8jySAXGM/cqr21vGshYEBkLXRoNA?=
- =?us-ascii?Q?KuPcNAihNIwme/Fq2sxiqAwkETIjkYMy0rTpWOlJ7H+Eg4sNZsCBdXSkU/Yf?=
- =?us-ascii?Q?opomd2TpADmqnNZiDlEOTlC0IU2dgCCmVypNPWwsknzGxtCKdXdSZqsj/ARU?=
- =?us-ascii?Q?Yavhy91y4p/cO5bNcovE2Ky+gohonbDXPLUOBQlk2g+FMowag2uRk8XVrUgp?=
- =?us-ascii?Q?y4mi8Twl61t9QnQzCtOn5MoR2NjJZGn0Twc0QWaqwnUbXwnFiOmFRXPu5D8l?=
- =?us-ascii?Q?8qoYnp/uhKL6Y+ARu0eZGQ5qBwhOYz9uQ3Iv6axZvvLxraBZ470mGRsWJvQ3?=
- =?us-ascii?Q?8UpGtJR5+IVbZtumg9O4flfP2iY5JtPimu1YlmN1IOxE5cbkuAU3Cy3P85hS?=
- =?us-ascii?Q?3T6D6XLC3IR3kQZ79d8Q8/UdOK/FUHSs21aQZtqo67IsF36CDONpLi12wOsU?=
- =?us-ascii?Q?p2dVvOB7IKujEeVCxeONaoi6PfPK3/GtbP+dYHebl9TF75uO2L+I5dKd7WXw?=
- =?us-ascii?Q?Ex3jVkA1fcOzJjSM1JGzzdRJtKzDLeFxKSa8N2oRgtsxsZhQWV0Xw+lmvfs4?=
- =?us-ascii?Q?VKr4AHggNIlsnF9F5eyQbbb7g0aCiP1j8UAZLF1s67RhU7at+3Puv6iZbWtZ?=
- =?us-ascii?Q?Ko1/v676bgOxokyoYF0YN8zwX0SAnaQayqA7yYtB0yQ4UFQnFG1/G9EDskvS?=
- =?us-ascii?Q?mdtfQDZ9lLG3rhfeNbgJbyCx1hu5wzdvVVdTrtGmmDp/AUNYSOVEfFtL9+Ry?=
- =?us-ascii?Q?YCrysD0jCtbHu2Dy1DgnPnWMGC48KusPzEYz4JVqLddphLQnmo/FyP2H4Yzw?=
- =?us-ascii?Q?P7VsPy8fHIwj4KFtRXXbo63e2satFoWepz+6PB8BYtgnMrP16cdSNpUrT8Vh?=
- =?us-ascii?Q?jxvtxiW5ke4XiGPH+2T4fUVCJZE6lqt89vzKN3ItLv6CLOz+JvNkhDIJO1QD?=
- =?us-ascii?Q?vt5M+BEojpM/VOrfJBLlfVrv4bMOVRkPTSqY?=
+ ARA:13230040|82310400026|1800799024|376014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?+IjrBFoGnl+xYM2utP0Tn5XRWwASNceWCDKqK/Pu+mC2fkVAiH3jsJKTDPrA?=
+ =?us-ascii?Q?AXXQR4FwgWmYtqCEUwXYM+TewDW4qBqo0Dl4dUbD2EOX+9YdIL09QlVgM9OR?=
+ =?us-ascii?Q?B3m1RymeElEG1Zfm0M3ZkCdgQNMmtMxmd9M1+zNecpoCSkgDSls8nezuLCv7?=
+ =?us-ascii?Q?cdmgcMB+qkX5UZH0KZb4gczz5o6OCuQGz18BP47IxVEey6ejskL+10WI75Fi?=
+ =?us-ascii?Q?sOtPNs34eoKorlh+N5jiF7/s+W6XxucAEMlQQWDVOfKqg+gaXJEvQkr5Kkwv?=
+ =?us-ascii?Q?K4pr4H47pDkwHdFJ3c27nVKnsZ8lXF45ID90/ZqlBLVXAOkHZNwqeiaZBIpo?=
+ =?us-ascii?Q?ynlPCX4ZerJ5EoXPMJQ/aFBNNedo2uuo4mC0ikgTLERXElxXTyKT0QUjrFtH?=
+ =?us-ascii?Q?Hxbuy3JZh+V05u/O2h8f9f2vVSLB/wBfsHQijVr2bw+0zNtFZsYiNkXPUF2q?=
+ =?us-ascii?Q?6tZV60NmCvrNUbXIksKIvg7zj+L/7hXKFmQAzbG1zavKE48m8Gz1jZBgyoo4?=
+ =?us-ascii?Q?q4ObnSx+udJpFgqf1O60oy8GWixHUlYZm/u43C7Z0oIO8QbWixgl8gcU1NF2?=
+ =?us-ascii?Q?iseBZD76Emz2XK2keXYsNiRXzE3BNW4Pjtv5JTcBXMG7cJP1IoCaMPwACxDb?=
+ =?us-ascii?Q?EZ/QkPf2jKH6HjR64wpGKHyQlTw+97yd8YTGXb8BKYGKCFDhYAjkd76jEoIg?=
+ =?us-ascii?Q?t3Wqejbqe1a95BBjR5Tc2KHyu/C4Xdb7fyWgKYsG8qMzNp1MT6RfHhDY6nKJ?=
+ =?us-ascii?Q?RUxvWsOJUgOUsWj9kRmldAhrrs2kIZwZsYPY3EbTFwLyZr8tovEq5jo35+Sp?=
+ =?us-ascii?Q?bjk+ccCJkbrykzXGk/FSYVXFz3PF4jjnyjf1P9TtuD2wv90BOAaiHcBecHhi?=
+ =?us-ascii?Q?0e2cU4gbif7K2sGL6IWURX/ZQFuui7Y4WIL4EiLClWxSiZmzMFXdDl8ZjYvN?=
+ =?us-ascii?Q?lH1u62lp/2hsGElgVXIdC1ZamXUqjsh3v1uwA7JajAMiQTJmPGkJW0EmWRxM?=
+ =?us-ascii?Q?GLhXOpmdfgVwFMmNs6w2xf7YwE0ARzFYhmYWIYKrAjyddSTb2mcbeaUebGJn?=
+ =?us-ascii?Q?0ogl2daisJdB5bzb6rjLdMDkYmcIgZgzeFXilpU4ipHP5r7Zj6SqjSbl+bBt?=
+ =?us-ascii?Q?aC/0CG4iyx7RB0qtPoOAOnn2NieiyaqNkaLE01gTdkVWq09mibCmKi3N3+5l?=
+ =?us-ascii?Q?xO1Dr5F2Qv2rpz9ONP48aR4ZWR66BfWc7ZhVg1mAHnei1RP6cw84lGPyH510?=
+ =?us-ascii?Q?0sS8Q9ViDkzChL6C7tjUfcXHGLVh3DCyCyIOU0Bva4BESrEaRvf8WZxtZke0?=
+ =?us-ascii?Q?8WSLUpYxQnvPOKI0Et5y5nH+P/2vSIsFskbJGsOVi2fTj1JT+TXXBmmouDzh?=
+ =?us-ascii?Q?2oTU9cWO6NcA+FV3rtLv11vKkuq9XGx4rE1d6TsehIqyrreppyhLQr8E3u0I?=
+ =?us-ascii?Q?d8+Ctz79BUwcxLy1k2z+vff3CRyZIBBXKD5Gu6yz1G480WJEmcM8mCJvYL+c?=
+ =?us-ascii?Q?rOfl8QtPzebuA6YDHf5kH3MZBali3Nj7K46I?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(36860700013); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 10:37:07.2997 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2115daf9-c4d0-49dc-1e96-08ddef8cd32a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 10:37:07.6965 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: abebf6d6-2386-4af8-43d6-08ddef8cd367
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509FB.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8P195MB2042
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1P195MB0478
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,22 +158,22 @@ boot from raw addresses instead of a FAT partition.
 Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- configs/phycore_am62ax_r5_defconfig | 2 ++
+ configs/phycore_am62ax_a53_defconfig | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/configs/phycore_am62ax_r5_defconfig b/configs/phycore_am62ax_r5_defconfig
-index 01d100842de..584a6415ca5 100644
---- a/configs/phycore_am62ax_r5_defconfig
-+++ b/configs/phycore_am62ax_r5_defconfig
-@@ -42,6 +42,8 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
- CONFIG_SPL_EARLY_BSS=y
+diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62ax_a53_defconfig
+index 05849d05be4..27fa4386a21 100644
+--- a/configs/phycore_am62ax_a53_defconfig
++++ b/configs/phycore_am62ax_a53_defconfig
+@@ -48,6 +48,8 @@ CONFIG_SPL_MAX_SIZE=0x58000
+ CONFIG_SPL_PAD_TO=0x0
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
 +CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
  CONFIG_SPL_DMA=y
- CONFIG_SPL_DM_MAILBOX=y
- CONFIG_SPL_MTD=y
+ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_ETH=y
 -- 
 2.48.1
 
