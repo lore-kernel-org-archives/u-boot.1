@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6D7ACAC583
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 14:13:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAC8ECAC583
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 14:13:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E729830B4;
-	Tue,  9 Sep 2025 16:13:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4FE98831B4;
+	Tue,  9 Sep 2025 16:13:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qoQfBiwl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DNh3F2AR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5BB78319C; Tue,  9 Sep 2025 16:13:22 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 612B2831B4; Tue,  9 Sep 2025 16:13:24 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E9028309E
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 16:13:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A826B8313F
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 16:13:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-887745ee6ceso73421039f.1
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 07:13:20 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3ffe6666f8dso13255895ab.2
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 07:13:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757427199; x=1758031999; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757427200; x=1758032000; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S6oevkLyJR4owOfbqEjG0nLXu3jnYwkpJRolPEDmcYI=;
- b=qoQfBiwlbXQjc2lvDemGn7+0h7KJQT/CZ+/6E7Y5vU9Ri8JeL5t1B3PX22/4pAVUBE
- 4B68usjRP1BmGcq0foK/XL+Y0p8KTwEshfwwGT4ml7+jxacOUA/BfqdhKHkXDUhzWeJY
- 8xn0Q0uRq5y5bXRMrl35RVaUcC8qzW+cyE6Os=
+ bh=Ju5RSt5InxPsQL7oM7ne6Ilhoki9oCUGzBVwamg+L2s=;
+ b=DNh3F2ARPm+Yye45S3vwSTfnVSGux1VfKKggo1DP2DLDod9WGelBycPKQAGLVM8KFf
+ 1ubXwxhSSd8+DLNFonHjOvdD9f9L43ZLQaSiSiJ43DGj6OKcmtrSeeIbEjx4v8ITzkCQ
+ DZb+uFC/sVlg5/J97yB7QBlvJ4KHovW/EIh/Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757427199; x=1758031999;
+ d=1e100.net; s=20230601; t=1757427200; x=1758032000;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=S6oevkLyJR4owOfbqEjG0nLXu3jnYwkpJRolPEDmcYI=;
- b=Z4Booke7EZcLdPHNY6OHUUeWCVFONlER+ENLPxZ8sLwJchPTxXmh7AOLNwZs0cQI/A
- dvX8l9Sa2nOp7Zkr2BKsLUmlbgyrhlQ3Ol0OCQtnJNr5l0FkC4xQShSxsf6QW+MLkYKA
- cghkXEnlRiMNsWplfrNKo4QwUQ6NgNs6ep2p1MGPgmAprCQjsMERNnNQ/mt33tQKhQEJ
- GM7fM96DTVV8RPGQ3CocnfsIcS/qEr5eJMpw3VXQ10DRGXDm7urqOZStH36eH6P3Ki/9
- 7TuAbpR4bBy+VQnMEdc2q0/NOWvbV3wn6i5JTX+aSNnlPNON6QPScjxJzWKLU9duTOCW
- z9iw==
-X-Gm-Message-State: AOJu0YwuLbBlvfANSILNYSB3HGI1T1Rvndt2F6IyJuDUIWc+BHDQa97Q
- L0mWJS1x1quhmavjJHLZwVT7cpFSXmagYGDU4iQnpyFRnVpUGJjOmYUjLsqjeKjXbRjxjn2RehQ
- RxGa8Oak=
-X-Gm-Gg: ASbGncsXWmO/voyBLxQM+xDgKS7BkMHKuu7ky39R8/3cSV3OGtAJT9E0yKQSZtEYPgs
- 27yJvmXctbpRRqsGH0Lmkl68vgw/SiXBn9/YhGFDqnT8OAynd+8DYCCKSeVaTnS8QRdR3V8vpMg
- 47M+23EJjpd1JTFCiPil0nrtztCwkgKihAUYX8fbRaTlF7QkHYZ3S5gm8cTqOKsqarINdvAgDxU
- abECebtCwIpz+8mTi6WrosPjnhGeNo5qb0yjPap+IXf62JVaZVBR7IB+HMRIkyypzSZdIS3wPBm
- AE4twQdBCT+ZQJyl7IKbfmhV47kiPao/inCoz8JTab4LSv+X+AsOan/CFVfV83VHFh+4pkKGD7a
- JntWtH+iD/XYNGud7Kh9DkCsxSwq9CLsrfgYg11HYSPfvCxLixf44SAY=
-X-Google-Smtp-Source: AGHT+IHv0gdeUbEFn4mptX+jLDsyyiwaDD5+GRPX1wpmEz+mhPs+oM/3dZGfcTKoL9gN+a7HLpnClg==
-X-Received: by 2002:a05:6e02:1a45:b0:3f3:3140:bd00 with SMTP id
- e9e14a558f8ab-3fd8e98d182mr183165055ab.11.1757427195332; 
- Tue, 09 Sep 2025 07:13:15 -0700 (PDT)
+ bh=Ju5RSt5InxPsQL7oM7ne6Ilhoki9oCUGzBVwamg+L2s=;
+ b=RZhbz46PdcRWRMEYJiqPZWw3Ccb8BFLtVM33+oWSsz6LjGafqzKCDY/Y1drRS14Tzk
+ zvJ2oukHArjfNeUEftGV8M86iUfBH9yj8ydCLwV5uZu8cQ5a6zo2OI2zjyDapO+aOgy7
+ LQ9PpHvSNkaLkfGy6+gHdoqEA95nv9wdTKFLeMMldsfaWwu5PEApTu2YIBwztYCwO71I
+ 2tUVANzGH6aQbw1B+9xCSHskXSxdemofYD64H8x/8Rvkoyx/wWf0E4LRiU48A/kEBHJr
+ wG6vXKLbhhFWVGKI/RHQ8P+8E8oxS4R8oZjPihqm3ZOLXXtmZnhaYszSsAycYU9j8IDI
+ /dfQ==
+X-Gm-Message-State: AOJu0YyNff8o05AFa7bEJpVJ9OQBaysNmleect7DrX2Binzs5fJvNsHy
+ eo5j5orNPfiQW7vTkKcsKEdu925mfVmMdYC+KKEkx4ZC2yEQJE4YBDPK1gcM/qSTfgCXGODqsB4
+ 0n5XTHjs=
+X-Gm-Gg: ASbGncuFiaAo4QW9TxFjmKiO265QaFCLdUSWFCj2K0mwCDex9oePqf3TmnNt/TCRwdb
+ 5jc23wUOSMcE7IFZCC4Jc7IMlfKzqJ0qQCcf6zgxD6KI/aFfADM4UwFaZ++tjFhj3Fn4PNmug83
+ t7rj/vskZZ7tRkze/akZOd18EDF7adQOH60f8dtRqarKfUvfX7sjssjl10MRUP6SFDLpayQsUR7
+ 6Scg4AEmD9LA8vnkGXwacDO3ZH7w62ZyyKxBOcizolAHeAkQgc/GYvYWuH6YSmJx1GP4vHpm+VZ
+ Qu8TANOavjP/uA8D37w6C4bovo8dWEesxRSKU82wwvxhZVhsbvx05AQnUa7jlOpukRP2X7t1fsF
+ In4YhO3ryKSQpwYftyuk2XYXIs2Urk1hylgnQR3U6RnGcItAr0MEL/CE=
+X-Google-Smtp-Source: AGHT+IHlfogZYhmPFJtPiG+MHk4y2tPcYGb6sXf/lj+R3TiER0VzIzS6ksV3j8pUKNgc0ZKOlnwelQ==
+X-Received: by 2002:a05:6e02:3781:b0:3f6:5e42:9ec0 with SMTP id
+ e9e14a558f8ab-3fd8e9913fbmr173721695ab.13.1757427200197; 
+ Tue, 09 Sep 2025 07:13:20 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-50d8f31d0b6sm9669006173.42.2025.09.09.07.13.14
+ 8926c6da1cb9f-50d8f31d0b6sm9669006173.42.2025.09.09.07.13.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Sep 2025 07:13:14 -0700 (PDT)
+ Tue, 09 Sep 2025 07:13:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>
+To: Minda Chen <minda.chen@starfivetech.com>, 
+ Hal Feng <hal.feng@starfivetech.com>, E Shattow <e@freeshell.de>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250903070502.136681-1-patrick.rudolph@9elements.com>
-References: <20250903070502.136681-1-patrick.rudolph@9elements.com>
-Subject: Re: [PATCH] configs: Fix crash on coreboot x86
-Message-Id: <175742719436.1649309.14428693786511063635.b4-ty@konsulko.com>
-Date: Tue, 09 Sep 2025 08:13:14 -0600
+In-Reply-To: <20250901112748.676541-1-e@freeshell.de>
+References: <20250901112748.676541-1-e@freeshell.de>
+Subject: Re: [PATCH v1] configs: starfive: Add visionfive2 CONFIG_DNS enabled
+Message-Id: <175742719929.1649309.9266872764656995759.b4-ty@konsulko.com>
+Date: Tue, 09 Sep 2025 08:13:19 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,21 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 03 Sep 2025 09:05:01 +0200, Patrick Rudolph wrote:
+On Mon, 01 Sep 2025 04:27:40 -0700, E Shattow wrote:
 
-> Booting u-boot as payload with coreboot's main branch is currently broken
-> since commit [1] on x86 as U-boot assumes the active GDT matches what
-> U-Boot would have installed in start16.S.
+> Enable CONFIG_DNS for visionfive2 board target. With CONFIG_PROT_DNS_LWIP
+> enabled and CONFIG_CMD_DNS disabled this restores DNS functionality
+> displaced by LwIP DNS refactoring during the merge window.
 > 
-> Make no assumptions and always load the GDT when building as coreboot
-> payload to make sure the segment registers are actually matching the GDT.
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] configs: Fix crash on coreboot x86
-      commit: 77ef938212b1b273389ea1560b999e79a6c285b3
+[1/1] configs: starfive: Add visionfive2 CONFIG_DNS enabled
+      commit: 1a7882de8c859467ce931ed23761db1e391aeaff
 -- 
 Tom
 
