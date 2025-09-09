@@ -4,69 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95264CA0FED
-	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 04:36:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FECDCA0FED
+	for <u-boot@archiver.kernel.org>; Tue,  9 Sep 2025 04:36:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0429C80422;
+	by phobos.denx.de (Postfix) with ESMTP id BEFDA83106;
 	Tue,  9 Sep 2025 06:36:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="kElZeM55";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="olBpgmdw";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="tFIg0IKK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D030F82A9E; Tue,  9 Sep 2025 01:39:42 +0200 (CEST)
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+ id 4A63082A9E; Tue,  9 Sep 2025 03:25:48 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B23B3800B6
- for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 01:39:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=mainlining.org
+ by phobos.denx.de (Postfix) with ESMTPS id 4F1FE800B6
+ for <u-boot@lists.denx.de>; Tue,  9 Sep 2025 03:25:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrian@mainlining.org
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
- c=relaxed/relaxed; 
- h=From:To:Subject:Date:Message-ID; t=1757374375; bh=07QapfHa7jdpdk6vAoY0xe3
- 78E9+kgfpbR1pz1qS9Kc=; b=kElZeM55rUJ5U8oIiJi8ilTn5wUhgcbQEc8w9hNYAIE84tFGvG
- ljT97AGPQkh76vyAgfGqubgrX0/rl1jXFQJibVUfbmbfJ44BfOuLETkM3HEqHOUQnhbuz6nVTNr
- yZeBOWsU8PMOFjPPp0ENGQ2u5BvHxDTqwo60E0RaOm0ICw4XFFcwlWy78+TArdy9K0+cM2HSFvu
- 6r/+phzbITQTxBGmG4htPxsPrX4xsXkYEDIeWVOpvkZNjFahKCJ/MDOeGaCEZqJsi4JxuVwYTBY
- URjcI8aTmI11j6oMaL5OXw0p60/rLvxAu9LFyZPTfLPHNpEG8n8yZC9BGa0GrIAdV3w==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
- c=relaxed/relaxed; 
- h=From:To:Subject:Date:Message-ID; t=1757374375; bh=07QapfHa7jdpdk6vAoY0xe3
- 78E9+kgfpbR1pz1qS9Kc=; b=olBpgmdwoxVR9E/hriMDZsANKXdZpD0D2tGmrK7YjIGr8WFjIF
- dH13l2fO3ETvibmcD+8lRMth4tQdqjxk6xDw==;
-Message-ID: <b6e82030-303d-4f10-933d-7267da3b8558@mainlining.org>
-Date: Tue, 9 Sep 2025 01:32:53 +0200
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XyMy8pTgJU3Mow7QxKabrQAIKJ/d9tEJTJ+cn1+R1EZ4ShWNh9OGDhqLSC7BrFiqkzF4ioyjqm5n8OfJXsb/09oOzZRKRTtc01iZHr1vSb7tBPlj5hrJRk9Aog516SyvmFBNtu+chFzjIgzt9x9t2e+dEsY204Hkt/b9BKpZAY2ODk5IKc+ysSBrvXozFmq8rVblxlDVjoZQj8lV7Pn3P4iLZAH+gRobvDNxUiOLNajpJEWE+ZRAd488VsBeI6Z4rVz1WCDHUx9l0ZW8THfo9/yS1PiVZeORqlXPun7sn4q+8OIiQx0Y4QA2BhrRdO/3ketZQnMfAHFwMr5hMR7Bxw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=X4ENNxpv1F73bPyYCfOxNdQ5dOLAoFkviUzHhebuTtE=;
+ b=EsFIj6o32dUNn8BV5t7yHl/9m1LmdibOjxSrard8OK8RRrWJYzplKUHRcE4gAffbbzKvIyQNyvydw3q7NZksSND/fWygHzf+V/Fn6YSB8r6HfpPuzVvJOADkyM1GdRvfh/lzkXLPoB9ngmuwLDLXuZ9ufyC+LHRNQUOFjYhlu5tA5X42SwwlO45mP70JpcbGaSF4JQ1lI5zHZ+OVAaDpGG44adR4m3mVquKt+3bcNpWoihnDStg8PI6Kq0BaxFrPtfWU58oPlCkT3xjN14SCvwfzIrR4GXXMhr5dMssG7t/nQEBV/twf5s7nPgqX+7WbQ0vakWZumdjdKgcEqHLAPw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=X4ENNxpv1F73bPyYCfOxNdQ5dOLAoFkviUzHhebuTtE=;
+ b=tFIg0IKKoSvQxgy/Vw1ZXmFpU+azfpDmN98556cxX9CClrTnoIAf7ojx16ObHxX0khN2ApQM5Pi5XnABlEoeRwYFQz0jz45gzoSmwSYGqzlE/z+Bj9Xhw+p8cA0bj6B6pMq2Mr7jlK4dx1C0tjjI6OaByaiMFDmQ6B3HUkakVLUV2Ey9xlRMCkyk6ic7QIIMOkkCLazFb8IDSbYklwPQ7kn+w82wTvW1Ip+tv88CWrybrbJDAXzvEEFBFhCSwmLMTOYSH2IOsS3qt6eKwq1E2XJVn7jjYjHNLg4F0SuLVyjOYy2sYcbF57asTikE9L0Z0RicG+SUlT4iri08HphDZw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VI1PR04MB9835.eurprd04.prod.outlook.com (2603:10a6:800:1e1::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.15; Tue, 9 Sep
+ 2025 01:25:44 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9115.010; Tue, 9 Sep 2025
+ 01:25:43 +0000
+Date: Tue, 9 Sep 2025 10:37:09 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: John Ripple <john.ripple@keysight.com>
+Cc: alexander.sverdlin@siemens.com, andrej.valek@siemens.com,
+ festevam@gmail.com, hs@denx.de, peng.fan@nxp.com,
+ sbabic@nabladev.com, sr@denx.de, trini@konsulko.com,
+ u-boot@lists.denx.de, uboot-imx@nxp.com
+Subject: Re: [PATCH v3] imx8: Add ahab_commit command
+Message-ID: <20250909023709.GA11150@nxa18884-linux.ap.freescale.net>
+References: <20250818043344.GB13772@nxa18884-linux.ap.freescale.net>
+ <20250908211838.3772709-1-john.ripple@keysight.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250908211838.3772709-1-john.ripple@keysight.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SI1PR02CA0052.apcprd02.prod.outlook.com
+ (2603:1096:4:1f5::20) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/4] pinctrl: qcom: add SM7150 pinctrl driver
-To: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sam Day <me@samcday.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>,
- Julius Lehmann <lehmanju@devpi.de>,
- Aswin Murugan <aswin.murugan@oss.qualcomm.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Alexey Minnekhanov <alexeymin@postmarketos.org>
-Cc: Danila Tikhonov <danila@jiaxyga.com>, Luca Weiss <luca@lucaweiss.eu>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20250831004602.699953-1-adrian@mainlining.org>
- <20250831004602.699953-3-adrian@mainlining.org>
- <0343bb3c-f13f-4cc9-a972-e9fae200f476@linaro.org>
-Content-Language: en-US
-From: Jens Reidel <adrian@mainlining.org>
-In-Reply-To: <0343bb3c-f13f-4cc9-a972-e9fae200f476@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI1PR04MB9835:EE_
+X-MS-Office365-Filtering-Correlation-Id: 69232e9f-47a5-444b-4cc6-08ddef3fcb95
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|366016|19092799006|376014|52116014|1800799024|7053199007|38350700014;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?zntlQ2ZIU6EmMk7xOLDcVGi8uVC9lbit4pcf3BYhkQ6BTDakCGPpm8+Hp2uW?=
+ =?us-ascii?Q?rZr8LhDBs1nlAcLvgy5URJVFQtorxo1uooIvmNYvUW9jQnUKvaW9h9IBfkBn?=
+ =?us-ascii?Q?jUp2IHY9klwx44Z8id/1QCoWGG4ISSUcIlXulbAeJcgDR5UHfzBK7Ts6Mhp8?=
+ =?us-ascii?Q?lcrZBMHkYrA6WY/+B6eXPqNB2nWgxyLaasU7yuk/h/WinbPzP+STwcWRZn7T?=
+ =?us-ascii?Q?tKqA/tassl7Rcsvukr3GIuLjSJnB9zWO6vWjPaGr2+//OdN7d0mnNijKsGRp?=
+ =?us-ascii?Q?Mvh0PXshObAZPfGJBxfvhpZP3004hQI6l3UoDX6I9aIHCmLgGDd+rdlGCwl0?=
+ =?us-ascii?Q?zZzp64qDj+eV+T9DL9b2MkbLS1UQ8wyn6PzLKu0xBuIgzvvi67M0oZII0ZdM?=
+ =?us-ascii?Q?lDQnadCpHpIqhLg5WSSlrZIVrv4fntdTX0CpQe7AmmwZnvFwrAt+r564v1GE?=
+ =?us-ascii?Q?IrPx/tBQsYgseMm4uFsO1voW0O73S0Uy/VLvAoxKKm7Nk/+t5EZZED9YLVqW?=
+ =?us-ascii?Q?F9BzBZoL2SQPBH705T/nHLD1w58d60NgsewsKd2GvcVySBmla3ngrNHDP0Pu?=
+ =?us-ascii?Q?1QBi1r8sYs57gxeo1g5WvpSSEBtDkGq3dyUVkEPqB8OKHvGM/2wo8JrvXQty?=
+ =?us-ascii?Q?r6/6junrcoPyfNR4g9s0QugwTHo0fYQl6U/+H0VCpkg8Z0KKYmvg8U78j8LZ?=
+ =?us-ascii?Q?x8ITUu/1Sf90ket7zQzn5H6t01QZPCaCxW8MnQdD3ewvy9eMdALWWXPKjZua?=
+ =?us-ascii?Q?bFbl9rC6Ln1gkEmJDzg1m4AX69rse2qPGPqGb7xEAX72qZ1QyI2hwh4EOu1C?=
+ =?us-ascii?Q?pvlaPfrhTkT9w8ZFal6HhNiFTkRkZBXdITmbt6dpMIIGwJAho4MrdSszaEws?=
+ =?us-ascii?Q?R/Wrwc5GznsihPSqBtDONiPGZTJx6M37NY+Q8+d+mkAIiiVcgKwQsba0nDQE?=
+ =?us-ascii?Q?SThMX5yqZt6xJ6DyKJLxMv4JUu7YlsUFIViq36LTbkeenSSkw4DIGxm1X1av?=
+ =?us-ascii?Q?EFgkXCTETIFNZMjVEsqE8XXJ/OowVsRyLLanqRElv5izVLtV0TKoWDO/CPtE?=
+ =?us-ascii?Q?3BicQp6iJWY+SRlIiCo5DAgarD1y4jF/9GUrlcLmG+YvNl8yUZkMk92hBZHV?=
+ =?us-ascii?Q?GDuXiZ9XgoJZufXUpsmSxR/YNyh1qh1p35+he6Md8XHNuqcrVcT5X101PgLM?=
+ =?us-ascii?Q?4D9RZAgkkBeNzkMTd1ifXETubVpDt/3DngENctMGXVYghoXm9RefP/oHBfzl?=
+ =?us-ascii?Q?E/XzTayQtEiH9CXQ1Je42PKJ7VdAMSx3ZMVltd1pwI26QTp45f6tMduJx6GJ?=
+ =?us-ascii?Q?tbNTRLpLPOVSsseGC5uKPb9iK4IudiXCAdnE9tAfrUMBX+48Mmk5UsrhXJSg?=
+ =?us-ascii?Q?pDKdcjbAZxhb3M7DacAMPd6Bx803lM/W6IB2N9JdUmWdD05OdzgliDi9Gh6h?=
+ =?us-ascii?Q?GCNn31HCnHd684UR8UwomTWPCIgECSAHyIrx9/xFnR1ZFjowGVlbgxoAxRT5?=
+ =?us-ascii?Q?FIdX+8PW4NSOP8c=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(19092799006)(376014)(52116014)(1800799024)(7053199007)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Dka4LeP6OJ1MOYNyEfM7zSAYCabXLpHxlWuO2HHWkZgg1eVgpCcimhLWjRT4?=
+ =?us-ascii?Q?BCo0/uTYayjgnoIkhH7aPYOCIPCrmr9H5pLAurHWvL/yiKlJhBmdTd0BLUhS?=
+ =?us-ascii?Q?LMgK4VEDWHPjewS2mqnbAKLHlBLIOcayDkODL8nHte21PdSTSevTDd30ctQN?=
+ =?us-ascii?Q?MtxXVXfW9hKVqZ9yf06E2Qe/URusmVGw+tjwZEqNxhxRHWaoXeVQi1Zha7EG?=
+ =?us-ascii?Q?6I7ONGou2Eso6wJGOFAyy+NvHgTADh8Ck48ZseNv6LopwC8oBcnB0OMrPFBn?=
+ =?us-ascii?Q?asjaorejYJDXZqhwxNMGqHG0cX8BqSLFedHpwzLsIL5Fmf/xpn5b+7aB2bkG?=
+ =?us-ascii?Q?yhwQB8XmsJCvpkyZNnstx1gkmTdeEvle1K5XWV8GRf5tOf94+R3kSkIvV2Fk?=
+ =?us-ascii?Q?F6EhT2yoM8f02afLKbeqmhZiRytE+u2y9L25gpa23sAB42CA+7aw0WZ7rMo9?=
+ =?us-ascii?Q?dt/sm9Yf4hlz9z/X6OagRM4VOma/sfoT77aR0tw5EAfAfbkQsQBEsYdlyb+c?=
+ =?us-ascii?Q?jxGZvfYRcWajlSDAfFESaO07nCSJ8oPdecFAEnTKzjNYd2Gf1S2S8pr5YprI?=
+ =?us-ascii?Q?K2ItzS+QWszUMf2SVZPQq0OjBz5GQYmFHEWHvZZcZrz9BHi9X3ZENyS1VbkD?=
+ =?us-ascii?Q?dzxFQ/6erUr/knOd4M0h9CalVIGY6xjQebJ3P+BbUP0ioYivyX7b7vXeYlSz?=
+ =?us-ascii?Q?w9/ltgchmRVQFzPASG4PpOLxV/xxFtimGi33jQndt0PXTOs/mO7UNirjT3sF?=
+ =?us-ascii?Q?u7RtM/muOu2wHO4S0ojlB/RmsP4NcRFPjCT9iby9avjORCrThUrTpE611ALr?=
+ =?us-ascii?Q?gvneQN291pA2R7dK0j4/DL4LopaCo8SuT+aC2BUxrJlCq66T/BZ70Q5DlF5+?=
+ =?us-ascii?Q?nzxGyn9ui5rH52KYnR/cPTNci4MW5Vn9lEiXf2sr2rHkbgV0p4b96AMonVNB?=
+ =?us-ascii?Q?qnd6/bljXDyYFF/Cg4f1sV7NVHR8/JnNbzgEWIfj0m+xwuYq29L1cHjNtgrs?=
+ =?us-ascii?Q?GjdBmAya6+pnNeY/k6aoa+Ozum0T/5CZLNBFoel6SPEtu8HWv/r5NLV4k3za?=
+ =?us-ascii?Q?PpUIFyZ4h6KLI52AVQeHOFMXyyp1oKg/pvtzJ+UuPrddWs1A6YI2Cs+HR90g?=
+ =?us-ascii?Q?kMIlZngElcK5Vl/UR5/nJ5XMu6qEImGZKOzmnY804EfSp2LuLsXiYo9om46Z?=
+ =?us-ascii?Q?rAgovGAZZiRXlNODr4IiK6NGc4qSZjBO5zXbcgxi0Q0BOs4dsLzMdoIti1E7?=
+ =?us-ascii?Q?9u4y+NjJoQ514y+g88DxJjp4pU5zEuKhRie7CLAHxPvrNKaPtpAg6sPduZ1z?=
+ =?us-ascii?Q?T+Hv7C8CkuFQ1kPBd9lTVk05COvSnMAftll6ss7ih2BtazFYBer/k3SJTAMu?=
+ =?us-ascii?Q?xG9HwTXeTOXZ/FqJb2EJ2ne+pusFWq62OgmRfBnpz+uXR5EPAkHGv4IkZouz?=
+ =?us-ascii?Q?Wf/8rBD4Hnm/31zFxI6hqSm2wN4K+GCzcIv8cxNcUWH5VqNdLk8jD0PANSf9?=
+ =?us-ascii?Q?XUt1Li/wWC9DwoLqEWG30FD/QXIkeozuOROwqIHFKAx2YoGvoHbIw4GZPD9H?=
+ =?us-ascii?Q?XXIHaTKcIRzQa/58h+AYbmzWqUP0X0v14ppljpbn?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 69232e9f-47a5-444b-4cc6-08ddef3fcb95
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2025 01:25:43.8671 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: C1hlqGbAwTR+faH1BLXDbik8RP04APhuM4/Yxjw4dAi1I0cVX9gn5WpLwipGHVNTmKWnhH86eU5vMLbgGTAsbg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9835
 X-Mailman-Approved-At: Tue, 09 Sep 2025 06:36:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,217 +166,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/4/25 3:53 PM, Casey Connolly wrote:
-> 
-> 
-> On 31/08/2025 02:46, Jens Reidel wrote:
->> From: Danila Tikhonov <danila@jiaxyga.com>
->>
->> This SoC features a pinctrl block with north, south, and west tiles
->> accessible to the AP.
->>
->> Signed-off-by: Danila Tikhonov <danila@jiaxyga.com>
->> Co-developed-by: Jens Reidel <adrian@mainlining.org>
->> Signed-off-by: Jens Reidel <adrian@mainlining.org>
->> ---
->>   drivers/pinctrl/qcom/Kconfig          |   7 ++
->>   drivers/pinctrl/qcom/Makefile         |   1 +
->>   drivers/pinctrl/qcom/pinctrl-sm7150.c | 142 ++++++++++++++++++++++++++
->>   3 files changed, 150 insertions(+)
->>   create mode 100644 drivers/pinctrl/qcom/pinctrl-sm7150.c
->>
->> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
->> index 21f81b66099..d83ede21c75 100644
->> --- a/drivers/pinctrl/qcom/Kconfig
->> +++ b/drivers/pinctrl/qcom/Kconfig
->> @@ -89,6 +89,13 @@ config PINCTRL_QCOM_SM6115
->>   	  Say Y here to enable support for pinctrl on the Snapdragon SM6115 SoC,
->>   	  as well as the associated GPIO driver.
->>   
->> +config PINCTRL_QCOM_SM7150
->> +	bool "Qualcomm SM7150 GCC"
->> +	select PINCTRL_QCOM
->> +	help
->> +	  Say Y here to enable support for pinctrl on the Snapdragon SM7150 SoC,
->> +	  as well as the associated GPIO driver.
->> +
->>   config PINCTRL_QCOM_SM8150
->>   	bool "Qualcomm SM8150 Pinctrl"
->>   	select PINCTRL_QCOM
->> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
->> index 6cb53838e71..73c08a02a3d 100644
->> --- a/drivers/pinctrl/qcom/Makefile
->> +++ b/drivers/pinctrl/qcom/Makefile
->> @@ -15,6 +15,7 @@ obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
->>   obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
->>   obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
->>   obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
->> +obj-$(CONFIG_PINCTRL_QCOM_SM7150) += pinctrl-sm7150.o
->>   obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
->>   obj-$(CONFIG_PINCTRL_QCOM_SM8250) += pinctrl-sm8250.o
->>   obj-$(CONFIG_PINCTRL_QCOM_SM8550) += pinctrl-sm8550.o
->> diff --git a/drivers/pinctrl/qcom/pinctrl-sm7150.c b/drivers/pinctrl/qcom/pinctrl-sm7150.c
->> new file mode 100644
->> index 00000000000..435ba39b1db
->> --- /dev/null
->> +++ b/drivers/pinctrl/qcom/pinctrl-sm7150.c
->> @@ -0,0 +1,142 @@
->> +// SPDX-License-Identifier: BSD-3-Clause
->> +/*
->> + * Pinctrl driver for Qualcomm SM7150
->> + *
->> + * (C) Copyright 2025 Danila Tikhonov <danila@jiaxyga.com>
->> + * (C) Copyright 2025 Jens Reidel <adrian@mainlining.org>
->> + *
->> + * Based on Linux Kernel driver
->> + */
->> +
->> +#include <dm.h>
->> +
->> +#include "pinctrl-qcom.h"
->> +
->> +#define WEST	0x00000000
->> +#define NORTH	0x00400000
->> +#define SOUTH	0x00800000
->> +
->> +#define MAX_PIN_NAME_LEN 32
->> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
->> +
->> +static const struct pinctrl_function msm_pinctrl_functions[] = {
->> +	{ "qup12", 1 },
->> +	{ "gpio",  0 },
->> +	{ "sdc2_clk", 0 } /* special pin GPIO124 */
->> +};
->> +
->> +#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
->> +	{						\
->> +		.name = pg_name,			\
->> +		.ctl_reg = ctl,				\
->> +		.io_reg = 0,				\
->> +		.pull_bit = pull,			\
->> +		.drv_bit = drv,				\
->> +		.oe_bit = -1,				\
->> +		.in_bit = -1,				\
->> +		.out_bit = -1,				\
->> +	}
->> +
->> +#define UFS_RESET(pg_name, offset)			\
->> +	{						\
->> +		.name = pg_name,			\
->> +		.ctl_reg = offset,			\
->> +		.io_reg = offset + 0x4,			\
->> +		.pull_bit = 3,				\
->> +		.drv_bit = 0,				\
->> +		.oe_bit = -1,				\
->> +		.in_bit = -1,				\
->> +		.out_bit = 0,				\
->> +	}
->> +
->> +static const struct msm_special_pin_data msm_special_pins_data[] = {
->> +	[0] = UFS_RESET("ufs_reset", 0x9f000),
->> +	[1] = SDC_QDSD_PINGROUP("sdc1_rclk", WEST + 0x9a000, 15, 0),
->> +	[2] = SDC_QDSD_PINGROUP("sdc1_clk", WEST + 0x9a000, 13, 6),
->> +	[3] = SDC_QDSD_PINGROUP("sdc1_cmd", WEST + 0x9a000, 11, 3),
->> +	[4] = SDC_QDSD_PINGROUP("sdc1_data", WEST + 0x9a000, 9, 0),
->> +	[5] = SDC_QDSD_PINGROUP("sdc2_clk", SOUTH + 0x98000, 14, 6),
->> +	[6] = SDC_QDSD_PINGROUP("sdc2_cmd", SOUTH + 0x98000, 11, 3),
->> +	[7] = SDC_QDSD_PINGROUP("sdc2_data", SOUTH + 0x98000, 9, 0),
->> +};
->> +
->> +static const unsigned int sm7150_pin_offsets[] = {
->> +	[0] = SOUTH,	[1] = SOUTH,	[2] = SOUTH,	[3] = SOUTH,
->> +	[4] = NORTH,	[5] = NORTH,	[6] = NORTH,	[7] = NORTH,
->> +	[8] = NORTH,	[9] = NORTH,	[10] = NORTH,	[11] = NORTH,
->> +	[12] = SOUTH,	[13] = SOUTH,	[14] = SOUTH,	[15] = SOUTH,
->> +	[16] = SOUTH,	[17] = SOUTH,	[18] = SOUTH,	[19] = SOUTH,
->> +	[20] = SOUTH,	[21] = SOUTH,	[22] = SOUTH,	[23] = SOUTH,
->> +	[24] = SOUTH,	[25] = SOUTH,	[26] = SOUTH,	[27] = SOUTH,
->> +	[28] = SOUTH,	[29] = NORTH,	[30] = SOUTH,	[31] = WEST,
->> +	[32] = NORTH,	[33] = NORTH,	[34] = SOUTH,	[35] = SOUTH,
->> +	[36] = SOUTH,	[37] = SOUTH,	[38] = SOUTH,	[39] = SOUTH,
->> +	[40] = SOUTH,	[41] = SOUTH,	[42] = NORTH,	[43] = NORTH,
->> +	[44] = NORTH,	[45] = NORTH,	[46] = NORTH,	[47] = NORTH,
->> +	[48] = WEST,	[49] = WEST,	[50] = WEST,	[51] = WEST,
->> +	[52] = WEST,	[53] = WEST,	[54] = WEST,	[55] = WEST,
->> +	[56] = WEST,	[57] = WEST,	[58] = WEST,	[59] = NORTH,
->> +	[60] = NORTH,	[61] = NORTH,	[62] = NORTH,	[63] = NORTH,
->> +	[64] = NORTH,	[65] = NORTH,	[66] = NORTH,	[67] = NORTH,
->> +	[68] = NORTH,	[69] = NORTH,	[70] = NORTH,	[71] = NORTH,
->> +	[72] = NORTH,	[73] = NORTH,	[74] = WEST,	[75] = WEST,
->> +	[76] = WEST,	[77] = WEST,	[78] = WEST,	[79] = WEST,
->> +	[80] = WEST,	[81] = WEST,	[82] = WEST,	[83] = WEST,
->> +	[84] = WEST,	[85] = WEST,	[86] = NORTH,	[87] = NORTH,
->> +	[88] = NORTH,	[89] = NORTH,	[90] = NORTH,	[91] = NORTH,
->> +	[92] = NORTH,	[93] = NORTH,	[94] = SOUTH,	[95] = WEST,
->> +	[96] = WEST,	[97] = WEST,	[98] = WEST,	[99] = WEST,
->> +	[100] = WEST,	[101] = NORTH,	[102] = NORTH,	[103] = NORTH,
->> +	[104] = WEST,	[105] = NORTH,	[106] = NORTH,	[107] = WEST,
->> +	[108] = SOUTH,	[109] = SOUTH,	[110] = NORTH,	[111] = NORTH,
->> +	[112] = NORTH,	[113] = NORTH,	[114] = NORTH,	[115] = NORTH,
->> +	[116] = NORTH,	[117] = NORTH,	[118] = NORTH,
->> +};
->> +
->> +static const char *sm7150_get_function_name(struct udevice *dev, unsigned int selector)
->> +{
->> +	return msm_pinctrl_functions[selector].name;
->> +}
->> +
->> +static const char *sm7150_get_pin_name(struct udevice *dev,
->> +				       unsigned int selector)
->> +{
->> +	if (selector >= 119 && selector <= 126)
-> 
-> This should be && select <= 127, since there are 8 special pins.
-> We should really update all the drivers to use ARRAY_LENGTH macros
-> rather than doing all the maths by hand since so many have had errors at
-> this point ahaha
-> 
-> Kind regards,
+On Mon, Sep 08, 2025 at 03:18:38PM -0600, John Ripple wrote:
+>The ahab_commit command allows the user to commit into the SECO fuses
+>that control the SRK key revocation information. This is used to Revoke
+>compromised SRK keys.
+>
+>To use ahab_commit, the boot container must be built with an SRK
+>revocation bit mask that is not 0x0. For the SPSDK provided by NXP, this
+>means setting the 'srk_revoke_mask' option in the config file used to
+>sign the boot container. The 'ahab_commit 0x10' can then be used to commit
+>the SRK revocation information into the SECO fuses.
+>
+>Signed-off-by: John Ripple <john.ripple@keysight.com>
 
-Are you sure? I think this is correct, since start and end of the
-range are inclusive, so 119-126 are 8 GPIOs in total. The total
-pin count is also 126.
-
-Best regards,
-Jens
-
->> +		snprintf(pin_name, MAX_PIN_NAME_LEN,
->> +			 msm_special_pins_data[selector - 119].name);
->> +	else
->> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
->> +
->> +	return pin_name;
->> +}
->> +
->> +static int sm7150_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
->> +{
->> +	return msm_pinctrl_functions[selector].val;
->> +}
->> +
->> +static struct msm_pinctrl_data sm7150_data = {
->> +	.pin_data = {
->> +		.pin_offsets = sm7150_pin_offsets,
->> +		.pin_count = 126,
->> +		.special_pins_start = 119,
->> +		.special_pins_data = msm_special_pins_data,
->> +	},
->> +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
->> +	.get_function_name = sm7150_get_function_name,
->> +	.get_function_mux = sm7150_get_function_mux,
->> +	.get_pin_name = sm7150_get_pin_name,
->> +};
->> +
->> +static const struct udevice_id msm_pinctrl_ids[] = {
->> +	{ .compatible = "qcom,sm7150-tlmm", .data = (ulong)&sm7150_data },
->> +	{ /* sentinel */ }
->> +};
->> +
->> +U_BOOT_DRIVER(pinctrl_sm7150) = {
->> +	.name		= "pinctrl_sm7150",
->> +	.id		= UCLASS_NOP,
->> +	.of_match	= msm_pinctrl_ids,
->> +	.ops		= &msm_pinctrl_ops,
->> +	.bind		= msm_pinctrl_bind,
->> +};
-> 
-
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
