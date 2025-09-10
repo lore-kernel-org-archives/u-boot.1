@@ -4,83 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0404DCA101F
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 05:28:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF34CA101F
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 06:25:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 339BF8318E;
-	Wed, 10 Sep 2025 07:28:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id CA687830B4;
+	Wed, 10 Sep 2025 08:25:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="kodlL76Q";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="jc500GJg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 305498319C; Wed, 10 Sep 2025 07:28:39 +0200 (CEST)
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
+ id A5E528318E; Wed, 10 Sep 2025 08:25:45 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93ED0830B4
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 07:28:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5AD5A830A0
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 08:25:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pg1-x52f.google.com with SMTP id
- 41be03b00d2f7-b5229007f31so2472047a12.2
- for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 22:28:36 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-71d605c6501so55533747b3.3
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 23:25:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1757482115; x=1758086915;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1757485542; x=1758090342;
  darn=lists.denx.de; 
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tyGm4gozBLXHjLzIatyqccILqmFw3ks6VhZE6W6MgcU=;
- b=kodlL76Qb34LyzNfO3lt8HBcSj5607cWEpRIRJ+5Uy1ugW4jKago91YaU+lpQOsS7V
- YhuYrvJ2WnZeDY+QVx3mcwA4u4PQyr4ofCzF7rOPM65Y9GBF2KEnoIIXCaYGKAehNJEK
- B2RcCm7ki9hqANQwSZdrEuh6QOxiNywDWKqsg=
+ bh=9SGTHGDJHRZspo4SlZ6WwtxZbUtNyN/URAALMXRI/eA=;
+ b=jc500GJg4qdoYDMz3MCNsV/i63Q8uaWa+Sd6Jn/rcPbIfb4pufLO79ipokzR35iTkO
+ Izr9IeCyn8LkCyXLKeSrxpIu0O4KFA5h7aK9IkoHFi/CzNV2kp8msA8MeLNdAhuiY4jQ
+ gOiBSsJbjhm89la4S3exg/j2J5DQ98AKh6wOOeRsi4oCEXD1eFSEPyZzULGc6Dxh+x5b
+ qFlAl8hjSkqRSwBZWplM6CbVDg3WIK8qqlDaEmq4zSyV1szb1NVpom/4oUfPw9t0qFYk
+ IdfCPUenGGgJKEUksDfjnd00Xj68fXity7/Qg34Ryz4qujaMPwVase14uz/oocrASDxq
+ V03g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757482115; x=1758086915;
+ d=1e100.net; s=20230601; t=1757485542; x=1758090342;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tyGm4gozBLXHjLzIatyqccILqmFw3ks6VhZE6W6MgcU=;
- b=nmF9ynbeDsHxrZDPOq3lEqRizYf4G6g69Mi8FigdkCN2troOnXuruc+dPK2WH/KMoK
- OHvjl87zewazya2wGYL+P5wcCyRLLIo1xbudQRiHdyrVbucQDHAaTp2Hqxi6yHpIRS3w
- sR5bphpKACZSTvNl/yD/kCIXUFmAUPzX0UDMG8OtQwAkYMnoL68eavoHZ2ZCk0CDUexQ
- iqfJ9cWN5Ebu80u/zkZmxjRJTlo+T5uzBfm5zKzvy6WCgcGOG4gX6akfPsjaScc7FbaK
- BbHNGQPlkQ9rLbu6cs4AKfK3YRmagBRePq3AudjAu2LXOZxgjCKenhKRl/5vZW5VLhl8
- +8/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU6xWWNODCppCA1pXP5Ss8+LTr73CJ3Rorze8xhOBzinbCi+n51pqAQlmTTDonYPKj1BhZBohA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy2tRos8eBIWLfIZL3ilva/gqj0qYMIS5Ya6Jm1OKKmC0bVM+Be
- Uc//0kr55wglxkhi9an8C82ZVMHj6DykBfta0qREYpT4MPvPYBpNs4bgPEcG4SkAGs6VxSmypLB
- exqLelBJJQDJvkW/S9MmMxJ6pWUMMdFuFW2AxodLn5w==
-X-Gm-Gg: ASbGncuycs+UKDxKmoxCpPLfOFPkTvZJTn6PuUXSzU23aphiejSr+kt0JHlhHipPI9g
- dk1++cSZm6x3X2vNFhNF0+oXc0qJioyHLkQ/TikUQR46GTYZi2oaP4Y9sNGHiRgRUo1yj5YcXnb
- b5DKyKsPtiE+hgcLZUvrKlLtwvDrG4G7KRwv5OVlgfxf29VjqtVd48bQ4BjlkTDwPQgeyv+NwEm
- ky2EvaT4qwQHX9X6Q==
-X-Google-Smtp-Source: AGHT+IHLQsFXjpAl2Mun/HZT/hIZEkRPtycffygBs7jbYzBXUmnEgrmGyCLVSYIQDrB/yltKmqAvVRXeKZ1FUuDTRbQ=
-X-Received: by 2002:a17:902:ef0a:b0:24b:2336:e1c5 with SMTP id
- d9443c01a7336-251734f2ecdmr179384525ad.55.1757482114610; Tue, 09 Sep 2025
- 22:28:34 -0700 (PDT)
+ bh=9SGTHGDJHRZspo4SlZ6WwtxZbUtNyN/URAALMXRI/eA=;
+ b=NKkLfcjDfFet/AC12xKDcsluMdE79/SfsZAgTR+wHsOTYoZAQHCtQ7A2nRB9xOJ6UX
+ pZz88sWA/vHKy3+0MGbntMjSotfOnbOa0FW35y+KzeSmG3Cs++arwA2XYuKa6HmtlT6r
+ DwA6TR7gfVNbiEb4LxuuFJNVuioSlPmH+BK9EapvJiLOduNWMX2j1XWXTBcEWCHIil38
+ 2DJy7EMwOYavHGvubDpweCpEhRDtPHPnKWUfYPZnPwLfff45iMBPYaX3e0rEt1E+PwR+
+ UUwAmwOV7ggtI1BVhQbVE3uQJSYt8A7CMyyILrgwFdRiJQNSEpUCLs3knmGoV8uAvys/
+ 7TmQ==
+X-Gm-Message-State: AOJu0YxSgdTgo1k2yb7K7SB8i+18vLXDwHMcbQPGNIOkZh0sIBEPixcY
+ ZNsTPTJzizx0T9dIZ38fA9ixd0Dz2ZGeWo1u8TOvIMaJu7Fx3gov2hn2FDTcWGM2hxTAP008lg+
+ 2Kj+PWWZW04CVcxt0l14HHYb2wNwRHIDAr6Hr127593N9O99l9hYqgI8M
+X-Gm-Gg: ASbGnctNr6FPv2/I7A2OXBklsbO6ex73ZKdPGH5PAmqaABOcm3L97w8E+pojuRqDw2i
+ ZZQwLk+IAu2bTGqTSFDpJEHNs5Ayo9CoYO7isfCuaOLj8Qh2GOgLnxCxlrilvCFALZnw/YNcglA
+ QNwu3QT+UvWK8Hh4saVsYOxy5EoU+xAswqsoeyMtIiYNR1MkWKLra9iUKANkInzzS/A1nhslB99
+ V+bR1fuMglmDhRMJzQ=
+X-Google-Smtp-Source: AGHT+IHv/2XPmWOfHTnXtvKJCoe87CaRdNfqoy0su54iTqJUxGvUonRxQrR+/liRATE3ECkYhyz0u1TNLEIzpmePfAQ=
+X-Received: by 2002:a05:690c:30a:b0:723:8be3:a678 with SMTP id
+ 00721157ae682-727f553e67emr121202077b3.40.1757485541997; Tue, 09 Sep 2025
+ 23:25:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250702092313.970234-1-miquel.raynal@bootlin.com>
- <87a534exwc.fsf@bootlin.com>
- <CAMty3ZDG=MtRbzNPaRs=dz9AUkcTA5cHX+0=wgqyEbMqPhyxrQ@mail.gmail.com>
- <0efa621a-6cc5-4c1b-a5c9-9ab86f84692f@ti.com>
-In-Reply-To: <0efa621a-6cc5-4c1b-a5c9-9ab86f84692f@ti.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 10 Sep 2025 07:28:22 +0200
-X-Gm-Features: AS18NWBFusAPfER3h10VK9AOkYJVobyQU9uHQ1uxU2uU9SD3Retc_BTR8aldHK0
-Message-ID: <CAOf5uwk5gHPkhF1emwpUyp8aDYXhsO-6JQ_x1gicEK4kkajiiw@mail.gmail.com>
-Subject: Re: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,
- 02}jv behave correctly
-To: "Raghavendra, Vignesh" <vigneshr@ti.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Tom Rini <trini@konsulko.com>, Steam Lin <stlin2@winbond.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+References: <20250708134142.327224-1-padmarao.begari@amd.com>
+ <20250708134142.327224-3-padmarao.begari@amd.com>
+In-Reply-To: <20250708134142.327224-3-padmarao.begari@amd.com>
+From: Michal Simek <monstr@monstr.eu>
+Date: Wed, 10 Sep 2025 08:25:31 +0200
+X-Gm-Features: Ac12FXyO65PpvZQoHUzi5NBz5Bm_SeJCeO15WYt-26h695h2VyfR_OjF7vieDtI
+Message-ID: <CAHTX3dJR+kDZuKTb=Zpzy8gu+TRNrbwrUYn4cCpF7rK6f07naw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] board: xilinx: update guid based on metadata
+To: Padmarao Begari <padmarao.begari@amd.com>
+Cc: u-boot@lists.denx.de, git@amd.com, michal.simek@amd.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -99,101 +93,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all
+=C3=BAt 8. 7. 2025 v 15:42 odes=C3=ADlatel Padmarao Begari
+<padmarao.begari@amd.com> napsal:
+>
+> The generated GUID applies to all Xilinx platforms but is not
+> specific to any individual board. For FWU multi bank update,
+> use the image UUID (GUID) from the FWU metadata structure
+> rather than embedding a generated GUID into the U-Boot build.
+>
+> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
+> ---
+>  board/xilinx/common/board.c | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+>
+> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> index 8ffe7429901..c1fc8505761 100644
+> --- a/board/xilinx/common/board.c
+> +++ b/board/xilinx/common/board.c
+> @@ -712,3 +712,29 @@ phys_addr_t board_get_usable_ram_top(phys_size_t tot=
+al_size)
+>  }
+>
+>  #endif
+> +
+> +#if defined(CONFIG_FWU_MULTI_BANK_UPDATE)
+> +int fwu_mtd_platform_hook(struct udevice *dev, struct fwu_data *data)
 
-On Tue, Sep 9, 2025 at 7:08=E2=80=AFPM Raghavendra, Vignesh <vigneshr@ti.co=
-m> wrote:
->
->
->
-> On 9/9/2025 5:37 PM, Jagan Teki wrote:
-> > On Tue, Sep 9, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@boo=
-tlin.com> wrote:
-> >>
-> >> Hello,
-> >>
-> >> On 02/07/2025 at 11:23:13 +02, Miquel Raynal <miquel.raynal@bootlin.co=
-m> wrote:
-> >>
-> >>> These chips are internally made of two/four dies with linear addressi=
-ng
-> >>> capabilities to make it transparent to the user that two/four dies we=
-re
-> >>> used. There is one drawback however, the read status operation is rac=
-y
-> >>> as the status bit only gives the active die status and not the status=
- of
-> >>> the other die. For commands affecting the two dies, it means if anoth=
-er
-> >>> command is sent too fast after the first die has returned a valid
-> >>> status (deviation can be up to 200us), the chip will get corrupted/in=
- an
-> >>> unstable state.
-> >>>
-> >>> The solution adopted here is to iterate manually over all internal
-> >>> dies (which takes about 30us per die) until all are ready. This appro=
-ach
-> >>> will always be faster than a blind delay which represents the maximum
-> >>> deviation, while also being totally safe.
-> >>>
-> >>> A flash-specific hook for the status register read had to be
-> >>> implemented. Testing with the flash_speed benchmark in Linux shown no
-> >>> difference with the existing performances (using the regular status r=
-ead
-> >>> core function).
-> >>>
-> >>> As the presence of multiple dies is not filled in these chips SFDP
-> >>> tables (the table containing the crucial information is optional), we
-> >>> need to manually wire the hook.
-> >>>
-> >>> This change is adapted from Linux.
-> >>>
-> >>> Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-volat=
-ile-bit-v3-1-735363f8cc7d@bootlin.com/
-> >>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> >>
-> >> Same question for this one, no feedback for the past 2 months, I'm not
-> >> sure who's supposed to take these, Jagan and Vignesh you are marked M:
-> >> in maintainers, any chances this can get it?
-> >
-> > Unfortunately, I was off quite some-time. Need little bit of time.
-> > Vighnesh is off for years.
->
-> Thats not true. I dont have access to U-Boot SPI trees. So patches have
-> been flowing through individual "platfor/SoC" maintainers trees
-> unfortunately. Tom picks the patches from TI contributors once
-> me/Nishanth Acks where as AMD/Xlinix bits have been picked up by Michal
-> Simek and so on...
->
-> Happy to help out if you help to manage a merge window every now and
-> then or just review things. Most of the SPI NOR/NAND follow from linux
-> where its reviewed by set of maintainers and tested (example this one is
-> tested on TI board).
+as you told me the name doesn't fit with the first patch. That's why
+please send the v2 version of this patch.
 
-I will go through the patches over the weekend and review them. I will
-prepare a branch
-spi-nor-next and try to ask to test from there
-
-Michael
-
->
-> > In the meantime, Michael will help in
-> > review but need help on testing.
-> >
-> > Thanks,
-> > Jagan.
->
-
+M
 
 --=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
