@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23F8ECA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:15:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48DDACA101F
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:15:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 204DE833EC;
-	Wed, 10 Sep 2025 20:14:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65416833AD;
+	Wed, 10 Sep 2025 20:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ur3qygjx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mLaKjeJ9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEE53833D1; Wed, 10 Sep 2025 20:14:49 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 29C32833ED; Wed, 10 Sep 2025 20:14:51 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CB8083280
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:14:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 478AE83303
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:14:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-74542b1b2bcso6139089a34.3
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 11:14:47 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-74526ca79beso6052751a34.0
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 11:14:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757528086; x=1758132886; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757528087; x=1758132887; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aX8tyHicKnz2m4jZUGYtoUHrSv7O0rHpjX9CF+W29r4=;
- b=ur3qygjxduZmikm6ZViBW4mLRi2G03qjojHYsfwNLGXAAd8lTeqjCqF7sGOub2D6RV
- 7BzjlqFh8A5RB3AsCHI34BKGo3KgalKT+HRLLbUO+XoYtLp50Yv0ycmTqkvbfWlUlbUC
- wl3n/bcBa84w69nSVgtNd+iC1e81qpDLBu744=
+ bh=MmHMDcID81X+SRQKPt7KtDzKs8yR+52tU3BIDA8Jsro=;
+ b=mLaKjeJ9JALAcZDzo2EJtZ2RIp0e/DyXkdHjq1ESV8lzTTYDITHWwBB57t2cS2JvW7
+ DVvQGEX1RzOIy2tIwffmI48/C7sD2ziZ7zAeGnr4pNjKNLpoi7gWoxSoRgJFkKDVFyWy
+ AAt6auYW++KBGD/LPDdFeCoYcF8Uf9c9J7lQE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757528086; x=1758132886;
+ d=1e100.net; s=20230601; t=1757528087; x=1758132887;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aX8tyHicKnz2m4jZUGYtoUHrSv7O0rHpjX9CF+W29r4=;
- b=IhbgwUjacko/+VNDpd2+me5AhIUBEXB0KOoBUrZNUVF94YJD8s7L7+W7+wiY4T/z74
- frKjkb7lcuS9tiQ98pDBpHq3f2lgrPonEIp+dvdcq27x3fVd78Z5UNw/AFRUflb+IWY8
- e7uLKdHGulNiFGfHflBHjgQk+NYv9sT2RgyvoPQkBknA0KVGMMvBNjsytg+x0MK8wQrJ
- kTgvcIwb4ornowuCDaFfKouRCps2bq2fCaT8nE/pkZZWI0oiEmaO54NHyzjeXv0If6ps
- 1ZQnjOGYCt7E2k40y0FYE2/VfOiRnZWqfdba2jqcHZJrLenJfnP4w52AwuQ3KE9J4npN
- TQzQ==
-X-Gm-Message-State: AOJu0Yx5WrPSCglnnoegDGGs8DBvqtoLgaiBCNqeebzxg5uBY8RfjnLv
- gfDbZz+y4JvJYbh1oU4YQPlxXeQkTkgLvVwf7ueQFKKhqsGJ7tqe03o26bekxBKlIQg=
-X-Gm-Gg: ASbGncuzLKk97+rZKtnOWckMiHWQ99o8FYzR5DFMdVnYz6rC306gswCwu4AQXfzilOd
- /ydFfamG1SSQyvedKOrOuNn7eKzl2hQQX124n6sV+bPYlTKCPU4a58w+kvjIAn+7tMPsQDnYVMv
- 9jNPVSZk1d/LSUhb/SSpYAqv2bnLVXwRVsofWIhkI0EDrcifeZUdXLPjlgBjtZzoY6YA7Afa4vD
- HBB/3x8qJgBc4vYY3edncTYkcxh3fg69Uuy24Ecbo+GHd/AjnY33OZXpX20Lrv2S4IKQbOtGJKB
- SwC1pF4LRkHw8u/9BWReH1nopzF5fAwcHIxa1lp5VUTs67hoQGZ8sAwGmhpgGb9PCjploUw1L9I
- lBVcL4MDzNE6aSg95hO+QyX3IbGvZtyngo/cEABZRYc3xTeGh3oEbspxYATBpEodWew==
-X-Google-Smtp-Source: AGHT+IGJAKQCU6eLWpfZZQn+fun2yQM5rbqumOXW2PYKWTcoliau1z1udwCYa37IZTb6SLq/YfjTXw==
-X-Received: by 2002:a05:6830:2695:b0:745:a08d:cbc8 with SMTP id
- 46e09a7af769-74c7641c6bbmr7750398a34.24.1757528085992; 
- Wed, 10 Sep 2025 11:14:45 -0700 (PDT)
+ bh=MmHMDcID81X+SRQKPt7KtDzKs8yR+52tU3BIDA8Jsro=;
+ b=eB36bHiaXZZYiOSHChpvc6s1/fUZFVvT4bEMAGPOacFnvkRPUrRRDGyG0hQJszRGh1
+ KxEE+gdgJCoi+qz64pI/M1zMRTWzmgNNRnr2MJNC8InA87qRWb7qQSIPZkmlcNxRNRg/
+ bxaOlQ9UGF7txpm/Y6JOIV8Daia3hv41Hd15XHbcnsIZvWy+4hJHg45aVwoIf9yskCAX
+ HkvcGYSV02eOuP4KI/+BmWxjCMyqxn2wlQo3s6YGdx2YorBYvHm5V5SWKaY9gD/GIkzZ
+ hOKcn2le5FpG5Vi4IAVVntNKrEC0rFmqJBeuqMVhOAoJ6Kj3GJMdBWVmnOIAE0GpU8rb
+ Me+A==
+X-Gm-Message-State: AOJu0Yyu0HVktnKlur0u29o8GOCdexEfP98JThpbzYdqo92KZZ7rwgWH
+ k8OueBDhy4eJ24k4ghN+O2D/c3Op2K40sFzCXGocweoDG6z5r6AL8i28Nbs2AFEBeZ0=
+X-Gm-Gg: ASbGncvQGP01CKCZQRWoM988RRWVTIxk+eUiuJLj+IiQh1ojgxzvBD8sar7AKLnfWwN
+ T3wxtIFX66bhMbmZRepbfmEwU0LkfPECeyB9FDyM7i3iiaZTJrnkncyn9+zJfsfv/I0wXxTEaet
+ RLJx2tqrKat9zfLNr4Ycb5mOmv7XbZQoRZnZaUn3lRlj50KhfxIvDw6zgaBsUG+UnS+2cFhFPSE
+ Bn35V81WjZijAhpm9l+BRFfPia8vzLtRtXz1ftF85YrE58zTgrzbW48KF0Myf+9fgY5B2NxA3LQ
+ E2Hz8846l8X76FGPxGh0BIfSC1YDRMbvjRtD1Khum6u9iwPWRhEgRZVfhPfIRzyQydoDalSyZXY
+ DJcYpKGA3WC3u+vMUXzA+7W3YyfE0PGutftz8hh4bAJ0v73s2wlijnQYDN54ap4uvBg==
+X-Google-Smtp-Source: AGHT+IF7R+Dzja2TKLVfrREgi0fmZHOO5aYt1lR5uNknqMdZWwSTuac9ArcQx+mQR+Hr9N1AafPehQ==
+X-Received: by 2002:a05:6830:348e:b0:748:d0fe:3c07 with SMTP id
+ 46e09a7af769-74c70c78366mr8861357a34.12.1757528086942; 
+ Wed, 10 Sep 2025 11:14:46 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-75200e6a1casm18100a34.17.2025.09.10.11.14.45
+ 46e09a7af769-75200e6a1casm18100a34.17.2025.09.10.11.14.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Sep 2025 11:14:45 -0700 (PDT)
+ Wed, 10 Sep 2025 11:14:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, 
- Jan Kiszka <jan.kiszka@siemens.com>
-Cc: Masahiro Yamada <masahiroy@kernel.org>
-In-Reply-To: <b18a4f45-77dd-4f78-ba6c-2e017abc98b9@siemens.com>
-References: <b18a4f45-77dd-4f78-ba6c-2e017abc98b9@siemens.com>
-Subject: Re: [PATCH v2] tools: Do not generate logo when cross-building
-Message-Id: <175752808500.1959855.6085893942133582439.b4-ty@konsulko.com>
-Date: Wed, 10 Sep 2025 12:14:45 -0600
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250826193717.20543-1-mibodhi@gmail.com>
+References: <20250826193717.20543-1-mibodhi@gmail.com>
+Subject: Re: [PATCH] fs: ext4fs: Add initialization failure recovery path
+ in ext4fs_write
+Message-Id: <175752808609.1959855.9998774264852042673.b4-ty@konsulko.com>
+Date: Wed, 10 Sep 2025 12:14:46 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,19 +97,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 23 Aug 2025 17:21:09 +0200, Jan Kiszka wrote:
+On Tue, 26 Aug 2025 12:37:17 -0700, Tony Dinh wrote:
 
-> This cannot work (unless qemu-user is registered in binfmt_misc) as the
-> tools will be for a different architecture.
-> 
-> Fixes "make cross_tools" in case CONFIG_VIDEO_LOGO is enabled.
+> Don't invoke ext4fs_deinit() in ext4fs_write() if the failure occurs
+> during initialization. It would result in a crash since ext4fs_init()
+> has already done that.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] tools: Do not generate logo when cross-building
-      commit: 371a76e845504c9ba7ca216b6edfb4ae4ec14e56
+[1/1] fs: ext4fs: Add initialization failure recovery path in ext4fs_write
+      commit: 1f8fd9d37d69ecc269943a273d3bca4c1be2384e
 -- 
 Tom
 
