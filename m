@@ -4,66 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1449CA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 11:32:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14A8CA0FED
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 11:51:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C97D8318E;
-	Wed, 10 Sep 2025 13:32:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D6098318E;
+	Wed, 10 Sep 2025 13:50:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ns5laDkh";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="tCFMt2ir";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EDBD831D5; Wed, 10 Sep 2025 13:32:30 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5418830B4
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 13:32:27 +0200 (CEST)
+ id CE7388319C; Wed, 10 Sep 2025 13:50:57 +0200 (CEST)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20707.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::707])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A0A28830B4
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 13:50:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58ABWQEw127997;
- Wed, 10 Sep 2025 06:32:26 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757503946;
- bh=u0O4vlfEHZx8ZYnHqBtkHbh064I1gdbAKkuCogtgXIU=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=ns5laDkhewZsFzijqbXv7W2rjrimdJCdrDK3dzQfM9jmNsaUUyGme91lwkK5h+RpM
- 0m2zj6TQlB0Nm43u12F6Jkasri/lC2ddpjurTBbh4qhdcbUwIFKLWIdlXKmgJBA8JQ
- Nk4ltPfV26dyz5oyw3ZUVoRnqlXKGNJ3IQJIHayk=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58ABWPjG1116245
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 10 Sep 2025 06:32:25 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 10
- Sep 2025 06:32:25 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 10 Sep 2025 06:32:25 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58ABWOWh410515;
- Wed, 10 Sep 2025 06:32:24 -0500
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sAVh6gXfMDQE6sqv/OMY3cj0kn1oCZJTCghscB/EXgEb3F0dqOO3sgiMiCokwalSuMJlTMHDdu+QFyLnPMZZIFwLDU2082rozZKt+cjzCQSoApkXFOQ3r4wH/MxfufWOn+701nDyKQvVFjDZ8Nuo8TAz6zVZDX/XBjcxo5ESQE+F7viL4fvkTwI8/notXlPcE5F6FtI0p7Bsw6qNTkBKqqU7orIOSxm55zlrlozOA2aWCJOy7IzIhiiF2EvoNb3DFkd7ANK/hiSFUw/B6ndcAyXq3n/uR8JnCq2POt+XSnUJIH+EkljbCjCAdLdX5yzM8cBBcPKxA0XXhTyAoxomlg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0H/kfK++vsJDMWEe6FcJ9iCCVc8pk6mu1SNOfk50IZY=;
+ b=ytpbgKn4xWJOh6MW++PbpSjlMvz9pBqIcLvpZ1uZ3L6LvFnGefFNiVn97PfdUFmeD38ao8t99lmHhfKtylF9pqeRLO2j9xqljPwAsl8QCmap4kTYcFhcdAkGQJ3XMXPFTUPJl+oQsE/FG/tGB8Hiud/7CIPNh+tgHfVT64z4agxsOV8/4dlMczKSN/jBauPCwCgrcgzqElfwTCSmwalM3gI9X2rgYrF7iXJ41dwipV6UpNqWTKCS6nXrvQKmqDEslzZs/rwHNTtjMAP71I25d67hSpSgU+7YywIliolCr6VaTZmdH4eIbLoLUnWHS+LRCBo0mzxE/UcA1+l1qRFdeQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0H/kfK++vsJDMWEe6FcJ9iCCVc8pk6mu1SNOfk50IZY=;
+ b=tCFMt2irqxcKs8SnFqjqVzjuU82tfyj1p/BZDYSmAvKUR1gSo3h0vnpdbi6N0tGIlOQqbjyrn7IHoEdX30VGSE3UaooKsXJRj1QLGxuXl5z563yTBG4SWlRhJ+lWK+mT6+ruMeCpN/J44TKXAiCLFDZDmC4IYvDCZ7nreXbMn6f2CWFML/BO5iBUCUgqR11fQl64a31ur2YH6BJhxbl22Sn6GgplyyPBdVI12igs1w8W8xoOVSj65sjR+g+kmz9PG/yALKjsD3e5ItobHeGxhCjHr4qeLwW13TTfMAiZYTu73NFwwmc7GsWkKg27eXINjLhiOlxyjTRxyXLMAd04Sw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from VI0P195MB2484.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:248::6)
+ by PAXP195MB1312.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:1a6::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Wed, 10 Sep
+ 2025 11:50:53 +0000
+Received: from VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
+ ([fe80::24f:8371:2871:5981]) by VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
+ ([fe80::24f:8371:2871:5981%4]) with mapi id 15.20.9094.021; Wed, 10 Sep 2025
+ 11:50:53 +0000
+Message-ID: <d47cb78e-e3e4-4a65-a0d0-b7dbf22e7339@phytec.de>
+Date: Wed, 10 Sep 2025 13:50:46 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm: mach-k3: am625: Unlock MMR registers again
+To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>,
+ "bb@ti.com" <bb@ti.com>, "trini@konsulko.com" <trini@konsulko.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "kishon@ti.com"
+ <kishon@ti.com>, "c-vankar@ti.com" <c-vankar@ti.com>,
+ "s-vadapalli@ti.com" <s-vadapalli@ti.com>
+Cc: "upstream@lists.phytec.de" <upstream@lists.phytec.de>
+References: <20250815160240.3575140-1-d.schultz@phytec.de>
+ <63e0078fbf5cb045b79a441dca0f2f71fd3962e5.camel@siemens.com>
+Content-Language: en-US
+From: Daniel Schultz <d.schultz@phytec.de>
+In-Reply-To: <63e0078fbf5cb045b79a441dca0f2f71fd3962e5.camel@siemens.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: CH0PR13CA0059.namprd13.prod.outlook.com
+ (2603:10b6:610:b2::34) To VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:800:248::6)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 10 Sep 2025 17:02:23 +0530
-Message-ID: <DCP35HMEZQAI.30XSASDC8234E@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>, <trini@konsulko.com>, <afd@ti.com>,
- <n-francis@ti.com>, <s-k6@ti.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: Re: [RFC 1/1] arm: mach-k3: Rework spl/get_boot_device()
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250813102948.2426361-1-w.egorov@phytec.de>
- <20250813102948.2426361-2-w.egorov@phytec.de>
-In-Reply-To: <20250813102948.2426361-2-w.egorov@phytec.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: VI0P195MB2484:EE_|PAXP195MB1312:EE_
+X-MS-Office365-Filtering-Correlation-Id: d8fed5c1-7ce2-4054-fb11-08ddf0604b4a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0; ARA:13230040|1800799024|366016|10070799003|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OWZVRVU5OFhCRWFMTm50a2lCWTdkWHROeGFJQ2Jpb0NDOHdENk1XSlRmWTBS?=
+ =?utf-8?B?cDFpN044ZUNkQzJiSGhRaHdXOGJjV1pxaHBqTEd5RzZPOUF5MjJ0UGhrVzlN?=
+ =?utf-8?B?VnNkTFpIcTQ1aFJEVGx4TEI4MGJQb0pmRThWdGRoeUwrd3MwZ2ZHNEVEdFRQ?=
+ =?utf-8?B?V0NjWDFheVJnY1h4VlNIQXRURFhZTU5RVVZNdUNFWTg5OThRVDNEdUV4b3c4?=
+ =?utf-8?B?eThseHpCazRtNmxiSzQrcVZ3eXpLb0R2dDhncjJYeGRWL1lodmJtRlpZL0F5?=
+ =?utf-8?B?VXhhYzU1bnFLN1ZNaUZxbkU3UEh4L2cyamgvMXJpS2x1TTVjWmtSVzdiaEVw?=
+ =?utf-8?B?aklndHMxY1BhTEoxbTJNYmtKdkpscFJNWDNGVWRaSEVYVXBlaE9PY2VQb0Nq?=
+ =?utf-8?B?YmdiMmdzTUFCcWVsZDlCR2UrTG1pK1RKWkdubEJ1WDlTaXQwQVpZUHF0ZStl?=
+ =?utf-8?B?T1kxY1gxbjB5VkY0R1pZbHRoSjNyckpmS0tCVHkrNC8wTUNXRUZtZllJVUFU?=
+ =?utf-8?B?SGF5TWhudnd1WlVzQ1dZN284a3JKTjhhMEZBM2w4S2xZQVU4a21KN3BONHMw?=
+ =?utf-8?B?Q2MwSFFMRVpFbUkyNDlQd3NJOVVNdGpGeWZhaXI5RTI1MElFTTV6RlN3eGcy?=
+ =?utf-8?B?Yy9iU0JncER3aldTVHZIbXNuTkt5cVRrRUF1V0crZ0N0RGN6NzJZQkcrZFh6?=
+ =?utf-8?B?RUEwWDU4Z3UxbkYxUnB3UC9HTGlRZUJWVnoxbUVQM1RmaEZ4anhEMEdDTXdu?=
+ =?utf-8?B?VUxHRTlnT09TcERyaHM0bkd3c0hnQmlJUWRvcTRWeVVvc3hWR1JFdDBsSVNI?=
+ =?utf-8?B?WFd0NFJtQ28rZHBreFdsVjNwbWFuQXlLRm0xZS9vWXFEWmpuZ1d2MEhZcHdG?=
+ =?utf-8?B?RjlOVkU5b2NEbnlaNCtUWlM0SndIR3Ryb2NFRm1uRmZUVHVXaFhRVGxpWFpK?=
+ =?utf-8?B?a3pHR0FYOEZ4dXpjbGgvVFlaY3lEdW9pR2wrZmIwa1paclhWZ2dRZ1NJV3lM?=
+ =?utf-8?B?b0FaN1U2OVk1NnVjR2dZUHl4cTRTMEtPdCsrSFRsUHZkZ2FTQjExNG0wcms2?=
+ =?utf-8?B?RWpTSkM5bHRzTUNjUjVUbktNNFdwREIwUGl1NFFhT01SU3BNNmsyWmY3V0Ro?=
+ =?utf-8?B?NjFBTW11RlMvOXBHSmlBbDhESjI3dnY0QVRnckZwZUFyTnJzM3JhZlkyeDRv?=
+ =?utf-8?B?ZkJFREZYbytRQkU4Q1pSRVFMQTFnZVdhNk1PMWhkdmNtV3lERmppS1pvbDhR?=
+ =?utf-8?B?WW9ISjZEY3lzL2lQV1V0RVVtMFNXUmtyOE1uSWtBRjRFclhPYnVxOVk0M1Vr?=
+ =?utf-8?B?RVNXQ2lzZUVCL1FhVU5COFZwbldUT0d5djJKNzhWNlFQSXVxTDRaNERRb1lN?=
+ =?utf-8?B?a0R4MFRsWHViaXFxQURIVVJVOUwwZE5tbWczSmxLWXpqS1RNQ1R0a09FVDlP?=
+ =?utf-8?B?UDlxK1o4d0lxY0ZKaXM2bllUSTNvLzZWYVpqSEdzaUxjd0tYNE1pWnZDZW1T?=
+ =?utf-8?B?VXdQRnBzNXBkT3diaTFJVmQ3bHliL204d2pERmFCcExNU3J3dnd0REVkb3p3?=
+ =?utf-8?B?VW5NcVRFaytrSXFqMWExOVJ4SkZucmw2VWFxdUxidnBxQTBQaGFYSmhCeGtG?=
+ =?utf-8?B?OGxhVUpRMDBwSnFueVdZaVJCampmT1c5ZWVHMEExLzZJK2I1aDBjVUtYcis4?=
+ =?utf-8?B?VXdaRmVCNTB1MXRkbm9lbFRTc0sxb01hTEpmMEU1eFgyNzdLdWRuMVllL05l?=
+ =?utf-8?B?STBlSTkzT0M2NkJFbHNKcURRY3JrOFdNWU9DdDQvVEVKOTlQelRLSDVCRkVF?=
+ =?utf-8?B?SjMxMm1KeURiN0xCZkxsajJ0ZW9PVHN4djZJcS8wbVFadnNiVDB2dk1uRlQ2?=
+ =?utf-8?B?NnROdlhMUllQeHcvdlVwUmxaUWxOcmJyU25VZzVleUN4Y0xkWkdwMGVrZ1Nj?=
+ =?utf-8?Q?vKNsxBoe3R4=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:VI0P195MB2484.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(10070799003)(376014); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?L2k1Q0VyeXJ6VGNlWm1NdTlqbDJrV29GZE1xTGRYZWU4WjMvR2x6WlB6NFpx?=
+ =?utf-8?B?R0FwQk5DSjI2ZnRNTXhlMFZaUUtyS2I2Wmthd05YdXNjYTZubGlxU3BORVNv?=
+ =?utf-8?B?R205Tm42RDNrTzloQ3BIZ0kvRndzUi9BQXBSUUZZQ1lUZkMzQ1Fpb0UxN2M3?=
+ =?utf-8?B?TEJzbkJPRmp0cDRxd1podEZMVS9DT1VicVlYMWc5T1A3REc5aVBZWGlDWURB?=
+ =?utf-8?B?SFYyczBjNjlJVnZtNTJvL2pPSXZJZm5icFVueXN0OEdpT3cvaDlKUXM3emYx?=
+ =?utf-8?B?Z2h3dlh2TUxHditIL1h3aS9ZK2NzTTBEN2V5VDlZSXJ4RjIzL2YvbXdzb1c5?=
+ =?utf-8?B?b29lb3VxTys5YTJrOVduMkRjSkEwZE55RFl3K091RnRJMkMrbGZBTmhFMWx6?=
+ =?utf-8?B?bWxUSldDYzZXa2pVck9JNlM1aE1kRjJRUHNDRTgyN04zMmNtbG9GQWx1bW5t?=
+ =?utf-8?B?K21zcm1EUm5YeDhzTDJlMU1WYVhVOWRmTWZ5Tnp6Q0dBTkxRanlOWldrb244?=
+ =?utf-8?B?Z1ZDOURGSW5DTUp5UXBEblRXMlhkMzlLUUFNUHlkL2tPSGRDaFJGNXdJdTZ0?=
+ =?utf-8?B?RGxXUlJmRWRwMkd0UTVhcmdWRGpWRVRqZHFPdVIrc05QeFNDWmw2eTVoYktW?=
+ =?utf-8?B?dEZtcEhHMzVTeC96K3NZN29XK0hGbzFPaVE4Vmt6MDVxeVdMY2lON3hLaHNV?=
+ =?utf-8?B?MGhKVDFybVY2ajVWSXNhMC9vb3dnNjFwY2JaMjlhVDNubGl2eGhUTjlJZXI0?=
+ =?utf-8?B?eTMyK0RzNFJOSVdvbHo1aER5VGEvb0hjMGx5UTJXWWZyMW1hbWlwNHhnekh3?=
+ =?utf-8?B?YkRCRXBpc2J6QTlFOUQ0amhrSExlWFBmUGtnM1V3ZzNiV0lrYnFVZ01EOUxR?=
+ =?utf-8?B?d1I4T1ZpRVNwaXRMQjhGdGFFWWZ4UmNqMmIraWZoT3JpWjN6T1J3LzEzRVZU?=
+ =?utf-8?B?SjV4dUxiaTNWcFoxMUc0ZzJIRnpTSTZvZUpwRW11cWVwVW9TRGVtQmFzbUZj?=
+ =?utf-8?B?T3A2YzlnOS85NFlqbUtnTmdsaVBud0w3ZklYa3l2a3NncklNZlhZd01QTnQ3?=
+ =?utf-8?B?SWFad0ZpOGhadm5wek1raWZzelNoT3Bldjk0Tnk4d2JmdVFSS3ovN2FSVUxU?=
+ =?utf-8?B?RGRheCtINW1reUNhNjBCVEg0Uk1lSmZQWXhhaktqQ3JLcHNTelRDMWloMGVr?=
+ =?utf-8?B?ZXQ5SVJoUTROaHlEY1JnQzJ5OHlsYkRGZ2dzbTBBbjQ5a3pwMklvQ2hIektt?=
+ =?utf-8?B?UUIrTSt5ZU4wakpNdHZLUFF3Vmw2N1RnOUJFeVJwOHBkcDVXdXZVWUw3c3li?=
+ =?utf-8?B?NCtxUWYrR2tEWG0rZkRES0xlS3F0ZW9QRG9VS3lqUEFtNzdzM3c3cDArUTFH?=
+ =?utf-8?B?OUh3clY1bmcvSUU1aTlRWVBZL2ZEdis3TUNrUWxmZ052VU5OSm8yN0JxUmVn?=
+ =?utf-8?B?TGVkUGVpbk5IK2dQR0E4NUNlTTJidkk4bGFmOEtZNVRoTVZ6OGpKOUNsazQy?=
+ =?utf-8?B?ajVScTJBUDZYSkxjQ1pRMlQ2eG9GbWFmWlo2Y2xSN1N4ZSs0VDRnWjBoSmVE?=
+ =?utf-8?B?ZHcvNGh5NnFiZlV5Rzk1bmphT3lRWW80STRBVVkvN0NoZmoyZ3hRUUMvVUVN?=
+ =?utf-8?B?WE5hSkY4ZzNtNklkZ3pEK0lKZ2N5YXkzbUNiMm9wWERNTzRIZmkrVFVERmZy?=
+ =?utf-8?B?Z3FMRFhUc09vUmFKZUVjYW9SWXp4YnN1UW1DMk9wSC9Rdm1LSHY5KzIzcXJL?=
+ =?utf-8?B?eXE5dHZ5VHpFdE15dmpDdi95bWNDdDUzNzhrNzJnZG82OGlheXVPRzA2ZGJV?=
+ =?utf-8?B?QnRMeklVY3FxQTBtMzVzNkFBNENRbGtkMWtBalcraHVEcDlTUTc0T295RFU0?=
+ =?utf-8?B?VXpPMnlRQTVteThSSHJySStpNTJCcGlCMkNyN1JHM01BSWxUZ2FRc2FvbURm?=
+ =?utf-8?B?YmR1cjh5MFMvNDlhMEpDQWZ1eWJPZ0FDa2xqZjloNm1jZHdCaDVoSzlRYzFt?=
+ =?utf-8?B?UkRDYlk0aG1SNmRhamhVdUthSVVXcDd1Rm03WmwvSnFrV1NXbjBOdWxvMGJl?=
+ =?utf-8?B?ZjNOQWp6VnRPaFNxRWNCbHdxeTZldnZ6QmZmYWRoV20wZllTYm93VDZTRFFU?=
+ =?utf-8?B?d2F6YUVhSE9OVzI3NURDbTN4RHdBTENteE5PNFBrbDlncDRuR0o3bmVFVUs2?=
+ =?utf-8?Q?k0+KMcqVvyPjHi39uMJnZGxcrSDWzgoXWN1KwW8A9HD0?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: d8fed5c1-7ce2-4054-fb11-08ddf0604b4a
+X-MS-Exchange-CrossTenant-AuthSource: VI0P195MB2484.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2025 11:50:53.0328 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Lva9xG/um+EHT/4XFeZz77LLiC5VwV6HbqobEv31ipuBDr9xfh0fyV60jiNfbjyisICBbHDo49RuWgee9ZL6ww==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXP195MB1312
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,296 +179,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Wadim,
+Hi Alexander,
 
-The direction of your patch looks good to me, thanks for taking the time
-to refactor!
-
-A few comments below:
-
-On Wed Aug 13, 2025 at 3:59 PM IST, Wadim Egorov wrote:
-> The current implementation requires every K3 SoC to provide its own
-> get_boot_device()/get_*_bootmedia() functions which look very identical.
-> Rework it using table lookups for SoC data and reduce code duplication.
+On 8/21/25 18:21, Sverdlin, Alexander wrote:
+> Dear Daniel, TI team,
 >
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  arch/arm/mach-k3/Makefile                     |   2 +-
->  arch/arm/mach-k3/am62x/boot.c                 | 129 +++++-------------
->  arch/arm/mach-k3/boot-device.c                | 109 +++++++++++++++
->  arch/arm/mach-k3/boot-device.h                |  27 ++++
->  arch/arm/mach-k3/include/mach/am62_hardware.h |   1 +
->  5 files changed, 169 insertions(+), 99 deletions(-)
->  create mode 100644 arch/arm/mach-k3/boot-device.c
->  create mode 100644 arch/arm/mach-k3/boot-device.h
+> On Fri, 2025-08-15 at 09:02 -0700, Daniel Schultz wrote:
+>> The watchdog requires to have the MCU ESM error source enabled to
+>> trigger a system reboot. When booting HS-SE (security enforced)
+>> devices, the MMR registers are locked again and all write commands
+>> are simply ignored.
+>>
+>> Unlock the MMR registers again to successfully enable the MCU ESM
+>> source.
+> I'm just curious, could you please elaborate a bit, where the registers
+> are being locked again if they are being unlocked by ctrl_mmr_unlock()
+> in board_init_f() before enable_mcu_esm_reset()?
 >
-> diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
-> index b2fd5810b67..7dc77328e5c 100644
-> --- a/arch/arm/mach-k3/Makefile
-> +++ b/arch/arm/mach-k3/Makefile
-> @@ -6,7 +6,7 @@
->  obj-$(CONFIG_ARM64) +=3D arm64/
->  obj-$(CONFIG_CPU_V7R) +=3D r5/
->  obj-$(CONFIG_OF_LIBFDT) +=3D common_fdt.o
-> -obj-y +=3D common.o security.o k3-ddr.o
-> +obj-y +=3D common.o security.o k3-ddr.o boot-device.o
->  obj-$(CONFIG_SOC_K3_AM62A7) +=3D am62ax/
->  obj-$(CONFIG_SOC_K3_AM62P5) +=3D am62px/
->  obj-$(CONFIG_SOC_K3_AM625) +=3D am62x/
-> diff --git a/arch/arm/mach-k3/am62x/boot.c b/arch/arm/mach-k3/am62x/boot.=
-c
-> index a3a6cda6bdb..6d458f546a6 100644
-> --- a/arch/arm/mach-k3/am62x/boot.c
-> +++ b/arch/arm/mach-k3/am62x/boot.c
-[snip]
-> @@ -141,3 +44,33 @@ const char *get_reset_reason(void)
-> =20
->  	return "UNKNOWN";
->  }
-> +
-> +struct k3_boot_map am62_boot_device_primary_table[] =3D {
-> +	{ BOOT_DEVICE_OSPI, 0, 0, 0, BOOT_DEVICE_SPI },
-> +	{ BOOT_DEVICE_QSPI, 0, 0, 0, BOOT_DEVICE_SPI },
-> +	{ BOOT_DEVICE_XSPI, 0, 0, 0, BOOT_DEVICE_SPI },
-> +	{ BOOT_DEVICE_SPI, 0, 0, 0, BOOT_DEVICE_SPI },
-> +	{ BOOT_DEVICE_ETHERNET_RGMII, 0, 0, 0, BOOT_DEVICE_ETHERNET },
-> +	{ BOOT_DEVICE_ETHERNET_RMII, 0, 0, 0, BOOT_DEVICE_ETHERNET },
-> +	{ BOOT_DEVICE_EMMC, 0, 0, 0, BOOT_DEVICE_MMC1 },
-> +	{ BOOT_DEVICE_MMC, MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK, MAIN_DEVSTAT_PRI=
-MARY_MMC_PORT_SHIFT, 1, BOOT_DEVICE_MMC2 },
-> +	{ BOOT_DEVICE_MMC, MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK, MAIN_DEVSTAT_PRI=
-MARY_MMC_PORT_SHIFT, 0, BOOT_DEVICE_MMC1 },
-> +	{ BOOT_DEVICE_DFU, MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK, MAIN_DEVSTAT_PRI=
-MARY_USB_MODE_SHIFT, 1, BOOT_DEVICE_USB },
-> +	{ BOOT_DEVICE_DFU, MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK, MAIN_DEVSTAT_PRI=
-MARY_USB_MODE_SHIFT, 0, BOOT_DEVICE_DFU },
-> +	{ BOOT_DEVICE_NOBOOT, 0, 0, 0, BOOT_DEVICE_RAM },
-> +};
-> +
-> +struct k3_boot_map am62_boot_device_backup_table[] =3D {
-> +	{ BACKUP_BOOT_DEVICE_UART, 0, 0, 0, BOOT_DEVICE_UART },
-> +	{ BACKUP_BOOT_DEVICE_USB, 0, 0, 0, BOOT_DEVICE_USB },
-> +	{ BACKUP_BOOT_DEVICE_ETHERNET, 0, 0, 0, BOOT_DEVICE_ETHERNET },
-> +	{ BACKUP_BOOT_DEVICE_MMC, MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK, MAIN_D=
-EVSTAT_BACKUP_BOOTMODE_CFG_SHIFT, 0, BOOT_DEVICE_MMC1 },
-> +	{ BACKUP_BOOT_DEVICE_MMC, MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK, MAIN_D=
-EVSTAT_BACKUP_BOOTMODE_CFG_SHIFT, 1, BOOT_DEVICE_MMC2 },
-> +	{ BACKUP_BOOT_DEVICE_SPI, 0, 0, 0, BOOT_DEVICE_SPI },
-> +	{ BACKUP_BOOT_DEVICE_I2C, 0, 0, 0, BOOT_DEVICE_I2C },
-> +	{ BACKUP_BOOT_DEVICE_DFU, MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK, MAIN_D=
-EVSTAT_BACKUP_BOOTMODE_CFG_SHIFT, 0, BOOT_DEVICE_DFU },
-> +	{ BACKUP_BOOT_DEVICE_DFU, MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK, MAIN_D=
-EVSTAT_BACKUP_BOOTMODE_CFG_SHIFT, 1, BOOT_DEVICE_USB },
-> +};
-> +
-> +unsigned int am62_boot_device_primary_table_count =3D ARRAY_SIZE(am62_bo=
-ot_device_primary_table);
-> +unsigned int am62_boot_device_backup_table_count =3D ARRAY_SIZE(am62_boo=
-t_device_backup_table);
+> Is it TIFS firmware?
+> What else could be affected?
+> Do we expect to leave General Purpose Control Registers unlocked
+> when we return from board_init_f()?
+> Does it mean that the whole ctrl_mmr_unlock() has to be re-done
+> after k3_sysfw_loader() call?
 
-It might be better to have boot-device.h export an extern that the
-boards can set. Something like this:
+I really can't tell why those registers are locked again. I figured out 
+they're only locked again after loading the TIFS firmware on HS-SE 
+devices. So, I also assume the firmware itself locks those registers 
+again as part of a secure/security feature.
 
-boot-device.h:
+The A53 SPL will unlock those registers again, which will be permanent. 
+Only the watchdog is problematic because enable_mcu_esm_reset is 
+currently only called in the R5 SPL (config only enabled in the R5 SPL 
+defconfig).
 
-	extern struct k3_boot_device_info *info;
+BTW: We have seen the same behavior with the AM68A/J721S2.
 
-am62x/boot.c:
+- Daniel
 
-	static const struct k3_boot_device_info am62_map =3D {
-			.boot_device_primary_table =3D am62_boot_device_primary_table,
-			.boot_device_primary_count =3D ARRAY_SIZE(am62_boot_device_primary_table=
-),
-			.boot_device_backup_table =3D am62_boot_device_backup_table,
-			.boot_device_backup_count =3D ARRAY_SIZE(am62_boot_device_backup_table),
-			.main_devstat_reg =3D (void __iomem *)CTRLMMR_MAIN_DEVSTAT,
-			.wkup_devstat_reg =3D 0,
-			.bootmode_addr =3D (void __iomem *)K3_BOOT_PARAM_TABLE_INDEX_OCRAM,
-	};
-
-	struct k3_boot_device_info *info =3D &am62_map;
-
-This would allow you to remove the SOC specifics ifdefs from
-boot-device.c below.
-
-> diff --git a/arch/arm/mach-k3/boot-device.c b/arch/arm/mach-k3/boot-devic=
-e.c
-> new file mode 100644
-> index 00000000000..9b4f0ae7aa6
-> --- /dev/null
-> +++ b/arch/arm/mach-k3/boot-device.c
-> @@ -0,0 +1,109 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + *  Copyright (C) 2025 PHYTEC Messtechnik GmbH
-> + *  Author: Wadim Egorov <w.egorov@phytec.de>
-> + */
-> +
-> +#include "boot-device.h"
-> +
-> +#include <asm/io.h>
-> +#include <asm/arch/hardware.h>
-> +#include <asm/arch/am62_spl.h>
-> +
-> +struct k3_boot_device_info {
-> +	struct k3_boot_map *boot_device_primary_table;
-> +	unsigned int *boot_device_primary_count;
-> +	struct k3_boot_map *boot_device_backup_table;
-> +	unsigned int *boot_device_backup_count;
-> +	void __iomem *main_devstat_reg;
-> +	void __iomem *wkup_devstat_reg;
-> +	void __iomem *bootmode_addr;
-> +};
-> +
-> +static const struct k3_boot_device_info k3_boot_device_info[] =3D {
-> +#if defined(CONFIG_SOC_K3_AM625)
-> +	{
-> +		.boot_device_primary_table =3D am62_boot_device_primary_table,
-> +		.boot_device_primary_count =3D &am62_boot_device_primary_table_count,
-> +		.boot_device_backup_table =3D am62_boot_device_backup_table,
-> +		.boot_device_backup_count =3D &am62_boot_device_backup_table_count,
-> +		.main_devstat_reg =3D (void __iomem *)CTRLMMR_MAIN_DEVSTAT,
-> +		.wkup_devstat_reg =3D 0,
-> +		.bootmode_addr =3D (void __iomem *)K3_BOOT_PARAM_TABLE_INDEX_OCRAM,
-> +	},
-> +#endif
-> +};
-
-Why use an array here? We are only making use of the first entry
-anyways.
-
-> +
-> +static u32 __get_backup_bootmedia(u32 devstat)
-> +{
-> +	u32 bkup_bootmode =3D (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
-> +			     MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
-> +	u32 bkup_bootmode_cfg =3D (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_M=
-ASK) >>
-> +				 MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
-> +
-> +	const struct k3_boot_device_info *info =3D &k3_boot_device_info[0];
-> +	unsigned int i;
-> +
-> +	for (i =3D 0; i < *info->boot_device_backup_count; i++) {
-> +		struct k3_boot_map *m =3D &info->boot_device_backup_table[i];
-> +
-> +		if (bkup_bootmode !=3D m->mode)
-> +			continue;
-> +
-> +		if (m->cfg_mask =3D=3D 0)
-> +			return m->result;
-> +
-> +		if (((bkup_bootmode_cfg & m->cfg_mask) >> m->cfg_shift) =3D=3D m->cfg_=
-value)
-> +			return m->result;
-> +	}
-> +
-> +	return BOOT_DEVICE_RAM;
-> +}
-> +
-> +static u32 __get_primary_bootmedia(u32 devstat)
-> +{
-> +	u32 bootmode =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-> +			MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-> +	u32 bootmode_cfg =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK)=
- >>
-> +			MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-> +	const struct k3_boot_device_info *info =3D &k3_boot_device_info[0];
-> +	unsigned int i;
-> +
-> +	for (i =3D 0; i < *info->boot_device_primary_count; i++) {
-> +		struct k3_boot_map *m =3D &info->boot_device_primary_table[i];
-> +
-> +		if (bootmode !=3D m->mode)
-> +			continue;
-> +
-> +		if (m->cfg_mask =3D=3D 0)
-> +			return m->result;
-> +
-> +		if (((bootmode_cfg & m->cfg_mask) >> m->cfg_shift) =3D=3D m->cfg_value=
-)
-> +			return m->result;
-> +	}
-> +
-> +	return bootmode;
-> +}
-> +
-> +u32 get_boot_device(void)
-> +{
-
-This might be better kept as a weak function.
-
-> +	const struct k3_boot_device_info *info =3D &k3_boot_device_info[0];
-> +	u32 bootmode =3D readl(info->bootmode_addr);
-> +	u32 main_devstat =3D readl(info->main_devstat_reg);
-> +	u32 bootmedia;
-> +
-> +	if (!ARRAY_SIZE(k3_boot_device_info)) {
-> +		pr_err("%s: no boot-device info for this SoC\n", __func__);
-> +		return BOOT_DEVICE_NOBOOT;
-> +	}
-> +
-> +	if (bootmode =3D=3D K3_PRIMARY_BOOTMODE)
-> +		bootmedia =3D __get_primary_bootmedia(main_devstat);
-> +	else
-> +		bootmedia =3D __get_backup_bootmedia(main_devstat);
-> +
-> +	debug("%s: devstat =3D 0x%x bootmedia =3D 0x%x bootmode =3D %d\n",
-> +	      __func__, main_devstat, bootmedia, bootmode);
-> +
-> +	return bootmedia;
-> +}
-> diff --git a/arch/arm/mach-k3/boot-device.h b/arch/arm/mach-k3/boot-devic=
-e.h
-> new file mode 100644
-> index 00000000000..351f710151b
-> --- /dev/null
-> +++ b/arch/arm/mach-k3/boot-device.h
-> @@ -0,0 +1,27 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + *  Copyright (C) 2025 PHYTEC Messtechnik GmbH
-> + *  Author: Wadim Egorov <w.egorov@phytec.de>
-> + */
-> +
-> +#ifndef _K3_BOOT_DEVICE_H
-> +#define _K3_BOOT_DEVICE_H
-> +
-> +#include <linux/types.h>
-> +
-> +/* Descriptor for mode + optional cfg test -> normalized device */
-> +struct k3_boot_map {
-> +	u32 mode;	/* Raw PRIMARY_BOOTMODE value */
-> +	u32 cfg_mask;	/* Bits in devstat-cfg to test (0 if none) */
-> +	u32 cfg_shift;	/* Shift right before comparing */
-> +	u32 cfg_value;	/* Desired value after mask+shift */
-> +	u32 result;	/* Normalized device to return */
-> +};
-> +
-> +extern struct k3_boot_map am62_boot_device_primary_table[];
-> +extern unsigned int am62_boot_device_primary_table_count;
-> +
-> +extern struct k3_boot_map am62_boot_device_backup_table[];
-> +extern unsigned int am62_boot_device_backup_table_count;
-> +
-
-You wouldn't need these 4 externs per SoC too with the above suggestion.
-
-Regards,
-Anshul
-
-> +#endif /* _K3_BOOT_DEVICE_H */
-> diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mac=
-h-k3/include/mach/am62_hardware.h
-> index 2f5655bf24a..084f16bf2d2 100644
-> --- a/arch/arm/mach-k3/include/mach/am62_hardware.h
-> +++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
-> @@ -10,6 +10,7 @@
->  #define __ASM_ARCH_AM62_HARDWARE_H
-> =20
->  #include <config.h>
-> +#include <asm/io.h>
->  #ifndef __ASSEMBLY__
->  #include <linux/bitops.h>
->  #endif
-
+>
+>> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+>> ---
+>>   arch/arm/mach-k3/am62x/am625_init.c | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-k3/am62x/am625_init.c b/arch/arm/mach-k3/am62x/am625_init.c
+>> index a422919fab1..498bbe45b38 100644
+>> --- a/arch/arm/mach-k3/am62x/am625_init.c
+>> +++ b/arch/arm/mach-k3/am62x/am625_init.c
+>> @@ -84,6 +84,9 @@ static void ctrl_mmr_unlock(void)
+>>   
+>>   static __maybe_unused void enable_mcu_esm_reset(void)
+>>   {
+>> +	/* CTRLMMR_MCU_RST registers are locked again on HS-SE devices */
+>> +	mmr_unlock(MCU_CTRL_MMR0_BASE, 6);
+>> +
+>>   	/* Set CTRLMMR_MCU_RST_CTRL:MCU_ESM_ERROR_RST_EN_Z  to '0' (low active) */
+>>   	u32 stat = readl(CTRLMMR_MCU_RST_CTRL);
+>>   
