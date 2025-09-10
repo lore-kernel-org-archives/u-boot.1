@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D11E4CA101F
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FA47CA101F
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:14:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A8E4832EB;
+	by phobos.denx.de (Postfix) with ESMTP id A451983303;
 	Wed, 10 Sep 2025 20:13:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="WeGDFJ/d";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="sF82jiZ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17DFA83280; Wed, 10 Sep 2025 20:13:46 +0200 (CEST)
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
- [91.218.175.177])
+ id 2F12D83281; Wed, 10 Sep 2025 20:13:46 +0200 (CEST)
+Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
+ [91.218.175.180])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DA3C83280
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:13:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19510830A0
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:13:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,24 +29,24 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1757528022;
+ s=key1; t=1757528023;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Gv6FCZWp4VR2JrabdtHumoJUusT4rpu1mBioYzP5QBc=;
- b=WeGDFJ/dxAc8++2yWcuFzmOZd+B47Wy4dKaCJOAZbjt82IwDTYQNGz87jVB43+G69VJ+rU
- BWn0mDmP7+qYdrYZxEZ1hBXheRanszVKds3eFE1XovFmbGuRW/Bc+ojKs6w+QC4zn1QchK
- uInXICBSFESw3f1tiMo9HTOBz3XELDCMaNYHb7kTPjhNMvLk9aqo2Rn9ipaujGl2iKOs6h
- 6vx800dzEhVV2tHT+yZMJCMrfnzKLw09FQpto76zeNGNrtYjxS2ciqtcUiYQG9WKWqHMSq
- +vN1hX5tI7puit7Ol5nCcNDOY6ahqDqD7H7OJhKqRjWm1CI48gJNKUBntWdrMA==
+ bh=CcrMBf2I1JIKf4kXRgim8khe51Bzxdmj44MMOss98Ks=;
+ b=sF82jiZ6ctzRjNDyi0UGNyxMU6Tjb21C+FVSQ5TgFmuW6COcajSzu++71d7dtCIPVkYU2I
+ 50nohWlibi6zBozoBB1r8YgPhdSPYm52pcfuCgZ/2M5GltrqevwzrmTT7HYqdxZky5hzbl
+ hVqywdOfEHcXYnK+IagUSsTGxDMor/lOBaGrk/gS9E3cL4RZVyJSgCzRa4NAWbAjO01IJ3
+ c+8I9xRL3SX+yR4EweArd8tzPtyKiLeXunqRzU+pazk7RETuu9coGFGqs9iMFnJiVIMsaB
+ EheXkqBaSSuP9PzLdjjeZ5IpXmwXan1l8+WQ/SluPDvcLLvheJCW3pc68/aEPQ==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 10 Sep 2025 18:13:22 +0000
-Subject: [PATCH RFC v2 2/8] mmc: meson_gx_mmc: add minimal non-DM driver
+Date: Wed, 10 Sep 2025 18:13:23 +0000
+Subject: [PATCH RFC v2 3/8] serial: serial_meson: add minimal non-DM driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250910-spl-gx-v2-2-8f52aac47e04@postmarketos.org>
+Message-Id: <20250910-spl-gx-v2-3-8f52aac47e04@postmarketos.org>
 References: <20250910-spl-gx-v2-0-8f52aac47e04@postmarketos.org>
 In-Reply-To: <20250910-spl-gx-v2-0-8f52aac47e04@postmarketos.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -57,21 +57,21 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  ~postmarketos/upstreaming@lists.sr.ht, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5038;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4516;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=ebJD2FNBe9DByCt2k3nHhBr1mj7Kxl8J6JqYSPqORTo=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBowb/QrLKzj1rBH+huPWICOeCkhb2yy7Pl3A5X7
- 3liYQYu6YaJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaMG/0AAKCRCEr8vQ14ma
- A6PvEACK4Divgu9wCVTdJ4IugR6k/WqR5cUbwoejjhq2a7Fvd3tpa0JZaOPrY3hjGqiyDQZcRtO
- dto/nOSihbJBEJZnhKXuOG1OEUI7Wv01hcpMUkxqF5J/wCkT1klcZnoMl3tg6UyW8zpm9kQSAef
- l0XYbeHT/sO+N2HiMYq7LWYBt6Do+78HDadw6+ILhiHcgTe7PCr2XoHja2StVEXp0tK+k1Qds6z
- xbHixfqfnXLqZBWE6PSpcJvji40us0FFO9JrAKD0GUBThHupSqd6WRgZCdRhznQxBoTSQzELBqD
- Oblx4DgACNOfUm8t/NaBS76uL/6dXJIhECMJ1x7HuDK5r8KdnOt3dMNuZO690Nh7CfZOs4+9o0H
- cz5+lttesHNidr81FCR82yqoCBdGq8JMj8udgz/T9YD1IWUtTshoRBHrJolEWfI0Xs0RAjXFkCR
- IX57uMm7R2I/OMZpZlyHeq9MqZJCVvXOrjSlqZLRKRl2chmr5+BLVNHm6BhrQZ59/J3ZURA+e8z
- Ed0/4frxMAribLLThpvYMOimXV4+XXyM6nJal8oPcZB3gjV3pmmELK4hEGMpi+CWufTPGAkvCGr
- jZzW5+E3diurF3jm2pFYxHXyKABiwYTHnDjU8OZkZ7BA49Wg/FsdPX5L4WM+K53NDUEARkJIDXP
- tCQTZnfhP0liLvw==
+ bh=M+Xa8Ix6UmQljGDRUr1XCJ/dEvEFqyvz3xOcg7eX3LU=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBowb/RAiQSI6h+MnqiSJvhj/qwhBH+vj6elhJv8
+ vCPR3TzbKOJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaMG/0QAKCRCEr8vQ14ma
+ A9dCD/wJjNDvz8ZFvxkd0W3AHu0M1APgBvYFkWL0+t6XT0xUWvvlmzTM7NInjeY/5Hte53KuD0S
+ x+WbkdfKuwhDbxQTJXPXHFDe8G1KbVBLRTax8fzmMXZFYxtvrq0iP9kkFEf6fT+cIt7kHZFOrO6
+ XZDCe3w4uq6ARIK3EmkPtmSfLPp9N3YRxi0xPMtvCnjbFq5F8yO4piog51rARWuvp5iJ3LgiMRf
+ UwrYF7M3iqrN7T9uj7g7DPRcnkXYersRVpiz0/HobI4eTi0rlPKkgxHaMPgw2mGYdkivy2AVV/v
+ hRFKO60DAc7sh25rs7rofi7/gjGxEff4+2u34CKCHihBzkj2iHnNvt67Pj+4tNBsF6E+oUFpJkX
+ 3VosFy5Il+C37qfsQdF7IlCLDFjs2cPrH8yts4ER4kkXOkSj658/4+rWHgGIf0+PA8zzl+nCIYg
+ cguCHbKsOLMYPMH3Wu1841U6hRkDe2/A09n3wAB7rgngEkf8FE0JrfplWcEkWlki0EfLK+JIU8O
+ ZoUkrblATJXglka2//dJBqkRpMFtKI9JfKUKv2cY7ea+5f0SRCXPKf9xqDjYKKfJGJ7joCj94w0
+ uwf1RHXG5JzfPtX033BvUeMV7KTXqUTwXXMB3y8BC83PQMivclxZG+yqjkBVp0qm8v4KM1hzcy7
+ kl908/H4b9RIayA==
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -91,168 +91,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a minimal non-DM MMC driver for use in size-constrained
-environments.
+It is very limited and minimal, only implements putc/puts.
+This minimal driver is intended to be used in SPL, and other
+size-constrained situations.
 
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- arch/arm/include/asm/arch-meson/gx.h |  5 +++
- drivers/mmc/meson_gx_mmc.c           | 75 +++++++++++++++++++++++++++++++++++-
- 2 files changed, 79 insertions(+), 1 deletion(-)
+ drivers/serial/serial.c       |   2 +
+ drivers/serial/serial_meson.c | 110 +++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 111 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/arch-meson/gx.h b/arch/arm/include/asm/arch-meson/gx.h
-index 26ec5d0bc340bc03587047d68a88042779e64536..8cfc6b00329f252bbf452dba00f8ad56b480c707 100644
---- a/arch/arm/include/asm/arch-meson/gx.h
-+++ b/arch/arm/include/asm/arch-meson/gx.h
-@@ -41,4 +41,9 @@
- #define GX_GPIO_IN(n)		GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 1)
- #define GX_GPIO_OUT(n)	GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 2)
+diff --git a/drivers/serial/serial.c b/drivers/serial/serial.c
+index e10ca6eef768502ea32bf39a41ae2e3ccd168c66..c0b1eb3056181b95e1861f1ce08fcd82ff81eb71 100644
+--- a/drivers/serial/serial.c
++++ b/drivers/serial/serial.c
+@@ -129,6 +129,7 @@ serial_initfunc(pxa_serial_initialize);
+ serial_initfunc(smh_serial_initialize);
+ serial_initfunc(sh_serial_initialize);
+ serial_initfunc(mtk_serial_initialize);
++serial_initfunc(meson_serial_initialize);
  
-+/* Non-DM MMC init */
-+#if CONFIG_IS_ENABLED(MMC) && !CONFIG_IS_ENABLED(DM_MMC)
-+struct mmc *meson_mmc_init(int mmc_no);
+ /**
+  * serial_register() - Register serial driver with serial driver core
+@@ -167,6 +168,7 @@ int serial_initialize(void)
+ 	smh_serial_initialize();
+ 	sh_serial_initialize();
+ 	mtk_serial_initialize();
++	meson_serial_initialize();
+ 
+ 	serial_assign(default_serial_console()->name);
+ 
+diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
+index bb79b9729579a661084425d6b3c5357da31dc3c0..c728bc8f8347eeaa9c6c5e0c8f5905316e9cc077 100644
+--- a/drivers/serial/serial_meson.c
++++ b/drivers/serial/serial_meson.c
+@@ -3,9 +3,11 @@
+  * (C) Copyright 2016 Beniamino Galvani <b.galvani@gmail.com>
+  */
+ 
++#if CONFIG_IS_ENABLED(DM_SERIAL)
+ #include <dm.h>
+-#include <errno.h>
+ #include <fdtdec.h>
 +#endif
-+
- #endif /* __GX_H__ */
-diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
-index 5852b24c6d2a5a9d1b1e8a62f8c0ec325b339182..a4338f1e29c1da07acb0333be9b75a318cba1334 100644
---- a/drivers/mmc/meson_gx_mmc.c
-+++ b/drivers/mmc/meson_gx_mmc.c
-@@ -16,6 +16,7 @@
- #include <linux/log2.h>
- #include "meson_gx_mmc.h"
++#include <errno.h>
+ #include <linux/kernel.h>
+ #include <linux/bitops.h>
+ #include <linux/compiler.h>
+@@ -51,6 +53,7 @@ struct meson_serial_plat {
+ #define AML_UART_REG5_USE_NEW_BAUD	BIT(23) /* default 1 (use new baud rate register) */
+ #define AML_UART_REG5_BAUD_MASK		0x7fffff
  
-+#if CONFIG_IS_ENABLED(DM_MMC)
- bool meson_gx_mmc_is_compatible(struct udevice *dev,
- 				enum meson_gx_mmc_compatible family)
++#if CONFIG_IS_ENABLED(DM_SERIAL)
+ static u32 meson_calc_baud_divisor(ulong src_rate, u32 baud)
  {
-@@ -23,6 +24,7 @@ bool meson_gx_mmc_is_compatible(struct udevice *dev,
+ 	/*
+@@ -245,6 +248,111 @@ U_BOOT_DRIVER(serial_meson) = {
+ 	.plat_auto	= sizeof(struct meson_serial_plat),
+ };
  
- 	return compat == family;
- }
-+#endif
- 
- static inline void *get_regbase(const struct mmc *mmc)
- {
-@@ -67,7 +69,7 @@ static void meson_mmc_config_clock(struct mmc *mmc)
- 	 * Other SoCs use CLK_CO_PHASE_180 by default.
- 	 * It needs to find what is a proper value about each SoCs.
- 	 */
--	if (meson_gx_mmc_is_compatible(mmc->dev, MMC_COMPATIBLE_SM1))
-+	if (IS_ENABLED(CONFIG_MESON_SM))
- 		meson_mmc_clk |= CLK_CO_PHASE_270;
- 	else
- 		meson_mmc_clk |= CLK_CO_PHASE_180;
-@@ -82,9 +84,14 @@ static void meson_mmc_config_clock(struct mmc *mmc)
- 	meson_write(mmc, meson_mmc_clk, MESON_SD_EMMC_CLOCK);
- }
- 
-+#if CONFIG_IS_ENABLED(DM_MMC)
- static int meson_dm_mmc_set_ios(struct udevice *dev)
- {
- 	struct mmc *mmc = mmc_get_mmc_dev(dev);
 +#else
-+static int meson_legacy_mmc_set_ios(struct mmc *mmc)
-+{
-+#endif
- 	uint32_t meson_mmc_cfg;
- 
- 	meson_mmc_config_clock(mmc);
-@@ -193,10 +200,16 @@ static void meson_mmc_read_response(struct mmc *mmc, struct mmc_cmd *cmd)
- 	}
- }
- 
-+#if CONFIG_IS_ENABLED(DM_MMC)
- static int meson_dm_mmc_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
- 				 struct mmc_data *data)
- {
- 	struct mmc *mmc = mmc_get_mmc_dev(dev);
-+#else
-+static int meson_legacy_mmc_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
-+				     struct mmc_data *data)
-+{
-+#endif
- 	struct meson_mmc_plat *pdata = mmc->priv;
- 	uint32_t status;
- 	ulong start;
-@@ -235,6 +248,59 @@ static int meson_dm_mmc_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
- 	return ret;
- }
- 
-+#if !CONFIG_IS_ENABLED(DM_MMC)
-+struct meson_mmc_plat mmc_plat[2];
 +
-+static int meson_legacy_mmc_init(struct mmc *mmc)
++static int meson_serial_init(void)
 +{
-+	/* reset all status bits */
-+	meson_write(mmc, STATUS_MASK, MESON_SD_EMMC_STATUS);
++	struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
++	u32 val;
 +
-+	/* disable interrupts */
-+	meson_write(mmc, 0, MESON_SD_EMMC_IRQ_EN);
++	val = readl(&uart->control);
++	val |= (AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
++	writel(val, &uart->control);
++	val &= ~(AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
++	writel(val, &uart->control);
++	val |= (AML_UART_RX_EN | AML_UART_TX_EN);
++	writel(val, &uart->control);
 +
 +	return 0;
 +}
 +
-+static const struct mmc_ops meson_mmc_ops = {
-+	.send_cmd	= meson_legacy_mmc_send_cmd,
-+	.set_ios	= meson_legacy_mmc_set_ios,
-+	.init		= meson_legacy_mmc_init,
-+};
-+
-+struct mmc *meson_mmc_init(int mmc_no)
++static int meson_serial_stop(void)
 +{
-+	struct meson_mmc_plat *pdata = &mmc_plat[mmc_no];
-+	struct mmc_config *cfg = &pdata->cfg;
-+
-+	cfg->voltages = MMC_VDD_33_34 | MMC_VDD_32_33 |
-+			MMC_VDD_31_32 | MMC_VDD_165_195;
-+	cfg->host_caps = MMC_MODE_8BIT | MMC_MODE_4BIT;
-+	cfg->f_min = DIV_ROUND_UP(SD_EMMC_CLKSRC_24M, CLK_MAX_DIV);
-+	cfg->f_max = 6000000; /* 6 MHz */
-+	cfg->b_max = 127; /* max 128 - 1 block */
-+	cfg->name = "Meson SD/eMMC";
-+	cfg->ops = &meson_mmc_ops;
-+
-+	if (mmc_no == 0) /* MMC1: SD card */
-+		pdata->regbase = (void *)0xd0072000;
-+	else if (mmc_no == 1) /* MMC2: eMMC */
-+		pdata->regbase = (void *)0xd0074000;
-+
-+#if CONFIG_IS_ENABLED(MMC_PWRSEQ)
-+	/* Enable power if needed */
-+	ret = mmc_pwrseq_get_power(dev, cfg);
-+	if (!ret) {
-+		ret = pwrseq_set_power(cfg->pwr_dev, true);
-+		if (ret)
-+			return ret;
-+	}
-+#endif
-+
-+	return mmc_create(cfg, pdata);
++	return 0;
 +}
 +
-+#else
- static const struct dm_mmc_ops meson_dm_mmc_ops = {
- 	.send_cmd = meson_dm_mmc_send_cmd,
- 	.set_ios = meson_dm_mmc_set_ios,
-@@ -282,6 +348,12 @@ static int meson_mmc_probe(struct udevice *dev)
- 	cfg->b_max = 511; /* max 512 - 1 blocks */
- 	cfg->name = dev->name;
- 
-+	if (IS_ENABLED(CONFIG_SPL_BUILD)) {
-+		cfg->host_caps &= ~(MMC_MODE_HS_52MHz | MMC_MODE_HS);
-+		cfg->f_max = 6000000; /* 6 MHz */
-+		cfg->b_max = 127; /* max 128 - 1 block */
++static void meson_serial_setbrg(void)
++{
++}
++
++static void meson_serial_putc(const char ch)
++{
++	struct meson_uart *uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
++
++	/* On '\n' also do '\r' */
++	if (ch == '\n')
++		meson_serial_putc('\r');
++
++	while (readl(&uart->status) & AML_UART_TX_FULL)
++		;
++
++	writel(ch, &uart->wfifo);
++}
++
++static void meson_serial_puts(const char *s)
++{
++	while (*s)
++		meson_serial_putc(*s++);
++}
++
++static int meson_serial_getc(void)
++{
++	struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
++	uint32_t status = readl(&uart->status);
++
++	if (status & AML_UART_RX_EMPTY)
++		return -EAGAIN;
++
++	if (status & AML_UART_ERR) {
++		u32 val = readl(&uart->control);
++
++		/* Clear error */
++		val |= AML_UART_CLR_ERR;
++		writel(val, &uart->control);
++		val &= ~AML_UART_CLR_ERR;
++		writel(val, &uart->control);
++
++		/* Remove spurious byte from fifo */
++		readl(&uart->rfifo);
++		return -EIO;
 +	}
 +
- 	mmc->priv = pdata;
- 	upriv->mmc = mmc;
- 
-@@ -336,3 +408,4 @@ U_BOOT_DRIVER(meson_mmc) = {
- 	.of_to_plat = meson_mmc_of_to_plat,
- 	.plat_auto	= sizeof(struct meson_mmc_plat),
- };
++	return readl(&uart->rfifo) & 0xff;
++}
++
++static int meson_serial_tstc(void)
++{
++	struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
++	uint32_t status = readl(&uart->status);
++
++	if (status & AML_UART_RX_EMPTY)
++		return 0;
++	return 1;
++}
++
++struct serial_device meson_serial_device = {
++	.name	= "meson_serial",
++	.start	= meson_serial_init,
++	.stop	= meson_serial_stop,
++	.setbrg	= meson_serial_setbrg,
++	.getc	= meson_serial_getc,
++	.tstc	= meson_serial_tstc,
++	.putc	= meson_serial_putc,
++	.puts	= meson_serial_puts,
++};
++
++void meson_serial_initialize(void)
++{
++	serial_register(&meson_serial_device);
++}
++
++__weak struct serial_device *default_serial_console(void)
++{
++	return &meson_serial_device;
++}
++
 +#endif
++
+ #ifdef CONFIG_DEBUG_UART_MESON
+ 
+ #include <debug_uart.h>
 
 -- 
 2.51.0
