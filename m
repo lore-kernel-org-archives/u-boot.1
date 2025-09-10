@@ -4,77 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03224CA101F
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:15:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FD5ACA0FED
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:15:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A0718334F;
-	Wed, 10 Sep 2025 20:13:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 1FA20832AD;
+	Wed, 10 Sep 2025 20:14:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="ck88PfzU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L6yB/kAl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2F0683321; Wed, 10 Sep 2025 20:13:52 +0200 (CEST)
-Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::bd])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9627183390; Wed, 10 Sep 2025 20:14:08 +0200 (CEST)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B09838334F
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:13:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id DE1FA831D5
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1757528029;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9fjr89kFE17uREVn+2lkji5TWytZfzRaFdK5GG9iYnk=;
- b=ck88PfzU2GmF6GVl2XCWn77H1zug0cwPWpKia3on0mi807IqgqU3BwFo1/b92gTZLNeDiA
- l8TC1HIUpWBdzR/FFA5eXI6Ey/OCVX4bT7HvD5/X6SRC/O/dICONe0HJrNnzs5BUuJ69nX
- oTlLaVpkNN8wtexuoAIAeXuleuOO08Ky+IWK7yzOO5/EWK8JK/eGcBZI3MG7C53VGK9Jsi
- CluouEANYAsUWdv9sTUpeWXMwXmHt3qkrAlfDo76m+uc5mjyFj/CcnEGP0lzjcdbRWPch8
- 7/Cl3AqUlJv4niT2xTD5nsCB5bHcEPUuR2GKgRv6ZoBvVrdb/b7ju5PGSUiJ2w==
-From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 10 Sep 2025 18:13:28 +0000
-Subject: [PATCH RFC v2 8/8] doc: board: amlogic: add u-boot-spl documentation
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-62192ee029dso937886eaf.0
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 11:14:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1757528044; x=1758132844; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BVKcYGvX7TTI4RnHlhaAsBYjKBH4YLwBorX8o3dXrkc=;
+ b=L6yB/kAlTDBSBss2IrvjULwaLsyqZNIuPlHRjrrwbi96dpc1WNHa4xcXtOFn8UxfuQ
+ mGBpdToVjpdYNqtGWPN33wTBlNHFhDwS3rXr16yG+70Io5CdeR5pkFrmG6D5qczyCuWc
+ s2fdYZ47J0b9ARnKoucesDSgKhNy/awwsO3uk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757528044; x=1758132844;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BVKcYGvX7TTI4RnHlhaAsBYjKBH4YLwBorX8o3dXrkc=;
+ b=xTjmDRVSAxaJJY+mUifJ9XPi5xsiz1/fUbuLjeEDymv3Au7oSMwdh6IKelznEnC7VD
+ NG60pGZqXuslLMT6bQLl4Mxeayap352P/UjWgxsIKoUDwrMf/IlbA99jHviiubNyJhBl
+ THXXSuJGrhX2KZU4se0aP1WsUpqHn3LIpk2yvOk62+On5l+u2EQ1NbDn4HCX5H951fIT
+ Xcmo9vTbvY1EajZWcs99R1GMBGAPRDi6VjNpfsscBVsWdVCew8U8qhZw3wI/F/d7hfu5
+ iZ2fhiprSmlR/wzmv5UvkDz4idjaJGj+bXLuNJMwClv2bPBqd5u2FIltegkFqRfkX/th
+ N6ow==
+X-Gm-Message-State: AOJu0YzB8NUHXLS6RbriEU6diW6s3CGuQ2swffdDIWeG/xfepCDR+8G2
+ RpJEYTJU0DDqaZ9wCV8eihT3NIFMB8OUZ9dRaIlZvnjCMz+PDlmwmVVmQUvjklso/qI=
+X-Gm-Gg: ASbGncsHfKCLad9FyezvvNh1GaYEsO8MU3j1DP63I1HsAGqobfL8cUc6oEFWslnZObB
+ w9pHA2+8D45hskR+CLw3JmuCxJjprzFb1vwpK5g81WajOzJZipFCV+pP1EjSVdMfkrbuAb0Ggfe
+ tZ/SrPEgnyWkpGz5ZkAnugf1mTSxGPXVHw10tMvuP2NpA6UDeQMgVUBVrMdHO4/cGujh1WHDTrb
+ JrTd4B3RLq3Puo7cYQ0sgCXeRcl04DuZuYi9v58uD8/W1CPxY7t8fh8L3CvyeAbRoP1ApXDAg/y
+ h7PpHxB3zKeYL+YELbgObucz0NwErZqo4ZD1SJaf6Nfv95h5DcHIcmqtEM4joFuNzVgq8moga28
+ NYrOTzcZ7fWbxL4KiE2yXoV3SlAUrUQsmU8YKseFRjAzHl6bFP0/0YyMo
+X-Google-Smtp-Source: AGHT+IFXebtSqYxSVLnDDYn05aAJdONcPgnv/7UzoCk+RwRddpGrSkfjUoRdBEYrHOV4EZSygyEvDw==
+X-Received: by 2002:a05:6870:1d11:b0:2ff:89c8:44f4 with SMTP id
+ 586e51a60fabf-32262a73cd9mr6204695fac.11.1757528044030; 
+ Wed, 10 Sep 2025 11:14:04 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-32ce868ab46sm20742fac.13.2025.09.10.11.14.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Sep 2025 11:14:03 -0700 (PDT)
+Date: Wed, 10 Sep 2025 12:14:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sidharth Seela <sidharthseela@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1] doc: board: ti: am335x_evm: Add documentation
+Message-ID: <20250910181400.GH124814@bill-the-cat>
+References: <20250903202043.285746-1-sidharthseela@gmail.com>
+ <20250908055429.598536-1-sidharthseela@gmail.com>
+ <20250908215825.GT124814@bill-the-cat>
+ <CAJE-K+C0FHwxi4DneqqasD0D7H73BNk-ZO4GE+ZWSN=a0fdtqQ@mail.gmail.com>
+ <CAJE-K+Bhk+jqYpdqLxtTYQA7bCM9i_MNrAnSM+9Pcfu838gb3w@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250910-spl-gx-v2-8-8f52aac47e04@postmarketos.org>
-References: <20250910-spl-gx-v2-0-8f52aac47e04@postmarketos.org>
-In-Reply-To: <20250910-spl-gx-v2-0-8f52aac47e04@postmarketos.org>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Beniamino Galvani <b.galvani@gmail.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>, 
- u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
- ~postmarketos/upstreaming@lists.sr.ht, 
- Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4755;
- i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=PPSFBNTMX+Qs5SWiXu+uPXt4ZNX+lN8diCwladSvHZY=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBowb/SjFLtqbLnrQS5/CYW0Zoa5Ysof2aQg9ZnU
- c5zBHhrL5eJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaMG/0gAKCRCEr8vQ14ma
- AyHQD/9deqL5t4jhPE2nGvoxm8gHB7Ta0WX7sz6ql6ThzdwGn0Kg8PT1/IZt46uXt/uxnnQxK1v
- TUn3erf98JswMZNNUV4yaAKRUn7uw9+NAWrnO6SPLQ8GVHUFoU2I41r3otczb0uxHWZmS1dAOFG
- 0Sv/pBAdgtJfrVpZuY9BkjfwpM8FEqADOJmQStvbelc0POHtm4rjPe1RRA7aAQHtf5cVlqk6bwo
- OEExPKfWzim4cfhG48aWVyIjUVwuogKuC/nYOBWTXGntGCnt54q21N7QUhYFX3WNTMPp41suQJB
- O9T3XUOyZ8O1tEAq/b2+gP1fY4r4xA9SjfPBDSE1hEgiq8oQqxxhkRVSSIjpNWyx32rfN+P0OjS
- 2CEwoMFBcD/B9/aLMPBIR7X6e2USJwAmcM0j/tqaSbysAmrw5rJ7OsoS1c7WxRkaewFvhqh6uC0
- xGmnwPGu332D6ny4XaiLQIgJZXS2s5U9t2sCgImHODG4U69/tW1rUmdO005pSKEuWRLAP0LUSVR
- jJ2EV/lUNL1qATBfTo16PfAbW5NPT2pINF+wcRMXtp3Lf9Lfxgqck5LRhP/xEs3TMDJtBGz8cz7
- FaareiWnmxKe1I4SQqeV0Oq29MPTOtOjJSrglBsa54r80eaAKdDykq/V6OA/u3LIBdlFVAiZscb
- YrRdA2qXmuDBOxQ==
-X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
- fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
-X-Migadu-Flow: FLOW_OUT
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TUccDR/94uxsZVlm"
+Content-Disposition: inline
+In-Reply-To: <CAJE-K+Bhk+jqYpdqLxtTYQA7bCM9i_MNrAnSM+9Pcfu838gb3w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,136 +100,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add building and usage instructions for SPL.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
----
- doc/board/amlogic/index.rst             |  1 +
- doc/board/amlogic/pre-generated-fip.rst |  9 ++++
- doc/board/amlogic/spl.rst               | 77 +++++++++++++++++++++++++++++++++
- 3 files changed, 87 insertions(+)
+--TUccDR/94uxsZVlm
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/board/amlogic/index.rst b/doc/board/amlogic/index.rst
-index dcd935224ac0280a77455e3475a610fd81cfb80d..23380ac33f2b06efff7d4741ce2967d75671ca13 100644
---- a/doc/board/amlogic/index.rst
-+++ b/doc/board/amlogic/index.rst
-@@ -78,6 +78,7 @@ Boot Documentation
- 
-    boot-flow
-    pre-generated-fip
-+   spl
- 
- Board Documentation
- -------------------
-diff --git a/doc/board/amlogic/pre-generated-fip.rst b/doc/board/amlogic/pre-generated-fip.rst
-index 6a43d776d43f35cbffc7ba9e72bf05dd719f6387..d820bd09115952d4fca2b9e7d7b5a9e30bd11430 100644
---- a/doc/board/amlogic/pre-generated-fip.rst
-+++ b/doc/board/amlogic/pre-generated-fip.rst
-@@ -98,6 +98,13 @@ The repo also provides the following files used with GXBB boards:
- The repo also supports the open-source 'gxlimg' signing tool that can be used to sign
- U-Boot binaries for GXL/GXM/G12A/G12B/SM1 boards: https://github.com/repk/gxlimg
- 
-+The following binaries can be replaced with open-source implementations:
-+
-+- bl2.bin (GXBB and GXL only)
-+- bl31.img (GXBB, GXL, AXG and G12A only)
-+
-+Refer to `Experimental U-Boot SPL Support`_ if you wish to replace them.
-+
- Licensing
- ---------
- 
-@@ -129,3 +136,5 @@ clarified. The current Amlogic distribution licence is below:
-     // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-     // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-     // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+
-+.. _`Experimental U-Boot SPL Support`: spl.rst
-diff --git a/doc/board/amlogic/spl.rst b/doc/board/amlogic/spl.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..39d50e3da87d71f62cec1903c441c334bf7020e8
---- /dev/null
-+++ b/doc/board/amlogic/spl.rst
-@@ -0,0 +1,77 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Experimental U-Boot SPL Support
-+===============================
-+
-+There's some experimental support for some Amlogic SoCs, in U-Boot SPL.  It
-+replaces the proprietary bl2.bin blob used for DRAM init.  Currently Meson GX
-+SoCs (GXBB, GXL) are supported.
-+
-+A subset of Amlogic boards have SPL enabled.  These boards have been tested and
-+known to work to an extent.
-+
-+
-+Building Arm Trusted Firmware (TF-A)
-+------------------------------------
-+
-+This U-Boot SPL port requires the BL31 stage of mainline Arm Trusted
-+Firmware-A firmware. It provides an open source implementation of secure
-+software for Armv8-A. Build it with:
-+
-+.. code-block:: bash
-+
-+    $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-+    $ cd trusted-firmware-a
-+    $ make CROSS_COMPILE=aarch64-linux-gnu- PLAT=your_soc DEBUG=1
-+
-+Replace ``your_soc`` with the SoC target you wish to build for. For GXBB it's
-+``gxbb`` and for GXL it's ``gxl``.
-+
-+
-+Building a bl30_new.bin binary
-+------------------------------
-+
-+``bl30_new.bin`` has both ``bl30.bin`` and ``bl301.bin`` binary blobs
-+bundled. The former is the proper system control processor firmware and the
-+latter is a "plug-in" for board-specific DVFS/suspend-resume parameters. For
-+more info you may wish to read this page: `Pre-Generated FIP File Repo`_.
-+
-+To build using the FIP file repo, simply issue the following commands:
-+
-+.. code-block:: bash
-+
-+    $ cd amlogic-boot-fip/your_board
-+    $ make bl30_new.bin
-+
-+
-+.. _`Pre-Generated FIP File Repo`: pre-generated-fip.rst
-+
-+
-+U-Boot compilation
-+------------------
-+
-+U-Boot SPL is not enabled by default, instead there are config fragments that
-+can be used to enable it, with per-board configuration:
-+
-+- ``spl-libretech-cc-1gb.config``: 1 GB LePotato board
-+- ``spl-libretech-cc-2gb.config``: 2 GB LePotato board
-+- ``spl-odroid-c2.config``: ODROID-C2
-+- ``spl-videostrong-kii-pro.config``: Videostrong KII Pro
-+
-+Pick one of them then:
-+
-+.. code-block:: bash
-+
-+    $ export CROSS_COMPILE=aarch64-linux-gnu-
-+    $ export BL31=path/to/tf-a/bl31.bin                 # Upstream TF-A BL31 binary
-+    $ export SCP=path/to/bl30_new.bin                   # bl30_new.bin binary
-+    $ make <yourboardname>_defconfig spl-<yourboardname>.config
-+    $ make
-+
-+Write to SD:
-+
-+.. code-block:: bash
-+
-+    $ DEV=/dev/boot_device
-+    $ dd if=u-boot-meson-with-spl.bin of=$DEV conv=fsync,notrunc bs=512 seek=1
-+
+On Wed, Sep 10, 2025 at 10:24:47PM +0530, Sidharth Seela wrote:
 
--- 
-2.51.0
+> Hey Tom, could I get some feedback on how I can get my patch accepted?
+> I am a bit new to this, sorry.
 
+I've assigned it to Heinrich in patchwork and he'll review it soon.
+
+--=20
+Tom
+
+--TUccDR/94uxsZVlm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMG/5QAKCRAr4qD1Cr/k
+CnQ+AQCNPy9OP5CbvrUUgvc9OP6igU9m3L641RI09GzwV7/+6QD/X+XmxO+ySwUF
+cKe4LSnQqK+b5iUIS2Y/N9hS261E9QI=
+=8J2K
+-----END PGP SIGNATURE-----
+
+--TUccDR/94uxsZVlm--
