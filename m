@@ -4,92 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01476CA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 16:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01B26CA0FED
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 16:48:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FF54830B4;
-	Wed, 10 Sep 2025 18:03:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 08FD683236;
+	Wed, 10 Sep 2025 18:48:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tgN5xi0C";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C3C88318E; Wed, 10 Sep 2025 18:03:26 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FA63830A0
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 18:03:24 +0200 (CEST)
+ id DE33F8323A; Wed, 10 Sep 2025 18:48:18 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 6030D831D5
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 18:48:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-43838d8064bso526324b6e.1
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 09:03:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757520203; x=1758125003; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0aR/QyJ+3PMs1Uo3v1wTsYxwTROD6+GCCBdMuXfusgI=;
- b=tgN5xi0CsEXiJ5LsCQQf9lVg6jrlXcmfb47CoB4MH+Fr0pXS/cLKS7aABI2XkzfKoE
- gyNvZETllmERxUTdwtrDaesvITpDjR9AsBJdC7PY9KtC7FrC5yrSPWq/vfBBu2L/EH0h
- iCirwnGeJFnAMX8ZPapq1nq/NnPT/slJE5FWg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757520203; x=1758125003;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0aR/QyJ+3PMs1Uo3v1wTsYxwTROD6+GCCBdMuXfusgI=;
- b=O85IShivfhbaw5aHfJ+7tuNdS9o/Ls1RzilE3bo1jWVkzkzbjZ6xarafCJJ2S3RsSR
- 5zBehV/wrQtdIB4p1gC2i6FGA5jgUoHtUImbNkOPB1QP9bARPt5BkO/XdyX8YNH7Kn41
- +GgaJzib7E7dkC31MmrpZnsM8KRJ7RG3xGfJD/57WP+B12FH6Pa4V8nSigKKelAS51WN
- V5A15JcsU/R4tkx7xp1l2yrO9OmVGXOrT43ZhnlSFvZ6piLIhIPocMM5FZ2bNq/0/zSX
- HuSxbYi9AvAe1GOcWvXZ+AGohvW6u1/hPyWqf1X9iDAsV0cpTfDs6qcd6H9UbRyzwyPi
- nR/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcSxeZDUOsfE6+1Y5Ag8O2e5qOXqTEOFZuPMDBhZOfSC1X8bRH21aTpGd5YXadlS6Y6yoahRo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdFxncohGiW6ut3eSVbfCuUNs0LhYZTOp5Uvm0K8c4WvcTNeQJ
- q1ScuFwYxLVD2AWY4VWS2MOq41LtUmtZMHrAqV6c82pFNU1d6JKvJLXHPV/244WHo9c=
-X-Gm-Gg: ASbGncs5BtdBH6iRpttqcVGipv2u6DsxZRKDoFivjBQ9pxrkSj9yXXJRnDf1Ap2EXqb
- 6XSM8G3IwbdH3YfARyO/1puD7jYOX5ts+eS3u03Ehr2DiaVMvyKKgZSakMXExXkbQNksR1k5uTG
- yAh7EN488CC0khDtwoXbG7UAthAPLMJsWZ0r95gKYxoqAdhun+AtP4ZUxm7SOmYsFJQ0BlrhXiL
- tjWBi2k0vY/8yy4N4OsdSPpF3Ip95DW/jtkDDyPpu0iIhsDjE0fNNipmVHY2bExga5EnEMtguWr
- dY4iWFbMd7jUsajs3PUlC87sCBSZ2/VGinZJkVpbvB2gf+4Yx/O+yIuB4J7mYiXlr+Dgnci//HF
- cA6cMd+go56OkxZiUDUWl7ryrs8bNCtBQieaONsHyUCAcLpSBOQ0l8WWTeD8wtWQqp1Q=
-X-Google-Smtp-Source: AGHT+IEyKaiLv1oC0T16PcExY4YTrknWOTHRYQZfAon9Sbf+DJ1HjWPhCBVYqYZaGD0bBHWSoww2Hg==
-X-Received: by 2002:a05:6808:14cf:b0:437:f998:22 with SMTP id
- 5614622812f47-43b7bc09546mr47822b6e.21.1757520202809; 
- Wed, 10 Sep 2025 09:03:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43836abed32sm4945276b6e.29.2025.09.10.09.03.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Sep 2025 09:03:21 -0700 (PDT)
-Date: Wed, 10 Sep 2025 10:03:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Maarten Brock <Maarten.Brock@sttls.nl>
-Cc: Kory Maincent <kory.maincent@bootlin.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
- "jerome.forissier@linaro.org" <jerome.forissier@linaro.org>,
- "sjg@chromium.org" <sjg@chromium.org>
-Subject: Re: [PATCH 1/1] board: ti: am335x: Do not call disabled PMIC functions
-Message-ID: <20250910160319.GG124814@bill-the-cat>
-References: <DB6PR05MB4551D31271569EC04E8EC60F830CA@DB6PR05MB4551.eurprd05.prod.outlook.com>
- <20250908184342.7ec9500b@kmaincent-XPS-13-7390>
- <DB6PR05MB45516C241486780C8D198FCD830FA@DB6PR05MB4551.eurprd05.prod.outlook.com>
- <20250909162356.6ff75133@kmaincent-XPS-13-7390>
- <20250909143711.GV124814@bill-the-cat>
- <DB6PR05MB45511513B880348BFDA2CB77830EA@DB6PR05MB4551.eurprd05.prod.outlook.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4F3C216F2;
+ Wed, 10 Sep 2025 09:48:07 -0700 (PDT)
+Received: from donnerap (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 41A9F3F63F;
+ Wed, 10 Sep 2025 09:48:12 -0700 (PDT)
+Date: Wed, 10 Sep 2025 17:48:09 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Said Nasibov <said.nasibov@arm.com>
+Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <peter.hoyes@arm.com>, <david.hu2@arm.com>, <michael.zhao2@arm.com>,
+ <marek.vasut+renesas@mailbox.org>, <mkorpershoek@kernel.org>,
+ <pbrobinson@gmail.com>, <ilias.apalodimas@linaro.org>,
+ <m.schwan@phytec.de>, <quentin.schulz@cherry.de>,
+ <rayagonda.kokatanur@broadcom.com>, <tien.fong.chee@altera.com>,
+ <casey.connolly@linaro.org>, <patrick.rudolph@9elements.com>,
+ <alif.zakuan.yuslaimi@intel.com>, <boyan.karatotev@arm.com>,
+ <Oliver.Gaskell@analog.com>, <duje@dujemihanovic.xyz>, <1425075683@qq.com>,
+ Sean Anderson <sean.anderson@seco.com>
+Subject: Re: [RFC PATCH 1/2] bootmeth: implement semihosting (smh) boot method
+Message-ID: <20250910174809.64ad1ae2@donnerap>
+In-Reply-To: <20250828130657.249153-2-said.nasibov@arm.com>
+References: <20250828130657.249153-1-said.nasibov@arm.com>
+ <20250828130657.249153-2-said.nasibov@arm.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Zt4DzL9VL65zTZPP"
-Content-Disposition: inline
-In-Reply-To: <DB6PR05MB45511513B880348BFDA2CB77830EA@DB6PR05MB4551.eurprd05.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,84 +65,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 28 Aug 2025 14:06:56 +0100
+Said Nasibov <said.nasibov@arm.com> wrote:
 
---Zt4DzL9VL65zTZPP
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Said,
 
-On Wed, Sep 10, 2025 at 03:37:35PM +0000, Maarten Brock wrote:
-> > From: Tom Rini
-> >=20
-> > On Tue, Sep 09, 2025 at 04:23:56PM +0200, Kory Maincent wrote:
-> > > On Tue, 9 Sep 2025 12:45:10 +0000
-> > > Maarten Brock <Maarten.Brock@sttls.nl> wrote:
-> > >
-> > > > > From: Kory Maincent <kory.maincent@bootlin.com>
-> > > > >
-> > > > > On Mon, 8 Sep 2025 16:05:04 +0000
-> > > > > Maarten Brock <Maarten.Brock@sttls.nl> wrote:
-> > > > >
-> > > > > > When PMIC drivers are disabled their functions should not be ca=
-lled.
-> > > > > >
-> > > > > > Signed-off-by: Maarten Brock <maarten.brock@sttls.nl>
-> > > > >
-> > > > When a board is using a certain PMIC it should be possible to desel=
-ect
-> > > > all other PMICs that are not present. There is no point in keeping =
-unused
-> > > > code in the binary. Isn't that the whole idea of the configuration?
-> > > > The current situation gives a build failure when the unused PMIC is
-> > > > deselected.
-> > > >
-> > > > This file board/ti/am335x/board.c gives the impression to be useabl=
-e for
-> > > > all AM335X based boards, including those yet unknown. What if a boa=
-rd
-> > > > does not need any PMIC configuration, because the default strapped =
-config
-> > > > is enough, does one still need to drag those drivers along?
-> > >
-> > > Indeed, I hadn't understood that you would face a build error as the =
-PMIC
-> > > functions are not defined if we disable PMIC configs.
-> > >
-> > > I think the first issue is the design of this board.c file, but, well=
- it is
-> > > U-boot typical design.
-> > > And scale_vcores_generic() is not a generic function at all ...
-> > >
-> > > Ok, your change are legit after all.
-> >=20
-> > A thing to keep in mind is that am335x_evm is intended for the TI EVM
-> > family of boards and look-alikes (so all of the beagles which are
-> > kinda-sorta TI EVMs depending on when you asked someone).
->=20
-> TI and U-boot give the impression that this file could be used as a templ=
-ate
-> for any AM335x based board. That it produces build failures as soon as you
-> modify some configuration contradicts that IMHO.
->=20
-> The same goes for my recent patch about NO_NET and not providing
-> ft_board_setup(). That also results in an unexpected build failure.
+thanks for posting this!
 
-Yes, there is more "delete this code too" required here than on modern
-TI chips where the goal of having easier to customize evm support was
-(closer?) to being realized.
+(quite a long CC: list, but missing the semihosting maintainer! ;-) Adding
+Sean)
 
---=20
-Tom
+> This commit introduces a new standard boot method that supports booting
+> via semihosting as provided by ARM FVP platforms.
+> 
+> Semihosting enables the virtual platform to access host-side files as if
+> they were block devices, which is particularly useful in early boot
 
---Zt4DzL9VL65zTZPP
-Content-Type: application/pgp-signature; name="signature.asc"
+it's not really "block devices", but "on a filesystem"
 
------BEGIN PGP SIGNATURE-----
+> development and simulation environments. It removes the need for physical
+> storage or networking when loading kernel components.
+> 
+> This method mirrors the distroboot logic for semihosting, which is the
+> default boot method for vexpress64 platform. The load_file_from_host
+> helper function is implemented to mirror behaviour of "load hostfs" u-boot
+> command, so it similarly sets filesize environment variable after loading a
+> file - this is useful for later commands.
+> 
+> This implementation is marked with BOOTMETH_GLOBAL so it is always
+> considered during bootflow scan without requiring a boot device.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMGhQwAKCRAr4qD1Cr/k
-CsBCAQCBCo9mTWLGDThkelng0r+34ofnvX6RrTMTRN1QxZxamAEA8r6HGDNafEnh
-lTO2BNFh53+Jcf2bG76uNWSVfbnxgwg=
-=i7Gc
------END PGP SIGNATURE-----
+So I like that this exposes this to all platforms, but it seems to
+inherit some VExpress specific choices. And while $fdtfile seems to be used
+quite universally across the tree, $kernel_name and $ramdisk_name seem more
+arbitrary. I guess they are fine, but would be curious to hear if someone
+else has a pointer to prior art which sets file names for those components.
 
---Zt4DzL9VL65zTZPP--
+Also, when stdboot replaces distroboot in the next patch, this will
+silently drop support for the Android boot images. I am personally fine
+with this, but wonder if we should keep the current boot flow, to not
+break existing users.
+
+So either we add bootimg support here, protected by ARCH_VEXPRESS, or we
+add it in a separate file, with some kind of platform specific callback?
+
+> 
+> Signed-off-by: Said Nasibov <said.nasibov@arm.com>
+> ---
+>  boot/Kconfig        |  10 ++++
+>  boot/Makefile       |   1 +
+>  boot/bootmeth_smh.c | 113 ++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 124 insertions(+)
+>  create mode 100644 boot/bootmeth_smh.c
+> 
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index 2ff6f003738..fbd3f068908 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -936,6 +936,16 @@ config BOOTMETH_SCRIPT
+>  	  This provides a way to try out standard boot on an existing boot flow.
+>  	  It is not enabled by default to save space.
+>  
+> +config BOOTMETH_SMH
+> +	bool "Bootdev support for semihosting"
+> +	depends on SEMIHOSTING
+> +	select CMD_FDT
+> +	select BOOTMETH_GLOBAL
+> +	help
+> +	  Enables support for booting via semihosting. This bootmeth reads
+> +	  files including the kernel, device tree and ramdisk directly from
+> +	  the host's filesystem.
+> +
+>  config UPL
+>  	bool "upl - Universal Payload Specification"
+>  	imply CMD_UPL
+> diff --git a/boot/Makefile b/boot/Makefile
+> index 3da6f7a0914..5bed9e66507 100644
+> --- a/boot/Makefile
+> +++ b/boot/Makefile
+> @@ -37,6 +37,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+>  obj-$(CONFIG_$(PHASE_)BOOTMETH_SCRIPT) += bootmeth_script.o
+>  obj-$(CONFIG_$(PHASE_)CEDIT) += cedit.o
+>  obj-$(CONFIG_$(PHASE_)BOOTMETH_EFI_BOOTMGR) += bootmeth_efi_mgr.o
+> +obj-$(CONFIG_$(PHASE_)BOOTMETH_SMH) += bootmeth_smh.o
+>  
+>  obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += fdt_support.o
+>  obj-$(CONFIG_$(PHASE_)FDT_SIMPLEFB) += fdt_simplefb.o
+> diff --git a/boot/bootmeth_smh.c b/boot/bootmeth_smh.c
+> new file mode 100644
+> index 00000000000..2ceb66900ed
+> --- /dev/null
+> +++ b/boot/bootmeth_smh.c
+> @@ -0,0 +1,113 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Bootmethod for booting using semihosting
+> + *
+> + * Copyright 2025 Arm Ltd.
+> + * Written by Said Nasibov <said.nasibov@arm.com>
+> + */
+> +
+> +#define LOG_CATEGORY UCLASS_BOOTSTD
+> +
+> +#include <bootmeth.h>
+> +#include <dm.h>
+> +#include <env.h>
+> +#include <fs.h>
+> +
+> +static int script_check(struct udevice *dev, struct bootflow_iter *iter)
+> +{
+> +	return 0;
+> +}
+> +
+> +static int load_file_from_host(const char *name_var, const char *addr_var)
+> +{
+> +	const char *filename = env_get(name_var);
+> +	const char *addr_str = env_get(addr_var);
+> +	ulong addr;
+> +	loff_t len;
+> +	int ret;
+> +
+> +	/* Mount hostfs (semihosting) */
+> +	ret = fs_set_blk_dev("hostfs", NULL, FS_TYPE_ANY);
+> +	if (ret)
+> +		return log_msg_ret("hostfs", ret);
+> +
+> +	if (!filename || !addr_str)
+> +		return log_msg_ret("env missing", -EINVAL);
+> +
+> +	addr = hextoul(addr_str, NULL);
+> +	if (!addr)
+> +		return log_msg_ret("invalid addr", -EINVAL);
+> +
+> +	/* Read file into memory */
+> +	ret = fs_read(filename, addr, 0, 0, &len);
+> +	if (ret)
+> +		return log_msg_ret("fs_read", ret);
+> +
+> +	/* Set filesize environment variable in hex */
+> +	char size_str[32];
+> +	sprintf(size_str, "%lx", (unsigned long)len);
+> +	env_set("filesize", size_str);
+> +
+> +	return 0;
+> +}
+> +
+> +static int smh_read_bootflow(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	int ret;
+> +
+> +	ret = load_file_from_host("kernel_name", "kernel_addr_r");
+> +	if (ret)
+> +		return log_msg_ret("kernel", ret);
+> +
+> +	env_set("fdt_high", "0xffffffffffffffff");
+> +	env_set("initrd_high", "0xffffffffffffffff");
+
+As Tom already mentioned, this seems a bit of cargo cult, carried on from
+generation to generation, we should drop this.
+
+> +
+> +	ret = load_file_from_host("fdtfile", "fdt_addr_r");
+> +	if (ret) {
+> +		ret = run_command("fdt move $fdtcontroladdr $fdt_addr_r;", 0);
+> +		if (ret)
+> +			return log_msg_ret("fdt move", ret);
+> +	}
+> +
+> +	load_file_from_host("ramdisk_name", "ramdisk_addr_r");
+
+Should we support running without an initramfs? So when this call fails,
+we just use "-" for the second booti parameter.
+
+But in general this seems to work, though it is a bit silent, in that it
+doesn't announce the files (successfully) loaded, as it did before.
+
+Cheers,
+Andre
+
+> +
+> +	bflow->state = BOOTFLOWST_READY;
+> +
+> +	return 0;
+> +}
+> +
+> +static int smh_boot(struct udevice *dev, struct bootflow *bflow)
+> +{
+> +	int ret = run_command("booti $kernel_addr_r ${ramdisk_addr_r}:${filesize} ${fdt_addr_r};", 0);
+> +
+> +	return ret;
+> +}
+> +
+> +static int smh_bootmeth_bind(struct udevice *dev)
+> +{
+> +	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
+> +
+> +	plat->desc = "semihosting";
+> +	plat->flags = BOOTMETHF_GLOBAL;
+> +
+> +	return 0;
+> +}
+> +
+> +static struct bootmeth_ops smh_bootmeth_ops = {
+> +	.check		= script_check,
+> +	.read_bootflow	= smh_read_bootflow,
+> +	.boot		= smh_boot,
+> +};
+> +
+> +static const struct udevice_id smh_bootmeth_ids[] = {
+> +	{ .compatible = "u-boot,smh" },
+> +	{}
+> +};
+> +
+> +U_BOOT_DRIVER(bootmeth_0smh) = {
+> +	.name		= "bootmeth_smh",
+> +	.id		= UCLASS_BOOTMETH,
+> +	.of_match	= smh_bootmeth_ids,
+> +	.ops		= &smh_bootmeth_ops,
+> +	.bind       = &smh_bootmeth_bind,
+> +};
+
