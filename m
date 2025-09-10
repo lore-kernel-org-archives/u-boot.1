@@ -4,60 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AF67CA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 13:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9544ECA101F
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 13:26:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 835328318E;
-	Wed, 10 Sep 2025 15:21:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F1798318E;
+	Wed, 10 Sep 2025 15:26:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="TGwyDgGN";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xadjL8s2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 75DAB8319C; Wed, 10 Sep 2025 15:21:00 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71E49830B4
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 15:20:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=dh-electronics.com
+ id 70B2A8318E; Wed, 10 Sep 2025 15:26:14 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DA4B2830B4
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 15:26:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1757510453;
- bh=LYUnsWuMGv3pfP6yNkKrg7o4lB6E0Kl2y7TODzhHFHE=;
- h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=TGwyDgGNKVmX2+kbTpYSbwhNpl11e7YKB7rptA5YpEw0wgd/TvvPRhVmnEfNUTYIh
- C1fnPW0nshXlogP6ZX/5Cx7XCDhGXFr5zGx/5kGcMpMgtYOrSS8XpqgUc612vTl5yH
- Iz+mLoiEcVSXtymuNg5E0Kd2fxSyNxHSnDCMFJyEq5B3aqfU5muNXt496gkxOjDWKd
- B4t/pnROegT8age0EA4MIaxHR781NcRt9aHHxl75XChlG0Pt0Ts/z8AaSJMS+n3XXl
- ewRxP5vYOkaCmBCLNQ976/pWaQdWP9Vsr62dvaWQPFSn/cUhZhWqwLzgBum3zguY7U
- S7oib5KUHwxeg==
-X-secureTransport-forwarded: yes
-From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-Complaints-To: abuse@cubewerk.de
-To: Marek Vasut <marek.vasut@mailbox.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH 2/2] board: dhelectronics: Use isascii() before isprint()
- in dh_read_eeprom_id_page()
-Thread-Topic: [PATCH 2/2] board: dhelectronics: Use isascii() before isprint()
- in dh_read_eeprom_id_page()
-Thread-Index: AQHcH5L0j1PwsYiH8kK2MhqXemD/qbSMa4fg
-Date: Wed, 10 Sep 2025 13:20:52 +0000
-Message-ID: <581a80daec794054907b009ab249c3d1@dh-electronics.com>
-References: <20250907010103.667681-1-marek.vasut@mailbox.org>
- <20250907010103.667681-2-marek.vasut@mailbox.org>
-In-Reply-To: <20250907010103.667681-2-marek.vasut@mailbox.org>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58ADQ9w1574397;
+ Wed, 10 Sep 2025 08:26:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757510770;
+ bh=j/0N80IvAiGqg8L0FirFPz8JJ17e1dw4wboILN2jMGo=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=xadjL8s2sh3q9lcAW+bgo05Jj8Un+0uC2PIwySREwRaYYw4CaBzSeo9Fc5+mWZ5XH
+ wr3eXcJSk+2blTAbUyZYi3LZFIn98cbPWRWZUry0qFA9kswep6m2QesQjIEXC2Tlg7
+ ppQfiZ70Xb6lmqimpxdOnzdmQeTpeXQT2gTgk3rg=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58ADQ9YI1179177
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 10 Sep 2025 08:26:09 -0500
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 10
+ Sep 2025 08:26:09 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 10 Sep 2025 08:26:09 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58ADQ9AU537112;
+ Wed, 10 Sep 2025 08:26:09 -0500
+Date: Wed, 10 Sep 2025 08:26:09 -0500
+From: "bb@ti.com" <bb@ti.com>
+To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
+CC: "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "trini@konsulko.com" <trini@konsulko.com>, "d.schultz@phytec.de"
+ <d.schultz@phytec.de>, "s-vadapalli@ti.com" <s-vadapalli@ti.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "c-vankar@ti.com"
+ <c-vankar@ti.com>, "kishon@ti.com" <kishon@ti.com>
+Subject: Re: [PATCH] arm: mach-k3: am625: Unlock MMR registers again
+Message-ID: <20250910132609.bfqpdflcgfbtouq4@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250815160240.3575140-1-d.schultz@phytec.de>
+ <63e0078fbf5cb045b79a441dca0f2f71fd3962e5.camel@siemens.com>
+ <d47cb78e-e3e4-4a65-a0d0-b7dbf22e7339@phytec.de>
+ <20250910120815.ifbg5fndnaodopvt@bryanbrattlof.com>
+ <64f1a6561417bf7ff9d8e92ea69e1ef842bd2055.camel@siemens.com>
+ <20250910125335.orpc2lrm2amncbwg@bryanbrattlof.com>
+ <ae14d825d76df8b65cf82ac78a43aa0c47689b52.camel@siemens.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <ae14d825d76df8b65cf82ac78a43aa0c47689b52.camel@siemens.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,40 +88,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RnJvbTogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0QG1haWxib3gub3JnPg0KU2VudDogU3VuZGF5
-LCBTZXB0ZW1iZXIgNywgMjAyNSAzOjAxIEFNDQo+IFRoZSBpc3ByaW50KCkgY2hlY2tzIHByaW50
-YWJpbGl0eSBhY3Jvc3MgYWxsIDI1NiBjaGFyYWN0ZXJzLCBzb21lIG9mIHRoZQ0KPiB1cHBlciAx
-MjggY2hhcmFjdGVycyBhcmUgcHJpbnRhYmxlIGFuZCBwcm9kdWNlIGFydGlmYWN0cyBvbiBVQVJU
-LiBDYWxsDQo+IGlzYXNjaWkoKSBmaXJzdCB0byBvbmx5IGNvbnNpZGVyIHRoZSBib3R0b20gN2Jp
-dCBBU0NJSSBjaGFyYWN0ZXJzIGFzDQo+IHByaW50YWJsZSwgYW5kIHRoZW4gY2hlY2sgdGhlaXIg
-cHJpbnRhYmlsaXR5IHVzaW5nIGlzcHJpbnQoKS4gVGhpcyBmaXhlcw0KPiBhIHJhcmUgbWlzcHJp
-bnQgaW4gY2FzZSB0aGUgSUQgcGFnZSBjb250ZW50IGlzIHVuaW5pdGlhbGl6ZWQgb3IgY29ycnVw
-dGVkLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0QG1haWxi
-b3gub3JnPg0KPiAtLS0NCj4gQ2M6IENocmlzdG9waCBOaWVkZXJtYWllciA8Y25pZWRlcm1haWVy
-QGRoLWVsZWN0cm9uaWNzLmNvbT4NCj4gQ2M6IFNpbW9uIEdsYXNzIDxzamdAY2hyb21pdW0ub3Jn
-Pg0KPiBDYzogVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT4NCj4gLS0tDQo+ICBib2FyZC9k
-aGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYyB8IDYgKysrLS0tDQo+ICAxIGZpbGUgY2hh
-bmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBh
-L2JvYXJkL2RoZWxlY3Ryb25pY3MvY29tbW9uL2RoX2NvbW1vbi5jDQo+IGIvYm9hcmQvZGhlbGVj
-dHJvbmljcy9jb21tb24vZGhfY29tbW9uLmMNCj4gaW5kZXggYWVhYmQ2MTczNzQuLmU3ZWUyM2Fh
-OGNlIDEwMDY0NA0KPiAtLS0gYS9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24u
-Yw0KPiArKysgYi9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYw0KPiBAQCAt
-ODgsOSArODgsOSBAQCBpbnQgZGhfcmVhZF9lZXByb21faWRfcGFnZSh1OCAqZWVwcm9tX2J1ZmZl
-ciwgY29uc3QgY2hhciAqYWxpYXMpDQo+ICAgICAgICAgLyogVmFsaWRhdGUgaGVhZGVyIElEICov
-DQo+ICAgICAgICAgaWYgKGVpcC0+aGRyLmlkWzBdICE9ICdEJyB8fCBlaXAtPmhkci5pZFsxXSAh
-PSAnSCcgfHwgZWlwLT5oZHIuaWRbMl0gIT0gJ0UnKSB7DQo+ICAgICAgICAgICAgICAgICBwcmlu
-dGYoIiVzOiBFcnJvciB2YWxpZGF0aW5nIGhlYWRlciBJRCEgKGdvdCAlYyVjJWMgKDB4JTAyeCAw
-eCUwMnggMHglMDJ4KQ0KPiAhPSBleHBlY3RlZCBESEUpXG4iLA0KPiAtICAgICAgICAgICAgICAg
-ICAgICAgIF9fZnVuY19fLCBpc3ByaW50KGVpcC0+aGRyLmlkWzBdKSA/IGVpcC0+aGRyLmlkWzBd
-IDogJy4nLA0KPiAtICAgICAgICAgICAgICAgICAgICAgIGlzcHJpbnQoZWlwLT5oZHIuaWRbMV0p
-ID8gZWlwLT5oZHIuaWRbMV0gOiAnLicsDQo+IC0gICAgICAgICAgICAgICAgICAgICAgaXNwcmlu
-dChlaXAtPmhkci5pZFsyXSkgPyBlaXAtPmhkci5pZFsyXSA6ICcuJywNCj4gKyAgICAgICAgICAg
-ICAgICAgICAgICBfX2Z1bmNfXywgKGlzYXNjaWkoZWlwLT5oZHIuaWRbMF0pICYmIGlzcHJpbnQo
-ZWlwLT5oZHIuaWRbMF0pKSA/DQo+IGVpcC0+aGRyLmlkWzBdIDogJy4nLA0KPiArICAgICAgICAg
-ICAgICAgICAgICAgIChpc2FzY2lpKGVpcC0+aGRyLmlkWzFdKSAmJiBpc3ByaW50KGVpcC0+aGRy
-LmlkWzFdKSkgPyBlaXAtDQo+ID5oZHIuaWRbMV0gOiAnLicsDQo+ICsgICAgICAgICAgICAgICAg
-ICAgICAgKGlzYXNjaWkoZWlwLT5oZHIuaWRbMl0pICYmIGlzcHJpbnQoZWlwLT5oZHIuaWRbMl0p
-KSA/IGVpcC0NCj4gPmhkci5pZFsyXSA6ICcuJywNCj4gICAgICAgICAgICAgICAgICAgICAgICBl
-aXAtPmhkci5pZFswXSwgZWlwLT5oZHIuaWRbMV0sIGVpcC0+aGRyLmlkWzJdKTsNCj4gICAgICAg
-ICAgICAgICAgIHJldHVybiAtRUlOVkFMOw0KPiAgICAgICAgIH0NCg0KUmV2aWV3ZWQtYnk6IENo
-cmlzdG9waCBOaWVkZXJtYWllciA8Y25pZWRlcm1haWVyQGRoLWVsZWN0cm9uaWNzLmNvbT4NCg==
+On September 10, 2025 thus sayeth Sverdlin, Alexander:
+> Hi Bryan!
+> 
+> On Wed, 2025-09-10 at 07:53 -0500, bb@ti.com wrote:
+> > > > > > > The watchdog requires to have the MCU ESM error source enabled to
+> > > > > > > trigger a system reboot. When booting HS-SE (security enforced)
+> > > > > > > devices, the MMR registers are locked again and all write commands
+> > > > > > > are simply ignored.
+> > > > > > > 
+> > > > > > > Unlock the MMR registers again to successfully enable the MCU ESM
+> > > > > > > source.
+> > > > > > I'm just curious, could you please elaborate a bit, where the registers
+> > > > > > are being locked again if they are being unlocked by ctrl_mmr_unlock()
+> > > > > > in board_init_f() before enable_mcu_esm_reset()?
+> > > > > > 
+> > > > > > Is it TIFS firmware?
+> > > > > > What else could be affected?
+> > > > > > Do we expect to leave General Purpose Control Registers unlocked
+> > > > > > when we return from board_init_f()?
+> > > > > > Does it mean that the whole ctrl_mmr_unlock() has to be re-done
+> > > > > > after k3_sysfw_loader() call?
+> > > > > 
+> > > > > I really can't tell why those registers are locked again. I figured out
+> > > > > they're only locked again after loading the TIFS firmware on HS-SE devices.
+> > > > > So, I also assume the firmware itself locks those registers again as part of
+> > > > > a secure/security feature.
+> > > > 
+> > > > Hmm yeah this is likely a bug or a config issue. Ideally we 
+> > > > (U-Boot/Linux) should be in complete control of when these are locked or 
+> > > > unlocked. TIFS or DM shouldn't be anywhere near these MMRs.
+> > > > 
+> > > > > 
+> > > > > The A53 SPL will unlock those registers again, which will be permanent. Only
+> > > > > the watchdog is problematic because enable_mcu_esm_reset is currently only
+> > > > > called in the R5 SPL (config only enabled in the R5 SPL defconfig).
+> > > > > 
+> > > > > BTW: We have seen the same behavior with the AM68A/J721S2.
+> > > > 
+> > > > Hmm this is strange.
+> > > 
+> > > Thanks for your assessment!
+> > > Do you know who can be contacted at TI regarding this possible problem in
+> > > TIFS firmware? Maybe this has to be fixed in TIFS firmware indeed?
+> > 
+> > I've started creating some noise internally to see if we can debug this 
+> > faster. Most of these teams are fairly insulated from the outside world 
+> > and can only be reached via e2e tickets.
+> 
+> Thanks for looking into this!
+> I read it as if we would not need to create an e2e ticket for now?
+
+That's correct. I short circuited the e2e process by creating a bug and 
+messaging a few people internally to jump start the process:
+
+   https://sir.ext.ti.com/jira/browse/EXT_EP-12916
+
+~Bryan
