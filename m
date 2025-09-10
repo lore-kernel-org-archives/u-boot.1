@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F662CA101F
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 13:18:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AF67CA0FED
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 13:21:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD2D68318E;
-	Wed, 10 Sep 2025 15:18:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 835328318E;
+	Wed, 10 Sep 2025 15:21:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="fWGku5ex";
+	dkim=pass (2048-bit key; secure) header.d=dh-electronics.com header.i=@dh-electronics.com header.b="TGwyDgGN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76085831D5; Wed, 10 Sep 2025 15:18:21 +0200 (CEST)
-Received: from mx3.securetransport.de (mx3.securetransport.de
- [IPv6:2a01:4f8:c0c:92be::1])
+ id 75DAB8319C; Wed, 10 Sep 2025 15:21:00 +0200 (CEST)
+Received: from mx3.securetransport.de (mx3.securetransport.de [116.203.31.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BBFC830B4
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 15:18:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71E49830B4
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 15:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=dh-electronics.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cniedermaier@dh-electronics.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dh-electronics.com;
- s=dhelectronicscom; t=1757510294;
- bh=wfaYcFXk7imcSVz+cGvs4r2gkrF8ZjN5EuTI5yd3qw0=;
+ s=dhelectronicscom; t=1757510453;
+ bh=LYUnsWuMGv3pfP6yNkKrg7o4lB6E0Kl2y7TODzhHFHE=;
  h=From:To:CC:Subject:Date:References:In-Reply-To:From;
- b=fWGku5ex8KH1M9tA+BQjsBvvumQ3O6FsDQm0KVT5OqNCEbLG/SWODKkjRv45nb2Nk
- y9GdRGzrimaUZfnGK2LP/ZIzPsobN/szAXOi9g6ft4iwXTWiUP4PnkBNozs+/u1iHs
- k1hVDoyzt/bbGndF0RL6wdFA50FIaH0SuS57DwJQXTYE8LnpHLKVs4SPmgavY89D+g
- EYvi9ipObwBjErrtO8x2jN36c0Ts/SuWQEIC9bvBOriMdaLDEEN4Y87xNHPhq6B4xz
- WDrEWRp/dz6fuCXPHGnZmpLVoR+J2hWJZpnQ3ey54qhEfWM0gCSTwu2aATqfvOx7vT
- q7o7oljvHmIag==
+ b=TGwyDgGNKVmX2+kbTpYSbwhNpl11e7YKB7rptA5YpEw0wgd/TvvPRhVmnEfNUTYIh
+ C1fnPW0nshXlogP6ZX/5Cx7XCDhGXFr5zGx/5kGcMpMgtYOrSS8XpqgUc612vTl5yH
+ Iz+mLoiEcVSXtymuNg5E0Kd2fxSyNxHSnDCMFJyEq5B3aqfU5muNXt496gkxOjDWKd
+ B4t/pnROegT8age0EA4MIaxHR781NcRt9aHHxl75XChlG0Pt0Ts/z8AaSJMS+n3XXl
+ ewRxP5vYOkaCmBCLNQ976/pWaQdWP9Vsr62dvaWQPFSn/cUhZhWqwLzgBum3zguY7U
+ S7oib5KUHwxeg==
 X-secureTransport-forwarded: yes
 From: Christoph Niedermaier <cniedermaier@dh-electronics.com>
 Complaints-To: abuse@cubewerk.de
 To: Marek Vasut <marek.vasut@mailbox.org>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
 CC: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: RE: [PATCH 1/2] board: dhelectronics: Check pointer before access in
- dh_get_value_from_eeprom_buffer()
-Thread-Topic: [PATCH 1/2] board: dhelectronics: Check pointer before access in
- dh_get_value_from_eeprom_buffer()
-Thread-Index: AQHcH5L0jFgLOqgNzU2osHMXKuUj+7SMaktA
-Date: Wed, 10 Sep 2025 13:18:13 +0000
-Message-ID: <31547fea5bd345e5b47d1e21a095f176@dh-electronics.com>
+Subject: RE: [PATCH 2/2] board: dhelectronics: Use isascii() before isprint()
+ in dh_read_eeprom_id_page()
+Thread-Topic: [PATCH 2/2] board: dhelectronics: Use isascii() before isprint()
+ in dh_read_eeprom_id_page()
+Thread-Index: AQHcH5L0j1PwsYiH8kK2MhqXemD/qbSMa4fg
+Date: Wed, 10 Sep 2025 13:20:52 +0000
+Message-ID: <581a80daec794054907b009ab249c3d1@dh-electronics.com>
 References: <20250907010103.667681-1-marek.vasut@mailbox.org>
-In-Reply-To: <20250907010103.667681-1-marek.vasut@mailbox.org>
+ <20250907010103.667681-2-marek.vasut@mailbox.org>
+In-Reply-To: <20250907010103.667681-2-marek.vasut@mailbox.org>
 Accept-Language: de-DE, en-US
 Content-Language: de-DE
 X-MS-Has-Attach: 
@@ -75,37 +75,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 RnJvbTogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0QG1haWxib3gub3JnPg0KU2VudDogU3VuZGF5
-LCBTZXB0ZW1iZXIgNywgMjAyNSAzOjAxIEFNDQo+IFRoZSBlaXAgcG9pbnRlciBpbiBkaF9nZXRf
-dmFsdWVfZnJvbV9lZXByb21fYnVmZmVyKCkgbWlnaHQgYmUgTlVMTC4NCj4gVGhlIGN1cnJlbnQg
-TlVMTCBwb2ludGVyIGNoZWNrIGhhcHBlbnMgdG9vIGxhdGUsIGFmdGVyIHRoZSBlaXAgd2FzDQo+
-IGFjY2Vzc2VkIGluIHZhcmlhYmxlIGFzc2lnbm1lbnQuIFJlb3JkZXIgdGhlIHR3bywgc28gdGhl
-IE5VTEwgcG9pbnRlcg0KPiBjaGVjayBoYXBwZW5zIGZpcnN0LCBhbmQgYW55IGFjY2VzcyBzZWNv
-bmQsIG90aGVyd2lzZSB0aGUgYWNjZXNzIG1heQ0KPiB0cmlnZ2VyIGEgaGFuZyBvciBvdGhlciB1
-bmRlZmluZWQgYmVoYXZpb3IuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBNYXJlayBWYXN1dCA8bWFy
-ZWsudmFzdXRAbWFpbGJveC5vcmc+DQo+IC0tLQ0KPiBDYzogQ2hyaXN0b3BoIE5pZWRlcm1haWVy
-IDxjbmllZGVybWFpZXJAZGgtZWxlY3Ryb25pY3MuY29tPg0KPiBDYzogU2ltb24gR2xhc3MgPHNq
-Z0BjaHJvbWl1bS5vcmc+DQo+IENjOiBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPg0KPiAt
-LS0NCj4gIGJvYXJkL2RoZWxlY3Ryb25pY3MvY29tbW9uL2RoX2NvbW1vbi5jIHwgOSArKysrKyst
-LS0NCj4gIDEgZmlsZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQo+
-IA0KPiBkaWZmIC0tZ2l0IGEvYm9hcmQvZGhlbGVjdHJvbmljcy9jb21tb24vZGhfY29tbW9uLmMN
-Cj4gYi9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYw0KPiBpbmRleCA5Zjhl
-NTc1NGQ4Yy4uYWVhYmQ2MTczNzQgMTAwNjQ0DQo+IC0tLSBhL2JvYXJkL2RoZWxlY3Ryb25pY3Mv
-Y29tbW9uL2RoX2NvbW1vbi5jDQo+ICsrKyBiL2JvYXJkL2RoZWxlY3Ryb25pY3MvY29tbW9uL2Ro
-X2NvbW1vbi5jDQo+IEBAIC0xMzEsMTQgKzEzMSwxNyBAQCBpbnQgZGhfcmVhZF9lZXByb21faWRf
-cGFnZSh1OCAqZWVwcm9tX2J1ZmZlciwgY29uc3QgY2hhciAqYWxpYXMpDQo+ICBpbnQgZGhfZ2V0
-X3ZhbHVlX2Zyb21fZWVwcm9tX2J1ZmZlcihlbnVtIGVpcF9yZXF1ZXN0X3ZhbHVlcyByZXF1ZXN0
-LCB1OCAqZGF0YSwgaW50DQo+IGRhdGFfbGVuLA0KPiAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBzdHJ1Y3QgZWVwcm9tX2lkX3BhZ2UgKmVpcCkNCj4gIHsNCj4gLSAgICAgICBj
-b25zdCBjaGFyIGZpbl9jaHIgPSAoZWlwLT5wbC5pdGVtX3ByZWZpeCAmIERIX0lURU1fUFJFRklY
-X0ZJTl9CSVQpID8NCj4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICBESF9JVEVNX1BSRUZJ
-WF9GSU5fRkxBU0hFRF9DSFIgOiBESF9JVEVNX1BSRUZJWF9GSU5fSEFMRl9DSFI7DQo+IC0gICAg
-ICAgY29uc3QgdTggc29jX2NvZGVkID0gZWlwLT5wbC5pdGVtX3ByZWZpeCAmIDB4ZjsNCj4gKyAg
-ICAgICBjaGFyIGZpbl9jaHI7DQo+ICsgICAgICAgdTggc29jX2NvZGVkOw0KPiAgICAgICAgIGNo
-YXIgc29jX2NocjsNCj4gDQo+ICAgICAgICAgaWYgKCFlaXApDQo+ICAgICAgICAgICAgICAgICBy
-ZXR1cm4gLUVJTlZBTDsNCj4gDQo+ICsgICAgICAgZmluX2NociA9IChlaXAtPnBsLml0ZW1fcHJl
-Zml4ICYgREhfSVRFTV9QUkVGSVhfRklOX0JJVCkgPw0KPiArICAgICAgICAgICAgICAgICBESF9J
-VEVNX1BSRUZJWF9GSU5fRkxBU0hFRF9DSFIgOiBESF9JVEVNX1BSRUZJWF9GSU5fSEFMRl9DSFI7
-DQo+ICsgICAgICAgc29jX2NvZGVkID0gZWlwLT5wbC5pdGVtX3ByZWZpeCAmIDB4ZjsNCj4gKw0K
-PiAgICAgICAgIC8qIENvcHkgcmVxdWVzdGVkIGRhdGEgKi8NCj4gICAgICAgICBzd2l0Y2ggKHJl
-cXVlc3QpIHsNCj4gICAgICAgICBjYXNlIERIX01BQzA6DQoNClJldmlld2VkLWJ5OiBDaHJpc3Rv
-cGggTmllZGVybWFpZXIgPGNuaWVkZXJtYWllckBkaC1lbGVjdHJvbmljcy5jb20+DQo=
+LCBTZXB0ZW1iZXIgNywgMjAyNSAzOjAxIEFNDQo+IFRoZSBpc3ByaW50KCkgY2hlY2tzIHByaW50
+YWJpbGl0eSBhY3Jvc3MgYWxsIDI1NiBjaGFyYWN0ZXJzLCBzb21lIG9mIHRoZQ0KPiB1cHBlciAx
+MjggY2hhcmFjdGVycyBhcmUgcHJpbnRhYmxlIGFuZCBwcm9kdWNlIGFydGlmYWN0cyBvbiBVQVJU
+LiBDYWxsDQo+IGlzYXNjaWkoKSBmaXJzdCB0byBvbmx5IGNvbnNpZGVyIHRoZSBib3R0b20gN2Jp
+dCBBU0NJSSBjaGFyYWN0ZXJzIGFzDQo+IHByaW50YWJsZSwgYW5kIHRoZW4gY2hlY2sgdGhlaXIg
+cHJpbnRhYmlsaXR5IHVzaW5nIGlzcHJpbnQoKS4gVGhpcyBmaXhlcw0KPiBhIHJhcmUgbWlzcHJp
+bnQgaW4gY2FzZSB0aGUgSUQgcGFnZSBjb250ZW50IGlzIHVuaW5pdGlhbGl6ZWQgb3IgY29ycnVw
+dGVkLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTWFyZWsgVmFzdXQgPG1hcmVrLnZhc3V0QG1haWxi
+b3gub3JnPg0KPiAtLS0NCj4gQ2M6IENocmlzdG9waCBOaWVkZXJtYWllciA8Y25pZWRlcm1haWVy
+QGRoLWVsZWN0cm9uaWNzLmNvbT4NCj4gQ2M6IFNpbW9uIEdsYXNzIDxzamdAY2hyb21pdW0ub3Jn
+Pg0KPiBDYzogVG9tIFJpbmkgPHRyaW5pQGtvbnN1bGtvLmNvbT4NCj4gLS0tDQo+ICBib2FyZC9k
+aGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYyB8IDYgKysrLS0tDQo+ICAxIGZpbGUgY2hh
+bmdlZCwgMyBpbnNlcnRpb25zKCspLCAzIGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBh
+L2JvYXJkL2RoZWxlY3Ryb25pY3MvY29tbW9uL2RoX2NvbW1vbi5jDQo+IGIvYm9hcmQvZGhlbGVj
+dHJvbmljcy9jb21tb24vZGhfY29tbW9uLmMNCj4gaW5kZXggYWVhYmQ2MTczNzQuLmU3ZWUyM2Fh
+OGNlIDEwMDY0NA0KPiAtLS0gYS9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24u
+Yw0KPiArKysgYi9ib2FyZC9kaGVsZWN0cm9uaWNzL2NvbW1vbi9kaF9jb21tb24uYw0KPiBAQCAt
+ODgsOSArODgsOSBAQCBpbnQgZGhfcmVhZF9lZXByb21faWRfcGFnZSh1OCAqZWVwcm9tX2J1ZmZl
+ciwgY29uc3QgY2hhciAqYWxpYXMpDQo+ICAgICAgICAgLyogVmFsaWRhdGUgaGVhZGVyIElEICov
+DQo+ICAgICAgICAgaWYgKGVpcC0+aGRyLmlkWzBdICE9ICdEJyB8fCBlaXAtPmhkci5pZFsxXSAh
+PSAnSCcgfHwgZWlwLT5oZHIuaWRbMl0gIT0gJ0UnKSB7DQo+ICAgICAgICAgICAgICAgICBwcmlu
+dGYoIiVzOiBFcnJvciB2YWxpZGF0aW5nIGhlYWRlciBJRCEgKGdvdCAlYyVjJWMgKDB4JTAyeCAw
+eCUwMnggMHglMDJ4KQ0KPiAhPSBleHBlY3RlZCBESEUpXG4iLA0KPiAtICAgICAgICAgICAgICAg
+ICAgICAgIF9fZnVuY19fLCBpc3ByaW50KGVpcC0+aGRyLmlkWzBdKSA/IGVpcC0+aGRyLmlkWzBd
+IDogJy4nLA0KPiAtICAgICAgICAgICAgICAgICAgICAgIGlzcHJpbnQoZWlwLT5oZHIuaWRbMV0p
+ID8gZWlwLT5oZHIuaWRbMV0gOiAnLicsDQo+IC0gICAgICAgICAgICAgICAgICAgICAgaXNwcmlu
+dChlaXAtPmhkci5pZFsyXSkgPyBlaXAtPmhkci5pZFsyXSA6ICcuJywNCj4gKyAgICAgICAgICAg
+ICAgICAgICAgICBfX2Z1bmNfXywgKGlzYXNjaWkoZWlwLT5oZHIuaWRbMF0pICYmIGlzcHJpbnQo
+ZWlwLT5oZHIuaWRbMF0pKSA/DQo+IGVpcC0+aGRyLmlkWzBdIDogJy4nLA0KPiArICAgICAgICAg
+ICAgICAgICAgICAgIChpc2FzY2lpKGVpcC0+aGRyLmlkWzFdKSAmJiBpc3ByaW50KGVpcC0+aGRy
+LmlkWzFdKSkgPyBlaXAtDQo+ID5oZHIuaWRbMV0gOiAnLicsDQo+ICsgICAgICAgICAgICAgICAg
+ICAgICAgKGlzYXNjaWkoZWlwLT5oZHIuaWRbMl0pICYmIGlzcHJpbnQoZWlwLT5oZHIuaWRbMl0p
+KSA/IGVpcC0NCj4gPmhkci5pZFsyXSA6ICcuJywNCj4gICAgICAgICAgICAgICAgICAgICAgICBl
+aXAtPmhkci5pZFswXSwgZWlwLT5oZHIuaWRbMV0sIGVpcC0+aGRyLmlkWzJdKTsNCj4gICAgICAg
+ICAgICAgICAgIHJldHVybiAtRUlOVkFMOw0KPiAgICAgICAgIH0NCg0KUmV2aWV3ZWQtYnk6IENo
+cmlzdG9waCBOaWVkZXJtYWllciA8Y25pZWRlcm1haWVyQGRoLWVsZWN0cm9uaWNzLmNvbT4NCg==
