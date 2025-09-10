@@ -4,67 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C008CA101F
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 05:11:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0404DCA101F
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 05:28:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72571831BE;
-	Wed, 10 Sep 2025 07:11:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 339BF8318E;
+	Wed, 10 Sep 2025 07:28:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C6iU5shi";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="kodlL76Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2ED3830A0; Wed, 10 Sep 2025 07:11:11 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 948108318E
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 07:11:08 +0200 (CEST)
+ id 305498319C; Wed, 10 Sep 2025 07:28:39 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 93ED0830B4
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 07:28:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58A5B7Pi066471;
- Wed, 10 Sep 2025 00:11:07 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757481067;
- bh=6ZnQO11sEb3mw5VzmTa7H5mGciOuXp4zHWWe48ZMfOM=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=C6iU5shi7p2d+CCEy6sqtKJ00s2+McvaHofqeyBdIs1p7Emkid83ktw9EcJ9+TDiy
- Grmzk1afSIDc5DivVyiDpdkDOI5K0woJeNAaXe2l6R68eum9fUclXO23EUXkX0iC91
- scLCb+ZodQSqxtsDsPF+SmUMfqksDahKNDe67ZOw=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58A5B6Bo906750
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 10 Sep 2025 00:11:06 -0500
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 10
- Sep 2025 00:11:06 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 10 Sep 2025 00:11:06 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58A5B5Pw4148882;
- Wed, 10 Sep 2025 00:11:05 -0500
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-b5229007f31so2472047a12.2
+ for <u-boot@lists.denx.de>; Tue, 09 Sep 2025 22:28:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1757482115; x=1758086915;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tyGm4gozBLXHjLzIatyqccILqmFw3ks6VhZE6W6MgcU=;
+ b=kodlL76Qb34LyzNfO3lt8HBcSj5607cWEpRIRJ+5Uy1ugW4jKago91YaU+lpQOsS7V
+ YhuYrvJ2WnZeDY+QVx3mcwA4u4PQyr4ofCzF7rOPM65Y9GBF2KEnoIIXCaYGKAehNJEK
+ B2RcCm7ki9hqANQwSZdrEuh6QOxiNywDWKqsg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757482115; x=1758086915;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tyGm4gozBLXHjLzIatyqccILqmFw3ks6VhZE6W6MgcU=;
+ b=nmF9ynbeDsHxrZDPOq3lEqRizYf4G6g69Mi8FigdkCN2troOnXuruc+dPK2WH/KMoK
+ OHvjl87zewazya2wGYL+P5wcCyRLLIo1xbudQRiHdyrVbucQDHAaTp2Hqxi6yHpIRS3w
+ sR5bphpKACZSTvNl/yD/kCIXUFmAUPzX0UDMG8OtQwAkYMnoL68eavoHZ2ZCk0CDUexQ
+ iqfJ9cWN5Ebu80u/zkZmxjRJTlo+T5uzBfm5zKzvy6WCgcGOG4gX6akfPsjaScc7FbaK
+ BbHNGQPlkQ9rLbu6cs4AKfK3YRmagBRePq3AudjAu2LXOZxgjCKenhKRl/5vZW5VLhl8
+ +8/A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU6xWWNODCppCA1pXP5Ss8+LTr73CJ3Rorze8xhOBzinbCi+n51pqAQlmTTDonYPKj1BhZBohA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy2tRos8eBIWLfIZL3ilva/gqj0qYMIS5Ya6Jm1OKKmC0bVM+Be
+ Uc//0kr55wglxkhi9an8C82ZVMHj6DykBfta0qREYpT4MPvPYBpNs4bgPEcG4SkAGs6VxSmypLB
+ exqLelBJJQDJvkW/S9MmMxJ6pWUMMdFuFW2AxodLn5w==
+X-Gm-Gg: ASbGncuycs+UKDxKmoxCpPLfOFPkTvZJTn6PuUXSzU23aphiejSr+kt0JHlhHipPI9g
+ dk1++cSZm6x3X2vNFhNF0+oXc0qJioyHLkQ/TikUQR46GTYZi2oaP4Y9sNGHiRgRUo1yj5YcXnb
+ b5DKyKsPtiE+hgcLZUvrKlLtwvDrG4G7KRwv5OVlgfxf29VjqtVd48bQ4BjlkTDwPQgeyv+NwEm
+ ky2EvaT4qwQHX9X6Q==
+X-Google-Smtp-Source: AGHT+IHLQsFXjpAl2Mun/HZT/hIZEkRPtycffygBs7jbYzBXUmnEgrmGyCLVSYIQDrB/yltKmqAvVRXeKZ1FUuDTRbQ=
+X-Received: by 2002:a17:902:ef0a:b0:24b:2336:e1c5 with SMTP id
+ d9443c01a7336-251734f2ecdmr179384525ad.55.1757482114610; Tue, 09 Sep 2025
+ 22:28:34 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20250702092313.970234-1-miquel.raynal@bootlin.com>
+ <87a534exwc.fsf@bootlin.com>
+ <CAMty3ZDG=MtRbzNPaRs=dz9AUkcTA5cHX+0=wgqyEbMqPhyxrQ@mail.gmail.com>
+ <0efa621a-6cc5-4c1b-a5c9-9ab86f84692f@ti.com>
+In-Reply-To: <0efa621a-6cc5-4c1b-a5c9-9ab86f84692f@ti.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Wed, 10 Sep 2025 07:28:22 +0200
+X-Gm-Features: AS18NWBFusAPfER3h10VK9AOkYJVobyQU9uHQ1uxU2uU9SD3Retc_BTR8aldHK0
+Message-ID: <CAOf5uwk5gHPkhF1emwpUyp8aDYXhsO-6JQ_x1gicEK4kkajiiw@mail.gmail.com>
+Subject: Re: [PATCH] mtd: spi-nor: winbond: Make sure w25q{01,
+ 02}jv behave correctly
+To: "Raghavendra, Vignesh" <vigneshr@ti.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Tom Rini <trini@konsulko.com>, Steam Lin <stlin2@winbond.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 10 Sep 2025 10:41:04 +0530
-Message-ID: <DCOV1J6TSSS2.2N4O1QYQEZZOX@ti.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: Re: [PATCH 2/2] configs: phycore_am62ax_a53_defconfig: eMMC boot
- from raw offsets
-From: Anshul Dalal <anshuld@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>, <ggiordano@phytec.com>,
- <trini@konsulko.com>, <d.schultz@phytec.de>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250909103654.3341398-1-w.egorov@phytec.de>
- <20250909103654.3341398-2-w.egorov@phytec.de>
-In-Reply-To: <20250909103654.3341398-2-w.egorov@phytec.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,34 +99,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Sep 9, 2025 at 4:06 PM IST, Wadim Egorov wrote:
-> From: Daniel Schultz <d.schultz@phytec.de>
->
-> Enable CONFIG_SPL_SYS_MMCSD_RAW_MODE and set the offset address to
-> boot from raw addresses instead of a FAT partition.
->
-> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  configs/phycore_am62ax_a53_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/configs/phycore_am62ax_a53_defconfig b/configs/phycore_am62a=
-x_a53_defconfig
-> index 05849d05be4..27fa4386a21 100644
-> --- a/configs/phycore_am62ax_a53_defconfig
-> +++ b/configs/phycore_am62ax_a53_defconfig
-> @@ -48,6 +48,8 @@ CONFIG_SPL_MAX_SIZE=3D0x58000
->  CONFIG_SPL_PAD_TO=3D0x0
->  CONFIG_SPL_BOARD_INIT=3Dy
->  CONFIG_SPL_SYS_MALLOC_SIMPLE=3Dy
-> +CONFIG_SPL_SYS_MMCSD_RAW_MODE=3Dy
-> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=3D0x1400
->  CONFIG_SPL_DMA=3Dy
->  CONFIG_SPL_ENV_SUPPORT=3Dy
->  CONFIG_SPL_ETH=3Dy
+Hi all
 
-Looks good to me,
-Acked-by: Anshul Dalal <anshuld@ti.com>
+On Tue, Sep 9, 2025 at 7:08=E2=80=AFPM Raghavendra, Vignesh <vigneshr@ti.co=
+m> wrote:
+>
+>
+>
+> On 9/9/2025 5:37 PM, Jagan Teki wrote:
+> > On Tue, Sep 9, 2025 at 3:43=E2=80=AFPM Miquel Raynal <miquel.raynal@boo=
+tlin.com> wrote:
+> >>
+> >> Hello,
+> >>
+> >> On 02/07/2025 at 11:23:13 +02, Miquel Raynal <miquel.raynal@bootlin.co=
+m> wrote:
+> >>
+> >>> These chips are internally made of two/four dies with linear addressi=
+ng
+> >>> capabilities to make it transparent to the user that two/four dies we=
+re
+> >>> used. There is one drawback however, the read status operation is rac=
+y
+> >>> as the status bit only gives the active die status and not the status=
+ of
+> >>> the other die. For commands affecting the two dies, it means if anoth=
+er
+> >>> command is sent too fast after the first die has returned a valid
+> >>> status (deviation can be up to 200us), the chip will get corrupted/in=
+ an
+> >>> unstable state.
+> >>>
+> >>> The solution adopted here is to iterate manually over all internal
+> >>> dies (which takes about 30us per die) until all are ready. This appro=
+ach
+> >>> will always be faster than a blind delay which represents the maximum
+> >>> deviation, while also being totally safe.
+> >>>
+> >>> A flash-specific hook for the status register read had to be
+> >>> implemented. Testing with the flash_speed benchmark in Linux shown no
+> >>> difference with the existing performances (using the regular status r=
+ead
+> >>> core function).
+> >>>
+> >>> As the presence of multiple dies is not filled in these chips SFDP
+> >>> tables (the table containing the crucial information is optional), we
+> >>> need to manually wire the hook.
+> >>>
+> >>> This change is adapted from Linux.
+> >>>
+> >>> Link: https://lore.kernel.org/all/20250110-winbond-6-12-rc1-nor-volat=
+ile-bit-v3-1-735363f8cc7d@bootlin.com/
+> >>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> >>
+> >> Same question for this one, no feedback for the past 2 months, I'm not
+> >> sure who's supposed to take these, Jagan and Vignesh you are marked M:
+> >> in maintainers, any chances this can get it?
+> >
+> > Unfortunately, I was off quite some-time. Need little bit of time.
+> > Vighnesh is off for years.
+>
+> Thats not true. I dont have access to U-Boot SPI trees. So patches have
+> been flowing through individual "platfor/SoC" maintainers trees
+> unfortunately. Tom picks the patches from TI contributors once
+> me/Nishanth Acks where as AMD/Xlinix bits have been picked up by Michal
+> Simek and so on...
+>
+> Happy to help out if you help to manage a merge window every now and
+> then or just review things. Most of the SPI NOR/NAND follow from linux
+> where its reviewed by set of maintainers and tested (example this one is
+> tested on TI board).
 
-Regards
+I will go through the patches over the weekend and review them. I will
+prepare a branch
+spi-nor-next and try to ask to test from there
+
+Michael
+
+>
+> > In the meantime, Michael will help in
+> > review but need help on testing.
+> >
+> > Thanks,
+> > Jagan.
+>
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
