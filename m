@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FD5ACA0FED
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:15:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23F8ECA0FED
+	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 18:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FA20832AD;
-	Wed, 10 Sep 2025 20:14:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 204DE833EC;
+	Wed, 10 Sep 2025 20:14:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L6yB/kAl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ur3qygjx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9627183390; Wed, 10 Sep 2025 20:14:08 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id BEE53833D1; Wed, 10 Sep 2025 20:14:49 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE1FA831D5
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:14:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CB8083280
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 20:14:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-62192ee029dso937886eaf.0
- for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 11:14:05 -0700 (PDT)
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-74542b1b2bcso6139089a34.3
+ for <u-boot@lists.denx.de>; Wed, 10 Sep 2025 11:14:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757528044; x=1758132844; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BVKcYGvX7TTI4RnHlhaAsBYjKBH4YLwBorX8o3dXrkc=;
- b=L6yB/kAlTDBSBss2IrvjULwaLsyqZNIuPlHRjrrwbi96dpc1WNHa4xcXtOFn8UxfuQ
- mGBpdToVjpdYNqtGWPN33wTBlNHFhDwS3rXr16yG+70Io5CdeR5pkFrmG6D5qczyCuWc
- s2fdYZ47J0b9ARnKoucesDSgKhNy/awwsO3uk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757528044; x=1758132844;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1757528086; x=1758132886; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BVKcYGvX7TTI4RnHlhaAsBYjKBH4YLwBorX8o3dXrkc=;
- b=xTjmDRVSAxaJJY+mUifJ9XPi5xsiz1/fUbuLjeEDymv3Au7oSMwdh6IKelznEnC7VD
- NG60pGZqXuslLMT6bQLl4Mxeayap352P/UjWgxsIKoUDwrMf/IlbA99jHviiubNyJhBl
- THXXSuJGrhX2KZU4se0aP1WsUpqHn3LIpk2yvOk62+On5l+u2EQ1NbDn4HCX5H951fIT
- Xcmo9vTbvY1EajZWcs99R1GMBGAPRDi6VjNpfsscBVsWdVCew8U8qhZw3wI/F/d7hfu5
- iZ2fhiprSmlR/wzmv5UvkDz4idjaJGj+bXLuNJMwClv2bPBqd5u2FIltegkFqRfkX/th
- N6ow==
-X-Gm-Message-State: AOJu0YzB8NUHXLS6RbriEU6diW6s3CGuQ2swffdDIWeG/xfepCDR+8G2
- RpJEYTJU0DDqaZ9wCV8eihT3NIFMB8OUZ9dRaIlZvnjCMz+PDlmwmVVmQUvjklso/qI=
-X-Gm-Gg: ASbGncsHfKCLad9FyezvvNh1GaYEsO8MU3j1DP63I1HsAGqobfL8cUc6oEFWslnZObB
- w9pHA2+8D45hskR+CLw3JmuCxJjprzFb1vwpK5g81WajOzJZipFCV+pP1EjSVdMfkrbuAb0Ggfe
- tZ/SrPEgnyWkpGz5ZkAnugf1mTSxGPXVHw10tMvuP2NpA6UDeQMgVUBVrMdHO4/cGujh1WHDTrb
- JrTd4B3RLq3Puo7cYQ0sgCXeRcl04DuZuYi9v58uD8/W1CPxY7t8fh8L3CvyeAbRoP1ApXDAg/y
- h7PpHxB3zKeYL+YELbgObucz0NwErZqo4ZD1SJaf6Nfv95h5DcHIcmqtEM4joFuNzVgq8moga28
- NYrOTzcZ7fWbxL4KiE2yXoV3SlAUrUQsmU8YKseFRjAzHl6bFP0/0YyMo
-X-Google-Smtp-Source: AGHT+IFXebtSqYxSVLnDDYn05aAJdONcPgnv/7UzoCk+RwRddpGrSkfjUoRdBEYrHOV4EZSygyEvDw==
-X-Received: by 2002:a05:6870:1d11:b0:2ff:89c8:44f4 with SMTP id
- 586e51a60fabf-32262a73cd9mr6204695fac.11.1757528044030; 
- Wed, 10 Sep 2025 11:14:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-32ce868ab46sm20742fac.13.2025.09.10.11.14.02
+ bh=aX8tyHicKnz2m4jZUGYtoUHrSv7O0rHpjX9CF+W29r4=;
+ b=ur3qygjxduZmikm6ZViBW4mLRi2G03qjojHYsfwNLGXAAd8lTeqjCqF7sGOub2D6RV
+ 7BzjlqFh8A5RB3AsCHI34BKGo3KgalKT+HRLLbUO+XoYtLp50Yv0ycmTqkvbfWlUlbUC
+ wl3n/bcBa84w69nSVgtNd+iC1e81qpDLBu744=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757528086; x=1758132886;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=aX8tyHicKnz2m4jZUGYtoUHrSv7O0rHpjX9CF+W29r4=;
+ b=IhbgwUjacko/+VNDpd2+me5AhIUBEXB0KOoBUrZNUVF94YJD8s7L7+W7+wiY4T/z74
+ frKjkb7lcuS9tiQ98pDBpHq3f2lgrPonEIp+dvdcq27x3fVd78Z5UNw/AFRUflb+IWY8
+ e7uLKdHGulNiFGfHflBHjgQk+NYv9sT2RgyvoPQkBknA0KVGMMvBNjsytg+x0MK8wQrJ
+ kTgvcIwb4ornowuCDaFfKouRCps2bq2fCaT8nE/pkZZWI0oiEmaO54NHyzjeXv0If6ps
+ 1ZQnjOGYCt7E2k40y0FYE2/VfOiRnZWqfdba2jqcHZJrLenJfnP4w52AwuQ3KE9J4npN
+ TQzQ==
+X-Gm-Message-State: AOJu0Yx5WrPSCglnnoegDGGs8DBvqtoLgaiBCNqeebzxg5uBY8RfjnLv
+ gfDbZz+y4JvJYbh1oU4YQPlxXeQkTkgLvVwf7ueQFKKhqsGJ7tqe03o26bekxBKlIQg=
+X-Gm-Gg: ASbGncuzLKk97+rZKtnOWckMiHWQ99o8FYzR5DFMdVnYz6rC306gswCwu4AQXfzilOd
+ /ydFfamG1SSQyvedKOrOuNn7eKzl2hQQX124n6sV+bPYlTKCPU4a58w+kvjIAn+7tMPsQDnYVMv
+ 9jNPVSZk1d/LSUhb/SSpYAqv2bnLVXwRVsofWIhkI0EDrcifeZUdXLPjlgBjtZzoY6YA7Afa4vD
+ HBB/3x8qJgBc4vYY3edncTYkcxh3fg69Uuy24Ecbo+GHd/AjnY33OZXpX20Lrv2S4IKQbOtGJKB
+ SwC1pF4LRkHw8u/9BWReH1nopzF5fAwcHIxa1lp5VUTs67hoQGZ8sAwGmhpgGb9PCjploUw1L9I
+ lBVcL4MDzNE6aSg95hO+QyX3IbGvZtyngo/cEABZRYc3xTeGh3oEbspxYATBpEodWew==
+X-Google-Smtp-Source: AGHT+IGJAKQCU6eLWpfZZQn+fun2yQM5rbqumOXW2PYKWTcoliau1z1udwCYa37IZTb6SLq/YfjTXw==
+X-Received: by 2002:a05:6830:2695:b0:745:a08d:cbc8 with SMTP id
+ 46e09a7af769-74c7641c6bbmr7750398a34.24.1757528085992; 
+ Wed, 10 Sep 2025 11:14:45 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-75200e6a1casm18100a34.17.2025.09.10.11.14.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Sep 2025 11:14:03 -0700 (PDT)
-Date: Wed, 10 Sep 2025 12:14:00 -0600
+ Wed, 10 Sep 2025 11:14:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Sidharth Seela <sidharthseela@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v1] doc: board: ti: am335x_evm: Add documentation
-Message-ID: <20250910181400.GH124814@bill-the-cat>
-References: <20250903202043.285746-1-sidharthseela@gmail.com>
- <20250908055429.598536-1-sidharthseela@gmail.com>
- <20250908215825.GT124814@bill-the-cat>
- <CAJE-K+C0FHwxi4DneqqasD0D7H73BNk-ZO4GE+ZWSN=a0fdtqQ@mail.gmail.com>
- <CAJE-K+Bhk+jqYpdqLxtTYQA7bCM9i_MNrAnSM+9Pcfu838gb3w@mail.gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Jan Kiszka <jan.kiszka@siemens.com>
+Cc: Masahiro Yamada <masahiroy@kernel.org>
+In-Reply-To: <b18a4f45-77dd-4f78-ba6c-2e017abc98b9@siemens.com>
+References: <b18a4f45-77dd-4f78-ba6c-2e017abc98b9@siemens.com>
+Subject: Re: [PATCH v2] tools: Do not generate logo when cross-building
+Message-Id: <175752808500.1959855.6085893942133582439.b4-ty@konsulko.com>
+Date: Wed, 10 Sep 2025 12:14:45 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TUccDR/94uxsZVlm"
-Content-Disposition: inline
-In-Reply-To: <CAJE-K+Bhk+jqYpdqLxtTYQA7bCM9i_MNrAnSM+9Pcfu838gb3w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,31 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, 23 Aug 2025 17:21:09 +0200, Jan Kiszka wrote:
 
---TUccDR/94uxsZVlm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This cannot work (unless qemu-user is registered in binfmt_misc) as the
+> tools will be for a different architecture.
+> 
+> Fixes "make cross_tools" in case CONFIG_VIDEO_LOGO is enabled.
+> 
+> 
 
-On Wed, Sep 10, 2025 at 10:24:47PM +0530, Sidharth Seela wrote:
+Applied to u-boot/next, thanks!
 
-> Hey Tom, could I get some feedback on how I can get my patch accepted?
-> I am a bit new to this, sorry.
-
-I've assigned it to Heinrich in patchwork and he'll review it soon.
-
---=20
+[1/1] tools: Do not generate logo when cross-building
+      commit: 371a76e845504c9ba7ca216b6edfb4ae4ec14e56
+-- 
 Tom
 
---TUccDR/94uxsZVlm
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMG/5QAKCRAr4qD1Cr/k
-CnQ+AQCNPy9OP5CbvrUUgvc9OP6igU9m3L641RI09GzwV7/+6QD/X+XmxO+ySwUF
-cKe4LSnQqK+b5iUIS2Y/N9hS261E9QI=
-=8J2K
------END PGP SIGNATURE-----
-
---TUccDR/94uxsZVlm--
