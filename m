@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8E1CAC587
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 17:32:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88E36CAC58E
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 17:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 905D2833ED;
-	Thu, 11 Sep 2025 19:32:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16BD8833C0;
+	Thu, 11 Sep 2025 19:34:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="szZ5uJXx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G6jmM7ss";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F9E0833F9; Thu, 11 Sep 2025 19:32:17 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 20669833D1; Thu, 11 Sep 2025 19:34:11 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50A89833BF
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 19:32:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0E6C833BF
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 19:34:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-319c2a87a5aso351373fac.1
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 10:32:14 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-31d6aa3e73fso690103fac.0
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 10:34:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757611933; x=1758216733; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757612048; x=1758216848; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cmZKaEv+gkjFPZ8ejKtiEQrqsWaRkOz4aY/34hK+f2c=;
- b=szZ5uJXxyec/VVBtzxDBAAqxWlVtc9j6GxzylXHg7/fxNdyrvBSB3fRMxl5G1IfKCi
- UA2Jm6vg6m43Bmb+d59yzJ35N+xHHy58xbcC5wFN6nSqGzVg64lDo6uAH15XEGUleziO
- Rx11ubQ+eW8d5ZWyCzyV5Xua4MvZ9t3zuXzug=
+ bh=X1NI+HEtppX9pNh3pZas9h6mrzzkzLGg0p0RunRi3bc=;
+ b=G6jmM7ssebuBT4DnMn9NPyCY0onLdrLXDsGsLwqbZNp3WKPay08f5aNKYtGtZ4pYqD
+ /xkBVal1WG00flrSBPEr5LQ5u2iqnWFQ0HK2jxLR+NgyN/ldlN2lhYKZnozD9nzCuTpO
+ zt9T7ePUC4+D5M/aH1pKJw16amUbsznsTVQiI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757611933; x=1758216733;
+ d=1e100.net; s=20230601; t=1757612048; x=1758216848;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cmZKaEv+gkjFPZ8ejKtiEQrqsWaRkOz4aY/34hK+f2c=;
- b=fDLXMfTC/1kwp96OtRZYDM5FOTQenTaEx6bBWS28bGxzd0FL57TxIX9xHjhTwr6ioN
- +OxIG6o1j8F2Fj13PD+KHXAoxWp7PpNs/3AtTcJkfKdMvH+ofbOV8xOAiCQDWbuKXgxx
- T2j2hpYYgTvPvtF5k0IFg8865wk6DxXnokewwZ+KVHsi8cEN6/GlMHz4+AdZsnrYB88f
- jle1c999Ubm6OOVK4WvfOxMq97g+bDd+hC1kZKbehJHwX0Vr300grk+s5BZOT6uq/vLp
- YAa//Q997LMsZx17Sgkim0QUy72mqHk2LhujcitwuXtDBS1hmBwJVPggdK2cuIBWjgkJ
- l6LA==
-X-Gm-Message-State: AOJu0YzKMMxFkTGhPusyCCeZQwbe4Nvfxh+r2HWRv0PJ5iFG48LHcFeK
- f6eQ7K8fR0aM0T8K4QFJFR5B4vyMhH+mxbk6n+hktlFcQotXVE8NNfeVCC8Z+Dhp4XA=
-X-Gm-Gg: ASbGncsA2SHE+nbW//30MvYcRD7TmNopqzrb30lIrZRdfVevSStJnMz8YMYShrXkrUv
- 6sl1nkvauHYvZz8BbisPTTmgB5tyhbrZt2M6LraafXZNsGsH2BiPN8erxEcYGEYTqh0LQQj7s3P
- liunztuMLqpNCWEP4dMg8P50q/8AN2gUv9j6VOt8sLP37nw2nxr/A4c+C0n++zsCxveSaXwPGwx
- QkOS4WuLPyn/+tdwFxFjjRPyIWEd2QQK+A6p5/QWhQjWYJ2qGzrOdDpLlVusgTAr72JL1I8XWVy
- BKLUSDqvi191wfuz0A1eVPjqVWz7eaZMQva2H1B5DK+ZIoBleTqNjqJndc+/k04lLKyyUV5AV6c
- rdVx52kUgC1RjqWV5mGYsfaDr/lWGsF8HObyTbBGzfh3kRWFWKM6+T7OnPnyB97FeaoU=
-X-Google-Smtp-Source: AGHT+IEUmwa74k7jXP+KKCgqHJKI9ZBhkB7/uxk9YjDBURr+5hLL3KXrzms7z1Roc2EjK7nDDzbDEg==
-X-Received: by 2002:a05:6871:4b09:b0:31d:655c:4ac4 with SMTP id
- 586e51a60fabf-32e55081cb0mr23812fac.19.1757611932708; 
- Thu, 11 Sep 2025 10:32:12 -0700 (PDT)
+ bh=X1NI+HEtppX9pNh3pZas9h6mrzzkzLGg0p0RunRi3bc=;
+ b=qTmWeWWsd8xiY2ha2HE56PSjR4XaKXifPQMvS2OwcjAzK7cQ/vf7TL5I9kW9etAVKR
+ NGZyRCCD60W55H5Ok+n62iMO9WeAgX+U4ChIYQ8blwoTkFlvphOVCibye7vAFUL/ypjS
+ DCRPhsGBzVO/Wzsq0t+PsaTatx4JV0rInNMzQB6yo2VmLma9lOX7KR3bMcCvzpwY8JnY
+ KxkVnxKB4whEuDum/SR0PqjvWwcuoULjFGXibnoND4KhJ66C+Y1l4rCS48B6Zp6PiPQK
+ AjgwORPyzicLwkq+UNee76BfYjQ6XNSvt5x45TAvis2O+Y4EVFk3x2uRz/sRfbfnJIno
+ gkwg==
+X-Gm-Message-State: AOJu0YyeTqfQ4S+M6eX6CK+4P/I4U7JV9mLSWbg3DIhxMRVAzR6kibza
+ AjkLW4bOTkQjfF0xczho9vH2Q0z0++lxMppsq2N9oGrYDDPsbwr0nudc1PGLO3lPPxs=
+X-Gm-Gg: ASbGncs1F+ANTuQkT8FDkIgJPwg5ne6VOOWwCtT+HpNEk1db81XYuVxSVsUOyLUofwV
+ /szEHWD2IaUNnd+5zKObiPZ4hjpUmEwCJYgMAwfQrL1RcpZU4bVTjyALFutSuiRpezOpSHLO2nk
+ 2jLaWk6tBOxwCkUM3Er5l7FVfa8WkovngCFxPQnrJYwqUn54tvcWHVcsQ/LW/PqjY8kc8cwxMGv
+ +OE5xVHn2DAEbXWqjPWTQnYN2ggQB6cZQUfsOiKENcDOhcIW3CLf0hyOnIC6yvLCRiX2iaw1RC3
+ BZNSmfDUdqxUjpzWI6jibR3eUUwBmn3aYIpMl2VcKFot7gK9j2tHy7st8jYOhY3u49aElXB67ul
+ Mh9xRUtPWYPMlgctkpcp8LcY6/pNMyMRXZltxmSKciIjw0Kf+y/CQpy4fkveb+tDzXI8=
+X-Google-Smtp-Source: AGHT+IGmsobMXy1a8A9PeV6zTKPGSxqKZR5mqGWyOQc9MVqmAbs87IBhfgOIHRRKDnq8yc2nBtXqig==
+X-Received: by 2002:a05:6870:f606:b0:31d:7467:e381 with SMTP id
+ 586e51a60fabf-32e4ce950acmr106362fac.17.1757612046890; 
+ Thu, 11 Sep 2025 10:34:06 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-32d357d2f9fsm544625fac.24.2025.09.11.10.32.11
+ 586e51a60fabf-32d35edf450sm549054fac.32.2025.09.11.10.34.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Sep 2025 10:32:11 -0700 (PDT)
-Date: Thu, 11 Sep 2025 11:32:09 -0600
+ Thu, 11 Sep 2025 10:34:06 -0700 (PDT)
+Date: Thu, 11 Sep 2025 11:34:03 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Anshul Dalal <anshuld@ti.com>
 Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
  n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
-Subject: Re: [PATCH RFT v1 16/17] Kconfig: disable raw image boot in secure
+Subject: Re: [PATCH RFT v1 17/17] arm: spl: use fdt addr if arg is unset in
  falcon mode
-Message-ID: <20250911173209.GZ124814@bill-the-cat>
+Message-ID: <20250911173403.GA124814@bill-the-cat>
 References: <20250911131414.3296697-1-anshuld@ti.com>
- <20250911131414.3296697-17-anshuld@ti.com>
+ <20250911131414.3296697-18-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="J7FtZ2q5CKVdV8uk"
+ protocol="application/pgp-signature"; boundary="5UPwEEThE4uuIwnY"
 Content-Disposition: inline
-In-Reply-To: <20250911131414.3296697-17-anshuld@ti.com>
+In-Reply-To: <20250911131414.3296697-18-anshuld@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,78 +99,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---J7FtZ2q5CKVdV8uk
+--5UPwEEThE4uuIwnY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 11, 2025 at 06:44:12PM +0530, Anshul Dalal wrote:
+On Thu, Sep 11, 2025 at 06:44:13PM +0530, Anshul Dalal wrote:
 
-> CMD_BOOTI and CMD_BOOZ enable support for booting raw kernel images in
-> falcon mode. This is insecure since raw images can not be authenticated,
-> therefore disable those configs when SPL_OS_BOOT_SECURE is set.
+> spl_image->arg is passed to the kernel as an argument in the x0
+> register. However in cases when the kernel is loaded from a FIT
+> container along with a DT, the arg remains unset which leads to boot
+> failure.
+>=20
+> Therefore, this patch sets the arg to fdt address if it's null.
 >=20
 > Signed-off-by: Anshul Dalal <anshuld@ti.com>
 > ---
->  boot/Kconfig | 4 ++--
->  cmd/Kconfig  | 3 ++-
->  2 files changed, 4 insertions(+), 3 deletions(-)
+>  arch/arm/lib/spl.c | 2 ++
+>  1 file changed, 2 insertions(+)
 >=20
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 124f6db3e6e..ddb7a82b374 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -422,8 +422,8 @@ config BOOT_DEFAULTS_CMDS
->  	select CMD_DHCP if CMD_NET
->  	select CMD_PING if CMD_NET
->  	select CMD_PXE if CMD_NET
-> -	select CMD_BOOTI if ARM64
-> -	select CMD_BOOTZ if ARM && !ARM64
-> +	select CMD_BOOTI if ARM64 && !SPL_OS_BOOT_SECURE
-> +	select CMD_BOOTZ if ARM && !ARM64 && !SPL_OS_BOOT_SECURE
->  	imply CMD_MII if NET
-> =20
->  config BOOT_DEFAULTS
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 29de857ba7c..c4828ed90a4 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -360,12 +360,13 @@ config BOOTM_ELF
-> =20
->  config CMD_BOOTZ
->  	bool "bootz"
-> +	depends on !SPL_OS_BOOT_SECURE
->  	help
->  	  Boot the Linux zImage
-> =20
->  config CMD_BOOTI
->  	bool "booti"
-> -	depends on ARM64 || RISCV || SANDBOX
-> +	depends on (ARM64 || RISCV || SANDBOX) && !SPL_OS_BOOT_SECURE
->  	default y
->  	help
->  	  Boot an AArch64 Linux Kernel image from memory.
+> diff --git a/arch/arm/lib/spl.c b/arch/arm/lib/spl.c
+> index c43a63f1819..2e7613a6f2e 100644
+> --- a/arch/arm/lib/spl.c
+> +++ b/arch/arm/lib/spl.c
+> @@ -53,6 +53,8 @@ void __weak board_init_f(ulong dummy)
+>  #ifdef CONFIG_ARM64
+>  void __noreturn jump_to_image_linux(struct spl_image_info *spl_image)
+>  {
+> +	if (!spl_image->arg)
+> +		spl_image->arg =3D spl_image_fdt_addr(spl_image);
+>  	debug("Entering kernel arg pointer: 0x%p\n", spl_image->arg);
+>  	cleanup_before_linux();
+>  	armv8_switch_to_el2((u64)spl_image->arg, 0, 0, 0,
 
-You need to think about this in another way, commands aren't present in
-SPL binaries. What's probably the best starting path is to ignore this
-particular problem, U-Boot has tons of security breaking options, and
-then a follow-up would be to figure out how to build (and also for
-binman/etc, package!) only SPL. Since really you don't want to flash a
-full U-Boot itself when falcon mode will panic if fail and not fall back
-to U-Boot.
+This sounds like a standalone bugfix, that also needs to be more fully
+explained to make sure we're consistent about what we're doing. It might
+also be the case (I'm not sure without digging more!) that the caller in
+this case is in the wrong for having not set spl_image->arg already.
 
 --=20
 Tom
 
---J7FtZ2q5CKVdV8uk
+--5UPwEEThE4uuIwnY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMMHmQAKCRAr4qD1Cr/k
-CmK3AP9myRPBShoh/0ZqkbeF7n2fEHDe3wNDUB3zbxO3Fna0kAD9GnaQAmEybmvi
-5awhd6UGzdDcnHuX1mm98RvNkH0Ojwk=
-=Fnjn
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMMICwAKCRAr4qD1Cr/k
+CuuEAP44rxNpof+q2coZs03hXcP83odVW0QB2wbUm9kyyHjKEAD/ZnFy5E7jOIKt
+stR/06IDjaoJrz9zozwwGbBGceqxGQQ=
+=9w5X
 -----END PGP SIGNATURE-----
 
---J7FtZ2q5CKVdV8uk--
+--5UPwEEThE4uuIwnY--
