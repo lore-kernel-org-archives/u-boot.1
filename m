@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D407CAC58E
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 13:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7E9CCAC587
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 13:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A8C8833E9;
+	by phobos.denx.de (Postfix) with ESMTP id CD8E7834E1;
 	Thu, 11 Sep 2025 15:14:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tOOLJrzX";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NmGqlqPT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 033D38334F; Thu, 11 Sep 2025 15:14:35 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id B558683438; Thu, 11 Sep 2025 15:14:36 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87A658334F
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:14:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF697833AD
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:14:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BDERqQ379776;
- Thu, 11 Sep 2025 08:14:27 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BDEU4K808390;
+ Thu, 11 Sep 2025 08:14:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757596467;
- bh=/jBFWfiLaZpNNZGqNlxJeIt9vW9wkWvQXi75nkUTcR8=;
+ s=ti-com-17Q1; t=1757596470;
+ bh=8uQteAWKshrtCd84sSkcPm2bK/0jgxyShCg75muhbh8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=tOOLJrzXp4dzTJUd+vR2em34V5vKp7UvoaU6mNY7v2nl0DpUBMO2WVQzP0uzMi2wo
- GMFkDflQt+xiNS/f5ufUyZtc6eTiSPPUd7ioaoytPWzMZsFrFvek+HW0QWgWH7j8y7
- irk8kLQ1Qv7pv81+a3rCQ6ErJFPUAlZiOMRqWkC8=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BDER2L1078661
+ b=NmGqlqPTAkY2v15Dqa5ruN9QVEWrn5KW11yvKyp2LBza80v0HLRqO1paVyOuXnPVj
+ JN8wRh9Y0+aQAtum3a1O2q8lPaaWuKbhe98wBcJLJ9o9YW8gX4h/0OIQW88VvOaMnf
+ IFNg5HRJj0staEy9qaNsY/V/UVARaxIPwP2IZ84s=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BDETeS1179161
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 11 Sep 2025 08:14:27 -0500
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 11 Sep 2025 08:14:30 -0500
+Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 11
- Sep 2025 08:14:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 08:14:29 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE207.ent.ti.com
+ (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 11 Sep 2025 08:14:27 -0500
+ Transport; Thu, 11 Sep 2025 08:14:29 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BDEQMe1873050;
- Thu, 11 Sep 2025 08:14:26 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BDESIq2168851;
+ Thu, 11 Sep 2025 08:14:28 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
  <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH RFT v1 05/17] spl: ext: load kernel image before args in falcon
-Date: Thu, 11 Sep 2025 18:44:01 +0530
-Message-ID: <20250911131414.3296697-6-anshuld@ti.com>
+Subject: [PATCH RFT v1 06/17] spl: mmc: load kernel image before args in falcon
+Date: Thu, 11 Sep 2025 18:44:02 +0530
+Message-ID: <20250911131414.3296697-7-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250911131414.3296697-1-anshuld@ti.com>
 References: <20250911131414.3296697-1-anshuld@ti.com>
@@ -85,91 +85,47 @@ the load order for other boot media.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_ext.c | 51 +++++++++++++++++++++++++-------------------
- 1 file changed, 29 insertions(+), 22 deletions(-)
+ common/spl/spl_mmc.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
-index 7e0274a3058..279e254139f 100644
---- a/common/spl/spl_ext.c
-+++ b/common/spl/spl_ext.c
-@@ -96,39 +96,47 @@ int spl_load_image_ext_os(struct spl_image_info *spl_image,
- #endif
- 		return -1;
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index d06f9f0dee6..cd56cf71055 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -152,6 +152,16 @@ static int mmc_load_image_raw_os(struct spl_image_info *spl_image,
+ {
+ 	int ret;
+ 
++	ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
++		CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR);
++	if (ret)
++		return ret;
++
++	if (spl_image->os != IH_OS_LINUX && spl_image->os != IH_OS_TEE) {
++		puts("Expected image is not found. Trying to start U-Boot\n");
++		return -ENOENT;
++	}
++
+ #if defined(CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR)
+ 	unsigned long count;
+ 
+@@ -165,16 +175,6 @@ static int mmc_load_image_raw_os(struct spl_image_info *spl_image,
  	}
--#if defined(CONFIG_SPL_ENV_SUPPORT)
--	file = env_get("falcon_args_file");
-+
-+	if (!CONFIG_IS_ENABLED(ENV_SUPPORT))
-+		goto defaults;
-+
-+	file = env_get("falcon_image_file");
- 	if (file) {
--		err = ext4fs_open(file, &filelen);
--		if (err < 0) {
--			puts("spl: ext4fs_open failed\n");
-+		err = spl_load_image_ext(spl_image, bootdev, block_dev,
-+					 partition, file);
-+		if (err != 0) {
-+			puts("spl: falling back to default\n");
- 			goto defaults;
- 		}
--		err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
--		if (err < 0) {
--			printf("spl: error reading image %s, err - %d, falling back to default\n",
--			       file, err);
--			goto defaults;
--		}
--		file = env_get("falcon_image_file");
-+		file = env_get("falcon_args_file");
- 		if (file) {
--			err = spl_load_image_ext(spl_image, bootdev, block_dev,
--						 partition, file);
--			if (err != 0) {
--				puts("spl: falling back to default\n");
-+			err = ext4fs_open(file, &filelen);
-+			if (err < 0) {
-+				puts("spl: ext4fs_open failed\n");
-+				goto defaults;
-+			}
-+			err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
-+					  0, filelen, &actlen);
-+			if (err < 0) {
-+				printf("spl: error reading args %s, err - %d, falling back to default\n",
-+				       file, err);
- 				goto defaults;
- 			}
+ #endif	/* CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR */
+ 
+-	ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
+-		CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR);
+-	if (ret)
+-		return ret;
 -
- 			return 0;
- 		} else {
--			puts("spl: falcon_image_file not set in environment, falling back to default\n");
-+			puts("spl: falcon_args_file not set in environment, falling back to default\n");
- 		}
- 	} else {
--		puts("spl: falcon_args_file not set in environment, falling back to default\n");
-+		puts("spl: falcon_image_file not set in environment, falling back to default\n");
- 	}
- 
- defaults:
--#endif
-+
-+	err = spl_load_image_ext(spl_image, bootdev, block_dev, partition,
-+				 CONFIG_SPL_FS_LOAD_KERNEL_NAME);
-+
-+	if (err)
-+		return err;
- 
- 	err = ext4fs_open(CONFIG_SPL_FS_LOAD_ARGS_NAME, &filelen);
- 	if (err < 0)
-@@ -143,8 +151,7 @@ defaults:
- 		return -1;
- 	}
- 
--	return spl_load_image_ext(spl_image, bootdev, block_dev, partition,
--			CONFIG_SPL_FS_LOAD_KERNEL_NAME);
-+	return 0;
+-	if (spl_image->os != IH_OS_LINUX && spl_image->os != IH_OS_TEE) {
+-		puts("Expected image is not found. Trying to start U-Boot\n");
+-		return -ENOENT;
+-	}
+-
+ 	return 0;
  }
  #else
- int spl_load_image_ext_os(struct spl_image_info *spl_image,
 -- 
 2.51.0
 
