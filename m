@@ -4,84 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A80CA1016
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 03:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14ACDCA1016
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 04:15:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D0868319C;
-	Thu, 11 Sep 2025 05:29:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4AC4F831C2;
+	Thu, 11 Sep 2025 06:15:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ieKcDQCu";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="e1BU4s4X";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ppps3YOf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2BA8E831C2; Thu, 11 Sep 2025 05:29:00 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D5B58003E
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 05:28:57 +0200 (CEST)
+ id 76D5783236; Thu, 11 Sep 2025 06:15:52 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D54578319C
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 06:15:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cMjhT0swKz9tTK;
- Thu, 11 Sep 2025 05:28:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757561337;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cKRqRx1Qjo7f98HhSagw0DYWTx14ORBxoHHgU056n6U=;
- b=ieKcDQCuFiW/7AvUK6G1f1x9h1IlQ/T6LnxEEnqACMyH+BuKKgcaatcqL2P4Jza/YwLGt5
- E5Kkh9UrEYEEcSsCJvNkSYBhNuKm9a+SLm0vy/hYGAmJHoHFA4OZ0AAohAtjgVZZTFQvmB
- NKWzVFoBoNyqPLIUVt5NTeZrZBr+VvxhIV64jY8xSHo5/nx/3K7E3kchWiAPqruSpivAxA
- x7z8L3VxCBXW6yw2dAvaFE+a3FT14vnEXTAQMt06wbPflIhvQ/s1SAe1Cj8NVPN5tzhJKF
- 7eHFUl2zQxPHembXdXsYR8pGUcNSLK1AJehcpVDx4YYuew7oS6jFlEpFtkFArA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=e1BU4s4X;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <1684bd0d-b831-43e6-8713-95a2675957db@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1757561335;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cKRqRx1Qjo7f98HhSagw0DYWTx14ORBxoHHgU056n6U=;
- b=e1BU4s4X4Vo6oO40+0KBUkxupaV732LGJaRS3PDjB8HoSz+07LocWKvXnyDUwEz1W/uR5t
- rzBSyyf5TIhTb3qOz+L06DmogBFc6WjKHkS8JpmOokWOPxGktWSFV+fBGR1yYfXk1VaI3F
- +abtkdTmenluu4xr6297in1F91yTRuaZYwIjvDmaz/Yevz5vFFRJ/xd+b2ZUvBtXWQgxoL
- IOTvla7CTZvn+ZiC4nrrA+ickZQL0DSJl3ghiHNTdqi+x1LQr1ZEGporJ3TroNM42DzkSf
- fFwtU2HrGah4DuTWEEGHrYduxOn/pzJHs5HgTXKCAT0u0fG2f+vZKpAGCijEHw==
-Date: Thu, 11 Sep 2025 05:28:52 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58B4FmBu722247;
+ Wed, 10 Sep 2025 23:15:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757564148;
+ bh=JRA2vs8OjIaQZng5cgWZLcryhgdjx5typ5E6yj8IP4A=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Ppps3YOfbGDxr3e60knJHCOTkP9gd+1MprGplpDseCmAEt3mW/7Q9ur73upACH0cW
+ hWqY/uFCTMvVxxZvt92zW0kQeHGcrL4tojdPShKda37tcNuVjgYTHcyMHJco2F+wHX
+ cOYHyRt0ML4ZIuc3DZx13V1fkZMbaHxJ5ghC3PRo=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58B4FmLd1663996
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 10 Sep 2025 23:15:48 -0500
+Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 10
+ Sep 2025 23:15:47 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 10 Sep 2025 23:15:47 -0500
+Received: from [172.24.20.139] (lt5cd2489kgj.dhcp.ti.com [172.24.20.139])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58B4FhBd1231736;
+ Wed, 10 Sep 2025 23:15:44 -0500
+Message-ID: <69f903e4-b36c-4572-b05d-d6f6b0a982c7@ti.com>
+Date: Thu, 11 Sep 2025 09:45:43 +0530
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] env: spi: Fix gd->env_valid for the first write
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
- git@xilinx.com, Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>
-References: <7a6ffee423f45507af680c63a86cc50fb9e3a5df.1757489188.git.michal.simek@amd.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] configs: j722s_evm_a53_defconfig: Disable eMMC HS400
+To: Judith Mendez <jm@ti.com>, Tom Rini <trini@konsulko.com>
+CC: Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ "Vaishnav Achath" <vaishnav.a@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, "Moteen Shah" <m-shah@ti.com>,
+ Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>
+References: <20250910214514.1848847-1-jm@ti.com>
+ <20250910214514.1848847-5-jm@ti.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <7a6ffee423f45507af680c63a86cc50fb9e3a5df.1757489188.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20250910214514.1848847-5-jm@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 62b01b5c48e59bb5c27
-X-MBO-RS-META: xdq5fqemsebroe471hgugs6ek893q84m
-X-Rspamd-Queue-Id: 4cMjhT0swKz9tTK
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,64 +84,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/10/25 9:26 AM, Michal Simek wrote:
-> In case of ENV_INVALID (uninitialized variables) the first env location
-> should be used for storing variables.
-> That's why change the logic how env_valid is setup to be aligned with
-> offset calculation.
-> This will also fix the print about Valid environment is showing proper
-> location where variables are saved for the first time.
-> And also fixes behavior where the first two writes were going to the
-> first location instead of the first to the first location and second to
-> second location.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+
+On 9/11/2025 3:15 AM, Judith Mendez wrote:
+> This patch addresses silicon errata i2478 [0] "MMCSD0: HS400 Mode not
+> supported". Where, eMMC HS400 mode is not supported due to bus timing
+> limitations. As per workaround, use HS200 mode instead.
+>
+> [0] https://www.ti.com/lit/pdf/sprz575
+> Signed-off-by: Judith Mendez <jm@ti.com>
 > ---
-> 
-> Changes in v2:
-> - Simplify commit message
-> 
-> Origin commit message with more technical details.
-> 
-> When both location for variables are not valid (or empty) gd->env_valid is
-> 0 (ENV_INVALID) which is setup by
-> env_sf_load()/env_import_redund()/env_check_redund() calls.
-> 
-> When saveenv is called in case of SPI env_sf_save() is called which
-> contains logic which describes new/old variable locations.
-> 
-> if (gd->env_valid == ENV_VALID) {
->          env_new_offset = CONFIG_ENV_OFFSET_REDUND;
->          env_offset = CONFIG_ENV_OFFSET;
-> } else {
->          env_new_offset = CONFIG_ENV_OFFSET;
->          env_offset = CONFIG_ENV_OFFSET_REDUND;
-> }
-> 
-> In case of ENV_INVALID option the first location is used (else part)
-> and variables are saved with ENV_REDUND_ACTIVE flag.
-> The second location flag is rewritten to ENV_REDUND_OBSOLETE.
-> 
-> And
-> gd->env_valid = gd->env_valid == ENV_REDUND ? ENV_VALID : ENV_REDUND;
-> is executed. env_valid is ENV_INVALID that's why ENV_REDUND is setup
-> but that's not correct because the first location has been written and not
-> the second one.
-> That is confirmed by
-> printf("Valid environment: %d\n", (int)gd->env_valid);
-> which is showing number 2 (ENV_REDUND).
-> 
-> That's why change the logic how env_valid is setup to be aligned with
-> offset calculation which also cover the case where initial state is
-> ENV_INVALID.
-> Then print about Valid environment is showing proper location where
-> variables are saved for the first time.
-> But also it is fixing behavior where the first two writes are going to the
-> first location instead of the first to the first location and second to
-> second location. Alternation is happening after it.
-> 
-> v1: https://lore.kernel.org/r/03aa59f72f47fe0ecafd1e1ca52cbb8a5a8f0446.1755613540.git.michal.simek@amd.com
-Sorry for not being clear, the original commit message structure and 
-technical details were fine, it only needed slight rephrasing, in the 
-original form it was very hard to understand. Can you please reinstate 
-the original commit message and only clean it up slightly ?
+>   configs/j722s_evm_a53_defconfig | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+
+I think you should disable HS400 for am62px_evm_a53_defconfig as well
+
+> diff --git a/configs/j722s_evm_a53_defconfig b/configs/j722s_evm_a53_defconfig
+> index 83ac99c922a..a7ab78a367a 100644
+> --- a/configs/j722s_evm_a53_defconfig
+> +++ b/configs/j722s_evm_a53_defconfig
+> @@ -101,8 +101,8 @@ CONFIG_FS_LOADER=y
+>   CONFIG_SUPPORT_EMMC_BOOT=y
+>   CONFIG_MMC_IO_VOLTAGE=y
+>   CONFIG_SPL_MMC_IO_VOLTAGE=y
+> -CONFIG_MMC_HS400_SUPPORT=y
+> -CONFIG_SPL_MMC_HS400_SUPPORT=y
+> +CONFIG_MMC_HS200_SUPPORT=y
+> +CONFIG_SPL_MMC_HS200_SUPPORT=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_ADMA=y
+>   CONFIG_SPL_MMC_SDHCI_ADMA=y
