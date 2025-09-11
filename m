@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6182CCAC58E
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 13:17:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E127CAC58E
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 13:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F319835B3;
-	Thu, 11 Sep 2025 15:14:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 566AD833F1;
+	Thu, 11 Sep 2025 15:14:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kcp5QK8W";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hxdep8Yv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 882B5835FD; Thu, 11 Sep 2025 15:14:54 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 2D988833C0; Thu, 11 Sep 2025 15:14:56 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81D1F833F1
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:14:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36E84835D8
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BDEoJi750392;
- Thu, 11 Sep 2025 08:14:50 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BDEqsq297121;
+ Thu, 11 Sep 2025 08:14:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757596490;
- bh=yibkMHCmm4VX+E9HoIMingxprimPmlRmMCVOW/bQvSM=;
+ s=ti-com-17Q1; t=1757596492;
+ bh=/AST6HSymsA4mtX2qT7CW7w4DRgTObiD2AVUNWIL6Fo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=kcp5QK8W5dHTLQ0bx9xF6DnT+DBle+pXdIEgtsUtvX/8XqnGQDpCqJvm8a19UFJCN
- iJce8gcW7ETgiTA8vqZ5UNeBhnn4e3EQWV2e5Cln7oa5mq3EQHHfKUCtgTkILZo3wa
- plhqKQiUZgE8kqnegjHylFiH2FOPl7o5Wzj0pQgo=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BDEo4b1179269
+ b=hxdep8Yvnx850Z/LvuzPt/RmHWs8jgyXNy6yfWc0gL8mXl8IijooyRgSbZQLW7UfT
+ qLQuSyyZF09aoMGi5zg1glsVO8VlpG5QWIfePp6c7K7uHjtfFHmAw4rZhKO/AeJ915
+ Vq3+HanxEdiqbofgEzhqhhoSig3kzJcOi19RwY50=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BDEqmt515851
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 11 Sep 2025 08:14:50 -0500
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 11 Sep 2025 08:14:52 -0500
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 11
- Sep 2025 08:14:49 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 08:14:51 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 11 Sep 2025 08:14:49 -0500
+ Transport; Thu, 11 Sep 2025 08:14:51 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BDEm4t2169080;
- Thu, 11 Sep 2025 08:14:49 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BDEopl2169102;
+ Thu, 11 Sep 2025 08:14:51 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
  <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH RFT v1 16/17] Kconfig: disable raw image boot in secure falcon
+Subject: [PATCH RFT v1 17/17] arm: spl: use fdt addr if arg is unset in falcon
  mode
-Date: Thu, 11 Sep 2025 18:44:12 +0530
-Message-ID: <20250911131414.3296697-17-anshuld@ti.com>
+Date: Thu, 11 Sep 2025 18:44:13 +0530
+Message-ID: <20250911131414.3296697-18-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250911131414.3296697-1-anshuld@ti.com>
 References: <20250911131414.3296697-1-anshuld@ti.com>
@@ -81,50 +81,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CMD_BOOTI and CMD_BOOZ enable support for booting raw kernel images in
-falcon mode. This is insecure since raw images can not be authenticated,
-therefore disable those configs when SPL_OS_BOOT_SECURE is set.
+spl_image->arg is passed to the kernel as an argument in the x0
+register. However in cases when the kernel is loaded from a FIT
+container along with a DT, the arg remains unset which leads to boot
+failure.
+
+Therefore, this patch sets the arg to fdt address if it's null.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- boot/Kconfig | 4 ++--
- cmd/Kconfig  | 3 ++-
- 2 files changed, 4 insertions(+), 3 deletions(-)
+ arch/arm/lib/spl.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 124f6db3e6e..ddb7a82b374 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -422,8 +422,8 @@ config BOOT_DEFAULTS_CMDS
- 	select CMD_DHCP if CMD_NET
- 	select CMD_PING if CMD_NET
- 	select CMD_PXE if CMD_NET
--	select CMD_BOOTI if ARM64
--	select CMD_BOOTZ if ARM && !ARM64
-+	select CMD_BOOTI if ARM64 && !SPL_OS_BOOT_SECURE
-+	select CMD_BOOTZ if ARM && !ARM64 && !SPL_OS_BOOT_SECURE
- 	imply CMD_MII if NET
- 
- config BOOT_DEFAULTS
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 29de857ba7c..c4828ed90a4 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -360,12 +360,13 @@ config BOOTM_ELF
- 
- config CMD_BOOTZ
- 	bool "bootz"
-+	depends on !SPL_OS_BOOT_SECURE
- 	help
- 	  Boot the Linux zImage
- 
- config CMD_BOOTI
- 	bool "booti"
--	depends on ARM64 || RISCV || SANDBOX
-+	depends on (ARM64 || RISCV || SANDBOX) && !SPL_OS_BOOT_SECURE
- 	default y
- 	help
- 	  Boot an AArch64 Linux Kernel image from memory.
+diff --git a/arch/arm/lib/spl.c b/arch/arm/lib/spl.c
+index c43a63f1819..2e7613a6f2e 100644
+--- a/arch/arm/lib/spl.c
++++ b/arch/arm/lib/spl.c
+@@ -53,6 +53,8 @@ void __weak board_init_f(ulong dummy)
+ #ifdef CONFIG_ARM64
+ void __noreturn jump_to_image_linux(struct spl_image_info *spl_image)
+ {
++	if (!spl_image->arg)
++		spl_image->arg = spl_image_fdt_addr(spl_image);
+ 	debug("Entering kernel arg pointer: 0x%p\n", spl_image->arg);
+ 	cleanup_before_linux();
+ 	armv8_switch_to_el2((u64)spl_image->arg, 0, 0, 0,
 -- 
 2.51.0
 
