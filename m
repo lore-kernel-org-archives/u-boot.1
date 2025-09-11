@@ -4,89 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E265DCAC58E
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 16:11:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E83CAC587
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 16:43:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B718C833F9;
-	Thu, 11 Sep 2025 18:10:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9012D833BF;
+	Thu, 11 Sep 2025 18:43:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F0pi9hzI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hSsIXK5H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 459DB833E1; Thu, 11 Sep 2025 15:50:31 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 544A7833C6
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:50:29 +0200 (CEST)
+ id 9DECB833BF; Thu, 11 Sep 2025 18:43:31 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A71F283390
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 18:43:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ranquet.guillaume@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-45b9853e630so7043825e9.0
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 06:50:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757598629; x=1758203429; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dDBA3p3WQtoxNWvmRcEt7pGIHBqocIGbYVGfy40z5+I=;
- b=F0pi9hzIG0AqBlAY1vKIuuVUSatKK3QfB3O6o3UEzKTBZTt0wrxzlVw+JrRb+km/7p
- bYktmrOQp0FvF9e39ZJW2u/5u7eGi4ZrbZYuPwkxg7JmOGlFyXz/qESnOpLava55ulNs
- grgL8uH110Cj+UzWKd6sbM5fZDCrlEmaQSv5/0J5xeaNuOa++J1QHKlamSkIgrYMLgV3
- f4MX17anwKQghG/zWIlhMD8Zb/900RXL4dpY/mkK5qhERo9/2w7H8QH7rRudeayY3Low
- JE7K7mXCElKM4iPKE4WZxhJGfszpL6tAKlaEc0gZC3bOdZSZqZE3k7GLpBkqA76P4S7N
- hvSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757598629; x=1758203429;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dDBA3p3WQtoxNWvmRcEt7pGIHBqocIGbYVGfy40z5+I=;
- b=PLqnSYFWbyWbv2rbxMopqkFKfZoCVAqLo1VBC92o10I3mOAID59RIFOqO18NelOJj6
- sadioExk1mjo0Wsjj0+LF5Jxug5MkzQBrjEwE4BEGGlYy4Dj/qfB6efgM24YvDpwYsBQ
- 0NuaAJsV65W+oeiUvoTOzZvR5yqBSCy/nND84mE95iNGaiT1Vt18WTwsgdhSAvOHPgfm
- mCGPRnuhLqJ7jjCPtr6nOPC6Q3nBwb5ToSK+UHD1mA1mP61dLbRLcwnjjEeofslyqBQA
- 3U+bAVFD/lA1e6oCepUyKKCwBMC8A19U6UHDizMobHUbkLImU0mTH7iAcPF3ibsk758X
- RHbQ==
-X-Gm-Message-State: AOJu0YyuuemKIBns9hQ+CsxZSvBq4XBxSdaobkDTNAVKwKnzl92BcM+r
- HvOAZk+eKs+L5wI8gMzGqCJ9BrFl6UNRNQ21J4TqqUeU9cFrJBISCwwj
-X-Gm-Gg: ASbGncupZ5qQjD4n7TjWF0A+BbndcxhTGoboA1CCrj/BXq5JcyGcqWeE93netgxc6v1
- ccz2v/j/rFCxx/8LeD0iCi4pI746/ImJPabpg46dySCtCapYrsaag/khlA3n63i3vdXmTl6V8Uc
- THDNw4YE/KxOcN2m2sKMoErqXh5ld+fUjYjLOCc3TodK3NALON5l38d8z+OuvwlOyCrWBP2vuxi
- axEWVCjp6ZA3J6TYK0zmgaw3YJJ9ipYDP9m7IjqDVRS3t36tUkExTGQJ4trd4CP9RE/O7KFmmAE
- ip9dEf03Yv+clKbuwYaEHnyhStMXm2eVto8+XxVMOpGpQkNkGkgKL1ZbPHtEHZs+2wYxG2neHMU
- VT7zvyvwXKtG3tXZe2FK3zdxDk7ZKkmVB//Zvx+sqLkQsBW8VmNreACeW2WaP0UtbsVHNYJ5mNs
- As3nKERbkHWx7E8sxPaFYm
-X-Google-Smtp-Source: AGHT+IGA+Y2sIKd1IIhczzyk4FPPNZ0yxAKIjR2JL+hTwArljBsCCjCcdPU95ne1MMaurFWgHnLzlg==
-X-Received: by 2002:a05:600c:458d:b0:45d:d50e:20be with SMTP id
- 5b1f17b1804b1-45ddded8157mr170016215e9.26.1757598628446; 
- Thu, 11 Sep 2025 06:50:28 -0700 (PDT)
-Received: from [127.0.0.1] (lfbn-tou-1-1277-64.w90-76.abo.wanadoo.fr.
- [90.76.96.64]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3e7607cd4cdsm2540750f8f.37.2025.09.11.06.50.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Sep 2025 06:50:27 -0700 (PDT)
-From: Guillaume Ranquet <ranquet.guillaume@gmail.com>
-Date: Thu, 11 Sep 2025 15:50:26 +0200
-Subject: [PATCH] android: boot: fix wrong end of header in v3/v4 parsing
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BGhQs6335064;
+ Thu, 11 Sep 2025 11:43:26 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757609006;
+ bh=Yhz2Sx1sbgYNW3c6fTk6JCcIGPKr0z1vRuC3J0G5jpE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=hSsIXK5HKlzgstkkq+e1PrsxeJnllrWKQzfXB0oUjvfsO0yEKykd1MHGOgQwu0DTX
+ D4jBE0ZUHMWv0c2eYl/fllbIRgPFCKdSmChzLDHVpsYh+ZizIo7H0AzasiBUy/McMc
+ E5VM0UVLRAjGEd6+s9EB7PbsdaFq/nDgdAGmlKkc=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BGhQQ31189423
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 11 Sep 2025 11:43:26 -0500
+Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 11
+ Sep 2025 11:43:25 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
+ (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 11 Sep 2025 11:43:25 -0500
+Received: from [128.247.81.0] (ula0226330.dhcp.ti.com [128.247.81.0] (may be
+ forged))
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BGhPue2426162;
+ Thu, 11 Sep 2025 11:43:25 -0500
+Message-ID: <1e9902a0-3d0b-4266-b18f-0b0ad6ffbe13@ti.com>
+Date: Thu, 11 Sep 2025 11:43:25 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFT v1 03/17] spl: Kconfig: allow K3 devices to use falcon
+ mode
+To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>
+References: <20250911131414.3296697-1-anshuld@ti.com>
+ <20250911131414.3296697-4-anshuld@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250911131414.3296697-4-anshuld@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250911-android_header_fix-v1-1-af036221d3f0@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAKHTwmgC/x2MWwqAIBAArxL7neCDIrtKRGhuuT8aK0Qg3T3pc
- wZmKhRkwgJzV4HxpkI5NVB9B3t06URBoTFoqQdplRIuBc4UtoguIG8HPWKyXk5m90biCC28GJv
- +p8v6vh+KJs7IZAAAAA==
-X-Change-ID: 20250911-android_header_fix-89b083cb30e6
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Safae Ouajih <souajih@baylibre.com>
-Cc: u-boot@lists.denx.de, Guillaume Ranquet <ranquet.guillaume@gmail.com>
-X-Mailer: b4 0.14.2
-X-Mailman-Approved-At: Thu, 11 Sep 2025 18:10:40 +0200
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,61 +83,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The android boot header is page aligned but the current code made the
-assumption that the header was always smaller than the current header
-format.
+On 9/11/25 8:13 AM, Anshul Dalal wrote:
+> Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b4437bc
+> ("ti_armv7_common: Disable Falcon Mode on HS devices") for older 32-bit
+> HS devices and can be enabled on K3 devices.
+> 
 
-When the page_size is defined as 2048, as this is the case with the
-cuttlefish target, the current code sets the end of the header in the
-middle of it as the v3 and v4 headers are respectively 2112 and 2128
-bytes long.
+The reason we disabled Falcon Mode for these devices is because it
+could not be done securely, this is exactly what your series here
+is intended to fix. If we have secure falcon boot, then we should
+enable it for 32-bit devices also. Enable this for all TI devices
+and you can drop the previous patch.
 
-Fix that by aligning to page_size
+Andrew
 
-Fixes: 1115027d2f75 ("android: boot: update android_image_get_data to support v3, v4")
-Signed-off-by: Guillaume Ranquet <ranquet.guillaume@gmail.com>
----
- boot/image-android.c    | 7 ++++++-
- include/android_image.h | 2 ++
- 2 files changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/boot/image-android.c b/boot/image-android.c
-index 1cd2060bb3fdc85ff5f1dd81111ddc7663bf3b57..e46dee0d9b36a9a81dc2dc2999bf20be6a36846d 100644
---- a/boot/image-android.c
-+++ b/boot/image-android.c
-@@ -107,7 +107,12 @@ static void android_vendor_boot_image_v3_v4_parse_hdr(const struct andr_vnd_boot
- 	data->dtb_load_addr = hdr->dtb_addr;
- 	data->bootconfig_size = hdr->bootconfig_size;
- 	end = (ulong)hdr;
--	end += hdr->page_size;
-+
-+	if (hdr->header_version > 3)
-+		end += ALIGN(ANDR_VENDOR_BOOT_V4_SIZE, hdr->page_size);
-+	else
-+		end += ALIGN(ANDR_VENDOR_BOOT_V3_SIZE, hdr->page_size);
-+
- 	if (hdr->vendor_ramdisk_size) {
- 		data->vendor_ramdisk_ptr = end;
- 		data->vendor_ramdisk_size = hdr->vendor_ramdisk_size;
-diff --git a/include/android_image.h b/include/android_image.h
-index 96820709b42830c7ce4cb753687da373936253a7..a2d80499ba313589484dea17185703ac3866aa4d 100644
---- a/include/android_image.h
-+++ b/include/android_image.h
-@@ -21,6 +21,8 @@
- #define ANDR_BOOT_ARGS_SIZE 512
- #define ANDR_BOOT_EXTRA_ARGS_SIZE 1024
- #define VENDOR_BOOT_MAGIC "VNDRBOOT"
-+#define ANDR_VENDOR_BOOT_V3_SIZE 2112 /* sz(andr_vnd_boot_img_hdr) - sz(vendor_ramdisk_table*) */
-+#define ANDR_VENDOR_BOOT_V4_SIZE 2128 /* sz(andr_vnd_boot_img_hdr) */
- #define ANDR_VENDOR_BOOT_MAGIC_SIZE 8
- #define ANDR_VENDOR_BOOT_ARGS_SIZE 2048
- #define ANDR_VENDOR_BOOT_NAME_SIZE 16
-
----
-base-commit: c85b8071e7d3fd333f8a2fdd28083cb5ec3a0645
-change-id: 20250911-android_header_fix-89b083cb30e6
-
-Best regards,
--- 
-Guillaume Ranquet <ranquet.guillaume@gmail.com>
+> For secure boot, the kernel with x509 headers can be packaged in a fit
+> container (fitImage) signed with TIFS keys for authentication.
+> 
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>   common/spl/Kconfig | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 7e87e50f693..4f817fd31c5 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -1201,7 +1201,8 @@ config SPL_ONENAND_SUPPORT
+>   
+>   config SPL_OS_BOOT
+>   	bool "Activate Falcon Mode"
+> -	depends on !TI_SECURE_DEVICE
+> +	depends on !TI_SECURE_DEVICE_K2_OMAP2PLUS
+> +	select SPL_OS_BOOT_SECURE if TI_SECURE_DEVICE_K3
+>   	help
+>   	  Enable booting directly to an OS from SPL.
+>   	  for more info read doc/README.falcon
 
