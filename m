@@ -4,116 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C9ACA1016
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 07:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB8CBCA1016
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 07:01:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD6918338D;
-	Thu, 11 Sep 2025 09:00:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 127FA8338C;
+	Thu, 11 Sep 2025 09:00:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Szxj29mT";
-	dkim=pass (1024-bit key; unprotected) header.d=stmicroelectronics.onmicrosoft.com header.i=@stmicroelectronics.onmicrosoft.com header.b="KOXyA3Qr";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tWKMnXkX";
+	dkim=pass (1024-bit key; unprotected) header.d=stmicroelectronics.onmicrosoft.com header.i=@stmicroelectronics.onmicrosoft.com header.b="EwSq7lMj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D6358334F; Thu, 11 Sep 2025 09:00:34 +0200 (CEST)
+ id 4A30F833BF; Thu, 11 Sep 2025 09:00:39 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B83AB832FE
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 09:00:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B43F8334F
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 09:00:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=134998b3b3=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58B6lLtY001119;
- Thu, 11 Sep 2025 08:59:55 +0200
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58B6sqdF012270;
+ Thu, 11 Sep 2025 08:59:59 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:message-id
- :mime-version:subject:to; s=selector1; bh=rekIvo6XqfsGHIu5S24Zzv
- QQZRJUzBMHlfSPb95jTkU=; b=Szxj29mTQLiGEyaX4ba2e7m1/DOj7RN9FFGdKw
- lUvNkTlIA2ClSgL6gMGu9KTDYb/Bf8zBWgI5ZPu9FJAV4UJIUnD2lF7dhRnybYqf
- LUmWMsIkJgROyAkbzZvQ+gOp+Plr1+cvDZPkLzpWkjcSPSygipsOAn9ITajRAw6I
- PzC739KhjGIpXj6Y11dVJp9GhFwzivFAgwSqqsaP1VLsqw/CJQ0UQc8L/+h945o0
- bUpNQK4cigz09k/SEBMUcfwuTPYcg+Kze0v/RMeZZ5B6cU4fwBwOnmJb+Piggr0G
- kLteZbhPG89i+fX2fqh46XAFVJOI98CN8MeCoOrM1vz6oHAQ==
-Received: from am0pr02cu008.outbound.protection.outlook.com
- (mail-westeuropeazon11013001.outbound.protection.outlook.com [52.101.72.1])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 492fr9hxvu-1
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ qrT2IxsP/hUk4sMGASSsuTUZPziH0janUlCjnkrUYso=; b=tWKMnXkXwgtzgjse
+ qqngqddQFg11SLyN8Z94GTN6NUTHQNKetg6OXNwuiO4Z5TjTQodPfuAbyHvw+qiH
+ iQ+xPB1aiRCnAH0M0BDHuRa7KVfBH1Z3eORn/m7k2BFZnYohEIq2vm1J8Es2CMKS
+ f8ecd4NXj3w9+wc+YM4ZDFYzHf3IbpuYRMp72osYvpS2c4XRBPUK3RDvrpIFkuiM
+ HV4U1vTgazqJ07W7qrrYqU+giDmKlH4X5hAHps4H7oywDnOPdB21x5t9PRyj2k5m
+ zaSyC1BiAtze3IbMJyWcuDAtmWFd/C7okDmMzYSmXTq1CYT/eNu+kTeiroKQMWkg
+ V5sLvw==
+Received: from gvxpr05cu001.outbound.protection.outlook.com
+ (mail-swedencentralazon11013017.outbound.protection.outlook.com
+ [52.101.83.17])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 492fr9hxw1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 11 Sep 2025 08:59:54 +0200 (MEST)
+ Thu, 11 Sep 2025 08:59:59 +0200 (MEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=uMufsA0slaSHjY2cobosnsGpfaiIPbydnAfEl/kujVHNFc+SWJ9O6pFDhFdUwIiM+jdZHcJbXQK4WQe/KCZm9UT6HDDaAG+lvu0MK1xGCLiF1afXHMHJTEQwqXKqlYROGzV+laTqS74fkTsAyD9Lc0taGhOfLH1B/zTylIHboidveKopU8+DVsCRW4+lkDwSQe7DWajFX6QN5Vw2v4adHaZdEcGJR+6JN2dGZE0V7dQHAV2pL/7PVBiPxRQ/3dJ6NDvRMs2k0H6SYYShYn5EIcoIy6xhSh7Vvbefn5U0PTO0/C35iYX//02RWP8UQ6z6H8BuxtfCKZCsD6ZfO1rgTQ==
+ b=ybF7PTwWSDemtgNSH5svQoFihhlIQkUn8VG9CeO8iCg81DhLJdPwZovZU62OdQTiEDfEbLtzf0akxLan5FpfacjxhVXEul7ykm2wFkD0lc/9gp24HoUKm3VYOWx91u6fiwuLTMIHGqkgPQAZCRnkxLifRv1URHC3rrLpVpLuHq1hEmAfsjL9PlgEYgfuN8Igb8vCHAzw1eTNavTGWUAlEMgzyCeTZCmnleQWJKKvSlOzte6W/UTM4ewqWlmr4+rZwR8wHdil9c1cmIcWLK48bAao+J992G7rPi8gwmm9WUgqE2hqy2f5Q8+FZSPTcSkAr61J716wVj0IHbtG8wm7qA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rekIvo6XqfsGHIu5S24ZzvQQZRJUzBMHlfSPb95jTkU=;
- b=DjDzY3GjuE6Dpt0ulIm+3STNnjp5QUaUaP3cld0s61VJdnWFncscBXRzwA6/r+K4DuTTtPcq7cqL2PG0nv6NiERaagai57tN+cryBM3KpMcae5Oml075Wj9xicHMjvYs83gHnlrixy1osXX4cDKjEaa+EtUNt5pDFvrTLw8NvUmWQSVYmHRw6sBaf4Sh+1vUDSF0h01g9rvsHk2RZDbufDdXGLVTqah/7y4+DduqCOhBAc28s+k+exWIfQJDBEE/8/vPcmi4DnjynJfKLDOB1nRGP91BsCe0esvia2SUBCnYOlbyCj/7h3AMoXlqz93hxjqHEJlI7ZEJae8d52O3nA==
+ bh=qrT2IxsP/hUk4sMGASSsuTUZPziH0janUlCjnkrUYso=;
+ b=xz10T+xP7FORj8RpbODIvsw83cZtQjD6N6hE/m+A1DFv5EeBb15suE0ku2ruCnJB27Gl2FzR+pVum47H0g/CKT6cHF8HsD9PoCPCdAY1223plROv1TOk2qnr3oAI//+B2avrp9moEUSiNfxqmf0sCU6RdnsHxdE/+7aallL4hnY4ktYDKS0tV1lVlyOAIrRtHU7Pv0i5a+iYKwKB+T0HFLBN+pLHjUyOcRJyTaFg7tG/SGwfMragSodTlhlxmLk+OmGPYOtx6VpHsP3wHPHvm21jXJnx1ZgA+nVmbYeJ1JWwthFV3/m6c51SyDeJ7T1AcER68QZagOu63cuS0HKbew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.43) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ 164.130.1.44) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=stmicroelectronics.onmicrosoft.com;
  s=selector2-stmicroelectronics-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rekIvo6XqfsGHIu5S24ZzvQQZRJUzBMHlfSPb95jTkU=;
- b=KOXyA3Qr4PtL98KM808bC5edwbpimxI9+qtBJiTmAX1cGBOYKyFrmh3SRQPrKXSbFAwpWaf1MKvQBuk6uu4P0HLPTL9QozYdOKRM4SEpso5pdJ6/R8cCAILzezAz/7P/REx8fFQBwce/ziniilAtDmpIhOYD2cPIE2zTyjrHnQA=
-Received: from AS4PR10CA0013.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5dc::20)
- by AS8PR10MB6150.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:548::22)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=qrT2IxsP/hUk4sMGASSsuTUZPziH0janUlCjnkrUYso=;
+ b=EwSq7lMjAEP9E0oqhF4QF09hrEx3XELqjl5i5p8HhUvFcloojh10OxXtlADhUO+uyO9AHKfrLca0ZSucu7w92oxDVr/H4bFsTkEmEuBXEaApwdwCOXk1lCzV92UPCLWMtDiWiMNlyDWcARlenqEr85uCI4qWP3A8m+Bi0y2P2tA=
+Received: from DU2PR04CA0087.eurprd04.prod.outlook.com (2603:10a6:10:232::32)
+ by DB3PR10MB6764.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:432::9) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Thu, 11 Sep
- 2025 06:59:52 +0000
-Received: from AMS0EPF000001A1.eurprd05.prod.outlook.com
- (2603:10a6:20b:5dc:cafe::3e) by AS4PR10CA0013.outlook.office365.com
- (2603:10a6:20b:5dc::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.17 via Frontend Transport; Thu,
- 11 Sep 2025 06:59:52 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.43)
+ 2025 06:59:55 +0000
+Received: from DU2PEPF00028D0D.eurprd03.prod.outlook.com
+ (2603:10a6:10:232:cafe::58) by DU2PR04CA0087.outlook.office365.com
+ (2603:10a6:10:232::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.16 via Frontend Transport; Thu,
+ 11 Sep 2025 06:59:55 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.44)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
 Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.43 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.43; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.43) by
- AMS0EPF000001A1.mail.protection.outlook.com (10.167.16.231) with Microsoft
+ designate 164.130.1.44 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.44; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.44) by
+ DU2PEPF00028D0D.mail.protection.outlook.com (10.167.242.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9115.13 via Frontend Transport; Thu, 11 Sep 2025 06:59:52 +0000
+ 15.20.9115.13 via Frontend Transport; Thu, 11 Sep 2025 06:59:55 +0000
 Received: from SHFDAG1NODE1.st.com (10.75.129.69) by smtpO365.st.com
- (10.250.44.66) with Microsoft SMTP Server (version=TLS1_2,
+ (10.250.44.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 11 Sep
- 2025 08:57:30 +0200
+ 2025 08:52:46 +0200
 Received: from localhost (10.48.87.62) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 11 Sep
- 2025 08:59:51 +0200
+ 2025 08:59:54 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
  <uboot-stm32@st-md-mailman.stormreply.com>,
  Alexander Dahl <ada@thorsis.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, Bastien Curutchet
- <bastien.curutchet@bootlin.com>, Cheick Traore <cheick.traore@foss.st.com>,
- Christian Marangi <ansuelsmth@gmail.com>, =?UTF-8?q?Duje=20Mihanovi=C4=87?=
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, Christian Marangi
+ <ansuelsmth@gmail.com>, =?UTF-8?q?Duje=20Mihanovi=C4=87?=
  <duje@dujemihanovic.xyz>,
  Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>,
  Jagan Teki <jagan@amarulasolutions.com>, Jerome Forissier
  <jerome.forissier@linaro.org>, John Watts <contact@jookia.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Marek Vasut <marek.vasut@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, Sebastian Reichel
+ <marek.vasut@mailbox.org>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, Oliver Gaskell
+ <Oliver.Gaskell@analog.com>, Piotr Wojtaszczyk
+ <piotr.wojtaszczyk@timesys.com>, Sebastian Reichel
  <sebastian.reichel@collabora.com>, Simon Glass <sjg@chromium.org>, "Stefan
  Roese" <stefan.roese@mailbox.org>, Sumit Garg <sumit.garg@kernel.org>, "Tom
  Rini" <trini@konsulko.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>, Yao Zi <ziyao@disroot.org>
-Subject: [PATCH v2 0/5] stm32mp2: Add SPI flashes support
-Date: Thu, 11 Sep 2025 08:59:39 +0200
-Message-ID: <20250911065944.15020-1-patrice.chotard@foss.st.com>
+Subject: [PATCH v2 3/5] spi: Add STM32MP2 Octo-SPI driver support
+Date: Thu, 11 Sep 2025 08:59:42 +0200
+Message-ID: <20250911065944.15020-4-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250911065944.15020-1-patrice.chotard@foss.st.com>
+References: <20250911065944.15020-1-patrice.chotard@foss.st.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -122,67 +125,68 @@ X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001A1:EE_|AS8PR10MB6150:EE_
-X-MS-Office365-Filtering-Correlation-Id: 99cc346d-e270-45cc-6b79-08ddf100ce67
+X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0D:EE_|DB3PR10MB6764:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd3528fd-3dd6-4551-d21d-08ddf100d059
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014|7416014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kIiS3p8L8uPsYlWcAEXKS0aG5Vy5dWjjbZIWzxLB7rfKdyRgcVepHuS/WVbd?=
- =?us-ascii?Q?PIKnXYNPxXfk6oHiPjfy5FtLZzbzhSXF7WnNUSWYefkXpyAW7rZ+a5+IvwL9?=
- =?us-ascii?Q?zLSnAC+fYITffQieeF0XP2vCnumq5DkpRFyhihSLrEhGZBqi+O8YA2m14V3X?=
- =?us-ascii?Q?SCtsqdTULDsVkfxgcYxxERern88oY3AXPRKzTUBNkEEMizU3zeRB7DZff7Dr?=
- =?us-ascii?Q?8OjQHbxQMHXgyVi0JH5jkAQ61FMnAzAMS5/2NtCtqhuBA3MQtQcBNXJl6pYZ?=
- =?us-ascii?Q?ywPzOa4Cw4DcU1P2j3fu0ZUAL/R8JBL666w6N+r3xgfy5HJ6DwF45taT/MDj?=
- =?us-ascii?Q?/Vq5fHaP8Yua4VwgpelZF9gnY28bbhCmAHEdO0gOiEXAcem1K4n6yefpSHUa?=
- =?us-ascii?Q?CpKi03C8oDyeRUlxRscoimP7KnHyZu1MPZaz6q027TZspFpyNzraJe6Rs7AQ?=
- =?us-ascii?Q?JiGCjUXwitgH20X644QlkG5t3aeaNydnbESZ+iQugWhCFt9+2RfenL3ZIfKz?=
- =?us-ascii?Q?NEQg4sLyMP1jd5f1hrWQWpxmW6c8R3OXeUbG6iHwXJXk7w9/kCYYp0hHHKvD?=
- =?us-ascii?Q?VHAWJlzQJ59aIFfMPzgOh8nTnDYxhahLUqx5Xcwhs8wxdq8VjlG+m+jUktBM?=
- =?us-ascii?Q?EPUR51NXnOhDIG8fLyBD3hIdX0G6GGRqu7QtVhmYSqbGCzIeeE3Nd0fCNR9X?=
- =?us-ascii?Q?Bes2k91DLkJIrBh/IS9uXw0gV1cNB6y3nrWkZALpVXbc2Zm9BNiHXPJ6aFib?=
- =?us-ascii?Q?nYUTXCjCYHxnHVACUVBdbScB735Ayy00LcVQPl5t86LQvNbnDIkIuXiOnH3y?=
- =?us-ascii?Q?HmXIpw3zc1vJN7HTVzWU00+emWHxnQMw6aZmkMWZFiTuhtr8jJEaguiVaZiE?=
- =?us-ascii?Q?MfKiFs8FlVZZf4z+ugrlWGrqXqucZrMvtXEiYxW6viNXLgV3UR78bfkd/Gh5?=
- =?us-ascii?Q?4yq1+QzOqPXP25lUoXSJ6KsWCF36TDxK/zzzI6wjNEJDFyJfGFPIzT/YwTlT?=
- =?us-ascii?Q?gXAYt0ZGYc9vM7GlrgO1orWOwwnaqp1xfbYGI/rTmfCi/srkRXz+hvMALQgB?=
- =?us-ascii?Q?bLegGCHnYG4VELph1bP0r5k1j3Rg2rCLwSwyM86FVD+yDeI57s6HZRaJDezh?=
- =?us-ascii?Q?2Xb3QWbwuyFX0QWkTEz4uLSxRXj/RFM/i/uRoUZSZ+Rte7oftG0smrKxxBCw?=
- =?us-ascii?Q?MT+Z8XvljkIIc7CUUREjzz7njz4ZIJ4xg4rCURoPoVcy37GFQXW34H4aRXYb?=
- =?us-ascii?Q?9eE1NlN/+MgZuoSS7C2YFRQQZMD3i80pZRQ6e4HHcl4bQ9qUCjOuftPKuvLq?=
- =?us-ascii?Q?0RTEqsLSYS8DjEO83NRTVgFFfblhfRHhUO/RILIUYYoz5W/c6M8Mc6BVcDPe?=
- =?us-ascii?Q?goXIXJp5pVJ1eUzST4aVTBRNwZZc2vy9ofVUgSA70XKqieV2XZWt1WYwLbYC?=
- =?us-ascii?Q?e2H1qhKJYXYbczCkOSGRk2ViXMwNkgR+iRuq+WoMcMWV1jRAYt0lFwEocrar?=
- =?us-ascii?Q?UZefUTNCcjCrHzykRW+WtY/83pckrdXGgGQq?=
-X-Forefront-Antispam-Report: CIP:164.130.1.43; CTRY:IT; LANG:en; SCL:1; SRV:;
+ ARA:13230040|82310400026|1800799024|376014|7416014|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?UVneWbTbSN/lpTjTFJBKDBN+FYU+G+7eUq0uYXxKFa9FNiorrw5cfWkG8G83?=
+ =?us-ascii?Q?w7G7apZ+gOjiGDlfGG2hLp2ewayj6FmL3YSfHfHCGJNGile/gFNrGSH4uo4G?=
+ =?us-ascii?Q?aJd+XoqjtsyGJZb5LSqBaWKMZOjTS4MnO4yBTcN2OXkTBeqao7C9vq6I84j9?=
+ =?us-ascii?Q?r2/bSGC3ItT12zPggytYQDpYTR1jW5cPxtMSnHvUSrnWk1rAarRtTTZf4VLd?=
+ =?us-ascii?Q?xZ0UGLqc6qYQFzXxvCq5WitUJw+didXx+NmOr16/sS8fHTw2PBV4d3yYP4Fs?=
+ =?us-ascii?Q?7ldtBrkDLJy76MX/42lGLJG//Y31HqHgg2ygcX/Hws/FFYq4spcpEEzTpcQA?=
+ =?us-ascii?Q?bIsRMJX3mlbE2kcVsbvgMNlhDm/Qu6Qu9GD+wZ2zXtE51yeqkjLffpFAL9cJ?=
+ =?us-ascii?Q?+pDEftf8EKgsfRYq9JfDkvTvp0p6fM7w6vRJWNbXsUO2MGZA8ML1MSx0pe4J?=
+ =?us-ascii?Q?Od3hJCzDjxttTrwFJzepI0ZvLcQk0TYeM1f82IpTvd0GDpKLZmLX8pW2k/TD?=
+ =?us-ascii?Q?RaMc5OBzWWu4M6w/AHRwjvnPmon6qubsgpefSb+e1OhhLX0XlIU4+j5pVY3Y?=
+ =?us-ascii?Q?8svNaI8ZSz7JmjpCxmPumWDs78IiDwrzZbg4SYE9J71T0B0tUOqKSyWE1M/Z?=
+ =?us-ascii?Q?VTKrb8m4CQjdlEWH8ED3gQgcyKuqTngxeuK5UkLKpUHDq8WKEZpAEfSBu4oj?=
+ =?us-ascii?Q?bFoPgIgflmT3dCMadcMgn/HuoPGqX9mmZMoyqeDg/QbVGH/4AWvlnD56p77G?=
+ =?us-ascii?Q?VpMMIzQ6XgFkMzLTQuQGXbUdsKkp8LQOnEB5LxfkqQrIal2MnYTgpSWa8W/N?=
+ =?us-ascii?Q?D8r9VmkQ4fKBZYljrO8ZbhBcHq1sPA2upXFj4nygS76l5k7J2lgGh7ITvRBb?=
+ =?us-ascii?Q?PIdGA7lpiqm+lN2wJ+gadDdbxW+bYDol+HeeLZh35mnaYIjEbiNBwBdv4dXX?=
+ =?us-ascii?Q?toxzUVeDtg2xUonm+iU8OG4cU/6G7fDEfGoeJVuIXrk4pSFnVi1gnPeVMlXg?=
+ =?us-ascii?Q?y06crlo7rKhfQlBVA96JT37gKZIv0jMMS3jl0JCUqqtry9b+kZsYmEC5sb/I?=
+ =?us-ascii?Q?bbS+oL6BUJFQzxq4ddZCPs3O4n9WZaTk9VuCge3znh+pyvzANoqG8WcYDLKi?=
+ =?us-ascii?Q?DyXfislC41j75pfdXIrpHMc/aQUt4gkX2rIvRMLYya83y9fVUBJt97P6Uri4?=
+ =?us-ascii?Q?j5oQfWVKNDUBMI1Aazp3e6Q+DTDWIrV3cHgllq7H3by4sOlzgctLXH6qfnpR?=
+ =?us-ascii?Q?UY/e5gjF1w2Os5O0keXcV5u5XCro3RBdTTFhDEggrRQtnCI0Y07+82/TmllS?=
+ =?us-ascii?Q?YO7v0VLzZWSkCTgNITJtxlnvwuYyYJ5kzPvI8+SdYBtCK1vVsnk6FJTffnib?=
+ =?us-ascii?Q?nDP6y0wE+OPSLZVmwhMilHp6nBrZoZ5fbe0LX8Q7abDT8ITRYOsqnLEAI38V?=
+ =?us-ascii?Q?YnwI7IKCuDw52y/+VSthgXOeco8AzRJGYkyDMKGwPeROawtk0tYTPCC2gKVe?=
+ =?us-ascii?Q?1s4ixU6yDCbHEJwAiRnAFw2iTv/YQE8BqNXf?=
+X-Forefront-Antispam-Report: CIP:164.130.1.44; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(7416014); DIR:OUT;
+ SFS:(13230040)(82310400026)(1800799024)(376014)(7416014)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2025 06:59:52.0701 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 99cc346d-e270-45cc-6b79-08ddf100ce67
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2025 06:59:55.3092 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd3528fd-3dd6-4551-d21d-08ddf100d059
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.43];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.44];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001A1.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D0D.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6150
-X-Proofpoint-ORIG-GUID: JIUNiWlDSV-dgoB353gK6p0_ev-dHxzB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA5MDA3MCBTYWx0ZWRfX318otfj92tus
- 6NAUIYFib0OC1CVfIq96T1p31vVAOSfCW33lWzSrJce0kqU+6NbcvSCCMH9baYjHl3h4SyN9NwX
- scydLUiGM6bmWiNNeAqCulqyO3Gusy9jw/Tlu/vtjTmog/kyMMgI1Av9meugKd11yFeqeRR0txj
- ci0ZawDKZ/y8QEleL+Oc/IsJarIj7a0OSoQxhXxXDp0LHJ7kZhaufQW6lZpCfTQXIZKEdQphC+x
- YKzzooXCbVgRAJrn4p7p85iqP1hFQ4MSZgWSab7dpPuoFDLHWcbOY82mRrYR0q4gzwpBmwOfG2a
- 7xDxB7c8j+X5iwd8baTeAh8wwoE6wyCSYzj815L7wlPdfox5wzpNGLkkUmf0QwpA8EC6aQm+As/
- 5zeLJsdk
-X-Authority-Analysis: v=2.4 cv=We8Ma1hX c=1 sm=1 tr=0 ts=68c2736a cx=c_pps
- a=U9/24nWfJo5LsBcH4C/8Zg==:117 a=peP7VJn1Wk7OJvVWh4ABVQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR10MB6764
+X-Proofpoint-ORIG-GUID: v6SKVykcPqN7gJm9qtLP5SzE1gncgDUa
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTA5MDA3MCBTYWx0ZWRfXzL72Nx4mBZ2x
+ VbeLD6D+mxmYokF0Tnp+AbEIor+gR1zZjEE31mJvMkrHWvcfHfV6KNN/QuVGPbkyooRteZyzf0h
+ 4+q/OgUgaDBy9oTr1spTA4DXc2WN+wFiiAj20zQHCdapOxVbFyZKdW21gCmRbwmicKYYvLQrXRN
+ Boshta/opmv5qpEjgEDEXOLBD/RWwT0z5OsjARiRK8PQOFOJhi/ZTOGStsTxh4USE/Rm3aoWgay
+ bdTtSPcAhDHBVBlduKE4eG8zbBIPcnqpj1OsJhzJh7tNoseF2Htm1I75JbPTDeGfM4LU/CHP4ei
+ bUhGrpNOkx0SxAtHaA3NWTZQ1nIY3IEucnfDXW/vbh7gcmwsFuguzNCt1hm85xJNszklv2g2Pun
+ mhgm6zBw
+X-Authority-Analysis: v=2.4 cv=We8Ma1hX c=1 sm=1 tr=0 ts=68c2736f cx=c_pps
+ a=s/vd72jzPs8wYAfPC2zWMQ==:117 a=Tm9wYGWyy1fMlzdxM1lUeQ==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=h8e1o3o8w34MuCiiGQrqVE4VwXA=:19
  a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
  a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=SAHXIHsbQyQA:10 a=yJojWOMRYYMA:10
- a=s63m1ICgrNkA:10 a=FUbXzq8tPBIA:10 a=xYsl2oq6oxH_PECJ_NEA:9
-X-Proofpoint-GUID: JIUNiWlDSV-dgoB353gK6p0_ev-dHxzB
+ a=s63m1ICgrNkA:10 a=FUbXzq8tPBIA:10 a=8b9GpE9nAAAA:8 a=F4I06iH5sb35JsexnrsA:9
+ a=T3LWEMljR5ZiDmsYVIUa:22
+X-Proofpoint-GUID: v6SKVykcPqN7gJm9qtLP5SzE1gncgDUa
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-10_04,2025-09-10_01,2025-03-28_01
@@ -208,42 +212,699 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series introduces 2 new drivers:
-  _ STM32 Octo Memory Manager driver
-  _ STM32 OSPI driver
+Add STM32 OSPI driver, it supports :
+  - support sNOR / sNAND devices.
+  - Two functional modes: indirect (read/write) and memory-mapped (read).
+  - Single-, dual-, quad-, and octal-SPI communication.
+  - Single data rate (SDR).
 
-It adds resource check helpers which are used by OMM driver.
-It adds and enables OMM and OSPI driver support for stm32mp257f-ev1 board
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
+---
 
 Changes in v2:
-  - Add stm32-omm.c in MAINTAINERS file
   - Add stm32_ospi.c in MAINTAINERS file
-  - Collected reviewed-by from Patrick
 
-Patrice Chotard (5):
-  ioport: Add resource check helpers
-  memory: Add STM32 Octo Memory Manager driver
-  spi: Add STM32MP2 Octo-SPI driver support
-  configs: stm32mp25: Enable configs flags related to SPI flashes.
-  ARM: dts: Add flash0 partitions for stm32mp257f-ev1-u-boot
-
- MAINTAINERS                              |   2 +
- arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi |  41 ++
- configs/stm32mp25_defconfig              |  15 +-
- drivers/memory/Kconfig                   |  17 +
- drivers/memory/Makefile                  |   1 +
- drivers/memory/stm32_omm.c               | 421 +++++++++++++++
- drivers/spi/Kconfig                      |   8 +
- drivers/spi/Makefile                     |   1 +
- drivers/spi/stm32_ospi.c                 | 623 +++++++++++++++++++++++
- include/linux/ioport.h                   |  16 +
- 10 files changed, 1144 insertions(+), 1 deletion(-)
- create mode 100644 drivers/memory/stm32_omm.c
+ MAINTAINERS              |   1 +
+ drivers/spi/Kconfig      |   8 +
+ drivers/spi/Makefile     |   1 +
+ drivers/spi/stm32_ospi.c | 623 +++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 633 insertions(+)
  create mode 100644 drivers/spi/stm32_ospi.c
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 78bce87a6ca..af71fb02846 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -726,6 +726,7 @@ F:	drivers/rng/optee_rng.c
+ F:	drivers/rng/stm32_rng.c
+ F:	drivers/rtc/stm32_rtc.c
+ F:	drivers/serial/serial_stm32.*
++F:	drivers/spi/stm32_ospi.c
+ F:	drivers/spi/stm32_qspi.c
+ F:	drivers/spi/stm32_spi.c
+ F:	drivers/video/stm32/stm32_ltdc.c
+diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+index 1ae36b5a348..2960822211a 100644
+--- a/drivers/spi/Kconfig
++++ b/drivers/spi/Kconfig
+@@ -530,6 +530,14 @@ config SPI_SUNXI
+ 
+ 	  Same controller driver can reuse in all Allwinner SoC variants.
+ 
++config STM32_OSPI
++	bool "STM32MP2 OSPI driver"
++	depends on STM32MP25X && STM32_OMM
++	help
++	  Enable the STM32MP2 Octo-SPI (OSPI) driver. This driver can be
++	  used to access the SPI NOR flash chips on platforms embedding
++	  this ST IP core.
++
+ config STM32_QSPI
+ 	bool "STM32F7 QSPI driver"
+ 	depends on STM32F4 || STM32F7 || ARCH_STM32MP
+diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
+index da91b18b6ed..5129d649f84 100644
+--- a/drivers/spi/Makefile
++++ b/drivers/spi/Makefile
+@@ -75,6 +75,7 @@ obj-$(CONFIG_SPI_SIFIVE) += spi-sifive.o
+ obj-$(CONFIG_SPI_SN_F_OSPI) += spi-sn-f-ospi.o
+ obj-$(CONFIG_SPI_SUNXI) += spi-sunxi.o
+ obj-$(CONFIG_SH_QSPI) += sh_qspi.o
++obj-$(CONFIG_STM32_OSPI) += stm32_ospi.o
+ obj-$(CONFIG_STM32_QSPI) += stm32_qspi.o
+ obj-$(CONFIG_STM32_SPI) += stm32_spi.o
+ obj-$(CONFIG_TEGRA114_SPI) += tegra114_spi.o
+diff --git a/drivers/spi/stm32_ospi.c b/drivers/spi/stm32_ospi.c
+new file mode 100644
+index 00000000000..01b8f8e4987
+--- /dev/null
++++ b/drivers/spi/stm32_ospi.c
+@@ -0,0 +1,623 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
++/*
++ * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
++ */
++
++#define LOG_CATEGORY UCLASS_SPI
++
++#include <clk.h>
++#include <dm.h>
++#include <log.h>
++#include <reset.h>
++#include <spi.h>
++#include <spi-mem.h>
++#include <syscon.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <linux/iopoll.h>
++#include <linux/ioport.h>
++#include <linux/sizes.h>
++
++/* OCTOSPI control register */
++#define OSPI_CR			0x00
++#define OSPI_CR_EN		BIT(0)
++#define OSPI_CR_ABORT		BIT(1)
++#define OSPI_CR_TCEN		BIT(3)
++#define OSPI_CR_FSEL		BIT(7)
++#define OSPI_CR_FTHRES_MASK	GENMASK(13, 8)
++#define OSPI_CR_FTHRES_SHIFT	8
++#define OSPI_CR_CSSEL		BIT(24)
++#define OSPI_CR_FMODE_SHIFT	28
++#define OSPI_CR_FMODE_MASK	GENMASK(29, 28)
++
++/* OCTOSPI device configuration register */
++#define OSPI_DCR1		0x08
++#define OSPI_DCR1_CKMODE	BIT(0)
++#define OSPI_DCR1_DLYBYP	BIT(3)
++#define OSPI_DCR1_CSHT_SHIFT	8
++#define OSPI_DCR1_CSHT_MASK	GENMASK(13, 8)
++#define OSPI_DCR1_DEVSIZE_MASK	GENMASK(20, 16)
++#define OSPI_DCR1_MTYP_MASK	GENMASK(26, 24)
++
++/* OCTOSPI device configuration register 2 */
++#define OSPI_DCR2		0x0c
++#define OSPI_DCR2_PRESC_SHIFT	0
++#define OSPI_DCR2_PRESC_MASK	GENMASK(7, 0)
++
++/* OCTOSPI status register */
++#define OSPI_SR			0x20
++#define OSPI_SR_TEF		BIT(0)
++#define OSPI_SR_TCF		BIT(1)
++#define OSPI_SR_FTF		BIT(2)
++#define OSPI_SR_BUSY		BIT(5)
++
++/* OCTOSPI flag clear register */
++#define OSPI_FCR		0x24
++#define OSPI_FCR_CTEF		BIT(0)
++#define OSPI_FCR_CTCF		BIT(1)
++
++/* OCTOSPI data length register */
++#define OSPI_DLR		0x40
++
++/* OCTOSPI address register */
++#define OSPI_AR			0x48
++
++/* OCTOSPI data configuration register */
++#define OSPI_DR			0x50
++
++/* OCTOSPI communication configuration register */
++#define OSPI_CCR		0x100
++#define OSPI_CCR_IMODE_SHIFT	0
++#define OSPI_CCR_IMODE_MASK	GENMASK(2, 0)
++#define OSPI_CCR_ADMODE_SHIFT	8
++#define OSPI_CCR_ADMODE_MASK	GENMASK(10, 8)
++#define OSPI_CCR_ADSIZE_SHIFT	12
++#define OSPI_CCR_DMODE_SHIFT	24
++#define OSPI_CCR_DMODE_MASK	GENMASK(26, 24)
++#define OSPI_CCR_IND_WRITE	0
++#define OSPI_CCR_IND_READ	1
++#define OSPI_CCR_MEM_MAP	3
++
++/* OCTOSPI timing configuration register */
++#define OSPI_TCR		0x108
++#define OSPI_TCR_DCYC_SHIFT	0x0
++#define OSPI_TCR_DCYC_MASK	GENMASK(4, 0)
++#define OSPI_TCR_SSHIFT		BIT(30)
++
++/* OCTOSPI instruction register */
++#define OSPI_IR			0x110
++
++#define OSPI_MAX_MMAP_SZ	SZ_256M
++#define OSPI_MAX_CHIP		2
++
++#define OSPI_FIFO_TIMEOUT_US	30000
++#define OSPI_ABT_TIMEOUT_US	100000
++#define OSPI_BUSY_TIMEOUT_US	100000
++#define OSPI_CMD_TIMEOUT_US	1000000
++
++struct stm32_ospi_flash {
++	u32 cr;
++	u32 dcr;
++	u32 dcr2;
++	bool initialized;
++};
++
++struct stm32_ospi_priv {
++	struct stm32_ospi_flash flash[OSPI_MAX_CHIP];
++	int cs_used;
++};
++
++struct stm32_ospi_plat {
++	phys_addr_t regs_base;		/* register base address */
++	phys_addr_t mm_base;		/* memory map base address */
++	resource_size_t mm_size;
++	struct clk clk;
++	struct reset_ctl_bulk rst_ctl;
++	ulong clock_rate;
++};
++
++static int stm32_ospi_mm(struct udevice *dev,
++			 const struct spi_mem_op *op)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
++
++	memcpy_fromio(op->data.buf.in,
++		      (void __iomem *)ospi_plat->mm_base + op->addr.val,
++		      op->data.nbytes);
++
++	return 0;
++}
++
++static void stm32_ospi_read_fifo(void *val, phys_addr_t addr, u8 len)
++{
++	switch (len) {
++	case sizeof(u32):
++		*((u32 *)val) = readl_relaxed(addr);
++		break;
++	case sizeof(u16):
++		*((u16 *)val) = readw_relaxed(addr);
++		break;
++	case sizeof(u8):
++		*((u8 *)val) = readb_relaxed(addr);
++	};
++	schedule();
++}
++
++static void stm32_ospi_write_fifo(void *val, phys_addr_t addr, u8 len)
++{
++	switch (len) {
++	case sizeof(u32):
++		writel_relaxed(*((u32 *)val), addr);
++		break;
++	case sizeof(u16):
++		writew_relaxed(*((u16 *)val), addr);
++		break;
++	case sizeof(u8):
++		writeb_relaxed(*((u8 *)val), addr);
++	};
++}
++
++int stm32_ospi_tx_poll(struct udevice *dev, void *buf, u32 len, bool read)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	void (*fifo)(void *val, phys_addr_t addr, u8 len);
++	u32 sr;
++	int ret;
++	u8 step = 1;
++
++	if (read)
++		fifo = stm32_ospi_read_fifo;
++	else
++		fifo = stm32_ospi_write_fifo;
++
++	while (len) {
++		ret = readl_poll_timeout(regs_base + OSPI_SR, sr,
++					 sr & OSPI_SR_FTF,
++					 OSPI_FIFO_TIMEOUT_US);
++		if (ret) {
++			dev_err(dev, "fifo timeout (len:%d stat:%#x)\n",
++				len, sr);
++			return ret;
++		}
++
++		if (!IS_ALIGNED((uintptr_t)buf, sizeof(u32))) {
++			if (!IS_ALIGNED((uintptr_t)buf, sizeof(u16)))
++				step = sizeof(u8);
++			else
++				step = min((u32)len, (u32)sizeof(u16));
++		}
++		/* Buf is aligned */
++		else if (len >= sizeof(u32))
++			step = sizeof(u32);
++		else if (len >= sizeof(u16))
++			step = sizeof(u16);
++		else if (len)
++			step = sizeof(u8);
++
++		fifo(buf, regs_base + OSPI_DR, step);
++		len -= step;
++		buf += step;
++	}
++
++	return 0;
++}
++
++static int stm32_ospi_tx(struct udevice *dev,
++			 const struct spi_mem_op *op,
++			 u8 mode)
++{
++	void *buf;
++
++	if (!op->data.nbytes)
++		return 0;
++
++	if (mode == OSPI_CCR_MEM_MAP)
++		return stm32_ospi_mm(dev, op);
++
++	if (op->data.dir == SPI_MEM_DATA_IN)
++		buf = op->data.buf.in;
++	else
++		buf = (void *)op->data.buf.out;
++
++	return stm32_ospi_tx_poll(dev, buf, op->data.nbytes,
++				 op->data.dir == SPI_MEM_DATA_IN);
++}
++
++static int stm32_ospi_get_mode(u8 buswidth)
++{
++	if (buswidth == 8)
++		return 4;
++
++	if (buswidth == 4)
++		return 3;
++
++	return buswidth;
++}
++
++int stm32_ospi_wait_for_not_busy(struct udevice *dev)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 sr;
++	int ret;
++
++	ret = readl_poll_timeout(regs_base + OSPI_SR, sr, !(sr & OSPI_SR_BUSY),
++				 OSPI_BUSY_TIMEOUT_US);
++	if (ret)
++		dev_err(dev, "busy timeout (stat:%#x)\n", sr);
++
++	return ret;
++}
++
++int stm32_ospi_wait_cmd(struct udevice *dev)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 sr;
++	int ret = 0;
++
++	ret = readl_poll_timeout(regs_base + OSPI_SR, sr,
++				 sr & OSPI_SR_TCF,
++				 OSPI_CMD_TIMEOUT_US);
++	if (ret) {
++		dev_err(dev, "cmd timeout (stat:%#x)\n", sr);
++	} else if (readl(regs_base + OSPI_SR) & OSPI_SR_TEF) {
++		dev_err(dev, "transfer error (stat:%#x)\n", sr);
++		ret = -EIO;
++	}
++
++	/* clear flags */
++	writel(OSPI_FCR_CTCF | OSPI_FCR_CTEF, regs_base + OSPI_FCR);
++
++	if (!ret)
++		ret = stm32_ospi_wait_for_not_busy(dev);
++
++	return ret;
++}
++
++static int stm32_ospi_exec_op(struct spi_slave *slave,
++			      const struct spi_mem_op *op)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(slave->dev->parent);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 cr, ccr = 0, addr_max;
++	int timeout, ret;
++	int dmode;
++	u8 mode = OSPI_CCR_IND_WRITE;
++	u8 dcyc = 0;
++
++	dev_dbg(slave->dev, "%s: cmd:%#x mode:%d.%d.%d.%d addr:%#llx len:%#x\n",
++		__func__, op->cmd.opcode, op->cmd.buswidth, op->addr.buswidth,
++		op->dummy.buswidth, op->data.buswidth,
++		op->addr.val, op->data.nbytes);
++
++	addr_max = op->addr.val + op->data.nbytes + 1;
++
++	if (op->data.dir == SPI_MEM_DATA_IN && op->data.nbytes) {
++		if (addr_max < ospi_plat->mm_size && op->addr.buswidth)
++			mode = OSPI_CCR_MEM_MAP;
++		else
++			mode = OSPI_CCR_IND_READ;
++	}
++
++	if (op->data.nbytes)
++		writel(op->data.nbytes - 1, regs_base + OSPI_DLR);
++
++	clrsetbits_le32(regs_base + OSPI_CR, OSPI_CR_FMODE_MASK,
++			mode << OSPI_CR_FMODE_SHIFT);
++
++	ccr |= (stm32_ospi_get_mode(op->cmd.buswidth) << OSPI_CCR_IMODE_SHIFT) &
++		OSPI_CCR_IMODE_MASK;
++
++	if (op->addr.nbytes) {
++		ccr |= ((op->addr.nbytes - 1) << OSPI_CCR_ADSIZE_SHIFT);
++		ccr |= (stm32_ospi_get_mode(op->addr.buswidth)
++			<< OSPI_CCR_ADMODE_SHIFT) & OSPI_CCR_ADMODE_MASK;
++	}
++
++	if (op->dummy.buswidth && op->dummy.nbytes)
++		dcyc = op->dummy.nbytes * 8 / op->dummy.buswidth;
++
++	clrsetbits_le32(regs_base + OSPI_TCR, OSPI_TCR_DCYC_MASK,
++			dcyc << OSPI_TCR_DCYC_SHIFT);
++
++	if (op->data.nbytes) {
++		dmode = stm32_ospi_get_mode(op->data.buswidth);
++		ccr |= (dmode << OSPI_CCR_DMODE_SHIFT) & OSPI_CCR_DMODE_MASK;
++	}
++
++	writel(ccr, regs_base + OSPI_CCR);
++
++	/* set instruction, must be set after ccr register update */
++	writel(op->cmd.opcode, regs_base + OSPI_IR);
++
++	if (op->addr.nbytes && mode != OSPI_CCR_MEM_MAP)
++		writel(op->addr.val, regs_base + OSPI_AR);
++
++	ret = stm32_ospi_tx(slave->dev->parent, op, mode);
++	/*
++	 * Abort in:
++	 * -error case
++	 * -read memory map: prefetching must be stopped if we read the last
++	 *  byte of device (device size - fifo size). like device size is not
++	 *  knows, the prefetching is always stop.
++	 */
++	if (ret || mode == OSPI_CCR_MEM_MAP)
++		goto abort;
++
++	/* Wait end of tx in indirect mode */
++	ret = stm32_ospi_wait_cmd(slave->dev->parent);
++	if (ret)
++		goto abort;
++
++	return 0;
++
++abort:
++	setbits_le32(regs_base + OSPI_CR, OSPI_CR_ABORT);
++
++	/* Wait clear of abort bit by hw */
++	timeout = readl_poll_timeout(regs_base + OSPI_CR, cr,
++				     !(cr & OSPI_CR_ABORT),
++				     OSPI_ABT_TIMEOUT_US);
++
++	writel(OSPI_FCR_CTCF, regs_base + OSPI_FCR);
++
++	if (ret || timeout)
++		dev_err(slave->dev, "%s ret:%d abort timeout:%d\n", __func__,
++			ret, timeout);
++
++	return ret;
++}
++
++static int stm32_ospi_probe(struct udevice *bus)
++{
++	struct stm32_ospi_priv *priv = dev_get_priv(bus);
++	struct stm32_ospi_plat *ospi_plat;
++	phys_addr_t regs_base;
++	int ret;
++
++	ospi_plat = dev_get_plat(bus);
++	regs_base = ospi_plat->regs_base;
++
++	ret = clk_enable(&ospi_plat->clk);
++	if (ret) {
++		dev_err(bus, "failed to enable clock\n");
++		return ret;
++	}
++
++	/* Reset OSPI controller */
++	reset_assert_bulk(&ospi_plat->rst_ctl);
++	udelay(2);
++	reset_deassert_bulk(&ospi_plat->rst_ctl);
++
++	priv->cs_used = -1;
++
++	setbits_le32(regs_base + OSPI_TCR, OSPI_TCR_SSHIFT);
++
++	clrsetbits_le32(regs_base + OSPI_CR, OSPI_CR_FTHRES_MASK,
++			3 << OSPI_CR_FTHRES_SHIFT);
++
++	/* Set dcr devsize to max address */
++	setbits_le32(regs_base + OSPI_DCR1,
++		     OSPI_DCR1_DEVSIZE_MASK | OSPI_DCR1_DLYBYP);
++
++	return 0;
++}
++
++static int stm32_ospi_claim_bus(struct udevice *dev)
++{
++	struct stm32_ospi_priv *priv = dev_get_priv(dev->parent);
++	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev->parent);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	unsigned int slave_cs = slave_plat->cs[0];
++
++	if (slave_cs >= OSPI_MAX_CHIP)
++		return -ENODEV;
++
++	if (priv->cs_used != slave_cs) {
++		struct stm32_ospi_flash *flash = &priv->flash[slave_cs];
++
++		priv->cs_used = slave_cs;
++
++		if (flash->initialized) {
++			/* Set the configuration: speed + cs */
++			writel(flash->cr, regs_base + OSPI_CR);
++			writel(flash->dcr, regs_base + OSPI_DCR1);
++			writel(flash->dcr2, regs_base + OSPI_DCR2);
++		} else {
++			/* Set chip select */
++			clrsetbits_le32(regs_base + OSPI_CR,
++					OSPI_CR_CSSEL,
++					priv->cs_used ? OSPI_CR_CSSEL : 0);
++
++			/* Save the configuration: speed + cs */
++			flash->cr = readl(regs_base + OSPI_CR);
++			flash->dcr = readl(regs_base + OSPI_DCR1);
++			flash->dcr2 = readl(regs_base + OSPI_DCR2);
++			flash->initialized = true;
++		}
++	}
++
++	setbits_le32(regs_base + OSPI_CR, OSPI_CR_EN);
++
++	return 0;
++}
++
++static int stm32_ospi_release_bus(struct udevice *dev)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(dev->parent);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++
++	clrbits_le32(regs_base + OSPI_CR, OSPI_CR_EN);
++
++	return 0;
++}
++
++static int stm32_ospi_set_speed(struct udevice *bus, uint speed)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(bus);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	u32 ospi_clk = ospi_plat->clock_rate;
++	u32 prescaler = 255;
++	u32 csht;
++	int ret;
++
++	if (speed > 0) {
++		prescaler = 0;
++		if (ospi_clk) {
++			prescaler = DIV_ROUND_UP(ospi_clk, speed) - 1;
++			if (prescaler > 255)
++				prescaler = 255;
++		}
++	}
++
++	csht = (DIV_ROUND_UP((5 * ospi_clk) / (prescaler + 1), 100000000)) - 1;
++
++	ret = stm32_ospi_wait_for_not_busy(bus);
++	if (ret)
++		return ret;
++
++	clrsetbits_le32(regs_base + OSPI_DCR2, OSPI_DCR2_PRESC_MASK,
++			prescaler << OSPI_DCR2_PRESC_SHIFT);
++
++	clrsetbits_le32(regs_base + OSPI_DCR1, OSPI_DCR1_CSHT_MASK,
++			csht << OSPI_DCR1_CSHT_SHIFT);
++
++	return 0;
++}
++
++static int stm32_ospi_set_mode(struct udevice *bus, uint mode)
++{
++	struct stm32_ospi_plat *ospi_plat = dev_get_plat(bus);
++	phys_addr_t regs_base = ospi_plat->regs_base;
++	const char *str_rx, *str_tx;
++	int ret;
++
++	ret = stm32_ospi_wait_for_not_busy(bus);
++	if (ret)
++		return ret;
++
++	if ((mode & SPI_CPHA) && (mode & SPI_CPOL))
++		setbits_le32(regs_base + OSPI_DCR1, OSPI_DCR1_CKMODE);
++	else if (!(mode & SPI_CPHA) && !(mode & SPI_CPOL))
++		clrbits_le32(regs_base + OSPI_DCR1, OSPI_DCR1_CKMODE);
++	else
++		return -ENODEV;
++
++	if (mode & SPI_CS_HIGH)
++		return -ENODEV;
++
++	if (mode & SPI_RX_OCTAL)
++		str_rx = "octal";
++	else if (mode & SPI_RX_QUAD)
++		str_rx = "quad";
++	else if (mode & SPI_RX_DUAL)
++		str_rx = "dual";
++	else
++		str_rx = "single";
++
++	if (mode & SPI_TX_OCTAL)
++		str_tx = "octal";
++	else if (mode & SPI_TX_QUAD)
++		str_tx = "quad";
++	else if (mode & SPI_TX_DUAL)
++		str_tx = "dual";
++	else
++		str_tx = "single";
++
++	dev_dbg(bus, "mode=%d rx: %s, tx: %s\n", mode, str_rx, str_tx);
++
++	return 0;
++}
++
++static const struct spi_controller_mem_ops stm32_ospi_mem_ops = {
++	.exec_op = stm32_ospi_exec_op,
++};
++
++static const struct dm_spi_ops stm32_ospi_ops = {
++	.claim_bus = stm32_ospi_claim_bus,
++	.release_bus = stm32_ospi_release_bus,
++	.set_speed = stm32_ospi_set_speed,
++	.set_mode = stm32_ospi_set_mode,
++	.mem_ops = &stm32_ospi_mem_ops,
++};
++
++static int stm32_ospi_of_to_plat(struct udevice *dev)
++{
++	struct stm32_ospi_plat *plat = dev_get_plat(dev);
++	struct resource res;
++	struct ofnode_phandle_args args;
++	const fdt32_t *reg;
++	int ret, len;
++
++	reg = dev_read_prop(dev, "reg", &len);
++	if (!reg) {
++		dev_err(dev, "Can't get regs base address\n");
++		return -ENOENT;
++	}
++
++	plat->regs_base = (phys_addr_t)dev_translate_address(dev, reg);
++
++	/* optional */
++	ret = dev_read_phandle_with_args(dev, "memory-region", NULL, 0, 0, &args);
++	if (!ret) {
++		ret = ofnode_read_resource(args.node, 0, &res);
++		if (ret) {
++			dev_err(dev, "Can't get mmap base address(%d)\n", ret);
++			return ret;
++		}
++
++		plat->mm_base = res.start;
++		plat->mm_size = resource_size(&res);
++
++		if (plat->mm_size > OSPI_MAX_MMAP_SZ) {
++			dev_err(dev, "Incorrect memory-map size: %lld Bytes\n", plat->mm_size);
++			return -EINVAL;
++		}
++
++		dev_dbg(dev, "%s: regs_base=<0x%llx> mm_base=<0x%llx> mm_size=<0x%x>\n",
++			__func__, plat->regs_base, plat->mm_base, (u32)plat->mm_size);
++	} else {
++		plat->mm_base = 0;
++		plat->mm_size = 0;
++		dev_info(dev, "memory-region property not found (%d)\n", ret);
++	}
++
++	ret = clk_get_by_index(dev, 0, &plat->clk);
++	if (ret < 0) {
++		dev_err(dev, "Failed to get clock\n");
++		return ret;
++	}
++
++	ret = reset_get_bulk(dev, &plat->rst_ctl);
++	if (ret && ret != -ENOENT) {
++		dev_err(dev, "Failed to get reset\n");
++		return ret;
++	}
++
++	plat->clock_rate = clk_get_rate(&plat->clk);
++	if (!plat->clock_rate)
++		return -EINVAL;
++
++	return ret;
++};
++
++static const struct udevice_id stm32_ospi_ids[] = {
++	{ .compatible = "st,stm32mp25-ospi" },
++	{ }
++};
++
++U_BOOT_DRIVER(stm32_ospi) = {
++	.name = "stm32_ospi",
++	.id = UCLASS_SPI,
++	.of_match = stm32_ospi_ids,
++	.of_to_plat = stm32_ospi_of_to_plat,
++	.ops = &stm32_ospi_ops,
++	.plat_auto = sizeof(struct stm32_ospi_plat),
++	.priv_auto = sizeof(struct stm32_ospi_priv),
++	.probe = stm32_ospi_probe,
++};
 -- 
 2.25.1
 
-base-commit: 4a41a331efc4c6937cf4d2723282ca4d136cfb2b
-branch: upstream_OSPI_v2
