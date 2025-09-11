@@ -4,167 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E43CA101F
-	for <u-boot@archiver.kernel.org>; Wed, 10 Sep 2025 23:55:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE28CA101F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 01:56:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4F9883257;
-	Thu, 11 Sep 2025 01:54:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id C0BB1831C2;
+	Thu, 11 Sep 2025 03:56:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="G9U8AEkF";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A994A833AD; Thu, 11 Sep 2025 01:54:17 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 743F883236; Thu, 11 Sep 2025 03:56:55 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E54F83236
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 01:54:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 136A58319C
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 03:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N+KjisptQE7b9J5FxNKxqNJPxlp9yrpSeto9Q7wx7v7cwoZ8iRl1ggofX5VtL2oDEoXwTBWUGy1rUM7wqa7Ha2cK1d8vuyJf2jXteleTTZKi6nLorh8jrLwZGDk0kKuqrMoGjOYcHMIHhlVYRtPLgPGz0k/ZGEURj+6SQyT4jAKU/sFvykc5Rlkuczu8j/TToFnPz4rrbjBstT8LHS6eCr+M2Du5Nxsl8WK2MiIlQB7RBdjP5v/P3JpPtAEk0BdgeEvrfZOiXyhReqYamjSTxlB6jdojLjScI1Zxr6w2KKu8mQ1JZYHwSqgwqazL2hDlKG+k9HSj+Ci/hNAsoYM5GQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2/4519YpOJP2FArMPW/CXF2AOGAkp8YnvhAEyGC2ru8=;
- b=qAnI8DCphrbKwBNRXfRwBEU5DHN28DJmjvGoE6JL7OPGBcHKFWmIt+njnamz0sbuV5ibudO1HtnG1wVZNA/5IGvUhRsUsHkZQonIePXixDKg2gHZVwDtExLmmj+K/GIcMNv2Fljtwjces8G6aaaEvdwXT0+pUN+8H5r+NeMNWouquRN8VZSTtJYixpYk9U0mU8UBOlDckH+2hpMfvQ2ZeLDossRALllhK4Ko5E3GG06fKBRL00MFoWE2ZWmQkBjdwTqv+sE/kyr9x5JSg6/Gk9hFt/Y9t6gp5RLeE1Vc88WvPVxOfhRLo/VFThbtpJIUgpfyypHvbQ2wtHp/oxADXQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2/4519YpOJP2FArMPW/CXF2AOGAkp8YnvhAEyGC2ru8=;
- b=G9U8AEkFhX/RCXn2O5TRtVg6ubFCNEmhOJJilfrIJr7wXzCFp40MHBQnfhAZ6sRPJ65Y2zShzFGNjDEpQmem/92Bk19RE83I0gbHW59ueqY9qXhUP+RpeiRX4kECMcCzZcJAc5DwQ09zMaqe953m/Kowlj/TJsrNJPT2GRFjGrWQrDf4XNC7fGLJvMeZT621cM7iSmdSvbFKjKYJs+0pAizpTGMNMsRYQ92Rb6eIGqLI96KxCmEr5R/MRzrZppLGskTuX/GeejdcSiYuJRrBEQYxjq1fTxIbeTXaTo69SeVwKd2uuaCcAQ9tYBodJdT1J6fZT0rQiipw8C5LRG99hg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by PA2PR04MB10514.eurprd04.prod.outlook.com (2603:10a6:102:41e::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.15; Wed, 10 Sep
- 2025 23:54:14 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9115.010; Wed, 10 Sep 2025
- 23:54:14 +0000
-From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Date: Mon, 01 Sep 2025 18:48:07 +0800
-Subject: [PATCH v1 8/8] pinctrl: nxp: Add i.MX94 daisy register offset
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250901-imx94-v1-8-c85ae7cdd95c@oss.nxp.com>
-References: <20250901-imx94-v1-0-c85ae7cdd95c@oss.nxp.com>
-In-Reply-To: <20250901-imx94-v1-0-c85ae7cdd95c@oss.nxp.com>
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
- Alice Guo <alice.guo@nxp.com>
-Cc: u-boot@lists.denx.de, Alice Guo <alice.guo@oss.nxp.com>, 
- Jacky Bai <ping.bai@nxp.com>, Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.13.0
-X-ClientProxiedBy: MAXP287CA0008.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a00:49::18) To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.63.30]) (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 9A00FB2201A5;
+ Thu, 11 Sep 2025 03:56:50 +0200 (CEST)
+Message-ID: <5ce9ad71-2d24-408b-ba55-cd87bf96afb1@freeshell.de>
+Date: Wed, 10 Sep 2025 18:56:48 -0700
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|PA2PR04MB10514:EE_
-X-MS-Office365-Filtering-Correlation-Id: 15c80157-fdca-46d7-2840-08ddf0c55869
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|366016|1800799024|376014|19092799006|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NGl2a1VHVTl1ckgrRStlcE1yd2ZoaFQ4QlMrWkJERVcrK0txUnZQamdaaGRj?=
- =?utf-8?B?UFVWNUxKbW4zVVRRbWw1OHhVaHJndkpsTE5qVzVraUp4eDNSVzA0M3Z6RWwx?=
- =?utf-8?B?OExGWmZ5TXFRZjZldU90UFdhYUdtOGlwb0lMQnlyTUJMbHozSndHdWhpTEN4?=
- =?utf-8?B?WG5ZaFYybnNVc2ozYWJMUVZqYTVMcDIwa2IyWTNoNkorUFp2TFdLWUZ5YjVS?=
- =?utf-8?B?cjZhd1B4S0RBcnNFbzJHb2kxMHM4T1JBWHBPaTBoelh1KzB5SHoyVXFad2Fh?=
- =?utf-8?B?TTN1dUVjOXIxbXNiblFtYWxObU1veVRlNmRUMzZvNjl3V0RxTzdqc25UZTFx?=
- =?utf-8?B?T25KL1d4TVVTakJUMjhuc2NscXFoL2dRUEpWRkFGWGY5VmwzaUdPVE5TYmxo?=
- =?utf-8?B?dTlhclFXbEF1SzJhUmpFL2ZxVDlldm9zRFFBT2pJa0hFVVpMQmFtV01IWlg5?=
- =?utf-8?B?L3JPaHppZk5lanlIcnU5b2paTkgwVGF1ZGJ4Y2RNeWgyMGVMaUdyL0duM1FF?=
- =?utf-8?B?Z0Q3Zmx4MVZ5ZWJYSG1pdUU2Vndpb3NmbTA3QjhqQUdMYVQ0RnZzanJsRElG?=
- =?utf-8?B?Wk9uRTRoU2pwYUg3T2ZDc3d4QzRzTmpzcEVMQ2Y3QTRsRkZVKzZJNndGRm9R?=
- =?utf-8?B?ZTFqeFVqd3I3U1JIZmZncVZUQ3JmQVI2a3k2WWk0Uy9WWHZKNFNBMXdsM3FI?=
- =?utf-8?B?QjI0b2gxRnhvODNQemRzQ1plbmhpVUJKNmJOVTBIekxkT2NpSy9JbDNpYnI4?=
- =?utf-8?B?MjVlbGRvZHlrb2xlOFF6aXNLWmYySUU5aEQxa05oOFBCZWRldVBzQmY5eGtt?=
- =?utf-8?B?YUxTT2taNnFBV0IxWmc1dEVMa1lXMGZZTkR2V2NIV0dSS0ozWmhZNzZnbXNj?=
- =?utf-8?B?RUNXSWo1NUhzZ2g2MFZ5TE8wbmFXVW1mdXcwa0V0cjlSME96NkdLeG1YVkhj?=
- =?utf-8?B?eFZCVUFERHdGay85ZU5LT2p4RC9uYlBFdXJLYzA2aFNjOHZQcWFqdEYzYmFH?=
- =?utf-8?B?VHdZdlQrdDUwRzY3bkRNWG0xU2hGY1d2RXBCcGRMcFVncTMxaWpzdmhId3Bu?=
- =?utf-8?B?cG9RSG53Y1hIdFBvZkYwcjlkVHJZVVF0bmJBQjY5bXJSdkI2dkZZTFgyV1l0?=
- =?utf-8?B?eExMVkNWV3VqT0QwN0NpNzNlcEZJTVRRY0EycEpXWExJdnJITk9nQ2lqWFhx?=
- =?utf-8?B?ak9lSkpJcnRiOWo4QVplYjYyUDdkWHN1ZHVPZlAweGxoNnNmZGM5bXFwMnpP?=
- =?utf-8?B?bk1yWnFmeHZycmNINnR5UG8vL3A2c3JodTFHR1VCVjlHM01MeWs5WUNGY1BQ?=
- =?utf-8?B?VE0wQ2k4K3F2RWJaMGdMWC9JbEFEYkRsWjdGR3NiTTNZWVpsZk9IYkxrM0Z5?=
- =?utf-8?B?R0N0NytLVFNuTlppMHRwL3RFSkQrSm52SWZ6T25CbXR3N1ZkZVhZQm5XZGxO?=
- =?utf-8?B?c1FlWTdUMnR6cFdRdWhLc2JyeUczWUgzWlhMaHMzQzhoUmV5YitnM0RxUzhY?=
- =?utf-8?B?T3BEajJUR3Q2S3psMVZPZXdra1hrd3Y5TTRuQXZyZndWMjFVVDVrTDJKUXpJ?=
- =?utf-8?B?MzZlUVU1Q1BZRHBpa3ErWWhWMDY1KzJocXg4TTBnYktTMU1CM2x2SzdadFlV?=
- =?utf-8?B?NllJR2tRZDdzUEZpVjU0UW9ocUhlT0dla3dpVWVlNnBUVmU4M2ZtYnk4cWox?=
- =?utf-8?B?SStSaFJSNVBtcFVoUUQwcFI4UjIvRkh5L081QjY4OWFqbWpaUEJ6Uzc3MlZD?=
- =?utf-8?B?Q0lCaFdrSFl2SndwaUhWRWwrNkphRncyUFNyN28wUzV3OEducjBrZmhxQ3Zr?=
- =?utf-8?B?YWxXTSt5ZmhvclU5TDJpUkFFQ0lBeFU2dUFjRkNONmdFYzl6Zll5aHhzbmgw?=
- =?utf-8?B?amR5RkhMbk9Vd1B1TTdkL2tVZGR5UEhOZERLVVJkazQ5OGRTYjE2MlFEaC9X?=
- =?utf-8?B?aEhkNUw2WWwzSzdzT3FsVWFWZmQ2bzdlRFpoQlAxRFY5WjV4QkpqK0JjVjR2?=
- =?utf-8?Q?hEBdZEXaqa6wnfPeUJKkB9OqcVkyQQ=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(366016)(1800799024)(376014)(19092799006)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N2oxcmMvNUlFd2hrdk9YOVNXWkw3Yk52cVlvT1dnQ1NxYXdDUk00TVQrL3ZY?=
- =?utf-8?B?YVZtanJyWHRnWWtRblFRSXR2WElzRTZ5aldGWmVmQnM5MmdmbVdsdERJMW1J?=
- =?utf-8?B?d0FjUTdKN0hQY25qallpbEVIQmkzb0Z6Ymwwc1ByRlhJWGx3RnhqdmpjaXFJ?=
- =?utf-8?B?ZmIwbUgwWVViWHFYdy8yYUVMUldSNWNHZGtuSXUrblFBdStyTUdtM3ZCbU1t?=
- =?utf-8?B?bkhpUXFVZU8wMEUwZkhCTzVLcmJmUEFOcFNmZGErSE5GMjZWRE1ZejNKdkJy?=
- =?utf-8?B?UU1xcVkvWkxDeWNIUVFJeHBseVo2dWI5VkhaRHlLK1I2dzJmU2dsMndma04w?=
- =?utf-8?B?K2k1OWZ6SDd5MXdxSDNQZndpYUR2azBvY3VvZGRvSlpsUExFYWFzbWZQSkNw?=
- =?utf-8?B?ejBrMFVGMHJsOTd1bkUwQzlmMXlYSDZqcE83YVU4ZzBNS0NocWNTYlRhZU0x?=
- =?utf-8?B?NkdhRiswQW0wUVVQU0pLeG1lYU5Lc2JWdWEySzJSMFlsNFAybUY4RHBTU3Uw?=
- =?utf-8?B?V2Q5TTNEMU82Z1lTOGQ4d1pleFdodGZNQ3o0cnRucWVhY1FlSVZzRlhETHhu?=
- =?utf-8?B?bHRUSzhjMlYrWkRLT29MQTZRRkt6cjAydG5LL1ZXdGhHMkdueGFFZGdVU2hT?=
- =?utf-8?B?dHBnaUdzcFNpRTJoVE41OVpHNEpqM1BpWktvc0hTMHlkVncxaC9XWWJnb1hH?=
- =?utf-8?B?bS91S1d0bmVMLzNBcGg5dit3RmhONEpjamN1WStMcFZKbjhsWjIyVFg1SG5w?=
- =?utf-8?B?TndmKzl5NVBuSHBhNWxzUEpjb2NiQzBHY3RwV3lkZUxhR2RCOGNsdFQ4NHB5?=
- =?utf-8?B?Vnk1bjVYSGNJclpWd0ZwSU90N1RQbEp3VW43UkJ0ak4vV3ZGaVJpbUQrdVJr?=
- =?utf-8?B?Wk5KU1Jad215K25tZUpJcDA2QktaRkt4N1BvNVl6eUxVaUJmUlJkSWgzYnhN?=
- =?utf-8?B?SSsxY3pEVTRKdGg0cmpQeldqc09ySkZRR0dvRHUrVG4vT3JMRy96Zk0vNFR3?=
- =?utf-8?B?NUxuSzB1TWlYaWRWazlUbnI4NzBVM3JNWDNIaXJDQlJkTFFidUl3RC9UVjQw?=
- =?utf-8?B?aGNrSCtJcm5vTGxMMmhKTFU5NDltQUx4enp1clBOOFUwQVRYQlpkQ3Jtb0NZ?=
- =?utf-8?B?MWpmMDcrYUtxQklyK3pTMEJVMjBaanlCRlVhNDNDaWhlR29nYjZsbnFjVkNV?=
- =?utf-8?B?VXRGOVUyOElrcFR5UFVqV2lKcFphQ0Z6Q0VLaDBkN3prd3hMN3B5YWpKdnc3?=
- =?utf-8?B?VnNBd01YYVhnU0ZROTdEUTdSKytHc0dCbEtBWHpjaGRQdFRoR2d4ME4yM3A4?=
- =?utf-8?B?VzFYYzYrV0twejNMeDZrb2U2dS9RRGQzQ0lFdnNCTVNMM2RjTHgrd2F3Lzdm?=
- =?utf-8?B?b2ZIdWpGSmNQNVBlQ3lDQ3pxOWxCb0ZsTy9ScEJaY2VJcTIybVBxdG9NdGRh?=
- =?utf-8?B?OWFPbVBlTWZiYXp4b3JSTldrVlFNMS9rKzRjMWUvRUZnNHFSUFJrSGhRdUZM?=
- =?utf-8?B?T1JNYXhZYy9RQjl0TFYyMmJiYWU2M3VLalZKY2ZMZUNMQ1hjR25zWXY3Z00r?=
- =?utf-8?B?dFRmNVFCTG0yc2RXcTFBM3FzTlIrNHprTnowa2FUSzBnZTJldndLbjdMcUxF?=
- =?utf-8?B?ZC9ZenM0blhvOXJEN0c0eTVQWWNobkJsMDdxbGxFN1VsWFN0QXBhUzNEalVt?=
- =?utf-8?B?UEtxOHFvUFQ5M2Q5N1FyYUhKdDROQmp0T3V2djFmNUtoNkdCK21HaCtlcDFw?=
- =?utf-8?B?ZFp3ZVRIaytObWdMVWp1TFJCZy8xU01aTjZNT3FHdllVSEh6Qm5SNG13VTMv?=
- =?utf-8?B?WmVWcjFWQ2dmQmgyZm5iUzV0cEc4eG5STFdPeVBPODMrRWI1ZmhCMno4STFu?=
- =?utf-8?B?WjA2ei9SUnpCMGpoU09obHZLTE9aaDZEUzV1Wk9LR3hFcUo4dWZIN2l4akh2?=
- =?utf-8?B?d3BFL0o5TnJBZ2RCRmNuWlVjMzhkeHZuLzNFQ0toV3lYY2E4YllCN0o5OW5s?=
- =?utf-8?B?ZUNiMWlFUHJzK2hwd1hsMy9SeGVWK282Z2NqWUtMNmRqbzNvekVtUVc1YXpk?=
- =?utf-8?B?aEZycGhrbE1NSUhsNCtPMVhsTTRyMVpORm4wWlovL25oeGlPQzBGQnZjdjVk?=
- =?utf-8?Q?tTi9vvWs5dgO2N5SiaCHr8lQ7?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15c80157-fdca-46d7-2840-08ddf0c55869
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2025 23:54:14.0199 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: OPiNyel1QygeGvUBcO+HES+YBa8+vLhwr4PGryP4wlImSpRivJDc6VYoF5RviN0Mz50k33Y20EaY0BDs78WW4g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10514
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 4/8] imx9: scmi: Update the files under
+ arch/arm/mach-imx/imx9/scmi/ to support i.MX94
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Alice Guo <alice.guo@nxp.com>
+Cc: u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>, 
+ Jacky Bai <ping.bai@nxp.com>
+References: <20250901-imx94-v1-0-c85ae7cdd95c@oss.nxp.com>
+ <20250901-imx94-v1-4-c85ae7cdd95c@oss.nxp.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250901-imx94-v1-4-c85ae7cdd95c@oss.nxp.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,50 +59,303 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alice Guo <alice.guo@nxp.com>
+Hi Alice,
 
-Define the daisy register offset for i.MX94 at 0x608 within the iomuxc
-register space. This enables correct pad selection for daisy chain
-configuration on i.MX94 platforms.
+On 9/1/25 03:48, Alice Guo (OSS) wrote:
+> From: Ye Li <ye.li@nxp.com>
+> 
+> - Add base addresses for WDG3, WDG4, GPIO6, and GPIO7 for i.MX94.
+> - Introduce common.h with macros of clock IDs, power domains, and CPU
+>   types for platform-specific replacement (e.g., i.MX94, i.MX95).
+> - Extend imx_get_mac_from_fuse() to support i.MX94.
+> 
+> Signed-off-by: Ye Li <ye.li@nxp.com>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+> Acked-by: Peng Fan <peng.fan@nxp.com>
+> Reviewed-by: Jacky Bai <ping.bai@nxp.com>
+> ---
+>  arch/arm/include/asm/arch-imx9/imx-regs.h |  9 ++++++
+>  arch/arm/mach-imx/imx9/scmi/clock.c       | 28 +++++++++--------
+>  arch/arm/mach-imx/imx9/scmi/common.h      | 41 +++++++++++++++++++++++++
+>  arch/arm/mach-imx/imx9/scmi/soc.c         | 50 ++++++++++++++++++++++++-------
+>  4 files changed, 105 insertions(+), 23 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-imx9/imx-regs.h b/arch/arm/include/asm/arch-imx9/imx-regs.h
+> index 5127fe8f286..a44fa6663c3 100644
+> --- a/arch/arm/include/asm/arch-imx9/imx-regs.h
+> +++ b/arch/arm/include/asm/arch-imx9/imx-regs.h
+> @@ -17,14 +17,23 @@
+>  
+>  #define ANATOP_BASE_ADDR    0x44480000UL
+>  
+> +#ifdef CONFIG_IMX94
+> +#define WDG3_BASE_ADDR      0x49220000UL
+> +#define WDG4_BASE_ADDR      0x49230000UL
+> +#else
+>  #define WDG3_BASE_ADDR      0x42490000UL
+>  #define WDG4_BASE_ADDR      0x424a0000UL
+> +#endif
+>  #define WDG5_BASE_ADDR      0x424b0000UL
+>  
+>  #define GPIO2_BASE_ADDR	    0x43810000UL
+>  #define GPIO3_BASE_ADDR	    0x43820000UL
+>  #define GPIO4_BASE_ADDR	    0x43840000UL
+>  #define GPIO5_BASE_ADDR	    0x43850000UL
+> +#ifdef CONFIG_IMX94
+> +#define GPIO6_BASE_ADDR	    0x43860000UL
+> +#define GPIO7_BASE_ADDR	    0x43870000UL
+> +#endif
+>  
+>  #define FSB_BASE_ADDR       0x47510000UL
+>  
+> diff --git a/arch/arm/mach-imx/imx9/scmi/clock.c b/arch/arm/mach-imx/imx9/scmi/clock.c
+> index 6e6541eaa31..1f071873dca 100644
+> --- a/arch/arm/mach-imx/imx9/scmi/clock.c
+> +++ b/arch/arm/mach-imx/imx9/scmi/clock.c
+> @@ -6,16 +6,18 @@
+>  #include <asm/arch/clock.h>
+>  #include <dm/uclass.h>
+>  #include <scmi_agent.h>
+> +#include <scmi_nxp_protocols.h>
 
-Signed-off-by: Jacky Bai <ping.bai@nxp.com>
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
-Acked-by: Peng Fan <peng.fan@nxp.com>
----
- drivers/pinctrl/nxp/pinctrl-imx-scmi.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+>  #include "../../../../../dts/upstream/src/arm64/freescale/imx95-clock.h"
 
-diff --git a/drivers/pinctrl/nxp/pinctrl-imx-scmi.c b/drivers/pinctrl/nxp/pinctrl-imx-scmi.c
-index aed47be337d..781835c6852 100644
---- a/drivers/pinctrl/nxp/pinctrl-imx-scmi.c
-+++ b/drivers/pinctrl/nxp/pinctrl-imx-scmi.c
-@@ -16,6 +16,7 @@
- #include "pinctrl-imx.h"
- 
- #define DAISY_OFFSET_IMX95      0x408
-+#define DAISY_OFFSET_IMX94      0x608
- 
- /* SCMI pin control types */
- #define PINCTRL_TYPE_MUX        192
-@@ -133,6 +134,8 @@ static int imx_scmi_pinctrl_probe(struct udevice *dev)
- 
- 	if (IS_ENABLED(CONFIG_IMX95))
- 		priv->daisy_offset = DAISY_OFFSET_IMX95;
-+	else if (IS_ENABLED(CONFIG_IMX94))
-+		priv->daisy_offset = DAISY_OFFSET_IMX94;
- 	else
- 		return -EINVAL;
- 
-@@ -141,7 +144,7 @@ static int imx_scmi_pinctrl_probe(struct udevice *dev)
- 
- static int imx_scmi_pinctrl_bind(struct udevice *dev)
- {
--	if (IS_ENABLED(CONFIG_IMX95))
-+	if (IS_ENABLED(CONFIG_IMX95) || IS_ENABLED(CONFIG_IMX94))
- 		return 0;
- 
- 	return -ENODEV;
+What is this? I asked and it was suggested to send a patch upstream, but
+they said no. Ref:
+https://lore.kernel.org/lkml/PAXPR04MB845970863A16718967270D1A880EA@PAXPR04MB8459.eurprd04.prod.outlook.com/
 
--- 
-2.43.0
+> +#include "common.h"
+>  
+>  u32 get_arm_core_clk(void)
+>  {
+>  	u32 val;
+>  
+> -	val = imx_clk_scmi_get_rate(IMX95_CLK_SEL_A55C0);
+> +	val = imx_clk_scmi_get_rate(SCMI_CLK(SEL_A55C0));
+>  	if (val)
+>  		return val;
+> -	return imx_clk_scmi_get_rate(IMX95_CLK_A55);
+> +	return imx_clk_scmi_get_rate(SCMI_CLK(A55));
+>  }
+>  
+>  void init_uart_clk(u32 index)
+> @@ -24,13 +26,13 @@ void init_uart_clk(u32 index)
+>  
+>  	switch (index) {
+>  	case 0:
+> -		clock_id = IMX95_CLK_LPUART1;
+> +		clock_id = SCMI_CLK(LPUART1);
+>  		break;
+>  	case 1:
+> -		clock_id = IMX95_CLK_LPUART2;
+> +		clock_id = SCMI_CLK(LPUART2);
+>  		break;
+>  	case 2:
+> -		clock_id = IMX95_CLK_LPUART3;
+> +		clock_id = SCMI_CLK(LPUART3);
+>  		break;
+>  	default:
+>  		return;
+> @@ -38,7 +40,7 @@ void init_uart_clk(u32 index)
+>  
+>  	/* 24MHz */
+>  	imx_clk_scmi_enable(clock_id, false);
+> -	imx_clk_scmi_set_parent(clock_id, IMX95_CLK_24M);
+> +	imx_clk_scmi_set_parent(clock_id, SCMI_CLK(24M));
+>  	imx_clk_scmi_set_rate(clock_id, 24000000);
+>  	imx_clk_scmi_enable(clock_id, true);
+>  }
+> @@ -49,19 +51,19 @@ unsigned int mxc_get_clock(enum mxc_clock clk)
+>  	case MXC_ARM_CLK:
+>  		return get_arm_core_clk();
+>  	case MXC_IPG_CLK:
+> -		return imx_clk_scmi_get_rate(IMX95_CLK_BUSWAKEUP);
+> +		return imx_clk_scmi_get_rate(SCMI_CLK(BUSWAKEUP));
+>  	case MXC_CSPI_CLK:
+> -		return imx_clk_scmi_get_rate(IMX95_CLK_LPSPI1);
+> +		return imx_clk_scmi_get_rate(SCMI_CLK(LPSPI1));
+>  	case MXC_ESDHC_CLK:
+> -		return imx_clk_scmi_get_rate(IMX95_CLK_USDHC1);
+> +		return imx_clk_scmi_get_rate(SCMI_CLK(USDHC1));
+>  	case MXC_ESDHC2_CLK:
+> -		return imx_clk_scmi_get_rate(IMX95_CLK_USDHC2);
+> +		return imx_clk_scmi_get_rate(SCMI_CLK(USDHC2));
+>  	case MXC_ESDHC3_CLK:
+> -		return imx_clk_scmi_get_rate(IMX95_CLK_USDHC3);
+> +		return imx_clk_scmi_get_rate(SCMI_CLK(USDHC3));
+>  	case MXC_UART_CLK:
+> -		return imx_clk_scmi_get_rate(IMX95_CLK_LPUART1);
+> +		return imx_clk_scmi_get_rate(SCMI_CLK(LPUART1));
+>  	case MXC_FLEXSPI_CLK:
+> -		return imx_clk_scmi_get_rate(IMX95_CLK_FLEXSPI1);
+> +		return imx_clk_scmi_get_rate(SCMI_CLK(FLEXSPI1));
+>  	default:
+>  		return -1;
+>  	};
+> diff --git a/arch/arm/mach-imx/imx9/scmi/common.h b/arch/arm/mach-imx/imx9/scmi/common.h
+> new file mode 100644
+> index 00000000000..df26ecff3e4
+> --- /dev/null
+> +++ b/arch/arm/mach-imx/imx9/scmi/common.h
+> @@ -0,0 +1,41 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright 2025 NXP
+> + */
+> +
+> +#ifndef _SCMI_CLOCK_COMMON_H_
+> +#define _SCMI_CLOCK_COMMON_H_
+> +
+
+> +#ifdef CONFIG_IMX94
+> +#define IMX_PLAT 94
+> +#include <../dts/upstream/src/arm64/freescale/imx94-clock.h>
+> +#include <../dts/upstream/src/arm64/freescale/imx94-power.h>
+> +
+> +#define IMX94_CLK_FLEXSPI1 IMX94_CLK_XSPI1
+> +#endif
+> +
+> +#ifdef CONFIG_IMX95
+> +#define IMX_PLAT 95
+> +#include <../dts/upstream/src/arm64/freescale/imx95-clock.h>
+> +#include <../dts/upstream/src/arm64/freescale/imx95-power.h>
+> +
+> +#define IMX95_PD_M70 IMX95_PD_M7
+> +#endif
+
+Again this weird include relative-global path... not good.
+
+I don't know what it should be, sorry. It is fragile and we should do
+something better.
+
+> +
+> +#define IMX_PLAT_STR__(plat) # plat
+> +#define IMX_PLAT_STR_(IMX_PLAT) IMX_PLAT_STR__(IMX_PLAT)
+> +#define IMX_PLAT_STR IMX_PLAT_STR_(IMX_PLAT)
+> +
+> +#define SCMI_CLK__(plat, clk) IMX ## plat ## _CLK_ ## clk
+> +#define SCMI_CLK_(plat, clk) SCMI_CLK__(plat, clk)
+> +#define SCMI_CLK(clk) SCMI_CLK_(IMX_PLAT, clk)
+> +
+> +#define SCMI_PD__(plat, pd) IMX ## plat ## _PD_ ## pd
+> +#define SCMI_PD_(plat, pd) SCMI_PD__(plat, pd)
+> +#define SCMI_PD(pd) SCMI_PD_(IMX_PLAT, pd)
+> +
+> +#define SCMI_CPU__(plat) MXC_CPU_IMX ## plat
+> +#define SCMI_CPU_(plat) SCMI_CPU__(plat)
+> +#define SCMI_CPU SCMI_CPU_(IMX_PLAT)
+> +
+> +#endif
+> diff --git a/arch/arm/mach-imx/imx9/scmi/soc.c b/arch/arm/mach-imx/imx9/scmi/soc.c
+> index f0b2aad8701..43aecca6f48 100644
+> --- a/arch/arm/mach-imx/imx9/scmi/soc.c
+> +++ b/arch/arm/mach-imx/imx9/scmi/soc.c
+> @@ -21,6 +21,7 @@
+>  #include <linux/iopoll.h>
+>  #include <scmi_agent.h>
+>  #include <scmi_nxp_protocols.h>
+> +#include "common.h"
+>  
+>  DECLARE_GLOBAL_DATA_PTR;
+>  
+> @@ -176,7 +177,7 @@ u32 get_cpu_rev(void)
+>  {
+>  	u32 rev = (gd->arch.soc_rev >> 24) - 0xa0;
+>  
+> -	return (MXC_CPU_IMX95 << 12) | (CHIP_REV_1_0 + rev);
+> +	return (SCMI_CPU << 12) | (CHIP_REV_1_0 + rev);
+>  }
+>  
+>  #define UNLOCK_WORD 0xD928C520
+> @@ -437,12 +438,16 @@ void imx_get_mac_from_fuse(int dev_id, unsigned char *mac)
+>  {
+>  	u32 val[2] = {};
+>  	int ret, num_of_macs;
+> +	u32 bank = 40;
+>  
+> -	ret = fuse_read(40, 5, &val[0]);
+> +	if (is_imx94())
+> +		bank = 66;
+> +
+> +	ret = fuse_read(bank, 5, &val[0]);
+>  	if (ret)
+>  		goto err;
+>  
+> -	ret = fuse_read(40, 6, &val[1]);
+> +	ret = fuse_read(bank, 6, &val[1]);
+>  	if (ret)
+>  		goto err;
+>  
+> @@ -458,10 +463,32 @@ void imx_get_mac_from_fuse(int dev_id, unsigned char *mac)
+>  	mac[3] = (val[0] >> 24) & 0xff;
+>  	mac[4] = val[1] & 0xff;
+>  	mac[5] = (val[1] >> 8) & 0xff;
+> -	if (dev_id == 1)
+> -		mac[5] = mac[5] + 3;
+> -	if (dev_id == 2)
+> -		mac[5] = mac[5] + 6;
+> +
+> +	if (is_imx94()) {
+> +		/*
+> +		 * i.MX94 uses the following mac address offset list:
+> +		 * | No.    | Module      | Mac address user          |
+> +		 * |--------|-------------|---------------------------|
+> +		 * | 0 ~ 1  | ethercat    | port0/port1               |
+> +		 * | 2      | netc switch | internal enetc3 mac/swp0  |
+> +		 * | 3 ~ 6  |             | enetc3 vf1~3/swp1         |
+> +		 * | 7      | enetc mac   | enetc0 pf                 |
+> +		 * | 8      |             | enetc1 pf                 |
+> +		 * | 9      |             | enetc2 pf                 |
+> +		 * | 10     | netc switch | swp2                      |
+> +		 */
+> +		if (dev_id == 0)
+> +			mac[5] = mac[5] + 2; /* enetc3 mac/swp0 */
+> +		if (dev_id == 1)
+> +			mac[5] = mac[5] + 8; /* enetc1 */
+> +		if (dev_id == 2)
+> +			mac[5] = mac[5] + 9; /* enetc2 */
+> +	} else {
+> +		if (dev_id == 1)
+> +			mac[5] = mac[5] + 3;
+> +		if (dev_id == 2)
+> +			mac[5] = mac[5] + 6;
+> +	}
+>  
+>  	debug("%s: MAC%d: %pM\n", __func__, dev_id, mac);
+>  	return;
+> @@ -518,7 +545,6 @@ static char *rst_string_imx94[32] = {
+>  	"por"
+>  };
+>  
+> -
+>  int get_reset_reason(bool sys, bool lm)
+>  {
+>  	struct scmi_imx_misc_reset_reason_in in = {
+> @@ -612,8 +638,8 @@ int get_reset_reason(bool sys, bool lm)
+>  const char *get_imx_type(u32 imxtype)
+>  {
+>  	switch (imxtype) {
+> -	case MXC_CPU_IMX95:
+> -		return "95";/* iMX95 FULL */
+> +	case SCMI_CPU:
+> +		return IMX_PLAT_STR;
+>  	default:
+>  		return "??";
+>  	}
+> @@ -701,6 +727,10 @@ int arch_cpu_init(void)
+>  		gpio_reset(GPIO3_BASE_ADDR);
+>  		gpio_reset(GPIO4_BASE_ADDR);
+>  		gpio_reset(GPIO5_BASE_ADDR);
+> +#ifdef CONFIG_IMX94
+> +		gpio_reset(GPIO6_BASE_ADDR);
+> +		gpio_reset(GPIO7_BASE_ADDR);
+> +#endif
+>  	}
+>  
+>  	return 0;
+> 
+
+Best regards,
+
+-E Shattow
 
