@@ -4,67 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E04ECAC587
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 16:10:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A4D5CAC587
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 16:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CD47833BF;
+	by phobos.denx.de (Postfix) with ESMTP id 6BB81833EC;
 	Thu, 11 Sep 2025 18:10:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="W94Ro0QO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iXiLY+MK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BACAA833EB; Thu, 11 Sep 2025 15:35:50 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3E617833C0; Thu, 11 Sep 2025 15:35:51 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00C4E833C0
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:35:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CB6D833E1
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:35:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=mathieu.dubois-briand@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 61FDA1A0DB9;
- Thu, 11 Sep 2025 13:35:47 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 3909460630;
- Thu, 11 Sep 2025 13:35:47 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4D9BB102F29DB; 
- Thu, 11 Sep 2025 15:35:34 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1757597746; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=zvj/0gh5zFe5rqZoFI72Tdtur2zqnViYorPR3ZF9KKQ=;
- b=W94Ro0QOQke0F6Mza8FoQ17PtMdadf1CXBl1k+WC5qZlsNrJhnxr2sY0xDIRN41s3L2+qn
- edX/VPPVAzTiRPpZxPzEBPp0X4k4tLhg7BYLdmwHPVbdbD0ZmA0J4b6U+1e4AP796diu9D
- NCuus6FNkJbpO6T2cxE4BrjfqO7KrISl1g/GEaXYbcbSkDBjtYcNUKVNVnDyXhFaym7MUH
- M/S0swjp+6gdZzA+UdM3doAMzCoj08COzGxIGe6VIMaswu1XtGjnj4vbv45tlFIieg4Qcn
- J/WBnSnRW94WrpHAxJ7yHdzS69ApvhaVWl6pkAhoAVz+IAPYXiKILYHuUkLRtw==
-From: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Date: Thu, 11 Sep 2025 15:34:28 +0200
-Subject: [PATCH] imx93_frdm: Add support for flashing board with UUU
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ranquet.guillaume@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-45dec1ae562so6876745e9.1
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 06:35:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757597749; x=1758202549; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Jj+VxDDPoVWOScyog32eLkBz/EftUhvrkDG4RyRUOUQ=;
+ b=iXiLY+MKVJmJ4LkCisgw2f+Bef+qNsWOOD4pQjktne0SYHEMDbxwzG0S6ZJkUmGH4J
+ d/Pxg6HQmYD6GBeZvCLSdLuirjbNY68NJY8pRhSnzaEa1BUbnUFgosdrG5rmmgsAAZ7N
+ 0W5PpN/r+OTvVnkZZCYzeCaAc0iwyiEMRRcTlwbszybKne5O4xWjNDJxB7bE6LbONPuM
+ TpwZnh3YP+06WZAbsq8ktQeIc1dwBMVOmyiCsKAcGL+GT7grXVpKnOy40xG8FzSubm1C
+ eB4D1+S2v4DmiPcXmd3RP2zyoDEaoSzjmtv8pZvYZvorrbCDPeDzYROd9QBKwik9KazR
+ fLzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757597749; x=1758202549;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Jj+VxDDPoVWOScyog32eLkBz/EftUhvrkDG4RyRUOUQ=;
+ b=ITPCqEIgToxAuNjeIfLts2cQ4130b/gpmnMyCuUMi9HDX5CEyBDyxxGnnZm5KyhOlo
+ AzmsARFrUyz+GxE3N4P/Xyhl0hjz5y+Oew9etot+SD9+v517SOqjT+l2wYnPxrx14YUj
+ iDEVYTfYQG8A7IaY+YX50kw9JGfGVfmLlBSPschVd5G3/Vlu4KanD8qzG9te47HsAy0J
+ e0qGBAbwN6MAAXJwXVDrcQ16EXlW3P/toIG5GlKh6vrGdR8Acz0CE36GZfvFtAhsk557
+ u0CyjW2IRyBfKDQgFGivsDMWVAnTwcwYUIkO/LaOuTmCdgG5qg59K6TAO+9t3G0C0+AA
+ bDPg==
+X-Gm-Message-State: AOJu0Yzg71b0v5Fyd+jxGvmQOC99GgrPMmYcs6s5kO0pSzKbLFSXUF5V
+ Ncrmgsc9TNxSie/X5bzkk2/KC4OKE+ZIDUxwnmNVam1pJ1paBsMvkIDc
+X-Gm-Gg: ASbGncuaTD5PQ3J3STzPRZZnu9xU+pP8sEQRhQJXBiCLP3vFqHO4ducw8tMsP8ijp/Z
+ UG2+kK2dSj29iu6pQasn4iyqRPe4zB5qMidpKSjBisgcjJ8YY42S8NxvFAaBf3gd4WCKkdrosnr
+ NPbbpR0WrTDQBFZ+STTA5Gi8kYqK7sYsqzmhJeJOJc7WlsSp9rkv1bzowfW4KK8UJLohOwJ4PKL
+ 7DPdqzUBtbgz41RTff7nYX8vo6D4YqwZJflUtjNKv3L2565TVcmdqkUxFyY3NEAj7xXxbTkQoDY
+ qSjKU/e363Qh0S9x4cKyBcnxhlCv/IriGoNZXwd1W2JTCPjCDxIay8d/giCyeMWqfUazjxIBUEb
+ mRDJSOvrOvPj3V8fDpsOZKDVfegZmXMICsd+r3WVOEwEw7hu5glVaGjMQD4AQ8cjyjdy0fmzzv2
+ 8=
+X-Google-Smtp-Source: AGHT+IGpRwkI37oQ4JhYNe2inZLQ38C3vEZbUhpsyYOyvUfFmIvflIR5EgTD5D+/AreM8UO37yUpuA==
+X-Received: by 2002:a05:600c:3b08:b0:45c:b549:2241 with SMTP id
+ 5b1f17b1804b1-45ddded9806mr161402875e9.27.1757597748339; 
+ Thu, 11 Sep 2025 06:35:48 -0700 (PDT)
+Received: from [127.0.0.1] (lfbn-tou-1-1277-64.w90-76.abo.wanadoo.fr.
+ [90.76.96.64]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45e017c1455sm26729455e9.24.2025.09.11.06.35.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Sep 2025 06:35:47 -0700 (PDT)
+From: Guillaume Ranquet <ranquet.guillaume@gmail.com>
+Date: Thu, 11 Sep 2025 15:35:41 +0200
+Subject: [PATCH] x86: boot: fix unreachable else branch in boot_prep_linux
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250911-mathieu-frdm_imx93_fastboot-v1-1-c629d8b7c8cc@bootlin.com>
-X-B4-Tracking: v=1; b=H4sIAOPPwmgC/x3MwQqEIBAA0F+JOSeouxX1KxEy2VhzMENtCaJ/X
- +n4Lu+GRJEpwVDdEOnHicNeoOoK7Ib7SoKXYtBSN7JXSnjMG9MpXFy8YX/1H+Mw5TmELDqcpbR
- Nq/FroQxHJMfXu4/T8/wBvQKOoW0AAAA=
-To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>
-Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
- Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-X-Mailer: b4 0.14.1
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1757597734; l=3654;
- i=mathieu.dubois-briand@bootlin.com; s=20241219; h=from:subject:message-id;
- bh=PuabTONHOI3Wi68roDlpuNjBuN3i7VlZrimHSyEB9a4=;
- b=glgz8TmKPdfjoxU2fhiTiuY3u2CYMWBtsy1EWIlReG0Y7/rkvhQw8og1WicbmdEl04wuf+Kld
- G0AwrmmXJVeAKBoqlW9susPyvOywhE8qywLFWNPsSCnHncnkczIFkMJ
-X-Developer-Key: i=mathieu.dubois-briand@bootlin.com; a=ed25519;
- pk=1PVTmzPXfKvDwcPUzG0aqdGoKZJA3b9s+3DqRlm0Lww=
-X-Last-TLS-Session-Version: TLSv1.3
+Message-Id: <20250911-fix_fit_zimage-v1-1-bd779ef56b22@gmail.com>
+X-B4-Tracking: v=1; b=H4sIACzQwmgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDcwNj3bTMivi0zJL4qszcRKCsqXlSipmRZZppYpKpElBTQVEqUAXYwOj
+ Y2loABqzgemAAAAA=
+X-Change-ID: 20250703-fix_fit_zimage-57bd629f5ab5
+To: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Guillaume Ranquet <ranquet.guillaume@gmail.com>
+X-Mailer: b4 0.14.2
 X-Mailman-Approved-At: Thu, 11 Sep 2025 18:10:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,116 +102,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow to flash a board using NXP UUU utility:
-- Enable fastboot support on USB.
-- Add fastboot partition aliases with names used by UUU. Also add extra
-  environment variables used by UUU.
-- Set 'dofastboot' environment variable based on boot device
-  configuration, allowing to automatically enter fastboot when booting
-  from USB.
+The else if branch uses the is_zimage boolean which is initialized to 0
+and never set before being tested here.
 
-Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+remove the test on is_zimage to make this code reachable.
+
+Signed-off-by: Guillaume Ranquet <ranquet.guillaume@gmail.com>
 ---
- board/freescale/imx93_frdm/imx93_frdm.c   |  6 ++++++
- board/freescale/imx93_frdm/imx93_frdm.env |  8 ++++++++
- configs/imx93_frdm_defconfig              | 13 +++++++++++++
- 3 files changed, 27 insertions(+)
+ arch/x86/lib/bootm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/freescale/imx93_frdm/imx93_frdm.c b/board/freescale/imx93_frdm/imx93_frdm.c
-index c74fd85712f4..ab9ee040d8bf 100644
---- a/board/freescale/imx93_frdm/imx93_frdm.c
-+++ b/board/freescale/imx93_frdm/imx93_frdm.c
-@@ -10,6 +10,7 @@
- #include <asm/arch/sys_proto.h>
- #include <asm/arch-imx9/imx93_pins.h>
- #include <asm/arch/clock.h>
-+#include <asm/mach-imx/boot_mode.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
- 
-@@ -55,5 +56,10 @@ int board_late_init(void)
- 		env_set("board_rev", "iMX93");
- 	}
- 
-+	if (get_boot_device() == USB_BOOT) {
-+		printf("Detect USB boot. Will enter fastboot mode!\n");
-+		env_set_ulong("dofastboot", 1);
-+	}
-+
- 	return 0;
- }
-diff --git a/board/freescale/imx93_frdm/imx93_frdm.env b/board/freescale/imx93_frdm/imx93_frdm.env
-index 528a953c8df1..ea5000f1c685 100644
---- a/board/freescale/imx93_frdm/imx93_frdm.env
-+++ b/board/freescale/imx93_frdm/imx93_frdm.env
-@@ -19,8 +19,16 @@ kernel_addr_r=CONFIG_SYS_LOAD_ADDR
- loadimage=load mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
- loadfdt=load mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
- boot_os=booti ${loadaddr} - ${fdt_addr_r}
-+fastboot_partition_alias_all=0:0
-+fastboot_partition_alias_bootloader=0.1
-+emmc_dev=0
-+sd_dev=0
-+dofastboot=0
- 
- bsp_bootcmd=
-+	if test ${dofastboot} = 1; then
-+		fastboot 0;
-+	fi;
- 	echo Running BSP bootcmd ...;
- 	mmc dev ${mmcdev};
- 	run mmcargs;
-diff --git a/configs/imx93_frdm_defconfig b/configs/imx93_frdm_defconfig
-index 4f837ca92828..3f96e1ddd4ff 100644
---- a/configs/imx93_frdm_defconfig
-+++ b/configs/imx93_frdm_defconfig
-@@ -30,6 +30,7 @@ CONFIG_EFI_VAR_BUF_SIZE=139264
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-+# CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_BOOTCOMMAND="bootflow scan -lb; run bsp_bootcmd"
- CONFIG_DEFAULT_FDT_FILE="imx93-11x11-frdm.dtb"
- CONFIG_SYS_CBSIZE=2048
-@@ -58,6 +59,7 @@ CONFIG_CMD_ERASEENV=y
- CONFIG_CMD_NVEDIT_EFI=y
- # CONFIG_CMD_CRC32 is not set
- CONFIG_CMD_MEMTEST=y
-+# CONFIG_CMD_BIND is not set
- CONFIG_CMD_CLK=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_FUSE=y
-@@ -91,6 +93,11 @@ CONFIG_ADC_IMX93=y
- CONFIG_SPL_CLK_IMX93=y
- CONFIG_CLK_IMX93=y
- CONFIG_DFU_MMC=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x82800000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_UUU_SUPPORT=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_IMX_RGPIO2P=y
- CONFIG_DM_PCA953X=y
- CONFIG_DM_I2C=y
-@@ -116,6 +123,12 @@ CONFIG_SYSRESET=y
- CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_DM_THERMAL=y
-+CONFIG_USB=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
-+CONFIG_CI_UDC=y
- CONFIG_ULP_WATCHDOG=y
- CONFIG_WDT=y
- CONFIG_SHA384=y
+diff --git a/arch/x86/lib/bootm.c b/arch/x86/lib/bootm.c
+index 0827a884b1d245ecb8a55d46105a1d67d0cdfb56..7a94dc877e31dc8c02131699b9318c35e4fcfe79 100644
+--- a/arch/x86/lib/bootm.c
++++ b/arch/x86/lib/bootm.c
+@@ -103,7 +103,7 @@ static int boot_prep_linux(struct bootm_headers *images)
+ 		}
+ 		is_zimage = 1;
+ #if defined(CONFIG_FIT)
+-	} else if (images->fit_uname_os && is_zimage) {
++	} else if (images->fit_uname_os) {
+ 		ret = fit_image_get_data(images->fit_hdr_os,
+ 					 images->fit_noffset_os,
+ 					 (const void **)&data, &len);
 
 ---
-base-commit: 7a4f3c5652157cbb3d26a7728bfe537ea483efc9
-change-id: 20250911-mathieu-frdm_imx93_fastboot-7ab00c562a4c
+base-commit: c85b8071e7d3fd333f8a2fdd28083cb5ec3a0645
+change-id: 20250703-fix_fit_zimage-57bd629f5ab5
 
 Best regards,
 -- 
-Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Guillaume Ranquet <ranquet.guillaume@gmail.com>
 
