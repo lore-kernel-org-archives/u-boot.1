@@ -4,67 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E127CAC58E
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 13:17:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B74FCAC58E
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 14:24:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 566AD833F1;
-	Thu, 11 Sep 2025 15:14:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 41B45833AD;
+	Thu, 11 Sep 2025 16:24:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=minlexx.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hxdep8Yv";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=minlexx.ru header.i=@minlexx.ru header.b="F9NNwUtA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D988833C0; Thu, 11 Sep 2025 15:14:56 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36E84835D8
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 15:14:54 +0200 (CEST)
+ id 7E015833C6; Thu, 11 Sep 2025 16:24:10 +0200 (CEST)
+Received: from sm24.hosting.reg.ru (sm24.hosting.reg.ru [31.31.198.150])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F1C088334F
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 16:24:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BDEqsq297121;
- Thu, 11 Sep 2025 08:14:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757596492;
- bh=/AST6HSymsA4mtX2qT7CW7w4DRgTObiD2AVUNWIL6Fo=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=hxdep8Yvnx850Z/LvuzPt/RmHWs8jgyXNy6yfWc0gL8mXl8IijooyRgSbZQLW7UfT
- qLQuSyyZF09aoMGi5zg1glsVO8VlpG5QWIfePp6c7K7uHjtfFHmAw4rZhKO/AeJ915
- Vq3+HanxEdiqbofgEzhqhhoSig3kzJcOi19RwY50=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BDEqmt515851
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 11 Sep 2025 08:14:52 -0500
-Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 11
- Sep 2025 08:14:51 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 11 Sep 2025 08:14:51 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BDEopl2169102;
- Thu, 11 Sep 2025 08:14:51 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
- <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH RFT v1 17/17] arm: spl: use fdt addr if arg is unset in falcon
- mode
-Date: Thu, 11 Sep 2025 18:44:13 +0530
-Message-ID: <20250911131414.3296697-18-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250911131414.3296697-1-anshuld@ti.com>
-References: <20250911131414.3296697-1-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=minlexx.ru
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=alexeymin@minlexx.ru
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=minlexx.ru; 
+ s=dkim;
+ h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:
+ Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=6KZWtnxJUUq938q5fc5FywTIwyIjpOWi3Izf+5FdNd8=; b=F9NNwUtAaz86GOFVG7hHG1qFi7
+ AAkpIxX7ZLsDHJoFySvgwxh20EcGJW4yqeDo+TY594wk1dVutICAzsoDAPHkmhD0mROOAlNXWbQrU
+ gBY9aaQO/lM/Fc4OQWGR6zFZB/jTwlcXntWWjwqXpm1damwbnPuvELUSdrDk9HCePhZU=;
+Received: by sm24.hosting.reg.ru with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+ (envelope-from <alexeymin@minlexx.ru>) id 1uwiDV-000000000r7-47ao;
+ Thu, 11 Sep 2025 17:24:05 +0300
+Message-ID: <04a4b029-c661-4921-9981-96ce82fb2498@minlexx.ru>
+Date: Thu, 11 Sep 2025 17:24:05 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/6] Fix UART autoboot issues on DragonBoard 410c
+To: u-boot-qcom@groups.io, Casey Connolly <casey.connolly@linaro.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Sam Day <me@samcday.com>, u-boot@lists.denx.de
+References: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
+Content-Language: en-US
+From: Alexey Minnekhanov <alexeymin@minlexx.ru>
+In-Reply-To: <20250908-db410c-autoboot-fixes-v2-0-316ed98e0143@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,31 +70,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-spl_image->arg is passed to the kernel as an argument in the x0
-register. However in cases when the kernel is loaded from a FIT
-container along with a DT, the arg remains unset which leads to boot
-failure.
+On 08.09.2025 14:31, Stephan Gerhold via groups.io wrote:
+> There have been issues with autoboot on DB410c for years, where autoboot
+> gets interrupted by spurious input on the UART console. I've tried fixing
+> this back in 2021, but it turned out this fix was not enough. Looking into
+> it further, there are two separate issues to fix:
+> 
+>   - Spurious input with UART disconnected: The RX pin is floating in this
+>     case, resulting in garbage or a UART break event (0x00 byte). This is
+>     interpreted as input in the autoboot prompt. Fix this by adding
+>     bias-pull-up for the RX pin. I've made this change upstream in Linux
+>     6.16 for all MSM8916/MSM8939 devices and it has already landed in U-Boot
+>     through the recent subtree update of dts/upstream.
+> 
+>   - Spurious input when querying console size with UART connected: It's
+>     unclear why this happens, but it seems to be some issue in the overly
+>     complex implementation of 4-character packing mode in the serial_msm
+>     driver. Fix this by switching the driver to use the more simple
+>     single-character mode, which doesn't have this issue.
+> 
+> With these patches, autoboot is finally working reliably on DragonBoard
+> 410c (and hopefully will remain so for the future :-)).
+> 
+FWIW I've tested this series using serial UART DM interface on SDM660 
+device. It does not fix *all* the issues needed for it to function 
+there, but I can confirm it does not break anything and makes things 
+much better than before, now with proper resetting and single-character 
+mode it's possible to not rely on configuration from previous boot 
+loader, for example.
 
-Therefore, this patch sets the arg to fdt address if it's null.
+Tested-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/lib/spl.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/arch/arm/lib/spl.c b/arch/arm/lib/spl.c
-index c43a63f1819..2e7613a6f2e 100644
---- a/arch/arm/lib/spl.c
-+++ b/arch/arm/lib/spl.c
-@@ -53,6 +53,8 @@ void __weak board_init_f(ulong dummy)
- #ifdef CONFIG_ARM64
- void __noreturn jump_to_image_linux(struct spl_image_info *spl_image)
- {
-+	if (!spl_image->arg)
-+		spl_image->arg = spl_image_fdt_addr(spl_image);
- 	debug("Entering kernel arg pointer: 0x%p\n", spl_image->arg);
- 	cleanup_before_linux();
- 	armv8_switch_to_el2((u64)spl_image->arg, 0, 0, 0,
--- 
-2.51.0
-
+--
+Regards,
+Alexey Minnekhanov
