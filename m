@@ -4,71 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17793CAC58E
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 14:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DB01CAC58E
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 14:49:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A83B833AD;
-	Thu, 11 Sep 2025 16:48:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id F04FC833AD;
+	Thu, 11 Sep 2025 16:49:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uFh1n3TD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q9Z3tYLm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6BAA8334F; Thu, 11 Sep 2025 16:48:43 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60E93833C6
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 16:48:41 +0200 (CEST)
+ id C0885833D1; Thu, 11 Sep 2025 16:49:07 +0200 (CEST)
+Received: from mail-oa1-x2a.google.com (mail-oa1-x2a.google.com
+ [IPv6:2001:4860:4864:20::2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EAED68334F
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 16:49:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58BEmdNk768132;
- Thu, 11 Sep 2025 09:48:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757602119;
- bh=a+YL+ixNi33A+nFk5xJuwaWFg9qBIUF76yJsVC0BwXI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=uFh1n3TDlKbHCn84NpqggEw4zHPz+vvxthFxE72/qyFEKjpMqajzw324l+AUVKqAo
- xUGWA5fjqDcU1D2xHiE9L6LV9y1aNev6LNl/E53oF/US5YXI08s2WiZOtNW6dj/8bY
- 8SgW5bdaBSChviqXseXCfTvinQAMOISWP4UCwdek=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58BEmd1M2013823
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Thu, 11 Sep 2025 09:48:39 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 11
- Sep 2025 09:48:38 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 11 Sep 2025 09:48:38 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58BEmc311986826;
- Thu, 11 Sep 2025 09:48:38 -0500
-Message-ID: <c5d62f63-c107-4834-a70e-6a65f25b75c0@ti.com>
-Date: Thu, 11 Sep 2025 09:48:38 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2a.google.com with SMTP id
+ 586e51a60fabf-314f332e064so130219fac.2
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 07:49:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1757602143; x=1758206943; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FWqt6CFmjzCSrKhlPnE0kBHekERdlohmpyt5yonwXU8=;
+ b=Q9Z3tYLmS5IhWnmQsY5OTYfNcf2/xCqu0b6SpQeNP3bozmuYGToQyUkWmubKGcyQBW
+ Ac+9/JmR10mRWXhxYsQ8BsTOBBM6DLpCQXkKVGwzghd9mP5GN9fIZETDSpnloL5GqLA4
+ Xuo6N28yYglnKk7G1g47VWp1Ax+brH1mzlTxQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757602143; x=1758206943;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FWqt6CFmjzCSrKhlPnE0kBHekERdlohmpyt5yonwXU8=;
+ b=tvjyhZGp3s2ssC6PUIPsFhKYSDcsHX9LuQbTSS+xUP9xLOeQtNYS0u0Xp+ooCs5eYR
+ QlSEnyUVI+6jDe53ZD7DSfE4Aw8xyrfUJjUHGD+AtnCImgFOSAliZ/Rnlya8N+Yl2BAI
+ fw51IveowD5DjunGPmvSjYTLGcU3DPfHuNrFs7rkdGA7N5wRoAxJTW6NOd6SdZEsPN56
+ 8Q0GnhmpTW8lHnm6whHtyF8JFo9Jjfqvhth72cEWLGbgf4jNLNlJBrrinWzKfBWdZSC5
+ Qb0oWCEbkbxMrMl0wsoCvhYp3IZxwkJW9TgZ9ptNCMgZdPbbLBa94zQfbA3DEwdDfYyc
+ QVKA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVYcg4q64LxJnAxQk7eOLKZY2tqhJZLbu6L/TXRH564NISysO/VU4gSCWnqLrQ7FvaRJH7XEUI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yys6rM3t1WuYDYGvXOf/yqi2LKgcD0o+++Jl95BxI2TUTWZddxy
+ vB8ccQWL2pdDDIo7LTuAehYtdXqgC/ddyXhLupZny12Esrj6clwdG1s8HA1+BRffJ+c=
+X-Gm-Gg: ASbGncvT+jbjylbJ2m6XoSzqlNqg/xQHWK4u72VYs50uKFD7aijKVvkGxOUTqrbMKZr
+ 46hNQo1FCxFPdr3xo3kSIoQdO0IlPPdpGlyHpWJoa47QC1b01h7UQT64Ikn9jlVDio7kVVgzvXm
+ qeBgWKnIDMKk0BJnwL1KlUUAcDGqIE+kzNbhHECfzBj8w4M6qBFdynQ7W1LSMZtC53JT9GWa0jc
+ eAS4diZyPG9Ho9xBjfxB7p0c+mXkaPWOIyQTem11UKzlJDT4GqEXwUCsYNwA0C2g2iL5SJZGUoQ
+ GOpiha94WB71azvg8JO4R3aRN8APlrael7tD1zad4BIkRvsoPNcTqVrq3nqOfQEJE0tIWaFtXKu
+ q4PGEPWl1O1jYey0xkpkNhCGO76PRPVCFPezZUvk3XmQ5Ddheyap/HC3V3hj615QY6AE=
+X-Google-Smtp-Source: AGHT+IE4QHOWZSW8n6NUBlz2afUH8tcbUIsw3MPgN8BsQHPzshsSadbHsvJet8YEjIWbeMv4Tz+kZw==
+X-Received: by 2002:a05:6870:a11e:b0:30b:cd02:297c with SMTP id
+ 586e51a60fabf-3226542f9a3mr9647883fac.35.1757602143529; 
+ Thu, 11 Sep 2025 07:49:03 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-32d357d2f9fsm452876fac.24.2025.09.11.07.49.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Sep 2025 07:49:02 -0700 (PDT)
+Date: Thu, 11 Sep 2025 08:49:00 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>
+Cc: Peng Fan <peng.fan@nxp.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ "Chee, Tien Fong" <tien.fong.chee@altera.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>
+Subject: Re: [PATCH v2 1/3] include: dt-bindings: clk: agilex: Add Agilex
+ clock definitions header file
+Message-ID: <20250911144900.GL124814@bill-the-cat>
+References: <20250909021116.12599-1-alif.zakuan.yuslaimi@altera.com>
+ <20250909021116.12599-2-alif.zakuan.yuslaimi@altera.com>
+ <PAXPR04MB84591699BEC41960D222BB6D8809A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+ <PH7PR03MB7063972B766EC67BA14BA639AD09A@PH7PR03MB7063.namprd03.prod.outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
-To: "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini <trini@konsulko.com>, Moteen
- Shah <m-shah@ti.com>
-CC: Manorit Chawdhry <m-chawdhry@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Moteen Shah <m-shah@ti.com>, Andrew Davis <afd@ti.com>,
- <u-boot@lists.denx.de>
-References: <20250910214514.1848847-1-jm@ti.com>
- <20250910214514.1848847-2-jm@ti.com>
- <9bb08b19-ca4a-40f2-afcf-92af0a71b51a@ti.com>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <9bb08b19-ca4a-40f2-afcf-92af0a71b51a@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JXQtLjA7WI9kdDsw"
+Content-Disposition: inline
+In-Reply-To: <PH7PR03MB7063972B766EC67BA14BA639AD09A@PH7PR03MB7063.namprd03.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,119 +107,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit, Moteen,
 
-On 9/10/25 11:38 PM, Kumar, Udit wrote:
-> 
-> On 9/11/2025 3:15 AM, Judith Mendez wrote:
->> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The macros
->> however, mix MMC device with the two bootmodes. Decouple the two types
->> of macros so that bootmodes can be identified with:
->> - BOOT_DEVICE_MMCSD
->> - BOOT_DEVICE_EMMC
-> 
-> Few devices already (kind of have this )
-> 
-> arch/arm/mach-k3/include/mach/j722s_spl.h
-> 
-> #define BOOT_DEVICE_MMC                 0x08
-> #define BOOT_DEVICE_EMMC                0x09
-> 
-> can we use in same way, BOOT_DEVICE_MMC  as SD instead of adding SD as 
-> postfix and
-> 
-> and add BOOT_DEVICE_EMMC, on devices where this is missing
+--JXQtLjA7WI9kdDsw
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-No, there are two boot modes. MMCSD boot and EMMC boot. That is what I
-am trying to make clear with switching:
+On Thu, Sep 11, 2025 at 07:17:32AM +0000, Yuslaimi, Alif Zakuan wrote:
+> Hi,
+>=20
+> > -----Original Message-----
+> > From: Peng Fan <peng.fan@nxp.com>
+> > Sent: Thursday, September 11, 2025 2:23 PM
+> > To: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@altera.com>; u-
+> > boot@lists.denx.de
+> > Cc: Tom Rini <trini@konsulko.com>; Lukasz Majewski <lukma@denx.de>; Sean
+> > Anderson <seanga2@gmail.com>; Jaehoon Chung
+> > <jh80.chung@samsung.com>; Chee, Tien Fong <tien.fong.chee@altera.com>;
+> > Simon Glass <sjg@chromium.org>; Marek Vasut
+> > <marek.vasut+renesas@mailbox.org>; Simon Goldschmidt
+> > <simon.k.r.goldschmidt@gmail.com>
+> > Subject: RE: [PATCH v2 1/3] include: dt-bindings: clk: agilex: Add Agil=
+ex clock
+> > definitions header file
+> >=20
+> > [CAUTION: This email is from outside your organization. Unless you trus=
+t the
+> > sender, do not click on links or open attachments as it may be a fraudu=
+lent email
+> > attempting to steal your information and/or compromise your computer.]
+> >=20
+> > > Subject: [PATCH v2 1/3] include: dt-bindings: clk: agilex: Add Agilex
+> > > clock definitions header file
+> > > From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> > >
+> > > Introduce header file to define the clock indexes for the Agilex plat=
+form.
+> > >
+> > > Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+> > > ---
+> > >  include/dt-bindings/clock/agilex-clock.h | 71
+> >=20
+> > This not landed into linux kernel?
+> >=20
+>=20
+> The existing Agilex clock header file in Linux mainline is outdated and
+> missing several clock ID definitions required by the current U-Boot clock=
+ driver.
+> =20
+> To avoid dependency on Linux upstream progress, this patch introduces
+> a self-contained copy of the updated Agilex clock header file within U-Bo=
+ot.
+>=20
+> This ensures U-Boot on Agilex can be built and function correctly with th=
+e latest
+> values for the clock driver.
+>=20
+> We can clean this up later once the latest version of the clock header fi=
+le has been
+> upstreamed into Linux mainline and synced over to U-Boot.
 
- > #define BOOT_DEVICE_MMC                 0x08
- > #define BOOT_DEVICE_EMMC                0x09
-To:
+What's the progress on syncing this to Linux? I am OK with this path IF
+and only IF once this is in upstream Linux any conflicts will be quickly
+resolved here in U-Boot to use the upstream header.
 
- > #define BOOT_DEVICE_MMCSD                 0x08
- > #define BOOT_DEVICE_EMMC                0x09
+--=20
+Tom
 
-When we say: BOOT_DEVICE_MMC, it is not obvious it is from am62x/j722s
-TRM:
+--JXQtLjA7WI9kdDsw
+Content-Type: application/pgp-signature; name="signature.asc"
 
-MMCSD Boot (SD Card Boot or eMMC Boot using UDA). The goal of these
-two specific macros is to mimic the supported boot modes.
+-----BEGIN PGP SIGNATURE-----
 
-> 
-> 
->> according to devstat parsed boot mode values and on-board devices can be
->> identified with:
->> - BOOT_DEVICE_MMC1
->> - BOOT_DEVICE_MMC2
->> - BOOT_DEVICE_MMC2_2
-> 
-> Why you need to change
-> 
-> #define for BOOT_DEVICE_MMC1 and and BOOT_DEVICE_MMC2
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMLhWQAKCRAr4qD1Cr/k
+CmwdAPwJYaeVC3kpyDh+hFE56ldhfBe3/z8EirwnYxIIzt5rsQEAoEUrLrKdctaF
+i29ipFkfIm1WUC8X3z1od+EGCWqzCQw=
+=5zyC
+-----END PGP SIGNATURE-----
 
-Because the goals is to decouple the bootmodes from the macros used to
-distinguish eMMC and SD card devices.
-
-> 
-> 
-> 
->> according to arbitrary numbers mainly used to differentiate between eMMC
->> and SD card.
-> 
-> Please check subject line, this is not a fix
-> 
->> Signed-off-by: Judith Mendez <jm@ti.com>
->> ---
->>   arch/arm/mach-k3/am62ax/am62a7_init.c          |  4 ++--
->>   arch/arm/mach-k3/am62ax/boot.c                 |  8 ++++----
->>   arch/arm/mach-k3/am62px/am62p5_init.c          | 12 ++++++------
->>   arch/arm/mach-k3/am62x/am625_init.c            |  4 ++--
->>   arch/arm/mach-k3/am62x/boot.c                  |  8 ++++----
->>   arch/arm/mach-k3/am64x/boot.c                  |  8 ++++----
->>   arch/arm/mach-k3/am65x/am654_init.c            | 18 ++++++++++--------
->>   arch/arm/mach-k3/include/mach/am62_hardware.h  |  8 ++++----
->>   arch/arm/mach-k3/include/mach/am62_spl.h       | 10 +++++-----
->>   arch/arm/mach-k3/include/mach/am62a_hardware.h |  8 ++++----
->>   arch/arm/mach-k3/include/mach/am62a_spl.h      | 10 +++++-----
->>   arch/arm/mach-k3/include/mach/am62p_hardware.h |  8 ++++----
->>   arch/arm/mach-k3/include/mach/am62p_spl.h      | 10 +++++-----
->>   arch/arm/mach-k3/include/mach/am64_hardware.h  |  4 ++--
->>   arch/arm/mach-k3/include/mach/am64_spl.h       | 13 +++++++------
->>   arch/arm/mach-k3/include/mach/am6_hardware.h   |  8 ++++----
->>   arch/arm/mach-k3/include/mach/am6_spl.h        | 13 +++++++++----
->>   arch/arm/mach-k3/include/mach/j721e_hardware.h |  6 +++---
->>   arch/arm/mach-k3/include/mach/j721e_spl.h      | 14 ++++++++++----
->>   .../arm/mach-k3/include/mach/j721s2_hardware.h |  6 +++---
->>   arch/arm/mach-k3/include/mach/j721s2_spl.h     | 13 +++++++++----
->>   arch/arm/mach-k3/include/mach/j722s_hardware.h |  8 ++++----
->>   arch/arm/mach-k3/include/mach/j722s_spl.h      | 10 +++++-----
->>   .../arm/mach-k3/include/mach/j784s4_hardware.h |  6 +++---
->>   arch/arm/mach-k3/include/mach/j784s4_spl.h     | 13 +++++++++----
->>   arch/arm/mach-k3/j721e/j721e_init.c            | 14 +++++++++-----
->>   arch/arm/mach-k3/j721s2/j721s2_init.c          | 14 +++++++++-----
->>   arch/arm/mach-k3/j722s/j722s_init.c            | 12 ++++++------
->>   arch/arm/mach-k3/j784s4/j784s4_init.c          | 14 +++++++++-----
->>   29 files changed, 160 insertions(+), 124 deletions(-)
->>
->> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach-k3/ 
->> am62ax/am62a7_init.c
->> index 00173e6836b..1fd466bbdfc 100644
->> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
->> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
->> @@ -225,8 +225,8 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 
->> boot_device)
->>           if (IS_ENABLED(CONFIG_SPL_FS_FAT) || 
->> IS_ENABLED(CONFIG_SPL_FS_EXT4))
->>               return MMCSD_MODE_FS;
->>           return MMCSD_MODE_EMMCBOOT;
->> [..]
->> +    if (bootmode == BOOT_DEVICE_EMMC)
->> +        bootmode = BOOT_DEVICE_MMC1;
->> +
-> 
-> Could you test once, eMMC on J784s4
-
-I do not have J784s4, Moteen, would you be able to test?
-
-~ Judith
+--JXQtLjA7WI9kdDsw--
