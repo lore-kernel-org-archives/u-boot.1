@@ -4,84 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F4DCAC58E
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 15:15:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D37BBCAC58E
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 15:32:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8F1C83390;
-	Thu, 11 Sep 2025 17:15:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0413683390;
+	Thu, 11 Sep 2025 17:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RwmWAptR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F7fz/kED";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93418833C0; Thu, 11 Sep 2025 17:15:55 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id D57B9833C6; Thu, 11 Sep 2025 17:32:01 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 732C28334F
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 17:15:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77ED58334F
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 17:31:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-74c1251df00so469884a34.0
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 08:15:53 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-30cceb3be82so661162fac.2
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 08:31:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757603752; x=1758208552; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757604718; x=1758209518; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Mui1PBsxAT6kHfsVfgmjeWOzA329eSbgt//t/iprP24=;
- b=RwmWAptRRbrXqYk4C9yqkdVXKCHjL1zynGNFpE9SgSHp3zAozbKsYhIMix4RQMf5oK
- mpI6sduDQuTnZywjh2Cfzg+DGPKXrl6FP2GCyJLVq5dbTi+K/PE68rRieWDeJu4xxhEi
- RC0NoXx7jDnO4L4XlwK8osxTJH84mGsjzNxcM=
+ bh=yjeX03D8Y8/FR67eGTm0fWjpEngqoZngjhf/CXOZdRs=;
+ b=F7fz/kED0paQR15AoO+BGt9H+aUF/LCzylc6LBWC5+HZscaUnOljY2Z7RkvXvim6wy
+ Dxr1t3o8BM+J11VgscsHSk7TiR0DG7FtglreYI8P/hF7nWFA21eFDX6ehEPGTZON9uOc
+ BStCnKuFig+vKrnRm9udA8rV7cOJl6OC/1R/I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757603752; x=1758208552;
+ d=1e100.net; s=20230601; t=1757604718; x=1758209518;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Mui1PBsxAT6kHfsVfgmjeWOzA329eSbgt//t/iprP24=;
- b=Yc26IXmZrobDGZp5lWgoKMtJgmRaniIJMeQZRT8VaTomJ+3JIO3RUHk13bJzu1fObi
- gfwPZUiPSfp8Y2uiYI8TW6gGrLwV9tXymjvZYNFD4ta/3Z6JJg+efcBovTg38Dhr8Icy
- v+bsbDt82uhgP3FVxDEjIEx1cRi7zbJPJR9EqhtpxZgxLNec0tnrvewzr6iZi0Zcy1jU
- nSp4Hcc0AOqfertQu5lKjB6Ru+AzDCS9unPzsqqpsqcVUuaw/nLCL+k1kMApUH1sayBO
- JwGK0uv6Jzr05pmS7YAwFJppS9yd18w9dLpaZQykPlJvSn46YvmiUQyKl6tb4vqJgPNH
- AaJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVE5fWgHxkqOXFZkD7nGswi2z1RuLNAYwSdWe5E3gfCp0vQBZJ9c6XHtj8DCOikY4iFeezXd0s=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBLmO4XdIo5jxvPhpmZ4s+sSHHuSZ9F1TRb8bxEfWVATNJJ+ZB
- Fvdn/Z0ht+sFbcDQlaj0prAhAOQTHPfFN1OvAepmQKPFACQeCE6+Z6BaduSeku1bj94=
-X-Gm-Gg: ASbGncu23P3PiEny+JKhGGvEBBnC9Tt1aD4UyvXyC0gT9+t6V7CSfnGyEPANZwOxpEI
- ZDXsUoEwYngsG6PH7C8jg8pfY5gzV95+uhVfL0k/K9C5gtgUyUG+gyKPIH5iB4xIKuhdPpFYtJ9
- zsuijT4fPXI1Lmpl/cjg5YWkJzvs4drP5MzN8FVxlrTi2/cWbxMEaOEWgIwF3GlfSNMSziFSZmZ
- PF0FwuDf0orMU/V2VQyN2woS+u54G+TxKy78m1rzdZ41BQ2grwl4ID4mxf5Se8j62uJB09vvD31
- jogYAshzIlKnGv80ZLvfw2M5uzVvFV//sHLoKmTaQsmVvyqWh4vtZWg/ygoR6een0LHAipLUE6I
- zFTnunTBn4ulmJFgaU5nqoVVkqHgCNgsxzuo8/8/BrQzWCSub/tDzNzx5dCAatMc4XHY=
-X-Google-Smtp-Source: AGHT+IEq5bVf08fyooekHkbjXMET5pPN9fhlExNyRGhDCuRvxrw8kKMss8rcPobHmSbm38XpQ0QUfw==
-X-Received: by 2002:a05:6830:730f:b0:743:801d:5215 with SMTP id
- 46e09a7af769-74c74fbde35mr10628601a34.17.1757603752141; 
- Thu, 11 Sep 2025 08:15:52 -0700 (PDT)
+ bh=yjeX03D8Y8/FR67eGTm0fWjpEngqoZngjhf/CXOZdRs=;
+ b=nlpBD2Kj+Bub7XrAJUzcve3Qirq0GBHJ0oO66M/uSaIq0GTB3AeOCdtjp8nhjdGTCD
+ UCgxjZWgtLnhX6q/QKT6DQFSSkLQ+VwUq91/4Cggl+GLc3248cU+7CkSkwoCw8M6IBIL
+ pz3Gs/T6iCvu4YicTb8eQlDWZTgWtRU816YQ2hEmJ7f4FuE2AJRWPyhowgKN6ZWMTx9j
+ vbitQrGELTy9SCx2S5FiPJjdNgZpVl8qNr99I5c1+kM+fLddFraGMHGawgDOrgkR1NJy
+ d6FbmWrXK9zyq5faG3D63BNRYkjNJeCtBdvsTl8Xa4cJzR4oWwdEcPfSF9JbPVk66IBN
+ AiGg==
+X-Gm-Message-State: AOJu0YxgXraiyCkyAIXPiSPrXRn8yyXhkQAccwvcP0ip9q2/LDr54Rjo
+ +doFtGTSeq4x0HXOoefn2SjFuoOCrQv1InUzLEeaSNgeBnfL0DUHJAQZFjNgPFky2j0=
+X-Gm-Gg: ASbGnctQCRCAnBqgzpj/ZsSRREzFFEJxXivLmoEhPZUdx5qOao51tFJDgXdm6puBfWt
+ /lEYQgNepGtLeskcZiGR18RPiy7pMylw7mQpD/H1szT+hl4sqlzLNXBddwjUhj4bgm1vmkEflF4
+ Zlc0P7Um5HnCk/SGY3vC9YCtR443gSGhUA4R7hHP7AjnVGjB+FQ/c32YpvaDevmWe9YGLfcNtV+
+ V6DJvbZJPRX/3vJvGUORgoFM5/uPUao10EzrD74DVqrpJ7kr952nhedwVY4yBrfEL0ewPa2DOti
+ rEstf6EdERdjIN3EIs+aOOJc1gIbDdX6V49PhRCM3QET7MtJnL51nGtBQKgPB4iIN7IlDToP0J7
+ Lg/rnIQepY1VnLvpvCGJtLj3+2W7pCaTXHYtqhdF8UTSXxXLeOEMYynvz
+X-Google-Smtp-Source: AGHT+IHsmlE6ojSNjB5i/yitXcckbxPSkM6y02x9+M5knd11fzof1++WXjcHFzx63z/02IGPk6r0Dw==
+X-Received: by 2002:a05:6871:878c:b0:31d:6bbe:5a1b with SMTP id
+ 586e51a60fabf-3226533832fmr9017160fac.48.1757604718102; 
+ Thu, 11 Sep 2025 08:31:58 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7524bd83643sm392252a34.34.2025.09.11.08.15.50
+ 586e51a60fabf-32d3345266fsm475993fac.13.2025.09.11.08.31.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Sep 2025 08:15:50 -0700 (PDT)
-Date: Thu, 11 Sep 2025 09:15:48 -0600
+ Thu, 11 Sep 2025 08:31:57 -0700 (PDT)
+Date: Thu, 11 Sep 2025 09:31:54 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-Cc: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] imx93_frdm: Add support for flashing board with UUU
-Message-ID: <20250911151548.GN124814@bill-the-cat>
-References: <20250911-mathieu-frdm_imx93_fastboot-v1-1-c629d8b7c8cc@bootlin.com>
+To: Heiko Thiery <heiko.thiery@gmail.com>
+Cc: u-boot@lists.denx.de, Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Michael Walle <mwalle@kernel.org>,
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Varadarajan Narayanan <quic_varada@quicinc.com>,
+ Marek Vasut <marek.vasut@mailbox.org>
+Subject: Re: [PATCH] env: fix config dependency for
+ ENV_OFFSET_REDUND_RELATIVE_END
+Message-ID: <20250911153154.GO124814@bill-the-cat>
+References: <20250911093223.65323-1-heiko.thiery@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Mc9+glU+Mg/a0wiX"
+ protocol="application/pgp-signature"; boundary="XjhKcfbTSBlIP+zo"
 Content-Disposition: inline
-In-Reply-To: <20250911-mathieu-frdm_imx93_fastboot-v1-1-c629d8b7c8cc@bootlin.com>
+In-Reply-To: <20250911093223.65323-1-heiko.thiery@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,41 +105,37 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Mc9+glU+Mg/a0wiX
+--XjhKcfbTSBlIP+zo
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 11, 2025 at 03:34:28PM +0200, Mathieu Dubois-Briand wrote:
-> Allow to flash a board using NXP UUU utility:
-> - Enable fastboot support on USB.
-> - Add fastboot partition aliases with names used by UUU. Also add extra
->   environment variables used by UUU.
-> - Set 'dofastboot' environment variable based on boot device
->   configuration, allowing to automatically enter fastboot when booting
->   from USB.
->=20
-> Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
-> ---
->  board/freescale/imx93_frdm/imx93_frdm.c   |  6 ++++++
->  board/freescale/imx93_frdm/imx93_frdm.env |  8 ++++++++
->  configs/imx93_frdm_defconfig              | 13 +++++++++++++
->  3 files changed, 27 insertions(+)
+On Thu, Sep 11, 2025 at 11:32:24AM +0200, Heiko Thiery wrote:
 
-This needs to update doc/board/nxp/imx93_frdm.rst as well, thanks.
+> Since commit 5fb88fa725 "env: Rename SYS_REDUNDAND_ENVIRONMENT to ENV_RED=
+UNDANT"
+> the option SYS_REDUNDAND_ENVIRONMENT is no longer available and should be
+> renamed to ENV_REDUNDANT.
+>=20
+> Cc: Marek Vasut <marek.vasut@mailbox.org>
+> Signed-off-by: Heiko Thiery <heiko.thiery@gmail.com>
+
+Fixes: 5fb88fa725d6 ("env: Rename SYS_REDUNDAND_ENVIRONMENT to ENV_REDUNDAN=
+T")
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---Mc9+glU+Mg/a0wiX
+--XjhKcfbTSBlIP+zo
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMLnoAAKCRAr4qD1Cr/k
-CvGzAQCvgUJkUi2qlx2mhi3LyvVOrbajCrMgs1yQpoMmmnrg6wD9G2/fWRSPhk7e
-qtSbY6rzHpCYqs447OMMdExXY3lczww=
-=ucQu
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMLrZwAKCRAr4qD1Cr/k
+Cq8FAQDEyYZ5ZfRGvQWX3bj8RYaE0H4kMBsRHdSkmGPYh3j6WwD9H8A017unuQkA
+VRiy89inyTwqPC/npL8KsUqR/zSTYQQ=
+=+WKy
 -----END PGP SIGNATURE-----
 
---Mc9+glU+Mg/a0wiX--
+--XjhKcfbTSBlIP+zo--
