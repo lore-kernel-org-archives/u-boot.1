@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1136CA101F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 02:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D46D6CA101F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Sep 2025 02:01:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 191C5831C2;
-	Thu, 11 Sep 2025 04:00:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F07C831C2;
+	Thu, 11 Sep 2025 04:01:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="VtF20UoX";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="N5NkU603";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 252E08323A; Thu, 11 Sep 2025 04:00:22 +0200 (CEST)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::612])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4F82A83253; Thu, 11 Sep 2025 04:01:00 +0200 (CEST)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on2062e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2407::62e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3E218319C
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 04:00:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CDF08319C
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 04:00:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gfaGZuNxz1JL5X7Xkn2bOWwmKkyDm0s3uTUBa8inYfTagtnY03ZBQUWj+IHTi/nMdT2QrHS5QbNtIwSgEzsFyE1V/A+/KdKvTn+Nwxyt7A8K/3Jx/SZFhXDbBmNMRSjLesOacfqBcX8FNBH51UyZaiB4B5O6g036AwVnJH7mp6cBrq+m6NL4yY2ZaLsmBubuQJjmN4Q/ef14heWLedRe0HAJLs+FPPNQXVrgm8P4SAlj5MCBpBQxYErFX+GHMf86/Ddx9FRyrm0Q49HUXhKl3nKXBOwxg6Ifi48dKCcvuHrbN18/L2vdnESoUdAOlwxz3eHZLpyTj9U2YxZm4iclLA==
+ b=hiUX7xv7mCyL3eCugOJlhib0lB0ynBbD9gzgS0lx24T4WFwyxlaJXAUfapAAlbUUoj73vnuduFwm/wU4bBVogpUFc/V8SjmttB7kCJm+A9m/P0u/RDOYs6TKmhemHtc4YokyLq2TarjeSNRqYrY0+g3INt8Z1vCq5GcStcNMFJyNd4YS8l7alLUkNoDS6IfzO8g31D9EkywiiJcl85p1knz7tYZYC3iraaLCwOgVT4hpvGiVavPAPaQdjG2Eie9hWEP0BBbOH7J67wMVYwwIbgUzlyQfg3dUsHBakL66WxRBMxp7Yj0H9HT1f7RC3ERyuHBQTMsmN346k3NKyy4Mug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pZz9NfjbJ9DD5FtI2kJRVv+eOQe6CpklNOQNpDdFtbM=;
- b=OpsmxVLN+17UweUUgjWGCTmdkxMNCF7+3Z8rdPChJF2goySZFG54VVk/uWSzvUbgdvOCYA3radUPkF8Q/Cla1QAWTn6fINXkuL6O4peS2CEfJoWnZ03YelOhI41kSrY2JMcdWXJwavAI7kpMDDFmm9zytEbhuavJEi0PtLMEpS6+z6BjeM+yCqotKnZdB8UQsReTjG7+7UIkSdyzjSSwRoqwvMdgnFf3RtInJwMeq2Gd6TPhq+V/w7jkd4AoKaRdM0/GqW5yVmGuypsJLWVQq8U2NhYWt+Oa1srKjG0Qo+s1KBC9t57hb/O+uRR74cevY9nYgpesQN2osEMB7gVcfA==
+ bh=UT08fwdSJNqXWKz4ASJCV10vIBFAAlHGTF2y47jGf4c=;
+ b=Z80gpVU6SxJfhdKuxx6ZAalthFLTliZSb0VaKSCTK3slmtTKXttMEzYpQD6F+phL7giU1fkoxm7V+j61kAtPRpzsbXv8QC666B4q8nzn2ohCY1v7nW1ZxYto82rvsiWi9H+Bb87qA9oy7cZqV/o41bUsx5YOHsAtkzMyzDS4yZYddIwZZ/bm38TLU4LPcmwO5dthjYh+DdmBCks2myahV0EfmeFMsvSfgeEj4ysxBPEyLIASVmMiTUwallUx75bhK31qpbVzKXTD+Do+hff0q3wHi3acXdSA+mUc4OXtNpOZZ2OKiBWdt2ShrKKF39jnBwhHA6u+eO6PTF7uDT99OQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pZz9NfjbJ9DD5FtI2kJRVv+eOQe6CpklNOQNpDdFtbM=;
- b=VtF20UoXrPP7f0mv7MD5UD8QEr/Lyrhs8nXjVN56zlxt782qkoKef3rE2BtI5/N5FTF2pri7y/6qsWCtW5srr/JOl6greLPwBz1xiuTpApMguAOe06iwnIDgVTGDR7N0k4hnIP1YvynQAQTpzeWEVwLx85eaR0HyWb9P7k1uMVQBZCYeZp5bLB4MsRAmbWLFlPtz4X9oEhiBgRbP/utAmcuaF9JovS7B9m20oir50quLVPNMexLLmBplBrN2Q8biQBR5+siBZYQzMWOAeeGmVsINJ1hqgFW1XdoMZzI68rV2QGh4huFFfbhO5E/IZ3Pk8/8CEwgXCTLMFlSdnf4P/w==
+ bh=UT08fwdSJNqXWKz4ASJCV10vIBFAAlHGTF2y47jGf4c=;
+ b=N5NkU603jDImsXfoSyN2JEwL85Q4AcL3r7dMBhSb1H2Y+owq0ipCuIaXPX9Jsn3vQNKQVKKyQH1Fg8/4ClKZcFL0OJBI67su3m0Yms1CM1gYlqfA/VSQur2J3KSgR6ccGYKGXcUJTdGBzy4UxCroBljOEbeZNRQwosJLdaxA3cdkOQad3Ce7uUiQ7brSAxgKNwL6kVBQSIElKYVrpgxakB2Kof8C5Rm5DNjIX9jqgK/Jxns35tU7gooQOeK3OOW2CZgEXf6HWBnYxVkXPRsYAqYtAC2FtC7BZll/Cy3rQgEaYIycA7TFjy9gZqrMHvqVExSCOVoOnXSJITX4CSs89w==
 Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
  by CH2PR03MB5176.namprd03.prod.outlook.com (2603:10b6:610:97::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.14; Thu, 11 Sep
- 2025 02:00:16 +0000
+ 2025 02:00:55 +0000
 Received: from LV8PR03MB8137.namprd03.prod.outlook.com
  ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
  ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9115.010; Thu, 11 Sep 2025
- 02:00:15 +0000
+ 02:00:55 +0000
 From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@altera.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
@@ -59,16 +59,16 @@ CC: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Sean
  <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, Marek Vasut
  <marek.vasut+renesas@mailbox.org>, Simon Goldschmidt
  <simon.k.r.goldschmidt@gmail.com>
-Subject: RE: [PATCH v2 1/3] include: dt-bindings: clk: agilex: Add Agilex
- clock definitions header file
-Thread-Topic: [PATCH v2 1/3] include: dt-bindings: clk: agilex: Add Agilex
- clock definitions header file
-Thread-Index: AQHcIS9FC/fQHhaeukCNXODgs2dy0LSNPStA
-Date: Thu, 11 Sep 2025 02:00:15 +0000
-Message-ID: <LV8PR03MB813776306D48C76F8C2FF7CAA709A@LV8PR03MB8137.namprd03.prod.outlook.com>
+Subject: RE: [PATCH v2 2/3] drivers: clk: agilex: Support for enable/disable
+ API
+Thread-Topic: [PATCH v2 2/3] drivers: clk: agilex: Support for enable/disable
+ API
+Thread-Index: AQHcIS9FGTBHxCeMfk2PtxU1WYC+LLSNPVrQ
+Date: Thu, 11 Sep 2025 02:00:55 +0000
+Message-ID: <LV8PR03MB81375364E817DEEDE7572252A709A@LV8PR03MB8137.namprd03.prod.outlook.com>
 References: <20250909021116.12599-1-alif.zakuan.yuslaimi@altera.com>
- <20250909021116.12599-2-alif.zakuan.yuslaimi@altera.com>
-In-Reply-To: <20250909021116.12599-2-alif.zakuan.yuslaimi@altera.com>
+ <20250909021116.12599-3-alif.zakuan.yuslaimi@altera.com>
+In-Reply-To: <20250909021116.12599-3-alif.zakuan.yuslaimi@altera.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -77,81 +77,81 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|CH2PR03MB5176:EE_
-x-ms-office365-filtering-correlation-id: eff994a0-2e6a-4380-ab00-08ddf0d6f3ae
+x-ms-office365-filtering-correlation-id: 872146b3-c4da-4b81-2d36-08ddf0d70b22
 x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
  ARA:13230040|366016|1800799024|376014|38070700021|7053199007; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?zAhYOBJJSYjytPYQT20mJO7G6CWheu09apjI7wC7ZRLjnltip14Iwp8NZS4S?=
- =?us-ascii?Q?53i8NoNlKj5L6YnG13x9OURb2zoZu+ioDO52DCV0rgIZoY0oY5wZt0Vqp4zE?=
- =?us-ascii?Q?d3p5NSZaXb0U/FRhh1gTmJziC0Rj4mI3ob8Uw1B9No/W7jGYNb7FuE31ER6C?=
- =?us-ascii?Q?t9Jc6BKSIazQSs/TeR/23Bc+LqI/zYK3V7qxciIScBTg7xaXaB7pylJ8GzMl?=
- =?us-ascii?Q?0JYejM3bmnBduE3ycOkNxiHuTQugwoT4+WN7ipMW5tUUG1us49/s6nrdSvlh?=
- =?us-ascii?Q?SiHS456nHDR6b472I2gsBvqwN9Vh4cNMZpaVw9/x/XSVIVV1evyFGG+YBJuN?=
- =?us-ascii?Q?zQpojpnGlV6UXLBa0LeY+V6RpCWI/VkY+vYRUruXftlyJFDLBcGGwG7ObJNM?=
- =?us-ascii?Q?8o/TIocNY5IMfnIUiKM2PR1WToJp+CI9M0zhW3wg8mRI7jD80By8txCg0GCS?=
- =?us-ascii?Q?wzNbxgDsRKaG/9EmTG2hlhYTfmzsZxV1GUrmPMhLYLHTYpTjdmYabcuaMk92?=
- =?us-ascii?Q?qUuurB85zOEPkjYQPZz0vRm7aQBjie668B9CLG9LlNXDHwmQ39Vhm5zIJMF8?=
- =?us-ascii?Q?+I9q7Z2z0Y0Dl6a2uUEqFOqK7FVzHpRCjrFdzyEcWqXqK0kaKQ81R4IDVI1S?=
- =?us-ascii?Q?322XAY3ho6N8zurIJqWgua1mo+e+GMJQJPPOcgy8IdQYHUMybRh7068ECAsX?=
- =?us-ascii?Q?H6v4/IG6/6cjmrtrIqW2dwhbuFarrIFsbvaurG9nyMz3D2AXppSGRMDxjP10?=
- =?us-ascii?Q?+MwQGVaQM5j3GBbXk96ktp3SnEDu7CghUCQTx633CRvpkR3dUlkX0eZlu1Vl?=
- =?us-ascii?Q?QdhPvxqgJgY68rLeDVmFXwdve+mPml+U3eCbr93x3XbucdwFdFAPzG57rGHV?=
- =?us-ascii?Q?oHMiPBW0IyO4NWtG+5uvfrNmFHhyWVQ7oqcFIzfFhq5wXQV05WtpGvqDTjXp?=
- =?us-ascii?Q?6/PEgiTKyglAYgCM6z2Ky8QSXp6K4BXdHSD+lpM7y8GLbfLg4LU2akeujefx?=
- =?us-ascii?Q?su5iU4QvLkhKQj2GeJ95xWxJAneUonX83RzKGHF+4CTIIiEk5Oyw1V81/WfF?=
- =?us-ascii?Q?zdvONkNe35L10J7xnRd7W1t130XY/3GBiLd0E0iSB0Xb9Rz6CxYkgdM9w7Nx?=
- =?us-ascii?Q?+E3qiejv9PgmUduw4PZu+5vWpzsuIbC4uQjx1vS6Qp0+JNPjEcHZEFUQIH4E?=
- =?us-ascii?Q?Bm71kVP7iA3ZCcSqYusNXz6RxcZZ67X5YXwVJqasZ0ongi/IObe/4hbqoh4t?=
- =?us-ascii?Q?OyMSAEtWBd72s3TccxRPwru8nHHvlVL0kjJfH6cWUBmPesXF4HZ9mW7MBcMz?=
- =?us-ascii?Q?opGxEyGXrv39yDv0HlVGVU7Ox0MoKCE6ECGXMtftN0A6c8ZSMFG1emZcBpk3?=
- =?us-ascii?Q?vUTELbNrhX+1mqGb+8LHikIjWrJYE3feI1AJK+ecjuMqLzBV3OCN6NiilzGi?=
- =?us-ascii?Q?/ZbeDPoRRC0=3D?=
+x-microsoft-antispam-message-info: =?us-ascii?Q?ueFozq17ad+TadSN3jOER/qO7WH/jnJUEeY5x3amMXw/tfllJn/38rsiPHzi?=
+ =?us-ascii?Q?NZImlRtnDqqrMf3DBHmP7ChdOSOu/Ct/Gr113VxgDW3D0ZVH89PKQYhRpJ81?=
+ =?us-ascii?Q?KYsU3aRCZDNiw07Q9XMrzXBpdEx+KU1hdp5SJ5s1EOIZfXVudLXQmC/+YquD?=
+ =?us-ascii?Q?dEGD1kHeDD/fORsGkPVIMa+sNTTdK+DmZCFNG6lrakf/VcT7A0bVNhdokYOO?=
+ =?us-ascii?Q?8OU8GOuvHK3/0nB4jLNZsJd3Lo+tty99PvfOL+VMtdKaneG3c9y8IDDi20dO?=
+ =?us-ascii?Q?w7m4rlB9ZSD7B7DtYIjPXoX0GMdFz8uiaUpWg70BUayTiH/08xpKorTICTiC?=
+ =?us-ascii?Q?uOsgqvvFmlY6MZ7sK2zBvqlp0tk3lT/n5IxQnAENFaDRno8yPmn3vvG831Pb?=
+ =?us-ascii?Q?wLILzXNM/8LOlVOtfAxTmq39JA5Q7E9dojzLrHTMqyTZmpXeZrRsrM5nkNoN?=
+ =?us-ascii?Q?IFt2Vj3Kxzc/7rajLYwuySn6bvbbw6WC8YN788ekpaMnuCEl0YUoDUREiV7O?=
+ =?us-ascii?Q?/PiXJpRVwcZXJ2NhbzNARSWqeI+CrblNthxlySfqDKMIDWntqth62PMY6aWI?=
+ =?us-ascii?Q?AZUTYkqg/1IaC1L9mY73hMBuGqfaADJZebEmDwVyF3reTrovl0ZA0+rZ+nCx?=
+ =?us-ascii?Q?InadSGIBNu762E3YQtTeF5aOhjbqA0kxhvRSVzWKFdAeM9FbCTz3OEEtY6ao?=
+ =?us-ascii?Q?f69UdjXjW8alm3CbxQQP3PA6GPH3EE9uXbL65acXBaWLCYpprfcwL7kcrTOz?=
+ =?us-ascii?Q?iI9zc4fCPTeDrEbMEmUcivLO1I/nNOKXMnwtcQAdFE/Ti+HrRDzjQfmbsu9j?=
+ =?us-ascii?Q?1P2ub6D+XTuDv5aFA7yQDSKBNJ0BHiJxkwH+3wAgrxIAI1/IULDgbhLbNJQ0?=
+ =?us-ascii?Q?51Gle/ll+cV8EH0IEE0RFo0jGryq9yEukj8jYN4ynAHJWeWfjOKgwyXn2bNu?=
+ =?us-ascii?Q?swdC/3r8LyrP1Ly8PaG0CZgZLk9PeOkL2lwgwWPMIYo1S4HqZdQ7gQcsNVgH?=
+ =?us-ascii?Q?pGazVQJh9GXkRkruBfgaPlSWQWlngMp3kt3eO9eucYMWBck8RnnImJSUfJIS?=
+ =?us-ascii?Q?tTj0/A6lHLZ/gdBKvkrwK8KV+lC616fJZ5HGPJ+DSwAy7Ad/BqvBQg4OK5G9?=
+ =?us-ascii?Q?DMHywAnZcEGYMOxJA3gLhN6f01QzJ1e80auKe/M8dSHS2aIJTR1A43j9f+1H?=
+ =?us-ascii?Q?FskBCk7NPck7KOHUf9gpppXfdxSjwulVhXDIGbpLUurE4KCvCUJzrIRdgRMV?=
+ =?us-ascii?Q?2ZoU238gqiGC2FCrKcT9tSx5Pi7WJ21GHYrY2uw6/ohZh2dOybt+AihTWKHp?=
+ =?us-ascii?Q?gArQ4g8zQ0tI77y9aUDG5qN0qxkZZn1pe9v9ZiEu20l6eoWiphut6Hn3CSvd?=
+ =?us-ascii?Q?yv3UGUlRhCCQZiIVTJREsK+KB8hzgzHfDfnrRsBNgNT6n+4FM81xjIDa9AqZ?=
+ =?us-ascii?Q?TmddpcF3F0Q=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(1800799024)(376014)(38070700021)(7053199007); DIR:OUT;
  SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?myu0tZGam+X0EtVQBZ+hZZDIl2GulEk/lGeK+YO7WKp4AXRRsyaleYORfzP5?=
- =?us-ascii?Q?rwiDr6E8X2J5uxupb04iNL5RligATzbfwBTjQ08GM+8RuRETzYoF/oDPm3qJ?=
- =?us-ascii?Q?qG689bsTODPpCJUfLoCk978a2jkUW2H5/AhJzflVEpn7pbrHv5kLuvrBCcFQ?=
- =?us-ascii?Q?yd5NCWTrWx+33/sB7SOgNXBp+3OeNWH9seZRHPyPATSQW7VWohaMIv0E4+tI?=
- =?us-ascii?Q?Mi6b31dyBvvLn6MvnIScZb8qAfbaIWdKYHpc6wiomCmRCJHEglLXcC+mRfSA?=
- =?us-ascii?Q?VbJS/ia1N3023U49xI3W7u11kDo6G8+PRfCEFhaUbk9soKFKzUrLNAxN+94O?=
- =?us-ascii?Q?PIkOMjBKpkrjPhUNHnbAe005TmYenPw8chf5YlfkLxf3N2nG5IczEzLOWqAB?=
- =?us-ascii?Q?8kfVoWsymWx6JpkXFEjlJyJvgqq8JznEyZXtZ6SlJEZ7IKvTubxqGCmHa7x8?=
- =?us-ascii?Q?Jw8PH1rDB/+lp8SYqDcqiBMrzCKyTBs32TW4J8/nLNji6jA21m1Syo9Ol8Cl?=
- =?us-ascii?Q?drBCfo2G2lQRo7GnSgiqRyTw9nP4Q+AzMIIL7tUMuf2kT0M5w4YxLTYeWME1?=
- =?us-ascii?Q?Ic8+FJUCf3XwesCROnRLBy3Y6J3vkLAmsLMbjiO/pvgX22wnsL+rSYSOc9qK?=
- =?us-ascii?Q?MFZ39Xu5D5g7ScrTf8QjgNAI6HQJymCiuLNunsrn9VSCsbOV7z+yxjxjfsBW?=
- =?us-ascii?Q?ZjAnwDvgZPmWeG4Z0gOKyTp1UwsII3D/BdpkWYZvimzcfypgDA/n5aahGvbV?=
- =?us-ascii?Q?KXzTsDUuayaT0yLuiKDR/GBpprTsBMpTJm6n56CD29mB+q4dDG6agBD+xYQJ?=
- =?us-ascii?Q?w/xsPtF1sXFxnMqBbEEI3FDS/+6pkTzrfskHCKeEZPdQaDiKuk8yy2ViFbOb?=
- =?us-ascii?Q?xo4pcI5nqCsWZvR7f8y44XG9cdmgyloxrZlLkgJ5ThaXVpAhEX4oe+81y2gF?=
- =?us-ascii?Q?5HqrE5pSznYEyllqDOsE2bGKuzUeKoYmWTzinPQ4QD0rgGdvKrgSl0uYM/do?=
- =?us-ascii?Q?nxgxaLNLZo9vc0ICUsNutWO4VBbpqfIjvL/gmyz8PwblxN3WkSN9c7bsHGw4?=
- =?us-ascii?Q?mil33LR2hI28LyDm3h47SG/YoBixPtCVfwE4baYYWx439ynxXLkefbxEr+/J?=
- =?us-ascii?Q?13mKXi0lMSgCfNug7uWWIfswInIKDjQGl3Z7S/B9R07J6+1OBwnYzmA2/aCv?=
- =?us-ascii?Q?HYS9NJPl+dUPLMkM8tEecb3AbZ2uWFHSVRFNpRQg9oDswbIJhHEWTH+P/7K5?=
- =?us-ascii?Q?3TksakBaXiYKnayiaqcxGZcBKuh+AjT++9KcVqN4W5b2JUgubBKq4qP2WPwn?=
- =?us-ascii?Q?gyxTWP7imZv8x8JDW0tOFjQrcCK2y5vMjmyq1mmZTDYI2+tnhPBB8iK+7Hc2?=
- =?us-ascii?Q?owyRoyIkNKYx1HEcVtBoMehkDNQCndjb+ua15t8ZO04iVnOIx1CUsMZptQ6y?=
- =?us-ascii?Q?nASFmAEbPhyUrXdAi9z+XfzhHhx/cG6nMo2sYsPLdBndmRckLc9HuBDR0CSt?=
- =?us-ascii?Q?aOOJ1NOduBzjOC1hSGi4vhWJmiyu/NZZ/HSBSuZ7bNlcOsj0aBjQ1QNfhygm?=
- =?us-ascii?Q?pIX+w4VgQxvBHv88s2i2nRM26feJR4MnzmGXFvAO?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?j0c+3AjpyY21mFQKkuK2CCWa4YE4q/9VjI1aBOuwlkxBCvxlcS6NmNdvMHz2?=
+ =?us-ascii?Q?CzBSwP7dPUSkjlk/oiZhJDfhllift2fBdqJc+ZLLmTVeuK3EvIdsYRyevCHb?=
+ =?us-ascii?Q?oiqaaXG5EsjHrkDU+Qff9lctKfUdWiTSEAwHxRylkHVsk+87ikM9T+cDULuX?=
+ =?us-ascii?Q?rW3lULXef1jXtlkQkAylONx3A2NZbBAx5rXZhKS3mD3nVHr+C+YxLF8AU8fu?=
+ =?us-ascii?Q?XYo+eUeECjddCTOc2CChoBZbg/WYaZV24wfXNtxSlhz6owaaKJxBxq3zbjMq?=
+ =?us-ascii?Q?dkDZXjSNCG8xnVvkHbSrtIzrNKWSn2DsMZtOtxxd85fz3cZsg/KTlafO2DHS?=
+ =?us-ascii?Q?w+FxWL4oMOaFogHTE2O3MQmlU5hOGT4qcoUQCQ2hygi1ktUTDKLE+KsKL+cV?=
+ =?us-ascii?Q?ZhOqpieEAV9DKAjbdmDPjZ/pogk7st+ZyTrsTQFXfKfYnY7dY1ciTnpgy7hH?=
+ =?us-ascii?Q?ca+WFcts+Hn4lYD0Q2737JXl3sGFoJlgqkhosTUlyc38RMSrGOWnldNRx2b6?=
+ =?us-ascii?Q?kTAsv20VujqQyM/7u/ShBODoD44Lw3gxI4N1urhvOd+u0l1Kg81a5VIfvcQF?=
+ =?us-ascii?Q?i+EU0C/ATKmEJtD/ySKSc/BlkIN8uLK8zpAXp6leKhsiUjEr2pQI43dojdWt?=
+ =?us-ascii?Q?i/elDy3dHWeO+xSV6Nmdjg2nIxAa3uRpJbbZFtN1DVBVwDBg8z/cYf+Y1yHG?=
+ =?us-ascii?Q?lrcxAIGoN5QPX2neq48AQneDOl/lNYkySNdswSQO3F/nYUM9h2HFrYVcyKgx?=
+ =?us-ascii?Q?W8N1nQTGEzt8SdGQ5Bjqn5malgel1Bmt8DsnveWhMWV/l4mJX9voXffgVuEA?=
+ =?us-ascii?Q?MtQ7UHWSbPs4P4YUqoNL4yQhFbVe8VvnSGaUTyvNgSYCSHLWadPbgUJ2jbN4?=
+ =?us-ascii?Q?i5weVZ/mdxX1lZur+wgDB6O1oC7Nz/tM7O6ucVL5KE6dUuMwyyoh+aR3kGX1?=
+ =?us-ascii?Q?2odb6KUXR+eJMjy81s6HyKCiI/aR1lTWQbfPtNpS+px3kUKQ+PWQT38Z5V/5?=
+ =?us-ascii?Q?sGcR3gRK953amXdubANQunmPUAO+G8ucsXzIr6ceJVpw3AGMBp9m6UfntzKu?=
+ =?us-ascii?Q?luXnpqhr4/oJIYAWICMJarHTUPf6ZIL4fqTlicjjE9pw5fC0AByg+53hMg4v?=
+ =?us-ascii?Q?d65/Y33GRNy6G11KMwZvfUZjc9fO1utfbSOirixh3Jdrz/CTGDJgw4drPSOe?=
+ =?us-ascii?Q?EmXrReRn5Ih7Rwy1+OiS+ti35FrFra4Ypq2qTc4iNpfAAhPSzwNzyzGM3Bdf?=
+ =?us-ascii?Q?5g2vjxhwZJTeECNBYcv1XxwILjwSfwxI390fcp8mSo+nbfzrManTiKaFRR9O?=
+ =?us-ascii?Q?5s5tEZn5/LL3uQSoOdmUgXmSkWzugUFCOvZYTw0VlESvRHKh+P2N60Q8v6va?=
+ =?us-ascii?Q?N0TFbx/MH0AdwOJ9gn06Y+CP5ipogDx3oEh1gbTq/Sq8JmLqZdNFPB7YQmZN?=
+ =?us-ascii?Q?Q1nh6XLx4MqhIAFabBaxj1UD0OHw7ta+8PZ6P69c6m58QUtM8pRzgjWxdWMj?=
+ =?us-ascii?Q?t0i7F+epmKMd8XuHdj0tuvH1nZJlmAFdL1YPFYIQYnYSvlMuWsmcYQM/t7W/?=
+ =?us-ascii?Q?AxbL8kPjMuhnwvDaL5Qegi+DP5a+IqFSRu23U1Km?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eff994a0-2e6a-4380-ab00-08ddf0d6f3ae
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2025 02:00:15.8324 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 872146b3-c4da-4b81-2d36-08ddf0d70b22
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2025 02:00:55.1382 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: RS72EIlYobJyLAck5NWAiXcBKsAfMlpsUG+MfRc6spJNuFXcTyOiMhMfYnMTmxIAtowlutG6sHdHdhqbe+PIXNw1FOcjc2s7tD/YHbBh9lo=
+X-MS-Exchange-CrossTenant-userprincipalname: mlgqTBDL+E6fPTgXvgy461/D1mgu3IVqRfQP8IvKkqfP8JVm2FXmkSwaBv/Wpwg0z6G0GiVc77c7FP482iHxEdT45eo08IVRTZdKqZdBHyQ=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB5176
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -182,98 +182,221 @@ X-Virus-Status: Clean
 > Vasut <marek.vasut+renesas@mailbox.org>; Simon Goldschmidt
 > <simon.k.r.goldschmidt@gmail.com>; Yuslaimi, Alif Zakuan
 > <alif.zakuan.yuslaimi@altera.com>
-> Subject: [PATCH v2 1/3] include: dt-bindings: clk: agilex: Add Agilex clo=
-ck
-> definitions header file
+> Subject: [PATCH v2 2/3] drivers: clk: agilex: Support for enable/disable =
+API
 >=20
 > From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 >=20
-> Introduce header file to define the clock indexes for the Agilex platform=
-.
+> Update Agilex clock driver to support enabling or disabling the periphera=
+l
+> clocks via clock driver model APIs.
+>=20
+> The caller will pass the clock ID to this driver and the driver will then=
+ proceed
+> to manipulate the desired bit in the Agilex clock manager peripheral PLL
+> register based on the given clock ID.
 >=20
 > Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 > ---
->  include/dt-bindings/clock/agilex-clock.h | 71 ++++++++++++++++++++++++
->  1 file changed, 71 insertions(+)
->  create mode 100644 include/dt-bindings/clock/agilex-clock.h
+>  drivers/clk/altera/clk-agilex.c | 120
+> ++++++++++++++++++++++++++++++++  drivers/clk/altera/clk-agilex.h |
+> 20 ++++++
+>  2 files changed, 140 insertions(+)
 >=20
-> diff --git a/include/dt-bindings/clock/agilex-clock.h b/include/dt-
-> bindings/clock/agilex-clock.h
-> new file mode 100644
-> index 00000000000..a6252180516
-> --- /dev/null
-> +++ b/include/dt-bindings/clock/agilex-clock.h
-> @@ -0,0 +1,71 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (C) 2025 Altera Corporation <www.altera.com>  */
+> diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agi=
+lex.c
+> index 242740a4b00..46b04895cc5 100644
+> --- a/drivers/clk/altera/clk-agilex.c
+> +++ b/drivers/clk/altera/clk-agilex.c
+> @@ -22,6 +22,8 @@ DECLARE_GLOBAL_DATA_PTR;
+>=20
+>  struct socfpga_clk_plat {
+>  	void __iomem *regs;
+> +	int pllgrp;
+> +	int bitmask;
+>  };
+>=20
+>  /*
+> @@ -643,8 +645,125 @@ static ulong socfpga_clk_get_rate(struct clk *clk)
+>  	}
+>  }
+>=20
+> +static int bitmask_from_clk_id(struct clk *clk) {
+> +	struct socfpga_clk_plat *plat =3D dev_get_plat(clk->dev);
 > +
-> +#ifndef __AGILEX_CLOCK_H
-> +#define __AGILEX_CLOCK_H
+> +	switch (clk->id) {
+> +	case AGILEX_MPU_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D CLKMGR_MAINPLLGRP_EN_MPUCLK_MASK;
+> +		break;
+> +	case AGILEX_L4_MAIN_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_MAINPLLGRP_EN_L4MAINCLK_MASK;
+> +		break;
+> +	case AGILEX_L4_MP_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_MAINPLLGRP_EN_L4MPCLK_MASK;
+> +		break;
+> +	case AGILEX_L4_SP_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D CLKMGR_MAINPLLGRP_EN_L4SPCLK_MASK;
+> +		break;
+> +	case AGILEX_CS_AT_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
+> +		break;
+> +	case AGILEX_CS_TRACE_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
+> +		break;
+> +	case AGILEX_CS_PDBG_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D CLKMGR_MAINPLLGRP_EN_CSCLK_MASK;
+> +		break;
+> +	case AGILEX_CS_TIMER_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_MAINPLLGRP_EN_CSTIMERCLK_MASK;
+> +		break;
+> +	case AGILEX_S2F_USER0_CLK:
+> +		plat->pllgrp =3D CLKMGR_MAINPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_MAINPLLGRP_EN_S2FUSER0CLK_MASK;
+> +		break;
+> +	case AGILEX_EMAC0_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D CLKMGR_PERPLLGRP_EN_EMAC0CLK_MASK;
+> +		break;
+> +	case AGILEX_EMAC1_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D CLKMGR_PERPLLGRP_EN_EMAC1CLK_MASK;
+> +		break;
+> +	case AGILEX_EMAC2_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D CLKMGR_PERPLLGRP_EN_EMAC2CLK_MASK;
+> +		break;
+> +	case AGILEX_EMAC_PTP_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_PERPLLGRP_EN_EMACPTPCLK_MASK;
+> +		break;
+> +	case AGILEX_GPIO_DB_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_PERPLLGRP_EN_GPIODBCLK_MASK;
+> +		break;
+> +	case AGILEX_SDMMC_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_PERPLLGRP_EN_SDMMCCLK_MASK;
+> +		break;
+> +	case AGILEX_S2F_USER1_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D
+> CLKMGR_PERPLLGRP_EN_S2FUSER1CLK_MASK;
+> +		break;
+> +	case AGILEX_PSI_REF_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D CLKMGR_PERPLLGRP_EN_PSIREFCLK_MASK;
+> +		break;
+> +	case AGILEX_USB_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D CLKMGR_PERPLLGRP_EN_USBCLK_MASK;
+> +		break;
+> +	case AGILEX_SPI_M_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D CLKMGR_PERPLLGRP_EN_SPIMCLK_MASK;
+> +		break;
+> +	case AGILEX_NAND_CLK:
+> +		plat->pllgrp =3D CLKMGR_PERPLL_EN;
+> +		plat->bitmask =3D CLKMGR_PERPLLGRP_EN_NANDCLK_MASK;
+> +		break;
+> +	default:
+> +		return -ENXIO;
+> +	}
 > +
-> +/* fixed rate clocks */
-> +#define AGILEX_OSC1			0
-> +#define AGILEX_CB_INTOSC_HS_DIV2_CLK	1
-> +#define AGILEX_CB_INTOSC_LS_CLK		2
-> +#define AGILEX_L4_SYS_FREE_CLK		3
-> +#define AGILEX_F2S_FREE_CLK		4
+> +	return 0;
+> +}
 > +
-> +/* PLL clocks */
-> +#define AGILEX_MAIN_PLL_CLK		5
-> +#define AGILEX_MAIN_PLL_C0_CLK		6
-> +#define AGILEX_MAIN_PLL_C1_CLK		7
-> +#define AGILEX_MAIN_PLL_C2_CLK		8
-> +#define AGILEX_MAIN_PLL_C3_CLK		9
-> +#define AGILEX_PERIPH_PLL_CLK		10
-> +#define AGILEX_PERIPH_PLL_C0_CLK	11
-> +#define AGILEX_PERIPH_PLL_C1_CLK	12
-> +#define AGILEX_PERIPH_PLL_C2_CLK	13
-> +#define AGILEX_PERIPH_PLL_C3_CLK	14
-> +#define AGILEX_MPU_FREE_CLK		15
-> +#define AGILEX_MPU_CCU_CLK		16
-> +#define AGILEX_BOOT_CLK			17
+>  static int socfpga_clk_enable(struct clk *clk)  {
+> +	struct socfpga_clk_plat *plat =3D dev_get_plat(clk->dev);
+> +	uintptr_t base_addr =3D (uintptr_t)plat->regs;
+> +	int ret;
 > +
-> +/* fixed factor clocks */
-> +#define AGILEX_L3_MAIN_FREE_CLK		18
-> +#define AGILEX_NOC_FREE_CLK		19
-> +#define AGILEX_S2F_USR0_CLK		20
-> +#define AGILEX_NOC_CLK			21
-> +#define AGILEX_EMAC_A_FREE_CLK		22
-> +#define AGILEX_EMAC_B_FREE_CLK		23
-> +#define AGILEX_EMAC_PTP_FREE_CLK	24
-> +#define AGILEX_GPIO_DB_FREE_CLK		25
-> +#define AGILEX_SDMMC_FREE_CLK		26
-> +#define AGILEX_S2F_USER0_FREE_CLK	27
-> +#define AGILEX_S2F_USER1_FREE_CLK	28
-> +#define AGILEX_PSI_REF_FREE_CLK		29
+> +	ret =3D bitmask_from_clk_id(clk);
+> +	if (ret)
+> +		return ret;
 > +
-> +/* Gate clocks */
-> +#define AGILEX_MPU_CLK			30
-> +#define AGILEX_MPU_PERIPH_CLK		31
-> +#define AGILEX_L4_MAIN_CLK		32
-> +#define AGILEX_L4_MP_CLK		33
-> +#define AGILEX_L4_SP_CLK		34
-> +#define AGILEX_CS_AT_CLK		35
-> +#define AGILEX_CS_TRACE_CLK		36
-> +#define AGILEX_CS_PDBG_CLK		37
-> +#define AGILEX_CS_TIMER_CLK		38
-> +#define AGILEX_S2F_USER0_CLK		39
-> +#define AGILEX_EMAC0_CLK		40
-> +#define AGILEX_EMAC1_CLK		41
-> +#define AGILEX_EMAC2_CLK		42
-> +#define AGILEX_EMAC_PTP_CLK		43
-> +#define AGILEX_GPIO_DB_CLK		44
-> +#define AGILEX_NAND_CLK			45
-> +#define AGILEX_PSI_REF_CLK		46
-> +#define AGILEX_S2F_USER1_CLK		47
-> +#define AGILEX_SDMMC_CLK		48
-> +#define AGILEX_SPI_M_CLK		49
-> +#define AGILEX_USB_CLK			50
-> +#define AGILEX_NAND_X_CLK		51
-> +#define AGILEX_NAND_ECC_CLK		52
-> +#define AGILEX_NUM_CLKS			53
+> +	setbits_le32(base_addr + plat->pllgrp, plat->bitmask);
 > +
-> +#endif	/* __AGILEX_CLOCK_H */
+> +	return 0;
+> +}
+> +
+> +static int socfpga_clk_disable(struct clk *clk) {
+> +	struct socfpga_clk_plat *plat =3D dev_get_plat(clk->dev);
+> +	uintptr_t base_addr =3D (uintptr_t)plat->regs;
+> +	int ret;
+> +
+> +	ret =3D bitmask_from_clk_id(clk);
+> +	if (ret)
+> +		return ret;
+> +
+> +	clrbits_le32(base_addr + plat->pllgrp, plat->bitmask);
+> +
+>  	return 0;
+>  }
+>=20
+> @@ -672,6 +791,7 @@ static int socfpga_clk_of_to_plat(struct udevice *dev=
+)
+>=20
+>  static struct clk_ops socfpga_clk_ops =3D {
+>  	.enable		=3D socfpga_clk_enable,
+> +	.disable	=3D socfpga_clk_disable,
+>  	.get_rate	=3D socfpga_clk_get_rate,
+>  };
+>=20
+> diff --git a/drivers/clk/altera/clk-agilex.h b/drivers/clk/altera/clk-agi=
+lex.h
+> index b3e8841a512..be639957940 100644
+> --- a/drivers/clk/altera/clk-agilex.h
+> +++ b/drivers/clk/altera/clk-agilex.h
+> @@ -1,6 +1,7 @@
+>  /* SPDX-License-Identifier: GPL-2.0 */
+>  /*
+>   * Copyright (C) 2019 Intel Corporation <www.intel.com>
+> + * Copyright (C) 2025 Altera Corporation <www.altera.com>
+>   */
+>=20
+>  #ifndef	_CLK_AGILEX_
+> @@ -210,7 +211,26 @@ struct cm_config {
+>=20
+>  #define CLKMGR_LOSTLOCK_SET_MASK		BIT(0)
+>=20
+> +#define CLKMGR_MAINPLLGRP_EN_MPUCLK_MASK		BIT(0)
+> +#define CLKMGR_MAINPLLGRP_EN_L4MAINCLK_MASK		BIT(1)
+> +#define CLKMGR_MAINPLLGRP_EN_L4MPCLK_MASK		BIT(2)
+> +#define CLKMGR_MAINPLLGRP_EN_L4SPCLK_MASK		BIT(3)
+> +#define CLKMGR_MAINPLLGRP_EN_CSCLK_MASK		BIT(4)
+> +#define CLKMGR_MAINPLLGRP_EN_CSTIMERCLK_MASK		BIT(5)
+> +#define CLKMGR_MAINPLLGRP_EN_S2FUSER0CLK_MASK		BIT(6)
+> +
+> +#define CLKMGR_PERPLLGRP_EN_EMAC0CLK_MASK		BIT(0)
+> +#define CLKMGR_PERPLLGRP_EN_EMAC1CLK_MASK		BIT(1)
+> +#define CLKMGR_PERPLLGRP_EN_EMAC2CLK_MASK		BIT(2)
+> +#define CLKMGR_PERPLLGRP_EN_EMACPTPCLK_MASK		BIT(3)
+> +#define CLKMGR_PERPLLGRP_EN_GPIODBCLK_MASK		BIT(4)
+>  #define CLKMGR_PERPLLGRP_EN_SDMMCCLK_MASK		BIT(5)
+> +#define CLKMGR_PERPLLGRP_EN_S2FUSER1CLK_MASK		BIT(6)
+> +#define CLKMGR_PERPLLGRP_EN_PSIREFCLK_MASK		BIT(7)
+> +#define CLKMGR_PERPLLGRP_EN_USBCLK_MASK		BIT(8)
+> +#define CLKMGR_PERPLLGRP_EN_SPIMCLK_MASK		BIT(9)
+> +#define CLKMGR_PERPLLGRP_EN_NANDCLK_MASK		BIT(10)
+> +
+>  #define CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_OFFSET	26
+>  #define CLKMGR_PERPLLGRP_EMACCTL_EMAC0SELB_MASK		BIT(26)
+>  #define CLKMGR_PERPLLGRP_EMACCTL_EMAC1SELB_OFFSET	27
 > --
 > 2.35.3
 
