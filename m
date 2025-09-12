@@ -4,81 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44131CA101F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 06:35:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C40F1CAC582
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 06:38:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4433833F5;
-	Fri, 12 Sep 2025 08:35:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 28E388334F;
+	Fri, 12 Sep 2025 08:38:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oCxZiI2d";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A0DFBcDl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 945FB833F9; Fri, 12 Sep 2025 08:35:43 +0200 (CEST)
-Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
- [IPv6:2607:f8b0:4864:20::b136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10BDB83322
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 08:35:40 +0200 (CEST)
+ id 8A2B5833EB; Fri, 12 Sep 2025 08:38:40 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1920983322
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 08:38:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb136.google.com with SMTP id
- 956f58d0204a3-60f4678ceabso946351d50.3
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 23:35:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757658939; x=1758263739; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=S5nS/1KT1m0VKtVAjXDyb1k7RB5BC2ls/c6XqaLCKWM=;
- b=oCxZiI2dYR0CuRaPE9u+N++SaEMhpJ5YZEDGUJVH0BhoVcUSCG4pcWzaN9wY3ztoHC
- Wdy+01ABtut1mbvlWlSJwquXyqiqeRenPaoaE9ygm1lmK10Ut6JI4oq5ZPqwKuAqtr9c
- ZXZQdzxzkyw4m4BpvJGKmt8sdtQUCBtCsr9VwljGrD6zFa5FRhY21wG8Nudnc72BbISu
- UDpkjeOwYeNSTpwxg8ILBoaFPeFdGHpBg1Xgs3fAlDjyIsd66Y02pPCd5LYLaRytl8Uf
- 0fiPYS8YCnxA6DAb0bcfHvkN5eTuzUoouagB480i4tuSZ2faQgSr9Hl3hKHMKYrCbPPZ
- N4SA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757658939; x=1758263739;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=S5nS/1KT1m0VKtVAjXDyb1k7RB5BC2ls/c6XqaLCKWM=;
- b=SZU7Y7ABNb5FKo12SqUHw+GFC+p6RcYsQoXUP7++N/YL1fkuj50XVZs5ZlcdgLGIGw
- nToVd/OCg0oBB001icxaIbEn8AY9sAc2BHhvhJNdLjRdOJqhT+clKeHwriyTwmGvw7tr
- vJFHP32rnet6gzg5ynVDs88BHAmIc2euKcbnbw5sWsqHh/jINMiyeqW9Rc9L2LgTPsm4
- 2h9oTsMjjp77UPDg7qzDF69Jq0InCFkBEte1R2bbAmSc++Zx3wipSiLI5baLuvvSUeWU
- Nkb3PdwtRgJEyHzaMcrvsmn9WbWGTED4xeBvW48gNU6fzSbKdwx0Xvfh1KNXVzjbMyqq
- DA2Q==
-X-Gm-Message-State: AOJu0YyLxnwYVaECnqxgScZakIpdvX5jaRFQ3jBkICLPj6EyilotS5DC
- io3ok4rfQrxGim/slSSupzaPYkftRdqu/md346GQnVKSpGfG9lK6Pj5s/WB/iCj3yup/QObmhHx
- Bv/d2JDnTc9zczyEXsKskWoHDERaaZmLKpqf2SWRZqg==
-X-Gm-Gg: ASbGnctMS2ubM8xph5zzFkHnDSVolAjhr5OtmX+ye82Hrgi3qZY+v1Q3HQs/jCOF4es
- 8jN8DNKSzMCfV5khh6hoHHlympxnplaa3VdThX4ZhsAkQWRKSouFgqK2/7CZUJdyueu8nwQgk0/
- zRdtEKoYvgNAAg73FAZXVgGQOzOWdFL9kPeZEYGC26MvlMSs0vWmY6/k3WkXeHvuKGDc2PjeQQH
- 2WSf0bp9viVgta4zFXC8NRnZlr05J73RZzy5gUuyqUKjakuNFJau2R6lYthIhkQvcshBv3FEb8B
- eQn5a5fD2Q7FV7i0b6HSQvHh1oBb10EFfmil5T5UnQvaO2bO9HgJPFkBhgzT/iI=
-X-Google-Smtp-Source: AGHT+IGwFoqwGZ+YF2YzlZKvC1zJzAQDYjtPtsVRbzGHDbuLay4uChXm+H/2perhv6zeZ4CLJIaKQWaffCrWtX6v/2E=
-X-Received: by 2002:a53:7b03:0:b0:604:3849:9b8a with SMTP id
- 956f58d0204a3-6272164e7bbmr1258931d50.32.1757658938696; Thu, 11 Sep 2025
- 23:35:38 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58C6cX82913100;
+ Fri, 12 Sep 2025 01:38:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757659113;
+ bh=RGHNvRgigXYmas0m8iT1RV/WYN8DPC2vPQXj9zrxUgg=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=A0DFBcDlByr4qM0WlZH+46kPGIzf6n6U3nULT4SnjLL5i2Zk1YNYzl2/SNyfWyrTC
+ TmyoPiFxA/W7DT36ta+wxQuMUgc2TjtTV0GU7ySb9erjZRB0kyGsG/DcNXLrz1LRsb
+ pL5865lOz0aKFoSejMLyUHBUt3uXqstLs8jBz2Tw=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58C6cXND2569499
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 12 Sep 2025 01:38:33 -0500
+Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 12
+ Sep 2025 01:38:32 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
+ (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 12 Sep 2025 01:38:32 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58C6cVUx3474846;
+ Fri, 12 Sep 2025 01:38:32 -0500
 MIME-Version: 1.0
-References: <20250905081902.489345-1-anshuld@ti.com>
- <20250905081902.489345-8-anshuld@ti.com>
-In-Reply-To: <20250905081902.489345-8-anshuld@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 12 Sep 2025 09:35:02 +0300
-X-Gm-Features: Ac12FXzsaFs3m3cPjM1LzjQQLUiJLurBU31kIVy-ozXgRUtUvFMS87PgQoIPRC0
-Message-ID: <CAC_iWjL4oJDtRMGqBQ9r-bgjR5w+J5o=5cQrt330S4KLr2E0xQ@mail.gmail.com>
-Subject: Re: [PATCH -next v6 07/10] arm: armv8: mmu: add mmu_unmap_reserved_mem
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, d-gole@ti.com, b-padhi@ti.com, vigneshr@ti.com, 
- trini@konsulko.com, nm@ti.com, robertcnelson@gmail.com, w.egorov@phytec.de, 
- francesco.dolcini@toradex.com, ggiordano@phytec.com, m-chawdhry@ti.com, 
- a-nandan@ti.com, afd@ti.com, bb@ti.com, u-kumar1@ti.com, devarsht@ti.com
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 12 Sep 2025 12:08:30 +0530
+Message-ID: <DCQM5KG6M5Q1.3POA3UVZ1J563@ti.com>
+CC: <u-boot@lists.denx.de>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <a-nandan@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>
+Subject: Re: [PATCH -next v6 05/10] arm: armv8: mmu: add mem_map_fix_dram_banks
+From: Anshul Dalal <anshuld@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
+References: <20250905081902.489345-1-anshuld@ti.com>
+ <20250905081902.489345-6-anshuld@ti.com>
+ <CAC_iWjJos1Xu0LWK4aqJ9aq2UZhor8uvnGRVg1xKs69HmnhP6A@mail.gmail.com>
+In-Reply-To: <CAC_iWjJos1Xu0LWK4aqJ9aq2UZhor8uvnGRVg1xKs69HmnhP6A@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,37 +85,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul,
+Hi Ilias,
 
-[....]
-
+On Fri Sep 12, 2025 at 12:03 PM IST, Ilias Apalodimas wrote:
+> Hi Anshul,
 >
->         return 0;
->  }
-> +
-> +int mmu_unmap_reserved_mem(const char *name)
-> +{
-> +       void *fdt = (void *)gd->fdt_blob;
-> +       char node_path[128];
-> +       fdt_addr_t addr;
-> +       fdt_size_t size;
-> +       int ret;
-> +
-> +       snprintf(node_path, sizeof(node_path), "/reserved-memory/%s", name);
-> +       ret = fdt_path_offset(fdt, node_path);
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       addr = fdtdec_get_addr_size(fdt, ret, "reg", &size);
-> +       if (addr == FDT_ADDR_T_NONE)
-> +               return -1;
-> +
-> +       mmu_change_region_attr(addr, size, PTE_TYPE_FAULT);
+> On Fri, 5 Sept 2025 at 11:19, Anshul Dalal <anshuld@ti.com> wrote:
+>>
+>> For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
+>> the MMU as part of mmu_setup.
+>>
+>> But since the exact configuration of memory banks might not be known at
+>> build time, many platforms such as imx9, versal2 etc. utilize
+>> gd->bd->bi_dram to configure the static map at runtime.
+>>
+>> Therefore this patch adds a new API mem_map_fix_dram_banks that modifies
+>> the static map in a similar way. Allowing for anyone to map all dram
+>> banks by just passing the index to last entry in their mem_map and it's
+>> length.
+>>
+>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>> ---
+>>  arch/arm/cpu/armv8/cache_v8.c    | 27 +++++++++++++++++++++++++++
+>>  arch/arm/include/asm/armv8/mmu.h | 10 ++++++++++
+>>  2 files changed, 37 insertions(+)
+>>
+>> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8=
+.c
+>> index 6e662395a83..edb895da1f2 100644
+>> --- a/arch/arm/cpu/armv8/cache_v8.c
+>> +++ b/arch/arm/cpu/armv8/cache_v8.c
+>> @@ -58,6 +58,33 @@ static int get_effective_el(void)
+>>         return el;
+>>  }
+>>
+>> +int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 at=
+trs)
+>> +{
+>> +       unsigned int i;
+>> +       int ret =3D fdtdec_setup_memory_banksize();
+>> +
+>> +       if (ret) {
+>> +               printf("%s: Failed to setup dram banks\n", __func__);
+>> +               return ret;
+>> +       }
+>> +
+>> +       if (index + CONFIG_NR_DRAM_BANKS >=3D len) {
+>> +               printf("%s: Not sufficient space in memory map\n", __fun=
+c__);
+>> +               return -ENOMEM;
+>> +       }
+>
+> The length of the mem_map array is configured at compile time.
+> So this is going to fail for all existing boards unless someone
+> explicitly changes the size of their struct mm_region.
+> I think if we go down that path, we need to change the error message
+> as well and point them to the right direction
+>
+>> +
+>> +       for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
+>> +               mem_map[index].virt =3D gd->bd->bi_dram[i].start;
+>> +               mem_map[index].phys =3D gd->bd->bi_dram[i].start;
+>> +               mem_map[index].size =3D gd->bd->bi_dram[i].size;
+>> +               mem_map[index].attrs =3D attrs;
+>> +               index++;
+>> +       }
+>> +
+>> +       mem_map[index] =3D (const struct mm_region){ 0 };
+>
+> Why do you need the const?
+> Can we do
+> memset(&mem_map[index], 0, sizeof(mem_map[index]));
+> instead?
+>
 
-Since you are basically breaking the memory map here, you can use
-mmu_change_region_attr_nobreak() and not run the loop twice.
+Yeah, we could do that instead. But it essentially achieves the same
+thing, right?
 
-[...]
-
-Cheers
-/Ilias
+Regards,
+Anshul
