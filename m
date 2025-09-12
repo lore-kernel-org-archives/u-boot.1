@@ -4,132 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20011CA101F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 10:06:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4539CCAC582
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 10:08:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D07248340C;
-	Fri, 12 Sep 2025 12:06:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E4A5833ED;
+	Fri, 12 Sep 2025 12:08:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Jiv/Lr3f";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="JkZeV/QH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A059E833E9; Fri, 12 Sep 2025 12:06:01 +0200 (CEST)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2408::611])
+ id 8EBAE8341A; Fri, 12 Sep 2025 12:08:02 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C2CF8340A
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 12:05:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 642DB83322
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 12:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=Padmarao.Begari@amd.com
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SCBejI6HJWe4nMeHgBrKcJ/Bz913MS7mjRImXRlJ9rIBBl0BfIKEnFdEHaNIELKM80r0iV+sFd97J6ZdpGub/cfNgbVzvgYsFswkJ+TMkwFw3Isj7dsnnkDtvuPZsUrVkX6Oph0F7T0U0N10HfCj3BOmFayF5fIF3dYEJn4OFNT/2MV63Q/7HHL/RB1cZD2a3eRpQ8PzOGHWgvw5eN13KdK/VSUYPBjq/4uYoGhxE7g6TCpAhSsKrPK7Lsl+ob4pODVGx1WT4QAt4FhXR3gzbJO7tIXNNFHxnpz5y60hJYgaxm8LMH2bThip5ukxAkYr8BGOWDR80HYoT6Pmk00Rmw==
+ b=AFERJBJOrCV334LitWNzxpB/Aonz1kG2iXsA7091Y/vM3uP/b3tPonoFpfEMQbNB6lSaf0bBdRhz4BI8J4zYj7o8WKYKIbDdb/dnyfvfjJn1WW0stubuHw5WTmySmuyR96x9/AP6AB/SVyb+Agr/1m8fGqElyYB88BgyJXB0mLVH2230W0k4BtFHd40+UWl6FKpbD2/z0Gok4vXQMrzxaGHb+L+eJuE07vmFZ2XUcAVeft1SUet2fai2HtkRMMvM5UdiweOf7/zDR/tNxNSeRhKEKGDHH3iD2CQd38qV7SVUoEndl9FXS9giT8njxFcLzkJ13wmqpIqoU8LAhfesxg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2vZIHPMELFEGwHa3rTvVIUuI1xxBrhYaiMub7FYQr1E=;
- b=tiiUota/Lv2bWRVrCqVZPDgGWkohI7nS0nmw3WcCBumMwPHsqjgqyQn3IiIt/05YqYXUGBHO13KLUzHk1R8zGgKdPo0eYAwX9jlpoeomgqAaHm1cDNXh0FJBBUyR79Q8fZEtGdnoz350VVPevG+AxGUQyWQrP/pETFD5I8xOAvPZRdf0XdJdnV3G/MjH8fNjnCIE3wrX5ZgjIXcB782nRl2DJ2T/Hf880Em+ehzNsYPjZaakKojrWFnfz5yLrIfVRXp/rnA51qROSaZzJVP0TwqkAtnZO9bEQnJYER13CJWc0w2Ueei7wk4EgkBZUt6iKbJt/pMXqNYWwXa15EKNQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=temperror (sender ip
- is 165.204.84.17) smtp.rcpttodomain=lists.denx.de
- smtp.mailfrom=amd.com; 
- dmarc=temperror action=none header.from=amd.com; dkim=none (message not
- signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=ePHwoop21BnX5c8oHMAGEWv5ILTyS+s4Sm4OujGrDgc=;
+ b=YSfOr/FEgTpQJqPrbWT98b1MFQfj4PhOSxNLyJR19HI+goI1FmERNYlIJCAUrd4/CFKZivJbGMNZ8uo+5MFbppQntjodlzBoUvZH7WGeacDJsxacUudjp3aFQPP/A0H6YGWX4QZgvpf1h4WwN2BuLJduSZiNaKHeUgt9V5mn3NU3ZaH9WVfjuVjbffDsZ0CipBP0LzDZ42CYu1kpH/Vihvq29Jsjhs8QNq2JvW3pKYJ0pSU9FvrUni707z41UcDOdaofkSSXy/uWWn8y5tLSlzpPeAYNdWopHJAMHi8Y8Bs8iB3w49W5QsYpXvtXsXPYve6/V+B7cQecB+7dxeKYoA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2vZIHPMELFEGwHa3rTvVIUuI1xxBrhYaiMub7FYQr1E=;
- b=Jiv/Lr3f0HW0Hc6euUotRVNlo7HZHn/h7jdGJm8kLktUGSAAmhFire1d9WEE0WNAdAGccO62J0kLu+KOzlE/hmWx/+PLb8JSZugbaelKetAmiDmHoNS+4NWghDMymKyMwfsXzFjE5GsARyIu3+rIJ1C+FroCqNqTBazp6Y0VxkA=
-Received: from MN0P220CA0013.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:52e::28)
- by DS0PR12MB8562.namprd12.prod.outlook.com (2603:10b6:8:164::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9094.22; Fri, 12 Sep
- 2025 10:05:53 +0000
-Received: from BN3PEPF0000B373.namprd21.prod.outlook.com
- (2603:10b6:208:52e:cafe::1d) by MN0P220CA0013.outlook.office365.com
- (2603:10b6:208:52e::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9115.17 via Frontend Transport; Fri,
- 12 Sep 2025 10:05:53 +0000
-X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
- 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=temperror action=none header.from=amd.com;
-Received-SPF: TempError (protection.outlook.com: error in processing during
- lookup of amd.com: DNS Timeout)
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF0000B373.mail.protection.outlook.com (10.167.243.170) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9115.0 via Frontend Transport; Fri, 12 Sep 2025 10:05:51 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Fri, 12 Sep
- 2025 03:05:50 -0700
-Received: from xhdkummari40.xilinx.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Fri, 12 Sep 2025 03:05:49 -0700
-From: Padmarao Begari <padmarao.begari@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <git@amd.com>, <michal.simek@amd.com>, <ilias.apalodimas@linaro.org>
-Subject: [PATCH v4 1/2] FWU: Add platform hook support for fwu metata
-Date: Fri, 12 Sep 2025 15:35:38 +0530
-Message-ID: <20250912100539.4127378-2-padmarao.begari@amd.com>
-X-Mailer: git-send-email 2.44.1
-In-Reply-To: <20250912100539.4127378-1-padmarao.begari@amd.com>
-References: <20250912100539.4127378-1-padmarao.begari@amd.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B373:EE_|DS0PR12MB8562:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4f3c4257-6446-41ce-e36b-08ddf1e3f48e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4hYFjzyryxAtBzwe8pE+1L014YlD+/MIa+EBTtFz3ernTVLvCZVo79oqwkbA?=
- =?us-ascii?Q?dJQvmue1BylCKWs7U6lD1iHwfGUHUk6iJn1TSCtUz/5CPsNXbbc1RL8uwl/e?=
- =?us-ascii?Q?PMqplfLksL8KEK6enbzBEC2xjOTu+SxROeoh+i0eh/HKK3Tw3nhyaSrJ/GRi?=
- =?us-ascii?Q?fl19hR+784nu09bxDMU55TUFtCOov2F2OLfTTg0ys/zDIDjgqdqXWkTk7qF7?=
- =?us-ascii?Q?beC9Rzkh0E2mjxw+erKVmDJ0PayZFjZJMKAG16C4F0cnAPvVJKd0AcwLoMoz?=
- =?us-ascii?Q?pRiPoakhnqV5BIdig82Jy1GJ5qUAwY2zfjU7T4Jxhl/9SiSSClYb5OGjRkz0?=
- =?us-ascii?Q?xAxts9xu6DYzORIVcJpbX/AWjG4pm9+4+QoQvNJ2CkXrXUNxJDXMxNse/9KW?=
- =?us-ascii?Q?iMg0Q8hfMIsxJtIwoyik1UIY61vvOIOe8jF38oMJGOUoy5dUZYCqr9X+Uv5B?=
- =?us-ascii?Q?gCkiE6ArHKs6YQY0aT1pO9vnknlXOERN6SBi5Zxpb+iPSWObZYQ5av7XxcMT?=
- =?us-ascii?Q?9GPLn9KYXHu+ClxSHRGmG7dkuColP1vcrn9yzeKLGdu54Am/st855MOe1nGk?=
- =?us-ascii?Q?/dGxs1aCMJKG1d/caqZ9c29ICofXAtVM1bRGbYEEQK6R4B9yRqqSPbC8DIfH?=
- =?us-ascii?Q?5c6gYdK3gb0c7XRcyRV4owmQLmPNT1Hpc8Jvr5WOE6fMq+oCVDB3rxZIKwxx?=
- =?us-ascii?Q?ul+Pg0U1NB+2VEq8feVP3T8JDeFTFr7hKyLxzN1AMwOh7mB0tpfuvshD8+/a?=
- =?us-ascii?Q?+rRyMSP7M5j+CmI6pAhrDM1ciAvLf67Y+rXMurHQq727TQRYdhmNQDT7F3kC?=
- =?us-ascii?Q?qtE6OkRPf+e6Z8hbFib5dmHqTTSxg7EKWLwCzTUZA7t6eB/66+IyRljsI+85?=
- =?us-ascii?Q?ThzLliQj2/YIKPHNoERIochNtz6yK70TvVodSzfIBFMgjJ/6sEtqTfQIHZ4x?=
- =?us-ascii?Q?s0g9rnh5FCjXqwDGTjnzlPbJAmi87y2kfXN4S23szBkWoWOVShgx+YonzW6t?=
- =?us-ascii?Q?wV5fyBqsDt658PD16+bravMJfsu5/qjirt8Cp5dQDnkzY31lHA5WtJWozT82?=
- =?us-ascii?Q?0jlSkZyick0PUlnrP0Urh5eCgsjzKRM+3d/qUI2n+AIdhdQYtnvNcblstXPa?=
- =?us-ascii?Q?tcgkpp/gBhVdWRxIobcEvHidsnNtKpyeF6idK9GimiVS2S7p2iHDMjPffizE?=
- =?us-ascii?Q?QV4h5dsnhwpZwCcuDPTptLbjmhyEeId2F96nKq+fc/Sl6TpJnC4+4rbCcSHS?=
- =?us-ascii?Q?05DkRz6BqR2Uv3l/sNnwKlYSgQUe1TcFGwn8qmOSuSZNDK/WSdLF+V6hsbVM?=
- =?us-ascii?Q?7rdZLa1Rszz1qm2EfrUemzeLMRosXj9h9I9W573MTSV5q/8N4pyoQ6pk3Kk6?=
- =?us-ascii?Q?XJJ/ZW0r+gw29Ahrxe+nAlFOT+uTcSJ4oMNcv59h3XIpgPfceR3FkRUIWf99?=
- =?us-ascii?Q?hH4EVSHO8lmbSeV6ARuU9CHhARNezDRTksmnKX/fQdDt89x+28zfk64AFaL1?=
- =?us-ascii?Q?S+0lgRnFUvRcGG7v81Y2sMpnXWV6gu2Jfx5/?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb07.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ bh=ePHwoop21BnX5c8oHMAGEWv5ILTyS+s4Sm4OujGrDgc=;
+ b=JkZeV/QHELTVCVLnKXd53UJza2QO+yq2GnaZUr1A0P0lyscoizrOHpRQPC47aOjBHDczEennbAgyS44zsblro0cglbJrZ88KHny3idta9z0YYFF6cHmoNhONftWrGNJcfLvU+BP6Fbqpfh+1HJjHLDb6BrF76plHQskLnzwRADD16qcByzIhPx1yTrxvhSqfqqdBXkYb7lHwifIkLACnSwuupE+wS2ATEjcplZbhf7ETLrzTyb0pIdDpE3xf1dmK4Rbep0UmXuUqvmHS0IWcG5XdwhtRJeTHt4JNGBCvDxCfo+8Qdf8c5LoXzDGpxVFkW9CWNsDwF8g5PqQ8lxRVSA==
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by PAXPR04MB8476.eurprd04.prod.outlook.com (2603:10a6:102:1df::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.16; Fri, 12 Sep
+ 2025 10:07:58 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9115.010; Fri, 12 Sep 2025
+ 10:07:58 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Ye Li <ye.li@nxp.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "festevam@gmail.com" <festevam@gmail.com>, dl-uboot-imx
+ <uboot-imx@nxp.com>, "trini@konsulko.com" <trini@konsulko.com>, Alice Guo
+ <alice.guo@nxp.com>, "Ye Li (OSS)" <ye.li@oss.nxp.com>,
+ "tien.fong.chee@altera.com" <tien.fong.chee@altera.com>,
+ "alif.zakuan.yuslaimi@altera.com" <alif.zakuan.yuslaimi@altera.com>
+Subject: RE: [PATCH] arm: armv8: Fix spl recover data section broken
+Thread-Topic: [PATCH] arm: armv8: Fix spl recover data section broken
+Thread-Index: AQHcI8lsobwLHH6QcUCYwBnWgfUYwbSPUokA
+Date: Fri, 12 Sep 2025 10:07:58 +0000
+Message-ID: <PAXPR04MB84597A23746CA4919C6D0EC98808A@PAXPR04MB8459.eurprd04.prod.outlook.com>
+References: <20250912094111.319680-1-ye.li@nxp.com>
+In-Reply-To: <20250912094111.319680-1-ye.li@nxp.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|PAXPR04MB8476:EE_
+x-ms-office365-filtering-correlation-id: 4a3c84fe-bcc5-4223-aefd-08ddf1e44016
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|1800799024|366016|19092799006|38070700021; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?SVQ8CauwqTT1uyqNvtGmHeD2get20n3M5PkDFYfrOpdV+xNyBx1r1If5k6VE?=
+ =?us-ascii?Q?jWy8sHH9Nmp9/uVuHIre2DmeUS/iu5/y8jlAy3tdiZCe+9HT0Y37H92MpPxd?=
+ =?us-ascii?Q?veYZ//IhOji4L8+YBSonwyD+pUPipNLgNs6/TPVo7Lou7P+muHRRnofZVWpO?=
+ =?us-ascii?Q?r0nwIkIYbaoZM8c0Y0wcVtpgDDEwTM3ABt1sjjjG4cGHOE4SC9LLfEgMDr6C?=
+ =?us-ascii?Q?xG7zvmoKsdsUDpriH8fhdAV/pXwO0jOWql1dLwHr3WlboYDV863qJXq8M8yh?=
+ =?us-ascii?Q?FtooHuiRlb3rKXyj8sUaW3+0eL5Yq5qNB/kigsnvP3Ii7VSMlOD3lZW05apd?=
+ =?us-ascii?Q?tMZaDdOe29AGE482GIAKt5V4KBiZa9dSXFGOUuNNVirNpmoNk+lILNfnyyfJ?=
+ =?us-ascii?Q?3WlBAzz68dinZX0MyiapbhCciJwh+OjpQSSiBhMMtSmi16m2AANTZnttUyEj?=
+ =?us-ascii?Q?Eym4C9E/jCWgJNHJWXJiCaGpqifM3F7ZucxKo22Az1vdts3cKr/A7b4K/yYY?=
+ =?us-ascii?Q?oAlB/DmlIxlqL5QDeRpE5gOqArus1pWr4ugY/i6rZmnlzJZXY1zSlhIbYVO/?=
+ =?us-ascii?Q?E/LlpUsQs8nymGz+7NshI1jAvM2NYNIRHsQU9dXqGUdVmleBZBSwZsaPT53r?=
+ =?us-ascii?Q?Oy2sqWbAC+HDI8jEWyzDAv9vOWgP2u9rTylPugGFNXQ2X2WC8sgQP6JTM+Pj?=
+ =?us-ascii?Q?6i1OE35DDbdige4sX+JbCggqfVq5Nug5MF6LxyCozHLmEAy3oZ6B/40AJACr?=
+ =?us-ascii?Q?GDbnbzax9U0gayoLMsjfDr6es+jQu9JN27ksa4IGqDmI6IiI6StCYVvI64m1?=
+ =?us-ascii?Q?kzgcr7tyFbdia7gCSWuxJ6Yy05EZR73ff3fAwIcOJ4fZ0U1Fr9PVoD4YTo/B?=
+ =?us-ascii?Q?xrgR3gXI8adqOl7xN8Tu36sUSKJHaPDhjZkIIGYi0gYnxAyzUf0WMZvpemb4?=
+ =?us-ascii?Q?yPqi1C2Y6CRH4XPwd9QdHi7uzrzlsylzzZe3Z14ooOS3KnzwMADB7c/Q+U1K?=
+ =?us-ascii?Q?ktHfDeqbeZPHp4i1xrN+LYkCXf9s/Q3RzNdjZNiGxjlo55woXKbaPfECxyXY?=
+ =?us-ascii?Q?5kEHiS4PCIbjOx96984AGWN3eJtar2dpjoVbCq5nMYKq7ccs227C0A0gjmN6?=
+ =?us-ascii?Q?NPCOYIF9X1ZBGJKaKQMr54x6Z/NMZgupyDDjvXr2upvi6asGMSMjLpmMuDFH?=
+ =?us-ascii?Q?I630BnXZRFCZ59MpH1CHE6VmvWtFXzgh5fCtH6cvdCkmLcxeSYivacpeWa9I?=
+ =?us-ascii?Q?wR1JCMSRrN0YRY0nEeZ2zyBFGXU+YlXLTvGal2czbUz2LvjVwumKFPUX3p9+?=
+ =?us-ascii?Q?Ef/wrH74kjbx9lfHzhbM0M+Rn44fLGrhib7QGCn6DgkU9FyFqe/Qo1Adg8kj?=
+ =?us-ascii?Q?ZB/nBCLC2iD44qHHT+ntgEgMDU2OABBP5Rei9J2dww91zpL6UomkQ4hagTfn?=
+ =?us-ascii?Q?MZ+pxloEWH0eA9Rxh8vjWGZvmNJPN0Ef0+et0/PwABq+geN445xfTYv/z+VG?=
+ =?us-ascii?Q?JLACooStH1XoNoM=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016)(19092799006)(38070700021); DIR:OUT;
  SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Sep 2025 10:05:51.8936 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4f3c4257-6446-41ce-e36b-08ddf1e3f48e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B373.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8562
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?WNyrucaHepN2KnxBaPBMr8SRM1S6rtgDsqj2VBfG0Q51JHkEKma1o/sirFyg?=
+ =?us-ascii?Q?SPS7KP1L8HrvVG/I9Hnx0zrfUCnmxwpIMmByghQ4YZLOVZCd3zRfyGjaaH/8?=
+ =?us-ascii?Q?9VSN555IH0OBOGq43hTXFbIVRrMkc0M99EWdF7ptXsBhMuOav2BIQ9sGcX2T?=
+ =?us-ascii?Q?u5eBzTUTDgpAa8W4kYkJriREbDWGMFIGHEUFZuW6GWmKLAwcJ7GLAdK2edp7?=
+ =?us-ascii?Q?7g3kh7KjnT9f92ftL+YSqYpDmx17+mCG6xL/a2qUaSPphFBa4VbDPzrIQznm?=
+ =?us-ascii?Q?fOaFmieRb0UQbm7esdwg6FDdasIXLSU6zdzEdfNZCu0cpfZ0dzCnodTv/SKP?=
+ =?us-ascii?Q?EwEpreqvL3FxYfaix9k7mF5I9h/vMgTgC/fHny387e3DD3yJegFRPkDJDwuE?=
+ =?us-ascii?Q?6rleb0WhD/xyh+z1B3RJRL4wbVznOMqrdnUWNm6HlGIYHgLfNjeQEB6FmZii?=
+ =?us-ascii?Q?b9HNJj1HonNkjh7yYmy5N1oU6RiP/2VyiZbL85K/H+Gey/aFlUdNXG/1xicS?=
+ =?us-ascii?Q?eqypsdfrSxh00s0Gy0ZTieuRJQy5Kf/wuH4vO7+srP6vWaGyDm8GcDyhLUSU?=
+ =?us-ascii?Q?w5PirYioKcp9Zbav31dVjiwwHTMb9Skw8lBTLRToMAP8vN/WzJbMURtE1Vv2?=
+ =?us-ascii?Q?/COq6PH8nQxgYQXFhlxq6MRKHeKHGUxN+mheAWViwkBcQq8E/E//xAmwtRlT?=
+ =?us-ascii?Q?WGfKAi7V/seEg2Z4j0UBgLtA7j0ec45jLXmK5EQQk9rvxT3PkfAYjm9Y+Qyy?=
+ =?us-ascii?Q?0KiJ1tWquRGcts5Q4xRjW7F332HTJoDjNZY52n6s1RxFPyX4TBKDPHmxnQTi?=
+ =?us-ascii?Q?i3OOF16lN+SQr9aVMaErsV4BJVhmEMSo8WxVUb1cqMV8JTCbQAp4cjCu/9as?=
+ =?us-ascii?Q?4+pIonLWK/DFdoRHS8yQiv+Skf0UX7YNNBZ1eWhqk3A8oD/RXMBrRJ05UQ0H?=
+ =?us-ascii?Q?paN2AU6ylWQh5kb2/JXxxUDgXiO8KP3KO9nv3SD93aAoSC5Ln/6kSa4hUYXn?=
+ =?us-ascii?Q?wmZJjETZ8lGaEDBHkhz0dLXl7V7bvYDJFl8oD8Oy5+/3tcrufa+N2BjpodBK?=
+ =?us-ascii?Q?oaWqqQ8VWtdKGv3krjOItMIC8eNzlNt84jtsBooO3tmQ8JugGyqBt6nmDlXR?=
+ =?us-ascii?Q?+Mv0SOltYa+QyE8HuoseahrYRlSwxg/1wuGzkijQ1r4WMM2e8IJa7ZXG+efF?=
+ =?us-ascii?Q?GbSgu3dpU3hKg5bub4PYhocGltkKeP8OSmhtmvb1Z8A7NsKEZoGq6XYZkFc5?=
+ =?us-ascii?Q?EU3/8UMfns9iWYXrjYwd0NMILhUGXuXwMrFZ6+N2W+SOLBxA9w6WMLMQyty1?=
+ =?us-ascii?Q?sCZcPyh1NzjSZAGR6JzKQvvppXq3zNX9YWAxLjWBlI38uHovYtYGOEOUAfHx?=
+ =?us-ascii?Q?D/oqbzumpO6BFrpOMUYbeCh7X2lm+u+P8EqDmyMyqc1CciTol4GYhuIxMAaT?=
+ =?us-ascii?Q?aoyTGYuNChyK5R9abx3OiYFpd3nO/E7feuk+PoZeux0aGBUgyauwWXI1dtRv?=
+ =?us-ascii?Q?HQ8LhrQLTwd14YZEgdhSjMf+jO0A02gleuc6LXWc26QA57wV6II5OmFV9MbQ?=
+ =?us-ascii?Q?EEUn9Pqd8muDeUj0ApI=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a3c84fe-bcc5-4223-aefd-08ddf1e44016
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Sep 2025 10:07:58.6199 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: fHV7hs6dfmP9W+zOSSWNGmkit0wP7G8WECrjlasbHW6Sr+vazMss1pEvs8ymvvnPP3HoYA2rm5/yT6MihejGAg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8476
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,84 +163,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-FWU metadata information is unavailable for platform-specific
-operations since FWU initialization has not yet occurred.
-The initialization function is invoked as part of the main
-loop event. To address this, the FWU platform hook function
-is introduced during FWU initialization, allowing metadata
-processing with platform-specific operations.
+> Subject: [PATCH] arm: armv8: Fix spl recover data section broken
+>=20
+> SPL recover data section is broken which causes reboot failure on some
+> i.MX platforms (iMX8QM/iMX95).
+> The global variable cold_reboot_flag is assigned to weak reset_flag
+> function which always return 1, so restore never been executed in
+> warm reboot.
+>=20
+> Fixes: 1c37e59bfbba ("arm: armv8: Improve SPL data save and restore
+> implementation")
+> Signed-off-by: Ye Li <ye.li@nxp.com>
 
-Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
----
- include/fwu.h         | 11 +++++++++++
- lib/fwu_updates/fwu.c | 18 ++++++++++++++++++
- 2 files changed, 29 insertions(+)
-
-diff --git a/include/fwu.h b/include/fwu.h
-index 77e60167fc7..e7bd1d492af 100644
---- a/include/fwu.h
-+++ b/include/fwu.h
-@@ -128,6 +128,17 @@ int fwu_read_mdata(struct udevice *dev, struct fwu_mdata *mdata,
- int fwu_write_mdata(struct udevice *dev, struct fwu_mdata *mdata,
- 		    bool primary, uint32_t size);
- 
-+/**
-+ * fwu_platform_hook() - Platform specific processing with FWU metadata
-+ * @dev: FWU metadata device
-+ * @data: FWU metadata
-+ *
-+ * Provide a platform specific function for processing with the FWU metadata.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_platform_hook(struct udevice *dev, struct fwu_data *data);
-+
- /**
-  * fwu_get_mdata() - Read, verify and return the FWU metadata
-  *
-diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-index 7f085a0211f..0f5ef2ba515 100644
---- a/lib/fwu_updates/fwu.c
-+++ b/lib/fwu_updates/fwu.c
-@@ -655,6 +655,16 @@ __weak void fwu_plat_get_bootidx(uint *boot_idx)
- 		*boot_idx = 0; /* Dummy value */
- }
- 
-+/**
-+ * fwu_platform_hook() - Platform specific processing with FWU metadata
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+__weak int fwu_platform_hook(struct udevice *dev, struct fwu_data *data)
-+{
-+	return 0;
-+}
-+
- /**
-  * fwu_update_checks_pass() - Check if FWU update can be done
-  *
-@@ -712,6 +722,7 @@ static int fwu_boottime_checks(void)
- {
- 	int ret;
- 	u32 boot_idx, active_idx;
-+	struct fwu_data *data;
- 
- 	ret = uclass_first_device_err(UCLASS_FWU_MDATA, &g_dev);
- 	if (ret) {
-@@ -770,6 +781,13 @@ static int fwu_boottime_checks(void)
- 	if (!ret)
- 		boottime_check = 1;
- 
-+	data = fwu_get_data();
-+	ret = fwu_platform_hook(g_dev, data);
-+	if (ret) {
-+		log_err("fwu_platform_hook() failed\n");
-+		return ret;
-+	}
-+
- 	return 0;
- }
- EVENT_SPY_SIMPLE(EVT_MAIN_LOOP, fwu_boottime_checks);
--- 
-2.44.1
-
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
