@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 335CDCAC58F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 12:17:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 524B4CA101F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 12:17:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E8B883496;
-	Fri, 12 Sep 2025 14:16:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AFC6583448;
+	Fri, 12 Sep 2025 14:16:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="G1xZtWYY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Q5x/XfGb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C77C8346A; Fri, 12 Sep 2025 14:16:34 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id E5E7E830A0; Fri, 12 Sep 2025 14:16:37 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB8DC83443
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 14:16:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DF3A834B4
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 14:16:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58CCGTKD600602;
- Fri, 12 Sep 2025 07:16:29 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58CCGX8U1028416;
+ Fri, 12 Sep 2025 07:16:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757679389;
- bh=M7V4ZgaE71WliAhx49Bk5aH4jr/mYN6fetLRzUcY2uY=;
+ s=ti-com-17Q1; t=1757679393;
+ bh=yzwqXF+fGMZCBBZT7i0WgaLfhODlppnmsaLUOurrdts=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=G1xZtWYYHexMcZlzU2rp3fqeljhnS2UkLvmUJfMB/Nr3gnApsf/BSveQcn1XsOyfx
- G2fbD8T+Jm+LyCgUyjmwSF1p8VOgs0LCvO68PyX/F6sYyFMcejSL+lARhc9ZMII3Fz
- 8A9ebOlbQWt07pZfd88qoBem38r0K/wQkNgHEqBg=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58CCGTp51965964
+ b=Q5x/XfGbo9f2pESrVCTYHbJ9ld+vhfKRuH9CjD9r3+XioTUQUXKvn5231vHgTvv/q
+ lAbQ4P14nq28i+/VUPYv/BeTUMKSoeGzZtUoB9+qHcGF4v8ALPcTXedHL/QZRICbmn
+ iTjaSbAGZgO0Uyiydb+ndv5ORxXfL1UIGTE6ghOw=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58CCGXdN2757001
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 12 Sep 2025 07:16:29 -0500
-Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 12 Sep 2025 07:16:33 -0500
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 12
- Sep 2025 07:16:28 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 07:16:32 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 12 Sep 2025 07:16:28 -0500
+ Transport; Fri, 12 Sep 2025 07:16:32 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58CCGRA13886171;
- Fri, 12 Sep 2025 07:16:28 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58CCGVMj3886254;
+ Fri, 12 Sep 2025 07:16:32 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,10 +57,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
-Subject: [PATCH -next v7 04/10] arm: armv8: invalidate dcache entries on
- dcache_enable
-Date: Fri, 12 Sep 2025 17:46:11 +0530
-Message-ID: <20250912121618.1074054-5-anshuld@ti.com>
+Subject: [PATCH -next v7 06/10] mach-k3: map all banks using
+ mem_map_fix_dram_banks
+Date: Fri, 12 Sep 2025 17:46:13 +0530
+Message-ID: <20250912121618.1074054-7-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250912121618.1074054-1-anshuld@ti.com>
 References: <20250912121618.1074054-1-anshuld@ti.com>
@@ -84,46 +84,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In dcache_enable, currently the dcache entries are only invalidated when
-the MMU is not enabled. This causes issues when dcache_enable is called
-with the MMU already configured, in such cases the existing dcache
-entries are not flushed which might result in un-expected behavior.
+The static memory map for K3 (k3_mem_map) only maps the first DRAM bank
+and therefore doesn't scale for platforms with multiple memory banks.
 
-This patch invalidates the cache entries on every call of dcache_enable
-before enabling dcache (by setting CR_C). This makes dcache_enable
-behave similar to icache_enable as well.
+This patch modifies enable_caches to add mem_map_fix_dram_banks which
+appends all the memory banks to k3_mem_map before calling mmu_setup.
 
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/cpu/armv8/cache_v8.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ arch/arm/mach-k3/arm64/arm64-mmu.c     | 5 +++--
+ arch/arm/mach-k3/common.c              | 9 +++++++++
+ arch/arm/mach-k3/include/mach/k3-ddr.h | 6 ++++++
+ 3 files changed, 18 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 1c1e33bec24..6e662395a83 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -830,16 +830,15 @@ void flush_dcache_range(unsigned long start, unsigned long stop)
- void dcache_enable(void)
+diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+index 79650a7e346..479451452a2 100644
+--- a/arch/arm/mach-k3/arm64/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+@@ -12,8 +12,9 @@
+ #include <asm/system.h>
+ #include <asm/armv8/mmu.h>
+ #include <linux/sizes.h>
++#include <mach/k3-ddr.h>
+ 
+-struct mm_region k3_mem_map[] = {
++struct mm_region k3_mem_map[K3_MEM_MAP_LEN] = {
+ 	{ /* SoC Peripherals */
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+@@ -28,7 +29,7 @@ struct mm_region k3_mem_map[] = {
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, { /* First DRAM Bank of size 2G */
++	}, [K3_MEM_MAP_FIRST_BANK_IDX] = { /* First DRAM Bank of size 2G */
+ 		.virt = CFG_SYS_SDRAM_BASE,
+ 		.phys = CFG_SYS_SDRAM_BASE,
+ 		.size = SZ_2G,
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index ea287ba1226..0a73b1fa296 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -31,6 +31,7 @@
+ #include <dm/uclass-internal.h>
+ #include <dm/device-internal.h>
+ #include <asm/armv8/mmu.h>
++#include <mach/k3-ddr.h>
+ 
+ #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
+ #define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
+@@ -262,6 +263,14 @@ void board_prep_linux(struct bootm_headers *images)
+ 
+ void enable_caches(void)
  {
- 	/* The data cache is not active unless the mmu is enabled */
--	if (!(get_sctlr() & CR_M)) {
--		invalidate_dcache_all();
--		__asm_invalidate_tlb_all();
-+	if (!mmu_status())
- 		mmu_setup();
--	}
++	int ret;
++
++	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
++				     PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++					     PTE_BLOCK_INNER_SHARE);
++	if (ret)
++		debug("%s: Failed to setup dram banks\n", __func__);
++
+ 	mmu_setup();
  
- 	/* Set up page tables only once (it is done also by mmu_setup()) */
- 	if (!gd->arch.tlb_fillptr)
- 		setup_all_pgtables();
+ 	icache_enable();
+diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
+index 39e6725bb9b..207e60b2763 100644
+--- a/arch/arm/mach-k3/include/mach/k3-ddr.h
++++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
+@@ -8,6 +8,12 @@
  
-+	invalidate_dcache_all();
-+	__asm_invalidate_tlb_all();
- 	set_sctlr(get_sctlr() | CR_C);
- }
+ #include <spl.h>
+ 
++/* We need 3 extra entries for:
++ *   SoC peripherals, flash and the sentinel value.
++ */
++#define K3_MEM_MAP_LEN			((CONFIG_NR_DRAM_BANKS) + 3)
++#define K3_MEM_MAP_FIRST_BANK_IDX	2
++
+ int dram_init(void);
+ int dram_init_banksize(void);
  
 -- 
 2.51.0
