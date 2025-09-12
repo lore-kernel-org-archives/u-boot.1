@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CFCACA101F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 12:17:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B77AFCA101F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 12:17:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5491834EC;
-	Fri, 12 Sep 2025 14:16:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3356083542;
+	Fri, 12 Sep 2025 14:16:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xAvdLHhi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fwT2b/Cf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 767C78350A; Fri, 12 Sep 2025 14:16:44 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 40CB7834E5; Fri, 12 Sep 2025 14:16:45 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F2FC834E5
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 14:16:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBDD983281
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 14:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58CCGZjF966963;
- Fri, 12 Sep 2025 07:16:35 -0500
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58CCGdMB600691;
+ Fri, 12 Sep 2025 07:16:39 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757679395;
- bh=f6ADJY6MAmtq4nA8jKzIgWgA3kqyyX6soQGCqsxJVrU=;
+ s=ti-com-17Q1; t=1757679399;
+ bh=+Xa2xeghfzXR31Yp+6nJerznIVTHYBJ5OmMYgocPaEg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=xAvdLHhi5vdj2EoadrYszXMhCo5nYpS1LwqEe3riA+orOGeHavL2Pyv1oYncZdHWp
- mOllyfcQB15URlPVmB2QPZhAsO8hKoA5eiq8uEqDgX538BbiDGMENqlZ7Jp2Gzry3i
- NA7kvZGhisAXCfJTiWIkaarK9tcfYvKkZ4DhakC4=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58CCGZNU1287982
+ b=fwT2b/CfiSj2quBKH19LlwOAAD+N3QIS3xrhq60Ui3PD9pOJE1z3g89tbXU8oie2F
+ 405c//IbGQuEwGLicaX8TtmKMp13Dmk4LFn1dWVUVVydcLlQ1CL37q3QGf1tMc6bxz
+ rjE4gmj+ind7tiYM5zzKSL1K4VEFvH1OvHnTb2PM=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58CCGdKn1288032
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 12 Sep 2025 07:16:35 -0500
-Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 12 Sep 2025 07:16:39 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 12
- Sep 2025 07:16:34 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
- (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 07:16:39 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 12 Sep 2025 07:16:34 -0500
+ Transport; Fri, 12 Sep 2025 07:16:38 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58CCGXWc3886281;
- Fri, 12 Sep 2025 07:16:34 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58CCGbwC3886353;
+ Fri, 12 Sep 2025 07:16:38 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,9 +57,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>
-Subject: [PATCH -next v7 07/10] arm: armv8: mmu: add mmu_unmap_reserved_mem
-Date: Fri, 12 Sep 2025 17:46:14 +0530
-Message-ID: <20250912121618.1074054-8-anshuld@ti.com>
+Subject: [PATCH -next v7 09/10] mach-k3: add reserved memory fixups for next
+ boot stage
+Date: Fri, 12 Sep 2025 17:46:16 +0530
+Message-ID: <20250912121618.1074054-10-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250912121618.1074054-1-anshuld@ti.com>
 References: <20250912121618.1074054-1-anshuld@ti.com>
@@ -83,82 +84,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
-the MMU's page tables, done by mmu_setup.
+The boot flow in K3 platforms requires the subsequent boot stages to be
+aware of the memory reserved for previous boot binaries. In the regular
+boot sequence of:
 
-Though this works well for simpler platforms, it makes creating runtime
-carveouts by modifying the static array at runtime exceedingly complex
-like in mach-snapdragon/board.c.
+R5 SPL -> ATF -> OP-TEE -> A-core SPL -> U-Boot -> Kernel,
 
-Creation of such carveouts are much better handled by APIs such as
-mmu_change_region_attr once the page tables are configured. Usually such
-carveouts are configured via the device-tree's reserved-memory node
-which provides the address and size for the carveout.
+Both A-core SPL and U-Boot should be made aware of the memory reserved
+for ATF and OP-TEE from their device-tree. Currently this information is
+absent.
 
-Therefore this patch adds mmu_unmap_reserved_mem which acts as a wrapper
-over mmu_change_region_attr, helping unmap a reserved-memory region.
+Therefore this patch adds the reserved-memory regions as part of
+spl_perform_arch_fixups for the next stage's DT. This is called during
+both R5 and A-core SPL which fixes up the DT for their respective next
+stages: A-core SPL and U-Boot proper.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/cpu/armv8/cache_v8.c    | 23 +++++++++++++++++++++++
- arch/arm/include/asm/armv8/mmu.h |  9 +++++++++
- 2 files changed, 32 insertions(+)
+ arch/arm/mach-k3/common.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 20583bad470..1dcb6007475 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -86,6 +86,29 @@ int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs)
- 
- 	return 0;
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index 0a73b1fa296..581a7246630 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -321,6 +321,17 @@ static __maybe_unused void k3_dma_remove(void)
+ 		pr_warn("DMA Device not found (err=%d)\n", rc);
  }
-+
-+int mmu_unmap_reserved_mem(const char *name)
+ 
++void spl_perform_arch_fixups(struct spl_image_info *spl_image)
 +{
-+	void *fdt = (void *)gd->fdt_blob;
-+	char node_path[128];
-+	fdt_addr_t addr;
-+	fdt_size_t size;
-+	int ret;
++	void *fdt = spl_image_fdt_addr(spl_image);
 +
-+	snprintf(node_path, sizeof(node_path), "/reserved-memory/%s", name);
-+	ret = fdt_path_offset(fdt, node_path);
-+	if (ret < 0)
-+		return ret;
++	if (!fdt)
++		return;
 +
-+	addr = fdtdec_get_addr_size(fdt, ret, "reg", &size);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -1;
-+
-+	mmu_change_region_attr_nobreak(addr, size, PTE_TYPE_FAULT);
-+
-+	return 0;
++	fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
++	fdt_fixup_reserved(fdt, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
 +}
 +
- u64 get_tcr(u64 *pips, u64 *pva_bits)
+ void spl_board_prepare_for_boot(void)
  {
- 	int el = get_effective_el();
-diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-index 257352f216e..fbd64e649ff 100644
---- a/arch/arm/include/asm/armv8/mmu.h
-+++ b/arch/arm/include/asm/armv8/mmu.h
-@@ -206,6 +206,15 @@ void setup_pgtables(void);
-  * @len: The size of mem_map
-  */
- int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs);
-+
-+/**
-+ * mmu_unmap_reserved_mem() - Unmaps a reserved-memory node as PTE_TYPE_FAULT
-+ * once MMU is configured by mmu_setup.
-+ *
-+ * @name: The name of the node under "/reserved-memory/" path
-+ */
-+int mmu_unmap_reserved_mem(const char *name);
-+
- u64 get_tcr(u64 *pips, u64 *pva_bits);
- 
- /**
+ #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
 -- 
 2.51.0
 
