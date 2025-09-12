@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D79FCA101F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 23:03:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B50DCAC582
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 23:03:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A94D283322;
-	Sat, 13 Sep 2025 01:02:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 089D383448;
+	Sat, 13 Sep 2025 01:03:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lkVIDQ2N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r//N7BO8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B571283429; Sat, 13 Sep 2025 01:02:57 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id EE8CB830A0; Sat, 13 Sep 2025 01:03:02 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 943A8830A0
- for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 01:02:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12F4C83447
+ for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 01:03:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-746d7c469a8so2196854a34.3
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 16:02:55 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-30ccec59b4bso1712344fac.3
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 16:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757718174; x=1758322974; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757718179; x=1758322979; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JavC2Yzm37v86vM7yHwpfkOFlQWqgvREX4+4jPGNdbI=;
- b=lkVIDQ2NedW9xFoffGJtD9wWx4Xz/c4gJOqOZF2iHYnl7KmyxLlTtARAbAywO8UF95
- nCOE89TFI40R0PDnqrCJBC0+hOGDd1sM18isA+qVFxo0kTf/wiPidcXz0K4fAGy0E+6A
- s2mGVN+Ce5eQ7CTg4Id7coK/xgbJMqKw7Xqeo=
+ bh=dnf1d5Ft3wlDPGtfhwZU5Gw7n/4TTfqoKgs9KSsFviM=;
+ b=r//N7BO8YKl/Zn3nx9EfteVIicmBBn0ssxUi7dhWCvM0z81mBrivmDN+mJm0V1T4lE
+ 6rmGa3tfsaLEEpeNQjJVujkDiosiuMpHnkLhtp8oEjxz1UzUFKzb5PGYmD+OrORaQ69O
+ oYGnT5bv/qUVBJrNv4Cy1tuDSKKVu5GF22TMs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757718174; x=1758322974;
+ d=1e100.net; s=20230601; t=1757718179; x=1758322979;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JavC2Yzm37v86vM7yHwpfkOFlQWqgvREX4+4jPGNdbI=;
- b=Od0huRj2HIC0LbPa9aMeJdDBDK1UUX/uk9gSTry5Yfen08Ejmwx/uGKWPvqiF9jQs4
- BtQbs8j8/Ir07kmT2HAnstQMRXmqUr20DvK/abNHzK0gmMKKkxVjaf0LpnvCkWZ5ho8d
- XuDbl77yHqK+xzktLRtansBHQTY4LlixNmCdW20UxqSG89/XqugmogVVjiYu4aor70mG
- J/ha0tVwHUe0LATvFGBaVvGu4KrWuVWDxlt3WQ9Tlya+1vk9JxFxjAzsM0sxQQQl3HZG
- D2PpA2n6a1CY9mwEARSLyYiijmoosxzJkZ2MJrT9/jRyiyaB5ehFM0OXhqViWU6gtvUF
- b8cQ==
-X-Gm-Message-State: AOJu0YwV8mZphFmyvFpC53eg0F5MjbTzpLZs/XzoVFxZmUdeOyblTjbv
- XxzA6JJsuyuvmV71MpCNx7eULC5Nw0evmYM25RQMMjmrdF69Nds1CmzCJb2CQm5VNoEtI+wbp+H
- +25Dg2Ro=
-X-Gm-Gg: ASbGncuEE9EM0coSoXp/bJM/SY+QNieVhAC8p+RAldPbKrgO4X+2mrdVKtNrfn60PtT
- 7N2sUGrktFbOC1YJHpeVLd6nJcyvJYB6GT58NC4goEmxV2v3QQlIgCC06KnKt/a0RZs6zcipudo
- oiwcsd4nBZf7gt4KqLwyr38SOcjPJ8ynEN5plohzltRMOLCKn1GWpiXxlvguharL/vi/wKXezMG
- 3S7vc0E23maZOUhXSfCliRWJEPx1u6V4XkPl2pva6UxQhyaN5uVCh3frRDp67yG7bCkAXOwm3IK
- OJeHub4clsnFZmngxYA1N0M0qzTg9kumlcwMD/OfxZIQzs6b94wjFEqEWwWHMey+TSU7bTRVwMb
- I7gV3S0cVW7x4gVfVLbfxD7Gbxlmeuf5L50kMTASmjBkVVRihpXSfZV5V8BQ=
-X-Google-Smtp-Source: AGHT+IFMJn9rliERzk/z+PptM945pUxGTZdRi1Qy5wQKSAZJGsmhjJdXuTfvp6CdPdhW9Qq1ugVxjg==
-X-Received: by 2002:a05:6830:411c:b0:746:d995:4e56 with SMTP id
- 46e09a7af769-75353379d0fmr2744803a34.11.1757718174328; 
- Fri, 12 Sep 2025 16:02:54 -0700 (PDT)
+ bh=dnf1d5Ft3wlDPGtfhwZU5Gw7n/4TTfqoKgs9KSsFviM=;
+ b=Y49mPmoeRhUZQgpCyLnb81zfwOfadvE2+JGLJRcsThjnNWufvFjeK8ep9P7qRzinL4
+ goP9YOpPjj8BViHh8RvqavFTOU2snKBWla3pZIvr51fwL+fM4O8UKxM7hBPHZtPiDiEl
+ 5QBoeftdRTKCJHDgy1ND+sgzryv4p37pJ5/8uq+rk16aYISwGa3VMZLmxAxVTIbXcXSa
+ fuKWGGsawpuyVn+B1LIWRqgspJemLDp+AzHJV0Vx5BBkAzK3QWdzWOcLHEDcQZ9Op2pj
+ mYl0fqjdUphPSW0CmD4yGH1Xi7e910V/zfrynWKBHQzm2H6uZRozgDdempNPUgq8IStn
+ UEnA==
+X-Gm-Message-State: AOJu0YzTJxFJ85n4p/JfIZaVmzDHJ4afbpf4dps1kFzo4gZAHvQ+hA8L
+ FcdOqQGh2zdWMvEKHJdIBuRf+6Or+ZpAMEKCgbSL2yAmCrBbCVbLUT4+CkAyoHcRywU0teulPUr
+ t+9MfH3w=
+X-Gm-Gg: ASbGncti86HSxvKfFX8bisyJBAJUCOL8Pmer3rRGZMMBL5lCM0PNx6BTleaihWD2SrC
+ S8sGxmgey1+Ku80QVNnwnpBCgmnVj85cPogESDX3R9NtDyAs2AtG3AaLH8G80CvM7OcE+5yLzRe
+ F81uJ6AcPlODFJ/ERzd4RIzVvBuDKTVBoFYtVgxSmf6k0jgLUN5rnO1/tXqTNQpOREPQfiDMhFO
+ HzplQaE8u1eYgInG0pVqBpTH+mVF0BNzwlQ7sgg2SBM0pikfoL1rQOfZTSNIgaTdnqBtrhveKwX
+ ATsvQ3CsjIH9l4hdwbLbvJOTF4M8urabp0l259X+Cr+lLKcEN1bDjoufQV4JjlsLTCo8GboOoVL
+ BHyxPyzdyGxaaCBDx/FL0+E2ks4OYquFzIbPYrcJ4M7YpcGBKjEAXWZHEjWg=
+X-Google-Smtp-Source: AGHT+IHrq8gaKvePJaPBesLKgy8vLq130zs1hHAhMa+/piPLNTQ8EaiptYrnO/Lu1zM3Jx9ncjUDqw==
+X-Received: by 2002:a05:6871:330c:b0:30b:7d90:1061 with SMTP id
+ 586e51a60fabf-32e54075e1amr2722855fac.4.1757718178789; 
+ Fri, 12 Sep 2025 16:02:58 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7524be7ad7fsm1278649a34.37.2025.09.12.16.02.53
+ 586e51a60fabf-32d3344e6d0sm1513035fac.8.2025.09.12.16.02.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Sep 2025 16:02:53 -0700 (PDT)
+ Fri, 12 Sep 2025 16:02:58 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH] doc: Remove README.commands.itest
-Date: Fri, 12 Sep 2025 17:02:52 -0600
-Message-ID: <20250912230252.4144988-1-trini@konsulko.com>
+Subject: [PATCH] doc: Convert README.commands.spl to rST
+Date: Fri, 12 Sep 2025 17:02:57 -0600
+Message-ID: <20250912230257.4145026-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,40 +92,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We currently document this command in doc/usage/cmd/itest.rst and this
-documentation is more comprehensive than the older README file. Delete
-the older file.
+This converts the existing README.commands.spl file to rST as
+doc/usage/cmd/spl.rst and adds it to the command index. Minimal
+rewording is done to the previous contents, to make it fit better with
+the overall style of documentation now.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
- doc/README.commands.itest | 16 ----------------
- 1 file changed, 16 deletions(-)
- delete mode 100644 doc/README.commands.itest
+ doc/README.commands.spl | 31 --------------------------
+ doc/usage/cmd/spl.rst   | 48 +++++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst     |  1 +
+ 3 files changed, 49 insertions(+), 31 deletions(-)
+ delete mode 100644 doc/README.commands.spl
+ create mode 100644 doc/usage/cmd/spl.rst
 
-diff --git a/doc/README.commands.itest b/doc/README.commands.itest
+diff --git a/doc/README.commands.spl b/doc/README.commands.spl
 deleted file mode 100644
-index 5e0fe86247a8..000000000000
---- a/doc/README.commands.itest
+index ecfd3ca9ee58..000000000000
+--- a/doc/README.commands.spl
 +++ /dev/null
-@@ -1,16 +0,0 @@
--A slow day today so here is a revised itest command with provisional
--support for comparing strings as well :-))
+@@ -1,31 +0,0 @@
+-The spl command is used to export a boot parameter image to RAM. Later
+-it may implement more functions connected to the SPL.
 -
--Now table driven to allow the operators
---eq, -ne, -lt, -gt, -le, -ge, ==, !=, <>, <, >, <=, >=
+-SUBCOMMAND EXPORT
+-To execute the command everything has to be in place as if bootm should be
+-used. (kernel image, initrd-image, fdt-image etc.)
 -
--Uses the expected command modifier for integer compares of width 1, 2 or
--4 bytes of .b, .w, .l and the new modifer of .s for a string compare.
--String comparison is over the length of the shorter, this hopefully
--avoids missing terminators when using an indirect pointer.
+-export has two subcommands:
+-	atags: exports the ATAGS
+-	fdt: exports the FDT
 -
--eg.
--if itest.l *40000 == 12345678 then; ....
--if itest.w *40000 != 1234 then; ....
--if itest.b *40000 >= 12 then; ....
--if itest.s *40000 -eq hello then; ....
+-Call is:
+-spl export <fdt|atags> [kernel_addr] [initrd_addr] [fdt_addr if fdt]
+-
+-
+-TYPICAL CALL
+-
+-on OMAP3:
+-nandecc hw
+-nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
+-spl export atags			/* export ATAGS */
+-nand erase 0x680000 0x20000		/* erase - one page */
+-nand write 0x80000100 0x680000 0x20000	/* write the image - one page */
+-
+-call with FDT:
+-nandecc hw
+-nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
+-tftpboot 0x80000100 devkit8000.dtb /* Read fdt */
+-spl export fdt 0x82000000 - 0x80000100	/* export FDT */
+-nand erase 0x680000 0x20000		/* erase - one page */
+-nand write <adress shown by spl export> 0x680000 0x20000
+diff --git a/doc/usage/cmd/spl.rst b/doc/usage/cmd/spl.rst
+new file mode 100644
+index 000000000000..59471c65a623
+--- /dev/null
++++ b/doc/usage/cmd/spl.rst
+@@ -0,0 +1,48 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++.. index::
++   single: spl (command)
++
++spl command
++===========
++
++Synopsis
++--------
++
++::
++
++    spl export <fdt|atags> [kernel_addr] [initrd_addr] [fdt_addr if fdt]
++
++Description
++-----------
++
++The *spl* command is used to export a boot parameter image to RAM. Later
++it may implement more functions connected to the SPL.
++
++spl export
++~~~~~~~~~~
++
++To execute the command everything has to be in place as if bootm should be
++used. (kernel image, initrd-image, fdt-image if used). The first argument
++passed to the export subcommand must be either atags or fdt, which signifies if
++we are preparing an ATAGS or device tree for export.
++
++Example
++-------
++
++On an OMAP3 platform with ATAGS::
++
++    => nandecc hw
++    => nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
++    => spl export atags			/* export ATAGS */
++    => nand erase 0x680000 0x20000		/* erase - one page */
++    => nand write 0x80000100 0x680000 0x20000	/* write the image - one page */
++
++On an OMAP3 platform with device tree::
++
++    => nandecc hw
++    => nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
++    => tftpboot 0x80000100 devkit8000.dtb /* Read fdt */
++    => spl export fdt 0x82000000 - 0x80000100	/* export FDT */
++    => nand erase 0x680000 0x20000		/* erase - one page */
++    => nand write <adress shown by spl export> 0x680000 0x20000
+diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+index 3a48521d5d56..a34db5cb627b 100644
+--- a/doc/usage/index.rst
++++ b/doc/usage/index.rst
+@@ -124,6 +124,7 @@ Shell commands
+    cmd/sntp
+    cmd/sound
+    cmd/source
++   cmd/spl
+    cmd/tcpm
+    cmd/temperature
+    cmd/test
 -- 
 2.43.0
 
