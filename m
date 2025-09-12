@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B50DCAC582
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 23:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 298B1CAC582
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 23:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 089D383448;
-	Sat, 13 Sep 2025 01:03:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2DEC8833F9;
+	Sat, 13 Sep 2025 01:41:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r//N7BO8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UieYKJte";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE8CB830A0; Sat, 13 Sep 2025 01:03:02 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 84DFA8341A; Sat, 13 Sep 2025 01:41:25 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12F4C83447
- for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 01:03:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 065E1833BF
+ for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 01:41:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-30ccec59b4bso1712344fac.3
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 16:03:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-62ecd3c21d3so3006637a12.0
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 16:41:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757718179; x=1758322979; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dnf1d5Ft3wlDPGtfhwZU5Gw7n/4TTfqoKgs9KSsFviM=;
- b=r//N7BO8YKl/Zn3nx9EfteVIicmBBn0ssxUi7dhWCvM0z81mBrivmDN+mJm0V1T4lE
- 6rmGa3tfsaLEEpeNQjJVujkDiosiuMpHnkLhtp8oEjxz1UzUFKzb5PGYmD+OrORaQ69O
- oYGnT5bv/qUVBJrNv4Cy1tuDSKKVu5GF22TMs=
+ d=chromium.org; s=google; t=1757720482; x=1758325282; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=79zWTKys9C37Th56GSgm3O4Sw5T87FkU4DpxQQvwWsI=;
+ b=UieYKJte8jiixCyVO0c+5oMaVrVwIRPITy+DJ9fasQDUP+P5DdAR7ZdeOCul2bpu0m
+ peEgAgVGFQEzzdZ2MINUAvQ7Cp20zIZH6uNXoJ8aEfMAhDrLUxmOblBhT6xWv23c7WzH
+ FxKDstrxALsXca8DunnAK0agB+AQan/xT/qqk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757718179; x=1758322979;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1757720482; x=1758325282;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dnf1d5Ft3wlDPGtfhwZU5Gw7n/4TTfqoKgs9KSsFviM=;
- b=Y49mPmoeRhUZQgpCyLnb81zfwOfadvE2+JGLJRcsThjnNWufvFjeK8ep9P7qRzinL4
- goP9YOpPjj8BViHh8RvqavFTOU2snKBWla3pZIvr51fwL+fM4O8UKxM7hBPHZtPiDiEl
- 5QBoeftdRTKCJHDgy1ND+sgzryv4p37pJ5/8uq+rk16aYISwGa3VMZLmxAxVTIbXcXSa
- fuKWGGsawpuyVn+B1LIWRqgspJemLDp+AzHJV0Vx5BBkAzK3QWdzWOcLHEDcQZ9Op2pj
- mYl0fqjdUphPSW0CmD4yGH1Xi7e910V/zfrynWKBHQzm2H6uZRozgDdempNPUgq8IStn
- UEnA==
-X-Gm-Message-State: AOJu0YzTJxFJ85n4p/JfIZaVmzDHJ4afbpf4dps1kFzo4gZAHvQ+hA8L
- FcdOqQGh2zdWMvEKHJdIBuRf+6Or+ZpAMEKCgbSL2yAmCrBbCVbLUT4+CkAyoHcRywU0teulPUr
- t+9MfH3w=
-X-Gm-Gg: ASbGncti86HSxvKfFX8bisyJBAJUCOL8Pmer3rRGZMMBL5lCM0PNx6BTleaihWD2SrC
- S8sGxmgey1+Ku80QVNnwnpBCgmnVj85cPogESDX3R9NtDyAs2AtG3AaLH8G80CvM7OcE+5yLzRe
- F81uJ6AcPlODFJ/ERzd4RIzVvBuDKTVBoFYtVgxSmf6k0jgLUN5rnO1/tXqTNQpOREPQfiDMhFO
- HzplQaE8u1eYgInG0pVqBpTH+mVF0BNzwlQ7sgg2SBM0pikfoL1rQOfZTSNIgaTdnqBtrhveKwX
- ATsvQ3CsjIH9l4hdwbLbvJOTF4M8urabp0l259X+Cr+lLKcEN1bDjoufQV4JjlsLTCo8GboOoVL
- BHyxPyzdyGxaaCBDx/FL0+E2ks4OYquFzIbPYrcJ4M7YpcGBKjEAXWZHEjWg=
-X-Google-Smtp-Source: AGHT+IHrq8gaKvePJaPBesLKgy8vLq130zs1hHAhMa+/piPLNTQ8EaiptYrnO/Lu1zM3Jx9ncjUDqw==
-X-Received: by 2002:a05:6871:330c:b0:30b:7d90:1061 with SMTP id
- 586e51a60fabf-32e54075e1amr2722855fac.4.1757718178789; 
- Fri, 12 Sep 2025 16:02:58 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-32d3344e6d0sm1513035fac.8.2025.09.12.16.02.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Sep 2025 16:02:58 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH] doc: Convert README.commands.spl to rST
-Date: Fri, 12 Sep 2025 17:02:57 -0600
-Message-ID: <20250912230257.4145026-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ bh=79zWTKys9C37Th56GSgm3O4Sw5T87FkU4DpxQQvwWsI=;
+ b=YzLh7jpFTqnDsVT/gt8COqd/cmsTDzsC8eABoH5OUrF03Rsi+Kkj8GBAH5nHXrvbsO
+ vIkHMGQIXA0ujm/s4OtFyTbFb26vK2C8NsP9IVLYEmeruHtiLsSSnljYRNx4exJlvmMW
+ MHE50S01go4FNA2EJbI8tg7yjtFCTeKocbPEKdzsBPrL2kM6gjYD29h3SNliuyJkXGva
+ qT3R+I/5nhaNpRrUa/Tfxe43tIxrU+iU5+hmXa8EE4C5sbfSXKdXQ7EhbfmQu+yxOEHB
+ qo43PzCcckxSNxb+MBYwSGIJZ7RqUPPWva9kdgOIwMXwWLUrJflMKz8uYfo1OvVtqfwR
+ iAUA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxZ3e2BhvFXMWIww+n+kvzDWnsfTwUcoW9NnfFFIm2pEFHWj3ZIdWLiDDaBBeLAT6ljJPQLR8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjcrZn14TEWua69/E+KDFzb8YZfWRiYZh65Z0h26KnoYGPgtxX
+ kwd0FCXF1SM6FrsNhC5tdoWvIO3OJsD5latOqnvefBWEPaX2XnzWZlr/Dp5yboStVODtfoRqZmC
+ d+6TIOQrCAAJja38nlI3OewMJGmK0lXrEvJ8ME2ms
+X-Gm-Gg: ASbGncvw3X65GOSmo5s1nOETDeg2jCkFO+PQRXyOdNSw6onxKqheYiwx4QuH6kMqp83
+ w8fBudTUeP27gp32KwA2pKahFNnl3LOsm1nOozTfSlmJlq5zQw5gOzjl8TbVnGgGPkUKhTn0FKt
+ Z3hzt9eMib1NZj7QkD4MprgnMdUUIXNEk22Q7Mh0lvNsZc1dB3UH9pEAIfZ+MCU22MBl/w8jRi3
+ TM3kuM/A4CEim/G8CBu/qrzyps=
+X-Google-Smtp-Source: AGHT+IHXO48+SKSHFsZpdO6xy0evtTY/Vr6qE+/XklBq73RrA1L6ndXzGZUAntriTBvuBugXajD8T5ON8xYJjvpoXEo=
+X-Received: by 2002:a17:907:3f94:b0:b04:854b:bced with SMTP id
+ a640c23a62f3a-b07c3574f95mr437716166b.20.1757720482439; Fri, 12 Sep 2025
+ 16:41:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org>
+ <20250907-spl-gx-v1-4-37395d9ff5af@postmarketos.org>
+ <829fe59a-10e5-4cd2-a032-d293d87f68d1@gmx.de>
+ <DCPE9A29ADNG.5XDSJ73VEPCS@postmarketos.org>
+ <3875c210-7d29-4bca-b535-0522dc615cc8@canonical.com>
+ <DCQ2ZF3T8VMM.1JN4QJ324NFM2@postmarketos.org>
+In-Reply-To: <DCQ2ZF3T8VMM.1JN4QJ324NFM2@postmarketos.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 12 Sep 2025 17:41:10 -0600
+X-Gm-Features: AS18NWBBJnqHfeUlWOJUyD3_RrGLN53jEh2Tweeeqg5LsClAv1lON7yp3AOgqlY
+Message-ID: <CAFLszTjxY6c0unXvdcjC36hhpB-BwxM_FcgpRdkXBa+V3GynvQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 4/9] serial: serial_meson: add minimal non-DM driver
+To: Ferass El Hafidi <funderscore@postmarketos.org>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ ~postmarketos/upstreaming@lists.sr.ht, Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Beniamino Galvani <b.galvani@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,125 +98,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This converts the existing README.commands.spl file to rST as
-doc/usage/cmd/spl.rst and adds it to the command index. Minimal
-rewording is done to the previous contents, to make it fit better with
-the overall style of documentation now.
+Hi Ferass,
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
----
- doc/README.commands.spl | 31 --------------------------
- doc/usage/cmd/spl.rst   | 48 +++++++++++++++++++++++++++++++++++++++++
- doc/usage/index.rst     |  1 +
- 3 files changed, 49 insertions(+), 31 deletions(-)
- delete mode 100644 doc/README.commands.spl
- create mode 100644 doc/usage/cmd/spl.rst
+On Thu, 11 Sept 2025 at 09:37, Ferass El Hafidi
+<funderscore@postmarketos.org> wrote:
+>
+> On Wed Sep 10, 2025 at 8:30 PM UTC, Heinrich Schuchardt wrote:
+> > On 9/10/25 22:14, Ferass El Hafidi wrote:
+> >> On Wed Sep 10, 2025 at 7:53 PM UTC, Heinrich Schuchardt wrote:
+> >>> <...>
+> >>>> +static int meson_serial_getc(void)
+> >>>> +{
+> >>>> +  struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
+> >>>> +  uint32_t status = readl(&uart->status);
+> >>>> +
+> >>>> +  if (status & AML_UART_RX_EMPTY)
+> >>>> +          return -EAGAIN;
+> >>>> +
+> >>>> +  if (status & AML_UART_ERR) {
+> >>>> +          u32 val = readl(&uart->control);
+> >>>> +
+> >>>> +          /* Clear error */
+> >>>> +          val |= AML_UART_CLR_ERR;
+> >>>> +          writel(val, &uart->control);
+> >>>> +          val &= ~AML_UART_CLR_ERR;
+> >>>> +          writel(val, &uart->control);
+> >>>> +
+> >>>> +          /* Remove spurious byte from fifo */
+> >>>> +          readl(&uart->rfifo);
+> >>>> +          return -EIO;
+> >>>> +  }
+> >>>> +
+> >>>> +  return readl(&uart->rfifo) & 0xff;
+> >>>> +}
+> >>>> +
+> >>>> +static int meson_serial_tstc(void)
+> >>>> +{
+> >>>> +  struct meson_uart *const uart = (struct meson_uart *)CONFIG_VAL(DEBUG_UART_BASE);
+> >>>
+> >>> CONFIG_SPL_DEBUG_UART_BASE only exists for CONFIG_DEBUG_UART=y and
+> >>> CONFIG_SPL=y. Shall all configurations depend on CONFIG_DEBUG_UART=y?
+> >>>
+> >>> Creating this dependency does not look right to me.
+> >>>
+> >>
+> >> All Amlogic defconfigs have CONFIG_DEBUG_UART enabled, but I can remove
+> >> the dependency on CONFIG_DEBUG_UART_BASE if you think it doesn't look
+> >> right.
+> >
+> > We should avoid the possibility of build failures for changed configuration.
+> >
+> > Will CONFIG_MESON_SERIAL depend on CONFIG_DEBUG_UART
+> > or will CONFIG_ARCH_MESON select CONFIG_DEBUG_UART?
+>
+> Then it might be best to not use DEBUG_UART_BASE.  I'll fix that for
+> next revision.  Thanks!
 
-diff --git a/doc/README.commands.spl b/doc/README.commands.spl
-deleted file mode 100644
-index ecfd3ca9ee58..000000000000
---- a/doc/README.commands.spl
-+++ /dev/null
-@@ -1,31 +0,0 @@
--The spl command is used to export a boot parameter image to RAM. Later
--it may implement more functions connected to the SPL.
--
--SUBCOMMAND EXPORT
--To execute the command everything has to be in place as if bootm should be
--used. (kernel image, initrd-image, fdt-image etc.)
--
--export has two subcommands:
--	atags: exports the ATAGS
--	fdt: exports the FDT
--
--Call is:
--spl export <fdt|atags> [kernel_addr] [initrd_addr] [fdt_addr if fdt]
--
--
--TYPICAL CALL
--
--on OMAP3:
--nandecc hw
--nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
--spl export atags			/* export ATAGS */
--nand erase 0x680000 0x20000		/* erase - one page */
--nand write 0x80000100 0x680000 0x20000	/* write the image - one page */
--
--call with FDT:
--nandecc hw
--nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
--tftpboot 0x80000100 devkit8000.dtb /* Read fdt */
--spl export fdt 0x82000000 - 0x80000100	/* export FDT */
--nand erase 0x680000 0x20000		/* erase - one page */
--nand write <adress shown by spl export> 0x680000 0x20000
-diff --git a/doc/usage/cmd/spl.rst b/doc/usage/cmd/spl.rst
-new file mode 100644
-index 000000000000..59471c65a623
---- /dev/null
-+++ b/doc/usage/cmd/spl.rst
-@@ -0,0 +1,48 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
-+
-+.. index::
-+   single: spl (command)
-+
-+spl command
-+===========
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    spl export <fdt|atags> [kernel_addr] [initrd_addr] [fdt_addr if fdt]
-+
-+Description
-+-----------
-+
-+The *spl* command is used to export a boot parameter image to RAM. Later
-+it may implement more functions connected to the SPL.
-+
-+spl export
-+~~~~~~~~~~
-+
-+To execute the command everything has to be in place as if bootm should be
-+used. (kernel image, initrd-image, fdt-image if used). The first argument
-+passed to the export subcommand must be either atags or fdt, which signifies if
-+we are preparing an ATAGS or device tree for export.
-+
-+Example
-+-------
-+
-+On an OMAP3 platform with ATAGS::
-+
-+    => nandecc hw
-+    => nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
-+    => spl export atags			/* export ATAGS */
-+    => nand erase 0x680000 0x20000		/* erase - one page */
-+    => nand write 0x80000100 0x680000 0x20000	/* write the image - one page */
-+
-+On an OMAP3 platform with device tree::
-+
-+    => nandecc hw
-+    => nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
-+    => tftpboot 0x80000100 devkit8000.dtb /* Read fdt */
-+    => spl export fdt 0x82000000 - 0x80000100	/* export FDT */
-+    => nand erase 0x680000 0x20000		/* erase - one page */
-+    => nand write <adress shown by spl export> 0x680000 0x20000
-diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-index 3a48521d5d56..a34db5cb627b 100644
---- a/doc/usage/index.rst
-+++ b/doc/usage/index.rst
-@@ -124,6 +124,7 @@ Shell commands
-    cmd/sntp
-    cmd/sound
-    cmd/source
-+   cmd/spl
-    cmd/tcpm
-    cmd/temperature
-    cmd/test
--- 
-2.43.0
+I've been thinking about doing something about a minimal UART (and
+i2c) for a while.
 
+Before driver model we just called serial_putc() and *the* serial
+driver would handle it. Can we do something similar here?
+
+My suggestion for an API:
+
+CONFIG_SERIAL_ONE to indicate that driver model is not used for serial
+
+Then in serial-uclass.c update serial_putc() to use that config and
+call serial_one_putc(int ch), with that function being defined in the
+only serial driver that is compiled in. Update serial_init() to call
+serial_one_init().
+
+That way we keep things compatible with driver model and avoid
+building on the old serial.c
+
+This is similar to how the debug UART, but the debug UART is special.
+
+Regards,
+Simon
