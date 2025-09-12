@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27403CA101F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 06:34:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44131CA101F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 06:35:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C6B48334F;
-	Fri, 12 Sep 2025 08:34:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4433833F5;
+	Fri, 12 Sep 2025 08:35:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p8xrkMgE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oCxZiI2d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68597833E9; Fri, 12 Sep 2025 08:33:59 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 945FB833F9; Fri, 12 Sep 2025 08:35:43 +0200 (CEST)
+Received: from mail-yx1-xb136.google.com (mail-yx1-xb136.google.com
+ [IPv6:2607:f8b0:4864:20::b136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D9DE83322
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 08:33:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10BDB83322
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 08:35:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-7227bc08c97so17859297b3.1
- for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 23:33:57 -0700 (PDT)
+Received: by mail-yx1-xb136.google.com with SMTP id
+ 956f58d0204a3-60f4678ceabso946351d50.3
+ for <u-boot@lists.denx.de>; Thu, 11 Sep 2025 23:35:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1757658836; x=1758263636; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1757658939; x=1758263739; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FJ9diK6rNWduvgZtttD3f1Zp4tA6wp3oLjiDXxuyXuE=;
- b=p8xrkMgE7Zk3gw1NgsFcbd7o2/L7lOgABNoHb0/Ywy/h9E94i4jSSyxMfSYrofbxJG
- 52Mbu4sWeYOPmOWU9gYgEL2zHJ64D5VizO4hxjZTTKYxouB4pkefbk5Cv8QfRD++1s+t
- H8RSrgIE1UVQmnso1NZzFlv1pBtAKZ086YzTzE8mydR7/P7p88AyR2Gxgu49gnlZZRbE
- fX0vWzqw5hauhRT/4esY9f/kArdFBHmVli6YziOn9e2beQNQTAomWi/nS7v/UXb7eDlv
- fyyRM/8H7BMag8JYDMsd8vzkDuy0tSNqtZykswHl+U2UuTwLeuuu6FWFHO5FtlTEJ2+8
- x/Dg==
+ bh=S5nS/1KT1m0VKtVAjXDyb1k7RB5BC2ls/c6XqaLCKWM=;
+ b=oCxZiI2dYR0CuRaPE9u+N++SaEMhpJ5YZEDGUJVH0BhoVcUSCG4pcWzaN9wY3ztoHC
+ Wdy+01ABtut1mbvlWlSJwquXyqiqeRenPaoaE9ygm1lmK10Ut6JI4oq5ZPqwKuAqtr9c
+ ZXZQdzxzkyw4m4BpvJGKmt8sdtQUCBtCsr9VwljGrD6zFa5FRhY21wG8Nudnc72BbISu
+ UDpkjeOwYeNSTpwxg8ILBoaFPeFdGHpBg1Xgs3fAlDjyIsd66Y02pPCd5LYLaRytl8Uf
+ 0fiPYS8YCnxA6DAb0bcfHvkN5eTuzUoouagB480i4tuSZ2faQgSr9Hl3hKHMKYrCbPPZ
+ N4SA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757658836; x=1758263636;
+ d=1e100.net; s=20230601; t=1757658939; x=1758263739;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FJ9diK6rNWduvgZtttD3f1Zp4tA6wp3oLjiDXxuyXuE=;
- b=ZVW35cLZwZoEQCyBQ59PSa5u6ApF/nsnGMfxtlLXk6pQN9Q9F95wvfmsjSirWjcdpL
- FNApyGBW/6sUy3DnhBKQ0VW8wqcWLbrnYAOXaxou5BsVO1kw2F/rBY3KRwsRHlBAexsf
- +erE7uwwYiYi6Gvm6QrKqjd2qRwlUSTsBNdguR1GGoqt6uYyv/qM84BdF4wrVWoiP6HD
- HFsm0d87szx0Is8Hp1eN0EWMP/O6QxweTlX2UQRLlOcaS2a3BFashUOj3rn7m6Bt8Ss/
- i3QtPT+7JzSfAEg+2iTBDwoNc6g+ai6vxl7qNdvYCNS+nKvC+Yy4AnnqvO+Sa1wF+ZYU
- AHpg==
-X-Gm-Message-State: AOJu0Ywhs1HjAUuDUVzBtI1cUPYvS97fWkKUBGrAC95Mi62/7+zmkBps
- s+iPMZ5uipQGuaYOfJSOZJ5XpZrzkb2V3r1P1cHSzJI+v/N31bXDbmWVcQ3QLot2PAz7iWXAv55
- z7jUAqOHGltILb0cm6H6FIlAKGVIWPlFzw1gnPiyw/Q==
-X-Gm-Gg: ASbGncsh3M2Zuj0NiKrOCueLEs1gSG1VRoM7rcB18An4SSu3x+qAyrqyqi4kZR0FAsz
- xuJ29hjr/I++mP8KTIyh8DNzYXuu85Tny1sahFs0dG7gkwQKnNh7vycNhSsTq/dPclKtJCxLnpr
- 3IAD65UdHg6WeQ7+fXdWkYT7RUUBl6brIcQoNcCedPMEyCg4k1I/5Tm6OLJJfzZfybbCPWph7Wd
- g0M10h7um2973fL7bUixdSHGr9E/1x2+FOrehMup8XEGT085nMm/SmHjESHqq7pwBtyt/tShb/+
- 0j7sKnXBodVklrbsSmF7ZolQbfLLTD0TH7GSWGJ97UENFywWp1pXKxda2TTAlRE=
-X-Google-Smtp-Source: AGHT+IGl1rwHT9YEx8Wv3n+7oIMipDLnc3upd6CaWthLhIknwRW1HjtyDzrC+tfc/89sE4dD3ahXNmsZucFlX64wiAY=
-X-Received: by 2002:a05:690c:b86:b0:71b:f46e:691 with SMTP id
- 00721157ae682-7306a0393b9mr18597547b3.11.1757658835878; Thu, 11 Sep 2025
- 23:33:55 -0700 (PDT)
+ bh=S5nS/1KT1m0VKtVAjXDyb1k7RB5BC2ls/c6XqaLCKWM=;
+ b=SZU7Y7ABNb5FKo12SqUHw+GFC+p6RcYsQoXUP7++N/YL1fkuj50XVZs5ZlcdgLGIGw
+ nToVd/OCg0oBB001icxaIbEn8AY9sAc2BHhvhJNdLjRdOJqhT+clKeHwriyTwmGvw7tr
+ vJFHP32rnet6gzg5ynVDs88BHAmIc2euKcbnbw5sWsqHh/jINMiyeqW9Rc9L2LgTPsm4
+ 2h9oTsMjjp77UPDg7qzDF69Jq0InCFkBEte1R2bbAmSc++Zx3wipSiLI5baLuvvSUeWU
+ Nkb3PdwtRgJEyHzaMcrvsmn9WbWGTED4xeBvW48gNU6fzSbKdwx0Xvfh1KNXVzjbMyqq
+ DA2Q==
+X-Gm-Message-State: AOJu0YyLxnwYVaECnqxgScZakIpdvX5jaRFQ3jBkICLPj6EyilotS5DC
+ io3ok4rfQrxGim/slSSupzaPYkftRdqu/md346GQnVKSpGfG9lK6Pj5s/WB/iCj3yup/QObmhHx
+ Bv/d2JDnTc9zczyEXsKskWoHDERaaZmLKpqf2SWRZqg==
+X-Gm-Gg: ASbGnctMS2ubM8xph5zzFkHnDSVolAjhr5OtmX+ye82Hrgi3qZY+v1Q3HQs/jCOF4es
+ 8jN8DNKSzMCfV5khh6hoHHlympxnplaa3VdThX4ZhsAkQWRKSouFgqK2/7CZUJdyueu8nwQgk0/
+ zRdtEKoYvgNAAg73FAZXVgGQOzOWdFL9kPeZEYGC26MvlMSs0vWmY6/k3WkXeHvuKGDc2PjeQQH
+ 2WSf0bp9viVgta4zFXC8NRnZlr05J73RZzy5gUuyqUKjakuNFJau2R6lYthIhkQvcshBv3FEb8B
+ eQn5a5fD2Q7FV7i0b6HSQvHh1oBb10EFfmil5T5UnQvaO2bO9HgJPFkBhgzT/iI=
+X-Google-Smtp-Source: AGHT+IGwFoqwGZ+YF2YzlZKvC1zJzAQDYjtPtsVRbzGHDbuLay4uChXm+H/2perhv6zeZ4CLJIaKQWaffCrWtX6v/2E=
+X-Received: by 2002:a53:7b03:0:b0:604:3849:9b8a with SMTP id
+ 956f58d0204a3-6272164e7bbmr1258931d50.32.1757658938696; Thu, 11 Sep 2025
+ 23:35:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250905081902.489345-1-anshuld@ti.com>
- <20250905081902.489345-6-anshuld@ti.com>
-In-Reply-To: <20250905081902.489345-6-anshuld@ti.com>
+ <20250905081902.489345-8-anshuld@ti.com>
+In-Reply-To: <20250905081902.489345-8-anshuld@ti.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 12 Sep 2025 09:33:20 +0300
-X-Gm-Features: Ac12FXzQ3EMLv87L8fUhV-cYSkltEGMlkaD_nei3H_YiYoRUkj027mVBGg2IuF8
-Message-ID: <CAC_iWjJos1Xu0LWK4aqJ9aq2UZhor8uvnGRVg1xKs69HmnhP6A@mail.gmail.com>
-Subject: Re: [PATCH -next v6 05/10] arm: armv8: mmu: add mem_map_fix_dram_banks
+Date: Fri, 12 Sep 2025 09:35:02 +0300
+X-Gm-Features: Ac12FXzsaFs3m3cPjM1LzjQQLUiJLurBU31kIVy-ozXgRUtUvFMS87PgQoIPRC0
+Message-ID: <CAC_iWjL4oJDtRMGqBQ9r-bgjR5w+J5o=5cQrt330S4KLr2E0xQ@mail.gmail.com>
+Subject: Re: [PATCH -next v6 07/10] arm: armv8: mmu: add mmu_unmap_reserved_mem
 To: Anshul Dalal <anshuld@ti.com>
 Cc: u-boot@lists.denx.de, d-gole@ti.com, b-padhi@ti.com, vigneshr@ti.com, 
  trini@konsulko.com, nm@ti.com, robertcnelson@gmail.com, w.egorov@phytec.de, 
@@ -97,72 +97,35 @@ X-Virus-Status: Clean
 
 Hi Anshul,
 
-On Fri, 5 Sept 2025 at 11:19, Anshul Dalal <anshuld@ti.com> wrote:
+[....]
+
 >
-> For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
-> the MMU as part of mmu_setup.
->
-> But since the exact configuration of memory banks might not be known at
-> build time, many platforms such as imx9, versal2 etc. utilize
-> gd->bd->bi_dram to configure the static map at runtime.
->
-> Therefore this patch adds a new API mem_map_fix_dram_banks that modifies
-> the static map in a similar way. Allowing for anyone to map all dram
-> banks by just passing the index to last entry in their mem_map and it's
-> length.
->
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
->  arch/arm/cpu/armv8/cache_v8.c    | 27 +++++++++++++++++++++++++++
->  arch/arm/include/asm/armv8/mmu.h | 10 ++++++++++
->  2 files changed, 37 insertions(+)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 6e662395a83..edb895da1f2 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -58,6 +58,33 @@ static int get_effective_el(void)
->         return el;
+>         return 0;
 >  }
->
-> +int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs)
+> +
+> +int mmu_unmap_reserved_mem(const char *name)
 > +{
-> +       unsigned int i;
-> +       int ret = fdtdec_setup_memory_banksize();
+> +       void *fdt = (void *)gd->fdt_blob;
+> +       char node_path[128];
+> +       fdt_addr_t addr;
+> +       fdt_size_t size;
+> +       int ret;
 > +
-> +       if (ret) {
-> +               printf("%s: Failed to setup dram banks\n", __func__);
+> +       snprintf(node_path, sizeof(node_path), "/reserved-memory/%s", name);
+> +       ret = fdt_path_offset(fdt, node_path);
+> +       if (ret < 0)
 > +               return ret;
-> +       }
 > +
-> +       if (index + CONFIG_NR_DRAM_BANKS >= len) {
-> +               printf("%s: Not sufficient space in memory map\n", __func__);
-> +               return -ENOMEM;
-> +       }
-
-The length of the mem_map array is configured at compile time.
-So this is going to fail for all existing boards unless someone
-explicitly changes the size of their struct mm_region.
-I think if we go down that path, we need to change the error message
-as well and point them to the right direction
-
+> +       addr = fdtdec_get_addr_size(fdt, ret, "reg", &size);
+> +       if (addr == FDT_ADDR_T_NONE)
+> +               return -1;
 > +
-> +       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> +               mem_map[index].virt = gd->bd->bi_dram[i].start;
-> +               mem_map[index].phys = gd->bd->bi_dram[i].start;
-> +               mem_map[index].size = gd->bd->bi_dram[i].size;
-> +               mem_map[index].attrs = attrs;
-> +               index++;
-> +       }
-> +
-> +       mem_map[index] = (const struct mm_region){ 0 };
+> +       mmu_change_region_attr(addr, size, PTE_TYPE_FAULT);
 
-Why do you need the const?
-Can we do
-memset(&mem_map[index], 0, sizeof(mem_map[index]));
-instead?
+Since you are basically breaking the memory map here, you can use
+mmu_change_region_attr_nobreak() and not run the loop twice.
 
 [...]
 
-Thanks
+Cheers
 /Ilias
