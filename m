@@ -4,84 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2C99CAC582
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 14:23:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8613ACAC582
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 14:26:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3455C833E9;
-	Fri, 12 Sep 2025 16:23:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D40C2833E9;
+	Fri, 12 Sep 2025 16:26:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q9bbJSQY";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB579833EB; Fri, 12 Sep 2025 16:23:25 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B348183285
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 16:23:23 +0200 (CEST)
+ id D567F833F9; Fri, 12 Sep 2025 16:26:55 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 9C6CD83285
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 16:26:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-74be52f5447so804158a34.1
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 07:23:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757687002; x=1758291802; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ppXMmKw+epVxuWU0tM//uLtLPWtPS4S+fcXFuHFVGJ0=;
- b=Q9bbJSQYbYAUFtOoyULl4VT2mOzZjjMGXvSKX88OD+saQcMH0acTef6rizvCXpK8ez
- AcoMkRh0zFhxnV6aRIUhy5hBEZntpHww98gC11/Gi4E8egSKL35kZMQw1NL03w9amMKy
- 9ckP2rSjiu6W3rnoZPbBt3BuxBgAgj+A1ZO0U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757687002; x=1758291802;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ppXMmKw+epVxuWU0tM//uLtLPWtPS4S+fcXFuHFVGJ0=;
- b=rabe54ckDjY4i61u+Z9GWZJays+6ykMiblNC+sucWri32Oo5PYZSks2aEuJZXDoCWT
- p8s6GW18hjNu2ow3s3ViR6H494RMJnB9EsOJAcU6OJ34ncqV0vclXCYCXc5LFDGDvWfZ
- MekM4ZXvx/PxvBcK8qII7cgEIlMi51GLLxxhwREpzR31+N5mLhm/xBOEvwlxokuz5JO2
- 9iHLvlC+77lNDPCzmUdGKbTXRlKJq5/Q7ekpOG6LCOb3bGprCwoSl/hB0upgcw38LD0j
- /Da+WNxwWsljOjsg/rRY/WaiP3VXiwtU0e8PgF/64boi0TiyHB7EE/uej0rfnwZ914Et
- 3EyA==
-X-Gm-Message-State: AOJu0YzBoqMUtqrvInGqCZNpJnY90QcWilzTnqC1UEzOMX21gdoZp5xO
- ZJSKq422u7wVjxwcyEQhdEDYOgOCMBf9BC/YecpMfMi0cEv+L1Y7tCw8ISIh0owSOt3/2iKVmVM
- MlksB1js=
-X-Gm-Gg: ASbGncs77odKD7OcwT0pK4GKNrIOrdAXKxwvjX4JCZQv6sCaoUQoMg4MYoS5guI0EXS
- 3p5s5SWUX3/bYzcN22bt9DaFk/WQEsRi/fppppZStMnH0DI3zSv1etftgxE7zlTBD0+NI3QEnqi
- edtcnHC+1Dn82azvX1J2wAFRj9tdmLPIMhUpLhhuPHs5rEOK4ULvuc+ssALxCVfrM4o3VMy5kUJ
- PZ/01bG2WLBT8GL0Q58+12P3c8OiDO2j6lPBT/ufeVtu76BjJbK3tpJw0Ou4n+r8CzQRR0CbK5f
- DKwCm9QiGCKR2DRXLOx72TnETx4FgtIPAZhovmqHLFUqgL551NyQ9AYfMCmnbhdD0Wo09I0LWBw
- +C/lEOjtLh8f7TTbzxPJ3D4X/+qCtAIj/3yOfvVELhK8Eg906bjZxNZ0pc4B0Xqb2UiI93lLAeh
- 7Rgw==
-X-Google-Smtp-Source: AGHT+IEJi/f1rnbZPYxWHpwnnEHk+wIU57rMwJ5L3XfdsvBgYRUN4iVayf5khcDtWZpAtLp4Gav8xw==
-X-Received: by 2002:a05:6808:1a17:b0:439:b674:d99f with SMTP id
- 5614622812f47-43b8da0b35amr1337277b6e.40.1757687002292; 
- Fri, 12 Sep 2025 07:23:22 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43b828d3199sm790118b6e.4.2025.09.12.07.23.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Sep 2025 07:23:21 -0700 (PDT)
-Date: Fri, 12 Sep 2025 08:23:19 -0600
-From: Tom Rini <trini@konsulko.com>
-To: E Shattow <e@freeshell.de>
-Cc: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
-Subject: Re: [PATCH v2] scripts/Makefile.lib: add CONFIG_SYS_CONFIG_NAME
- prefix to dtsi search
-Message-ID: <20250912142319.GA4060911@bill-the-cat>
-References: <20250826214708.309271-1-e@freeshell.de>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9CC3616A3;
+ Fri, 12 Sep 2025 07:26:44 -0700 (PDT)
+Received: from donnerap (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BDB1B3F66E;
+ Fri, 12 Sep 2025 07:26:51 -0700 (PDT)
+Date: Fri, 12 Sep 2025 15:26:41 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Debbie Horsfall <debbie.horsfall@arm.com>
+Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>, <fenghua@phytium.com.cn>,
+ <linus.walleij@linaro.org>, <Peter.Hoyes@arm.com>,
+ <liviu.dudau@foss.arm.com>
+Subject: Re: [PATCH 2/2] arm: vexpress64: Enable SYSRESET and SYSRESET_PSCI
+Message-ID: <20250912152641.7d9b9faa@donnerap>
+In-Reply-To: <20250910151342.204255-2-debbie.horsfall@arm.com>
+References: <20250910151342.204255-1-debbie.horsfall@arm.com>
+ <20250910151342.204255-2-debbie.horsfall@arm.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mbS/zLh1qVQLl59Q"
-Content-Disposition: inline
-In-Reply-To: <20250826214708.309271-1-e@freeshell.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,47 +58,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 10 Sep 2025 16:13:42 +0100
+Debbie Horsfall <debbie.horsfall@arm.com> wrote:
 
---mbS/zLh1qVQLl59Q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Debbie,
 
-On Tue, Aug 26, 2025 at 02:47:00PM -0700, E Shattow wrote:
+> Select SYSRESET on Vexpress64 to enable system reset to support other
+> features, such as capsule-on-disk. Select SYSRESET_PSCI if PSCI is
+> inferred from the firmware (via ARM_PSCI_FW).
+> Select ARM_SMCCC for Vexpress64 boards which in turn selects
+> ARM_PSCI_FW.
+> 
+> The sysreset uclass unconditionally implements a reset_cpu() function.
+> Remove the empty reset_cpu() in vexpress64 board code.
 
-> Add ${CONFIG_SYS_CONFIG_NAME}-u-boot.dtsi into dtsi include search order:
-> orig filename, (SYS_CONFIG_NAME), SYS_SOC, SYS_CPU, SYS_VENDOR, no prefix
->=20
-> Signed-off-by: E Shattow <e@freeshell.de>
+Thanks for the cleanup, looks good. Tested on AEM-RevC FVP and Juno.
+
+> Signed-off-by: Debbie Horsfall <debbie.horsfall@arm.com>
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
 > ---
->  doc/develop/devicetree/control.rst | 1 +
->  scripts/Makefile.lib               | 2 ++
->  2 files changed, 3 insertions(+)
+>  arch/arm/Kconfig                     | 2 ++
+>  board/armltd/vexpress64/Kconfig      | 2 ++
+>  board/armltd/vexpress64/vexpress64.c | 5 -----
+>  3 files changed, 4 insertions(+), 5 deletions(-)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 40368abc297..d51a7619cdb 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1417,6 +1417,8 @@ config ARCH_VEXPRESS64
+>  	select MTD_NOR_FLASH if MTD
+>  	select FLASH_CFI_DRIVER if MTD
+>  	select ENV_IS_IN_FLASH if MTD
+> +	select SYSRESET
+> +	select SYSRESET_PSCI if ARM_PSCI_FW
+>  	imply DISTRO_DEFAULTS
+>  
+>  config TARGET_CORSTONE1000
+> diff --git a/board/armltd/vexpress64/Kconfig b/board/armltd/vexpress64/Kconfig
+> index f413c51ac43..5b10074e03f 100644
+> --- a/board/armltd/vexpress64/Kconfig
+> +++ b/board/armltd/vexpress64/Kconfig
+> @@ -22,6 +22,7 @@ config VEXPRESS64_BASE_MODEL
+>  	select LINUX_KERNEL_IMAGE_HEADER
+>  	select POSITION_INDEPENDENT
+>  	imply DM_RNG
+> +	select ARM_SMCCC
+>  
+>  choice
+>  	prompt "VExpress64 board variant"
+> @@ -47,6 +48,7 @@ config TARGET_VEXPRESS64_JUNO
+>  	select USB_EHCI_GENERIC if USB
+>  	select USB_OHCI_HCD if USB
+>  	select USB_OHCI_GENERIC if USB
+> +	select ARM_SMCCC
+>  	imply OF_HAS_PRIOR_STAGE
+>  
+>  endchoice
+> diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress64/vexpress64.c
+> index 0b75c1358f0..e8f1c2fe9fe 100644
+> --- a/board/armltd/vexpress64/vexpress64.c
+> +++ b/board/armltd/vexpress64/vexpress64.c
+> @@ -206,11 +206,6 @@ int board_fdt_blob_setup(void **fdtp)
+>  #endif
+>  #endif
+>  
+> -/* Actual reset is done via PSCI. */
+> -void reset_cpu(void)
+> -{
+> -}
+> -
+>  /*
+>   * Board specific ethernet initialization routine.
+>   */
 
-A problem is that today, this leads to failure to build on:
-mt7622_rfb mt7986_rfb mt7986a_bpir3_emmc mt7986a_bpir3_sd mt7988_rfb
-mt7988_sd_rfb mt8516_pum
-pkin socfpga_stratix10 socfpga_stratix10_atf socfpga_agilex5
-socfpga_agilex5_nand2 socfpga_agil
-ex5_vab socfpga_n5x socfpga_n5x_atf socfpga_n5x_vab
-mt7623a_unielec_u7623_02 mt7623n_bpir2 imx6
-q_bosch_acc imx6dl_mamoj socfpga_arria10 socfpga_arria5 socfpga_cyclone5
-
-Because the problem you're trying to solve is being partly solved in
-another way by others, perhaps?
-
---=20
-Tom
-
---mbS/zLh1qVQLl59Q
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMQs1AAKCRAr4qD1Cr/k
-ChNnAP0R1qU13NrPDNAGPTLGjlgtylbCyMAh1MXtUIBcqwbX4AD8DsyQ8TEP8Iau
-dvCDZo+676jaFkaP5GTxz8D6uL9DCwg=
-=ctSR
------END PGP SIGNATURE-----
-
---mbS/zLh1qVQLl59Q--
