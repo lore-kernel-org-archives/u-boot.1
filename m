@@ -4,69 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07140CA101F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 13:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2C99CAC582
+	for <u-boot@archiver.kernel.org>; Fri, 12 Sep 2025 14:23:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E792833EB;
-	Fri, 12 Sep 2025 15:23:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3455C833E9;
+	Fri, 12 Sep 2025 16:23:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SHgp6yhl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q9bbJSQY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0193833F9; Fri, 12 Sep 2025 15:23:55 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3021783285
- for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 15:23:53 +0200 (CEST)
+ id DB579833EB; Fri, 12 Sep 2025 16:23:25 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B348183285
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 16:23:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58CDNbkr526057;
- Fri, 12 Sep 2025 08:23:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757683417;
- bh=RNxnfPUgYJxN4w5uGZNHVkV8R29jyBY3wZUCYDXMG0o=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=SHgp6yhl9UUTBtL77LpcFEgJNmjqfcSPtsTcYGt7OG6MCHGHxKF8COnzqgfbRVUNa
- /zY1L8JP30SkTJoNyrt373Qq4B7r1iHdEZqzwe6OvZUZMspzaTzQDlst89mij5RoWO
- WZp+2XJvmXdtwTul4SUwoLjrJ5MNuWtrr4slOs8k=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58CDNaep1882669
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 12 Sep 2025 08:23:36 -0500
-Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 12
- Sep 2025 08:23:36 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 12 Sep 2025 08:23:36 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58CDNYke3655543;
- Fri, 12 Sep 2025 08:23:35 -0500
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-74be52f5447so804158a34.1
+ for <u-boot@lists.denx.de>; Fri, 12 Sep 2025 07:23:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1757687002; x=1758291802; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ppXMmKw+epVxuWU0tM//uLtLPWtPS4S+fcXFuHFVGJ0=;
+ b=Q9bbJSQYbYAUFtOoyULl4VT2mOzZjjMGXvSKX88OD+saQcMH0acTef6rizvCXpK8ez
+ AcoMkRh0zFhxnV6aRIUhy5hBEZntpHww98gC11/Gi4E8egSKL35kZMQw1NL03w9amMKy
+ 9ckP2rSjiu6W3rnoZPbBt3BuxBgAgj+A1ZO0U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757687002; x=1758291802;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ppXMmKw+epVxuWU0tM//uLtLPWtPS4S+fcXFuHFVGJ0=;
+ b=rabe54ckDjY4i61u+Z9GWZJays+6ykMiblNC+sucWri32Oo5PYZSks2aEuJZXDoCWT
+ p8s6GW18hjNu2ow3s3ViR6H494RMJnB9EsOJAcU6OJ34ncqV0vclXCYCXc5LFDGDvWfZ
+ MekM4ZXvx/PxvBcK8qII7cgEIlMi51GLLxxhwREpzR31+N5mLhm/xBOEvwlxokuz5JO2
+ 9iHLvlC+77lNDPCzmUdGKbTXRlKJq5/Q7ekpOG6LCOb3bGprCwoSl/hB0upgcw38LD0j
+ /Da+WNxwWsljOjsg/rRY/WaiP3VXiwtU0e8PgF/64boi0TiyHB7EE/uej0rfnwZ914Et
+ 3EyA==
+X-Gm-Message-State: AOJu0YzBoqMUtqrvInGqCZNpJnY90QcWilzTnqC1UEzOMX21gdoZp5xO
+ ZJSKq422u7wVjxwcyEQhdEDYOgOCMBf9BC/YecpMfMi0cEv+L1Y7tCw8ISIh0owSOt3/2iKVmVM
+ MlksB1js=
+X-Gm-Gg: ASbGncs77odKD7OcwT0pK4GKNrIOrdAXKxwvjX4JCZQv6sCaoUQoMg4MYoS5guI0EXS
+ 3p5s5SWUX3/bYzcN22bt9DaFk/WQEsRi/fppppZStMnH0DI3zSv1etftgxE7zlTBD0+NI3QEnqi
+ edtcnHC+1Dn82azvX1J2wAFRj9tdmLPIMhUpLhhuPHs5rEOK4ULvuc+ssALxCVfrM4o3VMy5kUJ
+ PZ/01bG2WLBT8GL0Q58+12P3c8OiDO2j6lPBT/ufeVtu76BjJbK3tpJw0Ou4n+r8CzQRR0CbK5f
+ DKwCm9QiGCKR2DRXLOx72TnETx4FgtIPAZhovmqHLFUqgL551NyQ9AYfMCmnbhdD0Wo09I0LWBw
+ +C/lEOjtLh8f7TTbzxPJ3D4X/+qCtAIj/3yOfvVELhK8Eg906bjZxNZ0pc4B0Xqb2UiI93lLAeh
+ 7Rgw==
+X-Google-Smtp-Source: AGHT+IEJi/f1rnbZPYxWHpwnnEHk+wIU57rMwJ5L3XfdsvBgYRUN4iVayf5khcDtWZpAtLp4Gav8xw==
+X-Received: by 2002:a05:6808:1a17:b0:439:b674:d99f with SMTP id
+ 5614622812f47-43b8da0b35amr1337277b6e.40.1757687002292; 
+ Fri, 12 Sep 2025 07:23:22 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-43b828d3199sm790118b6e.4.2025.09.12.07.23.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Sep 2025 07:23:21 -0700 (PDT)
+Date: Fri, 12 Sep 2025 08:23:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: E Shattow <e@freeshell.de>
+Cc: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
+Subject: Re: [PATCH v2] scripts/Makefile.lib: add CONFIG_SYS_CONFIG_NAME
+ prefix to dtsi search
+Message-ID: <20250912142319.GA4060911@bill-the-cat>
+References: <20250826214708.309271-1-e@freeshell.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 12 Sep 2025 18:53:34 +0530
-Message-ID: <DCQURPCT4OE0.3KPUIUT5R243J@ti.com>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, Dinesh Maniyam
- <dinesh.maniyam@altera.com>, Fiona Klute <fiona.klute@gmx.de>, "Harsha
- Vardhan V M" <h-vm@ti.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, "Rasmus Villemoes" <ravi@prevas.dk>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, Simon Glass
- <sjg@chromium.org>
-Subject: Re: [PATCH] doc: usage: Add File System section and Ext4 documentation
-From: Anshul Dalal <anshuld@ti.com>
-To: Tony Dinh <mibodhi@gmail.com>, Tom Rini <trini@konsulko.com>
-X-Mailer: aerc 0.20.1-0-g2ecb8770224a-dirty
-References: <20250912045352.18856-1-mibodhi@gmail.com>
-In-Reply-To: <20250912045352.18856-1-mibodhi@gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mbS/zLh1qVQLl59Q"
+Content-Disposition: inline
+In-Reply-To: <20250826214708.309271-1-e@freeshell.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,185 +98,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
 
-On Fri Sep 12, 2025 at 10:19 AM IST, Tony Dinh wrote:
-> Create doc/usage/filesystems/ section.
-> Convert doc/README.ext4 to rST format and move it to the new section.
-> Update documentation to add configuration instruction for Ext4 Write
-> when using large partitions.
->
-> Note that this patch depends on this previous patch:
-> https://patchwork.ozlabs.org/project/uboot/patch/20250910215702.15576-1-m=
-ibodhi@gmail.com/
->
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+--mbS/zLh1qVQLl59Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Aug 26, 2025 at 02:47:00PM -0700, E Shattow wrote:
+
+> Add ${CONFIG_SYS_CONFIG_NAME}-u-boot.dtsi into dtsi include search order:
+> orig filename, (SYS_CONFIG_NAME), SYS_SOC, SYS_CPU, SYS_VENDOR, no prefix
+>=20
+> Signed-off-by: E Shattow <e@freeshell.de>
 > ---
->
->  .../filesystems/ext4.rst}                     | 55 +++++++++++++++----
->  doc/usage/index.rst                           |  8 +++
->  2 files changed, 53 insertions(+), 10 deletions(-)
->  rename doc/{README.ext4 =3D> usage/filesystems/ext4.rst} (79%)
->
-> diff --git a/doc/README.ext4 b/doc/usage/filesystems/ext4.rst
-> similarity index 79%
-> rename from doc/README.ext4
-> rename to doc/usage/filesystems/ext4.rst
-> index ca9f19953d2..18e45045344 100644
-> --- a/doc/README.ext4
-> +++ b/doc/usage/filesystems/ext4.rst
-> @@ -1,9 +1,22 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Ext4 File System
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Overview
-> +--------
-> +
->  U-Boot supports access of both ext2 and ext4 filesystems, either in read=
--only
->  mode or in read-write mode.
-> =20
-> +Configuration
-> +-------------
-> +
->  First, to enable support for both ext4 (and, automatically, ext2 as well=
-),
->  but without selecting the corresponding commands, enable one of the foll=
-owing:
-> =20
-> +::
-> +
->    CONFIG_FS_EXT4	(for read-only)
->    CONFIG_EXT4_WRITE	(for read-write)
-> =20
-> @@ -20,22 +33,28 @@ or ext4-related commands:
-> =20
->  use one or both of:
-> =20
-> -  CONFIG_CMD_EXT2
-> -  CONFIG_CMD_EXT4
-> +::
-> +
-> +	CONFIG_CMD_EXT2
-> +	CONFIG_CMD_EXT4
-> =20
->  Selecting either of the above automatically selects CONFIG_FS_EXT4 if it
->  wasn't enabled already.
-> =20
->  In addition, to get the write access command "ext4write", enable:
-> =20
-> -  CONFIG_CMD_EXT4_WRITE
-> +::
-> +
-> +	CONFIG_CMD_EXT4_WRITE
-> =20
->  which automatically selects CONFIG_EXT4_WRITE if it wasn't defined
->  already.
-> =20
->  Also relevant are the generic filesystem commands, selected by:
-> =20
-> -  CONFIG_CMD_FS_GENERIC
-> +::
-> +
-> +	CONFIG_CMD_FS_GENERIC
-> =20
->  This does not automatically enable EXT4 support for you, you still need
->  to do that yourself.
-> @@ -44,6 +63,8 @@ Lastly, the current u-boot implementation for Ext4 writ=
-e requires a lot
->  of memory to run successfully. The following enable support for
->  large Ext4 partitions:
-> =20
-> +::
-> +
->  	CONFIG_EXT4_MAX_JOURNAL_ENTRIES
->  	CONFIG_SYS_MALLOC_LEN
-> =20
-> @@ -51,10 +72,15 @@ The number of journal entries and dynamic memory allo=
-cation are proportional
->  to the partition capacity. For example, an ext4 4TB HDD partition could
->  require approximately 500 entries and more than 128 MB heap space.
-> =20
-> +Examples
-> +--------
-> +
->  Some sample commands to test ext4 support:
-> =20
->  1. Check that the commands can be seen in the output of U-Boot help:
-> =20
-> +::
-> +
->  	UBOOT #help
->  	...
->  	ext4load- load binary file from a Ext4 file system
-> @@ -65,6 +91,8 @@ Some sample commands to test ext4 support:
-> =20
->  2. To list the files in an ext4-formatted partition, run:
-> =20
-> +::
-> +
->  	ext4ls <interface> <dev[:part]> [directory]
-> =20
->  	For example:
-> @@ -72,6 +100,8 @@ Some sample commands to test ext4 support:
-> =20
->  3. To read and load a file from an ext4-formatted partition to RAM, run:
-> =20
-> +::
-> +
->  	ext4load <interface> <dev[:part]> [addr] [filename] [bytes]
-> =20
+>  doc/develop/devicetree/control.rst | 1 +
+>  scripts/Makefile.lib               | 2 ++
+>  2 files changed, 3 insertions(+)
 
-The command usage has updated to:
+A problem is that today, this leads to failure to build on:
+mt7622_rfb mt7986_rfb mt7986a_bpir3_emmc mt7986a_bpir3_sd mt7988_rfb
+mt7988_sd_rfb mt8516_pum
+pkin socfpga_stratix10 socfpga_stratix10_atf socfpga_agilex5
+socfpga_agilex5_nand2 socfpga_agil
+ex5_vab socfpga_n5x socfpga_n5x_atf socfpga_n5x_vab
+mt7623a_unielec_u7623_02 mt7623n_bpir2 imx6
+q_bosch_acc imx6dl_mamoj socfpga_arria10 socfpga_arria5 socfpga_cyclone5
 
-ext4load <interface> [<dev[:part]> [addr [filename [bytes [pos]]]]]
+Because the problem you're trying to solve is being partly solved in
+another way by others, perhaps?
 
->  	For example:
-> @@ -79,16 +109,21 @@ Some sample commands to test ext4 support:
-> =20
->  4. To write a file to an ext4-formatted partition.
-> =20
-> +::
-> +
->  	a) First load a file to RAM at a particular address for example 0x30007=
-fc0.
->  	Now execute ext4write command:
->  	ext4write <interface> <dev[:part]> [filename] [Address] [sizebytes]
-> =20
+--=20
+Tom
 
-This is an outdated format for ext4write, currently it's addr, filename
-and then size.
+--mbS/zLh1qVQLl59Q
+Content-Type: application/pgp-signature; name="signature.asc"
 
->  	For example:
-> -	UBOOT #ext4write mmc 2:2 /boot/uImage 0x30007fc0 6183120
-> -	(here 6183120 is the size of the file to be written)
-> +	UBOOT #ext4write mmc 2:2 /boot/uImage 0x30007fc0 0x5E58D0
-> +	(here 0x5E58D0 is the size of the file to be written,
-> +	which was output by the ext4load command)
->  	Note: Absolute path is required for the file to be written
+-----BEGIN PGP SIGNATURE-----
 
-IMO, all the code blocks with U-Boot's console output in the 'Examples'
-should only have text that user should expect during a regular usage,
-all comments should be outside the code block as plain text. Like
-follows:
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMQs1AAKCRAr4qD1Cr/k
+ChNnAP0R1qU13NrPDNAGPTLGjlgtylbCyMAh1MXtUIBcqwbX4AD8DsyQ8TEP8Iau
+dvCDZo+676jaFkaP5GTxz8D6uL9DCwg=
+=ctSR
+-----END PGP SIGNATURE-----
 
-The ``ext4write`` command can be used to write to an ext4
-partition as follows:
-
-::
-
-	ext4write <interface> <dev[:part]> <addr> <absolute filename path> [sizeby=
-tes] [file offset]
-
-For example to write a file loaded at 0x8200000 of size 256 bytes to an
-ext4-formatted partition with the filename ``/boot/sample_file.hex``:
-
-::
-
-  =3D> ext4write mmc 2:2 0x82000000 /boot/sample_file.hex 0x100
-  256 bytes written in 138 ms (1000 Bytes/s)
-
-Regards,
-Anshul
+--mbS/zLh1qVQLl59Q--
