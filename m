@@ -4,130 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28C8CAC582
-	for <u-boot@archiver.kernel.org>; Sat, 13 Sep 2025 00:32:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76842CAC582
+	for <u-boot@archiver.kernel.org>; Sat, 13 Sep 2025 00:38:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20123830A0;
-	Sat, 13 Sep 2025 02:32:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D9BB2830A0;
+	Sat, 13 Sep 2025 02:38:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="t7jFHiWw";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mer7fGaS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5EB5833EB; Sat, 13 Sep 2025 02:32:35 +0200 (CEST)
+ id F01C6833F9; Sat, 13 Sep 2025 02:38:31 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59C4382ADA
- for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 02:32:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BDBD82ADA
+ for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 02:38:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1757723552; x=1758328352; i=xypron.glpk@gmx.de;
- bh=n6eFhd/HSFglf1a1GPxWGVCJYMhKoZDhHWgx5bXwBkc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:Cc:From:In-Reply-To:Content-Type:
+ s=s31663417; t=1757723909; x=1758328709; i=xypron.glpk@gmx.de;
+ bh=A+XX7wAVZxBMng+o6cZLbH5tu10qhEt1W106aPyhwQk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=t7jFHiWw+5kpSYgj8bX2d7YiS44l0ugGD21OltDPP7sMqqxZ1DJwnQh0kkP602xe
- wAn+9SU6TE7o3zHmU7SHdIpavuqro5LKHl2K/Tc081NHV++Quk+rpnLqKdE2QZI6j
- ti9rSWJZhcJii350kr2ZEQXpPclXhfkJ+QBrSMaS+dGNv4DzuW8qnnBXboAGAeXD3
- W5jhxFWDHcb38gFrXfwuhxAmz4dnnzIiC+5JBsm1XTgunOb8/nsfP3b7O/BkOgN8S
- baiHU4gVl5PGWxq/YxIHpf+CZSx9Z0P4hwKrZnAi9HEXOBZzJoXrQMtJxXOudqWjv
- XMnL8mM1rwHmcD/6sg==
+ b=mer7fGaSzh3jTb6tVjFAdeiRd4cYh7yqJ4LeDxyRBKwkypAzKJMXwp0LqNqIAdEG
+ +CVE2kmTKEof/UgmRhmV3puQAbVkvc6YGnlv9a7XfuWZX69tQuFcuJkyw6i/x8Prc
+ 3SKd/5+bO3EDHnujGpsnKYOLmRkCsjIp37vejEiJEqdolP9u5SCJGqLVO9wfNAbGe
+ IZU8JJp7KewbvK63mflJTDerlNnAwNawcC3UtsphWZnaWVDB8t8tfBw+jNp6F3m7Z
+ O2HG3qyI1K+5vDOOmOuIbITTHJVrh/wC/aYuBOAy6fRnWtSP9AIx9OFVaHu3dDUIg
+ j7R+Y555WytvbJcg3A==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MY68T-1uuDOv0rJF-00UkMI; Sat, 13
- Sep 2025 02:32:32 +0200
-Message-ID: <19c6abe0-c71e-4542-bf61-0e9f57c74c58@gmx.de>
-Date: Sat, 13 Sep 2025 02:32:26 +0200
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MvK0X-1u6dfA22Nt-00w8aK; Sat, 13
+ Sep 2025 02:38:29 +0200
+Message-ID: <fc56fec2-68d6-41b3-ba0e-ee649d443456@gmx.de>
+Date: Sat, 13 Sep 2025 02:38:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: Convert README.commands.spl to rST
+Subject: Re: [PATCH] doc: Remove README.commands.itest
 To: Tom Rini <trini@konsulko.com>
-References: <20250912230257.4145026-1-trini@konsulko.com>
-Content-Language: en-US
 Cc: u-boot@lists.denx.de
+References: <20250912230252.4144988-1-trini@konsulko.com>
+Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250912230257.4145026-1-trini@konsulko.com>
+In-Reply-To: <20250912230252.4144988-1-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:sT62Wsx2HIYzbhNDkJt7j7g06MCwpXGj0TeZcSJgkuDilHWp9Iu
- jQokDDJOO8oRs75KsZTuJn7sXqgKz9yIDaSaZv+EsP6Qd+/qlwI7cBQM6lU7kfLUqV9Qtjm
- TV/SbrKvdx0olhwQJvjHMjoiTIeIjFYmvteMtdPmk6ChG+wYw5QW11Fzr1Epax0621UluN/
- 6Aw3yxc8GO0N1yu8sHmvA==
-UI-OutboundReport: notjunk:1;M01:P0:qeFHkASvIjg=;qajzsokDfPHhBubiOpldQWC+9kz
- 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
+X-Provags-ID: V03:K1:3kY8wnqmvm5NU2OON0o34Vnu5Vsmt7MUjKkMG7XiEyEN4mtCTBm
+ iqCzlupGlzgU3wNlS90N0ncno4QW42Y19ZAKPSXkKtyzPlTGN5l1czNBhzQjrr0spH7v9fN
+ DnM1WH4Cz+XzwNXoRHwJ9PqcLflOApnu8N7oTfc8Ue4J+aEDEJzyPFg39dNkhemaqnye97m
+ q1jSfPy7TFA/55y7MeIPw==
+UI-OutboundReport: notjunk:1;M01:P0:K307HusQ5jc=;IV5zwaQB96cP3+OMeY3FuEQgFtz
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,218 +144,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/13/25 01:02, Tom Rini wrote:
-> This converts the existing README.commands.spl file to rST as
-> doc/usage/cmd/spl.rst and adds it to the command index. Minimal
-> rewording is done to the previous contents, to make it fit better with
-> the overall style of documentation now.
+> We currently document this command in doc/usage/cmd/itest.rst and this
+> documentation is more comprehensive than the older README file. Delete
+> the older file.
 >=20
 > Signed-off-by: Tom Rini <trini@konsulko.com>
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
 > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > ---
->   doc/README.commands.spl | 31 --------------------------
->   doc/usage/cmd/spl.rst   | 48 +++++++++++++++++++++++++++++++++++++++++
->   doc/usage/index.rst     |  1 +
->   3 files changed, 49 insertions(+), 31 deletions(-)
->   delete mode 100644 doc/README.commands.spl
->   create mode 100644 doc/usage/cmd/spl.rst
+>   doc/README.commands.itest | 16 ----------------
+>   1 file changed, 16 deletions(-)
+>   delete mode 100644 doc/README.commands.itest
 >=20
-> diff --git a/doc/README.commands.spl b/doc/README.commands.spl
+> diff --git a/doc/README.commands.itest b/doc/README.commands.itest
 > deleted file mode 100644
-> index ecfd3ca9ee58..000000000000
-> --- a/doc/README.commands.spl
+> index 5e0fe86247a8..000000000000
+> --- a/doc/README.commands.itest
 > +++ /dev/null
-> @@ -1,31 +0,0 @@
-> -The spl command is used to export a boot parameter image to RAM. Later
-> -it may implement more functions connected to the SPL.
+> @@ -1,16 +0,0 @@
+> -A slow day today so here is a revised itest command with provisional
+> -support for comparing strings as well :-))
 > -
-> -SUBCOMMAND EXPORT
-> -To execute the command everything has to be in place as if bootm should=
- be
-> -used. (kernel image, initrd-image, fdt-image etc.)
+> -Now table driven to allow the operators
+> --eq, -ne, -lt, -gt, -le, -ge, =3D=3D, !=3D, <>, <, >, <=3D, >=3D
 > -
-> -export has two subcommands:
-> -	atags: exports the ATAGS
-> -	fdt: exports the FDT
-> -
-> -Call is:
-> -spl export <fdt|atags> [kernel_addr] [initrd_addr] [fdt_addr if fdt]
-> -
-> -
-> -TYPICAL CALL
-> -
-> -on OMAP3:
-> -nandecc hw
-> -nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
-> -spl export atags			/* export ATAGS */
-> -nand erase 0x680000 0x20000		/* erase - one page */
-> -nand write 0x80000100 0x680000 0x20000	/* write the image - one page */
-> -
-> -call with FDT:
-> -nandecc hw
-> -nand read 0x82000000 0x280000 0x400000	/* Read kernel image from NAND*/
-> -tftpboot 0x80000100 devkit8000.dtb /* Read fdt */
-> -spl export fdt 0x82000000 - 0x80000100	/* export FDT */
-> -nand erase 0x680000 0x20000		/* erase - one page */
-> -nand write <adress shown by spl export> 0x680000 0x20000
-> diff --git a/doc/usage/cmd/spl.rst b/doc/usage/cmd/spl.rst
-> new file mode 100644
-> index 000000000000..59471c65a623
-> --- /dev/null
-> +++ b/doc/usage/cmd/spl.rst
-> @@ -0,0 +1,48 @@
-> +.. SPDX-License-Identifier: GPL-2.0+:
-
-%s/GPL-2.0+/GPL-2.0-OR-LATER/
-
-Cf. https://spdx.org/licenses/GPL-2.0-or-later.html
-
-> +
-> +.. index::
-> +   single: spl (command)
-> +
-> +spl command
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +Synopsis
-> +--------
-> +
-> +::
-> +
-> +    spl export <fdt|atags> [kernel_addr] [initrd_addr] [fdt_addr if fdt=
-]
-
-Those brackets cannot be correct. I definitively cannot remove the=20
-kernel_addr and provide an initrd_addr instead. Do you mean:
-
-spl export <fdt|atags> [kernel_addr [initrd_addr [fdt_addr if fdt]]]
-
-> +
-> +Description
-> +-----------
-> +
-> +The *spl* command is used to export a boot parameter image to RAM. Late=
+> -Uses the expected command modifier for integer compares of width 1, 2 o=
 r
-
-In the current state the man-page is not very helpful. Please, move the=20
-more extensive description from doc/develop/falcon.rst here.
-
-* I would not know what a "boot parameter image" might be. Please,=20
-explain it for a novice user.
-* Please, describe what each parameter is used for.
-* Please, explain what atags refers to. I would assume you mean what is=20
-described in=20
-https://developer.arm.com/documentation/den0013/0400/Boot-Code/Booting-Lin=
-ux/Kernel-parameters-using-ATAGs.=20
-But don't expect a novice user to know.
-* What does the command do if "fdt" is used?
-
-> +it may implement more functions connected to the SPL.
-> +
-> +spl export
-> +~~~~~~~~~~
-
-This heading makes no sense.
-
-> +
-> +To execute the command everything has to be in place as if bootm should=
- be
-
-Bootm can for instance boot a FIT image with an EFI binary.
-I wouldn't expect this to work when booting in Falcon mode where EFI is=20
-not available.
-
-This sentence should be replaced by a meaningful description.
-
-> +used. (kernel image, initrd-image, fdt-image if used). The first argume=
-nt
-> +passed to the export subcommand must be either atags or fdt, which sign=
-ifies if
-
-%s/signifies/indicates/
-
-> +we are preparing an ATAGS or device tree for export.
-
-Isn't ATAGs the plural form of ATAG?
-Why would you write 'an ATAGS' if there are multiple tags?
-
-Please, describe under which circumstances and with which values these=20
-environment variables are filled and what they are used for.
-
-* fdtargsaddr
-* fdtargslen
-
-> +
-> +Example
-> +-------
-> +
-> +On an OMAP3 platform with ATAGS::
-> +
-> +    =3D> nandecc hw
-> +    =3D> nand read 0x82000000 0x280000 0x400000	/* Read kernel image fr=
-om NAND*/
-
-What format must the image have to be used for booting? A FIT image?
-
-> +    =3D> spl export atags			/* export ATAGS */
-
-Is spl export atags never used with kernel_addr, initrd_addr, fdt_addr?
-
-Does `spl export atags` without further arguments create any ATAGs?
-Where would it take the values from?
-
-> +    =3D> nand erase 0x680000 0x20000		/* erase - one page */
-> +    =3D> nand write 0x80000100 0x680000 0x20000	/* write the image - on=
-e page */
-
-What is written to nand here?
-What relevance have these magic addresses?
-How would a user know which address to use?
-
-> +
-> +On an OMAP3 platform with device tree::
-> +
-> +    =3D> nandecc hw
-> +    =3D> nand read 0x82000000 0x280000 0x400000	/* Read kernel image fr=
-om NAND*/
-> +    =3D> tftpboot 0x80000100 devkit8000.dtb /* Read fdt */
-> +    =3D> spl export fdt 0x82000000 - 0x80000100	/* export FDT */
-
-Why would anybody use a device-tree from a TFTP server in conjunction=20
-with a kernel from nand?
-
-> +    =3D> nand erase 0x680000 0x20000		/* erase - one page */
-> +    =3D> nand write <adress shown by spl export> 0x680000 0x20000
-
-The address seems to be gd->bd->bi_boot_params which is hard coded in=20
-board files and not visible to the user. This is just gruesome. The=20
-address should be exported to a variable to be usable in scripts.
-
-Which customizing is needed to use the spl command? These settings seem=20
-to be relevant and should be described in sufficient detail:
-
-CONFIG_CMD_SPL
-CONFIG_OF_LIBFDT
-CONFIG_CMD_SPL_WRITE_SIZE
-CONFIG_SUPPORT_PASSING_ATAGS
-CONFIG_SYS_BOOT_RAMDISK_HIGH
-
-Which return values does the command provide?
-
-Best regards
-
-Heinrich
-
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index 3a48521d5d56..a34db5cb627b 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -124,6 +124,7 @@ Shell commands
->      cmd/sntp
->      cmd/sound
->      cmd/source
-> +   cmd/spl
->      cmd/tcpm
->      cmd/temperature
->      cmd/test
+> -4 bytes of .b, .w, .l and the new modifer of .s for a string compare.
+> -String comparison is over the length of the shorter, this hopefully
+> -avoids missing terminators when using an indirect pointer.
+> -
+> -eg.
+> -if itest.l *40000 =3D=3D 12345678 then; ....
+> -if itest.w *40000 !=3D 1234 then; ....
+> -if itest.b *40000 >=3D 12 then; ....
+> -if itest.s *40000 -eq hello then; ....
 
