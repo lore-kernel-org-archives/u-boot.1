@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B767CAC582
-	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 12:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DC97CAC587
+	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 13:13:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FF3180B9B;
-	Sun, 14 Sep 2025 14:24:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id A5CE981E13;
+	Sun, 14 Sep 2025 15:13:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="iEGR++Or";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KuB+LmeY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03B5883071; Sun, 14 Sep 2025 14:24:05 +0200 (CEST)
-Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com
- [IPv6:2001:41d0:203:375::aa])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 65DA983043; Sat, 13 Sep 2025 18:39:34 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9798D80077
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 14:24:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 160FB82AE1
+ for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 18:39:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Mime-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1757852642;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bbJb38WU3tO7kUGJwBpvRDPP1Fe4TJZcvMNUncxM2gU=;
- b=iEGR++OroNxaQYxbWB9OFCPCoX9OkzQzDnDGKNs1mexetml+pUXyxm8RwZyT6n91h0H6Ji
- 2dqn8ohy441Nzjd20b2bam4l6ljat2SojA4bLudHUxr8XcFOR5hZWc2Xqisythym35S4R2
- NzvHXWfzC8718VvcGSCLF0ja4W9i6c3nVm4jVscEkrLzLjJpSE3Xm08xfosFJX8oz7YmC1
- 7L3JXDjum2qzHhJJWZ6mbhfJvw99cqb19vaD8//WlcSKEH8O0AjMwgnlm2yZRYOH4+j7YL
- YlnA/LiXu/oBlEf78bWSTAo62Mnyv7VqBzcCRgSd/O0kGPxDVhM6+b98A/OHRw==
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sun, 14 Sep 2025 12:23:58 +0000
-Message-Id: <DCSIR5UWG23F.17XD45AIS72TP@postmarketos.org>
-To: "Simon Glass" <sjg@chromium.org>, "Ferass El Hafidi"
- <funderscore@postmarketos.org>
-Cc: "Heinrich Schuchardt" <heinrich.schuchardt@canonical.com>, "Jonas
- Karlman" <jonas@kwiboo.se>, <u-boot@lists.denx.de>,
- <u-boot-amlogic@groups.io>, <~postmarketos/upstreaming@lists.sr.ht>, "Tom
- Rini" <trini@konsulko.com>, "Neil Armstrong" <neil.armstrong@linaro.org>,
- "Peng Fan" <peng.fan@nxp.com>, "Jaehoon Chung" <jh80.chung@samsung.com>,
- "Beniamino Galvani" <b.galvani@gmail.com>
-Subject: Re: [PATCH RFC 4/9] serial: serial_meson: add minimal non-DM driver
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: "Ferass El Hafidi" <funderscore@postmarketos.org>
-References: <20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org>
- <20250907-spl-gx-v1-4-37395d9ff5af@postmarketos.org>
- <829fe59a-10e5-4cd2-a032-d293d87f68d1@gmx.de>
- <DCPE9A29ADNG.5XDSJ73VEPCS@postmarketos.org>
- <3875c210-7d29-4bca-b535-0522dc615cc8@canonical.com>
- <DCQ2ZF3T8VMM.1JN4QJ324NFM2@postmarketos.org>
- <CAFLszTjxY6c0unXvdcjC36hhpB-BwxM_FcgpRdkXBa+V3GynvQ@mail.gmail.com>
-In-Reply-To: <CAFLszTjxY6c0unXvdcjC36hhpB-BwxM_FcgpRdkXBa+V3GynvQ@mail.gmail.com>
-X-Migadu-Flow: FLOW_OUT
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-7761b392d50so1701835b3a.0
+ for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 09:39:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757781570; x=1758386370; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mlFir9Yk02C6sbtGyqDzDAhQRzKklGr/tmCxz+XzNrQ=;
+ b=KuB+LmeY8XQ3JMqDMQKFOSr9CLP4mCQi4HqEBwGfRGwFmjpV9Pj1MiUvhDVDROQ2v3
+ SNCT4WfzVg3j/IK1uXu1saYD0gkSsUEsVdddchNGVCjHHG53zrIFKopZnuuEsvPQm6ET
+ RLqn2t1BjQv/ehxb9LY4CyZrb/sK7lzGFYcsCGDAx2dhceNV8DeQL82OW0sBv9B4uzaS
+ K5FcUWOdJlu0yMKl617xfktOPQ9EAdgcHXTteY2JGi1T3yx89LezKsX5ggfPf8KZxDOX
+ jmtpuLEd67mWheHQ8H/0t88gUmLMNU1G6gQoWQBhtd2ghl+Kg/zE7Qe2YQ7aGh9oYvD0
+ p4Mw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757781570; x=1758386370;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mlFir9Yk02C6sbtGyqDzDAhQRzKklGr/tmCxz+XzNrQ=;
+ b=tZgbrQnoN4nKYpO5jJLoPmKZeqpSoK2k5AcWjcSgWZ0GVBHWWVeLE2IVTRRmkoEEjK
+ SCcc7TwMd6D0H8EDmTPjXENFchQDxxj9qF2c9nIRd9F3xVA5FRK6HS9jqBEGw5o25ir6
+ AzBrCcVxtBe1c40mcLg8+yZsE5bVYPklY36kJK3pbO2YP2tTlrbXCrBAl5auMWDG66Kp
+ zmP+8yHx9+taweOpclGMoWI7vcPgwZeu9NP6LlEsIAC+VjKn5mDwwpjuO2NLJsQ4lavq
+ 3sObUoD9fn/LqFMZWjicwsWP4pAOQUPGkbjYkRYcAUaU/3vKSvIjDc8KBaGjGN0b46Fp
+ BB8A==
+X-Gm-Message-State: AOJu0Yzb5t5fOfZsQ0fHBFkKXIbBXBbv02XCHzVQvTXwbNsNeU8WhOTB
+ 1g/icwE/uDZ+SWL/I3wo+BQ7PimBW4hc6emkghmWpbKy9ClBlj4fDxpNrqCrHlaR
+X-Gm-Gg: ASbGncsRi2xnMSiXkrc8qRd4ojdf8UX5uPUnV5Ugif/HsGqCwT05X/dz98x2EiScYdT
+ QjSBckyoDk7Y3vCbkSUXJ5DLTTUQQAfUlwFDfql8lKPPqwjFAUWd4tLTwhOkwOUDXcCqZS5riwC
+ 3iau+BXkWctmByiVoFbYqs8qHIOHCWw/zmMlg/uaZN5fJt4z6HxlqpNtKzgRE9iZSSi4RPusRuY
+ mTc9GIA2FUuPWlWYc8b0QhH5mT2bP4SedxASroHVH+deY4o9mN405y222AxociHJygjY7LvN5Jz
+ P041lExKUMbPaawhlcYEcHxKKu4h1jenUReSG8GK8zamFpUthb4illZMlZOHgl7CemubeJ357oY
+ uW0ogPjoEjZAbbKIC/ahOig3Y5JV9JkyPIA6k1FoC4ZaaQQWaEyQGI76nlpQ+
+X-Google-Smtp-Source: AGHT+IGOjSf91mgP5fBBn04H9MW66EsCg9NOIPBcwwAuR8NmexF8XjwEf0kEmQ/Li/usKTMx4+Fttg==
+X-Received: by 2002:a05:6a00:2d22:b0:772:6f95:f326 with SMTP id
+ d2e1a72fcca58-7761209531cmr7302432b3a.10.1757781570233; 
+ Sat, 13 Sep 2025 09:39:30 -0700 (PDT)
+Received: from localhost.localdomain ([185.213.82.147])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-77607a47d7fsm8804270b3a.31.2025.09.13.09.39.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 13 Sep 2025 09:39:29 -0700 (PDT)
+From: briansune <briansune@gmail.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	briansune <briansune@gmail.com>
+Subject: [PATCH] cmd/dma: fix generic naming, spacing, and Dependencies
+Date: Sun, 14 Sep 2025 00:39:13 +0800
+Message-ID: <20250913163913.395-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.47.1.windows.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 14 Sep 2025 15:13:36 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,92 +96,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri Sep 12, 2025 at 11:41 PM UTC, Simon Glass wrote:
-> Hi Ferass,
->
-> On Thu, 11 Sept 2025 at 09:37, Ferass El Hafidi
-> <funderscore@postmarketos.org> wrote:
->>
->> On Wed Sep 10, 2025 at 8:30 PM UTC, Heinrich Schuchardt wrote:
->> > On 9/10/25 22:14, Ferass El Hafidi wrote:
->> >> On Wed Sep 10, 2025 at 7:53 PM UTC, Heinrich Schuchardt wrote:
->> >>> <...>
->> >>>> +static int meson_serial_getc(void)
->> >>>> +{
->> >>>> +  struct meson_uart *const uart =3D (struct meson_uart *)CONFIG_VA=
-L(DEBUG_UART_BASE);
->> >>>> +  uint32_t status =3D readl(&uart->status);
->> >>>> +
->> >>>> +  if (status & AML_UART_RX_EMPTY)
->> >>>> +          return -EAGAIN;
->> >>>> +
->> >>>> +  if (status & AML_UART_ERR) {
->> >>>> +          u32 val =3D readl(&uart->control);
->> >>>> +
->> >>>> +          /* Clear error */
->> >>>> +          val |=3D AML_UART_CLR_ERR;
->> >>>> +          writel(val, &uart->control);
->> >>>> +          val &=3D ~AML_UART_CLR_ERR;
->> >>>> +          writel(val, &uart->control);
->> >>>> +
->> >>>> +          /* Remove spurious byte from fifo */
->> >>>> +          readl(&uart->rfifo);
->> >>>> +          return -EIO;
->> >>>> +  }
->> >>>> +
->> >>>> +  return readl(&uart->rfifo) & 0xff;
->> >>>> +}
->> >>>> +
->> >>>> +static int meson_serial_tstc(void)
->> >>>> +{
->> >>>> +  struct meson_uart *const uart =3D (struct meson_uart *)CONFIG_VA=
-L(DEBUG_UART_BASE);
->> >>>
->> >>> CONFIG_SPL_DEBUG_UART_BASE only exists for CONFIG_DEBUG_UART=3Dy and
->> >>> CONFIG_SPL=3Dy. Shall all configurations depend on CONFIG_DEBUG_UART=
-=3Dy?
->> >>>
->> >>> Creating this dependency does not look right to me.
->> >>>
->> >>
->> >> All Amlogic defconfigs have CONFIG_DEBUG_UART enabled, but I can remo=
-ve
->> >> the dependency on CONFIG_DEBUG_UART_BASE if you think it doesn't look
->> >> right.
->> >
->> > We should avoid the possibility of build failures for changed configur=
-ation.
->> >
->> > Will CONFIG_MESON_SERIAL depend on CONFIG_DEBUG_UART
->> > or will CONFIG_ARCH_MESON select CONFIG_DEBUG_UART?
->>
->> Then it might be best to not use DEBUG_UART_BASE.  I'll fix that for
->> next revision.  Thanks!
->
-> I've been thinking about doing something about a minimal UART (and
-> i2c) for a while.
->
-> Before driver model we just called serial_putc() and *the* serial
-> driver would handle it. Can we do something similar here?
->
-> My suggestion for an API:
->
-> CONFIG_SERIAL_ONE to indicate that driver model is not used for serial
->
-> Then in serial-uclass.c update serial_putc() to use that config and
-> call serial_one_putc(int ch), with that function being defined in the
-> only serial driver that is compiled in. Update serial_init() to call
-> serial_one_init().
->
-> That way we keep things compatible with driver model and avoid
-> building on the old serial.c
->
-> This is similar to how the debug UART, but the debug UART is special.
+This adds a new U-Boot command 'c5_pl330_dma' for Cyclone V SoCDK
+boards. It provides access to the Reset Manager's Per2ModRst register
+to release the reset for ARM PrimeCell PL330 DMA channels. This allows
+software to initialize and use the PL330 DMA controller properly after
+reset.
 
-Sounds good to me, I'm excited to see a very minimal serial driver API
-that doesn't rely on the legacy API, while still being small enough for
-SPL.
+Signed-off-by: briansune <briansune@gmail.com>
+---
+ cmd/4913           |  0
+ cmd/5036           |  0
+ cmd/Kconfig        |  9 +++++++++
+ cmd/Makefile       |  1 +
+ cmd/c5_pl330_dma.c | 50 ++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 60 insertions(+)
+ create mode 100644 cmd/4913
+ create mode 100644 cmd/5036
+ create mode 100644 cmd/c5_pl330_dma.c
 
->
-> Regards,
-> Simon
+diff --git a/cmd/4913 b/cmd/4913
+new file mode 100644
+index 00000000000..e69de29bb2d
+diff --git a/cmd/5036 b/cmd/5036
+new file mode 100644
+index 00000000000..e69de29bb2d
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 29de857ba7c..75c388d19da 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1791,6 +1791,15 @@ endmenu
+ 
+ menu "Shell scripting commands"
+ 
++if TARGET_SOCFPGA_CYCLONE5_SOCDK
++
++config CMD_C5_PL330_DMA
++	bool "Release Reset DMA Channels for PL330 Handshake"
++	help
++	  Provides access to Reset Manager Per2ModRst. Enables DMA
++	  channels for ARM PrimeCell PL330 via reset release.
++endif
++
+ config CMD_CAT
+ 	bool "cat"
+ 	help
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 36e79cc3c28..d16e6fae20a 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -42,6 +42,7 @@ obj-$(CONFIG_CMD_BOOTI) += booti.o
+ obj-$(CONFIG_CMD_BTRFS) += btrfs.o
+ obj-$(CONFIG_CMD_BUTTON) += button.o
+ obj-$(CONFIG_CMD_CAT) += cat.o
++obj-$(CONFIG_CMD_C5_PL330_DMA) += c5_pl330_dma.o
+ obj-$(CONFIG_CMD_CACHE) += cache.o
+ obj-$(CONFIG_CMD_CBFS) += cbfs.o
+ obj-$(CONFIG_CMD_CEDIT) += cedit.o
+diff --git a/cmd/c5_pl330_dma.c b/cmd/c5_pl330_dma.c
+new file mode 100644
+index 00000000000..5267ea2bd44
+--- /dev/null
++++ b/cmd/c5_pl330_dma.c
+@@ -0,0 +1,50 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Brian Sune <briansune@gmail.com>
++ */
++
++#include <vsprintf.h>
++#include <command.h>
++#include <asm/io.h>
++
++#include <asm/arch/base_addr_ac5.h>
++
++#define RSTMGR_PERMODRST 0x18   /* PERMODRST register offset */
++
++static int do_dmareset(struct cmd_tbl *cmdtp, int flag, int argc,
++		       char * const argv[])
++{
++	u8 val;
++	int i, ch;
++
++	if (argc < 2) {
++		printf("Usage: dmareset <channel 0-7> [<channel 0-7> ...]\n");
++		return CMD_RET_USAGE;
++	}
++
++	/* Read current register value */
++	val = readb(SOCFPGA_RSTMGR_ADDRESS + RSTMGR_PERMODRST);
++
++	/* Iterate over all channels given as arguments */
++	for (i = 1; i < argc; i++) {
++		ch = simple_strtoul(argv[i], NULL, 0);
++		if (ch < 0 || ch > 7) {
++			printf("Error: channel must be 0-7\n");
++			return CMD_RET_USAGE;
++		}
++		val &= ~(1 << ch);
++		printf("PL330 DMA channel %d reset released\n", ch);
++	}
++
++	/* Write back */
++	writeb(val, (SOCFPGA_RSTMGR_ADDRESS + RSTMGR_PERMODRST));
++
++	return 0;
++}
++
++U_BOOT_CMD(
++	dmareset, 8, 0, do_dmareset,
++	"Release PL330 DMA channel reset(s) for SoCFPGA",
++	"dmareset <channel 0-7> [<channel 0-7> ...]  - release reset for one or more DMA channels"
++);
++
+-- 
+2.47.1.windows.1
+
