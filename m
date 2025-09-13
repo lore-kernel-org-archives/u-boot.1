@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03D47CAC587
-	for <u-boot@archiver.kernel.org>; Sat, 13 Sep 2025 15:51:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C68DACAC58E
+	for <u-boot@archiver.kernel.org>; Sat, 13 Sep 2025 15:52:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A63382FC7;
-	Sat, 13 Sep 2025 17:51:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E0EB382FC7;
+	Sat, 13 Sep 2025 17:52:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YEUyMMxW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g4JOd0NQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F359F83043; Sat, 13 Sep 2025 17:51:06 +0200 (CEST)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id AEE8D833EB; Sat, 13 Sep 2025 17:52:00 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFAB382AE1
- for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 17:51:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9010A82AE1
+ for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 17:51:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-423fc1532bdso3918675ab.1
- for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 08:51:04 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-3f663c571e2so29038275ab.0
+ for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 08:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757778663; x=1758383463; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1757778717; x=1758383517; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CI4rGP583IiO2r9ZtJzDJj+2IzyEHheklXjgvyxtgV0=;
- b=YEUyMMxW74iJLCiFXcfhFWF5gR/MtTIG++vLXvkF3E4zX1TWNrW8pB4Pnxaaw/47sQ
- fU4oCocPa37eF5qh82m5jjZtyg0Sp2Pxy/dv/5FxQn+nGdgPcdXuNLLQsk6NtS3en4/y
- yWwmpktkB17O0i99IIqj+7VAc0d74L2OBi2sE=
+ bh=lCWrRPMdxOHsbpQNfgWAI75OJGeg4cXFBKXdyXqxv1M=;
+ b=g4JOd0NQ2HMx9WX3/yckquhLr+D7oqMJ8VZdfBJQHtgbOgHejfgRjG2AdXa2e7gM9N
+ BlGP+2nxOgB7VNkdulDMI5aHuRu6zH803A+mwjcRsABJjm99K8oJm+PT/2jmnQElj+VD
+ X7LHWscwvAIs6jfz9gH6TdOQQs4RtVs2s1L90=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757778663; x=1758383463;
+ d=1e100.net; s=20230601; t=1757778717; x=1758383517;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CI4rGP583IiO2r9ZtJzDJj+2IzyEHheklXjgvyxtgV0=;
- b=Jgl2irxSrasdDxBLkte9GIP7BlqZbXBpjv7x40Xn4vGZOOA80xMrW1CZztZEfwNAnI
- 1zhY9CWKv2xI1WHxt390aUpQT8tU+1pUNVk+FEQZIAopmo0gvqpSDMH8O2kxxDMvnkpU
- 8+zb0OjC+k62ERVxRyHT9oPAU2AGcZieds6aRPLbinXDWWG4e+XUfDekjHW6eh+701ne
- X1kBADSObZ25mWt507Uk9q/qVmdva8XYCr8t39RzY6T+APtcqzapAeGsNwvwK1IjmD7t
- 9nqj3Jsaf2YhYl0MfoXC50o9zY3y30cA0oRuaFOW9hJMNZWhiUh6IY8nHhkoPE5PwoUZ
- 13oA==
+ bh=lCWrRPMdxOHsbpQNfgWAI75OJGeg4cXFBKXdyXqxv1M=;
+ b=hSTr3t0tls4VGX9XwMG3VrJXN+7kaKeGad1oB7brIfLHKU0DlRTV45A/Y1mcSwt0HJ
+ KHjsFFj6OqkiriaqhnJa42rvzU6vWXuMThn/S86rP9ooL1P8WtYWKP3ApU02Kqs8Ytos
+ e7Jk/0UKD2Tcqd3z5gz7kXuiBn4PSrVCCIdBYjKQ8cOh2RzOvlWkKlJ4PwHe5kwaS3Ae
+ A+Wets+eSTEcGNStLNJgIT5t1mN6JVacO53O41G2609a/nZDqPxQ/iuff74qubpWhygT
+ h8abKfuKHWI+54Szdy3NjIBjYSfwyAkRbuRk1nkCFCAg6llNjZ5xQ2Jnm+f9XoFWCFTE
+ OukA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXuYxHSIMdreEM6grE+PT63PkUjDiqmiEAWaBE4iLADcMRIMClIyFyK0ZcGz7Zb1sagvbYYPQw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQJiWnn0vP1JqL9zcfzxOHvhDBbu2k0OAam5DVcTlFMWjAuccD
- whuM310IcJ8wC+SJzaUWLLJyUcrVMjUzJ8h2371pUwT9abTBYTXyPnHnCkb7fCdwrP0=
-X-Gm-Gg: ASbGncvGjVy+rdRvEjTmNTHezoGcOXKfWu8qsW4NRz65xrneCFY40ACuQT8uLbukHZ6
- 4Rn8qTLlPpv9QhwiaAdDae3KPqE0nrlCOrkCyCjNewTAAaq5S4GDQJ/n7pXWREQD9sDBbwaDBHV
- Lr3rBJbpDZN947AbB0BarUkQh+/Auy/ys/MN6cF0DP5Oc5DTPtFHCYw+Zm8fNCN0G8Ts0eEyzVI
- yZZGgZ4QwRI+OZRfLJz0Du/hss1YnPc+j6fXvszjscBF8bMaGEtATt+beVG9cdg0ty0/7LLk8iO
- onu83wR9ya+2hsu+vOEOkdCa/JC1pjrR/YVR9anfOk6IRyBrZbdYLweQXBc5Nt6zccXgWT0eyez
- Lx4xgI5KtkYfQumb3pvrMVjFHdjK4RlI7ls/JGzMeB3gLRtRJduRY6JYsqju38OUx//Q=
-X-Google-Smtp-Source: AGHT+IF5XAI7vVNFJhqCF995C+BzWEJw9qawQbrSYrcAlpl/O7CBN9940QP5Fl/LqnbQckQehEUzuA==
-X-Received: by 2002:a05:6e02:1988:b0:3f3:86f:520c with SMTP id
- e9e14a558f8ab-4209d7e0f28mr83218675ab.7.1757778663380; 
- Sat, 13 Sep 2025 08:51:03 -0700 (PDT)
+ AJvYcCUXfVvS5UrAxtO/tTA1srNX612gnJe8r5LnAoSGcleiiDpEmStdXPIGtCOsfC6RgXqHQOMzs6U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyiNmAPkP0qxcCeCrOB+K2j+ELb6ZJ8ahMUa3+VJpwerwG2Mjt0
+ AGylxBw+JnSXg6HfDiH4y7sSMnkh8sseLKPEhGuySh4UYJoi5M2DAveoDlXb53vDXDvQ3XpFG9x
+ 9cvGf+F8=
+X-Gm-Gg: ASbGncuNSwS6SjngclOxznIihiD5+TlKidzJI/1nn0C+SF4B8bVZYTIMC7nGy0eukA5
+ gGaKcnSlEG+4SFr7E0BmI9FlugOVUmplVRkBWymMLtjzUTSGg+XzKam8n52hiXaRoIVgo5C5YQ0
+ paa+V7zdabj0wwAhWgmK6vsUiDzjwBHdEFkCAXoLW8/BndFu1pLDLizEbYtq9oVZfb4cSyJA+P8
+ iW0ZMTFtUqL5QFJqtFrb/vYyWTysx4JD4Z/UFN75gmJWv2jPMA8yw2QXfYk7t5sZebRjDSLfszg
+ rywME/WmAys5dy14xn+vEC6XpUpBImc4b5eeMF711FmWKToJ+xmWTnuavqmodhjwTHAbT6jeUNU
+ USfORSQArvXqervajXnB4ZG9FCeP+q5KjZr8U+9l/Mnzd7jeD+WEAGxQliXT0i8Zk+Rc=
+X-Google-Smtp-Source: AGHT+IF1jqV9mWo2lMY0Nq09GU20enCd5o7ikIJhROHiBa1MkwJwq0CWG2Xs0v/IB8GpulFcta5mqg==
+X-Received: by 2002:a05:6e02:1fe5:b0:41f:8265:4101 with SMTP id
+ e9e14a558f8ab-420a5782009mr78715045ab.30.1757778717285; 
+ Sat, 13 Sep 2025 08:51:57 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-41df8eb44besm34094855ab.22.2025.09.13.08.51.01
+ 8926c6da1cb9f-511f2efc550sm2824953173.4.2025.09.13.08.51.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Sep 2025 08:51:02 -0700 (PDT)
-Date: Sat, 13 Sep 2025 09:51:00 -0600
+ Sat, 13 Sep 2025 08:51:56 -0700 (PDT)
+Date: Sat, 13 Sep 2025 09:51:54 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ferass El Hafidi <funderscore@postmarketos.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- ~postmarketos/upstreaming@lists.sr.ht,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Beniamino Galvani <b.galvani@gmail.com>
-Subject: Re: [PATCH RFC 4/9] serial: serial_meson: add minimal non-DM driver
-Message-ID: <20250913155100.GA67696@bill-the-cat>
-References: <20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org>
- <20250907-spl-gx-v1-4-37395d9ff5af@postmarketos.org>
- <829fe59a-10e5-4cd2-a032-d293d87f68d1@gmx.de>
- <DCPE9A29ADNG.5XDSJ73VEPCS@postmarketos.org>
- <3875c210-7d29-4bca-b535-0522dc615cc8@canonical.com>
- <DCQ2ZF3T8VMM.1JN4QJ324NFM2@postmarketos.org>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] power: pfuze100: Ensure loop index is incremented
+Message-ID: <20250913155154.GF124814@bill-the-cat>
+References: <20250703-pfuze100_fix-v1-1-5f838e29d122@linaro.org>
+ <20250831153513.GA2800031@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Aky8MjDGurDYPGYM"
+ protocol="application/pgp-signature"; boundary="wYOhWtu/pc74PrcY"
 Content-Disposition: inline
-In-Reply-To: <DCQ2ZF3T8VMM.1JN4QJ324NFM2@postmarketos.org>
+In-Reply-To: <20250831153513.GA2800031@bill-the-cat>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,83 +100,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Aky8MjDGurDYPGYM
+--wYOhWtu/pc74PrcY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 11, 2025 at 03:37:07PM +0000, Ferass El Hafidi wrote:
-> On Wed Sep 10, 2025 at 8:30 PM UTC, Heinrich Schuchardt wrote:
-> > On 9/10/25 22:14, Ferass El Hafidi wrote:
-> >> On Wed Sep 10, 2025 at 7:53 PM UTC, Heinrich Schuchardt wrote:
-> >>> <...>
-> >>>> +static int meson_serial_getc(void)
-> >>>> +{
-> >>>> +	struct meson_uart *const uart =3D (struct meson_uart *)CONFIG_VAL(=
-DEBUG_UART_BASE);
-> >>>> +	uint32_t status =3D readl(&uart->status);
-> >>>> +
-> >>>> +	if (status & AML_UART_RX_EMPTY)
-> >>>> +		return -EAGAIN;
-> >>>> +
-> >>>> +	if (status & AML_UART_ERR) {
-> >>>> +		u32 val =3D readl(&uart->control);
-> >>>> +
-> >>>> +		/* Clear error */
-> >>>> +		val |=3D AML_UART_CLR_ERR;
-> >>>> +		writel(val, &uart->control);
-> >>>> +		val &=3D ~AML_UART_CLR_ERR;
-> >>>> +		writel(val, &uart->control);
-> >>>> +
-> >>>> +		/* Remove spurious byte from fifo */
-> >>>> +		readl(&uart->rfifo);
-> >>>> +		return -EIO;
-> >>>> +	}
-> >>>> +
-> >>>> +	return readl(&uart->rfifo) & 0xff;
-> >>>> +}
-> >>>> +
-> >>>> +static int meson_serial_tstc(void)
-> >>>> +{
-> >>>> +	struct meson_uart *const uart =3D (struct meson_uart *)CONFIG_VAL(=
-DEBUG_UART_BASE);
-> >>>
-> >>> CONFIG_SPL_DEBUG_UART_BASE only exists for CONFIG_DEBUG_UART=3Dy and
-> >>> CONFIG_SPL=3Dy. Shall all configurations depend on CONFIG_DEBUG_UART=
-=3Dy?
-> >>>
-> >>> Creating this dependency does not look right to me.
-> >>>
-> >>=20
-> >> All Amlogic defconfigs have CONFIG_DEBUG_UART enabled, but I can remove
-> >> the dependency on CONFIG_DEBUG_UART_BASE if you think it doesn't look
-> >> right.
-> >
-> > We should avoid the possibility of build failures for changed configura=
-tion.
-> >
-> > Will CONFIG_MESON_SERIAL depend on CONFIG_DEBUG_UART
-> > or will CONFIG_ARCH_MESON select CONFIG_DEBUG_UART?
+On Sun, Aug 31, 2025 at 09:35:13AM -0600, Tom Rini wrote:
+> On Thu, Jul 03, 2025 at 12:31:50PM +0100, Andrew Goodbody wrote:
 >=20
-> Then it might be best to not use DEBUG_UART_BASE.  I'll fix that for
-> next revision.  Thanks!
+> > The for loop in se_desc uses i as the loop index and also to cause the
+> > loop to end if the passed in name is not found. However i is not
+> > incremented which could cause the loop to continue indefinitely and
+> > access out of bounds memory.
+> > Add an increment of i to ensure that the loop terminates correctly in
+> > the case where name is not found.
+> >=20
+> > This issue found by Smatch.
+> >=20
+> > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> > ---
+> >  drivers/power/regulator/pfuze100.c | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> I size tested this as part of merging and saw unexpected shrinkage. In
+> turn, this got me to look harder at the code and I think the best answer
+> is to refactor things so that se_desc(...) follow the normal (linux
+> kernel) pattern of for (i =3D 0; i < ARRAY_SIZE(desc); i++) instead of
+> being passed size. That's I think the root of this confusion too. I'll
+> post a patch shortly.
 
-The way we normally solve these kind of things, since they aren't
-actually configurable (it's part of the chip itself) is just #define
-them either in the driver header or some <asm/arch/..> header file.
+While I really wanted to make this suggested change, I'm just missing
+something as to how it should work, and perhaps the better answer is to
+rework the caller a bit to handle the check inline? I'm not sure...
 
 --=20
 Tom
 
---Aky8MjDGurDYPGYM
+--wYOhWtu/pc74PrcY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMWS3wAKCRAr4qD1Cr/k
-CgNrAQDj42u/PHcPNZLcy06QtK9FlPCAUMvnmqOfHKnSuO3PbgEAx/yEqpzyEsS6
-JnN8n6jWOLulzrySYh3UW7yS3dtoBww=
-=fpui
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMWTGQAKCRAr4qD1Cr/k
+Cjv3AQDXHu0sfeUVt/TQK+RPLv4Z9Q4CUj+1Y3y7xfyvMHu7iwEAwIpN0OG1Hp3J
++NF46QM6V7Kgx1T9L8o1N2KrTExXyg8=
+=PuOW
 -----END PGP SIGNATURE-----
 
---Aky8MjDGurDYPGYM--
+--wYOhWtu/pc74PrcY--
