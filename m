@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED35DCAC587
-	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 16:04:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E8ECA0EE8
+	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 17:49:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0249A83322;
-	Sun, 14 Sep 2025 18:04:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7900D80B9B;
+	Sun, 14 Sep 2025 19:49:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AO2dtyl4";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EQ8xAq5d";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tmLWUz0z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 163FB82AE1; Sun, 14 Sep 2025 17:27:59 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B6FFB81E13; Sun, 14 Sep 2025 19:49:36 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FBD980B9B
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 17:27:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3055A80422
+ for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 19:49:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=osama.abdelkader@gmail.com
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-45b9a856dc2so21162045e9.0
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 08:27:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757863677; x=1758468477; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=b19F8pGAc90KZx0eJNn1dqTb/dtDyk1f6VxnA63U09U=;
- b=AO2dtyl4qTozPtiCNBkbcg18VsIak7zUdk9loHChtTOWcCsIgK/VJd5YmUQ6gZZxWZ
- rwwZCU+90m9k+iQ0iMRFJLBTi65cR+6mElpOZ6byEN/cXPKrznfzt8tiww2qgE32zSiq
- efpZ0aKHhT/3aStOsmCCQN5C16vCXArV5QCGfAWNyYvOG3bcb+4SJJlCRYU2tk+L4N/d
- Vm9H+I/YgOk7zsmQGhJ38+DAp0AH9p74trErchKGpqHKevxhNwRvBs6LDoly06P2GFgO
- q1RJbW4dZ+QdjBW11evEVuVk4EqP7+QzG8pb1d5GvnvN72/kU8yEZ95ggmL+P+SjNnu4
- oRzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757863677; x=1758468477;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=b19F8pGAc90KZx0eJNn1dqTb/dtDyk1f6VxnA63U09U=;
- b=TyRzmN1C93+S7KkZyvqOVkZ8hDFZG9pqjs+6vTqRZx0vYk0srmPqwtyH/tKaJZ8R49
- Vjqhmb9kg10HVgdJIT3FxjHhtoWX9ngJ0f+WYtKVZOaZzNigq3Ao09Me9dAXnfx5WNxh
- 3Smu1QiK6KSORC8mKSeL+o2md3M0KnBzQaVVvX/97E4fXkGgpX3avlviTRKrZ856esXu
- 78UuQqSXgKlmYODafw1ZLe+BUG+FRlCv3jnHI5jXsijua2PdyYxlkciiJCBTO+nbBAcL
- fRarux2AvEHOvUBXPnPSc+GdQ88IjcUyj0ztX+5C8D/VGdb77MWRKcv+AG0H8Brjqo+E
- UyDg==
-X-Gm-Message-State: AOJu0YzthJh7M11fAHt1OUlttCC6oh9Xq4Fw2cwCcyqvF5aqm+DwtcJF
- 9ZoQiN48t4NiRaYtG3ktpnWEt2qU9/67zMqNZUe2dYkmdbFqJTOHVV9aID+BeA==
-X-Gm-Gg: ASbGncvnRvpUq98P1NJtyXC4Qzi1vnwExPzjfib4cPMSaV/Uk7a3N2pxSZVSjs1cVoV
- aL/dSAkF6UDJ0tl6wsy4uP/bIPyv8VGcBeBKwxavAY6dielY/dMUxUgNZ/zvSHzH62CqSRuD229
- jq7KNMttryGZzp1pTpwItzfJe7+6wg0UItdtRaGSR4rVAHVCVdxLqG6lvRImPAQh3ysiQRREZx2
- Iq37XIM2CLs5+O/15wrBHvOCgWaBJUcY7enWYUOcs6RwxNK0a3VC2dJbrsxKUe7gniDhUWUuGTf
- XNNWSxVJ5C5CIbU03El/Q2coDW/F9qQSIMKjo9USrFLxdUJwSG3g3TrdpzEdd0Ojo2PqBKeiJLi
- aVLBHrmKna+WnM0cYqAx7EURxiILA2gX2tC7/RDKE7/H9qKNbFgpeMGoH/79D4Z8kRKS5CvMQp3
- oFfpo=
-X-Google-Smtp-Source: AGHT+IGAPGdPWaNzX3+sntdve864iEsEavDipfDZp+dS4DfMPhJ/KysQZp2Q8Wmnrru0WJwNpOQcmg==
-X-Received: by 2002:adf:8bd9:0:b0:3ea:2ed6:9e35 with SMTP id
- ffacd0b85a97d-3ea2ed6a0f2mr1118641f8f.60.1757863676618; 
- Sun, 14 Sep 2025 08:27:56 -0700 (PDT)
-Received: from osama.. ([156.223.20.4]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3e9a066366fsm3374396f8f.44.2025.09.14.08.27.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Sep 2025 08:27:56 -0700 (PDT)
-From: Osama Abdelkader <osama.abdelkader@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de,
-	Osama Abdelkader <osama.abdelkader@gmail.com>
-Subject: [PATCH] imls: remove return parentheses
-Date: Sun, 14 Sep 2025 17:27:51 +0200
-Message-ID: <20250914152751.784312-1-osama.abdelkader@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cPwf50bwPz9skH;
+ Sun, 14 Sep 2025 19:49:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1757872173;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pDcDW6H1j4d/uoMXh9cUiHNWuSnhorRFF4Ods3G5TmY=;
+ b=EQ8xAq5dJC6Ty1jNNa26eOJOmhzGlBBzMMEikBx4s9HpBjszVlOV9C5TlfrVl2GQXQJVNI
+ fKukDxfULSenZs6/UPClGoBPV8t1bgpmJsPa/bHi+uuA0llXoCPLoWnzDZVXSbB1xQRJKo
+ 5YdTMafPjkJxgtyd0x5Dxcu0HTfWB8veJAIZAuq/4r4IkHPj3e4oLTsgR/EKAK4bTJNU47
+ JfTwZQNC3Pjvd1c7BOIZ9oHnmFZVMDUDyEi1DXcurKiCPjX/Dz2PCxmhBbqUmEfr7DMRVK
+ Blcjl16VXSW+ltd7SiiDQByk54DU7W2Cpwdz1ZXBgyNciSQv/15UqU7Vchffgw==
+Message-ID: <464e0429-ac06-49fc-831d-b9e86946446d@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1757872170;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pDcDW6H1j4d/uoMXh9cUiHNWuSnhorRFF4Ods3G5TmY=;
+ b=tmLWUz0zml3HI8KHbFcaNvGZqGZzV1yr3gTjE0WmOJ9TRtQ9pwsg3W4xVuyje+yKxf2LEX
+ UowWFn7tXc4h/ZsEs2be8qInJTRU3HCwyHOVzgBYC3DMwXtx7efHKKsk6NTIE7PzOjixSF
+ cC+RX0RH8WU92OQmiGhdqEJs9/5V2ulS2mRuP146EGe2nDxK2Uqb/qrpmV0MLBIW3PrtA/
+ 5sNnej9YHLDZbSiRsTG7cH4Qz/uim+p+pGUVG94eCrFbfsCRtRNcBl8qQumwc9DnIBpqYG
+ lqjKlGvAQDPTX8x7YpSPp8VprlAJ38c2Xlo6zR7HkWx29bNXId+zOCW0gdoOsg==
+Date: Sun, 14 Sep 2025 19:49:23 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 14 Sep 2025 18:04:42 +0200
+Subject: Re: [PATCH 1/1] [U-Boot, v4, 1/1]net: phy: Add the Airoha EN8811H PHY
+ driver
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de,
+ trini@konsulko.com
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com, 
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com,
+ albert-al.lee@airoha.com
+References: <20250914044115.18391-1-lucienzx159@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250914044115.18391-1-lucienzx159@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: f2d64f40cc2eb6f088d
+X-MBO-RS-META: c3ameqw4e7jagyiuq7jwjjcx3oxwckse
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +93,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-return is not a function, parentheses are not required
+On 9/14/25 6:41 AM, Lucien.Jheng wrote:
+> Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
+> 100/1000/2500 Mbps with auto negotiation only.
+> 
+> The driver uses two firmware files, for which updated versions are added to
+> linux-firmware already.
+> 
+> Locating the AIROHA FW within the filesystem at the designated partition
+> and path will trigger its automatic loading and writing to the PHY via MDIO.
+> If need board specific loading override,
+> please override the en8811h_read_fw function on board or architecture level.
+> 
+> Linux upstream AIROHA EN8811H driver commit:
+> 71e79430117d56c409c5ea485a263bc0d8083390
+> 
+> Based on the Linux upstream AIROHA EN8811H driver code(air_en8811h.c),
+> I have modified the relevant process to align with the U-Boot boot sequence.
+> and have validated this on Banana Pi BPI-R3 Mini.
+> 
+> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+> ---
+> Change in PATCH v4:
+> air_en8811.c:
+>   * Create the airoha folder
 
-Signed-off-by: Osama Abdelkader <osama.abdelkader@gmail.com>
----
- cmd/bootm.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+directory
 
-diff --git a/cmd/bootm.c b/cmd/bootm.c
-index bee683d0580..2c5aea26d98 100644
---- a/cmd/bootm.c
-+++ b/cmd/bootm.c
-@@ -572,7 +572,7 @@ static int do_imls(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (ret_nand)
- 		return ret_nand;
- 
--	return (0);
-+	return 0;
- }
- 
- U_BOOT_CMD(
--- 
-2.43.0
+> to store all future airoha phy drivers.
+>   * Use `request_firmware_into_buf_via_script` for firmware loading.
 
+
+[...]
+
+> +++ b/drivers/net/phy/airoha/Kconfig
+> @@ -0,0 +1,11 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +menuconfig PHY_AIROHA
+> +	bool "Airoha Ethernet PHYs support"
+> +
+> +config PHY_AIROHA_EN8811
+> +	bool "Airoha Ethernet EN8811H support"
+> +	depends on PHY_AIROHA
+> +        select FS_LOADER
+
+It seems tabs/spaces are mixed here, please fix.
+
+> +	help
+> +	  AIROHA EN8811H supported.
+
+[...]
+
+> +#define EN8811H_MD32_DM_SIZE	0x4000
+> +#define EN8811H_MD32_DSP_SIZE	0x20000
+> +
+> + #define EN8811H_FW_CTRL_1		0x0f0018
+> + #define EN8811H_FW_CTRL_1_START	0x0
+> + #define EN8811H_FW_CTRL_1_FINISH	0x1
+> + #define EN8811H_FW_CTRL_2		0x800000
+> + #define EN8811H_FW_CTRL_2_LOADING	BIT(11)
+
+Same here, avoid leading space.
+
+[...]
+
+> +__weak int en8811h_read_fw(void **addr)
+
+Does this still have to be a __weak function, now that it uses generic 
+fw loader ?
+
+> +{
+> +	void *buffer;
+> +	int ret;
+> +
+> +	if (!IS_ENABLED(CONFIG_FS_LOADER))
+> +		return -EOPNOTSUPP;
+> +
+> +	buffer = malloc(EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
+> +	if (!buffer) {
+> +		printf("Failed to allocate memory for firmware\n");
+> +		return -ENOMEM;
+> +	}
+> +
+> +	ret = request_firmware_into_buf_via_script(&buffer,
+
+I think 'buffer' without the & should be used here.
+
+> +						   EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE,
+> +						   "en8811h_load_firmware");
+[...]
