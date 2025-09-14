@@ -4,43 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A84C3CAC58F
-	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 02:43:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AC51CAC58F
+	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 12:21:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C54E281E13;
-	Sun, 14 Sep 2025 04:43:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 55DA480B9B;
+	Sun, 14 Sep 2025 14:21:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="RWNTlnTN";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B436883071; Sun, 14 Sep 2025 04:43:34 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 59BAA82AE1; Sun, 14 Sep 2025 14:21:38 +0200 (CEST)
+Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com
+ [91.218.175.177])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB31C809A5
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 04:43:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28C2980077
+ for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 14:21:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [216.234.200.247])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 859BFB220119;
- Sun, 14 Sep 2025 04:43:31 +0200 (CEST)
-Message-ID: <e8c10057-fe7d-4be0-91fc-18fac4fc8606@freeshell.de>
-Date: Sat, 13 Sep 2025 19:43:29 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] scripts/Makefile.lib: add CONFIG_SYS_CONFIG_NAME
- prefix to dtsi search
-From: E Shattow <e@freeshell.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Rasmus Villemoes <ravi@prevas.dk>
-References: <20250826214708.309271-1-e@freeshell.de>
- <20250912142319.GA4060911@bill-the-cat>
- <7f8d9074-2b5a-4790-adb7-9ed28824dbdd@freeshell.de>
-Content-Language: en-US
-In-Reply-To: <7f8d9074-2b5a-4790-adb7-9ed28824dbdd@freeshell.de>
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+Mime-Version: 1.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1757852494;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=qshQm6wdpNQCBQU99mETFn7xrf8l0nLSbNp4NcWs6is=;
+ b=RWNTlnTNE29nMvKacAKj5WzwZ+cMo5kZ1p2F5EJcbJbdQvSBy6IKp/iCaLYVRunX0O/rK2
+ QcECSRhwgQSwv77/IaVghRhgCPr9ER2BrvVplI2LqsXcrYD6J93RJpASpwAMHGxmVbb6Ll
+ iIZ1x+RqI09Q+IqjrkzOmqMqX1Ngs93sj+A6cIJNBnLBhzq4p2W3KGaQx8NRI1Pi9Jkerc
+ aQtPob/PDp2EHQ8uWcHInY3mfXzGoWBf483adJ5bvUiO2uBlnxXHhkL5S6iuQH24JqbeGk
+ oCZ6xappzUgqbxPRl0TgAUOaJTkr1sE39BrItgP9gYc39PE6BAfy6eO/u7j46A==
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Date: Sun, 14 Sep 2025 12:21:30 +0000
+Message-Id: <DCSIP9YKO8EZ.8LUZKIEMJSWM@postmarketos.org>
+Cc: "Heinrich Schuchardt" <heinrich.schuchardt@canonical.com>, "Jonas
+ Karlman" <jonas@kwiboo.se>, "Simon Glass" <sjg@chromium.org>,
+ <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
+ <~postmarketos/upstreaming@lists.sr.ht>, "Neil Armstrong"
+ <neil.armstrong@linaro.org>, "Peng Fan" <peng.fan@nxp.com>, "Jaehoon Chung"
+ <jh80.chung@samsung.com>, "Beniamino Galvani" <b.galvani@gmail.com>
+Subject: Re: [PATCH RFC 4/9] serial: serial_meson: add minimal non-DM driver
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: "Ferass El Hafidi" <funderscore@postmarketos.org>
+To: "Tom Rini" <trini@konsulko.com>, "Ferass El Hafidi"
+ <funderscore@postmarketos.org>
+References: <20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org>
+ <20250907-spl-gx-v1-4-37395d9ff5af@postmarketos.org>
+ <829fe59a-10e5-4cd2-a032-d293d87f68d1@gmx.de>
+ <DCPE9A29ADNG.5XDSJ73VEPCS@postmarketos.org>
+ <3875c210-7d29-4bca-b535-0522dc615cc8@canonical.com>
+ <DCQ2ZF3T8VMM.1JN4QJ324NFM2@postmarketos.org>
+ <20250913155100.GA67696@bill-the-cat>
+In-Reply-To: <20250913155100.GA67696@bill-the-cat>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,70 +80,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat Sep 13, 2025 at 3:51 PM UTC, Tom Rini wrote:
+> <...>
+>
+> The way we normally solve these kind of things, since they aren't
+> actually configurable (it's part of the chip itself) is just #define
+> them either in the driver header or some <asm/arch/..> header file.
 
+Yes, this is what I did locally.  I'm waiting for further feedback
+(on other patches) before sending the v3.
 
-On 9/13/25 02:23, E Shattow wrote:
-> 
-> 
-> On 9/12/25 07:23, Tom Rini wrote:
->> On Tue, Aug 26, 2025 at 02:47:00PM -0700, E Shattow wrote:
->>
->>> Add ${CONFIG_SYS_CONFIG_NAME}-u-boot.dtsi into dtsi include search order:
->>> orig filename, (SYS_CONFIG_NAME), SYS_SOC, SYS_CPU, SYS_VENDOR, no prefix
->>>
->>> Signed-off-by: E Shattow <e@freeshell.de>
->>> ---
->>>  doc/develop/devicetree/control.rst | 1 +
->>>  scripts/Makefile.lib               | 2 ++
->>>  2 files changed, 3 insertions(+)
->>
->> A problem is that today, this leads to failure to build on:
->> mt7622_rfb mt7986_rfb mt7986a_bpir3_emmc mt7986a_bpir3_sd mt7988_rfb
->> mt7988_sd_rfb mt8516_pum
->> pkin socfpga_stratix10 socfpga_stratix10_atf socfpga_agilex5
->> socfpga_agilex5_nand2 socfpga_agil
->> ex5_vab socfpga_n5x socfpga_n5x_atf socfpga_n5x_vab
->> mt7623a_unielec_u7623_02 mt7623n_bpir2 imx6
->> q_bosch_acc imx6dl_mamoj socfpga_arria10 socfpga_arria5 socfpga_cyclone5
->>
->> Because the problem you're trying to solve is being partly solved in
->> another way by others, perhaps?
->>
-> 
-> For example the first in the list of build failure, mt7622_rfb:
-> 
->   DTC     arch/arm/dts/mt7623a-unielec-u7623-02-emmc.dtb
-> Error: /root/source/u-boot.git/arch/arm/dts/mt7622-u-boot.dtsi:27.1-6
-> Label or path snfi not found
-> 
-> This happens because CONFIG_SYS_CONFIG_NAME is "mt7622" and is not the
-> expected "m7622-rfb". Explicitly setting CONFIG_SYS_CONFIG_NAME in
-> configs/mt7622_rfb_defconfig does not work.
-> 
-> arch/arm/mach-mediatek/Kconfig:
-> config SYS_CONFIG_NAME
->         default "mt7622" if TARGET_MT7622
->         default "mt7623" if TARGET_MT7623
->         default "mt7629" if TARGET_MT7629
->         default ...
-> 
-> Drop this in-flight change from the above and it compiles fine.
-> 
-> I would expect this to be an anti-pattern/bug unless we are setting
-> CONFIG_SYS_CONFIG_NAME explicitly in a config file, no?
-> 
-> Why is SYS_CONFIG_NAME being modified in this way?
-> 
-> -E
-
-Replying my own questions, the name of the defconfig is not represented
-by SYS_CONFIG_NAME and NAK my own patch here... it will have to be a
-different (new?) symbol name and configurable from Kconfig not
-necessarily defconfig file name.
-
-I'll improve on the other series "increase detail for dtsi debug output"
-and propose a user-configurable dtsi include order that is more suitable.
-
-Thanks for your patience while I learn these programming concepts!
-
--E
+Thanks.
