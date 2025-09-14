@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FEF5CAC594
-	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 13:14:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F1B5CAC587
+	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 13:14:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2A488346A;
+	by phobos.denx.de (Postfix) with ESMTP id EC3C0834D4;
 	Sun, 14 Sep 2025 15:13:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="DbfwBOui";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="duQTWK4C";
+	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="WGDv0b7m";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="w5A6BghQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3C3682A9E; Sun, 14 Sep 2025 11:47:57 +0200 (CEST)
+ id 3B82481E13; Sun, 14 Sep 2025 11:49:00 +0200 (CEST)
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE53880B9B
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 11:47:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 565B880B9B
+ for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 11:48:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=david.wronek@mainlining.org
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=To:Message-Id:Subject:Date:From; t=1757842981; bh=tG4LBQUZZNGGKDLpLiJNpSK
- GgT+R4A5G7cXfukDNXaU=; b=DbfwBOuibKj4yFsY92Nhd3jZA3KBUGWJD+e0510ZZoc30K0Md0
- MZN/GdlU8F+3dJt3dPVycEyZbmdsrvCxKsRSAtV0TgEit0IsibQ/u6NO2q4pFBuySVy3CrZpgwt
- qk/WBpG4ZN84yG0m3g8NwSbSVkK6RSiM9uMnlTHW0HS9nDGmsgFdThlIoUoQl5j9/9Stq0VSnoN
- nxw1ydtLlcc/ycHfXQzQ6PGaXlFe7eC7H+Z8PaDc+nJYXZdrS+8JBcmZhG7yiRSelsafRyng2cE
- 6hw5IZVhvmRWq7gB2+fuVO/d1FAAkzhyybFS8SGK6hbc84gKMix9AaE7leCP0UwwLLA==;
+ h=To:Message-Id:Subject:Date:From; t=1757842981; bh=iYy69PPBRg3Bpe2NIwkllDA
+ T1ZgQcmRAudom4WGBfh4=; b=WGDv0b7mkGuuMUZ/6qWAUQb1Ughl21wKwfjZ0pJ0juq6edi9iQ
+ NWuLoz9dKmhwbV36QXCbmRbTt7bCIeq/HSaJBBoERRqWtsKjGQo+BiCvnXifnvXmbUj1tJ5FvZW
+ 6Me9Q+K0oU3Qi/tOGxwbs5HXKpnkt6x+em/dH+q7AADTET+8B4auGEHXJJwA6F7kzEJ5tQCT1xo
+ MgcRYdFV3jmQivummbzGm6itW1UBISzq+600hhHG98r040pjvLUiXv4dv5382cwlay/Ha73bWj2
+ C6rP46042kO6BzEGyPbQgQRka9YrNI+2Fvg70nM9DEQ2st48sxRfLzAB94jtEE20o/w==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=To:Message-Id:Subject:Date:From; t=1757842981; bh=tG4LBQUZZNGGKDLpLiJNpSK
- GgT+R4A5G7cXfukDNXaU=; b=duQTWK4CCPVH0BEAgXK1IaUibAUfam8zNLB9Ug18vxAteR1GkM
- Wv6qCvyowWJ1rF+caWgIUaH02MZHggXcYyCw==;
+ h=To:Message-Id:Subject:Date:From; t=1757842981; bh=iYy69PPBRg3Bpe2NIwkllDA
+ T1ZgQcmRAudom4WGBfh4=; b=w5A6BghQRkiR6bM95X6+wE98+HAsa3DBFcUhH3qXcRTD26EF7o
+ LUiSLvMiSl4yge9aPp/Iqj9hh+N7aa4PYzCQ==;
 From: David Wronek <david.wronek@mainlining.org>
-Date: Sun, 14 Sep 2025 11:42:34 +0200
-Subject: [PATCH 3/5] pinctrl: qcom: add sdm670 pinctrl driver
+Date: Sun, 14 Sep 2025 11:42:35 +0200
+Subject: [PATCH 4/5] qcom_defconfig: enable pinctrl for sdm670
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250914-sdm670-v1-3-a344024062ab@mainlining.org>
+Message-Id: <20250914-sdm670-v1-4-a344024062ab@mainlining.org>
 References: <20250914-sdm670-v1-0-a344024062ab@mainlining.org>
 In-Reply-To: <20250914-sdm670-v1-0-a344024062ab@mainlining.org>
 To: Alexey Minnekhanov <alexeymin@postmarketos.org>, 
@@ -63,11 +63,11 @@ Cc: linux@mainlining.org, ~postmarketos/upstreaming@lists.sr.ht,
  u-boot@lists.denx.de, u-boot-qcom@groups.io, 
  David Wronek <david.wronek@mainlining.org>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1757842979; l=7715;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1757842979; l=670;
  i=david.wronek@mainlining.org; s=20250914; h=from:subject:message-id;
- bh=J8ab9sUiLyAgSR2n88TFxCOrT8PUGvj0zq0qCKV0dR4=;
- b=iK+Ju+SzMYlNiUT/JKzVw0Rr8jZr4UrH+4Pk/94STL5/EQG1WCOVycYvQvwQrh7s2iFdQ1Vt4
- fxWFk3JyxsLDKleToqXoDLnEQhUMNPEYor5MnFjD+bAx9sXA9E5l0/c
+ bh=ve94gICE0hdgknEQ2iHk458wcwoN/zbU7O303aQuRow=;
+ b=GOMQy/C3b3xGsfm/1QNZ4F7z9dC6c2cHV4mBdmsB5MLy2Q8uh2tsUacv5C56IwzK9UPGdhobm
+ HFcXEkGLLefCYFs70lj6pWI2rm+/8I6EolJ9dBIylRHqXv+alB900Yt
 X-Developer-Key: i=david.wronek@mainlining.org; a=ed25519;
  pk=NtKhS1PfXjRIaJwWcYTu7JS0cX3GEmccZo+a6erVTfU=
 X-Mailman-Approved-At: Sun, 14 Sep 2025 15:13:36 +0200
@@ -87,303 +87,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a pinctrl driver for the TLMM block found in the SDM670 SoC.
+Enable the SDM670 pinctrl driver.
 
 Signed-off-by: David Wronek <david.wronek@mainlining.org>
 ---
- drivers/pinctrl/qcom/Kconfig          |   7 +
- drivers/pinctrl/qcom/Makefile         |   1 +
- drivers/pinctrl/qcom/pinctrl-sdm670.c | 252 ++++++++++++++++++++++++++++++++++
- 3 files changed, 260 insertions(+)
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 21f81b6609910c06b83941633481d69c7b0a491f..45f900e93833a0bac900f60e0577fc1b8c8b630c 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -68,6 +68,13 @@ config PINCTRL_QCOM_SC7280
- 	help
- 	  Say Y here to enable support for pinctrl on the Snapdragon SC7280 SoC,
- 
-+config PINCTRL_QCOM_SDM670
-+	bool "Qualcomm SDM670 Pinctrl"
-+	select PINCTRL_QCOM
-+	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon SDM670 SoC,
-+	  as well as the associated GPIO driver.
-+
- config PINCTRL_QCOM_SDM660
- 	bool "Qualcomm SDM630/660 Pinctrl"
- 	select PINCTRL_QCOM
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 6cb53838e71b8075b359cf7890e5174223d54b5c..f43868363d633c45ff14471d016a1e4768a7f77c 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
- obj-$(CONFIG_PINCTRL_QCOM_SA8775P) += pinctrl-sa8775p.o
- obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
- obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
-+obj-$(CONFIG_PINCTRL_QCOM_SDM670) += pinctrl-sdm670.o
- obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
- obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
- obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-sdm670.c b/drivers/pinctrl/qcom/pinctrl-sdm670.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..ec3ae226141ed73c8dc7605626e10488da54d420
---- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-sdm670.c
-@@ -0,0 +1,252 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Qualcomm SDM670 pinctrl
-+ *
-+ * (C) Copyright 2025 David Wronek <david.wronek@mainlining.org>
-+ */
-+
-+#include <dm.h>
-+#include "pinctrl-qcom.h"
-+
-+#define NORTH	0x00500000
-+#define SOUTH	0x00900000
-+#define WEST	0x00100000
-+
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-+
-+static const struct pinctrl_function sdm670_pinctrl_functions[] = {
-+	{ "gpio", 0 },
-+	{ "blsp_uart2", 3 }, /* gpio 4 and 5, used for debug uart */
-+};
-+
-+static const unsigned int sdm670_pin_offsets[] = {
-+	[0] = SOUTH,
-+	[1] = SOUTH,
-+	[2] = SOUTH,
-+	[3] = SOUTH,
-+	[4] = NORTH,
-+	[5] = NORTH,
-+	[6] = NORTH,
-+	[7] = NORTH,
-+	[8] = WEST,
-+	[9] = WEST,
-+	[10] = NORTH,
-+	[11] = NORTH,
-+	[12] = SOUTH,
-+	[13] = WEST,
-+	[14] = WEST,
-+	[15] = WEST,
-+	[16] = WEST,
-+	[17] = WEST,
-+	[18] = WEST,
-+	[19] = WEST,
-+	[20] = WEST,
-+	[21] = WEST,
-+	[22] = WEST,
-+	[23] = WEST,
-+	[24] = WEST,
-+	[25] = WEST,
-+	[26] = WEST,
-+	[27] = WEST,
-+	[28] = WEST,
-+	[29] = WEST,
-+	[30] = WEST,
-+	[31] = WEST,
-+	[32] = WEST,
-+	[33] = WEST,
-+	[34] = WEST,
-+	[35] = NORTH,
-+	[36] = NORTH,
-+	[37] = NORTH,
-+	[38] = NORTH,
-+	[39] = NORTH,
-+	[40] = NORTH,
-+	[41] = SOUTH,
-+	[42] = SOUTH,
-+	[43] = SOUTH,
-+	[44] = SOUTH,
-+	[45] = SOUTH,
-+	[46] = SOUTH,
-+	[47] = SOUTH,
-+	[48] = SOUTH,
-+	[49] = NORTH,
-+	[50] = NORTH,
-+	[51] = NORTH,
-+	[52] = NORTH,
-+	[53] = NORTH,
-+	[54] = NORTH,
-+	[55] = NORTH,
-+	[56] = NORTH,
-+	[57] = NORTH,
-+	[65] = NORTH,
-+	[66] = NORTH,
-+	[67] = NORTH,
-+	[68] = NORTH,
-+	[75] = NORTH,
-+	[76] = NORTH,
-+	[77] = NORTH,
-+	[78] = NORTH,
-+	[79] = NORTH,
-+	[80] = NORTH,
-+	[81] = NORTH,
-+	[82] = NORTH,
-+	[83] = NORTH,
-+	[84] = NORTH,
-+	[85] = SOUTH,
-+	[86] = SOUTH,
-+	[87] = SOUTH,
-+	[88] = SOUTH,
-+	[89] = SOUTH,
-+	[90] = SOUTH,
-+	[91] = SOUTH,
-+	[92] = SOUTH,
-+	[93] = SOUTH,
-+	[94] = SOUTH,
-+	[95] = SOUTH,
-+	[96] = SOUTH,
-+	[97] = WEST,
-+	[98] = WEST,
-+	[99] = NORTH,
-+	[100] = WEST,
-+	[101] = WEST,
-+	[102] = WEST,
-+	[103] = WEST,
-+	[105] = NORTH,
-+	[106] = NORTH,
-+	[107] = NORTH,
-+	[108] = NORTH,
-+	[109] = NORTH,
-+	[110] = NORTH,
-+	[111] = NORTH,
-+	[112] = NORTH,
-+	[113] = NORTH,
-+	[114] = WEST,
-+	[115] = WEST,
-+	[116] = SOUTH,
-+	[117] = NORTH,
-+	[118] = NORTH,
-+	[119] = NORTH,
-+	[120] = NORTH,
-+	[121] = NORTH,
-+	[122] = NORTH,
-+	[123] = NORTH,
-+	[124] = NORTH,
-+	[125] = NORTH,
-+	[126] = NORTH,
-+	[127] = WEST,
-+	[128] = WEST,
-+	[129] = WEST,
-+	[130] = WEST,
-+	[131] = WEST,
-+	[132] = WEST,
-+	[133] = NORTH,
-+	[134] = NORTH,
-+	[135] = WEST,
-+	[136] = WEST,
-+	[137] = WEST,
-+	[138] = WEST,
-+	[139] = WEST,
-+	[140] = WEST,
-+	[141] = WEST,
-+	[142] = WEST,
-+	[143] = WEST,
-+	[144] = SOUTH,
-+	[145] = SOUTH,
-+	[146] = WEST,
-+	[147] = WEST,
-+	[148] = WEST,
-+	[149] = WEST,
-+};
-+
-+#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-+{							\
-+	.name = pg_name,				\
-+	.ctl_reg = ctl,					\
-+	.io_reg = 0,					\
-+	.pull_bit = pull,				\
-+	.drv_bit = drv,					\
-+	.oe_bit = -1,					\
-+	.in_bit = -1,					\
-+	.out_bit = -1,					\
-+}
-+
-+#define UFS_RESET(pg_name, offset)			\
-+{							\
-+	.name = pg_name,				\
-+	.ctl_reg = offset,				\
-+	.io_reg = offset + 0x4,				\
-+	.pull_bit = 3,					\
-+	.drv_bit = 0,					\
-+	.oe_bit = -1,					\
-+	.in_bit = -1,					\
-+	.out_bit = 0,					\
-+}
-+
-+static const struct msm_special_pin_data sdm670_special_pins_data[] = {
-+	UFS_RESET("ufs_reset", 0x99d000),
-+	SDC_QDSD_PINGROUP("sdc1_rclk", NORTH + 0x99000, 15, 0),
-+	SDC_QDSD_PINGROUP("sdc1_clk",  NORTH + 0x99000, 13, 6),
-+	SDC_QDSD_PINGROUP("sdc1_cmd",  NORTH + 0x99000, 11, 3),
-+	SDC_QDSD_PINGROUP("sdc1_data", NORTH + 0x99000, 9,  0),
-+	SDC_QDSD_PINGROUP("sdc2_clk",  NORTH + 0x9a000, 14, 6),
-+	SDC_QDSD_PINGROUP("sdc2_cmd",  NORTH + 0x9a000, 11, 3),
-+	SDC_QDSD_PINGROUP("sdc2_data", NORTH + 0x9a000, 9,  0),
-+};
-+
-+static const char *sdm670_get_function_name(struct udevice *dev, unsigned int selector)
-+{
-+	return sdm670_pinctrl_functions[selector].name;
-+}
-+
-+static const char *sdm670_get_pin_name(struct udevice *dev, unsigned int selector)
-+{
-+	static const char * const special_pins_names[] = {
-+		"ufs_reset",
-+		"sdc1_rclk", "sdc1_clk", "sdc1_cmd", "sdc1_data",
-+		"sdc2_clk", "sdc2_cmd", "sdc2_data",
-+	};
-+
-+	if (selector >= 150 && selector <= 157)
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 150]);
-+	else
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+
-+	return pin_name;
-+}
-+
-+static int sdm670_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-+{
-+	if (selector >= 0 && selector < ARRAY_SIZE(sdm670_pinctrl_functions))
-+		return sdm670_pinctrl_functions[selector].val;
-+	return -EINVAL;
-+}
-+
-+struct msm_pinctrl_data sdm670_data = {
-+	.pin_data = {
-+		.pin_offsets = sdm670_pin_offsets,
-+		.pin_count = ARRAY_SIZE(sdm670_pin_offsets) + ARRAY_SIZE(sdm670_special_pins_data),
-+		.special_pins_start = 150,
-+		.special_pins_data = sdm670_special_pins_data,
-+	},
-+	.functions_count = ARRAY_SIZE(sdm670_pinctrl_functions),
-+	.get_function_name = sdm670_get_function_name,
-+	.get_function_mux = sdm670_get_function_mux,
-+	.get_pin_name = sdm670_get_pin_name,
-+};
-+
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{
-+		.compatible = "qcom,sdm670-tlmm",
-+		.data = (ulong)&sdm670_data
-+	},
-+	{ /* Sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(pinctrl_ssdm670) = {
-+	.name = "pinctrl_sdm670",
-+	.id = UCLASS_NOP,
-+	.of_match = msm_pinctrl_ids,
-+	.ops = &msm_pinctrl_ops,
-+	.bind = msm_pinctrl_bind,
-+};
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 86d7de89e7746e33f4385ca78c839b43319cd861..06e48e525e670f9304177879744f0a466ed79c9c 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -110,6 +110,7 @@ CONFIG_PINCTRL_QCOM_QCM2290=y
+ CONFIG_PINCTRL_QCOM_QCS404=y
+ CONFIG_PINCTRL_QCOM_SA8775P=y
+ CONFIG_PINCTRL_QCOM_SC7280=y
++CONFIG_PINCTRL_QCOM_SDM670=y
+ CONFIG_PINCTRL_QCOM_SDM845=y
+ CONFIG_PINCTRL_QCOM_SM6115=y
+ CONFIG_PINCTRL_QCOM_SM8150=y
 
 -- 
 2.51.0
