@@ -4,53 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EADAFCA0EE8
-	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 14:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65201CAC587
+	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 16:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4336D83071;
-	Sun, 14 Sep 2025 16:56:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=minlexx.ru
+	by phobos.denx.de (Postfix) with ESMTP id A47D482A9E;
+	Sun, 14 Sep 2025 18:04:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=minlexx.ru header.i=@minlexx.ru header.b="AmSPq4Jq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrYnALOA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4954083322; Sun, 14 Sep 2025 16:56:52 +0200 (CEST)
-Received: from sm24.hosting.reg.ru (sm24.hosting.reg.ru [31.31.198.150])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5B37582AE1; Sun, 14 Sep 2025 17:27:34 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B96E82AE1
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 16:56:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F36980B9B
+ for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 17:27:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=minlexx.ru
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=alexeymin@minlexx.ru
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=minlexx.ru; 
- s=dkim;
- h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
- To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
- Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
- In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
- List-Post:List-Owner:List-Archive;
- bh=fWEu7eDT71YLeN+LjPEDLR16Jkeqd9JPGYtffjDAI90=; b=AmSPq4JqKPYhYFU7In3mL/Vwt1
- ytVG4Tb6A8iLoE1PznRkPf4QZusqYTjkFs1peA0jasLUSledbnBYaKMrw/uphZrHi+X+igXv0yQy6
- OSa7TvSqWnocee5yc1pzNhFo07WwK7WKey1XmBxCH1TkMHrz1mbbEVdRQEFSQ7I8PWgQ=;
-Received: by sm24.hosting.reg.ru with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
- (envelope-from <alexeymin@minlexx.ru>) id 1uxo9o-000000006tV-0gm7;
- Sun, 14 Sep 2025 17:56:48 +0300
-From: Alexey Minnekhanov <alexeymin@minlexx.ru>
-To: Casey Connolly <casey.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
- u-boot-qcom@groups.io, u-boot@lists.denx.de,
- Alexey Minnekhanov <alexeymin@minlexx.ru>
-Subject: [PATCH] qcom_defconfig: Enable pinctrl driver for SDM630/660
-Date: Sun, 14 Sep 2025 17:56:20 +0300
-Message-ID: <20250914145620.1962735-1-alexeymin@minlexx.ru>
-X-Mailer: git-send-email 2.49.1
+ spf=pass smtp.mailfrom=osama.abdelkader@gmail.com
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-45f2c5ef00fso2733865e9.1
+ for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 08:27:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757863652; x=1758468452; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=p3y3A1UdRRuNYf/F2gPo5Za1hnmkOqlluqLyBLAjSuA=;
+ b=TrYnALOAlpif5wQilfjvz1z4RGnuh0RHXYYE0gM8tH8XTbhppXNeocRlueeL8Gh6nx
+ u4NJWwEB0/g/1dNlX6Pt9t1VRdyB1GUTdNP6i0mOKXgjsf2s3MC70Rk/Q3QvX13TjNdH
+ aggBTp1KBzfyDFx5dHPoHoTiCjolz+ynCC4v1yfdN66JMReTrAp6ifrQglfcdUNQo7GB
+ ibY/sNAgY2DsRasKd8K7yFTwgKTulrXWbowkLlz+gXx6EOl/FkbExA+qXebftJq+hHYN
+ co8Xkq0LexcrrEXK6BaPmX38im26OGTh+EdjO2+X7k4QqVvvzHGzW0+p4ReX/Y0xI+J3
+ V8pA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757863652; x=1758468452;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=p3y3A1UdRRuNYf/F2gPo5Za1hnmkOqlluqLyBLAjSuA=;
+ b=ljK/LTqZvhH/B6MljMqoD8NLSR7awm9VcaOX7Eq/D+5zF8Itwh69bHv/8Vbcq+qopa
+ Q2ozeZb6uo3k/6hoCWDaElYa4hTUMd45IdkNPmxtnvZiA+1Tj3V7vOB5o+Ss4WCusldr
+ fvXgoYJpY466gyNynQFgSf18C8tzodFBfSSZ/9fhykc9ZNMXYl1g7L1p0UhPfwi5bTX0
+ 2pSAU8KVajaWDsjhTp1CL/MNO5yPTL0xDRSG138iqpdeSJQoZl3xeT2ERnUxvT0F5PD2
+ RyV1lA9hzOXufqroxiLzeCJ+cI/eaRLDVfvOvJHxyjqdz2GlEUrZmWDtwz39Ino3lAzu
+ cLWQ==
+X-Gm-Message-State: AOJu0Yz6lIcr4MX0cHr2MVH+rbUIh8oV2NPtQK4A4DraTAELPhpwxXIu
+ lzf3tu919NFg6Q96tmVkB0P5fZWS6HrNe6ALfRIjjbI+na0pmFzkrS4u
+X-Gm-Gg: ASbGncumIt70Ph9YcbWs5KRJiLjJbuAeM1gWu2NnaD1RRo9CFZpfworhJR4+1CtnSfr
+ H2ifLL3FbsV+vXIqXqOzJXNKnnZUG8DXrclxjs/biRc+40utdCcL0ZiC5MDETSdsjDaf43sr0WL
+ 5kNXVH8SKsseAXKgSSn+Z/uqisicSGhgRzKpflzPb/YQ60xSnMVOrK/pA0ROz6zeXCZE1MuemQp
+ kImVrLhOHGRofs5GGO/7wXm/SvkFUmtbtQAwTvM8CjIMhyQZNaztNaJ7quh/bT2HbIXgiclBJx3
+ g2PlPcqe6xip+eW1hQxXQ6/d/fEknX3kciIzdqUf9wF8y8Ou0ohRpcSh+3Uvrt2FWgHRUe8FLXd
+ 1Q78ubgSWORtAd8VBwinOas5LumdHtSnOznYFbbfWG1lfffp6dK2JskDi+JyaY4cJ3jA3akbbDs
+ FPMhuVaBKqT296lw==
+X-Google-Smtp-Source: AGHT+IGZCicfedmvb3Bjjh2WrgJ2BCCckae2vbhyIF2+OxmJPLipafSiVeZ/JKY8n7olpukyv2zaUQ==
+X-Received: by 2002:a05:6000:420f:b0:3e5:955d:a81b with SMTP id
+ ffacd0b85a97d-3e7659c4248mr8096185f8f.34.1757863651651; 
+ Sun, 14 Sep 2025 08:27:31 -0700 (PDT)
+Received: from osama.. ([156.223.20.4]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-45e017c0643sm138106025e9.23.2025.09.14.08.27.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 14 Sep 2025 08:27:31 -0700 (PDT)
+From: Osama Abdelkader <osama.abdelkader@gmail.com>
+To: trini@konsulko.com,
+	sjg@chromium.org
+Cc: u-boot@lists.denx.de,
+	Osama Abdelkader <osama.abdelkader@gmail.com>
+Subject: [PATCH] sandbox: use env_get() for time offset instead of getenv()
+Date: Sun, 14 Sep 2025 17:27:27 +0200
+Message-ID: <20250914152727.784016-1-osama.abdelkader@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 14 Sep 2025 18:04:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,27 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Pin controller driver for SDM630/636/660 SoCs was added in
-b4420a0c9ed ("drivers: pinctrl: Add Qualcomm SDM630/660 TLMM driver"),
-but not enabled in qcom_defconfig. Correct that omission.
+The sandbox time offset is intended to be controlled via the U-Boot
+environment, not the host process environment. Update os_get_time_offset()
+to use env_get() instead of the libc getenv().
 
-Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
+Leave other getenv() uses (e.g. U_BOOT_PERSISTENT_DATA_DIR,
+UBOOT_SB_FUZZ_TEST) unchanged, since those refer to host environment
+variables needed by sandbox tests.
+
+Signed-off-by: Osama Abdelkader <osama.abdelkader@gmail.com>
 ---
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/sandbox/cpu/os.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 86d7de89e77..3acd57fb774 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -110,6 +110,7 @@ CONFIG_PINCTRL_QCOM_QCM2290=y
- CONFIG_PINCTRL_QCOM_QCS404=y
- CONFIG_PINCTRL_QCOM_SA8775P=y
- CONFIG_PINCTRL_QCOM_SC7280=y
-+CONFIG_PINCTRL_QCOM_SDM660=y
- CONFIG_PINCTRL_QCOM_SDM845=y
- CONFIG_PINCTRL_QCOM_SM6115=y
- CONFIG_PINCTRL_QCOM_SM8150=y
+diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
+index f5c9a8aecf2..e48eb23cdc0 100644
+--- a/arch/sandbox/cpu/os.c
++++ b/arch/sandbox/cpu/os.c
+@@ -35,6 +35,7 @@
+ #include <asm/state.h>
+ #include <os.h>
+ #include <rtc_def.h>
++#include <env.h>
+ 
+ /* Environment variable for time offset */
+ #define ENV_TIME_OFFSET "UBOOT_SB_TIME_OFFSET"
+@@ -1014,7 +1015,7 @@ long os_get_time_offset(void)
+ {
+ 	const char *offset;
+ 
+-	offset = getenv(ENV_TIME_OFFSET);
++	offset = env_get(ENV_TIME_OFFSET);
+ 	if (offset)
+ 		return strtol(offset, NULL, 0);
+ 	return 0;
 -- 
-2.49.1
+2.43.0
 
