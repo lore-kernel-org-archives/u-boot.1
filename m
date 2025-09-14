@@ -4,43 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0664ACAC587
-	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 14:44:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EADAFCA0EE8
+	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 14:56:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B4C383071;
-	Sun, 14 Sep 2025 16:44:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
+	by phobos.denx.de (Postfix) with ESMTP id 4336D83071;
+	Sun, 14 Sep 2025 16:56:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=minlexx.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="qmf7WNM9";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=minlexx.ru header.i=@minlexx.ru header.b="AmSPq4Jq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0534B83211; Sun, 14 Sep 2025 16:44:56 +0200 (CEST)
-Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 4954083322; Sun, 14 Sep 2025 16:56:52 +0200 (CEST)
+Received: from sm24.hosting.reg.ru (sm24.hosting.reg.ru [31.31.198.150])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0107082AE1
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 16:44:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B96E82AE1
+ for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 16:56:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=netcube.li
+ dmarc=pass (p=none dis=none) header.from=minlexx.ru
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukas.schmid@netcube.li
-dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding; 
- bh=iBA+IbG/V20LMDO57PhRWTNs+si/3jCv8vzS9k7alOs=;
- b=qmf7WNM9XnzfXKxGncr5+WllrRh07DZhuGb4QCWzKrnnfsOyCFVrKim2wWKtDZnCfe2moubyG5pT1CSFUrPLi4Lgsewoa4FgriFZNN4CHjmvvfnKOQl518T5EKVPU450kklGE8knHQ83aJpZboEFetLE082LMZFjYNoa/3M9XMM=
-Received: from lukas-hpz440workstation.lan.sk100508.local (cm70-231.liwest.at
- [212.241.70.231]) by mail.netcube.li with ESMTPA
- ; Sun, 14 Sep 2025 16:44:53 +0200
-From: Lukas Schmid <lukas.schmid@netcube.li>
-To: Tom Rini <trini@konsulko.com>
-Cc: Lukas Schmid <lukas.schmid@netcube.li>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1 1/1] sunxi: extend R528/T113-s3/D1(s) DRAM initialisation
-Date: Sun, 14 Sep 2025 16:44:11 +0200
-Message-Id: <20250914144411.157826-1-lukas.schmid@netcube.li>
-X-Mailer: git-send-email 2.39.5
+ spf=none smtp.mailfrom=alexeymin@minlexx.ru
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=minlexx.ru; 
+ s=dkim;
+ h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:
+ To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=fWEu7eDT71YLeN+LjPEDLR16Jkeqd9JPGYtffjDAI90=; b=AmSPq4JqKPYhYFU7In3mL/Vwt1
+ ytVG4Tb6A8iLoE1PznRkPf4QZusqYTjkFs1peA0jasLUSledbnBYaKMrw/uphZrHi+X+igXv0yQy6
+ OSa7TvSqWnocee5yc1pzNhFo07WwK7WKey1XmBxCH1TkMHrz1mbbEVdRQEFSQ7I8PWgQ=;
+Received: by sm24.hosting.reg.ru with esmtpsa (TLS1.2) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+ (envelope-from <alexeymin@minlexx.ru>) id 1uxo9o-000000006tV-0gm7;
+ Sun, 14 Sep 2025 17:56:48 +0300
+From: Alexey Minnekhanov <alexeymin@minlexx.ru>
+To: Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de,
+ Alexey Minnekhanov <alexeymin@minlexx.ru>
+Subject: [PATCH] qcom_defconfig: Enable pinctrl driver for SDM630/660
+Date: Sun, 14 Sep 2025 17:56:20 +0300
+Message-ID: <20250914145620.1962735-1-alexeymin@minlexx.ru>
+X-Mailer: git-send-email 2.49.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -59,72 +67,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend the DRAM initialisation code to add support for the T113-S4 aka
-T113M4020DC0 by checking the SoC's CHIPID.
+Pin controller driver for SDM630/636/660 SoCs was added in
+b4420a0c9ed ("drivers: pinctrl: Add Qualcomm SDM630/660 TLMM driver"),
+but not enabled in qcom_defconfig. Correct that omission.
 
-Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
 ---
- drivers/ram/sunxi/dram_sun20i_d1.c | 13 ++++++++++++-
- drivers/ram/sunxi/dram_sun20i_d1.h |  7 +++++++
- 2 files changed, 19 insertions(+), 1 deletion(-)
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
-index a1794032f3b..01d19d5feaa 100644
---- a/drivers/ram/sunxi/dram_sun20i_d1.c
-+++ b/drivers/ram/sunxi/dram_sun20i_d1.c
-@@ -54,6 +54,11 @@ static void sid_read_ldoB_cal(const dram_para_t *para)
- 	clrsetbits_le32(0x3000150, 0xff00, reg << 8);
- }
- 
-+static u32 sid_read_soc_chipid(void)
-+{
-+	return readl(SUNXI_SID_BASE + 0x00) & 0xffff;
-+}
-+
- static void dram_voltage_set(const dram_para_t *para)
- {
- 	int vol;
-@@ -663,6 +668,7 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
- 
- 	fuse = (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
- 	debug("DDR efuse: 0x%x\n", fuse);
-+	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
- 
- 	if (para->dram_type == SUNXI_DRAM_TYPE_DDR2) {
- 		if (fuse == 15)
-@@ -675,7 +681,12 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
- 			switch (fuse) {
- 			case 8: cfg = ac_remapping_tables[2]; break;
- 			case 9: cfg = ac_remapping_tables[3]; break;
--			case 10: cfg = ac_remapping_tables[5]; break;
-+			case 10:
-+				if (sid_read_soc_chipid() == SUNXI_CHIPID_T113M4020DC0)
-+					cfg = ac_remapping_tables[0];
-+				else
-+					cfg = ac_remapping_tables[5];
-+				break;
- 			case 11: cfg = ac_remapping_tables[4]; break;
- 			default:
- 			case 12: cfg = ac_remapping_tables[1]; break;
-diff --git a/drivers/ram/sunxi/dram_sun20i_d1.h b/drivers/ram/sunxi/dram_sun20i_d1.h
-index 91383f6cf10..7bd8f67a77a 100644
---- a/drivers/ram/sunxi/dram_sun20i_d1.h
-+++ b/drivers/ram/sunxi/dram_sun20i_d1.h
-@@ -19,6 +19,13 @@ enum sunxi_dram_type {
- 	SUNXI_DRAM_TYPE_LPDDR3 = 7,
- };
- 
-+enum sunxi_soc_chipid {
-+	SUNXI_CHIPID_F133A = 0x5C00,
-+	SUNXI_CHIPID_D1S = 0x5E00,
-+	SUNXI_CHIPID_T113S3 = 0x6000,
-+	SUNXI_CHIPID_T113M4020DC0 = 0x7200,
-+};
-+
- /*
-  * This structure contains a mixture of fixed configuration settings,
-  * variables that are used at runtime to communicate settings between
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 86d7de89e77..3acd57fb774 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -110,6 +110,7 @@ CONFIG_PINCTRL_QCOM_QCM2290=y
+ CONFIG_PINCTRL_QCOM_QCS404=y
+ CONFIG_PINCTRL_QCOM_SA8775P=y
+ CONFIG_PINCTRL_QCOM_SC7280=y
++CONFIG_PINCTRL_QCOM_SDM660=y
+ CONFIG_PINCTRL_QCOM_SDM845=y
+ CONFIG_PINCTRL_QCOM_SM6115=y
+ CONFIG_PINCTRL_QCOM_SM8150=y
 -- 
-2.39.5
-
+2.49.1
 
