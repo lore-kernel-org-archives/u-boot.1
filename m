@@ -4,90 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B2CFCAC587
-	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 13:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B6E5CAC587
+	for <u-boot@archiver.kernel.org>; Sun, 14 Sep 2025 14:33:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D70158344E;
-	Sun, 14 Sep 2025 15:13:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 88EAD83071;
+	Sun, 14 Sep 2025 16:33:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gmerKWO5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Q4YMUUHv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0108581E13; Sun, 14 Sep 2025 06:42:07 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E00CE83071
- for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 06:42:03 +0200 (CEST)
+ id BD89C8317B; Sun, 14 Sep 2025 16:33:39 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C35BA82AE1
+ for <u-boot@lists.denx.de>; Sun, 14 Sep 2025 16:33:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lucienzx159@gmail.com
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-7723cf6e4b6so2525765b3a.3
- for <u-boot@lists.denx.de>; Sat, 13 Sep 2025 21:42:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757824922; x=1758429722; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ic5+LuSXVituobjWM6m9ikaU79Ql4OjAgtBsKDvy8AA=;
- b=gmerKWO5BUrnOKySsYyPtl9LkMuCV6zZipZROpl0fxQPQ1RUP87csjHGEEs0IIw6nH
- puUfJr6IU7xn/JUG2A2x1BKKolG4jifMoUDyKm3FcZdWHsOnKYQiqtC0f1iJKY+mKZ7d
- cIz4P2nyCrt4m78KOf/jxw4ypEYIUROtrLZbXKZeIbtbIM5MoE6OA5xuEB/bW8LcgJPa
- zmcFN280lubz+nQo8+/ZA3EZ73O2pDkteHTNBmHShhU4mzpaXf74W+HhxCTWE0l89pYW
- STnAc8Lf3iOf/GJp8jqkwcQ7a2oDlWaOY1l8PwiJJy06NBq9YwiIkL2+TKjLHrDsaQTf
- meGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757824922; x=1758429722;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ic5+LuSXVituobjWM6m9ikaU79Ql4OjAgtBsKDvy8AA=;
- b=RihSSzadq+UKs/9Cv8b5Adfq4mebXXu5a9v8PSfjVXVJFTiH6AzPlFftfX3d2sNo3G
- oMxm3RRbK7e0vL/16IgX0tuHKm1tALGugu+f8LnJijRpNKptfwEcEDFzYub/6ZWdi7g0
- 4lm+5ycbbuCUZ1znCWB/udAVuZHv3a4zSfDR2VyZa6mW35LmRFco4Q65y0ubiu+Rg4sf
- 6ze5+Fr6OGu+NbeIRnoLrnVF7xQSTS75+S4xlHQzihYwO+TlQkGiO0iBLidy/LwZnXfN
- CJX9ZatEW/xGxMkRVvy9cek+MjOyAW2AoSnz25HTtgj3xHUjpmJLp1hs9dW2BsJKn6AF
- 89dA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXImWbZzvpnFCWIwcuoJJm6Qda7fZZQZBhPf/SZb6dWv9Mh7sDtPzOLz47a3uWIv9CvkaikSd8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxCxgPD8XJiSZsqV12/mlgWNiC37gwzZvrw5WSyeh3tQobdq6O9
- hx0EZtfcvr7ouFtpQnyzUMUaVlm0S3+9iWdkSKaEGoezX/DtZXuKwiGS
-X-Gm-Gg: ASbGncvs6t7N0bBgy76FgqUGgzA9OM5L1dvZGf6yzDMqy+i5nDeSYOLrvV1rxmehFoo
- dcq/KEObB0iTXyBntHs4IjdRhhDl91g0Uw8iIIK60cVdpgQ4FFj3ynR96Fe+Kr9QHFAnmAhbt3+
- +p86mVZnZBuD7mCq8FdAVDUqSP+p9huqDrTfz1aLMNR4XNoyfYYR3CA0lgSnpB4ppSSJYcelOaw
- lytyG+r4LPitv4lAi2foCEZx9XydnzgMjiPlMb6Ng2PM10vVLIYm+hhxZebeLcvfbHD6njdn/Vr
- PvwMQh+ikVMOg2uakRdxOxM2hMQzQPKpN4iCFtDRRmq+xpyhdRBExC3WFpTxRTDDaB4PrgL8LBA
- qpzKW8H2/ktd4IEFR3I2XY4dx7JPBuqXNoa3jk76Y72dsdG8bda3wcR7hbbwNHo8jHD/nXKRdBS
- Q67AFq6VEBA1f1gGAW2Q==
-X-Google-Smtp-Source: AGHT+IGzQObm+iHkQaNBqaFdAu8MF6PMp141g3euXtNZNlYZc3lvlJCzu0hS8S5cMVtzQ7rsLO1IBQ==
-X-Received: by 2002:a05:6a00:2289:b0:775:f2cc:c78e with SMTP id
- d2e1a72fcca58-776121674e0mr9408006b3a.21.1757824922024; 
- Sat, 13 Sep 2025 21:42:02 -0700 (PDT)
-Received: from localhost.localdomain (124-218-201-66.cm.dynamic.apol.com.tw.
- [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-77607b346dasm9841386b3a.68.2025.09.13.21.41.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Sep 2025 21:42:01 -0700 (PDT)
-From: "Lucien.Jheng" <lucienzx159@gmail.com>
-To: ilias.apalodimas@linaro.org, jerome.forissier@linaro.org,
- marek.vasut+renesas@mailbox.org, paul.barker.ct@bp.renesas.com,
- pbrobinson@gmail.com, lucienzx159@gmail.com, u-boot@lists.denx.de,
- trini@konsulko.com
-Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com,
- frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com,
- albert-al.lee@airoha.com
-Subject: [PATCH 1/1] [U-Boot, v4,
- 1/1]net: phy: Add the Airoha EN8811H PHY driver
-Date: Sun, 14 Sep 2025 12:41:15 +0800
-Message-Id: <20250914044115.18391-1-lucienzx159@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58EEXDpf1313570;
+ Sun, 14 Sep 2025 09:33:13 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1757860393;
+ bh=lQUBNIFI7eN3XevrgMbmBW3psNTvg3hC4aDRrsscKvs=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Q4YMUUHv3binpRoxJAYN/um832vHrgDdlodnODPUFOC60QnfiUFAaGc7SEak41b7U
+ 9klUbzNZMN7RCpmRGb8Q2a3PsMY2G2fWXRThgRQwIrp5AQF79FDEDC8meWAJ4UWIT6
+ oHPDmO/iOeBHMx29cIxnzrFC3jNQ8xrAvbTbi2vE=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58EEXDmb3281001
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Sun, 14 Sep 2025 09:33:13 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Sun, 14
+ Sep 2025 09:33:13 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Sun, 14 Sep 2025 09:33:13 -0500
+Received: from [172.24.233.62] (devarsh-precision-tower-3620.dhcp.ti.com
+ [172.24.233.62])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58EEX8v22597464;
+ Sun, 14 Sep 2025 09:33:09 -0500
+Message-ID: <fdfaf245-aecc-48a5-b247-6320d4f0aa49@ti.com>
+Date: Sun, 14 Sep 2025 20:03:08 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 14 Sep 2025 15:13:47 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] drivers: video: tidss: Refactor tidss_drv
+To: Swamil Jain <s-jain1@ti.com>, <aradhya.bhatia@linux.dev>, <n-jain1@ti.com>,
+ <tomi.valkeinen@ideasonboard.com>, <trini@konsulko.com>, <agust@denx.de>
+CC: <vigneshr@ti.com>, <praneeth@ti.com>, <h-shenoy@ti.com>, <u-kumar1@ti.com>,
+ <n-francis@ti.com>, <u-boot@lists.denx.de>
+References: <20250725043012.1186886-1-s-jain1@ti.com>
+Content-Language: en-US
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <20250725043012.1186886-1-s-jain1@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,955 +82,877 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
-100/1000/2500 Mbps with auto negotiation only.
+Hi Swamil,
 
-The driver uses two firmware files, for which updated versions are added to
-linux-firmware already.
+Thanks for the patch.
 
-Locating the AIROHA FW within the filesystem at the designated partition
-and path will trigger its automatic loading and writing to the PHY via MDIO.
-If need board specific loading override,
-please override the en8811h_read_fw function on board or architecture level.
+On 25/07/25 10:00, Swamil Jain wrote:
+> - Refactor tidss_drv to improve modularity, enabling support for more
+>    display interfaces beyond OLDI in the future
+> - Add detection and initialization of active OLDI panels using the DT
+> - Port tidss_oldi.c from the upstream Linux kernel oldi series[0] and
+>    derive several APIs from it to determine the dual link pixel order
+> - Add tidss_oldi_init() and helper routines to handle OLDI-specific
+>    setup and move related helper routines to tidss_oldi.c
+> 
+> [0]: https://lore.kernel.org/all/20250528122544.817829-1-aradhya.bhatia@linux.dev/
+> 
+> Signed-off-by: Swamil Jain <s-jain1@ti.com>
+> ---
+> Changes in v2:
+> - Iterate through all available OLDIs
+> - Move dss_oldi_tx_power from tidss_drv.c to tidss_oldi.c
+> - Rename tidss_attach_active_panel to a more generic name
+> - To handle all active hw video ports, add an array for active hw vps
+> - Iterate through all active hw vps to enable respective clks
+> 
+> Link to v1: https://lore.kernel.org/u-boot/20250603105735.4038240-1-s-jain1@ti.com/
+> ---
+>   drivers/video/tidss/Makefile     |   2 +-
+>   drivers/video/tidss/tidss_drv.c  | 215 +++++++++++++-------
+>   drivers/video/tidss/tidss_drv.h  |  14 +-
+>   drivers/video/tidss/tidss_oldi.c | 332 +++++++++++++++++++++++++++++++
+>   drivers/video/tidss/tidss_oldi.h |  89 +++++++++
+>   drivers/video/tidss/tidss_regs.h |  21 --
+>   6 files changed, 574 insertions(+), 99 deletions(-)
+>   create mode 100644 drivers/video/tidss/tidss_oldi.c
+>   create mode 100644 drivers/video/tidss/tidss_oldi.h
+> 
+> diff --git a/drivers/video/tidss/Makefile b/drivers/video/tidss/Makefile
+> index 3381a5fec57..846c19c5a7b 100644
+> --- a/drivers/video/tidss/Makefile
+> +++ b/drivers/video/tidss/Makefile
+> @@ -9,4 +9,4 @@
+>   # Author: Tomi Valkeinen <tomi.valkeinen@ti.com>
+>   
+>   
+> -obj-${CONFIG_$(PHASE_)VIDEO_TIDSS} = tidss_drv.o
+> +obj-${CONFIG_$(PHASE_)VIDEO_TIDSS} = tidss_drv.o tidss_oldi.o
+> diff --git a/drivers/video/tidss/tidss_drv.c b/drivers/video/tidss/tidss_drv.c
+> index 865d4bddb7f..76985931198 100644
+> --- a/drivers/video/tidss/tidss_drv.c
+> +++ b/drivers/video/tidss/tidss_drv.c
+> @@ -32,6 +32,7 @@
+>   #include <dm/of_access.h>
+>   #include <dm/device_compat.h>
+>   #include <dm/device-internal.h>
+> +#include <dm/ofnode_graph.h>
+>   
+>   #include <linux/bug.h>
+>   #include <linux/err.h>
+> @@ -40,6 +41,7 @@
+>   
+>   #include "tidss_drv.h"
+>   #include "tidss_regs.h"
+> +#include "tidss_oldi.h"
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+>   
+> @@ -249,37 +251,6 @@ static void OVR_REG_FLD_MOD(struct tidss_drv_priv *priv, u32 ovr, u32 idx,
+>   					      val, start, end));
+>   }
+>   
+> -static void dss_oldi_tx_power(struct tidss_drv_priv *priv, bool power)
+> -{
+> -	u32 val;
+> -
+> -	if (WARN_ON(!priv->oldi_io_ctrl))
+> -		return;
+> -
+> -	if (priv->feat->subrev == DSS_AM625) {
+> -		if (power) {
+> -			switch (priv->oldi_mode) {
+> -			case OLDI_SINGLE_LINK_SINGLE_MODE:
+> -				/* Power down OLDI TX 1 */
+> -				val = OLDI1_PWRDN_TX;
+> -				break;
+> -			case OLDI_DUAL_LINK:
+> -				/* No Power down */
+> -				val = 0;
+> -			break;
+> -			default:
+> -				/* Power down both the OLDI TXes */
+> -				val = OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX;
+> -				break;
+> -			}
+> -		} else {
+> -			val = OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX;
+> -		}
+> -		regmap_update_bits(priv->oldi_io_ctrl, OLDI_PD_CTRL,
+> -				   OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX, val);
+> -	}
+> -}
+> -
+>   static void dss_set_num_datalines(struct tidss_drv_priv *priv,
+>   				  u32 hw_videoport)
+>   {
+> @@ -562,7 +533,7 @@ int dss_vp_enable_clk(struct tidss_drv_priv *priv, u32 hw_videoport)
+>   void dss_vp_prepare(struct tidss_drv_priv *priv, u32 hw_videoport)
+>   {
+>   	dss_vp_set_gamma(priv, hw_videoport, NULL, 0);
+> -	dss_vp_set_default_color(priv, 0, 0);
+> +	dss_vp_set_default_color(priv, hw_videoport, 0);
+>   
+>   	if (priv->feat->vp_bus_type[hw_videoport] == DSS_VP_OLDI) {
+>   		dss_oldi_tx_power(priv, true);
+> @@ -734,27 +705,111 @@ static void dss_vp_init(struct tidss_drv_priv *priv)
+>   		VP_REG_FLD_MOD(priv, i, DSS_VP_CONFIG, 1, 2, 2);
+>   }
+>   
+> -static int dss_init_am65x_oldi_io_ctrl(struct udevice *dev,
+> -				       struct tidss_drv_priv *priv)
+> +bool is_pipeline_components_enabled(ofnode endpoint, ofnode prev)
+>   {
+> -	struct udevice *syscon;
+> -	struct regmap *regmap;
+> -	int ret = 0;
+> +	ofnode ports_parent = ofnode_graph_get_port_parent(endpoint);
+> +	ofnode ports = ofnode_find_subnode(ports_parent, "ports");
+> +	ofnode port, local_endpoint, remote_endpoint;
+>   
+> -	ret = uclass_get_device_by_phandle(UCLASS_SYSCON, dev, "ti,am65x-oldi-io-ctrl",
+> -					   &syscon);
+> -	if (ret) {
+> -		debug("unable to find ti,am65x-oldi-io-ctrl syscon device (%d)\n", ret);
+> -		return ret;
+> +	if (!ofnode_valid(ports) || !ofnode_valid(ports_parent))
+> +		return false;
+> +
+> +	if (strstr(ofnode_get_name(ports_parent), "dss"))
+> +		/*
+> +		 * If we reach dss again, return true. In the case of a dual-link OLDI,
+> +		 * we have 2 ports. While traversing oldi@0, this API also traverses oldi@1
+> +		 * and hence it will reach dss_ports again. If it reaches dss_ports,
+> +		 * that means every element in the pipeline is enabled already, and hence
+> +		 * if dss is reached, return true.
+> +		 */
+> +		return true;
+> +
+> +	/*
+> +	 *Traverse all endpoints of the ports node.
+> +	 */
+> +	ofnode_for_each_subnode(port, ports) {
+> +		if (strncmp(ofnode_get_name(port), "port", 4))
+> +			continue;
+> +		ofnode_for_each_subnode(local_endpoint, port) {
+> +			if (strncmp(ofnode_get_name(local_endpoint), "endpoint", 8))
+> +				continue;
+> +			remote_endpoint = ofnode_graph_get_remote_endpoint(local_endpoint);
+> +			if (prev.np == remote_endpoint.np)
+> +				continue;
+> +			return ofnode_is_enabled(remote_endpoint) &&
+> +			       is_pipeline_components_enabled(remote_endpoint, local_endpoint);
+> +		}
+>   	}
+> +	return true;
+> +}
+> +
+> +static bool is_bridge_and_panel_enabled(ofnode endpoint)
+> +{
+> +	ofnode remote_endpoint = ofnode_graph_get_remote_endpoint(endpoint);
+> +	ofnode prev_endpoint = endpoint;
+>   
+> -	/* get grf-reg base address */
+> -	regmap = syscon_get_regmap(syscon);
+> -	if (!regmap) {
+> -		debug("unable to find rockchip grf regmap\n");
+> -		return -ENODEV;
+> +	return is_pipeline_components_enabled(remote_endpoint, prev_endpoint);
+> +}
+> +
+> +static int tidss_enable_pipeline_components(struct tidss_drv_priv *priv)
+> +{
+> +	/*
+> +	 * Check if any bridge is present in the pipeline and initialize it.
+> +	 * Pipeline here refer to DSS=>bridges=>panel. If we find all elements
+> +	 * of a pipeline enabled in DT then only pipeline is enabled.
+> +	 * This function returns active panels count with all bridges with sink
+> +	 * are enabled in DT.
+> +	 */
+> +	ofnode dss_node = dev_ofnode(priv->dev);
+> +	ofnode dss_ports = ofnode_find_subnode(dss_node, "ports");
+> +	ofnode port, remote_port, local_endpoint;
+> +	int hw_videoport;
+> +	int active_pipelines = 0;
+> +	int ret;
+> +
+> +	ofnode_for_each_subnode(port, dss_ports) {
+> +		if (strncmp(ofnode_get_name(port), "port", 4))
+> +			continue;
+> +
+> +		ofnode_for_each_subnode(local_endpoint, port) {
+> +			if (strncmp(ofnode_get_name(local_endpoint), "endpoint", 8))
+> +				continue;
+> +
+> +			if (!is_bridge_and_panel_enabled(local_endpoint))
+> +				continue;
+> +
+> +			/* Get videoport id*/
+> +			ret = ofnode_read_u32(port, "reg", &hw_videoport);
+> +			if (ret) {
+> +				dev_warn(priv->dev,
+> +					 "Failed to read videoport id, reg property not found for node: %s\n",
+> +					 ofnode_get_name(local_endpoint));
+> +				/* Check for other video ports */
+> +				continue;
+> +			}
+> +
+> +			remote_port = ofnode_graph_get_remote_port_parent(local_endpoint);
+> +			if (strstr(ofnode_get_name(remote_port), "oldi")) {
+> +				/* Initialize oldi */
+> +				ret = tidss_oldi_init(priv->dev);
+> +				if (ret) {
+> +					if (ret != -ENODEV)
+> +						dev_warn(priv->dev, "oldi panel error %d\n", ret);
+> +					break;
+> +				}
+> +
+> +				priv->active_hw_vps[active_pipelines++] = hw_videoport;
+> +				/*
+> +				 * Only one dual-link oldi panel supported at a time so
+> +				 * initialize it only and then check for other videoports
+> +				 */
+> +				break;
+> +			}
+> +		}
+>   	}
+> -	priv->oldi_io_ctrl = regmap;
+> +	priv->active_pipelines = active_pipelines;
+> +	if (active_pipelines == 0)
+> +		return -1;
+>   	return 0;
+>   }
+>   
+> @@ -772,7 +827,6 @@ static int tidss_drv_probe(struct udevice *dev)
+>   	priv->dev = dev;
+>   
+>   	priv->feat = &dss_am625_feats;
+> -
+>       /*
+>        * set your plane format based on your bmp image
+>        * Supported 24bpp and 32bpp bmpimages
+> @@ -782,6 +836,18 @@ static int tidss_drv_probe(struct udevice *dev)
+>   
+>   	dss_common_regmap = priv->feat->common_regs;
+>   
+> +	/*
+> +	 * Check for all components present in the pipeline. Pipeline here refers
+> +	 * to: DSS_HW_VP*=>bridge[0]=>....=>bridge[n]=>panel. Enable all
+> +	 * components in the pipeline.
+> +	 */
+> +	ret = tidss_enable_pipeline_components(priv);
+> +	if (ret) {
+> +		if (ret == -1)
+> +			dev_warn(priv->dev, "NO active panels detected, check status of panel nodes\n");
+> +		return ret;
+> +	}
+> +
+>   	ret = uclass_first_device_err(UCLASS_PANEL, &panel);
+>   	if (ret) {
+>   		if (ret != -ENODEV)
+> @@ -829,10 +895,12 @@ static int tidss_drv_probe(struct udevice *dev)
+>   	dss_vid_write(priv, 0, DSS_VID_BA_1, uc_plat->base & 0xffffffff);
+>   	dss_vid_write(priv, 0, DSS_VID_BA_EXT_1, (u64)uc_plat->base >> 32);
+>   
+> -	ret = dss_plane_setup(priv, 0, 0);
+> -	if (ret) {
+> -		dss_plane_enable(priv, 0, false);
+> -			return ret;
+> +	for (i = 0; i < priv->active_pipelines; i++) {
+> +		ret = dss_plane_setup(priv, 0, priv->active_hw_vps[i]);
+> +		if (ret) {
+> +			dss_plane_enable(priv, 0, false);
+> +				return ret;
+> +		}
+>   	}
+>   
+>   	dss_plane_enable(priv, 0, true);
+> @@ -844,34 +912,31 @@ static int tidss_drv_probe(struct udevice *dev)
+>   		priv->base_vp[i] = dev_remap_addr_name(dev, priv->feat->vp_name[i]);
+>   	}
+>   
+> -	ret = clk_get_by_name(dev, "vp1", &priv->vp_clk[0]);
+> -	if (ret) {
+> -		dev_err(dev, "video port %d clock enable error %d\n", i, ret);
+> -		return ret;
+> -	}
+> +	uc_priv->xsize = timings.hactive.typ;
+> +	uc_priv->ysize = timings.vactive.typ;
+>   
+> -	dss_ovr_set_plane(priv, 1, 0, 0, 0, 0);
+> -	dss_ovr_enable_layer(priv, 0, 0, true);
+> +	for (i = 0; i < priv->active_pipelines; i++) {
+>   
+> -	/* Video Port cloks */
+> -	dss_vp_enable_clk(priv, 0);
+> +		ret = clk_get_by_name(dev,
+> +				      dss_am625_feats.vpclk_name[priv->active_hw_vps[i]],
+> +				      &priv->vp_clk[priv->active_hw_vps[i]]);
+> +		if (ret) {
+> +			dev_err(dev, "video port %d clock enable error %d\n", i, ret);
+> +			return ret;
+> +		}
+>   
+> -	dss_vp_set_clk_rate(priv, 0, timings.pixelclock.typ * 1000);
+> +		dss_ovr_set_plane(priv, 1, priv->active_hw_vps[i], 0, 0, 0);
+> +		dss_ovr_enable_layer(priv, priv->active_hw_vps[i], 0, true);
+>   
+> -	priv->oldi_mode = OLDI_MODE_OFF;
+> -	uc_priv->xsize = timings.hactive.typ;
+> -	uc_priv->ysize = timings.vactive.typ;
+> -	if (priv->feat->subrev == DSS_AM65X || priv->feat->subrev == DSS_AM625) {
+> -		priv->oldi_mode = OLDI_DUAL_LINK;
+> -		if (priv->oldi_mode) {
+> -			ret = dss_init_am65x_oldi_io_ctrl(dev, priv);
+> -			if (ret)
+> -				return ret;
+> -		}
+> +		/* Video Port cloks */
+> +		dss_vp_enable_clk(priv, priv->active_hw_vps[i]);
+> +
 
-Linux upstream AIROHA EN8811H driver commit:
-71e79430117d56c409c5ea485a263bc0d8083390
+remove blank line
 
-Based on the Linux upstream AIROHA EN8811H driver code(air_en8811h.c),
-I have modified the relevant process to align with the U-Boot boot sequence.
-and have validated this on Banana Pi BPI-R3 Mini.
+> +		dss_vp_set_clk_rate(priv, priv->active_hw_vps[i], timings.pixelclock.typ * 1000);
+> +
 
-Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
----
-Change in PATCH v4:
-air_en8811.c:
- * Create the airoha folder to store all future airoha phy drivers.
- * Use `request_firmware_into_buf_via_script` for firmware loading.
+remove blank line
+> +		dss_vp_prepare(priv, priv->active_hw_vps[i]);
+> +		dss_vp_enable(priv, priv->active_hw_vps[i], &timings);
+>   	}
+>   
+> -	dss_vp_prepare(priv, 0);
+> -	dss_vp_enable(priv, 0, &timings);
+>   	dss_vp_init(priv);
+>   
+>   	ret = clk_get_by_name(dev, "fck", &priv->fclk);
+> diff --git a/drivers/video/tidss/tidss_drv.h b/drivers/video/tidss/tidss_drv.h
+> index e229d975ff4..04f124f4d27 100644
+> --- a/drivers/video/tidss/tidss_drv.h
+> +++ b/drivers/video/tidss/tidss_drv.h
+> @@ -13,9 +13,12 @@
+>   #define __TIDSS_DRV_H__
+>   
+>   #include <media_bus_format.h>
+> +#include <syscon.h>
+> +#include <regmap.h>
+>   
+>   #define TIDSS_MAX_PORTS 4
+>   #define TIDSS_MAX_PLANES 4
+> +#define TIDSS_MAX_OLDI_TXES 2
+>   
+>   enum dss_vp_bus_type {
+>   	DSS_VP_DPI,		/* DPI output */
+> @@ -31,6 +34,8 @@ enum dss_oldi_modes {
+>   	OLDI_DUAL_LINK,				/* Combined Output over OLDI 0 and 1. */
+>   };
+>   
+> +enum oldi_mode_reg_val { SPWG_18 = 0, JEIDA_24 = 1, SPWG_24 = 2 };
+> +
+>   struct dss_features_scaling {
+>   	u32 in_width_max_5tap_rgb;
+>   	u32 in_width_max_3tap_rgb;
+> @@ -96,13 +101,13 @@ struct dss_features {
+>   	u32 vid_order[TIDSS_MAX_PLANES];
+>   };
+>   
+> -enum dss_oldi_mode_reg_val { SPWG_18 = 0, JEIDA_24 = 1, SPWG_24 = 2 };
+> +// enum dss_oldi_mode_reg_val { SPWG_18 = 0, JEIDA_24 = 1, SPWG_24 = 2 };
 
-Change in PATCH v3:
-air_en8811.c:
- * Add U-Boot environment variable(en8811h_fw_part, en8811h_fw_dm_dir, en8811h_fw_dsp_dir)
-   support for firmware loading.
+Why is above commented out ? If not needed then please remove the line. 
+Also run checkpatch. With the suggested fixes,
 
-Regarding the firmware loading mechanism,
-Please refer to the following script example for guidance:
-1.  `env set en8811h_load_firmware 'env set fw_addr 0x46000000 && env set fw_size 0x24000 && mw.b ${fw_addr} 0 ${fw_size} && load mmc 0:3 0x46000000 /boot/EthMD32.dm.bin && if test ${filesize} -eq 4000; then load mmc 0:3 0x46004000 /boot/EthMD32.DSP.bin; else echo "loading MD32 FW failed"; env set fw_size 0; exit 1;fi'`
-````Test Log````
-Net:   16384 bytes read in 1 ms (15.6 MiB/s)
-131072 bytes read in 9 ms (13.9 MiB/s)
-addr: 0x46000000, size: 0x24000
-Found Airoha Firmware.
-MD32 firmware version: 24112802
-````End of Test Log````
+Reviewed-by: Devarsh Thakkar <devarsht@ti.com>
 
-2.  `env set en8811h_load_firmware 'env set fw_addr 0x46000000 && env set fw_size 0x24000 && mmc partconf 0 1 2 2 && mmc read $fw_addr 0x0 0x120 && mmc partconf 0 1 1 0'`
-````Test Log````
-Net:   MMC read: dev # 0, block # 0, count 288 ... 288 blocks read: OK
-addr: 0x46000000, size: 0x24000
-Found Airoha Firmware.
-MD32 firmware version: 24112802
-````End of Test Log````
+Regards
+Devarsh
 
- drivers/net/phy/Kconfig             |   2 +
- drivers/net/phy/Makefile            |   1 +
- drivers/net/phy/airoha/Kconfig      |  11 +
- drivers/net/phy/airoha/Makefile     |   3 +
- drivers/net/phy/airoha/air_en8811.c | 833 ++++++++++++++++++++++++++++
- 5 files changed, 850 insertions(+)
- create mode 100644 drivers/net/phy/airoha/Kconfig
- create mode 100644 drivers/net/phy/airoha/Makefile
- create mode 100644 drivers/net/phy/airoha/air_en8811.c
-
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 21bf983056a..538819d92cd 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -184,6 +184,8 @@ config PHY_MARVELL_10G
- 	help
- 	  Support for the Marvell Alaska MV88X3310 and compatible PHYs.
-
-+source "drivers/net/phy/airoha/Kconfig"
-+
- config PHY_MESON_GXL
- 	bool "Amlogic Meson GXL Internal PHY support"
-
-diff --git a/drivers/net/phy/Makefile b/drivers/net/phy/Makefile
-index a119eb5e177..62446e4ef44 100644
---- a/drivers/net/phy/Makefile
-+++ b/drivers/net/phy/Makefile
-@@ -21,6 +21,7 @@ obj-$(CONFIG_PHY_ET1011C) += et1011c.o
- obj-$(CONFIG_PHY_LXT) += lxt.o
- obj-$(CONFIG_PHY_MARVELL) += marvell.o
- obj-$(CONFIG_PHY_MARVELL_10G) += marvell10g.o
-+obj-y += airoha/
- obj-$(CONFIG_PHY_MICREL_KSZ8XXX) += micrel_ksz8xxx.o
- obj-$(CONFIG_PHY_MICREL_KSZ90X1) += micrel_ksz90x1.o
- obj-$(CONFIG_PHY_MESON_GXL) += meson-gxl.o
-diff --git a/drivers/net/phy/airoha/Kconfig b/drivers/net/phy/airoha/Kconfig
-new file mode 100644
-index 00000000000..84f12ebb1a2
---- /dev/null
-+++ b/drivers/net/phy/airoha/Kconfig
-@@ -0,0 +1,11 @@
-+# SPDX-License-Identifier: GPL-2.0-only
-+menuconfig PHY_AIROHA
-+	bool "Airoha Ethernet PHYs support"
-+
-+config PHY_AIROHA_EN8811
-+	bool "Airoha Ethernet EN8811H support"
-+	depends on PHY_AIROHA
-+        select FS_LOADER
-+	help
-+	  AIROHA EN8811H supported.
-+
-diff --git a/drivers/net/phy/airoha/Makefile b/drivers/net/phy/airoha/Makefile
-new file mode 100644
-index 00000000000..84d23b19ab0
---- /dev/null
-+++ b/drivers/net/phy/airoha/Makefile
-@@ -0,0 +1,3 @@
-+# SPDX-License-Identifier: GPL-2.0
-+
-+obj-$(CONFIG_PHY_AIROHA_EN8811) += air_en8811.o
-diff --git a/drivers/net/phy/airoha/air_en8811.c b/drivers/net/phy/airoha/air_en8811.c
-new file mode 100644
-index 00000000000..8262d4554b1
---- /dev/null
-+++ b/drivers/net/phy/airoha/air_en8811.c
-@@ -0,0 +1,833 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Driver for the Airoha EN8811H 2.5 Gigabit PHY.
-+ *
-+ * Limitations of the EN8811H:
-+ * - Only full duplex supported
-+ * - Forced speed (AN off) is not supported by hardware (100Mbps)
-+ *
-+ * Source originated from linux air_en8811h.c
-+ *
-+ * Copyright (C) 2025 Airoha Technology Corp.
-+ */
-+
-+#include <phy.h>
-+#include <errno.h>
-+#include <log.h>
-+#include <env.h>
-+#include <malloc.h>
-+#include <fs_loader.h>
-+#include <asm/unaligned.h>
-+#include <linux/iopoll.h>
-+#include <linux/bitops.h>
-+#include <linux/compat.h>
-+#include <dm/device_compat.h>
-+#include <u-boot/crc.h>
-+
-+#define EN8811H_PHY_ID		0x03a2a411
-+
-+#define AIR_FW_ADDR_DM	0x00000000
-+#define AIR_FW_ADDR_DSP	0x00100000
-+
-+#define EN8811H_MD32_DM_SIZE	0x4000
-+#define EN8811H_MD32_DSP_SIZE	0x20000
-+
-+ #define EN8811H_FW_CTRL_1		0x0f0018
-+ #define EN8811H_FW_CTRL_1_START	0x0
-+ #define EN8811H_FW_CTRL_1_FINISH	0x1
-+ #define EN8811H_FW_CTRL_2		0x800000
-+ #define EN8811H_FW_CTRL_2_LOADING	BIT(11)
-+
-+ /* MII Registers */
-+ #define AIR_AUX_CTRL_STATUS		0x1d
-+ #define AIR_AUX_CTRL_STATUS_SPEED_MASK	GENMASK(4, 2)
-+ #define AIR_AUX_CTRL_STATUS_SPEED_100	0x4
-+ #define AIR_AUX_CTRL_STATUS_SPEED_1000	0x8
-+ #define AIR_AUX_CTRL_STATUS_SPEED_2500	0xc
-+
-+#define AIR_EXT_PAGE_ACCESS		0x1f
-+#define AIR_PHY_PAGE_STANDARD		0x0000
-+#define AIR_PHY_PAGE_EXTENDED_4		0x0004
-+
-+/* MII Registers Page 4*/
-+#define AIR_BPBUS_MODE			0x10
-+#define AIR_BPBUS_MODE_ADDR_FIXED	0x0000
-+#define AIR_BPBUS_MODE_ADDR_INCR	BIT(15)
-+#define AIR_BPBUS_WR_ADDR_HIGH		0x11
-+#define AIR_BPBUS_WR_ADDR_LOW		0x12
-+#define AIR_BPBUS_WR_DATA_HIGH		0x13
-+#define AIR_BPBUS_WR_DATA_LOW		0x14
-+#define AIR_BPBUS_RD_ADDR_HIGH		0x15
-+#define AIR_BPBUS_RD_ADDR_LOW		0x16
-+#define AIR_BPBUS_RD_DATA_HIGH		0x17
-+#define AIR_BPBUS_RD_DATA_LOW		0x18
-+
-+/* Registers on MDIO_MMD_VEND1 */
-+#define EN8811H_PHY_FW_STATUS		0x8009
-+#define EN8811H_PHY_READY		0x02
-+
-+/* Registers on MDIO_MMD_VEND2 */
-+#define AIR_PHY_LED_BCR			0x021
-+#define AIR_PHY_LED_BCR_MODE_MASK	GENMASK(1, 0)
-+#define AIR_PHY_LED_BCR_TIME_TEST	BIT(2)
-+#define AIR_PHY_LED_BCR_CLK_EN		BIT(3)
-+#define AIR_PHY_LED_BCR_EXT_CTRL	BIT(15)
-+
-+#define AIR_PHY_LED_DUR_ON		0x022
-+
-+#define AIR_PHY_LED_DUR_BLINK		0x023
-+
-+#define AIR_PHY_LED_ON(i)	       (0x024 + ((i) * 2))
-+#define AIR_PHY_LED_ON_MASK		(GENMASK(6, 0) | BIT(8))
-+#define AIR_PHY_LED_ON_LINK1000		BIT(0)
-+#define AIR_PHY_LED_ON_LINK100		BIT(1)
-+#define AIR_PHY_LED_ON_LINK10		BIT(2)
-+#define AIR_PHY_LED_ON_LINKDOWN		BIT(3)
-+#define AIR_PHY_LED_ON_FDX		BIT(4) /* Full duplex */
-+#define AIR_PHY_LED_ON_HDX		BIT(5) /* Half duplex */
-+#define AIR_PHY_LED_ON_FORCE_ON		BIT(6)
-+#define AIR_PHY_LED_ON_LINK2500		BIT(8)
-+#define AIR_PHY_LED_ON_POLARITY		BIT(14)
-+#define AIR_PHY_LED_ON_ENABLE			BIT(15)
-+
-+#define AIR_PHY_LED_BLINK(i)	       (0x025 + ((i) * 2))
-+#define AIR_PHY_LED_BLINK_1000TX	BIT(0)
-+#define AIR_PHY_LED_BLINK_1000RX	BIT(1)
-+#define AIR_PHY_LED_BLINK_100TX		BIT(2)
-+#define AIR_PHY_LED_BLINK_100RX		BIT(3)
-+#define AIR_PHY_LED_BLINK_10TX		BIT(4)
-+#define AIR_PHY_LED_BLINK_10RX		BIT(5)
-+#define AIR_PHY_LED_BLINK_COLLISION	BIT(6)
-+#define AIR_PHY_LED_BLINK_RX_CRC_ERR	BIT(7)
-+#define AIR_PHY_LED_BLINK_RX_IDLE_ERR	BIT(8)
-+#define AIR_PHY_LED_BLINK_FORCE_BLINK	BIT(9)
-+#define AIR_PHY_LED_BLINK_2500TX	BIT(10)
-+#define AIR_PHY_LED_BLINK_2500RX	BIT(11)
-+
-+#define EN8811H_FW_VERSION		0x3b3c
-+
-+#define EN8811H_POLARITY		0xca0f8
-+#define EN8811H_POLARITY_TX_NORMAL	BIT(0)
-+#define EN8811H_POLARITY_RX_REVERSE	BIT(1)
-+
-+#define EN8811H_CLK_CGM			0xcf958
-+#define EN8811H_CLK_CGM_CKO		BIT(26)
-+#define EN8811H_HWTRAP1			0xcf914
-+#define EN8811H_HWTRAP1_CKO		BIT(12)
-+
-+#define air_upper_16_bits(n) ((u16)((n) >> 16))
-+#define air_lower_16_bits(n) ((u16)((n) & 0xffff))
-+#define clear_bit(bit, bitmap)	__clear_bit(bit, bitmap)
-+
-+/* Led definitions */
-+#define EN8811H_LED_COUNT	3
-+
-+struct led {
-+	unsigned long rules;
-+	unsigned long state;
-+};
-+
-+enum {
-+	AIR_PHY_LED_STATE_FORCE_ON,
-+	AIR_PHY_LED_STATE_FORCE_BLINK,
-+};
-+
-+enum {
-+	AIR_PHY_LED_DUR_BLINK_32MS,
-+	AIR_PHY_LED_DUR_BLINK_64MS,
-+	AIR_PHY_LED_DUR_BLINK_128MS,
-+	AIR_PHY_LED_DUR_BLINK_256MS,
-+	AIR_PHY_LED_DUR_BLINK_512MS,
-+	AIR_PHY_LED_DUR_BLINK_1024MS,
-+};
-+
-+enum {
-+	AIR_LED_DISABLE,
-+	AIR_LED_ENABLE,
-+};
-+
-+enum {
-+	AIR_ACTIVE_LOW,
-+	AIR_ACTIVE_HIGH,
-+};
-+
-+enum {
-+	AIR_LED_MODE_DISABLE,
-+	AIR_LED_MODE_USER_DEFINE,
-+};
-+
-+/* Trigger specific enum */
-+enum air_led_trigger_netdev_modes {
-+	AIR_TRIGGER_NETDEV_LINK = 0,
-+	AIR_TRIGGER_NETDEV_LINK_10,
-+	AIR_TRIGGER_NETDEV_LINK_100,
-+	AIR_TRIGGER_NETDEV_LINK_1000,
-+	AIR_TRIGGER_NETDEV_LINK_2500,
-+	AIR_TRIGGER_NETDEV_LINK_5000,
-+	AIR_TRIGGER_NETDEV_LINK_10000,
-+	AIR_TRIGGER_NETDEV_HALF_DUPLEX,
-+	AIR_TRIGGER_NETDEV_FULL_DUPLEX,
-+	AIR_TRIGGER_NETDEV_TX,
-+	AIR_TRIGGER_NETDEV_RX,
-+	AIR_TRIGGER_NETDEV_TX_ERR,
-+	AIR_TRIGGER_NETDEV_RX_ERR,
-+
-+	/* Keep last */
-+	__AIR_TRIGGER_NETDEV_MAX,
-+};
-+
-+/* Default LED setup:
-+ * GPIO5 <-> LED0  On: Link detected, blink Rx/Tx
-+ * GPIO4 <-> LED1  On: Link detected at 2500 and 1000 Mbps
-+ * GPIO3 <-> LED2  On: Link detected at 2500 and  100 Mbps
-+ */
-+#define AIR_DEFAULT_TRIGGER_LED0 (BIT(AIR_TRIGGER_NETDEV_LINK)      | \
-+				  BIT(AIR_TRIGGER_NETDEV_RX)        | \
-+				  BIT(AIR_TRIGGER_NETDEV_TX))
-+#define AIR_DEFAULT_TRIGGER_LED1 (BIT(AIR_TRIGGER_NETDEV_LINK_2500) | \
-+				  BIT(AIR_TRIGGER_NETDEV_LINK_1000))
-+#define AIR_DEFAULT_TRIGGER_LED2 (BIT(AIR_TRIGGER_NETDEV_LINK_2500) | \
-+				  BIT(AIR_TRIGGER_NETDEV_LINK_100))
-+
-+#define AIR_PHY_LED_DUR_UNIT	781
-+#define AIR_PHY_LED_DUR (AIR_PHY_LED_DUR_UNIT << AIR_PHY_LED_DUR_BLINK_64MS)
-+
-+struct en8811h_priv {
-+	int firmware_version;
-+	bool		mcu_needs_restart;
-+	struct led	led[EN8811H_LED_COUNT];
-+};
-+
-+static int air_phy_read_page(struct phy_device *phydev)
-+{
-+	return phy_read(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS);
-+}
-+
-+static int air_phy_write_page(struct phy_device *phydev, int page)
-+{
-+	return phy_write(phydev, MDIO_DEVAD_NONE, AIR_EXT_PAGE_ACCESS, page);
-+}
-+
-+int air_phy_select_page(struct phy_device *phydev, int page)
-+{
-+	int ret, oldpage;
-+
-+	oldpage = air_phy_read_page(phydev);
-+	if (oldpage < 0)
-+		return oldpage;
-+
-+	if (oldpage != page) {
-+		ret = air_phy_write_page(phydev, page);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	return oldpage;
-+}
-+
-+int air_phy_restore_page(struct phy_device *phydev, int oldpage, int ret)
-+{
-+	int r;
-+
-+	if (oldpage < 0)
-+		return oldpage;
-+
-+	r = air_phy_write_page(phydev, oldpage);
-+	if (ret >= 0 && r < 0)
-+		ret = r;
-+
-+	return ret;
-+}
-+
-+static int air_buckpbus_reg_write(struct phy_device *phydev,
-+				  u32 pbus_address, u32 pbus_data)
-+{
-+	int ret, saved_page;
-+
-+	saved_page = air_phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			air_upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			air_lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
-+			air_upper_16_bits(pbus_data));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
-+			air_lower_16_bits(pbus_data));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+restore_page:
-+	if (ret < 0)
-+		printf("%s 0x%08x failed: %d\n", __func__,
-+		       pbus_address, ret);
-+
-+	return air_phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int air_buckpbus_reg_read(struct phy_device *phydev,
-+				 u32 pbus_address, u32 *pbus_data)
-+{
-+	int pbus_data_low, pbus_data_high;
-+	int ret = 0, saved_page;
-+
-+	saved_page = air_phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
-+			air_upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
-+			air_lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_HIGH);
-+	if (pbus_data_high < 0) {
-+		ret = pbus_data_high;
-+		goto restore_page;
-+	}
-+
-+	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_LOW);
-+	if (pbus_data_low < 0) {
-+		ret = pbus_data_low;
-+		goto restore_page;
-+	}
-+
-+	*pbus_data = pbus_data_low | (pbus_data_high << 16);
-+
-+restore_page:
-+	if (ret < 0)
-+		printf("%s 0x%08x failed: %d\n", __func__,
-+		       pbus_address, ret);
-+
-+	return air_phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int air_buckpbus_reg_modify(struct phy_device *phydev,
-+				   u32 pbus_address, u32 mask, u32 set)
-+{
-+	int pbus_data_low, pbus_data_high;
-+	u32 pbus_data_old, pbus_data_new;
-+	int ret = 0, saved_page;
-+
-+	saved_page = air_phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_FIXED);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_HIGH,
-+			air_upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_ADDR_LOW,
-+			air_lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	pbus_data_high = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_HIGH);
-+	if (pbus_data_high < 0) {
-+		ret = pbus_data_high;
-+		goto restore_page;
-+	}
-+
-+	pbus_data_low = phy_read(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_RD_DATA_LOW);
-+	if (pbus_data_low < 0) {
-+		ret = pbus_data_low;
-+		goto restore_page;
-+	}
-+
-+	pbus_data_old = pbus_data_low | (pbus_data_high << 16);
-+	pbus_data_new = (pbus_data_old & ~mask) | set;
-+	if (pbus_data_new == pbus_data_old)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			air_upper_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			air_lower_16_bits(pbus_address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH,
-+			air_upper_16_bits(pbus_data_new));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW,
-+			air_lower_16_bits(pbus_data_new));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+restore_page:
-+	if (ret < 0)
-+		printf("%s 0x%08x failed: %d\n", __func__,
-+		       pbus_address, ret);
-+
-+	return air_phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int air_write_buf(struct phy_device *phydev, unsigned long address,
-+			 unsigned long array_size, const unsigned char *buffer)
-+{
-+	unsigned int offset;
-+	int ret, saved_page;
-+	u16 val;
-+
-+	saved_page = air_phy_select_page(phydev, AIR_PHY_PAGE_EXTENDED_4);
-+	if (saved_page < 0)
-+		return saved_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_MODE,
-+			AIR_BPBUS_MODE_ADDR_INCR);
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_HIGH,
-+			air_upper_16_bits(address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_ADDR_LOW,
-+			air_lower_16_bits(address));
-+	if (ret < 0)
-+		goto restore_page;
-+
-+	for (offset = 0; offset < array_size; offset += 4) {
-+		val = get_unaligned_le16(&buffer[offset + 2]);
-+		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_HIGH, val);
-+		if (ret < 0)
-+			goto restore_page;
-+
-+		val = get_unaligned_le16(&buffer[offset]);
-+		ret = phy_write(phydev, MDIO_DEVAD_NONE, AIR_BPBUS_WR_DATA_LOW, val);
-+		if (ret < 0)
-+			goto restore_page;
-+	}
-+
-+restore_page:
-+	if (ret < 0)
-+		printf("%s 0x%08lx failed: %d\n", __func__,
-+		       address, ret);
-+
-+	return air_phy_restore_page(phydev, saved_page, ret);
-+}
-+
-+static int en8811h_wait_mcu_ready(struct phy_device *phydev)
-+{
-+	int ret, reg_value;
-+
-+	/* Because of mdio-lock, may have to wait for multiple loads */
-+	ret = phy_read_mmd_poll_timeout(phydev, MDIO_MMD_VEND1,
-+					EN8811H_PHY_FW_STATUS, reg_value,
-+					reg_value == EN8811H_PHY_READY,
-+					20000, 7500000, true);
-+	if (ret) {
-+		printf("MCU not ready: 0x%x\n", reg_value);
-+		return -ENODEV;
-+	}
-+
-+	return 0;
-+}
-+
-+__weak int en8811h_read_fw(void **addr)
-+{
-+	void *buffer;
-+	int ret;
-+
-+	if (!IS_ENABLED(CONFIG_FS_LOADER))
-+		return -EOPNOTSUPP;
-+
-+	buffer = malloc(EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
-+	if (!buffer) {
-+		printf("Failed to allocate memory for firmware\n");
-+		return -ENOMEM;
-+	}
-+
-+	ret = request_firmware_into_buf_via_script(&buffer,
-+						   EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE,
-+						   "en8811h_load_firmware");
-+	if (ret < 0) {
-+		printf("Failed to load EthMD32.dm.bin: %d\n", ret);
-+		return ret;
-+	}
-+
-+	*addr = buffer;
-+
-+	debug("Found Airoha Firmware.\n");
-+
-+	return 0;
-+}
-+
-+static int en8811h_load_firmware(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	void *buffer;
-+	int ret;
-+
-+	if (!IS_ENABLED(CONFIG_FS_LOADER))
-+		return -EOPNOTSUPP;
-+
-+	ret = en8811h_read_fw(&buffer);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				     EN8811H_FW_CTRL_1_START);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
-+				      EN8811H_FW_CTRL_2_LOADING,
-+				      EN8811H_FW_CTRL_2_LOADING);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DM, EN8811H_MD32_DM_SIZE,
-+			    (unsigned char *)buffer);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_write_buf(phydev, AIR_FW_ADDR_DSP, EN8811H_MD32_DSP_SIZE,
-+			    (unsigned char *)buffer + EN8811H_MD32_DM_SIZE);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_modify(phydev, EN8811H_FW_CTRL_2,
-+				      EN8811H_FW_CTRL_2_LOADING, 0);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				     EN8811H_FW_CTRL_1_FINISH);
-+	if (ret < 0)
-+		goto en8811h_load_firmware_out;
-+
-+	ret = en8811h_wait_mcu_ready(phydev);
-+
-+	air_buckpbus_reg_read(phydev, EN8811H_FW_VERSION,
-+			      &priv->firmware_version);
-+	printf("MD32 firmware version: %08x\n",
-+	       priv->firmware_version);
-+
-+en8811h_load_firmware_out:
-+	free(buffer);
-+	if (ret < 0)
-+		printf("Firmware loading failed: %d\n", ret);
-+
-+	return ret;
-+}
-+
-+static int en8811h_restart_mcu(struct phy_device *phydev)
-+{
-+	int ret;
-+
-+	ret = phy_write_mmd(phydev, 0x1e, 0x8009, 0x0);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				     EN8811H_FW_CTRL_1_START);
-+	if (ret < 0)
-+		return ret;
-+
-+	return air_buckpbus_reg_write(phydev, EN8811H_FW_CTRL_1,
-+				      EN8811H_FW_CTRL_1_FINISH);
-+}
-+
-+static int air_led_hw_control_set(struct phy_device *phydev, u8 index,
-+				  unsigned long rules)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	u16 on = 0, blink = 0;
-+	int ret;
-+
-+	if (index >= EN8811H_LED_COUNT)
-+		return -EINVAL;
-+
-+	priv->led[index].rules = rules;
-+
-+	if (rules & BIT(AIR_TRIGGER_NETDEV_FULL_DUPLEX))
-+		on |= AIR_PHY_LED_ON_FDX;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_10) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK10;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_100) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK100;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_1000) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK1000;
-+
-+	if (rules & (BIT(AIR_TRIGGER_NETDEV_LINK_2500) | BIT(AIR_TRIGGER_NETDEV_LINK)))
-+		on |= AIR_PHY_LED_ON_LINK2500;
-+
-+	if (rules & BIT(AIR_TRIGGER_NETDEV_RX)) {
-+		blink |= AIR_PHY_LED_BLINK_10RX   |
-+			 AIR_PHY_LED_BLINK_100RX  |
-+			 AIR_PHY_LED_BLINK_1000RX |
-+			 AIR_PHY_LED_BLINK_2500RX;
-+	}
-+
-+	if (rules & BIT(AIR_TRIGGER_NETDEV_TX)) {
-+		blink |= AIR_PHY_LED_BLINK_10TX   |
-+			 AIR_PHY_LED_BLINK_100TX  |
-+			 AIR_PHY_LED_BLINK_1000TX |
-+			 AIR_PHY_LED_BLINK_2500TX;
-+	}
-+
-+	if (blink || on) {
-+		/* switch hw-control on, so led-on and led-blink are off */
-+		clear_bit(AIR_PHY_LED_STATE_FORCE_ON,
-+			  &priv->led[index].state);
-+		clear_bit(AIR_PHY_LED_STATE_FORCE_BLINK,
-+			  &priv->led[index].state);
-+	} else {
-+		priv->led[index].rules = 0;
-+	}
-+
-+	ret = phy_modify_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_ON(index),
-+			     AIR_PHY_LED_ON_MASK, on);
-+
-+	if (ret < 0)
-+		return ret;
-+
-+	return phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_BLINK(index),
-+			     blink);
-+};
-+
-+static int air_led_init(struct phy_device *phydev, u8 index, u8 state, u8 pol)
-+{
-+	int val = 0;
-+	int err;
-+
-+	if (index >= EN8811H_LED_COUNT)
-+		return -EINVAL;
-+
-+	if (state == AIR_LED_ENABLE)
-+		val |= AIR_PHY_LED_ON_ENABLE;
-+	else
-+		val &= ~AIR_PHY_LED_ON_ENABLE;
-+
-+	if (pol == AIR_ACTIVE_HIGH)
-+		val |= AIR_PHY_LED_ON_POLARITY;
-+	else
-+		val &= ~AIR_PHY_LED_ON_POLARITY;
-+
-+	err = phy_write_mmd(phydev, 0x1f, AIR_PHY_LED_ON(index), val);
-+	if (err < 0)
-+		return err;
-+
-+	return 0;
-+}
-+
-+static int air_leds_init(struct phy_device *phydev, int num, u16 dur, int mode)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	int ret, i;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_DUR_BLINK,
-+			    dur);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = phy_write_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_DUR_ON,
-+			    dur >> 1);
-+	if (ret < 0)
-+		return ret;
-+
-+	switch (mode) {
-+	case AIR_LED_MODE_DISABLE:
-+		ret = phy_modify_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_BCR,
-+				     AIR_PHY_LED_BCR_EXT_CTRL |
-+				     AIR_PHY_LED_BCR_MODE_MASK, 0);
-+		break;
-+	case AIR_LED_MODE_USER_DEFINE:
-+		ret = phy_modify_mmd(phydev, MDIO_MMD_VEND2, AIR_PHY_LED_BCR,
-+				     AIR_PHY_LED_BCR_EXT_CTRL |
-+				     AIR_PHY_LED_BCR_CLK_EN,
-+				     AIR_PHY_LED_BCR_EXT_CTRL |
-+				     AIR_PHY_LED_BCR_CLK_EN);
-+		if (ret < 0)
-+			return ret;
-+		break;
-+	default:
-+		printf("LED mode %d is not supported\n", mode);
-+		return -EINVAL;
-+	}
-+
-+	for (i = 0; i < num; ++i) {
-+		ret = air_led_init(phydev, i, AIR_LED_ENABLE, AIR_ACTIVE_HIGH);
-+		if (ret < 0) {
-+			printf("LED%d init failed: %d\n", i, ret);
-+			return ret;
-+		}
-+		air_led_hw_control_set(phydev, i, priv->led[i].rules);
-+	}
-+
-+	return 0;
-+}
-+
-+static int en8811h_config(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv = phydev->priv;
-+	ofnode node = phy_get_ofnode(phydev);
-+	u32 pbus_value = 0;
-+	int ret = 0;
-+
-+	/* If restart happened in .probe(), no need to restart now */
-+	if (priv->mcu_needs_restart) {
-+		ret = en8811h_restart_mcu(phydev);
-+		if (ret < 0)
-+			return ret;
-+	} else {
-+		ret = en8811h_load_firmware(phydev);
-+		if (ret) {
-+			printf("Load firmware fail.\n");
-+			return ret;
-+		}
-+		/* Next calls to .config() mcu needs to restart */
-+		priv->mcu_needs_restart = true;
-+	}
-+
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800c, 0x0);
-+	if (ret < 0)
-+		return ret;
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800d, 0x0);
-+	if (ret < 0)
-+		return ret;
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800e, 0x1101);
-+	if (ret < 0)
-+		return ret;
-+	ret = phy_write_mmd(phydev, 0x1e, 0x800f, 0x0002);
-+	if (ret < 0)
-+		return ret;
-+
-+	/* Serdes polarity */
-+	pbus_value = 0;
-+	if (ofnode_read_bool(node, "airoha,pnswap-rx"))
-+		pbus_value |=  EN8811H_POLARITY_RX_REVERSE;
-+	else
-+		pbus_value &= ~EN8811H_POLARITY_RX_REVERSE;
-+	if (ofnode_read_bool(node, "airoha,pnswap-tx"))
-+		pbus_value &= ~EN8811H_POLARITY_TX_NORMAL;
-+	else
-+		pbus_value |=  EN8811H_POLARITY_TX_NORMAL;
-+	ret = air_buckpbus_reg_modify(phydev, EN8811H_POLARITY,
-+				      EN8811H_POLARITY_RX_REVERSE |
-+				      EN8811H_POLARITY_TX_NORMAL, pbus_value);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = air_leds_init(phydev, EN8811H_LED_COUNT, AIR_PHY_LED_DUR,
-+			    AIR_LED_MODE_USER_DEFINE);
-+	if (ret < 0) {
-+		printf("Failed to disable leds: %d\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int en8811h_parse_status(struct phy_device *phydev)
-+{
-+	int ret = 0, reg_value;
-+
-+	phydev->duplex = DUPLEX_FULL;
-+
-+	reg_value = phy_read(phydev, MDIO_DEVAD_NONE, AIR_AUX_CTRL_STATUS);
-+	if (reg_value < 0)
-+		return reg_value;
-+
-+	switch (reg_value & AIR_AUX_CTRL_STATUS_SPEED_MASK) {
-+	case AIR_AUX_CTRL_STATUS_SPEED_2500:
-+		phydev->speed = SPEED_2500;
-+		break;
-+	case AIR_AUX_CTRL_STATUS_SPEED_1000:
-+		phydev->speed = SPEED_1000;
-+		break;
-+	case AIR_AUX_CTRL_STATUS_SPEED_100:
-+		phydev->speed = SPEED_100;
-+		break;
-+	default:
-+		printf("Auto-neg error, defaulting to 2500M/FD\n");
-+		phydev->speed = SPEED_2500;
-+		break;
-+	}
-+
-+	return ret;
-+}
-+
-+static int en8811h_startup(struct phy_device *phydev)
-+{
-+	int ret = 0;
-+
-+	ret = genphy_update_link(phydev);
-+	if (ret)
-+		return ret;
-+
-+	return en8811h_parse_status(phydev);
-+}
-+
-+static int en8811h_probe(struct phy_device *phydev)
-+{
-+	struct en8811h_priv *priv;
-+
-+	priv = malloc(sizeof(*priv));
-+	if (!priv)
-+		return -ENOMEM;
-+	memset(priv, 0, sizeof(*priv));
-+
-+	priv->led[0].rules = AIR_DEFAULT_TRIGGER_LED0;
-+	priv->led[1].rules = AIR_DEFAULT_TRIGGER_LED1;
-+	priv->led[2].rules = AIR_DEFAULT_TRIGGER_LED2;
-+
-+	/* mcu has just restarted after firmware load */
-+	priv->mcu_needs_restart = false;
-+
-+	phydev->priv = priv;
-+
-+	return 0;
-+}
-+
-+U_BOOT_PHY_DRIVER(en8811h) = {
-+	.name = "Airoha EN8811H",
-+	.uid = EN8811H_PHY_ID,
-+	.mask = 0x0ffffff0,
-+	.config = &en8811h_config,
-+	.probe = &en8811h_probe,
-+	.startup = &en8811h_startup,
-+	.shutdown = &genphy_shutdown,
-+};
---
-2.34.1
+>   
+>   struct dss_bus_format {
+>   	u32 bus_fmt;
+>   	u32 data_width;
+>   	bool is_oldi_fmt;
+> -	enum dss_oldi_mode_reg_val oldi_mode_reg_val;
+> +	enum oldi_mode_reg_val oldi_mode_reg_val;
+>   };
+>   
+>   static struct dss_bus_format dss_bus_formats[] = {
+> @@ -132,6 +137,11 @@ struct tidss_drv_priv {
+>   	struct dss_bus_format *bus_format;
+>   	u32 pixel_format;
+>   	u32 memory_bandwidth_limit;
+> +	unsigned int num_oldis;
+> +	struct tidss_oldi *oldis[TIDSS_MAX_OLDI_TXES];
+> +	u8 active_hw_vps[TIDSS_MAX_PORTS];
+> +	u8 active_pipelines;
+>   };
+>   
+> +struct tidss_oldi;
+>   #endif
+> diff --git a/drivers/video/tidss/tidss_oldi.c b/drivers/video/tidss/tidss_oldi.c
+> new file mode 100644
+> index 00000000000..700ad966129
+> --- /dev/null
+> +++ b/drivers/video/tidss/tidss_oldi.c
+> @@ -0,0 +1,332 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
+> + * Swamil Jain <s-jain1@ti.com>
+> + *
+> + * based on the linux tidss_oldi.c, which is
+> + *
+> + * Copyright (C) 2024 - Texas Instruments Incorporated
+> + * Author: Aradhya Bhatia <a-bhatia1@ti.com>
+> + */
+> +
+> +#include <dm.h>
+> +#include <malloc.h>
+> +#include <syscon.h>
+> +#include <clk.h>
+> +#include <regmap.h>
+> +
+> +#include <dm/ofnode_graph.h>
+> +#include <dm/ofnode.h>
+> +#include <dm/device_compat.h>
+> +
+> +#include <linux/bug.h>
+> +
+> +#include "tidss_oldi.h"
+> +
+> +enum tidss_oldi_pixels {
+> +	OLDI_PIXELS_EVEN = BIT(0),
+> +	OLDI_PIXELS_ODD = BIT(1),
+> +};
+> +
+> +/**
+> + * enum tidss_oldi_dual_link_pixels - Pixel order of an OLDI dual-link connection
+> + * @TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS: Even pixels are expected to be generated
+> + *    from the first port, odd pixels from the second port
+> + * @TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS: Odd pixels are expected to be generated
+> + *    from the first port, even pixels from the second port
+> + */
+> +enum tidss_oldi_dual_link_pixels {
+> +	TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS = 0,
+> +	TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS = 1,
+> +};
+> +
+> +static const struct oldi_bus_format oldi_bus_formats[] = {
+> +	{ MEDIA_BUS_FMT_RGB666_1X7X3_SPWG,	18, SPWG_18,	MEDIA_BUS_FMT_RGB666_1X18 },
+> +	{ MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,	24, SPWG_24,	MEDIA_BUS_FMT_RGB888_1X24 },
+> +	{ MEDIA_BUS_FMT_RGB888_1X7X4_JEIDA,	24, JEIDA_24,	MEDIA_BUS_FMT_RGB888_1X24 },
+> +};
+> +
+> +static int tidss_oldi_get_port_pixels_type(ofnode port_node)
+> +{
+> +	bool even_pixels =
+> +		ofnode_has_property(port_node, "dual-lvds-even-pixels");
+> +	bool odd_pixels =
+> +		ofnode_has_property(port_node, "dual-lvds-odd-pixels");
+> +	return (even_pixels ? OLDI_PIXELS_EVEN : 0) |
+> +	       (odd_pixels ? OLDI_PIXELS_ODD : 0);
+> +}
+> +
+> +static int tidss_oldi_get_remote_pixels_type(ofnode port_node)
+> +{
+> +	ofnode endpoint = ofnode_null();
+> +	int pixels_type = -EPIPE;
+> +
+> +	ofnode_for_each_subnode(endpoint, port_node) {
+> +		ofnode remote_port;
+> +		int current_pt;
+> +
+> +		if (!ofnode_name_eq(endpoint, "endpoint"))
+> +			continue;
+> +
+> +		remote_port = ofnode_graph_get_remote_port(endpoint);
+> +		if (!ofnode_valid(remote_port))
+> +			return -EPIPE;
+> +
+> +		current_pt = tidss_oldi_get_port_pixels_type(remote_port);
+> +		if (pixels_type < 0)
+> +			pixels_type = current_pt;
+> +
+> +		if (!current_pt || pixels_type != current_pt)
+> +			return -EINVAL;
+> +	}
+> +
+> +	return pixels_type;
+> +}
+> +
+> +int tidss_oldi_get_dual_link_pixel_order(ofnode port1, ofnode port2)
+> +{
+> +	int remote_p1_pt, remote_p2_pt;
+> +
+> +	if (!ofnode_valid(port1) || !ofnode_valid(port2))
+> +		return -EINVAL;
+> +
+> +	remote_p1_pt = tidss_oldi_get_remote_pixels_type(port1);
+> +	if (remote_p1_pt < 0)
+> +		return remote_p1_pt;
+> +
+> +	remote_p2_pt = tidss_oldi_get_remote_pixels_type(port2);
+> +	if (remote_p2_pt < 0)
+> +		return remote_p2_pt;
+> +
+> +	/*
+> +	 * A valid dual-lVDS bus is found when one remote port is marked with
+> +	 * "dual-lvds-even-pixels", and the other remote port is marked with
+> +	 * "dual-lvds-odd-pixels", bail out if the markers are not right.
+> +	 */
+> +	if (remote_p1_pt + remote_p2_pt != OLDI_PIXELS_EVEN + OLDI_PIXELS_ODD)
+> +		return -EINVAL;
+> +
+> +	return remote_p1_pt == OLDI_PIXELS_EVEN ?
+> +		TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS :
+> +		TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS;
+> +}
+> +
+> +static int get_oldi_mode(ofnode oldi_tx, u32 *companion_instance)
+> +{
+> +	ofnode companion;
+> +	ofnode port0, port1;
+> +	int pixel_order;
+> +	int ret;
+> +	/*
+> +	 * Find if the OLDI is paired with another OLDI for combined OLDI
+> +	 * operation (dual-lvds or clone).
+> +	 */
+> +	companion = ofnode_parse_phandle(oldi_tx, "ti,companion-oldi", 0);
+> +	if (!ofnode_valid(companion)) {
+> +		/*
+> +		 * OLDI TXes in Single Link mode do not have companion
+> +		 * OLDI TXes and, Secondary OLDI nodes don't need this
+> +		 * information.
+> +		 */
+> +		if (ofnode_has_property(oldi_tx, "ti,secondary-oldi"))
+> +			return OLDI_MODE_SECONDARY;
+> +
+> +		/*
+> +		 * The OLDI TX does not have a companion, nor is it a
+> +		 * secondary OLDI. It will operate independently.
+> +		 */
+> +		return OLDI_MODE_SINGLE_LINK;
+> +	}
+> +
+> +	ret = ofnode_read_u32(companion, "reg", companion_instance);
+> +	if (ret)
+> +		return OLDI_MODE_UNSUPPORTED;
+> +
+> +	/*
+> +	 * We need to work out if the sink is expecting us to function in
+> +	 * dual-link mode. We do this by looking at the DT port nodes we are
+> +	 * connected to, if they are marked as expecting even pixels and
+> +	 * odd pixels than we need to enable vertical stripe output.
+> +	 */
+> +	port0 = ofnode_graph_get_port_by_id(oldi_tx, 1);
+> +	port1 = ofnode_graph_get_port_by_id(companion, 1);
+> +	pixel_order = tidss_oldi_get_dual_link_pixel_order(port0, port1);
+> +	switch (pixel_order) {
+> +	case -EINVAL:
+> +		/*
+> +		 * The dual link properties were not found in at least
+> +		 * one of the sink nodes. Since 2 OLDI ports are present
+> +		 * in the DT, it can be safely assumed that the required
+> +		 * configuration is Clone Mode.
+> +		 */
+> +		return OLDI_MODE_CLONE_SINGLE_LINK;
+> +
+> +	case TIDSS_OLDI_DUAL_LINK_ODD_EVEN_PIXELS:
+> +		return OLDI_MODE_DUAL_LINK;
+> +
+> +	/* Unsupported OLDI Modes */
+> +	case TIDSS_OLDI_DUAL_LINK_EVEN_ODD_PIXELS:
+> +	default:
+> +		return OLDI_MODE_UNSUPPORTED;
+> +	}
+> +}
+> +
+> +static int get_parent_dss_vp(ofnode oldi_tx, u32 *parent_vp)
+> +{
+> +	ofnode ep, dss_port;
+> +	int ret;
+> +
+> +	ep = ofnode_graph_get_endpoint_by_regs(oldi_tx, 0, -1);
+> +	if (ofnode_valid(ep)) {
+> +		dss_port = ofnode_graph_get_remote_port(ep);
+> +		if (!ofnode_valid(dss_port))
+> +			ret = -ENODEV;
+> +
+> +		ret = ofnode_read_u32(dss_port, "reg", parent_vp);
+> +		if (ret)
+> +			return -ENODEV;
+> +		return 0;
+> +	}
+> +
+> +	return -ENODEV;
+> +}
+> +
+> +static int tidss_init_oldi_io_ctrl(struct udevice *dev, struct tidss_oldi *tidss_oldi)
+> +{
+> +	struct udevice *syscon;
+> +	struct regmap *regmap = NULL;
+> +	int ret = 0;
+> +
+> +	ret = uclass_get_device_by_phandle(UCLASS_SYSCON, dev, "ti,am65x-oldi-io-ctrl",
+> +					   &syscon);
+> +	if (ret) {
+> +		debug("unable to find ti,am65x-oldi-io-ctrl syscon device (%d)\n", ret);
+> +		return ret;
+> +	}
+> +
+> +	/* get grf-reg base address */
+> +	regmap = syscon_get_regmap(syscon);
+> +	if (!regmap) {
+> +		debug("unable to find rockchip grf regmap\n");
+> +		return -ENODEV;
+> +	}
+> +	tidss_oldi->io_ctrl = regmap;
+> +	return 0;
+> +}
+> +
+> +int tidss_oldi_init(struct udevice *dev)
+> +{
+> +	struct tidss_drv_priv *priv = dev_get_priv(dev);
+> +	u32 parent_vp, oldi_instance, companion_instance;
+> +	int ret, tidss_oldi_panel_count = 0;
+> +	enum tidss_oldi_link_type link_type;
+> +	struct tidss_oldi *tidss_oldi;
+> +	struct clk *serial;
+> +	ofnode child;
+> +	ofnode oldi_parent = ofnode_find_subnode(dev_ofnode(dev), "oldi-transmitters");
+> +
+> +	if (!ofnode_valid(oldi_parent))
+> +		/* Return gracefully */
+> +		return 0;
+> +
+> +	ofnode_for_each_subnode(child, oldi_parent) {
+> +		priv->oldis[tidss_oldi_panel_count] = NULL;
+> +
+> +		ret = get_parent_dss_vp(child, &parent_vp);
+> +		if (ret == -ENODEV) {
+> +			/*
+> +			 * ENODEV means that this particular OLDI node
+> +			 * is not connected with the DSS, which is not
+> +			 * a harmful case. There could be another OLDI
+> +			 * which may still be connected.
+> +			 * Continue to search for that.
+> +			 */
+> +			ret = 0;
+> +			continue;
+> +		}
+> +
+> +		ret = ofnode_read_u32(child, "reg", &oldi_instance);
+> +		if (ret) {
+> +			ret = -ENODEV;
+> +			break;
+> +		}
+> +
+> +		link_type = get_oldi_mode(child, &companion_instance);
+> +		if (link_type == OLDI_MODE_UNSUPPORTED) {
+> +			dev_warn(dev, "OLDI%u: Unsupported OLDI connection.\n", oldi_instance);
+> +
+> +			ret = OLDI_MODE_UNSUPPORTED;
+> +			/* Return gracefully, no supported OLDI panel found */
+> +			break;
+> +		} else if (link_type == OLDI_MODE_SECONDARY) {
+> +			/*
+> +			 * This is the secondary OLDI node, which serves as a
+> +			 * companinon to the primary OLDI, when it is configured
+> +			 * for the dual-lvds mode. Since the primary OLDI will
+> +			 * be a part of bridge chain, no need to put this one
+> +			 * too. Continue onto the next OLDI node.
+> +			 */
+> +			continue;
+> +		}
+> +
+> +		serial = malloc(sizeof(struct clk));
+> +		ret = clk_get_by_name_nodev(child, "serial", serial);
+> +		if (ret) {
+> +			dev_err(dev, "video port %d clock enable error %d\n", parent_vp, ret);
+> +			free(serial);
+> +			return ret;
+> +		}
+> +
+> +		tidss_oldi = malloc(sizeof(struct tidss_oldi));
+> +		ret = tidss_init_oldi_io_ctrl(dev, tidss_oldi);
+> +		if (ret) {
+> +			debug("tidss could not initialize oldi_io_ctrl\n");
+> +			free(serial);
+> +			free(tidss_oldi);
+> +			return ret;
+> +		}
+> +
+> +		tidss_oldi->dev = dev;
+> +		tidss_oldi->parent_vp = parent_vp;
+> +		tidss_oldi->oldi_instance = oldi_instance;
+> +		tidss_oldi->companion_instance = companion_instance;
+> +		tidss_oldi->link_type = link_type;
+> +		tidss_oldi->serial = serial;
+> +		priv->oldis[tidss_oldi_panel_count] = tidss_oldi;
+> +		priv->oldi_mode = link_type;
+> +		tidss_oldi_panel_count++;
+> +	}
+> +	priv->num_oldis = tidss_oldi_panel_count;
+> +	return 0;
+> +}
+> +
+> +void dss_oldi_tx_power(struct tidss_drv_priv *priv, bool power)
+> +{
+> +	u32 val;
+> +
+> +	if (WARN_ON(!priv->oldis[0]->io_ctrl))
+> +		return;
+> +
+> +	if (priv->feat->subrev == DSS_AM625) {
+> +		if (power) {
+> +			switch (priv->oldi_mode) {
+> +			case OLDI_SINGLE_LINK_SINGLE_MODE:
+> +				/* Power down OLDI TX 1 */
+> +				val = OLDI1_PWRDN_TX;
+> +				break;
+> +			case OLDI_DUAL_LINK:
+> +				/* No Power down */
+> +				val = 0;
+> +			break;
+> +			default:
+> +				/* Power down both the OLDI TXes */
+> +				val = OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX;
+> +				break;
+> +			}
+> +		} else {
+> +			val = OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX;
+> +		}
+> +		regmap_update_bits(priv->oldis[0]->io_ctrl, OLDI_PD_CTRL,
+> +				   OLDI_BANDGAP_PWR | OLDI0_PWRDN_TX | OLDI1_PWRDN_TX, val);
+> +	}
+> +}
+> diff --git a/drivers/video/tidss/tidss_oldi.h b/drivers/video/tidss/tidss_oldi.h
+> new file mode 100644
+> index 00000000000..aa38c6d9fdb
+> --- /dev/null
+> +++ b/drivers/video/tidss/tidss_oldi.h
+> @@ -0,0 +1,89 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
+> + * Swamil Jain <s-jain1@ti.com>
+> + *
+> + * based on the linux tidss_oldi.c, which is
+> + *
+> + * Copyright (C) 2024 - Texas Instruments Incorporated
+> + * Author: Aradhya Bhatia <a-bhatia1@ti.com>
+> + */
+> +
+> +#ifndef __TIDSS_OLDI_H__
+> +#define __TIDSS_OLDI_H__
+> +
+> +#include <dm/ofnode.h>
+> +#include <dm/of_access.h>
+> +#include <media_bus_format.h>
+> +
+> +#include "tidss_drv.h"
+> +
+> +/* OLDI PORTS */
+> +#define OLDI_INPUT_PORT    0
+> +#define OLDI_OURPUT_PORT   1
+> +
+> +/* Control MMR Registers */
+> +
+> +/* Register offsets */
+> +#define OLDI_PD_CTRL            0x100
+> +#define OLDI_LB_CTRL            0x104
+> +
+> +/* Power control bits */
+> +#define OLDI_PWRDOWN_TX(n)	BIT(n)
+> +
+> +/* LVDS Bandgap reference Enable/Disable */
+> +#define OLDI_PWRDN_BG		BIT(8)
+> +
+> +/*
+> + * OLDI IO_CTRL register offsets. On AM654 the registers are found
+> + * from CTRL_MMR0, there the syscon regmap should map 0x14 bytes from
+> + * CTRLMMR0P1_OLDI_DAT0_IO_CTRL to CTRLMMR0P1_OLDI_CLK_IO_CTRL
+> + * register range.
+> + */
+> +#define OLDI_DAT0_IO_CTRL			0x00
+> +#define OLDI_DAT1_IO_CTRL			0x04
+> +#define OLDI_DAT2_IO_CTRL			0x08
+> +#define OLDI_DAT3_IO_CTRL			0x0C
+> +#define OLDI_CLK_IO_CTRL			0x10
+> +
+> +/* Only for AM625 OLDI TX */
+> +#define OLDI_PD_CTRL				0x100
+> +#define OLDI_LB_CTRL				0x104
+> +
+> +#define OLDI_BANDGAP_PWR			BIT(8)
+> +#define OLDI_PWRDN_TX				BIT(8)
+> +#define OLDI0_PWRDN_TX				BIT(0)
+> +#define OLDI1_PWRDN_TX				BIT(1)
+> +
+> +enum tidss_oldi_link_type {
+> +	OLDI_MODE_UNSUPPORTED,
+> +	OLDI_MODE_SINGLE_LINK,
+> +	OLDI_MODE_CLONE_SINGLE_LINK,
+> +	OLDI_MODE_DUAL_LINK,
+> +	OLDI_MODE_SECONDARY,
+> +};
+> +
+> +struct oldi_bus_format {
+> +	u32 bus_fmt;
+> +	u32 data_width;
+> +	enum oldi_mode_reg_val oldi_mode_reg_val;
+> +	u32 input_bus_fmt;
+> +};
+> +
+> +struct tidss_oldi {
+> +	struct udevice *dev;
+> +
+> +	enum tidss_oldi_link_type link_type;
+> +	const struct oldi_bus_format *bus_format;
+> +	u32 oldi_instance;
+> +	u32 companion_instance;
+> +	u32 parent_vp;
+> +
+> +	struct clk *serial;
+> +	struct regmap *io_ctrl;
+> +};
+> +
+> +int tidss_oldi_init(struct udevice *dev);
+> +void dss_oldi_tx_power(struct tidss_drv_priv *priv, bool power);
+> +
+> +#endif /* __TIDSS_OLDI_H__ */
+> diff --git a/drivers/video/tidss/tidss_regs.h b/drivers/video/tidss/tidss_regs.h
+> index 440db8d1c7a..4ee8b330a20 100644
+> --- a/drivers/video/tidss/tidss_regs.h
+> +++ b/drivers/video/tidss/tidss_regs.h
+> @@ -231,27 +231,6 @@ enum dss_common_regs {
+>   #define DSS_VP_DSS_DMA_THREADSIZE		0x170 /* J721E */
+>   #define DSS_VP_DSS_DMA_THREADSIZE_STATUS	0x174 /* J721E */
+>   
+> -/*
+> - * OLDI IO_CTRL register offsets. On AM654 the registers are found
+> - * from CTRL_MMR0, there the syscon regmap should map 0x14 bytes from
+> - * CTRLMMR0P1_OLDI_DAT0_IO_CTRL to CTRLMMR0P1_OLDI_CLK_IO_CTRL
+> - * register range.
+> - */
+> -#define OLDI_DAT0_IO_CTRL			0x00
+> -#define OLDI_DAT1_IO_CTRL			0x04
+> -#define OLDI_DAT2_IO_CTRL			0x08
+> -#define OLDI_DAT3_IO_CTRL			0x0C
+> -#define OLDI_CLK_IO_CTRL			0x10
+> -
+> -/* Only for AM625 OLDI TX */
+> -#define OLDI_PD_CTRL				0x100
+> -#define OLDI_LB_CTRL				0x104
+> -
+> -#define OLDI_BANDGAP_PWR			BIT(8)
+> -#define OLDI_PWRDN_TX				BIT(8)
+> -#define OLDI0_PWRDN_TX				BIT(0)
+> -#define OLDI1_PWRDN_TX				BIT(1)
+> -
+>   /* Supported plane formats */
+>   #define DSS_FORMAT_ARGB4444 0x0
+>   #define DSS_FORMAT_ABGR4444 0x1
+> 
 
