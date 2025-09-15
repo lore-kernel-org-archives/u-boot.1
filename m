@@ -4,54 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D3E8CAC597
-	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 16:26:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC7F1CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 17:31:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3E90830CA;
-	Mon, 15 Sep 2025 18:26:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
+	by phobos.denx.de (Postfix) with ESMTP id 05DD5830B4;
+	Mon, 15 Sep 2025 19:31:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="Mk5xLy5q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="m7rPgGL2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1877983106; Mon, 15 Sep 2025 18:26:16 +0200 (CEST)
-Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com
- [95.215.58.179])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 40863830CA; Mon, 15 Sep 2025 19:31:16 +0200 (CEST)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C865282AE1
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 18:26:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=jookia.org
+ by phobos.denx.de (Postfix) with ESMTPS id 11239802C1
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 19:31:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=contact@jookia.org
-Date: Tue, 16 Sep 2025 02:22:05 +1000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1757953571;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=oSkft1a8dG1BCyFqdbwn1tbmBSg8ath9Da5hoDFDg7o=;
- b=Mk5xLy5qCicX+yBYJdjRcPLDNr/beedh5qhHJWeO0AuAeB8YEpMYSnoV0TY6cFAXSkne4J
- 2MZ9SFtHJLojV+8X7xhdyuQjkt3+V3qvmrGMW9heAdeWeD9f/RGvwFt7KhJm8xOUvEBEI+
- ByPAtbfUU6HYrAXv3Z/TErIeeUeMUyk1aF0G6+STZmDsUmfg5Xz9ZMjBURadrkx7WA8FN2
- TzE/cc0/LYgi6zUR4UealeAJE83F8CpSXp24OiYEBCFmftAU4fG5X9n0CdexEWXP7WBrxz
- hOZhnwByOuYO6Z/4yWD/QKSDhG0gnz+E1P6lKrsWyV3jXfoXSeoktTCfem6n4w==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: John Watts <contact@jookia.org>
-To: Lukas Schmid <lukas.schmid@netcube.li>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/1] sunxi: extend R528/T113-s3/D1(s) DRAM
- initialisation
-Message-ID: <aMg9LQ6VlxkNCgbk@titan>
-References: <20250914144411.157826-1-lukas.schmid@netcube.li>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-75871cd9228so1180607a34.3
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 10:31:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1757957473; x=1758562273; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=z1FmZONa5nSh3/mvNXuPk01/YO1JwGp53vna844lQq0=;
+ b=m7rPgGL2k0cPfc3+xo4Ua6ktzGeZPRW1agqEmazFPCdM90Ur/NYNNIFnOjlPYoAZiU
+ MmnqhHVV6ms8kTrCrwygc8FGuj7f8ikLQREevqRIg9v2t7dp8KHBo20G5EKOe56zadvr
+ m/SeuX+lmcr5pbpqBN1fEd2vaX4IWczB9PVzg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757957473; x=1758562273;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z1FmZONa5nSh3/mvNXuPk01/YO1JwGp53vna844lQq0=;
+ b=XQGwys7lIhINHZ8uXU4xVO4fBVqDhI2TtbxwNvqwyBk44ULe1D7ewYsc7V+/oBgym+
+ F2J4t5JnbrSr82tUENC51RxdrN0xaWtPidb0A3kIutWiD+0tx15tPcCiOEa9vRxJ1cDK
+ sf2lAUYD1BYyVIoK67ARLq/avpudDKptZLvtHBxRyRTWm6v4ikx7ilrRdazqGiMwCa4r
+ EkU5rmSBlZtHeQDj0Lmgtk409bM469uIviVMQ4XMPdz36XUDwP2nA9V2wPsAIgxXLREZ
+ JlHirl1MxD9/LtvymU+MGQ65r/xhX//RBltrrgFKs8uLrwImf/aIAntngu1QCFIwYlG7
+ 26tw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJzaSZnlM3cWd2XqbwwcNuulIrSDNlGtBJjJVO2kAjdZtmEvvQvv5Nx8AWULe9w6qfD270bwE=@lists.denx.de
+X-Gm-Message-State: AOJu0YyoyoXc+ZOSOlrPjHY/wfFvNUJcgEub/CWveyjwZhPCyjQvZney
+ U8RJsCMtZJGWYCHMUQPKLMXyZkPuOoXVUsE8jJCJVuZ38HGQ8BzsRfT10j18TO6MU2s=
+X-Gm-Gg: ASbGncvDRuXBRWhUL3r4RbXQquzy+IvKOf1cYMbuDmQ0cIGYCqNy08kDAynhYuILGQz
+ NMGoEpM3ngLaiL+UH1UUGmOTSiGBOFv6gJs0f3/Kp9Jl7cdOc1pLUX6sCl0VpVZW1OHVu0SEbaR
+ 9Q99jiI7puDIM1OxN6EmaToY51edGXi73oLoaNYN49HkpK8ujOaHEs10YFBnfRWYD0TQD9eQQ+x
+ O1NuE5rZsl+/S2lEP6we78AO3/iOX/cx12ra5BJ/2Yd5H5u4Hn814RJfhPyhyg/QzVgpM4WAVie
+ wefqWQEE1j1/erQl+Jl9pDDEg9rIRw/v1M4sm+bJTY8ElKDBPnnqjjG+u13N25Ykg1dskzJzhHP
+ uhmUG6YmqHjvwywMMHml3gCEw4LC6pLw7JbxUQa8rqDwhozODspiFGXursw5618r6rYs=
+X-Google-Smtp-Source: AGHT+IEpgxC6xdPSGLpQgyvpYpnVa5IgurFRmJO+gUsqnVgcpjpPH3ggnvPKHVEO7egR+7EmqhhkjA==
+X-Received: by 2002:a05:6830:920:b0:745:a220:155c with SMTP id
+ 46e09a7af769-75353e5eaaamr7242903a34.16.1757957472670; 
+ Mon, 15 Sep 2025 10:31:12 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-621b7d22e0asm1262777eaf.13.2025.09.15.10.31.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Sep 2025 10:31:11 -0700 (PDT)
+Date: Mon, 15 Sep 2025 11:31:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] power: pfuze100: Ensure loop index is incremented
+Message-ID: <20250915173109.GL124814@bill-the-cat>
+References: <20250703-pfuze100_fix-v1-1-5f838e29d122@linaro.org>
+ <20250831153513.GA2800031@bill-the-cat>
+ <20250913155154.GF124814@bill-the-cat>
+ <cf91c8fe-a264-4db3-990b-b866a42d17a1@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NsOhyZ+UctK8bWA3"
 Content-Disposition: inline
-In-Reply-To: <20250914144411.157826-1-lukas.schmid@netcube.li>
-X-Migadu-Flow: FLOW_OUT
+In-Reply-To: <cf91c8fe-a264-4db3-990b-b866a42d17a1@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,129 +101,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Sep 14, 2025 at 04:44:11PM +0200, Lukas Schmid wrote:
-> Extend the DRAM initialisation code to add support for the T113-S4 aka
-> T113M4020DC0 by checking the SoC's CHIPID.
 
-Hi there, I've tested this patch and confirm that it is required to boot my
-T113-S4 from an EmbedSky dev kit. Here is the product:
-http://wiki.armbbs.net/tqwiki/public/docs/TQT113_CORE
-I can confirm this board does not boot without this patch.
+--NsOhyZ+UctK8bWA3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Here's a Tested-by and Reviewed-By:
+On Mon, Sep 15, 2025 at 10:45:56AM +0100, Andrew Goodbody wrote:
+> On 13/09/2025 16:51, Tom Rini wrote:
+> > On Sun, Aug 31, 2025 at 09:35:13AM -0600, Tom Rini wrote:
+> > > On Thu, Jul 03, 2025 at 12:31:50PM +0100, Andrew Goodbody wrote:
+> > >=20
+> > > > The for loop in se_desc uses i as the loop index and also to cause =
+the
+> > > > loop to end if the passed in name is not found. However i is not
+> > > > incremented which could cause the loop to continue indefinitely and
+> > > > access out of bounds memory.
+> > > > Add an increment of i to ensure that the loop terminates correctly =
+in
+> > > > the case where name is not found.
+> > > >=20
+> > > > This issue found by Smatch.
+> > > >=20
+> > > > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> > > > ---
+> > > >   drivers/power/regulator/pfuze100.c | 2 +-
+> > > >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > >=20
+> > > I size tested this as part of merging and saw unexpected shrinkage. In
+> > > turn, this got me to look harder at the code and I think the best ans=
+wer
+> > > is to refactor things so that se_desc(...) follow the normal (linux
+> > > kernel) pattern of for (i =3D 0; i < ARRAY_SIZE(desc); i++) instead of
+> > > being passed size. That's I think the root of this confusion too. I'll
+> > > post a patch shortly.
+> >=20
+> > While I really wanted to make this suggested change, I'm just missing
+> > something as to how it should work, and perhaps the better answer is to
+> > rework the caller a bit to handle the check inline? I'm not sure...
+>=20
+> Sorry Tom, I am just not sure if this is an action item on me or are you
+> still looking at it? I do not know the code well but could take a look at=
+ it
+> if needed.
 
-Tested-by: John Watts <contact@jookia.org>
-Reviewed-by: John Watts <contact@jookia.org>
+Sorry for being unclear. The original patch isn't right I think, the
+size change leads me to believe that we're changing the loop behavior.
+Looking harder at the code in question, it seems like it's an odd way to
+iterate over every element in the array ('i' isn't used, we just
+increment desc and quite possibly don't handle failure to find a match
+correctly?). I think the best path is reworking the code a bit, but no,
+I don't have the time to. If you don't have time to, perhaps Fabio or
+Peng can?
 
-That said there are some things I would like to see improved in this patch.
+--=20
+Tom
 
-> 
-> Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
-> ---
->  drivers/ram/sunxi/dram_sun20i_d1.c | 13 ++++++++++++-
->  drivers/ram/sunxi/dram_sun20i_d1.h |  7 +++++++
->  2 files changed, 19 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
-> index a1794032f3b..01d19d5feaa 100644
-> --- a/drivers/ram/sunxi/dram_sun20i_d1.c
-> +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
-> @@ -54,6 +54,11 @@ static void sid_read_ldoB_cal(const dram_para_t *para)
->  	clrsetbits_le32(0x3000150, 0xff00, reg << 8);
->  }
->  
-> +static u32 sid_read_soc_chipid(void)
-> +{
-> +	return readl(SUNXI_SID_BASE + 0x00) & 0xffff;
-> +}
-> +
+--NsOhyZ+UctK8bWA3
+Content-Type: application/pgp-signature; name="signature.asc"
 
-mctl_phy_ac_remapping uses readl to read a fuse and labels that as uint32_t,
-maybe this should be uint32_t too?
+-----BEGIN PGP SIGNATURE-----
 
-The other question I have is how did you figure out this register and mask? Is
-it documented somewhere? I would love to see a comment or note in the Git
-commit saying where these values came from, even if it's just 'taken from
-sunxi-fel' or 'heard from apritzel'. Having notes like that can really help
-when troubleshooting old code, which hopefully this will be one day.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMhNWgAKCRAr4qD1Cr/k
+CitBAQCcqMLG3u873ZWRW2GO9nwZjYJDqnsMdCtgKoB0VpKq1AD+MTWM52NQ+IB4
+yexiuWCNcP5YIWdH/I5ofclntSXrIg8=
+=mxPK
+-----END PGP SIGNATURE-----
 
-I found something that seems to agree from the Tina device tree:
-
-		sid@3006000 {
-			compatible = "allwinner,sun20iw1p1-sid", "allwinner,sunxi-sid";
-			reg = <0x0 0x03006000 0 0x1000>;
-			#address-cells = <1>;
-			#size-cells = <1>;
-
-			chipid {
-				reg = <0x0 0>;
-				offset = <0x200>;
-				size = <0x10>;
-			};
-
->  static void dram_voltage_set(const dram_para_t *para)
->  {
->  	int vol;
-> @@ -663,6 +668,7 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
->  
->  	fuse = (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
->  	debug("DDR efuse: 0x%x\n", fuse);
-> +	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
->  
->  	if (para->dram_type == SUNXI_DRAM_TYPE_DDR2) {
->  		if (fuse == 15)
-> @@ -675,7 +681,12 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
->  			switch (fuse) {
->  			case 8: cfg = ac_remapping_tables[2]; break;
->  			case 9: cfg = ac_remapping_tables[3]; break;
-> -			case 10: cfg = ac_remapping_tables[5]; break;
-> +			case 10:
-> +				if (sid_read_soc_chipid() == SUNXI_CHIPID_T113M4020DC0)
-> +					cfg = ac_remapping_tables[0];
-> +				else
-> +					cfg = ac_remapping_tables[5];
-> +				break;
->  			case 11: cfg = ac_remapping_tables[4]; break;
->  			default:
->  			case 12: cfg = ac_remapping_tables[1]; break;
-> diff --git a/drivers/ram/sunxi/dram_sun20i_d1.h b/drivers/ram/sunxi/dram_sun20i_d1.h
-> index 91383f6cf10..7bd8f67a77a 100644
-> --- a/drivers/ram/sunxi/dram_sun20i_d1.h
-> +++ b/drivers/ram/sunxi/dram_sun20i_d1.h
-> @@ -19,6 +19,13 @@ enum sunxi_dram_type {
->  	SUNXI_DRAM_TYPE_LPDDR3 = 7,
->  };
->  
-> +enum sunxi_soc_chipid {
-> +	SUNXI_CHIPID_F133A = 0x5C00,
-> +	SUNXI_CHIPID_D1S = 0x5E00,
-> +	SUNXI_CHIPID_T113S3 = 0x6000,
-> +	SUNXI_CHIPID_T113M4020DC0 = 0x7200,
-> +};
-> +
-
-Same question as previous: Where do these values come from? Could this be
-documented? I can't find these values anywhere else. Noting this down would
-help if someone wants to use them as reference to if they turn out to be wrong.
-Speaking of...
-
-awboot seems to believe the T113S4 chip ID is 0x6800:
-https://github.com/szemzoa/awboot/blob/main/arch/arm32/mach-t113s4/dram.c#L726
-
-				if(chipid == 0x6800){ // 0x6800 is T113-S4 no remap
-					cfg = ac_remapping_tables[0];
-				} else {
-					cfg = ac_remapping_tables[5];
-				}
-
-Perhaps theirs is for the M4030DC0 or something?
-
->  /*
->   * This structure contains a mixture of fixed configuration settings,
->   * variables that are used at runtime to communicate settings between
-> -- 
-> 2.39.5
-> 
-> 
-
-John.
+--NsOhyZ+UctK8bWA3--
