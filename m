@@ -4,76 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A833DCAC592
-	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 21:34:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9F3CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 21:57:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA26482C84;
-	Mon, 15 Sep 2025 23:34:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D54382C84;
+	Mon, 15 Sep 2025 23:57:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JwZ2ctWO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cTZliopw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D46D8344E; Mon, 15 Sep 2025 23:34:12 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id B7BA78344E; Mon, 15 Sep 2025 23:57:29 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36B2B81E13
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 23:34:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA19F81E13
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 23:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-62f1987d547so2695875a12.2
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 14:34:10 -0700 (PDT)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b00a9989633so912516366b.0
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 14:57:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757972050; x=1758576850; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1757973447; x=1758578247; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v/BZptiUaF9QbdqsZt6bKhgHq2F5moAxS/2k3Rfcli8=;
- b=JwZ2ctWOreGF+9NDGub+/XiUmoI5P2z9Vjzjx3ZjVWpDZS76kb7kWcePO06ODTROzR
- +nljyKRC4qYglgnJLQEKCiZpZhL+rjts3yZNpQHE34vX5aYSZELEloSyCNudU5ZU14tK
- Cv+45Uh9EBHr7haOD5bAzSJUY3oiIYqq67rvTMRLh4sKUGD7aJvkp6o/lTLmYc7sHU/7
- SwaXsYUinSyy/6oqXzkqnhT3L+P8wQfUXvPfaxraSARsjD6dMTlvNWPB12qcw2pQlgOW
- lt55lt/IXvuKkbq05qMrP6IZD/CtisisuKqBI4Hb9SgnQN/mbbjQkCaMDuEFKu5/XnPt
- jj1A==
+ bh=nvds91N8CaGzULu/i9psqkffekPgXS3fC/L74vPAwdg=;
+ b=cTZliopw6GB7VGI5NfPyMKS7y56mVpHbro8yC7aGTPBHA/fMmcEl4Vea6TZZtv2CER
+ 2/a5IU6lsF6Aeo5RyjUwxkcb7BJWTlrhXv/xgh7pMznnumc9EE9rIrmDfkqQey+N4JJB
+ CEGR2L0tKW5KboiWuwgve/asdkTaDM2wtVrWo1I5Xbgm9OILxcAbQFKoj427s4VGe+tw
+ 77aXZljtOpcUECK42kT1+plonuxMZYoD6BqsgXfYp0Y3vOGvbQUa/q27okV7WAzExLlq
+ pyBnR//jGgjfH76e9kKgsk7/Aez/8OoWBVy+x6/O9A0gc0LsmdH1hY09o14KxmPhGtdM
+ sUuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757972050; x=1758576850;
+ d=1e100.net; s=20230601; t=1757973447; x=1758578247;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=v/BZptiUaF9QbdqsZt6bKhgHq2F5moAxS/2k3Rfcli8=;
- b=TdlBnnNwZwgaeuvrG61lk+xCkBOToPPfv7n/s5skvWugVaEf9U+hYCLdLJGa/I2Ro/
- zoW1dElsutyP1lNgf1onuX7pRrF24BDfOBYlqrwayk8m4/NctOGGWD0fs2cL2RNzL1fP
- CJPIwxaGXKdphaJY1ouw4Vdf+v0xpAjvxziH9d/gZc6wIaXt2+fuN1iFB7eD7ADfDw2V
- IBkQgihWU2UyNOC5lu/cUXx1zEnx/ONjqDanag1Ue4CYUBYpm+Rdxdv3KMDPoLJr3fM1
- D4166WJ+IesOhUZEkfJZF2VoW9YxwFPkbGsjr1biWbXNcz2BRY3kzqG+R8vUCgb96Hq7
- bvSw==
-X-Gm-Message-State: AOJu0Yxyvu/McE7VIxd2YOZP2lPrg4JzEBDezILDsaD8xmXOtAyUudyj
- 1F7vDw1QDTHDl0p5PuQ0NI3EKiXUivxmRSneyF/cmBcnvfZvHgbWG1Lpbi2vvOnxu35QIuyMpGL
- cJIw2q6PtMXKrUYdQzq9EiXb0Kg0Siv4=
-X-Gm-Gg: ASbGncub9zDz+v0aA8N9RmV7VGur+TAtlgBjGCnuDPJj17NRa/5MAYNeTul3jkenEUz
- Qg8tCSEry9wIBMG1rX/ktifNtiXV+9jNc9cAysVjvXum1uQRZDhdYrGYcPvmEe/m0sRw70znuAL
- 6wfEs/qWWtOCAnNCt6tmYnw1/Aq0NqB2Xkqfcxen38UvLA8yQOEBq6PpbQPrQ4R83fBEzB8bdhf
- JvvfRwGbBmXshnmAiw=
-X-Google-Smtp-Source: AGHT+IFwVgDQ5YMLoG+xa2MvRqDZSO9uV01ttDmBg6AFJql+kGXXVcucxDCkM0+mrdci/VlywT9srGwPkzkK2KCEjrI=
-X-Received: by 2002:a05:6402:a0c2:b0:61c:e99d:fdef with SMTP id
- 4fb4d7f45d1cf-62ed8241121mr12140477a12.2.1757972049387; Mon, 15 Sep 2025
- 14:34:09 -0700 (PDT)
+ bh=nvds91N8CaGzULu/i9psqkffekPgXS3fC/L74vPAwdg=;
+ b=UyewXud29iLmfnuhH/k/HC1KJ6aGSrEL54yPDuaQiFrDd0mm7WUBB7ML3usij4VgtZ
+ o7ICKxYtLs/FjVNITOvlQcnIVIPzwUAQpGgjAdYClcyIZiULefh9LQJIp+8cPw/6N3i/
+ 0k70/scI9+oSU+tJnLg1F8MRIs/kDDKW2jkX0lYKL6Y/eSOCkuJ+BUFsf/oHcgaLuQxj
+ ZSieKHz1vBCMT1toU2u8Kcmd4jMK0KhPkc49WAWYDFUDDBZ4crKU772PTbDalQFtXP2Y
+ r9UndXpQVaL9t1HMptNYXLLHnPoYhxivjec+q2IA8Gcuszdkci22jTYLFO1M+hVS8lrj
+ HTfg==
+X-Gm-Message-State: AOJu0Yzm0GJp3+uRBY0FZPQy8RqVGxUV6uFaldUL6w9JvfFUatnl/qNh
+ RZieam/8DdCQqEnlNFwqI7KH7S7ZYiLlAIlfIHpW8oCKHAtIaPoC+qrS+pu+RyyxYitfdAO92Mx
+ uYVMhsXefDu3ra2gIZ4KjEJ83TDr4lm0=
+X-Gm-Gg: ASbGncs6y2IzLwdASF8/exlDAvWafqHP20qfuHRak+RyuIXgzActxKSVwcgAtmrh6jJ
+ Rk0hxaLQ1Rjp0PtTaiJxctQoTQB+kJajHAHlIDAzV1ZHrltgJAVF+pylH+pKQK2Mmv1VhRYLD1v
+ 9rR+TAI8KoOOs25kAEH7KopCX9mY4w3kG4FlS44INVdKayfkmcULEJvTy1pBuoTTcZCXfeLwWO+
+ NS/sUQrU0tjosaZ2hJKd2maplD3aA==
+X-Google-Smtp-Source: AGHT+IHGgzdq3XMPHtWX3Ka4/F/ZI7QzcU4f7i9f9CcOIZaoW4b9st3xf1/ke7B06IBnTgcOvDFKcYyhpoY42FDXb7c=
+X-Received: by 2002:a17:907:9621:b0:b0b:5d7f:6ae4 with SMTP id
+ a640c23a62f3a-b167ea62cacmr2505866b.8.1757973447042; Mon, 15 Sep 2025
+ 14:57:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250915210109.459864-1-trini@konsulko.com>
-In-Reply-To: <20250915210109.459864-1-trini@konsulko.com>
+References: <20250915203827.GN124814@bill-the-cat>
+In-Reply-To: <20250915203827.GN124814@bill-the-cat>
 From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 15 Sep 2025 14:33:56 -0700
-X-Gm-Features: AS18NWAW6m8_3q7ZNflGVvNYaqK-UcoMEhUnOyeeTb9MZmsYjNxaPgDeZZ2wBSQ
-Message-ID: <CAJaLiFx-127XfC5tQNBvPoHbtzKXN3DB4AGg-53VedshEt_xwg@mail.gmail.com>
-Subject: Re: [PATCH] MAINTAINERS: Update Luka Perkov's roles
+Date: Mon, 15 Sep 2025 14:57:15 -0700
+X-Gm-Features: AS18NWA4jTYmc6sJOdMFNNQa-ejwAVdJf9EjgrStfS-B1Y7duyo44uqwrTbGmZw
+Message-ID: <CAJaLiFz2epS5+nh4NYJBg5PDakfR+kNASBjqiWvPZmAABGUK5g@mail.gmail.com>
+Subject: Re: Continued need for ATAGS-based booting?
 To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Luka Perkov <luka.perkov@sartura.hr>
+Cc: u-boot@lists.denx.de, Dave Purdy <david.c.purdy@gmail.com>, 
+ Ion Agorria <ion@agorria.com>, Jason Cooper <u-boot@lakedaemon.net>, 
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
+ Luka Perkov <luka@openwrt.org>, Luka Perkov <luka.perkov@sartura.hr>, 
+ Michael Walle <michael@walle.cc>, Peter Geis <pgwipeout@gmail.com>,
+ Phil Sutter <phil@nwl.cc>, 
+ Stefan Roese <sr@denx.de>, Stephan Gerhold <stephan@gerhold.net>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Walter Schweizer <swwa@users.sourceforge.net>, 
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,113 +101,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 15, 2025 at 2:01=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+Hi Tom,
+
+On Mon, Sep 15, 2025 at 1:38=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
 :
 >
-> Per a private email, drop Luka Perkov from MAINTAINERS entries.
+> As part of working on cleaning up documentation, I ended up seeing just
+> how few boards still enable support for ATAGS-based OS booting. In fact,
+> the list is:
+> brcp150 brcp170 brcp1_1r brcp1_1r_switch brcp1_2r brsmarc2 chagall
+> dockstar dreamplug ds109 ds116 ds414 endeavoru goflexhome grouper
+> icnova-a20-swac iconnect ideapad-yoga-11 lschlv2 lsxhl mocha mot n1
+> n2350 nsa310s nsa325 openrd_base openrd_client openrd_ultimate ouya
+> picasso pogo_e02 pogo_v4 qc750 sheevaplug star stemmy surface-2
+> surface-rt tegratab tf701t transformer_t20 transformer_t30 x3_t30
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Thanks for all your work in the past!
->
-> Cc: Luka Perkov <luka.perkov@sartura.hr>
-> ---
->  MAINTAINERS                                | 1 -
->  board/Marvell/mvebu_armada-8k/MAINTAINERS  | 1 -
->  board/iomega/iconnect/MAINTAINERS          | 1 -
->  board/mikrotik/crs3xx-98dx3236/MAINTAINERS | 4 ----
->  board/zyxel/nsa310s/MAINTAINERS            | 1 -
->  5 files changed, 8 deletions(-)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 3fb163aa1db1..1b41f57a58bc 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -346,7 +346,6 @@ F:  drivers/spi/gxp_spi.c
->
->  ARM IPQ40XX
->  M:     Robert Marko <robert.marko@sartura.hr>
-> -M:     Luka Perkov <luka.perkov@sartura.hr>
->  S:     Maintained
->  F:     arch/arm/mach-ipq40xx/
->  F:     include/dt-bindings/clock/qcom,gcc-ipq4019.h
-> diff --git a/board/Marvell/mvebu_armada-8k/MAINTAINERS b/board/Marvell/mv=
-ebu_armada-8k/MAINTAINERS
-> index 55e485faa962..15660cd17d4f 100644
-> --- a/board/Marvell/mvebu_armada-8k/MAINTAINERS
-> +++ b/board/Marvell/mvebu_armada-8k/MAINTAINERS
-> @@ -13,7 +13,6 @@ F:    configs/mvebu_mcbin-88f8040_defconfig
->
->  Puzzle-M801 BOARD
->  M:     Luka Kovacic <luka.kovacic@sartura.hr>
-> -M:     Luka Perkov <luka.perkov@sartura.hr>
->  S:     Maintained
->  F:     configs/mvebu_puzzle-m801-88f8040_defconfig
->  F:     arch/arm/dts/armada-8040-puzzle-m801.dts
-> diff --git a/board/iomega/iconnect/MAINTAINERS b/board/iomega/iconnect/MA=
-INTAINERS
-> index a1b018e8169f..d9093b28ef08 100644
-> --- a/board/iomega/iconnect/MAINTAINERS
-> +++ b/board/iomega/iconnect/MAINTAINERS
-> @@ -1,6 +1,5 @@
->  ICONNECT BOARD
->  M:      Tony Dinh <mibodhi@gmail.com>
-> -M:     Luka Perkov <luka@openwrt.org>
->  S:     Maintained
->  F:     board/iomega/iconnect/
->  F:     include/configs/iconnect.h
-> diff --git a/board/mikrotik/crs3xx-98dx3236/MAINTAINERS b/board/mikrotik/=
-crs3xx-98dx3236/MAINTAINERS
-> index 906ff98970bd..04423556924a 100644
-> --- a/board/mikrotik/crs3xx-98dx3236/MAINTAINERS
-> +++ b/board/mikrotik/crs3xx-98dx3236/MAINTAINERS
-> @@ -1,13 +1,11 @@
->  CRS3XX-98DX3236 BOARD
->  M:     Luka Kovacic <luka.kovacic@sartura.hr>
-> -M:     Luka Perkov <luka.perkov@sartura.hr>
->  S:     Maintained
->  F:     board/mikrotik/crs3xx-98dx3236/
->  F:     include/configs/crs3xx-98dx3236.h
->
->  CRS305-1G-4S BOARD
->  M:     Luka Kovacic <luka.kovacic@sartura.hr>
-> -M:     Luka Perkov <luka.perkov@sartura.hr>
->  S:     Maintained
->  F:     configs/crs305-1g-4s_defconfig
->  F:     configs/crs305-1g-4s-bit_defconfig
-> @@ -16,7 +14,6 @@ F:    arch/arm/dts/armada-xp-crs305-1g-4s-bit.dts
->
->  CRS326-24G-2S BOARD
->  M:     Luka Kovacic <luka.kovacic@sartura.hr>
-> -M:     Luka Perkov <luka.perkov@sartura.hr>
->  S:     Maintained
->  F:     configs/crs326-24g-2s_defconfig
->  F:     configs/crs326-24g-2s-bit_defconfig
-> @@ -25,7 +22,6 @@ F:    arch/arm/dts/armada-xp-crs326-24g-2s-bit.dts
->
->  CRS328-4C-20S-4S BOARD
->  M:     Luka Kovacic <luka.kovacic@sartura.hr>
-> -M:     Luka Perkov <luka.perkov@sartura.hr>
->  S:     Maintained
->  F:     configs/crs328-4c-20s-4s_defconfig
->  F:     configs/crs328-4c-20s-4s-bit_defconfig
-> diff --git a/board/zyxel/nsa310s/MAINTAINERS b/board/zyxel/nsa310s/MAINTA=
-INERS
-> index 11106acf3e94..865c98f7724d 100644
-> --- a/board/zyxel/nsa310s/MAINTAINERS
-> +++ b/board/zyxel/nsa310s/MAINTAINERS
-> @@ -1,6 +1,5 @@
->  NSA310S BOARD
->  M:     Tony Dinh <mibodhi@gmail.com>
-> -M:     Luka Perkov <luka.perkov@sartura.hr>
->  S:     Maintained
->  F:     board/zyxel/nsa310s/
->  F:     include/configs/nsa310s.h
-> --
-> 2.43.0
->
-For Iomega iconnect and ZyXEL NSA310S.
-Reviewed-by: Tony Dinh <mibodhi@gmail.com>
+> And my question is, for you board maintainers, do you still need to
+> actively support booting such old Linux kernels? Or can we disable this
+> support and then possibly be able to remove the underlying code as well.
+> Thanks!
 
-All the best ,
+IIRC, Debian latest mainline kernel still expects ATAGS for most of
+these boards (ones which they have installer for):
+
+n2350 ds116 dockstar dreamplug ds109 ds414 goflexhome
+lschlv2 lsxhl nsa310s nsa325 openrd_base openrd_client openrd_ultimate
+pogo_e02 pogo_v4
+
+I think we should keep ATAGS around until the Linux kernel removes it.
+
+All the best,
 Tony
+
+
+>
+> --
+> Tom
