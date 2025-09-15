@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 137D7CAC597
-	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 13:41:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62902CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 13:42:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C05080B9B;
-	Mon, 15 Sep 2025 15:41:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B220D8344E;
+	Mon, 15 Sep 2025 15:42:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="JWs5hWvZ";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="eUBeH5nW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D532582C84; Mon, 15 Sep 2025 15:41:53 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id E1C1080422; Mon, 15 Sep 2025 15:42:01 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1F0180422
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 15:41:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A51FD80422
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 15:41:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jan.kiszka@siemens.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EsKEP9CZrQ0+x4Zwq+Syv+jteawzYJhQBZzLdOaTjx4dNlpWd0ewEBoudh89boVKo2rQp7bqQzF5W8+nBToWRMsfYF8AWH38o6D3ts1P5jHCN3rpq/IBNXk4v5aMe8hv8kGJAvw00qTymRegdV4TuXFDkZRxpW6gx5oM1Dxe35xR30ewGAL+xf8fwdsJaDlNk9xoIERZz9fergAFwbb+oEtPLFZvoknPH9yIa/qE1moN3YLskkbpCDKmx83/8p/sME6RqtCTzfmz7zInFlaFzVPdjXfskuVZUa2L/9vSnI1UPKwv/AVn4BKetH4DBnYBKxMKlINXK7sEGQAv0YOSHg==
+ b=t2MvKMSl8C22dLh7lvss7BsHaeRhqTujvoTE7Rf4svKxpQKi4IXxzL4AEcGlU5N90oEB2M5SMFgRALK4lfYeC8yD2SkssOdhXfnuD/ekx1Yfi6TLAEKXk1XQiCio0BcOO7GOHmcwhcloozNZVNChu6ICpoy5SpzOrxIyVSgC6InJzyqm7B2NgjchH46WUY8omXXQB048l8AR4lbAnu9gTgKF1yJ1zL8bNYs2RrybUhfIxrnhY2tEOqmpAzYjOWxbUlFmx7TZUbuY7LlUddcaM8dhGw6w9la8rCYU+SZYByYxaW6IsmgcivrdwIqcVBD1qaM2QqR1sI+iTyZZ5mn1uw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OKY9xEitH1M0honN9l83fZDOMvgGW/LwbMjiPuVoMFg=;
- b=d7gIKJc1MEBAscbVCQRIvnStN8+NySDyq1yAmWMBCB7toNnvTO4zhKa3CfBSF0+xNWT8jetJ7vKdnbh8RyVnuyFvjvl8sdh/IakzhHxijmrpxS9cKz7B7jJfyOzfvhodQBdB1fvhbTH3g1QsXLkgotU6Lp5Ahq5XlGc43JtdiIva+NP2PoMm4OLFFNLVlXs6ED/xzk1u1sL8hnL3ufZBlm4Wcei2O4eic4P4q9PL0zMNocDtdpoDliNN2LXJ9rlepOcf6bR6e9Igr+WDUVvTTHtt7wf4f2zP2UnkHeYyiGTNgfAAC5sQEVupSTe1KAqNxpGYN3H5EolJ9FzUyK/Ppw==
+ bh=v8nnC3eS983sXG0LVakLwd7YoBeO7p8XofAi6nn0Ld4=;
+ b=yUgsvL/jFdWwLz9oX2ubI7cXyQ4jan80wyr8971HQnUDV1+IXmcX6w9zCZFtx04j429Wun1uSUDZkOWKiq/G59j5i+UI1DQ9l11to8OUU6i1R73FSg1lu/pl/orvm2w09O6/iqTrrlMm4OwJX9si/3JCMlrrs8ChMxB0iU6yAejGVaIDw3wPsuzDjGrKyYX+7HIO8AEIbba8VSgi/StkDdeCqxkU5K1zoxIAYGC0OIJG933TWzfamIG/pRDLj4gHACZ5MJdU/H2jMeEmFx45rthjibRry8L4uwS3qwhYdkANsY5q6idaEMGZ+/WetGWAFP9B1GnX/SHzswvDkj/19Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
  dkim=pass header.d=siemens.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OKY9xEitH1M0honN9l83fZDOMvgGW/LwbMjiPuVoMFg=;
- b=JWs5hWvZKZDhXrPsOW8n1LReG1TTt6yuxHnIZxDT+UQEeynptdcwEWUOVuFzdETwR+JpiUqN6D+DsUs8elGz/QgVFzqSjtjmME2U4hUHm6r6QhjqGIANvUHmWy8qoCvDdeksfycmq4Q7qp2vsB/NC54D9PDSu4+qBjTp8E4i8nGvmTGLXAPGM3dD4GjRV0bSJWpDDqaUspW3UdzFwzqt9q98RxhDNY2NyVqRh2JXmWVAa7Ytsi7HgnbthW/vYSGYNT4zhCMAKIePR1rKUJXr0gWiR927p958LDAnmNSWRmieOuS5fc4CZPdYgac98HVXA9k614dWjJ/b+WhRqzZ6UA==
+ bh=v8nnC3eS983sXG0LVakLwd7YoBeO7p8XofAi6nn0Ld4=;
+ b=eUBeH5nWLoRzpY2N+U9CS7fmNGHXDzUIiFfsHxxJBWLx06rAQQZb5ihORRpqgnRLydwx8nYJDGy5c5NGac64dny0wPJ6qVy/LeAnS0QM/bWOcnFPF2nsrLpyXb/LSMoAQTy6aiAWbuvE0MHuiJ3WcMB/nV+8Oy2pxt1RhImHigZu8uD4+gECaFgY1LEjMT9vdX33vVF5FlgUzS3i/aupW8KGuK6VbnFNvH4aSnCDsK6PwwFHAq35/QpytvZaNfkF3OTdyiDpf6LO0qbrqNlSzizOPp8TH17Y/oxlsCD2dyPwtJn9WT7327JB4mIEFP9ZqmHGqsOMfRQtJ06ZFm4Flw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=siemens.com;
 Received: from DB4PR10MB6190.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:386::16)
- by AS2PR10MB7084.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5e8::17)
+ by PR3PR10MB3916.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:48::16)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.21; Mon, 15 Sep
- 2025 13:41:50 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.19; Mon, 15 Sep
+ 2025 13:41:57 +0000
 Received: from DB4PR10MB6190.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::fa4b:dd2d:9aea:d5b3]) by DB4PR10MB6190.EURPRD10.PROD.OUTLOOK.COM
  ([fe80::fa4b:dd2d:9aea:d5b3%6]) with mapi id 15.20.9115.018; Mon, 15 Sep 2025
- 13:41:50 +0000
-Message-ID: <13ba48f3-155c-4329-8bd9-fc548c6ea53c@siemens.com>
-Date: Mon, 15 Sep 2025 15:41:46 +0200
+ 13:41:57 +0000
+Message-ID: <de5e5cfd-6946-4be3-ba08-5105460a7de0@siemens.com>
+Date: Mon, 15 Sep 2025 15:41:55 +0200
 User-Agent: Mozilla Thunderbird
 From: Jan Kiszka <jan.kiszka@siemens.com>
-Subject: [PATCH] lib: optee: Add line ending to debug() outputs
+Subject: [PATCH] test: Fix optee unit test
 Content-Language: en-US
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+To: Jens Wiklander <jens.wiklander@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List
+ <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  xsFNBGZY+hkBEACkdtFD81AUVtTVX+UEiUFs7ZQPQsdFpzVmr6R3D059f+lzr4Mlg6KKAcNZ
  uNUqthIkgLGWzKugodvkcCK8Wbyw+1vxcl4Lw56WezLsOTfu7oi7Z0vp1XkrLcM0tofTbClW
@@ -106,101 +108,101 @@ Autocrypt: addr=jan.kiszka@siemens.com; keydata=
  ZffO4PeNJOUYfXdH13A6rbU0y6xE7Okuoa01EqNi9yqyLA8gPgg/DhOpGtK8KokCsdYsTbk=
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR3P281CA0133.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:94::20) To DB4PR10MB6190.EURPRD10.PROD.OUTLOOK.COM
+X-ClientProxiedBy: FR3P281CA0122.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:94::6) To DB4PR10MB6190.EURPRD10.PROD.OUTLOOK.COM
  (2603:10a6:10:386::16)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB4PR10MB6190:EE_|AS2PR10MB7084:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3ef9bacc-5673-424a-01da-08ddf45d9f12
+X-MS-TrafficTypeDiagnostic: DB4PR10MB6190:EE_|PR3PR10MB3916:EE_
+X-MS-Office365-Filtering-Correlation-Id: f96c9fd8-1f66-4112-5a74-08ddf45da3a6
 X-MS-Exchange-AtpMessageProperties: SA
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RkxRQXlaWmc4NGU0TDM2U3MzejRraDFrS2p3bFhHdTNCUUF5NlE1TFl1Zzhr?=
- =?utf-8?B?alFKQUgxQ2I4S3dXSytxWGRnU2lhM1JZWTFVcStUZXZrdEhFK3AxaEVhNThm?=
- =?utf-8?B?SFRoV3RURmtjTzdtNUtFNVY5OCtrUk85dkVwU2Noa2JPUEFhSnNqMlRSSHha?=
- =?utf-8?B?a2RxV0E1ZVk3QXdidmR5NEM2K3JZUmtpNzNTWGg4VHgwenVQVlArSHc1M0JW?=
- =?utf-8?B?OTlEZ0ZIUW5HYmF0blBmbVZLVWJ1VFdPdVE3QXRHK1ViWDBwOVRGN3JoZWhN?=
- =?utf-8?B?RTBwcXJ2ZW1MOE5VRTloanVWOUVSVFljUktCYjBzUWEvTTNzSkdXb1ZVMkVz?=
- =?utf-8?B?c2owcEJqNG1yeERIa2JsQ1F0VWV3OTVBL2pSVlNTZ2xTRk1zNkpTVkZwWjBr?=
- =?utf-8?B?SjdvcTNDNTBaTXk4Q3pUeWc5NzFwaFIwdUFYVy9wajFlVXJVYWtuMHRqL29z?=
- =?utf-8?B?Q1kvQnlXNW9YSmYrLzFYZ2xVOXZ2bHZZMEhYMVd1VHJUd001aUovU0IyM1Rt?=
- =?utf-8?B?WUZvOHkwSHZtbU1QLzNrRzlHNnNHeC9MeVNZOVpCS1FtN3VBME45M3JQOHhG?=
- =?utf-8?B?ZUFOU1Ewd0I4dEVBSkprWWVsNUJKOXlrdHFPMTdJZWMrdWduaEgrVTY2cWdw?=
- =?utf-8?B?VG9IK2NXRGdQSnBPbnM5ZUpDc0F3ZzRsU3E0eXgrYkJNYmo3aTlSc2NRWkc3?=
- =?utf-8?B?YVBEZGtIdzJWbnA5YTUyWGlLaExhVk9BWE5YWnJ2aHVlZ3BIQThkT3psVUhJ?=
- =?utf-8?B?VUxwZ3pMMHlnc3dNWlFEY3ZVWHpXd1o0MmZ3NG5qcUI1YTF2TFg2WWtOUXZk?=
- =?utf-8?B?Sk42TmF0dnFtT1hmbm5tN3IwY3JPL0tmczcrUTJwQTlZMUhTanBlVXE0dnQ5?=
- =?utf-8?B?UmdzQ3U2a2FWSEZyK1NSKzdtMVJmUk1nRStjbnNNeWVrZUtQMnYwYXl0dDlp?=
- =?utf-8?B?TSsxV3VPREc2K1JBUVpsRFJkMU0vSDBkTG5UdFZqTDlDSDJuTTlqQ001U0Rp?=
- =?utf-8?B?UytTM2RjMWxxd2RyYmd4VmdmalRNaXBBbjVZaThyMmtlVkxvSnp3TExrdDNu?=
- =?utf-8?B?R0I5T2diWGtVeEs3enF0dytFMmU0d1AxTnoxUzlXK3Nhb3E0NDBDUGVtRkUy?=
- =?utf-8?B?Q01YRXFleUMzOXMwVFdYM2VLVy93OHZMT01yeWZ6RzkvMXBQcjYzZEpyN0JM?=
- =?utf-8?B?S0NUWWFnT3FobkRlRzk5cEhzanJOU0poNTY4R05IaU5OSWtIRHJwblorUU0y?=
- =?utf-8?B?ZnFMWERpMlNwVnJkV1NzZS8rd3B3RTEvMWF2RDJOVWFiSTMxbkZmSURJUTZi?=
- =?utf-8?B?b2NTeFA5SzEwUkZPcVhhNkJ2VDU5aWlScWNZc0xVRVN0V2dVd2p0ZC9xSGww?=
- =?utf-8?B?Qy9ha1Y0K3J1cnNOdjJBZGkvNEVaNEJzNVVQRkpWTldIeTRBWlFTWGJtaXBU?=
- =?utf-8?B?N3hxRVBuVjdxMWl3V3NyQm42VnlrSkloZ3QxcVk2T200QjB0bmVhWFEyNWR0?=
- =?utf-8?B?Vlc1UENWU2lZS3ROTE5UWlQwV2IrZE1pTllGVk5WdHdORVFma0dBMXhhZnRs?=
- =?utf-8?B?ZFhwalR0WGpxV1ZMSFQyMDBWbXoyQXNHbUFLZU93T0NacDFncUZpdGU2U0Qw?=
- =?utf-8?B?MUlZY2JIbWphdmhFdFA5RkVVd0FMcXlRQWwzZVJYeWZOK044NnFpSlBpVGow?=
- =?utf-8?B?enRPSmVMTm53bVBHYnJXK2MxZmxTdnB6am91eGNOYUNNdUhxejJBODRXM3ov?=
- =?utf-8?B?Q0x6L1BMT21WWlBmNWkxM21XMlhyejRJZ3ZGYWloSjN5L0VxR0FSMGZlNHI3?=
- =?utf-8?B?bFJjakNMOXZYMGI1a0tOejR1b1hLa002UkgvdDBJMlRzK2MzWEZCUkNzVWMy?=
- =?utf-8?B?ZXdsa1NDTytzSzVrbkJ0WTdQMFMrcDFycnlpUVMxc0g1cTFmSFF3czZsbjZo?=
- =?utf-8?Q?SyYkYm8vbA8=3D?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Z2N1SDd0TDhwTlhUSkxmWldFY2ZsU0hOTVFyZVNldW1URm1JekxTZlFzQ25Q?=
+ =?utf-8?B?dlJiTWpvN1hUZEY0TitYbDdpMzUxNktUcm9WTUlQMTdTTVhDQzQ0bnJDSXZx?=
+ =?utf-8?B?L2cvaFVQNGlnZ053Tm9wVDZxNWtPT1JPNEdhVXBVVVJGQnJsM1hDb2NDMGVY?=
+ =?utf-8?B?dVVIN3ljdURSeEh3SlduVFIwRGlyaFJlYTJwejVEYW5tTFQ1QjNBRFJQeFNO?=
+ =?utf-8?B?U3JOellLQjRhTmxET01kU2RkdzBlZnZ3cUNjR1B4VjB2dHZKSXpSendhYzNo?=
+ =?utf-8?B?Z2pKSEthNjN2V0pOQkNhSm1jSWxicHZIYzQ2WDcvVHpTWVdicmoycHEvL2VD?=
+ =?utf-8?B?SVd3a1RHRzdLc3d1bll6T0NRVi9LRG9oS01obk5zampsTkRjcnFyVjViZkts?=
+ =?utf-8?B?SVlVeDYyYUZpRlFhVm5nNU1yVHpNY1RnMHM3L0RUc0xQamR5a1B1aXBRSDNL?=
+ =?utf-8?B?NW9PT1VvOGt0aWhKendFaWFJMXpZdnU3TzJzayt5MnY2RVl3QkN6d2ZYbnA2?=
+ =?utf-8?B?Y29aZnU1TjFicVloU1ZlL1FJVWQvb25xOUlLRE9ZQzNYSzVNQmp5cW4vd1kv?=
+ =?utf-8?B?amtEUHJMb1I4UmdKWHVCanZ2SkZwakNRZ2J5aU5XQjBmZFJpL3Y1d2hwZGww?=
+ =?utf-8?B?LzRiUnF0RUpoVk95WWd2YUpDMldWeHpSTUdwSk5lNUJzc2MzZkxoSENTM2Iw?=
+ =?utf-8?B?N1JOVEVORXVRZmVOVHJ4UkhsdHlNVlRwa3NiNHV1bjhIZ0tISFJ1WllsK281?=
+ =?utf-8?B?TFpEdllZQkNUV01vUUxEK0k0OHkzQ0oyU0tNSFJzcHFEczJ3WDV3UHRzUVBr?=
+ =?utf-8?B?VTdrUUJHSXFURDk0NlZvTUIzMW9CcGRrZTErZkp4eU9XUWNYUktLSFJjWk9i?=
+ =?utf-8?B?NFFBaURjT0dnVWRZL0tCVGowUmFYZ04wYVIzeW01S0ovVWcrUVhmMlA1Vkhv?=
+ =?utf-8?B?NHhOdVhENHJGUkFhYkRJRFFiU3RvUXNpYTJVTHRVM3o4eXgyem9FeG42MzhM?=
+ =?utf-8?B?V0xhZHIyZmNpd0xxWDQwYVFFT1VFd013MGw3TWptV3kwdEV3ek1TZkg3ZGpx?=
+ =?utf-8?B?cytFL3JWZ1JxQjVMMUR5NU5ObUJnOGFheGJDYUZNNy8xTkdDWVFRT1A3RVZx?=
+ =?utf-8?B?RDdUMEZOTE1NbThOUjdsc1hndXBPaFBnWkF0N3lJNHZYKyt5Qkt5aGtlRE5V?=
+ =?utf-8?B?K2hnTCthT1FNQ1Jtbi9ENy93aWtqSnZVR2JwczJnYk5NeWFzOUNqcHVYMVNI?=
+ =?utf-8?B?VTIxLzk0V3B1STNWTk91b29pTWZERHlTN25XWE5KNU9EQkhUaDROcWFLV0Uv?=
+ =?utf-8?B?SzA0ZTFDa2t5dDJEYmNNaDdaNk5XbTBJVXhTaW1yOUltblFWMVhnZ0pDRXpC?=
+ =?utf-8?B?bk9ncEVGK0FlaE9XNHBNV0VuNkorc0d4bmFtWnZHYUpweU9HVkR5bGYyTU9I?=
+ =?utf-8?B?a0p5eWpUUFBieFpuTXBMTGRWejljN0FrNzg5aHJPV3NzcXdKUnUxTmNBMzRo?=
+ =?utf-8?B?NGt0VDZwbXlPWjMwdllzMmlRYlVFdjBuS3pYbWRDb2RJZFRPUzZ2c3ovNlVv?=
+ =?utf-8?B?RmZoSE1sanV5ZHVCRU1sMnJKdFdnd1U0Z3BYTkwvRkUrSWNFb2VYeGtHNDdR?=
+ =?utf-8?B?SGVYd0hZbVRSSGdiWlIzaG4ra1FFdmUrMTQ3QThYQiswbCt5cnl1RXo4bmRu?=
+ =?utf-8?B?K0RBbkQycjRLS1JqeGFEQXdTbk1zU2IwMjFQZ1dEamNRTUZZbmlUdFAwejdF?=
+ =?utf-8?B?TS9leGpaelcyV20zMmgveGZvQmwvR20wdElJZ1g1dEJFQkRGa0dQVW40bHpC?=
+ =?utf-8?B?cFFaRmtqMXkwcjJnRjBsbmJGZkdyeExJQmVpZmV5YjRzZXJuTzEvVXR0Z0ha?=
+ =?utf-8?B?SFFvNGE4ZkJiYXlDa0JHYVdNRWNGQXUrVC9jbEpiK212Zk1PMEd6YjlZL3hP?=
+ =?utf-8?Q?SN7jHbuGcOM=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB4PR10MB6190.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?K20yQS9jWE4vblRLZnYxQ0UxaEM2Y1dSUmNxSHgzeStybExOdWtUNHYzT3RX?=
- =?utf-8?B?NjRoVDE4azFkdkpUb1Z2dXRyNTN0YkJsMk44cUtlMkZOM29VcVcrY3VIYzJ3?=
- =?utf-8?B?TWptQkp4UXdFZVFKb1M2RUgzUUVaZ2l2VExZa0Nsa3BUU0UwaXZBRXU1bElP?=
- =?utf-8?B?WkdjUExiQ1lMb0Y3cFkvUGErTXBSWUROb2tNeXlhTjNMUW83TzcrZmdhWHBN?=
- =?utf-8?B?YmN3TndmaVFJQzAyd0hRTDJvT2RvK1hmMHA0Nmt6M0NhNnZHVkF4UXl0REhL?=
- =?utf-8?B?U2tzWjFSMXNKOEE5b2dmT1FuenljSndTRVpHOUpnY0J0bU5kd2RHSWVmMHJp?=
- =?utf-8?B?bnBjUjJ5elByMGFUWXNHTEpNRXRNOUZYWmNKdytrV0lWOHdzaWJ6ajNVOC9W?=
- =?utf-8?B?cHZMMVNZeVoxelJ0RXJQUVQ1TUFnZWlURjQwOUlha25qcWFlMHpjdlZFR012?=
- =?utf-8?B?WTVPMXIyRHRxalVvRmJKSURiK29MYlJlU3hLdlBBYzd2bnRCZW5KUkJsUVAr?=
- =?utf-8?B?b2hsVFlxT21GdmNvSjdyQ2YvQkxxbVZaTUViVmU0a2VGWWNBbGliZzg0MGto?=
- =?utf-8?B?SHNuT2tIdWJ1MzJBbUdCODhXRDZpWmtGY3NnaGhWRGtMdkR1MGp0ODVYWHRE?=
- =?utf-8?B?RXlXQjE1VkxZZjJrNjU3aXVacVpBbGdjbENnUkEwV0VlTUU1dzdsWm5YcXVv?=
- =?utf-8?B?WHg4S0pVTmhzUVA4Um5UY3VuQ0ZYVW9QYXVud2VSRVQzN3VEU25SeDV5MnRG?=
- =?utf-8?B?d2lkVlhRd1g0NWFhb2FXSFdhemo5UVBNVlZnMERwL0t1Ti81RjRWdnQ5cWZm?=
- =?utf-8?B?bzJjZmF0WktvZ1lwZHRhb2Z5RkQ3MlVuV0U2Vk9QSnhGUVNsZFdVQjBCQ0xD?=
- =?utf-8?B?RlVYaG9iNmNtRmUwVlptR3NhY1dYWXdhUjg3eGJvZzJuZU1JSHJzdE83eGFO?=
- =?utf-8?B?d2xwRUFwNzhHeFNDUWNDSlgrMzVEY0F2cmF2cUZMUEJwSUl5WmVqWjJCaTJm?=
- =?utf-8?B?MCtWRGNOUGxJek9wV3ZVOC9Ea0NDSWxteVIyMFM4bnUraXBCNWJQYmVmSGlB?=
- =?utf-8?B?SGpMK1pQT3ZEaE9vSUdsTkFqbmNlNzdGV1ozRkVmTzIxVVp0V1ZCK1BVV3Uw?=
- =?utf-8?B?VG83ZkZhU3lscGYxd1pZY3VQb3JhSDArZFl2WWhtNS81bm91b1JiUklPMlBR?=
- =?utf-8?B?MVY0cGNkcnhGOGp6M1dHc3FDNjFySm1ZdXg2RHdPSTdrL0dqOU05OTJzc3N3?=
- =?utf-8?B?NTBnK21JMlVWUERFak1CR0NwVCtiU0cwM0RLZ25zY3lzODZxKzF0QlAwOVlz?=
- =?utf-8?B?aDdyamc4bWVhNHJiNWJrTkxOK3hVMmVWbUpNemwvNjdqNGtVQzR6QU4xempy?=
- =?utf-8?B?ZzRpWmRSZ0xCQVVZcDlqMU1JaFh6MU56S2hRS1FVVVQyTTkxOFU5MUw1angy?=
- =?utf-8?B?TENqSU9DOEVpV2lRTXlkczZBZ1JqY2Z5N1kzU1kwcTBRTGJtbWhLWjd2TU1W?=
- =?utf-8?B?RlJiVkF0SzMvV245SlBHSkIxQlBXQ1I0NU80c3huQnBOYnNJOXZZNkgrcG9z?=
- =?utf-8?B?a2dTQkYvdERUY2c4VEd1RXJjR0ducE80bUxodkd4TkUwUGhLZ3ZubVdNa0Yv?=
- =?utf-8?B?SER4RGdDQzhURW1venZra0l1c2lXamFKM1Y1aEg0RXlDeHhMckJZSDVKSnJR?=
- =?utf-8?B?cThtTEthR3BqaVdoU2lwdE5pLzdaT0I5SHZDQ0svMXVqTnlEeE02WmhLVjNT?=
- =?utf-8?B?cUJHRTQzUDVhV3hzUFcwSXNDZ2lVWUl6MHY4NW96WmtuUU1LVEd4RW9FMGt1?=
- =?utf-8?B?bVFtY25hUzVnZlgra2ErSmJUQlRDdENaUHEyYzJlWXE4TVB0UEpZdDJSREhq?=
- =?utf-8?B?TVlhMWJiNHhFSUdRVmJPMG9wZ2RUUTVCOGUvUzhRYzUwV0JGbXNUV0pJVzcx?=
- =?utf-8?B?Zi8yNGJLQ1JuTG1wbjA0NUVoNXk1OHBSaEZ1L2pWT3BEVHJ5MkVnMUxKRlhv?=
- =?utf-8?B?YzlpZXZ1cllHdERtL05CVGVWM2ZDNUhlUi81WW5VRlkvZlQ0ZmRDYzJiVC9Y?=
- =?utf-8?B?QmFRK2Ztb1c2QXBkcURqVGNubkxxVDNWREZJTVZBVnBxWW1JOWEyNkxrMjFM?=
- =?utf-8?B?ZnRnM2NMU1lvOGpJdGNxMVp5ZEpjTGMzSG45WE13Ukd5ZUZWL3F3dnpOY0JX?=
- =?utf-8?B?REE9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MXZYdm1uNXJnN2ZwYWhsOXhxVndIeHMyRzBQd0h1SWxRUUxWcmp1VWtYMjFI?=
+ =?utf-8?B?Qy8vV1FQNFZZZURNdmVhazg0Rm1NWDBycnpqVTFCMW8zc1VXS0t3TzhzM1Z5?=
+ =?utf-8?B?RmpzUk5iK2VyNm9LMUhVeWxJMHVxK2lwUnJERUpYKytjRDRmdWlJQlBydjBP?=
+ =?utf-8?B?UDg2UXY3Q1RidDRndW5nNVByMkVlbEk4cWViLzk0VXhacG9GWXJrV0NrREFz?=
+ =?utf-8?B?dnlpME00RmpTM0JMemRJZm5vN2VUVGs3MzUvSTA4eXpTdFp2ZXFWdmhadkpk?=
+ =?utf-8?B?SlFrdllIZVlpU0NCQklDdCtXc2FjV2hyRWpRNU84TEdRN3JjdkdmUjRjT0JR?=
+ =?utf-8?B?MExzTmQrTDl5d2NNd2JFOGFJT3ErVmJEZVlwQVkyMElreWtHMmV4SkRjdy9W?=
+ =?utf-8?B?WGw5VUF2dVF3MW94MERaZklCN2Q0emFRbGkxUXdObFlZbWR6aittb2h0QXYv?=
+ =?utf-8?B?ZHFaQzg5V3VJODZOVVo4N00rMGc2Q05NbEExR1hjSEs5bU5COTF4RGFsbG45?=
+ =?utf-8?B?SUg4bWZvOTYyVjJCOWNLMVNhOU8rNEJFWmhReVZHc284alB6cmw5SVE4cUlq?=
+ =?utf-8?B?K1NrNkZHRXFzQ2g5VUN3L3ZhZlBIU2g0ZSs3b2xkdUoyemVLOEdpWGkwSklr?=
+ =?utf-8?B?K3JDSlZ5WlFFZkg1RlVianZENEFZa1QrbVRIeUxocXkremNUdUFtRHRPOURL?=
+ =?utf-8?B?bHNOZTZrRFlFbzdzdjM5QnIyd21tL0FHZEdSb0Q0aHdMK3dHbkdaSTM3N0Q0?=
+ =?utf-8?B?M0pRTzNpdS9YVFFSNHVjTjZONnVEcDVwWTl1c2F5empwTTNhYXIzUkRpNmNU?=
+ =?utf-8?B?dGRQcy9aQkFBZFQ2RWpRQ29uMVF3QStpaTRUVFBKRjVvMGRhL0xyOU9qMGg4?=
+ =?utf-8?B?NmNtS3FHKzB0QnNsRFgvT2JxTkVtYkNaU0lNbmY2SGtwZGFzWkJodXRCSlU2?=
+ =?utf-8?B?VWExKzRoRjNnMTJQdVBkd29LdjVocTBTOHk5R1pEaXE2Qy9EeGRlcGdNbXEy?=
+ =?utf-8?B?QmhEbGl4UWJKbHUxemFLZkpKZ2JrTnNBMjRGWHNhaWlTVTU3MDhmV3pSMHd3?=
+ =?utf-8?B?YW1YaVFHdUFEV3hzbTQ3S0pHd3NlajFnSkpnczg3OUdoRlB5RVJrVDVEYUE1?=
+ =?utf-8?B?SVhZWnlnYWFPbnVNTUxLY1FUZSttWm4xbFB4MlZtK3Irc0NicXRLcm9VUDRX?=
+ =?utf-8?B?TWhXcTZ6WE1wSVJLQ2pSbE05WlQrNVVhbk80djVEY21NZGdFU29Wd3hEWW16?=
+ =?utf-8?B?K0RKTkRKUTdaY01SMGV4UTBpZmR1SHV1ZzY1SWt5QmdiNGpzczhsaExYR2lS?=
+ =?utf-8?B?VC8weGtKUnlrSWJWem5QeldpZ3NsS1ZTcU5nZzlocEFJMlR1Z0dYZkRlNlFK?=
+ =?utf-8?B?Y3p5NTdoTWFUQjNad2tmczE3emtvQXE5WGhmc1hKdmdsdmJDNWlwMDRUb1Bm?=
+ =?utf-8?B?Q0VWZjJNZkx6RnAzb0cvMFpZVWxnNkIzZTM1YW9uWFhNaWNSN2Uvc1NTeG8r?=
+ =?utf-8?B?Qm5BcXZxMGYrWjZ1dCtyUmk5QVA2ODlNVDMzRDhxT0R5ckI4Rk1wamhmUXRD?=
+ =?utf-8?B?cjBmaVRkRDZVRlpGZU9RZ1lQWU8vaHhnN3Z4djRCa0hNSWIzcmJMdnUrRkE4?=
+ =?utf-8?B?L3BYTFVFL2dIYy9lOWhtK1NGWnNxSDVQa1pCMXY4ZEhrc3hXeEMzMmpKUGU3?=
+ =?utf-8?B?b0pIWW1lUW8rVnMyMVNrRjNvWXIveFltc01uNEgrVFczNW5zUTVIb2NvdHRO?=
+ =?utf-8?B?SmkwL00yeWo0WDZQOUdDWDU1cThsaHhPMmZnK2JFY1R1UUpVU3phaDZuT2R6?=
+ =?utf-8?B?UkprWExlamFzaExmakc0WWFmZVY1R0l2eTQ2MTlnM29Lam8vZm5RSlFpZng3?=
+ =?utf-8?B?K2k4ODBncVpBZzdsejJad2tHWWYySmljU2UzS0dCd2RTeXZWLzNTV25ibWUx?=
+ =?utf-8?B?RjZseWZ6Y3JQdGFIQUpETW0xNkNGMXh3NFp5KzRSSWo4NTVvTzdyQnFCR0Q0?=
+ =?utf-8?B?dlIyenhvQ0xoa3g4YUMxSnp2STNNRHlad0tHL0RzbkJVYWtQd2UvZ1FhOThP?=
+ =?utf-8?B?RXFBUUNnRmw3ZE1iZS9tSm0zWjZZUGdWLzFIbm5DbEUxaVVnU0pwTjdMM3Vx?=
+ =?utf-8?B?L0wvT25nZ1NDUUViVm9NWjJRQ0cwY3RuTjF1cmlSU1BNVWlOMXR0WGdDdlNa?=
+ =?utf-8?B?bFE9PQ==?=
 X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3ef9bacc-5673-424a-01da-08ddf45d9f12
+X-MS-Exchange-CrossTenant-Network-Message-Id: f96c9fd8-1f66-4112-5a74-08ddf45da3a6
 X-MS-Exchange-CrossTenant-AuthSource: DB4PR10MB6190.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2025 13:41:50.0720 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2025 13:41:57.4221 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c817Mutwj3eObP1D+Uv+gLHDpK10Z4BnMvJA0I/FlUrIPHwHDz8kFrCgA/z6E41zGvY/VgWXqQl5mgIi9cirkw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7084
+X-MS-Exchange-CrossTenant-UserPrincipalName: ss23ogZodx+wO7Qcl+cSxwMcuNaOIsnkmk0k+zlNXEHR7EhENVJ5UbqxbWJxhPsidytQ0bYp7ZEYKPfIWapKfg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR10MB3916
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -219,50 +221,131 @@ X-Virus-Status: Clean
 
 From: Jan Kiszka <jan.kiszka@siemens.com>
 
+This was apparently not built for several years: Since a2535243e011,
+optee_copy_fdt_nodes implicitly works against the U-Boot dt. We
+therefore have to tweak its reference before using the function and
+restore things afterwards.
+
+If it had been built, actually trying it out would have failed next: We
+need CONFIG_OPTEE_LIB to actually build the function that is primarily
+being tested here. And we need to re-initialize target fdt, now that the
+tests may run in random order.
+
+Fixes: a2535243e011 ("lib: optee: migration optee_copy_fdt_nodes for OF_LIVE support")
+Fixes: ba2feaf41435 ("test: Split optee tests into three functions")
 Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
 ---
- lib/optee/optee.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ test/optee/Kconfig |  1 +
+ test/optee/optee.c | 42 +++++++++++++++++++++++++++++++-----------
+ 2 files changed, 32 insertions(+), 11 deletions(-)
 
-diff --git a/lib/optee/optee.c b/lib/optee/optee.c
-index 393f2715a9c..c643fd8fea0 100644
---- a/lib/optee/optee.c
-+++ b/lib/optee/optee.c
-@@ -87,7 +87,7 @@ static int optee_copy_firmware_node(ofnode node, void *fdt_blob)
- 	/* copy the compatible property */
- 	prop = ofnode_get_property(node, "compatible", &len);
- 	if (!prop) {
--		debug("missing OP-TEE compatible property");
-+		debug("missing OP-TEE compatible property\n");
- 		return -EINVAL;
- 	}
+diff --git a/test/optee/Kconfig b/test/optee/Kconfig
+index 63e2cbf79c7..ebf8d07c41c 100644
+--- a/test/optee/Kconfig
++++ b/test/optee/Kconfig
+@@ -1,6 +1,7 @@
+ config UT_OPTEE
+ 	bool "Enable OP-TEE Unit Tests"
+ 	depends on OF_CONTROL && OPTEE
++	select OPTEE_LIB
+ 	default y
+ 	help
+ 	  This enables the 'ut optee' command which runs a series of unit
+diff --git a/test/optee/optee.c b/test/optee/optee.c
+index 658621fa2fa..7e1c8d04a11 100644
+--- a/test/optee/optee.c
++++ b/test/optee/optee.c
+@@ -5,16 +5,20 @@
  
-@@ -98,7 +98,7 @@ static int optee_copy_firmware_node(ofnode node, void *fdt_blob)
- 	/* copy the method property */
- 	prop = ofnode_get_property(node, "method", &len);
- 	if (!prop) {
--		debug("missing OP-TEE method property");
-+		debug("missing OP-TEE method property\n");
- 		return -EINVAL;
- 	}
+ #include <command.h>
+ #include <errno.h>
++#include <fdtdec.h>
+ #include <fdt_support.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <tee/optee.h>
++#include <asm/global_data.h>
  
-@@ -121,7 +121,7 @@ int optee_copy_fdt_nodes(void *new_blob)
- 	/* only proceed if there is an /firmware/optee node */
- 	node = ofnode_path("/firmware/optee");
- 	if (!ofnode_valid(node)) {
--		debug("No OP-TEE firmware node in old fdt, nothing to do");
-+		debug("No OP-TEE firmware node in old fdt, nothing to do\n");
- 		return 0;
- 	}
+ #include <linux/sizes.h>
  
-@@ -131,7 +131,7 @@ int optee_copy_fdt_nodes(void *new_blob)
- 	 * so do not interfere.
- 	 */
- 	if (fdt_path_offset(new_blob, "/firmware/optee") >= 0) {
--		debug("OP-TEE Device Tree node already exists in target");
-+		debug("OP-TEE Device Tree node already exists in target\n");
- 		return 0;
- 	}
+ #include <test/ut.h>
+ #include <test/optee.h>
  
++DECLARE_GLOBAL_DATA_PTR;
++
+ /* 4k ought to be enough for anybody */
+ #define FDT_COPY_SIZE	(4 * SZ_1K)
+ 
+@@ -40,14 +44,6 @@ static int optee_test_init(struct unit_test_state *uts)
+ 	if (!fdt)
+ 		return ret;
+ 
+-	/*
+-	 * Resize the FDT to 4k so that we have room to operate on
+-	 *
+-	 * (and relocate it since the memory might be mapped
+-	 * read-only)
+-	 */
+-	ut_assertok(fdt_open_into(fdt_base, fdt, FDT_COPY_SIZE));
+-
+ 	return 0;
+ }
+ OPTEE_TEST_INIT(optee_test_init, 0);
+@@ -127,9 +123,21 @@ static int optee_fdt_protected_memory(struct unit_test_state *uts)
+ static int optee_fdt_copy_empty(struct unit_test_state *uts)
+ {
+ 	void *fdt_no_optee = &__dtb_test_optee_no_optee_begin;
++	const void *fdt_blob = gd->fdt_blob;
++
++	/*
++	 * Resize the FDT to 4k so that we have room to operate on
++	 *
++	 * (and relocate it since the memory might be mapped
++	 * read-only)
++	 */
++	ut_assertok(fdt_open_into(&__dtb_test_optee_base_begin, fdt,
++				  FDT_COPY_SIZE));
+ 
+ 	/* This should still run successfully */
+-	ut_assertok(optee_copy_fdt_nodes(fdt_no_optee, fdt));
++	gd->fdt_blob = fdt_no_optee;
++	ut_assertok(optee_copy_fdt_nodes(fdt));
++	gd->fdt_blob = fdt_blob;
+ 
+ 	expect_success = false;
+ 	ut_assertok(optee_fdt_firmware(uts));
+@@ -143,8 +151,14 @@ OPTEE_TEST(optee_fdt_copy_empty, 0);
+ static int optee_fdt_copy_prefilled(struct unit_test_state *uts)
+ {
+ 	void *fdt_optee = &__dtb_test_optee_optee_begin;
++	const void *fdt_blob = gd->fdt_blob;
+ 
+-	ut_assertok(optee_copy_fdt_nodes(fdt_optee, fdt));
++	ut_assertok(fdt_open_into(&__dtb_test_optee_base_begin, fdt,
++				  FDT_COPY_SIZE));
++
++	gd->fdt_blob = fdt_optee;
++	ut_assertok(optee_copy_fdt_nodes(fdt));
++	gd->fdt_blob = fdt_blob;
+ 
+ 	expect_success = true;
+ 	ut_assertok(optee_fdt_firmware(uts));
+@@ -158,9 +172,15 @@ OPTEE_TEST(optee_fdt_copy_prefilled, 0);
+ static int optee_fdt_copy_already_filled(struct unit_test_state *uts)
+ {
+ 	void *fdt_optee = &__dtb_test_optee_optee_begin;
++	const void *fdt_blob = gd->fdt_blob;
++
++	ut_assertok(fdt_open_into(&__dtb_test_optee_base_begin, fdt,
++				  FDT_COPY_SIZE));
+ 
+ 	ut_assertok(fdt_open_into(fdt_optee, fdt, FDT_COPY_SIZE));
+-	ut_assertok(optee_copy_fdt_nodes(fdt_optee, fdt));
++	gd->fdt_blob = fdt_optee;
++	ut_assertok(optee_copy_fdt_nodes(fdt));
++	gd->fdt_blob = fdt_blob;
+ 
+ 	expect_success = true;
+ 	ut_assertok(optee_fdt_firmware(uts));
 -- 
 2.51.0
