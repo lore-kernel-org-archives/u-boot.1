@@ -4,62 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5963CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 13:06:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A18CAC597
+	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 13:06:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32B2583496;
+	by phobos.denx.de (Postfix) with ESMTP id 8E40A834D4;
 	Mon, 15 Sep 2025 15:06:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=sifive.com header.i=@sifive.com header.b="dDR+Lcyt";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37E288309E; Mon, 15 Sep 2025 01:46:08 +0200 (CEST)
-Received: from cstnet.cn (smtp21.cstnet.cn [159.226.251.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2AFB882C84; Mon, 15 Sep 2025 09:44:53 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9221A82AE1
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 01:46:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A49D28317B
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 09:44:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=iscas.ac.cn
+ dmarc=pass (p=reject dis=none) header.from=sifive.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=wangruikang@iscas.ac.cn
-Received: from [127.0.0.2] (unknown [114.241.87.235])
- by APP-01 (Coremail) with SMTP id qwCowAA3kaOzU8doX5noAg--.33344S2;
- Mon, 15 Sep 2025 07:45:55 +0800 (CST)
-From: Vivian Wang <wangruikang@iscas.ac.cn>
-Date: Mon, 15 Sep 2025 07:45:49 +0800
-Subject: [PATCH] riscv: qemu: Remove fdt_high default
+ spf=pass smtp.mailfrom=jimmy.ho@sifive.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-2445824dc27so33765745ad.3
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 00:44:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sifive.com; s=google; t=1757922288; x=1758527088; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=chPgoWzRq5DYntczAVxdc3aehsH7UExofh9sxKY60VU=;
+ b=dDR+LcytwmlW+385nfF5jTu+Z4Hd0DX3n/hvnBuJeGa0FzPCthtqmeKHsuSOHvVkv3
+ OBlX2S58pmQRYvDrj7wqqykPV7x8cISEXcwtj3r0pIE5h414yBysAf1zqA2QsLKrEgsN
+ RKQIiSc13SAVkZP9JDH1IRHjuTMNSHXVsmOv4drebdFneMwiNgytjaEYEvXvmBtcWX9/
+ XuhtZj4ySYEQ9tsykD+PAHieo6x5RuynGBWcDzGdQlQ0JjUG9f/q7wveAEVQs3xhGvSJ
+ +IPK2iDqn9kg9eEJ1/+tqBPKh/16ocAjuS+z5VnglTjwDPrVXHjiczc1IbEyzvH5ZhjY
+ JwfQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757922288; x=1758527088;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=chPgoWzRq5DYntczAVxdc3aehsH7UExofh9sxKY60VU=;
+ b=G6ZLCT59F4xXs/ejZavtyanwAGy+O84hUR99WRKM5LYbM34sOhvfCzTDT/8dH8SkzX
+ ZT/dXRI2KuEL93X/lbQHE6nDzDb+dr+uuTN9yQnBE2VFF1Y4IdUt9WYGG3GcgMkAhzLN
+ yMDqvqmEibz7S7EvqrSgf9sNIh/3qlbJrblQb/4WN9bp+1Dn+mYwMzYL4+DKabWmrs4E
+ cPSgh9RowYZ3K/Sh6T8z0oka4P9ZHYkrt/TwnFK9fdKBNTrgz627qT8bS9lpG5h/Qw0R
+ VIBl0ckEZ+C9++fhUgwIki/d6BTgyvqjhJUctDx6wZGsnzReMs1ufFlxNCKak/+qewzN
+ MX0A==
+X-Gm-Message-State: AOJu0Yx7HfIjofVaCUMGICKSLoj4McdKYCcwIKfwKq2KPMVcoTnuXXwP
+ DCT4VVgxQxCwb4dx/XZV32+iiSa6NLdkU63xwGa+7EbQJKgMKe/GwO9IVtAF9O2IMGaghI486u1
+ uAp8H5yp1Sj1HPlCcDsOs7tUF2eRAFw0ZctEqRYivej5w7GxDVZUzXX8Is41MgbBMhgU3wUJY07
+ UGCWjmOgb/P831uGy8hcaDbH+fARLMLdqne3mC4wMR
+X-Gm-Gg: ASbGncsH4h3gOS5w6Ek6S2hwCXpu7miejgHuflmovx9oNYH2x8fguQBJ6+XmZOEHy8/
+ WPyIqlWHphNf2U2SwQ3tURO6N8KnXQv+1syw0gF/bnsCEyyxd1da+zRpW5xZAAVXPZGtzqZ53j8
+ +9GF8tykpIxGumVj+hen+huhTB8FYnmpfqaCoxd2pD4mrC4mD1zpYqg7BvmO/TjQHKwn+XjunFE
+ ndrKD0z14UfpekobDbta1YQsAhuBaEfZoTG8q9lHrQflZiHfUeF0Dqkl68EBaFozqjaYFi4o0rs
+ 2MxdF2z3ZtnenhAERbAj6WWldMb8xp5TmU1Kl73gZUCezplhTsbzIBBJ/urj1/T00RL1iqT9c94
+ k5kJPiZBJ6E9zkbN+VVfIdJ+OVO8uqQx6NGdP2PtHeATKQw==
+X-Google-Smtp-Source: AGHT+IE51vhJ86Es5vUVSKoRqc/BC09Nzn/0JFcPdIHoFRYrEZEoeCDWLtM4mISdIwa/V7yTLXNr2A==
+X-Received: by 2002:a17:902:ec86:b0:267:6649:ec10 with SMTP id
+ d9443c01a7336-2676649f0ecmr18319105ad.4.1757922287620; 
+ Mon, 15 Sep 2025 00:44:47 -0700 (PDT)
+Received: from hsinchu01.internal.sifive.com ([210.176.154.34])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-25e2fb546f9sm86056175ad.127.2025.09.15.00.44.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Sep 2025 00:44:47 -0700 (PDT)
+From: Jimmy Ho <jimmy.ho@sifive.com>
+To: u-boot@lists.denx.de
+Cc: Greentime Hu <greentime.hu@sifive.com>
+Subject: [PATCH] arch/riscv: Remove unused macro in encoding.h
+Date: Mon, 15 Sep 2025 15:44:27 +0800
+Message-ID: <20250915074427.31985-1-jimmy.ho@sifive.com>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250915-qemu-riscv-remove-fdt-high-v1-1-661178447396@iscas.ac.cn>
-X-B4-Tracking: v=1; b=H4sIAKxTx2gC/yWNyw6CMBAAf4Xs2TUtikF+xXDoY4E9FGRbGhPCv
- 1vlOHOY2SGSMEXoqh2EMkde5gL6UoGbzDwSsi8Mtaob9dQNrhQ2FI4uo1BYMuHgE048TqiNe7S
- t9/pmLZTAW2jgzz/+6k8WWrfySKcEayKhW0Lg1FX597hqheLu0B/HFx6+4CecAAAA
-X-Change-ID: 20250915-qemu-riscv-remove-fdt-high-1ac688dd13bb
-To: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>, 
- Vivian Wang <wangruikang@iscas.ac.cn>
-X-Mailer: b4 0.14.2
-X-CM-TRANSID: qwCowAA3kaOzU8doX5noAg--.33344S2
-X-Coremail-Antispam: 1UD129KBjvdXoWruw4xJFW5Gw1rWr18ur18Grg_yoWkKrX_C3
- W3XFZ5ur47ZF42krs5JFyfKr1093Z2yr1xJF1rJrZxGFs7Ar43Z34xWF1xtw1q9w4DCFn7
- Z3WruF4qkrWFgjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
- 9fnUUIcSsGvfJTRUUUb4kFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2IYs7xG
- 6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
- A2z4x0Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_
- Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr
- 0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
- 6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr
- 0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS14v2
- 6r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrV
- AFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCI
- c40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267
- AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_
- Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUehL0UU
- UUU
-X-Originating-IP: [114.241.87.235]
-X-CM-SenderInfo: pzdqw2pxlnt03j6l2u1dvotugofq/
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 15 Sep 2025 15:06:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,35 +97,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Setting fdt_high to all ones is discouraged and does not appear to be
-useful for RISC-V QEMU. Moreover, it causes a boot failure when the FDT
-generated internally by QEMU is used while booting. Remove it to allow
-U-Boot to pick a suitable address and relocate the FDT.
+From: Greentime Hu <greentime.hu@sifive.com>
 
-Closes: https://lore.kernel.org/u-boot/8397369a-9b0b-4798-9c30-3a81165657d6@iscas.ac.cn
-Signed-off-by: Vivian Wang <wangruikang@iscas.ac.cn>
+This patch remove the unused macro DRAM_BASE.
+
+Signed-off-by: Greentime Hu <greentime.hu@sifive.com>
 ---
- include/configs/qemu-riscv.h | 1 -
+ arch/riscv/include/asm/encoding.h | 1 -
  1 file changed, 1 deletion(-)
 
-diff --git a/include/configs/qemu-riscv.h b/include/configs/qemu-riscv.h
-index cf4fcb90b047bb641d702124f2efa451408c0b16..dad59cc0d5827981396b10d9782766d4d9aa29c6 100644
---- a/include/configs/qemu-riscv.h
-+++ b/include/configs/qemu-riscv.h
-@@ -32,7 +32,6 @@
+diff --git a/arch/riscv/include/asm/encoding.h b/arch/riscv/include/asm/encoding.h
+index 56c5da86e86..ae3e5bce5c1 100644
+--- a/arch/riscv/include/asm/encoding.h
++++ b/arch/riscv/include/asm/encoding.h
+@@ -95,7 +95,6 @@
+ #define DEFAULT_MTVEC		0x00001010
+ #define CFG_STRING_ADDR	0x0000100C
+ #define EXT_IO_BASE		0x40000000
+-#define DRAM_BASE		0x80000000
  
- #define CFG_EXTRA_ENV_SETTINGS \
- 	CFG_STD_DEVICES_SETTINGS \
--	"fdt_high=0xffffffffffffffff\0" \
- 	"initrd_high=0xffffffffffffffff\0" \
- 	"kernel_addr_r=0x84000000\0" \
- 	"kernel_comp_addr_r=0x88000000\0" \
-
----
-base-commit: 18973d4b0801ec6d7fddc0084601036b5c3b08ad
-change-id: 20250915-qemu-riscv-remove-fdt-high-1ac688dd13bb
-
-Best regards,
+ // page table entry (PTE) fields
+ #define PTE_V		0x001 // Valid
 -- 
-Vivian "dramforever" Wang
+2.39.3
 
