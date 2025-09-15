@@ -4,72 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22AC0CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 18:32:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B8C7CAC597
+	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 18:52:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C1CE8344E;
-	Mon, 15 Sep 2025 20:32:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 664738344E;
+	Mon, 15 Sep 2025 20:52:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K6VcxmOC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H5MqICsM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF6C083496; Mon, 15 Sep 2025 20:32:05 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCD9A8318E
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 20:32:01 +0200 (CEST)
+ id A0995830CA; Mon, 15 Sep 2025 16:36:07 +0200 (CEST)
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F33380B9B
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 16:36:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58FIVxZA1192493;
- Mon, 15 Sep 2025 13:31:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757961119;
- bh=J95QUsHD3fgE/+9sRj/Llm8tPkkDu/JtMEcRIN1BmM0=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=K6VcxmOCkIto6Y4saRdIbupAb7QOIiIrDT2xiYscxdvbnqV7oTVWjOhy0QnLfla58
- pMoynZhnBTvSjRH0vR0KIJw0azNGWVmGFfR+Qxm9T8weygYCnY+PHM57OF9sfYbjAr
- uiJScFtLBN1gSc5LhhObgccWcCPn6ahiGTuIiZ20=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58FIVxvk4144230
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 15 Sep 2025 13:31:59 -0500
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 15
- Sep 2025 13:31:59 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 15 Sep 2025 13:31:59 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58FIVxaa075300;
- Mon, 15 Sep 2025 13:31:59 -0500
-Message-ID: <b419a2ac-108b-4c5b-83a4-5c90be0e535e@ti.com>
-Date: Mon, 15 Sep 2025 13:31:59 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pf1-x434.google.com with SMTP id
+ d2e1a72fcca58-77619f3f41aso2217909b3a.2
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 07:36:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1757946964; x=1758551764; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=N2AHWVKz8fFtq+qlhjLcEFVbgUNnAKRbsog5SIDVmsY=;
+ b=H5MqICsMLSeOox8UYQUA+DUtllIHnSnqCHomyoebJ2qoXKL1OqsFwpJiKO/qtQz9PM
+ wQQ974+RTWfGsx8n4okkBtJFUZOiDNMiJVgoG5oM1UmUBgbuHStiWXXEPf+2HCHgV3rv
+ cgKOVZZ5v3E02WtoVrNiyB0Dxp36lq33lbDawOPBMdssFgcWUuPA7nKw0BIlBoQooofr
+ 4xdjlXqiHhP/VNHbrobemn4Zd3/V67ceA+zduPPZK0IK318GJ/Fzg4pDzPINkxWLGlF4
+ 75HtDs4VBTrlnyWCkNrzMjvjjNUd2QFiFsWuRzWoirIm2MRVDmvqUbfMehikBT5opt98
+ snFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1757946964; x=1758551764;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=N2AHWVKz8fFtq+qlhjLcEFVbgUNnAKRbsog5SIDVmsY=;
+ b=QL+pcalD4aib/GffU5XpA4ecNe1YjEIXxR20QHEn4j8Yx+6g/tL8PM6O+Mfj2/zeTX
+ 4GFFGE10tlzKt1R6GHCIRrkJEh+L79xt1vV07z7SJvwviYZDxUd0m25ffLRWHj8990BM
+ O8LHYY24kKG2cEfUKn1rUuI4+Aityu9OxnQQpjeOWtuoZvf0f/5WGf5DONnzNbbnG0DS
+ mqfDLxNQSAPxI3nJP4/hsMqa47M4Q5gnnG7sq6xxyJNEugGm/pgpH7MU7t4PG3Apcjgg
+ wC7YSJ3Ja4Tbb5MD4r4wdPovhJ7SgidnVh3RQQUDcNl5+XHFyBR9uF2W1qErwpB5RP2O
+ c9MA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUXIUBtuQaALaS2DNKOqSLnmciUUwqc0aq/3cCBBeUCg+d6wbxPJwRTDhXGvEtAfAKJZWR4ckk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyRzSFmD7etwOM05MwgjWilkyq6dQQqLGQuzLeVMVNQuZXyxwVr
+ 2R3JLw5HC47nYyCYq9TzwG9g7+90M1UBoKL2gq025PPAMyDt7817iG6M
+X-Gm-Gg: ASbGnctjhbammHI+/WQ56WkKSsmPLE5I7N1h9avyam3iBjF3jzXxbxPCHErtErlAXZ5
+ XbwLqu20r58WUbLpkGZ7FJSzbBel07Vhf5TwwSbxZnKvNonT2hqaM4JFTq+sf/yVapaRzGDW9jy
+ ymG7j6SSrIkMTxXKAyItlnKRKqdZvkfEF2P5KgHRC4E6dvQ9anQdg5034cnDSCuTRZ32jH5e09R
+ 4nP2ldunNEw3Aw58+meGbXhH+zN80yU30hxUb40X277m0bU4Iv1x4jkAn3l9TDiManco7Y58NdY
+ STJuxHeMEV30Xlm4TK/B0uh1LWI2dt+Unn6U82SakP+U9o/xE4RDUSGCu439af/3n+CAEXAJJem
+ 4Z1WhbCLIOKLGHjlOXxDUQyQM45L80roidYIZGMkEGdj5ekA2i0OmPjnFSoDnX0qdQes1H3nj52
+ DCWbOgMILQky4fs3y+/A==
+X-Google-Smtp-Source: AGHT+IFdKITA09i1tD7golgTOJ8cBf1XkdJsm9fJffQUP4iV4V0ymE5XDsWViDT0/jd4qtat33luFg==
+X-Received: by 2002:a05:6a20:734d:b0:250:997d:409d with SMTP id
+ adf61e73a8af0-2602cf1126dmr16988311637.60.1757946963346; 
+ Mon, 15 Sep 2025 07:36:03 -0700 (PDT)
+Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-77607b17c78sm13635042b3a.50.2025.09.15.07.35.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Sep 2025 07:36:02 -0700 (PDT)
+Message-ID: <0924393d-c87b-4a6a-8590-3ab49d039dfa@gmail.com>
+Date: Mon, 15 Sep 2025 22:35:56 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
-To: Moteen Shah <m-shah@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: Manorit Chawdhry <m-chawdhry@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>
-References: <20250910214514.1848847-1-jm@ti.com>
- <20250910214514.1848847-2-jm@ti.com>
- <9bb08b19-ca4a-40f2-afcf-92af0a71b51a@ti.com>
- <c5d62f63-c107-4834-a70e-6a65f25b75c0@ti.com>
- <3671e129-b88a-4db8-a2f4-0fb1ca32dd47@ti.com>
+Subject: Re: [PATCH 1/1] [U-Boot, v4, 1/1]net: phy: Add the Airoha EN8811H PHY
+ driver
+To: Marek Vasut <marek.vasut@mailbox.org>, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de,
+ trini@konsulko.com
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com, 
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com,
+ albert-al.lee@airoha.com
+References: <20250914044115.18391-1-lucienzx159@gmail.com>
+ <464e0429-ac06-49fc-831d-b9e86946446d@mailbox.org>
 Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <3671e129-b88a-4db8-a2f4-0fb1ca32dd47@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+In-Reply-To: <464e0429-ac06-49fc-831d-b9e86946446d@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailman-Approved-At: Mon, 15 Sep 2025 20:52:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,153 +110,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Moteen,
+Hi Marek
 
-On 9/15/25 6:35 AM, Moteen Shah wrote:
-> Hey Judith,
-> 
-> On 11/09/25 20:18, Judith Mendez wrote:
->> Hi Udit, Moteen,
->>
->> On 9/10/25 11:38 PM, Kumar, Udit wrote:
->>>
->>> On 9/11/2025 3:15 AM, Judith Mendez wrote:
->>>> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The 
->>>> macros
->>>> however, mix MMC device with the two bootmodes. Decouple the two types
->>>> of macros so that bootmodes can be identified with:
->>>> - BOOT_DEVICE_MMCSD
->>>> - BOOT_DEVICE_EMMC
->>>
->>> Few devices already (kind of have this )
->>>
->>> arch/arm/mach-k3/include/mach/j722s_spl.h
->>>
->>> #define BOOT_DEVICE_MMC                 0x08
->>> #define BOOT_DEVICE_EMMC                0x09
->>>
->>> can we use in same way, BOOT_DEVICE_MMC  as SD instead of adding SD 
->>> as postfix and
->>>
->>> and add BOOT_DEVICE_EMMC, on devices where this is missing
->>
->> No, there are two boot modes. MMCSD boot and EMMC boot. That is what I
->> am trying to make clear with switching:
->>
->> > #define BOOT_DEVICE_MMC                 0x08
->> > #define BOOT_DEVICE_EMMC                0x09
->> To:
->>
->> > #define BOOT_DEVICE_MMCSD                 0x08
->> > #define BOOT_DEVICE_EMMC                0x09
->>
->> When we say: BOOT_DEVICE_MMC, it is not obvious it is from am62x/j722s
->> TRM:
->>
->> MMCSD Boot (SD Card Boot or eMMC Boot using UDA). The goal of these
->> two specific macros is to mimic the supported boot modes.
->>
->>>
->>>
->>>> according to devstat parsed boot mode values and on-board devices 
->>>> can be
->>>> identified with:
->>>> - BOOT_DEVICE_MMC1
->>>> - BOOT_DEVICE_MMC2
->>>> - BOOT_DEVICE_MMC2_2
->>>
->>> Why you need to change
->>>
->>> #define for BOOT_DEVICE_MMC1 and and BOOT_DEVICE_MMC2
->>
->> Because the goals is to decouple the bootmodes from the macros used to
->> distinguish eMMC and SD card devices.
-> 
-> Isn't MMC1=eMMC and MMC2=MMCSD u-boot's own notation? In which case 
-> there already is a clear distinction.
-> With the case with am62x/j722s, I agree that there needs to be a clarity 
-> with the modes, BOOT_DEVICE_MMC is vague.
+Thank you for reviewing my patch.
 
-
-Firstly, MMC1=eMMC device and MMC2=SD card for K3.
-Secondly, when we say we need a better distinction, it is for
-distinguishing the boot modes from the BOOT_DEVICE_MMC1 and
-BOOT_DEVICE_MMC2 devices. Both of which may be used interchangeably
-in spl_mmc_boot_mode() but they are not the same.
-
-~ Judith
-
-
-> 
+Marek Vasut 於 2025/9/15 上午 01:49 寫道:
+> On 9/14/25 6:41 AM, Lucien.Jheng wrote:
+>> Add the driver for the Airoha EN8811H 2.5 Gigabit PHY. The PHY supports
+>> 100/1000/2500 Mbps with auto negotiation only.
 >>
->>>
->>>
->>>
->>>> according to arbitrary numbers mainly used to differentiate between 
->>>> eMMC
->>>> and SD card.
->>>
->>> Please check subject line, this is not a fix
->>>
->>>> Signed-off-by: Judith Mendez <jm@ti.com>
->>>> ---
->>>>   arch/arm/mach-k3/am62ax/am62a7_init.c          |  4 ++--
->>>>   arch/arm/mach-k3/am62ax/boot.c                 |  8 ++++----
->>>>   arch/arm/mach-k3/am62px/am62p5_init.c          | 12 ++++++------
->>>>   arch/arm/mach-k3/am62x/am625_init.c            |  4 ++--
->>>>   arch/arm/mach-k3/am62x/boot.c                  |  8 ++++----
->>>>   arch/arm/mach-k3/am64x/boot.c                  |  8 ++++----
->>>>   arch/arm/mach-k3/am65x/am654_init.c            | 18 +++++++++ 
->>>> +--------
->>>>   arch/arm/mach-k3/include/mach/am62_hardware.h  |  8 ++++----
->>>>   arch/arm/mach-k3/include/mach/am62_spl.h       | 10 +++++-----
->>>>   arch/arm/mach-k3/include/mach/am62a_hardware.h |  8 ++++----
->>>>   arch/arm/mach-k3/include/mach/am62a_spl.h      | 10 +++++-----
->>>>   arch/arm/mach-k3/include/mach/am62p_hardware.h |  8 ++++----
->>>>   arch/arm/mach-k3/include/mach/am62p_spl.h      | 10 +++++-----
->>>>   arch/arm/mach-k3/include/mach/am64_hardware.h  |  4 ++--
->>>>   arch/arm/mach-k3/include/mach/am64_spl.h       | 13 +++++++------
->>>>   arch/arm/mach-k3/include/mach/am6_hardware.h   |  8 ++++----
->>>>   arch/arm/mach-k3/include/mach/am6_spl.h        | 13 +++++++++----
->>>>   arch/arm/mach-k3/include/mach/j721e_hardware.h |  6 +++---
->>>>   arch/arm/mach-k3/include/mach/j721e_spl.h      | 14 ++++++++++----
->>>>   .../arm/mach-k3/include/mach/j721s2_hardware.h |  6 +++---
->>>>   arch/arm/mach-k3/include/mach/j721s2_spl.h     | 13 +++++++++----
->>>>   arch/arm/mach-k3/include/mach/j722s_hardware.h |  8 ++++----
->>>>   arch/arm/mach-k3/include/mach/j722s_spl.h      | 10 +++++-----
->>>>   .../arm/mach-k3/include/mach/j784s4_hardware.h |  6 +++---
->>>>   arch/arm/mach-k3/include/mach/j784s4_spl.h     | 13 +++++++++----
->>>>   arch/arm/mach-k3/j721e/j721e_init.c            | 14 +++++++++-----
->>>>   arch/arm/mach-k3/j721s2/j721s2_init.c          | 14 +++++++++-----
->>>>   arch/arm/mach-k3/j722s/j722s_init.c            | 12 ++++++------
->>>>   arch/arm/mach-k3/j784s4/j784s4_init.c          | 14 +++++++++-----
->>>>   29 files changed, 160 insertions(+), 124 deletions(-)
->>>>
->>>> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach- 
->>>> k3/ am62ax/am62a7_init.c
->>>> index 00173e6836b..1fd466bbdfc 100644
->>>> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
->>>> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
->>>> @@ -225,8 +225,8 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 
->>>> boot_device)
->>>>           if (IS_ENABLED(CONFIG_SPL_FS_FAT) || 
->>>> IS_ENABLED(CONFIG_SPL_FS_EXT4))
->>>>               return MMCSD_MODE_FS;
->>>>           return MMCSD_MODE_EMMCBOOT;
->>>> [..]
->>>> +    if (bootmode == BOOT_DEVICE_EMMC)
->>>> +        bootmode = BOOT_DEVICE_MMC1;
->>>> +
->>>
->>> Could you test once, eMMC on J784s4
+>> The driver uses two firmware files, for which updated versions are 
+>> added to
+>> linux-firmware already.
 >>
->> I do not have J784s4, Moteen, would you be able to test?
-> 
-> I tested this series on J784s4, MMCSD boot and eMMC boot 0 boot works fine.
-> 
-> Regards,
-> Moteen
-> 
+>> Locating the AIROHA FW within the filesystem at the designated partition
+>> and path will trigger its automatic loading and writing to the PHY 
+>> via MDIO.
+>> If need board specific loading override,
+>> please override the en8811h_read_fw function on board or architecture 
+>> level.
 >>
->> ~ Judith
+>> Linux upstream AIROHA EN8811H driver commit:
+>> 71e79430117d56c409c5ea485a263bc0d8083390
+>>
+>> Based on the Linux upstream AIROHA EN8811H driver code(air_en8811h.c),
+>> I have modified the relevant process to align with the U-Boot boot 
+>> sequence.
+>> and have validated this on Banana Pi BPI-R3 Mini.
+>>
+>> Signed-off-by: Lucien.Jheng <lucienzx159@gmail.com>
+>> ---
+>> Change in PATCH v4:
+>> air_en8811.c:
+>>   * Create the airoha folder
+>
+> directory
+>
+>> to store all future airoha phy drivers.
+>>   * Use `request_firmware_into_buf_via_script` for firmware loading.
+>
+>
+> [...]
+>
+>> +++ b/drivers/net/phy/airoha/Kconfig
+>> @@ -0,0 +1,11 @@
+>> +# SPDX-License-Identifier: GPL-2.0-only
+>> +menuconfig PHY_AIROHA
+>> +    bool "Airoha Ethernet PHYs support"
+>> +
+>> +config PHY_AIROHA_EN8811
+>> +    bool "Airoha Ethernet EN8811H support"
+>> +    depends on PHY_AIROHA
+>> +        select FS_LOADER
+>
+> It seems tabs/spaces are mixed here, please fix.
+>
+>> +    help
+>> +      AIROHA EN8811H supported.
+>
+> [...]
+>
+>> +#define EN8811H_MD32_DM_SIZE    0x4000
+>> +#define EN8811H_MD32_DSP_SIZE    0x20000
+>> +
+>> + #define EN8811H_FW_CTRL_1        0x0f0018
+>> + #define EN8811H_FW_CTRL_1_START    0x0
+>> + #define EN8811H_FW_CTRL_1_FINISH    0x1
+>> + #define EN8811H_FW_CTRL_2        0x800000
+>> + #define EN8811H_FW_CTRL_2_LOADING    BIT(11)
+>
+> Same here, avoid leading space.
+>
+> [...]
+>
+>> +__weak int en8811h_read_fw(void **addr)
+>
+> Does this still have to be a __weak function, now that it uses generic 
+> fw loader ?
+>
+>> +{
+>> +    void *buffer;
+>> +    int ret;
+>> +
+>> +    if (!IS_ENABLED(CONFIG_FS_LOADER))
+>> +        return -EOPNOTSUPP;
+>> +
+>> +    buffer = malloc(EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
+>> +    if (!buffer) {
+>> +        printf("Failed to allocate memory for firmware\n");
+>> +        return -ENOMEM;
+>> +    }
+>> +
+>> +    ret = request_firmware_into_buf_via_script(&buffer,
+>
+> I think 'buffer' without the & should be used here.
+
+Regarding buffer,
+
+I've reviewed the function definition for 
+request_firmware_into_buf_via_script.
+The first parameter is void **buf, which is a pointer to a pointer.
+
+I think passing &buffer is the correct way to call this function.
+
+If we were to pass just buffer (a void *), the function would receive a 
+copy of the pointer's value, and any memory allocation inside the 
+function would not be reflected in our original buffer variable.
+
+Please let me know if my understanding is incorrect, as I want to ensure 
+I'm using the function as intended.
+
+>
+>> + EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE,
+>> +                           "en8811h_load_firmware");
+> [...]
+
 
