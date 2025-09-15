@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4BAECAC597
-	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 18:09:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22AC0CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 18:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E0B183496;
-	Mon, 15 Sep 2025 20:09:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C1CE8344E;
+	Mon, 15 Sep 2025 20:32:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="XmHYlR8b";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K6VcxmOC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 901FA8349B; Mon, 15 Sep 2025 20:09:21 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id AF6C083496; Mon, 15 Sep 2025 20:32:05 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5490D8344E
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 20:09:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCD9A8318E
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 20:32:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58FI9GfO1096654;
- Mon, 15 Sep 2025 13:09:16 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58FIVxZA1192493;
+ Mon, 15 Sep 2025 13:31:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1757959757;
- bh=+LzQWVtlux8VNNyPCCpDTPbQJZS1CLkQGsQGGImLVxA=;
+ s=ti-com-17Q1; t=1757961119;
+ bh=J95QUsHD3fgE/+9sRj/Llm8tPkkDu/JtMEcRIN1BmM0=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=XmHYlR8bvYgDEoOksr4AXzCrarGbDwVft9Z2ZxvkOBmSMIk+O0PLql0cvnqOnUFF5
- eVMmIyQvWOEfuT8FUx32wi5YA+TfkkQ/IPynMYrLY7Hp/HtgCBgzoTIk51nSjKPVS9
- +fvNY/NnBiG/E7IwRzG6UC4OJ/vjIT1LckHTMMJA=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58FI9GmA925097
+ b=K6VcxmOCkIto6Y4saRdIbupAb7QOIiIrDT2xiYscxdvbnqV7oTVWjOhy0QnLfla58
+ pMoynZhnBTvSjRH0vR0KIJw0azNGWVmGFfR+Qxm9T8weygYCnY+PHM57OF9sfYbjAr
+ uiJScFtLBN1gSc5LhhObgccWcCPn6ahiGTuIiZ20=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58FIVxvk4144230
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 15 Sep 2025 13:09:16 -0500
-Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 15 Sep 2025 13:31:59 -0500
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 15
- Sep 2025 13:09:16 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 13:31:59 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 15 Sep 2025 13:09:16 -0500
+ Transport; Mon, 15 Sep 2025 13:31:59 -0500
 Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58FI9Gj6050760;
- Mon, 15 Sep 2025 13:09:16 -0500
-Message-ID: <7d85c88f-8582-4f87-b1c4-e97772e4aa68@ti.com>
-Date: Mon, 15 Sep 2025 13:09:16 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58FIVxaa075300;
+ Mon, 15 Sep 2025 13:31:59 -0500
+Message-ID: <b419a2ac-108b-4c5b-83a4-5c90be0e535e@ti.com>
+Date: Mon, 15 Sep 2025 13:31:59 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
-To: Wadim Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>
-CC: Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- "Vaishnav Achath" <vaishnav.a@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, "Moteen Shah" <m-shah@ti.com>,
- Andrew Davis <afd@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- <u-boot@lists.denx.de>
+To: Moteen Shah <m-shah@ti.com>, "Kumar, Udit" <u-kumar1@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Manorit Chawdhry <m-chawdhry@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>
 References: <20250910214514.1848847-1-jm@ti.com>
  <20250910214514.1848847-2-jm@ti.com>
- <b48c05f5-c8ae-4353-aabc-7217dad18d4a@phytec.de>
+ <9bb08b19-ca4a-40f2-afcf-92af0a71b51a@ti.com>
+ <c5d62f63-c107-4834-a70e-6a65f25b75c0@ti.com>
+ <3671e129-b88a-4db8-a2f4-0fb1ca32dd47@ti.com>
 Content-Language: en-US
 From: Judith Mendez <jm@ti.com>
-In-Reply-To: <b48c05f5-c8ae-4353-aabc-7217dad18d4a@phytec.de>
+In-Reply-To: <3671e129-b88a-4db8-a2f4-0fb1ca32dd47@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -86,62 +86,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/15/25 9:22 AM, Wadim Egorov wrote:
-> Hi Judith,
+Hi Moteen,
+
+On 9/15/25 6:35 AM, Moteen Shah wrote:
+> Hey Judith,
 > 
-> On 9/11/25 12:45 AM, Judith Mendez wrote:
->> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The macros
->> however, mix MMC device with the two bootmodes. Decouple the two types
->> of macros so that bootmodes can be identified with:
->> - BOOT_DEVICE_MMCSD
->> - BOOT_DEVICE_EMMC
->> according to devstat parsed boot mode values and on-board devices can be
->> identified with:
->> - BOOT_DEVICE_MMC1
->> - BOOT_DEVICE_MMC2
->> - BOOT_DEVICE_MMC2_2
->> according to arbitrary numbers mainly used to differentiate between eMMC
->> and SD card.
+> On 11/09/25 20:18, Judith Mendez wrote:
+>> Hi Udit, Moteen,
 >>
->> Signed-off-by: Judith Mendez <jm@ti.com>
->> ---
+>> On 9/10/25 11:38 PM, Kumar, Udit wrote:
+>>>
+>>> On 9/11/2025 3:15 AM, Judith Mendez wrote:
+>>>> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The 
+>>>> macros
+>>>> however, mix MMC device with the two bootmodes. Decouple the two types
+>>>> of macros so that bootmodes can be identified with:
+>>>> - BOOT_DEVICE_MMCSD
+>>>> - BOOT_DEVICE_EMMC
+>>>
+>>> Few devices already (kind of have this )
+>>>
+>>> arch/arm/mach-k3/include/mach/j722s_spl.h
+>>>
+>>> #define BOOT_DEVICE_MMC                 0x08
+>>> #define BOOT_DEVICE_EMMC                0x09
+>>>
+>>> can we use in same way, BOOT_DEVICE_MMC  as SD instead of adding SD 
+>>> as postfix and
+>>>
+>>> and add BOOT_DEVICE_EMMC, on devices where this is missing
+>>
+>> No, there are two boot modes. MMCSD boot and EMMC boot. That is what I
+>> am trying to make clear with switching:
+>>
+>> > #define BOOT_DEVICE_MMC                 0x08
+>> > #define BOOT_DEVICE_EMMC                0x09
+>> To:
+>>
+>> > #define BOOT_DEVICE_MMCSD                 0x08
+>> > #define BOOT_DEVICE_EMMC                0x09
+>>
+>> When we say: BOOT_DEVICE_MMC, it is not obvious it is from am62x/j722s
+>> TRM:
+>>
+>> MMCSD Boot (SD Card Boot or eMMC Boot using UDA). The goal of these
+>> two specific macros is to mimic the supported boot modes.
+>>
+>>>
+>>>
+>>>> according to devstat parsed boot mode values and on-board devices 
+>>>> can be
+>>>> identified with:
+>>>> - BOOT_DEVICE_MMC1
+>>>> - BOOT_DEVICE_MMC2
+>>>> - BOOT_DEVICE_MMC2_2
+>>>
+>>> Why you need to change
+>>>
+>>> #define for BOOT_DEVICE_MMC1 and and BOOT_DEVICE_MMC2
+>>
+>> Because the goals is to decouple the bootmodes from the macros used to
+>> distinguish eMMC and SD card devices.
 > 
-> <snip>
-> 
->> +++ b/arch/arm/mach-k3/include/mach/am62_spl.h
->> @@ -17,7 +17,7 @@
->>   #define BOOT_DEVICE_ETHERNET_RMII    0x05
->>   #define BOOT_DEVICE_I2C            0x06
->>   #define BOOT_DEVICE_UART        0x07
->> -#define BOOT_DEVICE_MMC            0x08
->> +#define BOOT_DEVICE_MMCSD            0x08
->>   #define BOOT_DEVICE_EMMC        0x09
->>   #define BOOT_DEVICE_USB            0x2A
->> @@ -29,16 +29,16 @@
->>   /* U-Boot used aliases */
->>   #define BOOT_DEVICE_ETHERNET        0x04
->> -#define BOOT_DEVICE_MMC2        0x08
->> -#define BOOT_DEVICE_MMC1        0x09
->> +#define BOOT_DEVICE_MMC1        0xFF0
->> +#define BOOT_DEVICE_MMC2        0xFF1
-> 
-> How did you end up using 0xFF0? Is it simply to make the difference 
-> between modes more clear? It probably does not matter because it is a u- 
-> boot-only representation.
+> Isn't MMC1=eMMC and MMC2=MMCSD u-boot's own notation? In which case 
+> there already is a clear distinction.
+> With the case with am62x/j722s, I agree that there needs to be a clarity 
+> with the modes, BOOT_DEVICE_MMC is vague.
 
 
-Yes to differentiate. So it it does not matter then why does it matter
-to change to 0xFF0? My opinion here is that switching to 0xFF0 helps\
-when debugging.
-
-This method is the same way we were doing with BOOT_DEVICE_MMC2_2 which
-also had an arbitrary number because the macro is required by u-boot.
-
-But now::
-BOOT_DEVICE_MMC2 -> 0xFF0 instead of using MMCSD boot value
-BOOT_DEVICE_MMC1 -> 0xFF1 instead of using eMMC boot value
-and just modified:
-BOOT_DEVICE_MMC2_2 -> 0xFF2 instead of 0xFF or other arbitrary numbers.
+Firstly, MMC1=eMMC device and MMC2=SD card for K3.
+Secondly, when we say we need a better distinction, it is for
+distinguishing the boot modes from the BOOT_DEVICE_MMC1 and
+BOOT_DEVICE_MMC2 devices. Both of which may be used interchangeably
+in spl_mmc_boot_mode() but they are not the same.
 
 ~ Judith
+
+
+> 
+>>
+>>>
+>>>
+>>>
+>>>> according to arbitrary numbers mainly used to differentiate between 
+>>>> eMMC
+>>>> and SD card.
+>>>
+>>> Please check subject line, this is not a fix
+>>>
+>>>> Signed-off-by: Judith Mendez <jm@ti.com>
+>>>> ---
+>>>>   arch/arm/mach-k3/am62ax/am62a7_init.c          |  4 ++--
+>>>>   arch/arm/mach-k3/am62ax/boot.c                 |  8 ++++----
+>>>>   arch/arm/mach-k3/am62px/am62p5_init.c          | 12 ++++++------
+>>>>   arch/arm/mach-k3/am62x/am625_init.c            |  4 ++--
+>>>>   arch/arm/mach-k3/am62x/boot.c                  |  8 ++++----
+>>>>   arch/arm/mach-k3/am64x/boot.c                  |  8 ++++----
+>>>>   arch/arm/mach-k3/am65x/am654_init.c            | 18 +++++++++ 
+>>>> +--------
+>>>>   arch/arm/mach-k3/include/mach/am62_hardware.h  |  8 ++++----
+>>>>   arch/arm/mach-k3/include/mach/am62_spl.h       | 10 +++++-----
+>>>>   arch/arm/mach-k3/include/mach/am62a_hardware.h |  8 ++++----
+>>>>   arch/arm/mach-k3/include/mach/am62a_spl.h      | 10 +++++-----
+>>>>   arch/arm/mach-k3/include/mach/am62p_hardware.h |  8 ++++----
+>>>>   arch/arm/mach-k3/include/mach/am62p_spl.h      | 10 +++++-----
+>>>>   arch/arm/mach-k3/include/mach/am64_hardware.h  |  4 ++--
+>>>>   arch/arm/mach-k3/include/mach/am64_spl.h       | 13 +++++++------
+>>>>   arch/arm/mach-k3/include/mach/am6_hardware.h   |  8 ++++----
+>>>>   arch/arm/mach-k3/include/mach/am6_spl.h        | 13 +++++++++----
+>>>>   arch/arm/mach-k3/include/mach/j721e_hardware.h |  6 +++---
+>>>>   arch/arm/mach-k3/include/mach/j721e_spl.h      | 14 ++++++++++----
+>>>>   .../arm/mach-k3/include/mach/j721s2_hardware.h |  6 +++---
+>>>>   arch/arm/mach-k3/include/mach/j721s2_spl.h     | 13 +++++++++----
+>>>>   arch/arm/mach-k3/include/mach/j722s_hardware.h |  8 ++++----
+>>>>   arch/arm/mach-k3/include/mach/j722s_spl.h      | 10 +++++-----
+>>>>   .../arm/mach-k3/include/mach/j784s4_hardware.h |  6 +++---
+>>>>   arch/arm/mach-k3/include/mach/j784s4_spl.h     | 13 +++++++++----
+>>>>   arch/arm/mach-k3/j721e/j721e_init.c            | 14 +++++++++-----
+>>>>   arch/arm/mach-k3/j721s2/j721s2_init.c          | 14 +++++++++-----
+>>>>   arch/arm/mach-k3/j722s/j722s_init.c            | 12 ++++++------
+>>>>   arch/arm/mach-k3/j784s4/j784s4_init.c          | 14 +++++++++-----
+>>>>   29 files changed, 160 insertions(+), 124 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/mach-k3/am62ax/am62a7_init.c b/arch/arm/mach- 
+>>>> k3/ am62ax/am62a7_init.c
+>>>> index 00173e6836b..1fd466bbdfc 100644
+>>>> --- a/arch/arm/mach-k3/am62ax/am62a7_init.c
+>>>> +++ b/arch/arm/mach-k3/am62ax/am62a7_init.c
+>>>> @@ -225,8 +225,8 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 
+>>>> boot_device)
+>>>>           if (IS_ENABLED(CONFIG_SPL_FS_FAT) || 
+>>>> IS_ENABLED(CONFIG_SPL_FS_EXT4))
+>>>>               return MMCSD_MODE_FS;
+>>>>           return MMCSD_MODE_EMMCBOOT;
+>>>> [..]
+>>>> +    if (bootmode == BOOT_DEVICE_EMMC)
+>>>> +        bootmode = BOOT_DEVICE_MMC1;
+>>>> +
+>>>
+>>> Could you test once, eMMC on J784s4
+>>
+>> I do not have J784s4, Moteen, would you be able to test?
+> 
+> I tested this series on J784s4, MMCSD boot and eMMC boot 0 boot works fine.
+> 
+> Regards,
+> Moteen
+> 
+>>
+>> ~ Judith
 
