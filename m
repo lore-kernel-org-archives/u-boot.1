@@ -4,87 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C9F3CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 21:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EF5BCAC597
+	for <u-boot@archiver.kernel.org>; Mon, 15 Sep 2025 22:08:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D54382C84;
-	Mon, 15 Sep 2025 23:57:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 05DCE82C84;
+	Tue, 16 Sep 2025 00:08:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cTZliopw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O7TTU3r8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7BA78344E; Mon, 15 Sep 2025 23:57:29 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 25E2A8344E; Tue, 16 Sep 2025 00:08:46 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA19F81E13
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 23:57:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0232581E13
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 00:08:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b00a9989633so912516366b.0
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 14:57:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-42406e56820so7074855ab.3
+ for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 15:08:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1757973447; x=1758578247; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nvds91N8CaGzULu/i9psqkffekPgXS3fC/L74vPAwdg=;
- b=cTZliopw6GB7VGI5NfPyMKS7y56mVpHbro8yC7aGTPBHA/fMmcEl4Vea6TZZtv2CER
- 2/a5IU6lsF6Aeo5RyjUwxkcb7BJWTlrhXv/xgh7pMznnumc9EE9rIrmDfkqQey+N4JJB
- CEGR2L0tKW5KboiWuwgve/asdkTaDM2wtVrWo1I5Xbgm9OILxcAbQFKoj427s4VGe+tw
- 77aXZljtOpcUECK42kT1+plonuxMZYoD6BqsgXfYp0Y3vOGvbQUa/q27okV7WAzExLlq
- pyBnR//jGgjfH76e9kKgsk7/Aez/8OoWBVy+x6/O9A0gc0LsmdH1hY09o14KxmPhGtdM
- sUuA==
+ d=konsulko.com; s=google; t=1757974123; x=1758578923; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EOhH/m0UhKXSLK5pipxr/9IuAVgaBH9HHbaDSsL8Su0=;
+ b=O7TTU3r8OK09Lcq417R7g+ovaxpKT12mpwvDc8jn/7MibXx5IRaJJA95UaoxbKakSb
+ urxlbdepB75E2/1W953ST1QL58F/viRd3J108Uj9BLZnlATr9VliwDoWGJkx80XwY9MT
+ ZKKnEeuVWGuF7LY6YL14E1KtjGD+37vZoew2k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757973447; x=1758578247;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nvds91N8CaGzULu/i9psqkffekPgXS3fC/L74vPAwdg=;
- b=UyewXud29iLmfnuhH/k/HC1KJ6aGSrEL54yPDuaQiFrDd0mm7WUBB7ML3usij4VgtZ
- o7ICKxYtLs/FjVNITOvlQcnIVIPzwUAQpGgjAdYClcyIZiULefh9LQJIp+8cPw/6N3i/
- 0k70/scI9+oSU+tJnLg1F8MRIs/kDDKW2jkX0lYKL6Y/eSOCkuJ+BUFsf/oHcgaLuQxj
- ZSieKHz1vBCMT1toU2u8Kcmd4jMK0KhPkc49WAWYDFUDDBZ4crKU772PTbDalQFtXP2Y
- r9UndXpQVaL9t1HMptNYXLLHnPoYhxivjec+q2IA8Gcuszdkci22jTYLFO1M+hVS8lrj
- HTfg==
-X-Gm-Message-State: AOJu0Yzm0GJp3+uRBY0FZPQy8RqVGxUV6uFaldUL6w9JvfFUatnl/qNh
- RZieam/8DdCQqEnlNFwqI7KH7S7ZYiLlAIlfIHpW8oCKHAtIaPoC+qrS+pu+RyyxYitfdAO92Mx
- uYVMhsXefDu3ra2gIZ4KjEJ83TDr4lm0=
-X-Gm-Gg: ASbGncs6y2IzLwdASF8/exlDAvWafqHP20qfuHRak+RyuIXgzActxKSVwcgAtmrh6jJ
- Rk0hxaLQ1Rjp0PtTaiJxctQoTQB+kJajHAHlIDAzV1ZHrltgJAVF+pylH+pKQK2Mmv1VhRYLD1v
- 9rR+TAI8KoOOs25kAEH7KopCX9mY4w3kG4FlS44INVdKayfkmcULEJvTy1pBuoTTcZCXfeLwWO+
- NS/sUQrU0tjosaZ2hJKd2maplD3aA==
-X-Google-Smtp-Source: AGHT+IHGgzdq3XMPHtWX3Ka4/F/ZI7QzcU4f7i9f9CcOIZaoW4b9st3xf1/ke7B06IBnTgcOvDFKcYyhpoY42FDXb7c=
-X-Received: by 2002:a17:907:9621:b0:b0b:5d7f:6ae4 with SMTP id
- a640c23a62f3a-b167ea62cacmr2505866b.8.1757973447042; Mon, 15 Sep 2025
- 14:57:27 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250915203827.GN124814@bill-the-cat>
-In-Reply-To: <20250915203827.GN124814@bill-the-cat>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 15 Sep 2025 14:57:15 -0700
-X-Gm-Features: AS18NWA4jTYmc6sJOdMFNNQa-ejwAVdJf9EjgrStfS-B1Y7duyo44uqwrTbGmZw
-Message-ID: <CAJaLiFz2epS5+nh4NYJBg5PDakfR+kNASBjqiWvPZmAABGUK5g@mail.gmail.com>
-Subject: Re: Continued need for ATAGS-based booting?
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Dave Purdy <david.c.purdy@gmail.com>, 
- Ion Agorria <ion@agorria.com>, Jason Cooper <u-boot@lakedaemon.net>, 
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- Luka Perkov <luka@openwrt.org>, Luka Perkov <luka.perkov@sartura.hr>, 
+ d=1e100.net; s=20230601; t=1757974123; x=1758578923;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EOhH/m0UhKXSLK5pipxr/9IuAVgaBH9HHbaDSsL8Su0=;
+ b=G1bW8AhySIsddgiCulAndqPt7X+iFiGfgibZIBYRLsoByO4VLF8F7fkZwAPor2T8nK
+ zc1Jr0p9mqXrHg60zjJe9u5VGMGNa+rQ+4JH9PlVUuzKMRHMTzilk2XTrLOUhGlDcSAz
+ QYYY91cz7D7gku9BfDasq2fWR6h2f1ZidkXXvedAFN0f4bK0GxDZb2X4msXR7ZtWMdn7
+ xheUH5cr5atmP8S1/tSnysRll3jSeKxtyPFC7ZpjykhJSP6weBk4zzOkKlA743poNHIG
+ l90Pf3doTH2DAUWs5sv5pWPqBOO5NsHglq6gH0pSi8WEmORr9yBB772C9f5Xkc3Xr2/O
+ t25w==
+X-Gm-Message-State: AOJu0YypByKXJpyV42yFx6nM+rKff+hJ+ZpU99YdOQvyrzVCBkgF2T21
+ 3bwHHAyTFsKJJMSLcDNi+I9cXt8mgQKMpugZReJzKpPXqTv4YT8nS562+ZqzC3DD6TE=
+X-Gm-Gg: ASbGncs5+wkXsKz3ZQ+Lrhlj59bnoeNjumFZEFmVEjwOlHLTCbZJGt9TmVu2iUJdE8F
+ QoBOrDXLfJl0GD0MiSKBCbsT1XoQqdPTlUc/hBdWazHoHXQdyt2iG5CVCdye+8vL9RON2HWbYby
+ bWVOY3gM86P2giBVNUoaAY09venRlkh9oBVz7UVx8uidqG3juwX5DpeuWNGhJfyB26tMiZeZzJ1
+ b3l7insO2EfwWS2qS739KY7Odv4xCD0COlCy6ny5yRUmYPH62NSLoteACSTFSAuUPiwnPRl4E7N
+ bwaPDyFueg6VoOYoBt5zOMPan82+2P61dMFNOqL12qrOXDDQ8tkmGz270ql20l9zqGGVmhtQW/0
+ 17J4M4UdNchL0fF9BukDghVe1sUXTyzlgrMVcIoZm5VY2XDrAVrjG83C3
+X-Google-Smtp-Source: AGHT+IE8j3GtvHtr6CeIePrZT62pfVWz6bV0cp3zKZ0yFFaefvgrmGVDiNHZJKsyD4RVove1vwEm2g==
+X-Received: by 2002:a05:6e02:2192:b0:424:b2c:a771 with SMTP id
+ e9e14a558f8ab-4240b2ca9abmr21833945ab.8.1757974122671; 
+ Mon, 15 Sep 2025 15:08:42 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-511f306750bsm5127626173.53.2025.09.15.15.08.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Sep 2025 15:08:41 -0700 (PDT)
+Date: Mon, 15 Sep 2025 16:08:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: u-boot@lists.denx.de, Dave Purdy <david.c.purdy@gmail.com>,
+ Ion Agorria <ion@agorria.com>, Jason Cooper <u-boot@lakedaemon.net>,
+ Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ Luka Perkov <luka@openwrt.org>, Luka Perkov <luka.perkov@sartura.hr>,
  Michael Walle <michael@walle.cc>, Peter Geis <pgwipeout@gmail.com>,
- Phil Sutter <phil@nwl.cc>, 
- Stefan Roese <sr@denx.de>, Stephan Gerhold <stephan@gerhold.net>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Walter Schweizer <swwa@users.sourceforge.net>, 
+ Phil Sutter <phil@nwl.cc>, Stefan Roese <sr@denx.de>,
+ Stephan Gerhold <stephan@gerhold.net>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Walter Schweizer <swwa@users.sourceforge.net>,
  Wolfgang Wallner <wolfgang.wallner@br-automation.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: Continued need for ATAGS-based booting?
+Message-ID: <20250915220839.GO124814@bill-the-cat>
+References: <20250915203827.GN124814@bill-the-cat>
+ <CAJaLiFz2epS5+nh4NYJBg5PDakfR+kNASBjqiWvPZmAABGUK5g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nxRMS93mwBLm5HHm"
+Content-Disposition: inline
+In-Reply-To: <CAJaLiFz2epS5+nh4NYJBg5PDakfR+kNASBjqiWvPZmAABGUK5g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,39 +105,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, Sep 15, 2025 at 1:38=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> As part of working on cleaning up documentation, I ended up seeing just
-> how few boards still enable support for ATAGS-based OS booting. In fact,
-> the list is:
-> brcp150 brcp170 brcp1_1r brcp1_1r_switch brcp1_2r brsmarc2 chagall
-> dockstar dreamplug ds109 ds116 ds414 endeavoru goflexhome grouper
-> icnova-a20-swac iconnect ideapad-yoga-11 lschlv2 lsxhl mocha mot n1
-> n2350 nsa310s nsa325 openrd_base openrd_client openrd_ultimate ouya
-> picasso pogo_e02 pogo_v4 qc750 sheevaplug star stemmy surface-2
-> surface-rt tegratab tf701t transformer_t20 transformer_t30 x3_t30
->
-> And my question is, for you board maintainers, do you still need to
-> actively support booting such old Linux kernels? Or can we disable this
-> support and then possibly be able to remove the underlying code as well.
-> Thanks!
+--nxRMS93mwBLm5HHm
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-IIRC, Debian latest mainline kernel still expects ATAGS for most of
-these boards (ones which they have installer for):
+On Mon, Sep 15, 2025 at 02:57:15PM -0700, Tony Dinh wrote:
+> Hi Tom,
+>=20
+> On Mon, Sep 15, 2025 at 1:38=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > As part of working on cleaning up documentation, I ended up seeing just
+> > how few boards still enable support for ATAGS-based OS booting. In fact,
+> > the list is:
+> > brcp150 brcp170 brcp1_1r brcp1_1r_switch brcp1_2r brsmarc2 chagall
+> > dockstar dreamplug ds109 ds116 ds414 endeavoru goflexhome grouper
+> > icnova-a20-swac iconnect ideapad-yoga-11 lschlv2 lsxhl mocha mot n1
+> > n2350 nsa310s nsa325 openrd_base openrd_client openrd_ultimate ouya
+> > picasso pogo_e02 pogo_v4 qc750 sheevaplug star stemmy surface-2
+> > surface-rt tegratab tf701t transformer_t20 transformer_t30 x3_t30
+> >
+> > And my question is, for you board maintainers, do you still need to
+> > actively support booting such old Linux kernels? Or can we disable this
+> > support and then possibly be able to remove the underlying code as well.
+> > Thanks!
+>=20
+> IIRC, Debian latest mainline kernel still expects ATAGS for most of
+> these boards (ones which they have installer for):
+>=20
+> n2350 ds116 dockstar dreamplug ds109 ds414 goflexhome
+> lschlv2 lsxhl nsa310s nsa325 openrd_base openrd_client openrd_ultimate
+> pogo_e02 pogo_v4
+>=20
+> I think we should keep ATAGS around until the Linux kernel removes it.
 
-n2350 ds116 dockstar dreamplug ds109 ds414 goflexhome
-lschlv2 lsxhl nsa310s nsa325 openrd_base openrd_client openrd_ultimate
-pogo_e02 pogo_v4
+Yes, sigh, if it's still in-use we need to keep it. Thanks.
 
-I think we should keep ATAGS around until the Linux kernel removes it.
+--=20
+Tom
 
-All the best,
-Tony
+--nxRMS93mwBLm5HHm
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
->
-> --
-> Tom
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMiOYwAKCRAr4qD1Cr/k
+CnTSAQDtZPiuaDl84zZkxnL7Qo0iw1QbJ+CRduBIUucB1kyO/AD+LM+UNrz5587Q
+LQT172Fc7YRHGlh7wJy/Vo3VB96R4Ac=
+=9+HG
+-----END PGP SIGNATURE-----
+
+--nxRMS93mwBLm5HHm--
