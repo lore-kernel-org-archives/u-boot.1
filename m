@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB1ECAC59B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5468ACAC592
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC33883071;
-	Tue, 16 Sep 2025 20:27:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 021A383236;
+	Tue, 16 Sep 2025 20:27:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rx+lHcKL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CwUJkJCS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16F75803CC; Tue, 16 Sep 2025 20:27:44 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 436F183335; Tue, 16 Sep 2025 20:27:49 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9276B83321
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:27:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 168D483335
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:27:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-3326d9ee5edso1983370fac.3
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:41 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-74526ca7a46so2323468a34.2
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758047260; x=1758652060; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758047266; x=1758652066; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=J5SDE5U2nAtPiYIGxuCk/GUHDg4vze/f5gCjnGY5peo=;
- b=Rx+lHcKLm4nKq+D1LL5TXfD+eZ/nfuHOFDz0DhBcp92ldu33R2Wwa3H8LDafLBNTZr
- 0PhMgBXtEiUpiojyEUSzxhXMEXowDW6pnrP1Bt3LBhWsM777wkYoOAw9NFjAMq1LllXH
- 16X7ICajUh0TEXkmwlMMTKrQKfZkEWrjZY3to=
+ bh=zXT6vp0M91on8rXoPgOjHIj9m6nYFmap9JQZipcoa1Q=;
+ b=CwUJkJCSsJSHRoG+lS63LfGmyFBbb097Q+I2iFW3IM6yK4+AXUSuw8KbJK7SnDucS1
+ MAbdK5r7nBtE8bXb7N/n71gdckmF8rAJ58J8M4G8uzJh24SXAiW+bLmiJzxJe6+up32A
+ W0NiS9dcCIrpGnfqDnyrBfWkdJGBAxLeTShT0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758047260; x=1758652060;
+ d=1e100.net; s=20230601; t=1758047266; x=1758652066;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J5SDE5U2nAtPiYIGxuCk/GUHDg4vze/f5gCjnGY5peo=;
- b=qEPB47YC5GY/aQ0Q5Vqlh7Qb7eKKGAfnhV4YJcAJuYmiOR+DvvrpTjX2jGeXZXcxf1
- Lg1GgrUCPG80XeLcInb1HpaQWs4pMdGwiOh6Fa3ILVk8GTy9np8riJaKeBw1xLBSiMyR
- xYaep9aV/NX2zKXONpKxS3H0dnBgRJhsq/m/UoYFY5G/DEB+z1vMVWXFKmTanrVwFlur
- +4JrfR/RX5SP/1gHtnzEIN+YbBFYlYilD6kuxHfM0p/wr6dcKo3TlVBOLGdkWNHAGL3A
- f9X5fvI12Vlpvz0Zx1uqyesvrZbdAnof86xtgS1H4324FbkLLYPfU3PGXwjp8eSVmRDV
- jnjQ==
-X-Gm-Message-State: AOJu0YywxznE5ewtMLFtDXj5ux00EHefzUR8f/7r83A3R9/jCFADh5Y+
- DZz7LusPawhLE/+hUKQXj+8xz8VmalFSOot60/LwW+tlXUfs6UCNKQ+run0GxRTPmxM=
-X-Gm-Gg: ASbGnctoDkWaXjEbyUXCGJmgRSWRaT0KBAVej48YHgQ73NEkklR1livKak09NSzF+HY
- a9gKK42gXoBrRjkXkDiCc9QtWQ+MHo10PpflKS+Cg9bcw6SyxgkynYkER7x0FuWpK4yJih1P8OR
- 7DH/riw4GagUjB1y8TSNt8R08Dpgk+eysfKXbly4OmVKTeisjr5tITQncpNp9wd3luWCvrLJLlC
- kThGLWYaffWPd8J7Gv4bbakG7BN5FCBcUYVcbKZci2YFQVRL7t4S1HP83BiO1VndBZgUt8hfI2N
- a+e09PEWiZ+9TUf6zuaMAd4jaGWl8cLgtPF61xVJd3jnwyjLaztf94aHk6T+lVbBsp/YrmQZ2ug
- ZWGeMxWMgkVbsuaJ3V71Ttm2LIvBOz1EyT5SaCAhozEWFVPrE624Zda+J
-X-Google-Smtp-Source: AGHT+IHSd+0KVeQzRpfCKN6OhXa23bVSv//oRhho7vrpC4X2+ML/Oezgm6dGIeJmJPZI+W+2WR7Ljg==
-X-Received: by 2002:a05:6870:c081:b0:321:2680:2f8e with SMTP id
- 586e51a60fabf-32e560cd615mr9870776fac.10.1758047260169; 
- Tue, 16 Sep 2025 11:27:40 -0700 (PDT)
+ bh=zXT6vp0M91on8rXoPgOjHIj9m6nYFmap9JQZipcoa1Q=;
+ b=YpV7lJ7qiqFTVQX2RjSZRjdAsyVryWFYpU3mFI14U1nXNaeSibK05MksKOHo55azUg
+ KekGnskqMQAMzBQPjR41EwLtVlGutIEZnkEnyQIMszulpejqgiIjNGMdOh/z2kQHtPhb
+ VTcRsXvhXw8w2O7IyZ/HEpRdlg5UISIShIzDog2pqEMvDIKUVVvoZswpHoW1I68WBRLQ
+ /0M3O5s+fms73QcImqmN+K3aZaMq+SZ+KIeNxXMzbeRctgf6TjiAn900riz8hE2DLmi5
+ 3DHjBNZ1x+PiH/tYY3N/ndUfFHBwAXZ9VYHMa2+X8dd5w+6CEziA0DRS1Wg6E7FxrFZ1
+ hYmA==
+X-Gm-Message-State: AOJu0YxdNwKxneNZfT9Nu+aoIZ7G7o2QUlfsx0y4U0KyOjVb7fMQfjjL
+ 6+BCg07tOMlGeVfS6idCs+JZodNxkir17oaIrGFuSL8pjMwpes2+wfWHb68d5YbAdb0=
+X-Gm-Gg: ASbGncs+74s6VK/1W8d8D9W3dhWFa2OIV4pbroADbsqWLVpLHH8LQhxh1ZK8fdhGU2H
+ EU6+mWeiV0w5ty8rYs6beNQdxCVXueEPMNvubXH8sWcdhSDtJEN44Bszb3EMd/vDnb0/144gTg0
+ dyElm/Lju+i2JbrM1wVoruxiwwUZLlrI0exJjLvd1MGbUljMOiLWLXjniVfu0gdMHaPNtT+drIG
+ VFuW8na1XwcNbgF64R9Inzhl9y2G+/Ml9VnjHI1ckLVpPfLXDO9WimscV2a7dSCGxykMvzWhMgx
+ nHDml1H3oQSyFzzFTGSiAPVIQdwI5xvw67AMWVpnvsKKb2ftRDT5R1776GQLR/0W/t/2dx51yz2
+ 1/dXkpppMOqDfUS1RlFNBtD6qRQiOEQH2ktaJIP419rtiW/4QePTi9KDtTa7jgWngElw=
+X-Google-Smtp-Source: AGHT+IHe97Ac+mqsOCvl6Q4sWvQsUSTRLDDRJ5LWMJWn3mRRid0aMzs2G94ZwGwGTwRU+H00rGw4yg==
+X-Received: by 2002:a05:6808:444a:b0:439:b28b:3e62 with SMTP id
+ 5614622812f47-43b8da383ebmr9982645b6e.44.1758047265678; 
+ Tue, 16 Sep 2025 11:27:45 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7607e2047ddsm144846a34.11.2025.09.16.11.27.38
+ 006d021491bc7-621b7a6cc75sm1969146eaf.0.2025.09.16.11.27.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 11:27:39 -0700 (PDT)
-Date: Tue, 16 Sep 2025 12:27:37 -0600
+ Tue, 16 Sep 2025 11:27:44 -0700 (PDT)
+Date: Tue, 16 Sep 2025 12:27:42 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
@@ -77,15 +77,15 @@ Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sam Protsenko <semen.protsenko@linaro.org>
-Subject: Re: [PATCH 1/5] docker: add OP-TEE build for testing Firmware Handoff
-Message-ID: <20250916182737.GY124814@bill-the-cat>
+Subject: Re: [PATCH 2/5] ci: add post-buildman script to build TF-A
+Message-ID: <20250916182742.GZ124814@bill-the-cat>
 References: <20250916161426.32259-1-raymond.mao@linaro.org>
- <20250916161426.32259-2-raymond.mao@linaro.org>
+ <20250916161426.32259-3-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5YQqgdfELgnZCyAm"
+ protocol="application/pgp-signature"; boundary="VG43eOHkD83/AZpg"
 Content-Disposition: inline
-In-Reply-To: <20250916161426.32259-2-raymond.mao@linaro.org>
+In-Reply-To: <20250916161426.32259-3-raymond.mao@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,77 +104,106 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---5YQqgdfELgnZCyAm
+--VG43eOHkD83/AZpg
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 16, 2025 at 09:14:17AM -0700, Raymond Mao wrote:
-> Fetch OP-TEE (4.7.0) and build it with Firmware Handoff enabled.
+On Tue, Sep 16, 2025 at 09:14:18AM -0700, Raymond Mao wrote:
+> Add a script which is running after buildman to fetch TF-A (v2.13.0)
+> with MbedTLS (v3.6) and build 'flash.bin', linking built U-Boot as
+> BL33 and OP-TEE as BL32, with both Firmware Handoff and Measured Boot
+> enabled.
 >=20
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 > ---
->  tools/docker/Dockerfile | 77 +++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 77 insertions(+)
+>  .azure-pipelines.yml               |  1 +
+>  .gitlab-ci.yml                     |  1 +
+>  tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++++++++++++++
+>  3 files changed, 89 insertions(+)
+>  create mode 100755 tools/post_build_tfa_fw_handoff.sh
 >=20
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index 5b4c75f8400..02a8a2fb37c 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -54,6 +54,83 @@ RUN if [ "$TARGETPLATFORM" =3D "linux/amd64" ]; then \
->  		wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2=
-020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz; \
->  	fi
-> =20
-> +# Build OP-TEE
-> +RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt,sharing=3Dlocked \
-> +    --mount=3Dtype=3Dcache,target=3D/var/lib/apt,sharing=3Dlocked \
-> +    apt-get update && apt-get install -y \
-> +	adb \
+> diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> index 8209d2b329c..eb547606ddd 100644
+> --- a/.azure-pipelines.yml
+> +++ b/.azure-pipelines.yml
+> @@ -290,6 +290,7 @@ stages:
+>            cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_r=
+iscv64.efi
+>            cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm6=
+4.efi
+>            cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm.e=
+fi
+> +          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TRAVIS_BUILD_DIR=
+} \${TEST_PY_BD} \${TEST_PY_ID}
+>            # create sdcard / spi-nor images for sifive unleashed using ge=
+nimage
+>            if [[ "\${TEST_PY_BD}" =3D=3D "sifive_unleashed" ]]; then
+>                mkdir -p root;
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 85401d3e09b..61e4af96c9a 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -79,6 +79,7 @@ stages:
+>      - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_riscv64.=
+efi
+>      - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm64.efi
+>      - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm.efi
+> +    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} ${T=
+EST_PY_BD} ${TEST_PY_ID}
+>      # create sdcard / spi-nor images for sifive unleashed using genimage
+>      - if [[ "${TEST_PY_BD}" =3D=3D "sifive_unleashed" ]]; then
+>          mkdir -p root;
+> diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/post_build_tfa_fw=
+_handoff.sh
+> new file mode 100755
+> index 00000000000..f876db593ba
+> --- /dev/null
+> +++ b/tools/post_build_tfa_fw_handoff.sh
 
-Whatever in this list of dependencies that are new for OP-TEE should be
-added to the normal list of things we install.
+The "is this a valid board" check should be in the pipeline file (like
+where we do all the other board-specific things) instead of the helper
+script.
 
-[snip]
-> +RUN git clone https://github.com/OP-TEE/optee_os.git /tmp/optee_os && \
-> +	cd /tmp/optee_os/ && \
-> +	git checkout 4.7.0 && \
-> +	make CROSS_COMPILE=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64=
--linux- \
-> +		CROSS_COMPILE_core=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch6=
-4-linux- \
-> +		CROSS_COMPILE32=3D/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-l=
-inux-gnueabi- \
-> +		CROSS_COMPILE_ta_arm32=3D/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bi=
-n/arm-linux-gnueabi- \
-> +		CROSS_COMPILE_ta_arm64=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aa=
-rch64-linux- \
-> +		ARCH=3Darm \
-> +		CFG_ARM64_core=3Dy \
-> +		CFG_TRANSFER_LIST=3Dy CFG_MAP_EXT_DT_SECURE=3Dy \
-> +		PLATFORM=3Dvexpress-qemu_armv8a CFG_RPMB_FS=3Dy \
-> +		CFG_RPMB_FS_DEV_ID=3D0 CFG_CORE_HEAP_SIZE=3D524288 CFG_RPMB_WRITE_KEY=
-=3Dy \
-> +		CFG_CORE_HEAP_SIZE=3D524288 CFG_CORE_DYN_SHM=3Dy CFG_RPMB_TESTKEY=3Dy \
-> +		CFG_RPMB_WRITE_KEY=3D1 \
-> +		CFG_REE_FS=3Dn CFG_CORE_ARM64_PA_BITS=3D48  \
-> +		CFG_TEE_CORE_LOG_LEVEL=3D4 CFG_TEE_TA_LOG_LEVEL=3D1 DEBUG=3Dy
+> @@ -0,0 +1,87 @@
+> +#!/bin/bash
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (c) 2025 Linaro Limited
+> +# Author: Raymond Mao <raymond.mao@linaro.org>
+> +#
+> +# CI Post-buildman script for building TF-A 'flash.bin' with Measured
+> +# Boot and Firmware Handoff enabled.
+> +#
+> +# Usage: from the top level U-Boot source tree, run:
+> +# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} \
+> +#     ${TEST_PY_BD} ${TEST_PY_ID}
+> +#
+> +# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated and copied
+> +# to /tmp.
+> +
+> +set -e
+> +
+> +BUILDMAN_OUT_DIR=3D$(realpath "$1")
+> +BOARD=3D$2
+> +ID=3D$4
+> +echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, ID: $ID"
 
-And this should be much farther down in the file, near where we build
-TF-A and coreboot and everything else, not up top.
+Can we not use fiptool to update the contents of a file here? And build
+as much as possible in the Dockerfile, like we do for vexpress?
 
 --=20
 Tom
 
---5YQqgdfELgnZCyAm
+--VG43eOHkD83/AZpg
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmsGAAKCRAr4qD1Cr/k
-CluDAQCvLPkeP8IImA8T36hRVv1FmnLWrqO65Mao9w5yP4swZgEAv5SHZ5mLyX5m
-Ebyyw+7vvu44RJUbGo0u9BsqYuPhZAg=
-=YQD+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmsHgAKCRAr4qD1Cr/k
+CkrlAQDNwO12P0/mR7ze4HEJ6cP821Fq/2pwp6l9pHPJlfnuJQEAzMZ/EtD+O2Ds
+5aG+Ev2gQmvt4NcQogYF9isN8v0eFwc=
+=zXSu
 -----END PGP SIGNATURE-----
 
---5YQqgdfELgnZCyAm--
+--VG43eOHkD83/AZpg--
