@@ -4,87 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1AB6CAC592
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6112CCAC59B
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:48:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6775281E13;
-	Tue, 16 Sep 2025 20:34:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 66E0381E13;
+	Tue, 16 Sep 2025 20:48:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GPWusIuN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o27yxRpo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 693CE83071; Tue, 16 Sep 2025 20:34:40 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id EB9B98309A; Tue, 16 Sep 2025 20:48:50 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E1A7803CC
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:34:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77118803CC
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:48:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-32a9c1d2b95so3387094fac.0
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:34:38 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-61ea79c1e91so2587544eaf.3
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:48:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758047677; x=1758652477; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758048527; x=1758653327; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=72OenqphIDukDkAr/6ZDHV3GTiE5FJ5mh3/JlXLEMKE=;
- b=GPWusIuNJgj++rWwZNa0oyyl5BDblq4uimd03imle9FpUtrLS5Ef2T1ddN6dZuO3tG
- suyTLbXykD19zu5YAPgkjhfz9AsESk26DKH/TYnNRF4WN9XmgOE08S4EnvfkNKVLXeil
- b2BDqqF60enNioPxdLgauGQr8u0a8jv6AO3uo=
+ bh=DDE0oNyAm58H6cXWU/6zOLTEHFEJH3/mYQgYKXFmUT4=;
+ b=o27yxRpoGc/y3enUmkNKCuarN3UTVBjwPOzBGsdKgiZ56oNahS3IJUdsnxVa51Pc37
+ qwD0MZepoEMke07otp6C2GAn0JsfjvHaOGjEYJTBZwmlErLqygQy1GpNZR830eNMoTPZ
+ 7JJmUwIEGpm8DopYQQJB21X0zju71e34L+Lw8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758047677; x=1758652477;
+ d=1e100.net; s=20230601; t=1758048527; x=1758653327;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=72OenqphIDukDkAr/6ZDHV3GTiE5FJ5mh3/JlXLEMKE=;
- b=Fo4NOeLc0aI/SZG46fOK44GP/3x4wTdKd2ZOJlGztVMmG5UdxA/NLgjoEcuGazk4Db
- V9FYTBhpBrjIpdGiFnxz3Md7oYjrD5P9dpc09imZzkRpRpqJynL6eK/pm7OIof0ecRa7
- AxcbYE6hVg5CeeK7GIKavqDuils/d9U8aLm4SXV8kFGP26QwXnVFpdo6Ndrcl54bI4f6
- +OWMttYRxjeRssqrmkPYwSWMyP9IDKUbjCGg3ZEVR4ZuTv8w5OnicsWrTV5BLHZ+8EyZ
- 6bxvWLAa+PueEYS+lcJehq/i9prVNTfsXfn/UGPX4ea0gqwI5LgafDcUwa6olJySQTjt
- q3+Q==
-X-Gm-Message-State: AOJu0Yyz61GozCgMCTecQMQCJVGRGEY1Zgsit5G8Wtj/Xyfy5M/o7cil
- 06y8gxSsnlulLL3jl2EsAHhGKPViAgZkMnQqUqgd3j3bD73fzpjaqhvZFxA9P4K5J4PmDkf+sMq
- 9fK5dq2w=
-X-Gm-Gg: ASbGnctIPWGNMVkIQbql3nwU/qZ1L6BTDKvuZuAjtTtTG4qvDNf1H3EU0HJLBywFlFm
- 1ygeOTk83bKzMuEQ2tl5eSh0bZa8oT+z3qfmMw0Juk/rP9QdTDqQK7HGXzbzkzOyvEwLd4henUw
- 3y8c85EASdAsUvEu0MXtikujAV/d6PT0yrftFitWEJCw+W7hy7QSmEYLb2y/q+CUMd61ImKKOlL
- ZDtvIjE0XQ1Bxm3eusMBfwd1/VJG5a3AloGM0dUZEvHhlyQP6aYp2ZOXXzyuueRDNv2wmg/7P2R
- 9E2L5VuBsCwZTt0eSUBxM+hU6g5eJxAnS2eujStrWLlAEiVOFlZVTOPOAe2Tbf7OpzRA2IfKSLX
- 6TbyoEsDcKHi/DrIxyykWPferW1tzwrOH+7BOQUkGF0IYUOXOYZygd4EyZnoh/MfVY2KtTIHR+F
- 1rvQ==
-X-Google-Smtp-Source: AGHT+IGmnxe4vXikmK8BdN2mKTVsF/i1hrKx93xwaz6KkBR43zpRiKCeL9dt4f+s7PS92qmnf4wfNA==
-X-Received: by 2002:a05:6870:705c:20b0:332:1b00:6dc with SMTP id
- 586e51a60fabf-3321b0f701emr4829029fac.10.1758047677020; 
- Tue, 16 Sep 2025 11:34:37 -0700 (PDT)
+ bh=DDE0oNyAm58H6cXWU/6zOLTEHFEJH3/mYQgYKXFmUT4=;
+ b=j7rvjz9/vGivKAGLsBC5l+lMkM43WvBpkRpKMIq8sUmYUBF+CUxlRhhlpDEX0iuTYx
+ k7FvnpHx5q4CKtUOuBig1OnhEgFFfADkHhBL08Tsou0y1S8DnrKpsUnnVo9jIP96WnBQ
+ 7TeSn3YJUxpPu2b2n4d5teH/6+9W0uwNr0QtcXwztjB6JvMg+cjkMJAzTBLIXkYckJfV
+ xoRdbgDJ2ahFaAkh/NGABXkBhSAXDpI94w1JiD2HzrJtmQI+1KkUYNlwSjdDSZ49pr0C
+ 6OVzDjoOKShoSPxwp2qzW+s/wTgcvJEzOMEfKeEAlEbHZBl5cnCq3I/NgeferKVg5YA0
+ ZUkw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaUUE9xXDKOP8+7Vb+dS+Tuw9bpqK2sKYwU80QWn+5rmz6nknTKTt/rDNycJCl8MYpv0Oeee4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxYFbMaAyaTvQ+G1xVnf8YHXZyL/5A8CEfFh4T1IzVe4BcDUvVq
+ C0/zzoiIzExBKkxypMVKmASJhR60g2FRSDQsV+rnkgYweRvqpt9fA3TuLzoaIw0OjyY=
+X-Gm-Gg: ASbGncv+Gfsnfq8y+t0ajYe+Qu6x+Ti8wkKb8vMqfbvzKkTGaPhUaKLH1KOvXCZkVPa
+ V7PT+jmL2PScrS6VxaLEcjBguH256DdDKVkxyR8yrZiYElB6MtymZlMo/vhgk25HpMgNfO5miJl
+ RvcGl8P/HlKQJdkVzgC1M34RlNwsO+ohhmHyDEc5J7iCpfj3G9dq4zMYKcUWhDr8ol8W0uSM4b5
+ Kq2VDGrLNsYlbv+aYTdz8qiDChoH27i35U+ST2jgOKjQ0+wjgW2/0nU3neZVm4zMhftShDuVqCz
+ oKsPRxL1xZUxF8p+LbC5KbkSNjZ2ch6PwM5AJMydP+L9SbtaGcGaAonAKsYmLqZg74K9MtEJGhZ
+ VTTJzEv99CypbTMjEGXIa4O7D36GKf4GSi3kmp0ZAaQJYVz5pl27jlp5/
+X-Google-Smtp-Source: AGHT+IEAOfGChgV2ZR4lGPZ6KXlglCcze84xG00Nl+Pp6gA4ti4kmzCTAPyMXBY+4JB6gl1sJjYUbA==
+X-Received: by 2002:a05:6808:f8b:b0:438:2199:6874 with SMTP id
+ 5614622812f47-43b8daa967cmr8494578b6e.50.1758048527046; 
+ Tue, 16 Sep 2025 11:48:47 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-757c0e39e4csm2308090a34.36.2025.09.16.11.34.35
+ 586e51a60fabf-32d33452e9fsm5043474fac.11.2025.09.16.11.48.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 11:34:36 -0700 (PDT)
-Date: Tue, 16 Sep 2025 12:34:33 -0600
+ Tue, 16 Sep 2025 11:48:46 -0700 (PDT)
+Date: Tue, 16 Sep 2025 12:48:43 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
- n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com,
- kever.yang@rock-chips.com, hl@rock-chips.com, tim@feathertop.org,
- marek.vasut+renesas@mailbox.org
-Subject: Re: [PATCH v1 4/8] spl: ubi: refactor spl_ubi_load_image for falcon
- mode
-Message-ID: <20250916183433.GD124814@bill-the-cat>
-References: <20250916105857.163951-1-anshuld@ti.com>
- <20250916105857.163951-5-anshuld@ti.com>
+To: E Shattow <e@freeshell.de>
+Cc: Vivian Wang <wangruikang@iscas.ac.cn>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH] riscv: qemu: Remove fdt_high default
+Message-ID: <20250916184843.GF124814@bill-the-cat>
+References: <20250915-qemu-riscv-remove-fdt-high-v1-1-661178447396@iscas.ac.cn>
+ <20250915143227.GJ124814@bill-the-cat>
+ <3caf66ce-f9f4-4072-9a31-3d67f392c37f@freeshell.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="u4wtpNC13H9k1ie0"
+ protocol="application/pgp-signature"; boundary="XN+rAcNura14xNbs"
 Content-Disposition: inline
-In-Reply-To: <20250916105857.163951-5-anshuld@ti.com>
+In-Reply-To: <3caf66ce-f9f4-4072-9a31-3d67f392c37f@freeshell.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,39 +104,65 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---u4wtpNC13H9k1ie0
+--XN+rAcNura14xNbs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 16, 2025 at 04:28:52PM +0530, Anshul Dalal wrote:
-
-> This patch moves the falcon mode handling logic out of
-> spl_ubi_load_image to spl_ubi_load_image_os, this allows for cleaner
-> handling for fallback to U-Boot in case falcon mode fails.
+On Mon, Sep 15, 2025 at 05:25:23PM -0700, E Shattow wrote:
+> Hi Tom,  Add CC: Heinrich
 >=20
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-[snip]
-> -		puts("Loading Linux failed, falling back to U-Boot.\n");
-> +		printf("%s: Failed in falcon boot: %d", __func__, ret);
-> +		printf("Fallback to U-Boot\n");
+> On 9/15/25 07:32, Tom Rini wrote:
+> > On Mon, Sep 15, 2025 at 07:45:49AM +0800, Vivian Wang wrote:
+> >=20
+> >> Setting fdt_high to all ones is discouraged and does not appear to be
+> >> useful for RISC-V QEMU. Moreover, it causes a boot failure when the FDT
+> >> generated internally by QEMU is used while booting. Remove it to allow
+> >> U-Boot to pick a suitable address and relocate the FDT.
+> >>
+> >> Closes: https://lore.kernel.org/u-boot/8397369a-9b0b-4798-9c30-3a81165=
+657d6@iscas.ac.cn
+> >> Signed-off-by: Vivian Wang <wangruikang@iscas.ac.cn>
+> >=20
+>=20
+> > I'm very glad to see this finally and would like to see the rest of the
+> > RISC-V platforms follow and do the same now.
+> >=20
+> > Reviewed-by: Tom Rini <trini@konsulko.com>
+> >=20
+>=20
+> When you say you would like the rest of the RISC-V platforms (to) follow
+> and do the same;  What do you mean?  Heinrich and I were trying to
+> figure this out off of something you said on IRC awhile back. I was
+> taking a guess it was the qemu config (and this patch makes sense to me
+> so I think that's part of it), but what else? Is that a reference to
+> sifive-unleashed config fragment, are there others?
+>=20
+> If you give us a detailed hint what we should be looking at it would go
+> a long way and we can test / figure out the rest. Is initrd_high
+> all-ones on your radar too?
 
-Switching from puts to printf doesn't gain us new information here and
-may pull in printf when we only had puts before. SPL needs more
-consideration than usual about size growth.
+The simple answer is that no platforms should ever set fdt_high=3D0xff...
+nor initrd_high=3D0xff... by default. This tells U-Boot to never try and
+relocate in memory these parts of the boot even when U-Boot knows that
+they will overlap or are not correctly aligned. This in turn leads to
+harder to debug failures at run time. Unfortunately RISC-V platforms
+were introduced with these set and whatever checkpatch.pl check I had
+missed them at the time (aside, most recently checkpatch.pl was missing
+this in .env files, I fixed that today).
 
 --=20
 Tom
 
---u4wtpNC13H9k1ie0
+--XN+rAcNura14xNbs
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmtuQAKCRAr4qD1Cr/k
-CrjqAPsFaDqeHPIPlw7vSSzqhrRdHok7ghxcpHRXAuvaSiNYOwEA32jhcHfqEz9g
-IYhu+7kIl6S+awR0vWJFQ9E54Bz8rws=
-=L4ZE
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmxCAAKCRAr4qD1Cr/k
+Cs8uAQCfho84kYIFX64if6tbw//EYCTz2UFhMUppowU9TJzkDAD9ExpMv8Xy32TT
+TtYUbwpOS4q76kJb1nROIm1zSgXQmQE=
+=i3wz
 -----END PGP SIGNATURE-----
 
---u4wtpNC13H9k1ie0--
+--XN+rAcNura14xNbs--
