@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7166CAC592
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BE5ECAC592
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3211583071;
-	Tue, 16 Sep 2025 20:27:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C6F38323A;
+	Tue, 16 Sep 2025 20:27:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ekZrGSJ8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WpDKyrvA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADD6383236; Tue, 16 Sep 2025 20:27:04 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id DDE54803CC; Tue, 16 Sep 2025 20:27:05 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12809803CC
+ by phobos.denx.de (Postfix) with ESMTPS id E7FC883071
  for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:27:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-751415c488cso5054650a34.1
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:01 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7459fa1ef2aso5738781a34.1
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758047220; x=1758652020; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758047221; x=1758652021; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ccrPyvQlRg+KQaMfBWBfDA/wInuR0i9JoOl9Lxu0Zt4=;
- b=ekZrGSJ8DaQRSXokaDZNLKSlub+0PJ4iVoSn68mGPbjRG1Fi9yT8LXKKVfom/PL9oP
- 2OttmGotdUgoW3pTGUcLRHGhsozGEYmKR2GTSWe6hQ16l+MP46laBxrJbcSFfQv7+1Ho
- cJRPV6k7XNsr2fFAE/LQBNukFdfgdFQGanko4=
+ bh=ArUtvoQgKEAISDesPfv4CGgFOqCk+F5W/HvDfzKHez8=;
+ b=WpDKyrvAa3h/JCzmPGFYSI6OADvh3KUWf3xnbtZk0Ksoo+FGTP/uKJ6zdLwaqzwTOS
+ eHfOMfAu1Lmqc29jQCU3yqV53c58tSqOKs9c5M+iR3JClVSn/2QzzSJoXGjuf9qHqD2C
+ v9UZPdFmtAfZE9mckMHiUhgdtUIoy0L1Zlssk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758047220; x=1758652020;
+ d=1e100.net; s=20230601; t=1758047221; x=1758652021;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ccrPyvQlRg+KQaMfBWBfDA/wInuR0i9JoOl9Lxu0Zt4=;
- b=vfflcbmUIfJnaHAF0FV3Wsx7jm+c/Q/8TTmJu2yO7u7ktzCc5naaDCw6h4AvVOaAmD
- b0RuerkIdyYwE6OCivM1k8I+2YR/isfRqdBhHDg2GNfRHXjP/DZbtcohbECtoldq3OUR
- Js17CzQd50S7X0rerZViQgwN/55eWY13fv2gNVr+mcCAZ9KwiWbdNbOISex1nONHTwcy
- D1AMx8VlvMFW1edlmBZ9dK+x21oOz1P06zwUTiRoXfXwQuYUbX0ro/vMCWL3zcJ1el66
- UdqA0itGCnBVuARR9xD8fvPRm5WumdJELlvVeZ9FsXBf0lIeGD42bWugWLB9l9VhOTir
- TYwQ==
-X-Gm-Message-State: AOJu0YxyvlnRssFz0s9BVbpFNDTP8Pef8wVIkzBysgMDwFZ+B5mcDmR6
- K4414oSTAEqk4I0sQ42AMN+k91Ai8HKg8ev5qWwyvhFRl9RiF2t1Hx9jDM1MHbzEoJtoAMIKa9r
- pA10uloE=
-X-Gm-Gg: ASbGnctfykm770HKGRFnWa7hAIn6fGLhXhvMeTHvnvLHWDosN3V2C+wK6eAnfDwE9OT
- 7bNJtyUN6uHBgbIrME21tmwPRphVC45h7fpUGx7cTshpxKXTULfVkJO07ykDiscC4Q4t5/crt03
- iqYJ2Qpb/myUT1S8XHwlT4mJAwenF4HfEnVFigKocoJ/8ZKpqFsDW3tWVddBopCGWirsmit9zcl
- SN6aL1WucW3vk1poHjGBHInbIEgFPZCkGIf4ZKjozsaw6tS+2IHkB8POwn526ORnNv2GdfLJwx+
- d87NKIJZWr2uFTTtj4uovjoazz0n/gHF41YXt484ZDlcqqiFz08WrolxRHnHRa13ymTjgZLRP/r
- zKKaVOwoFv1yhGoPJ6lDBbIxLAUeusAt+KGRsSa5CB0UF+whq+msfAlo=
-X-Google-Smtp-Source: AGHT+IGVNK4dZDM6VJzsE4bQDCudQ/Oa5VHIcCM1oHF35PNlcCStOoA5Tz6bxtA1/5wRpJLEZB1svg==
-X-Received: by 2002:a05:6808:180c:b0:439:b1eb:300e with SMTP id
- 5614622812f47-43b8da24704mr7133089b6e.33.1758047220240; 
- Tue, 16 Sep 2025 11:27:00 -0700 (PDT)
+ bh=ArUtvoQgKEAISDesPfv4CGgFOqCk+F5W/HvDfzKHez8=;
+ b=oGz+N0n81WeNQLqFEwo0Nqt+p7p0R9yxDrhZDHEFc7hPSVGLvlBwRvvFDFgzgDb4yy
+ 1LB3+TPSF9ieLt+d/gwqPC502Gc5quN4tXqC9uckP3niyMnh5dpVQtISNe6cE8j1Fvsy
+ myYSodvRxWnkyFoFKB++d05zTiDdPlNwWXNbRv1iUJsqvGeZHv1DJXmcvG3fnomahjxE
+ pgImTPZvtPKPYTl4I6pXPdpnqNRrx1tp4uIh9yvKspzGzEFHubhpDjtPIZ2FDotluyOU
+ ovGErOx0oivIvU9Lbx+XiSG2kH5+KYuuBo7V9dRLXBQz92Q0B7y07jTx/Q/JLE3UvVGa
+ gIww==
+X-Gm-Message-State: AOJu0YzmJsJaJeoTKAOWHeIc9eH7oN0ZOeWkHRGZVMOShFW0ztq86Ry2
+ Lw06E5MUc4Zs09PTlmkFtHLKi/WKCswcMDCuvgXvzsCEmY4JJhj+uJz9qHf7QXNVOmmpBD1/IPV
+ c400U274=
+X-Gm-Gg: ASbGncsBkwMcSA5qDdr3tz3xs6G9AIvRLPFiNdKTxCIVi+efQ1ryNmtzcU7xIDpktO0
+ 8bMEa6haswFcw+X5izbd3AL6wOWU+52bWYusEHvRPwDonki1mj1qrVq1Z2Tevea/SpEFbSlgljk
+ yeoR1ZBzrZh2uYyWjkUXXf39puYvKOJ51r2vSsM5JQ5XBOaFC3iybAYQZuBC+0tJJArCirJxSpY
+ DdGra6mLVGpj/qr+cwR2VLPH0BbVm8GhpQVl7LpmjzCp/jWXciYgUsbUkQe5S2gEwKHy1f8ugn8
+ TndgKtTjCBOmK8GNlJFL8B9DC/FPgB2HOU+8smh85NQ92R3QKnYxY79pf2Ngb8XG7UoBvI3r8Tx
+ Kr7An+CkRlx1I0PJWP5olLRO/+Fze0P+etMnPIL8+i9aEctws44Y6ARbu95MhP4fhfg==
+X-Google-Smtp-Source: AGHT+IE1jAqgS7CtkNBH/6UTv0zr6oij6L7GbulgJbk1xIvojUh2g2IoZkhWdq3raTrK1yFp8CzsOQ==
+X-Received: by 2002:a05:6808:f07:b0:438:237f:dab7 with SMTP id
+ 5614622812f47-43b8d86ef56mr8457531b6e.6.1758047221671; 
+ Tue, 16 Sep 2025 11:27:01 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43b82abd2d5sm3392308b6e.26.2025.09.16.11.26.59
+ 5614622812f47-43b82abd2d5sm3392308b6e.26.2025.09.16.11.27.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 11:26:59 -0700 (PDT)
+ Tue, 16 Sep 2025 11:27:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
 Cc: vigneshr@ti.com
-In-Reply-To: <20250902045708.1328550-1-anshuld@ti.com>
-References: <20250902045708.1328550-1-anshuld@ti.com>
-Subject: Re: [PATCH v1] board: ti: common: Kconfig: add CMD_MEMINFO
-Message-Id: <175804721901.614326.9430956043611439220.b4-ty@konsulko.com>
-Date: Tue, 16 Sep 2025 12:26:59 -0600
+In-Reply-To: <20250903111704.530700-1-anshuld@ti.com>
+References: <20250903111704.530700-1-anshuld@ti.com>
+Subject: Re: [PATCH v1] mach-k3: fix reading size and addr from fdt on R5
+Message-Id: <175804722041.614326.10024295791263118169.b4-ty@konsulko.com>
+Date: Tue, 16 Sep 2025 12:27:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,18 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 02 Sep 2025 10:27:07 +0530, Anshul Dalal wrote:
+On Wed, 03 Sep 2025 16:47:02 +0530, Anshul Dalal wrote:
 
-> Add CMD_MEMINFO and CMD_MEMINFO_MAP to list of configs implied by
-> TI_COMMON_CMD_OPTIONS. This allows users to easily view the memory
-> configuration and the memory maps at runtime.
+> fdtdec_get_addr_size uses architecture dependent datatypes which causes
+> the 32-bit R5 to fail when reading the 64-bit size and addr fields of
+> reg nodes from the fdt.
 > 
+> Therefore change it to a common api for both 64 and 32 bit platforms to
+> allow for fdt fixups from R5.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] board: ti: common: Kconfig: add CMD_MEMINFO
-      commit: 83bb1c438486a03184795b0dfa970271496b24bf
+[1/1] mach-k3: fix reading size and addr from fdt on R5
+      commit: 7aa5271def6ba16ff4426aa164b7bb743673b3c3
 -- 
 Tom
 
