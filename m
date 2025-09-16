@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F37CCAC598
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:59:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF1BCCAC598
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:59:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C13283321;
-	Tue, 16 Sep 2025 12:59:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6588C8331F;
+	Tue, 16 Sep 2025 12:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RtNeKQKD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h72e21Oh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65D75832F0; Tue, 16 Sep 2025 12:59:14 +0200 (CEST)
+ id 5ED40834D4; Tue, 16 Sep 2025 12:59:16 +0200 (CEST)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40B56803CC
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:59:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 421C8832DA
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:59:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAx7JF1258835;
- Tue, 16 Sep 2025 05:59:07 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAx93q1258839;
+ Tue, 16 Sep 2025 05:59:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758020347;
- bh=hvsTdZCytJVlTJYonPusk1C6djElQ2A/otJiTFr6LkM=;
+ s=ti-com-17Q1; t=1758020349;
+ bh=XJAjOy96kgOeKxc8MDpMeeiJy4GnUQ1hUtzb1w6XBIQ=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=RtNeKQKDSqBzkAoHUW9uXRnza+dPWN6XFn0KPK/BiYYZbBg0+zEui/eM1D2j61H0m
- nfmgB0MrqMvAy5jfZXk2nNIIvOO1IjBeqQubRDN8wbAj9+o6jflBvGMCwcVjrwPylm
- s8+MwkWTP+G9quzp8EFNXB1XTiAhe+rBazkC78sc=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAx7oJ663990
+ b=h72e21Ohh/kEnz1uElpr5MQjGMBLWqiY+ULy0Z4Wy07ZgGKn1nOz6nyZWfVcrOgUt
+ cKBgN69nUdpMrRGJvNlyMKx5M01YtqeabG40ebyRmVnzW1rttLOhol4dj2HOrqZbEa
+ +CAx5fqDK+u9gmBlgxquZJ7DQs0mgk5VtcQGxog8=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAx9mY471906
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 05:59:07 -0500
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 05:59:09 -0500
+Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 05:59:07 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 05:59:09 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 05:59:07 -0500
+ Transport; Tue, 16 Sep 2025 05:59:09 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAx5Er1203029;
- Tue, 16 Sep 2025 05:59:06 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAx7Y11203052;
+ Tue, 16 Sep 2025 05:59:08 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,9 +56,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v1 4/8] spl: ubi: refactor spl_ubi_load_image for falcon mode
-Date: Tue, 16 Sep 2025 16:28:52 +0530
-Message-ID: <20250916105857.163951-5-anshuld@ti.com>
+Subject: [PATCH v1 5/8] spl: spi: refactor spl_spi_load_image for falcon mode
+Date: Tue, 16 Sep 2025 16:28:53 +0530
+Message-ID: <20250916105857.163951-6-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250916105857.163951-1-anshuld@ti.com>
 References: <20250916105857.163951-1-anshuld@ti.com>
@@ -83,79 +83,65 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This patch moves the falcon mode handling logic out of
-spl_ubi_load_image to spl_ubi_load_image_os, this allows for cleaner
+spl_spi_load_image to spl_spi_load_image_os, this allows for cleaner
 handling for fallback to U-Boot in case falcon mode fails.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_ubi.c | 44 ++++++++++++++++++++++++++++++++------------
- 1 file changed, 32 insertions(+), 12 deletions(-)
+ common/spl/spl_spi.c | 31 ++++++++++++++++++++++++-------
+ 1 file changed, 24 insertions(+), 7 deletions(-)
 
-diff --git a/common/spl/spl_ubi.c b/common/spl/spl_ubi.c
-index a8d3f43b452..09b9bbc5c47 100644
---- a/common/spl/spl_ubi.c
-+++ b/common/spl/spl_ubi.c
-@@ -11,6 +11,32 @@
- #include <ubispl.h>
- #include <spl.h>
+diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
+index c2b188371c2..2a6098a4dc3 100644
+--- a/common/spl/spl_spi.c
++++ b/common/spl/spl_spi.c
+@@ -49,6 +49,25 @@ u32 __weak spl_spi_boot_cs(void)
+ 	return CONFIG_SF_DEFAULT_CS;
+ }
  
 +#if CONFIG_IS_ENABLED(OS_BOOT)
-+int spl_ubi_load_image_os(struct spl_image_info *spl_image,
-+			  struct spl_boot_device *bootdev,
-+			  struct ubispl_info *info)
++static int spl_spi_load_image_os(struct spl_image_info *spl_image,
++				 struct spl_boot_device *bootdev,
++				 struct spi_flash *flash,
++				 struct spl_load_info *load)
 +{
-+	struct legacy_img_hdr *header;
-+	struct ubispl_load volumes[2];
-+	int err;
++	int err = spl_load(spl_image, bootdev, load, 0,
++			   CONFIG_SYS_SPI_KERNEL_OFFS);
 +
-+	volumes[0].vol_id = CONFIG_SPL_UBI_LOAD_KERNEL_ID;
-+	volumes[0].load_addr = (void *)CONFIG_SYS_LOAD_ADDR;
-+	volumes[1].vol_id = CONFIG_SPL_UBI_LOAD_ARGS_ID;
-+	volumes[1].load_addr = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
-+
-+	err = ubispl_load_volumes(info, volumes, 2);
 +	if (err)
 +		return err;
 +
-+	header = (struct legacy_img_hdr *)volumes[0].load_addr;
-+	spl_parse_image_header(spl_image, bootdev, header);
-+	puts("Linux loaded.\n");
-+
-+	return 0;
++	/* Read device tree. */
++	return spi_flash_read(flash, CONFIG_SYS_SPI_ARGS_OFFS,
++			      CONFIG_SYS_SPI_ARGS_SIZE,
++			      (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
 +}
 +#endif
 +
- int spl_ubi_load_image(struct spl_image_info *spl_image,
- 		       struct spl_boot_device *bootdev)
- {
-@@ -46,21 +72,15 @@ int spl_ubi_load_image(struct spl_image_info *spl_image,
+ /*
+  * The main entry for SPI booting. It's necessary that SDRAM is already
+  * configured and available since this code loads the main U-Boot image
+@@ -81,15 +100,13 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
  
  #if CONFIG_IS_ENABLED(OS_BOOT)
  	if (!spl_start_uboot()) {
--		volumes[0].vol_id = CONFIG_SPL_UBI_LOAD_KERNEL_ID;
--		volumes[0].load_addr = (void *)CONFIG_SYS_LOAD_ADDR;
--		volumes[1].vol_id = CONFIG_SPL_UBI_LOAD_ARGS_ID;
--		volumes[1].load_addr = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
-+		ret = spl_ubi_load_image_os(spl_image, bootdev, &info);
-+		if (!ret)
-+			return 0;
+-		int err = spl_load(spl_image, bootdev, &load, 0,
+-				   CONFIG_SYS_SPI_KERNEL_OFFS);
++		err = spl_spi_load_image_os(spl_image, bootdev, flash, &load);
  
--		ret = ubispl_load_volumes(&info, volumes, 2);
--		if (!ret) {
--			header = (struct legacy_img_hdr *)volumes[0].load_addr;
--			spl_parse_image_header(spl_image, bootdev, header);
--			puts("Linux loaded.\n");
--			goto out;
--		}
--		puts("Loading Linux failed, falling back to U-Boot.\n");
-+		printf("%s: Failed in falcon boot: %d", __func__, ret);
-+		printf("Fallback to U-Boot\n");
+ 		if (!err)
+-			/* Read device tree. */
+-			return spi_flash_read(
+-				flash, CONFIG_SYS_SPI_ARGS_OFFS,
+-				CONFIG_SYS_SPI_ARGS_SIZE,
+-				(void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
++			return 0;
++
++		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
++		       __func__, err);
  	}
  #endif
-+
- 	header = spl_get_load_buffer(-sizeof(*header), sizeof(header));
- #ifdef CONFIG_SPL_UBI_LOAD_BY_VOLNAME
- 	volumes[0].vol_id = -1;
+ 
 -- 
 2.51.0
 
