@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CCDCAC599
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 11:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC6BCAC599
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 11:22:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E5A9803CC;
-	Tue, 16 Sep 2025 12:59:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BDD9283071;
+	Tue, 16 Sep 2025 13:22:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AvIANtvE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JjQO7tI2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53B4B83542; Tue, 16 Sep 2025 12:59:22 +0200 (CEST)
+ id 61E4F8309A; Tue, 16 Sep 2025 13:22:33 +0200 (CEST)
 Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F48C83526
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:59:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB71E80325
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 13:22:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAxFKX1258875;
- Tue, 16 Sep 2025 05:59:15 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GBMJJl1262737;
+ Tue, 16 Sep 2025 06:22:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758020355;
- bh=6wAK9InP+9nlxANpBF6pZKwVWl63ol1gX6mGuv63iPw=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=AvIANtvE7qRnA+NxmoDG6buj9SsfqCfy2hrXAN39pZbv/VZa+GtRXe3vb5TaJfk4D
- Y7PeurQGqXZ0GvW9Cm8/MIW68zC+aHEjy30fsBjbaHarjOCKkU3shCuR8GvfX+t+ze
- DljM+Pun4+DBOP42w8S6+xjDVgOySHsk0YPd3JWA=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAxFgY664084
+ s=ti-com-17Q1; t=1758021739;
+ bh=0qmZxbLTT7NYI4YtL6tOpM7AIVNURaU25JciLPimFwM=;
+ h=From:To:CC:Subject:Date;
+ b=JjQO7tI2RrXbvUrlMcTHsjF8C+23VzyQjDKNeRWtZSiWLZRn2gTMn2qsZNAV7+4Ib
+ e2h6bNEulgnKudwzHX7lxYMpoZ5wP7R95bCFMhZ5vuOMcKOOjhm52hbJdxMWm7XTJz
+ I/zf4XtsXf/LG7yyK1wguagyPaByfk+8+GMgDvFI=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GBMJOE483750
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 05:59:15 -0500
-Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 06:22:19 -0500
+Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 05:59:15 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 06:22:19 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
+ (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 05:59:15 -0500
+ Transport; Tue, 16 Sep 2025 06:22:19 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAxDkM1203262;
- Tue, 16 Sep 2025 05:59:14 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GBMIpY1529678;
+ Tue, 16 Sep 2025 06:22:18 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
- <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
- <hl@rock-chips.com>, <tim@feathertop.org>,
- <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v1 8/8] spl: falcon: disable fallback to U-Boot on failure
-Date: Tue, 16 Sep 2025 16:28:56 +0530
-Message-ID: <20250916105857.163951-9-anshuld@ti.com>
+CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
+ <patrice.chotard@foss.st.com>, <patrick.delaunay@foss.st.com>
+Subject: [PATCH -next v1] arm: armv8: remove redundant definition of mmu_status
+Date: Tue, 16 Sep 2025 16:52:05 +0530
+Message-ID: <20250916112205.238811-1-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250916105857.163951-1-anshuld@ti.com>
-References: <20250916105857.163951-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -82,107 +82,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of falling back to the standard U-Boot boot flow, we should just
-halt boot if the expected boot flow in falcon mode fails.
+mmu_status is used in io memcpy functions to prevent accesses to non
+8-byte aligned addresses when the mmu is disabled. Though there is a
+redundant definition enabled when icaches is turned off by setting
+SYS_ICACHE_OFF.
 
-This prevents a malicious actor from accessing U-Boot proper if they can
-cause a boot failure on falcon mode.
+This patch removes the redundant definition, allowing mmu_status to
+properly report the status regardless of config settings. This shouldn't
+be a problem since access to non 8-byte aligned data can be done
+irrespective of icache state.
+
+Fixes: 268f6ac1f95c ("arm64: Update memcpy_{from, to}io() helpers")
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_mmc.c  | 4 ++++
- common/spl/spl_nand.c | 6 ++++--
- common/spl/spl_nor.c  | 6 ++++--
- common/spl/spl_spi.c  | 6 ++++--
- common/spl/spl_ubi.c  | 2 ++
- 5 files changed, 18 insertions(+), 6 deletions(-)
+ arch/arm/cpu/armv8/cache_v8.c | 15 +++++----------
+ 1 file changed, 5 insertions(+), 10 deletions(-)
 
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index c5585d8e0d2..d0dad6ea8fd 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -272,6 +272,8 @@ static int spl_mmc_do_fs_boot(struct spl_image_info *spl_image,
- 			return 0;
- 		printf("%s, Failed to load falcon payload: %d\n", __func__,
- 		       ret);
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return ret;
- 		printf("Fallback to U-Boot\n");
- 	}
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 1dcb6007475..74814601483 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -1184,11 +1184,6 @@ int icache_status(void)
+ 	return (get_sctlr() & CR_I) != 0;
+ }
  
-@@ -412,6 +414,8 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- 			ret = mmc_load_image_raw_os(spl_image, bootdev, mmc);
- 			if (!ret)
- 				return 0;
-+			if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+				return ret;
- 		}
+-int mmu_status(void)
+-{
+-	return (get_sctlr() & CR_M) != 0;
+-}
+-
+ void invalidate_icache_all(void)
+ {
+ 	__asm_invalidate_icache_all();
+@@ -1210,17 +1205,17 @@ int icache_status(void)
+ 	return 0;
+ }
  
- 		raw_sect = spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
-diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-index f37baefb372..93ef2d1c02c 100644
---- a/common/spl/spl_nand.c
-+++ b/common/spl/spl_nand.c
-@@ -138,8 +138,10 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
- 		err = spl_nand_load_image_os(spl_image, bootdev);
- 		if (!err)
- 			return 0;
--		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
--		       __func__, err);
-+		printf("%s: Failed in falcon boot: %d", __func__, err);
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return err;
-+		printf("Fallback to U-Boot\n");
- 	}
- #endif
+-int mmu_status(void)
+-{
+-	return 0;
+-}
+-
+ void invalidate_icache_all(void)
+ {
+ }
  
-diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
-index 9c037bd62eb..6f9ff91bef7 100644
---- a/common/spl/spl_nor.c
-+++ b/common/spl/spl_nor.c
-@@ -95,8 +95,10 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- 		if (!err)
- 			return 0;
+ #endif	/* !CONFIG_IS_ENABLED(SYS_ICACHE_OFF) */
  
--		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
--		       __func__, err);
-+		printf("%s: Failed in falcon boot: %d", __func__, err);
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return err;
-+		printf("Fallback to U-Boot\n");
- 	}
- #endif
- 
-diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
-index 2a6098a4dc3..cbc864809fe 100644
---- a/common/spl/spl_spi.c
-+++ b/common/spl/spl_spi.c
-@@ -105,8 +105,10 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 		if (!err)
- 			return 0;
- 
--		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
--		       __func__, err);
-+		printf("%s: Failed in falcon boot: %d", __func__, err);
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return err;
-+		printf("Fallback to U-Boot\n");
- 	}
- #endif
- 
-diff --git a/common/spl/spl_ubi.c b/common/spl/spl_ubi.c
-index 09b9bbc5c47..3c6f80de7d9 100644
---- a/common/spl/spl_ubi.c
-+++ b/common/spl/spl_ubi.c
-@@ -77,6 +77,8 @@ int spl_ubi_load_image(struct spl_image_info *spl_image,
- 			return 0;
- 
- 		printf("%s: Failed in falcon boot: %d", __func__, ret);
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return ret;
- 		printf("Fallback to U-Boot\n");
- 	}
- #endif
++int mmu_status(void)
++{
++	return (get_sctlr() & CR_M) != 0;
++}
++
+ /*
+  * Enable dCache & iCache, whether cache is actually enabled
+  * depend on CONFIG_SYS_DCACHE_OFF and CONFIG_SYS_ICACHE_OFF
 -- 
 2.51.0
 
