@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AD4ACAC598
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 16:15:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FF58CAC598
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 16:15:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F28283321;
-	Tue, 16 Sep 2025 18:14:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 268BD8338C;
+	Tue, 16 Sep 2025 18:15:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="McvRG8pU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jqpodX9/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BADE483323; Tue, 16 Sep 2025 18:14:52 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 59896832DA; Tue, 16 Sep 2025 18:15:00 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E4AF83321
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 18:14:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 083F08344E
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 18:14:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-423394b393eso91905ab.1
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 09:14:50 -0700 (PDT)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-88f49be4c21so140167539f.1
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 09:14:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758039288; x=1758644088; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1758039296; x=1758644096; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Vn2dZ4Ncyruef5vEN0NZpmbNju8b5s7fZhmLPXHdhv0=;
- b=McvRG8pUMAym1rUC5iUXYU8n61Om7PSmxP5nm/CRv7t7fSWS56IGMOd2UVCnSgsI8l
- P/wu53x0gK7hEvEkgIAM8mhcW22tZB8/y+jZKrHDUOqXO23wP9lsOMDVCFmYohdyIoCT
- mw/2P1DWB6uYsXXdCw0dgYTjNNr7E80VB+2sPvx2rZAgtjFe9JDmTqQqWTDxsipvOD3R
- x4K4XvQinAw/453Xipj7RRa+F+6OlPTdlpssI3RxWxwuCKDdIL1ukPf3fkGwu1CQSxAR
- YJ0hhUiHrKrCA7+dA03GZ+vkVuxGG8hGZVXo7829sUP1deC/vm9G51sICRjR6WOCjyuY
- Xrxw==
+ bh=WjHC9WM1SimkVEI4xSMMwoMTklyKoj42anJR/dzOfbg=;
+ b=jqpodX9/ezxAqrwGqJEW4uYZbGvFJCE0gC1bcMtEFO3pOoCYkSNPYskyJlWLambMT3
+ OyDlmSaslfvtyO2QXTrCYvqSs37LXcYlccIOPt+RVg1ZcpcuG1VqyWVlGGyKX5EVBRms
+ P01OMGStXR9+WStNzrq1U3q5svsmm7jPJvDVYVxDSHfVsF7YxNb94RYdX8bTvMFeNQzO
+ SHvZjed2skfrWc9mPzb+7jXPJTTv9xFNQkF/S4ddG3dZjUZfN716+rZxqoMtkU+nYXbM
+ 9cvoLJWVc58MXRsRO96JiuBMevGuMasvyIMoirm3xyNXrNvzvroqwf1Jx0OykRSsI9KE
+ EWDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758039288; x=1758644088;
+ d=1e100.net; s=20230601; t=1758039296; x=1758644096;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Vn2dZ4Ncyruef5vEN0NZpmbNju8b5s7fZhmLPXHdhv0=;
- b=ulkMOKBzLyn+CaWj52mgoZ87HSDgfnwVNISX/7FDlCYFeuhaE+RPkRtyx9Xk59NfMO
- y9ItaGGvevuV20KDB+X+XRuw9n+cAYjE+3mGJ7qQvnt9cHDDBclEtcWTMx0UUMdaZPP6
- EyN9yFUVebAQw7SlJkFhwFZnFegkcZkgLZy1aii3ly6VDTo7lk40cNZKwB1fhny6qhXe
- yic7+ZfvkgMeTWvSFisivU5Bf1TyXDLisDjnymmxcpieri6cjZpEzDFTSu1IW2nA5QJ8
- 1ThzR5UIItZYfNlwN6YhmV/ybwKJN++0vFXigbKf96iFFydTU/gpvcW/4WKHClsL4UMB
- E07A==
-X-Gm-Message-State: AOJu0YwuJGsyrqdkwkWO7qij7aOVdaoiD2cqEFQM0l/Q4jKoIAnXRBAz
- +kgXv7Bs7UliOe3OmHFXmrzrPf0uimrrP89iBWlR6s83bO3cCo1S5+3Dtbgjg3c+EHNPjLti+Vh
- MhH6M
-X-Gm-Gg: ASbGncty5bs3ovVeNg6flCCdX+T/KTgfIPWLsMhLPuRu/Ly3z7suibhhfZ3433sB87e
- yrMM/S1s0XyUPuAXLytzFTZVZh1hv8fM+qHDTFVO7W5+FZVUNBie0YUhcph4GVk3oJ8N7XdhMIJ
- g76oetmMlgkZ9KY1ZmD1n9soPsvi4gOH9l02h2lpKrCi+1f4yqOFsGZg8S17fvaQCvOXrFSy2rS
- KN2HIROR7ziedrejzCNamiOAj9RQJXegNCZZ4n9YDMl3aiT1wkV2Hb+Sp5vOGZPPZz+/PgzCnT7
- B7BH3cX9Di5YGrb8KxDTE8KJ349yEcotLCURTm3C0qUwwIAiE5MK+SncGo+lSj53wQ8bgz0hBbf
- 1gr/1bO9NrEeWloa2HCyyW7kSa4d0IQe6EHgVRXXCUUqxBOeGgjMBrvRJinn0M5gXrEp4fjr7Zy
- GfuzK8JGmtxg==
-X-Google-Smtp-Source: AGHT+IHbg/upbI1veJiG6R1tnAOAqzBKxjhFUEHNBdW7rdY5yUm+QGxaebN3pIi9wA06HCWG3pbx2A==
-X-Received: by 2002:a92:cdaa:0:b0:423:2666:4687 with SMTP id
- e9e14a558f8ab-424114a7167mr24697745ab.15.1758039288496; 
- Tue, 16 Sep 2025 09:14:48 -0700 (PDT)
+ bh=WjHC9WM1SimkVEI4xSMMwoMTklyKoj42anJR/dzOfbg=;
+ b=SK14fN4y5Eny0jjM2blA5AKae3KhQgOzh5D6hQbPyYlt/oeLOZjX649D4xlToe4dSk
+ MrGh8OTFLmqjelJA81S5xcjW1hMIAEYqds8/JBsAM7Ul8qWdcMclyuhuASspu8z48wNb
+ jvYfKjzVUWIV3CjbR4S6q5CIvo/XQBJ7jPtFAAjaIKbC5xLua9V3Uf+uqIbuAiWUU3iL
+ zG71BpoJw/5JgCF7adyoh49lb+oFQ/ZzGM87hBeeptDX4mdGsVPbzJkiEw2owUy6RJx1
+ pqeAsUTYxmxqXO/18fbKellvxd7G2FbHbCA9OxQckByuUNM3Ce6xaFAd3aOnFldyxcbE
+ t5AQ==
+X-Gm-Message-State: AOJu0YwfAhPoPPfMPDC2MOjae4R/OVOOEmOEh32FAVXenkh6GzvTkZPs
+ SaThn+H6/sRV5dcjEAAZf9JZ8BIvQAhVEK7EMgSGMEfeymbB5hoxwK664i0MlQrl6kZrx2ibJ5e
+ Z6ipm
+X-Gm-Gg: ASbGncvFwtX2XMLK6j6i9TGyZ/tedfc2sUqIQpzi26LyokGLaLt/lIuSd7y9WoNjXWN
+ bt2VliOb47suZnqeatfxAevv2zKERdwWaE8PjnkBeSQBm1RwLNQhNUn1M4idfFqRx1infeH1aRi
+ eFSFH2VZWLAPDu91mSbc+45UbUb+FuEP5OtiUPfqqvQfBU6rNdM+VFD2liKVngOUDKe/9plCz1n
+ gDE0ig0rqOxTq+z8iiD2VlPJXIfap1Fh62+nWFUV7MeIR5yV3QQU2yuCZ60VNJ2PQwtRBzEXK/v
+ WVnlQchR+C87rrwoesIuryT8y8P+wyY2NC5ieEep1G8pJo07IYMHu2NHEYnV5kK4z4Vd3WywGpn
+ lyqpesYmxRWsH1lKqkwkpg427Uz69IJvgqS/4/2SGdYHFaGN79tkaNo86m4gLtw6q61UwaTu/1i
+ 3XyMiw4+SAZg==
+X-Google-Smtp-Source: AGHT+IGDv5Dvv8o7f2Tw79dsQg9FMT+xtgQxk9tyiFy67EafRRvMnCPFYB6TZFllvxy/M7XwQjGziw==
+X-Received: by 2002:a05:6e02:1a07:b0:41c:473a:aa30 with SMTP id
+ e9e14a558f8ab-420a417436dmr148640695ab.22.1758039296464; 
+ Tue, 16 Sep 2025 09:14:56 -0700 (PDT)
 Received: from ubuntu.localdomain (209-227-169-220.cpe.distributel.net.
  [209.227.169.220]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-41f0ea1bdaasm68433615ab.39.2025.09.16.09.14.47
+ e9e14a558f8ab-41f0ea1bdaasm68433615ab.39.2025.09.16.09.14.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 09:14:47 -0700 (PDT)
+ Tue, 16 Sep 2025 09:14:56 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -80,11 +80,10 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH 2/5] ci: add post-buildman script to build TF-A
-Date: Tue, 16 Sep 2025 09:14:18 -0700
-Message-Id: <20250916161426.32259-3-raymond.mao@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 3/5] pytest: add test script to validate Firmware Handoff
+Date: Tue, 16 Sep 2025 09:14:19 -0700
+Message-Id: <20250916161426.32259-4-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250916161426.32259-1-raymond.mao@linaro.org>
 References: <20250916161426.32259-1-raymond.mao@linaro.org>
@@ -106,136 +105,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a script which is running after buildman to fetch TF-A (v2.13.0)
-with MbedTLS (v3.6) and build 'flash.bin', linking built U-Boot as
-BL33 and OP-TEE as BL32, with both Firmware Handoff and Measured Boot
-enabled.
+Add test cases to validate FDT and TPM eventlog handoff from TF-A
+and OP-TEE via bloblist.
+
+For FDT, the nodes 'reserved-memory' and 'firmware' appended by
+OP-TEE indicates a successful handoff.
+
+For TPM eventlog, the events 'SECURE_RT_EL3', 'SECURE_RT_EL1_OPTEE'
+and 'SECURE_RT_EL1_OPTEE_EXTRA1' created by TF-A indicates a
+successful handoff.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- .azure-pipelines.yml               |  1 +
- .gitlab-ci.yml                     |  1 +
- tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++++++++++++++
- 3 files changed, 89 insertions(+)
- create mode 100755 tools/post_build_tfa_fw_handoff.sh
+ test/py/tests/test_fw_handoff.py | 94 ++++++++++++++++++++++++++++++++
+ 1 file changed, 94 insertions(+)
+ create mode 100644 test/py/tests/test_fw_handoff.py
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 8209d2b329c..eb547606ddd 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -290,6 +290,7 @@ stages:
-           cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_riscv64.efi
-           cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm64.efi
-           cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm.efi
-+          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TRAVIS_BUILD_DIR} \${TEST_PY_BD} \${TEST_PY_ID}
-           # create sdcard / spi-nor images for sifive unleashed using genimage
-           if [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
-               mkdir -p root;
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 85401d3e09b..61e4af96c9a 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -79,6 +79,7 @@ stages:
-     - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_riscv64.efi
-     - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm64.efi
-     - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm.efi
-+    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} ${TEST_PY_BD} ${TEST_PY_ID}
-     # create sdcard / spi-nor images for sifive unleashed using genimage
-     - if [[ "${TEST_PY_BD}" == "sifive_unleashed" ]]; then
-         mkdir -p root;
-diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/post_build_tfa_fw_handoff.sh
-new file mode 100755
-index 00000000000..f876db593ba
+diff --git a/test/py/tests/test_fw_handoff.py b/test/py/tests/test_fw_handoff.py
+new file mode 100644
+index 00000000000..4cdf51a4375
 --- /dev/null
-+++ b/tools/post_build_tfa_fw_handoff.sh
-@@ -0,0 +1,87 @@
-+#!/bin/bash
++++ b/test/py/tests/test_fw_handoff.py
+@@ -0,0 +1,94 @@
 +# SPDX-License-Identifier: GPL-2.0+
 +#
 +# Copyright (c) 2025 Linaro Limited
 +# Author: Raymond Mao <raymond.mao@linaro.org>
 +#
-+# CI Post-buildman script for building TF-A 'flash.bin' with Measured
-+# Boot and Firmware Handoff enabled.
-+#
-+# Usage: from the top level U-Boot source tree, run:
-+# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} \
-+#     ${TEST_PY_BD} ${TEST_PY_ID}
-+#
-+# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated and copied
-+# to /tmp.
++# Validate Firmware Handoff from TF-A and OP-TEE
 +
-+set -e
++import pytest
++import re
 +
-+BUILDMAN_OUT_DIR=$(realpath "$1")
-+BOARD=$2
-+ID=$4
-+echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, ID: $ID"
++def _norm_ws(s: str) -> str:
++    """Normalize whitespace for robust comparisons."""
++    return re.sub(r"\s+", " ", s).strip()
 +
-+# U-Boot binary generated by buildman
-+BL33_BIN=${BUILDMAN_OUT_DIR}/u-boot.bin
-+# Path to the toolchain file that generated by buildman
-+TOOLCHAIN_INFO_FILE=${BUILDMAN_OUT_DIR}/toolchain
++@pytest.mark.buildconfigspec("bloblist")
++@pytest.mark.buildconfigspec("cmd_bloblist")
++@pytest.mark.buildconfigspec("of_control")
++@pytest.mark.buildconfigspec("cmd_fdt")
++def test_fw_handoff_dt(ubman):
++    """Validate FDT handoff via bloblist."""
 +
-+MBEDTLS_DIR=/tmp/mbedtls
-+TFA_DIR=/tmp/tfa-fh
-+OPTEE_DIR=/tmp/optee_os
-+OPTEE_OUT_DIR=${OPTEE_DIR}/out/arm-plat-vexpress/core
-+BL32_BIN=${OPTEE_OUT_DIR}/tee-header_v2.bin
-+BL32_EXTRA1_BIN=${OPTEE_OUT_DIR}/tee-pager_v2.bin
-+BL32_EXTRA2_BIN=${OPTEE_OUT_DIR}/tee-pageable_v2.bin
++    if (ubman.config.board_type != 'qemu_arm64' or
++        ubman.config.board_identity != 'fw_handoff_tfa_optee'):
++        pytest.skip("Test only for qemu_arm64 with ID fw_handoff_tfa_optee")
 +
-+if [[ "$BOARD" != "qemu_arm64" || "$ID" != "fw_handoff_tfa_optee" ]]; then
-+    exit 0
-+fi
++    bloblist = ubman.run_command("bloblist list")
++    blob_fdt = re.search(r"^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+1\s+Control FDT\s*$",
++                         bloblist, re.MULTILINE)
++    assert blob_fdt, "Control FDT entry not found in bloblist"
 +
-+if [ -f "$TOOLCHAIN_INFO_FILE" ]; then
-+  # Extract path and cross prefix of the toolchain
-+  TOOLCHAIN_PATH=$(grep '^path ' "$TOOLCHAIN_INFO_FILE" | cut -d' ' -f2)
-+  TOOLCHAIN_PREFIX=$(grep '^cross ' "$TOOLCHAIN_INFO_FILE" | cut -d' ' -f2)
-+  TOOLCHAIN_NAME="${TOOLCHAIN_PATH}/${TOOLCHAIN_PREFIX}"
-+  echo "Extracted toolchain: $TOOLCHAIN_NAME"
-+else
-+  echo "ERROR: toolchain info file not found!"
-+  exit 1
-+fi
++    blob_fdt_addr = int(blob_fdt.group(1), 16)
++    ubman.run_command(f"fdt addr {blob_fdt_addr:x}")
 +
-+# Set the same toolchain used by buildman for building
-+CROSS="CROSS_COMPILE=$TOOLCHAIN_NAME"
++    reserved_a = ubman.run_command("fdt print /reserved-memory")
++    firmware_a = ubman.run_command("fdt print /firmware")
 +
-+# Get TF-A (v2.13.0) and MbedTLS (v3.6)
-+git clone --depth=1 --branch mbedtls-3.6 https://github.com/ARMmbed/mbedtls.git ${MBEDTLS_DIR}
-+git clone --depth=1 --branch v2.13.0 https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git ${TFA_DIR}
++    fdt_addr_out = ubman.run_command("echo $fdt_addr")
++    fdt_addr_match = re.search(r"(?:0x)?([0-9a-fA-F]+)", fdt_addr_out)
++    assert fdt_addr_match, "Could not parse $fdt_addr"
 +
-+make -C ${TFA_DIR} \
-+  ${CROSS} \
-+  PLAT=qemu \
-+  BL33=${BL33_BIN} \
-+  BL32=${BL32_BIN} \
-+  BL32_EXTRA1=${BL32_EXTRA1_BIN} \
-+  BL32_EXTRA2=${BL32_EXTRA2_BIN} \
-+  BL32_RAM_LOCATION=tdram SPD=opteed \
-+  TRANSFER_LIST=1 E=0 \
-+  TRUSTED_BOARD_BOOT=1 \
-+  GENERATE_COT=1 \
-+  CREATE_KEYS=1 \
-+  DECRYPTION_SUPPORT=aes_gcm \
-+  ENCRYPT_BL31=1 \
-+  ENCRYPT_BL32=1 \
-+  ENABLE_STACK_PROTECTOR=strong \
-+  KEY_ALG=rsa \
-+  KEY_SIZE=4096 \
-+  MEASURED_BOOT=1 \
-+  EVENT_LOG_LEVEL=10 \
-+  KEY_ALG=rsa \
-+  MBOOT_EL_HASH_ALG=sha256 \
-+  MBEDTLS_DIR=${MBEDTLS_DIR} \
-+  all fip
++    fdt_addr = int(fdt_addr_match.group(1), 16)
++    ubman.run_command(f"fdt addr {fdt_addr:x}")
 +
-+TFA_OUT_DIR=${TFA_DIR}/build/qemu/release
-+dd if=${TFA_OUT_DIR}/bl1.bin of=${TFA_OUT_DIR}/flash.bin bs=4096 conv=notrunc
-+dd if=${TFA_OUT_DIR}/fip.bin of=${TFA_OUT_DIR}/flash.bin seek=64 bs=4096 conv=notrunc
-+cp ${TFA_OUT_DIR}/bl1.bin ${TFA_OUT_DIR}/fip.bin ${TFA_OUT_DIR}/flash.bin /tmp/
++    reserved_b = ubman.run_command("fdt print /reserved-memory")
++    firmware_b = ubman.run_command("fdt print /firmware")
++
++    # Normalize whitespace & compare
++    assert _norm_ws(reserved_a) == _norm_ws(reserved_b), \
++        "reserved-memory blocks differ between Control FDT and $fdt_addr FDT"
++    assert _norm_ws(firmware_a) == _norm_ws(firmware_b), \
++        "firmware blocks differ between Control FDT and $fdt_addr FDT"
++
++@pytest.mark.buildconfigspec("bloblist")
++@pytest.mark.buildconfigspec("cmd_bloblist")
++@pytest.mark.buildconfigspec("cmd_memory")
++def test_fw_handoff_eventlog(ubman):
++    """Validate TPM event log handoff via bloblist."""
++
++    if (ubman.config.board_type != 'qemu_arm64' or
++        ubman.config.board_identity != 'fw_handoff_tfa_optee'):
++        pytest.skip("Test only for qemu_arm64 with ID fw_handoff_tfa_optee")
++
++    # Get the address and size of eventlog from the bloblist
++    bloblist_output = ubman.run_command("bloblist list")
++    evt_addr = None
++    evt_size = None
++    for line in bloblist_output.splitlines():
++        if "TPM event log" in line:
++            parts = line.strip().split()
++            evt_addr = int(parts[0], 16)
++            evt_size = int(parts[1], 16)
++            break
++
++    assert evt_addr is not None and evt_size is not None, \
++        "TPM event log not found in bloblist"
++
++    # Read byte from memory and extract printable ASCII from each line
++    md_output = ubman.run_command(f"md.b {evt_addr:x} {evt_size}")
++    ascii_log = ""
++    for line in md_output.splitlines():
++        match = re.search(r'([0-9a-f]+:.*?)((?:\s[0-9a-f]{2}){1,16})\s+(.*)', line)
++        if match:
++            ascii_part = match.group(3).strip()
++            ascii_log += ascii_part
++
++    # The events created by TF-A are expected
++    expected_keywords = [
++        "SECURE_RT_EL3",
++        "SECURE_RT_EL1_OPTEE",
++        "SECURE_RT_EL1_OPTEE_EXTRA1"
++    ]
++
++    for keyword in expected_keywords:
++        assert keyword in ascii_log, f"Missing expected event: {keyword}"
 -- 
 2.25.1
 
