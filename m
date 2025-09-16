@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60471CAC598
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 22:07:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3050CAC592
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 22:35:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A18283323;
-	Wed, 17 Sep 2025 00:06:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 218C98319C;
+	Wed, 17 Sep 2025 00:35:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZzIAm1CZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="y5Hya0Sn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E70C4832F0; Wed, 17 Sep 2025 00:06:42 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 609CA83323
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 00:06:40 +0200 (CEST)
+ id 6235583280; Wed, 17 Sep 2025 00:35:39 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E7C6B8318E
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 00:35:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7459d088020so2833016a34.3
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 15:06:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758060399; x=1758665199; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=LDNMI/fL6WhLdjKW7tsDlz/vot/T5xIMHPrCfp9ZUIc=;
- b=ZzIAm1CZ6rN7y/wAOaRNYsBX+UFRh+2+anmZkbjhEfU/TTkIhxcVocL5tP1Eb67uzI
- bB/5DXkKnvZkHgDrDb1YsOULK/kOP4XozDjZfPNxCeskf+jdnwA6+7fnywr9pV+K48jx
- DC7pOVBLWS21PIxMLtQx84oldAlOOyaB7k7JI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758060399; x=1758665199;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LDNMI/fL6WhLdjKW7tsDlz/vot/T5xIMHPrCfp9ZUIc=;
- b=DnFysFKzRu3Azk5Prb3cfM9w4hhNWZPo+7N/ydnK4KjnJ8a4f9VOhRlcGDPZLUI0X6
- VpmHDFfHx7zV2tCw8JtmNK2+s2eVnK5Y73JKndN2Hzq7ADt58i4Gk1eF2rGs9UkiQA31
- IwNLFwusTyE+IJutJUtabzYxmaDmg4biLWqcuH4YiHPuOnMo4wJxT1Uv0sZRf1uz1mEI
- x5isATz+YEmAC+EpXN/HHlaSRzbJHRsizVeiV62Tx9z7ikHJqWaWRJHWK8TdctDaIyHy
- RS5AoCMGCTNSdPJtHLkgb1aiRs8rBgSQIAcu5oEfTINx115hXPDG5U6jjW1SNNWa9jZU
- qvBw==
-X-Gm-Message-State: AOJu0YztiyKouRoXDIDZbJtVmDZL8nAB7s1m8xzmmpaV72uaF/bpAWgT
- T8vqa+9yxtIAlqXo3Q4lyYSg6OygoR1STGdfXKIj5zQqn/zx3VMiUqKCKwXkOfVdCUlxjL+Njyk
- 2ed6svCg=
-X-Gm-Gg: ASbGncto07Rc6aLCvol9lSfUnE7Tca/3rvm4FJIe5rGS6+IIoePJbywVAV25560Gfao
- SzEdA8B485xE/ecxDwc4HkRp4uNUKXSvxpPEBhV8yo8Iu8fOFVl3ztdxuZmrBYlo4XMrwbPcJy3
- VgDUEqSmb068bjgsLA8+gD53Klyb01bHS37+cnMzROu7HQ+9LejQwugIbO8seg1kqLMvdvbHiPp
- La31F1og59ZG00y5fqRe/B8h6gh6DEdrjXyceo+TRrXC6FZGOLAoeuHMHPrZmwvpQG3GIQJ1yq/
- KjJ5wcD37kdgiTEkh81aGH0kPo97UHFyxGB7vyv+33DGEfOH5X2a6zYC135im0dvwWqdTiH945O
- PNMUETCWwE29k56s6BmoUD7myh793SJbo86EvYMuITMFGJlGqdS7A3vzQYF70QkIpBw==
-X-Google-Smtp-Source: AGHT+IHhyShofmDfk9952PcMHju5dqaWEYmaZ8x0cacCtGNyipmvP7V5IsQ0tzcd6PYCobIvwRurGA==
-X-Received: by 2002:a05:6808:2203:b0:439:ba45:96cd with SMTP id
- 5614622812f47-43b8d9d6854mr8147253b6e.31.1758060398830; 
- Tue, 16 Sep 2025 15:06:38 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43b82a72a48sm3500050b6e.20.2025.09.16.15.06.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 15:06:38 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Javier Tia <javier.tia@linaro.org>
-In-Reply-To: <20250905205349.127333-1-javier.tia@linaro.org>
-References: <20250905205349.127333-1-javier.tia@linaro.org>
-Subject: Re: [PATCH v3 0/4] Modernize U-Boot code formatting with clang-format
-Message-Id: <175806039811.649628.4300351470915606526.b4-ty@konsulko.com>
-Date: Tue, 16 Sep 2025 16:06:38 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GMZXBm1370216;
+ Tue, 16 Sep 2025 17:35:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758062133;
+ bh=UrU0ch+rIqNR7yoHYMgVPv5TdmrBdC73o+aDmCzixLs=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=y5Hya0SnTN03FtyhdGlWzVvutoopkzCOtsnLTFxNJ9MjeHEvzwBaCDgD9zCIUwq4p
+ 6BPTl2GMLqd2pJU9tWLqs/QzbWUfRvIM47XJJ3BkW18mWbO58zOG/85tFYcdCWILGs
+ JrQpSE4MUy9Q0ZX1GnmRCF0iyr/pRMbWS9ogpe/U=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GMZXW71052674
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 16 Sep 2025 17:35:33 -0500
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
+ Sep 2025 17:35:33 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 16 Sep 2025 17:35:33 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GMZXZF2010137;
+ Tue, 16 Sep 2025 17:35:33 -0500
+Message-ID: <c9b5d045-e719-40b3-acf4-cf887e0ce51b@ti.com>
+Date: Tue, 16 Sep 2025 17:35:33 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
+To: Andrew Davis <afd@ti.com>, Anshul Dalal <anshuld@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ "Vaishnav Achath" <vaishnav.a@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, "Moteen Shah" <m-shah@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20250910214514.1848847-1-jm@ti.com>
+ <20250910214514.1848847-2-jm@ti.com> <DCPPO8O0GIVD.1CWNDWAKDGVEC@ti.com>
+ <b61c7f41-6e1d-4d90-a8b8-e446bc32e3a6@ti.com>
+ <9c1b1344-b6fb-4ad4-aaec-1b187e1cd27d@ti.com>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <9c1b1344-b6fb-4ad4-aaec-1b187e1cd27d@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,32 +87,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 05 Sep 2025 14:53:43 -0600, Javier Tia wrote:
+Hi Andrew, Anshul,
 
-> This patch series modernizes U-Boot's code formatting infrastructure by
-> with current Linux kernel practices and providing a more robust and
-> comprehensive formatting solution.
+On 9/16/25 11:22 AM, Andrew Davis wrote:
+> On 9/11/25 9:59 AM, Judith Mendez wrote:
+>> Hi Anshul,
+>>
+>> On 9/11/25 12:11 AM, Anshul Dalal wrote:
+>>> On Thu Sep 11, 2025 at 3:15 AM IST, Judith Mendez wrote:
+>>>> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The 
+>>>> macros
+>>>> however, mix MMC device with the two bootmodes. Decouple the two types
+>>>> of macros so that bootmodes can be identified with:
+>>>> - BOOT_DEVICE_MMCSD
+>>>> - BOOT_DEVICE_EMMC
+>>>> according to devstat parsed boot mode values and on-board devices 
+>>>> can be
+>>>> identified with:
+>>>> - BOOT_DEVICE_MMC1
+>>>> - BOOT_DEVICE_MMC2
+>>>> - BOOT_DEVICE_MMC2_2
+>>>> according to arbitrary numbers mainly used to differentiate between 
+>>>> eMMC
+>>>> and SD card.
+>>>>
+>>>> Signed-off-by: Judith Mendez <jm@ti.com>
+>>>> ---
+>>>
+>>> I guess the confusion here is how we are calling boot modes from devstat
+>>> as well as the boot device as BOOT_DEVICE_*. Perhaps we should rename
+>>> the former to DEVSTAT_BOOT_MODE_* or something along those lines.
+>>>
+>>> That would make the difference between a boot *mode* and a boot *device*
+>>> more clear, DEVSTAT_BOOT_MODE_MMCSD or DEVSTATE_BOOT_MODE_EMMC would
+>>> distinguish between SD or EMMC boot modes with BOOT_DEVICE_MMC*
+>>> indicating the MMC port used.
+>>>
+>>> This would also allow use to only have the respective
+>>> DEVSTAT_BOOT_MODE_* defined in each soc's headers with BOOT_DEVICE_*
+>>> coming from arch/arm/include/asm/spl.h.
+>>
+>>
+>> Right, I guess if
+>>
+>> BOOT_DEVICE_MMCSD
+>> BOOT_DEVICE_EMMC
+>>
+>> Is still not clear enough, it would be a good idea to use:
+>> DEVSTAT_BOOT_MODE_MMCSD
+>> DEVSTAT_BOOT_MODE_EMMC
+>>
+>> Its only a real problem for MMC since we have the confusion with eMMC
+>> boot and MMCSD boot and we mix the two as a result in
+>> spl_mmc_boot_mode() and spl_boot_device().
+>>
+>>
+>> Its not really an issue for other boot modes to warrant renaming all the
+>> bootmodes, but I would like to make these macros as clear as possible in
+>> this series since I plan to refactor spl_mmc_boot_mode() next.
+>>
+>> So lets hear if any one else has a strong opinion on this before
+>> deciding on:
+>>
+>> DEVSTAT_BOOT_MODE_MMCSD
+>> DEVSTAT_BOOT_MODE_EMMC
 > 
-> Changes in v3:
+> This looks like the correct way to label these as they are the content
+> of the DEVSTAT register, this would also keep them from being confused
+> with the U-Boot internal definitions for BOOT_MODE_* and BOOT_DEVICE_*.
 > 
-> - Extend clang-format documentation with additional information. How to disable
->   formatting. Explain controversial aspects of introducing a new coding style.
->   Clarify the origin of the '.clang-format'. Add code formatting best
->   practices.
-> 
-> [...]
+> But you should do it for all the DEVSTAT register defines, not just
+> MMC and not just for Sitara, do it for all our K3 boards. It should
+> be a simple rename patch to start. Then you can work to detangle
+> "mode" from "device" for the MMC case as you are doing here.
 
-Applied to u-boot/next, thanks!
+I take it back, seems like this cannot be done, u-boot source requires
+all the macros:
+BOOT_DEVICE_SPI
+BOOT_DEVICE_RAM
+BOOT_DEVICE_UART
+etc...
 
-[1/4] clang-format: Add configuration file
-      commit: 29f6db89add2a5484ac478ba93d4574bb65ee158
-[2/4] tools: zynqmp_psu_init_minimize.sh: Switch to clang-format
-      commit: aa711ac815618bdc2c992c4b3869f6ef27b80202
-[3/4] Lindent: Remove wrapper around indent tool
-      commit: 1b5a8ff3fdf607656097761174abe4b7473b89db
-[4/4] doc: Update U-Boot coding style guide with clang-format usage
-      commit: a9d997685a400e1a08d60056177aefcd159bc2af
--- 
-Tom
+in order to even build.
+
+Simply renaming the macros to style:
+DEVSTAT_BOOT_MODE_SPI
+DEVSTAT_BOOT_MODE_RAM
+DEVSTAT_BOOT_MODE_UART
+
+will not work without creating a duplicate:
+#define BOOT_DEVICE_SPI		DEVSTAT_BOOT_MODE_SPI
+#define BOOT_DEVICE_RAM		DEVSTAT_BOOT_MODE_RAM
+#define BOOT_DEVICE_UART	DEVSTAT_BOOT_MODE_UART
+or similar logic
+
+So basically we would be doubling the size of all spl.h files.
+
+In reality there is only confusion with MMC device/bootmodes,
+we do not to rename every single boot modes/boot device since
+there is no real confusion there.
+
+~ Judith
 
 
+-
