@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45676CAC598
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 22:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6422CAC592
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 22:06:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D00F8329F;
-	Wed, 17 Sep 2025 00:06:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C29383236;
+	Wed, 17 Sep 2025 00:06:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nahRFqzy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iEma0K/p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EFF78329F; Wed, 17 Sep 2025 00:06:38 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 056928318E; Wed, 17 Sep 2025 00:06:41 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 649198319C
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 00:06:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CAE50800D7
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 00:06:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-750b77699b4so4649024a34.2
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 15:06:36 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-74526ca79c2so2356623a34.3
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 15:06:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758060395; x=1758665195; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758060396; x=1758665196; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4mD3yXKV19PBIJ5d3Wt35cEwBjnZz3kosufvNI5QQoI=;
- b=nahRFqzyDWiMjjIYxsnwj63tjjmaXCuqe58cEGbOVWj1FivM7hohkGxmKoUnNb6YHr
- 9wwIp9Cw/XSpwGeKx8jeHgqup+uMIjEieKtC3g4hYXWbCCvqczf2qcnP4tlvP7vLw/P/
- f7xyKnkaV3e2OvZwcD/iBbRlf5mG0BVta4Xv0=
+ bh=ypTJs+PER64bQrHSaPjE2Br/EAkAhRAvXPNfe+hovOo=;
+ b=iEma0K/pSgbpLtoj3NCLhdibjQ/dwILwOoaNzcjduqMpdNqyguu9soaBzfxVAaZhZU
+ HyBK2JL+6i4gNpZqbHwF+41YomzpafSb6badiHCDcvFglea5v4iWu0Q9tWppZdQ2agHY
+ h1YWOZgQvj5Mjh536cX4kavRFCUfGfRoNDWI4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758060395; x=1758665195;
+ d=1e100.net; s=20230601; t=1758060396; x=1758665196;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4mD3yXKV19PBIJ5d3Wt35cEwBjnZz3kosufvNI5QQoI=;
- b=NOqOBivSgWFCzWim66AYQvvUdaVte+glHED8s9Y5XHMlDiokHw1u0dOfskvz2ER5IG
- UELXZQ10Wl24X24InKYF99nOg7dKaY8bwNgzu04JvDj8F+k21paAPXJP2in59gSRyB4U
- NdcZwuQGH+mCaS3QA0yMpj3P0fFPj+GikB6AUv09qzx7zQ4cnDjPNtEBB9EB2t4tXZHM
- VRvxULRKbrUJkUBGXHUGnEW/xKk9JNW7YTdBtAm3jbdWcTKqKGiV5uP//pcGEVowx+T3
- Tq+8MY8ugWmoYhHihGp4N9jU6/YE3JejDKZvsbi+DBI9zktnn264rU00Y0hGPOEZcjYH
- qujA==
-X-Gm-Message-State: AOJu0YzRHiJ+bOguxtbkrNh2hN05asT30lR2DkWTUCHDdum6tdFjYHTz
- Ivs6mwy/kL4fgcMNMhvdxrnYg/I2yoLno+i9Ao9PGXT18dmqVzN3Ee4DKrTbz45uTHo=
-X-Gm-Gg: ASbGnctso8HRBgO06iEhb5SwXEOVbB29PFiGOAioUol8PzBaeBsT609XPOGioMqkMNV
- QSXHrmCWgByXWoeKOtlPDcdcIzjrU7ykkUjBc8j5L+rToK4hOMrVGTnuOtizvi8xpvlMZSjDjn1
- FUvh+v7kCW3fSbOgUD5fMNYXEXKQPz63+HVkoE55ua2U6hFrSIYIKBNvRGNUwsocZ7xbPWrv6SW
- HABlx6n/BKyHeNphn6/L+D0eGOa+YipW0ZgR8zfeiJRLsuCq37vI8G17ezsHgE5kWVZHKr2cEUm
- 13+HEN8Fu7p1Dn1QEviGA4wj/sA5Ga3dzizUrNaW2Az1njIfedEYqBG+m3mB0iV3OAgO+s6nwMo
- 1W1sMKBwWYdSUO70RrPLrp4MbQS4LdyBUpRKr3PMYYDiVswrBFqcucN7AM9GF1eLKfw==
-X-Google-Smtp-Source: AGHT+IFQSkUzEEokb1dilaCxIOzEdUQq8TLGBOlAbI9bps+WSERnDTRZAOhPIUDr+c6uNlHljjixww==
-X-Received: by 2002:a05:6808:2f16:b0:43d:326c:6ebe with SMTP id
- 5614622812f47-43d326c7674mr3644355b6e.31.1758060395125; 
- Tue, 16 Sep 2025 15:06:35 -0700 (PDT)
+ bh=ypTJs+PER64bQrHSaPjE2Br/EAkAhRAvXPNfe+hovOo=;
+ b=hj2Y30MW3D7TC/4KpPDwOThypfp/30FY6Yey3WDFVdmb8qFOBko+wpfXv6MfeNgQsY
+ H7US5IbKh3QkYIusDiZL4WSdTqxafDFwD/zsojKJjD9xz7UhRpfXtaGALn+2XMuo71O6
+ vj6jx61D/CtvY4BfSDh+aKdb394KBU6H22ccKJLSHXaCY5EZOl05EKuXxueObDiN8mjo
+ 6AI/BSoHNVc43p08Fs0VT9EjgskLo39tqmKX+T5QJGmsIkHa5uNvkuvVpUbuyTDVL18/
+ DqUVLb92tZYogLGNmwYkVMNo9xg/Gxv6WlgK+ceauC76Cusbhdy6AB+I6ncbMeB/5pvD
+ scbw==
+X-Gm-Message-State: AOJu0YzziUmVC2TNOZtt9cv1vAJjUT3C+yduLrakxFNt36KL6jy+T5nO
+ 0oOSWRd4VIzqMBhxUCn9XHW4fHNzmCT7lQ3MtkyuPzowRG64Rd4o1TUTggLZ32+6s+Alc9hJuO6
+ kyGqcjy8=
+X-Gm-Gg: ASbGncuRxsSEe2Zv1K+3XAwclgR1Lg9qwz+wjLqyv4BY8a3+WjfBMU0QGV4UMjEorzp
+ nT2Fir07AiyeasReQE8Is1fXzcGl7Xi0b1koFoOg1WhUzzTW6NKiz5iYel99rFbbmMf47k18EKK
+ 47kJ+LppSIG7uVkdXaNB/uVffUsiO9YDwdvo8vhKNcEzcQD6erjQVRlOaOQY9KNo8Zgs9oKMZLI
+ 0VvTb11PAFf0FcC1fXQFRy3ZfJagj6aoHK29xl8nEC5LomTMBNBSyRGq4AxGJW0ukCzCVz8d35n
+ +25FKZJxW+l3t0eAndYiw7l4qUdcYCMCjVw30adpQCU7bsdhea8Hd2hB8DaWTfcYczz5QuFfij/
+ 4yIM6XUox786+pP5abXmdnDFfCvlqqQnOT6HoM/a1/NlFyddRxNNynhMUjnODbFqrpoJYOvx+VE
+ NN
+X-Google-Smtp-Source: AGHT+IHkNzAkMCOrngs85+gQSTtKrTbAPXVHLBJKdrUknBO2zfWibLcQWraY93x1ia5mq9uiKGxUKw==
+X-Received: by 2002:a05:6808:ec4:b0:43b:bcb:70e0 with SMTP id
+ 5614622812f47-43b8da50299mr8777302b6e.40.1758060396560; 
+ Tue, 16 Sep 2025 15:06:36 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43b82a72a48sm3500050b6e.20.2025.09.16.15.06.33
+ 5614622812f47-43b82a72a48sm3500050b6e.20.2025.09.16.15.06.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 15:06:34 -0700 (PDT)
+ Tue, 16 Sep 2025 15:06:35 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Philip Molloy <philip@philipmolloy.com>
-Cc: Michael Hennerich <michael.hennerich@analog.com>, 
- Philip Molloy <philip.molloy@analog.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>, 
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, adsp-linux@analog.com
-In-Reply-To: <20250905112509.2443775-2-philip@philipmolloy.com>
-References: <20250905112509.2443775-1-philip@philipmolloy.com>
- <20250905112509.2443775-2-philip@philipmolloy.com>
-Subject: Re: [PATCH 1/1] gpio: adp5588: Add ADP5587 as compatible
-Message-Id: <175806039381.649628.16170852399493646335.b4-ty@konsulko.com>
-Date: Tue, 16 Sep 2025 16:06:33 -0600
+To: u-boot@lists.denx.de, Aditya Dutt <duttaditya18@gmail.com>
+Cc: Harald Welte <laforge@openmoko.org>, Asherah Connor <ashe@kivikakk.ee>, 
+ Simon Glass <sjg@chromium.org>
+In-Reply-To: <20250905140611.238951-1-duttaditya18@gmail.com>
+References: <20250905140611.238951-1-duttaditya18@gmail.com>
+Subject: Re: [PATCH] cmd: terminal: avoid serial_reinit_all() with
+ DM_SERIAL enabled
+Message-Id: <175806039529.649628.6873889159151246687.b4-ty@konsulko.com>
+Date: Tue, 16 Sep 2025 16:06:35 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,18 +99,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 05 Sep 2025 11:25:13 +0000, Philip Molloy wrote:
+On Fri, 05 Sep 2025 19:36:11 +0530, Aditya Dutt wrote:
 
-> The ADP5587 is a simpler version of the ADP5588. The ADP5588 can
-> configure two pins, C8 and C9, as GPIOs or light sensors. The ADP5587
-> does not include the light sensors.
+> serial_reinit_all() is only available when CONFIG DM_SERIAL is disabled
+> and CONFIG_SERIAL is enabled.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] gpio: adp5588: Add ADP5587 as compatible
-      commit: 41d9ac102536a07f8561533873bb8e772e61d54a
+[1/1] cmd: terminal: avoid serial_reinit_all() with DM_SERIAL enabled
+      commit: bbc9347a98c3fb32610d4324c9e0f6239f013143
 -- 
 Tom
 
