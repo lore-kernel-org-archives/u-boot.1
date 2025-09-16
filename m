@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8101CAC59B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:57:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D3DCAC59B
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 19:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2881681E13;
-	Tue, 16 Sep 2025 20:57:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A4F90803CC;
+	Tue, 16 Sep 2025 21:20:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AYSKNqJK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mkkksBES";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B785883236; Tue, 16 Sep 2025 20:57:50 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 707CB81E13; Tue, 16 Sep 2025 21:20:45 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BC4E800C1
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:57:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7865B800C1
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 21:20:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-74a61973bedso5205651a34.0
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:57:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-628f29d68ecso11437887a12.3
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:20:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758049067; x=1758653867; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Eut7hUsvmLCqzkfFt51D8Y0E8FlOWsn4zVMOqmfry0k=;
- b=AYSKNqJK7/21xRD6R8rk6vB9OugEENfLW6vVBKXJtgdo3rJcWdy4AtvMvmxvHhihmW
- PmVnZK8cfT9jLY5pwxR1O4aPaRGyviMXZE3W/lckdrQdw1smaymZcLp4JTxFgaOT8XEW
- 7z8CVd4hJDAnn4x+5eibejOoJMCoGkF85Ifjc=
+ d=chromium.org; s=google; t=1758050443; x=1758655243; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/g1VD9LXPRqtAVCKAnNDCBFCQ2WkcNfnjDWnawGEBto=;
+ b=mkkksBESX6XnYG4NqrUfNDNOg6IKn/WFyGTzaDJFo8ySfsqGMV/ETqOfQVQGCKCNV3
+ Z8WeFdjZr+gFofkvoaLTmRNHEn4MR5B3uOGBGhADn9VhNflscYxJg8bTGHqToVdkTR7u
+ vlqa3ZTuwkmWAryzJ8l0NqlcBQiHkwlWhxBSk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758049067; x=1758653867;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Eut7hUsvmLCqzkfFt51D8Y0E8FlOWsn4zVMOqmfry0k=;
- b=QXWtESrFTKLoTHG3p9rSmpStoeWYFwam4ryrrO6K0IfMpe4PZ1RbFxqkU4KrordXzX
- E6jV4CA769SOxA9JyPydaGN/ZSAz0Q316zT0sdjsvwbXcbA4YMgMCa1212xkbJKW/8j2
- dxa7sLuVwgv448eSvw0LK6lGV30LILbXOfStGUgIpQ4QfqnrVL7EGZwhRXvRdZhoZQQS
- pFRxyz0ZBJ9BAZRt7t3WI8s0PFIHB+Fmu/ZXf5OMLZFNf1c+SUB5fjPxsswBW68vjWXe
- 6iApXVX0vk4+D6sEmn5o1MieHMpt+Sxgcd+Kte6bRysDVvgVMBRk6/JnSmL4MsW4ek8t
- /WPQ==
-X-Gm-Message-State: AOJu0Yynth1VNSluHdp58QKOgkZrTgKf/y+Lb8HXqHWQ37+9mM2RZUc4
- d9Px2WU1HDYLcOMYzyLFB97hToPwp9lXhn+8jgTM+oTVl+PWgKMA0mv5zeA04BxeDPM=
-X-Gm-Gg: ASbGncuWMVfUIWkKHLEXn7uJ/L/u3wT3orEdld88LEmBKXduVgdbHavD3H/LekqW9Iw
- Vindb1dnwscTGzFbiBG4B2ru+QSdHYUKevjDL5BbzIV/t3guJuXx2LoQQ/QoKh+LMOj5QjXi/0J
- rY3+sdDvZfplLk9A7DHO8tUBCnA7x+Zn6ANVH+FWCsY/s465PS2KAf0Mvj1Mve8BPbe+R/NVEdS
- 9X1NMGQFtZt3dZUO4+qlV4gqfKeze7Ku/dmP8YDhvZP9qRTm/THGAnUaDoivpBSRoIU3aJ3EMYr
- 3f+c3L/HitYGYx/xQIy7/LnKaYXzkiH2x1aupjLledhNT9RTMiW6+RH63xRUoupCTifpZEuxkTk
- GiKvcxe5jKwOyOlwFBCvPOXmeo5v4Jh0zufTguKqvE/jwLUVs+LA3CPOe26OFyl4lkgw=
-X-Google-Smtp-Source: AGHT+IEU911txnYbSIsqXps22XTzkAeT7VCFoPdkrVr+2et63B/GnadaxrmG9ymFKNaNDVvlLunoZQ==
-X-Received: by 2002:a05:6808:10cf:b0:43d:2146:e537 with SMTP id
- 5614622812f47-43d2146ecacmr5570817b6e.2.1758049067368; 
- Tue, 16 Sep 2025 11:57:47 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43b82aa3e3esm3435969b6e.23.2025.09.16.11.57.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 11:57:46 -0700 (PDT)
-Date: Tue, 16 Sep 2025 12:57:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: Gitlab CI slowdown
-Message-ID: <20250916185744.GG124814@bill-the-cat>
+ d=1e100.net; s=20230601; t=1758050443; x=1758655243;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/g1VD9LXPRqtAVCKAnNDCBFCQ2WkcNfnjDWnawGEBto=;
+ b=YB1FMiala22rxmnXi8x5w9KnuALF94TopsNJexeTOmpO/mQ1LxJU45A7KINez7GF4c
+ 4amuao/jqBnulCsUn8IyPbzkVg4/Z5Wfu9toNRVqe1Lh53kvv36ULdkx0CsbBCSXLBR3
+ n+q71gqI69zBEqAcxwu7ixB+w00WKiRlniZWrOMDBYh7ac8lgT5PemLEUyLkmNQjlkz/
+ hnK2X9zbChvADClq1YMaUkoEEHglM4iwnBjY36CzGZWW0clj1ueO/DuWbGo99M9l4BgT
+ O1f+TkiuKmaeSmaoBHSBDwZY8drWrlWyd6bvAzeIr8I+/E2cZazXyldGg3/6uUL0DUsz
+ SjQQ==
+X-Gm-Message-State: AOJu0YzlS1aI5qFMUekhe+engE8f07riHkhbo8FNJdI9HV5vpYGGFZOT
+ a8eGvHH3/sVV3cnlnJBQ2ZBYpROMotWoCWbmFdkI3p6HCM2sSY4BG9r++cY5aEorcdeui0qlppX
+ anYL6WFEA7N9nO71Udk2lG4pt50j3d0aERqhUJa5OFTC1DUzKSOoiKQ==
+X-Gm-Gg: ASbGncvHZ3kE/GWrShcnvAvF0mv2WppDHGh1Sti1xJFkEEpEAXdm3jzfx4lrA45vhKJ
+ TiErkoxB91x2uvoWZPTdSmqK9DkrvCxRF55QVZT4pUtSeviucH0zzhROdqaSAq3GrqqPfRjTwAr
+ P/tM0XQ+xlwREjTbGGs+qMYc/alFpsjnQnrZD/lFNWCZaM6Oka4WsKVkKZqHUmh7CJ7Qs3y+GFM
+ ooX2wgTcDpmgEQ0
+X-Google-Smtp-Source: AGHT+IEM43k8YupUp3CSOa/TwEMJpq7haxSsg9EX+f54KYngpOevdtOd2kTU6u1bVnf1f+N4il+uVI4mNqE1W1VoY1Y=
+X-Received: by 2002:a17:907:60c8:b0:afe:78c2:4d4a with SMTP id
+ a640c23a62f3a-b07c381bb7cmr1979198866b.34.1758050442928; Tue, 16 Sep 2025
+ 12:20:42 -0700 (PDT)
+MIME-Version: 1.0
 References: <20250916174402.GV124814@bill-the-cat>
  <CAFLszThagMr7f8tbAfeKTHsFc204TJN+z-B-SxR5qNqnM15Nzg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="a7lYUUz9kO09oJ3K"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThagMr7f8tbAfeKTHsFc204TJN+z-B-SxR5qNqnM15Nzg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20250916185744.GG124814@bill-the-cat>
+In-Reply-To: <20250916185744.GG124814@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 16 Sep 2025 13:20:30 -0600
+X-Gm-Features: AS18NWAMF_S4Rq7CB08OqPHxettVzBc372qc4In4imghtrzfkNEYurNK8IJr4mg
+Message-ID: <CAFLszThwMcwMJOyy=2=hGZj7ME_huL13Yb1T52R-2HCJYzdY2A@mail.gmail.com>
+Subject: Re: Gitlab CI slowdown
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,47 +88,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---a7lYUUz9kO09oJ3K
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Sep 16, 2025 at 12:56:04PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 16 Sept 2025 at 11:44, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 16 Sept 2025 at 12:57, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Sep 16, 2025 at 12:56:04PM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Hey all,
+> > On Tue, 16 Sept 2025 at 11:44, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > Hey all,
+> > >
+> > > Currently, Gitlab CI runs are going to be extremely slow on the final
+> > > world build on arm64 hardware task. While we had previously had 3 fast
+> > > machines available here, one of them was decommissioned unexpectedly a
+> > > number of weeks ago and the other day the UPS another one was on died
+> > > unexpectedly. Currently this is expected to be restored in a few days.
+> > > Our third machine was disabled for a number of months due to some issue
+> > > with the machine itself that seems to have been resolved, however it
+> > > also allows for multiple concurrent jobs so it will be slow when two or
+> > > more pipelines try and world build at once. Thanks for your
+> > > understanding and patience.
 > >
-> > Currently, Gitlab CI runs are going to be extremely slow on the final
-> > world build on arm64 hardware task. While we had previously had 3 fast
-> > machines available here, one of them was decommissioned unexpectedly a
-> > number of weeks ago and the other day the UPS another one was on died
-> > unexpectedly. Currently this is expected to be restored in a few days.
-> > Our third machine was disabled for a number of months due to some issue
-> > with the machine itself that seems to have been resolved, however it
-> > also allows for multiple concurrent jobs so it will be slow when two or
-> > more pipelines try and world build at once. Thanks for your
-> > understanding and patience.
->=20
-> Is my one (alex) in this list? If so, can I change the config to
-> resolve the concurrent issue?
+> > Is my one (alex) in this list? If so, can I change the config to
+> > resolve the concurrent issue?
+>
+> Yes, alex is the one I was talking about there, thanks!
 
-Yes, alex is the one I was talking about there, thanks!
+OK, I've turned it back down to one job.
 
---=20
-Tom
+Regards,
+Simon
 
---a7lYUUz9kO09oJ3K
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmzKAAKCRAr4qD1Cr/k
-CnaBAP0dyP8d5CzPoK5/Gv5IieIsDPxWkWK/sPY15dxg3nIhzwD/UB92oyt3rOCu
-RUqDaWTaJcWAj66p8wNR02vI8SbvEwE=
-=HVLI
------END PGP SIGNATURE-----
-
---a7lYUUz9kO09oJ3K--
+>
+> --
+> Tom
