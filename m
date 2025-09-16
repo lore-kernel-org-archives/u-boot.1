@@ -4,67 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC6BCAC599
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 11:22:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C186DCAC599
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 11:26:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDD9283071;
-	Tue, 16 Sep 2025 13:22:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3067283071;
+	Tue, 16 Sep 2025 13:26:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JjQO7tI2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uupQ8xMe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61E4F8309A; Tue, 16 Sep 2025 13:22:33 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id AA0E68318E; Tue, 16 Sep 2025 13:26:44 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB71E80325
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 13:22:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21C1480325
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 13:26:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GBMJJl1262737;
- Tue, 16 Sep 2025 06:22:19 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GBQUrJ1711852;
+ Tue, 16 Sep 2025 06:26:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758021739;
- bh=0qmZxbLTT7NYI4YtL6tOpM7AIVNURaU25JciLPimFwM=;
- h=From:To:CC:Subject:Date;
- b=JjQO7tI2RrXbvUrlMcTHsjF8C+23VzyQjDKNeRWtZSiWLZRn2gTMn2qsZNAV7+4Ib
- e2h6bNEulgnKudwzHX7lxYMpoZ5wP7R95bCFMhZ5vuOMcKOOjhm52hbJdxMWm7XTJz
- I/zf4XtsXf/LG7yyK1wguagyPaByfk+8+GMgDvFI=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GBMJOE483750
+ s=ti-com-17Q1; t=1758021990;
+ bh=xqRnNkF2sTVWHUNxgK8wSBdzb38ckJKaX+h8hBp1c4A=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=uupQ8xMeo5anz+41WRz6lJNqgGvPduJeLHa+aVH+SHsndDkl4S9BNN9tsZiBkBsPi
+ wDquM0fL2SCcL5fyclqJlGCVg6PTHmW3XarhX4JhWVTGrjI6obJm9xwJp6ChZQaafq
+ 4i5z9QaYb78U15i4kQwqgFIl3nrvPP/yTS0bLoRY=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GBQUKb677557
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 06:22:19 -0500
-Received: from DFLE211.ent.ti.com (10.64.6.69) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 06:26:30 -0500
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 06:22:19 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 06:26:29 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 06:22:19 -0500
+ Transport; Tue, 16 Sep 2025 06:26:29 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GBMIpY1529678;
- Tue, 16 Sep 2025 06:22:18 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
- <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
- <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GBQSap1233277;
+ Tue, 16 Sep 2025 06:26:29 -0500
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 16 Sep 2025 16:56:27 +0530
+Message-ID: <DCU6S7WGIC4A.LBF0DCDYWQWD@ti.com>
+CC: <d-gole@ti.com>, <b-padhi@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
+ <nm@ti.com>, <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
- <patrice.chotard@foss.st.com>, <patrick.delaunay@foss.st.com>
-Subject: [PATCH -next v1] arm: armv8: remove redundant definition of mmu_status
-Date: Tue, 16 Sep 2025 16:52:05 +0530
-Message-ID: <20250916112205.238811-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ <u-boot@lists.denx.de>, <patrice.chotard@foss.st.com>,
+ <patrick.delaunay@foss.st.com>
+Subject: Re: [PATCH -next v7 04/10] arm: armv8: invalidate dcache entries on
+ dcache_enable
+From: Anshul Dalal <anshuld@ti.com>
+To: Anshul Dalal <anshuld@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20250912121618.1074054-1-anshuld@ti.com>
+ <20250912121618.1074054-5-anshuld@ti.com>
+ <f7cf5404-610b-420a-ae5a-a1d4cdb7ed4b@gmx.de>
+ <DCT42CFXRKPZ.28R4SNL5IVDR3@ti.com>
+In-Reply-To: <DCT42CFXRKPZ.28R4SNL5IVDR3@ti.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,62 +88,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-mmu_status is used in io memcpy functions to prevent accesses to non
-8-byte aligned addresses when the mmu is disabled. Though there is a
-redundant definition enabled when icaches is turned off by setting
-SYS_ICACHE_OFF.
+Hi all,
 
-This patch removes the redundant definition, allowing mmu_status to
-properly report the status regardless of config settings. This shouldn't
-be a problem since access to non 8-byte aligned data can be done
-irrespective of icache state.
+On Mon Sep 15, 2025 at 10:35 AM IST, Anshul Dalal wrote:
+> Hi Heinrich,
+>
+> On Fri Sep 12, 2025 at 5:58 PM IST, Heinrich Schuchardt wrote:
+>> On 9/12/25 14:16, Anshul Dalal wrote:
+>>> In dcache_enable, currently the dcache entries are only invalidated whe=
+n
+>>> the MMU is not enabled. This causes issues when dcache_enable is called
+>>> with the MMU already configured, in such cases the existing dcache
+>>> entries are not flushed which might result in un-expected behavior.
+>>>=20
+>>> This patch invalidates the cache entries on every call of dcache_enable
+>>> before enabling dcache (by setting CR_C). This makes dcache_enable
+>>> behave similar to icache_enable as well.
+>>>=20
+>>> Reviewed-by: Dhruva Gole <d-gole@ti.com>
+>>> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>>> Tested-by: Wadim Egorov <w.egorov@phytec.de>
+>>> ---
+>>>   arch/arm/cpu/armv8/cache_v8.c | 7 +++----
+>>>   1 file changed, 3 insertions(+), 4 deletions(-)
+>>>=20
+>>> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v=
+8.c
+>>> index 1c1e33bec24..6e662395a83 100644
+>>> --- a/arch/arm/cpu/armv8/cache_v8.c
+>>> +++ b/arch/arm/cpu/armv8/cache_v8.c
+>>> @@ -830,16 +830,15 @@ void flush_dcache_range(unsigned long start, unsi=
+gned long stop)
+>>>   void dcache_enable(void)
+>>>   {
+>>>   	/* The data cache is not active unless the mmu is enabled */
+>>> -	if (!(get_sctlr() & CR_M)) {
+>>> -		invalidate_dcache_all();
+>>> -		__asm_invalidate_tlb_all();
+>>> +	if (!mmu_status())
+>>
+>> You are changing the logic here without describing why in the commit=20
+>> message:
+>>
+>> mmu_status() returns zero if CONFIG_SYS_ICACHE_OFF=3Dy.
+>> Only for CONFIG_SYS_ICACHE_OFF=3Dn it calls get_sctlr().
+>>
+>> Please, check if the logic change is intended.
+>> Please, update the commit message.
+>>
+>
+> The bheaviour should be the same for all combinations of ICACHE_OFF and
+> DCACHE_OFF except for when ICACHE_OFF=3Dy and DCACHE_OFF=3Dn, in such cas=
+es
+> there is the concern that mmu_setup will be called everytime on
+> dcache_enable after my patch.
+>
+> This was not an intended change, thanks for bringing it to my attention.
+>
+> I think we should drop the ICACHE_OFF=3Dy definition of mmu_setup which
+> was added in the commit 268f6ac1f95c ("arm64: Update memcpy_{from,
+> to}io() helpers"). And only keep the one that calls get_sctlr. If that's
+> off the table, I can respin the series without the call to mmu_status as
+> well.
+>
 
-Fixes: 268f6ac1f95c ("arm64: Update memcpy_{from, to}io() helpers")
+I have posted the patch[1] removing ICACHE_OFF=3Dy definition of
+mmu_status, that patch along with this series should address this
+unintended change.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- arch/arm/cpu/armv8/cache_v8.c | 15 +++++----------
- 1 file changed, 5 insertions(+), 10 deletions(-)
+Regards,
+Anshul
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 1dcb6007475..74814601483 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -1184,11 +1184,6 @@ int icache_status(void)
- 	return (get_sctlr() & CR_I) != 0;
- }
- 
--int mmu_status(void)
--{
--	return (get_sctlr() & CR_M) != 0;
--}
--
- void invalidate_icache_all(void)
- {
- 	__asm_invalidate_icache_all();
-@@ -1210,17 +1205,17 @@ int icache_status(void)
- 	return 0;
- }
- 
--int mmu_status(void)
--{
--	return 0;
--}
--
- void invalidate_icache_all(void)
- {
- }
- 
- #endif	/* !CONFIG_IS_ENABLED(SYS_ICACHE_OFF) */
- 
-+int mmu_status(void)
-+{
-+	return (get_sctlr() & CR_M) != 0;
-+}
-+
- /*
-  * Enable dCache & iCache, whether cache is actually enabled
-  * depend on CONFIG_SYS_DCACHE_OFF and CONFIG_SYS_ICACHE_OFF
--- 
-2.51.0
+[1]: https://lore.kernel.org/u-boot/20250916112205.238811-1-anshuld@ti.com/
+
+>>
+>>>   		mmu_setup();
+>>> -	}
+>>>  =20
+>>>   	/* Set up page tables only once (it is done also by mmu_setup()) */
+>>>   	if (!gd->arch.tlb_fillptr)
+>>>   		setup_all_pgtables();
+>>>  =20
+>>> +	invalidate_dcache_all();
+>>> +	__asm_invalidate_tlb_all();
+>>>   	set_sctlr(get_sctlr() | CR_C);
+>>>   }
+>>>  =20
 
