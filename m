@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71CBACAC59B
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003B1CAC592
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E97508329F;
-	Tue, 16 Sep 2025 20:27:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5FFB7832F0;
+	Tue, 16 Sep 2025 20:27:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B8SmxKB/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eYhBYS+5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A98E4832AD; Tue, 16 Sep 2025 20:27:30 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 77D28803CC; Tue, 16 Sep 2025 20:27:36 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7274A81E13
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:27:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2930C8331B
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:27:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-750b77699b4so4516440a34.2
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:28 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-62347d880feso1514483eaf.3
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758047247; x=1758652047; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758047253; x=1758652053; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QcnaAg3MgiH2eX05hvlKAV5oP0IJ3bY00ynJ+hDj+uw=;
- b=B8SmxKB/QaZD0Hxo++2Dt0flERwfteMd/6qDDOGM8w4OFK1E3CUe+No/uMnfIpCKxr
- sQKCaAOKSseOmICC4wfydOhiNeDNbWliFDZhZDu/jmeQz0mDTKbOTq92dpoIHw5ADcUb
- WQ8i9RNBzLtRSACMIH5xfVlaroP/ts4yJ2mR4=
+ bh=YfWFPlTsMCBCoG5S5Nju9e1HKcAMyss5N+WJTAUj4A0=;
+ b=eYhBYS+5xeF6krZTv6z/GS/Lktlhb83sDjyMCNsKmuxUZ9hktyc16e19eZ64bbeh5c
+ FZmvwn59Pk4R3fChHLppGwWomxtrgVz6SnLe4F3FP0ygadcN7deO29sYx68v6dcPX9+J
+ t/JQbVnZlUZIe4acMCjJsWe2F74aljbVjcZDk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758047247; x=1758652047;
+ d=1e100.net; s=20230601; t=1758047253; x=1758652053;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QcnaAg3MgiH2eX05hvlKAV5oP0IJ3bY00ynJ+hDj+uw=;
- b=WCgxpXsZnKspiBfoFfB6hugTiePz03mnJTmFbAD8+QEKW0CmzbkPNev3ZTI2uvLHcK
- EVWA7PS3jmC1wT+mhkJxnA0dqbsM3tp5Qz1IUCErevaaHTtjAdC7y/a1u7HjDzGuaIE5
- TN5m/4DlgXH4bViHqHftzp/vkxpKkU81vqehcWteiH6Q8ts4APh+Bh7grajZPoCrJ9qT
- OiY0CHlHXxe9SkjyBMfMwgyZzMjTJVjbtL1McuEuOgLox3RhwmQvUhaO8XadhMa4DiNu
- i96VqUEn9lXRMXL4c5QQvYqf5bOIVCJZ9Jd+g7Y/otpu273Q/pelaa9jEe3iXx4FJjNR
- 85+g==
-X-Gm-Message-State: AOJu0YzENHHNEUbuHJP2hseJ9ilezt3QhUzGKimiwbjnJ4nhjOUdMLuD
- C1XOIuGCzufT4myxc1ELFcC+fAZR7TOI4j5GxbRKxjPCnthBfVBB7NumF7zgXVvjOqQ=
-X-Gm-Gg: ASbGncvrLlRUfbXcp7PYtpAO2HqgizqL76UrJvX85lajenMSkXWGv8HWXuPBUwZZLfE
- rSunsV/jGcM7J0XeJl9/p26cFJXpofzJx2lSdXQlTzSrVy4W1RzGTdkFRZ8FzT86dFsnGpkZ99A
- aawaUfswMfjwqXBQy40WxgOGKLnSSIk6ba4CG0IU1bpjCKZ53YqsJy8wWdE0ngWb8zKxiL4Apz7
- ka8odE76jdu3i6cM0/3pytyvPYIZmyY5SMJht/lzeIFS3Lj43tQli7/rKr6eiLUUdspTJaAlUyk
- eRtX6nwKfGt6lEzQNeGPs9OnOg7cIHZ4b25vgz24CoL0YTKIA12cGWGwZeuPj6CxShS6bf6aphy
- P9bNQTPhUCeLkeClbifgV0avv2TtvTq+Wb6yrnMCwlKasv19sYnd81ajYaGhD/Imy0KI=
-X-Google-Smtp-Source: AGHT+IFfED0q7alCBOB6vE2Mo6+vSsIkAzJTMItH+YJSBvGXMts1Yo+Aq/rPU1rjoKKDeHEFTkvLrA==
-X-Received: by 2002:a05:6830:6d18:b0:741:bf2f:ee88 with SMTP id
- 46e09a7af769-753555c1d2emr8608138a34.24.1758047247144; 
- Tue, 16 Sep 2025 11:27:27 -0700 (PDT)
+ bh=YfWFPlTsMCBCoG5S5Nju9e1HKcAMyss5N+WJTAUj4A0=;
+ b=cpHRBe2LNIqE4tIlGhZmatWCvqZ0cBrYCYnwtArAV8+oLzMaVpRbDHpIt1XVN1CYrN
+ MugcmZpvPw6kwtNJlY4YP4OhGBrKPU9MR57C6MhhzYaFlNvl7cXMnnpkSg7G2FogTWMB
+ KtT7ecS7QgGqr/HWw7m0RuAwtNvKhqGMO2rLZEDIheeqpW9T0EoK6cruyW50wwLJabUn
+ ssxn8w+LjShueG2PCPBz8OePzMNNOGj/kCn2yuP117LWyTmb07BzuJ1n/BvA6upMklBR
+ fxZKft1Z99pbAVuC4FP5DnLh8rT75/n9TJIFBkb5BI3U1QhXJNKBN7JUyNS5dlbjVMez
+ k/Zg==
+X-Gm-Message-State: AOJu0YxraVTraXzqPrgpg0oEmSbXf08t3VPasLoyhpe9mtynTM6DUKSV
+ KA/umoBQ4Hy8KbZjX4IqMauNJaTtSNaOlxCqRsytAO9sPe83LM7bWx4Pxh9ltzog+7E=
+X-Gm-Gg: ASbGncthSx5mP2JfBXCfEsjxo2rbuIAGcnoNe7m3y+mC/0VaLwNhxZiOMMpCU6aQk+J
+ 3BCppo/SVPVdcpolZNfv7O9HKoqHh9eAQYmh9pO3A3WgJC4Q8bjoS/ppZdYyTtbvQQHY+Bl6FE8
+ +crFdGL3ypMqu6fjPlUyg3aVRZ+Pxd6TZVNHKmN16OnTXrs3hgf9hpYyWGz36V51TjbekAIu3MP
+ s8eK/PN3+xdYtzsclLZYAfiVY/DfHPWphqeCAaHICmCI8eFO0xTjZU1hPGFukDpLfPjgaOq8MuO
+ n+p1XFgy5Fo6PXTE7FcMhKDEQWD0cwUwsFwaOFz2mB8E/8mKBl0MgFemsk4dQHXgFDKK4j/+4xm
+ klDmUU7BVAMhsVegQBwPmRVyZoEx5y2gpqxBflO0YI5JLGQn2wqp8U40Y
+X-Google-Smtp-Source: AGHT+IE2pLLidZAG/ym+BIF775AzUMBquWJxems1DnT+ztURxKsJlMnM+tPTHRKbhwJjAfwqb9qO9g==
+X-Received: by 2002:a05:6808:6a89:b0:439:27db:51e5 with SMTP id
+ 5614622812f47-43b8d8e527dmr7240319b6e.18.1758047252761; 
+ Tue, 16 Sep 2025 11:27:32 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-621b7a6cc75sm1968947eaf.0.2025.09.16.11.27.25
+ 5614622812f47-43d20e4fa88sm1940952b6e.24.2025.09.16.11.27.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 11:27:26 -0700 (PDT)
-Date: Tue, 16 Sep 2025 12:27:24 -0600
+ Tue, 16 Sep 2025 11:27:31 -0700 (PDT)
+Date: Tue, 16 Sep 2025 12:27:29 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
@@ -77,15 +77,16 @@ Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sam Protsenko <semen.protsenko@linaro.org>
-Subject: Re: [PATCH u-boot-test-hooks 1/2] bin: add helper script for testing
- swtmp with TF-A
-Message-ID: <20250916182724.GW124814@bill-the-cat>
+Subject: Re: [PATCH u-boot-test-hooks 2/2] travis-ci: add config file for
+ testing firmware handoff on qemu_arm64
+Message-ID: <20250916182729.GX124814@bill-the-cat>
 References: <20250916161230.32140-1-raymond.mao@linaro.org>
+ <20250916161230.32140-2-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mTCdx0NNRadn1sHg"
+ protocol="application/pgp-signature"; boundary="VXbgkX6I8tIhHI2m"
 Content-Disposition: inline
-In-Reply-To: <20250916161230.32140-1-raymond.mao@linaro.org>
+In-Reply-To: <20250916161230.32140-2-raymond.mao@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,77 +105,97 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---mTCdx0NNRadn1sHg
+--VXbgkX6I8tIhHI2m
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 16, 2025 at 09:12:24AM -0700, Raymond Mao wrote:
+On Tue, Sep 16, 2025 at 09:12:25AM -0700, Raymond Mao wrote:
 
-> The existing 'qemu.swtpm' does not run swtpm_setup to configure the
-> algorithm, by default it enables all algorithms it supports, but TF-A
-> currently only support sha256 and measured with sha256-only, enabling
-> other algorithms causes more measurements at U-Boot and then leads
-> to eventlog mismatching.
+> The existing 'conf.qemu_arm64_na' uses 'u-boot.bin' as bios, but for
+> the case of TF-A, 'u-boot.bin' is BL33 and the assembled 'flash.bin'
+> is the bios instead, which will be built and assembled at run-time
+> via a post-buildman script and copied to '/tmp'.
+>=20
+> Moreover, for running TF-A and OP-TEE on qemu, '-m 4G' and
+> 'virtualization=3Dfalse,secure=3Don' are required, and '-semihosting'
+> should be replaced with its modern alias
+> '-semihosting-config enable=3Don,target=3Dnative'.
+>=20
+> Last, point to the new helper script 'swtpm-tfa'.
 >=20
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+
+Lets fixup the current qemu_arm64 conf to have as much in common as
+possible (4G, modern semihosting flags, etc). Next:
+
 > ---
->  bin/qemu.swtpm-tfa | 30 ++++++++++++++++++++++++++++++
->  1 file changed, 30 insertions(+)
->  create mode 100644 bin/qemu.swtpm-tfa
+>  .../conf.qemu_arm64_fw_handoff_tfa_optee      | 31 +++++++++++++++++++
+>  1 file changed, 31 insertions(+)
+>  create mode 100644 bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
 >=20
-> diff --git a/bin/qemu.swtpm-tfa b/bin/qemu.swtpm-tfa
+> diff --git a/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee b/bin/tra=
+vis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
 > new file mode 100644
-> index 0000000..cbcddef
+> index 0000000..9aa6d3b
 > --- /dev/null
-> +++ b/bin/qemu.swtpm-tfa
-> @@ -0,0 +1,30 @@
-> +#!/bin/sh
-> +# SPDX-License-Identifier: BSD-2
-> +#
+> +++ b/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+> @@ -0,0 +1,31 @@
 > +# Copyright (c) 2025 Linaro Limited
 > +# Author: Raymond Mao <raymond.mao@linaro.org>
-> +# Based on qemu.swtpm
+> +# Based on conf.qemu_arm64 which is
+> +# Copyright (c) 2017 Tuomas Tynkkynen. All rights reserved.
 > +#
-> +# This script launches swtpm to emulate a TPMv2.
-> +# It explicitly configures swtpm with sha256-only.
+> +# Permission is hereby granted, free of charge, to any person obtaining a
+> +# copy of this software and associated documentation files (the "Softwar=
+e"),
+> +# to deal in the Software without restriction, including without limitat=
+ion
+> +# the rights to use, copy, modify, merge, publish, distribute, sublicens=
+e,
+> +# and/or sell copies of the Software, and to permit persons to whom the
+> +# Software is furnished to do so, subject to the following conditions:
 > +#
-> +# The parameter -t makes it unload when the connection to QEMU is
-> +# terminated.
+> +# The above copyright notice and this permission notice shall be include=
+d in
+> +# all copies or substantial portions of the Software.
 > +#
-> +# To make use of it add
-> +#
-> +#     qemu_helper_script=3D"swtpm-tfa"
-> +#
-> +# to the board script and the following arguments to qemu_extra_args
-> +#
-> +#     -chardev socket,id=3Dchrtpm,path=3D/tmp/tpm/swtpm-sock \
-> +#     -tpmdev emulator,id=3Dtpm0,chardev=3Dchrtpm \
-> +#     -device tpm-tis-device,tpmdev=3Dtpm0
-> +#
-> +# U-Boot must be built with CONFIG_TPM2_MMIO=3Dy.
+> +# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRES=
+S OR
+> +# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILIT=
+Y,
+> +# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHA=
+LL
+> +# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR O=
+THER
+> +# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+> +# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> +# DEALINGS IN THE SOFTWARE.
 > +
-> +rm -rf /tmp/tpm
-> +mkdir -p /tmp/tpm
-> +swtpm_setup --tpmstate /tmp/tpm --tpm2 --pcr-banks sha256
-> +swtpm socket -d -t --tpmstate dir=3D/tmp/tpm --tpm2 \
-> +--ctrl type=3Dunixio,path=3D/tmp/tpm/swtpm-sock
+> +console_impl=3Dqemu
+> +qemu_machine=3D"virt,virtualization=3Dfalse,secure=3Don"
+> +qemu_helper_script=3D"swtpm-tfa"
+> +qemu_binary=3D"qemu-system-aarch64"
+> +qemu_extra_args=3D"-m 4G -cpu cortex-a57 -nographic -netdev user,id=3Dne=
+t0,tftp=3D${UBOOT_TRAVIS_BUILD_DIR} -device e1000,netdev=3Dnet0 -device vir=
+tio-rng-pci -d unimp -semihosting-config enable=3Don,target=3Dnative -chard=
+ev socket,id=3Dchrtpm,path=3D/tmp/tpm/swtpm-sock -tpmdev emulator,id=3Dtpm0=
+,chardev=3Dchrtpm -device tpm-tis-device,tpmdev=3Dtpm0"
 
-I think we need to abstract the current script to take arguments and
-then pass them as needed in the conf.board file.
+Can we line break this? Then make some functional groupings? Thanks.
 
 --=20
 Tom
 
---mTCdx0NNRadn1sHg
+--VXbgkX6I8tIhHI2m
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmsCAAKCRAr4qD1Cr/k
-CpohAQCU9J9AqKy+mVKkT1tDKFOXmXdW+WAk9jL5E/OZUuCnSAEAvESWR3rkJgDm
-dTx9ev1YZzblQuQdTIADnfCwvj8/Mgw=
-=OcUk
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmsEQAKCRAr4qD1Cr/k
+ClKpAPkBgc0ol2E/Siu7OeQOjHulGQsZ/EN9xofl03aZsOglGAD/UaLGl670GSiR
+m47EBJGggmbu9fT50s7fjw7n9ysfJwI=
+=F/X7
 -----END PGP SIGNATURE-----
 
---mTCdx0NNRadn1sHg--
+--VXbgkX6I8tIhHI2m--
