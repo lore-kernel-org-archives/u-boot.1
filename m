@@ -4,91 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E02CAC592
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 16:15:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7332CAC592
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 16:22:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F84283510;
-	Tue, 16 Sep 2025 18:15:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 45DF28309A;
+	Tue, 16 Sep 2025 18:22:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OP91yUp1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wI4sIkod";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 187578323A; Tue, 16 Sep 2025 18:15:14 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6FEA8350A
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 18:15:11 +0200 (CEST)
+ id EAF488318E; Tue, 16 Sep 2025 18:22:56 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B34A481E13
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 18:22:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-424073edddaso59895ab.1
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 09:15:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758039310; x=1758644110; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ojjwO/2rZI4bMa1astwC/nKY9VZZKvGaAsrHdeKS0is=;
- b=OP91yUp1c0fCL6AWZordlIHOc2yK/tN6K0P69Tm5XSptvkZ4sVVOAOmmDWIdm7pIsl
- dhqIMob7ZieF61fDWSmCHr0S7r5ek3ugw+em/Vf/UmFW/qjgwJj7Wtgv+AGYqtTo7Jag
- h5uXiG8+XO8aLaJeZHzb/BbUY0oQBfebiEn+T5Ri6zd7f9aKkLaSzwOTxujfuNtRPawC
- nFGkhIE/FZfF045DMEFVfPq9FJd1KEC+98lncTvBtNVbs3BHNVtWdGI/LboHlWPY7lu2
- 8uSPUpFYfRLTFPBk8uuj8rvngyoDQwo70TMvRzFDNWOc7gOuf7vjV5pCWdVE74lXJfmd
- g95Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758039310; x=1758644110;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ojjwO/2rZI4bMa1astwC/nKY9VZZKvGaAsrHdeKS0is=;
- b=pjzQHwvRcZ+pdD/tCqAhGmghS5srjS+cvJK1D8c0rZYmN+irGmo/nD3ePQTa8fzSqX
- Qb+xxSXhJ1lAgV/UVBTLwrUzSoc2gK4Sn1WX241cnUBuksPCAseHNajpxpdc3io2ZcMg
- pjxQUBcY7JUsTK9c4W8DQ7jI7E2NzMz5c6GHkyEbcM0FnpF/ueoUPbI1170ZUwZ9LwW5
- VtS/4u5s+OfnXLVBoV+Qv2UBg1i9eV/O3jeKUx3Z0Ku+7fYvmtzA4DtR3ZEZkpxY+m8d
- jYUXdFC/FLQWeFVmn6J3/11sUOHiKvvG4PT1z1B/84psEHbaY7yu7J0+7fE7ViGbU7rl
- okDw==
-X-Gm-Message-State: AOJu0Yzq//lyUWbC3yA58wdaCEgj0Dv40ikfaMBid8B9cPhFkSt94j7b
- 7bTzfinGbTOfI6+Y8BF4e3h4uBLnppJddO9L/warj7R3aKCWDjzDNFMg+cKY9XjoBp0USYNIUDD
- zzNrw
-X-Gm-Gg: ASbGnct6/D8ltRuBPpmfJbwiGPPpHizyiVNsuWkJtZJvDTCWSEg/ovunk+Dha+yYRBs
- V9TnevwRXZpzZKo7XqG1f5IjdkBkOz8t/quZRND2z4uvrW8EKTulGmnIHMlz8faIye4gDeXE0tM
- 59t5mY8CSimZAn2wP8nID4JBb4zFIs+j/weHBvm+CR25HVmakdqhQhhW7njTbpmz/T1BXAi03Vh
- iLGajOcTUtQED9CxtRDoU40cpyZjx/xhcHZYUk2NPB06pb0vKvFEP4/V4n5NcPhvtLzBCWJFaCV
- vJMPAgBbi+T0tLyvCj273ufoLRHVgTGqOebCI4VrB7h1xzID/oQj5ETFU5YCNIe3jEApIO65DaF
- XAaV3KeXQzZX2A1DmieaPlC2ZGJUUsE58esoRHmFIu8j/1PMVb/t3siQyRbc6pFU6iay+bQfSfG
- 1ZDaBEvodYzTofVHCx6+NP
-X-Google-Smtp-Source: AGHT+IHnJBIU7qlOdw1ec6hsb/XookF51PkuZO7cGgyfDD8HLECLz0srD1QWGYy8lxFZPHLEBZNBpg==
-X-Received: by 2002:a05:6e02:4807:b0:424:52b:add8 with SMTP id
- e9e14a558f8ab-4241143ecefmr22816675ab.3.1758039310102; 
- Tue, 16 Sep 2025 09:15:10 -0700 (PDT)
-Received: from ubuntu.localdomain (209-227-169-220.cpe.distributel.net.
- [209.227.169.220]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-41f0ea1bdaasm68433615ab.39.2025.09.16.09.15.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 09:15:09 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 5/5] ci: add test entries for qemu_arm64_tfa_fw_handoff
-Date: Tue, 16 Sep 2025 09:14:21 -0700
-Message-Id: <20250916161426.32259-6-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250916161426.32259-1-raymond.mao@linaro.org>
-References: <20250916161426.32259-1-raymond.mao@linaro.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GGMqQ3053220;
+ Tue, 16 Sep 2025 11:22:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758039773;
+ bh=Ql5vwZ2gUt999QYbZp52S1GhTTxaNKz+L6Gil4f3hPE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=wI4sIkod3LAsJLHggn7eTVY1q70w1XdSg9dSJw6yNjozKoFuWFQtqcqLh2dC7UaIZ
+ 1+rdfWDonlqf6l67zu6y8xBME/4eudunv8cyoPRSXm0wNKdKW+H9BpFGR5bN0O5BiL
+ jT570zN4cGWJcR+e/9J3aEpLZ9+TrbOMxWDrNf84=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GGMq9f853160
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 16 Sep 2025 11:22:52 -0500
+Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
+ Sep 2025 11:22:52 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 16 Sep 2025 11:22:52 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GGMp091888531;
+ Tue, 16 Sep 2025 11:22:51 -0500
+Message-ID: <9c1b1344-b6fb-4ad4-aaec-1b187e1cd27d@ti.com>
+Date: Tue, 16 Sep 2025 11:22:51 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
+To: Judith Mendez <jm@ti.com>, Anshul Dalal <anshuld@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ "Vaishnav Achath" <vaishnav.a@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, "Moteen Shah" <m-shah@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20250910214514.1848847-1-jm@ti.com>
+ <20250910214514.1848847-2-jm@ti.com> <DCPPO8O0GIVD.1CWNDWAKDGVEC@ti.com>
+ <b61c7f41-6e1d-4d90-a8b8-e446bc32e3a6@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <b61c7f41-6e1d-4d90-a8b8-e446bc32e3a6@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,48 +86,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add qemu_arm64_tfa_fw_handoff test entries to azure and gitlab
-pipelines.
+On 9/11/25 9:59 AM, Judith Mendez wrote:
+> Hi Anshul,
+> 
+> On 9/11/25 12:11 AM, Anshul Dalal wrote:
+>> On Thu Sep 11, 2025 at 3:15 AM IST, Judith Mendez wrote:
+>>> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The macros
+>>> however, mix MMC device with the two bootmodes. Decouple the two types
+>>> of macros so that bootmodes can be identified with:
+>>> - BOOT_DEVICE_MMCSD
+>>> - BOOT_DEVICE_EMMC
+>>> according to devstat parsed boot mode values and on-board devices can be
+>>> identified with:
+>>> - BOOT_DEVICE_MMC1
+>>> - BOOT_DEVICE_MMC2
+>>> - BOOT_DEVICE_MMC2_2
+>>> according to arbitrary numbers mainly used to differentiate between eMMC
+>>> and SD card.
+>>>
+>>> Signed-off-by: Judith Mendez <jm@ti.com>
+>>> ---
+>>
+>> I guess the confusion here is how we are calling boot modes from devstat
+>> as well as the boot device as BOOT_DEVICE_*. Perhaps we should rename
+>> the former to DEVSTAT_BOOT_MODE_* or something along those lines.
+>>
+>> That would make the difference between a boot *mode* and a boot *device*
+>> more clear, DEVSTAT_BOOT_MODE_MMCSD or DEVSTATE_BOOT_MODE_EMMC would
+>> distinguish between SD or EMMC boot modes with BOOT_DEVICE_MMC*
+>> indicating the MMC port used.
+>>
+>> This would also allow use to only have the respective
+>> DEVSTAT_BOOT_MODE_* defined in each soc's headers with BOOT_DEVICE_*
+>> coming from arch/arm/include/asm/spl.h.
+> 
+> 
+> Right, I guess if
+> 
+> BOOT_DEVICE_MMCSD
+> BOOT_DEVICE_EMMC
+> 
+> Is still not clear enough, it would be a good idea to use:
+> DEVSTAT_BOOT_MODE_MMCSD
+> DEVSTAT_BOOT_MODE_EMMC
+> 
+> Its only a real problem for MMC since we have the confusion with eMMC
+> boot and MMCSD boot and we mix the two as a result in
+> spl_mmc_boot_mode() and spl_boot_device().
+> 
+> 
+> Its not really an issue for other boot modes to warrant renaming all the
+> bootmodes, but I would like to make these macros as clear as possible in
+> this series since I plan to refactor spl_mmc_boot_mode() next.
+> 
+> So lets hear if any one else has a strong opinion on this before
+> deciding on:
+> 
+> DEVSTAT_BOOT_MODE_MMCSD
+> DEVSTAT_BOOT_MODE_EMMC
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- .azure-pipelines.yml | 4 ++++
- .gitlab-ci.yml       | 7 +++++++
- 2 files changed, 11 insertions(+)
+This looks like the correct way to label these as they are the content
+of the DEVSTAT register, this would also keep them from being confused
+with the U-Boot internal definitions for BOOT_MODE_* and BOOT_DEVICE_*.
 
-diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index eb547606ddd..4316041ad9a 100644
---- a/.azure-pipelines.yml
-+++ b/.azure-pipelines.yml
-@@ -468,6 +468,10 @@ stages:
-         qemu_arm64_lwip:
-           TEST_PY_BD: "qemu_arm64_lwip"
-           TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
-+        qemu_arm64_tfa_fw_handoff:
-+          TEST_PY_BD: "qemu_arm64"
-+          TEST_PY_ID: "--id fw_handoff_tfa_optee"
-+          TEST_PY_TEST_SPEC: "test_fw_handoff"
-         qemu_arm_sbsa_ref:
-           TEST_PY_BD: "qemu-arm-sbsa"
-           TEST_PY_TEST_SPEC: "not sleep"
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 61e4af96c9a..03f83320c87 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -400,6 +400,13 @@ qemu_arm64_lwip test.py:
-     TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
-   <<: *buildman_and_testpy_dfn
- 
-+qemu_arm64_tfa_fw_handoff test.py:
-+  variables:
-+    TEST_PY_BD: "qemu_arm64"
-+    TEST_PY_ID: "--id fw_handoff_tfa_optee"
-+    TEST_PY_TEST_SPEC: "test_fw_handoff"
-+  <<: *buildman_and_testpy_dfn
-+
- qemu_arm_sbsa test.py:
-   variables:
-     TEST_PY_BD: "qemu-arm-sbsa"
--- 
-2.25.1
+But you should do it for all the DEVSTAT register defines, not just
+MMC and not just for Sitara, do it for all our K3 boards. It should
+be a simple rename patch to start. Then you can work to detangle
+"mode" from "device" for the MMC case as you are doing here.
+
+Andrew
+
+> 
+> ~ Judith
+> ...
+> 
 
