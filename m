@@ -4,148 +4,188 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72121CAC599
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 07:17:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7ED5CAC599
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 07:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C38858309A;
-	Tue, 16 Sep 2025 09:16:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C4708344E;
+	Tue, 16 Sep 2025 09:17:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="qr0dEeg7";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Z+b6D4eZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6363B81E13; Tue, 16 Sep 2025 03:46:10 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DEED983071; Tue, 16 Sep 2025 08:54:17 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0119480B9B
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 03:46:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5477D80B9B
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 08:54:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1354551b1f=christophe.roullier@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58G60Str016675;
+ Tue, 16 Sep 2025 08:54:11 +0200
+Received: from duzpr83cu001.outbound.protection.outlook.com
+ (mail-northeuropeazon11012020.outbound.protection.outlook.com [52.101.66.20])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 494yy1268c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 16 Sep 2025 08:54:10 +0200 (MEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wiEs/EdnuWYMPiAABPEF2QTwoZzPjn5+0xcZH50nNdDfZzg0GkyFlmv7a5Nh7235G14NRfFwd2Mv8vgaNdpPuazk9aia0hsPcTXwVdwNJscvhDnCWy5sAxJHVSoqTMmDUWnQIpCRmk6pP2wiQVpRzdq7zrik56RDljUfVdoGlg2bxiZhm1CM5ad/hq65HR0hZigBAh4VGIe8DmC5WfdGVQv1KhagS5Rd6nyc7iw1g6P4SDEHyTZ9kGytYEOEDCgJFKv7wuM0C728eeavJrf3YnEeldo9Gaey7A7tP82GBe4f8G+hgEH59klkcwWTCix9zJAp2KLbOb866KD1R417KQ==
+ b=iqPYORy2iOkVP3ZIJWBYrKco1yVNaTFeFiL+UmpmsqC+MqiC1QtW8MWAD5hrBfdcIyKIQKvsOMJ8xHBuRNcNVQa6Usa0+xm7/DKWR9w1edhX1S8M1v5dko+PpV0rnAS/zl2Bf2bWPCyAACBOPnbJeGs38vkxtbi60PW9j+Is6ZXlmi2HS/aW+z8g/rMesKRotvXFyy7/4foAdXPULw16QUYjeL9yTbf3TJxljI74G3ACPmD34aJrOKIhbh/8Ctuhl/ZEyKgNpYeThSX/aFuVA7zgSC7de0nMNfeHduy5d1cKyuhumVflCCEyyWLU+yf/plgn9OPLENTzgqmf9F2zEQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wUkLygWeTW5jcnjRTJWpY2d0NDV9L0z3wtXTIyrM0II=;
- b=kDMtXUZjGnhOzWdcmk969ojFIE+BAV6lTyMOgDxjsKVnZPFnev4LK+5DHHc+FmaCKPZJTuUyOYkicU80RuPVZmECN6mzvY3J1QyEbHFzMa2sPHe6T7KLCj9xINIXUhKmph00L+Ag8Odzl5i5lugufh/6t3EoEEwLPfhHzC+vIm5zJToscBMHXH+V/NXnA+GYM+zFkp5D54/jmMOJgRG1xXkTXFEnKskg9ELDToLrzHqqgueBl3lgmyAYNracWKPslMn3aZEwmAnyW3FGaKNNjlvuKHIC45ko/M5mGcFtgYyowubYlCEIen66Pers69179OHWQYeMrYX+KDweb2tZLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
+ bh=MBzkCT4HcnQfHK1xelzXfPOYO/4IS8ovID4mJZ31s0I=;
+ b=DXReCbvwXKt5w20cP13lZJmFqkmsror2yD21eacnYt9vys4AiS7abh9z/E257OTUp7doGFHTu3hGsM702gDuD+wN4tf2YfVn8y3+L0XU9aSY9x8a7BZC/DYm71IhtlBoCnyFOcr2AsRTu81qNbbqL2BVSqe5sE1hvK6D6jgd/ruTw2PF1ch/R0Eg37HFy3sG37CAZb62opgjuOWORMfrFnkIS3y55nX2PB7zM3PfwNbZhYDW6EMHUk76Trd6ddIuZk1vhauaf81/gm1hU8Rf990l7djpqFeA2BSU3ofIEtGPwhbXw8vnQHutiv256yDYjP4MphMZqGr0l99kQ5rIxQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.43) smtp.rcpttodomain=mailbox.org smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wUkLygWeTW5jcnjRTJWpY2d0NDV9L0z3wtXTIyrM0II=;
- b=qr0dEeg7zS/AGBY66X9+wbyDnMItQEqAzK1HJTziZ0nLboBevQ2gW+NCadeZBil+xHO764l+CZUd2I1RmgvUnRpxJ9EXp8yA1xn1wMm6f+4QKeVpigHOB0SG44PFtaBgyn+GNblF1h4Bwh8f5JERG9CL8PfAIUUr8xXaY+34gAqPg4UOicGFR2i906t4msaR1acy4sc1hLAVY9YR68II8dZJ8A0p6ipdvqGduhjwxidgiBfih+Cay/gCPro8dVNa8xM24eZAIVUOYGPYCKau4xlRxB+/o2+jpkh8LH8Hri8BEQ8QALRvOErEV969Nhy0HrdgCQyCQmeXsQeBS6a5tQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by VI0PR04MB10173.eurprd04.prod.outlook.com (2603:10a6:800:245::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.19; Tue, 16 Sep
- 2025 01:46:05 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9137.010; Tue, 16 Sep 2025
- 01:46:05 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: jh80.chung@samsung.com,
-	trini@konsulko.com
-Cc: u-boot@lists.denx.de, uboot-imx@nxp.com, Peng Fan <peng.fan@nxp.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] power: regulator: pfuze100: Fix accessing the regulator desc
-Date: Tue, 16 Sep 2025 10:57:35 +0800
-Message-Id: <20250916025735.20289-1-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.35.3
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG2PR06CA0220.apcprd06.prod.outlook.com
- (2603:1096:4:68::28) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ bh=MBzkCT4HcnQfHK1xelzXfPOYO/4IS8ovID4mJZ31s0I=;
+ b=Z+b6D4eZTRc4RcrdzZaA0v0ygcEDpcwu5/0IVsAj5w2fUGkunZvdpbSGsQUT/wO4QDm+msLMhqIGcfAoEG7KatTXVyHA8jpko4Kfauihk5f3+k3QhGbVpgFtJiYeLJtr6T0sGxvAAnUhhR0bTK16ylf5wvRk4yTaJFS7+Q7PXwo8l4ijU0nRihY9pPzAlIUZR0AeYmACrRp1bxlzNz+DbTlNMQ5tAU9LaXqVmJFMUKUkpDqVYKW7hGCxaDzFzgF2XfGAhm3fpw4vszSnYdQM8Kk+fyD8YBOXIVBaKjjDiToCKAoNLszphjEvDHmkU/TMf2pspX4LWTqpp1y51Y5tAw==
+Received: from DUZP191CA0059.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4fa::13)
+ by AM7PR10MB3828.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:17c::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9115.22; Tue, 16 Sep
+ 2025 06:54:08 +0000
+Received: from DB5PEPF00014B8F.eurprd02.prod.outlook.com
+ (2603:10a6:10:4fa:cafe::f1) by DUZP191CA0059.outlook.office365.com
+ (2603:10a6:10:4fa::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.12 via Frontend Transport; Tue,
+ 16 Sep 2025 06:54:08 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.43)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.43 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.43; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.43) by
+ DB5PEPF00014B8F.mail.protection.outlook.com (10.167.8.203) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9137.12 via Frontend Transport; Tue, 16 Sep 2025 06:54:07 +0000
+Received: from SHFDAG1NODE2.st.com (10.75.129.70) by smtpO365.st.com
+ (10.250.44.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 16 Sep
+ 2025 08:51:42 +0200
+Received: from [10.48.86.164] (10.48.86.164) by SHFDAG1NODE2.st.com
+ (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 16 Sep
+ 2025 08:54:05 +0200
+Message-ID: <7355aea1-17af-477d-84b3-9f47ccbb35ee@foss.st.com>
+Date: Tue, 16 Sep 2025 08:53:58 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] net: dwc_eth_qos: Fix support for stm32mp2 platform
+To: Marek Vasut <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
+CC: Joe Hershberger <joe.hershberger@ni.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20250915005331.222677-1-marek.vasut@mailbox.org>
+Content-Language: en-US
+From: Christophe ROULLIER <christophe.roullier@foss.st.com>
+In-Reply-To: <20250915005331.222677-1-marek.vasut@mailbox.org>
+X-Originating-IP: [10.48.86.164]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE2.st.com
+ (10.75.129.70)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI0PR04MB10173:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6f92986-7e81-4e87-34dc-08ddf4c2cc8e
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B8F:EE_|AM7PR10MB3828:EE_
+X-MS-Office365-Filtering-Correlation-Id: 14b1886a-de78-4c24-ab02-08ddf4edd51d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|52116014|19092799006|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4Mb7wqi9DewGIUa5es2qXpUbBke/ADLpdVmbO21CaMWYQptXucG8cQ4sPK4y?=
- =?us-ascii?Q?vb85Awj6aptZMFhQRaDfrpmZJlvSzjbzkI3PYCQPzjDFGlxizxrTtO0IjQuO?=
- =?us-ascii?Q?2Vv4nbVIvs/HWZqG9DgBRjmcbU68oebJXVcH4GFwz2EhSFL1ARoosH6i8XKF?=
- =?us-ascii?Q?XhpYjpCq7NFlIQzKIc1GB8tRDH50WGDV6k6IjAiveCfAe0sg3HDXE0s3sCzH?=
- =?us-ascii?Q?U7n2pohT4JrtZg+Bc9bRq2hJ4yEKadu9DzsQasntQabEWRxvguOO4jv7KpWK?=
- =?us-ascii?Q?BxS7OTo2coQhH2x5veXTYdL65FuCx4ijrz1tbxy9IKDuYJSuiU4UwE6pzf+U?=
- =?us-ascii?Q?KyErdqRGpzKtScIqZahTuzhQ1spSxu/PycOCGolzxmYjAyreBm61LxQsn5ZI?=
- =?us-ascii?Q?TeI/l/JnXVE1Kk1MCwlSieMLkPDGaTMGMmGDhdks199SsA4igc5lBKsP9Kpp?=
- =?us-ascii?Q?8auUNx0fuLU+S2zXsHpiZmxZeW1ZZ69M0QCdwDODlNhX7yFLAKAHIdVW+BEI?=
- =?us-ascii?Q?GuULC4DA7F9z2xtQEa2UnJoGYDItixZYo86M+xCPEITbNfuOgtnQK/eLrTsn?=
- =?us-ascii?Q?S1ABmahQOxxdsEB53onuBO8O8DWdk//69Qex/1XI5MhwuDYk+pz38R8jvvEC?=
- =?us-ascii?Q?zFML4xjkoGrawnw+WNKgvm4eurY/1gw6RZ9N5r2QiG9MTmI3MBWxOIgvuG/Z?=
- =?us-ascii?Q?obdsEuw6SOytzlgkMYKBqHDga4a5KWuCpEyfrhoSTrYsRIZT3GNtMocEO8bg?=
- =?us-ascii?Q?o567G3rOcwJjFYAlAzWRd5gghgSlwNFct5D2rRABYMzGMouyf1kehVeWymb8?=
- =?us-ascii?Q?sceMthiV9Ftl/xeTeAMCPXMxDcbmegLE6a58hqbLeAxpfeTGfYc92bXk6NGm?=
- =?us-ascii?Q?dT6MMPWTfJYtzH4RU/hOhtuD08OZ4mFWn9cKSqA+sKZie22sPw4fHyt8teJJ?=
- =?us-ascii?Q?LjlCc5pBGEhnlcvKxDyxKCSpPvGI232o5TaiWIfTdj2WqCAJ6vXs7274YtmS?=
- =?us-ascii?Q?8+PkFiwUtc+6nRhzCCSQUJRkmx9RebZXgIFrQqqX+fh+ucrD3/Rm6O+DUeow?=
- =?us-ascii?Q?EkRG82bn7lx2RGGf/94cHsJCWduKPGUpPNP0IYLmujgyDUmnZKDz8LF+1YzD?=
- =?us-ascii?Q?j5wXWS1CN9ezE+bb4iMTi7ZlRLA+Bh7lbLXmnHqj1l+tMFzB2yTPWjLbvgZr?=
- =?us-ascii?Q?NoJN7T01Y59PO02RmWrHbcOnBqKlTy5G8wgAGJHZqx1HAOADULfvFbYRC60A?=
- =?us-ascii?Q?q4VKrm8XrCnBFaDVI53ZTrAtwZ4dLFzUQgMDgqjvLG5Etd4VMLwlDJUPbJBU?=
- =?us-ascii?Q?UZZwN3fxBl80ddRmYoLp6fGWroIwqxUshDwkHQK7YVAHajOT6UNUhHq54M9H?=
- =?us-ascii?Q?P/2wUQcCUsKUWe6w+WkBFORZ3EuB7U1nzkc14fVJWTZthSVRAZ8Gybsun6Ah?=
- =?us-ascii?Q?3DfDLZxzhTvupXBk6iRlfW2/uSFt8LG4rWI4SlpfAZ9ergzrdorJNg=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(52116014)(19092799006)(38350700014);
+ ARA:13230040|82310400026|36860700013|376014|1800799024|7053199007|8096899003; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UWw0WmwwN09YTkpTOWg0YVJpL1dlTU9ydlpUNnprMjF6czRidFNHTzNJZmNm?=
+ =?utf-8?B?ZjlHMUZkSUhqeWtDSklrbjdUM28wT3NKWFJhOEtIVjNjVVh4VVV5QkdGVnAr?=
+ =?utf-8?B?RERnM1lUQWtwcUVjMEhsZEdWcmpXU0JMMVpYQzZwM3dvWXVIWXVVQmtGOURY?=
+ =?utf-8?B?aU9vczZLUWRlQUY0NWQ1NEk3dkYvK3pod0w2VHk5SThjT1RvVzZJZ1pWajlm?=
+ =?utf-8?B?cUFkV1M3NWRjNFJ5QThLMnR2NUV5RzgyZjVXRXZ1aDRwcUFCNTJReStCVGVP?=
+ =?utf-8?B?OEpsVUx1VjBwVmhMZEpTcitrRUtid1RrT2lFb2N5SzI2KzlnemZjTGs1ZW4v?=
+ =?utf-8?B?NHdDUEZHeEIwZmJPQTd2M0Z4MDJiTFQ3VFpHTFBDbjJhZUVJSU1aWDRMMEdM?=
+ =?utf-8?B?SzZsaEg3NTFCczZkaVQ2NzRIcXNHZ1U5enJrd1RXYzdZSmZDTTdrRG5rWUhU?=
+ =?utf-8?B?Q2tmNzlORTZ5L2E1aUhvMkVlT3FOYU9Cd0Q3MkYybVBSQ1FYaDBBV3MzYUxy?=
+ =?utf-8?B?ZlQ4bStCMkp4NEJvaFFULzNMMi9lY291U3FNRHBsbXpPVDJZcEtQaU1LYm9J?=
+ =?utf-8?B?RkVxdzg0bGZYd2JpMzg0MEF3YXJNb0lUSjFzRldpZllPVGJpYnJxSWY4d3Jy?=
+ =?utf-8?B?UnJVcytYeTZhNnJadHUyalpFT3N5d1ZKeGZ2NFJzVnZvR29uaXBrOFJocUZJ?=
+ =?utf-8?B?a21EcXVOQlF3M1pGdEVMY0FYSUxMRnozbGNJLy9VV0d0UjZHWGRoSEcwdmxy?=
+ =?utf-8?B?M1gzd3o4WS8rRk1hcVFXMFZvWXNrVEJDQnhIUG5XZkNhL3FhNXVnd1EzRjRF?=
+ =?utf-8?B?dFZ6N2IyK2hpdDRZWUtPRjlGRmRWMkwxQmFhaXZNWlZZejA4VFZwL1lkdEFH?=
+ =?utf-8?B?QmQzeEFOTUR0UUg5SW1TbWxQSnNqQXJNMEljZEtLN0xqdlFMY2hWTHdManBm?=
+ =?utf-8?B?ZjZ2UzU1MkprN2lqaTBPWlBneHlvaGtDOStTWXVNdXBTWllvZGNZVlVrYWg1?=
+ =?utf-8?B?dGsyQUtUeGN6amtwWHIrK2RSUUpZeGpVKzQwUEllcDZiaFRFOGE4Ry9qREFr?=
+ =?utf-8?B?WWhqcE1KYlNGcHc0OEoyNGZjdi9KRHdhMm9iTFlqZWJBWUl6MlA4TDJpaW4v?=
+ =?utf-8?B?cEpFTU96dnRINmxRY0g4MWlkQXpmcTVTTk51UnlzMnNnTkNLdkd3Q0pPaWtr?=
+ =?utf-8?B?TWM5cEhqaW05dkJQMEh3bHVpUEt1dTR3MUV1ZU11MnhqQXlTR2Jic0pIeHhl?=
+ =?utf-8?B?ZFJNUU1zYnhQMXVZazlHdjZrZFJkQnVtZEVBZnhLMzF2cUJMcFJJVFhycTUx?=
+ =?utf-8?B?MzhaWGdQQXZTOEgyODJHd2hxK2pTL2pBUDVmY1JlLy9od3I0RTVLTnhPMzdl?=
+ =?utf-8?B?YVJ0QkthZ2RPMWtWdVpveCtsanU4cXBVQXgrckkwK3NSREVDNXdSRmFQZzNk?=
+ =?utf-8?B?aVhzck5ITlBIV1dRNzZjeCtOTnJrV1Erc05nVnBMZVhFV3g3ZTBEMnR3amNT?=
+ =?utf-8?B?UVJSZ0MvUVlGckdYTFgzVnhXRW9wZG5neWhyNml6b0lTSUdLYVBTdUpjL1FK?=
+ =?utf-8?B?eVdsQkk2Q2tJR0Fpd3VJTkdyNmhGN0JGR3FxSG91SDVFRW5aNnVNZUFwTzJE?=
+ =?utf-8?B?T3lLSGJUT1IzZ0pidmpaSHFVNHRuNnRvVW9pclAvK01iaWdJNVcveWQxOUN5?=
+ =?utf-8?B?NWFydDZ0V3B6VmtqdHlLSTJ3Y3NKZE5JRXhVVkhTRFJ0QUY4ZURNaWZ0ZVJ4?=
+ =?utf-8?B?SjI4UExjd1ZvNHEyUWE3cHA5eWV0c1lTL0hlbTNGQzdpNTBWcW55bVZJOTBY?=
+ =?utf-8?B?UVhJRDd5aEVENGF4YVYrMGNncjZsTEFTbjlxQWRGaG9GMmo2RGNFMGo4Q1k1?=
+ =?utf-8?B?dXlYQ1JDQy9NYUpDQlpOOVBNU05BdWU4a2Q3dzdlNUZGN2JOdmJxNHJBNHQx?=
+ =?utf-8?B?eGNScUFadEwxWlFWaXl2VlIwWDRTVTJTTHB5MTJ1QUg3eUkrNDJHR0wvU1VY?=
+ =?utf-8?B?NzlRN1NjVXBEejFBTTNWYjNaLzFrYzk1KzlRVWcyR1BDdjY1U3QyT3Z4RDBy?=
+ =?utf-8?Q?gNYuj7?=
+X-Forefront-Antispam-Report: CIP:164.130.1.43; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024)(7053199007)(8096899003);
  DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?EdFotx7uuKznX68+/03P0+PlbhrNQBFgAXt/p9435oiAvnD9tt8Ssj4ow2Z5?=
- =?us-ascii?Q?33xLPSnvoCfyGOZKcjVampYtad2pZFXrqFIbcLV0T9RZqRGAZQKuomvs+M/w?=
- =?us-ascii?Q?jiF2M3zDg5rS/URGqMZArEchdkjYMuxDZHSQZB+irvP/MRI2PDT8Km0FP4s0?=
- =?us-ascii?Q?8AXnzQBchLUzKITYyvdHmgollEKJZShWeCGLjHsGv5KxUm3MCGxT8tJtRQUo?=
- =?us-ascii?Q?D+MjiRqXG9AtoP51H6bDwNRjd7G5jerYewLScsgnJJy6FelWoyfTVYkhAK4/?=
- =?us-ascii?Q?9PvsFO/ZmiUrIvzOqnx4tRl6zEKlhsCuJ+euvVntEzue7LZ9jsnS+gBHlXmf?=
- =?us-ascii?Q?OrJbYM4cPTEVirwDYwbHwEAjE9E5dmgAu/IVve1n7PikOklamBvQrfvd14Ls?=
- =?us-ascii?Q?rVJuo3LTLkmVSXAcSEUXeGIsuXan9hh4wBBbk1vo+2wutiDa3OAxmoo3L11e?=
- =?us-ascii?Q?YGPVq5eAhvzeLEx3z7wBO+geBCxODNfaucYvoL3UDB1itmNicIC6cqJGjHF8?=
- =?us-ascii?Q?zKN5NGpn7kJidM0wjIzLboPRxx3ooIHELtPH64yznMcQN78bAcDJGLQm8wTw?=
- =?us-ascii?Q?TmEk38gmz77AI1cRFQuTuUIievrmPEung81q5JUIotaWQAibShjDteSn0iGf?=
- =?us-ascii?Q?MvmM84rehBm1+l9kNKAqrp2oP8eZhibCJEobqNhZXX58Guh2tGYQ/YIEPObF?=
- =?us-ascii?Q?FJ0BAyLFLLrfuSVQdacSHuE8Yd0cB9Jzy93TPinOUW6gvDOz4uj3FydRnezk?=
- =?us-ascii?Q?lY8VucYmqtcHbZxG1Q3rSi1wtrCx3sy0mST1z1PrNUq5mWQSNbo+/11nYcJU?=
- =?us-ascii?Q?+ELG0Cio8URbDRnzMzKvtfAhxpJB+W3bRj9cLOk4qa9SBrKBdtIcD9Gf9pa6?=
- =?us-ascii?Q?1chJybjDaxOip0vfukPgGT66PcEbVQ+liAQMvfseVOeE2kZyUftHaM3tKDpw?=
- =?us-ascii?Q?QcWAc7dkWlU6u58I8Hbrd8XpmD+UiTPV5E379v9AQ7QqB6c0tOHT46VLQG8c?=
- =?us-ascii?Q?tZsqRfnf2WldH8EKFKVggdJ8leBx7CwWOtYx5gQKrcFPqajnsv6f2bdqDTDd?=
- =?us-ascii?Q?N2sP1lHkhRx73r9fAgdWu/XPzWUEOLAJfAzaKskZNXAG9/bitHqw1YWBM0gV?=
- =?us-ascii?Q?6v6yJFDYYrHNQBcgD6EHcdYxfSNJbMzgSyeoon0LOfpdk+da+scUFzAU1w4w?=
- =?us-ascii?Q?zpqqgv7k0A3CmL3ivhOqQ4i+/013uBSczo9A3pB/BLO6tW2XHxKMqOuhMepl?=
- =?us-ascii?Q?3ZU0nijw5GTi0qfdxImOxSuF7NBm2LMwgAARt2lBySbEBuYYdBNZ6psIrIk1?=
- =?us-ascii?Q?9+WWxxoP/VjUynOWKSXo5kUYoPz/hnnu6VJXa2BdNdCS5imbhS8PtRJUN71y?=
- =?us-ascii?Q?OOH6SaWbRH+J3f0AD48CjgPigbVQpEcgnb0byhd8tfPAaCQWay8AN5slI0ys?=
- =?us-ascii?Q?7fmb8r7nwJiuFy+/ZeQ2rXlyWyKzt4KKc22fwF3COhdAA8QDUOQGzVqsnOji?=
- =?us-ascii?Q?iJtNp/QgJ7gtDtwg0w4kv65KfgItDA0UD9/N8oRylKaqEUdsy5zJaR8bqcwr?=
- =?us-ascii?Q?xRAUk4xKHcHuyriesmb/gox8iAf0qt1DbmHHT53n?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6f92986-7e81-4e87-34dc-08ddf4c2cc8e
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2025 01:46:05.1847 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: c+XgAq3yxxJ/xq6Nlrvrtd1llqBRF1no+V+hheh/PkVPjr8N+EwGuypXtJb55RSPtRI/QdE7GK7mCUUJsykb/Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10173
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2025 06:54:07.5132 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14b1886a-de78-4c24-ab02-08ddf4edd51d
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.43];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B8F.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR10MB3828
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTEzMDAyMyBTYWx0ZWRfX1cfJZNxO5dHd
+ JufH85YnZQmEEC3FvF2bi8cEtZITv04BmhTqYBd+tylJBK5UOYT8soSk0wjwnxH6JqIKCqsymzJ
+ LB3mPGt880jl52dmbkzC/9PKRAh67W1wi4WPKV6XT6A9V6aDS7YETb2XO0+lv4JM4jIEpdmy2p3
+ pomJqQqEVGQN27Kq1WuF44uAsidMcfq7QhEBfzvhH0xG8ktYQLtw0GDWoUSsUilXKjvDWdxCWXr
+ io0CqcFK/Qoggvd3z/nAwBfzTQJgd3OOQvlHKkUr/RXqgvjQU8jq0tPr+URKMJZP6IwdJYGpIJy
+ Ubm9RGugvjMY8zAdokaBLDZ5TgmqU8wwyOPZxUYD+K9gIyohI1ASys7lCtBB9d/lE6aqVbSpbIZ
+ 525OhCvx
+X-Proofpoint-ORIG-GUID: QxPZXZG-qgNwK_NwXdejrm-l-kJzkota
+X-Proofpoint-GUID: QxPZXZG-qgNwK_NwXdejrm-l-kJzkota
+X-Authority-Analysis: v=2.4 cv=X+9SKHTe c=1 sm=1 tr=0 ts=68c90992 cx=c_pps
+ a=zBo0Hn18DklVKBP/19+Pqg==:117 a=peP7VJn1Wk7OJvVWh4ABVQ==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=h8e1o3o8w34MuCiiGQrqVE4VwXA=:19
+ a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=Su15o2SJOdkA:10 a=yJojWOMRYYMA:10
+ a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10 a=b3CbU_ItAAAA:8 a=8b9GpE9nAAAA:8
+ a=gVGD3344AAAA:8 a=pGLkceISAAAA:8 a=k-42gJp3AAAA:8 a=phlkwaE_AAAA:8
+ a=mt9yJrkggKRqU94j67QA:9 a=QEXdDO2ut3YA:10
+ a=WNj6xPxDx39IkADCwcMA:9 a=DqOT5d7piJGlU3_B:21 a=_W_S_7VecoQA:10
+ a=lqcHg5cX4UMA:10 a=Rv2g8BkzVjQTVhhssdqe:22 a=T3LWEMljR5ZiDmsYVIUa:22
+ a=xQEvYfgLW3QvObN0DhJi:22 a=uCSXFHLys93vLW5PjgO_:22 a=uKTQOUHymn4LaG7oTSIC:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-16_02,2025-09-12_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 spamscore=0
+ impostorscore=0 phishscore=0 malwarescore=0 bulkscore=0 clxscore=1011
+ suspectscore=0 adultscore=0 classifier=typeunknown authscore=0 authtc=
+ authcc= route=outbound adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2507300000 definitions=main-2509130023
 X-Mailman-Approved-At: Tue, 16 Sep 2025 09:16:57 +0200
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,100 +202,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+On 9/15/25 02:53, Marek Vasut wrote:
 
-se_desc loop check is wrong, it relies on the desc always has
-the expected name to end of the loop. It works because the device tree
-has the expected name as of now, but this may not be always true.
+> The layout of SYSCFG_ETHnCR on STM32MP25xx is slightly different yet again.
+> Add missing swizzling to program the correct register with the correct content.
+>
+> Fixes: 20afca89ed53 ("net: dwc_eth_qos: add support of stm32mp2 platform")
+> Signed-off-by: Marek Vasut<marek.vasut@mailbox.org>
+> ---
+> Cc: Christophe Roullier<christophe.roullier@foss.st.com>
+> Cc: Joe Hershberger<joe.hershberger@ni.com>
+> Cc: Patrice Chotard<patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay<patrick.delaunay@foss.st.com>
+> Cc: Ramon Fried<rfried.dev@gmail.com>
+> Cc: Tom Rini<trini@konsulko.com>
+> Cc:u-boot@lists.denx.de
+> Cc:uboot-stm32@st-md-mailman.stormreply.com
+> ---
+> V2: Gate off SELMII bit on both MP13 and MP2
+> ---
+>   drivers/net/dwc_eth_qos_stm32.c | 44 ++++++++++++++++++++++++++-------
+>   1 file changed, 35 insertions(+), 9 deletions(-)
+>
+> diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
+> index 7a28f2a3e83..57ac528ebf5 100644
+> --- a/drivers/net/dwc_eth_qos_stm32.c
+> +++ b/drivers/net/dwc_eth_qos_stm32.c
+> @@ -137,13 +137,15 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
+>   	const bool eth_ref_clk_sel = dev_read_bool(dev, "st,eth-ref-clk-sel");
+>   	/* SoC is STM32MP13xx with two ethernet MACs */
+>   	const bool is_mp13 = device_is_compatible(dev, "st,stm32mp13-dwmac");
+> +	/* SoC is STM32MP25xx with two ethernet MACs */
+> +	const bool is_mp2 = device_is_compatible(dev, "st,stm32mp25-dwmac");
+>   	/* Gigabit Ethernet 125MHz clock selection. */
+>   	const bool eth_clk_sel = dev_read_bool(dev, "st,eth-clk-sel");
+>   	/* Ethernet clock source is RCC. */
+>   	const bool ext_phyclk = dev_read_bool(dev, "st,ext-phyclk");
+>   	struct regmap *regmap;
+>   	u32 regmap_mask;
+> -	u32 value;
+> +	u32 reg, value;
+>   
+>   	regmap = syscon_regmap_lookup_by_phandle(dev, "st,syscon");
+>   	if (IS_ERR(regmap))
+> @@ -163,7 +165,7 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
+>   		 * acts as a selector between 0:GMII and 1:MII. As STM32MP13xx
+>   		 * supports only MII, ETH_SELMII is not present.
+>   		 */
+> -		if (!is_mp13)	/* Select MII mode on STM32MP15xx */
+> +		if (!is_mp13 && !is_mp2) /* Select MII mode on STM32MP15xx */
+>   			value |= SYSCFG_PMCSETR_ETH_SELMII;
+>   		break;
+>   	case PHY_INTERFACE_MODE_GMII:	/* STM32MP15xx only */
+> @@ -213,15 +215,39 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
+>   		return -EINVAL;
+>   	}
+>   
+> -	/* Shift value at correct ethernet MAC offset in SYSCFG_PMCSETR */
+> -	value <<= ffs(regmap_mask) - ffs(SYSCFG_PMCSETR_ETH1_MASK);
+> +	if (is_mp2) {
+> +		/*
+> +		 * STM32MP25xx SYSCFG EthernetN control register
+> +		 * has ETHn_CLK_SEL and ETHn_REF_CLK_SEL bits
+> +		 * swapped, swizzle them back in place. Bitfield
+> +		 * ETHn_SEL is shifted by 1 right, fix this up.
+> +		 */
+> +		value = ((value & SYSCFG_PMCSETR_ETH_SEL_MASK) >> 1) |
+> +			((value & SYSCFG_PMCSETR_ETH_CLK_SEL) << 1) |
+> +			((value & SYSCFG_PMCSETR_ETH_REF_CLK_SEL) >> 1);
+> +
+> +		/*
+> +		 * STM32MP25xx SYSCFG EthernetN control register
+> +		 * bits always start at bit shift 0 and there is
+> +		 * one register for each MAC, shift the register
+> +		 * content in place.
+> +		 */
+> +		value >>= ffs(SYSCFG_PMCSETR_ETH1_MASK) - 1;
+> +
+> +		reg = dev_read_u32_index_default(dev, "st,syscon", 1, 0);
+>   
+> -	/* Update PMCCLRR (clear register) */
+> -	regmap_write(regmap, is_mp13 ?
+> -			     SYSCFG_PMCCLRR_MP13 : SYSCFG_PMCCLRR_MP15,
+> -			     regmap_mask);
+> +		return regmap_write(regmap, reg, value);
+> +	} else {
+> +		/* Shift value at correct ethernet MAC offset in SYSCFG_PMCSETR */
+> +		value <<= ffs(regmap_mask) - ffs(SYSCFG_PMCSETR_ETH1_MASK);
+>   
+> -	return regmap_update_bits(regmap, SYSCFG_PMCSETR, regmap_mask, value);
+> +		/* Update PMCCLRR (clear register) */
+> +		regmap_write(regmap, is_mp13 ?
+> +				     SYSCFG_PMCCLRR_MP13 : SYSCFG_PMCCLRR_MP15,
+> +				     regmap_mask);
+> +
+> +		return regmap_update_bits(regmap, SYSCFG_PMCSETR, regmap_mask, value);
+> +	}
+>   }
+>   
+>   static int eqos_probe_resources_stm32(struct udevice *dev)
 
-Drop se_desc by moving the check into probe and fix the loop check.
-
-Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- drivers/power/regulator/pfuze100.c | 44 ++++++++++++------------------
- 1 file changed, 17 insertions(+), 27 deletions(-)
-
-diff --git a/drivers/power/regulator/pfuze100.c b/drivers/power/regulator/pfuze100.c
-index bf3a7019411..f864b1d8834 100644
---- a/drivers/power/regulator/pfuze100.c
-+++ b/drivers/power/regulator/pfuze100.c
-@@ -241,56 +241,46 @@ static struct dm_regulator_mode pfuze_ldo_modes[] = {
- 	MODE(LDO_MODE_ON, LDO_MODE_ON, "LDO_MODE_ON"),
- };
- 
--static struct pfuze100_regulator_desc *se_desc(struct pfuze100_regulator_desc *desc,
--					       int size,
--					       const char *name)
--{
--	int i;
--
--	for (i = 0; i < size; desc++) {
--		if (!strcmp(desc->name, name))
--			return desc;
--		continue;
--	}
--
--	return NULL;
--}
--
- static int pfuze100_regulator_probe(struct udevice *dev)
- {
- 	struct dm_regulator_uclass_plat *uc_pdata;
- 	struct pfuze100_regulator_plat *plat = dev_get_plat(dev);
- 	struct pfuze100_regulator_desc *desc;
-+	int i, size;
- 
- 	switch (dev_get_driver_data(dev_get_parent(dev))) {
- 	case PFUZE100:
--		desc = se_desc(pfuze100_regulators,
--			       ARRAY_SIZE(pfuze100_regulators),
--			       dev->name);
-+		desc = pfuze100_regulators;
-+		size = ARRAY_SIZE(pfuze100_regulators);
- 		break;
- 	case PFUZE200:
--		desc = se_desc(pfuze200_regulators,
--			       ARRAY_SIZE(pfuze200_regulators),
--			       dev->name);
-+		desc = pfuze200_regulators;
-+		size = ARRAY_SIZE(pfuze200_regulators);
- 		break;
- 	case PFUZE3000:
--		desc = se_desc(pfuze3000_regulators,
--			       ARRAY_SIZE(pfuze3000_regulators),
--			       dev->name);
-+		desc = pfuze3000_regulators;
-+		size = ARRAY_SIZE(pfuze3000_regulators);
- 		break;
- 	default:
- 		debug("Unsupported PFUZE\n");
- 		return -EINVAL;
- 	}
--	if (!desc) {
-+
-+	for (i = 0; i < size; i++) {
-+		if (strcmp(desc[i].name, dev->name))
-+			continue;
-+		break;
-+	}
-+
-+	if (i == size) {
- 		debug("Do not support regulator %s\n", dev->name);
- 		return -EINVAL;
- 	}
- 
--	plat->desc = desc;
-+	plat->desc = &desc[i];
- 	uc_pdata = dev_get_uclass_plat(dev);
- 
--	uc_pdata->type = desc->type;
-+	uc_pdata->type = desc[i].type;
- 	if (uc_pdata->type == REGULATOR_TYPE_BUCK) {
- 		if (!strcmp(dev->name, "swbst")) {
- 			uc_pdata->mode = pfuze_swbst_modes;
--- 
-2.35.3
-
+Reviewed-by: Christophe ROULLIER<christophe.roullier@foss.st.com>
