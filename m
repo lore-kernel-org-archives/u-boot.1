@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67288CAC598
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:36:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE07BCAC598
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:59:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA28080325;
-	Tue, 16 Sep 2025 12:36:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 62B9683071;
+	Tue, 16 Sep 2025 12:59:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QVq7H9zK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RM9MmmEI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD55C80325; Tue, 16 Sep 2025 12:35:59 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 583508323A; Tue, 16 Sep 2025 12:59:08 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 75D2B8318E
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:35:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE047803CC
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:59:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAZrDi1771113;
- Tue, 16 Sep 2025 05:35:53 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAx1N91258827;
+ Tue, 16 Sep 2025 05:59:01 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758018953;
- bh=CVokullzBeUX4lhNYmkEqJOdjnpDbXkBmsXrbvXhGAk=;
+ s=ti-com-17Q1; t=1758020341;
+ bh=E4n/7CZvdyNO54FcaindUUXI5oxjtoYqLuEEvTrwboo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=QVq7H9zKk95gSwFq7yJavhGDhh2OX1GxhOWreUfTdNlL+TIG0sjnT+7W4/1mLELEI
- x5aP49nxmlp+75RLQAij92pyqliOIw7Hbwz4uq2wjRA8Iq2vO47lVdk0OR6mu+lQLT
- OxpWlMLBWRljLgHUMf+p59N/zN30rDjsZZ6lB8s8=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAZqAY653606
+ b=RM9MmmEIz4M7Pzt4V5hbSLo4i3bWV1VDYSnkBRxW7N3njRDm5kKtbksoQy9Am4ovQ
+ ucaHHgZvZxad22YK2aOfIpOOp6HRBKIW+6oMsXEKNmO/0+QsXHumcbyuFlQyd42t1P
+ XF5gdnYHTwZDuwWuaGoYXTkbawy1Y8A/X8VVY4zs=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAx10V1470799
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 05:35:53 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 05:59:01 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 05:35:52 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 05:59:01 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 05:35:52 -0500
+ Transport; Tue, 16 Sep 2025 05:59:01 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAZpSt1480255;
- Tue, 16 Sep 2025 05:35:51 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAwxCb1503039;
+ Tue, 16 Sep 2025 05:59:00 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,13 +56,12 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 4/4] spl: ext,
- fat: cleanup use of CONFIG_SPL_LIBCOMMON_SUPPORT
-Date: Tue, 16 Sep 2025 16:05:41 +0530
-Message-ID: <20250916103542.104773-5-anshuld@ti.com>
+Subject: [PATCH v1 1/8] spl: Kconfig: add SPL_OS_BOOT_SECURE config symbol
+Date: Tue, 16 Sep 2025 16:28:49 +0530
+Message-ID: <20250916105857.163951-2-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250916103542.104773-1-anshuld@ti.com>
-References: <20250916103542.104773-1-anshuld@ti.com>
+In-Reply-To: <20250916105857.163951-1-anshuld@ti.com>
+References: <20250916105857.163951-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -83,100 +82,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Minor cleanup of spl_ext and spl_fat files, removing the outdated
-CONFIG_SPL_LIBCOMMON_SUPPORT symbols similar to the commit 1847129025e0
-("spl: mmc: Drop checks for CONFIG_SPL_LIBCOMMON_SUPPORT") and adding a
-few extra failure reports.
+This patch adds the new SPL_OS_BOOT_SECURE symbol that enables secure
+boot flow in falcon mode. This symbol can be used to disable certain
+inherently insecure options during falcon boot.
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_ext.c | 10 ++++------
- common/spl/spl_fat.c | 14 ++++++--------
- 2 files changed, 10 insertions(+), 14 deletions(-)
+ common/spl/Kconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
-index 80bd084db4e..a3925d38d52 100644
---- a/common/spl/spl_ext.c
-+++ b/common/spl/spl_ext.c
-@@ -47,9 +47,7 @@ int spl_load_image_ext(struct spl_image_info *spl_image,
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index ab05536bd02..7e87e50f693 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1206,6 +1206,14 @@ config SPL_OS_BOOT
+ 	  Enable booting directly to an OS from SPL.
+ 	  for more info read doc/README.falcon
  
- 	err = ext4fs_mount();
- 	if (!err) {
--#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
- 		printf("%s: ext4fs mount err - %d\n", __func__, err);
--#endif
- 		return -1;
- 	}
- 
-@@ -63,11 +61,9 @@ int spl_load_image_ext(struct spl_image_info *spl_image,
- 	err = spl_load(spl_image, bootdev, &load, filelen, 0);
- 
- end:
--#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
- 	if (err < 0)
- 		printf("%s: error reading image %s, err - %d\n",
- 		       __func__, filename, err);
--#endif
- 
- 	return err < 0;
- }
-@@ -144,8 +140,10 @@ defaults:
- 	ext4fs_set_blk_dev(block_dev, &part_info);
- 	ext4fs_mount();
- 	err = ext4fs_open(CONFIG_SPL_FS_LOAD_ARGS_NAME, &filelen);
--	if (err < 0)
--		puts("spl: ext4fs_open failed\n");
-+	if (err < 0) {
-+		puts("spl: ext4fs_open failed on args\n");
-+		return err;
-+	}
- 
- 	err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
- 	if (err < 0) {
-diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-index 2c8eee01272..80e800b4755 100644
---- a/common/spl/spl_fat.c
-+++ b/common/spl/spl_fat.c
-@@ -98,11 +98,9 @@ int spl_load_image_fat(struct spl_image_info *spl_image,
- 	err = spl_load(spl_image, bootdev, &load, size, 0);
- 
- end:
--#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
- 	if (err < 0)
- 		printf("%s: error reading image %s, err - %d\n",
- 		       __func__, filename, err);
--#endif
- 
- 	return err;
- }
-@@ -116,8 +114,10 @@ int spl_load_image_fat_os(struct spl_image_info *spl_image,
- 	__maybe_unused char *file;
- 
- 	err = spl_register_fat_device(block_dev, partition);
--	if (err)
-+	if (err) {
-+		printf("%s: fat mount err - %d\n", __func__, err);
- 		return err;
-+	}
- 
- 	if (!CONFIG_IS_ENABLED(ENV_SUPPORT))
- 		goto defaults;
-@@ -157,11 +157,9 @@ defaults:
- 	err = file_fat_read(CONFIG_SPL_FS_LOAD_ARGS_NAME,
- 			    (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
- 	if (err <= 0) {
--#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
--		printf("%s: error reading image %s, err - %d\n",
--		       __func__, CONFIG_SPL_FS_LOAD_ARGS_NAME, err);
--#endif
--		return -1;
-+		printf("%s: error reading image %s, err - %d\n", __func__,
-+		       CONFIG_SPL_FS_LOAD_ARGS_NAME, err);
-+		return err;
- 	}
- 
- 	return 0;
++config SPL_OS_BOOT_SECURE
++	bool "Allow Falcon Mode on secure devices"
++	depends on SPL_OS_BOOT
++	help
++	  This allows for secure devices with signature verification capabilities
++	  to use falcon mode by disabling certain inherently non-securable options
++	  in the SPL boot flow.
++
+ config SPL_PAYLOAD_ARGS_ADDR
+ 	hex "Address in memory to load 'args' file for Falcon Mode to"
+ 	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
 -- 
 2.51.0
 
