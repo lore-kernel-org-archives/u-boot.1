@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42ACACAC598
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 11:00:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52CCDCAC599
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 11:00:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C9F783323;
-	Tue, 16 Sep 2025 12:59:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E5A9803CC;
+	Tue, 16 Sep 2025 12:59:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="On9ac1kE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AvIANtvE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B49B8353A; Tue, 16 Sep 2025 12:59:20 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 53B4B83542; Tue, 16 Sep 2025 12:59:22 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 097A3803CC
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:59:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F48C83526
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:59:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAxD261707373;
- Tue, 16 Sep 2025 05:59:13 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAxFKX1258875;
+ Tue, 16 Sep 2025 05:59:15 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758020353;
- bh=/CpcEN18W1bI040vFodiXEDL4duBMIUwIc3CZO3Lfhk=;
+ s=ti-com-17Q1; t=1758020355;
+ bh=6wAK9InP+9nlxANpBF6pZKwVWl63ol1gX6mGuv63iPw=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=On9ac1kEkzqcRZFUvKDCW/LVSFBRt0xjSrj/h+tOZwnjcxwD1FComaTsazAc57tpY
- ES8nhbIhMAZaVzk9BDKWDEbISP9D2cZ6d8z0Qurkq9oXlO5cpemmXKJ8u0wUDLSd5x
- gNh9q2mhcY5nxnu/zC9hiU8kXFHk94nmQSPzBzvI=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAxDRp1471138
+ b=AvIANtvE7qRnA+NxmoDG6buj9SsfqCfy2hrXAN39pZbv/VZa+GtRXe3vb5TaJfk4D
+ Y7PeurQGqXZ0GvW9Cm8/MIW68zC+aHEjy30fsBjbaHarjOCKkU3shCuR8GvfX+t+ze
+ DljM+Pun4+DBOP42w8S6+xjDVgOySHsk0YPd3JWA=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAxFgY664084
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 05:59:13 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 05:59:15 -0500
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 05:59:13 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 05:59:15 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 05:59:13 -0500
+ Transport; Tue, 16 Sep 2025 05:59:15 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAxBfu1503329;
- Tue, 16 Sep 2025 05:59:12 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAxDkM1203262;
+ Tue, 16 Sep 2025 05:59:14 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,9 +56,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v1 7/8] spl: nand: refactor spl_nand_load_image for falcon mode
-Date: Tue, 16 Sep 2025 16:28:55 +0530
-Message-ID: <20250916105857.163951-8-anshuld@ti.com>
+Subject: [PATCH v1 8/8] spl: falcon: disable fallback to U-Boot on failure
+Date: Tue, 16 Sep 2025 16:28:56 +0530
+Message-ID: <20250916105857.163951-9-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250916105857.163951-1-anshuld@ti.com>
 References: <20250916105857.163951-1-anshuld@ti.com>
@@ -82,130 +82,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch moves the falcon mode handling logic out of
-spl_ubi_load_image to spl_ubi_load_image_os, this allows for cleaner
-handling for fallback to U-Boot in case falcon mode fails.
+Instead of falling back to the standard U-Boot boot flow, we should just
+halt boot if the expected boot flow in falcon mode fails.
+
+This prevents a malicious actor from accessing U-Boot proper if they can
+cause a boot failure on falcon mode.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_nand.c | 95 +++++++++++++++++++++++--------------------
- 1 file changed, 52 insertions(+), 43 deletions(-)
+ common/spl/spl_mmc.c  | 4 ++++
+ common/spl/spl_nand.c | 6 ++++--
+ common/spl/spl_nor.c  | 6 ++++--
+ common/spl/spl_spi.c  | 6 ++++--
+ common/spl/spl_ubi.c  | 2 ++
+ 5 files changed, 18 insertions(+), 6 deletions(-)
 
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index c5585d8e0d2..d0dad6ea8fd 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -272,6 +272,8 @@ static int spl_mmc_do_fs_boot(struct spl_image_info *spl_image,
+ 			return 0;
+ 		printf("%s, Failed to load falcon payload: %d\n", __func__,
+ 		       ret);
++		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
++			return ret;
+ 		printf("Fallback to U-Boot\n");
+ 	}
+ 
+@@ -412,6 +414,8 @@ int spl_mmc_load(struct spl_image_info *spl_image,
+ 			ret = mmc_load_image_raw_os(spl_image, bootdev, mmc);
+ 			if (!ret)
+ 				return 0;
++			if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
++				return ret;
+ 		}
+ 
+ 		raw_sect = spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
 diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-index 22883f4e8b9..f37baefb372 100644
+index f37baefb372..93ef2d1c02c 100644
 --- a/common/spl/spl_nand.c
 +++ b/common/spl/spl_nand.c
-@@ -75,6 +75,52 @@ static int spl_nand_load_element(struct spl_image_info *spl_image,
- 	return spl_load(spl_image, bootdev, &load, 0, offset);
- }
- 
-+#if CONFIG_IS_ENABLED(OS_BOOT)
-+static int spl_nand_load_image_os(struct spl_image_info *spl_image,
-+				  struct spl_boot_device *bootdev)
-+{
-+	int *src, *dst, err;
-+	struct legacy_img_hdr *header = spl_get_load_buffer(0, sizeof(*header));
-+
-+	/* load linux */
-+	nand_spl_load_image(CONFIG_SYS_NAND_SPL_KERNEL_OFFS, sizeof(*header),
-+			    (void *)header);
-+	err = spl_parse_image_header(spl_image, bootdev, header);
-+	if (err)
-+		return err;
-+
-+	if (header->ih_os != IH_OS_LINUX)
-+		return -EINVAL;
-+
-+	/* happy - was a linux */
-+	err = nand_spl_load_image(CONFIG_SYS_NAND_SPL_KERNEL_OFFS,
-+				  spl_image->size,
-+				  (void *)spl_image->load_addr);
-+	nand_deselect();
-+
-+	if (err)
-+		return err;
-+
-+	/*
-+	 * load parameter image load to temp position since nand_spl_load_image
-+	 * reads a whole block which is typically larger than
-+	 * CONFIG_CMD_SPL_WRITE_SIZE therefore may overwrite following sections
-+	 * like BSS
-+	 */
-+	nand_spl_load_image(CONFIG_CMD_SPL_NAND_OFS, CONFIG_CMD_SPL_WRITE_SIZE,
-+			    (void *)CONFIG_TEXT_BASE);
-+	/* copy to destintion */
-+	for (dst = (int *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
-+	    src = (int *)CONFIG_TEXT_BASE;
-+	     src < (int *)(CONFIG_TEXT_BASE + CONFIG_CMD_SPL_WRITE_SIZE);
-+	     src++, dst++) {
-+		writel(readl(src), dst);
-+	}
-+
-+	return 0;
-+}
-+#endif
-+
- static int spl_nand_load_image(struct spl_image_info *spl_image,
- 			       struct spl_boot_device *bootdev)
- {
-@@ -89,51 +135,14 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
- 
- #if CONFIG_IS_ENABLED(OS_BOOT)
- 	if (!spl_start_uboot()) {
--		int *src, *dst;
--		struct legacy_img_hdr *header =
--			spl_get_load_buffer(0, sizeof(*header));
--
--		/*
--		 * load parameter image
--		 * load to temp position since nand_spl_load_image reads
--		 * a whole block which is typically larger than
--		 * CONFIG_CMD_SPL_WRITE_SIZE therefore may overwrite
--		 * following sections like BSS
--		 */
--		nand_spl_load_image(CONFIG_CMD_SPL_NAND_OFS,
--			CONFIG_CMD_SPL_WRITE_SIZE,
--			(void *)CONFIG_TEXT_BASE);
--		/* copy to destintion */
--		for (dst = (int *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
--		     src = (int *)CONFIG_TEXT_BASE;
--			src < (int *)(CONFIG_TEXT_BASE +
--				      CONFIG_CMD_SPL_WRITE_SIZE);
--		     src++, dst++) {
--			writel(readl(src), dst);
--		}
--
--		/* load linux */
--		nand_spl_load_image(CONFIG_SYS_NAND_SPL_KERNEL_OFFS,
--			sizeof(*header), (void *)header);
--		err = spl_parse_image_header(spl_image, bootdev, header);
--		if (err)
--			return err;
--		if (header->ih_os == IH_OS_LINUX) {
--			/* happy - was a linux */
--			err = nand_spl_load_image(
--				CONFIG_SYS_NAND_SPL_KERNEL_OFFS,
--				spl_image->size,
--				(void *)spl_image->load_addr);
--			nand_deselect();
--			return err;
--		} else {
--			puts("The Expected Linux image was not "
--				"found. Please check your NAND "
--				"configuration.\n");
--			puts("Trying to start u-boot now...\n");
--		}
-+		err = spl_nand_load_image_os(spl_image, bootdev);
-+		if (!err)
-+			return 0;
-+		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
-+		       __func__, err);
+@@ -138,8 +138,10 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
+ 		err = spl_nand_load_image_os(spl_image, bootdev);
+ 		if (!err)
+ 			return 0;
+-		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
+-		       __func__, err);
++		printf("%s: Failed in falcon boot: %d", __func__, err);
++		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
++			return err;
++		printf("Fallback to U-Boot\n");
  	}
  #endif
-+
- #ifdef CONFIG_NAND_ENV_DST
- 	spl_nand_load_element(spl_image, bootdev, CONFIG_ENV_OFFSET);
- #ifdef CONFIG_ENV_OFFSET_REDUND
+ 
+diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
+index 9c037bd62eb..6f9ff91bef7 100644
+--- a/common/spl/spl_nor.c
++++ b/common/spl/spl_nor.c
+@@ -95,8 +95,10 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
+ 		if (!err)
+ 			return 0;
+ 
+-		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
+-		       __func__, err);
++		printf("%s: Failed in falcon boot: %d", __func__, err);
++		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
++			return err;
++		printf("Fallback to U-Boot\n");
+ 	}
+ #endif
+ 
+diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
+index 2a6098a4dc3..cbc864809fe 100644
+--- a/common/spl/spl_spi.c
++++ b/common/spl/spl_spi.c
+@@ -105,8 +105,10 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
+ 		if (!err)
+ 			return 0;
+ 
+-		printf("%s: Failed in falcon boot: %d, fallback to U-Boot",
+-		       __func__, err);
++		printf("%s: Failed in falcon boot: %d", __func__, err);
++		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
++			return err;
++		printf("Fallback to U-Boot\n");
+ 	}
+ #endif
+ 
+diff --git a/common/spl/spl_ubi.c b/common/spl/spl_ubi.c
+index 09b9bbc5c47..3c6f80de7d9 100644
+--- a/common/spl/spl_ubi.c
++++ b/common/spl/spl_ubi.c
+@@ -77,6 +77,8 @@ int spl_ubi_load_image(struct spl_image_info *spl_image,
+ 			return 0;
+ 
+ 		printf("%s: Failed in falcon boot: %d", __func__, ret);
++		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
++			return ret;
+ 		printf("Fallback to U-Boot\n");
+ 	}
+ #endif
 -- 
 2.51.0
 
