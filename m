@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003B1CAC592
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AB1ECAC59B
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 18:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FFB7832F0;
-	Tue, 16 Sep 2025 20:27:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC33883071;
+	Tue, 16 Sep 2025 20:27:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eYhBYS+5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rx+lHcKL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D28803CC; Tue, 16 Sep 2025 20:27:36 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 16F75803CC; Tue, 16 Sep 2025 20:27:44 +0200 (CEST)
+Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
+ [IPv6:2001:4860:4864:20::2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2930C8331B
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:27:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9276B83321
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 20:27:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-62347d880feso1514483eaf.3
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:34 -0700 (PDT)
+Received: by mail-oa1-x2e.google.com with SMTP id
+ 586e51a60fabf-3326d9ee5edso1983370fac.3
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 11:27:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758047253; x=1758652053; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758047260; x=1758652060; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YfWFPlTsMCBCoG5S5Nju9e1HKcAMyss5N+WJTAUj4A0=;
- b=eYhBYS+5xeF6krZTv6z/GS/Lktlhb83sDjyMCNsKmuxUZ9hktyc16e19eZ64bbeh5c
- FZmvwn59Pk4R3fChHLppGwWomxtrgVz6SnLe4F3FP0ygadcN7deO29sYx68v6dcPX9+J
- t/JQbVnZlUZIe4acMCjJsWe2F74aljbVjcZDk=
+ bh=J5SDE5U2nAtPiYIGxuCk/GUHDg4vze/f5gCjnGY5peo=;
+ b=Rx+lHcKLm4nKq+D1LL5TXfD+eZ/nfuHOFDz0DhBcp92ldu33R2Wwa3H8LDafLBNTZr
+ 0PhMgBXtEiUpiojyEUSzxhXMEXowDW6pnrP1Bt3LBhWsM777wkYoOAw9NFjAMq1LllXH
+ 16X7ICajUh0TEXkmwlMMTKrQKfZkEWrjZY3to=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758047253; x=1758652053;
+ d=1e100.net; s=20230601; t=1758047260; x=1758652060;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YfWFPlTsMCBCoG5S5Nju9e1HKcAMyss5N+WJTAUj4A0=;
- b=cpHRBe2LNIqE4tIlGhZmatWCvqZ0cBrYCYnwtArAV8+oLzMaVpRbDHpIt1XVN1CYrN
- MugcmZpvPw6kwtNJlY4YP4OhGBrKPU9MR57C6MhhzYaFlNvl7cXMnnpkSg7G2FogTWMB
- KtT7ecS7QgGqr/HWw7m0RuAwtNvKhqGMO2rLZEDIheeqpW9T0EoK6cruyW50wwLJabUn
- ssxn8w+LjShueG2PCPBz8OePzMNNOGj/kCn2yuP117LWyTmb07BzuJ1n/BvA6upMklBR
- fxZKft1Z99pbAVuC4FP5DnLh8rT75/n9TJIFBkb5BI3U1QhXJNKBN7JUyNS5dlbjVMez
- k/Zg==
-X-Gm-Message-State: AOJu0YxraVTraXzqPrgpg0oEmSbXf08t3VPasLoyhpe9mtynTM6DUKSV
- KA/umoBQ4Hy8KbZjX4IqMauNJaTtSNaOlxCqRsytAO9sPe83LM7bWx4Pxh9ltzog+7E=
-X-Gm-Gg: ASbGncthSx5mP2JfBXCfEsjxo2rbuIAGcnoNe7m3y+mC/0VaLwNhxZiOMMpCU6aQk+J
- 3BCppo/SVPVdcpolZNfv7O9HKoqHh9eAQYmh9pO3A3WgJC4Q8bjoS/ppZdYyTtbvQQHY+Bl6FE8
- +crFdGL3ypMqu6fjPlUyg3aVRZ+Pxd6TZVNHKmN16OnTXrs3hgf9hpYyWGz36V51TjbekAIu3MP
- s8eK/PN3+xdYtzsclLZYAfiVY/DfHPWphqeCAaHICmCI8eFO0xTjZU1hPGFukDpLfPjgaOq8MuO
- n+p1XFgy5Fo6PXTE7FcMhKDEQWD0cwUwsFwaOFz2mB8E/8mKBl0MgFemsk4dQHXgFDKK4j/+4xm
- klDmUU7BVAMhsVegQBwPmRVyZoEx5y2gpqxBflO0YI5JLGQn2wqp8U40Y
-X-Google-Smtp-Source: AGHT+IE2pLLidZAG/ym+BIF775AzUMBquWJxems1DnT+ztURxKsJlMnM+tPTHRKbhwJjAfwqb9qO9g==
-X-Received: by 2002:a05:6808:6a89:b0:439:27db:51e5 with SMTP id
- 5614622812f47-43b8d8e527dmr7240319b6e.18.1758047252761; 
- Tue, 16 Sep 2025 11:27:32 -0700 (PDT)
+ bh=J5SDE5U2nAtPiYIGxuCk/GUHDg4vze/f5gCjnGY5peo=;
+ b=qEPB47YC5GY/aQ0Q5Vqlh7Qb7eKKGAfnhV4YJcAJuYmiOR+DvvrpTjX2jGeXZXcxf1
+ Lg1GgrUCPG80XeLcInb1HpaQWs4pMdGwiOh6Fa3ILVk8GTy9np8riJaKeBw1xLBSiMyR
+ xYaep9aV/NX2zKXONpKxS3H0dnBgRJhsq/m/UoYFY5G/DEB+z1vMVWXFKmTanrVwFlur
+ +4JrfR/RX5SP/1gHtnzEIN+YbBFYlYilD6kuxHfM0p/wr6dcKo3TlVBOLGdkWNHAGL3A
+ f9X5fvI12Vlpvz0Zx1uqyesvrZbdAnof86xtgS1H4324FbkLLYPfU3PGXwjp8eSVmRDV
+ jnjQ==
+X-Gm-Message-State: AOJu0YywxznE5ewtMLFtDXj5ux00EHefzUR8f/7r83A3R9/jCFADh5Y+
+ DZz7LusPawhLE/+hUKQXj+8xz8VmalFSOot60/LwW+tlXUfs6UCNKQ+run0GxRTPmxM=
+X-Gm-Gg: ASbGnctoDkWaXjEbyUXCGJmgRSWRaT0KBAVej48YHgQ73NEkklR1livKak09NSzF+HY
+ a9gKK42gXoBrRjkXkDiCc9QtWQ+MHo10PpflKS+Cg9bcw6SyxgkynYkER7x0FuWpK4yJih1P8OR
+ 7DH/riw4GagUjB1y8TSNt8R08Dpgk+eysfKXbly4OmVKTeisjr5tITQncpNp9wd3luWCvrLJLlC
+ kThGLWYaffWPd8J7Gv4bbakG7BN5FCBcUYVcbKZci2YFQVRL7t4S1HP83BiO1VndBZgUt8hfI2N
+ a+e09PEWiZ+9TUf6zuaMAd4jaGWl8cLgtPF61xVJd3jnwyjLaztf94aHk6T+lVbBsp/YrmQZ2ug
+ ZWGeMxWMgkVbsuaJ3V71Ttm2LIvBOz1EyT5SaCAhozEWFVPrE624Zda+J
+X-Google-Smtp-Source: AGHT+IHSd+0KVeQzRpfCKN6OhXa23bVSv//oRhho7vrpC4X2+ML/Oezgm6dGIeJmJPZI+W+2WR7Ljg==
+X-Received: by 2002:a05:6870:c081:b0:321:2680:2f8e with SMTP id
+ 586e51a60fabf-32e560cd615mr9870776fac.10.1758047260169; 
+ Tue, 16 Sep 2025 11:27:40 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43d20e4fa88sm1940952b6e.24.2025.09.16.11.27.30
+ 46e09a7af769-7607e2047ddsm144846a34.11.2025.09.16.11.27.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Sep 2025 11:27:31 -0700 (PDT)
-Date: Tue, 16 Sep 2025 12:27:29 -0600
+ Tue, 16 Sep 2025 11:27:39 -0700 (PDT)
+Date: Tue, 16 Sep 2025 12:27:37 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
@@ -77,16 +77,15 @@ Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sam Protsenko <semen.protsenko@linaro.org>
-Subject: Re: [PATCH u-boot-test-hooks 2/2] travis-ci: add config file for
- testing firmware handoff on qemu_arm64
-Message-ID: <20250916182729.GX124814@bill-the-cat>
-References: <20250916161230.32140-1-raymond.mao@linaro.org>
- <20250916161230.32140-2-raymond.mao@linaro.org>
+Subject: Re: [PATCH 1/5] docker: add OP-TEE build for testing Firmware Handoff
+Message-ID: <20250916182737.GY124814@bill-the-cat>
+References: <20250916161426.32259-1-raymond.mao@linaro.org>
+ <20250916161426.32259-2-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VXbgkX6I8tIhHI2m"
+ protocol="application/pgp-signature"; boundary="5YQqgdfELgnZCyAm"
 Content-Disposition: inline
-In-Reply-To: <20250916161230.32140-2-raymond.mao@linaro.org>
+In-Reply-To: <20250916161426.32259-2-raymond.mao@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,97 +104,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---VXbgkX6I8tIhHI2m
+--5YQqgdfELgnZCyAm
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 16, 2025 at 09:12:25AM -0700, Raymond Mao wrote:
-
-> The existing 'conf.qemu_arm64_na' uses 'u-boot.bin' as bios, but for
-> the case of TF-A, 'u-boot.bin' is BL33 and the assembled 'flash.bin'
-> is the bios instead, which will be built and assembled at run-time
-> via a post-buildman script and copied to '/tmp'.
->=20
-> Moreover, for running TF-A and OP-TEE on qemu, '-m 4G' and
-> 'virtualization=3Dfalse,secure=3Don' are required, and '-semihosting'
-> should be replaced with its modern alias
-> '-semihosting-config enable=3Don,target=3Dnative'.
->=20
-> Last, point to the new helper script 'swtpm-tfa'.
+On Tue, Sep 16, 2025 at 09:14:17AM -0700, Raymond Mao wrote:
+> Fetch OP-TEE (4.7.0) and build it with Firmware Handoff enabled.
 >=20
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-
-Lets fixup the current qemu_arm64 conf to have as much in common as
-possible (4G, modern semihosting flags, etc). Next:
-
 > ---
->  .../conf.qemu_arm64_fw_handoff_tfa_optee      | 31 +++++++++++++++++++
->  1 file changed, 31 insertions(+)
->  create mode 100644 bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+>  tools/docker/Dockerfile | 77 +++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 77 insertions(+)
 >=20
-> diff --git a/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee b/bin/tra=
-vis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
-> new file mode 100644
-> index 0000000..9aa6d3b
-> --- /dev/null
-> +++ b/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
-> @@ -0,0 +1,31 @@
-> +# Copyright (c) 2025 Linaro Limited
-> +# Author: Raymond Mao <raymond.mao@linaro.org>
-> +# Based on conf.qemu_arm64 which is
-> +# Copyright (c) 2017 Tuomas Tynkkynen. All rights reserved.
-> +#
-> +# Permission is hereby granted, free of charge, to any person obtaining a
-> +# copy of this software and associated documentation files (the "Softwar=
-e"),
-> +# to deal in the Software without restriction, including without limitat=
-ion
-> +# the rights to use, copy, modify, merge, publish, distribute, sublicens=
-e,
-> +# and/or sell copies of the Software, and to permit persons to whom the
-> +# Software is furnished to do so, subject to the following conditions:
-> +#
-> +# The above copyright notice and this permission notice shall be include=
-d in
-> +# all copies or substantial portions of the Software.
-> +#
-> +# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRES=
-S OR
-> +# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILIT=
-Y,
-> +# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHA=
-LL
-> +# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR O=
-THER
-> +# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-> +# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-> +# DEALINGS IN THE SOFTWARE.
-> +
-> +console_impl=3Dqemu
-> +qemu_machine=3D"virt,virtualization=3Dfalse,secure=3Don"
-> +qemu_helper_script=3D"swtpm-tfa"
-> +qemu_binary=3D"qemu-system-aarch64"
-> +qemu_extra_args=3D"-m 4G -cpu cortex-a57 -nographic -netdev user,id=3Dne=
-t0,tftp=3D${UBOOT_TRAVIS_BUILD_DIR} -device e1000,netdev=3Dnet0 -device vir=
-tio-rng-pci -d unimp -semihosting-config enable=3Don,target=3Dnative -chard=
-ev socket,id=3Dchrtpm,path=3D/tmp/tpm/swtpm-sock -tpmdev emulator,id=3Dtpm0=
-,chardev=3Dchrtpm -device tpm-tis-device,tpmdev=3Dtpm0"
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index 5b4c75f8400..02a8a2fb37c 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -54,6 +54,83 @@ RUN if [ "$TARGETPLATFORM" =3D "linux/amd64" ]; then \
+>  		wget -O - https://github.com/foss-xtensa/toolchain/releases/download/2=
+020.07/x86_64-2020.07-xtensa-dc233c-elf.tar.gz | tar -C /opt -xz; \
+>  	fi
+> =20
+> +# Build OP-TEE
+> +RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt,sharing=3Dlocked \
+> +    --mount=3Dtype=3Dcache,target=3D/var/lib/apt,sharing=3Dlocked \
+> +    apt-get update && apt-get install -y \
+> +	adb \
 
-Can we line break this? Then make some functional groupings? Thanks.
+Whatever in this list of dependencies that are new for OP-TEE should be
+added to the normal list of things we install.
+
+[snip]
+> +RUN git clone https://github.com/OP-TEE/optee_os.git /tmp/optee_os && \
+> +	cd /tmp/optee_os/ && \
+> +	git checkout 4.7.0 && \
+> +	make CROSS_COMPILE=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64=
+-linux- \
+> +		CROSS_COMPILE_core=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch6=
+4-linux- \
+> +		CROSS_COMPILE32=3D/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-l=
+inux-gnueabi- \
+> +		CROSS_COMPILE_ta_arm32=3D/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bi=
+n/arm-linux-gnueabi- \
+> +		CROSS_COMPILE_ta_arm64=3D/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aa=
+rch64-linux- \
+> +		ARCH=3Darm \
+> +		CFG_ARM64_core=3Dy \
+> +		CFG_TRANSFER_LIST=3Dy CFG_MAP_EXT_DT_SECURE=3Dy \
+> +		PLATFORM=3Dvexpress-qemu_armv8a CFG_RPMB_FS=3Dy \
+> +		CFG_RPMB_FS_DEV_ID=3D0 CFG_CORE_HEAP_SIZE=3D524288 CFG_RPMB_WRITE_KEY=
+=3Dy \
+> +		CFG_CORE_HEAP_SIZE=3D524288 CFG_CORE_DYN_SHM=3Dy CFG_RPMB_TESTKEY=3Dy \
+> +		CFG_RPMB_WRITE_KEY=3D1 \
+> +		CFG_REE_FS=3Dn CFG_CORE_ARM64_PA_BITS=3D48  \
+> +		CFG_TEE_CORE_LOG_LEVEL=3D4 CFG_TEE_TA_LOG_LEVEL=3D1 DEBUG=3Dy
+
+And this should be much farther down in the file, near where we build
+TF-A and coreboot and everything else, not up top.
 
 --=20
 Tom
 
---VXbgkX6I8tIhHI2m
+--5YQqgdfELgnZCyAm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmsEQAKCRAr4qD1Cr/k
-ClKpAPkBgc0ol2E/Siu7OeQOjHulGQsZ/EN9xofl03aZsOglGAD/UaLGl670GSiR
-m47EBJGggmbu9fT50s7fjw7n9ysfJwI=
-=F/X7
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMmsGAAKCRAr4qD1Cr/k
+CluDAQCvLPkeP8IImA8T36hRVv1FmnLWrqO65Mao9w5yP4swZgEAv5SHZ5mLyX5m
+Ebyyw+7vvu44RJUbGo0u9BsqYuPhZAg=
+=YQD+
 -----END PGP SIGNATURE-----
 
---VXbgkX6I8tIhHI2m--
+--5YQqgdfELgnZCyAm--
