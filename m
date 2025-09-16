@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA64CAC598
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67288CAC598
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:36:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27A748318E;
-	Tue, 16 Sep 2025 12:36:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AA28080325;
+	Tue, 16 Sep 2025 12:36:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MaWV0gQk";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QVq7H9zK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F0C68331F; Tue, 16 Sep 2025 12:35:58 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id AD55C80325; Tue, 16 Sep 2025 12:35:59 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AAE583287
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:35:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75D2B8318E
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:35:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAZoWV1704878;
- Tue, 16 Sep 2025 05:35:50 -0500
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAZrDi1771113;
+ Tue, 16 Sep 2025 05:35:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758018950;
- bh=8uQteAWKshrtCd84sSkcPm2bK/0jgxyShCg75muhbh8=;
+ s=ti-com-17Q1; t=1758018953;
+ bh=CVokullzBeUX4lhNYmkEqJOdjnpDbXkBmsXrbvXhGAk=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=MaWV0gQkk9u4lYyehl5TqsW/aqoTygNAsGIh157+Iot4oK8u6GnCqaWI4oOZa4CT0
- iyRj+Nf+pdPoXQ+upkWJfVfZX9ZH+PZy9xlSWBca81zn4SoEPLyFlQxNxNxHuypFOx
- hp2r+4ad8Ru4bd5+rNs/M3B52wwAapIpjAc90ilc=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAZojT653601
+ b=QVq7H9zKk95gSwFq7yJavhGDhh2OX1GxhOWreUfTdNlL+TIG0sjnT+7W4/1mLELEI
+ x5aP49nxmlp+75RLQAij92pyqliOIw7Hbwz4uq2wjRA8Iq2vO47lVdk0OR6mu+lQLT
+ OxpWlMLBWRljLgHUMf+p59N/zN30rDjsZZ6lB8s8=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAZqAY653606
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 05:35:50 -0500
-Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 05:35:53 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 05:35:50 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 05:35:52 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 05:35:50 -0500
+ Transport; Tue, 16 Sep 2025 05:35:52 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAZnAR1180633;
- Tue, 16 Sep 2025 05:35:49 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAZpSt1480255;
+ Tue, 16 Sep 2025 05:35:51 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,9 +56,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 3/4] spl: mmc: load kernel image before args in falcon
-Date: Tue, 16 Sep 2025 16:05:40 +0530
-Message-ID: <20250916103542.104773-4-anshuld@ti.com>
+Subject: [PATCH v2 4/4] spl: ext,
+ fat: cleanup use of CONFIG_SPL_LIBCOMMON_SUPPORT
+Date: Tue, 16 Sep 2025 16:05:41 +0530
+Message-ID: <20250916103542.104773-5-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250916103542.104773-1-anshuld@ti.com>
 References: <20250916103542.104773-1-anshuld@ti.com>
@@ -82,52 +83,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Load the kernel image before args in falcon mode to be consistent with
-the load order for other boot media.
+Minor cleanup of spl_ext and spl_fat files, removing the outdated
+CONFIG_SPL_LIBCOMMON_SUPPORT symbols similar to the commit 1847129025e0
+("spl: mmc: Drop checks for CONFIG_SPL_LIBCOMMON_SUPPORT") and adding a
+few extra failure reports.
 
+Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_mmc.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+ common/spl/spl_ext.c | 10 ++++------
+ common/spl/spl_fat.c | 14 ++++++--------
+ 2 files changed, 10 insertions(+), 14 deletions(-)
 
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index d06f9f0dee6..cd56cf71055 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -152,6 +152,16 @@ static int mmc_load_image_raw_os(struct spl_image_info *spl_image,
- {
- 	int ret;
+diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
+index 80bd084db4e..a3925d38d52 100644
+--- a/common/spl/spl_ext.c
++++ b/common/spl/spl_ext.c
+@@ -47,9 +47,7 @@ int spl_load_image_ext(struct spl_image_info *spl_image,
  
-+	ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
-+		CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR);
-+	if (ret)
-+		return ret;
-+
-+	if (spl_image->os != IH_OS_LINUX && spl_image->os != IH_OS_TEE) {
-+		puts("Expected image is not found. Trying to start U-Boot\n");
-+		return -ENOENT;
-+	}
-+
- #if defined(CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR)
- 	unsigned long count;
- 
-@@ -165,16 +175,6 @@ static int mmc_load_image_raw_os(struct spl_image_info *spl_image,
+ 	err = ext4fs_mount();
+ 	if (!err) {
+-#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		printf("%s: ext4fs mount err - %d\n", __func__, err);
+-#endif
+ 		return -1;
  	}
- #endif	/* CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR */
  
--	ret = mmc_load_image_raw_sector(spl_image, bootdev, mmc,
--		CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR);
--	if (ret)
--		return ret;
--
--	if (spl_image->os != IH_OS_LINUX && spl_image->os != IH_OS_TEE) {
--		puts("Expected image is not found. Trying to start U-Boot\n");
--		return -ENOENT;
--	}
--
- 	return 0;
+@@ -63,11 +61,9 @@ int spl_load_image_ext(struct spl_image_info *spl_image,
+ 	err = spl_load(spl_image, bootdev, &load, filelen, 0);
+ 
+ end:
+-#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 	if (err < 0)
+ 		printf("%s: error reading image %s, err - %d\n",
+ 		       __func__, filename, err);
+-#endif
+ 
+ 	return err < 0;
  }
- #else
+@@ -144,8 +140,10 @@ defaults:
+ 	ext4fs_set_blk_dev(block_dev, &part_info);
+ 	ext4fs_mount();
+ 	err = ext4fs_open(CONFIG_SPL_FS_LOAD_ARGS_NAME, &filelen);
+-	if (err < 0)
+-		puts("spl: ext4fs_open failed\n");
++	if (err < 0) {
++		puts("spl: ext4fs_open failed on args\n");
++		return err;
++	}
+ 
+ 	err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
+ 	if (err < 0) {
+diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+index 2c8eee01272..80e800b4755 100644
+--- a/common/spl/spl_fat.c
++++ b/common/spl/spl_fat.c
+@@ -98,11 +98,9 @@ int spl_load_image_fat(struct spl_image_info *spl_image,
+ 	err = spl_load(spl_image, bootdev, &load, size, 0);
+ 
+ end:
+-#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 	if (err < 0)
+ 		printf("%s: error reading image %s, err - %d\n",
+ 		       __func__, filename, err);
+-#endif
+ 
+ 	return err;
+ }
+@@ -116,8 +114,10 @@ int spl_load_image_fat_os(struct spl_image_info *spl_image,
+ 	__maybe_unused char *file;
+ 
+ 	err = spl_register_fat_device(block_dev, partition);
+-	if (err)
++	if (err) {
++		printf("%s: fat mount err - %d\n", __func__, err);
+ 		return err;
++	}
+ 
+ 	if (!CONFIG_IS_ENABLED(ENV_SUPPORT))
+ 		goto defaults;
+@@ -157,11 +157,9 @@ defaults:
+ 	err = file_fat_read(CONFIG_SPL_FS_LOAD_ARGS_NAME,
+ 			    (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
+ 	if (err <= 0) {
+-#ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+-		printf("%s: error reading image %s, err - %d\n",
+-		       __func__, CONFIG_SPL_FS_LOAD_ARGS_NAME, err);
+-#endif
+-		return -1;
++		printf("%s: error reading image %s, err - %d\n", __func__,
++		       CONFIG_SPL_FS_LOAD_ARGS_NAME, err);
++		return err;
+ 	}
+ 
+ 	return 0;
 -- 
 2.51.0
 
