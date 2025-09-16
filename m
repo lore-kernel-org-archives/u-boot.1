@@ -4,86 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD67CAC592
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 03:09:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A9DECAC59A
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 05:58:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3901A81E13;
-	Tue, 16 Sep 2025 05:09:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F9D080B9B;
+	Tue, 16 Sep 2025 07:58:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i+pxM/RW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EutQkU74";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B29F780422; Tue, 16 Sep 2025 05:09:56 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92FA780422
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 05:09:54 +0200 (CEST)
+ id F399481E13; Tue, 16 Sep 2025 07:58:15 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 862E880422
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 07:58:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-88776dcac7aso177137439f.1
- for <u-boot@lists.denx.de>; Mon, 15 Sep 2025 20:09:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1757992193; x=1758596993; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6PI0cWUMW/hOSmVWXfsc5WUkWXWO7fvJQRpbfEk+UUU=;
- b=i+pxM/RWWxugRzvBUKF9XIgMlFPn2MwCFMCSVnvLFHWoM2jmZJRHnPfZX0b9EvGD4W
- K0CzzevkgUnx/fbXFWQxU23i1hsQn+ixkWcCNm5h9JXikoKiN1cELeqM784/l8Lm4ruN
- iOkBtk3IOGLA4JBbYOCUo1PNHBDvyxca/UmuA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1757992193; x=1758596993;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6PI0cWUMW/hOSmVWXfsc5WUkWXWO7fvJQRpbfEk+UUU=;
- b=B6nCWctTrWGdVFdyf7sWe1Vi3GamYm+EyBQkqhehUGftrfSh3RI+sRs/tfjuH86AJZ
- AwkCpqbTQIsD+Z3qAuaC23v2HL6Okdh41VHTk1fSyRrldTZFK0udXfBuBqzpz50SGTc9
- KhWqqjac1UC7vpZ5SWfe24wl8MDnQeqNEoXHvUW0v8MWGfAARf7L6Nz4ZPOiUbFv3Jdq
- Sb6s22FsjEUQ8SFZvd/QFx4IcdKw5v+pmmeTB8vEt3fWWiA6o4eWyvmprxTWz+w/870i
- Xh+KWKrX9KOdMiCo7E9NrI6BpSHeM8gE3pbzOFROjGsnz+hWRY8s8wpH1FXSejd9Sz4T
- g6yw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWht9YaA5d6riL5Ou/jXw5DdqMzP5Y+KpesgR4gAw4oKdprL7AroMqp9u2cuIvGcanAG9wEx2c=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKpuCI5906bmUlHoiN9zMXRwNRhKwym1stQNwWhZgEk2bWaT2T
- V0xVfQVUz17lj8hF5HwDYtmWSjfS81UQadBFh8AHI0ndl8TLR48v//B8SFQ900tQyNE=
-X-Gm-Gg: ASbGncvB5u3G0Jg69Zl7pYx3roMSnb0BcSEvSNF9VCvdkHWE8GkvAKXEJUfb0kFGkfG
- li4gx6Ys5uShJSaWwzhiMvpOiTmTGN/Os4WFlonD4gLGw57DZfbyB9q+uKjPnBQQ7BaRnDzRf+i
- x/xPhV9VYXdJ3iw+werUaEwB6O79fQvFIuElo3cFVQ9gU3Di8HRyxdzF2PcyoDxlyVy75PzZj76
- 17DwhpFYKuMfcX8M19xSTZKFgh8Uiepvt8NcbBbmxhJzJt24Z1TJRPKiCkBr1CigJdoCLj7BePm
- Rn0sL1iJmKdk2bQfQDmNxL57Nt1D9bngTTRsNd/s9AJiaU4gIOu6rcaVh9omXIob4gClgk/jtyd
- 1fbnpYh+jsk8qX6tigAn5/GcVpBCVlyvv0Olk3GW9cDSwwOn5r457OXn9
-X-Google-Smtp-Source: AGHT+IHSo9CBFkFOQxtngSLZcD7gsFtJfzVm49hEQ8pNGqD//5I62xjJ1YImez4snMTdONc6Dzb0oQ==
-X-Received: by 2002:a05:6602:140c:b0:893:656f:5481 with SMTP id
- ca18e2360f4ac-893656f5789mr535237139f.12.1757992193267; 
- Mon, 15 Sep 2025 20:09:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-511f3060816sm5528605173.52.2025.09.15.20.09.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Sep 2025 20:09:52 -0700 (PDT)
-Date: Mon, 15 Sep 2025 21:09:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: jh80.chung@samsung.com, u-boot@lists.denx.de, uboot-imx@nxp.com,
- Peng Fan <peng.fan@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Fabio Estevam <festevam@gmail.com>
-Subject: Re: [PATCH] power: regulator: pfuze100: Fix accessing the regulator
- desc
-Message-ID: <20250916030949.GP124814@bill-the-cat>
-References: <20250916025735.20289-1-peng.fan@oss.nxp.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58G5w7oV1299561;
+ Tue, 16 Sep 2025 00:58:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758002287;
+ bh=FSjKFzfuL17/fhMU0wXvs/qdL0baGLwh4kP1CWSoQVQ=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=EutQkU74cU1X0NNWZmsv5omDLRdQyHAtrbkmBh5LiOn5cF4t+x4jL00lU0/cUu2zs
+ GP3Xt6xC2MkRILg1XiEQAfuk3jIhp9BMFLLd2CpXudOw+105UtLgZOUjH3ExXVWyCC
+ q7E9/VH8EQ/cekCFzXrPstEldy258WL1PcJy7vKI=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58G5w7jl304125
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 16 Sep 2025 00:58:07 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
+ Sep 2025 00:58:06 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 16 Sep 2025 00:58:06 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58G5w5CB1132736;
+ Tue, 16 Sep 2025 00:58:06 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Mbffjr6oOoKKDIZ0"
-Content-Disposition: inline
-In-Reply-To: <20250916025735.20289-1-peng.fan@oss.nxp.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 16 Sep 2025 11:28:05 +0530
+Message-ID: <DCTZSSLLIB7W.85DPC6Y0J696@ti.com>
+CC: Anshul Dalal <anshuld@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Harsha Vardhan V M <h-vm@ti.com>, "Jerome Forissier"
+ <jerome.forissier@linaro.org>, Jonas Karlman <jonas@kwiboo.se>, Simon Glass
+ <sjg@chromium.org>, "Venkatesh Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH v2] doc: usage: Add File System section and Ext4
+ documentation
+From: Anshul Dalal <anshuld@ti.com>
+To: Tony Dinh <mibodhi@gmail.com>, Tom Rini <trini@konsulko.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20250914205807.22817-1-mibodhi@gmail.com>
+In-Reply-To: <20250914205807.22817-1-mibodhi@gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,43 +82,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon Sep 15, 2025 at 2:26 AM IST, Tony Dinh wrote:
+> Create doc/usage/filesystems/ section.
+> Convert doc/README.ext4 to rST format and move it to the new section.
+> Update documentation to add configuration instruction for Ext4 Write
+> when using large partitions.
+>
+> Note that this patch depends on this previous patch:
+> https://patchwork.ozlabs.org/project/uboot/patch/20250910215702.15576-1-m=
+ibodhi@gmail.com/
+>
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 
---Mbffjr6oOoKKDIZ0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reviewed-by: Anshul Dalal <anshuld@ti.com>
 
-On Tue, Sep 16, 2025 at 10:57:35AM +0800, Peng Fan (OSS) wrote:
+Thanks for the patch!
 
-> From: Peng Fan <peng.fan@nxp.com>
->=20
-> se_desc loop check is wrong, it relies on the desc always has
-> the expected name to end of the loop. It works because the device tree
-> has the expected name as of now, but this may not be always true.
->=20
-> Drop se_desc by moving the check into probe and fix the loop check.
->=20
-> Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-
-Thanks for reworking this!
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---Mbffjr6oOoKKDIZ0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMjU+gAKCRAr4qD1Cr/k
-CvxKAP0SqE2+j/+GeIDomAjigJMDVluMDrWk22aQo5Jpw3yMMwEAir9WtCoaaHLz
-rRS+FzasUrTqFgN/iW3WZlMvUOED3g8=
-=Sr6K
------END PGP SIGNATURE-----
-
---Mbffjr6oOoKKDIZ0--
+Regards,
+Anshul
