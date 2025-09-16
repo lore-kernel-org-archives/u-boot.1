@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69514CAC599
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:36:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 816C8CAC599
+	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 10:36:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8959883253;
-	Tue, 16 Sep 2025 12:35:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C289F832AD;
+	Tue, 16 Sep 2025 12:35:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jie0VA6V";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xFADRDDX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B83D280325; Tue, 16 Sep 2025 12:35:53 +0200 (CEST)
+ id D780D8329B; Tue, 16 Sep 2025 12:35:55 +0200 (CEST)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8C42981E13
- for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:35:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 303698309A
+ for <u-boot@lists.denx.de>; Tue, 16 Sep 2025 12:35:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAZkoH1349758;
- Tue, 16 Sep 2025 05:35:46 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58GAZnjw1349765;
+ Tue, 16 Sep 2025 05:35:49 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758018947;
- bh=+IhmTVOlWXkvr1dbNeH9wTNU2amjm4WuQIEn6AFzXzs=;
+ s=ti-com-17Q1; t=1758018949;
+ bh=gEPMYIQPvJPcMomoi6xYSu4MZnL2bO93PnPVCmAvbMI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=jie0VA6V7w5SxalbEKsZRucxNu0r2uRD8BCGswfrYoFSkM/g4++1n2ap1H+Hc5zYc
- DCZc/T+pkUBMz56nVZoxn2kXj7/+YkBH0rJGFCtyCH2hbu/7vpZUcjpi873cEAtfDt
- 84XbnWhxaFOvQrAIVxAu2GmBZkrHcokudF7TbeA0=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAZkTo1461257
+ b=xFADRDDX+xGgs3yLU2dPYhKCx8Wf1zwTdv1WE0ka4O2yDQ31Ba00hm8xos4B5trqF
+ 5MGw2NBNCYknWMUOXClsMxejiFP9UON9aHlB7tSEzN7zZXHHtCqOv9qyb6FoaEfY+I
+ aQ8TEyWOZoS+ZOxJmTDfmX+EyDDr9dyf6w/Ew7cg=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58GAZnEx462285
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 05:35:46 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 05:35:49 -0500
+Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 05:35:46 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 05:35:48 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE210.ent.ti.com
+ (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 05:35:46 -0500
+ Transport; Tue, 16 Sep 2025 05:35:48 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAZjkK1480157;
- Tue, 16 Sep 2025 05:35:45 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58GAZlIB1480178;
+ Tue, 16 Sep 2025 05:35:47 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,9 +56,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 1/4] spl: fat: load kernel image before args in falcon
-Date: Tue, 16 Sep 2025 16:05:38 +0530
-Message-ID: <20250916103542.104773-2-anshuld@ti.com>
+Subject: [PATCH v2 2/4] spl: ext: load kernel image before args in falcon
+Date: Tue, 16 Sep 2025 16:05:39 +0530
+Message-ID: <20250916103542.104773-3-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250916103542.104773-1-anshuld@ti.com>
 References: <20250916103542.104773-1-anshuld@ti.com>
@@ -82,47 +82,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently in falcon mode, the FS and raw mmc boot loads the args file
-first followed by the kernel image whereas others load in the opposite
-order. This inconsistency means falcon boot doesn't behave the same
-across various boot media.
-
-For example, in the case where the kernel file is a FIT with the kernel
-image present alongside the dtb and the args file is another DT, which
-DT should be picked? The one form the FIT or the one set by the args
-file? Currently this depends entirely on how the boot media handles
-falcon mode.
-
-Therefore, this patch enforces the load order of the kernel image first
-followed by the args file in FAT FS boot. So in the above example, the
-args file would take precedence.
+Load the kernel image before args in falcon mode to be consistent with
+the load order for other boot media.
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_fat.c | 41 ++++++++++++++++++++++++-----------------
- 1 file changed, 24 insertions(+), 17 deletions(-)
+ common/spl/spl_ext.c | 56 +++++++++++++++++++++++++++-----------------
+ 1 file changed, 34 insertions(+), 22 deletions(-)
 
-diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
-index 8b7cafa7291..2c8eee01272 100644
---- a/common/spl/spl_fat.c
-+++ b/common/spl/spl_fat.c
-@@ -119,32 +119,40 @@ int spl_load_image_fat_os(struct spl_image_info *spl_image,
- 	if (err)
- 		return err;
- 
--#if defined(CONFIG_SPL_ENV_SUPPORT) && defined(CONFIG_SPL_OS_BOOT)
+diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
+index 7e0274a3058..80bd084db4e 100644
+--- a/common/spl/spl_ext.c
++++ b/common/spl/spl_ext.c
+@@ -96,40 +96,53 @@ int spl_load_image_ext_os(struct spl_image_info *spl_image,
+ #endif
+ 		return -1;
+ 	}
+-#if defined(CONFIG_SPL_ENV_SUPPORT)
 -	file = env_get("falcon_args_file");
++
 +	if (!CONFIG_IS_ENABLED(ENV_SUPPORT))
 +		goto defaults;
 +
 +	file = env_get("falcon_image_file");
  	if (file) {
--		err = file_fat_read(file, (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
--		if (err <= 0) {
+-		err = ext4fs_open(file, &filelen);
+-		if (err < 0) {
+-			puts("spl: ext4fs_open failed\n");
+-			goto defaults;
+-		}
+-		err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
+-		if (err < 0) {
 -			printf("spl: error reading image %s, err - %d, falling back to default\n",
 -			       file, err);
-+		err = spl_load_image_fat(spl_image, bootdev, block_dev,
++		err = spl_load_image_ext(spl_image, bootdev, block_dev,
 +					 partition, file);
 +		if (err != 0) {
 +			puts("spl: falling back to default\n");
@@ -130,49 +124,61 @@ index 8b7cafa7291..2c8eee01272 100644
  		}
 -		file = env_get("falcon_image_file");
 +
++		ext4fs_set_blk_dev(block_dev, &part_info);
++		ext4fs_mount();
 +		file = env_get("falcon_args_file");
  		if (file) {
--			err = spl_load_image_fat(spl_image, bootdev, block_dev,
+-			err = spl_load_image_ext(spl_image, bootdev, block_dev,
 -						 partition, file);
 -			if (err != 0) {
 -				puts("spl: falling back to default\n");
-+			err = file_fat_read(
-+				file, (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
-+			if (err <= 0) {
++			err = ext4fs_open(file, &filelen);
++			if (err < 0) {
++				puts("spl: ext4fs_open failed\n");
++				goto defaults;
++			}
++			err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
++					  0, filelen, &actlen);
++			if (err < 0) {
 +				printf("spl: error reading args %s, err - %d, falling back to default\n",
 +				       file, err);
  				goto defaults;
  			}
 -
  			return 0;
- 		} else
+ 		} else {
 -			puts("spl: falcon_image_file not set in environment, falling back to default\n");
 +			puts("spl: falcon_args_file not set in environment, falling back to default\n");
- 	} else
+ 		}
+ 	} else {
 -		puts("spl: falcon_args_file not set in environment, falling back to default\n");
 +		puts("spl: falcon_image_file not set in environment, falling back to default\n");
+ 	}
  
  defaults:
 -#endif
-+
-+	err = spl_load_image_fat(spl_image, bootdev, block_dev, partition,
+ 
++	err = spl_load_image_ext(spl_image, bootdev, block_dev, partition,
 +				 CONFIG_SPL_FS_LOAD_KERNEL_NAME);
 +
 +	if (err)
 +		return err;
- 
- 	err = file_fat_read(CONFIG_SPL_FS_LOAD_ARGS_NAME,
- 			    (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
-@@ -156,8 +164,7 @@ defaults:
++
++	ext4fs_set_blk_dev(block_dev, &part_info);
++	ext4fs_mount();
+ 	err = ext4fs_open(CONFIG_SPL_FS_LOAD_ARGS_NAME, &filelen);
+ 	if (err < 0)
+ 		puts("spl: ext4fs_open failed\n");
+@@ -143,8 +156,7 @@ defaults:
  		return -1;
  	}
  
--	return spl_load_image_fat(spl_image, bootdev, block_dev, partition,
+-	return spl_load_image_ext(spl_image, bootdev, block_dev, partition,
 -			CONFIG_SPL_FS_LOAD_KERNEL_NAME);
 +	return 0;
  }
  #else
- int spl_load_image_fat_os(struct spl_image_info *spl_image,
+ int spl_load_image_ext_os(struct spl_image_info *spl_image,
 -- 
 2.51.0
 
