@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7585CCAC59A
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 13:48:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3374CAC599
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 13:48:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70E498361E;
+	by phobos.denx.de (Postfix) with ESMTP id B21B78362C;
 	Wed, 17 Sep 2025 15:47:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gX33JllY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vy4ziCe3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 681F88361E; Wed, 17 Sep 2025 15:47:43 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 09EE3835CB; Wed, 17 Sep 2025 15:47:44 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8569835CB
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 15:47:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE831833D0
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 15:47:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-75731ec93bcso1156044a34.1
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 06:47:40 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-74526ca79beso5623407a34.0
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 06:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1758116860; x=1758721660; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SzQ8MWMBdBZu4NwfwPtASoWnN5Nd0GoxZzxN7ksAhOY=;
- b=gX33JllYgjTTNrc/2ESLiQDsWiGTrlCT9+rDi5NNvJ2KsU8ZU4VC4o3dY0Yk9WC/lE
- m23fOEPjfcyGYg34Vy1Oxb5vpC37ypIIr9ztS+OWLbHnvWoQS3PGleOnWNyAH/jJVDYc
- of+Z97iRo/v362zV6RxFMP6Tk3q44KX9R5xv4=
+ bh=TyTSmO1vRDK0Hnly1o29q1qziRUl7kIIm12I6gwit1o=;
+ b=Vy4ziCe3DLxboQd1p9nJr7Bw0wRpZ54s++Xqp3W7YElBgjGNJmev11hkAYalOJF2kR
+ yFYhRkLGipVY5jln4bHnRBksWvlJw0H9NIeEH/aSNso3Cr5wgbG+6pAzCafglyPm+Ss/
+ B6JUBAscfF33JLeQpVEZLTuwbJT0ZjZLSQCNs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1758116860; x=1758721660;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SzQ8MWMBdBZu4NwfwPtASoWnN5Nd0GoxZzxN7ksAhOY=;
- b=ACWRB1UENb8FDIVu/1w64RNpgMyRxlm+7vf/z1veexf9A5ZQ3Mwj9f61ALCY37U/as
- HWMK7+9hBG8YEJb92b9MphF1IJOVh1N2WbLfDO5K/xHssusq0sYZeJp3zNuK6CX/a4Pk
- 5HW534amlshDwuvPnDG/1MFstDoMGVAwvPSXf7pQUm5RxkMkYEsHUY9r39ZnVoGUAWzF
- 2tbcoA1qPZP2nbyf+5fzOMo0ua74+lBaj+yerKnAhE9GTvvqdITdpV6v6fexKiyhAAM5
- uoDbagllfPgsUM3grn9snX7OFHKdSF1Sc7eeb3wsNxpWOc1SRSh81nF7wcxppO1c6qde
- BgtQ==
-X-Gm-Message-State: AOJu0YzP6M2O4PPJkKSHXHf0vf45XeEyjz2i17oP0FFPpJBRSMdmOhvh
- /DBgEJoqTNuFIB+eeQGq7XNKlqfKaX7GEMsNqSO6Xgg6fOLaJWSRBcHzOh6/llFQtoI=
-X-Gm-Gg: ASbGncvh0SGsK544SeYSM6EUjtIsQ+m0gtaA9DNygED6Ok756bRuAv0ly26nGmGWf3V
- GjIHFDeaAQVnKpWXBrBsrow1w64c1KmZozR1GTTKumbg0KoEai99FOO5qkrljNajjbn5fTtW6ZX
- nuIQRviLloE2/oyWVo3bJHRoiwN79fu29vLDTZQR6Pr3B6W6dtSwkqqWMAY4hA1xGBtcSK/np3o
- 6lk5iIsTsLnxg7ku8LKlhfkW397Dt8VQ7hS13n2UWutXQfdtWFq1jApT6aZAN/JyK4brhsgAZLj
- G9WbcNFzU/8XPEXzYFvNY0P6/XLnXAsi0OFyCzcXYVYO/B649Bd0WkKBXr0eGvPbnKlcYy2W/L2
- nPvrHmOr0oND5Aj3UZMBt587RiJ6ndbHCiNLiq42gK0uee/ZV5VeZsrY=
-X-Google-Smtp-Source: AGHT+IG06mGQHilO7ChhuQGBBchYxJTI0oQGdB27MNq7E7aHQwkx3RtFYRwwDltK4KKlJpdARe11aw==
-X-Received: by 2002:a05:6830:3697:b0:74a:6dfd:3675 with SMTP id
- 46e09a7af769-76312ca047emr1453288a34.11.1758116859677; 
- Wed, 17 Sep 2025 06:47:39 -0700 (PDT)
+ bh=TyTSmO1vRDK0Hnly1o29q1qziRUl7kIIm12I6gwit1o=;
+ b=J1MLAdo2UypCY4lpHJGfN6z33LL5htmQ34Revi+2yWjJfiwaCls1geu+OEuUkuBOqv
+ YWHxcr1+Vuscng4YBJqYvjbYx1a72ek+40NlKMaYjaxUWOOY9Ds3D51Y98FZl3iymf7n
+ xlCMqACULXSNFYynsW50d1NfiiX+O7kCayhBImLjCbFcVydgt3Tzrz37bAq/rwjN60/o
+ H9Cu7g8eofLnI00wd8Nj+JsWzhVNR29l/Bmssm8403INytEReosGZaytd3MNlFm+wBn4
+ lE7hvWT55cDOyf1Da7j92dGW7amRdg3RHSixwXv2ttjf4BfS4OtjnebldAnHpTAWLXgd
+ ZZlA==
+X-Gm-Message-State: AOJu0Yzp+hWhQbTco44QPpD0l5SAzp57ieeSaPnAzmc/uConFmkUU2jC
+ f+SqZsj/K9TNV75R5z+zNcEL+or/0gSXsDp5B2HCvvKVlLwFRc4qbb6pwNNYzZGgU8Q=
+X-Gm-Gg: ASbGnctS9qaLpOhXUQOC12+YjZcGk67H6hMy0yK5xxurdQowe790bVzcGzTQzcvqLhq
+ z8vHIhTNAlETqczDrGAYWFTsXNG7jVT5awx3dSwsB2UEDCUsvSssmJprX90Z5eQHd+U+5BSlEPM
+ IzG/OLAq7XG/nB1qL3YO5JluC8oLN+Hzclyc2Y33OfcjbCnE0UBfLm/vIEIFSw0IOCcDeWYsZey
+ ezgTMbTlWMBlY83lvgnNZc5SQos5cEZPDLRqVSbHriTm0Qflvc/ZQyC6wt4UrRMkW32tn38xP9/
+ TDJigoGHupG9sVZsqR4PykXZVa72Yjza440W13WaRI471TQdsvDg6eX85KiWN5FbWs86+RQdGEf
+ Y2ZQLZ2iXCmKlqc4uT68v4RjWcYFjJrSE22ukMVR21kvxafH7wlQWLd6xm4LXpM+xLA==
+X-Google-Smtp-Source: AGHT+IF7i3rTS0SvggZ7qpM6N9ivsskPHrgRxPQsIBfrwvychPC0ahRvJyRn/Yn0f565glgNXP9mHQ==
+X-Received: by 2002:a05:6830:2a0d:b0:741:a668:2cec with SMTP id
+ 46e09a7af769-7630f4dbaf2mr1226929a34.3.1758116860616; 
+ Wed, 17 Sep 2025 06:47:40 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7538127f35dsm4799937a34.35.2025.09.17.06.47.38
+ 46e09a7af769-7538127f35dsm4799937a34.35.2025.09.17.06.47.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Sep 2025 06:47:39 -0700 (PDT)
+ Wed, 17 Sep 2025 06:47:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut@mailbox.org>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Roger Quadros <rogerq@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>
-In-Reply-To: <20250906230052.582621-1-marek.vasut@mailbox.org>
-References: <20250906230052.582621-1-marek.vasut@mailbox.org>
-Subject: Re: [PATCH] phy: Reset init count on phy exit failure
-Message-Id: <175811685869.752169.3298850426023376676.b4-ty@konsulko.com>
-Date: Wed, 17 Sep 2025 07:47:38 -0600
+Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
+ Simon Glass <sjg@chromium.org>
+In-Reply-To: <20250907010103.667681-1-marek.vasut@mailbox.org>
+References: <20250907010103.667681-1-marek.vasut@mailbox.org>
+Subject: Re: [PATCH 1/2] board: dhelectronics: Check pointer before access
+ in dh_get_value_from_eeprom_buffer()
+Message-Id: <175811685980.752169.702390256025070470.b4-ty@konsulko.com>
+Date: Wed, 17 Sep 2025 07:47:39 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,18 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 07 Sep 2025 01:00:44 +0200, Marek Vasut wrote:
+On Sun, 07 Sep 2025 03:00:46 +0200, Marek Vasut wrote:
 
-> In case the PHY exit callback reports failure, reset init_count to 0 anyway,
-> so the next attempt at PHY initialization might try to reinitialize the PHY
-> and restore it to normal operation.
+> The eip pointer in dh_get_value_from_eeprom_buffer() might be NULL.
+> The current NULL pointer check happens too late, after the eip was
+> accessed in variable assignment. Reorder the two, so the NULL pointer
+> check happens first, and any access second, otherwise the access may
+> trigger a hang or other undefined behavior.
 > 
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] phy: Reset init count on phy exit failure
-      commit: c6a4b44cdcc11431223a9d9db17de0c587d49c72
+[1/2] board: dhelectronics: Check pointer before access in dh_get_value_from_eeprom_buffer()
+      commit: 1c735620e19e2ae07705cc38da1552ee6a696ff0
+[2/2] board: dhelectronics: Use isascii() before isprint() in dh_read_eeprom_id_page()
+      commit: fd396316432ad4a0f2998ea9eee9720be0e5d5f8
 -- 
 Tom
 
