@@ -4,163 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9E51CAC59A
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 14:25:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0E8ECAC59A
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 14:43:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55ECF835D0;
-	Wed, 17 Sep 2025 16:25:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 238D3835CB;
+	Wed, 17 Sep 2025 16:43:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Fn+xCT0p";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sYCJCD9P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95DF4835CB; Wed, 17 Sep 2025 16:25:41 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5DDC9835EA; Wed, 17 Sep 2025 16:43:08 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19A40835CB
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 16:25:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 7A925835B3
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 16:43:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rB7XH3u+hGCI/LzjM5cDoVq3YojgUpWtd/jj+FX/QS4ZPdd19IHFN5P8Ms0NQvcOQBlVeV9LzD2ywPtSmfIBYKVSn5+uovhVI4cP5j5V+iRtlm0J05sCnyN8Ii5PXRRHa0B+WbUv8KGIzqZRiH4ZDnuNsHUi7YpnqCbZxLdOJaJ3otiGO6A/nQgBq1vKoU0KKih4StBhmj6DTPX37IYvh8ILbZQaMY55iDp+znQSKCYVjWWH7rhkURVQAqdf4Z/WzkEBUGDJf6JiHrjmnwVnXo22G5GmB99fhwANC1lUmn1Lt04ztzz580DTZs2p3nC2GO/J8dEdE1lxd92HbWFk+A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bZbe7H/3rTwg245p7sRhH9uQzUFC3IyTFmnJNz4Oe1w=;
- b=H21ct586en4nHayK3G/X0HVSpgSv4IqoA7OXhBGEhFEryUl9pMTQMy0GSDV18D7OtCAi787GFSk6AKsODoPqUP1Tr75d/2rfKsXWiWm78KX5i+Fme+AffBNkpuhqmsl8+qoa6VKnCrcHWIDVpkd2NgttcxDe49FsD9xOGNXq4romjOg62iZ8uRXUM+sS3FnU0uXz03vreWoV9AAxFUKOCC5WWIGOaA+pKh+lN7XIsAVmUZEGLzswWLDfB+oLGhANx1tQo7cUiO3SOwOp8hdn2oAoK0WrsyZ0nnBG5HaQf/cbzYOe7vr4B1PLhBEAH2BhY4JQt54BNEmnypSnCxLYZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bZbe7H/3rTwg245p7sRhH9uQzUFC3IyTFmnJNz4Oe1w=;
- b=Fn+xCT0pUN/PVHbG2g83WTR2IrAIoGYrKZpWbNkhgdWgRIKeAy8KUUlXnCn0YCeCUWqQ4SHkFO59bEB9FL4LGcdxO1QHbVMpKv5KSlMxQTF14qSa167xVQ7pXOsE5wVHPUR9JlnVyVlakPYt/VqTXwMoIRUsHXlN9mjEjwdm3iA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS5PR04MB9730.eurprd04.prod.outlook.com (2603:10a6:20b:677::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.13; Wed, 17 Sep
- 2025 14:25:37 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9137.010; Wed, 17 Sep 2025
- 14:25:37 +0000
-Message-ID: <a74df246-2e53-4c73-b545-58ca832f7d83@cherry.de>
-Date: Wed, 17 Sep 2025 16:25:35 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert "board: st: stm32mp1: Clean env_get_location()"
-To: Kory Maincent <kory.maincent@bootlin.com>,
- uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de
-Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>,
- thomas.petazzoni@bootlin.com, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Tom Rini <trini@konsulko.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-References: <20250917141736.59732-1-kory.maincent@bootlin.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250917141736.59732-1-kory.maincent@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR0P281CA0139.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:96::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-267dff524d1so13845225ad.3
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 07:43:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1758120184; x=1758724984; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3LT7JT4hC0/cKNI+OIc8DcCQfCVmiRYp1WMZqBbiHok=;
+ b=sYCJCD9PxfzNnpVbIKYoRvgIKHH0Y79UgE9+gEq0JMBJr7OtPzTqJjVh2ofg8+S/29
+ s4y+aw1N4Pxukj5Yx3zu8+6zww6bKx/4yL6R+6X/MqakTuQnE9+NGJ7w5OuWKg/uVbqg
+ HKBCr0Rw6xZJSD6oce1MK0QfOqCwMDlB5cw4AuQnzxCpH4+gFk2kB8G5WS1EAeibe6BV
+ GfZZHk4XSe+lOMAH+S+OkHw7+sw/ugyZ9H3nLt5L/B0D2uxViWfqcIqrRFTVcHazO3qx
+ tzKB1puX2f/TXkgAulSzmDL3ehGg2FRxmqk3lgEGO6wukyiBVH7OvjmwshvYmFR0ySx/
+ 3WDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758120184; x=1758724984;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3LT7JT4hC0/cKNI+OIc8DcCQfCVmiRYp1WMZqBbiHok=;
+ b=Td1pGexcEuAGgOj8JXkcPmKtFHkPxubJzL5K9sfyLuuTm+MlGnRwfDXauGKhnw+CpB
+ rLB4sTnE3IuzZ9n/E7E63ak+PeytHBI873fnB1RnYlRAgr4cLelDr07HJIkKiHiomILj
+ 9r0UhQ1wECH4+9z/nfuM8KF7c5+Ok0yajhPfGA5+nG5xGekHFWuwSK7JC08V5HgeMFuA
+ P+QGXbZmbIU9w5SRmfvkKo1WqF44WAWyysPhvgekX6ok+BaDeFb8RFmUAZ0SUNb1GkFV
+ nkR/jOlpVfu08ZZWuYNVdqC8OWxlLboiB4A6SIudY17tRzDFg26lTCBqurwuzTEqadRr
+ CakQ==
+X-Gm-Message-State: AOJu0YxK75bxMPgUpLNtDXXZbMwAbN/KtST1njug68mThzp7DFCFa9j9
+ +Y3JmkYNWo5h7el/hMgx9sPWAMRM2Vl4ixG0BewIYNgPZ4OPqVcxf8ZOVkhWadfWLjMdK1xKMl5
+ Gw2cad5lzc/wWWcalAaWtbXMf2EJngIz/2m8RA4t4mQ==
+X-Gm-Gg: ASbGnculGQudhcT8TbMVcm8FMSxkEXi3d6pg3VSnzVkumtySJggVO9WGPeLHt64HyVX
+ zoabbHbYM4JLbKK4bmElT4ykDfL3YoRDbO2wOqGIryi86mp8MHDYaJK0OVEKHRWXISemXf1Agpe
+ UetSdtsNl6k8R4kgc7M6QU4XsGOjSaNQ1qqOgigVAUMZctoLEN2Rjl1zRwHRjO7vH8TNhWQ5KYD
+ 7B58xVBbN6WwSUaWDJq
+X-Google-Smtp-Source: AGHT+IE1kzQOl+Zhn93jUkW3lgM/ghZdrI/41LJlPkMno/quekQXueFQH1V6GiS8nVCc3LPavyJLjNo0cVjkPd/uwlQ=
+X-Received: by 2002:a17:902:db0d:b0:265:c476:9a53 with SMTP id
+ d9443c01a7336-26813cf234fmr25288335ad.41.1758120183906; Wed, 17 Sep 2025
+ 07:43:03 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS5PR04MB9730:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1a4fccd9-a5a4-424a-71b1-08ddf5f611ba
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aFlNY0xpZzk3THpRaHJ4TlRlYWJQWnZQcXZSbDUyMXVGSmk5RnFTK3V5UFdR?=
- =?utf-8?B?VG00NTNaRC9QWWNQR2p2Z3o2Mk9QQ1dOKzVzSDk0OXh6SkxMWFcrVDJMNlVV?=
- =?utf-8?B?bmx2SDJLeEJreVhlQ1Q3ajF5clFvSlI5QjVTWFc0Snd1TklxcWJXZ00yblRr?=
- =?utf-8?B?SnFOajhuSS9UbnV1MisxMUZiWkZKU2hST1pkeHB3N0ZvTzVxOGdwNkxjZXpF?=
- =?utf-8?B?UnhwMnk1YUNkNzVaNEp5V1h4SjA3Mm1JU3pETW9ocFFyR1BVTm0rb3NLQUcr?=
- =?utf-8?B?SVRjYUt1MFZuaWpGZGxVRzJYN2RZd2UvVVNSeDJ2NVZ3ZEhtbWZOMms5WXhR?=
- =?utf-8?B?Ti84eVFUSmswWndJVE44UzhtelVrVU1PYWRadDErT3VVVHk5UzVaRmFOYW5C?=
- =?utf-8?B?NmJ6OTdFa1E4RExDMi9IYjRGSEZMV3RnOUxHMEt3ak1CdGlvTXV6Q1N5cW54?=
- =?utf-8?B?dFdEaVBBWkxjNXdkS0ZaNVpNb3J5cXBldkJ6cXY4dll1amU3VEtMbkp5YlNh?=
- =?utf-8?B?WVkvTE9CYjZhSmxlL0tBS0VObXczNmtMeWRHamxBMmRFbE5waEFwQW1DenBz?=
- =?utf-8?B?Y2labGYzQWVMTkp5c1FRT3l0RzJGb0loeENSVTBNVE9EZHJudjZaTDdLaCtV?=
- =?utf-8?B?ZWx6ekk5QkI4SmduR1VsdjR1V2VOdEVCaCsrbThUZWV5K3lvaXZhV0RiY2xB?=
- =?utf-8?B?TExoUklIbHJtYS8xdmhKSzYzUFc4S3RIb3hib1FDRng2cldwOXJpREUyR2FW?=
- =?utf-8?B?WWpRNTU0S21CTzRXdGJQZ0xUelc2cTcvOXhNOXFhUWpUdUcrODdjZmlJeHNz?=
- =?utf-8?B?ZmFiS0lvempmbzYvYnJCQ3pCSStkM2xaWVg1ZHlobldTU283dXZndW5wWDNC?=
- =?utf-8?B?WEQvUDN3R2JCcnhzSDIvU05EQUZQc2ZFeGcySTVCMzhGUmxENE8xR3NNNVk1?=
- =?utf-8?B?SE1CZlZjYndmYVR1d0RzdUdFMlZMY1NJdWZtdVAyRVQ1Mjd1eFdqblZTNUVj?=
- =?utf-8?B?RXE2NlJzclBPZ2lDTlliMVlyQXNEM3J1K3pmOWlZeWFCWVZxZUFRcnZPL3RL?=
- =?utf-8?B?ZHI4UHkvSG9CYW9rUnhUYVJSeDIzWllIL0NMMHZMaGw4cFU2QVBBaGk4UGlx?=
- =?utf-8?B?NmVKYzlZTjFRYXRKOUJ3aTRJdDlWTjVwM3ZUbm1pV1luVG5EcWxJcEIvUFBp?=
- =?utf-8?B?VXQrRVR0VVI2V3pZSStzTnpMY1Bqd3JMVXVMdVZQYVdMSm90WWRjY0NldVoy?=
- =?utf-8?B?UDBKNlJtTnk4SjhKNDdSOFIzc3hHTU1NR0JqakorTTZtSU5wNU05b1NSWnEr?=
- =?utf-8?B?cVQ2Q3IrRW45RjF4aHVYYldZOGd0QUE2ZmU5MjdMbXF0ZGx1cWhSdDJSWld6?=
- =?utf-8?B?MEphOGpqa245WGtmdTAzOTdlMDM4TldYMUVyajROSC9ZWEFmSWVYbkdrTXVz?=
- =?utf-8?B?T3RjbDN4NVoyWlRNNFhibnBaYVJLcmVqc1ZXL3UrVm4vTHpIWE54NjVzREhN?=
- =?utf-8?B?cUJyYklOZHQ3WTQwSis2d1JYSkhoM0d5TmVzWXBiYWgveHdGZENDd1lqWm5T?=
- =?utf-8?B?TzhXSy9MYStHeWd0enVMbkluaXlJVUppdFdzVXJYWXI4VjJPSEdzU1daYjA0?=
- =?utf-8?B?RFN0cG1RL0J0QW9QZ1lMcGo5eStsb0g2WW53WkNMYnJWTHZ5S04zTjhjRVhw?=
- =?utf-8?B?cXMzUzFIUVhGZVdhcFB0VFkwVTlPTHdoZVZKU0NHeEFyenFzcXFINHNpanpJ?=
- =?utf-8?B?U2FoUDVFQTRndnZtaGNGd1h4V1hTZElrekRzSmRyU0szK2xRQml2dWhXb3lU?=
- =?utf-8?Q?wprs9kVeCwMs3FTlUnWflgkb/VLxLObzmhMQk=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U0QvM1lPTS9VZ3JZU0lqRUpnWWs1dmZ2bEFsV21jQyt6eVh0TWtUWmpOZm1q?=
- =?utf-8?B?VzQ3blc3RXhWaDkvWVBRZ3RObkp1SHI3QzNIdEhSZG92VXBYUlBrTEljblVJ?=
- =?utf-8?B?L2FmY0h0dzRGV0txc0hCODhxZnl4cU1vd3h5ZUo1TW1rdDlpY0hsV3M2VTUx?=
- =?utf-8?B?SzNrL3FoTjB6NzYxVWxJQVluNXh2bHNBdm9Ub29BK2QvSUNuNGptdXl2bUc0?=
- =?utf-8?B?cElJeG5FRytzcDlxYWc5TnFlaC9SemYyZmVSKzF0eXRobnF1NXdlRXRFZlJr?=
- =?utf-8?B?U1pOQm5xVnJhdTBoQTd4S0NQZFhuQXd5V2UxVDFUUXZzRjhtWE95VFlwdEhj?=
- =?utf-8?B?R0I0dU1TY0VVckw2Zk1YbDVyYzllOHA0aEdhZXVwMEJjekhHSllNTmxBc0FY?=
- =?utf-8?B?SVBIRm1qNmxSSm95UUdmZkRmWEs0YlY5TVBtUWhOamlpSTlpNGRyaHJaclhT?=
- =?utf-8?B?UGsvRVZrUVp6Rk51L2hqallyQWRSaW1Ya0hBQWw5a0lVLzNaYmdGWW5YZEY2?=
- =?utf-8?B?OVYwZWVaeDlCTmZKYmNQNHlZdUJuRFFWbDRjZFBLZU43dXJPSHFXamV0N2hj?=
- =?utf-8?B?UlhkdG0xQ0dCZUN4ellxS2tweXVIdUp0RmVBalJYTGYvZXZ4QjBMUk52WUZ6?=
- =?utf-8?B?RDVPV25yMnI5UmlmTkRQMEkrWll5MnBBQnVNR0dkd1FJdHB1UVJLVG9lTi9z?=
- =?utf-8?B?UFVjOEVvZ1gwL0UvV0I1ejFSSWNnRmRwZnozZmhURlpncXZCSERST3VkODBn?=
- =?utf-8?B?cHZqblN3MWNFL3drWVM2RlVEK3NXeDV1Y0M1M1I0SXJsQTF6enhmd2c3RVpB?=
- =?utf-8?B?NnpkNVJpalRnbGJJeWRtemRUaEYyckRLd09Ub3NmYndjOGtzWDR1WHU5UUk0?=
- =?utf-8?B?WGM1WkdydXNiYjUrUzY2ZlEvb0RkajRKZWVGME5UVFdkMEJUVDR6Q3YvbzBT?=
- =?utf-8?B?cVUzdG8vdEZPdFJlcllkRlkvQXJWNitzQ1Y3OGtjcW9DQ1AzeXNlZGhkWVRR?=
- =?utf-8?B?SEM5MkJibWdkYVBEQ3lIOU5kUlBjVCtYcnh6TmZ3NXpzQ0VrT2U1MzI2a1JU?=
- =?utf-8?B?ZVV1VnpBQVQ3ek91cVlLcUlOSWx4djRzcC9kbFE3MXlVYyswVUNRNEZ1d3VE?=
- =?utf-8?B?ODM1K01SNzBJZVNGNllBS0JVa2ZxU2xqWmwxZldwV1JoRVNnT0lYWnRzc1lJ?=
- =?utf-8?B?KzVEODZUbGQ5aCtHaC9vODVrNStsSVVuK0lhZHFLVnU1V1ZWcXVNYnVTdGhk?=
- =?utf-8?B?V1Z2TUI1SzZCU0xXakRveGhhRi9KdVl3T0R6MnhxOW8vZE4xNmpjSXhkMjAv?=
- =?utf-8?B?YzBGcTNia3l1cncvV0VaZVg5dkJoTzZGbklKVXBNcTk1UFl2QjZES2ZJdHB0?=
- =?utf-8?B?c0pGTDBhdld4YldoSlM4elJNQUV4VmVVSUc3MXpCNmlnc2g4VmVpMGlWL003?=
- =?utf-8?B?STlhb2dkOHhwWjg5eWdlNGxYZ3pCVWI3MHAzcHp5a3NZRndpdUUrdWJuNjlD?=
- =?utf-8?B?b25hYi9rVnphd1o3cThrbldjYjhZcXNsNGMyMlZRSXVyWldlWDVkNE5zVW50?=
- =?utf-8?B?U3I0WXptR2p2M0IxMGppaGVMY3ZFTzZrUlhpVW1CSy9TMUdjZmNqaUNKU29n?=
- =?utf-8?B?aE5DWFkrc1YwRjVmNGZLb2RoUDVnM2x3aEpZa09Ld09aK3ZoL1piUUpnYUZ2?=
- =?utf-8?B?SVlsYVNGU09URTdxWWY4MzdoUSt6WWtzUGtHSUpZSlBwMVhNdTJ6d1V0YVFw?=
- =?utf-8?B?Vmtab2h1RURSOE5pZlU5TEZBc095RldtWWcrR1huenQ1OG5RbVlNb2tSNzNm?=
- =?utf-8?B?L1BYUGdHaHJZVDVNalNDRkpVVjV3UGhtc2djL2J6NXhSOEVkL2ZNeEc1bkh4?=
- =?utf-8?B?cHpCME9MK0N4NmFjVThFZklxYndJemhQQ2h4Nmc1N2Z5NTJBVUNCMjdIVngz?=
- =?utf-8?B?ZGExa3p1S1pVd1NkajdTUEVUb0Y0R3dNRmdQdS82WWw4SUxWVjZuMXl3TENQ?=
- =?utf-8?B?UlB4TzdVWnBqUzNqcGZhLytUcEQ3eVNvOEtGdVVDS09OZXJNUi93Yk1VdU9J?=
- =?utf-8?B?VHhYemRSZlExam13RkJpZ09RcTdNSUZneDM2dnRPdldjMHdIR215UkhKNUpR?=
- =?utf-8?B?aHVPM01UYkN3MkdJK0VXd2NEVzlXelJYa1dERWphdWVZdy9pSDA1MHBGdGl5?=
- =?utf-8?B?Smc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1a4fccd9-a5a4-424a-71b1-08ddf5f611ba
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2025 14:25:37.0474 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JSpjlfMYhJJO6y8EYf9tNsKE8e/EHpyYSekLyLPx0xNSQez2VPC4b3mN4kBNv88hxF07eJMo0U46vM87NUkrvzqv+hmJT3CkBvTsPjmcZ9M=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB9730
+References: <20250916161230.32140-1-raymond.mao@linaro.org>
+ <20250916161230.32140-2-raymond.mao@linaro.org>
+ <20250916182729.GX124814@bill-the-cat>
+In-Reply-To: <20250916182729.GX124814@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 17 Sep 2025 10:42:52 -0400
+X-Gm-Features: AS18NWCpBldcOLUh9EzVd5lv1IeFd4krMYHwV6K1O2WAjqGJBx-8l9seuQtKYdM
+Message-ID: <CAEfUkULE=tHe+hyerxBW5MRarO+JeJb59B-1voTFVjGmuPaidA@mail.gmail.com>
+Subject: Re: [PATCH u-boot-test-hooks 2/2] travis-ci: add config file for
+ testing firmware handoff on qemu_arm64
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -177,46 +101,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Köry,
+Hi Tom,
 
-On 9/17/25 4:17 PM, Kory Maincent wrote:
-> This reverts commit d37641c61ba212241c38e3fd22f0335fc0bebc96.
-> 
-> Restore support for environment storage in EXT4 filesystem on eMMC boot.
-> The previous cleanup incorrectly removed this fallback option which is
-> needed for boards that store their environment in an EXT4 partition.
-> 
-> This configuration is OS-specific rather than board-dependent and should
-> remain as it is configurable via menuconfig. Even if it is not described
-> in ST defconfigs people may have enabled it in their defconfig.
-> 
-> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> ---
-> 
-> Debugging this issue raises another issue that need investigation.
-> If env_get_location return ENVL_IS_NOWHERE but CONFIG_ENV_IS_NOWHERE is
-> not set, U-boot stall without any log. There might be an ENV check issue
-> here.
+On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Sep 16, 2025 at 09:12:25AM -0700, Raymond Mao wrote:
+>
+> > The existing 'conf.qemu_arm64_na' uses 'u-boot.bin' as bios, but for
+> > the case of TF-A, 'u-boot.bin' is BL33 and the assembled 'flash.bin'
+> > is the bios instead, which will be built and assembled at run-time
+> > via a post-buildman script and copied to '/tmp'.
+> >
+> > Moreover, for running TF-A and OP-TEE on qemu, '-m 4G' and
+> > 'virtualization=3Dfalse,secure=3Don' are required, and '-semihosting'
+> > should be replaced with its modern alias
+> > '-semihosting-config enable=3Don,target=3Dnative'.
+> >
+> > Last, point to the new helper script 'swtpm-tfa'.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>
+> Lets fixup the current qemu_arm64 conf to have as much in common as
+> possible (4G, modern semihosting flags, etc). Next:
+>
+> > ---
+> >  .../conf.qemu_arm64_fw_handoff_tfa_optee      | 31 +++++++++++++++++++
+> >  1 file changed, 31 insertions(+)
+> >  create mode 100644 bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+> >
+> > diff --git a/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee b/bin/t=
+ravis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+> > new file mode 100644
+> > index 0000000..9aa6d3b
+> > --- /dev/null
+> > +++ b/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+> > @@ -0,0 +1,31 @@
+> > +# Copyright (c) 2025 Linaro Limited
+> > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > +# Based on conf.qemu_arm64 which is
+> > +# Copyright (c) 2017 Tuomas Tynkkynen. All rights reserved.
+> > +#
+> > +# Permission is hereby granted, free of charge, to any person obtainin=
+g a
+> > +# copy of this software and associated documentation files (the "Softw=
+are"),
+> > +# to deal in the Software without restriction, including without limit=
+ation
+> > +# the rights to use, copy, modify, merge, publish, distribute, sublice=
+nse,
+> > +# and/or sell copies of the Software, and to permit persons to whom th=
+e
+> > +# Software is furnished to do so, subject to the following conditions:
+> > +#
+> > +# The above copyright notice and this permission notice shall be inclu=
+ded in
+> > +# all copies or substantial portions of the Software.
+> > +#
+> > +# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPR=
+ESS OR
+> > +# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABIL=
+ITY,
+> > +# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT S=
+HALL
+> > +# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR=
+ OTHER
+> > +# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARIS=
+ING
+> > +# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> > +# DEALINGS IN THE SOFTWARE.
+> > +
+> > +console_impl=3Dqemu
+> > +qemu_machine=3D"virt,virtualization=3Dfalse,secure=3Don"
+> > +qemu_helper_script=3D"swtpm-tfa"
+> > +qemu_binary=3D"qemu-system-aarch64"
+> > +qemu_extra_args=3D"-m 4G -cpu cortex-a57 -nographic -netdev user,id=3D=
+net0,tftp=3D${UBOOT_TRAVIS_BUILD_DIR} -device e1000,netdev=3Dnet0 -device v=
+irtio-rng-pci -d unimp -semihosting-config enable=3Don,target=3Dnative -cha=
+rdev socket,id=3Dchrtpm,path=3D/tmp/tpm/swtpm-sock -tpmdev emulator,id=3Dtp=
+m0,chardev=3Dchrtpm -device tpm-tis-device,tpmdev=3Dtpm0"
+>
+> Can we line break this? Then make some functional groupings? Thanks.
+>
+I am thinking about to merge this script into the common one
+"conf.qemu_arm64_na", but do you mind to add
+"virtualization=3Dfalse,secure=3Don" as a common setting? even though It
+is only needed when running with TF-A/OP-TEE.
 
-I believe this may be related to what I hit almost three years ago, see 
-commit log in 
-https://source.denx.de/u-boot/u-boot/-/commit/b1f1b4a5a528eeefea283ccca2ee9777cb10c840
+Raymond
 
-"""
-since arch_env_get_location() is called
-by env_init() which is part of the pre-relocation process, a valid,
-non-ENVL_UNKNOWN, value shall be returned otherwise the relocation fails
-with the following message:
-initcall sequence 00000000002866c0 failed at call 0000000000256b34 (err=-19)
 
-This valid, non-ENVL_UNKNOWN, value is ENVL_NOWHERE which requires to
-always select CONFIG_ENV_IS_NOWHERE otherwise this work-around does not
-work.
-"""
-
-Hope this helps.
-
-I haven't dug deeper than that though.
-
-Cheers,
-Quentin
+> --
+> Tom
