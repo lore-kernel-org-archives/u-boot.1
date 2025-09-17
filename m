@@ -4,75 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD2ACAC5A0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 16:06:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06EAFCAC59A
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 16:22:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20C04836A4;
-	Wed, 17 Sep 2025 18:06:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E24683677;
+	Wed, 17 Sep 2025 18:22:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=fairphone.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hCN78HAX";
+	dkim=pass (2048-bit key; unprotected) header.d=fairphone.com header.i=@fairphone.com header.b="OS5eLf8S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F150836A6; Wed, 17 Sep 2025 18:06:51 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A86ED8365C
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 18:06:48 +0200 (CEST)
+ id 40741835B9; Wed, 17 Sep 2025 14:47:52 +0200 (CEST)
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
+ [IPv6:2a00:1450:4864:20::642])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F274F80C93
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 14:47:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HG6kPO1553516;
- Wed, 17 Sep 2025 11:06:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758125206;
- bh=CnhPX/iebRiuW4cEmZMHAN2TFU4wnsB7p6LlIDFn15A=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=hCN78HAXHV7y8szA/RqOMUngwYPPY6lPpQoOvLXZHWeQXMKVN1x4zbDyTPht8JRDa
- KT40l+Y/g4Ts3vFLzaqtvW6xKny20juBrttL+yNkY75kDIARShYgkvJYYbc0fmDM1A
- Q/G/BxEJgpyqcYv9duLa860O4lknj2tZgok7amDw=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HG6kBC1664168
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 17 Sep 2025 11:06:46 -0500
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
- Sep 2025 11:06:45 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 17 Sep 2025 11:06:45 -0500
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HG6jFv3621731;
- Wed, 17 Sep 2025 11:06:45 -0500
-Message-ID: <4deb9bf9-f1d7-472c-93d2-5ccaf96ba4f0@ti.com>
-Date: Wed, 17 Sep 2025 11:06:45 -0500
+ dmarc=pass (p=none dis=none) header.from=fairphone.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=luca.weiss@fairphone.com
+Received: by mail-ej1-x642.google.com with SMTP id
+ a640c23a62f3a-b07c2908f3eso800950766b.1
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 05:47:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=fairphone.com; s=fair; t=1758113269; x=1758718069; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xDVmkA5XCgWHEC8wknEhdMnWg4aY+OBm5C5RZINyFnI=;
+ b=OS5eLf8SmxT/XrDYFt0vbSYWRkqnRqlsgVuhnRnJ5vnMylZBb/oOLRHcooHHWvqiFm
+ N+r6Sv+tH3wzoB7qVXjmVSp9HOPl1GxHTEBWAOnVvyJfNN96Dvul386DwRJ+JHLEMY02
+ 5kyUdDJhnyq0C1y0uY85zwKA27HQJBR6jwgiXEpsQXTP9NCYEim1dbZ8ZnO0c2oyeFjV
+ aQ2PMBrRCyCCV8OnhzGG01bJsIN3/XR6RSb4jy0I8QBN7wnXOEYEgTFNiIqfegM97b2f
+ LVplcbixh14WuYV6AFcVW+8UhDrhTThCWZgpxW1HVi62OkRNBrWNS5N7slY4v+3UGJnY
+ D9dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758113269; x=1758718069;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xDVmkA5XCgWHEC8wknEhdMnWg4aY+OBm5C5RZINyFnI=;
+ b=FWIQVYHW2vT58Y9046yGcKD6sXdM9RI9Yt86THU7Me9ySDMNLLjoDsGtg9BtL3ZPEm
+ +pty9K6RpmCTwdZyNg3Etm2d+OBtViZfvMexRMv4blf8GpgrD7ysKoN1qoFrG5HTlSbC
+ LyqhshP8JqYMYTq+hIRLBHBf27+H5rod4C1ccGgwfEy8R6Q1Uhnx9/7B2MkfbE+pvMuv
+ 8+ikPQHVZd7KpwrGFgxpVOl/kw1lTfUrO2QjQhaxoTvDC6c1e8cAch076v51dTgXDWe5
+ 4C6QHLMFbTE7UznSdvmuWb2oy5viPBhtspmNJ3S7e8t2rANKbcMR100U8zP2wlCSkAWx
+ HRbQ==
+X-Gm-Message-State: AOJu0YwFZIsLfHOyeunBERu6qNCfHGxfbkX1upPWwfmVzGsOW+V51+tM
+ veNXQs8LWi7BYVU6e65cxwUTAZommPO77xioPe4oW9LR6QjFFUaM8OZSVk6czjgRvLE=
+X-Gm-Gg: ASbGncs90pFjFDRyPet/5QLVw3hyXOQD1Jxy0HhcA1D6q01PfFp16Wyrki7h995JCQ2
+ 46xBdFY0fkRXoZewzZsa1NRFaV0eRh6DQ2gzRqIopp7meADh2tqRxH67DQoyTp0AKhaY+jsl4H/
+ 6wb2YKyjtTfh+M7i3CedVpuraLkjzmxaJkqfd+7sZzjCss+gXcqsswdRmuUKJREPqy/L/f3wmr2
+ +5ONsbwsMHPeV7ZPiXrXPKU9GWyWwaGzlJhoHQv6bsRdJgzNLhSmUO/s35qphe6r5Y/QUBstCog
+ +NC7Sa/tBp17u9tL4w9CKIkk2Wmjpna5pketnhFcl+I9CLfqYGjg9mOWjZw7LbIsE2fzt+C4SnC
+ NZi2THyrdaSD4dT09Z6tqynfdeV3rCA3D7KsEBd2E/s0jhL8bc0z7Wb9zqQsdwTY+FDGfSg==
+X-Google-Smtp-Source: AGHT+IGo6npRrPdtT3jgvXNaG34JEFtArkR1dmfA5YYHE0YC4MpbBpratmKMfspY7DzIp2diCiblEw==
+X-Received: by 2002:a17:906:730d:b0:b04:725c:bcb with SMTP id
+ a640c23a62f3a-b1bb60490a5mr240745766b.23.1758113269290; 
+ Wed, 17 Sep 2025 05:47:49 -0700 (PDT)
+Received: from otso.local (144-178-202-138.static.ef-service.nl.
+ [144.178.202.138]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b08cab32303sm937441866b.72.2025.09.17.05.47.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Sep 2025 05:47:48 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH v2 0/9] U-Boot Bringup of SM6350 SoC
+Date: Wed, 17 Sep 2025 14:47:33 +0200
+Message-Id: <20250917-sm6350-bringup-v2-0-13346fc2a2f6@fairphone.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
-To: Anshul Dalal <anshuld@ti.com>, Andrew Davis <afd@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- "Vaishnav Achath" <vaishnav.a@ti.com>,
- Jayesh Choudhary <j-choudhary@ti.com>, "Moteen Shah" <m-shah@ti.com>,
- Udit Kumar <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-References: <20250910214514.1848847-1-jm@ti.com>
- <20250910214514.1848847-2-jm@ti.com> <DCPPO8O0GIVD.1CWNDWAKDGVEC@ti.com>
- <b61c7f41-6e1d-4d90-a8b8-e446bc32e3a6@ti.com>
- <9c1b1344-b6fb-4ad4-aaec-1b187e1cd27d@ti.com>
- <c9b5d045-e719-40b3-acf4-cf887e0ce51b@ti.com>
- <DCURIP1YMD3G.2JMJP9EN3EE2K@ti.com>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <DCURIP1YMD3G.2JMJP9EN3EE2K@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-B4-Tracking: v=1; b=H4sIAOWtymgC/3XMyw6CMBCF4Vchs7amDHKJK9/DsGjrALOgJVNtN
+ KTvbmXv8j/J+XaIJEwRrtUOQokjB18CTxW4xfiZFD9KA2psdVcPKq5d02plhf382pQeCC+kp8F
+ ahHLahCZ+H+B9LL1wfAb5HH6qf+tfKtVKq8Y5RGNsb3pzmwzLtgRPZxdWGHPOX4pC/7SwAAAA
+X-Change-ID: 20250618-sm6350-bringup-08e24e0f8bb2
+To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@kernel.org>, Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Luca Weiss <luca.weiss@fairphone.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1758113268; l=2088;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=u0b0+0CVLx+Sppcg/b9nivsuHI3CXetqUEHUDEBLxPk=;
+ b=UvOwnFtXZ7zjR4e0S6h1Iec1eW55nXWH8hDxxNyANsuowIsmiFlAUxMu33bcYXOZcsMC30M3K
+ 8GxAt/APJ9kAAABZtq14xGBsafM/lMUrIgXFuXl2ckXJSy0TDf/IcLC
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+X-Mailman-Approved-At: Wed, 17 Sep 2025 18:22:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,131 +112,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/16/25 10:41 PM, Anshul Dalal wrote:
-> Hi Judith,
-> 
-> On Wed Sep 17, 2025 at 4:05 AM IST, Judith Mendez wrote:
->> Hi Andrew, Anshul,
->>
->> On 9/16/25 11:22 AM, Andrew Davis wrote:
->>> On 9/11/25 9:59 AM, Judith Mendez wrote:
->>>> Hi Anshul,
->>>>
->>>> On 9/11/25 12:11 AM, Anshul Dalal wrote:
->>>>> On Thu Sep 11, 2025 at 3:15 AM IST, Judith Mendez wrote:
->>>>>> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The
->>>>>> macros
->>>>>> however, mix MMC device with the two bootmodes. Decouple the two types
->>>>>> of macros so that bootmodes can be identified with:
->>>>>> - BOOT_DEVICE_MMCSD
->>>>>> - BOOT_DEVICE_EMMC
->>>>>> according to devstat parsed boot mode values and on-board devices
->>>>>> can be
->>>>>> identified with:
->>>>>> - BOOT_DEVICE_MMC1
->>>>>> - BOOT_DEVICE_MMC2
->>>>>> - BOOT_DEVICE_MMC2_2
->>>>>> according to arbitrary numbers mainly used to differentiate between
->>>>>> eMMC
->>>>>> and SD card.
->>>>>>
->>>>>> Signed-off-by: Judith Mendez <jm@ti.com>
->>>>>> ---
->>>>>
->>>>> I guess the confusion here is how we are calling boot modes from devstat
->>>>> as well as the boot device as BOOT_DEVICE_*. Perhaps we should rename
->>>>> the former to DEVSTAT_BOOT_MODE_* or something along those lines.
->>>>>
->>>>> That would make the difference between a boot *mode* and a boot *device*
->>>>> more clear, DEVSTAT_BOOT_MODE_MMCSD or DEVSTATE_BOOT_MODE_EMMC would
->>>>> distinguish between SD or EMMC boot modes with BOOT_DEVICE_MMC*
->>>>> indicating the MMC port used.
->>>>>
->>>>> This would also allow use to only have the respective
->>>>> DEVSTAT_BOOT_MODE_* defined in each soc's headers with BOOT_DEVICE_*
->>>>> coming from arch/arm/include/asm/spl.h.
->>>>
->>>>
->>>> Right, I guess if
->>>>
->>>> BOOT_DEVICE_MMCSD
->>>> BOOT_DEVICE_EMMC
->>>>
->>>> Is still not clear enough, it would be a good idea to use:
->>>> DEVSTAT_BOOT_MODE_MMCSD
->>>> DEVSTAT_BOOT_MODE_EMMC
->>>>
->>>> Its only a real problem for MMC since we have the confusion with eMMC
->>>> boot and MMCSD boot and we mix the two as a result in
->>>> spl_mmc_boot_mode() and spl_boot_device().
->>>>
->>>>
->>>> Its not really an issue for other boot modes to warrant renaming all the
->>>> bootmodes, but I would like to make these macros as clear as possible in
->>>> this series since I plan to refactor spl_mmc_boot_mode() next.
->>>>
->>>> So lets hear if any one else has a strong opinion on this before
->>>> deciding on:
->>>>
->>>> DEVSTAT_BOOT_MODE_MMCSD
->>>> DEVSTAT_BOOT_MODE_EMMC
->>>
->>> This looks like the correct way to label these as they are the content
->>> of the DEVSTAT register, this would also keep them from being confused
->>> with the U-Boot internal definitions for BOOT_MODE_* and BOOT_DEVICE_*.
->>>
->>> But you should do it for all the DEVSTAT register defines, not just
->>> MMC and not just for Sitara, do it for all our K3 boards. It should
->>> be a simple rename patch to start. Then you can work to detangle
->>> "mode" from "device" for the MMC case as you are doing here.
->>
->> I take it back, seems like this cannot be done, u-boot source requires
->> all the macros:
->> BOOT_DEVICE_SPI
->> BOOT_DEVICE_RAM
->> BOOT_DEVICE_UART
->> etc...
->>
->> in order to even build.
->>
->> Simply renaming the macros to style:
->> DEVSTAT_BOOT_MODE_SPI
->> DEVSTAT_BOOT_MODE_RAM
->> DEVSTAT_BOOT_MODE_UART
->>
->> will not work without creating a duplicate:
->> #define BOOT_DEVICE_SPI		DEVSTAT_BOOT_MODE_SPI
->> #define BOOT_DEVICE_RAM		DEVSTAT_BOOT_MODE_RAM
->> #define BOOT_DEVICE_UART	DEVSTAT_BOOT_MODE_UART
->> or similar logic
->>
->> So basically we would be doubling the size of all spl.h files.
->>
->> In reality there is only confusion with MMC device/bootmodes,
->> we do not to rename every single boot modes/boot device since
->> there is no real confusion there.
->>
-> 
-> Correct me if I'm wrong here but BOOT_DEVICE_* should only be used
-> within the common u-boot source. Our job is to just the return the
-> correct macro from the SoC's boot.c file and ensure they are all unique
-> values.
-> 
-> If that's true, can we make use of BOOT_DEVICE_* defines from
-> arch/arm/include/asm/spl.h?
-> 
-> That should avoid duplication since we would just rename the existing
-> BOOT_DEVICE_* macros to DEVSTAT_BOOT_MODE_* in our board's spl.h while
-> relying on BOOT_DEVICE_* from arm's spl.h.
+Add a clock driver, pinctrl driver for SM6350, and enable support for
+this SoC in the SMMU and UFS driver. Add a debug kconfig fragment which
+configures the debug UART address.
 
-Then we come back in a circle to the first real problem which is
-untangling MMC bootmodes from MMC boot devices.
+Finally add support for the PM6150L regulators which is used to get
+power on for the SD card.
 
-Why are we trying to refactor all the MMC_DEVICE_* ? There is no
-real problem for those bootmodes / boot devices since boot device =
-boot mode for those. It is only a real problem for MMC since boot device
-DOES NOT equal boot mode for MMC.
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+---
+Changes in v2:
+- Drop printf from clk driver
+- Add patch for spmi gpio (volume-down button)
+- Pick up tags
+- Rebase on v2025.10-rc4
+- Link to v1: https://lore.kernel.org/r/20250618-sm6350-bringup-v1-0-3cc22aab7a7a@fairphone.com
 
-~ Judith
+---
+Luca Weiss (9):
+      clk/qcom: Add SM6350 clock driver
+      clk/stub: add sm6350-rpmh clock
+      drivers: pinctrl: Add Qualcomm SM6350 TLMM driver
+      iommu: qcom-smmu: Add qcom,sm6350-smmu-500 compatible
+      phy: qcom: Add SM6350 to QMP UFS PHY driver
+      regulator: qcom-rpmh-regulator: add support for pm6150l regulators
+      gpio: qcom: Support GPIOs on PM6350 PMIC
+      qcom_defconfig: Enable SM6350 clock and pinctrl drivers
+      board/qualcomm: add debug config fragment for SM6350
 
+ board/qualcomm/debug-sm6350.config            |   5 +
+ configs/qcom_defconfig                        |   2 +
+ drivers/clk/clk-stub.c                        |   1 +
+ drivers/clk/qcom/Kconfig                      |   8 ++
+ drivers/clk/qcom/Makefile                     |   1 +
+ drivers/clk/qcom/clock-sm6350.c               | 193 ++++++++++++++++++++++++++
+ drivers/gpio/qcom_spmi_gpio.c                 |   1 +
+ drivers/iommu/qcom-hyp-smmu.c                 |   3 +-
+ drivers/phy/qcom/phy-qcom-qmp-ufs.c           |   1 +
+ drivers/pinctrl/qcom/Kconfig                  |   7 +
+ drivers/pinctrl/qcom/Makefile                 |   1 +
+ drivers/pinctrl/qcom/pinctrl-sm6350.c         | 104 ++++++++++++++
+ drivers/power/regulator/qcom-rpmh-regulator.c |  31 +++++
+ 13 files changed, 357 insertions(+), 1 deletion(-)
+---
+base-commit: 7a4f3c5652157cbb3d26a7728bfe537ea483efc9
+change-id: 20250618-sm6350-bringup-08e24e0f8bb2
+
+Best regards,
+-- 
+Luca Weiss <luca.weiss@fairphone.com>
 
