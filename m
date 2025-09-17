@@ -4,54 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 539C0CAC59D
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 12:46:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66730CAC59A
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 12:49:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B90B98353A;
-	Wed, 17 Sep 2025 14:46:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id D9BF4833ED;
+	Wed, 17 Sep 2025 14:49:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="C49dehE/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hIImrBsU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8F1683544; Wed, 17 Sep 2025 14:46:09 +0200 (CEST)
-Received: from mx.nabladev.com (mx.nabladev.com [178.251.229.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D5BA833ED
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 14:46:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
+ id 6A787834E1; Wed, 17 Sep 2025 14:49:10 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0848B80C93
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 14:49:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukma@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9DAAE1063CA; Wed, 17 Sep 2025 14:46:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1758113166;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=oyek2XPTtoMMzPUYQHqsPr5vbx9jjk2gTzUelh84geQ=;
- b=C49dehE/ASWoinyEFRSUToXP9OV44h/bTBov8MWWmqrfiUXxBpEctfFhiZkndsg0M4RH7R
- G4vKDtXSNp55XEUePJ1U4Ua1VT/JujfLIKbyLVtn+kzv0MaXLw/fFAY3Wx28YJuR/exVQC
- PLB6MNMyVH3EVqqG4Itf2KwNF9NAMGrC17E0BrdhATXHTjqbRQ2yIpdMukkvN3qQCMLO3c
- S3WBcYjRCMGueL9Zz1yerLKcGgM+GqFm5j5nQllkJk0qOuvoVgbcrljKevMS0onU1Hn2Bp
- Bz9gefk512cGihr4/RQCrokgbid942yyRSUmahOpT2zBBkOzpmkoKYB+lwVdZg==
-Date: Wed, 17 Sep 2025 14:46:04 +0200
-From: =?UTF-8?B?xYF1a2Fzeg==?= Majewski <lukma@nabladev.com>
-To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] timer: tegra: Bind watchdog driver when timer node
- is processed
-Message-ID: <20250917144604.49f792b4@wsk>
-In-Reply-To: <20250826093936.3521235-1-lukma@nabladev.com>
-References: <20250826093936.3521235-1-lukma@nabladev.com>
-Organization: Nabla
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HCn2I4251370;
+ Wed, 17 Sep 2025 07:49:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758113342;
+ bh=7gHsL/C0XCYD1Uye4cA2ROPTKF6COlVTEsILIywjvvQ=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=hIImrBsUJ0kwZvFPVGbgIsLJxpnOPP7LDXh5xFs1TvthN0AvT+vrJF4tLEkcg8W7s
+ jKXry+jlS8eUR4bhrCE3q4y1WCTfGtiUAxuOvOr9DHJAMc1y1BBgTdk9ypw9qBDqJu
+ j0czUv+Fuu40NI47BJNrlvDEYauygAU/POqGCpjQ=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HCn2Qp2345164
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 17 Sep 2025 07:49:02 -0500
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
+ Sep 2025 07:49:01 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 17 Sep 2025 07:49:01 -0500
+Received: from localhost (lcpd911.dhcp.ti.com [172.24.233.130])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HCn0Sr3355600;
+ Wed, 17 Sep 2025 07:49:01 -0500
+Date: Wed, 17 Sep 2025 18:18:59 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, <b-padhi@ti.com>, <vigneshr@ti.com>,
+ <trini@konsulko.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
+ <w.egorov@phytec.de>, <francesco.dolcini@toradex.com>,
+ <ggiordano@phytec.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
+ <patrice.chotard@foss.st.com>, <patrick.delaunay@foss.st.com>
+Subject: Re: [PATCH -next v1] arm: armv8: remove redundant definition of
+ mmu_status
+Message-ID: <20250917124859.t3phgju3jxthkmpm@lcpd911>
+References: <20250916112205.238811-1-anshuld@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250916112205.238811-1-anshuld@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,77 +83,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Community,
-
-> The Tegra30 SoC is a bit special, as it doesn't have the separate IP
-> block to provide watchdog functionality.
+On Sep 16, 2025 at 16:52:05 +0530, Anshul Dalal wrote:
+> mmu_status is used in io memcpy functions to prevent accesses to non
+> 8-byte aligned addresses when the mmu is disabled. Though there is a
+> redundant definition enabled when icaches is turned off by setting
+> SYS_ICACHE_OFF.
 > 
-> Instead, timer IP block allows such functionality when properly
-> configured.
+> This patch removes the redundant definition, allowing mmu_status to
+> properly report the status regardless of config settings. This shouldn't
+> be a problem since access to non 8-byte aligned data can be done
+> irrespective of icache state.
 > 
-> As in the tegra30.dtsi there is a timer node, which "covers" all
-> timers, with 'nvidia,tegra30-timer' compatibility it was necessary to
-> manually bind U-Boot's WDT driver (based on WDT_UCLASS).
+> Fixes: 268f6ac1f95c ("arm64: Update memcpy_{from, to}io() helpers")
 > 
-> Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
 > ---
->  drivers/timer/tegra-timer.c | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
+>  arch/arm/cpu/armv8/cache_v8.c | 15 +++++----------
+>  1 file changed, 5 insertions(+), 10 deletions(-)
 > 
-> diff --git a/drivers/timer/tegra-timer.c b/drivers/timer/tegra-timer.c
-> index 3545424889d..361539efa43 100644
-> --- a/drivers/timer/tegra-timer.c
-> +++ b/drivers/timer/tegra-timer.c
-> @@ -11,6 +11,8 @@
->  #include <asm/arch/clock.h>
->  #include <asm/arch/tegra.h>
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index 1dcb6007475..74814601483 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -1184,11 +1184,6 @@ int icache_status(void)
+>  	return (get_sctlr() & CR_I) != 0;
+>  }
 >  
-> +#include <dm/lists.h>
-> +
->  #define TEGRA_OSC_CLK_ENB_L_SET		(NV_PA_CLK_RST_BASE +
-> 0x320) #define TEGRA_OSC_SET_CLK_ENB_TMR	BIT(5)
->  
-> @@ -106,6 +108,21 @@ static int tegra_timer_probe(struct udevice *dev)
+> -int mmu_status(void)
+> -{
+> -	return (get_sctlr() & CR_M) != 0;
+> -}
+> -
+>  void invalidate_icache_all(void)
+>  {
+>  	__asm_invalidate_icache_all();
+> @@ -1210,17 +1205,17 @@ int icache_status(void)
 >  	return 0;
 >  }
 >  
-> +static int tegra_timer_bind(struct udevice *dev)
+> -int mmu_status(void)
+> -{
+> -	return 0;
+> -}
+> -
+>  void invalidate_icache_all(void)
+>  {
+>  }
+>  
+>  #endif	/* !CONFIG_IS_ENABLED(SYS_ICACHE_OFF) */
+>  
+> +int mmu_status(void)
 > +{
-> +	/*
-> +	 * In Tegra 30 SoC the Watchdog is accomplished
-> +	 * by the timer IP block (timer5).
-> +	 */
-> +	if (CONFIG_IS_ENABLED(WDT_TEGRA))
-> +		return device_bind_driver_to_node(dev, "tegra_wdt",
-> +						  "tegra-wdt",
-> +						  dev_ofnode(dev),
-> +						  NULL);
-> +
-> +	return 0;
+> +	return (get_sctlr() & CR_M) != 0;
 > +}
 > +
->  static const struct timer_ops tegra_timer_ops = {
->  	.get_count = tegra_timer_get_count,
->  };
-> @@ -124,6 +141,7 @@ U_BOOT_DRIVER(tegra_timer) = {
->  	.id		= UCLASS_TIMER,
->  	.of_match	= tegra_timer_ids,
->  	.probe		= tegra_timer_probe,
-> +	.bind		= tegra_timer_bind,
->  	.ops		= &tegra_timer_ops,
->  	.flags		= DM_FLAG_PRE_RELOC,
->  };
+>  /*
 
-Are there any new comments regarding this patch set?
+Good catch,
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
 -- 
 Best regards,
-
-Lukasz Majewski
-
---
-Nabla Software Engineering GmbH
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschftsfhrer : Stefano Babic
+Dhruva Gole
+Texas Instruments Incorporated
