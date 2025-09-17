@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD1FACAC598
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 04:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F03CA0EE8
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 04:42:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3740E8331F;
-	Wed, 17 Sep 2025 06:19:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 386EC803CC;
+	Wed, 17 Sep 2025 06:42:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oEInZK7/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tGfI0p5m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64D0F83327; Wed, 17 Sep 2025 06:19:44 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id DF45B832F9; Wed, 17 Sep 2025 06:42:17 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEBCA83314
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 06:19:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63D20800C1
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 06:42:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58H4Jee3166293;
- Tue, 16 Sep 2025 23:19:40 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58H4gDSe1524970;
+ Tue, 16 Sep 2025 23:42:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758082780;
- bh=aisyaXv7suSlU26Wpry6+46L0SUXlW+ujvL9UXhg/bk=;
+ s=ti-com-17Q1; t=1758084133;
+ bh=HO8pX3Z7NBTIqtIUgTRg/ZxzkKAmd8uC89JAAsxzppA=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=oEInZK7/Sgq9HajoobH5aHLqT7VDhZJO9aDSE0zxNOGVvMRn40Y5QYrdwrkBw357o
- au/ZiSLE/SLTG1kWi/4jEeogFlue4Ym8LhLi5WheoJ98mFHpGC77yClFi1OzCQf3fF
- IcoJzXK05dxAgKdkEJ6BGvsqb0dGdfuAwirD1HYA=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58H4Jeon2055485
+ b=tGfI0p5moOfDYFTrk1N6fpF5mcm7MDYmZnfGz/H8LM25nMjKj5EyKuYEvgyutnnMN
+ L+DKAjpKrtyUeGZamsOoLBtlQ8N/G3Rr4AmzL5ApYGAox5z9y+cQDYtu4SPM+owaUf
+ SAXjixDeGF9SteoMLb6tiB+IK5oQ7kmSjoT19Fwk=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58H4gDMt492841
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 16 Sep 2025 23:19:40 -0500
-Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 16 Sep 2025 23:42:13 -0500
+Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 16
- Sep 2025 23:19:39 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 23:42:13 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 16 Sep 2025 23:19:39 -0500
-Received: from [172.24.19.53] (ltpw0bk3wf.dhcp.ti.com [172.24.19.53])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58H4JbZJ2690194;
- Tue, 16 Sep 2025 23:19:38 -0500
-Message-ID: <59097c32-9efc-4ec2-87ea-14594b8e6fde@ti.com>
-Date: Wed, 17 Sep 2025 09:49:37 +0530
+ Transport; Tue, 16 Sep 2025 23:42:13 -0500
+Received: from [172.24.20.139] (lt5cd2489kgj.dhcp.ti.com [172.24.20.139])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58H4gBfH2715264;
+ Tue, 16 Sep 2025 23:42:12 -0500
+Message-ID: <835be5c3-de8b-4aa2-abc8-ca858646557a@ti.com>
+Date: Wed, 17 Sep 2025 10:12:10 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2] board: ti: am57xx: Remove "ti/omap/" from
  name_fit_config
-To: <trini@konsulko.com>
-CC: <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+To: Anurag Dutta <a-dutta@ti.com>, <trini@konsulko.com>
+CC: <n-francis@ti.com>, <u-boot@lists.denx.de>
 References: <20250917041729.3460570-1-a-dutta@ti.com>
 Content-Language: en-US
-From: "Dutta, Anurag" <a-dutta@ti.com>
+From: "Kumar, Udit" <u-kumar1@ti.com>
 In-Reply-To: <20250917041729.3460570-1-a-dutta@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
@@ -80,10 +80,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
-Please pick this up for v2025.10.
 
-On 17-09-2025 09:47, Anurag Dutta wrote:
+On 9/17/2025 9:47 AM, Anurag Dutta wrote:
 > Commit 649f4a7d3ca7 ("board: ti: am57xx: Set fdtfile from C code
 > instead of findfdt script") prepends "ti/omap/" to the actual name
 > of the fdtfile whereas fit image boot needs exact dtb name. So, remove
@@ -114,6 +112,11 @@ On 17-09-2025 09:47, Anurag Dutta wrote:
 >   	fi
 > -get_fit_config=setenv name_fit_config ${fdtfile}
 > +get_fit_config=setexpr name_fit_config gsub "ti/omap/" "" ${fdtfile}
+
+
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+
+
 >   console=ttyS2,115200n8
 >   fdtfile=undefined
 >   finduuid=part uuid mmc 0:2 uuid
