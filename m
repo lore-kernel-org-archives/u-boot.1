@@ -4,134 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE1DCAC5A0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 16:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD2ACAC5A0
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 16:06:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A9C83692;
-	Wed, 17 Sep 2025 18:00:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=de.bosch.com
+	by phobos.denx.de (Postfix) with ESMTP id 20C04836A4;
+	Wed, 17 Sep 2025 18:06:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=de.bosch.com header.i=@de.bosch.com header.b="BtEs6UJQ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hCN78HAX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C706836A3; Wed, 17 Sep 2025 18:00:26 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40EB183677
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 18:00:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=de.bosch.com
+ id 1F150836A6; Wed, 17 Sep 2025 18:06:51 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A86ED8365C
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 18:06:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Mark.Jonas@de.bosch.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SrL5okBJURzCn74DcX50Doynh002ZRnH+KEAsvFvocVKthw218t1SNRwd4xhnovkYMv4OgFGeeES0xrVHLFowYSezSnsLcRCkzqUDaFaRxKxX2ESscb19WF10V5VXndvsLksS87SLBvONTF3XbuW+BBcOBtUKlFDh3TwOzyfhHLStlqfnA22oPEJESL+zUDPTJvH13gWCLKQVyyMpf+beFx/Enfrg9zv66HxJud6GODATrwB5lQK+j2er8N18rmNWR/1DBsOt2pe/7HXgbDroIiOqZFjzg8PX7osCLoB1NIop53qMFXN2oAXMdedqyHxt14/4g/rQ7L46EOv10tZQg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6TM+SgGWSiCQ+cgCawJ/Y0QE/tmJHobSiYdLPhzxhlg=;
- b=lsMxESS6VchWWkNUEPYEyzZQ6Cpada/eg9CICB8Li8vMgkIVwBDMmQRI5a4hoz6yen2z/9YTJyKM936QFE6rX2ti7r0trxHluvnXBBdCHRgHRO3ZR+og+qMPn+GD36mILjoSUzpSPHID/vGvEyShhltGjugAuAYrz7cF9LsfqTvQOcWj7bBXCfjRFdmHuSfjFvo9/T1N/n6Im8+lAgJ1A2cz7dr9IwEu8T3EHGSZn0nOfX0j9FydC4zT5W8zOOCjkJ/ccAETx3sTQFUPJw03Ey/QGo2A3MEpRkNU/zHf3bhS2bwaV6Cd7DBHP3UcqgnoR512ZTWYg++MVuqyfNO53w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 139.15.153.206) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=de.bosch.com;
- dmarc=pass (p=reject sp=none pct=100) action=none header.from=de.bosch.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=de.bosch.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6TM+SgGWSiCQ+cgCawJ/Y0QE/tmJHobSiYdLPhzxhlg=;
- b=BtEs6UJQ7Y4Kw72TN3EqJWBgrFljs+9dujfZeXWcVW2VvopnolxOuoPyd/qTtLxQSnJiWiD14LJ/vXqrzdRObkI9x0lhPVyGsyjHU5qVaKlsUyxYLBwmJ3sPvbfYt6PLIskOAKDmTlsMmqoaBntQI1e2p0nH8LLkbDq7oMr7jrIdXn59jy82YbmH5NshetxLylGtHzL8yknzAQ0vLOPg5IzZZr4rVMtB8ltsqRXZQZYR7ndZvZVxCdWzd0mcATYc18IuUHl66SGDvFiUQcOC7W6sqsJCa93DqN+sbdLoYqczew6IT8VV5TVbmJ0F3UlQDqHrwWsk2l3A7QjdQtAr0g==
-Received: from DB8PR09CA0036.eurprd09.prod.outlook.com (2603:10a6:10:a0::49)
- by PA1PR10MB8641.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:451::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.13; Wed, 17 Sep
- 2025 16:00:21 +0000
-Received: from DU2PEPF0001E9BF.eurprd03.prod.outlook.com
- (2603:10a6:10:a0:cafe::86) by DB8PR09CA0036.outlook.office365.com
- (2603:10a6:10:a0::49) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.13 via Frontend Transport; Wed,
- 17 Sep 2025 16:00:21 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 139.15.153.206)
- smtp.mailfrom=de.bosch.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=de.bosch.com;
-Received-SPF: Pass (protection.outlook.com: domain of de.bosch.com designates
- 139.15.153.206 as permitted sender)
- receiver=protection.outlook.com; 
- client-ip=139.15.153.206; helo=eop.bosch-org.com; pr=C
-Received: from eop.bosch-org.com (139.15.153.206) by
- DU2PEPF0001E9BF.mail.protection.outlook.com (10.167.8.68) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9137.12 via Frontend Transport; Wed, 17 Sep 2025 16:00:21 +0000
-Received: from RNGMBX3002.de.bosch.com (10.124.11.207) by eop.bosch-org.com
- (139.15.153.206) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.27; Wed, 17 Sep
- 2025 18:00:05 +0200
-Received: from GRB-C-0009M.ot.de.bosch.com (10.22.69.50) by smtp.app.bosch.com
- (10.124.11.207) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.27; Wed, 17 Sep
- 2025 18:00:04 +0200
-From: <mark.jonas@de.bosch.com>
-To: <u-boot@lists.denx.de>
-CC: <festevam@gmail.com>, <emil.kronborg@protonmail.com>, Ricardo Simoes
- <ricardo.simoes@pt.bosch.com>, Mark Jonas <mark.jonas@de.bosch.com>
-Subject: [PATCH] clk: imx6q: Add definition for missing PWM clocks
-Date: Wed, 17 Sep 2025 17:59:32 +0200
-Message-ID: <20250917155932.3096-1-mark.jonas@de.bosch.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HG6kPO1553516;
+ Wed, 17 Sep 2025 11:06:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758125206;
+ bh=CnhPX/iebRiuW4cEmZMHAN2TFU4wnsB7p6LlIDFn15A=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=hCN78HAXHV7y8szA/RqOMUngwYPPY6lPpQoOvLXZHWeQXMKVN1x4zbDyTPht8JRDa
+ KT40l+Y/g4Ts3vFLzaqtvW6xKny20juBrttL+yNkY75kDIARShYgkvJYYbc0fmDM1A
+ Q/G/BxEJgpyqcYv9duLa860O4lknj2tZgok7amDw=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HG6kBC1664168
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 17 Sep 2025 11:06:46 -0500
+Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
+ Sep 2025 11:06:45 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
+ (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 17 Sep 2025 11:06:45 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HG6jFv3621731;
+ Wed, 17 Sep 2025 11:06:45 -0500
+Message-ID: <4deb9bf9-f1d7-472c-93d2-5ccaf96ba4f0@ti.com>
+Date: Wed, 17 Sep 2025 11:06:45 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.22.69.50]
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF0001E9BF:EE_|PA1PR10MB8641:EE_
-X-MS-Office365-Filtering-Correlation-Id: ada49784-e7ee-493f-84e7-08ddf6034e4a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?TBzCe+kwoAxipsqBK0+EgJiPOkV92cVH/+jA2zCDZaqaiueH/0P1/MWE8KwS?=
- =?us-ascii?Q?P+2C6c4Zac+xZrOIn/mLfk7ywVUfT865ZnXfPrdvpr97dlCCyLmcoQPhPTig?=
- =?us-ascii?Q?gCos0VVcqkwXWuq8xvov7m53Az3imkDnB0KkDu2mx8jjE6c/BWZJMfSut2zq?=
- =?us-ascii?Q?BO+XTYklgcqZyjka+XjzONgWI9n8umbCiNxYzkxh6JR1v7FeQpoetUCo81aL?=
- =?us-ascii?Q?0z09RcFaGqVSC++uKWGiau5e9tKUM3Ng53gJtMHovth7O4iovbDNOIXeprMJ?=
- =?us-ascii?Q?qnMPZ68cMYT0bpyHDcjLVoMlkR06AihCnqH7jWaM0xNh6NPTLss24f71jeUc?=
- =?us-ascii?Q?gL1kTbXqtK6r4zcLNi4uCdpqBTZgrHSbEBFw4kDgaxg6xeL7TSGC2oj04Wg4?=
- =?us-ascii?Q?5GsVETDtqO155KXqcuEAG44Xtc1e85xSc5x8e+ADJ85eZ8bctQmMRodMnCqk?=
- =?us-ascii?Q?j/sJAg+5rqwvoJt7LAvD07WsUYnblsRDPf52LznvD0lemMs2SzskmgO8fnK5?=
- =?us-ascii?Q?3ctdEGb+7fxlBiALAUx3bGQWHOwFNGvITsm3frwfiM7oig+rxfoliysRmRWc?=
- =?us-ascii?Q?yMK79kByvRxoeDnoM2+rib+4W5UeYkDXLh+KRxtdzUR1OELXUn+zkKJjQSZV?=
- =?us-ascii?Q?QoG5K8P0VJavBXEFoILc/fhfo+tMBG9IPqBQtQ5tta8Nmer0oUq2hDeQ0WWn?=
- =?us-ascii?Q?r1A8F7EPhJzZeBEowYF9jpHDPntbqrOjuBxh86AhsBNjMHaYXx7RqtoXmkQy?=
- =?us-ascii?Q?Qo9Xpa0HjqEuQ9O76xrIQvqgeQmgN91Z0R0hUUumVqqgIKfoHZ6nsxISvJ+3?=
- =?us-ascii?Q?HseVplNTR1lX0GSjFAqkzD/0TX3wOyetnEzN5zBTiUJXa0Gcy47mgo+Jv1/O?=
- =?us-ascii?Q?34XPtr+XGmJTznlXzNhU49tgBE3QJ3AjWlfbk2TpJ7QkbDBieWAg4kgS74Bc?=
- =?us-ascii?Q?5PWDoCOa5LXIgmMMBPvqM3qDBdtS7y3fIXSWzSVWZnI1ZbNtsjXV+TxOnZ5S?=
- =?us-ascii?Q?3BVrx+2/5jyzia6AY727QhA2NeQw0KHCh5+RNBSHUJ/rjg5ePaktw92HtDEo?=
- =?us-ascii?Q?7rKmBf0JQYSfgiYWlUfuwaLD2dpv6j8dcv4XVzx+ZCoffnpQx6V+lCQkB+Od?=
- =?us-ascii?Q?KoOzY58/0DXaJay/Vr5NXLf32NJ+2dQETXVUZENPASegThZ90t/lrb6DOgjG?=
- =?us-ascii?Q?gChHnwQbGp18ASz+zWwMXvRsAvfyIsDkw3+9jf5hV2K+JJ/MsGO1pSEKZzbn?=
- =?us-ascii?Q?w7lvuXuZGMOzXVU3jvPDOJmMVvDq8AXA6VrpFfB0+re5gm56J7FbyExQYYNW?=
- =?us-ascii?Q?tG4DejQASyAISblKAOCIKobFBCf7oYZ5ejFAHpTBK6E6gFllUOE7hFC4Yuac?=
- =?us-ascii?Q?jClzoi3CO4TYdYl3wGzV8veOz+YLRwh+mfbOBtdScMotOdBxe90Cf8GrC1YL?=
- =?us-ascii?Q?QBKRm2XNTCk1/YkhcCpLZEvufLUnL+CfOKgbhwlIzT8YW7JytuIaw7g5ApX8?=
- =?us-ascii?Q?MVwE6UY5b6wnVsg/HiuG1AXgHlupvzXD7tgP?=
-X-Forefront-Antispam-Report: CIP:139.15.153.206; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:eop.bosch-org.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: de.bosch.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2025 16:00:21.4286 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ada49784-e7ee-493f-84e7-08ddf6034e4a
-X-MS-Exchange-CrossTenant-Id: 0ae51e19-07c8-4e4b-bb6d-648ee58410f4
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=0ae51e19-07c8-4e4b-bb6d-648ee58410f4; Ip=[139.15.153.206];
- Helo=[eop.bosch-org.com]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF0001E9BF.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB8641
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
+To: Anshul Dalal <anshuld@ti.com>, Andrew Davis <afd@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ "Vaishnav Achath" <vaishnav.a@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, "Moteen Shah" <m-shah@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20250910214514.1848847-1-jm@ti.com>
+ <20250910214514.1848847-2-jm@ti.com> <DCPPO8O0GIVD.1CWNDWAKDGVEC@ti.com>
+ <b61c7f41-6e1d-4d90-a8b8-e446bc32e3a6@ti.com>
+ <9c1b1344-b6fb-4ad4-aaec-1b187e1cd27d@ti.com>
+ <c9b5d045-e719-40b3-acf4-cf887e0ce51b@ti.com>
+ <DCURIP1YMD3G.2JMJP9EN3EE2K@ti.com>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <DCURIP1YMD3G.2JMJP9EN3EE2K@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,37 +89,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
+On 9/16/25 10:41 PM, Anshul Dalal wrote:
+> Hi Judith,
+> 
+> On Wed Sep 17, 2025 at 4:05 AM IST, Judith Mendez wrote:
+>> Hi Andrew, Anshul,
+>>
+>> On 9/16/25 11:22 AM, Andrew Davis wrote:
+>>> On 9/11/25 9:59 AM, Judith Mendez wrote:
+>>>> Hi Anshul,
+>>>>
+>>>> On 9/11/25 12:11 AM, Anshul Dalal wrote:
+>>>>> On Thu Sep 11, 2025 at 3:15 AM IST, Judith Mendez wrote:
+>>>>>> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The
+>>>>>> macros
+>>>>>> however, mix MMC device with the two bootmodes. Decouple the two types
+>>>>>> of macros so that bootmodes can be identified with:
+>>>>>> - BOOT_DEVICE_MMCSD
+>>>>>> - BOOT_DEVICE_EMMC
+>>>>>> according to devstat parsed boot mode values and on-board devices
+>>>>>> can be
+>>>>>> identified with:
+>>>>>> - BOOT_DEVICE_MMC1
+>>>>>> - BOOT_DEVICE_MMC2
+>>>>>> - BOOT_DEVICE_MMC2_2
+>>>>>> according to arbitrary numbers mainly used to differentiate between
+>>>>>> eMMC
+>>>>>> and SD card.
+>>>>>>
+>>>>>> Signed-off-by: Judith Mendez <jm@ti.com>
+>>>>>> ---
+>>>>>
+>>>>> I guess the confusion here is how we are calling boot modes from devstat
+>>>>> as well as the boot device as BOOT_DEVICE_*. Perhaps we should rename
+>>>>> the former to DEVSTAT_BOOT_MODE_* or something along those lines.
+>>>>>
+>>>>> That would make the difference between a boot *mode* and a boot *device*
+>>>>> more clear, DEVSTAT_BOOT_MODE_MMCSD or DEVSTATE_BOOT_MODE_EMMC would
+>>>>> distinguish between SD or EMMC boot modes with BOOT_DEVICE_MMC*
+>>>>> indicating the MMC port used.
+>>>>>
+>>>>> This would also allow use to only have the respective
+>>>>> DEVSTAT_BOOT_MODE_* defined in each soc's headers with BOOT_DEVICE_*
+>>>>> coming from arch/arm/include/asm/spl.h.
+>>>>
+>>>>
+>>>> Right, I guess if
+>>>>
+>>>> BOOT_DEVICE_MMCSD
+>>>> BOOT_DEVICE_EMMC
+>>>>
+>>>> Is still not clear enough, it would be a good idea to use:
+>>>> DEVSTAT_BOOT_MODE_MMCSD
+>>>> DEVSTAT_BOOT_MODE_EMMC
+>>>>
+>>>> Its only a real problem for MMC since we have the confusion with eMMC
+>>>> boot and MMCSD boot and we mix the two as a result in
+>>>> spl_mmc_boot_mode() and spl_boot_device().
+>>>>
+>>>>
+>>>> Its not really an issue for other boot modes to warrant renaming all the
+>>>> bootmodes, but I would like to make these macros as clear as possible in
+>>>> this series since I plan to refactor spl_mmc_boot_mode() next.
+>>>>
+>>>> So lets hear if any one else has a strong opinion on this before
+>>>> deciding on:
+>>>>
+>>>> DEVSTAT_BOOT_MODE_MMCSD
+>>>> DEVSTAT_BOOT_MODE_EMMC
+>>>
+>>> This looks like the correct way to label these as they are the content
+>>> of the DEVSTAT register, this would also keep them from being confused
+>>> with the U-Boot internal definitions for BOOT_MODE_* and BOOT_DEVICE_*.
+>>>
+>>> But you should do it for all the DEVSTAT register defines, not just
+>>> MMC and not just for Sitara, do it for all our K3 boards. It should
+>>> be a simple rename patch to start. Then you can work to detangle
+>>> "mode" from "device" for the MMC case as you are doing here.
+>>
+>> I take it back, seems like this cannot be done, u-boot source requires
+>> all the macros:
+>> BOOT_DEVICE_SPI
+>> BOOT_DEVICE_RAM
+>> BOOT_DEVICE_UART
+>> etc...
+>>
+>> in order to even build.
+>>
+>> Simply renaming the macros to style:
+>> DEVSTAT_BOOT_MODE_SPI
+>> DEVSTAT_BOOT_MODE_RAM
+>> DEVSTAT_BOOT_MODE_UART
+>>
+>> will not work without creating a duplicate:
+>> #define BOOT_DEVICE_SPI		DEVSTAT_BOOT_MODE_SPI
+>> #define BOOT_DEVICE_RAM		DEVSTAT_BOOT_MODE_RAM
+>> #define BOOT_DEVICE_UART	DEVSTAT_BOOT_MODE_UART
+>> or similar logic
+>>
+>> So basically we would be doubling the size of all spl.h files.
+>>
+>> In reality there is only confusion with MMC device/bootmodes,
+>> we do not to rename every single boot modes/boot device since
+>> there is no real confusion there.
+>>
+> 
+> Correct me if I'm wrong here but BOOT_DEVICE_* should only be used
+> within the common u-boot source. Our job is to just the return the
+> correct macro from the SoC's boot.c file and ensure they are all unique
+> values.
+> 
+> If that's true, can we make use of BOOT_DEVICE_* defines from
+> arch/arm/include/asm/spl.h?
+> 
+> That should avoid duplication since we would just rename the existing
+> BOOT_DEVICE_* macros to DEVSTAT_BOOT_MODE_* in our board's spl.h while
+> relying on BOOT_DEVICE_* from arm's spl.h.
 
-Following the work done in commit 7f39ad5a, this commit adds definitions
-for PWM2, PWM3, and PWM4 clocks. Allowing one to use these PWM modules
-together with DM_CLK.
+Then we come back in a circle to the first real problem which is
+untangling MMC bootmodes from MMC boot devices.
 
-Note that the solution was verified only against PWM3.
+Why are we trying to refactor all the MMC_DEVICE_* ? There is no
+real problem for those bootmodes / boot devices since boot device =
+boot mode for those. It is only a real problem for MMC since boot device
+DOES NOT equal boot mode for MMC.
 
-Signed-off-by: Ricardo Simoes <ricardo.simoes@pt.bosch.com>
-Signed-off-by: Mark Jonas <mark.jonas@de.bosch.com>
----
- drivers/clk/imx/clk-imx6q.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+~ Judith
 
-diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
-index 13239f2f64d..b69355cefc7 100644
---- a/drivers/clk/imx/clk-imx6q.c
-+++ b/drivers/clk/imx/clk-imx6q.c
-@@ -156,6 +156,12 @@ static int imx6q_clk_probe(struct udevice *dev)
- 	       imx_clk_gate2(dev, "i2c3", "ipg_per", base + 0x70, 10));
- 	clk_dm(IMX6QDL_CLK_PWM1,
- 	       imx_clk_gate2(dev, "pwm1", "ipg_per", base + 0x78, 16));
-+	clk_dm(IMX6QDL_CLK_PWM2,
-+	       imx_clk_gate2(dev, "pwm2", "ipg_per", base + 0x78, 18));
-+	clk_dm(IMX6QDL_CLK_PWM3,
-+	       imx_clk_gate2(dev, "pwm3", "ipg_per", base + 0x78, 20));
-+	clk_dm(IMX6QDL_CLK_PWM4,
-+	       imx_clk_gate2(dev, "pwm4", "ipg_per", base + 0x78, 22));
- 
- 	clk_dm(IMX6QDL_CLK_ENET, imx_clk_gate2(dev, "enet", "ipg", base + 0x6c, 10));
- 	clk_dm(IMX6QDL_CLK_ENET_REF,
--- 
-2.34.1
 
