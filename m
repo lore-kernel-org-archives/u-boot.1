@@ -4,45 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8E54CAC592
-	for <u-boot@archiver.kernel.org>; Tue, 16 Sep 2025 23:58:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1842CAC598
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 00:03:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF3A08318E;
-	Wed, 17 Sep 2025 01:58:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E5C5D83287;
+	Wed, 17 Sep 2025 02:03:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B50883280; Wed, 17 Sep 2025 01:58:02 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id 47627832AD; Wed, 17 Sep 2025 02:03:38 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3E2B8309A
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 01:57:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55A068309A
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 02:03:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [216.234.200.145])
+Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 07D2EB220596;
- Wed, 17 Sep 2025 01:57:57 +0200 (CEST)
-Message-ID: <4be72e1b-7385-4216-8cca-59928983f2f2@freeshell.de>
-Date: Tue, 16 Sep 2025 16:57:56 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/4] riscv: dts: starfive: visionfive2 depend on
- SYS_CONFIG_NAME automatic dtsi inclusion
-To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-References: <20250905050301.900528-1-e@freeshell.de>
- <20250905050301.900528-5-e@freeshell.de>
-Content-Language: en-US
+ by freeshell.de (Postfix) with ESMTPSA id 56132B2200D8;
+ Wed, 17 Sep 2025 02:03:33 +0200 (CEST)
 From: E Shattow <e@freeshell.de>
-In-Reply-To: <20250905050301.900528-5-e@freeshell.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+To: 
+Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 0/4] riscv: dts: starfive: prune redundant jh7110-common
+Date: Tue, 16 Sep 2025 17:02:21 -0700
+Message-ID: <20250917000254.1134031-1-e@freeshell.de>
+X-Mailer: git-send-email 2.50.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,36 +54,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+There are more than a few additional JH7110 CPU boards that may soon be
+upstreamed. Each new variant supported by U-Boot has the burden of adding
+a per-dts stub file for automatic dtsi inclusion by the build system. Also
+i.e. the JH7110S CPU board introduced by StarFive is to be supported by
+the same U-Boot starfive_visionfive2 target. Let's prepare for and clean
+out (remove) per-dts file -u-boot.dtsi automatic inclusion stubs for all
+dts that exist in dts/upstream/src subtree, making these per-dts
+-u-boot.dtsi files unnecessary for future additions.
 
-On 9/4/25 22:02, E Shattow wrote:
-> Rename visionfive2 per-cpu jh7110-u-boot.dtsi to
-> starfive-visionfive2-u-boot.dtsi for inclusion by search order for whole
-> starfive_visionfive2 target. There is expected to be support for multiple
-> CPUs and boards, so let's use the automatic dtsi inclusion that is a
-> better match for this.
-> 
-> Depends on patch: "scripts/Makefile.lib: add CONFIG_SYS_CONFIG_NAME prefix
-> to dtsi search" [1].
-> 1: https://lore.kernel.org/u-boot/20250826214708.309271-1-e@freeshell.de/
-> 
-> Signed-off-by: E Shattow <e@freeshell.de>
-> ---
->  .../dts/{jh7110-u-boot.dtsi => starfive-visionfive2-u-boot.dtsi}  | 0
->  1 file changed, 0 insertions(+), 0 deletions(-)
->  rename arch/riscv/dts/{jh7110-u-boot.dtsi => starfive-visionfive2-u-boot.dtsi} (100%)
-> 
-> diff --git a/arch/riscv/dts/jh7110-u-boot.dtsi b/arch/riscv/dts/starfive-visionfive2-u-boot.dtsi
-> similarity index 100%
-> rename from arch/riscv/dts/jh7110-u-boot.dtsi
-> rename to arch/riscv/dts/starfive-visionfive2-u-boot.dtsi
+The last patch in this series anticipates additional CPU models for
+starfive_visionfive2 config, changing from SYS_CPU automatic inclusion
+dtsi to a filename more similar to the defconfig name via config Extra
+dtsi inclusion. This also allows that any supported board for this config
+which does need to use the per-dts automatic dtsi inclusion by the build
+system may do so without having to include this common dtsi again.
 
-N.B. I guessed wrong the SYS_CONFIG_NAME is not representative of any
-defconfig name. v3 replaces this patch 4/4 and refers to
-starfive-visionfive2-u-boot.dtsi via CONFIG_DEVICE_TREE_INCLUDES extra
-.dtsi include in defconfig. That unfortunately makes it less visible for
-DEVICE_TREE_DEBUG=1 so I am also having a look at improving the dtsi
-automatic inclusion and DEVICE_TREE_INCLUDES handling. Anyhow "config
-name" in context of SYS_CONFIG_NAME is perhaps referring to the Kconfig
-config fragment include '.h' file no relation to any defconfig.
+Changes since v2:
+- Drop PATCH 4/4 "visionfive2 depend on SYS_CONFIG_NAME automatic dtsi
+inclusion"
+- Add patch "Use visionfive2 DEVICE_TREE_INCLUDES dtsi named similar to
+defconfig"
+- Revise cover letter descriptions
 
--E
+E Shattow (4):
+  riscv: dts: starfive: prune redundant jh7110-common overrides
+  riscv: dts: starfive: sync visionfive2 overrides with upstream Linux
+    for-next
+  riscv: dts: starfive: visionfive2 depend on SYS_CPU automatic dtsi
+    inclusion
+  configs: starfive: Use visionfive2 DEVICE_TREE_INCLUDES dtsi named
+    similar to defconfig
+
+ arch/riscv/dts/jh7110-common-u-boot.dtsi      | 99 -------------------
+ .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |  7 --
+ arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  7 --
+ .../dts/jh7110-pine64-star64-u-boot.dtsi      |  7 --
+ ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |  7 --
+ ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |  7 --
+ ....dtsi => starfive-visionfive2-u-boot.dtsi} | 82 ++++++---------
+ configs/starfive_visionfive2_defconfig        |  1 +
+ 8 files changed, 33 insertions(+), 184 deletions(-)
+ delete mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+ rename arch/riscv/dts/{jh7110-u-boot.dtsi => starfive-visionfive2-u-boot.dtsi} (54%)
+
+
+base-commit: b82fa9d752b025d3b5305b5b07debe6808a5d027
+-- 
+2.50.0
+
