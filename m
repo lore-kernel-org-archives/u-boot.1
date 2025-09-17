@@ -4,84 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBBE6CAC59A
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 15:44:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C73CAC59A
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 15:45:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A43B183623;
-	Wed, 17 Sep 2025 17:44:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id F100983655;
+	Wed, 17 Sep 2025 17:45:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bSDdj5EO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AMVD+7+f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C330083622; Wed, 17 Sep 2025 17:44:22 +0200 (CEST)
-Received: from mail-pg1-x532.google.com (mail-pg1-x532.google.com
- [IPv6:2607:f8b0:4864:20::532])
+ id 13E488365C; Wed, 17 Sep 2025 17:45:11 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E03F83622
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 17:44:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECE2A83622
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 17:45:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x532.google.com with SMTP id
- 41be03b00d2f7-b54a74f9150so4925473a12.0
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 08:44:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-62189987b47so2872261eaf.1
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 08:45:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758123858; x=1758728658; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tinDZkNIAuXuN5t8ldoguY82bFsH3OcQV/WttOI9Uxo=;
- b=bSDdj5EOktqVCzEFwQ77dVGSojYKAjIwl6e9C/VNgb9IpVlHksEdf200VrU8j1kdFD
- mTpG9YReddqrO4sdS8j1WcaWWZh3xLd/NFqpH9ir+OOuRFjeuSCk9IQmFswS6FYwPF3e
- FwQo8QnV+p0nfgi58G3S9ow4Ha9FgRH4/dtJjGNHZtx8GWtFSAOhwj8m+isiPy1A8twy
- HO0YWIumd5m7qr1MPzjfQzQ60dWkwirCTnWylcgkGnDv5urEYP3nhu7zBTWGZ3JBzwCJ
- Z9dZQM51xaXZGuOlrlUWnadJD9BWAseEHcU5kxJzp4fEl/88aldIP5xaIUgWvhhomhMN
- hatg==
+ d=konsulko.com; s=google; t=1758123907; x=1758728707; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=z0g2IrEJUVuA5mz1pZJ7i5UakkiScipoQNcQI0ZRQhk=;
+ b=AMVD+7+fMIpPecwJHudonlwSkYXpD5pr9KGP1384cJtrp5Sw3kVdocTqrWHOPtWb5v
+ utzItHY5xColH4hnyq7WAIHwCPAPeccOdNF4ciz5JnWFOfc8H/bcjlTQNGItsLKGQZ3T
+ cnNGCfjtoObFIKC9CK+8CxAbajhxqBVlwVoLM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758123858; x=1758728658;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tinDZkNIAuXuN5t8ldoguY82bFsH3OcQV/WttOI9Uxo=;
- b=miGgjuUr1rqmNbPCLVsdD62rrtm79fcTyZo5n4nkPoYa9qMMaXdLi+jjkAaxZezDJC
- PVWLgjxAl4QKgZrTIzvtGaMM9UCRb4jcGT+fNHH17AqVC8kcs5TjJgdCIh93y6gGEuXC
- h1IPnxSsIxTItube1EgvgJzpWkpu2fno9TnNI13Rj0MuIwMOrbpFoi+eNa/PQ5UHVmDT
- VO406Kp0IvT3tAEdC0rbK3A5vAh72GEjBQfYgc4M/oZkM9RtJaKZtdtyZU4gwUw76t8L
- OjxepsOzhahRJ3VPdj0nMeBK+WG/wM/zkWG6XEIRSDH2yv5tAYLFqv92zQAicw8xGnRJ
- 0QqA==
-X-Gm-Message-State: AOJu0YxRw+k9PqaL7VRnbODwE1mbxI40/8NTFlQHgW+8DK7JX5O7IZpx
- E6PbOSwFz1FdaPxbvjC2XW3wZha/Tueb1D5s74LzrLrAVmEKyhztkGyOKuzQ6wFZ7CXe1UDx/1H
- t1B1tUijTz8vLfaJbsRivBkyhSg6aNQZmGkjRLbhPmg==
-X-Gm-Gg: ASbGncujLMWJnb3Csyfz8k1i+W4NLHxcf7BPzRYQWIFoD7n4teNxWEYfbuji6iO/Z4b
- 2mMmHagaSw+KkrljikE/u9Yv+E0vQexvMYRXRwZIoot6LZ0zThDk1B7y5oV3aDwig3yWxHec2bZ
- IktIMaIdgelm2rsEsCyiaIsKPnjC0ZaPJnF3F1iV1+6Ju0g8i95OpJoVvHyhQwpQq+bj0AUSqA8
- AFjFgfQpQ==
-X-Google-Smtp-Source: AGHT+IGZ21oWk/X53qFwo2WlEIbaZz4A22xDxaynDSuHnddKIdpDDfnogefiBhkmtoVYp8z4y0Xn07I+1n+hwjRCi3E=
-X-Received: by 2002:a17:902:d2ca:b0:268:1034:ac8b with SMTP id
- d9443c01a7336-26812189d01mr32232055ad.26.1758123858251; Wed, 17 Sep 2025
- 08:44:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20250916161426.32259-1-raymond.mao@linaro.org>
- <20250916161426.32259-3-raymond.mao@linaro.org>
- <20250916182742.GZ124814@bill-the-cat>
-In-Reply-To: <20250916182742.GZ124814@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 17 Sep 2025 11:44:07 -0400
-X-Gm-Features: AS18NWDihjQnrDM3R7cGB-TU9DqxcN2XPenPbOThw5lL7X4hqDDYpX_8oTnBgFw
-Message-ID: <CAEfUkUL2t64-hz-_acWHf01WgLeddYu7S8dRudmNT3re0_hfnQ@mail.gmail.com>
-Subject: Re: [PATCH 2/5] ci: add post-buildman script to build TF-A
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ d=1e100.net; s=20230601; t=1758123907; x=1758728707;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z0g2IrEJUVuA5mz1pZJ7i5UakkiScipoQNcQI0ZRQhk=;
+ b=PErEYqdJxkm2X77kuMyscmLx/sMKmYur1VE0zqhIf+SnIuJ6Rw3sUpioskG0BIxQgw
+ 8heOSeAs1X3cvxlj2fqZPlalX4gJV13rgoEHoOfUSHqBgKEuSsnVYLXNZddA045JGoQg
+ ycroLou9sz59tUM6dgZLgFfhMQOwOpCaMdK0NjG5Dth75VB/deFz92WDQa3mY2R8gv0d
+ RSQxC2JG/Bc93joHw+3Q3HkGqrdkyV/Bg6WiISooEhHtCQ5XqJn/FNXJTT92MkTXp57M
+ jFKx9JQjTlH8V+qk5INCFprBXSBZZztyHdQWXm9MmKMk3+A/YBdTOSrnH9ox83w4OpBJ
+ SoXQ==
+X-Gm-Message-State: AOJu0YzEm2w1S12hCnW9wlAIN25E1azuWDBifdZwl+bh371fUgRQGZZb
+ O4+rzuvvq/6mxSUJWv6S8I9oKPPqs7KWkB23NGQiEg+ujLSCHf3TbY3nZHN/J1CeBGA=
+X-Gm-Gg: ASbGnctWCLrh6WwOEJhVv9MiQ1mt+q1E4cV4DPQpk3evW8A4lYNlpccZ1UufOGAZHN9
+ Sr+OO+hqCbbF41sQvnQIEcH1OasqHVFRINKylNUeYKIRTes5pDzIwXa7s0ACWtsXtzAmFBF60er
+ qVc1DHbCBulwMiusqevb1LZgi0Zm6/wxM13JUKgk7T8b+vTIJgNtKt24cIeDmlX7hlfV0U7uQRj
+ hBwdu345J1z9D/ZG8en4BxCYM1Gz5/kHsG1n7Es2VXQyHQaNjYT5A3xDP04eld5r9+7QOSSfhI3
+ n945vMAkBtzffRCbhkmwFIKBQ6DtAFTVtFisF+FOPu4nZNjaFyomip7lziQ2UeSG3VG/3C8EPMl
+ PzFG7Bkt2JaaTswLZB+m4iT+ncx+MfbVRYbEspm+v7XH6hUePKqP45TfD
+X-Google-Smtp-Source: AGHT+IE7HVuHOTVWXZlnwaIj3YMMNdaLarDnu9ScUZZqB1FtiSuGeGkTDkMT1IdCxzBBHJsiu9X8qw==
+X-Received: by 2002:a05:6870:320f:b0:321:28f7:77fa with SMTP id
+ 586e51a60fabf-335bf727901mr1431948fac.32.1758123906507; 
+ Wed, 17 Sep 2025 08:45:06 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-32d35382f8asm6371962fac.19.2025.09.17.08.45.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Sep 2025 08:45:05 -0700 (PDT)
+Date: Wed, 17 Sep 2025 09:45:03 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sam Protsenko <semen.protsenko@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH u-boot-test-hooks 2/2] travis-ci: add config file for
+ testing firmware handoff on qemu_arm64
+Message-ID: <20250917154503.GL124814@bill-the-cat>
+References: <20250916161230.32140-1-raymond.mao@linaro.org>
+ <20250916161230.32140-2-raymond.mao@linaro.org>
+ <20250916182729.GX124814@bill-the-cat>
+ <CAEfUkULE=tHe+hyerxBW5MRarO+JeJb59B-1voTFVjGmuPaidA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="N4sWfWivfi94SqBT"
+Content-Disposition: inline
+In-Reply-To: <CAEfUkULE=tHe+hyerxBW5MRarO+JeJb59B-1voTFVjGmuPaidA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,91 +106,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Sep 16, 2025 at 09:14:18AM -0700, Raymond Mao wrote:
-> > Add a script which is running after buildman to fetch TF-A (v2.13.0)
-> > with MbedTLS (v3.6) and build 'flash.bin', linking built U-Boot as
-> > BL33 and OP-TEE as BL32, with both Firmware Handoff and Measured Boot
-> > enabled.
+--N4sWfWivfi94SqBT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Sep 17, 2025 at 10:42:52AM -0400, Raymond Mao wrote:
+> Hi Tom,
+>=20
+> On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> >  .azure-pipelines.yml               |  1 +
-> >  .gitlab-ci.yml                     |  1 +
-> >  tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++++++++++++++
-> >  3 files changed, 89 insertions(+)
-> >  create mode 100755 tools/post_build_tfa_fw_handoff.sh
+> > On Tue, Sep 16, 2025 at 09:12:25AM -0700, Raymond Mao wrote:
 > >
-> > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > index 8209d2b329c..eb547606ddd 100644
-> > --- a/.azure-pipelines.yml
-> > +++ b/.azure-pipelines.yml
-> > @@ -290,6 +290,7 @@ stages:
-> >            cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_riscv64.efi
-> >            cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm64.efi
-> >            cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm.efi
-> > +          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TRAVIS_BUILD_DIR} \${TEST_PY_BD} \${TEST_PY_ID}
-> >            # create sdcard / spi-nor images for sifive unleashed using genimage
-> >            if [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
-> >                mkdir -p root;
-> > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > index 85401d3e09b..61e4af96c9a 100644
-> > --- a/.gitlab-ci.yml
-> > +++ b/.gitlab-ci.yml
-> > @@ -79,6 +79,7 @@ stages:
-> >      - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_riscv64.efi
-> >      - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm64.efi
-> >      - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm.efi
-> > +    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} ${TEST_PY_BD} ${TEST_PY_ID}
-> >      # create sdcard / spi-nor images for sifive unleashed using genimage
-> >      - if [[ "${TEST_PY_BD}" == "sifive_unleashed" ]]; then
-> >          mkdir -p root;
-> > diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/post_build_tfa_fw_handoff.sh
-> > new file mode 100755
-> > index 00000000000..f876db593ba
-> > --- /dev/null
-> > +++ b/tools/post_build_tfa_fw_handoff.sh
->
-> The "is this a valid board" check should be in the pipeline file (like
-> where we do all the other board-specific things) instead of the helper
-> script.
->
-> > @@ -0,0 +1,87 @@
-> > +#!/bin/bash
-> > +# SPDX-License-Identifier: GPL-2.0+
-> > +#
-> > +# Copyright (c) 2025 Linaro Limited
-> > +# Author: Raymond Mao <raymond.mao@linaro.org>
-> > +#
-> > +# CI Post-buildman script for building TF-A 'flash.bin' with Measured
-> > +# Boot and Firmware Handoff enabled.
-> > +#
-> > +# Usage: from the top level U-Boot source tree, run:
-> > +# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} \
-> > +#     ${TEST_PY_BD} ${TEST_PY_ID}
-> > +#
-> > +# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated and copied
-> > +# to /tmp.
-> > +
-> > +set -e
-> > +
-> > +BUILDMAN_OUT_DIR=$(realpath "$1")
-> > +BOARD=$2
-> > +ID=$4
-> > +echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, ID: $ID"
->
-> Can we not use fiptool to update the contents of a file here? And build
-> as much as possible in the Dockerfile, like we do for vexpress?
->
-Sorry I am not quite clear about how it was done for fvp, maybe I
-missed some context, do you mean to build TF-A with OP-TEE at
-Dokerfile and generate a fip.bin without BL33? But then who will
-assemble BL1+fip+u-boot? by test hooks?
+> > > The existing 'conf.qemu_arm64_na' uses 'u-boot.bin' as bios, but for
+> > > the case of TF-A, 'u-boot.bin' is BL33 and the assembled 'flash.bin'
+> > > is the bios instead, which will be built and assembled at run-time
+> > > via a post-buildman script and copied to '/tmp'.
+> > >
+> > > Moreover, for running TF-A and OP-TEE on qemu, '-m 4G' and
+> > > 'virtualization=3Dfalse,secure=3Don' are required, and '-semihosting'
+> > > should be replaced with its modern alias
+> > > '-semihosting-config enable=3Don,target=3Dnative'.
+> > >
+> > > Last, point to the new helper script 'swtpm-tfa'.
+> > >
+> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> >
+> > Lets fixup the current qemu_arm64 conf to have as much in common as
+> > possible (4G, modern semihosting flags, etc). Next:
+> >
+> > > ---
+> > >  .../conf.qemu_arm64_fw_handoff_tfa_optee      | 31 +++++++++++++++++=
+++
+> > >  1 file changed, 31 insertions(+)
+> > >  create mode 100644 bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+> > >
+> > > diff --git a/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee b/bin=
+/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+> > > new file mode 100644
+> > > index 0000000..9aa6d3b
+> > > --- /dev/null
+> > > +++ b/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
+> > > @@ -0,0 +1,31 @@
+> > > +# Copyright (c) 2025 Linaro Limited
+> > > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > > +# Based on conf.qemu_arm64 which is
+> > > +# Copyright (c) 2017 Tuomas Tynkkynen. All rights reserved.
+> > > +#
+> > > +# Permission is hereby granted, free of charge, to any person obtain=
+ing a
+> > > +# copy of this software and associated documentation files (the "Sof=
+tware"),
+> > > +# to deal in the Software without restriction, including without lim=
+itation
+> > > +# the rights to use, copy, modify, merge, publish, distribute, subli=
+cense,
+> > > +# and/or sell copies of the Software, and to permit persons to whom =
+the
+> > > +# Software is furnished to do so, subject to the following condition=
+s:
+> > > +#
+> > > +# The above copyright notice and this permission notice shall be inc=
+luded in
+> > > +# all copies or substantial portions of the Software.
+> > > +#
+> > > +# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EX=
+PRESS OR
+> > > +# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTAB=
+ILITY,
+> > > +# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT=
+ SHALL
+> > > +# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES =
+OR OTHER
+> > > +# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, AR=
+ISING
+> > > +# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+> > > +# DEALINGS IN THE SOFTWARE.
+> > > +
+> > > +console_impl=3Dqemu
+> > > +qemu_machine=3D"virt,virtualization=3Dfalse,secure=3Don"
+> > > +qemu_helper_script=3D"swtpm-tfa"
+> > > +qemu_binary=3D"qemu-system-aarch64"
+> > > +qemu_extra_args=3D"-m 4G -cpu cortex-a57 -nographic -netdev user,id=
+=3Dnet0,tftp=3D${UBOOT_TRAVIS_BUILD_DIR} -device e1000,netdev=3Dnet0 -devic=
+e virtio-rng-pci -d unimp -semihosting-config enable=3Don,target=3Dnative -=
+chardev socket,id=3Dchrtpm,path=3D/tmp/tpm/swtpm-sock -tpmdev emulator,id=
+=3Dtpm0,chardev=3Dchrtpm -device tpm-tis-device,tpmdev=3Dtpm0"
+> >
+> > Can we line break this? Then make some functional groupings? Thanks.
+> >
+> I am thinking about to merge this script into the common one
+> "conf.qemu_arm64_na", but do you mind to add
+> "virtualization=3Dfalse,secure=3Don" as a common setting? even though It
+> is only needed when running with TF-A/OP-TEE.
 
-Raymond
+So long as everything works in CI for the other cases, yes, that's fine.
 
-> --
-> Tom
+--=20
+Tom
+
+--N4sWfWivfi94SqBT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMrXewAKCRAr4qD1Cr/k
+Ckv/APwJwtPSNfkYbNddCisG8siSYe3YeG7csalxQgJwHi2g0wD/Rqv5LxpsuLs2
+OmhUfGzjkAR5haexBlCr+hJbc3Q8pAs=
+=Q45k
+-----END PGP SIGNATURE-----
+
+--N4sWfWivfi94SqBT--
