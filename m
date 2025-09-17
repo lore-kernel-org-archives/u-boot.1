@@ -4,81 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CB11CA0EE8
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 08:39:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A983CAC598
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 09:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7288883390;
-	Wed, 17 Sep 2025 10:39:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 96FB0834D4;
+	Wed, 17 Sep 2025 11:09:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UGTXpVGS";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="dTyy1sHt";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="78C9Ok0h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89BA2833D0; Wed, 17 Sep 2025 10:39:13 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 298AA83510; Wed, 17 Sep 2025 11:09:58 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F62F80077
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 10:39:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AF6D8349B
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 11:09:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-b042cc3954fso1147123266b.0
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 01:39:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758098350; x=1758703150; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t6XIrcrprvyVGuLj7XY6i3y85ocuOaqpp6qq2ABVLwY=;
- b=UGTXpVGSwTVaVGV8h86SJeUv6Fvc+Dz4sIC3qLex83cbYP8maXPInJOXH4wE9QF555
- z5o4afrr42sNg0TTsqk0BakgIbnIIyHhArDQvKlqroYvZ1tGDTZX1QvgIYYpgYeOg8mf
- +oP8AuetLfqChRIC78q+1VSK04aAoN8YdqLfnGes+wag8IodIml5hMl3r0mJvDKxwaDR
- /dYzefa2TwDf6Je2yQDMjKQyRlLpSIjK6aX5S8y6pM4AVRBKh9jDbrGjBju1I4bo9OiC
- HUZE0o7f5e+odyPXnDLRY+DF+7sNO8w+zWUN1JyCKf8pJesizW5zZqUzy6X88hZF2LaM
- A77w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758098350; x=1758703150;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t6XIrcrprvyVGuLj7XY6i3y85ocuOaqpp6qq2ABVLwY=;
- b=pqsfwNl3Qm/5aVZ7vgRVDFE/SD8agLOl++jMts9NcumEoz8rGwnraMU5Q8+4D6Y9Dm
- YstiY5bGRjj5C3Qms2m7lIhqXa9+kaHwSoBMUym9pV2ILR3XgQJxXAkGd5H67kSk2qfw
- AE/Kgh2E5DqMoWPScfMCcfyRfeUyaiB1kdnhGKKyojdw7FFrZJZnEGzXdOVVunfejlN6
- qYRilq22XjUYWx6O+RzYNK1W+A+95aN0AylC+ax/F7NnwnPN6NtEoJPTngxMRXK+uXZh
- +AnqSUHtU+F/xFVup2nLd/So9gCKw0Ie2EiPqFZaHa/06/OVepccgzi1AmWsJ7oTggEz
- 7YdQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXddumSvJB+ZXK1ca2s+gUad8pBPnvY5c/nKHVxQ/Gil6RRyu9JjlOQ+ex9gKPHhkWBSbzDy40=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLjx1X5MLCkeOnmiX9F82eZt23meicyI6lxeN2CmbLDexU8ZNp
- 3ZzLsYdEad6EnU8Hp4HwrAkJDHFZknGyxuL3yh1tlzbuBuKNAqdGku828tAr05DlHt6uAheuj/U
- 1ntNnYgANrHjhW1XmF9cf+zqak9sTwqg=
-X-Gm-Gg: ASbGnctcgZKqY82jzDwJoW55NusICXHtRHKa3Tq76zWekxnOWiX3pm4HC1FR82dP0R0
- GZ9EU6sL2O9lI3YNsJpS9jgf4ssOsUO0hKpMCyzD1SEL04zVfwPVwtJ+IgnEiUXbvctBnCdmJ5c
- s99/zYGTsVZb+ZGnOiS4y7gUToXnMaptKZNYpe/iZhKdCzH5GmgkWQIyfHQrCKbJCldP822Xv8d
- +5eSK81EQ==
-X-Google-Smtp-Source: AGHT+IGnKOhjq4Y8R6KTGT5crQK7m0gQeV19iLDlzzsHzZkksypmV47RugWbRGKi22YRBV/M2UlA53DM7Z1AV48QPS8=
-X-Received: by 2002:a17:906:dc89:b0:b0b:5547:409 with SMTP id
- a640c23a62f3a-b1bb7e3602amr156732266b.49.1758098350416; Wed, 17 Sep 2025
- 01:39:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=b.spranger@linutronix.de
+From: Benedikt Spranger <b.spranger@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1758100195;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dT840Bmq6x/hbQBpxit4dr1XPaPD53+O3LN7vrRjf04=;
+ b=dTyy1sHtt5MNNqV544QeXF30cCahkiaXEpRaI27CYMxfe8RnHyKdLKRIeVWcDgAdbEX179
+ 01Db4OLpJn/7LIGD5HPrj+q2RFTuPOEwxStGgE9PCrsV2cmio2VgxfWLed07l/WUQvVN3N
+ ZYSL8Z30PhB1xUPguCZvN8+xJKzJIeamqexNxlzIpL6zOEKveWz46HdJvANI+qzKHpY2Ur
+ amuqbYD9X+axbq7hySNWdWtXC0gRFOVSQC4hA33tjbVpnH5G/mgGYidssGoCRiE9v4Ph3R
+ +N+YkWuEWM83ii24DPY8Dn1I+rWn00EufEQrupI69LLGbqUh36GRnQt9wadUhg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1758100195;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=dT840Bmq6x/hbQBpxit4dr1XPaPD53+O3LN7vrRjf04=;
+ b=78C9Ok0hPqgKdSIGunw8RYKgf0YXHU9FB/yredaQcEnd2woj62eknteeIfAW7GqhxnY5VS
+ m6tgIBDTicOIuZCg==
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, John Ogness <john.ogness@linutronix.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: [RESEND PATCH] drivers/mtd/ubispl/ubispl.c: limit copy size
+Date: Wed, 17 Sep 2025 11:14:17 +0200
+Message-ID: <20250917091417.545-1-b.spranger@linutronix.de>
 MIME-Version: 1.0
-References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
- <f12fccf0f6d6b36fa58a7ef971ee9d06b566b03a.camel@opensuse.org>
- <60d548b8-1cbe-4fab-a49c-8b1cb9027f19@epam.com>
-In-Reply-To: <60d548b8-1cbe-4fab-a49c-8b1cb9027f19@epam.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 17 Sep 2025 09:38:58 +0100
-X-Gm-Features: AS18NWDYFXkl0JymXaZG96mXHhkGGg4LkLPFZiykLxzwozIwXHk3GkxrhjiXfE0
-Message-ID: <CALeDE9Nct9oht9sVLFuBPJ7144VLj5aL1uhFzX81etD2zOhE3w@mail.gmail.com>
-Subject: Re: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
-To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-Cc: Jonas Kvinge <jonaski@opensuse.org>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,33 +71,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Sept 2025 at 19:54, Oleksii Moisieiev
-<Oleksii_Moisieiev@epam.com> wrote:
->
-> Hi Jonas,
->
-> I see that rp1 bindings are already merged so we have started rebase
-> process.
-> Once we'll done we will send another version on top of the latest master.
+The fastmap VID header is embedded in struct ubi_scan_info. During fastmap
+scan, the header is copied into struct ubi_scan_info, if valid. The former
+code mixed up the amount of copied bytes and copied more bytes than
+nessesary. This had no side effect, since the affected struct members are
+uninitialized at that point and overwritten later.
 
-Please also take into account the feedback I have already provided.
+Limit the copied bytes to the VID header size.
 
-> On 06/09/2025 02:12, Jonas Kvinge wrote:
-> > [You don't often get email from jonaski@opensuse.org. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> >
-> > On Wed, 2025-02-05 at 10:15 +0000, Oleksii Moisieiev wrote:
-> >> This patch series provides generic support for Raspberry PI 5 in
-> >> U-Boot with additional hardware drivers.
-> >> The following features were implemented:
-> >> 1) add generic board config for Raspberry PI5 including device-tree
-> >> files;
-> >> 2) add support for RP1 chip with additional hardware;
-> >> 3) add support for rp1-clock driver with dt-bindings update;
-> >> 4) PCIE BRCMSTB driver support for Raspberry PI 5;
-> >> 5) add clock/reset/gpio drivers;
-> >> 6) add ethernet support in u-boot.
-> >>
-> > Is it possible to get these patches updated for the latest master
-> > branch? I'm having trouble with at least patch 9 and 11.
-> >
-> > Jonas
+Signed-off-by: Benedikt Spranger <b.spranger@linutronix.de>
+Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/mtd/ubispl/ubispl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/mtd/ubispl/ubispl.c b/drivers/mtd/ubispl/ubispl.c
+index 9face5fae15..0143caa051d 100644
+--- a/drivers/mtd/ubispl/ubispl.c
++++ b/drivers/mtd/ubispl/ubispl.c
+@@ -779,7 +779,7 @@ static int ubi_scan_fastmap(struct ubi_scan_info *ubi,
+ 		 * that already so we merily copy it over.
+ 		 */
+ 		if (pnum == fm_anchor)
+-			memcpy(vh, ubi->blockinfo + pnum, sizeof(*fm));
++			memcpy(vh, ubi->blockinfo + pnum, sizeof(*vh));
+ 
+ 		if (i == 0) {
+ 			if (be32_to_cpu(vh->vol_id) != UBI_FM_SB_VOLUME_ID) {
+-- 
+2.51.0
+
