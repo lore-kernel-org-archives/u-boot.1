@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B85C6CA0EE8
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 09:47:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64C22CAC598
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 09:47:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6326983577;
-	Wed, 17 Sep 2025 11:47:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBDE483510;
+	Wed, 17 Sep 2025 11:47:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wrZo19dy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qi+iPDfP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86369835C9; Wed, 17 Sep 2025 11:47:13 +0200 (CEST)
+ id E960E8359F; Wed, 17 Sep 2025 11:47:16 +0200 (CEST)
 Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8496183510
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 11:47:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C052D8357F
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 11:47:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
 Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58H9l9Bp1579024;
- Wed, 17 Sep 2025 04:47:09 -0500
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58H9lCj61579044;
+ Wed, 17 Sep 2025 04:47:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758102429;
- bh=gAJtN/4N6IIqUp1oC1qxCTOI+IFsaD1jrUui8yq7JQg=;
+ s=ti-com-17Q1; t=1758102432;
+ bh=DhLczpvHxMpxEpjCsC11q0fxpw+ToRalRpH7Kihwk/M=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=wrZo19dyss81O3bB0gFB8In3RhQtb5PkAI2E8evOCGyILWDC7UB/TxLTDXGlW/YVc
- U/Chg1AN4MY5L8LJuBpB7diwZgdLJSttl1bLhfv3rJQDJ+QkZt5nUGFmY4Bf7GoA0L
- Sq/+yfkoNEBK1iFQO4iHpp0+sWZuH6U7kAXAu3Zc=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58H9l9r1670232
+ b=qi+iPDfPzRFoSEPwXw7pI2IK3hXalft4MzN+hGPsCFgSKjek1mCf0VqkG2NM2u0WW
+ n8IwofwIfF/Z9jIOMu88QmAnlF1rftiM3o+Vg9WG+OK4FllBT1xfbkcBJWwBaeDCdL
+ 0Azj0ez8M66MmDv0esFvo6dtVf4vxo6sfRf9U2Z8=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58H9lCSD670244
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 17 Sep 2025 04:47:09 -0500
-Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 17 Sep 2025 04:47:12 -0500
+Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
- Sep 2025 04:47:09 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 04:47:11 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE205.ent.ti.com
+ (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 17 Sep 2025 04:47:09 -0500
+ Transport; Wed, 17 Sep 2025 04:47:11 -0500
 Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [10.24.68.237])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58H9l0Bx3103753;
- Wed, 17 Sep 2025 04:47:07 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58H9l0C03103753;
+ Wed, 17 Sep 2025 04:47:10 -0500
 From: Anurag Dutta <a-dutta@ti.com>
 To: <trini@konsulko.com>
 CC: <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>,
  <a-dutta@ti.com>
-Subject: [PATCH v4 3/4] configs: j7200_evm_*_defconfig: Enable HBMC and
- MUX_MMIO at SPL
-Date: Wed, 17 Sep 2025 15:16:58 +0530
-Message-ID: <20250917094659.3922343-4-a-dutta@ti.com>
+Subject: [PATCH v4 4/4] arm: dts: k3-j721e-r5-common-proc-board: Enable HBMC
+ in R5 SPL stage
+Date: Wed, 17 Sep 2025 15:16:59 +0530
+Message-ID: <20250917094659.3922343-5-a-dutta@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250917094659.3922343-1-a-dutta@ti.com>
 References: <20250917094659.3922343-1-a-dutta@ti.com>
@@ -80,47 +80,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the HBMC and MUX_MMIO configs in the SPL and u-boot proper
-stage for successful HBMC boot.
+Enable HBMC in the R5 SPL stage
 
+Fixes: c9df79ee64d0 ("arm: dts: k3-j721e-r5-common: Add HBMC overrides for R5 SPL")
 Signed-off-by: Anurag Dutta <a-dutta@ti.com>
 ---
- configs/j7200_evm_a72_defconfig | 1 +
- configs/j7200_evm_r5_defconfig  | 2 ++
- 2 files changed, 3 insertions(+)
+ arch/arm/dts/k3-j721e-r5-common-proc-board.dts | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/configs/j7200_evm_a72_defconfig b/configs/j7200_evm_a72_defconfig
-index 36274804881..c657b0166e0 100644
---- a/configs/j7200_evm_a72_defconfig
-+++ b/configs/j7200_evm_a72_defconfig
-@@ -132,6 +132,7 @@ CONFIG_CFI_FLASH=y
- CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
- CONFIG_FLASH_CFI_MTD=y
- CONFIG_SYS_FLASH_CFI=y
-+CONFIG_HBMC_AM654=y
- CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
- CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index d97d331fdbd..09784f300db 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -116,6 +116,7 @@ CONFIG_CFI_FLASH=y
- CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
- CONFIG_FLASH_CFI_MTD=y
- CONFIG_SYS_FLASH_CFI=y
-+CONFIG_HBMC_AM654=y
- CONFIG_SYS_MAX_FLASH_BANKS_DETECT=y
- CONFIG_DM_SPI_FLASH=y
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-@@ -124,6 +125,7 @@ CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
- CONFIG_SPI_FLASH_SPANSION=y
- CONFIG_SPI_FLASH_S28HX_T=y
- CONFIG_MULTIPLEXER=y
-+CONFIG_SPL_MUX_MMIO=y
- CONFIG_PINCTRL=y
- # CONFIG_PINCTRL_GENERIC is not set
- CONFIG_SPL_PINCTRL=y
+diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+index c775432505b..e4f799dfb27 100644
+--- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
++++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+@@ -52,6 +52,7 @@
+ };
+ 
+ &hbmc {
++	status = "okay";
+ 	reg = <0x0 0x47040000 0x0 0x100>,
+ 		<0x0 0x50000000 0x0 0x8000000>;
+ 	ranges = <0x0 0x0 0x0 0x50000000 0x4000000>,
 -- 
 2.34.1
 
