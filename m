@@ -4,41 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EC88CAC5A0
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 16:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CD69CAC59A
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 16:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A24E783816;
-	Wed, 17 Sep 2025 18:24:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 7287F836A3;
+	Wed, 17 Sep 2025 18:48:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QYmLeprC";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70B72836A3; Wed, 17 Sep 2025 18:22:38 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3317A8365C
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 18:22:36 +0200 (CEST)
+ id 79851836A3; Wed, 17 Sep 2025 18:48:30 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 09BB08366F
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 18:48:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=debbie.horsfall@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 57F962696;
- Wed, 17 Sep 2025 09:22:27 -0700 (PDT)
-Received: from e137876.manchester.arm.com (e137876.arm.com [10.33.10.100])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6ADCD3F673;
- Wed, 17 Sep 2025 09:22:34 -0700 (PDT)
-From: Debbie Horsfall <debbie.horsfall@arm.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, fenghua@phytium.com.cn, linus.walleij@linaro.org,
- Peter.Hoyes@arm.com, liviu.dudau@foss.arm.com
-Subject: [PATCH v2 2/2] arm: vexpress64: Enable SYSRESET and SYSRESET_PSCI
-Date: Wed, 17 Sep 2025 17:22:22 +0100
-Message-ID: <20250917162222.1061111-2-debbie.horsfall@arm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250917162222.1061111-1-debbie.horsfall@arm.com>
-References: <20250917162222.1061111-1-debbie.horsfall@arm.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58HGmQSO1656580;
+ Wed, 17 Sep 2025 11:48:26 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758127706;
+ bh=Aqf3O3IUo0+OsmYohM/hJVvF/PJpB2A3JvDi+QZHWfE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=QYmLeprCFMVeSDpu9M17zG40vvJ2JuxZLV2dRwC9ezSVIHmzqlMVzthgSpr89RoCS
+ Hup1oTsEtv5i6aumM85kEDQLM1eEf21q1mlgEOPe/ScSCFVtVYtaWTrfPsnAvYn4in
+ etZ4fMPKjG6rD3SA7S0/r2qI97iIuO/UiGJlwU4o=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58HGmQQf1686516
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 17 Sep 2025 11:48:26 -0500
+Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
+ Sep 2025 11:48:25 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 17 Sep 2025 11:48:25 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58HGmPsJ3671207;
+ Wed, 17 Sep 2025 11:48:25 -0500
+Message-ID: <9ab3c451-783d-47f3-8c6d-87b6449f5845@ti.com>
+Date: Wed, 17 Sep 2025 11:48:25 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm: mach-k3: Fix MMC macros
+To: Judith Mendez <jm@ti.com>, Anshul Dalal <anshuld@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ "Vaishnav Achath" <vaishnav.a@ti.com>,
+ Jayesh Choudhary <j-choudhary@ti.com>, "Moteen Shah" <m-shah@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>, <u-boot@lists.denx.de>
+References: <20250910214514.1848847-1-jm@ti.com>
+ <20250910214514.1848847-2-jm@ti.com> <DCPPO8O0GIVD.1CWNDWAKDGVEC@ti.com>
+ <b61c7f41-6e1d-4d90-a8b8-e446bc32e3a6@ti.com>
+ <9c1b1344-b6fb-4ad4-aaec-1b187e1cd27d@ti.com>
+ <c9b5d045-e719-40b3-acf4-cf887e0ce51b@ti.com>
+ <DCURIP1YMD3G.2JMJP9EN3EE2K@ti.com>
+ <4deb9bf9-f1d7-472c-93d2-5ccaf96ba4f0@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <4deb9bf9-f1d7-472c-93d2-5ccaf96ba4f0@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 17 Sep 2025 18:24:15 +0200
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,71 +90,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Select SYSRESET on Vexpress64 to enable system reset to support other
-features, such as capsule-on-disk. Select SYSRESET_PSCI if PSCI is
-inferred from the firmware (via ARM_PSCI_FW).
-Select ARM_SMCCC for Vexpress64 boards which in turn selects
-ARM_PSCI_FW.
+On 9/17/25 11:06 AM, Judith Mendez wrote:
+> On 9/16/25 10:41 PM, Anshul Dalal wrote:
+>> Hi Judith,
+>>
+>> On Wed Sep 17, 2025 at 4:05 AM IST, Judith Mendez wrote:
+>>> Hi Andrew, Anshul,
+>>>
+>>> On 9/16/25 11:22 AM, Andrew Davis wrote:
+>>>> On 9/11/25 9:59 AM, Judith Mendez wrote:
+>>>>> Hi Anshul,
+>>>>>
+>>>>> On 9/11/25 12:11 AM, Anshul Dalal wrote:
+>>>>>> On Thu Sep 11, 2025 at 3:15 AM IST, Judith Mendez wrote:
+>>>>>>> For all K3 SoC's eMMC boot and MMCSD boot modes are supported. The
+>>>>>>> macros
+>>>>>>> however, mix MMC device with the two bootmodes. Decouple the two types
+>>>>>>> of macros so that bootmodes can be identified with:
+>>>>>>> - BOOT_DEVICE_MMCSD
+>>>>>>> - BOOT_DEVICE_EMMC
+>>>>>>> according to devstat parsed boot mode values and on-board devices
+>>>>>>> can be
+>>>>>>> identified with:
+>>>>>>> - BOOT_DEVICE_MMC1
+>>>>>>> - BOOT_DEVICE_MMC2
+>>>>>>> - BOOT_DEVICE_MMC2_2
+>>>>>>> according to arbitrary numbers mainly used to differentiate between
+>>>>>>> eMMC
+>>>>>>> and SD card.
+>>>>>>>
+>>>>>>> Signed-off-by: Judith Mendez <jm@ti.com>
+>>>>>>> ---
+>>>>>>
+>>>>>> I guess the confusion here is how we are calling boot modes from devstat
+>>>>>> as well as the boot device as BOOT_DEVICE_*. Perhaps we should rename
+>>>>>> the former to DEVSTAT_BOOT_MODE_* or something along those lines.
+>>>>>>
+>>>>>> That would make the difference between a boot *mode* and a boot *device*
+>>>>>> more clear, DEVSTAT_BOOT_MODE_MMCSD or DEVSTATE_BOOT_MODE_EMMC would
+>>>>>> distinguish between SD or EMMC boot modes with BOOT_DEVICE_MMC*
+>>>>>> indicating the MMC port used.
+>>>>>>
+>>>>>> This would also allow use to only have the respective
+>>>>>> DEVSTAT_BOOT_MODE_* defined in each soc's headers with BOOT_DEVICE_*
+>>>>>> coming from arch/arm/include/asm/spl.h.
+>>>>>
+>>>>>
+>>>>> Right, I guess if
+>>>>>
+>>>>> BOOT_DEVICE_MMCSD
+>>>>> BOOT_DEVICE_EMMC
+>>>>>
+>>>>> Is still not clear enough, it would be a good idea to use:
+>>>>> DEVSTAT_BOOT_MODE_MMCSD
+>>>>> DEVSTAT_BOOT_MODE_EMMC
+>>>>>
+>>>>> Its only a real problem for MMC since we have the confusion with eMMC
+>>>>> boot and MMCSD boot and we mix the two as a result in
+>>>>> spl_mmc_boot_mode() and spl_boot_device().
+>>>>>
+>>>>>
+>>>>> Its not really an issue for other boot modes to warrant renaming all the
+>>>>> bootmodes, but I would like to make these macros as clear as possible in
+>>>>> this series since I plan to refactor spl_mmc_boot_mode() next.
+>>>>>
+>>>>> So lets hear if any one else has a strong opinion on this before
+>>>>> deciding on:
+>>>>>
+>>>>> DEVSTAT_BOOT_MODE_MMCSD
+>>>>> DEVSTAT_BOOT_MODE_EMMC
+>>>>
+>>>> This looks like the correct way to label these as they are the content
+>>>> of the DEVSTAT register, this would also keep them from being confused
+>>>> with the U-Boot internal definitions for BOOT_MODE_* and BOOT_DEVICE_*.
+>>>>
+>>>> But you should do it for all the DEVSTAT register defines, not just
+>>>> MMC and not just for Sitara, do it for all our K3 boards. It should
+>>>> be a simple rename patch to start. Then you can work to detangle
+>>>> "mode" from "device" for the MMC case as you are doing here.
+>>>
+>>> I take it back, seems like this cannot be done, u-boot source requires
+>>> all the macros:
+>>> BOOT_DEVICE_SPI
+>>> BOOT_DEVICE_RAM
+>>> BOOT_DEVICE_UART
+>>> etc...
+>>>
+>>> in order to even build.
+>>>
+>>> Simply renaming the macros to style:
+>>> DEVSTAT_BOOT_MODE_SPI
+>>> DEVSTAT_BOOT_MODE_RAM
+>>> DEVSTAT_BOOT_MODE_UART
+>>>
+>>> will not work without creating a duplicate:
+>>> #define BOOT_DEVICE_SPI        DEVSTAT_BOOT_MODE_SPI
+>>> #define BOOT_DEVICE_RAM        DEVSTAT_BOOT_MODE_RAM
+>>> #define BOOT_DEVICE_UART    DEVSTAT_BOOT_MODE_UART
+>>> or similar logic
+>>>
+>>> So basically we would be doubling the size of all spl.h files.
+>>>
+>>> In reality there is only confusion with MMC device/bootmodes,
+>>> we do not to rename every single boot modes/boot device since
+>>> there is no real confusion there.
+>>>
+>>
+>> Correct me if I'm wrong here but BOOT_DEVICE_* should only be used
+>> within the common u-boot source. Our job is to just the return the
+>> correct macro from the SoC's boot.c file and ensure they are all unique
+>> values.
+>>
+>> If that's true, can we make use of BOOT_DEVICE_* defines from
+>> arch/arm/include/asm/spl.h?
+>>
+>> That should avoid duplication since we would just rename the existing
+>> BOOT_DEVICE_* macros to DEVSTAT_BOOT_MODE_* in our board's spl.h while
+>> relying on BOOT_DEVICE_* from arm's spl.h.
+> 
+> Then we come back in a circle to the first real problem which is
+> untangling MMC bootmodes from MMC boot devices.
+> 
+> Why are we trying to refactor all the MMC_DEVICE_* ? There is no
+> real problem for those bootmodes / boot devices since boot device =
+> boot mode for those. It is only a real problem for MMC since boot device
+> DOES NOT equal boot mode for MMC.
+> 
 
-The sysreset uclass unconditionally implements a reset_cpu() function.
-Remove the empty reset_cpu() in vexpress64 board code.
+Boot mode does not equal boot device, even though we sometimes
+mix the two. For example, a UART boot "device" implies a ymodem
+boot "mode". Our ROM also conflates the two concepts as most
+boot devices support one mode each. U-Boot is more flexible and
+"device" is split from "mode".
 
-Signed-off-by: Debbie Horsfall <debbie.horsfall@arm.com>
----
- arch/arm/Kconfig                     | 2 ++
- board/armltd/vexpress64/Kconfig      | 2 ++
- board/armltd/vexpress64/vexpress64.c | 5 -----
- 3 files changed, 4 insertions(+), 5 deletions(-)
+Our DEVSTAT register gives us the combination, not just the
+"device". So the defines that we use to match against content
+of the DEVSTAT register should not be same as those returned
+by spl_boot_device() and other U-Boot functions for "device".
+They should have their own definitions.
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 16db046f4b8..0a1bd6958fe 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1418,6 +1418,8 @@ config ARCH_VEXPRESS64
- 	select MTD_NOR_FLASH if MTD
- 	select FLASH_CFI_DRIVER if MTD
- 	select ENV_IS_IN_FLASH if MTD
-+	select SYSRESET
-+	select SYSRESET_PSCI if ARM_PSCI_FW
- 	imply DISTRO_DEFAULTS
- 
- config TARGET_CORSTONE1000
-diff --git a/board/armltd/vexpress64/Kconfig b/board/armltd/vexpress64/Kconfig
-index 610ab0ac37d..9ef3fa1b379 100644
---- a/board/armltd/vexpress64/Kconfig
-+++ b/board/armltd/vexpress64/Kconfig
-@@ -23,6 +23,7 @@ config VEXPRESS64_BASE_MODEL
- 	select POSITION_INDEPENDENT
- 	imply DM_RNG
- 	imply RNG_ARM_RNDR
-+	select ARM_SMCCC
- 
- choice
- 	prompt "VExpress64 board variant"
-@@ -48,6 +49,7 @@ config TARGET_VEXPRESS64_JUNO
- 	select USB_EHCI_GENERIC if USB
- 	select USB_OHCI_HCD if USB
- 	select USB_OHCI_GENERIC if USB
-+	select ARM_SMCCC
- 	imply OF_HAS_PRIOR_STAGE
- 
- endchoice
-diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress64/vexpress64.c
-index 0b75c1358f0..e8f1c2fe9fe 100644
---- a/board/armltd/vexpress64/vexpress64.c
-+++ b/board/armltd/vexpress64/vexpress64.c
-@@ -206,11 +206,6 @@ int board_fdt_blob_setup(void **fdtp)
- #endif
- #endif
- 
--/* Actual reset is done via PSCI. */
--void reset_cpu(void)
--{
--}
--
- /*
-  * Board specific ethernet initialization routine.
-  */
--- 
-2.43.0
+Andrew
 
