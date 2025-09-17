@@ -4,83 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 543B6CAC599
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 14:01:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 845AACAC59A
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 14:18:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5D3B835B9;
-	Wed, 17 Sep 2025 16:01:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BCBA4835CD;
+	Wed, 17 Sep 2025 16:17:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HF4T+PV+";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JxiJHIpJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F453835EA; Wed, 17 Sep 2025 16:01:28 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E81E5835D0; Wed, 17 Sep 2025 16:17:57 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2BCA8354B
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 16:01:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F32F9835CB
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 16:17:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-45cb5e5e71eso42909145e9.2
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 07:01:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758117685; x=1758722485; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zriWZae3e3G7v/FbOwlYlp4gh3qQkNbfhrxiX1HUNeM=;
- b=HF4T+PV+EuRdaRy1CJJQ8SrO4/5yKlWkOG/zQY4HBWNYrE4NbBPUKaDWOlWXkB4hBu
- 1osWrUfs2t0W2ZuDMFDDFvdWe+Gpe9RTziTzo1RAXmKV0DRxSd8qjoHLn5CPtCd7cAGj
- zBpKWauN8Xmc3OnaC9gqH6b8VrsBK0fMnIQrlgionqHeY1RfKrduLXRfLgvJAiMGI+SQ
- jNq2AwmC3qGmTmmYOsKXVr/hFn57gYJEe7ucdHPeWbpEuimdCYqt4p6T2VJ6KVJY3j0V
- zPLbJF1zw2CwO+vbevWqqDXcinnjaey4RgVpeEnVpwkAIakR7PtJtYJizB6gSUV0dK0J
- 7eAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758117685; x=1758722485;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zriWZae3e3G7v/FbOwlYlp4gh3qQkNbfhrxiX1HUNeM=;
- b=C+KflM2vp7dO1bQ+bZIL5PDANaOrbtDAHcDHxDt4dXZs+4wofc031t1edJu+II1CbR
- Vj2hsebh701sVdQUQisbaJqbSajye0DUyP4sgi0Ych8+gYwYsRv1HUisXy1KEKWDNoyF
- 0SKcwkw58+Z/xEgMqQelJRQeO4L9sWdG6nv95uX30KUmqGP5hvVRxtT1TGYQhHO0py9s
- ELGdgAwrRravhIPqMn5q6NPrK315Yjh/0MCTHU70GGufiz4SRQvCnVNEtP/rRNvP/s0E
- dAsTbK0aYwQGv3UQ5Ic3nTvPtoBJxQFKooYYff4qQ6UWbtLpz7Ymp+uVT16rFpx4yHCt
- xvyg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUW8LWCWMF9Y4/HomH3eAw+jfbNULtDwpVJejOYvmFx2EdxnOhtzgftLgZxrv/2xyItaHXi5M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5qbBEPGdtSOXQRl+MtRoRjG42nxSdDUzRkOVAIAbmUZikaq7w
- uLhYBlj26FGnLZGJFScyK3TcnLciK2R0/4gIC1h9NqTNrmM4Vn2FR4MFgZeFKtg5Q3y6sDGVpQY
- WPme2GC5+nMTKvx6+rRqr1q0/HnYWQZU=
-X-Gm-Gg: ASbGncshZtXfLl43v5+uYxkNwALpUTJ6Pxiz3rYJEl8XKErUZDaU1SUwTk6cm6U8SRZ
- 8qaiiP0UcFg5lsOA4KLcx0ucccxTu2cO4EUkR1GsS197BulhI6G5Ep6tI7Ym7LD+DS2nll7rprD
- gYiLOCFBlNakHtubrkjDDlvn42DoPbiVWuedxosNxFs28Wv/QA4RJz4ME062vCBIjdjGZpB1qYZ
- H43/XbI
-X-Google-Smtp-Source: AGHT+IHKOu1rcky6uXzEDgAVg2u8h/MNxvO8krw2SmYnXfkxnQl+p1a/K7fZGE7KNLDMpthF+nlP4acR73ETs2KyqVM=
-X-Received: by 2002:a05:600c:3151:b0:45f:28cd:e033 with SMTP id
- 5b1f17b1804b1-46202bf7eebmr25155995e9.10.1758117684015; Wed, 17 Sep 2025
- 07:01:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 5158F4E40CBF;
+ Wed, 17 Sep 2025 14:17:54 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 2544B6063E;
+ Wed, 17 Sep 2025 14:17:54 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7CE6A102F1BAB; 
+ Wed, 17 Sep 2025 16:17:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1758118672; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=7TnniF4l7evE+rV7uydB5p4OtYoz/hDQ+6zGVt/q708=;
+ b=JxiJHIpJdl5lj5mATYtQaYphYBu1dF3b0A2bNyyz6PNBB36QWzM41y3cvK6oBIymQON5hz
+ C3sWjx3oKgE6/3Td0wUqp3VgY07DEOdQgO2XwwuKuPGwWvwruci8o7CyU28RzXN14x3k1y
+ QflmTCLYnwkz2xGY5z8JuPknX/Q+MG+/R4WNRapvyqvoQ3i52d7B2dhinAh/uYXcsQN5ty
+ ktv9iJjp5xffEA5OrS1cbZ1r/E1h0/2emtMhBOYDH7+RAQabninXidMnnXiMwcJ+Ia51bI
+ YdVkk/pXYzgV4UkEoK8GDIK0rFJEiBUFsyp7al6I+UNrxkXcHk7gwvBhpMiBXA==
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: uboot-stm32@st-md-mailman.stormreply.com,
+	u-boot@lists.denx.de
+Cc: Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Kory Maincent <kory.maincent@bootlin.com>, thomas.petazzoni@bootlin.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] Revert "board: st: stm32mp1: Clean env_get_location()"
+Date: Wed, 17 Sep 2025 16:17:35 +0200
+Message-ID: <20250917141736.59732-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250826093936.3521235-1-lukma@nabladev.com>
- <20250826093936.3521235-2-lukma@nabladev.com>
-In-Reply-To: <20250826093936.3521235-2-lukma@nabladev.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Wed, 17 Sep 2025 17:01:05 +0300
-X-Gm-Features: AS18NWBjjDhd1z4shCDFQRYtMvKDauBsrMri4REDQSHCwlXnqJUzL3R6A-T_HNw
-Message-ID: <CAPVz0n3LNfmM1aN88UWRpf2=TxHSEhCVRvZ5MHLqy+eg+5BEqA@mail.gmail.com>
-Subject: Re: [PATCH 2/2] watchdog: Add implementation of NVIDIA's Tegra 30
- watchdog driver
-To: Lukasz Majewski <lukma@nabladev.com>
-Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,194 +74,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=B2=D1=82, 26 =D1=81=D0=B5=D1=80=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 12:3=
-9 Lukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> This commit provides support for Tegra's 30 watchdog functionality.
-> The WATCHDOG index 0 in conjunction with TIMER 5 has been used. as the
-> same setup is used in Linux kernel driver.
->
-> Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
-> ---
->  drivers/watchdog/Kconfig     |   7 ++
->  drivers/watchdog/Makefile    |   1 +
->  drivers/watchdog/tegra_wdt.c | 121 +++++++++++++++++++++++++++++++++++
->  3 files changed, 129 insertions(+)
->  create mode 100644 drivers/watchdog/tegra_wdt.c
->
-> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
-> index 9e149a75e81..a10baed7232 100644
-> --- a/drivers/watchdog/Kconfig
-> +++ b/drivers/watchdog/Kconfig
-> @@ -454,6 +454,13 @@ config WDT_TANGIER
->           Intel Tangier SoC. If you're using a board with Intel Tangier
->           SoC, say Y here.
->
-> +config WDT_TEGRA
-> +       bool "Tegra watchdog"
-> +       depends on WDT && ARCH_TEGRA
-> +       help
-> +         Select this to enable support for the watchdog timer
-> +         embedded in NVIDIA Tegra SoCs.
-> +
->  config WDT_ARM_SMC
->         bool "ARM SMC watchdog timer support"
->         depends on WDT && ARM_SMCCC
-> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
-> index d52d17e1c90..02e2674f8af 100644
-> --- a/drivers/watchdog/Makefile
-> +++ b/drivers/watchdog/Makefile
-> @@ -53,6 +53,7 @@ obj-$(CONFIG_WDT_STARFIVE) +=3D starfive_wdt.o
->  obj-$(CONFIG_WDT_STM32MP) +=3D stm32mp_wdt.o
->  obj-$(CONFIG_WDT_SUNXI) +=3D sunxi_wdt.o
->  obj-$(CONFIG_WDT_TANGIER) +=3D tangier_wdt.o
-> +obj-$(CONFIG_WDT_TEGRA) +=3D tegra_wdt.o
->  obj-$(CONFIG_WDT_XILINX) +=3D xilinx_wwdt.o
->  obj-$(CONFIG_WDT_ADI) +=3D adi_wdt.o
->  obj-$(CONFIG_WDT_QCOM) +=3D qcom-wdt.o
-> diff --git a/drivers/watchdog/tegra_wdt.c b/drivers/watchdog/tegra_wdt.c
-> new file mode 100644
-> index 00000000000..812ec312fee
-> --- /dev/null
-> +++ b/drivers/watchdog/tegra_wdt.c
-> @@ -0,0 +1,121 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * NVIDIA Tegra Watchdog driver
-> + *
-> + * Copyright (C) 2025 NABLA Software Engineering
-> + * Lukasz Majewski, NABLA Software Engineering, lukma@nabladev.com
-> + */
-> +
-> +#include <dm.h>
-> +#include <wdt.h>
-> +#include <hang.h>
-> +#include <asm/io.h>
-> +#include <watchdog.h>
-> +
-> +/* Timer registers */
-> +#define TIMER_PTV                      (0x0)
+This reverts commit d37641c61ba212241c38e3fd22f0335fc0bebc96.
 
-Here and further, use 0x0 without (), hex numbers in lower case
+Restore support for environment storage in EXT4 filesystem on eMMC boot.
+The previous cleanup incorrectly removed this fallback option which is
+needed for boards that store their environment in an EXT4 partition.
 
-> +#define TIMER_EN                       BIT(31)
-> +#define TIMER_PERIODIC                 BIT(30)
-> +
-> +/* WDT registers */
-> +#define WDT_CFG                                (0x0)
-> +#define WDT_CFG_PERIOD_SHIFT           4
-> +#define WDT_CFG_PERIOD_MASK            GENMASK(7, 0)
-> +#define WDT_CFG_INT_EN                 BIT(12)
-> +#define WDT_CFG_PMC2CAR_RST_EN         BIT(15)
-> +#define WDT_CMD                                (0x8)
-> +#define WDT_CMD_START_COUNTER          BIT(0)
-> +#define WDT_CMD_DISABLE_COUNTER                BIT(1)
-> +#define WDT_UNLOCK                     (0xC)
-> +#define WDT_UNLOCK_PATTERN             (0xc45a)
-> +
-> +/* Use watchdog ID 0 */
-> +#define WDT0_BASE                      0x100
-> +
-> +/* Use Timer 5 as WDT counter */
-> +#define WDT_TIM5_BASE                  0x60
-> +#define WDT_TIM5_ID                    5
-> +
-> +struct tegra_wdt_priv {
-> +       void __iomem *wdt_base;
-> +       void __iomem *tim_base;
-> +};
-> +
-> +static int tegra_wdt_reset(struct udevice *dev)
-> +{
-> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
-> +
-> +       writel(WDT_CMD_START_COUNTER, priv->wdt_base + WDT_CMD);
-> +
-> +       return 0;
-> +}
-> +
-> +static int tegra_wdt_start(struct udevice *dev, u64 timeout, ulong flags=
-)
-> +{
-> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
-> +       u32 timeout_sec =3D timeout / 1000;
-> +
-> +       /*
-> +        * Timer for WDT has a fixed 1MHz clock, so for 1 second period o=
-ne
-> +        * shall write 1000000ul.
-> +        *
-> +        * On Tegra the watchdog reset actually occurs on the 4th expirat=
-ion
-> +        * of this counter, so we set the period to 1/4.
-> +        */
-> +       writel(TIMER_EN | TIMER_PERIODIC | (1000000ul / 4),
-> +              priv->tim_base + TIMER_PTV);
-> +
-> +       /* Support for timeout from 1 to 255 seconds */
-> +       if (timeout_sec < 1 || timeout_sec > 255)
-> +               return -EINVAL;
+This configuration is OS-specific rather than board-dependent and should
+remain as it is configurable via menuconfig. Even if it is not described
+in ST defconfigs people may have enabled it in their defconfig.
 
-Check should be before any register writing is done.
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
 
-> +
-> +       writel(WDT_CFG_PMC2CAR_RST_EN | (timeout_sec << WDT_CFG_PERIOD_SH=
-IFT) |
-> +              WDT_TIM5_ID, priv->wdt_base + WDT_CFG);
-> +
-> +       writel(WDT_CMD_START_COUNTER, priv->wdt_base + WDT_CMD);
-> +
-> +       return 0;
-> +}
-> +
-> +static int tegra_wdt_stop(struct udevice *dev)
-> +{
-> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
-> +
-> +       writel(WDT_UNLOCK_PATTERN, priv->wdt_base + WDT_UNLOCK);
-> +       writel(WDT_CMD_DISABLE_COUNTER, priv->wdt_base + WDT_CMD);
-> +       writel(0, priv->tim_base + TIMER_PTV);
-> +
-> +       return 0;
-> +}
-> +
-> +static int tegra_wdt_probe(struct udevice *dev)
-> +{
-> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
-> +       void __iomem *base;
-> +
-> +       if (!device_is_compatible(dev, "nvidia,tegra30-timer"))
-> +               return -ENODEV;
+Debugging this issue raises another issue that need investigation.
+If env_get_location return ENVL_IS_NOWHERE but CONFIG_ENV_IS_NOWHERE is
+not set, U-boot stall without any log. There might be an ENV check issue
+here.
+---
+ board/st/stm32mp1/stm32mp1.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Remove this restriction, it is not needed.
+diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
+index ab7af69d472..cb5cab9f36a 100644
+--- a/board/st/stm32mp1/stm32mp1.c
++++ b/board/st/stm32mp1/stm32mp1.c
+@@ -751,6 +751,8 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 	case BOOT_FLASH_EMMC:
+ 		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
+ 			return ENVL_MMC;
++		else if (CONFIG_IS_ENABLED(ENV_IS_IN_EXT4))
++			return ENVL_EXT4;
+ 		else
+ 			return ENVL_NOWHERE;
+ 
+-- 
+2.43.0
 
-> +
-> +       base =3D dev_read_addr_ptr(dev);
-> +       if (!base)
-> +               return -ENOENT;
-> +
-> +       priv->wdt_base =3D base + WDT0_BASE;
-> +       priv->tim_base =3D base + WDT_TIM5_BASE;
-> +
-> +       return 0;
-> +}
-> +
-> +static const struct wdt_ops tegra_wdt_ops =3D {
-> +       .start          =3D tegra_wdt_start,
-> +       .stop           =3D tegra_wdt_stop,
-> +       .reset          =3D tegra_wdt_reset,
-> +};
-> +
-> +U_BOOT_DRIVER(tegra_wdt) =3D {
-> +       .name =3D "tegra_wdt",
-> +       .id =3D UCLASS_WDT,
-> +       .priv_auto =3D sizeof(struct tegra_wdt_priv),
-> +       .probe =3D tegra_wdt_probe,
-> +       .ops =3D &tegra_wdt_ops,
-> +};
-> --
-> 2.39.5
->
-
-Everything else seems to be fine. Apply those cosmetic changes and I
-will pick your patches.
