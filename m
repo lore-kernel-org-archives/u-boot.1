@@ -4,59 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15282CA0EE8
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 09:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFEDFCAC598
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 09:47:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5465783542;
-	Wed, 17 Sep 2025 11:47:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B278A835B0;
+	Wed, 17 Sep 2025 11:47:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ve1E1Dn6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ajeMPYsf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DCF783544; Wed, 17 Sep 2025 11:47:08 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 75234834E1; Wed, 17 Sep 2025 11:47:09 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE4E38004F
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 11:47:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D3F983510
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 11:47:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58H9l3iP1483098;
- Wed, 17 Sep 2025 04:47:03 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58H9l56i222078;
+ Wed, 17 Sep 2025 04:47:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758102423;
- bh=vrlsycDB1rWe5s0mXezd4WJSCzm5//YI5IWSFb8f/YU=;
- h=From:To:CC:Subject:Date;
- b=Ve1E1Dn6lhvar/A1SGlLecR43+4ZDqxR6op4bHTeNC1Bu1rK4QKH1tUjIN9nNXnXZ
- dGveO7iHhIw0o5Sa1EuEjWFjwDOf/ucwZNn6KAts9bwqRdhzWKTq051ecLgNvtr6Zy
- hDuMbLrPuV98R9v30vjHHmvFRaTZRaVU9zrd64mI=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58H9l3HE670135
+ s=ti-com-17Q1; t=1758102425;
+ bh=5qOs3XDDAPPI+zmms3tK+jASaBhSLZrpFQDfkzkTdcc=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=ajeMPYsfb/8GSrYcsucMrK7pIM4xevxFSFdmHSj0M6Wu509Xi/eeVnXYAv7y4sD/y
+ xQ+/jdQzoAEAYGKsMoC24WwAT1nWwc9G/rooud7FNIVNY8iyP9240UeSOKun/PjvMe
+ eYOQyNu9XI1bdPr94LR9hbhap6BhbnBq1pwg0y5E=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58H9l5lG2250355
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 17 Sep 2025 04:47:03 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 17 Sep 2025 04:47:05 -0500
+Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 17
- Sep 2025 04:47:02 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 04:47:04 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE206.ent.ti.com
+ (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 17 Sep 2025 04:47:02 -0500
+ Transport; Wed, 17 Sep 2025 04:47:04 -0500
 Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [10.24.68.237])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58H9l0Bu3103753;
- Wed, 17 Sep 2025 04:47:00 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58H9l0Bv3103753;
+ Wed, 17 Sep 2025 04:47:03 -0500
 From: Anurag Dutta <a-dutta@ti.com>
 To: <trini@konsulko.com>
 CC: <n-francis@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>,
  <a-dutta@ti.com>
-Subject: [PATCH v4 0/4] Hyperflash boot fixes for j721e/j7200
-Date: Wed, 17 Sep 2025 15:16:55 +0530
-Message-ID: <20250917094659.3922343-1-a-dutta@ti.com>
+Subject: [PATCH v4 1/4] mtd: Kconfig: Add SPL_MUX_MMIO dependency to HBMC
+ driver
+Date: Wed, 17 Sep 2025 15:16:56 +0530
+Message-ID: <20250917094659.3922343-2-a-dutta@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250917094659.3922343-1-a-dutta@ti.com>
+References: <20250917094659.3922343-1-a-dutta@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -77,51 +80,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
-This series introdues a couple of small fixes that involves
-enabling hyperflash at R5 SPL and u-boot proper stage and
-Kconfig changes that are required for HBMC boot on j721e/j7200
+MUX_MMIO is needed by HBMC in SPL stage. Enable it at SPL as well
+as u-boot proper stage.
 
-Test logs:
-https://gist.github.com/anuragdutta731/0f56e8d9bdf0cfe3d221c69d09a58704
+Signed-off-by: Anurag Dutta <a-dutta@ti.com>
+---
+ drivers/mtd/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Changelog: v4:
-1. Removed fixes tag from commit message
-2. Added configs for j7200 as well
-
-Link to v3:
-https://lore.kernel.org/all/20250902102000.1388848-1-a-dutta@ti.com/
-
-Changelog : v3 :
-1. Modified commit messages and added correct fixes tag
-
-Link to v2:
-https://lore.kernel.org/all/20250902064839.1296877-1-a-dutta@ti.com/
-
-Changelog : v2 :
-1. Modified commit messages according to review comments
-2. Added configs for r5 spl for j721e for hbmc boot
-
-Link to v1 :
-https://lore.kernel.org/all/20250416061652.2394419-1-a-dutta@ti.com/
-
-P.S.: We have cross-checked the generated .config file to verify whether
-the configurations added in this series are actually reflected. And Yes,
-they are. So, please include this series in the 2025.10 master.
-
-Anurag Dutta (4):
-  mtd: Kconfig: Add SPL_MUX_MMIO dependency to HBMC driver
-  configs: j721e_evm_r5: Enable HBMC and MUX_MMIO at SPL
-  configs: j7200_evm_*_defconfig: Enable HBMC and MUX_MMIO at SPL
-  arm: dts: k3-j721e-r5-common-proc-board: Enable HBMC in R5 SPL stage
-
- arch/arm/dts/k3-j721e-r5-common-proc-board.dts | 1 +
- configs/j7200_evm_a72_defconfig                | 1 +
- configs/j7200_evm_r5_defconfig                 | 2 ++
- configs/j721e_evm_r5_defconfig                 | 2 ++
- drivers/mtd/Kconfig                            | 2 +-
- 5 files changed, 7 insertions(+), 1 deletion(-)
-
+diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
+index 2b7f5e5ed7b..e76601a5545 100644
+--- a/drivers/mtd/Kconfig
++++ b/drivers/mtd/Kconfig
+@@ -202,7 +202,7 @@ config RENESAS_RPC_HF
+ 
+ config HBMC_AM654
+ 	bool "HyperBus controller driver for AM65x SoC"
+-	depends on MULTIPLEXER && MUX_MMIO
++	depends on MULTIPLEXER && (MUX_MMIO || SPL_MUX_MMIO)
+ 	help
+ 	 This is the driver for HyperBus controller on TI's AM65x and
+ 	 other SoCs
 -- 
 2.34.1
 
