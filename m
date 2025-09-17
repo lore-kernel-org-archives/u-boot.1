@@ -4,38 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1842CAC598
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 00:03:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44ABFCAC598
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 00:04:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5C5D83287;
-	Wed, 17 Sep 2025 02:03:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C30FC8309A;
+	Wed, 17 Sep 2025 02:04:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47627832AD; Wed, 17 Sep 2025 02:03:38 +0200 (CEST)
+ id 8B0F483280; Wed, 17 Sep 2025 02:04:02 +0200 (CEST)
 Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A068309A
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 02:03:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11E71800C1
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 02:04:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 56132B2200D8;
- Wed, 17 Sep 2025 02:03:33 +0200 (CEST)
+ by freeshell.de (Postfix) with ESMTPSA id 05CEAB220170;
+ Wed, 17 Sep 2025 02:03:57 +0200 (CEST)
 From: E Shattow <e@freeshell.de>
-To: 
-Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
  Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, E Shattow <e@freeshell.de>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 0/4] riscv: dts: starfive: prune redundant jh7110-common
-Date: Tue, 16 Sep 2025 17:02:21 -0700
-Message-ID: <20250917000254.1134031-1-e@freeshell.de>
+Subject: [PATCH v3 1/4] riscv: dts: starfive: prune redundant jh7110-common
+ overrides
+Date: Tue, 16 Sep 2025 17:02:22 -0700
+Message-ID: <20250917000254.1134031-2-e@freeshell.de>
 X-Mailer: git-send-email 2.50.0
+In-Reply-To: <20250917000254.1134031-1-e@freeshell.de>
+References: <20250917000254.1134031-1-e@freeshell.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -54,57 +56,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are more than a few additional JH7110 CPU boards that may soon be
-upstreamed. Each new variant supported by U-Boot has the burden of adding
-a per-dts stub file for automatic dtsi inclusion by the build system. Also
-i.e. the JH7110S CPU board introduced by StarFive is to be supported by
-the same U-Boot starfive_visionfive2 target. Let's prepare for and clean
-out (remove) per-dts file -u-boot.dtsi automatic inclusion stubs for all
-dts that exist in dts/upstream/src subtree, making these per-dts
--u-boot.dtsi files unnecessary for future additions.
+Prune jh7110-common-u-boot.dtsi (clocks, qspi flash, eeprom, and
+bootph-pre-ram hints now upstream since devicetree-rebasing v6.16).
 
-The last patch in this series anticipates additional CPU models for
-starfive_visionfive2 config, changing from SYS_CPU automatic inclusion
-dtsi to a filename more similar to the defconfig name via config Extra
-dtsi inclusion. This also allows that any supported board for this config
-which does need to use the per-dts automatic dtsi inclusion by the build
-system may do so without having to include this common dtsi again.
+In preparation for removal of per-dts jh7110-*-u-boot.dtsi replace include
+by next dependency jh7110-u-boot.dtsi in automatic dtsi inclusion order.
 
-Changes since v2:
-- Drop PATCH 4/4 "visionfive2 depend on SYS_CONFIG_NAME automatic dtsi
-inclusion"
-- Add patch "Use visionfive2 DEVICE_TREE_INCLUDES dtsi named similar to
-defconfig"
-- Revise cover letter descriptions
-
-E Shattow (4):
-  riscv: dts: starfive: prune redundant jh7110-common overrides
-  riscv: dts: starfive: sync visionfive2 overrides with upstream Linux
-    for-next
-  riscv: dts: starfive: visionfive2 depend on SYS_CPU automatic dtsi
-    inclusion
-  configs: starfive: Use visionfive2 DEVICE_TREE_INCLUDES dtsi named
-    similar to defconfig
-
+Signed-off-by: E Shattow <e@freeshell.de>
+---
  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 99 -------------------
- .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |  7 --
- arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  7 --
- .../dts/jh7110-pine64-star64-u-boot.dtsi      |  7 --
- ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |  7 --
- ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |  7 --
- ....dtsi => starfive-visionfive2-u-boot.dtsi} | 82 ++++++---------
- configs/starfive_visionfive2_defconfig        |  1 +
- 8 files changed, 33 insertions(+), 184 deletions(-)
+ .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |  2 +-
+ arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  2 +-
+ .../dts/jh7110-pine64-star64-u-boot.dtsi      |  2 +-
+ ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |  2 +-
+ ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |  2 +-
+ 6 files changed, 5 insertions(+), 104 deletions(-)
  delete mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
- delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
- rename arch/riscv/dts/{jh7110-u-boot.dtsi => starfive-visionfive2-u-boot.dtsi} (54%)
 
-
-base-commit: b82fa9d752b025d3b5305b5b07debe6808a5d027
+diff --git a/arch/riscv/dts/jh7110-common-u-boot.dtsi b/arch/riscv/dts/jh7110-common-u-boot.dtsi
+deleted file mode 100644
+index 049b0a7ce28..00000000000
+--- a/arch/riscv/dts/jh7110-common-u-boot.dtsi
++++ /dev/null
+@@ -1,99 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0 OR MIT
+-/*
+- * Copyright (C) 2023 StarFive Technology Co., Ltd.
+- */
+-
+-#include "jh7110-u-boot.dtsi"
+-/ {
+-	aliases {
+-		spi0 = &qspi;
+-	};
+-
+-	chosen {
+-		bootph-pre-ram;
+-	};
+-
+-	firmware {
+-		spi0 = &qspi;
+-		bootph-pre-ram;
+-	};
+-
+-	memory@40000000 {
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&uart0 {
+-	bootph-pre-ram;
+-	reg-offset = <0>;
+-	current-speed = <115200>;
+-};
+-
+-&mmc0 {
+-	bootph-pre-ram;
+-};
+-
+-&mmc1 {
+-	bootph-pre-ram;
+-};
+-
+-&qspi {
+-	bootph-pre-ram;
+-
+-	flash@0 {
+-		bootph-pre-ram;
+-		cdns,read-delay = <2>;
+-		spi-max-frequency = <100000000>;
+-	};
+-};
+-
+-&syscrg {
+-	assigned-clocks = <&syscrg JH7110_SYSCLK_CPU_ROOT>,
+-			  <&syscrg JH7110_SYSCLK_BUS_ROOT>,
+-			  <&syscrg JH7110_SYSCLK_PERH_ROOT>,
+-			  <&syscrg JH7110_SYSCLK_QSPI_REF>;
+-	assigned-clock-parents = <&pllclk JH7110_PLLCLK_PLL0_OUT>,
+-				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
+-				 <&pllclk JH7110_PLLCLK_PLL2_OUT>,
+-				 <&syscrg JH7110_SYSCLK_QSPI_REF_SRC>;
+-	assigned-clock-rates = <0>, <0>, <0>, <0>;
+-};
+-
+-&sysgpio {
+-	bootph-pre-ram;
+-};
+-
+-&mmc0_pins {
+-	bootph-pre-ram;
+-	rst-pins {
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&mmc1_pins {
+-	bootph-pre-ram;
+-	clk-pins {
+-		bootph-pre-ram;
+-	};
+-
+-	mmc-pins {
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&i2c5_pins {
+-	bootph-pre-ram;
+-	i2c-pins {
+-		bootph-pre-ram;
+-	};
+-};
+-
+-&i2c5 {
+-	bootph-pre-ram;
+-	eeprom@50 {
+-		bootph-pre-ram;
+-		compatible = "atmel,24c04";
+-		reg = <0x50>;
+-		pagesize = <16>;
+-	};
+-};
+diff --git a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+index ab882d07f6f..b9202f2acce 100644
+--- a/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
++++ b/arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+@@ -3,5 +3,5 @@
+  * Copyright (C) 2024 StarFive Technology Co., Ltd.
+  */
+ 
+-#include "jh7110-common-u-boot.dtsi"
++#include "jh7110-u-boot.dtsi"
+ #include "starfive-visionfive2-binman.dtsi"
+diff --git a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+index ab882d07f6f..b9202f2acce 100644
+--- a/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
++++ b/arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+@@ -3,5 +3,5 @@
+  * Copyright (C) 2024 StarFive Technology Co., Ltd.
+  */
+ 
+-#include "jh7110-common-u-boot.dtsi"
++#include "jh7110-u-boot.dtsi"
+ #include "starfive-visionfive2-binman.dtsi"
+diff --git a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+index ab882d07f6f..b9202f2acce 100644
+--- a/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
++++ b/arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+@@ -3,5 +3,5 @@
+  * Copyright (C) 2024 StarFive Technology Co., Ltd.
+  */
+ 
+-#include "jh7110-common-u-boot.dtsi"
++#include "jh7110-u-boot.dtsi"
+ #include "starfive-visionfive2-binman.dtsi"
+diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+index ab882d07f6f..b9202f2acce 100644
+--- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
++++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+@@ -3,5 +3,5 @@
+  * Copyright (C) 2024 StarFive Technology Co., Ltd.
+  */
+ 
+-#include "jh7110-common-u-boot.dtsi"
++#include "jh7110-u-boot.dtsi"
+ #include "starfive-visionfive2-binman.dtsi"
+diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+index 874074174ff..848ed8225ac 100644
+--- a/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
++++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+@@ -3,5 +3,5 @@
+  * Copyright (C) 2023 StarFive Technology Co., Ltd.
+  */
+ 
+-#include "jh7110-common-u-boot.dtsi"
++#include "jh7110-u-boot.dtsi"
+ #include "starfive-visionfive2-binman.dtsi"
 -- 
 2.50.0
 
