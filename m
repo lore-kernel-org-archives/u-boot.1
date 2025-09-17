@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1514CAC59A
-	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 14:00:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 543B6CAC599
+	for <u-boot@archiver.kernel.org>; Wed, 17 Sep 2025 14:01:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 280DA835A2;
-	Wed, 17 Sep 2025 16:00:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D5D3B835B9;
+	Wed, 17 Sep 2025 16:01:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JAT346ZT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HF4T+PV+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F1BB835B3; Wed, 17 Sep 2025 16:00:44 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id 4F453835EA; Wed, 17 Sep 2025 16:01:28 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A42238354B
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 16:00:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2BCA8354B
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 16:01:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-331e80c3985so3849229fac.3
- for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 07:00:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-45cb5e5e71eso42909145e9.2
+ for <u-boot@lists.denx.de>; Wed, 17 Sep 2025 07:01:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758117640; x=1758722440; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/H9GBNtZXXGZkN01z8PAIWouv+gOSbl6AXIQL4Pelrk=;
- b=JAT346ZT3JsMj/bcW0VhOKFq3d9jPZO4n9NT/YJkUC3h/95CrkIyUPLL06XXuPJhEu
- b3wWHbsk+wTX5PIPKzKHVuY9Q5uZy5HXgDapc3gxY/YHbyCaq9H06dCifzOxoj2GbU1t
- +JEzpqerqNwCsXnd4zDsyTg+N2n1Yd/kAMQkk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758117640; x=1758722440;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1758117685; x=1758722485; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/H9GBNtZXXGZkN01z8PAIWouv+gOSbl6AXIQL4Pelrk=;
- b=FBySyvcexkCnx4v1TD1JH6h/sB3NuYySOYdXo36Z6B9npGDROB4d/z01yRyqjt/8xH
- /6dDBEQ+zlv7g3tIvXbmdWpQ/926kWD6Vgm5JDqzctqLyO/uyRgkzviWiebLhZ83UWCY
- hfeiMSVnGArvUW1Io4QxNC1il/PqSchJrfddI+CLal8l6hIJ4MLQqiSMGPFzf1cPKxDK
- +yOfbYv0Sj7+KeKR/UzsyUazsKYryBLx3xw3I+A1BshioIQnwCMCL5/TJT4KToqmqimO
- OZgA1l3joygVdQ0F/6dOU1uKZQTtDHpPkKhjU4FC0T7Re9Sgth4pytChwEwcoJADCAR8
- 1nGw==
-X-Gm-Message-State: AOJu0Yx1rkw20X0ZK6htXqMqmFgBouIxRIv20hfsIFLhU58anQrTI4/k
- Y4e2gpPpYgjXkqmPoV7n8eFVd/0QybGZiz/shhS7/FwD1fmipCRAXYJVJB17JpPIF04=
-X-Gm-Gg: ASbGncu2Gih/pIJqqDt67AQ9QnNH7wDLW5wGkU2HynS3moH4bOP0qv08A2K7sGc4kIV
- kPIiwB+zbJRsesxFQmlARlooVtLD6j414urD9Spo6OQpfh35tka/Ats+q2+dBYDahEn+y4TO/EN
- kMtJrRy7o7OBOQuWBo77BW0OslMhpUK8kaa0AohjPeG03tsav6PL736f4zz8YehDDB8foAHXwpw
- a1blbpH1wtBKRapoWTeDRaTdQ5ZWh3vNn1n4bVHFxe0rSeBIgaenReJOwnr+t2G67mjuE1Ti7T9
- nCusUj9dF+g/jA3PpwRRqD82N7bYgcWauXCaZ8LGtxzPJycfqOWCuK/edFzcrNDA8xfzejo5mUF
- x4rYoD0VqaNTCEr5Kbp0PjnlP3T/CPqLGpXGbPqkfl67WtxaXSuYjfwDExZLXd5wkx5w=
-X-Google-Smtp-Source: AGHT+IEixpRWTGFPiZNpVvVm2VZE5T/t7Kk7FGiG2+Tqq/lzdsrmE9UDDfPcBNMpNuj2o8w2y3GOLw==
-X-Received: by 2002:a05:6870:a50b:b0:30c:9385:bf11 with SMTP id
- 586e51a60fabf-335bd28fefcmr1226808fac.3.1758117640094; 
- Wed, 17 Sep 2025 07:00:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-75249298644sm5229137a34.6.2025.09.17.07.00.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Sep 2025 07:00:39 -0700 (PDT)
-Date: Wed, 17 Sep 2025 08:00:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>,
- Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Subject: Re: [PATCH] doc: memory: Restore missing diagram
-Message-ID: <20250917140037.GI124814@bill-the-cat>
-References: <20250910154039.1942458-1-trini@konsulko.com>
- <DCV3MTQELBJA.1LWFIXMOFBHAC@ti.com>
+ bh=zriWZae3e3G7v/FbOwlYlp4gh3qQkNbfhrxiX1HUNeM=;
+ b=HF4T+PV+EuRdaRy1CJJQ8SrO4/5yKlWkOG/zQY4HBWNYrE4NbBPUKaDWOlWXkB4hBu
+ 1osWrUfs2t0W2ZuDMFDDFvdWe+Gpe9RTziTzo1RAXmKV0DRxSd8qjoHLn5CPtCd7cAGj
+ zBpKWauN8Xmc3OnaC9gqH6b8VrsBK0fMnIQrlgionqHeY1RfKrduLXRfLgvJAiMGI+SQ
+ jNq2AwmC3qGmTmmYOsKXVr/hFn57gYJEe7ucdHPeWbpEuimdCYqt4p6T2VJ6KVJY3j0V
+ zPLbJF1zw2CwO+vbevWqqDXcinnjaey4RgVpeEnVpwkAIakR7PtJtYJizB6gSUV0dK0J
+ 7eAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758117685; x=1758722485;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=zriWZae3e3G7v/FbOwlYlp4gh3qQkNbfhrxiX1HUNeM=;
+ b=C+KflM2vp7dO1bQ+bZIL5PDANaOrbtDAHcDHxDt4dXZs+4wofc031t1edJu+II1CbR
+ Vj2hsebh701sVdQUQisbaJqbSajye0DUyP4sgi0Ych8+gYwYsRv1HUisXy1KEKWDNoyF
+ 0SKcwkw58+Z/xEgMqQelJRQeO4L9sWdG6nv95uX30KUmqGP5hvVRxtT1TGYQhHO0py9s
+ ELGdgAwrRravhIPqMn5q6NPrK315Yjh/0MCTHU70GGufiz4SRQvCnVNEtP/rRNvP/s0E
+ dAsTbK0aYwQGv3UQ5Ic3nTvPtoBJxQFKooYYff4qQ6UWbtLpz7Ymp+uVT16rFpx4yHCt
+ xvyg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXUW8LWCWMF9Y4/HomH3eAw+jfbNULtDwpVJejOYvmFx2EdxnOhtzgftLgZxrv/2xyItaHXi5M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5qbBEPGdtSOXQRl+MtRoRjG42nxSdDUzRkOVAIAbmUZikaq7w
+ uLhYBlj26FGnLZGJFScyK3TcnLciK2R0/4gIC1h9NqTNrmM4Vn2FR4MFgZeFKtg5Q3y6sDGVpQY
+ WPme2GC5+nMTKvx6+rRqr1q0/HnYWQZU=
+X-Gm-Gg: ASbGncshZtXfLl43v5+uYxkNwALpUTJ6Pxiz3rYJEl8XKErUZDaU1SUwTk6cm6U8SRZ
+ 8qaiiP0UcFg5lsOA4KLcx0ucccxTu2cO4EUkR1GsS197BulhI6G5Ep6tI7Ym7LD+DS2nll7rprD
+ gYiLOCFBlNakHtubrkjDDlvn42DoPbiVWuedxosNxFs28Wv/QA4RJz4ME062vCBIjdjGZpB1qYZ
+ H43/XbI
+X-Google-Smtp-Source: AGHT+IHKOu1rcky6uXzEDgAVg2u8h/MNxvO8krw2SmYnXfkxnQl+p1a/K7fZGE7KNLDMpthF+nlP4acR73ETs2KyqVM=
+X-Received: by 2002:a05:600c:3151:b0:45f:28cd:e033 with SMTP id
+ 5b1f17b1804b1-46202bf7eebmr25155995e9.10.1758117684015; Wed, 17 Sep 2025
+ 07:01:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rh1U5zy/yrTVniC9"
-Content-Disposition: inline
-In-Reply-To: <DCV3MTQELBJA.1LWFIXMOFBHAC@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250826093936.3521235-1-lukma@nabladev.com>
+ <20250826093936.3521235-2-lukma@nabladev.com>
+In-Reply-To: <20250826093936.3521235-2-lukma@nabladev.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Wed, 17 Sep 2025 17:01:05 +0300
+X-Gm-Features: AS18NWBjjDhd1z4shCDFQRYtMvKDauBsrMri4REDQSHCwlXnqJUzL3R6A-T_HNw
+Message-ID: <CAPVz0n3LNfmM1aN88UWRpf2=TxHSEhCVRvZ5MHLqy+eg+5BEqA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] watchdog: Add implementation of NVIDIA's Tegra 30
+ watchdog driver
+To: Lukasz Majewski <lukma@nabladev.com>
+Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,46 +97,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+=D0=B2=D1=82, 26 =D1=81=D0=B5=D1=80=D0=BF. 2025=E2=80=AF=D1=80. =D0=BE 12:3=
+9 Lukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> This commit provides support for Tegra's 30 watchdog functionality.
+> The WATCHDOG index 0 in conjunction with TIMER 5 has been used. as the
+> same setup is used in Linux kernel driver.
+>
+> Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
+> ---
+>  drivers/watchdog/Kconfig     |   7 ++
+>  drivers/watchdog/Makefile    |   1 +
+>  drivers/watchdog/tegra_wdt.c | 121 +++++++++++++++++++++++++++++++++++
+>  3 files changed, 129 insertions(+)
+>  create mode 100644 drivers/watchdog/tegra_wdt.c
+>
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index 9e149a75e81..a10baed7232 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -454,6 +454,13 @@ config WDT_TANGIER
+>           Intel Tangier SoC. If you're using a board with Intel Tangier
+>           SoC, say Y here.
+>
+> +config WDT_TEGRA
+> +       bool "Tegra watchdog"
+> +       depends on WDT && ARCH_TEGRA
+> +       help
+> +         Select this to enable support for the watchdog timer
+> +         embedded in NVIDIA Tegra SoCs.
+> +
+>  config WDT_ARM_SMC
+>         bool "ARM SMC watchdog timer support"
+>         depends on WDT && ARM_SMCCC
+> diff --git a/drivers/watchdog/Makefile b/drivers/watchdog/Makefile
+> index d52d17e1c90..02e2674f8af 100644
+> --- a/drivers/watchdog/Makefile
+> +++ b/drivers/watchdog/Makefile
+> @@ -53,6 +53,7 @@ obj-$(CONFIG_WDT_STARFIVE) +=3D starfive_wdt.o
+>  obj-$(CONFIG_WDT_STM32MP) +=3D stm32mp_wdt.o
+>  obj-$(CONFIG_WDT_SUNXI) +=3D sunxi_wdt.o
+>  obj-$(CONFIG_WDT_TANGIER) +=3D tangier_wdt.o
+> +obj-$(CONFIG_WDT_TEGRA) +=3D tegra_wdt.o
+>  obj-$(CONFIG_WDT_XILINX) +=3D xilinx_wwdt.o
+>  obj-$(CONFIG_WDT_ADI) +=3D adi_wdt.o
+>  obj-$(CONFIG_WDT_QCOM) +=3D qcom-wdt.o
+> diff --git a/drivers/watchdog/tegra_wdt.c b/drivers/watchdog/tegra_wdt.c
+> new file mode 100644
+> index 00000000000..812ec312fee
+> --- /dev/null
+> +++ b/drivers/watchdog/tegra_wdt.c
+> @@ -0,0 +1,121 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * NVIDIA Tegra Watchdog driver
+> + *
+> + * Copyright (C) 2025 NABLA Software Engineering
+> + * Lukasz Majewski, NABLA Software Engineering, lukma@nabladev.com
+> + */
+> +
+> +#include <dm.h>
+> +#include <wdt.h>
+> +#include <hang.h>
+> +#include <asm/io.h>
+> +#include <watchdog.h>
+> +
+> +/* Timer registers */
+> +#define TIMER_PTV                      (0x0)
 
---rh1U5zy/yrTVniC9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Here and further, use 0x0 without (), hex numbers in lower case
 
-On Wed, Sep 17, 2025 at 06:41:01PM +0530, Anshul Dalal wrote:
-> On Wed Sep 10, 2025 at 9:10 PM IST, Tom Rini wrote:
-> > From: Neha Malcom Francis <n-francis@ti.com>
-> >
-> > When applying the patch that became commit a2d881f5bcd3 ("doc: memory:
-> > Add documentation for system RAM") one of the diagrams was missed.
-> > Re-add this missing file.
-> >
-> > Reported-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-> > Fixes: a2d881f5bcd3 doc: memory: Add documentation for system RAM
-> > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> > [trini: Take Neha's original svg and re-apply it]
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
->=20
-> Are we sure a2d881f5bcd3, is the correct SHA for the commit? On my local
-> tree as well as github[1] it is 284ef1bbcefc.
->=20
-> [1]: https://github.com/u-boot/u-boot/commit/284ef1bbcefcf3180592ed48f522=
-c79618099bd6
+> +#define TIMER_EN                       BIT(31)
+> +#define TIMER_PERIODIC                 BIT(30)
+> +
+> +/* WDT registers */
+> +#define WDT_CFG                                (0x0)
+> +#define WDT_CFG_PERIOD_SHIFT           4
+> +#define WDT_CFG_PERIOD_MASK            GENMASK(7, 0)
+> +#define WDT_CFG_INT_EN                 BIT(12)
+> +#define WDT_CFG_PMC2CAR_RST_EN         BIT(15)
+> +#define WDT_CMD                                (0x8)
+> +#define WDT_CMD_START_COUNTER          BIT(0)
+> +#define WDT_CMD_DISABLE_COUNTER                BIT(1)
+> +#define WDT_UNLOCK                     (0xC)
+> +#define WDT_UNLOCK_PATTERN             (0xc45a)
+> +
+> +/* Use watchdog ID 0 */
+> +#define WDT0_BASE                      0x100
+> +
+> +/* Use Timer 5 as WDT counter */
+> +#define WDT_TIM5_BASE                  0x60
+> +#define WDT_TIM5_ID                    5
+> +
+> +struct tegra_wdt_priv {
+> +       void __iomem *wdt_base;
+> +       void __iomem *tim_base;
+> +};
+> +
+> +static int tegra_wdt_reset(struct udevice *dev)
+> +{
+> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
+> +
+> +       writel(WDT_CMD_START_COUNTER, priv->wdt_base + WDT_CMD);
+> +
+> +       return 0;
+> +}
+> +
+> +static int tegra_wdt_start(struct udevice *dev, u64 timeout, ulong flags=
+)
+> +{
+> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
+> +       u32 timeout_sec =3D timeout / 1000;
+> +
+> +       /*
+> +        * Timer for WDT has a fixed 1MHz clock, so for 1 second period o=
+ne
+> +        * shall write 1000000ul.
+> +        *
+> +        * On Tegra the watchdog reset actually occurs on the 4th expirat=
+ion
+> +        * of this counter, so we set the period to 1/4.
+> +        */
+> +       writel(TIMER_EN | TIMER_PERIODIC | (1000000ul / 4),
+> +              priv->tim_base + TIMER_PTV);
+> +
+> +       /* Support for timeout from 1 to 255 seconds */
+> +       if (timeout_sec < 1 || timeout_sec > 255)
+> +               return -EINVAL;
 
-Maybe we list both, it was a problematic set of changes unfortunately.
+Check should be before any register writing is done.
 
---=20
-Tom
+> +
+> +       writel(WDT_CFG_PMC2CAR_RST_EN | (timeout_sec << WDT_CFG_PERIOD_SH=
+IFT) |
+> +              WDT_TIM5_ID, priv->wdt_base + WDT_CFG);
+> +
+> +       writel(WDT_CMD_START_COUNTER, priv->wdt_base + WDT_CMD);
+> +
+> +       return 0;
+> +}
+> +
+> +static int tegra_wdt_stop(struct udevice *dev)
+> +{
+> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
+> +
+> +       writel(WDT_UNLOCK_PATTERN, priv->wdt_base + WDT_UNLOCK);
+> +       writel(WDT_CMD_DISABLE_COUNTER, priv->wdt_base + WDT_CMD);
+> +       writel(0, priv->tim_base + TIMER_PTV);
+> +
+> +       return 0;
+> +}
+> +
+> +static int tegra_wdt_probe(struct udevice *dev)
+> +{
+> +       struct tegra_wdt_priv *priv =3D dev_get_priv(dev);
+> +       void __iomem *base;
+> +
+> +       if (!device_is_compatible(dev, "nvidia,tegra30-timer"))
+> +               return -ENODEV;
 
---rh1U5zy/yrTVniC9
-Content-Type: application/pgp-signature; name="signature.asc"
+Remove this restriction, it is not needed.
 
------BEGIN PGP SIGNATURE-----
+> +
+> +       base =3D dev_read_addr_ptr(dev);
+> +       if (!base)
+> +               return -ENOENT;
+> +
+> +       priv->wdt_base =3D base + WDT0_BASE;
+> +       priv->tim_base =3D base + WDT_TIM5_BASE;
+> +
+> +       return 0;
+> +}
+> +
+> +static const struct wdt_ops tegra_wdt_ops =3D {
+> +       .start          =3D tegra_wdt_start,
+> +       .stop           =3D tegra_wdt_stop,
+> +       .reset          =3D tegra_wdt_reset,
+> +};
+> +
+> +U_BOOT_DRIVER(tegra_wdt) =3D {
+> +       .name =3D "tegra_wdt",
+> +       .id =3D UCLASS_WDT,
+> +       .priv_auto =3D sizeof(struct tegra_wdt_priv),
+> +       .probe =3D tegra_wdt_probe,
+> +       .ops =3D &tegra_wdt_ops,
+> +};
+> --
+> 2.39.5
+>
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMq/AgAKCRAr4qD1Cr/k
-CkquAQDDYmmVAQC+1x8gehj+LSjoOF+Dhbz3PcOA5MbxoVUMdQD5ATN8nAAdPvyW
-H1zRjBVVG7GleYdpR53+hydEo634twU=
-=vn4p
------END PGP SIGNATURE-----
-
---rh1U5zy/yrTVniC9--
+Everything else seems to be fine. Apply those cosmetic changes and I
+will pick your patches.
