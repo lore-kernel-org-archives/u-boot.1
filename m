@@ -4,51 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8041CAC5A0
-	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 12:49:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9EDDCAC5A0
+	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 12:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F397C8318E;
-	Thu, 18 Sep 2025 14:49:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41D848004F;
+	Thu, 18 Sep 2025 14:55:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="cqauEBl6";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="Q+4LvPRn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D70C8319C; Thu, 18 Sep 2025 14:49:46 +0200 (CEST)
+ id 30FF281E13; Thu, 18 Sep 2025 14:55:08 +0200 (CEST)
 Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F43D8003E
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 14:49:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5F8F8003E
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 14:55:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
 Received: from fencepost.gnu.org ([2001:470:142:3::e])
  by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
  (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1uzE4w-0003OL-Nv; Thu, 18 Sep 2025 08:49:39 -0400
+ id 1uzEA9-0004Ew-Of; Thu, 18 Sep 2025 08:55:01 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:Subject:To:From:in-reply-to:
- references; bh=LAhk7qhC4YmeYQsz7w5lArGChNesJPV88fZwbgBUQI0=; b=cqauEBl61kYNp6
- DKsFSxHfHKwEKuhu96zG4hvA7lhMQtPKDCYJRDmijWOE+P4B8GNgJ+tEg8e8F7cSkJFFne9di6Vdd
- MIYchbuEmScM0rXA0HaK0B4epTbVcdTG1JQ348/+Nm0wVLZI3fQ2tf+tAakA7QIBNJZpgKwDGrg4b
- eT4LDELVjvGR6FliiZRYgPKE8UMSmt8B4Cdb0ZqvKV+NcSbGbplP4cwQAoH6iw00TDP3ayqqur35o
- 0q+YIUuSASutPEIicegw+tYgESGuaXcFalCZdL9xhKGsiVi+AD72v9elT4jG7vaWbhnny+do66YA3
- v6tVhXYBzUlttZ7jdb8g==;
+ s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
+ From; bh=T9P2S/zM390wxqwbX74miGaLnIVJR3yWwr483amilHE=; b=Q+4LvPRnjEUI4wENwQOk
+ 9VShju8p6LAdSx1G2truxQKJDPm3ThU687XrTG6BeJ2e3Rz2ir6pjLx2+LhhiJHbHFe23a986vN8D
+ zkyPEuoZiHSRNML1UZYX2fQnos8aObzHXdQ4vdk78ayQpCidBDnDJlAIDDs4l++T1xg4906/MxOiG
+ etiI2ipiT41sqsov1FXcywCuu1+3UgeHD+0F+5NOD/Snm8V2+FsHCVx8GaWJdLLGTKxxf/hV7coMs
+ aj7fdS6PxY5PGpxYkRhyOdjOE1FiVIpEb1qZv7VYW1HeGTpXU+h3UBry5oLmIPrL6S1OT0o0GujQc
+ 1lPrTPeO78VC7w==;
 From: Mathieu Othacehe <othacehe@gnu.org>
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>, Paul Barker <paul@pbarker.dev>,
- Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
- Mathieu Othacehe <othacehe@gnu.org>, u-boot@lists.denx.de
-Cc: anton.reding@landisgyr.com
-Subject: [PATCH] board: rzg2l: Do not expect a DTB blob from the TF-A.
-Date: Thu, 18 Sep 2025 14:48:27 +0200
-Message-ID: <20250918124827.5577-1-othacehe@gnu.org>
-X-Mailer: git-send-email 2.49.0
+To: Biju Das <biju.das.jz@bp.renesas.com>
+Cc: "marek.vasut@mailbox.org" <marek.vasut@mailbox.org>,  "paul@pbarker.dev"
+ <paul@pbarker.dev>,  Chris Paterson <Chris.Paterson2@renesas.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "anton.reding@landisgyr.com" <anton.reding@landisgyr.com>
+Subject: Re: RZG2L and DTB blob from TF-A
+In-Reply-To: <TY3PR01MB11346F452EAE530A0931C9D228614A@TY3PR01MB11346.jpnprd01.prod.outlook.com>
+ (Biju Das's message of "Tue, 16 Sep 2025 14:02:36 +0000")
+References: <87plbqd0kk.fsf@gnu.org>
+ <56857fb6-e3d4-4069-afde-57b43c4d2442@mailbox.org>
+ <TY3PR01MB11346F452EAE530A0931C9D228614A@TY3PR01MB11346.jpnprd01.prod.outlook.com>
+Date: Thu, 18 Sep 2025 14:54:58 +0200
+Message-ID: <87plbnhqe5.fsf@gnu.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,129 +69,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On the RZG2L platform, the advised
-TF-A (https://github.com/renesas-rz/rzg_trusted-firmware-a/tree/v2.5/rzg2l)
-does not pass any DTB blob to U-Boot.
 
-On the other hand, the RZG2L part of U-Boot expects a DTB to be passed.  It
-means that if one flashes the latest TF-A as well as the mainline U-Boot,
-it will crash trying to dereference the NULL DTB pointer before outputing
-anything, which is painful to debug.
+Hey,
 
-As the renesas_rzg2l_smarc_defconfig U-Boot configuration (the only RZG2L
-supported configuration) is anyway embedding only the
-renesas/r9a07g044l2-smarc.dts device-tree, it is fair to assume that we are
-booting from that platform.
+> Also, you need a patch to identify the device and pass it as blob
+> to the mainline u-boot
+>
+> On TF-A:
+> .ep_info.args.arg1 = (uintptr_t)fdt_blob,
+>
+> Also you should fill the memory blob(fdt_blob).
+>
+> Hope you can take over from here.
 
-Remove any DTB blob expectation and assume that we are booting from the
-platform we are compiling U-Boot for.
+Thanks Marek and Biju. The current state is still that people will take
+the forked Renesas TF-A, the mainline U-Boot with the
+renesas_rzg2l_smarc_defconfig configuration and expect things to work
+out of the box.
 
-Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
----
- arch/arm/mach-renesas/cpu_info-rzg2l.c | 25 ++--------------
- board/renesas/rzg2l/rzg2l.c            | 40 --------------------------
- 2 files changed, 2 insertions(+), 63 deletions(-)
+Currently, before figuring out that the TF-A needs to be patched
+manually, U-Boot is just crashing without outputing anything, which is
+painful to debug.
 
-diff --git a/arch/arm/mach-renesas/cpu_info-rzg2l.c b/arch/arm/mach-renesas/cpu_info-rzg2l.c
-index ab95ce76388..97e0eb419a4 100644
---- a/arch/arm/mach-renesas/cpu_info-rzg2l.c
-+++ b/arch/arm/mach-renesas/cpu_info-rzg2l.c
-@@ -10,9 +10,6 @@
- 
- #define SYSC_LSI_DEVID		0x11020A04
- 
--/* If the firmware passed a device tree, use it for soc identification. */
--extern u64 rcar_atf_boot_args[];
--
- /* CPU information table */
- struct tfa_info {
- 	const char *soc_name;
-@@ -24,32 +21,14 @@ static const struct tfa_info tfa_info[] = {
- 	{ "renesas,r9a07g044l2", "R9A07G044L", RENESAS_CPU_TYPE_R9A07G044L },
- };
- 
--static const struct tfa_info invalid_tfa_info = { NULL, "(invalid)", 0 };
--
--static const struct tfa_info *get_tfa_info(void)
--{
--	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
--
--	if (fdt_magic(atf_fdt_blob) == FDT_MAGIC) {
--		unsigned int i;
--		for (i = 0; i < ARRAY_SIZE(tfa_info); i++) {
--			if (!fdt_node_check_compatible(atf_fdt_blob, 0,
--						       tfa_info[i].soc_name))
--				return &tfa_info[i];
--		}
--	}
--
--	return &invalid_tfa_info;
--}
--
- const u8 *rzg_get_cpu_name(void)
- {
--	return get_tfa_info()->cpu_name;
-+	return tfa_info->cpu_name;
- }
- 
- u32 renesas_get_cpu_type(void)
- {
--	return get_tfa_info()->cpu_type;
-+	return tfa_info->cpu_type;
- }
- 
- u32 renesas_get_cpu_rev_integer(void)
-diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
-index 509c5dbb156..0bdf030eb15 100644
---- a/board/renesas/rzg2l/rzg2l.c
-+++ b/board/renesas/rzg2l/rzg2l.c
-@@ -7,46 +7,6 @@
- #include <fdtdec.h>
- #include <linux/libfdt.h>
- 
--#if IS_ENABLED(CONFIG_MULTI_DTB_FIT)
--/* If the firmware passed a device tree, use it for board identification. */
--extern u64 rcar_atf_boot_args[];
--
--static bool is_rzg2l_board(const char *board_name)
--{
--	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
--
--	return fdt_node_check_compatible(atf_fdt_blob, 0, board_name) == 0;
--}
--
--int board_fit_config_name_match(const char *name)
--{
--	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
--
--	if (fdt_magic(atf_fdt_blob) != FDT_MAGIC)
--		return -1;
--
--	if (is_rzg2l_board("renesas,r9a07g044l2"))
--		return strcmp(name, "r9a07g044l2-smarc");
--
--	return -1;
--}
--#endif
--
--static void apply_atf_overlay(void *fdt_blob)
--{
--	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
--
--	if (fdt_magic(atf_fdt_blob) == FDT_MAGIC)
--		fdt_overlay_apply_node(fdt_blob, 0, atf_fdt_blob, 0);
--}
--
--int fdtdec_board_setup(const void *fdt_blob)
--{
--	apply_atf_overlay((void *)fdt_blob);
--
--	return 0;
--}
--
- int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	return 0;
--- 
-2.49.0
+As the only RZG2L supported by U-Boot is the r9a07g044l2-smarc, and we
+are not receiving any blob from the TF-A, I think it is fair to assume
+that we are booting from the platform we are compiling U-Boot for.
 
+I have proposed a patch here:
+https://lists.denx.de/pipermail/u-boot/2025-September/598712.html
+
+Thanks,
+
+Mathieu
