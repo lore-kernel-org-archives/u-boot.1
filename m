@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6532CAC5A0
-	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 12:08:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2ECFCAC59A
+	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 12:09:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F8CD8323A;
-	Thu, 18 Sep 2025 14:08:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47ED78331F;
+	Thu, 18 Sep 2025 14:09:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1393E83314; Thu, 18 Sep 2025 14:08:25 +0200 (CEST)
+ id 2B45083323; Thu, 18 Sep 2025 14:09:12 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B7A98329B
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 14:08:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAA25832AD
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 14:09:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 58IC7jFw089950
+ by Atcsqr.andestech.com with ESMTPS id 58IC8V51090015
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 18 Sep 2025 20:07:45 +0800 (+08)
+ Thu, 18 Sep 2025 20:08:31 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 18 Sep
- 2025 20:07:45 +0800
-Date: Thu, 18 Sep 2025 20:07:41 +0800
+ 2025 20:08:31 +0800
+Date: Thu, 18 Sep 2025 20:08:26 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Yao Zi <ziyao@disroot.org>
 CC: Rick Chen <rick@andestech.com>, Tom Rini <trini@konsulko.com>, "Chia-Wei,
  Wang" <chiawei_wang@aspeedtech.com>,
  Simon Glass <sjg@chromium.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 2/3] configs: ibex-ast2700: Explicitly disable Zaamo
- and Zalrsc extension
-Message-ID: <aMv2AbX_L5_LPnHB@swlinux02>
+Subject: Re: [PATCH v2 3/3] riscv: Add a Zalrsc-only alternative for
+ synchronization in start.S
+Message-ID: <aMv2JMa_g_pvP6HO@swlinux02>
 References: <20250902081932.21103-1-ziyao@disroot.org>
- <20250902081932.21103-3-ziyao@disroot.org>
+ <20250902081932.21103-4-ziyao@disroot.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250902081932.21103-3-ziyao@disroot.org>
+In-Reply-To: <20250902081932.21103-4-ziyao@disroot.org>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 58IC7jFw089950
+X-MAIL: Atcsqr.andestech.com 58IC8V51090015
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,16 +70,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 02, 2025 at 08:19:31AM +0000, Yao Zi wrote:
-> This board supports neither Zaamo nor Zalrsc extension, thus we want to
-> build it without "a" specified in the ISA string passed to compiler in
-> case of misused A-extension instructions. With RISCV_ISA_ZAAMO and
-> RISCV_ISA_ZALRSC Kconfig options introduced, we must explicitly disable
-> both of them to achieve this.
+On Tue, Sep 02, 2025 at 08:19:32AM +0000, Yao Zi wrote:
+> Add an alternative implementation that use Zalrsc extension only for
+> HART lottery and SMP locking to support SMP on cores without "Zaamo"
+> extension available. The Zaamo implementation is still prioritized if
+> both of them are available, since it takes fewer instructions.
 > 
 > Signed-off-by: Yao Zi <ziyao@disroot.org>
 > ---
->  configs/ibex-ast2700_defconfig | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>  arch/riscv/cpu/start.S | 26 +++++++++++++++++++++++++-
+>  1 file changed, 25 insertions(+), 1 deletion(-)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
