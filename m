@@ -4,92 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 008D0CA1013
-	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 14:46:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE4ACAC59A
+	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 15:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46FF681E13;
-	Thu, 18 Sep 2025 16:46:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C710581E13;
+	Thu, 18 Sep 2025 17:05:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZF/z6E2x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oa3+8DyZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60EFF8309A; Thu, 18 Sep 2025 16:46:19 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 4B93182ADA; Thu, 18 Sep 2025 17:05:40 +0200 (CEST)
+Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
+ [IPv6:2607:f8b0:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 589DA80B9B
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 16:46:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7523F80B9B
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:05:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-26799bf6a2eso10677965ad.3
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 07:46:16 -0700 (PDT)
+Received: by mail-pg1-x531.google.com with SMTP id
+ 41be03b00d2f7-b4c1fc383eeso750403a12.1
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 08:05:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758206775; x=1758811575; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DkWzMDppI3P8BvLouJs+ECX/PPShDfnKr9VJXxdAOkY=;
- b=ZF/z6E2xNX5wfrAgP1s6H+uoHsdn1fou9n6Sv2+ZpXgPCrjjC9OZsObiaGtVkUCwAd
- i+J19U3OFkYJn+fjTFOj+xhpBx5omKaUFxeK/Q16bXwg1/4PPTOPdgKI6gl1D3B/lwNV
- 48FvcswoUx0uVTEAfrPlkjG4jdnHfk8saATKzpBYBJlTD2ToVy2MO4D0qAzfTIEYaBpC
- e18XXpZsxJUsjqt+k99g5e+iG5nWEwqn7Sla8osuzmWIiqrGzKqbscYbB+WwTzdOQv3F
- 4W8ANxq4kyMYzIMmSep3EC5yopjWtA9GbVN8MHK2/m3a+eBlf7/U9JrF1G18F9hQVu49
- 0y4g==
+ d=linaro.org; s=google; t=1758207936; x=1758812736; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=K/AUmY9mLHNPBXaus4TsM31G34aYZCW9i8lmY311XFk=;
+ b=oa3+8DyZgFn4m9S6W1XeEAvlj7XBvsoFZhjfgMBdzPv5oB1YnRulVNzQizI9wXFd0j
+ ryrJ6uDVmBICot3ZppbTolDv2z8qUGLJeC8PNOcPdRoOEyX9YtVB9KJ0tB9cydEuPTg+
+ E72bnNY/rkxb+ZWMcOhDGgYfP2u1DybbpourUk+oFaI6gKhudV3lvZq1rhr5ZL31fy2I
+ jikfwnVqc3EruC7cIt49YVyKCGriqNvfVVjsKsjHMEmrWcQU4E7ICSF2T78k/6e/pgks
+ nou78Q4OWsSopdgqztMB4N0NZCrXRe+93GAPWNNHQWBGTHFofD/Q92/oT3H5fcbUW3zq
+ QXew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758206775; x=1758811575;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DkWzMDppI3P8BvLouJs+ECX/PPShDfnKr9VJXxdAOkY=;
- b=t/gEOn/7Yper80SStiSx5WyyJ4FuuOPf6+MMPsSGV3wFTZe5ijaKgHEztgZVzIDprd
- 1nmEROrMH9R8p1l2zyWDAk9pJzSQAH2Aj3ciuO9xo8D9HqpqT7XeZc9/MjB7i69ykRcE
- 9h375RB4QEjFoubhOpOVcSEoKEPFaajGpX7lnkaGpQRWwYuTmkfNxnEzyBQufKtwfGVq
- dfqUuiGOQlEUrhLaXKp60cDQYl099IEBezedNHSVctCcVcKvM57rSfPuWsRpOhJb0Npn
- 0MWo3Bo1OVz4P633lbGE7bBy2pWcsHn4o+DX9hYrLZq1/05R79H6618aZJ2jx4JfFIIN
- Hf8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXtat0/aXLm0ynCX23YsYYhAM4osLmWD9FwAcIcwXg2ol7/J4CPrBpnr7mVdbc3jczQiziswYo=@lists.denx.de
-X-Gm-Message-State: AOJu0YylwRFI8BbIE+m4d8xBktD+87K9HdmaFHr2L9JYuHOZAU0unDVe
- njqK2F1E9zLfaq39JkE+h5DlpeliAhB6EQMZftJRjfoSFlGtvbJkCF2unwdpilOEmcwPKKXOb6w
- 7XaefKZlNs0/s/0KmSVRFHuy83VjCO4xLJ5sd5ab6MQ==
-X-Gm-Gg: ASbGncu2ymK3+RGfFFNIfrNcI1ImQgIhaIH+d9Q0y7mvMmJmg80f9E0QRFPdzUMFOu1
- 9Dhal9uGbFmtsuq/s/V0yIQhGvisWMKzeDxOzlsIvaHRGl+U+RHl9Vnq/jPCAeGwGfpM+wHi64d
- vtHew2+Iij5Tpe9ZQy+ozdGEuwS0i+mH7z/MkkjOkPt1jdE+CUSWRtO/Uq3evSqiIO3Rc3JXYey
- Gffh4HH4SXoq3bhqLbyXxbjdFbk
-X-Google-Smtp-Source: AGHT+IECB2MKR29fxzzIQgfjGX77Eily0yov+U90ymy5dOyNeAP1Io45NU+Tkyg2XYuaU9IMT8yIZQNHjZYUyF/QzFQ=
-X-Received: by 2002:a17:903:2448:b0:24c:a9c6:d193 with SMTP id
- d9443c01a7336-26811e8850dmr96665765ad.18.1758206774749; Thu, 18 Sep 2025
- 07:46:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758207936; x=1758812736;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=K/AUmY9mLHNPBXaus4TsM31G34aYZCW9i8lmY311XFk=;
+ b=O6LMXNNzqSXOzaYQbjYmXk3w+jxXse66PUGrj3kiOjq3KD6RbYf6OZIEyKsvj/O6UR
+ OT2VI0RH8L8Sqf/kJ1jWv16qfYAnl1PShrd/bkoy+5IaCZVJ0i2GGPAjjmYnZ1amxnvw
+ 5/F8HDTE0HzhoXthH4kMMopV5mjbtOP7sFvd/HTb60V27SBDRLmZQ3NJht39hZw6euZV
+ QI7ZM/IJ08v5avnIzXj3TZfs4ZVCV2O0b6UAwDpiQ4fxUhD+K0qAM6rm6jizvitICiDs
+ kuHNIFwZ7GKTnAlF6Fm1MxSDFcsKMuJTMKJNKhTESpq77nJgpvSWgqnqmsLsBLtREn0S
+ Y75Q==
+X-Gm-Message-State: AOJu0Yw7nOgZHCgAtkhhHctIEQ7Qw4INEJhH1KtQYyPf2Yg7sAu1IsGu
+ w7vuJPNo6BVKLrxpCbUYJbfVA2B5J86Jak3GelHqlhXCJRNnyF7ouwA+TlFX8ta0JPN7O5c6Z59
+ IYHs3sdqYYWKho05WdUzQYNLR8bQy83u5GJIhwnvnyQ==
+X-Gm-Gg: ASbGncvu3sDAfrYQpKoim5i079mRndRmTgfNg4AIowP8RvnNKlVEwnPTplsfmBdqp6Z
+ RAmBFlvNbxHcvYaSGRpqP2YGkhS70yefq9kciLLNRgIATc7nLe7s9B47oOR5b2pFAKfJ+ipO5Pc
+ H4DJhkPSgVPNm2F0LOYeK1stSbmy3L6VT+QO7Q9Rxdc8jex5/1lNS+4VHJqNodV6vKH7/cDgPKJ
+ suMJT3XWv539B98fQSdjILUkgdx
+X-Google-Smtp-Source: AGHT+IGBKQ4GMdV4LPacW5otkENpU5OWEYkd5PNwBEM4R2dOWKNKmy0HUSLVsHkxjJs0UrNRdpGZSVA/M6UD8LtU2JM=
+X-Received: by 2002:a17:902:f682:b0:269:aba0:f0a7 with SMTP id
+ d9443c01a7336-269aba0fe75mr13910545ad.2.1758207935608; Thu, 18 Sep 2025
+ 08:05:35 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250916161230.32140-1-raymond.mao@linaro.org>
- <20250916161230.32140-2-raymond.mao@linaro.org>
- <20250916182729.GX124814@bill-the-cat>
- <CAEfUkULE=tHe+hyerxBW5MRarO+JeJb59B-1voTFVjGmuPaidA@mail.gmail.com>
- <20250917154503.GL124814@bill-the-cat>
- <3D57BD7A-AE77-4240-89C1-AF2BDD979B64@gmx.de>
-In-Reply-To: <3D57BD7A-AE77-4240-89C1-AF2BDD979B64@gmx.de>
+References: <20250916161426.32259-1-raymond.mao@linaro.org>
+ <20250916161426.32259-4-raymond.mao@linaro.org>
+ <20250916182747.GA124814@bill-the-cat>
+ <CAEfUkUKX6zM+=R4s9UOQAmDho-V9UULvky0rG7H1CVj6uJCy9g@mail.gmail.com>
+ <20250917174612.GN124814@bill-the-cat>
+In-Reply-To: <20250917174612.GN124814@bill-the-cat>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 18 Sep 2025 10:46:04 -0400
-X-Gm-Features: AS18NWCzoAUPdGWYGmXS8UImV4EBucEMLRsi9c294JN64YmPEC3KLXjbQFE0x1M
-Message-ID: <CAEfUkUJsyJGWFHhOXbRN+vw8Jv6koa7_Zvnoz0+JJx7hsjsKZg@mail.gmail.com>
-Subject: Re: [PATCH u-boot-test-hooks 2/2] travis-ci: add config file for
- testing firmware handoff on qemu_arm64
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+Date: Thu, 18 Sep 2025 11:05:25 -0400
+X-Gm-Features: AS18NWC_oZL6lwrL97EiEItCs68lA0BQOQFgOVu0XwTRjVJJwOuUEiYnbU26jYE
+Message-ID: <CAEfUkUL_YzG41ta=2XRv_XWY8A43ZZ9aX3Fci6f9D0zjoDjwzw@mail.gmail.com>
+Subject: Re: [PATCH 3/5] pytest: add test script to validate Firmware Handoff
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>, 
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,136 +99,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Thu, 18 Sept 2025 at 06:44, Heinrich Schuchardt <xypron.glpk@gmx.de> wro=
-te:
+On Wed, 17 Sept 2025 at 13:46, Tom Rini <trini@konsulko.com> wrote:
 >
-> Am 17. September 2025 17:45:03 MESZ schrieb Tom Rini <trini@konsulko.com>=
-:
-> >On Wed, Sep 17, 2025 at 10:42:52AM -0400, Raymond Mao wrote:
-> >> Hi Tom,
-> >>
-> >> On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
-> >> >
-> >> > On Tue, Sep 16, 2025 at 09:12:25AM -0700, Raymond Mao wrote:
-> >> >
-> >> > > The existing 'conf.qemu_arm64_na' uses 'u-boot.bin' as bios, but f=
-or
-> >> > > the case of TF-A, 'u-boot.bin' is BL33 and the assembled 'flash.bi=
-n'
-> >> > > is the bios instead, which will be built and assembled at run-time
-> >> > > via a post-buildman script and copied to '/tmp'.
-> >> > >
-> >> > > Moreover, for running TF-A and OP-TEE on qemu, '-m 4G' and
-> >> > > 'virtualization=3Dfalse,secure=3Don' are required, and '-semihosti=
-ng'
-> >> > > should be replaced with its modern alias
-> >> > > '-semihosting-config enable=3Don,target=3Dnative'.
-> >> > >
-> >> > > Last, point to the new helper script 'swtpm-tfa'.
-> >> > >
-> >> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> >> >
-> >> > Lets fixup the current qemu_arm64 conf to have as much in common as
-> >> > possible (4G, modern semihosting flags, etc). Next:
-> >> >
-> >> > > ---
-> >> > >  .../conf.qemu_arm64_fw_handoff_tfa_optee      | 31 ++++++++++++++=
-+++++
-> >> > >  1 file changed, 31 insertions(+)
-> >> > >  create mode 100644 bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_o=
-ptee
-> >> > >
-> >> > > diff --git a/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee b/=
-bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
-> >> > > new file mode 100644
-> >> > > index 0000000..9aa6d3b
-> >> > > --- /dev/null
-> >> > > +++ b/bin/travis-ci/conf.qemu_arm64_fw_handoff_tfa_optee
-> >> > > @@ -0,0 +1,31 @@
-> >> > > +# Copyright (c) 2025 Linaro Limited
-> >> > > +# Author: Raymond Mao <raymond.mao@linaro.org>
-> >> > > +# Based on conf.qemu_arm64 which is
-> >> > > +# Copyright (c) 2017 Tuomas Tynkkynen. All rights reserved.
-> >> > > +#
-> >> > > +# Permission is hereby granted, free of charge, to any person obt=
-aining a
-> >> > > +# copy of this software and associated documentation files (the "=
-Software"),
-> >> > > +# to deal in the Software without restriction, including without =
-limitation
-> >> > > +# the rights to use, copy, modify, merge, publish, distribute, su=
-blicense,
-> >> > > +# and/or sell copies of the Software, and to permit persons to wh=
-om the
-> >> > > +# Software is furnished to do so, subject to the following condit=
-ions:
-> >> > > +#
-> >> > > +# The above copyright notice and this permission notice shall be =
-included in
-> >> > > +# all copies or substantial portions of the Software.
-> >> > > +#
-> >> > > +# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,=
- EXPRESS OR
-> >> > > +# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHAN=
-TABILITY,
-> >> > > +# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EV=
-ENT SHALL
-> >> > > +# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAG=
-ES OR OTHER
-> >> > > +# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,=
- ARISING
-> >> > > +# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR O=
-THER
-> >> > > +# DEALINGS IN THE SOFTWARE.
-> >> > > +
-> >> > > +console_impl=3Dqemu
-> >> > > +qemu_machine=3D"virt,virtualization=3Dfalse,secure=3Don"
-> >> > > +qemu_helper_script=3D"swtpm-tfa"
-> >> > > +qemu_binary=3D"qemu-system-aarch64"
-> >> > > +qemu_extra_args=3D"-m 4G -cpu cortex-a57 -nographic -netdev user,=
-id=3Dnet0,tftp=3D${UBOOT_TRAVIS_BUILD_DIR} -device e1000,netdev=3Dnet0 -dev=
-ice virtio-rng-pci -d unimp -semihosting-config enable=3Don,target=3Dnative=
- -chardev socket,id=3Dchrtpm,path=3D/tmp/tpm/swtpm-sock -tpmdev emulator,id=
-=3Dtpm0,chardev=3Dchrtpm -device tpm-tis-device,tpmdev=3Dtpm0"
-> >> >
-> >> > Can we line break this? Then make some functional groupings? Thanks.
-> >> >
-> >> I am thinking about to merge this script into the common one
-> >> "conf.qemu_arm64_na", but do you mind to add
-> >> "virtualization=3Dfalse,secure=3Don" as a common setting? even though =
-It
-> >> is only needed when running with TF-A/OP-TEE.
+> On Wed, Sep 17, 2025 at 11:54:08AM -0400, Raymond Mao wrote:
+> > Hi Tom,
+> >
+> > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Sep 16, 2025 at 09:14:19AM -0700, Raymond Mao wrote:
+> > > > Add test cases to validate FDT and TPM eventlog handoff from TF-A
+> > > > and OP-TEE via bloblist.
+> > > >
+> > > > For FDT, the nodes 'reserved-memory' and 'firmware' appended by
+> > > > OP-TEE indicates a successful handoff.
+> > > >
+> > > > For TPM eventlog, the events 'SECURE_RT_EL3', 'SECURE_RT_EL1_OPTEE'
+> > > > and 'SECURE_RT_EL1_OPTEE_EXTRA1' created by TF-A indicates a
+> > > > successful handoff.
+> > > >
+> > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > ---
+> > > >  test/py/tests/test_fw_handoff.py | 94 ++++++++++++++++++++++++++++++++
+> > > >  1 file changed, 94 insertions(+)
+> > > >  create mode 100644 test/py/tests/test_fw_handoff.py
+> > > >
+> > > > diff --git a/test/py/tests/test_fw_handoff.py b/test/py/tests/test_fw_handoff.py
+> > > > new file mode 100644
+> > > > index 00000000000..4cdf51a4375
+> > > > --- /dev/null
+> > > > +++ b/test/py/tests/test_fw_handoff.py
+> > > > @@ -0,0 +1,94 @@
+> > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > +#
+> > > > +# Copyright (c) 2025 Linaro Limited
+> > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > > > +#
+> > > > +# Validate Firmware Handoff from TF-A and OP-TEE
+> > > > +
+> > > > +import pytest
+> > > > +import re
+> > > > +
+> > > > +def _norm_ws(s: str) -> str:
+> > > > +    """Normalize whitespace for robust comparisons."""
+> > > > +    return re.sub(r"\s+", " ", s).strip()
+> > > > +
+> > > > +@pytest.mark.buildconfigspec("bloblist")
+> > > > +@pytest.mark.buildconfigspec("cmd_bloblist")
+> > > > +@pytest.mark.buildconfigspec("of_control")
+> > > > +@pytest.mark.buildconfigspec("cmd_fdt")
+> > > > +def test_fw_handoff_dt(ubman):
+> > > > +    """Validate FDT handoff via bloblist."""
+> > > > +
+> > > > +    if (ubman.config.board_type != 'qemu_arm64' or
+> > > > +        ubman.config.board_identity != 'fw_handoff_tfa_optee'):
+> > > > +        pytest.skip("Test only for qemu_arm64 with ID fw_handoff_tfa_optee")
+> > >
+> > > This (and the other tests) should be more pytest.mark.buildconfigspec
+> > > but for TARGET_QEMU_ARM_64BIT and then relevant TF-A/OP-TEE options. And
+> > > even then, possibly just the relevant TF-A/OP-TEE options as it should
+> > > work on other platforms too, yes? Thanks.
+> > >
+> > Just like what you commented to my test-hooks patches, if we can merge
+> > and use a general conf qemu_arm64_na, the check for the board ID is no
+> > longer needed.
+> > But still this is for qemu_arm64 only, since the TF-A driver is
+> > platform-dependent, thus the feature currently only works on a few
+> > platforms.
 >
-> Main U-Boot is meant to be running in EL2. So why should we start in EL3 =
-without TF-A?
+> My point is that if a platform enables the correct U-Boot options (and
+> only would if the rest of the firmware stack supported it, yes?) then
+> this test should also run correctly. Right?
 >
-> Why do you want to disable virtualization?
->
-1. That was my original motivation to make a separate config file for
-introducing "secure=3Don", since it might lead to unpredictable
-behaviours when without TF-A, even tests done normally.
-2. You are right, virtualization=3Dfalse can be removed.
+In U-Boot, Firmware Handoff is sharing the BLOBLIST kconfig, and with
+two prerequisites for a "handoff via bloblist" happen:
+1. BLOBLIST is selected.
+2. Registers are carrying a bloblist compliant to Firmware Handoff
+plus expected conventions.
 
-But then we need to make a decision from 2 options:
-1. Use one set of config/helper scripts for all qemu_arm64 cases,
-ignoring the unpredictable behaviour caused by starting from EL3/EL2.
-2. Keep the current patch - use separate sets of config/helper to keep
-the concept more clearer. (qemu_helper_script can be just one by using
-args, but does not make too much sense when we still have two config
-files).
-
-@Tom Rini @Heinrich Schuchardt What are your thoughts?
+But a platform selecting BLOBLIST does not necessarily enable Firmware
+Handoff - Simon designed the bloblist with other purposes other than
+handoff.
 
 Regards,
 Raymond
 
-> Best regards
->
-> Heinrich
->
-> >
-> >So long as everything works in CI for the other cases, yes, that's fine.
-> >
->
+> --
+> Tom
