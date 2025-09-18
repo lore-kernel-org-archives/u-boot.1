@@ -4,69 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E19FFCAC59A
-	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 11:24:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4136CAC5A8
+	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 11:55:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ABEC81E13;
-	Thu, 18 Sep 2025 13:24:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F7F480B9B;
+	Thu, 18 Sep 2025 13:55:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JHjt46Eh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KaOgCa83";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32D3182C84; Thu, 18 Sep 2025 13:24:31 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0B6F80107
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 13:24:28 +0200 (CEST)
+ id 661EC81E13; Thu, 18 Sep 2025 13:55:32 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C95380107
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 13:55:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58IBORwZ1834684
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 06:24:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758194667;
- bh=O7PZSS9OW3V5BTJWtEdCx6bjC/CrMm3Qk+whzJUyQ20=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=JHjt46Eh6WESi1MfYVKHtCUnHNilej7SEYtVRJTILSc2Bxwwq4RspNGDkMDmxCp0e
- KVq7LaeqSNv9NCLkfPb+No1WaLL69WkhMdjmGJrMNkh/Xihbz5x8wdSTUxVvuY79XK
- k5KDuFRxWQHkc7x2eFT27jlxT4F5lWsTmuZKLEXA=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58IBORd51510559
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 06:24:27 -0500
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 18
- Sep 2025 06:24:26 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 18 Sep 2025 06:24:26 -0500
-Received: from [172.24.233.249] (ula0502350.dhcp.ti.com [172.24.233.249])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58IBON7u497651;
- Thu, 18 Sep 2025 06:24:24 -0500
-Message-ID: <83e63fd0-3abc-4c10-ae4b-d9af6a4593b3@ti.com>
-Date: Thu, 18 Sep 2025 16:54:23 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-71d5fb5e34cso8865717b3.0
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 04:55:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1758196528; x=1758801328; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9gxRhFkhqXSyWYrgq/2pd3b+LqLeJZ71u0mdoLhdJcw=;
+ b=KaOgCa83E6gkPmoUKVg0j7ReLHPhKiOjuhsda20wxUt1AZGiZA1KujD4kj5WFZXkcI
+ hnPoJFcL69NnSpn6vaSeffW3t6BPTN5qZPz0acZeJnTUzym5z/DRrs39ccDbgJUAWVTL
+ K5FwXZmEhssxPtASzP/ZeQTTnDWWEbT+XuzK9Q7viJpC260VbH7QFnotAc9dfIyTexBb
+ lUX8WJ1DoknIBCZgbLziA2vYKxKwQ8NKwIZbPDaL6IpgGDMajJh25J+hEa3EJeVoHrjn
+ wvWpXLFtiIefa++4DUVMSPpg4T/nDfTgWnhhQDKbIc066K8HnZGh11d7RRN3SMRnaIn6
+ cwdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758196528; x=1758801328;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9gxRhFkhqXSyWYrgq/2pd3b+LqLeJZ71u0mdoLhdJcw=;
+ b=ESWg2frfg2nyJuAf2aq+/+q86vznJsISUQ4TOOf8tHEwsnwdNl/Jd3cz+uRMNr/mpY
+ Dx8nz7pjC+NOO8YiEuQZbABrP8abvWgok2WCFujqNSMl7hWZM4fvG7ISLE7qsHpZoZeb
+ 728byC3YuBsQCARS+IHVQ4lcTvwOyIzk1KSReiX7j0qUcon1AP1r1DC3w1I5bt1FhyS2
+ JRP77vW3XbbqJsGw0X+Js2khyE6K10q+zqVG9csaGgpKjqmFNCykYeNXE0b/bo9qwOLW
+ jLBjAuQwNI6LvQg2TatvUTVkokQrH4+vfYnPOh2z8hY8DwnazmIQFxK/ijrc4tlbb8nD
+ nLqg==
+X-Gm-Message-State: AOJu0YyNJQ4OOt9lo9O18AxOjFVLtTJBsh/WRBP5q3LK3DhBVTamxciH
+ 635l+JnE3q4qKqQPcLZH8dvfcsbIlxsWdDKcyyzZgCjznf29uhrRNJaQPoQ7oLGfWAq0YQvfCWu
+ 6J4b5hB+i34x0exWDffMRTQX0VvtgzFM20Qa/mHeelw==
+X-Gm-Gg: ASbGncsb6uinx6edAa7eQ0efCC0Ml1OeVnqSVBgUSbP/lUbTw7tlb3h0hljGPqtdiU6
+ CM27zLt1JsO6DdA6QfTMpU/414F+X69MGf1FwHclL16GlXT/w6jtBJRUIPU/yZCgG9vB4vWJtIh
+ d25VOhn0DBqZkwgifMkA5k7iBDGB+bhEoLkqxGg0LZI/w58rqeKrLfPYRF4qOCV4z/0HCkc+rRG
+ V55EKkWTPlQFSYcsRI0Xw05NlpG4ENvMDztaKuDSIxSdU+UwyAH4ybhfx3POAOWfpjRCnD4yGtT
+ 5z5Cob6VEPv037J3yWSKQfMF5VB9RQZku/J0eR4T9LIbVGkzhxfmtYksS5TOZEMIq33gs2LmHei
+ a7gii
+X-Google-Smtp-Source: AGHT+IEqc5FdDLP4N9Joay/J3iX1/Zkx9jzuhJwv1Z6JGlnpdUjRmy7Qle+jtmNpvqDSkPCUBauuY1WtnKTbIKGv2xQ=
+X-Received: by 2002:a05:690c:9203:b0:733:d35b:d7f4 with SMTP id
+ 00721157ae682-739708b4be5mr22587557b3.21.1758196528047; Thu, 18 Sep 2025
+ 04:55:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 3/5] arch: mach-k3: Introduce support for AM62D2-EVM
-To: Andrew Davis <afd@ti.com>
-CC: <u-boot@lists.denx.de>, <bb@ti.com>, <khasim@ti.com>, <v-singh1@ti.com>,
- <anshuld@ti.com>, "Raghavendra, Vignesh" <vigneshr@ti.com>, "Bajjuri,
- Praneeth" <praneeth@ti.com>, "Menon, Nishanth" <nm@ti.com>
-References: <20250909053429.444854-1-p-bhagat@ti.com>
- <20250909053429.444854-4-p-bhagat@ti.com>
- <26171a54-6ee7-4292-b287-6a63c1ed0184@ti.com>
-Content-Language: en-US
-From: Paresh Bhagat <p-bhagat@ti.com>
-In-Reply-To: <26171a54-6ee7-4292-b287-6a63c1ed0184@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250916112205.238811-1-anshuld@ti.com>
+In-Reply-To: <20250916112205.238811-1-anshuld@ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 18 Sep 2025 14:54:50 +0300
+X-Gm-Features: AS18NWCLKBvuNP1fLwsuxZLgzvR_u6HnlwwTHLsYnHzoD4i24wTGnsFtYoXcX3I
+Message-ID: <CAC_iWjJcH1F-=7kgZDEs9z+2Y_j6dOMM7sMaXCMtAEqyTi14dQ@mail.gmail.com>
+Subject: Re: [PATCH -next v1] arm: armv8: remove redundant definition of
+ mmu_status
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, d-gole@ti.com, b-padhi@ti.com, vigneshr@ti.com, 
+ trini@konsulko.com, nm@ti.com, robertcnelson@gmail.com, w.egorov@phytec.de, 
+ francesco.dolcini@toradex.com, ggiordano@phytec.com, m-chawdhry@ti.com, 
+ afd@ti.com, bb@ti.com, u-kumar1@ti.com, devarsht@ti.com, 
+ patrice.chotard@foss.st.com, patrick.delaunay@foss.st.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,70 +97,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
-
-
-On 09/09/25 19:24, Andrew Davis wrote:
-> On 9/9/25 12:34 AM, Paresh Bhagat wrote:
->> Introduce the basic functions and definitions needed to properly
+On Tue, 16 Sept 2025 at 14:22, Anshul Dalal <anshuld@ti.com> wrote:
 >
-> What "functions"?
-
-
-Thanks i will improve on the description.
+> mmu_status is used in io memcpy functions to prevent accesses to non
+> 8-byte aligned addresses when the mmu is disabled. Though there is a
+> redundant definition enabled when icaches is turned off by setting
+> SYS_ICACHE_OFF.
 >
->> initialize TI's AM62D2-EVM.
->>
->> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
->> ---
->>   arch/arm/mach-k3/am62ax/Kconfig | 25 +++++++++++++++++++++++++
->>   1 file changed, 25 insertions(+)
->>
->> diff --git a/arch/arm/mach-k3/am62ax/Kconfig 
->> b/arch/arm/mach-k3/am62ax/Kconfig
->> index f8cdcdca57a..e7ab299fe5d 100644
->> --- a/arch/arm/mach-k3/am62ax/Kconfig
->> +++ b/arch/arm/mach-k3/am62ax/Kconfig
->> @@ -50,9 +50,34 @@ config TARGET_PHYCORE_AM62AX_R5
->>       select BINMAN
->>       imply SYS_K3_SPL_ATF
->>   +config TARGET_AM62D2_A53_EVM
->> +    bool "TI K3 based AM62D2 EVM running on A53"
->> +    select ARM64
->> +    select BINMAN
->> +    imply BOARD
->> +    imply SPL_BOARD
->> +    imply TI_I2C_BOARD_DETECT
->> +
->> +config TARGET_AM62D2_R5_EVM
->> +    bool "TI K3 based AM62D2 EVM running on R5"
->> +    select CPU_V7R
->> +    select SYS_THUMB_BUILD
->> +    select K3_LOAD_SYSFW
->> +    select RAM
->> +    select SPL_RAM
->> +    select K3_DDRSS
->> +    select BINMAN
->> +    imply SYS_K3_SPL_ATF
->> +    imply TI_I2C_BOARD_DETECT
->> +
->>   endchoice
->>   +if TARGET_AM62A7_A53_EVM || TARGET_AM62A7_R5_EVM
+> This patch removes the redundant definition, allowing mmu_status to
+> properly report the status regardless of config settings. This shouldn't
+> be a problem since access to non 8-byte aligned data can be done
+> irrespective of icache state.
 >
-> The Phycore boards are not our EVMs, you have them guarded by this
-> new if block. Why have these if block at all? The Kconfigs below
-> have the if checks already inside.
+> Fixes: 268f6ac1f95c ("arm64: Update memcpy_{from, to}io() helpers")
 >
-> Andrew
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
 
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Thanks i missed it. will correct this in next revision.
+>  arch/arm/cpu/armv8/cache_v8.c | 15 +++++----------
+>  1 file changed, 5 insertions(+), 10 deletions(-)
 >
->>   source "board/ti/am62ax/Kconfig"
->>   source "board/phytec/phycore_am62ax/Kconfig"
->> +endif
->>   +if TARGET_AM62D2_A53_EVM || TARGET_AM62D2_R5_EVM
->> +source "board/ti/am62dx/Kconfig"
->> +endif
->>   endif
+> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> index 1dcb6007475..74814601483 100644
+> --- a/arch/arm/cpu/armv8/cache_v8.c
+> +++ b/arch/arm/cpu/armv8/cache_v8.c
+> @@ -1184,11 +1184,6 @@ int icache_status(void)
+>         return (get_sctlr() & CR_I) != 0;
+>  }
+>
+> -int mmu_status(void)
+> -{
+> -       return (get_sctlr() & CR_M) != 0;
+> -}
+> -
+>  void invalidate_icache_all(void)
+>  {
+>         __asm_invalidate_icache_all();
+> @@ -1210,17 +1205,17 @@ int icache_status(void)
+>         return 0;
+>  }
+>
+> -int mmu_status(void)
+> -{
+> -       return 0;
+> -}
+> -
+>  void invalidate_icache_all(void)
+>  {
+>  }
+>
+>  #endif /* !CONFIG_IS_ENABLED(SYS_ICACHE_OFF) */
+>
+> +int mmu_status(void)
+> +{
+> +       return (get_sctlr() & CR_M) != 0;
+> +}
+> +
+>  /*
+>   * Enable dCache & iCache, whether cache is actually enabled
+>   * depend on CONFIG_SYS_DCACHE_OFF and CONFIG_SYS_ICACHE_OFF
+> --
+> 2.51.0
 >
