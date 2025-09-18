@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A10CBCAC597
-	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 20:46:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 480E4CAC597
+	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 22:44:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F376581E13;
-	Thu, 18 Sep 2025 22:46:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 54153829E7;
+	Fri, 19 Sep 2025 00:44:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HPnAwXY1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wHZ4Qrdn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE4558206E; Thu, 18 Sep 2025 22:46:02 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 0FDE582C84; Fri, 19 Sep 2025 00:44:29 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D7E080B9B
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 22:46:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4CC5800D7
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 00:44:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-331e80c3985so1550942fac.3
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 13:46:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-b54f57eb7c9so858008a12.3
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 15:44:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758228359; x=1758833159; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UJqX6c0vhsaoyPX8gc3P8P0YJC6TK1+dm3iymdih8mM=;
- b=HPnAwXY1ifCTE4Rld7CCts0bwgigGazsc+P5Qi/cE7JWvCsgCvjsNvSLSMkn4qlOuN
- M7np7Tz6FqAUy0785krkrrhv1nCcdwYJWfA3SmypRxCWlob8yd93h8kSNXVumd4oObL/
- ki8Pq8N6TMfl36uaLcEY3YZZqNRkmPbMHg9x4=
+ d=linaro.org; s=google; t=1758235464; x=1758840264; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=F0rB3Ar4+luMEc6UBZsOFlc2NUdsx//bcfVko4qwWB4=;
+ b=wHZ4QrdnXkx9Dljs5b2sj0GpI990/ApB0rbepbQ22Ip7eIkfKqv8z3rcjSvyGQ2JYx
+ CDw4MmHL8Iks6yMFT9960L6Wy+SWokx1m8LjFaYj5cqzRectqQXnN6/OXnVdpTFNG8/k
+ mlR7I1iccR5imfltqOiyNm2tNy7d9y8QXnHqdB6xr7CdrJLmmWE9UjD2QxKqZX3TxHZV
+ VQ9OcVxSxidXA50x4WWu4gYavg74H8y4xBZLPJvvpHeFjJOysY479rNrvWfnUnPByWIG
+ YMRVnWx0LZknUzv4gQBtDr9xC6G2hdzt7oQmKogDN4ImhTLPMc04mVKx1+zn3ggoE2u8
+ hkHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758228359; x=1758833159;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UJqX6c0vhsaoyPX8gc3P8P0YJC6TK1+dm3iymdih8mM=;
- b=LGeJxgb7xpSEORzhmrnfgPQdnl35daqwO862eSwsY51DehRYhePAil/gqTknFySAiX
- 3Q1EtlAj+Fo3GCkGCm2FOBBexkE78vMqMStng0DOdafuPIxZpssvROlIGi6mpwceTtzG
- tup1Nc3mWentC7occyPyOnpYVob3gUs1C8C/TLYA8sHfXAFd9qCecytbuHB8lebnON2w
- WTOsxMb+S3oAdHQSteCghn8tHFneJ+WqZexgujM34d7GIylDc2Td3Fwcdv9qvB+P0g99
- RAKZAXOv3B/l9ZdEXGmGK2fUvBQog7sorR/RW/AvDsTeRbLmCtM63CRfIpZPlqb9p8GC
- HDlg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU5Rk9sE4TItgeylIVhG2XoM65/4zu0oq9e+juvKqUtnACeQWEeod+UeU5eByJ1znWSs13cFNY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzF+a90aNFxHbAlJMBVpgSplQmh+Z8eVu8PpPCWjIeq8cdcnXfu
- k/zjjHjY4DSqBAx8oiMCCNKYwudbGWOEKC3OZaqlxra7I6iAVaFEmPQN8TT+FtUaP7HDwsXLANl
- ypf3DJVU=
-X-Gm-Gg: ASbGnctRrFDeCmp7RVYeBG1RWAFMjyQvel3Am67czs3q2wPq0RUemhPqGg50ywtxW2v
- TTryeBedFwHSSGnEurRsCHONqhMNRdhsQqavPkEFKTru8s/NSBCWZsx3a/+85WR8+h+yGXgnFoE
- Bff5VM7RF2TB7b4PsMHOnspcMonCiRC9AY1JY24K4ltQwRyr0pJcNvsfZ4KX5fl2xYdQrzzlaIE
- ugghEjZLb0YdLVQCv6pBvrI1/mQmzLFEJ6xExDKfgUfKXdmsWlgEfJoVqUhhOSymTI1ZmsArbGZ
- tzOnBSPueZU3hSs2ls07oi6SqD5Jha/pXIMMVesp0nQc6Q0uvQcx5oD0ubZCQO3XrYxW2dIZwN6
- ZpsudbyI2g5OgcU0hLH7Sz3lfz36vzbcq+EPAdipfKCjb4vgt3tgDVbq/bygyTpV57dFiwSxOoL
- A=
-X-Google-Smtp-Source: AGHT+IEj0tSNQCY2N6dofqVeFg4sqrRZMhMDC8/3hwUBH+M5eVYHRmGB/r2JVKs2ku0H8vOK4ztecA==
-X-Received: by 2002:a05:6871:2316:b0:30b:cce6:a5a1 with SMTP id
- 586e51a60fabf-33bb619310cmr680877fac.35.1758228359344; 
- Thu, 18 Sep 2025 13:45:59 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-336e637cad3sm1847365fac.29.2025.09.18.13.45.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Sep 2025 13:45:58 -0700 (PDT)
-Date: Thu, 18 Sep 2025 14:45:56 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Debbie Horsfall <debbie.horsfall@arm.com>, u-boot@lists.denx.de,
- fenghua@phytium.com.cn, linus.walleij@linaro.org,
- Peter.Hoyes@arm.com, liviu.dudau@foss.arm.com
-Subject: Re: [PATCH v2 1/2] vexpress63: Set the DM_RNG property
-Message-ID: <20250918204556.GQ124814@bill-the-cat>
-References: <20250917162222.1061111-1-debbie.horsfall@arm.com>
- <20250918111934.0b0a9ec0@donnerap.manchester.arm.com>
+ d=1e100.net; s=20230601; t=1758235464; x=1758840264;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=F0rB3Ar4+luMEc6UBZsOFlc2NUdsx//bcfVko4qwWB4=;
+ b=HY+Yq+0nXI7NpdY4bYs4zLWTpjNo4D20HXC737h8PBFyFF4f7PIe01QRJl18KJmQcK
+ fxWG40jpBWBu3Pve56cWPjJJSaRNqGOpaSu2b/ajBC6RxkRWJogg/DcLa+wtUb+OYjIo
+ +PcM7zsq6/vV9Mbns5OUxJbEaVjK2hiy74vy/F8xZdP2U75u+FRj4Kz1P8lrLFy4JgKA
+ aPuB6hCYV667lwcNPcf0Dbf0wPZQ7F//ql2/nrgaMHobKIYdvbu7tC42IsHm/DVfEI/M
+ GKqxA9EZZTuYKTyJHHY9rO8OfaEukK0DwaJM9cUH+/+HVY8Pg6+q5BANxd8H36lQx+k6
+ RzKw==
+X-Gm-Message-State: AOJu0Yx/GqdICjHJns/KO6SJzl3a3iHo3q4zYzH3t7ra48h1I1M/0dh9
+ CWgcgJvTtmhnszyRnDR78e/5FcP55VdiRG0thzelra4HKQoieGGeAVa212AAcP4Rz1As7DBJRAD
+ i6G+MAFOxO2KlzKClesbc4JeB97/huP95hmvWHDvOkg==
+X-Gm-Gg: ASbGncvZOqALUHyLISh5klR0ScQ6nVWhgg/oRGZla+HRMxU95LTu9v8szb5NhLOveNc
+ IC/mQqsMHCFETx1JpSCphMj2YmJYfzgFnpZKL+LMIdIgZJyQVcCd/2AQomccPv8/VTeVP6wqZUW
+ 68mNcPjkf1Pg3p0m/cbZiLn4bGxHMn0yCp73lBk5CZYOQRNw5p/NBjl3YOstHRXpyHLy3RniSex
+ 0McM12f8Da83mVsR+jznWtF7Qyh
+X-Google-Smtp-Source: AGHT+IFfu3k8/vJNN9x8tA2PD2SiChe02Pc2EtTOTX6Nz4Y0IA1b4KXssYULplaJb5rWDdrU6a0rzPmCCu/Gu0w2R2o=
+X-Received: by 2002:a17:90b:3fd0:b0:330:852e:2bcc with SMTP id
+ 98e67ed59e1d1-3309834e1f2mr1051955a91.21.1758235464081; Thu, 18 Sep 2025
+ 15:44:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OJr5FAe6x0tijIRG"
-Content-Disposition: inline
-In-Reply-To: <20250918111934.0b0a9ec0@donnerap.manchester.arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250916161426.32259-1-raymond.mao@linaro.org>
+ <20250916161426.32259-4-raymond.mao@linaro.org>
+ <20250916182747.GA124814@bill-the-cat>
+ <CAEfUkUKX6zM+=R4s9UOQAmDho-V9UULvky0rG7H1CVj6uJCy9g@mail.gmail.com>
+ <20250917174612.GN124814@bill-the-cat>
+ <CAEfUkUL_YzG41ta=2XRv_XWY8A43ZZ9aX3Fci6f9D0zjoDjwzw@mail.gmail.com>
+ <20250918200919.GO124814@bill-the-cat>
+In-Reply-To: <20250918200919.GO124814@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Thu, 18 Sep 2025 18:44:14 -0400
+X-Gm-Features: AS18NWBTOjQ66y-UtcehMz8pStQLgGf6VwS_m0IPEZXtslpcuVVNhIfuU_hqkEs
+Message-ID: <CAEfUkULbRavxp+xd8TDwihRk6tVGxicgd0oeDxs9wZSdudBzNA@mail.gmail.com>
+Subject: Re: [PATCH 3/5] pytest: add test script to validate Firmware Handoff
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
+ Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,77 +101,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---OJr5FAe6x0tijIRG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 18 Sept 2025 at 16:09, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Sep 18, 2025 at 11:05:25AM -0400, Raymond Mao wrote:
+> > Hi Tom,
+> >
+> > On Wed, 17 Sept 2025 at 13:46, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Wed, Sep 17, 2025 at 11:54:08AM -0400, Raymond Mao wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Sep 16, 2025 at 09:14:19AM -0700, Raymond Mao wrote:
+> > > > > > Add test cases to validate FDT and TPM eventlog handoff from TF-A
+> > > > > > and OP-TEE via bloblist.
+> > > > > >
+> > > > > > For FDT, the nodes 'reserved-memory' and 'firmware' appended by
+> > > > > > OP-TEE indicates a successful handoff.
+> > > > > >
+> > > > > > For TPM eventlog, the events 'SECURE_RT_EL3', 'SECURE_RT_EL1_OPTEE'
+> > > > > > and 'SECURE_RT_EL1_OPTEE_EXTRA1' created by TF-A indicates a
+> > > > > > successful handoff.
+> > > > > >
+> > > > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > > > ---
+> > > > > >  test/py/tests/test_fw_handoff.py | 94 ++++++++++++++++++++++++++++++++
+> > > > > >  1 file changed, 94 insertions(+)
+> > > > > >  create mode 100644 test/py/tests/test_fw_handoff.py
+> > > > > >
+> > > > > > diff --git a/test/py/tests/test_fw_handoff.py b/test/py/tests/test_fw_handoff.py
+> > > > > > new file mode 100644
+> > > > > > index 00000000000..4cdf51a4375
+> > > > > > --- /dev/null
+> > > > > > +++ b/test/py/tests/test_fw_handoff.py
+> > > > > > @@ -0,0 +1,94 @@
+> > > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > > +#
+> > > > > > +# Copyright (c) 2025 Linaro Limited
+> > > > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > > > > > +#
+> > > > > > +# Validate Firmware Handoff from TF-A and OP-TEE
+> > > > > > +
+> > > > > > +import pytest
+> > > > > > +import re
+> > > > > > +
+> > > > > > +def _norm_ws(s: str) -> str:
+> > > > > > +    """Normalize whitespace for robust comparisons."""
+> > > > > > +    return re.sub(r"\s+", " ", s).strip()
+> > > > > > +
+> > > > > > +@pytest.mark.buildconfigspec("bloblist")
+> > > > > > +@pytest.mark.buildconfigspec("cmd_bloblist")
+> > > > > > +@pytest.mark.buildconfigspec("of_control")
+> > > > > > +@pytest.mark.buildconfigspec("cmd_fdt")
+> > > > > > +def test_fw_handoff_dt(ubman):
+> > > > > > +    """Validate FDT handoff via bloblist."""
+> > > > > > +
+> > > > > > +    if (ubman.config.board_type != 'qemu_arm64' or
+> > > > > > +        ubman.config.board_identity != 'fw_handoff_tfa_optee'):
+> > > > > > +        pytest.skip("Test only for qemu_arm64 with ID fw_handoff_tfa_optee")
+> > > > >
+> > > > > This (and the other tests) should be more pytest.mark.buildconfigspec
+> > > > > but for TARGET_QEMU_ARM_64BIT and then relevant TF-A/OP-TEE options. And
+> > > > > even then, possibly just the relevant TF-A/OP-TEE options as it should
+> > > > > work on other platforms too, yes? Thanks.
+> > > > >
+> > > > Just like what you commented to my test-hooks patches, if we can merge
+> > > > and use a general conf qemu_arm64_na, the check for the board ID is no
+> > > > longer needed.
+> > > > But still this is for qemu_arm64 only, since the TF-A driver is
+> > > > platform-dependent, thus the feature currently only works on a few
+> > > > platforms.
+> > >
+> > > My point is that if a platform enables the correct U-Boot options (and
+> > > only would if the rest of the firmware stack supported it, yes?) then
+> > > this test should also run correctly. Right?
+> > >
+> > In U-Boot, Firmware Handoff is sharing the BLOBLIST kconfig, and with
+> > two prerequisites for a "handoff via bloblist" happen:
+> > 1. BLOBLIST is selected.
+> > 2. Registers are carrying a bloblist compliant to Firmware Handoff
+> > plus expected conventions.
+> >
+> > But a platform selecting BLOBLIST does not necessarily enable Firmware
+> > Handoff - Simon designed the bloblist with other purposes other than
+> > handoff.
+>
+> Ah, right, OK. So we need to make the test opt-in (via the board env
+> u_boot_boardenv_...) instead then. We can't hard-code a board ID in to
+> the tests, that's not portable.
+>
+Well, I can create a 'u_boot_boardenv_qemu_arm64_fw_handoff_tfa_optee.py' with:
+'env__firmware_handoff_enabled = True'.
+Then in the pytest get it via 'ubman.config.env.get()'.
 
-On Thu, Sep 18, 2025 at 11:19:34AM +0100, Andre Przywara wrote:
-> On Wed, 17 Sep 2025 17:22:21 +0100
-> Debbie Horsfall <debbie.horsfall@arm.com> wrote:
->=20
-> Hi Debbie,
->=20
-> thanks for the changes, looks good now.
->=20
-> > [PATCH v2 1/2] vexpress63: Set the DM_RNG property
->=20
->                          ^^
-> It's nice to see new platforms supported ;-)
->=20
-> Tom, can you please fix this up when merging? The series looks good to go
-> now from my perspective.
+Thanks.
+Regards,
+Raymond
 
-I shall endeavour to not forget.
-
->=20
-> > Enable the DM_RNG virtio random number generator driver in order to
-> > consume entropy within U-Boot. This allows U-Boot to inject entropy to =
-the
-> > kernel via UEFI, so the kernel can use that early, for instance for
-> > address layout randomisation, or when the kernel does not provide an
-> > entropy driver itself.
-> >=20
-> > Signed-off-by: Debbie Horsfall <debbie.horsfall@arm.com>
->=20
-> Reviewed-by: Andre Przywara <andre.przywara@arm.com>
->=20
-> Cheers,
-> Andre
->=20
-> > ---
-> >  board/armltd/vexpress64/Kconfig | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >=20
-> > diff --git a/board/armltd/vexpress64/Kconfig b/board/armltd/vexpress64/=
-Kconfig
-> > index 7e8709444fe..610ab0ac37d 100644
-> > --- a/board/armltd/vexpress64/Kconfig
-> > +++ b/board/armltd/vexpress64/Kconfig
-> > @@ -21,6 +21,8 @@ config VEXPRESS64_BASE_MODEL
-> >  	imply EFI_SET_TIME if DM_RTC
-> >  	select LINUX_KERNEL_IMAGE_HEADER
-> >  	select POSITION_INDEPENDENT
-> > +	imply DM_RNG
-> > +	imply RNG_ARM_RNDR
-> > =20
-> >  choice
-> >  	prompt "VExpress64 board variant"
->=20
-
---=20
-Tom
-
---OJr5FAe6x0tijIRG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMxveAAKCRAr4qD1Cr/k
-CsL2AP9c7deoYnTGe0xVu3KLoXaCIk3armAGJ9TRYrBJ89zrGgD/fggzWkLxUI45
-9ErgM28Ps+kx1un4GKiZB01cJABa+AE=
-=idvP
------END PGP SIGNATURE-----
-
---OJr5FAe6x0tijIRG--
+> --
+> Tom
