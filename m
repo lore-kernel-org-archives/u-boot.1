@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF49CAC5A0
-	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 13:18:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EA1DCAC59A
+	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 13:51:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 122BC8004F;
-	Thu, 18 Sep 2025 15:18:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 69B8780B9B;
+	Thu, 18 Sep 2025 15:51:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lR2lWRum";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QMSZ2F1v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E34738309A; Thu, 18 Sep 2025 15:18:54 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id C60B681E13; Thu, 18 Sep 2025 15:51:05 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 475D68003E
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 15:18:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19AFF8004F
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 15:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-bhagat@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58IDIoXD017908
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 08:18:50 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58IDox2i494573;
+ Thu, 18 Sep 2025 08:50:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758201531;
- bh=QRSUoDZZ4zXzdv2qQxFcyFFnlERE2uxTaeHRY4iJA9A=;
+ s=ti-com-17Q1; t=1758203459;
+ bh=TaW+ZIIzaiXkGM89whu3jm/56VprJpaJ//PlDtmstkE=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=lR2lWRumek2hMTPbZMJZWEkcymBi/wBJsaAxOvPehnFsperixAUg6fvAR6XYP72BX
- fHYysEbk1iOGjWOb7HUh/Y4evJBdJvng49IPdeDLWrIR+8smAw4vbdUZpK/eA1pYw7
- v7zT2d3GdswCh2lm+YtHw6/cFlsKc3hHkiHfRDMw=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58IDIovr2376591
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL)
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 08:18:50 -0500
-Received: from DLEE207.ent.ti.com (157.170.170.95) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ b=QMSZ2F1vLKhs+m+geAgfSFV8gpjuBGWjBYB24HUerm3kqVaKt9lINW3zctBys6VVl
+ Qny+dVTKc5h2OPPzMGhDZQrATyXI35K8wA9+x/qMszDJBJsiGH7X7i0S+30qddjpXG
+ 1hp33n4jx51PrJUFJ/2lcYrUlbWRVKVphuGGTZ1s=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58IDox8V2151211
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 18 Sep 2025 08:50:59 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 18
- Sep 2025 08:18:50 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 08:50:59 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 18 Sep 2025 08:18:50 -0500
+ Transport; Thu, 18 Sep 2025 08:50:59 -0500
 Received: from [172.24.233.249] (ula0502350.dhcp.ti.com [172.24.233.249])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58IDIlOh641157;
- Thu, 18 Sep 2025 08:18:47 -0500
-Message-ID: <8ad2c8b4-e4e4-48c4-9502-964705aa33c4@ti.com>
-Date: Thu, 18 Sep 2025 18:48:46 +0530
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58IDotSa965912;
+ Thu, 18 Sep 2025 08:50:56 -0500
+Message-ID: <50a2750f-39fb-4e3d-85fb-a365792ac2b0@ti.com>
+Date: Thu, 18 Sep 2025 19:20:55 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 4/5] arm: dts: Introduce AM62D2-EVM dtbs
-To: Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <bb@ti.com>, <khasim@ti.com>, <v-singh1@ti.com>,
- <afd@ti.com>, "Raghavendra, Vignesh" <vigneshr@ti.com>, "Bajjuri, Praneeth"
- <praneeth@ti.com>, "Menon, Nishanth" <nm@ti.com>
+Subject: Re: [RFC PATCH v2 0/5] Add initial support for AM62D2-EVM
+To: Tom Rini <trini@konsulko.com>
+CC: <vigneshr@ti.com>, <praneeth@ti.com>, <nm@ti.com>, <u-boot@lists.denx.de>, 
+ <bb@ti.com>, <khasim@ti.com>, <v-singh1@ti.com>, <afd@ti.com>,
+ <anshuld@ti.com>
 References: <20250909053429.444854-1-p-bhagat@ti.com>
- <20250909053429.444854-5-p-bhagat@ti.com> <DCOUCTBZ6JGI.QNZEO4LYIKR6@ti.com>
+ <20250909220312.GD124814@bill-the-cat>
 Content-Language: en-US
 From: Paresh Bhagat <p-bhagat@ti.com>
-In-Reply-To: <DCOUCTBZ6JGI.QNZEO4LYIKR6@ti.com>
+In-Reply-To: <20250909220312.GD124814@bill-the-cat>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -82,58 +82,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul,
+Hi Tom,
 
 
-On 10/09/25 10:08, Anshul Dalal wrote:
->
-> On Tue Sep 9, 2025 at 11:04 AM IST, Paresh Bhagat wrote:
->> Introduce the base dts files needed for u-boot or to augment the linux
->> dtbs for use in the u-boot-spl and u-boot binaries. Support added for
->> HS-SE and HS-FS boot binaries for AM62dx via binman.
->>
->> Signed-off-by: Paresh Bhagat <p-bhagat@ti.com>
->> ---
+On 10/09/25 03:33, Tom Rini wrote:
+> On Tue, Sep 09, 2025 at 11:04:24AM +0530, Paresh Bhagat wrote:
+>> The AM62D2 SoC, part of the K3 architecture, is built for high-performance
+>> DSP tasks in automotive audio, pro audio, radar, sonar, and medical
+>> imaging. It features up to four Cortex-A53 cores (1.4GHz), two Cortex-R5F
+>> cores, and a C7x DSP with 2 TOPS MMA. Key interfaces include multi-channel
+>> McASP audio, TSN-capable Gigabit Ethernet, and a range of peripherals
+>> (UART, SPI, I2C, CAN, USB, eMMC/SD, OSPI, CSI). It supports LPDDR4/DDR4,
+>> secure boot with hardware security, and low-power modes with
+>> CAN/GPIO/UART wakeup.
+> [snip]
 >>   arch/arm/dts/Makefile                        |    2 +
 >>   arch/arm/dts/k3-am62d-ddr-1866mhz-32bit.dtsi | 2802 ++++++++++++++++++
 >>   arch/arm/dts/k3-am62d-evm-binman.dtsi        |  262 ++
 >>   arch/arm/dts/k3-am62d2-evm-u-boot.dtsi       |   14 +
 >>   arch/arm/dts/k3-am62d2-r5-evm.dts            |   82 +
->>   5 files changed, 3162 insertions(+)
+>>   arch/arm/mach-k3/am62ax/Kconfig              |   25 +
+>>   board/ti/am62dx/Kconfig                      |   26 +
+>>   board/ti/am62dx/MAINTAINERS                  |    8 +
+>>   board/ti/am62dx/Makefile                     |    7 +
+>>   board/ti/am62dx/am62dx.env                   |   21 +
+>>   board/ti/am62dx/board-cfg.yaml               |   36 +
+>>   board/ti/am62dx/evm.c                        |   37 +
+>>   board/ti/am62dx/pm-cfg.yaml                  |   12 +
+>>   board/ti/am62dx/rm-cfg.yaml                  | 1047 +++++++
+>>   board/ti/am62dx/sec-cfg.yaml                 |  379 +++
+>>   board/ti/am62dx/tifs-rm-cfg.yaml             |  903 ++++++
+>>   configs/am62dx_evm_a53_defconfig             |   22 +
+>>   configs/am62dx_evm_r5_defconfig              |   20 +
+>>   18 files changed, 5705 insertions(+)
 >>   create mode 100644 arch/arm/dts/k3-am62d-ddr-1866mhz-32bit.dtsi
 >>   create mode 100644 arch/arm/dts/k3-am62d-evm-binman.dtsi
 >>   create mode 100644 arch/arm/dts/k3-am62d2-evm-u-boot.dtsi
 >>   create mode 100644 arch/arm/dts/k3-am62d2-r5-evm.dts
->>
-> [snip]
->> diff --git a/arch/arm/dts/k3-am62d2-evm-u-boot.dtsi b/arch/arm/dts/k3-am62d2-evm-u-boot.dtsi
->> new file mode 100644
->> index 00000000000..d1b17e8f83f
->> --- /dev/null
->> +++ b/arch/arm/dts/k3-am62d2-evm-u-boot.dtsi
->> @@ -0,0 +1,14 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +/*
->> + * Common AM62D EVM dts file for SPLs
->> + * Copyright (C) 2025 Texas Instruments Incorporated - https://www.ti.com/
->> + */
->> +
->> +#include "k3-am62d-evm-binman.dtsi"
->> +
->> +/ {
->> +	chosen {
->> +		stdout-path = "serial2:115200n8";
->> +		tick-timer = &main_timer0;
->> +	};
->> +};
-Since serial_present is enabled, it checks for stdout in the specified 
-format.
-Also we need to define timer property for r5, so does not make sense to 
-move it to kernel dts.
+>>   create mode 100644 board/ti/am62dx/Kconfig
+>>   create mode 100644 board/ti/am62dx/MAINTAINERS
+>>   create mode 100644 board/ti/am62dx/Makefile
+>>   create mode 100644 board/ti/am62dx/am62dx.env
+>>   create mode 100644 board/ti/am62dx/board-cfg.yaml
+>>   create mode 100644 board/ti/am62dx/evm.c
+>>   create mode 100644 board/ti/am62dx/pm-cfg.yaml
+>>   create mode 100644 board/ti/am62dx/rm-cfg.yaml
+>>   create mode 100644 board/ti/am62dx/sec-cfg.yaml
+>>   create mode 100644 board/ti/am62dx/tifs-rm-cfg.yaml
+>>   create mode 100644 configs/am62dx_evm_a53_defconfig
+>>   create mode 100644 configs/am62dx_evm_r5_defconfig
+> This isn't architecture and board, it's just a board, it should be a
+> single patch. In that some of these yaml files are big, it would be good
+> to figure out as a generic problem how to reduce that if possible (I
+> don't know if it is).
 
 
-> The chosen node is already part of the kernel dt for the AM62d, why not
-> move this addition to the kernel dt directly?
+Thanks for the review. Will take into account in the next revision.
+In case of am62d, I could reuse the same yaml file as am62a. That should 
+reduce the patch size at-least.
+For a generic solution across boards, we need to have a right usage 
+model something that will need more discussion. Same with the case of 
+ddr config here.
 >
-> Regards,
-> Anshul
