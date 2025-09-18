@@ -4,85 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE4ACAC59A
-	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 15:05:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B226FCA1013
+	for <u-boot@archiver.kernel.org>; Thu, 18 Sep 2025 15:06:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C710581E13;
-	Thu, 18 Sep 2025 17:05:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 474CF81E13;
+	Thu, 18 Sep 2025 17:06:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oa3+8DyZ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="elLvVA39";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B93182ADA; Thu, 18 Sep 2025 17:05:40 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 989F08319C; Thu, 18 Sep 2025 17:06:53 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7523F80B9B
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:05:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8474F80B9B
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:06:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-b4c1fc383eeso750403a12.1
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 08:05:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758207936; x=1758812736; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=K/AUmY9mLHNPBXaus4TsM31G34aYZCW9i8lmY311XFk=;
- b=oa3+8DyZgFn4m9S6W1XeEAvlj7XBvsoFZhjfgMBdzPv5oB1YnRulVNzQizI9wXFd0j
- ryrJ6uDVmBICot3ZppbTolDv2z8qUGLJeC8PNOcPdRoOEyX9YtVB9KJ0tB9cydEuPTg+
- E72bnNY/rkxb+ZWMcOhDGgYfP2u1DybbpourUk+oFaI6gKhudV3lvZq1rhr5ZL31fy2I
- jikfwnVqc3EruC7cIt49YVyKCGriqNvfVVjsKsjHMEmrWcQU4E7ICSF2T78k/6e/pgks
- nou78Q4OWsSopdgqztMB4N0NZCrXRe+93GAPWNNHQWBGTHFofD/Q92/oT3H5fcbUW3zq
- QXew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758207936; x=1758812736;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=K/AUmY9mLHNPBXaus4TsM31G34aYZCW9i8lmY311XFk=;
- b=O6LMXNNzqSXOzaYQbjYmXk3w+jxXse66PUGrj3kiOjq3KD6RbYf6OZIEyKsvj/O6UR
- OT2VI0RH8L8Sqf/kJ1jWv16qfYAnl1PShrd/bkoy+5IaCZVJ0i2GGPAjjmYnZ1amxnvw
- 5/F8HDTE0HzhoXthH4kMMopV5mjbtOP7sFvd/HTb60V27SBDRLmZQ3NJht39hZw6euZV
- QI7ZM/IJ08v5avnIzXj3TZfs4ZVCV2O0b6UAwDpiQ4fxUhD+K0qAM6rm6jizvitICiDs
- kuHNIFwZ7GKTnAlF6Fm1MxSDFcsKMuJTMKJNKhTESpq77nJgpvSWgqnqmsLsBLtREn0S
- Y75Q==
-X-Gm-Message-State: AOJu0Yw7nOgZHCgAtkhhHctIEQ7Qw4INEJhH1KtQYyPf2Yg7sAu1IsGu
- w7vuJPNo6BVKLrxpCbUYJbfVA2B5J86Jak3GelHqlhXCJRNnyF7ouwA+TlFX8ta0JPN7O5c6Z59
- IYHs3sdqYYWKho05WdUzQYNLR8bQy83u5GJIhwnvnyQ==
-X-Gm-Gg: ASbGncvu3sDAfrYQpKoim5i079mRndRmTgfNg4AIowP8RvnNKlVEwnPTplsfmBdqp6Z
- RAmBFlvNbxHcvYaSGRpqP2YGkhS70yefq9kciLLNRgIATc7nLe7s9B47oOR5b2pFAKfJ+ipO5Pc
- H4DJhkPSgVPNm2F0LOYeK1stSbmy3L6VT+QO7Q9Rxdc8jex5/1lNS+4VHJqNodV6vKH7/cDgPKJ
- suMJT3XWv539B98fQSdjILUkgdx
-X-Google-Smtp-Source: AGHT+IGBKQ4GMdV4LPacW5otkENpU5OWEYkd5PNwBEM4R2dOWKNKmy0HUSLVsHkxjJs0UrNRdpGZSVA/M6UD8LtU2JM=
-X-Received: by 2002:a17:902:f682:b0:269:aba0:f0a7 with SMTP id
- d9443c01a7336-269aba0fe75mr13910545ad.2.1758207935608; Thu, 18 Sep 2025
- 08:05:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cSJrT4RYHz9v5D;
+ Thu, 18 Sep 2025 17:06:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758208009;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Q4mW5kBJz03x/CcfyYb8DcttFUpWr5pNz5QDTwbr99g=;
+ b=elLvVA39Q9m5oVf096I0D+ZAOTzlmzBoZj3qYG9CE4liSgBMeoQQ5Y0MDpsp9j/ubYqZv7
+ mRztt5wkObJAZcn8Ke7rcfBAknYDawZsqdyRFQbHQTcq7t8umXWbCXAKzvneTKLCBKAL+R
+ wHMag+VmP2fAPRK/LdaRqoytFiFdmu5sAvG+Z2j3EDF9tJ2TeJLK7GCgymVdFetWCVYSWL
+ cSJJK904CvnMjZLd4QcwoDY7BPQzNIHdHcoWuQymuJxfM6lGkMAXdqvVA5HBb5NiOh9tpY
+ 8yNyE1exNqy2o3l1JRfEREbdDV4O4dRw76nKgfCvL+IR5XtVVYwu8jlGYBa90g==
+Message-ID: <e66af909-d82b-4f4e-aa41-99a043abee76@mailbox.org>
+Date: Thu, 18 Sep 2025 17:06:46 +0200
 MIME-Version: 1.0
-References: <20250916161426.32259-1-raymond.mao@linaro.org>
- <20250916161426.32259-4-raymond.mao@linaro.org>
- <20250916182747.GA124814@bill-the-cat>
- <CAEfUkUKX6zM+=R4s9UOQAmDho-V9UULvky0rG7H1CVj6uJCy9g@mail.gmail.com>
- <20250917174612.GN124814@bill-the-cat>
-In-Reply-To: <20250917174612.GN124814@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Thu, 18 Sep 2025 11:05:25 -0400
-X-Gm-Features: AS18NWC_oZL6lwrL97EiEItCs68lA0BQOQFgOVu0XwTRjVJJwOuUEiYnbU26jYE
-Message-ID: <CAEfUkUL_YzG41ta=2XRv_XWY8A43ZZ9aX3Fci6f9D0zjoDjwzw@mail.gmail.com>
-Subject: Re: [PATCH 3/5] pytest: add test script to validate Firmware Handoff
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] board: rzg2l: Do not expect a DTB blob from the TF-A.
+To: Mathieu Othacehe <othacehe@gnu.org>
+Cc: anton.reding@landisgyr.com, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Tom Rini <trini@konsulko.com>, Paul Barker <paul@pbarker.dev>,
+ Peng Fan <peng.fan@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ u-boot@lists.denx.de, Biju Das <biju.das.jz@bp.renesas.com>,
+ Chris Paterson <Chris.Paterson2@renesas.com>
+References: <20250918124827.5577-1-othacehe@gnu.org>
+ <173f12da-c201-4272-83a1-f70f2d4ca47b@mailbox.org> <87cy7nhlk1.fsf@gnu.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <87cy7nhlk1.fsf@gnu.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 9994bb32e019b55c311
+X-MBO-RS-META: hy9cdr85fzobpzznfwx8kafnkzub5q43
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,91 +80,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 9/18/25 4:39 PM, Mathieu Othacehe wrote:
 
-On Wed, 17 Sept 2025 at 13:46, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Sep 17, 2025 at 11:54:08AM -0400, Raymond Mao wrote:
-> > Hi Tom,
-> >
-> > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Sep 16, 2025 at 09:14:19AM -0700, Raymond Mao wrote:
-> > > > Add test cases to validate FDT and TPM eventlog handoff from TF-A
-> > > > and OP-TEE via bloblist.
-> > > >
-> > > > For FDT, the nodes 'reserved-memory' and 'firmware' appended by
-> > > > OP-TEE indicates a successful handoff.
-> > > >
-> > > > For TPM eventlog, the events 'SECURE_RT_EL3', 'SECURE_RT_EL1_OPTEE'
-> > > > and 'SECURE_RT_EL1_OPTEE_EXTRA1' created by TF-A indicates a
-> > > > successful handoff.
-> > > >
-> > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > > > ---
-> > > >  test/py/tests/test_fw_handoff.py | 94 ++++++++++++++++++++++++++++++++
-> > > >  1 file changed, 94 insertions(+)
-> > > >  create mode 100644 test/py/tests/test_fw_handoff.py
-> > > >
-> > > > diff --git a/test/py/tests/test_fw_handoff.py b/test/py/tests/test_fw_handoff.py
-> > > > new file mode 100644
-> > > > index 00000000000..4cdf51a4375
-> > > > --- /dev/null
-> > > > +++ b/test/py/tests/test_fw_handoff.py
-> > > > @@ -0,0 +1,94 @@
-> > > > +# SPDX-License-Identifier: GPL-2.0+
-> > > > +#
-> > > > +# Copyright (c) 2025 Linaro Limited
-> > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
-> > > > +#
-> > > > +# Validate Firmware Handoff from TF-A and OP-TEE
-> > > > +
-> > > > +import pytest
-> > > > +import re
-> > > > +
-> > > > +def _norm_ws(s: str) -> str:
-> > > > +    """Normalize whitespace for robust comparisons."""
-> > > > +    return re.sub(r"\s+", " ", s).strip()
-> > > > +
-> > > > +@pytest.mark.buildconfigspec("bloblist")
-> > > > +@pytest.mark.buildconfigspec("cmd_bloblist")
-> > > > +@pytest.mark.buildconfigspec("of_control")
-> > > > +@pytest.mark.buildconfigspec("cmd_fdt")
-> > > > +def test_fw_handoff_dt(ubman):
-> > > > +    """Validate FDT handoff via bloblist."""
-> > > > +
-> > > > +    if (ubman.config.board_type != 'qemu_arm64' or
-> > > > +        ubman.config.board_identity != 'fw_handoff_tfa_optee'):
-> > > > +        pytest.skip("Test only for qemu_arm64 with ID fw_handoff_tfa_optee")
-> > >
-> > > This (and the other tests) should be more pytest.mark.buildconfigspec
-> > > but for TARGET_QEMU_ARM_64BIT and then relevant TF-A/OP-TEE options. And
-> > > even then, possibly just the relevant TF-A/OP-TEE options as it should
-> > > work on other platforms too, yes? Thanks.
-> > >
-> > Just like what you commented to my test-hooks patches, if we can merge
-> > and use a general conf qemu_arm64_na, the check for the board ID is no
-> > longer needed.
-> > But still this is for qemu_arm64 only, since the TF-A driver is
-> > platform-dependent, thus the feature currently only works on a few
-> > platforms.
->
-> My point is that if a platform enables the correct U-Boot options (and
-> only would if the rest of the firmware stack supported it, yes?) then
-> this test should also run correctly. Right?
->
-In U-Boot, Firmware Handoff is sharing the BLOBLIST kconfig, and with
-two prerequisites for a "handoff via bloblist" happen:
-1. BLOBLIST is selected.
-2. Registers are carrying a bloblist compliant to Firmware Handoff
-plus expected conventions.
+Hello Mathieu,
 
-But a platform selecting BLOBLIST does not necessarily enable Firmware
-Handoff - Simon designed the bloblist with other purposes other than
-handoff.
+>> magic validity first. Is the magic actually valid in your fail case?
+> 
+> So to clarify the situation, the mainline TF-A does not have RZG2L
+> support. So the only one available out there is the forked Reneasas one
+> that I have mentioned up in the thread.
+> 
+> Now, the mainline U-Boot is doing:
+> 
+> --8<---------------cut here---------------start------------->8---
+> 	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
+> 
+> 	if (fdt_magic(atf_fdt_blob) != FDT_MAGIC)
+> --8<---------------cut here---------------end--------------->8---
+> 
+> unconditionally, with rcar_atf_boot_args[1] being NULL as no arguments
+> are passed by the forked Reneasas TF-A fork to U-Boot.
 
-Regards,
-Raymond
+Ah, thank you for clarification, now it makes sense.
 
-> --
-> Tom
+> I could test for NULL pointers as well, but I thought that getting rid
+> of that piece of code made more sense as there are no TF-As out there
+> passing such arguments.
+
+Hopefully the RZG2L upstream TFA is coming. When it does, it will likely 
+pass the DT which contains various reserved-memory {} nodes to U-Boot.
+
+Until then, I think check for params that are passed in being 0 is the 
+right future-proof fix.
+
+> If you think that it will be better to take the problem the other way
+> around and modify the forked TF-A to pass that argument that also makes
+> sense to me. Picking one of the two solutions would allow us to have
+> something working out of the box.
+
+No, because we cannot depend on the fact that users will update both TFA 
+and U-Boot, they can update U-Boot and keep old TFA.
+
+>> Also, enable CONFIG_DEBUG_UART in your U-Boot config, then you will get very
+>> early UART output capabilities, it works even before DT is used.
+> 
+> Noted, thanks :)
+You're welcome.
