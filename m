@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D95CAC59A
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 06:40:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB1C4CAC592
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 06:40:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 282B48329B;
-	Fri, 19 Sep 2025 08:40:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49F8C83281;
+	Fri, 19 Sep 2025 08:40:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="pBzJPH4z";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="TEZrhkf1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D021D83314; Fri, 19 Sep 2025 08:40:04 +0200 (CEST)
-Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on2070f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::70f])
+ id DCAE98323A; Fri, 19 Sep 2025 08:40:04 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2071c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::71c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C9F48329F
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 08:40:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 459CA83281
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 08:40:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GXmmaJwmyVQLwg8RIcKAzZJxbFrCoiAUi45wfKpliaYUv6Dgi7QnWnKLnK5QNipCjqb9jOETwIr5eYeEXm5XbvIClVCQUpnVOTTFRgt+AxO8gj8p5ZtBt6ENlwG3tXk8JTkOuFow4EEFlqwmldZEMn+6pla1SyWcvrJIQ3gsxLpE0ndlC0qybo/QhoZ3mlZsf1RrqjuFI7KKozUO0sL5ons89IYFWrJcwNx4LDrPnswpNSBIunZ1/iFfxpgr9DRdhcntEFHh2iWucoh3U1eUaUNMwnxw0TlP6OhVgaXCYyTOmq4QeGu6huxQNITS/u/MNCld6rxdzRE2EeLTNVnFJQ==
+ b=Q90lCVNabdS8RorzpEeo15GQsIy4Q1GubO6JSjZCrMst+gDqWVfXxMFWJ1oa0O7CwUF+KlqA2h4dvhG+q3gAyTeuF0pBeYXoFsUITIAHjO9Awa4Wh45EMRZSqynpYozbVArHL7srOCbY5l6dfT3PrHF/8l+W6gpNBHE+V494qIF4Wep3PJCmxnGovSVPhVvJ7PelsBrY3+50zmK1qpgURcsqbS+7oy6JTvXkjeIADNuftGVtnVd8oAHnzESDJdpBHKZK/NeQTatJ7XmTbly5gzgC4IRGnvh6aSVOgS0iVJRxQalZI1k0uCPpKFgUwaYfT//C0zZkO12B40g+B8Wv1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yTuOqMQFFxe8hKjK2TBu7/cZoQ3nF6Es1ql065NtQBc=;
- b=Nu0a12j9Uq7P5SxVN/aqyGxe/xMckcKVMGESM3fH/QZ0AjcHj7zYafJfGlkb2Pt0UXhDX4WkPN+TriiF7zwrPmyOpR0FZNP2ldTfO9whUn7g9yMHYypGR0eAJdzM2dWnt54cKtohOOia0HA/Mgr2s4/jyg/3+qAUfW15/rQw719ZYGpi6Ia3s//jIb6ogaMesAmgo0PHbWEY9pAPaTNDh9WokuROaB/AQlq3xWvVAa+Tg87Ipr3SAQcZYTc8DXDAigpg0x4rdQKQN2SQ3ENR8vVNpR8/abeb3b731dex3jroy0W2TbUbVBec3p2VdL4bZoCmPf+v/5OXUjhYeWUkTQ==
+ bh=FwcQKO1szCkxEAG5vmJ2ZgFl/atfPuFAICYcL3nVIyc=;
+ b=KXFzWyCvMVTK+FB6pZvaKVFD4B8wHblTbyxMdW/ja7f41Q4SUwWsCCDYIwFYi+Do/c9FfdK8sFj6kiyN4dwWBlc2EwfVcnjrSrqcReBq664DuRB946eCFlkUvUTOLKmCNy8FO5zso1AJeP9bifWBPs//1Y0kkiHeKxo8lhIt1x+ID5i4NHklDWJgwtVq1sWFMDhkuT2cH/YOZUXs+tl9yHjPcggfkdONu+14nKkYOjTyVtFw4g64nBn4sJSi8qa+MFp51OpMa/P+WuV6zaS5JXy/Fgv8vhGQ2ihMtfd97b9FDvXm9SSj/PFgRdxx/3a8SZbOXJwfQHHzxvwem6AdXw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yTuOqMQFFxe8hKjK2TBu7/cZoQ3nF6Es1ql065NtQBc=;
- b=pBzJPH4zRJvxgzbJ/UuWuodz5vroFqd723PCkfbpKjVoX3L7j0gH/oAv7S4WOv1csmG1pTOOFyovDDR19xx4rjg9ILDVDbpl8MeE7W5QrZEsqXEw5H4AMjQYrGZ9kqpBRDTvn10D7X/50+OaEtk86kQDbb0E7/cHE8bN6uzNT/ct6sHm5hiNko8+Ttufzd7AEAJVC2BP+8tgYH+yIjt1+SXp1sXJM/As+myw4+XronTWToZctEKvEqZWM7CGT6doUv0ehoyM8UTbq4b1dzpZhwJ6/ze5MhZx08WqzoCItbGMDSeaYEHoERqt8W2b6Rjwh8pOOwZeklsIl2nvwWiIRg==
-Received: from AM6PR04CA0015.eurprd04.prod.outlook.com (2603:10a6:20b:92::28)
- by DB4P195MB1894.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:379::18) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=FwcQKO1szCkxEAG5vmJ2ZgFl/atfPuFAICYcL3nVIyc=;
+ b=TEZrhkf1/MsietW9/jdnSTbrIsQB6kdFQB75OIM/UUgtoDuafc23Iv1qX70vF/TWIp4I1NsqG5t/8bmO1awcdznUBx99hvpsEWRQS0aUNHfCVSKYzQWlW7JeEZ1wWSXAbs3KSwUMksMV0xe0m5cUhFgSWAdgb6JkX8jXg0luE3qhO/e8i/rkG4fgtdBXS1Yc8dVyeFHpGwgv90W++NwM+9McE8okGlDd8aSXkcZkV8r2K+W9ZUPF1X+d6orHEEyYNN5seEw1sh55+t6I+qjwFpuYZ2TPHTVo2sfE0fbnFjrdpFE1+G2qgTJKF1ASTF6UP9afu51Awqlyhs6dZJEgqg==
+Received: from AM6PR04CA0016.eurprd04.prod.outlook.com (2603:10a6:20b:92::29)
+ by VI0P195MB2713.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:2cc::19)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.13; Fri, 19 Sep
- 2025 06:39:58 +0000
+ 2025 06:39:57 +0000
 Received: from AM4PEPF00025F9A.EURPRD83.prod.outlook.com
- (2603:10a6:20b:92:cafe::45) by AM6PR04CA0015.outlook.office365.com
- (2603:10a6:20b:92::28) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.14 via Frontend Transport; Fri,
+ (2603:10a6:20b:92:cafe::41) by AM6PR04CA0016.outlook.office365.com
+ (2603:10a6:20b:92::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.16 via Frontend Transport; Fri,
  19 Sep 2025 06:39:57 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
@@ -65,7 +65,7 @@ Received: from Diagnostix.phytec.de (91.26.50.189) by
 Received: from Postix.phytec.de (172.25.0.11) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.58; Fri, 19 Sep
- 2025 08:39:57 +0200
+ 2025 08:39:56 +0200
 Received: from phytec.de (172.25.0.51) by Postix.phytec.de (172.25.0.11) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Fri, 19 Sep
@@ -74,12 +74,10 @@ From: Wadim Egorov <w.egorov@phytec.de>
 To: <trini@konsulko.com>, <ggiordano@phytec.com>, <d.schultz@phytec.de>,
  <bb@ti.com>
 CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-Subject: [PATCH 1/2] board: phytec: phycore_am6xx: Update scriptaddr
-Date: Fri, 19 Sep 2025 08:39:47 +0200
-Message-ID: <20250919063948.3093358-2-w.egorov@phytec.de>
+Subject: [PATCH 0/2] Fix boot w/ scriptaddr & minor newline issue
+Date: Fri, 19 Sep 2025 08:39:46 +0200
+Message-ID: <20250919063948.3093358-1-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250919063948.3093358-1-w.egorov@phytec.de>
-References: <20250919063948.3093358-1-w.egorov@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -88,52 +86,52 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Postix.phytec.de
  (172.25.0.11)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM4PEPF00025F9A:EE_|DB4P195MB1894:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8d811b50-a6f9-4468-cc9d-08ddf74759e9
+X-MS-TrafficTypeDiagnostic: AM4PEPF00025F9A:EE_|VI0P195MB2713:EE_
+X-MS-Office365-Filtering-Correlation-Id: 18842f95-aa4b-4413-2406-08ddf747597e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|1800799024|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?KF7PyEbU+1WNtskEv4MB2nS/VnyUrGjsd5yN8uZcAHwQZjJKc6ssO7VYeZH0?=
- =?us-ascii?Q?5kGmEFOkTiV+hol2gUN9VU5+ng2Zn4IkLnaEowCo9EQEJ9Hiw1jbfB8mF5SN?=
- =?us-ascii?Q?giYTHVoF8wmm05wXrWcOTOKH0AshvDTQ4YN1HLYf2DKMxen8j1UxxYlJSZDi?=
- =?us-ascii?Q?N4K8HXr3FzRkGp3HBs2BbhRVLFcT+qEQ416b/h37Z3H457Mzzak7wx9+xoiV?=
- =?us-ascii?Q?Ep+SQ7XesJgKiVQ+IVbrTNBtKRNpsTe/dGjS1b/CZR1DgprGIs18t4gJlS3Y?=
- =?us-ascii?Q?+d7Dj8ecEMt0cY7DBYjI4+qYaLfinHR006xLklkvNcHHHu/RYFvzOZHSbR+G?=
- =?us-ascii?Q?c3hkzHNc/LxKUGR0Q+FsTttdbDI4dN3HziLVgTC8nlVTynP/uYe4Mg1l/bOK?=
- =?us-ascii?Q?K0MrXrsKmMeHlJ6D7V30Ev3KJ02phbLKwkY3QmDxLbuDQR9QKKO2OUcjlRtq?=
- =?us-ascii?Q?SL/kburzO2T8FaTUgD4fgl1FqSY0bMTifH3nDjaDZxf3DocY8cYnqeYBTbpw?=
- =?us-ascii?Q?drVMI/+16iP1doWmqZRJoQgMUouJ7cNz4qn+b7ir9rHgkYgoC7grJ3WqQ8W5?=
- =?us-ascii?Q?kQPWTQAOXUBB1q10+QoKWk3yc+2jRSRykZ8C/zpBNBdAfuH8Mexh/fRi5lsF?=
- =?us-ascii?Q?0+PNSMTGsnzQY8BShXWv+3LuQuNCOc1XiCUEYvxlcyTef5MoRFH4KJLtyrFW?=
- =?us-ascii?Q?Ev6gbfuXBtnhYL1H1oAs6MmtC96sxrZcg314JVaDPa7QsNe7UvnGojukeUze?=
- =?us-ascii?Q?AJmYoZuXN9TrVFa1Y5UNQOpiUuRstV0JF2SP2TS+fVpiRLYUIKKj0in2vkDP?=
- =?us-ascii?Q?04gcWZ3nBA+pnv74Ha+4fBNDteBKTjoQNhSIgZo/W7A8ANUvqT3Ja83avESu?=
- =?us-ascii?Q?tscceI0ZqbS7JMirrEQyiI5RCyVBTh3EeWWGAkksKJKQng3YLYIwYc5VLOAu?=
- =?us-ascii?Q?zUf0xPee+3pSKYUqUz6ufbMEdOOB3yQb/cRc7XrkzP7x45GyhSKOkBNTP2j+?=
- =?us-ascii?Q?cjBUG6ECTJshISzdR4HX8OhG65G1kCrgSipAR/Iq2V3ypO03qA7IYLH6Ts2d?=
- =?us-ascii?Q?yV/Iaz+7FBjrOg0lY09ecmdXGSwawJg6o9qthCSgXYstWbddoU7bGeKsPKKG?=
- =?us-ascii?Q?mRctzTafSY/c+X0xsCH9/AIzkb+0MiT0cc0viXq1BW6QHpY8k1htUK68IMi6?=
- =?us-ascii?Q?XhHDDq3rydK/P0MEqoQforVM2KWrGd/OQX6S0JQSDjVzcOYtj4AO09boAQ+U?=
- =?us-ascii?Q?kUMEXrYrHR9454XfntHA8s3NEb3WRLOL6xKqGJT66Cf9pGH1PXlKzr4lSB8f?=
- =?us-ascii?Q?WaWill6MO53eR0kZ2EO09F0KZ+GBcbJ6TSIOUNoGpVEnVpLCRvY8BXsdQbMT?=
- =?us-ascii?Q?VY/x5OH53Ue9G/FYvviNjPIkDUwhAWhdohf3rzqkAqLe5Db2hfXOE5lgbjkU?=
- =?us-ascii?Q?5cP2JU78X06folZ0j/yge7Osep6FyitPRajnPh9VeyguKcjqZmauyQxNzstM?=
- =?us-ascii?Q?yIGiCphvyrByINhEWhzgXUggXhnVOCvoyoyv?=
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?v0XUbUcqXGW+yk0mYOwY3Raar1+OHOmQIHyaHoZUSV52bEAY+QrR2HxhP879?=
+ =?us-ascii?Q?baLDU//rnBdQGmIRGe3uPLEUg/ONs3YJTYkImZ8BFJSqo3tf5YFfZXch/Z72?=
+ =?us-ascii?Q?BM3bAJiV2Jpq6OMk91km5XLrAscNAW+lf4vkXZVChNtzmjEhVrAMfZNdsk1y?=
+ =?us-ascii?Q?wSPcJwYuRYayQ+652qD2iudbTa2QDASPOJNu7Qj1thdD4g6MjSCFbbq39WVK?=
+ =?us-ascii?Q?VBWSA5macL8V6VUVrVQ+oLOwT9rcTF+Oo6eKkKBNBSHHmM0Mp48+51IWANj5?=
+ =?us-ascii?Q?pIqhqbfGZCMFWvB3iBiJMOoSdK39iLdKTd76Ic8fsX2Ot4VtMDLOokdz7atl?=
+ =?us-ascii?Q?whXcABw8ZzR5KZBqI+IApXT+r6o881QqY6iQYVuXpGEk852bjZb2K5+NevTb?=
+ =?us-ascii?Q?9DtzrbxgQT5SPksIkQQQEYO9uR9bgeehvyjE1wvJqkErMmUCqa6jvWQ++pQw?=
+ =?us-ascii?Q?Cu5qf9qa86CvR5GjmoOtjLmdZT+AjwZvApEXcT8GsRRrzLfEdEfeqj0mAtHX?=
+ =?us-ascii?Q?C8PzyV0GjdlQWG/iHtO2Kof4m57sYBFxB5zpS3Ug6CTiitXUBQg2SUVwPihj?=
+ =?us-ascii?Q?zYURiqCJrvZrF6WVEMtNKyNAYRLHw8xQJjU9xw/V00UjQbUCEwfRiD4P6237?=
+ =?us-ascii?Q?kun6xHsI1sFs5hmOvsBXpL2bwd9fJ2VcZefHYlGshiy9BcZGcEcxd2DnFNN2?=
+ =?us-ascii?Q?Y5FBR1mcQuOwx/b5Th27lOLclLsI9nkRj7PrV6HiOtiggUqA3gYCBvDgIvyI?=
+ =?us-ascii?Q?y42ZKUjwDw6XF7Su04oQA4e4Xt6atPGAGlF6KaYoPhyGABF8iJpSVt1Txb5m?=
+ =?us-ascii?Q?S+5/RDMKyRNjD0ZpCcz1EHHYFEch5tyy/o3NO6RcOeP9TbKm917lZNDwkx4z?=
+ =?us-ascii?Q?dfnXseloy27dOtFr6Q+u0IYQyX7OHWYvED+i9bpRTwX0X0adlBvGKLXdmgKU?=
+ =?us-ascii?Q?5e+K0AdOBIeEKb6cqwRoDoB8+p1WCh5x9QKgGd0GnwswBYMzk1UQv5de+Bd7?=
+ =?us-ascii?Q?tgNaJsnx/ErbeNB1OApJrSoteabXSNUVlDCRNGhAUQ+N10Eh5O14NQjCmBQH?=
+ =?us-ascii?Q?BZgcS9uD+tSmgMMbaynMe1+fIcJCDckkdBGz9Ug1FFdR5gqq0/+HZU44GRPe?=
+ =?us-ascii?Q?qpKCv05/z9CNDu7/C8IMy84tDPC1n3Tqn3Fi8Sfdpnw43Xe3nUYQlKKzcGhg?=
+ =?us-ascii?Q?61sH5ibPM9IX4RgBJw3A20k+n6W8pzVzdBBqNptlpoV+Ab+eZWUaL3Eu+6q6?=
+ =?us-ascii?Q?d3pMM4Gd1aTk+rxxrOerWqX0mCcG7o6fWHu1fSGLkg5y3H8nCVexT6ixsd07?=
+ =?us-ascii?Q?2I5egEIURpvXIAbxDOjknB72/RxSI/rVMJo+u9RIFsI5DSRuJV6Fo0YeEmNt?=
+ =?us-ascii?Q?gfZDXaArrFW/Gq7vFGXmaeNgmgiCA8u8QiRU7u8AgKQnzcmOZGUC01KZZffb?=
+ =?us-ascii?Q?Pf/RtPP4OTP8XVERmUlvLJkvn5yZX85M0C/sHgTO8uDEgNCi/8xl0uDV359Q?=
+ =?us-ascii?Q?ktR/qKQsr7D7MkhckEJD82Ody+Bmz1aA6cXX?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2025 06:39:57.9266 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8d811b50-a6f9-4468-cc9d-08ddf74759e9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Sep 2025 06:39:57.2205 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 18842f95-aa4b-4413-2406-08ddf747597e
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AM4PEPF00025F9A.EURPRD83.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4P195MB1894
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0P195MB2713
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,65 +148,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After switching our boards to standard boot, we observed that the
-kernel hangs when booting with the "script" boot method over the
-network.
+First patch fixes boot issues with script boot method and the
+second patch is a minor formatting fix in our board detection code.
 
-The original scriptaddr value was copied from ti_common.env and
-remained unused for some time. On phycore-am62x and phycore-am62ax,
-however, this address conflicts with the current location where
-ATF is loaded (CONFIG_K3_ATF_LOAD_ADDR).
+@TI: I think the scriptaddr should be also updated for most TI/K3 and
+beagle board boards.
 
-Move scriptaddr to 0x89100000, directly after fdtoverlay_addr_r.
-The phycore-am64x is not affected by this issue, but we update it
-as well to keep all phycore-am6xx boards consistent.
+Wadim Egorov (2):
+  board: phytec: phycore_am6xx: Update scriptaddr
+  board: phytec: common: Fix missing newline in error message
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
+ board/phytec/common/phytec_som_detection.c     | 2 +-
  board/phytec/phycore_am62ax/phycore_am62ax.env | 2 +-
  board/phytec/phycore_am62x/phycore_am62x.env   | 2 +-
  board/phytec/phycore_am64x/phycore_am64x.env   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/board/phytec/phycore_am62ax/phycore_am62ax.env b/board/phytec/phycore_am62ax/phycore_am62ax.env
-index ff4ab8c87b8..47e90f1b7c6 100644
---- a/board/phytec/phycore_am62ax/phycore_am62ax.env
-+++ b/board/phytec/phycore_am62ax/phycore_am62ax.env
-@@ -5,7 +5,7 @@
- 
- fdtaddr=0x88000000
- loadaddr=0x82000000
--scriptaddr=0x80000000
-+scriptaddr=0x89100000
- fdt_addr_r=0x88000000
- kernel_addr_r=0x82000000
- ramdisk_addr_r=0x88080000
-diff --git a/board/phytec/phycore_am62x/phycore_am62x.env b/board/phytec/phycore_am62x/phycore_am62x.env
-index ff4ab8c87b8..47e90f1b7c6 100644
---- a/board/phytec/phycore_am62x/phycore_am62x.env
-+++ b/board/phytec/phycore_am62x/phycore_am62x.env
-@@ -5,7 +5,7 @@
- 
- fdtaddr=0x88000000
- loadaddr=0x82000000
--scriptaddr=0x80000000
-+scriptaddr=0x89100000
- fdt_addr_r=0x88000000
- kernel_addr_r=0x82000000
- ramdisk_addr_r=0x88080000
-diff --git a/board/phytec/phycore_am64x/phycore_am64x.env b/board/phytec/phycore_am64x/phycore_am64x.env
-index cbaf45b3ace..f4136ed237d 100644
---- a/board/phytec/phycore_am64x/phycore_am64x.env
-+++ b/board/phytec/phycore_am64x/phycore_am64x.env
-@@ -4,7 +4,7 @@
- 
- fdtaddr=0x88000000
- loadaddr=0x82000000
--scriptaddr=0x80000000
-+scriptaddr=0x89100000
- fdt_addr_r=0x88000000
- kernel_addr_r=0x82000000
- ramdisk_addr_r=0x88080000
 -- 
 2.48.1
 
