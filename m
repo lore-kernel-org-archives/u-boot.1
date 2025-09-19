@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B301CAC597
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 00:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D8B2CAC597
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 00:12:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F9D9829E7;
-	Fri, 19 Sep 2025 02:12:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 086E9832AD;
+	Fri, 19 Sep 2025 02:12:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MEEVmvQq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t1+o2mS+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A2858323A; Fri, 19 Sep 2025 02:12:18 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 1D0338329B; Fri, 19 Sep 2025 02:12:30 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C95C81E13
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 02:12:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC8C38329F
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 02:12:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-74c7d98935eso824465a34.1
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:12:15 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-751415c488cso1484537a34.1
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:12:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758240734; x=1758845534; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DP6ScbkxyKIYsmRRweVCP9ZhdnhodpklXurusVDPhdw=;
- b=MEEVmvQqpnlPA265+RTNH8V4pvj59bePw+1Uo1XvGPfWozT44f5eltPnKVBdQciZj/
- 78NJjzLMxiWRaxsaJISyd+4nJuyhTh4JPO0zv9caSYsnL1/8f9p8AnNtCGspUovYk8BO
- u5SMAZIS1yDHVX6py7Rnc9GYCCnCHLoNkbbyE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758240734; x=1758845534;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1758240746; x=1758845546; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DP6ScbkxyKIYsmRRweVCP9ZhdnhodpklXurusVDPhdw=;
- b=mCbfWxM8z4dAg97fsAeKX7yTbr0ukaa9HXhe1H4v56VxL/zhTr9rnPrqppFgl5pdQg
- mfq/ScMQsE5dnBWl8ycrXYhX7QZCuqL9EZWMTa/ZRJ5acZvpb0GxRH8zC4LPhwmscn88
- h4fgoaYi/YIwog7YvIxAtmfq78/3a2oe5QKLxnOq9f8AVr7PzN5XEZLTVge6QzoKLzwD
- isGjBqww6D06QWhgiPBPgYTHpRoxAIgOOGlKaSSj+cQx6qVj9/LlslcSglCZpiNlZhH3
- NX58RiIAgiYZngHdHcsV76Sgt66TEHJkkfcwUHY3aQqzVwdRA4OLd6AhEnj6wBijzkUa
- gWIQ==
-X-Gm-Message-State: AOJu0YyK4Z9J75J6JFFqghByPGHLYks+5aQ8FKxlQUj7BaCtWxIRJTu0
- /k4XMJQZAMfc/WA3oBgYcyk8dYDN1ocYnNM932YrpkWhjHB6kEdcfVHbynbHLZ7wIzk=
-X-Gm-Gg: ASbGncs+xQPIX8PxBPksanYUTRZZMOFVqPC7LSWc75mJTHGnDeB9PUN0Jw/M4Rtzuzo
- PDuAay3fn2YiTcidfUpLSdR6gAoxUOFoGSB8odX+3UiHXyyRYKaHTvYJqb8Cn34f1CFNRMEx1BP
- PJcFXzNpZa8veUwVB7zFuZ/+rQQ9vGGHG/a++aLscgo8qbZcyoIMkhhS5J3eDb4sYYSfYnwcq9H
- cCf2ZddjesCTAzv8F2TJed8jhFJfK4b9hirIeFH5bfxqhh82yyK0o5ZAoqyk8XjRZNvAQr/mKla
- 8/ho0XEf3Up8z2uiOkHFYXaOkvcmAL26nacv6U6p0bbPbagpo5o4geg2xpgoqy5UMJahsg688f6
- YYeCkRHOoK8hTOCYXwJOy1dn9/02LOmsSr80FxQ2XeGu5RA/IihvJe2m8
-X-Google-Smtp-Source: AGHT+IFgZQneBmIex26bMELX+q3Y08CL24yaku8PbDmktxmN+iC/ZZeF7Du65brqeHGsLtOg9iiVPw==
-X-Received: by 2002:a05:6808:2186:b0:42c:5291:8ec with SMTP id
- 5614622812f47-43d6c199752mr541732b6e.18.1758240734359; 
- Thu, 18 Sep 2025 17:12:14 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-625dbbaee3bsm1227869eaf.24.2025.09.18.17.12.13
+ bh=rQsIwjVGyCgGh3gCz+2chnkwXu8CyUum9auvz7loEuc=;
+ b=t1+o2mS+ubwU3nicwhghM08uhiNGVsjF3/4jjOr+BolOZdyA+2FJZz7hmFrAgNz0Cj
+ WO4PmG+EdJS9THEtXDw+rutEqxEvvuIrbYORjotZxLgb2xZJ/aCFrTF1q2oGQ1tNfDw5
+ DzM2cWyp7dGGO2ZdMv5ZvjBZykMwJVQBZQmqA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758240746; x=1758845546;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rQsIwjVGyCgGh3gCz+2chnkwXu8CyUum9auvz7loEuc=;
+ b=IeQU3ipG/0FG7mlIsbf3fXIe3pRXFJ0OBGwBn++En5VwRGkyDvAGcwYf2HgYUGBppb
+ xC9kPQaQllMDpx+IXmrNTNZ1rnTINvO4G7aQGWRwukXESorjy7TxRGDQ4t6iGKqKv4Ua
+ s6VGzIH9rcQsfvw5LaM3RCCe2TjEr1D5XD+SFRArmRQb3JFhnoQDVVj5jiXGIlFZSaGn
+ pdms0NwkrQh6WDRRrWSSJpN1VH8DlQ5Kzcks6nTunbuCVlwLF5zuebBXARP0OaA+v7sl
+ 3sMEqbylvNQKMaLlpnQS2UjxnWurJNdK3BStF+g6XNqIjuRqo4C8n7xmSQtGOJ3zm9CQ
+ Sftg==
+X-Gm-Message-State: AOJu0Yy9xxtN9y+d3wedHXsZGsJbFpUe2IYdmmJiYeByGhUK0x6hdBkf
+ K5ZtuYhWd5QdMI7WZuW2I5hWtdRz3hdouc95TwcqaZCkheb2H/nlV/7j5ybhLu5L5wI=
+X-Gm-Gg: ASbGncsoJaM96g6cJNWs39vMnneAB7hePVzN25wOiXEgWHetT6/yDWp2nFxXOxSShX0
+ qa4wIe4D3qzzHRe4MnBFH1lt4y/9SstpW05eplhJRPDFKlOPwma1tX5OoDJFfLj35B1oLdVPuIc
+ zaCo3gOA2rOEteNMiCWZirb9KOqM76YuhenbmfsVcgQdMhaPkLfcGaL2Y5jXroLYAS2tKyJh9pV
+ g7ihULLMdyChuOGoLNaMx+LdIV4xc19GL6Sq3vQVzD4UDg2HYbb3xDUUybVIh1oJIVoVprYjkU8
+ WJBZD8yHVpBSUxfyZXIUXRuQgKx8aRZvZmsSyWb21Ilgu54ZU0XqEk+lTragFmuC+KVIJ3zNT1c
+ WyTg3RCmDTuY/1EMBwlZugzk7fKR1IlgucvIM5e1PuW9+NwjezeBEPlxPjVt+te6VJzwl0Z9ztQ
+ ==
+X-Google-Smtp-Source: AGHT+IG4wEwS+fuYydi7XdSXxzJNUqtvQn4xi522Yw5ChApl+oWjAWc9M9PaXDPTvx71uKGq3uhyyA==
+X-Received: by 2002:a05:6830:3913:b0:757:7d79:bd9c with SMTP id
+ 46e09a7af769-76f79079584mr989100a34.25.1758240746576; 
+ Thu, 18 Sep 2025 17:12:26 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7691b0244d7sm1694728a34.15.2025.09.18.17.12.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Sep 2025 17:12:13 -0700 (PDT)
-Date: Thu, 18 Sep 2025 18:12:11 -0600
+ Thu, 18 Sep 2025 17:12:26 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Weijie Gao <weijie.gao@mediatek.com>
-Cc: u-boot@lists.denx.de,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Sky Huang <SkyLake.Huang@mediatek.com>
-Subject: Re: [PATCH v4 4/5] net: phy: Add MediaTek built-in 2.5Gb ethernet
- PHY driver
-Message-ID: <20250919001211.GS124814@bill-the-cat>
+To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
+In-Reply-To: <cover.1757315849.git.weijie.gao@mediatek.com>
 References: <cover.1757315849.git.weijie.gao@mediatek.com>
- <6ee539edf71577a0cf5d39dad495bb7121629993.1757315849.git.weijie.gao@mediatek.com>
+Subject: Re: [PATCH v4 0/5] Add support for MediaTek MT7987/MT7988 built-in
+ 2.5Gb ethernet PHY (v4)
+Message-Id: <175824074567.975344.2778312909667402144.b4-ty@konsulko.com>
+Date: Thu, 18 Sep 2025 18:12:25 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="d/YpKRbYI7b41pZp"
-Content-Disposition: inline
-In-Reply-To: <6ee539edf71577a0cf5d39dad495bb7121629993.1757315849.git.weijie.gao@mediatek.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,78 +99,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 08 Sep 2025 16:33:57 +0800, Weijie Gao wrote:
 
---d/YpKRbYI7b41pZp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> This patch adds PHY driver for MediaTek MT7987/MT7988 built-in 2.5Gb
+> ethernet PHY.
+> 
+> Changes in v4:
+> Remove unneeded const from argv[0] used for cmd_process()
+> 
+> Changes in v3:
+> 1. Removed all optional code configured by dt properties
+> 2. Make use of request_firmware_into_buf_via_script() for firmware loading
+> 
+> [...]
 
-On Mon, Sep 08, 2025 at 04:34:18PM +0800, Weijie Gao wrote:
+Applied to u-boot/next, thanks!
 
-> The MediaTek MT7987/MT7988 SoCs features a built-in 2.5Gb PHY
-> connected to GMAC1. The PHY supports 10/100/1000/2500 Mbps
-> full-duplex only.
->=20
-> The PHY requires one or two firmware files. Firmware for MT7988 has
-> already been added to upstream: mediatek/mt7988/i2p5ge-phy-pmb.bin.
-> MT7987 has two firmware files which will be add to upstream later:
-> i2p5ge-phy-pmb.bin and i2p5ge-phy-DSPBitTb.bin.
->=20
-> Environment variable can be set for firmware data loading:
-> mt7987_i2p5ge_load_pmb_firmware for i2p5ge-phy-pmb.bin
-> mt7987_i2p5ge_load_dspbit_firmware for i2p5ge-phy-DSPBitTb.bin
-> mt7988_i2p5ge_load_pmb_firmware for i2p5ge-phy-pmb.bin
->=20
-> This driver allows dedicated weak functions to be overridden by
-> board to provide the firmware data:
-> mt7987_i2p5ge_get_fw() for MT7987
-> mt7988_i2p5ge_get_fw() for MT7988
->=20
-> To enable the PHY, add the following not to device tree:
-> &eth1 {
-> 	status =3D "okay";
-> 	phy-mode =3D "xgmii";
-> 	phy-handle =3D <&phy15>;
->=20
-> 	phy15: ethernet-phy@15 {
-> 		compatible =3D "ethernet-phy-ieee802.3-c45";
-> 		reg =3D <15>;
-> 		phy-mode =3D "xgmii";
-> 	};
-> };
->=20
-> Signed-off-by: Sky Huang <SkyLake.Huang@mediatek.com>
-> Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
-
-Sorry for the late review:
-
-> diff --git a/drivers/net/phy/mediatek/Kconfig b/drivers/net/phy/mediatek/=
-Kconfig
-> new file mode 100644
-> index 00000000000..7de7b65b4e6
-> --- /dev/null
-> +++ b/drivers/net/phy/mediatek/Kconfig
-> @@ -0,0 +1,16 @@
-> +# SPDX-License-Identifier: GPL-2.0-only
-> +
-> +config MTK_NET_PHYLIB
-> +	tristate
-
-A tristate makes no sense in U-Boot, it needs to be bool. I'll fix this
-in the merge commit while applying.
-
---=20
+[1/5] misc: fs_loader: allow returning actual firmware data size in request_firmware_into_buf_via_script()
+      commit: 63585689686fee83b382edacad249a4ec35d7c3d
+[2/5] misc: fs_loader: allow using long script name in request_firmware_into_buf_via_script()
+      commit: 5b1d3d83d68a713c492bfad991338d47069f337e
+[3/5] net: mediatek: associate PHY device with dts node specified by phy-handle
+      commit: 465d76a0381dae83942f81329400b1fa2487185a
+[4/5] net: phy: Add MediaTek built-in 2.5Gb ethernet PHY driver
+      commit: b4b266fc139ad0a8856db6a7495f7e9a2cc27a6f
+[5/5] MAINTAINERS: update ethernet-related file list for MediaTek ARM platform
+      commit: 32b4c88ff2712ffafec875e22d866537d2f33dac
+-- 
 Tom
 
---d/YpKRbYI7b41pZp
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaMyf2wAKCRAr4qD1Cr/k
-CoCGAP9U2stxxsPJGBI+593y6PKwUfh2FpdrOZSh15tpBSjatgD9HPNri3+pPr52
-yYWz+dPi3az9cBC36ClJhTXliTXieA8=
-=gqNT
------END PGP SIGNATURE-----
-
---d/YpKRbYI7b41pZp--
