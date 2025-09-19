@@ -4,85 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AF1CCAC592
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 18:09:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB859CAC592
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 20:25:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B2FD8329F;
-	Fri, 19 Sep 2025 20:09:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B0D0F8309A;
+	Fri, 19 Sep 2025 22:25:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gGfqrlHe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d4NmettB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C579832AD; Fri, 19 Sep 2025 20:09:07 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id E2EC0832AD; Fri, 19 Sep 2025 22:25:40 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCAC583285
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 20:09:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF43081D6A
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 22:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-62344b7b69cso1446041eaf.0
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 11:09:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-261682fdfceso40026005ad.1
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 13:25:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758305343; x=1758910143; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XBJgoD+1zmWOMPi1BG5uvl7HIlYcacUbRUAdcBe+854=;
- b=gGfqrlHe/ZtpZK7h8taVRqGUVnwYanoTqmjcN3CiJxycpjxK5eoNiFJINuIuH+AWEc
- WqnraMOcAUBxD7EGeIh9OfrTxL+RuA738IKko58DAuXx+QMyHIsCIfmUaImmMcNAF8OX
- Nc/va5CZNtlCX5PFI0OkkxnQpx2mNb3r4Ptrk=
+ d=linaro.org; s=google; t=1758313536; x=1758918336; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=gEN1o8lKv48+wyiYoPTD46cOfrwwGb5WaSX9xfGDYzY=;
+ b=d4NmettBOz57NM9rXhSZY/XTaxOd/c8pMwCBos4rsd7MBxJs6QOPhwU20fq/KOngyr
+ 7BnUSYwLWfkwn3ngQK4eNH0xE1jhmHTBdcYWvqz1EcM++LaA7OAA43318J3sjgpms4/5
+ me30kdVB5YONF9uHur4XoFzlp9ONhFeQeU0zZYS9KJHBbpB1rqROTyuJDWg5JWDlJr85
+ 2o8YGaoZ3+vfb23FsegMBtG36oJn7Y/EgBirLrhkw40qNzOIcpCFsQ/MHv46QKUdTAcY
+ FGhtR6erxj4tmDOcUxV94FMiKOr0HexJIbhxdP4fLLOE46AoiKuTuog1YSXHnaAojiyX
+ qvxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758305343; x=1758910143;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XBJgoD+1zmWOMPi1BG5uvl7HIlYcacUbRUAdcBe+854=;
- b=Nk9bFFMz2Nl/94ij6PFeQXu9tvcM9IIjOsOblz1qQdQjerxkf+XWrHRWm90cRibY+k
- abhC386Z/rX4KEHkddo4/wFw1LqQGbx0iNXLBA6h+giK39pSxanP9f6U3JQtaR1UPjrw
- fxihLEhLg/Fsw6DqQKqgpD+tU1V+jiuEIDgZMP2DdRhLiKaieX+H2D07szKSPunwQKtA
- SMwMcXEz+Qx9YryDWlSgpjm3zahtYDxFWjT6OjOJwfwXCKLR5ERWWk3Fn/Bw29rTXBOG
- 0VWrzolr/gz7mOd2xqxTzxnSJy4+5pNeCGxjPdOuJ5E+rOsRgZe9VhsAfgHV1cLRynfW
- EXQQ==
+ d=1e100.net; s=20230601; t=1758313536; x=1758918336;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=gEN1o8lKv48+wyiYoPTD46cOfrwwGb5WaSX9xfGDYzY=;
+ b=fd4M9mzk4/mmd1l1OoYcZMMufzHKFcwbj+ZQ759LMETcUhuc6lAVVSafJufB3aAiAE
+ ocFBFOCgQGXOrrlb66cZ2ze9lYdYRzut8iBFu5D7bfpY0OW00b9oWOD1kihFzqY6XCN+
+ Fz4wPXEAsgap0Y/+9r3tYq9x5I1hZ4Q5MJjDl6TU7W9wsvc8jK+OHlKvqUla6YyEzJ/8
+ MGejJyR2niHtxJknYOfxYpT53cHcQ1SGJg63onfNMrXz86huEPGy4Kgp3tMKxKfrdtMN
+ 4meR/A+2p8RD/AYqS6/4DPr+n0ZFkrNDOAFKi5OtrWSSuc5HD9oIG8PRyBEWMt/6bQet
+ l1UQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6RjbmfxVwWQsv5A4jFOPnNvMCrEeMhcvE6yxW/01gOOZaXUGkRIIsVW0ay2BcFn6adOKIpgI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz4bxSfegEYT9U97QPOOpEkTlq+Tc25+MlN4/gEGI8l28txDzqS
- y93UIOJcOklfBTgCYz6+pz76kfSf7VrpjSm/he8cltqfjYLoSuY2g9tTYQk/tBDJD4oI3LR93fC
- cAkDmzVk=
-X-Gm-Gg: ASbGncugjeWxsIeioYYizVUiC+NfdwEXgbUqFMOKbk7JcodhirxEPLNjuQCnnAePfYw
- i+ZsigdSaYpD8W8VmffLGnq20p0kUWoS82S3BcWXHSbYOEz8p1it1v+7+/V2Jq01H0V0Dpj212z
- E37rPpgHM+WdmxiGNkMhzX9OfApJhMoNixF9gbcr76hDChH68v7ZPz5CxKkgWCDmtavXUMfdrWR
- W4lPMvq4/vUhVTdkhMUdB2pzyx/2DU06FgaL0NB/aQ5yj8gzb9UA1JTnO8DpsG/viZgfs2o2f3/
- V1wXzvdpEUzFncHYSibghJDHdENhfPtxVlqCmK+ozaSnBXwRo5lS4f+my3PDQkSUFW8/luG1r2o
- wqo+jEtSGHv7RwfiY3G/k68wJtnvX5juakygIQlGXKm+UmD9RsBxlDcHc
-X-Google-Smtp-Source: AGHT+IGVnWx2HkZ5XCzb2U4IZ8xRRGzabXIkFkSklKRWHa2aZVcTmoqmNA8FFLk7hgKLry8Vt/SPtQ==
-X-Received: by 2002:a05:6820:2228:b0:620:ea78:ceb4 with SMTP id
- 006d021491bc7-62724fdda2bmr1809270eaf.0.1758305343325; 
- Fri, 19 Sep 2025 11:09:03 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7691c44ef20sm2645107a34.17.2025.09.19.11.09.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Sep 2025 11:09:02 -0700 (PDT)
-Date: Fri, 19 Sep 2025 12:09:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] bootstd: make it possible to use tftp for netboot with
- standardboot
-Message-ID: <20250919180900.GA1107020@bill-the-cat>
-References: <20250911-ip_dyn_bootstd-v1-1-74f74507cc18@phytec.de>
+ AJvYcCWdP1ya4/CZLxum4dEQHvNFx0m1tBL66Xt6sFjl8zj0d/YxNJGyvqbhaGdBe95wtyWhKVfT6ZE=@lists.denx.de
+X-Gm-Message-State: AOJu0YwbtEQFodCqvNEWJRi7GWyxjPIr0B6y5SrvqYGa4yiDS5KPsTaj
+ NprexDubbWMV2KmrooO6LpoBso2eyC45Ml8aXz5B5dUaa6NEptCqqlKuYLeKMnJiasDu8SD2kYm
+ 4rVG0VxJm6H8rXrubQsOwlSkxHrWCpTm8L3a7Bg3QSg==
+X-Gm-Gg: ASbGncuZua2rg9XQQI3uesF3TkkyykBmYve63N/IbEwOzQAus8LkOjN7eaD+F1kT1Al
+ Ymgs9yGv8PYJnNcT4kimXjqQCWk8AlGuhNjFgiGbPSmWxBpfYwddFkJVrAD00uy1qIf7KgwIkEU
+ jfQEn2tQwYEzPfoPwwOny6l5bDGbPIN4TmzFIjApgUIK0oG8/l1BTb8yP79EpJo1Z9UrBrdqbYe
+ 8Zjsy+Cig==
+X-Google-Smtp-Source: AGHT+IHckENcPYLLn1IJVAG2xhZPWPYPR4ZH8TsK+fzS4wNnfPCzOzkJMoXeNjjq/t+lmL6WWPTtiIshhKneLiZ+LMM=
+X-Received: by 2002:a17:902:ea12:b0:246:cf6a:f010 with SMTP id
+ d9443c01a7336-2697c83c18emr126320355ad.13.1758313536204; Fri, 19 Sep 2025
+ 13:25:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7ejInKUdZwGoVmzL"
-Content-Disposition: inline
-In-Reply-To: <20250911-ip_dyn_bootstd-v1-1-74f74507cc18@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250910054012.2055983-1-chalianis1@gmail.com>
+In-Reply-To: <20250910054012.2055983-1-chalianis1@gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 19 Sep 2025 16:25:25 -0400
+X-Gm-Features: AS18NWAOQh3c8s8T2B8ItlomerIoCNknkB-cdAGIiasWSq2I6BgQ7zCdIkNu7NY
+Message-ID: <CAEfUkULT==tq8LVRYf-uS2o-SaVDmwpd3XXC_uKCOeOjof1rsA@mail.gmail.com>
+Subject: Re: [PATCH] arm: mach-qemu: add support for boot from TF-A.
+To: chalianis1@gmail.com
+Cc: trini@konsulko.com, patrick.rudolph@9elements.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,38 +92,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---7ejInKUdZwGoVmzL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 10 Sept 2025 at 04:19, <chalianis1@gmail.com> wrote:
+>
+> From: Chali Anis <chalianis1@gmail.com>
+>
+> add support for boot from Arm Trusted Firmware for qemu aarch64
+> permits to exprement TF-A boot, Tested on qemu-system-aarch64.
+>
+> Signed-off-by: Chali Anis <chalianis1@gmail.com>
+> ---
+>  arch/arm/mach-qemu/Kconfig             | 1 +
+>  board/emulation/common/qemu_mtdparts.c | 2 ++
+>  2 files changed, 3 insertions(+)
+>
+The change to skip NOR flash partition setup under TFABOOT looks
+reasonable, since in TF-A boot flow the storage layout should be
+handled via FIP/TF-A.
+But the commit message is a bit too vague, is it the final change and
+qemu_arm64 is now sufficient to declare ARCH_SUPPORT_TFABOOT?
+If yes, please state it in the commit message.
+And please also explicitly describe what the patch did, like "skip NOR
+flash partition setup for boot from TF-A".
 
-On Thu, Sep 11, 2025 at 12:34:07PM +0200, Benjamin Hahn wrote:
+Regards,
+Raymond
 
-> Add the option to load the bootscript with the tftp command (static IP)
-> instead of the dhcp command (dynamic IP). For this a new function
-> tftpb_run similar to dhcp_run, is needed. The selection of which command
-> to use can be done with the ip_dyn environment variable, which can be
-> set to yes or no. The ip_dyn variable was chosen as it is already in use
-> on the imx platforms.
-> Also edit the bootstd doc.
->=20
-> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
-
-This leads to failure to build when CMD_TFTPBOOT is not set.
-
---=20
-Tom
-
---7ejInKUdZwGoVmzL
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaM2cMgAKCRAr4qD1Cr/k
-CgnCAP99Hsse5e2L255NsOxGUBu0uRJ8zN44rdUJm2Y4HWTCGgD/cHOrtynouime
-8YwMgMbT8sykZCO26wkfZieSC8eV9wI=
-=Qao8
------END PGP SIGNATURE-----
-
---7ejInKUdZwGoVmzL--
+> diff --git a/arch/arm/mach-qemu/Kconfig b/arch/arm/mach-qemu/Kconfig
+> index 9c06c6a3a5ce..316dde5145c0 100644
+> --- a/arch/arm/mach-qemu/Kconfig
+> +++ b/arch/arm/mach-qemu/Kconfig
+> @@ -18,6 +18,7 @@ config TARGET_QEMU_ARM_64BIT
+>         bool "ARMv8, 64bit"
+>         select ARM64
+>         select BOARD_LATE_INIT
+> +       select ARCH_SUPPORT_TFABOOT
+>
+>  config TARGET_QEMU_ARM_SBSA
+>         bool "SBSA Reference"
+> diff --git a/board/emulation/common/qemu_mtdparts.c b/board/emulation/common/qemu_mtdparts.c
+> index c1501276789c..c3863d3b0479 100644
+> --- a/board/emulation/common/qemu_mtdparts.c
+> +++ b/board/emulation/common/qemu_mtdparts.c
+> @@ -59,6 +59,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>                         debug("mtd device = %s\n", dev->name);
+>                 }
+>
+> +#ifndef CONFIG_TFABOOT
+>                 mtd = get_mtd_device_nm("nor0");
+>                 if (!IS_ERR_OR_NULL(mtd)) {
+>                         mtd_partition = CONFIG_MTDPARTS_NOR0;
+> @@ -72,6 +73,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>                         board_get_mtdparts("nor1", mtd_partition, ids, parts);
+>                         put_mtd_device(mtd);
+>                 }
+> +#endif
+>         }
+>
+>         mtd_initialized = true;
+> --
+> 2.34.1
+>
