@@ -4,66 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3121CAC592
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 11:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AB89CAC592
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 12:20:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A6AC81E13;
-	Fri, 19 Sep 2025 13:59:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 806718319C;
+	Fri, 19 Sep 2025 14:20:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BbF1LDUl";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="m5MA1qFw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD76083071; Fri, 19 Sep 2025 13:59:06 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E50B98004F
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 13:59:03 +0200 (CEST)
+ id E3FFD8323A; Fri, 19 Sep 2025 14:20:29 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 79AAD81E13
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 14:20:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58JBx1Aq710314;
- Fri, 19 Sep 2025 06:59:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758283141;
- bh=t/uJIEKm1EuHEo1b4VU7dFE5k0nBj5ijX4i4inx1Sd8=;
- h=Date:Subject:From:To:CC:References:In-Reply-To;
- b=BbF1LDUlY9UqM3f4Hw4rK4dOIUNQHYSpQOaPE3C4C8sL/xfwXpRVOCdRI9pLc+UMm
- e44l0HXLpzjUYmcYCj0pk8ayHubfBAwD5Um+C7jRi/iCyeUHTnqkX/RNAmZ4cKpQUF
- /EIexwXF3Ki1oEAaoCKZxzmMTP5ot+jOJYku11vg=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58JBx1ep3130465
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 19 Sep 2025 06:59:01 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 19
- Sep 2025 06:59:01 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 19 Sep 2025 06:59:01 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58JBx02X2528270;
- Fri, 19 Sep 2025 06:59:00 -0500
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cSs6039pKz9sy4;
+ Fri, 19 Sep 2025 14:20:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758284424;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LG3x3jCSd3MeKy6W2OEnmtJxHNN86hjJl2LqLu6dd84=;
+ b=m5MA1qFwxLGUApV+WGQ5SvyTFMkvlLUpA41oEC52i1Ep7OUSnw2D+DoXtwQrv/m0GYoGnK
+ osKGkrEoOVc7PVfIPiRyNzc1YMjiD3327Jdzyob3p76UEjVGaY03AXycxRmxh+AUQDcfY3
+ Vf7jw709PV/JDh6FQlwmCo94K412D8nROAdSfhG+rytYJ1TP/zVz+twCamykweQZgLZ8R1
+ qL9cMYC8HJgqB3BzL83qTQxzKYU8gTxDusMHxCp+mjycly+WNU787LwERHH/lpb5uDGJz2
+ q4yDswiTRMoDxfQ+Jj5DxPPQqy6v+LvCf5aD2MOC+HmrZGmAp7U1aE7da/N/XA==
+Message-ID: <0528b2bd-09ef-45d4-9003-f8c1baab372b@mailbox.org>
+Date: Fri, 19 Sep 2025 14:20:22 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 19 Sep 2025 17:28:59 +0530
-Message-ID: <DCWRCRBERKOZ.3QATM9M067WNX@ti.com>
-Subject: Re: [PATCH 1/2] board: phytec: phycore_am6xx: Update scriptaddr
-From: Anshul Dalal <anshuld@ti.com>
-To: Wadim Egorov <w.egorov@phytec.de>, <trini@konsulko.com>,
- <ggiordano@phytec.com>, <d.schultz@phytec.de>, <bb@ti.com>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20250919063948.3093358-1-w.egorov@phytec.de>
- <20250919063948.3093358-2-w.egorov@phytec.de>
-In-Reply-To: <20250919063948.3093358-2-w.egorov@phytec.de>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Subject: Re: [PATCH] cmd: sf: align erase and write on erase block boundary
+To: Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de, jagan@amarulasolutions.com
+Cc: peng.fan@nxp.com, uboot-imx@nxp.com, alice.guo@nxp.com, ye.li@oss.nxp.com
+References: <20250919070156.1497268-1-ye.li@nxp.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250919070156.1497268-1-ye.li@nxp.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: gsyoufts9s1bp5pmjd78chzhm7ozspbd
+X-MBO-RS-ID: 0705f6204c714ba66b2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,28 +74,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri Sep 19, 2025 at 12:09 PM IST, Wadim Egorov wrote:
-> After switching our boards to standard boot, we observed that the
-> kernel hangs when booting with the "script" boot method over the
-> network.
->
-> The original scriptaddr value was copied from ti_common.env and
-> remained unused for some time. On phycore-am62x and phycore-am62ax,
-> however, this address conflicts with the current location where
-> ATF is loaded (CONFIG_K3_ATF_LOAD_ADDR).
->
+On 9/19/25 9:01 AM, Ye Li wrote:
+> From: Viorel Suman <viorel.suman@nxp.com>
+> 
+> Align erase and write on erase block boundary in line
+> with how read was aligned in commit 622b5d35613.
+What is the issue that is being fixed here ?
 
-We should look into doing similar for K3 as well, would be useful when
-we switch to std boot as well.=20
+What is the reproducer ?
 
-> Move scriptaddr to 0x89100000, directly after fdtoverlay_addr_r.
-> The phycore-am64x is not affected by this issue, but we update it
-> as well to keep all phycore-am6xx boards consistent.
->
-> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
-
-Reviewed-by: Anshul Dalal <anshuld@ti.com>
-
-Regards,
-Anshul
+Details please .
