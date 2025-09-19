@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 038E2CAC592
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 15:08:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30276CAC59A
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 15:09:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69C168329F;
-	Fri, 19 Sep 2025 17:08:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BA65583314;
+	Fri, 19 Sep 2025 17:09:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RiZ4mH81";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KSJaTH+k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0145C832AD; Fri, 19 Sep 2025 17:08:50 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id 4E2628331F; Fri, 19 Sep 2025 17:09:41 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 901D283285
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 17:08:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C81E48329F
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 17:09:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-3197f534179so1799547fac.2
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 08:08:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-b0418f6fc27so384404466b.3
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 08:09:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758294526; x=1758899326; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=f7k2pfCf79Nxrel9Az128HEX14BLF05cmn3jdEOpAj0=;
- b=RiZ4mH81c4SKPdA9dirKmrzY5UBz0uxw9KfwRXRXo8GgXjx5i7C83pyhtYEOdnTQPz
- A/fhPGYmAT3sZ3v5FGt5TOu28H5ERTTBYvT69Kg2AlAs87IFA8EIZte6iBx/ATY92KkV
- UcmZbhj0+2HeVhbsMHNa6P4mghbp6Ykidrobk=
+ d=chromium.org; s=google; t=1758294578; x=1758899378; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NxsSmyp+I/su0XHD9feH2YcbDf5n/EXnKMY85eMvgQs=;
+ b=KSJaTH+kmzkmmQH1yRU7jhyjCC1n4GgpjyW2Hha/EWClG5xYCgPdDPokRZx793CKdl
+ ByNsaPDFEccxVFjy54YU0ZCH0x7dpKvM2U0PPXy9+BYKNGwSxXOmbYcZzqNVJAZzU6Cu
+ /5BCy7cRYWp3nl8fHWYPbC0G9VcosczlV5MD0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758294526; x=1758899326;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f7k2pfCf79Nxrel9Az128HEX14BLF05cmn3jdEOpAj0=;
- b=K6wbu1wlzSzNvaPJtXETiNtNQAqPxhoDD3dl/mdwFRB00uuevYWDvRGEmjc0bmFILx
- ZFDge5BtpFDRKtFWgZjhdxOWntpKrhxnMAV/CCeQm2dVM4F4ESSq5WGCTiw8GM4xXeRA
- K/CpqpijOamULrchm7NxL1ThMdtKlvNJ0ir8Bpk8YDYLNdGIVlYiQoNopUpWegxXkTPi
- M8KVl6JqyWXsyUZ0oLpDGfJAmvcLkkZCQCQPrNl1pnqozkVPsRll0Skzj7JVoOZkv6NH
- +ipwO4aQ6E90yxyEe2M2X4zc+k2ZWK89BPhaUrhIjuDIXlPPAAhemVtEuY1LOShyqht2
- 3Fog==
-X-Gm-Message-State: AOJu0YzP0kTpi6SyL0xh1g50LBkV/3Doc58TbEeOzxL6I/lZcBD40a4B
- MiOOs6L7WiTYljBq7JGqriDEPMD2Lla9jXnRJWvoBaUJFSClRclM0KnuJzagBFzZwP4=
-X-Gm-Gg: ASbGnct9FIdc89KQzayCv8whXCLwDq/J7m+VowJlDpMQPxctcvyR00gDuIIT3p09GSp
- mm3tuAE7JWd9Wp824F3QTOQrX/YpYHlN4YCD8TJ99ypoOib5IR2oUkH6NDzMFcKIB9Ly+1UA97P
- 2RWL5/IMiDs0A62aQSWqdjEhYJbO7r29WvnvXABBUWh8tXA04+dv/5leJOeA732mVlaHpZ5FcYF
- ZwAaeYywLM9Ktymo4NrFn1FWR11jfmyyey4PlHEQdcPfDskjYrwvY0kbNH9HF7rWHhHg/y1lLcC
- meg3zzSxZtPJh0LxEXhO/kuoaNK+zeLEw0Y/AV3fkWBzqUWEeI0ikH6AnEw3pVBnxEC3J62EeSq
- 72sQZTtr39RkjwSV+9tyyRYqArA3MxqWyk8/1J29NawmmisWhPeJO9UKS
-X-Google-Smtp-Source: AGHT+IGq0XcPPc6W25cz4nR+epAhXmfImVYYtcywgWa0/A76Xbr+7Xr/916NkfzDK3NbMFpFmb0Kvw==
-X-Received: by 2002:a05:6870:458b:b0:32a:a799:675e with SMTP id
- 586e51a60fabf-33bb1fad8d6mr1662890fac.1.1758294526219; 
- Fri, 19 Sep 2025 08:08:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-336e3afa775sm3181168fac.7.2025.09.19.08.08.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Sep 2025 08:08:45 -0700 (PDT)
-Date: Fri, 19 Sep 2025 09:08:43 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <ravi@prevas.dk>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 0/9] exports overhaul
-Message-ID: <20250919150843.GV124814@bill-the-cat>
-References: <20250919101002.568488-1-ravi@prevas.dk>
+ d=1e100.net; s=20230601; t=1758294578; x=1758899378;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NxsSmyp+I/su0XHD9feH2YcbDf5n/EXnKMY85eMvgQs=;
+ b=a2eeCmfmBJOCG2KgTJVUQSZnQ1jxeltv6v3/yLbT++lzRI4l5DOURT3+DO9ikSeKTc
+ 1LepMfgFT2zJdMMTTt6u3m8tT1vRQbbWoBAf7cD7bRZwFGmczpZI2xsjLmckB3b5pEy+
+ uOay8shf4JRcD7i6rsPlY8pJ9iajWh97dUqnmpGgi0Xl7JA8OFV7PxZ30ygGF/fZ6For
+ zT/l5CwnSnnBsv/apdp+M4LdP6DE1gdHxPGqVZUPJqzaiy33OTnx0hiO9jZE1iK0kYeF
+ 0XFrrr+U9jsiOzWFlxJzYuBCD/p/HZcsnMX6Y8OP/oCHVgBSQMcxSI0Sr6Q37WPbgldD
+ LVow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU3Q1Z6SUMzgtGuClS5UBcR/ZgKL16nBZksgwmxHCMlpDz13xvCVqzR837SWQinRMcX9sB27JE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2MNOgSZWvmUsiyhjSG3X6nvsaogYOj6q3cWvyjecnlTKwO8P5
+ VNDf/asKQLQ0vF1KlssL7NBS6/AEBxkQ1GMB+AkaG7bTEpPcNqbL07Kj37RTKfh6lFWQGylVF/t
+ MnPefNXieKFqgAfkvecvD3J+Q92gWkET5x6TS+KR4UyWyoOZBKTI=
+X-Gm-Gg: ASbGncvhGg/ottWMkl1Wew3/77r0MEIXtZo8UqhUdIwHV5lWnvkJ44alLpVz2WJuW0y
+ ZKz8PG1mROXDIzamoQDAAq+8OjKj63u/gWbrBDNlmym6r/RWFGeXH/ZcC49WFgmbIyKpB1oUo/u
+ Zg2fyoPzCRXqEpyHvKc8l1M2fphmbkIJOMVe6KvNFbmOo+QY8pxEmtYw9nO6E7TPuL6Bo3+ZDvP
+ xn+XQ==
+X-Google-Smtp-Source: AGHT+IG1pyiSt643BrjO0qSwEaPaQpvsTbeyilLLA1Sa1Qk8Jw5IrWybQ+7wLqWfMfoi771bpj3Z+gjSGRxWcoZeTbo=
+X-Received: by 2002:a17:906:fe01:b0:afe:f92d:9178 with SMTP id
+ a640c23a62f3a-b24f602ba4cmr368492366b.60.1758294578188; Fri, 19 Sep 2025
+ 08:09:38 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WCX1MJW/3A98RmeD"
-Content-Disposition: inline
-In-Reply-To: <20250919101002.568488-1-ravi@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250916161426.32259-1-raymond.mao@linaro.org>
+ <20250916161426.32259-3-raymond.mao@linaro.org>
+ <20250916182742.GZ124814@bill-the-cat>
+ <CAEfUkUL2t64-hz-_acWHf01WgLeddYu7S8dRudmNT3re0_hfnQ@mail.gmail.com>
+ <20250917154926.GM124814@bill-the-cat>
+In-Reply-To: <20250917154926.GM124814@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 19 Sep 2025 09:09:26 -0600
+X-Gm-Features: AS18NWBdaIFITfzihZyO9EPYpsRHQo08BrXSSOb8n9uyrX_R1PUBtq82RGTGMPA
+Message-ID: <CAFLszTjBPpgPcqTuAdzhV=HAR01mvzFKBTcNOrxxz4djZ-8h0A@mail.gmail.com>
+Subject: Re: [PATCH 2/5] ci: add post-buildman script to build TF-A
+To: Tom Rini <trini@konsulko.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,46 +99,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Raymond,
 
---WCX1MJW/3A98RmeD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 17 Sept 2025 at 09:49, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Sep 17, 2025 at 11:44:07AM -0400, Raymond Mao wrote:
+> > Hi Tom,
+> >
+> > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Sep 16, 2025 at 09:14:18AM -0700, Raymond Mao wrote:
+> > > > Add a script which is running after buildman to fetch TF-A (v2.13.0)
+> > > > with MbedTLS (v3.6) and build 'flash.bin', linking built U-Boot as
+> > > > BL33 and OP-TEE as BL32, with both Firmware Handoff and Measured Boot
+> > > > enabled.
+> > > >
+> > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > ---
+> > > >  .azure-pipelines.yml               |  1 +
+> > > >  .gitlab-ci.yml                     |  1 +
+> > > >  tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++++++++++++++
+> > > >  3 files changed, 89 insertions(+)
+> > > >  create mode 100755 tools/post_build_tfa_fw_handoff.sh
+> > > >
+> > > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> > > > index 8209d2b329c..eb547606ddd 100644
+> > > > --- a/.azure-pipelines.yml
+> > > > +++ b/.azure-pipelines.yml
+> > > > @@ -290,6 +290,7 @@ stages:
+> > > >            cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_riscv64.efi
+> > > >            cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm64.efi
+> > > >            cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm.efi
+> > > > +          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TRAVIS_BUILD_DIR} \${TEST_PY_BD} \${TEST_PY_ID}
+> > > >            # create sdcard / spi-nor images for sifive unleashed using genimage
+> > > >            if [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+> > > >                mkdir -p root;
+> > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > > index 85401d3e09b..61e4af96c9a 100644
+> > > > --- a/.gitlab-ci.yml
+> > > > +++ b/.gitlab-ci.yml
+> > > > @@ -79,6 +79,7 @@ stages:
+> > > >      - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_riscv64.efi
+> > > >      - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm64.efi
+> > > >      - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm.efi
+> > > > +    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} ${TEST_PY_BD} ${TEST_PY_ID}
+> > > >      # create sdcard / spi-nor images for sifive unleashed using genimage
+> > > >      - if [[ "${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+> > > >          mkdir -p root;
+> > > > diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/post_build_tfa_fw_handoff.sh
+> > > > new file mode 100755
+> > > > index 00000000000..f876db593ba
+> > > > --- /dev/null
+> > > > +++ b/tools/post_build_tfa_fw_handoff.sh
+> > >
+> > > The "is this a valid board" check should be in the pipeline file (like
+> > > where we do all the other board-specific things) instead of the helper
+> > > script.
+> > >
+> > > > @@ -0,0 +1,87 @@
+> > > > +#!/bin/bash
+> > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > +#
+> > > > +# Copyright (c) 2025 Linaro Limited
+> > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > > > +#
+> > > > +# CI Post-buildman script for building TF-A 'flash.bin' with Measured
+> > > > +# Boot and Firmware Handoff enabled.
+> > > > +#
+> > > > +# Usage: from the top level U-Boot source tree, run:
+> > > > +# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} \
+> > > > +#     ${TEST_PY_BD} ${TEST_PY_ID}
+> > > > +#
+> > > > +# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated and copied
+> > > > +# to /tmp.
+> > > > +
+> > > > +set -e
+> > > > +
+> > > > +BUILDMAN_OUT_DIR=$(realpath "$1")
+> > > > +BOARD=$2
+> > > > +ID=$4
+> > > > +echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, ID: $ID"
+> > >
+> > > Can we not use fiptool to update the contents of a file here? And build
+> > > as much as possible in the Dockerfile, like we do for vexpress?
+> > >
+> > Sorry I am not quite clear about how it was done for fvp, maybe I
+> > missed some context, do you mean to build TF-A with OP-TEE at
+> > Dokerfile and generate a fip.bin without BL33? But then who will
+> > assemble BL1+fip+u-boot? by test hooks?
+>
+> So for FVP, in the Dockerfile we say BL33=/dev/null and this gets
+> packaged correctly. Then in u-boot-test-hooks we have bin/flash.fiptool
+> which will update "fip" with the just-built u-boot.bin. The logic:
+>     # If we have TF-A binaries, we need to use them.
+>     - if [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
+>         cp /opt/tf-a/"${TEST_PY_BD}"/fip.bin /opt/tf-a/"${TEST_PY_BD}"/bl1.bin /tmp/;
+>         export fip=/tmp/fip.bin;
+>         export bl1=/tmp/bl1.bin;
+>         export PATH=/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3:${PATH};
+>       fi
+>
+> Is how we know what bl1.bin and fip.bin to use as the base.
+>
+> --
+> Tom
 
-On Fri, Sep 19, 2025 at 12:09:53PM +0200, Rasmus Villemoes wrote:
+This should actually use binman.  We don't want any shell scripts for
+building :-) We finally got rid of the FIT generator script after some
+years.
 
+Build mbedtls and TFA should be in dockerfile, like we have for
+coreboot, for example. I suspect they will be useful in other tests
+too.
 
-> This all started from me wondering "why does this standalone app end
-> up being so huge"? Oh, it essentially links in its own standard C
-> library to get strlen() and snprintf(). Which then led to asking "why
-> don't we export all those standard C functions when we have them
-> anyway?".
->=20
-> CI has chewed on these and seem happy - it was CI which told me about
-> the necessity of [1/9]: https://github.com/u-boot/u-boot/pull/813
-
-For the series:
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
-That said, in general and looking towards the future, I do think "needs
-a non-trivial standalone app" is better done as a standalone EFI app
-rather than U-Boot's standalone API support. Our standalone API is weird
-and fragile (as this series shows you're well aware) but the EFI one is
-well defined and we just implement it.
-
---=20
-Tom
-
---WCX1MJW/3A98RmeD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaM1x+AAKCRAr4qD1Cr/k
-CtzaAP44kcZzEiEaiJOMryw5GkQGqlU3tUhKosuK3bD5m4cN/QD/Y0gnC8sEZ6dH
-fcI2OJBBbOz1+hhCAsffZRGeSd2AGwM=
-=SqxZ
------END PGP SIGNATURE-----
-
---WCX1MJW/3A98RmeD--
+Regards,
+Simon
