@@ -4,82 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E473CAC597
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 00:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B82BCAC597
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 00:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD4783390;
-	Fri, 19 Sep 2025 02:12:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 83DC7829E7;
+	Fri, 19 Sep 2025 02:57:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fZlioLKQ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DD678331F; Fri, 19 Sep 2025 02:12:33 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2714A82C84; Fri, 19 Sep 2025 02:57:54 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E5FF8329F
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 02:12:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A18B81E13
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 02:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-74381df387fso840820a34.0
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:12:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758240749; x=1758845549; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=q1DHKCbEKLORLWNcO0/110Sf2kDbn2L3qk9/Xxeph/s=;
- b=fZlioLKQhCJq45KlbFhIlGooIH/V2SsB5raZq9BbxOC6uOA9kqWczURhp5wpj3y2F5
- EiDasIAsTSuAtbm89YHtgFm76qmJBaBC2Hxh9oefq8XrA8GWt/1zj0fFDV5u7BwXc5Mp
- q5xxcyYXrGdJXFbl78OHS0Z9A3/Lx784MaCs0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758240749; x=1758845549;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=q1DHKCbEKLORLWNcO0/110Sf2kDbn2L3qk9/Xxeph/s=;
- b=AVPdU5peLbTIgfPP0+7J6jh1RnNi2Af0e+UdP4nfIgOV8Nwe+sVOwdJP7TDxS+C1SN
- QYLPi1QRrI32yXCW/r6kPIIVvC3Qs5KkjENx8k2BIy9G3loE1lxbhyJX2vFC8X8RQKLc
- J51lL60g8bXmmqD/5Z7p97sCqZjxSv82c9+rClRW0wmjkfPhWpIH5wifuHqOsIQZMzh5
- CBMpK4x2IyXvwvrvCKFFmQUIftsIekz3nZV74dU6fGNOrd9Dn8N6AEG2pg+SIYWEN3rM
- AKj+ePRCHv1jxP1QQoOG4VaRxz35wSklTlA09gpbvTJL5hakuImIHx98jBRwj34TPLtn
- QZqQ==
-X-Gm-Message-State: AOJu0YxnVnbj5bGG16M8Uw79XnJs+dcSH2OHpCeKclMkVpNUMdeNNf8A
- V5grVgE/htH6X2aYfLK+TeUH+u8JdYnfkfoBghh6B/aTALIRg4L3jvcvEHF+PP2pdB4=
-X-Gm-Gg: ASbGncscVBYGgutRsyvrC1oVmuXvWuf+244ReXWI0Nm0AOYs9hRLM42BhOFspwOG6M5
- B4uUlSNUHW+iHK3oWm9ecMyuJ1Vs3o0BMVwJrmLcCXwv4arlXYB+rtrfsBO5sL1Qo18rqTOs/xU
- 32kgtZZFOc12yERIM2ymQTIQ+dsenDcfPgd+U7sVbpbE+IDbKUHLVVt4B090ELIFo5mARcNb0Bz
- hU8kF2u7KKDympiaTXq/x4OAMMVv+h7fwy+We+Dd2b6rW/lDpMBD+GJD6i9C/+CCV058yyrrgDr
- IVHrMgIMxl82L6dDzo/nkYStuqUUGEpmMTHudBvVcEFN00fq5pcZR3kL2x2/1CPIakUGFQazkWO
- I0yTPBegr/AumZR6P5IpwiRG2vbYLoMXYmwh45xgGvgxgP6MBVCbTHWhub4Kin9kD2n4YvjjgR8
- 8RXMu53Y/8
-X-Google-Smtp-Source: AGHT+IH6TbmiJsmPJFh3XL/oDuaAJczLn8lzO3d8UAC0YyCzp3g/+WFJQuifZJGHDgYQ5b9qKhmMVw==
-X-Received: by 2002:a05:6830:82ea:b0:748:3ae3:8d20 with SMTP id
- 46e09a7af769-76f7bba8c3emr902261a34.19.1758240748991; 
- Thu, 18 Sep 2025 17:12:28 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7691b0244d7sm1694728a34.15.2025.09.18.17.12.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Sep 2025 17:12:28 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: JJLIU0@nuvoton.com, Jim Liu <jim.t90615@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250910021617.285527-1-JJLIU0@nuvoton.com>
-References: <20250910021617.285527-1-JJLIU0@nuvoton.com>
-Subject: Re: [PATCH v1] arm: nuvoton: remove unused parameter
-Message-Id: <175824074797.975344.6500072148002296122.b4-ty@konsulko.com>
-Date: Thu, 18 Sep 2025 18:12:27 -0600
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.61.9]) (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 6F8A9B2202B3;
+ Fri, 19 Sep 2025 02:57:50 +0200 (CEST)
+Message-ID: <a29fc221-7d35-4454-be40-5a7132e08760@freeshell.de>
+Date: Thu, 18 Sep 2025 17:57:48 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/7] doc: make pdfdocs: Specify texlive-xetex as a
+ prerequisite
+To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Neha Malcom Francis <n-francis@ti.com>
+References: <20250825224459.682403-1-adrianocarvalho.pt@gmail.com>
+ <20250825224459.682403-2-adrianocarvalho.pt@gmail.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250825224459.682403-2-adrianocarvalho.pt@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,17 +57,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Sep 2025 10:16:17 +0800, Jim Liu wrote:
 
-> remove CFG_SYS_BOOTM_LEN parameter
+
+On 8/25/25 15:44, Adriano Carvalho wrote:
+> If I don't apt install texlive-xetex, this is what I get with docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025:
 > 
+> uboot@35c89b9ab70e:~/u-boot$ make pdfdocs
+>   HOSTCC  scripts/basic/fixdep
+> doc/Makefile:89: The 'xelatex' command was not found. Make sure you have it installed and in PATH to produce PDF output.
+>   SKIP    Sphinx pdfdocs target.
 > 
+> NOTE: This won't completely fix the pdfdocs target. See next commit(s).
+> 
+> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> ---
+>  doc/build/documentation.rst | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/doc/build/documentation.rst b/doc/build/documentation.rst
+> index 098c96a4c4f..68d7e11c572 100644
+> --- a/doc/build/documentation.rst
+> +++ b/doc/build/documentation.rst
+> @@ -16,6 +16,8 @@ the following dependencies are needed to build the documentation:
+>  
+>  * texinfo (if building the `Infodoc documentation`_)
+>  
 
-Applied to u-boot/next, thanks!
+> +* texlive-xetex (if building the `PDF documentation`_ through the *pdfdocs* target)
+> +
 
-[1/1] arm: nuvoton: remove unused parameter
-      commit: 30fbbde2cdfaebb1db47d7c0d457a32e3c6552c3
--- 
-Tom
+needs one additional package recommended:
 
+* texlive-xetex texlive-fonts-recommended (if building the `PDF
+documentation`_ through the *pdfdocs* target)
 
+>  HTML documentation
+>  ------------------
+>  
+
+-E
