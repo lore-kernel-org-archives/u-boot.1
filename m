@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D8B2CAC597
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 00:12:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39B5CCAC597
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 00:12:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 086E9832AD;
-	Fri, 19 Sep 2025 02:12:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 686A783327;
+	Fri, 19 Sep 2025 02:12:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="t1+o2mS+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eUz+zkNV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D0338329B; Fri, 19 Sep 2025 02:12:30 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 47AAC832AD; Fri, 19 Sep 2025 02:12:31 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC8C38329F
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 02:12:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18BF5832DA
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 02:12:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-751415c488cso1484537a34.1
- for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:12:27 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-74d3389cd7eso514983a34.1
+ for <u-boot@lists.denx.de>; Thu, 18 Sep 2025 17:12:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758240746; x=1758845546; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758240748; x=1758845548; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rQsIwjVGyCgGh3gCz+2chnkwXu8CyUum9auvz7loEuc=;
- b=t1+o2mS+ubwU3nicwhghM08uhiNGVsjF3/4jjOr+BolOZdyA+2FJZz7hmFrAgNz0Cj
- WO4PmG+EdJS9THEtXDw+rutEqxEvvuIrbYORjotZxLgb2xZJ/aCFrTF1q2oGQ1tNfDw5
- DzM2cWyp7dGGO2ZdMv5ZvjBZykMwJVQBZQmqA=
+ bh=BVWLGN4ss3+eE+XqfEygJ210oMtwxgm7ebJ+pyMfAtY=;
+ b=eUz+zkNVQP5Mn2g+KStgLDiXhg70vnmrAm+PHtdvkBeIKwBD+LCuG+ZGU4icZwVpY4
+ BETo/jP7qq8F8PxaZspbAaegsgaa/MdWlZmZLCdEe+Oh/ZBvxKQXwiqlPbfcGcKoc6oe
+ V+mCVjpBQoMcECG44X35mSgkQeGAxs1+OOBoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758240746; x=1758845546;
+ d=1e100.net; s=20230601; t=1758240748; x=1758845548;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rQsIwjVGyCgGh3gCz+2chnkwXu8CyUum9auvz7loEuc=;
- b=IeQU3ipG/0FG7mlIsbf3fXIe3pRXFJ0OBGwBn++En5VwRGkyDvAGcwYf2HgYUGBppb
- xC9kPQaQllMDpx+IXmrNTNZ1rnTINvO4G7aQGWRwukXESorjy7TxRGDQ4t6iGKqKv4Ua
- s6VGzIH9rcQsfvw5LaM3RCCe2TjEr1D5XD+SFRArmRQb3JFhnoQDVVj5jiXGIlFZSaGn
- pdms0NwkrQh6WDRRrWSSJpN1VH8DlQ5Kzcks6nTunbuCVlwLF5zuebBXARP0OaA+v7sl
- 3sMEqbylvNQKMaLlpnQS2UjxnWurJNdK3BStF+g6XNqIjuRqo4C8n7xmSQtGOJ3zm9CQ
- Sftg==
-X-Gm-Message-State: AOJu0Yy9xxtN9y+d3wedHXsZGsJbFpUe2IYdmmJiYeByGhUK0x6hdBkf
- K5ZtuYhWd5QdMI7WZuW2I5hWtdRz3hdouc95TwcqaZCkheb2H/nlV/7j5ybhLu5L5wI=
-X-Gm-Gg: ASbGncsoJaM96g6cJNWs39vMnneAB7hePVzN25wOiXEgWHetT6/yDWp2nFxXOxSShX0
- qa4wIe4D3qzzHRe4MnBFH1lt4y/9SstpW05eplhJRPDFKlOPwma1tX5OoDJFfLj35B1oLdVPuIc
- zaCo3gOA2rOEteNMiCWZirb9KOqM76YuhenbmfsVcgQdMhaPkLfcGaL2Y5jXroLYAS2tKyJh9pV
- g7ihULLMdyChuOGoLNaMx+LdIV4xc19GL6Sq3vQVzD4UDg2HYbb3xDUUybVIh1oJIVoVprYjkU8
- WJBZD8yHVpBSUxfyZXIUXRuQgKx8aRZvZmsSyWb21Ilgu54ZU0XqEk+lTragFmuC+KVIJ3zNT1c
- WyTg3RCmDTuY/1EMBwlZugzk7fKR1IlgucvIM5e1PuW9+NwjezeBEPlxPjVt+te6VJzwl0Z9ztQ
- ==
-X-Google-Smtp-Source: AGHT+IG4wEwS+fuYydi7XdSXxzJNUqtvQn4xi522Yw5ChApl+oWjAWc9M9PaXDPTvx71uKGq3uhyyA==
-X-Received: by 2002:a05:6830:3913:b0:757:7d79:bd9c with SMTP id
- 46e09a7af769-76f79079584mr989100a34.25.1758240746576; 
- Thu, 18 Sep 2025 17:12:26 -0700 (PDT)
+ bh=BVWLGN4ss3+eE+XqfEygJ210oMtwxgm7ebJ+pyMfAtY=;
+ b=VJn3ve3KWDDdw6y6Gm9HtDoRFuodfEgo7B7KA15XCAy5scIjhci/jeP7J1k9Lf7och
+ HfrzbcDBDXH18PpggTjRDggeTBqMNUfOYzWEBW7zWirxBovmmkM3GR6KPkblTVbUhpYx
+ kpNcMB+Iv6+6UXCPZqEpHeiXW1jz1m2ipJPSRbu00hMWn6CY5QzfdpUff6ayl1N2++k1
+ 893sMRtJ2F/4rFfU1T1ZGxCqOZ3uFquo4eiiPjQOPHM3QSDTROyzTakC1YEl0Wclxf8G
+ VScaHzSN74xiUC6hILtu43OpcsXxGvHlqslsp/AAhW7S18Y6bM09fhetH9n3UqSv5Lvh
+ vHNg==
+X-Gm-Message-State: AOJu0YzMdmVP+9xLQE103gNz/NluF5a19h9hStvPGyna4P2ylg/t4TUz
+ urLYAHgs+H76EUH2PwokyDmN9wb3RWE+phuV0gWnY9ekKiu4ji/aJpOuLbF4avj/KEg=
+X-Gm-Gg: ASbGncv7iG3FDpwQamnLmPzt7kWq2r0ebiU6f1u4shUi9KOZzhYbjroUTx1aQjUYTf6
+ shyZQSGHALsbQZt7Goe/KjKBUg+Bcj0NRU+4+8EtsIZLq0+Z8z3BLUhvotVLUo5dpjBTP7UnHsO
+ a57crctaWDNSyiwlWnhO3g9dVjmk9L5vA9TBrpCANFTnLnVXRW+aEmrGdjZ46zGYl3L/jd01rdg
+ aD5hR+HoOVD/4wQQGvxWWKTgPZnaop1ZXpaQX7r33SsF0A43BSEbq8B9F0V1gZ+ydrRPfw60tMo
+ qX0EindlQHMcD5GyA8zyFuRIzJV7Tk5daRQFA9f4jSKw5Lm9kO8sLmr+/OG6sy8D81922TWor+j
+ 64PXOuV7b6WJGxgfLVyzaSQIyQlKvvObZBRMStST3qtHuUFLN3MxYyU7HH7UQlbJ/Mi/DpJYyiB
+ DEjvP+4YXN
+X-Google-Smtp-Source: AGHT+IG2yN3I2e69S2ia3fBw1/nP5+3ygkEhH9duVqhE56OBiMVetcvGa8cp3swRWqGT4o+RAgHyIw==
+X-Received: by 2002:a05:6830:63ca:b0:741:bf2f:ee87 with SMTP id
+ 46e09a7af769-76f5f990256mr1066905a34.0.1758240747834; 
+ Thu, 18 Sep 2025 17:12:27 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7691b0244d7sm1694728a34.15.2025.09.18.17.12.25
+ 46e09a7af769-7691b0244d7sm1694728a34.15.2025.09.18.17.12.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Sep 2025 17:12:26 -0700 (PDT)
+ Thu, 18 Sep 2025 17:12:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Weijie Gao <weijie.gao@mediatek.com>
-Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>
-In-Reply-To: <cover.1757315849.git.weijie.gao@mediatek.com>
-References: <cover.1757315849.git.weijie.gao@mediatek.com>
-Subject: Re: [PATCH v4 0/5] Add support for MediaTek MT7987/MT7988 built-in
- 2.5Gb ethernet PHY (v4)
-Message-Id: <175824074567.975344.2778312909667402144.b4-ty@konsulko.com>
-Date: Thu, 18 Sep 2025 18:12:25 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Martin Schwan <m.schwan@phytec.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>, 
+ Simon Glass <sjg@chromium.org>
+In-Reply-To: <20250908134833.38297-1-marek.vasut+renesas@mailbox.org>
+References: <20250908134833.38297-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] boot: Increase kernel size limit to 128 MiB on
+ ARM64/PPC/RV
+Message-Id: <175824074681.975344.11287721738562196556.b4-ty@konsulko.com>
+Date: Thu, 18 Sep 2025 18:12:26 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,32 +100,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Sep 2025 16:33:57 +0800, Weijie Gao wrote:
+On Mon, 08 Sep 2025 15:48:16 +0200, Marek Vasut wrote:
 
-> This patch adds PHY driver for MediaTek MT7987/MT7988 built-in 2.5Gb
-> ethernet PHY.
+> The ARM64 kernel Image size with LOCKDEP enabled is now around 80 MiB, which
+> makes it unbootable due to "Image too large: increase CONFIG_SYS_BOOTM_LEN".
+> Increase the image size limit to 128 MiB to future proof the limit.
 > 
-> Changes in v4:
-> Remove unneeded const from argv[0] used for cmd_process()
 > 
-> Changes in v3:
-> 1. Removed all optional code configured by dt properties
-> 2. Make use of request_firmware_into_buf_via_script() for firmware loading
-> 
-> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/5] misc: fs_loader: allow returning actual firmware data size in request_firmware_into_buf_via_script()
-      commit: 63585689686fee83b382edacad249a4ec35d7c3d
-[2/5] misc: fs_loader: allow using long script name in request_firmware_into_buf_via_script()
-      commit: 5b1d3d83d68a713c492bfad991338d47069f337e
-[3/5] net: mediatek: associate PHY device with dts node specified by phy-handle
-      commit: 465d76a0381dae83942f81329400b1fa2487185a
-[4/5] net: phy: Add MediaTek built-in 2.5Gb ethernet PHY driver
-      commit: b4b266fc139ad0a8856db6a7495f7e9a2cc27a6f
-[5/5] MAINTAINERS: update ethernet-related file list for MediaTek ARM platform
-      commit: 32b4c88ff2712ffafec875e22d866537d2f33dac
+[1/1] boot: Increase kernel size limit to 128 MiB on ARM64/PPC/RV
+      commit: e18a0dec6e383bf903b7b577201fece58122dae8
 -- 
 Tom
 
