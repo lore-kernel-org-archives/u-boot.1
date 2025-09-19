@@ -4,54 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A4C3CAC592
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 10:50:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13ED7CAC592
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 10:52:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 373A083542;
-	Fri, 19 Sep 2025 12:50:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A2B2683526;
+	Fri, 19 Sep 2025 12:52:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A036383335; Fri, 19 Sep 2025 12:50:20 +0200 (CEST)
+ id D0F6583526; Fri, 19 Sep 2025 12:52:22 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 029E08329F
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 12:50:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C21C18329F
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 12:52:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 58JAmuhN069049
+ by Atcsqr.andestech.com with ESMTPS id 58JApcAF070679
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Fri, 19 Sep 2025 18:48:56 +0800 (+08)
+ Fri, 19 Sep 2025 18:51:38 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 19 Sep
- 2025 18:48:56 +0800
-Date: Fri, 19 Sep 2025 18:48:52 +0800
+ 2025 18:51:38 +0800
+Date: Fri, 19 Sep 2025 18:51:35 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: Vivian Wang <wangruikang@iscas.ac.cn>
-CC: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
- <u-boot@lists.denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- "Auer, Lukas" <lukas.auer@aisec.fraunhofer.de>
-Subject: Re: [PATCH] riscv: qemu: Remove fdt_high default
-Message-ID: <aM01FDY8I6CGwDe9@swlinux02>
-References: <20250915-qemu-riscv-remove-fdt-high-v1-1-661178447396@iscas.ac.cn>
+To: E Shattow <e@freeshell.de>
+CC: Rick Chen <rick@andestech.com>, Minda Chen <minda.chen@starfivetech.com>, 
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, Heinrich Schuchardt
+ <heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH v3 1/4] riscv: dts: starfive: prune redundant
+ jh7110-common overrides
+Message-ID: <aM01tzHP26weSAqC@swlinux02>
+References: <20250917000254.1134031-1-e@freeshell.de>
+ <20250917000254.1134031-2-e@freeshell.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250915-qemu-riscv-remove-fdt-high-v1-1-661178447396@iscas.ac.cn>
+In-Reply-To: <20250917000254.1134031-2-e@freeshell.de>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 58JAmuhN069049
+X-MAIL: Atcsqr.andestech.com 58JApcAF070679
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,18 +71,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 15, 2025 at 07:45:49AM +0800, Vivian Wang wrote:
-> Setting fdt_high to all ones is discouraged and does not appear to be
-> useful for RISC-V QEMU. Moreover, it causes a boot failure when the FDT
-> generated internally by QEMU is used while booting. Remove it to allow
-> U-Boot to pick a suitable address and relocate the FDT.
+On Tue, Sep 16, 2025 at 05:02:22PM -0700, E Shattow wrote:
+> Prune jh7110-common-u-boot.dtsi (clocks, qspi flash, eeprom, and
+> bootph-pre-ram hints now upstream since devicetree-rebasing v6.16).
 > 
-> Closes: https://lore.kernel.org/u-boot/8397369a-9b0b-4798-9c30-3a81165657d6@iscas.ac.cn
-> Signed-off-by: Vivian Wang <wangruikang@iscas.ac.cn>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> Reviewed-by: Lukas Auer <lukas.auer@aisec.fraunhofer.de>
+> In preparation for removal of per-dts jh7110-*-u-boot.dtsi replace include
+> by next dependency jh7110-u-boot.dtsi in automatic dtsi inclusion order.
+> 
+> Signed-off-by: E Shattow <e@freeshell.de>
 > ---
->  include/configs/qemu-riscv.h | 1 -
->  1 file changed, 1 deletion(-)
+>  arch/riscv/dts/jh7110-common-u-boot.dtsi      | 99 -------------------
+>  .../jh7110-deepcomputing-fml13v01-u-boot.dtsi |  2 +-
+>  arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi  |  2 +-
+>  .../dts/jh7110-pine64-star64-u-boot.dtsi      |  2 +-
+>  ...10-starfive-visionfive-2-v1.2a-u-boot.dtsi |  2 +-
+>  ...10-starfive-visionfive-2-v1.3b-u-boot.dtsi |  2 +-
+>  6 files changed, 5 insertions(+), 104 deletions(-)
+>  delete mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
