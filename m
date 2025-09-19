@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A6B0CAC592
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 10:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C080CAC592
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 10:48:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF4DB8344E;
-	Fri, 19 Sep 2025 12:47:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91715833F5;
+	Fri, 19 Sep 2025 12:48:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFC0B8319C; Fri, 19 Sep 2025 12:47:32 +0200 (CEST)
+ id 88DFE833F5; Fri, 19 Sep 2025 12:48:02 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 796E98344E
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 12:47:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F7E183510
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 12:47:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 58JAlHpL068691
+ by Atcsqr.andestech.com with ESMTPS id 58JAlgcM068787
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Fri, 19 Sep 2025 18:47:17 +0800 (+08)
+ Fri, 19 Sep 2025 18:47:42 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 19 Sep
- 2025 18:47:17 +0800
-Date: Fri, 19 Sep 2025 18:47:14 +0800
+ 2025 18:47:42 +0800
+Date: Fri, 19 Sep 2025 18:47:39 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Jamie Gibbons <jamie.gibbons@microchip.com>
 CC: <u-boot@lists.denx.de>, Conor Dooley <conor.dooley@microchip.com>,
  Valentina Fernandez Alanis <valentina.fernandezalanis@microchip.com>, Cyril
  Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 6/6] board: microchip: mpfs_generic: include processing
- of dtbos
-Message-ID: <aM00slz_V7lkNgkF@swlinux02>
+Subject: Re: [PATCH 4/6] doc: microchip: add mpfs_video.rst
+Message-ID: <aM00y816sqWm-5Ts@swlinux02>
 References: <20250902101105.3218793-1-jamie.gibbons@microchip.com>
- <20250902101105.3218793-7-jamie.gibbons@microchip.com>
+ <20250902101105.3218793-5-jamie.gibbons@microchip.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250902101105.3218793-7-jamie.gibbons@microchip.com>
+In-Reply-To: <20250902101105.3218793-5-jamie.gibbons@microchip.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 58JAlHpL068691
+X-MAIL: Atcsqr.andestech.com 58JAlgcM068787
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,13 +69,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 02, 2025 at 11:11:03AM +0100, Jamie Gibbons wrote:
-> Include the use of the process dtbo functionality added in the MPFS
-> system controller driver.
+On Tue, Sep 02, 2025 at 11:11:01AM +0100, Jamie Gibbons wrote:
+> Add documentation to support the addition of the MPFS Video Kit.
 > 
 > Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
 > ---
->  board/microchip/mpfs_generic/mpfs_generic.c | 2 ++
->  1 file changed, 2 insertions(+)
+>  doc/board/microchip/index.rst      |   1 +
+>  doc/board/microchip/mpfs_video.rst | 105 +++++++++++++++++++++++++++++
+>  2 files changed, 106 insertions(+)
+>  create mode 100644 doc/board/microchip/mpfs_video.rst
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
