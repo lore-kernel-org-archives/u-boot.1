@@ -4,55 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C080CAC592
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 10:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44202CAC592
+	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 10:48:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91715833F5;
-	Fri, 19 Sep 2025 12:48:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7E3983314;
+	Fri, 19 Sep 2025 12:48:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88DFE833F5; Fri, 19 Sep 2025 12:48:02 +0200 (CEST)
+ id F1F2F8350A; Fri, 19 Sep 2025 12:48:39 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F7E183510
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 12:47:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90BDB83314
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 12:48:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 58JAlgcM068787
+ by Atcsqr.andestech.com with ESMTPS id 58JAmGJi068936
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Fri, 19 Sep 2025 18:47:42 +0800 (+08)
+ Fri, 19 Sep 2025 18:48:16 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 19 Sep
- 2025 18:47:42 +0800
-Date: Fri, 19 Sep 2025 18:47:39 +0800
+ 2025 18:48:16 +0800
+Date: Fri, 19 Sep 2025 18:48:11 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: Jamie Gibbons <jamie.gibbons@microchip.com>
-CC: <u-boot@lists.denx.de>, Conor Dooley <conor.dooley@microchip.com>,
- Valentina Fernandez Alanis <valentina.fernandezalanis@microchip.com>, Cyril
- Jean <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 4/6] doc: microchip: add mpfs_video.rst
-Message-ID: <aM00y816sqWm-5Ts@swlinux02>
-References: <20250902101105.3218793-1-jamie.gibbons@microchip.com>
- <20250902101105.3218793-5-jamie.gibbons@microchip.com>
+To: Eoin Dickson <Eoin.Dickson@microchip.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <Conor.Dooley@microchip.com>,
+ <Jamie.Gibbons@microchip.com>, <Praveen.Kumar@microchip.com>,
+ <Cyril.Jean@microchip.com>, <jagan@amarulasolutions.com>
+Subject: Re: [PATCH] gpio: mpfs_gpio: fix compilation warnings
+Message-ID: <aM006wxyMBjwEGK6@swlinux02>
+References: <20250909125347.2847130-1-Eoin.Dickson@microchip.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20250902101105.3218793-5-jamie.gibbons@microchip.com>
+In-Reply-To: <20250909125347.2847130-1-Eoin.Dickson@microchip.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
  ATCPCS34.andestech.com (10.0.1.134)
 X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 58JAlgcM068787
+X-MAIL: Atcsqr.andestech.com 58JAmGJi068936
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,14 +68,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 02, 2025 at 11:11:01AM +0100, Jamie Gibbons wrote:
-> Add documentation to support the addition of the MPFS Video Kit.
+On Tue, Sep 09, 2025 at 06:23:47PM +0530, Eoin Dickson wrote:
+> From: Eoin Dickson <eoin.dickson@microchip.com>
 > 
-> Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
+> mchp_gpio_get_value() should return int instead of bool, and some casts
+> are needed.
+> 
+> Signed-off-by: Eoin Dickson <eoin.dickson@microchip.com>
 > ---
->  doc/board/microchip/index.rst      |   1 +
->  doc/board/microchip/mpfs_video.rst | 105 +++++++++++++++++++++++++++++
->  2 files changed, 106 insertions(+)
->  create mode 100644 doc/board/microchip/mpfs_video.rst
+>  drivers/gpio/mpfs_gpio.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
