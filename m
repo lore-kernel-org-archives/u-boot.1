@@ -4,82 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03B3CCAC5A0
-	for <u-boot@archiver.kernel.org>; Sat, 20 Sep 2025 05:11:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 789EACAC5A0
+	for <u-boot@archiver.kernel.org>; Sat, 20 Sep 2025 10:21:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CF24833E9;
-	Sat, 20 Sep 2025 07:10:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B91A8309A;
+	Sat, 20 Sep 2025 12:21:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LO3Bme80";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A1A982A9E; Sat, 20 Sep 2025 04:54:38 +0200 (CEST)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9BCAC8317B; Sat, 20 Sep 2025 12:21:50 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCC4D8003E
- for <u-boot@lists.denx.de>; Sat, 20 Sep 2025 04:54:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26FDA8004F
+ for <u-boot@lists.denx.de>; Sat, 20 Sep 2025 12:21:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chalianis1@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-32eb45ab7a0so2575301a91.0
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 19:54:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758336874; x=1758941674; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1G+kmRkHQJfVQONBkVPyf3dGIeBs7Op9gRo3iaO1ncU=;
- b=LO3Bme80aPUNx49E9A1ntwz6JuuVGqqG7FuZ6zSbPh8prHFJ2M1wfwAgLJ/QqmoY8Y
- hj+7NILTHgrPuhDLUNaZ3gaAJXS79bXztXKVW8kSc4SuPV8hYFrhN8MdG8+a2AfuZEFi
- S/XKN/yvkrPmuYILiE3awjHG4HRRAwEHlUGzOZvZPpAumwr+I1YW4nf7FuYKdw0x8HB/
- 87GO9NzbSzW6PwagSirxUhLP9V5CSJhWF+/n4yeqoLV8RJu3oKbTjvQ3kH93jVRugXch
- uPUJkPBEyIM/phFw2gmpcJEFWi89LJ1YUJaocOXzc7HFE1KL7Ebs+ckaacmk4ZbxZ6tY
- UWMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758336874; x=1758941674;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1G+kmRkHQJfVQONBkVPyf3dGIeBs7Op9gRo3iaO1ncU=;
- b=KVqS3ABEd29ED3E6DLuzRuCY1uODjQ65NLLnwG2kSDOMNrcp3j5obRZ0mcMYiomae6
- yhOM7fOpUYmTEUlFsaXJFee3IHuCQDDTGNxEzPHcr63YDePmi49MZ5jwPgkOjFBlIfvj
- 69WXHVCK6KLWrYGcpVcZ+5byylE0mz4wDhtgN1KZfnATMZNkB0zBzYN1EaYNkVN2qylb
- FaWu/dG3VTA9RGoAiq5rEAVlWLpJfZluCJjWO0qNsg1nuNEXR4BGXVOrOWS+V2BzNnnu
- lX3E8ZGVmJe4VxK0EHuMH5eHt9WGEkT0lBJJ4tNocF48/c8n/sy068UgnJe0ersb/pVh
- fcDg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU/5UOcuaGB0SVsEt0HXzd8uR9PtjTmtiHq5TeNEOeWRDutV0g8Abb/Cjxbr9H8DJ69nZJ/6ZQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwnMTVMa4UBBPpfc6PtagmzkmVv5cz/pw+dKA6smfpsTw84xBDn
- ogCPlqMuZoS7A/OKi6tYQssloreQc/GOk5hml8r8kH7frIvgUgKNAqlxJFVZ99RWOEGP8VT6o+8
- j4Rar85l0BkPhgh3tvrkXCjFVz8OThzo=
-X-Gm-Gg: ASbGncuPfCRg7VENq1rwDzmwqglDKD5Dx6ehPNEa4V6zOYTxPGnt8KUeIX0H9NbJP8g
- nWirW3BTF05rkHZWGd4Pidx0VcjVXA2W/gihvHtD9CGsGhvC5NzvWi+nnWruZKPg75SmV/i6Ssf
- YRnZJLJ7b87peSKVQvY/THt168EiXVIUITfp4Ex3bK5ZCg4xLFZ+NbtxhPdAUtcYqsIwP2hIREg
- W+OJqzV2ln/jCk59ZVEOj3rL5suZAvXNp5yTPqAwcxX9NvWE54stpP65wenZ7LslDC7JA==
-X-Google-Smtp-Source: AGHT+IE8AeV/RwOwkpIITrsRfBJhfLBYgYNWsMPLAzFiV1jdmG4/ZofoLqLJ+2fXqoiXtHtluic9YCVJaHKLSrWWdHY=
-X-Received: by 2002:a17:902:d50c:b0:26e:49e3:55f0 with SMTP id
- d9443c01a7336-26e49e38a46mr35626155ad.16.1758336874265; Fri, 19 Sep 2025
- 19:54:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
+ by Atcsqr.andestech.com with ESMTPS id 58KAK5TA032636
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
+ Sat, 20 Sep 2025 18:20:05 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sat, 20 Sep
+ 2025 18:20:05 +0800
+Date: Sat, 20 Sep 2025 18:20:01 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <ycliang@andestech.com>, <rick@andestech.com>,
+ <ziyao@disroot.org>, <randolph@andestech.com>,
+ <heinrich.schuchardt@canonical.com>, <hal.feng@starfivetech.com>,
+ <jamie.gibbons@microchip.com>, <eoin.dickson@microchip.com>,
+ <wangruikang@iscas.ac.cn>, <greentime.hu@sifive.com>, <e@freeshell.de>
+Subject: [GIT,PULL] u-boot-riscv/next
+Message-ID: <aM5_0WpehgnK8wH-@swlinux02>
 MIME-Version: 1.0
-References: <20250919222424.95815-1-chalianis1@gmail.com>
- <CAEfUkUJmMh3dHJRhRxJZHe6b44b+59K6+H1UoruEZqXQDiL9iQ@mail.gmail.com>
-In-Reply-To: <CAEfUkUJmMh3dHJRhRxJZHe6b44b+59K6+H1UoruEZqXQDiL9iQ@mail.gmail.com>
-From: anis chali <chalianis1@gmail.com>
-Date: Fri, 19 Sep 2025 22:54:22 -0400
-X-Gm-Features: AS18NWAazTIZxJ65UWrzg2W1szElcy4iWLSdUVp9qK4QHA5RZYJHjFjIMtKGJts
-Message-ID: <CAL+1fyDSaoLudm4_cqAzL+1AWp2D2pp5M2dNxcQNbwQ31s0wcQ@mail.gmail.com>
-Subject: Re: [PATCH] arm: mach-qemu: add support for qemu booted from TF-A.
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: trini@konsulko.com, patrick.rudolph@9elements.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 20 Sep 2025 07:10:46 +0200
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
+ ATCPCS34.andestech.com (10.0.1.134)
+X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 58KAK5TA032636
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,100 +68,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Okay thenk you for feedback. I will check this next week, I will
-reformat the patch, concerning the second point for efi capsules
-I didn't consider it, for me u-boot didn't support to run as an efi
-application in arm64 systems but it is interesting to know that.
+Hi Tom,
 
-Regards.
-Anis.
+The following changes since commit a209627ed7921f40669f5c0795570d40e77e4cb7:
 
+  Merge patch series "board: dhelectronics: Check pointer before access in dh_get_value_from_eeprom_buffer()" (2025-09-16 16:14:30 -0600)
 
-Le ven. 19 sept. 2025 =C3=A0 20:37, Raymond Mao <raymond.mao@linaro.org> a =
-=C3=A9crit :
->
-> Hi,
->
-> On Fri, 19 Sept 2025 at 18:24, <chalianis1@gmail.com> wrote:
-> >
-> > From: Chali Anis <chalianis1@gmail.com>
-> >
-> > add the ability to be booted from Arm Trusted Firmware for qemu aarch64=
-,
-> > to do so we need to skip NOR flash partition setup.
-> > U-boot launched as BL33 from TF-A is supported and Tested on arm64 with
-> > qemu-system-aarch64 and the qemu ARM64 support ARCH_SUPPORT_TFABOOT.
-> >
-> Actually the patch is trying to skip part of the initialization when
-> U-Boot is running as BL33, so the statement like "add the ability to
-> be booted...", "U-boot launched as BL33 from TF-A is supported" won't
-> help as U-Boot is working as BL33 already.
->
-> > Signed-off-by: Chali Anis <chalianis1@gmail.com>
-> > ---
-> >  arch/arm/mach-qemu/Kconfig             | 1 +
-> >  board/emulation/common/qemu_mtdparts.c | 2 ++
-> >  2 files changed, 3 insertions(+)
-> >
-> > diff --git a/arch/arm/mach-qemu/Kconfig b/arch/arm/mach-qemu/Kconfig
-> > index 9c06c6a3a5ce..316dde5145c0 100644
-> > --- a/arch/arm/mach-qemu/Kconfig
-> > +++ b/arch/arm/mach-qemu/Kconfig
-> > @@ -18,6 +18,7 @@ config TARGET_QEMU_ARM_64BIT
-> >         bool "ARMv8, 64bit"
-> >         select ARM64
-> >         select BOARD_LATE_INIT
-> > +       select ARCH_SUPPORT_TFABOOT
-> >
-> >  config TARGET_QEMU_ARM_SBSA
-> >         bool "SBSA Reference"
-> > diff --git a/board/emulation/common/qemu_mtdparts.c b/board/emulation/c=
-ommon/qemu_mtdparts.c
-> > index c1501276789c..c3863d3b0479 100644
-> > --- a/board/emulation/common/qemu_mtdparts.c
-> > +++ b/board/emulation/common/qemu_mtdparts.c
-> > @@ -59,6 +59,7 @@ void board_mtdparts_default(const char **mtdids, cons=
-t char **mtdparts)
-> >                         debug("mtd device =3D %s\n", dev->name);
-> >                 }
-> >
-> > +#ifndef CONFIG_TFABOOT
-> >                 mtd =3D get_mtd_device_nm("nor0");
-> >                 if (!IS_ERR_OR_NULL(mtd)) {
-> >                         mtd_partition =3D CONFIG_MTDPARTS_NOR0;
-> > @@ -72,6 +73,7 @@ void board_mtdparts_default(const char **mtdids, cons=
-t char **mtdparts)
-> >                         board_get_mtdparts("nor1", mtd_partition, ids, =
-parts);
-> >                         put_mtd_device(mtd);
-> >                 }
-> > +#endif
-> >
->
-> Skipping the default NOR mtdparts when TFABOOT is selected looks fine.
-> However, qemu_dfu.c still sets dfu_alt_info based on those NOR
-> partitions (used by DFU/EFI capsule flows).
->
-> This actually brings one concern related to capsule update: currently
-> the QEMU ARM64 board depends on mtdparts to make EFI capsule update
-> work.
-> It raises a question: do we actually want to support capsule update
-> when U-Boot is running as BL33?
-> If yes, then the current patch breaks capsule update and more work is nee=
-ded.
-> If no, we should make it explicit (e.g. prevent
-> EFI_CAPSULE_FIRMWARE_MANAGEMENT from being selected together with
-> TFABOOT).
->
-> BTW, can you please add a rev number in the subject line? E.g. [PATCH
-> v2], [PATCH v3]... See the patterns from other patches.
->
-> Regards,
-> Raymond
->
-> >         }
-> >
-> >         mtd_initialized =3D true;
-> > --
-> > 2.34.1
-> >
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
+
+for you to fetch changes up to 10fdc2735da3a4825a5172056090eaf41e061627:
+
+  configs: starfive: Use visionfive2 DEVICE_TREE_INCLUDES dtsi named similar to defconfig (2025-09-19 19:23:32 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/27673
+----------------------------------------------------------------
+- Switch to upstream devicetree for TH1520 platform
+- Remove fdt_high env variable
+- Support SMP on RISC-V cores with Zalrsc only
+- Make MPFS Generic
+- riscv: dts: starfive: prune redundant jh7110-common
+----------------------------------------------------------------
+E Shattow (4):
+      riscv: dts: starfive: prune redundant jh7110-common overrides
+      riscv: dts: starfive: sync visionfive2 overrides with upstream Linux for-next
+      riscv: dts: starfive: visionfive2 depend on SYS_CPU automatic dtsi inclusion
+      configs: starfive: Use visionfive2 DEVICE_TREE_INCLUDES dtsi named similar to defconfig
+
+Eoin Dickson (1):
+      gpio: mpfs_gpio: fix compilation warnings
+
+Greentime Hu (1):
+      arch/riscv: Remove unused macro in encoding.h
+
+Hal Feng (1):
+      pcie: starfive: Remove the redundant print of probe success
+
+Heinrich Schuchardt (1):
+      starfive: avoid NULL dereference in fdt_check_header()
+
+Jamie Gibbons (6):
+      board: microchip: icicle: rename all icicle files to generic
+      configs/microchip_mpfs_generic_defconfig: add board
+      doc: microchip: introduce common sections
+      doc: microchip: add mpfs_video.rst
+      misc: mpfs_syscontroller: add functions to read device tree overlays
+      board: microchip: mpfs_generic: include processing of dtbos
+
+Randolph Lin (1):
+      include: configs: andes: Remove fdt_high env variable
+
+Vivian Wang (1):
+      riscv: qemu: Remove fdt_high default
+
+Yao Zi (7):
+      configs: th1520_lpi4a: Enlarge SYS_MALLOC_F_LEN to 0x10000
+      clk: thead: th1520-ap: Mark drivers as DM_FLAG_PRE_RELOC
+      pinctrl: th1520: Mark driver as DM_FLAG_PRE_RELOC
+      dts: th1520: Switch to upstream devicetree
+      riscv: Add Kconfig options to distinguish Zaamo and Zalrsc
+      configs: ibex-ast2700: Explicitly disable Zaamo and Zalrsc extension
+      riscv: Add a Zalrsc-only alternative for synchronization in start.S
+
+ arch/riscv/Kconfig                                 |  23 +-
+ arch/riscv/Makefile                                |   7 +-
+ arch/riscv/cpu/start.S                             |  26 +-
+ arch/riscv/cpu/th1520/Kconfig                      |   1 +
+ arch/riscv/dts/Makefile                            |   1 -
+ arch/riscv/dts/jh7110-common-u-boot.dtsi           |  99 ---
+ .../dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi  |   7 -
+ arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi       |   7 -
+ arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi    |   7 -
+ .../jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi |   7 -
+ .../jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi |   7 -
+ ...-boot.dtsi => starfive-visionfive2-u-boot.dtsi} |  82 +--
+ arch/riscv/dts/th1520-lichee-module-4a-u-boot.dtsi |  10 +
+ arch/riscv/dts/th1520-lichee-module-4a.dtsi        | 164 -----
+ arch/riscv/dts/th1520-lichee-pi-4a-u-boot.dtsi     |  27 +
+ arch/riscv/dts/th1520-lichee-pi-4a.dts             |  33 -
+ arch/riscv/dts/th1520-u-boot.dtsi                  |  44 ++
+ arch/riscv/dts/th1520.dtsi                         | 530 ---------------
+ arch/riscv/include/asm/encoding.h                  |   1 -
+ .../{mpfs_icicle => mpfs_generic}/Kconfig          |   6 +-
+ board/microchip/mpfs_generic/MAINTAINERS           |   7 +
+ .../{mpfs_icicle => mpfs_generic}/Makefile         |   2 +-
+ .../mpfs_icicle.c => mpfs_generic/mpfs_generic.c}  |   2 +
+ board/microchip/mpfs_icicle/MAINTAINERS            |   7 -
+ board/starfive/visionfive2/spl.c                   |   3 +-
+ configs/ibex-ast2700_defconfig                     |   3 +-
+ ..._defconfig => microchip_mpfs_generic_defconfig} |   5 +-
+ configs/starfive_visionfive2_defconfig             |   1 +
+ configs/th1520_lpi4a_defconfig                     |   4 +-
+ doc/board/microchip/index.rst                      |   1 +
+ doc/board/microchip/mpfs_build_boot.rst            |  29 +
+ doc/board/microchip/mpfs_common.rst                | 666 ++++++++++++++++++
+ doc/board/microchip/mpfs_design_hss.rst            |  37 +
+ doc/board/microchip/mpfs_icicle.rst                | 743 +--------------------
+ doc/board/microchip/mpfs_video.rst                 | 105 +++
+ drivers/clk/thead/clk-th1520-ap.c                  |   3 +
+ drivers/gpio/mpfs_gpio.c                           |   8 +-
+ drivers/misc/mpfs_syscontroller.c                  | 200 ++++++
+ drivers/pci/pcie_starfive_jh7110.c                 |   2 -
+ drivers/pinctrl/pinctrl-th1520.c                   |   1 +
+ ...chip_mpfs_icicle.h => microchip_mpfs_generic.h} |   0
+ include/configs/qemu-riscv.h                       |   1 -
+ include/configs/voyager.h                          |   1 -
+ 43 files changed, 1245 insertions(+), 1675 deletions(-)
+ delete mode 100644 arch/riscv/dts/jh7110-common-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-deepcomputing-fml13v01-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-milkv-mars-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-pine64-star64-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.2a-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/jh7110-starfive-visionfive-2-v1.3b-u-boot.dtsi
+ rename arch/riscv/dts/{jh7110-u-boot.dtsi => starfive-visionfive2-u-boot.dtsi} (54%)
+ create mode 100644 arch/riscv/dts/th1520-lichee-module-4a-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/th1520-lichee-module-4a.dtsi
+ create mode 100644 arch/riscv/dts/th1520-lichee-pi-4a-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/th1520-lichee-pi-4a.dts
+ create mode 100644 arch/riscv/dts/th1520-u-boot.dtsi
+ delete mode 100644 arch/riscv/dts/th1520.dtsi
+ rename board/microchip/{mpfs_icicle => mpfs_generic}/Kconfig (92%)
+ create mode 100644 board/microchip/mpfs_generic/MAINTAINERS
+ rename board/microchip/{mpfs_icicle => mpfs_generic}/Makefile (85%)
+ rename board/microchip/{mpfs_icicle/mpfs_icicle.c => mpfs_generic/mpfs_generic.c} (98%)
+ delete mode 100644 board/microchip/mpfs_icicle/MAINTAINERS
+ rename configs/{microchip_mpfs_icicle_defconfig => microchip_mpfs_generic_defconfig} (84%)
+ create mode 100644 doc/board/microchip/mpfs_build_boot.rst
+ create mode 100644 doc/board/microchip/mpfs_common.rst
+ create mode 100644 doc/board/microchip/mpfs_design_hss.rst
+ create mode 100644 doc/board/microchip/mpfs_video.rst
+ rename include/configs/{microchip_mpfs_icicle.h => microchip_mpfs_generic.h} (100%)
+
+Best regards,
+Leo
