@@ -4,99 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A23B0CAC59A
-	for <u-boot@archiver.kernel.org>; Fri, 19 Sep 2025 21:05:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4E1CAC592
+	for <u-boot@archiver.kernel.org>; Sat, 20 Sep 2025 00:37:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F4528309A;
-	Fri, 19 Sep 2025 23:05:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1CEA882A9E;
+	Sat, 20 Sep 2025 02:37:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sdxyvKDu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xLodRhOb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF40F8329F; Fri, 19 Sep 2025 23:05:08 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 2003A8309A; Sat, 20 Sep 2025 02:37:54 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EADBB81D6A
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 23:05:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 744B2809A5
+ for <u-boot@lists.denx.de>; Sat, 20 Sep 2025 02:37:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-4103fb72537so20803095ab.0
- for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 14:05:05 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2697899a202so19688705ad.0
+ for <u-boot@lists.denx.de>; Fri, 19 Sep 2025 17:37:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758315904; x=1758920704; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=SfE/LwvVFjkLZ9390YoY94vaGd3NWuZGv/mvy1PjAT4=;
- b=sdxyvKDu3Rya0d7X+5XblThsnzlOedSyQoed4O5ktI3euFKWOgXD4kkXVoD2vwchiz
- Btt4jvOBqXouTDUr94T8dAcxwlMezT3cJoGhYFVOrUKGa7VRmwbQZyu3El1KOKv9wp6r
- 4GaQn0VZ7wZSxda/T/g/9AidBkl0JmfEc4bOycj2ZbQcC8VInzFNbRjywz9Qs+JCdk9s
- VN2O+6aHlpds7sW97Z/tD2wQTD8G8j6p7Q/BJDrxs4n4DZgStW2DS+YTzTjlRGvEZoue
- OWauXHetQRo43xPVMxxj2Eq/PzXrVgXQI6YPR6jKzTc9B0YJPqQPD8bqGYuWdeiXDKer
- XerQ==
+ d=linaro.org; s=google; t=1758328670; x=1758933470; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4oF0rtN7JPekM/qOuEoTawAo2MH011HDbXEC6e94M+U=;
+ b=xLodRhObGGdxpiZbjiY3b+0piHVylp3RY/I0mT3NaREiTZGJ1hY8rgf9UrudL450e+
+ Q5paQWwmCijBPWtO9pyLJA9POBUzSo3XEhn7YNUhDcfIZxLWd0dyFiS8y0UcO3rGzyH8
+ 9MI2I1UAi7FWY31FBA8Po8s3T5MD0E6yVnrKTalI5YPwn7I7KMqz6FgaP8xgrbh+VITD
+ lLGLfOXn4F6C9hRZ1l2Q3Mt2EYHGHPjtejk1OCW0GB7as9HDk+93kcps5XnjQkctodWj
+ oibilLceiHN1juVXwX2ppBB1W/xHjtAwRvREi+p9rVFCh4bEphb8hxHLkOsE2niSc2Pl
+ j9Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758315904; x=1758920704;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1758328670; x=1758933470;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SfE/LwvVFjkLZ9390YoY94vaGd3NWuZGv/mvy1PjAT4=;
- b=qvoSA0yEwzGtob5XPXJ1FqsM9NhghhpJshb57HXDc4CPrIkmE4orhOFOYadV/hWuxC
- u72lAegR5UJnhV52m2HQMpvsZ+ReE1FdOKarqZlmW/9xCfkEyOpB+YmgeTQFnDIW8eDf
- 3mVm+EoB43Qv0/Kq6kj/vB7lg5h93swZzD0+e8p/MdFiqBgHVSJ6bzsslmwsC6yVDoe+
- HncFA4q0FUnzdxy3Lk/Q8q7kjMnLi41tFlABIztJPGRJZxIYNR63X3tlGO24Gl00e5tz
- Qiec+Gak78L6Df1z0BNR+mWmHMYFiYF5R46+IVMMCakb8Z6IWqIYHFlfR2fXTuTlM6bp
- w2iw==
-X-Gm-Message-State: AOJu0YxjmYxGZ31ROtRpmomYEpXiyhZCvEy0jUqqAHJBLA9z/oCd7BBn
- p3yHWp2+R3pI9I3WWUMfaKpIxmHtpQa0ZUWnQi4hRnbVujHsi3mzsBmsF87pTGKh2kkxb2YeJCh
- XwS+X
-X-Gm-Gg: ASbGncuXkeV0bO05O3TpFt3HkYvlgO4lV7kCyUpdy4tBFXteUbvThTu6E+v58eZ0i04
- PFvtVFN9n9yW9DHr2N7IVsQgLsmBamAHF+1g0PjErH0TJzmigX+RU/QUib9ThTn4fLNP/VQ3l3t
- yxQqLGG0p5AuHtRFdGOOkI2RkH6fL8rwflwuSq3Kyk2FZu4gxh1XHcQ9UBDizbrg7kdiQZ8MeaJ
- l2S38WNIvoVsfaFexlgbulUK0S6+ZPgd0KFN5bLSBDYikHWoW4aJB1Fbm0Hv14nEoQradt4UvZ7
- jIX4K7krsIFlRn+CcNq01gUCOQF6DJ9/vwenahce/gxstJzn7vifSoFre74uI60JmZUf6XIgPRQ
- 9BIVnmtY/FxCVeIYM24AY238eOyCIorYbkekbsdHRjWEOd/qnMtgHJY+sXiCl+V+rOEdvs4Rc3t
- vCT1WMfRgRUQ==
-X-Google-Smtp-Source: AGHT+IGjyU4eByBc1KdOQCp2eyuTt3ZXBzT17jp4xEILLwSdfu5fnHa7wse41zMRW5qSm/j72bv8Bw==
-X-Received: by 2002:a05:6e02:1a02:b0:409:d91f:a48f with SMTP id
- e9e14a558f8ab-424819af2dfmr69461025ab.22.1758315904295; 
- Fri, 19 Sep 2025 14:05:04 -0700 (PDT)
-Received: from ubuntu.localdomain (173-206-115-235.cpe.distributel.net.
- [173.206.115.235]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-53d50aa5e80sm2555795173.45.2025.09.19.14.05.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Sep 2025 14:05:03 -0700 (PDT)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Simon Glass <sjg@chromium.org>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Yao Zi <ziyao@disroot.org>, Stefan Roese <stefan.roese@mailbox.org>,
- Heiko Schocher <hs@nabladev.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mark Kettenis <kettenis@openbsd.org>,
- Baocheng Su <baocheng.su@siemens.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Li Hua Qian <huaqian.li@siemens.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Samuel Holland <samuel.holland@sifive.com>
-Subject: [PATCH] MAINTAINERS: Add myself into the list for MbedTLS
-Date: Fri, 19 Sep 2025 14:04:51 -0700
-Message-Id: <20250919210457.291632-1-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
+ bh=4oF0rtN7JPekM/qOuEoTawAo2MH011HDbXEC6e94M+U=;
+ b=O+jWw8bDmCWHTFrd0mBgu8VU+tzBRcXI4MBg7lvylPFaKQZn6TQCq4IAi+uK+6o+zs
+ H9FixfjGi5KzwZTJq1/wK48RW5UGN+plg1Drqt8o3g1bTh7TbN6jQJoz1Q37mEQDcprp
+ MLQIYXIxxU8PN5BLxhE1Z1o23judSqXr4gqYoljmTmRyMP23SF2gNL/pkL09YTxeKpAS
+ rExBze/LSoFUhvqmbRzxfCgPdvbYDAKrBLSQf/E4cf44lgsCrd24wnXZUR4XSZbg4MDU
+ f3XZkS9WvhtR9RYbMDBarVncqFvXbo6zID54CMVytUOXcV0ANhxO5FbbTMnpoFns/JUu
+ /Rsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAc3kTkKCXNxz6y2ZJQ2z4neI80l/+Mt8nbIIrzX8P6XkFfgpFS57fUfU54QrL5KcCuHYT9tg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwDV61Nj4PIm38hS5KjGj2bfo5pIeUHiFiaa++Q833gkzEdB21M
+ mvgTFcSWrPfFbOF1ngNLsHa8TeRMXJjcwus4265ZWeUKz32ClSgzzysxx7DEi5tPxqnGpHBGi4s
+ wu4JvJLt5VgexV3Rz4SoNbERJkX7CezlJpiZ8Dt0YXw==
+X-Gm-Gg: ASbGnctk+DaSjQBmaGHa5h6yaGtCEpTpSNDQ4CPRfmB2qp/Ur5qLj3+aACxbAZzOMzD
+ S4pDiTLvkyOdv0SGyZvVlbUq9pyjEEK5SR1V75Ab4bSXafv1/AuQIv5zqjGhwGv1HC/GKRQU8po
+ PQhrhL1ypT40Yb53VgmmBf2M6HYAv+jU9fQ2wnvYr3ptTUYMUHbFMJHG0k0tLYIUul1SAa/RO5K
+ 40kREn0+w==
+X-Google-Smtp-Source: AGHT+IFizpy4aMUpNvoB+h02x4je9PG55DHbdSu9FKXArDHBnVnQXP1dkOgz87AHrjXijqGzWHFXsnFWMGQ2WQnyBXM=
+X-Received: by 2002:a17:903:2983:b0:242:5f6c:6b4e with SMTP id
+ d9443c01a7336-269b785e4f1mr75736965ad.7.1758328669908; Fri, 19 Sep 2025
+ 17:37:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250919222424.95815-1-chalianis1@gmail.com>
+In-Reply-To: <20250919222424.95815-1-chalianis1@gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 19 Sep 2025 20:37:38 -0400
+X-Gm-Features: AS18NWCrEnM6kiYIm1kBIXW9x0Jqsdi8LQrwuhr5junweCsDNp7JFJz8v6RQJv8
+Message-ID: <CAEfUkUJmMh3dHJRhRxJZHe6b44b+59K6+H1UoruEZqXQDiL9iQ@mail.gmail.com>
+Subject: Re: [PATCH] arm: mach-qemu: add support for qemu booted from TF-A.
+To: chalianis1@gmail.com
+Cc: trini@konsulko.com, patrick.rudolph@9elements.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,29 +92,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add myself into the list for MbedTLS.
+Hi,
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- MAINTAINERS | 5 +++++
- 1 file changed, 5 insertions(+)
+On Fri, 19 Sept 2025 at 18:24, <chalianis1@gmail.com> wrote:
+>
+> From: Chali Anis <chalianis1@gmail.com>
+>
+> add the ability to be booted from Arm Trusted Firmware for qemu aarch64,
+> to do so we need to skip NOR flash partition setup.
+> U-boot launched as BL33 from TF-A is supported and Tested on arm64 with
+> qemu-system-aarch64 and the qemu ARM64 support ARCH_SUPPORT_TFABOOT.
+>
+Actually the patch is trying to skip part of the initialization when
+U-Boot is running as BL33, so the statement like "add the ability to
+be booted...", "U-boot launched as BL33 from TF-A is supported" won't
+help as U-Boot is working as BL33 already.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 3fb163aa1db..cbb1d9c3e77 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1292,6 +1292,11 @@ T:	git git://github.com/ARM-software/u-boot.git
- F:	drivers/video/mali_dp.c
- F:	drivers/i2c/i2c-versatile.c
- 
-+MBEDTLS
-+M:	Raymond Mao <raymond.mao@linaro.org>
-+S:	Maintained
-+F:	lib/mbedtls/
-+
- MEMBUF
- M:	Simon Glass <sjg@chromium.org>
- S:	Maintained
--- 
-2.25.1
+> Signed-off-by: Chali Anis <chalianis1@gmail.com>
+> ---
+>  arch/arm/mach-qemu/Kconfig             | 1 +
+>  board/emulation/common/qemu_mtdparts.c | 2 ++
+>  2 files changed, 3 insertions(+)
+>
+> diff --git a/arch/arm/mach-qemu/Kconfig b/arch/arm/mach-qemu/Kconfig
+> index 9c06c6a3a5ce..316dde5145c0 100644
+> --- a/arch/arm/mach-qemu/Kconfig
+> +++ b/arch/arm/mach-qemu/Kconfig
+> @@ -18,6 +18,7 @@ config TARGET_QEMU_ARM_64BIT
+>         bool "ARMv8, 64bit"
+>         select ARM64
+>         select BOARD_LATE_INIT
+> +       select ARCH_SUPPORT_TFABOOT
+>
+>  config TARGET_QEMU_ARM_SBSA
+>         bool "SBSA Reference"
+> diff --git a/board/emulation/common/qemu_mtdparts.c b/board/emulation/common/qemu_mtdparts.c
+> index c1501276789c..c3863d3b0479 100644
+> --- a/board/emulation/common/qemu_mtdparts.c
+> +++ b/board/emulation/common/qemu_mtdparts.c
+> @@ -59,6 +59,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>                         debug("mtd device = %s\n", dev->name);
+>                 }
+>
+> +#ifndef CONFIG_TFABOOT
+>                 mtd = get_mtd_device_nm("nor0");
+>                 if (!IS_ERR_OR_NULL(mtd)) {
+>                         mtd_partition = CONFIG_MTDPARTS_NOR0;
+> @@ -72,6 +73,7 @@ void board_mtdparts_default(const char **mtdids, const char **mtdparts)
+>                         board_get_mtdparts("nor1", mtd_partition, ids, parts);
+>                         put_mtd_device(mtd);
+>                 }
+> +#endif
+>
 
+Skipping the default NOR mtdparts when TFABOOT is selected looks fine.
+However, qemu_dfu.c still sets dfu_alt_info based on those NOR
+partitions (used by DFU/EFI capsule flows).
+
+This actually brings one concern related to capsule update: currently
+the QEMU ARM64 board depends on mtdparts to make EFI capsule update
+work.
+It raises a question: do we actually want to support capsule update
+when U-Boot is running as BL33?
+If yes, then the current patch breaks capsule update and more work is needed.
+If no, we should make it explicit (e.g. prevent
+EFI_CAPSULE_FIRMWARE_MANAGEMENT from being selected together with
+TFABOOT).
+
+BTW, can you please add a rev number in the subject line? E.g. [PATCH
+v2], [PATCH v3]... See the patterns from other patches.
+
+Regards,
+Raymond
+
+>         }
+>
+>         mtd_initialized = true;
+> --
+> 2.34.1
+>
