@@ -4,86 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5D4DCAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58FE5CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:40:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF05083423;
-	Mon, 22 Sep 2025 16:40:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 78D6B83448;
+	Mon, 22 Sep 2025 16:40:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cl2ZTIrh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aGQkn65i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D559832DA; Mon, 22 Sep 2025 00:04:10 +0200 (CEST)
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
+ id 34EA083211; Mon, 22 Sep 2025 00:59:20 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C52F38317B
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 00:04:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D541C82B07
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 00:59:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=davidzangcs@gmail.com
-Received: by mail-pf1-x42b.google.com with SMTP id
- d2e1a72fcca58-77f1a79d7e5so1406171b3a.1
- for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 15:04:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-77f32d99a97so358855b3a.1
+ for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 15:59:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758492245; x=1759097045; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lB3jVZjxgvOqltI2nxu9UoIbSsHxjIuD2E42hMfRDe0=;
- b=Cl2ZTIrh6wbeUo+cec4wBv4Qyx2gCQ2Q9euYQuA2JKxEzm5dceFV3yc9xDq23UpLBD
- Ax2nWCOByNWtFIGc5J0ourj8siPcUekLWoVEaC0JNs3U9crWBJrbFs26lERiea+pfOIq
- lnZFmcqHBu5qr5SuJwsj8JMeS7iq2zdI/fhw8IPqqPvB/po10VfGATQeA6AwSdoFL3Jg
- WwY9cu9edXi8mYfUk3EMuIsrwGVXk41lZxun9MaZDI9joMT4NHH5BjbtR2gc3LBQ3yhu
- SMJtWD69TDg9+AItUtv2gU64+4Fmy2/97qZSwzgccojiuRh+eTYV6wI4wkLhutcEFqFv
- w2bA==
+ d=gmail.com; s=20230601; t=1758495556; x=1759100356; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=aN1cKNZ/ROP1/IbzszO5mIbx8jqpKcySNVES0DxnWlc=;
+ b=aGQkn65i6A83mMSuA0R6gZUH+g6ckqR/XotawKJN4QEfw+NYw+/Z9HaZdeLNF2eyqh
+ xNd2Fx1pYoqSe00yVuXg9+Fsk/zNjNySKlAK6Opj1XbS4p263KkADmCnfO2/leap7DYi
+ mTQDrO8VUx5OIJIrhoSgHTN290Bx9HIXce66v9n9dBaSDMhTbbhDnZimKjcG7uQ/6QYQ
+ p/Yso0TM/PPcv3VyczUq4DHcn3jKCr+sfOVhabYV/jSdOkwZ1H+mtwu4tTN1VglF2J3m
+ kGPa1BvVtVK0ZvK9dV+FwAOZxZqHJfXoUl9jBst6Il9ybaICzXypTMafHRHwprs/uJry
+ WMZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758492245; x=1759097045;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lB3jVZjxgvOqltI2nxu9UoIbSsHxjIuD2E42hMfRDe0=;
- b=pxHIve4aBvnAhDt6aa+MGHqPK1t4L/jrulyW1pPRcvMGLGD32eZOrHLszQ1sJMl0Tg
- tV3mi9Yj9AnBAA1d5X+vWHT14nbi+OoE1EgCG17LAAybIjXV1Pq08Nzhgu6d36m7pF6F
- nJZ2hDXtal5uNaaGfOpy2p6zKK1aNpItZqIn/F8wRaf9IUtUyhH9S3mcCdKNOQ15ZGsa
- o31BbLELFAcADJe4SUXQwl74DEzHJSfy8JWxvxqA6oWNJGokP69wxe+boER7VAtY23P2
- bJm5jgqDV2+FOinP4TZXEFvDqqex+5WrGlrSeC8HdtK8MfP6N+uQ07C3bgq8rQRDhCNc
- xB4g==
-X-Gm-Message-State: AOJu0Yxej0vW7GKeI/6UNw0ykNfv6FDyWdsvoZ8tA2BUFxBHKzFWrNs3
- MmwMc+pr9ZWE/5uPjMzVaXyVTP3bQhgTcmc6m3tWecAH1s9dXdpzzB6g8AKZZ1f3q7ApG/Lm+A9
- fgHuGHKs0Nj3X7P4vmpLPmXgWqfOm6w4=
-X-Gm-Gg: ASbGnctCm9HG5vL6wQAyuVMbn8W/TJxP0MCIDkgIGCBvHYpH9zqbM0zPh9EzIzYVvi/
- WC1qeSw6hyq1EtUeCNenTi000CF4yo4jVs6vmJ2TS3niIiuWRLvAU8tlznOuFDXehwtCYYnDw5T
- IKmG8MK9Dz78LuQ5d1TVNKLnpPMXF78s3vZI5ZkW1NcWD84oWFckUGZ6HMQZaIYMocLYws1cGGA
- yZD
-X-Google-Smtp-Source: AGHT+IGARXcPswD4C/1K1ZBm8YUvwJ+PnDtT//M3FCxqzKrv9y7Xt3vvr1aAHH7D2jkuzZRZCtQxsmgtlc9IwtHHzuk=
-X-Received: by 2002:a05:6a21:e097:b0:249:d3d:a506 with SMTP id
- adf61e73a8af0-2927808cd1amr14842113637.57.1758492245128; Sun, 21 Sep 2025
- 15:04:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758495556; x=1759100356;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=aN1cKNZ/ROP1/IbzszO5mIbx8jqpKcySNVES0DxnWlc=;
+ b=VV3pr1i7/16wAv3lBOJVorPis2xmYKxK0CYmSKlJ83bBuQA4Ev2w4Scc86aQN9+t8J
+ pVy4Wn3GJ1+rD7rzeIMD1F9HwGadWitwZ9eO0pwBHwgYmMAxoiDHz0QRRTxBI+E6u46y
+ uxnyoJhxiY+WzFPsIgcH5GCkrpYN8TAoItR6wU38KdOYGOqGBHSZ0OZpjzTEpUGgtdyf
+ VZHBDHC3044+HIPXio6+7LSIs157yIpkpjW9eniVECIoXOaOW7CLamwl6wk0xoFhOZoq
+ KUDO/NplMAnwRxTNxUONz5dJIAt1aIFYfedtFbh8AYIstyFP1ehk4U+h00GCcH4eAbfa
+ ZvVw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVT+lX60B7QP73AvW4GFZjLk8RV58acEmIpZOjsu6IktKcNjYss1vW0y1QcDQV5SJ/UqcPbAi4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzHZVeYzsEicGexqsnfka0z34nh9WVolzPJrj3yaHDqQa8OWx/z
+ z5gJTmlyNPUv3fuUnGqAj9kxtqoBOBLNdo98RJK/P9v/w6kLwGpDjwvATKqxSw==
+X-Gm-Gg: ASbGncsbu6Liz6HSEwqUvBQ6s2yhij3HS91FAWAcCJ3RD9XoP+fy5+CFVFDiIcCy2Kb
+ vmqQS0PKFFOamYvPV9FN9E/4wLyzZp5XeDT9PkC8gLRyS3LJFZ66m6Yakk+6DToeDavrhNGvNVc
+ 6aY/lW6QSTf6F/Wj1qFuCT1Ee6ZG4HoFrRdpnMNn/sQfTpHT7Ao2rMiKAxxvYWIcYzauttk/92H
+ smQXB1ZrDNagxpc4p3EwngP4mkriMvhEUJw1H6dW5hFD688dqGCh98fG0On95DoRcJeNLJyu9iA
+ Xfj675SfCAEBJYpgAGTGoftHkD12Dl5zHQPnWbU9hZo32KrG1/S8cx/fS717eD3H4LrzoiZuTC6
+ MWUdAeuGa4PpABUjLcl1phmsP0XdYOt7e7tRwFJQ7yOkBK+FvjYmYS7QWIaIF5m4E7Ez6Pkz/Wu
+ X95Rxl/tA=
+X-Google-Smtp-Source: AGHT+IHJdShWV0XS9qInhKZwrZgfTjhr+UDW1TGzm0aMHyPrwpebuWPlYYD25t9LaR8JCIqn/s9Ruw==
+X-Received: by 2002:a05:6a00:997:b0:772:3aa4:226e with SMTP id
+ d2e1a72fcca58-77e4e4c834dmr12531429b3a.19.1758495556183; 
+ Sun, 21 Sep 2025 15:59:16 -0700 (PDT)
+Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-77eee36c2b2sm7058068b3a.78.2025.09.21.15.59.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 21 Sep 2025 15:59:15 -0700 (PDT)
+Message-ID: <443410c2-c5c8-4ed4-8b69-a4318b62550e@gmail.com>
+Date: Mon, 22 Sep 2025 06:59:10 +0800
 MIME-Version: 1.0
-References: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
-From: David Zang <davidzangcs@gmail.com>
-Date: Sun, 21 Sep 2025 17:03:53 -0500
-X-Gm-Features: AS18NWBrJlaNFJM0YUe7-KjQ9EQ2UwPrZ1A_m9YhF2mnsjaIteDl8UXb4k0-QvQ
-Message-ID: <CACwB3C-nrN7O8PH_oCHNXGuwJTudJ+BeCOjkFC=fW4eBcbFuOw@mail.gmail.com>
-Subject: Re: [PATCH] thermal: Convert .get_temp() return value to millicelsius
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, 
- Alice Guo <alice.guo@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Mathieu Othacehe <othacehe@gnu.org>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] [U-Boot, v4, 1/1]net: phy: Add the Airoha EN8811H PHY
+ driver
+To: Marek Vasut <marek.vasut@mailbox.org>, ilias.apalodimas@linaro.org,
+ jerome.forissier@linaro.org, marek.vasut+renesas@mailbox.org,
+ paul.barker.ct@bp.renesas.com, pbrobinson@gmail.com, u-boot@lists.denx.de,
+ trini@konsulko.com
+Cc: joseph.lin@airoha.com, wenshin.chung@airoha.com, lucien.jheng@airoha.com, 
+ frank-w@public-files.de, daniel@makrotopia.org, ericwouds@gmail.com,
+ albert-al.lee@airoha.com
+References: <20250914044115.18391-1-lucienzx159@gmail.com>
+ <464e0429-ac06-49fc-831d-b9e86946446d@mailbox.org>
+ <0924393d-c87b-4a6a-8590-3ab49d039dfa@gmail.com>
+ <8429f5cd-2c8e-4e2d-a661-a7f6d6ddf215@mailbox.org>
+Content-Language: en-US
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+In-Reply-To: <8429f5cd-2c8e-4e2d-a661-a7f6d6ddf215@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 22 Sep 2025 16:40:04 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,52 +112,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 5, 2025 at 7:06=E2=80=AFPM Marek Vasut <marek.vasut+renesas@mai=
-lbox.org>
-wrote:
+Hi Marek
 
-> Linux kernel .get_temp() callback reports values in millicelsius,
-> U-Boot currently reports them in celsius. Align the two and report
-> in millicelsius. Update drivers accordingly. Update callsites that
-> use thermal_get_temp() as well.
+Marek Vasut 於 2025/9/22 上午 06:40 寫道:
+> On 9/15/25 4:35 PM, Lucien.Jheng wrote:
 >
-> The 'temperature' command now reports temperature in millicelsius
-> as well, with additional accuracy. This changes command line ABI
-> slightly.
+> Hi,
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Adam Ford <aford173@gmail.com>
-> Cc: Alice Guo <alice.guo@nxp.com>
-> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
-> Cc: David Zang <davidzangcs@gmail.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: Mathieu Othacehe <othacehe@gnu.org>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Stefano Babic <sbabic@nabladev.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Ye Li <ye.li@nxp.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  arch/arm/mach-imx/cpu.c             | 1 +
->  arch/arm/mach-imx/imx8ulp/soc.c     | 2 +-
->  cmd/temperature.c                   | 2 +-
->  drivers/cpu/imx8_cpu.c              | 2 +-
->  drivers/mmc/omap_hsmmc.c            | 1 +
->  drivers/thermal/imx_scu_thermal.c   | 2 +-
->  drivers/thermal/imx_thermal.c       | 2 +-
->  drivers/thermal/imx_tmu.c           | 2 +-
->  drivers/thermal/rcar_gen3_thermal.c | 6 +++---
->  drivers/thermal/thermal_sandbox.c   | 2 +-
->  drivers/thermal/ti-bandgap.c        | 2 +-
->  drivers/thermal/ti-lm74.c           | 2 +-
->  include/thermal.h                   | 2 +-
->  13 files changed, 15 insertions(+), 13 deletions(-)
+> sorry for the late reply.
 >
+>>>> +__weak int en8811h_read_fw(void **addr)
+>>>
+>>> Does this still have to be a __weak function, now that it uses 
+>>> generic fw loader ?
+>>>
+>>>> +{
+>>>> +    void *buffer;
+>>>> +    int ret;
+>>>> +
+>>>> +    if (!IS_ENABLED(CONFIG_FS_LOADER))
+>>>> +        return -EOPNOTSUPP;
+>>>> +
+>>>> +    buffer = malloc(EN8811H_MD32_DM_SIZE + EN8811H_MD32_DSP_SIZE);
+>>>> +    if (!buffer) {
+>>>> +        printf("Failed to allocate memory for firmware\n");
+>>>> +        return -ENOMEM;
+>>>> +    }
+>>>> +
+>>>> +    ret = request_firmware_into_buf_via_script(&buffer,
+>>>
+>>> I think 'buffer' without the & should be used here.
+>>
+>> Regarding buffer,
+>>
+>> I've reviewed the function definition for 
+>> request_firmware_into_buf_via_script.
+>> The first parameter is void **buf, which is a pointer to a pointer.
+>>
+>> I think passing &buffer is the correct way to call this function.
+>>
+>> If we were to pass just buffer (a void *), the function would receive 
+>> a copy of the pointer's value, and any memory allocation inside the 
+>> function would not be reflected in our original buffer variable.
+>>
+>> Please let me know if my understanding is incorrect, as I want to 
+>> ensure I'm using the function as intended.
+> I was confused by the current request_firmware_into_buf_via_script() 
+> interface.
+>
+> In the current design, passing pointer to pointer into 
+> request_firmware_into_buf_via_script() is not necessary, because the 
+> request_firmware_into_buf_via_script() function internally does 
+> memcpy() into the 'buf' buffer, and for that to work, pointer to 
+> pointer is not necessary, plain pointer to buffer would do just fine.
+>
+> I think this current interface which does memcpy() is actually better 
+> than the one I originally suggested which would use memdup(), so let's 
+> keep it.
+>
+> I now sent an update patch to remove the pointer to pointer:
+>
+> [PATCH] misc: fs_loader: Use buffer pointer in 
+> request_firmware_into_buf_via_script()
+>
+> That should be all I hope.
 
-Reviewed-by: David Zang <davidzangcs@gmail.com>
-David
+Thank you for sharing.
+
+After your patch commit, I will update the driver again.
+
