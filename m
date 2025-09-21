@@ -4,43 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED99CAC5A5
-	for <u-boot@archiver.kernel.org>; Sun, 21 Sep 2025 00:55:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5EEDCAC5A7
+	for <u-boot@archiver.kernel.org>; Sun, 21 Sep 2025 08:57:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0E9F830B4;
-	Sun, 21 Sep 2025 02:55:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id E441C830CA;
+	Sun, 21 Sep 2025 10:57:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="b46Duvs4";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AD54830CA; Sun, 21 Sep 2025 02:55:00 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BCF6282B07
- for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 02:54:57 +0200 (CEST)
+ id 90B51830CA; Sun, 21 Sep 2025 10:57:47 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 35ABF82B07
+ for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 10:57:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B10B91655;
- Sat, 20 Sep 2025 17:54:48 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 209BA3F66E;
- Sat, 20 Sep 2025 17:54:56 -0700 (PDT)
-Date: Sun, 21 Sep 2025 01:54:48 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Vladimir Panov <gbr@voidland.org>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>, Sunil
- Mohan Adapa <sunil@medhas.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] sunxi: OLinuXino-A64 needs the CONFIG_GMAC_TX_DELAY=4
- workaround.
-Message-ID: <20250921015448.16ee4735@minigeek.lan>
-In-Reply-To: <20250731082953.2006406-1-gbr@voidland.org>
-References: <20250731082953.2006406-1-gbr@voidland.org>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
+ s=s31663417; t=1758445061; x=1759049861; i=frank-w@public-files.de;
+ bh=9zLQIffeu+BqvxGwKyk1ezjgJhs4kFmJlcKG8GJvCNo=;
+ h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Cc:Subject:
+ Content-Type:Date:In-Reply-To:References:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=b46Duvs43LIEWTpYEzQoC6JDbn8aBRqJ3R8zrGLR6B9gfkJQoZeRz0vsYjMfd0sS
+ GDGZzQXfdfO0AnLrk2E/eKtXHBT2QERuofjTu0ZJvYojxpSYkrvO80UkCnzwMr513
+ 78DcghqRPyGs0AI26rxc6bdr3iEJrU2RH/bTkAoVvm3QWSnIcOxUIGN0R8iCngNnm
+ 1tCVk59PZNM1a/I3oORyT1Dd5ACsAnEhEYqUhEeDBoBqpnh5r5U96gLx0tH/s70Om
+ KgSw8tgllWgYgMtYxvKiR2TrZz3Bb2FuwiCc9p+KcmOYxijr9nmKuR87EyHAF9Co2
+ ziTXzn+6knRCaJClYw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [217.61.144.255] ([217.61.144.255]) by
+ trinity-msg-rest-gmx-gmx-live-cb7cf587c-sv4zv (via HTTP); Sun, 21 Sep 2025
+ 08:57:41 +0000
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Message-ID: <trinity-c6602654-0e16-4733-ade7-c41d7ed4cb03-1758445061028@trinity-msg-rest-gmx-gmx-live-cb7cf587c-sv4zv>
+From: Frank Wunderlich <frank-w@public-files.de>
+To: devel@easynet.dev, u-boot@lists.denx.de
+Cc: devel@easynet.dev
+Subject: Aw: [PATCH] Fix Linux reboot on MT7988 using EFI and PSCI
+Content-Type: text/plain; charset=UTF-8
+Date: Sun, 21 Sep 2025 08:57:41 +0000
+In-Reply-To: <20250920154248.789281-1-devel@easynet.dev>
+References: <20250920154248.789281-1-devel@easynet.dev>
+X-UI-CLIENT-META-MAIL-DROP: W10=
+X-Provags-ID: V03:K1:axlWKfi4v55mT5SmVziHmz1e5Lsob1ghIuH/y2QfOZIUQPWgh2Zr/H/v/AGDeGXMN7JGR
+ 4XInSOP4Mv2Ak77KT2TTuatpwGetIQRhCl5WH8ISu6kSMh2LNfaVU8QCGvC0ddG3jTpNhTYnf4hF
+ B053Vm9jrIn+FAXvTAQe2Xr3QF71WaeQJCVMltm0cIXi5Z8ES+sQ8SKKVfEvwkkzc+9X1zYNkTnW
+ DIsZEiitavoJuyMfylM4HiMHCKRNEi/6MjTLx1Gp2b963lIilerO4tkb0lWN4esGqKaa1SrXNmVA
+ PGna7nK8bv4AIFxd0WNk+jLKjrU86qJlAiemeOYhtU+aegO1DR9s/vF+HX/OjtXY2M=
+UI-OutboundReport: notjunk:1;M01:P0:4kcZxWKTnxU=;1Cyroy8IFWFVoB/Y6WP68U+f+v+
+ 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
+ dWMw==
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,56 +141,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 31 Jul 2025 11:29:51 +0300
-Vladimir Panov <gbr@voidland.org> wrote:
+Hi
 
-Hi Vladimir,
+thanks for your patch.
 
-sorry for the delay, I somehow missed your email back in July.
+some notes below.
 
-> Olimex OLinuXino-A64's ethernet does not work reliably by default.
-> 
-> It needs the CONFIG_GMAC_TX_DELAY=4 workaround mentioned here:
-> https://linux-sunxi.org/Olimex_A20-OLinuXino-Lime2#GMAC_quirks
+> Gesendet: Samstag, 20. September 2025 um 17:42
+> Von: EasyNetDev <devel@easynet.dev>
+> An: u-boot@lists.denx.de
+> CC: EasyNetDev <devel@easynet.dev>
+> Betreff: [PATCH] Fix Linux reboot on MT7988 using EFI and PSCI
+>
+> Signed-off-by: EasyNetDev <devel@easynet.dev>
 
-Mmh, I am a bit confused: how is this supposed to work?
-CONFIG_GMAC_TX_DELAY is only used in gmac.c, which is only for the A20
-GMAC, but is not used or even built for the A64.
-When I build an image for a64-olinuxino-emmc_defconfig, I get the exact
-same binary with and without this patch.
+this needs to be below commit description with your real name.
 
-So how does this fix anything?
+> I'm proposing adding PSCI in DTS for MT7988 SoC which solves the problem
+> when U-Boot is compiled with CONFIG_PSCI_RESET=3Dy.
+> If this code in DTS is missing and the system is using U-Boot EFI -> GRU=
+B EFI -> Linux Kernel,
+> then the Linux kernel is not able to reboot the board on systemctl reboo=
+t.
+>=20
+> This simple code fixes this issue.
 
-Cheers,
-Andre
+please write description in a way that you describe the issue itself and h=
+ow to fix  without personal points.
 
-> Signed-off-by: Vladimir Panov <gbr@voidland.org>
-> ---
-> 
->  configs/a64-olinuxino-emmc_defconfig | 1 +
->  configs/a64-olinuxino_defconfig      | 1 +
->  2 files changed, 2 insertions(+)
-> 
-> diff --git a/configs/a64-olinuxino-emmc_defconfig
-> b/configs/a64-olinuxino-emmc_defconfig index a5989fab1c6..7f333011b48
-> 100644 --- a/configs/a64-olinuxino-emmc_defconfig
-> +++ b/configs/a64-olinuxino-emmc_defconfig
-> @@ -7,5 +7,6 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_SUPPORT_EMMC_BOOT=y
->  CONFIG_SUN8I_EMAC=y
-> +CONFIG_GMAC_TX_DELAY=4
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_OHCI_HCD=y
-> diff --git a/configs/a64-olinuxino_defconfig
-> b/configs/a64-olinuxino_defconfig index 0b469c25d0d..0dd93ffa238
-> 100644 --- a/configs/a64-olinuxino_defconfig
-> +++ b/configs/a64-olinuxino_defconfig
-> @@ -6,5 +6,6 @@ CONFIG_MACH_SUN50I=y
->  CONFIG_MMC_SUNXI_SLOT_EXTRA=2
->  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->  CONFIG_SUN8I_EMAC=y
-> +CONFIG_GMAC_TX_DELAY=4
->  CONFIG_USB_EHCI_HCD=y
->  CONFIG_USB_OHCI_HCD=y
+e.g.
 
+When booting with U-Boot EFI -> GRUB EFI -> Linux Kernel reboot is not pos=
+sible with "systemctl reboot".
+
+Fix this by adding psci node in uboot devicetree.
+
+Patch itself looks good :)
+
+regards Frank
