@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6577CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:25:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5D4DCAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:40:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC398349B;
-	Mon, 22 Sep 2025 16:25:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EF05083423;
+	Mon, 22 Sep 2025 16:40:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ak6Q4Yvt";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cl2ZTIrh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 685D583542; Mon, 22 Sep 2025 16:25:39 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 8D559832DA; Mon, 22 Sep 2025 00:04:10 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76EAF83443
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:25:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C52F38317B
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 00:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-5797c8612b4so4334027e87.2
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:25:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=davidzangcs@gmail.com
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-77f1a79d7e5so1406171b3a.1
+ for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 15:04:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758551137; x=1759155937; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BgV0M5qUtfUB0RAtr95njfBpaQ/yrVNr0hAHsJbZ6io=;
- b=Ak6Q4YvtbmET5SSIe29S9lYjz3zdG95UpyzGaOtRs0iEtw49plBbgPTtsPNyJUeRjZ
- kDQA2zQsj+Lk90wnE1JCMg8NdRrpswyp8s3sebAD20JqPcbkLplfXw7CoR4y2ltUf+5J
- Wx05IWg0OzrVWGjuqLVKHoLbNR1XHyeLO2EdjJDUQnuPONZJFRIJkOjLdpGen490YiNO
- IX5k8ct4VryiJbv/IRxN2BbcEu6rsGBcYg1ZsfLj3GFpF12LH6gdbWRn2Nw5kilBjVzQ
- eTF8c8hGKHf3Mr8Iqb5mkcDEGlOv0R4H1+cFqAVGkAumqpw3xFWtgxdC6KyyZgvKvyru
- HRbA==
+ d=gmail.com; s=20230601; t=1758492245; x=1759097045; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lB3jVZjxgvOqltI2nxu9UoIbSsHxjIuD2E42hMfRDe0=;
+ b=Cl2ZTIrh6wbeUo+cec4wBv4Qyx2gCQ2Q9euYQuA2JKxEzm5dceFV3yc9xDq23UpLBD
+ Ax2nWCOByNWtFIGc5J0ourj8siPcUekLWoVEaC0JNs3U9crWBJrbFs26lERiea+pfOIq
+ lnZFmcqHBu5qr5SuJwsj8JMeS7iq2zdI/fhw8IPqqPvB/po10VfGATQeA6AwSdoFL3Jg
+ WwY9cu9edXi8mYfUk3EMuIsrwGVXk41lZxun9MaZDI9joMT4NHH5BjbtR2gc3LBQ3yhu
+ SMJtWD69TDg9+AItUtv2gU64+4Fmy2/97qZSwzgccojiuRh+eTYV6wI4wkLhutcEFqFv
+ w2bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758551137; x=1759155937;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BgV0M5qUtfUB0RAtr95njfBpaQ/yrVNr0hAHsJbZ6io=;
- b=NhtzkVkozeSIa0miubYCumbg2yG1B3PnilMqA79XQ06PNG/I+r7Tp/aCHX+Xhe5Vsh
- ehifEHAqinMogrktIl5eHxMyigo6Mcdy4usjF+sT3Czx1IDGCS05ZA/4eHZ3vIemmzhz
- 19zMAjP1evHNX3t5iqwSxzuu2bfAoS6b8QkAAHtAuTPbcGFb0OE+AUgwnywA/CZz5wMC
- bw23PUnY1rdSztRCNFNDCJc1IXYWJ002UR7duMvae8iJw3tbeYOzZCRCn5NnZBakFO87
- df8zzcr6f5ZSGV8SAkFnk9e/R9I6Khc5oN5mhJegUwa02GQ/cS2F9zVUmBca9/FMMu0j
- 3zkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVGu534NwkicSQ59uiiJRAXMuztbAyeO/aSN+ctPUvc9VulfnGW3MR7ty10AM8SkB5bYvLUyuI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyR+SQGxR1SYOroqz43N8C+AXyCJDLS6Y1WgvO14FFXX0Fi6cqn
- WKD4v8M1k5UOwL6aTG5BSLsgc2JlbpJxeXfE0tdm9ywDAmzDDCfrRG9v+LqvTBSyZH3R0aCpqMO
- jThzJro2bRfjaxtKbxxcVsZQ4m78NnkSBcQ==
-X-Gm-Gg: ASbGnctdi8EyRxHnAZCkU0iwN12Y/eP20SQGr7B95uetyFAGn02O91AI1d8Wr5tR5He
- r8/j6mDmLW1galy70RPiuXpWHrxPI0vDE5jcHFoGy8Z+ivLelf4b8jCFOTQp5P1SzG6JZBg0m60
- 6IEpXISuxk1RcPi8CyKnV/rJrUXXKsCuFJs/mH5iYHLfjWxO929lK3JTxQioXwa5aGvqDnxAsHc
- nKHeEmb2aXQDLd1jlcms5YQpgVthKWuM+aXJo4=
-X-Google-Smtp-Source: AGHT+IGAPZTymnWvcbJ+mJ7rkuF1yRILvBuxuaapFCZzOXQ75bNwomRx4ZzqHRTwb+DQyNntCUqtK347r7jVAeBqKOg=
-X-Received: by 2002:a05:6512:340c:b0:572:1f0b:5ef3 with SMTP id
- 2adb3069b0e04-579e08b39b7mr4712874e87.11.1758551136400; Mon, 22 Sep 2025
- 07:25:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758492245; x=1759097045;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lB3jVZjxgvOqltI2nxu9UoIbSsHxjIuD2E42hMfRDe0=;
+ b=pxHIve4aBvnAhDt6aa+MGHqPK1t4L/jrulyW1pPRcvMGLGD32eZOrHLszQ1sJMl0Tg
+ tV3mi9Yj9AnBAA1d5X+vWHT14nbi+OoE1EgCG17LAAybIjXV1Pq08Nzhgu6d36m7pF6F
+ nJZ2hDXtal5uNaaGfOpy2p6zKK1aNpItZqIn/F8wRaf9IUtUyhH9S3mcCdKNOQ15ZGsa
+ o31BbLELFAcADJe4SUXQwl74DEzHJSfy8JWxvxqA6oWNJGokP69wxe+boER7VAtY23P2
+ bJm5jgqDV2+FOinP4TZXEFvDqqex+5WrGlrSeC8HdtK8MfP6N+uQ07C3bgq8rQRDhCNc
+ xB4g==
+X-Gm-Message-State: AOJu0Yxej0vW7GKeI/6UNw0ykNfv6FDyWdsvoZ8tA2BUFxBHKzFWrNs3
+ MmwMc+pr9ZWE/5uPjMzVaXyVTP3bQhgTcmc6m3tWecAH1s9dXdpzzB6g8AKZZ1f3q7ApG/Lm+A9
+ fgHuGHKs0Nj3X7P4vmpLPmXgWqfOm6w4=
+X-Gm-Gg: ASbGnctCm9HG5vL6wQAyuVMbn8W/TJxP0MCIDkgIGCBvHYpH9zqbM0zPh9EzIzYVvi/
+ WC1qeSw6hyq1EtUeCNenTi000CF4yo4jVs6vmJ2TS3niIiuWRLvAU8tlznOuFDXehwtCYYnDw5T
+ IKmG8MK9Dz78LuQ5d1TVNKLnpPMXF78s3vZI5ZkW1NcWD84oWFckUGZ6HMQZaIYMocLYws1cGGA
+ yZD
+X-Google-Smtp-Source: AGHT+IGARXcPswD4C/1K1ZBm8YUvwJ+PnDtT//M3FCxqzKrv9y7Xt3vvr1aAHH7D2jkuzZRZCtQxsmgtlc9IwtHHzuk=
+X-Received: by 2002:a05:6a21:e097:b0:249:d3d:a506 with SMTP id
+ adf61e73a8af0-2927808cd1amr14842113637.57.1758492245128; Sun, 21 Sep 2025
+ 15:04:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250919075142.1674177-1-primoz.fiser@norik.com>
-In-Reply-To: <20250919075142.1674177-1-primoz.fiser@norik.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Sep 2025 11:25:24 -0300
-X-Gm-Features: AS18NWBHzMWvlX31QkLHnWH49skBAI_2l_sjeIQ8fxfJgiISmc0nVRfD-tkzgQY
-Message-ID: <CAOMZO5DkaPAkdZxyEq0gQz-d8BR8-feuL0mRL+e50SMrULDtzQ@mail.gmail.com>
-Subject: Re: [PATCH] board: phytec: phycore-imx93: Fix i.MX93 voltage modes
-To: Primoz Fiser <primoz.fiser@norik.com>
-Cc: Mathieu Othacehe <m.othacehe@gmail.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, upstream@lists.phytec.de
+References: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
+From: David Zang <davidzangcs@gmail.com>
+Date: Sun, 21 Sep 2025 17:03:53 -0500
+X-Gm-Features: AS18NWBrJlaNFJM0YUe7-KjQ9EQ2UwPrZ1A_m9YhF2mnsjaIteDl8UXb4k0-QvQ
+Message-ID: <CACwB3C-nrN7O8PH_oCHNXGuwJTudJ+BeCOjkFC=fW4eBcbFuOw@mail.gmail.com>
+Subject: Re: [PATCH] thermal: Convert .get_temp() return value to millicelsius
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>, 
+ Alice Guo <alice.guo@nxp.com>, Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
+ Mathieu Othacehe <othacehe@gnu.org>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>,
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
+X-Mailman-Approved-At: Mon, 22 Sep 2025 16:40:04 +0200
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +100,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 19, 2025 at 4:51=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
-m> wrote:
->
-> Fix support for i.MX93 voltage modes on phyCORE-i.MX93 SoM boards.
->
-> First of all, Kconfig option CONFIG_IMX9_LOW_DRIVE_MODE is gone since
-> commit c9efcad23741 ("imx93_evk: Remove CONFIG_IMX9_LOW_DRIVE_MODE and
-> ld defconfig") and was replaced by runtime detection mechanism. Thus
-> lets use is_voltage_mode() instead of Kconfig to detect CPU type and
-> select proper voltage mode.
->
-> Secondly, 1400MHz ND mode (Nominal Drive) requiring 0.85V BUCK voltage
-> was not supported with current power_init_board() PMIC settings. Add
-> check also for this CPU type and set BUCK voltage accordingly.
->
-> Last but not least, add printf() printouts about PMIC voltage mode to
-> the console. This makes it more apparent and verbose about voltage mode
-> in use. Also our internal tests depend on this printout to catch issues
-> with i.MX93 CPU types and set PMIC voltage modes.
->
-> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+On Fri, Sep 5, 2025 at 7:06=E2=80=AFPM Marek Vasut <marek.vasut+renesas@mai=
+lbox.org>
+wrote:
 
-Applied to -master, thanks.
+> Linux kernel .get_temp() callback reports values in millicelsius,
+> U-Boot currently reports them in celsius. Align the two and report
+> in millicelsius. Update drivers accordingly. Update callsites that
+> use thermal_get_temp() as well.
+>
+> The 'temperature' command now reports temperature in millicelsius
+> as well, with additional accuracy. This changes command line ABI
+> slightly.
+>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+> Cc: Adam Ford <aford173@gmail.com>
+> Cc: Alice Guo <alice.guo@nxp.com>
+> Cc: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Cc: David Zang <davidzangcs@gmail.com>
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Mathieu Othacehe <othacehe@gnu.org>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Stefano Babic <sbabic@nabladev.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Ye Li <ye.li@nxp.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>  arch/arm/mach-imx/cpu.c             | 1 +
+>  arch/arm/mach-imx/imx8ulp/soc.c     | 2 +-
+>  cmd/temperature.c                   | 2 +-
+>  drivers/cpu/imx8_cpu.c              | 2 +-
+>  drivers/mmc/omap_hsmmc.c            | 1 +
+>  drivers/thermal/imx_scu_thermal.c   | 2 +-
+>  drivers/thermal/imx_thermal.c       | 2 +-
+>  drivers/thermal/imx_tmu.c           | 2 +-
+>  drivers/thermal/rcar_gen3_thermal.c | 6 +++---
+>  drivers/thermal/thermal_sandbox.c   | 2 +-
+>  drivers/thermal/ti-bandgap.c        | 2 +-
+>  drivers/thermal/ti-lm74.c           | 2 +-
+>  include/thermal.h                   | 2 +-
+>  13 files changed, 15 insertions(+), 13 deletions(-)
+>
+
+Reviewed-by: David Zang <davidzangcs@gmail.com>
+David
