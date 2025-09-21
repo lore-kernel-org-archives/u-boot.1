@@ -4,125 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 956CECAC5A8
-	for <u-boot@archiver.kernel.org>; Sun, 21 Sep 2025 09:03:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37345CAC59A
+	for <u-boot@archiver.kernel.org>; Sun, 21 Sep 2025 12:16:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 169FA830CA;
-	Sun, 21 Sep 2025 11:03:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 511AD830CA;
+	Sun, 21 Sep 2025 14:16:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="hVzU0UK2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZOTWyS4q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56895831A4; Sun, 21 Sep 2025 11:03:17 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 612228317B; Sun, 21 Sep 2025 14:15:58 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49E0B82B07
- for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 11:03:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 6841581E13
+ for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 14:15:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=public-files.de;
- s=s31663417; t=1758445395; x=1759050195; i=frank-w@public-files.de;
- bh=iDHvUwpdEXNgYDIwCZBM76aDSqTNKE4NYpqTP844NNc=;
- h=X-UI-Sender-Class:MIME-Version:Message-ID:From:To:Cc:Subject:
- Content-Type:Date:In-Reply-To:References:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=hVzU0UK2kxn56d2eI5bBC68s4pZ9SnNGhteu+CSmKXK/ibkbYg0PgXl87NtJStg/
- vYUhOOzCFW7bdyhPeUObMLf9p9vJCnFM5gznd41bPoYMfvWwdzT6x8yJUH+tiX6ft
- /OK7NBTwaZ/IqprFCBFHjK814j5ERbS4ZAikp/dtmG8emvs0il4SM8NJTZuUihKxC
- ibwctvn5LA81KvwBODfh6Kk7RE2exKyncZcN/lfEYLEch+HbHWdZd7yyTNuMpnSBb
- kHBabenWw0jF59XuyY4Mem/bxfGfnNEfRFqOwEkfdluNlFureU3DS0jh3qXut4Rva
- lzsSuGMIO/1/CH0yTg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [217.61.144.255] ([217.61.144.255]) by
- trinity-msg-rest-gmx-gmx-live-646f7b8dfd-24vr4 (via HTTP); Sun, 21 Sep 2025
- 09:03:14 +0000
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-368348d30e0so6726641fa.1
+ for <u-boot@lists.denx.de>; Sun, 21 Sep 2025 05:15:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1758456956; x=1759061756; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9AC4alj7BODy+tGg63FW+FvwgwFWTUOs8ikXVgt7Jzw=;
+ b=ZOTWyS4qdcpw2dc2YV5hHdQNmZuVdbMwQ3OY3OjI2QJ+seFEpDp6Z8y3RYk3WN9YNO
+ TDSq7VcQtKUh3ufTnvPia92WcpxqFzIE0ARxyxGViyC8lS29CkKOEYT7vscLubhZkAn1
+ ZAFSagg1ONZi6zciQh6bxEWrH9ha/dzqOAnHq6+WooXanOBWP0MlIJ8aF5/lXymYvtu7
+ rc694PKZdKQNWTVd/gBakNJMJ30M8UG4KziKYnH0zrYvKQMwb/+ctQl330Fjj/ow3n2L
+ c0VrJSXQJUdL44fmv1Zk2+e9vRoxn8cbIWItWc3TS3lo8hh+mSwnvyj6hs6EJNZcA+YG
+ 9NDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758456956; x=1759061756;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9AC4alj7BODy+tGg63FW+FvwgwFWTUOs8ikXVgt7Jzw=;
+ b=fBdS7QjybkBrFgmGJ+UJjOi1zf+/HP31o5y6gPVvLVF27AZXF7rI9h62MVTMnESnJJ
+ pJohBy6hCs/XWtOChOdi2rasD1YxEHZt9Ty2wF41WQu3WK+uDM3vncj+M29FiFTwhSw9
+ 84oGSDLdd4NPSBwQppR/35TMe5yGdpA7NDe8l/dW/k/3KBCITCnCnsld/I0BqGSefbry
+ BLYjNWCjPFTW2k9lTIh36yFlF8uf/jpPtSEuVpJEW73PwfdLm4OC3QgY+QdsZxlN6mY7
+ JBxY2uATa/JgLYEEVLHzztEcD5eQk8m1ZUe0hD4LVR0Io+/XijmL9Ovv/8yTQyg58pOa
+ xMfg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQT9tgbr96P9v8+V4z0rxDpPx+AXEWiiAfoBoKWD3OJLh2tojSQLXBQC6rJCj4eOyzuJ6F6Io=@lists.denx.de
+X-Gm-Message-State: AOJu0YwaSvjAHvbj4SYarxxRvrcE1PqRSClAV8HQqC5LfJe0WkncXafZ
+ ETMO07Bm04eVGZZB60lLiN2F3T9wbk6oFpdIfboKas2OOUb1pQaEO+vionUJgF1oa0C0BlHRN0W
+ a4w65ikRqzMqBzOHueySd8m/XFb4jzSA=
+X-Gm-Gg: ASbGnctV+xJzA6rDHT+3zc5cCNh+HcCvAnJyMg9zvfzYAz8djiDEz9nuC4ahYMRKqBj
+ 1HpUYogN9EzhD84lyojOC/ytVmb/GjamSw8h54nYHlJM9xMVlL6h1qiaFEpVtS3NEuBVfvsRVwl
+ ORPHSpMPYK6CNuCd690InxvI2zPCILj4TtPQpCVrluvsV6QJO+OqaEVKU2L+aHbWTiq9Y3sEPqa
+ Y2zXlOqyqbatdKcSLl1G0ABrzeRy9r6CgnetzU=
+X-Google-Smtp-Source: AGHT+IFikKT1lhivZtx10Z0Ia2Ssp6r9shO+tCY7GVtRteLdfeSV5Q7jUv/gaKbFKQ/qdF9RXCU6A0qv6akX+W818LU=
+X-Received: by 2002:a2e:be06:0:b0:367:6b0b:be70 with SMTP id
+ 38308e7fff4ca-3676b0bce83mr16875411fa.32.1758456955373; Sun, 21 Sep 2025
+ 05:15:55 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <trinity-9c95f31d-257e-4486-b833-df15865a5e55-1758445394693@trinity-msg-rest-gmx-gmx-live-646f7b8dfd-24vr4>
-From: Frank Wunderlich <frank-w@public-files.de>
-To: devel@easynet.dev, u-boot@lists.denx.de
-Cc: devel@easynet.dev
-Subject: Aw: [PATCH] MT7988 add LED Blue/Green + WPS/Reset Button
-Content-Type: text/plain; charset=UTF-8
-Date: Sun, 21 Sep 2025 09:03:14 +0000
-In-Reply-To: <20250920163536.1096800-1-devel@easynet.dev>
-References: <20250920163536.1096800-1-devel@easynet.dev>
-X-UI-CLIENT-META-MAIL-DROP: W10=
-X-Provags-ID: V03:K1:aJ2YXBu3D2pO5CTHlUofurE0jxup0CVTm8kgKCdyBgnWohHfBdUMPEPhSxhAK+FxWsD89
- DElaku+MXZf25ozXQiBiKQWxB49ke2QUH9TeuOF68ERyMvwoHuXuuuIVnt9TkxU1B+AIQx44PTL6
- QJcxIWOgzUj+tExN+5XS7e16JLP41yJItPrgNCfwYA32aZTO+geCI6k2k9mXd8m4TxrOY1um/LnU
- kgiGxELgGb80ZFr0s2DO6LKFzSoq/jZ7jW86MQmzPDF9p2qgfvkYNpAWg8i0PWnWusBbv7nOypAD
- 3QiE8F8c8jrK7t8xL1rdyklwwnbdWVyvTdR05ySmQxrr5nzn8EDBeWsvRc1nq7YTg0=
-UI-OutboundReport: notjunk:1;M01:P0:ImhcjINBiOg=;J6iRhZJS6RL+I6jzrBv4gOEPWr3
- lyOEuxXN0nql+AWXlT/ZE3PiampQ++TYL+p1OuG96ebRNAX0oXpVni3Ak7WQ91G7vxaUPw5wm
- XCeuaVPjK9QVvoCDujle8PaAUBrfXk2gETOJYeR+dimlNKiFLGr59Nz6WrpQkAeLBR7GxIgd3
- Nx7ewHsUo+vCH76pOYpO2LsUiHadGjIP6sdY4q7AAlatSxOYzPhz2QwHAv3lFO7WhOI8PQGhZ
- heJhgoshJYdtqtNzNSGb00jznGjm2xGyvXkGwMAmD9/ilWK8O6K1jDKT/Kgea/f9Ipl8xPq2U
- MGIfajUORZYasbRFkCZyC50MadIAyjAE/5LVDGHgONBaY+xyLcTM/jgFsDjq6nocvRH664Y7j
- uVAFVDTJ9+HkYj8IpuhMcypkRv+M++keQwV1XEUBNI6W1jOBRNS3rI2ROZzE+sue4Pg9AYF4m
- Jf3XvVV/E7xKTTZHD6HFXwi9aBaHnlIL9pwTDEkJDKc27srELLifS4LjbXtuYY6DcxhJevAUV
- kRidKkmn0ju/hpuhEfJ748Miy/aghyxdw2X31QLFxy9D4T016lxBwEezbDG+YkcvbCHpyULc8
- iszkymSStMkC4gDo3jmiVNX0UQr+rW6QCg2DdvkBCCljBI/IsnWN1BZ8frP/k3RFTGTOz0zmN
- l50fni0PVlrOFSWK7J16exmszCOprkooSG3wJHmjbXriPnAw+DbFKM3Rl+L7KSh5HFlYiy2j0
- 2b764523iRRCq6080vDos1eJRNcA3MFvs06mdHK9OimYQC8bS30t6cDb9dwTRB3jLGGXuwnfr
- 7dPi50+iR1GpUju4ksq1DKNVQ2iIk9bWbJMOBQB5B+Sl3sfl/swQPk4FIqanqhHwk5pIp6WYI
- BbbbkSSsypQP0fBtsvGlsfu9Z/vJVJBqG24RdwL4viRwG32U9WsO0GJmpkzfk6jOerrCXeRyN
- 8QYAXsvJafDn3FaLSNjbOdyBpdcijPm04venPxSmLLxk42JXUZIhZHeiawc5XESybWAb/6Z94
- H45oDZOSjeRLD8Hl0svmy4n1aaIU1FZXz6YQs8IS9xmKN5ZDCQLFRMm2tLU29UtpQnRuIrEXe
- MdhMltPfFWP7+FgOyv5C+bQz3AqK472ioNIiEZU24yfBifNq8DTEmakdajgR6yWhPh8mduhrY
- KBsdxJxrgVKXmHC1C+M51TIuETieK852T1WhEu3CwxtkUED2CjFjd8+B38D6zyzMHDF3x6u9O
- bCfHkdEpErGNK3L+HCKZJwb/nbxe+Xwj33VkVVAjFgvSJQHdBl7lUEea5+jB9ZvB1WAvn5iuL
- dQ9j7nugP1cL0j7dEJsQWa9Io3oMVW1J5DNBQL14PyOAvlOedOq42BUwVwcwDFs+syTaOua6s
- /WfIL/E76ubhEU4QN6o7SV+vN0oO7yeONeMLmDvTDBCHnJ1Ut0DZsVuuNw38Ua66waSNnWhCO
- Kori2domqZMK/XILZhdmngLfT4QPDq3Hqg8TzjI+zxwXN3ekCr5zoE9qz9h9QVq4JrmpYcIOJ
- 590bNt5mkmgpIrWEPRKq8hW3oR4cje2pz6ISnHG0D4PChmwvbl64WC53gGFaTRj2r+A9YzsGe
- Z6GfQYtqPCPt1HEDJ/TEEl9BLEJTzsHl+Nmvj/JQmQxTeDYCJUWGimrLh1RpFrsfNnU8VE7WA
- 1R2SxHMJdn3CcVgf/iA6W28tvJu8vEoic09W56+Emc7wgw09aM2K6bFwizMmbGnVhgzrJv+UL
- r6sgP4C00BIEkRUVG9zwj86wk4Ctv9Yt+UE7IT3JFHNt8R7XnuHXN/nlM4ka8rBZRJjVntOiq
- Oj4i/kS/ujtNl5dyFWVvomKX3rfBUiSaWckoHklzoj+kEla3X8ljzeRL+bGbNXDiOQ42UlzvR
- Y/M7Fk8PBGHsIiIC0FzEtx1GAPqfjYNBQcFVzWSiS/1oj9HRGCoOnhsadPFtJN8dVKVMLiysa
- QC71bIG5oQrSitG+HpitsNHmbEXDyqQfZHK4ezs/9bnMayvCxVpf2TU+qATSlZBaySw9kkYNJ
- 8ymyrkpPAt7x7RCP659Sfrxu6gyJ1/3CKDRyDxHzcQ9qGt6b3eihljm0T79XMAnt6ml5v/5ER
- TVZkyjBgBESGNSj7nlRMdVX7yuJrvFvSfr5IcJ9QGLzffUnDTND4Tqw65DRtQHDRTLaVCSpQB
- CIBLNXtL89vq6vioe2gTxGsd25NlZceQCuK4RDGqEq1kHEg7ZioJo1uyyqGmsGY1YZyM14iE/
- FXnP/rapeV7Goxit7Ok7hLnAo3lUyepjqH4gwqsQCdubhIXevxTwRXcgkaAOqm6l9Pphj0vv+
- wyzBo/DwEiBXYKueyRUHVYGwu+LotrEKzQGakCOsZeQLtjLIrFg5wI057teESY0pItNdFr9Us
- iQ3Q137/vl6R81d8j4OmcEsJ5/NvaKUhXCvjzVcIAEULs05ggduGSYItG7og91sV+yvm8QP3W
- /j8rqikSjcaDXNCjOGv/moyi0RYakciTnxf5xGLeH7qQDqRW+dS85NUBXCniZ+XkHBMzK1Ojz
- +ERhp95lKiA/Qgqz3f724itlhO5U7vVErsCKXEjOYW2OL4c/9729nMgWPSaQ1UJEVpxZ7dyJv
- MGGaL2Z8IfH8ZbWi/m6NSv1TJ4EUdpY7A8yUyjUfnQ8kFiTgHip1dzlWMR2VuGO1W2AZoHHU9
- 5QOOvy1Oe9ariVIZS5Ur7i7pq147OAPnyU7aFHArSbXSa55fr8SnkSF6056HIr1PwsEFBsu2p
- tsydyYIwAYpPHAwdG1CrhD79eXwq93NZRkWajHGxXPWK+cl0fsgKjzA8Rg5bSqZkbdRh6YpYm
- jAcuJzZ6xibN0c1stqNW2zKWuNm5O7pom+pJs44xvM3IIMhHiU99f+mp+XC9S7DgBehrrBE0i
- QwfhvIxQTmk8lCmiZVz2wWc7rf7vTsjEasQ34ZOsyCtIe0f+wJ7b5EGq9gwd+ZqZYvVaf+xOJ
- Y09ccZLcSqFY8WMTSZ7zQWOOVjC7mdPVL2gUsHpd7sNFTl7R+O1xKcAv3aAP3f0VAcvc11VXx
- Qnnaw+XKlPOzDk20UrZlL/VMVxXtfMiYKawtPwoT+T6LFbYS5b/oRdIQB6hqShKx+wkRbqv8D
- epG9MWCX3F7G0nV63xGovUGoogTAWmlzEpT6P/9qRectk6DxTWDmWVAMj+V2VdIH741XgohFl
- 9IBrR4q6HQb29fUa3bUAo2zuZLGtawHiRC5zkfNhu+we+DkBSoMHVU1xnLVbpXhx7XMPUZ1Cs
- S6OVxHnrnT7txoBGbBpT4o6TdLtJgSNAGS3qodyccGY6GYaHvnOVLczBQGHjA2IKZ03h0HZey
- 9wJxu4bodYkDsx4F0zDJjYOPSze7iekvnF2XwOcKrViKrSL0YlMiJFLWwOyjgohJ4jove5Oe6
- /eEQp8AYWRzN2Vx1aQPjOPKg/cZvK/X5xJL9Sc9qY8GCqmf/rNGLE1OtJQQAE/RfhF9FQ2Jxe
- mwl2zoaMMixZtBd3lZM526KnVdr+6DzB4Q/4nXqqCWX1M2QyP65gxG8UcFf4Xp3xWLW7u1qhM
- 45yxMn+g4aT5fIFHpwHsnEvdxZ+uggeHnTAodgwcV1PAw+5Jv539hFJScshQ0z3Sd5Q3fqULn
- PDroaL1WjmPFQReABywDtVcT7R4Jrn1sygvyeqmWjHJvhBTzmm6dwNaVOORGJYm/cv/BhWRkA
- YjlGBPoahHaa86n68w9lSHwDJGD+DGwiPFjyP296SXR7bBIe3l19luoBn+g5EzUZ2zTKFbSJ3
- jfhyUszoS00ZVT8tjfM0jnQVuagI13lJazT96UTNZ9btxrsS3UBkM6FCV0gQqyI4uBzhh6lAy
- JMISWU5QUMOvHbJxmjSMeZOGNaPy9/TuDKETAkybvadukNSoFx6GRqKxxUFNy7TZ2fhwisPEz
- 587rx5UOPXl6pGDH3B7YZV7GRjQtFJ4eZ8DbtOHoeapD3Dd64A7+PlEbn0VznFxLSA5F17q6o
- lzEEloB3QayTSgO/n1PzPAZgYdKiJIom81b+E0YH/WkPn8iIuej65AP8LA+Ct+U8V07U+wcpH
- betP67JYus8Y68NKFB+yC3H+Maxe7QifMKxzNDpzbpAhC88m2wEiW88fSjifAKgncJpeqV3DM
- jjpoU/xw7sEl5QYo/hv0ivghCQatDIXlJMfPkbMaSJOZe59t9JVMSkpipX1DLleq9MR+Dk+tu
- mlMsSP6ZH+ONDE8X8wXZRGTZuei7RSMW1MfUQFZqBGqVGy5ATam45rMKvvYjaTvSo8iX55sfx
- ZVyg3am0QRKmC1lOhyND/OE9dXzZlzEvF149uNAcoFgUkxNx5LYEc/yB0JBJhMVVjAbZnRabO
- R4brv64QbGrJG3FIXA47Xm/GftJosFCI/2z/BZC8CxjLZaFnkO/7D5yaGe5dmrfVSJLKjNlta
- kin6JG/a7LF+EUiRAL0CRjPmmN8KGbB+ikRgEk3mfoU0S838YrfvAX/JDAkLPm0qRMjMlMPjm
- nLFN5FmlLYbRd29MwKG7RiwGg9MOXACnrc=
+References: <20250901-imx94-v1-0-c85ae7cdd95c@oss.nxp.com>
+ <20250901-imx94-v1-4-c85ae7cdd95c@oss.nxp.com>
+ <5ce9ad71-2d24-408b-ba55-cd87bf96afb1@freeshell.de>
+ <PAXPR04MB96448A9D96B04749D3E882FBE209A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB96448A9D96B04749D3E882FBE209A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 21 Sep 2025 09:15:43 -0300
+X-Gm-Features: AS18NWC29F3yVcgJuyY0VztUUgGuBH3n270PMRQGn6DfGQP6-NjKKYxzPVM_N8E
+Message-ID: <CAOMZO5CmBuOBT7snFVV_KLw_jJJ_b1-BGUk+pVAEYC6JMOFBRw@mail.gmail.com>
+Subject: Re: [EXT] Re: [PATCH v1 4/8] imx9: scmi: Update the files under
+ arch/arm/mach-imx/imx9/scmi/ to support i.MX94
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: E Shattow <e@freeshell.de>, Stefano Babic <sbabic@nabladev.com>, 
+ dl-uboot-imx <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>,
+ Alice Guo <alice.guo@nxp.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Jacky Bai <ping.bai@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -140,38 +102,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Alice,
 
-> Gesendet: Samstag, 20. September 2025 um 18:35
-> Von: EasyNetDev <devel@easynet.dev>
-> An: u-boot@lists.denx.de
-> CC: EasyNetDev <devel@easynet.dev>
-> Betreff: [PATCH] MT7988 add LED Blue/Green + WPS/Reset Button
+On Thu, Sep 11, 2025 at 3:42=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
+
+> > >  #include "../../../../../dts/upstream/src/arm64/freescale/imx95-cloc=
+k.h"
+> >
+> > What is this? I asked and it was suggested to send a patch upstream, bu=
+t they
+> > said no. Ref:
+...
+> This line of code is unnecessary and can be deleted.
+
+> > Again this weird include relative-global path... not good.
+> >
+> > I don't know what it should be, sorry. It is fragile and we should do s=
+omething
+> > better.
+> >
 >
-> MT7988 is missing LED Blue and Green from DTS.
-> EEPROM is hard wired to LED Green and you can't use it without
-> LED support.
-> WPS/Reset button is just for future customization of the U-Boot booting.
->=20
-> Signed-off-by: EasyNetDev <devel@easynet.dev>
+> These files are derived from the Linux source code.
 
-please use real name here :)
+Please address E Shattow's comments and send a v2 that also contains
+the imx94-evk support.
 
-> ---
->  arch/arm/dts/mt7988-rfb.dts    | 23 +++++++++++++++++++++++
->  arch/arm/dts/mt7988-sd-rfb.dts | 23 +++++++++++++++++++++++
->  2 files changed, 46 insertions(+)
+This way, we can achieve build coverage for the entire series.
 
-i'm not sure if RFB (which dts you are patching) has also green/blue led a=
-nd the buttons.
-
-If you really need this, you have to create an own devicetree for BPI-R4 (=
-i guess you are
-using this board).
-
-btw. in uboot eeprom can be written without setting the green led...someho=
-w pinctrl driver
-behaves differently (or pin is already initialized to work).
-
-regards Frank
-
+Thanks
