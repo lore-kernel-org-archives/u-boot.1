@@ -4,83 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C1C9CAC5A7
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 08:11:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06087CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 08:28:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8436883211;
-	Mon, 22 Sep 2025 10:11:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4786983390;
+	Mon, 22 Sep 2025 10:28:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mGxQTS8U";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AK/34BfI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1132B83390; Mon, 22 Sep 2025 10:11:31 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 62C4C833E8; Mon, 22 Sep 2025 10:28:33 +0200 (CEST)
+Received: from CY3PR05CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::7])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C487382B07
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 10:11:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 888A083211
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 10:28:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3ee1221ceaaso2116666f8f.3
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 01:11:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758528688; x=1759133488; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FRSLKG+xOvKuMHFWKOe8oweqRF0B5KLWgGVxv37jfTE=;
- b=mGxQTS8UzHn/1mpDgEYJI/PhYpwN+5lPXF7bnbOfSYLuCHl2YsgFU5AN35xLMXmBYJ
- Kf6W1RRWnvN4Ch1Xcqmm9v/lwF1o2FhBgv3Cjrao319byp4xDVytpvZswlrPu83fHoe6
- mtiA83x7JioaPi9cZCddyPz17rUuFWKzBiOfVF1BVUZWjGIYQJ8FHGn4DLFzR7QIKMBy
- L3D5G2TrDLfo31bxtCnMQbDuC25D8rjRXEw0T1JJM6Nx83j/j5YQ/KFolZsG6eO/aRA4
- SQWncA8R3WF/ElCLuFNc8y63IvOCNQWmQcTDmS9h0RZqgsZK2opUYi8ymfvXwgnCbOeo
- yB6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758528688; x=1759133488;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FRSLKG+xOvKuMHFWKOe8oweqRF0B5KLWgGVxv37jfTE=;
- b=BpqZWBFytz/07qsYi6pNxenHGPXnh5vJmL+4K8lEtK5xShz0Q9LkWISPmgLISH+kQY
- rAsDlYDRnd24PxNTnSbcGUjlGdf1BS0p4pa37c9x7QzNHKqRY/zssYs5xKVj0C2Jq2y1
- GQ7H1nGVKQkKlFMre3iFwpBUQDWFwcp6G8Uw7NQfK4WD0XCGAJmw9LcfraW6UXRzP6nm
- CKeJ0nAz7hYfWwyLErZbk78Dl4DG+yIS0413dP1fUtdLoZxfr/+dDwgZ407ac364VqfH
- UkPOuZu152OpHz7KQ25qaCxXjUoHOE15U5UaXyZKMe48MgVH3bzxK0rS6v2LpLtu9U5u
- Dqbg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX/S9+wKAwHWNXVLZokZsG2pzStOJyXCl65922MpaTIV/XXgOz57SltzK42xlcSh7W+6KDZO7E=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywf5xF6M4ORQbgyMwQf9saDsw/5UARTP8yYTxJsJufhAzn368Xg
- gNRSXZPhTr9eXA78d5LtILC4z8cyHwkKOhs9qFnRJX6t0fS83sKiD0Jn4Xmgp9KZ3Ph4OkVJpdW
- xpNCCn0ZNQ405I6MAbU7omB6nnXfN328=
-X-Gm-Gg: ASbGncuTfY61ggPXmlWqvxjgU0mwNzmsWAdCEeFRhyQ+O/IcdRgFfoJvEIN12Aji0zd
- TolCRw2pjncAD4/zKa/4YPrImOtt6mxYteW0kupkuJUQG5RA2yCsPvvcRM0RncAIouvwFxXo33f
- PcO+fv34l56SP4Ok7EZeRLG/5PUmLeSEkL3+JfF57ZumxyHB5k5e0w5rP2kpnwsRmbxbHemFEzz
- mHY7rTq
-X-Google-Smtp-Source: AGHT+IE+qhIYJkTY6NLR/4/culgEFTjSbpv2/pOdIS2g3WsiDyAWI9ry7Gtz3WXjiGzQ2jaOTaKpha52nIjTQLkH7KQ=
-X-Received: by 2002:a05:6000:22c7:b0:3ee:1357:e18f with SMTP id
- ffacd0b85a97d-3ee7bad15e4mr9969205f8f.12.1758528688003; Mon, 22 Sep 2025
- 01:11:28 -0700 (PDT)
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EGrpjuQHQbF/eEFb+uLBNEUp2DA+TFIzqi3yUZzyxnizQFY2yjzUx3e4tfdUNyIo42myLWBdqvs2/pkbx7jRyahSUJbw1C7RwS5X2T852815hfVT+1+wdmx3Wcne6ss/qM8H1U+XL0d9aTSPADdonYCTiFcaGJU4xxAEs3QWGa1EdXmP+aV4WKjL41zbkTXNdfHAMB1FTnnET22lVzy14wgHQEyUAgWxlOC6r3iV9N0J/YGW7/Mr/A9C1ol/dIH9f2Zlv0wkhmZhdmymAXJtiu7vjwV3PgmKXt7kyj69QD2PI0VyMP1QOmydtoP4O6cG9ZzdPX0tvLAtIVxXrunn8w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=T8cSDDqBhO09723+7XaFF17umVthIl93aDdfUvfy2WE=;
+ b=tdMu7YwqBUWeo1WQSp7Bgef1cw0U4MvvwPC39wY3JkTsgDRkh61hi+tvbCYVtn4f+XY4D1i3iJEbOX/Ee701FwoEPcXrTmrgLXm4+1jhMqtUBvIqSEGv2QTwp4NTFugJWYbLvmwHcMKD8/7uDPlrY0/HLNXngCBQvjCcygJuW7eQ+qR8X0F6R5uwcYP2dyq+TZPLi9SgRKNU666toGdVsAvJctyviKhqNvu5jgekeZuDQ0n1lF/ApkaDmiokDyZ40opFDuLkogTZcWKcRwW9hLrB2G8FlNZUCDvPoCw05n0CUef4x/C7FivR0fiWLfhy8va4lOzA1P0kPhssre01KQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=T8cSDDqBhO09723+7XaFF17umVthIl93aDdfUvfy2WE=;
+ b=AK/34BfIhwAdq6JtYdclj8vEKdY+muBgl4Os/nXadB1fxHFzVnqi0D2VXuG1+1Bev05Ciij6PT1S2jn0mwaV8Gh7xHc6+d6nYBgHqqnojiaDrZ+cH8oco+x62cb717hIwudfFqYs/A6GsrWG7BHkMGDjvqWWx9ROluUK54/2Jow=
+Received: from BYAPR01CA0012.prod.exchangelabs.com (2603:10b6:a02:80::25) by
+ DS0PR12MB8041.namprd12.prod.outlook.com (2603:10b6:8:147::18) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9137.19; Mon, 22 Sep 2025 08:28:25 +0000
+Received: from SJ5PEPF000001F0.namprd05.prod.outlook.com
+ (2603:10b6:a02:80:cafe::8e) by BYAPR01CA0012.outlook.office365.com
+ (2603:10b6:a02:80::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.19 via Frontend Transport; Mon,
+ 22 Sep 2025 08:29:48 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ SJ5PEPF000001F0.mail.protection.outlook.com (10.167.242.68) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9137.12 via Frontend Transport; Mon, 22 Sep 2025 08:28:25 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 22 Sep
+ 2025 01:28:23 -0700
+Received: from localhost (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Mon, 22 Sep 2025 01:28:23 -0700
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Nithish Kumar Naroju <nithishkumar.naroju@amd.com>, Rohit Visavalia
+ <rohit.visavalia@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh Yadav
+ Abbarapu" <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] arm64: zynqmp: Fix DTOVL warning about graphs in kv/kr260
+Date: Mon, 22 Sep 2025 10:28:15 +0200
+Message-ID: <576630cc9696e21bef15bd1f0ca35e396adc4eca.1758529693.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250919101117.853194-1-lukma@nabladev.com>
- <CAPVz0n2VSmeyaHRn6WUfSN3uBu+7fw38Q2Wz22VWMjth8nTsPA@mail.gmail.com>
- <20250922100826.4ab1d4d8@wsk>
-In-Reply-To: <20250922100826.4ab1d4d8@wsk>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 22 Sep 2025 11:11:16 +0300
-X-Gm-Features: AS18NWC8T0u8Wps9_jOQqvV3NjtH9p6-p9ktRXSu9-y-LaHI-mRvMtq3ncq8j-o
-Message-ID: <CAPVz0n1nmTsENcyE5=U9j6z-aJgG9RO+g+TEh2D5Zf=gw8bo-Q@mail.gmail.com>
-Subject: Re: [PATCH] arm: gpio: Add set_flags callback to the Tegra gpio driver
-To: =?UTF-8?Q?=C5=81ukasz_Majewski?= <lukma@nabladev.com>
-Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3802; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=lj4eLEmiX+el/3HOltQAbvdpo0j8yOB4SKSqaRzn7wA=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRc5FjAeL8vnLn38JUl0a8OZ7a9qGpsCXhXmPDGjOWF5
+ uc/B36c7ihlYRDjYJAVU2SZzqTjsObbtaViyyPzYeawMoEMYeDiFICJrBBh+GfXLel6yeOnx6Ie
+ yxWaekvnfolWz3O7nNN+Lee9yKL+z9sZGVZziCzkOXzGunLWrQ29pbOmc71YP7NKIrpT54Nc+vW
+ 5YlwA
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F0:EE_|DS0PR12MB8041:EE_
+X-MS-Office365-Filtering-Correlation-Id: e1b6e12a-c356-492c-a67f-08ddf9b1fff0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?yvR8dVYVo32HHwCVZXHVJu5wKz0v15tmrZGM/uwF0o2viI1M9R7Y3NOw5x2X?=
+ =?us-ascii?Q?sflpNfubnBH4lX2r5pWRsaMzX0T4MjT3QL/wIxbxX+Dtmb8xfV+U1y+EISPa?=
+ =?us-ascii?Q?CO4nhrknFujyJ0f2rfZPLHHlJJ5vX7UKXfBgHWe6SLNSS/HKVdK5Z6yD5pMC?=
+ =?us-ascii?Q?UaqMBxeStHm4KZEbqjf46AtYAlkpNUcGaweA9MGjDtrCudMHgwYlshAx3WSs?=
+ =?us-ascii?Q?/Qs5UwttKMlOo5ALvDAq1TAm8Ix9w3hLBuzfUZwCZCGrMt2cb3IEEBChjFFA?=
+ =?us-ascii?Q?b8gwypZwEBdw6pDsGGa/z4PzCkt3/jqilc5KuZ84Yhc4hDIV4G9HRXn3FOdW?=
+ =?us-ascii?Q?iAsBwtkUKHbx197osEy99dpSldrgd1SjC6J+7Jea6wmCSmYrDxse4po0rOTw?=
+ =?us-ascii?Q?uH3vsuZ/+HqDXW7ncBVENm3xhUHo7BMNx2pTkH3ew7wMzDw+hTbLtgFSc+Tc?=
+ =?us-ascii?Q?xURxNWk4UUA4ZLGYeFAXITMWxaZYe0wlKWtyhw2UAAWbZPCl0n2Qs2IDACAE?=
+ =?us-ascii?Q?8DeCMfo7Vbn+XPwogZeZYxLvltm/w70+QRet9MR2CBkyiRmyvsaG5R8qAzZ+?=
+ =?us-ascii?Q?bOOJeav6agaMw8bAtQJjDz3jM7irsN47ARo0VXFMMKmACQYg5o8y9JYLwd83?=
+ =?us-ascii?Q?rVAIpFJyOeOMPY75nvLAK0082gSCuKwHODi5zKMwIXbhmaNuUJ5d3x7AQRIZ?=
+ =?us-ascii?Q?YckDYbf582WDy08Y+zwBdvyKzaMH1LFCu+rI/Dxzd1AvxPSD5ssjLZh/Tb2A?=
+ =?us-ascii?Q?bjHzH+5/8snllNVvIcuWcoVQ4zE1tonEOiMEhG7CbpNasFHfNCdEBV508p7N?=
+ =?us-ascii?Q?JVwo0MTwg9JbKzyZ7+sVZeJ05Z3OuOb1P8blsGBB15pnidETCYgzFvbGKSW3?=
+ =?us-ascii?Q?TMJx4Z731brKaKxwu3BlUcj+pofGGSc+qwyt8xmpJV2XPLeZadYX0PaFriAt?=
+ =?us-ascii?Q?CAC1ul8KHEg/jQm2Hp5sgu6uFLmJVOfYR+q20Y0XZO29gYi7cZwJSqj1dZNk?=
+ =?us-ascii?Q?TbMhwahy0m2IMHNDBF2Zi2eVF+ZuCWj7kFfSMHtLEsab7OzK3kc9MysNmON4?=
+ =?us-ascii?Q?ljOaUIv1K5oexjrqgVJ7nD4bIJVkce+8gd4EOdQU6nh87WoqsAAG+rGHfknw?=
+ =?us-ascii?Q?TxdGHzOx4drc0HgPNrrCbwm2712bFVYh7bfLI25CKRS1dpHZlWlKogPcyBWN?=
+ =?us-ascii?Q?fpKvoRQ6E4JcnVwMdEmWCXHcSRDWOM5CA2nNd+O413mhI8gwwSx6fiTEwiz5?=
+ =?us-ascii?Q?Oz614lMoDcYDxLX9TZZ0eEy1x0xC0D+MK+BMke+rYatGlD2BEqCGONUQ7qmL?=
+ =?us-ascii?Q?jw7MEEZYEjHF7/SoYZnYLjOgRqZVl/7XQw32NQfjnIGClkFSK/nZ5DICc9JB?=
+ =?us-ascii?Q?bbcEhq/M7cYTs67HOtEuSqff+FvND7bASqEIzm2fZLkrfenyeW256RB+uCoc?=
+ =?us-ascii?Q?AuNAaJhHc4LaimyZItYuewvumLZhMjf7dy0YFtWvMCDron5jKrX+AZFvLHlJ?=
+ =?us-ascii?Q?n2qxfXGRBFYFunjrLVYsnI0TEHgG156HVjA/?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2025 08:28:25.3350 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e1b6e12a-c356-492c-a67f-08ddf9b1fff0
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F0.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8041
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,152 +153,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 22 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 11:08 =C5=
-=81ukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Hi Svyatoslav,
->
-> > =D0=BF=D1=82, 19 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 13:11 =
-Lukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > In some Tegra SoC (like e.g. T30) there is a possibility that one
-> > > will configure at early boot state a pin as GPIO (to use it for
-> > > e.g. carrier board detection). However, afterwards (i.e. in Linux)
-> > > the same pin will be used as the special function one.
-> > >
-> > > Current Tegra gpio driver doesn't allow this, so callback for
-> > > set_flags() has been defined to properly setup the GPIO when
-> > > required.
-> >
-> > Please write the commit message in the imperative mood.
-> >
-> > > For now following flags are supported:
-> > > - GPIOD_IS_AF (i.e. "alternate function").
-> > > - GPIOD_IS_IN
-> > > - GPIOD_IS_OUT
-> > >
-> > > In long term the tegra_gpio_set_flags() is going to replace
-> > > direction_{input|output} callbacks.
-> > >
-> >
-> > It is not a book chapter, describe what the commit does briefly.
->
-> Sorry, but the commit message is a pretty nice form of the
-> documentation.
->
-> For example when you come back to a project, after a few years each
-> extra sentence is priceless.
->
-> >
-> > > Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
-> > > ---
-> > >  drivers/gpio/tegra_gpio.c | 24 ++++++++++++++++++++++++
-> > >  1 file changed, 24 insertions(+)
-> > >
-> > > diff --git a/drivers/gpio/tegra_gpio.c b/drivers/gpio/tegra_gpio.c
-> > > index 3d1e18854f2..1e8bd051875 100644
-> > > --- a/drivers/gpio/tegra_gpio.c
-> > > +++ b/drivers/gpio/tegra_gpio.c
-> > > @@ -258,6 +258,29 @@ static int tegra_gpio_rfree(struct udevice
-> > > *dev, unsigned int offset) return 0;
-> > >  }
-> > >
-> > > +static int tegra_gpio_set_flags(struct udevice *dev, unsigned int
-> > > offset,
-> > > +                               ulong flags)
-> > > +{
-> > > +       struct tegra_port_info *state =3D dev_get_priv(dev);
-> > > +       int gpio =3D state->base_gpio + offset;
-> > > +
-> > > +       debug("gpio_set_flags: pin =3D %d (port %d:bit %d), flag =3D
-> > > %d\n",
-> > > +             gpio, GPIO_FULLPORT(gpio), GPIO_BIT(gpio), flags);
-> > > +
-> >
-> > Have you even built this code yourself? "flags" is of type ulong, not
-> > int
->
-> It was compiling, but I will double check it.
->
-> >
-> > > +       if (flags & GPIOD_IS_AF) {
-> > > +               set_config(gpio, CFG_SFIO);
-> > > +               return 0;
-> > > +       } else if (flags & GPIOD_IS_IN) {
-> > > +               return tegra_gpio_direction_input(dev, offset);
-> > > +       } else if (flags & GPIOD_IS_OUT) {
-> > > +               bool value =3D flags & GPIOD_IS_OUT_ACTIVE;
-> > > +
-> > > +               return tegra_gpio_direction_output(dev, offset,
-> > > value);
-> > > +       }
-> > > +
-> > > +       return -EINVAL;
-> > > +}
-> > > +
-> > >  static const struct dm_gpio_ops gpio_tegra_ops =3D {
-> > >         .direction_input        =3D tegra_gpio_direction_input,
-> > >         .direction_output       =3D tegra_gpio_direction_output,
-> > > @@ -266,6 +289,7 @@ static const struct dm_gpio_ops gpio_tegra_ops
-> > > =3D { .get_function           =3D tegra_gpio_get_function,
-> > >         .xlate                  =3D tegra_gpio_xlate,
-> > >         .rfree                  =3D tegra_gpio_rfree,
-> > > +       .set_flags              =3D tegra_gpio_set_flags,
-> >
-> > If you are already touching this anyway, then touch it properly. Since
-> > set_flags op is meant to remove direction ops, then remove latter too.
-> >
->
-> Ok.
->
-> > >  };
-> > >
-> > >  /*
-> > > --
-> > > 2.39.5
-> > >
-> >
-> > This commit causes regression on LG P990 board, backlight is located
-> > on gpio i2c line and with this patch gpio i2c refuses to work
-> >
-> > (bootloader) Core:  114 devices, 27 uclasses, devicetree: separate
-> > (bootloader) MMC:   sdhci@c8000400: 1, sdhci@c8000600: 0
-> > (bootloader) Loading Environment from MMC... Reading from MMC(0)...
-> > *** (bootloader) Warning - bad CRC, using default environment
-> > (bootloader)
-> > (bootloader) Can't get i2c-5 gpios! Error: -22
-> > (bootloader) Can't get i2c-5 gpios! Error: -16
-> > (bootloader) In:    serial,usbkbd,button-kbd
-> > (bootloader) Out:   serial,vidconsole
-> > (bootloader) Err:   serial,vidconsole
-> > (bootloader) Net:   No ethernet found.
-> > (bootloader)
-> > (bootloader) Autoboot in 0 seconds
->
-> Apparently, some flags are not yet supported - like  GPIOD_PULL_UP/DOWN
-> or GPIOD_OPEN_DRAIN.
->
-> Is this the one from u-boot/board/lg/star/star.c function
-> star_fix_panel()?
->
-> Or is it somewhere else - for example in drivers/i2c/i2c-gpio.c ?
->
+DTC is generating warnings about missing port like:
+DTOVL   arch/arm/dts/zynqmp-smk-k24-revA-sck-kv-g-revB.dtb
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtbo: Warning (graph_port):
+ /fragment@5/__overlay__: graph port node name should be 'port'
+...
 
-I have told that it comes from i2c-gpio
+That's why change description and add it directly to dpsub mode to contain
+full description with also port.
 
-> For the latter it looks like I do support all the required flags.
->
-> At least on my Colibri T30 it works correctly - so extra help is
-> appreciated.
->
-> --
-> Best regards,
->
-> Lukasz Majewski
->
-> --
-> Nabla Software Engineering GmbH
-> HRB 40522 Augsburg
-> Phone: +49 821 45592596
-> E-Mail: office@nabladev.com
-> Geschftsfhrer : Stefano Babic
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
+
+ arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 10 ++++++----
+ arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 10 ++++++----
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 12 +++++++-----
+ arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 12 +++++++-----
+ 4 files changed, 26 insertions(+), 18 deletions(-)
+
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+index b92dcb86e87e..88396d089f43 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+@@ -154,11 +154,13 @@
+ 	phy-names = "dp-phy0";
+ 	phys = <&psgtr 1 PHY_TYPE_DP 0 1>;
+ 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
+-};
+ 
+-&out_dp {
+-	dpsub_dp_out: endpoint {
+-		remote-endpoint = <&dpcon_in>;
++	ports {
++		out_dp: port@5 {
++			dpsub_dp_out: endpoint {
++				remote-endpoint = <&dpcon_in>;
++			};
++		};
+ 	};
+ };
+ 
+diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+index 99ad220d13d6..e041a962d89e 100644
+--- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+@@ -155,11 +155,13 @@
+ 	phy-names = "dp-phy0";
+ 	phys = <&psgtr 1 PHY_TYPE_DP 0 1>;
+ 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
+-};
+ 
+-&out_dp {
+-	dpsub_dp_out: endpoint {
+-		remote-endpoint = <&dpcon_in>;
++	ports {
++		out_dp: port@5 {
++			dpsub_dp_out: endpoint {
++				remote-endpoint = <&dpcon_in>;
++			};
++		};
+ 	};
+ };
+ 
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+index d7351a17d3e8..fbbebbea80cb 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+@@ -3,7 +3,7 @@
+  * dts file for KV260 revA Carrier Card
+  *
+  * (C) Copyright 2020 - 2022, Xilinx, Inc.
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
++ * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
+  *
+  * SD level shifter:
+  * "A" - A01 board un-modified (NXP)
+@@ -131,11 +131,13 @@
+ 	phy-names = "dp-phy0", "dp-phy1";
+ 	phys = <&psgtr 1 PHY_TYPE_DP 0 0>, <&psgtr 0 PHY_TYPE_DP 1 0>;
+ 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
+-};
+ 
+-&out_dp {
+-	dpsub_dp_out: endpoint {
+-		remote-endpoint = <&dpcon_in>;
++	ports {
++		out_dp: port@5 {
++			dpsub_dp_out: endpoint {
++				remote-endpoint = <&dpcon_in>;
++			};
++		};
+ 	};
+ };
+ 
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+index a4ae37ebaccf..87f94f8ef9d8 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+@@ -3,7 +3,7 @@
+  * dts file for KV260 revA Carrier Card
+  *
+  * (C) Copyright 2020 - 2022, Xilinx, Inc.
+- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
++ * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
+  *
+  * Michal Simek <michal.simek@amd.com>
+  */
+@@ -116,11 +116,13 @@
+ 	phy-names = "dp-phy0", "dp-phy1";
+ 	phys = <&psgtr 1 PHY_TYPE_DP 0 0>, <&psgtr 0 PHY_TYPE_DP 1 0>;
+ 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
+-};
+ 
+-&out_dp {
+-	dpsub_dp_out: endpoint {
+-		remote-endpoint = <&dpcon_in>;
++	ports {
++		out_dp: port@5 {
++			dpsub_dp_out: endpoint {
++				remote-endpoint = <&dpcon_in>;
++			};
++		};
+ 	};
+ };
+ 
+-- 
+2.43.0
+
+base-commit: 221ab6313667165276ec87aad0fac3d58a91dd21
+branch: test
