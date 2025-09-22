@@ -4,58 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D32CCAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 22:26:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F25CA100F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 23:04:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A572832F9;
-	Tue, 23 Sep 2025 00:26:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 75B82832F9;
+	Tue, 23 Sep 2025 01:04:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="edvHUk31";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LgeUTt1J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BCBC83390; Tue, 23 Sep 2025 00:26:02 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C889983390; Tue, 23 Sep 2025 01:04:55 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D57EC83211
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 00:25:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C221983211
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 01:04:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cVyPK6YqTz9sWQ;
- Tue, 23 Sep 2025 00:25:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758579957;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=fDhUQ3nDrXp1quHuJU9zQLZylaGY3kLRgSgmtutuv9s=;
- b=edvHUk31Z7rwKcHQQY2K3f/X1dZgHcP0pM5CYloQgLi8tICVdiAmbAqNvNRMkSSsCHc5MV
- v2dtOlEEGtbKXk2VJSOOv4pOUW9AT2pAozt/PH35kYLbqmmfHhXLT+n0PAj6hLFJerOpF6
- pcntA5LunVW2Edgsi0W/Nn22Mno6c4HVoTM6OdirRt8NYT/2/WerOuegiZKpr79kRnRg3W
- s5mKz9YYtIPgt897dHE+WgWdcPD/+vzHqENp+tszRzVUhHXBfBnFNGiIsb3i/WfbIapybr
- hBJbpKSSM0U/wXPxUyD7NO0xzKUF5qRG686GtZDNGd8AIsuyhQqTyxUK7gCs1g==
-Message-ID: <dec23078-9225-4faa-b364-74b590dfd667@mailbox.org>
-Date: Mon, 22 Sep 2025 16:47:23 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-57e36125e8aso1579275e87.2
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:04:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1758582293; x=1759187093; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VIE9O8RuovSccJNxyH1UCjFSOHuXpHgZs9OxriSL31c=;
+ b=LgeUTt1J+b2RcJlbDfaeURWvUsvdY3WS0iFK30PLD08opjs6RWUPt3ftv9QT0lFk60
+ EJ3s5eBjLW6wwcTRNNP3F7nccIHEJHB9MNUp1BJydxts/Mf+4iKdKpWrswMpbNmcI5SB
+ EQMADsEzg06lHHl90dqySfIZ0QAsXkCH4vkgF2G/vj0cLH66Ldab0yivWhfWhlF8C2gn
+ mkvHezvUh7fkJVT0SnkL6yI2GXG8wT4UrZ17GIBTI3tf4J3ADFZpokyD4Hy2ZcfGlqaO
+ RTHp7LTrIHaI3oP0G/mEFUS4g87QoMcgGm2yBmcr19vAoZqaEgrMtzYFyEfhPpGhuMfV
+ MZGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758582293; x=1759187093;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=VIE9O8RuovSccJNxyH1UCjFSOHuXpHgZs9OxriSL31c=;
+ b=N22rUK1+QzodrlyoPpqAZlUp7PlIwmCyQHcj66Ubo2KOKsCX6Ffvjo/aXWhx/DE5z1
+ ybaYk1wHbuGhmuXYhx98q5ziLQS4ntcq5Tytqy+MNsTfZ2m+zLNQ7zEBMUJLVb1olkb7
+ d9B7RNIixi1P6oVPoRN4IumoFgc80/W5ReuzmpHvqFh4WqHyWNut7LmpiH5EVCwSqcxZ
+ YFX6XtD91dF6Te3G6/J2xaplnWhgacbZ1VhcznpeQEk7uFUrkZytBYjd3OpDOsevI1Di
+ bNF8kBnPgr0q2Py8/cXEooeZquxU/N3yUp9N/fRAws+4Em+VHc3sbvctvCS/ASfWQJwd
+ 43Dg==
+X-Gm-Message-State: AOJu0Yzz4oHnx8gFeynSSLvsp9NbPn+T6p1ZJL3B/6+fy/SQGR5N133R
+ zumjFNC9f4wHyljsu3Ml5G2oTITfXGysjZkvBbwCvyO4zf80SNxNXRcECZ9GreCXkPDb/rrCMYS
+ frzRrJYcK3/hU0PfbI623iwrAmsXcJrM=
+X-Gm-Gg: ASbGncsd6VWlcQlBs5Ox5MPwfVHM9ufNxS7eL6nDIn4db6iIWTvi8MdHCg4x8M10P3e
+ YW0b1MVvCY38cX46jCzVk/GFUiaIia9o9lnNOUnM7oWi7eFSq3zBosAO9HLSyaUJUIb4Op+T4/w
+ goNI54lcDEUiIxTaDxJaTO3ral0z40Ad+ntZoFMiyGjjpTwWxdM8NUzd/sN6+smVRVp6Y+0LUTH
+ nTmhnu71Rul9diDUYUyN1mTulNFl/0dM2krEwo=
+X-Google-Smtp-Source: AGHT+IFEpDeTDLxvdhWTF/V6tudmwkpGhCgb4PUMxwutJO5j5/7X9JSdiwy3imvgW35y3FpOH9yXJ5INbtSj16srejE=
+X-Received: by 2002:a05:6512:2210:b0:577:5ea7:1484 with SMTP id
+ 2adb3069b0e04-58070328f26mr85389e87.6.1758582292621; Mon, 22 Sep 2025
+ 16:04:52 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] usb: musb-new: fix typos
-To: yegorslists@googlemail.com, u-boot@lists.denx.de
-References: <20250922141229.5739-1-yegorslists@googlemail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250922141229.5739-1-yegorslists@googlemail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 8e8129b74f3c0fcf80c
-X-MBO-RS-META: t7r78e15f9z8w9tei6rwrro4do1jgfkg
+References: <20250922111143.1204915-1-ye.li@nxp.com>
+In-Reply-To: <20250922111143.1204915-1-ye.li@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 22 Sep 2025 20:04:40 -0300
+X-Gm-Features: AS18NWAl55zZ5QGC-v3aLuC8-zNrVmEhuFen7jpMLcr9MpVM71CQJRHlTdnsfG4
+Message-ID: <CAOMZO5C2u-bn5jET1QMrg7yg=FLSgfEGchUvwEhyNY-W=cDEMA@mail.gmail.com>
+Subject: Re: [PATCH 1/4] spi: nxp_fspi: Use second last LUT entry for AHB read
+To: Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, peng.fan@nxp.com, 
+ uboot-imx@nxp.com, alice.guo@nxp.com, ye.li@oss.nxp.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,13 +93,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/22/25 4:12 PM, yegorslists@googlemail.com wrote:
-> From: Yegor Yefremov <yegorslists@googlemail.com>
-> 
-> Typos found via codespell utility.
-> 
-> Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+Hi Ye Li,
 
-Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
+On Mon, Sep 22, 2025 at 8:12=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
+>
+> Use a dedicated LUT (second last) for AHB read command, so we can
+> directly read from the AHB memory-mapped address and booting M core
+> for XIP on Flexspi NOR.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
 
-Thanks !
+As Tom pointed out in other patches you submitted, please make sure to
+run checkpatch on all the submissions:
+
+CHECK: Alignment should match open parenthesis
+#156: FILE: drivers/spi/nxp_fspi.c:543:
++ if (op->data.nbytes && op->data.dir =3D=3D SPI_MEM_DATA_IN &&
++ op->addr.nbytes) {
+
+total: 0 errors, 0 warnings, 1 checks, 27 lines checked
+
+Please fix and submit a v2.
