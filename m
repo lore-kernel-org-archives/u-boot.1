@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 907C1CA100F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 19:42:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1B3DCAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 19:42:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB48B83211;
-	Mon, 22 Sep 2025 21:42:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 268DF83447;
+	Mon, 22 Sep 2025 21:42:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0558883443; Mon, 22 Sep 2025 21:20:51 +0200 (CEST)
-Received: from smtpbgau2.qq.com (smtpbgau2.qq.com [54.206.34.216])
+ id F3AD383445; Mon, 22 Sep 2025 21:20:56 +0200 (CEST)
+Received: from smtpbgau1.qq.com (smtpbgau1.qq.com [54.206.16.166])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 451FF832F9
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 21:20:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB91683423
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 21:20:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
-X-QQ-mid: zesmtpsz5t1758568831ta4655ce6
-X-QQ-Originating-IP: Fq5ITHJWsjrkiKvNYCiB85WZzuCrxpY/dnv9TsO5K2o=
+X-QQ-mid: zesmtpsz5t1758568837tc5061e5a
+X-QQ-Originating-IP: CoRmPSUyOF0EuDGs3ojWi/Q8whCV8e6SuEQ6008fEWI=
 Received: from debian.. ( [218.1.219.45]) by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 23 Sep 2025 03:20:30 +0800 (CST)
+ id ; Tue, 23 Sep 2025 03:20:36 +0800 (CST)
 X-QQ-SSF: 0000000000000000000000000000000
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 5887580862384762391
+X-BIZMAIL-ID: 12673140078698010598
 EX-QQ-RecipientCnt: 3
 From: Beiyan Yun <root@infi.wang>
 To: u-boot@lists.denx.de
 Cc: Beiyan Yun <root@infi.wang>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/4] doc: bindings: fix aquantia-phy.txt typo
-Date: Tue, 23 Sep 2025 03:20:09 +0800
-Message-ID: <B13DC3B6B66510F3+20250922192021.268592-3-root@infi.wang>
+Subject: [PATCH 4/4] doc: bindings: add Aquantia PHY node's "firmware-name"
+ binding
+Date: Tue, 23 Sep 2025 03:20:11 +0800
+Message-ID: <7B7BFF5CA2A452D9+20250922192021.268592-5-root@infi.wang>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20250922192021.268592-1-root@infi.wang>
 References: <20250922192021.268592-1-root@infi.wang>
@@ -43,23 +44,22 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
 Feedback-ID: zesmtpsz:infi.wang:qybglogicsvrgz:qybglogicsvrgz6b-0
-X-QQ-XMAILINFO: OKkKo7I1HxIeXha8jx2zljAInekgw5ZI3fyMNnDdF5f9zGpYSmRg7cYO
- HAxPlgPbamC9LyA1jVJ55NbcqcGA7UDkmFx7BxepkeMAVO1nwn5xx6bxgMgE9w2TzPyrlWS
- W7saQKCd0dsqzAGGcmjWbo3eBxBqGLdSqFUWsWM8fIsW4LGe/NBIzT99+jNOuWEklFd5RlN
- wclMe+P2dzTJcULOfgwp6eUaZG0orj9qKum1w/eIsPr76RsPL+p8cVURGjzl/bq4/H2ATOq
- L/xuZboMMPqXCRkvOaivvTobesXoYiZiR8n8PR9iW+IKR3cbccnS/UIjrArxhgT+YtnYUZO
- XiANXyyvf9eIW1lJNgwp03za/epgEeH/41EYFd2aSI2r8ADq/nSim95IqeHqD3/i2Q0+UA6
- w/mmDmcJkS4vuJ6I7mbtgwyzwL0WfoyxkYt7OLXs52uvn+sOiOF9FZyne2ryd71qtm/5m8L
- 5hh0e3CaxPH5+j8q7AaqQHh/16Bjc93yc7R1GC2danP2tCAe3BrB1wxAxAKFdwId6JCn6uN
- iz8n5Gd4EDZIY88eF7i8ag0gY0Wa4sVhpAXNhXFrOq33A77yUCEF+gysh8BWLznpLKBU3Cx
- anY5qCYWNOvattBFM5//lCbEN0jy/Yf0R9ilt9jzionSfkPThseSzDogZSXGg53loW3z47I
- szhND0M2o0jh5NqXuwZq3miXe2cw7/ekqMzxita/F49nUUZwfW5R0tpLv4a/7pX0GVE+51w
- nN6EJiROZthXyqE/xXEG0w014SIZ9Ino2JtnHFTNmUNEoeEcfsL+/W1u/tXeBzXhgXhm4d2
- NGST17ACOcsGV+F3tOTg0AiAZkFBk0dyGNwnpMxutVnsAs2TXOA/0E/LMCOTJ4miUW0mRov
- he5NPh2AOAr4SE6sMOhZz8kCKXfcTpUqlsJlVvKn4s6D9YAKfs3dHqlzn99mhKNWER43bFg
- t5OFwFnj1X5jsfQm2G6A/cnZHCMaOdpe+CerJEWZdlaWwrXf4jvpW5M0Y8XatjR7aGdrDl6
- A5XpVSOA==
-X-QQ-XMRINFO: M/715EihBoGSf6IYSX1iLFg=
+X-QQ-XMAILINFO: NvH2zBBgt3uTMTwhQo7G83tkDI7KHgKPT7DzoTnhECV6mQ+Af+KFOqv5
+ 9wxnvMPW06H47dpZayr+3bghGwKCe8xlUNi6TlSpEpual7FonIIogIE7jBJDygCdVujHv48
+ k3lndKmBBN/X2TWtzIIc3tjcM2E3nxkk3Qm8gOT9hlxTUEVwM44tc2z0EyrH1ZfISq/FWFY
+ C2wgP7Es05aPoZcRAZ4yEjrZhgMF7LOFCXR33JCfWal0nHtp6+aUwRjgnZZrnQDU02Erl4x
+ TK/x01pxJdNn3lNJJCBVGKnI6+ctchxnXAgDw2yDj7hfPkWMg9r+EKmRKx7L6y3K8kUaw/T
+ /yaazSGF8iMBvGPwx6kBH18p+EaJz61+kSBRqTJ7wp0cW+7YTixVli1xJ+1NJgbcBOavq50
+ Zt0C9riHvutF07hQRFk755Vnodbdrf3ZYOfoVT4eEE4z8IxhOD7XELui9a0JPrEqFcKJQ3j
+ 1UMrPdSVpC3LVmM4mtNeAVThkYHoJlPW/oH06+x8X21wq9ufmtWTK93Nmo/7lSqVJh2EP7H
+ pY6bFt8TloiifiraAupZTuVAEjl2lXnSlC9xjHuOjtcKLvBtEGHnO938U65vgKYNBRduz07
+ 6/ar1A6w55Rf4CJsidh3A25ryYurq2yhgzGrRj3ThKP++vocTQ4F4EI1u+xNcWr+1LFWL/F
+ 187LjeB+8Z9h4k+btBFUKvKFgPjSm3+CoP/tUxn3EncFC5etHZjTJxyRWmtxjfknHHEmfFj
+ Wn/+8PpeJw306i3jWWRUCQFic4bVA3ORXV1Fi21XLIj0GA4D2yQ3YDZu2XuAy+dO+Keia9V
+ dw91GCHKjSyXOc2a6/bN8s+65uDLf01E0Iud7fjWGTjvDLj4rb+ZvbkmU6LdKO5SB8aKDFg
+ UDDkxv1uS+a/n2JxXfTYmoQ9Sp/q+00c8nmZBfXPhqDgHVLpRIx0Ab5baUzO88YXedaPPx9
+ RSsEsg+I5NREzBf49uBwu1AaxwuJzdyO27LHHbHsD0vDcjw==
+X-QQ-XMRINFO: Nq+8W0+stu50PRdwbJxPCL0=
 X-QQ-RECHKSPAM: 0
 X-Mailman-Approved-At: Mon, 22 Sep 2025 21:42:39 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -78,27 +78,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix typo: "weays" -> "ways"
+With the switch to generic firmware loader, "firmware-name" binding
+was introduced to define the firmware filename.
+Provide the document and usage examples.
 
 Signed-off-by: Beiyan Yun <root@infi.wang>
+
 ---
 
- doc/device-tree-bindings/net/aquantia-phy.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ doc/device-tree-bindings/net/aquantia-phy.txt | 30 +++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
 diff --git a/doc/device-tree-bindings/net/aquantia-phy.txt b/doc/device-tree-bindings/net/aquantia-phy.txt
-index 89ce61e05bb..7dd3d45df12 100644
+index 7dd3d45df12..1227c04d04f 100644
 --- a/doc/device-tree-bindings/net/aquantia-phy.txt
 +++ b/doc/device-tree-bindings/net/aquantia-phy.txt
-@@ -4,7 +4,7 @@ This text describes properties that are applicable to Aquantia PHY nodes in
- addition to the bindings in phy.txt.
+@@ -11,15 +11,45 @@ a custom firmware is needed for each integration of a PHY.
+ Several optional bindings are defined that allow these configuration points to
+ be driven by the PHY driver and reduce dependency on specific FW versions.
  
- Aquantia PHYs allow some flexibility in the way they are wired in a system,
--they allow MDI pins to be reversed, LEDs linked up in different weays, have an
-+they allow MDI pins to be reversed, LEDs linked up in different ways, have an
- I2C slave interface that can be used for debug.  Normally the configuration
- corresponding to these is driven by the PHY firmware with the downside that
- a custom firmware is needed for each integration of a PHY.
++Aquantia PHY's firmware is often provided by PHY-resident SPI flash; if absent
++or outdated, U-Boot can upload firmware over MDIO during PHY initialization.
++The driver uploads only when the PHY reports missing firmware or a fault.
++
+ Optional properties:
+ mdi-reversal: 0 or 1 indicating that reversal must be disabled/enabled.
+               Firmware default is used if the property is missing.
+ smb-addr:     I2C/SMBus address to use, firmware default is used if the property
+               is missing.
++firmware-name: String containing the filename of the PHY firmware to load
++               (only when CONFIG_PHY_AQUANTIA_UPLOAD_FW is enabled).
+ 
+ Example node:
+ phy@00 {
+ 	reg = <0x00>;
+ 	mdi-reversal = <1>;
+ 	smb-addr = <0x25>;
++	firmware-name = "aqr-firmware.cld";
++};
++
++Example using the generic firmware loader:
++/	{
++	chosen {
++		/* Select default firmware loader instance */
++		firmware-loader = &fs_loader0;
++	};
++
++	fs_loader0: fs-loader@0 {
++		bootph-all;
++		compatible = "u-boot,fs-loader";
++		/* Load from MMC0, partition 1 */
++		phandlepart = <&mmc_0 1>;
++	};
++
++	mdio {
++		phy@0 {
++			reg = <0>;
++			/* Load this file via the selected fs-loader */
++			firmware-name = "aqr-firmware.cld";
++		};
++	};
+ };
 -- 
 2.47.3
 
