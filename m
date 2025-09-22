@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1A3DCAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 13:27:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF9BCAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 13:32:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6407783211;
-	Mon, 22 Sep 2025 15:27:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9040E83211;
+	Mon, 22 Sep 2025 15:32:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="inB91Y/5";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="a/+0hCXF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF5B3833ED; Mon, 22 Sep 2025 15:27:13 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 5AED58341C; Mon, 22 Sep 2025 15:32:37 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FA6B82CF4
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 15:27:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7127682CF4
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 15:32:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=yegorslists@googlemail.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-afcb7a16441so636759166b.2
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 06:27:11 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-62f4273a404so9867495a12.0
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 06:32:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1758547630; x=1759152430; darn=lists.denx.de; 
+ d=googlemail.com; s=20230601; t=1758547954; x=1759152754; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=txMOMUxnAABukrNxxUD+Ul0Gxlc9k7JOiDFuQxg9t5o=;
- b=inB91Y/5kKH6ueraqEV5kMPwubqbHENAY8XylFfX//KwIqNQSnk121wU1seagDyet8
- 6EipkrmSYEfCWsSsLTkaGYwLeIlhzMxSc8KhPzbmYXhFL1PApfhJfXotFWVAW9smZNlm
- X24UkkAYJjboC4hFWNqc8s1Qedm3BLSUPUyO1P4OHjHGAVUnwH7YXPRpmrIy8tSzrQHo
- Cch0mN6hn96sC3N/SBq1ddUQeRX5rxJxGOH/vd4RWZvo4P44NFGeC3IfO0A7r0aDtddm
- /TnLPUpAjPy2g+9iYoroVMZnjW34oI308lbtebmNlNH5r6qdUdGHlGI1DDk6muQnCXTT
- m4xg==
+ bh=e/YPq8lHCxFQCg2eEVu91BP+LCMLjlXYw4XGynZJFxo=;
+ b=a/+0hCXF30b8CIK3rwzO8wd8bO8EZnhTmHpk8Qc/pa4HJAhnV1jl9kB0Rx0CGDOs5L
+ 0ToWLvb4peOUUt9peIauvCe/8/9DWnvpe8YEXEl0fDOsfIYwIzdhs1jO1l9NCAfyPZCQ
+ 1dOAMR7pRvgHzoACRTpaHpIDdWhddMXL3gs4ZMm1Jy+oQ2LQQ7STNgmFO3Inert9KYl1
+ oMDgzE+HR5TewpLrIJw9e97qQlPhMamf2eiGFDo74sM8UJx8Jj7zfgGJv66VaGMwhv4f
+ 8cfH2Umt6dnDLsT55tF0vcZgPRVa+fA+KHBPr+0azusZLafTpp9jdPLXBGOa3t+MCrvC
+ KWGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758547630; x=1759152430;
+ d=1e100.net; s=20230601; t=1758547954; x=1759152754;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=txMOMUxnAABukrNxxUD+Ul0Gxlc9k7JOiDFuQxg9t5o=;
- b=IKEa9VBbwkoBmzcqG4pACavGtBjc/EzZq9uy8N77ct0Uu4Kn31fwPFmiaz17ZuMdwM
- dr5xVZoVK1FtBsIuIIxAhwTcrDcUcmY7G/wJDeZBfIiezsHE7B1+qHC8R9RDO9z8LgCX
- MLH9f/PZo4L+S9A3ycxFomq06ZzPeQQH596LAYvgmRvD4/LUocGB3fTQqHMEbDl07Z0M
- WqYmYa/MmKkXqlB41Tcm+JUSpztmeQh0WGIidcGJr3eXF6CMnWBwFmwtSUPfUA8yvvVE
- 1v+l55whhIXzj7UHWwYe8ltkJ0HS1/bBev+RucnWovKiJpmrwNKbBPDqqm1/JqNqehLh
- OoQg==
-X-Gm-Message-State: AOJu0YyYaj/dBe7XgaHSVo/ouaCyeIHAsavQVXfI+MfxSMm521hBxHJE
- hASX5KzuNVDKUNKmUVwS+rPATpr4ncPQQFD39Qz4vgd+MqGaAiH8aRt/V7mfpg==
-X-Gm-Gg: ASbGncvdOEa5TuLH870TO8olITwJfy+Q+0iismNn+Mu8OD3HHuH6edmDdiV4mloA7go
- e1YmolvZKU1PCMavgWn2PkRGwh+btgwPKD/4ReiEqLBXjIeXD7SVOLiskd2LeO7W42FCzMZ9TUN
- t+AT9NxEiCwYlR8e8jEKC6+FMTMRkOgeDdiZBM9Q0rITi32NCGI45X5A83zumJIy7uV5Jz5Apfy
- fJxEgiByf+pTv2DG/Pp1f7U8BTcLhFF7JUZNfRbll7L8taYSxJMdXckGvTb617IMV9RHSJLHy2J
- Y92dXCYt2NEa4SbZNiaPLeWb3+cylTfanVts0NHg8w8JPhP3Ig3lgEwFGJfDMVC1idnDTqLcMFu
- QrtCh2HrUP+gvuxj7ucjpo6EuONZDdS1iDsj5wLwd+tv9XKFt6G7ZM1XBjCSWlLSe/wYdC/Ir3S
- bA2mI=
-X-Google-Smtp-Source: AGHT+IH4QjTNfXAs8gkiIn7dc7VvKQIacV91RRFIur3jkG/vSYxIVU6lsG5UUVmzXjbiyyoTKkvMqg==
-X-Received: by 2002:a17:907:3cd2:b0:b09:d915:1416 with SMTP id
- a640c23a62f3a-b24f51a0a42mr1183196766b.54.1758547630386; 
- Mon, 22 Sep 2025 06:27:10 -0700 (PDT)
+ bh=e/YPq8lHCxFQCg2eEVu91BP+LCMLjlXYw4XGynZJFxo=;
+ b=mKd/3N+qcpHmVtA7mCryPQch0ghu8KN1mn5MoKxUFOeYZlMnBnOlNDfpW0/yFo82ZN
+ HFvfX41S5A8sOqwGhi/pcbffbP1CYz50DnaGWTKIw5M4lIl17bDOd4/YOGlTBKSa943H
+ 6BZV8xUYh8nmjR1nTs1CizPAud5U0FyOH4wTuHQQjz3fzlxhM3Od2DvVt47xC+kj0GAX
+ gzRHpvs+85/n6WHvyCg8hQmonPUlEpQE2rsRCao4GTkvyZDfv8xzDqojhDjeacF9qppl
+ Prz6lLTMIDIK/33O6iOK9qC2jOR1xggWktxHeFosNRsq8CsEhEFivXFxVKZ9uMVE3w4K
+ kWPg==
+X-Gm-Message-State: AOJu0YzNXh1LpYVU6MeotrD7OiqrGuTJo04CWpM0XrfHmU7a4QTQEz4W
+ lSxb5+ThY8ao48n+lamVC5VkkhGHYjPKFY9vt8EBtYfeBoR+lCKfsdeSna9Wlw==
+X-Gm-Gg: ASbGncsHCLVvoIAKsONGbxpSLoRBbDybZJiIKTt3rrStMIOs09ohv3EJFlnazkOT79/
+ 4mSqg4AyNYvTGCjj2yOOfeXGpMC6KZgea6BAMGAQ3eml1TSAHJcm6L0BIMd6gVrqHTVew/ENKdw
+ ISue8aCmSLokOQmBQ9Sk6VBywpWqbqG36disGI+9fqocUSL9DU7UnGV7+h3CWrtv7m6lU5Fk3bl
+ HJFRc+revZug6KWwiVcXcsJmoYr80zySmxd8qWN7bLhRd7OOmrhMKZtCjQJJ12Lv+bB26gcI4u2
+ UWtTNCxeOW+NDrs4vjhBwBXpvCpcL7kXAi+HM/Dr9dvEzdQHUqMsFRKUajZBKLgR76DKIvg0dJt
+ bIuRW9mMjaCWgwB5vXsev5Uttqn/t6SHjQuUgYLJSSaRVJhCsS3WL1+SAZT7wPT7ArwEU91pmxE
+ GW+cGLHYdzENYk4w==
+X-Google-Smtp-Source: AGHT+IHK+zVUv/H+w32g9h//2G7JqN7Xoe8UcrhzsyDjk2vuJQ1Z23COd/OMaq2huY3ANnxD2nD8yw==
+X-Received: by 2002:a17:907:2d0d:b0:b2e:f8df:f5c9 with SMTP id
+ a640c23a62f3a-b2ef8e00bcfmr62710966b.6.1758547954070; 
+ Mon, 22 Sep 2025 06:32:34 -0700 (PDT)
 Received: from development2.visionsystems.local (mail.visionsystems.de.
  [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b2d5c22db22sm168937266b.68.2025.09.22.06.27.09
+ a640c23a62f3a-b29e6597caesm464830366b.73.2025.09.22.06.32.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Sep 2025 06:27:09 -0700 (PDT)
+ Mon, 22 Sep 2025 06:32:33 -0700 (PDT)
 From: yegorslists@googlemail.com
 To: u-boot@lists.denx.de
-Cc: lukma@denx.de, seanga2@gmail.com,
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
  Yegor Yefremov <yegorslists@googlemail.com>
-Subject: [PATCH] clk: ti: fix K3 clock driver help texts
-Date: Mon, 22 Sep 2025 15:27:00 +0200
-Message-Id: <20250922132700.4180174-1-yegorslists@googlemail.com>
+Subject: [PATCH] net: fix RMII help text
+Date: Mon, 22 Sep 2025 15:32:29 +0200
+Message-Id: <20250922133229.4180942-1-yegorslists@googlemail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -98,35 +98,26 @@ X-Virus-Status: Clean
 
 From: Yegor Yefremov <yegorslists@googlemail.com>
 
-Add "in SPL" to the SPL related driver help texts.
+Replace MII with RMII as it is a Reduced Media-Independent Interface.
 
 Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
 ---
- drivers/clk/ti/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/net/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
-index fbcdefd889a..bcf3976a09f 100644
---- a/drivers/clk/ti/Kconfig
-+++ b/drivers/clk/ti/Kconfig
-@@ -49,7 +49,7 @@ config CLK_K3_PLL
- 	  Enables PLL clock support for K3 SoC family of devices.
- 
- config SPL_CLK_K3_PLL
--	bool "PLL clock support for K3 SoC family of devices"
-+	bool "PLL clock support for K3 SoC family of devices in SPL"
- 	depends on CLK && LIB_RATIONAL && SPL
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index d1cb69f85ad..7ae28c4e0d5 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -662,7 +662,7 @@ config MII
+ config RMII
+ 	bool "Enable RMII"
  	help
- 	  Enables PLL clock support for K3 SoC family of devices.
-@@ -61,7 +61,7 @@ config CLK_K3
- 	  Enables the clock translation layer from DT to device clocks.
+-	  Enable support of the Reduced Media-Independent Interface (MII)
++	  Enable support of the Reduced Media-Independent Interface (RMII)
  
- config SPL_CLK_K3
--	bool "Clock support for K3 SoC family of devices"
-+	bool "Clock support for K3 SoC family of devices in SPL"
- 	depends on CLK && SPL
- 	help
- 	  Enables the clock translation layer from DT to device clocks.
+ config PCNET
+ 	bool "AMD PCnet series Ethernet controller driver"
 -- 
 2.34.1
 
