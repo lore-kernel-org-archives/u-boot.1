@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83160CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 16:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82D47CA100F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 17:08:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2D42832F9;
-	Mon, 22 Sep 2025 18:38:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C4EB0832F9;
+	Mon, 22 Sep 2025 19:08:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vrlSz+Ej";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qiKRuPOz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CPI/wbL2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7A5983423; Mon, 22 Sep 2025 18:38:51 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 21AAB832F9; Mon, 22 Sep 2025 19:08:05 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8DEC8004F
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 18:38:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A53EA8004F
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 19:08:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cVphm2YD7z9vB3;
- Mon, 22 Sep 2025 18:38:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758559128;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=S42KgxnLkRRVGKasNBkomdgbk7oJH7TscEpSYgcQcI4=;
- b=vrlSz+Ej7UriQ/poTkYvvIPA2LiQFhGKXwO3XYZ/KQpxWDYxYV0D1m55g+4OBr5WtaKjWi
- 3jCn0/6Zx2BJsoNKW9KXdh6nxJxOZNjC98o3sQZuIzWXQfM5fATJnQeg2SCdS0vjHh4XpE
- 4M5W1xIpSX4/KD20+pQEjVEDnf2BcTJpsWl1P7WIM5Le+ZvqPKYzQ/H59jTBde7jyt2ISy
- 4St2C3SY2vkGWf3G3VaFX63xlPBmBVDRAPdwNc5DMZol4/mxoe/orp8lRdXYrxO2+ejbPF
- pAt4MtFzhwlFKcanadbKXpyb1PTO4mSA2lkjk9mQVbW2/600SelAzHuVj93IQA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=qiKRuPOz;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <fbe74a6f-37bb-4f5f-aeea-e0d58ff7b805@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758559126;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=S42KgxnLkRRVGKasNBkomdgbk7oJH7TscEpSYgcQcI4=;
- b=qiKRuPOzgOFZTXZ1VkkeJnSs117+YfeQRc4kV4wwkz1bH0r6J+tSGDtOTKpGhj1stxMrv2
- jYMhK05GSaUJ6/bGGGWrvePUdNbXz+4pXqyZjqgTObrWnYF+lNpJiUXKNilFdcR1b8H45q
- hmATOHxgWFjYec4t9ZltthSyKxds5F2YHee5/spy5kbQxCy4yXsDQNK5+ffq+9ht/4jLFb
- oNQRXJRfiXtTRToTZUXpdQLOUqte8bnZ8d992hYE98uzbkxxYyJeLyBNSm9wwWhfXN3sxD
- rGtoOMpqQF5LvnUPR/kSLQgmgbk/avgrYtJYq6R+1P1dgENJW/HEYRRovtvlGw==
-Date: Mon, 22 Sep 2025 18:38:43 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-74381e2079fso4679373a34.0
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 10:08:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1758560880; x=1759165680; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aiBe+I4PPBOCysCrKlfxJilqPnDkQcxokRNBRV19piM=;
+ b=CPI/wbL2aguVJUPD8nav/n3a2rxMBetGx94sDtWvhT+BnRnygpKkoHod15uTiYP0j/
+ g4hwrowq6Xfh0DteDH+cwhbuhXAFu6t3daodqP+z5O0XL6y2hG68P2u5kahZid3e69RY
+ GZnmRQt64v62sCjvPGD3AKz28vDm4SlD6XIpg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758560880; x=1759165680;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aiBe+I4PPBOCysCrKlfxJilqPnDkQcxokRNBRV19piM=;
+ b=bwK/ADjSmdUx9KGqjHBFzDRl4Z/y9XmCj06P9t+MLw3AHDYnazxAWG4k4deIY6eNCQ
+ FqZdNQz4jPI8gw9nXtM82XZLfAN9zbWQFyubbfI/BCRndH1s4P24pMTP35byjKQ9VKbH
+ HfypXJt/d9sTVZ9/bUkqRa2e0gSe+DZe6Zd+GuOvFMkiP+c4oe1O5rbh2dZWSmQTAi8f
+ 3MulLf9s0eAgZm8V+Q3nf2QPTpIHRUORWbufcLvdRdTQKgrf8lf5gZlMuun1qP0+QVjr
+ cuke92vMuOhAtUI7ZwGlpOArCO7NdxvVZ83ki27jahtKVCMA1ycLRHXSdmXp0CQNl4cL
+ R2jg==
+X-Gm-Message-State: AOJu0YwaWNAmcvasukrhglO7fxux4ZaWn1LXmtq9vw6ubyieRRUL/cJH
+ hzjUneSb/J03VmBHFqH36qsUoVBn/5grI0D59aMKIj+ZeU+cuNdvZv7Tm8s0k5wBI/E=
+X-Gm-Gg: ASbGncsz+IBRkj9qQYUqoPK203ClzznO+Ng5e0XbDr1Mgp203tE7nKoqN071CJSMRXJ
+ OgULDaG6LQRXSBq12ln8+AabBWvRK8xJOM8Lh0LoEG7lexbAM4MDpJJC6ty2KM5PKFCV2H4ia5D
+ aVhriU5sFpYaIGtNdrBxGBCxyKU3r0AYFzfL/98eGIqDMPsl4EzuIb3hH+iK4RG7JEiqeFmEG8d
+ XpSinbm8MqPG/0bDlnB6AxEk4TIm34CKsuzBpeUreZt1GwHsmPmjS5l6dqJ5siFZBqnhom7Dfxk
+ 53LlE6smhBwxaxCvlGHdpzAvhbfpieZg9KA1VwWi+AfOWOeSh2aHdiwhAJ2wLIstNWpCfHhhxjA
+ 58L4sWfunxOY4xKVuBmPjEbmeadI09UCaJ0OSU3tiwHyi5xWJGhVcDTRh
+X-Google-Smtp-Source: AGHT+IGx+Di0lFTig54mhMSWugO39ecExQeqI/k0kGCpcsLGxdPjHTKTZCXNOcCE2AsN0XOyhNp2kg==
+X-Received: by 2002:a05:6808:2f0e:b0:438:bdb0:89b6 with SMTP id
+ 5614622812f47-43d6c24f547mr5982502b6e.34.1758560880167; 
+ Mon, 22 Sep 2025 10:08:00 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-43d5c85ef60sm5083700b6e.26.2025.09.22.10.07.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Sep 2025 10:07:59 -0700 (PDT)
+Date: Mon, 22 Sep 2025 11:07:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250922
+Message-ID: <20250922170757.GD124814@bill-the-cat>
+References: <20250922141915.208136-1-festevam@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] board: rzg2l: Check the DTB pointer passed by the TF-A.
-To: Mathieu Othacehe <othacehe@gnu.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Paul Barker <paul@pbarker.dev>,
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- u-boot@lists.denx.de
-Cc: anton.reding@landisgyr.com
-References: <20250922162901.22908-1-othacehe@gnu.org>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250922162901.22908-1-othacehe@gnu.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ahwsr7egxum63d5cwojahqkeqa355qbf
-X-MBO-RS-ID: 5314650555b53208c5c
-X-Rspamd-Queue-Id: 4cVphm2YD7z9vB3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KBlm/GdYCgB7k4dx"
+Content-Disposition: inline
+In-Reply-To: <20250922141915.208136-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,20 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/22/25 6:29 PM, Mathieu Othacehe wrote:
-> On the RZG2L platform, the advised
-> TF-A (https://github.com/renesas-rz/rzg_trusted-firmware-a/tree/v2.5/rzg2l)
-> does not pass any DTB blob to U-Boot.
-> 
-> On the other hand, the RZG2L part of U-Boot expects a DTB to be passed.  It
-> means that if one flashes the latest TF-A as well as the mainline U-Boot,
-> it will crash trying to dereference the NULL DTB pointer before outputing
-> anything.
-> 
-> Check if the DTB pointer is NULL before trying to use it.
-> 
-> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+--KBlm/GdYCgB7k4dx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks !
+On Mon, Sep 22, 2025 at 11:19:15AM -0300, Fabio Estevam wrote:
+
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/next, thanks.
+>=20
+> The following changes since commit 464800d91b036cfd2df26598d8df2ac72d4569=
+dd:
+>=20
+>   Merge branch 'next' of https://source.denx.de/u-boot/custodians/u-boot-=
+riscv into next (2025-09-20 10:02:00 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-next-20250922
+>=20
+> for you to fetch changes up to 424103865662603d821028734ecddda8802e43b3:
+>=20
+>   doc: phytec: imx8m: Style and firmware update (2025-09-20 17:48:20 -030=
+0)
+>=20
+> u-boot-imx-next-20250922
+
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--KBlm/GdYCgB7k4dx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNGCagAKCRAr4qD1Cr/k
+CiaYAP0dG8+irNCp75PF0SqdaCD3TbRjUA9mOuASMDSwUULlhwEAkeNrkyW2IWiH
+cK5fnqrani3O/PwBwLtBG2lPvVAtjAo=
+=rSMW
+-----END PGP SIGNATURE-----
+
+--KBlm/GdYCgB7k4dx--
