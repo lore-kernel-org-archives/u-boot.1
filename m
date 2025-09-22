@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB456CAC5A8
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:21:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62529CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38F6983447;
-	Mon, 22 Sep 2025 16:21:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DC1AC83443;
+	Mon, 22 Sep 2025 16:21:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jU0uTF8z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FAbHa1qg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82AB383448; Mon, 22 Sep 2025 16:21:11 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id CC35183447; Mon, 22 Sep 2025 16:21:49 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84F6C83443
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:21:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DDD8883211
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:21:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-57bd7f0e5baso1604168e87.3
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:21:09 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-57bd04f2e84so1983814e87.1
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:21:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758550869; x=1759155669; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1758550907; x=1759155707; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Qi3LrhA1FdvffMR/GrhOH2F/XhA+1VZW8esxNbIap3Q=;
- b=jU0uTF8z4RZMSMo9yXyinwMe+QjcguQvNxcbs/yzJ56Y+DaGH11vIZ5w9bXU6PbP0Y
- 0cSZJZTSpK6drRV1HofPXWqeikb9XIKHLWmy0cQivslX+tRiuWc0zpzxr7dLqC1fHg4F
- Q/le/lN+F2RSN2f/Q8H182x+2fm3EZfex9epvSKscpPYO5KscBCUEjp9OOnBGDs9MhXK
- LHm4mplcsUhzu4K0TWJiHDox3eEzJaPiWYHYpmqz89x2SFuQE07aiDBj+g3KCTVZawhE
- 95lmY1CmPbLNbASIyUPCeWGsB1mv2zWHPndr7wAdBLwTU3fNRgfJCWq7vnFgAEzwYn8p
- fDBQ==
+ bh=CBcb7L744pjnSxQ19XAcLaNYspMlf4fa9CQ4r7S+qV8=;
+ b=FAbHa1qg2sJTsIbac70mbC4SASd6KWyEBgs9thxawa8LuCq23uxNugTwxgw0F3xmL4
+ XO9G6QO9lpcVSm5EnhsgVU0IrNmqhaXHwALbbU1KFZP+loN7cSQT9tOTTTCSWaV64OcY
+ zORi53dGRfl6u5fqyD2gtwczsHB8BLjWkqAGd2+yvLie+GODNupKX98EgrP3HcHLBJ9M
+ rZASRb+CNO4g+jbEhvndRynC61eRvKaYTKZNh6mzD/vV5/ieMG2izDA8rbn1JnUPrsqK
+ YyiwErIL/V3X8GuhXiBM/nAa1NtSzOzcvAUrlowo4KmQVEcUHSL4mw1QwDzQHmdvuijJ
+ zC9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758550869; x=1759155669;
+ d=1e100.net; s=20230601; t=1758550907; x=1759155707;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Qi3LrhA1FdvffMR/GrhOH2F/XhA+1VZW8esxNbIap3Q=;
- b=OLULp+qg8KpY9yNuoT9gZYkoxpRDjQoOovTON+EhI21LfUZ587A4BBjXADltPZeA8v
- sX0yhkDysHk6683T10yTXXT+A6achaRKY9YSh4wbnVkUhqVpDWzJVTA0gfSDCpmLHLIB
- BfkqsBGnS282otkeD8J2cze1dga37bCuVWVimhUx17QFCO8b56TDXZAJrVVXu6vA/CJ/
- rAJt23GTqGTbnsa/jNeGcTBGIeKu7L3MRkNvjOpZdVTYGjSBdkJSuD1T5kBc4/QcAf60
- Z7Q/Cb9v3/pOySwDW9D0Ey54Py3zKwUp48clGnIdflTHNXim8H8N4OUBdUBHaIChzJnb
- OrAQ==
-X-Gm-Message-State: AOJu0Yz0pzVmK/2mw8fAOB0Y9O3VuLYr7fj1I4Bxe/iYU4xFd0lqmUg9
- R5gcuZKfACistwxVbMfTwsARlfx+BLLP0G82hs68mE8a3FnYVO8d0s797e00lh3vwKI1wpXwhfF
- U4LDYJu4017gvAPtMs5N4IGeUDgddinc=
-X-Gm-Gg: ASbGncv20toBENZPqFUW5jFMLUBTAemi3zHsp5XdT/+HipqeQiobxqtxUFfgtFqo+29
- VBa+CoL+9qbDNzBOkhJhYpWIuE5C1Xpmm/sN4XONjPW8AusjxGJN0d4FEBBgD5Nfy5WKWSaULzH
- y8mwLpnC44qQuoXUEY+jEXNOlGX8OseEFFClYNMfqUZGLvSyOrN3id0tTvjKgmmLb5y4iloXHm6
- 3Q7tXd7y+BU7hbfJanWph3rOM9151qI6fxUU1o=
-X-Google-Smtp-Source: AGHT+IHRlSBt3niF6efs22Gd48QE8BNubpa6Qd+aa0UmS6Eh50jqYEi5U+6kpcSTBHbcY9bBKPouPmCj59YdZ14/M1U=
-X-Received: by 2002:a05:6512:3089:b0:57c:2474:372b with SMTP id
- 2adb3069b0e04-57c24743888mr2699250e87.49.1758550868653; Mon, 22 Sep 2025
- 07:21:08 -0700 (PDT)
+ bh=CBcb7L744pjnSxQ19XAcLaNYspMlf4fa9CQ4r7S+qV8=;
+ b=F86zS/likh1aIX4oj3mPrieDEaCw9sW/bOGGFtezH9GZ6/TvDpqdSV2tdqqOODcqIt
+ WeK2PffqMMnuSoh0fdXwWJoLZAGiEll+jZBLnfXRT1SBMnViIQVc/kgDVWsNq9ao1/hb
+ DSTz/XI6TtUhLAPhBmRGMul1jEScb55l14bTcKVyrk7OlQczn2msr+NRsurChcULT2Hi
+ 32aH/Doz8Y+SkSPGW6B++F6+ZcnVF5dQooCJhdc4MRl/wyzXZ+yIoAxNwl7PhdlC9YCi
+ 4lYd+3m/nferH29Bu54ckm2vdAFCG2IeXQ38lHgob8Wl/vbsrCV9oXdPdLDlZa8HXyC0
+ hJ7w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJZPhxhHVWfa0KIAh6bxLi/hpdC7wdj7m+BnkA+Xu5H1TSEH4FM+SgvyNbwsu62xNxnpUlgAw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzl99orMdEHE3rarN4h+MLQKKxSsSQImrPW3/LsSo2HEJS5kB5j
+ yVO+l1rQ/l1XuQBjewo1ZtCSooySzqmF5FROxAcgI7Oo2bhUPJwOPazmm0IdBE7auUEtZsHuSZs
+ yGbqV5TTEe9v4V4cX6g6AXZLSkuVEOPg=
+X-Gm-Gg: ASbGncu4DYE6yTCBNRToB68xP1tei7k7lzq8g9LxECJ+oxzFJLWnQL11YHPIAuNHCn8
+ IChA3dsAcb0lJ3YQ7BhXWExhOfih+4fZq+pzMsCtTtJE1YGUQxtda1tuuQERLO3GKC7/ph7zKI7
+ ZsAUVqzSzbgUZJuBVRxtiXl3J00zTKP5NUSrp6QCmnUFjGkV/W81RD9rau6IMkQG3ki8X0cWwKW
+ HXu1FN3+e5zpDIRhAlAztnNouhTs99I/t/MBM8=
+X-Google-Smtp-Source: AGHT+IETN9aZXqgLcdeuBFhfxsLTzFPhfnZhpmKm4mJZ51I0ldfnpWDpqpZi84TmMAcTu8J+Mg3cD/wpP8wtfk8cCDc=
+X-Received: by 2002:a05:6512:36da:b0:55b:842d:5828 with SMTP id
+ 2adb3069b0e04-579e3d2b125mr3200587e87.36.1758550905381; Mon, 22 Sep 2025
+ 07:21:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250911095841.3659022-1-ye.li@nxp.com>
-In-Reply-To: <20250911095841.3659022-1-ye.li@nxp.com>
+References: <20250915-mathieu-frdm_imx93_fastboot-v2-1-a4f2a72758e9@bootlin.com>
+In-Reply-To: <20250915-mathieu-frdm_imx93_fastboot-v2-1-a4f2a72758e9@bootlin.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Sep 2025 11:20:57 -0300
-X-Gm-Features: AS18NWC4qFt_9D_mLScLkG6nswWx9NTRyVbAsTJR_Ojiz9ySIYF4p0NfQF6LSNA
-Message-ID: <CAOMZO5B9LEWjJZM0L_U1N4E9NWbCnDvDD2G4UfurQ2i6esYZyQ@mail.gmail.com>
-Subject: Re: [PATCH 0/8] Enable PCIE controller on iMX95 EVK
-To: Ye Li <ye.li@nxp.com>
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
- alice.guo@nxp.com, ye.li@oss.nxp.com, tharvey@gateworks.com, 
- sumit.garg@linaro.org
+Date: Mon, 22 Sep 2025 11:21:33 -0300
+X-Gm-Features: AS18NWCpi_UyQa4NczF_QMfTARgpiIpc1dNxKzC41_nvKbh8Ea2CYHd0f0E1xZg
+Message-ID: <CAOMZO5A+u2dp9NMDv79-4gnpAYcM8Zig7PGsjCeb=2J_jLpJ9Q@mail.gmail.com>
+Subject: Re: [PATCH v2] imx93_frdm: Add support for flashing board with UUU
+To: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Cc: Stefano Babic <sbabic@nabladev.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,29 +97,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 11, 2025 at 6:59=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
+On Mon, Sep 15, 2025 at 9:57=E2=80=AFAM Mathieu Dubois-Briand
+<mathieu.dubois-briand@bootlin.com> wrote:
 >
-> The patch set is used to enable PCIE host controller on iMX95 EVK.
-> We need below driver changes:
-> 1. Add iMX95 support to pcie_dw_imx driver.
-> 2. Add iXM95 blkctrl clock driver which is a abstract of clock gate
->    in hsio blkctrl for PCIE.
-> 3. Add vin-supply enablement for fixed regulator, since iMX95 EVK
->    uses two levels regulators in DTS.
-> 4. Fix issue in clk-uclass when assign high clock rate.
+> Allow to flash a board using NXP UUU utility:
+> - Enable fastboot support on USB.
+> - Add fastboot partition aliases with names used by UUU. Also add extra
+>   environment variables used by UUU.
+> - Set 'dofastboot' environment variable based on boot device
+>   configuration, allowing to automatically enter fastboot when booting
+>   from USB.
 >
-> log on iMX95 19x19 EVK:
->
->       u-boot=3D> pci
->       BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
->       _____________________________________________________________
->       00.00.00   0x1131     0xe101     Network controller      0x00
->       00.01.00   0x1131     0xe001     Base system peripheral  0x07
->       01.00.00   0x1131     0xee00     Base system peripheral  0x80
->       01.01.00   0x1131     0xe001     Base system peripheral  0x07
->       02.00.00   0x1131     0x0000     Bridge device           0x04
->       03.00.00   0x1b4b     0x2b43     Network controller      0x00
->       03.00.01   0x1b4b     0x2b44     Network controller      0x00
->       PCIE-4: Link down
+> Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 
-Applied the series to -next, thanks.
+Applied to -next, thanks.
