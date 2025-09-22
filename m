@@ -4,139 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06087CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 08:28:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21864CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 09:12:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4786983390;
-	Mon, 22 Sep 2025 10:28:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 3C7F683280;
+	Mon, 22 Sep 2025 11:12:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AK/34BfI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SgzH5rRQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62C4C833E8; Mon, 22 Sep 2025 10:28:33 +0200 (CEST)
-Received: from CY3PR05CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DA240832F9; Mon, 22 Sep 2025 11:12:21 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 888A083211
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 10:28:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C61D83211
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 11:12:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EGrpjuQHQbF/eEFb+uLBNEUp2DA+TFIzqi3yUZzyxnizQFY2yjzUx3e4tfdUNyIo42myLWBdqvs2/pkbx7jRyahSUJbw1C7RwS5X2T852815hfVT+1+wdmx3Wcne6ss/qM8H1U+XL0d9aTSPADdonYCTiFcaGJU4xxAEs3QWGa1EdXmP+aV4WKjL41zbkTXNdfHAMB1FTnnET22lVzy14wgHQEyUAgWxlOC6r3iV9N0J/YGW7/Mr/A9C1ol/dIH9f2Zlv0wkhmZhdmymAXJtiu7vjwV3PgmKXt7kyj69QD2PI0VyMP1QOmydtoP4O6cG9ZzdPX0tvLAtIVxXrunn8w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=T8cSDDqBhO09723+7XaFF17umVthIl93aDdfUvfy2WE=;
- b=tdMu7YwqBUWeo1WQSp7Bgef1cw0U4MvvwPC39wY3JkTsgDRkh61hi+tvbCYVtn4f+XY4D1i3iJEbOX/Ee701FwoEPcXrTmrgLXm4+1jhMqtUBvIqSEGv2QTwp4NTFugJWYbLvmwHcMKD8/7uDPlrY0/HLNXngCBQvjCcygJuW7eQ+qR8X0F6R5uwcYP2dyq+TZPLi9SgRKNU666toGdVsAvJctyviKhqNvu5jgekeZuDQ0n1lF/ApkaDmiokDyZ40opFDuLkogTZcWKcRwW9hLrB2G8FlNZUCDvPoCw05n0CUef4x/C7FivR0fiWLfhy8va4lOzA1P0kPhssre01KQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=T8cSDDqBhO09723+7XaFF17umVthIl93aDdfUvfy2WE=;
- b=AK/34BfIhwAdq6JtYdclj8vEKdY+muBgl4Os/nXadB1fxHFzVnqi0D2VXuG1+1Bev05Ciij6PT1S2jn0mwaV8Gh7xHc6+d6nYBgHqqnojiaDrZ+cH8oco+x62cb717hIwudfFqYs/A6GsrWG7BHkMGDjvqWWx9ROluUK54/2Jow=
-Received: from BYAPR01CA0012.prod.exchangelabs.com (2603:10b6:a02:80::25) by
- DS0PR12MB8041.namprd12.prod.outlook.com (2603:10b6:8:147::18) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9137.19; Mon, 22 Sep 2025 08:28:25 +0000
-Received: from SJ5PEPF000001F0.namprd05.prod.outlook.com
- (2603:10b6:a02:80:cafe::8e) by BYAPR01CA0012.outlook.office365.com
- (2603:10b6:a02:80::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.19 via Frontend Transport; Mon,
- 22 Sep 2025 08:29:48 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ5PEPF000001F0.mail.protection.outlook.com (10.167.242.68) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9137.12 via Frontend Transport; Mon, 22 Sep 2025 08:28:25 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Mon, 22 Sep
- 2025 01:28:23 -0700
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Mon, 22 Sep 2025 01:28:23 -0700
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>
-CC: Nithish Kumar Naroju <nithishkumar.naroju@amd.com>, Rohit Visavalia
- <rohit.visavalia@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh Yadav
- Abbarapu" <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] arm64: zynqmp: Fix DTOVL warning about graphs in kv/kr260
-Date: Mon, 22 Sep 2025 10:28:15 +0200
-Message-ID: <576630cc9696e21bef15bd1f0ca35e396adc4eca.1758529693.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-62fbc90e6f6so4913335a12.3
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 02:12:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1758532335; x=1759137135; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aD3isQrfnPJYf15zaRzSOLwt3ulMzWN0KVOYQ8r0/+0=;
+ b=SgzH5rRQSPemIi+Si+fEjSsvPYysJrHWFSZFZYHB/fCFkCIm4li6QIwmjuvpQcl1EB
+ A7fdJsNjJSXjRiYSF4B4QJq3magKlz5O/tTWxVfMjaU6RrA9ec+aK2/5ewCDXoEYOjq1
+ l30N9QcBH9LZr7HcqpVbd7hWjsvHtdfWb++xftCQ7NfbwPsrJOUoT4TiXocQCemlEymR
+ UVPUCifrEvY1WIN+W+iihk/j8PnDgjvSN2i8xdVYp4EbhLz9F0PKVNVQzm9ih8KmCk04
+ /jfI1Crh7O7ow9Lkwwdi31eMxHsuhKQWq7bjkbsPSXDBST92QcGY8xfUDLfvDfzjdC87
+ 0QOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758532335; x=1759137135;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aD3isQrfnPJYf15zaRzSOLwt3ulMzWN0KVOYQ8r0/+0=;
+ b=wHJpxtVtL4+8rR3S6LLAO7gqnsslzQq1mcXgcISfd9CuV0JdG0XDIpCZeGLLsVP0td
+ gRrpgoPgF6tIMOBNZ9fRnTjw6LVfp/Hw+dkuuW0NmSr8UNrY1tNI2vSJXAZIrwilmqTB
+ Emiwp7WSc6T9nPDmWnPpCQuSj46UP+Q6JKy1gC0U/xmudhikQKolTdFJ6/TiF+DpyxuD
+ PxVOf/IJtXeI/74eSmhIaLkGobFD5YCotvo5TP9r6E20yoYmmzEN8KwY/a1ISULikVrl
+ 0OoZjhWk5MENPAeysrmUeQoh8aj4Q0ye8c6PO7vMA7XHHtZkvs8YaqWE6/oWm8jiwzv7
+ ba0w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV36oXrG8M5jkl2mJF1BpOQLpvBBk/fOXDG96tE+P/OyIoGmdWazihI5BpDO17YqOH8yM98dqI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxafGsIhgoSTkScPxAiJQA5keofclgj4PtCgRDpntFfZlo0DfPW
+ 2I/G9XITh43me5MvC0rqXTfKZ04L3HxgdqRXShFsIUDdmoH+ZfMZJz0ASj8AdM/ty+Y6C/5uIsU
+ uliAiXdSHjWhFOL+PqHvw58EoBFQhF98=
+X-Gm-Gg: ASbGncsMU6Aqh2lGnEZfZmP2lOdMdDAStr36rm5Wo5Aru3VQiI1wE8RvkXJXDoGp95l
+ 35/3qFCM/XCSKUNQ/0BkQpgqDK3fIzjPpF0KyIcfUSEGUSa702rZLdNRlCDCuFnUuLCCstFowNh
+ LkbQLMdGX5G4DwAXs6a+glJJfL9oWR8vJX3jxETGxToogHsZ7NW09iV9MRg/ZmXuHLvHpIAny/T
+ oWKtY0F
+X-Google-Smtp-Source: AGHT+IGapxUmK6UJ6u1C30e97XtZvJTErM+K+Ull5kN7UWypE2yw3cV8VBqY3skD9/2ciASPjyt0juGzlfKib3Xhy7s=
+X-Received: by 2002:a05:6402:23db:b0:62f:7760:f90c with SMTP id
+ 4fb4d7f45d1cf-62fc0a7b88cmr9906153a12.31.1758532334553; Mon, 22 Sep 2025
+ 02:12:14 -0700 (PDT)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3802; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=lj4eLEmiX+el/3HOltQAbvdpo0j8yOB4SKSqaRzn7wA=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRc5FjAeL8vnLn38JUl0a8OZ7a9qGpsCXhXmPDGjOWF5
- uc/B36c7ihlYRDjYJAVU2SZzqTjsObbtaViyyPzYeawMoEMYeDiFICJrBBh+GfXLel6yeOnx6Ie
- yxWaekvnfolWz3O7nNN+Lee9yKL+z9sZGVZziCzkOXzGunLWrQ29pbOmc71YP7NKIrpT54Nc+vW
- 5YlwA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F0:EE_|DS0PR12MB8041:EE_
-X-MS-Office365-Filtering-Correlation-Id: e1b6e12a-c356-492c-a67f-08ddf9b1fff0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|82310400026|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?yvR8dVYVo32HHwCVZXHVJu5wKz0v15tmrZGM/uwF0o2viI1M9R7Y3NOw5x2X?=
- =?us-ascii?Q?sflpNfubnBH4lX2r5pWRsaMzX0T4MjT3QL/wIxbxX+Dtmb8xfV+U1y+EISPa?=
- =?us-ascii?Q?CO4nhrknFujyJ0f2rfZPLHHlJJ5vX7UKXfBgHWe6SLNSS/HKVdK5Z6yD5pMC?=
- =?us-ascii?Q?UaqMBxeStHm4KZEbqjf46AtYAlkpNUcGaweA9MGjDtrCudMHgwYlshAx3WSs?=
- =?us-ascii?Q?/Qs5UwttKMlOo5ALvDAq1TAm8Ix9w3hLBuzfUZwCZCGrMt2cb3IEEBChjFFA?=
- =?us-ascii?Q?b8gwypZwEBdw6pDsGGa/z4PzCkt3/jqilc5KuZ84Yhc4hDIV4G9HRXn3FOdW?=
- =?us-ascii?Q?iAsBwtkUKHbx197osEy99dpSldrgd1SjC6J+7Jea6wmCSmYrDxse4po0rOTw?=
- =?us-ascii?Q?uH3vsuZ/+HqDXW7ncBVENm3xhUHo7BMNx2pTkH3ew7wMzDw+hTbLtgFSc+Tc?=
- =?us-ascii?Q?xURxNWk4UUA4ZLGYeFAXITMWxaZYe0wlKWtyhw2UAAWbZPCl0n2Qs2IDACAE?=
- =?us-ascii?Q?8DeCMfo7Vbn+XPwogZeZYxLvltm/w70+QRet9MR2CBkyiRmyvsaG5R8qAzZ+?=
- =?us-ascii?Q?bOOJeav6agaMw8bAtQJjDz3jM7irsN47ARo0VXFMMKmACQYg5o8y9JYLwd83?=
- =?us-ascii?Q?rVAIpFJyOeOMPY75nvLAK0082gSCuKwHODi5zKMwIXbhmaNuUJ5d3x7AQRIZ?=
- =?us-ascii?Q?YckDYbf582WDy08Y+zwBdvyKzaMH1LFCu+rI/Dxzd1AvxPSD5ssjLZh/Tb2A?=
- =?us-ascii?Q?bjHzH+5/8snllNVvIcuWcoVQ4zE1tonEOiMEhG7CbpNasFHfNCdEBV508p7N?=
- =?us-ascii?Q?JVwo0MTwg9JbKzyZ7+sVZeJ05Z3OuOb1P8blsGBB15pnidETCYgzFvbGKSW3?=
- =?us-ascii?Q?TMJx4Z731brKaKxwu3BlUcj+pofGGSc+qwyt8xmpJV2XPLeZadYX0PaFriAt?=
- =?us-ascii?Q?CAC1ul8KHEg/jQm2Hp5sgu6uFLmJVOfYR+q20Y0XZO29gYi7cZwJSqj1dZNk?=
- =?us-ascii?Q?TbMhwahy0m2IMHNDBF2Zi2eVF+ZuCWj7kFfSMHtLEsab7OzK3kc9MysNmON4?=
- =?us-ascii?Q?ljOaUIv1K5oexjrqgVJ7nD4bIJVkce+8gd4EOdQU6nh87WoqsAAG+rGHfknw?=
- =?us-ascii?Q?TxdGHzOx4drc0HgPNrrCbwm2712bFVYh7bfLI25CKRS1dpHZlWlKogPcyBWN?=
- =?us-ascii?Q?fpKvoRQ6E4JcnVwMdEmWCXHcSRDWOM5CA2nNd+O413mhI8gwwSx6fiTEwiz5?=
- =?us-ascii?Q?Oz614lMoDcYDxLX9TZZ0eEy1x0xC0D+MK+BMke+rYatGlD2BEqCGONUQ7qmL?=
- =?us-ascii?Q?jw7MEEZYEjHF7/SoYZnYLjOgRqZVl/7XQw32NQfjnIGClkFSK/nZ5DICc9JB?=
- =?us-ascii?Q?bbcEhq/M7cYTs67HOtEuSqff+FvND7bASqEIzm2fZLkrfenyeW256RB+uCoc?=
- =?us-ascii?Q?AuNAaJhHc4LaimyZItYuewvumLZhMjf7dy0YFtWvMCDron5jKrX+AZFvLHlJ?=
- =?us-ascii?Q?n2qxfXGRBFYFunjrLVYsnI0TEHgG156HVjA/?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2025 08:28:25.3350 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e1b6e12a-c356-492c-a67f-08ddf9b1fff0
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001F0.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8041
+References: <20250921174312.154990-1-clamor95@gmail.com>
+ <20250921174312.154990-2-clamor95@gmail.com>
+In-Reply-To: <20250921174312.154990-2-clamor95@gmail.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 22 Sep 2025 10:12:03 +0100
+X-Gm-Features: AS18NWC7TO7boeV4pJJGn1971QZBt1MWuJ97DWkrE5lNr1xE6tNIlcP-lhI-fZY
+Message-ID: <CALeDE9O9ADznKVav69BdjS2D-cm1-dHZT38ECQQGvh0raU=F9Q@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] configs: tegra: remove ATAGS support
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,132 +93,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-DTC is generating warnings about missing port like:
-DTOVL   arch/arm/dts/zynqmp-smk-k24-revA-sck-kv-g-revB.dtb
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtbo: Warning (graph_port):
- /fragment@5/__overlay__: graph port node name should be 'port'
-...
+On Sun, 21 Sept 2025 at 18:43, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+>
+> Remove support for ATAGS-based OS booting. ATAGS are used for booting
+> older Linux kernel versions and we are moving away from using those.
+>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
 
-That's why change description and add it directly to dpsub mode to contain
-full description with also port.
+Looks good to me.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
-
- arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 10 ++++++----
- arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 10 ++++++----
- arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 12 +++++++-----
- arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 12 +++++++-----
- 4 files changed, 26 insertions(+), 18 deletions(-)
-
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-index b92dcb86e87e..88396d089f43 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-@@ -154,11 +154,13 @@
- 	phy-names = "dp-phy0";
- 	phys = <&psgtr 1 PHY_TYPE_DP 0 1>;
- 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
--};
- 
--&out_dp {
--	dpsub_dp_out: endpoint {
--		remote-endpoint = <&dpcon_in>;
-+	ports {
-+		out_dp: port@5 {
-+			dpsub_dp_out: endpoint {
-+				remote-endpoint = <&dpcon_in>;
-+			};
-+		};
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-index 99ad220d13d6..e041a962d89e 100644
---- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-@@ -155,11 +155,13 @@
- 	phy-names = "dp-phy0";
- 	phys = <&psgtr 1 PHY_TYPE_DP 0 1>;
- 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
--};
- 
--&out_dp {
--	dpsub_dp_out: endpoint {
--		remote-endpoint = <&dpcon_in>;
-+	ports {
-+		out_dp: port@5 {
-+			dpsub_dp_out: endpoint {
-+				remote-endpoint = <&dpcon_in>;
-+			};
-+		};
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-index d7351a17d3e8..fbbebbea80cb 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-@@ -3,7 +3,7 @@
-  * dts file for KV260 revA Carrier Card
-  *
-  * (C) Copyright 2020 - 2022, Xilinx, Inc.
-- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
-+ * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
-  *
-  * SD level shifter:
-  * "A" - A01 board un-modified (NXP)
-@@ -131,11 +131,13 @@
- 	phy-names = "dp-phy0", "dp-phy1";
- 	phys = <&psgtr 1 PHY_TYPE_DP 0 0>, <&psgtr 0 PHY_TYPE_DP 1 0>;
- 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
--};
- 
--&out_dp {
--	dpsub_dp_out: endpoint {
--		remote-endpoint = <&dpcon_in>;
-+	ports {
-+		out_dp: port@5 {
-+			dpsub_dp_out: endpoint {
-+				remote-endpoint = <&dpcon_in>;
-+			};
-+		};
- 	};
- };
- 
-diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-index a4ae37ebaccf..87f94f8ef9d8 100644
---- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-+++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-@@ -3,7 +3,7 @@
-  * dts file for KV260 revA Carrier Card
-  *
-  * (C) Copyright 2020 - 2022, Xilinx, Inc.
-- * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
-+ * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-  */
-@@ -116,11 +116,13 @@
- 	phy-names = "dp-phy0", "dp-phy1";
- 	phys = <&psgtr 1 PHY_TYPE_DP 0 0>, <&psgtr 0 PHY_TYPE_DP 1 0>;
- 	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
--};
- 
--&out_dp {
--	dpsub_dp_out: endpoint {
--		remote-endpoint = <&dpcon_in>;
-+	ports {
-+		out_dp: port@5 {
-+			dpsub_dp_out: endpoint {
-+				remote-endpoint = <&dpcon_in>;
-+			};
-+		};
- 	};
- };
- 
--- 
-2.43.0
-
-base-commit: 221ab6313667165276ec87aad0fac3d58a91dd21
-branch: test
+> ---
+>  configs/chagall_defconfig         | 3 ---
+>  configs/endeavoru_defconfig       | 3 ---
+>  configs/grouper_defconfig         | 3 ---
+>  configs/ideapad-yoga-11_defconfig | 3 ---
+>  configs/mocha_defconfig           | 3 ---
+>  configs/mot_defconfig             | 3 ---
+>  configs/n1_defconfig              | 3 ---
+>  configs/ouya_defconfig            | 3 ---
+>  configs/picasso_defconfig         | 3 ---
+>  configs/qc750_defconfig           | 3 ---
+>  configs/star_defconfig            | 3 ---
+>  configs/surface-2_defconfig       | 3 ---
+>  configs/surface-rt_defconfig      | 3 ---
+>  configs/tegratab_defconfig        | 3 ---
+>  configs/tf701t_defconfig          | 3 ---
+>  configs/transformer_t20_defconfig | 3 ---
+>  configs/transformer_t30_defconfig | 3 ---
+>  configs/x3_t30_defconfig          | 3 ---
+>  18 files changed, 54 deletions(-)
+>
+> diff --git a/configs/chagall_defconfig b/configs/chagall_defconfig
+> index 3acb7d53727..1688b4c4d07 100644
+> --- a/configs/chagall_defconfig
+> +++ b/configs/chagall_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="chagall"
+> diff --git a/configs/endeavoru_defconfig b/configs/endeavoru_defconfig
+> index 804b00697a1..165c0996038 100644
+> --- a/configs/endeavoru_defconfig
+> +++ b/configs/endeavoru_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="endeavoru"
+> diff --git a/configs/grouper_defconfig b/configs/grouper_defconfig
+> index b9068e18b03..b6c9550bbbc 100644
+> --- a/configs/grouper_defconfig
+> +++ b/configs/grouper_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="grouper"
+> diff --git a/configs/ideapad-yoga-11_defconfig b/configs/ideapad-yoga-11_defconfig
+> index d5befae419d..68ca8333019 100644
+> --- a/configs/ideapad-yoga-11_defconfig
+> +++ b/configs/ideapad-yoga-11_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="ideapad-yoga-11"
+> diff --git a/configs/mocha_defconfig b/configs/mocha_defconfig
+> index ab8cea69a02..ded43ccea58 100644
+> --- a/configs/mocha_defconfig
+> +++ b/configs/mocha_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_SYS_MALLOC_LEN=0x2500000
+>  CONFIG_NR_DRAM_BANKS=2
+> diff --git a/configs/mot_defconfig b/configs/mot_defconfig
+> index dc6549cba76..f6066b9e149 100644
+> --- a/configs/mot_defconfig
+> +++ b/configs/mot_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x00110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="mot"
+> diff --git a/configs/n1_defconfig b/configs/n1_defconfig
+> index 9bba6db99b5..1940a2208a9 100644
+> --- a/configs/n1_defconfig
+> +++ b/configs/n1_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x00110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="n1"
+> diff --git a/configs/ouya_defconfig b/configs/ouya_defconfig
+> index 60cc3796c5e..e82f65a9a86 100644
+> --- a/configs/ouya_defconfig
+> +++ b/configs/ouya_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="ouya"
+> diff --git a/configs/picasso_defconfig b/configs/picasso_defconfig
+> index f5c6619a271..9d153694245 100644
+> --- a/configs/picasso_defconfig
+> +++ b/configs/picasso_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x00110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="picasso"
+> diff --git a/configs/qc750_defconfig b/configs/qc750_defconfig
+> index 3f85890bdbd..2be3838ae60 100644
+> --- a/configs/qc750_defconfig
+> +++ b/configs/qc750_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="qc750"
+> diff --git a/configs/star_defconfig b/configs/star_defconfig
+> index 38cbdec1c3a..59eabdcb2b4 100644
+> --- a/configs/star_defconfig
+> +++ b/configs/star_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x00110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="star"
+> diff --git a/configs/surface-2_defconfig b/configs/surface-2_defconfig
+> index 6e287539f53..d3e6166cf89 100644
+> --- a/configs/surface-2_defconfig
+> +++ b/configs/surface-2_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_SYS_MALLOC_LEN=0x2500000
+>  CONFIG_NR_DRAM_BANKS=2
+> diff --git a/configs/surface-rt_defconfig b/configs/surface-rt_defconfig
+> index 4cd543ccb9c..88b67749095 100644
+> --- a/configs/surface-rt_defconfig
+> +++ b/configs/surface-rt_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="surface-rt"
+> diff --git a/configs/tegratab_defconfig b/configs/tegratab_defconfig
+> index 00a0843d4d0..27cb75c92b5 100644
+> --- a/configs/tegratab_defconfig
+> +++ b/configs/tegratab_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_SYS_MALLOC_LEN=0x2500000
+>  CONFIG_NR_DRAM_BANKS=2
+> diff --git a/configs/tf701t_defconfig b/configs/tf701t_defconfig
+> index a9976bf0388..e8f920587c3 100644
+> --- a/configs/tf701t_defconfig
+> +++ b/configs/tf701t_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_SYS_MALLOC_LEN=0x2500000
+>  CONFIG_NR_DRAM_BANKS=2
+> diff --git a/configs/transformer_t20_defconfig b/configs/transformer_t20_defconfig
+> index c0a5a2fd02c..61eab59fa3b 100644
+> --- a/configs/transformer_t20_defconfig
+> +++ b/configs/transformer_t20_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x00110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="transformer-t20"
+> diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
+> index eb3e41e68c5..6f8953aa103 100644
+> --- a/configs/transformer_t30_defconfig
+> +++ b/configs/transformer_t30_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SOURCE_FILE="transformer-t30"
+> diff --git a/configs/x3_t30_defconfig b/configs/x3_t30_defconfig
+> index 3081d1203cf..82fff349210 100644
+> --- a/configs/x3_t30_defconfig
+> +++ b/configs/x3_t30_defconfig
+> @@ -1,8 +1,5 @@
+>  CONFIG_ARM=y
+>  CONFIG_ARCH_TEGRA=y
+> -CONFIG_SUPPORT_PASSING_ATAGS=y
+> -CONFIG_CMDLINE_TAG=y
+> -CONFIG_INITRD_TAG=y
+>  CONFIG_TEXT_BASE=0x80110000
+>  CONFIG_NR_DRAM_BANKS=2
+>  CONFIG_ENV_SIZE=0x3000
+> --
+> 2.48.1
+>
