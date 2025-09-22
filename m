@@ -4,80 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2E13CAC5A8
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:13:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02552CAC5A8
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:16:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F28383211;
-	Mon, 22 Sep 2025 16:13:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7004883211;
+	Mon, 22 Sep 2025 16:16:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EJxS/eBP";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="PzvoPdNj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 042B1833ED; Mon, 22 Sep 2025 16:13:44 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E69AC8341C; Mon, 22 Sep 2025 16:16:42 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25CBA82CF4
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:13:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB7B982CF4
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:16:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-273a0aeed57so16895795ad.1
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:13:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758550419; x=1759155219; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=iPhwYxK49aII+VjEHEdd60jyS4XpUVTwrLDfGWfneP0=;
- b=EJxS/eBPPvRiDkuf8RvuEHQ2c9XFjSBN64a9XyICIj2BYmpnWU1WARd90pB41So8xu
- 2UeplWUywdGn/iJ0yZPgKEHfIRJRhNtIiq9ZNIFHJWmoGWuWomf33F7OGuvhqYnzbtqh
- yfS7AuYizksi3Wm1jA7nIEgsxLbhPseD3BTD/Ev659IeCbeWeGdb/9mhIK7wIi0c2oFI
- uS+hiiqHaCJgSZgBFrCysBpewlirJ6Qs4Qe+Dj/MKn+z5rOTMEVuRl9p03gsV3XNXyEa
- BNP7aN9OdNqfO9RA5uAlTcVN/8iMcahYVcP10voHsgd8CjRgES6YjcfAK98VOeBS2yr/
- mAeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758550419; x=1759155219;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=iPhwYxK49aII+VjEHEdd60jyS4XpUVTwrLDfGWfneP0=;
- b=Up4XJ/9qXSY8wcXzam+ZSaGDSnNfJQdex4kc16h/iN9JMy9vyhoFHNXk1dxV3hXM9z
- o2scSqMoGHg7y7Y2gBB4ZX9X0GfgU+6bAHWu7Nzz3NqR7hpmbQVez1qnytFklQiV6kcx
- G9bVYfmdQ+R9tSNQRTGqkLkWp+XsooMrLHq0vFWVXd4FWvnl4aq+zTpzuft114dE6XBb
- 950yO/liSL9SdNcUxJ94nzLLxMVZWs7+i/Uqiz3D10dTJ8bX1cb71COfOn26CEiaIK0P
- Qr1TOkStSsIvRjutbYVtx1kBSmfYbpqmcO5FR2Eyz4mwvZKeX7oU1MV2+U76V6zwI5IE
- zmgA==
-X-Gm-Message-State: AOJu0YzRvDlh/TthZ9iOXF4EedDDn91yDSw32JCg1bKUSPtnRtXe8LFH
- g9ST4jCOBq92vTJp3nXo4VjuXc80P28qhRbF1hQAgaoyL49YgldDWjfT5Ys38Q==
-X-Gm-Gg: ASbGncshNXLKuOfcaOtXgjPEcZYAqzKBzcec78VpBRra/dvTrWZG2XjtMT1BgMG0/cx
- NN9qZG26roxfsWOlPMzbVB+onETlSQG1qxFgGOXu5utAl8OZGmuC1WXJ4EK3Je7KK/iRvhafI4B
- 4rJq+PmBFo1tt3Ukb35wq4X+rd7Sm+RiYbUR87sWNQ4utZTCYXejYEe+6pJsDj3TdixZCPR7gnb
- N/kAIHN/ppHMlBlxvAioYyqNlaDM8X9edxrDQRz4d5jpowUf1xN/NbbtH4ENI47qrH66WbdR5/5
- BNTruKcFcw0hJXsTgU2H8K13whYz2fBcAgn7EiDa7AyK8PDubsdm+vjv2liOmi7Z3CIvbImBoFl
- CYr6jCSSWD5p0wDe/xMsHAVmclASGDWne1I3pYHSgC4YXBZs=
-X-Google-Smtp-Source: AGHT+IGa4i0XSESq0kJfK7ZGno5zaxfFaRiSJcOiYqCtXvHqvLTkIOMx8ky8IrYIeplBs2kro4l60w==
-X-Received: by 2002:a17:902:cf41:b0:26a:6d5a:944e with SMTP id
- d9443c01a7336-26a6d69d840mr180624915ad.24.1758550419253; 
- Mon, 22 Sep 2025 07:13:39 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:17f3:310f:2163:7ea3])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2698033d788sm134861495ad.127.2025.09.22.07.13.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Sep 2025 07:13:38 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20250922
-Date: Mon, 22 Sep 2025 11:13:35 -0300
-Message-Id: <20250922141335.207427-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=lukma@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 33568106D7B; Mon, 22 Sep 2025 16:16:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1758550600; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=9xUPXrSV0idaApuboMOT/B/J2pnDmTK38u8N/NyMvIo=;
+ b=PzvoPdNjfLKfsOhb7Lxvj07ghY+/V05y5WK/3xu5rU4dav6QHGqYMUh5BJiV4jgyZ36amL
+ n3wHV/pa/oSKQpvRo5NRvw21VZv+Eb32BKCuek4omS5rtt0/SyKQcw9mG+6+R32eMBjJja
+ Fp4ySCeQzXerks/kab4E5TbCYsH+70QliUXXoeKpqlNGypjtdv66h6boya5hO6uyMEChUM
+ uS5qQgF9BmHDHtLH8iid5//qdbEB76YUzhjR5TNniVBRbBt1xXpZGvBLT6cUbf6Pceun9A
+ asafOYoG39UoqXE4PAPKA3EybIr9b20oUIvJV+I51BdZN01lh7hNqi5TyRZTHw==
+From: Lukasz Majewski <lukma@nabladev.com>
+To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@nabladev.com>
+Subject: [PATCH v2] arm: gpio: Add set_flags callback to the Tegra gpio driver
+Date: Mon, 22 Sep 2025 16:16:17 +0200
+Message-Id: <20250922141617.225861-1-lukma@nabladev.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,42 +63,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This patch adds support for the .set_flags callback.
+For now following flags are supported:
+- GPIOD_IS_AF (i.e. "alternate function").
+- GPIOD_IS_IN
+- GPIOD_IS_OUT
 
-Please pull from u-boot-imx/master, thanks.
+Currently, the .set_flags in gpio-uclass.c (function dm_gpio_set_value())
+is used before .set_value callback, so functionally replaces it.
+As a result the corresponding tegra_gpio_set_value() can be removed.
 
-The following changes since commit d33b21b7e261691e8d6613a24cc9b0ececba3b01:
+Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
+---
 
-  ARM: Remove mistyped GICV3 definition from ARCH_SYNQUACER (2025-09-20 12:02:58 -0600)
+Changes for v2:
+- Fix the format specifier for flags in debug() function
+- Update commit message
+- Remove tegra_gpio_set_value() method (as it is functionally replaced by
+  set_value()
+- Prevent from returning errors when flags = 0 (problem with e.g. I2C GPIO
+  support)
+---
+ drivers/gpio/tegra_gpio.c | 39 +++++++++++++++++++++++----------------
+ 1 file changed, 23 insertions(+), 16 deletions(-)
 
-are available in the Git repository at:
+diff --git a/drivers/gpio/tegra_gpio.c b/drivers/gpio/tegra_gpio.c
+index 3d1e18854f2..85f2d28ee73 100644
+--- a/drivers/gpio/tegra_gpio.c
++++ b/drivers/gpio/tegra_gpio.c
+@@ -182,21 +182,6 @@ static int tegra_gpio_get_value(struct udevice *dev, unsigned offset)
+ 	return (val >> GPIO_BIT(gpio)) & 1;
+ }
+ 
+-/* write GPIO OUT value to pin 'gpio' */
+-static int tegra_gpio_set_value(struct udevice *dev, unsigned offset, int value)
+-{
+-	struct tegra_port_info *state = dev_get_priv(dev);
+-	int gpio = state->base_gpio + offset;
+-
+-	debug("gpio_set_value: pin = %d (port %d:bit %d), value = %d\n",
+-	      gpio, GPIO_FULLPORT(gpio), GPIO_BIT(gpio), value);
+-
+-	/* Configure GPIO output value. */
+-	set_level(gpio, value);
+-
+-	return 0;
+-}
+-
+ void gpio_config_table(const struct tegra_gpio_config *config, int len)
+ {
+ 	int i;
+@@ -258,14 +243,36 @@ static int tegra_gpio_rfree(struct udevice *dev, unsigned int offset)
+ 	return 0;
+ }
+ 
++static int tegra_gpio_set_flags(struct udevice *dev, unsigned int offset,
++				ulong flags)
++{
++	struct tegra_port_info *state = dev_get_priv(dev);
++	int gpio = state->base_gpio + offset;
++
++	debug("gpio_set_flags: pin = %d (port %d:bit %d), flag = 0x%lx\n",
++	      gpio, GPIO_FULLPORT(gpio), GPIO_BIT(gpio), flags);
++
++	if (flags & GPIOD_IS_AF) {
++		set_config(gpio, CFG_SFIO);
++	} else if (flags & GPIOD_IS_IN) {
++		return tegra_gpio_direction_input(dev, offset);
++	} else if (flags & GPIOD_IS_OUT) {
++		bool value = flags & GPIOD_IS_OUT_ACTIVE;
++
++		return tegra_gpio_direction_output(dev, offset, value);
++	}
++
++	return 0;
++}
++
+ static const struct dm_gpio_ops gpio_tegra_ops = {
+ 	.direction_input	= tegra_gpio_direction_input,
+ 	.direction_output	= tegra_gpio_direction_output,
+ 	.get_value		= tegra_gpio_get_value,
+-	.set_value		= tegra_gpio_set_value,
+ 	.get_function		= tegra_gpio_get_function,
+ 	.xlate			= tegra_gpio_xlate,
+ 	.rfree			= tegra_gpio_rfree,
++	.set_flags		= tegra_gpio_set_flags,
+ };
+ 
+ /*
+-- 
+2.39.5
 
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20250922
-
-for you to fetch changes up to 1f95591cee01ea5e065b61d99a9853b164acbcf8:
-
-  board: phytec: phycore-imx93: Fix i.MX93 voltage modes (2025-09-21 09:09:13 -0300)
-
-u-boot-imx-master-20250922
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/27685
-
-- Fix Phycore i.MX93 voltage modes
-- Call DM post init function for init_r phase on i.MX8ULP
-- Fix ELE FW version print bug on i.MX8UL EVK.
-- Fix LPCG number in ccm_reg structure on i.MX93
-----------------------------------------------------------------
-Primoz Fiser (1):
-      board: phytec: phycore-imx93: Fix i.MX93 voltage modes
-
-Ye Li (3):
-      imx: imx8ulp: Call DM post init function for init_r phase
-      imx8ulp_evk: Fix ELE FW version print bug
-      arm: imx9: Fix LPCG number in ccm_reg structure
-
- arch/arm/include/asm/arch-imx9/clock.h |  2 +-
- arch/arm/mach-imx/imx8ulp/soc.c        |  1 +
- board/freescale/imx8ulp_evk/spl.c      |  4 ++--
- board/phytec/phycore_imx93/spl.c       | 37 +++++++++++++++++-----------------
- 4 files changed, 22 insertions(+), 22 deletions(-)
