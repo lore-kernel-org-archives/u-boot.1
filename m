@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD22ACAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 12:30:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5BA8CAC5AA
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 13:06:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2A3983280;
-	Mon, 22 Sep 2025 14:30:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 82D4F83211;
+	Mon, 22 Sep 2025 15:06:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="p7Noc4K7";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="w80aHpoB";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="a35y76k9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3AF05832F9; Mon, 22 Sep 2025 14:30:09 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 256A4832F9; Mon, 22 Sep 2025 15:06:09 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CF9E83211
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 14:30:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AF9382CF4
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 15:06:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cVj9n2q0Pz9tMQ;
- Mon, 22 Sep 2025 14:30:05 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758544205;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=8okz44p8YvCJb3ASFokOmaZhC37QCQurHkDRCyFt/aw=;
- b=p7Noc4K7u40S0hA3scYD/HZdZGhQmojLwQKUtAm+tKu8JiyTBFaE8p+RJVGHEC6ZDsXi7c
- qzf5M+RKQ0bKf4X7oSpBqH5tIUESo0UpqY2T87FINJgtoXR/2W66zFLWrTqaSbPSKEYVGt
- WSrAgpZgVAOZBzLvEznHzhP6pV3dhhSPqr+NnXQK3RnP5JWFYEcuFE7dNLiIr4xmKa8vZ4
- YsUD7bthXxDGqMtXqMmDM2Fvj5eYqlf731bd5PnVFw+mYOhbRqa42hLiuAYDCYMGZh+yx7
- 1JYTfH8308T4HujHJRK54yfrh2Xxy+nLmIAM5Hbs94UUwdRR270895zrWta8mg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=w80aHpoB;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758544203;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=8okz44p8YvCJb3ASFokOmaZhC37QCQurHkDRCyFt/aw=;
- b=w80aHpoBt2o9Qzol85lj0PD66ogU3Pcj8dodsAUXqfx+gP4xI07ziaTqjoPhCX92v5gcpm
- kHgp8N6bl3CUrOUZmKhnPtXqJgUcdhibnC2H/DO96mjftXsPYezQqDjIBOhoVmqFDsEc2O
- nB9GO3xYNlS/b3wjWBi7eNh6oKAIcc6lVkwlpmdrWo+IyQl/MQ83C5lyaMbvTH3JNgvao8
- clKLpUv+ZfBONTN6b3ZQuE6welEVU5M7i6LGsIThbvWTmOc+BAOR/a0ibiRPe/uBk6Rb6g
- g9x/imYb2OrfmWH4dYGQTro5GJNcJG1SkHthns1X8B57H8PIzZyHaj5kr2YqYA==
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b04ba58a84fso742610266b.2
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 06:06:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1758546365; x=1759151165; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BGTQ0C330rjkw2JJTzNK1dKSaQtu0GxHJOSBlfyQPWo=;
+ b=a35y76k9NYtEijCZRwR6cppsM9pcwCONRkg1F+Ut52XEx8KJnU8yEud0RovEzoAx2Z
+ V6rWsfDjhLalciEcYzL9PdhZfxRb7d2tSQbCOB9lJe8WPBWvnCCqaoBvjABrJSju+Gl0
+ Ayc62wMb7kPT0XJNe1bCro/1QvWyG7Y8VCc201UPaCk3OjHT5JcahARWkC5aKNpS10ug
+ 1VER47I6k017r5FvEwdn30bF0uCMO1syMTeR0MoJKQveE0AbtVhXz4ExvMvWNcwbWlTA
+ B4q0/nq7eZ5lQdRbgGmU0c4CPtqrUw4Ky4EbNSdlJCTZnpGZukQxVUoYH/DOSm2HOiK8
+ ciPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758546365; x=1759151165;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BGTQ0C330rjkw2JJTzNK1dKSaQtu0GxHJOSBlfyQPWo=;
+ b=PBgdE335mKLnHSKSi8kltYfSIr8urrkc73aSLpY9U2DzVhUmW9+KAdAq1LKzQ1pmYa
+ mtH+myqFOGwuBlgh9rCmAIlMSX/cOwLbSNE7AX6Ua99aFouwjLLxiPNfLPzVK2YhYltv
+ eWXreXSFIAn3nlMY3NJWJ8UN5mF13uLTjQSltx5kX1CADDhpyta0BhAeG1y5Ymk5KMni
+ yg0XcU68ofcxssIZI17CPtlWgv3aEH4XRiXEl06IOt8Fcq47Yc0j6XVJKqwyTk1CVgZD
+ ftVHxQe+eRRGr2A3igVTiP8iFIrL/RBSbVnESgmT60J+TGlPoNh4TNWfEGOMeu4x3z4S
+ 5kOA==
+X-Gm-Message-State: AOJu0YxuJBP0hJU6Oswd/E9tkuooxHcmeByxiniCVFdffLfFW/oXLGPA
+ j8keS5gofVqCIyJKT35TeLFAF/DRXCEe0S2iUY0gscx5ORsUirVIRZOc+Se5AA==
+X-Gm-Gg: ASbGncuneGRqjOCBSWZYK3sNUK/e1dqhS8kxasfJZZYwQU5Wn6ScWVqLxvI6WNT8vle
+ vlyzpCGITSumaVzcofPjqt1zhKbnwQgFtoDWZZbkpor6613CKhoObyODm6XfahikKQmfMiAAh8Q
+ Vo8LXJIqJOG6G1ipI4PlMgpS50ppghFeBAIkEB3NfCAgrLjZzWnDW/7U6S6IZpZS8raxDkR3NHr
+ MjdHFqUz/imkYxVHuclQ2uSyWhWlnQi/zKcsLVBr5IsVKo6xvKJplZrd4X2O8vcvoe0mlOWUtMt
+ YnVXhvTc5FueeZ4PvLx1HLjTY8RGqW5Nufi8fLxiogLS0c13ZrPHt0JJRvsvdNmFjw5ssy/SQ+P
+ xIgkI+UwHA5Pwsc1J/P8odQ8v7epMpNvz+y1qUk2ZMp/vUQEI8JPyDoq+c+8pVStge27s7Wm9jl
+ f4fBc=
+X-Google-Smtp-Source: AGHT+IFW5PfP8iNDjIWqphj24sv1tWMxawSlvDvL2QrUZL/pT/6FaruHSgppg4k5rxSBXgIlr+4fNQ==
+X-Received: by 2002:a17:907:d0a:b0:b04:1d07:40de with SMTP id
+ a640c23a62f3a-b24ee9dbacamr1476246366b.23.1758546365080; 
+ Mon, 22 Sep 2025 06:06:05 -0700 (PDT)
+Received: from development2.visionsystems.local (mail.visionsystems.de.
+ [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b2bcb8c930csm297920566b.26.2025.09.22.06.06.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Sep 2025 06:06:04 -0700 (PDT)
+From: yegorslists@googlemail.com
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- "Lucien.Jheng" <lucienzx159@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] linux/kernel.h: Update upper_NN_bits() and lower_NN_bits()
- macros
-Date: Mon, 22 Sep 2025 14:29:22 +0200
-Message-ID: <20250922122948.56748-1-marek.vasut+renesas@mailbox.org>
+Cc: trini@konsulko.com,
+	Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] usb: musb-new: fix ti-musb dependencies
+Date: Mon, 22 Sep 2025 15:05:57 +0200
+Message-Id: <20250922130557.4178098-1-yegorslists@googlemail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: j86bcyumh544dmnpdmof565r1c7p4r3p
-X-MBO-RS-ID: 65d29b2c8150a79db08
-X-Rspamd-Queue-Id: 4cVj9n2q0Pz9tMQ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,48 +96,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Synchronize upper_NN_bits() and lower_NN_bits() macros with Linux 6.16.7
-commit 118d777c4cb4 ("wordpart.h: Add REPEAT_BYTE_U32()"). This fixes the
-lower_32_bits() macros and assures it works with 64bit systems correctly.
-This also adds 16bit variants of these macros, which will be used by the
-Airoha PHY driver.
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: "Lucien.Jheng" <lucienzx159@gmail.com>
-Cc: Rasmus Villemoes <ravi@prevas.dk>
-Cc: Raymond Mao <raymond.mao@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- include/linux/kernel.h | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+If OF_CONTROL is on, ti-musb.c registers a "ti-musb-wrapper" driver
+that requires UCLASS_MISC. Hence, select MISC if both OF_CONTROL
+and USB_MUSB_TI are selected.
 
-diff --git a/include/linux/kernel.h b/include/linux/kernel.h
-index e0443ecac84..44a639a5e4e 100644
---- a/include/linux/kernel.h
-+++ b/include/linux/kernel.h
-@@ -111,7 +111,19 @@
-  * lower_32_bits - return bits 0-31 of a number
-  * @n: the number we're accessing
-  */
--#define lower_32_bits(n) ((u32)(n))
-+#define lower_32_bits(n) ((u32)((n) & 0xffffffff))
-+
-+/**
-+ * upper_16_bits - return bits 16-31 of a number
-+ * @n: the number we're accessing
-+ */
-+#define upper_16_bits(n) ((u16)((n) >> 16))
-+
-+/**
-+ * lower_16_bits - return bits 0-15 of a number
-+ * @n: the number we're accessing
-+ */
-+#define lower_16_bits(n) ((u16)((n) & 0xffff))
- 
- /*
-  * abs() handles unsigned and signed longs, ints, shorts and chars.  For all
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+---
+ drivers/usb/musb-new/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/usb/musb-new/Kconfig b/drivers/usb/musb-new/Kconfig
+index ad9072a5327..acd6e3decc3 100644
+--- a/drivers/usb/musb-new/Kconfig
++++ b/drivers/usb/musb-new/Kconfig
+@@ -40,6 +40,7 @@ config USB_MUSB_DA8XX
+ config USB_MUSB_TI
+ 	bool "Enable TI OTG USB controller"
+ 	depends on AM33XX
++	select MISC if OF_CONTROL
+ 	select USB_MUSB_DSPS
+ 	help
+ 	  Say y here to enable support for the dual role high
 -- 
-2.51.0
+2.34.1
 
