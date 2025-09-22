@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA07CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:24:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92005CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:25:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3982A8349B;
-	Mon, 22 Sep 2025 16:24:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9DB448350A;
+	Mon, 22 Sep 2025 16:25:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S0kKOXjW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y8r9cbRm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 586E7834D4; Mon, 22 Sep 2025 16:24:51 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id BA20D83526; Mon, 22 Sep 2025 16:25:13 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6974883443
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:24:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBB6983443
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:25:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-366ce79fbeeso18493181fa.0
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:24:49 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-578ecc56235so3635464e87.0
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:25:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758551089; x=1759155889; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1758551111; x=1759155911; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z/SgYUoO9NiexQDFCRtL4lXhuY/H0ZM6suHOCkGARNA=;
- b=S0kKOXjWLAOIRiv8Bb9gi9BAj4RmWNi6mod9o4/YH0asX4maKJr2ruUcy0qxEYNwep
- OW8DOrUlGuXgvg0S/xtM3SxvVTLvtwQvaRyrSnUDqgp86S/u3qOJaWImc6Zy3hQ5m7Ak
- Vb2WRlJlr+lfhNGAb17WozrMfVvsLgsfJ8D/rkt6pfupzDTjPd/x28BcHN19v0ks0em1
- zXVBWVCz6uk/G5CRkCCEckO1OqIiEQS7xyKDEr8n4gTe7EKc/9wo2MoNRVENGV3iMNSY
- D1lbQA1edXlvwgERfF3kZLlkFhoISFo9VxwMRK8SbRTfXbiy+BgcVQjThLnp6lc5jE0w
- MKEw==
+ bh=pKf4W0tST69Vz6OOnubUtHqnvOBqFkcADKg5RJsmCLE=;
+ b=Y8r9cbRmtuG+EzqpGHjiAnb53wDtRtmlj3E1INXqXUrtJyfrj5hMDGMu0b5Ri6RyFn
+ kVylkOXNKi4UERnrmbq3qI0ouKXMh9ORlskUG0KqP6IgAUFIgDw4qzcQEy3hJAU2ctVx
+ XMRuZI7JkKdiUa/hkN/TvbnD9bWJMIz+Qs3ME6uhwx/d36xUuyyYNs5yUJQQ/x+fIPcC
+ JPGZlsyIUEslRou3H8zrlh+hx2JOuc38JUEPSfTcdGysI1e8ctJVMI6LVdIzI8UJ9QUZ
+ 0JbN8xsjfEi1DrjD9EYQJLzP13ox7AB0SFha+INhG+MDHxE+b8b4ApxeyopPwAvd/LnX
+ 74Ww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758551089; x=1759155889;
+ d=1e100.net; s=20230601; t=1758551111; x=1759155911;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z/SgYUoO9NiexQDFCRtL4lXhuY/H0ZM6suHOCkGARNA=;
- b=VvIDBCUt+3ZBaN1+RKb/mNiZAp/nFtZJjJmsaXWY70M8bIFcDDLctDF+2hWqF1P2H2
- Tiv+etsviy9vlL5EZNiTI4IfVqicIEsYX+ibvdYYJtJrs0WwK5c5LJr7d4Wb2yZ5kzH5
- PmX35gPvpHw2KvtyzIEE+oWNMk0aJKXn8BjAB6ijtTFzTOojsgMpkla3oBffwYfGPoJS
- AgzYfiJ3ncsnCxsBbzAE6mqmYnL3lWaikuFZN2hh4ZB32SnnQ5IAe9M+5Vw8nBkFGj+n
- htrfWVybkOkFhK6GepfzwStr3h/Vax5YLyS6FPoiO8PpnBx2Ygvl3dQbNJCpEdM/KKpr
- 53Bg==
-X-Gm-Message-State: AOJu0Ywuu2h7yEn+/NwCvEfUYjm/54Yf52C6RPqBz+5VqQBTTBsCkGLp
- ZF8033q9rV+gffWv0s5HcR4ThMSVBIhVctIUiYGr8eRqVEioTfCXLVP+WyWZmKEDXYkXG+K6il0
- B7zvIjFaJJXzq4gopxo2CS/eWv8Qn7Mg=
-X-Gm-Gg: ASbGncuA5I/Ea2rD2HfoyIONWT8POhuYAe2U+BeSh4k5/cU90u2pnkbgCqTHAtzgpUx
- Fr6+nKEEYCDdDclO24a+Xx/dK3uyV/7QQC8cmnJifdFBx/KDuCjtZGhf781VXFjXje3Nhe9PG5E
- hlEp33FkoZ1HVyww8rwHXsD/yvKcKjz29tvRmRmVVDHqNDkyl5+6A3aCApMw8HRtFJD+CLs0aFU
- yUGTe0KVLl4a1MQADoaYJ9U/0tRmmGRX6vqBfo=
-X-Google-Smtp-Source: AGHT+IFoTJTpG+9iR86uz6pEEinhkt3egNv2sz5QCK1cWg/p0E6iaHP814gWlfKYqYZIK1+htwSKoCxneyWISabbtzQ=
-X-Received: by 2002:a05:651c:1509:b0:36c:259a:c916 with SMTP id
- 38308e7fff4ca-36c259acbb2mr7660171fa.20.1758551087117; Mon, 22 Sep 2025
- 07:24:47 -0700 (PDT)
+ bh=pKf4W0tST69Vz6OOnubUtHqnvOBqFkcADKg5RJsmCLE=;
+ b=UA3X0SvOAlpONr6ZHTZbzizKxxl0yekeRX2WWhjcb3nKrGcdqvton2OON3VOtp2pc0
+ oemFbKK2SEqK90Arb0R3fiaa6A67ZgRlF4+lFX6C8ABkwkK/B21HlnsAzjZOc3mnR+RE
+ WKI/N5zcpDpKJHWoSfp79TIgoS3kRiEoefejLDB7FIxuG2A+LiuKKVFU5SWs42h43Ozd
+ ckwCDbA+KZQRwdEzpMlACeeSvvp6DZhqbpdifu2YM9vrRY8Mv9Es8CMT8dQC9Guqyo5x
+ fU85y/QIEzd4P7L3dUN/14ojA1DSY83zrcrUK5dF5pIWxWIdqziwq1qEp3vOSAlSwGYS
+ MPow==
+X-Gm-Message-State: AOJu0YyIi/w+13toR3QkfXbhOlWewjoDqgm8e67QS3Nuv0wzwTZgmT+j
+ UjG46yGRd/+k1MeLxRNw680aqCbkwSjGdYq8K1g6a7GG1TnQsRC/QU+EjaqNJUfUPcrw0mWfyIS
+ DzAaHHMiOtFpu3ZAzWgOd2dFDUlVt5w0=
+X-Gm-Gg: ASbGncve6kfYIUlBZhJSX/NPsu0nZdPpd/5eIVwo095BXGICWBoUkG/QCxotGFVUwrW
+ y4av5D79tyhFo2UXSXqA+px2mOWAHQQ4DpFsJneP73MCG9MhEJkU7UM3ctdL7hJB9zWUN5ycMEw
+ bWOu7JTM5ghnvkCLBcCxVNThQAzrzYSXfCgUebgDo44LZ3SEV4xaKWbt2Lc06P5w1rIqKSudX3F
+ cES3iA0CRivEMjxi1VuideZ1FAE2wjMGb18A3k=
+X-Google-Smtp-Source: AGHT+IErukkJVYslv91uGivJhr93jfTD6C8JS/ZqfVPQXjdSO+fk6ZPcJEhTKyZq1E0VFeMJqUvCdC3Xg9dXZcUcvFw=
+X-Received: by 2002:a05:6512:aca:b0:57a:8b00:fa5 with SMTP id
+ 2adb3069b0e04-57a8b0010c9mr4530956e87.51.1758551110938; Mon, 22 Sep 2025
+ 07:25:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250919065834.1497068-1-ye.li@nxp.com>
- <20250919065834.1497068-2-ye.li@nxp.com>
-In-Reply-To: <20250919065834.1497068-2-ye.li@nxp.com>
+ <20250919065834.1497068-3-ye.li@nxp.com>
+In-Reply-To: <20250919065834.1497068-3-ye.li@nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Sep 2025 11:24:35 -0300
-X-Gm-Features: AS18NWB5ywhh5PUoX41JNHGVC-akWsRR5bgaz5VknRLZeFkCvWXdA0BHB4O3zKg
-Message-ID: <CAOMZO5Abi64vTgjj0N1jQBaYa3dvffFF0L-HLppGVYGfq_LcTw@mail.gmail.com>
-Subject: Re: [PATCH] imx8ulp_evk: Fix ELE FW version print bug
+Date: Mon, 22 Sep 2025 11:24:59 -0300
+X-Gm-Features: AS18NWA7xJx7_uIr_QApgG8A7ONDgvtlYbH4YXaPIfU5m93RNNa_E5T-ghSRJxQ
+Message-ID: <CAOMZO5BFVgyELK7=WT=u3R1BVMTrm=59xw42H78qRsRBt=50yw@mail.gmail.com>
+Subject: Re: [PATCH] arm: imx9: Fix LPCG number in ccm_reg structure
 To: Ye Li <ye.li@nxp.com>
 Cc: u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
  alice.guo@nxp.com, ye.li@oss.nxp.com
@@ -96,28 +96,11 @@ X-Virus-Status: Clean
 
 On Fri, Sep 19, 2025 at 3:59=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
 >
-> According to latest ELE Get FW version API, the FW version word is define=
-d
-> as below. The patch version only has 4 bits and minor version has 12 bits=
-.
-> However, the codes use 8 bits for patch version and minor version. Add th=
-e
-> patch to fix the issue.
->
-> ELE firmware version
-> [31] - When set indicates a dirty build.
-> [30] - Reserved
-> [29:28] - Hotfix version.
-> [27] - When set, indicate that ELE FW is authenticated and operational.
-> [26:25] - Reserved
-> [24] - When set, indicate that an alternative FW is running.
-> [23:16] - Indicate the major version. This byte is checked against the
-> version set in the fuses to determine if the FW execution can be authoriz=
-ed
-> [15:4] - Indicate the minor version.
-> [3:0] - Indicate the patch version.
+> The LPCG number on iMX93 and iMX91 is 127 not 122. The wrong
+> value is used in ccm_reg structure and Coverity reports several
+> issues as out-of-bounds write.
 >
 > Signed-off-by: Ye Li <ye.li@nxp.com>
 > Reviewed-by: Peng Fan <peng.fan@nxp.com>
 
-Applied to -master, thanks,
+Applied to -master, thanks.
