@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92005CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6577CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:25:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DB448350A;
-	Mon, 22 Sep 2025 16:25:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7AC398349B;
+	Mon, 22 Sep 2025 16:25:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y8r9cbRm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ak6Q4Yvt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA20D83526; Mon, 22 Sep 2025 16:25:13 +0200 (CEST)
+ id 685D583542; Mon, 22 Sep 2025 16:25:39 +0200 (CEST)
 Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
  [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBB6983443
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:25:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 76EAF83443
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:25:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
 Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-578ecc56235so3635464e87.0
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:25:11 -0700 (PDT)
+ 2adb3069b0e04-5797c8612b4so4334027e87.2
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:25:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758551111; x=1759155911; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1758551137; x=1759155937; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pKf4W0tST69Vz6OOnubUtHqnvOBqFkcADKg5RJsmCLE=;
- b=Y8r9cbRmtuG+EzqpGHjiAnb53wDtRtmlj3E1INXqXUrtJyfrj5hMDGMu0b5Ri6RyFn
- kVylkOXNKi4UERnrmbq3qI0ouKXMh9ORlskUG0KqP6IgAUFIgDw4qzcQEy3hJAU2ctVx
- XMRuZI7JkKdiUa/hkN/TvbnD9bWJMIz+Qs3ME6uhwx/d36xUuyyYNs5yUJQQ/x+fIPcC
- JPGZlsyIUEslRou3H8zrlh+hx2JOuc38JUEPSfTcdGysI1e8ctJVMI6LVdIzI8UJ9QUZ
- 0JbN8xsjfEi1DrjD9EYQJLzP13ox7AB0SFha+INhG+MDHxE+b8b4ApxeyopPwAvd/LnX
- 74Ww==
+ bh=BgV0M5qUtfUB0RAtr95njfBpaQ/yrVNr0hAHsJbZ6io=;
+ b=Ak6Q4YvtbmET5SSIe29S9lYjz3zdG95UpyzGaOtRs0iEtw49plBbgPTtsPNyJUeRjZ
+ kDQA2zQsj+Lk90wnE1JCMg8NdRrpswyp8s3sebAD20JqPcbkLplfXw7CoR4y2ltUf+5J
+ Wx05IWg0OzrVWGjuqLVKHoLbNR1XHyeLO2EdjJDUQnuPONZJFRIJkOjLdpGen490YiNO
+ IX5k8ct4VryiJbv/IRxN2BbcEu6rsGBcYg1ZsfLj3GFpF12LH6gdbWRn2Nw5kilBjVzQ
+ eTF8c8hGKHf3Mr8Iqb5mkcDEGlOv0R4H1+cFqAVGkAumqpw3xFWtgxdC6KyyZgvKvyru
+ HRbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758551111; x=1759155911;
+ d=1e100.net; s=20230601; t=1758551137; x=1759155937;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pKf4W0tST69Vz6OOnubUtHqnvOBqFkcADKg5RJsmCLE=;
- b=UA3X0SvOAlpONr6ZHTZbzizKxxl0yekeRX2WWhjcb3nKrGcdqvton2OON3VOtp2pc0
- oemFbKK2SEqK90Arb0R3fiaa6A67ZgRlF4+lFX6C8ABkwkK/B21HlnsAzjZOc3mnR+RE
- WKI/N5zcpDpKJHWoSfp79TIgoS3kRiEoefejLDB7FIxuG2A+LiuKKVFU5SWs42h43Ozd
- ckwCDbA+KZQRwdEzpMlACeeSvvp6DZhqbpdifu2YM9vrRY8Mv9Es8CMT8dQC9Guqyo5x
- fU85y/QIEzd4P7L3dUN/14ojA1DSY83zrcrUK5dF5pIWxWIdqziwq1qEp3vOSAlSwGYS
- MPow==
-X-Gm-Message-State: AOJu0YyIi/w+13toR3QkfXbhOlWewjoDqgm8e67QS3Nuv0wzwTZgmT+j
- UjG46yGRd/+k1MeLxRNw680aqCbkwSjGdYq8K1g6a7GG1TnQsRC/QU+EjaqNJUfUPcrw0mWfyIS
- DzAaHHMiOtFpu3ZAzWgOd2dFDUlVt5w0=
-X-Gm-Gg: ASbGncve6kfYIUlBZhJSX/NPsu0nZdPpd/5eIVwo095BXGICWBoUkG/QCxotGFVUwrW
- y4av5D79tyhFo2UXSXqA+px2mOWAHQQ4DpFsJneP73MCG9MhEJkU7UM3ctdL7hJB9zWUN5ycMEw
- bWOu7JTM5ghnvkCLBcCxVNThQAzrzYSXfCgUebgDo44LZ3SEV4xaKWbt2Lc06P5w1rIqKSudX3F
- cES3iA0CRivEMjxi1VuideZ1FAE2wjMGb18A3k=
-X-Google-Smtp-Source: AGHT+IErukkJVYslv91uGivJhr93jfTD6C8JS/ZqfVPQXjdSO+fk6ZPcJEhTKyZq1E0VFeMJqUvCdC3Xg9dXZcUcvFw=
-X-Received: by 2002:a05:6512:aca:b0:57a:8b00:fa5 with SMTP id
- 2adb3069b0e04-57a8b0010c9mr4530956e87.51.1758551110938; Mon, 22 Sep 2025
- 07:25:10 -0700 (PDT)
+ bh=BgV0M5qUtfUB0RAtr95njfBpaQ/yrVNr0hAHsJbZ6io=;
+ b=NhtzkVkozeSIa0miubYCumbg2yG1B3PnilMqA79XQ06PNG/I+r7Tp/aCHX+Xhe5Vsh
+ ehifEHAqinMogrktIl5eHxMyigo6Mcdy4usjF+sT3Czx1IDGCS05ZA/4eHZ3vIemmzhz
+ 19zMAjP1evHNX3t5iqwSxzuu2bfAoS6b8QkAAHtAuTPbcGFb0OE+AUgwnywA/CZz5wMC
+ bw23PUnY1rdSztRCNFNDCJc1IXYWJ002UR7duMvae8iJw3tbeYOzZCRCn5NnZBakFO87
+ df8zzcr6f5ZSGV8SAkFnk9e/R9I6Khc5oN5mhJegUwa02GQ/cS2F9zVUmBca9/FMMu0j
+ 3zkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVGu534NwkicSQ59uiiJRAXMuztbAyeO/aSN+ctPUvc9VulfnGW3MR7ty10AM8SkB5bYvLUyuI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyR+SQGxR1SYOroqz43N8C+AXyCJDLS6Y1WgvO14FFXX0Fi6cqn
+ WKD4v8M1k5UOwL6aTG5BSLsgc2JlbpJxeXfE0tdm9ywDAmzDDCfrRG9v+LqvTBSyZH3R0aCpqMO
+ jThzJro2bRfjaxtKbxxcVsZQ4m78NnkSBcQ==
+X-Gm-Gg: ASbGnctdi8EyRxHnAZCkU0iwN12Y/eP20SQGr7B95uetyFAGn02O91AI1d8Wr5tR5He
+ r8/j6mDmLW1galy70RPiuXpWHrxPI0vDE5jcHFoGy8Z+ivLelf4b8jCFOTQp5P1SzG6JZBg0m60
+ 6IEpXISuxk1RcPi8CyKnV/rJrUXXKsCuFJs/mH5iYHLfjWxO929lK3JTxQioXwa5aGvqDnxAsHc
+ nKHeEmb2aXQDLd1jlcms5YQpgVthKWuM+aXJo4=
+X-Google-Smtp-Source: AGHT+IGAPZTymnWvcbJ+mJ7rkuF1yRILvBuxuaapFCZzOXQ75bNwomRx4ZzqHRTwb+DQyNntCUqtK347r7jVAeBqKOg=
+X-Received: by 2002:a05:6512:340c:b0:572:1f0b:5ef3 with SMTP id
+ 2adb3069b0e04-579e08b39b7mr4712874e87.11.1758551136400; Mon, 22 Sep 2025
+ 07:25:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250919065834.1497068-1-ye.li@nxp.com>
- <20250919065834.1497068-3-ye.li@nxp.com>
-In-Reply-To: <20250919065834.1497068-3-ye.li@nxp.com>
+References: <20250919075142.1674177-1-primoz.fiser@norik.com>
+In-Reply-To: <20250919075142.1674177-1-primoz.fiser@norik.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Sep 2025 11:24:59 -0300
-X-Gm-Features: AS18NWA7xJx7_uIr_QApgG8A7ONDgvtlYbH4YXaPIfU5m93RNNa_E5T-ghSRJxQ
-Message-ID: <CAOMZO5BFVgyELK7=WT=u3R1BVMTrm=59xw42H78qRsRBt=50yw@mail.gmail.com>
-Subject: Re: [PATCH] arm: imx9: Fix LPCG number in ccm_reg structure
-To: Ye Li <ye.li@nxp.com>
-Cc: u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
- alice.guo@nxp.com, ye.li@oss.nxp.com
+Date: Mon, 22 Sep 2025 11:25:24 -0300
+X-Gm-Features: AS18NWBHzMWvlX31QkLHnWH49skBAI_2l_sjeIQ8fxfJgiISmc0nVRfD-tkzgQY
+Message-ID: <CAOMZO5DkaPAkdZxyEq0gQz-d8BR8-feuL0mRL+e50SMrULDtzQ@mail.gmail.com>
+Subject: Re: [PATCH] board: phytec: phycore-imx93: Fix i.MX93 voltage modes
+To: Primoz Fiser <primoz.fiser@norik.com>
+Cc: Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, upstream@lists.phytec.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,13 +96,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 19, 2025 at 3:59=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
+On Fri, Sep 19, 2025 at 4:51=E2=80=AFAM Primoz Fiser <primoz.fiser@norik.co=
+m> wrote:
 >
-> The LPCG number on iMX93 and iMX91 is 127 not 122. The wrong
-> value is used in ccm_reg structure and Coverity reports several
-> issues as out-of-bounds write.
+> Fix support for i.MX93 voltage modes on phyCORE-i.MX93 SoM boards.
 >
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> Reviewed-by: Peng Fan <peng.fan@nxp.com>
+> First of all, Kconfig option CONFIG_IMX9_LOW_DRIVE_MODE is gone since
+> commit c9efcad23741 ("imx93_evk: Remove CONFIG_IMX9_LOW_DRIVE_MODE and
+> ld defconfig") and was replaced by runtime detection mechanism. Thus
+> lets use is_voltage_mode() instead of Kconfig to detect CPU type and
+> select proper voltage mode.
+>
+> Secondly, 1400MHz ND mode (Nominal Drive) requiring 0.85V BUCK voltage
+> was not supported with current power_init_board() PMIC settings. Add
+> check also for this CPU type and set BUCK voltage accordingly.
+>
+> Last but not least, add printf() printouts about PMIC voltage mode to
+> the console. This makes it more apparent and verbose about voltage mode
+> in use. Also our internal tests depend on this printout to catch issues
+> with i.MX93 CPU types and set PMIC voltage modes.
+>
+> Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 
 Applied to -master, thanks.
