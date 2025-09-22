@@ -4,144 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4C3FCAC5A7
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 11:12:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4218CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 11:49:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FA12833E9;
-	Mon, 22 Sep 2025 13:12:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id E6F7D83280;
+	Mon, 22 Sep 2025 13:49:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="SpYqz6Yb";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZinBfzui";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="a9qbdMfw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FD7F83211; Mon, 22 Sep 2025 13:12:28 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id B42F0833E9; Mon, 22 Sep 2025 13:49:53 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CDDA8340C
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 13:12:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5122983211
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 13:49:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ye.li@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=y24gynkK9wTeKJV8WS9Gtd5Md5bDNeeAUa5djahi7r6zBEXXxlYyrYeP2TxuY9s1n7j8B/QAC4RxjBFAvEYbyu9yUdeOOEf3ldAMtQNJr3/nKLcg4mJBVshwGmajYf1cUlt6CvyeCM0md9bNaq+VCNVukaEQn5gLv91bMJWzyd2mY56N/fMhgymBdUwhfqaOhypVsd6MPgpr2XfydqfJmpsgtt2P/upfCjiXDG24UUcaJppM6rNNZoa6CDEvzvhwRNayt4LfdHnUbziz2x5tZ3NBq1VVbWIT4HEadzR8807ntqD4VOe2/yROg6aJz6XxNIOXg/7bKqW4dPsRRCmBFQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JXkqK8iFJBqu7GByiJ5QwzFoscIf5oElusMovs5/piQ=;
- b=IWUAFt84cIULcZDabtAtjIALdgPh0AkbVoB2BbfYSvB/PZhJ4zNhXVArHW+sRVF7e+Aq9SPCCYAmhGMEPvifm7JJfmQVcLWe+5WQTn/B+1P+NQg1j2xEF7yp4b70nvw9fCCoByq89lH9Xj3dTvfz1RB+dyKeF5QNlvjWokpYVPx5nExWM1TlvH42EfxG3jh+2p5sRu7OdpatSLOB4zwG2ej42yNsRNZqY3EQ5kxoHyp8IK6dyG/N8WghkmzqiepZ+DkLGgwGrONFghXa+EDTRnL7a2eKVeVlCBcC/39aUliZlVSu3VbmKHj/ocJvAQ0KZDpFP1FpLYDyQ+N+o7ev0Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JXkqK8iFJBqu7GByiJ5QwzFoscIf5oElusMovs5/piQ=;
- b=SpYqz6YburTqLdlcsLlAnuGm+GqpoLQgIaf5huYNqwMXcmOcdsZY3ZrfflbIkwtwMQNGCDBMIJ3GloZvgRcID29zXQVlPgwsfqdc86frSRmpHlHwOZLdWV5wkmMGqgCYPbKn9/0qZvrCcndUSiYISRf1zvezdsIAnlplE5HkePGuOvEpR8SfbdL+kBg/6LRTpqmCKwI6UWgyIKU0lT5DdZWXRS25n5FzY9n9ZRTI2myYGjgx8/kcuQRnLmfqn00osvVvi3GVkLhEGBEttv7N1PcBNDDIJtMWjdwkrN93jx4tQcgaQjgBgX94vARqawNKuNqqmecmIzsS25OQAvzvWQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com (2603:10a6:20b:4ec::5)
- by VI0PR04MB10735.eurprd04.prod.outlook.com (2603:10a6:800:269::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.9; Mon, 22 Sep
- 2025 11:12:24 +0000
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::afae:fb35:fc8:5c90]) by AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::afae:fb35:fc8:5c90%7]) with mapi id 15.20.9160.008; Mon, 22 Sep 2025
- 11:12:24 +0000
-From: Ye Li <ye.li@nxp.com>
-To: u-boot@lists.denx.de,
-	jagan@amarulasolutions.com,
-	festevam@gmail.com
-Cc: peng.fan@nxp.com, uboot-imx@nxp.com, alice.guo@nxp.com, ye.li@oss.nxp.com
-Subject: [PATCH 4/4] spi: nxp_fspi: Support i.MX8ULP flexspi
-Date: Mon, 22 Sep 2025 19:11:43 +0800
-Message-Id: <20250922111143.1204915-4-ye.li@nxp.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20250922111143.1204915-1-ye.li@nxp.com>
-References: <20250922111143.1204915-1-ye.li@nxp.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SG2P153CA0043.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c6::12)
- To AS4PR04MB9436.eurprd04.prod.outlook.com
- (2603:10a6:20b:4ec::5)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cVhHM0YNWz9sX2;
+ Mon, 22 Sep 2025 13:49:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758541791;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=mfAIXS55w72pPX+dbRT4KeuO7USmiTo+zB7HuDmSXRA=;
+ b=ZinBfzui0OP2VZnkxTaTc5Ux95R02+A+g9RM6KdCh0ZbsycnR5wcvBbitHOTr8+1AU3ZFQ
+ EYX10fZNHVJkNqCIrVwXEHfkdTVVgMJzgWwVrCsp6Kp5aO36eiYhG6Vn8dSuCuReVlvXGZ
+ eAfEP7avK8CcZp/5ty6Iac0nh5sMo1E0b9u8FaMwUlGZ/xk6ZxjfWng4Lz4w1zpr7gyMJ6
+ CAr7c2Tg+K9/SGFd/n9WvkALD6t78UqalRQqsL2mbgJsqrusr5Qri3E7auESkOd0LwcZ4i
+ XfGnfeW3iVCkT5mZhqFb81teOK4R8SyLUmqAEsm8c9R3Mv70vaT3YImvHMvF9A==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=a9qbdMfw;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758541789;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=mfAIXS55w72pPX+dbRT4KeuO7USmiTo+zB7HuDmSXRA=;
+ b=a9qbdMfwcD23dYSj+5cQUojl3My/7JXTomLuvZT8KZCHgbL/eXePOrshp2at7tCubrNMoI
+ 148hz3C58lYktta5yS5uEFio2qXELOi6+DXJoUBHWoMFGvFSHWOBSq1pxHCX5XCrcttaJG
+ /pNgTnjEkmYbSEev3giR3TSPPA9hjbGSXfRQpn1zFHPdGKJ7rwXxwuoppxV4efdYxVIV5M
+ BljKsM+BGZCnF/BbrM2M1Wg4sLfIfb+6Ls1BRBXlwd/vglfhX9FFh6H1qC1Rh4gtk0yBOG
+ cEDAjRIRxHWs0ZXEISA575tnaV+hiUyJsIh+x3ES7XJpbcVPnyY010Ldv8Bq9w==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ "Lucien.Jheng" <lucienzx159@gmail.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>, Tom Rini <trini@konsulko.com>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: [PATCH 1/2] fw_loader: Split from fs_loader into separate library file
+Date: Mon, 22 Sep 2025 13:48:27 +0200
+Message-ID: <20250922114926.51984-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR04MB9436:EE_|VI0PR04MB10735:EE_
-X-MS-Office365-Filtering-Correlation-Id: a93eb9bf-af8b-4e15-a610-08ddf9c8e860
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|42112799006|19092799006|376014|52116014|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?S/mtuCVa8AJdBg81zT08DmdoU6GyPpkNiTSg4RPGVIxt2GmtJyLXg6/JmQOZ?=
- =?us-ascii?Q?Z1W0Abplg1Ft0iYbuiCjf63+9JFVZzL1W5NS1h5kdZ+fwsfqScqY7+FgSqcB?=
- =?us-ascii?Q?CZd2dyBnVc+10ni24pPU/q0E5mMwD7GwfloK85LlDEvgL5XoxBKN2HoDEFcW?=
- =?us-ascii?Q?rgdAXSiGB3+VWHyXN4GE7R501vjiNj70t1CelluWZEjYmgVrqzsitGeWvIiO?=
- =?us-ascii?Q?HzKECqYrLbhjPXUXqqSno7jcHPCT4UVRUYkbYdTRWwHTvVPBv5qQvKzmbjyq?=
- =?us-ascii?Q?cC2RDQKLkneM6immxiXVFkt2IVoKmxGvjikmEkzGuHN/luwg7Nupm5tWQTE2?=
- =?us-ascii?Q?EdIILoEy9w+z8xwSd0JpAQgYDjahWeJARZApm1qLC/H3/LlYvw0jnTLzkxPD?=
- =?us-ascii?Q?jULegMtjxWJrZQ74vrhypZ6B3m+q3hYMiNvc+18+qYAxcQfm2wKUeuh31Hjt?=
- =?us-ascii?Q?XiWA+ylKeJK7vo0xJrdLMvZXoS2HgZLFVj6mb5VyeYA6oZFGA3Pm7RTiGJwp?=
- =?us-ascii?Q?hTEDZ5lJahuohqT4IG83YpUuCU79Tdy7tJsUbmQfIlHWYILlcnZ8W3U7mJAO?=
- =?us-ascii?Q?VlKoLzfaPwAlucfPLhkPvhal+HmZd7lFto0xYiRh9KYJQTNLe3Yd7Fcr3Pna?=
- =?us-ascii?Q?wque0ZoOifipa1u3c+1Q5+zFRa3IsfsIJ/zhRvVzeL6S3QpnaqBpMQc6dTtm?=
- =?us-ascii?Q?sRKxZDp2l0IGzoXRz/kwsh4UYMCq5XA9uIMtpvod/VhxXfcCiCoA4fOSe+of?=
- =?us-ascii?Q?5ZKT+8vtGvoVL3cfVsCQZd2WtuZ05cPNIOjs7YlQmPX3+zyYFbU5vd2o/HwQ?=
- =?us-ascii?Q?QLNgLfuhC8LHk1WvvuxpGqaH83j3Tg7WxqCSh+NvIbOVNqGrdh3JS1mGMBec?=
- =?us-ascii?Q?tTiOK49oxxKRY4C3FuLXDWy36iyR/RzJlA8QWFz8rdMPt867j+Wpydzt0So0?=
- =?us-ascii?Q?Hv7VSJNB3+odeH+DJvq1dfS3onwB6DNZzSC4EkFEjzyT7OHp8cjWHuuuKtE8?=
- =?us-ascii?Q?MayHGspLJBUGp1J3nxkrEZgzEMuZW08NgrkBPOIovxIPWXm+/BamLhW/e3VG?=
- =?us-ascii?Q?Y+Z0idiY+8ucUdHgGDI79rlalx8SSlLRjbmSFnIZXyr3Rajpq8gXr0KZOhpF?=
- =?us-ascii?Q?/QRUep3I+bb8z40B0YFH6R7EZykArSV0sXVS4t2onT+LDOFV/+oh1rYxlU6F?=
- =?us-ascii?Q?JyEn9W9ZPoYqRrbBmG769upCGyxyKXGB5st77vEJlTmtk+/a8K68oTKdLzle?=
- =?us-ascii?Q?LZIPPJxY75te9yU4HwDDi0i53D4DNv8dYQkfdu4gLAc48GvAXTJO21XZb7F/?=
- =?us-ascii?Q?rF+w0KBYzCUjn31DIfCOf1RNbRmD00hZ7vJ2uTE6nOJXDdOIDjqgwgJ+FUs/?=
- =?us-ascii?Q?95LTz1QU+dAwb84poFtFSO2yAi4Mhvwn3XTnVbMmAP8OlT1vuwXmYq7k1/zR?=
- =?us-ascii?Q?7Kp0sHbeSDAB77kRijCTq1VmzoIemllz3A4/Lbz8dbUdf0i4nuM2IQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR04MB9436.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(42112799006)(19092799006)(376014)(52116014)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?9nWO9Z2vzM7X8dTWdV8yVIDhR/ohCeIe5Nf1wIDoQTzyUTfp5PUsQk9JSq5u?=
- =?us-ascii?Q?1SxZgIhyOnFATWtWvRxN7U1qO4qBP7w3BfQ82rdHhzXieKZFt6NkfD6k1sgy?=
- =?us-ascii?Q?3fi4uj79tAm0dx0UxmdTzsbGurwhIpmvGwB186gqs1rWJPLyKURaw96yEHWA?=
- =?us-ascii?Q?LWRl3DRQVSu4t+Mo6aJB9uwlv+pvD6CEoJeoA8q1FaIEXmocr956HHh3anXM?=
- =?us-ascii?Q?PbLsvACPhnR3QINQyyp1xcPXs1lgU06f6zZK6Zjs55r2ZW3AhlSlsMqUPj/T?=
- =?us-ascii?Q?nEt9tSlNy0VILnKA6sfUDkfbYH8FNWjjdgkrVp17DA+7muK4gz6QvcBuM32/?=
- =?us-ascii?Q?vYmTRvD1+ovSqzWTdSezGMC6cetntikMDnX4uD329x6eiYbEfl1qF0TYemit?=
- =?us-ascii?Q?Cz/VeeFYNb4V3x6Qda4VmOB6bcHY5fMINoksRXU+SX5092Xxu54cG1EJeYg9?=
- =?us-ascii?Q?WLnqbWYvcwBv9OoVyyTUUlSn71GeqPkWJzovuTsh2s7m4pBh2LrKMVhGtC+1?=
- =?us-ascii?Q?qfFJQV8TK9cFZI9Pd+9T1sYjF9iaufdXPF9as/LUg8VD8iMjukqn81VIaEon?=
- =?us-ascii?Q?G2uDFacMXcSz2eE2n3OU9ajjulavP0h1QLTBUmZzH2i91pCj7P5hqfLTSs1L?=
- =?us-ascii?Q?RBth7Hw9RPdQ3XYb1Q1ylnjlPdMIBnEqOe5t7mH+SF1Mc8HOXxZf/cK/DGnd?=
- =?us-ascii?Q?msSTow2Y4Uhf2+pqPNUDe6HuHticcDLHQNMbcz5yJV1xFCWRTH/w4KdKcN36?=
- =?us-ascii?Q?V+vkcfcRpIbmtrnGU9m4F8dA16aOlNZh3WZuzcJyEtdtRmGIOTQGgEzb42Jb?=
- =?us-ascii?Q?qxajspXG9KN62PlGZrAubI+Swa3kUILIEnet4DWDuTeeN7caWkv+4M1hjqw/?=
- =?us-ascii?Q?j37EgU76pIvdrQ+xlUR4P1/Q4dWoEurhZnwQX3SdsXxItcKOOgmxISYmArzu?=
- =?us-ascii?Q?uNcggcuwplJ/8kaNqx9AB1UOd7ZEG+8aGLIwBaG/A8O7oQZV5+medp3vmNoq?=
- =?us-ascii?Q?ZdjtzXiwP+hJ6+0ifcDbAmRmtbaxi7ppKJz9BMIMZFby+jZ5+rXe/psNFTg3?=
- =?us-ascii?Q?MB2TnNFFhLhHlneAfHMn5ffXfsRH/DNJI14zWrYl17E7HNVkP6PVnYYfP3o5?=
- =?us-ascii?Q?Iv+QzYPnmNEjscay4iLOHtTKQsBzx7DuNcCCYA8BJrcPCn314X1KaKre959N?=
- =?us-ascii?Q?CquMrJNbMBg75Ja1reGYcxr9oXHJzDuWbBZn/JMstt7zmZ7QECMAQdoxjhFR?=
- =?us-ascii?Q?aSPet77/ro5iInHIGF2a9c28fSMZY6vklzQcdrclmWwvP6KY5Tvcud/Uq+Sn?=
- =?us-ascii?Q?HNT2Nb+PvVD3FSASbApFcZbWQpoyyEDdNkifcBiEWMndOtIaQLS6NELrWD6m?=
- =?us-ascii?Q?bwfzA0IBC+PFu609bHKvt9KB7UsZrz1Z/sLVRD5G4X3Ce3IPRJb+LTCLKDJG?=
- =?us-ascii?Q?z0CkWgtsHaWARWp2NHQVockwqlKFGgcxbjPUY6/OTu5Y/j1ASO7G0pD/R/0O?=
- =?us-ascii?Q?D1beketEdENtQqNtAXDW3p6jVQIxSWpwwxUjgIBq+O8PIK/BpnO2nco1Hari?=
- =?us-ascii?Q?K2ZXNKM+VUKzZF03Ye4=3D?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a93eb9bf-af8b-4e15-a610-08ddf9c8e860
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR04MB9436.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2025 11:12:24.6636 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1x2y+6fJiC0oUNSxzF76+cGNO4DUOO1xB20bg4UFNjhUxzbWi2mG1fkW0SAx87O8
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB10735
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: qhjeuiqapy7s4tu13oq1y8wwpwurajbi
+X-MBO-RS-ID: ce755b9cb1f5f0e746d
+X-Rspamd-Queue-Id: 4cVhHM0YNWz9sX2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,42 +96,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add i.MX8ULP flexspi compatible string and driver data.
-The flexspi on i.MX8ULP only has 16 LUT sequences and uses 1KB RX FIFO.
+The script based firmware loader does not use anything from the
+fs_loader implementation. Separate it into its own library source
+file and convert the mediatek PHY to use this separate code. This
+should reduce the amount of code that is pulled in alongside the
+firmware loader, as the FS loader is no longer included.
 
-Signed-off-by: Ye Li <ye.li@nxp.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/spi/nxp_fspi.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Cc: "Lucien.Jheng" <lucienzx159@gmail.com>
+Cc: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
+Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Ryder Lee <ryder.lee@mediatek.com>
+Cc: Sky Huang <SkyLake.Huang@mediatek.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Weijie Gao <weijie.gao@mediatek.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/misc/fs_loader.c             | 47 -----------------------
+ drivers/net/phy/mediatek/Kconfig     |  2 +-
+ drivers/net/phy/mediatek/mtk-2p5ge.c |  2 +-
+ include/fs_loader.h                  | 25 ------------
+ include/fw_loader.h                  | 34 +++++++++++++++++
+ lib/Kconfig                          |  8 ++++
+ lib/Makefile                         |  2 +
+ lib/fw_loader.c                      | 57 ++++++++++++++++++++++++++++
+ 8 files changed, 103 insertions(+), 74 deletions(-)
+ create mode 100644 include/fw_loader.h
+ create mode 100644 lib/fw_loader.c
 
-diff --git a/drivers/spi/nxp_fspi.c b/drivers/spi/nxp_fspi.c
-index 97751fac025b..ef53bf2ea891 100644
---- a/drivers/spi/nxp_fspi.c
-+++ b/drivers/spi/nxp_fspi.c
-@@ -355,6 +355,15 @@ static const struct nxp_fspi_devtype_data imx8dxl_data = {
- 	.little_endian = true,  /* little-endian    */
- };
+diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+index d641647e040..2928cf75f89 100644
+--- a/drivers/misc/fs_loader.c
++++ b/drivers/misc/fs_loader.c
+@@ -228,53 +228,6 @@ int request_firmware_into_buf(struct udevice *dev,
+ 	return ret;
+ }
  
-+static const struct nxp_fspi_devtype_data imx8ulp_data = {
-+	.rxfifo = SZ_1K,       /* (128  * 64 bits)  */
-+	.txfifo = SZ_1K,        /* (128 * 64 bits)  */
-+	.ahb_buf_size = SZ_2K,  /* (256 * 64 bits)  */
-+	.quirks = 0,
-+	.lut_num = 16,
-+	.little_endian = true,  /* little-endian    */
-+};
+-int request_firmware_into_buf_via_script(void *buf, size_t max_size,
+-					 const char *script_name,
+-					 size_t *retsize)
+-{
+-	char *args[2] = { "run", (char *)script_name };
+-	int ret, repeatable;
+-	ulong addr, size;
+-
+-	if (!buf || !script_name || !max_size)
+-		return -EINVAL;
+-
+-	/* Run the firmware loading script */
+-	ret = cmd_process(0, 2, args, &repeatable, NULL);
+-	if (ret) {
+-		log_err("Firmware loading script '%s' not defined or failed.\n",
+-			script_name);
+-		return -EINVAL;
+-	}
+-
+-	/* Find out where the firmware got loaded and how long it is */
+-	addr = env_get_hex("fw_addr", 0);
+-	size = env_get_hex("fw_size", 0);
+-
+-	/* Clear the variables set by the firmware loading script */
+-	env_set("fw_addr", NULL);
+-	env_set("fw_size", NULL);
+-
+-	if (!addr || !size) {
+-		log_err("Firmware address (0x%lx) or size (0x%lx) are invalid.\n",
+-			addr, size);
+-		return -EINVAL;
+-	}
+-
+-	if (size > max_size) {
+-		log_err("Loaded firmware size 0x%lx exceeded maximum allowed size 0x%zx.\n",
+-			size, max_size);
+-		return -E2BIG;
+-	}
+-
+-	if (retsize)
+-		*retsize = size;
+-
+-	memcpy(buf, (void *)addr, size);
+-
+-	return 0;
+-}
+-
+ static int fs_loader_of_to_plat(struct udevice *dev)
+ {
+ 	u32 phandlepart[2];
+diff --git a/drivers/net/phy/mediatek/Kconfig b/drivers/net/phy/mediatek/Kconfig
+index bbda951e7d9..933271f01fa 100644
+--- a/drivers/net/phy/mediatek/Kconfig
++++ b/drivers/net/phy/mediatek/Kconfig
+@@ -6,8 +6,8 @@ config MTK_NET_PHYLIB
+ config PHY_MEDIATEK_2P5GE
+ 	bool "MediaTek built-in 2.5Gb ethernet PHYs"
+ 	depends on OF_CONTROL && (TARGET_MT7987 || TARGET_MT7988)
++	select FW_LOADER
+ 	select MTK_NET_PHYLIB
+-	select FS_LOADER
+ 	help
+ 	  Supports MediaTek SoC built-in 2.5Gb ethernet PHYs.
+ 
+diff --git a/drivers/net/phy/mediatek/mtk-2p5ge.c b/drivers/net/phy/mediatek/mtk-2p5ge.c
+index 0e704bdb04d..4090db0b474 100644
+--- a/drivers/net/phy/mediatek/mtk-2p5ge.c
++++ b/drivers/net/phy/mediatek/mtk-2p5ge.c
+@@ -10,7 +10,7 @@
+ #include <dm/of_access.h>
+ #include <dm/pinctrl.h>
+ #include <dm/ofnode.h>
+-#include <fs_loader.h>
++#include <fw_loader.h>
+ #include <linux/bitfield.h>
+ #include <linux/delay.h>
+ #include <linux/iopoll.h>
+diff --git a/include/fs_loader.h b/include/fs_loader.h
+index 3afd9e62b4a..7e16e0f7030 100644
+--- a/include/fs_loader.h
++++ b/include/fs_loader.h
+@@ -65,29 +65,4 @@ int request_firmware_into_buf(struct udevice *dev,
+  */
+ int get_fs_loader(struct udevice **dev);
+ 
+-/**
+- * request_firmware_into_buf_via_script() -
+- * Load firmware using a U-Boot script and copy to buffer
+- * @buf: Pointer to a pointer where the firmware buffer will be stored.
+- * @max_size: Maximum allowed size for the firmware to be loaded.
+- * @script_name: Name of the U-Boot script to execute for firmware loading.
+- * @retsize: Return the actual firmware data size (optional).
+- *
+- * Executes a U-Boot script (@script_name) that loads firmware into
+- * memory and sets the environment variables 'fw_addr' (address) and
+- * 'fw_size' (size in bytes). On success, copies the firmware
+- * from the given address to user buffer @buf.
+- *
+- * The script must set these environment variables:
+- *   fw_addr - Address where firmware is loaded in memory
+- *   fw_size - Size of the firmware in bytes
+- *
+- * The script should be defined in the U-Boot environment, for example:
+- *   env set script_name 'load mmc 0:1 ${loadaddr} firmware.bin &&
+- *   env set fw_addr ${loadaddr} && env set fw_size ${filesize}
+- * Return: 0 on success, negative value on error.
+- */
+-int request_firmware_into_buf_via_script(void *buf, size_t max_size,
+-					 const char *script_name,
+-					 size_t *retsize);
+ #endif
+diff --git a/include/fw_loader.h b/include/fw_loader.h
+new file mode 100644
+index 00000000000..35574482b2b
+--- /dev/null
++++ b/include/fw_loader.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright (C) 2025 Lucien Jheng <lucienzx159@gmail.com>
++ */
++#ifndef _FW_LOADER_H_
++#define _FW_LOADER_H_
 +
- struct nxp_fspi {
- 	struct udevice *dev;
- 	void __iomem *iobase;
-@@ -1101,6 +1110,7 @@ static const struct udevice_id nxp_fspi_ids[] = {
- 	{ .compatible = "nxp,imx8mp-fspi", .data = (ulong)&imx8mm_data, },
- 	{ .compatible = "nxp,imx8qxp-fspi", .data = (ulong)&imx8qxp_data, },
- 	{ .compatible = "nxp,imx8dxl-fspi", .data = (ulong)&imx8dxl_data, },
-+	{ .compatible = "nxp,imx8ulp-fspi", .data = (ulong)&imx8ulp_data, },
- 	{ .compatible = "nxp,imxrt1170-fspi", .data = (ulong)&imxrt1170_data, },
- 	{ }
- };
++/**
++ * request_firmware_into_buf_via_script() -
++ * Load firmware using a U-Boot script and copy to buffer
++ * @buf: Pointer to a pointer where the firmware buffer will be stored.
++ * @max_size: Maximum allowed size for the firmware to be loaded.
++ * @script_name: Name of the U-Boot script to execute for firmware loading.
++ * @retsize: Return the actual firmware data size (optional).
++ *
++ * Executes a U-Boot script (@script_name) that loads firmware into
++ * memory and sets the environment variables 'fw_addr' (address) and
++ * 'fw_size' (size in bytes). On success, copies the firmware
++ * from the given address to user buffer @buf.
++ *
++ * The script must set these environment variables:
++ *   fw_addr - Address where firmware is loaded in memory
++ *   fw_size - Size of the firmware in bytes
++ *
++ * The script should be defined in the U-Boot environment, for example:
++ *   env set script_name 'load mmc 0:1 ${loadaddr} firmware.bin &&
++ *   env set fw_addr ${loadaddr} && env set fw_size ${filesize}
++ * Return: 0 on success, negative value on error.
++ */
++int request_firmware_into_buf_via_script(void *buf, size_t max_size,
++					 const char *script_name,
++					 size_t *retsize);
++
++#endif
+diff --git a/lib/Kconfig b/lib/Kconfig
+index fbc9de90669..d6feee38ed3 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -71,6 +71,14 @@ config DYNAMIC_CRC_TABLE
+ 	  Enable this option to calculate entries for CRC tables at runtime.
+ 	  This can be helpful when reducing the size of the build image
+ 
++config FW_LOADER
++	bool "Enable firmware loader using environment script"
++	depends on CMDLINE
++	depends on ENV_SUPPORT
++	help
++	  Enable this option to make firmware loading using user-provided
++	  U-Boot environment script functionality accessible to U-Boot code.
++
+ config HAVE_ARCH_IOMAP
+ 	bool
+ 	help
+diff --git a/lib/Makefile b/lib/Makefile
+index 2643bfc867c..a2e60668864 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -22,6 +22,8 @@ obj-$(CONFIG_AES) += aes.o
+ obj-$(CONFIG_AES) += aes/
+ obj-$(CONFIG_$(PHASE_)BINMAN_FDT) += binman.o
+ 
++obj-$(CONFIG_FW_LOADER) += fw_loader.o
++
+ ifndef API_BUILD
+ ifneq ($(CONFIG_CHARSET),)
+ obj-y += charset.o
+diff --git a/lib/fw_loader.c b/lib/fw_loader.c
+new file mode 100644
+index 00000000000..207f5fadd1e
+--- /dev/null
++++ b/lib/fw_loader.c
+@@ -0,0 +1,57 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2025 Lucien Jheng <lucienzx159@gmail.com>
++ */
++
++#include <command.h>
++#include <env.h>
++#include <errno.h>
++#include <linux/types.h>
++#include <log.h>
++
++int request_firmware_into_buf_via_script(void *buf, size_t max_size,
++					 const char *script_name,
++					 size_t *retsize)
++{
++	char *args[2] = { "run", (char *)script_name };
++	int ret, repeatable;
++	ulong addr, size;
++
++	if (!buf || !script_name || !max_size)
++		return -EINVAL;
++
++	/* Run the firmware loading script */
++	ret = cmd_process(0, 2, args, &repeatable, NULL);
++	if (ret) {
++		log_err("Firmware loading script '%s' not defined or failed.\n",
++			script_name);
++		return -EINVAL;
++	}
++
++	/* Find out where the firmware got loaded and how long it is */
++	addr = env_get_hex("fw_addr", 0);
++	size = env_get_hex("fw_size", 0);
++
++	/* Clear the variables set by the firmware loading script */
++	env_set("fw_addr", NULL);
++	env_set("fw_size", NULL);
++
++	if (!addr || !size) {
++		log_err("Firmware address (0x%lx) or size (0x%lx) are invalid.\n",
++			addr, size);
++		return -EINVAL;
++	}
++
++	if (size > max_size) {
++		log_err("Loaded firmware size 0x%lx exceeded maximum allowed size 0x%zx.\n",
++			size, max_size);
++		return -E2BIG;
++	}
++
++	if (retsize)
++		*retsize = size;
++
++	memcpy(buf, (void *)addr, size);
++
++	return 0;
++}
 -- 
-2.7.4
+2.51.0
 
