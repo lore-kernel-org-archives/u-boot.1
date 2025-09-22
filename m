@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 297B9CAC5A8
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:20:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB456CAC5A8
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:21:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98DC183211;
-	Mon, 22 Sep 2025 16:20:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 38F6983447;
+	Mon, 22 Sep 2025 16:21:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ECAKIyWE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jU0uTF8z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22B6B83445; Mon, 22 Sep 2025 16:20:27 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 82AB383448; Mon, 22 Sep 2025 16:21:11 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3831082CF4
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:20:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84F6C83443
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:21:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-57e36125e8aso1081885e87.2
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:20:25 -0700 (PDT)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-57bd7f0e5baso1604168e87.3
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758550824; x=1759155624; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1758550869; x=1759155669; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iQcrgZkWR6zZEnB1F2iSQbsuz4sdn9kdNDpVCDmBkYw=;
- b=ECAKIyWERhrni+QZzyT6hZs2YZ0YZk5RmZwDObNP7rs3aVjBIhdNEfivyX5kMayrUT
- X4p/BKq1wsPhE2sCPB5KaZbO+j6uSoqVpVJ6kE9ES25rX9+dUkwNouOMYl5bZDeazyCy
- kYVSps67F1t7eN383jaUoKS9+BKQSFbe+xUOZgbxNv0HXNuFObfmXGlG5HbTY2lEOoEV
- QuG/RQ0zWUAp83ISLIppz5/RerlIxrif7yNfBdxFOvmtoW1shqBHWVB6Pu3x2cNmDYfu
- wI4F0eYA2j1Jrh94AcEfsS4dtzfs8hR0t2krU5/kQIZmhRmL23pjM0YSkndvZgYruqdE
- DASw==
+ bh=Qi3LrhA1FdvffMR/GrhOH2F/XhA+1VZW8esxNbIap3Q=;
+ b=jU0uTF8z4RZMSMo9yXyinwMe+QjcguQvNxcbs/yzJ56Y+DaGH11vIZ5w9bXU6PbP0Y
+ 0cSZJZTSpK6drRV1HofPXWqeikb9XIKHLWmy0cQivslX+tRiuWc0zpzxr7dLqC1fHg4F
+ Q/le/lN+F2RSN2f/Q8H182x+2fm3EZfex9epvSKscpPYO5KscBCUEjp9OOnBGDs9MhXK
+ LHm4mplcsUhzu4K0TWJiHDox3eEzJaPiWYHYpmqz89x2SFuQE07aiDBj+g3KCTVZawhE
+ 95lmY1CmPbLNbASIyUPCeWGsB1mv2zWHPndr7wAdBLwTU3fNRgfJCWq7vnFgAEzwYn8p
+ fDBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758550824; x=1759155624;
+ d=1e100.net; s=20230601; t=1758550869; x=1759155669;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iQcrgZkWR6zZEnB1F2iSQbsuz4sdn9kdNDpVCDmBkYw=;
- b=Cu/ti5TTWjlvV8IRJdzvr48EE6jDb+RXI+7//B3pzimiCiz5ahGEpF3tUqRpcPl3W/
- WbdeOEZDs4pPUg1zDjR3bEcIXIcfTDXGH1uY9EDzdiQKQ5lf3m54xnKBcgcGSbHP1FUP
- 11oKlpHBD+YX8T+MePxUvDXsYqVj8daPmGfLwaBH9NgXJJj3EDBUibc45tV0P9b+OSrY
- YfDqn1bXixKOnk1u8f6ljIWtFRkqn5RPH+xluzKkFdQJkDFyUqpvzsQykFTRWbIpD1Gh
- S510ZQO/3F7MmxE9gm8s5B+cMzpKqQNeWr2DbIuBLfGlnZYTR76JqKd95lHpgIsAxqhz
- zfYA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWAe8n62zL9qeD9RKFMvqM/qX8FiN6xx6ERKkstnu9YotcXgsdEnv2Ic1OsI8O1sAOzxuNqrlc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0AlMnfur96lW2aqXu8PuBLajruzYnVLsatD+GsgFdvhgOJkW9
- robgyetuVvF5WWy87nLDly4ZrP25e8Yruh3sKJnMOS5s0nRJL8wJrqofDnOynto4nvUKtJ9aLI/
- HEHUX7c+GOO5N6NeXmRjOZ4pKPjL1hBk=
-X-Gm-Gg: ASbGncute848OvyN2d4Ia6QYNIxhpd11EZ3rWCYKUWQl4thlkQpbeWD8Byz7Vx7Gmfa
- SY+jE/ltAaHQKZsIa/7Q7xQtJyhucf/T5xn/3ZdnWZB63KBbzhhsfAep0cd75+PcT19unYG8Xnz
- /SdEQyNohw1LEwBoZpnHYi1kBO0SY+5AjLLvXlqnvQ5VOcTjPcFA+9fw31vstAxXhxSSR6fsIEz
- Rj9y0stxEhPDuG1dyvO/Dr7kQUcx5x/jRK8wUE=
-X-Google-Smtp-Source: AGHT+IHnhiKh1UO/dnuuFsKqEJpBzJSvz/eIjH6jArQRyBpMkJ1IRHj8nIDiPta1I4mi4pe6ML7EZqopKhF0aC8r108=
-X-Received: by 2002:a05:6512:6811:b0:57a:33ff:c7fc with SMTP id
- 2adb3069b0e04-57a33ffc8f6mr3457876e87.48.1758550824320; Mon, 22 Sep 2025
- 07:20:24 -0700 (PDT)
+ bh=Qi3LrhA1FdvffMR/GrhOH2F/XhA+1VZW8esxNbIap3Q=;
+ b=OLULp+qg8KpY9yNuoT9gZYkoxpRDjQoOovTON+EhI21LfUZ587A4BBjXADltPZeA8v
+ sX0yhkDysHk6683T10yTXXT+A6achaRKY9YSh4wbnVkUhqVpDWzJVTA0gfSDCpmLHLIB
+ BfkqsBGnS282otkeD8J2cze1dga37bCuVWVimhUx17QFCO8b56TDXZAJrVVXu6vA/CJ/
+ rAJt23GTqGTbnsa/jNeGcTBGIeKu7L3MRkNvjOpZdVTYGjSBdkJSuD1T5kBc4/QcAf60
+ Z7Q/Cb9v3/pOySwDW9D0Ey54Py3zKwUp48clGnIdflTHNXim8H8N4OUBdUBHaIChzJnb
+ OrAQ==
+X-Gm-Message-State: AOJu0Yz0pzVmK/2mw8fAOB0Y9O3VuLYr7fj1I4Bxe/iYU4xFd0lqmUg9
+ R5gcuZKfACistwxVbMfTwsARlfx+BLLP0G82hs68mE8a3FnYVO8d0s797e00lh3vwKI1wpXwhfF
+ U4LDYJu4017gvAPtMs5N4IGeUDgddinc=
+X-Gm-Gg: ASbGncv20toBENZPqFUW5jFMLUBTAemi3zHsp5XdT/+HipqeQiobxqtxUFfgtFqo+29
+ VBa+CoL+9qbDNzBOkhJhYpWIuE5C1Xpmm/sN4XONjPW8AusjxGJN0d4FEBBgD5Nfy5WKWSaULzH
+ y8mwLpnC44qQuoXUEY+jEXNOlGX8OseEFFClYNMfqUZGLvSyOrN3id0tTvjKgmmLb5y4iloXHm6
+ 3Q7tXd7y+BU7hbfJanWph3rOM9151qI6fxUU1o=
+X-Google-Smtp-Source: AGHT+IHRlSBt3niF6efs22Gd48QE8BNubpa6Qd+aa0UmS6Eh50jqYEi5U+6kpcSTBHbcY9bBKPouPmCj59YdZ14/M1U=
+X-Received: by 2002:a05:6512:3089:b0:57c:2474:372b with SMTP id
+ 2adb3069b0e04-57c24743888mr2699250e87.49.1758550868653; Mon, 22 Sep 2025
+ 07:21:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250818043344.GB13772@nxa18884-linux.ap.freescale.net>
- <20250908211838.3772709-1-john.ripple@keysight.com>
-In-Reply-To: <20250908211838.3772709-1-john.ripple@keysight.com>
+References: <20250911095841.3659022-1-ye.li@nxp.com>
+In-Reply-To: <20250911095841.3659022-1-ye.li@nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Sep 2025 11:20:12 -0300
-X-Gm-Features: AS18NWAbytla39HMVuCPpetuC1DVLCf7TrBTBNXf9jsPulVLwsIx3LslJS-hSYw
-Message-ID: <CAOMZO5C-hxz-+4=50pGLtO0Ma4wtaHQFfpGqJJDH9nYC=b8=jQ@mail.gmail.com>
-Subject: Re: [PATCH v3] imx8: Add ahab_commit command
-To: John Ripple <john.ripple@keysight.com>
-Cc: peng.fan@oss.nxp.com, alexander.sverdlin@siemens.com, 
- andrej.valek@siemens.com, hs@denx.de, peng.fan@nxp.com, sbabic@nabladev.com, 
- sr@denx.de, trini@konsulko.com, u-boot@lists.denx.de, uboot-imx@nxp.com
+Date: Mon, 22 Sep 2025 11:20:57 -0300
+X-Gm-Features: AS18NWC4qFt_9D_mLScLkG6nswWx9NTRyVbAsTJR_Ojiz9ySIYF4p0NfQF6LSNA
+Message-ID: <CAOMZO5B9LEWjJZM0L_U1N4E9NWbCnDvDD2G4UfurQ2i6esYZyQ@mail.gmail.com>
+Subject: Re: [PATCH 0/8] Enable PCIE controller on iMX95 EVK
+To: Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
+ alice.guo@nxp.com, ye.li@oss.nxp.com, tharvey@gateworks.com, 
+ sumit.garg@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,20 +94,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 8, 2025 at 6:18=E2=80=AFPM John Ripple <john.ripple@keysight.co=
-m> wrote:
+On Thu, Sep 11, 2025 at 6:59=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
 >
-> The ahab_commit command allows the user to commit into the SECO fuses
-> that control the SRK key revocation information. This is used to Revoke
-> compromised SRK keys.
+> The patch set is used to enable PCIE host controller on iMX95 EVK.
+> We need below driver changes:
+> 1. Add iMX95 support to pcie_dw_imx driver.
+> 2. Add iXM95 blkctrl clock driver which is a abstract of clock gate
+>    in hsio blkctrl for PCIE.
+> 3. Add vin-supply enablement for fixed regulator, since iMX95 EVK
+>    uses two levels regulators in DTS.
+> 4. Fix issue in clk-uclass when assign high clock rate.
 >
-> To use ahab_commit, the boot container must be built with an SRK
-> revocation bit mask that is not 0x0. For the SPSDK provided by NXP, this
-> means setting the 'srk_revoke_mask' option in the config file used to
-> sign the boot container. The 'ahab_commit 0x10' can then be used to commi=
-t
-> the SRK revocation information into the SECO fuses.
+> log on iMX95 19x19 EVK:
 >
-> Signed-off-by: John Ripple <john.ripple@keysight.com>
+>       u-boot=3D> pci
+>       BusDevFun  VendorId   DeviceId   Device Class       Sub-Class
+>       _____________________________________________________________
+>       00.00.00   0x1131     0xe101     Network controller      0x00
+>       00.01.00   0x1131     0xe001     Base system peripheral  0x07
+>       01.00.00   0x1131     0xee00     Base system peripheral  0x80
+>       01.01.00   0x1131     0xe001     Base system peripheral  0x07
+>       02.00.00   0x1131     0x0000     Bridge device           0x04
+>       03.00.00   0x1b4b     0x2b43     Network controller      0x00
+>       03.00.01   0x1b4b     0x2b44     Network controller      0x00
+>       PCIE-4: Link down
 
-Applied to next, thanks.
+Applied the series to -next, thanks.
