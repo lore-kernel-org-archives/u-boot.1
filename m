@@ -4,182 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB46CCA100F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:54:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 546D5CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 15:55:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DFA682CF4;
-	Mon, 22 Sep 2025 16:54:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6EC94833ED;
+	Mon, 22 Sep 2025 17:55:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="lTklU+91";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ITRrPfbY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 845A2833ED; Mon, 22 Sep 2025 16:54:40 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C5DBB8341C; Mon, 22 Sep 2025 17:55:28 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 113D182998
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:54:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E71783211
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 17:55:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=13602f48ad=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58MEWf0Q027200;
- Mon, 22 Sep 2025 16:54:37 +0200
-Received: from osppr02cu001.outbound.protection.outlook.com
- (mail-norwayeastazon11013064.outbound.protection.outlook.com [40.107.159.64])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 49a77kx5sy-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 22 Sep 2025 16:54:36 +0200 (MEST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iBhpid3kFogxW7k8+T66HfthBY7EoCtJqar7ODWa6qEwTeoABTnX8yoFe33acYKWkU93FjMqpXb22AdLVfmUjPY/lwKOUV0+YhmWKRgvCUYZqFg75Cl98SCxWrukYuYMvG5KHdVoYx+mkhpjb+OrIvCHCwBn1KEqHDB+I9cECSGfYSoG/m6Przmh3ct95w0AXFAZCIsEjm/p0LT4P/t2gMcCt5NcS6RUtvxqXT8HcCLEWEn+AyrK3Unp5qFLCf7a25dUbBlouIpEfOARnY8SKQXtB9/9i66RXXl41IFj5Iv9zr9UuZuCLaGtMRNNvGS6kbTCqiFYvMGdQ9sV4HMkNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=83AMO4cmqFXzgDn1yXgxpdMzOifvYku8UdaMTx1g55o=;
- b=orEiXt3sK45YxDT4qKTs1pKFQmKdcx4m+Wf6UXjqBTFjoTWKi2BfDUZntGgCmeP01x7d9yPzDFLS63cit6f0e0Wgcy31dZV9VYZqjp4uurJLEUJvPWmjcWE2ZykewGZMPeeREDSSGm+AoRhy1cEuSI7Aks07tDskx6d2BXA/E1wEn0rgFqe/684UVmwX8zGaF6zWLFHVRgDGVTIp8KFFC3HiAkLx8vSrG4p38kA6nWq9Rk2LgyJELwrU39V+uXQ9+9pp44i25Gi9h7s1KO6mvZjAZXZ3T0m8Ifm4I0cfk+Jd+u7UVVTT3jOdN8Bq/0/aXPOXBGRkr5X2kpOA8VN4Aw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.44) smtp.rcpttodomain=konsulko.com smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=83AMO4cmqFXzgDn1yXgxpdMzOifvYku8UdaMTx1g55o=;
- b=lTklU+91YKfN5PruFyUgV+gIENpIcuy5P/deWmOmT0izYW0Vujw0+7w7Johb0NvUFWSJrR0eyq2CF+fx0VoWASC7DVaChNHXeg7KUdsYzMQpWgUon/W+pvsGmI76UaDF+z7mLwJSM5yMF+l4s/U4WETPM4hjokA+ngA2UsNsJWKd4GWKVkFILI56Y56KL0H/Q8NUvkTpNZonkAIXnOpeJE1ItR3ZhG1xWUp78fMIW4dQHpI12siDcGNqwwgVhiZ0szoozYbqEN8LQztNVqLsYZZQXpgI+mLgPtCXU2tZl6dn7NqrzGzSt5zxGQaTJVALYUQ4xPlh8qs3Po/eFLp0eA==
-Received: from PR0P264CA0157.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1b::25)
- by PA1PR10MB9121.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:451::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.20; Mon, 22 Sep
- 2025 14:54:30 +0000
-Received: from AMS0EPF000001A2.eurprd05.prod.outlook.com
- (2603:10a6:100:1b:cafe::c9) by PR0P264CA0157.outlook.office365.com
- (2603:10a6:100:1b::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.20 via Frontend Transport; Mon,
- 22 Sep 2025 14:54:30 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.44)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.44 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.44; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.44) by
- AMS0EPF000001A2.mail.protection.outlook.com (10.167.16.235) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9137.12 via Frontend Transport; Mon, 22 Sep 2025 14:54:29 +0000
-Received: from SHFDAG1NODE1.st.com (10.75.129.69) by smtpO365.st.com
- (10.250.44.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Mon, 22 Sep
- 2025 16:47:09 +0200
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Mon, 22 Sep
- 2025 16:54:29 +0200
-Message-ID: <4facaa5a-c7b0-48ea-8863-0324ae1bc780@foss.st.com>
-Date: Mon, 22 Sep 2025 16:54:29 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-34207c1bdaeso426622fac.3
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 08:55:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1758556525; x=1759161325; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RsC1fB3MV4e7g0CU2rEKBerwEkwATRePrze5d/4oeT0=;
+ b=ITRrPfbYOzNxd6WydFNCfxArXRgC0VLXjBrVpqdX7hAAHcn7dzYSMRTlYMTRVaGyJb
+ MpqAgm9GmEs3/QvjTYFio/hPDV1sId2nsxx3HiOuwytHww2rjPiKdgjIIqH1ujXkLlsG
+ NSKLKdvynY9ZSlPwNgNzPbl1KIoBIHP6nXnuU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758556525; x=1759161325;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RsC1fB3MV4e7g0CU2rEKBerwEkwATRePrze5d/4oeT0=;
+ b=X6QhT1ajVLfYIveCH4OLxNsfbdtRnZ6mUE6qQr56ofGp7CuOjH0n6NFHAaBhmZwbp6
+ F7O4crg2IUrC2N0X8mp/mAirOW2/6h/3LG/dJIY4vGowLXJDU1/TFrpHMzjsrMssk7Iz
+ AV2hwcT9VqphUBlvZNMglFTzFxXJrYQTOp+qUNcCAYczJY1VXKFSB4Z62JLTPtTw67o1
+ JPrrPRM7lIhR+SbzAHY+zhkGPcUSy2s6XVAwWPTLqI7iZ5a4hFJJPEAA3Rh0vMieykNb
+ b5qwtXe+09aASwvuc5eGXUX2+OnHfUXhuwFJP5Md9RcVdlrp6+wswh7DTFNh3eaBlQrY
+ s63Q==
+X-Gm-Message-State: AOJu0Yx9RIoaDpickX/cw3lElWHyRMH01Z7h8G+TXK0yV3NMCVO9JXBp
+ 5GtcaPvHCgQpdOTqTm+qQJkPdJV4b8vrvXJ8kiSbgQxjwq0Q8kCurvsBmVL5C4Her/s=
+X-Gm-Gg: ASbGncsQ60sL0F/ZFVi/VB7b2l/Dhq+6HUilFdkIdtKpeOcUl9EZ0f1g3WG1jXb7R+t
+ GQdN37EXsN+1fivdpIgENVyrS2dmpaYiY5yufkMIIWj8ms9SRiF6YYJOb+X24YEIbVGu6YHB8l5
+ o9qE2jTKRrTrLgkQKjsqFYC6WKAAMI/h9yS5N/X4pa5kO8DZsCp9aMD96yDASiuHt/jvrvInyu4
+ VZEHHCer0VBZPO4sWO1aYP46s4wO6muuQ1cpieud6o+LY/YJ4q0mTtai5STpTS+EJDBCwiuSPcv
+ uZdJOBXSlhqrkpOpNoegsmGOLSYYS/sfe9SVhMDvTd0PXOu1drmbbZlg+1WYJegj9n/Tthe0fJO
+ EPzYQq+ubPPgfqjjGnp+R80weXeB6EpZTMsiWl8dWdgsH+CXKkACs7YNF
+X-Google-Smtp-Source: AGHT+IHIEbeVDceiock1SdzFwlsf+M5PpdMqPeYyWitotx3dKELB6w54cw80eqVWFhN/rzEZfYrUwg==
+X-Received: by 2002:a05:6870:148c:b0:322:5c2d:58c9 with SMTP id
+ 586e51a60fabf-33bb5b6c0e2mr6426657fac.24.1758556524927; 
+ Mon, 22 Sep 2025 08:55:24 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-341ec028f4fsm1361194fac.14.2025.09.22.08.55.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Sep 2025 08:55:24 -0700 (PDT)
+Date: Mon, 22 Sep 2025 09:55:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250922
+Message-ID: <20250922155522.GC124814@bill-the-cat>
+References: <20250922141915.208136-1-festevam@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PULL] Pull request for u-boot next / v2026.01 =
- u-boot-stm32-20250919
-To: Tom Rini <trini@konsulko.com>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, Gatien CHEVALLIER
- <gatien.chevallier@foss.st.com>
-References: <e7ce25bf-c64c-47bf-be8a-158756058ead@foss.st.com>
- <20250919141110.GU124814@bill-the-cat>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250919141110.GU124814@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001A2:EE_|PA1PR10MB9121:EE_
-X-MS-Office365-Filtering-Correlation-Id: 872b5991-d436-4cd3-c88a-08ddf9e7ef11
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014|13003099007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NGc1UUdmOEk2RU91S1Y1SDBqZHZBWTB4Mk81V3NhLzF5QmxUM2p2SmhTKzFZ?=
- =?utf-8?B?aCtPWmxhSFcxdzdQTmpQTWloMHZVYlNLZWtRNUdtdTNGZE16NDFBNDZLVVZM?=
- =?utf-8?B?allpNnd2OERxTUJUQ2tGcTErVk0zc0U4cFNTc3ZtYkdvTkJTUS90ZnJCZDVa?=
- =?utf-8?B?bmZBY3EreUNmV0RGckNtVWs1MHVUWklNTmczM2M3NUN3TTZXeUJYY0hNNlFz?=
- =?utf-8?B?ZW9ia0wrdEZJWCtockRuY0ttRFRpdGZmdmdkcDVlNzltVU15aTVNaHM0STNk?=
- =?utf-8?B?V3J2WjhwL2RXdHlNamdmM25SKy9sVzI1d0pWR1Jxb25sUnJmTmdKOTJEa3R3?=
- =?utf-8?B?UTE2ZG81bGZhdjNRMWZtSWZEM0h3UXpmalM2SHFvby9ZcVI4SVMzTFdHRjJi?=
- =?utf-8?B?Y1ptaFBTYzRYM0hNblBxU2lhVDZSMDMzYmFVT3QvTjBMaGNKQXV0ekRLSmho?=
- =?utf-8?B?N1NMWkQwT01TZVNkWXl5ZmpLNU95d3JwV3NsalVoVTMxVWs4L1F6Y3FqU3d6?=
- =?utf-8?B?QzY5TksrYUVhNTdhVzZLamhma0R4S3VPb01hdG5rMlF6Z2QxcGdxQ0l1cWpq?=
- =?utf-8?B?dmpDeDhqZUg2eFBNTThBVld2b0RjT2Q0SGJxaXpub2MrK25YbjVRcUZYZDRS?=
- =?utf-8?B?T1BuMWQ0WW5YOXhTZFh5elo4T0M5Tk1mMlVSdmFyb1AweWN5R3ozUkZuM0Qx?=
- =?utf-8?B?ZG1sbTM0Z3loVmgwVGxrS1dvRGhNWG5aTGdHU3F3NVRBK1pYemYzUDhtTTFa?=
- =?utf-8?B?Yk5PMVVUOU1LUHZLMkx1OTc5V04yQTJpc3F4R2lLSlR2WDdhV2d3bmtOczdZ?=
- =?utf-8?B?bzkvSUJnT1E3ZitCRDZEMXlMWVA3czFVd29CSzEwcWgzZGNrbXI4Rm1pVkp2?=
- =?utf-8?B?NTQ0RnhnSXRYNzdKTFU0K3RkUVY5MDU5OTlSUmkvWjlYSU1WMndXc2UvbVlQ?=
- =?utf-8?B?M0tZQXVCOHZ4WStsU1k1Vm9xcWJPYWdZcHZxeDM0N3pyL21qUWhGN3ZEcmJM?=
- =?utf-8?B?SExnSDRZUnZmZzJHNkZnTVFPblA3NkdUM0hNRHlPZjRFaCtVRFVhLzNseURY?=
- =?utf-8?B?OU56dkVZNUVWZnA1RlB1UGU5YXFWY0NPbWkrbFJka1c5TWI5V1dKRXJ5eDhT?=
- =?utf-8?B?elVTVmZMY3NJRDVtR0JwL1I5RG1EM1VvSzVSaVVrd3JZcmp2Ulc3SjlkZjBt?=
- =?utf-8?B?K2MzbHJDMTQwVnNtbFNMZTNEOEtyalRIWjk4M2VacjErSjk0ZnVySWJUMlNC?=
- =?utf-8?B?WnVBamNUQjVpQTZtUzFLU2ppcE5iU3N2RE5xYndtNWdXU21lNFlOUkFybFJJ?=
- =?utf-8?B?Ni91MjAxVXA4d0tlWCtHakJIRm9kZTM3VWNjQ1JVaXpKVzcrbXpIRGk5WnFO?=
- =?utf-8?B?TnJ6OXo3eUUzWGVqTjZuS3lackp3bFFQTDNjZDVrMUx0MFVKbElBOFB6Mllz?=
- =?utf-8?B?MUgyL0p2NTRmdmhoVkpLOEtacDNxVVN6N0psNzRxOWM5bzNPenRGd3lGK0lB?=
- =?utf-8?B?ODBOQit2YWdtLyt0WWVoSmZCbjI5ZHh0MXgvZXM4QlRQUER5WmI4SGR2MVRr?=
- =?utf-8?B?eXIxdFViNnVoTEFLL3IwMGRHMmRBa2NDc3Z5bDhnR2ZWYXFBN3QzOHRnZEhz?=
- =?utf-8?B?bnpYdXZBVVFHazFEZWVjRll5TEhBbDRWRHVWdk9WaDRnbkhnRytWbVpFMXhm?=
- =?utf-8?B?cmd1dlBZZHJ3ZFowUlZkWFJNb3A2VTRPaEc0TW50QjJQSTVkbFMvK1Z4d0NG?=
- =?utf-8?B?SStSUXlsWFlBYXY2YkF1Zmh2R3Izcm9aZ0R2V3JzeHd2VU9BT0RwWEFPMVVj?=
- =?utf-8?B?bUMvSTBZZ1MvUDROVWV2UjlQd3BVRFVDdU9td1JqSEcraFN2RFNEVEFuSldU?=
- =?utf-8?B?OUNvbzUvb2g3QjBXQ0dSSDloaXk4KzUvRnlhcHJZcUtxNUZNL2phRDJLM3du?=
- =?utf-8?B?Z3RYM3ZxS3NnSW44bGMxckozL1VSQWV2QjYxc25Nc3FJc2xoZkxaKzFCazd4?=
- =?utf-8?B?UkhSMXEybFcvU0s5Q0tUZUdjV25FMDg2enIvWmJMckpvVVAzUmhyc2t4STl5?=
- =?utf-8?Q?U/5VNm?=
-X-Forefront-Antispam-Report: CIP:164.130.1.44; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014)(13003099007);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2025 14:54:29.8982 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 872b5991-d436-4cd3-c88a-08ddf9e7ef11
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.44];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001A2.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB9121
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTIxMDAwNSBTYWx0ZWRfX70n1fvVc6nna
- CmUP8+3PR1K1gu47bx0R77Mm3STktXBTBLaWzpboOvaFoxRPdGnR+kAV/1MBmV+Md4ZVIa7yzzH
- Bc+3eUCQyVTbvMfzllqo9Wnl9/9dyIPGEK/1acIcLrjRxdXQo1H5oNXKpGT4EA13s4k27aZhqxf
- Nl9jZWlqLTqBS58Fmf52iuI+HRLaC5Hz9/s3uYPuHxVjY4YJh+H99PkCvdUcA8HSTqE/lPq1qJp
- EBGTO2zkapjLKmKxaUawHI7w7iJG/Csz71SlocyZ3EK+HYbDKcIetH4Pb8Td9zeSKThdIEZqa5R
- irchjjd3bAbLGMEoJh2bz6r7waL8TXpSYu3uhIg07vJZOhy43COstPAjAg1TGp+VaYt7cZ+GQdx
- C6NXkaxj
-X-Authority-Analysis: v=2.4 cv=H6Tbw/Yi c=1 sm=1 tr=0 ts=68d1632c cx=c_pps
- a=JRzJ8T7PdTfL/uBtHARA3w==:117 a=Tm9wYGWyy1fMlzdxM1lUeQ==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=h8e1o3o8w34MuCiiGQrqVE4VwXA=:19
- a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
- a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=SAHXIHsbQyQA:10 a=IkcTkHD0fZMA:10
- a=yJojWOMRYYMA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10 a=YfCOm-DyAAAA:8
- a=SSninbzh35AtQip9lr4A:9 a=QEXdDO2ut3YA:10 a=zQLMK8awuJ6_Hvp-_9Ux:22
-X-Proofpoint-ORIG-GUID: C00oMHyBaFgdqFIpOlrezDg9NE3tLkhE
-X-Proofpoint-GUID: C00oMHyBaFgdqFIpOlrezDg9NE3tLkhE
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-09-22_01,2025-09-22_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- phishscore=0 bulkscore=0
- adultscore=0 clxscore=1015 spamscore=0 priorityscore=1501 impostorscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.19.0-2507300000
- definitions=main-2509210005
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gSdOwfBi4dtI+gRi"
+Content-Disposition: inline
+In-Reply-To: <20250922141915.208136-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -197,22 +96,89 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--gSdOwfBi4dtI+gRi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 9/19/25 16:11, Tom Rini wrote:
-> On Fri, Sep 19, 2025 at 08:36:18AM +0200, Patrice CHOTARD wrote:
-> 
->> Hi Tom, 
->>
->> Please pull the STM32 related patches for u-boot/next, v2026.01 = u-boot-stm32-20250919
->>
->> CI status: https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/27668
-> 
-> I just noticed to start looking at this yesterday. The 'tristate'
-> keyword is meaningless in U-Boot, we only use bool. I've fixed this up
-> in the merge commit.
+On Mon, Sep 22, 2025 at 11:19:15AM -0300, Fabio Estevam wrote:
 
-OK thanks for taking care of this point ;-)
+> Hi Tom,
+>=20
+> Please pull from u-boot-imx/next, thanks.
+>=20
+> The following changes since commit 464800d91b036cfd2df26598d8df2ac72d4569=
+dd:
+>=20
+>   Merge branch 'next' of https://source.denx.de/u-boot/custodians/u-boot-=
+riscv into next (2025-09-20 10:02:00 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-next-20250922
+>=20
+> for you to fetch changes up to 424103865662603d821028734ecddda8802e43b3:
+>=20
+>   doc: phytec: imx8m: Style and firmware update (2025-09-20 17:48:20 -030=
+0)
+>=20
+> u-boot-imx-next-20250922
+> ------------------------
+>=20
+> CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/27684
+>=20
+> - Add i.MX8 ahab-commit command.
+> - Add support for flashing board with UUU on imx93_frdm.
+> - Fix the acces of PFUZE100 regulator desc.
+> - Add more i.MX6 PWM clock definitions.
+> - Enable OP-TEE on phytec-imx8m and update documentation.
+> - Enable PCI host controller on iMX95 19x19 EVK.
+> ----------------------------------------------------------------
+> John Ripple (1):
+>       imx8: Add ahab_commit command
+>=20
+> Mathieu Dubois-Briand (1):
+>       imx93_frdm: Add support for flashing board with UUU
+>=20
+> Peng Fan (1):
+>       power: regulator: pfuze100: Fix accessing the regulator desc
+>=20
+> Ricardo Simoes (1):
+>       clk: imx6q: Add definition for missing PWM clocks
+>=20
+> Yannic Moog (3):
+>       phytec-imx8m boards: enable OP-TEE for KASLR
+>       doc: phytec: update imx8m docs for optee builds
+>       doc: phytec: imx8m: Style and firmware update
+>=20
+> Ye Li (8):
+>       pci: dw: Fix wrong register used for PCI_COMMAND
+>       pci: pcie_dw_imx: Add iMX9 support to the driver
+>       clk: imx: Add imx95 blkctrl clock driver
+>       power: regulator: Add vin-supply for GPIO and Fixed regulators
+>       clk: clk-uclass: Fix clk_set_default_rates issue
+>       arm: dts: imx95: Assign HSIOPLL_VCO as HSIOPLL parent clock
+>       arm: dts: imx95-evk: set alias for enetc PCI buses
+>       imx95_evk: Enable PCI host controller on iMX95 19x19 EVK
 
-Patrice
+Looking at checkpatch.pl output, there's a lot of spacing warnings on
+both drivers/clk/imx/clk-imx95-blkctrl.c and drivers/pci/pcie_dw_imx.c
+and I've gone and fixed them up in the merge commit. But, to the
+authors, please try and fix these before posting, thanks.
 
-> 
+--=20
+Tom
+
+--gSdOwfBi4dtI+gRi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNFxZgAKCRAr4qD1Cr/k
+CgONAQC8q4XpezRdBfNlvco/x8Rwo6mVfpYJj7ezXXmyI9WsGwD+Kr/4/Ast0TOf
+gFob9VQ9sTMwhgkzfa0duGsTT2rFWwg=
+=lTC4
+-----END PGP SIGNATURE-----
+
+--gSdOwfBi4dtI+gRi--
