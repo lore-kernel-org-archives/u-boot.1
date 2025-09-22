@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025A8CAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:23:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 656B1CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 14:24:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C36083443;
-	Mon, 22 Sep 2025 16:23:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5749834D4;
+	Mon, 22 Sep 2025 16:24:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JGCyHMEx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XN2whPD7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D5CB8344E; Mon, 22 Sep 2025 16:23:29 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id CF544834E1; Mon, 22 Sep 2025 16:24:22 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EA72832F9
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:23:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E0B7683443
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 16:24:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-57bf912cbf6so1788560e87.3
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:23:27 -0700 (PDT)
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-57dfd0b6cd7so1451328e87.0
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 07:24:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758551006; x=1759155806; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1758551060; x=1759155860; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DDNtGmnnGxaP2jX8f2dkyC9vlhWYD4io8sXW/Wmrg9g=;
- b=JGCyHMEx2rPVo6AtsOBtDSTiJ7GkKu+dn8iHSACym7hBDeXdDXtRQWAoMawYFcSZOF
- FRMnrepzbqBdS5ncqwTG+GlEWFhi1jSZYesB2Bu1NLSQKPvVjp9W8LcnqWq9xc5lr0/S
- dcaX942oqVsqGA+M/SsnZvBu5JaxASeQXW16dY6sZfJ5Ufnsamigs8Qp8x0vzRJjlDbx
- TY4+e5M8yv4xfRyndMuiORVojKgOUs/WGiixCKBnbDUWWVWnfwZmP4y/KOAjEcVDnssS
- YLTM4pZn+LJlxrk9jx/pyV2zFNp04Bc0L7I7G5w7A9ydFN088osYvSSV5VSsHlnNgs1b
- dD1Q==
+ bh=wyBITM7UIQpFksBii69ut4MPwZWiH987aGV9fr+615w=;
+ b=XN2whPD70iDX6nmZswi/AGdn7QkfpdxQj0pHKXEUs863v5kq7F++Qz1hOqmsN+T7oQ
+ 1Ln1K8fKx7pmmafIJVnYs2ptamHIfVEBxyp2nbhdHn1rCh1O0+a4dn9eaMSJw19wDqkR
+ 3/KKhDibo034pILSu/ZUgIKNwXElW7IsbMpb0dYOjvkFNIah7UXTNEQl0P15AxKas8qd
+ WJj8jfssmOqCCKzpIsq/bxIC6+UO1YlV9ZJTvUfaziDcPzdmz7xPl6KDjCZnOj9UDZ2C
+ j+Dl7Hc8vQvRn8j+4zZ7CYcnu/yGNk5xX4f5OtbID6QBmzHKQql6P4GSJ+QXrS3NiiMs
+ 8uRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758551006; x=1759155806;
+ d=1e100.net; s=20230601; t=1758551060; x=1759155860;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DDNtGmnnGxaP2jX8f2dkyC9vlhWYD4io8sXW/Wmrg9g=;
- b=Xfve9QHmfX0t8vT/5i4ujvGNMcHkkj6X1Sgit93HjuPdxukmhCW3FPuDYoTaaM4o9R
- Q9zWFEx/lEB1Istmkw7w5w6bwwxvbdC2VvXJLAb/Nz2vcjFY8BgfYwsGwwkbJYONo9Z3
- cEDY5nTAiC6mpkKOre55LY3RQZ5bNEUAbgIB1HhwGwpuSG4GONflhxwQYHP6AJIKGGd1
- 0ocDkhTPJSFFBqCNwOckMEGXqdPTJCg+Chab61WOVY1W4NYVPd3vXmn4KY9KOlkkeLzv
- wz5H7/XI02s2B0S/OdlxQTcRz7Q+ASvV4UmTv3psjOgNPppamh8LRqae1qdD+VeQS3Z3
- 7noQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0a7yiA0LzwIALjxkr8NRBuGHAvbYOsXjSzZ8mpBmlHsWREwbrBrVrv3KvsxZ5TOynUXWAzck=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtWzHU5PsfJQZmZxLrlfLQ8S4z7DgupQnbHy6WtL2poK1lWqcF
- 4BOtnAqSlINVAkOW4xLgwDLB8Hv1w36VpVLEJGutLvpEjbV411wIdFSTXgkUuCtCAXeROpTwQTD
- Af6U8h61IXoubyJP38ZH54tPjNuMwHdM=
-X-Gm-Gg: ASbGncs2xW1tBsrMb8OXH/eOYErLXcXo6rNJ1IkYpZIn73lMdGotYErxaMm7KhHZ3p7
- WgxK1XUFbZ5GWBINyZpO4OQgHX+cq7aaYDE4Pq8xDvFDATlPxkHwgGDEYLxfoNQUjuVKetbgx+Y
- 42xFupFXrLJolYJDOIGOdL4DEF6EbsIn+H/HZ8Gzm23av/kvwePZCJOLtpirZEDi926TZBibWQU
- x4qsgvF0Hhf8WQCkckOJA9GmORyLz8+uV0MoNs=
-X-Google-Smtp-Source: AGHT+IHmnMgAw4UUfNF79T3xQSAOTb8A7w+/R8UxpNI77Ns8wW8HjAytPHU1LCP3othbznpbFqNSCYU3faA9VhNJ6Qw=
-X-Received: by 2002:a05:6512:3a95:b0:57b:6e38:654e with SMTP id
- 2adb3069b0e04-57b6e3871d9mr3070893e87.7.1758551006382; Mon, 22 Sep 2025
- 07:23:26 -0700 (PDT)
+ bh=wyBITM7UIQpFksBii69ut4MPwZWiH987aGV9fr+615w=;
+ b=jvjbwvtyE8SUNOGQ1/8CZZRgYXdzzOhjqi5rnpYuiJKdVMSJ/1RqROVzj0/TIeiQGt
+ i41HgA8NNcmbhtQjoxWkK+/0xl33tNN18r3mbyOwYD0triGImi4tIQFGpOSG/cUdcdLE
+ GBeb/EHTsnM+gDO/Qk9k+kFtu2PK+41wJKpj19ZT23w6H4cDGT/Gc+s7AC1COlH4zXKS
+ WkLIljKPcsgfdyqW1s1UM7lfzKk8V8jRAAmsUmLKOETxgSCLilLfR0MwkZwXdoNk9bJF
+ Y2mBcxvQsqUvDehqyITzml4XVUdNSoGujf54v2D8OXfVzUyRhZv5E0lgoNs7tocwzd5n
+ XL1Q==
+X-Gm-Message-State: AOJu0YxQviGH/qOULeP3aKjV+zvI89PT20hBClP42pogn9ZH5BjWSJea
+ K7Zrp0kbQCPZx/IErpfcEjluEEMqLtUb11wLXyvSvBTkrA8rEHpJgF+5oESZjgiQivuqt49gsvX
+ x5QXj2tVdqYLmBzN1Nu0ieDBBFJ3bdvE=
+X-Gm-Gg: ASbGncspWmAf8bcQjgvl3ZtpcpNUi64pj2ykT8XpBhcDKunR37XIZBxpjfQmD6HST2k
+ MjFSe1vtabs2p99WjIkVOsRisNxPk86sOBHfAhksAylLPTfk/ifqABA4xEtgVqHzGQ5xtOcn/Zs
+ fgztmvNxcfbfwIeKkvDinfvp24OCsMLPkCvt+xC2aNXgfymisKKpecMsKlBf6j+A5Kw2wJ+FUgY
+ S6GHw5o9XZOvkGLnuZmk4l76EygtaYDWRYcLrw=
+X-Google-Smtp-Source: AGHT+IFg7GSVgZcacu8hEER4zqKDi17wXDSlXkYkZ0X7mOxIXr+aKCsbGARdGaDtWwY+tpAW2ZETalZgRLYDIXYdFJI=
+X-Received: by 2002:a05:6512:3e2a:b0:568:c51:e7cb with SMTP id
+ 2adb3069b0e04-579e2db7fdbmr4731765e87.52.1758551060053; Mon, 22 Sep 2025
+ 07:24:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250918-imx8m-optee-enable-v5-0-ecbe0b583b94@phytec.de>
-In-Reply-To: <20250918-imx8m-optee-enable-v5-0-ecbe0b583b94@phytec.de>
+References: <20250919065834.1497068-1-ye.li@nxp.com>
+In-Reply-To: <20250919065834.1497068-1-ye.li@nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 22 Sep 2025 11:23:14 -0300
-X-Gm-Features: AS18NWCEIWXxf1XEk5G_pp4r9URHah-kea3BO3xEauGoY2cIiFxw57O5ASPkVWw
-Message-ID: <CAOMZO5A2f6yS+pgsYxwHLAx1-tmjxko3JvfN57OsUY0V+Wo3Dw@mail.gmail.com>
-Subject: Re: [PATCH v5 0/3] PHYTEC imx8m boards: enable OP-TEE as default
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>,
- u-boot@lists.denx.de, 
- upstream@lists.phytec.de, Benjamin Hahn <b.hahn@phytec.de>, 
- Yashwanth Varakala <y.varakala@phytec.de>, Jan Remmet <j.remmet@phytec.de>
+Date: Mon, 22 Sep 2025 11:24:06 -0300
+X-Gm-Features: AS18NWBepkowo8M5EfhPINcVVcYutjzU9HiSyPsRQP-5943Z36R44NsuSBzZ2HE
+Message-ID: <CAOMZO5BwY497Y6q32gtET_=pEUZV83f9awzka0VU5ZBeveUf-g@mail.gmail.com>
+Subject: Re: [PATCH] imx: imx8ulp: Call DM post init function for init_r phase
+To: Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
+ alice.guo@nxp.com, ye.li@oss.nxp.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,16 +93,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 18, 2025 at 3:14=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrot=
-e:
+On Fri, Sep 19, 2025 at 3:59=E2=80=AFAM Ye Li <ye.li@nxp.com> wrote:
 >
-> OPTEE config was unset by default and the doc for the boards was not
-> quite accurate as TEE configs must be enabled first in order to be able
-> to build with OP-TEE support.
-> This series enables the config by default, i.e. when wanting to build
-> without OP-TEE now, configs need to be modified.
-> Update and clean up the documentation:
-> Change instructions on how to build bootable image with the new OP-TEE
-> related changes.
+> The ELE MU driver needs to be probed at init_r phase as well because
+> some ELE APIs will be called.
+>
+> Signed-off-by: Ye Li <ye.li@nxp.com>
 
-Applied the series to -next, thanks.
+Applied to -master, thanks.
