@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6616ACAC5A7
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 09:37:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D20E2CAC5AC
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 09:37:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3090483280;
+	by phobos.denx.de (Postfix) with ESMTP id 8FE508340C;
 	Mon, 22 Sep 2025 11:36:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vbW/mI42";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YaE2maWm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D73D383211; Mon, 22 Sep 2025 11:36:52 +0200 (CEST)
+ id 88784833F9; Mon, 22 Sep 2025 11:36:54 +0200 (CEST)
 Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
  [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE27F832F9
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 11:36:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E79E3833E8
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 11:36:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
 Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3ee12332f3dso4141729f8f.2
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 02:36:50 -0700 (PDT)
+ ffacd0b85a97d-3ee64bc6b85so2787256f8f.3
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 02:36:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758533810; x=1759138610; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1758533811; x=1759138611; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wqqpzgE2HNyI5+8VxwdBI2UkeOxriyYRbRE47AdsEVc=;
- b=vbW/mI42qg6Bjotn5HcW7/NQkupt9I8Ptylomw7WMW97M4O2duHw5x1bN3w8878JPb
- dyJGL05ubgDaEu536S4XZqOa2gNLLABynU4KSiaY+u7soDLkVucBiL0R9YDN2TxJx4xp
- Sw87+KNhLMhid7vtds/IIWqvr5HQFZFRzhG1pEuEqH/c5WtcbN+Dk1ROqvuNPfg3ZS/0
- I12Hs7zbHEQDxS9rQuV/gWHajvDVDCRL+55U2mcdrIcZNjty+ZIUje/nqMzYWHtXpgDD
- /qvFz55umhSXXzmLhl+ws0gQDHEYCoJa3s7wiYyc0/4crpYimh6J4xn6jgPAz/GBoYCo
- bUQw==
+ bh=hGu4/bXKM7lUcNH48gpVT0m2A1N8DJGofrMOFUm9XqM=;
+ b=YaE2maWmIXw61hfPQOl+AwIrOZ1s46DWjusNWtPnTAq/9UMli/SFFhNVyw4W/+581C
+ YNJfivkOiqqC1+xL6ocW+Xdic17f7p8v3ghwv6pAJG/PbnCZvFgkMIrmMiOLp2bUmhXl
+ mXSSINefK0Tlbf1ASTpRXaPU1Q83/R/WyD3QKixlxgDQ/ZinP9RdspdUrqx6sQ7R1Yv4
+ E1+/Nf99RtSW2h+H0weKTBf/IGH8rMbn/Z1vXSlhx0ppYzYwAnVbErNaqacn9A533OzJ
+ +FfKw3VBVEX4cpDwj/v+c0MZ6iG95/VSKtgQQJcDCqQ6QYcdEySAlmRfu2mUOZsbLHYX
+ C2Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758533810; x=1759138610;
+ d=1e100.net; s=20230601; t=1758533811; x=1759138611;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wqqpzgE2HNyI5+8VxwdBI2UkeOxriyYRbRE47AdsEVc=;
- b=jggOEpElxn6TGVpS5EzY4ImOw+QzzlwWynEmzGCsR8FPhxIigTdpd62Mx1UsV5qnd9
- vYuy3qnTS0v1MyB32gg9GGr6KVqPnUZD/27q62/2VakEBfTxIScI/qstIpZZ8IoalO/l
- GEOALLBhE4CxjbRPm+r2HAU3L56rOOAw0vhqpM+Pt/fDpTVMaLW0/H6W5WTgNrTP78gd
- VqxV1FMh+WbXn/KUVnogr+meXeb1bypCf7rI08UYfkYQUQZyZbT+R+/w2gBEuLfWqrzo
- GzmROgl5j2Gp10yCfUbBs2rrstYUqjtedVFqmhJjtYVKf2iVGd1zs5/WlF1PowRBHHdk
- Go0Q==
-X-Gm-Message-State: AOJu0Yw1Y/+i7+Xtcei49KjtDKjOQtkwisymv83ZoXAZHrZyVvY2XIXD
- D90M45PXDvZMmWPSb8AcoDAQbbsR1eiFzavbJ9Wxv+shU+qr/Z4rCtRS3cT5ZFFyWxkRLoRCl/J
- KQPkqPWc=
-X-Gm-Gg: ASbGncuQD7AxtUU7gtbBZvOKY+omPhJeacO22F3Tb6PGtZCYzIrPAF1vmQN92hwBu8Q
- dpqGhUTvbX8ZT/DNeA9OJh0iFBQB47Jl+aX7UpCl1SN/6109n25p68QOi2dwj9eOT/mfdUwpRXI
- 99d/f36fSvw2kfdHmt5+sSgL4zMDfWy1x+IcK6V6a7NLV7/LdODmI91zZjVnzefrFAwojNUfjjK
- FAsoS9mQxykZlE2VoqjRCBz5gDwlZ4K4aWk4+OMrXVA6wjHDIJXyTHiVtBrQzkF+NZFDV9zoyiW
- Rkgwkw4j+9NQcgmFZuDg8Wdj+LzJph8cUW9Q6fct/8H18Kie7cV7RV8VIQgzdvwedy78/q/LyG/
- /QUcZt9yd8PYX+72ubSV6p3PEygqaYzQ=
-X-Google-Smtp-Source: AGHT+IH1QFcjFqIBmE2ZWe0W3KysvjswyryjF9TvOYVv61yNZjZmdeeC7PWSFEHOAsmjZ0mOLNyVtw==
-X-Received: by 2002:a05:6000:2f84:b0:3fc:c90d:9957 with SMTP id
- ffacd0b85a97d-3fcc90d9a60mr2246065f8f.16.1758533810192; 
- Mon, 22 Sep 2025 02:36:50 -0700 (PDT)
+ bh=hGu4/bXKM7lUcNH48gpVT0m2A1N8DJGofrMOFUm9XqM=;
+ b=QkCSmfTkuKtckyFv/Z43cURev3HG4DJMUqZR5dqAFD++yWICLq/gSFkGuZb1e+Xw4i
+ DnSUpC1VUmLkdooJnWrhWAZhxNAH+lNEAVDtmRzei1oA37me1I7O14PoaJzDvjvqsrI7
+ 85BAJ4j594+1dyv2ZBLpzmub2JFtws5hz01w00OqsMQ62zDgKZ8FwhAuQzY/YVE4UpF1
+ Aw27PbfIPHmi2xSO8LGv2VJ0KjzTkyBvVs8DVX2BlIIoQAIUaS3QwhY6OYTWMy9JfDCe
+ I+e49CNwkZy7kjQmzwnu+bbGScN3NKn9NUdQKPwa6egBqIXWMk8rXxwmZp8Zqa0bWZhm
+ fNVg==
+X-Gm-Message-State: AOJu0Yya/pma8m91H9nociw3LVwuBTLnBpsMsWMC9TwaL+wufndpISDO
+ a7aop4nZJAuLNToVkr0cSTKifjwVm2WcR6u4XciXm5sBo2njn3J8GNbBStAdzmz6ZqozOuoGxiO
+ Kc7DVH2U=
+X-Gm-Gg: ASbGncsnKBxpaRf3cguNXlwleypQOdd9oBDlqYAPwgck9FHlu+WlLySBV5+2NRVWVxE
+ JtosvoPM2MZz2ZjOk6xhZYfRnYQrp2oxEAyM5Lx2RsOHxmNNtAk+BlRKlJE+bKepLeRRfM58qkR
+ SjX7sRHU43Sy/aL3uk1bIkAbWj9Mqu93/ytc5MY9is9op5Yttkz/Fi+C8vM6laX5oHX0Fwtodvs
+ s0HMFVLUwpEndRQYCY3MEf64zrin2trBQozpoOiqxgG+OBu4Uxj9LYcYPq2zoyXPRLVKb0mwPAM
+ VsF+oImnP19e+BvAHqffSbdF5NYFwVqCP2UgQKzcKmwaEGRiuDXlEDKtKFio5eagDLhKSsLbp4R
+ HDrvRGt6PKwwtvB1OyvG/Z9DT7JOeXwJWIvFvLbs1PA==
+X-Google-Smtp-Source: AGHT+IGZW7ocznOByua2DXjKz3LeFqfuXti8W51l46/loTqsiR5FkkURX/BYdsFp/zTlSc785IcsIQ==
+X-Received: by 2002:a05:6000:2f83:b0:3d3:1ad0:e8b7 with SMTP id
+ ffacd0b85a97d-3ee7d6864e9mr9693019f8f.12.1758533811162; 
+ Mon, 22 Sep 2025 02:36:51 -0700 (PDT)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:fe8b:a136:2e69:4bd1])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3ee07407d0asm19177840f8f.17.2025.09.22.02.36.49
+ ffacd0b85a97d-3ee07407d0asm19177840f8f.17.2025.09.22.02.36.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Sep 2025 02:36:49 -0700 (PDT)
+ Mon, 22 Sep 2025 02:36:50 -0700 (PDT)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: U-Boot mailing list <u-boot@lists.denx.de>
 Cc: Michal Simek <michal.simek@amd.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Javier Tia <javier.tia@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/3] net: lwip: enable debug traces for SNTP when
- CONFIG_LWIP_DEBUG is set
-Date: Mon, 22 Sep 2025 11:35:41 +0200
-Message-ID: <20250922093629.2547703-2-jerome.forissier@linaro.org>
+Subject: [PATCH 2/3] net: lwip: dhcp: make NTP servers usable by the sntp
+ command
+Date: Mon, 22 Sep 2025 11:35:42 +0200
+Message-ID: <20250922093629.2547703-3-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250922093629.2547703-1-jerome.forissier@linaro.org>
 References: <20250922093629.2547703-1-jerome.forissier@linaro.org>
@@ -105,28 +106,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that SNTP is supported, enable SNTP debug traces when LWIP_DEBUG is
-enabled. In particular, this allows to see which NTP servers are
-received during DHCP.
+When both CMD_DHCP and CMD_SNTP are enabled, one would expect the NTP
+servers received by DHCP to be used by the sntp command by default. Fix
+dhcp_loop() so that it is indeed the case.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reported-by: Michal Simek <michal.simek@amd.com>
 ---
 
- lib/lwip/u-boot/lwipopts.h | 1 +
- 1 file changed, 1 insertion(+)
+ net/lwip/dhcp.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/lib/lwip/u-boot/lwipopts.h b/lib/lwip/u-boot/lwipopts.h
-index 80b93ea172db..e8a2c9d7a0a6 100644
---- a/lib/lwip/u-boot/lwipopts.h
-+++ b/lib/lwip/u-boot/lwipopts.h
-@@ -44,6 +44,7 @@
- #define DNS_DEBUG                       LWIP_DBG_ON
- #define IP6_DEBUG                       LWIP_DBG_OFF
- #define DHCP6_DEBUG                     LWIP_DBG_OFF
-+#define SNTP_DEBUG                      LWIP_DBG_ON
- #endif
+diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+index 4c9cb0ecaa07..cbdfea3ba82a 100644
+--- a/net/lwip/dhcp.c
++++ b/net/lwip/dhcp.c
+@@ -8,6 +8,7 @@
+ #include <dm/device.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
++#include <lwip/apps/sntp.h>
+ #include <lwip/dhcp.h>
+ #include <lwip/dns.h>
+ #include <lwip/timeouts.h>
+@@ -48,6 +49,13 @@ static int dhcp_loop(struct udevice *udev)
+ 	if (!netif)
+ 		return CMD_RET_FAILURE;
  
- #define LWIP_TESTMODE                   0
++	/*
++	 * Request the DHCP stack to parse and store the NTP servers for
++	 * eventual use by the SNTP command
++	 */
++	if (CONFIG_IS_ENABLED(CMD_SNTP))
++		sntp_servermode_dhcp(1);
++
+ 	start = get_timer(0);
+ 
+ 	if (dhcp_start(netif))
 -- 
 2.48.1
 
