@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1380ACAC592
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 17:08:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E67FFCAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 18:47:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DBB683443;
-	Mon, 22 Sep 2025 19:08:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E5A0832F9;
+	Mon, 22 Sep 2025 20:47:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SU7qWp/u";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="n/5kgzN6";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wHsYoR6a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 023A583447; Mon, 22 Sep 2025 19:08:15 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B3679833ED; Mon, 22 Sep 2025 20:47:31 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D85968004F
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 19:08:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CCB183211
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 20:47:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-746c0ee5d77so3723364a34.3
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 10:08:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758560891; x=1759165691; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RNIcj0lcCCTXhCRxseNl+xVXtszpojsXiNNZatdymbU=;
- b=SU7qWp/uxz+DxMWnlGu4my4mvJv8ObADJGOt3kv/7aVsF3eF+IEdYNCGp9uXnR7SPT
- pqX+VZh0EwOC9Pr8QAW/5zpdcVRqU6SGZqNXkvD/mRQOvZZLGunDjqXLS9GKSnjBazg/
- 6PGtXua0ZlZBTXNgoHhfZcn6Ip35pXZATLDaE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758560891; x=1759165691;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RNIcj0lcCCTXhCRxseNl+xVXtszpojsXiNNZatdymbU=;
- b=Vvjzhpo1PXYgyX8JJwYyZRV2JQr1pui9lmaLnBCwhFdWjUDYZOPTR9NE5qikjkCnLS
- f5WRkGhK0cMRXoyb1Bc29TKlj9LNUQO/E8tFOEOqujCDWRar2xhZ2w1vUrZq7k5F9C5N
- B0T3yZqruzqoia30DcQGrCdFdLLX1NrEBMt+nB3/z4ei//POeDFcxAJtLaoak7wrHoO6
- wDWmRiK4eqK0/RFXzdTH4IjK1jJbZ+wG1rtpKvVBWU6rxvsngEl+Sr0ZPvDQZ1l/81Pd
- ThK7GNA5FNXUoMFCtk1uxyXHwvTDGRnZMFtmLV9eJRrP472L+uG0kUYncfMqqjlGGm+3
- jX9Q==
-X-Gm-Message-State: AOJu0Yw0bNivgBfRnhKTVctZFG1SDmUY4DM0bj9te0KGY8138eE8nxXq
- tdaHL4G/h6yC0jeC9oAjt+tkJ96B0T76x4u+WNMR6OackKmmrPUDulHpSpRDjD5qCx0=
-X-Gm-Gg: ASbGncue5JKyh5Gv7bq2DooJ1DihZc/tVoSRLQEzq/4xIrhy0xLIOR5CK60f41T2QLx
- ioct8pgHgcUgUDOmYTublh4aMNn+Gs4TzzHFhTCH5o8y9u20csRqirCg21F6MlB4RX/G8Aeo+DE
- S2zGAI049Z4hPEH/oGn6JSkXXngV74fw2qZ1SktTqln6ZJtDUE0W7QmqG2bYv5K1W3hHSpdh2vg
- hODDHadCL/o3pr9M8w66cHc4t5ytUTPRA3vjB7ryeLm7S9bwnpuUoH8Vki555IvpuYd1caT9tHH
- hk+4buUObvalPW0E3I6cbfW+EdQQvh+0sHMsjjn21yz0s8OK4GUOoQnDyZ8Jht3O0mHA7yJ3JOY
- KWlTA3fhU/U8Mk0FK+4AfORusa8BtFg2zk3FGqPs/UXIL/EiRdRnKTyI=
-X-Google-Smtp-Source: AGHT+IFpVdj/MzIEdT3nZERQamGzuEWW7kCdprN/mYyp2arvYltIrEzxfZhAPe+fUMLhc6g7nqLvPg==
-X-Received: by 2002:a05:6830:4188:b0:745:53ad:e25d with SMTP id
- 46e09a7af769-76f7c1679f3mr5690292a34.21.1758560891631; 
- Mon, 22 Sep 2025 10:08:11 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7691b0244ccsm6034332a34.12.2025.09.22.10.08.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Sep 2025 10:08:11 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250922141335.207427-1-festevam@gmail.com>
-References: <20250922141335.207427-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20250922
-Message-Id: <175856089087.3025236.3228432184499661179.b4-ty@konsulko.com>
-Date: Mon, 22 Sep 2025 11:08:10 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cVsYF0sR2z9sr7;
+ Mon, 22 Sep 2025 20:47:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758566849;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zFydSxYQ7vrFgknXBBEVOeXDKrh/LBHaXb2ICe8shhk=;
+ b=n/5kgzN6lCfuK37nD/TeTXufiHJ3oEyi4mLt+apnWgz0KmQkP8rZxxrQz/UsCGMKRJJmIF
+ aw0XK6Lwi/DI2tFFCWpaDgcZytY+8IbzvzLidd5LScxFJvl6Wab4ulNCRDi9ERli2qQQmY
+ 4sn9IVi0wek9z5ba6guyutsdwMJ+ym99OGmicHe1dkRsliWUYiezoj7cqoUdYLXkjxk3Ms
+ txgsxrNrBaCOKNq8DNfUDMqBsxZau3v34mEKPtpizL8mrTCZE3z6BuBpIBebbfwFd5bAre
+ WBqDLAsQveKQBCXI5SG5aQJNDxoNiZZ8GyflTFkRxfuEAWeCg4eqzDALmV1Lfw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=wHsYoR6a;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::202 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <e05c9282-1736-4056-97b7-939b913dbfd4@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758566847;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zFydSxYQ7vrFgknXBBEVOeXDKrh/LBHaXb2ICe8shhk=;
+ b=wHsYoR6abH8TYuVT4u+jCuy4ug7y+Gn2uABH7x2NKOnKHKnLUjHbYGB2XDIMtn7rPnMTSg
+ 2K54JszlC3q+Xa7FvoxIagnRrXxBHgHJ87R/CmY7wRQ+VJFGn5KO/gANOCjMCqOzThXLTv
+ Rixn5Hg8vXZfGmh5M12w6IYH/AwffBpggIBgqZ5nTgF2F2VAQ1T4mdGoaAobk1xpihW56K
+ PeTR37PxapgIR87KlpJAST+qeGzzKN57Z8r2Q7VNlakwvQhX7p0iAXLN3Wdbw2mPKlxiDY
+ n4gktMmnHNdMa4BtbFsQGdTYxJa1eK4i9cucNsjdKvwsMvNzSo7MzBGa5jpQYw==
+Date: Mon, 22 Sep 2025 20:47:24 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v3] env: spi: Fix gd->env_valid for the first write
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>
+References: <493603eba5d4eabf2b281e1f438fd19fc0587712.1758557017.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <493603eba5d4eabf2b281e1f438fd19fc0587712.1758557017.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-MBO-RS-ID: 9c1859784aaf308f3e6
+X-MBO-RS-META: pp4i9oyju4otxsgeyb3yuzexyac4xxt1
+X-Rspamd-Queue-Id: 4cVsYF0sR2z9sr7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,21 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Sep 2025 11:13:35 -0300, Fabio Estevam wrote:
-
-> Please pull from u-boot-imx/master, thanks.
+On 9/22/25 6:03 PM, Michal Simek wrote:
+> When both SPI environment locations are invalid (gd->env_valid ==
+> ENV_INVALID), the first call to saveenv writes to the primary location and
+> sets the active flag. However, the logic for updating gd->env_valid
+> incorrectly sets it to ENV_REDUND, which does not match the actual location
+> written. This causes the first two writes to target the same location, and
+> alternation only begins after the second write.
 > 
-> The following changes since commit d33b21b7e261691e8d6613a24cc9b0ececba3b01:
+> Update the logic to alternate gd->env_valid based on whether the last write
+> was to the primary or redundant location, ensuring the first write sets
+> ENV_VALID and subsequent writes alternate as expected. This aligns
+> env_valid with the actual storage location and fixes the alternation
+> sequence from the first write.
 > 
->   ARM: Remove mistyped GICV3 definition from ARCH_SYNQUACER (2025-09-20 12:02:58 -0600)
+> With this change, the "Valid environment" printout correctly reflects the
+> active location after each save, and the alternation between primary and
+> redundant locations works as intended from the start.
 > 
-> are available in the Git repository at:
-> 
-> [...]
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
 
-Merged into u-boot/master, thanks!
-
--- 
-Tom
-
-
+Reviewed-by: Marek Vasut <marek.vasut@mailbox.org>
