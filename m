@@ -4,159 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8076ACAC5A8
-	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 13:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B57E9CAC592
+	for <u-boot@archiver.kernel.org>; Mon, 22 Sep 2025 13:59:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 096FC83211;
-	Mon, 22 Sep 2025 15:49:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 079B783211;
+	Mon, 22 Sep 2025 15:59:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="mQL4Gm74";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XrLKLWxb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 085EF8341C; Mon, 22 Sep 2025 15:49:10 +0200 (CEST)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170120005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6EE7C832F9; Mon, 22 Sep 2025 15:59:10 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA22382CF4
- for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 15:49:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id C9AF482CF4
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 15:59:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u3B/N+XcxMro3cznkVcwdVn86W92jx9BZ955uPjGB28mFYradusVNFwoc7s4R00lbnCQMJvYnGcp1cYhaGy0pBwW/pQ9ue/3KExNBfyHtQpaw1Ye2GAGTNrOTrg44TUl0B3sGoGUeKYf8EY7wNWLgcMGmAD8/vZz8dPOoRlJron+3izhmfzPDSot5aqPgeech9nmEfL6YEb9chhYBvvv/R/EJWWM55IbNNw0tp2RdYI6csYcYLnEksaJCNCRdgjL8DjAnk1fzvXF0hXPcTodmqlQBwsu2q4Hgu7FEG6b9eduYZT8qyMM/JFKiUBhiqE0ytKsmV6Ziu9kxfwZo4Rf1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Abn0gNNEg1+Zo4bEent9nrOrH4xa/0JFWVflNpQ/uWE=;
- b=msRjpxGlDH+cikXAchbbuxLH+MSShfEAxWyC2pmJozcgRHZ1abft3mRkui9EteN/lw9l8tpgXjB+qV2S7xsLRP0Vj9OePgv6lqO+x1eiCaSiVaN+oeujrEA3VlIqT1HRgs6rdcV5zXNcA51AMKpKWxnXyUOWYeiqpbXYiTqqYbxvUiZ/ZQzLL8EdfU8BFPxHhwa4okB5o5n0iZi1RkEJ33gJ5qP9iBdYw/iLSrG5i2OPhQCh0pBkVzFQFth1yOLTZZZ+ngsju7KjG8q8Nc7bwCaATdGkR9PFuo0YbqhAMHcmOE3BmNAZKm7J/JTebrbF2uQpwwHw6NDKo/cjM+doGw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Abn0gNNEg1+Zo4bEent9nrOrH4xa/0JFWVflNpQ/uWE=;
- b=mQL4Gm74rp7auRL/vRcpGTcAGmmWBNPt9Lump9Zn6nkpD+dzTb1mqX4jqIiETsd7Oz9wJO00UnPcTHhuhch8+Bp0LbH+fFrCYrKNDMALgCZSnz3fzKjzlnUwYcNm8yhqnQGFUokRVu05Ril9vMHlJz5AQInJnFTRBZQ64hYTg54=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com (2603:10a6:20b:409::9)
- by PA4PR04MB7503.eurprd04.prod.outlook.com (2603:10a6:102:f2::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.7; Mon, 22 Sep
- 2025 13:49:04 +0000
-Received: from AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea]) by AM9PR04MB8906.eurprd04.prod.outlook.com
- ([fe80::d379:5378:b1:cea%4]) with mapi id 15.20.9160.008; Mon, 22 Sep 2025
- 13:49:04 +0000
-Message-ID: <1f4cd9f1-653b-499b-ab9c-864fd434ceac@cherry.de>
-Date: Mon, 22 Sep 2025 15:49:02 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: ti: fix K3 clock driver help texts
-To: yegorslists@googlemail.com, u-boot@lists.denx.de
-Cc: lukma@denx.de, seanga2@gmail.com
-References: <20250922132700.4180174-1-yegorslists@googlemail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250922132700.4180174-1-yegorslists@googlemail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1P291CA0011.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::8) To AM9PR04MB8906.eurprd04.prod.outlook.com
- (2603:10a6:20b:409::9)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-889b846c314so101581939f.2
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 06:59:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1758549544; x=1759154344; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EVEfieoaQUXBMmtdfcqK1UydKSuz2Ky9Ycm8IZoXV2o=;
+ b=XrLKLWxbtPvn5XpwO6LckI6YO/8o/3NOIB5HdTIOC0fkksNgW7irIpSUt+Y9zLdBz7
+ rXBIYOpuJ62vIJHLQNf4DkD8TRoHvNdWBSQmhDceipwZnz0p8w5soCzvbKLA1enk8CMN
+ TbTfDSQkPrtZ94YPj/jINOFu7tIIiyO1Bc8JA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758549544; x=1759154344;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EVEfieoaQUXBMmtdfcqK1UydKSuz2Ky9Ycm8IZoXV2o=;
+ b=PHlC9e2q7kGVYwOpHPcmRgaGI0/XVHd5j57h963ihTXo+IKh/YMgw4W6cl+wYhPdqQ
+ Z5yY3sKWkeSz54NVup9Le/UweqEoXjwKmqGtrHYofzEcuJvjfixSOS4Lj10uYWiv6JF4
+ bc3MgBaBjpEDkMNMfWRut/SXuqvUeTAq97iBwDQqDLVWsa9FSUd/oQBQvNuOBEPbKKd1
+ xRovh+Lw7tu60bQxXG/qycFI8tp9+LRjs81vtYTvpPEiwYnD3AnXga74XQhri/oxK9yz
+ Cq6jKF2zLHkeCbczN/xJ+IpN7oeEEEWcSPPYOmq2V92R3pRPwPAB+kW9YtR+Tw4jtVbl
+ +LMw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXW+u0S6AmcoS2MrUJwWRPwPyDtT/tIL/ljGIvThcM+PXDhD5Z+po6ydivofRjHIpSqM1kJZ38=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8vxe1En1Zk08bVavfV3pKWlWxxaP3J8HeXM0h9qy+GwLfje3y
+ 13XpTnUKp4WUF00nMg+WrOJ5GTBLoL7mHGIz1BfS9UsSEwxJPNCHqSVmV+3+FIrjI8I=
+X-Gm-Gg: ASbGnctE84Or/C/U/cGYtqzC+PomqFllCx+DGalRBDxFUtiHCx7VqUwtLl0nPRUZT2G
+ 3NpkwGq9zDRMC38GG8UXhTtSkI6kf9j3XOpQIqw2vsMJ7rJbV4G7PW7Eh0owNbrR3bOxIW9/hht
+ D7KNqBHmEoqcUi11SLx0xVIHItxyTTZFr3vw2fgUfc5Oi7yfAZtpG62XRtZe63JJqjPtJvAAGve
+ IpPbnbNnyaFpMBpPaIbWHRclT25RZlNEhgfay4MiCUjOCnYVyHD3Xj3jpdsXQ2ASELJ3gESlieH
+ jKkQT4OjL1gbcpXkx7R+CiivfC/PwPVHIwwEIuUFPy/iDOpKKPpT5nNEutoBP/ztnpBRoZndjlU
+ Dj/0JzypKvQlxpnf0y8/BgWciMU4eKoqVO9/do8p0cEspvEIxPdDPUrlV
+X-Google-Smtp-Source: AGHT+IEPUVycMEbBgpVMQM8Xo0RQY4QeCiJATVKAcT7KrA50IaB5fHg61i3S3jxtwM7KALim3EnwnQ==
+X-Received: by 2002:a05:6e02:12e4:b0:425:6edd:f004 with SMTP id
+ e9e14a558f8ab-4256eddf1f0mr97004465ab.20.1758549544226; 
+ Mon, 22 Sep 2025 06:59:04 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-557e9e4252csm2221966173.81.2025.09.22.06.59.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Sep 2025 06:59:03 -0700 (PDT)
+Date: Mon, 22 Sep 2025 07:59:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: Re: [PATCH 2/5] ci: add post-buildman script to build TF-A
+Message-ID: <20250922135901.GB124814@bill-the-cat>
+References: <20250916161426.32259-1-raymond.mao@linaro.org>
+ <20250916161426.32259-3-raymond.mao@linaro.org>
+ <20250916182742.GZ124814@bill-the-cat>
+ <CAEfUkUL2t64-hz-_acWHf01WgLeddYu7S8dRudmNT3re0_hfnQ@mail.gmail.com>
+ <20250917154926.GM124814@bill-the-cat>
+ <CAFLszTjBPpgPcqTuAdzhV=HAR01mvzFKBTcNOrxxz4djZ-8h0A@mail.gmail.com>
+ <20250919152638.GW124814@bill-the-cat>
+ <CAFLszTgvGT56_r6R8QGpu1kV8PcNUk3diVAguadZeBfKfh6vjw@mail.gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB8906:EE_|PA4PR04MB7503:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2fa50a42-bc5f-4ea2-1195-08ddf9decadd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZDYxU3RmQnZkMXJ1bWgzcFBIT0JVaXRraXlnVjdOSksrd2tNS2dVdUg5R3Ny?=
- =?utf-8?B?ZWpXcUNSRkptZXVjbkhsTTlDaWdsWGR1K3FjcU11akhXcXJXdFVOWW9XckpL?=
- =?utf-8?B?WVh2TlpVSllZaHRGVW14YlZWTUVTbHZKZHhubTZNanhBOHJpQkxnVHJpSFpN?=
- =?utf-8?B?U0oxQWtrT3dtWEdzNGdMMVFYdkFhUWRCaVI1NG03aEEvVDZQQnJaRnJydDFp?=
- =?utf-8?B?QWVXNWN6dTlGOXZpd1N4bm00UzM1cEhQUDJEMFE4WVRZTUkzRzhTNlkwdGZl?=
- =?utf-8?B?R253QitOWnhHb1l2SjJxbkpZRDY5YWR4MHJiaDRlTUQ0Qi9NNVlIRFZPZW5Z?=
- =?utf-8?B?WnlvOFZ6UGdlZFRHZWMxc3Nkd0pwZFkxYjB6bytzbGVtdlBwYmpQbjBlUmxq?=
- =?utf-8?B?cFlzNUpuMzhiZEVHZWFVZUt5a09ERkt3c1V0dFU5QVV2dzUrSUY0LzlVRUQ4?=
- =?utf-8?B?dU5LRnhnVGsvQzJNYnlVak9Fei82R2JyUWJaZ1JtT3gxVkR2UkxlNndMemQ3?=
- =?utf-8?B?cTFQRWhnTStHYmFuN2JjUXZoTktHQ0J2bjNObWxlS280MEw4di9aRTRzWHpS?=
- =?utf-8?B?ZmE5RHR6WXVDSjVVeU5TdDg0QlVNY1pIWWpIQmh5SVhzV2k2NmVSRmdodXRa?=
- =?utf-8?B?ekN1YlR2bDFnbEJCa0lDSlk5TjZ3U0xyNGJtRzBDVkZVaGtVbytQenlkN1hG?=
- =?utf-8?B?allOemY2RVFDM0dHeGtjZU5ESGhkYWU4RGtQU1EzcFlMQnVRSS9EeDBHL0ww?=
- =?utf-8?B?Yzc0V2tPSTdTOEhVZ0FvTUR5My9tZTgwM2xCTWNScUJxam92Q2h2UzBQc0JB?=
- =?utf-8?B?ak9LWVIwcW1LYi80OXAveHJYUGZ5dEJaM3hXMzR6THlFZUdGYXRZRXdEQWVq?=
- =?utf-8?B?andzZi9JdlpyTERSVGVFNnNCOUM2RDFkUU1haTZSVGFBUG9HTHZQOVFLbk13?=
- =?utf-8?B?ZUFrWFJ0dUkwcDZDWmd3SWpKSTUyWE1GRERzUW4wa1dIK1ZKV2ZRbnlzVXpi?=
- =?utf-8?B?Z1EzZ1VkdnJLVjVmUVNtdm5OaVJCeStEajJUWlBTd2tZeUp4S3UxcDdnR3pY?=
- =?utf-8?B?KzAyelA2TDg1NUVnOWlKbVZubG9ya015QjVPdENMQU02Z3ljd1h4cFpHSHN6?=
- =?utf-8?B?MThuQWEzQzQ5bVRHSkQ4TDF4Q0w4b3pRa2hLRy9COTVEL2h3L3VNUU0zUEdu?=
- =?utf-8?B?RThTZ0M0VFl2WlJQSWpSZllFODNEZElXTVRJSytCT1RZUEhpRzk3cHhrWTJx?=
- =?utf-8?B?WlZ6aVpwU0c5S2xGcnd5cm1TSkNHUkx5SThGVE9MNTMrckg3WnhudWtHdU5K?=
- =?utf-8?B?aHh0T1VMTUhzZ3BtbUNBSER6VUNkVkdXTnl5UEZBTnJPYWdQRFlrTVRrdEdr?=
- =?utf-8?B?RTYyd2JPM0V1NkVZVDFxc3M1YlRPeGVnNWdJWVRlelF0MlRxK2x0OWlwL0w5?=
- =?utf-8?B?RFVlU3NTTk9EdlRUZm9Od0c2MEdINFZGcTdQVkJaS0RtNE5YeTRhMXVJRHIz?=
- =?utf-8?B?WUJtVHR1Yk5UQTFiYTg2NTlWY055QzRvMnhUVXlYUUFldjJlMGpXNmpSSllI?=
- =?utf-8?B?bjd5K1UvaXBNQWNhRDhUK2RmZnFtd2NoN3p6TGR2RE81RHp3U1dBYlQwaWo3?=
- =?utf-8?B?V2tma3c2TTZuYTQxTWlXLy82dGhLcmg2RENHcnFzMC80bFU4Wjl0NlpXSXVt?=
- =?utf-8?B?VGdGSzFYa01DM0p2NkI4Vm9rbFpudTN2ZU1aeHpTL2hsNE5KaFQ4SUlIcWZF?=
- =?utf-8?B?M0FJWXJrQlNjMk51QmNRU1FuTXJFeXZmSml0UE9QZUFYcUlpL2dGODBLM2t1?=
- =?utf-8?B?YUNqcGttRGNtTDdlZXhIbUxVdnhFelV6cDk4ZlYrRlJEZHp0NnVOdzFZU2lt?=
- =?utf-8?B?SjQ4S2ZlelZXSEhPZlJKN2ZxWVJJWTJteHBZcytSb3prNnc9PQ==?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB8906.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Vm1oMjJZbkF4c3F2VlBGRG16c3ZGckF3bC9HRUNCYWEwa1hMeFRZZHJjMFNK?=
- =?utf-8?B?czF1MlJWY25MN2o2ZnNDSkl0RmZtMjlja2VCRDlrQ2ZiUWxsOEx1ZW1pc0Z2?=
- =?utf-8?B?Q1AyRVdoQjhkUzYyZURjTnJNNUFjRXhNNVhBRGMweXBNL05IOU5UNDRPM2N1?=
- =?utf-8?B?MDBXNkZZRDZzcWZnUnRJNGxESHhBdmpyeTUzMnNLcWJjWUVLb2RHdlM2THAw?=
- =?utf-8?B?NFVHdXVINFZXTmtQcXFXU1BpN1dWQS91REI1NmdQOXl0c0lmdEpnTzN4eitY?=
- =?utf-8?B?L0VtZWhDWFZMWTNpTUdTVXJhSGFNYk9kUXUwSGhueFhHSld0U3pHKzBNakFG?=
- =?utf-8?B?SGJqMG1wNXkxbXhEaU1LYVg2c3RadTNsOWQrSWN4ZHJYekFYTS9wSnRpa0JB?=
- =?utf-8?B?TE9IUHpTSkl4ckxZRWg3eWhpNnp4ckxzcVFZeXdNZGU3ejd4Mk5Sb082UzUr?=
- =?utf-8?B?ck1sWmJ4czR5OTRiMGNnU0FwTnN2Q3RQRUhQcTBOWGtUTlhWK0ROdG9iMFo2?=
- =?utf-8?B?SGJLOG9kalhwUGRyaFA0S3VaWnFXZXMvTEkyODJXOUJUR1lNcytaeitLbCt2?=
- =?utf-8?B?VTFJNUFuaVVEOVFQTkxBdFpGeWVyeDNmMXM1T3RtdE95cmlwN21iWUFzcGY2?=
- =?utf-8?B?RVZ1SFo4aGZ1Y3MvZWFrNVphVjVaVkVXN0dDMGs5ZENiSUpCMDZHTGpsNXkr?=
- =?utf-8?B?VFpVL1VGTXNJWTlhY3JwaFZLclE0NEZCSVNGZkdsdlpmTHlZZU9zY1BxOUJ1?=
- =?utf-8?B?cHVuWnJTdGg2QkFwMCs2TVJMR2NudUdWKzVhcCtLSUdhUHhURVorMjQwejN5?=
- =?utf-8?B?ZUZyQVJYRnhDSzE1Y2g2TStGQlFaOFZheDlyN2o4MmRJYVFYaCtxNm5OQXlq?=
- =?utf-8?B?RW9KelB2ejRZMzIwQ0Q3QmRGWGc2TUR6NU8wbWdXb0Z6TVpxejNoVGx0MTRn?=
- =?utf-8?B?bDl1M3Y0bDdSTGp4aVhqTDhuY1h1bXZFc2pMcysvM0o4ZTh5MUpmWEd2VWx4?=
- =?utf-8?B?WURSampDQlFUUlF4aXBTVHloUXA1Z2ovM1creHVrNm9mRTVTbTZSdmd2eTMr?=
- =?utf-8?B?UFZVcHVNV0tXMndHTGQ1WmhHQ3cyeGc1dGs5UDFLdm1tbWJKdWhpYXlmUTQr?=
- =?utf-8?B?R25sbm9neG5BRTdwMGI4eVpHSy9ZU21XNkZEMHNodFcvU25lSzZiTWZyS1Fo?=
- =?utf-8?B?T09PaVBldVhjMG1PbVUxcTErRzJ5SGRsbVRyUDJiYXBVWVNuOU5YK3o0VWxs?=
- =?utf-8?B?ZDRaR1QwWEF3czFNYXlUemJpT1BKckZFbU9CRkxsb3U0dzVrdlpsV0dJVko5?=
- =?utf-8?B?a0svSWR1dG1nKzhkcHV6aE5pMWR5NmpCSGxkRjIrMldrVE5sS3hFUVVDLzZn?=
- =?utf-8?B?dnl3SkZ0QUNiY2wyZStCWHpZT083OHhJRmxqVDJtVUxHeUtHM0RKd2hIanI3?=
- =?utf-8?B?UlNyQkxuY0ZlOUcvQU11RVpOU3M2UElzSldZeFF1QUhQZmlTWlczUU1vRjd4?=
- =?utf-8?B?QnA0UngzS2pUQk4zN0F6WVNldmI5Y1NoQ0xpK2Z0MWtNNHd6V3hUNW9lUXMw?=
- =?utf-8?B?R3dXWDJGZGlxVHJOclgzL1VpQUcxeUhQOE9FTXpoTXJWU1g1WWd1MldRdW1u?=
- =?utf-8?B?a3NoRit1QTVKL0lNMlcwb3YyaCtFYXFnd0o3UWlqeC9zZG5xNDRHRTh2ZFJZ?=
- =?utf-8?B?eU5SZkhsdHVCSEV5TUdaMi9UUHBXTmJvSFU2RTF4Ykh4S3FGczNsZmt5WnZQ?=
- =?utf-8?B?NmFTUkpQOUZYc2xwdy9BUk1oMWxKYVR1aGRzWnpDSlFlK1Y0Ynhack1vZ1ZF?=
- =?utf-8?B?VWduYnFweHpXNGtkeXlOQU1rTnNyYnBSbzhpTGhCMm1ubW5UZjE2YUh6Lzdr?=
- =?utf-8?B?Tk8zU1pCVll0VVFOdld5UVBDRnM5K29pOWpidTJhZCthLzNOcVM2U2FvdFNG?=
- =?utf-8?B?di94M0FreTNndVhoMy9RNGpRVG5OWWpock9xc3p6dnZrL2xDc1R6a0pQYyto?=
- =?utf-8?B?KzIxYW9kZVlMZFBoak8zU0RoeDR3dXo1UGRaRjNMUE1Jd1ZUZmZTcXVnSjZ4?=
- =?utf-8?B?R2U4Mkc2Wm1zSExoR08rc3RZTExPa1dsOHRpU1lhNGVpR1hMQ1d6L2FUTXNo?=
- =?utf-8?B?T08renZFZGh5UlBKRytJOUdOUkc3eUQrK0dCRndLVkpvMHRISDB5eEQ2QU1K?=
- =?utf-8?B?Vnc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2fa50a42-bc5f-4ea2-1195-08ddf9decadd
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB8906.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2025 13:49:03.9795 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HzPPF0VF6S5cDLmBpKZ+9bYSFUItm51DLcPHIZeuhteohvU7UQoZAuSshZoCWo3j3RAAi4ILRrtzW5Bz8cKrqiY/Jy46wErDiviJIa3hbOo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB7503
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UEbsHv9QCI9lhgYF"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgvGT56_r6R8QGpu1kV8PcNUk3diVAguadZeBfKfh6vjw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,18 +111,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yegor,
 
-On 9/22/25 3:27 PM, yegorslists@googlemail.com wrote:
-> [You don't often get email from yegorslists@googlemail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
-> 
-> From: Yegor Yefremov <yegorslists@googlemail.com>
-> 
-> Add "in SPL" to the SPL related driver help texts.
-> 
-> Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+--UEbsHv9QCI9lhgYF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+On Sat, Sep 20, 2025 at 10:13:34AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 19 Sept 2025 at 09:26, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Sep 19, 2025 at 09:09:26AM -0600, Simon Glass wrote:
+> > > Hi Raymond,
+> > >
+> > > On Wed, 17 Sept 2025 at 09:49, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Sep 17, 2025 at 11:44:07AM -0400, Raymond Mao wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrot=
+e:
+> > > > > >
+> > > > > > On Tue, Sep 16, 2025 at 09:14:18AM -0700, Raymond Mao wrote:
+> > > > > > > Add a script which is running after buildman to fetch TF-A (v=
+2.13.0)
+> > > > > > > with MbedTLS (v3.6) and build 'flash.bin', linking built U-Bo=
+ot as
+> > > > > > > BL33 and OP-TEE as BL32, with both Firmware Handoff and Measu=
+red Boot
+> > > > > > > enabled.
+> > > > > > >
+> > > > > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > > > > ---
+> > > > > > >  .azure-pipelines.yml               |  1 +
+> > > > > > >  .gitlab-ci.yml                     |  1 +
+> > > > > > >  tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++++=
+++++++++++
+> > > > > > >  3 files changed, 89 insertions(+)
+> > > > > > >  create mode 100755 tools/post_build_tfa_fw_handoff.sh
+> > > > > > >
+> > > > > > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> > > > > > > index 8209d2b329c..eb547606ddd 100644
+> > > > > > > --- a/.azure-pipelines.yml
+> > > > > > > +++ b/.azure-pipelines.yml
+> > > > > > > @@ -290,6 +290,7 @@ stages:
+> > > > > > >            cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUILD=
+_DIR}/grub_riscv64.efi
+> > > > > > >            cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_DI=
+R}/grub_arm64.efi
+> > > > > > >            cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_DIR=
+}/grub_arm.efi
+> > > > > > > +          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TRAV=
+IS_BUILD_DIR} \${TEST_PY_BD} \${TEST_PY_ID}
+> > > > > > >            # create sdcard / spi-nor images for sifive unleas=
+hed using genimage
+> > > > > > >            if [[ "\${TEST_PY_BD}" =3D=3D "sifive_unleashed" ]=
+]; then
+> > > > > > >                mkdir -p root;
+> > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > > > > > index 85401d3e09b..61e4af96c9a 100644
+> > > > > > > --- a/.gitlab-ci.yml
+> > > > > > > +++ b/.gitlab-ci.yml
+> > > > > > > @@ -79,6 +79,7 @@ stages:
+> > > > > > >      - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR/g=
+rub_riscv64.efi
+> > > > > > >      - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/grub=
+_arm64.efi
+> > > > > > >      - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/grub_=
+arm.efi
+> > > > > > > +    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BU=
+ILD_DIR} ${TEST_PY_BD} ${TEST_PY_ID}
+> > > > > > >      # create sdcard / spi-nor images for sifive unleashed us=
+ing genimage
+> > > > > > >      - if [[ "${TEST_PY_BD}" =3D=3D "sifive_unleashed" ]]; th=
+en
+> > > > > > >          mkdir -p root;
+> > > > > > > diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/post_=
+build_tfa_fw_handoff.sh
+> > > > > > > new file mode 100755
+> > > > > > > index 00000000000..f876db593ba
+> > > > > > > --- /dev/null
+> > > > > > > +++ b/tools/post_build_tfa_fw_handoff.sh
+> > > > > >
+> > > > > > The "is this a valid board" check should be in the pipeline fil=
+e (like
+> > > > > > where we do all the other board-specific things) instead of the=
+ helper
+> > > > > > script.
+> > > > > >
+> > > > > > > @@ -0,0 +1,87 @@
+> > > > > > > +#!/bin/bash
+> > > > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > > > +#
+> > > > > > > +# Copyright (c) 2025 Linaro Limited
+> > > > > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > > > > > > +#
+> > > > > > > +# CI Post-buildman script for building TF-A 'flash.bin' with=
+ Measured
+> > > > > > > +# Boot and Firmware Handoff enabled.
+> > > > > > > +#
+> > > > > > > +# Usage: from the top level U-Boot source tree, run:
+> > > > > > > +# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUIL=
+D_DIR} \
+> > > > > > > +#     ${TEST_PY_BD} ${TEST_PY_ID}
+> > > > > > > +#
+> > > > > > > +# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated and=
+ copied
+> > > > > > > +# to /tmp.
+> > > > > > > +
+> > > > > > > +set -e
+> > > > > > > +
+> > > > > > > +BUILDMAN_OUT_DIR=3D$(realpath "$1")
+> > > > > > > +BOARD=3D$2
+> > > > > > > +ID=3D$4
+> > > > > > > +echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, ID:=
+ $ID"
+> > > > > >
+> > > > > > Can we not use fiptool to update the contents of a file here? A=
+nd build
+> > > > > > as much as possible in the Dockerfile, like we do for vexpress?
+> > > > > >
+> > > > > Sorry I am not quite clear about how it was done for fvp, maybe I
+> > > > > missed some context, do you mean to build TF-A with OP-TEE at
+> > > > > Dokerfile and generate a fip.bin without BL33? But then who will
+> > > > > assemble BL1+fip+u-boot? by test hooks?
+> > > >
+> > > > So for FVP, in the Dockerfile we say BL33=3D/dev/null and this gets
+> > > > packaged correctly. Then in u-boot-test-hooks we have bin/flash.fip=
+tool
+> > > > which will update "fip" with the just-built u-boot.bin. The logic:
+> > > >     # If we have TF-A binaries, we need to use them.
+> > > >     - if [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
+> > > >         cp /opt/tf-a/"${TEST_PY_BD}"/fip.bin /opt/tf-a/"${TEST_PY_B=
+D}"/bl1.bin /tmp/;
+> > > >         export fip=3D/tmp/fip.bin;
+> > > >         export bl1=3D/tmp/bl1.bin;
+> > > >         export PATH=3D/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9=
+=2E3:${PATH};
+> > > >       fi
+> > > >
+> > > > Is how we know what bl1.bin and fip.bin to use as the base.
+> > > >
+> > > > --
+> > > > Tom
+> > >
+> > > This should actually use binman.  We don't want any shell scripts for
+> > > building :-) We finally got rid of the FIT generator script after some
+> > > years.
+> > >
+> > > Build mbedtls and TFA should be in dockerfile, like we have for
+> > > coreboot, for example. I suspect they will be useful in other tests
+> > > too.
+> >
+> > There's nothing to do here for binman, it already supports fiptool. It
+> > just doesn't make much sense to add the complexity in this case however.
+>=20
+> Write a binman description so it creates an image as part of the build
+> for this board.
+>=20
+> It could be a good example if other people want to use TF-A, etc. with U-=
+Boot.
 
-Thanks!
-Quentin
+No, I don't think that makes sense in this case, you're missing
+sufficient context.
+
+--=20
+Tom
+
+--UEbsHv9QCI9lhgYF
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNFWJAAKCRAr4qD1Cr/k
+CmB3AQCh57ceTj9/0pMWAE3ej/Uy9RcKXPyP3ZFJKkbC8FJZJQEAqmikER5J7Eq/
+AhES3lgprZgEwg9iE7r0UgXo+Z0Vtgo=
+=a46l
+-----END PGP SIGNATURE-----
+
+--UEbsHv9QCI9lhgYF--
