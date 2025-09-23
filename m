@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E86E9CAC5AA
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 02:17:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62300CAC5A7
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 02:17:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62DE83621;
-	Tue, 23 Sep 2025 04:15:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3AE9F83445;
+	Tue, 23 Sep 2025 04:15:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="Tk91O+cM";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="aHV+bEXy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6154835CB; Tue, 23 Sep 2025 04:15:49 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id DD95A83445; Tue, 23 Sep 2025 04:15:53 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9EE48363C
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 04:15:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4820683211
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 04:15:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GI6TFredZGwxHFvMbsOuso85dVGdC72f9zyP+ZbVoTiptWcYLoAJaj9A6zmrXqbP3QbXIPHFH6y9rwmzAHRrQh/8FmZHZ6aaPz5otZkZ8JjC5Ay/4jwtp+WKgNHXviDXJsJECAgmr0MDsdP8FVU9dAxzT+9ZpTPpDd3FNDQeEMPwd4ThDnjMsekbro+taqAMNYdrQ20Z2r7Ce6PKnJ9H5k0x2RiQag1No2Hazf4Ej62h1+C31ElrPffWD3bT6FGdaY3Jnsdb0d/SelQTLayQ4Kb09EspnCLFROmRYfH4b1uaM0FqdLFk1vJ4NpI+KHAQq5PCdOPddhYAfweH+rWj8g==
+ b=hjl6a67zvjMR/cpgwbh/FwKTBMtF+aqWb9+9NCydYOT+ewEq/3Tkm9/rUn/y1pt8M4fcuI6js8XtBaFZvpwssenRYiE5SVV4+fNBXQuSNpJyigv7n9dpz0xumx+8abEz06c7Ov7PNNYQu7mgfVU95P6ylFZRK43ebYbJnfDmneF6CyO/Z9zbV2nN0LZVTgS9rROW/vsa4yor+o9UIchboOcxwUt54+2xR7YKJ0zrQOIuh4LyDeDdAQDC5IaQyZGcxpXBLpaOM1qFlGptsuDpVykoVKSzs03/6UmdeMWaUVoTOKRbAmnWjyn4eQev+OHd770IK3VSWzyHqe8foA9zgg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=97yR0oZdeWBY653FHZAS2K8uzo3dRdwN3TLjWCSYh0Q=;
- b=FGGOsl/6jkS4c3nh/4IOo5X6SPkNFLPegARXnADYQROtR8NunrgEG7wreZZW2SCXu3Fftjl4zQHtN4MIksWycD07R5HBL2WyZZSADr2UguQvhVTWIUJmTCfeYrncIuXV1/Eq95LQgJ5x3UyjOnaqzat7AsXm5SLVxv4wu6ze+ggcWJutyLyWDFLgGWPYpt7giypx7TrwlW3Co8MI3csWpUAn2EjChFYexgT0LoVh2SgdlKejWICH6H0c22mV9lmz3r6YFgh6OHL4KEMCvzOd144NkiFQurFXz+19E8eXgczXaPTWlajVzaj4Tl2VT0qwogpfgYYarzo5smZ1bAwGpw==
+ bh=/xo36rI8CJO/MlRHnfm0FrZRoAfXZX0sHdxB0sjf6c4=;
+ b=QCt/p30UFepoHae3arEbampyA3SNhOJF8ScE4NGGlizpFGYQn0u3qgotFTO6RTwFyZikSkUC3ddUmq/vTp5t9uCEh+2UFBC8kXOrkm08CXkj4bI9HhBQ86K7XcHC1F6OyEYKZl/j0xZPLdZfqhufLB73xwjW1Crd82Ha1krHDJL2paPWwOyK5jdvNaCP72Q3uGoxs5+UUkfzAhpbECPkrtPb2f+Cf2iyEdp/yb+3VkY1BJZNnRbHQV0JOj26LRACwJn6Q4MkWXjr3HpA0KA84oT35kn/TozNJW7E+8o7QnWlMo/7T/npLguHTUisn3wJtedybHDMINIUTmgw5NJ/zg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=97yR0oZdeWBY653FHZAS2K8uzo3dRdwN3TLjWCSYh0Q=;
- b=Tk91O+cMHbQf1+QehqCOKxwyEXv2EbQKV+ZrRt7be9WhcK7On4jccvc2SuNQg+X4Y/2J47isu17KGimIKxgDGBgmUWy8HxxRfqwqhnxrFf6cWVXJReGku1+vCA/N2R0c0YCLx/jMcyR3LxWOejLQGF4dRcSsKDB4DLVBe2Tdv0kO7GSsE3Te8Qa4I0PKlv18YP2Advu7W9XPL0gyKu35xlk0VaODH2IXeo4p45bZiIC9S3fgNDFrYGGSolqPjpM2HHJ7zrns9nM+C2DfcnuX6RzaUVwwYPu36C+zyx96Kj5bRsBM8TWJFKqBmxJHo8g2dBvdAhk5XE28RpR50dh28w==
+ bh=/xo36rI8CJO/MlRHnfm0FrZRoAfXZX0sHdxB0sjf6c4=;
+ b=aHV+bEXyBe6ma8zDRL4lPqjXEGclQYFjttYG4Z0rrGdT388MLuzGVCmeXWtWV2eAqdhxyNUROXID534SwrLdS7MoGw39Q9DnwY6xx1hfBjkHCPuCZuOkN6G8mzdmpi6MfR/Tjlph7SRiGLLhn5rr2YGz/uNLPqXn/NHoPvGD2PD2IdhhOpuJ73iS4Q3n+U5+ekX55lv42Ceccq5eYpl1pMe9cWRa6SmFvT2OUhil6Qfulz2RJS1NNIhcIZEVG6pVRQ/G1Eg8zmxbBbugdG3H1VhlXa4FpD87sf+WUIBHAmi97n0hblPkZ3yauHUHnhFvIFOzK6nIc1xB8hwKq0j8oA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by VI1PR04MB9835.eurprd04.prod.outlook.com (2603:10a6:800:1e1::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.9; Tue, 23 Sep
- 2025 02:15:45 +0000
+ 2025 02:15:49 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9160.008; Tue, 23 Sep 2025
- 02:15:45 +0000
+ 02:15:49 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Date: Tue, 23 Sep 2025 10:15:03 +0800
-Subject: [PATCH v3 11/12] arm: dts: Add i.MX943 EVK board dtsi files
+Date: Tue, 23 Sep 2025 10:15:04 +0800
+Subject: [PATCH v3 12/12] imx94_evk: Add i.MX943 EVK board support
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250923-imx94-v1-11-cb3b65169048@oss.nxp.com>
+Message-Id: <20250923-imx94-v1-12-cb3b65169048@oss.nxp.com>
 References: <20250923-imx94-v1-0-cb3b65169048@oss.nxp.com>
 In-Reply-To: <20250923-imx94-v1-0-cb3b65169048@oss.nxp.com>
 To: Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
@@ -74,96 +74,96 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|VI1PR04MB9835:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ab3aa6e-5daa-423f-25ef-08ddfa471ac5
+X-MS-Office365-Filtering-Correlation-Id: 3c76f1ee-5657-4170-5463-08ddfa471cbd
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|19092799006|376014|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NzBValdVT1poWlcyT2VwOVV1cHdXL2I0NnZOSWJDYk5JSVFvZFlkMXVwWEor?=
- =?utf-8?B?UFlWWnoyUTlCUTBQWTJKOVBIK2p1Sk5OZ054ay9OTFFCcXA1ZUhYM2pTaE02?=
- =?utf-8?B?K29sblE0YlRWZGdLZXduQnpIc2Nyem14SW02MWhJdWMzYzAxOW4xeEhNajF1?=
- =?utf-8?B?Wkk0THZmaTN2Wjg1YWppZFBaZVprMENmUlkwL0hlcFFWUnQrR3E3eit0V3NG?=
- =?utf-8?B?SjA0aHcxWmRiaW5HSTVVWlc2ZVB5cTlCamR4VnNUTGxSRktGbkNYUHJmU05y?=
- =?utf-8?B?cUZSajhaSENTNHA2MlIzY3ZwYW8xN3czVVZPNkpmK0FVOGVRdXVMdGpuSzV5?=
- =?utf-8?B?V3NQbklGQ0Jxd0NDbktTbjVuZjY1NmxLVSt2QXo1ekhJNm9yb09PWXEyY1VX?=
- =?utf-8?B?S3cwc0V4d0grU0N4bHA0UTAvamZsc0ZOb2xIU2F4OUNacjNXWG1WQ1pScVVB?=
- =?utf-8?B?K0VGWHB2dUdjMkZsUG9jUkNPOVhhRGhsTndHS1FrcUxXbjVEb3lFc1pwbW41?=
- =?utf-8?B?cUlvdGdBbElGR1VXWmZUazI0d2x2VmRUbUJMUHpqQ2V3aWoxSG1jUmh0bEd1?=
- =?utf-8?B?UFc2cjlZTC93UTIwWVc1RnlvS0ZDTVRzR3FGaW5mTUtHekhKWU5SdW9pbHl3?=
- =?utf-8?B?U0NCOHdQUmZ4MFZpbG5JUWFEN2Q3bGt4L29SQjRiV0RDWisvK2J2eFA5b3Fj?=
- =?utf-8?B?aFRkMk1EUWt5N1RiUkJsRFFkUnc4b1FXUm4zMkwxT2QwNjVWbUF5eVp1M0Js?=
- =?utf-8?B?RThkbW9RUVVET0tTeFdrMTRPdC9sRENBODZGbytwdTVrNlFGNk5JVTRkT2tS?=
- =?utf-8?B?aWtmV1N4WjdhODlRblpyS0NrM2pqNXA5bFgvNWpqWEl5WEM5cGthZi9aMnRx?=
- =?utf-8?B?VFB1QklsTWRHQmhZMCs0d01JelR5akVVM1IrZ1hpd0x3djRtTXhJdDk1SnNF?=
- =?utf-8?B?VFpSQ0dRRnFWUVZOZGVibkpVMzd2QXZHZk53MEd3eisxSGtna1FnVUlkbFc3?=
- =?utf-8?B?SGdabE1QMHRhaCtLSG5tZ0t5bmg4RE0va25DQjJpM2NsdWhNQS9TRWJ3STM5?=
- =?utf-8?B?QktvNWJScllUb3IwSjRzUHRsT1lsTXRpNnRqdm42R1dTRGptYWtPekkyYkt5?=
- =?utf-8?B?alFEU1F4clBadTJxOHdoWmRpTGFlR1FoaWo0T2FjUkQ1SzcxY3NoMmNiaWlk?=
- =?utf-8?B?RTRuWSsyNlcvN2oyaGFnc3R3OVpqUVlqY0xvallnampDS3pYeVJEYzFrblJs?=
- =?utf-8?B?Z0k1ZFZ0VGdLMllWS0NFSnE3MUpBc2Rad2tiQktaY3E1cnRBWFI3K0lHOVNZ?=
- =?utf-8?B?N25TVWNYT1AwNUZadHkzaVk4VWNLSUF1eklPM0JMUkVCNWs4MVVWOG9yRW5C?=
- =?utf-8?B?OFVXUlNmb0thdE44Q28rcWp2VjNVa2tkaW5ndGlEM3ZCa0M5dTB5akFpSWxa?=
- =?utf-8?B?RXk2N2RGaEc0QWwzZmVyK1d1WVl2N2h1eGVFbTJCMTcxRzFpNEtwZ2ZqcjFR?=
- =?utf-8?B?OXJkSlREVjYwTjM5QlRtbmlSdTBaeUpPYzUrTS9SODZhUjBNNEt6eUVrZldR?=
- =?utf-8?B?eERLNU03MGsvanpLMFFra3ZSVXBpUm0rbGhwRCtMVE8yQUJWR1RQYmNQSEdC?=
- =?utf-8?B?N2dKS2RSOFlFcFMvQ1JTNFFvcTE0Vml1SDh2Qkp4azdGa0Z5UnE4M3lqdkgx?=
- =?utf-8?B?UHBidnViNGEzbFJHOHdjcDhYSnFIb3VYZlZ6ZXNMS1FoTGJKQWtoZHpRdGxy?=
- =?utf-8?B?TENiRStUb3JjV1BPR3lkNVpSU0NXK3hoSzNBbGswQ3hsc0FERFF0WkFxV1lt?=
- =?utf-8?B?QVB4VTJIc0JuU1owUzUrMDArcW00TENmay9MUDNsRFF1NmJXRVlheUZnNmxV?=
- =?utf-8?B?VHdkNWx0L0U5R3B0UDF5cEkvemtDTDVSTlZJbExxdVZIUFVCbzVvUlZESFVJ?=
- =?utf-8?B?d0JvK2JFNWZkTzZqY3V1NVByUEFuUTRrVW5jcEFSa3AzSXBuamVTemdOSC9a?=
- =?utf-8?B?Wjc5cGFGNk93PT0=?=
+ ARA:13230040|1800799024|366016|19092799006|376014|52116014|13003099007|38350700014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SndhemFnbUZ2cmtqQ0ZUbHJHNHF4RjRVTjFmbGh6RVIwNkliTlYwVDVCS09G?=
+ =?utf-8?B?UDhPYjRPY0JpWmlYOFZ2T2hTTzY0WkE3eWVoTFZ4N3JmSnB1eEx5dnRCSUE4?=
+ =?utf-8?B?NGU5RkthZTlIYm5hTEVGNjFSbllUTGJ1QlZ6ZjRnd3Z5NlF4TnV1dVh6amJR?=
+ =?utf-8?B?QVZzaGQrVFhiZ3RXQ2h4bmR2V1RXdkswd1FpeVJHNTN6MnVXSkU4Ym0zUCti?=
+ =?utf-8?B?dVZMVXJiSG1UUDdqdE56bTVEaUtTVUs1ZEtmZ3JaWW81ME1QWTQ3a3huWC9R?=
+ =?utf-8?B?N1M1V0hyaEVSVmRPdU5rbjRncWN2Yk03OEh1UC9SdGtJUElldzNwNWF5U3dp?=
+ =?utf-8?B?c0JhdGNMRi9tNCtJdTJtVnZWMDhJaU1PRmdwVkVmTmQwTFc1TmMrMUhVcFZp?=
+ =?utf-8?B?NWdpd2UzdEVScG9jOUFmNnliUWhOMUxkTm5SUUNtZlV1ekpieE1UVGgvc0do?=
+ =?utf-8?B?NDFsT3VMa2FCMnhubTNUb2pUa3M2cE44SDhwWTd1emRzb1lZRFlWS3FDVjN5?=
+ =?utf-8?B?bUZOTHdRQ05jNFgrMnI4QmhZVmhGUWc0SnlrQjkzbmRkUmw2d3pXd2g0QVhC?=
+ =?utf-8?B?N25jdXBFeVdBRGFrdTVoaDN6Tkt4bTJBRHJkTWRJenV0ZGFHZTlGaGhFSlc1?=
+ =?utf-8?B?VEpTWCtWWXN1NWd5cXFOWGdRTERtQUhXaGQ2QkV0WVM0cWM4b1huYWZOUEt1?=
+ =?utf-8?B?bG15czJXUXlKTUs1VjBKUzRYWGlmYnNvdW01TGFvRlhKUWdOcFVGSU4vT3ls?=
+ =?utf-8?B?YnpVMDJWdjVLZ2ZCdHRzakp0cnVnWDZXaER2TEpkaHNxMHA4WFplNkU5MWp2?=
+ =?utf-8?B?SjU0Yk50NWhVbGFTQ1U4Q0x4cm5qNExSZHlqanZ3VVNEVTl5LzF2dUE3M1BL?=
+ =?utf-8?B?MWlXcVhDaDlCeXF4T2p2MFB6VlFyQXh0QWJSQ2IwWmh6U0VPK1pLZjlsVUx0?=
+ =?utf-8?B?VngwZzA0OFRzRWRMN3RzUC90VStCSUt3akRoZHhrV1kxaUh6MjllRmRHdDly?=
+ =?utf-8?B?Tk9lMGRCWFVLOThlZFV2N0U1SWpqQjN4MkxvL1lVYjVrcG05Nkl1Z0xqaGc5?=
+ =?utf-8?B?L2dZZURjUm1WZnVRRXRtQldUeFJ4aGpMUU9SM1ByVWppYytUbGQwa3RjbTc4?=
+ =?utf-8?B?NXBYaWZtQnNVMHR3M1BsQ2pLK1FyNlF1QnhGbXE3aFVwczVhRzNxbGJnby9k?=
+ =?utf-8?B?R0Z5c054TCtqc0hqMVJub1FUSnU4Z0tWVFhvMWxlMGo3L1duOXFGR1pKTGtX?=
+ =?utf-8?B?RldKUWd6M01PVnpOSG9oeit3SUpmS3N1LzFyeHJMRmVVK1J4ejQyUDZsQzFM?=
+ =?utf-8?B?R3FlQkhZd1RkS1NtNXdtN0dibjdOclBPNktUQ3NtVnNyYVl4MUZyWEsyeTdp?=
+ =?utf-8?B?QzYyRmVxWWg5bTFybGROZW1jSjhIbGRwR0libXJjaXFPRFZGazY1ZXd4SDc2?=
+ =?utf-8?B?aGFlL3Y0NXpnV1lvTlArOSsvWXovd1NBUFhVZUpVeU0rTkpqYSt2TTRyb21q?=
+ =?utf-8?B?azFCUzhGcDFlZ0lkayt4UXE1UDluWlNGYVhWemFaYzlKbjlkTnlYZ00zVkln?=
+ =?utf-8?B?SWxFY3ZpY0h6TitIdmwzYXlub1luaVArM3ViVlRvaytCQmxnZzZPOXlsSTZ5?=
+ =?utf-8?B?WGMrck9KVXdIR04zZTY2SUIzUVVEV0s2UWp4ME44N2NVVWo0YnErUVNNRlNz?=
+ =?utf-8?B?SjlTVkVPYUhDZzE4Zlg0bkxCNklqaVIwYXg4NktiZ0xEbjVoTkZyL0Ntems1?=
+ =?utf-8?B?UUw3a3lLRkxHRUNCOHFJditFd0cwbkRRYkJ2NjdOT0RKdDErbm5hMkFRY2I5?=
+ =?utf-8?B?MWNuNDVISVZnU0x6TFZyVE9hZTFyWnlFRUtxQ1BwMnBDcHdGb3RORzRTMWZz?=
+ =?utf-8?B?NUd1R2xOVFhuSjdVdUJ5Yy9pN0dIY0JFeXVEZW5DRWoyOWJvaEJYSDRJcUI4?=
+ =?utf-8?B?SFZva2dqK24vVHhXSlZPYVg3ODdDbm9mTDd2OXg3OWhWN2Myd3haMXFJWHRu?=
+ =?utf-8?Q?SlJCPJOhCIbGdEcIIo7ghqJ5+rWYDo=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(19092799006)(376014)(52116014)(38350700014);
+ SFS:(13230040)(1800799024)(366016)(19092799006)(376014)(52116014)(13003099007)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TlVkOXhrOThNTk93YmNFcmJsOWVQQm1kUnZEREpqZmRyT3dYd3Z3NDYyVVoy?=
- =?utf-8?B?Zmd3MFhlR0NXUm5BMFgzRXBhNnV3L1pLOVlFejZTMUVlbUNYMk03ZHpXbGxO?=
- =?utf-8?B?eitJOU1YUzN2eVFDaVE4TGc0TDZHOS9Mb0lKTjltSEpXdnhzejhaemIrd3RC?=
- =?utf-8?B?UThRMDFzZW5sS1E1TnZtckQ2aEc5NkpoVzEwT2N4MW9LMTZONDk3SmdCN05N?=
- =?utf-8?B?ejFMbFZld1RESEgvMzdaN2JSZjc1d2lOWjBWRHN5eW5STTFPV1cvQ1RNdk9y?=
- =?utf-8?B?Tk9SVXF5TzRBVTNrcVdpVHlkUXV5TWJQa0JKenFPY0hSMkdzU1EwR2pYaUNh?=
- =?utf-8?B?ZjBYZ2NKczN2UnlPL3lGd2srVU5tZ0NIVUdGMit6VmJ0Zlk4akIxRkhjaTNR?=
- =?utf-8?B?TjVjREwwL1VnTjZvVUVvU3lzdjVIdWJkU252RXZEYUtvK0JBWm0xTEdGU3V6?=
- =?utf-8?B?L2U5dy9vSFNyeWM4S3doMmNDTTM5L0tXVlNpazdBa0hTQ0RoaS8xb1o5R0o5?=
- =?utf-8?B?cFc3TXUwdmZFMzNscmZoUHF2SmQ2YXB6Um5RMTJWcUg5eVdIeVZOaGpOTSts?=
- =?utf-8?B?KzJ2QTRGUUxJa1ZDekw0QjhKS0ZLOUpFcGd2VjRUSTBFN20zcy9kaHJWYWlJ?=
- =?utf-8?B?RUlrdWdiTUJDUkJCN0l5Rkw2QTNSMkFiQ0tuV2dFa2w0b0x4YzFuWlg5SXp0?=
- =?utf-8?B?bWhRZmJuZDV2RlppZ0Rzd3B2dXlqOWliQmJCeDV3WWJ3T0NRSUh6QnduK29m?=
- =?utf-8?B?V3J5QWxpU0NCQ0ZhaCtwRlhIdmdlRGlOdkNlNThaYmFRTzBkVGRPQmVpK2tr?=
- =?utf-8?B?UFdqNkR2QXJ0cjA5OS9YNWJkNjh1YW50dmVodUZNVnA0Z3NMcGRVelY4K2xW?=
- =?utf-8?B?U0VSVDhtbEVOYjZRNXNaWnFCOTJwMGk0V1UzSEtTK1kvZnBpcVJUZkhCSTgx?=
- =?utf-8?B?YS9veFJJdFdYVzlkTmJTMkNKS21OVHFXQ1ZCWG9vTVNpTnd4eW5IM2JZbXp2?=
- =?utf-8?B?c0F2UVB6OGdydmJzRzhqZ3lybjU2ZGlabFE4TnYvS0gxUngwQ2F4K1BIcE5U?=
- =?utf-8?B?WUF6bnpBUXF6RHJqczlBZHV2bTNScmo2eWE1RU16MU95YlNxaDhjZGJMSzcy?=
- =?utf-8?B?dE4vV0Z0cmMrTEVRMU5haVNnekZSWTVtZ3pEek1XcCtnZVBNb0xnemYrVHJN?=
- =?utf-8?B?RnBJbzUxT0tLcGdzQ0VXVWNCUUkxWjMrWEpEYzhLVGM2cWJYazE3L2hJejZs?=
- =?utf-8?B?cEZMdDljS2oyZXFiRGplTmhmYkN0VFBPOG05eDZRM0oySlc5MGpDVjFiL01m?=
- =?utf-8?B?NWdTa2R6NmV1NDFiOXBNdEgwL0Z3cmJ6NC8vZnhpSVFhVnFSYWJqT0RFY1hE?=
- =?utf-8?B?Qk1EYllGY2JpWW14WU8xVWZaL1k1RmJPUnozR0wvSjAzNkR2SUlGdU5uS2Uz?=
- =?utf-8?B?R014M0tjRm0vcTNXcTVQbEtaU2gvR0FQNWZtOXl4TVlIL0czeU5MQi9DSERF?=
- =?utf-8?B?Z3U3MGpnTzlVeTR4L2ozRUxkcHhhQjlHZks0c0JzdVhpVi9mWThVRVFqMzUr?=
- =?utf-8?B?YW9oVnlORjZ1cjZKZzZlY28xbTZkcVVwQVV0SnkrMjc2enEzN3R1RURzQnV2?=
- =?utf-8?B?Yjl6VW80VnNHNVZSUUZ5OHdHcXhlcmJISjdIdTNadFQycFV5dGdiK1BZUjVC?=
- =?utf-8?B?YmxoKzRhWS9EbEU1QlJVb3NFRFdLR3BsNWNZVGZOQVRDUHNuSWlPOGdwbEor?=
- =?utf-8?B?Q0ozR2RTM3g4MWdsUG9LMlRaUDc5MWtjTnk4WklmVFlialNCMUlZejN6SGFY?=
- =?utf-8?B?SktGZEI4dC9MUDY0ZEttRVkwRDRiaXFKQTZoT1R5WGt6UXc4dUpQS1FxYnVx?=
- =?utf-8?B?dXoyRzU4SWVMOTQ0TGtJWUo2bll1U3FxYWZKYytZSktmdERQY25aOGNEUExL?=
- =?utf-8?B?UklvT0FEclJJUWhzTzE4TFZid3NENytQeU5ILzk1ajFORUJLK0xSbG83bVFG?=
- =?utf-8?B?TlpmMHNva2N2b1FuMVcyUzRTeVlWMzBCWGtmeWpHSE9zZU5xQm1CaC9KTng5?=
- =?utf-8?B?Q253WmhiTUcra1ovejgrMFhsUVZMSDI1L1pNS2FhbGdPVFc3cVRpbkdTMnpn?=
- =?utf-8?Q?E01D8TKMjqgGYCMK8TH4rW7G5?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aUdITXVlWnRnZVJHMS80VEVIRXNjcTViSCtMbitsSEEvZXpTbWhWUFZPZS9N?=
+ =?utf-8?B?U1N1aWUyOHdWRG95MDNxVGlVYUc5aUgzNldzYmtCWjNVcGt6bC95eUV5dVdQ?=
+ =?utf-8?B?bHZuRmEwSHh2VWdsNUU3eXN2Wk9jRnZIc25Kc0d2QXQvTWxKVStoZ09ESjYx?=
+ =?utf-8?B?QkdrcVQ1OVd2R3FFWU9yOTVpU3V5cXI3ZjFualRnTHdSVEhTNERFSzdqbG1v?=
+ =?utf-8?B?TzIraDRMZE1FTGxSME42eXgzeS9xb1lFTHh2bjhxQVVaaCtSVTgxeGoxYi9P?=
+ =?utf-8?B?a3hmaDROSTY4bFMxMGJFOGVGN2NTMytBN05ESytOMkZCczhyOTcxQjlpcDE2?=
+ =?utf-8?B?ZWlGbXhLN2laT21uclhCRTlUd28yd2tRNWMvZjBxUjNrSXl0bEtUekNKRVBG?=
+ =?utf-8?B?YldqSExPTWk4VlVuQjh3UWtYUVdWQTlUajk0bnR5aHRXMmQ0UW5hZWo1TkNR?=
+ =?utf-8?B?all3aVZzRllDT2M3TEVHRmJkZHRFbHJnZU0yeU0vNUNMamJDK2F6R0lTWko1?=
+ =?utf-8?B?RW1udUZDRTI1SmR3ZXFSTGh6eVZIakFjTkw1YVJ2S2ZlcHJvQ3BNQjB2ZXdX?=
+ =?utf-8?B?b1k3TFpRbzFXaGJSV0k3YzlZRGpHRUtHUUE4N2RJVUN6aDNSNTFpY3k3TzBy?=
+ =?utf-8?B?clVXczdzT3paYVpqOVNEZGpQV2tmSFpUdWY5ZC9oN0tTaE1OTTNwTFpuUXo2?=
+ =?utf-8?B?SUc0dVRHbWFpQW1xdXAvTHJhSzFLY2sxcGsxWElBalBpSERPcitIMVBvRjQw?=
+ =?utf-8?B?STFuZ21tOXltNXY4RlJueTZ1cXlmakwwY2JuTlRTVVJKSXNmaU9hWjBxSkQr?=
+ =?utf-8?B?Z3ZlVFBjRFFkMlJKREc2b3hjTStwV29XaGVyVzBmQWZGOGh1MVUxaGZCVU9m?=
+ =?utf-8?B?dldiRjNDMEY0WWZIdmdiS3dpZHdvTkZ5MjhnQ3c3MDBhcUtKd0NkSUo1dCtV?=
+ =?utf-8?B?NE40d01XMFFrR3h5SHZJcHFic3pSalpnYnlIQTVObk1iTHN5NEYvL2cxZ1k2?=
+ =?utf-8?B?YWRISTBDc25hbSszTnFXZTl3M3ZYUlVhZ0hSRHhUMm5rSnd3ZHNhUSsrK2JY?=
+ =?utf-8?B?THVtTVZTTW1hVHEzUC94OFJYcEltekpMR3RuVC92c3lyZmV0eDhsK2I0eGxS?=
+ =?utf-8?B?dDZxWDY0dlhnQjVEK1pwQ09CdUZ3OGtLeWlsOVd2MDZmeWljZ2FXN1NITHVK?=
+ =?utf-8?B?V2NBbzM3aU8wbmlaZXR1SG1qZFcvdG5sRTF3bDVQakRTNUdTZzVEZDJsQTRX?=
+ =?utf-8?B?WXRaSWZ6TU95Sk5hVG55aW9jUHR3OGFXOEZ5K2RHNmR5UXpFVjF2aGpFdHJv?=
+ =?utf-8?B?YzZ0d0hZaElTZlBSdm5aS3ZVeHNDN2h5S1N1U0xtZjlYS3B0eTh0V1A3MjVO?=
+ =?utf-8?B?STFmeEFXa0JFcW9LREtsdktzODZ1cnJaMm9XdzJNamk3ckVkRnZkS1BqK0g2?=
+ =?utf-8?B?R0RVeWpBcm5HeGhodVRVZjhlT1RGQUNrNkprd3FGM0JkVUlDSWFFYlUweEtP?=
+ =?utf-8?B?dHdSZmkyb1g1TnJKcU9ZVzhhTW1qTzB2NnBhelRlZkhCYm5RUnhYT2lvRWVR?=
+ =?utf-8?B?RExSVVJOM3JUSHJyWUxRaUl4aEwrUk9TdTc2SGo5TFp2Y2loSUl0WEJyQ1pL?=
+ =?utf-8?B?cnJSZXcwS2NJbVVDN0JZV0hIR0lsME0wbmluR09sb2xWcHBLZW93N3pMSHhB?=
+ =?utf-8?B?UDY2VkwwdWhNMStQdzJKeFBaV2s2WWhrL2Z3SDZuQ3k0NnlpS2wzUkN1T09R?=
+ =?utf-8?B?OVJNTWtCeE1hNTFCcGNrazJlRkgyMnBVSmtkQ0xTTnphL3ErTDB0QmJ2dmdU?=
+ =?utf-8?B?S0FsSXpVZms0WElUMEVmalNZMWpwUlJBWlN6eHRuaENCTlY0bDBKRU1ZK2Zs?=
+ =?utf-8?B?MmNZY1ViYU5aMEZmaFpJc2tobFVZMkl0cWNWR1ZxU09lRitKdDQvRStqQi9L?=
+ =?utf-8?B?MnhQMEVFRllNODlIN1haMU90NTk5VWFyU2ZIS21xd3M2bitiT3d1Y0J2cm5h?=
+ =?utf-8?B?R0kyekcyZnRCOEJrMEVpTG1PS1ZoTnpqaUhzSGpyakl2UnhKcGl0Y08yakZN?=
+ =?utf-8?B?bmVINHZkcHBjU1VEVVFVZDczZXRqRnhlS1pZenEyUnNpWDNsaWNibktEcWxO?=
+ =?utf-8?Q?We0x2XcG3NT+Pw0ICkkjY9MtN?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ab3aa6e-5daa-423f-25ef-08ddfa471ac5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3c76f1ee-5657-4170-5463-08ddfa471cbd
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2025 02:15:45.7989 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2025 02:15:49.0588 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jctvOJCvwmkTO5FZnqICVhKx4I0oCfgZQqO3YFqHm67i8Q/bjxvKhLefjJ3d2Cwb3yx1kxdOypYqths0W1wQwQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1RB5uK0TRvPoTd8YN7b86az0qRdHK+zYbeDf4N63FVM0qfuAfaLPQjIQ307pz7S/L0SRhSGgVdQRMtep9x7+/g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9835
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -183,305 +183,635 @@ X-Virus-Status: Clean
 
 From: Ye Li <ye.li@nxp.com>
 
-Introduce the base dtsi files for the i.MX943 EVK board. These files
-define the essential components such as messaging units, uSDHC, GPIOs
-and lpuart for board bring-up.
+Add board-level code and defconfig for the i.MX943 EVK board, supporting
+multiple SOM variants: 19x19 LPDDR5, 19x19 LPDDR4 and 15x15 LPDDR4.
 
 Signed-off-by: Ye Li <ye.li@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 Acked-by: Peng Fan <peng.fan@nxp.com>
 Reviewed-by: Jacky Bai <ping.bai@nxp.com>
 ---
- arch/arm/dts/imx943-evk-u-boot.dtsi |  62 +++++++++++
- arch/arm/dts/imx943-u-boot.dtsi     | 212 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 274 insertions(+)
+ arch/arm/mach-imx/Makefile              |   2 +-
+ arch/arm/mach-imx/imx9/Kconfig          |   8 +++
+ board/freescale/imx94_evk/Kconfig       |  12 ++++
+ board/freescale/imx94_evk/MAINTAINERS   |   6 ++
+ board/freescale/imx94_evk/Makefile      |  11 +++
+ board/freescale/imx94_evk/imx94_evk.c   |  41 ++++++++++++
+ board/freescale/imx94_evk/imx94_evk.env | 100 +++++++++++++++++++++++++++
+ board/freescale/imx94_evk/spl.c         |  81 ++++++++++++++++++++++
+ configs/imx943_evk_defconfig            | 115 ++++++++++++++++++++++++++++++++
+ doc/board/nxp/imx943_evk.rst            | 112 +++++++++++++++++++++++++++++++
+ doc/board/nxp/index.rst                 |   1 +
+ include/configs/imx94_evk.h             |  24 +++++++
+ 12 files changed, 512 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/imx943-evk-u-boot.dtsi b/arch/arm/dts/imx943-evk-u-boot.dtsi
+diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
+index fa2cdaba144..1efe690e876 100644
+--- a/arch/arm/mach-imx/Makefile
++++ b/arch/arm/mach-imx/Makefile
+@@ -223,7 +223,7 @@ endif
+ 
+ ifeq ($(CONFIG_ARCH_IMX9)$(CONFIG_ARCH_IMX8ULP), y)
+ 
+-ifneq ($(and $(CONFIG_IMX95),$(CONFIG_BINMAN)),)
++ifneq ($(and $(CONFIG_BINMAN),$(or $(CONFIG_IMX95),$(CONFIG_IMX94))),)
+ SPL: spl/u-boot-spl.bin FORCE
+ 	$(call if_changed,mkimage)
+ else
+diff --git a/arch/arm/mach-imx/imx9/Kconfig b/arch/arm/mach-imx/imx9/Kconfig
+index f2011448c23..48f458fa55c 100644
+--- a/arch/arm/mach-imx/imx9/Kconfig
++++ b/arch/arm/mach-imx/imx9/Kconfig
+@@ -106,6 +106,13 @@ config TARGET_IMX95_19X19_EVK
+ 	imply BOOTSTD_FULL
+ 	imply OF_UPSTREAM
+ 
++config TARGET_IMX943_EVK
++	bool "imx943_evk"
++	select IMX94
++	imply BOOTSTD_BOOTCOMMAND
++	imply BOOTSTD_FULL
++	imply OF_UPSTREAM
++
+ endchoice
+ 
+ source "board/freescale/imx91_evk/Kconfig"
+@@ -114,6 +121,7 @@ source "board/freescale/imx93_frdm/Kconfig"
+ source "board/freescale/imx93_qsb/Kconfig"
+ source "board/phytec/phycore_imx93/Kconfig"
+ source "board/variscite/imx93_var_som/Kconfig"
++source "board/freescale/imx94_evk/Kconfig"
+ source "board/freescale/imx95_evk/Kconfig"
+ 
+ endif
+diff --git a/board/freescale/imx94_evk/Kconfig b/board/freescale/imx94_evk/Kconfig
 new file mode 100644
-index 00000000000..5496385dc4d
+index 00000000000..a4237244ace
 --- /dev/null
-+++ b/arch/arm/dts/imx943-evk-u-boot.dtsi
-@@ -0,0 +1,62 @@
++++ b/board/freescale/imx94_evk/Kconfig
+@@ -0,0 +1,12 @@
++if TARGET_IMX943_EVK
++
++config SYS_BOARD
++	default "imx94_evk"
++
++config SYS_VENDOR
++	default "freescale"
++
++config SYS_CONFIG_NAME
++	default "imx94_evk"
++
++endif
+diff --git a/board/freescale/imx94_evk/MAINTAINERS b/board/freescale/imx94_evk/MAINTAINERS
+new file mode 100644
+index 00000000000..95309430734
+--- /dev/null
++++ b/board/freescale/imx94_evk/MAINTAINERS
+@@ -0,0 +1,6 @@
++i.MX94 EVK BOARD
++M:	Alice Guo <alice.guo@nxp.com>
++S:	Maintained
++F:	board/freescale/imx94_evk/
++F:	include/configs/imx94_evk.h
++F:	configs/imx943_evk_defconfig
+diff --git a/board/freescale/imx94_evk/Makefile b/board/freescale/imx94_evk/Makefile
+new file mode 100644
+index 00000000000..ca31602f6ba
+--- /dev/null
++++ b/board/freescale/imx94_evk/Makefile
+@@ -0,0 +1,11 @@
++#
++# Copyright 2025 NXP
++#
++# SPDX-License-Identifier:      GPL-2.0+
++#
++
++obj-y += imx94_evk.o
++
++ifdef CONFIG_SPL_BUILD
++obj-y += spl.o
++endif
+diff --git a/board/freescale/imx94_evk/imx94_evk.c b/board/freescale/imx94_evk/imx94_evk.c
+new file mode 100644
+index 00000000000..28d512ac5f3
+--- /dev/null
++++ b/board/freescale/imx94_evk/imx94_evk.c
+@@ -0,0 +1,41 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2025 NXP
 + */
 +
-+#include "imx943-u-boot.dtsi"
++#include <asm/arch/clock.h>
++#include <asm/gpio.h>
++#include <asm/mach-imx/sys_proto.h>
++#include <env.h>
++#include <fdt_support.h>
 +
-+&lpuart1 {
-+	bootph-pre-ram;
-+};
++int board_early_init_f(void)
++{
++	init_uart_clk(0);
++	return 0;
++}
 +
-+&reg_usdhc2_vmmc {
-+	bootph-pre-ram;
-+};
++int board_init(void)
++{
++	return 0;
++}
 +
-+&usdhc1 {
-+	bootph-pre-ram;
-+};
++int board_late_init(void)
++{
++	if (IS_ENABLED(CONFIG_ENV_IS_IN_MMC))
++		board_late_mmc_env_init();
 +
-+&usdhc2 {
-+	bootph-pre-ram;
-+};
++	env_set("sec_boot", "no");
 +
-+&wdog3 {
-+	status = "disabled";
-+};
++	if (IS_ENABLED(CONFIG_AHAB_BOOT))
++		env_set("sec_boot", "yes");
 +
-+&pinctrl_reg_usdhc2_vmmc {
-+	bootph-pre-ram;
-+};
++	return 0;
++}
 +
-+&pinctrl_uart1 {
-+	bootph-pre-ram;
-+};
++int board_phys_sdram_size(phys_size_t *size)
++{
++	*size = PHYS_SDRAM_SIZE + PHYS_SDRAM_2_SIZE;
 +
-+&pinctrl_usdhc1 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc1_100mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc1_200mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2 {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2_100mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2_200mhz {
-+	bootph-pre-ram;
-+};
-+
-+&pinctrl_usdhc2_gpio {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/dts/imx943-u-boot.dtsi b/arch/arm/dts/imx943-u-boot.dtsi
++	return 0;
++}
+diff --git a/board/freescale/imx94_evk/imx94_evk.env b/board/freescale/imx94_evk/imx94_evk.env
 new file mode 100644
-index 00000000000..9c4882f7d79
+index 00000000000..2baf1bbadcb
 --- /dev/null
-+++ b/arch/arm/dts/imx943-u-boot.dtsi
-@@ -0,0 +1,212 @@
++++ b/board/freescale/imx94_evk/imx94_evk.env
+@@ -0,0 +1,100 @@
++#ifdef CONFIG_AHAB_BOOT
++sec_boot=yes
++#else
++sec_boot=no
++#endif
++
++jh_root_dtb=imx943-evk-root.dtb
++jh_mmcboot=setenv fdtfile ${jh_root_dtb};
++	setenv jh_clk kvm.enable_virt_at_load=false cpuidle.off=1 clk_ignore_unused kvm-arm.mode=nvhe;
++	setenv jh_root_mem 0x60000000@0x90000000,0x100000000@0x100000000;
++	if run loadimage; then
++		run mmcboot;
++	else run jh_netboot; fi;
++jh_netboot=setenv fdtfile ${jh_root_dtb};
++	setenv jh_root_mem 0x60000000@0x90000000,0x100000000@0x100000000;
++	setenv jh_clk kvm.enable_virt_at_load=false cpuidle.off=1 clk_ignore_unused kvm-arm.mode=nvhe; run netboot;
++
++initrd_addr=0x93800000
++emmc_dev=0
++sd_dev=1
++scriptaddr=0x93500000
++kernel_addr_r=CONFIG_SYS_LOAD_ADDR
++image=Image
++splashimage=0xA0000000
++console=ttyLP0,115200 earlycon
++fdt_addr_r=0x93000000
++fdt_addr=0x93000000
++cntr_addr=0xA8000000
++cntr_file=os_cntr_signed.bin
++boot_fit=no
++fdtfile=CONFIG_DEFAULT_FDT_FILE
++bootm_size=0x10000000
++mmcdev=CONFIG_SYS_MMC_ENV_DEV
++mmcautodetect=yes
++mmcargs=setenv bootargs ${jh_clk} ${mcore_args} console=${console} root=${mmcroot}
++prepare_mcore=setenv mcore_args pd_ignore_unused;
++loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};
++bootscript=echo Running bootscript from mmc ...; source
++loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
++loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
++loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}
++auth_os=booti ${cntr_addr}
++boot_os=booti ${loadaddr} - ${fdt_addr_r};
++mmcboot=echo Booting from mmc ...;
++		run mmcargs;
++		if test ${sec_boot} = yes; then
++			run auth_os;
++		else
++			if test ${boot_fit} = yes || test ${boot_fit} = try; then
++				bootm ${loadaddr};
++			else
++				if run loadfdt; then
++					run boot_os;
++				else
++					echo WARN: Cannot load the DT;
++				fi;
++			fi;
++		fi;
++netargs=setenv bootargs ${jh_clk} ${mcore_args} console=${console} root=/dev/nfs
++		ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp
++netboot=echo Booting from net ...;
++		run netargs;
++		if test ${ip_dyn} = yes; then
++			setenv get_cmd dhcp;
++		else
++			setenv get_cmd tftp;
++		fi;
++		if test ${sec_boot} = yes; then
++			${get_cmd} ${cntr_addr} ${cntr_file};
++			run auth_os;
++		else
++			${get_cmd} ${loadaddr} ${image};
++			if test ${boot_fit} = yes || test ${boot_fit} = try; then
++				bootm ${loadaddr};
++			else
++				if ${get_cmd} ${fdt_addr_r} ${fdtfile}; then
++					run boot_os;
++				else
++					echo WARN: Cannot load the DT;
++				fi;
++			fi;
++		fi;
++bsp_bootcmd=echo Running BSP bootcmd ...;
++			mmc dev ${mmcdev}; if mmc rescan; then
++			if run loadbootscript; then
++				run bootscript;
++			else
++				if test ${sec_boot} = yes; then
++					if run loadcntr; then
++						run mmcboot;
++					else run netboot;
++					fi;
++				else
++					if run loadimage; then
++						run mmcboot;
++					else run netboot;
++					fi;
++				fi;
++			fi;
++		fi;
+diff --git a/board/freescale/imx94_evk/spl.c b/board/freescale/imx94_evk/spl.c
+new file mode 100644
+index 00000000000..341b165b3c8
+--- /dev/null
++++ b/board/freescale/imx94_evk/spl.c
+@@ -0,0 +1,81 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * Copyright 2025 NXP
 + */
 +
-+/ {
-+	binman {
-+		multiple-images;
++#include <asm/arch/clock.h>
++#include <asm/arch/mu.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/gpio.h>
++#include <asm/mach-imx/boot_mode.h>
++#include <asm/mach-imx/ele_api.h>
++#include <asm/sections.h>
++#include <hang.h>
++#include <init.h>
++#include <spl.h>
 +
-+		m33-oei-ddrfw {
-+			pad-byte = <0x00>;
-+			align-size = <0x8>;
-+			filename = "m33-oei-ddrfw.bin";
++DECLARE_GLOBAL_DATA_PTR;
 +
-+			oei-m33-ddr {
-+				align-size = <0x4>;
-+				filename = "oei-m33-ddr.bin";
-+				type = "blob-ext";
-+			};
++int spl_board_boot_device(enum boot_device boot_dev_spl)
++{
++	switch (boot_dev_spl) {
++	case SD1_BOOT:
++	case MMC1_BOOT:
++		return BOOT_DEVICE_MMC1;
++	case SD2_BOOT:
++	case MMC2_BOOT:
++		return BOOT_DEVICE_MMC2;
++	case USB_BOOT:
++		return BOOT_DEVICE_BOARD;
++	case QSPI_BOOT:
++		return BOOT_DEVICE_SPI;
++	default:
++		return BOOT_DEVICE_NONE;
++	}
++}
 +
-+			imx-lpddr {
-+				type = "nxp-header-ddrfw";
++void spl_board_init(void)
++{
++	int ret;
 +
-+				imx-lpddr-imem {
-+					filename = "lpddr5_imem_v202409.bin";
-+					type = "blob-ext";
-+				};
++	puts("Normal Boot\n");
 +
-+				imx-lpddr-dmem {
-+					filename = "lpddr5_dmem_v202409.bin";
-+					type = "blob-ext";
-+				};
-+			};
++	ret = ele_start_rng();
++	if (ret)
++		printf("Fail to start RNG: %d\n", ret);
++}
 +
-+			imx-lpddr-qb {
-+				type = "nxp-header-ddrfw";
++/* SCMI support by default */
++void board_init_f(ulong dummy)
++{
++	int ret;
 +
-+				imx-lpddr-imem-qb {
-+					filename = "lpddr5_imem_qb_v202409.bin";
-+					type = "blob-ext";
-+				};
++	/* Clear the BSS. */
++	memset(__bss_start, 0, __bss_end - __bss_start);
 +
-+				imx-lpddr-dmem-qb {
-+					filename = "lpddr5_dmem_qb_v202409.bin";
-+					type = "blob-ext";
-+				};
-+			};
-+		};
++	if (IS_ENABLED(CONFIG_SPL_RECOVER_DATA_SECTION) &&
++	    IS_ENABLED(CONFIG_SPL_BUILD))
++		spl_save_restore_data();
 +
-+		imx-boot {
-+			filename = "flash.bin";
-+			pad-byte = <0x00>;
++	timer_init();
 +
-+			spl {
-+				type = "nxp-imx9image";
-+				cfg-path = "spl/u-boot-spl.cfgout";
-+				args;
++	spl_early_init();
 +
-+				cntr-version = <2>;
-+				boot-from = "sd";
-+				soc-type = "IMX9";
-+				append = "mx943a0-ahab-container.img";
-+				container;
-+				dummy-ddr;
-+				image0 = "oei", "m33-oei-ddrfw.bin", "0x1ffc0000";
-+				hold = <0x10000>;
-+				image1 = "m33", "m33_image.bin", "0x1ffc0000";
-+				image2 = "a55", "spl/u-boot-spl.bin", "0x20480000";
-+				dummy-v2x = <0x8b000000>;
-+			};
++	/* Need enable SCMI drivers and ELE driver before enabling console */
++	ret = imx9_probe_mu();
++	if (ret)
++		hang(); /* if MU not probed, nothing can output, just hang here */
 +
-+			u-boot {
-+				type = "nxp-imx9image";
-+				cfg-path = "u-boot-container.cfgout";
-+				args;
++	arch_cpu_init();
 +
-+				cntr-version = <2>;
-+				boot-from = "sd";
-+				soc-type = "IMX9";
-+				container;
-+				image0 = "a55", "bl31.bin", "0x8a200000";
-+				image1 = "a55", "u-boot.bin", "0x90200000";
-+			};
-+		};
-+	};
-+};
++	board_early_init_f();
 +
-+&cpu0 {
-+	clocks = <&scmi_clk IMX94_CLK_ARMPLL_PFD0>;
-+	/delete-property/ power-domains;
-+};
++	preloader_console_init();
 +
-+&cpu1 {
-+	clocks = <&scmi_clk IMX94_CLK_ARMPLL_PFD0>;
-+	/delete-property/ power-domains;
-+};
++	debug("SOC: 0x%x\n", gd->arch.soc_rev);
++	debug("LC: 0x%x\n", gd->arch.lifecycle);
 +
-+&cpu2 {
-+	clocks = <&scmi_clk IMX94_CLK_ARMPLL_PFD0>;
-+	/delete-property/ power-domains;
-+};
++	get_reset_reason(true, false);
 +
-+&cpu3 {
-+	clocks = <&scmi_clk IMX94_CLK_ARMPLL_PFD0>;
-+	/delete-property/ power-domains;
-+};
++	board_init_r(NULL, 0);
++}
+diff --git a/configs/imx943_evk_defconfig b/configs/imx943_evk_defconfig
+new file mode 100644
+index 00000000000..27230ed3207
+--- /dev/null
++++ b/configs/imx943_evk_defconfig
+@@ -0,0 +1,115 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX9=y
++CONFIG_TEXT_BASE=0x90200000
++CONFIG_SYS_MALLOC_LEN=0x2000000
++CONFIG_SYS_MALLOC_F_LEN=0x10000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_ENV_SOURCE_FILE="imx94_evk"
++CONFIG_ENV_SIZE=0x4000
++CONFIG_ENV_OFFSET=0x700000
++CONFIG_DM_GPIO=y
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx943-evk"
++CONFIG_TARGET_IMX943_EVK=y
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_SYS_MONITOR_LEN=524288
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_DRIVERS_MISC=y
++CONFIG_SPL_TEXT_BASE=0x20480000
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x204d6000
++CONFIG_SPL_BSS_MAX_SIZE=0x2000
++CONFIG_SYS_LOAD_ADDR=0x90400000
++CONFIG_SPL=y
++CONFIG_SPL_RECOVER_DATA_SECTION=y
++CONFIG_PCI=y
++CONFIG_OF_BOARD_FIXUP=y
++CONFIG_SYS_MEMTEST_START=0x90000000
++CONFIG_SYS_MEMTEST_END=0xA0000000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_OF_SYSTEM_SETUP=y
++CONFIG_BOOTCOMMAND="bootflow scan -l; run bsp_bootcmd"
++CONFIG_DEFAULT_FDT_FILE="imx943-evk.dtb"
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_PBSIZE=2074
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_BOARD_LATE_INIT=y
++CONFIG_SPL_MAX_SIZE=0x30000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_LOAD_IMX_CONTAINER=y
++# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
++CONFIG_SPL_SYS_MALLOC=y
++CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
++CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x93200000
++CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
++CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1040
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_WATCHDOG=y
++CONFIG_SYS_PROMPT="u-boot=> "
++CONFIG_CMD_ERASEENV=y
++CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CRC32_VERIFY=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_FUSE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_POWEROFF=y
++CONFIG_CMD_SNTP=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EFIDEBUG=y
++CONFIG_CMD_RTC=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_GETTIME=y
++CONFIG_CMD_TIMER=y
++CONFIG_CMD_REGULATOR=y
++CONFIG_CMD_HASH=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_CLK_CCF=y
++CONFIG_CLK_SCMI=y
++CONFIG_SPL_CLK_SCMI=y
++CONFIG_SPL_FIRMWARE=y
++# CONFIG_SCMI_AGENT_SMCCC is not set
++CONFIG_IMX_RGPIO2P=y
++CONFIG_IMX_MU_MBOX=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_FSL_USDHC=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_IMX_SCMI=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_SCMI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RTC=y
++CONFIG_DM_SERIAL=y
++CONFIG_FSL_LPUART=y
++CONFIG_ULP_WATCHDOG=y
+diff --git a/doc/board/nxp/imx943_evk.rst b/doc/board/nxp/imx943_evk.rst
+new file mode 100644
+index 00000000000..651db08a0f7
+--- /dev/null
++++ b/doc/board/nxp/imx943_evk.rst
+@@ -0,0 +1,112 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+&aips1 {
-+	bootph-all;
-+};
++imx943_evk
++=======================
 +
-+&aips2 {
-+	bootph-all;
-+};
++U-Boot for the NXP i.MX943 19x19 EVK board
 +
-+&aips3 {
-+	bootph-all;
-+};
++Quick Start
++-----------
 +
-+&clk_ext1 {
-+	bootph-all;
-+};
++- Get ahab-container.img
++- Get DDR PHY Firmware Images
++- Get and Build OEI Images
++- Get and Build System Manager Image
++- Get and Build the ARM Trusted Firmware
++- Build the Bootloader Image
++- Boot
 +
-+&dummy {
-+	bootph-all;
-+};
++Get ahab-container.img
++--------------------------------------
 +
-+&{/firmware} {
-+	bootph-all;
-+};
++Note: srctree is U-Boot source directory
 +
-+&{/firmware/scmi} {
-+	bootph-all;
-+};
++.. code-block:: bash
 +
-+&{/firmware/scmi/protocol@11} {
-+	bootph-all;
-+};
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-ele-imx-2.0.2-89161a8.bin
++   $ sh firmware-ele-imx-2.0.2-89161a8.bin --auto-accept
++   $ cp firmware-ele-imx-2.0.2-89161a8/mx943a0-ahab-container.img $(srctree)
 +
-+&{/firmware/scmi/protocol@13} {
-+	bootph-all;
-+};
++Get DDR PHY Firmware Images
++--------------------------------------
 +
-+&{/firmware/scmi/protocol@14} {
-+	bootph-all;
-+};
++Note: srctree is U-Boot source directory
 +
-+&{/firmware/scmi/protocol@19} {
-+	bootph-all;
-+};
++.. code-block:: bash
 +
-+&gpio2 {
-+	bootph-pre-ram;
-+};
++   $ wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.28-994fa14.bin
++   $ sh firmware-imx-8.28-994fa14.bin --auto-accept
++   $ cp firmware-imx-8.28-994fa14/firmware/ddr/synopsys/lpddr5*v202409.bin $(srctree)
 +
-+&gpio3 {
-+	bootph-pre-ram;
-+};
++Get and Build OEI Images
++--------------------------------------
 +
-+&gpio4 {
-+	bootph-pre-ram;
-+};
++Note: srctree is U-Boot source directory
++Get OEI from: https://github.com/nxp-imx/imx-oei
++branch: master
 +
-+&gpio5 {
-+	bootph-pre-ram;
-+};
++.. code-block:: bash
 +
-+&gpio6 {
-+	bootph-pre-ram;
-+};
++   $ sudo apt -y install make gcc g++-multilib srecord
++   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ export TOOLS=$PWD
++   $ git clone -b master https://github.com/nxp-imx/imx-oei.git
++   $ cd imx-oei
++   $ make board=mx943lp5-19 oei=ddr DEBUG=1 all
++   $ cp build/mx943lp5-19/ddr/oei-m33-ddr.bin $(srctree)
 +
-+&gpio7 {
-+	bootph-pre-ram;
-+};
++Get and Build System Manager Image
++--------------------------------------
 +
-+&mu2 {
-+	bootph-all;
-+};
++Note: srctree is U-Boot source directory
++Get System Manager from: https://github.com/nxp-imx/imx-sm
++branch: master
 +
-+&osc_24m {
-+	bootph-all;
-+};
++.. code-block:: bash
 +
-+&scmi_buf0 {
-+	bootph-all;
-+};
++   $ sudo apt -y install make gcc g++-multilib srecord
++   $ wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ tar xvf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
++   $ export TOOLS=$PWD
++   $ git clone -b master https://github.com/nxp-imx/imx-sm.git
++   $ cd imx-sm
++   $ make config=mx94evk all
++   $ cp build/mx94evk/m33_image.bin $(srctree)
 +
-+&scmi_buf1 {
-+	bootph-all;
-+};
++Get and Build the ARM Trusted Firmware
++--------------------------------------
 +
-+&{/soc} {
-+	bootph-all;
++Note: srctree is U-Boot source directory
++Get ATF from: https://github.com/nxp-imx/imx-atf/
++branch: lf_v2.12
 +
-+	elemu1: mailbox@47530000 {
-+		compatible = "fsl,imx93-mu-s4";
-+		reg = <0x0 0x47530000 0x0 0x10000>;
-+		bootph-all;
-+		status = "okay";
-+	};
++.. code-block:: bash
 +
-+	elemu3: mailbox@47550000 {
-+		compatible = "fsl,imx93-mu-s4";
-+		reg = <0x0 0x47550000 0x0 0x10000>;
-+		bootph-all;
-+		status = "okay";
-+	};
-+};
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ unset LDFLAGS
++   $ unset AS
++   $ git clone -b lf_v2.12 https://github.com/nxp-imx/imx-atf.git
++   $ cd imx-atf
++   $ make PLAT=imx94 bl31
++   $ cp build/imx94/release/bl31.bin $(srctree)
 +
-+&sram0 {
-+	bootph-all;
-+};
++Build the Bootloader Image
++--------------------------
++
++.. code-block:: bash
++
++   $ export CROSS_COMPILE=aarch64-poky-linux-
++   $ make imx943_evk_defconfig
++   $ make
++
++Copy flash.bin to the MicroSD card:
++
++.. code-block:: bash
++
++   $ sudo dd if=flash.bin of=/dev/sd[x] bs=1k seek=32 conv=fsync
++
++Boot
++----
++
++Set i.MX943 boot device to MicroSD card
+diff --git a/doc/board/nxp/index.rst b/doc/board/nxp/index.rst
+index aa7d857346d..670501164b5 100644
+--- a/doc/board/nxp/index.rst
++++ b/doc/board/nxp/index.rst
+@@ -16,6 +16,7 @@ NXP Semiconductors
+    imx93_9x9_qsb
+    imx93_11x11_evk
+    imx93_frdm
++   imx943_evk
+    imx95_evk
+    imxrt1020-evk
+    imxrt1050-evk
+diff --git a/include/configs/imx94_evk.h b/include/configs/imx94_evk.h
+new file mode 100644
+index 00000000000..f93c3c4e4a8
+--- /dev/null
++++ b/include/configs/imx94_evk.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright 2025 NXP
++ */
++
++#ifndef __IMX94_EVK_H
++#define __IMX94_EVK_H
++
++#include <linux/sizes.h>
++#include <linux/stringify.h>
++#include <asm/arch/imx-regs.h>
++
++#define CFG_SYS_INIT_RAM_ADDR	0x90000000
++#define CFG_SYS_INIT_RAM_SIZE	0x200000
++
++#define CFG_SYS_SDRAM_BASE           0x90000000
++#define PHYS_SDRAM                   0x90000000
++#define PHYS_SDRAM_SIZE			     0x70000000UL /* 2GB  - 256MB DDR */
++#define PHYS_SDRAM_2_SIZE	             0x180000000 /* 8GB */
++
++/* Using ULP WDOG for reset */
++#define WDOG_BASE_ADDR          WDG3_BASE_ADDR
++
++#endif
 
 -- 
 2.43.0
