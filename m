@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A39CAC5B0
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 13:09:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C3DCAC5B1
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 13:09:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B02B98359F;
-	Tue, 23 Sep 2025 15:09:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 075CB835CB;
+	Tue, 23 Sep 2025 15:09:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w3I/+iRx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C3I8YgVH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA7DE835C6; Tue, 23 Sep 2025 15:09:16 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id E41F983510; Tue, 23 Sep 2025 15:09:17 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF0C283510
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 15:09:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1439C834E1
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 15:09:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58ND9AAZ1456282;
- Tue, 23 Sep 2025 08:09:10 -0500
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58ND9B621480040;
+ Tue, 23 Sep 2025 08:09:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758632950;
- bh=ydA4S+oG9G2iKisBQHe+2zu/AxtWEpYy5zBPv01qPWw=;
+ s=ti-com-17Q1; t=1758632951;
+ bh=Nb5BKfEPXEB5G+AXCD87wYVBU/1vWplJIZ5DLoF4RVM=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=w3I/+iRx5aPSEkHFFGuOiiHD7PC3gv5r6HZKHqXqf5J4ql/n696XV0b6+0Vl/tbbF
- XeXpH3ZmnbDWKDuY3wstxKS9OL2CPkt5EFoePdPT72jkAKnhAtox22+Nlf58TJX6Vw
- 3PMJADPDbHcbnBVGZpJ/N+diHKZrHfyctfzamXVc=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58ND99QV1679942
+ b=C3I8YgVHSsuwZxDvxYi7ZoR9CZEtL1FohooFf7DcPKml6eepRz8ktSVFNcFdk4ht0
+ K1zvKHbV8mpW1x7b70XIaisa5VxWQyswRWL4hVTG/ERXpUBNfFhgPg+co+hELLZoPI
+ zcG7/jCm/GXF7bgyZ8uJ9rcgjOoedYNr11rN/iqk=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58ND9Bv71679957
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 23 Sep 2025 08:09:10 -0500
-Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 23 Sep 2025 08:09:11 -0500
+Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 23
- Sep 2025 08:09:09 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2025 08:09:11 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 23 Sep 2025 08:09:09 -0500
+ Transport; Tue, 23 Sep 2025 08:09:11 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58ND98ex083763;
- Tue, 23 Sep 2025 08:09:08 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58ND9APY341164;
+ Tue, 23 Sep 2025 08:09:10 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,9 +56,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 3/8] spl: mmc: split spl_mmc_do_fs_boot into regular/os_boot
-Date: Tue, 23 Sep 2025 18:38:55 +0530
-Message-ID: <20250923130901.705124-4-anshuld@ti.com>
+Subject: [PATCH v2 4/8] spl: ubi: refactor spl_ubi_load_image for falcon mode
+Date: Tue, 23 Sep 2025 18:38:56 +0530
+Message-ID: <20250923130901.705124-5-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250923130901.705124-1-anshuld@ti.com>
 References: <20250923130901.705124-1-anshuld@ti.com>
@@ -82,119 +82,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently the logic to handle falcon mode as well as the regular boot is
-inside spl_mmc_do_fs_boot, this prevents us from cleanly extending
-falcon mode functionality like toggleable fallback to U-Boot proper.
-
-Therefore this patch splits the logic into spl_mmc_fs_load and
-spl_mmc_fs_load_os to handle the regular boot and falcon mode use case.
+This patch moves the falcon mode handling logic out of
+spl_ubi_load_image to spl_ubi_load_image_os, this allows for cleaner
+handling for fallback to U-Boot in case falcon mode fails.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/spl_mmc.c | 77 +++++++++++++++++++++++++++-----------------
- 1 file changed, 47 insertions(+), 30 deletions(-)
+ common/spl/spl_ubi.c | 41 ++++++++++++++++++++++++++++++-----------
+ 1 file changed, 30 insertions(+), 11 deletions(-)
 
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index cd56cf71055..e26f1087d45 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -193,6 +193,46 @@ int spl_start_uboot(void)
- }
- #endif
+diff --git a/common/spl/spl_ubi.c b/common/spl/spl_ubi.c
+index a8d3f43b452..162ec0f2f9b 100644
+--- a/common/spl/spl_ubi.c
++++ b/common/spl/spl_ubi.c
+@@ -11,6 +11,32 @@
+ #include <ubispl.h>
+ #include <spl.h>
  
-+static int spl_mmc_fs_load_os(struct spl_image_info *spl_image,
-+			      struct spl_boot_device *bootdev,
-+			      struct blk_desc *blk_dev, int part)
++#if CONFIG_IS_ENABLED(OS_BOOT)
++int spl_ubi_load_image_os(struct spl_image_info *spl_image,
++			  struct spl_boot_device *bootdev,
++			  struct ubispl_info *info)
 +{
-+	int err = -ENOSYS;
++	struct legacy_img_hdr *header;
++	struct ubispl_load volumes[2];
++	int err;
 +
-+	if (CONFIG_IS_ENABLED(FS_FAT)) {
-+		err = spl_load_image_fat_os(spl_image, bootdev, blk_dev, part);
-+		if (!err)
-+			return 0;
-+	}
-+	if (CONFIG_IS_ENABLED(FS_EXT4)) {
-+		err = spl_load_image_ext_os(spl_image, bootdev, blk_dev, part);
-+		if (!err)
-+			return 0;
-+	}
++	volumes[0].vol_id = CONFIG_SPL_UBI_LOAD_KERNEL_ID;
++	volumes[0].load_addr = (void *)CONFIG_SYS_LOAD_ADDR;
++	volumes[1].vol_id = CONFIG_SPL_UBI_LOAD_ARGS_ID;
++	volumes[1].load_addr = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
 +
-+	return err;
++	err = ubispl_load_volumes(info, volumes, 2);
++	if (err)
++		return err;
++
++	header = (struct legacy_img_hdr *)volumes[0].load_addr;
++	spl_parse_image_header(spl_image, bootdev, header);
++	puts("Linux loaded.\n");
++
++	return 0;
 +}
-+
-+static int spl_mmc_fs_load(struct spl_image_info *spl_image,
-+			   struct spl_boot_device *bootdev,
-+			   struct blk_desc *blk_dev, int part, const char *file)
-+{
-+	int err = -ENOENT;
-+
-+	if (CONFIG_IS_ENABLED(FS_FAT)) {
-+		err = spl_load_image_fat(spl_image, bootdev, blk_dev, part, file);
-+		if (!err)
-+			return 0;
-+	}
-+	if (CONFIG_IS_ENABLED(FS_EXT4)) {
-+		err = spl_load_image_ext(spl_image, bootdev, blk_dev, part, file);
-+		if (!err)
-+			return 0;
-+	}
-+
-+	return err;
-+}
-+
- #ifdef CONFIG_SYS_MMCSD_FS_BOOT
- static int spl_mmc_do_fs_boot(struct spl_image_info *spl_image,
- 			      struct spl_boot_device *bootdev,
-@@ -225,42 +265,19 @@ static int spl_mmc_do_fs_boot(struct spl_image_info *spl_image,
- 	}
- #endif
- 
--#ifdef CONFIG_SPL_FS_FAT
- 	if (!spl_start_uboot()) {
--		ret = spl_load_image_fat_os(spl_image, bootdev, mmc_get_blk_desc(mmc),
--					    partition);
-+		ret = spl_mmc_fs_load_os(spl_image, bootdev,
-+					 mmc_get_blk_desc(mmc), partition);
- 		if (!ret)
- 			return 0;
- 	}
--#ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
--	ret = spl_load_image_fat(spl_image, bootdev, mmc_get_blk_desc(mmc),
--				 partition,
--				 filename);
--	if (!ret)
--		return ret;
--#endif
--#endif
--#ifdef CONFIG_SPL_FS_EXT4
--	if (!spl_start_uboot()) {
--		ret = spl_load_image_ext_os(spl_image, bootdev, mmc_get_blk_desc(mmc),
--					    partition);
--		if (!ret)
--			return 0;
--	}
--#ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
--	ret = spl_load_image_ext(spl_image, bootdev, mmc_get_blk_desc(mmc),
--				 partition,
--				 filename);
--	if (!ret)
--		return 0;
--#endif
--#endif
--
--#if defined(CONFIG_SPL_FS_FAT) || defined(CONFIG_SPL_FS_EXT4)
--	ret = -ENOENT;
--#endif
- 
-+#ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
-+	return spl_mmc_fs_load(spl_image, bootdev, mmc_get_blk_desc(mmc),
-+			       partition, filename);
-+#else
- 	return ret;
 +#endif
- }
- #endif
++
+ int spl_ubi_load_image(struct spl_image_info *spl_image,
+ 		       struct spl_boot_device *bootdev)
+ {
+@@ -46,21 +72,14 @@ int spl_ubi_load_image(struct spl_image_info *spl_image,
  
+ #if CONFIG_IS_ENABLED(OS_BOOT)
+ 	if (!spl_start_uboot()) {
+-		volumes[0].vol_id = CONFIG_SPL_UBI_LOAD_KERNEL_ID;
+-		volumes[0].load_addr = (void *)CONFIG_SYS_LOAD_ADDR;
+-		volumes[1].vol_id = CONFIG_SPL_UBI_LOAD_ARGS_ID;
+-		volumes[1].load_addr = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
++		ret = spl_ubi_load_image_os(spl_image, bootdev, &info);
++		if (!ret)
++			return 0;
+ 
+-		ret = ubispl_load_volumes(&info, volumes, 2);
+-		if (!ret) {
+-			header = (struct legacy_img_hdr *)volumes[0].load_addr;
+-			spl_parse_image_header(spl_image, bootdev, header);
+-			puts("Linux loaded.\n");
+-			goto out;
+-		}
+ 		puts("Loading Linux failed, falling back to U-Boot.\n");
+ 	}
+ #endif
++
+ 	header = spl_get_load_buffer(-sizeof(*header), sizeof(header));
+ #ifdef CONFIG_SPL_UBI_LOAD_BY_VOLNAME
+ 	volumes[0].vol_id = -1;
 -- 
 2.51.0
 
