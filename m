@@ -4,68 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72A1CAC5A7
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 13:10:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17413CAC5A7
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 13:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B59B58362C;
-	Tue, 23 Sep 2025 15:09:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 436DF8341C;
+	Tue, 23 Sep 2025 15:37:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K8WtA4sA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WLq5+FJ6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CC238350A; Tue, 23 Sep 2025 15:09:24 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BB8983510
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 15:09:22 +0200 (CEST)
+ id 89A8383448; Tue, 23 Sep 2025 15:37:25 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 238D480C93
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 15:37:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58ND9JRO1480044;
- Tue, 23 Sep 2025 08:09:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758632959;
- bh=0UiwTMiv5uU6HYYRuWj9x6oIdVQs0+K/VhYobWWQEuI=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=K8WtA4sA7KX/ypzs11+3/EDK84G1+4HEAGxK4LK/Dk7ZZZtWWpxtax7lh6Juouwe3
- mHeIJSlukgHI0cYLRrvR6buWDnEDqTg+ipzGTrzCxytQlEoOOCCNzPV2IEXd8i7x6s
- +EAhYXBRSVPwHHLhsYVCFq8OLsD6BXHRCWnPqFnM=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58ND9J852800753
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 23 Sep 2025 08:09:19 -0500
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 23
- Sep 2025 08:09:18 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 23 Sep 2025 08:09:18 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58ND9H5a341241;
- Tue, 23 Sep 2025 08:09:18 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
- <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
- <hl@rock-chips.com>, <tim@feathertop.org>,
- <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v2 8/8] spl: falcon: disable fallback to U-Boot on failure
-Date: Tue, 23 Sep 2025 18:39:00 +0530
-Message-ID: <20250923130901.705124-9-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250923130901.705124-1-anshuld@ti.com>
-References: <20250923130901.705124-1-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-425715aeccdso14461575ab.2
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 06:37:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1758634642; x=1759239442; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=SF1tEhbiho/prbZMMivq3xQAIPzLqcNN9M2bmanO6bU=;
+ b=WLq5+FJ6mB1FVVOGv394R7lryu1BC2+7dSWckNqz+ObkmcQdm5FsNgplKYWKyr0Khp
+ m1Pqi7WhQQI7ZQKZwXWlzrGuSt/yLindmLGcBLmIudUXAlye+ocjMeXMgmh5J52GGqUm
+ YuF+xxnmLNJ1ElhdFet97wmwv8ExeXwSlcqV4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758634642; x=1759239442;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SF1tEhbiho/prbZMMivq3xQAIPzLqcNN9M2bmanO6bU=;
+ b=MF9CY/Z38+YJRxfS+mkgAOHXVwIrd1qhLC8U4mcIUkxfGeYHb7gp0JFVWEtWOJHD6e
+ jjxukoIGjloAzLjJG/zYcOM6zDmzHJpUVeSYvYQcENe0mmAiE9K3s59rtLVDNnO/m2pQ
+ HcMNLAgunHCCKN5PaEcxq5tEfN2WFklBHQ7a0kovrO1xOy4Iq8yl4kcAMTem9IweHEkM
+ 5ebDRPgufJcr4F1bgYH/r9+3o153MxgqVKBLjLqmKImFZONszvp7UBjSpGuP1DGdD51A
+ hGADGfIWsZjdt3Djl/YUWL1Sm17QPbsNeIXNSMnOUmDGZuwfGSxCV1SBUtQV1+ktH4eu
+ JVzA==
+X-Gm-Message-State: AOJu0Yx7dhxLGQBHfTCJ3ThYB1Pdgdmrbs89a5yLOwfwo865To/x6x5M
+ 3+hYvqvmqIYB7025RjGIlZCmz4OG+uPUzZzUmrZDxwWeLi8t17fdbbObcDcHGzpGcGYZ/IThPOy
+ r6Sk7E2M=
+X-Gm-Gg: ASbGnctsHlBfrmQDBbq619M6UyRpKwOV0g4FfNWG3CzkEwbPsBA3kKzzKXc9xIVKm31
+ UdnoxWF22mIeMlWMs4DmFubkR9BV9t7tUeCvZOulcXBvYWeSVyZiggzURroXuCptlNEARCVfm3C
+ vC4nGaDFPIbK5X0E1qVW1SPLSoYXcDtfIxGtKQLRz8nwcV/MviR9Np4FMh/QZqyycO3Gj17faO0
+ 3icuuYmY4ag/inCZHv4ivAjssenwjOkYTDEc3ShbH0eqfSwZNiN7Rphgcy8BOOOcH59xnrdmgAK
+ yKzA3h1MA3jWtqa6MmiFhqEQK+APAAOjEAf4rgjzzeBlZ49N360OYdIk6UFDV9qTQXXtuzVwWpJ
+ fhjDobgBPWgqpKIuhK38l5N13yAHihbLzVwuc/+9tg3daxoxpcON4bsTB
+X-Google-Smtp-Source: AGHT+IHdr57OVuk+iPDXxDmaUIy78PYd8x8vVSJkyZFR0uJFZtp7nENGRBlRBSksLQRtSKWlV4cR6A==
+X-Received: by 2002:a05:6e02:1a6c:b0:424:b862:831e with SMTP id
+ e9e14a558f8ab-42581e7a50fmr39287285ab.15.1758634640766; 
+ Tue, 23 Sep 2025 06:37:20 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-55bbf14c47esm2860939173.41.2025.09.23.06.37.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Sep 2025 06:37:19 -0700 (PDT)
+Date: Tue, 23 Sep 2025 07:37:17 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2025.10-r5 4released
+Message-ID: <20250923133717.GM124814@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5XnD7+5xrBxcRcei"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,113 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of falling back to the standard U-Boot boot flow, we should just
-halt boot if the expected boot flow in falcon mode fails.
 
-This prevents a malicious actor from accessing U-Boot proper if they can
-cause a boot failure on falcon mode.
+--5XnD7+5xrBxcRcei
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- common/spl/spl_mmc.c  |  4 ++++
- common/spl/spl_nand.c | 11 +++++------
- common/spl/spl_nor.c  | 10 +++++-----
- common/spl/spl_spi.c  |  3 +++
- common/spl/spl_ubi.c  |  2 ++
- 5 files changed, 19 insertions(+), 11 deletions(-)
+Hey all,
 
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index e26f1087d45..c9637399c15 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -270,6 +270,8 @@ static int spl_mmc_do_fs_boot(struct spl_image_info *spl_image,
- 					 mmc_get_blk_desc(mmc), partition);
- 		if (!ret)
- 			return 0;
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return ret;
- 	}
- 
- #ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
-@@ -409,6 +411,8 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- 			ret = mmc_load_image_raw_os(spl_image, bootdev, mmc);
- 			if (!ret)
- 				return 0;
-+			if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+				return ret;
- 		}
- 
- 		raw_sect = spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
-diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-index 8993e304c26..7d1b55b2311 100644
---- a/common/spl/spl_nand.c
-+++ b/common/spl/spl_nand.c
-@@ -138,12 +138,11 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
- 		err = spl_nand_load_image_os(spl_image, bootdev);
- 		if (!err)
- 			return 0;
--		} else {
--			puts("The Expected Linux image was not "
--				"found. Please check your NAND "
--				"configuration.\n");
--			puts("Trying to start u-boot now...\n");
--		}
-+
-+		puts("%s: Failed in falcon boot: %d", __func__, err);
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return err;
-+		puts("Fallback to U-Boot\n");
- 	}
- #endif
- 
-diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
-index e999dcc4fcf..6f8149cac53 100644
---- a/common/spl/spl_nor.c
-+++ b/common/spl/spl_nor.c
-@@ -94,11 +94,11 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- 		err = spl_nor_load_image_os(spl_image, bootdev);
- 		if (!err)
- 			return 0;
--		} else {
--			puts("The Expected Linux image was not found.\n"
--			     "Please check your NOR configuration.\n"
--			     "Trying to start u-boot now...\n");
--		}
-+
-+		puts("%s: Failed in falcon boot: %d", __func__, err);
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return err;
-+		puts("Fallback to U-Boot\n");
- 	}
- #endif
- 
-diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
-index 1ada37f5c21..863be144316 100644
---- a/common/spl/spl_spi.c
-+++ b/common/spl/spl_spi.c
-@@ -104,6 +104,9 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 
- 		if (!err)
- 			return 0;
-+
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return err;
- 	}
- #endif
- 
-diff --git a/common/spl/spl_ubi.c b/common/spl/spl_ubi.c
-index 162ec0f2f9b..95676975e76 100644
---- a/common/spl/spl_ubi.c
-+++ b/common/spl/spl_ubi.c
-@@ -77,6 +77,8 @@ int spl_ubi_load_image(struct spl_image_info *spl_image,
- 			return 0;
- 
- 		puts("Loading Linux failed, falling back to U-Boot.\n");
-+		if (CONFIG_IS_ENABLED(OS_BOOT_SECURE))
-+			return ret;
- 	}
- #endif
- 
--- 
-2.51.0
+It's a day late, apologies, and here's the next rc. I've pushed this out
+and will merge to the next branch shortly. As with previous releases, I
+want to reiterate that in terms of project organization, we're moving
+ahead with SFC and they'll be joining us on the community call that
+follows the v2025.10 release itself. I would strongly encourage anyone
+with questions or concerns to join and speak up, or reach out privately
+if desired. If anyone knows of regression fixes that need to be picked
+up still please reach out.
 
+We're continuing with a community meeting following the release
+and once again this is the same time as the previous meeting. The
+meeting details itself are:
+https://meet.google.com/btj-wgcg-euw
+September 23rd, 2025. 9am (GMT -06:00)
+
+To join by phone:
+https://meet.google.com/tel/btj-wgcg-euw?pin=3D1307528552322&hs=3D1
+
+In terms of a rough changelog:
+- Small sets of regression fixes on TI K3, i.MX, STM and starfive
+  platforms.
+
+I continue to plan to do an rc release every two weeks and the final
+release will be 06 October 2025.
+
+Thanks all!
+
+--=20
+Tom
+
+--5XnD7+5xrBxcRcei
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNKijQAKCRAr4qD1Cr/k
+CnSPAQClVWAkmRAGPo+YxptBP1PL6BkIklXkk8wuR4NVyx4hzgEAgvderZvkQrWO
++exZsgFYbOSPPQk/faibKYRJwC9s/QU=
+=echP
+-----END PGP SIGNATURE-----
+
+--5XnD7+5xrBxcRcei--
