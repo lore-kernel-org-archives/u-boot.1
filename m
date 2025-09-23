@@ -4,167 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD685CAC5A7
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 05:47:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7104BCAC5A7
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 06:34:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A25E6833ED;
-	Tue, 23 Sep 2025 07:47:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D4A383390;
+	Tue, 23 Sep 2025 08:33:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="XefnESX9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W1mprUbX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6218983443; Tue, 23 Sep 2025 07:47:35 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1662D833E9; Tue, 23 Sep 2025 08:33:57 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D20F583390
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 07:47:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED9648004F
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 08:33:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ye.li@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jq2gqmzjcdvGaT+fIzNLTL5fug4tI5jZb2aWFc9MDrvmW8SBZ1lwEo20NscGpiEL+fWIa5+4xlHeI+rblicR7B8X1Cxqo8YJZuN2Yz/ecywDlCxbI0FYUdC06qFSCxymCO7ezXr6vTxVvEin2SBHhpOsela9Cs+bnDIGdHCSLsr3xl31nkq7RH/15FA/f9ho/7DmWc2i01OdUYk4QrU+M0zfao5rn1O93/oquXPXSvUux6j6hui8RZ5xUy4IqkK73UeDQ7X2bnwPQOQ7M9yzV+lIb59N0Krx+GnFHN/NN09eplnA4IOMGpsAq6YZ8QaaM+B4058LbJfwknELxyHe5g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1xZJG8lhzJA0F55Lrz/hHNB6Ib168WvkIU/JiDkBIZw=;
- b=AUmtuJzb3dYY7iGUXW9gHh+AdKPbYGUr5a9ss6b6gMEu805L9Pmdgn6QErQhBB9DXmrbD/TxYXSnV3NiCRtXHBTAnySAPEnIxAEWwreaNSxHat7cKC03LCK4EGVyvj8EtSJJQyN+zltxpTHIGXa3b3uXT0fGxLlKJxdz8zRxn5yREGVyfIjwWWIDzNzetZu2nGjfdgMdGwqRiXCXVeVHexZNEaArqA7a5XekP/GQHcctvGQEQ5gbUfIKNZ+CJTy+zOGoOFAW00w6xcZDkGaI8sscqFE+WCAjNTn+ggY8jNbMkoeLk36Fy5Zl+wOlVHlmljLuLVwyk9fCo17APC/QwQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1xZJG8lhzJA0F55Lrz/hHNB6Ib168WvkIU/JiDkBIZw=;
- b=XefnESX9Dao12YH6l0IS+RtAApgCZPLb6bOreLQ4zhNILrXi+vysEG+NYKtv8YaG/Zl0TkAq1w8tibD8kYC6/ZMDIaJezlxLYbKnP8B+Zz7P8ql5gqYhSZp6P5VRcSi9LRfoIG/vluIo5EjwosXslKyI7Wk4E/7nC9v5xJLTlKtAJRm6psnLLIUmcWzh5eZYOKgA0yJXHk/BJt7j7Cg8y2VDZMVTFH0FR7M/fWcosA6Gc695adpJCp3ZfpcfoD45QP0jvN4XGtznwdhj6HM+v3ByyyFfzLOerEO4yWxlvV1oSeoKMal3X7Otip8lKq+nQjP9uww6kjFqG3z3+fEeDA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com (2603:10a6:20b:4ec::5)
- by PR3PR04MB7386.eurprd04.prod.outlook.com (2603:10a6:102:85::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.8; Tue, 23 Sep
- 2025 05:47:31 +0000
-Received: from AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::afae:fb35:fc8:5c90]) by AS4PR04MB9436.eurprd04.prod.outlook.com
- ([fe80::afae:fb35:fc8:5c90%7]) with mapi id 15.20.9160.008; Tue, 23 Sep 2025
- 05:47:31 +0000
-Message-ID: <cd29c886-dcfc-4268-a475-3932765fb9b3@oss.nxp.com>
-Date: Tue, 23 Sep 2025 13:47:26 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] spi: nxp_fspi: Support i.MX8DXL flexspi
-To: Fabio Estevam <festevam@gmail.com>, Ye Li <ye.li@nxp.com>
-Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, peng.fan@nxp.com,
- uboot-imx@nxp.com, alice.guo@nxp.com
-References: <20250922111143.1204915-1-ye.li@nxp.com>
- <20250922111143.1204915-3-ye.li@nxp.com>
- <CAOMZO5CcvBz97mOpZ0RwAxGMJg9ry6QEnNMZCTMUpLufMnQYSA@mail.gmail.com>
-Content-Language: en-US
-From: Ye Li <ye.li@oss.nxp.com>
-In-Reply-To: <CAOMZO5CcvBz97mOpZ0RwAxGMJg9ry6QEnNMZCTMUpLufMnQYSA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SG2P153CA0026.APCP153.PROD.OUTLOOK.COM (2603:1096:4:c7::13)
- To AS4PR04MB9436.eurprd04.prod.outlook.com
- (2603:10a6:20b:4ec::5)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-749399349ddso20694557b3.3
+ for <u-boot@lists.denx.de>; Mon, 22 Sep 2025 23:33:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1758609233; x=1759214033; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YFtFPYjlgfgiIKrBkilVc2zwhXGbUDA2PjrMEh2VD/4=;
+ b=W1mprUbXbrCp3cktCrhOqXc1pftD/TYJCB6SvodilEBiXu2wmoCOqiKzWjJcmX/7Nv
+ 9dGyztKT0cWbhuMSinaGxiRNwptrvqM4qRP4h5ZRT9KvjQNO/6acY9FmUB2OLSdchLFt
+ gDU0ZlY5qmEhqWNOt7wsmVHti/7tYdoDiMRIX+CElUxZM+hTErzturmoA4jmW6YCj1mF
+ fw1ESx927NKUsClIoRgMDZI6gOPFFf43fyDVoLUGYlBJiXlHFRKeKdreu2a86o7NiNQZ
+ YTEZmjSL5pXfqWkZLNvmw0RjVoP9zYEqYRVJrX2Gde0zaX18XWKbD9V0bY5A+rz/F6tl
+ iHwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758609233; x=1759214033;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YFtFPYjlgfgiIKrBkilVc2zwhXGbUDA2PjrMEh2VD/4=;
+ b=p4vdVJ2he6MWd/aDg9QEH40483XjtqLfxgHPe4L0sZWfuzYyAfyePGOni+prz7eX1H
+ hGtmB/NY49muqWqZtjVQiG7E0lPkm2Rv70LA3cbeqsV0SEHvDLkb7VwJ6Yvv9RMfaX13
+ XZFbbcGzEavUYslQ9e/Ew86pASoH7u5P4F363nlpILAALbJlXJDn/+484o2He55BfjbT
+ u7UtH7T6L3RDEzVEImzkad0/AuKyZ9gDmSgcB6lYwLdkAsQTlKnmALtCiPmgWFjtaK8I
+ jNFTRA4f1xn8Wiv3AsoZ6tasdRGjeHRoAe6UucuYFM1OuTKNgkwY4P78qQDREkj/8So/
+ vP7w==
+X-Gm-Message-State: AOJu0YxiEbQDt6dcN8eK0cmtspivpi6dQAPiTrk9VdGe9LLrMBjR2TW6
+ Yp4fAcN8xn7WuYicxeeYKruROabFhjXoDecogkpZMSRlNtvY4sxmZQhg68CaeT1X4FXQZwlugU5
+ FTXvvPv6yuMqiIFqcVLEQkhtWJsbOhRmBmXAUZtxxMA==
+X-Gm-Gg: ASbGncsYKd23qAd3KtjSLKiTVLjJkzEow1GfAKDS3YyFswK9Mk0ZKu1nPmiCnYQ8x3C
+ lrdDjdb4x0ufzy+nC/SFyoKmw8jdgmmTMzO9FI9gdMQcNzyeWlOQflrCYu31FE2fAN7GNseOWDz
+ 5QAu6eh/aawOvCwb+SS16jTBXzubuVeTZEJJct4BnLtdrEcfNqqQf/gTfTfy1IzSzauvTwVLnqg
+ HN4L8c=
+X-Google-Smtp-Source: AGHT+IG1oL7zorGoYS7mS+szuBMKXxVho/dK3JPTM7MLwVjR/qPdAPZ55is+xk61IxXP+wfCqc7yp6R1W1940D9WIrs=
+X-Received: by 2002:a05:690c:d1b:b0:747:8a32:4614 with SMTP id
+ 00721157ae682-75895212f99mr10346367b3.16.1758609232560; Mon, 22 Sep 2025
+ 23:33:52 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR04MB9436:EE_|PR3PR04MB7386:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7e6cb429-c593-4856-bdd4-08ddfa64afb3
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|19092799006|376014|42112799006; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?U2hhUUhsNmNTenpiT2tRZm41QzNVMFlsOWlOb0xnSnlIVWtDb2h0cHZIbHpu?=
- =?utf-8?B?TVZoWGNkdVY3MkRaZmJqeVBiWDFBd1hlMDJhM0VnY0lBWndQcFVwSFBXZ2Yx?=
- =?utf-8?B?WnNDTXgvZGMvbmk2Z3NhQ29HMXFtNTVxeXVIa2g3eWh5eE56dlRCeU11QTBY?=
- =?utf-8?B?NUJHdktzdEJwbWhWbXhxL1NUbzU4Qnc4OXBUQ2hDSlRTR1QyL3d2dXR6MXRs?=
- =?utf-8?B?N1lJRjNTVk55b1RxNTB5bHArNUt4dmhJTUdqUytVZzlWYkhDM21RVkIvbFZ4?=
- =?utf-8?B?N1FvS0ZWZENCcHUrNjQ2d0tFOXpkYzBPeWdEQUFFckdZN2kweVRvc3dIRnBJ?=
- =?utf-8?B?QUpyTG1YM1pHTDRJU1VVcWIvdnN0V1kvN3gxSVZqWWxFUktYbWNaay9BVDVm?=
- =?utf-8?B?cnR4Y0RYc20yN0hSMVB1a1NBaTVLQ2tjUVh4Z1BjbU5CSTBBczVWMThSUzU4?=
- =?utf-8?B?alUyZnllTWt4UWhtNUNkOVNvTkJoMTdVMllZa0dpcmg1WXNOeG5YNDVYdWRQ?=
- =?utf-8?B?Sm40RWxqODVZS1dBSnVBWTJ4QzduRmhheXBucm9xcHFGUkdYVWFEOGNSSjhh?=
- =?utf-8?B?SnZjSUJQbWYrNGtUMEFvV3dmWENBcGcvNmpQWThiTTJ2aUlVMVEwK09HQWh4?=
- =?utf-8?B?bUM4STdja2x3c3luU3d2K01GMXFvNEUrNTJ2REM3eVVyVEJsbEc3Mlp4bzR0?=
- =?utf-8?B?VFo5VjQvSC9hQzZISCtzbzdPakNHTVBXOUYwcE55VE52djdJU29iOU40RndT?=
- =?utf-8?B?TW5SQ1N3ejg2UUFES2xTaER6enpsSFV3ZzdIQjZKWWJONnZXdEVldWF5WHIw?=
- =?utf-8?B?R2JIamR3bE5hUUpVQS9OTWVncVd6VGdxdTArTE0vN05JYmhldnJYc0MwQkw0?=
- =?utf-8?B?aDR4ZXEvTTdMMXo2RlVnNjNOQXEwVWpwWklET2N1NHdLWXVaWEF0QU1GeFl0?=
- =?utf-8?B?ajNhVlJqVFd4c25OcTNpb3VRRERKcWFlQ0R2Q2pJYm9JLzkxV2c4TXJrUnFq?=
- =?utf-8?B?ck5JbXRoVU1NZ2JmemQ4cEl2ZTdGd0FNQ1hOSnM2TVFXU2tlZWcyWHgwQlZJ?=
- =?utf-8?B?S3VzVXpSUGJZd2duQkRqeXJvejY3ajJ5L1p3VjFUWTlOeGo4QUhkK2Ywb0w2?=
- =?utf-8?B?bVNEbmhiZTY2R2wvWVUzazkrT1JDeHlrQVBaaWZFOExPVE56RlZkcXZGOVFs?=
- =?utf-8?B?U0UxbzVGQmtkeml6bUxwQUJNcTNCZ0RlNE5JMWpIcWlzMWM1dE9MMTI5c2pN?=
- =?utf-8?B?WVlLTTZmSUUyZlVzaHZjZklFV1ZUaXE5UDFNN1JuYlQwTXFMM0JtdmVGMUF5?=
- =?utf-8?B?OUVBaFgwK1hlVDUrZmYrZjBURUYwSXdOMlN1d1NQSzRhTmlWSFRHay9oaFZP?=
- =?utf-8?B?dmVtUStLak14T3M5elQyUzF6S1JZeXN6RDdveTIzQzJRMnZPZGE1QTVwWDdr?=
- =?utf-8?B?TEw4S1pGYVF4TDlDdHRiN1NOTHhtTnI3aTJZMlh5SmVTT2JmbjNEbVlYNktp?=
- =?utf-8?B?VTNiNnl3WWN1RldPNmE3Q1BHSzBOR2Nnc2YyU3A5cno4RFBwQ2ZPOG5vcmF2?=
- =?utf-8?B?TVRhOWVrbDNEc3VSQkFaRkNkVlF2TzNCWFBtaEtBOElzWDlYc3FUUGlia3N4?=
- =?utf-8?B?UEQ5WlZpWjFNNFZUWmt0WlZZMWhra3lEZDRRNXFYdUpuY0lCS1prMSs0Yzdx?=
- =?utf-8?B?cGtyK1lQdGMvM0xmRTZnc3RCTTlkYkJncGZFczhMKzN0N2Z5YlBXdVJ6b0l6?=
- =?utf-8?B?RTA4UFFPbXNLTEZXYlA3SU5paU5mUmRkK0ZjeE55b2RGT3VlRGJQTmdkMlJG?=
- =?utf-8?B?NUxTWWYxZDlzSlZiL3lpeUM3RUY0SXBMWnBEV1lvN3Y0VEFMSWpmOGJaRElQ?=
- =?utf-8?B?ZzhteDExNk1SM3FRTXJEL2hFaVlVSlNBZEV5a0gzWUpBMXVLMmRtdlhqN2VP?=
- =?utf-8?Q?Y/rNh8DUB6A=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR04MB9436.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(19092799006)(376014)(42112799006); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UEE5RWxSTXZkcm1hVHQ0eEJTTG9ROTE4VFBORE1BeGplWVBlZ0hhVkFGMFM3?=
- =?utf-8?B?cGNHd1JodXI3aEpDa0txcytuU1lIeEd4QXFNeklGNWEvRUZEVXFuTkRSR1RC?=
- =?utf-8?B?emJEYVhVMWYwTTVWRm1PVjBYNnY3dUtFeWFJdHEyRTdhT1NrWEY2NnovRk5B?=
- =?utf-8?B?eWpzQkRyaE5FOXZsRlNDVmxhUjZucEY3OTFLNE00LzFTQk5FNnNwUkJsZThx?=
- =?utf-8?B?SUduWjZoQ0tnWWpQdlFjR3BEK3ZyQmhZU0ZRemNiV0ZSK1N1Wk5YeEVKcmZ3?=
- =?utf-8?B?TkM5VWk0aE5mQkJnZitBMi9CakZxWTBXTmhpbTlvQ3lreGRZQ3UzbGowcEdV?=
- =?utf-8?B?a3hCUThzQjNKVEZCU3Q3YzVkTFlaaG1qejM4SmFKSnk4cmczTUxKODJxWFZ6?=
- =?utf-8?B?bFBDQnp0MUZBUWsranEyYVhRMGZoMFJzWVlxaTEwUGpRNmFmRG5tN0p2dWhr?=
- =?utf-8?B?L09HY2Y3bFRJZHF2aUlEcjVrUCtGL3lQVzlCM0Z4ZnBIMHZrYTlTT1Q3eTlF?=
- =?utf-8?B?TmMrc1pNdXkxT1E1MWV5NjVsQlEyTHNwUjlML3V2UGVIR0VEVFQ3a052emph?=
- =?utf-8?B?aXdIeU1yZysrV1ljUFN1MHgySzJnRjQ1NGFhSzlLSm1pdHRFMWNrTXcrK3NJ?=
- =?utf-8?B?NUdFSWZQYno5aEdDaVp1Y3plRTdKN1VyeDlHMWVmR2lidjFnOStKKzlDVDh6?=
- =?utf-8?B?YWdpbi81V2tycjh5anRNbmhSS3ROZ1FJM1BIMExVT2p5d0ZqNGgzRjQzVWo1?=
- =?utf-8?B?WEVwT0FaZjV2SU14Wm5KMjN3eWJYS0tJZ2p0ajFSNHhJN1lyeVMwWjRxWkJM?=
- =?utf-8?B?L3JzMEhZUitPdDhKU09vTGdmQnhBVU9KdjF0U1NwUlBIRGdyN2lvTDdsUUV4?=
- =?utf-8?B?MUNqL2JFQ1hxTmtVNHl2bmloNkh5dmFMRkR6MWVTVkhRNnFka2R0Q0l0elk5?=
- =?utf-8?B?Znl3ZzlIc2dSa3ZkbktSWERueG9qakdTUmRoUFhBcHNrTkJqWU1JdnNiYjZF?=
- =?utf-8?B?a2wwTUFZWllVcUl3NHJndVRnNEdNWHc2YWlDaWsxd2lleU5QMmVKdHpxWStK?=
- =?utf-8?B?YUtwL0g5eS9uMSs1U28wanJhMEhCTGVxTjR1SWFyL04zTUcvYlZ5V0FWaEZX?=
- =?utf-8?B?cXc4NkVjNzM2dWJuWDdwV1hWelptZVo0c1VmeHJFQzgwR3VUa05ybmhQOTAv?=
- =?utf-8?B?OENIMDlUaEdrUnNLTFp3ZURlU044NURocUErMG5PZHlZa1hFMEFPZXR3Z3Zx?=
- =?utf-8?B?WU1mUHNuOThKR3MrdzV0QWNQclNadTZINEZnRkZ3SXZVSHBEdDlOQkZibWFM?=
- =?utf-8?B?VXp2WW9OWi8venVhb0FXYWliakZGUUJhQlloZVZTTDlwL2VkaHdYSDhQbXNG?=
- =?utf-8?B?ZjRONVF5OG04WERIZ1o2eVJlQjNtUDFhazZyaW56RlliUGxwSVV3dEswTnV0?=
- =?utf-8?B?RUx0MUlLVXZwRHJZUFR5YjBSOWJXNzBqVGJ4SGtkQk80bUhhbi9VWXZhdjNN?=
- =?utf-8?B?QVh5clA3TVRuZUNKZ1lNdTUwQWZGTGg5ZWxhWEhQQXRVRjBsamhBSUNYQzRK?=
- =?utf-8?B?Uld4M0JGMlA0eS9RdW1kUGFjQ3ZkbEFMVGQzbDVkMUl4bGFSaEd5TGN2S2Iz?=
- =?utf-8?B?MU1RRC9DdVk5MHFmYkI4bzJqZmYra2pWSmpiZmJLbFRlZVJyaWhmU1lEYXlk?=
- =?utf-8?B?R1FJRldQdEZ3Skl3NmVyWEk0YldBV0Y2OEVrQWpqYkRGYXdONFFXMmVLVTFK?=
- =?utf-8?B?TzdGYW95NE1zRlQ5a1ZWSk5wcVM5c1lWOUF5aTFuRWRaSTlTM3d6Q2J4Q2N3?=
- =?utf-8?B?NVhoWkEwQXZ2VW5kLzVsQkptcFI4UVlDSUN1N21FTS90UVFwZ2h4bFI5NGFm?=
- =?utf-8?B?WWJyTzd3V1VLVExEMFJsdURWbUZsY1BGNmZ5TlUrbWhiREZETU8xc2Z2ZHZU?=
- =?utf-8?B?andmTGFad0xYSHJEcVJnUE9NczdPRFpTNFliZmdFbytmSVV0cHA3L3QyY2Mx?=
- =?utf-8?B?anpqMFN4WnpYazlqeVdrUGZBVXNLdjBrNUhOS3BoRFR3V3ZqOWpqK1JMSXd5?=
- =?utf-8?B?V2lBMXFiVDRmamxtTVl3Vnk1dk5KdUVLS0xFVEZERzBJbXlEeHhTSWUwODJ4?=
- =?utf-8?Q?CAgdPNfr83KynSRxM0vK7oy/7?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e6cb429-c593-4856-bdd4-08ddfa64afb3
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR04MB9436.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2025 05:47:31.2207 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Hzm+3vQJGTdQPKuQVMEX+Ab07sL/a0TphQtNFHHml2UUsUdKNMLOiaYSgwVCM8bp
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7386
+References: <20250919205605.291108-1-raymond.mao@linaro.org>
+In-Reply-To: <20250919205605.291108-1-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 23 Sep 2025 09:33:16 +0300
+X-Gm-Features: AS18NWA_t8f9-TqkYo7ZwIyKPQGTpu3rVRRpKWxhmwvBXwU4uGjrKD-JoYGcBmk
+Message-ID: <CAC_iWj+=5pZq539tunamO9=U4fbRCHujqG2WGq1uK70O2sQ4Bg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] smbios: Fix duplicated smbios handles
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Mark Kettenis <kettenis@openbsd.org>,
+ Baocheng Su <baocheng.su@siemens.com>, Simon Glass <sjg@chromium.org>, 
+ Jan Kiszka <jan.kiszka@siemens.com>, Li Hua Qian <huaqian.li@siemens.com>, 
+ Peng Fan <peng.fan@nxp.com>, Samuel Holland <samuel.holland@sifive.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,19 +94,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Raymond,
+
+On Fri, 19 Sept 2025 at 23:56, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Some smbios types can have multiple instances (e.g. Type 7, 9, 16, 17,
+> 19), thus the 'handle' argument should be a pointer so that the value
+> can be accumulated when writing all the instances.
+> This also fix the observed duplicated Type 7 handles.
+
+This was wrong as well because the write methods were called with
+method->write((ulong *)&addr, &handle, &ctx); right?
 
 
-On 9/23/2025 10:14 AM, Fabio Estevam wrote:
-> On Mon, Sep 22, 2025 at 8:12 AM Ye Li <ye.li@nxp.com> wrote:
->>
->> Due to a errata on i.MX8DXL flexspi, we can't use AHB read, only can
-> 
-> Is this erratum public? If so, please add a reference to it.
-It is a errata ERR050601 for 8DXL A1 silicon. Latest B0 silicon has it 
-fixed. The public errata doc is only for B0, so this one is not included.
-I will update the commit log in v2 to add detail description.
+>
+> Fixes: bcf456dd369e ("smbios: add detailed smbios information")
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
 
-Best regards,
-Ye Li
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-
+> Changes in v3:
+> - Initial patch.
+>
+>  lib/smbios.c | 42 +++++++++++++++++++++++-------------------
+>  1 file changed, 23 insertions(+), 19 deletions(-)
+>
+> diff --git a/lib/smbios.c b/lib/smbios.c
+> index b8c2846277a..85508c06547 100644
+> --- a/lib/smbios.c
+> +++ b/lib/smbios.c
+> @@ -103,7 +103,7 @@ struct smbios_ctx {
+>   * @ctx:       context for writing the tables
+>   * Return:     size of the structure
+>   */
+> -typedef int (*smbios_write_type)(ulong *addr, int handle,
+> +typedef int (*smbios_write_type)(ulong *addr, int *handle,
+>                                  struct smbios_ctx *ctx);
+>
+>  /**
+> @@ -364,7 +364,7 @@ static int smbios_string_table_len(const struct smbios_ctx *ctx)
+>         return (ctx->next_ptr + 1) - ctx->eos;
+>  }
+>
+> -static int smbios_write_type0(ulong *current, int handle,
+> +static int smbios_write_type0(ulong *current, int *handle,
+>                               struct smbios_ctx *ctx)
+>  {
+>         struct smbios_type0 *t;
+> @@ -372,7 +372,7 @@ static int smbios_write_type0(ulong *current, int handle,
+>
+>         t = map_sysmem(*current, len);
+>         memset(t, 0, len);
+> -       fill_smbios_header(t, SMBIOS_BIOS_INFORMATION, len, handle);
+> +       fill_smbios_header(t, SMBIOS_BIOS_INFORMATION, len, *handle);
+>         smbios_set_eos(ctx, t->eos);
+>         t->vendor = smbios_add_prop_si(ctx, NULL, SYSID_SM_BIOS_VENDOR,
+>                                        "U-Boot");
+> @@ -423,7 +423,7 @@ static int smbios_write_type0(ulong *current, int handle,
+>         return len;
+>  }
+>
+> -static int smbios_write_type1(ulong *current, int handle,
+> +static int smbios_write_type1(ulong *current, int *handle,
+>                               struct smbios_ctx *ctx)
+>  {
+>         struct smbios_type1 *t;
+> @@ -434,7 +434,7 @@ static int smbios_write_type1(ulong *current, int handle,
+>
+>         t = map_sysmem(*current, len);
+>         memset(t, 0, len);
+> -       fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
+> +       fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, *handle);
+>         smbios_set_eos(ctx, t->eos);
+>
+>         t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
+> @@ -471,7 +471,7 @@ static int smbios_write_type1(ulong *current, int handle,
+>         return len;
+>  }
+>
+> -static int smbios_write_type2(ulong *current, int handle,
+> +static int smbios_write_type2(ulong *current, int *handle,
+>                               struct smbios_ctx *ctx)
+>  {
+>         struct smbios_type2 *t;
+> @@ -485,7 +485,7 @@ static int smbios_write_type2(ulong *current, int handle,
+>          */
+>         t = map_sysmem(*current, len);
+>         memset(t, 0, len);
+> -       fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
+> +       fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, *handle);
+>
+>         /* eos is at the end of the structure */
+>         eos_addr = (u8 *)t + len - sizeof(t->eos);
+> @@ -519,7 +519,7 @@ static int smbios_write_type2(ulong *current, int handle,
+>          * t->number_contained_objects = <obj_handle_num>;
+>          */
+>
+> -       t->chassis_handle = handle + 1;
+> +       t->chassis_handle = *handle + 1;
+>
+>         len = t->hdr.length + smbios_string_table_len(ctx);
+>         *current += len;
+> @@ -528,7 +528,7 @@ static int smbios_write_type2(ulong *current, int handle,
+>         return len;
+>  }
+>
+> -static int smbios_write_type3(ulong *current, int handle,
+> +static int smbios_write_type3(ulong *current, int *handle,
+>                               struct smbios_ctx *ctx)
+>  {
+>         struct smbios_type3 *t;
+> @@ -548,7 +548,7 @@ static int smbios_write_type3(ulong *current, int handle,
+>
+>         t = map_sysmem(*current, len);
+>         memset(t, 0, len);
+> -       fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, handle);
+> +       fill_smbios_header(t, SMBIOS_SYSTEM_ENCLOSURE, len, *handle);
+>  #if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE)
+>         elem_addr = (u8 *)t + offsetof(struct smbios_type3, sku_number);
+>         sku_num_addr = elem_addr + elem_size;
+> @@ -669,7 +669,7 @@ static void smbios_write_type4_dm(struct smbios_type4 *t,
+>  #endif
+>  }
+>
+> -static int smbios_write_type4(ulong *current, int handle,
+> +static int smbios_write_type4(ulong *current, int *handle,
+>                               struct smbios_ctx *ctx)
+>  {
+>         struct smbios_type4 *t;
+> @@ -679,7 +679,7 @@ static int smbios_write_type4(ulong *current, int handle,
+>
+>         t = map_sysmem(*current, len);
+>         memset(t, 0, len);
+> -       fill_smbios_header(t, SMBIOS_PROCESSOR_INFORMATION, len, handle);
+> +       fill_smbios_header(t, SMBIOS_PROCESSOR_INFORMATION, len, *handle);
+>         smbios_set_eos(ctx, t->eos);
+>         t->socket_design = smbios_add_prop_si(ctx, "socket-design",
+>                                               SYSID_SM_PROCESSOR_SOCKET, NULL);
+> @@ -828,13 +828,14 @@ static int smbios_write_type7_1level(ulong *current, int handle,
+>         return len;
+>  }
+>
+> -static int smbios_write_type7(ulong *current, int handle,
+> +static int smbios_write_type7(ulong *current, int *handle,
+>                               struct smbios_ctx *ctx)
+>  {
+>         int len = 0;
+>         int i, level;
+>         ofnode parent = ctx->node;
+>         struct smbios_ctx ctx_bak;
+> +       int hdl_base = *handle;
+>
+>         memcpy(&ctx_bak, ctx, sizeof(ctx_bak));
+>
+> @@ -850,15 +851,17 @@ static int smbios_write_type7(ulong *current, int handle,
+>                         return 0;
+>                 ctx->subnode_name = buf;
+>                 ctx->node = ofnode_find_subnode(parent, ctx->subnode_name);
+> -               len += smbios_write_type7_1level(current, handle++, ctx, i);
+> +               *handle = hdl_base + i;
+> +               len += smbios_write_type7_1level(current, *handle, ctx, i);
+>                 memcpy(ctx, &ctx_bak, sizeof(*ctx));
+>         }
+> +
+>         return len;
+>  }
+>
+>  #endif /* #if IS_ENABLED(CONFIG_GENERATE_SMBIOS_TABLE_VERBOSE) */
+>
+> -static int smbios_write_type32(ulong *current, int handle,
+> +static int smbios_write_type32(ulong *current, int *handle,
+>                                struct smbios_ctx *ctx)
+>  {
+>         struct smbios_type32 *t;
+> @@ -866,7 +869,7 @@ static int smbios_write_type32(ulong *current, int handle,
+>
+>         t = map_sysmem(*current, len);
+>         memset(t, 0, len);
+> -       fill_smbios_header(t, SMBIOS_SYSTEM_BOOT_INFORMATION, len, handle);
+> +       fill_smbios_header(t, SMBIOS_SYSTEM_BOOT_INFORMATION, len, *handle);
+>         smbios_set_eos(ctx, t->eos);
+>
+>         *current += len;
+> @@ -875,7 +878,7 @@ static int smbios_write_type32(ulong *current, int handle,
+>         return len;
+>  }
+>
+> -static int smbios_write_type127(ulong *current, int handle,
+> +static int smbios_write_type127(ulong *current, int *handle,
+>                                 struct smbios_ctx *ctx)
+>  {
+>         struct smbios_type127 *t;
+> @@ -883,7 +886,7 @@ static int smbios_write_type127(ulong *current, int handle,
+>
+>         t = map_sysmem(*current, len);
+>         memset(t, 0, len);
+> -       fill_smbios_header(t, SMBIOS_END_OF_TABLE, len, handle);
+> +       fill_smbios_header(t, SMBIOS_END_OF_TABLE, len, *handle);
+>
+>         *current += len;
+>         unmap_sysmem(t);
+> @@ -954,7 +957,8 @@ ulong write_smbios_table(ulong addr)
+>                                 ctx.node = ofnode_find_subnode(parent_node,
+>                                                                method->subnode_name);
+>                 }
+> -               len += method->write((ulong *)&addr, handle++, &ctx);
+> +               len += method->write((ulong *)&addr, &handle, &ctx);
+> +               handle++;
+>         }
+>
+>         /*
+> --
+> 2.25.1
+>
