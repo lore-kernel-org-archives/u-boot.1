@@ -4,70 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F84CAC5A5
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 18:40:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54AAACAC5AC
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 20:49:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B67A8341C;
-	Tue, 23 Sep 2025 20:40:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 49101808AF;
+	Tue, 23 Sep 2025 22:49:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="arKk2Yhe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BCRpJuam";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2FAE80107; Tue, 23 Sep 2025 20:40:39 +0200 (CEST)
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com
- [IPv6:2a00:1450:4864:20::642])
+ id B1A2F82ADA; Tue, 23 Sep 2025 22:49:20 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A384833E9
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 20:40:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1EE280107
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 22:49:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x642.google.com with SMTP id
- a640c23a62f3a-b2ee3c13aa4so285601866b.3
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 11:40:37 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-62fa0653cd1so7114031a12.0
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 13:49:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1758652836; x=1759257636; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=EsU4SzD5QnwoSQ6a9BnPJ65QUAWIJ7OX+h+m6YKczpE=;
- b=arKk2YheTDBmrRwvelfJTJHk8/3ggnyQ5CLZOcgap8aB7rByue4ncmwhjA9/BjKFbU
- CPYhZg8T0q6D852xRjT00/SS3YDc8ulFUQOFiehoHTCu0EMLzZt6k3Wj8l3PKFxdngpI
- Ypbwe6ZfySZyKHUUoIx4NHBqVqwH3xM+e1zhc=
+ d=gmail.com; s=20230601; t=1758660558; x=1759265358; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Uu/BuNAaDS0eYEUZZ/MQLBrkEP6VXFipbQO9HlOq6C0=;
+ b=BCRpJuamo/DKw7LinU0g5TzJs6Z1GPvq7GnOUqqcHWG0gCDzoA4HnhnjFe/WdyUkGg
+ WCbBZMwjKCCvtABNoJAK+zyRkvZf+330Zv0QSVoNs8iJ3KuB9eSqOFEhD7RT4yKKCtp8
+ 3gqdxBCjuMiJm3CSJtujwKNyc2RcOncjav4aGyGEpCWYa+qfPSzLzfGYyXPe8oK1UdhA
+ H8NgDXQ3GJycwx6eFUXpTl6ORW7RUzULQtD9lRQmOdloTvzUDWB0o5vFlSy07vmEDUPv
+ UZcxrfGW/xqna2SVvpliHPDk9t8TG/FTG+R+3cN2Bt7RMnmp7OK1FDu7cnGzoQIYXzbD
+ Y1yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758652836; x=1759257636;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=EsU4SzD5QnwoSQ6a9BnPJ65QUAWIJ7OX+h+m6YKczpE=;
- b=eEMZlaUCmhC1eXx5MK94jI/BOx/FiR2b7eFx6gxv4ArCPR8BF2hrNv9OYRWs5FHXV1
- o9i4HZ/jzG6ho4zQmedmtmpX9q8kC8nxDU6RMphZXgKFDxxBx08C6JnE2pmYVa/lZ2qd
- veyev8T5uj9yV1kNOfWeLrPBqRcmxVJxcnqLFJms+Os0nFtCYxLLTsKkwOfNOaMv3XWC
- NJmhevBlZFVnfkba6TtGSRbPsCbG+1tCSyjtBx8tAdCD0tZLeC2ISoXwzKRuaf44p3PG
- XsKqX0a1LvdBetoOgOXgtzMX+cRrz1gR0mGKXGIGZ6mFrv9KtHSiiNvKk/uYAClJ8tzl
- gLqw==
-X-Gm-Message-State: AOJu0Yz78Ex/+kPIArPq1YsAMBS7mmsdqlS1DINChPFn2iSPAXhVTLB/
- SFiLFPm9kxMmv5IqzOnWQNcyNJDhEdgGSOCE/IUb8PnstBnnGw+6dl4PJeyeoKY+Ws/wyrNfOY2
- CU0TKwazGmL6MrzKsT+Bw9lz5gVGodHASB4U172L+jy+GQCSIpIxlzu1p
-X-Gm-Gg: ASbGnctMSY0plkF/KolAeASn/oOZdV74dXkf+LewhV97yKxa9EvgQ7iS5sVuUhQfNuL
- mgYMC985Hi1+7OcAUPh1k11LJuTXYf2M/ZC40eCIqijW+pnhbc9ImUVT5Osxuz6UsCYxNs3n006
- 0Q2QoykXNwqsPzvbfAw4z2kZ9pxxepPIyw8i88GUq9tyeGWiX9Et9vnBYbyLhwIP7iEOdi0NYcs
- qD2IQMNyDAMGAlC
-X-Google-Smtp-Source: AGHT+IGrKX8PNd17B6Bl9GCFPweBFYcoXohJ58kXqL4faObuKgSN+2FdpIQ562fWOqJsrQPLnhcZtJeCi3MWDLe2TXs=
-X-Received: by 2002:a17:907:2da6:b0:af9:eace:8a52 with SMTP id
- a640c23a62f3a-b302ba11b03mr367003466b.50.1758652836147; Tue, 23 Sep 2025
- 11:40:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758660558; x=1759265358;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Uu/BuNAaDS0eYEUZZ/MQLBrkEP6VXFipbQO9HlOq6C0=;
+ b=uX6IFxp82h+a5CcMpb2/4E0irkHGS/TXRDmgwV5GMZkwdoXgCIssJXizdSW1mOvtQ7
+ hQvAt++rJptIC43L05Qks9KQVuc1j5ePxdCno0Nwq+QuD7q6JnBZB+RBPfHan9W48Aab
+ SF6PzjblkcAfren1RH7pMKYtMRSUZfW9SPEsLVcV/0Ym5/1X0rD6jEFw4xTTPPRraTIh
+ NEI39/P54IwzzocCGuOM/e651yb/K4HchsJe2H2gIcTqrAylXPiKeRGPfYPaaoPht3Vr
+ Xu5TrpkRNMTh/eFU192XHw9ULS1WMwZjIIK06MrRmeqWLMXkmJOlXI1LiwHQMd7KAMgs
+ ppCQ==
+X-Gm-Message-State: AOJu0YzyZSD6jCAnQs8WyeKcoL5rCi2Vs5Y6oMwhxRGS3Y9/9Csm7LV9
+ 3TRSSg4nfAyIoXQ/DUM5lAKsRUfAOShq3D/nQwW6hQyZXrIoSEK6GG/PwhHzCtFx6WBgzsz/0CF
+ dkRQC+a6x3/kYC6ofYzj9skvZwf9+MlU=
+X-Gm-Gg: ASbGncvgC20HOyXK8R04poCNSi+mzjKGMqzVjog0Bwn1UXIxaLctjkjFBIP3jZagyNQ
+ 34ZVql8KlQ03Fb0DyFdtXzvzg3xJJZ3XLsgwF0xlYdXHnaArsPOKCuiuE5Wg5iN5Ag5O5zN6wCv
+ Oi0LkRO+N5254IrryScS71+/vsCp5sqb8GaG/DbLQEEqgILKKdlaFMcuCFUY80+9P6sHgJBnWPt
+ urG1eBkyexyBFi9/XTnX1Q+p3pW6k2pem/1HGw=
+X-Google-Smtp-Source: AGHT+IGDqxXm9whgwb8Tj1VoI0zYKLcoLrrI9r+96lVp8vxl74MBqG60VT2bHwGTFrsSc8y27FmvHjt0buuEjt1UdkM=
+X-Received: by 2002:a05:6402:1d24:b0:634:5722:cc3f with SMTP id
+ 4fb4d7f45d1cf-6346779876dmr2824564a12.16.1758660557970; Tue, 23 Sep 2025
+ 13:49:17 -0700 (PDT)
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 23 Sep 2025 12:40:24 -0600
-X-Gm-Features: AS18NWCWs33Ws4UOZ1U67RcsIC-dBNRpdd6g3ycKrPFDK6wfFCSQYJLdogIluCg
-Message-ID: <CAFLszTjH6-dQxy-wgGR5n_7eqhnLQk=N=XVYvBr_n0NvN7=U_Q@mail.gmail.com>
-Subject: Reviewers please for Flat Image Tree (FIT) Spec
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: U-Boot Custodians <u-boot-custodians@lists.denx.de>
+References: <20250825224459.682403-1-adrianocarvalho.pt@gmail.com>
+ <20250825224459.682403-5-adrianocarvalho.pt@gmail.com>
+ <20250825230044.GB124814@bill-the-cat>
+ <CACAHuLCyX_32AQozgt-Wf18b7ia5m3nRJZ7bA=M9oM1mwh-OXA@mail.gmail.com>
+ <20250827002317.GF124814@bill-the-cat>
+ <CACAHuLB0uwUjnR58qgeoOcHO-PC5geYFuBKF4Mw+=UFjT9urRQ@mail.gmail.com>
+ <CACAHuLDZzgF1a7wG8fwNZ1YnUruPgyd9MifY2COS1kQFsqXsTw@mail.gmail.com>
+ <CACAHuLDp5COeBue8jt8U3s59UsTnzjFH33ThXVFXk7-XLCF1BQ@mail.gmail.com>
+ <20250905230929.GN124814@bill-the-cat>
+In-Reply-To: <20250905230929.GN124814@bill-the-cat>
+From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Date: Tue, 23 Sep 2025 21:49:05 +0100
+X-Gm-Features: AS18NWBLlHacz2gI2htO_28fD83J_oQLcV30iXOkz6M_GbT6na0uWlQjpIJ-GkQ
+Message-ID: <CACAHuLBgL2h+XYysfwYSOBcwyjrJRk7Z4X5Axr6PDDF_Xq17Rw@mail.gmail.com>
+Subject: Re: [PATCH 4/7] doc: make pdfdocs: Ensure SVG files are converted to
+ PDF before the compilation of *.tex files
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Neha Malcom Francis <n-francis@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,15 +101,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Ping. Any update on this?
 
-This spec <https://fitspec.osfw.foundation/> is undergoing another round of
-changes, but since it is now hosted outside U-Boot there are not too many
-people seeing the PRs.
+Com os melhores cumprimentos. / Best regards.
+Adriano Carvalho
 
-If you have an interest in FIT, please can you take a look at the PRs
-<https://github.com/open-source-firmware/flat-image-tree/pulls> and ideally
-send me your github handle so I can add you to the project as a reviewer.
-
-Thanks,
-Simon
+On Sat, 6 Sept 2025 at 00:09, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Sep 04, 2025 at 02:24:57AM +0100, Adriano Carvalho wrote:
+> > On Wed, 3 Sept 2025 at 02:14, Adriano Carvalho
+> > <adrianocarvalho.pt@gmail.com> wrote:
+> > > [...]
+> > > So, in principle, we "only" need to replace all ".. image" with "..
+> > > kernel-image" (65 occurrences / 17 files). However, I did that, and
+> > > got:
+> > >
+> > > sphinx.errors.ExtensionError: Handler <bound method
+> > > ImageCollector.process_doc of
+> > > <sphinx.environment.collectors.asset.ImageCollector object at
+> > > 0x79380051bbe0>> for event 'doctree-read' threw an exception
+> > > (exception: 'uri')
+> > > [...]
+> >
+> > Actually, the right approach is to use ".. kernel-figure" not "..
+> > kernel-image". The latter is never used in the kernel.
+> >
+> > Using ".. kernel-figure" it works fine. The remaining patches are
+> > still required though.
+> >
+> > So, if you intend to remain aligned with Linux in the way the
+> > Documentation is built, instead of this patch a new one is required
+> > that replaces all instances of ".. image" with ".. kernel-image" (65
+> > ccurrences / 17 files).
+> >
+> > Please let me know how you'd like me to proceed.
+>
+> We should switch to "kernel-image" and update our checkpatch.pl to
+> complain (and this might be acceptable to the linux kernel too, are
+> there instances of ".. image" ? I assume they too should be
+> kernel-image) so that we don't regress in easy to catch ways.
+>
+> And then yes, getting the correct non-zero SVG for the TI example needs
+> to be done.
+>
+> > Moreover, the infrastructure to build the Documentation is a bit
+> > behind that of Linux. Not a lot but quite a few changes. Should I try
+> > to issue a patch series to place U-Boot as in sync as possible with
+> > Linux?
+>
+> This is a question for Heinrich. Thanks again for digging here!
+>
+> --
+> Tom
