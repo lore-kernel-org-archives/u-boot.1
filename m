@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 035C1CAC5AC
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 18:33:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE3F9CAC5AC
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 18:33:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FF298341C;
-	Tue, 23 Sep 2025 20:33:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BC69833E9;
+	Tue, 23 Sep 2025 20:33:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BdYZ1EXa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SVBvjsxC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8557283448; Tue, 23 Sep 2025 20:32:59 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 513A080107; Tue, 23 Sep 2025 20:33:05 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 948E480107
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 20:32:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54E268349B
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 20:33:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-62f4a8dfadcso7105904a12.1
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 11:32:57 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b2e173b8364so384024066b.1
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 11:33:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1758652375; x=1759257175; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1758652382; x=1759257182; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9whfWAdyRLxQyIZZufp93g9yvTXlHhHU/qQDIz0ay2w=;
- b=BdYZ1EXaDYFdZHT2usOIp0utpCHnd6qVGLGJ5eDcYhrvFsguLfIn166r8FxMuAtXyp
- VOGTN3sY83GrizIJ42Fkcj7YGZqb6DdCPfn5EXAYVqTBIMoLEpB6MXuYEHG4APgXXrFf
- UR2PelkruzX5Co6s9Ip59gJGd6WqKT/ox4kr8=
+ bh=1LNtWK2k+HSI2kA1PyQhd9hyPX3zd1vJk7t8bjGBWZQ=;
+ b=SVBvjsxCosrh9mwz012Pq0eQzph/I3kqRAXQ+WzZowNqP0KqdIb8AObh/uJeo4c0qc
+ uumIQcviEAOmoQYXMgOmQkAKuTRnF6mAKUgxSdrjTY2p/vHk4r5uHv+i2Kkfnwa1yrGb
+ 8jlO8J8pYnjfyuZPbs9be4DeXG23p+U9GQxJE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758652375; x=1759257175;
+ d=1e100.net; s=20230601; t=1758652382; x=1759257182;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9whfWAdyRLxQyIZZufp93g9yvTXlHhHU/qQDIz0ay2w=;
- b=BC2cLWf4x9/+mt/bPMXoYWlgsnUP80oFWKfNHCiYEYCMY8o4ZKnmGD0pgeN6M51ZJc
- AJ1/Pvjg3ry+nfZ8/Xn9LzHk/Lvz6Bb9dHLcw/NId6aUYIETgQ6Up5xCtoufsRzHXAyE
- 9J1k92B0XbzLCj538SqDBi+ifG50kV5QR88NNHmO1kY4eQ1ukbM9MJfaotgQjL22MqUp
- 8kYY/RnZUm+6jhL/u7+Oabbfolz8Ra+Gex1OAtVZD3UdGzl6x8WR9KMc4eaxnXPz3kUd
- fgIb8+yPmPEduohqWpa4Wm/dZWMMBpHsZ15Fmu4Yebi8pmK9TNQdg6BjUXIykJSIROCE
- HUhg==
-X-Gm-Message-State: AOJu0YyXOI+ju1zQpGv3cVdxl+IOO72xLlkqMDq37g4brzEtnIoahTlz
- 9QkdcjjccMF1xvxcYB3IFWzbCFH7fB8Pl3z30hmZ4iQ12SjJleskssNRlvqJyp1n2+BFbq+EKmY
- jlXt8cv/wCk4bN0jp20TM6SMUUJrvzDqsZmfNJFml0kDyKHdL8qWJ+w==
-X-Gm-Gg: ASbGncvWor2kYwVCEpCdvXglIsVP0HhkeCErmt38yHZEuiF9kqM/7sgei5VoAyNae3A
- Lr4aMG/08uJz7ZQhaBm0NE8hlfvDUg87OhofInDj2xOvd1fK/uLq7CeQhc3XyI4pPSIBYwKynW0
- EcW6Dvc7zk8amnsFhTjgHywzQI/8dt9fmT7RHV/Oq6IvEdjntCAjEnb06EjkEFMBj9D6Bqq6+De
- BVl5FoEPiXnsjVN
-X-Google-Smtp-Source: AGHT+IGNHgsL1h/vktsNVWmsWxMxoF7jkHKGiv6cET4aVCOLhtBYbwBKmaquqxLMkbnEMGkXxR1x1Qmfc8+npMD6gDA=
-X-Received: by 2002:a17:907:7f91:b0:b04:848f:a0d4 with SMTP id
- a640c23a62f3a-b30263b8326mr348430566b.13.1758652375208; Tue, 23 Sep 2025
- 11:32:55 -0700 (PDT)
+ bh=1LNtWK2k+HSI2kA1PyQhd9hyPX3zd1vJk7t8bjGBWZQ=;
+ b=WyDqcoLRGLt6iuVwGLPabZ9+8guve2E4bcmv29XFrxTeUGulNxshlQYssW7aLP7SUT
+ BX/3PTODjFPjIR4NyDCEWJEXD6ieDF/MAxx0/60Gzvn7p3ah7ENVi1Hik0cuOKkCzF7X
+ 2exbKGSCDKtrQTFCw41z8vuoiqNv3ltZT5oGTl3gLHkwIpov4UHFSdBQ+cdpWqpwXNtc
+ TDNJ/9VKzYuH52E8zbpb5LCI7CFczC3DuDC66TokXiDinfWM83ywJMrU/65U+CoG4/hm
+ qsz/HFdv+77m0NBk5Acb2EXLbSX4w7SxtMrHJik762whOMspt7f2BhxW762Hn6msktYx
+ /F1Q==
+X-Gm-Message-State: AOJu0Yxoth1ReA1TLZvrLJUnVg7od3JzBt1UD1NWkJdAwHW1PgynbUS5
+ j0Ac++BwlVZ3ICNeKOwoSCtClfbdx5Be+LaNZJ5b2csfBz/Ss3EFtqbYcdA9/rLUhTbOwUekDlZ
+ lsb2ZYOs2H5MYGZLZjxHwI9MGfWA0fbGX0vFAGI33KXSqRkGap/t06A==
+X-Gm-Gg: ASbGncuBHUU6hrmmvTXP9pmKrg47+3Xi/JtApesS/P74IcMDswMxwz6ViyCuMqlv/T8
+ MUFpks4X89K0x9IpZP21QoVSWYfZ9Chnmv87lADtC/QXON9XTGGKRZnY3lfIxeS+UKbIB1Pxm7/
+ wWKiO5EN2XbdhfqzqT+8H4QJ3wys/CjZ9lVl7a8W8tz4s5XB9F706cBGkRAmqrjX6SeKLeyUblu
+ /CUxw==
+X-Google-Smtp-Source: AGHT+IExCWnrF5wLWxBhdLyUghhh8cnBB/eQ3XXsYb6dIHk1fX7Z0BZiypGAbbtu8eKZSc+KMqw5ABFTVk94Jpfyi7Q=
+X-Received: by 2002:a17:906:57cc:b0:b32:2b60:f13 with SMTP id
+ a640c23a62f3a-b322b7ea383mr49329866b.54.1758652381747; Tue, 23 Sep 2025
+ 11:33:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250923183053.786043-1-sjg@u-boot.org>
- <20250923183053.786043-3-sjg@u-boot.org>
-In-Reply-To: <20250923183053.786043-3-sjg@u-boot.org>
+ <20250923183053.786043-4-sjg@u-boot.org>
+In-Reply-To: <20250923183053.786043-4-sjg@u-boot.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 23 Sep 2025 12:32:36 -0600
-X-Gm-Features: AS18NWDANljiSZgar01e7Y6zyygTSbWyC9qXh7hksygIq1VN1nvnwc59XqMuq_k
-Message-ID: <CAFLszTgbn-DQ7-_8iZ=MnqewSWzbrhujXTfqhja1CXDEoamn9w@mail.gmail.com>
-Subject: Re: [PATCH 3/4] efi: test: Update distro EFI-app tests for new naming
+Date: Tue, 23 Sep 2025 12:32:37 -0600
+X-Gm-Features: AS18NWCJUSB0vCDScCoEkO3a6nv2XoM_k7AcXiXPtRBRZDU6qJAsnsMgE5cOJ70
+Message-ID: <CAFLszTi6gf=PSYsNYT19ry_2TwoZUBF4yXsOnMOmXGSGrQD1EA@mail.gmail.com>
+Subject: Re: [PATCH 4/4] test: Deal with the silent menu in grub
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -99,40 +99,50 @@ On Tue, 23 Sept 2025 at 12:31, Simon Glass <sjg@u-boot.org> wrote:
 >
 > From: Simon Glass <sjg@chromium.org>
 >
-> The EFI-media devices names were recently changed to make it easier to
-> tell them apart. Update the tests as well, since this change caused them
-> to fail.
+> The distro test for EFI in the EFI ARM app is currently flaky.
+>
+> If the test does not send an 'escape' character, then the board may boot
+> straight into Ubuntu. If it does, but didn't need to, then grub sits at
+> the command prompt.
+>
+> Handle this by pressing escape twice (which should always go to the grub
+> command line), then using the 'normal' command to start the menu.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: dea4ea00a72 ("efi: Set the efi_media device name when binding")
 > ---
 >
->  test/py/tests/test_distro.py | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+>  test/py/tests/test_distro.py | 14 +++++++++++---
+>  1 file changed, 11 insertions(+), 3 deletions(-)
 >
 > diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
-> index 77caf32145e..cc4aa265d90 100644
+> index cc4aa265d90..d9bc9b18648 100644
 > --- a/test/py/tests/test_distro.py
 > +++ b/test/py/tests/test_distro.py
-> @@ -84,7 +84,7 @@ def test_distro_arm_app_extlinux(ubman):
->          ubman.run_command('bootmeth order extlinux')
->          ubman.run_command('boot', wait_for_prompt=False)
->
-> -        ubman.expect(["Booting bootflow 'efi_media.bootdev.part_2' with extlinux"])
-> +        ubman.expect(["Booting bootflow 'efi_media_1.bootdev.part_2' with extlinux"])
->          ubman.expect(['Exiting EFI'])
->          ubman.expect(['Booting Linux on physical CPU'])
->
-> @@ -102,7 +102,8 @@ def test_distro_arm_app_efi(ubman):
->          ubman.run_command('bootmeth order efi')
->          ubman.run_command('boot', wait_for_prompt=False)
->
-> -        ubman.expect(["Booting bootflow 'efi_media.bootdev.part_1' with efi"])
-> +        ubman.expect(
-> +            ["Booting bootflow 'efi_media_1.bootdev.part_1' with efi"])
+> @@ -106,13 +106,21 @@ def test_distro_arm_app_efi(ubman):
+>              ["Booting bootflow 'efi_media_1.bootdev.part_1' with efi"])
 >
 >          # Press Escape to force GRUB to appear, even if the silent menu was
->          # enabled by a previous boot
+> -        # enabled by a previous boot
+> +        # enabled by a previous boot. If the menu is already set to appear, this
+> +        # will exit to the grub> prompt
+> +        ubman.send('\x1b')
+> +
+> +        # Press Escape again, to force it to the grub> prompt
+>          ubman.send('\x1b')
+>
+>      # Wait until we see the editor appear
+>      with ubman.log.section('grub'):
+> -        ubman.expect(['ESC to return previous'])
+> -        # ubman.expect(['The highlighted entry will be executed automatically in 29s'])
+> +        ubman.expect(['grub>'])
+> +
+> +        ubman.run_command('normal', wait_for_prompt=False)
+> +
+> +        # exp = ubman.expect(['ESC to return previous', 'grub>'])
+> +        ubman.expect(['The highlighted entry will be executed automatically in'])
+>
+>          # Press 'e' to edit the command line
+>          ubman.log.info("Pressing 'e'")
 > --
 > 2.43.0
 >
