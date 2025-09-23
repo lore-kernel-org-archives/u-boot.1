@@ -4,75 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B830CAC5A5
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 08:11:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90971CAC5A7
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 08:12:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 952DF80050;
-	Tue, 23 Sep 2025 10:11:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EED1A80050;
+	Tue, 23 Sep 2025 10:12:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="rO8FIz5J";
+	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="Aj3f2U5b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16FC980C93; Tue, 23 Sep 2025 10:11:55 +0200 (CEST)
+ id 4B3A4833E9; Tue, 23 Sep 2025 10:12:36 +0200 (CEST)
 Received: from outbound.st.icloud.com
- (p-east2-cluster3-host12-snip4-3.eps.apple.com [57.103.77.184])
+ (p-east2-cluster4-host4-snip4-10.eps.apple.com [57.103.78.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD2678004F
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 10:11:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FF818004F
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 10:12:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=infi.wang
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
 Received: from outbound.st.icloud.com (unknown [127.0.0.2])
  by p00-icloudmta-asmtp-us-east-1a-100-percent-0 (Postfix) with ESMTPS id
- A3DE51800765; Tue, 23 Sep 2025 08:11:50 +0000 (UTC)
+ E495D18001C6; Tue, 23 Sep 2025 08:12:29 +0000 (UTC)
 Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
- bh=2a8DqXE0kGGcr6LhB1WTuPEjGjFiubh21p4M4bNe35Q=;
+ bh=7gI2rJuq/b4Wbn4jbpRTQCMTUU+HJLDIK43+RK2Lrc4=;
  h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
- b=rO8FIz5JDPnbP7rn8TOnMM6dI5GBhVusj6RBnBInWKRD0nzxa2/UpEmFON/Lk6p7+UMlGyFo415yED/BCNrHlxvx4lpIhBPfahghLwGsCegX3m2Q2zGJGG1u0JviVKX2wTr6QMN6MQxE0Ry52MOoMaUo6OoXp9lG0dTxZDuSJuyVv729dB5Wt1aslIDlASEIDUK0mthXIqSMXTsQSbrXm4yyxypiKHTyqGOuUf+iwj/a2MRm2ETs56AV0SnuyKdhfGxBSznAhF7HwQ6HLVwqKq4MRprunFKllnko97L6I/VxfD0xJoc5P+kKjNQraEyu/HYN6W1NtahoorNYfHfwbg==
+ b=Aj3f2U5bldsiF4XNeNiBzTTwwML+6dZyKcikNqOdB1zo+f1bV36V7PxUVozkMZ5GH/KooUubfYpgE8oZX+39226tognWkiGwPOvZk3oore/hqy3eFAXdWsXLOVHJGiQ2nzqqWKAFVRoysuVqc4dG9TX+ZzI/k326RPVtrKACItt5i5yyLqIRWWJNSonm3+Rn5LDIXATWnYCzHqafzUZDPvfFKVeAlCvZleVPASz+fM6v6iab3bxjPgoxDATTTRVXHhXq0ZaPzt3Z/B7t96ZY+JiDiuMRvaDEPRa6tYW2Mp0jqwLuiCIlImlHNYoDYLb4xiD5x0Tzjq3JLHLYIMQKTA==
 mail-alias-created-date: 1549370554000
 Received: from smtpclient.apple (st-asmtp-me-k8s.p00.prod.me.com
  [17.42.251.67])
  by p00-icloudmta-asmtp-us-east-1a-100-percent-0 (Postfix) with ESMTPSA id
- B1B2318001F6; Tue, 23 Sep 2025 08:11:47 +0000 (UTC)
+ 6F59118001EF; Tue, 23 Sep 2025 08:12:27 +0000 (UTC)
 Content-Type: text/plain;
 	charset=utf-8
 Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH 0/4] net: phy: aquantia: Switch to generic firmware loader
+Subject: Re: [PATCH 1/4] net: phy: aquantia: switch to use phy_get_ofnode()
 From: Beiyan Yun <root@infi.wang>
-In-Reply-To: <FC37593FA94A297B+20250922192021.268592-1-root@infi.wang>
-Date: Tue, 23 Sep 2025 16:11:34 +0800
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
+In-Reply-To: <4DE4F2A2E02C441F+20250922192021.268592-2-root@infi.wang>
+Date: Tue, 23 Sep 2025 16:12:16 +0800
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
- "Lucien.Jheng" <lucienzx159@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Ramon Fried <rfried.dev@gmail.com>,
- Romain Gantois <romain.gantois@bootlin.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>,
- weijie.gao@mediatek.com
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <8AC5DB75-0B31-408E-A4E1-734BAC92E3B1@infi.wang>
-References: <FC37593FA94A297B+20250922192021.268592-1-root@infi.wang>
+Message-Id: <40C6830D-0A91-4D5D-A5C2-6E5C9B025863@infi.wang>
+References: <20250922192021.268592-1-root@infi.wang>
+ <4DE4F2A2E02C441F+20250922192021.268592-2-root@infi.wang>
 To: u-boot@lists.denx.de
 X-Mailer: Apple Mail (2.3826.700.81)
-X-Proofpoint-ORIG-GUID: bvs1uRsNFvPxseBE66wMmN7aFaHO7kMJ
-X-Proofpoint-GUID: bvs1uRsNFvPxseBE66wMmN7aFaHO7kMJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTIzMDA3NSBTYWx0ZWRfX01QBKRf0e61u
- 6dLM95ru2JaB8AXDD0SVMO/NIJoRPSPUFUJKKmXhi6cBe4nnj8E6e1qrOLTLnEnIp3lJjIWwyU5
- II1xlZN7S9J9WoDFzJohG3IMk6C4R+t9T8v9VBs/8iYxQUmNJciPIi4xNI+sXU8RXTdDt5mcnyC
- VGZLrMCg3xJxzqycPlTXTezVs9eAKJzkRYNWD7I6mdu4fwcxr85XBM0cgUXrSQJqDT6ve0Db2ct
- 2JctgfvPMnMwjl/6e8qMxMMpa37K9ES70NeqiRDKfWkYsJnbgFRtpCo7SJSgctDivqWky75mY=
+X-Proofpoint-ORIG-GUID: 8oK4EMJYB9LkqSaLMXkrRgpGqtZTvk7F
+X-Proofpoint-GUID: 8oK4EMJYB9LkqSaLMXkrRgpGqtZTvk7F
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTIzMDA3NSBTYWx0ZWRfX1pmWROi5W7PX
+ 3nChbPDNbQago2mN4tIVhqnIwDMR2rmjU9nh7sj7AZ8VnHiJtlxjiws+f4ftiQgczJyR9taPRx5
+ CfzXwSpGe2IKdzEPSTY2aFCxaGBdUF2gW3G9qAxYMOf1Kq6+LOFnFuaea+/R4asQ2zmUkwzt0Ce
+ rmPV3fH4X7W2nklzYSSqCCk+3nQjXX3FtBqBUlct5XPmUOQAWoDis4+3DzV3EXacUDecgSj+Sv+
+ CdTwZEUxF5B8NJ9G22GM8BfKRx/LYceVjD4xeDRSO3b1ADT2rr/aYP1WE5juV/ARwhN3MUAL8=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-09-23_01,2025-09-22_05,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- malwarescore=0 bulkscore=0 phishscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 clxscore=1030 suspectscore=0 classifier=spam adjust=0 reason=mlx
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ phishscore=0 spamscore=0 suspectscore=0 clxscore=1030 malwarescore=0
+ adultscore=0 mlxlogscore=922 mlxscore=0 classifier=spam adjust=0 reason=mlx
  scancount=1 engine=8.22.0-2506270000 definitions=main-2509230075
-X-JNJ: AAAAAAABzMkDoi4KS0tBrX8EX1iGhxJRlw0xnddkqDAb7JvOgfwpHAFaZiXOoDdbQ8aFf2h3ZOV4KArnzRTWzzgiE6YdCvcQTTeN7vWYOsNW9LFXuM9HyTKjqlUfYnQEA9/fnYHB+xZDbqiJ2WiI2leRKGzdrld4vyrHcRPX9pxNCytWp1riPYKOqwsAOq9zuP7VtBGsgy9K2fGVPc6RmtpomT233GO95CDCQlVD2T73Sh/qMnkCJg3Iql5f9KRL9rP3IxxWNEzARg+l1wi3fTrTuoUNWb6LXw7c5C8M9SRwbiD8r3VIviC1tismwxoyssRUFEZ1WyXZQJ2Nym1Dp4tU8mu8cBU+Cwnh3+W4Sfc0jymW/ujCcI7cKHipRLru9D/v0dC86oQGQ3PkgInpK5rHMGnCVMGM+NPImLcSHnYyIP1qWOhGvQaE/xRZCG8fo/qHFGOzk5dBi/6uez6TigCGNSx04CO6O97cEQb6jZ0GxjwF+1SsJE7kUvPbxUujYKEBv2+I4HgRn3JTWZaXc0SDelbZuscRLJQITmdcFU06HboJ9wkMFzJMs7j8WDqr2YmjFJR4WZ81AR6AKZA6zNaqNNq1scVRwgoHOzRL7n6iA9a9HQBG/SlQ/+snV7lBjqwovIku7o+tHwkchs8K9nIIJiRYOfX2CL+1/FWo+ELLmxru2z3RKsTOQxvdUDMXaFiXSD3w8ItHsBBIjyhCGlYQPWne1zafjljjqqwwjuadtNMdyNuPPRCGYp2Vpvz+PY3mEV3Z5Wz3o37f8O5U
+X-JNJ: AAAAAAABpcRpJOelUADL5rL98xRkwW/ZUsz+koc4DpbabrU+BdWyIPaiufeSZQLcZgmrYGlvUhD4BkdrqjvLQKcE2YhzjGU72gMSQvDzechu/GrW3gt2aFf5dR+pbEoaYHOnj9DujaAWVqr4bzIEIw17mFCQ4VqOxsbsQrgph10rQvGNGLhV1xIaM/I2wUBtIR/eRcBG2UJGZePPYbWHDnud5jereRaQEGTFeDLsa8UFJ/WAawocrWPckr2819HORceFSNxP+2dN6ofHlX1ewbY7z315faZH4Qj4k2SEysLZEXR8b0hAGI4UcgRsB8iM+NQ+xHTPv/QYGGFEa5IlmaWYVRqpw9L1cxPy3hGXH3EDdeuH4mJsVWmz9A/JjXRxD7kUiTljCWzH9viRw8il3y2Zs5/IjKAaG7K+hUEtC4pVwqQ1J9tE5eu5vBcree/a14eIugV/oJhBG5PHKQrPa1oW0hcLNSmjmMtFllRD6PJAvhW5hSOAJQ5utE8JSW+Dyv09KQzppDqdI8vGvtdUDQiONmLdwKkDAQxESJQeFpXYEia80eA756vhh6rHSXsLP/XqWelgUIPojS0cG7Z6QK9OINxHB9JMJoIqmm2YfKBd8khnVVJSVRbqCvvpbwVFKWVzzZhA0zZlAXKjOCpdCviwFwcZgRO8sWB63lra0SUxhLg8MZv5Prs=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,52 +85,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Please refer to resent series at: =
+Please refer to resent series at =
 https://lists.denx.de/pipermail/u-boot/2025-September/598941.html
 
 > On 23 Sep 2025, at 3:20=E2=80=AFAM, Beiyan Yun <root@infi.wang> wrote:
 >=20
+> Use PHY API phy_get_ofnode() helper to get PHY DT node.
 >=20
-> Hi,
+> Signed-off-by: Beiyan Yun <root@infi.wang>
+> ---
 >=20
-> This patch series refactors the Aquantia PHY firmware loader to use
-> the generic fsloader framework.
+> drivers/net/phy/aquantia.c | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
 >=20
-> The existing loader is limited to loading firmware from an MMC device,
-> which restricts its use on many devices (e.g., routers) that may use
-> other storage like USB or have a UBIFS root filesystem. Migrating to =
-the
-> generic firmware loader allows firmware to be sourced from any backend
-> supported by the fsloader framework.
+> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
+> index f63a13824ca..903fcd667f6 100644
+> --- a/drivers/net/phy/aquantia.c
+> +++ b/drivers/net/phy/aquantia.c
+> @@ -338,7 +338,7 @@ static int aquantia_set_proto(struct phy_device =
+*phydev,
 >=20
-> The series is structured as follows:
-> - The first patch is a minor cleanup, switching to the =
-phy_get_ofnode()
->  helper.
-> - The second patch fixes a small typo in the binding document.
-> - The third and main patch replaces the custom loader with generic =
-one.
-> - The final patch updates the device tree binding documentation to
->  introduce the firmware-name property and provide usage examples.
->=20
-> This change has been tested on a Buffalo WXR18000BE10P router, loading
-> firmware from a UBIFS volume for Marvell CUX3410.
->=20
->=20
-> Beiyan Yun (4):
->  net: phy: aquantia: switch to use phy_get_ofnode()
->  doc: bindings: fix aquantia-phy.txt typo
->  net: phy: aquantia: use generic firmware loader
->  doc: bindings: add Aquantia PHY node's "firmware-name" binding
->=20
-> doc/device-tree-bindings/net/aquantia-phy.txt |  32 ++++-
-> drivers/net/phy/Kconfig                       |  19 ++-
-> drivers/net/phy/aquantia.c                    | 124 +++++++++---------
-> 3 files changed, 103 insertions(+), 72 deletions(-)
+> static int aquantia_dts_config(struct phy_device *phydev)
+> {
+> -	ofnode node =3D phydev->node;
+> +	ofnode node =3D phy_get_ofnode(phydev);
+> 	u32 prop;
+> 	u16 reg;
 >=20
 > --=20
 > 2.47.3
 >=20
-> base-commit: d33b21b7e261691e8d6613a24cc9b0ececba3b01
-> branch: aquantia-fsloader
 
