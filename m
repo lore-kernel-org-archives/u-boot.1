@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C266CAC5AC
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 16:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87717CAC5AC
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 17:54:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A72580107;
-	Tue, 23 Sep 2025 18:55:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E65A80107;
+	Tue, 23 Sep 2025 19:54:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="odYCCwnz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C6pPTStB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D58F800B6; Tue, 23 Sep 2025 18:55:53 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id 67D6F80C93; Tue, 23 Sep 2025 19:54:34 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E172C80C93
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 18:55:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A348800B6
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 19:54:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-74526ca79beso4884314a34.0
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 09:55:50 -0700 (PDT)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-42576a07eeeso21909055ab.0
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 10:54:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758646549; x=1759251349; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=btR2TGFmHcvFul791ihZxCh8n3TpfkpQS5noFHwlarM=;
- b=odYCCwnz+2Te0N0AMKXGJdXp1BZQ0zezv4KXZy8D/v5ztGfuKaxwi3hNskqWIFlOOC
- XUWT40w/5WwjO5WeydFE4klU9N40HsrhurTNar6mBsv+8uNOT2witD3mdR+4Z0EcjmtT
- fc4mM+okctLqL9upSvpnF0nM9fspafhANp2QQ=
+ d=konsulko.com; s=google; t=1758650071; x=1759254871; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NDxmdQfab9kb3drRFTjEw4NXSV78Dl0ykbUsJv7SCF0=;
+ b=C6pPTStB5Kj75csy4qgh79DVV0kL1kTg/z6HLjNkSArbVtXYGhrkwcnW5vDwLABL7l
+ Hzzo1KKXZC+sND50yqk1SO/aSamk5CrpZ8cYIOru3DKm/gY2C8aYheiCaegxXS5qYk1h
+ Gl8PsmDiGEuCK0do444yqBBE/AU6zykuGe0Hg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758646549; x=1759251349;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=btR2TGFmHcvFul791ihZxCh8n3TpfkpQS5noFHwlarM=;
- b=EJWKa+SmKAB/y2mEd9H88ofTcb/P0nm7NsGnmjuuaZMA0JWcGr3El5llsqKGKI+vfv
- 4BF1qHy1VnNsbW7GTibzrcl+jMM6hEis4wk7kOSJulFZjiqZXYMuV7onawHmOX/6yanB
- rR5is6mJS7uO5Bel5a+1AnC/d2vxEChgQGkk4Sn6+EKUy3P8ctjx/dj+BSKSxAIRUCTg
- FTDUZiMu2zkFc1Sg/fcCE/sWoj8jZysN4f7EnS55ekebsZRteuI7zNPk39IF8/oGFEK4
- UZScPM2Ot1+fRJYsq+/tlaT3/ikgO2O1f8T4v9VMoo7iyDS5YbaUjRxywkRdQAZ9ju6M
- kzhw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVsTG2otJ9RxLEJtmBQwrnjdL7reS4C6dqWr7QIxG88hqUhlQ/AqTxxcZmoDuduXStkS9AFyVI=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTpje3KvdA5sRR4k8unYnwfNlB1BVSvBVeOSspPGF+Bl5o4fYZ
- E5MGt1txITIfxXGXI0+nLocl9wBR/OLyb6NIWw6SA7DGfwbS/luqe75XeWp1IEABDcl7o5IGByg
- 0Ypxe0B4=
-X-Gm-Gg: ASbGncv+3yfNPYJMA4s8JM0UdBCMG7WoIFSSen3d16CVvXJBMHiHpYqMWNaUbsv56As
- sSP4oI5Kx4u1Ppa6Q9DZ8RrHAHFQBL85izmOIgYhKR4wRNAYylHSaAP26NGc9x+QQ/JJYBFUvH+
- x1qZjMlFZfsI30dPDwRlAWzmbNmECkt1Yjdg2YQm8Iyl2tsIuTaLWDkwyzaXKSCleVPZZof5gK4
- hfY0Xi0BLTZCs5tYq4En4jRZZkF3PKvmnB5mVVdrybT3TtwbQp7Qrs6SFt6IMBwBc/HkZN/yi/4
- IXj7MB3nV3li/07S5l6XRDGG3to04pOufDgZEVdz64+EFpoeCED1tQybr+hFAR1SJ0i9e1UbqGX
- zGk4Et4uCDICg7Ei1w5d4N0bpqqfN1NmzQV8zNFtiqEYk8SrDHPvEWCDZoOo7N8dkDUs=
-X-Google-Smtp-Source: AGHT+IHyt+gSyuJ184ovm0T1Pnj3zA2CZwpYlN4UpisapOhhWgJmcZvXIUYv8o9ApGQdvwZ/ij6ruw==
-X-Received: by 2002:a05:6808:211d:b0:438:241b:e8c7 with SMTP id
- 5614622812f47-43f2d4f9ce0mr2296814b6e.45.1758646549520; 
- Tue, 23 Sep 2025 09:55:49 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1758650071; x=1759254871;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NDxmdQfab9kb3drRFTjEw4NXSV78Dl0ykbUsJv7SCF0=;
+ b=e4oPENdlfHTxetQyHWiUL8qJ8Wj+sW+XxDIrU2ceqiYojCd9mOFOg9P4y9kS0ppmjM
+ 4VFwbibBVzuZmKJScf7ff4JBeJzmfvVV1skmeTIerujgPGC+g1PmDv1pdFEXa3zrNEDX
+ DFLrpbbZbzO7qxDSDmhrZaYPI48b7UtCMWBHO/BIEmx8uIqZSyaWmP2V7lrXACOyeWcN
+ dMen7hSzp1oT7MHQ0QNrXDaQt6FEfrjHMxOdf/BIKtg20ILKm8D2IvrYvvIt0eOkWiMl
+ iTlmSgAxQNWzuVgyF2TDaGH6qhz5cE3eCRMSiNzjTTv4xnAA9wDbS1OwM8E7ihKRzzMg
+ JZPA==
+X-Gm-Message-State: AOJu0YzHBcTvyILHQM5Yx9WKFjK23SET6R4tZurTCB8dSbv4+g6/pdW2
+ T/izsx8f9/0Te9EAr6jUb/ZDkx95WrECr9lgrLCkiS9Cv4h56Z4B9gVapw96cXfe6adDkZ6cD6Y
+ 3cbtPsjI=
+X-Gm-Gg: ASbGncsSZqYrJTeyjhGHeRgJHQ1vJZVYeXBcT5ELUthZyOJ30e/H8SkNj+gZhc0KbS5
+ opXU2lTxsP/5s43ddcZI0YUvDD3/J+arbjNnIKJj+y3UXRk1SvI7aBIXef41jZmnNQnbKVfWuqx
+ UC6LsOeKH6AIPmq+QdLnVVmm4mgI899NG/C6Z1An6cn2x2zyqXm/Ii8hmECYWUpiPmdbju2LVwi
+ EK/IAssfPezT6xLewa0HpLtA4o1zriJhYaxueVHt9XE1fhJxR4fHF+lLrHgvF1cESKRmH/nBwr+
+ Wxtedp7jxySHlDPdW6f/0rPOxAvZj5U1VUezr0aoAho4eRkt3NVKFngGhdVQjY6D8v93BCi6g0H
+ jhsM418QcylafBEebgTpLHRwER38Pnnh/bnPiJPssJJIEYkeUrarhOzwU84c=
+X-Google-Smtp-Source: AGHT+IHNZivbKunbPLYVBNWdoFsM5sVv598YaCyrf1ONEpsSPgnddb0bKL/CirL9pe2xByRDpDRx+g==
+X-Received: by 2002:a05:6e02:2169:b0:424:7f5a:9423 with SMTP id
+ e9e14a558f8ab-42581e6f594mr50078875ab.19.1758650070927; 
+ Tue, 23 Sep 2025 10:54:30 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43d5c85d269sm6049271b6e.23.2025.09.23.09.55.48
+ e9e14a558f8ab-4244a493b40sm73443865ab.12.2025.09.23.10.54.30
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Sep 2025 09:55:48 -0700 (PDT)
-Date: Tue, 23 Sep 2025 10:55:46 -0600
+ Tue, 23 Sep 2025 10:54:30 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Benjamin Hahn <B.Hahn@phytec.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] bootstd: make it possible to use tftp for netboot
- with standardboot
-Message-ID: <20250923165546.GA197373@bill-the-cat>
-References: <20250923-ip_dyn_bootstd-v2-1-eb59a788e647@phytec.de>
+To: u-boot@lists.denx.de
+Subject: [PATCH] doc: develop: process: Add note about asking for feedback
+Date: Tue, 23 Sep 2025 11:54:29 -0600
+Message-ID: <20250923175429.204668-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="d+20zMq5AJL2eJQJ"
-Content-Disposition: inline
-In-Reply-To: <20250923-ip_dyn_bootstd-v2-1-eb59a788e647@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,75 +91,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+It can be unclear to contributors what to do if they haven't gotten any
+feedback on patches they have submitted. Add a sentence saying that if
+they feel it's been too long without any comment, it's OK to reply
+again.
 
---d+20zMq5AJL2eJQJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ doc/develop/process.rst | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-On Tue, Sep 23, 2025 at 03:43:09PM +0200, Benjamin Hahn wrote:
+diff --git a/doc/develop/process.rst b/doc/develop/process.rst
+index 0c6fb31e87b9..4bfbf0eb9c63 100644
+--- a/doc/develop/process.rst
++++ b/doc/develop/process.rst
+@@ -139,7 +139,9 @@ comments). Even a "I have no time now, will look into it later"
+ message is better than nothing. Also, if there are remarks to a
+ patch, these should leave no doubt if they were just comments and the
+ patch will be accepted anyway, or if the patch should be
+-reworked/resubmitted, or if it was rejected.
++reworked/resubmitted, or if it was rejected. However, if a submitter
++feels it has been too long since posting their patch and not received
++any feedback, it is OK to follow-up and ask.
+ 
+ Review Process, Git Tags
+ ------------------------
+-- 
+2.43.0
 
-> Add the option to load the bootscript with the tftp command (static IP)
-> instead of the dhcp command (dynamic IP). For this a new function
-> tftpb_run similar to dhcp_run, is needed. The selection of which command
-> to use can be done with the ip_dyn environment variable, which can be
-> set to yes or no. The ip_dyn variable was chosen as it is already in use
-> on the imx platforms.
-> Also edit the bootstd doc.
->=20
-> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
-> ---
-> Changes in v2:
-> - fix build error when CONFIG_CMD_TFTPBOOT is not activated
-> - Link to v1: https://lore.kernel.org/r/20250911-ip_dyn_bootstd-v1-1-74f7=
-4507cc18@phytec.de
-> ---
->  boot/bootmeth_script.c           |  8 ++++++++
->  cmd/net.c                        | 18 ++++++++++++++++++
->  doc/develop/bootstd/overview.rst |  4 ++++
->  doc/develop/bootstd/script.rst   |  6 ++++--
->  include/net-common.h             |  8 ++++++++
->  5 files changed, 42 insertions(+), 2 deletions(-)
->=20
-> diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-> index 020cb8a7aec0..fd15b1ac1a20 100644
-> --- a/boot/bootmeth_script.c
-> +++ b/boot/bootmeth_script.c
-> @@ -129,7 +129,15 @@ static int script_read_bootflow_net(struct bootflow =
-*bflow)
->  	if (!fname)
->  		return log_msg_ret("dhc", -EINVAL);
-> =20
-> +#ifdef CONFIG_CMD_TFTPBOOT
-> +	if (env_get_yesno("ip_dyn") =3D=3D 0)
-> +		ret =3D tftpb_run(addr, fname);
-> +	else
-> +		ret =3D dhcp_run(addr, fname, true);
-> +#else
->  	ret =3D dhcp_run(addr, fname, true);
-> +#endif /* CONFIG_CMD_TFTPBOOT */
-
-This is a case where IS_ENABLED(CONFIG..) is helpful as we can do:
-if (IS_ENABLED(CONFIG_CMD_TFTPBOOT) && env_get_yesno("ip_dyn") =3D=3D 0)
-	ret =3D tftpb_run(addr, fname);
-else
-	ret =3D dhcp_run(addr, fname, true);
-
-And when CONFIG_CMD_TFTPBOOT isn't set the compiler optimizes this to
-just the dhcp_run call.
-
---=20
-Tom
-
---d+20zMq5AJL2eJQJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNLRCwAKCRAr4qD1Cr/k
-CuP7APoDJuOUrUmvmg4PTqZoQBGLov06gRidCmnsGgZlhw4F7QEA3CHOQahjJbC2
-Z1BmpfEz7F9TLeCCmw290+ETPoxzhgY=
-=ES//
------END PGP SIGNATURE-----
-
---d+20zMq5AJL2eJQJ--
