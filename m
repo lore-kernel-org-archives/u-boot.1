@@ -4,45 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D99FCAC5B0
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 10:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE116CAC5A7
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 10:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DC9A834E1;
-	Tue, 23 Sep 2025 12:27:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 4EA45800B6;
+	Tue, 23 Sep 2025 12:49:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="LuSxMWiw";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAD2880C93; Tue, 23 Sep 2025 12:27:41 +0200 (CEST)
-Received: from smtp-1909.mail.infomaniak.ch (smtp-1909.mail.infomaniak.ch
- [185.125.25.9])
+ id 36CC780C93; Tue, 23 Sep 2025 12:49:12 +0200 (CEST)
+Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4663F83445
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 12:27:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D0FB80050
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 12:49:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
+ dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
- [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cWGQ16ym4zBfD;
- Tue, 23 Sep 2025 12:27:37 +0200 (CEST)
-Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4cWGQ13tNGzFgY; Tue, 23 Sep 2025 12:27:37 +0200 (CEST)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 23 Sep 2025 12:27:22 +0200
-Subject: [PATCH 3/3] mkimage: fit: erase data-size property when importing data
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=RCxNl34uob9/zxOT6lwnU4IIBLIG/1k4zeV1MQ2pJYU=; b=LuSxMWiw5sNOK9J7oVkKDVi46B
+ 9xxcInmGYfHeg1PVQNc0cBgNav8o03Zg56+SkKfvDHnXNjd06GmcrU0ROFG/m6hpUkT7pqBFoLDnh
+ v0L2oMVDMz94bOWdkRo+0xINY2BTZOyutOjA2+0E4Cuqi3vCewl3t6drJAotNJ62Kbkpq7GAKMJ0X
+ GXo0o/2zNLZTyrBWVKJ6eyBTaMpBo0HQWo60eqL1lOmwqVgSfWyhFhfIQgqDkuxDIZAdrwUWvfE4F
+ o73AD4UlxL78iy17m6HhTavfkQqfuXzbG84J86PV2hHvhUgdMrDoayapcIerPUaRC9gHXkQTfoO2l
+ wn1D5meg==;
+Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:48620
+ helo=localhost.localdomain)
+ by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.98.2) (envelope-from <primoz.fiser@norik.com>)
+ id 1v10a6-00000001Dqq-23Da; Tue, 23 Sep 2025 12:49:08 +0200
+From: Primoz Fiser <primoz.fiser@norik.com>
+To: Mathieu Othacehe <m.othacehe@gmail.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	upstream@lists.phytec.de
+Subject: [PATCH] board: phytec: phycore-imx93: Set CONFIG_ETHPRIME to eth0
+Date: Tue, 23 Sep 2025 12:49:07 +0200
+Message-Id: <20250923104907.1817958-1-primoz.fiser@norik.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250923-mkimage-2-runs-data-size-v1-3-ef3fa57e9645@cherry.de>
-References: <20250923-mkimage-2-runs-data-size-v1-0-ef3fa57e9645@cherry.de>
-In-Reply-To: <20250923-mkimage-2-runs-data-size-v1-0-ef3fa57e9645@cherry.de>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Lars Feyaerts <lars@bitbiz.be>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.2
-X-Infomaniak-Routing: alpha
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cp2.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
+X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,52 +81,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Set ethprime to eth0 since FEC interface is considered the primary IF on
+phyCORE-i.MX93 SoM based boards. This comes from the fact that the same
+bootloader is reused for both carrier boards, that is phyBOARD-Segin and
+phyBOARD-Nash which both use different Ethernet PHYs on the EQOS (eth1)
+interface and thus eth1 cannot be used as a prime.
 
-When importing data, the data-offset property is removed and the data
-content is imported inside the data property of the node.
-
-When mkimage is run twice on the same FIT, data-size property is already
-set in the second run, from the first run (via the fit_export_data
-function). If we don't remove the data-size property, nothing guarantees
-it matches the actual size of data within the data property. To avoid
-possible mistakes when handling the data property, let's simply remove
-the data-size property as well.
-
-This also fixes an ordering issue of the data-size and data-offset
-properties in FIT when comparing the FIT after one run of mkimage and a
-second run. This is due to fit_export_data setting data-offset property
-first (it doesn't exist so it's added) and then data-size (it doesn't
-exist so it's added) for the first run, while it sets data-offset
-property first (removed in fit_import_data, so it doesn't exist so it's
-added) and then data-size (it exists already from the first run, so it's
-simply modified) for the second run.
-
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
 ---
- tools/fit_image.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/imx93-phycore_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/fit_image.c b/tools/fit_image.c
-index 41c386bdc9c8e01a66ee8f62e0e7116e47a68bd8..feb0cfeeeebd2de9581f39e8f784a63105f5091b 100644
---- a/tools/fit_image.c
-+++ b/tools/fit_image.c
-@@ -771,6 +771,14 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
- 			ret = -EINVAL;
- 			goto err_munmap;
- 		}
-+
-+		ret = fdt_delprop(fdt, node, FIT_DATA_SIZE_PROP);
-+		if (ret) {
-+			debug("%s: Failed to erase %s property: %s\n", __func__,
-+			      FIT_DATA_SIZE_PROP, fdt_strerror(ret));
-+			ret = -EINVAL;
-+			goto err_munmap;
-+		}
- 	}
- 
- 	confs = fdt_path_offset(fdt, FIT_CONFS_PATH);
-
+diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
+index 0acdfd2bf53c..4c952e966d1a 100644
+--- a/configs/imx93-phycore_defconfig
++++ b/configs/imx93-phycore_defconfig
+@@ -89,7 +89,7 @@ CONFIG_ENV_REDUNDANT=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_ENV_MMC_DEVICE_INDEX=1
+ CONFIG_USE_ETHPRIME=y
+-CONFIG_ETHPRIME="eth1"
++CONFIG_ETHPRIME="eth0"
+ CONFIG_NET_RANDOM_ETHADDR=y
+ CONFIG_SPL_DM=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
 -- 
-2.51.0
+2.34.1
 
