@@ -4,71 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90971CAC5A7
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 08:12:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1D20CAC5B0
+	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 09:58:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EED1A80050;
-	Tue, 23 Sep 2025 10:12:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=infi.wang
+	by phobos.denx.de (Postfix) with ESMTP id EA29380050;
+	Tue, 23 Sep 2025 11:58:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=infi.wang header.i=@infi.wang header.b="Aj3f2U5b";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="Mkju4UXA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B3A4833E9; Tue, 23 Sep 2025 10:12:36 +0200 (CEST)
-Received: from outbound.st.icloud.com
- (p-east2-cluster4-host4-snip4-10.eps.apple.com [57.103.78.151])
+ id B65FF833E9; Tue, 23 Sep 2025 11:58:43 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FF818004F
- for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 10:12:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=infi.wang
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=root@infi.wang
-Received: from outbound.st.icloud.com (unknown [127.0.0.2])
- by p00-icloudmta-asmtp-us-east-1a-100-percent-0 (Postfix) with ESMTPS id
- E495D18001C6; Tue, 23 Sep 2025 08:12:29 +0000 (UTC)
-Dkim-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infi.wang; s=sig1;
- bh=7gI2rJuq/b4Wbn4jbpRTQCMTUU+HJLDIK43+RK2Lrc4=;
- h=Content-Type:Mime-Version:Subject:From:Date:Message-Id:To:x-icloud-hme;
- b=Aj3f2U5bldsiF4XNeNiBzTTwwML+6dZyKcikNqOdB1zo+f1bV36V7PxUVozkMZ5GH/KooUubfYpgE8oZX+39226tognWkiGwPOvZk3oore/hqy3eFAXdWsXLOVHJGiQ2nzqqWKAFVRoysuVqc4dG9TX+ZzI/k326RPVtrKACItt5i5yyLqIRWWJNSonm3+Rn5LDIXATWnYCzHqafzUZDPvfFKVeAlCvZleVPASz+fM6v6iab3bxjPgoxDATTTRVXHhXq0ZaPzt3Z/B7t96ZY+JiDiuMRvaDEPRa6tYW2Mp0jqwLuiCIlImlHNYoDYLb4xiD5x0Tzjq3JLHLYIMQKTA==
-mail-alias-created-date: 1549370554000
-Received: from smtpclient.apple (st-asmtp-me-k8s.p00.prod.me.com
- [17.42.251.67])
- by p00-icloudmta-asmtp-us-east-1a-100-percent-0 (Postfix) with ESMTPSA id
- 6F59118001EF; Tue, 23 Sep 2025 08:12:27 +0000 (UTC)
-Content-Type: text/plain;
-	charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3826.700.81\))
-Subject: Re: [PATCH 1/4] net: phy: aquantia: switch to use phy_get_ofnode()
-From: Beiyan Yun <root@infi.wang>
-In-Reply-To: <4DE4F2A2E02C441F+20250922192021.268592-2-root@infi.wang>
-Date: Tue, 23 Sep 2025 16:12:16 +0800
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <40C6830D-0A91-4D5D-A5C2-6E5C9B025863@infi.wang>
-References: <20250922192021.268592-1-root@infi.wang>
- <4DE4F2A2E02C441F+20250922192021.268592-2-root@infi.wang>
-To: u-boot@lists.denx.de
-X-Mailer: Apple Mail (2.3826.700.81)
-X-Proofpoint-ORIG-GUID: 8oK4EMJYB9LkqSaLMXkrRgpGqtZTvk7F
-X-Proofpoint-GUID: 8oK4EMJYB9LkqSaLMXkrRgpGqtZTvk7F
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTIzMDA3NSBTYWx0ZWRfX1pmWROi5W7PX
- 3nChbPDNbQago2mN4tIVhqnIwDMR2rmjU9nh7sj7AZ8VnHiJtlxjiws+f4ftiQgczJyR9taPRx5
- CfzXwSpGe2IKdzEPSTY2aFCxaGBdUF2gW3G9qAxYMOf1Kq6+LOFnFuaea+/R4asQ2zmUkwzt0Ce
- rmPV3fH4X7W2nklzYSSqCCk+3nQjXX3FtBqBUlct5XPmUOQAWoDis4+3DzV3EXacUDecgSj+Sv+
- CdTwZEUxF5B8NJ9G22GM8BfKRx/LYceVjD4xeDRSO3b1ADT2rr/aYP1WE5juV/ARwhN3MUAL8=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-09-23_01,2025-09-22_05,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- phishscore=0 spamscore=0 suspectscore=0 clxscore=1030 malwarescore=0
- adultscore=0 mlxlogscore=922 mlxscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.22.0-2506270000 definitions=main-2509230075
-X-JNJ: AAAAAAABpcRpJOelUADL5rL98xRkwW/ZUsz+koc4DpbabrU+BdWyIPaiufeSZQLcZgmrYGlvUhD4BkdrqjvLQKcE2YhzjGU72gMSQvDzechu/GrW3gt2aFf5dR+pbEoaYHOnj9DujaAWVqr4bzIEIw17mFCQ4VqOxsbsQrgph10rQvGNGLhV1xIaM/I2wUBtIR/eRcBG2UJGZePPYbWHDnud5jereRaQEGTFeDLsa8UFJ/WAawocrWPckr2819HORceFSNxP+2dN6ofHlX1ewbY7z315faZH4Qj4k2SEysLZEXR8b0hAGI4UcgRsB8iM+NQ+xHTPv/QYGGFEa5IlmaWYVRqpw9L1cxPy3hGXH3EDdeuH4mJsVWmz9A/JjXRxD7kUiTljCWzH9viRw8il3y2Zs5/IjKAaG7K+hUEtC4pVwqQ1J9tE5eu5vBcree/a14eIugV/oJhBG5PHKQrPa1oW0hcLNSmjmMtFllRD6PJAvhW5hSOAJQ5utE8JSW+Dyv09KQzppDqdI8vGvtdUDQiONmLdwKkDAQxESJQeFpXYEia80eA756vhh6rHSXsLP/XqWelgUIPojS0cG7Z6QK9OINxHB9JMJoIqmm2YfKBd8khnVVJSVRbqCvvpbwVFKWVzzZhA0zZlAXKjOCpdCviwFwcZgRO8sWB63lra0SUxhLg8MZv5Prs=
+ by phobos.denx.de (Postfix) with ESMTPS id 32BFB80050
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 11:58:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=354b57e8f=Manikandan.M@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1758621522; x=1790157522;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=g2G+KI1Fi1bO/SizbJyMOCX/Jd7BPzeJXdc1WsAstsQ=;
+ b=Mkju4UXATsdVvZhGiNMAUKO1KSqsOAlBdHpKUZA0JrK42rjtGIAZH0WM
+ 7ObqP5/RAt6g6UFXLHD2DJ2auX3MjWlmzte8wrIpTx9Rx5u5qD6Ou6xal
+ BWPRnoarCKXXlpLqvnazG0sV/5m8JQ6lfNpaK2GrlrOC2wKmDxR1ez+mN
+ NCWnWb61Olnd7HRN9kcct9Tz+5bwLXZyLs60WTZ3X8HEyNsef/vsq4z5t
+ Tz6IYTbMpVZbZ/vgY631c8hkTyUa3MZt7k/V1hqzDCnuJtp1mn6Do3C08
+ hMZxsHN2hOsGjVUgPRdok5YGapCzjBQd5GaDQWTRkuwzY9GmzFo5c1tdd Q==;
+X-CSE-ConnectionGUID: AbFig+T8T7e/aqNyDXzeow==
+X-CSE-MsgGUID: +y1x6N+KRtWDZvRUw2/1GA==
+X-IronPort-AV: E=Sophos;i="6.18,287,1751266800"; d="scan'208";a="46869730"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 23 Sep 2025 02:58:40 -0700
+Received: from chn-vm-ex04.mchp-main.com (10.10.85.152) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Tue, 23 Sep 2025 02:58:28 -0700
+Received: from che-lt-i67131.microchip.com (10.10.85.11) by
+ chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server id
+ 15.1.2507.58 via Frontend Transport; Tue, 23 Sep 2025 02:58:25 -0700
+From: Manikandan Muralidharan <manikandan.m@microchip.com>
+To: Lukasz Majewski <lukma@denx.de>, <seanga2@gmail.com>,
+ <varshini.rajendran@microchip.com>, <Ryan.Wanner@microchip.com>,
+ <balamanikandan.gunasundar@microchip.com>, <romain.sioen@microchip.com>,
+ <u-boot@lists.denx.de>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH 1/2] clk: at91: Add ACR in all PLL setting.
+Date: Tue, 23 Sep 2025 15:28:17 +0530
+Message-ID: <20250923095818.441917-1-manikandan.m@microchip.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,34 +81,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Please refer to resent series at =
-https://lists.denx.de/pipermail/u-boot/2025-September/598941.html
+Add ACR in all PLL setting. Add correct ACR value for each PLL used in
+different SoCs.
 
-> On 23 Sep 2025, at 3:20=E2=80=AFAM, Beiyan Yun <root@infi.wang> wrote:
->=20
-> Use PHY API phy_get_ofnode() helper to get PHY DT node.
->=20
-> Signed-off-by: Beiyan Yun <root@infi.wang>
-> ---
->=20
-> drivers/net/phy/aquantia.c | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/drivers/net/phy/aquantia.c b/drivers/net/phy/aquantia.c
-> index f63a13824ca..903fcd667f6 100644
-> --- a/drivers/net/phy/aquantia.c
-> +++ b/drivers/net/phy/aquantia.c
-> @@ -338,7 +338,7 @@ static int aquantia_set_proto(struct phy_device =
-*phydev,
->=20
-> static int aquantia_dts_config(struct phy_device *phydev)
-> {
-> -	ofnode node =3D phydev->node;
-> +	ofnode node =3D phy_get_ofnode(phydev);
-> 	u32 prop;
-> 	u16 reg;
->=20
-> --=20
-> 2.47.3
->=20
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
+---
+ drivers/clk/at91/pmc.h      | 1 +
+ drivers/clk/at91/sam9x60.c  | 2 ++
+ drivers/clk/at91/sam9x7.c   | 5 +++++
+ drivers/clk/at91/sama7d65.c | 1 +
+ drivers/clk/at91/sama7g5.c  | 1 +
+ 5 files changed, 10 insertions(+)
+
+diff --git a/drivers/clk/at91/pmc.h b/drivers/clk/at91/pmc.h
+index 580c9964ff4..f38868d1665 100644
+--- a/drivers/clk/at91/pmc.h
++++ b/drivers/clk/at91/pmc.h
+@@ -42,6 +42,7 @@ struct clk_pll_characteristics {
+ 	u16 *icpll;
+ 	u8 *out;
+ 	u8 upll : 1;
++	u32 acr;
+ };
+ 
+ struct clk_pll_layout {
+diff --git a/drivers/clk/at91/sam9x60.c b/drivers/clk/at91/sam9x60.c
+index e04266a2be2..2251e2846fa 100644
+--- a/drivers/clk/at91/sam9x60.c
++++ b/drivers/clk/at91/sam9x60.c
+@@ -123,6 +123,7 @@ static const struct clk_pll_characteristics apll_characteristics = {
+ 	.num_output = ARRAY_SIZE(plla_outputs),
+ 	.output = plla_outputs,
+ 	.core_output = core_outputs,
++	.acr = 0x00020010UL,
+ };
+ 
+ static const struct clk_pll_characteristics upll_characteristics = {
+@@ -131,6 +132,7 @@ static const struct clk_pll_characteristics upll_characteristics = {
+ 	.output = upll_outputs,
+ 	.core_output = core_outputs,
+ 	.upll = true,
++	.acr = 0x12023010UL, /* fIN = [18 MHz, 32 MHz]*/
+ };
+ 
+ /* Layout for fractional PLLs. */
+diff --git a/drivers/clk/at91/sam9x7.c b/drivers/clk/at91/sam9x7.c
+index ad9865feff0..9ea253e6ff8 100644
+--- a/drivers/clk/at91/sam9x7.c
++++ b/drivers/clk/at91/sam9x7.c
+@@ -164,6 +164,7 @@ static const struct clk_pll_characteristics plla_characteristics = {
+ 	.num_output = ARRAY_SIZE(plla_outputs),
+ 	.output = plla_outputs,
+ 	.core_output = plla_core_outputs,
++	.acr = 0x00020010UL, /* Old ACR_DEFAULT_PLLA value */
+ };
+ 
+ static const struct clk_pll_characteristics upll_characteristics = {
+@@ -172,6 +173,7 @@ static const struct clk_pll_characteristics upll_characteristics = {
+ 	.output = upll_outputs,
+ 	.core_output = upll_core_outputs,
+ 	.upll = true,
++	.acr = 0x12023010UL, /* fIN=[20 MHz, 32 MHz] */
+ };
+ 
+ static const struct clk_pll_characteristics lvdspll_characteristics = {
+@@ -179,6 +181,7 @@ static const struct clk_pll_characteristics lvdspll_characteristics = {
+ 	.num_output = ARRAY_SIZE(lvdspll_outputs),
+ 	.output = lvdspll_outputs,
+ 	.core_output = lvdspll_core_outputs,
++	.acr = 0x12023010UL, /* fIN=[20 MHz, 32 MHz] */
+ };
+ 
+ static const struct clk_pll_characteristics audiopll_characteristics = {
+@@ -186,6 +189,7 @@ static const struct clk_pll_characteristics audiopll_characteristics = {
+ 	.num_output = ARRAY_SIZE(audiopll_outputs),
+ 	.output = audiopll_outputs,
+ 	.core_output = audiopll_core_outputs,
++	.acr = 0x12023010UL, /* fIN=[20 MHz, 32 MHz] */
+ };
+ 
+ static const struct clk_pll_characteristics plladiv2_characteristics = {
+@@ -193,6 +197,7 @@ static const struct clk_pll_characteristics plladiv2_characteristics = {
+ 	.num_output = ARRAY_SIZE(plladiv2_outputs),
+ 	.output = plladiv2_outputs,
+ 	.core_output = plladiv2_core_outputs,
++	.acr = 0x00020010UL,  /* Old ACR_DEFAULT_PLLA value */
+ };
+ 
+ /* Layout for fractional PLLs. */
+diff --git a/drivers/clk/at91/sama7d65.c b/drivers/clk/at91/sama7d65.c
+index 8d2c25e6fa9..9f0b394543b 100644
+--- a/drivers/clk/at91/sama7d65.c
++++ b/drivers/clk/at91/sama7d65.c
+@@ -184,6 +184,7 @@ static const struct clk_pll_characteristics pll_characteristics = {
+ 	.num_output = ARRAY_SIZE(pll_outputs),
+ 	.output = pll_outputs,
+ 	.core_output = core_outputs,
++	.acr = 0x00070010UL,
+ };
+ 
+ /* Layout for fractional PLLs. */
+diff --git a/drivers/clk/at91/sama7g5.c b/drivers/clk/at91/sama7g5.c
+index c0e27828b1a..f24d251857f 100644
+--- a/drivers/clk/at91/sama7g5.c
++++ b/drivers/clk/at91/sama7g5.c
+@@ -169,6 +169,7 @@ static const struct clk_pll_characteristics pll_characteristics = {
+ 	.num_output = ARRAY_SIZE(pll_outputs),
+ 	.output = pll_outputs,
+ 	.core_output = core_outputs,
++	.acr = 0x00070010UL,
+ };
+ 
+ /* Layout for fractional PLLs. */
+-- 
+2.25.1
 
