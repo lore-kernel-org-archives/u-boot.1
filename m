@@ -4,94 +4,145 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B84FCAC5A5
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 15:26:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11AF3CAC5AE
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 15:27:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 894618365C;
-	Wed, 24 Sep 2025 17:25:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F3DD680819;
+	Wed, 24 Sep 2025 17:25:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EJ3bEKXr";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="r38xEcy1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBE0983071; Wed, 24 Sep 2025 16:34:02 +0200 (CEST)
-Received: from mail-ua1-x929.google.com (mail-ua1-x929.google.com
- [IPv6:2607:f8b0:4864:20::929])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DC49B8323A; Wed, 24 Sep 2025 17:16:56 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6154980107
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 16:34:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45B5B80819
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 17:16:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-ua1-x929.google.com with SMTP id
- a1e0cc1a2514c-8c0e2d1efd5so1650600241.3
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 07:34:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758724439; x=1759329239; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uy161euH7AND+5CTzsMFSqmHiUAviLps+Fe4/bb+UaE=;
- b=EJ3bEKXruXlV6yHycHOQfIGVuZv6UESUgtcYoTp2+8KdGB1DLi5TEjmvwjUSe9ziNF
- iTqfba1USL9g5aClKgAsx025vscwBCiQJxooDt7GtSjHuNN2wBaCxsyuDyUgj6KoTFVH
- IHVcDVz8ZrWj003mz/tctsgTJPDsY9BikNe4KbyPw9y8UcDzWg1Kv3kD3y4URoG533Lx
- 4i2oKyR8l7VBJdy9YWhXIxXWVQwOuRZ5C2eRKa3Xk1ESoQOiMl7+Qx5qn9HGOkBw86pS
- QLhYDhk5aedOCG/xqhnhi/tbAcZ6v/07GPIJdpod2tAC37a7xaDai+bWaIpe9MDfzKoz
- WJjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758724439; x=1759329239;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uy161euH7AND+5CTzsMFSqmHiUAviLps+Fe4/bb+UaE=;
- b=Nms/f1XmTAfyRafwLXRs1MWIv1Ff+OZhHgKWIZLU3n4fNm9d8BpcXZhh9uzQthLcI7
- 4hD5RZY0FvvwNxhDEa1hBfFywdkVYxtg2X5UxFPgZ9GJw/ULcjexah3GilecKqiqaqhj
- YRUqeo6mSrNrhyPNNiB42+AoB0CWvGiTT5snNTiZU7X5isCMLoWamn7IjLXXe8A3NdBh
- GUUCewmIITNLt8tzJoHHsY9WYUxkwCCRmcHBjP/rEQq+DR+aGP6dPiEBcHTmsD+gQgQH
- OHln2Icv474fhkm9VgeQVsqaMVa4p2dwI4N1fGQXSzS9YXS4wvXr0jcpr/ZFUk88PJyx
- N7hQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWvWqTcHYGR+RszaAt1VOB3df3VOd41nDn8YpMBBM+ggVNeQR0bawSz07Fg2mbbqO7qBkhkNO4=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywz68iah0r4Vvtn2jykIYjTsGhLX9kfh3ng4Z7FyskDLWQhquNi
- nokYBLD3zhTYKjbGUZyAuOsYvuzQWNI1qZz55l58KlR6XbiE3cX5EeGGzyvTSCtnDUUZvnivkW1
- L+DzgHGV7bsseYb7nTOJVdNlxHvWRVhM=
-X-Gm-Gg: ASbGnct0FNML8zpk+Nz0Tii6rgfV4Gdj6aBZzWASENXutysPWs23RBgdMztJujVDAHx
- ueMmm+pU91EVZ8MGPCeAUN10bbAcNe1jMmKa7M/DQtABbxTJe4Dquk/kcUN9teDZu2iwK8Aurzh
- WBZYCP1nYwd8FzSIMa+vRC2uuGzpAK/yrDAZZshvKEjVhMFbJG5I2ITl8dQ+GiOpdcIwYfjfeOT
- EJrNSY=
-X-Google-Smtp-Source: AGHT+IH1zTDPqdpI9wGQW4k7xrIDWE2OSG6RC5lABWyS/yGxZe2d9ge2YXIZKxKw1Xo91L/pRiXdnxeLIWhFHZUZokU=
-X-Received: by 2002:a05:6102:3f0e:b0:4f1:7946:ed52 with SMTP id
- ada2fe7eead31-5acc83fb099mr57800137.12.1758724438993; Wed, 24 Sep 2025
- 07:33:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MSvVqVJw4cvJJbGdoU6H7jiyLmfo1GPqybep7xu8MqC55FPDoIkgzq/akhZJTDMFv+mVKaoKY3RVnojWI6q4dSKioKff42v1R72YY1X7X9CPF2Qg9tKE39rlvFXckhiGH5hYf/9lR7i0buIMSUkibhCoK6SYhbKhjFDGmrh6+CUt6VebAWfbZfE2/x87OEtkpikUbceUGapO1HINquMTByQ2+NCZpmrOioRewURMWuIQLUeJyXGcB10qqVaSnAxKjLfwu2MjQjK4HEBTPSeGhQ/z3Qe6KNpltFFExDOwdFxvVhxT8HyZPIUUXjO7KcTU1VHV3tcrj2Nu5IeawKc8zA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=1foU8FIMsD2LBky9qElqE+4Jo9Ib6jCfZmvn/82W5Yg=;
+ b=K25lPbCL+4boqLKHQ0g68RxHClNV+XdAXKG9YHNtKpYXqXsbuCdEUvmoCO5/eGZcFl9uFf1lLKdQOxc8iP5l7WgZL2dNyO2U080Ts2JvxPjT7zptS+FPyR8MCoDvvPGvMs2iPUikNVwRh0uHdnDTBbQTzrS7s2v+wlgbyqDSjigymbTZHfVtInVT2OeaLFB3L+NJ1e55fP5f97sjyqXDijaANhIBQM3qr+64V6xeBr2QNprGl1c+ca8Mj67HG4sdb0G8xKLPP3Ol5C8DV0RyvJ3GH6uQfThoKcLHMjDA/r3SepkekRUeiCAoXhXZZZtlCAWfmUA7s83lusJ6jmD6ZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=1foU8FIMsD2LBky9qElqE+4Jo9Ib6jCfZmvn/82W5Yg=;
+ b=r38xEcy16Hz3tRFswD44hso74E3Vq1c+oMJ5fGGTQdGuzdx4Y79RYqO+MQOxB6vkLYZ8n5SiDU5ncZtiT7/ryO1RU4GUFjg6M+SziI1xhqWuUeTeIp/OJvv6L89CAR8T30DzPQEmkJm4t1mAeIWi0+rKFPkCkmsrI5JG5jItBhE3Hv4ZsC6MPj+vSFSlAI2i/izLj5bsaa5YViHJXPlhnRzhmPWZB4cbgPPUcLVH24l6gpBxDdrFspvqdYXh+AaHhjrHzfWksJZTJNAVxcVlUxBJ7pJ6KjHnSdviTAI1Dd4W3dieDPsauWvHkLGSDpO4ph0mbQA3eLel8dhJY7tw4A==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by VI0PR04MB11819.eurprd04.prod.outlook.com (2603:10a6:800:2eb::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.9; Wed, 24 Sep
+ 2025 15:16:51 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9160.008; Wed, 24 Sep 2025
+ 15:16:51 +0000
+Date: Thu, 25 Sep 2025 00:28:35 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] please pull mmc-power-next-2025-09-24 for next
+Message-ID: <20250924162835.GA2186@nxa18884-linux.ap.freescale.net>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SI2PR01CA0003.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:191::16) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-References: <20250914110021.4103-1-aristo.chen@canonical.com>
- <20250924113733.uz6hozszbuynemtc@giddy>
- <20250924114317.742ae4ntrb4mvuyq@expert>
- <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
- <20250924135139.GH197373@bill-the-cat>
- <20250924140524.fy46p7ifr4oxh5mc@uncooked>
-In-Reply-To: <20250924140524.fy46p7ifr4oxh5mc@uncooked>
-From: Aristo Chen <jj251510319013@gmail.com>
-Date: Wed, 24 Sep 2025 22:33:22 +0800
-X-Gm-Features: AS18NWBykcZsivNB520efiPnCZqq5piWVTo8j7Z9kpDh7_Ns8zy0M8vAl0_1aVQ
-Message-ID: <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
- and fix related test/DTS issues
-To: Nishanth Menon <nm@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>,
- u-boot@lists.denx.de, 
- sjg@chromium.org, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
- paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de, 
- w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com, 
- n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, 
- ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, 
- alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Wed, 24 Sep 2025 17:25:44 +0200
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|VI0PR04MB11819:EE_
+X-MS-Office365-Filtering-Correlation-Id: cc446749-3ee7-431f-2d76-08ddfb7d6332
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|19092799006|366016|376014|52116014|1800799024|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jas49JLh+uh/JmbKPZrt25adiyckbbLuCfchGTHFvgl0ekyhC2c8/D+jjd7K?=
+ =?us-ascii?Q?Aj1pcCwAFMrPptZ6VLYDVz6wUF4Ea/uovNOcF4c8SKISHSe04BOZ8G8/SDz6?=
+ =?us-ascii?Q?St57q5byhhodrLdT8qAG1EX2P1d043xZJK7wk96miTB5rJKpKWWsQTp+1LlM?=
+ =?us-ascii?Q?Mjex0kX9diYFecUbafnuI2NehguoQHrn6GWwN1+VfI1+BewNmH+h4Px+Ak3q?=
+ =?us-ascii?Q?1avf4RTT2SiQrVsbRrPFjZpW1OSNvqXHD1wkF4WjxSCWCCcvepPbaot83sxq?=
+ =?us-ascii?Q?dB/CkklbJRmagW8boYvgC28liE6A0inb9Az3bq8y1FSYkPbFzd3a56yKnJFh?=
+ =?us-ascii?Q?mj/8+FmlCA582Mmr4jFLIfwyY3EyxOCCuA42U+n0jX/aIsaaEu/TtU0ojEzA?=
+ =?us-ascii?Q?5QzDbwmdgzf+3tmhO0ZG0uCJaQdB8XclQwRubeems6BYgJgQfsB0fku36hoh?=
+ =?us-ascii?Q?HeYwuGni9UuNhJNaxnb46GzqevJvowyO8BVfWciubRrV5E0TyQiaSA4kfUUw?=
+ =?us-ascii?Q?lvJXs7DDWWigafnzsS9XKN7WcnvJ7JgGV/0hvEilivpRPCG9EW1EgJy9g87j?=
+ =?us-ascii?Q?K30Le9zB1GyUxcSwnGrQnjhaqYBiYQLztth7EpUzDlArqpCSX+su34811d75?=
+ =?us-ascii?Q?7Igaxl1TsU2LreRj7fE3oBIZpvsaNQaV5xRLE0ieIHD2uvc+UhW5Ny+eI7OX?=
+ =?us-ascii?Q?thhsyTceMUCSjeVRwUQS78qjR+lo1YOhCmvg+q7EO+oWGmHLjzRmlSzvp6Ud?=
+ =?us-ascii?Q?7DDzevM8xRChvxseh/gRSDM3NDHK4Yw1HWFp6M/1Q+S87hawE//Bjy+DUWrM?=
+ =?us-ascii?Q?3TokfU/YgrfyVxbW+ngxT1qkS0rXd5oQ7Ea1c8a9acPxbJPbTsjiF4EA03LK?=
+ =?us-ascii?Q?xj+Ali+hO/EQq7nyBT1eFAkCO//9EOrdYMRb3gSxWif163Oz3jvWyy3GlhVb?=
+ =?us-ascii?Q?6M8DjPvpQACJDDL6sVi6b999OW+b3l/BRX0p7zMmbhsTKsRjT39CAkY96jIt?=
+ =?us-ascii?Q?Cd4VMdmuwSGTzSQnF9TcfT3T+3Syo5JUH+UZXXkFW2Fo7epQHB8aDzXbX2SL?=
+ =?us-ascii?Q?xxP1GXp0h1dryfkRK1ToG/agNAfAklilKjnhecF3cs+9FuPaaik0zADyubnb?=
+ =?us-ascii?Q?VV/l1apQA9cMPSizlZfx7OPdSbAkfzj7rxAjUtfbVCLq9BhEMRywMuyYU1IN?=
+ =?us-ascii?Q?4biOJP6sAin8Igja6qBDB78sgwL4FWOx1XCDVzHdR/8mCkeWAlgkz7b9Mo0d?=
+ =?us-ascii?Q?OdRrDBFh3Fb1g2ccqS4hLI61TpKcbeZAVe0SulqazIrgx7Um9rIatOvczMJ4?=
+ =?us-ascii?Q?zhM3Se54DUI8mbJRM3A0cMa9mkp/JXbv2fyHDqeGUJKWNEwFj723ONs1ljzQ?=
+ =?us-ascii?Q?DwfrpnWZn+S5lo5NPbtDqPDpOGGy8snWN1FshZdoZoG80zi5V41tLydt8O+9?=
+ =?us-ascii?Q?MyQoiACOISk=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(366016)(376014)(52116014)(1800799024)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?2SbimaCaX3msd4hkcXkM64NVAoMtoQSTlaGimsiitj6Wi79CpoSExY44oZtO?=
+ =?us-ascii?Q?SVKmiWq8WLRRLAOMu8Zgxo+ZW+LMf2bD6CHKzHMrffVqUfXipYY2nVf+KFb5?=
+ =?us-ascii?Q?GlTZf8wHnwk/juW/8Pat4cXieqysMkNFh3S17UP8CUdS5wpeGMb69VPxz8AH?=
+ =?us-ascii?Q?yu9d6uRcvXjAGJ8bW9xhQcbCVcSSxolRbSQ4ZEB3BGY5pFRGmRFaFyekGI/W?=
+ =?us-ascii?Q?62ZAIgqBncbsNnPbW8/a/Ic9dDu3YsPbd+kJ210PSNAyJaWkReJmWvz5C2qx?=
+ =?us-ascii?Q?sI3WdJV5Ttto0c8KeIY60g3uEjR73E4te9QYz9AbLeiJELVjgUlexM31A+Ez?=
+ =?us-ascii?Q?Kvt+wAdyDciqz9gRfaTzHUrOXAYVMoBnJnLgQgTQCLuf14sBTVubrXxTN2E4?=
+ =?us-ascii?Q?5+qPh1HDeNZpV09sJhfdBKP8Dpbl79NW0QtBmLr4pXRUBHl1087tvzhSooGN?=
+ =?us-ascii?Q?flrlnSiV7lhU+EqVo98yabxCWQfOg9QuGe1BHwo6b+3FDEg8q4xDAOEiEjVA?=
+ =?us-ascii?Q?HlZKkOLVhWQtY461HzRh32yggUpt1kJ9Iyx1X1+JutKNOaph+KjFktucYF0i?=
+ =?us-ascii?Q?WzCMvw0t8q1eJMBzgxlYoPu0GXp2Li61xw8UVzl9FZZT0npWKz8OnQ5+m9T3?=
+ =?us-ascii?Q?qFgNT4WJRY694ODT0f/RtoCu3InkTyfN1a8dnYMFfSvvLyOFM2xFewo98bXK?=
+ =?us-ascii?Q?05kZq3rwL3t5eXJGTIJtpAi8QDPCHOBXRr9SbeoB4iTrJtx1BJ+3KdRm8pvj?=
+ =?us-ascii?Q?DU4tTimnLpBQ2PapD+gTvPiSsPatBqrpr7qZ1YLsViI7+sWozxbERgR6Oa+F?=
+ =?us-ascii?Q?B893S9LDmREhs40ogQSCDbWE8H6MqmWj+3X9V2wbro7HR1OkpsNaVfDqCULp?=
+ =?us-ascii?Q?AEvxOgwqAlVoDUunzzVwXzDRXZ5AHtNim8qZrW84EyhwulqG3Pr0UrdTNHyS?=
+ =?us-ascii?Q?hI21sbUj++XxJI3OurG5Mf7osgI6ddLrWzXqKmU8nD62c/nmDsw4MLk/GBpO?=
+ =?us-ascii?Q?0RSN0r6vsZQU2Ci/pUu1nnsm1zhEGYd1tg7VJS+T5ivM8KieEL9j62NPDOnO?=
+ =?us-ascii?Q?UpzmZ4elMBmxOwRQ7o/rXMTcfEOACH5UO/uNYjcJosAIP8tXteNY/bSIUL2+?=
+ =?us-ascii?Q?TzkMYMxbtVYKNtT24P9OVpZq6yD/K/rtbK5OHKt6puQ3NqpqCUfiKUe6CriS?=
+ =?us-ascii?Q?vizhARp/XPgIfeLXFH4yc35vL5wadysu/V6MU4tvb8sQN8XlpWQSbO9oHlWn?=
+ =?us-ascii?Q?YopY/qjKuA7Qpp9hBlWsC0R7l/B1BflsSVSDsLy5gdS4jO5iZPK36xJJHV/6?=
+ =?us-ascii?Q?HTNFf+/8dN2anpV3NpGsj6DIzVs6eVKpCOX8hU/U/LxD2TKgOG0MwVbrpOev?=
+ =?us-ascii?Q?PIaDZ4B6QPL/ExO+f4wOosSgbNZCof3b/noashIGqQR5KI4USp2flxfWx+m/?=
+ =?us-ascii?Q?7ncR4nFeN7AaW2pSn7Yon8B50T93hxGVZUdFmk3cE9Q4Ux8XoAenWLqz/6aR?=
+ =?us-ascii?Q?ELFStF/2RxtU0QVHePR5QYYFfWwLvxKUwXIiuy2JLOBmS6cyo/cojQlzdI0c?=
+ =?us-ascii?Q?4NJnYPOe3WHtsbxitntc9FOKRST8JGD0gS8kX9q/?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cc446749-3ee7-431f-2d76-08ddfb7d6332
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2025 15:16:51.2408 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wPeYsTiGkHrjrz3jjLdIfNE0hETaroorze7n+X8rUbIQ6w1+ctErcgEJtPcZV6NhdTzeeXZcOXU1gpzPLT+9DA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR04MB11819
+X-Mailman-Approved-At: Wed, 24 Sep 2025 17:25:56 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,58 +159,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Nishanth Menon <nm@ti.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=97=A5 =E9=
-=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:05=E5=AF=AB=E9=81=93=EF=BC=9A
->
-> On 07:51-20250924, Tom Rini wrote:
-> > On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
-> > > Hi Aristo,
-> > >
-> > > On 9/24/25 04:43, Nishanth Menon wrote:
-> > > > On 06:37-20250924, Nishanth Menon wrote:
-> > > >> On 10:59-20250914, Aristo Chen wrote:
-> > > >>> This patch series enhances FIT image robustness by adding **memor=
-y
-> > > >>> region overlap detection** to `mkimage` and fixing existing overl=
-aps
-> > > >>> in DTS files and `binman` tests.
-> > > >
-> > > > [...]
-> > > >>>
-> > > >>
-> > > >> Looks like i see a build regression in linux-next after this serie=
-s.
-> > > >
-> > > > I fat fingered that one.. sorry, I meant u-boot next.
-> > > >
-> > > >
-> > > > Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
-> > > >
-> > > >>
-> > > >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
-> > > >
-> > > > I  believe there are outstanding comments on V1 that have'nt been
-> > > > addressed either. Can we revert/drop this series for now while the
-> > > > comments are addressed?
-> > > >
-> > >
-> > > Similar to Nishanth, I am seeing a build regression, itb.map:
-> >
-> > Sorry for the noise all, I've reverted this in next now.
-> >
->
-> Thanks Tom.
-> --
-> Regards,
-> Nishanth Menon
-> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DD=
-B5 849D 1736 249D
-> https://ti.com/opensource
+Hi Tom,
 
-Apology for introducing the regression, I will find time to fix them,
-and thanks Tom for reverting my patch set to unblock others
+Please pull mmc-power-next-2025-09-24 for next
 
-For TIFS stub entries on AM6x platforms and the starfive visionfive2,
-sounds like the image in the FIT will be selected during the runtime,
-so they are not really overlapping each other. I will need to figure
-out other way instead
+---------------------------------------------------
+Correct error value check in regulator_list_autoset
+Minor style fixes in mmc
+---------------------------------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/27712
+
+Thanks,
+Peng
+
+The following changes since commit e482fdbbca935de32400054eb532de45b1cc01cb:
+
+  Revert "Merge patch series "mkimage: Detect FIT image load address overlaps and fix related test/DTS issues"" (2025-09-24 07:50:44 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-mmc.git tags/mmc-power-next-2025-09-24
+
+for you to fetch changes up to 3cabc6bf7e16c7e2a1156392c31e40f678cc7026:
+
+  mmc: core: style fixes in mmc.c (2025-09-25 00:06:27 +0800)
+
+----------------------------------------------------------------
+Andrew Goodbody (1):
+      power: regulator: Fix incorrect use of binary and
+
+Bhimeswararao Matsa (1):
+      mmc: core: style fixes in mmc.c
+
+ drivers/mmc/mmc.c                          | 5 ++---
+ drivers/power/regulator/regulator-uclass.c | 2 +-
+ 2 files changed, 3 insertions(+), 4 deletions(-)
