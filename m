@@ -4,147 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FFE0CAC5A5
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 14:18:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7417CAC5AE
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 15:25:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C64582C84;
-	Wed, 24 Sep 2025 16:18:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0BB9083071;
+	Wed, 24 Sep 2025 17:25:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=htecgroup.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="L7N/fFX5";
+	dkim=pass (2048-bit key; unprotected) header.d=htecgroup.com header.i=@htecgroup.com header.b="RSNST4i5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0624683447; Wed, 24 Sep 2025 16:18:45 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
+ id 7AE0B82998; Wed, 24 Sep 2025 13:04:56 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF62A80107
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 16:18:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 40B0A8004F
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 13:04:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=htecgroup.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=uros.stajic@htecgroup.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nglizi4IDUplz4UNodA96p+xx6gHqUUJG9ZmZfaU4kgqqVcbxI8o16P75EjlpL9G0LnMayVgfJGnh3ZmwWHQ5uqOy+oE8VkDl41bScnvn50uAOP1In0BrsvgG7dRb7iT9mKnq5IRWEQz++WfuJA1wB9tZzLXnxOuxM2dzARs7GaQqlOK92M+luxMVVX7QB3S3aXI8rbjeKEL7C4hyyaPqakvJCsSrtlLCYQSx4nJjh6e4ekiLdgVuvl1GMqaBy4Ttd18jLQbQNLfzWlx9DzIuLMfre0Jn33sN2zNkDNmB0ZJLoswAyWmSfOEiO3DicvqwJwPo9hiR9XzU3Yxr9mRCQ==
+ b=WyN8aPULJ0qXlJrtoYVMeAx2tzQsOuoLWtCHueF3rOyKH1EupaaLhp8iC7wBkfqdJEJW2Q+F1X2m1lD/oQpj+pOqGeoGum2xCCsFdMDzWqeBAxW6rfcjLs5fcvhlHW2Ac+SJ854DHlw6TbvIT9Sx5I0RqRHid023Qp7ZSCR8C1oRHJOtCt+deA+MNior4pNAsOThwvI25C3VP+NpuCzeqMi6XBE78K+3XN01bfLWag99OoI2mrEur/CVzbvz1NnhQPOt67FGQVNd3impSHB3VMmFokh6ANwjgzFCCFVR8SU2+paq2vdaQ2n18dPW5wAgyzLiD4Fb8/XVOGlaxseIVw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ydPDfgb6ND8iKbuG63815PvfRhyiGg/9ozlTTbrz0o8=;
- b=NeoNiNeZpvKrMefRga9dM8a0IaWgDEFTlnNDn2TyOF9HQ/micuiyG6bYNZkkwvDWX1vA7SAKqqihP+z/fsdY2d28TKWWWbXlUD6dWZzET+ShFLaq0PFEzm/uhgOdS3WCWuDrJtAKcGHGZ/FFcsbD2Uvo/M0YZqgnml0M8PR+QvP3alunTkbVOnHouX/EwNnT8j0cRMP4XlYlmCtg0+jgn3Z41nC5LiUsOPuE8AoE/t0Qrz5mitQcrnWL6vOgyg0yAVETfC4h9egLsZKX0Ta5Zz9JsgO84CKaf0vSBUvbHnQS9f9PTSvAPzevg9EuKFFUp7eMITWjQiEkR4ySB6Epzw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=snuFO6IuZWr3mnAb6hmMIpat4ljn4onyWRPEa/AqAsI=;
+ b=SZOLuzQ323KxuUP6ZXgJYVyWeL7SOJelWCa3mbmg9FdDJyGkgId1LhXoNeGsfYvKl4k+lNki9Fe3zyMvq3VctHoQNeh/R0psYKrWBfTst12YmNcnrV0CIp0wvVef4yclfDf7PxqRgkV2rCU4vl7ltd0eImrHc1Qma0zSBBI5Kwn38FshK+LgOXovE0+pwik7PxZxzIaUtd0hEIgl8rNqS2YvfJ/7W7TKl5OP2xWCz92u7kRSmEoovDpMm2yWsc4LtCUzaVy0Hyn4B0mrCZ8DDQQhZCH7zjgDcJG4PmhhGs9RZPFlwSQVyKnq3mi5Tv7UYTvM9EZsJE6iQvqRc3r70g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=htecgroup.com; dmarc=pass action=none
+ header.from=htecgroup.com; dkim=pass header.d=htecgroup.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=htecgroup.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ydPDfgb6ND8iKbuG63815PvfRhyiGg/9ozlTTbrz0o8=;
- b=L7N/fFX59Vj7LD8oGr7/ZGvCWPoGGHGy5Ow/TMOT5JEXOh9n7zUV9U6CeOJyeqCZdrLCVPypUjSn3Tlrzv+ZzLNdMJmDXvTWb+ZwNC2MFs/s25GQs6F0j7+UDkSMG3ShmnYon6fM6zFRewBxIfSX8/H0UddiGKjhY0PJdTFrXoI=
-Received: from MW4PR04CA0095.namprd04.prod.outlook.com (2603:10b6:303:83::10)
- by CY5PR12MB6526.namprd12.prod.outlook.com (2603:10b6:930:31::20)
- with Microsoft SMTP Server (version=TLS1_2,
+ bh=snuFO6IuZWr3mnAb6hmMIpat4ljn4onyWRPEa/AqAsI=;
+ b=RSNST4i5nDZL0csJneRXFGNvAhojb7MNQhpPLlnU7OtboCEGgIH/LT+HU2FViCworRTbp2gYp4/gUdff4ek1JnH2qdpLlrfrRVCEuZflc8P30FpWwerXugUCWQLTRuYA6JtI4iHu9KFV8ssImvTuqNQoxQX/BDQg9xsnfAeTUFBdanrCB10beXLBG7VyETM1buysCeqCcc8we6SLFAJmL+C8zVicasanegGp6H9f3D7en9prkvA+wQT0oPYdTKduUYrzdrbJ7u4z9UE2uIthDRpA/IzbWcqFNDIboXGeuZ92/RrGicX1/27Xj4oG5rjXjUxVy1i0DT2ByXnQNpP6nQ==
+Received: from GV1PR09MB5977.eurprd09.prod.outlook.com (2603:10a6:150:a2::7)
+ by AS8PR09MB6043.eurprd09.prod.outlook.com (2603:10a6:20b:56a::20) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.19; Wed, 24 Sep
- 2025 14:18:37 +0000
-Received: from SJ1PEPF000023D4.namprd21.prod.outlook.com
- (2603:10b6:303:83:cafe::11) by MW4PR04CA0095.outlook.office365.com
- (2603:10b6:303:83::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.20 via Frontend Transport; Wed,
- 24 Sep 2025 14:18:37 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF000023D4.mail.protection.outlook.com (10.167.244.69) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9182.0 via Frontend Transport; Wed, 24 Sep 2025 14:18:37 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Wed, 24 Sep
- 2025 07:18:26 -0700
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 24 Sep
- 2025 09:18:25 -0500
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Wed, 24 Sep 2025 07:18:25 -0700
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>, <ilias.apalodimas@linaro.org>
-CC: Adriano Cordova <adrianox@gmail.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Raymond Mao <raymond.mao@linaro.org>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Ying-Chun Liu (PaulLiu)"
- <paul.liu@linaro.org>
-Subject: [PATCH] efi_loader: Cleanup UEFI Variables menu selection
-Date: Wed, 24 Sep 2025 16:18:18 +0200
-Message-ID: <626d2f37e4026622d797f4806625b00c1c4b17b7.1758723496.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ 2025 11:04:44 +0000
+Received: from GV1PR09MB5977.eurprd09.prod.outlook.com
+ ([fe80::5e01:31b8:ed86:eca7]) by GV1PR09MB5977.eurprd09.prod.outlook.com
+ ([fe80::5e01:31b8:ed86:eca7%6]) with mapi id 15.20.9160.008; Wed, 24 Sep 2025
+ 11:04:43 +0000
+From: Uros Stajic <uros.stajic@htecgroup.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Djordje Todorovic <Djordje.Todorovic@htecgroup.com>
+Subject: [PATCH v4 00/10] riscv: Add support for P8700 platform on Boston board
+Thread-Topic: [PATCH v4 00/10] riscv: Add support for P8700 platform on Boston
+ board
+Thread-Index: AQHcLUMI755g8v3+TUu2mRAce3sZAg==
+Date: Wed, 24 Sep 2025 11:04:43 +0000
+Message-ID: <c2e28cdc-5975-441e-97be-e59ad42f4d4f@htecgroup.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=htecgroup.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GV1PR09MB5977:EE_|AS8PR09MB6043:EE_
+x-ms-office365-filtering-correlation-id: 66d2b57b-7d43-44ad-3b8e-08ddfb5a2a93
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700021;
+x-microsoft-antispam-message-info: =?utf-8?B?NjlGekFrUHVRWS9DR0t0RndJTjFkV3dvYUU5Rm1SWVJ1Z2ZJOVZMUXNWc2hI?=
+ =?utf-8?B?dkpGNXJBbmp3Qjh1TjdFN0g5THNoSi9ud21aUjJsVFNIcDNWeUZCNmVGZGh5?=
+ =?utf-8?B?ZEJOSmFDZmtBdXY2ckVvN1g3WlhkTXJGK05xc1drbGNhbEx4ajlBVzQrL1Fm?=
+ =?utf-8?B?TVpWU2cwdTdQa1UwYzB6Ni9UL0RVTFNNWDRrcU9SME1wZEFkcXBWcU5kWTJs?=
+ =?utf-8?B?NEYrMndJOUJVaWUwNDB6cmxUT3QzbGVjSXd2Nkt0YzRqR0tkR09TVFZBL1E4?=
+ =?utf-8?B?NWtCdmNkNDdJTHZla2MzNEM5TTNFZkZBem50bjFZdzlneGxKZTRNWU1Vck0x?=
+ =?utf-8?B?ZEdWUVRVcy9taVZtbUJDRUttY0ZockhiU2tyZ2dLS0traDZSS0tSV0djemV6?=
+ =?utf-8?B?NkVjV0FSaGFDQmw1Q0t6eSticTQ2enhoUGJqWVpBQ2h5Z0FacnZINjVVazVk?=
+ =?utf-8?B?THZQaWlHQ2dtUW04d2dDNjR3d252eEdESHZSTXo3Wmxzdy9OSDlIRncxd2xy?=
+ =?utf-8?B?VDBxYTFILzVCL1hzdWo2S3dMbWtpaEZjbkthamg1YS9TcmxKbEw0MmFXNHlD?=
+ =?utf-8?B?Wi9vOUVnS3RwcTJuTGplRXpMNGpKR1kzOE13ZzBlYi9pWGUveUFjalVLeXRT?=
+ =?utf-8?B?K0hLRFg5UWUwRE50M2dNZlVsT0FZc3BVSkFkM1pBWVNkTmxiSXhLL2YwWUJI?=
+ =?utf-8?B?MkZoT29vdjRZYjVWU05QaEFnbDlqalJ6cWZBVVZLc3Q1Rm1FOEZzZi9GWDBa?=
+ =?utf-8?B?R3lqS0tiTzM2TnZhSWprc2lyU0xnQXNxR1VZYUpDajZybTYxOTFWYk9CRGlZ?=
+ =?utf-8?B?Tzc0aExoZ25ZUXY1cTlMalRBL0dPd21ablRWRzZocExmWEpJb3lvKy9Ya3pM?=
+ =?utf-8?B?KzhhVnpYVjBkREhlUWtlMmNuZnByMDVTeDE1SVkyVkJ0ZGJuQVhaV0N3UU1w?=
+ =?utf-8?B?T1BQVXdPRkptVjY2TUs0Qzh0QTZQemJTZEFlSmxmeXRFZHkzSVhDSTVuK0t6?=
+ =?utf-8?B?WEhCZmdqK0pHTG9ydGpKR0liVVVBcDBsdjlFUVpVVXJST0pTaE44T0hHWEJt?=
+ =?utf-8?B?ZlRINGZ2QXBHUnNwRWxYay9NSUExd3VZYVRjMzBXcDRWUlhSeUsyYXVIaWtY?=
+ =?utf-8?B?OW5xb3hjMHR2S0gzdHNKV0M3NWI5dWFrZXRGdEV4bkJlQ0FuczBIdmFMbmpY?=
+ =?utf-8?B?M3dmM3NDKzFrSHpKVnR4K2c0ZDJ1ZFY1UWIxWHNHTlQwRVY3YnRjbU16cG1C?=
+ =?utf-8?B?d2JXUHBjR3VFdjk2SHVCQVA0NStyanBwTUt3V3lxOEY1NjBtZzY2RVlrb0Jh?=
+ =?utf-8?B?WGZsVVFlZExhQUlLdGplUVhiWnhNWHZzVWdIdE1SVldYZm5RNlJWTmJpbUxS?=
+ =?utf-8?B?VFlRNm9XeCswZTliQit0T1lFZDFseGZreDJ4bHdHR1R1cGthMEd4WjlnUEM4?=
+ =?utf-8?B?aEUzQjFRQmJWcFNhdjJPQWRYcytVNHVLclQrZFUyMTI4NXR6VmhHMEs3MEpv?=
+ =?utf-8?B?ZWxTRTlleWhodnQreGgyaXRRNzVtYVdwZWQwOEpaOTEzb3lBQS9ybUZ4WUEx?=
+ =?utf-8?B?K1doYjZSL1Z5aWxYbjBaOU1GMXhURzRUTkVtdm9SUVdoeUxCcXRpbzFPdXJS?=
+ =?utf-8?B?RnJ1RnRKK0hsY3VIdFZOeFM4S3FyRTR0ZFlGYmI2NXI5WVUzSkFKclNqS1V2?=
+ =?utf-8?B?cHhtblVNeUFxNW4vM3BhWm9sMWdEQnkzRnRYdW9TQTNsakFFYXVWNEF2N0RH?=
+ =?utf-8?B?Z3luQUI1REM1bU8yQ2kvcXFHcHJWZWhrZWNQMk4rdE0xVHFHL3JJUFQrMTM1?=
+ =?utf-8?B?Y1QweVp2KzhNZ3ZRd2R1SnFZY1dSQkJaSTFKM3hpcjAyNWEwZi9nclV5TFVw?=
+ =?utf-8?B?ODQ4Vzh1WVdhUWUya0xwVG1TdzY5NHlrSkhxLzVrR1B1N1B2dm1jaTFuclpW?=
+ =?utf-8?Q?3WsHJyXY3CA=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV1PR09MB5977.eurprd09.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(38070700021); DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?RThhMEpuNW1xYzZzVDRDd0pMZkc1cTF4RldTck9jUTJaZ0k1ekQyaHY4WWx2?=
+ =?utf-8?B?UUZpMFhoWkpDcUJCOXlYQnEwWVNiR0Vza1JTbnJNS1hYVkM3b1c2U0xyR3Zz?=
+ =?utf-8?B?eUpmK1FBYklFaWJsVnFFMzFvK1lsZlhiV2h2Z0d2V0I3VXI3WWplSG1kaTFs?=
+ =?utf-8?B?RUpkQ1RxMTB1cVZKcFBYQURyaUxod0cxUU9xS2NiUzl1NFFTdGZ4R0xvMjQ3?=
+ =?utf-8?B?R1ozd2lCU1dkN2EzVkhvVlozVWpWSjhwVmdZNFJXbEhEeDBBSU5icW5DUERi?=
+ =?utf-8?B?TnNheGppZEpYa3JmUHk0RkpWR2JRTVRCbjlnWHl6UGFVNnNlRXdnSXo4dG5o?=
+ =?utf-8?B?NjNSb0VXdEt6b29ieGp2REE3bGRDcGo4cXNSSFVXdWJ5NTUxMHJpTE91TmlD?=
+ =?utf-8?B?cnl4amZ2M21YSGR6VjU2ZDRkUlBlNnZEMmxleEdIcTlXQUJ4K2tGL2ExL250?=
+ =?utf-8?B?Ylc0RmVyOGozaEladXZXdFdLMVVoeUZYR1hiT3dtU2hwUk9RdDM0KzhBVzVV?=
+ =?utf-8?B?bVkxTTBoN3hkZ1UrcUNKZ0FTQ01lNlZ3c3dBcGdEU2NHS2lWVFhldkt0VjAv?=
+ =?utf-8?B?aUhQOEMwRW9KcnZxQWJFSXNBbzJRQ1R0SG1ZdWlxTjJnVGlWd2EyMEdNT0V5?=
+ =?utf-8?B?VU1CeDlPTTdKOEk4NVhRY1NPWDBVRkl1S0Ywd2o4UFpmb0ZIZ2N2T0FKY2Uv?=
+ =?utf-8?B?c1VYK3lXbmUwa0tOQjViM1VSOWRYVDYrSk41TURuTWkvQXoyek1KZU1BUWlX?=
+ =?utf-8?B?dENzSTBXcldMT0taaE1CZzQ4M1lENVpDREdUUlpXd0NYQXhYQVg2WHVxYlJC?=
+ =?utf-8?B?bXlPdm9EM2Vmd1VnRHhNRHRJeDRCMDR4TzIwbmIyOTh6SlBDZytvbVRTNGlT?=
+ =?utf-8?B?S0pWczlFL2NKZGZISEpUTW52VEgvUXNTM0FTTkU4VmtHZElHVnVNS2s5Y0Mw?=
+ =?utf-8?B?RHc1ZzU2Vm9ORHJPNHZFSldhSno0RUU2cmhLNk16NEZpYTBialFKNGMvYUxU?=
+ =?utf-8?B?b2xrQ0JCRXI3SzBJUThkM3VtSmhqWnpPRnlZc3dKVFlZdFNsNVVaeGFzN251?=
+ =?utf-8?B?eThNWTJVZXBISktGZGsvakhoczZTajUvSUpaaFVDWkx4eURsd1hPNmZzcnAv?=
+ =?utf-8?B?M29iWC9WbUZGckhYb1RXcHlBOElhbHhHb1o5SmpnNnVKRmNDbDZ5WGd2dk5o?=
+ =?utf-8?B?TVlESmRYUDJWcGNIQXVudjBWTkc0OUhjekk3L2lPSS9CYjVrbGJSbWo3ei9H?=
+ =?utf-8?B?eUZuenJPZ1dma3RFTVl0YU9lY3V5UEFialZqK2NIVmdBRSttOHNSUVZmYXlE?=
+ =?utf-8?B?NHFOTFkyQ3N2emNMOURVd0pnemFFZy9hc1JLRVIrSGIrMzJidWlrWU9Zem9I?=
+ =?utf-8?B?aHQ3TG1kem8yajFmcFMyNFJRbmt6Si92bFcwN2FXT2xmOGpDUUJkU3lady83?=
+ =?utf-8?B?M0xhSHJkamtIYW1ya2U5dmRFd2hLS0ZOTE1OYnI4bDR4VUVrbjE4T1Vtakpu?=
+ =?utf-8?B?REJrUFhkalhybk9FVVY2N2pscVEzVWUzQ1RseDgwUkRGUHJDbU5xbW4wYmFR?=
+ =?utf-8?B?dWE2RWJzYlBRRWZvZDhmRGh0M3dhTnZEQjkzR3VjKzVqeTkyZVUxY0FaSUZQ?=
+ =?utf-8?B?VmNSRHFxOFg2ZmVrU1c5YTlvRmExZHJ3cS90S1ZuQ2FXRXpKSXhGbC9tS0w4?=
+ =?utf-8?B?SWJXbzhWTkNMRWQrMVk2TjNweTN4dmloeTVsdGxqTW1WcHNYbEpwY256cVZB?=
+ =?utf-8?B?YW9yVCtFYTM4VU84WTR1MGd2YlNYSkJnZzR5R1BBb2Q5SzVFSnRBQjMzVXZt?=
+ =?utf-8?B?aTFTaWlUTUhvSnRiVzZCL3VLYm83azcxTFRSdUlkK3ZaSzNvQ1VrS2N1d1FM?=
+ =?utf-8?B?QVZSMGM4S2Z6MGJiQVlJdWllaDgvbmh2YmYwaHRneUtzc3lGYVNBTVBrVUpR?=
+ =?utf-8?B?NHpXYS8vMWVOeVliY2xWbm0wMDR2QW1ZYzVSOXlaUE44LzBtNTdCQmNEMkNt?=
+ =?utf-8?B?R3BJcXV0d0ZURHdPb21IK0hVd0hSdEdhc0haMTduTHNDODB5OUs2dndNWXZz?=
+ =?utf-8?B?Vi9ucFByRFczLzB6c1BuNGRNb3FkZmM3NXF4ZzVENmhpL1pqd04zZHNlWFRh?=
+ =?utf-8?B?RmcwdVEwMEZMaDE4OGxlTVJ2R2QrZGd3UHBKMm5OTHhhbFpEdEhyZjkxOTJ3?=
+ =?utf-8?B?Y0E9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <75729779A08C994D8C311CDA4A7FC84C@eurprd09.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3738; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=LitlA3bUJP6oiAFjnp2kYHMGS3LHepKZ+FC6EBKPkTs=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWRc/rt6+UtGJ6HJFgKWK8xa3L6lHFG4JKTzdcqiZbvv9
- LWXrrQJ6ShlYRDjYJAVU2SZzqTjsObbtaViyyPzYeawMoEMYeDiFICJvO1i+CuzRjxi71xzkXXW
- DNM5FoWmzXtW/nm3ZXjovj8XLnzqYj7AyPD1XtLxALFOL3v2s3Pv5ZT4FPEvNmg7OXOj8nzJGe5
- 7BdgA
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB04.amd.com: michal.simek@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D4:EE_|CY5PR12MB6526:EE_
-X-MS-Office365-Filtering-Correlation-Id: 65fbc37e-93cd-461e-2bdd-08ddfb7540c3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?iMoOjgEHPCQpPxoxx33Mzo1uLJ3r4Q48Ku3e5pmuUZWxTbRusOvZp5eZq/99?=
- =?us-ascii?Q?8d0U5xQqaaIv5aZ5a34IVxsxo9K0n/M3U9rylBwzWEx1tKsFx1LMXBfFURhz?=
- =?us-ascii?Q?yo8psi3Qmhzi6oGQGtmtTjI7ksfH6H8bZMfK7prUEPUZtD4TL0Ee6kIfk1vN?=
- =?us-ascii?Q?6imc4710OAEp+ztj31BhL1svWK7fD0rrBrTf2X6UsLTD7d/aEn3Wy5UTcynV?=
- =?us-ascii?Q?JPbEBV6kvU3Mnox+zEEuNs5st4zT1qWMW4vfrDhIlR08acctwW6dkU2sXKOP?=
- =?us-ascii?Q?DJ0FjzyaIOwEmAZ3w9kUxpwuQjILQV0HPuSqrZHn/bqVSpWbxjtOYPXml3Us?=
- =?us-ascii?Q?3oT16qkVqewuTDMcoKzDWiESHUrHv9kfhYIMzxJuT/4bRqU4ZmF/tfe65O8G?=
- =?us-ascii?Q?xzFstMFR0pGOFqXgxaCskr5wosvf+AEM7Ks45QmleN6x2TrybI0a9cg0YfFh?=
- =?us-ascii?Q?5POmPrcLG48GgkH0ZjvgkoyCV9Sp2n1FRCM2u6CORGw8OExlX3drY2cFWbNQ?=
- =?us-ascii?Q?CRiKOmz+XOVmZ5CBom6UO6AjSqb3hQHpeZPNNw4eIf5fIm2k0s6wbxiWFbM+?=
- =?us-ascii?Q?swlOtTfOCowkROhNv9vlj5zKce0zHUhhABbqqB+HOFrll4xNH8U3aPn8HDIt?=
- =?us-ascii?Q?zpexe0LJ4X9VCivKzVt0zLWufvjs7AsFJdjH7X+1LiMQIBJ9j4rgwyCE2pkR?=
- =?us-ascii?Q?bw4HtGWZVLnnnrgoUxpfkhmyN9pNpHRJByiEfLl2H2gszHBnC+v6tvO88WGy?=
- =?us-ascii?Q?R0B2i0SdI7ZTfhzYSb4svHf8nHtQwrmQoabYe+hhfGfp3CJojbqzV2/a/zhp?=
- =?us-ascii?Q?EfiH7+vrfOb22JrwwugA2fWZvTXdMveNp983KeS/vgYvn0+MJuwu2o4sQg3d?=
- =?us-ascii?Q?pd7m10cogIL/UB9r+c3hyq09+cqESXrH7vqpYLC9Fr9Qdy0Z8qO8AHhOErl+?=
- =?us-ascii?Q?HjdroCcpnk8Qge8jRXha019LCEpGO9wZINaG7Lgbucri7Ldjb/EEMPe2gmD5?=
- =?us-ascii?Q?vNCs+e2R3c3LRyA71DxiggAY4horOXB4aA8Wf4uGCdbGb75YmZaMAn0eDFy9?=
- =?us-ascii?Q?CTVmL1Y10ZlfENK4hl/eeQ5sLoXhQhNUUHyAZA/tfg6y72fVOsh6eXaiZdl6?=
- =?us-ascii?Q?ec6htkWL9oaIFvKDD777RPw+NgWQ99xUS4q2JbBB2bZ6asU7ZgI73UqgS5Mo?=
- =?us-ascii?Q?icYyR2eAvJx7pN4s2le1j5amL9inqigYh43UXu3wuEsJF2sS3WwFJgoB1k3i?=
- =?us-ascii?Q?LQfEYDtaxc2CTpaFliHX+YSDAca4GRBfQG7nP3Rc7XffuORSg30+lQvjaygW?=
- =?us-ascii?Q?WQSRNqPfGGBJH63e/NL4Fffbb6oFAaI88ImiL0yo08wlOUNB2ev72MkOnXdM?=
- =?us-ascii?Q?zL4vF8Y8iFqbWKIUGGV8xEHVSlxCysxaTtErvVa/hfpjS/4c6Kpdog/KF2IZ?=
- =?us-ascii?Q?1qncY2pEp8LlGApzkre9LHlj7z1jaZ+DKgxvnaqJceSFmcaZKK3x/rlpemni?=
- =?us-ascii?Q?UqDXfla0bMHDKayVuqu2cPj0RSZuc6LNWViX?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2025 14:18:37.1422 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 65fbc37e-93cd-461e-2bdd-08ddfb7540c3
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF000023D4.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6526
+X-OriginatorOrg: htecgroup.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GV1PR09MB5977.eurprd09.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 66d2b57b-7d43-44ad-3b8e-08ddfb5a2a93
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2025 11:04:43.6214 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 9f85665b-7efd-4776-9dfe-b6bfda2565ee
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: om5+HQlITYqulAQ00+EbcHAMu2ZLVEYL0qYr2qSTxKvkED1B07PlvPMoJ3ekCGwDsPI+Dxsr/cHOGYkpCapPqh4sisJ8vfBnEK8nLa6vmHE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR09MB6043
+X-Mailman-Approved-At: Wed, 24 Sep 2025 17:25:44 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,96 +177,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are 3 options listed between choice/endchoice FILE/TEE/NO_STORE.
-There is no reason to add other config with dependencies between
-choice/endchoice because they can never be selected because they depends on
-only that 3 options which can be selected.
-That's why move additional configuration with dependency below choice
-section.
-
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
-
- lib/efi_loader/Kconfig | 50 +++++++++++++++++++++---------------------
- 1 file changed, 25 insertions(+), 25 deletions(-)
-
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 900113ca3e9a..13e44be1d067 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -123,22 +123,6 @@ config EFI_VARIABLE_FILE_STORE
- 	  Select this option if you want non-volatile UEFI variables to be
- 	  stored as file /ubootefi.var on the EFI system partition.
- 
--config EFI_RT_VOLATILE_STORE
--	bool "Allow variable runtime services in volatile storage (e.g RAM)"
--	depends on EFI_VARIABLE_FILE_STORE
--	help
--	  When EFI variables are stored on file we don't allow SetVariableRT,
--	  since the OS doesn't know how to write that file. At the same time
--	  we copy runtime variables in DRAM and support GetVariableRT
--
--	  Enable this option to allow SetVariableRT on the RAM backend of
--	  the EFI variable storage. The OS will be responsible for syncing
--	  the RAM contents to the file, otherwise any changes made during
--	  runtime won't persist reboots.
--	  Authenticated variables are not supported. Note that this will
--	  violate the EFI spec since writing auth variables will return
--	  EFI_INVALID_PARAMETER
--
- config EFI_MM_COMM_TEE
- 	bool "UEFI variables storage service via the trusted world"
- 	depends on OPTEE
-@@ -157,6 +141,31 @@ config EFI_MM_COMM_TEE
- 	  MM buffer. The data is copied by u-boot to the shared buffer before issuing
- 	  the door bell event.
- 
-+config EFI_VARIABLE_NO_STORE
-+	bool "Don't persist non-volatile UEFI variables"
-+	help
-+	  If you choose this option, non-volatile variables cannot be persisted.
-+	  You could still provide non-volatile variables via
-+	  EFI_VARIABLES_PRESEED.
-+
-+endchoice
-+
-+config EFI_RT_VOLATILE_STORE
-+	bool "Allow variable runtime services in volatile storage (e.g RAM)"
-+	depends on EFI_VARIABLE_FILE_STORE
-+	help
-+	  When EFI variables are stored on file we don't allow SetVariableRT,
-+	  since the OS doesn't know how to write that file. At the same time
-+	  we copy runtime variables in DRAM and support GetVariableRT
-+
-+	  Enable this option to allow SetVariableRT on the RAM backend of
-+	  the EFI variable storage. The OS will be responsible for syncing
-+	  the RAM contents to the file, otherwise any changes made during
-+	  runtime won't persist reboots.
-+	  Authenticated variables are not supported. Note that this will
-+	  violate the EFI spec since writing auth variables will return
-+	  EFI_INVALID_PARAMETER
-+
- config FFA_SHARED_MM_BUF_SIZE
- 	int "Memory size of the shared MM communication buffer"
- 	depends on EFI_MM_COMM_TEE && ARM_FFA_TRANSPORT
-@@ -184,15 +193,6 @@ config FFA_SHARED_MM_BUF_ADDR
- 	  the MM SP in secure world.
- 	  It is assumed that the MM SP knows the address of the shared MM communication buffer.
- 
--config EFI_VARIABLE_NO_STORE
--	bool "Don't persist non-volatile UEFI variables"
--	help
--	  If you choose this option, non-volatile variables cannot be persisted.
--	  You could still provide non-volatile variables via
--	  EFI_VARIABLES_PRESEED.
--
--endchoice
--
- config EFI_VARIABLES_PRESEED
- 	bool "Initial values for UEFI variables"
- 	depends on !COMPILE_TEST
--- 
-2.43.0
-
-base-commit: 321508004b343679e9dad0fc0f7c230c68de648d
-branch: debian-sent3
+SGVsbG8sDQoNCmp1c3QgcmVhY2hpbmcgb3V0IHJlZ2FyZGluZyB0aGUgc2VyaWVzIGxpbmtlZCBi
+ZWxvdw0KdG8gc2VlIGlmIHRoZXJl4oCZcyBhbnkgZmVlZGJhY2s6DQoNCmh0dHBzOi8vcGF0Y2h3
+b3JrLm96bGFicy5vcmcvcHJvamVjdC91Ym9vdC9saXN0Lz9zZXJpZXM9NDY5ODcxDQoNClRoYW5r
+cyBpbiBhZHZhbmNlIGZvciB5b3VyIHRpbWUhDQoNCkJlc3QgcmVnYXJkcywNClVyb3M=
