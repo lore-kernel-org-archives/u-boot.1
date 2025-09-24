@@ -4,94 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59EDECAC5AE
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 13:51:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB09CAC5AE
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 13:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A93B883447;
-	Wed, 24 Sep 2025 15:51:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1064683447;
+	Wed, 24 Sep 2025 15:52:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NaZWaDc3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPqTq9yH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0672C834D4; Wed, 24 Sep 2025 15:51:47 +0200 (CEST)
+ id 126CC83447; Wed, 24 Sep 2025 15:52:14 +0200 (CEST)
 Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
  [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AE4680107
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 15:51:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B491580107
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 15:52:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-30ccec928f6so2895292fac.3
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 06:51:44 -0700 (PDT)
+ 586e51a60fabf-30cce534a91so2770738fac.0
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 06:52:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758721903; x=1759326703; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WqUCTsrBGZqd2APnTOn132IM07S7qZH5Ypo9M7ee8aM=;
- b=NaZWaDc3yjTTkMnGzrR+HCrfwik2GIR2E5XzhQPypooagK8YvuXAqxkr9owvNjWIm3
- uPKypnvbq7LN1He1TU+KWT+mP7es2ntAyhEWT5d0LetNclgx+IdeVchgjrOBRbXghDqh
- 5CqsSIPWLzhI2LA/9V1Ueby1hAccFhJilFqTc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758721903; x=1759326703;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1758721930; x=1759326730; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WqUCTsrBGZqd2APnTOn132IM07S7qZH5Ypo9M7ee8aM=;
- b=q9uu30WJZTOrkb06uvFPRfwYZR1jtxgFX2M3Jda0ZbZJLIIe+HMTjEK7B4ZHBmBCKq
- qixhBbIieWD5z11nwXix2qKkq7PkMTypAxGGYDF62RIE2QWI7s9fZHbC5QfSHZbnWPbM
- HAI0mjjFsmjnJIhe/HdEcqxti5SEcTDvXuVGVQvH+Pgw0gtfE3f47Wac7V/XQTdrCkTw
- p5HEy2+qSjsjrv043n4WfvI4K8vEgp1JS0b3Zmq/uUfq4nMM1MEHBRtEwBJJFKhjU8TX
- zi0jozyUfW1MvAfL/ymnJIP+Ijij2Lwvs/800TtTYS8N1bb1E9P5lrkjxn3KsC7zLUWV
- 5KYg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYh9FJCEI3IOtl2UJ9KY3GxkhJ1+ZfVxjvb/BSwWAYlyzIaffI8UyEgMAmiiCBbFyKo4lUM1g=@lists.denx.de
-X-Gm-Message-State: AOJu0YxXQdOUb7Cp811Lg1//w25q5p4U1pnhtyMe1vWDrHLEUGJFcf9L
- jBO5gKpIsP7vJW2BQWKoe3JnUgo0gWsx1noLkM+rKlnipSU3nL+xDLlt/q33h7b4kmk=
-X-Gm-Gg: ASbGncsZ64LDaqoJE08qpJFHulgOplAP7m8TPbk+pfYVJTKHUd9hBXY2x0NSQ2iiNin
- 8VJIU5mfJsOj40vM71IE5cOBmxponHPaVKSpLJ/WHBlpt3aJjYd9Y68J2LjboLNWhnlBO4D3BLj
- 5gYO9xzRjUiEZU+lRwO+H6TOSFGINkirNlPIsFJAm+ItnO0Yh9XJR9zqDtwlbhIpRVixAnU98dm
- ptxWhY8BWcLTH8Aa0ukCV5K5/aW23h7VRCm3Mdq2g/8SMjiqirc29OG53XtEJfIWZhdWaok6YYA
- vN97nvgGTTcJ9A7S5V0KFtRaEw9lx2adh2/xXhTnLX8EWUf06jRdC1Zo3kLBTG+MhQTDOl5WH7z
- XTAA0Mkse7DlNSoftWz4sxz30Aa3I+WH5f5mH6P39L4YAyKVR9k1oE9eD
-X-Google-Smtp-Source: AGHT+IG7vxTWVYwXhfSXuU6mERZ7Nd5uws6f/s4v3+UBYi3kybL35WyGIKHs3Eqn1moBXK3BT9ZOgw==
-X-Received: by 2002:a05:6870:64a2:b0:342:74e6:4fac with SMTP id
- 586e51a60fabf-34c86b478a1mr3394434fac.42.1758721903152; 
- Wed, 24 Sep 2025 06:51:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-336e412167csm10372968fac.12.2025.09.24.06.51.41
+ bh=QPLQ8Goet5189EhG4yoSrGJtAgnVvIvbEtHR3/xBR0o=;
+ b=PPqTq9yHM5pLslV8qUS7tU0SHYiNUdEZYNFp+3gwxUEN5KHBzyylk29EvygzW0eHId
+ TSvdksGtHBct6jfvbhnT3s5/ppAGE5XOChvk3eXvNSnmH5ZxXqz6ZZf8uhF7Lv0ZdwAL
+ uBGkiShR87EfYbqDZ2tV57icjJcFQUyRWOE1g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758721930; x=1759326730;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QPLQ8Goet5189EhG4yoSrGJtAgnVvIvbEtHR3/xBR0o=;
+ b=QslaQ4mComSWoHjjusyGd9E+70uGVBBBVmxKje/PnR2Yg9qNzhproUckeZjIj4VMNG
+ xq/+2B3rAUQHMuKs/oBT2hiz6Pzwy0a7wobRybjlBF49mJCeHmMCmmhD0/fdRwRpw37y
+ O2XiNuOPz9DbUwgsuO3VwE6qmKXcWd9RP5ljfDhFXFOo7eaCozOtNiB7bk/4vS1B5z40
+ /+2jkUWTyRGgXuivvNdz3JndGwSx7ttOuk1aohDnTCQiSqIVEwP6X5sgfLjoKoHYkX+6
+ E5FHiwQTBov1Eg0o92UVBylizfnaiwBHkD213eoImBpg7pvYDturLRpSfU39oLSNJ/zi
+ vxjw==
+X-Gm-Message-State: AOJu0YzBVbVhZdbVMJt9ZNWhpW8mWc7+QQFXOUyu6B6zN1Y49nz8f65s
+ Oe4NJt1+cA3QtYdhOzIgHZCxXaz1aCx+2WSQuQERcV6VHHZmR8VS5qgal78Q12hfkfmFjuZU/Vz
+ pzG4z2y4=
+X-Gm-Gg: ASbGnctxsqAZ/aXDJxVSjSz4Sb7ftJznJ6d1CiJ/Xe5vpRoj+M/fHoTYbr7RZdANan2
+ k12X5d15djh1ilMlTxznvxn50B61ch2z84HgGdHQzGqg+YikWGNpVQ0Ws6PG0vK8lqs3FKraufk
+ V9sgIFM1esMDVrolX/UWBYLejqS4DpusFELuk5rUz6wGjNmg0Q827ezV8Wgp8DcMVmQ0kqTuWh8
+ 5MYRxMdxq/0W1Msa8I6t436kOUlI66DY2XLvJbKgkWU9NYERjrUEp8kSoQ7fp5iCF2bJyF6bxJK
+ jpmlMU5pMI/iEGzJcKLeHic0TetZf0UUe5UGrxw8pHojt3z6sINnH5wfGcolfeQ7RQxFX+bEaik
+ PuLZQbGZKHBqVvtuxxfJvE4+Y+GrWi46zKyuRQSvfI8WtUDK20sBYadM=
+X-Google-Smtp-Source: AGHT+IEiOwesXJqaX7VM0ANbzNxs2c7UUCuyzvCdY5YG76ZhmzMuKaG+OAjBDDE5AuUxM9kNc6WlXg==
+X-Received: by 2002:a05:6870:970a:b0:30b:9053:147d with SMTP id
+ 586e51a60fabf-34c891dd368mr4476438fac.26.1758721930377; 
+ Wed, 24 Sep 2025 06:52:10 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7691b11a8a0sm7751113a34.13.2025.09.24.06.52.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Sep 2025 06:51:42 -0700 (PDT)
-Date: Wed, 24 Sep 2025 07:51:39 -0600
+ Wed, 24 Sep 2025 06:52:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: E Shattow <e@freeshell.de>
-Cc: Nishanth Menon <nm@ti.com>, Aristo Chen <jj251510319013@gmail.com>,
- u-boot@lists.denx.de, sjg@chromium.org, alpernebiyasak@gmail.com,
- al.kochet@gmail.com, paul.henrys_ext@softathome.com, bb@ti.com,
- y.moog@phytec.de, w.egorov@phytec.de, francesco.dolcini@toradex.com,
- ggiordano@phytec.com, n-francis@ti.com, afd@ti.com,
- d.schultz@phytec.de, d-gole@ti.com, ravi@prevas.dk,
- carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de,
- alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
-Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
- and fix related test/DTS issues
-Message-ID: <20250924135139.GH197373@bill-the-cat>
-References: <20250914110021.4103-1-aristo.chen@canonical.com>
- <20250924113733.uz6hozszbuynemtc@giddy>
- <20250924114317.742ae4ntrb4mvuyq@expert>
- <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+To: ggiordano@phytec.com, d.schultz@phytec.de, bb@ti.com, 
+ Wadim Egorov <w.egorov@phytec.de>
+Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
+In-Reply-To: <20250919063948.3093358-1-w.egorov@phytec.de>
+References: <20250919063948.3093358-1-w.egorov@phytec.de>
+Subject: Re: [PATCH 0/2] Fix boot w/ scriptaddr & minor newline issue
+Message-Id: <175872192906.333621.10806821068422597111.b4-ty@konsulko.com>
+Date: Wed, 24 Sep 2025 07:52:09 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Y486mIP/9owdqAHG"
-Content-Disposition: inline
-In-Reply-To: <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,56 +97,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 19 Sep 2025 08:39:46 +0200, Wadim Egorov wrote:
 
---Y486mIP/9owdqAHG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> First patch fixes boot issues with script boot method and the
+> second patch is a minor formatting fix in our board detection code.
+> 
+> @TI: I think the scriptaddr should be also updated for most TI/K3 and
+> beagle board boards.
+> 
+> Wadim Egorov (2):
+>   board: phytec: phycore_am6xx: Update scriptaddr
+>   board: phytec: common: Fix missing newline in error message
+> 
+> [...]
 
-On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
-> Hi Aristo,
->=20
-> On 9/24/25 04:43, Nishanth Menon wrote:
-> > On 06:37-20250924, Nishanth Menon wrote:
-> >> On 10:59-20250914, Aristo Chen wrote:
-> >>> This patch series enhances FIT image robustness by adding **memory
-> >>> region overlap detection** to `mkimage` and fixing existing overlaps
-> >>> in DTS files and `binman` tests.
-> >=20
-> > [...]
-> >>>
-> >>
-> >> Looks like i see a build regression in linux-next after this series.
-> >=20
-> > I fat fingered that one.. sorry, I meant u-boot next.
-> >=20
-> >=20
-> > Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
-> >=20
-> >>
-> >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
-> >=20
-> > I  believe there are outstanding comments on V1 that have'nt been
-> > addressed either. Can we revert/drop this series for now while the
-> > comments are addressed?
-> >=20
->=20
-> Similar to Nishanth, I am seeing a build regression, itb.map:
+Applied to u-boot/master, thanks!
 
-Sorry for the noise all, I've reverted this in next now.
-
---=20
+[1/2] board: phytec: phycore_am6xx: Update scriptaddr
+      commit: ac046ad1873cb3d85f4c81c0bed592a4ed7a5903
+[2/2] board: phytec: common: Fix missing newline in error message
+      commit: 96971e5090cd6975023d0556b3d47b195442902e
+-- 
 Tom
 
---Y486mIP/9owdqAHG
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNP3ZwAKCRAr4qD1Cr/k
-CjLVAPwLzkfnZ66VokagMJ20i6mJfzu9n08+X4v0tiO6dcvybwD/VAz1VKvPixp9
-KmeUPXQXZzesnhz5HmY2lax+GqIGLQI=
-=nBD7
------END PGP SIGNATURE-----
-
---Y486mIP/9owdqAHG--
