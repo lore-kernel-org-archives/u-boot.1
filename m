@@ -4,83 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB09CAC5AE
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 13:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C16CAC5A5
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 14:00:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1064683447;
-	Wed, 24 Sep 2025 15:52:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 82ED383447;
+	Wed, 24 Sep 2025 16:00:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PPqTq9yH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hrfbSo+5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 126CC83447; Wed, 24 Sep 2025 15:52:14 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B491580107
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 15:52:11 +0200 (CEST)
+ id 9F4B083510; Wed, 24 Sep 2025 16:00:32 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B3D2180107
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 16:00:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-30cce534a91so2770738fac.0
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 06:52:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758721930; x=1759326730; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QPLQ8Goet5189EhG4yoSrGJtAgnVvIvbEtHR3/xBR0o=;
- b=PPqTq9yHM5pLslV8qUS7tU0SHYiNUdEZYNFp+3gwxUEN5KHBzyylk29EvygzW0eHId
- TSvdksGtHBct6jfvbhnT3s5/ppAGE5XOChvk3eXvNSnmH5ZxXqz6ZZf8uhF7Lv0ZdwAL
- uBGkiShR87EfYbqDZ2tV57icjJcFQUyRWOE1g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758721930; x=1759326730;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QPLQ8Goet5189EhG4yoSrGJtAgnVvIvbEtHR3/xBR0o=;
- b=QslaQ4mComSWoHjjusyGd9E+70uGVBBBVmxKje/PnR2Yg9qNzhproUckeZjIj4VMNG
- xq/+2B3rAUQHMuKs/oBT2hiz6Pzwy0a7wobRybjlBF49mJCeHmMCmmhD0/fdRwRpw37y
- O2XiNuOPz9DbUwgsuO3VwE6qmKXcWd9RP5ljfDhFXFOo7eaCozOtNiB7bk/4vS1B5z40
- /+2jkUWTyRGgXuivvNdz3JndGwSx7ttOuk1aohDnTCQiSqIVEwP6X5sgfLjoKoHYkX+6
- E5FHiwQTBov1Eg0o92UVBylizfnaiwBHkD213eoImBpg7pvYDturLRpSfU39oLSNJ/zi
- vxjw==
-X-Gm-Message-State: AOJu0YzBVbVhZdbVMJt9ZNWhpW8mWc7+QQFXOUyu6B6zN1Y49nz8f65s
- Oe4NJt1+cA3QtYdhOzIgHZCxXaz1aCx+2WSQuQERcV6VHHZmR8VS5qgal78Q12hfkfmFjuZU/Vz
- pzG4z2y4=
-X-Gm-Gg: ASbGnctxsqAZ/aXDJxVSjSz4Sb7ftJznJ6d1CiJ/Xe5vpRoj+M/fHoTYbr7RZdANan2
- k12X5d15djh1ilMlTxznvxn50B61ch2z84HgGdHQzGqg+YikWGNpVQ0Ws6PG0vK8lqs3FKraufk
- V9sgIFM1esMDVrolX/UWBYLejqS4DpusFELuk5rUz6wGjNmg0Q827ezV8Wgp8DcMVmQ0kqTuWh8
- 5MYRxMdxq/0W1Msa8I6t436kOUlI66DY2XLvJbKgkWU9NYERjrUEp8kSoQ7fp5iCF2bJyF6bxJK
- jpmlMU5pMI/iEGzJcKLeHic0TetZf0UUe5UGrxw8pHojt3z6sINnH5wfGcolfeQ7RQxFX+bEaik
- PuLZQbGZKHBqVvtuxxfJvE4+Y+GrWi46zKyuRQSvfI8WtUDK20sBYadM=
-X-Google-Smtp-Source: AGHT+IEiOwesXJqaX7VM0ANbzNxs2c7UUCuyzvCdY5YG76ZhmzMuKaG+OAjBDDE5AuUxM9kNc6WlXg==
-X-Received: by 2002:a05:6870:970a:b0:30b:9053:147d with SMTP id
- 586e51a60fabf-34c891dd368mr4476438fac.26.1758721930377; 
- Wed, 24 Sep 2025 06:52:10 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7691b11a8a0sm7751113a34.13.2025.09.24.06.52.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Sep 2025 06:52:09 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: ggiordano@phytec.com, d.schultz@phytec.de, bb@ti.com, 
- Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, upstream@lists.phytec.de
-In-Reply-To: <20250919063948.3093358-1-w.egorov@phytec.de>
-References: <20250919063948.3093358-1-w.egorov@phytec.de>
-Subject: Re: [PATCH 0/2] Fix boot w/ scriptaddr & minor newline issue
-Message-Id: <175872192906.333621.10806821068422597111.b4-ty@konsulko.com>
-Date: Wed, 24 Sep 2025 07:52:09 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58OE0NRl1239946;
+ Wed, 24 Sep 2025 09:00:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758722423;
+ bh=6qfLlqEXJFv/y7CJu+M1tkmp4F0jpRxKbnzDPH2/eWM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=hrfbSo+5eV/DXUic+2eoMFmTaRhdfnfs+GlIZNnKkKn0dXCyrA/uluOvC6bzv5sBT
+ DQGLDB//XlMNhpmA7ede4KA76seyf6wp90wf9l1bl/QTu68ien67RmQXxwdG80dhqg
+ xaN6tIeyygPXCzLpNAenOTJ6lDBaxiIq52UZR3f4=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58OE0Nu51908080
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 24 Sep 2025 09:00:23 -0500
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 24
+ Sep 2025 09:00:22 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 24 Sep 2025 09:00:23 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58OE0MUm1853996;
+ Wed, 24 Sep 2025 09:00:22 -0500
+Message-ID: <90889791-4dd8-4656-94de-06edbd269872@ti.com>
+Date: Wed, 24 Sep 2025 09:00:22 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/8] spl: Kconfig: allow K3 devices to use falcon mode
+To: Anshul Dalal <anshuld@ti.com>, <u-boot@lists.denx.de>
+CC: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>,
+ <kever.yang@rock-chips.com>, <hl@rock-chips.com>, <tim@feathertop.org>,
+ <marek.vasut+renesas@mailbox.org>
+References: <20250923130901.705124-1-anshuld@ti.com>
+ <20250923130901.705124-3-anshuld@ti.com>
+ <134414a0-8fcc-4fb0-9f53-3dc803d41b70@ti.com>
+ <DD11OP1DYB5Y.4ABDK7GP4SSO@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <DD11OP1DYB5Y.4ABDK7GP4SSO@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,27 +85,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Sep 2025 08:39:46 +0200, Wadim Egorov wrote:
-
-> First patch fixes boot issues with script boot method and the
-> second patch is a minor formatting fix in our board detection code.
+On 9/24/25 7:55 AM, Anshul Dalal wrote:
+> On Tue Sep 23, 2025 at 9:48 PM IST, Andrew Davis wrote:
+>> On 9/23/25 8:08 AM, Anshul Dalal wrote:
+>>> Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b4437bc
+>>> ("ti_armv7_common: Disable Falcon Mode on HS devices") for older 32-bit
+>>> HS devices and but can now be enabled with the addition of
+>>> OS_BOOT_SECURE.
+>>>
+>>> For secure boot, the kernel with x509 headers can be packaged in a fit
+>>> container (fitImage) signed with TIFS keys for authentication.
+>>>
+>>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>>> ---
+>>>    common/spl/Kconfig | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+>>> index 7e87e50f693..ab780da9e1c 100644
+>>> --- a/common/spl/Kconfig
+>>> +++ b/common/spl/Kconfig
+>>> @@ -1201,7 +1201,7 @@ config SPL_ONENAND_SUPPORT
+>>>    
+>>>    config SPL_OS_BOOT
+>>>    	bool "Activate Falcon Mode"
+>>> -	depends on !TI_SECURE_DEVICE
+>>> +	select SPL_OS_BOOT_SECURE if TI_SECURE_DEVICE
+>>>    	help
+>>>    	  Enable booting directly to an OS from SPL.
+>>>    	  for more info read doc/README.falcon
+>>
+>> The subject doesn't need to include "K3", this is for all
+>> TI secure devices.
+>>
 > 
-> @TI: I think the scriptaddr should be also updated for most TI/K3 and
-> beagle board boards.
+> Oh yeah, will fix in the next revision.
 > 
-> Wadim Egorov (2):
->   board: phytec: phycore_am6xx: Update scriptaddr
->   board: phytec: common: Fix missing newline in error message
+>> This patch should also go last in the series. Not that it
+>> causes any break, but feels like a "security bisectability"
+>> problem to allow something and then after make it secure.
+>>
 > 
-> [...]
+> I was more looking at it from the ability to test the subsequent patches
+> in the series on any TI platform which would depend on this [2/8] patch.
+> 
+> Though your concern is valid too but there are still a few things
+> remaining from this series that would need to be implemented to make
+> falcon mode truly secure on TI_SECURE_DEVICE. Perhaps we should drop
+> this patch until everything's in place?
+> 
+Yeah, I'd save this to the very end of all your series here, that way
+it signals that we now think SPL_OS_BOOT_SECURE is functional and secure.
 
-Applied to u-boot/master, thanks!
-
-[1/2] board: phytec: phycore_am6xx: Update scriptaddr
-      commit: ac046ad1873cb3d85f4c81c0bed592a4ed7a5903
-[2/2] board: phytec: common: Fix missing newline in error message
-      commit: 96971e5090cd6975023d0556b3d47b195442902e
--- 
-Tom
-
-
+Andrew
