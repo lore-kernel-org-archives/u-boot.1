@@ -4,38 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E75CCAC5A5
-	for <u-boot@archiver.kernel.org>; Tue, 23 Sep 2025 22:31:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB6ACAC5A5
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 00:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEBA483335;
-	Wed, 24 Sep 2025 00:31:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id D1C2F808AF;
+	Wed, 24 Sep 2025 02:28:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D5576833E9; Wed, 24 Sep 2025 00:31:56 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55AB7808AF
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 00:31:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 9AE44B2201D9;
- Wed, 24 Sep 2025 00:31:52 +0200 (CEST)
-From: E Shattow <e@freeshell.de>
-To: Tom Rini <trini@konsulko.com>, Heinrich Schuchart <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
-	E Shattow <e@freeshell.de>
-Subject: [PATCH v3] doc: Update mentions of README.fdt-control
-Date: Tue, 23 Sep 2025 15:30:50 -0700
-Message-ID: <20250923223103.1613052-1-e@freeshell.de>
-X-Mailer: git-send-email 2.50.0
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b6r9OJJg";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CCE5080B9B; Wed, 24 Sep 2025 02:28:07 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EE5580107
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 02:28:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-74382048b8cso4940672a34.3
+ for <u-boot@lists.denx.de>; Tue, 23 Sep 2025 17:28:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1758673684; x=1759278484; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yyb8PyljkRkYEgaZqobQmrHcwNl301qhzQFG6FB/HzU=;
+ b=b6r9OJJgLC7Q6ZiYNS0XggHUuWd7MN4bBRFHPh96V3yRZgR57fOYkZskl8ayiA9Mkl
+ vOi/Uou1+JqCOyKtz6haTlHQsSmyNocTNb34ZDMpNC+jVHQ4wZnvBFomr3wgs233kUEE
+ TcilNl/swOua0z4SUxlF3Nbg1czT3UcSJbpww=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758673684; x=1759278484;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yyb8PyljkRkYEgaZqobQmrHcwNl301qhzQFG6FB/HzU=;
+ b=gFlYAMXJ3DBlZF2jLvdWqnkvwpq3Gm1OhKX+LKuf6LsFMcQECMALwQOv5juGQNJvVW
+ sQJjM/uSqdf9xTdnTku7+ZC95sysSq1nz+bKmXtkKSUG/eQSmvMYIeRsk4z6d09pkge0
+ 8BjXb37nDbHviyR6+LDirMEjpEAS6QLiZGDasESudCEB5s7PgulzYaAsDvzTWmwmcGed
+ b8JYkEhnfq0ECZ70hM1ZOTfXmmmxETopx8Un2GEK4Y1Cd6ejsdf39oYF/H01xMmQyq8B
+ 4NtDQ7XmrtGCS9LbUSmaDIwNYj/9V/31ps+6q/FyLxpTmUdMpcDDwcZZ89UW69nd/Q4X
+ zHdQ==
+X-Gm-Message-State: AOJu0YxC+iGQdMEdQ2oKsT2SZc/4cZ2KgHlMHHsBr5fzVYPBULj3D9SU
+ z5mk9QKbJmiCqgUht2vKo0q9sTCxFYExe9iIs3QCdL0/oOTQapzYWbUB0uYANpbr80s=
+X-Gm-Gg: ASbGncuVlhBIj79+r8lnEM+5Vhusippkiz1hW0Sfb9bpsWL++bmMy2bHm9kusM3i6Nu
+ zD/mKAmgN9ZvJZev1nfsGzSQLv1btC2RnooLTBkNx3cZ5hGS2ZzCy6XP7rnCyIcwl7S8bahlFE2
+ H9WKjtpJSPFfKRfElITAxhKL8WtgEWgVoqqufz6zn4ldHj0toJcjIdL0u7ceA8Ow7XeeDxNZl+S
+ i7rcRFk2WZUHSGhfdUZIGVRfoP2JvyLKpUKLBVZB4rga9YMe7+ds5G66tkkfzV3gR2OO36lkEeV
+ NtBlmCABjyU94TjbwnuxTEJA+5HXg9czQcvZTStFUEHyqRWM6PAXiUG5Gb4snUuSZBg688LsoxC
+ nkKchod78NwewLG7yiTjm34t/vhWPgdiuWgHVibNM4CRGcBKdwUGHQqY3KdSW3Y9Aaw==
+X-Google-Smtp-Source: AGHT+IEaMmsGxsv8tB2bBQPhhSretoHvhsTa7UNAJz+WCmmKwx/eAbm8pcMKc2x2uUEvcB0tD0tIxQ==
+X-Received: by 2002:a05:6830:6309:b0:74b:3f2:134 with SMTP id
+ 46e09a7af769-79143c271damr3536651a34.3.1758673684242; 
+ Tue, 23 Sep 2025 17:28:04 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-78ce6e5d8a0sm1906654a34.0.2025.09.23.17.28.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Sep 2025 17:28:03 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Aristo Chen <jj251510319013@gmail.com>
+Cc: sjg@chromium.org, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
+ paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de, 
+ w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com, 
+ n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, 
+ ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, 
+ alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
+In-Reply-To: <20250914110021.4103-1-aristo.chen@canonical.com>
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+Message-Id: <175867368257.246129.3001464313456637551.b4-ty@konsulko.com>
+Date: Tue, 23 Sep 2025 18:28:02 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -52,109 +101,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update documents 'README.fdt-control' reference to replacement 'control.rst':
-  doc/arch/nios2.rst
-  dts/Makefile
+On Sun, 14 Sep 2025 10:59:25 +0000, Aristo Chen wrote:
 
-Also convert some adjacent pathname mentions to rST links where applicable
+> This patch series enhances FIT image robustness by adding **memory
+> region overlap detection** to `mkimage` and fixing existing overlaps
+> in DTS files and `binman` tests.
+> 
+> The primary goal is to prevent runtime memory corruption from
+> conflicting load addresses in FIT images.
+> 
+> [...]
 
-Fixes: 3e9fddfc4f14 "doc: Move devicetree control doc to rST"
-Signed-off-by: E Shattow <e@freeshell.de>
----
+Applied to u-boot/next, thanks!
 
-Changes since v2: Use document reference instead of adding per-doc ref.
-
-Changes since v1: Use per-doc ref to add reST links where applicable.
-
----
- doc/arch/nios2.rst                    | 2 +-
- doc/develop/devicetree/control.rst    | 2 +-
- doc/develop/driver-model/ethernet.rst | 2 +-
- doc/develop/spl.rst                   | 2 +-
- doc/usage/fit/overlay-fdt-boot.rst    | 2 +-
- dts/Makefile                          | 2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/doc/arch/nios2.rst b/doc/arch/nios2.rst
-index 34a75e7fb00..90b4ddf387b 100644
---- a/doc/arch/nios2.rst
-+++ b/doc/arch/nios2.rst
-@@ -13,7 +13,7 @@ Please refer to the link for Linux port and toolchains:
- http://rocketboards.org/foswiki/view/Documentation/NiosIILinuxUserManual
- 
- The Nios II port of u-boot is controlled by device tree. Please check
--out doc/README.fdt-control.
-+out :doc:`/develop/devicetree/control`.
- 
- To add a new board/configuration (eg, mysystem) to u-boot, you will need
- three files.
-diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index 0233945f8b6..8811e1d5c23 100644
---- a/doc/develop/devicetree/control.rst
-+++ b/doc/develop/devicetree/control.rst
-@@ -282,7 +282,7 @@ U-Boot can be divided into three phases: TPL, SPL and U-Boot proper.
- 
- The full devicetree is available to U-Boot proper, but normally only a subset
- (or none at all) is available to TPL and SPL. See 'Pre-Relocation Support' and
--'SPL Support' in doc/driver-model/design.rst for more details.
-+'SPL Support' in :doc:`/develop/driver-model/design` for more details.
- 
- 
- Using several DTBs in the SPL (SPL_MULTI_DTB_FIT Kconfig option)
-diff --git a/doc/develop/driver-model/ethernet.rst b/doc/develop/driver-model/ethernet.rst
-index 73c3a728dbf..2e1df744d4a 100644
---- a/doc/develop/driver-model/ethernet.rst
-+++ b/doc/develop/driver-model/ethernet.rst
-@@ -8,7 +8,7 @@ own ethernet device driver.  Here we will describe a new pseudo 'APE' driver.
- 
- Most existing drivers do already - and new network driver MUST - use the
- U-Boot core driver model. Generic information about this can be found in
--doc/driver-model/design.rst, this document will thus focus on the network
-+:doc:`/develop/driver-model/design`, this document will thus focus on the network
- specific code parts.
- Some drivers are still using the old Ethernet interface, differences between
- the two and hints about porting will be handled at the end.
-diff --git a/doc/develop/spl.rst b/doc/develop/spl.rst
-index 7f2eac50806..08b51172014 100644
---- a/doc/develop/spl.rst
-+++ b/doc/develop/spl.rst
-@@ -145,7 +145,7 @@ fdtgrep is also used to remove:
-   'bootph-verify' (VPL))
- 
- All the nodes remaining in the SPL devicetree are bound
--(see doc/driver-model/design.rst).
-+(see :doc:`/develop/driver-model/design`).
- 
- NOTE: U-Boot migrated to a new schema for the u-boot,dm-* tags in 2023. Please
- update to use the new bootph-* tags as described in the
-diff --git a/doc/usage/fit/overlay-fdt-boot.rst b/doc/usage/fit/overlay-fdt-boot.rst
-index 3d7296ad913..d687e98ea2a 100644
---- a/doc/usage/fit/overlay-fdt-boot.rst
-+++ b/doc/usage/fit/overlay-fdt-boot.rst
-@@ -13,7 +13,7 @@ that matches the desired configuration.
- 
- This document focuses on specifically using overlays as part of a FIT image.
- General information regarding overlays including its syntax and building it
--can be found in doc/README.fdt-overlays
-+can be found in :doc:`/usage/fdt_overlays`
- 
- Configuration without overlays
- ------------------------------
-diff --git a/dts/Makefile b/dts/Makefile
-index 86bf8dc2156..fd4ae31a533 100644
---- a/dts/Makefile
-+++ b/dts/Makefile
-@@ -3,7 +3,7 @@
- # Copyright (c) 2011 The Chromium OS Authors.
- 
- # This Makefile builds the internal U-Boot fdt if CONFIG_OF_CONTROL is
--# enabled. See doc/README.fdt-control for more details.
-+# enabled. See doc/develop/devicetree/control.rst for more details.
- 
- DEVICE_TREE ?= $(CONFIG_DEFAULT_DEVICE_TREE:"%"=%)
- ifeq ($(DEVICE_TREE),)
-
-base-commit: 2f2ab7e13a69367cc9b88a45899e24dba02667c6
+[1/7] binman: Fix typo for the test case name
+      commit: 88392a59bf87bf2c1c5aedc0b76f459d702f71a7
+[2/7] binman: Fix FIT image overlap issues
+      commit: dade54edaff659c4ed6fc40db0b2dd446714c573
+[3/7] binman: Fix FIT image overlap issues for testFitSplitElf
+      commit: a06733fc83f07dd975a9e220a44392f3455c7c21
+[4/7] arm: dts: k3-am6xx: Fix FIT image memory overlap in binman configurations
+      commit: cbc4da1dce3f8dd828a2e613676fdceefd87e1ea
+[5/7] tools: mkimage: detect overlapping load regions in FIT configurations
+      commit: 588094f2c8ec9a4f7d2dcda11ffae8db8462149c
+[6/7] test: Add test case for FIT image load address overlap detection
+      commit: 8f3d3510e31ebc7b2057f431322a7174b6b60ea6
+[7/7] doc: binman: Add guidance for determining ELF load addresses
+      commit: 4907a920e8292e9e38ddab4d211dfd5499097a8c
 -- 
-2.50.0
+Tom
+
 
