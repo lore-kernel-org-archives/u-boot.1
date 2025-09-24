@@ -4,70 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56FFACAC5A5
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 12:55:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BE87CAC5AE
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 13:31:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8E0E83447;
-	Wed, 24 Sep 2025 14:55:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BFAD483447;
+	Wed, 24 Sep 2025 15:31:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PhI9Rgjx";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A26983448; Wed, 24 Sep 2025 14:55:37 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C32AC800D7
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 14:55:32 +0200 (CEST)
+ id E3FCB8349B; Wed, 24 Sep 2025 15:31:32 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A274B800D7
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 15:31:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58OCtSkN1700408;
- Wed, 24 Sep 2025 07:55:28 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1758718528;
- bh=ppol2CkhfcaECH+xd085CQYh4WQBPVhkJiHj5ZEg4f0=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=PhI9Rgjxgx+xlhOaInUuULwFxH7LkzdAE5Sn5GACIGbtOhUgd+y2UfvTiUD4ZysHl
- wP3X78JcBTWthRqNUM7UhqRuLiulPY/g+SIYFFysjAsdKBbOVM70uwIAgNfzl5fZId
- R/CSf2gW6D92cWJJEaDJukhGfg8+j/Oei8l3/Rwo=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58OCtSqG2762764
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 24 Sep 2025 07:55:28 -0500
-Received: from DLEE205.ent.ti.com (157.170.170.85) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 24
- Sep 2025 07:55:27 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE205.ent.ti.com
- (157.170.170.85) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 24 Sep 2025 07:55:27 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58OCtQHo2028232;
- Wed, 24 Sep 2025 07:55:27 -0500
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [143.105.119.198])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 18F95B220249;
+ Wed, 24 Sep 2025 15:31:25 +0200 (CEST)
+Message-ID: <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+Date: Wed, 24 Sep 2025 06:31:23 -0700
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Wed, 24 Sep 2025 18:25:25 +0530
-Message-ID: <DD11OP1DYB5Y.4ABDK7GP4SSO@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Andrew Davis <afd@ti.com>, Anshul Dalal <anshuld@ti.com>,
- <u-boot@lists.denx.de>
-CC: <vigneshr@ti.com>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
- <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>,
- <kever.yang@rock-chips.com>, <hl@rock-chips.com>, <tim@feathertop.org>,
- <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH v2 2/8] spl: Kconfig: allow K3 devices to use falcon mode
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20250923130901.705124-1-anshuld@ti.com>
- <20250923130901.705124-3-anshuld@ti.com>
- <134414a0-8fcc-4fb0-9f53-3dc803d41b70@ti.com>
-In-Reply-To: <134414a0-8fcc-4fb0-9f53-3dc803d41b70@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+To: Nishanth Menon <nm@ti.com>, Aristo Chen <jj251510319013@gmail.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, sjg@chromium.org,
+ alpernebiyasak@gmail.com, al.kochet@gmail.com,
+ paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de,
+ w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com,
+ n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com,
+ ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de,
+ alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250924114317.742ae4ntrb4mvuyq@expert>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,53 +63,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue Sep 23, 2025 at 9:48 PM IST, Andrew Davis wrote:
-> On 9/23/25 8:08 AM, Anshul Dalal wrote:
->> Falcon mode was disabled for TI_SECURE_DEVICE at commit e95b9b4437bc
->> ("ti_armv7_common: Disable Falcon Mode on HS devices") for older 32-bit
->> HS devices and but can now be enabled with the addition of
->> OS_BOOT_SECURE.
->>=20
->> For secure boot, the kernel with x509 headers can be packaged in a fit
->> container (fitImage) signed with TIFS keys for authentication.
->>=20
->> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->> ---
->>   common/spl/Kconfig | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>=20
->> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
->> index 7e87e50f693..ab780da9e1c 100644
->> --- a/common/spl/Kconfig
->> +++ b/common/spl/Kconfig
->> @@ -1201,7 +1201,7 @@ config SPL_ONENAND_SUPPORT
->>  =20
->>   config SPL_OS_BOOT
->>   	bool "Activate Falcon Mode"
->> -	depends on !TI_SECURE_DEVICE
->> +	select SPL_OS_BOOT_SECURE if TI_SECURE_DEVICE
->>   	help
->>   	  Enable booting directly to an OS from SPL.
->>   	  for more info read doc/README.falcon
->
-> The subject doesn't need to include "K3", this is for all
-> TI secure devices.
->
+Hi Aristo,
 
-Oh yeah, will fix in the next revision.
+On 9/24/25 04:43, Nishanth Menon wrote:
+> On 06:37-20250924, Nishanth Menon wrote:
+>> On 10:59-20250914, Aristo Chen wrote:
+>>> This patch series enhances FIT image robustness by adding **memory
+>>> region overlap detection** to `mkimage` and fixing existing overlaps
+>>> in DTS files and `binman` tests.
+> 
+> [...]
+>>>
+>>
+>> Looks like i see a build regression in linux-next after this series.
+> 
+> I fat fingered that one.. sorry, I meant u-boot next.
+> 
+> 
+> Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
+> 
+>>
+>> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
+> 
+> I  believe there are outstanding comments on V1 that have'nt been
+> addressed either. Can we revert/drop this series for now while the
+> comments are addressed?
+> 
 
-> This patch should also go last in the series. Not that it
-> causes any break, but feels like a "security bisectability"
-> problem to allow something and then after make it secure.
->
+Similar to Nishanth, I am seeing a build regression, itb.map:
 
-I was more looking at it from the ability to test the subsequent patches
-in the series on any TI platform which would depend on this [2/8] patch.
+ImagePos    Offset      Size  Name
+<none>      00000000  <none>    itb
+<none>      00000000  <none>    fit
+<none>      00000000  000c1698  uboot
+<none>      00000000  000c1698  u-boot-nodtb
+<none>      000c1698  00202128  opensbi
+<none>      00000000  00202128  opensbi
 
-Though your concern is valid too but there are still a few things
-remaining from this series that would need to be implemented to make
-falcon mode truly secure on TI_SECURE_DEVICE. Perhaps we should drop
-this patch until everything's in place?
+Yields this error:
+...
+ MKIMAGE fit-dtb.blob
+Warning: not able to get `load` of node 'fdt-1'
+Warning: not able to get `load` of node 'fdt-2'
+Warning: not able to get `load` of node 'fdt-3'
+Warning: not able to get `load` of node 'fdt-4'
+Warning: not able to get `load` of node 'fdt-5'
+Warning: not able to get `load` of node 'fdt-6'
+Warning: not able to get `load` of node 'fdt-7'
+  CAT     u-boot-fit-dtb.bin
+...
+  MKIMAGE u-boot.img
+Warning: not able to get `load` of node 'fdt-1'
+Warning: not able to get `load` of node 'fdt-2'
+Warning: not able to get `load` of node 'fdt-3'
+Warning: not able to get `load` of node 'fdt-4'
+Warning: not able to get `load` of node 'fdt-5'
+Warning: not able to get `load` of node 'fdt-6'
+Warning: not able to get `load` of node 'fdt-7'
+  COPY    u-boot.dtb
+  MKIMAGE u-boot-dtb.img
+Warning: not able to get `load` of node 'fdt-1'
+Warning: not able to get `load` of node 'fdt-2'
+Warning: not able to get `load` of node 'fdt-3'
+Warning: not able to get `load` of node 'fdt-4'
+Warning: not able to get `load` of node 'fdt-5'
+Warning: not able to get `load` of node 'fdt-6'
+Warning: not able to get `load` of node 'fdt-7'
+  BINMAN  .binman_stamp
+Wrote map file './itb.map' to show errors
+binman: Error 1 running 'mkimage -t -F ./itb.fit.fit': Warning: not able
+to get `load` of node 'fdt-1'
+[Config: conf-1] Error: Overlap detected:
+  - uboot: [0x40200000 - 0x402c1698]
+  - opensbi: [0x40000000 - 0x40202128]
 
-Regards,
-Anshul
+make[1]: *** [/tmp/u-boot.2.git/Makefile:1339: .binman_stamp] Error 1
+make[1]: Leaving directory '/home/es/build/u-boot'
+make: *** [Makefile:198: sub-make] Error 2
+make: Leaving directory '/tmp/u-boot.2.git'
+
+If you would like to reproduce the issue, use config
+starfive_visionfive2_defconfig and pass to OPENSBI env variable the path
+of opensbi object 'fw_dynamic.bin' built using PLATFORM=generic, with
+the ordinary gcc riscv64 toolchain. The starfive visionfive2 board
+target in U-Boot supports multiple vendors and boards selected at
+runtime and is an example of a more complex FIT usage that you may be
+interested in for comparison and testing.
+
+Best regards,
+
+-E
