@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86A34CAC59A
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 04:21:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E8B1CAC5A5
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 04:21:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE6DB83447;
-	Wed, 24 Sep 2025 06:20:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 13671834D4;
+	Wed, 24 Sep 2025 06:20:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="ORRJ/Z/L";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="cYJfGMWa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B93683447; Wed, 24 Sep 2025 06:20:52 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 0D644833ED; Wed, 24 Sep 2025 06:20:53 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7942833E9
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 06:20:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D954D80B9B
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 06:20:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Bp2SqalEo2ombl3A0B3opykywHeOjMg1yLxPei4Ib2Gc5A0xS/4qhpNMZgO/JQ5zb2ceSuLidhOnywpCLBB3RHbHNUpTAeAOhHwsZ6efF2j7Uwxya35oOrhHSc4YL5Q9M+w/cwKGqaR9btIKi/RM26R0MoLavnj1oYLFu9QqxvhHPWApW4wDsP9qhRT4jgEJzxLAhAqpVkatabysRxo338z6wcF/CwR3Znhf+zrqCBwz+2ZMUAWn/xBqO5NsxzIiAzYG7OoDkd9uxo5jSUAVo+eQexds2+THsXldA3Zc34UnvvmaqgRYJlYMzVm84gdIsOiGh+4jRagXuqbQu5yjhA==
+ b=N2V0JYZm0cT7nPaX37N9G8YpO7g/u+OJfKv8eKzVmLYEAaCYlmbaQYwf9JKcVzfTUlAWatSvOaZt/zh+vtVg2M3uvQDzouva/F5aR4JzF+3ZBQmLgMAM+3SugxR7n/B9anEytTDB7jqSsdBIph6QEkWAtifUDq2tI5uYKGTPQiYjGq08SxoVJ6E0XeY6UB69kXSCoj3XqFQd7gbHGF3h34OnI8s4Vx/Viv9CJ8Zxxk0LKvAoH5LiCtsv+g4Px8eegrIJuD40fWXeEIPqH/5iKvh12qor3A1mFnDmaZIEG+pTH16ABlJRnl1hmsSstl4dNmbzpuTlpXbGGskO6zHdtA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fb2XFzElTh0vSY2HbfVbtF+RAIRXOUNUruC7C+hKeHo=;
- b=tGouzBh+rZstHLhM7fRgSN4XEMAnWHZIf+stG7RRxI5xamLRCigRhXuvmuKOCQvqZBHqEy45/LvQo8Nrjsu/X/GiY9mgMA7Gdpf/B1I8sZ/Q5hBxxO6N0eTDIPtxpgZ5xz0JyCSJ4XFxS8USlaRtIqNSPA17YtqiyAgJ1KYdO5N3WjMy7mvvBmW+DBc7sioTy7E9FyIAnmRSfw51O7ueGODjGo+Cfuji+FixHpmKd/LtNevgBG+eF9/8YEPDGQeD7THEcKovxoygYRjY2Z7ot61br6w8uP2LTF3GQKLi2o0Q88gsxh3SlkypeA11qJ3Xuau1LtSx4szsDD4rv8mAvw==
+ bh=drrSf4GG1G9/0lqfFC75sgWurUt43oAuwu+WPVeAhRA=;
+ b=hpJUzTtAraeo3d+krHAzvZa8Ufl1lmGI9zHye1Wwerk9BA2Z8aPwqPaZj8JbyZnDKrys13Bx98JmqVvf1xyPmrZl4KgKzzuz/1x7nDUhS9hvUPZULvmo+jgnTjNdkEn2I56/45G8W7JkytEvkyw6PmJZX39MvL7rs1XCh9h/xp2MqUOutDRb+KXgoOK0YYUVqVnSxmZO67WAYlKYDdIrilb0A8e6wOKYoMQ+p83/V3X51u7M7DE1At1wSDr6Y1WkLaXipC/ufoliFAHMt0wdq21l983se9M7fNnxKDFYyf2B8gfX4OKFUqrq5yjrMTc+IS9yDbft+ngyTvfVoINTjA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fb2XFzElTh0vSY2HbfVbtF+RAIRXOUNUruC7C+hKeHo=;
- b=ORRJ/Z/L+hw4pNCf0e17YqgYIcc+Upy1bW/OMSAF79G+LzW+at1b41NTxkrLuBFzV3lMZVvisf8YaeRh0soK+AIYXxN4/HeVjz1pzk1FC0hFcdaXGtq4vCAntWqe86E4LEPxN+45iQZff3tSwGXiceoIaxj+pnzO9EWbDJcubOa8JWboV25fcw7Mgn3xASptg5iecmaEFi7yGhQX1iO4ZQHvJyC5ow6VfOZcVchjOXSB0vzok/dB+lKlqCnLsTGDJQwD+sasK03a7Mow7ddrbfAehWRNFSlEyASK5Ka2iqPPM470OdYq8ihXdOQTNgNR4cBa1lwFXIJcrswWOHURIQ==
+ bh=drrSf4GG1G9/0lqfFC75sgWurUt43oAuwu+WPVeAhRA=;
+ b=cYJfGMWaMoVnIgUTamlN8agmOkEvSw7HZ/MrSwpsgCKLtGD++WRYIU7oRiDZkE9AYYBrPR5QzN2P7kFpkyhRnZElypYJbRxRu3rlyiGI3OVk3AVOmJ6c7tLiP4wWunOWAFu72yV7cyVtwfnhhWGlGzJl8bYI3T11vS4AOWzwdJe2ox143WrA+sgN2ygLI8V+t6W+kjMq0fBAarHx0AjZ/DujhvHyZHHy/be3s1Tnl83nfc9QbB5ECclcnVe+OS1WWEmeP8P2OT+enQnMRVhhM6hSYMxvpD/9O8+NF6jE6XPBemV0QWp2krVxkho95CgJ48P6Gvaqc2/F/Ebj8t21Hw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by PAXPR08MB7552.eurprd08.prod.outlook.com (2603:10a6:102:24f::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.9; Wed, 24 Sep
- 2025 04:20:45 +0000
+ 2025 04:20:46 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9137.018; Wed, 24 Sep 2025
- 04:20:45 +0000
+ 04:20:46 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -65,9 +65,9 @@ To: Tom Rini <trini@konsulko.com>,
  Christian Marangi <ansuelsmth@gmail.com>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: [PATCH RESEND v2 2/3] cmd: mtd: add nand_write_test command support
-Date: Wed, 24 Sep 2025 07:20:32 +0300
-Message-ID: <20250924042033.1873771-3-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH RESEND v2 3/3] cmd: mtd: add nand_read_test command support
+Date: Wed, 24 Sep 2025 07:20:33 +0300
+Message-ID: <20250924042033.1873771-4-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250924042033.1873771-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20250924042033.1873771-1-mikhail.kshevetskiy@iopsys.eu>
@@ -79,79 +79,79 @@ X-ClientProxiedBy: FR2P281CA0130.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAXPR08MB7552:EE_
-X-MS-Office365-Filtering-Correlation-Id: cb28ee36-6b2d-487f-ca78-08ddfb21bb68
+X-MS-Office365-Filtering-Correlation-Id: e71f3758-b539-4a9c-54b2-08ddfb21bc2c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|1800799024|376014|7416014|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?es95YMJPo312tFqdxYf943FGFPLQhmmiVAvMdDps0FcosEYyf2hxx40TXSOT?=
- =?us-ascii?Q?Xryoi1GnnZr58NBvWpaU8Jrif0yWZgpiAXciUFDd3PKejTH/fc2zYY/ku7NO?=
- =?us-ascii?Q?bcYgiLnJshsDbSxtPBOlrpgCZVyyBZlQbiu9l2dO0jsNWceXCIGHOdnCd39q?=
- =?us-ascii?Q?tfRmLaIJwWUzY7pJaK6eNJTF29GjhIbuWW0i4tRrUbbWG6wFd8u9+wB2Y4TI?=
- =?us-ascii?Q?XULKJoF1oulrFGPVH9wtDwY3V/pIhSHALuf7bc2VLkeenL3hgsASNbSSlGsj?=
- =?us-ascii?Q?5amGn6+GBItQyJjSvfaB+sLqSAXtc8srFB+omxys97iVHA3kohGrjCkkasMK?=
- =?us-ascii?Q?R62Q34p48wOesE8xH4fA0W2salw+fDLxeQjUiE4ppn2uvKcRu8fJcGrgmOc7?=
- =?us-ascii?Q?/G4weJBynRd+vR/o7g8bMsq6ainLLkhsweFhw9Xs1jNFcjyy4K89hSBisojQ?=
- =?us-ascii?Q?4nyp+rxde0y7Xsm5EoZXHmvUD4tYyZr01XR8u2qimqNiJLYEo8BvHUZqN0pC?=
- =?us-ascii?Q?3p960wJDC++xH9b1x5qIKZiKzCFjiwdy1oN8bE6Wx/dWKjcZcUqa8o6BPrhZ?=
- =?us-ascii?Q?+SNjZzvV76UBh4eca+iNGp0BYiHau4h5trdr/Eay1o1Mk9MKCN/K7uMTvJkv?=
- =?us-ascii?Q?hUYAcWQDu4E6x9gnlncxbioDU7dN92cXVgfq3ITwZjt29LpC2ff5Io1sRnzu?=
- =?us-ascii?Q?AGH4HWv1GhGiOSAIK97TkXCmmSYO5QMY+12ZSUon3X82cl8cR3QSi5vrhtz+?=
- =?us-ascii?Q?ZyyWcqVWV/dgRfzh+M8mDhkTx5Xr6Uuh/OeFcwz0IZclvDivN71fXvqZj2fW?=
- =?us-ascii?Q?N+mJlW7kpcOj7jhl3flXWdh8slbrBvuCS0+YywQFGMOJ59Q4Anay+bOhvmoK?=
- =?us-ascii?Q?E6QoukDxMi7/jCBNRfG9I7pH3RvYj29x9Pqtzw1C0cqrynP9zKW/M1ZegJai?=
- =?us-ascii?Q?OM11RchXGoix/oqHjefti4OfNaxoEaxkGGoc1hgNpYELfelJnKYay+BaibPp?=
- =?us-ascii?Q?nCTC8fb+Twp2t+QRf7YiQU+e90SKZGoA+m3y35417EoDBgq2EJ8La2J9+7o8?=
- =?us-ascii?Q?Sk8VWFNg8maFV/QsL+hSnnSC/zmr8iBFaur7+cLrUqKdNrmTUegrs6W9/Eam?=
- =?us-ascii?Q?PTsLGhlPJsSOmy+zU6//P+z21NiEOVZEmmHlRmX538bYtjOOTFPgV92cI35b?=
- =?us-ascii?Q?6ngAuXLDc9rpL49dxmnpDi5M9zuqi7Dl0xmbYLA2ZPmflXgazKFdpz6HlLO0?=
- =?us-ascii?Q?V1NiIClblZgzDua/1olGFF41uYalz4acUX/qWPhpU7lruhu8xIzzBiNQXTAD?=
- =?us-ascii?Q?AXbC/rghId7oA4dC5+rFQ1H0/MSDJh65/2bRcnXmbQFJFJn8eYfQ7QR7YGxu?=
- =?us-ascii?Q?S1tczXh1xm6SNYKzS94MGzc3k6D1PIZaauBixtmz3qga6V/tiKGkUCDsa4+w?=
- =?us-ascii?Q?bjfttQ66tHCFOwZ2Pf4JaKAk+wFXrlg+cim50DGE1XuuDpDjsfYkbWwmIaHt?=
- =?us-ascii?Q?fLJwu2zhpQzEw7o=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RUb1Awm1K8I81pZ978JNn8GTrbLUhlSTOlSDhqkg04c5PVFvf8SS7VBPwGMP?=
+ =?us-ascii?Q?B0nu5ZF3fwKo9avVPHECdoZx3ec1vCxhXbpLxoKPCx5clZQA+jMdwOsZuq/b?=
+ =?us-ascii?Q?MvYIgQsmj0zxGmezrADVtqBb9YTNrOP4KB1s2055rQlxCEc7wPxEVUCKqECy?=
+ =?us-ascii?Q?sL8FFO/6naPB4ThiYnKpM6+WrCM9IeXtVqyEUoD5FbZ+nWjp3ll3PXqlXc9g?=
+ =?us-ascii?Q?qxrAEjs6u9H/clS/IELDDpnDy6GoB1upWZsWA3WcQKI/dJoAdwIglpYCHW/3?=
+ =?us-ascii?Q?f7DO1U/GEdWfFwnEm0nOXwQhHCQ/kvPBqUxaFqfAXcCL31Hj81HhWQ+hy7xP?=
+ =?us-ascii?Q?1ChxB2ksJ0lSnmPw4tPvuhnQ1vNiZ38K4ZZqRaKuOVlGtNwoPuyHKCqc0t8B?=
+ =?us-ascii?Q?Rawic2T6lappM7QPXMEa9AkoEjwKHKkkA+sSpf49m2TFD3UhweHIO1PLOtRe?=
+ =?us-ascii?Q?Qb+mj6Dlr68jvL/q2zTXH4kpaneZX5qio/4AwXgLwTF2ugTCNWbr9d1XBVSV?=
+ =?us-ascii?Q?g/g7N1blz427rr0v12VRVFxRDSwUrduV62y8CgWvd3kp+XmTAIBqeaOdV9hI?=
+ =?us-ascii?Q?drkIh8NdHV7JNS/QajnWa0D0dX/sfTDME6K9ZrX3KFNavZRTxZaO7c3I1w3k?=
+ =?us-ascii?Q?nyxFwfYpz6Bii1/fxBx5QUtOX3nfp5dBtr3UI26E1Ff2hPk/HEGw5/e+Lh44?=
+ =?us-ascii?Q?RB0+9RljzXkv3chf2bP9kXPV9UXUQsPHuN2zCMizt3cGYShotC7uwjQiWYlR?=
+ =?us-ascii?Q?iD72+ticksOMh4aCHODXe9HQBqldir0MJNtY2NtJ3iiUv6V3e0E8ettqIlzw?=
+ =?us-ascii?Q?SIZiy5yKgDZCT+Bpl+lMFecbNjaKfKu5pxZHlAK/CIrBtRIOTICNFyATiwlR?=
+ =?us-ascii?Q?EdD0A6Ina1MRm4yju46XhkQ+6yb1eEFcORpcBK2uSUrc40PPRljE+8J97OmP?=
+ =?us-ascii?Q?yNT1A6xzPeIOFHNR7iSanqXewBx8t24hIYiCndAGyRVO2tKd/NsGhA5yvRsB?=
+ =?us-ascii?Q?y/Qka77wrhEoc0lmXdK3jbeWjYyJbKHZlhf3ycWEhoOXBeBuxbqsSzZTaKa6?=
+ =?us-ascii?Q?S5QkHpPOSdz1MWiLRh9JWlea9gdtFJlvWHcakwsSjt/DXqhWhELKievt7cAk?=
+ =?us-ascii?Q?F3ApWEMnvm9LQSx+PMXF0EJyxv3t8GfsdgJR7akdfG3m1T7ieHdcPBIkGmVw?=
+ =?us-ascii?Q?rXyKLgiX2JsUl+P+f+wmP4oGIhlQI1IpI/40jwFdDMboTD2JdwaaKIlLO30/?=
+ =?us-ascii?Q?Z7RwKxYggiDlWKEc/ovj3qyeRqktsR4QxkixGs4+JBNs4flOeHq81OQyZQg+?=
+ =?us-ascii?Q?B34dVqlYAYUhZ32J9sT/PGRPxabDbeoaT4N19YdNDWlCGwNYBY9s4Qnfk0mL?=
+ =?us-ascii?Q?f9vTb/qF7pdUWTENqHdr34x4E5h/+KdaDpZiYrYSuPJz6qP7KFBR+HT2LK1U?=
+ =?us-ascii?Q?/hlvS9REQ+XLvg+J4pKclS52EwVRJ04q/Fe8tRBvYQP0NzKiFOsCfi1SlZ8T?=
+ =?us-ascii?Q?u9vHlKhWBlSeUK8=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(52116014)(1800799024)(376014)(7416014)(366016)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?XHR0Kzq1PK2LX615YwpMGJ791vzQEvfBOiIjtkCBsCWtgsBys7xqPH0LRIbl?=
- =?us-ascii?Q?KmAElifAG0mWdhJdNp0JSXN7RzABmNx+u3bPbAFQ0b073xnXKKKnq+RcEv6u?=
- =?us-ascii?Q?jnn1yGfeURnWasSBdtoowJVEv/EcmjHXvJH3JB7tY+DgnBJp9fFPBtAXHNse?=
- =?us-ascii?Q?BZUCawIIzsD9yDPM4nDR8vWVcnICKNe0KL3c/u251R+VJoms0do2cMdgAdx1?=
- =?us-ascii?Q?WxmyC7XgPPCRUyMHd7CD/OYa4LbQJ+rRU91LNhwzERtG5hdpifqNLGzt4Tgy?=
- =?us-ascii?Q?gPGX0c+z0VdVmvIjVSWYqkS4iP2uWwAh8oWGJ/1KUUDbFEvGz+3Oec0PBSSt?=
- =?us-ascii?Q?2mcZWtuOhN3HXTyzuKwv5XSxyG4eWgXVaL1IMZUse3UWtKpUhw28VB1eqyTJ?=
- =?us-ascii?Q?qEJFFJxwl71ZXZUJvqI5I/9E2el3OAAnm1rGienyMYaiyTW5u4kQsOaOlPcR?=
- =?us-ascii?Q?z1bQLCAPjzFIiBA85ziNAS8SFyE4jRpOv7zMA3DpnbcmNzCHtMSqpSdYKRrw?=
- =?us-ascii?Q?OxV5OdfdseJWjSiXG1N5Y5LdxevVUZTut9iNCkolrxtMVGetK3CH5psBfjWI?=
- =?us-ascii?Q?yq1cYZuPgQaHcAlY81MnYrBhXXRnR/RQEGTaPbzakV13whL3M5uAVeNU2iii?=
- =?us-ascii?Q?sCK5YjxD4zjMUEYQTF67EIC0hJ/9zEXc80eR0g2WT4KiCQWl8tfXEqxTWveW?=
- =?us-ascii?Q?opeqJmMfNUT6ThVL3PruIRINm0Z22zndMXWdcfbW/dRe1pynRhbP28oTFl4y?=
- =?us-ascii?Q?2BKwVpwdMKUanQTNK/XEWJn3BZpTZDyRoEfuveV3bhOung31TlFRC4H8A+Zi?=
- =?us-ascii?Q?NqDeYe2YyeWfcwPQ0Z1irGf3Zaid3KxbvgLqgQgVGLhRrVOBs3GtBg8tde2H?=
- =?us-ascii?Q?b+TmkilA498kZ7Kf2l97mIZ1QBrocykz1nGhapIwuDnG49liexUGtL8JoL5g?=
- =?us-ascii?Q?wTTI0McIZySH2YISKoFLyuETSd3UeNVjbFrpsRS3FTkqHKwtKKiKjo33GIn+?=
- =?us-ascii?Q?gP311+XJ4SfNTeztYiSYSOzkSphpdM+XoyCJQnqGFhtmOks/91nVzKR8yxux?=
- =?us-ascii?Q?pw4pSmpEOvfQ2lqRI5f2ZC/NoYrD4ceHZQ4G8tf5VYxKN1N5KW1LgXBx7xg4?=
- =?us-ascii?Q?zE74xcuxrKF/9WhjlUSEnrFc81oFhzdnDPEBJEYo2wbf0J/SXTLsm/PF2eEi?=
- =?us-ascii?Q?NL8pMtwbCJsSl8lIXCzBTiTyw284V2KAQGPTfJ9eHdtW8e4Bt0c6cHNcZvu/?=
- =?us-ascii?Q?n0uJ4WJ2f5uf+Q83NvwHgnOP+qs4fk0hjPQoxzniFyJUrS/ECh9rciYox+C8?=
- =?us-ascii?Q?VsATaTWd/MTmFNCb7a7KZaQDndSUAMD+6fPWcObpddPkFaXoOHs8MksIMo2Q?=
- =?us-ascii?Q?tDJnfzgwbjIHyb8AomRTQmSjdAxY4/k4399bdvS7crmfXTRdrjJprLDf9QTh?=
- =?us-ascii?Q?SP2IZZF/FTsfnsL5xbPmKsLqvq+RuPBSMAaT8BZ9AzOzPHQWiImxcKIuIx+T?=
- =?us-ascii?Q?BERPYILx8PSQT/NM5d82E0Ta/xJr1dEoj6gWjBlqH/TgjJ/4Du6lpZbnuxC8?=
- =?us-ascii?Q?17HG6IMHsXLKo49acdoK59maY8hbCqyY3sPa1xtRbMJp2ZWOqbNbQCV3vpEN?=
- =?us-ascii?Q?X3SVG2r0+L/ju4ZOUm3Opk8=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?HKuWJTfZNaoXpHHhqJ5rk49UD+AKo10DSPCdXyhhipcjsLyPEEY4XuDWLB2N?=
+ =?us-ascii?Q?v7NuNzk1m1GsTtq98Ddt8Ngt1Wq0v0pkwLN6Udyc1XB+XdEL87lWLFL3KbMZ?=
+ =?us-ascii?Q?+j8HZi0AVVxVWAByVq4c1fqqx87XGvGKjva4IqEVLSnp/ZMnD+/qKf0sdTT/?=
+ =?us-ascii?Q?E5YejuJPS4oTXsV2xj5FjIT/SXzTjxn0iq3lnW46EapC1F8IirlmPmUfACgA?=
+ =?us-ascii?Q?jyVPQPFLABOfW36AmigLWGMIXadL9YZmMQ9GMs/j3V5CpYxj1Ah9FuZMh0ko?=
+ =?us-ascii?Q?eMvNCxS3O+Fvc8bY5WqV7BofT6scd3TXviVl/kYSTEpe36lcRHejpoKzGEpe?=
+ =?us-ascii?Q?ERa9EPKMn2ydGQ0qZB2TN8lVzNbDk4+zRHEhpHAcULukTmfhxNH4oz3aFFqa?=
+ =?us-ascii?Q?CrHz+t7Y4bOzSI7sSdZtN0rJX+FiJc3EQlkYtPqxfDRWN2cZTGKT5a3bu+Bk?=
+ =?us-ascii?Q?ks1M3cyu1D/jTcZncift72Ditvnb/1QXSScOg09xMJ6w52qk3dWwQgiTD8MT?=
+ =?us-ascii?Q?9b6/lqMYMDhBRdv9Po2iUoY9xNKYKCskvz1VJmY7y4HsDrsxu95gUoCnWhP3?=
+ =?us-ascii?Q?usC6fbwWF7r3Qz3emhskV7Rj0eJ4pxZyaqMXmXqB948Y5gL8jlzYpHQnRUzx?=
+ =?us-ascii?Q?tDxza5EoQDIKk8+b3QOMfJr/NJWjybhyVJPLfSkG4RqCrx+Y4FkEMFldPygR?=
+ =?us-ascii?Q?GaPgmdsDT3BmEXKamj0tLuMY0kKvrHX82aU57HCvgvJ/IFNbalq/k6Ww+3/4?=
+ =?us-ascii?Q?V0B1peZ/xLNQ/KwqCbNZHStGZo560dQVjOjzhQn4XnDu8i041XLBVqQx9O0y?=
+ =?us-ascii?Q?bhRP1QaNInb2T5e1bkV+3MnQ0byo4j8Z4v3cNFNYnr07TC5g2LsjszXdnBkH?=
+ =?us-ascii?Q?JTyRz9spgP3+p7q1RWJlIwLGKln64qkGH7QnTf3YGMP//WMPjqaHzso659yR?=
+ =?us-ascii?Q?ODAFTNt5Scye/Bzv6toGJP7hF2Z7t1smgttQo8buL5LwKy0tQmKjEeiD0+11?=
+ =?us-ascii?Q?AuCbYPgx9UPvAcqmYJyP4kuvosyPUSK7iNMXCz3Ypk/cu4imomCHMkIG/wLh?=
+ =?us-ascii?Q?VjtTRAyh2TVUvwmsfQqlIBG3V7X65AHRzNGY7aburJ7Qjmy1jv6Q49IYT2Mt?=
+ =?us-ascii?Q?g1P7ec6KdjtADR9iBzloaLBmKCUm4Yj+OlynGECUPjliZITjXIC9gGT1Atue?=
+ =?us-ascii?Q?xKlsIdrTdDcWuB3MzHSCsBIAJ6OOd3weivSWAurd+Lj1GJrVGDbhfTgDKpEq?=
+ =?us-ascii?Q?CRLy4z/40fhujpOT08crR2QNEk/SK+vfTXs/iGWkPwuB1BoZ7bdgaGCqv8qo?=
+ =?us-ascii?Q?/cn8fUKbmetpLCZakuOl9OsAQqMzW9afRcb4pG289EcRNmzZS+1F/R3RWQLR?=
+ =?us-ascii?Q?cPCEMaxWxC4l0OjAW2CqTYmlihmbGismpxOkFSWzSQLpEYX6trAUdnjwtzSo?=
+ =?us-ascii?Q?FWtwO4Iyj+Esn7yB/O197Ms7j0/k+nazzGyO/oUJSjkMAPpsVLUeEE2gLYcT?=
+ =?us-ascii?Q?Qi7/KNxDtsm5Ae2IibIBAo0bQOThdbxIt77Ld0FTPSU8tDe+ZFY+pqmW34fw?=
+ =?us-ascii?Q?F8Wy5ALDpSG7BXuFUCfalQI7dZlJokutDxD3juGpiIEraekYxsLclUgUmQk+?=
+ =?us-ascii?Q?AdB4eQvKd6vQnjU2i13au/g=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: cb28ee36-6b2d-487f-ca78-08ddfb21bb68
+X-MS-Exchange-CrossTenant-Network-Message-Id: e71f3758-b539-4a9c-54b2-08ddfb21bc2c
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2025 04:20:45.5413 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2025 04:20:46.7927 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VkyBbYhy2ZUkBtZDLUBkN8Jp/aHoPgu1QojH5pzomvuLjL/oWLpxo5QQquah7uonJYeZUJ98rW6H+cZW1v3Lu2O0Zz2IS8qLv21YisBBOUc=
+X-MS-Exchange-CrossTenant-UserPrincipalName: RSHOFujNawVePlYrUShoITY3M+1zokLcReovQQ90ZLr5yMSk1uCViTm82k94qf+Roml5seK1X4pocuv1MeWTPCvITpVs9QlU/nDvjFXIe48=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7552
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -169,186 +169,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some nand flashes (like spi-nand one) are registered with mtd
-subsystem only, thus nand command can't be used to work with
-such flashes. As result some functionality is missing.
+This patch implements read-only test of nand flash devices.
 
-This patch implements 'nand torture' functionality for mtd command.
+Test reads blocks of NAND flash in normal and raw modes and compares
+results. The following statuses can be returned for a block:
+ * non-ecc reading failed,
+ * ecc reading failed,
+ * block is bad,
+ * bitflips is above maximum,
+ * actual number of biflips above reported one,
+ * bitflips reached it maximum value,
+ * bitflips above threshold,
+ * block is ok.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
- cmd/Kconfig |  14 ++++
- cmd/mtd.c   | 197 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 211 insertions(+)
+ cmd/Kconfig |  16 +++++
+ cmd/mtd.c   | 202 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 218 insertions(+)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 8f2a35d780b..cd1a664f34f 100644
+index cd1a664f34f..21d6db57628 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -1519,6 +1519,20 @@ config CMD_MTD_MARKBAD
+@@ -1533,6 +1533,22 @@ config CMD_MTD_NAND_WRITE_TEST
  
- 	  This is a clone of "nand markbad" command, but for 'mtd' subsystem.
+ 	  WARNING: This test will destroy any data on blocks being tested.
  
-+config CMD_MTD_NAND_WRITE_TEST
-+	bool "mtd nand_write_test (destructive)"
++config CMD_MTD_NAND_READ_TEST
++	bool "mtd nand_read_test"
 +	depends on CMD_MTD
 +	help
-+	  MTD nand_write_test command support.
++	  MTD nand_read_test command support.
 +
-+	  Writes blocks of NAND flash with different patterns.
-+	  This is useful to determine if a block that caused a write error
-+	  is still good or should be marked as bad.
-+
-+	  This is a clone of "nand torture" command, but for 'mtd' subsystem.
-+
-+	  WARNING: This test will destroy any data on blocks being tested.
++	  Reads blocks of NAND flash in normal and raw modes and compares results.
++	  The following statuses can be returned for a block:
++	    * non-ecc reading failed,
++	    * ecc reading failed,
++	    * block is bad,
++	    * bitflips is above maximum,
++	    * actual number of biflips above reported one,
++	    * bitflips reached it maximum value,
++	    * block is ok.
 +
  config CMD_MUX
  	bool "mux"
  	depends on MULTIPLEXER
 diff --git a/cmd/mtd.c b/cmd/mtd.c
-index 95e4be9863d..4d69c7b4915 100644
+index 4d69c7b4915..689d8d11655 100644
 --- a/cmd/mtd.c
 +++ b/cmd/mtd.c
-@@ -20,6 +20,7 @@
- #include <time.h>
- #include <dm/devres.h>
- #include <linux/err.h>
-+#include <memalign.h>
- 
- #include <linux/ctype.h>
- 
-@@ -762,6 +763,194 @@ out_put_mtd:
+@@ -951,6 +951,200 @@ out_put_mtd:
  }
  #endif
  
-+#ifdef CONFIG_CMD_MTD_NAND_WRITE_TEST
-+/**
-+ * nand_check_pattern:
-+ *
-+ * Check if buffer contains only a certain byte pattern.
-+ *
-+ * @param buf buffer to check
-+ * @param patt the pattern to check
-+ * @param size buffer size in bytes
-+ * Return: 1 if there are only patt bytes in buf
-+ *         0 if something else was found
-+ */
-+static int nand_check_pattern(const u_char *buf, u_char patt, int size)
-+{
-+	int i;
++#ifdef CONFIG_CMD_MTD_NAND_READ_TEST
++enum nand_read_status {
++	NAND_READ_STATUS_UNKNOWN = 0,
++	NAND_READ_STATUS_NONECC_READ_FAIL,
++	NAND_READ_STATUS_ECC_READ_FAIL,
++	NAND_READ_STATUS_BAD_BLOCK,
++	NAND_READ_STATUS_BITFLIP_ABOVE_MAX,
++	NAND_READ_STATUS_BITFLIP_MISMATCH,
++	NAND_READ_STATUS_BITFLIP_MAX,
++	NAND_READ_STATUS_UNRELIABLE,
++	NAND_READ_STATUS_OK,
++};
 +
-+	for (i = 0; i < size; i++)
-+		if (buf[i] != patt)
-+			return 0;
-+	return 1;
-+}
-+
-+/**
-+ * nand_write_test:
-+ *
-+ * Writes a block of NAND flash with different patterns.
-+ * This is useful to determine if a block that caused a write error is still
-+ * good or should be marked as bad.
-+ *
-+ * @param mtd nand mtd instance
-+ * @param offset offset in flash
-+ * Return: 0 if the block is still good
-+ */
-+static int nand_write_test(struct mtd_info *mtd, loff_t offset)
++/* test_buf MUST be not smaller than 2 * blocksize bytes */
++static enum nand_read_status nand_read_block_check(struct mtd_info *mtd,
++						   loff_t off,
++						   size_t blocksize,
++						   u_char *test_buf)
 +{
-+	u_char patterns[] = {0xa5, 0x5a, 0x00};
-+	struct erase_info instr = {
-+		.mtd = mtd,
-+		.addr = offset,
-+		.len = mtd->erasesize,
++	struct mtd_oob_ops ops = {
++		.mode   = MTD_OPS_RAW,
++		.len    = blocksize,
++		.datbuf = test_buf,
 +	};
-+	size_t retlen;
-+	int err, ret = -1, i, patt_count;
-+	u_char *buf;
++	int i, d, ret, len, pos, cnt, max;
 +
-+	if ((offset & (mtd->erasesize - 1)) != 0) {
-+		puts("Attempt to torture a block at a non block-aligned offset\n");
-+		return -EINVAL;
++	if (blocksize % mtd->writesize != 0) {
++		printf("\r  block at 0x%llx: bad block size\n", off);
++		return NAND_READ_STATUS_UNKNOWN;
 +	}
 +
-+	if (offset + mtd->erasesize > mtd->size) {
-+		puts("Attempt to torture a block outside the flash area\n");
-+		return -EINVAL;
++	ret = mtd->_read_oob(mtd, off, &ops);
++	if (ret < 0) {
++		printf("\r  block at 0x%llx: non-ecc reading error %d\n",
++		       off, ret);
++		return NAND_READ_STATUS_NONECC_READ_FAIL;
 +	}
 +
-+	patt_count = ARRAY_SIZE(patterns);
++	ops.mode = MTD_OPS_PLACE_OOB;
++	ops.datbuf = test_buf + blocksize;
 +
-+	buf = malloc_cache_aligned(mtd->erasesize);
-+	if (buf == NULL) {
-+		puts("Out of memory for erase block buffer\n");
-+		return -ENOMEM;
++	ret = mtd->_read_oob(mtd, off, &ops);
++	if (ret == -EBADMSG) {
++		printf("\r  block at 0x%llx: bad block\n", off);
++		return NAND_READ_STATUS_BAD_BLOCK;
 +	}
 +
-+	for (i = 0; i < patt_count; i++) {
-+		err = mtd_erase(mtd, &instr);
-+		if (err) {
-+			printf("%s: erase() failed for block at 0x%llx: %d\n",
-+			       mtd->name, instr.addr, err);
-+			goto out;
-+		}
-+
-+		/* Make sure the block contains only 0xff bytes */
-+		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
-+		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
-+			printf("%s: read() failed for block at 0x%llx: %d\n",
-+			       mtd->name, instr.addr, err);
-+			goto out;
-+		}
-+
-+		err = nand_check_pattern(buf, 0xff, mtd->erasesize);
-+		if (!err) {
-+			printf("Erased block at 0x%llx, but a non-0xff byte was found\n",
-+			       offset);
-+			ret = -EIO;
-+			goto out;
-+		}
-+
-+		/* Write a pattern and check it */
-+		memset(buf, patterns[i], mtd->erasesize);
-+		err = mtd_write(mtd, offset, mtd->erasesize, &retlen, buf);
-+		if (err || retlen != mtd->erasesize) {
-+			printf("%s: write() failed for block at 0x%llx: %d\n",
-+			       mtd->name, instr.addr, err);
-+			goto out;
-+		}
-+
-+		err = mtd_read(mtd, offset, mtd->erasesize, &retlen, buf);
-+		if ((err && err != -EUCLEAN) || retlen != mtd->erasesize) {
-+			printf("%s: read() failed for block at 0x%llx: %d\n",
-+			       mtd->name, instr.addr, err);
-+			goto out;
-+		}
-+
-+		err = nand_check_pattern(buf, patterns[i], mtd->erasesize);
-+		if (!err) {
-+			printf("Pattern 0x%.2x checking failed for block at "
-+			       "0x%llx\n", patterns[i], offset);
-+			ret = -EIO;
-+			goto out;
-+		}
++	if (ret < 0) {
++		printf("\r  block at 0x%llx: ecc reading error %d\n", off, ret);
++		return NAND_READ_STATUS_ECC_READ_FAIL;
 +	}
 +
-+	ret = 0;
++	if (mtd->ecc_strength == 0)
++		return NAND_READ_STATUS_OK;
 +
-+out:
-+	free(buf);
-+	return ret;
++	if (ret > mtd->ecc_strength) {
++		printf("\r  block at 0x%llx: returned bit-flips value %d "
++		       "is above maximum value %d\n",
++		       off, ret, mtd->ecc_strength);
++		return NAND_READ_STATUS_BITFLIP_ABOVE_MAX;
++	}
++
++	max = 0;
++	pos = 0;
++	len = blocksize;
++	while (len > 0) {
++		cnt = 0;
++		for (i = 0; i < mtd->ecc_step_size; i++) {
++			d = test_buf[pos + i] ^ test_buf[blocksize + pos + i];
++			if (d == 0)
++				continue;
++
++			while (d > 0) {
++				d &= (d - 1);
++				cnt++;
++			}
++		}
++		if (cnt > max)
++			max = cnt;
++
++		len -= mtd->ecc_step_size;
++		pos += mtd->ecc_step_size;
++	}
++
++	if (max > ret) {
++		printf("\r  block at 0x%llx: bitflip mismatch, "
++		       "read %d but actual %d\n", off, ret, max);
++		return NAND_READ_STATUS_BITFLIP_MISMATCH;
++	}
++
++	if (ret == mtd->ecc_strength) {
++		printf("\r  block at 0x%llx: max bitflip reached, "
++		       "block is unreliable\n", off);
++		return NAND_READ_STATUS_BITFLIP_MAX;
++	}
++
++	if (ret >= mtd->bitflip_threshold) {
++		printf("\r  block at 0x%llx: bitflip threshold reached, "
++		       "block is unreliable\n", off);
++		return NAND_READ_STATUS_UNRELIABLE;
++	}
++
++	return NAND_READ_STATUS_OK;
 +}
 +
-+static int do_nand_write_test(struct cmd_tbl *cmdtp, int flag, int argc,
-+			      char *const argv[])
++static int do_mtd_nand_read_test(struct cmd_tbl *cmdtp, int flag, int argc,
++				 char *const argv[])
 +{
-+	struct mtd_info *mtd;
-+	loff_t off, len;
-+	int ret = 0;
-+	unsigned int failed = 0, passed = 0;
++	struct mtd_info		*mtd;
++	u64			off, blocks;
++	int			stat[NAND_READ_STATUS_OK + 1];
++	enum nand_read_status	ret;
++	u_char			*buf;
 +
 +	if (argc < 2)
 +		return CMD_RET_USAGE;
@@ -358,80 +345,99 @@ index 95e4be9863d..4d69c7b4915 100644
 +		return CMD_RET_FAILURE;
 +
 +	if (!mtd_can_have_bb(mtd)) {
-+		printf("Only NAND-based devices can be tortured\n");
-+		goto out_put_mtd;
++		printf("Only NAND-based devices can be checked\n");
++		goto test_error;
 +	}
 +
-+	argc -= 2;
-+	argv += 2;
-+
-+	off = argc > 0 ? hextoul(argv[0], NULL) : 0;
-+	len = argc > 1 ? hextoul(argv[1], NULL) : mtd->size;
-+
-+	if (!mtd_is_aligned_with_block_size(mtd, off)) {
-+		printf("Offset not aligned with a block (0x%x)\n",
-+		       mtd->erasesize);
-+		ret = CMD_RET_FAILURE;
-+		goto out_put_mtd;
++	if (!mtd->_read_oob) {
++		printf("RAW reading is not supported\n");
++		goto test_error;
 +	}
 +
-+	if (!mtd_is_aligned_with_block_size(mtd, len)) {
-+		printf("Size not a multiple of a block (0x%x)\n",
-+		       mtd->erasesize);
-+		ret = CMD_RET_FAILURE;
-+		goto out_put_mtd;
++	buf = malloc_cache_aligned(2 * mtd->erasesize);
++	if (!buf) {
++		printf("Can't allocate memory for the test\n");
++		goto test_error;
 +	}
 +
-+	printf("\nNAND write test: device '%s' offset 0x%llx size 0x%llx (block size 0x%x)\n",
-+	       mtd->name, off, len, mtd->erasesize);
-+	while (len > 0) {
-+		printf("\r  block at %llx ", off);
-+		if (mtd_block_isbad(mtd, off)) {
-+			printf("marked bad, skipping\n");
-+		} else {
-+			ret = nand_write_test(mtd, off);
-+			if (ret) {
-+				failed++;
-+				printf("failed\n");
-+			} else {
-+				passed++;
-+			}
++	blocks = mtd->size;
++	do_div(blocks, mtd->erasesize);
++
++	printf("ECC strength:     %d\n",   mtd->ecc_strength);
++	printf("ECC theshold:     %d\n",   mtd->bitflip_threshold);
++	printf("ECC step size:    %d\n",   mtd->ecc_step_size);
++	printf("Erase block size: 0x%x\n", mtd->erasesize);
++	printf("Total blocks:     %lld\n", blocks);
++
++	printf("\nworking...\n");
++	memset(stat, 0, sizeof(stat));
++	for (off = 0; off < mtd->size; off += mtd->erasesize) {
++		ret = nand_read_block_check(mtd, off, mtd->erasesize, buf);
++		stat[ret]++;
++
++		switch (ret) {
++		case NAND_READ_STATUS_BAD_BLOCK:
++		case NAND_READ_STATUS_BITFLIP_MAX:
++		case NAND_READ_STATUS_UNRELIABLE:
++			if (!mtd_block_isbad(mtd, off))
++				printf("\r  block at 0x%llx: should be marked "
++				       "as BAD\n", off);
++			break;
++
++		case NAND_READ_STATUS_OK:
++			if (mtd_block_isbad(mtd, off))
++				printf("\r  block at 0x%llx: marked as BAD, but "
++				       "probably is GOOD\n", off);
++			break;
++
++		default:
++			break;
 +		}
-+		off += mtd->erasesize;
-+		len -= mtd->erasesize;
 +	}
-+	printf("\n Passed: %u, failed: %u\n", passed, failed);
-+	if (failed != 0)
-+		ret = CMD_RET_FAILURE;
 +
-+out_put_mtd:
++	free(buf);
++
 +	put_mtd_device(mtd);
++	printf("\n");
++	printf("results:\n");
++	printf("  Good blocks:            %d\n", stat[NAND_READ_STATUS_OK]);
++	printf("  Physically bad blocks:  %d\n", stat[NAND_READ_STATUS_BAD_BLOCK]);
++	printf("  Unreliable blocks:      %d\n", stat[NAND_READ_STATUS_BITFLIP_MAX] +
++						 stat[NAND_READ_STATUS_UNRELIABLE]);
++	printf("  Non checked blocks:     %d\n", stat[NAND_READ_STATUS_UNKNOWN]);
++	printf("  Failed to check blocks: %d\n", stat[NAND_READ_STATUS_NONECC_READ_FAIL] +
++						 stat[NAND_READ_STATUS_ECC_READ_FAIL]);
++	printf("  Suspictious blocks:     %d\n", stat[NAND_READ_STATUS_BITFLIP_ABOVE_MAX] +
++						 stat[NAND_READ_STATUS_BITFLIP_MISMATCH]);
++	return CMD_RET_SUCCESS;
 +
-+	return ret;
++test_error:
++	put_mtd_device(mtd);
++	return CMD_RET_FAILURE;
 +}
 +#endif
 +
  static int do_mtd_bad(struct cmd_tbl *cmdtp, int flag, int argc,
  		      char *const argv[])
  {
-@@ -847,6 +1036,9 @@ U_BOOT_LONGHELP(mtd,
+@@ -1039,6 +1233,9 @@ U_BOOT_LONGHELP(mtd,
  #endif
- #if CONFIG_IS_ENABLED(CMD_MTD_MARKBAD)
- 	"mtd markbad                           <name>         <off> [<off> ...]\n"
+ #if CONFIG_IS_ENABLED(CMD_MTD_NAND_WRITE_TEST)
+ 	"mtd nand_write_test                   <name>        [<off> [<size>]]\n"
 +#endif
-+#if CONFIG_IS_ENABLED(CMD_MTD_NAND_WRITE_TEST)
-+	"mtd nand_write_test                   <name>        [<off> [<size>]]\n"
++#if CONFIG_IS_ENABLED(CMD_MTD_NAND_READ_TEST)
++	"mtd nand_read_test                    <name>\n"
  #endif
  	"\n"
  	"With:\n"
-@@ -884,6 +1076,11 @@ U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
- #if CONFIG_IS_ENABLED(CMD_MTD_MARKBAD)
- 		U_BOOT_SUBCMD_MKENT_COMPLETE(markbad, 20, 0, do_mtd_markbad,
+@@ -1081,6 +1278,11 @@ U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
+ 		U_BOOT_SUBCMD_MKENT_COMPLETE(nand_write_test, 4, 0,
+ 					     do_nand_write_test,
  					     mtd_name_complete),
 +#endif
-+#if CONFIG_IS_ENABLED(CMD_MTD_NAND_WRITE_TEST)
-+		U_BOOT_SUBCMD_MKENT_COMPLETE(nand_write_test, 4, 0,
-+					     do_nand_write_test,
++#if CONFIG_IS_ENABLED(CMD_MTD_NAND_READ_TEST)
++		U_BOOT_SUBCMD_MKENT_COMPLETE(nand_read_test, 2, 0,
++					     do_mtd_nand_read_test,
 +					     mtd_name_complete),
  #endif
  		U_BOOT_SUBCMD_MKENT_COMPLETE(bad, 2, 1, do_mtd_bad,
