@@ -4,46 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE92CAC5A5
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 09:56:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E93C9CAC5B3
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 11:37:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6F4882998;
-	Wed, 24 Sep 2025 11:56:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CB8E80B9B;
+	Wed, 24 Sep 2025 13:37:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rK6QmW1A";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F3E183445; Wed, 24 Sep 2025 11:56:35 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id BAB6680B9B
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 11:56:32 +0200 (CEST)
+ id 54C9C82998; Wed, 24 Sep 2025 13:37:49 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F2BC80107
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 13:37:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A617C106F;
- Wed, 24 Sep 2025 02:56:23 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E5EB83F66E;
- Wed, 24 Sep 2025 02:56:30 -0700 (PDT)
-Date: Wed, 24 Sep 2025 10:56:27 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Peter Robinson <pbrobinson@gmail.com>, "linux-sunxi@lists.linux.dev"
- <linux-sunxi@lists.linux.dev>
-Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] Allwinner: fix booting on a number of devices
-Message-ID: <20250924105627.27b32035@donnerap.manchester.arm.com>
-In-Reply-To: <CALeDE9NQq+7yxEQ3v6KB=2OK58+MC-923nPr1tbxaw0vEcfMAA@mail.gmail.com>
-References: <20250827075017.1583168-1-pbrobinson@gmail.com>
- <20250829153124.55f35ac6@minigeek.lan>
- <CALeDE9NQq+7yxEQ3v6KB=2OK58+MC-923nPr1tbxaw0vEcfMAA@mail.gmail.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58OBbXFP1688860;
+ Wed, 24 Sep 2025 06:37:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758713853;
+ bh=jJtELfHIpObUMtBGCLGNR7ioGcmFzoreCyRVYm+AUzI=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=rK6QmW1AVr3JuiHMkajYQgiC0mZ4AMQOXLHxUa2/7lCACLEKbCfGm22UBxZdLfJxC
+ nabaDDiwdMBFZqMXsOobjLD08wU/EevMOCYvrBW1BRQ/wL/ZKWkRCQktn5nEeJiL7m
+ VBuzgtsMO/nlhgvVBTqIctAQC6opeTWN1rTwJQUI=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58OBbXkY2723586
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 24 Sep 2025 06:37:33 -0500
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 24
+ Sep 2025 06:37:33 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 24 Sep 2025 06:37:33 -0500
+Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58OBbXYb1939718;
+ Wed, 24 Sep 2025 06:37:33 -0500
+Date: Wed, 24 Sep 2025 06:37:33 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Aristo Chen <jj251510319013@gmail.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <al.kochet@gmail.com>,
+ <paul.henrys_ext@softathome.com>, <bb@ti.com>, <y.moog@phytec.de>,
+ <w.egorov@phytec.de>, <francesco.dolcini@toradex.com>,
+ <ggiordano@phytec.com>, <n-francis@ti.com>, <afd@ti.com>,
+ <d.schultz@phytec.de>, <d-gole@ti.com>, <ravi@prevas.dk>,
+ <carlos.lopezr4096@gmail.com>, <quentin.schulz@cherry.de>,
+ <alice.guo@nxp.com>, Aristo Chen <aristo.chen@canonical.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+Message-ID: <20250924113733.uz6hozszbuynemtc@giddy>
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250914110021.4103-1-aristo.chen@canonical.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,76 +85,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 29 Aug 2025 16:13:51 +0100
-Peter Robinson <pbrobinson@gmail.com> wrote:
-
-Hi,
-
-> > > Revert "sunxi: enable MMU_PGPROT proper page table protection"
-> > >
-> > > This reverts commit 16cfccda4dbf0b53473b8212897f5c63bfbeb6e1.
-> > >
-> > > This causes the follow issue on the A64 boards I have including
-> > > Pine64+, Pine64-LTS and the Pinephone. Revert until the issue
-> > > can be properly investigated.
-> > >
-> > > CPU:   Allwinner A64 (SUN50I)
-> > > Model: Pine64+
-> > > DRAM:  2 GiB
-> > > Insufficient RAM for page table: 0x5000 > 0x4000. Please increase the size in get_page_table_size()  
-> >
-> > Mmh, how did you get this? I just ran mainline on a Pine64-LTS, and
-> > didn't see any issues. Are you running on some specific setup? I am on
-> > GCC 11.2.0, TF-A is some v2.12.0-724-gf745e004a, and that's with
-> > pine64-lts_defconfig.  
+On 10:59-20250914, Aristo Chen wrote:
+> This patch series enhances FIT image robustness by adding **memory
+> region overlap detection** to `mkimage` and fixing existing overlaps
+> in DTS files and `binman` tests.
 > 
-> Fedora 42/43, gcc 15.2, binutils 2.44, TF-A 2.13.
+> The primary goal is to prevent runtime memory corruption from
+> conflicting load addresses in FIT images.
 > 
-> I've seen it across Pine64+, Pine64-LTS and Pinephone.
+> Key Changes:
 > 
-> No special setup and I reproduced in on the vanilla upstream checkout
-> from a couple of days ago when I had the time to do the bisect.
-
-So I tried this with some gcc 15.2 from kernel.org, binutils is at 2.45
-there. That worked just fine for me. So can you send me the generated ELF
-files (u-boot and spl/u-boot-spl), from some upstream commit that breaks
-for you? And also the final u-boot-sunxi-with-spl.bin? Either for the
-Pine64+ or LTS. Could be privately, no need to spam the list. I would then
-try to build something as close as possible to that, and compare the ELF
-files to mine, to spot any differences.
-
-Cheers,
-Andre
-
-> > > resetting ...
-> > > System reset not supported on this platform
-> > >
-> > > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
-> > > ---
-> > >  arch/arm/Kconfig | 1 -
-> > >  1 file changed, 1 deletion(-)
-> > >
-> > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > > index 40368abc297..b8be270e4d7 100644
-> > > --- a/arch/arm/Kconfig
-> > > +++ b/arch/arm/Kconfig
-> > > @@ -1207,7 +1207,6 @@ config ARCH_SUNXI
-> > >       select DM_SPI_FLASH if SPI && MTD
-> > >       select DM_KEYBOARD
-> > >       select DM_SERIAL
-> > > -     select MMU_PGPROT if ARM64  
-> >
-> > Regardless that's quite a sledgehammer. If that's a real issue, we
-> > could surely provide our own get_page_table_size() implementation which
-> > is more generous?  
+> 1.  `mkimage` Overlap Detection: A new validation in
+>     `tools/fit_image.c` checks for overlapping load addresses
+>     within FIT configurations. `mkimage` now errors out with 
+>     detailed info on conflicts, preventing bad FIT image creation.
 > 
-> You commit that reverts says "This might trigger runtime exceptions in
-> misbehaving drivers, which should then be fixed." which shows that it
-> might cause a problem, and I agree that any drivers should be fixed,
-> but the above output tells me absolutely nothing about even where to
-> begin to look so to use your sledgehammer analogy, if I knew whether I
-> needed a ball-peen hammer or a claw hammer I could but I am basically
-> blind and with my testing the sledge hammer solves the problem.
+> 2.  New Test Case: A Python test verifies the new detection.
+>     It intentionally creates an overlap (kernel and FDT)
+>     to confirm correct error handling.
 > 
-> Peter
+> 3.  Fixes for Existing Overlaps:
+>     * Board DTS (k3-am6xx): Adjusted load addresses for TI
+>       firmware stubs to prevent conflicts. This resolves
+>       previously undetected overlaps.
+>     * `binman` Tests: Fixed several tests. U-Boot load
+>       addresses were shifted to avoid ATF conflicts. A new
+>       linker script for TEE ELF sections ensures distinct
+>       memory layouts.
+> 
+> 4.  Documentation: Added guidance for developers on how to
+>     determine ELF load addresses using readelf, linker scripts,
+>     and objdump when working with binman FIT images.
+> 
+> Impact:
+> 
+> This series improves FIT image reliability by catching overlaps
+> at build time, helping developers resolve issues before runtime
+> failures.
+> 
+> ### Changes in v2:
+> - Fixed typo in test case name (testFitSignNoSignatureNodes)
+> - Added fixes for additional k3-am642 DTS files
+> - Added comprehensive documentation for ELF load address determination
+> - Enhanced copyright notice in elf_sections_tee.lds
+> 
+> Aristo Chen (7):
+>   binman: Fix typo for the test case name
+>   binman: Fix FIT image overlap issues
+>   binman: Fix FIT image overlap issues for testFitSplitElf
+>   arm: dts: k3-am6xx: Fix FIT image memory overlap in binman
+>     configurations
+>   tools: mkimage: detect overlapping load regions in FIT configurations
+>   test: Add test case for FIT image load address overlap detection
+>   doc: binman: Add guidance for determining ELF load addresses
+> 
+>  arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 22 ++---
+>  arch/arm/dts/k3-am625-sk-binman.dtsi          | 16 ++--
+>  .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 16 ++--
+>  arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 10 +--
+>  arch/arm/dts/k3-am62a-sk-binman.dtsi          |  4 +-
+>  arch/arm/dts/k3-am642-phycore-som-binman.dtsi |  6 +-
+>  test/py/tests/test_fit_mkimage_validate.py    | 65 ++++++++++++++
+>  tools/binman/entries.rst                      | 18 ++++
+>  tools/binman/ftest.py                         |  4 +-
+>  .../test/276_fit_firmware_loadables.dts       |  4 +-
+>  tools/binman/test/340_fit_signature.dts       |  4 +-
+>  tools/binman/test/342_fit_signature.dts       |  4 +-
+>  tools/binman/test/Makefile                    |  6 +-
+>  tools/binman/test/elf_sections_tee.c          |  1 +
+>  tools/binman/test/elf_sections_tee.lds        | 32 +++++++
+>  tools/fit_image.c                             | 90 ++++++++++++++++++-
+>  tools/mkimage.c                               |  3 +-
+>  17 files changed, 257 insertions(+), 48 deletions(-)
+>  create mode 120000 tools/binman/test/elf_sections_tee.c
+>  create mode 100644 tools/binman/test/elf_sections_tee.lds
+> 
+> -- 
+> 2.43.0
+> 
 
+Looks like i see a build regression in linux-next after this series.
+
+https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
+
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+https://ti.com/opensource
