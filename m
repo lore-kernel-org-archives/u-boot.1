@@ -4,74 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BE84CAC5A7
-	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 09:09:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE92CAC5A5
+	for <u-boot@archiver.kernel.org>; Wed, 24 Sep 2025 09:56:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94A1880B9B;
-	Wed, 24 Sep 2025 11:09:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
+	by phobos.denx.de (Postfix) with ESMTP id E6F4882998;
+	Wed, 24 Sep 2025 11:56:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="ELJz2cw8";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D814C833E9; Wed, 24 Sep 2025 11:09:35 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D401C80107
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 11:09:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=googlemail.com
+ id 3F3E183445; Wed, 24 Sep 2025 11:56:35 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id BAB6680B9B
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 11:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yegorslists@googlemail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-36a6a39752bso34322281fa.0
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 02:09:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1758704970; x=1759309770; darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=m1TyA5zYcSjMjLYAvbSEd0p6kyG5NibiIUQWtTcKTfw=;
- b=ELJz2cw8cj7cygs3GVNhC9WC5MER3WAMjLaTd4GF51qxBTry0gzhtL6pmIs/uPf2an
- 08m5PxSGnsgKI0iAG8i9YXpP1b/6SSB4hazLQqVJe+I3Wdb2mqQEq/jKDdOI+L1vF85/
- HkcDCHRCGbek53N2xNNJTmM0V8MUoXOtK1xjtNJyYxSqdnw9k6SIuY/5dLmsUWKo1W1A
- uSnEPFVbBd0qPtkMamjSo9pibtJyh75/tNhiJvV85/I7rc4ulSa7eGhA0hssNo6tdM6I
- U6muzvpes6OqueVG5HustvzYNETEAFQZomSXEVJX7o/6aT0JcJ7N2fnYbxi++yj0cyIG
- vR+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758704970; x=1759309770;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=m1TyA5zYcSjMjLYAvbSEd0p6kyG5NibiIUQWtTcKTfw=;
- b=iX/gLdCV3YlTCyLnTJtHoaaUxaRRRHde7Zqqy9rVQ6IHTEcjqegVYdfimdW4EdAKgD
- lmLtk/DcrP68sf5SO2JuMNByP8QPZr0ZGEqNVygJEZ5C3pf2OiTG4gegooN3DHCg0ywD
- 49rzf30FfFa4oFiagSm7OHrKcDLdgqqiN/VthEryf/1ShHD8uYyXIqyhlLqgF2+JwFGW
- Mll0A6Sg/gwzW54WKFDalQS5bRe7vo0CwAA9M7/9jnvhMJzNgaAmDRsNmbfglay5LMsd
- X41HBHzx68ZQJS3g9HKRmuxqOkVgsbXsOzNgKrPX4UFJFGzXcU17Teb0OsuVv1sDNaJV
- LoCA==
-X-Gm-Message-State: AOJu0Yxm4Li9gLlTHaDbAtSFHl0AJHY1eEMNEYAo+SbYCew0GBsl9zqS
- 8O+MEVrFMien5cL5CvMhSCYgxXVnbe8hggV9Q9ASWqQ8srsJO+BcMDqF78otOlh6KS52pBpAVnI
- 6NxlDogf/xtxDAAGCrO4WUuSRublDyCzd7EkO
-X-Gm-Gg: ASbGncu4a5ilb/F2W+o1/asdTrCzPK5VmDpMD/zzBY49J2mIxHvrwakXar3W2Sl/aw8
- 9/usnC0XAtoETzL9JwGlCMFHEBTP8ICfBslkiFV37R5juFcX3W/UagqnwVdBz1R8K2Az6ridqa7
- ZdA4fzyyf7WpvKeXGwu2CfP1iLKASKHfM/MHGTr61CRoonUP7fbIi2DSaSOeRBet+AJ9f9oNAv7
- QGlrPF3
-X-Google-Smtp-Source: AGHT+IGHYbm+UYwSJyulmXsNV2ad7wNg6q355F80ToV6/+9ldYmp5UWv4sDCN3i0KHBIz7I8DqAn/M11YzdbY9kHG6s=
-X-Received: by 2002:a05:651c:1991:b0:36d:5c6d:fd57 with SMTP id
- 38308e7fff4ca-36d5c6e0176mr17604531fa.32.1758704970073; Wed, 24 Sep 2025
- 02:09:30 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A617C106F;
+ Wed, 24 Sep 2025 02:56:23 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E5EB83F66E;
+ Wed, 24 Sep 2025 02:56:30 -0700 (PDT)
+Date: Wed, 24 Sep 2025 10:56:27 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Peter Robinson <pbrobinson@gmail.com>, "linux-sunxi@lists.linux.dev"
+ <linux-sunxi@lists.linux.dev>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] Allwinner: fix booting on a number of devices
+Message-ID: <20250924105627.27b32035@donnerap.manchester.arm.com>
+In-Reply-To: <CALeDE9NQq+7yxEQ3v6KB=2OK58+MC-923nPr1tbxaw0vEcfMAA@mail.gmail.com>
+References: <20250827075017.1583168-1-pbrobinson@gmail.com>
+ <20250829153124.55f35ac6@minigeek.lan>
+ <CALeDE9NQq+7yxEQ3v6KB=2OK58+MC-923nPr1tbxaw0vEcfMAA@mail.gmail.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-From: Yegor Yefremov <yegorslists@googlemail.com>
-Date: Wed, 24 Sep 2025 11:09:16 +0200
-X-Gm-Features: AS18NWBMjvOV8Q56uY9-_2d27rICA2_r2Eo5b-GAw5obdihw47i1zdjVDxJKO5c
-Message-ID: <CAGm1_ktPcqpCzy=B=_n1fZS5dZVCB208qt8CTgBJak=V0xfgEQ@mail.gmail.com>
-Subject: am335x: NAND boot problem using the legacy u-boot.img
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: seanga2@gmail.com, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,31 +60,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HI all,
+On Fri, 29 Aug 2025 16:13:51 +0100
+Peter Robinson <pbrobinson@gmail.com> wrote:
 
-trying to boot using the latest master, I get the following error:
+Hi,
 
-U-Boot SPL 2025.10-rc4 (Sep 23 2025 - 16:45:07 +0200)
-Trying to boot from NAND
-Error: -5
-SPL: failed to boot from all boot devices (err=-5)
-### ERROR ### Please RESET the board ###
+> > > Revert "sunxi: enable MMU_PGPROT proper page table protection"
+> > >
+> > > This reverts commit 16cfccda4dbf0b53473b8212897f5c63bfbeb6e1.
+> > >
+> > > This causes the follow issue on the A64 boards I have including
+> > > Pine64+, Pine64-LTS and the Pinephone. Revert until the issue
+> > > can be properly investigated.
+> > >
+> > > CPU:   Allwinner A64 (SUN50I)
+> > > Model: Pine64+
+> > > DRAM:  2 GiB
+> > > Insufficient RAM for page table: 0x5000 > 0x4000. Please increase the size in get_page_table_size()  
+> >
+> > Mmh, how did you get this? I just ran mainline on a Pine64-LTS, and
+> > didn't see any issues. Are you running on some specific setup? I am on
+> > GCC 11.2.0, TF-A is some v2.12.0-724-gf745e004a, and that's with
+> > pine64-lts_defconfig.  
+> 
+> Fedora 42/43, gcc 15.2, binutils 2.44, TF-A 2.13.
+> 
+> I've seen it across Pine64+, Pine64-LTS and Pinephone.
+> 
+> No special setup and I reproduced in on the vanilla upstream checkout
+> from a couple of days ago when I had the time to do the bisect.
 
-It turns out that bl_len will be set to 0 in spl_nand_read():
+So I tried this with some gcc 15.2 from kernel.org, binutils is at 2.45
+there. That worked just fine for me. So can you send me the generated ELF
+files (u-boot and spl/u-boot-spl), from some upstream commit that breaks
+for you? And also the final u-boot-sunxi-with-spl.bin? Either for the
+Pine64+ or LTS. Could be privately, no need to spam the list. I would then
+try to build something as close as possible to that, and compare the ELF
+files to mine, to spot any differences.
 
-spl_set_bl_len(load, nand_page_size());
+Cheers,
+Andre
 
-This sets the aligned image size to 0 in _spl_load():
+> > > resetting ...
+> > > System reset not supported on this platform
+> > >
+> > > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> > > ---
+> > >  arch/arm/Kconfig | 1 -
+> > >  1 file changed, 1 deletion(-)
+> > >
+> > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > > index 40368abc297..b8be270e4d7 100644
+> > > --- a/arch/arm/Kconfig
+> > > +++ b/arch/arm/Kconfig
+> > > @@ -1207,7 +1207,6 @@ config ARCH_SUNXI
+> > >       select DM_SPI_FLASH if SPI && MTD
+> > >       select DM_KEYBOARD
+> > >       select DM_SERIAL
+> > > -     select MMU_PGPROT if ARM64  
+> >
+> > Regardless that's quite a sledgehammer. If that's a real issue, we
+> > could surely provide our own get_page_table_size() implementation which
+> > is more generous?  
+> 
+> You commit that reverts says "This might trigger runtime exceptions in
+> misbehaving drivers, which should then be fixed." which shows that it
+> might cause a problem, and I agree that any drivers should be fixed,
+> but the above output tells me absolutely nothing about even where to
+> begin to look so to use your sledgehammer analogy, if I knew whether I
+> needed a ball-peen hammer or a claw hammer I could but I am basically
+> blind and with my testing the sledge hammer solves the problem.
+> 
+> Peter
 
-size = ALIGN(spl_image->size + overhead, spl_get_bl_len(info));
-
-Looks like FIT images with full FIT support will be also affected:
-
-                       read = info->read(info, offset,
-                                           ALIGN(size, spl_get_bl_len(info)),
-                                            buf);
-
-If I manually set bl_len to 1, I can boot without an issue. What am I missing?
-
-Best regards,
-Yegor
