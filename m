@@ -4,93 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25F7DCAC5B1
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:18:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A66CAC5A7
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:21:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A648980107;
-	Thu, 25 Sep 2025 16:18:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF6498206E;
+	Thu, 25 Sep 2025 16:21:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CRpsNCi5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AYJw8h/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E8A5809A5; Thu, 25 Sep 2025 16:18:56 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 5660A82998; Thu, 25 Sep 2025 16:21:22 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CAB0800D7
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:18:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3648580107
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:21:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-30cce892b7dso669881fac.1
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:18:54 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-74ed00220f6so426312a34.2
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:21:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758809933; x=1759414733; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758810079; x=1759414879; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4Mj6H7zX7T6rbhN8mWbnjoD2VETQ82G0hcDBOrFuBAE=;
- b=CRpsNCi5AV/1g+EGWI6qZfVkUixT7kwgcyhxa72N5iqNsnSfpLWmG2jW/jFNiO3H8w
- UMKLp8rrLq50g5V0WnZZ5S8D+C0f0IsWiVjfdj1tMVo0BgJ54DkNVoUXM7EiXmjaschF
- GHnu8vAhf8DlTVpSobIiAkjq8bQVyqMv0JMG4=
+ bh=UUDiZxGzSfcYDtcVTAk3hG0lu1bXVruTlHNln8JEqdo=;
+ b=AYJw8h/X4MhAAtIF9mG/lrwq5t73umxE8lRBwk+SdD3Jz+XQGLESvG5MISXv4LSH9q
+ TKiHS8g779ojl2u93bOYTi2IJV/hgk/Cxwti/lPktNEvJ9uv0dUofJD7pXIUo37RaESZ
+ iPLzccNqrgt1l2RlAV5mEgwllAvJ1EtCwweqQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758809933; x=1759414733;
+ d=1e100.net; s=20230601; t=1758810079; x=1759414879;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4Mj6H7zX7T6rbhN8mWbnjoD2VETQ82G0hcDBOrFuBAE=;
- b=Rfi2kJvWeV0tMQSMFvbrAY8LGms/oxlo/PwocSJe7oHq4C1DeKWJNdIYViTGjaA6Gs
- WbYToKLLA0Yv8L4Ny6kSpo+6sM+obAQ0wGLEOJgsICIM++3HuGUobNtVydWPbOhl6ckX
- QPxdxViYICFGaH2qL+nw/SI16Gqrj5RyJpPEekXXyWe5qla/5TmmT8nRMmXK6wSM2B/Q
- rBoE5p72bWvoBut6i4PsaVt2mPDAsEkKz3tqdQJSQ861bsDqwMcH+oA+XrBfjGhLBAXb
- NwwdFIfZ1/MFyrZI7AcJkOoy7iWm1K3Z5OTIyk4E7prJJ5s/XuxEbuk7izQ8p2ukT96O
- QzXA==
-X-Gm-Message-State: AOJu0Yx6kWFuSK6X2HKkfI0hUpuOxhht2Y9sNmyIFScAjZdFRe6SYtfj
- 3Onj2jOYsP0tH57mMfXglm+LVP/EPVJ5tsazMIPVopt4wanw4IMId4CGx1diFXIwSHA=
-X-Gm-Gg: ASbGncsrfRihl+GuXe2xmXGaqrwEmAC9GtAxmKyTd/tdwSr02U1cWEr6ZgXHxmYCpCl
- C/zjNdc3xJsgYfEDQxbsMJPwlEo8+sjux0QvuoeJapLfB/lVinHrZfPch9TsljT56Q0oKJT2JEm
- ZbrXDex09NPTBy6npdALwiYsABH8a1/tQ40sS5SKNSkmnvEtRrNMFL4RAq2t5dFAJIbUJKf9KH9
- n9NgRzazUrAEqVCjwR2ASqpbO2+bL9YQgFfSwIyVx0MPPu9JBuC1XAz2VF/K6b+GcK5NlTZytyw
- 9seH/kVNK3Z0IPlJK9YMp+MeuhRmH/0AJgwDqLdvZoV5UNxELM7l7eiq9taMubADGd5+f5bx3mT
- I/guOnH0TI+a2mCuQnRvd3mTTkx56/AeINZcfZOcpxJWoEig7pq4LnS89
-X-Google-Smtp-Source: AGHT+IGq5be/fDcpDnwed3TQD3XXTyEM5aA71wrMH8xgWzp4qo6rUqd+UwnkfZl2r9t0Nq40g5LDcA==
-X-Received: by 2002:a05:6871:341f:b0:315:7fe7:40a9 with SMTP id
- 586e51a60fabf-35ee8f14026mr2063429fac.29.1758809932921; 
- Thu, 25 Sep 2025 07:18:52 -0700 (PDT)
+ bh=UUDiZxGzSfcYDtcVTAk3hG0lu1bXVruTlHNln8JEqdo=;
+ b=v8WN7RmdfJYGvz5KUSq++r/3ey21m5M7U9vqUPaGW8YPZXHlETZknTiKDOBWGoSZlZ
+ 3KgfoX6nzBYjESCOuzQ/whrRspz7jFNujCHmGgp4R/bxUjGXeYfK57N0oXU53Ft+9L6A
+ qugMbRSjIM+3w9AEowa4CDs4u9EpwWC1IdBtCuU+cLjQItYNX3hy2sGNUSgk7CFKqa9t
+ l0emrxCGAx4vlJ4maWYO1OHCZGNcDYktAGOKgPdwnct2NEso6kGgkvj+aFJz190WR3To
+ swY4fWIRQTu3X7Gh5PjJeE8kjkHGgwjo8IXdzD10//qImrTkTaJVoGjHj9q9JLdJDjaX
+ DFgQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXUsovAEiUGOLguaVwfSvovZaaZ334HS67hGjsWil8G1n8pKIqwBwYPK7+haMjEs66liuxOg5M=@lists.denx.de
+X-Gm-Message-State: AOJu0YwaMuwAipR3v9rXfQNsGCEFq5HmcOiLeXss0Ms07QD/E9UrkZXu
+ 2Hc97Nvt14tFP1yb61725yQnAMUVY4/fIrX0eUxXtNLxbEOumzaECoo8o+hIfEyPbkE=
+X-Gm-Gg: ASbGncv6Pa3fz/iKcXDdy1CiZIxiSAgjka3ExC0pztfjHxqM/K8mXvRKJunkxCi8o4G
+ YYkSfoXZhcPtLXhG9ZpMom//uiO+g11SByHi3EC6uhKr4zfY0WTD22+Hu6KxNJeFY75d1UkO37S
+ 2iurn8SGh47048mP6BoPb9pkVfVSS2htXbKXbUKcs9aJVh9fdQvGJIR48blOl4vvSgMlta6AyEY
+ oc1E7PjaVnThG7q59XntlKFZSVNkqBL9adQPav0gHHhkSG+cSqJmDphjTPM30kY42uEIt6Q4Qf0
+ Z5b1Fjx89UaplK2KmtjJH+hwHbX7s5ZlLmzkLkPK+c7HiupnTw4c52m3dpnl4zpMkLr3KwP4UOL
+ HzyLdOhcSHMUimVN9Cn/DAG9kz/b3MbwATSV/dKdu7cHzeTA6tas+YnHm
+X-Google-Smtp-Source: AGHT+IFWzs4VhXgqIFGpGOy0zPh5BbWVzTl3eTqN5nWoeYj281Y9TWZg90V3oV3YFc57tlkchiCVgw==
+X-Received: by 2002:a05:6808:3a0f:b0:439:8e9:637c with SMTP id
+ 5614622812f47-43f4cf5adbamr1542241b6e.25.1758810078825; 
+ Thu, 25 Sep 2025 07:21:18 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a233315ea9sm431073a34.11.2025.09.25.07.18.50
+ 586e51a60fabf-363b2ad67d5sm583438fac.24.2025.09.25.07.21.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 07:18:51 -0700 (PDT)
-Date: Thu, 25 Sep 2025 08:18:49 -0600
+ Thu, 25 Sep 2025 07:21:18 -0700 (PDT)
+Date: Thu, 25 Sep 2025 08:21:15 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Ezra Buehler <ezra.buehler@husqvarnagroup.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>,
- Peter Robinson <pbrobinson@gmail.com>, Stefan Roese <sr@denx.de>,
- Thomas Chou <thomas@wytron.com.tw>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: Re: [PATCH v7 2/5] bootstd: select BLK rather than depending on it
-Message-ID: <20250925141849.GM197373@bill-the-cat>
-References: <20250925002308.2825164-1-sjg@u-boot.org>
- <20250925002308.2825164-3-sjg@u-boot.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Carlos =?iso-8859-1?Q?L=F3pez?= <carlos.lopezr4096@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] Revert "tools: mkimage: detect overlapping load regions
+ in FIT configurations"
+Message-ID: <20250925142115.GN197373@bill-the-cat>
+References: <20250925134212.59709-1-marek.vasut+renesas@mailbox.org>
+ <20250925140802.GL197373@bill-the-cat>
+ <7fdf6e61-0b05-4ee3-96bd-abf9aa7ed737@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0UhDLv8TKKpXqCuM"
+ protocol="application/pgp-signature"; boundary="aVt48+A+Zt83OPyH"
 Content-Disposition: inline
-In-Reply-To: <20250925002308.2825164-3-sjg@u-boot.org>
+In-Reply-To: <7fdf6e61-0b05-4ee3-96bd-abf9aa7ed737@mailbox.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -109,56 +105,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---0UhDLv8TKKpXqCuM
+--aVt48+A+Zt83OPyH
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 24, 2025 at 06:23:01PM -0600, Simon Glass wrote:
+On Thu, Sep 25, 2025 at 04:13:52PM +0200, Marek Vasut wrote:
+> On 9/25/25 4:08 PM, Tom Rini wrote:
+> > On Thu, Sep 25, 2025 at 03:41:43PM +0200, Marek Vasut wrote:
+> >=20
+> > > This reverts commit 588094f2c8ec9a4f7d2dcda11ffae8db8462149c.
+> > >=20
+> > > This introduces warnings on valid fitImages which do not set load
+> > > address for fdt-1 DT node. This is valid, because DT can be loaded
+> > > to suitable location as determined by the fitImage loader.
+> > >=20
+> > > Warning: not able to get `load` of node 'fdt-1'
+> > >=20
+> > > Furthermore, do not add C++ style comments into C code.
+> > >=20
+> > > Either send a fix or apply this revert.
+> > >=20
+> > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> >=20
+> > Sorry you hit this during the window before I reverted the series.
+> Just keeping my bootloader up to date ... :)
 
-> From: Simon Glass <sjg@chromium.org>
->=20
-> With recent changes to how BLK works, we must use 'select' to enable the
-> BLK feature, which is currently required by BOOTSTD.
->=20
-> This fixes the following error:
->=20
->     GEN     Makefile
->   scripts/kconfig/conf  --syncconfig Kconfig
->   boot/Kconfig:496:error: recursive dependency detected!
->   boot/Kconfig:496:	symbol BOOTSTD_DEFAULTS depends on BOOTSTD
->   boot/Kconfig:441:	symbol BOOTSTD default is visible depending on BLK
->   drivers/block/Kconfig:1:	symbol BLK is selected by USB
->   drivers/usb/Kconfig:1:	symbol USB is selected by BOOTSTD_DEFAULTS
->=20
-> Disable BOOTSTD for the boards which don't have enough space or some
-> other problem:
->=20
->   zynq_cse_nand
->   zynq_cse_nor
->   zynq_cse_qspi
->   gardena-smart-gateway-mt7688
->   10m50
->   3c120
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-This is the wrong direction. Please instead get the dependencies correct
-in the next patch. You're likely missing some conditionals on the
-selects you add as bootstd does not depend on BLK.
+I do in fact appreciate that I pushed the series my afternoon and woke
+up to (well, I saw the first revert request before going to bed, but
+it's the next branch and not hours before a release :)) several problem
+reports. Prompt testing and reporting really is great.
 
 --=20
 Tom
 
---0UhDLv8TKKpXqCuM
+--aVt48+A+Zt83OPyH
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNVPRQAKCRAr4qD1Cr/k
-CrUtAQCWy/Z4UIE2vuJOUO+dAkWVWKEqa2ewSjlYItXOdBgLrAEA2bVITfR5AIuN
-oQyywE90ysRtCeysn3vhZbw+s/dtJg0=
-=C2Ec
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNVP2wAKCRAr4qD1Cr/k
+CpxqAP9l+KpCm07A3st03SKTXt/iOnxDHR1XdpllG0fJs7xNEQEAkEm3axgMwcPt
+H745cwEW/Mavi2/KPcm0sGhMVSdX9Q4=
+=DxcK
 -----END PGP SIGNATURE-----
 
---0UhDLv8TKKpXqCuM--
+--aVt48+A+Zt83OPyH--
