@@ -4,45 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FFD3CAC5AE
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 02:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26AB0CAC5AE
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 02:38:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B23E83631;
-	Thu, 25 Sep 2025 04:07:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 631D883678;
+	Thu, 25 Sep 2025 04:38:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="hY+MCvAT";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40B5D83666; Thu, 25 Sep 2025 04:07:30 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ id 12A8C8368E; Thu, 25 Sep 2025 04:38:44 +0200 (CEST)
+Received: from BYAPR05CU005.outbound.protection.outlook.com
+ (mail-westusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c000::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06D1F835CB
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 04:07:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D977B80819
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 04:38:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [143.105.119.198])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 22BE1B220962;
- Thu, 25 Sep 2025 04:07:24 +0200 (CEST)
-Message-ID: <1871663e-b918-4351-9e9e-97f9a4c73733@freeshell.de>
-Date: Wed, 24 Sep 2025 19:07:22 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [GIT,PULL] u-boot-riscv/next
-To: Tom Rini <trini@konsulko.com>, Leo Liang <ycliang@andestech.com>,
- Yao Zi <ziyao@disroot.org>
-Cc: u-boot@lists.denx.de, rick@andestech.com, randolph@andestech.com,
- hal.feng@starfivetech.com, jamie.gibbons@microchip.com,
- eoin.dickson@microchip.com, wangruikang@iscas.ac.cn,
- greentime.hu@sifive.com, Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <aM5_0WpehgnK8wH-@swlinux02>
- <175839044541.1370912.7338002899133591795.b4-ty@konsulko.com>
+ dmarc=pass (p=reject dis=none) header.from=altera.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tien.fong.chee@altera.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=i8KSBZFKQIHD48P43tkRoCJ4ObirZBCmjA7Zoh24DOgNs1Cw5zq0kKFkWXRmtXiOKANeoB0KK8Jun7Yevbp7xutC0Jl69DEsFOdxfY8NXMQqhTGCXyd1DzZD1BPv9dqsAhVcid32oOw9sTW3vlGDE9GtczLu6KoQJTwOA9B2yoeMhVFcMa/Q2sSKrKE7N9UPk1yHTRWi8fZ+Uh4MkB12P5PGwwy/NDeALlvBingHZPBtM6nsoIK8VayS7GnyHVicO61XyTNOsB1ZcgwbYqMWkIAsRULcZc9cRabAasMK9rTZtekvzaDQap48rrmKZwBHn27lE4hYCDt0luYptsuBVw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4tSD8hv+P6IVnoyvEam6mL/uz1QaPXCsMHEeXs4182A=;
+ b=rhFTajN8LoZLmjntbVG6EwqcwiE4WzFh5hpiCfArhZBMKStLRxI+W5QdTck59EGqBz/hMp7JNDaCFpU4hYGfBsB0JuoaHjm3Z2F5VH2jjZHJ/tbRIvbmXzBzQ+6FsawkOtqXprN6ZW9rM5XlOC0Epm6dGFmI9YiysFTYs0E+NhDF6D2IbUT7kkuvV7szQqX+YbPnWxrrb7W/eIqAScyRcNRRDtPG0ge1m9HnRzp8GMgpGZtFYkMNYHMe5oH4mP4PhRXWUcKi1GgG2vhhSPpytCoMT6RTIe0N6iGuNw+0e2Hu8f3BYBP53qGTcJbeP74WbJmFNDbnudFNcX80U6T80A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
+ dkim=pass header.d=altera.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4tSD8hv+P6IVnoyvEam6mL/uz1QaPXCsMHEeXs4182A=;
+ b=hY+MCvATuQBrQx1sf4ca9GPareTEEIHN8XiBhzg51jxIiWr9cOuXaFvyEc1ifc6UMQXGkXEX5wpMT9+44bOeGMDLzegoE0wIUQl62V7jeTYPxl2ZLnY/UR1U3ua/876N7EDb+WwPeQE4lFLtuvUXWPkRD0DUobuIsD0oqe0TuJyKj6rI6b8sxL4VwJwPfjC4qjXfdRTgdDNhoHphLe1QBbMwYnSslZ0IZiHP1wjPzBHzZu2RbNtj1qTooP1S87yx4lOGxqYGJmVRF9gomP44ZEWqJsQnYPAVcDJ2cAUbU0lFMK2qPlix87iI87riV/XcBPi9mcyRStO5mkTqBtt1Gw==
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com (2603:10b6:408:295::8)
+ by SJ2PR03MB7497.namprd03.prod.outlook.com (2603:10b6:a03:566::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.10; Thu, 25 Sep
+ 2025 02:38:38 +0000
+Received: from LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5]) by LV8PR03MB8137.namprd03.prod.outlook.com
+ ([fe80::b25b:d888:f620:91f5%4]) with mapi id 15.20.9160.008; Thu, 25 Sep 2025
+ 02:38:38 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
+To: "Ravulapalli, Naresh Kumar" <naresh.kumar.ravulapalli@altera.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Marek Vasut <marek.vasut@mailbox.org>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: RE: [PATCH v4 1/4] arch: arm: dts: Enable USB3.1 for Agilex5
+Thread-Topic: [PATCH v4 1/4] arch: arm: dts: Enable USB3.1 for Agilex5
+Thread-Index: AQHcLSfY41En1u0Vj0C7rZjLpOctebSjMDMg
+Date: Thu, 25 Sep 2025 02:38:38 +0000
+Message-ID: <LV8PR03MB81372A8AA90F08FE1CDD5E25A71FA@LV8PR03MB8137.namprd03.prod.outlook.com>
+References: <20250924074911.15538-1-nareshkumar.ravulapalli@altera.com>
+ <20250924074911.15538-2-nareshkumar.ravulapalli@altera.com>
+In-Reply-To: <20250924074911.15538-2-nareshkumar.ravulapalli@altera.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <175839044541.1370912.7338002899133591795.b4-ty@konsulko.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=altera.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV8PR03MB8137:EE_|SJ2PR03MB7497:EE_
+x-ms-office365-filtering-correlation-id: b3a808a3-e57d-43c9-44ec-08ddfbdca1c0
+x-ms-exchange-atpmessageproperties: SA
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|366016|1800799024|38070700021|7053199007; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?7V93t6QJY/Etpz2pN6U5TLPdlKyrs7owajVbXaU4zN1kkkyBurJPmZSjBL/W?=
+ =?us-ascii?Q?Nac97U/2oHRm87nf0RRpVZB9FKi+ZWmHz4EQ4i346Awk6feFZ8tjJUBKLq/o?=
+ =?us-ascii?Q?HeEvcWMQgkC134G8GlCLj60u0Pu1mDqotAO/i9xZFI1q6+OwY0sboZmn0PA1?=
+ =?us-ascii?Q?a7ZjH+ly60aSxN75i6Xo/qxSK1I/SZWNRwagk4K473brPgEyEyYgmLb0CYvP?=
+ =?us-ascii?Q?5D9WrsT2VZhTEhXnfvy/NLQ2dT3w4VdGeuCm0H1jqQtcaZ49wZGakf17gLxZ?=
+ =?us-ascii?Q?bID+jMFKt4kamwWQKDScxFmSkDqFm5t5PwLYIbA1pQEh7JEAyo6/u6itAwEA?=
+ =?us-ascii?Q?JIa4viXXYo6vcFEMxRs5mW4xUIi8bQv+Hpr1Vu2GJD4q1EpceXBvS7oB2RDR?=
+ =?us-ascii?Q?kgVNDpZDE51waC/3JU6akrTqgrlaFhmoMk8yVFF/vKw6En8nohzCrKNC3xH2?=
+ =?us-ascii?Q?D6lprB7HbvrNYKcjzAqV0Qi5hyrI2IsJ1QSStjshTs0MBr6DUlm7uJV9Xgws?=
+ =?us-ascii?Q?9WJ6BX7ZKdZwI/EN957IaWTdJ8JVgm0nPk2qt3sJXMMvBjqIR5WU0LtTBZvu?=
+ =?us-ascii?Q?PIjXF3jt56pRBkaPG2m5T9jWn3EbWmDlwPNif0X/yqkgy5mXgC3+54Yi8jrK?=
+ =?us-ascii?Q?02t2cSpFnuwB0AURtkV8lsCrdm13N6gjD9Oz/FOkQsy45ZtjPzqghmZF+HPR?=
+ =?us-ascii?Q?Zuza++2hmlACVxHqseq/4BRU8ZMlI9PKyiRdjqOZ2sThnkWYt+d8hfC/Gf7A?=
+ =?us-ascii?Q?Y6Wv3sS/5xIPxkNuquOqhfBeGS951r2+Av/i0sPoZi3QW4hlEysBcG5UT6PU?=
+ =?us-ascii?Q?QQNusb6OdWySP6MN8kDV17XdlYXuAngUSWrqoP9fAVwuVs5LFQkoLBCy9gRT?=
+ =?us-ascii?Q?he6QhDSgGz+SpFg0WesoCC1KWAUJ0/fUP+TV16GeEQDmEYs6F5TroFT0js0u?=
+ =?us-ascii?Q?1XxvEnQpmDimYeb29zNxUbK8OINFQ5xPHcHhAEUWUhr3JdvxedCL1K7VadZS?=
+ =?us-ascii?Q?G/w0wB4mBFclXS9HZ4bQXQ5GzmKFcJwI/X8BtvLD/cPPwDlBB3IMaKKZ1O8u?=
+ =?us-ascii?Q?cv40GQDWJpAzaFjGismUdUYEfRzdw3W0EtgD7kGUPlLkWED8Q65lm1JyrVGQ?=
+ =?us-ascii?Q?gb/HEEZBrXHAWkYkbZQi3SGqfQIsNDeITMQp+P0T5fkAseEqVs7V1BhYWCMZ?=
+ =?us-ascii?Q?X3pX9K0VszlH/jgm9m8EWrEd9qDjQvcX8SawndgVBX7hWAiZxWVc9I9tYfrX?=
+ =?us-ascii?Q?jKTFKGTp/jWUWMIqQ53k4qarOfkv4dh6hxx5KXSQJsaqS+bhtcTWMoyx1h7E?=
+ =?us-ascii?Q?lgr1Wxebz/M0nJCOVoAT44NnbR+Mfd1Dqbk5ZwMnUo6rvF63OUWY78BIDryM?=
+ =?us-ascii?Q?nJWGARE4lb4mRJrUOAXXiTTh3HMXv7p4G7P+N3+N+xWeKMiiExxpDYenmV+W?=
+ =?us-ascii?Q?Y3cQp1Ww7EneNtgyc5bo5EbOU6MV1rbO1mbEeeacrdoLMUlYVkp35gTsKgP5?=
+ =?us-ascii?Q?QV18BywDign6kLk=3D?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:LV8PR03MB8137.namprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(38070700021)(7053199007); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?SvPxdleRaOg0kCqzfTYBq2H2yRnqwG8r/JDY2YaNnQgzE0YIfJV1XBSI9lJ6?=
+ =?us-ascii?Q?IvWybVZO1t0laR2QmnAMfQJytNhRKWbbBIcMM16KKyopvt42QdA8psA9O2u4?=
+ =?us-ascii?Q?/Svr8PbkQHtwqOUmlzqn2D93w3YS6rMlSustnKCyfzURxzbpFFGJ2AWVy59l?=
+ =?us-ascii?Q?Yr1D7vOi5FXgA7j4w/hd8wStYLWhaCvK7IoFDjqszKYeDivAzKUbF702cgtg?=
+ =?us-ascii?Q?f+zcGY2Q0M8zbLlpRxS8JHGA3aLH3wmNpZFBNKh2df9g7J1NZBMowVaijamK?=
+ =?us-ascii?Q?Ela+pDrZcuR2cyT1FTPVtU0Wf3jEsyRbAxCKK+R/KYDN/7TjN19YlJUczZI+?=
+ =?us-ascii?Q?A2eEEbhs4vSCikJpPTnxbOpaoumGk3HUGAdxPEssm95bB93L8jE0z0WWTm01?=
+ =?us-ascii?Q?FUoC5xKTjxw07IgN8+lgPzYsC+fQNvARhejETwk97k9Z5Y1p38QKCe4u7xve?=
+ =?us-ascii?Q?7t5eNVLHu5oiOPFC3IiYTvhIOP/G/N1sPnxHVQ6ukeu7J6RSA0Wh3WHrVPRH?=
+ =?us-ascii?Q?liZ4+pgpxACVntkDvykQRBub7J8+FTcza7APZQuYfxEHHMksexUZt6eH7d4z?=
+ =?us-ascii?Q?sZj0Y9VtKno4kv80xYCnYwPuHhAcZtpVGIyVi+U/sgtEwUSoT/NEMSNlUsSY?=
+ =?us-ascii?Q?AF2xgW2YUC9vDEHLd7QYk8Twk9weRDImwdJ+qTzv+FcNLQB0L8cHd4tylZKv?=
+ =?us-ascii?Q?i9o613U7ydDae+18gIbxcCdqQQicATkV1pt+k49LgJt4Lrpzoxv8lFdi8mKZ?=
+ =?us-ascii?Q?vpYF+bQIAR5ud34x/zACWiW1pidggFQBDhW7S8DWxAaPiLQWPXgRziDF/LYP?=
+ =?us-ascii?Q?XeiIh3oh1tHquFKwmSL6YB99hPKzWDeqpXOA7JNgnYN9+AkWIZxOYn1fEmU0?=
+ =?us-ascii?Q?Bz+GjP0GIvW46bCOml91OexF/qYd3kwiM2UADK0WzvqwKE/twEwfCqKqHVOz?=
+ =?us-ascii?Q?gwuMSNJi18iYJrmRfKF8hFepG/xgR76BdLHLNH0BuRI+CdvGEBXyQCNHJeM7?=
+ =?us-ascii?Q?j1/nBBpwunWRbqh22uOraCMRDj86SgPYEF/Tbx9aDkwMCLtnCoylHRySLcDt?=
+ =?us-ascii?Q?WDP6xptuAlwCY7l0XHfYXBkR50GEgcS7zaZ8TS4fCfQ3WvRxUZVIIjz8a/x9?=
+ =?us-ascii?Q?hToSfoOYQ4ZAvLTO9Xw5FYQ0d+Bz0jtiQ8AkNddUfySgMGpTmgEjuboWsMGr?=
+ =?us-ascii?Q?axOEuiFEbgVzZCJ8g8asyQ+jY6uv2lOQtzdqQaNvIcHmmSMf94hX05Lx3F/j?=
+ =?us-ascii?Q?PTXYNWHwg09Mhuz92KC7xNLfsIQQtphZgZgPI1B+CfmELWk8DgPPP7wbq41x?=
+ =?us-ascii?Q?/zHa7QXI0zru6fbaM9Jw7ay5dReAkWYDnLSNNewhJ1Cj/aoMIdagB0nPPkXt?=
+ =?us-ascii?Q?mU4IwHBJSbVZoMeH/YxWYQ+EGSyaPANeq/t0JLPHFn/nTWxQYu3CK3QnTmH0?=
+ =?us-ascii?Q?0oOskf369KWoWlMjZ4/9ZfmYLLVMsomIg9LyzQmSYHFS+LJqVPTEosM9BKB5?=
+ =?us-ascii?Q?c3HlbD0IKu5PSTGIDb3P9niwobHEv4MavAY+LtF6XFEWhlON5K/gTxni177I?=
+ =?us-ascii?Q?bEEqwkoTAnJeYk0EU7VGnn9sudHjD5QuzfftnbkL?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: altera.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR03MB8137.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3a808a3-e57d-43c9-44ec-08ddfbdca1c0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Sep 2025 02:38:38.1154 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: YblQjNGrxw/JERELJj2WYF/HhdHRF0SJy5q0dIKXQk+6KCTfGOB4zW9JGt4qByfgV97shtwuUbuHmSeymZvRMha09+5wBIgH4vwf3+NS4Ko=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR03MB7497
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,33 +165,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom, Leo, and Yao,
 
-On 9/20/25 10:47, Tom Rini wrote:
-> On Sat, 20 Sep 2025 18:20:01 +0800, Leo Liang wrote:
-> 
->> The following changes since commit a209627ed7921f40669f5c0795570d40e77e4cb7:
->>
->>   Merge patch series "board: dhelectronics: Check pointer before access in dh_get_value_from_eeprom_buffer()" (2025-09-16 16:14:30 -0600)
->>
->> are available in the Git repository at:
->>
->>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git next
->>
->> [...]
-> 
-> Merged into u-boot/next, thanks!
-> 
 
-Runtime regression for VisionFive2 SPL bisected to bad commit
-a681cfecb434 "riscv: Add a Zalrsc-only alternative for synchronization
-in start.S". Confirmed by checking out origin/next (to 44c4919e9 "test:
-Fix optee unit test") and reverting that commit a681cfecb434 only.
+> -----Original Message-----
+> From: Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
+> Sent: Wednesday, 24 September, 2025 3:49 PM
+> To: u-boot@lists.denx.de
+> Cc: Chee, Tien Fong <tien.fong.chee@altera.com>; Marek Vasut
+> <marek.vasut@mailbox.org>; Simon Goldschmidt
+> <simon.k.r.goldschmidt@gmail.com>; Tom Rini <trini@konsulko.com>;
+> Ravulapalli, Naresh Kumar <naresh.kumar.ravulapalli@altera.com>
+> Subject: [PATCH v4 1/4] arch: arm: dts: Enable USB3.1 for Agilex5
+>=20
+> USB 3.1 node is enabled for Agilex5.
+>=20
+> Signed-off-by: Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.c=
+om>
+> ---
+>  arch/arm/dts/socfpga_agilex5_socdk.dts | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/arch/arm/dts/socfpga_agilex5_socdk.dts
+> b/arch/arm/dts/socfpga_agilex5_socdk.dts
+> index 2ab143e38f8..886cc89fdb6 100644
+> --- a/arch/arm/dts/socfpga_agilex5_socdk.dts
+> +++ b/arch/arm/dts/socfpga_agilex5_socdk.dts
+> @@ -87,6 +87,10 @@
+>  	disable-over-current;
+>  };
+>=20
+> +&usb31 {
+> +	status =3D "okay";
+> +};
+> +
+>  &watchdog0 {
+>  	status =3D "okay";
+>  };
+> --
+> 2.35.3
 
-I am late to testing this, sorry about that. It would have been better
-to catch this before becoming part of a range of bisect commits that now
-have a non-functional SPL on visionfive2.
+Reviewed-by: Tien Fong Chee <tien.fong.chee@altera.com>
 
-Best regards,
-
--E
