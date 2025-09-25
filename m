@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF8F4CAC5B5
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05CF4CAC5B0
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C9EB832AD;
+	by phobos.denx.de (Postfix) with ESMTP id D206F835B9;
 	Thu, 25 Sep 2025 22:51:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h/j6mwf3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XnvG2XfA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6138B834E1; Thu, 25 Sep 2025 22:51:36 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id 4247D835BF; Thu, 25 Sep 2025 22:51:38 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FA19835B3
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:51:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30D0C833ED
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:51:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-35bdcaf79e7so1131840fac.0
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:51:33 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-746d3b0f7e5so1466990a34.2
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:51:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758833493; x=1759438293; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758833495; x=1759438295; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=rIPZ5Cc9g6zPYIrFENlD7eXObdl8uq06lk7gYo7ed/4=;
- b=h/j6mwf3rgxyXbIMCnRKTZNC4KnffaxxqVbvWwm+MU/stZb52Y154pfRqT3Eyw6ZV1
- DK84TE1o3il9Te9jG4mMNwfX2VYFzAdz17L8wB4K7fCpfRpMozF3u1mFbOMwH0oc/+Dg
- nGXey/ECA5X6nGRPVqjLU0cVuZcxNv2tWKUVo=
+ bh=j6Eo8x3BYFADI0DQq5/mr6IpofpCN6bhyJM/Ll5Qq30=;
+ b=XnvG2XfAp77XlBJIkLQ5YMEEjP1LxAyUcwajKHYzeBSNfOIwazDQE4jppRKI15uirx
+ /P31dwHokD6P+2rsxW+uB8Vetah4TjwCzpSVgimoEFguIN0ET4mFzg34HTVXvmg9cU/v
+ BphPgDDDldxTnSrfMJkjPPTgHbSCPEnchqHDY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758833493; x=1759438293;
+ d=1e100.net; s=20230601; t=1758833495; x=1759438295;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rIPZ5Cc9g6zPYIrFENlD7eXObdl8uq06lk7gYo7ed/4=;
- b=n0pXmHEIJq2UgOpNTUTWMQQKdvIHXtChYqRn1hNabqXGn21cxS+NmrqQmrZbaYAcNy
- fbQErAKpWX/oJUpct5CQRRaEQ7RcykyCkmrpaX5/EWdrxddBLM+4l/+DtCnfhuOSbBIY
- NoTA8hqR8zzLqMbMDHKdUMdYA17/lowuordYqfmPxLgSUWJ5mwXjjjTQ7PZScIcO/cbr
- gCvgmwAK2by+BEdibKJsRvC5qkxgldov8IQ+HMa8DmHOkdyFd1RBpiZZh6W1VfdSN5Vu
- Vw8pWpUFJ9NNNytXwl/nnqEAo87+3k95n4dAoUmRATQYw5DlhgxqlnG7FvkkbuUn2xcH
- gQkA==
-X-Gm-Message-State: AOJu0Yx3ENhAJ9oGkhA1jXfQcukIVhYB/AX+NLPRIcbov57wQg5OrMlX
- kSg4gqLNb+gkHJ+ikLvCnoTICRvCRPJsmtPWzK/AfHXqbxNmJivyUJbeiqV7zDVB6BCJdV7bfFp
- HOxTGyP0=
-X-Gm-Gg: ASbGncs8aqeEiNDwNj+3Kc3PeEqRa2S6Lq33EMJQUBWLWronAaKiXFtXzImWzxfpJRO
- DgctAxw8yiDfqzPf7xhF9S92vqmwGY4LgXMbnxzhK8imoEPvlzVCWgkcjystjQHVzkvFieUO8F3
- HWE8gSZQygehklPGfvkZfTjUVINq/KiAVV/AulrZ272ekTmqUnCXtuyjHPe+MjrlB81J821Stda
- UAyqTFAD3a5hEbX9UCH6Btoqd1QGM+2PDNggTxYmGfsmasjRdG8SJUgumrMr3g8DdFLD8WAPh8H
- l5mEQPoXd+7F9pieHe2NcuJIFdkCA23Za6+vlQ2fEVg53dNM8ySSIkwLGnlLGTnRT6SGXCdq0ED
- T73e7aAOpFvCDbfwT6gZ31w9WNKwCgfg/aoZjv1afc4u8VUhR3FL2AYJkDuYlVmMqVq1Y9g==
-X-Google-Smtp-Source: AGHT+IGpwtFUczrDZm4RIZw4yvF0fFAJ9FVfG9xawnEZpbLyqldaGDN8yeOUAP6nXb3Cbi51vORaYA==
-X-Received: by 2002:a05:6871:610:b0:331:15b8:807 with SMTP id
- 586e51a60fabf-35eea4720ddmr2845859fac.41.1758833492760; 
- Thu, 25 Sep 2025 13:51:32 -0700 (PDT)
+ bh=j6Eo8x3BYFADI0DQq5/mr6IpofpCN6bhyJM/Ll5Qq30=;
+ b=i2U3/jhrLKzbk1gScKQZZfQACmRQWMppcEtN9C3tce2xs2NCh56Ee/Yklfw3jSHC7c
+ 0pGhhYQUhcqauY1D3jGNNPho9kUTTE7bvTdcHLN8w/wYusnVKoG8Md9Tay9EWv6zXhFX
+ iWrMRQTcEon/bVcizFESRDARUh2i2sqtnzVHWYOTkaBrAHeIJWqqGDQ/wxlSvT1dEHB2
+ mF+f7KGJShIdnugpbXuLOeo26aC8pSFkqhiBgQOkvcvQmnXqPKqPOtrHZvsNC0qsXMa8
+ fJreVdcv1WXyTsU+rAwq0rF3XVa9ExUpSwvELuq3QEwuN2qa5lER4UoSl39/HZLg8O0v
+ fdzg==
+X-Gm-Message-State: AOJu0YyIuDvlZnxYo5fT0uuXnfdXIIER9hIiRWJezwTqCIUOomLboqm/
+ CpYjXSjkklF+OlfKV5et4FFzXH9drg4ieT5X2sA6Cs9emGbBvr3Yht6vAfjBG6wRACHfvUd2fRm
+ nwv1e9NE=
+X-Gm-Gg: ASbGnctnsBEp97LhfWH8IlrrYsSmKp/g71Gp8+3lHKg6ZkebDKIV3Xp8JtTE9NCRtsh
+ dyYdZFK5dg3NpBn9AVdyK/XrZYTBEYp4YYN0DHX5qwmNzRHH51jbMQcy9qNz50l53PmEK6QgPuN
+ z9nGXwY33LaDVdTSLQEcfTTkKbX4NdOw9yjwaK1BMdNEKTChgnob3NzDZDZWohcRpSFrMXjBD4J
+ uv4e72yoy6vhWc7JbcXwFbmIGjAQ7AghQMYpTacOWzg7pMDWQEhyUk3ZAI5cefVeUKE7bIH0x6z
+ 4MeZdu3qQs5wS0FTom20OKplZHtIHgldu9mKv1XL1CuXRCTTnsrA9Glk1GBzTRHe+ClC0407FY/
+ IX2w/MFbCj4iGX0vYlbmS7mwEypVNf0szBbUglFpvoCReo3RZYjlsqJGpxkWqg0Xgozfo4g==
+X-Google-Smtp-Source: AGHT+IFIPvxB+tvJtRuMMNLK80UGEqA4tecvvvsgnO7vDB1J0s4BoEkzMD8EseOzeVlAo86FSKJoBQ==
+X-Received: by 2002:a05:6808:188a:b0:43f:179f:9d02 with SMTP id
+ 5614622812f47-43f4cec1af6mr2360116b6e.42.1758833494997; 
+ Thu, 25 Sep 2025 13:51:34 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-363a3d461e4sm842554fac.13.2025.09.25.13.51.31
+ 46e09a7af769-7a23fa4c6afsm606081a34.29.2025.09.25.13.51.33
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 13:51:32 -0700 (PDT)
+ Thu, 25 Sep 2025 13:51:34 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] cmd: Make CMD_MP depend on the CPU framework being disabled
-Date: Thu, 25 Sep 2025 14:51:30 -0600
-Message-ID: <20250925205131.3561949-1-trini@konsulko.com>
+Subject: [PATCH] cmd: Update dependencies on CMD_IRQ
+Date: Thu, 25 Sep 2025 14:51:32 -0600
+Message-ID: <20250925205132.3561964-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,9 +91,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The CMD_MP (and cmd/mp.c) command provide a "cpu" command which is
-mutually exclusive from the "cpu" command provided by cmd/cpu.c and the
-CPU framework. Make CMD_MP depend on CPU not being enabled.
+For CMD_IRQ to function, we need enable/disable_interrupt functions as
+well as do_irqinfo functions to be defined. Only NIOS2, PowerPC and X86
+implement the latter, so correct dependencies to be opt-in not out-out
+here.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
@@ -101,18 +102,18 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 3248583b4e85..c457cc8e5c42 100644
+index c457cc8e5c42..5e5252ef1347 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -2425,7 +2425,7 @@ config CMD_SLEEP
+@@ -2997,7 +2997,7 @@ config CMD_EVENT
  
- config CMD_MP
- 	bool "support for multiprocessor commands"
--	depends on MP
-+	depends on MP && !CPU
- 	default y
+ config CMD_IRQ
+ 	bool "irq - Show information about interrupts"
+-	depends on !ARM && !MIPS && !RISCV && !SH
++	depends on NIOS2 || PPC || X86
  	help
- 	  This enables commands to bringup different processors
+ 	  This enables two commands:
+ 
 -- 
 2.43.0
 
