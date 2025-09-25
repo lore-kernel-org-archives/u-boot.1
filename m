@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C3C1CAC5AA
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 06:09:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E100CAC5B1
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 06:21:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE976835CB;
-	Thu, 25 Sep 2025 08:09:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
+	by phobos.denx.de (Postfix) with ESMTP id 27CFE836B2;
+	Thu, 25 Sep 2025 08:21:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="LjVIVs3Y";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U85QGDAE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B40628362C; Thu, 25 Sep 2025 08:09:20 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id A435F836B8; Thu, 25 Sep 2025 08:21:33 +0200 (CEST)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 941AF835C9
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 08:09:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=googlemail.com
+ by phobos.denx.de (Postfix) with ESMTPS id E698D835CB
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 08:21:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yegorslists@googlemail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-57ea78e0618so533550e87.0
- for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 23:09:18 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-ea856357c38so449253276.3
+ for <u-boot@lists.denx.de>; Wed, 24 Sep 2025 23:21:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1758780558; x=1759385358; darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H8CuGI+fm+C/E4CQ2OSVMS5JULJZp/hO69jybs9un5I=;
- b=LjVIVs3Yzl5Lm32rdL5Ilo/LtGTlFdZ12SXNX5k2vO7vBYERkHzBVQqVfW4AAm0GT7
- bDw6ofBuoV6ReAI+n2hyAF79J6zRdg0PNU8t5H7IoIA/thRIHcOcKFukg2BNiYMM0xDq
- 8F40AKcI0rsLi6XuQN3pSN8cJ9Z2/XamB1StU2xEaIGSmPwQf8x7bkjte9etDi5+Lyej
- rwjfrQmBDKP4oHZjaSZ3Y+9SqxntT8MgSL4q04M6mmM534bKAhQuUjgPBAwqUl4ecrXn
- V0G7QdUgCWTDNB/5+fHjpFcPrPbkVkL9hOvQmv4pnHe1MTAh9y3GCnw7TjibUWRtEIa8
- XLYw==
+ d=linaro.org; s=google; t=1758781290; x=1759386090; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=B2i38U/x/oQjgYhkNjwFcWg0yJJI86Z4DohF0zTGvQw=;
+ b=U85QGDAEGdwJL9UEzpRW5L4nfXOJ7pH0mp0CmjcsUpWw0PFJW47jDEUQKWQf6uPHMI
+ iTcDwmZoOr5EjXgWfw+XwchgFU00YsPWDh8AtwCkGvsV0zmiijnGK2xn0srCQ/i1hJE2
+ IiOy0HpQyfYrBalSBjdPYp1CDQ3mDfnmMLgICA3EIy/c46fV3yASvzUoLzVL5H2tVq8Y
+ 2a5L/sdEctgHalwFS09mz2GjdnQ6hzierFa4+4vdZBdwejzc59IfzrQibLKlwRiqkR5I
+ kZFGqBIFapzPDHSw6xrtTwajkvFLC0JCpQ/Wf8GVorNK/8qZ6dhSsTcaKSG4wQju+yoF
+ /E5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758780558; x=1759385358;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=H8CuGI+fm+C/E4CQ2OSVMS5JULJZp/hO69jybs9un5I=;
- b=JAbdJyDJyhdk1mGcmF/RAw0f4ZqA3ni/vo8W22qDMWo9oy7UHiZ1PKQz9+hQKH9D9I
- 0CENFcejMREgnhSuT31hPMXF3HckSG2ttrNP3/LD5UdYaMiSB65NytSdMFKskBJi1k8H
- vlQK1nFiv9oHR13ShojEcWuILOAPjlgHNNQPSL4TGWFbQTAHCwmGf/z6GFhia8BFGCSc
- C9KtsA54QpFjkMrE+L3ChED3wdG/Gu/DY6HCGzZbz/ep0sZiGVUs3luek31eHNsRmC+P
- q8eDHZGKJp9p3Z5NyyoUgvRxTLDX1Y9fOJ6N8uRcU8vwoazOrjP98yZG1Uv6OPxu+Q5Y
- vyXg==
-X-Gm-Message-State: AOJu0YwzSTh99tdFdxMbK5ay8lrT32CQsRhhWxq/GCkwyJhkBQqIU454
- 8vFTGsTZ7oWeirCvL7yspquBL2Pc3On7czdF/DR7M1Q02aKEMS1G0RgsqVkRkdpo84Hufx4NQtR
- K7gPsWoyWG/seJWx5mQSY17nALvAoILk=
-X-Gm-Gg: ASbGncuo7WUBoziGmoH6DcMapWIQt21mNNGF8B7cobxW7qd6cRv8n1ZNawHtl6qlcHE
- kqSDjvSy7YSNAi7qHEs/Ip3e+naO6Kpy5HnRQ28SG55A3NSBoq5PZJIBc9trRqin+aTAJPGzGlG
- zX9aRUGmGoMmYWelH+DEDBUINhb+AIlcAw9apF1DK61Dtjl+JctD4JaRZ54/j7GoR7xiv3T8g4t
- i/exE4M
-X-Google-Smtp-Source: AGHT+IFdYFAJ2nupxD4VRKD/F4tlKGG6hiX7WLkksbpJ1iwzMcvv90fyRurZ5p9Fl7TIwm7MvYqPHhNBFV1opmJvazU=
-X-Received: by 2002:a05:6512:3e06:b0:578:ed03:7b5f with SMTP id
- 2adb3069b0e04-582d258405fmr563968e87.26.1758780557514; Wed, 24 Sep 2025
- 23:09:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758781290; x=1759386090;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=B2i38U/x/oQjgYhkNjwFcWg0yJJI86Z4DohF0zTGvQw=;
+ b=rHQPrKZzC+fWYyinaNIY+0pi7F6qLQEi4FO6hVOLYsACQLGkNHkzIX2LBjBOH1VbFk
+ wGHYjpTVJEGZ9WpHobfYb1wlo/socA98+aJQNgmASQOWX7dW4K5mBVSPwDsiDH1cluQd
+ kNT3tolvRcGaJi6iZ0UIJ+YFMjpt4SQocVZ3iyhBYTqJxud/eQJQJlQJYDJi95Z5tfeV
+ KraD71NSMphLwR7ktLEoMWAGcFuLQKFYzTMHWBOQ6DPqNKHTboc5umdEY8MboC1m18BT
+ ERLPej17pzjoMZe7Uj2h9M7K0ApRJOtFzLJr0Tq6JaWiA0LOJ/GPsY6qJ9mu1rwPmItK
+ eQOA==
+X-Gm-Message-State: AOJu0YxE+RAmO7sLYxC1ihmP3S9xx0pZCH769wTKj58NnC/h048ikzi5
+ f2n0kWtXXM1OxJLw6C1/UIEDyTTaPVIsrHZXDo3cemvFTQLvRcTsINtQcNI19Rt3Wp3A20hnGRv
+ +kKV1u1GsSlR+uJUZfyw1DrlQxwPteAjY4s/e7KQYYg==
+X-Gm-Gg: ASbGnctlqu7hp9BHDyzAuJHYYzMrMzNL1EPEvXo4OBJv8Is2x6CMXkDqLS704CgTwOL
+ MwvsaBYK8HwqoeuJqSrixgezMokcHaGG6b+nw+KUiGKI9/8nAzPfOuZYlUhor5gEXilazmUarzD
+ WIDoqbIPeR4T1pnB74pAtoipL1AQqjHwSf4L+go3g41BG6v6BTBykkL7xblXpbe9y166lr0ogyN
+ vY+N8Q=
+X-Google-Smtp-Source: AGHT+IHopT15xyfi8hUYUxOAlbk9gv+f2vZ06DG/HQAKN6Q0NgL9qb4Mm85lVF0TwF5oWVH+iqkLJUDHYvzFb+oRmRE=
+X-Received: by 2002:a05:6902:f89:b0:eaf:141:a68b with SMTP id
+ 3f1490d57ef6-eb37fc2fa3emr1981409276.19.1758781289743; Wed, 24 Sep 2025
+ 23:21:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAGm1_ktPcqpCzy=B=_n1fZS5dZVCB208qt8CTgBJak=V0xfgEQ@mail.gmail.com>
- <20250924141428.GI197373@bill-the-cat>
-In-Reply-To: <20250924141428.GI197373@bill-the-cat>
-From: Yegor Yefremov <yegorslists@googlemail.com>
-Date: Thu, 25 Sep 2025 08:09:05 +0200
-X-Gm-Features: AS18NWAgc1gz_b6syxsAO_Jjp9P_RMwzOHsWF6atMhbf9oEvDkWdZ7wOaZgoAc8
-Message-ID: <CAGm1_kt1hu+yPoMshm1M1LMszpxeiVijUU1ZF5UThQtL85xmMA@mail.gmail.com>
-Subject: Re: am335x: NAND boot problem using the legacy u-boot.img
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, seanga2@gmail.com,
- Simon Glass <sjg@chromium.org>
+References: <20250924233120.454116-1-javier.tia@linaro.org>
+ <20250924233120.454116-2-javier.tia@linaro.org>
+In-Reply-To: <20250924233120.454116-2-javier.tia@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 25 Sep 2025 09:20:53 +0300
+X-Gm-Features: AS18NWCXG6z3hgCSRreAgS6uw92jDDI3NVHYvvBd0RE-hyB5fBSgQM39sj3q1u0
+Message-ID: <CAC_iWjKBzrJJj1fzeAkBeV2ZrOO1fT+9QUHrVdkb0FFD+seafg@mail.gmail.com>
+Subject: Re: [PATCH v6 1/2] part: Export part_driver_lookup_type for external
+ use
+To: Javier Tia <javier.tia@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,64 +92,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Javier,
 
-On Wed, Sep 24, 2025 at 4:14=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On Thu, 25 Sept 2025 at 02:31, Javier Tia <javier.tia@linaro.org> wrote:
 >
-> On Wed, Sep 24, 2025 at 11:09:16AM +0200, Yegor Yefremov wrote:
+> Make part_driver_lookup_type non-static so it can be used outside
+> part.c. This allows external callers to determine the appropriate
+> partition driver for a block device, enabling more flexible handling of
+> partition types.
 >
-> > HI all,
-> >
-> > trying to boot using the latest master, I get the following error:
-> >
-> > U-Boot SPL 2025.10-rc4 (Sep 23 2025 - 16:45:07 +0200)
-> > Trying to boot from NAND
-> > Error: -5
-> > SPL: failed to boot from all boot devices (err=3D-5)
-> > ### ERROR ### Please RESET the board ###
-> >
-> > It turns out that bl_len will be set to 0 in spl_nand_read():
-> >
-> > spl_set_bl_len(load, nand_page_size());
-> >
-> > This sets the aligned image size to 0 in _spl_load():
-> >
-> > size =3D ALIGN(spl_image->size + overhead, spl_get_bl_len(info));
-> >
-> > Looks like FIT images with full FIT support will be also affected:
-> >
-> >                        read =3D info->read(info, offset,
-> >                                            ALIGN(size, spl_get_bl_len(i=
-nfo)),
-> >                                             buf);
-> >
-> > If I manually set bl_len to 1, I can boot without an issue. What am I m=
-issing?
+> Add a prototype and kernel-doc comment in part.h to document the
+> function contract. Provide a stub inline implementation returning NULL
+> when partition support is disabled, ensuring build consistency across
+> configurations.
 >
-> I wonder if this has always been an underlying problem. Looking at
-> drivers/mtd/nand/raw/am335x_spl_bch.c we've always had nand_page_size()
-> return nand_to_mtd(&nand_chip)->writesize and I assume that should have
-> been being set to CONFIG_SYS_NAND_PAGE_SIZE but I don't see that as the
-> case. If you change nand_page_size to just return
-> CONFIG_SYS_NAND_PAGE_SIZE or nand_init to set writesize to
-> CONFIG_SYS_NAND_PAGE_SIZE does it then work again?
+> Signed-off-by: Javier Tia <javier.tia@linaro.org>
+> ---
+>  disk/part.c    |  2 +-
+>  include/part.h | 21 +++++++++++++++++++++
+>  2 files changed, 22 insertions(+), 1 deletion(-)
+>
+> diff --git a/disk/part.c b/disk/part.c
+> index 66e2b3a7219..f0c6866e210 100644
+> --- a/disk/part.c
+> +++ b/disk/part.c
+> @@ -63,7 +63,7 @@ static struct part_driver *part_driver_get_type(int part_type)
+>   * @dev_desc: Device descriptor
+>   * Return: Driver found, or NULL if none
+>   */
+> -static struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
+> +struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
+>  {
+>         struct part_driver *drv =
+>                 ll_entry_start(struct part_driver, part_driver);
+> diff --git a/include/part.h b/include/part.h
+> index b772fb34c8a..52fd3d534e0 100644
+> --- a/include/part.h
+> +++ b/include/part.h
+> @@ -471,6 +471,9 @@ ulong disk_blk_erase(struct udevice *dev, lbaint_t start, lbaint_t blkcnt);
+>  #define part_get_info_ptr(x)   x
+>  #endif
+>
+> +static inline struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
+> +{ return NULL; }
 
-yes, the following change makes the system bootable again:
+This won't compile. You need to define it in the #else of #if
+CONFIG_IS_ENABLED(PARTITIONS)
 
-diff --git a/drivers/mtd/nand/raw/am335x_spl_bch.c
-b/drivers/mtd/nand/raw/am335x_spl_bch.c
-index 4b50f351d35..a77206d3815 100644
---- a/drivers/mtd/nand/raw/am335x_spl_bch.c
-+++ b/drivers/mtd/nand/raw/am335x_spl_bch.c
-@@ -212,6 +212,8 @@ void nand_init(void)
-        if (nand_chip.select_chip)
-                nand_chip.select_chip(mtd, 0);
-
-+       mtd->writesize =3D CONFIG_SYS_NAND_PAGE_SIZE;
-+
-        /* NAND chip may require reset after power-on */
-        nand_command(0, 0, 0, NAND_CMD_RESET);
- }
-
-Yegor
+Cheers
+/Ilias
+> +
+>  /**
+>   * struct part_driver - partition driver
+>   */
+> @@ -727,6 +730,24 @@ int part_get_type_by_name(const char *name);
+>   */
+>  int part_get_bootable(struct blk_desc *desc);
+>
+> +/**
+> + * part_driver_lookup_type() - Look up the partition driver for a blk device
+> + *
+> + * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each partition driver
+> + * against the blk device to see if there is a valid partition table acceptable
+> + * to that driver.
+> + *
+> + * If @desc->part_type is already set, it just returns the driver for that
+> + * type, without testing if the driver can find a valid partition on the
+> + * descriptor.
+> + *
+> + * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
+> + *
+> + * @desc: Device descriptor
+> + * Return: Driver found, or NULL if none
+> + */
+> +struct part_driver *part_driver_lookup_type(struct blk_desc *desc);
+> +
+>  #else
+>  static inline int part_driver_get_count(void)
+>  { return 0; }
+> --
+> 2.51.0
+>
