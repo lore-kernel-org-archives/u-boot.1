@@ -4,95 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 673BFCAC5B1
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F5ACAC5B1
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:13:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD1688319C;
-	Thu, 25 Sep 2025 16:09:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D276809A5;
+	Thu, 25 Sep 2025 16:13:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WYLd44BY";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="dEYZzyEw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F201782998; Thu, 25 Sep 2025 15:50:22 +0200 (CEST)
-Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
- [IPv6:2607:f8b0:4864:20::e2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BC88582A9E; Thu, 25 Sep 2025 16:13:04 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 825628004F
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 15:50:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38E7080107
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:13:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jj251510319013@gmail.com
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-50f8bf5c518so695726137.3
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 06:50:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758808219; x=1759413019; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bSlWBxNa9iYEciRPsvm6RwYkIZeK2VyQI7JPO48JvY0=;
- b=WYLd44BYAIV/1seokn+t8PayJ3vEnaXyXoc+umo0pCE4OKamnapEQmT4IAlHcN+eIb
- wX5m5O32h+HEY8E0OXaNjb5JoJK7jarOXAcq3NZuGJBkeQfSDcz2qcN5GQDsAePQnO42
- pWXLkdCq0nX0UfLOaBSH8z60M3xFL3tiXkMRl8IKCmVWvKHmY4MuKki4BSUAwrPdTMi7
- W4jEunqqJItdAf7D7Ad+a6nsOewdYhzlmzG/7OU7PUodJvIcsRls18NFj9430ovW7prT
- gzoDg9/u35tbeFb1IOJwzW3T2kgscKmDZOw5pwXaXeYxMVmO3l4zNbLjlZWt/ac4p0oL
- LiwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758808219; x=1759413019;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bSlWBxNa9iYEciRPsvm6RwYkIZeK2VyQI7JPO48JvY0=;
- b=b1KyL1b0+TLuRQgiOsf70dHOnUMSHDSegrPzaDrWLJr4uAZds0OKsaWXwKq2a0gcdi
- J9IFQ9KV+ZaLDEP6d8XegDpcoxtOQwp44vnUpfNvJckT1IKynl9YND7khmfd8ckKWGEW
- 1TThgcnBKSFY2k+LvFSJrSs3sGsMexiUYx1W1dhA9ByQJRjAeGqRgon06714mpbKXc6t
- LkPbVKm+Sza0Oabktfx8oowAIQ8Xu0lNyNxC89ZmCVNJYMXXkDyUsf1UistG+2eHZfVw
- MU34lbxj4bZpqpX3Nky6qA+miPaHUH54l7BfQnG83u4zBCBUWQFxXyKKMc8J8LseqzD0
- TfMQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVWsmUc4neQb/ugCAhqDTq2PHIB9Bm958fAQ9Hx/McRuoy5zFU4XVd0w+RdmRk8ajowdmB/pVI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxRwYmodpxCeiotqBXbzilMfWWWtzjzQIKVuflFkmTZKJcf4RBU
- 1Oo8uWZUUPqHDG/PJQSlBAAuiT9+xGm8fYRJ3/pOS3wutiekzxdGNtQUtbC9pHEoP6NvOjquG0I
- WdrR8d/dsncdfmuigJA4HKMT2Wsk+d+Q=
-X-Gm-Gg: ASbGncv0GDT+uRxfttynZhKhJQlkZB6lFZmLHkDlrQEgBf1DsNpMMuBEycOpWstAiDq
- UWhBrG9WJCIbOhbPdA0OTKidozEVLr3yY+oymRxGuvMewARrZJDiQgtfzqopQayJriU+KQ3h4P7
- d3+mXElz1VhisQUsWwSXhq0kpviUeqSBnfh+ATm8U7dFag9I40mOaFXSAKI/aOIY010AXUBApUb
- W3JP6k=
-X-Google-Smtp-Source: AGHT+IGYcGvU81AOjqmRtbRAVX8zy171XBQuF8BRAH2YQ5iXtQ/CWZRP8KEGB98nDBHONKL1miDARG6I61wdtCNgUnA=
-X-Received: by 2002:a05:6102:370a:b0:4f1:37f4:8c32 with SMTP id
- ada2fe7eead31-5accd5f0ba0mr1625627137.11.1758808219120; Thu, 25 Sep 2025
- 06:50:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cXbK729SZz9t29;
+ Thu, 25 Sep 2025 16:12:59 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758809579;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=L4WhqgjpEHTVNi5FoLl2/A2AW2c3q1YLysy7nK6y4ZM=;
+ b=dEYZzyEwhBfp2sI+oJ1VMTzRFVa1weKUkfE6F7ZL9h9wX3SZVGJfy3zALUgBYKOMDKqcIX
+ BlwwAbgSkWyILqovhQ6nWXpKveNPnJf85tSnOJ84M0x7HPYWAk346c0j0JbMLibaMZKZJn
+ FL2jFZ4wzK3K7Fb7NDVAx9qIGj+5tkaBbq+wnIsEsRrh7KHvp58e6hefS3iLUed/Ok0qj9
+ xCSn0vde82gtSfkirTHvq5PKWZaxHPBUTHLp8tAUzASSAhV2Ot5ff5fYxxZq2f/WjmnyuA
+ t95KHHXGCcOZXK8GlNWEGSfRu59g1OKWqSCiWcdRHCaCUHMWsvleh/hA9QbhJw==
+Message-ID: <59d4ef95-e030-4508-8e1e-ae37a0df6c29@mailbox.org>
+Date: Thu, 25 Sep 2025 16:12:58 +0200
 MIME-Version: 1.0
-References: <20250914110021.4103-1-aristo.chen@canonical.com>
- <20250924113733.uz6hozszbuynemtc@giddy>
- <20250924114317.742ae4ntrb4mvuyq@expert>
- <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
- <20250924135139.GH197373@bill-the-cat>
- <20250924140524.fy46p7ifr4oxh5mc@uncooked>
- <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
-In-Reply-To: <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
-From: Aristo Chen <jj251510319013@gmail.com>
-Date: Thu, 25 Sep 2025 21:49:43 +0800
-X-Gm-Features: AS18NWAGOExMc9K27Em5rwGJz0qxoeoSOgWbpydC-5NZevREhbCaYVG9Id9kPiU
-Message-ID: <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
- and fix related test/DTS issues
-To: Nishanth Menon <nm@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>,
- u-boot@lists.denx.de, 
- sjg@chromium.org, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
- paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de, 
- w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com, 
- n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, 
- ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, 
- alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 25 Sep 2025 16:09:51 +0200
+Subject: Re: [PATCH] usb: dwc3: Remove redundant test
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20250925-dwc3_ep0-v1-1-7af60ed1e28c@linaro.org>
+ <b6d1f1df-eed5-4cbe-8add-31c1e77e3a16@mailbox.org>
+ <02ef127e-f789-4cc6-9592-eb4b75f1b0ea@linaro.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <02ef127e-f789-4cc6-9592-eb4b75f1b0ea@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: oqq15bhqaznt3u6wc9s334mjgxhdcf3b
+X-MBO-RS-ID: 2057db640fece63e08d
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,105 +77,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=
-=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:33=E5=AF=AB=E9=81=93=EF=
-=BC=9A
->
-> Nishanth Menon <nm@ti.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=97=A5 =
-=E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:05=E5=AF=AB=E9=81=93=EF=BC=9A
-> >
-> > On 07:51-20250924, Tom Rini wrote:
-> > > On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
-> > > > Hi Aristo,
-> > > >
-> > > > On 9/24/25 04:43, Nishanth Menon wrote:
-> > > > > On 06:37-20250924, Nishanth Menon wrote:
-> > > > >> On 10:59-20250914, Aristo Chen wrote:
-> > > > >>> This patch series enhances FIT image robustness by adding **mem=
-ory
-> > > > >>> region overlap detection** to `mkimage` and fixing existing ove=
-rlaps
-> > > > >>> in DTS files and `binman` tests.
-> > > > >
-> > > > > [...]
-> > > > >>>
-> > > > >>
-> > > > >> Looks like i see a build regression in linux-next after this ser=
-ies.
-> > > > >
-> > > > > I fat fingered that one.. sorry, I meant u-boot next.
-> > > > >
-> > > > >
-> > > > > Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580=
-f
-> > > > >
-> > > > >>
-> > > > >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
-> > > > >
-> > > > > I  believe there are outstanding comments on V1 that have'nt been
-> > > > > addressed either. Can we revert/drop this series for now while th=
-e
-> > > > > comments are addressed?
-> > > > >
-> > > >
-> > > > Similar to Nishanth, I am seeing a build regression, itb.map:
-> > >
-> > > Sorry for the noise all, I've reverted this in next now.
-> > >
-> >
-> > Thanks Tom.
-> > --
-> > Regards,
-> > Nishanth Menon
-> > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 =
-DDB5 849D 1736 249D
-> > https://ti.com/opensource
->
-> Apology for introducing the regression, I will find time to fix them,
-> and thanks Tom for reverting my patch set to unblock others
->
-> For TIFS stub entries on AM6x platforms and the starfive visionfive2,
-> sounds like the image in the FIT will be selected during the runtime,
-> so they are not really overlapping each other. I will need to figure
-> out other way instead
+On 9/25/25 4:07 PM, Andrew Goodbody wrote:
+> On 25/09/2025 14:56, Marek Vasut wrote:
+>> On 9/25/25 3:20 PM, Andrew Goodbody wrote:
+>>> In dwc3_ep0_complete_data there is a test for 'r' being null and the
+>>> code will return at that point if so. After that point 'r' is guaranteed
+>>> to not be null and testing for that is redundant. Remove the test for
+>>> 'r' being non-null.
+>>>
+>>> This issue was found by Smatch.
+>>>
+>>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>>> ---
+>>>   drivers/usb/dwc3/ep0.c | 5 +----
+>>>   1 file changed, 1 insertion(+), 4 deletions(-)
+>>>
+>>> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+>>> index c656cbe25ce..680756532f0 100644
+>>> --- a/drivers/usb/dwc3/ep0.c
+>>> +++ b/drivers/usb/dwc3/ep0.c
+>>> @@ -799,10 +799,7 @@ static void dwc3_ep0_complete_data(struct dwc3 
+>>> *dwc,
+>>>       status = DWC3_TRB_SIZE_TRBSTS(trb->size);
+>>>       if (status == DWC3_TRBSTS_SETUP_PENDING) {
+>>>           dev_dbg(dwc->dev, "Setup Pending received");
+>>> -
+>>> -        if (r)
+>>> -            dwc3_gadget_giveback(ep0, r, -ECONNRESET);
+>>> -
+>>> +        dwc3_gadget_giveback(ep0, r, -ECONNRESET);
+>>>           return;
+>>>       }
+>> Please use ./scripts/get_maintainer.pl to get full CC list and CC all 
+>> relevant parties.
+> 
+> Hi Marek,
+> 
+> I use 'b4 prep --auto-to-cc' which calls get_maintainer.pl to populate 
+> the email addresses used.
+It seems to be missing these people:
 
+Mattijs Korpershoek <mkorpershoek@kernel.org>
+Neil Armstrong <neil.armstrong@linaro.org>
+Anshul Dalal <anshuld@ti.com>
 
-Thank you all for the feedback on my FIT image overlap detection patch
-series, and apology again for the issues that I introduced
-
-Currently what I have in my mind is to have the following 2 changes in
-my patch set
-### 1. Add support for mutually exclusive image groups
-Some platforms load only one image from a group at runtime. In the
-device tree, we may have something like this
-```
-tifsstub-hs {
-    // ... existing properties ...
-    mutually-exclusive-group =3D "tifsstub";
-};
-tifsstub-fs {
-    // ... existing properties ...
-    mutually-exclusive-group =3D "tifsstub";
-};
-```
-The overlap checker would then skip validation between images in the
-same mutually-exclusive-group, while still catching genuine
-overlaps
-
-### 2.  Change from build error to warning
-Given that there may be edge cases(such as
-starfive_visionfive2_defconfig) not covered by current CI pipelines,
-changing overlap
-detection from a build-stopping error to a warning initially. This would:
-- Alert developers to potential memory layout issues
-- Avoid breaking existing working configurations
-- Allow time to refine the detection logic based on community feedback
-- Enable a gradual transition to stricter validation once the approach is p=
-roven
-The warning could later become an error once we have confidence in the
-detection accuracy across all supported platforms.
-
-Feel free to let me know if you have any concerns or suggestions
-
-Thanks for your time and guidance!
-Aristo
