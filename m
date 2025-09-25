@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3946BCAC5B0
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:56:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D76CAC5B0
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:56:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B10748309D;
-	Thu, 25 Sep 2025 22:56:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 167BE82A9E;
+	Thu, 25 Sep 2025 22:56:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CDQiq21o";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h1C+NcXR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FF1F832AD; Thu, 25 Sep 2025 22:56:17 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 7D7388341C; Thu, 25 Sep 2025 22:56:19 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A58A80819
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:56:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EC48830CA
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:56:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-74542b1b2bcso1193961a34.3
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:56:15 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7a4a993dea6so367073a34.1
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:56:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758833774; x=1759438574; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=UF4GJ9vpVg1jNC0eoQtm+nJKv8V34twrp138NR3KvRY=;
- b=CDQiq21oZqW0kqNPDygyu6AhRVLL1BSdMqGzS15MhJI5Wour50B/blwG6PBq0CrhZv
- /mAutGZgvmQjPe4RBFtB76uNRAOV0jff+a46Y3SrY5gK3XcIvxZ6gUbTBZK9KM/yu0O1
- gCQJFp3673AK5gzjfTt4PsUszcfgj0alqTvaY=
+ d=konsulko.com; s=google; t=1758833776; x=1759438576; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uDEuGXypBg3fMXPcI/0oPVM68g/gcL3wNfLmZ6Bz0FM=;
+ b=h1C+NcXRlBwrgADRwEXphIAakrRxed3Ks2zjygYch0la1C0jZtpUgTC/Xa4krMURbW
+ xgfJnomXYJto6CgvZgfhnMGt1gu+YGoJ3fmZRovr1DrtK1UlZPpGwUAiCM+UNfXMcKWL
+ R0PGyKfM/V3WERUhHa2S0PsgVi1HIyjMSZ8RI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758833774; x=1759438574;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UF4GJ9vpVg1jNC0eoQtm+nJKv8V34twrp138NR3KvRY=;
- b=o2A6Zb2pzPNjP2UhJc1/BZJDimF+lIz8d8xQDt7nmUHKLR9v9xFILe8GJxVRJyUzFf
- hTj5BHJdis0OoCzBmkvdXNdmc+1lTsFJ4kt+rxqaz/H3Q4Y/DajBZ2AcxMlj3RqIwuVp
- 3iIDz1RicYfASWoMYCGVATsuWPFZgTUO03LV4oBaksqRR8IB0sj2QHGzJ+UklwDs75BX
- e6blsX7n63lFApnzPHdN7PIhkuO0mrAjc8+gtprrcetoUTla8PY+cK8m4+UcRDAkcuYJ
- wackUxGhBJ4YpGRNPfhZLLcC583VKxdgsIvrkE1kviINvdo10deJuSUkLdtgrF3xor4c
- VhDA==
-X-Gm-Message-State: AOJu0YyODaH/t/JbNIvw5HB4ZnYizqeT8REM923n1gGVQfYBXg/worgg
- OJ9znabvNQkGMqBnzI3+WIbnMr4V3sDrM8hzzLmRPWa7maf2rwEvIm3btbrMuwHxFyGmgjsaucb
- QzWBhDl0=
-X-Gm-Gg: ASbGncu4Vifso+uh59yFXi1zQRPKvKOYxoxF84GjngXRfuEHrIeWlNMaz5akr+59zQe
- SdHOIHipy/UypUZOjq5L3fM1Ss3SBARBO/1FV/LnGHDPO0daRqQufDeO6T8xuTNPm+krUzGmaC+
- EaGeL/Z6BOTisVwjq0m+R6KqW70lgZMqk4APw+G6n0IorPHUmQr143BskCcwyanH5+qTTgZUXKW
- U4Zxr2xWS9DE3UPXOEXBX7nJJo09hIIsCcxulihwoCtkiXIJNLVJKWGQOQxQVJZzxHvAtyD2w84
- pWo5DLMeEz8MwcdtYtHc7bvtXjA0ULq8HGa31TpMRuGdJg4xPLvqaqsl3faYJXguvzNOuZ7GUzz
- oXf0Nf2cEZoIy4uV6tbg2eSNYmtjSnmHrgLJSkLPzHXbL5n6Bc61nejp03ww=
-X-Google-Smtp-Source: AGHT+IEVGOw5/kC2MXpZW5f0cSGaGb3TyoT7LDBtAk1kzUyy0Zqj0JYiUtPysrZ87fUfS0y+jTLfoA==
-X-Received: by 2002:a05:6830:82dc:b0:744:f0db:a1af with SMTP id
- 46e09a7af769-7a048ee1f1bmr2612615a34.31.1758833774320; 
- Thu, 25 Sep 2025 13:56:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758833776; x=1759438576;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uDEuGXypBg3fMXPcI/0oPVM68g/gcL3wNfLmZ6Bz0FM=;
+ b=ey3H90+wpHihRnkYwfQtLgW8vucTe0hBxMLUlewQ5jSz2MJOkfpDjqp615pSAj2/Nw
+ /BlsQQJt//uoRv6mvXZ3gGF9Xw2j7aCczAXG8FIH4JS1K4frQocVeKu5FbggsQa/LGZy
+ rpmOst+Zdwf6h59dS1FIMZHRsWmg7yW79lFr/cUH8S1nxuZoZFTDHHpHl47DyOTuKwjd
+ hTA6eO3E+QkBCI7aiudF/R0HEQMD4EQsM6XKAE/jG4lOy9Ptosv7Yq+DB4sgZfR3sL84
+ OlrAfHKoHIVu+sxvXVVJKr0rZzo1CYZZ69+xyUs7hOwgOJJ6H5Oc6FTL8L69PtaRNnFp
+ wubg==
+X-Gm-Message-State: AOJu0YwxC85ouqh1QJ0/xu54v0lej2rl6d4NwUQB/RzAh1LEIpSovS2p
+ 50u6gFrqGZzwjy6Rd2Or/hrzBiuO1ZEBVbMKxXOOC6+sc8BLOHWEwyqgEL/lkMid1t1snpZZVWK
+ pjOqi7Bo=
+X-Gm-Gg: ASbGncuV7jK1ojfRQMGDxfUQxnflhWYl2OjbpHaULweV9+pH8XSNL2VPGu9vADAQdr8
+ j2sfu13R5XJYvKcrDqU4Ij3Mca7yNpiuuqxhr5zBpkBqkNbQD2BxAX63XZockkLRcoVBbePZING
+ kiTmNHFMqHAZmz/GBz9RYdl6aBZPpn+ZLbFFFAdYwAgkFPW3M/wP++2hwPedYQpuJ2Rk/eccz6i
+ IegBtmFuOtI/EF4k7DMovBAy+nTXHAjNHQUNUglBOcqtcnZBsjsiiqisYx1HColaB4tkFtriRxd
+ iNEepGelF1AxZkToK9ZLrreuDW9XLP+X3QWY6YH55Ze5qSTbJz6ES85dfMhTgX9FYWzFlk9KQwO
+ z+FaMT4Z5dTy6mPPPAMYe4hhgOfeBqa6GJZSSJy4ha7ZnecgY8YJMh7SuFF8=
+X-Google-Smtp-Source: AGHT+IF/MRSRr2lL0y2oMmNoVpx75RUJIX9Z1biSY8BD4nv5a/Pur8EWHrJ0voJsRGrK9xOgcU4GpQ==
+X-Received: by 2002:a05:6830:4985:b0:757:7ad:243c with SMTP id
+ 46e09a7af769-7a04b15751cmr2697502a34.34.1758833776128; 
+ Thu, 25 Sep 2025 13:56:16 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a2405c455esm608892a34.35.2025.09.25.13.56.13
- for <u-boot@lists.denx.de>
+ 006d021491bc7-63b28448e7dsm333679eaf.22.2025.09.25.13.56.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 13:56:13 -0700 (PDT)
+ Thu, 25 Sep 2025 13:56:15 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] gpio: aspeed: Make U_BOOT_DRIVER entries unique
-Date: Thu, 25 Sep 2025 14:56:12 -0600
-Message-ID: <20250925205612.3562525-1-trini@konsulko.com>
+Cc: Stefan Roese <stefan.roese@mailbox.org>
+Subject: [PATCH] phy: marvell: Tighten MVEBU_COMPHY_SUPPORT dependencies
+Date: Thu, 25 Sep 2025 14:56:14 -0600
+Message-ID: <20250925205614.3562540-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,29 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-All instances of the U_BOOT_DRIVER must use a unique name or they will
-lead to link time failures due to name space conflicts when both are
-present. In this case gpio-aspeed-g7 was using the same name as
-gpio-aspeed.
+This driver cannot link without access to functions that are defined in
+files that are only build on some platforms.  Express those requirements
+in Kconfig as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/gpio/gpio-aspeed-g7.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cc: Stefan Roese <stefan.roese@mailbox.org>
+---
+ drivers/phy/marvell/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpio/gpio-aspeed-g7.c b/drivers/gpio/gpio-aspeed-g7.c
-index 4c6ab86203c2..4607468ca05f 100644
---- a/drivers/gpio/gpio-aspeed-g7.c
-+++ b/drivers/gpio/gpio-aspeed-g7.c
-@@ -141,7 +141,7 @@ static const struct udevice_id aspeed_gpio_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(gpio_aspeed) = {
-+U_BOOT_DRIVER(gpio_aspeed_g7) = {
- 	.name   = "gpio-aspeed",
- 	.id     = UCLASS_GPIO,
- 	.of_match = aspeed_gpio_ids,
+diff --git a/drivers/phy/marvell/Kconfig b/drivers/phy/marvell/Kconfig
+index b5f69c0a96d3..c66197de1433 100644
+--- a/drivers/phy/marvell/Kconfig
++++ b/drivers/phy/marvell/Kconfig
+@@ -1,5 +1,6 @@
+ config MVEBU_COMPHY_SUPPORT
+ 	bool "ComPhy SerDes driver"
++	depends on ARMADA_3700 || ARMADA_8K
+ 	help
+ 	  Choose this option to add support
+ 	  for Comphy driver.
 -- 
 2.43.0
 
