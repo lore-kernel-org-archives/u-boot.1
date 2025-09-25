@@ -4,93 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CCCCAC5B7
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 15:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAE3CAC5B1
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 15:47:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E38C80107;
-	Thu, 25 Sep 2025 17:38:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AF0438206E;
+	Thu, 25 Sep 2025 17:47:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TizXOm0+";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CABF80B9B; Thu, 25 Sep 2025 17:38:50 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DBEF88206E; Thu, 25 Sep 2025 17:47:12 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 154F9800D7
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 17:38:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79632800D7
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 17:47:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-46e37d10f3eso5025625e9.0
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 08:38:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758814727; x=1759419527; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=GKaJnHjx7HJ6j383JWP+gs3nvdtxy7rAXdDLc79J3U8=;
- b=TizXOm0+f4RdOOzo2sFD2ovSi+/+M8wYyYOb7Yqeh/pQR87Sv9lVIb8qTGtPjYta7N
- CG5LTA+gDceEW/KwLUkB1qX8VrMnDAPqnD0s+G2bKdh1qP5ALIA3oCQ0YIEi3rZ1s6Cf
- GrtOBmLKLTSVNQAw4yZ/+oPiB5lSCvmGkApzb3cO/iwKkF+sWzKm8TqOYk05cM0ygClN
- JA5xz9Wn5finvkIbHRLqS6fpI09GpCwX/KlCdIAw/5ua+R3dhHPT6EuSdWUBvc52AKki
- RV0r3Zp98O1Tq/zmYFZ/rJrd77UrTj2xJiVUZ24wY6V6G/nj0Ltau/3ZXVehyJfVRlUp
- uZvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758814727; x=1759419527;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GKaJnHjx7HJ6j383JWP+gs3nvdtxy7rAXdDLc79J3U8=;
- b=ZbcijffhAs2rF2gyxvOX2yyPbRN5nARvoyAqEjRD1BNIAvRpF9yg1n4E+HowXQy4YP
- VKt44+R9/m/26hNNOuJTacTlIGUlfaQwEvJHhJxgqEBAEsAoXWnAwoSKBQoGpiLeEmcC
- mvUwho+43160Qxla1oG0q9yxbwWNO75b6WFiJO+c1zrm40Ae+fVbzcsJvTczdatobyqG
- yrX6ess41Fb/wUzseJ0Ng0uxLiiLVFrZndzSXSyaRwITAbP9j004vxKghaRVe9v41L10
- 1gskvtRqumO1a5eTjdCjeRNMjOg+iRSUqSuJ+qzmC8xa4YOUPrqjAmNPo2viRqOoBdFe
- dyfg==
-X-Gm-Message-State: AOJu0YztDD1HP1ZqRm57GZQv/Dw/X9otnHy+96pLkg450dgjNHHkN/r0
- oaKZB5KD++y6wKT5N0ivkmMBEjSjSo+1tTV6iWYyUrhhJHBHGtSTtjTstzy1Mm0yXmg9XSt5n4w
- cL9zxzGY=
-X-Gm-Gg: ASbGnctyZqY8iczpJTk1fT0zIzLCfIRk4KVG76teF3g6v5TiNrzAAwLYXn4uKGldETX
- sKjNnovl/wIO7M3XJGR4m6aLhVMLAr+Bdd5++XfEjPAahtcGh9Q8omaAWRR+iYKSiwxMxLLYRzL
- /rZBUNpx/P6fj4qhx4UQb7ESjyzDB6a82sabkrq18mxX5hMtK9jKxZpOewDRzcpor64gdnr7DFk
- 19Ng2KOzgzRHrROxxTekuB4gDdevjcxarUHkZAzrS3W1iWo0FD/NpBD9bmB3tg+yM8hX5D41FEB
- DGE9adHLQPhc+GWf7LPkLkl1+Rv9LfH0Na0worOTuMF+QwgdDX4p2asPYktzYfx3qAlVBmAmXpe
- cYAy3HQF3SZsKBwdWzg0QSR3ctwlolCPnMEU83cXZCA==
-X-Google-Smtp-Source: AGHT+IFuBIP1DQ/kmKux0JHs5SkaZaZre+rgNiaLK0qn1tl7m6vSOxD9VyyMkhe6Ew05JjsCI/NXbA==
-X-Received: by 2002:a05:600c:4816:b0:46d:996b:826a with SMTP id
- 5b1f17b1804b1-46e32a19e7dmr25346895e9.36.1758814727292; 
- Thu, 25 Sep 2025 08:38:47 -0700 (PDT)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:2f01:888f:3733:9fe6])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fb9d26ef7sm3607045f8f.26.2025.09.25.08.38.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 08:38:46 -0700 (PDT)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: U-Boot mailing list <u-boot@lists.denx.de>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- Greg Malysa <malysagreg@gmail.com>, Heiko Schocher <hs@nabladev.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Sebastian Reichel <sebastian.reichel@collabora.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <stefan.roese@mailbox.org>,
- Sumit Garg <sumit.garg@kernel.org>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Yao Zi <ziyao@disroot.org>
-Subject: [PATCH] MAINTAINERS: update NETWORK and NETWORK (LWIP)
-Date: Thu, 25 Sep 2025 17:38:16 +0200
-Message-ID: <20250925153819.3282808-1-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.48.1
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.27.29]) (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 02007B2201C7;
+ Thu, 25 Sep 2025 17:47:05 +0200 (CEST)
+Message-ID: <c80dcbd0-17ed-4490-a16d-d5b26f13f010@freeshell.de>
+Date: Thu, 25 Sep 2025 08:47:04 -0700
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+To: Aristo Chen <jj251510319013@gmail.com>, Nishanth Menon <nm@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, sjg@chromium.org,
+ alpernebiyasak@gmail.com, al.kochet@gmail.com,
+ paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de,
+ w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com,
+ n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com,
+ ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de,
+ alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+ <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+ <20250924135139.GH197373@bill-the-cat>
+ <20250924140524.fy46p7ifr4oxh5mc@uncooked>
+ <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
+ <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,45 +67,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add myself as a maintainer of the NETWORK subsystem since:
-- I have effectively been handling net patches in my patchwork queue and
-sending pull requests to Tom,
-- I do have push access to the u-boot-net custodian tree.
 
-Also, add u-boot-net as the SCM tree for NETWORK (LWIP) since it is where
-lwIP-related patches end up too.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-CC: Ramon Fried <rfried.dev@gmail.com>
-CC: Joe Hershberger <joe.hershberger@ni.com>
-CC: Tom Rini <trini@konsulko.com>
----
+On 9/25/25 06:49, Aristo Chen wrote:
+> Aristo Chen <jj251510319013@gmail.com> 於 2025年9月24日 週三 下午10:33寫道：
+>>
+>> Nishanth Menon <nm@ti.com> 於 2025年9月24日 週三 下午10:05寫道：
+>>>
+>>> On 07:51-20250924, Tom Rini wrote:
+>>>> On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
+>>>>> Hi Aristo,
+>>>>>
+>>>>> On 9/24/25 04:43, Nishanth Menon wrote:
+>>>>>> On 06:37-20250924, Nishanth Menon wrote:
+>>>>>>> On 10:59-20250914, Aristo Chen wrote:
+>>>>>>>> This patch series enhances FIT image robustness by adding **memory
+>>>>>>>> region overlap detection** to `mkimage` and fixing existing overlaps
+>>>>>>>> in DTS files and `binman` tests.
+>>>>>>
+>>>>>> [...]
+>>>>>>>>
+>>>>>>>
+>>>>>>> Looks like i see a build regression in linux-next after this series.
+>>>>>>
+>>>>>> I fat fingered that one.. sorry, I meant u-boot next.
+>>>>>>
+>>>>>>
+>>>>>> Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
+>>>>>>
+>>>>>>>
+>>>>>>> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
+>>>>>>
+>>>>>> I  believe there are outstanding comments on V1 that have'nt been
+>>>>>> addressed either. Can we revert/drop this series for now while the
+>>>>>> comments are addressed?
+>>>>>>
+>>>>>
+>>>>> Similar to Nishanth, I am seeing a build regression, itb.map:
+>>>>
+>>>> Sorry for the noise all, I've reverted this in next now.
+>>>>
+>>>
+>>> Thanks Tom.
+>>> --
+>>> Regards,
+>>> Nishanth Menon
+>>> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+>>> https://ti.com/opensource
+>>
+>> Apology for introducing the regression, I will find time to fix them,
+>> and thanks Tom for reverting my patch set to unblock others
+>>
+>> For TIFS stub entries on AM6x platforms and the starfive visionfive2,
+>> sounds like the image in the FIT will be selected during the runtime,
+>> so they are not really overlapping each other. I will need to figure
+>> out other way instead
+> 
+> 
+> Thank you all for the feedback on my FIT image overlap detection patch
+> series, and apology again for the issues that I introduced
+> 
+> Currently what I have in my mind is to have the following 2 changes in
+> my patch set
+> ### 1. Add support for mutually exclusive image groups
+> Some platforms load only one image from a group at runtime. In the
+> device tree, we may have something like this
+> ```
+> tifsstub-hs {
+>     // ... existing properties ...
+>     mutually-exclusive-group = "tifsstub";
+> };
+> tifsstub-fs {
+>     // ... existing properties ...
+>     mutually-exclusive-group = "tifsstub";
+> };
+> ```
+> The overlap checker would then skip validation between images in the
+> same mutually-exclusive-group, while still catching genuine
+> overlaps
+> 
 
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
+I am not keen on stuffing more complexity into that data to solve a
+problem with its data checker. There is already a common compatible
+"starfive,jh7110" shared among starfive_visionfive2 supported boards in
+U-Boot.  May as well rename starfive_visionfive2 to starfive_jh711x, now
+that there is confirmed JH7110S and JH7110I CPU variants differing only
+in QA'd voltage, divider, and operational temperature set points;  so
+instrumentation of common compatible into the proposed classifier would
+have to allow expression that one compatible is equivalent to itself or
+a list of other compatibles i.e. "starfive,jh7110" equals
+"starfive,jh7110s" equals "starfive,jh7110i". However you want to
+implement that, is the data checker's job not the responsibility of the
+data to forecast what it may or may not be similar to. MAINTAINERS file
+in my opinion is the data model, but instead it would be to silence
+warnings, and in one big uniform file not spread over the whole code base.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b030242a2d8..108d07a7232 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1412,6 +1412,7 @@ F:	drivers/mmc/
- NETWORK
- M:	Joe Hershberger <joe.hershberger@ni.com>
- M:	Ramon Fried <rfried.dev@gmail.com>
-+M:	Jerome Forissier <jerome.forissier@linaro.org>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-net.git
- F:	drivers/net/
-@@ -1421,6 +1422,7 @@ F:	net/
- NETWORK (LWIP)
- M:	Jerome Forissier <jerome.forissier@linaro.org>
- S:	Maintained
-+T:	git https://source.denx.de/u-boot/custodians/u-boot-net.git
- F:	cmd/lwip/
- F:	cmd/net-lwip.c
- F:	configs/qemu_arm64_lwip_defconfig
--- 
-2.48.1
+If you can show me how this removes complexity for say, adding another
+variant to starfive_visionfive2 as a thought exercise, I'll buy into it;
+we did this once or twice already with removing the need to give a name
+and explicitly list each fit definition, which you see now as fit-(n)
+and as it happens these generic number-sequence names are more than good
+enough; the transition to OF_UPSTREAM allowed to drop per-board dts file
+maintenance; whole classes of maintenance gone and we don't worry about
+it again. Adding a new variant is simply add to CONFIG_OF_LIST and also
+whatever eeprom data comparison logic at spl.c to select it at runtime.
 
-base-commit: 44c4919e9dd6c162b237633ba689441eca9a149c
-branch: maintainers-net
+But then, what of one board (not visionfive2) that has two very
+different configurations with overlaps to itself? Something with
+multiple architectures but only one may be used, selected at power-on.
+Okay, well those are named by their dts filepath as named in OF_LIST,
+then for example. Again the MAINTAINERS data model I think fits.
+
+Thanks and do not make it so that every variant added needs some
+additional edit or created file or commit just to please the data
+checker. Wildcard-ing is good, the ideal is that you don't need to do
+anything in the normal case, or only a broad one-time wildcard saying to
+silence the warnings because what is needed does obviously and
+intentionally overlap.
+
+-E
+
+> ### 2.  Change from build error to warning
+> Given that there may be edge cases(such as
+> starfive_visionfive2_defconfig) not covered by current CI pipelines,
+> changing overlap
+> detection from a build-stopping error to a warning initially. This would:
+> - Alert developers to potential memory layout issues
+> - Avoid breaking existing working configurations
+> - Allow time to refine the detection logic based on community feedback
+> - Enable a gradual transition to stricter validation once the approach is proven
+> The warning could later become an error once we have confidence in the
+> detection accuracy across all supported platforms.
+> 
+> Feel free to let me know if you have any concerns or suggestions
+> 
+> Thanks for your time and guidance!
+> Aristo
+
