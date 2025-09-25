@@ -4,52 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAE3CAC5B1
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 15:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4557DCAC5B1
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 16:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF0438206E;
-	Thu, 25 Sep 2025 17:47:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 8996880107;
+	Thu, 25 Sep 2025 18:02:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="jB1LWR/c";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBEF88206E; Thu, 25 Sep 2025 17:47:12 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id B019C809A5; Thu, 25 Sep 2025 18:02:26 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79632800D7
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 17:47:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 594D2800D7
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 18:02:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [98.97.27.29]) (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 02007B2201C7;
- Thu, 25 Sep 2025 17:47:05 +0200 (CEST)
-Message-ID: <c80dcbd0-17ed-4490-a16d-d5b26f13f010@freeshell.de>
-Date: Thu, 25 Sep 2025 08:47:04 -0700
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 167FC22B59;
+ Thu, 25 Sep 2025 18:02:24 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id 6FIO3KGQe-S5; Thu, 25 Sep 2025 18:02:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1758816143; bh=25uKYNjSa1Qb80cjh0D9AX8jj87b5jIkmG3Ma3/vhTI=;
+ h=From:To:Cc:Subject:Date;
+ b=jB1LWR/czIPJ39DDjCwrVkMmoo5goS6Y1GPbJu5gYtPWyoRz82x3QbwMcTaXtW87z
+ zCJ08obPbAW2Xrvw1qZq1+ktGDYPtRYnmTCBl9E6duAbnVaFYJC8dBwMzn2aUZ3ZdG
+ Oa0pfwHvVt25Gm5i7M0JvAMp5YZH6CCG2ws4KMpZEkrHbL3100UiFqC4I+BpiOTHRR
+ bTJPuPGTFyrOQ5RkeGea2uakvPT8JsBOygOE1eWPpsLBGrwtNW3PTbiVSEB+Ohbpy5
+ 0Ix/h4ljpovvKNjVM9Lktd0ZGIuIcyKuSumdcNiqlslsXS4Vzye/8ljzPOI2jEHrOZ
+ PU3A80jUWmtaQ==
+From: Yao Zi <ziyao@disroot.org>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Yao Zi <ziyao@disroot.org>,
+ E Shattow <e@freeshell.de>
+Subject: [PATCH] Revert "riscv: Add a Zalrsc-only alternative for
+ synchronization in start.S"
+Date: Thu, 25 Sep 2025 16:01:48 +0000
+Message-ID: <20250925160148.21624-1-ziyao@disroot.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
- and fix related test/DTS issues
-To: Aristo Chen <jj251510319013@gmail.com>, Nishanth Menon <nm@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, sjg@chromium.org,
- alpernebiyasak@gmail.com, al.kochet@gmail.com,
- paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de,
- w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com,
- n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com,
- ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de,
- alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
-References: <20250914110021.4103-1-aristo.chen@canonical.com>
- <20250924113733.uz6hozszbuynemtc@giddy>
- <20250924114317.742ae4ntrb4mvuyq@expert>
- <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
- <20250924135139.GH197373@bill-the-cat>
- <20250924140524.fy46p7ifr4oxh5mc@uncooked>
- <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
- <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -67,140 +69,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This reverts commit a681cfecb4346107212f377e2075f6eb1bdc6a2b.
 
+It has been reported that the commit causes boot regression for SPL on
+StarFive VisionFive 2 or compatible boards. Inspecting the code, I did
+spot one logic error for deciding whether Zaamo or Zalrsc is used, and
+it's still unclear what exactly causes the regression, let's revert it
+for now.
 
-On 9/25/25 06:49, Aristo Chen wrote:
-> Aristo Chen <jj251510319013@gmail.com> 於 2025年9月24日 週三 下午10:33寫道：
->>
->> Nishanth Menon <nm@ti.com> 於 2025年9月24日 週三 下午10:05寫道：
->>>
->>> On 07:51-20250924, Tom Rini wrote:
->>>> On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
->>>>> Hi Aristo,
->>>>>
->>>>> On 9/24/25 04:43, Nishanth Menon wrote:
->>>>>> On 06:37-20250924, Nishanth Menon wrote:
->>>>>>> On 10:59-20250914, Aristo Chen wrote:
->>>>>>>> This patch series enhances FIT image robustness by adding **memory
->>>>>>>> region overlap detection** to `mkimage` and fixing existing overlaps
->>>>>>>> in DTS files and `binman` tests.
->>>>>>
->>>>>> [...]
->>>>>>>>
->>>>>>>
->>>>>>> Looks like i see a build regression in linux-next after this series.
->>>>>>
->>>>>> I fat fingered that one.. sorry, I meant u-boot next.
->>>>>>
->>>>>>
->>>>>> Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
->>>>>>
->>>>>>>
->>>>>>> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
->>>>>>
->>>>>> I  believe there are outstanding comments on V1 that have'nt been
->>>>>> addressed either. Can we revert/drop this series for now while the
->>>>>> comments are addressed?
->>>>>>
->>>>>
->>>>> Similar to Nishanth, I am seeing a build regression, itb.map:
->>>>
->>>> Sorry for the noise all, I've reverted this in next now.
->>>>
->>>
->>> Thanks Tom.
->>> --
->>> Regards,
->>> Nishanth Menon
->>> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
->>> https://ti.com/opensource
->>
->> Apology for introducing the regression, I will find time to fix them,
->> and thanks Tom for reverting my patch set to unblock others
->>
->> For TIFS stub entries on AM6x platforms and the starfive visionfive2,
->> sounds like the image in the FIT will be selected during the runtime,
->> so they are not really overlapping each other. I will need to figure
->> out other way instead
-> 
-> 
-> Thank you all for the feedback on my FIT image overlap detection patch
-> series, and apology again for the issues that I introduced
-> 
-> Currently what I have in my mind is to have the following 2 changes in
-> my patch set
-> ### 1. Add support for mutually exclusive image groups
-> Some platforms load only one image from a group at runtime. In the
-> device tree, we may have something like this
-> ```
-> tifsstub-hs {
->     // ... existing properties ...
->     mutually-exclusive-group = "tifsstub";
-> };
-> tifsstub-fs {
->     // ... existing properties ...
->     mutually-exclusive-group = "tifsstub";
-> };
-> ```
-> The overlap checker would then skip validation between images in the
-> same mutually-exclusive-group, while still catching genuine
-> overlaps
-> 
+Reported-by: E Shattow <e@freeshell.de>
+Link: https://lore.kernel.org/u-boot/1871663e-b918-4351-9e9e-97f9a4c73733@freeshell.de/
+Signed-off-by: Yao Zi <ziyao@disroot.org>
+---
 
-I am not keen on stuffing more complexity into that data to solve a
-problem with its data checker. There is already a common compatible
-"starfive,jh7110" shared among starfive_visionfive2 supported boards in
-U-Boot.  May as well rename starfive_visionfive2 to starfive_jh711x, now
-that there is confirmed JH7110S and JH7110I CPU variants differing only
-in QA'd voltage, divider, and operational temperature set points;  so
-instrumentation of common compatible into the proposed classifier would
-have to allow expression that one compatible is equivalent to itself or
-a list of other compatibles i.e. "starfive,jh7110" equals
-"starfive,jh7110s" equals "starfive,jh7110i". However you want to
-implement that, is the data checker's job not the responsibility of the
-data to forecast what it may or may not be similar to. MAINTAINERS file
-in my opinion is the data model, but instead it would be to silence
-warnings, and in one big uniform file not spread over the whole code base.
+The original series causing the problem[1] contains 3 patches, and I
+think it should be enough to revert the change of start.S only, since
+the others touch no code, and should be relatively safe. I'll fix the
+reverted change up and get it work on VisionFive 2 when I got my new
+board. Sorry for the inconvenience.
 
-If you can show me how this removes complexity for say, adding another
-variant to starfive_visionfive2 as a thought exercise, I'll buy into it;
-we did this once or twice already with removing the need to give a name
-and explicitly list each fit definition, which you see now as fit-(n)
-and as it happens these generic number-sequence names are more than good
-enough; the transition to OF_UPSTREAM allowed to drop per-board dts file
-maintenance; whole classes of maintenance gone and we don't worry about
-it again. Adding a new variant is simply add to CONFIG_OF_LIST and also
-whatever eeprom data comparison logic at spl.c to select it at runtime.
+[1]: https://lore.kernel.org/u-boot/20250902081932.21103-1-ziyao@disroot.org/
 
-But then, what of one board (not visionfive2) that has two very
-different configurations with overlaps to itself? Something with
-multiple architectures but only one may be used, selected at power-on.
-Okay, well those are named by their dts filepath as named in OF_LIST,
-then for example. Again the MAINTAINERS data model I think fits.
+ arch/riscv/cpu/start.S | 26 +-------------------------
+ 1 file changed, 1 insertion(+), 25 deletions(-)
 
-Thanks and do not make it so that every variant added needs some
-additional edit or created file or commit just to please the data
-checker. Wildcard-ing is good, the ideal is that you don't need to do
-anything in the normal case, or only a broad one-time wildcard saying to
-silence the warnings because what is needed does obviously and
-intentionally overlap.
-
--E
-
-> ### 2.  Change from build error to warning
-> Given that there may be edge cases(such as
-> starfive_visionfive2_defconfig) not covered by current CI pipelines,
-> changing overlap
-> detection from a build-stopping error to a warning initially. This would:
-> - Alert developers to potential memory layout issues
-> - Avoid breaking existing working configurations
-> - Allow time to refine the detection logic based on community feedback
-> - Enable a gradual transition to stricter validation once the approach is proven
-> The warning could later become an error once we have confidence in the
-> detection accuracy across all supported platforms.
-> 
-> Feel free to let me know if you have any concerns or suggestions
-> 
-> Thanks for your time and guidance!
-> Aristo
+diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
+index 6324ff585d4..7bafdfd390a 100644
+--- a/arch/riscv/cpu/start.S
++++ b/arch/riscv/cpu/start.S
+@@ -151,15 +151,8 @@ call_harts_early_init:
+ 	 */
+ 	la	t0, hart_lottery
+ 	li	t1, 1
+-#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+ 	amoswap.w s2, t1, 0(t0)
+ 	bnez	s2, wait_for_gd_init
+-#else
+-	lr.w	s2, (t0)
+-	bnez	s2, wait_for_gd_init
+-	sc.w	s2, t1, (t0)
+-	bnez	s2, wait_for_gd_init
+-#endif
+ #else
+ 	/*
+ 	 * FIXME: gp is set before it is initialized. If an XIP U-Boot ever
+@@ -184,12 +177,7 @@ call_harts_early_init:
+ #if !CONFIG_IS_ENABLED(XIP)
+ #ifdef CONFIG_AVAILABLE_HARTS
+ 	la	t0, available_harts_lock
+-#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+ 	amoswap.w.rl zero, zero, 0(t0)
+-#else
+-	fence	rw, w
+-	sw	zero, 0(t0)
+-#endif
+ #endif
+ 
+ wait_for_gd_init:
+@@ -202,14 +190,7 @@ wait_for_gd_init:
+ #ifdef CONFIG_AVAILABLE_HARTS
+ 	la	t0, available_harts_lock
+ 	li	t1, 1
+-1:
+-#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+-	amoswap.w.aq t1, t1, 0(t0)
+-#else
+-	lr.w.aq	t1, 0(t0)
+-	bnez	t1, 1b
+-	sc.w.rl t1, t1, 0(t0)
+-#endif
++1:	amoswap.w.aq t1, t1, 0(t0)
+ 	bnez	t1, 1b
+ 
+ 	/* register available harts in the available_harts mask */
+@@ -219,12 +200,7 @@ wait_for_gd_init:
+ 	or	t2, t2, t1
+ 	SREG	t2, GD_AVAILABLE_HARTS(gp)
+ 
+-#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+ 	amoswap.w.rl zero, zero, 0(t0)
+-#else
+-	fence	rw, w
+-	sw	zero, 0(t0)
+-#endif
+ #endif
+ 
+ 	/*
+-- 
+2.50.1
 
