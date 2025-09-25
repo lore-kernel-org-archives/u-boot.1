@@ -4,84 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5C3CAC5B1
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:09:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 673BFCAC5B1
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3528E80107;
+	by phobos.denx.de (Postfix) with ESMTP id DD1688319C;
 	Thu, 25 Sep 2025 16:09:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="m+G48tZv";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="F5HVhilv";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WYLd44BY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E74BB836F0; Thu, 25 Sep 2025 10:25:31 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F201782998; Thu, 25 Sep 2025 15:50:22 +0200 (CEST)
+Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
+ [IPv6:2607:f8b0:4864:20::e2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E38E836B4
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 10:25:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 825628004F
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 15:50:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cXRc91RyGz9tJx;
- Thu, 25 Sep 2025 10:25:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758788729;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lyru5m3KUcAH0XxoJh8JTiMCNPEmxO4uzw2h21NSt6s=;
- b=m+G48tZvg2W4Xh0QhMygeqW6GxLqBlu2YUnGNeyToPWM0EGIsX9ZNCRnh/TswSQa2yrfzm
- sv7QchO5Y1bwwtSDtzO6zqIkSeimNZkvmcMYcRhdqESyGWcSHihwyno6PorLmL5OXj2PhI
- +wn65Tu3S/0wvTKd3bXxzHaLVBEZTmFCi6lhGTeMb/H0FLxvx2nuWviTUVD7F8nq0RBE+9
- h4mgJtLNkbhei/hrTCIHvpGUl9WqCkj1+WWlh7Ae5/d7IT2Cw8C2Rvxi4aZ58InUBQNY1N
- gjW9sYh6ss+bK5XBmOIEPH0K9ck/ZZlbNx8rTdl3nuMXC0Y0v0wHChC3dX9c8Q==
-Message-ID: <7ec0eba7-ab95-4269-9b5d-256c1eef50a0@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758788726;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=lyru5m3KUcAH0XxoJh8JTiMCNPEmxO4uzw2h21NSt6s=;
- b=F5HVhilvFEDCKeSEcFpVfrn/WcpFcFRMotTJD82Xclo99V+vG3gyKs91ZMYR94rgXRykUG
- LwOTJ6a7cmKDv2QpGRkXkaoQ+BUtGZIUJ6K7QG3R3xtiWhFU8nZ7iixacoigbRq79bbhyV
- /0cIyFcuCtqPjjJcHslxPYCe1OsZOQ8BUQhqN2rxnhj9JVR+k0EKCju3twkr/wSfMkMPzr
- VmTtW4f40V+ilOfQllQI3xyshwTcZYDzgkLL1K3VEZeP+gYwn46LZePj2utpNXUvcZ2OO2
- DKY7QsZFu8JJvCc56FjezSZGSdfFM6zXxquObvppLgnepamBDGthRdyUUhChEg==
-Date: Thu, 25 Sep 2025 10:25:20 +0200
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-50f8bf5c518so695726137.3
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 06:50:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1758808219; x=1759413019; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bSlWBxNa9iYEciRPsvm6RwYkIZeK2VyQI7JPO48JvY0=;
+ b=WYLd44BYAIV/1seokn+t8PayJ3vEnaXyXoc+umo0pCE4OKamnapEQmT4IAlHcN+eIb
+ wX5m5O32h+HEY8E0OXaNjb5JoJK7jarOXAcq3NZuGJBkeQfSDcz2qcN5GQDsAePQnO42
+ pWXLkdCq0nX0UfLOaBSH8z60M3xFL3tiXkMRl8IKCmVWvKHmY4MuKki4BSUAwrPdTMi7
+ W4jEunqqJItdAf7D7Ad+a6nsOewdYhzlmzG/7OU7PUodJvIcsRls18NFj9430ovW7prT
+ gzoDg9/u35tbeFb1IOJwzW3T2kgscKmDZOw5pwXaXeYxMVmO3l4zNbLjlZWt/ac4p0oL
+ LiwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758808219; x=1759413019;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bSlWBxNa9iYEciRPsvm6RwYkIZeK2VyQI7JPO48JvY0=;
+ b=b1KyL1b0+TLuRQgiOsf70dHOnUMSHDSegrPzaDrWLJr4uAZds0OKsaWXwKq2a0gcdi
+ J9IFQ9KV+ZaLDEP6d8XegDpcoxtOQwp44vnUpfNvJckT1IKynl9YND7khmfd8ckKWGEW
+ 1TThgcnBKSFY2k+LvFSJrSs3sGsMexiUYx1W1dhA9ByQJRjAeGqRgon06714mpbKXc6t
+ LkPbVKm+Sza0Oabktfx8oowAIQ8Xu0lNyNxC89ZmCVNJYMXXkDyUsf1UistG+2eHZfVw
+ MU34lbxj4bZpqpX3Nky6qA+miPaHUH54l7BfQnG83u4zBCBUWQFxXyKKMc8J8LseqzD0
+ TfMQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWsmUc4neQb/ugCAhqDTq2PHIB9Bm958fAQ9Hx/McRuoy5zFU4XVd0w+RdmRk8ajowdmB/pVI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRwYmodpxCeiotqBXbzilMfWWWtzjzQIKVuflFkmTZKJcf4RBU
+ 1Oo8uWZUUPqHDG/PJQSlBAAuiT9+xGm8fYRJ3/pOS3wutiekzxdGNtQUtbC9pHEoP6NvOjquG0I
+ WdrR8d/dsncdfmuigJA4HKMT2Wsk+d+Q=
+X-Gm-Gg: ASbGncv0GDT+uRxfttynZhKhJQlkZB6lFZmLHkDlrQEgBf1DsNpMMuBEycOpWstAiDq
+ UWhBrG9WJCIbOhbPdA0OTKidozEVLr3yY+oymRxGuvMewARrZJDiQgtfzqopQayJriU+KQ3h4P7
+ d3+mXElz1VhisQUsWwSXhq0kpviUeqSBnfh+ATm8U7dFag9I40mOaFXSAKI/aOIY010AXUBApUb
+ W3JP6k=
+X-Google-Smtp-Source: AGHT+IGYcGvU81AOjqmRtbRAVX8zy171XBQuF8BRAH2YQ5iXtQ/CWZRP8KEGB98nDBHONKL1miDARG6I61wdtCNgUnA=
+X-Received: by 2002:a05:6102:370a:b0:4f1:37f4:8c32 with SMTP id
+ ada2fe7eead31-5accd5f0ba0mr1625627137.11.1758808219120; Thu, 25 Sep 2025
+ 06:50:19 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH v7 2/5] bootstd: select BLK rather than depending on it
-To: Simon Glass <sjg@u-boot.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
- Ezra Buehler <ezra.buehler@husqvarnagroup.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
- Thomas Chou <thomas@wytron.com.tw>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <20250925002308.2825164-1-sjg@u-boot.org>
- <20250925002308.2825164-3-sjg@u-boot.org>
-Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20250925002308.2825164-3-sjg@u-boot.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 1dreiku87bkarnkxg3m75rocpxodoj63
-X-MBO-RS-ID: 592dd03a7945eaed56b
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+ <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+ <20250924135139.GH197373@bill-the-cat>
+ <20250924140524.fy46p7ifr4oxh5mc@uncooked>
+ <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
+In-Reply-To: <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
+From: Aristo Chen <jj251510319013@gmail.com>
+Date: Thu, 25 Sep 2025 21:49:43 +0800
+X-Gm-Features: AS18NWAGOExMc9K27Em5rwGJz0qxoeoSOgWbpydC-5NZevREhbCaYVG9Id9kPiU
+Message-ID: <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+To: Nishanth Menon <nm@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, E Shattow <e@freeshell.de>,
+ u-boot@lists.denx.de, 
+ sjg@chromium.org, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
+ paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de, 
+ w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com, 
+ n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, 
+ ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, 
+ alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailman-Approved-At: Thu, 25 Sep 2025 16:09:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,150 +109,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=
+=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:33=E5=AF=AB=E9=81=93=EF=
+=BC=9A
+>
+> Nishanth Menon <nm@ti.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=97=A5 =
+=E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:05=E5=AF=AB=E9=81=93=EF=BC=9A
+> >
+> > On 07:51-20250924, Tom Rini wrote:
+> > > On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
+> > > > Hi Aristo,
+> > > >
+> > > > On 9/24/25 04:43, Nishanth Menon wrote:
+> > > > > On 06:37-20250924, Nishanth Menon wrote:
+> > > > >> On 10:59-20250914, Aristo Chen wrote:
+> > > > >>> This patch series enhances FIT image robustness by adding **mem=
+ory
+> > > > >>> region overlap detection** to `mkimage` and fixing existing ove=
+rlaps
+> > > > >>> in DTS files and `binman` tests.
+> > > > >
+> > > > > [...]
+> > > > >>>
+> > > > >>
+> > > > >> Looks like i see a build regression in linux-next after this ser=
+ies.
+> > > > >
+> > > > > I fat fingered that one.. sorry, I meant u-boot next.
+> > > > >
+> > > > >
+> > > > > Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580=
+f
+> > > > >
+> > > > >>
+> > > > >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
+> > > > >
+> > > > > I  believe there are outstanding comments on V1 that have'nt been
+> > > > > addressed either. Can we revert/drop this series for now while th=
+e
+> > > > > comments are addressed?
+> > > > >
+> > > >
+> > > > Similar to Nishanth, I am seeing a build regression, itb.map:
+> > >
+> > > Sorry for the noise all, I've reverted this in next now.
+> > >
+> >
+> > Thanks Tom.
+> > --
+> > Regards,
+> > Nishanth Menon
+> > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 =
+DDB5 849D 1736 249D
+> > https://ti.com/opensource
+>
+> Apology for introducing the regression, I will find time to fix them,
+> and thanks Tom for reverting my patch set to unblock others
+>
+> For TIFS stub entries on AM6x platforms and the starfive visionfive2,
+> sounds like the image in the FIT will be selected during the runtime,
+> so they are not really overlapping each other. I will need to figure
+> out other way instead
 
-glad to "hear" something from you again. ;)
 
-...
+Thank you all for the feedback on my FIT image overlap detection patch
+series, and apology again for the issues that I introduced
 
-On 9/25/25 02:23, Simon Glass wrote:
-> From: Simon Glass <sjg@chromium.org>
-> 
-> With recent changes to how BLK works, we must use 'select' to enable the
-> BLK feature, which is currently required by BOOTSTD.
-> 
-> This fixes the following error:
-> 
->      GEN     Makefile
->    scripts/kconfig/conf  --syncconfig Kconfig
->    boot/Kconfig:496:error: recursive dependency detected!
->    boot/Kconfig:496:	symbol BOOTSTD_DEFAULTS depends on BOOTSTD
->    boot/Kconfig:441:	symbol BOOTSTD default is visible depending on BLK
->    drivers/block/Kconfig:1:	symbol BLK is selected by USB
->    drivers/usb/Kconfig:1:	symbol USB is selected by BOOTSTD_DEFAULTS
-> 
-> Disable BOOTSTD for the boards which don't have enough space or some
-> other problem:
-> 
->    zynq_cse_nand
->    zynq_cse_nor
->    zynq_cse_qspi
->    gardena-smart-gateway-mt7688
->    10m50
->    3c120
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> Changes in v7:
-> - Put this patch earlier in the series, so it is bisectable
-> - Disable some boards which lack space
-> 
-> Changes in v6:
-> - Add new patch to select BLK rather than depending on it
-> 
->   boot/Kconfig                                   | 3 ++-
->   configs/10m50_defconfig                        | 1 +
->   configs/3c120_defconfig                        | 1 +
->   configs/gardena-smart-gateway-mt7688_defconfig | 1 +
+Currently what I have in my mind is to have the following 2 changes in
+my patch set
+### 1. Add support for mutually exclusive image groups
+Some platforms load only one image from a group at runtime. In the
+device tree, we may have something like this
+```
+tifsstub-hs {
+    // ... existing properties ...
+    mutually-exclusive-group =3D "tifsstub";
+};
+tifsstub-fs {
+    // ... existing properties ...
+    mutually-exclusive-group =3D "tifsstub";
+};
+```
+The overlap checker would then skip validation between images in the
+same mutually-exclusive-group, while still catching genuine
+overlaps
 
-For this platform:
+### 2.  Change from build error to warning
+Given that there may be edge cases(such as
+starfive_visionfive2_defconfig) not covered by current CI pipelines,
+changing overlap
+detection from a build-stopping error to a warning initially. This would:
+- Alert developers to potential memory layout issues
+- Avoid breaking existing working configurations
+- Allow time to refine the detection logic based on community feedback
+- Enable a gradual transition to stricter validation once the approach is p=
+roven
+The warning could later become an error once we have confidence in the
+detection accuracy across all supported platforms.
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+Feel free to let me know if you have any concerns or suggestions
 
-Thanks,
-Stefan
-
->   configs/zynq_cse_nand_defconfig                | 1 +
->   configs/zynq_cse_nor_defconfig                 | 1 +
->   configs/zynq_cse_qspi_defconfig                | 1 +
->   7 files changed, 8 insertions(+), 1 deletion(-)
-> 
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index d1e608f2595..2cc33cc874d 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -438,8 +438,9 @@ config BOOT_DEFAULTS
->   
->   menuconfig BOOTSTD
->   	bool "Standard boot"
-> -	default y if BLK
-> +	default y
->   	depends on DM && OF_CONTROL
-> +	select BLK
->   	help
->   	  U-Boot supports a standard way of locating something to boot,
->   	  typically an Operating System such as Linux, provided by a distro such
-> diff --git a/configs/10m50_defconfig b/configs/10m50_defconfig
-> index 8180ed55e3e..0d4b1dc8d94 100644
-> --- a/configs/10m50_defconfig
-> +++ b/configs/10m50_defconfig
-> @@ -13,6 +13,7 @@ CONFIG_SYS_LOAD_ADDR=0xcc000000
->   CONFIG_ENV_ADDR=0xF4080000
->   CONFIG_SYS_MONITOR_BASE=0xCFF80000
->   CONFIG_FIT=y
-> +# CONFIG_BOOTSTD is not set
->   # CONFIG_AUTOBOOT is not set
->   CONFIG_SYS_CBSIZE=256
->   CONFIG_SYS_PBSIZE=276
-> diff --git a/configs/3c120_defconfig b/configs/3c120_defconfig
-> index 0a6eae4b5dd..c444a12f485 100644
-> --- a/configs/3c120_defconfig
-> +++ b/configs/3c120_defconfig
-> @@ -13,6 +13,7 @@ CONFIG_SYS_LOAD_ADDR=0xd4000000
->   CONFIG_ENV_ADDR=0xE2880000
->   CONFIG_SYS_MONITOR_BASE=0xD7F80000
->   CONFIG_FIT=y
-> +# CONFIG_BOOTSTD is not set
->   # CONFIG_AUTOBOOT is not set
->   CONFIG_SYS_CBSIZE=256
->   CONFIG_SYS_PBSIZE=276
-> diff --git a/configs/gardena-smart-gateway-mt7688_defconfig b/configs/gardena-smart-gateway-mt7688_defconfig
-> index 3c2bcc6a3c4..ea0094394eb 100644
-> --- a/configs/gardena-smart-gateway-mt7688_defconfig
-> +++ b/configs/gardena-smart-gateway-mt7688_defconfig
-> @@ -31,6 +31,7 @@ CONFIG_HAS_BOARD_SIZE_LIMIT=y
->   CONFIG_BOARD_SIZE_LIMIT=655360
->   CONFIG_FIT=y
->   CONFIG_FIT_SIGNATURE=y
-> +# CONFIG_BOOTSTD is not set
->   CONFIG_LEGACY_IMAGE_FORMAT=y
->   CONFIG_AUTOBOOT_KEYED=y
->   CONFIG_AUTOBOOT_STOP_STR="x"
-> diff --git a/configs/zynq_cse_nand_defconfig b/configs/zynq_cse_nand_defconfig
-> index 4272b7320b6..9b85b23a9d5 100644
-> --- a/configs/zynq_cse_nand_defconfig
-> +++ b/configs/zynq_cse_nand_defconfig
-> @@ -23,6 +23,7 @@ CONFIG_SPL=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_SYS_CUSTOM_LDSCRIPT=y
->   CONFIG_SYS_LDSCRIPT="arch/arm/mach-zynq/u-boot.lds"
-> +# CONFIG_BOOTSTD is not set
->   # CONFIG_AUTOBOOT is not set
->   CONFIG_USE_PREBOOT=y
->   CONFIG_SYS_CBSIZE=1024
-> diff --git a/configs/zynq_cse_nor_defconfig b/configs/zynq_cse_nor_defconfig
-> index 74c4595eb43..fab02bfdb0a 100644
-> --- a/configs/zynq_cse_nor_defconfig
-> +++ b/configs/zynq_cse_nor_defconfig
-> @@ -23,6 +23,7 @@ CONFIG_SPL=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_SYS_CUSTOM_LDSCRIPT=y
->   CONFIG_SYS_LDSCRIPT="arch/arm/mach-zynq/u-boot.lds"
-> +# CONFIG_BOOTSTD is not set
->   # CONFIG_AUTOBOOT is not set
->   CONFIG_USE_PREBOOT=y
->   CONFIG_SYS_CBSIZE=1024
-> diff --git a/configs/zynq_cse_qspi_defconfig b/configs/zynq_cse_qspi_defconfig
-> index 145b7fd33bb..31ff00c689c 100644
-> --- a/configs/zynq_cse_qspi_defconfig
-> +++ b/configs/zynq_cse_qspi_defconfig
-> @@ -29,6 +29,7 @@ CONFIG_DEBUG_UART=y
->   CONFIG_REMAKE_ELF=y
->   CONFIG_SYS_CUSTOM_LDSCRIPT=y
->   CONFIG_SYS_LDSCRIPT="arch/arm/mach-zynq/u-boot.lds"
-> +# CONFIG_BOOTSTD is not set
->   # CONFIG_AUTOBOOT is not set
->   # CONFIG_ARCH_FIXUP_FDT_MEMORY is not set
->   CONFIG_USE_PREBOOT=y
-
+Thanks for your time and guidance!
+Aristo
