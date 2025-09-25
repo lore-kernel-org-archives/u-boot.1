@@ -4,68 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17312CAC5B0
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 22:40:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33099CAC5B0
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 22:48:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 710E18206E;
-	Fri, 26 Sep 2025 00:40:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 99AA4802C1;
+	Fri, 26 Sep 2025 00:48:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iEp5919p";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="jODrVedd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GauDhMXO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EEB98206E; Fri, 26 Sep 2025 00:40:41 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0AA868309D; Fri, 26 Sep 2025 00:48:44 +0200 (CEST)
+Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
+ [IPv6:2607:f8b0:4864:20::a2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9ACFB802C1
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 00:40:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CE7E80107
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 00:48:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cXpZt2Vp8z9tTp;
- Fri, 26 Sep 2025 00:40:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758840038;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ka/vhg6QuDYA6Ze1fRW3xhDo7rd/B/3rL/T43bbEPJA=;
- b=iEp5919p1lBilfGCEVeoh5KN7r+L5Om3L9fuLSa7+PLXmwnUG21EjUqt6eStBKSvH0RLQX
- I2MvrQa5O1NPZFKPiSl2ptk05u8s8OaW1UiD3wvaEpMVOcRgBxPpAAesgvoZmHUQpBb0zT
- aoOsBZyk+YoTH97pRqCX2NmPer+lHdDuev2NJuwdi1+YxTw1jLV2GScRRySdrtNoTmzE3M
- nNnOnR0JkCIXvUFK4A1q5hkeHp3iN8rofj7TCyNoCFqzl9stXOum/8m9ngQ9jd+8Ls+v3X
- 5IOl7LtrLb/4PtUT78/DbP4MnGmlvkSKtCcYx6S097NJzTl4l55odSCqoAyeTg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758840036;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ka/vhg6QuDYA6Ze1fRW3xhDo7rd/B/3rL/T43bbEPJA=;
- b=jODrVeddrlOQLv5+ui3CzyC4pw8Yt7CNApN4DircriQDfrB4N2MAUH5IB6n33CuldY05zt
- 8sK/UMiywwn5WKir8XgOnkVKqHsUlLR8iCT0vuRhn54cOP7srzCUi6h2raYjN1nG5maHpe
- DEZWzmbi57hLXyme+rjOUaBkudna7ucfqfxcAXrJ/jQpzqLf+cJOPf6TmM3Lwbji+GIyoW
- XtnoVB7/FiD8u1tTYXjKIbA08rXkDAkubE+DsHfsoF+8sHmP8HHuakoK+/2JgkyMNx3R3j
- QBfNW0tAXNgJ3loTs/Fzhg01Fwprv/XnVXK+5JiuQfoEE6AvyIINE4Cj9fDVRA==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mathieu Othacehe <othacehe@gnu.org>
-Subject: [PULL] u-boot-sh/master
-Date: Fri, 26 Sep 2025 00:39:16 +0200
-Message-ID: <20250925224019.181523-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=javier.tia@linaro.org
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-54b21395093so927956e0c.0
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 15:48:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1758840520; x=1759445320; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7rJc6SkE54klSHBy8e9t8vkjaSLRTBeEu0/gNdnc7gU=;
+ b=GauDhMXOO0otVJWgn4H+AMWsSr5g+L9cEBLi19QmPAB3sjBEheh7SYGxFZTuMzQsR5
+ V08rg+OiJRNyGlNFbaNlSDJVIiMp6GfiI20/T9p3lRFI/M5e24qFkgi9GuHktyftbQss
+ R2jMef2uyXGA42Bv+hQbpczdhakmn7k1ilXM1lPUQklK6JRrUDArE8aI5Bh/RjPLezpw
+ lU5ZdQSNjmDGpw+Ze4ZxeSWhgyMbFpcERqGNXJMjsmDd2oegyJQrnYWHqLkxdj6D64xk
+ VR33n6W9YOYr9OVcz8VOuMqwtPSsD8KEz8ILkvvW/xHLyHFnAELRz4okmYjQJvnKI2Nu
+ ViNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758840520; x=1759445320;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7rJc6SkE54klSHBy8e9t8vkjaSLRTBeEu0/gNdnc7gU=;
+ b=FL33K3Ci4jLncqJCiQNc/rSKZ0twntu4rW7Rmq19a36KBt2cIFzccbXUn9wF2DKrTS
+ KpzFlASSPnerj8661JMLZEInLMT8dXAkODt/QiVXGYQEazKLmfxd/LTdwdS5bD69svNv
+ 6g3OYXleF3xnECE9pXCQziWs5RXiUA/jLSN37kkKPop/LoLTu/4jBQCMjnAig7E9uEsb
+ oFfqq8Ocl3oX5I7X2711CPoKwb3kB8hSZbP88bjPp0cI0Hsdu2BTSA6Py6QW4qFQiLEw
+ GfEhAOHPr1UfKKIRoBtLntlmHnCrgj1vbz5yRcNUX4NeSp5ZlC4wAmwKXhraZCsLYdvI
+ SS/A==
+X-Gm-Message-State: AOJu0YxV9JHQMJMx3m7/8R9FDITpoDB0siZRlQ7Oo08T9AUju260f4iw
+ 0zg93vqhKAnbbO0hkAjZwQjT9K/cKq+BBB/zC5+s/cQwbO95LDZwDYV+g54D2H/y2J9eO8vEBMe
+ /zR3J
+X-Gm-Gg: ASbGnct5CDZQiHnyyB/vfHcuyOZhSeNuOcFfh8u9rCGkjtylSr5PXqsE4zZZWk5Dg9s
+ bDyUxVxvYh8suE5CsXtLuFukhia930LTrHZnY2JBxPE4FMb9z6iBg6yoUgc1ciXvvgqJFGmwXTB
+ jhCv+N/o1TBNBg2t9DC0RqmRYUZlHqXqUROgpwjAVjtAdElnSJ0Ne9aOR/uxOVwmggdithuOFEB
+ riIlossfAiEHxYRfQWvmz42gyULOVQo7hh99qLRn0kgEjjtzboEFlnuQgGMi5G1Mch7I3R9x8EM
+ +8SRbYedqUYLUcGNkIUchn4ES9g+Ao2nHJ7ewAv1PTwzpeswJRI0HD1FTt16BFkypwVgLdPgdNg
+ QV9RBR0QMZNAZMQ1tD9zR3cC0Hwu4n+9u88FKOca6vHgPGZ/m
+X-Google-Smtp-Source: AGHT+IGA5I1Odu8+KLLbptOmsvAbqd04UdxMmmAYzY7vr3YFVm52odpRv93SA0Jv5/Xz/8gC/v29jw==
+X-Received: by 2002:a05:6122:4584:b0:54a:1ec6:b1ab with SMTP id
+ 71dfb90a1353d-54bed271549mr2235219e0c.0.1758840520061; 
+ Thu, 25 Sep 2025 15:48:40 -0700 (PDT)
+Received: from jetm-rog-crosshair-hero-x870e ([177.93.10.192])
+ by smtp.gmail.com with ESMTPSA id
+ 71dfb90a1353d-54beddf9c76sm673866e0c.28.2025.09.25.15.48.39
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Sep 2025 15:48:39 -0700 (PDT)
+From: Javier Tia <javier.tia@linaro.org>
+To: u-boot@lists.denx.de
+Subject: [PATCH v7 0/2] Improve disk image detection in efi_bootmgr
+Date: Thu, 25 Sep 2025 16:48:35 -0600
+Message-ID: <20250925224838.567562-1-javier.tia@linaro.org>
+X-Mailer: git-send-email 2.51.0
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 56p5nyo6ydn3oy6aywb16c8r7oo78557
-X-MBO-RS-ID: 06b466e268775c54a9e
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,31 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RZG2 boot failure fix for boot with TFA which does not pass DT,
-and R-Car Gen4 PCIe controller driver alignment with Linux fixes.
+Enhances the process for identifying disk images within the EFI boot
+manager. Utilize part_driver_lookup_type() to verify the validity of a
+downloaded file as a disk image, rather than depending on file
+extensions.
 
-The following changes since commit f53fe908ac3dd44f7ad63dff319636541710b98c:
+part_driver_lookup_type() is now used in the prepare_loaded_image()
+function in the EFI boot manager to detect partitions on a block device
+created from a downloaded image. This allows the boot manager to boot
+from any disk image that can be recognized by a partition driver, not
+just ISO and IMG images.
 
-  Merge patch series "Fix boot w/ scriptaddr & minor newline issue" (2025-09-24 07:50:13 -0600)
+Update prepare_loaded_image() to create the ramdisk block device
+internally, obtain the blk_desc and use part_driver_lookup_type() to
+detect a valid partition table.
 
-are available in the Git repository at:
+In try_load_from_uri_path(), try prepare_loaded_image() first to detect
+disk images, and fall back to PE-COFF detection only if that fails.
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+Include part.h in the EFI loader and export part_driver_lookup_type and
+add its prototype and documentation in include/part.h. This makes the
+partition-driver lookup available to other code paths that need to
+detect partition tables on a block descriptor.
 
-for you to fetch changes up to 19c292a8c5d0e2d0b85279d22643c6a4f6db9139:
+---
+Changes in v7:
+- Fix U-Boot CI build error. Passing CI: https://github.com/u-boot/u-boot/pull/816
+- Remove duplicate kerneldocs from part_driver_lookup_type, as it's included in part.h
 
-  pci: pcie-rcar-gen4: Add missing 1ms delay after PWR reset assertion (2025-09-25 23:19:17 +0200)
+- v6 link: https://lore.kernel.org/u-boot/20250924233120.454116-1-javier.tia@linaro.org/
+- v5 link: https://lore.kernel.org/u-boot/20250905172330.135550-1-javier.tia@linaro.org/
+- v4 link: https://lore.kernel.org/u-boot/20250903214417.431985-1-javier.tia@linaro.org/
+- v3 link: https://lore.kernel.org/u-boot/20250829155415.90634-1-javier.tia@linaro.org/
+- v2 link: https://lore.kernel.org/u-boot/20250808213627.649669-1-javier.tia@linaro.org/
+- v1 link: https://lore.kernel.org/u-boot/20250805162158.117876-1-javier.tia@linaro.org/
 
-----------------------------------------------------------------
-Marek Vasut (3):
-      pci: pcie-rcar-gen4: Fix inverted break condition in PHY initialization
-      pci: pcie-rcar-gen4: Assure reset occurs before DBI access
-      pci: pcie-rcar-gen4: Add missing 1ms delay after PWR reset assertion
+Javier Tia (2):
+  part: Export part_driver_lookup_type for external use
+  efi_loader: Improve disk image detection in efi_bootmgr
 
-Mathieu Othacehe (1):
-      board: rzg2l: Check the DTB pointer passed by the TF-A.
+ disk/part.c                  | 18 +------------
+ include/part.h               | 21 +++++++++++++++
+ lib/efi_loader/efi_bootmgr.c | 51 +++++++++++++++++++++++++-----------
+ 3 files changed, 58 insertions(+), 32 deletions(-)
 
- arch/arm/mach-renesas/cpu_info-rzg2l.c | 2 +-
- board/renesas/rzg2l/rzg2l.c            | 4 ++--
- drivers/pci/pci-rcar-gen4.c            | 7 ++++++-
- 3 files changed, 9 insertions(+), 4 deletions(-)
+-- 
+2.51.0
+
