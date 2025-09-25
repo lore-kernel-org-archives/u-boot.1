@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51524CAC5B0
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:56:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ACB9CAC5B0
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:56:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DE6D835D8;
-	Thu, 25 Sep 2025 22:56:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9E7AD83447;
+	Thu, 25 Sep 2025 22:56:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s7DRJxrB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VmNx1629";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 541B3833ED; Thu, 25 Sep 2025 22:56:21 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
+ id 60D188341C; Thu, 25 Sep 2025 22:56:23 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4206D833ED
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:56:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46A7983542
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:56:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7a76561c291so417871a34.1
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:56:19 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-30cce86052cso1059211fac.1
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:56:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758833778; x=1759438578; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758833780; x=1759438580; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=/fqgJIf71LxwC09gy89JDWHJgJxmBhhAEDL55BS5g64=;
- b=s7DRJxrBgG08HfcL91td2UWA9bdTDuuKUTqviakyn2Z41zq8gBlKn0c911Wl08CDoU
- H3QA+HYfij0emM+LiVBnIqI/ONNyOLHZEAgDg+FwfXNQ/2X77I78YUFHZzVM2lLv0/4s
- XV/am88NLsoDCaeEr1lJ8LQ5SWiG0VkrH4ozs=
+ bh=//uOZFQ3IBMDNRyShvZJ/JUKMC9l/df8eIW5/5TDT/c=;
+ b=VmNx1629wz6aFe7key/33mEHM1BhvU12vWqAk9rpAwEwM17KsbuV2AVnsfr5qZ/xLm
+ YHIaHAdQlANf5RCKIqB0QBybMfbX5+MNbokTNWg1kt7YnNiH3U3wuCDwmLI99Piz4FQq
+ rJ64qFzN/QnMsB59GBWuQnJ6al4tvMPpQml5w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758833778; x=1759438578;
+ d=1e100.net; s=20230601; t=1758833780; x=1759438580;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/fqgJIf71LxwC09gy89JDWHJgJxmBhhAEDL55BS5g64=;
- b=p5cMmQEifJYbQvOqqFWEpW19qb2I+XY72/wk4JUKTZdGmzRsy9f9NIuKxr/aVJvpeO
- gVvBBTiY0fJ0s71XF0TxiCiS+uv78hobw9l/zg/3+B3wIdNsgOT34o5FEfqq6Rtj7Dtx
- HI9k6qYnCNF7aiKRNkormt+mFf2qf+vbKx6VX1/FV5fSwhrblr68UG2Sy/K6pcEMFyvA
- MKfq4VfLkBoTFu4d3RW6+EAxW9w74AW/HnkXivdzwHXXNVjj5d9CLRRsf8ATnBz3r/6G
- vSI0f57qs7qpq+eCqptcJrgMEhBORgQ/lGO81ZwfqF43IefvJ/vuRWCzAdmMw59zMbwR
- qWwA==
-X-Gm-Message-State: AOJu0Yw6nnqpMXCMsWoy3MAfWwXpHZfVmDr/ssoeJVguf0HWHLWz2zCo
- +9/Sr+VdcUndIqozHQNCMmVJ5cN15tWdORUcYUS8YZKcMVS6vybZB9Un34VDEZkOwJjXr8Gu4ZB
- Z5Oe8L0s=
-X-Gm-Gg: ASbGnctsHDfaohLZth3umWyf85pIW6ZVGmsM6vczm3KwgpecQHs1pOARSF/YDUMquMq
- DFd+36VGtPgx45mE/5ClP2C3ADGth2qyp8dxl3gydXn+vPTOUWbAtDm9tqvP+5+ch58Yrs/+lMm
- sXTUYV4kWaaD5bHgsYC06kZYgxy4E64aFLhrc8AK+DvPI9uXbJgLBo4tt2E31gl2ojYE2+3MNNM
- DAOLa9V1enJ27gFcGTfRbATxCaWS2qHNvY4Jf6rDWoKEvz8AOn0KxwUImeUJWc1tKUkr6gqLWUQ
- GbHxZFvqZ+X9SdoGPkdf0yUUtCvDNhMjw3m30TN237r49r9gdxaoIfx/dbhIaFo44ZTJVjSuyqn
- Lnsm3zxu3fDA6I8DvEtNCmNcMkWvGOCR5m/g4rOJzCa66THBCY72+GRlnFsU=
-X-Google-Smtp-Source: AGHT+IHNppDwOSNrwY9jp4H+5I4Rttnhx24Qy3PZxKZ7JWzKAni5qvTkHdZHbyK/yhBvlw2yAWOzXA==
-X-Received: by 2002:a05:6830:3c87:b0:758:ebf:fb35 with SMTP id
- 46e09a7af769-7a03a9d10cdmr3050687a34.4.1758833778046; 
- Thu, 25 Sep 2025 13:56:18 -0700 (PDT)
+ bh=//uOZFQ3IBMDNRyShvZJ/JUKMC9l/df8eIW5/5TDT/c=;
+ b=ZmUAkJUpfUklrTxn9Q9pw/IXX2OQMkGCuXPsd1jIRCQFgIXUre9Gq9pkTNM0L691PN
+ j5yiJcjm/Eii4jSiHfxh3orUuPApI0yqbofHTJfVqNsxpuUQ6ZK4ELxPPE08u6mhBKT+
+ 7R02PpkHjLCvUrcXXggo3YvAdF4j9pLjL7V/CwPPd+yfsw39yPcbJZaE98uBRsM+/fGk
+ F/3qc4RjC5RuJJW+vxFSsL1G9WjUGhmIUWLycpNnTwMlrwQOPNQXtITekoO3Ek06N+/y
+ HUZUUD/dXYXP6MRUk96tUEBRWwoAYxpHIe4gn2KFtpB+f/2WsTNiPLkkq2nGNvtULF9m
+ I0ig==
+X-Gm-Message-State: AOJu0YweCA5fGHpNA3+sXyuMRHCxgi3oGp25Zn/F9B/Nw4l+IZJFOFO7
+ ua70urnV6CPFzYowVc+ciSPs82w0dQtQLKCJSpWL2U65LJPJ/Tr55XNofydn15oICljyXKlvwLJ
+ wgPzM9v4=
+X-Gm-Gg: ASbGncvDFT6qAjOu8jX6YQmn+G+EMvVtL/z6hMZAgA069/I2Xj3ZaRXo34TXGRnqHaj
+ +L/uPE5N8el3FqlCQvb7WPC0TmH7p+2YdGd8EbgQWTm3FLqi/aphVi0A1gMlNmRMfiorCBAh21B
+ 50cbKUpPvLlKFZfPeE8Q8BJocv4s5IAiLF8jgaYL5anteE1MxRCtabny4ISxOYCKhaRJWQ33+R9
+ AiMNN33gQNr6RB1m3gP5xCjOPnIxar6aSdSmcQTX77h4fK5nQKwTyzArpadR4clijHYlDUmTTpy
+ 5xU0FE41ig35xAsVfp1NB6u7S8VKUmMCNyKF00RCf0F9JMG7SgWYpE1eTUKhPoyDd4Q4TqJ6kMW
+ YQMgLMErzBecTuP6Va6uqWACNk4ASIrl+aQ3lNCQ14Cs1d4rge5FSkL7G5mg=
+X-Google-Smtp-Source: AGHT+IH+32lGw1NUC24Rl2Ltvb5meAzoOCD7iySUtvTg2rrRK16/aFpCpDeMdXgIyaY0ewiA+jAzwg==
+X-Received: by 2002:a05:6870:d6a4:b0:353:f24:e95a with SMTP id
+ 586e51a60fabf-35ef0761242mr1882914fac.42.1758833780012; 
+ Thu, 25 Sep 2025 13:56:20 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a2422794c0sm604323a34.41.2025.09.25.13.56.17
+ 46e09a7af769-7a2401f018esm611107a34.33.2025.09.25.13.56.18
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 13:56:17 -0700 (PDT)
+ Thu, 25 Sep 2025 13:56:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] rtc: Make U_BOOT_DRIVER entries unique
-Date: Thu, 25 Sep 2025 14:56:16 -0600
-Message-ID: <20250925205616.3562560-1-trini@konsulko.com>
+Subject: [PATCH] spmi: sandbox: Make U_BOOT_DRIVER entries unique
+Date: Thu, 25 Sep 2025 14:56:18 -0600
+Message-ID: <20250925205618.3562580-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,26 +93,26 @@ X-Virus-Status: Clean
 
 All instances of the U_BOOT_DRIVER must use a unique name or they will
 lead to link time failures due to name space conflicts when both are
-present. In this case the driver was reusing the max313xx name.
+present. In this case the driver was reusing the msm name.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/rtc/ds1672.c | 2 +-
+ drivers/spmi/spmi-sandbox.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/rtc/ds1672.c b/drivers/rtc/ds1672.c
-index 4705e5abc932..651b1dc950fc 100644
---- a/drivers/rtc/ds1672.c
-+++ b/drivers/rtc/ds1672.c
-@@ -108,7 +108,7 @@ static const struct udevice_id ds1672_of_id[] = {
+diff --git a/drivers/spmi/spmi-sandbox.c b/drivers/spmi/spmi-sandbox.c
+index 992b08dd6120..1a8561b3aea2 100644
+--- a/drivers/spmi/spmi-sandbox.c
++++ b/drivers/spmi/spmi-sandbox.c
+@@ -144,7 +144,7 @@ static const struct udevice_id sandbox_spmi_ids[] = {
  	{ }
  };
  
--U_BOOT_DRIVER(rtc_max313xx) = {
-+U_BOOT_DRIVER(rtc_ds1672) = {
- 	.name	= "rtc-ds1672",
- 	.id     = UCLASS_RTC,
- 	.probe  = ds1672_probe,
+-U_BOOT_DRIVER(msm_spmi) = {
++U_BOOT_DRIVER(sandbox_spmi) = {
+ 	.name = "sandbox_spmi",
+ 	.id = UCLASS_SPMI,
+ 	.of_match = sandbox_spmi_ids,
 -- 
 2.43.0
 
