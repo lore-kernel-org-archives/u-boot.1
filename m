@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C44CAC5B1
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:08:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5C3CAC5B1
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:09:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 862FF80107;
-	Thu, 25 Sep 2025 16:08:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3528E80107;
+	Thu, 25 Sep 2025 16:09:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KSENmhNf";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="m+G48tZv";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="F5HVhilv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88C708206E; Thu, 25 Sep 2025 16:08:10 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E74BB836F0; Thu, 25 Sep 2025 10:25:31 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC2338004F
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:08:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E38E836B4
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 10:25:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-62184a28eaaso193720eaf.1
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:08:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758809285; x=1759414085; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/p0mSM527Ccw/h/olingUGX3e57H9ldLZ2+UjJ/Aqyk=;
- b=KSENmhNflPipqA0dH+njjvmUploGJ/t/zjIOCLEnXAmuIG5JNfB0+lA0HbfhMa2bJV
- K27mqvvbLa3tWtF0QlRUz4SQXl0jrWKHxGIxR0oITdiSSWa3h9z3l4TJzlS6n4JYB5mQ
- PED9SgSxzAMxMPhwHTHnulwOPQHtnsktC3cK4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758809285; x=1759414085;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/p0mSM527Ccw/h/olingUGX3e57H9ldLZ2+UjJ/Aqyk=;
- b=UliNBbgm3YXQDPrpA/JprUgtkTeg8nshZnPdRRRXX4hPYgtnGDOpwEoQOAUtqX6/8t
- xanyKb6DH07TEmwcvO1UURT4UCzkmZ8jlXOBvciOwY+eahgzZbrdf19qj2Y+NjmzduYV
- LGsRAomQeZ7XHvqk2obmUXixamebEdMSRkZJZymQMdWXqnqk9mCZ5gMGLwf4J2vBGJHz
- xJS4ee63b+M6tLB96EUadZKz8mCMz+ojPQgxBEeja23b4U6D+3urwL9bICPooYPGnku5
- Rda0lVHTkj+aFCr53IRqlzTIVA0mj94b/4sgRx7Jd6vfO+QUztuoV285hkhhmTvx1tvT
- ny7w==
-X-Gm-Message-State: AOJu0YwE7DzRm3motq0IaPqUIchnH5WUujFtOWzw4NYAtA+Sz48AixLn
- 1YKWQQ0FiRg53fjulNuO+CdBiB0HSxY+5UvbHcjpAcQwtP1K8a38oehKsIKSvJN0dew=
-X-Gm-Gg: ASbGncvrHxqnY1UogAtPA+Ck/FLCbXXoTXsNoihWPJDVd5H9sTK7AudA/gh1No+FjcO
- 02cedAhIkofP9uGUddUl5mKepr2Je79mgiuu4JcByJ/vztiIuIerr2718FXSWEHFqcwfin9qJtO
- qiuLK80kxbaJkxStESrnkyFmXZuPnNsrylae86mBNCvlDf0OCH1r9Jd/F0ywTahk4P8q9cNulcr
- ZB7lvkH3FH1ZL8AEy0s1GI8wQjrl0yYhHmaCMLDSxzSSQ3IES28ALTD70AxEnUyKhIDYyy9zj/+
- cQqwvbAM596kcua1g0iAmvcX5Y8yXDFMWAud6nKdmR6ME1iG69KmSA4os2aigFB4YG0U21okDUd
- A1LxGFi34ppcNb21qbsmZY5Ym5rW2d9tRUOvr/FyuRCxNCJMuCkLbp+Gg
-X-Google-Smtp-Source: AGHT+IHnnOQfsuRnG3c0Ay9Uxxf28frruqMfmIB/J/xDFcJFUnEuUsSv7B4g4makewE0q31ph6qctw==
-X-Received: by 2002:a4a:bc9a:0:b0:63d:bc20:a63b with SMTP id
- 006d021491bc7-63dbc20b6f7mr111398eaf.0.1758809285594; 
- Thu, 25 Sep 2025 07:08:05 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-63b1ff15ba8sm197471eaf.8.2025.09.25.07.08.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 07:08:04 -0700 (PDT)
-Date: Thu, 25 Sep 2025 08:08:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de,
- Carlos =?iso-8859-1?Q?L=F3pez?= <carlos.lopezr4096@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] Revert "tools: mkimage: detect overlapping load regions
- in FIT configurations"
-Message-ID: <20250925140802.GL197373@bill-the-cat>
-References: <20250925134212.59709-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cXRc91RyGz9tJx;
+ Thu, 25 Sep 2025 10:25:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758788729;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=lyru5m3KUcAH0XxoJh8JTiMCNPEmxO4uzw2h21NSt6s=;
+ b=m+G48tZvg2W4Xh0QhMygeqW6GxLqBlu2YUnGNeyToPWM0EGIsX9ZNCRnh/TswSQa2yrfzm
+ sv7QchO5Y1bwwtSDtzO6zqIkSeimNZkvmcMYcRhdqESyGWcSHihwyno6PorLmL5OXj2PhI
+ +wn65Tu3S/0wvTKd3bXxzHaLVBEZTmFCi6lhGTeMb/H0FLxvx2nuWviTUVD7F8nq0RBE+9
+ h4mgJtLNkbhei/hrTCIHvpGUl9WqCkj1+WWlh7Ae5/d7IT2Cw8C2Rvxi4aZ58InUBQNY1N
+ gjW9sYh6ss+bK5XBmOIEPH0K9ck/ZZlbNx8rTdl3nuMXC0Y0v0wHChC3dX9c8Q==
+Message-ID: <7ec0eba7-ab95-4269-9b5d-256c1eef50a0@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758788726;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=lyru5m3KUcAH0XxoJh8JTiMCNPEmxO4uzw2h21NSt6s=;
+ b=F5HVhilvFEDCKeSEcFpVfrn/WcpFcFRMotTJD82Xclo99V+vG3gyKs91ZMYR94rgXRykUG
+ LwOTJ6a7cmKDv2QpGRkXkaoQ+BUtGZIUJ6K7QG3R3xtiWhFU8nZ7iixacoigbRq79bbhyV
+ /0cIyFcuCtqPjjJcHslxPYCe1OsZOQ8BUQhqN2rxnhj9JVR+k0EKCju3twkr/wSfMkMPzr
+ VmTtW4f40V+ilOfQllQI3xyshwTcZYDzgkLL1K3VEZeP+gYwn46LZePj2utpNXUvcZ2OO2
+ DKY7QsZFu8JJvCc56FjezSZGSdfFM6zXxquObvppLgnepamBDGthRdyUUhChEg==
+Date: Thu, 25 Sep 2025 10:25:20 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9x+JXlufhpqlc/+R"
-Content-Disposition: inline
-In-Reply-To: <20250925134212.59709-1-marek.vasut+renesas@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v7 2/5] bootstd: select BLK rather than depending on it
+To: Simon Glass <sjg@u-boot.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Simon Glass <sjg@chromium.org>,
+ Ezra Buehler <ezra.buehler@husqvarnagroup.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Thomas Chou <thomas@wytron.com.tw>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <20250925002308.2825164-1-sjg@u-boot.org>
+ <20250925002308.2825164-3-sjg@u-boot.org>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <20250925002308.2825164-3-sjg@u-boot.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 1dreiku87bkarnkxg3m75rocpxodoj63
+X-MBO-RS-ID: 592dd03a7945eaed56b
+X-Mailman-Approved-At: Thu, 25 Sep 2025 16:09:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,42 +99,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---9x+JXlufhpqlc/+R
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+glad to "hear" something from you again. ;)
 
-On Thu, Sep 25, 2025 at 03:41:43PM +0200, Marek Vasut wrote:
+...
 
-> This reverts commit 588094f2c8ec9a4f7d2dcda11ffae8db8462149c.
->=20
-> This introduces warnings on valid fitImages which do not set load
-> address for fdt-1 DT node. This is valid, because DT can be loaded
-> to suitable location as determined by the fitImage loader.
->=20
-> Warning: not able to get `load` of node 'fdt-1'
->=20
-> Furthermore, do not add C++ style comments into C code.
->=20
-> Either send a fix or apply this revert.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+On 9/25/25 02:23, Simon Glass wrote:
+> From: Simon Glass <sjg@chromium.org>
+> 
+> With recent changes to how BLK works, we must use 'select' to enable the
+> BLK feature, which is currently required by BOOTSTD.
+> 
+> This fixes the following error:
+> 
+>      GEN     Makefile
+>    scripts/kconfig/conf  --syncconfig Kconfig
+>    boot/Kconfig:496:error: recursive dependency detected!
+>    boot/Kconfig:496:	symbol BOOTSTD_DEFAULTS depends on BOOTSTD
+>    boot/Kconfig:441:	symbol BOOTSTD default is visible depending on BLK
+>    drivers/block/Kconfig:1:	symbol BLK is selected by USB
+>    drivers/usb/Kconfig:1:	symbol USB is selected by BOOTSTD_DEFAULTS
+> 
+> Disable BOOTSTD for the boards which don't have enough space or some
+> other problem:
+> 
+>    zynq_cse_nand
+>    zynq_cse_nor
+>    zynq_cse_qspi
+>    gardena-smart-gateway-mt7688
+>    10m50
+>    3c120
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v7:
+> - Put this patch earlier in the series, so it is bisectable
+> - Disable some boards which lack space
+> 
+> Changes in v6:
+> - Add new patch to select BLK rather than depending on it
+> 
+>   boot/Kconfig                                   | 3 ++-
+>   configs/10m50_defconfig                        | 1 +
+>   configs/3c120_defconfig                        | 1 +
+>   configs/gardena-smart-gateway-mt7688_defconfig | 1 +
 
-Sorry you hit this during the window before I reverted the series.
+For this platform:
 
---=20
-Tom
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
 
---9x+JXlufhpqlc/+R
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks,
+Stefan
 
------BEGIN PGP SIGNATURE-----
+>   configs/zynq_cse_nand_defconfig                | 1 +
+>   configs/zynq_cse_nor_defconfig                 | 1 +
+>   configs/zynq_cse_qspi_defconfig                | 1 +
+>   7 files changed, 8 insertions(+), 1 deletion(-)
+> 
+> diff --git a/boot/Kconfig b/boot/Kconfig
+> index d1e608f2595..2cc33cc874d 100644
+> --- a/boot/Kconfig
+> +++ b/boot/Kconfig
+> @@ -438,8 +438,9 @@ config BOOT_DEFAULTS
+>   
+>   menuconfig BOOTSTD
+>   	bool "Standard boot"
+> -	default y if BLK
+> +	default y
+>   	depends on DM && OF_CONTROL
+> +	select BLK
+>   	help
+>   	  U-Boot supports a standard way of locating something to boot,
+>   	  typically an Operating System such as Linux, provided by a distro such
+> diff --git a/configs/10m50_defconfig b/configs/10m50_defconfig
+> index 8180ed55e3e..0d4b1dc8d94 100644
+> --- a/configs/10m50_defconfig
+> +++ b/configs/10m50_defconfig
+> @@ -13,6 +13,7 @@ CONFIG_SYS_LOAD_ADDR=0xcc000000
+>   CONFIG_ENV_ADDR=0xF4080000
+>   CONFIG_SYS_MONITOR_BASE=0xCFF80000
+>   CONFIG_FIT=y
+> +# CONFIG_BOOTSTD is not set
+>   # CONFIG_AUTOBOOT is not set
+>   CONFIG_SYS_CBSIZE=256
+>   CONFIG_SYS_PBSIZE=276
+> diff --git a/configs/3c120_defconfig b/configs/3c120_defconfig
+> index 0a6eae4b5dd..c444a12f485 100644
+> --- a/configs/3c120_defconfig
+> +++ b/configs/3c120_defconfig
+> @@ -13,6 +13,7 @@ CONFIG_SYS_LOAD_ADDR=0xd4000000
+>   CONFIG_ENV_ADDR=0xE2880000
+>   CONFIG_SYS_MONITOR_BASE=0xD7F80000
+>   CONFIG_FIT=y
+> +# CONFIG_BOOTSTD is not set
+>   # CONFIG_AUTOBOOT is not set
+>   CONFIG_SYS_CBSIZE=256
+>   CONFIG_SYS_PBSIZE=276
+> diff --git a/configs/gardena-smart-gateway-mt7688_defconfig b/configs/gardena-smart-gateway-mt7688_defconfig
+> index 3c2bcc6a3c4..ea0094394eb 100644
+> --- a/configs/gardena-smart-gateway-mt7688_defconfig
+> +++ b/configs/gardena-smart-gateway-mt7688_defconfig
+> @@ -31,6 +31,7 @@ CONFIG_HAS_BOARD_SIZE_LIMIT=y
+>   CONFIG_BOARD_SIZE_LIMIT=655360
+>   CONFIG_FIT=y
+>   CONFIG_FIT_SIGNATURE=y
+> +# CONFIG_BOOTSTD is not set
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+>   CONFIG_AUTOBOOT_KEYED=y
+>   CONFIG_AUTOBOOT_STOP_STR="x"
+> diff --git a/configs/zynq_cse_nand_defconfig b/configs/zynq_cse_nand_defconfig
+> index 4272b7320b6..9b85b23a9d5 100644
+> --- a/configs/zynq_cse_nand_defconfig
+> +++ b/configs/zynq_cse_nand_defconfig
+> @@ -23,6 +23,7 @@ CONFIG_SPL=y
+>   CONFIG_REMAKE_ELF=y
+>   CONFIG_SYS_CUSTOM_LDSCRIPT=y
+>   CONFIG_SYS_LDSCRIPT="arch/arm/mach-zynq/u-boot.lds"
+> +# CONFIG_BOOTSTD is not set
+>   # CONFIG_AUTOBOOT is not set
+>   CONFIG_USE_PREBOOT=y
+>   CONFIG_SYS_CBSIZE=1024
+> diff --git a/configs/zynq_cse_nor_defconfig b/configs/zynq_cse_nor_defconfig
+> index 74c4595eb43..fab02bfdb0a 100644
+> --- a/configs/zynq_cse_nor_defconfig
+> +++ b/configs/zynq_cse_nor_defconfig
+> @@ -23,6 +23,7 @@ CONFIG_SPL=y
+>   CONFIG_REMAKE_ELF=y
+>   CONFIG_SYS_CUSTOM_LDSCRIPT=y
+>   CONFIG_SYS_LDSCRIPT="arch/arm/mach-zynq/u-boot.lds"
+> +# CONFIG_BOOTSTD is not set
+>   # CONFIG_AUTOBOOT is not set
+>   CONFIG_USE_PREBOOT=y
+>   CONFIG_SYS_CBSIZE=1024
+> diff --git a/configs/zynq_cse_qspi_defconfig b/configs/zynq_cse_qspi_defconfig
+> index 145b7fd33bb..31ff00c689c 100644
+> --- a/configs/zynq_cse_qspi_defconfig
+> +++ b/configs/zynq_cse_qspi_defconfig
+> @@ -29,6 +29,7 @@ CONFIG_DEBUG_UART=y
+>   CONFIG_REMAKE_ELF=y
+>   CONFIG_SYS_CUSTOM_LDSCRIPT=y
+>   CONFIG_SYS_LDSCRIPT="arch/arm/mach-zynq/u-boot.lds"
+> +# CONFIG_BOOTSTD is not set
+>   # CONFIG_AUTOBOOT is not set
+>   # CONFIG_ARCH_FIXUP_FDT_MEMORY is not set
+>   CONFIG_USE_PREBOOT=y
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNVMvgAKCRAr4qD1Cr/k
-CgCVAP4h6+lEbgDp4epTGrop1NnB/TcDeoHMqRoQw7yFEKExsgEA5hyiDVQjRasF
-habf2ym38pZThMuFIhvrLEG5HTHaXwc=
-=ocC+
------END PGP SIGNATURE-----
-
---9x+JXlufhpqlc/+R--
