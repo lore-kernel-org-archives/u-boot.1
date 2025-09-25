@@ -4,122 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D8DCCAC5B0
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 22:51:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D9ECAC5B0
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 00:51:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E145682A9E;
-	Fri, 26 Sep 2025 00:51:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 12418802C1;
+	Fri, 26 Sep 2025 02:51:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Om7LVTrB";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="a/ixde2V";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lt3YaA7/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 096DB82AE1; Fri, 26 Sep 2025 00:51:39 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3AA0482998; Fri, 26 Sep 2025 01:09:05 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3FA2802C1
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 00:51:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2200980107
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 01:09:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-85d02580a07so78024185a.0
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 15:51:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758840695; x=1759445495; darn=lists.denx.de;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TlFF5T0wJuWbKLI/nzf0Wm0TlqdP8SZMrIi8a5WJuDQ=;
- b=Om7LVTrBgwSiq/uwm+b/wIDz7MNuTn5CN1OZ5d+wngzFG71GuTcmNeygQb2nz1i7Ak
- 0KOzmIHI0PJnLj3AIPNP3SsXOOvOkC7ORJxVqeV4KlI2fgNYVfN5wCfgmMVQkdi6y71u
- DNn2b86zl+KhrIYnSpytL8IfDHujqiB5R0GHvyPVIF7Pp6HLZboI8dp0qzleRa5WDaPo
- zPwWh+WiDgZ9CafIBDFaWv2Pj/ews6KTv8elg50Lg9TO6qxVu5rsno+qVHBG+5e6foNj
- /MXzJ/2uVGOsO9S3rl31UZPue5H6LAQ+WD/wiy5kPilZQLhMdzTJEpZvBTrbTxEfdDKC
- PRqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758840695; x=1759445495;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=TlFF5T0wJuWbKLI/nzf0Wm0TlqdP8SZMrIi8a5WJuDQ=;
- b=FUEcoBDGsGAGI3EgVQ0sImqrif6EpdZ2aDE8TKoKOoGLb88AaOzEAoqqpeytVKjuJq
- zaKZe9gm9cmFcXOD6m/p+DGrRPKuI7FOE833I9AkIke/vRbTf1W+DqCHl3KR0hwkmREn
- IuE8G/Ab63jrc6l6Ql1yNGijRUEHT+r1zr2LlGSwAsxTCM+EAJnHsilKFfGwB1IY70og
- UXzCyl5xMLL3xe220OsiWvLXagQmcPEY15k/CNmlsT3PA25IMswiHsk2mr5b3+2W+VAo
- JKYBm2fyQuGZsw2JI8v080gA7rlHAKw2s+eL6+msHTri6mttW4v13rIjpgp/9ECRz2vv
- hu2w==
-X-Gm-Message-State: AOJu0Yx3d/DqAfgpC/HPw4oBttUtoTGIktOrFp2kzFhEO+TJYhNimJns
- vlNJsrBC3Fb93fbwgIvOeWZHhMEM+XRXyCaVXRLdZtMPbY5RhYDulnKxBdDxDcBlrqNtrAVA9qP
- RXWBe
-X-Gm-Gg: ASbGncsFUKhie1e0x1SrnVZsDhslw1QkG1RzLrRsXoSRkJO8Fx53a1r/8CAb98D7gSi
- cgMcIoBW2TiD4nimHuSaZGz3MMN1JNmCpWvwpHV6eBhG8lyZell2gAoa3x5G044XcGrht/7WhLQ
- iMCgaJUopuo8OR6jWCkq0PjJ1C8XCMzdPM6UY30rCUSxUy/XRSmuwMXf0vaOJOQGiQreg/exPMo
- cctQ9FLk5uUmMsxFUYP1EYCn1QeauIkrx3WulX+Xf2Bq5VjULaPgxqN+xUSnugmp3tyFLtf9PqL
- TP1fzrlGuoECn59e6RSIyCE4BDMlCGDAjI13kWshlNlZdoJ+D29X9X2Cd7PODjNvkaPO7v1FGx0
- q34gFZrk4ah1Da9j3MNIpIrKCQOeDuhL7hx38XI8PxB/SCNyii6a2cfDkMse8YP6+lDeWZxlHis
- HoVRlPy6ZXQDXXLw==
-X-Google-Smtp-Source: AGHT+IHothsm64p9/aqeWTdz599DQoQ0hOGR+idNLLM/AfZ0FtheOAt1d2nwJMf4gD5Cdn7hlzEZPw==
-X-Received: by 2002:a05:620a:8009:b0:85f:61d2:7989 with SMTP id
- af79cd13be357-85f61d27a21mr343465285a.14.1758840695572; 
- Thu, 25 Sep 2025 15:51:35 -0700 (PDT)
-Received: from fauth-a2-smtp.messagingengine.com
- (fauth-a2-smtp.messagingengine.com. [103.168.172.201])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-85c3218e75csm186062185a.49.2025.09.25.15.51.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 15:51:33 -0700 (PDT)
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfauth.phl.internal (Postfix) with ESMTP id 24398F40066;
- Thu, 25 Sep 2025 18:51:32 -0400 (EDT)
-Received: from phl-imap-07 ([10.202.2.97])
- by phl-compute-05.internal (MEProxy); Thu, 25 Sep 2025 18:51:32 -0400
-X-ME-Sender: <xms:dMfVaH1v6TEQtpVZtxCYqxBjeTXqg0JXudpSrILW8qmr35f1RvWm7A>
- <xme:dMfVaA6aWQN6EpndNm1aGIUiSCaIsbyYGkuc6tz4dVKfLZrSRxLGgcBlHoKy94boO
- nBoxXO5MYkqsNyuE67bC1rtjDSKJc3xXY0NJRpYQpck_wBflDadsyA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdeijeejfecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefoggffhffvvefkjghfufgtgfesthhqredtredtjeenucfhrhhomhepfdflrghvihgv
- rhcuvfhirgdfuceojhgrvhhivghrrdhtihgrsehlihhnrghrohdrohhrgheqnecuggftrf
- grthhtvghrnhepledukeevvdfgkeegffeiieeikefhkedvteejtdehffdvhffgjeevieev
- jeffleelnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomh
- epfhgrshhtmhgrihhlodhmvghsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdduhedv
- keekleehkeefqdefudefieegvdeliedqjhgrvhhivghrrdhtihgrpeeplhhinhgrrhhord
- horhhgsehjvghtmhdrmhgvpdhnsggprhgtphhtthhopeefpdhmohguvgepshhmthhpohhu
- thdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhope
- hilhhirghsrdgrphgrlhhoughimhgrsheslhhinhgrrhhordhorhhgpdhrtghpthhtohep
- uhdqsghoohhtsehlihhsthhsrdguvghngidruggv
-X-ME-Proxy: <xmx:dMfVaCx4i5coq4EWNfZdx_VnBYpdoYpMllIhz_kUmd4_SQXiwVNvXA>
- <xmx:dMfVaGA2tK2Fj2cGZTFdFacU9xuvlHDuEIsMWdojl6oULYfVRQosQw>
- <xmx:dMfVaHbidqkibWS4N99b4XI7qnPJEiMdyxqWUd2EycE-_tEz7Yg9Xg>
- <xmx:dMfVaGjxbRrECclkv0V9DkISd0QrH8HtWW_SOPVnvvtr7o9iiknJYA>
- <xmx:dMfVaB5DZjGphwbv5Mbe68pGSObOI3qX_lKpLiNPPZgcuIT7ot3xz1Wl>
-Feedback-ID: idd3648b2:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id E9BF01EA0068; Thu, 25 Sep 2025 18:51:31 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cXqCd5PVNz9tHV;
+ Fri, 26 Sep 2025 01:09:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758841741;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ny/N3CgwEJi5VQAtQMc4ASae0MhR5yT1dMgpc9eT0Ps=;
+ b=a/ixde2VJ8HvveYuQ1u7/1X+kx1mYheU5zbuodwV/OcHyPvV8I7WnQtYNG+G3JVPp7hKsn
+ zbr2BUHPhpaS1/EVEvvVpu1CkoOAyERv7QjdS4oL5uZ1m01ufPoBA8N8o7QzHBBszLMiGF
+ WS18RRHdlqrzHko4XZcOdkiKJ9fCyMDcLU05KYRYkTdlvOkio1rwaB2h3/YPdEQRdW6ncc
+ etg908lg/grnus6+UDhMsb9hi4IALf//C13iIgpNrf6mKJaqxVSylceP8bci2TB29gk82X
+ Q98G6pvlqECDzzLf/RUI/2hdYbpIWHIs/UqQUSNMaey8DWMmF8/Iyzv4k56G9A==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="lt3YaA7/";
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+usb@mailbox.org designates
+ 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut+usb@mailbox.org
+From: Marek Vasut <marek.vasut+usb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758841739;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ny/N3CgwEJi5VQAtQMc4ASae0MhR5yT1dMgpc9eT0Ps=;
+ b=lt3YaA7/eYm7mZdYXTCYDr8EVbBUrJjahWpsgvCSAEfouReN0dC2x1gSIl7CAdtsX03KCw
+ k0ql/cJRuAQar9jK3QWQKkKYDlj74DOKxadwVAeyc15g9mj43Ik5xQv++cJ+3eRF0nZd3M
+ m9602JITpZCanNmvuTfRa6eJgb7TYlMqIM9TkQL7QRCNjHDtX7c5M/80LT9qu123bW99s8
+ AvPUZMbljcjTturz7BhSJJiXxLaCtlxoJAOKf+2YfnAFP6LFh1jABxp/xAfURoEsFTxATz
+ JtBrwsnY/pJ2RNO/49rtfBiVqmasMdYp5pvVgERzvaxDIyH9HFtSu0/JXJ/9Iw==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>
+Subject: [PULL] u-boot-usb/next
+Date: Fri, 26 Sep 2025 01:08:33 +0200
+Message-ID: <20250925230847.183416-1-marek.vasut+usb@mailbox.org>
 MIME-Version: 1.0
-X-ThreadId: A_MkewDl2oIw
-Date: Thu, 25 Sep 2025 16:51:11 -0600
-From: "Javier Tia" <javier.tia@linaro.org>
-To: "Tom Rini" <trini@konsulko.com>,
- "Ilias Apalodimas" <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de
-Message-Id: <6007da67-28f9-4c6c-8e4b-9200c0a3d134@app.fastmail.com>
-In-Reply-To: <20250925163541.GR197373@bill-the-cat>
-References: <20250924233120.454116-1-javier.tia@linaro.org>
- <20250924233120.454116-2-javier.tia@linaro.org>
- <CAC_iWjKBzrJJj1fzeAkBeV2ZrOO1fT+9QUHrVdkb0FFD+seafg@mail.gmail.com>
- <20250925163541.GR197373@bill-the-cat>
-Subject: Re: [PATCH v6 1/2] part: Export part_driver_lookup_type for external
- use
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: pp8ewoyjtpuddzx497t1na5k6c3jfnju
+X-MBO-RS-ID: d424e2b84178c3af088
+X-Rspamd-Queue-Id: 4cXqCd5PVNz9tHV
+X-Mailman-Approved-At: Fri, 26 Sep 2025 02:51:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,62 +89,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The following changes since commit 44c4919e9dd6c162b237633ba689441eca9a149c:
 
-On Thu, Sep 25, 2025, at 10:35 AM, Tom Rini wrote:
-> On Thu, Sep 25, 2025 at 09:20:53AM +0300, Ilias Apalodimas wrote:
->> Hi Javier,
->>=20
->> On Thu, 25 Sept 2025 at 02:31, Javier Tia <javier.tia@linaro.org> wro=
-te:
->> >
->> > Make part_driver_lookup_type non-static so it can be used outside
->> > part.c. This allows external callers to determine the appropriate
->> > partition driver for a block device, enabling more flexible handlin=
-g of
->> > partition types.
->> >
->> > Add a prototype and kernel-doc comment in part.h to document the
->> > function contract. Provide a stub inline implementation returning N=
-ULL
->> > when partition support is disabled, ensuring build consistency acro=
-ss
->> > configurations.
->> >
->> > Signed-off-by: Javier Tia <javier.tia@linaro.org>
->> > ---
->> >  disk/part.c    |  2 +-
->> >  include/part.h | 21 +++++++++++++++++++++
->> >  2 files changed, 22 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/disk/part.c b/disk/part.c
->> > index 66e2b3a7219..f0c6866e210 100644
->> > --- a/disk/part.c
->> > +++ b/disk/part.c
->> > @@ -63,7 +63,7 @@ static struct part_driver *part_driver_get_type(i=
-nt part_type)
->> >   * @dev_desc: Device descriptor
->> >   * Return: Driver found, or NULL if none
->> >   */
->> > -static struct part_driver *part_driver_lookup_type(struct blk_desc=
- *desc)
->> > +struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
->
-> Since Ilias has a comment, I'll also note that with the kerneldoc movi=
-ng
-> to the header, the version in the C file should be removed (this means
-> they won't get out of sync).
+  test: Fix optee unit test (2025-09-24 11:04:11 -0600)
 
-I have removed the duplicate kerneldocs as you mentioned; it's already i=
-n the header. Thanks.
+are available in the Git repository at:
 
-Sent patch series v7.
+  git://source.denx.de/u-boot-usb.git next
 
-> --=20
-> Tom
->
-> Attachments:
-> * signature.asc
+for you to fetch changes up to 3285584429ba09df602011784f40e2c2d59a26b9:
 
---=20
-=C2=BB Javier Tia =E2=9C=8D
+  usb: host: Tighten USB musb-new host glue driver dependencies (2025-09-26 00:06:00 +0200)
+
+----------------------------------------------------------------
+Tom Rini (6):
+      usb: dwc3: Tighten driver glue dependencies
+      usb: gadget: Tighten requirements on USB_GADGET_ATMEL_USBA
+      usb: gadget: bcm_udc_otg: Remove unused driver
+      usb: gadget: max3420_udc: Remove unused driver
+      usb: host: Tighten USB host driver dependencies
+      usb: host: Tighten USB musb-new host glue driver dependencies
+
+ drivers/usb/dwc3/Kconfig             |   9 +-
+ drivers/usb/gadget/Kconfig           |  12 +-
+ drivers/usb/gadget/Makefile          |   2 -
+ drivers/usb/gadget/bcm_udc_otg.h     |  19 -
+ drivers/usb/gadget/bcm_udc_otg_phy.c |  54 ---
+ drivers/usb/gadget/max3420_udc.c     | 879 -----------------------------------
+ drivers/usb/host/Kconfig             |   8 +-
+ drivers/usb/musb-new/Kconfig         |   2 +
+ 8 files changed, 15 insertions(+), 970 deletions(-)
+ delete mode 100644 drivers/usb/gadget/bcm_udc_otg.h
+ delete mode 100644 drivers/usb/gadget/bcm_udc_otg_phy.c
+ delete mode 100644 drivers/usb/gadget/max3420_udc.c
