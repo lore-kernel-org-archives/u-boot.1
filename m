@@ -4,36 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A75CAC5AA
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 05:33:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7842BCAC5A5
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 05:33:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9814D8362C;
-	Thu, 25 Sep 2025 07:33:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07F16836C8;
+	Thu, 25 Sep 2025 07:33:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB4A1836A3; Thu, 25 Sep 2025 07:33:17 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
+ id C081B836D1; Thu, 25 Sep 2025 07:33:39 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2DFD835C9
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:33:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D06CA835C9
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:33:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 47126B220123;
- Thu, 25 Sep 2025 07:33:14 +0200 (CEST)
+ by freeshell.de (Postfix) with ESMTPSA id E7E3AB2200F6;
+ Thu, 25 Sep 2025 07:33:35 +0200 (CEST)
 From: E Shattow <e@freeshell.de>
 To: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
 Cc: u-boot@lists.denx.de,
 	E Shattow <e@freeshell.de>
-Subject: [RFC v1 0/4] Add upstream boards Milk-V Mars CM and Mars CM Lite
-Date: Wed, 24 Sep 2025 22:32:04 -0700
-Message-ID: <20250925053233.1874027-1-e@freeshell.de>
+Subject: [RFC v1 1/4] riscv: dts: starfive: Add Milk-V Mars CM and Mars CM
+ Lite from upstream Linux for-next
+Date: Wed, 24 Sep 2025 22:32:05 -0700
+Message-ID: <20250925053233.1874027-2-e@freeshell.de>
 X-Mailer: git-send-email 2.50.0
+In-Reply-To: <20250925053233.1874027-1-e@freeshell.de>
+References: <20250925053233.1874027-1-e@freeshell.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -52,64 +56,234 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Milk-V Mars CM and Mars CM Lite SoM's were formerly supported v2024.07 to
-v2025.01 and then absent since the OF_UPSTREAM transition of starfive
-visionfive2 multi-board support. Upstream patches are now queued up for the
-next merge window to Linux v6.18, so let's re-introduce support for these
-boards.
+Import dtsi common to Mars CM and Mars CM Lite, and adopt dts for each as
+per-board automatic inclusion. This commit should be reverted
+when devicetree-rebasing release candidate for Linux 6.18 is sync'ed.
 
-Sorting of OF_LIST is kept consistent with `LANG=C sort`, and callbacks in
-SPL for dts selection are ordered the same. Logic for setting fdtfile env
-variable corresponds with the sorting of OF_LIST and not the representative
-EEPROM value comparisons.
-
-This series does violate some norms as it modifies the dts/upstream tree,
-and generally is introducing as upstream something which is not quite yet
-stable or release candidate in upstream devicetree-rebasing. RFC patches
-sent this way for review would benefit from not modifying dts/upstream
-tree at all but here it is done with empty files to pacify the build
-system. Actual dts content is simply copied to arch/$ARCH/dts as automatic
-inclusion dtsi. This pretends that if merged, then when upstream changes
-appear in devicetree-rebasing it would be only this updated content which
-can easily be reverted and empty placeholder files in dts/upstream be
-merged with less tedious conflict resolution.
-
-For development with a local Linux source tree, the dtsi files for
-automatic inclusion may simply have a 1-liner include to the location of
-the corresponding dts file from that Linux source tree.
-
-Open to comments about how best to encourage early review of series like
-this (notable is StarFive VisionFive2 Lite new product recently posted)
-when there is a hard dependency on both the OF_LIST of a multi-board
-target as starfive visionfive2 is and the dts which may not yet be
-available from dts/upstream devicetree-rebasing.
-
-E Shattow (4):
-  riscv: dts: starfive: Add Milk-V Mars CM and Mars CM Lite from
-    upstream Linux for-next
-  board: starfive: visionfive2: Add Milk-V Mars CM and Mars CM Lite
-    selection by product_id
-  riscv: dts: Add placeholder files for pending upstream Milk-V Mars CM
-    and Mars CM Lite
-  configs: starfive: Add Milk-V Mars CM and Mars CM Lite to visionfive2
-
+Signed-off-by: E Shattow <e@freeshell.de>
+---
  .../dts/jh7110-milkv-marscm-emmc-u-boot.dtsi  |  12 ++
  .../dts/jh7110-milkv-marscm-lite-u-boot.dtsi  |  25 +++
  arch/riscv/dts/jh7110-milkv-marscm.dtsi       | 159 ++++++++++++++++++
- board/starfive/visionfive2/spl.c              |   8 +
- .../visionfive2/starfive_visionfive2.c        |   6 +
- configs/starfive_visionfive2_defconfig        |   2 +-
- .../starfive/jh7110-milkv-marscm-emmc.dts     |   0
- .../starfive/jh7110-milkv-marscm-lite.dts     |   0
- 8 files changed, 211 insertions(+), 1 deletion(-)
+ 3 files changed, 196 insertions(+)
  create mode 100644 arch/riscv/dts/jh7110-milkv-marscm-emmc-u-boot.dtsi
  create mode 100644 arch/riscv/dts/jh7110-milkv-marscm-lite-u-boot.dtsi
  create mode 100644 arch/riscv/dts/jh7110-milkv-marscm.dtsi
- create mode 100644 dts/upstream/src/riscv/starfive/jh7110-milkv-marscm-emmc.dts
- create mode 100644 dts/upstream/src/riscv/starfive/jh7110-milkv-marscm-lite.dts
 
-
-base-commit: e482fdbbca935de32400054eb532de45b1cc01cb
+diff --git a/arch/riscv/dts/jh7110-milkv-marscm-emmc-u-boot.dtsi b/arch/riscv/dts/jh7110-milkv-marscm-emmc-u-boot.dtsi
+new file mode 100644
+index 00000000000..e568537af2c
+--- /dev/null
++++ b/arch/riscv/dts/jh7110-milkv-marscm-emmc-u-boot.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2025 E Shattow <e@freeshell.de>
++ */
++
++/dts-v1/;
++#include "jh7110-milkv-marscm.dtsi"
++
++/ {
++	model = "Milk-V Mars CM";
++	compatible = "milkv,marscm-emmc", "starfive,jh7110";
++};
+diff --git a/arch/riscv/dts/jh7110-milkv-marscm-lite-u-boot.dtsi b/arch/riscv/dts/jh7110-milkv-marscm-lite-u-boot.dtsi
+new file mode 100644
+index 00000000000..6c40d0ec401
+--- /dev/null
++++ b/arch/riscv/dts/jh7110-milkv-marscm-lite-u-boot.dtsi
+@@ -0,0 +1,25 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2025 E Shattow <e@freeshell.de>
++ */
++
++/dts-v1/;
++#include "jh7110-milkv-marscm.dtsi"
++
++/ {
++	model = "Milk-V Mars CM Lite";
++	compatible = "milkv,marscm-lite", "starfive,jh7110";
++};
++
++&mmc0 {
++	bus-width = <4>;
++	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
++};
++
++&mmc0_pins {
++	pwren-pins {
++		pinmux = <GPIOMUX(22, GPOUT_HIGH,
++				      GPOEN_ENABLE,
++				      GPI_NONE)>;
++	};
++};
+diff --git a/arch/riscv/dts/jh7110-milkv-marscm.dtsi b/arch/riscv/dts/jh7110-milkv-marscm.dtsi
+new file mode 100644
+index 00000000000..25b70af564e
+--- /dev/null
++++ b/arch/riscv/dts/jh7110-milkv-marscm.dtsi
+@@ -0,0 +1,159 @@
++// SPDX-License-Identifier: GPL-2.0 OR MIT
++/*
++ * Copyright (C) 2025 E Shattow <e@freeshell.de>
++ */
++
++/dts-v1/;
++#include <dt-bindings/interrupt-controller/irq.h>
++#include "jh7110-common.dtsi"
++
++/ {
++	aliases {
++		i2c1 = &i2c1;
++		i2c3 = &i2c3;
++		i2c4 = &i2c4;
++		serial3 = &uart3;
++	};
++
++	sdio_pwrseq: sdio-pwrseq {
++		compatible = "mmc-pwrseq-simple";
++		reset-gpios = <&sysgpio 33 GPIO_ACTIVE_LOW>;
++	};
++};
++
++&gmac0 {
++	assigned-clocks = <&aoncrg JH7110_AONCLK_GMAC0_TX>;
++	assigned-clock-parents = <&aoncrg JH7110_AONCLK_GMAC0_RMII_RTX>;
++	starfive,tx-use-rgmii-clk;
++	status = "okay";
++};
++
++&i2c0 {
++	status = "okay";
++};
++
++&i2c2 {
++	status = "disabled";
++};
++
++&i2c6 {
++	status = "disabled";
++};
++
++&mmc1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	mmc-pwrseq = <&sdio_pwrseq>;
++	non-removable;
++	status = "okay";
++
++	ap6256: wifi@1 {
++		compatible = "brcm,bcm43456-fmac", "brcm,bcm4329-fmac";
++		reg = <1>;
++		interrupt-parent = <&sysgpio>;
++		interrupts = <34 IRQ_TYPE_LEVEL_HIGH>;
++		interrupt-names = "host-wake";
++		pinctrl-0 = <&wifi_host_wake_irq>;
++		pinctrl-names = "default";
++	};
++};
++
++&pcie0 {
++	status = "okay";
++};
++
++&phy0 {
++	rx-internal-delay-ps = <1500>;
++	tx-internal-delay-ps = <1500>;
++	motorcomm,rx-clk-drv-microamp = <3970>;
++	motorcomm,rx-data-drv-microamp = <2910>;
++	motorcomm,tx-clk-10-inverted;
++	motorcomm,tx-clk-100-inverted;
++	motorcomm,tx-clk-1000-inverted;
++	motorcomm,tx-clk-adj-enabled;
++};
++
++&pwm {
++	status = "okay";
++};
++
++&spi0 {
++	status = "okay";
++};
++
++&sysgpio {
++	uart1_pins: uart1-0 {
++		tx-pins {
++			pinmux = <GPIOMUX(16, GPOUT_SYS_UART1_TX,
++					      GPOEN_ENABLE,
++					      GPI_NONE)>;
++			bias-disable;
++			drive-strength = <12>;
++			input-disable;
++			input-schmitt-disable;
++		};
++
++		rx-pins {
++			pinmux = <GPIOMUX(17, GPOUT_LOW,
++					      GPOEN_DISABLE,
++					      GPI_SYS_UART1_RX)>;
++			bias-pull-up;
++			input-enable;
++			input-schmitt-enable;
++		};
++
++		cts-pins {
++			pinmux = <GPIOMUX(3, GPOUT_LOW,
++					     GPOEN_DISABLE,
++					     GPI_SYS_UART1_CTS)>;
++			bias-disable;
++			input-enable;
++			input-schmitt-enable;
++		};
++
++		rts-pins {
++			pinmux = <GPIOMUX(2, GPOUT_SYS_UART1_RTS,
++					     GPOEN_ENABLE,
++					     GPI_NONE)>;
++			bias-disable;
++			input-disable;
++			input-schmitt-disable;
++		};
++	};
++
++	usb0_pins: usb0-0 {
++		vbus-pins {
++			pinmux = <GPIOMUX(25, GPOUT_SYS_USB_DRIVE_VBUS,
++					      GPOEN_ENABLE,
++					      GPI_NONE)>;
++			bias-disable;
++			input-disable;
++			input-schmitt-disable;
++			slew-rate = <0>;
++		};
++	};
++
++	wifi_host_wake_irq: wifi-host-wake-irq-0 {
++		wake-pins {
++			pinmux = <GPIOMUX(34, GPOUT_LOW,
++					      GPOEN_DISABLE,
++					      GPI_NONE)>;
++			input-enable;
++		};
++	};
++};
++
++&uart1 {
++	uart-has-rtscts;
++	pinctrl-0 = <&uart1_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++};
++
++&usb0 {
++	dr_mode = "host";
++	pinctrl-names = "default";
++	pinctrl-0 = <&usb0_pins>;
++	status = "okay";
++};
 -- 
 2.50.0
 
