@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05CF4CAC5B0
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:52:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2E4CAC5B5
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:52:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D206F835B9;
-	Thu, 25 Sep 2025 22:51:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 05B24833ED;
+	Thu, 25 Sep 2025 22:52:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XnvG2XfA";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="LBIeCUvI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4247D835BF; Thu, 25 Sep 2025 22:51:38 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 4641882A9E; Thu, 25 Sep 2025 22:52:02 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30D0C833ED
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:51:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11CC5834E1
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:52:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-746d3b0f7e5so1466990a34.2
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:51:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-62f0702ef0dso5321919a12.1
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:52:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758833495; x=1759438295; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=j6Eo8x3BYFADI0DQq5/mr6IpofpCN6bhyJM/Ll5Qq30=;
- b=XnvG2XfAp77XlBJIkLQ5YMEEjP1LxAyUcwajKHYzeBSNfOIwazDQE4jppRKI15uirx
- /P31dwHokD6P+2rsxW+uB8Vetah4TjwCzpSVgimoEFguIN0ET4mFzg34HTVXvmg9cU/v
- BphPgDDDldxTnSrfMJkjPPTgHbSCPEnchqHDY=
+ d=googlemail.com; s=20230601; t=1758833519; x=1759438319; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nx05fhQxT6uAfj+9HbuvXQwBLDYe5dfWC3NpbbNiCAk=;
+ b=LBIeCUvIK0sGjnKq/h9Y6GZ4Oe5ecZ628nk6WxkkgLWRRYaZ99uoVH6m2Pdbb/QHzU
+ AGGzNFDsInsrbmIOVSP6iSLqWoUNer5q8Eup0ouCnEhqmQUystdw3KyUnYXhaqtF5x+5
+ FmOFMht49pvFw1/ExfFJjMc0WLIYF3MQfw6QaTIaf5bc8xFIq+zFvvH7Lfft10DduZzh
+ 8x42Zv89RPdO5czG33fpWW7IYFAzeawfBIKVX+zNZaD74sG1BWMgr8Jg9H1IKvPqU32B
+ o+AIs4It2r8AGMSzvUbXr3qXqboM7uQR/Xs9zdfCTZeijLbwl+LAIIq55my7PJygR0Il
+ bguA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758833495; x=1759438295;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j6Eo8x3BYFADI0DQq5/mr6IpofpCN6bhyJM/Ll5Qq30=;
- b=i2U3/jhrLKzbk1gScKQZZfQACmRQWMppcEtN9C3tce2xs2NCh56Ee/Yklfw3jSHC7c
- 0pGhhYQUhcqauY1D3jGNNPho9kUTTE7bvTdcHLN8w/wYusnVKoG8Md9Tay9EWv6zXhFX
- iWrMRQTcEon/bVcizFESRDARUh2i2sqtnzVHWYOTkaBrAHeIJWqqGDQ/wxlSvT1dEHB2
- mF+f7KGJShIdnugpbXuLOeo26aC8pSFkqhiBgQOkvcvQmnXqPKqPOtrHZvsNC0qsXMa8
- fJreVdcv1WXyTsU+rAwq0rF3XVa9ExUpSwvELuq3QEwuN2qa5lER4UoSl39/HZLg8O0v
- fdzg==
-X-Gm-Message-State: AOJu0YyIuDvlZnxYo5fT0uuXnfdXIIER9hIiRWJezwTqCIUOomLboqm/
- CpYjXSjkklF+OlfKV5et4FFzXH9drg4ieT5X2sA6Cs9emGbBvr3Yht6vAfjBG6wRACHfvUd2fRm
- nwv1e9NE=
-X-Gm-Gg: ASbGnctnsBEp97LhfWH8IlrrYsSmKp/g71Gp8+3lHKg6ZkebDKIV3Xp8JtTE9NCRtsh
- dyYdZFK5dg3NpBn9AVdyK/XrZYTBEYp4YYN0DHX5qwmNzRHH51jbMQcy9qNz50l53PmEK6QgPuN
- z9nGXwY33LaDVdTSLQEcfTTkKbX4NdOw9yjwaK1BMdNEKTChgnob3NzDZDZWohcRpSFrMXjBD4J
- uv4e72yoy6vhWc7JbcXwFbmIGjAQ7AghQMYpTacOWzg7pMDWQEhyUk3ZAI5cefVeUKE7bIH0x6z
- 4MeZdu3qQs5wS0FTom20OKplZHtIHgldu9mKv1XL1CuXRCTTnsrA9Glk1GBzTRHe+ClC0407FY/
- IX2w/MFbCj4iGX0vYlbmS7mwEypVNf0szBbUglFpvoCReo3RZYjlsqJGpxkWqg0Xgozfo4g==
-X-Google-Smtp-Source: AGHT+IFIPvxB+tvJtRuMMNLK80UGEqA4tecvvvsgnO7vDB1J0s4BoEkzMD8EseOzeVlAo86FSKJoBQ==
-X-Received: by 2002:a05:6808:188a:b0:43f:179f:9d02 with SMTP id
- 5614622812f47-43f4cec1af6mr2360116b6e.42.1758833494997; 
- Thu, 25 Sep 2025 13:51:34 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a23fa4c6afsm606081a34.29.2025.09.25.13.51.33
- for <u-boot@lists.denx.de>
+ d=1e100.net; s=20230601; t=1758833519; x=1759438319;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nx05fhQxT6uAfj+9HbuvXQwBLDYe5dfWC3NpbbNiCAk=;
+ b=QlcBlnHEz+CdaYIFBM0iCM9sBb15uq3NKx92jf5WJVJjYMaWCNgx6UZaa4ShUkDxMs
+ zkYxYlwgDlhiW/c8ai5VkA9VslgmAymlRGxcYZzfZGZh/+ShTCc7b0I9AXcsGSHFJTyF
+ I5j9yH/G7c1/b+YP3nhn9OaPyVmGYCjfwB/cvRtuzwwBEzz52oGojP6s7oD4XIQZ/VKB
+ zIe6rpGwY5z356PwVc2qwX0nTidEb5itEmFlDpXgZPLpLRho46kmbSXHScU25SMTxmAH
+ PRxxNsxNlscD6UWfrRKWA0TARM3Ry7pC5iNA+Y9CwQhy+jSCMsSXkPN8JmR6TFG1VFxN
+ Ec8g==
+X-Gm-Message-State: AOJu0YzhRolTPv9z3V2ZE/aeVmXEZWVq5op1q+EXiOnX99oBD3Dt3I/j
+ hAtEIS9QZIGceFiIiSou9Uhlhb/nGRkhtHZW1+vdr8GBDN0eU6pnXv8VFY9VrQ==
+X-Gm-Gg: ASbGncuizfvziv+AvHlnAqALxVIqMp2qKZYD7bPivKFHVN5peW3uuMX+wccO+6PD45G
+ o5kpklbl+B/nek4Jv3YpP/cb8Lr9QUjjJy5yDNEOm/aauv0y4hgy00cCJPBIfzX2F2a1LNElClq
+ WOLg9EnxJewsgnyYWr/TAdUVPIWCJu43vp6lvBXlF2T09EzV72FzWltMYgPMJ2mlGb53Fgkfuim
+ uDughHJLrVlEv7e2zvxvSLCgtIOsSxH8eoC53PHUJyjr00FWOCuJ3boyNVGhA2tUfzhJnca8Gox
+ Iny7tI9JrI52iYe6M+HbQi+6I6JqNmwCCwMzwlPAKzq7e1RdXFsFXE2gNekit2+IQTqUdxocxdk
+ C45RemmzvdejcV946fsC7JgoreZi2g4VUI1E36Hyt+G59aWXTfQn+689K8RNEuUp9schMhfiqb5
+ esotE=
+X-Google-Smtp-Source: AGHT+IHE4I4QpXHX3O64nE9ssWlUtlx06e1/m5cYXC5GnLzXjMeNeenigzNv4r+MBLuQbdBuQuuBmA==
+X-Received: by 2002:a17:907:7fa7:b0:b2a:47c9:8ff5 with SMTP id
+ a640c23a62f3a-b354a8ad592mr432455766b.10.1758833518540; 
+ Thu, 25 Sep 2025 13:51:58 -0700 (PDT)
+Received: from development2.visionsystems.local (mail.visionsystems.de.
+ [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b353e5d014csm229554366b.19.2025.09.25.13.51.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 13:51:34 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ Thu, 25 Sep 2025 13:51:57 -0700 (PDT)
+From: yegorslists@googlemail.com
 To: u-boot@lists.denx.de
-Subject: [PATCH] cmd: Update dependencies on CMD_IRQ
-Date: Thu, 25 Sep 2025 14:51:32 -0600
-Message-ID: <20250925205132.3561964-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ trini@konsulko.com, Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] spl: nand: initialize writesize for am335x
+Date: Thu, 25 Sep 2025 22:51:50 +0200
+Message-Id: <20250925205150.453502-1-yegorslists@googlemail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,29 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For CMD_IRQ to function, we need enable/disable_interrupt functions as
-well as do_irqinfo functions to be defined. Only NIOS2, PowerPC and X86
-implement the latter, so correct dependencies to be opt-in not out-out
-here.
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Initialize mtd->writesize in nand_init() as otherwise
+nand_page_size() returns 0 and this affects NAND read
+operations.
+
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
 ---
- cmd/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/mtd/nand/raw/am335x_spl_bch.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index c457cc8e5c42..5e5252ef1347 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2997,7 +2997,7 @@ config CMD_EVENT
+diff --git a/drivers/mtd/nand/raw/am335x_spl_bch.c b/drivers/mtd/nand/raw/am335x_spl_bch.c
+index 4b50f351d35..a77206d3815 100644
+--- a/drivers/mtd/nand/raw/am335x_spl_bch.c
++++ b/drivers/mtd/nand/raw/am335x_spl_bch.c
+@@ -212,6 +212,8 @@ void nand_init(void)
+ 	if (nand_chip.select_chip)
+ 		nand_chip.select_chip(mtd, 0);
  
- config CMD_IRQ
- 	bool "irq - Show information about interrupts"
--	depends on !ARM && !MIPS && !RISCV && !SH
-+	depends on NIOS2 || PPC || X86
- 	help
- 	  This enables two commands:
- 
++	mtd->writesize = CONFIG_SYS_NAND_PAGE_SIZE;
++
+ 	/* NAND chip may require reset after power-on */
+ 	nand_command(0, 0, 0, NAND_CMD_RESET);
+ }
 -- 
-2.43.0
+2.34.1
 
