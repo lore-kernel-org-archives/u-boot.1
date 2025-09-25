@@ -4,86 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00C62CAC5A5
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 13:20:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CAC3CAC5A7
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 13:42:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 110DB80819;
-	Thu, 25 Sep 2025 15:20:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D063280107;
+	Thu, 25 Sep 2025 15:42:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TXYHMYAT";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jd+GbLjc";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OvXmgjee";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB039832AD; Thu, 25 Sep 2025 15:20:42 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4CF27809A5; Thu, 25 Sep 2025 15:42:34 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 420E680107
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 15:20:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AAAE8004F
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 15:42:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-46e2562e8cbso8377415e9.1
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 06:20:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1758806439; x=1759411239; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ONevhEASRFWGexrGxnZs5MN9SB4cXc5KLBhZn36RxrM=;
- b=TXYHMYAT5WYZ1pUxj5/mf81ziWrDLMy/aTucM5/l5oos/a0XPnGFJ4r2ARn/MBz2e1
- lQSl1MbpwvVr1NALgB0g29U6ATD67juzzUmeh0BE5KdiUn0cOTunOjkbiPHeGQapCUQR
- c8NerOR8Gcj+LYBQlOo9AnBYCVL59nf3T8TqV7HB7x3C4rrEsT7Z/B6oB6vhaqeoYgLY
- v604gr7tDpkgyihC3h8igpUE52ZjDfnW79Qm4rp/BEtgRUPr3zvOFiYKv44h1OAsECT5
- XHoBzw1M93g/bzmhZt0JL3kxuFM1XwYSI46qi5fZKG3XL5UTfyDOfoTVOfru/cFdDXwZ
- pfVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758806439; x=1759411239;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ONevhEASRFWGexrGxnZs5MN9SB4cXc5KLBhZn36RxrM=;
- b=Sd+rw9zi1q91nqgEPigTWwzikU9SizW9cij1vYcQ1OP00+fW5t8ekZF8xufd/X5WE7
- S+9vDM7M6OV7mkbnt3UW6YnO55eS3SGwxy/owTRsTXGIwAwjoxkGRqtZ2bmsdQ9xM/H7
- p7gsB2mEIOjCTMr9ne/Mon6TxywYm0kr8snQ9Kr+O1ttN2n2gOVt7zZ/Ce8rdNoie0zS
- hih7PfoqTLu3phFL8v1WnhlwSuAbRMZ5jSRoGX44kGphN6mjRYIG7AybJKQQchXieP5W
- 1vkAczDTO+phubhKKi/gtRazwThA/tqFDol+LipUSLq7aNlpznsUvxXJ39hw7DLaGjoZ
- yEdg==
-X-Gm-Message-State: AOJu0Ywp+HBmuUyCDSW/ID5fJwhKGi+QYDf7ROKBa6m9kV9PGQuU8DfF
- 94TwQzBTv+hbyZZJKDn2n6KKe/23vnKn/+Qx/6TdzU6sqJOJ/HKD+2hdQWdk4ToxKbJRbo/FcZJ
- Vz99e
-X-Gm-Gg: ASbGnctRAPDv3eU5zwAdmpAQKQhSTwSXL7VgGGoCMjzQxWigWcl/cw+27sDa0M7eH+o
- KJRGwivVXEQSBXnArAxAStKLG8rHPiF3e0wOVXdpZdnryABLdTNrT5KO0RDc0pZFOAtlbgQ3Uml
- WSHFFkYc7d3e/1NEO1eJNBb3cwP8BF0bFdnsz29WLVzb7D5h9bGx2I+2NqLABja85tGcAl1PPH0
- gruyx6UjxyPO9GWtossYkFfeUtncn+EWFJ4XEsBddQIsNKW2xEd/8cp8/yXTAsKWQmAILnG3A6u
- 3az/EkQB2ffLyiVsnAh4RPdOB4Wbmfs34sYFA5srZXIqJjD4Xlk7Wt86mxzf0xAGxO19Lo9K/Gc
- sl8PV/VS3wuCUmC4heRExT5gALsHFNZRgCBZMSgyMlU6wVUD2C/U=
-X-Google-Smtp-Source: AGHT+IFTEBuQoCW9k1kFDYEOC+3b9C3lOl8cSqu9H60mHer+Yq1YG6ky+XkR3DzeSI3qK+Dh5UZL3g==
-X-Received: by 2002:a05:600c:1554:b0:45d:d6fc:24f7 with SMTP id
- 5b1f17b1804b1-46e32a158camr36848875e9.32.1758806439478; 
- Thu, 25 Sep 2025 06:20:39 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:5cb4:3820:cbe0:c98b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e2ab31e97sm77509475e9.14.2025.09.25.06.20.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 06:20:39 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 25 Sep 2025 14:20:38 +0100
-Subject: [PATCH] usb: dwc3: Remove redundant test
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cXZdz0hRSz9sWs;
+ Thu, 25 Sep 2025 15:42:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758807751;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=97Z5NwoEwZuqTzoOmCgD0o+gs5FNZva3oiKsU8hy/lE=;
+ b=jd+GbLjcWFmgPaI/JNhw/pyMsgAc9QLDK/PC1mN6XeG0XkXp+IvEWdrqKTvyTwa6lA1udT
+ EsqKbF6cVtwgp7nqexw+dCcOpbo0fVep511LjTHrHUd5ncQuuox2x11ALn/97c8xJ8DWP6
+ Pd0Ctu9hxB0rebtjCvXpMBtVVWFmVuR50jHlkgNDQ+MTg4nz3XOXBwf/iGM/jNnv6k/Ota
+ +k4XVmMBQOddtcz315eCGKl+xa7eg477z3q57cq+Z/BExRR4gee+BfSYNBkzB7iMd0mlEe
+ LQtz1VA6SOlt30TA6yfB0scFPPoDt9WSkiqAkRu+6x7LMp41/Y3jwbx06p0tIg==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758807749;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=97Z5NwoEwZuqTzoOmCgD0o+gs5FNZva3oiKsU8hy/lE=;
+ b=OvXmgjeeEKJXCt6+uYENJdq5tn32onIAmWEfF4BEgytHznCF3mNt/O+AVT/8sIfuLA3WDz
+ RRwbMc3nfVxnzjLkUf2epLPwfX2xWR4Ewgu8kW35d/2Kc2QUgSCBNbtVgrLz8ePYYB+X4a
+ t1lfdaS+zNMWiMC9KfEvaVfVh+dD2wLIivuYYL9vi6U4kysjs2DxEk4tfVS683dFLM6DSK
+ gcdbt59KOJcgCm/FOgKYoqf+OBnbshknvToDWBmk+WJ9zVqes+iyKa1y9a3CnbRRihXsst
+ 4CdWidzK5HrIJEYt8NNNp1ndCuI9ZDyRcBoMQRoEtzbtBpUCTF2bH06HSuo2vQ==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ =?UTF-8?q?Carlos=20L=C3=B3pez?= <carlos.lopezr4096@gmail.com>,
+ Aristo Chen <jj251510319013@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] Revert "tools: mkimage: detect overlapping load regions in
+ FIT configurations"
+Date: Thu, 25 Sep 2025 15:41:43 +0200
+Message-ID: <20250925134212.59709-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250925-dwc3_ep0-v1-1-7af60ed1e28c@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAKVB1WgC/x2NUQ5AMBAFryL7rckqQl1FRKpd7E9JK0gad1c+5
- 2VeJkIgzxSgyyJ4Ojnw5hIUeQZm1W4hwTYxSJQ1KlkLe5lypB1F1RiliharFi0kfdKBxOS1M+t
- 3cHQf37x7mvn+C/3wPC9NphQzcQAAAA==
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.12.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 606088193d7a34dbedd
+X-MBO-RS-META: sxrwrmx1fra33ncr35epnny13nh4iaqd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,40 +87,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In dwc3_ep0_complete_data there is a test for 'r' being null and the
-code will return at that point if so. After that point 'r' is guaranteed
-to not be null and testing for that is redundant. Remove the test for
-'r' being non-null.
+This reverts commit 588094f2c8ec9a4f7d2dcda11ffae8db8462149c.
 
-This issue was found by Smatch.
+This introduces warnings on valid fitImages which do not set load
+address for fdt-1 DT node. This is valid, because DT can be loaded
+to suitable location as determined by the fitImage loader.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Warning: not able to get `load` of node 'fdt-1'
+
+Furthermore, do not add C++ style comments into C code.
+
+Either send a fix or apply this revert.
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/usb/dwc3/ep0.c | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+Cc: "Carlos López" <carlos.lopezr4096@gmail.com>
+Cc: Aristo Chen <jj251510319013@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Rasmus Villemoes <ravi@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ tools/fit_image.c | 90 +----------------------------------------------
+ tools/mkimage.c   |  3 +-
+ 2 files changed, 2 insertions(+), 91 deletions(-)
 
-diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-index c656cbe25ce..680756532f0 100644
---- a/drivers/usb/dwc3/ep0.c
-+++ b/drivers/usb/dwc3/ep0.c
-@@ -799,10 +799,7 @@ static void dwc3_ep0_complete_data(struct dwc3 *dwc,
- 	status = DWC3_TRB_SIZE_TRBSTS(trb->size);
- 	if (status == DWC3_TRBSTS_SETUP_PENDING) {
- 		dev_dbg(dwc->dev, "Setup Pending received");
+diff --git a/tools/fit_image.c b/tools/fit_image.c
+index 12f4cdb2875..10849733816 100644
+--- a/tools/fit_image.c
++++ b/tools/fit_image.c
+@@ -22,20 +22,6 @@
+ #include <version.h>
+ #include <u-boot/crc.h>
+ 
+-struct fit_region {
+-	ulong load;
+-	ulong size;
+-	const char *name;
+-};
 -
--		if (r)
--			dwc3_gadget_giveback(ep0, r, -ECONNRESET);
+-static int regions_overlap(const struct fit_region *a, const struct fit_region *b)
+-{
+-	ulong a_end = a->load + a->size;
+-	ulong b_end = b->load + b->size;
 -
-+		dwc3_gadget_giveback(ep0, r, -ECONNRESET);
- 		return;
+-	return !(a_end <= b->load || b_end <= a->load);
+-}
+-
+ static struct legacy_img_hdr header;
+ 
+ static int fit_estimate_hash_sig_size(struct image_tool_params *params, const char *fname)
+@@ -837,12 +823,9 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
  	}
  
-
----
-base-commit: 44c4919e9dd6c162b237633ba689441eca9a149c
-change-id: 20250925-dwc3_ep0-47c99180480d
-
-Best regards,
+ 	fdt_for_each_subnode(node, fdt, confs) {
+-		struct fit_region *regions = NULL;
+-		unsigned int img_count = 0;
+-		unsigned int regions_allocated = 0;
+ 		const char *conf_name = fdt_get_name(fdt, node, NULL);
+ 
+-		for (unsigned int i = 0; i < ARRAY_SIZE(props); i++) {
++		for (int i = 0; i < ARRAY_SIZE(props); i++) {
+ 			int count = fdt_stringlist_count(fdt, node, props[i]);
+ 
+ 			if (count < 0)
+@@ -863,79 +846,8 @@ static int fit_import_data(struct image_tool_params *params, const char *fname)
+ 					ret = FDT_ERR_NOTFOUND;
+ 					goto err_munmap;
+ 				}
+-
+-				ulong img_load = 0;
+-				int img_size = 0;
+-
+-				if (fit_image_get_load(fdt, img, &img_load)) {
+-					fprintf(stderr,
+-						"Warning: not able to get `load` of node '%s'\n",
+-						img_name);
+-					// Skip checking the components that do not have a
+-					// definition for `load`
+-					continue;
+-				}
+-				const char *img_data = fdt_getprop(fdt, img,
+-								   FIT_DATA_PROP,
+-								   &img_size);
+-
+-				if (!img_data || !img_size)
+-					continue;
+-
+-				// Check if we've already added this image to avoid duplicates
+-				for (unsigned int k = 0; k < img_count; k++) {
+-					if (!strcmp(regions[k].name, img_name))
+-						goto next_node;
+-				}
+-
+-				// Expand regions array if needed
+-				if (img_count >= regions_allocated) {
+-					unsigned int new_size = regions_allocated ?
+-								regions_allocated * 2 : 8;
+-					struct fit_region *new_regions = realloc(regions,
+-							new_size * sizeof(struct fit_region));
+-					if (!new_regions) {
+-						fprintf(stderr,
+-							"Failed to allocate memory for regions in config %s\n",
+-							fdt_get_name(fdt, node, NULL));
+-						free(regions);
+-						ret = -ENOMEM;
+-						goto err_munmap;
+-					}
+-					regions = new_regions;
+-					regions_allocated = new_size;
+-				}
+-
+-				regions[img_count].load = img_load;
+-				regions[img_count].size = img_size;
+-				regions[img_count].name = img_name;
+-				img_count++;
+-next_node:;
+-			}
+-		}
+-
+-		// Check for overlap within this config only
+-		for (unsigned int i = 0; i < img_count; i++) {
+-			for (unsigned int j = i + 1; j < img_count; j++) {
+-				if (regions_overlap(&regions[i], &regions[j])) {
+-					fprintf(stderr,
+-						"[Config: %s] Error: Overlap detected:\n"
+-						"  - %s: [0x%lx - 0x%lx]\n"
+-						"  - %s: [0x%lx - 0x%lx]\n",
+-						fdt_get_name(fdt, node, NULL),
+-						regions[i].name, regions[i].load,
+-						regions[i].load + regions[i].size,
+-						regions[j].name, regions[j].load,
+-						regions[j].load + regions[j].size);
+-					ret = FDT_ERR_BADSTRUCTURE;
+-					free(regions);
+-					goto err_munmap;
+-				}
+ 			}
+ 		}
+-
+-		// Clean up allocated memory for this configuration
+-		free(regions);
+ 	}
+ 
+ 	munmap(old_fdt, sbuf.st_size);
+diff --git a/tools/mkimage.c b/tools/mkimage.c
+index e96fb7e42db..12183270776 100644
+--- a/tools/mkimage.c
++++ b/tools/mkimage.c
+@@ -533,8 +533,7 @@ int main(int argc, char **argv)
+ 			retval = tparams->fflag_handle(&params);
+ 
+ 		if (retval != EXIT_SUCCESS) {
+-			if (retval == FDT_ERR_NOTFOUND ||
+-			    retval == FDT_ERR_BADSTRUCTURE) {
++			if (retval == FDT_ERR_NOTFOUND) {
+ 				// Already printed error, exit cleanly
+ 				exit(EXIT_FAILURE);
+ 			}
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.51.0
 
