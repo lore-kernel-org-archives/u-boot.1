@@ -4,90 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2A66CAC5A7
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:21:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5896FCAC5B1
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:28:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF6498206E;
-	Thu, 25 Sep 2025 16:21:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D300580107;
+	Thu, 25 Sep 2025 16:28:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AYJw8h/X";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TAtgoskc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5660A82998; Thu, 25 Sep 2025 16:21:22 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3648580107
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:21:20 +0200 (CEST)
+ id 9E8B9809A5; Thu, 25 Sep 2025 16:28:35 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FE2A800D7
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:28:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-74ed00220f6so426312a34.2
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:21:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758810079; x=1759414879; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UUDiZxGzSfcYDtcVTAk3hG0lu1bXVruTlHNln8JEqdo=;
- b=AYJw8h/X4MhAAtIF9mG/lrwq5t73umxE8lRBwk+SdD3Jz+XQGLESvG5MISXv4LSH9q
- TKiHS8g779ojl2u93bOYTi2IJV/hgk/Cxwti/lPktNEvJ9uv0dUofJD7pXIUo37RaESZ
- iPLzccNqrgt1l2RlAV5mEgwllAvJ1EtCwweqQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758810079; x=1759414879;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UUDiZxGzSfcYDtcVTAk3hG0lu1bXVruTlHNln8JEqdo=;
- b=v8WN7RmdfJYGvz5KUSq++r/3ey21m5M7U9vqUPaGW8YPZXHlETZknTiKDOBWGoSZlZ
- 3KgfoX6nzBYjESCOuzQ/whrRspz7jFNujCHmGgp4R/bxUjGXeYfK57N0oXU53Ft+9L6A
- qugMbRSjIM+3w9AEowa4CDs4u9EpwWC1IdBtCuU+cLjQItYNX3hy2sGNUSgk7CFKqa9t
- l0emrxCGAx4vlJ4maWYO1OHCZGNcDYktAGOKgPdwnct2NEso6kGgkvj+aFJz190WR3To
- swY4fWIRQTu3X7Gh5PjJeE8kjkHGgwjo8IXdzD10//qImrTkTaJVoGjHj9q9JLdJDjaX
- DFgQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXUsovAEiUGOLguaVwfSvovZaaZ334HS67hGjsWil8G1n8pKIqwBwYPK7+haMjEs66liuxOg5M=@lists.denx.de
-X-Gm-Message-State: AOJu0YwaMuwAipR3v9rXfQNsGCEFq5HmcOiLeXss0Ms07QD/E9UrkZXu
- 2Hc97Nvt14tFP1yb61725yQnAMUVY4/fIrX0eUxXtNLxbEOumzaECoo8o+hIfEyPbkE=
-X-Gm-Gg: ASbGncv6Pa3fz/iKcXDdy1CiZIxiSAgjka3ExC0pztfjHxqM/K8mXvRKJunkxCi8o4G
- YYkSfoXZhcPtLXhG9ZpMom//uiO+g11SByHi3EC6uhKr4zfY0WTD22+Hu6KxNJeFY75d1UkO37S
- 2iurn8SGh47048mP6BoPb9pkVfVSS2htXbKXbUKcs9aJVh9fdQvGJIR48blOl4vvSgMlta6AyEY
- oc1E7PjaVnThG7q59XntlKFZSVNkqBL9adQPav0gHHhkSG+cSqJmDphjTPM30kY42uEIt6Q4Qf0
- Z5b1Fjx89UaplK2KmtjJH+hwHbX7s5ZlLmzkLkPK+c7HiupnTw4c52m3dpnl4zpMkLr3KwP4UOL
- HzyLdOhcSHMUimVN9Cn/DAG9kz/b3MbwATSV/dKdu7cHzeTA6tas+YnHm
-X-Google-Smtp-Source: AGHT+IFWzs4VhXgqIFGpGOy0zPh5BbWVzTl3eTqN5nWoeYj281Y9TWZg90V3oV3YFc57tlkchiCVgw==
-X-Received: by 2002:a05:6808:3a0f:b0:439:8e9:637c with SMTP id
- 5614622812f47-43f4cf5adbamr1542241b6e.25.1758810078825; 
- Thu, 25 Sep 2025 07:21:18 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-363b2ad67d5sm583438fac.24.2025.09.25.07.21.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 07:21:18 -0700 (PDT)
-Date: Thu, 25 Sep 2025 08:21:15 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
- Carlos =?iso-8859-1?Q?L=F3pez?= <carlos.lopezr4096@gmail.com>,
- Aristo Chen <jj251510319013@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Rasmus Villemoes <ravi@prevas.dk>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] Revert "tools: mkimage: detect overlapping load regions
- in FIT configurations"
-Message-ID: <20250925142115.GN197373@bill-the-cat>
-References: <20250925134212.59709-1-marek.vasut+renesas@mailbox.org>
- <20250925140802.GL197373@bill-the-cat>
- <7fdf6e61-0b05-4ee3-96bd-abf9aa7ed737@mailbox.org>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 58PESGep1475199;
+ Thu, 25 Sep 2025 09:28:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1758810496;
+ bh=otdluRCHbQp/BAIFvSIPJ5TugV2ETMaIoDLXQAyov40=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=TAtgoskcucQZwFXU4P95HBGxDMCaqMdIJXNtRhQY6KQDet4Vd0hy7jvjlzKDJWxeM
+ HEse1MvD1e7xCi2TAUcOlLUfndgTDUkI8jHOzaYnNklmFvwL5ReK2/LdbXboEz5XNL
+ njg8o8EQw4ideJ94cqZoske7h9pCreKwCV1h+W40=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 58PESFkb233723
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 25 Sep 2025 09:28:15 -0500
+Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 25
+ Sep 2025 09:28:15 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 25 Sep 2025 09:28:15 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 58PESFS03629532;
+ Thu, 25 Sep 2025 09:28:15 -0500
+Date: Thu, 25 Sep 2025 09:28:15 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Aristo Chen <jj251510319013@gmail.com>
+CC: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>, E Shattow
+ <e@freeshell.de>, <u-boot@lists.denx.de>,
+ <sjg@chromium.org>, <alpernebiyasak@gmail.com>, <al.kochet@gmail.com>,
+ <paul.henrys_ext@softathome.com>, <y.moog@phytec.de>,
+ <w.egorov@phytec.de>, <francesco.dolcini@toradex.com>,
+ <ggiordano@phytec.com>, <n-francis@ti.com>, <afd@ti.com>,
+ <d.schultz@phytec.de>, <d-gole@ti.com>, <ravi@prevas.dk>,
+ <carlos.lopezr4096@gmail.com>, <quentin.schulz@cherry.de>,
+ <alice.guo@nxp.com>, Aristo Chen <aristo.chen@canonical.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+Message-ID: <20250925142815.p46kfcxibgipf3hr@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+ <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+ <20250924135139.GH197373@bill-the-cat>
+ <20250924140524.fy46p7ifr4oxh5mc@uncooked>
+ <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
+ <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="aVt48+A+Zt83OPyH"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <7fdf6e61-0b05-4ee3-96bd-abf9aa7ed737@mailbox.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,50 +95,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On September 25, 2025 thus sayeth Aristo Chen:
+> Aristo Chen <jj251510319013@gmail.com> 於 2025年9月24日 週三 下午10:33寫道：
+> >
+> > Nishanth Menon <nm@ti.com> 於 2025年9月24日 週三 下午10:05寫道：
+> > >
+> > > On 07:51-20250924, Tom Rini wrote:
+> > > > On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
+> > > > > Hi Aristo,
+> > > > >
+> > > > > On 9/24/25 04:43, Nishanth Menon wrote:
+> > > > > > On 06:37-20250924, Nishanth Menon wrote:
+> > > > > >> On 10:59-20250914, Aristo Chen wrote:
+> > > > > >>> This patch series enhances FIT image robustness by adding **memory
+> > > > > >>> region overlap detection** to `mkimage` and fixing existing overlaps
+> > > > > >>> in DTS files and `binman` tests.
+> > > > > >
+> > > > > > [...]
+> > > > > >>>
+> > > > > >>
+> > > > > >> Looks like i see a build regression in linux-next after this series.
+> > > > > >
+> > > > > > I fat fingered that one.. sorry, I meant u-boot next.
+> > > > > >
+> > > > > >
+> > > > > > Fails at commit 4d84fa1261eb, last pass was on commit d81c1118580f
+> > > > > >
+> > > > > >>
+> > > > > >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f76
+> > > > > >
+> > > > > > I  believe there are outstanding comments on V1 that have'nt been
+> > > > > > addressed either. Can we revert/drop this series for now while the
+> > > > > > comments are addressed?
+> > > > > >
+> > > > >
+> > > > > Similar to Nishanth, I am seeing a build regression, itb.map:
+> > > >
+> > > > Sorry for the noise all, I've reverted this in next now.
+> > > >
+> > >
+> > > Thanks Tom.
+> > > --
+> > > Regards,
+> > > Nishanth Menon
+> > > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+> > > https://ti.com/opensource
+> >
+> > Apology for introducing the regression, I will find time to fix them,
+> > and thanks Tom for reverting my patch set to unblock others
+> >
+> > For TIFS stub entries on AM6x platforms and the starfive visionfive2,
+> > sounds like the image in the FIT will be selected during the runtime,
+> > so they are not really overlapping each other. I will need to figure
+> > out other way instead
+> 
+> 
+> Thank you all for the feedback on my FIT image overlap detection patch
+> series, and apology again for the issues that I introduced
+> 
+> Currently what I have in my mind is to have the following 2 changes in
+> my patch set
+> ### 1. Add support for mutually exclusive image groups
+> Some platforms load only one image from a group at runtime. In the
+> device tree, we may have something like this
+> ```
+> tifsstub-hs {
+>     // ... existing properties ...
+>     mutually-exclusive-group = "tifsstub";
+> };
+> tifsstub-fs {
+>     // ... existing properties ...
+>     mutually-exclusive-group = "tifsstub";
+> };
+> ```
+> The overlap checker would then skip validation between images in the
+> same mutually-exclusive-group, while still catching genuine
+> overlaps
 
---aVt48+A+Zt83OPyH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This was the direction I was leaning as well. A way to opt-out or group 
+the binaries we know should overlap.
 
-On Thu, Sep 25, 2025 at 04:13:52PM +0200, Marek Vasut wrote:
-> On 9/25/25 4:08 PM, Tom Rini wrote:
-> > On Thu, Sep 25, 2025 at 03:41:43PM +0200, Marek Vasut wrote:
-> >=20
-> > > This reverts commit 588094f2c8ec9a4f7d2dcda11ffae8db8462149c.
-> > >=20
-> > > This introduces warnings on valid fitImages which do not set load
-> > > address for fdt-1 DT node. This is valid, because DT can be loaded
-> > > to suitable location as determined by the fitImage loader.
-> > >=20
-> > > Warning: not able to get `load` of node 'fdt-1'
-> > >=20
-> > > Furthermore, do not add C++ style comments into C code.
-> > >=20
-> > > Either send a fix or apply this revert.
-> > >=20
-> > > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> >=20
-> > Sorry you hit this during the window before I reverted the series.
-> Just keeping my bootloader up to date ... :)
+> 
+> ### 2.  Change from build error to warning
+> Given that there may be edge cases(such as
+> starfive_visionfive2_defconfig) not covered by current CI pipelines,
+> changing overlap
+> detection from a build-stopping error to a warning initially. This would:
+> - Alert developers to potential memory layout issues
+> - Avoid breaking existing working configurations
+> - Allow time to refine the detection logic based on community feedback
+> - Enable a gradual transition to stricter validation once the approach is proven
+> The warning could later become an error once we have confidence in the
+> detection accuracy across all supported platforms.
+> 
 
-I do in fact appreciate that I pushed the series my afternoon and woke
-up to (well, I saw the first revert request before going to bed, but
-it's the next branch and not hours before a release :)) several problem
-reports. Prompt testing and reporting really is great.
+I haven't looked into what is needed for the visionfive2 board, but I 
+liked having this as a build error. If we know the build will not work 
+on for the board I think we should fail to build it.
 
---=20
-Tom
+Though it's really just for the selfish reason of not having to debug 
+other people's builds that lead to the unsatisfying conclusion of memory 
+corruption.
 
---aVt48+A+Zt83OPyH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNVP2wAKCRAr4qD1Cr/k
-CpxqAP9l+KpCm07A3st03SKTXt/iOnxDHR1XdpllG0fJs7xNEQEAkEm3axgMwcPt
-H745cwEW/Mavi2/KPcm0sGhMVSdX9Q4=
-=DxcK
------END PGP SIGNATURE-----
-
---aVt48+A+Zt83OPyH--
+~Bryan
