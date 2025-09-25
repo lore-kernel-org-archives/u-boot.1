@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D08EFCAC5B0
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:44:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB0ACAC5B5
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 20:44:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F0FC82A9E;
-	Thu, 25 Sep 2025 22:44:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B0CBC8344E;
+	Thu, 25 Sep 2025 22:44:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cauyYuQ/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XwCG2p/F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 034C083445; Thu, 25 Sep 2025 22:44:20 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 3447E82A9E; Thu, 25 Sep 2025 22:44:21 +0200 (CEST)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA775809A5
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:44:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 055AC832AD
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:44:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-74c7d98935eso726456a34.1
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:44:17 -0700 (PDT)
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-638ac2981b9so566702eaf.3
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 13:44:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758833056; x=1759437856; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tStO7K4fo3WQ1xnd72W+04FQ0hQ249S+sZzMVU0IcSE=;
- b=cauyYuQ/Sn1B2tKcnG9VZ8r/SvOodv63Yks4sydO+1xhye4rYnRD1iR9UAS5m+zGyf
- 8vb42MheVA7+Fbi4baLd04PsFmhllkesEOq/i24X+GnHhlJRvgvqcoWKfGrrMSUY0Std
- cMNZ5AokmRP7yemQryxV3GIZgP0oypFjf87/E=
+ d=konsulko.com; s=google; t=1758833058; x=1759437858; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=THaVmH7DjWhYVchgIAEeamrYGNX1koDXUGFfkwERezI=;
+ b=XwCG2p/F0Vu2VBMGWR+BnwFjt908PByH9hEcW2eEr92SrwP6fivDD6zozO6LUY7xbv
+ EFuPTzo/pP7NPMU3bBIlnQeg8rbRQOA6oo71e3WO+xSYMLEqer6GvI3Ox9pz/OsmS8Fn
+ cWdVoyods0dH9g/iCS0+CBdcf6JpB4cSGbENw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758833056; x=1759437856;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tStO7K4fo3WQ1xnd72W+04FQ0hQ249S+sZzMVU0IcSE=;
- b=Y12+vMDoQ19tNOx8utB8aJZOTQlJTOteoJlPzTuEfvoP+tk1XRsgaoAWJz9Z/2fykU
- iIbF+VRBScEO4VhM3K42KwKahRmCZtTUYahqnEUC+xuZFGNHerF9XRSkFnCghLKXJlXo
- Tr2zjyqmsJcGyvr6Cho35BvEyD23vk//BQKBQTtax5IdKMbz4R4vU6cx5za+ZbNos1Q1
- dqaGsbZO9/6L8ttLNk7a9dGuEzNHnvR0dbxHyOyb2DOW89hSqY3lk2f6UvPtAAo352Re
- yvaXtb02uaIkptECdX+DaAsFI3ko/O5zbTq0OTktsB1fjURW1xu87k+ZTr6MsNs2H24I
- D6XQ==
-X-Gm-Message-State: AOJu0YzsWYn8nJVJE1DCjWr+aom0f9hgCbdJRHnVRZpqo+D2rPiB5XIG
- 33bHfMnMk1HCKtcAlvcMFpTmGZzArLtELIKefeZkjSBrYg1bkKlFgap4kEyoY4LjZrKEYqhdnQq
- zMsRk9Bk=
-X-Gm-Gg: ASbGnctqeymVXAP4PZw/Ab609m3MB+YMJzL/E4lT4+X1QS5SbGSZ35gnOhqNEWzEpMY
- 9J/y9d7y0HrQUpNUcyY64ThkIz/teaWKZFxZyfGAbUgDGi0p25ACOYgm5I6cvq6HGkQjd+gJGfZ
- ma8bJNSrKsSXHc1JrCwOSK+SKCEiUlbVizEENkiCec26oUATkxYSFjbC2VatsrKedF5j4SNnZwI
- fTQutfZR5yvLisZeGxXKuO/NhPfuz8zQFebGZO4RMcj6A16WzBedTGXsK/jyNIYnWeVl86zBXiJ
- GYByRJAWxQAQqphL7qilPs4z7k5Lph2spkzo2WOH96DH6gBN58Yr/sG6gq7yN5iprDR4hexLFpd
- 9XYoKuSkvBtsNNqz5p9ld+j2XVokwGgfyPcRlMcsim9sgY7W2nIE1NqinaUg=
-X-Google-Smtp-Source: AGHT+IFQcDjEc3fJqb5EOGn6/LWDtjFhUiWKtZmK93QFqD+vfHgI05OhHFYYUKOZn1S/26G/L/sI5Q==
-X-Received: by 2002:a05:6830:2783:b0:741:3929:31a with SMTP id
- 46e09a7af769-7a03f673f9bmr2513159a34.12.1758833056272; 
- Thu, 25 Sep 2025 13:44:16 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758833058; x=1759437858;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=THaVmH7DjWhYVchgIAEeamrYGNX1koDXUGFfkwERezI=;
+ b=MYqKokYjhEpOjx0sZZAldgbluYmhX56jq9Xo7Czr/mXK39pbmDloB7aRhpmashC8mM
+ 6CLxfIh6W5o0BJvjKgpwbnnhMQR1AbZLXBEGZ/ZiQge3BXKZRasMAkVoZtyUuql9Nx8p
+ KQYiXG2pG5SC0cMgOvDagu2fT7B3cS3t2HV4wv6svtgbX/Prr0pwUHaOZeKY5RIMNtnB
+ szkl8EfgfyLCEHnMEQMCmCPGl/yyPDr1WLYjtccWuklg0SMXzWLXmtqbwIeyDZDhu5kG
+ /Tzr4xwLuXb9GLXAi9yFsVG/BcTQv3Z/6JUVqSNjhB6UmdWqI8ItZ4t8A56L1hgS+RCM
+ m07Q==
+X-Gm-Message-State: AOJu0YyYMwYi0rDjh61EOGbN8A4MrcEoL3OmCr3yT8wAlGVWqSOjWtP2
+ 8H5LsYhY42jXvWKT93ou/wHTSmSo8cx34z7vmk3NEOZIKA4TimNYmd2sHgnJ9K7ZlFeLVoh7ikE
+ 79ytlh0c=
+X-Gm-Gg: ASbGncuMIdMseIQg494c/02c8TWvG1pdTT0OtuZtbm48BJgBfEh4e1GomyDYLwvQ6yG
+ BTmg5tYcO/6LknLKqpc6QtzhXdknOTSOJjzQLzxbntF+Bt/XKDbWCkEcQYiJ7d9B1mucx6fR/mS
+ 35fBbwG7hJw/+wyhWhIS3HZ0nYW8woKcTKLVDxoFUyTswLijDFn6P/wvIK1027ph4MdrISM6fwI
+ 73HNagl9Y77qfRb1sv00wfTw0xn+zNg6QsJCm+FRSmKOPh+Vm9ClSnRF2HlCa/ziDW4wSSTycOi
+ 47GcYLrqSaK/xwwzh9iiDtXXHlc/dWYF2sU8Vgk05kGyFsTfrJ//sDW9xgqu0S6X7FOre/nH5s5
+ r4sTm7Aaqx9OUWhH4JvQO0GGcZJz5rFzAneLiLLFtQRUx2HtuQf+2auIR77U=
+X-Google-Smtp-Source: AGHT+IEcL6hkS4QdYYzjP/lX0/AdQviKmdtm713qBXXGaPitIOvcvRTkN2SIjsLh+gJ/7i4q9MDkww==
+X-Received: by 2002:a05:6808:50a6:b0:43f:4190:bcb7 with SMTP id
+ 5614622812f47-43f4cfc6d10mr2797566b6e.37.1758833057741; 
+ Thu, 25 Sep 2025 13:44:17 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a23193d01bsm605790a34.8.2025.09.25.13.44.15
+ 46e09a7af769-7a23193d01bsm605790a34.8.2025.09.25.13.44.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 13:44:15 -0700 (PDT)
+ Thu, 25 Sep 2025 13:44:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Tien Fong Chee <tien.fong.chee@altera.com>
-Subject: [PATCH 1/4] arm: socfpga: Tighten a few more driver dependencies
-Date: Thu, 25 Sep 2025 14:44:11 -0600
-Message-ID: <20250925204414.3561033-1-trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH 2/4] net: Add SYS_FAULT_MII_ADDR to Kconfig
+Date: Thu, 25 Sep 2025 14:44:12 -0600
+Message-ID: <20250925204414.3561033-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250925204414.3561033-1-trini@konsulko.com>
+References: <20250925204414.3561033-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,53 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some drivers which depend on SoCFPGA specific headers had not had
-appropriate dependencies list in Kconfig. Add ARCH_SOCFPGA or
-TARGET_SOCFPGA_SOC64 where appropriate.
+The support found under SYS_FAULT_ECHO_LINK_DOWN requires that the
+SYS_FAULT_MII_ADDR symbol also be set. This wasn't previously found in
+Kconfig, so add it now.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Tien Fong Chee <tien.fong.chee@altera.com>
----
- drivers/net/Kconfig          | 4 ++--
- drivers/power/domain/Kconfig | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index d1cb69f85ad4..7c13055d606c 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -190,7 +190,7 @@ config DWC_ETH_XGMAC_SOCFPGA
- 	bool "Synopsys DWC Ethernet XGMAC device support for SOCFPGA"
- 	select REGMAP
- 	select SYSCON
--	depends on DWC_ETH_XGMAC
-+	depends on ARCH_SOCFPGA && DWC_ETH_XGMAC
- 	default y if TARGET_SOCFPGA_AGILEX5
- 	help
- 	  The Synopsys Designware Ethernet XGMAC IP block with specific
-@@ -376,7 +376,7 @@ config ETH_DESIGNWARE_SOCFPGA
- 	select SYSCON
- 	select DW_ALTDESCRIPTOR
- 	bool "Altera SoCFPGA extras for Synopsys Designware Ethernet MAC"
--	depends on ETH_DESIGNWARE
-+	depends on ARCH_SOCFPGA && ETH_DESIGNWARE
- 	help
- 	  The Altera SoCFPGA requires additional configuration of the
- 	  Altera system manager to correctly interface with the PHY.
-diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
-index ebf5d828cb02..0ad885c9e8ba 100644
---- a/drivers/power/domain/Kconfig
-+++ b/drivers/power/domain/Kconfig
-@@ -20,7 +20,7 @@ config APPLE_PMGR_POWER_DOMAIN
+Changes in v2:
+- Add missing dependency on LED_STATUS_RED_ENABLE as well.
+---
+ README      | 3 ---
+ net/Kconfig | 4 ++++
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/README b/README
+index 07cfded6be53..27cde241bef4 100644
+--- a/README
++++ b/README
+@@ -1238,9 +1238,6 @@ Note: once the monitor has been relocated, then it will complain if
+ the default environment is used; a new CRC is computed as soon as you
+ use the "saveenv" command to store a valid environment.
  
- config AGILEX5_PMGR_POWER_DOMAIN
- 	bool "Enable the Agilex5 PMGR power domain driver"
--	depends on SPL_POWER_DOMAIN
-+	depends on SPL_POWER_DOMAIN && TARGET_SOCFPGA_SOC64
+-- CONFIG_SYS_FAULT_MII_ADDR:
+-		MII address of the PHY to check for the Ethernet link state.
+-
+ - CONFIG_DISPLAY_BOARDINFO
+ 		Display information about the board that U-Boot is running on
+ 		when U-Boot starts up. The board function checkboard() is called
+diff --git a/net/Kconfig b/net/Kconfig
+index 40ec6bbce761..5768fab6f8fb 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -60,6 +60,10 @@ config SYS_FAULT_ECHO_LINK_DOWN
+ 	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
+ 	  be configured.
+ 
++config SYS_FAULT_MII_ADDR
++	hex "MII address of the PHY to check for the Ethernet link state"
++	depends on SYS_FAULT_ECHO_LINK_DOWN && LED_STATUS_RED_ENABLE
++
+ config TFTP_PORT
+ 	bool "Set TFTP UDP source/destination ports via the environment"
  	help
- 	  Enable support for power gating peripherals' SRAM specified in
- 	  the handoff data values obtained from the bitstream to reduce
 -- 
 2.43.0
 
