@@ -4,92 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2464CAC5A7
-	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:32:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF415CAC5A7
+	for <u-boot@archiver.kernel.org>; Thu, 25 Sep 2025 14:34:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41FF382A9E;
-	Thu, 25 Sep 2025 16:32:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CD77832AD;
+	Thu, 25 Sep 2025 16:34:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TDKat/8i";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Jod6Wk5o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D43088309D; Thu, 25 Sep 2025 16:32:15 +0200 (CEST)
-Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
- [IPv6:2607:f8b0:4864:20::c34])
+ id 57F31832AD; Thu, 25 Sep 2025 16:34:10 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A48D80107
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:32:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C67A482A9E
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 16:34:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc34.google.com with SMTP id
- 006d021491bc7-61bd4a3f39cso345296eaf.0
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:32:13 -0700 (PDT)
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-30ccea94438so571812fac.2
+ for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 07:34:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758810732; x=1759415532; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758810846; x=1759415646; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iVEo4rRV0oJr65caBHvRHjuI8jwLs0/cC3yTyadpEpg=;
- b=TDKat/8iTgZh6jQ5gzMzl4KnGs0T17R5XuNZMLK5X/ncvm6Ir3NU+SryVgwKhrK5lO
- eHF4fDBEv9mbqfdu1xaFrJfrEpkPALAgJiMHi9/ojFgxJnJusHlE71mxwtWD5iDJ43y5
- JiPmmNxz1fdHW4KI3iyQFE9zCf4m6pZDy4S6E=
+ bh=cWj+BCF4hqo+9gPgm1cYBx0bz9vOAJhBnyfDnc/cKzY=;
+ b=Jod6Wk5oL4bVGFiXAi34X+zF/SZkcTR1033zpGQhhhrTE7wfX9xyZtMmT8X8OVmZBN
+ ZHbi8gtn+Zpjx/81H0fLVvCtrd5z5HW+o1JEtJtO4zJcC8Wd/QxgCeDIaou4G3c3zz60
+ E53pHWk9NUnTCU9CrGs9WsKjHB3fXnsC05qXU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758810732; x=1759415532;
+ d=1e100.net; s=20230601; t=1758810846; x=1759415646;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iVEo4rRV0oJr65caBHvRHjuI8jwLs0/cC3yTyadpEpg=;
- b=X8mg1FR5L8txI+ilRHsV0pPUu6mAiBlFmTueqNC1PRCnvqkBq1nKQ015juj3J76IuT
- 5D1E4BcfLqoT4vpPViRSoJWzM/G0+dbSBTPpxTGUJGeOY1Lb2VNE2yomIA+OJirPYY2f
- 5tUVyjfTLBVinTm8VS3LsIQL2W9r3QvEIYchFzL1xTY2w5DwMVPCQ8Ttcw9xH++Tpteb
- eaNLwPk0cguZb4oY0Gx7iodHwyGuM1iSIIDOsva8NoA3YFgh25/sPF/5bplogzHAMYc5
- zUt2MzgktWEQwo0ESHn1QGfXW3LjIsgD44pcoqRaSfXmOKu8nZgjGcWcgKMHag1vUSsv
- KF1w==
+ bh=cWj+BCF4hqo+9gPgm1cYBx0bz9vOAJhBnyfDnc/cKzY=;
+ b=CJ10JqWEZ86Ax3bThe+/fuoyKX+6EbZytra6LUezAs2wge8ii5KCbbBtBUFp92qv+H
+ VVyxEa0RPU/+5rHNTQKt17daoTHVzFzIbEby3PQsw69BpKVYmA2f+K9Dkm5rinPmhQK+
+ E8Ao7R0kwBn90PuWQrJALUCXu5qTaR6EojN1ungUx8Y+uFlcBdu3Ssob0rDWbyg+QTZo
+ VqsksrPHpKfyRFXZPnX6fT/47u+17ZqjVYIz9cdFm2TSXsTMspRKci5LRoDVp9W17am1
+ yqdTd+wSh64PY6sRZo8Y5xmht5xkLbt4sf3261mqa3oJhafeSxK/oyVS+te3DSXtq1Xj
+ tQEQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVOAnV6ONS2EFKbsYIKagHZUiZvGcuJuNqtrCnD0w+W1ZTpCUSWSfKbLjfPJ0DVAeJq3sVxXuw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxo0JceFk7+TvbRS4vCdxHrSZdADvZo7CrAatGl04DhtgGQICQ2
- keVg1eViPcI1YFJwsRratC5QnNP1pJOh2NXzR9FScs4V3Cea+bBCOpf/ge2XDznJza8=
-X-Gm-Gg: ASbGncuPpg+g+XmCQ0iE43hDb4QRpGP1OUuVGdkleNsKJXUehvx7mTdpUPtU1AXHdrk
- Rm1oPDde2i4XkJStMpSkHpBTcsJuTBdCkvgWGin1C2I7C1epcYn5MfD9fMjqkJdO2sQQIqdB4LQ
- 6wu34ChtRjozRfeUEbQm6qmzzLG/cD0prKn5zvbiHgDXL7sgth0icMXK6MFhSkYEvRivRFv6Cvk
- sikY3+6vvBZZVgbVdja7TsgkiptZ8CaLmq+4uzF9Mv7vWGRzLkNgq2Hj5JHuDDMHw7sZA/5LGUY
- qXcWZF1gpiAtz4x3KzqNgpiZug0rH/piwRoA+m7NE36cho1hWmiclSPRE1r/V8gAPaSLSdkJP7+
- QUIS9vkU3nBn5B/GaxzjsnGiPuIGSNBWU1MU/OMAaIogvotHQA9ru/fyk
-X-Google-Smtp-Source: AGHT+IF6JBlffKlsHRhxNS+/EUxuNLjNGP/NZUTud51tHNxM6lu3xH+mNxjTbo/MCbWhbHLWLctD1w==
-X-Received: by 2002:a05:6870:420f:b0:34a:63ae:4bcb with SMTP id
- 586e51a60fabf-35eeb3e9a42mr1509253fac.46.1758810732115; 
- Thu, 25 Sep 2025 07:32:12 -0700 (PDT)
+ AJvYcCXEdLqFu7n94AJydQI6IGendd5ftcJja8B7OzmBcHq+3mUnJmb+IuaSEiq1Z0F/hytSI/iPDpI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz25MnGQkcFT0k+mssJLnJ6om0eL+OkJQV3qP+g3FJz49dNikIu
+ KnoCpbmAWpdmtvDMGuI1YT2G3C44MvlnXk9XogTyAXwBR7k1qwUV5c5oC/1YTkS2SK8=
+X-Gm-Gg: ASbGncsri5F9OPFWwDUznOG+T8dfoN9waDnPiowmTJptn/oYIBtM449psA1+pHy3EYV
+ ZpuEtquUXE0xMmEe8BRv/ZBETRrJyz/cb/EyodpzTN8/usekfvAHgcpZ9mA9VMTabVRT5nLYRQO
+ 7lJtWPj132Ch/JzXUyms2aAtRGPHqdusbbRRLxOO8tIwL1WD3WlVfeZnO0Q+1vm/z0y/G2a31Pf
+ SK1De0wtQT7S3f+QBXQMr8W/Bdc9+drECigNUzyCs81JVPOkFX9E5/mSZbXDbWeiT0XkKe38iJg
+ CuTCuZWXBvutEWHifFhelyoY7OIvpdThzFXv9H1NeBmgWM91J4ipWpNq5GkMXuZKiBe8+K9StT8
+ yIyjY6YB1+Ut94JjV1kmvcf4VEeq31pV1CtlOxr/oVJ4XdHn7PSNXWxxL
+X-Google-Smtp-Source: AGHT+IGFQt6s5thA4jCYYQ75UtsL/nAtb5/TXtXqHPavCKTRCjXS6fJ2U3CUNTRbC41vwIEInkz7Hw==
+X-Received: by 2002:a05:6871:7bc7:b0:34c:251a:4ef2 with SMTP id
+ 586e51a60fabf-35ebf3f488emr2046502fac.2.1758810846463; 
+ Thu, 25 Sep 2025 07:34:06 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-363a3d461e4sm597102fac.13.2025.09.25.07.32.10
+ 586e51a60fabf-363b3381cd0sm590182fac.26.2025.09.25.07.34.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Sep 2025 07:32:11 -0700 (PDT)
-Date: Thu, 25 Sep 2025 08:32:09 -0600
+ Thu, 25 Sep 2025 07:34:05 -0700 (PDT)
+Date: Thu, 25 Sep 2025 08:34:03 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Paul Barker <paul@pbarker.dev>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH 5/6] power: regulator: tps65910: Cannot test unsigned for
- being negative
-Message-ID: <20250925143209.GQ197373@bill-the-cat>
-References: <20250807-pwr_regulator-v1-0-42a4105336ec@linaro.org>
- <20250807-pwr_regulator-v1-5-42a4105336ec@linaro.org>
- <78a0767b-2508-4602-a37a-eb4e72b37120@kontron.de>
- <b44654c2-de9e-4bd6-96a8-aa338435048a@linaro.org>
- <d320ef0e-2711-4f86-9881-6aabdf6766c2@kontron.de>
- <5b5d3865-1bc0-45c5-adf8-0f63cfda47bf@linaro.org>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Adam Ford <aford173@gmail.com>,
+ "Derald D. Woods" <woods.technical@gmail.com>,
+ Marek Vasut <marex@denx.de>, Paul Kocialkowski <contact@paulk.fr>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 2/3] am33xx: am3517 evm: Drop old musb AM35X driver
+Message-ID: <20250925143403.GA685920@bill-the-cat>
+References: <20250629195455.53083-1-pbrobinson@gmail.com>
+ <20250629195455.53083-2-pbrobinson@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jQLkTwKzxb6PoH2m"
+ protocol="application/pgp-signature"; boundary="hYd8PN3exTNdbIqS"
 Content-Disposition: inline
-In-Reply-To: <5b5d3865-1bc0-45c5-adf8-0f63cfda47bf@linaro.org>
+In-Reply-To: <20250629195455.53083-2-pbrobinson@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,95 +102,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---jQLkTwKzxb6PoH2m
+--hYd8PN3exTNdbIqS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 25, 2025 at 12:11:14PM +0100, Andrew Goodbody wrote:
-> On 01/09/2025 17:58, Frieder Schrempf wrote:
-> > Hi Andrew,
-> >=20
-> > Am 01.09.25 um 18:26 schrieb Andrew Goodbody:
-> > > On 27/08/2025 08:54, Frieder Schrempf wrote:
-> > > > Am 07.08.25 um 18:35 schrieb Andrew Goodbody:
-> > > > > The code in tps65910_regulator.c treats the field supply in struct
-> > > > > tps65910_regulator_pdata as an int and even tests the value for b=
-eing
-> > > > > negative so change it from a u32 to int so that the code all work=
-s as
-> > > > > expected.
-> > > >=20
-> > > > I'm not sure if this is the best solution. The supply field holds a
-> > > > voltage value in uV and u32 seems like a reasonable type to use.
-> > > >=20
-> > > > I would argue that the driver should be changed to not use int and
-> > > > remove the negative value check.
-> > >=20
-> > > Hi Frieder,
-> > >=20
-> > > I would offer the counter argument that the TPS65910 has an absolute
-> > > maximum rating of 7V so any advantage of being able to use all 32 bits
-> > > vs 'only' 31 bits to hold a value in uV, when 23 bits would be enough,
-> > > is somewhat lost.
-> > >=20
-> > > As I say in the commit message all the rest of the code in this driver
-> > > treats this field as an int and declares int variables to hold its va=
-lue
-> > > so using a u32 throughout this driver would just mean changes being m=
-ade
-> > > with no benefit. Removing the negative value check leaves the code op=
-en
-> > > to unexpected behaviour and hard to find bugs.
-> > >=20
-> > > More than that the field is being assigned to from the function
-> > > regulator_get_value() which is in the regulator uclass and returns an
-> > > int. So following your suggestion to its logical conclusion would mean
-> > > changing the uclass and then that would lead to changes also being ma=
-de
-> > > to all other clients. This would turn into a major project which I am
-> > > not very keen to take on as I do not see any benefit to it.
-> > >=20
-> > > So yes, simply changing one field in a struct from u32 to int does se=
-em
-> > > to me to be the best solution. It achieves the aim of fixing the code
-> > > with the minimum of effort and I see no downside to it.
-> >=20
-> > Thanks for the reply. I totally missed the fact that
-> > regulator_get_value() returns an int. When I was looking at the code, I
-> > assumed that there are only positive values ever used.
-> >=20
-> > You are right. Sorry for the noise. The patch is fine.
-> >=20
-> > Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
-> >=20
-> > Thanks
-> > Frieder
->=20
->=20
-> This patch is still showing as 'Changes requested' in Patchwork but I am =
-not
-> sure why. Should I change its state or should I leave that to someone els=
-e?
+On Sun, Jun 29, 2025 at 08:54:47PM +0100, Peter Robinson wrote:
 
-Please update the patchwork state. I assume patchwork also shows the b4
-email from when I applied it. However due to patchwork being slow
-sometimes the state change gets missed and I only run my script that
-updates patchwork to include the git hash when I also merge next to
-master (which is something I should look in to doing more frequently).
+> The USB_AM35X is a legacy driver with one remaining user. The rest
+> of the am33xx devices use the USB_MUSB_TI driver for DM_USB so
+> move the last user USB_MUSB_TI which is the newer musb driver
+> So move to the newer driver so we can drop the old driver.
+>=20
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> ---
+>  configs/am3517_evm_defconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
+> index 244a39cd88f..ba8552948b0 100644
+> --- a/configs/am3517_evm_defconfig
+> +++ b/configs/am3517_evm_defconfig
+> @@ -92,6 +92,6 @@ CONFIG_OMAP3_SPI=3Dy
+>  CONFIG_USB=3Dy
+>  CONFIG_USB_EHCI_HCD=3Dy
+>  CONFIG_USB_MUSB_HOST=3Dy
+> -CONFIG_USB_MUSB_AM35X=3Dy
+> +CONFIG_USB_MUSB_TI=3Dy
+>  CONFIG_BCH=3Dy
+>  CONFIG_SPL_TINY_MEMSET=3Dy
+
+This patch is wrong, CONFIG_USB_MUSB_AM35X is the right symbol for the
+correct "musb-new" glue code for this platform.
 
 --=20
 Tom
 
---jQLkTwKzxb6PoH2m
+--hYd8PN3exTNdbIqS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNVSaAAKCRAr4qD1Cr/k
-Cm81APwMsN+XYFi2R/BFN/U45lGvSnk4x7GU4zb3enj/hLeGkAD/e52/7aindHEH
-VSs7K2Xtw2DnB7PnoZayCIpuDMwKAgY=
-=N0eJ
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNVS2gAKCRAr4qD1Cr/k
+Chr8AQDkUaaWC1ALernSr5Yl+lw9ndkjq2mO+5xkhXh0pt7hMAEA9+vB7y69qA5V
+2y/A3IFh15NUYyshnq30apozvRQMEQ8=
+=Cr+m
 -----END PGP SIGNATURE-----
 
---jQLkTwKzxb6PoH2m--
+--hYd8PN3exTNdbIqS--
