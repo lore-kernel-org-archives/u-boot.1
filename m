@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF2F9CAC5B8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 17:11:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BCAFCAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 17:12:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25C3183839;
-	Fri, 26 Sep 2025 19:11:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA2CA8382E;
+	Fri, 26 Sep 2025 19:12:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OnwgpJG5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LIoBgdwK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 780A98383E; Fri, 26 Sep 2025 19:11:17 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id B46BF83855; Fri, 26 Sep 2025 19:12:56 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 367FB835FD
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 19:11:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB228835FD
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 19:12:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-36a6a3974fdso777871fa.0
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 10:11:15 -0700 (PDT)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-36bf096b092so31611271fa.1
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 10:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758906674; x=1759511474; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1758906774; x=1759511574; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yTTgzY4wVtmQGUjNLn3z4TDqNZaSLA3GNqlfr1WNf80=;
- b=OnwgpJG5YVYACRjDPuzkg0S3nIcSs5Ykdl/d1Vwg6g8FtsQfrcEctxciwT/aLPiQjR
- /u5K7QfD+k20C2TcK1n+w29xCMl7d29gtBFDMFcUCMbf++qYszue3x4nN8/WPqA9k9Uq
- wJvU2+0x+XmLuds6abI0x+zIEGmA1Wal7dOqcC6Hu2K02gj93MckSLo52oXOcPK3hMKG
- VmpNtqd1YkHnzOyvw/hUBp1ZtsKqUTjyvADUtEwF/6Fyd+Z5nJCgtPVnH6UurgjN9eTG
- vEkwscR2LD6dZhUvaUPGzy0OP+aEzTlHc39emb9+uK+M2Y4RD0EQNQXBAM7SCsVNJk/2
- pbpA==
+ bh=61ST3f6QYcM2Ke5AjZB02oJvSETxTvAzFffo5DQBaEs=;
+ b=LIoBgdwKLAdB64I7gWFjqQPliKyF3FE/cVKn43XmMF1IpgTSa3ssaWk34Wdxgt79Gc
+ yU7z0vIIfSiayc9/kvCcSyQHKOxnYHvly+EdrIRJJRpMtmm8XHgQ6OQMtBSSYTEMVn/2
+ emdTtLibJxSPDVWbS3Pb0hb/u9vBee/5ecZxDwjERaWrnUKohOMG9Toc3R13UA3EL4T0
+ 4r7JPtvoBPWhznLgj9/6znhUsZOmiMmAH9cRQCbz1zIPC1SZuD6u8IkdlkGNwCWtlQXj
+ 6e6mjp7APkO7I3IzO3xxh0Op+FYIHYJnh3lyENIr15s+DmwmlQnV6ojn4QZuEZgmwHcy
+ 3AMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758906674; x=1759511474;
+ d=1e100.net; s=20230601; t=1758906774; x=1759511574;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yTTgzY4wVtmQGUjNLn3z4TDqNZaSLA3GNqlfr1WNf80=;
- b=Kr8VPktolFknokF3TLH+ixmUrqAknsXUl2AuBmJbVIyT7JqtpFQZOXH6kdofzx6nHC
- Cuv8sQohSK/KbVoxlfqdXRZDL3EajvC+/7Ne9Kveq4ntmDpZpE9y67zwRr2UJ/q4NqY6
- HsUTiG2t++af+sjkPzRaFLL6esYaBfHaDrLOhNax1rE8XcpyoR/sX929YRKgf1bx3BKk
- sGE2QzQCffKjGmOOP7QLy9Vih1ajrEm42wOtjW//DYxhZgn9gGwlm4dilI/G4NAHbicd
- pims7UIN3x+ZrzRrkp8Qb+GkwODVlbl10+hn/8/E/x5ukEOl2zzIbcjPUIW1bUx37MMi
- J/YQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVHWr4U5xtjNIJXMcJbq1GNYj7/MpeOxaB+QM2Rr6VAKvzFIGC7flvRKpzg/7noErVldRSOkVI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcqrkutKY7Yd0CxLuWK71djyDFUvRDg+DrynFVcyJwPXEPt9lg
- KUy3vD/R34XPt/92ajz64fybAb3aVjAasw5y2yStrP36QesvGwS69BhdbZZ9X88aKNxrgs5Qa9h
- wJhKFn9sNMDBxCS41W693ZTB6Fzsaoec=
-X-Gm-Gg: ASbGncvC1wiIWgYvjLULYzgXWBeKkI/b+v2sbtdYVcgsmbGRt15qJ9NGxgK5ehPUlVk
- hdSohmxT9RKk4Uk+pfIfN7OvpVX5D2YM0UflY/iRdq6Jn8K7HqLKIMr/xAuBefzzMaqO0ZoUuD9
- i0Tyk4WUB8xInviS85F8MJoSJbBY5df2T32PzshW12qwSK3oQSnG4X4/Utitl2CQFgFllFu3ppo
- G84znsxIiGU6KKM6cbtJvtHRtgDuNYafqlO/Xk=
-X-Google-Smtp-Source: AGHT+IFK1iNJXlc9QFV/bALOEIzsRnDijXIOMVBr1yhHdD+/A+N2Q1qHQx1bxO1Vu1SrG92E+zd7Xqmyh3eqTOOfkVU=
-X-Received: by 2002:a05:651c:1990:b0:35e:c1c5:fd12 with SMTP id
- 38308e7fff4ca-36f8011570dmr26786351fa.40.1758906674173; Fri, 26 Sep 2025
- 10:11:14 -0700 (PDT)
+ bh=61ST3f6QYcM2Ke5AjZB02oJvSETxTvAzFffo5DQBaEs=;
+ b=fJtOeVSWVG2prVRNsW8urIdL+rHFFg8+vOmeSQ/+U94FRv3NVv0Zzw97d5tC/DHbY6
+ V6VNnqnGStarcbcjCUDeqRivN8ByUdxS+ZngvW2E8pOzBQLK6iuYYHVCeZmqqVzDmucU
+ islbgo3TzrR2BNCJ6r5sjgY4bAzog7kTf4viWx53s2pCeR/ChrzJdI07cr+bJKNNK8qk
+ 4y4/S0Cri5KqENnX2pbRM6VkjztGI1eycUgDiWg2Ho5x3vPnl5hLIklQLFL6PBHU6aPq
+ zQRJkInV+SZ42P+mardjpGtl26OVYPyXNgcqAL94uCO5JpFKpG/WxFC//DJwTY4UHTvC
+ au5A==
+X-Gm-Message-State: AOJu0YwV/IoCQKZplmxh048+I2LYiTYCoy2eh9rb88/0IFIH2OM9U+Vg
+ d3DQGbRf9VnWYc/aDPNLYxKo+w+IomjJrT9kkVKLY/0bXHL/y6WXLd6kJT+zTfuXyvyvo279MXV
+ Yh03pBj4bRRw52qHAnuMUanRrK3YwuXY=
+X-Gm-Gg: ASbGncu3KMuDezq+Jz0eGM6cPUg4j7b0AYG5DCla1Qns8w2rF48bVVsOsxnWrGtsDaY
+ Qgwvw3EoSZe+GL+3j2LOKeMqV7NLA7wO1hBxaWRuKy/PKcp+Bo/9Er3cpuM1rBQzvDeQHdrCyxR
+ UVBvfjJnmvX2KSMZ1pacYkdDKMtk1U4aObYc4n2WxfWJFlESwLb+lLj06ZauAM7NmIeDGVRNXnf
+ 8T9csWyNcSueo7AhD2ftAhGVBC0llfY6czjFm0=
+X-Google-Smtp-Source: AGHT+IGn8xwblDk/lfyOljhfIliYe52ZPoRotWydhvmC6hS1k1vOGaaYYtj1IkeJf9a4x14ezPwejao/u/ig4Y9Xlfg=
+X-Received: by 2002:a2e:bd12:0:b0:36e:ca93:6299 with SMTP id
+ 38308e7fff4ca-36f7d2cc799mr24770931fa.15.1758906773805; Fri, 26 Sep 2025
+ 10:12:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250923-imx94-v1-0-cb3b65169048@oss.nxp.com>
-In-Reply-To: <20250923-imx94-v1-0-cb3b65169048@oss.nxp.com>
+References: <20250924021127.2866184-1-ye.li@nxp.com>
+In-Reply-To: <20250924021127.2866184-1-ye.li@nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 26 Sep 2025 14:11:02 -0300
-X-Gm-Features: AS18NWBs-7w7DKaQQIbAx2LPX7Q-t0qCb53n2QnYeEBREwLmaLukrw6xU6htyPM
-Message-ID: <CAOMZO5DNtKVJ6yNxEtLF1ruJ70KiY+7Rkxd5KnNJ6jNVCg+5-A@mail.gmail.com>
-Subject: Re: [PATCH v3 00/12] imx: add i.MX94 support
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Stefano Babic <sbabic@nabladev.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Tom Rini <trini@konsulko.com>, Alice Guo <alice.guo@nxp.com>,
- u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>
+Date: Fri, 26 Sep 2025 14:12:42 -0300
+X-Gm-Features: AS18NWC-xwlespp1LqxxTij8oPHxqik6EejPRbhd6-hvLq-vFjwGc5NyEdn6_LU
+Message-ID: <CAOMZO5DZabJANTXZdcUZXk18D94zL=T4C8tbzYLv+0tqS_BQGg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] spi: nxp_fspi: Use second last LUT entry for AHB
+ read
+To: Ye Li <ye.li@nxp.com>
+Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, peng.fan@nxp.com, 
+ uboot-imx@nxp.com, alice.guo@nxp.com, ye.li@oss.nxp.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -98,33 +94,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
-
-On Mon, Sep 22, 2025 at 11:15=E2=80=AFPM Alice Guo (OSS) <alice.guo@oss.nxp=
-.com> wrote:
+On Tue, Sep 23, 2025 at 11:11=E2=80=AFPM Ye Li <ye.li@nxp.com> wrote:
 >
-> Changes in v1:
->  - Addition of i.MX94 CPU type and SoC-level Kconfig entry.
->  - Printing of the LM/system last booted/shutdown reasons.
->  - Definition of base addresses for WDG3, WDG4, GPIO6 and GPIO7.
->  - Support for lifecycle state display.
->  - Introduction of daisy register offset specific to i.MX94.
+> Use a dedicated LUT (second last) for AHB read command, so we can
+> directly read from the AHB memory-mapped address and booting M core
+> for XIP on Flexspi NOR.
 >
-> Changes in v2:
->  - Add support for i.MX94 in get_imx_type_str() to ensure correct CPU typ=
-e reporting.
->  - Adjust container header buffer address.
->  - Introduce base DTS files for i.MX943 EVK.
->  - Add board-level code and defconfig for i.MX943 EVK.
->
-> Changes in v3:
->  - Add -I$(srctree)/... in the Makefile to specify the path to .h files
->    from the Linux.
->  - Delete initrd_high=3D0xffffffffffffffff in imx94_evk.env.
->
-> CI:
-> https://github.com/u-boot/u-boot/pull/815/checks
-
-Thanks for sharing the CI link, appreciate it.
+> Signed-off-by: Ye Li <ye.li@nxp.com>
 
 Series applied to -next, thanks.
