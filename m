@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEC8DCAC5B8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 15:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5241BCAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 15:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B991B83826;
-	Fri, 26 Sep 2025 17:31:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0BEDD83849;
+	Fri, 26 Sep 2025 17:31:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cK+pcnUH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k7Wzeu1O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 213C48382A; Fri, 26 Sep 2025 17:31:40 +0200 (CEST)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id B90E88383E; Fri, 26 Sep 2025 17:31:41 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 003D783816
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 17:31:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98E8583826
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 17:31:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-4248a13fbe9so12273165ab.1
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 08:31:37 -0700 (PDT)
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7abc631ae5cso606314a34.1
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 08:31:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758900696; x=1759505496; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=rJO8sYbKlL94Z0GopRvNcb3nYq5esQgPxqYvvBtENJ0=;
- b=cK+pcnUH+rdRjs7nevVSUmOmT/ZPvzGc7oZniNvOdLTdzhuWmSyhAjS/g928Ag+Vgw
- 6sPOpDb8LwNj6ESJtTJiWkIHpyyNxYZwGqji4C72522S6wU9PCkX2dqVrHnT2C6H6++a
- 6QolbgNf1Yq3dG2NfaurmQ8hbZpVCx/a9hroA=
+ d=konsulko.com; s=google; t=1758900698; x=1759505498; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hO080N8Bx1RnHQTxDPBo0WAeL9Xl/OrrRwlRFxFDeWA=;
+ b=k7Wzeu1Obri7AxLM+U5kmi+anEgW8TVvykYPsjA7dpcfgczPULRQKlyIT5ZNwpPEVt
+ p2v2e8TVTHTcxJgL8tCWFxWDmIzNX5Tr+LT/mnIwGM3RmVnvLwXgfkTRJaBBjzaZ9Wh9
+ DSuO3xylY9TqenaYzR4tQhzy69klJhAUvv6F4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758900696; x=1759505496;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=rJO8sYbKlL94Z0GopRvNcb3nYq5esQgPxqYvvBtENJ0=;
- b=XR58SkdKcWGjXnMST2Hjtwg3eUM6BJgUcxdwRIRtpoh2XaN6heSIMrM0XVXOScwcll
- ooed+9dNhZ8zZpIVnaWx1CLVzWKOEZ+KWRtWoPLLDr2X1vgHwwatjP9dkhsRQRODjqAM
- qwahqn2KFt2jXnF4C8KqN4dk94pBeWwbpCU1rU24Bl/HzjPBSNxv+QVwTzriJyA/FKyK
- yZrOxnvY0l2Imy1tXjIiUHJSNVcirZ1ZNAPqEz65tXPjeC6PrD9KIfWOPbyvaaQ8961Y
- 7J0wuQi/A8H88sfzUqMpdg/piGbEJ2NAzBBi4th7T0P3PCVNnuY/xPUXBlTa6NQ86Tq+
- WL6A==
-X-Gm-Message-State: AOJu0YxWJkWa70hBbfq1MzdLiq/QGRI8AqHNOOUW0INO28j15Z8XJJrg
- Bbc380BCZSf2RLOfcV7Oy4qyiPRNpyqKWVLEo9fDTXnV/dYcJfsFTuR/59regoIjGPI5u6VvlGI
- w+DE3A9I=
-X-Gm-Gg: ASbGncvZWjNEQIxmzUSY1f3F55OUEd+PC/nOJUxSNMViWbPzxfEPJ6IpDCRp9yDXob7
- eUuPVCWHr2kXskPvPGOVmofsgl1Y7IWk9PHj0KHMW8dlUplZH/Acps8bGWyyYaP9PMNnYsa2uA5
- O0iYQviiqIBf87qdHJWDT6Q9rSwVtu5Mx5Jk0I3EGf7qdjgP974lbamtk0uQT1rdlTedecL3VJ8
- ulsxzCLytg1xFprAH9GcjEnEg4XF8cEcT3Gij5Vmz1Ymg3EJDqedgAxzFNd9sWslrRco7/BTHTJ
- gG6ehd1jNP3KZFOQ7F5P84h6FmsqTJZblRNv4JkCAggERlOegP2IXgtLp0+cVyzXhz5uRNnmZ6i
- tPWEtQ9uJjn/ayhaiGf0TTggAwSsW+oChmKffI7SfIPfuBNEWar33Bz/3tVW6OLV11Eb+F1Eixo
- jcnmbv
-X-Google-Smtp-Source: AGHT+IEJ+q6b5127bWn9Nz9y4AxCChCRROdJtXNaJSakKtQQjrv3Jcjmvnb59geod+D3LKliGBOl0g==
-X-Received: by 2002:a05:6e02:194a:b0:428:306a:175d with SMTP id
- e9e14a558f8ab-428306a1868mr12417185ab.28.1758900696260; 
- Fri, 26 Sep 2025 08:31:36 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1758900698; x=1759505498;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hO080N8Bx1RnHQTxDPBo0WAeL9Xl/OrrRwlRFxFDeWA=;
+ b=YsewgsT1k4IUrfGMI7gaO5+c8zoXdVPKvUCTawnFQSLtEyE7xmISrNCIVKkmXzXylW
+ 6fXia7p93n+ApGDSiosMkg/IE2zqQin8bro23b+qg0V1G+t5bitzJYW3jP/zGapRN+aZ
+ /x736EFw5hDnBL5VIwGapBbS2KLL5mkisNwBPNS9Ng0EVYf3hIXBE1uTsS574yWD+SLV
+ WBYZ+viaX7yYLqRcjwuV4aKFKFjB6iTo4NnHQ0AHRM864S9bq9zgpk13bVIs70yFKV3b
+ 0NySGYT7wIniT0YfVlAIf1GGfCxG1+GZgNkakZOGf0DbEHyxL/je8V2BJADttTIO2kkh
+ RiVw==
+X-Gm-Message-State: AOJu0YyGfgiHkKkOBtLqQfjUi3HoVR0c2z1ApgqUetdaHhtnYUgMxRWT
+ XdNYRByOslE/FkcIcMidunEg/wyxjaFDFNCx+lAX81y+2cVCZ2m8i7V/Vgu4Zg4GzF5EbRZZyvW
+ OVW0Cfr8=
+X-Gm-Gg: ASbGncv1Au+R+CV33fOrdqdWJs1hCWfDXRJOFe0lq1FfBnjig/mFqB4dZfPN6fudtsa
+ ZXrWaB+gn0icbdGP3OG3dYtaARaFBqhDiyEr2bT8eKKEk4pdSBRvIt8gV5gqZZt2Oy3/V7sX6/P
+ XdHpqX/QvNr46B9wDniDQD1V0y+m0aJUTieDg6ohbfwOCur+6Kc3SPTrHj249EyR3kDB40SkwjH
+ y9mTzGOy4MzXUbvibRKvc7c+K5Znw2p5w+KFrLK26wq6jmgCijDeHpc/lxOqiuNuPr08kKl2RW/
+ omP/tafaQdyiRdiXKnEd+zCfQxCC1EzGvexaUJ5W+7Yvv3S8w06VthbIoriIqeBtNrIQI+1BQhM
+ TruM0C3OdGtRSQJEh1Z838l7WGT60jtX0uIZx21kJ5jNWR9BwPhhxKDsLFmU=
+X-Google-Smtp-Source: AGHT+IEpz9Kzpcmn86B77kvWzDxy9T9mjxvx92bctIonaAwT4UKIivumkDxtxA3XwI0l3so3D80BnA==
+X-Received: by 2002:a05:6830:210f:b0:757:d075:2fca with SMTP id
+ 46e09a7af769-7a04d5ad9e1mr4121839a34.31.1758900698338; 
+ Fri, 26 Sep 2025 08:31:38 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-56a69a1b7d5sm1979237173.49.2025.09.26.08.31.35
- for <u-boot@lists.denx.de>
+ 8926c6da1cb9f-56a69a1b7a6sm1968334173.45.2025.09.26.08.31.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 08:31:35 -0700 (PDT)
+ Fri, 26 Sep 2025 08:31:37 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] led: Mark LED_STATUS as depending on LED being disabled
-Date: Fri, 26 Sep 2025 09:31:34 -0600
-Message-ID: <20250926153134.3680852-1-trini@konsulko.com>
+Cc: Eugen Hristev <eugen.hristev@linaro.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH] nand: atmel: Rework ATMEL_EBI and DM_NAND_ATMEL interaction
+Date: Fri, 26 Sep 2025 09:31:36 -0600
+Message-ID: <20250926153136.3680867-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,30 +94,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The LED_STATUS functionality is part of the legacy LED framework. This
-cannot be enabled at the same time as the new LED API is. Make the text
-prompt be clear this is legacy and add a dependency on LED being
-disabled.
+The way that the NAND driver under DM_NAND_ATMEL is probed is by the
+dummy memory driver controlled by ATMEL_EBI. Rather than require that
+for NAND to work both be enabled, make NAND select ATMEL_EBI and do not
+prompt for ATMEL_EBI as it only triggers the probe for NAND.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/led/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Cc: Eugen Hristev <eugen.hristev@linaro.org>
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: Michael Trimarchi <michael@amarulasolutions.com>
+---
+ drivers/memory/Kconfig       | 2 +-
+ drivers/mtd/nand/raw/Kconfig | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/led/Kconfig b/drivers/led/Kconfig
-index c98cbf92fabe..a37ec633fb6b 100644
---- a/drivers/led/Kconfig
-+++ b/drivers/led/Kconfig
-@@ -137,7 +137,8 @@ config SPL_LED_GPIO
- 	  See the help of LED_GPIO for details.
+diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
+index eaee739c6aab..591d9d9c6569 100644
+--- a/drivers/memory/Kconfig
++++ b/drivers/memory/Kconfig
+@@ -14,7 +14,7 @@ config MEMORY
+ 	  For now this uclass has no methods yet.
  
- config LED_STATUS
--	bool "Enable status LED API"
-+	bool "Enable legacy status LED API"
-+	depends on !LED
+ config ATMEL_EBI
+-	bool "Support for Atmel EBI"
++	bool
  	help
- 	  Allows common u-boot commands to use a board's leds to
- 	  provide status for activities like booting and downloading files.
+ 	  Driver for Atmel EBI controller. This is a dummy
+ 	  driver. Doesn't provide an access to EBI controller. Select
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index aa4bb2a0595c..f083113486ed 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -50,6 +50,7 @@ config SYS_NAND_NO_SUBPAGE_WRITE
+ config DM_NAND_ATMEL
+ 	bool "Support Atmel NAND controller with DM support"
+ 	depends on ARCH_AT91
++	select ATMEL_EBI
+ 	select SYS_NAND_SELF_INIT
+ 	imply SYS_NAND_USE_FLASH_BBT
+ 	help
 -- 
 2.43.0
 
