@@ -4,79 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C12DCAC5AC
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 05:34:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45AC1CAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 06:41:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EF758206E;
-	Fri, 26 Sep 2025 07:34:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DA8D8206E;
+	Fri, 26 Sep 2025 08:41:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HZQIzUip";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QYRJnEcJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BD0C82A9E; Fri, 26 Sep 2025 07:34:06 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 31A338206E; Fri, 26 Sep 2025 08:41:38 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C5148144A
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 07:34:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E47C78144A
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 08:41:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-3ecde0be34eso1585202f8f.1
- for <u-boot@lists.denx.de>; Thu, 25 Sep 2025 22:34:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758864844; x=1759469644; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZgKj0r8nysyjDLgPIfNENSQMYmIlifZI6PuZogSp8zo=;
- b=HZQIzUipDbE5Di/5AzitmXcVdRVQ2NFA0XjR1nSgGxiwsMSyzNPdIEW37YrKBJB3KN
- Rv8rQ9qF+BYHncFrqNLtTfgkO/bM+OtDkuy8BdZZi7uH1PSevL3lTJDOpJtraxdXnBil
- x9y3QaHEM3WyWjWhtUaSG54Npz1Dg5KwuY6DKNlWGjXtWVQfgCsyDa5anzxnZOxHgq/D
- QXcMEVg2m5KCUyGUOYQC787gPWFRDtqLlOELRzj9j/ngE0v0Q8IoQHLH+RorNzESk+LU
- Hch2RRG4oIamrvgI6Gh4pv3/0393NBy1YQiMsfLn08wOwVpBgTdOPEhSebNKHQ/JyVPO
- 6YZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758864844; x=1759469644;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZgKj0r8nysyjDLgPIfNENSQMYmIlifZI6PuZogSp8zo=;
- b=aXMqmG7LJobtHVo3UVX3j7m2/pgK01o4aNYBAPnyeJl+abnH5A4QJiIcFsMv/7dBmg
- 6iQySHbFGJAQE8xaVKO5qu/ttinU9PRbo/k7UTVgRJnE/hoLWw4h/QUvi4AYZ+lCbdUM
- IPsccgqmx2Y2s+c4coiHfiAFWzhSffWtVSo2qTX9srjck/hxYQfP1E7hT3N1XxG32NMT
- HKQ5JdVS0ZeXqHYNSl7JQ4tDukRm+U39Xgmv5BpMpEKnDkfSDNeipwTrCEjpPSQ6enwr
- Nt/BexrUdpIYAx74I8KfhXUUhMqh6HlHcEO04zC95tBeWFh8dqSAW4fSriNcQqD258XT
- bPOg==
-X-Gm-Message-State: AOJu0Yy9mDbg00PY4Bie+a7Fuha7JtglS2vvJ7D1fcseWiRvTBIARHLz
- HIqB1pDx6XbbZ6N25oGBqBr2BbRiU8l4KqBLLYPWdkgeKjL/BsysX0kID/3ANbMRxPRJRPptHwi
- 2neVhCTpoBNvl9E6xrVcuFB1AWgLqig0=
-X-Gm-Gg: ASbGnct90F8ehyWv7DTw9xI7zr4LupEUXIExN6IVD8CoRl5umGnAcvzhQBzaL7MhDWJ
- 6d/FFMpmHmulZruqdSq6c9L/1u13Oa04Yn5rdy3MxQ8NNwO50X+E9tjtiHfbrgyGuFDXTOIqmkX
- c3RDWMiPDdR7bdxEob+J10Wotv2TvFnpdSlXei6QkAJZ+eaqziYBbRMqW0rFalCv6PIyq2j7RfT
- PZZZt0/J//JnsUCZYw=
-X-Google-Smtp-Source: AGHT+IFA5L4Ptd90qDJ2sOCWun8oczfaX42Dy9V53TDkWF6aMegHRACHOqf/D+VT+m4Fekb0qcBJSR2Zld+MBaUkzhc=
-X-Received: by 2002:a05:6000:2204:b0:3ea:d634:1493 with SMTP id
- ffacd0b85a97d-40f5e5c1023mr4556582f8f.3.1758864843687; Thu, 25 Sep 2025
- 22:34:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cY1Fp0LyMz9sWh;
+ Fri, 26 Sep 2025 08:41:34 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1758868894;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iit9GxQSWJPxbifmj0k8fxA0sgy+g8GgtOT+8W1efuc=;
+ b=QYRJnEcJGIKbqqpKkT8HM6rbxwR6+LJT0kJzUzHhKajsAcpo0Gw/KniHM0+cyzLxzc7oFT
+ idWxcd1PaP0LfmOi/soHz5PgcNOY18SGz7wQyHIKNbkvfOdyEvIwDoefJ3I5hhmVrJdY9g
+ b2uAFkaE3v1POaj85f6E3A5pCoo4qI/zXoGsRcOjUvlSoIt8442LjZwmSuDWHuOToutR7k
+ pnLRoE7LNv8ap8/9BF6JZs07RNcJPEKiVLcN77Se/sZwR36FJsYXobNT27MTgTaNBOF8zT
+ x2aAmaV79WoxG+qmpg6uEfW4fbV0QfD2nxNs0yZ88MvSZOhBIzf/fPjfEeXOtA==
+Message-ID: <4d5bc549-a033-4baa-80a8-21ae2496007d@mailbox.org>
+Date: Fri, 26 Sep 2025 08:41:32 +0200
 MIME-Version: 1.0
-References: <20250925204535.3561174-1-trini@konsulko.com>
-In-Reply-To: <20250925204535.3561174-1-trini@konsulko.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Fri, 26 Sep 2025 08:33:52 +0300
-X-Gm-Features: AS18NWDw0bAgZTP6M0Fv--5zknFzH-gHoPV8nkxvlDcm8BGe5Z0f04S99Bv3shA
-Message-ID: <CAPVz0n1gTbwUNtN4dFbo8vEEOqqQNhborqy=7+A5CyhGcusJ8A@mail.gmail.com>
-Subject: Re: [PATCH] crypto: tegra: Tighten TEGRA_AES driver dependency
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Thierry Reding <treding@nvidia.com>,
- Ion Agorria <ion@agorria.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] phy: marvell: Tighten MVEBU_COMPHY_SUPPORT dependencies
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250925205614.3562540-1-trini@konsulko.com>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <20250925205614.3562540-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: 9hdaidgixdmb75k6yguzznf4hu3je8s3
+X-MBO-RS-ID: 08099bd871c756b635a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,38 +74,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 25 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 23:45 Tom =
-Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> This driver relies on tegra-specific headers to compile so make it
-> depend on ARCH_TEGRA.
->
+On 9/25/25 22:56, Tom Rini wrote:
+> This driver cannot link without access to functions that are defined in
+> files that are only build on some platforms.  Express those requirements
+> in Kconfig as well.
+> 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> Cc: Thierry Reding <treding@nvidia.com>
-> Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-> Cc: Ion Agorria <ion@agorria.com>
+> Cc: Stefan Roese <stefan.roese@mailbox.org>
+
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+
+Thanks,
+Stefan
+
 > ---
->  drivers/crypto/tegra/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/crypto/tegra/Kconfig b/drivers/crypto/tegra/Kconfig
-> index b027609307b0..0f2acaaade1f 100644
-> --- a/drivers/crypto/tegra/Kconfig
-> +++ b/drivers/crypto/tegra/Kconfig
-> @@ -1,6 +1,6 @@
->  config TEGRA_AES
->         bool "Support the Tegra AES"
-> -       depends on DM_AES
-> +       depends on ARCH_TEGRA && DM_AES
->         help
->           This provides a means to encrypt and decrypt data using the Teg=
-ra
->           Bit Stream Engine for Video/Audio. Also may provide a mean to
-> --
-> 2.43.0
->
+>   drivers/phy/marvell/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/phy/marvell/Kconfig b/drivers/phy/marvell/Kconfig
+> index b5f69c0a96d3..c66197de1433 100644
+> --- a/drivers/phy/marvell/Kconfig
+> +++ b/drivers/phy/marvell/Kconfig
+> @@ -1,5 +1,6 @@
+>   config MVEBU_COMPHY_SUPPORT
+>   	bool "ComPhy SerDes driver"
+> +	depends on ARMADA_3700 || ARMADA_8K
+>   	help
+>   	  Choose this option to add support
+>   	  for Comphy driver.
 
-Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
-
-Applied to u-boot-tegra/staging, thank you!
