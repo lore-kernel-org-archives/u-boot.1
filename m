@@ -4,82 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F190CAC5AE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 15:57:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDF5CAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:02:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 319AE831E0;
-	Fri, 26 Sep 2025 17:57:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 33F8D8386F;
+	Fri, 26 Sep 2025 18:02:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SNn+de2P";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WA58smmv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D28408373B; Fri, 26 Sep 2025 17:57:15 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 27D7583868; Fri, 26 Sep 2025 18:02:35 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD3B183817
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 17:57:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AD9C83824
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 18:02:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-9158337ac22so38656039f.3
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 08:57:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-427e5121313so2900935ab.0
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 09:02:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758902232; x=1759507032; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lf4Sff/IGySWbAnslFasTS79nqXBslbR/vU/6TY8lgc=;
- b=SNn+de2PWlxRDqyyZeGONPiU54gN8RV2JM8Cta8jcr7a/vlXuLlzH8T6X2dsTyeHqs
- 6SWRPLuW1Eg35Q3lyGcUn0thVKYJJ/1PKHTN/2BbIM4T2jwEFQo/x0ij0DzF6NZ7GVMD
- cqtNH5MGdCwn2kfSHXtFdCqkmS5BPs6EMP2yg=
+ d=chromium.org; s=google; t=1758902550; x=1759507350; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0HxDM6gr2rONdbcVcfHGkRLLA8LBLdhnjkcdN2NnHMU=;
+ b=WA58smmvK3Sxfxy5NoJuN7RXFTRqfCJarcE4ka+ZDJ3AxSywbAeOHVKs2JMuuhcsJF
+ 5LNTm4S0mTIY4XOk13rOt+2lm/mGfyF55C8pbt3H0MxwYbmkxwl9F+UhrdB3RZupqzEb
+ R/00flA4St5sjtcaaISiywukwsop62m8/NlXs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758902232; x=1759507032;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lf4Sff/IGySWbAnslFasTS79nqXBslbR/vU/6TY8lgc=;
- b=kHJt0lDvY8QSlqTWsMPiIm3WsY6FxD+RCe4kXvh6MkUug+0KUWfacUEc+FJ2Av4zuV
- L7AalY1JlKKWKhFP+CO4j7B8kUl3i4RbQafnrqj3NA7knWu+MMFod3V+M92wNdHVPzBT
- zlC8kOoxqzX2x+JBjPxCkjhCkJUI6KyLodugV0O3YcYhf1Qn1ecb9KGUit/gM+BuMXmW
- Qzvg8J4mckQvD0fiQzf6Ljtpa3gtx56YW1p3AkqDJwA4RwGZuj5SE4StV76fueCEYBst
- oc6DgqQsCmnEXTnviVgVfqdxkVIRuC+REuXkwjMUq/Y7OBLmafCZnMCeMJg4iUnuNQPg
- GjNQ==
-X-Gm-Message-State: AOJu0Yy3iKCY3EMZEu19z+CqZf0QzMsxFvc4Uq+OBidSp2QM1CH0cQoF
- Rj6lletH7WYBV7rBhYGjnA/5mLeFloqGX7z1QiGLZX/iBLAGxMvhdCw/zRQuo60nOU7lZ6wHump
- FWACnhAk=
-X-Gm-Gg: ASbGncuRSFGwOBfSXlD7n90g1L/iVp9SzDJvfTbm/JPIKzDwg6v8XvMTUBGJ40ixQfE
- ko/eUbhPBrMl0rCyFwCqsGe6T57RO/2N/LmJTc+9oaWe0REz+ypKCUoXQGqc0x747ik4f0MzqSY
- JmeLFeboPsuTU6BJoTz2TPWfpiRm8X96MXM9+UcVGTfabBdXfQHRnPRAcx9ScgFEa9JEBX54Ma8
- WNgYHLVLJjbD8bKu6J53UJfhg/szKiWSX8dt8v0ydAavpGmvHK8X4+XoS6QLaRQFmZwDfg4h+hm
- rruPKG+AjEv5CgEOBbosAF6j9A6ZY0Qva0es5bCXW9sZA2tnUdSWuLXSgY1TD6Gm57AWDSDqW7x
- qyJmaRgkE179SIhULq8lH3rD+RIBOiyOnei4RJgNTyBDwBTGUnYJ89Lw=
-X-Google-Smtp-Source: AGHT+IGVd4gWvfx4US/J5K3cX/7eb7gbhoKsdwJJMyjjDAqCUo7lP95Rr/bjGLNiwgTGM31QYp7LWw==
-X-Received: by 2002:a05:6e02:2509:b0:427:8024:750e with SMTP id
- e9e14a558f8ab-427802475fbmr30563455ab.20.1758902232452; 
- Fri, 26 Sep 2025 08:57:12 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
- by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-425bff81253sm23502615ab.34.2025.09.26.08.57.11
+ d=1e100.net; s=20230601; t=1758902550; x=1759507350;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0HxDM6gr2rONdbcVcfHGkRLLA8LBLdhnjkcdN2NnHMU=;
+ b=BlQx9sn/cjI1FHqfYWjoNzR+hGZu1H5jvfH48ktUl6s9v+PEq9gAzXJ7PLTGkJoozT
+ kSuaNHNMwBufdymAmRsoxWuTDSZ+kvuZU4JGx15t9xvGGLMEWkKhTfI9lHliya4qpn4M
+ OoTbxEb+O7Q0G30otV7FW3O8t99Y6iE2Po+4MKXCzuwToh6IUvWfpR0pChCNk4zW4Jky
+ YuAO+3FkXdco32woED07C/wlJ/2FLWacLmsm9qxOHrvDMBggVCMtioBvmYBBZIXZk67C
+ fmSmmL+3yaici8omi34GBVyOeLYaTvQXJM4RD3aTgcCF0YmJV4g0t5wbKa1EeTUcU9uC
+ /5vA==
+X-Gm-Message-State: AOJu0YykoN9z6fS4Pxp+PXXh10/i8KmCmwbqDv7x+VzOyq/x1EfkGgrK
+ qWjjf0zZJgq0RnFbsqLsTvi6cK8ShHYOG2UgTWoK4AhHe4+iKnx6D0HmuNKAq8BBB1tVrIC6vYs
+ FH3Ubug==
+X-Gm-Gg: ASbGncsy+9t8JBfQoDdzSaOmvd3a85DYzMNaN5h5yTVSvde7u1+xTkTUW3ekePyNjHY
+ GFYKnVYQXku+3IhtiNPjDsWbjXediyepaH+1XybfjVYKPC3F56jc6thO6Y1gO7UaeyhkwlaJ3DT
+ GqIUc4tuqEpYk4vbX3TQQ457i2D2/HHKufDYAZ2le/49rr4SOapYi6r3iEZjHZTetR2eC7s1j/y
+ v0xD4tIqoOb0BniDgEw4X4uhWJyn+EVznPFKm0Bn8dv0UlwEzwPAK6QHlRth1eQnDvWThIkmsdW
+ kXi+aEe5JveB0hmNPPhGWYYeIWdua2jDaI6XeAFQXBVvFQRrQKkNhTcS8AQyGVXO7l57R+0DzDG
+ uHdnWv/Pd+98RW6lBpkc7CYs++Vg=
+X-Google-Smtp-Source: AGHT+IEoG4aUSr+9GAGh8ZIkkIDSTHcRRwjdd0ctscoq0KCMBtKYj7UsPr3NfQnMRkHj9rhLLafYDw==
+X-Received: by 2002:a05:6e02:1949:b0:424:8151:6e20 with SMTP id
+ e9e14a558f8ab-4259566d09cmr133123315ab.29.1758902550022; 
+ Fri, 26 Sep 2025 09:02:30 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-56a6a5ae382sm1997134173.64.2025.09.26.09.02.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 08:57:11 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, yegorslists@googlemail.com
-Cc: dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com
-In-Reply-To: <20250925205150.453502-1-yegorslists@googlemail.com>
-References: <20250925205150.453502-1-yegorslists@googlemail.com>
-Subject: Re: [PATCH] spl: nand: initialize writesize for am335x
-Message-Id: <175890223123.3683518.17642590196860530782.b4-ty@konsulko.com>
-Date: Fri, 26 Sep 2025 09:57:11 -0600
+ Fri, 26 Sep 2025 09:02:29 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ =?UTF-8?q?Duje=20Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
+ Hans de Goede <hdegoede@redhat.com>, Liya Huang <1425075683@qq.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>
+Subject: [PATCH v8 0/4] bootstd: sunxi: Migrate to standard boot
+Date: Fri, 26 Sep 2025 10:02:08 -0600
+Message-ID: <20250926160216.2157348-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,19 +106,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Sep 2025 22:51:50 +0200, yegorslists@googlemail.com wrote:
+This series attempts to migrate all sunxi boards to use standard boot,
+along with a text environment.
 
-> Initialize mtd->writesize in nand_init() as otherwise
-> nand_page_size() returns 0 and this affects NAND read
-> operations.
-> 
-> 
+According to Heinrich this should not affect bootmgr, since it is a
+global bootmeth. FEL should be OK since it is also a global bootmeth and
+is ordered before bootmgr.
 
-Applied to u-boot/master, thanks!
+Heinrich has a pending series which moves the ordering of bootmgr to
+speed up the boot and we will talk that through in the coming days.
 
-[1/1] spl: nand: initialize writesize for am335x
-      commit: 9b45d574af1b64fcd997f08fe702a2d0ecfccbe4
+Changes in v8:
+- Drop 'select' for USB
+
+Changes in v7:
+- Drop bootmgr-disable patch
+
+Changes in v6:
+- Drop patch to revert make efi_mgr bootmeth work for non-sandbox setups
+
+Changes in v4:
+- Reword Kconfig
+- Add a name for the bootflow
+- Drop UUID_GPT_SYSTEM and UUID_GPT_ESP definitions
+- Drop special case for ARM64's devicetree subdir
+- Drop unwanted quotations and indentation in KERNEL_COMPAT path
+
+Changes in v2:
+- Put the FEL bootmeth before all other global bootmeths
+- Convert the other DISTRO_DEFAULTS in the Kconfig too
+- Keep BOOTCMD_SUNXI_COMPAT
+- Keep bootcmd_sunxi_compat if OLD_SUNXI_KERNEL_COMPAT is enabled
+
+Simon Glass (4):
+  sunxi: Add a bootmeth for FEL
+  sunxi: Move to bootstd
+  sunxi: Drop old distro boot variables
+  sunxi: Move to text environment
+
+ arch/arm/Kconfig               |   6 +-
+ board/sunxi/sunxi.env          | 140 +++++++++++++++++++
+ boot/Kconfig                   |  14 ++
+ boot/Makefile                  |   1 +
+ boot/bootmeth_fel.c            |  85 ++++++++++++
+ include/configs/sunxi-common.h | 238 ---------------------------------
+ 6 files changed, 244 insertions(+), 240 deletions(-)
+ create mode 100644 board/sunxi/sunxi.env
+ create mode 100644 boot/bootmeth_fel.c
+
 -- 
-Tom
+2.43.0
 
-
+base-commit: 44c4919e9dd6c162b237633ba689441eca9a149c
+branch: std8
