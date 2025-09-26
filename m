@@ -4,60 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45AC1CAC5AE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 06:41:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 553DECAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 07:25:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DA8D8206E;
-	Fri, 26 Sep 2025 08:41:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8C6798206E;
+	Fri, 26 Sep 2025 09:25:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QYRJnEcJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UWMHd+Lg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31A338206E; Fri, 26 Sep 2025 08:41:38 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4B4E282998; Fri, 26 Sep 2025 09:25:31 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E47C78144A
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 08:41:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C7D7F8144A
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 09:25:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cY1Fp0LyMz9sWh;
- Fri, 26 Sep 2025 08:41:34 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1758868894;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=iit9GxQSWJPxbifmj0k8fxA0sgy+g8GgtOT+8W1efuc=;
- b=QYRJnEcJGIKbqqpKkT8HM6rbxwR6+LJT0kJzUzHhKajsAcpo0Gw/KniHM0+cyzLxzc7oFT
- idWxcd1PaP0LfmOi/soHz5PgcNOY18SGz7wQyHIKNbkvfOdyEvIwDoefJ3I5hhmVrJdY9g
- b2uAFkaE3v1POaj85f6E3A5pCoo4qI/zXoGsRcOjUvlSoIt8442LjZwmSuDWHuOToutR7k
- pnLRoE7LNv8ap8/9BF6JZs07RNcJPEKiVLcN77Se/sZwR36FJsYXobNT27MTgTaNBOF8zT
- x2aAmaV79WoxG+qmpg6uEfW4fbV0QfD2nxNs0yZ88MvSZOhBIzf/fPjfEeXOtA==
-Message-ID: <4d5bc549-a033-4baa-80a8-21ae2496007d@mailbox.org>
-Date: Fri, 26 Sep 2025 08:41:32 +0200
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-45ed646b656so12856795e9.3
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 00:25:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1758871528; x=1759476328; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=jiVSwWIBqxYg7V+/OUMwa8PqGuGqlBNVolkeuwDC5Do=;
+ b=UWMHd+Lg6EjIj/DtzttK0tkDAIdw9tZ2p6fnfecI5jBSNCURV05Wg7C870yTn0U6xg
+ qdvaLtdm8FYDGOepiSiQKuc+XYjkTh454QTarIFvEe4n6bzEFhZVaz9EQBxb99+ZCTbn
+ gsVo0/PmOSHYqRVwz4ddrVE3XkZRaJI2OjOYU3eo6gi3ktPFQmSXuFmhIkyhqs/HFJOI
+ F/IeU1P9QRd+qnxMbXzyK0nFgcP/6vkC12voLe5m8Ixq7jwfOBq2lNU7rGNmdz0YGyXv
+ h1oNpmsBTpR8kON0K9a6jzDrtIDB1Uzyn0Tw8pVLiqf6tHCOdmC9wlWc+wS0KnZgCJr4
+ bO1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758871528; x=1759476328;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=jiVSwWIBqxYg7V+/OUMwa8PqGuGqlBNVolkeuwDC5Do=;
+ b=sh7jw8LjIwacXmNUeuJgd2J9BG8W5Hqq7gBObNqrc5wAVqqywJf68DYCcpub3PBes7
+ F5kA0vNwkqi7+CmUQDo9yUwWNQyq6fTWWJWAiSBctal20OxqO/01qwBRScLuY2CRRb2f
+ lA1OLfVn8y/ic7UeyF/lfny4/4utBU35gqHBZJuapuO5bPNbfyUJ3/4ExLcDWGndvTUy
+ jgxZoiWWd0ZcFI8eZMdVFSsLJo1mGy5iHJVrve4ivckR+c1IKhRziHrksyL0YZOdzoVb
+ IpbMl6X+vIDrsSzwfRcscE58GAFAmpus8wEo3ciJuHLWBTlBjEmorEsIYXevji1lld88
+ vl5g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVXvRJxOYZrrIfaUu5QJn/rvfW7OnjzSv/jreVhnOms65Me5fziCXD/zDDg5QFYi8BkdLc6OVA=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQycZvbsJsaNVV/ANzb6IJMJAyfChgeLJbMDN7CYCXOCJkwIdE
+ g5A7BRfYzrzIPrAF7r4xPX63kwWLidBeJf4xXS0JwR631Sqw9UKzc+OcZ46iso+7ueH3kZGqpVL
+ 3EX4Bbw0=
+X-Gm-Gg: ASbGnct1uAcYAnQ26/vBF2sIiFEsMrCAioJ6g3LZ1dGogbfzIXruJYMX92wnOVNBIVI
+ noNz+Kyyo+1AoGM67AmyiW6hsH1ros4iKYKnls+hoDKJKUhxjCM1NIIa1+ejGCTLkEpJl5vOU+k
+ rKAtpiSdqLBeHWyZUgBXeLZ4W2jYb9GZrqXsQQgxyf6zhrXb6zGdtsse+1e30dGDi13gPMQXHcr
+ no4nAOuMv9T7YxQRubaaAuFJiUCHnSJyR92gCG+HcSRTgnp+UJpA5mvqOpNvVRiIWYuBSDvL0TH
+ f85CXBO0p5Ine9OHry87HX63FLPRX57yy/d2m2upp7cwavwG/DD0cyPk782cnjXJvfNhrbRe9ji
+ 773f0ResjqI8lvp6KBN+Bzc7KD42kloxI2Q2reUkuO9QKmrRe+bx8RsLCbbAffevIWNvR2dMmtC
+ 3EOhP+I4oGig==
+X-Google-Smtp-Source: AGHT+IFUsOp+7eQDfI86lhOUkeBN9bFgCio14TpcxS13W3ExgDeJtfWbLmdqw32izv8eQulEDqIWJQ==
+X-Received: by 2002:a05:600c:4512:b0:46d:996b:828c with SMTP id
+ 5b1f17b1804b1-46e329e3f76mr70060575e9.10.1758871528116; 
+ Fri, 26 Sep 2025 00:25:28 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:c93:82d7:a602:f31d?
+ ([2a01:e0a:3cb:7bb0:c93:82d7:a602:f31d])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46e33be363esm63219535e9.15.2025.09.26.00.25.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Sep 2025 00:25:27 -0700 (PDT)
+Message-ID: <2e1c9d7d-b10f-490f-ad0b-cd567eae1912@linaro.org>
+Date: Fri, 26 Sep 2025 09:25:27 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] phy: marvell: Tighten MVEBU_COMPHY_SUPPORT dependencies
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] net: Add SYS_FAULT_MII_ADDR to Kconfig
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20250925205614.3562540-1-trini@konsulko.com>
+References: <20250925204414.3561033-1-trini@konsulko.com>
+ <20250925204414.3561033-2-trini@konsulko.com>
 Content-Language: en-US
-From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <20250925205614.3562540-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250925204414.3561033-2-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 9hdaidgixdmb75k6yguzznf4hu3je8s3
-X-MBO-RS-ID: 08099bd871c756b635a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,33 +104,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/25/25 22:56, Tom Rini wrote:
-> This driver cannot link without access to functions that are defined in
-> files that are only build on some platforms.  Express those requirements
-> in Kconfig as well.
+
+
+On 9/25/25 22:44, Tom Rini wrote:
+> The support found under SYS_FAULT_ECHO_LINK_DOWN requires that the
+> SYS_FAULT_MII_ADDR symbol also be set. This wasn't previously found in
+> Kconfig, so add it now.
 > 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> Cc: Stefan Roese <stefan.roese@mailbox.org>
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> 
+> Changes in v2:
+> - Add missing dependency on LED_STATUS_RED_ENABLE as well.
+> ---
+>  README      | 3 ---
+>  net/Kconfig | 4 ++++
+>  2 files changed, 4 insertions(+), 3 deletions(-)
+> 
+> diff --git a/README b/README
+> index 07cfded6be53..27cde241bef4 100644
+> --- a/README
+> +++ b/README
+> @@ -1238,9 +1238,6 @@ Note: once the monitor has been relocated, then it will complain if
+>  the default environment is used; a new CRC is computed as soon as you
+>  use the "saveenv" command to store a valid environment.
+>  
+> -- CONFIG_SYS_FAULT_MII_ADDR:
+> -		MII address of the PHY to check for the Ethernet link state.
+> -
+>  - CONFIG_DISPLAY_BOARDINFO
+>  		Display information about the board that U-Boot is running on
+>  		when U-Boot starts up. The board function checkboard() is called
+> diff --git a/net/Kconfig b/net/Kconfig
+> index 40ec6bbce761..5768fab6f8fb 100644
+> --- a/net/Kconfig
+> +++ b/net/Kconfig
+> @@ -60,6 +60,10 @@ config SYS_FAULT_ECHO_LINK_DOWN
+>  	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
+>  	  be configured.
+>  
+> +config SYS_FAULT_MII_ADDR
+> +	hex "MII address of the PHY to check for the Ethernet link state"
+> +	depends on SYS_FAULT_ECHO_LINK_DOWN && LED_STATUS_RED_ENABLE
+> +
+>  config TFTP_PORT
+>  	bool "Set TFTP UDP source/destination ports via the environment"
+>  	help
 
-Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
 Thanks,
-Stefan
-
-> ---
->   drivers/phy/marvell/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/phy/marvell/Kconfig b/drivers/phy/marvell/Kconfig
-> index b5f69c0a96d3..c66197de1433 100644
-> --- a/drivers/phy/marvell/Kconfig
-> +++ b/drivers/phy/marvell/Kconfig
-> @@ -1,5 +1,6 @@
->   config MVEBU_COMPHY_SUPPORT
->   	bool "ComPhy SerDes driver"
-> +	depends on ARMADA_3700 || ARMADA_8K
->   	help
->   	  Choose this option to add support
->   	  for Comphy driver.
-
+-- 
+Jerome
