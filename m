@@ -4,88 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C658ECAC5B9
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:08:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C93ACAC5B9
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:14:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0DEA8323A;
-	Fri, 26 Sep 2025 16:08:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E129E832AD;
+	Fri, 26 Sep 2025 16:14:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Fou6duvL";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BFDC8329F; Fri, 26 Sep 2025 16:08:34 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 428A283192
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:08:32 +0200 (CEST)
+ id 872D1833E9; Fri, 26 Sep 2025 16:14:07 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 0AB9183192
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:14:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-90a0b3ddebeso61353739f.0
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 07:08:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758895711; x=1759500511; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hy1VUl0aUlKNQ19oeEB0JT6vnzebDfPeTQL9vizku2o=;
- b=Fou6duvL+b0zmAzTiBY1oNA4w1IkhLnX838qwvls0AvXoFs34Upc7ih0YWbPdO/XLE
- hrc2T/igs3OM/zMbCsc8ezytZiKUASBTdFqv+YU3MArwE2NdiSdWXbiOQxzy/pOZ8nzm
- xabtKGfy69ngivUZyg9UNIFmfiePN1Zsb3J24=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758895711; x=1759500511;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hy1VUl0aUlKNQ19oeEB0JT6vnzebDfPeTQL9vizku2o=;
- b=niqbW7TVmHeXEwr/69nzBxTuzG6R5S22rjEq7zIzXUEimEPDpb+nJkCWhZ1g1A2lQn
- ddbKHCXLEshs73t0DtZ/q0U1Z+00Tha0aJqMlA1+00m9I/yh0StMOf7i1+WK2y0rSxVd
- qluoLl5+oNZMP6mN3jEJOuHAnFgkUZZ5dN4HGrbUiL+yNTF13SOuMrDA187pgTXbWNXy
- l2ulAvGBNts+sCwaB3w8JrFnDzqYh8ANW1fNNF58b2ZBzI+AkBRX7n7gEeFu4Rv6QKsW
- Osc14Iw1DY5KgPM0P0iaLH0zcqg1XnA5ZkuvXriGG+o2jn5Evuek9BfPmg0oD0VJY/H/
- dsQw==
-X-Gm-Message-State: AOJu0YyVj5AadQ+/1WmF6QstYTrUe6MpJ2DlOwnD2nUB31ZlJttuT+SJ
- 9eQzkWhUsuEkEa/dg6ZldkUqvlzeCcTl6tqK1piMjhoepEca4brGtaGw60uPQAkcIhxjhNZ8uRa
- GQkqnIVM=
-X-Gm-Gg: ASbGncuUkGUC2YyqCa8gf7ku1Z2Hwgmbp8IHoOOsGgKOLj5dMBF7joAk29seoUZP32Q
- uXv5GeikFsGj1jSWBggSAQ/9Gv4HZ9ZumxcUMqC6RwMeuGlmOsobWr7juos5d79q9LPqxvpEzK/
- qK3dEeVsi2eEpw3tyRd1ZkViAr+/ydja2OaSkSMdLtqjsgOjTsJ4pWRhuLBbVDxk7QUB1clNRbA
- pMI6dTIxYYx2PJbGRMNYvpPxBr21HduHnyiBgbjvSlJGlcJqQGwYKQ9psMYCM6MaoZfzi9T1meC
- kO93f2mLB5MvDS5TwqWAZDloRpzh1T9qJd4w/ZJcIAoOMxCwSau+3/+2dY3Q0OusoX0ijLi2bPD
- YrZPi2G1mFMVBsirkSzcYGyFHb7kYw6fZQVvU/0y77nKegHy9f4gxYKSa0HakNjwLHWk=
-X-Google-Smtp-Source: AGHT+IFsc66E2Djx6Za99soGaODMMaxLuwv0TgTj1cQRvQdfzo1Ku2iu2SUKmLWIxVq03W5+0qAROA==
-X-Received: by 2002:a05:6e02:b22:b0:425:7974:fe32 with SMTP id
- e9e14a558f8ab-425956541ddmr104887665ab.23.1758895710629; 
- Fri, 26 Sep 2025 07:08:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-56a65654b00sm1886308173.29.2025.09.26.07.08.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 07:08:29 -0700 (PDT)
-Date: Fri, 26 Sep 2025 08:08:27 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Ng, Boon Khai" <boon.khai.ng@altera.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- "Chee, Tien Fong" <tien.fong.chee@altera.com>
-Subject: Re: [PATCH 4/4] net: Tighten more driver dependencies
-Message-ID: <20250926140827.GT197373@bill-the-cat>
-References: <20250925204414.3561033-1-trini@konsulko.com>
- <20250925204414.3561033-4-trini@konsulko.com>
- <SA3PR03MB71879F064700EEC64233B7CBB41EA@SA3PR03MB7187.namprd03.prod.outlook.com>
+ spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 4A912168F;
+ Fri, 26 Sep 2025 07:13:55 -0700 (PDT)
+Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.32.54])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D37B13F5A1;
+ Fri, 26 Sep 2025 07:13:59 -0700 (PDT)
+From: abdellatif.elkhlifi@arm.com
+To: u-boot@lists.denx.de
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Davidson kumaresan <davidson.kumaresan@arm.com>,
+ Adam Johnston <Adam.Johnston@arm.com>,
+ Hugues Kamba Mpiana <hugues.kambampiana@arm.com>,
+ Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
+Subject: [PATCH v5 00/24] Introduce Firmware Update Support for Arm PSA
+Date: Fri, 26 Sep 2025 15:13:27 +0100
+Message-ID: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="86qnltLkfVFYSLv5"
-Content-Disposition: inline
-In-Reply-To: <SA3PR03MB71879F064700EEC64233B7CBB41EA@SA3PR03MB7187.namprd03.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,55 +65,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
---86qnltLkfVFYSLv5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This patch series adds Firmware Update (FWU) support for Arm PSA
+Certified platforms [1], enabling U-Boot to serve as
+the FWU Client, with the Secure World acting as the Update Agent that
+manages the firmware store and its metadata.
 
-On Fri, Sep 26, 2025 at 05:53:14AM +0000, Ng, Boon Khai wrote:
-> Hi Tom,
->=20
-> >  config DWC_ETH_XGMAC
-> > -        bool "Synopsys DWC Ethernet XGMAC device support"
-> > +        bool
-> >  	select PHYLIB
-> >          help
-> >            This driver supports the Synopsys Designware Ethernet XGMAC =
-(10G @@
->=20
-> That case we shall remove the DWC_ETH_XGMAC config from our
-> socfpga defconfig?
->=20
-> > -190,7 +190,8 @@ config DWC_ETH_XGMAC_SOCFPGA
-> >  	bool "Synopsys DWC Ethernet XGMAC device support for SOCFPGA"
-> >  	select REGMAP
-> >  	select SYSCON
-> > -	depends on ARCH_SOCFPGA && DWC_ETH_XGMAC
-> > +	select DWC_ETH_XGMAC
-> > +	depends on ARCH_SOCFPGA
-> >  	default y if TARGET_SOCFPGA_AGILEX5
-> >  	help
-> >  	  The Synopsys Designware Ethernet XGMAC IP block with specific diff =
---
->=20
-> And preserve this config DWC_ETH_XGMAC_SOCFPGA?
+This implementation adheres to the Platform Security Firmware Update
+specification [3] for the A-profile Arm Architecture and leverages the
+Trusted Services framework [4] to interact with the Secure World update
+agent. By delegating update management to the Secure World, U-Boot
+handles only the client-side coordination, invoking a well-defined set
+of ABIs over the FF-A interface [5] to deliver update capsules.
 
-Both of the changes have that effect. There's no need to update the
-defconfig file, it'll get changed on the next resync.
+Key features include:
 
---=20
-Tom
+- Generic, platform-agnostic design.
+- FF-A-based ABI: All interactions between U-Boot and the update agent
+    occur over the FF-A interface, ensuring compatibility across
+    PSA-compliant systems.
+- Multi-payload capsules: Support for capsules containing multiple
+    payloads, start/end markers, signed firmware images.
+- ESRT support: Capsule payloads may be signed for authenticity, and
+    U-Boot can populate the EFI System Resource Table (ESRT) for
+     OS-level firmware management.
+- On-disk and standard capsule handling.
 
---86qnltLkfVFYSLv5
-Content-Type: application/pgp-signature; name="signature.asc"
+For implementation details, please refer to the documentation [6].
+For a real world example, please see the Arm PSA FWU logs [7] when used
+for on-disk capsule update in Corstone-1000 [2].
+For trying the implementation on Corstone-1000 FVP, please follow these steps [8].
 
------BEGIN PGP SIGNATURE-----
+Changes in v5:
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNaeWAAKCRAr4qD1Cr/k
-CmekAQCTqfZHbRt9nMIe9hR9QE6uIY5iVcpomK+/k/S0LCB/VQD+JpycobpnFDKP
-SzWbaUQf/0wDwU6sXMTmf3WsAY+Llww=
-=Me50
------END PGP SIGNATURE-----
+* As suggested by Ilias:
+    - Make PSA handling simpler for the payload acceptance logic
+    - Use efi_fill_image_desc_array() for PSA
+      instead of changing efi_firmware_get_image_info()
 
---86qnltLkfVFYSLv5--
+* Add CONFIG_FWU_KEEP_FMP_HEADER to control whether
+  the user wants to keep the FMP header or strip it from the payload
+
+* Address kernel-doc warnings
+
+Cheers,
+Abdellatif
+
+[1]: PSA: https://www.psacertified.org
+[2]: Corstone-1000: https://developer.arm.com/Processors/Corstone-1000
+[3]: DEN0118 v1.0 A specification: https://developer.arm.com/documentation/den0118/latest 
+[4]: Trusted Services documentation: https://trusted-services.readthedocs.io/en/stable
+[5]: FF-A interface: doc/arch/arm64.ffa.rst
+[6]: Documentation of the FWU for Arm PSA support: doc/develop/uefi/fwu_arm_psa.rst
+[7]: Arm PSA FWU logs when used for on-disk capsule update in Corstone-1000
+[8]: Performing Capsule update on Corstone-1000 FVP and MPS3:
+     https://git.yoctoproject.org/meta-arm/tree/meta-arm-bsp/documentation/corstone1000/user-guide.rst#n838
+
+```
+CapsuleApp: capsule block/size              0xDD741040/0x25ACE
+Found EFI system partition on Boot0001: OnDiskFWU
+FS2:;HD0b:;BLK4: 
+Succeed to write edk2-corstone1000-fvp-v6.uefi.capsule
+resetting ...
+NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Regular State
+FWU: ABI version 1.0 detected
+FWU: Updating 1 payload(s)
+Applying capsule edk2-corstone1000-fvp-v6.uefi.capsule succeeded.
+Reboot after firmware update.
+NOTICE:  BL2: v2.11.0(debug):v2.11.0-dirty
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Trial State
+...
+Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+...
+root@corstone1000-fvp:~# reboot
+...
+U-Boot 2025.07-rc5 (Jul 10 2025 - 15:23:22 +0000) corstone1000 aarch64 
+...
+FWU: System booting in Regular State
+...
+Poky (Yocto Project Reference Distro) 5.2 corstone1000-fvp /dev/ttyAMA0
+
+corstone1000-fvp login:
+
+root@corstone1000-fvp:~# cat /sys/firmware/efi/esrt/entries/entry*/*
+0x0
+f1d883f9-dfeb-5363-98d8-686ee3b69f4f
+0
+6
+0
+6
+0
+0x0
+7fad470e-5ec5-5c03-a2c1-4756b495de61
+0
+0
+0
+0
+0
+0x0
+f1933675-5a8c-5b6d-9ef4-846739e89bc8
+0
+0
+0
+0
+0
+0x0
+f771aff9-c7e9-5f99-9eda-2369dd694f61
+0
+0
+0
+0
+0
+root@corstone1000-fvp:~# 
+```
+
+Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>
+Cc: Adriano Cordova <adrianox@gmail.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Davidson kumaresan <davidson.kumaresan@arm.com>
+Cc: Adam Johnston <Adam.Johnston@arm.com>
+Cc: Hugues Kamba Mpiana <hugues.kambampiana@arm.com>
+Cc: Srinivas Kalaga <Srinivas.Kalaga2@arm.com>
+
+Abdellatif El Khlifi (23):
+  arm_ffa: Add FFA_MEM_SHARE support
+  arm_ffa: Add FFA_MEM_RECLAIM support
+  arm_ffa: sandbox: Replace the emulator error log with debug log
+  arm_ffa: sandbox: Improve the readability of clearing the X registers
+  arm_ffa: sandbox: Add FFA_MEM_SHARE emulation
+  arm_ffa: sandbox: Add FFA_MEM_SHARE tests
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM emulation
+  arm_ffa: sandbox: Add FFA_MEM_RECLAIM tests
+  fwu_arm_psa: Initialize the update agent
+  fwu_arm_psa: Read the FWU directory through get_image_info()
+  fwu_arm_psa: Add staging ABIs
+  efi_loader: fwu_arm_psa: Add set_image() support
+  efi_loader: fwu_arm_psa: Allow keeping the FMP payload header
+  efi_loader: fwu: fwu_arm_psa: Skip accepting the payload after
+    set_image()
+  efi_loader: fwu: fwu_arm_psa: Disable trial state handling
+  fwu_arm_psa: Add FWU acceptance mechanism
+  fwu_arm_psa: Add ESRT support
+  fwu_arm_psa: Add ExitBootService() notification handler
+  fwu_arm_psa: corstone1000: Enable FWU support
+  fwu_arm_psa: corstone1000: Perform bank logic when reading boot index
+  fwu_arm_psa: corstone1000: Notify SE Proxy SP on ExitBootService()
+  fwu_arm_psa: corstone1000: Set Boot0001 for on-disk FWU
+  fwu_arm_psa: Document FWU support for Arm PSA
+
+Emekcan Aras (1):
+  efi_loader: capsule: Add runtime capsule flags checks
+
+ MAINTAINERS                                   |    8 +
+ .../include/asm/sandbox_arm_ffa_priv.h        |   21 +-
+ board/armltd/corstone1000/corstone1000.c      |  252 ++-
+ board/armltd/corstone1000/corstone1000.env    |    8 +
+ configs/corstone1000_defconfig                |   13 +-
+ doc/arch/arm64.ffa.rst                        |    4 +
+ doc/develop/uefi/fwu_arm_psa.rst              |  154 ++
+ doc/develop/uefi/index.rst                    |    1 +
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  285 +++-
+ drivers/firmware/arm-ffa/arm-ffa.c            |    4 +-
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  108 +-
+ drivers/firmware/arm-ffa/sandbox_ffa.c        |    4 +-
+ include/arm_ffa.h                             |  128 +-
+ include/arm_ffa_priv.h                        |  153 +-
+ include/efi_api.h                             |    8 +
+ include/efi_loader.h                          |    8 +
+ include/fwu_arm_psa.h                         |  403 +++++
+ lib/efi_loader/efi_capsule.c                  |   46 +-
+ lib/efi_loader/efi_firmware.c                 |   32 +-
+ lib/fwu_updates/Kconfig                       |   34 +
+ lib/fwu_updates/Makefile                      |    2 +
+ lib/fwu_updates/fwu.c                         |   24 +-
+ lib/fwu_updates/fwu_arm_psa.c                 | 1467 +++++++++++++++++
+ test/dm/ffa.c                                 |   73 +-
+ 24 files changed, 3154 insertions(+), 86 deletions(-)
+ create mode 100644 doc/develop/uefi/fwu_arm_psa.rst
+ create mode 100644 include/fwu_arm_psa.h
+ create mode 100644 lib/fwu_updates/fwu_arm_psa.c
+
+
+base-commit: 59e6462d7c08eeba744afa0f17846c398b8ef9e1
+-- 
+2.43.0
+
