@@ -4,87 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CD6CAC5B8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:30:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54EF1CAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 17:09:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60879838C1;
-	Fri, 26 Sep 2025 18:30:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 819A783655;
+	Fri, 26 Sep 2025 19:09:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Lzghwurf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HCko7QU6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 391B2838C7; Fri, 26 Sep 2025 18:30:06 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 97E12837B6; Fri, 26 Sep 2025 19:09:51 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18607838A5
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 18:30:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04FE8835FD
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 19:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-46e2c3b6d4cso16499045e9.3
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 09:30:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-244580523a0so26582155ad.1
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 10:09:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758904203; x=1759509003; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1758906587; x=1759511387; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=B2nzQEi1+usWvURgdGByZdCs0yKzpw/AppOW1ie74BI=;
- b=LzghwurfLZlsavI2IeZGjl6EpPHYVhm9mLEYT2CaGAvarXuLneUE/n+hwT9wxys6ci
- gy0hsjMnyaCGTB2hVEjs2lkoSAvWLPUs1k8AQzT8XZgD9WQ9/cCgfsseFqwyKmLDz29E
- twJn1RUOYgvPGpp8vOVSnx4RZmZ2l5nW0gAA+tVtkAT5SUxHfKFYA5tyYJ+a9Wlk0vOG
- +y8zWRbmvaSfXfkNxJGURfAxZV5MxNYOQ8VCYeE0N9iKSw8y+Sn/f81zGaMP7B5J/hM+
- SA2P0cVf+kslv+Re7C5l05fJJL7J92Q6G3CPQlSJRFeyX+Ipr0NR/FOcOA1c2BZU1ob6
- XdTQ==
+ bh=ztp2sZ+lkzqiB5VmZdUKJPMuLd6gNIdsHvGCX7YY4dA=;
+ b=HCko7QU6ka5RNUFG1Az9DfVOE4PHX9RuA7a0JPrYAfWRYGaftTn8CQlID8w2DmZwlH
+ EfwWTsEfmeOaZWZPAOOB6pYCFHYrtmB5BnhSwS+QOpt2Y2QJu44p5z+gtYvc3xAX4Y4p
+ 9UxhOALwmBrQQEmAgBRJt3jvJmN5QE7wHVVE4OZ1hdRYkuE5ZH5zyO7sbZnKqgXXn9Gm
+ E4n+PujLEDOO74LAiCwem54RWren5sUop8x2oQKey9Rvm8YeAsV6/WlfBgyt6l278rOu
+ r/qgEujaV6/PuJSkcHBA4lm6ZR6Lo/QDjP2eFxyyzoS7mvKOLfzCY5La+AQj0SjKMDMO
+ JT+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758904203; x=1759509003;
+ d=1e100.net; s=20230601; t=1758906587; x=1759511387;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=B2nzQEi1+usWvURgdGByZdCs0yKzpw/AppOW1ie74BI=;
- b=BWZeNCjpygahb0PblPzLma53iSd6U6Y4rwWT2wsRhlfJSUskYoou04G3iA/sPmOv1E
- pcwZhnpJO2OMpLO8I1ZMwN0FmRtHM3b/I+qFvq3Ft/fxr+iXFfIK4b92tYj5/BouV5ut
- enznlZxhN+pr4x59emR6pq1MQQ7NcLjnZrTJquylLALxmQHb+/pMHwyVltyCBQRRf0hF
- YFiGqIOvEObBc3sgcuMOspM0R1XwEKHVeXCKnsxo8XJozjQsI/T5GB3S1z1GNcnv8Obg
- z7NoPxXcrTU4+R8I/7Qjk6Lf+EP6KjPqh4oIkCXM7MoKxftR50UtIYcETY6tNZe2JESp
- 35QA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXIqtfZlzChUHn9Vh88DViTDmX4vv+NLu5QHv+HyD139HioCgy1Ej6urdpSz7KiBsni8NonQ94=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyk9Yn0uDMMvTBXj79QDWPxepGFgfDHiNHeBFJuDD5YwA9pLrW4
- pXRyt2/v5VSb/z0a1W7dGIya99LA2A/cHXcASneI3Uin5SXUQHNdOfIm
-X-Gm-Gg: ASbGnctWXePyoXTYQN0A4fq1yjl1fziPEQkDnE3jwKdF888nnsC1jebWw3gp3jSE33U
- EwL5OYqPvWyLTCEqyWuH6YP5LHWLsLAAkEx6y/fTS6/RREp+YQVXUrUAQ/fUSARrTEo6sEENP66
- XiCbThwhFmVNMBhozO9rQWe+1tdic+tf++fUBbql860RzaARb+f5XlUb3ouHc0UN5L4Xp48Q14s
- d/cDpPbjy/uvNGSkYeZ5ErzKF10Kweyqb1YedCIWNwCcS4sKRG+v0OGIV8Ov81KXwE51bIyGO/d
- s8+RZ8+OQV4J3lYtZRt6vc48eCD0l99tACVyirFrkNbHA9DssMoq3vi1csdCLDwYi4Ys0QVKa8w
- GMun26ZRMI+pEdgv/14vgW4kkF42OvjJ0mAvPQaUn2MeKlOqWZ6HBALQO8jBdbg/Koia8cX71X2
- tWzwnOKiD5GSWawkZSEbOLr2EIYRpvDdtBqOL0PqmdlCU/lEP2skfPQx6txIKi3uzZnvwi4Q0xJ
- v6KKz+wc8Cs48ub4h0SLsu70BYLacgYaKtp
-X-Google-Smtp-Source: AGHT+IFJTNlolu+VXOvdIzO65iM9Ib+XTAb7f4OXOKMKzfD3N72mukrLltkSXAFOk8nyNoDBgt5p8A==
-X-Received: by 2002:a05:600c:3f12:b0:46e:42cb:d93f with SMTP id
- 5b1f17b1804b1-46e42cbdbacmr14455875e9.15.1758904203266; 
- Fri, 26 Sep 2025 09:30:03 -0700 (PDT)
-Received: from cypher.home.roving-it.com
- (7.9.7.f.b.1.3.0.b.8.f.0.9.e.0.0.1.8.6.2.1.1.b.f.0.b.8.0.1.0.0.2.ip6.arpa.
- [2001:8b0:fb11:2681:e9:f8b:31b:f797])
- by smtp.googlemail.com with ESMTPSA id
- 5b1f17b1804b1-46e33beebbasm81232995e9.19.2025.09.26.09.30.02
+ bh=ztp2sZ+lkzqiB5VmZdUKJPMuLd6gNIdsHvGCX7YY4dA=;
+ b=dUkTSGEQ65tAv4gKLIOkbcTlUVnxZ9YA/3zQw8chCl3FnxExxWpkLEpKAlBx8DQHXM
+ HzDSVDbRSq01hbEoNY7t5MZx19s9hJVQVI7npXc02CAt2Mj41G2zIbtIRIrJctV/3Dai
+ gj57bspWdP/dymABGLFrmYBYXLzqrGzjzMmqKVhE0aYCoNm4xq3mcJQk1V+CNNKNWn5v
+ ASSVrYipT1y8meYLI77kChpsxWatNn/RF4mkcgyoWRfWLi+E+/a3JbBq46b/c3XFWvcG
+ EsP9lsLCoihbazHuWOmyhoTd8YerhmnCnDXxVu87zFAaWYTt+pP8g53hWfcg22DCAU0G
+ UWtg==
+X-Gm-Message-State: AOJu0YzINjTZZvdgFB97C3a7JnCKwb/dIHegqy2bQDIkuxWzXbLso+il
+ 7BJOYeY5cVwumuG5m5d6q8kwcGpDOfDev+VA3Ajbxs5YwMTzvSV+9xkdAMAnCg==
+X-Gm-Gg: ASbGnctfNMmsiDBfmbIo3g9TJSvAnBQNHWw3fUX+/8S0annAd22MMJENiwmuC7o3RbL
+ OoFapDLTHngmB4lNm+o7FqnhiF8cqz+73lgHRku6S4mnOTLQJqbe4E7aa3Any+xNB3t+eby38Fs
+ QO3crXhSuN0h9uo0j8fju+AW2nx5jplu1cfPX7K7PbKLkj4W4ZUzGbk3s2gHsK2ksnzinRSOIHV
+ zj7A7jGNdKAXO79y81sjUnkMxt49e30xP9J2vELeLdiR2+7bu5Ajisb0M+L+AhvZHpBeHtJmke2
+ 4k5Y5mB0emCYOpKSy+SLVi0ntoVYEkhPcUhgJa9oaJ6DmkdvUlklf3pUltZbmfGhfM2dAQWRY+j
+ CSixzOl/oYE29u6Xja74Ukz58LB4KW/RKqoGt
+X-Google-Smtp-Source: AGHT+IF5O9V5fDd3bfrXurk6f7GqDkz325oo3xadq3KK7TmQRKs21FXsydnmIh+wiJofgTcFo4f4CA==
+X-Received: by 2002:a17:903:5c6:b0:27c:3b07:5812 with SMTP id
+ d9443c01a7336-27ed4a31712mr63276775ad.36.1758906587451; 
+ Fri, 26 Sep 2025 10:09:47 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:5d91:23ba:2d44:e936])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-27ed68821aesm59461345ad.90.2025.09.26.10.09.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 09:30:02 -0700 (PDT)
-From: Peter Robinson <pbrobinson@gmail.com>
-To: Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
- Heiko Stuebner <heiko@sntech.de>, Xuhui Lin <xuhui.lin@rock-chips.com>,
- u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v2] board: rockchip: Add support for rk3588 MNT Reform2
-Date: Fri, 26 Sep 2025 17:29:56 +0100
-Message-ID: <20250926163000.657437-1-pbrobinson@gmail.com>
-X-Mailer: git-send-email 2.51.0
+ Fri, 26 Sep 2025 10:09:46 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20250926
+Date: Fri, 26 Sep 2025 14:09:43 -0300
+Message-Id: <20250926170943.846750-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,168 +94,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for MNT Reform2, it works as a carrier board
-with a Firefly iCore-3588Q SoM.
+Hi Tom,
 
-Specification:
-- Rockchip RK3588
-- LPDDR5X 16/32 GB
-- eMMC 128/256 GB
-- HDMI Type A out x 1
-- USB 3.0 Host x 1
-- USB-C 3.0 with DisplayPort AltMode
-- PCIE M.2 E Key for Wireless connection
-- PCIE M.2 M Key for NVME connection
-- DSI to eDP panel
-- 1Gb Ethernet w/ Microchip KSZ9310 PHY
+Please pull from u-boot-imx/next, thanks.
 
-Tested using Fedora boot on USB stick and eMMC.
+The following changes since commit 44c4919e9dd6c162b237633ba689441eca9a149c:
 
-Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
----
+  test: Fix optee unit test (2025-09-24 11:04:11 -0600)
 
-v2:
-- DT now upstream
-- dropped extra -u-boot.dtsi bits
-- Run synconfig
-- Minor other cleanups
+are available in the Git repository at:
 
- arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi |  3 +
- board/rockchip/evb_rk3588/MAINTAINERS       |  6 ++
- configs/mnt-reform2-rk3588_defconfig        | 84 +++++++++++++++++++++
- doc/board/rockchip/rockchip.rst             |  1 +
- 4 files changed, 94 insertions(+)
- create mode 100644 arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
- create mode 100644 configs/mnt-reform2-rk3588_defconfig
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20250926
 
-diff --git a/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
-new file mode 100644
-index 00000000000..e1bdd5f98c5
---- /dev/null
-+++ b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
-@@ -0,0 +1,3 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+
-+#include "rk3588-u-boot.dtsi"
-diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
-index 379c85f48a4..d630e3d4985 100644
---- a/board/rockchip/evb_rk3588/MAINTAINERS
-+++ b/board/rockchip/evb_rk3588/MAINTAINERS
-@@ -29,6 +29,12 @@ F:	configs/generic-rk3588_defconfig
- F:	arch/arm/dts/rk3588-generic.dts
- F:	arch/arm/dts/rk3588-generic-u-boot.dtsi
- 
-+MNT-REFORM2-RK3588
-+M:	Peter Robinson <pbrobinson@gmail.com>
-+S:	Maintained
-+F:	configs/mnt-reform2-rk3588_defconfig
-+F:	arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
-+
- ORANGEPI-5-RK3588
- M:	Jonas Karlman <jonas@kwiboo.se>
- S:	Maintained
-diff --git a/configs/mnt-reform2-rk3588_defconfig b/configs/mnt-reform2-rk3588_defconfig
-new file mode 100644
-index 00000000000..c9cd4c85321
---- /dev/null
-+++ b/configs/mnt-reform2-rk3588_defconfig
-@@ -0,0 +1,84 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=24000000
-+CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-mnt-reform2"
-+CONFIG_ROCKCHIP_RK3588=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_TARGET_EVB_RK3588=y
-+CONFIG_SYS_LOAD_ADDR=0xc00800
-+CONFIG_DEBUG_UART_BASE=0xFEB50000
-+CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_PREBOOT="pci enum; usb start; nvme scan;"
-+CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-mnt-reform2"
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x40000
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ATF=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_REGULATOR=y
-+# CONFIG_SPL_DOS_PARTITION is not set
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_OF_LIVE=y
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_CLK=y
-+CONFIG_ROCKCHIP_GPIO=y
-+CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_LED=y
-+CONFIG_LED_GPIO=y
-+CONFIG_MISC=y
-+CONFIG_SUPPORT_EMMC_RPMB=y
-+CONFIG_MMC_HS400_ES_SUPPORT=y
-+CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_SPL_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_ROCKCHIP=y
-+CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_PHY_ROCKCHIP_USBDP=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_RK8XX=y
-+CONFIG_REGULATOR_RK8XX=y
-+CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SPL_RAM=y
-+CONFIG_BAUDRATE=1500000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_SYSRESET=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_ERRNO_STR=y
-diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
-index de3aa79cb5c..1e60327066b 100644
---- a/doc/board/rockchip/rockchip.rst
-+++ b/doc/board/rockchip/rockchip.rst
-@@ -152,6 +152,7 @@ List of mainline supported Rockchip boards:
-      - Hardkernel ODROID-M2 (odroid-m2-rk3588s)
-      - Indiedroid Nova (nova-rk3588s)
-      - Khadas Edge2 (khadas-edge2-rk3588s)
-+     - MNT Reform2 (mnt-reform2-rk3588)
-      - Pine64 QuartzPro64 (quartzpro64-rk3588)
-      - Radxa ROCK 5 ITX (rock-5-itx-rk3588)
-      - Radxa ROCK 5A (rock5a-rk3588s)
--- 
-2.51.0
+for you to fetch changes up to 1566f803bff58f472c38e2e34204753529d01136:
 
+  imx9: scmi: Add PCIE ECAM and outbound space to MMU (2025-09-26 09:52:54 -0300)
+
+u-boot-imx-next-20250926
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/27737
+
+- Add support for i.MX94 EVK.
+- Set CONFIG_ETHPRIME to eth0 on phycore-imx93.
+- Expand the nxp_fspi support to i.MX8QXP/8DXL/8ULP.
+----------------------------------------------------------------
+Alice Guo (2):
+      cpu: imx94: Add support for i.MX94 in get_imx_type_str()
+      pinctrl: nxp: Add i.MX94 daisy register offset
+
+Peng Fan (1):
+      imx95: Add get_reset_reason() to retrieve the LM/system last booted/shutdown reasons
+
+Primoz Fiser (1):
+      board: phytec: phycore-imx93: Set CONFIG_ETHPRIME to eth0
+
+Ye Li (14):
+      imx9: Add i.MX94 CPU type and SoC-level Kconfig
+      imx9: scmi: Add i.MX94 support to get_reset_reason()
+      imx9: scmi: Update the files under arch/arm/mach-imx/imx9/scmi/ to support i.MX94
+      imx: container: Add i.MX94 support to get_imageset_end()
+      imx9: Change container header temp buffer address
+      imx: ele_ahab: Implement display_life_cycle() for i.MX95
+      imx: ele_ahab: Add i.MX94 support to display_life_cycle()
+      arm: dts: Add i.MX943 EVK board dtsi files
+      imx94_evk: Add i.MX943 EVK board support
+      spi: nxp_fspi: Use second last LUT entry for AHB read
+      spi: nxp_fspi: Support i.MX8QXP flexspi
+      spi: nxp_fspi: Support i.MX8DXL flexspi
+      spi: nxp_fspi: Support i.MX8ULP flexspi
+      imx9: scmi: Add PCIE ECAM and outbound space to MMU
+
+ arch/arm/dts/imx943-evk-u-boot.dtsi        |  62 +++++++++
+ arch/arm/dts/imx943-u-boot.dtsi            | 212 ++++++++++++++++++++++++++++
+ arch/arm/include/asm/arch-imx/cpu.h        |   2 +
+ arch/arm/include/asm/arch-imx9/imx-regs.h  |  11 +-
+ arch/arm/include/asm/arch-imx9/sys_proto.h |   1 +
+ arch/arm/include/asm/mach-imx/sys_proto.h  |   1 +
+ arch/arm/mach-imx/Makefile                 |   2 +-
+ arch/arm/mach-imx/ele_ahab.c               |  55 +++++++-
+ arch/arm/mach-imx/image-container.c        |   4 +-
+ arch/arm/mach-imx/imx9/Kconfig             |  17 +++
+ arch/arm/mach-imx/imx9/scmi/Makefile       |   3 +
+ arch/arm/mach-imx/imx9/scmi/clock.c        |  29 ++--
+ arch/arm/mach-imx/imx9/scmi/common.h       |  41 ++++++
+ arch/arm/mach-imx/imx9/scmi/soc.c          | 213 +++++++++++++++++++++++++++--
+ board/freescale/imx94_evk/Kconfig          |  12 ++
+ board/freescale/imx94_evk/MAINTAINERS      |   6 +
+ board/freescale/imx94_evk/Makefile         |  11 ++
+ board/freescale/imx94_evk/imx94_evk.c      |  41 ++++++
+ board/freescale/imx94_evk/imx94_evk.env    | 100 ++++++++++++++
+ board/freescale/imx94_evk/spl.c            |  81 +++++++++++
+ board/freescale/imx95_evk/spl.c            |   3 +
+ configs/imx93-phycore_defconfig            |   2 +-
+ configs/imx943_evk_defconfig               | 115 ++++++++++++++++
+ doc/board/nxp/imx943_evk.rst               | 112 +++++++++++++++
+ doc/board/nxp/index.rst                    |   1 +
+ drivers/cpu/imx8_cpu.c                     |   2 +
+ drivers/pinctrl/nxp/pinctrl-imx-scmi.c     |   5 +-
+ drivers/spi/nxp_fspi.c                     |  44 +++++-
+ include/configs/imx94_evk.h                |  24 ++++
+ include/scmi_nxp_protocols.h               |  55 ++++++++
+ 30 files changed, 1233 insertions(+), 34 deletions(-)
+ create mode 100644 arch/arm/dts/imx943-evk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx943-u-boot.dtsi
+ create mode 100644 arch/arm/mach-imx/imx9/scmi/common.h
+ create mode 100644 board/freescale/imx94_evk/Kconfig
+ create mode 100644 board/freescale/imx94_evk/MAINTAINERS
+ create mode 100644 board/freescale/imx94_evk/Makefile
+ create mode 100644 board/freescale/imx94_evk/imx94_evk.c
+ create mode 100644 board/freescale/imx94_evk/imx94_evk.env
+ create mode 100644 board/freescale/imx94_evk/spl.c
+ create mode 100644 configs/imx943_evk_defconfig
+ create mode 100644 doc/board/nxp/imx943_evk.rst
+ create mode 100644 include/configs/imx94_evk.h
+ create mode 100644 include/scmi_nxp_protocols.h
