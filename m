@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB39CAC5AE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C7FCAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:02:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84B8B8384E;
-	Fri, 26 Sep 2025 18:02:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE2878389E;
+	Fri, 26 Sep 2025 18:02:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MI2gW7Cf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ImvNJfFg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACC1483887; Fri, 26 Sep 2025 18:02:37 +0200 (CEST)
-Received: from mail-il1-x144.google.com (mail-il1-x144.google.com
- [IPv6:2607:f8b0:4864:20::144])
+ id 465EE838A0; Fri, 26 Sep 2025 18:02:46 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F92383824
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 18:02:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0942683824
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 18:02:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x144.google.com with SMTP id
- e9e14a558f8ab-425911e5661so9568265ab.1
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 09:02:35 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-8eeeeb37cc5so170379539f.0
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 09:02:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1758902553; x=1759507353; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1758902562; x=1759507362; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sRNODJlaCT62WIxehS2s60bcT7C679vS5fBmY6yJY6c=;
- b=MI2gW7Cf+nAF9dDZBDPKvQT+bte4LD6uSQVYpc6kCMWYPaazI6Hd/gNC0kd/r0zJhE
- GKG18h2nhSHMPVzjCLdUM/vbwRdQOqcr9D1kDcGZCbSfEdht0kS+R0FYntnKtSTowV4M
- 3FBWfU3fmAXWqHq/lEQ8VzAdQxuHr7FwVYHEM=
+ bh=TA67DAjwCEhGdvmLHYccHic5lxDWlnUPOg2c4QUYQlU=;
+ b=ImvNJfFg1cTNdvhN0Nulyt/f+CU5wMucEy/9GhLilBV6vocgkqkcMXJa8LUx2WwTG6
+ Cx4Z0DqETmcHYz3ZLvrBvHcXKUWaV9kUySl9aZ/fVEKD3vD3keOvSyVIqGW8eXOFlOJV
+ igyIjhoFQp66XBEILS7l6Y0BOTVYIV9yD/384=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758902553; x=1759507353;
+ d=1e100.net; s=20230601; t=1758902562; x=1759507362;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sRNODJlaCT62WIxehS2s60bcT7C679vS5fBmY6yJY6c=;
- b=cqK2bzBSAHF2dOQPpxrz+zSdFQ8fo0SHz//5SgkvBW6Pvtq9vutxbxFEUb/9ZxioAE
- 9fDJd3jH9VRSGONn7LD98Dj2wcuR6LByixD0bwaeElXb3TsEHkKxzoo/TKCPGEyKYpID
- /GxxsNTANNby0f01NMA/l4lYyk/jf2Hhj3Fy4KnwWLnpjbPmnZBS9j+UNGKUQD+db8ju
- +Z3pB4Nf+l5PJT3O8LXYZ/3ACTpxGU0jRczxZfBjSvxjNi99m8PopixOlRhyNpTjhY5j
- cgFyp83se2C/YThRwy7ffK/Bol7pHdKHiZrTugCwoxiVK+Eh/W1sJ2/w9niICPCk/HNT
- ZYNQ==
-X-Gm-Message-State: AOJu0YxKJwBSC1IuAJDLbmIfeZ0yLzdm5sYB/nokkxw9r20ni6vAwF11
- uw/Wau7dIRnJP8JnNvPpX1cMsk3Dc58RmnrCpJNQ/aXuKWkctLMok8gG3HXYckJkaEmHeyKe/Kw
- UXAVLxFGC
-X-Gm-Gg: ASbGncuEChupyqo7UMSpB8Tzk1XMV91GyRx6E54FPi79pLppN/J5bxqrMza4cMbEZQ/
- X79QqB5gA4CLuxPsHkosDoIuqsBY8c/zsrWBwD3f98MsvfJ3ds77DvEGXiD80BXnN7ifbY5vsPz
- 4iQ2447K9QztPiV7w2vG0f34+1BcxRPRO2Q0TsCgCTEV1w2m2M38/89cm0X8Hm061SAYG0lSUjc
- l2x7F7QMtw6abhFbcA7Atm9F8cwAL6hDEK4zBONWi+5bz+L51YX/iOBJAG/ggfGKQ6nUYNABr13
- niaN/itrZiyj/2o1yTl8on7NOcutFaDH4tbmNeIfuVoPTieJ4GSjjg661xzMItof6Yi+0xSVvlI
- fpONy9xwD7ImCtJ1j8dwTcb/lHyI=
-X-Google-Smtp-Source: AGHT+IGyUdtncrudMUzpPjyRdHx3Upgzp4+dRQV/+OYO+LJt5NE3usYQAwYwfbZIpZoS/xECXdqh3w==
-X-Received: by 2002:a05:6e02:4701:b0:425:793a:e089 with SMTP id
- e9e14a558f8ab-4259563e17bmr100638295ab.15.1758902552563; 
- Fri, 26 Sep 2025 09:02:32 -0700 (PDT)
+ bh=TA67DAjwCEhGdvmLHYccHic5lxDWlnUPOg2c4QUYQlU=;
+ b=NIBlOqXlZsPRK7ycE0mBQZjSZKozkBXRBlEdqvil0AYCK/hs1T5eCu0aJIVhl7RZZt
+ bU2xhYQD7pXoDHTyozo1jDDv/o0LM4HWM7ilbuOu8faLPXZ4ZM/0tsBcSRxhralRA65z
+ 1vGYNccOPNpUTfGYAcnXC6LfpuZ3/WV+IdJBzbVYaIqznaPpyegKTFR7F/R6Ctod3n7w
+ m6GecARQzrlW3rWirHXLAzTHVGxIuEEr9KLOl2GIk9kD7JQnfNPB1/RiRE9I2loj5/Y5
+ q5YaqbmEBQMt8b7xQ5cAf+47/tsMHZII64ttRZnT7Npz1dy73zq8FK88haz/Qsfqsd2/
+ KMAw==
+X-Gm-Message-State: AOJu0YwyLmsG9rca8LrYxiQwEirbxAUOC/G7qrY+BU9UWQyM3HPQhbjm
+ LfTwDTjnEYErKGiQ96jH4fj6B6qhwZqKZ24TnQKEcFXWhTXsF/96Bl/upfwB8+0d1zJbReVub96
+ NNY3VLA==
+X-Gm-Gg: ASbGncusazKyZvZMX9XS2eE/LXQljqGuBNOXNWCvyul6E7314pZSpYIN34I0hCa4b1n
+ 7gnlMzty8VW+klasvvpabZPl1/CHoJdEFx21gEv6IJpB31g45+WETPUuH61pG4Eji5/JlRk0UTG
+ 8xyKkKphvQTBrcnckr+XJhhsAgw0CBVz17FF77MA+sJ4lrgpSGFs0i2jzbg8/aM8s/ScZOAGDzc
+ M3VGm948QL1oDuUs1bksvQwgQtY6QWK6pQ/xGT9KsSe7eASNcMhufa1TpzeF83kcHJGapdFj1+i
+ CyCtbb40C3vVa0trpRhJKhHRyohcigU59CgeS4wYJRPKc8kGKyAdv756Vv8aJ35oPFBn0WZEioq
+ AfqpaxGrA0S7DnckxwUEuoIQJnJE=
+X-Google-Smtp-Source: AGHT+IGCLPtUZVBB9UzAbNXk2WHsV3uQDw8CKaVzfkfeo6JFh+66nAFqT73yRMVeuTteUEuWxvfbXg==
+X-Received: by 2002:a05:6602:1601:b0:8b8:50d6:36c1 with SMTP id
+ ca18e2360f4ac-901369ca5e4mr1266728339f.0.1758902562013; 
+ Fri, 26 Sep 2025 09:02:42 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-56a6a5ae382sm1997134173.64.2025.09.26.09.02.31
+ 8926c6da1cb9f-56a6a5ae382sm1997134173.64.2025.09.26.09.02.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 09:02:31 -0700 (PDT)
+ Fri, 26 Sep 2025 09:02:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH v8 1/4] sunxi: Add a bootmeth for FEL
-Date: Fri, 26 Sep 2025 10:02:09 -0600
-Message-ID: <20250926160216.2157348-2-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v8 3/4] sunxi: Drop old distro boot variables
+Date: Fri, 26 Sep 2025 10:02:11 -0600
+Message-ID: <20250926160216.2157348-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250926160216.2157348-1-sjg@chromium.org>
 References: <20250926160216.2157348-1-sjg@chromium.org>
@@ -101,156 +96,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for booting from a script loaded over FEL. This mirrors the
-bootcmd_fel provided by distro boot.
+These are not needed as bootstd handles the boot now. Drop them.
+
+Keep BOOTCMD_SUNXI_COMPAT for now since it does not relate to
+distro boot.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
 
-(no changes since v4)
-
-Changes in v4:
-- Reword Kconfig
-- Add a name for the bootflow
+(no changes since v2)
 
 Changes in v2:
-- Put the FEL bootmeth before all other global bootmeths
+- Keep BOOTCMD_SUNXI_COMPAT
 
- boot/Kconfig        | 14 ++++++++
- boot/Makefile       |  1 +
- boot/bootmeth_fel.c | 85 +++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 100 insertions(+)
- create mode 100644 boot/bootmeth_fel.c
+ include/configs/sunxi-common.h | 75 +---------------------------------
+ 1 file changed, 1 insertion(+), 74 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index dd047365754..d1e608f2595 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -634,6 +634,20 @@ config BOOTMETH_EFI_BOOTMGR
- 	  the EFI binary to be launched is determined. To set the EFI variables
- 	  use the eficonfig command.
+diff --git a/include/configs/sunxi-common.h b/include/configs/sunxi-common.h
+index b29a25d5617..666553ccadb 100644
+--- a/include/configs/sunxi-common.h
++++ b/include/configs/sunxi-common.h
+@@ -156,76 +156,6 @@
+ 	"fdt ram " FDT_ADDR_R " 0x100000;" \
+ 	"ramdisk ram " RAMDISK_ADDR_R " 0x4000000\0"
  
-+config BOOTMETH_FEL
-+	bool "Bootdev support for Sunxi FEL"
-+	depends on ARCH_SUNXI
-+	default y
-+	help
-+	  Enables support for executing an explicit boot script uploaded before
-+	  via the USB FEL protocol. The 'fel_scriptaddr' environment variable
-+	  holds the address of this script, taken from the SPL header.
-+
-+	  This method is only available if booting from FEL, i.e. the
-+	  'fel_booted' environment variable is set.
-+
-+	  See https://linux-sunxi.org/FEL/Protocol for more information.
-+
- config BOOTMETH_QFW
- 	bool "Boot method using QEMU parameters"
- 	depends on QFW
-diff --git a/boot/Makefile b/boot/Makefile
-index 3da6f7a0914..e026720ff39 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -31,6 +31,7 @@ obj-$(CONFIG_$(PHASE_)BOOTMETH_EXTLINUX) += bootmeth_extlinux.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_EXTLINUX_PXE) += bootmeth_pxe.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_EFILOADER) += bootmeth_efi.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
-+obj-$(CONFIG_$(PHASE_)BOOTMETH_FEL) += bootmeth_fel.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_QFW) += bootmeth_qfw.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_RAUC) += bootmeth_rauc.o
- obj-$(CONFIG_$(PHASE_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
-diff --git a/boot/bootmeth_fel.c b/boot/bootmeth_fel.c
-new file mode 100644
-index 00000000000..b5a3f3730e3
---- /dev/null
-+++ b/boot/bootmeth_fel.c
-@@ -0,0 +1,85 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Bootmethod for sunxi FEL loading
-+ *
-+ * Copyright 2024 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ */
-+
-+#define LOG_CATEGORY UCLASS_BOOTSTD
-+
-+#include <bootdev.h>
-+#include <bootflow.h>
-+#include <bootmeth.h>
-+#include <command.h>
-+#include <dm.h>
-+#include <env.h>
-+
-+static int fel_check(struct udevice *dev, struct bootflow_iter *iter)
-+{
-+	return 0;
-+}
-+
-+static int fel_read_bootflow(struct udevice *dev, struct bootflow *bflow)
-+{
-+	if (!env_get("fel_booted") || !env_get("fel_scriptaddr"))
-+		return -ENOENT;
-+
-+	bflow->name = strdup("fel-script");
-+	if (!bflow->name)
-+		return log_msg_ret("fel", -ENOMEM);
-+	bflow->state = BOOTFLOWST_READY;
-+
-+	return 0;
-+}
-+
-+static int fel_read_file(struct udevice *dev, struct bootflow *bflow,
-+			 const char *file_path, ulong addr,
-+			 enum bootflow_img_t type, ulong *sizep)
-+{
-+	return -ENOSYS;
-+}
-+
-+static int fel_boot(struct udevice *dev, struct bootflow *bflow)
-+{
-+	ulong addr;
-+	int ret;
-+
-+	addr = env_get_hex("fel_scriptaddr", 0);
-+	ret = cmd_source_script(addr, NULL, NULL);
-+	if (ret)
-+		return log_msg_ret("boot", ret);
-+
-+	return 0;
-+}
-+
-+static int fel_bootmeth_bind(struct udevice *dev)
-+{
-+	struct bootmeth_uc_plat *plat = dev_get_uclass_plat(dev);
-+
-+	plat->desc = IS_ENABLED(CONFIG_BOOTSTD_FULL) ?
-+	   "Sunxi FEL boot over USB" : "FEL";
-+	plat->flags = BOOTMETHF_GLOBAL;
-+
-+	return 0;
-+}
-+
-+static struct bootmeth_ops fel_bootmeth_ops = {
-+	.check		= fel_check,
-+	.read_bootflow	= fel_read_bootflow,
-+	.read_file	= fel_read_file,
-+	.boot		= fel_boot,
-+};
-+
-+static const struct udevice_id fel_bootmeth_ids[] = {
-+	{ .compatible = "u-boot,fel-bootmeth" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(bootmeth_2fel) = {
-+	.name		= "bootmeth_fel",
-+	.id		= UCLASS_BOOTMETH,
-+	.of_match	= fel_bootmeth_ids,
-+	.ops		= &fel_bootmeth_ops,
-+	.bind		= fel_bootmeth_bind,
-+};
+-/****************************************************************************
+- *                  definitions for the distro boot system                  *
+- ****************************************************************************/
+-#ifdef CONFIG_MMC
+-#if CONFIG_MMC_SUNXI_SLOT_EXTRA != -1
+-#define BOOTENV_DEV_MMC_AUTO(devtypeu, devtypel, instance)		\
+-	BOOTENV_DEV_MMC(MMC, mmc, 0)					\
+-	BOOTENV_DEV_MMC(MMC, mmc, 1)					\
+-	"bootcmd_mmc_auto="						\
+-		"if test ${mmc_bootdev} -eq 1; then "			\
+-			"run bootcmd_mmc1; "				\
+-			"run bootcmd_mmc0; "				\
+-		"elif test ${mmc_bootdev} -eq 0; then "			\
+-			"run bootcmd_mmc0; "				\
+-			"run bootcmd_mmc1; "				\
+-		"fi\0"
+-
+-#define BOOTENV_DEV_NAME_MMC_AUTO(devtypeu, devtypel, instance) \
+-	"mmc_auto "
+-
+-#define BOOT_TARGET_DEVICES_MMC(func) func(MMC_AUTO, mmc_auto, na)
+-#else
+-#define BOOT_TARGET_DEVICES_MMC(func) func(MMC, mmc, 0)
+-#endif
+-#else
+-#define BOOT_TARGET_DEVICES_MMC(func)
+-#endif
+-
+-#ifdef CONFIG_AHCI
+-#define BOOT_TARGET_DEVICES_SCSI(func) func(SCSI, scsi, 0)
+-#else
+-#define BOOT_TARGET_DEVICES_SCSI(func)
+-#endif
+-
+-#ifdef CONFIG_USB_STORAGE
+-#define BOOT_TARGET_DEVICES_USB(func) func(USB, usb, 0)
+-#else
+-#define BOOT_TARGET_DEVICES_USB(func)
+-#endif
+-
+-#ifdef CONFIG_CMD_PXE
+-#define BOOT_TARGET_DEVICES_PXE(func) func(PXE, pxe, na)
+-#else
+-#define BOOT_TARGET_DEVICES_PXE(func)
+-#endif
+-
+-#ifdef CONFIG_CMD_DHCP
+-#define BOOT_TARGET_DEVICES_DHCP(func) func(DHCP, dhcp, na)
+-#else
+-#define BOOT_TARGET_DEVICES_DHCP(func)
+-#endif
+-
+-/* FEL boot support, auto-execute boot.scr if a script address was provided */
+-#define BOOTENV_DEV_FEL(devtypeu, devtypel, instance) \
+-	"bootcmd_fel=" \
+-		"if test -n ${fel_booted} && test -n ${fel_scriptaddr}; then " \
+-			"echo '(FEL boot)'; " \
+-			"source ${fel_scriptaddr}; " \
+-		"fi\0"
+-#define BOOTENV_DEV_NAME_FEL(devtypeu, devtypel, instance) \
+-	"fel "
+-
+-#define BOOT_TARGET_DEVICES(func) \
+-	func(FEL, fel, na) \
+-	BOOT_TARGET_DEVICES_MMC(func) \
+-	BOOT_TARGET_DEVICES_SCSI(func) \
+-	BOOT_TARGET_DEVICES_USB(func) \
+-	BOOT_TARGET_DEVICES_PXE(func) \
+-	BOOT_TARGET_DEVICES_DHCP(func)
+-
+ #ifdef CONFIG_OLD_SUNXI_KERNEL_COMPAT
+ #define BOOTCMD_SUNXI_COMPAT \
+ 	"bootcmd_sunxi_compat=" \
+@@ -242,8 +172,6 @@
+ #define BOOTCMD_SUNXI_COMPAT
+ #endif
+ 
+-#include <config_distro_bootcmd.h>
+-
+ #ifdef CONFIG_USB_KEYBOARD
+ #define CONSOLE_STDIN_SETTINGS \
+ 	"stdin=serial,usbkbd\0"
+@@ -296,7 +224,6 @@
+ 	"uuid_gpt_esp=" UUID_GPT_ESP "\0" \
+ 	"uuid_gpt_system=" UUID_GPT_SYSTEM "\0" \
+ 	"partitions=" PARTS_DEFAULT "\0" \
+-	BOOTCMD_SUNXI_COMPAT \
+-	BOOTENV
++	BOOTCMD_SUNXI_COMPAT
+ 
+ #endif /* _SUNXI_COMMON_CONFIG_H */
 -- 
 2.43.0
 
