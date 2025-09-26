@@ -4,84 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E163CAC5B8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:48:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5791BCAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2839983692;
-	Fri, 26 Sep 2025 16:48:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E81758362A;
+	Fri, 26 Sep 2025 16:49:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ms9DbPkE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dA0uI3RC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96F1A83677; Fri, 26 Sep 2025 16:48:28 +0200 (CEST)
+ id 80527836B4; Fri, 26 Sep 2025 16:49:12 +0200 (CEST)
 Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
  [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F21E83692
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:48:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 337F7835FD
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:49:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-b2ee3c13aa4so348169466b.3
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 07:48:26 -0700 (PDT)
+ a640c23a62f3a-afcb7a16441so370995566b.2
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 07:49:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1758898105; x=1759502905; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=upm3Qgl++c+4QXd6lAjSFbLcGtWiuXaUFc/N1QWj8Ck=;
- b=ms9DbPkEwS1tWTrwhQfVp1ujPwSqb5V1QYKzc2KZhFjMcVjiDYLDubzKpSUlMS9hcn
- 2zP5AKESXlEdu/qLYSNimmi0ULWLl/NGfaCGGQlctmH2/n/raGUr3s5qg91XOHgQE0dR
- pdO30fNlSjphK8TyrNqIw5rNRuwFcWgxEbzq4=
+ d=chromium.org; s=google; t=1758898150; x=1759502950; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WLr54B91d4IpiXhRvBFa2MDGHg0VLo/etFhgutMQM9w=;
+ b=dA0uI3RC2C4YIqANmFQeJ0nGjk7uTQ4XxuFJjFYWWGahVssR64ohvmWCJIWVxUwnrk
+ a7IKzAHtewljBf420885OGcvJZSxy38MfmLjGxEtWzq3z8zASD54elBUEepSKuMm/hMn
+ WSsFoqhT3VnQtOkHF0aDoEL/cd9JKLkNtOfBo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758898105; x=1759502905;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=upm3Qgl++c+4QXd6lAjSFbLcGtWiuXaUFc/N1QWj8Ck=;
- b=PYBZfyyeI159P/4Ce7pt3m0Xbl/CKFPNrRjg84LEkmo1R5y+nSl2SNd7c3HgqRHcUt
- I8sqsf2Jb2CeejkPWL+wDijrWLTU+QEGgRy4ZrG1dRXOFYJzaMf/ZNc9iaSkN+6XAQds
- ZRq9DRupw2E8lq5aXtn+mMYnlnH+2B5jzSPwS1stOuqQ96/RTdkUkqkAS0q/J4ib1B9e
- UAsRExTkKW0tvzyOlJ1QLbGR4yO/cq6gRClzPelUFcHBohZdhyhoZb7RkJaeVjOIJBg4
- CD8DbTEjokHUGryD6FnpQnsAjyBgSj2tYwMucAq6a/oy48l3+jppumZJz6/z1FUzhM7z
- ueyw==
+ d=1e100.net; s=20230601; t=1758898150; x=1759502950;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WLr54B91d4IpiXhRvBFa2MDGHg0VLo/etFhgutMQM9w=;
+ b=VhLiDaZ11Fbbws/gv0EP0XZpUpxyUoV8XklwJ2WaGjrZCYCwfmiaaR0VGdbGk0TpiB
+ vtO7ewQRXkrz0LqctpGy9IJL/MTT9wQ0NaBiGP0fzcOIkXi7ONrBW2ch58thQOZkkP7X
+ I3jsq3MoUYvFhPq9GZUHCVyuVrD6voPmispYuImAQKXFnJcLM4PCmGnczxHHxHsLlEGc
+ 9N6pYkmgeGrOUp0hEWjCvCJU4T9zeAcKb2eXKCqodYrgDmUR4bq1bfMuirOL0QYd5wiJ
+ ES2z3JYKecgcf7l9fiFUZ/C6E3A3uLbAsBsaitvF0iAY7fZQgfLXhru4BClAfv3/Pcdc
+ NCXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXF+jjwhuCp2xvNNaqB50U4RbWNUXs8+hs0LKf2TzLTHp2wKajaokYDZZCqU3qMAe7gXESeYJA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLWDOLtKhgV2UtRYnXIXMGR1RFZOQIc8oQfNF439PIUqzN8eUX
- DJcgqm1m2fVo8NnMg0vv10ilttstsn4v3y9SjjCMfVF4d4DwRF0fGDuv5PfFadaKbW9MMilQ6Hp
- B2JvFWieQ27uBKIgUgWs7LLgWAvRpZu8VEFgM9b75
-X-Gm-Gg: ASbGncuXnC1VY/5pCOU9dPvRkmX9F//c5TTi+qxtXB2ObmxkoaOLFSiqkikbQbinKyG
- Fy2Lrd5C3NJRfobgBkndDFm7jIhDrLWm0uJ7oj6cUbmvz5csKuVMYJVdwez+SSXczXssOgOHjQw
- yxrojdwbZp8gMjrrhK+ZWGEf997hirXCpBoNIDvjQwf184HAORzVYSEuKz5tz3bJdxdB3EVikaD
- 8jepg==
-X-Google-Smtp-Source: AGHT+IG140J5hgDEwyBOvL/yv64vX+v36ofjbkhxkcUjbbLWHlpDwFlvZVF/T16OdQ8e1lQUtMf3Wk9se0KhDD6kaW8=
-X-Received: by 2002:a17:906:6a14:b0:af9:c119:3b4 with SMTP id
- a640c23a62f3a-b34ba147a76mr837074766b.13.1758898105324; Fri, 26 Sep 2025
- 07:48:25 -0700 (PDT)
+ AJvYcCXYZ5S8mG045NqPG0avUf7IdjeN83pEvZHLcQuyaMnL+Idl7iDqlsN2jwhtzvdF0esqqk0Tkr4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7Ndl5xKqZMEEtBkBWx/faYKbWj0adUD4VcXpWWIsOEjoK8sD8
+ F9iIlfkPNeZnX27fkSsUNxjcKyKReJ9aHnjb1DNPolXTUXpfMmQ6a6gJJyUMAZlvVYmZ+Frw0/5
+ ZwTwl7hkefVd+JALppnCzVGcdlj017AmSHyo9GbcI
+X-Gm-Gg: ASbGncuDVwbTaBUpu63tDexlnavRfznmSTEF4eQP0l1jMzvGuymZtsM+TMOeF4RKm6V
+ SjMC9qEiJL1GEfuM6Km8XjyMU/+yHTmnwSHqYCd+5C/+x9cdEayHNQk+CESFJmN/R5d2Sx6Qj01
+ Di1pf8gXsAUV8Lh8KDC7kAmwV3+vi7+ejrBRsITGFJTgXlKZOVAzz5gPnYNqgjELd3krOa40rVA
+ opP+ZhmOCsLERuY
+X-Google-Smtp-Source: AGHT+IFJ8/O7IYQqkvL6mtxXq5e9wuIEYdoj7Suphvew6rkaRVLttKVMoCGJk+jEASu93GG4YPy5484T5nqDoGKgm5w=
+X-Received: by 2002:a17:907:948a:b0:b29:1c4b:3d4e with SMTP id
+ a640c23a62f3a-b34b8d96295mr802778266b.28.1758898149550; Fri, 26 Sep 2025
+ 07:49:09 -0700 (PDT)
 MIME-Version: 1.0
 References: <20250914110021.4103-1-aristo.chen@canonical.com>
- <20250914110021.4103-8-aristo.chen@canonical.com>
- <cf85516f-3985-4f53-bc61-6481446a5a19@kwiboo.se>
-In-Reply-To: <cf85516f-3985-4f53-bc61-6481446a5a19@kwiboo.se>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+ <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+ <20250924135139.GH197373@bill-the-cat>
+ <20250924140524.fy46p7ifr4oxh5mc@uncooked>
+ <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
+ <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
+In-Reply-To: <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 26 Sep 2025 08:48:11 -0600
-X-Gm-Features: AS18NWCnxWDf1fyRVqdR8V87hv7ieBe5myR4aCDLTMDz8q9V6yAr1VA0dFvHfiU
-Message-ID: <CAFLszThxPj4HdN0yONPW+xVgHOFK5E1maJS2fyLnnwi5WA57yQ@mail.gmail.com>
-Subject: Re: [PATCH v2 7/7] doc: binman: Add guidance for determining ELF load
- addresses
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Aristo Chen <jj251510319013@gmail.com>, trini@konsulko.com,
- alpernebiyasak@gmail.com, 
- al.kochet@gmail.com, paul.henrys_ext@softathome.com, bb@ti.com, 
- y.moog@phytec.de, w.egorov@phytec.de, francesco.dolcini@toradex.com, 
- ggiordano@phytec.com, n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, 
- d-gole@ti.com, ravi@prevas.dk, carlos.lopezr4096@gmail.com, 
- quentin.schulz@cherry.de, alice.guo@nxp.com, 
- Aristo Chen <aristo.chen@canonical.com>, u-boot@lists.denx.de
+Date: Fri, 26 Sep 2025 08:48:57 -0600
+X-Gm-Features: AS18NWDDj7B04aV7UojXsbr8kqKBVI_t8eCFVySKIMJ7eTHeaBI2P3GxYkQdBj8
+Message-ID: <CAFLszTiNSnyw86oi_k3F0okOmQn2U6pU7SwrQc0e-tGHd_Py=g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+To: Aristo Chen <jj251510319013@gmail.com>
+Cc: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>,
+ E Shattow <e@freeshell.de>, 
+ u-boot@lists.denx.de, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
+ paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de, 
+ w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com, 
+ n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, 
+ ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, 
+ alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,79 +105,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 24 Sept 2025 at 06:32, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> Hi,
->
-> On 9/14/2025 12:59 PM, Aristo Chen wrote:
-> > Add documentation to help users understand how to determine where ELF
-> > files will be loaded when using binman's 'fit,load' property. This
-> > addresses the common confusion about how load addresses are determined
-> > from ELF files.
-> >
-> > The documentation explains three methods:
-> > 1. Using readelf to examine program headers
-> > 2. Checking the linker script (.lds file)
-> > 3. Using objdump to see section addresses
-> >
-> > Also includes a specific example from binman tests showing how
-> > elf_sections.lds sets ATF load address to 0x00000010 and
-> > elf_sections_tee.lds sets TEE load address to 0x00100010 to avoid
-> > memory overlap conflicts.
-> >
-> > This helps users debug memory layout conflicts more efficiently when
-> > working with FIT images containing multiple ELF components.
-> >
-> > Signed-off-by: Aristo Chen <aristo.chen@canonical.com>
-> > ---
-> >  tools/binman/entries.rst | 18 ++++++++++++++++++
-> >  1 file changed, 18 insertions(+)
-> >
-> > diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
-> > index 12a39d070e4..f6a5465ca44 100644
-> > --- a/tools/binman/entries.rst
-> > +++ b/tools/binman/entries.rst
-> > @@ -1050,6 +1050,24 @@ split-elf
-> >          Generates a `load = <...>` property with the load address of the
-> >          segment
-> >
-> > +        Note: The load address comes from the ELF file's program header or
-> > +        linker script. To determine where an ELF file will be loaded, you can:
-> > +
-> > +        1. Use readelf to examine the program headers:
-> > +           ``readelf -l your_elf_file.elf``
-> > +           Look for the LOAD segments and their VirtAddr (Virtual Address)
-> > +
-> > +        2. Check the linker script (.lds file) used to build the ELF:
-> > +           Look for the `. = <address>;` statements which set the location
-> > +           counter and determine load addresses for different sections
-> > +
-> > +        3. Use objdump to see section addresses:
-> > +           ``objdump -h your_elf_file.elf``
-> > +
-> > +        For example, in binman tests, elf_sections.lds sets ATF load address
-> > +        to 0x00000010, while elf_sections_tee.lds sets TEE load address to
-> > +        0x00100010 to avoid memory overlap conflicts.
->
-> tools/binman/entries.rst should be generated from a "binman entry-docs"
-> run as described in the documentation [1].
->
-> Please update tools/binman/etype/fit.py or this will be lost next time
-> someone updates the entries documentation.
+Hi Aristo,
 
-With that fixed:
+On Thu, 25 Sept 2025 at 07:50, Aristo Chen <jj251510319013@gmail.com> wrote=
+:
+>
+> Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=882=
+4=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:33=E5=AF=AB=E9=81=93=EF=
+=BC=9A
+> >
+> > Nishanth Menon <nm@ti.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=97=A5=
+ =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:05=E5=AF=AB=E9=81=93=EF=BC=9A
+> > >
+> > > On 07:51-20250924, Tom Rini wrote:
+> > > > On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
+> > > > > Hi Aristo,
+> > > > >
+> > > > > On 9/24/25 04:43, Nishanth Menon wrote:
+> > > > > > On 06:37-20250924, Nishanth Menon wrote:
+> > > > > >> On 10:59-20250914, Aristo Chen wrote:
+> > > > > >>> This patch series enhances FIT image robustness by adding **m=
+emory
+> > > > > >>> region overlap detection** to `mkimage` and fixing existing o=
+verlaps
+> > > > > >>> in DTS files and `binman` tests.
+> > > > > >
+> > > > > > [...]
+> > > > > >>>
+> > > > > >>
+> > > > > >> Looks like i see a build regression in linux-next after this s=
+eries.
+> > > > > >
+> > > > > > I fat fingered that one.. sorry, I meant u-boot next.
+> > > > > >
+> > > > > >
+> > > > > > Fails at commit 4d84fa1261eb, last pass was on commit d81c11185=
+80f
+> > > > > >
+> > > > > >>
+> > > > > >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f7=
+6
+> > > > > >
+> > > > > > I  believe there are outstanding comments on V1 that have'nt be=
+en
+> > > > > > addressed either. Can we revert/drop this series for now while =
+the
+> > > > > > comments are addressed?
+> > > > > >
+> > > > >
+> > > > > Similar to Nishanth, I am seeing a build regression, itb.map:
+> > > >
+> > > > Sorry for the noise all, I've reverted this in next now.
+> > > >
+> > >
+> > > Thanks Tom.
+> > > --
+> > > Regards,
+> > > Nishanth Menon
+> > > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A3=
+4 DDB5 849D 1736 249D
+> > > https://ti.com/opensource
+> >
+> > Apology for introducing the regression, I will find time to fix them,
+> > and thanks Tom for reverting my patch set to unblock others
+> >
+> > For TIFS stub entries on AM6x platforms and the starfive visionfive2,
+> > sounds like the image in the FIT will be selected during the runtime,
+> > so they are not really overlapping each other. I will need to figure
+> > out other way instead
+>
+>
+> Thank you all for the feedback on my FIT image overlap detection patch
+> series, and apology again for the issues that I introduced
+>
+> Currently what I have in my mind is to have the following 2 changes in
+> my patch set
+> ### 1. Add support for mutually exclusive image groups
+> Some platforms load only one image from a group at runtime. In the
+> device tree, we may have something like this
+> ```
+> tifsstub-hs {
+>     // ... existing properties ...
+>     mutually-exclusive-group =3D "tifsstub";
+> };
+> tifsstub-fs {
+>     // ... existing properties ...
+>     mutually-exclusive-group =3D "tifsstub";
+> };
+> ```
+> The overlap checker would then skip validation between images in the
+> same mutually-exclusive-group, while still catching genuine
+> overlaps
+>
+> ### 2.  Change from build error to warning
+> Given that there may be edge cases(such as
+> starfive_visionfive2_defconfig) not covered by current CI pipelines,
+> changing overlap
+> detection from a build-stopping error to a warning initially. This would:
+> - Alert developers to potential memory layout issues
+> - Avoid breaking existing working configurations
+> - Allow time to refine the detection logic based on community feedback
+> - Enable a gradual transition to stricter validation once the approach is=
+ proven
+> The warning could later become an error once we have confidence in the
+> detection accuracy across all supported platforms.
+>
+> Feel free to let me know if you have any concerns or suggestions
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+We should try to have discussions on FIT on the spec github as well,
+e.g. filing an issue at [1] and referring to it here. I'm not sure how
+to link github discussions to a mailing list, so that perhaps just
+create an issue?. FIT is used by most firmware projects at this point,
+many of which don't follow this mailing list.
 
+Regards,
+Simon
 
 >
-> [1] https://docs.u-boot.org/en/latest/develop/package/binman.html#entry-documentation
->
-> Regards,
-> Jonas
->
-> > +
-> >      fit,entry
-> >          Generates a `entry = <...>` property with the entry address of the
-> >          ELF. This is only produced for the first entry
->
+> Thanks for your time and guidance!
+> Aristo
+
+[1] https://github.com/open-source-firmware/flat-image-tree/issues
