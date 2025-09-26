@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BCAFCAC5AE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 17:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92CD4CAC5B8
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 21:46:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA2CA8382E;
-	Fri, 26 Sep 2025 19:12:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7838583693;
+	Fri, 26 Sep 2025 23:46:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LIoBgdwK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JhbHd+M3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B46BF83855; Fri, 26 Sep 2025 19:12:56 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id E2E6981E13; Fri, 26 Sep 2025 23:46:30 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB228835FD
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 19:12:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C253683653
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 23:46:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-36bf096b092so31611271fa.1
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 10:12:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-31d6b8be249so2578612fac.0
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 14:46:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1758906774; x=1759511574; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1758923187; x=1759527987; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=61ST3f6QYcM2Ke5AjZB02oJvSETxTvAzFffo5DQBaEs=;
- b=LIoBgdwKLAdB64I7gWFjqQPliKyF3FE/cVKn43XmMF1IpgTSa3ssaWk34Wdxgt79Gc
- yU7z0vIIfSiayc9/kvCcSyQHKOxnYHvly+EdrIRJJRpMtmm8XHgQ6OQMtBSSYTEMVn/2
- emdTtLibJxSPDVWbS3Pb0hb/u9vBee/5ecZxDwjERaWrnUKohOMG9Toc3R13UA3EL4T0
- 4r7JPtvoBPWhznLgj9/6znhUsZOmiMmAH9cRQCbz1zIPC1SZuD6u8IkdlkGNwCWtlQXj
- 6e6mjp7APkO7I3IzO3xxh0Op+FYIHYJnh3lyENIr15s+DmwmlQnV6ojn4QZuEZgmwHcy
- 3AMw==
+ bh=KoSpD9nHKyK3/PLZ0ntsLaiogBXiKGyItlE987/GcH0=;
+ b=JhbHd+M3PWtoUFexeUUyRlLQKRxaHeioGkmjrEldeZwwCJ79BAk/la4SEyl5S++i4Q
+ VmUUCt7wxUQn9dT4xAFc5ULFq+F/ybPUvBtrQJ2gS5ClVkCBI4JKmIMy4nnjfu3D27yy
+ oO4nPFkYBoE4ui9ifY+ObtzZEcBm/xfNDVt0g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758906774; x=1759511574;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1758923187; x=1759527987;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=61ST3f6QYcM2Ke5AjZB02oJvSETxTvAzFffo5DQBaEs=;
- b=fJtOeVSWVG2prVRNsW8urIdL+rHFFg8+vOmeSQ/+U94FRv3NVv0Zzw97d5tC/DHbY6
- V6VNnqnGStarcbcjCUDeqRivN8ByUdxS+ZngvW2E8pOzBQLK6iuYYHVCeZmqqVzDmucU
- islbgo3TzrR2BNCJ6r5sjgY4bAzog7kTf4viWx53s2pCeR/ChrzJdI07cr+bJKNNK8qk
- 4y4/S0Cri5KqENnX2pbRM6VkjztGI1eycUgDiWg2Ho5x3vPnl5hLIklQLFL6PBHU6aPq
- zQRJkInV+SZ42P+mardjpGtl26OVYPyXNgcqAL94uCO5JpFKpG/WxFC//DJwTY4UHTvC
- au5A==
-X-Gm-Message-State: AOJu0YwV/IoCQKZplmxh048+I2LYiTYCoy2eh9rb88/0IFIH2OM9U+Vg
- d3DQGbRf9VnWYc/aDPNLYxKo+w+IomjJrT9kkVKLY/0bXHL/y6WXLd6kJT+zTfuXyvyvo279MXV
- Yh03pBj4bRRw52qHAnuMUanRrK3YwuXY=
-X-Gm-Gg: ASbGncu3KMuDezq+Jz0eGM6cPUg4j7b0AYG5DCla1Qns8w2rF48bVVsOsxnWrGtsDaY
- Qgwvw3EoSZe+GL+3j2LOKeMqV7NLA7wO1hBxaWRuKy/PKcp+Bo/9Er3cpuM1rBQzvDeQHdrCyxR
- UVBvfjJnmvX2KSMZ1pacYkdDKMtk1U4aObYc4n2WxfWJFlESwLb+lLj06ZauAM7NmIeDGVRNXnf
- 8T9csWyNcSueo7AhD2ftAhGVBC0llfY6czjFm0=
-X-Google-Smtp-Source: AGHT+IGn8xwblDk/lfyOljhfIliYe52ZPoRotWydhvmC6hS1k1vOGaaYYtj1IkeJf9a4x14ezPwejao/u/ig4Y9Xlfg=
-X-Received: by 2002:a2e:bd12:0:b0:36e:ca93:6299 with SMTP id
- 38308e7fff4ca-36f7d2cc799mr24770931fa.15.1758906773805; Fri, 26 Sep 2025
- 10:12:53 -0700 (PDT)
+ bh=KoSpD9nHKyK3/PLZ0ntsLaiogBXiKGyItlE987/GcH0=;
+ b=pRgqKUuWXmU4KPCMui5HusH+J+txoZtPeVZGdqd91voItyfHMBrsYWwzgefA8icgkY
+ +Vcsw8oRf5rLswC1aMo0Mgo/5CDPWGIVcw+IxmfDAyHPzUPvQ+BOfWlu6Te7i2CRf2st
+ LybhV21A6DCPatloctCTmq8PvlgxUVQ4M5SzfjNSMl2HOpwjLuAKzOKI26dL3JzzXPQp
+ WUTH54AR2rgTrCekDe9SYjaieUJHXI5G2k/t+a08Y1J/Ia6EgpF/YGAU5oTaaQQFkh29
+ Aev1cq2Ouii9n8H4R8dpNBMVFtH74uNBZtbL62HcczIj+Lrj5wSbd3uuwMc8p//YkEHg
+ 7e3A==
+X-Gm-Message-State: AOJu0YzUPSewyljR+h/UJpk6t1cgCckGrYUK+uAjh474+6BhihTUktk7
+ 5lqIR7t6AzT4ZcdlqTljKClVB+eEae/TPM4SSaQHdGDE1Wu0nbktKvi7ELAiqXBCerU=
+X-Gm-Gg: ASbGncvlp8Y/B0YCuthsgDw55Wn3U1HykNojCEfIQ++5SE45WjleGyWnrqWynwVUDQd
+ CfyadeOzWDqXRYPZq37wamk1RV6EHkrYdR3YXMlV+/KDupELGvI7O9ombTU/x93CBzg4jg3Q3Vn
+ e5w+a9tVWoj+3QmkWj2HyqpOIU98oPCw9KO6qPf66OQ0GY1OeLRbSWiDiDuZ2P5VNsMVdhaMe5O
+ AXEBHUZ9S7ZTAZ3+56zqWf9WJLnd91OOjQX6oWh2OFGwFgdtv4BCCqN1x36vpYNo0BM9cUjU6ew
+ YryFyPyVHpto5ZXkVtd0AG50gRkbD/9aCHbUzRDKGsGTP+TyAgB0hkVyc++WQiKaQFGhjmXcoK6
+ Lb9oRKVecqSFTimvi4FuObEuaGMR8zybz79ycHgr0TfdABVnpxZyxQTWiVNzygFptGA==
+X-Google-Smtp-Source: AGHT+IGpMWca2IChUykPDMlcyS/i89mkTHKxQs2/PvRufmIyJdjMGu+m/22I/3+FqUS36K6Ka3g09Q==
+X-Received: by 2002:a05:6870:55d0:b0:347:1e45:9d68 with SMTP id
+ 586e51a60fabf-35eed5f6a56mr5204315fac.32.1758923187457; 
+ Fri, 26 Sep 2025 14:46:27 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-363b51636b4sm1720585fac.32.2025.09.26.14.46.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Sep 2025 14:46:26 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250926170943.846750-1-festevam@gmail.com>
+References: <20250926170943.846750-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250926
+Message-Id: <175892318624.3792987.6460388074894418180.b4-ty@konsulko.com>
+Date: Fri, 26 Sep 2025 15:46:26 -0600
 MIME-Version: 1.0
-References: <20250924021127.2866184-1-ye.li@nxp.com>
-In-Reply-To: <20250924021127.2866184-1-ye.li@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 26 Sep 2025 14:12:42 -0300
-X-Gm-Features: AS18NWC-xwlespp1LqxxTij8oPHxqik6EejPRbhd6-hvLq-vFjwGc5NyEdn6_LU
-Message-ID: <CAOMZO5DZabJANTXZdcUZXk18D94zL=T4C8tbzYLv+0tqS_BQGg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/4] spi: nxp_fspi: Use second last LUT entry for AHB
- read
-To: Ye Li <ye.li@nxp.com>
-Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, peng.fan@nxp.com, 
- uboot-imx@nxp.com, alice.guo@nxp.com, ye.li@oss.nxp.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,12 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 23, 2025 at 11:11=E2=80=AFPM Ye Li <ye.li@nxp.com> wrote:
->
-> Use a dedicated LUT (second last) for AHB read command, so we can
-> directly read from the AHB memory-mapped address and booting M core
-> for XIP on Flexspi NOR.
->
-> Signed-off-by: Ye Li <ye.li@nxp.com>
+On Fri, 26 Sep 2025 14:09:43 -0300, Fabio Estevam wrote:
 
-Series applied to -next, thanks.
+> Please pull from u-boot-imx/next, thanks.
+> 
+> The following changes since commit 44c4919e9dd6c162b237633ba689441eca9a149c:
+> 
+>   test: Fix optee unit test (2025-09-24 11:04:11 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
+
+Merged into u-boot/next, thanks!
+
+-- 
+Tom
+
+
