@@ -4,154 +4,155 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A98CAC5B8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:05:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD0F1CAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:06:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D087838AB;
-	Fri, 26 Sep 2025 18:05:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B68B838C8;
+	Fri, 26 Sep 2025 18:06:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="AZgaqp/y";
+	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="Zn+l4KUg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBDE98144A; Fri, 26 Sep 2025 07:53:19 +0200 (CEST)
-Received: from CY7PR03CU001.outbound.protection.outlook.com
- (mail-westcentralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c112::5])
+ id EA7C583189; Fri, 26 Sep 2025 12:36:29 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A98608206E
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 07:53:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 366AF8206E
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 12:36:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
+ spf=pass smtp.mailfrom=gaurav.jain@nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=C6SLRfzSqks1T37AlVMm1QIN0zQ5wlNnEkTSfRit2gy4H36Nq7Y+JYHZgzFwevMU94x0aYtEuQpbpc3CPbYlFDGwnJog7nNv1HOATbVeem6iTg10Y5M5ib4HSJgBdIL2bOdINizDVnJFVBOwr1i7u+53u/EIpkk+iIN4Hg7pc65Inor8FKa+bOlc6bmLKHJLHwHkgb/vb7HJU3jRE/rHvvuqLFald5zHvuEHllCXrf8cMriuoMLSUFBSEKBDhY5GAOG8xRCjdc5woHvkiRcj5SzExfqzLOo13vyM9zeaDL9cKqco0fd8VwSwpTPMzJY5rJgdUozxs4WbOeumuCtBJg==
+ b=UJMjVHt0pwTqHRfpRBRhNsMJS3pMhIooozRASI5MKTXqlDL+ehc4x2zCWitlhrhwKzPa64T74qYizOFIqWnNUuKCKnkasklUkA+x8dHK+mr5j7n6zoqUvRXOYhkF2vK7VkCpCOFd0GStAk7KTsGjs4Wy3a8o4CjCaFnYbPRXHQ3Eejd6z78YDU3S9zPo0gte05S8G4zEFEyzxnNiUHQKUlmkQnPgMoBP2r2Kiqf800U8sqZlfwz2sMCgVKiiWurDoyTZkfP69L43doF6T/Es1G/fpwczYeGgxhFxQvrxummhb3NeJCgbkceHfAr6MbIvzIG3m1uxjz0wwvjIEIo39A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oszCR00dG+ofHEETWpk3NM4lLjkaXPEeZQM/bNWx2/4=;
- b=c3F1lTo6V/IpsRBlClZy1hi6PtfCAjz2+fSTk2hWwev93wsrIlZVBOAqVZGQRd2IwgMVvurpYG3hea1deK3qZqBTEYRyz99o3nly20WwXyHj7y17aKgyM1JAR9yt78nHbhkdOKjs1474uun91zUK4ZyvuGddZlatltj3cMZiCewugJiwiNYMl4xHoU3ZDMOSD++C3OJrLn5s36b2OgqDZzEs2kJ6DinqQqMit4RXxSd15y+zqDfW1ryAvD0YWLeyIbLrEQeR5ID1UZLbE6h8RVwGKGUMRDpAJq56YAYwgoH+RLYmsRvh2uG1kYyG3p/MwMPQ4mPbcTCJTSnfKS9UrQ==
+ bh=D/v9Ws2l4MWqlUj6pVnqNTONMwv5HeCgwj2oNK2wfjo=;
+ b=PGBYYTBZQODWUbtwxObR6ee05rv0Lu4xMln4bRv+Y6cXSXhvDvlup4Xk/y6pmaJH9dXaQ2lWigJO/ulL+EDpvQCgWdg36uqrrpEtbyBEebTbcG5rHp2a8UQoJKVuPaz0IWrRw7uiJ3FzArcUlyBv77P8mJzd3GHQQ+n6jF+gbsE6TMHcNPe5IPrfqqfJwjSsepMZsvKD+tbxcdlcoYusmDlHjgQBnWmPFoH8ZQ6Pso6Jb7I5VxSkKvAWBd8IqnIlR2sAEzLUjit1fjn37gMvDhw3r5jmVwb+oT1VamOPi9Upeg5sPykF3SIwD9rphvIBYuaG40oMt3TUW3LeiLVY7g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oszCR00dG+ofHEETWpk3NM4lLjkaXPEeZQM/bNWx2/4=;
- b=AZgaqp/ybGugzC9gUPEb09YrVOI0Kv/HUuaCT78x7t8Z42r1QKqgsbXt50E9ItuIto8Vw2icq2sqrq95m/jxxH3DPcDfKATUduEPGdPm05/ypqmVsKW/+yXILNWgQ9Km4izidakUMIl7EHF7qipANbbo8CU8YgNxd07gnThpDQj/4uvbYosVMQJx3B1yKcwMg2UIHM3AWL70OwPsaLNdPU2pOC7/GHnqj8lfge3ShUQhB/B0AMlyCYdN2qdJt9EIizSi99OGUhrP51wnsrR+2WNYi1bgw1VNu/gxIcXn36Qyyw+DFgAXWEkLNHz4eyh7UfTibjCzIGxwyxbjdUomrQ==
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by SN7PR03MB7034.namprd03.prod.outlook.com (2603:10b6:806:32e::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.11; Fri, 26 Sep
- 2025 05:53:14 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::3145:43b1:92d7:f7a4]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::3145:43b1:92d7:f7a4%4]) with mapi id 15.20.9160.008; Fri, 26 Sep 2025
- 05:53:14 +0000
-From: "Ng, Boon Khai" <boon.khai.ng@altera.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
- Chunfeng Yun <chunfeng.yun@mediatek.com>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>, "Chee, Tien Fong"
- <tien.fong.chee@altera.com>
-Subject: RE: [PATCH 4/4] net: Tighten more driver dependencies
-Thread-Topic: [PATCH 4/4] net: Tighten more driver dependencies
-Thread-Index: AQHcLl0urDy3lihiW0qQsFz4WTZlH7Sk9jOQ
-Date: Fri, 26 Sep 2025 05:53:14 +0000
-Message-ID: <SA3PR03MB71879F064700EEC64233B7CBB41EA@SA3PR03MB7187.namprd03.prod.outlook.com>
-References: <20250925204414.3561033-1-trini@konsulko.com>
- <20250925204414.3561033-4-trini@konsulko.com>
-In-Reply-To: <20250925204414.3561033-4-trini@konsulko.com>
-Accept-Language: en-MY, en-US
+ bh=D/v9Ws2l4MWqlUj6pVnqNTONMwv5HeCgwj2oNK2wfjo=;
+ b=Zn+l4KUgzK6IqinFqV+oNpcSTYs0khTsNHsPr/h03YOZ6vMrFuwEQzSR1HTph4SO+2h3kV/RVwrTYGxKwIbvInaG6bGkok2IlxZ7x4H/M9d67ShVpngC3lcnFPmBxE1PclWuaH1iWn9zwxJ/h7xiYvj3XrGfAJ7G5RaNFHTwJczLQnjB0zF3FM2XyqIXAU7eeTYcyNBvPhdG5kTRrqEqV3c70MziZ4gEztW6f9HLmj2jpBg7Q2CTesIwJ0rzppfLHFeStFaL6iPAl16nzjl7W/6eo5YBt51lkmjwGYe3S9fmsQN/VMYfplb98JSzwa76U3X1VU2ghyui4ShXm6A1Hg==
+Received: from DB9PR04MB8409.eurprd04.prod.outlook.com (2603:10a6:10:244::6)
+ by VE1PR04MB7389.eurprd04.prod.outlook.com (2603:10a6:800:1b1::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.8; Fri, 26 Sep
+ 2025 10:36:23 +0000
+Received: from DB9PR04MB8409.eurprd04.prod.outlook.com
+ ([fe80::1436:d8ba:25b8:1637]) by DB9PR04MB8409.eurprd04.prod.outlook.com
+ ([fe80::1436:d8ba:25b8:1637%4]) with mapi id 15.20.9160.008; Fri, 26 Sep 2025
+ 10:36:23 +0000
+From: Gaurav Jain <gaurav.jain@nxp.com>
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+CC: Horia Geanta <horia.geanta@nxp.com>, Pankaj Gupta <pankaj.gupta@nxp.com>, 
+ Varun Sethi <V.Sethi@nxp.com>, Silvano Di Ninno <silvano.dininno@nxp.com>, 
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>, Tom Rini
+ <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, Peng Fan
+ <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>, "Baehring, Olaf"
+ <olaf.baehring@draeger.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: RE: [PATCH] crypto/rng: double the entropy delay interval for retry
+Thread-Topic: [PATCH] crypto/rng: double the entropy delay interval for retry
+Thread-Index: AQHcHkhDXtNuizJfXkivOLzUhM7Ih7Sgl9kAgATKzFA=
+Date: Fri, 26 Sep 2025 10:36:23 +0000
+Message-ID: <DB9PR04MB840990678ACDDF8243F90303E71EA@DB9PR04MB8409.eurprd04.prod.outlook.com>
+References: <20250905093348.204409-1-gaurav.jain@nxp.com>
+ <20250923091238.GF31170@nxa18884-linux.ap.freescale.net>
+In-Reply-To: <20250923091238.GF31170@nxa18884-linux.ap.freescale.net>
+Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
+ header.d=none;dmarc=none action=none header.from=nxp.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SA3PR03MB7187:EE_|SN7PR03MB7034:EE_
-x-ms-office365-filtering-correlation-id: 42368764-ec94-4435-a17e-08ddfcc0fbd9
-x-ms-exchange-atpmessageproperties: SA
+x-ms-traffictypediagnostic: DB9PR04MB8409:EE_|VE1PR04MB7389:EE_
+x-ms-office365-filtering-correlation-id: 5a1d6a52-5933-46ed-9c61-08ddfce889dd
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|10070799003|1800799024|366016|38070700021; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?QpSfqINur9pj4FVsIfem2RGO8+pt5wwchJzmfBXQNNvONQz8QHWJ7HbMjpNg?=
- =?us-ascii?Q?ic4fFxYBfv10DHqGfukjGHmXRT02ZW7yLwpXu07nCIhxrK7WpWFpvJJZVptm?=
- =?us-ascii?Q?nj70tiaLVYWYfco/l7r9QnZg64WXm/vDE1XR0tVmXld6VLiJbZ2BHCSF0ea5?=
- =?us-ascii?Q?2U727ALqnQZRN2U1I9rYF217LEUB/atvf6gQ0O4GRD7S19sM0al1CaeSP9RI?=
- =?us-ascii?Q?TmeZPBXMvzV2kYogRVl4QWrswLSBB9tFEw14gQWpmNk/p4POmUZYsd7wlkoG?=
- =?us-ascii?Q?XaAiOyTenSkiKhpCWopU/zv/ijvtbJc4Lq5Q6PCJC+/xpgN1JvKaL+DDQzYa?=
- =?us-ascii?Q?xsn6sp+B9aSQUg215i5BKWlHBO42B+3DyVRGSy2G82uu5sPATy4NzJx5tJwl?=
- =?us-ascii?Q?bGJaIiEURTBNm2Kd0ndpK8mTAVX86GqxpRgy0LmBIP+auRWohHAcky/9O0i7?=
- =?us-ascii?Q?ReVuyvJ3MxJt5sKfUlL0b0uoMyMiySV58OF89UdUNvWlsLcwHjjU88oSJHjT?=
- =?us-ascii?Q?xVeUBm+N+yMR+YH7b9YFAYtUeM48x/fTXg7fkfugHNyvCy1/iy+W179viW9n?=
- =?us-ascii?Q?O1JJahlbl4BnwjiqLtUwnChaPKPnAyGlDuPFszUWHRRfIRTVJ9Env9wy73OV?=
- =?us-ascii?Q?R3DkAQU8phhys9yptgAU2E70HB2ePDLo3cLqfTbMjSu5rePiXKUyfSVthCW7?=
- =?us-ascii?Q?k1x9/0O7LBZ17psJ40qrPzMPvsrKhY9SsLUQdfO96c5AGD31M6EklQv9XrvW?=
- =?us-ascii?Q?tckhy5MWDp2huCYIzmeQAK27nA89aZ/2Ig+dDZiSpTH/GZonA0ad3ibFDAGC?=
- =?us-ascii?Q?xC7BV6RyWTi7Ub2u/QmKX1kFIB38/O1cSan+0nccDFCXfXEOJSbnjo57ndZi?=
- =?us-ascii?Q?3N5oBve76+Z4g+CM78aVB68H+Og0D4rz5QD8NCZ5/7h8fdmM85JJZI+1Y1W9?=
- =?us-ascii?Q?p09IbKUtXsn25knzHne/oV5ngOH9flPi67Cfsmt+UtGDxyTd/7I3gUp0ys69?=
- =?us-ascii?Q?qo+vR0595AtM7t0olIimr1faSCLwdlwz+GHJYvUnhmascoDs5NK7eslts2VX?=
- =?us-ascii?Q?vz9Dvsbdm/rA0qZYeztNrHovHmLAeNRjM8q1BcmEJAVq+uTktFeRWwndqC5o?=
- =?us-ascii?Q?FpA8fJvrh69gdCNfMAvFkgBXYBRKSUiKAwEp0UQUa642CapxPW3lCrjGI7H+?=
- =?us-ascii?Q?tVZTIlHvLcIJs7lhjj9epsbW7c6BBDkjoqBjvG82Lph51Tw7jC5Xe1J+D6uG?=
- =?us-ascii?Q?Qe6VHXSRVgPiwRCzKnkkBVxRSSaD+yo+Ez3Uf2vwC1QR10vhwdKFgzWIeqL0?=
- =?us-ascii?Q?tPuy9PW5n1uz3yve6hF62aRO0pB8GnXhx3dOUFfPczPg6aR8Lp5zjfx715r8?=
- =?us-ascii?Q?GVgU5gBdan+IjydUrMOl/O1fKtE+IWgyxQjlnsr2SaiDX9Osh2K6p++pkGHS?=
- =?us-ascii?Q?jAn71gijDcO9b+Ts9oId1UB83aSrXCpSZePsADVvjCQEkOHSz6towA=3D=3D?=
+ ARA:13230040|376014|366016|1800799024|19092799006|38070700021; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?jrDAQqs5RtgpnhR8Nv1KVvGQT3YNcRHM5eyahmXHb5fvQLF9SKHrhL/GfyYq?=
+ =?us-ascii?Q?Vs0wt9iw3KGUY14TLgG+unfPaF+F0HIBZsAi0v1vRnpmkysV4JIt8kmwqDhY?=
+ =?us-ascii?Q?l19L6D8hNlru4wmb/u4RSJpHgQd7kuCjqmoOG4Izz5sr4rtWfjvD4hNV6lQj?=
+ =?us-ascii?Q?mFocDp+AWxQFa4WTJezbUSXb4miNFafvInFwT4k7fHYk40DK/CGg3k8p0SzW?=
+ =?us-ascii?Q?FyAEIhN3RkuBpGllSXxyePptYmsB9QKqgw1dQWzeg71ZCNXxRfBJRpPF29Ml?=
+ =?us-ascii?Q?+yBzCPqV0GSoQ1rAtqsQ+4txHuCqCz6D5rA5wFoxGfWZqa4l45kFabz32QRY?=
+ =?us-ascii?Q?tSX2LQwmny0r/K/t984uAKOu6d8ckcquRtRZenPCHiDbv02Xnqa3KpA9Tuhp?=
+ =?us-ascii?Q?06tMkHad9GZZVbs+VYgHDTTxg2kjy+KVDUEjHGbHkaDuXRSidSF38wI5+HcC?=
+ =?us-ascii?Q?3g8oPRRQQ9Iosg6U2FpKVGKgNn0guhGnTXTF+cuVbQGX6l2MlT8JSB6IAAtX?=
+ =?us-ascii?Q?dKNEchP2kAsXSQWRXNV4aMk5UCEigCej5HkP+9XWvBk8AibspzBKQmd+k8vK?=
+ =?us-ascii?Q?62J3CN0pvNLSKCCK3i+/fD7Ao041eW8MTCq+cMCZ4ZT2TpfhKgNd5kaEg0IR?=
+ =?us-ascii?Q?l/nYzK3Xxy+WM+UfDEkHlQjvGzzIG23gBwwPv9Iabfk7IC0ISgQn9qRt7CTA?=
+ =?us-ascii?Q?hWaof1L9vzn0njslCedoKzRQsnd1O/dEuJQ09w4owyuB+pjlsyTrXHzAnV4A?=
+ =?us-ascii?Q?FphYQxs9rxaNHl1dT0FdKQmWUuNF5afaCsVbCuQULFL/7LC/W0aufhS3twOv?=
+ =?us-ascii?Q?kTgNBR71K15eNJUkgqojVCS+7lIBM/ChzYsubVlKx0S2AGEgu1l+iKbu5Cv+?=
+ =?us-ascii?Q?u6DSWK7xIHK/U/RkUkjSSbZgWkFFmx0+jbN0csJbFN2QPcZXnNqfWdk6bis2?=
+ =?us-ascii?Q?XwszqIVKN5HqUzTIiPXXvkGrHfCHSmk2dfkq8gJSX7DSgs87vJSlslO1DOpj?=
+ =?us-ascii?Q?hhuX46JRQbFbNihpxMxjt9EHZgJQ4B70uxO4Rx70Xa+dOKItr35RRftvlk5w?=
+ =?us-ascii?Q?sZG7vmRP13wLxSkHMFvt/2z6o+bTVaT7pAdIu/PJwCKTUvB+n150yBkIkmt4?=
+ =?us-ascii?Q?+p5Df9B1wZDXr79XVci2W5twE6n2T2wva6e3UrQX3LcdFaDpxRNt8Iwn+w9Y?=
+ =?us-ascii?Q?gcdTGPDO8assNluZhYJEORLKyMo0Ika8/bp9Y0I98oFGIXnq8bR8Llo9o1LB?=
+ =?us-ascii?Q?nI3oh084AjjzugLoz8jSZv38o/10aUEjCEwd5w1ma8PI0dD7wkvWoQZDcNnV?=
+ =?us-ascii?Q?d1NITSLIwC6qmt/JjwhP+l9wuWHbXhdoj3fouNXno+4tU1n5Nn2FLDpFK48O?=
+ =?us-ascii?Q?97uNvKzlr1MzrV9oM4tor1yWlnaPUNWJ3aEo5TEoCZlwOb9U6DEw3q3U7H1y?=
+ =?us-ascii?Q?enUzdPtusAd+B+avY8gexNsnWSRYofQkL6mE9zf+NexpaKF1gUc0/zBvfDIu?=
+ =?us-ascii?Q?vfS961qfjV/TL+g=3D?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(10070799003)(1800799024)(366016)(38070700021); DIR:OUT;
+ IPV:NLI; SFV:NSPM; H:DB9PR04MB8409.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(19092799006)(38070700021); DIR:OUT;
  SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?jSBGalvTS9inXXTcOCbycwx7rotezT2kd4h13nuCCL9KGMLDPgyrNYMc8P2Z?=
- =?us-ascii?Q?SgV0rzk0QLNjGlc93FQWpd2VjWNmxSHY9aA1oBT0qwoHRZcxq9Ctekg1bWgR?=
- =?us-ascii?Q?NXRwYkaEJ9dqnSNHmpZLjNpQzWdh4bO/ae8bxq5RQtIoa6bpDBoWd2dZSyP2?=
- =?us-ascii?Q?F+xAWhRcW58ePXyn21DKyNIhk+gEnivb6GFiZXWr2tKU43RHgzYv9lP8b6vF?=
- =?us-ascii?Q?1paLPqQdc0NVSWT8B+izI6GiyMFTXXq7PFnIm7JuDXYAasyYKVImUETlpoSa?=
- =?us-ascii?Q?DBoEGE7SZfCVsugqFGsE/8mrf/woga7DYXycZvNBqgzTAEnFELMtavn4lED/?=
- =?us-ascii?Q?n369cjoXQZ5s+kOwC36R8tFLF7bDVSEYa5+TO1Hl9WgY9esAZBBInHNh1yET?=
- =?us-ascii?Q?sTzpA27RvDW8z8T6SaFA6NK7sXX2GQWaA3xc5sdXcsmDYOvr38N63HitLq3U?=
- =?us-ascii?Q?yohbWSesYFXp5ps59AL+MYf0I1c55ThpzoM4i5G0XEWH3+KXhS/IRESCE1bE?=
- =?us-ascii?Q?SeOnC0jO1+VWhLPNCOh9mEFlgAJ96I2nK5jA78+SYeX+Arhqzyzge0fUlYZL?=
- =?us-ascii?Q?BxZWkSby4kTMl+e3fJkIIx/Sp0haGaaBDSJg6D9mqOeiQ0X9EwxpYizsxkDT?=
- =?us-ascii?Q?J40b+MgZ5kqLba2JnqTuiWC8v2cM+ByPpTVDp9YcpalxA3cQktQ+nLaLpHLE?=
- =?us-ascii?Q?OPX01rmKIbkKB5Y9xH96nIjrORjTLnlk/Cjxu/a+uzclprtYWam8CwDh7SE4?=
- =?us-ascii?Q?RdvTpVkHsDjv8z6UHv5tmK+BfN3TM7aF629focnCZqb2eEkEyBfdejUah9Wb?=
- =?us-ascii?Q?sUgMV3x8A1mYoP+o09g16dkdZoMQG081hONDtNzQzarXcLdmcCuTM1JRCQdq?=
- =?us-ascii?Q?7/oYIbHKilHGJGMkxJ/1vMj5LASbTSoqq+jOY+y0uhcb01KH4P2qBkxUbOD9?=
- =?us-ascii?Q?aRcd4MaK8rzj8v/iDL2YqDJWq37wE0iDHITuoXYSnlgwVr7AxEXJMhw/ec0q?=
- =?us-ascii?Q?7I1B1Yz9BnsjyFR2bUDBdd1i1lFHyJpfWhZHE7L0w5J1zzO7mgr3V6aqcde1?=
- =?us-ascii?Q?BcXmU4qp2rRGvdn7Xtnm1uj4Y/PA1ySuSUOfg0JPkDVo9QNC3bfcvL+Q9nJs?=
- =?us-ascii?Q?yVJAYPEv0xmQZD9cg/7kwGzz3yeADO+kZ45ej/WpFjUSOMOI0yg1bUtsMWU4?=
- =?us-ascii?Q?nEEPg60qjFXjTDNUoitBw6OoUkW5K6Zel+BCR53eiiRw5Ct5f0K1SQu1C3ZA?=
- =?us-ascii?Q?ggFDP+LSUCp/ARYE5FVoy/mtJWzzSHQHIQBDqnW+lxR/5rifHTCTPoDWTX5z?=
- =?us-ascii?Q?/VYUNU/Swkc2RHxXbL/yC860BawpfWNG2Ey2V6qlm9HPSy2aUNihJFn2iyPg?=
- =?us-ascii?Q?u2yIbVjvZCDgL/mo3Cw8717nr/5QRf5IURbcauy655mqskKMhjzG3RpWgNPX?=
- =?us-ascii?Q?Zr86SG4YvULUq7HNoGQ2uZqBgllyCFKaUpgHIId0+0/G9pXOixO6MlSkbPxH?=
- =?us-ascii?Q?hPF5Oy9afDxVOqZ+HUH8l9u2Z3QQrDbcnClenuQtCwku5rpCCezFsA9zwRkN?=
- =?us-ascii?Q?XHtaFmwlZGYv7UurGeHlT7a/44GKK93TaF8fUai77eZw4z271/884t3cr7MG?=
- =?us-ascii?Q?eMM6vbKVwqyTBdLVeqJ/HI4oHkT8fv/ieZUdKEW/nROQ?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?qDTxS5HEsOENGoIcMrox0aMSteYM1dMhRip0poWUVCckcYMwnjmx8iwJ5HVM?=
+ =?us-ascii?Q?2/9jeSwiJM/HJbewqWQJQkfF9Gs8LLaVZ6uniWAGim817wlCwJPlZVLbwFxs?=
+ =?us-ascii?Q?bRNnrMHgE5/66nwB330wPixfs4pGhVpjMH3LxnhA5heGF7cA3cJ+IfQ1S/dk?=
+ =?us-ascii?Q?qaT2l3lzij5H6gHbmZDvUiCzRQGNBatrnkpdZDp8wzI+jsRmG8pvXmXNLusD?=
+ =?us-ascii?Q?Mnt37RQeaAZzVSce1XtOx9kq6/dIrdejmIrLW3QQ5HveEYJBjBJ5HChrIgRD?=
+ =?us-ascii?Q?YF8mz0wLKhSqY+mv200HAOcH5BO95ygjQ/YhgjZ+2p54UjzmPRYeBw+MYHAP?=
+ =?us-ascii?Q?CX0hMqGeejy7nBH5VPFPKzFBHQt+IcutHxQ3iN/hzA3IUzAvcsgwcaICF5H8?=
+ =?us-ascii?Q?lO1LUCspsHeQgf0c5Y5rVvWXsFVLcT79VqveFkdic5Q78x38XJ4MyRa8gQA9?=
+ =?us-ascii?Q?vjMXHdrqRqY2rznkkJ3DG/OPgVrCj7GwDUinbg9ep3JIvvdds1cihtRyALrn?=
+ =?us-ascii?Q?u5e3v3bINqPh3RV5oHcKBW+W4buHDICd65MKuW361dv83MHxMIhuvFc7/dja?=
+ =?us-ascii?Q?Gwh52QNuC9/4Dg1wQ17OOLsIrFZGmFStv9DDnlVCvUekgQQdRkCiNWHk+tk9?=
+ =?us-ascii?Q?pf0K88cAlSqZOXa6L+yM6TgySZpL2bPEux1kXjHPeBC32wqbLd4iz8Cf3ZaW?=
+ =?us-ascii?Q?FE+ev83pQktvPd0djwEr+eSP3J0ysSSxAHoAfjRYL2Kh3yMpNacTQMtp1Y2G?=
+ =?us-ascii?Q?ZnBPJsFgsW5FWbByaJnPY59OVGVoJruWHni3ugyurb2R8CatEpxB7S5qsg+i?=
+ =?us-ascii?Q?dZf0K7MXXZPSh6CiLUXitHnOZhRrnHW2IOyY5KS94O0cSytmykx1Jh3BCd2g?=
+ =?us-ascii?Q?e+cwyeOZvUlux7rkqXLe4OG8I4f5oLw56eSYiC6c1tJQEiY56lNt9dCwYEcX?=
+ =?us-ascii?Q?RQnJhlevx6cn7ZQlyjJkM6lEuf9JNJqaggwCO6ZpgJ+XZR89RytXHI0z+9DE?=
+ =?us-ascii?Q?qLyAOJRd6DBaPTUrIiB9yLly6iaG914o/CuNrHtQKPmZFbhSFIntPbf9NhBB?=
+ =?us-ascii?Q?UfCVrULurAn5JMYSUwemu3LKy/XdvFaOGNlmWZn8sEBaECx8slu60ejZTgJI?=
+ =?us-ascii?Q?6GPUNAVUM83DwYAAlZhe34jB6B5OdKq2YgtbIdfb+g014ZTiZCqUP7tHXnIB?=
+ =?us-ascii?Q?6vs0leyGshK6UCYSjMeK9k/ldFn12Xd9QbaXenZDevNF38YGkXs1WcOOJq9I?=
+ =?us-ascii?Q?Qtn2dz6QtCk9dD2qCGaUjUSPNhHwY25kYT2+EY9Z9evA27B8u61iYsF6yNV9?=
+ =?us-ascii?Q?tyJpUFIACxr2j6BYsBUCMHcIY60yRA+bIRmQNVKmjk/eoa57zVUzWTqgM70A?=
+ =?us-ascii?Q?cnkXOAd1K6ZZgYD2oiK2EAEfvh1qKmEr4j+DY5FSK1Wk+cvqXhBnvfEyM8Uo?=
+ =?us-ascii?Q?XGMH+Snf2ZmWpsMq51jSo/Tz9fHqYGbNHSTsbSIO91eJWicfaksxLZBouyRx?=
+ =?us-ascii?Q?Q1dz/D+sIUz3WCyImGo+Zg6WrRoPL/kkIIpSXLGT5ZHrHByfoXgt0fnKqVgP?=
+ =?us-ascii?Q?R/+++AOueXpNknlH4B/HvcWHWlo31mL3CK6Landn?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
+X-OriginatorOrg: nxp.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 42368764-ec94-4435-a17e-08ddfcc0fbd9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Sep 2025 05:53:14.5136 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB8409.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a1d6a52-5933-46ed-9c61-08ddfce889dd
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Sep 2025 10:36:23.1975 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: hpVrzmx1JKbjOnjSqh8d1LlOYvfngrr20wAC3sYj177whu9W5VjamirQD0BJXYL9YwjqbrUX7zOjvklZZWsjFg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR03MB7034
-X-Mailman-Approved-At: Fri, 26 Sep 2025 18:05:54 +0200
+X-MS-Exchange-CrossTenant-userprincipalname: Ok7dBU8Sq2QF4UriTw5HOSeVnUwXyR4nK2EpsIqZPhKEu7/HA9ZtPAlnBb1O+8R7OFfqArq6x3vKX7Oe2NAzZQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR04MB7389
+X-Mailman-Approved-At: Fri, 26 Sep 2025 18:06:11 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,28 +169,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
->  config DWC_ETH_XGMAC
-> -        bool "Synopsys DWC Ethernet XGMAC device support"
-> +        bool
->  	select PHYLIB
->          help
->            This driver supports the Synopsys Designware Ethernet XGMAC (1=
-0G @@
 
-That case we shall remove the DWC_ETH_XGMAC config from our
-socfpga defconfig?
+> -----Original Message-----
+> From: Peng Fan (OSS) <peng.fan@oss.nxp.com>
+> Sent: Tuesday, September 23, 2025 2:43 PM
+> To: Gaurav Jain <gaurav.jain@nxp.com>
+> Cc: Horia Geanta <horia.geanta@nxp.com>; Pankaj Gupta
+> <pankaj.gupta@nxp.com>; Varun Sethi <V.Sethi@nxp.com>; Silvano Di Ninno
+> <silvano.dininno@nxp.com>; Meenakshi Aggarwal
+> <meenakshi.aggarwal@nxp.com>; Tom Rini <trini@konsulko.com>; Fabio
+> Estevam <festevam@gmail.com>; Peng Fan <peng.fan@nxp.com>; Simon Glass
+> <sjg@chromium.org>; Baehring, Olaf <olaf.baehring@draeger.com>; Heinrich
+> Schuchardt <xypron.glpk@gmx.de>; u-boot@lists.denx.de
+> Subject: Re: [PATCH] crypto/rng: double the entropy delay interval for re=
+try
+>=20
+> Hi Gaurav,
+>=20
+> On Fri, Sep 05, 2025 at 03:03:48PM +0530, Gaurav Jain wrote:
+> >during entropy evaluation, if the generated samples fail any
+> >statistical test, then, all of the bits will be discarded, and a second
+> >set of samples will be generated and tested.
+> >
+> >the entropy delay interval should be doubled before performing retry.
+> >
+> >Signed-off-by: Gaurav Jain <gaurav.jain@nxp.com>
+> >---
+> > drivers/crypto/fsl/jr.c | 2 +-
+> > 1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> >diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c index
+> >8f7a821ebf3..07d336c074a 100644
+> >--- a/drivers/crypto/fsl/jr.c
+> >+++ b/drivers/crypto/fsl/jr.c
+> >@@ -642,7 +642,7 @@ static int rng_init(uint8_t sec_idx, ccsr_sec_t *sec=
+)
+> > 		 */
+> > 		if (!inst_handles) {
+> > 			kick_trng(ent_delay, sec);
+> >-			ent_delay +=3D 400;
+> >+			ent_delay =3D ent_delay * 2;
+>=20
+> I not get the point on why need to double, would you please update the co=
+mmit
+> why not 500, 800 or else. What make ent_delay * 2 the best choice?
 
-> -190,7 +190,8 @@ config DWC_ETH_XGMAC_SOCFPGA
->  	bool "Synopsys DWC Ethernet XGMAC device support for SOCFPGA"
->  	select REGMAP
->  	select SYSCON
-> -	depends on ARCH_SOCFPGA && DWC_ETH_XGMAC
-> +	select DWC_ETH_XGMAC
-> +	depends on ARCH_SOCFPGA
->  	default y if TARGET_SOCFPGA_AGILEX5
->  	help
->  	  The Synopsys Designware Ethernet XGMAC IP block with specific diff --
+The typical reason a re-try is required when the entropy delay value is set=
+ too low.
+Therefore, when the re-try is attempted the entropy delay is doubled, thus =
+giving twice as long to generate each bit of entropy.
+This is done to prevent having too many failures.
 
-And preserve this config DWC_ETH_XGMAC_SOCFPGA?
+Regards
+Gaurav Jain
+>=20
+> Thanks,
+> Peng
+>=20
+> > 		}
+> > 		/*
+> > 		 * if instantiate_rng(...) fails, the loop will rerun
+> >--
+> >2.25.1
+> >
