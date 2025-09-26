@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70A66CAC5B8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39D8DCAC5B8
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:06:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6202C838E7;
+	by phobos.denx.de (Postfix) with ESMTP id B8228838F0;
 	Fri, 26 Sep 2025 18:06:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="x9E42ArY";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="xqJBe3+n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FE58836AC; Fri, 26 Sep 2025 16:54:33 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id AEAD383677; Fri, 26 Sep 2025 16:54:35 +0200 (CEST)
+Received: from PA4PR04CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FB90835B9
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:54:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFC09835B9
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:54:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l1gUmY4tabluqt9feq/ketmWNoq+9u3ZU8OY4ONJzpHxcCaCmbzqtBJgivdep1nxFprwyfTxBF07tOfTDYEL78ol+BV7W3T3Hny2bOTiyrD6/kZofSMv77APyw5EKitSg5rgZShLYWLRohtc7can7S2HF8aSpP6Cr0VatU6wlJIk8XH2zEZRvWcBup9QF8MPvvdLiYB+k6OqkOJKppUAlSRMCj3mOnQEbMgyOXNlIVHHDzSKUp1VBX7PrtXKGCP9EuA4DAdcYVeUDBCaQE2Xr8T8WTYid3756kflciDtNU5T/8fB4cq48xLmHNYNspEqSfEAKT5CaMJemdbXzwdT+Q==
+ b=b9iYQQtVDKPYNqO5j/+LKZZSDrcL+vgO3BmySG4cPhY5HIbo1CtA66jyH5swRUXLnGMKIRMhwXdvw+iifqjhRAjW2IZcRoqaJ4atY1+xr+4AgbG3u8/l6lLq8hdM55y2El07rrYysXsDDedB0OXMF49oJvIELzWUVj1qHThA7aBv1R9A0Oe0T2Kby1ZeEPxdSk/+G6yUJSjEDrYjn8MgZ2ksW05BhDm9i3obeR3A23ytJAXsBt8ZToW0xOkxn5Vmz+XF40809whnxDUn7dW8wEBUILI5hmsuJhmDXGzdAcHApIezKfsiQezoENA3z6Rh5KImMiZU7iq9myFZsF0/6w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mKyTAtrVBPov/IfzWDBRdobzSbiXyxlDWbebOklz1YQ=;
- b=cE80E+nw8S0WnK+U3wGCw2lsZzqvgVGgN5mAJBcnrmvAw4TJI0NWL0vh1UCU4skssHJWfBgbi61DIv3zo3oFoS1/DqdbsyPHevch8vU8owke1MuBzvGGeDrO7Q6EwQiGQtNtF91vOXQwBkShzp1br2vXIFFn1BX4ctRE6xD4/W+YY3IHR9Iz+ownmo5wZHj0pF7NJADWNsAD6XAbQ4EbCSCrWHk1OqCTFuhA631JOCy/UsJpMyWYPNaTjObKDql/WwQTe+Kh4sHTUTawtvFt2/qCCzH7MAcfamuiTpuEIEezRQ+udyFLC2m4RM9tgEmMH9NwQvubZ7NfiNGxlHfS+w==
+ bh=aF2Ui9EmKMOLfaYjotwi24zp4kjVZW/06hLbVt7KX+8=;
+ b=a4VPtrBY7nzcP2Q6GScWg2jipT2zDiy/7xTiLVUMAVEx0rSCN8HfgBV/JjHLM2flm51HDdwNBNARlgPu9LCZ/CKrM8fjhlpt/uhhSAVNx7eHFZxZyknB8kzF7Ac0nwHwqxJ9d5mMm8I4rOYVuc9rJEJtRX3vujcmC4LupM8hIXC0UWNOvQLNskP0rJAikVppt17Vw/MuWAtQZsr2mA+dgcNyzKgHfBqVn9clHZW4qVZ+6Ws75QOiyHORZkef25TM4GtyhRDr8l0Mgjyx9RK7hS0TyqpOKkaUf6798IHfWvzPTWkbYTkJSmSUt7ZbW/GIOVOT5YGbVLZ7CtRMJzT4pw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mKyTAtrVBPov/IfzWDBRdobzSbiXyxlDWbebOklz1YQ=;
- b=x9E42ArYlGjZeZRze3/Mr2iQr6o7Tt7VElop7GaUKrgpAKqGjdeHws1O5oQ46pfmjDrvkhoMcoymQ/d9mA2QR41ZBIaCWziPSyy+SeErKgsINyH6pzuCLzEGKTSN98+zLhJYKIvlgkWByo2OzrZdIS4KMtY1u1/b3Iw98VZ3an54UrwVXfpJH0Pvu0sc88ppj6ShBgGiNxo73LZS0/Gr0k8SQAxwOHN1p/NVuwduCYbvGlQgr//vGVmKFC1pahA40KgcG/+AsUXgbQcl+9q2jG9QuTv7L6YjhV2q42mxFxg18dFlTJdRzn98PDJbpK6jPZ3hhnaBJeiEoIRm5y28+A==
+ bh=aF2Ui9EmKMOLfaYjotwi24zp4kjVZW/06hLbVt7KX+8=;
+ b=xqJBe3+nmGqvq2rVKLJzOduBBjv38QoVVKZ1SPYf7RsUCJ4aH4Km56syThdUjako0FYeDp4fcipquZpslyuLXSj6XeFX+r1mkYbW/gvH/Aqyq06Iu1RlH6xCEPnMrQfb7QUrLiQTvGs8R9x1wzX4Sy1236k7vsVLL5ilaG3C0tEXo6NkWoirgGL0BF/VNPDruSkIQNfo7tDwAIl/vNxZFk/ceT4EV3ITieK9XJgypihH4H/2VD482TKOs4JlYHbXx+OTjb98d9POKpXJpeM4jD5nPUxaggrqar53wZySYnXnFgSa+GbBxpv90aAvNV83mWqGg4P1MS6vKAIBiepuiA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by GV2PR04MB11141.eurprd04.prod.outlook.com (2603:10a6:150:27c::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.10; Fri, 26 Sep
- 2025 14:54:29 +0000
+ 2025 14:54:31 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9160.010; Fri, 26 Sep 2025
- 14:54:29 +0000
+ 14:54:31 +0000
 From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Sat, 27 Sep 2025 00:06:15 +0800
-Subject: [PATCH 02/10] firmware: scmi: smt: Use io helpers
+Date: Sat, 27 Sep 2025 00:06:16 +0800
+Subject: [PATCH 03/10] firmware: scmi: smt: Dump more info
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250927-scmi-v1-2-5e9354fb3bff@nxp.com>
+Message-Id: <20250927-scmi-v1-3-5e9354fb3bff@nxp.com>
 References: <20250927-scmi-v1-0-5e9354fb3bff@nxp.com>
 In-Reply-To: <20250927-scmi-v1-0-5e9354fb3bff@nxp.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, 
@@ -72,96 +72,96 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|GV2PR04MB11141:EE_
-X-MS-Office365-Filtering-Correlation-Id: b4836268-5ca9-4457-4b20-08ddfd0c983c
+X-MS-Office365-Filtering-Correlation-Id: 56ff7e61-85c3-4149-03d0-08ddfd0c99a2
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|52116014|376014|19092799006|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ek1nUWJDYktaQkpMdk05d0hleU02UWMwakdQMUdvb3ZxNUNhZ2FzWFBjeGJh?=
- =?utf-8?B?OEhreTNMOEp2c084RjhLSWIzbENVblFWcGJGV05YdThkVTRPNlZqdFhKN2V5?=
- =?utf-8?B?ZEhndlNSM3VqQ0FJdHlIOEF4ZU5PZ1kyVk5XS1RmSjYxZWUycHplN3dOdjYy?=
- =?utf-8?B?N1kvWFZJMld5T0czenc1MDVVUVJJbTBHYkl6REdabFdxN2ZySHN0R3hibVdG?=
- =?utf-8?B?T0tJUlpta3h4bWZKRlAveDJmOGppZHFTelJhOVJKTE1EbHVlT1lhYXpvMTlW?=
- =?utf-8?B?MnR6eW5peGVhZ3B4b1RVTkc1aUYrMENWZ2Y0djFxdXozZms2VUZoKzVyZ2Q1?=
- =?utf-8?B?djVaK2N0OGo5YnNHTlZjd3N2SlhlSjQvNTlQeUtWSVMzZGkyMmZ2SVJXTkdq?=
- =?utf-8?B?NzQyMjd6UGg1NUN0cFVnbHlSbkN2d3Q3WEJ0WFZMaGRFNDhkZzhRS2UxdUhs?=
- =?utf-8?B?enhMWUJrb0NTTCtDcERiOEgzYmJsTk9VMjREUnl4SUhmemhnR3JCUVQ3bjJu?=
- =?utf-8?B?Uk1KRzVSK0pLRS9yM0duSnpQdTkya21odndGN2xWOEhTN0VTaVJMMkVpRzNW?=
- =?utf-8?B?ZjZCUnk2QkRnNkJmNzJzdWJtTFJreGNZTDN3RHR1Skc4ZG15alF0WEpmUlpG?=
- =?utf-8?B?UjRkdEZBcjhVSXJKZWpTN3lqTXhHaUVDQU1UL0FOTUdJOHlaU0FUaVkrSWZU?=
- =?utf-8?B?Q1p1NERwN1UyV1NGZTNtTGNZQkF3VXIwWTJ1M0NJR3VxV2MrV3NSLzNSeE54?=
- =?utf-8?B?OXlKSjNLQWdKamtCVFV2LzhVRzFTL05zS0Y4SEVTTWExYVd3a1JmUVRyNjlT?=
- =?utf-8?B?akJuV3RIVkVkaVRjMXYzaHlCbnVVTTh4QUwwOXJ4U1NLSTFGNENKYzV2TVZH?=
- =?utf-8?B?T0VLZWJIbTFKdVdrMVpnYUdjY2pZTUU0K3BKQk5zTWxiM3VEZjBUTWY3ejR0?=
- =?utf-8?B?dzR5VmxlQjh2RVM4d3hpRWViL0VPdXU4bjlvZGkrellUUDNnWDZQcWNHcmhL?=
- =?utf-8?B?ZGZ5Y01ycjBiWXAwcURvQ3hyOEM2TXdza3RIbXZUaHZhWCs0bnBGeHdaTWts?=
- =?utf-8?B?SUxEeFYvbGNKbkJNZUttVGF2dGozSlJ0aEZtbG5CMC9HQy9FcWsvZ3RmRVRQ?=
- =?utf-8?B?eTM2elpack9aWjloTDNINGd0UGJUa0tHN044bndVczB6K2JOUk9YOFd3RGpQ?=
- =?utf-8?B?Z0VHbDhnbVAxVUxXS09UVmt1MkRKQmxCNUowL0c5Zm5vbzdObEhHb2VyK2RU?=
- =?utf-8?B?QUhLenZ4SUVzSjEzbUNCMHMxbVoycnFEeVQxb0s5MWE5TmdSc3p5NWhBQnM1?=
- =?utf-8?B?ZE1ySldjeTBSNi9nd2prczg4YzNIR3VNRysxSkxlMmVCbUZDVmUrQWtHUDUv?=
- =?utf-8?B?UU9JK1RiczQzU0M5d2tNWkc3cVUvQW1TUXNVbmtGWFRDOG5naTNlYjZPVkZs?=
- =?utf-8?B?NVBxRmdsak9BUkhvSFBhWXVwajZ1MXNyUXNOREl3M3Y0akNKNTQyYkg5Q1Fm?=
- =?utf-8?B?QkgrVnJqLzI1QWpQS3pDeUtTQTJZTDlvdjdTRzI0T0d3cEVacGdJUklndzlZ?=
- =?utf-8?B?MmpYeThpaXMxWEt5VXE2WmRya3BiRkZsdkg3OTZDUS8zdEh2cTkzclhudGZQ?=
- =?utf-8?B?MEVhZU84bGJNMGQ3UlVvdVNsSXJ2Wm1pYXRBUkhocFQ2STc0YTZ3WEdpQWJl?=
- =?utf-8?B?R0FHTnhObWxNbkpXR1dLTHNPSU4xY0UwbzNQTy93Q25iODBNRUQzRVBFZHVQ?=
- =?utf-8?B?R0FlTTEybXlwMno5dVFCTDhHWVJMMW1tdFlpc3VDKzl5UTBOSkRPVi9FSG5w?=
- =?utf-8?B?WnkrckJDWU44QUt4VVV3dXFhWWFtTUJzSVEwdWFHSXFGcEN6UVkxTUd0WEc1?=
- =?utf-8?B?QW8yKzVKdDE2YncvNmNJRmJXbHdvRUFybncyUUZzNHNKVzRBVTlzTFJ6K0tj?=
- =?utf-8?B?QVNRSTBtcWRaYjM0bmJlR2QvaEhwTDJFYVNnOWh6WUR2bkVXN2Y3aEtzKzlR?=
- =?utf-8?B?U0Z5dWtNVE13PT0=?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MnVKb0VweVIxdGxOdE04Q2s4QlhrckN4NUhNK1FUNEpEL1JramlqT00xZUNG?=
+ =?utf-8?B?aTJ4STRMeVUxQkV6SW9JOHlyMDR5Z1p6MDdHUFNoNjgyekdJOHR0akdJeXVT?=
+ =?utf-8?B?cGdFQ3ljZG1oT0xlTEMzeC9XM3FQMnFGS01VM3ZtblI5U0lkUGg3SUZjRWM0?=
+ =?utf-8?B?S24vUHRXd1V5ZEhkQWlRak9TTFJ3K25IZVU0aklaWFBXKzhHc3hpTVVLdFh4?=
+ =?utf-8?B?c2Q3NHh1dE43dEhpZ1M3SE0rNjlNRWt5RzB0Q1JmR1VXeWpEWmZvNlBDMTRN?=
+ =?utf-8?B?QzQyOWMwdkE0TlpiTWlBQzZId2NOdkRsV1llUkFxOVlsMGxRd0NKUXVndjdr?=
+ =?utf-8?B?Wnh3YWlXQnpPSHBGK2hPQUNMQmRvWXJ5enlIcGRiMHphVThMS212UXE2c0tw?=
+ =?utf-8?B?QkY3TmRacUMxMG9ob1Y5WkdNYVRkUjRWVUZIdlE0NFhJdVlNT2FISkJTYStw?=
+ =?utf-8?B?b3c2YmdHYXdrTm1idTFVbjk0T1YyT2VaZ09JZG40aVpLS2VLeHVNSGMyWDU3?=
+ =?utf-8?B?T2h1ckwrRzJNdmUvMDJFcXo1L3dnZHBjb2xaYzlmWGtkQmRUQ2c3clhWclUx?=
+ =?utf-8?B?WERTRU5IYzFyVGJUWVVoNWJjMllzS3lVcUl5VjU1OW9rWW8rN3A4WFlOUWU4?=
+ =?utf-8?B?YWhvdklWbDREK1RLMjdQbjV4eExsS1BSd0htVmlkcU02UW5IRWMveHNKQmJU?=
+ =?utf-8?B?M01NVlBzY3RXaTVjNFFXeVBDQStMT3gzcHZuRkk2V3VrVm9rYk1vKzV5L1Rz?=
+ =?utf-8?B?dUxIdzJpUG5JaWtXT21HalRoR1FIcG8vR2FmVTZxRkpTbk1jQkIxUi95YjNs?=
+ =?utf-8?B?SHhOaDBaZHVKWTZJMEMxZ3BKWGZ6ZFdaOEhNU2p5L1M4WHpickpQRFY2b0dX?=
+ =?utf-8?B?d0Eyazd0bC9waENjZWVXbTFoaUJEMjc2MHZmOG1yaDRiUFVIdlYrUnZyN1BO?=
+ =?utf-8?B?TGViY1J5d2ZBN3BEallFSG5VRmQyK0d5ZTdjdEtlaUVJZjlJSlB6MjFTR3kw?=
+ =?utf-8?B?bndiS0trWXFROWQxQkpxRXVDdDBQS1NjQWNQeEIvanZqNm5udDM5MTRHa01M?=
+ =?utf-8?B?Vlprb3d1YVdtbUtEU0dTajFxaENOcW8zZEVUZEJ3Um5Dc2NXQW5NZnQvRTZ0?=
+ =?utf-8?B?QzVqeXc1c21mKytRMUsxbXdTYUxZQ2d6NG14ekNtTW9Oa1NOODdTbUFVTUgv?=
+ =?utf-8?B?SmZsUzhaTXBEc3AzOGtSb1ZFcmdzRGU4ODdicktXaXEzK0JwdkxvS1NLVUY4?=
+ =?utf-8?B?QWRkaGxaZTZrZ2lrWngrMEZIeldBZlZ4RzNHdGNsdWFJZEtLa1pwaXRLVlBW?=
+ =?utf-8?B?RXlvR012c25yNTNTVUhhVStZcHhOTTNncjZhY1l5UzhUamF4UFFKd0N0N0hH?=
+ =?utf-8?B?VTFhV3JqNlgwZlNsVlFsWVlGUnNWSWdobEdFWDgrSTV4Q2s0WkFyMzN0MWJV?=
+ =?utf-8?B?WDU1cTYwcStmZUxIUlJLMjZOSUJZR0k2Umh4a1U1TWxHWFRyR1g4TUFwRTdB?=
+ =?utf-8?B?OFBHdDBiamxYMFRkRlpxaWpqNCtXVG1UdDYzWW9SQ0tWT255K3d5cEExR291?=
+ =?utf-8?B?WXRacXRseWVYUFB1MWo0WFhQdG9jTXZMMDZhZU1IY3FicWNmRytTSVo0THdU?=
+ =?utf-8?B?R2xIUStnZ0txMWwzUDhFSStFREgxc2J6cHE1ZFJlTjRKSkFHRTE3cmphcGx3?=
+ =?utf-8?B?VjdHOFNrMVh2OEFJcmVjTWk5VlNLdUNkcTVBQzRuOFBCb0VyYXJBRmdKSFkw?=
+ =?utf-8?B?ZzRRTFdsWk95WlcxVG9rbk92eFA3Q1ZCK3lFYnBrVkxWZk5nMDlCekNhclIv?=
+ =?utf-8?B?WHZRbzZwWlg1SUtyUjFwWCtCaHJaaTlXeG1CdWpiOFlQQkRkOHVlMFBFU2JJ?=
+ =?utf-8?B?ZGlCWHBlWFZpRnIwbE9ROHVEMnlLZ0gwM3FwbmNUTS9Na2ZpVFlDcVI3M1ps?=
+ =?utf-8?B?Z3Fxa2R2NjVsUWUwYm41bnpKcjNYZ2p4NmhYVGsreExYVzhyZGRmNTQ2NWIz?=
+ =?utf-8?B?NnZ3RFExVWJRPT0=?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(52116014)(376014)(19092799006)(366016)(1800799024)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YzRQaitqOE5YeHVBc0Q5VVVGUm1XM1g3ZDhGVlRtWlUzbTlxMFBVaWJwWWpn?=
- =?utf-8?B?QURkUmRUTmgxalhoSkxNY3RjNE82WWZDenV6Z01WMXIwTmpSL1RmeWVGSXBI?=
- =?utf-8?B?MExJa2cvUmpHMlZhbUNjNUVXRlFkNUJkZXR6dFRHNXpPKzE4R0duNE9UUlpJ?=
- =?utf-8?B?dksxSml4V3BuZUZhOXFUbjFWMnRIQjFHY2tkdWVDMS9sOWRMdElXSjFEWng5?=
- =?utf-8?B?K1VMM3hUUVVuSlZ3Q1ZtSkFnZEc4Nm5QV3lNSENFR3d4S0VkTVZ6ckZEejVE?=
- =?utf-8?B?Ykkwc25GK2xrSjFabmtNd0xpbURZcVBOdUpqSktOUklyNTdFMGxVL2tnNGVa?=
- =?utf-8?B?Wmgzbnp5MEt4WkxVSjBiZTlxV3FlalZLZld1cXhBUmxORGVqZFRnc3ZSN244?=
- =?utf-8?B?cmpiR0tkMTBsOTg3N3k5WDNEU3YwcUVmRzFsMk9TdVN5cEZESEE3RTc5Nzls?=
- =?utf-8?B?UFAwUzBUMGhvRFljV2FVVGlZQzdRckdMVVI4VUphN0hVckQ3MTRVS01aWk16?=
- =?utf-8?B?RWxycnJ4NUdHbk5rZWEyTVhrNS8xdVJLV0dlMCtVZXdIZmVhR3ZvMWhXT2xE?=
- =?utf-8?B?ZjhWSVdoQlVWeWlsMDR5RFQ3MVhZYllUbUljcWJlMEZTajFNb1RxYUN3RTFw?=
- =?utf-8?B?UDgyTlBsK0Z3ZUM5eVBzaUZvdXBVY1RjNllkaTBWaEVoN29ZWDh0UTQ0d1NC?=
- =?utf-8?B?bmUrS0ZVS2gxR1VFWnJwSVlHY2dQbmlNRHBETEJHYXRQTnh3RGRQa1NBczVi?=
- =?utf-8?B?VGZpdndRZmVjdWJac2JiaHAxaXk1aE11S2dJZHVwalMyMTdHZFdhS2lVdFhw?=
- =?utf-8?B?ZzZZRDUzMHFRZ2xNVHcwZGplUjVwZDdvS1ZEekxybFJyQWJubFhxdk9ialY1?=
- =?utf-8?B?Q1NFRklSRDZ2a3hqVC9mZ0sxcVQ4ZG9wZ2s5cDNIVndlWTFnQjZFZk5KWHdY?=
- =?utf-8?B?c3JSNW9EckZvckVHNTVIaTg4eDBtMEpVZW1sWEtndzRJeUtXQWtBT3NoYmFh?=
- =?utf-8?B?YUxkK2F6dEo5cyt5V1lyRlBzQ2VBcGljSzIwS0ZPNENuc0tFSWxkWndhRmdo?=
- =?utf-8?B?YzBBbC9JWUNkMEZsU1FCQzc5ZmZXKzA4MytVejhZaEMxcGpFejZjRXdiQjZJ?=
- =?utf-8?B?a2JuT3ZpT0gwdkwxOVVQWDZJeTlIckQybHQ1Q3h1TGVrNHhVbUltTXRtNlQ4?=
- =?utf-8?B?WFJIUjdPWUhFR1g5M2EzQ2cwOUxBeURpTFpoL3dUN05lUE9ZOFdnVjlXMU5G?=
- =?utf-8?B?b0lxQWhmMjA3dVp3dTRtM3VvYUpTQmZKZE1QTSt1bSsrK2k1c0dvZ3VkZE9j?=
- =?utf-8?B?QkJQZmVhbnFxeUFPSG5FeFB3RUVsSDErRDNlZC96NURYQk0rbSsxSm9zRHZo?=
- =?utf-8?B?enE4UkxlcHZhUm9DVllNUUJ1bTBTNHRtbTMwK21QVjdIdnFBMk5sb0lBZGdP?=
- =?utf-8?B?VmtBZmEvYXphZXhjN054NEMwODNTQkRjSG9oZkNhT1hNV2pvSDZ0WmJzWVlO?=
- =?utf-8?B?UWtVUmo1V0J0M3ZhMXplclNvVW1uK202T3lsQXpQamFaNHFMYm9UbXB2UmRK?=
- =?utf-8?B?UDZpaEM3NUpjMUdRRnplMS8rUENyZGQrUEswYXhhOVY2N1VEdUZHRjhLU3N4?=
- =?utf-8?B?MHlNM0tic3I5NEhWY2RuZkJUTkEvaXZaV2RCMG8wbHBPZUI3ZjY5a2FJbnEv?=
- =?utf-8?B?bEhCZkxxSHMyQkhNQUY4SFhLOEVtRm1JYVJCRW1EQnlVNlNSYkVUS1VEN2Jp?=
- =?utf-8?B?NU8yV0FhRTJRbjJnOEVPT2NPa2JGc3E2RS9oclF2T256WXpwUmxkZUFiK2xm?=
- =?utf-8?B?WnduUndUc1d1WFJKNUJlY28vL1hHZzNtRjBaQjYyUmZsdTJRZXZjVC9GQ2hG?=
- =?utf-8?B?djZJQlFyVmFxazRCMDFYYW05Zk83cGFHYjhnRTJLckdQRHRyRUZtWkh3OUdJ?=
- =?utf-8?B?VUlwN0hWV1kxUU9FMWdQTDBkMjZ5K0paMng4T1MvSEhhSVVlNkRhVFNMQzN0?=
- =?utf-8?B?NUhBOWNpVUFqUmxDMDhaeTNlMVdQcmw1L0g0RDIwbWlZN0k0dFkvUFZZaExG?=
- =?utf-8?B?dWxrOThqaWVBejBXWXpzZXFIZE9sZ2pIRjZZNjJ4L0tlWHpWd1lQRnNwVklV?=
- =?utf-8?Q?mneKsTiF9zhPliKXV3nju9OlR?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZVhYcjBDK1I3RFFaNXNMR051bWJ2WmdhWFZ2Z2x6ZUdXUnc2b0NKVmhLZ3RD?=
+ =?utf-8?B?Q0Fqcmc3bk1QeVhRNmxhMWNTTE9HVUhWdVhaZ203WSs0Z0s0ZzY4RXpuend5?=
+ =?utf-8?B?akpYTEpFM3FvU05rbmY4WkYrOU91TGNHYzNlWWV5STJEUG1mUldoYlZBNm53?=
+ =?utf-8?B?TFltTkgwUGtGREVJYkJkdkFnaExTTlNYUDRqclVzT3Vod0NPbjhaVHdia1cx?=
+ =?utf-8?B?ZlpQQVN6eUk3RXdwWnpEVjJjOWdCUE5SN1lBMENUR2NOS0tVeFM1dkRzQ3Fv?=
+ =?utf-8?B?eC9STXpsL3FFZTZKT1QveUcxek5OekFmMVRGUXJ3WWpnL1Z4WXNlK3M5Y2pS?=
+ =?utf-8?B?UDRJTUhwbHJSS2xia2RyeVo3QWt3MHJPcDFDYUtTWjhGR2RLNjRUSUNpOTB0?=
+ =?utf-8?B?RnFjenNCd0NvbzZZdTFtYURRc1dOUmwxRktoaCtPZFdZY3NUd1RJR2lNZlND?=
+ =?utf-8?B?cVNWWkV6d2VmYTUybXhHVzBzNGJXQlVWQUtQT1lEOWphWmJwL1VzLzFQZUJK?=
+ =?utf-8?B?b242S0ZPSmtjazlVNHpiOGFVYVo3QWpKWkdmUjBweHZPOGczUEJxWUZMVURW?=
+ =?utf-8?B?UGNKYkh2VW12NEIvVlJsUnpVZWJLb3lwSWFxS2lSRUYwRGJLcDBxOHh3ODJS?=
+ =?utf-8?B?NXVKamhURHgvSnZaYzYyYmpxSFVKS0YyMTFnOVBwNXRWcmE2UGZzcUo4cXpQ?=
+ =?utf-8?B?UEYwbDAwQkZObHp6Q0xEMFBJV242RVVkTDNlenF1ZFl1dkFDajZNZEZVbmRS?=
+ =?utf-8?B?ZjJBY2tmTHVYVVRFT0tqTXFrTm56Qm1lNHdYNHpvQlZ3Y001Q3ErSnBnVklH?=
+ =?utf-8?B?VStlMlFvZlA5TTBIODRJc2E3Wm9MRUVLbXJBVkVnSGZ0YkkrWVN5dEM0TTJR?=
+ =?utf-8?B?bEYwQTd4K0pOaC8wZHdPWTRRczhIYzN3cjYvNEZTemZIRVFLMEVOOEE2aE5t?=
+ =?utf-8?B?YTN4eVBrSGFwdHVxbEdwQ0NucGlFS0pYN3ZKRTZmeWR0a2hwK2p0RjcxZ0hT?=
+ =?utf-8?B?bWk1QzZJeGFxTno2TGlEN3VyU0YrL0VzR2ZMWENNMENVOTM5MzR4RXZNMUJR?=
+ =?utf-8?B?MHd1KzhHRjVQTUJzT0ZEcnJZRGFXRjcyWWZOUGpxMVA5d1hUUW9aZXV0Y1Br?=
+ =?utf-8?B?SXRrZ3JaZUIxMkc0K2FKUlJyeHovTXpCaFNsSVhTSG1ZcUdIVzZMZXN6VDEr?=
+ =?utf-8?B?ZU5YSHI0dm9iYXdXZUc3V2s3UU1BRVBPa04vSFdXM0FISkpHUUo0bTcwNU5F?=
+ =?utf-8?B?cnJaMEs0cnNYZlBBYlgvcERCNDJIZkdpYU1HaS9ocngvSTZXZ09YRXByMzVQ?=
+ =?utf-8?B?RGZTWm5FK2g3d01CMnk0cFpTSklrODFOcUZMSFI1SUcwdVVYalVxY1V6OFBs?=
+ =?utf-8?B?WSsrZEJNQmRGNWpwYTBnTnlBNWs3SVRtZ2xXeEt3TnNrcE1LcDlaRE1xM2xI?=
+ =?utf-8?B?T0hmQ0tRcXNsSndVRUpXSFdYY0VyT3E3dkprcUxQNzNZR0FhejVFUWtzMUx3?=
+ =?utf-8?B?VldBTHZHZmYzYllRNVhkSWhsc0UzU1JnZVdVTjl4YUhoMkFyWWk4WHB0UStH?=
+ =?utf-8?B?Yjl3NEoxNDZBOVVGZ29tNUo4a0dGVG1ZZm9iMUZGckJYMmNOc29DaU02UVdp?=
+ =?utf-8?B?QlcyZXZRK3JXZlY0TGlWOE51Y3BPY0gvVzZKUVc3U01sVnRaN0NWN1c4UGJG?=
+ =?utf-8?B?dmJpeVVqUXZNTDVSTjB5eDA0SGxDSmFHWGEvZlFDUkdDZWhCVU9laUgyazVa?=
+ =?utf-8?B?WnlhbURxSVJaRThKdFJCNno3bUZWNTI5M1I5ckN1elpnNXVwT0FiVTJaSXYw?=
+ =?utf-8?B?RmIybjlMVTczM2htVEFsamM1Tk5YWmNOczBCbzZpeVBUM2hOQnlBWnY1dWMv?=
+ =?utf-8?B?ZnpOSHBaN2JKd3JML1FOQVlhZGtDTzhOQzlRRGxYNXpucmFDS3JyWW9sZkx3?=
+ =?utf-8?B?MGRJWWJhK2dKNGxLeFZ6dUVEMzZpRUE5aGhZMVZCL3gwc1VzQ1VhMXBjckpa?=
+ =?utf-8?B?dVhSS0cxNS9HR3pRNGlWK1I3TUN3b3JhK3l3WDhaejZNVGttWUI4b3lNVlFY?=
+ =?utf-8?B?NndZd1hTdURyWDQ2ejJITXZjQVdMTGRjZkgxclk3bjQxTlh5bWRhL0JkM3dE?=
+ =?utf-8?Q?usijiDLQEwiHIQQYmA9oS8zXe?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b4836268-5ca9-4457-4b20-08ddfd0c983c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 56ff7e61-85c3-4149-03d0-08ddfd0c99a2
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2025 14:54:29.5652 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2025 14:54:31.7679 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xPK4pKsrXUtFQSIPBpoOeXm5sJ+hckRSCu1lyjkwTqeCtSWAwUrCoRKHAAuplQhPl2QgunDxbKYV/OpCk6/NTA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: iSoUnKE8/lmvBalQy/10/nBPTdCM85S2FzaG0q2/dGt665jAZKxf5gxb9nJ+JLebetjh9orQAbMkh7bucEzG2A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11141
 X-Mailman-Approved-At: Fri, 26 Sep 2025 18:06:25 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -182,126 +182,60 @@ X-Virus-Status: Clean
 
 From: Peng Fan <peng.fan@nxp.com>
 
-It is not good practice to directly use "hdr->x" to read/write the hdr,
-because the SCMI buffer may not mapped as normal memory. Following Linux
-Kernel, using ioread32/iowrite32/memcpy_[from,to]io for smt header read,
-write.
+"Buffer too small" is too vague, dump more info to make it easier to
+debug issues.
+Change dev_dbg to dev_err when buffer is too small.
 
 Signed-off-by: Peng Fan <peng.fan@nxp.com>
 ---
- drivers/firmware/scmi/smt.c | 42 ++++++++++++++++++++++--------------------
- 1 file changed, 22 insertions(+), 20 deletions(-)
+ drivers/firmware/scmi/smt.c | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/firmware/scmi/smt.c b/drivers/firmware/scmi/smt.c
-index a7721bbe54ee286fe88dabb7e015944feaea2843..8bc721c664794e6629c50939707a756786353f9b 100644
+index 8bc721c664794e6629c50939707a756786353f9b..5eb78387344dd874fe3cc3fea38a0586ae149ef4 100644
 --- a/drivers/firmware/scmi/smt.c
 +++ b/drivers/firmware/scmi/smt.c
-@@ -25,9 +25,9 @@ static void scmi_smt_enable_intr(struct scmi_smt *smt, bool enable)
- 	struct scmi_smt_header *hdr = (void *)smt->buf;
+@@ -92,7 +92,9 @@ int scmi_write_msg_to_smt(struct udevice *dev, struct scmi_smt *smt,
  
- 	if (enable)
--		hdr->flags |= SCMI_SHMEM_FLAG_INTR_ENABLED;
-+		iowrite32(ioread32(&hdr->flags) | SCMI_SHMEM_FLAG_INTR_ENABLED, &hdr->flags);
- 	else
--		hdr->flags &= ~SCMI_SHMEM_FLAG_INTR_ENABLED;
-+		iowrite32(ioread32(&hdr->flags) & ~SCMI_SHMEM_FLAG_INTR_ENABLED, &hdr->flags);
- }
- 
- /**
-@@ -85,7 +85,7 @@ int scmi_write_msg_to_smt(struct udevice *dev, struct scmi_smt *smt,
- 	    (!msg->out_msg && msg->out_msg_sz))
- 		return -EINVAL;
- 
--	if (!(hdr->channel_status & SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE)) {
-+	if (!(ioread32(&hdr->channel_status) & SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE)) {
- 		dev_dbg(dev, "Channel busy\n");
- 		return -EBUSY;
- 	}
-@@ -97,12 +97,13 @@ int scmi_write_msg_to_smt(struct udevice *dev, struct scmi_smt *smt,
- 	}
- 
- 	/* Load message in shared memory */
--	hdr->channel_status &= ~SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE;
--	hdr->length = msg->in_msg_sz + sizeof(hdr->msg_header);
--	hdr->msg_header = SMT_HEADER_TOKEN(0) |
--			  SMT_HEADER_MESSAGE_TYPE(0) |
--			  SMT_HEADER_PROTOCOL_ID(msg->protocol_id) |
--			  SMT_HEADER_MESSAGE_ID(msg->message_id);
-+	iowrite32(ioread32(&hdr->channel_status) & ~SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE,
-+		  &hdr->channel_status);
-+	iowrite32(msg->in_msg_sz + sizeof(hdr->msg_header), &hdr->length);
-+	iowrite32(SMT_HEADER_TOKEN(0) |
-+		  SMT_HEADER_MESSAGE_TYPE(0) |
-+		  SMT_HEADER_PROTOCOL_ID(msg->protocol_id) |
-+		  SMT_HEADER_MESSAGE_ID(msg->message_id), &hdr->msg_header);
- 
- 	memcpy_toio(hdr->msg_payload, msg->in_msg, msg->in_msg_sz);
- 
-@@ -118,23 +119,23 @@ int scmi_read_resp_from_smt(struct udevice *dev, struct scmi_smt *smt,
- {
- 	struct scmi_smt_header *hdr = (void *)smt->buf;
- 
--	if (!(hdr->channel_status & SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE)) {
-+	if (!(ioread32(&hdr->channel_status) & SCMI_SHMEM_CHAN_STAT_CHANNEL_FREE)) {
- 		dev_err(dev, "Channel unexpectedly busy\n");
- 		return -EBUSY;
- 	}
- 
--	if (hdr->channel_status & SCMI_SHMEM_CHAN_STAT_CHANNEL_ERROR) {
-+	if (ioread32(&hdr->channel_status) & SCMI_SHMEM_CHAN_STAT_CHANNEL_ERROR) {
- 		dev_err(dev, "Channel error reported, reset channel\n");
- 		return -ECOMM;
- 	}
- 
--	if (hdr->length > msg->out_msg_sz + sizeof(hdr->msg_header)) {
-+	if (ioread32(&hdr->length) > msg->out_msg_sz + sizeof(hdr->msg_header)) {
- 		dev_err(dev, "Buffer too small\n");
+ 	if (smt->size < (sizeof(*hdr) + msg->in_msg_sz) ||
+ 	    smt->size < (sizeof(*hdr) + msg->out_msg_sz)) {
+-		dev_dbg(dev, "Buffer too small\n");
++		dev_err(dev,
++			"Buffer write too small: mst->size:%zu, in_msg_sz:%zu, out_msg_sz:%zu\n",
++			smt->size, msg->in_msg_sz, msg->out_msg_sz);
  		return -ETOOSMALL;
  	}
  
- 	/* Get the data */
--	msg->out_msg_sz = hdr->length - sizeof(hdr->msg_header);
-+	msg->out_msg_sz = ioread32(&hdr->length) - sizeof(hdr->msg_header);
- 	memcpy_fromio(msg->out_msg, hdr->msg_payload, msg->out_msg_sz);
- 
- 	return 0;
-@@ -147,7 +148,8 @@ void scmi_clear_smt_channel(struct scmi_smt *smt)
- {
- 	struct scmi_smt_header *hdr = (void *)smt->buf;
- 
--	hdr->channel_status &= ~SCMI_SHMEM_CHAN_STAT_CHANNEL_ERROR;
-+	iowrite32(ioread32(&hdr->channel_status) & ~SCMI_SHMEM_CHAN_STAT_CHANNEL_ERROR,
-+		  &hdr->channel_status);
- }
- 
- /**
-@@ -171,12 +173,12 @@ int scmi_msg_to_smt_msg(struct udevice *dev, struct scmi_smt *smt,
- 
- 	*buf_size = msg->in_msg_sz + sizeof(hdr->msg_header);
- 
--	hdr->msg_header = SMT_HEADER_TOKEN(0) |
--			  SMT_HEADER_MESSAGE_TYPE(0) |
--			  SMT_HEADER_PROTOCOL_ID(msg->protocol_id) |
--			  SMT_HEADER_MESSAGE_ID(msg->message_id);
-+	iowrite32(SMT_HEADER_TOKEN(0) |
-+		  SMT_HEADER_MESSAGE_TYPE(0) |
-+		  SMT_HEADER_PROTOCOL_ID(msg->protocol_id) |
-+		  SMT_HEADER_MESSAGE_ID(msg->message_id), &hdr->msg_header);
- 
--	memcpy(hdr->msg_payload, msg->in_msg, msg->in_msg_sz);
-+	memcpy_fromio(hdr->msg_payload, msg->in_msg, msg->in_msg_sz);
- 
- 	return 0;
- }
-@@ -196,7 +198,7 @@ int scmi_msg_from_smt_msg(struct udevice *dev, struct scmi_smt *smt,
+@@ -130,7 +132,8 @@ int scmi_read_resp_from_smt(struct udevice *dev, struct scmi_smt *smt,
  	}
  
- 	msg->out_msg_sz = buf_size - sizeof(hdr->msg_header);
--	memcpy(msg->out_msg, hdr->msg_payload, msg->out_msg_sz);
-+	memcpy_toio(msg->out_msg, hdr->msg_payload, msg->out_msg_sz);
+ 	if (ioread32(&hdr->length) > msg->out_msg_sz + sizeof(hdr->msg_header)) {
+-		dev_err(dev, "Buffer too small\n");
++		dev_err(dev, "Buffer too small: hdr->length:%u, out_msg_sz:%zu\n",
++			ioread32(&hdr->length), msg->out_msg_sz);
+ 		return -ETOOSMALL;
+ 	}
  
- 	return 0;
- }
+@@ -167,7 +170,8 @@ int scmi_msg_to_smt_msg(struct udevice *dev, struct scmi_smt *smt,
+ 
+ 	if (smt->size < (sizeof(*hdr) + msg->in_msg_sz) ||
+ 	    smt->size < (sizeof(*hdr) + msg->out_msg_sz)) {
+-		dev_dbg(dev, "Buffer too small\n");
++		dev_err(dev, "Buffer too small: mst->size:%zu, in_msg_sz:%zu, out_msg_sz:%zu\n",
++			smt->size, msg->in_msg_sz, msg->out_msg_sz);
+ 		return -ETOOSMALL;
+ 	}
+ 
+@@ -193,7 +197,8 @@ int scmi_msg_from_smt_msg(struct udevice *dev, struct scmi_smt *smt,
+ 	struct scmi_smt_msg_header *hdr = (void *)smt->buf;
+ 
+ 	if (buf_size > msg->out_msg_sz + sizeof(hdr->msg_header)) {
+-		dev_err(dev, "Buffer too small\n");
++		dev_err(dev, "Buffer too small: buf_size:%zu, out_msg_sz:%zu\n",
++			buf_size, msg->out_msg_sz);
+ 		return -ETOOSMALL;
+ 	}
+ 
 
 -- 
 2.35.3
