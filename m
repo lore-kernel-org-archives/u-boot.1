@@ -4,91 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5791BCAC5AE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:49:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A604DCAC5B8
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:53:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E81758362A;
-	Fri, 26 Sep 2025 16:49:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 396C8835CD;
+	Fri, 26 Sep 2025 16:53:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dA0uI3RC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="DQHxbSNU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80527836B4; Fri, 26 Sep 2025 16:49:12 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 82C00835FD; Fri, 26 Sep 2025 16:53:41 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 337F7835FD
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:49:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18119835B9
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:53:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-afcb7a16441so370995566b.2
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 07:49:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1758898150; x=1759502950; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WLr54B91d4IpiXhRvBFa2MDGHg0VLo/etFhgutMQM9w=;
- b=dA0uI3RC2C4YIqANmFQeJ0nGjk7uTQ4XxuFJjFYWWGahVssR64ohvmWCJIWVxUwnrk
- a7IKzAHtewljBf420885OGcvJZSxy38MfmLjGxEtWzq3z8zASD54elBUEepSKuMm/hMn
- WSsFoqhT3VnQtOkHF0aDoEL/cd9JKLkNtOfBo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758898150; x=1759502950;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WLr54B91d4IpiXhRvBFa2MDGHg0VLo/etFhgutMQM9w=;
- b=VhLiDaZ11Fbbws/gv0EP0XZpUpxyUoV8XklwJ2WaGjrZCYCwfmiaaR0VGdbGk0TpiB
- vtO7ewQRXkrz0LqctpGy9IJL/MTT9wQ0NaBiGP0fzcOIkXi7ONrBW2ch58thQOZkkP7X
- I3jsq3MoUYvFhPq9GZUHCVyuVrD6voPmispYuImAQKXFnJcLM4PCmGnczxHHxHsLlEGc
- 9N6pYkmgeGrOUp0hEWjCvCJU4T9zeAcKb2eXKCqodYrgDmUR4bq1bfMuirOL0QYd5wiJ
- ES2z3JYKecgcf7l9fiFUZ/C6E3A3uLbAsBsaitvF0iAY7fZQgfLXhru4BClAfv3/Pcdc
- NCXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYZ5S8mG045NqPG0avUf7IdjeN83pEvZHLcQuyaMnL+Idl7iDqlsN2jwhtzvdF0esqqk0Tkr4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7Ndl5xKqZMEEtBkBWx/faYKbWj0adUD4VcXpWWIsOEjoK8sD8
- F9iIlfkPNeZnX27fkSsUNxjcKyKReJ9aHnjb1DNPolXTUXpfMmQ6a6gJJyUMAZlvVYmZ+Frw0/5
- ZwTwl7hkefVd+JALppnCzVGcdlj017AmSHyo9GbcI
-X-Gm-Gg: ASbGncuDVwbTaBUpu63tDexlnavRfznmSTEF4eQP0l1jMzvGuymZtsM+TMOeF4RKm6V
- SjMC9qEiJL1GEfuM6Km8XjyMU/+yHTmnwSHqYCd+5C/+x9cdEayHNQk+CESFJmN/R5d2Sx6Qj01
- Di1pf8gXsAUV8Lh8KDC7kAmwV3+vi7+ejrBRsITGFJTgXlKZOVAzz5gPnYNqgjELd3krOa40rVA
- opP+ZhmOCsLERuY
-X-Google-Smtp-Source: AGHT+IFJ8/O7IYQqkvL6mtxXq5e9wuIEYdoj7Suphvew6rkaRVLttKVMoCGJk+jEASu93GG4YPy5484T5nqDoGKgm5w=
-X-Received: by 2002:a17:907:948a:b0:b29:1c4b:3d4e with SMTP id
- a640c23a62f3a-b34b8d96295mr802778266b.28.1758898149550; Fri, 26 Sep 2025
- 07:49:09 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1758898418; x=1759503218; i=xypron.glpk@gmx.de;
+ bh=lxgH9x51PBDQPCkTwvbAah4w7viMPAqxMQa8mYvoU4I=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=DQHxbSNUyCUSxJ3SzMV+eOwEF29HVfZcBGUwKl/ZyMYYVSS2JtlTnPdQgh60txdf
+ kfxyty4ynukx1odtrMdCyIninpNB3Ft8G8NcRApWBC7QCZP3D7i7hyUY7kU35WcPX
+ wiw5TMyJ625cABvHVvr7lPqa8BB9YW6mJpQXZ00l/yyCq8lsUhqDmEcm26DNryg5S
+ I2XQp4zWYu7UmkdHaizwEZtEnXny12n6K8yWlqOJkWiOuNM+5Cn9Q2YeImDFIPhkf
+ iH2uID3gyyxTnZDzggjse1w1xmKQZ+lB2I+cBv8Jl8nQmWhklYhAjDuFFpf7oQJT6
+ VC9T2tf3uFEfdoEFGA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N63Ra-1uHrgo1fxI-0127RQ; Fri, 26
+ Sep 2025 16:53:38 +0200
+Message-ID: <0ce44ac9-bfd0-4356-bbe5-1745c31cb729@gmx.de>
+Date: Fri, 26 Sep 2025 16:53:32 +0200
 MIME-Version: 1.0
-References: <20250914110021.4103-1-aristo.chen@canonical.com>
- <20250924113733.uz6hozszbuynemtc@giddy>
- <20250924114317.742ae4ntrb4mvuyq@expert>
- <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
- <20250924135139.GH197373@bill-the-cat>
- <20250924140524.fy46p7ifr4oxh5mc@uncooked>
- <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
- <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
-In-Reply-To: <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 26 Sep 2025 08:48:57 -0600
-X-Gm-Features: AS18NWDDj7B04aV7UojXsbr8kqKBVI_t8eCFVySKIMJ7eTHeaBI2P3GxYkQdBj8
-Message-ID: <CAFLszTiNSnyw86oi_k3F0okOmQn2U6pU7SwrQc0e-tGHd_Py=g@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
- and fix related test/DTS issues
-To: Aristo Chen <jj251510319013@gmail.com>
-Cc: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>,
- E Shattow <e@freeshell.de>, 
- u-boot@lists.denx.de, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
- paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de, 
- w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com, 
- n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, 
- ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, 
- alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Bootstd for sunxi
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <CAFLszTg1=XAnzoBEtduADXLS3xQxeNh1Dn_77Dc_V3bTUhhFzA@mail.gmail.com>
+ <20250924163413.GJ197373@bill-the-cat>
+ <CAFLszTh7so42FH2pms7dqzXFSz0vbOcab-GRmFCOaqLe2DL6fw@mail.gmail.com>
+ <20250925010615.GK197373@bill-the-cat>
+ <CAFLszTg5oOzt5poKdify8Hf44WVgy-uyb1tcmaUZ--auTd-xqQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTg5oOzt5poKdify8Hf44WVgy-uyb1tcmaUZ--auTd-xqQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Bo7D/iWuTXY0TaIGs2uA9cEAlr6QNPxLaJ2PqY0BoH4gWZZr2LC
+ 68VToP4i/GkoigSFpOTdnvnme3uMb6Y7syt7R/wTzSdiV6ZmzC6hLadshNB207SV0YxZxqK
+ A9QVcw7kbWGGq3w4RoJtA44q4yEMCNgWE73EHQZkoeeFdNVVHwATIW9NwsWlARkqsQCLHRT
+ Sx3K0Urq1dqsZ6gUinkPw==
+UI-OutboundReport: notjunk:1;M01:P0:wUwlh28FN84=;9L5+fiMQ7IZ1go85/O0XAwR3V5v
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,124 +153,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Aristo,
+On 9/26/25 16:47, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 24 Sept 2025 at 19:06, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Wed, Sep 24, 2025 at 06:34:53PM -0600, Simon Glass wrote:
+>>> Hi Tom,
+>>>
+>>> On Wed, 24 Sept 2025 at 10:34, Tom Rini <trini@konsulko.com> wrote:
+>>>>
+>>>> On Wed, Sep 24, 2025 at 10:28:45AM -0600, Simon Glass wrote:
+>>>>
+>>>>> Hi,
+>>>>>
+>>>>> After the discussion on the call this week and Andre's suggestion of
+>>>>> putting FEL as the first global boothmeth, I took a look this mornin=
+g.
+>>>>>
+>>>>> I created a new v7 series without the 'efi_loader: bootstd: Drop
+>>>>> bootmgr for sunxi' patch.
+>>>>>
+>>>>> It seems to run OK on a Linksprite_pcDuino3 but I'm not sure that is
+>>>>> enough. The FEL boothmeth is first, which is good. But Heinrich did =
+a
+>>>>> series to reorder bootmgr which hasn't landed and specifically I had
+>>>>> concerns about this patch[1].
+>>>>>
+>>>>> Given that Heinrich can't make the calls, I'll talk it through with
+>>>>> him separately and reply on this thread. For now I don't see much
+>>>>> benefit in sending the new v7 series, but I can if desired.
+>>>>
+>>>> The biggest blocking part of the sunxi series became that it showcase=
+d
+>>>> the more generic problem with integration of EFI and standard boot [2=
+]
+>>>> so yes, getting that resolved first is the next big blocker for tryin=
+g
+>>>> to migrate more platforms. It was unclear to me then, and still uncle=
+ar
+>>>> to me now what the value is in exposing more platforms to what I beli=
+eve
+>>>> ends up being a less than optimal experience is compared with what th=
+ey
+>>>> experience today.
+>>>
+>>> I'm not sure about the less-than-optimal, but I suspect this is the
+>>> bootmgr kicking in and checking the network. Heinrich has something
+>>> for that and I'll talk to him in a day or two.
+>>
+>> Well, that's not how [2] was summarized, but it's hard to know without
+>> anyone being able to try it.
+>=20
+> My understanding is that Andre wanted to disable bootmgr for sunxi, or
+> have it look only at devices mentioned by its boot variables, but
+> Heinrich did not.
 
-On Thu, 25 Sept 2025 at 07:50, Aristo Chen <jj251510319013@gmail.com> wrote=
-:
->
-> Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=882=
-4=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:33=E5=AF=AB=E9=81=93=EF=
-=BC=9A
-> >
-> > Nishanth Menon <nm@ti.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=97=A5=
- =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:05=E5=AF=AB=E9=81=93=EF=BC=9A
-> > >
-> > > On 07:51-20250924, Tom Rini wrote:
-> > > > On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
-> > > > > Hi Aristo,
-> > > > >
-> > > > > On 9/24/25 04:43, Nishanth Menon wrote:
-> > > > > > On 06:37-20250924, Nishanth Menon wrote:
-> > > > > >> On 10:59-20250914, Aristo Chen wrote:
-> > > > > >>> This patch series enhances FIT image robustness by adding **m=
-emory
-> > > > > >>> region overlap detection** to `mkimage` and fixing existing o=
-verlaps
-> > > > > >>> in DTS files and `binman` tests.
-> > > > > >
-> > > > > > [...]
-> > > > > >>>
-> > > > > >>
-> > > > > >> Looks like i see a build regression in linux-next after this s=
-eries.
-> > > > > >
-> > > > > > I fat fingered that one.. sorry, I meant u-boot next.
-> > > > > >
-> > > > > >
-> > > > > > Fails at commit 4d84fa1261eb, last pass was on commit d81c11185=
-80f
-> > > > > >
-> > > > > >>
-> > > > > >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced94105f7=
-6
-> > > > > >
-> > > > > > I  believe there are outstanding comments on V1 that have'nt be=
-en
-> > > > > > addressed either. Can we revert/drop this series for now while =
-the
-> > > > > > comments are addressed?
-> > > > > >
-> > > > >
-> > > > > Similar to Nishanth, I am seeing a build regression, itb.map:
-> > > >
-> > > > Sorry for the noise all, I've reverted this in next now.
-> > > >
-> > >
-> > > Thanks Tom.
-> > > --
-> > > Regards,
-> > > Nishanth Menon
-> > > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A3=
-4 DDB5 849D 1736 249D
-> > > https://ti.com/opensource
-> >
-> > Apology for introducing the regression, I will find time to fix them,
-> > and thanks Tom for reverting my patch set to unblock others
-> >
-> > For TIFS stub entries on AM6x platforms and the starfive visionfive2,
-> > sounds like the image in the FIT will be selected during the runtime,
-> > so they are not really overlapping each other. I will need to figure
-> > out other way instead
->
->
-> Thank you all for the feedback on my FIT image overlap detection patch
-> series, and apology again for the issues that I introduced
->
-> Currently what I have in my mind is to have the following 2 changes in
-> my patch set
-> ### 1. Add support for mutually exclusive image groups
-> Some platforms load only one image from a group at runtime. In the
-> device tree, we may have something like this
-> ```
-> tifsstub-hs {
->     // ... existing properties ...
->     mutually-exclusive-group =3D "tifsstub";
-> };
-> tifsstub-fs {
->     // ... existing properties ...
->     mutually-exclusive-group =3D "tifsstub";
-> };
-> ```
-> The overlap checker would then skip validation between images in the
-> same mutually-exclusive-group, while still catching genuine
-> overlaps
->
-> ### 2.  Change from build error to warning
-> Given that there may be edge cases(such as
-> starfive_visionfive2_defconfig) not covered by current CI pipelines,
-> changing overlap
-> detection from a build-stopping error to a warning initially. This would:
-> - Alert developers to potential memory layout issues
-> - Avoid breaking existing working configurations
-> - Allow time to refine the detection logic based on community feedback
-> - Enable a gradual transition to stricter validation once the approach is=
- proven
-> The warning could later become an error once we have confidence in the
-> detection accuracy across all supported platforms.
->
-> Feel free to let me know if you have any concerns or suggestions
+I would assume that I am not the only one that wants to run a Linux=20
+distro on Sunxi with out of the box experience. Ubuntu works just fine=20
+on my devices booting via EFI. Installing BSD also requires EFI.
 
-We should try to have discussions on FIT on the spec github as well,
-e.g. filing an issue at [1] and referring to it here. I'm not sure how
-to link github discussions to a mailing list, so that perhaps just
-create an issue?. FIT is used by most firmware projects at this point,
-many of which don't follow this mailing list.
+Best regards
 
-Regards,
-Simon
+Heinrich
 
->
-> Thanks for your time and guidance!
-> Aristo
+>=20
+>>
+>>>> But since no one can actually test things out and see what is or is n=
+ot
+>>>> different with the switch, yes, you should post v7.
+>>>
+>>> OK, done! Something wrong with CI, but not sure what.
+>>
+>> It seems something is going on with docker.com.
+>=20
+> OK
+>=20
+>>
+>>>> [2]: https://patchwork.ozlabs.org/project/uboot/patch/20241113150938.=
+1534931-4-sjg@chromium.org/#3418689
+>=20
+>=20
+> - Simon
 
-[1] https://github.com/open-source-firmware/flat-image-tree/issues
