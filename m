@@ -4,167 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69622CAC5B0
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 00:51:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DF0FCAC5AE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 04:12:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6263882AE1;
-	Fri, 26 Sep 2025 02:51:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 4B41882A9E;
+	Fri, 26 Sep 2025 06:12:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="V5bSY69p";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="IMVRUwhx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B22FE8206E; Fri, 26 Sep 2025 02:46:00 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 8CC9982AE1; Fri, 26 Sep 2025 06:12:24 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E5CC8004F
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 02:45:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BECAC8206E
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 06:12:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xDIjNsDF8ysrowl0JFp/b3z71LP6BGe34xS1ep8SJWV3vhA6F/d0msh2SLcghn1LOYRG1exGTmIgRz8Aa2pVayi6vTvUngUFCudNyBemJeq7xez2wWx0qip40swo98Q2h87YbDSKrCVUj0geWoolsEV2YPjXMN0zNDqVf6RNyU2ojltoJ4jBjZ8YhC3wzWpvWv0vOJojnbAUcIFd6bfdJwF+xB3qEkdkjk4ubeGxuDA90hlNEeFrgmBt3k5PpohkXGFbG7DWYyirZL5KJDpfJdyVDd0x/H//0NQohjd3Dz7lsu6EHz9dvsAk8wgTslzkzv82/XOvoM+4pSZh0rKbMg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ig7+WOWvyY1mH4ZgVWcNGiUX13MYPPROUz7TenAbS40=;
- b=LmmZvlmv0cvRymwtQAWxECiFYJp9k1+HGg3Sj3EM8nT4hWPJ739U2zgO3znkMnv0wRZbNM9ORKivsVMeV5AyUVpqzriF2b+3e4DtlEZeYKDh6V5/UleMq5dtF20H6czKQ7fl5N2aWGBuPmCnwosTUGHAOSqfcQhvwV19vMoFVz6FStkrrXHQnu26QUrr/nwfhLIM/2QZGNooKmjZCc+wNDCHpB5pToEeI3k50r5DDRWg/eEDJaHqbUg9WVCIl+fCc9O6G/5MR2dgiBuT/q8puUKrp+pQgWQU77GDdiEurNZnrgy1IQG+5I+D8IsXcgxBflYWSkQaKxzJo0jZxuedcw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ig7+WOWvyY1mH4ZgVWcNGiUX13MYPPROUz7TenAbS40=;
- b=V5bSY69p5gq8/Bgx5j69vmKaBckyIuct3mWL1a8WwfEmEc42/iI/Ufc8lsNR0ag5bWWv4P5MWeWTEdc3OvzvBGSO0MwRoiTYfoRcG2+9bsu/6APZi1D3oxyZ1/WKfSUtKBjkF0DayovBesVnV0/kdhtwg0lVXI2r/MfwT9BoY9R4J2PIPiy6WlvCnHCD83T+fFBEpdxczX+kjv4lRpq/ZjH9YlDVVjx95rljhyxZCQnu8jYQs6grpjPXJEi+CBPbloYpFylm2YgpsAV4sPxFWQIstnlCBkl+MgUot+gRnGeltQvwgNoUQJdDH08MpX/v9GAdHcjQcMsRhqzpaG4E0Q==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by PAXPR04MB9327.eurprd04.prod.outlook.com (2603:10a6:102:2b7::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.11; Fri, 26 Sep
- 2025 00:45:55 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9160.010; Fri, 26 Sep 2025
- 00:45:54 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Fri, 26 Sep 2025 09:57:47 +0800
-Subject: [PATCH] MAINTAINERS: Update MMC/POWER/FREESCALE QORIQ
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250926-maintainer-v1-1-3967fbd79dca@nxp.com>
-X-B4-Tracking: v=1; b=H4sIABrz1WgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDSyMz3dzEzLwSIE4t0jU2NjEzNUwySk1NM1ACaigoSk3LrAAbFh1bWws
- AOD2QzFwAAAA=
-X-Change-ID: 20250926-maintainer-334651b2eef0
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.14.2
-X-ClientProxiedBy: SI2P153CA0005.APCP153.PROD.OUTLOOK.COM
- (2603:1096:4:140::11) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 67B5125DD6;
+ Fri, 26 Sep 2025 06:12:21 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id AfJOvTrQkfqf; Fri, 26 Sep 2025 06:12:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1758859940; bh=xiPMtcjgsVWVqzoX0DCsf9uNvUwWolqofWC44RgkPy0=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=IMVRUwhxesV9daPWbElejip1urbD1d9taHpD93nPH6xgyZvqUoUWxuKq4TbEq45Ww
+ idsOnk9Ukgd7eDslrJwYruseYw2/tLQlfJXJMtmeUjuEGDEdu5gsKSPI4ZY563afoT
+ DHXtzXiFfxl6qYThOwIpXgwCyJdzIQSeX9MXiae4R5Lm2jM5quFkhg4pa69RbsZ/0W
+ ytg46+E8H7ykixGUwV8paQx7wtnrsItwELg/9lmrUo7ASn7JMWlB1WYkZhBlUatiDE
+ s3PFuzAMfQzjN8497pHlXaqUrUI7wXc2gX369oiMRbOOj9YeMDshV/SdgbXQ7Wk62D
+ uCXLAu2b5/tAQ==
+Date: Fri, 26 Sep 2025 04:11:54 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: E Shattow <e@freeshell.de>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] Revert "riscv: Add a Zalrsc-only alternative for
+ synchronization in start.S"
+Message-ID: <aNYSirEoll4m18QW@pie>
+References: <20250925160148.21624-1-ziyao@disroot.org>
+ <9113dd29-b862-4722-96d7-ad6d51219050@freeshell.de>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|PAXPR04MB9327:EE_
-X-MS-Office365-Filtering-Correlation-Id: 64d224a3-4d6c-4ffa-b472-08ddfc960ca3
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|52116014|376014|19092799006|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ZjlUUFM1RkZ0NWV6MURRaDBCazk1b0o5RG91R2tJMmN2THpPTE05QVJkNys4?=
- =?utf-8?B?Q25hdUpsSzNOcDZNbE1BUGNYMWtzOTVocjdHb1htOHhOL3FUOVdWaGUzVGJh?=
- =?utf-8?B?NDVLdzl1YktqRmlDUGlhdjJzKytoL1ZzK0RHQjVPOEZTT3NZaDhHQWdtem56?=
- =?utf-8?B?aEhYVGVvdWdNMG5yUUpmMHIvTFpRQVNxT3RROEx6WFY0d1BCZm0wK25nYXRJ?=
- =?utf-8?B?NDNya2twOGN5WEFQL3JyUWhGUW5vdXhkWDFQRzdjeVM2c29LTzVBQUxxR2JE?=
- =?utf-8?B?dUN6aVRLb2g3THcyOThlb3FrVStSR24wSFZJOUxrOHgrR3NzQkRYNWFQT0ZT?=
- =?utf-8?B?TkEzNE1NWjBEZldBY2VTTTF4MDBXTkluQ091NUt5WDBXUGw1RkNaRlFhVjNJ?=
- =?utf-8?B?c25JVStSWmZaWmM4M3lmWmlMSWtSdmtqRi9NTHJoODNvVThqRmdTNW9laVAr?=
- =?utf-8?B?UFVqa1BQUUo4cDdjRlM2ZS83YmRWM1Joa3JRRVN2KytlYXFPUHdYTWtPdElL?=
- =?utf-8?B?ZUVSNk5HU2c3Rm5iSEdUZmx6bFI0TVhJMVB4TUxxNFhjNXF6YWRiWm5rZ1JH?=
- =?utf-8?B?eXl4VUJjdHhkcGVKbkFueHlWblJDcE9VQWEvWFpqZzU0K3A2bWlnSGhRL0Mr?=
- =?utf-8?B?WXNhWlpOUDYrSHBuT2V5Z21NeFVvOXo2YkhubWUzSlQyeG1sdmdodnFjamFO?=
- =?utf-8?B?UllaSWJvN09NVmlqcitzanNVWmltWDJhU092NElOWUtYL1FBTUw4dTBXdUkr?=
- =?utf-8?B?eTVXd0U5VWFJRG1SQ2NiRlN0Qks3ejZhODBpTWpvN0FIOGtWSis5UUQvU0c0?=
- =?utf-8?B?MGFwbFFBZjFNckNRTU50UEdqRkFQeWYyeHdncWgxalhsNFFkSkZtOGxTWEkx?=
- =?utf-8?B?amJsNHhaMEsyOGlyUXIwN3FsbWJsN3g4Sk12anRNNGxUT2RKYUFETWgrOUs1?=
- =?utf-8?B?ZU8yY0pYeC9Eb3lyZzllZC81WjRjQWxoVEFYYnRZSExyL214R0lEN2I0ekFR?=
- =?utf-8?B?UDRGU0NsekpneXp2WldwQ1J2MzVoK1BhRnVTRjVEQ3NZWUI4N0NpY0dka2dK?=
- =?utf-8?B?UmZVTFNKYm9KYyt0ZTNGcUJwcnlTdkszd0tnS0VJckRDNWVSTVFGdzF6RDlx?=
- =?utf-8?B?Uk9NOHdkeGhqMlgyR05GR2pQVFdsa3Q3ajhKdGhTUUVzaWhWQkwyY29iaEFB?=
- =?utf-8?B?aGM3a3JJRXRtcHptYngxOS9lNnM4Q2NvVTd0MVBqZlA2dzlMLzVndlVyb3BS?=
- =?utf-8?B?RkZRK1UrK2dYSnJPR1JOcnJtWU0xK0E0NnI0UVNjVHV6OTdyTzBMVzV0TGFP?=
- =?utf-8?B?TmpENmVvSlQweG55RmZsRmx2TjQyRGtaUlc4bVNZVGgyQ2FqdXZFNWhKYzFG?=
- =?utf-8?B?WGd4ZURRQUl4RnVUa2dSUHdnY2lpa2h4cWJxL2JKb010bnpNRDJDb2lRWFp0?=
- =?utf-8?B?UnBvdWxTNUtId1E1RllpV3k4aXJVaEUxMHZ2YjVzV3RmSjRVeUxZNFhrb3lo?=
- =?utf-8?B?S2RuaUtjN1BtY0ZNc0RubHRLRVpXK2liZkJ2MmM5bkh1ZkQyLzRLRmVaV05G?=
- =?utf-8?B?b0lrTFNSL21rbUFOODJIWlh5MSs3RXhwMGRMeXVZa0d6dUQ3NmFiY1ZkQU5P?=
- =?utf-8?B?SU01M2dKcXoyUk9aMkRVdmpnUThMbVNIdnhLaWIveldqdGlkdi9tMnpFcGJm?=
- =?utf-8?B?M2RTTVBKY3JRUk1CTDMrTytxaHJ1RkxvUk0rNU5vYnR1ejhYKzZ1N1pKTURz?=
- =?utf-8?B?UW1wdlMwNmpRODhqQ2xidFRGOHZnak9lTmpqSGswOVpOaHhqRkMvTk1sWlhz?=
- =?utf-8?B?Ti9nWUZtVkdtVjRRbDJkUnM2WjhNczJLQ05oUTNTWWV3NklYdE1Ock1vSlpi?=
- =?utf-8?B?dEQrRk1pRHNaZTdoeDIzRFhjYlFNWXRKRkdYQU4zWmxuUlRhdUFmaUFWRFJ0?=
- =?utf-8?B?c1ZybzJEUzdoNTVVMmVCWXBKU0Y1UEFLRlFNR3BETE9RYlNWVUFJakRZVjRh?=
- =?utf-8?B?aGVxeWJMN09RPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(52116014)(376014)(19092799006)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cEJiWWlRM0xvc01PSWZVU0R0L3VjV3ZwejFycTVZbHJzWDVnVDRBNFNaSWh0?=
- =?utf-8?B?YW9EQnk5K2xtdTVhQXlOSXNHdUkweVhVTFBOQmhLQWVuQkRqa2tnZkcvcTl2?=
- =?utf-8?B?b0lBeEZNb2xESEdjK2lvVHVUbllyUUpKWHdjRzlyMjJIUStMWjh3K1U5empR?=
- =?utf-8?B?VmhNVW9SenlnendKV2VzOUx5M1dOdlBMM2FLWVpmam9nUWtsYnIyMFlkeElr?=
- =?utf-8?B?d0JCK2dwUGprb2ZYWEI5WG9LN2lVRE55aHdJYmpjdWFQS2JxVDV0WWdWS3dE?=
- =?utf-8?B?WnMwcHN0bGpXSFlLTXVmelJwQnV6SHZsR2FFQ1ByWUVZVUg0YXhHZGhUZ3I0?=
- =?utf-8?B?Y0JSYnVEVUwyY1QzR1I4Vjc3ZWZWSUlZRmU0dXlGeVlrQXRnb0JnQ3VrUE95?=
- =?utf-8?B?VW9kelNjTlBiNWZDWlFTQ3B1TnZhUmpNL0ZQY2p4QlJoUXVpcVI5dUp2bENj?=
- =?utf-8?B?c29BUHM2RmF2UTVyZ21CeW93QjVKSmROamkrbzVwSVNJdjUyaC9xd0dWYVBM?=
- =?utf-8?B?eU0yOWU4ZjhUM1B1ZTZvWnVKdEJyYUJ4REJ2T0xkMmU4ejJmVFlPdTBhWnNI?=
- =?utf-8?B?Z29WRUorVTg2SXZucElUQ2VFNDk5U3k3VDBqMkxPQkUvYkpJTjlYRU5Tc0FH?=
- =?utf-8?B?RnVWbDJyc3V5VGsvcHRXeDlVbVdoUU5hejB5Tno1Mk1NcW5ZUjdMMnpBVkhp?=
- =?utf-8?B?OUFNVGNNU3loOGJkRUZKMzhtNC83REpob2ViajlVaTk3cGo4bmZlb1RrNEZM?=
- =?utf-8?B?WEtxaUJTVC90MWpsRHNCSENsUDAvSW0vTW14MWVwanNqRy9MTUNndGJ6Wkxm?=
- =?utf-8?B?N3d4bGFSaUtmK2ZnbHdrWVoxY0tGbDlJKytvL1RndCsvTElFVTJ3dUFaZ2Rt?=
- =?utf-8?B?RTdCTEFrQXA0V0xOSXRxYUd3RTE5RWt3TS9xYXVPSlovdXhNSm5FSUFkeTZS?=
- =?utf-8?B?LzJPSTVxSjkyeE9haExoRzZ5TlY1Mjc4NXh0UjM3WUFFRk5LWmtNVkNSWDUx?=
- =?utf-8?B?NW5jMVV1bjcyY1BMQXRFQTBwY2xLSkJjMFFkVmpxeWY3RWtaNkJDdnBEb3dG?=
- =?utf-8?B?WjRVZHBDVUhXdEtUWHNFWC9YemY5SHdnTzVMa05LZFdOVnNLeXgxVDNnQnpR?=
- =?utf-8?B?MEpkUDBuUHZVRDhxQnBNZEp4aUEwNko3N0Z5UG9JakpyS1R2Z1g4dnJEb0pH?=
- =?utf-8?B?WHRhYWlObnBBcFZUR2g0K21VbnkySWxPd1dpMUNUSUZSQ1BIbEkxbnQrSnc5?=
- =?utf-8?B?NnpJQ005RFYvM1F1cjRJVmhxMjBwem1ibkMxWnZzSkMwbE9pcXByOTZOTUEw?=
- =?utf-8?B?akFiSkZnZFY4S0F4V1hjMmFSWGQ4U0VYY0JtdThPRks2RzdHYS9raEYwOWlP?=
- =?utf-8?B?R21vV2RqSlFPUlN3NUdQOHpWOFcxQytNakVsYVNBV256ZzNjY01RbjNaeHQ4?=
- =?utf-8?B?VWIxQ2FCYTkrbHIvTThxSlVLQjZmak12UTkzQmpTcGh3dCtCbTVaVUU0TVcy?=
- =?utf-8?B?QW1vUFBSUkxZMG50bWRxZnZ0dldMdkZKWGU1NUJyaHBGR1o0cXBJSGZXbXlo?=
- =?utf-8?B?ZzUreVJWSGRicmgxc1F4ZmVaZWc0eXdHcHFjbVlRSnNLNTRwcUVSeEg4Qzgx?=
- =?utf-8?B?dUpWcDQydFM1Tm55ajR1SU1UM2ErSGZrd0ZlZkNzcG1KYWRkY3dwbzE2Z0d5?=
- =?utf-8?B?QUxtay94TTNJb0ZyWUtTMDJOdVUrVHdXYmxMTmU5WUZ1SWNNU1NWYXI1dGZq?=
- =?utf-8?B?RTRkeEpOZmdLLzFlKzdKOVFjaUFqZ1BSdXVGdFNiZTlGSVk0d0xVN0VtZ0Nl?=
- =?utf-8?B?UFpoUG9Ec3FVSlc2YTFkWlJrV3dIdW4yWVpWeTJ3dERrMVB2QWpSN2ttTE5V?=
- =?utf-8?B?TmthaWUrZDVod2Z4RllEcTVRRzdNVDB0UUgwMXFHWWVBckNETzgwVHhyWE5U?=
- =?utf-8?B?WmMxVDNWU2pGOG5tbFBSQ1FFa094WXJ1dEE5RHBCVDd6bjV3ZU9EeWZxaVpi?=
- =?utf-8?B?cGdkTmdYNWZ6Ym5JOUowWWVrYmU1UlgvV2RlVVBFeFMxY2hBVlJLTU52VENB?=
- =?utf-8?B?K25lS2RFV0RZOWxXUmVLMW9oazdXbk45cGtHc05YTHlGK2pPaHhOWUZ2ZjJw?=
- =?utf-8?Q?Mj/rV3jSHkq8BXHnjClBUfkpr?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 64d224a3-4d6c-4ffa-b472-08ddfc960ca3
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2025 00:45:54.7259 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 6ge4Q43h4B2+Q/MoraS1kd9QQZJTm6kz9Tt1iyqUdL5HJv6Q4vrq3KKS78DetNQJ1oppqfZR5xxsT2mkcP8jnA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9327
-X-Mailman-Approved-At: Fri, 26 Sep 2025 02:51:26 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9113dd29-b862-4722-96d7-ad6d51219050@freeshell.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -181,54 +72,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+On Thu, Sep 25, 2025 at 09:27:25AM -0700, E Shattow wrote:
+> 
+> 
+> On 9/25/25 09:01, Yao Zi wrote:
+> > This reverts commit a681cfecb4346107212f377e2075f6eb1bdc6a2b.
+> > 
+> > It has been reported that the commit causes boot regression for SPL on
+> > StarFive VisionFive 2 or compatible boards. Inspecting the code, I did
+> > spot one logic error for deciding whether Zaamo or Zalrsc is used, and
+> > it's still unclear what exactly causes the regression, let's revert it
+> > for now.
+> > 
+> > Reported-by: E Shattow <e@freeshell.de>
+> > Link: https://lore.kernel.org/u-boot/1871663e-b918-4351-9e9e-97f9a4c73733@freeshell.de/
+> > Signed-off-by: Yao Zi <ziyao@disroot.org>
+> > ---
+> > 
+> > The original series causing the problem[1] contains 3 patches, and I
+> > think it should be enough to revert the change of start.S only, since
+> > the others touch no code, and should be relatively safe. I'll fix the
+> > reverted change up and get it work on VisionFive 2 when I got my new
+> > board. Sorry for the inconvenience.
+> > 
+> > [1]: https://lore.kernel.org/u-boot/20250902081932.21103-1-ziyao@disroot.org/
+> > 
+> >  arch/riscv/cpu/start.S | 26 +-------------------------
+> >  1 file changed, 1 insertion(+), 25 deletions(-)
+> > 
+> > diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
+> > index 6324ff585d4..7bafdfd390a 100644
+> > --- a/arch/riscv/cpu/start.S
+> > +++ b/arch/riscv/cpu/start.S
+> > @@ -151,15 +151,8 @@ call_harts_early_init:
+> >  	 */
+> >  	la	t0, hart_lottery
+> >  	li	t1, 1
+> > -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> >  	amoswap.w s2, t1, 0(t0)
+> >  	bnez	s2, wait_for_gd_init
+> > -#else
+> > -	lr.w	s2, (t0)
+> > -	bnez	s2, wait_for_gd_init
+> > -	sc.w	s2, t1, (t0)
+> > -	bnez	s2, wait_for_gd_init
+> > -#endif
+> >  #else
+> >  	/*
+> >  	 * FIXME: gp is set before it is initialized. If an XIP U-Boot ever
+> > @@ -184,12 +177,7 @@ call_harts_early_init:
+> >  #if !CONFIG_IS_ENABLED(XIP)
+> >  #ifdef CONFIG_AVAILABLE_HARTS
+> >  	la	t0, available_harts_lock
+> > -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> >  	amoswap.w.rl zero, zero, 0(t0)
+> > -#else
+> > -	fence	rw, w
+> > -	sw	zero, 0(t0)
+> > -#endif
+> >  #endif
+> >  
+> >  wait_for_gd_init:
+> > @@ -202,14 +190,7 @@ wait_for_gd_init:
+> >  #ifdef CONFIG_AVAILABLE_HARTS
+> >  	la	t0, available_harts_lock
+> >  	li	t1, 1
+> > -1:
+> > -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> > -	amoswap.w.aq t1, t1, 0(t0)
+> > -#else
+> > -	lr.w.aq	t1, 0(t0)
+> > -	bnez	t1, 1b
+> > -	sc.w.rl t1, t1, 0(t0)
+> > -#endif
+> > +1:	amoswap.w.aq t1, t1, 0(t0)
+> >  	bnez	t1, 1b
+> >  
+> >  	/* register available harts in the available_harts mask */
+> > @@ -219,12 +200,7 @@ wait_for_gd_init:
+> >  	or	t2, t2, t1
+> >  	SREG	t2, GD_AVAILABLE_HARTS(gp)
+> >  
+> > -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> >  	amoswap.w.rl zero, zero, 0(t0)
+> > -#else
+> > -	fence	rw, w
+> > -	sw	zero, 0(t0)
+> > -#endif
+> >  #endif
+> >  
+> >  	/*
+> 
+> Argument in favor of reverting three patches in the series are as: I do
+> not understand the use of invisible config symbols in this way for a
+> transition of something so dependent on toolchain implementation. How
+> would I express this from menuconfig selections without directly editing
+> symbols in the config ?
 
-- Update MMC entry to match 'mmc' using 'N'
-- Add myself as POWER maintainer for regulator and pmic patches. I have
-  started to handle relevant patches.
-- Update QORIQ maintainer. Priyanka has moved to work on other stuff, I
-  have been handling this for quite some time.
+I'm not sure what do you mean about "invisible", the two newly
+introduced Kconfig symbols have their description, are visible in
+menuconfig and thus could be changed by hand manually.
 
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- MAINTAINERS | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+I introduced these symbols for describing whether Zaamo/Zalrsc is
+availalbe on the targetted platform, and expecting one of them to be
+explicitly disabled by board-level config if a platform doesn't support
+Zalrsc or Zaamo, like how CONFIG_RISCV_ISA_A is tackled in
+ibex-ast2700_defconfig.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b030242a2d894863e477c8fa0f4e83d640225569..9d050fade8b2feff003c5ece2e4022d9530bb5d7 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1226,7 +1226,7 @@ S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-freebsd.git
- 
- FREESCALE QORIQ
--M:	Priyanka Jain <priyanka.jain@nxp.com>
-+M:	Peng Fan <peng.fan@nxp.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git
- F:	drivers/watchdog/sp805_wdt.c
-@@ -1408,6 +1408,7 @@ M:	Jaehoon Chung <jh80.chung@samsung.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-mmc.git
- F:	drivers/mmc/
-+N:	mmc
- 
- NETWORK
- M:	Joe Hershberger <joe.hershberger@ni.com>
-@@ -1513,6 +1514,7 @@ F:	test/cmd/pci_mps.c
- 
- POWER
- M:	Jaehoon Chung <jh80.chung@samsung.com>
-+M:	Peng Fan <peng.fan@nxp.com>
- S:	Maintained
- T:	git https://source.denx.de/u-boot/custodians/u-boot-pmic.git
- F:	drivers/power/
+> I only have some JH7110 boards (and one EIC7700X there is not U-Boot for
+> this upstream yet) that I can offer to do some testing for, what all
+> hardware for should this affect?  It's every riscv board ?
 
----
-base-commit: 44c4919e9dd6c162b237633ba689441eca9a149c
-change-id: 20250926-maintainer-334651b2eef0
+Technically speaking, yes, it introduces two Kconfig symbols that change
+the logic of determining the ISA extension string for a build, so every
+board is "affected".
+
+However, among all the RISC-V board-level configs we've already
+supported, only ibex-ast2700_defconfig explicitly disables
+CONFIG_RISCV_ISA_A, which means all other ports are compiled with "a"
+extension contained in ISA extension string before. For these ports, "a"
+will still be added to the ISA extension string, since
+CONFIG_RISCV_ISA_ZAAMO and CONFIG_RISCV_ISA_ZALRSC are default to "y".
+
+For ibex-ast2700_defconfig, as long as we adjust the defconfig to
+disable CONFIG_RISCV_ISA_ZAAMO and CONFIG_RISCV_ISA_ZALRSC, it will be
+built with the same ISA extension string as before (without "a"), too,
+which is done in PATCH 2.
+
+I only revert PATCH 3 since it really causes problems: I'm willing to
+rework it, and since it depends on PATCH 1, 2, they'll be probably added
+back as-is latter when I send v3 if they have been reverted together. If
+it's the case, I think reverting only PATCH 3 makes Git log clearer.
+
+If it's found PATCH 1, 2 really break something, I'm willing to revert
+them. Thanks for the comment.
+
+> Anyhow a revert of this one patch in the series is the minimum to
+> restore working SPL for starfive visionfive2 (as Star64, and Mars
+> CM/Lite). Thanks, Yao!
+> 
+> Acked-by: E Shattow <e@freeshell.de>
+> 
 
 Best regards,
--- 
-Peng Fan <peng.fan@nxp.com>
-
+Yao Zi
