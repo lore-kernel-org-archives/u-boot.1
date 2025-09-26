@@ -4,209 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E597DCAC5AE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:10:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20727CAC5B8
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 16:27:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 643F3834D4;
-	Fri, 26 Sep 2025 18:10:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B89983887;
+	Fri, 26 Sep 2025 18:27:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arm.com header.i=@arm.com header.b="bsCS6yGI";
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="bsCS6yGI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IVyRIjph";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AC6F836A3; Fri, 26 Sep 2025 18:10:32 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D2B568388B; Fri, 26 Sep 2025 18:27:10 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8AE483448
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 18:10:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A428D83868
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 18:27:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Harrison.Mutai@arm.com
-ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
- b=cxGWgso5tWAeffwqNTCfKNTJTEca2q471hTr6FUgfvuxvpBegcLNt1U9NBO+RuwLFN/SfYoLtvAMCMZPVHau3sxeAffGHjGs6Vn7sgV3Hhd4C7ZrsHQOMdDF8X4+k7lHZ72/U9Q6pIott0xl7Bg81GKcbx/uCcsCluhkIm8g8tDSDJ8/Ipljev+ih/hH2D+GIfOngnzzf/kim9n0E8tll1cLZ+pUsS6Yw6lyvChbvo3bdXEcWS7eXEwf3+aTenLA+d+QO7+NI4c2sGy9yzwJo33m9kRs3jDz9IfeBEsBUrouspzJhV819s6JG0tGFVMuXzJkmiCn9+crKPd3c0XTPA==
-ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rn98KZGSfDIWACqJEyIMQHfp6GpyStcoL9+SnLg7NR0=;
- b=KZBIV/p9qjXri96ILtcnYaudkSbu5zTzuml5nyKgX1is5+M72eiV6wrlJ7eiW+9XCEH1CTtcl9fP4btEOB1UvTKpBkvGB1rY5q++PaZxfbYsvWUZjOYkZp9KbE80J0/Qw4qKzorC2YTUVsEsccNqaP7DY3k0SAB1Ur9kjoNDG2nDBmtjAYvFogpoNqDUh1ds3XoOfF2P9uDrRxfwEacGUNNkRcrP9oRQxc3/SrxI0802OqQB3EwXJQJvGdJ046Qiq8pQ2Bf9Vg66l3Hlh/xAGf9Uc2yXv5NdI+xDthmsP6ZgrFFNCkK5vIGSp79fcBwsoqSIRQ7somdOKQ/YF+RUGw==
-ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
- 4.158.2.129) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=arm.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
- dkim=pass (signature was verified) header.d=arm.com; arc=pass (0 oda=1 ltdi=1
- spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
- dmarc=[1,1,header.from=arm.com])
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rn98KZGSfDIWACqJEyIMQHfp6GpyStcoL9+SnLg7NR0=;
- b=bsCS6yGIWpeC6IurFl2IgnQqVK7cx/0urZ3JLssoGnPuc1vbnHm59uuyuCTuKSJONdNpQVwRexkw33lPAUzE0sjugzUTzNF9pJF4NW6DV1hlW3vgNPk+LRuRWEBiEoGjQrYaRfpj/j4/oiDSVfCO9hWpQFDy9xvzSYsRK0JB81Y=
-Received: from DB8PR03CA0029.eurprd03.prod.outlook.com (2603:10a6:10:be::42)
- by AS2PR08MB10082.eurprd08.prod.outlook.com (2603:10a6:20b:62f::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.13; Fri, 26 Sep
- 2025 16:10:28 +0000
-Received: from DB5PEPF00014B98.eurprd02.prod.outlook.com
- (2603:10a6:10:be:cafe::eb) by DB8PR03CA0029.outlook.office365.com
- (2603:10a6:10:be::42) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.13 via Frontend Transport; Fri,
- 26 Sep 2025 16:10:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 4.158.2.129)
- smtp.mailfrom=arm.com; dkim=pass (signature was verified)
- header.d=arm.com;dmarc=pass action=none header.from=arm.com;
-Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
- 4.158.2.129 as permitted sender) receiver=protection.outlook.com;
- client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
-Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- DB5PEPF00014B98.mail.protection.outlook.com (10.167.8.165) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.9
- via Frontend Transport; Fri, 26 Sep 2025 16:10:26 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=dR/L57500X2l1PEkiRdjg8GgNEn9OtkZuoaryXqlnj5jRd9HjPAeNfoA5SDGrm4ZHWPy3uyggxFucGBbpFeyQTBPQVokUcogqyKDTwfXbzSVKQAZqiABOfwoJNjyWhhsb50wRfF4upJ9vepGIcqKavfXKyHCSi+26Y/XECRGLrnlTPAYU7Td6EV7a4h6C62fYA+kRcgE82KDP6d+yZ0etlEPGRNaI2GwXE18uYPYRzeIiWybOjxEIW4Z7Y6X5whFnlmrigLmxvFs7TfwlpuaeiPyLBjoiNq+kGviebroEpUjbPo8Tnrb54bD4x+rTfnW2qktGdNkqqDKtlY6W+XDSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rn98KZGSfDIWACqJEyIMQHfp6GpyStcoL9+SnLg7NR0=;
- b=IE19gpcvJyemrsaGRjrJAjpDf6/kzU8Jeq0aabPnKg1PCS+bP/CSSRqveSLJC/6Qvp5puYRIFZsHiD3v6wkgOKvwdHp5WETN/dKRUzVJHvVsexyx1cKUiYVdFM7ZuSKdHwmCDEo3a1hWDbWvL1t4GEGoA45y8L4eRbF3fuFh1LwGeq5wMOgpuFVGJ6LhjS7jKjHr3feQq9pVulWmrzGE4EQcRgzJZr7oJNOTlp6NP2xToP6ZMgtr9wHiDfVZtxQjrlP2W3d43p/2sNinAahEq91d7R6olTfUun5hj2230qRTSTBMFlU2rEJmvG9rC4Hya0k2B0koiSRwRRil712kzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
- header.d=arm.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rn98KZGSfDIWACqJEyIMQHfp6GpyStcoL9+SnLg7NR0=;
- b=bsCS6yGIWpeC6IurFl2IgnQqVK7cx/0urZ3JLssoGnPuc1vbnHm59uuyuCTuKSJONdNpQVwRexkw33lPAUzE0sjugzUTzNF9pJF4NW6DV1hlW3vgNPk+LRuRWEBiEoGjQrYaRfpj/j4/oiDSVfCO9hWpQFDy9xvzSYsRK0JB81Y=
-Authentication-Results-Original: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arm.com;
-Received: from DU4PR08MB11188.eurprd08.prod.outlook.com (2603:10a6:10:571::11)
- by DB9PR08MB10380.eurprd08.prod.outlook.com (2603:10a6:10:3d8::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9137.20; Fri, 26 Sep
- 2025 16:09:54 +0000
-Received: from DU4PR08MB11188.eurprd08.prod.outlook.com
- ([fe80::5926:9f0b:ea5d:24df]) by DU4PR08MB11188.eurprd08.prod.outlook.com
- ([fe80::5926:9f0b:ea5d:24df%5]) with mapi id 15.20.9160.008; Fri, 26 Sep 2025
- 16:09:54 +0000
-Message-ID: <ada31617-374d-4f87-97eb-c91da2c4e9b5@arm.com>
-Date: Fri, 26 Sep 2025 17:09:53 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Transfer List Checksum Correction and Impact on Bloblist
-Content-Language: en-GB
-References: <b7c008b2-0a1f-4971-af4e-428faf818d4e@arm.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>
-Cc: nd <nd@arm.com>
-From: Harrison Mutai <harrison.mutai@arm.com>
-In-Reply-To: <b7c008b2-0a1f-4971-af4e-428faf818d4e@arm.com>
-X-Forwarded-Message-Id: <b7c008b2-0a1f-4971-af4e-428faf818d4e@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0396.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:18f::23) To DU4PR08MB11188.eurprd08.prod.outlook.com
- (2603:10a6:10:571::11)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-62fa0653cd1so3525149a12.0
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 09:27:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1758904028; x=1759508828; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zF+adX+qpdpqUN9cwkf6LKBhd8K27VipqF1ls6gbWuA=;
+ b=IVyRIjphNC65DjZxpQ5kCck26guve1tBWK3wccr86UVCvwZJrGdKqUH60uSI/J2Y6p
+ Xi+s/wchDRcuvIUoyBdJqguT6XXSrSR+VpvFNSAulJkR2dOh9IuJtxhekIAsVzDKXf1+
+ ZRALhrcHPaGntyigpe+Zxr8c7G34KlFmH8ZP/PYs/f40lpRNUis3GrgO5OjXgB4x3Rt3
+ RGtQsvbss0q12NztBstMkMDytoBuzL4Qy2qzuNqV3K0H4Vlw15AW81izJp7Xa/iRnEHQ
+ o/gYnCRvmJ0I1SY8T2Sf8S7r6QFh580yzSLcGVkPn7bcd+nSNs9efQ7ROB2o3knspR6C
+ Ntxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1758904028; x=1759508828;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zF+adX+qpdpqUN9cwkf6LKBhd8K27VipqF1ls6gbWuA=;
+ b=dXEhb+TCVT38/lqwZjewViaKIPpnJCnMgb3X1nU4db8ys1/VZbE2M3SvMOI2tlzluR
+ qxl9hTIfptPHd7rSnPhRc+2IGj3eKRCZ2kE/inAdovPbmy+0bDRNLBb0onbG/8GCQd2U
+ 4qcUe2M9lrTPXj7U8rwV/C5XaESipAMc0YyMXmGfBB4Djj6l/spC8fseKwzTcBlCwuqx
+ UrkNm7akoeOnTwEdMjGIgwjRn/4uHKQoPt6XK7gWcKVXWptMcEWhCLIYy2mejPeXAoS0
+ QuIXXXtMAqCMFORakD3oQV+PjXjlWE0Kt7aHp/Ngvn7Ae+xxhxIaOzGClwt6kT1jwuOT
+ MXeQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXOSE02DqFYmU9bDEq8F2jTAthLLJsHT68+Wqwto/TG/v4jEjNc0FPWNYhEGwtCAgO+A15akrQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzhJ+P0Ioda4VXOU0q+DF09VK+mD6Z3UvMZ6bY43IxIXzRnbjC+
+ voeN8wG5EK8d5tdxMf6tulTxM0lO2vyr/q3AYxOtxSD/pLIt7/lFhSYkLtm/X3npAH1o5vtRdmx
+ 7aLFrQIkDKkO2XOHE/Jqj+AG6cIcttjfL7goZ
+X-Gm-Gg: ASbGnctprgmrPcEr8iNNzbd9bxpBt5HFDyn/t88sNDXa0373Da5FzzLnv+uf86b1Sr4
+ XsB4fwHxG3jxtMaE6efsHP9ys8NMTt1pgjyEAjt0VvLck6W9fvfRNDC7LB4JVV9AT73MJ1K9MD8
+ zVoY615stbxzBsyjZRYE8DH07TgctT1g/mrQFwuAHCAcKk3Vgro1WVVV4RVZUdt5Nm+ozgoZGNf
+ lrxmuy0pN0tfoeDLjZZdLn61qR4CVXwo/Byf9Jx464aSpU2qyJ3Sf0NrEtjDWz73waBxnRHCpnu
+ jx4ltMKy4d6IvtDiMwNEguqNiA==
+X-Google-Smtp-Source: AGHT+IHB+IjoD59159200sYx+8kpIUixqshZ0kuIKkufkoN+ympyecoiRzrlXm+KhviZW3Xu4mwtF3osw52FxV6UmuU=
+X-Received: by 2002:a05:6402:543:b0:62f:4b68:bfae with SMTP id
+ 4fb4d7f45d1cf-6349fa8fcf7mr5286942a12.31.1758904027720; Fri, 26 Sep 2025
+ 09:27:07 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-TrafficTypeDiagnostic: DU4PR08MB11188:EE_|DB9PR08MB10380:EE_|DB5PEPF00014B98:EE_|AS2PR08MB10082:EE_
-X-MS-Office365-Filtering-Correlation-Id: 13f82ab7-5b14-462c-ef04-08ddfd17346e
-x-checkrecipientrouted: true
-NoDisclaimer: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?TTNBWWt0VWtRTkxoVTdPdDZNc05ha2VlcytRVTFLUTA0L0hUa2F4akh3QXlR?=
- =?utf-8?B?WG5HZDRUWkNKWi9tN25lN3NZMGJsNUYybld4ZnM3VE9CWGVid1NKQjFqb1pQ?=
- =?utf-8?B?b0NnKzBiSUNUcVJHS1oxdDd4MitkODFSRW8vYTB3RkxjNHNPSXBlV2F2S21I?=
- =?utf-8?B?djBhUmRxOFROc3NZa1c0a3F5eW05dzJtU0QvN1BEbzFkYTNtdGlnaWlGYS95?=
- =?utf-8?B?eS84bjB2K01pOWJ5UXh5eTF6cjlEMlMycE43S25xbEYyWm43K0NkQlRTOGoz?=
- =?utf-8?B?QnRxQko0eFAyN0ZZNE80YnhTcmR0ZUduOVJiOWJnOU42MFptZFNVd2dYL25R?=
- =?utf-8?B?dGx1WHNPb1RleWVvT2hNeWM0K1pBVFk4ZVdmZzVIWTdrTnpnODlPdWptblZl?=
- =?utf-8?B?UFVMcEo1WlNSNGJ5UnJJMFg4aG9jcG1XOVFyN1ozV3NpTEwwUHhOaGlMMDZ1?=
- =?utf-8?B?UHJqOUhvT05zdGNlWE5ZTUpIUy9HSElNVTlPZStZZ2xjTlFwSTRnZnhLbm8r?=
- =?utf-8?B?TDRGMTRDSmJ6S2lVZjNibFR6dEQ4bjRiT09ITUtLYisvWURDczByajlCSm1Y?=
- =?utf-8?B?OVluSHc2aXNRVHkvQi9xb1hCaVNma2FxSUtlMHcvM1FQaTZlM0k4VVRkNFZD?=
- =?utf-8?B?cHFNSWt2anlXSkVaN2VjNXBzWU9VeGVGSjREQVBvRlZ6OWFYS0k3cVV4V2RI?=
- =?utf-8?B?S2tmS2ZSdHIyUmJMVE16Y0NYRmY4NHdlNmw5NlZMMFpwMWNKd2pFUFBlckY2?=
- =?utf-8?B?WXBKeDJ1UHZ4Y1lteEMzU1JPbmx1bm9iWXBCblhjV01YdmtQQ0tjUHVCbGl4?=
- =?utf-8?B?ckdjaXNmMXQzeVRsVFdsMlBaT2EycjBvL09ubHYwa3FNeDg1VFZkejFQNlZn?=
- =?utf-8?B?ell1bElpUjVmZDJDWGFaUENRMzFOM0JUQ2NHTDY1VlcxblZydzhuM09Xcmxz?=
- =?utf-8?B?L2dRak4rVGxvbVFUWXlwK2VyUVhnTHcvNnVLRjBuODdEY0Q0R04zT1ZrZThn?=
- =?utf-8?B?K05wc2s4VVlJcm1hVnd2UnZ4R0ZxY2dFbkRCRG9XeWpJOUFjSFBLWnBkekhS?=
- =?utf-8?B?cXFRb1JCZjByeUM3Ny9KYWRuT2hnRlNhc2Fsa005WnhwbEppd2kvcng5YndU?=
- =?utf-8?B?RkZsYnc5Z3NEeG9HNkhTUEFNb3NoS0YySE16OFVUWE55Sm9wSktiMDl6aWpE?=
- =?utf-8?B?ZDZOTkpqQkpsbEU3bUhzYTlzQ09UZHA5VjA4MHNVNjlFNFl6eHNaZnh5b2FM?=
- =?utf-8?B?UTZmVDdZQllGcUd0YWVsVlMzbEVVYXlwVnpsclplQ1h2VDAwUkNLd000dGN5?=
- =?utf-8?B?b2ZzMVliYzU5L01qZm1ER2YybVU2bDhsMXJ5MXY2WmswMHJJWlo2bDlFWUlx?=
- =?utf-8?B?MUxKcDUrbm9ML3BVN3VtQm5TNzUyQXFuNXZJYkxVZEIxZGlsMTcwWlJzMzQ2?=
- =?utf-8?B?dDI1Q3BvUm90Q3hmNkF0OEkyK0xaOFpVZldpT2dLMzBPaGpnbTd1L0FDKzI4?=
- =?utf-8?B?TE1QNXpuS05DU096VVBRUklJZnVUTWxyNlBTVS9oakw2WkRWeXBSTEFsUGJt?=
- =?utf-8?B?RnVna3BNcjBGd3RGYk9UZ1EyNm00OFEvNFZYVWliQ09QNVFRNDYzQmRQUHpx?=
- =?utf-8?B?eVFQa3Btc3FZTlBWb2FHMDRLNnZtMnVOTGRmV2wwMy9rUVAxVnNxSkovWWVi?=
- =?utf-8?B?R3huVHBOSlF4a1FMR09lcVZjd2I1cURHd1hsMDRCZVNiclh4UnQrdDlPU1BQ?=
- =?utf-8?B?dVNyME0va3F4ZENrZE81dWdCUU8vRU1aT2Y0WTdZM0w4MUoyTkFaRm5BNGZN?=
- =?utf-8?B?Mi9lNW9HN0FncWl6TGd1TjhZMC9XQURsMmd0QVJYQStrMmdwTC96Nzc2VWxk?=
- =?utf-8?B?Mm1IOVZ0RGxzazNxWURTRnBJT2NPUjBvdklBVXpsQXYrRlE9PQ==?=
-X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
- SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DU4PR08MB11188.eurprd08.prod.outlook.com;
- PTR:; CAT:NONE; SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101;
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB10380
-X-EOPAttributedMessage: 0
-X-MS-Exchange-Transport-CrossTenantHeadersStripped: DB5PEPF00014B98.eurprd02.prod.outlook.com
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id-Prvs: ff32f52c-97ce-40a1-05b5-08ddfd17213b
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|35042699022|14060799003|376014|82310400026|1800799024|36860700013;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?N0ZNQzBmYmdRUTNtT3NmQWt5UDc5Sm1nSEp3cGdpNTJsNlJWeVFKRmIvb2Qv?=
- =?utf-8?B?UmUvWW9wUC9vNXJPOU1sZ01PUFdCT0pERUpuZzFNbThnR3lWUHV3a0tiSWl6?=
- =?utf-8?B?UnI2eUwrWkJ1NEFJUitqS3cwMGdOdHVWNlhDRVIrdWw3MTdISm5UNXQ1TkVF?=
- =?utf-8?B?RVNXS01aaW9IZzdDWU5WWGZvbmhDaWx1TjFqTzhERjd6VzR5SHg4RHFueWw5?=
- =?utf-8?B?d1AwNGc0Z0RGN0pNNGRhQjdid3ZSV1pzaFFxRTVscE8vYkhJS3JOTTlqb2Jy?=
- =?utf-8?B?VWg0MTRFaTZQWWVWY2Rsam03QkZmbVdFYTdkTldNeDlzSmg2V1FXb1Z3Vmpx?=
- =?utf-8?B?c1Qra25aeU1nVmVrbk9tVnJoMnZyK0VBak0rQWkxeld3SER5dXBvTzdsd2po?=
- =?utf-8?B?SzR2Z09WdVdydGh3WW1TZEZwSEdXRE9qT1FCZGNMdzcvaFBqN3RxQXZrWnZT?=
- =?utf-8?B?dUhjL1o3YklXVG9kTC8veGhRZWFWQVhJOVZhQTRJYncxOGdmaGJJTkxaVlFW?=
- =?utf-8?B?eERTemloN3IwRWhvb3lURDUvUHQ1WXdyZ3hwbTVueVl2d1FIN2FBTVFlYmZp?=
- =?utf-8?B?b0tlcEJvbDJwaVlSNmd4VndrK2lGQnd4UUx6TEVNZWJpdm5zMWpKM1JSc3ZD?=
- =?utf-8?B?VzNDNGtmTWJaYVNGZEI0RElBT1hwUmxZWEM0Lzg4MUlzYk1kcDQyYTh3OHJq?=
- =?utf-8?B?RW0rK1NKZXFyYitqRkVWOFR5WnpHaDVZTktLcUZIOUY5QXlwbXFNNlR4cHhx?=
- =?utf-8?B?QkU4enJhaWhKWEQxa3IrbGFYZU8zVXU1WmpKK2FaTUcyb3p4aEdXMEFmd0JJ?=
- =?utf-8?B?VUpFNmEzdHNDT2ZUdlM2a216OUtkUU9PVE1vSnN1bmcvUUgzZkVKTTN6Rlo5?=
- =?utf-8?B?NE5UbDBLVTVmOCtzMGQyOWozTE9KaExiSDZnNkowM1BtWm5LY01hZTQzVXpx?=
- =?utf-8?B?Nno5L2ZQYkZqVi9KbEJtd1ZMZFFuYzdYRnF3VktCSjNBR1BXWnB2Vm01WjJn?=
- =?utf-8?B?VnFsVFdqUElGT2lLQStVT3NIdWhXa05jMW5LaWlMV2lvOG1rdDQ4VUp6cTdm?=
- =?utf-8?B?dEhHODc1aVpEUFUvb0swNzlYcERFVStBaml4SThFRndsd1d1RDdOOTJjby9D?=
- =?utf-8?B?dW1QbHRPQTZuT3FzQ0c4MlU5bnYrUHI0S3RpVkM4b1JRTXM2amxISnc1dW0x?=
- =?utf-8?B?VnFHUFl2c0NnckFYK0RFMERWYmlXeThXUGVZQ2hUbnQ0M0RrUmtsSzlrTm02?=
- =?utf-8?B?MTlZenBlSnVZYndHVmtNcVRKZk9MMG12MDl2anRwSXh4aEVJbVhsRGJ6ZEFS?=
- =?utf-8?B?MWNrVi9rU2U0Y3ZOQmdtZDBIT1NkSk11Wm45eWxrNElHNjR0TE95SEpFdmxV?=
- =?utf-8?B?dndxc3F5VTdScFo0aHFySVFzMWpuaDJ6d1NlRHE1UGNwNEdubUVxTkNraHd3?=
- =?utf-8?B?bGdiQXNxbXNqUGc4SWtkRm1WRmNpaHA2cUswSUpmYnRzYlU5Y0hndUYzVUN0?=
- =?utf-8?B?dm95dG12VXhYWDQxbUlzdjhpc3V1WmFoNXMzZjdBa0tTNlZQdDFqb0RoTHR3?=
- =?utf-8?B?cnkyMXphR0daeURQWVRIRlBlSDEzME9Vekt5Z0xoUHlJcmNrM2J3cmE1bW9E?=
- =?utf-8?B?bm5RaStJMHFUZzB6cXYybC9MM2hGbWljdlk1N0VqbWNKeGZIcUpKRmcrTUQz?=
- =?utf-8?B?VWM1N3NUZWozMWs3MEkwQ2QyT21WdEw5RHUyZUJOeTBCa0wxalJTeElDdFJj?=
- =?utf-8?B?eStXLzREUm9FK0Jyd3pvNGpvaGhsWXUxckIrR3NoUHVyZWhFQlhidVFrempM?=
- =?utf-8?B?eWJQZkJpbHA3Ui9mYkU2U2J1ekdwY0ZDUUtnVGpmM05CcU5YaFVBZ01UT0Q3?=
- =?utf-8?B?dVl1djhtb3NCT2FFeko5QnEyRThHYkVvTXNKdVJtNzRnK2JjREo2aEZNNFo3?=
- =?utf-8?B?K1cza1VHNkEyMHJFU1JEZUd0WFBCUGZFdXd6TVFSaC9jQjN3Ui80cEV2TjlC?=
- =?utf-8?B?OHc5bXRJZ3VYNGE1M09iZjdtNTZqY09vUzM2MjJwYjc4ckVqSk1HeWxPSmZv?=
- =?utf-8?Q?4MUsGZ?=
-X-Forefront-Antispam-Report: CIP:4.158.2.129; CTRY:GB; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:outbound-uk1.az.dlp.m.darktrace.com;
- PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(35042699022)(14060799003)(376014)(82310400026)(1800799024)(36860700013);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2025 16:10:26.1701 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 13f82ab7-5b14-462c-ef04-08ddfd17346e
-X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[4.158.2.129];
- Helo=[outbound-uk1.az.dlp.m.darktrace.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B98.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR08MB10082
+References: <20250630102524.127970-1-pbrobinson@gmail.com>
+ <a9587b7f-95fa-472c-af5a-8f45d606666d@cherry.de>
+In-Reply-To: <a9587b7f-95fa-472c-af5a-8f45d606666d@cherry.de>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 26 Sep 2025 17:26:56 +0100
+X-Gm-Features: AS18NWBF-uDCuyaKMDcqOalMVZd45SvPEG-rK3ja6hOQtSV6b-hQVxzQjUJUCs4
+Message-ID: <CALeDE9NhX9yKEJEXbEW=JdpBdQXE529SNAJTWeU98E9QA4o=Fg@mail.gmail.com>
+Subject: Re: [PATCH] board: rockchip: Add support for rk3588 MNT Reform2
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -223,22 +96,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Hi Quentin,
 
-We recently applied changes to the transfer list library [1] to correct 
-the checksum calculation. Previously, we used a simple byte-sum 
-approach. However, we later realized this contradicts the Firmware 
-Handoff specification, which states:
+> On 6/30/25 12:25 PM, Peter Robinson wrote:
+> > Add support for MNT Reform2, it works as a carrier board
+> > with a Firefly iCore-3588Q SoM.
+> >
+> > Specification:
+> > - Rockchip RK3588
+> > - LPDDR5X 16/32 GB
+> > - eMMC 128/256 GB
+> > - HDMI Type A out x 1
+> > - USB 3.0 Host x 1
+> > - USB-C 3.0 with DisplayPort AltMode
+> > - PCIE M.2 E Key for Wireless connection
+> > - PCIE M.2 M Key for NVME connection
+> > - DSI to eDP panel
+> > - 1Gb Ethernet w/ Microchip KSZ9310 PHY
+> >
+> > Tested using Fedora boot on USB stick and eMMC.
+> >
+> > Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> > ---
+> >   arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi | 14 ++++
+> >   board/rockchip/evb_rk3588/MAINTAINERS       |  6 ++
+> >   configs/mnt-reform2-rk3588_defconfig        | 87 +++++++++++++++++++++
+> >   doc/board/rockchip/rockchip.rst             |  1 +
+> >   4 files changed, 108 insertions(+)
+> >   create mode 100644 arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
+> >   create mode 100644 configs/mnt-reform2-rk3588_defconfig
+> >
+> > diff --git a/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
+> > new file mode 100644
+> > index 00000000000..d54220a3271
+> > --- /dev/null
+> > +++ b/arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
+> > @@ -0,0 +1,14 @@
+> > +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> > +
+> > +#include "rk3588-u-boot.dtsi"
+> > +
+> > +/ {
+> > +     chosen {
+> > +             u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
+>
+> This is the same as the one in rk3588s-u-boot.dtsi so I think it can be
+> omitted?
 
-> The checksum is set to a value such that the XOR over every byte in the
-> {tl_base_pa, …, tl_base_pa + used_size - 1} address range is equal to 0.
+Yes, I had been working with someone remotely and they had been
+testing a few things to get it working so there were a few leftovers I
+missed in the commit.
 
-This discrepancy creates problems when interoperating with Bloblist.
-Should Bloblist’s checksum calculation be updated to follow the same 
-XOR-based method?
+> > +     };
+> > +};
+> > +
+> > +&fspim2_pins {
+> > +     bootph-pre-ram;
+> > +     bootph-some-ram;
+> > +};
+>
+> I couldn't see where fspim2_pins is used for this board, are you sure
+> this is correct? I don't see sfc node being enabled.
 
-[1] 
-https://review.trustedfirmware.org/c/shared/transfer-list-library/+/42548
+Initially the user had reported it did have SPI flash, it doesn't, I
+forgot to clean that up.
 
-All the best,
-Harrison
+> > diff --git a/board/rockchip/evb_rk3588/MAINTAINERS b/board/rockchip/evb_rk3588/MAINTAINERS
+> > index 1232f05a387..24cf13c3c48 100644
+> > --- a/board/rockchip/evb_rk3588/MAINTAINERS
+> > +++ b/board/rockchip/evb_rk3588/MAINTAINERS
+> > @@ -29,6 +29,12 @@ F: configs/generic-rk3588_defconfig
+> >   F:  arch/arm/dts/rk3588-generic.dts
+> >   F:  arch/arm/dts/rk3588-generic-u-boot.dtsi
+> >
+> > +MNT-REFORM2-RK3588
+> > +M:   Peter Robinson <pbrobinson@gmail.com>
+> > +S:   Maintained
+> > +F:   configs/mnt-reform2-rk3588_defconfig
+> > +F:   arch/arm/dts/rk3588-mnt-reform2-u-boot.dtsi
+> > +
+> >   ORANGEPI-5-RK3588
+> >   M:  Jonas Karlman <jonas@kwiboo.se>
+> >   S:  Maintained
+> > diff --git a/configs/mnt-reform2-rk3588_defconfig b/configs/mnt-reform2-rk3588_defconfig
+> > new file mode 100644
+> > index 00000000000..e76c714b03d
+> > --- /dev/null
+> > +++ b/configs/mnt-reform2-rk3588_defconfig
+> > @@ -0,0 +1,87 @@
+> > +CONFIG_ARM=y
+> > +CONFIG_SKIP_LOWLEVEL_INIT=y
+> > +CONFIG_COUNTER_FREQUENCY=24000000
+> > +CONFIG_ARCH_ROCKCHIP=y
+> > +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3588-mnt-reform2"
+> > +CONFIG_ROCKCHIP_RK3588=y
+> > +CONFIG_SPL_SERIAL=y
+> > +CONFIG_TARGET_EVB_RK3588=y
+> > +CONFIG_SYS_LOAD_ADDR=0xc00800
+> > +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> > +CONFIG_DEBUG_UART_CLOCK=24000000
+> > +CONFIG_PCI=y
+> > +CONFIG_DEBUG_UART=y
+> > +CONFIG_USE_PREBOOT=y
+> > +CONFIG_PREBOOT="pci enum; usb start; nvme scan;"
+> > +CONFIG_FIT=y
+> > +CONFIG_FIT_VERBOSE=y
+> > +CONFIG_SPL_FIT_SIGNATURE=y
+> > +CONFIG_SPL_LOAD_FIT=y
+> > +CONFIG_LEGACY_IMAGE_FORMAT=y
+> > +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-mnt-reform2"
+>
+> Shouldn't that end with .dtb?
+
+Nope.
+
+> > +# CONFIG_DISPLAY_CPUINFO is not set
+> > +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> > +CONFIG_SPL_MAX_SIZE=0x40000
+> > +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> > +CONFIG_SPL_ATF=y
+> > +CONFIG_CMD_GPIO=y
+> > +CONFIG_CMD_GPT=y
+> > +CONFIG_CMD_I2C=y
+> > +CONFIG_CMD_MMC=y
+> > +CONFIG_CMD_PCI=y
+> > +CONFIG_CMD_USB=y
+> > +CONFIG_CMD_USB_MASS_STORAGE=y
+> > +# CONFIG_CMD_SETEXPR is not set
+> > +CONFIG_CMD_REGULATOR=y
+> > +# CONFIG_SPL_DOS_PARTITION is not set
+> > +CONFIG_SPL_OF_CONTROL=y
+> > +CONFIG_OF_LIVE=y
+> > +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> > +CONFIG_SPL_DM_SEQ_ALIAS=y
+> > +CONFIG_SPL_REGMAP=y
+> > +CONFIG_SPL_SYSCON=y
+> > +CONFIG_SPL_CLK=y
+> > +CONFIG_ROCKCHIP_GPIO=y
+> > +CONFIG_SYS_I2C_ROCKCHIP=y
+> > +CONFIG_LED=y
+> > +CONFIG_LED_GPIO=y
+> > +CONFIG_SYS_I2C_ROCKCHIP=y
+>
+> Mmmm CONFIG_SYS_I2C_ROCKCHIP=y appearing twice smells like hand-edited
+> defconfig, can you run make savedefconfig on it and use that output in
+> the patch?
+
+Yes, done in v2
+
+> > +CONFIG_MISC=y
+> > +CONFIG_SUPPORT_EMMC_RPMB=y
+> > +CONFIG_MMC_HS400_ES_SUPPORT=y
+> > +CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
+> > +CONFIG_MMC_HS400_SUPPORT=y
+> > +CONFIG_SPL_MMC_HS400_SUPPORT=y
+> > +CONFIG_MMC_SDHCI=y
+> > +CONFIG_MMC_SDHCI_SDMA=y
+> > +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> > +CONFIG_PHY_MICREL=y
+> > +CONFIG_PHY_MICREL_KSZ90X1=y
+> > +CONFIG_DWC_ETH_QOS=y
+> > +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> > +CONFIG_PHYLIB=y
+> > +CONFIG_NVME_PCI=y
+> > +CONFIG_PCIE_DW_ROCKCHIP=y
+> > +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> > +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> > +CONFIG_PHY_ROCKCHIP_USBDP=y
+> > +CONFIG_SPL_PINCTRL=y
+> > +CONFIG_DM_PMIC=y
+> > +CONFIG_PMIC_RK8XX=y
+> > +CONFIG_REGULATOR_RK8XX=y
+> > +CONFIG_PWM_ROCKCHIP=y
+> > +CONFIG_SPL_RAM=y
+> > +CONFIG_BAUDRATE=1500000
+> > +CONFIG_DEBUG_UART_SHIFT=2
+> > +CONFIG_SYS_NS16550_MEM32=y
+> > +CONFIG_ROCKCHIP_SPI=y
+>
+> I am not sure this setup actually has an SPI flash? At least couldn't
+> find it in the device tree in upstream Linux's Rockchip maintainer tree
+> for 6.17.
+
+It doesn't, I had been told differently initially, and the upstream
+file is also currently not complete.
+
+Peter
