@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7857CAC5B9
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16956CAC5B9
+	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 14:16:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09713836A6;
-	Fri, 26 Sep 2025 16:14:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7789F836C1;
+	Fri, 26 Sep 2025 16:14:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 436ED836A4; Fri, 26 Sep 2025 16:14:39 +0200 (CEST)
+ id 651AB836B8; Fri, 26 Sep 2025 16:14:42 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 29C2E8344E
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:14:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 4E8658344E
+ for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 16:14:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=abdellatif.elkhlifi@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7C1B82BF2;
- Fri, 26 Sep 2025 07:14:28 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 07CBC2C1C;
+ Fri, 26 Sep 2025 07:14:31 -0700 (PDT)
 Received: from e130802.cambridge.arm.com (e130802.arm.com [10.1.32.54])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3B1EB3F5A1;
- Fri, 26 Sep 2025 07:14:34 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DC93E3F5A1;
+ Fri, 26 Sep 2025 07:14:36 -0700 (PDT)
 From: abdellatif.elkhlifi@arm.com
 To: u-boot@lists.denx.de
 Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
@@ -36,10 +36,10 @@ Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Casey Connolly <casey.connolly@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v5 14/24] efi_loader: fwu: fwu_arm_psa: Skip accepting the
- payload after set_image()
-Date: Fri, 26 Sep 2025 15:13:41 +0100
-Message-ID: <20250926141351.1755829-15-abdellatif.elkhlifi@arm.com>
+Subject: [PATCH v5 15/24] efi_loader: fwu: fwu_arm_psa: Disable trial state
+ handling
+Date: Fri, 26 Sep 2025 15:13:42 +0100
+Message-ID: <20250926141351.1755829-16-abdellatif.elkhlifi@arm.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
 References: <20250926141351.1755829-1-abdellatif.elkhlifi@arm.com>
@@ -63,10 +63,9 @@ X-Virus-Status: Clean
 
 From: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 
-Do not update the acceptance metadata bit after updating an image
+No need for trial state handling in U-Boot for FWU Arm PSA
 
-The update agent (secure world) is responsible of setting the acceptance
-bit in the metadata.
+In FWU Arm PSA mode, trial state is handled by Secure world.
 
 Signed-off-by: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -78,71 +77,62 @@ Cc: Michal Simek <michal.simek@amd.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Casey Connolly <casey.connolly@linaro.org>
 Cc: Adriano Cordova <adrianox@gmail.com>
-
 ---
-
-Changelog of changes:
-===========================
-
-v5:
-
-* As suggested by Ilias: Make PSA handling simpler for the acceptance logic
-  (less ifs)
-
- lib/efi_loader/efi_capsule.c |  5 +++--
- lib/fwu_updates/fwu.c        | 16 ++++++++++++++++
- 2 files changed, 19 insertions(+), 2 deletions(-)
+ lib/efi_loader/efi_capsule.c | 7 +++++--
+ lib/fwu_updates/fwu.c        | 8 +++++++-
+ 2 files changed, 12 insertions(+), 3 deletions(-)
 
 diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index 234e3c1b3c0..06b502e2c25 100644
+index 06b502e2c25..42effd42628 100644
 --- a/lib/efi_loader/efi_capsule.c
 +++ b/lib/efi_loader/efi_capsule.c
-@@ -704,8 +704,9 @@ static efi_status_t efi_capsule_update_firmware(
- 				goto out;
- 			}
+@@ -562,7 +562,9 @@ static efi_status_t efi_capsule_update_firmware(
+ 	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
+ 		if (fwu_empty_capsule(capsule_data)) {
+ 			if (fwu_empty_capsule_checks_pass()) {
+-				return fwu_empty_capsule_process(capsule_data);
++				return !IS_ENABLED(CONFIG_FWU_ARM_PSA) ?
++					fwu_empty_capsule_process(capsule_data) :
++					0;
+ 			} else {
+ 				log_err("FWU empty capsule checks failed. Cannot start update\n");
+ 				return EFI_INVALID_PARAMETER;
+@@ -1375,7 +1377,8 @@ efi_status_t efi_launch_capsules(void)
  
--			log_debug("%s the accepted bit for Image %pUs\n",
--				  fw_accept_os ? "Cleared" : "Set",
-+			log_debug("%s %s the accepted bit for Image %pUs\n",
-+				  IS_ENABLED(CONFIG_FWU_ARM_PSA) ? "PSA will" : "",
-+				  fw_accept_os ? "clear" : "set",
- 				  image_type_id);
- 		}
+ 	efi_capsule_scan_done();
  
+-	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE)) {
++	if (IS_ENABLED(CONFIG_FWU_MULTI_BANK_UPDATE) &&
++	    !IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
+ 		if (capsule_update == true && update_status == true) {
+ 			ret = fwu_post_update_process(fw_accept_os);
+ 		} else if (capsule_update == true && update_status == false) {
 diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
-index 7f085a0211f..bfbb98c16d7 100644
+index bfbb98c16d7..45d43d424ba 100644
 --- a/lib/fwu_updates/fwu.c
 +++ b/lib/fwu_updates/fwu.c
-@@ -586,6 +586,14 @@ out:
-  */
- int fwu_accept_image(efi_guid_t *img_type_id, u32 bank)
- {
-+	/*
-+	 * In case of Arm PSA accepting images is either
-+	 * at ExitBootServices() or in the OS. So, let's skip setting the
-+	 * acceptance bit (not used in Arm PSA)
-+	 */
-+	if (IS_ENABLED(CONFIG_FWU_ARM_PSA))
-+		return EFI_SUCCESS;
+@@ -340,6 +340,11 @@ int fwu_get_mdata(struct fwu_mdata *mdata)
+ 		if (parts_ok[i])
+ 			continue;
+ 
++		if (IS_ENABLED(CONFIG_FWU_ARM_PSA)) {
++			log_err("FWU metadata copy %d invalid\n", i);
++			return -ENOTSYNC;
++		}
 +
- 	return fwu_clrset_image_accept(img_type_id, bank,
- 				       IMAGE_ACCEPT_SET);
- }
-@@ -606,6 +614,14 @@ int fwu_accept_image(efi_guid_t *img_type_id, u32 bank)
-  */
- int fwu_clear_accept_image(efi_guid_t *img_type_id, u32 bank)
- {
-+	/*
-+	 * In case of Arm PSA accepting images is either
-+	 * at ExitBootServices() or in the OS. So, let's skip clearing the
-+	 * acceptance bit (not used in Arm PSA)
-+	 */
-+	if (IS_ENABLED(CONFIG_FWU_ARM_PSA))
-+		return EFI_SUCCESS;
-+
- 	return fwu_clrset_image_accept(img_type_id, bank,
- 				       IMAGE_ACCEPT_CLEAR);
- }
+ 		memcpy(parts_mdata[i], parts_mdata[1 - i], mdata_size);
+ 		err = fwu_sync_mdata(parts_mdata[i], i ? SECONDARY_PART : PRIMARY_PART);
+ 		if (err) {
+@@ -781,7 +786,8 @@ static int fwu_boottime_checks(void)
+ 
+ 	in_trial = in_trial_state();
+ 
+-	ret = in_trial ? fwu_trial_count_update() : trial_counter_update(NULL);
++	ret = (in_trial && !IS_ENABLED(CONFIG_FWU_ARM_PSA)) ?
++	       fwu_trial_count_update() : trial_counter_update(NULL);
+ 
+ 	if (!ret)
+ 		boottime_check = 1;
 -- 
 2.43.0
 
