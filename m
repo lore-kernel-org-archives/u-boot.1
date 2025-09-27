@@ -4,98 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A18B2CAC5B8
-	for <u-boot@archiver.kernel.org>; Sat, 27 Sep 2025 14:04:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 648CCCAC5B8
+	for <u-boot@archiver.kernel.org>; Sat, 27 Sep 2025 14:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE22982A9E;
-	Sat, 27 Sep 2025 16:04:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 35A9D83192;
+	Sat, 27 Sep 2025 16:04:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mke22SwF";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eFx7FHVN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8D95830B4; Sat, 27 Sep 2025 16:04:54 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 3DD7083192; Sat, 27 Sep 2025 16:04:56 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC7268006D
- for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 16:04:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B40780819
+ for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 16:04:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7b00927607eso601402a34.0
- for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 07:04:52 -0700 (PDT)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-74382048b8cso2497234a34.3
+ for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 07:04:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758981891; x=1759586691; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758981893; x=1759586693; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y8+TqwVa9ZsnfC/8FstgrOX764Fw792I6qQc4jz5RE0=;
- b=mke22SwFUMANfQ+g4fWZxGIXvzXV70rqInPJd1bB17b6z8ItLftx3RtUpZjSWYMQoW
- KdIdSxNnS22e42Z31LZhtlj9dml5+vjnD9skr43ohjnitCk8fVY/Ngswk48LAx6eQNhN
- 4qAkZQhIhOP1v46Y6aON5ziE5YEUafZ2CvfaE=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=KfB0BbVlGpgtxTJOPca17KMLnN8tagpkU2iqZ6bc2GE=;
+ b=eFx7FHVNsAG5ZLXUf1cq7Kx63UhomCHocdg0USRunyzGpfwiXpoMSab3KCZLc2grnC
+ 73JzhmxSHWQDupKY/qF4tFi1NLHFX93Vqo8z3RZIcZgPdIGLuhu5IUBImV1QUkUYhlih
+ IdZQepmjFK9h3MP/j9vkd5czZTNEQTA11+OCo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758981891; x=1759586691;
+ d=1e100.net; s=20230601; t=1758981893; x=1759586693;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=y8+TqwVa9ZsnfC/8FstgrOX764Fw792I6qQc4jz5RE0=;
- b=JjweSn45FANFrwmFnDKAHyAYMozavUXgQBnCFr9L5R4SuWkcEYnFetTtsF1sKM3cJf
- /pjkj67+PwH9budwLx94NO3hRF/PtGp+XbLJg+ueYzJFipi4f3PPzHWfZlVM5ZOSmP31
- GHrc+cmAHlKLp+Ru/+FMYfYxxeeBd76UM9fVFkBhMk5LfJ72M2oELfxqf2jKf5C4G2ai
- A9MAdPMwLuuj+kLZt+tcl3QMPSSS4C8ysNu1ZW0NQVNNrF1gnqSCIfHKx/ESmQBjrjDJ
- SlUlqfzzNBW7nrSKjY4mFXBl3ZeSIGKWnAUqzBfKbu00fUSgaHCkIP1euljWSbyqAbP9
- wp0w==
-X-Gm-Message-State: AOJu0Yxpr6epRJhlQ10qiPXAa/BqeE0NsGtmZxOck4R+jj/nd1Z5IEvU
- NMSmQAsDCK+7sc3NCcSJkqkERGvwXVCiwbskdbVFBiZcqeHRL+NSywxf4FALg6YpZ8g=
-X-Gm-Gg: ASbGnctmkz9dZD9xJrCAqZOYHhTCiWfGirZF+OvSI2aBKjPfVyygj1A4EVqvFTPyX66
- xaor8rghP1s6kkaw5zD+WK7iR7eWqQPux686U+4xATjbt/j12bETMzkZ3CUxksdZPSZ7xTv2AFQ
- NU209OBPNaCVTXWKq63Ibx95Vr1EiKLuXcxoe3wHZfnhbvQU77OBX81oeX4O0RuMrJjUUUmpoFy
- E7ZhA5CzNICRxINx5td3Hkv9Pkt9n3IMA2bLGgpFKur7+mFxn9W+590GB7tUoZiJuJqlUJ+EkCX
- fduhQCb8bwWxX2JgATjK2aWdxJ9omQujdfFFcxcNbjNdzTCx1kZO6c1EVZgeDj/G9mYaRu8GHtO
- 3NTtjxT+xjdeYFB7PCc3sGrtAISqpEZTNOjEImEycbuTsHymtIcPc2fU=
-X-Google-Smtp-Source: AGHT+IHmP8cq1q9K31iNPx4Cjny6nD8mNGpL7EDvzYqh7VVpsn55f4uvvolAgZgQJjk7jbrQsOhbqw==
-X-Received: by 2002:a05:6830:6b06:b0:7ad:28e0:22f8 with SMTP id
- 46e09a7af769-7ad28e023a9mr3068270a34.32.1758981891472; 
- Sat, 27 Sep 2025 07:04:51 -0700 (PDT)
+ bh=KfB0BbVlGpgtxTJOPca17KMLnN8tagpkU2iqZ6bc2GE=;
+ b=mUS3+R9/OhUArA7cUFYw7e4WvQ/yVzHyImDCixOKXXC7sS7uT/XE0yTtc1hg4mPu65
+ auhNTIYMpmwDGAyWR0M0tbF1Xf9uPh2h1lWzwTG4aT5xDZHKPcqR36uHVH0ybMO8J1Ms
+ Oaw/o9YiQT+O5H6y6jzk1OGQMu+x5+H+WErZoOQXr5XmgCR+v/YvZBYyU6EhI5IAIxUd
+ 9WTCDfGsXU0QZ6IJZeKEePr1ca2IJlGAfbCcwTae47L7ZAy22/WmdPTgsoMULfIucNvx
+ dC2qrbyzisHQ4/xpAud407ScMFpo9iZWZfK9nyM0FOB0g296IquXP4MIWPJu+9hYWeMx
+ ud+A==
+X-Gm-Message-State: AOJu0YwwsXKY4dU2ki12VKhIzbumv41c2eAlM6Fc8ffoJUQguDRR7HlZ
+ sJdCrpu/BGlB+eGpa9BvUwV5Pp3n0GvfDgBzrGjzW7h6IWMZoydC0Nly3XEMSGTgVcE=
+X-Gm-Gg: ASbGnct0VsPp6R1MqnZsrZykoY79OjNnQKEhXqswPx6NLzPmA+AUjkvgOLPZk4/MwC6
+ qhCv09m5gmCU+HQAjp4GIObFC4eNd7a86NgTpU1iD7wmARzNCIcRUpVNPGUsoJK9aowis8hMyvO
+ xG/aQ+InOx6/U5nmgTwFdyShjZCE1bNsxBOMdhQzz2AtwvkUY6TucfB7R/ZyKrMhZGXYni48r2i
+ W0YrMDH3wXlQCZBleh6UlviyQiXpMa2YKj/yKcIFfw76ckB+YLNQQz7uZsiQXXyfTH6tPLbcLMa
+ SKquiC9f2+d6Vcg+Kq+ajdF3ZOdPACeSUAI0mKtxgj4F7ud1t6KI9xt0+b9RUrUVX83Wadgi9hF
+ B/as/I/EbypQcRerQUi/0NJq5I2vWYx/uLl3IZGOiyzeMiXPxk+KRl6ikKgbqrtxUTw==
+X-Google-Smtp-Source: AGHT+IE304Tf6QP6byWHtHOPeG3TLkoeNDmDp2jURWFxG20g8GQjcEHw2QiDaxlfVggXSjTrGLCdiw==
+X-Received: by 2002:a05:6830:2d8d:b0:790:710f:60e3 with SMTP id
+ 46e09a7af769-7a7ff0cf1c5mr2884903a34.23.1758981892870; 
+ Sat, 27 Sep 2025 07:04:52 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7b4c0e92da9sm20077a34.26.2025.09.27.07.04.48
+ 46e09a7af769-7b4c0e92da9sm20077a34.26.2025.09.27.07.04.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Sep 2025 07:04:50 -0700 (PDT)
+ Sat, 27 Sep 2025 07:04:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
-Cc: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- =?utf-8?q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Padmarao Begari <padmarao.begari@amd.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Paul Barker <paul@pbarker.dev>, Peng Fan <peng.fan@nxp.com>, 
- Prasad Kummari <prasad.kummari@amd.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Sam Day <me@samcday.com>, Sam Protsenko <semen.protsenko@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Tingting Meng <tingting.meng@altera.com>, 
- Varadarajan Narayanan <quic_varada@quicinc.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- "open list:ARM SNAPDRAGON" <u-boot-qcom@groups.io>
-In-Reply-To: <156e2f6f07731efd50688f1e59630b9caae4db65.1758095642.git.michal.simek@amd.com>
-References: <156e2f6f07731efd50688f1e59630b9caae4db65.1758095642.git.michal.simek@amd.com>
-Subject: Re: [PATCH] arm: Change SYS_INIT_SP_BSS_OFFSET from int to hex
-Message-Id: <175898188863.3905802.13054751176045069997.b4-ty@konsulko.com>
-Date: Sat, 27 Sep 2025 08:04:48 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250916161445.582540-1-trini@konsulko.com>
+References: <20250916161445.582540-1-trini@konsulko.com>
+Subject: Re: [PATCH] scripts: checkpatch.pl: Extend some checks to "env" files
+Message-Id: <175898189159.3905802.5126130292516092830.b4-ty@konsulko.com>
+Date: Sat, 27 Sep 2025 08:04:51 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -116,17 +93,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Sep 2025 09:54:06 +0200, Michal Simek wrote:
+On Tue, 16 Sep 2025 10:14:45 -0600, Tom Rini wrote:
 
-> The most of OFFSET values are in hex instead of int which is easier for
-> layout description.
+> In order for the U-Boot specific tests we've added (along with the long
+> line test) to be run on ".env" files as well, we need to update the line
+> in the process function that starts to limit the file extensions that we
+> test on.
 > 
 > 
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm: Change SYS_INIT_SP_BSS_OFFSET from int to hex
-      commit: c8a74db0cd2ae90720e81b55795cf2809762a995
+[1/1] scripts: checkpatch.pl: Extend some checks to "env" files
+      commit: 40888b1e4cc81404493a2df263af1ca20ccd08d6
 -- 
 Tom
 
