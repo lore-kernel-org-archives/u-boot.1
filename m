@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8C4CAC5B8
-	for <u-boot@archiver.kernel.org>; Fri, 26 Sep 2025 22:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61324CAC5B0
+	for <u-boot@archiver.kernel.org>; Sat, 27 Sep 2025 11:34:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 569798361E;
-	Sat, 27 Sep 2025 00:33:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7B66083544;
+	Sat, 27 Sep 2025 13:34:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fCcVT937";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q6aOV7H5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23CE2836A3; Sat, 27 Sep 2025 00:33:08 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 67ECE8350A; Sat, 27 Sep 2025 13:34:14 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FDBE8319C
- for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 00:33:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 077998350A
+ for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 13:34:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-8ca2e53c0d3so122990039f.1
- for <u-boot@lists.denx.de>; Fri, 26 Sep 2025 15:33:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-8c62e313847so110282339f.3
+ for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 04:34:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758925984; x=1759530784; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=sbPSd+qG0cLmVhfJa/vR5X2OIMA0AskAMXVp62aedk4=;
- b=fCcVT937CSgvb+RUes0fxl3M1pJXoBDfjs6aAcFlmk7TBkGxt3IJu/r2AOVNEiqUMY
- DTjmdCoXs4pVj8d7gn/SL2HfLfon8NbeuJA4KXG5GdTIZtgIb+9I6Y/doVCNDAU/Wif+
- gAU+uFFvtB8NQEYkmt2gmLNzxSxJotytH3nOA=
+ d=chromium.org; s=google; t=1758972850; x=1759577650; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QoYTH1eXFNDV862fGdzX1XAgAGlaOnOyX1FmjXGcs6I=;
+ b=Q6aOV7H5x5KU9y3h1xDvtMoxVqMqCCOpjWnMINzpE7r/CgQr2jkkVRR667kXfF+MiK
+ IDgfmYceGPDBYcKvduMEIlNBOaVAVMJQ3QQvYLRbLhO6ZexzBE3VCdnEUo8iUyvjA+GW
+ gpi/3uKmzS81ALoQK/41yWlYjQKZAArmTIsE4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758925984; x=1759530784;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sbPSd+qG0cLmVhfJa/vR5X2OIMA0AskAMXVp62aedk4=;
- b=Woku7k7vdZySWRYUB2hotVBUeAiNGSj2SWcBkTP7Du2YMm/Ivf+ImAmFqBEikFoScV
- Up9Sb25DsIGM7F/q9KTNnT/uIaS1EI49U3VViDJintqWxpeRaa2DTYj0z1wt/6vk9l+z
- HCjLgBqWQmTwA9bf7QFmuAV/teMAiqa6/qrPA43g97SKb2yO0MdwcuCZ8RYWzMz1lUwY
- bQUfuZgUnRALYWsOOw30yIwd4m8lI/AhsyZ2SiuJ3OrPmfgt+OMwJjAIHaOosAzKs2sm
- zobL8qHehf8HgrQFY7n/oaBEy8RDJyu9D1+AfYw9Z3BMJmlK6FO9H2g2sIOp6oWAxT1t
- haKA==
-X-Gm-Message-State: AOJu0YxGuN/L/WnKdE/RQdglcMrcWBc3+cau7MgX+V4C2Y/gsXsMz98W
- XFHPGz8zeyny66fy746BDFGQkWk+DBAVfVdCD/cGbf4p0hBUDyAm59sYVKInVl+3/S/X9jXHR5V
- HwZXZlb4=
-X-Gm-Gg: ASbGnctlwHYQC9rvOshfKraBOJ9IVjtdlxQByIZYdjzKUH5QmVAbus58tFoiyHHKnJv
- iQZGtNZwL7Jlam1ulJrbjFwXh/P5w+rZ6eQYpyUri6Iz2vl+sRQcLve2obOYziebqThXtPuqWt8
- c3d+ovMKmXr026C+Ef6C2bEcX8hVOJJjaV6/LsEYruVxiFMqpQEG+FVh4h0Xm2/s8spOpDHZoGk
- ASm4gPzRN5T8XJBple9O3wCbDf7JwTWjMhyzT6r+DRCBN/deIiAM5l0TrfyRSVB9IWUNlgM7K9/
- A/k7ljEmsH8skXBzVZAmoR3tAg1nxahuhM2M699UQxoTmyw9BHnt3G6tG9N6Lc5co2AOY5P/ZzU
- px/EFFuZrx/6foShXlpfaSNnMWNzMEOJay0lWgEk1s2v0+/CkCMCKVJLrncLzri+aCaqPfQ==
-X-Google-Smtp-Source: AGHT+IEFq2W9TPK6k7tVZB6WweIXuxo3fip6tIW2LydjQPquO+WrRzf0Hn/fUoF/VqjlqstHagscbg==
-X-Received: by 2002:a05:6e02:1aae:b0:424:7ef5:aeb with SMTP id
- e9e14a558f8ab-4259563befbmr124933425ab.17.1758925984264; 
- Fri, 26 Sep 2025 15:33:04 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-425bc68e3dbsm27354935ab.15.2025.09.26.15.33.02
+ d=1e100.net; s=20230601; t=1758972850; x=1759577650;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QoYTH1eXFNDV862fGdzX1XAgAGlaOnOyX1FmjXGcs6I=;
+ b=xS5Efofec5RutGUENtWgwV7i60ODM02EBuBVvjWWGcb1gv0tcXlA3J1FxmZBOEERlR
+ He4L8PiEPDipzx32vzV+ZNXDjf0FtKxqvZQf57k2mI0Yq1yWtCjW2krGNi83isQ7fSIu
+ YKRWzrGyEOz+85azSmgEPMw0666qV0Z5KnyZQyJRczQKygoKEOst7LFzoii0hcprV/Tt
+ 6WaRSIJJXAuvbDOUs/Lz67XgZmkbhCinuOz1p0n19GlphqNHCKCmi86AYETI7ykd+yMM
+ oguI4FlPwIJv7kI8hLB6Q6Dlhj0dC5/PYyFyhq0vu9iufmSLsURN72c8vAb/IYm4+bAi
+ J1fg==
+X-Gm-Message-State: AOJu0Yy4QQ0wC1d+2UivxxwXoqUSNW/hyp0dAp6csCx0mH8ceAYlPDw9
+ w0Wp8FD74BZYJq+tz1Pr0kZMqZSl25xgUJHm4NprTzU8z4zXdTq9GqBAKNdLyiznKBXYTxJR5um
+ Yjf4SXg==
+X-Gm-Gg: ASbGncunxYQPNCxXa27HLbkIptf4EJ7Ca+RfpOEHdZXd+MlL+cBT1JaBq4APQOWO45G
+ IqCOQNbDx2xzlWN32jZQ0JUdeUMjO/ADY+G98A0i9uVPRCpvyLRry1Zq7sTysIanCpssxGI023o
+ 8K8vrBwnRpaI25K3S6UxGhFKqvRkPH4ZAMc+khetkbrxqc3gJnYgTDikag2qbpba+RotTjDN48e
+ sCsnEV85o4lQZ1R44usuDEXEVUEOLLgIMWGc/G8XZN/jCjHlpYKH4+MmIRHQ6IyrltM2Zukx27b
+ 9VUrpl4DyWZgYrlw8HYuLGFw22gIBUwhxFU6u9DMz6vlLs38sGSkDSPLIsyvddp+P+5adpnrJnb
+ 5trZ1rA/Ulz/uA+VKMct0Dzayw+Y=
+X-Google-Smtp-Source: AGHT+IEgEcVvOpI0tdoxTFNQP6m+UVi7Ji7v7aTdadAIgqTJHEsdkFZjdJbfVAp5xieI/ctj285yjA==
+X-Received: by 2002:a05:6602:6b08:b0:887:3efb:6101 with SMTP id
+ ca18e2360f4ac-901567eeec7mr1746222039f.7.1758972850125; 
+ Sat, 27 Sep 2025 04:34:10 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-9040f54c16esm261142939f.19.2025.09.27.04.34.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Sep 2025 15:33:03 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: Re: [PATCH 0/9] exports overhaul
-Date: Fri, 26 Sep 2025 16:33:01 -0600
-Message-ID: <175892323904.3793125.11379082267045828474.b4-ty@konsulko.com>
+ Sat, 27 Sep 2025 04:34:08 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Stephen Warren <swarren@wwwdotorg.org>,
+ Stephen Warren <swarren@nvidia.com>, Simon Glass <sjg@chromium.org>,
+ Fiona Klute <fiona.klute@gmx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Martin Stolpe <martinstolpe@gmail.com>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Mauro Salvini <m.salvini@koansoftware.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: [PATCH v5 0/1] rpi: Tidy up booting
+Date: Sat, 27 Sep 2025 05:30:14 -0600
+Message-ID: <20250927113019.2863093-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250919101002.568488-1-ravi@prevas.dk>
-References: <20250919101002.568488-1-ravi@prevas.dk>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,43 +96,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Sep 2025 12:09:53 +0200, Rasmus Villemoes wrote:
+This series allows rpi to boot a compressed Ubuntu kernel with ~100MB
+ramdisk, by expanding the available space.
 
-> This all started from me wondering "why does this standalone app end
-> up being so huge"? Oh, it essentially links in its own standard C
-> library to get strlen() and snprintf(). Which then led to asking "why
-> don't we export all those standard C functions when we have them
-> anyway?".
-> 
-> CI has chewed on these and seem happy - it was CI which told me about
-> the necessity of [1/9]: https://github.com/u-boot/u-boot/pull/813
-> 
-> [...]
+It also tidies up some strange behaviour with the provided FDT, where a
+separate pointer is maintained to it, even though U-Boot has copied it
+and placed it in its own space. This avoids strange bugs where it
+accidentally gets overwritten when loading a file into memory.
 
-Now, it's important to note that this does increase the size of the API option
-because it adds more functionality there. Some size constrained platforms may
-wish to disable API support altogther and gain more space savings.
+The patch to expand the devicetree was dropped, meaning that people
+should be careful to unset fdt_addr in the environment.
 
-Applied to u-boot/next, thanks!
+In version 2, it incorporates some changes to fdt_addr, etc. suggested
+by Tom, as well as adding myself as a maintainer.
 
-[1/9] malloc.h: be a bit more consistent with macro definitions
-      commit: e54bf98c3afc6dc6e6ce9496c217cb1c660aac4d
-[2/9] _exports.h: drop creating dummy i2c entries and fixup config dependency
-      commit: 0933358163a3c0ef13577853194769504cfb39ea
-[3/9] _exports.h: simplify condition for including spi functions
-      commit: 475a72f6471194633fd85a813547bebe846611e0
-[4/9] _exports.h: drop the last dummy entries
-      commit: eb178c849c25024225941db79c1c3b9681a46a80
-[5/9] exports.c: drop unused dummy function
-      commit: a78941bc7ff72ab3b67197d53216306429e6a831
-[6/9] exports.h: make sure declarations are in sync with the actual exports
-      commit: bdbaaee65c69eebe1ee47296fa2fb12a4677697c
-[7/9] _exports.h: reorganize a bit
-      commit: 2ef6c17f7f46a908e99e24de53d2c153dc1972ab
-[8/9] _exports.h: export standard memory/string handling functions
-      commit: d95706158203db0b2281e134e8dfbad87e3d668c
-[9/9] exports.h: bump XF_VERSION
-      commit: 07588f4ad9b80e73726fd7ecb8e17e21785322a0
+Changes in v5:
+- Rebase to -next
+- Drop patch to add myself as a maintainer
+
+Changes in v4:
+- Expand the comment on set_fdt_addr()
+- Update the commit message to talk in terms of my testing
+
+Changes in v2:
+- Drop patch to allow expanding the devicetree during relocation
+
+Simon Glass (1):
+  rpi: Use the U-Boot control FDT for fdt_addr
+
+ board/raspberrypi/rpi/rpi.c | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
+
 -- 
-Tom
+2.43.0
 
+base-commit: 14b784aaf2a96b0f597b4fc3c5a3b4cb70f18182
+branch: stc5
