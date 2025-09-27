@@ -4,84 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C25CAC5B0
-	for <u-boot@archiver.kernel.org>; Sat, 27 Sep 2025 14:05:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A7D7CAC5B0
+	for <u-boot@archiver.kernel.org>; Sat, 27 Sep 2025 14:05:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8260E8329F;
-	Sat, 27 Sep 2025 16:04:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E4BDC830CA;
+	Sat, 27 Sep 2025 16:05:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WwyQqzbl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="R0t/rYZV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D00383192; Sat, 27 Sep 2025 16:04:58 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id A22F7832C8; Sat, 27 Sep 2025 16:04:59 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D89C4830CA
- for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 16:04:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89EB180819
+ for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 16:04:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-74542b1b2bcso2789833a34.3
- for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 07:04:55 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7827025e548so1865557a34.2
+ for <u-boot@lists.denx.de>; Sat, 27 Sep 2025 07:04:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1758981894; x=1759586694; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1758981896; x=1759586696; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j5OlmdmGDVBaVSD3YBilYr1YBcD/7SksOzzXAN3RSHg=;
- b=WwyQqzblQ/yp2WQxdhblqz8hTuJO8pPhcLkJ8zpHev6liLaTk9LTTGEbs6WAuWmPkb
- DvEJOqNijijob4iSG9KfygOMRtZlQhPAEpo2AtpzR5UAV9Kydo62fkPEFzYzsTxfcp1o
- woVGumkaP7UmpYTinrPBriD3Bv5NZqbxzzC3A=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=O2JdoA317WN0oo6RR7JeVf6qLu2OP6XgEAGmLh9NMeE=;
+ b=R0t/rYZVkZFk+vJ1GhyJpwDwqaVS5pfX0Ic64LQ4c1RkGXJqX2tIzW672tsAr2SAqq
+ F8CBOw5ZH5Sua1Z1wsutCxLYvXI6/o0hbQd45RslPLLBgMXOrlFPV6Q8u9lvfiP3xyFz
+ dslrMiNbcry6nInzDZXt8joK3K8GVhs/c6wzk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1758981894; x=1759586694;
+ d=1e100.net; s=20230601; t=1758981896; x=1759586696;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=j5OlmdmGDVBaVSD3YBilYr1YBcD/7SksOzzXAN3RSHg=;
- b=nIcjij952IFLDhAXJxU6BVcGazoI15g3S/bx4dEezc5B6NLFbFItSacaHLZw7o6H2U
- teEyYsSzuYiglsChquXgtmf8kOGonUmD+joC8sLAhCpB70b/9lL3ZLKiLH/1J+na4E8/
- +LOTadHv2cCymPImJQK3OGvhc6t8w/eGWw3ymTXLeOb4hynqYh30m3KVbQvPfkOsYK5b
- k4YFRypH+7OU+LtQaSZUmrfWST66U3okWKAaGypWZBg8sMsMdNr7adizYooETVEwbd3y
- EKN9Neabmr8wl3Pa5DJkExP1hnvRszYJyEauz5Da03ZkuN/T0wN1NC+Wap9Jiv4rCiMj
- Ks9Q==
-X-Gm-Message-State: AOJu0Yyso42cwsJZ213cd2LKcTX9ors97uQi6CADHwv7Bg+Y2FPmPrcF
- C60ONUL4C6uFNDqehryjcIvHi22x5W5X2NLTbEwqB0cqu+G3LlhlwMd5qsUQC4IUWDQ=
-X-Gm-Gg: ASbGncvPAsLrIYisACiiNaz+RnkUcKxaN+fLM2E++q7u9/GM8tc8ClB1NZrMEt2zxkX
- uYZJCXxp0b666DqgXTPCGtFsToIIZXYy8ZanAoqPGFfvkqddrSVSl1yYSaEkEXM0cZUaRslCvMf
- MXRuLdkNHuFeiotVS/CcwUkSqaY7Vx/uYLblobwVFdr+j46erA1cuAGLkL0BV4/degRCP5ULvZl
- Q4T8UkulDQbTgyQuwOBR25Tev5mOpkfkHimblvdYFTvY02ISnPF9Ds9LtHm6vSR+Wf5Kcup8Xbr
- yYErS0pKjbtwBpFuDK46UhPLmA5chIad1CYtCMZrIQiXaLIOrgLg2YQk7AZCyEA2tcMLUP2CM4x
- GxViweQo9XQV5Xh8huHl1KZajbUrFoe2qUi1eanhmJNmycium/lExSLY=
-X-Google-Smtp-Source: AGHT+IFH2aHPwpeLqIsmq3Y/A8DoTZ082oeOMITNAKEya+5PLL8rJTDalmTFs6UQG73+Sr3iYBaVmA==
-X-Received: by 2002:a05:6830:378e:b0:7a9:f37b:986c with SMTP id
- 46e09a7af769-7a9f37b9b14mr3273310a34.8.1758981894607; 
- Sat, 27 Sep 2025 07:04:54 -0700 (PDT)
+ bh=O2JdoA317WN0oo6RR7JeVf6qLu2OP6XgEAGmLh9NMeE=;
+ b=MofNkhSBC7tr6WAvR2Ld5I7/sR45TivZhJP+klLISuC0cJe/nDgrQyk5LTp+eoUMop
+ tSNmsHCrlrX+2rB/94c2dcSyVbngLpYz6PgtjyErzfRM/fbe7alF7XKi/+KuJzJTHOp2
+ wat6RoAbDaTpz94iY9Kdeky39DN5+p6cx42j+HfYMGc8BDW/5awPPhcVVRfOMi02O0tp
+ LiUbP3kwzOn3bfA3fIQVhxhWrqdcZSSGJgFLDUg+zZVPxka6i4T1qp/C7LpAND6lJbDI
+ 0BAX8MYD/Coty1DSAzMKEXzsn2sc415lZ7p2qwC5P/CDtZPfbMi98R51y3m1Twic9q9x
+ utUg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcsDwlPGnbHM2gEPnmrjycyLxVAmKRwRdJlG2d41pEuUPdZwaAL7xt8kGLPRmU6R/34w5urd4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzAndc0R7IxZnBTcwBd3J4CtsOITT749mlR16U5IgV0u16D+iBH
+ 0Zbxrt9X9enTKtzR/RDOSdu9ogr0FjWRPUpQr1/M7duQYzVWjoFLVXCeHaen31qWwuONspglPP7
+ 5Fr4hwbM=
+X-Gm-Gg: ASbGncvBMf+d7btENekjg08STRgCGhjUBWmcd8RsViAgrZXDID4vGpgt0G4GUnJznGA
+ em+IMwvTN7R0FV1DEZaaMxcpzb6WWqZ+XXAX3KTG6lKk9U9ApoZ4XkckUPKKwFtlCUb5aW1nZVy
+ Wp6wn1dkVxrnULXn4DvSkdnuc2+g+a2rS4yF4yxRjM0f8uLuW0lAWmGN64s2/c1nXaebqQyBvAO
+ D0feQ2+bdGlZkAZWZZmLFwJ2ChH4sOWHQHViHWc8rNQaN9v3tI6ISDen0t4hWwP8/GB9nMIXtq8
+ AnZjH9I7SucNeOMYHsgzRaF2bte32BNWdEZlUY+7ctpmLh9l3h23/9IYbBeoKPCNyFBA+FFKI6V
+ kCnYo3ScwME5qlTJKIBIAG8t4tBaN3jFfjuOitpVDVvQf+QjPBBFLbCg=
+X-Google-Smtp-Source: AGHT+IFkj0DL2thpePXKJcxUQlM+2EOf47XTl2p43DccBKrtUw9IbqEoc6bOY9Nc8NxchyEhkozGNw==
+X-Received: by 2002:a05:6830:6211:b0:743:801d:5215 with SMTP id
+ 46e09a7af769-7a048c02271mr7138953a34.17.1758981896284; 
+ Sat, 27 Sep 2025 07:04:56 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7b4c0e92da9sm20077a34.26.2025.09.27.07.04.53
+ 46e09a7af769-7b4c0e92da9sm20077a34.26.2025.09.27.07.04.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Sep 2025 07:04:53 -0700 (PDT)
+ Sat, 27 Sep 2025 07:04:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>, 
- Chris Paterson <chris.paterson2@renesas.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250918164936.25592-1-marek.vasut+renesas@mailbox.org>
-References: <20250918164936.25592-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] arm64: Add MIDR entry for Cortex-A720
-Message-Id: <175898189300.3905802.1751341647924318308.b4-ty@konsulko.com>
-Date: Sat, 27 Sep 2025 08:04:53 -0600
+To: mkorpershoek@kernel.org, j@jannau.net, u-boot@lists.denx.de, 
+ vishnu singh <v-singh1@ti.com>
+In-Reply-To: <20250916072515.1088313-1-v-singh1@ti.com>
+References: <20250916072515.1088313-1-v-singh1@ti.com>
+Subject: Re: [PATCH] bootstage: stash boot records to reserved mem before
+ kernel handoff
+Message-Id: <175898189474.3905802.8730233590307516405.b4-ty@konsulko.com>
+Date: Sat, 27 Sep 2025 08:04:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,16 +98,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Sep 2025 18:49:19 +0200, Marek Vasut wrote:
+On Tue, 16 Sep 2025 12:55:15 +0530, vishnu singh wrote:
 
-> Add MIDR entry for Cortex-A720 core.
+> U-Boot now stashes its bootstage buffer into a reserved memory region
+> whenever CONFIG_BOOTSTAGE_STASH is enabled, just before exiting to the
+> kernel. This allows a post boot parser to read a unified timeline
+> (SPL→U-Boot→Kernel→MCU/DSP) directly from DDR, enabling standardized
+> and repeatable boot-time profiling across releases and SoCs.
 > 
+> Change summary:
+>  Call bootstage_stash_default() in announce_and_cleanup()
+>   when CONFIG_BOOTSTAGE_STASH is set.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
-[1/1] arm64: Add MIDR entry for Cortex-A720
-      commit: 7c0f1c46f885db62c86d035814c1bb282af43c8c
+[1/1] bootstage: stash boot records to reserved mem before kernel handoff
+      commit: b6d9aa6aafc0ae2f551de301e1f371c4814cef68
 -- 
 Tom
 
