@@ -4,84 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 273A7CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 20:40:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAEECAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 20:40:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E1048349B;
-	Mon, 29 Sep 2025 22:39:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7C56483526;
+	Mon, 29 Sep 2025 22:40:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TXCDYDJh";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="CJWQrDIv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7370A832AD; Mon, 29 Sep 2025 22:39:55 +0200 (CEST)
-Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
- [IPv6:2607:f8b0:4864:20::a36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DA2E38344E; Mon, 29 Sep 2025 22:40:01 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D4A1832DA
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 22:39:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B87FD82A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 22:39:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-vk1-xa36.google.com with SMTP id
- 71dfb90a1353d-54bbe260539so2067089e0c.0
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 13:39:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759178392; x=1759783192; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Hq1mE6yv0lZWyTB7/dFXmfH/7v1xs7QK6zIzdhNgaSY=;
- b=TXCDYDJhbPo7RUVOZSqUHJjv6K0keHMLd2p9FnsDArfgKLVKnYCmKzOCs71330bICS
- 0lZ5qkecEBG5pJnG9cXN0X65l9WzqfkS/864y8Fohox+tn1Qk5UYyubVzHbKlAsoben4
- mp1UM1kSxgXVGQujAbLaIgdy649DAfZ8MP9gf5Geltzl7LG6yO4j9KCL5O1pTo0vM8Ss
- 4psNt+zAZvUdTVpYNI5+ELekb62CrZLQh/KieUjJ8h8LM1g8/Ax5Qny4WlUSzG1u47Pd
- l9SoP/sKkL8vJF21mKGBI2sj5BLRNi/5ajHslceM9HLV0iEYcawvbTqUtYSJSp6G0T38
- SSVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759178392; x=1759783192;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Hq1mE6yv0lZWyTB7/dFXmfH/7v1xs7QK6zIzdhNgaSY=;
- b=bZNdL4TQACph3cIwMFn0Xi0xhluSk5cdQCCROQOLfn9HyxKG+dK+D6j2DQnOvKuGHs
- QuF/s3u4Rl4m1pRj8RxUl8wjCpZ8B1EHXTZ9p2WOLPipmR1jhjHB6fDymGYjUErq2Y/h
- 0vtSBqs2t0DUoDNhLZ0TBsrEZ3UbK0MNBsdDw4dFN3w0RLdYXWurs5DpeE8rDe+/QI8l
- wCy3UC/Z3pGFZQDk7fblBcSd6mimiTy2GvGgS1hL50vNbcUDOPld8QdDsXGWjsCbPWnv
- UpcmtYzQ6Iw1h8qcbwLznKx/HsRefTKrGurt7Inf6PyIjJoCvH3KuESi5RW4/Nnn/7Uo
- f0kg==
-X-Gm-Message-State: AOJu0YxzSR19+ddS2Rt8KvqPdVUVLgwaIM/d9xXTqLpKp0lJedaaf/gv
- EiTy0WknQkjGCn8WnNa29LE/z/hWW2M45WLGvjKt4C/iekRJNDnDUohktnNjbx6S8hI=
-X-Gm-Gg: ASbGncvabkjMKfcD/HyM3wOjv1wW3WtIAnVjViszDY/9Fff8ZMXIsmUC4SX1HW8G7K/
- UJrCNk3uuAo5XO9zc5KTwMWndqSYTab9A148WXA1Fdhl0bxYSL41GH3+hG+/sDTt6/2ppdx37ne
- Q5ZcvYQbCr6e2hMhVFizk2m8VWdfDsmZ1dH0o+eLRpF4z3bBA3bddsIqfUHJ7R252m02zExr8Jv
- Z29ZY3EUx9rF39TjsibpYB7or0/RnNAlJN+fOBkf2qnEMF1WFL+aVX/01nvtCL5iX8W3OvkwtwT
- q8keHUWyQa8w8yt4mgbbrObYefvaBqEx7fP1NfrGmh2NcXMscmEijMRkaYyKY69/8Od5CsBXzW5
- I3VtNwDo5WI6pFThUMjirgliM0JX5rv01fCFCJESIYK24YIk+JB/ZpiiXOQ1pKC4LVak=
-X-Google-Smtp-Source: AGHT+IE4Xsjjs4zIu6KaA13jVkOd+OpWypF7WY+Z+mQLx7U8r4QmO2fE2rg8b2Skdn1ssonSG+1bZw==
-X-Received: by 2002:a05:6122:8c15:b0:54b:d89d:6971 with SMTP id
- 71dfb90a1353d-54bea1e1d62mr7248561e0c.13.1759178391747; 
- Mon, 29 Sep 2025 13:39:51 -0700 (PDT)
-Received: from jetm-rog-crosshair-hero-x870e.local ([177.93.10.188])
- by smtp.gmail.com with ESMTPSA id
- a1e0cc1a2514c-916d1518f84sm2651076241.6.2025.09.29.13.39.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 13:39:51 -0700 (PDT)
-From: Javier Tia <javier.tia@linaro.org>
-Date: Mon, 29 Sep 2025 14:39:29 -0600
-Subject: [PATCH 2/2] b4-config: Simplify configuration by relying on
- default b4 maintainer
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20250929-b4-docs-v1-2-a56c1a1856c5@linaro.org>
-References: <20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org>
-In-Reply-To: <20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Javier Tia <javier.tia@linaro.org>
-X-Mailer: b4 0.14.2
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 76fc83b4-9d74-11f0-809d-005056992ed3
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 76fc83b4-9d74-11f0-809d-005056992ed3;
+ Mon, 29 Sep 2025 22:39:58 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=SdFZwWNdMGpJH8L/hT1HscziPPCiP8oCzb5K6dPp/qE=;
+ b=CJWQrDIvUSFg0L4/7gtsrutO9L9o22enamPathFWpRkGh/v6JNbRWtvEiRfLGMGBZcmcUcTFlDADZ
+ rXB12EK2CjoIfCTXhpQYlr8M9BoEKFPw8bb/fbhEX+rcXBeDFVSpgA0KMr8OMFBdz33nD3mfsqVyYO
+ zC7OwpsAF7qOYQka2IPKXmvzKCghgKmgYGFdkwJaUsg+dGIDDdbb26BmVjKuoW3mb/XHYXcS/wTTs/
+ zu8JyKirQzn/Ljr6JOQbC3eaJmowdvoUfq78avMm7RvIiSATb6nVK1YLaH2WPz4MJR9BmgVZ6p+m9T
+ QMylDBnYP3OXW1DEh/Lc/feZ450AByw==
+X-KPN-MID: 33|4T4gtz3BMINKjKhI9Rx5ZcwdUewqiMIMj8iiO/blfd9LOrlGtfsxpkD+vOioVEV
+ 7HrZNUBJq2SATDdbGoLMfS4SLyVhx1KynKcqluQCtVCE=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|0azN+fAt56B3ynRFmUF9Vf35Tg1lFW1uYuB90MrXB8j3QhYz3o7VTNaYX9tNi7s
+ x6Xvak3PEx6pN2tz6pjmQHA==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 76cc0f27-9d74-11f0-bfed-00505699772e;
+ Mon, 29 Sep 2025 22:39:59 +0200 (CEST)
+Date: Mon, 29 Sep 2025 22:39:58 +0200
+Message-Id: <87qzvpdmch.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Tom Rini <trini@konsulko.com>
+Cc: kettenis@openbsd.org, u-boot@lists.denx.de, marex@denx.de
+In-Reply-To: <20250929195957.GN6093@bill-the-cat> (message from Tom Rini on
+ Mon, 29 Sep 2025 13:59:57 -0600)
+Subject: Re: [PATCH v2 3/3] usb: xhci-pci: Load ASMedia XHCI controller
+ firmware
+References: <20250929195241.70351-1-kettenis@openbsd.org>
+ <20250929195241.70351-4-kettenis@openbsd.org>
+ <20250929195957.GN6093@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,35 +76,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove explicit settings for send-auto-to-cmd and send-auto-cc-cmd from
-the project’s .b4-config. The b4 tool provides sensible defaults that
-automatically invoke scripts/get_maintainer.pl with recommended
-parameters, making the custom overrides unnecessary.
+> Date: Mon, 29 Sep 2025 13:59:57 -0600
+> From: Tom Rini <trini@konsulko.com>
+> 
+> On Mon, Sep 29, 2025 at 09:52:41PM +0200, Mark Kettenis wrote:
+> 
+> > The ASMedia XHCI controller found on some of the Apple Silicon
+> > machines needs firmware to operate.  Use the file system
+> > firmware loader interface to read the firmware and load it
+> > onto the controller.  This allows keyboards connected to the
+> > type-A ports on these machines to function in U-Boot.
+> > 
+> > Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
+> [snip]
+> > +config USB_XHCI_PCI_ASMEDIA
+> > +	bool "Support for ASMedia xHCI USB controller"
+> > +	depends on USB_XHCI_PCI
+> > +	default y if ARCH_APPLE
+> > +	imply FS_LOADER
+> 
+> The code reads like the loader is non-optional so this should be select
+> not imply.
 
-This simplifies the configuration file, reduces maintenance overhead,
-and ensures contributors benefit from ongoing improvements in b4’s
-built-in maintainer discovery.
+Thanks, the Kconfig stuff is still amystery to me sometimes.
 
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
----
- .b4-config | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/.b4-config b/.b4-config
-index 6ba10cf9b50e6acb8a789544d35a13641e6c0411..3a9c7c406b0188c043c28bc9a67e04d6a77ea260 100644
---- a/.b4-config
-+++ b/.b4-config
-@@ -2,6 +2,6 @@
- # See https://b4.docs.kernel.org/en/latest/config.html
- 
- [b4]
--    send-series-to = u-boot@lists.denx.de
--    send-auto-to-cmd = echo ""
--    send-auto-cc-cmd = scripts/get_maintainer.pl
-+# send-auto-to-cmd and send-auto-cc-cmd are populated automatically by b4, and
-+# the default configuration functions effectively as it executes
-+# scripts/get_maintainer.pl with the recommended parameters
-
--- 
-2.51.0
-
+Fixed for the next version.
