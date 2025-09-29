@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE765CAC5B5
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 09:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8F3CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 10:14:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24F588206E;
-	Mon, 29 Sep 2025 11:59:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A0748206E;
+	Mon, 29 Sep 2025 12:14:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tq-group.com header.i=@tq-group.com header.b="JZTrfdc0";
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="eutXWKHU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E7IELH2+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0550E82A9E; Mon, 29 Sep 2025 11:59:11 +0200 (CEST)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9CFDC82A9E; Mon, 29 Sep 2025 12:14:16 +0200 (CEST)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C0F0809A5
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 11:59:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ew.tq-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id 77FAB809A5
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 12:14:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=max.merchel@ew.tq-group.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-4ddf60466d4so34180361cf.2
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 03:14:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
- t=1759139948; x=1790675948;
- h=message-id:date:mime-version:to:cc:references:from:
- in-reply-to:content-transfer-encoding:subject;
- bh=HnKww5maqLvUWuV5p6tksFk9BTgjoIZbTtbRwXJePoU=;
- b=JZTrfdc0FCYMCi051iUXEO4Wj/+eiG41VFNK70zdIeCoOQ00D3TkcRfI
- sB+Q/CePbHxQm0g9aaalXpWqHmnJgqOIzksIzwbSgjxQKWb/tmmWpICPN
- +ZGe84iI+5b2bRT8U5ds7mkaqXRSgr7JaqjNOv+mqPXeAn1UokhA+Y+AV
- uVma+H3pB4kDe8xvDtQo0+KAovuBq+M8LYY1gruSE++UFIDHqr5/CrTfu
- IdTmJczCRT0dYPZGcjQUeY7GrHxznt9XgKfykDn4Xyzsncf/SbmDvaiQQ
- zuLL0srLGp0h1ORGTXwX0g+WkSyqxJZoMGcyG+AdVpmiaTVu4Pf9yulDH g==;
-X-CSE-ConnectionGUID: eYz1EVTkS6SyxfjQjmBpaA==
-X-CSE-MsgGUID: 0QJBuzl/QD+4W8tvVQ7CmQ==
-X-IronPort-AV: E=Sophos;i="6.18,301,1751234400"; d="scan'208";a="46206775"
-Subject: Re: Re: [PATCH] bloblist: fix missing OR between licenses in the
- SPDX-License-Identifier
-Received: from vmailcow01.tq-net.de ([10.150.86.48])
- by mx1.tq-group.com with ESMTP; 29 Sep 2025 11:59:06 +0200
-X-CheckPoint: {68DA586A-20-7104F59C-C32877CC}
-X-MAIL-CPID: E55E579E2A7D8DE5659CCE9FFF565C70_2
-X-Control-Analysis: str=0001.0A2D034F.68DA586B.0062, ss=1, re=0.000, recu=0.000,
- reip=0.000, cl=1, cld=1, fgs=0
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id EF4F1160D1E; Mon, 29 Sep 2025 11:59:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
- s=dkim; t=1759139941;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=HnKww5maqLvUWuV5p6tksFk9BTgjoIZbTtbRwXJePoU=;
- b=eutXWKHU9SgTUzDvQ4b322FFKemafqr3LMzfUGptTiimlyWCD9/qoyzbwIAQqxpEhLHuNt
- VClHRsqwm8b7PMcalpZyJAFfS4FoMvYvkiuYA6PJixxryqdMhm4Jsmq1+OTfKOOmgvpv9B
- 9TEx8YXaYMdA//V4t5lO9KupU3455Oo0F6zkaRRvOTbUvmEBE69/zXl53/UkSkESqaMSf3
- G/7QV5Y5Sii7UI/VwLO2zsh5LfGX/9GiKSDCanRqnFovnkgtDXOs+AvoM7TZK+6joN401e
- 2jGMzWAk9WkISw8LArayOHOtYBrsm6JXv74hjc129pBwBW0uI2O+CVy4AAUjoQ==
-Message-ID: <077e9371-4bd4-4c70-b505-428e8a491d83@ew.tq-group.com>
-Date: Mon, 29 Sep 2025 11:57:48 +0200
+ d=gmail.com; s=20230601; t=1759140853; x=1759745653; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
+ bh=XA1p9dDlihZlrribTMgAPwzhnEdM9mfqkQuuN4Yi9zQ=;
+ b=E7IELH2+65H2d1/AyRgmUbz7p4hVEzmST1Jp2EI+UxVlyvnae8ZWGo5V8f7M5emGhn
+ o1WX6UPtpgSOAy/YmN/gFa3wAdEOfGinluYCXmk6hO3cYV/akwvtRp4Y6c8I/SjD7i/q
+ guevIGHT2wZ6U1jkwGEHIm2SwWdxTAVPk2AaCESRqj9u8EbHsFrgPsw5e8qaNDYHVqwb
+ tPRK+NSJZa/LVi8oa1luA87bTOhxmRyc31EFXb+KXIvFggWmvtA9FlEswzBl0uGtAr8J
+ Xfshxm+MSuP2jJVlLLSc/oMP7TqCckUDhWdPtEZpT7aN413xMTdiRQD0Ds7pFCxEIuh+
+ NofQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759140853; x=1759745653;
+ h=in-reply-to:content-disposition:mime-version:references:subject:cc
+ :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XA1p9dDlihZlrribTMgAPwzhnEdM9mfqkQuuN4Yi9zQ=;
+ b=KaJ2f6fizgK0S4KbFgkUAEMdFTcxS2UZOXZR2gn50CwH0mq1FSfW3BG2KMdtpcucRy
+ +PkSDyaC6yr4jrNSK2wbFR3RvGuLH/I4wFF3dMQOUtBBf7u7RwHoa/LHYAX5Yyy4POf/
+ R8nqBcYq4u2DieSEUrYQZrBayKuVUdwdXmgdLEWjGcv0E316BrOQoeVkDzuSJNPywVBv
+ TDSFkadXpkOUWmb4Ay0xX56Qdc3nQi2jLPjspirBq88G0GenSkB0kKVDqAHUuq5omQGf
+ FNDY1xDZLPn0w7837rErDTM/zN0tUxYN7OVxv8e54fOOApUwFfu/ZArDanNePdDFobhx
+ 767g==
+X-Gm-Message-State: AOJu0Yz1wI+QjAxLmliNlrSwC42FQFlOVqocc95sm/03eNkETBYgP76Q
+ 2unz+QQ6sS5dn7L3v3YQht1Q+RpnP1wJPbUIKQvGWu5h5PyLeXLMdurcMwSDhQ==
+X-Gm-Gg: ASbGncsKUvfAHtAmHZfa5JyJUIFLtmALq38Ao8GQ3CwjASt7r2qtqsZvVJaCtFgufFH
+ VxI1P2gyLYXac2hjvfehv++UXbGbLwWiCcu4U4T5fMOxPF59rYf5Tj6fGonLgecf9xa3FOTC9Uv
+ /71nlCVJ7SsIIfP6PQ22b/KbjQdkvfWq5LoAYvD27oFv6qEKlAW/n7eLmQnOnMIndZuJXXW9ee3
+ 8VhOcHpF58AROU/dkHb/UwG0dSi0dt3OlNJL/NBd0fvOsEqmzKophBPURWzc1oothtrXVETZCSi
+ TcIu2pI5J6DoJLFww4jPX4MoGRuSYDWkVm2w+YCNTwkjAQ/yLH/gZ2ZvuuKtGC31+8cH8WKsnL6
+ 4NFwhO/UdcuTWnP/eAGs7Z5LpRUUPaQY7C4iKaLonLAKc8z5PzH4PpLW7Sc3F/vEZSdZWlg==
+X-Google-Smtp-Source: AGHT+IFt1SUqxHvuxiiX7Hssd66zH9IEjm0kORy1FeEdEnzY181G1U40mBlZ70XMykdRjIkiPRN+gg==
+X-Received: by 2002:ac8:5fd3:0:b0:4d8:372b:e16a with SMTP id
+ d75a77b69052e-4da481d96bcmr195826801cf.4.1759140853270; 
+ Mon, 29 Sep 2025 03:14:13 -0700 (PDT)
+Received: from Ansuel-XPS. (host-95-249-236-54.retail.telecomitalia.it.
+ [95.249.236.54]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-4db09f19db1sm73108481cf.2.2025.09.29.03.14.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 29 Sep 2025 03:14:12 -0700 (PDT)
+Message-ID: <68da5bf4.c80a0220.2f77f4.4c19@mx.google.com>
+X-Google-Original-Message-ID: <aNpb8ecIaLPzq8ir@Ansuel-XPS.>
+Date: Mon, 29 Sep 2025 12:14:09 +0200
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] test: led: Add missing ';'
+References: <20250925205026.3561694-1-trini@konsulko.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com
-References: <20250814120029.234237-1-Max.Merchel@ew.tq-group.com>
- <20250821191232.GA917481@bill-the-cat>
-Content-Language: en-US
-From: Max Merchel -alt <max.merchel@ew.tq-group.com>
-In-Reply-To: <20250821191232.GA917481@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250925205026.3561694-1-trini@konsulko.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +97,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Simon,
+On Thu, Sep 25, 2025 at 02:50:25PM -0600, Tom Rini wrote:
+> Some tests here had not been compile tested before submission and were
+> missing a ';' on the end of declaring struct udevice *dev. Add it.
+> 
+> Fixes: 9046279d92bb ("test: dm: Add tests for LED boot and activity")
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Christian Marangi <ansuelsmth@gmail.com>
+> ---
 
-Am 21.08.25 um 21:12 schrieb Tom Rini:
-> On Thu, Aug 14, 2025 at 02:00:11PM +0200, Max Merchel wrote:
-> 
->> Currently, the conditions of both licenses (GPL 2.0 and BSD-3-Clause) must
->> be met. However, the original commit message states that the BSD-3-Clause
->> was added to allow use of the files under a less restrictive license than
->> GPL 2.0. Therefore, the required OR between the licenses has been added.
->>
->> While at it update the SPDX-License-Identifier to SPDX version 3.
->>
->> Fixes: 6c9e3d1f ("bloblist: Relicense to allow BSD-3-Clause")
->> Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
->> ---
->>   common/bloblist.c  | 2 +-
->>   include/bloblist.h | 2 +-
->>   2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> So I'm going to defer this as the outcome of
-> https://patchwork.ozlabs.org/project/uboot/patch/20250101195817.995321-1-sjg@chromium.org/
-> was that it's fine to relicense but a v2 with a differ commit message
-> is needed. And while I thought about doing the v2 myself now, I think
-> this is something that really must come from the author.
-> 
-> 
+Sorry Tom for not catching this, I hoped the CI enabled these config.
 
-What's your opinion on this?
+Does the CI for these test use the SANDBOX defconfig?
+
+Just to prevent similar error in the future.
+
+>  test/dm/led.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/test/dm/led.c b/test/dm/led.c
+> index 36652c2833a9..f41a2fb73fc0 100644
+> --- a/test/dm/led.c
+> +++ b/test/dm/led.c
+> @@ -162,7 +162,7 @@ DM_TEST(dm_test_led_blink, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+>  #ifdef CONFIG_LED_BOOT
+>  static int dm_test_led_boot(struct unit_test_state *uts)
+>  {
+> -	struct udevice *dev
+> +	struct udevice *dev;
+>  
+>  	/* options/u-boot/boot-led is set to phandle to "sandbox:green" */
+>  	ut_assertok(led_get_by_label("sandbox:green", &dev));
+> @@ -180,7 +180,7 @@ DM_TEST(dm_test_led_boot, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+>  #ifndef CONFIG_LED_BLINK
+>  static int dm_test_led_boot_blink(struct unit_test_state *uts)
+>  {
+> -	struct udevice *dev
+> +	struct udevice *dev;
+>  
+>  	/* options/u-boot/boot-led is set to phandle to "sandbox:green" */
+>  	ut_assertok(led_get_by_label("sandbox:green", &dev));
+> @@ -200,7 +200,7 @@ DM_TEST(dm_test_led_boot_blink, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+>  #ifdef CONFIG_LED_ACTIVITY
+>  static int dm_test_led_activity(struct unit_test_state *uts)
+>  {
+> -	struct udevice *dev
+> +	struct udevice *dev;
+>  
+>  	/* options/u-boot/activity-led is set to phandle to "sandbox:red" */
+>  	ut_assertok(led_get_by_label("sandbox:red", &dev));
+> @@ -218,7 +218,7 @@ DM_TEST(dm_test_led_activity, UTF_SCAN_PDATA | UTF_SCAN_FDT);
+>  #ifndef CONFIG_LED_BLINK
+>  static int dm_test_led_activityt_blink(struct unit_test_state *uts)
+>  {
+> -	struct udevice *dev
+> +	struct udevice *dev;
+>  
+>  	/* options/u-boot/activity-led is set to phandle to "sandbox:red" */
+>  	ut_assertok(led_get_by_label("sandbox:red", &dev));
+> -- 
+> 2.43.0
+> 
 
 -- 
-Best regards,
-Max
-
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-http://www.tq-group.com/
-
+	Ansuel
