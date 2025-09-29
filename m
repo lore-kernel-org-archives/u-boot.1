@@ -4,84 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA898CAC5B9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 14:41:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 669AFCAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 14:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A2D783071;
-	Mon, 29 Sep 2025 16:41:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FB68832C8;
+	Mon, 29 Sep 2025 16:57:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jm9EebXE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s+aM4Cty";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB36A8329F; Mon, 29 Sep 2025 16:41:38 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
+ id 51495832DA; Mon, 29 Sep 2025 16:57:00 +0200 (CEST)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23DFF82A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 16:41:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B985C83071
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 16:56:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-43f56048d2cso410804b6e.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 07:41:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-b54dd647edcso4119928a12.1
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 07:56:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759156895; x=1759761695; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TshDxjnH+37gjwKN/30L3CEgsVodOm9+3Em1EYqStH4=;
- b=jm9EebXExtNhbWWm1s+Swnv+svKLSG77fMNs0+rtJdirACNA8Y0Ea+WcwZV9PXcwKG
- EATKIWJ8hdZoWkm/USmvTH7OoIZPcvOu7oUV0TC4TXC1JGrOokbDpYIE6ir6VsS2DXN2
- Y8FHBCPmliBIH7L1oT5XpIW/QnFHXMG175kO0=
+ d=linaro.org; s=google; t=1759157816; x=1759762616; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=c9uPuNN9knCBXdQ8PpvuBLVYODI37uuFieU+pVJqV+s=;
+ b=s+aM4CtywhQKZfwLHDIiQKL6UZ9tJG0I6ZuCtZNWwstwN8UeHLcjaBHpxhDnO7EIN9
+ MxiqRlABa7XS52JEIZah/CREYWi8iKRQNO3Y3elN4hwB/GXDMo5JsPzhls9zvYUG4v3N
+ iEjYYzDEMpBdCm6+yrpuXzQRiL0OCjHM+OnG4SkWX2sUPAncQG53R0uuqMit+6RLKoou
+ kmxtIgRHQKdmUjAxnxyyQTPSq1AvCMQLQT8cZA0gyx75g7cC3iGJ6zhgfOttN1GGgo57
+ MbwrbpH/izjipFb5e4Kk5yRGHtqH3i7DbW+WlPH812u7/9cjGu9M4lkL2INS+X6bBdis
+ 8YEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759156895; x=1759761695;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TshDxjnH+37gjwKN/30L3CEgsVodOm9+3Em1EYqStH4=;
- b=P0zR+dCaJeE6k88StAkZzAjcud7ZtBoo8plGVSWwVofDO16MFZ+DiW9v0dntaGRwLW
- UuLQgQM86TYHQWsuW4UhCIrTxDPigNaoNmA/wIO6iYf82cCJgpf6P2Gyeu7S8fytfKp6
- 9x38QVUnhfgGX5B7m2mK/aipL5UPceAABuQqXhAzVqj3iKq8osrGoHDeYU7loNvzRlXc
- TiAQBz5w9eEMGXQY22tkhBnNbb2EGX/8cS8oWAkJ0+cRGK4Qd/8l7el4KBQwaJt2uAgy
- Whug7wVex3jpiYVZWEHs8774Ju+OMqooYGI6FApgfQVvGl9PYrWr2zksuPDTXM5580o7
- Qd4g==
+ d=1e100.net; s=20230601; t=1759157816; x=1759762616;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=c9uPuNN9knCBXdQ8PpvuBLVYODI37uuFieU+pVJqV+s=;
+ b=HV6vL+yLoAE8cWROHHE2b/hXLato4cJWvaFHQ2vhTIPEF2iaELkx8In1xiciwcAHe7
+ TK34OgX+Y9V/bSn8i1ZAHeqF/NTdz/uQxFxvvlLkbsCXjGvSLOfJWJIU6h2KpJzr3xHu
+ HHS7mvSsc9tqXaURFobE9ugP0cWiEh4DPZ1f43U3HQxLJM6iHgdIGlVKH8sWFFdbpYY8
+ 9rOebORV0wGLGzv5lYi7mnAmGdLFu3L80cPqNWDWcj5X6xuTV9Wq3+hgp9AD2rn6dzxg
+ vSX8lbjPInMC6O3ckUw5N6uhqyPFKl5wpj9OHxG9O4Fy1+H27l1hvpzt4wg2WCK09CbS
+ 9COQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW4K4TkPrIW4/jplKq9x1IxSG8gndYcAdlqjnvPlI3V4+ShEcT7tchQXZv85u9vNGQQRiG09z8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzA7bV1HXwiCASVySsntZisXJCbAdXGCFNvAZb6xLyqgUzS1vI3
- 14Yhc9kEbwQeA5wvURh52wUhT5BWTjfXavMdWdbvuUN+4H+zxu9MfrHbdJXtEQ7mjvU=
-X-Gm-Gg: ASbGncvMKFSWDisehdoomO50lpR20EzA8PhyO2uLnzHvaBsQglL1UTRKc8owaIxVQ4H
- 6Fe56ZsNXRv5X/xqAY9VGHaRJ9kIwOySUtgNZExutLdFb10lXgpN83BFtGUZblyEOjgyLDjM4EE
- 5i7qCzmDycGPzn11/Y0NP2jRwSBuGq6+gDS1nc+XW1WNniMmJDZovXT+uimMcZI9LJMndS7PeLF
- 4fiZxfJyDMnTDbUE7pn7+62BT20LHn4dOhtoI6+G+T8pagxADIxgYg00TmYGurMwDc9yzZdjLQs
- xDsc/SKm5GL/oVSqyTnLb07AXSJHcqNVvLQHBs9cWENEMQsGqW/3hUfchrxt2zIdj5ZvBG4e1kg
- UkM3jCgAXXsGV4dw5QxHm2gnJm1+Lch/5BIPZrxNn8f8petE+NgJy/3xCj2som+AAR6boz6zmOA
- WDnw==
-X-Google-Smtp-Source: AGHT+IEwN3nAxfBWV1yhHSjqQo6huGAdMBbtlhMQcUw6Ka7A6BORBWLhdoE7pdmldIz6GeNbtc+EHA==
-X-Received: by 2002:a05:6808:22a6:b0:438:1c76:d4f with SMTP id
- 5614622812f47-43f4ccf0bfemr8959059b6e.1.1759156894674; 
- Mon, 29 Sep 2025 07:41:34 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43f5113190esm2158285b6e.14.2025.09.29.07.41.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 07:41:33 -0700 (PDT)
-Date: Mon, 29 Sep 2025 08:41:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: Re: [PATCH 2/5] ci: add post-buildman script to build TF-A
-Message-ID: <20250929144131.GF6093@bill-the-cat>
+ AJvYcCW8RExvk9/feXnjr0UjdRspKldYXh955/ndwmQwHn1/QqK12v2QDX5dt9nh8u8x1Ab88kZ+UPM=@lists.denx.de
+X-Gm-Message-State: AOJu0YypCsDBA79V1hrqOho64QapP1unm8CTlnLEdUOU9hoOR1uosX/d
+ y+GrStaekgDc+jA2iUvNKe8RwsF21eyxuqoWEWo133JEZqC+RcXmFhb+TMx8snEYYhWpCCb0vpz
+ WDvUtZrOEGlEb+DEil2ajEabzReRxJAPA9eD0rufX3Q==
+X-Gm-Gg: ASbGncsNNtGRJwHZftMLDavqY6wtN8doOdcs5FbjMlk1EP4Wu8wVC98W5EUBIuUuLfm
+ iRhi9KaClJmg6vQkNU3npQGrx6xKLtqus6avR4tx/F2Ln4kVDj9SdliDt5hdTGP3oqX1aV1pOsd
+ Kt3jDUwCQmurEg6tSv8OR819IidAA8fQ35q0kHLajQYPpGPLkm5DbqIaysvoSmaM7mwEvIev2Zz
+ IlFdmrQ
+X-Google-Smtp-Source: AGHT+IEKFnrUC7yBINJxgDtrgsYwm57Wa7BvFMPCH2d/466jYgZAROjt9sp/530az5LgvS+hOrTHNeLVSB01PRUaa70=
+X-Received: by 2002:a17:903:584:b0:270:8ae3:a6f1 with SMTP id
+ d9443c01a7336-27ed4a56d02mr138339965ad.46.1759157815709; Mon, 29 Sep 2025
+ 07:56:55 -0700 (PDT)
+MIME-Version: 1.0
 References: <20250916161426.32259-1-raymond.mao@linaro.org>
  <20250916161426.32259-3-raymond.mao@linaro.org>
  <20250916182742.GZ124814@bill-the-cat>
@@ -91,12 +75,23 @@ References: <20250916161426.32259-1-raymond.mao@linaro.org>
  <20250922193357.GG124814@bill-the-cat>
  <CAFLszTiRVtc4g4S2eELsGK7ZEz34g8k8w4HZ-Opy0xGhJWpgzg@mail.gmail.com>
  <CAEfUkUKdGE1w1e5HvtD+wQRXHGbjVs-Hnh782uaiGxav_wq71A@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ctb4zdBhFfMxdEsi"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkUKdGE1w1e5HvtD+wQRXHGbjVs-Hnh782uaiGxav_wq71A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20250929144131.GF6093@bill-the-cat>
+In-Reply-To: <20250929144131.GF6093@bill-the-cat>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 29 Sep 2025 10:56:44 -0400
+X-Gm-Features: AS18NWDLXBaJLcxFILn6v8z81xGhW0W2bUueer17Ge7hb7bgVMUTTnO1BmtaoJI
+Message-ID: <CAEfUkU+g0kphtxbF3aKanCbB6XwhxNJ_ecvMcG3dhoCXYULvXg@mail.gmail.com>
+Subject: Re: [PATCH 2/5] ci: add post-buildman script to build TF-A
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Sam Protsenko <semen.protsenko@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,201 +108,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---ctb4zdBhFfMxdEsi
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Sep 29, 2025 at 10:31:36AM -0400, Raymond Mao wrote:
-> Hi Simon,
->=20
-> On Wed, 24 Sept 2025 at 12:28, Simon Glass <sjg@chromium.org> wrote:
+On Mon, 29 Sept 2025 at 10:41, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Sep 29, 2025 at 10:31:36AM -0400, Raymond Mao wrote:
+> > Hi Simon,
 > >
-> > Hi,
-> >
-> > On Mon, 22 Sept 2025 at 13:34, Tom Rini <trini@konsulko.com> wrote:
+> > On Wed, 24 Sept 2025 at 12:28, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > On Mon, Sep 22, 2025 at 03:07:49PM -0400, Raymond Mao wrote:
-> > > > Hi Tom,
+> > > Hi,
+> > >
+> > > On Mon, 22 Sept 2025 at 13:34, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Wed, 17 Sept 2025 at 11:49, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Mon, Sep 22, 2025 at 03:07:49PM -0400, Raymond Mao wrote:
+> > > > > Hi Tom,
 > > > > >
-> > > > > On Wed, Sep 17, 2025 at 11:44:07AM -0400, Raymond Mao wrote:
-> > > > > > Hi Tom,
+> > > > > On Wed, 17 Sept 2025 at 11:49, Tom Rini <trini@konsulko.com> wrote:
 > > > > > >
-> > > > > > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wr=
-ote:
+> > > > > > On Wed, Sep 17, 2025 at 11:44:07AM -0400, Raymond Mao wrote:
+> > > > > > > Hi Tom,
 > > > > > > >
-> > > > > > > On Tue, Sep 16, 2025 at 09:14:18AM -0700, Raymond Mao wrote:
-> > > > > > > > Add a script which is running after buildman to fetch TF-A =
-(v2.13.0)
-> > > > > > > > with MbedTLS (v3.6) and build 'flash.bin', linking built U-=
-Boot as
-> > > > > > > > BL33 and OP-TEE as BL32, with both Firmware Handoff and Mea=
-sured Boot
-> > > > > > > > enabled.
+> > > > > > > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
 > > > > > > > >
-> > > > > > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > > > > > > > ---
-> > > > > > > >  .azure-pipelines.yml               |  1 +
-> > > > > > > >  .gitlab-ci.yml                     |  1 +
-> > > > > > > >  tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++=
-++++++++++++
-> > > > > > > >  3 files changed, 89 insertions(+)
-> > > > > > > >  create mode 100755 tools/post_build_tfa_fw_handoff.sh
+> > > > > > > > On Tue, Sep 16, 2025 at 09:14:18AM -0700, Raymond Mao wrote:
+> > > > > > > > > Add a script which is running after buildman to fetch TF-A (v2.13.0)
+> > > > > > > > > with MbedTLS (v3.6) and build 'flash.bin', linking built U-Boot as
+> > > > > > > > > BL33 and OP-TEE as BL32, with both Firmware Handoff and Measured Boot
+> > > > > > > > > enabled.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > > > > > > > > ---
+> > > > > > > > >  .azure-pipelines.yml               |  1 +
+> > > > > > > > >  .gitlab-ci.yml                     |  1 +
+> > > > > > > > >  tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++++++++++++++
+> > > > > > > > >  3 files changed, 89 insertions(+)
+> > > > > > > > >  create mode 100755 tools/post_build_tfa_fw_handoff.sh
+> > > > > > > > >
+> > > > > > > > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+> > > > > > > > > index 8209d2b329c..eb547606ddd 100644
+> > > > > > > > > --- a/.azure-pipelines.yml
+> > > > > > > > > +++ b/.azure-pipelines.yml
+> > > > > > > > > @@ -290,6 +290,7 @@ stages:
+> > > > > > > > >            cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_riscv64.efi
+> > > > > > > > >            cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm64.efi
+> > > > > > > > >            cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm.efi
+> > > > > > > > > +          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TRAVIS_BUILD_DIR} \${TEST_PY_BD} \${TEST_PY_ID}
+> > > > > > > > >            # create sdcard / spi-nor images for sifive unleashed using genimage
+> > > > > > > > >            if [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+> > > > > > > > >                mkdir -p root;
+> > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > > > > > > > index 85401d3e09b..61e4af96c9a 100644
+> > > > > > > > > --- a/.gitlab-ci.yml
+> > > > > > > > > +++ b/.gitlab-ci.yml
+> > > > > > > > > @@ -79,6 +79,7 @@ stages:
+> > > > > > > > >      - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_riscv64.efi
+> > > > > > > > >      - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm64.efi
+> > > > > > > > >      - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm.efi
+> > > > > > > > > +    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} ${TEST_PY_BD} ${TEST_PY_ID}
+> > > > > > > > >      # create sdcard / spi-nor images for sifive unleashed using genimage
+> > > > > > > > >      - if [[ "${TEST_PY_BD}" == "sifive_unleashed" ]]; then
+> > > > > > > > >          mkdir -p root;
+> > > > > > > > > diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/post_build_tfa_fw_handoff.sh
+> > > > > > > > > new file mode 100755
+> > > > > > > > > index 00000000000..f876db593ba
+> > > > > > > > > --- /dev/null
+> > > > > > > > > +++ b/tools/post_build_tfa_fw_handoff.sh
 > > > > > > > >
-> > > > > > > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > > > > > > > index 8209d2b329c..eb547606ddd 100644
-> > > > > > > > --- a/.azure-pipelines.yml
-> > > > > > > > +++ b/.azure-pipelines.yml
-> > > > > > > > @@ -290,6 +290,7 @@ stages:
-> > > > > > > >            cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUI=
-LD_DIR}/grub_riscv64.efi
-> > > > > > > >            cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_=
-DIR}/grub_arm64.efi
-> > > > > > > >            cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_D=
-IR}/grub_arm.efi
-> > > > > > > > +          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TR=
-AVIS_BUILD_DIR} \${TEST_PY_BD} \${TEST_PY_ID}
-> > > > > > > >            # create sdcard / spi-nor images for sifive unle=
-ashed using genimage
-> > > > > > > >            if [[ "\${TEST_PY_BD}" =3D=3D "sifive_unleashed"=
- ]]; then
-> > > > > > > >                mkdir -p root;
-> > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > > > > > > > index 85401d3e09b..61e4af96c9a 100644
-> > > > > > > > --- a/.gitlab-ci.yml
-> > > > > > > > +++ b/.gitlab-ci.yml
-> > > > > > > > @@ -79,6 +79,7 @@ stages:
-> > > > > > > >      - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR=
-/grub_riscv64.efi
-> > > > > > > >      - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/gr=
-ub_arm64.efi
-> > > > > > > >      - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/gru=
-b_arm.efi
-> > > > > > > > +    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_=
-BUILD_DIR} ${TEST_PY_BD} ${TEST_PY_ID}
-> > > > > > > >      # create sdcard / spi-nor images for sifive unleashed =
-using genimage
-> > > > > > > >      - if [[ "${TEST_PY_BD}" =3D=3D "sifive_unleashed" ]]; =
-then
-> > > > > > > >          mkdir -p root;
-> > > > > > > > diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/pos=
-t_build_tfa_fw_handoff.sh
-> > > > > > > > new file mode 100755
-> > > > > > > > index 00000000000..f876db593ba
-> > > > > > > > --- /dev/null
-> > > > > > > > +++ b/tools/post_build_tfa_fw_handoff.sh
-> > > > > > >
-> > > > > > > The "is this a valid board" check should be in the pipeline f=
-ile (like
-> > > > > > > where we do all the other board-specific things) instead of t=
-he helper
-> > > > > > > script.
-> > > > > > >
-> > > > > > > > @@ -0,0 +1,87 @@
-> > > > > > > > +#!/bin/bash
-> > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
-> > > > > > > > +#
-> > > > > > > > +# Copyright (c) 2025 Linaro Limited
-> > > > > > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
-> > > > > > > > +#
-> > > > > > > > +# CI Post-buildman script for building TF-A 'flash.bin' wi=
-th Measured
-> > > > > > > > +# Boot and Firmware Handoff enabled.
-> > > > > > > > +#
-> > > > > > > > +# Usage: from the top level U-Boot source tree, run:
-> > > > > > > > +# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BU=
-ILD_DIR} \
-> > > > > > > > +#     ${TEST_PY_BD} ${TEST_PY_ID}
-> > > > > > > > +#
-> > > > > > > > +# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated a=
-nd copied
-> > > > > > > > +# to /tmp.
-> > > > > > > > +
-> > > > > > > > +set -e
-> > > > > > > > +
-> > > > > > > > +BUILDMAN_OUT_DIR=3D$(realpath "$1")
-> > > > > > > > +BOARD=3D$2
-> > > > > > > > +ID=3D$4
-> > > > > > > > +echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, I=
-D: $ID"
-> > > > > > >
-> > > > > > > Can we not use fiptool to update the contents of a file here?=
- And build
-> > > > > > > as much as possible in the Dockerfile, like we do for vexpres=
-s?
-> > > > > > >
-> > > > > > Sorry I am not quite clear about how it was done for fvp, maybe=
- I
-> > > > > > missed some context, do you mean to build TF-A with OP-TEE at
-> > > > > > Dokerfile and generate a fip.bin without BL33? But then who will
-> > > > > > assemble BL1+fip+u-boot? by test hooks?
+> > > > > > > > The "is this a valid board" check should be in the pipeline file (like
+> > > > > > > > where we do all the other board-specific things) instead of the helper
+> > > > > > > > script.
+> > > > > > > >
+> > > > > > > > > @@ -0,0 +1,87 @@
+> > > > > > > > > +#!/bin/bash
+> > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > > > > > +#
+> > > > > > > > > +# Copyright (c) 2025 Linaro Limited
+> > > > > > > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
+> > > > > > > > > +#
+> > > > > > > > > +# CI Post-buildman script for building TF-A 'flash.bin' with Measured
+> > > > > > > > > +# Boot and Firmware Handoff enabled.
+> > > > > > > > > +#
+> > > > > > > > > +# Usage: from the top level U-Boot source tree, run:
+> > > > > > > > > +# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} \
+> > > > > > > > > +#     ${TEST_PY_BD} ${TEST_PY_ID}
+> > > > > > > > > +#
+> > > > > > > > > +# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated and copied
+> > > > > > > > > +# to /tmp.
+> > > > > > > > > +
+> > > > > > > > > +set -e
+> > > > > > > > > +
+> > > > > > > > > +BUILDMAN_OUT_DIR=$(realpath "$1")
+> > > > > > > > > +BOARD=$2
+> > > > > > > > > +ID=$4
+> > > > > > > > > +echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, ID: $ID"
+> > > > > > > >
+> > > > > > > > Can we not use fiptool to update the contents of a file here? And build
+> > > > > > > > as much as possible in the Dockerfile, like we do for vexpress?
+> > > > > > > >
+> > > > > > > Sorry I am not quite clear about how it was done for fvp, maybe I
+> > > > > > > missed some context, do you mean to build TF-A with OP-TEE at
+> > > > > > > Dokerfile and generate a fip.bin without BL33? But then who will
+> > > > > > > assemble BL1+fip+u-boot? by test hooks?
+> > > > > >
+> > > > > > So for FVP, in the Dockerfile we say BL33=/dev/null and this gets
+> > > > > > packaged correctly. Then in u-boot-test-hooks we have bin/flash.fiptool
+> > > > > > which will update "fip" with the just-built u-boot.bin. The logic:
+> > > > > >     # If we have TF-A binaries, we need to use them.
+> > > > > >     - if [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
+> > > > > >         cp /opt/tf-a/"${TEST_PY_BD}"/fip.bin /opt/tf-a/"${TEST_PY_BD}"/bl1.bin /tmp/;
+> > > > > >         export fip=/tmp/fip.bin;
+> > > > > >         export bl1=/tmp/bl1.bin;
+> > > > > >         export PATH=/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3:${PATH};
+> > > > > >       fi
+> > > > > >
+> > > > > > Is how we know what bl1.bin and fip.bin to use as the base.
+> > > > > >
 > > > > >
-> > > > > So for FVP, in the Dockerfile we say BL33=3D/dev/null and this ge=
-ts
-> > > > > packaged correctly. Then in u-boot-test-hooks we have bin/flash.f=
-iptool
-> > > > > which will update "fip" with the just-built u-boot.bin. The logic:
-> > > > >     # If we have TF-A binaries, we need to use them.
-> > > > >     - if [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
-> > > > >         cp /opt/tf-a/"${TEST_PY_BD}"/fip.bin /opt/tf-a/"${TEST_PY=
-_BD}"/bl1.bin /tmp/;
-> > > > >         export fip=3D/tmp/fip.bin;
-> > > > >         export bl1=3D/tmp/bl1.bin;
-> > > > >         export PATH=3D/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC=
--9.3:${PATH};
-> > > > >       fi
+> > > > > After looking deeper into this, I think we have to pass BL33 when TF-A
+> > > > > is being built, instead of appending the fip via fiptool later, since
+> > > > > in the added pytest we are going to test eventlog handoff that
+> > > > > enabling MEASURED_BOOT is required.
+> > > > > But when MEASURED_BOOT=1 (as well as TRUSTED_BOARD_BOOT=1 and
+> > > > > GENERATE_COT=1), the TF-A build system performs firmware measurement,
+> > > > > signing, and trust chain generation at build time, based on the actual
+> > > > > contents of each firmware image, including BL33.
 > > > > >
-> > > > > Is how we know what bl1.bin and fip.bin to use as the base.
-> > > > >
+> > > > > If a post-buildman script here is not acceptable we have to find
+> > > > > another way, but first of all we cannot build TF-A in the dockerfile
+> > > > > missing specifying the BL33.
 > > > >
-> > > > After looking deeper into this, I think we have to pass BL33 when T=
-F-A
-> > > > is being built, instead of appending the fip via fiptool later, sin=
-ce
-> > > > in the added pytest we are going to test eventlog handoff that
-> > > > enabling MEASURED_BOOT is required.
-> > > > But when MEASURED_BOOT=3D1 (as well as TRUSTED_BOARD_BOOT=3D1 and
-> > > > GENERATE_COT=3D1), the TF-A build system performs firmware measurem=
-ent,
-> > > > signing, and trust chain generation at build time, based on the act=
-ual
-> > > > contents of each firmware image, including BL33.
-> > > >
-> > > > If a post-buildman script here is not acceptable we have to find
-> > > > another way, but first of all we cannot build TF-A in the dockerfile
-> > > > missing specifying the BL33.
+> > > > Interesting. So TF-A doesn't have tooling for replacing and
+> > > > re-measuring, and instead you have to re-run make?
 > > >
-> > > Interesting. So TF-A doesn't have tooling for replacing and
-> > > re-measuring, and instead you have to re-run make?
+> > > Sorry to keep banging on about Binman, but it could provide a
+> > > post-build way to re-measure things and poke the updated measurements
+> > > into the image? It does some vaguely similar things with ELF symbols.
+> > >
 > >
-> > Sorry to keep banging on about Binman, but it could provide a
-> > post-build way to re-measure things and poke the updated measurements
-> > into the image? It does some vaguely similar things with ELF symbols.
-> >
->=20
-> I am still trying to see if I can use the pre-built Measured Boot
-> enabled TF-A with injecting BL33 via test-hooks, and will look back to
-> Binman if post-build is proved as a must.
+> > I am still trying to see if I can use the pre-built Measured Boot
+> > enabled TF-A with injecting BL33 via test-hooks, and will look back to
+> > Binman if post-build is proved as a must.
+>
+> Part of the important question is, what does TF-A support itself here?
+> To some extent "just patch the binary" also means "only useful in
+> limited circumstances for security".
+>
 
-Part of the important question is, what does TF-A support itself here?
-To some extent "just patch the binary" also means "only useful in
-limited circumstances for security".
+The TF-A prompts "BL2 image not found" after injecting BL33 which
+looks weird, I need to check what exactly is different in the logic
+before loading the image when with or w/o those build options.
+Generally it might be impacted by other options since measurements are
+done during run-time, so therorily injecting BL33 should be fine. I
+will find more clues before returning to you.
 
---=20
-Tom
+Raymond
 
---ctb4zdBhFfMxdEsi
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNqalgAKCRAr4qD1Cr/k
-Cm+VAP9aaCWwhYRfO7OZ6aKheY0YHGQwFruPjwNFFOZXcqo6tAEA3MSdtVdFex1a
-W7czxJ6E9EhXEKBDDxeZe1AQBygEIg8=
-=gpNM
------END PGP SIGNATURE-----
-
---ctb4zdBhFfMxdEsi--
+> --
+> Tom
