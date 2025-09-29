@@ -4,94 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 669AFCAC5B9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 14:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DBABCAC5B5
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 15:09:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FB68832C8;
-	Mon, 29 Sep 2025 16:57:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D66F783071;
+	Mon, 29 Sep 2025 17:09:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s+aM4Cty";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e9o3lP50";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51495832DA; Mon, 29 Sep 2025 16:57:00 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id 3BF758319C; Mon, 29 Sep 2025 17:09:09 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B985C83071
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 16:56:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EE8882A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 17:09:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-b54dd647edcso4119928a12.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 07:56:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-46e37d10ed2so46043745e9.2
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 08:09:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759157816; x=1759762616; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=c9uPuNN9knCBXdQ8PpvuBLVYODI37uuFieU+pVJqV+s=;
- b=s+aM4CtywhQKZfwLHDIiQKL6UZ9tJG0I6ZuCtZNWwstwN8UeHLcjaBHpxhDnO7EIN9
- MxiqRlABa7XS52JEIZah/CREYWi8iKRQNO3Y3elN4hwB/GXDMo5JsPzhls9zvYUG4v3N
- iEjYYzDEMpBdCm6+yrpuXzQRiL0OCjHM+OnG4SkWX2sUPAncQG53R0uuqMit+6RLKoou
- kmxtIgRHQKdmUjAxnxyyQTPSq1AvCMQLQT8cZA0gyx75g7cC3iGJ6zhgfOttN1GGgo57
- MbwrbpH/izjipFb5e4Kk5yRGHtqH3i7DbW+WlPH812u7/9cjGu9M4lkL2INS+X6bBdis
- 8YEg==
+ d=linaro.org; s=google; t=1759158546; x=1759763346; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=pPskbLnPrB50KMYXN7F5eD0csKFgmF0CSfO19xUcfWY=;
+ b=e9o3lP50Ktn0uvCBY1RSDYzAo2SpN5hwBM8ZBW32Vm4rki4eyFFvdOuHbAVE3zvoJD
+ ifHzG0jQOMCwBgiAbKrwihIRfyv4qh+8WrPmdBDO2cFxlma8GWrYfq87NLTuzLrNxAML
+ l+nGGYfIHqgb08dPbeBeNvsXEt502kVtYA51EwgY4cXetX2b8UKnXtRQp+eH3jCbNiaR
+ 1oZb1NPOU+RkaQhvS85L/Zm7yLD74Wq32LIclcc1DukFsTeFeGKz4BP/j0Omt/m5UK8M
+ Iwg9XTpt/nhU+Nx611bYDKVBNQqH9W1++xT24ZiMJBwUQkw9RKVlbyWM7x81Aj/3NSR7
+ jSNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759157816; x=1759762616;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c9uPuNN9knCBXdQ8PpvuBLVYODI37uuFieU+pVJqV+s=;
- b=HV6vL+yLoAE8cWROHHE2b/hXLato4cJWvaFHQ2vhTIPEF2iaELkx8In1xiciwcAHe7
- TK34OgX+Y9V/bSn8i1ZAHeqF/NTdz/uQxFxvvlLkbsCXjGvSLOfJWJIU6h2KpJzr3xHu
- HHS7mvSsc9tqXaURFobE9ugP0cWiEh4DPZ1f43U3HQxLJM6iHgdIGlVKH8sWFFdbpYY8
- 9rOebORV0wGLGzv5lYi7mnAmGdLFu3L80cPqNWDWcj5X6xuTV9Wq3+hgp9AD2rn6dzxg
- vSX8lbjPInMC6O3ckUw5N6uhqyPFKl5wpj9OHxG9O4Fy1+H27l1hvpzt4wg2WCK09CbS
- 9COQ==
+ d=1e100.net; s=20230601; t=1759158546; x=1759763346;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=pPskbLnPrB50KMYXN7F5eD0csKFgmF0CSfO19xUcfWY=;
+ b=gDnkwlnXVBPzKLDkkLaouFrg6q18shlrbwSKsWcIqu+8eYHYfJQiB8NCG68Y2iZbZ0
+ mHRwexH7vunbOv25tROakUjoJsY21Jv6+LIsBmx4Oj0DNr7jzh2Y2+xnD2FkVHmgx7EQ
+ EBlGt3NM7BpdKC2mBIJKHjJ1xrSaE4Twzql6+aiDdFDvKVjxda/3TgbmBcDuBkF0AF4/
+ XBiQnXr6UAUbiNNb4RvoUIYINnA4ODt9Af2OwfzPi2tlxEcRUIXo7Un5UfjN3o7K3fUx
+ VMn1dZ9OFCsMAIziIvTRtZAVKxGnadJpCirQHGDXMgqjv9NG9NHyLOwxOE8s6tfQSbhM
+ ansA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW8RExvk9/feXnjr0UjdRspKldYXh955/ndwmQwHn1/QqK12v2QDX5dt9nh8u8x1Ab88kZ+UPM=@lists.denx.de
-X-Gm-Message-State: AOJu0YypCsDBA79V1hrqOho64QapP1unm8CTlnLEdUOU9hoOR1uosX/d
- y+GrStaekgDc+jA2iUvNKe8RwsF21eyxuqoWEWo133JEZqC+RcXmFhb+TMx8snEYYhWpCCb0vpz
- WDvUtZrOEGlEb+DEil2ajEabzReRxJAPA9eD0rufX3Q==
-X-Gm-Gg: ASbGncsNNtGRJwHZftMLDavqY6wtN8doOdcs5FbjMlk1EP4Wu8wVC98W5EUBIuUuLfm
- iRhi9KaClJmg6vQkNU3npQGrx6xKLtqus6avR4tx/F2Ln4kVDj9SdliDt5hdTGP3oqX1aV1pOsd
- Kt3jDUwCQmurEg6tSv8OR819IidAA8fQ35q0kHLajQYPpGPLkm5DbqIaysvoSmaM7mwEvIev2Zz
- IlFdmrQ
-X-Google-Smtp-Source: AGHT+IEKFnrUC7yBINJxgDtrgsYwm57Wa7BvFMPCH2d/466jYgZAROjt9sp/530az5LgvS+hOrTHNeLVSB01PRUaa70=
-X-Received: by 2002:a17:903:584:b0:270:8ae3:a6f1 with SMTP id
- d9443c01a7336-27ed4a56d02mr138339965ad.46.1759157815709; Mon, 29 Sep 2025
- 07:56:55 -0700 (PDT)
+ AJvYcCUeMkjQM0OfrBSjfBnAh1Mww09DJttidaj/RQexRT8X8nEIH5gasEtAJvJn/CP48HnKU8SOBwE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjcPDzhuIkgb/Adl6QL+pe21RaqybXPvpomRsUgkA+fvAX2fbb
+ oLpXUcuHCe5KMHhqZBa0WF7ymme+KGcBWNzrmFSfyPc5O/wUspOAPX+4LfX14KkVbu8M+OYC+VE
+ IC5gV
+X-Gm-Gg: ASbGncs3+6R++Xhiq3qCdYpRutnNy/je9jVopoZUM2bTlWH3iY/J0l9guiXhlCNVoUV
+ o5aRkm4zRHNkZVGFVZkh0hN2VacNdi5HuB96xQJCzYhEVCcjgh9P+lc+LIJku1iLupt1ko4WRCk
+ okNZG4fEQCTzg2mLJc3NCooEFI4FjOOpw3OOErfyw4PiPOcPF8T1eI8MFKl5XRxvO+xgNcUWI/w
+ ZjdAFZpLCoJuqPIB0l4JdiWKlekYMUV9QxdboE1rLZLKW4JWO2YZ+5WG5QXYjKOwVQU3SYRfSC/
+ l3Y2awjaNNtAj9mZu1dxUAXlm/WN3+IQxUu2mX7F1OMxkCZb5SYX7ckyS9lCP1YYAwdEXW3S1RG
+ sWAf+hUM+V9tnhxcl+oWSPEy1QcnFOJI+3janPMoGPCRgfufP5+GvQZdOu1rAXlB6F52KI8lbwH
+ 3ltQMZLHCcpw==
+X-Google-Smtp-Source: AGHT+IHzoJh5hL7+iMMeQc7GcW8sQSxsvFNqxJmpTTbnGyezPHgGaSW9HPJIN7DYEaG53dZ/bp1i3w==
+X-Received: by 2002:a05:600c:4512:b0:46d:996b:828c with SMTP id
+ 5b1f17b1804b1-46e329e3f76mr188162335e9.10.1759158545858; 
+ Mon, 29 Sep 2025 08:09:05 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:f9e:3c01:4bc3:3107:fbfe:562?
+ ([2a0a:ef40:f9e:3c01:4bc3:3107:fbfe:562])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46e56f3dcacsm18377055e9.2.2025.09.29.08.09.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Sep 2025 08:09:05 -0700 (PDT)
+Message-ID: <d1579ba6-35f5-4dfb-b7d7-f6073bd92996@linaro.org>
+Date: Mon, 29 Sep 2025 16:09:04 +0100
 MIME-Version: 1.0
-References: <20250916161426.32259-1-raymond.mao@linaro.org>
- <20250916161426.32259-3-raymond.mao@linaro.org>
- <20250916182742.GZ124814@bill-the-cat>
- <CAEfUkUL2t64-hz-_acWHf01WgLeddYu7S8dRudmNT3re0_hfnQ@mail.gmail.com>
- <20250917154926.GM124814@bill-the-cat>
- <CAEfUkUL59toQ4vFN74qhCRdOo1-umqLOKJviZHSedbBWf71tgw@mail.gmail.com>
- <20250922193357.GG124814@bill-the-cat>
- <CAFLszTiRVtc4g4S2eELsGK7ZEz34g8k8w4HZ-Opy0xGhJWpgzg@mail.gmail.com>
- <CAEfUkUKdGE1w1e5HvtD+wQRXHGbjVs-Hnh782uaiGxav_wq71A@mail.gmail.com>
- <20250929144131.GF6093@bill-the-cat>
-In-Reply-To: <20250929144131.GF6093@bill-the-cat>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Mon, 29 Sep 2025 10:56:44 -0400
-X-Gm-Features: AS18NWDLXBaJLcxFILn6v8z81xGhW0W2bUueer17Ge7hb7bgVMUTTnO1BmtaoJI
-Message-ID: <CAEfUkU+g0kphtxbF3aKanCbB6XwhxNJ_ecvMcG3dhoCXYULvXg@mail.gmail.com>
-Subject: Re: [PATCH 2/5] ci: add post-buildman script to build TF-A
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: dwc3: Remove redundant test
 To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de
+References: <20250925-dwc3_ep0-v1-1-7af60ed1e28c@linaro.org>
+ <b6d1f1df-eed5-4cbe-8add-31c1e77e3a16@mailbox.org>
+ <02ef127e-f789-4cc6-9592-eb4b75f1b0ea@linaro.org>
+ <59d4ef95-e030-4508-8e1e-ae37a0df6c29@mailbox.org>
+ <cb3ad7f4-6e02-4a59-b763-887ead2c338d@linaro.org>
+ <20250929141507.GE6093@bill-the-cat>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250929141507.GE6093@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,161 +109,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 29/09/2025 15:15, Tom Rini wrote:
+> On Mon, Sep 29, 2025 at 10:09:09AM +0100, Andrew Goodbody wrote:
+>> On 25/09/2025 15:12, Marek Vasut wrote:
+>>> On 9/25/25 4:07 PM, Andrew Goodbody wrote:
+>>>> On 25/09/2025 14:56, Marek Vasut wrote:
+>>>>> On 9/25/25 3:20 PM, Andrew Goodbody wrote:
+>>>>>> In dwc3_ep0_complete_data there is a test for 'r' being null and the
+>>>>>> code will return at that point if so. After that point 'r'
+>>>>>> is guaranteed
+>>>>>> to not be null and testing for that is redundant. Remove the test for
+>>>>>> 'r' being non-null.
+>>>>>>
+>>>>>> This issue was found by Smatch.
+>>>>>>
+>>>>>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>>>>>> ---
+>>>>>>    drivers/usb/dwc3/ep0.c | 5 +----
+>>>>>>    1 file changed, 1 insertion(+), 4 deletions(-)
+>>>>>>
+>>>>>> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
+>>>>>> index c656cbe25ce..680756532f0 100644
+>>>>>> --- a/drivers/usb/dwc3/ep0.c
+>>>>>> +++ b/drivers/usb/dwc3/ep0.c
+>>>>>> @@ -799,10 +799,7 @@ static void
+>>>>>> dwc3_ep0_complete_data(struct dwc3 *dwc,
+>>>>>>        status = DWC3_TRB_SIZE_TRBSTS(trb->size);
+>>>>>>        if (status == DWC3_TRBSTS_SETUP_PENDING) {
+>>>>>>            dev_dbg(dwc->dev, "Setup Pending received");
+>>>>>> -
+>>>>>> -        if (r)
+>>>>>> -            dwc3_gadget_giveback(ep0, r, -ECONNRESET);
+>>>>>> -
+>>>>>> +        dwc3_gadget_giveback(ep0, r, -ECONNRESET);
+>>>>>>            return;
+>>>>>>        }
+>>>>> Please use ./scripts/get_maintainer.pl to get full CC list and
+>>>>> CC all relevant parties.
+>>>>
+>>>> Hi Marek,
+>>>>
+>>>> I use 'b4 prep --auto-to-cc' which calls get_maintainer.pl to
+>>>> populate the email addresses used.
+>>> It seems to be missing these people:
+>>>
+>>> Mattijs Korpershoek <mkorpershoek@kernel.org>
+>>> Neil Armstrong <neil.armstrong@linaro.org>
+>>> Anshul Dalal <anshuld@ti.com>
+>>
+>> So it looks like the default command used by b4 for the Cc: section is
+>> "scripts/get_maintainer.pl --nogit --nogit-fallback --nogit-chief-penguins
+>> --norolestats --nom" which causes recent signers to not be included due to
+>> the '--nogit' argument.
+>>
+>> I have added the following to my git config file.
+>>
+>> [b4]
+>> 	send-auto-cc-cmd = scripts/get_maintainer.pl --nogit-fallback
+>> --nogit-chief-penguins --norolestats --nom
+>>
+>> This will mean that from now on recent signers will be added to the Cc:
+>> list. I hope that this is what is expected.
+>>
+>> I will resend this patch with the expanded Cc: list.
+> 
+> A while back someone submitted a .b4.conf (or .b4.config? I forget...)
+> patch, but at the time it wasn't setting anything non-standard I
+> thought. However, is the above something that can be configured there?
+> If so, that would be good to put in a project-wide b4 config file, and
+> if it's not it'd be a good feature request for upstream.
 
-On Mon, 29 Sept 2025 at 10:41, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Sep 29, 2025 at 10:31:36AM -0400, Raymond Mao wrote:
-> > Hi Simon,
-> >
-> > On Wed, 24 Sept 2025 at 12:28, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi,
-> > >
-> > > On Mon, 22 Sept 2025 at 13:34, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Sep 22, 2025 at 03:07:49PM -0400, Raymond Mao wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Wed, 17 Sept 2025 at 11:49, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Wed, Sep 17, 2025 at 11:44:07AM -0400, Raymond Mao wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Tue, 16 Sept 2025 at 14:27, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > On Tue, Sep 16, 2025 at 09:14:18AM -0700, Raymond Mao wrote:
-> > > > > > > > > Add a script which is running after buildman to fetch TF-A (v2.13.0)
-> > > > > > > > > with MbedTLS (v3.6) and build 'flash.bin', linking built U-Boot as
-> > > > > > > > > BL33 and OP-TEE as BL32, with both Firmware Handoff and Measured Boot
-> > > > > > > > > enabled.
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > > > > > > > > ---
-> > > > > > > > >  .azure-pipelines.yml               |  1 +
-> > > > > > > > >  .gitlab-ci.yml                     |  1 +
-> > > > > > > > >  tools/post_build_tfa_fw_handoff.sh | 87 ++++++++++++++++++++++++++++++
-> > > > > > > > >  3 files changed, 89 insertions(+)
-> > > > > > > > >  create mode 100755 tools/post_build_tfa_fw_handoff.sh
-> > > > > > > > >
-> > > > > > > > > diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-> > > > > > > > > index 8209d2b329c..eb547606ddd 100644
-> > > > > > > > > --- a/.azure-pipelines.yml
-> > > > > > > > > +++ b/.azure-pipelines.yml
-> > > > > > > > > @@ -290,6 +290,7 @@ stages:
-> > > > > > > > >            cp /opt/grub/grubriscv64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_riscv64.efi
-> > > > > > > > >            cp /opt/grub/grubaa64.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm64.efi
-> > > > > > > > >            cp /opt/grub/grubarm.efi \${UBOOT_TRAVIS_BUILD_DIR}/grub_arm.efi
-> > > > > > > > > +          ./tools/post_build_tfa_fw_handoff.sh \${UBOOT_TRAVIS_BUILD_DIR} \${TEST_PY_BD} \${TEST_PY_ID}
-> > > > > > > > >            # create sdcard / spi-nor images for sifive unleashed using genimage
-> > > > > > > > >            if [[ "\${TEST_PY_BD}" == "sifive_unleashed" ]]; then
-> > > > > > > > >                mkdir -p root;
-> > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > > > > > > > > index 85401d3e09b..61e4af96c9a 100644
-> > > > > > > > > --- a/.gitlab-ci.yml
-> > > > > > > > > +++ b/.gitlab-ci.yml
-> > > > > > > > > @@ -79,6 +79,7 @@ stages:
-> > > > > > > > >      - cp /opt/grub/grubriscv64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_riscv64.efi
-> > > > > > > > >      - cp /opt/grub/grubaa64.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm64.efi
-> > > > > > > > >      - cp /opt/grub/grubarm.efi $UBOOT_TRAVIS_BUILD_DIR/grub_arm.efi
-> > > > > > > > > +    - ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} ${TEST_PY_BD} ${TEST_PY_ID}
-> > > > > > > > >      # create sdcard / spi-nor images for sifive unleashed using genimage
-> > > > > > > > >      - if [[ "${TEST_PY_BD}" == "sifive_unleashed" ]]; then
-> > > > > > > > >          mkdir -p root;
-> > > > > > > > > diff --git a/tools/post_build_tfa_fw_handoff.sh b/tools/post_build_tfa_fw_handoff.sh
-> > > > > > > > > new file mode 100755
-> > > > > > > > > index 00000000000..f876db593ba
-> > > > > > > > > --- /dev/null
-> > > > > > > > > +++ b/tools/post_build_tfa_fw_handoff.sh
-> > > > > > > >
-> > > > > > > > The "is this a valid board" check should be in the pipeline file (like
-> > > > > > > > where we do all the other board-specific things) instead of the helper
-> > > > > > > > script.
-> > > > > > > >
-> > > > > > > > > @@ -0,0 +1,87 @@
-> > > > > > > > > +#!/bin/bash
-> > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
-> > > > > > > > > +#
-> > > > > > > > > +# Copyright (c) 2025 Linaro Limited
-> > > > > > > > > +# Author: Raymond Mao <raymond.mao@linaro.org>
-> > > > > > > > > +#
-> > > > > > > > > +# CI Post-buildman script for building TF-A 'flash.bin' with Measured
-> > > > > > > > > +# Boot and Firmware Handoff enabled.
-> > > > > > > > > +#
-> > > > > > > > > +# Usage: from the top level U-Boot source tree, run:
-> > > > > > > > > +# $ ./tools/post_build_tfa_fw_handoff.sh ${UBOOT_TRAVIS_BUILD_DIR} \
-> > > > > > > > > +#     ${TEST_PY_BD} ${TEST_PY_ID}
-> > > > > > > > > +#
-> > > > > > > > > +# 'bl1.bin', 'fip.bin' and 'flash.bin' will be generated and copied
-> > > > > > > > > +# to /tmp.
-> > > > > > > > > +
-> > > > > > > > > +set -e
-> > > > > > > > > +
-> > > > > > > > > +BUILDMAN_OUT_DIR=$(realpath "$1")
-> > > > > > > > > +BOARD=$2
-> > > > > > > > > +ID=$4
-> > > > > > > > > +echo "Buildman Outdir: $BUILDMAN_OUT_DIR, Board: $BOARD, ID: $ID"
-> > > > > > > >
-> > > > > > > > Can we not use fiptool to update the contents of a file here? And build
-> > > > > > > > as much as possible in the Dockerfile, like we do for vexpress?
-> > > > > > > >
-> > > > > > > Sorry I am not quite clear about how it was done for fvp, maybe I
-> > > > > > > missed some context, do you mean to build TF-A with OP-TEE at
-> > > > > > > Dokerfile and generate a fip.bin without BL33? But then who will
-> > > > > > > assemble BL1+fip+u-boot? by test hooks?
-> > > > > >
-> > > > > > So for FVP, in the Dockerfile we say BL33=/dev/null and this gets
-> > > > > > packaged correctly. Then in u-boot-test-hooks we have bin/flash.fiptool
-> > > > > > which will update "fip" with the just-built u-boot.bin. The logic:
-> > > > > >     # If we have TF-A binaries, we need to use them.
-> > > > > >     - if [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
-> > > > > >         cp /opt/tf-a/"${TEST_PY_BD}"/fip.bin /opt/tf-a/"${TEST_PY_BD}"/bl1.bin /tmp/;
-> > > > > >         export fip=/tmp/fip.bin;
-> > > > > >         export bl1=/tmp/bl1.bin;
-> > > > > >         export PATH=/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3:${PATH};
-> > > > > >       fi
-> > > > > >
-> > > > > > Is how we know what bl1.bin and fip.bin to use as the base.
-> > > > > >
-> > > > >
-> > > > > After looking deeper into this, I think we have to pass BL33 when TF-A
-> > > > > is being built, instead of appending the fip via fiptool later, since
-> > > > > in the added pytest we are going to test eventlog handoff that
-> > > > > enabling MEASURED_BOOT is required.
-> > > > > But when MEASURED_BOOT=1 (as well as TRUSTED_BOARD_BOOT=1 and
-> > > > > GENERATE_COT=1), the TF-A build system performs firmware measurement,
-> > > > > signing, and trust chain generation at build time, based on the actual
-> > > > > contents of each firmware image, including BL33.
-> > > > >
-> > > > > If a post-buildman script here is not acceptable we have to find
-> > > > > another way, but first of all we cannot build TF-A in the dockerfile
-> > > > > missing specifying the BL33.
-> > > >
-> > > > Interesting. So TF-A doesn't have tooling for replacing and
-> > > > re-measuring, and instead you have to re-run make?
-> > >
-> > > Sorry to keep banging on about Binman, but it could provide a
-> > > post-build way to re-measure things and poke the updated measurements
-> > > into the image? It does some vaguely similar things with ELF symbols.
-> > >
-> >
-> > I am still trying to see if I can use the pre-built Measured Boot
-> > enabled TF-A with injecting BL33 via test-hooks, and will look back to
-> > Binman if post-build is proved as a must.
->
-> Part of the important question is, what does TF-A support itself here?
-> To some extent "just patch the binary" also means "only useful in
-> limited circumstances for security".
->
+[1] which also incidentally dropped the --nogit along with some other 
+arguments without mentioning that in the summary.
 
-The TF-A prompts "BL2 image not found" after injecting BL33 which
-looks weird, I need to check what exactly is different in the logic
-before loading the image when with or w/o those build options.
-Generally it might be impacted by other options since measurements are
-done during run-time, so therorily injecting BL33 should be fine. I
-will find more clues before returning to you.
+Yes this could be done in the same way. Do you want to take that old 
+patch or should I do a new one?
 
-Raymond
+Andrew
 
-> --
-> Tom
+1 - 
+http://patchwork.ozlabs.org/project/uboot/patch/20240717-b4-config-v1-1-0bc9e80ef582@flygoat.com/
