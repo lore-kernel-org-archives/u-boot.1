@@ -4,58 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2EFDCAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 19:52:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E85ECAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 19:53:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A2088319C;
-	Mon, 29 Sep 2025 21:52:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 63CDC8344E;
+	Mon, 29 Sep 2025 21:52:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=kpnmail.nl header.i=@kpnmail.nl header.b="ZR2YtIqV";
+	dkim=pass (1024-bit key; secure) header.d=kpnmail.nl header.i=@kpnmail.nl header.b="KIngw2hs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDCE08329F; Mon, 29 Sep 2025 21:52:54 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
+ id 9C5F28341C; Mon, 29 Sep 2025 21:52:58 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CE5E82A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 21:52:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC975832DA
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 21:52:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=kettenis@openbsd.org
-X-KPN-MessageId: e8e14948-9d6d-11f0-ad1a-005056999439
+X-KPN-MessageId: f80d4c69-9d6d-11f0-b0b9-00505699b430
 Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
  by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id e8e14948-9d6d-11f0-ad1a-005056999439;
- Mon, 29 Sep 2025 21:53:03 +0200 (CEST)
+ id f80d4c69-9d6d-11f0-b0b9-00505699b430;
+ Mon, 29 Sep 2025 21:53:28 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=kpnmail.nl; s=kpnmail01;
  h=mime-version:message-id:date:subject:to:from;
- bh=DcBWAHumYwDmM4bqp+X0zmD9gMIs+FGA586MkGUhadA=;
- b=ZR2YtIqVSlaRoaw9LoiFK81RVpVHKulmFRNl6fOqyoC+yuQpROX02+mm6HHo9kyCrV6FteR7DFowR
- KC7YrEoGM9xwFZzAgUY5Ay53KOhLvjCcWz0qO0fFbPcOMNNiDk3EpTrCOPgApOqwmcIKUdWi18FJq2
- gzphXhMhTJRjKN6c=
-X-KPN-MID: 33|Gt+RfhSlzezOjzztKbALvxxifeVLDrGrwQzZJBKQZtUUgNJVHgdATzpFBPttecx
- y0Pwx5uFO8hSKqZOiabMvMs5J9NeKyu1vb3yj7uLNGoI=
+ bh=EZrtevkCtkx1t7Om3HNRbn/jzI1WVEMkb1UZU/SklCw=;
+ b=KIngw2hsUotmcIzjPz6UqOx54t8lGXk2oCvpRD+CK2BjffFwiZq/5h+whC4aH9IiKH8tNi4I806M+
+ fbR+Hhjihouq/R2+WtN0wkEHd1/BUiytGBkMRycN/4g/TP7RO5bEgV+d+2j1nHplqSaYELeoGBjgka
+ bKuF9FvgfR0dyDl8=
+X-KPN-MID: 33|/HNxS2Tb5gfrWNTZjCQZo7g4D6GbuOZpZMXJwIcIHAnIqBYuq54lgjczO2ZM2SW
+ 68nWbEuy5eSlCjvZNYFlKnvI0M2sPNVe4eMjl0eLAf8A=
 X-KPN-VerifiedSender: No
-X-CMASSUN: 33|5wB9srYLpjtdf4HcIxg/AXBouxUoAsOh1U4J3p16dHjGZTSL6Aq7antw2SccZOf
- N8Q1OTLaOcVp3HemAOFuoXw==
+X-CMASSUN: 33|bOuvzKy6FR/bEv9ysxxHBbzkrNgMh5pT/84+GzxebPDSszXInb+hy1zZO2YFrky
+ cB/0zXtxYWUrB+Fw/vxcFvg==
 X-Originating-IP: 80.61.163.207
 Received: from bizet.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
  [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id e1ce4240-9d6d-11f0-8d3e-00505699b758;
- Mon, 29 Sep 2025 21:52:51 +0200 (CEST)
+ id e47bba44-9d6d-11f0-8d3e-00505699b758;
+ Mon, 29 Sep 2025 21:52:55 +0200 (CEST)
 From: Mark Kettenis <kettenis@openbsd.org>
 To: u-boot@lists.denx.de
 Cc: marex@denx.de,
 	trini@konsulko.com,
 	Mark Kettenis <kettenis@openbsd.org>
-Subject: [PATCH v2 0/3] Load ASMedia XHCI controller firmware
-Date: Mon, 29 Sep 2025 21:52:38 +0200
-Message-ID: <20250929195241.70351-1-kettenis@openbsd.org>
+Subject: [PATCH v2 1/3] apple: Set up file system firmware loader
+Date: Mon, 29 Sep 2025 21:52:39 +0200
+Message-ID: <20250929195241.70351-2-kettenis@openbsd.org>
 X-Mailer: git-send-email 2.50.1
+In-Reply-To: <20250929195241.70351-1-kettenis@openbsd.org>
+References: <20250929195241.70351-1-kettenis@openbsd.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,49 +76,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the Apple desktop machine have a PCI ASMedia XHCI controller
-that needs firmware to be uploaded to function.  This firmware is
-placed on the EFI system partition by the Asahi installer.  So this
-series sets up a file system firmware loader that reads from that
-partition and ports the Linux driver that uploads this firmware to
-the controller.  With this series, users can use USB devices (such
-as a keyboard) when they are connected to USB ports handled by the
-ASMedia XHCI controller.  This includes the type-A ports on the
-M2 Mac mini for example.
+Find the appropriate EFI system partition on the internal NVMe
+storage and set the U-Boot environment variables such that
+the file system firmware loader can load firmware from it.
 
-I submitted the first version of this series over a year ago.  Sorry
-for letting this linger for so long.  Back then Marek Vasut provided
-some good feedback that I incorporated in this v2.  Back then we
-concluded that env_set() failures should print a warning instead of
-doing a bitwise or of the return value.  But env_set() already prints
-a warning, so it makes more sense to just ignore the return value.
-This is common practice in the U-Boot tree.
-
+Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
 ---
+ arch/arm/mach-apple/board.c | 59 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
 
-Changes in v2:
-- Ignore env_set() return value
-- Sort readb_poll_sleep_timeout() before readl_poll_sleep_timeout()
-- Use read_poll_timeout() instead of open-coded timeout loops
-- Make asmedia_read_reg() return an error code
-
-
-Mark Kettenis (3):
-  apple: Set up file system firmware loader
-  iopoll: Add readb_poll_sleep_timeout
-  usb: xhci-pci: Load ASMedia XHCI controller firmware
-
- MAINTAINERS                         |   1 +
- arch/arm/mach-apple/board.c         |  59 ++++
- drivers/usb/host/Kconfig            |  11 +
- drivers/usb/host/Makefile           |   1 +
- drivers/usb/host/xhci-pci-asmedia.c | 410 ++++++++++++++++++++++++++++
- drivers/usb/host/xhci-pci.c         |   9 +
- include/linux/iopoll.h              |   3 +
- include/usb/xhci.h                  |   3 +
- 8 files changed, 497 insertions(+)
- create mode 100644 drivers/usb/host/xhci-pci-asmedia.c
-
+diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+index 4cd8979bdc2..d8b6787c705 100644
+--- a/arch/arm/mach-apple/board.c
++++ b/arch/arm/mach-apple/board.c
+@@ -8,6 +8,8 @@
+ #include <efi_loader.h>
+ #include <env.h>
+ #include <lmb.h>
++#include <nvme.h>
++#include <part.h>
+ 
+ #include <asm/armv8/mmu.h>
+ #include <asm/global_data.h>
+@@ -771,6 +773,60 @@ u64 get_page_table_size(void)
+ 	return SZ_256K;
+ }
+ 
++static char *asahi_esp_devpart(void)
++{
++	struct disk_partition info;
++	struct blk_desc *nvme_blk;
++	const char *uuid = NULL;
++	int devnum, len, p, part, ret;
++	static char devpart[64];
++	struct udevice *dev;
++	ofnode node;
++
++	if (devpart[0])
++		return devpart;
++
++	node = ofnode_path("/chosen");
++	if (ofnode_valid(node)) {
++		uuid = ofnode_get_property(node, "asahi,efi-system-partition",
++					   &len);
++	}
++
++	nvme_scan_namespace();
++	for (devnum = 0, part = 0;; devnum++) {
++		nvme_blk = blk_get_devnum_by_uclass_id(UCLASS_NVME, devnum);
++		if (!nvme_blk)
++			break;
++
++		dev = dev_get_parent(nvme_blk->bdev);
++		if (!device_is_compatible(dev, "apple,nvme-ans2"))
++			continue;
++
++		for (p = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
++			ret = part_get_info(nvme_blk, p, &info);
++			if (ret < 0)
++				break;
++
++			if (info.bootable & PART_EFI_SYSTEM_PARTITION) {
++				if (uuid && strcasecmp(uuid, info.uuid) == 0) {
++					part = p;
++					break;
++				}
++				if (part == 0)
++					part = p;
++			}
++		}
++
++		if (part > 0)
++			break;
++	}
++
++	if (part > 0)
++		snprintf(devpart, sizeof(devpart), "%x:%x", devnum, part);
++
++	return devpart;
++}
++
+ #define KERNEL_COMP_SIZE	SZ_128M
+ 
+ #define lmb_alloc(size, addr) lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, addr, size, LMB_NONE)
+@@ -780,6 +836,9 @@ int board_late_init(void)
+ 	u32 status = 0;
+ 	phys_addr_t addr;
+ 
++	env_set("storage_interface", blk_get_uclass_name(UCLASS_NVME));
++	env_set("fw_dev_part", asahi_esp_devpart());
++
+ 	/* somewhat based on the Linux Kernel boot requirements:
+ 	 * align by 2M and maximal FDT size 2M
+ 	 */
 -- 
 2.50.1
 
