@@ -4,92 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56821CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 12:13:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A786CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 12:20:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CDDB82A9E;
-	Mon, 29 Sep 2025 14:13:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D5B0482A9E;
+	Mon, 29 Sep 2025 14:20:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="g8D+w4C6";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="BS+R4SLK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XVl/uXQl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D5BB83071; Mon, 29 Sep 2025 14:13:29 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 961DA8319C; Mon, 29 Sep 2025 14:20:32 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52BBE8206E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:13:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A2318206E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:20:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cb0TL0ygnz9tgD;
- Mon, 29 Sep 2025 14:13:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1759148006;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1oiR6D4/FobXapnVji+ZAUOmQnFSoCc5TjswEloAmNI=;
- b=g8D+w4C6mvB17c9atBWltgFgM0LlEyjwrRwN/+8Afs6Px/h9sVVs73+xKIn0vYt9+jeFy5
- 2sUh1VyriQBd8tjkzW4OOfRULZr8Iu2FIfQZLpVAdGtISy45ACNUwhj4zUyH0gnptDiGPY
- ce0NPskSlLFDQmA7jhm+RCyXetz0qs6auhB4XAnMjCltsTkgp9HooVaXgadx1gRDUdYEt5
- OyQcYlBxSXPOswykUhsC8JUzBjdLbhUqjAv0q5nXQ5OOpkMlrAJkbb4ir4wcL3qWLknaka
- 9wSbbUJQzBpa0JUqHn4MJS41SLzXj1QPpgn3k1H5mnc+Z492ANlwg43vTmanGw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=BS+R4SLK;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <7ab73b44-8efc-47d6-9e6e-5ffd9ab0e3d7@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1759148004;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=1oiR6D4/FobXapnVji+ZAUOmQnFSoCc5TjswEloAmNI=;
- b=BS+R4SLKgkx24+CO9cG/J2vSS2VJJ3H5iqWd5hoUXH8qo7UIKajcWjr7HsFdNOElyb3dxn
- 0pMyVIqBeKbp0Y8l+T1gwFffzh3z8Yc7Uzlp6jpuAbiSY/cwopDMQbslB+jDkBjfPThIvi
- NrLePi39l0DSIAgep0SpJiRwob2W9nVfxMy4disuJXI9/il0BhZk0yuvMDT3YTQPFuAVrc
- /ctm5jR/rQe7gMbsSOeyaZhXnvPk9l7PKeEzZhc9TYycSHeBejBNKxBY8Bm5QobqdQQYZR
- 9AzyzzI1rBpkg2oGppA2y32miQ4Xl5oFcZzJX9SWIDKLom/BEa+PaJicMgrgrA==
-Date: Mon, 29 Sep 2025 14:13:17 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-61feb87fe26so6489847a12.1
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 05:20:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1759148429; x=1759753229; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=59bYRkFSbfCqCCiGR87JGrikLRZkZagtLEUKz/WQbh0=;
+ b=XVl/uXQlU2U/Hg0Nq1X7eCa6CYDL2UA6wpxUj89OZpfy0MWGYU2qxLxXk99BaDHuut
+ viV/twRcoPMh5tFZLuHDof06z2uG92RZWsE8eJlIa5CPvjsx7OvywkKmaQVfmYS4Ip98
+ cjwY3fu/FoAFjPHAN4q3pCkInb1e6pa8GeEY4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759148429; x=1759753229;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=59bYRkFSbfCqCCiGR87JGrikLRZkZagtLEUKz/WQbh0=;
+ b=gbpve1lzgeShvXsP5P7BnmQYb8XNq3GlDs8BqA2PnonxKqwbitFCfCP4/f5OC2Lel4
+ ifNTSG3gBibc/l0zIz5odlppJiwN+lx8ubpuhhMnvhK5jUmlp8NyFi9WIfmLxHp2/1lm
+ LARoSbfiQCBFiYj7ZoLm4+Yl6YqC+bzklPnVIHhOGIAaH8PNG5+sjt0OgkoiyU6fblSi
+ ZGYBKRKITgrueEKs2QYsqRFr9ToCu2JDdygt5be2POvRxOqGj6yk18ukcYZlgoVFqJ88
+ pDTX7dLVMP+KntaNim4gxogWRvP4j/93oHXRiWIZhlhnG0s+ZBGl4NNv7KWM+L9ZukPS
+ EPhQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW4yRIpzqsJfhlMTZQ+qlGlBdRZtTMLZMyizUaI7rfIqFSTJKr/Cn66oaqBYcyIn9qWH0ZLQxU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw5UxO7cSk6j9vDCc2Z1n2PmKsJOQhteigKT0DCHVDrqPgNKdWG
+ +/EsFKYeNQZSaAdbl0Bc9fNda4pcv74bAUoZ7xMhm1oYo1+30QeEVbvUH1RtrYApBJpYA4Ndxus
+ Zond6XDwgI1OEizGGYbUpxmAvsoYSWGufdJQ1GTqj
+X-Gm-Gg: ASbGncuJMvPEVCPLwcHQ0m3bZmh0c+8EZ7FKCMdKrMVFOWv8dl2YsdHmrDTHAOK8qs3
+ c2+QZmohu4lRDjQxOpUaKWrpPE2rAFHMrPm8r7O3EmHatnTW4//3dVKjd+WGrUGRlTzWcrm1I9J
+ 5KWOfzp4NwgvQ3s2hMgEK8KXICCS0bl/KX44qEnC0vEHRCFcZdHIjmkHLc6lL9Sao5lqO5zT4JW
+ h+gHven3RIyTw5+6F/wSaRZVoU=
+X-Google-Smtp-Source: AGHT+IGE5iV4e2xjn1791QDY24hyyn2qGnNJNKg7zsyXkbF/6Huq/jN019hvJMWikOyOrO/yxVehElbEVWbenn2G4jk=
+X-Received: by 2002:a17:907:7ea5:b0:b3e:5f20:88ad with SMTP id
+ a640c23a62f3a-b3e5f20dfe6mr465225766b.28.1759148429525; Mon, 29 Sep 2025
+ 05:20:29 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] xilinx: Enable sntp command
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@amd.com
-Cc: Anshul Dalal <anshuld@ti.com>, Fabio Estevam <festevam@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Herren <sputnik@on-the-web.ch>,
- Padmarao Begari <padmarao.begari@amd.com>, Peng Fan <peng.fan@nxp.com>,
- Prasad Kummari <prasad.kummari@amd.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- T Karthik Reddy <t.karthik.reddy@xilinx.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <8259ca2496dd8f6a25df566c43f16be019d75cb9.1759127081.git.michal.simek@amd.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <8259ca2496dd8f6a25df566c43f16be019d75cb9.1759127081.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 672a4f3845be78d5636
-X-MBO-RS-META: fa6frsiw4ijywtayjbwwcpxfn7q39row
-X-Rspamd-Queue-Id: 4cb0TL0ygnz9tgD
+References: <20250814120029.234237-1-Max.Merchel@ew.tq-group.com>
+ <20250821191232.GA917481@bill-the-cat>
+ <077e9371-4bd4-4c70-b505-428e8a491d83@ew.tq-group.com>
+In-Reply-To: <077e9371-4bd4-4c70-b505-428e8a491d83@ew.tq-group.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 29 Sep 2025 06:20:17 -0600
+X-Gm-Features: AS18NWCsNF26IxCnvU8_iUQa8-7YimVf2_k_RwCQi1w3s82aNT6WiW1ki5ZXF7o
+Message-ID: <CAFLszTiKR2La5GBNBJxYOWZm08+KsqcFxLjdfV+kfBh63=CPuQ@mail.gmail.com>
+Subject: Re: Re: [PATCH] bloblist: fix missing OR between licenses in the
+ SPDX-License-Identifier
+To: Max Merchel -alt <max.merchel@ew.tq-group.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot@ew.tq-group.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,7 +93,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/29/25 8:24 AM, Michal Simek wrote:
-> Enable SNTP commands on all Xilinx boards.
-Look at #include in configs/ , that should let you deduplicate xilinx 
-configs.
+Hi Max,
+
+On Mon, 29 Sept 2025 at 03:59, Max Merchel -alt
+<max.merchel@ew.tq-group.com> wrote:
+>
+> Hello Simon,
+>
+> Am 21.08.25 um 21:12 schrieb Tom Rini:
+> > On Thu, Aug 14, 2025 at 02:00:11PM +0200, Max Merchel wrote:
+> >
+> >> Currently, the conditions of both licenses (GPL 2.0 and BSD-3-Clause) =
+must
+> >> be met. However, the original commit message states that the BSD-3-Cla=
+use
+> >> was added to allow use of the files under a less restrictive license t=
+han
+> >> GPL 2.0. Therefore, the required OR between the licenses has been adde=
+d.
+> >>
+> >> While at it update the SPDX-License-Identifier to SPDX version 3.
+> >>
+> >> Fixes: 6c9e3d1f ("bloblist: Relicense to allow BSD-3-Clause")
+> >> Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
+> >> ---
+> >>   common/bloblist.c  | 2 +-
+> >>   include/bloblist.h | 2 +-
+> >>   2 files changed, 2 insertions(+), 2 deletions(-)
+> >
+> > So I'm going to defer this as the outcome of
+> > https://patchwork.ozlabs.org/project/uboot/patch/20250101195817.995321-=
+1-sjg@chromium.org/
+> > was that it's fine to relicense but a v2 with a differ commit message
+> > is needed. And while I thought about doing the v2 myself now, I think
+> > this is something that really must come from the author.
+> >
+> >
+>
+> What's your opinion on this?
+
+Yes I agree that we should relicense to GPLv2+ only. If you'd like to
+send a patch I can add a review tag.
+
+Regards,
+SImon
+
+
+>
+> --
+> Best regards,
+> Max
+>
+> TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Ge=
+rmany
+> Amtsgericht M=C3=BCnchen, HRB 105018
+> Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan S=
+chneider
+> http://www.tq-group.com/
+>
