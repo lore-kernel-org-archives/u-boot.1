@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D65CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 18:11:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF0BACAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 19:19:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9FAB833E9;
-	Mon, 29 Sep 2025 20:11:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BAB328319C;
+	Mon, 29 Sep 2025 21:19:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="O8zCM0gY";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="eobG4+bA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 936718344E; Mon, 29 Sep 2025 20:11:39 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 2BF658329F; Mon, 29 Sep 2025 21:19:07 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2586982A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 20:11:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7454F82A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 21:19:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-43f64a5014aso404953b6e.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 11:11:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-6401f1733d7so2084866eaf.0
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 12:19:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759169496; x=1759774296; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XS2PCu7eNxAoaoGgpY76TXacN3CnyEsrCjw507ShIHc=;
- b=O8zCM0gYSljMGFF4Q/y3IK+pByp6bRLiUdn62bBskAevqkaynPRQSA6O39LY6Ruezy
- 84V2KHy4rwdrHKHyRKMapzWQjo14ZWp8KLIRRbGL4R3AbAL07QJJwgJ9ci+X+y29XtBs
- 5enupTbawAaovNH+0FynDSTAtdnRkNi3bhDx0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759169496; x=1759774296;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1759173543; x=1759778343; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XS2PCu7eNxAoaoGgpY76TXacN3CnyEsrCjw507ShIHc=;
- b=HdDiHPzh3ccq4FJd5PWLf1r7ayVrl52/TBnkYCQupgqbnEVg67+8Xf5eq9TlVSu4iV
- UWIYjssn5J/O6wHDwrS89ajStMMLFDZHe2PeV+kT07h6kXPBqdhuVXBSkibDN3RAgDZX
- kf2+wbBeXmf5VXc8ydDyxUbE8xamY4jktsStJHCMB12OSDWFMJUUeeX6MwmG6uXYleJT
- U22S7JUA6FwQmlLu6/cUz6qTPttiSqx9YEhQJBhsslZ+zXQUa7cSHqP3V5pTEhGSW1Ls
- fMvD4k89kSKt+DJPac3t9sT+bDeVyihXO0yhqtOYa3kyn/C6A8HWbtoMFLJjd0m1r/1m
- AaDg==
-X-Gm-Message-State: AOJu0YxZwQk+5EgH35FOorARqIsWWRGTUFRBiDrB0NdkWDSrMpqrdRkR
- I6vg7f95mPugeTy8n51Nv7dAMkWJbrmsNqDiXJnc99m2fprhNl9bc3Gv+PyL5pCAEF2Ye975PPL
- 9pRlCcRQ=
-X-Gm-Gg: ASbGncspROCr2N4gOs4W8+ZRlPt3wgPsKy+BUNPuaBXqeii5xfHP+kwRQUuKkYjhD0t
- tdTbmXhKJlGHG1a3p3zwjK15i7Jw8LM9JbGe3i3mKcSNVpg7crHXUrd0nvvNhyNXyp/EAGciT2b
- r/AuoiPGVQiaCR6t4cGy/eZVnwaN+yiIXsh/2GRy9lB68c2a0hpWE0xXmW+6gNQswtLhxMFg0sS
- qWcRxch6Yqi5sVoRJ2Skk7L9uaFxmyUtxi2AceB9SR2vBmmsDyexpBWPBOyp8nSXb8QXP+3Avz7
- x3spC1FzuqRNJAeaxHdzRNi0Rda533atGTBMgkW8ZUjABT83OHfyixY8BxCIHNC+4Lxddxd8ILH
- ES78s1+OPeivwI/YqiaD0Xxo/5LZ5aRof8xXoj7+yLFATZ4rHyCQXt8JgkpxCH4qfSQJmm3e9+8
- hXOg==
-X-Google-Smtp-Source: AGHT+IE2Chk4v65Px0yFwoYSnHBfafnNjTkUPMa/PGIpj00x3FpOfYBN2PJohwCW2YLLnPZjhyIiqA==
-X-Received: by 2002:a05:6808:308e:b0:43f:7287:a5ac with SMTP id
- 5614622812f47-43f7287abe0mr3878674b6e.30.1759169495741; 
- Mon, 29 Sep 2025 11:11:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-63b1eec7515sm1367440eaf.2.2025.09.29.11.11.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 11:11:35 -0700 (PDT)
-Date: Mon, 29 Sep 2025 12:11:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Harrison Mutai <harrison.mutai@arm.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>, nd <nd@arm.com>
-Subject: Re: Transfer List Checksum Correction and Impact on Bloblist
-Message-ID: <20250929181133.GM6093@bill-the-cat>
-References: <b7c008b2-0a1f-4971-af4e-428faf818d4e@arm.com>
- <ada31617-374d-4f87-97eb-c91da2c4e9b5@arm.com>
+ bh=TW40jeTs8Q/7J1Z+A8hcR2g4MFXVTMFa7b8qSIKZUsA=;
+ b=eobG4+bA4LuTAWNTqY+xSUTJcsaG/zeGhkrLOT8vS0x6PAsWDJ5vigpYIyMvvHs1I+
+ gXGtgPTzDdI7dTe2JRJSOfQRW79CuW/Y2ALygiw9HKsXuFsh2665nQlVh/ll20PeeSaW
+ no/ryBi6Aayl4jcUktTFHn4PKqUWgo/1F0UPAQ6YUDkQi5ZsRq3jtm015z33PwTDrBCj
+ 02YBkK9Fy87aKzjLA5repXXbGeTCT6SeZroLphmjiy1/8X7f2/Wl+HA8ni/Bpdv6OgZK
+ pRS9DtIKj09lfIUCHtsr2e81ADF1As6udZs3c2WVHNfQB8A0u7Rbjta4jq1b62IIXj6A
+ j7vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759173543; x=1759778343;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TW40jeTs8Q/7J1Z+A8hcR2g4MFXVTMFa7b8qSIKZUsA=;
+ b=arHWYGvwlpS4QBS3g7ri2SQd3N9/LIxHpGSg6RVk63AYkHu+EXkgDPPVj6sgaZ4MpO
+ bXNiHFAMdaBWleqZ5blqOu/cCNWuu+W1fxowgx8/AyDfJg7DtpABTbUjhS/XwzDVlnI7
+ 6c4mr7gqABvOzKlMi4kuWOys8JBp+BnQ0hSEN9rvOsVjarCdzLv3RIdUUgary6pvmrbt
+ yHLKKypAxyqOkqZIpziAPI5MJFiiPk+lOjo92d1LuUGME1o3rYa45I4g1ZEijqLkLX4l
+ aB3g06Z+5ahM737sK0Ue+d+EbBPsoo2jPU3EQE4RVxjVdFVODg/2/7hTp2FOKgdmv/J9
+ DpJQ==
+X-Gm-Message-State: AOJu0YxPETrmYnfp4juZOUwPChiaUOYRtyS7VGCOpp1Zzu+YqE272FRB
+ GuNWcEMgwwVUHvuxKNHftBMWcl31+Lg0pNzB3UKUZf3kzYrZEB6TVhHtSDXVPq5xf68MmOJuEdZ
+ K/ydeiz2jf4l7jvAhRiXfk32sQFSAqcpLjyB8qN+rJaEafoiEW8O8gCA=
+X-Gm-Gg: ASbGnct508iRSI3GNSSK+WomYdnVTQhx7ddH4am/WKBA+U/vZMYxBz+6LVIbHfohDU7
+ L7z5kNmMn/NF6bhXNNo7Q3AhejyASmcqZyj+fjG+hS08e/NfEWKqW3iDEIYEI7LqWcHMEntcLrH
+ 5A6tAqCHUBwjjDuAJGlK//PnnDwtAookCANInboqBTM/vz4jlQJwaB49v+FgLErSZgOLmzwJ8fz
+ SMzzeAoymOaHLr5aA==
+X-Google-Smtp-Source: AGHT+IG7J99NtcDAKx+47syWLfdwQpqb2kDrRNYZLGZlnfyWMdgU3sEy4HbT7mXxrb/MuuS1s8O+DAo+PYnSbqlkh6A=
+X-Received: by 2002:a4a:bc96:0:b0:63d:bc20:a63f with SMTP id
+ 006d021491bc7-63dbc20b70amr4822892eaf.3.1759173543126; Mon, 29 Sep 2025
+ 12:19:03 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="h6Cdx1K/uQv2vcBV"
-Content-Disposition: inline
-In-Reply-To: <ada31617-374d-4f87-97eb-c91da2c4e9b5@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAJ+vNU38CyNjp96wH5m4FH022WxHghaASxU-gG=Uuc=ni7fYPQ@mail.gmail.com>
+ <e0c32dde-f265-42b5-ba4d-29a3deaa7eaf@linaro.org>
+ <CAJ+vNU3qmhCJhWbfoRFrSimOJpKxnRjx3sxKAUxqZ6tEX=FP5w@mail.gmail.com>
+ <72434802-3196-47fa-ae2b-f83c5c5f6356@linaro.org>
+In-Reply-To: <72434802-3196-47fa-ae2b-f83c5c5f6356@linaro.org>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 29 Sep 2025 12:18:52 -0700
+X-Gm-Features: AS18NWCSzsJW9rnjCCgup4rpS3dmwFRZt6cbScYLIL8H381A5EQqTRpIAm2tG4g
+Message-ID: <CAJ+vNU2nqccaDosgpZpo1Sf0TWFncaoU3GM3e617-=mhBhzJMA@mail.gmail.com>
+Subject: Re: LWIP buffer alignment
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,49 +95,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Tue, Sep 9, 2025 at 12:04=E2=80=AFAM Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+>
+>
+> On 9/8/25 18:44, Tim Harvey wrote:
+> > On Mon, Sep 8, 2025 at 7:21=E2=80=AFAM Jerome Forissier
+> > <jerome.forissier@linaro.org> wrote:
+> >>
+> >> Hi Tim,
+> >>
+> >> On 9/5/25 19:45, Tim Harvey wrote:
+> >>> Hi Jerome,
+> >>>
+> >>> I'm working with a board that has an IMX ENETC MAC on it
+> >>> drivers/net/fsl_enetc.c and when configured for LWIP it fails and
+> >>> warns about RX buffers not being 64B aligned:
+> >>> WARNING at drivers/net/fsl_enetc.c:776/enetc_setup_rx_bdr()!
+> >>>
+> >>> I tried changing MEM_ALIGNMENT to 64 in lib/lwip/u-boot/lwipopts.h bu=
+t
+> >>> that did not align the buffers to 64B. Where are the lwip buffers
+> >>> created and do you have any suggestions for working around this?
+> >>
+> >> The LwIP RX buffers are created in net-lwip.c. See eth_init_rings().
+> >> You might have PKTSIZE_ALIGN and/or PKTALIGN set wrongly.
+> >>
+> >
+> > Hi Jerome,
+> >
+> > Thanks for pointing me to eth_init_rings(). This function uses
+> > net_pkt_buf as the base for the net_rx_packets array which is a static
+> > global and not aligned.
+> >
+> > Looks like we need:
+> > diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+> > index 660ceb10cbe..aec05d55de6 100644
+> > --- a/net/lwip/net-lwip.c
+> > +++ b/net/lwip/net-lwip.c
+> > @@ -30,7 +30,7 @@ void (*push_packet)(void *, int len) =3D 0;
+> >  static int net_try_count;
+> >  static int net_restarted;
+> >  int net_restart_wrap;
+> > -static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
+> > +static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN]
+> > __attribute__((aligned(PKTALIGN)));
+> >  uchar *net_rx_packets[PKTBUFSRX];
+> >  uchar *net_rx_packet;
+> >  const u8 net_bcast_ethaddr[6] =3D { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff=
+ };
+> >
+> > If you agree I'll submit that. This does resolve the issue I see with
+> > the enetc driver using LwIP.
+>
+> Please do. But then I wonder how come the legacy NET works OK? Or does it=
+?
+> net/net.c has the same initialization sequence.
+>
 
---h6Cdx1K/uQv2vcBV
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Jerome,
 
-On Fri, Sep 26, 2025 at 05:09:53PM +0100, Harrison Mutai wrote:
-> Hi all,
->=20
-> We recently applied changes to the transfer list library [1] to correct t=
-he
-> checksum calculation. Previously, we used a simple byte-sum approach.
-> However, we later realized this contradicts the Firmware Handoff
-> specification, which states:
->=20
-> > The checksum is set to a value such that the XOR over every byte in the
-> > {tl_base_pa, =E2=80=A6, tl_base_pa + used_size - 1} address range is eq=
-ual to 0.
->=20
-> This discrepancy creates problems when interoperating with Bloblist.
-> Should Bloblist=E2=80=99s checksum calculation be updated to follow the s=
-ame
-> XOR-based method?
->=20
-> [1]
-> https://review.trustedfirmware.org/c/shared/transfer-list-library/+/42548
+Sorry for the late reply here. I can't explain how legacy NET aligns
+Ok - just lucky I guess as net_pkt_buf does end up with the right
+alignment there but definitely does not with lwip.
 
-Erm, since this has been out in the wild so to speak, we can't just
-change the algorithm without bumping some cardinal. Or are there yet
-other implementations that were doing what the spec said?
+Best Regards,
 
---=20
-Tom
-
---h6Cdx1K/uQv2vcBV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNrLzAAKCRAr4qD1Cr/k
-Cim9AQDWDy+xiN0HT7uHt+HKqeiAra48xrtnrhk2DWO6UXDFGwD/Tif7P+KpYMHm
-HixnmFU5Bw3mVG8Zn2VL6qK6oClSHQ4=
-=9Nnz
------END PGP SIGNATURE-----
-
---h6Cdx1K/uQv2vcBV--
+Tim
