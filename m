@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A786CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 12:20:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3491DCAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 12:22:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5B0482A9E;
-	Mon, 29 Sep 2025 14:20:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 91C5E82A9E;
+	Mon, 29 Sep 2025 14:22:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XVl/uXQl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kb03uZCn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 961DA8319C; Mon, 29 Sep 2025 14:20:32 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 4F875832AD; Mon, 29 Sep 2025 14:22:08 +0200 (CEST)
+Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
+ [IPv6:2607:f8b0:4864:20::b135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A2318206E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:20:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA1DD8206E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:22:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-61feb87fe26so6489847a12.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 05:20:30 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb135.google.com with SMTP id
+ 956f58d0204a3-6348447d5easo3412580d50.0
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 05:22:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759148429; x=1759753229; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=59bYRkFSbfCqCCiGR87JGrikLRZkZagtLEUKz/WQbh0=;
- b=XVl/uXQlU2U/Hg0Nq1X7eCa6CYDL2UA6wpxUj89OZpfy0MWGYU2qxLxXk99BaDHuut
- viV/twRcoPMh5tFZLuHDof06z2uG92RZWsE8eJlIa5CPvjsx7OvywkKmaQVfmYS4Ip98
- cjwY3fu/FoAFjPHAN4q3pCkInb1e6pa8GeEY4=
+ d=linaro.org; s=google; t=1759148525; x=1759753325; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6YH1H4R3/OiL0XI57zZTSoR6lHsfWoY+Th60Zk6RD1c=;
+ b=kb03uZCnE3Isz29Zz1MoH5IJLu+/aqdJObEZjhZQ1AvNu2yegGkomajvWYqMbZxe+/
+ MUxFxC5dS5lS12y8wHRURFc1LJUFUEsFdyGLbygss31AjQFXSlbvos/fIpJzWtzp2ccy
+ 0QkwPXTeqaWKguenOI6Q9YpIQ67vdxJjjnpsLWMie8ySsydVwBsxfMo6Ug7VPA7TZC2u
+ LiXI6ci7fIKTN8GHaRcWKTgks0FGFnLL00dvKl5nuJHwNsWvJG2bDt5OOHlKgneD2bv9
+ R6HOFLUSaKMgOxJrZPbh2MDEWK9QOPW7iqoeOn5NCA7cB74xfZvF8UteI6jbeHubQMYO
+ WzGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759148429; x=1759753229;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=59bYRkFSbfCqCCiGR87JGrikLRZkZagtLEUKz/WQbh0=;
- b=gbpve1lzgeShvXsP5P7BnmQYb8XNq3GlDs8BqA2PnonxKqwbitFCfCP4/f5OC2Lel4
- ifNTSG3gBibc/l0zIz5odlppJiwN+lx8ubpuhhMnvhK5jUmlp8NyFi9WIfmLxHp2/1lm
- LARoSbfiQCBFiYj7ZoLm4+Yl6YqC+bzklPnVIHhOGIAaH8PNG5+sjt0OgkoiyU6fblSi
- ZGYBKRKITgrueEKs2QYsqRFr9ToCu2JDdygt5be2POvRxOqGj6yk18ukcYZlgoVFqJ88
- pDTX7dLVMP+KntaNim4gxogWRvP4j/93oHXRiWIZhlhnG0s+ZBGl4NNv7KWM+L9ZukPS
- EPhQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4yRIpzqsJfhlMTZQ+qlGlBdRZtTMLZMyizUaI7rfIqFSTJKr/Cn66oaqBYcyIn9qWH0ZLQxU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5UxO7cSk6j9vDCc2Z1n2PmKsJOQhteigKT0DCHVDrqPgNKdWG
- +/EsFKYeNQZSaAdbl0Bc9fNda4pcv74bAUoZ7xMhm1oYo1+30QeEVbvUH1RtrYApBJpYA4Ndxus
- Zond6XDwgI1OEizGGYbUpxmAvsoYSWGufdJQ1GTqj
-X-Gm-Gg: ASbGncuJMvPEVCPLwcHQ0m3bZmh0c+8EZ7FKCMdKrMVFOWv8dl2YsdHmrDTHAOK8qs3
- c2+QZmohu4lRDjQxOpUaKWrpPE2rAFHMrPm8r7O3EmHatnTW4//3dVKjd+WGrUGRlTzWcrm1I9J
- 5KWOfzp4NwgvQ3s2hMgEK8KXICCS0bl/KX44qEnC0vEHRCFcZdHIjmkHLc6lL9Sao5lqO5zT4JW
- h+gHven3RIyTw5+6F/wSaRZVoU=
-X-Google-Smtp-Source: AGHT+IGE5iV4e2xjn1791QDY24hyyn2qGnNJNKg7zsyXkbF/6Huq/jN019hvJMWikOyOrO/yxVehElbEVWbenn2G4jk=
-X-Received: by 2002:a17:907:7ea5:b0:b3e:5f20:88ad with SMTP id
- a640c23a62f3a-b3e5f20dfe6mr465225766b.28.1759148429525; Mon, 29 Sep 2025
- 05:20:29 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759148525; x=1759753325;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6YH1H4R3/OiL0XI57zZTSoR6lHsfWoY+Th60Zk6RD1c=;
+ b=ACaXKvB7LeLR9xOjrXI8Tlf+vcv4am41qq8KLAaXM3K+zntvCmLUqva3sls8YgOzE7
+ Aquc8uGXBW9Lgm/CeqcQC2yzHvlIW3ysCvG07Tl9ePap3lhIP6tksz0jSxyFrsWWCYwn
+ PGh3OrLrTvJXG0Xt1NM7JtExVfZUhzTvmZsoUztMwg9HSdaiHa0f5f+p8z48RyA5qn4p
+ dIlG9QXhA5JHMLIGjySGA780B4d2jP6PEN+KuP2BHkSnF15w7nVKUjNX0B47OV5yczMH
+ ilrtmKzMlrbCviCUmgPiTPMVRcdYfxvpSrRmEto0uzGQbjw+WoqM2Pog3FyTZZXS7UX6
+ kYlw==
+X-Gm-Message-State: AOJu0YywRjpl7CBo5Lpe+YfS3mtI0HyhnTrynWXP74l4BF4B+HX008DW
+ fpmPEHNSftPv1+57MD4PSCPgafkPV3/cjMvCxz3oq3U7ZiFWdsovEelw7H7VWmGHFhhlvj/A4CJ
+ GlGMLI8IF+u2OoIP43c8NIy5U+53U6HTxJBv5FSAut6nSq+ZIegpy
+X-Gm-Gg: ASbGnct3pV8FNbxWTULOY7C4po8eiDX9bigK9n5I+uPAsMIh74eGwH2HyOkC+bSy5NX
+ +DFffad2Nm4ZIJ8EXOZXIcj6wbGm+SYkb6IqZmwy36RKU5wW9b0CVBd9Ctkia+PQQmHqf3Yi6Q3
+ 78hyEKIGuP2tWswuH1GlttnIuOe11T5Ino7IPt0wDSZC74w4m4AHkHzIsaH6DeI/PU9ZiDT0STz
+ eLRZPh9dJ+4TiRf
+X-Google-Smtp-Source: AGHT+IGKDWsYLpgOI5Ac+qRmFHgKEV9fxZxRUVN/G6pdNdu64c9o6Bx16GSD58/0GkhLxe9LvJV1WcmSYgT2SwU214Q=
+X-Received: by 2002:a05:690e:1505:b0:633:bbf7:40fd with SMTP id
+ 956f58d0204a3-6361a82e3d3mr17261749d50.38.1759148524421; Mon, 29 Sep 2025
+ 05:22:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20250814120029.234237-1-Max.Merchel@ew.tq-group.com>
- <20250821191232.GA917481@bill-the-cat>
- <077e9371-4bd4-4c70-b505-428e8a491d83@ew.tq-group.com>
-In-Reply-To: <077e9371-4bd4-4c70-b505-428e8a491d83@ew.tq-group.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 29 Sep 2025 06:20:17 -0600
-X-Gm-Features: AS18NWCsNF26IxCnvU8_iUQa8-7YimVf2_k_RwCQi1w3s82aNT6WiW1ki5ZXF7o
-Message-ID: <CAFLszTiKR2La5GBNBJxYOWZm08+KsqcFxLjdfV+kfBh63=CPuQ@mail.gmail.com>
-Subject: Re: Re: [PATCH] bloblist: fix missing OR between licenses in the
- SPDX-License-Identifier
-To: Max Merchel -alt <max.merchel@ew.tq-group.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, u-boot@ew.tq-group.com
+References: <20250926153144.3680937-1-trini@konsulko.com>
+In-Reply-To: <20250926153144.3680937-1-trini@konsulko.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 29 Sep 2025 15:21:28 +0300
+X-Gm-Features: AS18NWBW2MGkRJ5MH-fIHe2EDM8mCSjQya45X6gaqJwfmDym7VTbR9NMTicpRP0
+Message-ID: <CAC_iWj+PjZGFxR-B2xekuwZM8zHEEoDSPEbZz1iNOMAEYfKR3g@mail.gmail.com>
+Subject: Re: [PATCH] tee: Rework Makefile logic
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jens Wiklander <jens.wiklander@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,61 +90,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Max,
-
-On Mon, 29 Sept 2025 at 03:59, Max Merchel -alt
-<max.merchel@ew.tq-group.com> wrote:
+On Fri, 26 Sept 2025 at 18:31, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hello Simon,
+> The intention of how this Makefile was written was to allow for sandbox
+> to build and test drivers still while otherwise requiring OPTEE to be
+> enabled. This however didn't work quite right in practice as sandbox
+> could enable some drivers which would then fail to link. Rework things
+> such that sandbox will also traverse the optee directory when
+> SANDBOX_TEE is enabled, but only build one of the optee-specific files
+> when OPTEE is enabled.
 >
-> Am 21.08.25 um 21:12 schrieb Tom Rini:
-> > On Thu, Aug 14, 2025 at 02:00:11PM +0200, Max Merchel wrote:
-> >
-> >> Currently, the conditions of both licenses (GPL 2.0 and BSD-3-Clause) =
-must
-> >> be met. However, the original commit message states that the BSD-3-Cla=
-use
-> >> was added to allow use of the files under a less restrictive license t=
-han
-> >> GPL 2.0. Therefore, the required OR between the licenses has been adde=
-d.
-> >>
-> >> While at it update the SPDX-License-Identifier to SPDX version 3.
-> >>
-> >> Fixes: 6c9e3d1f ("bloblist: Relicense to allow BSD-3-Clause")
-> >> Signed-off-by: Max Merchel <Max.Merchel@ew.tq-group.com>
-> >> ---
-> >>   common/bloblist.c  | 2 +-
-> >>   include/bloblist.h | 2 +-
-> >>   2 files changed, 2 insertions(+), 2 deletions(-)
-> >
-> > So I'm going to defer this as the outcome of
-> > https://patchwork.ozlabs.org/project/uboot/patch/20250101195817.995321-=
-1-sjg@chromium.org/
-> > was that it's fine to relicense but a v2 with a differ commit message
-> > is needed. And while I thought about doing the v2 myself now, I think
-> > this is something that really must come from the author.
-> >
-> >
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Jens Wiklander <jens.wiklander@linaro.org>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  drivers/tee/Makefile       | 4 +---
+>  drivers/tee/optee/Makefile | 2 +-
+>  2 files changed, 2 insertions(+), 4 deletions(-)
 >
-> What's your opinion on this?
-
-Yes I agree that we should relicense to GPLv2+ only. If you'd like to
-send a patch I can add a review tag.
-
-Regards,
-SImon
-
-
+> diff --git a/drivers/tee/Makefile b/drivers/tee/Makefile
+> index ff844195ae12..5bc5df0d3805 100644
+> --- a/drivers/tee/Makefile
+> +++ b/drivers/tee/Makefile
+> @@ -1,8 +1,6 @@
+>  # SPDX-License-Identifier: GPL-2.0+
 >
+>  obj-y += tee-uclass.o
+> -obj-$(CONFIG_SANDBOX) += sandbox.o
+> -obj-$(CONFIG_OPTEE_TA_RPC_TEST) += optee/supplicant.o
+> -obj-$(CONFIG_OPTEE_TA_RPC_TEST) += optee/i2c.o
+> +obj-$(CONFIG_SANDBOX_TEE) += sandbox.o optee/
+>  obj-$(CONFIG_OPTEE) += optee/
+>  obj-y += broadcom/
+> diff --git a/drivers/tee/optee/Makefile b/drivers/tee/optee/Makefile
+> index 068c6e7aa1bf..36ac085ef420 100644
+> --- a/drivers/tee/optee/Makefile
+> +++ b/drivers/tee/optee/Makefile
+> @@ -1,6 +1,6 @@
+>  # SPDX-License-Identifier: GPL-2.0+
+>
+> -obj-y += core.o
+> +obj-$(CONFIG_OPTEE) += core.o
+>  obj-y += supplicant.o
+>  obj-$(CONFIG_DM_I2C) += i2c.o
+>  obj-$(CONFIG_SUPPORT_EMMC_RPMB) += rpmb.o
 > --
-> Best regards,
-> Max
+> 2.43.0
 >
-> TQ-Systems GmbH | M=C3=BChlstra=C3=9Fe 2, Gut Delling | 82229 Seefeld, Ge=
-rmany
-> Amtsgericht M=C3=BCnchen, HRB 105018
-> Gesch=C3=A4ftsf=C3=BChrer: Detlef Schneider, R=C3=BCdiger Stahl, Stefan S=
-chneider
-> http://www.tq-group.com/
->
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
