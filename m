@@ -4,82 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 718E9CAC5B9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6848CCAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:07:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3AEB18344E;
-	Mon, 29 Sep 2025 18:07:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7CBD483526;
+	Mon, 29 Sep 2025 18:07:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ukc5SWLi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YDAPVTF7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E005F834E1; Mon, 29 Sep 2025 18:07:30 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id A23E283526; Mon, 29 Sep 2025 18:07:31 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD2868341C
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:07:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A46E8349B
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:07:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7b3e2a51678so1592469a34.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:07:28 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7a7c1ecd433so2420473a34.3
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:07:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759162047; x=1759766847; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759162048; x=1759766848; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jgiL8BOEARhDjXQ5BQNhMMUH4hG0HZBxF78zElnTbfA=;
- b=Ukc5SWLi1m5BkGK/Er+KBw005QgzFAVs+n62qR5vsf9p4YExALaQ25hs2F+BWZs7Pf
- Cn6NiK2zbiCa5X+s+79QYzGAyuCxsgDzuu6b00zODNcUCHLnK4OvkzMuPjR5IqpOc1OY
- 6zxpdoqosjsFQuICb6vwEY8cv786OVT68q5i8=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=bAo1+v5DOO1OEXhjjo6i+1JL8gX7EZYhGDSt9lbvssI=;
+ b=YDAPVTF7A8jBZzuCd23Y+6AnSTH7nvqtzvwvsX4V0Mvr3QC0y4OqHDXHEyaYZ2jX7e
+ anY2qD8nkdUVD/RR6FYJzcznOnfyXazgzdlnJstERo6qYTePrWn1AMW+TNdS5+KRNAUC
+ JYVeNjnIIdQhRb1RYng/0LAze/o9ZoJZ0GVc0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759162047; x=1759766847;
+ d=1e100.net; s=20230601; t=1759162048; x=1759766848;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jgiL8BOEARhDjXQ5BQNhMMUH4hG0HZBxF78zElnTbfA=;
- b=n0A04xw6J5WtwPWbyoFjb5JAVjvilfp3H1u4BeIq9VWs98fKxoE3bHzzDd8J/YD84W
- 9ob/s9kLcvmL53/wSINOQqv5eHvD5KN1nVDyNY6UmhZT2s/5SV/biLPrcMHPPyruDp/s
- DVtatePdwpF7ZVrFcLSyzFxDLhlq36n2GD9nCr+AiL9PLE0XjZEq2qwKw646aVva00bw
- VbW/M1NFgzHcKAsyXZJsO4aOOLkvraif099ELeSXBTbWrHgjB8KENEiqiC5YFzuQDgWq
- XbpCk1Dv2xQKJUadcxFWbL2PRBH49sFKevOenG3XJiagSy5axtICKliNiH/SZJS3Vi5z
- hsCQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVw0iITtr3/xS3XDLMPUFiZ2F//zfNxL62PJ0RFWoPRQFVPKt6WtZsUPQKb5rRGSrteRy5p564=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqqFFauRX3LV+xE8gw7ZEVcaoz068L6SP4Vla/fkn6/wRrH3cM
- ryYtwA1xymLu4KBa9wsQll1+wi3xG62uGDVjbgks8EN8setTj+Pr9pJs7YgiNbA2JEg=
-X-Gm-Gg: ASbGncvsacqbT35o7cZgsBGBQ40RqM+eoiVFWr1zpnYIqjio/zN1OQQve8kul1pHdRd
- gJ5OB1x/BOUjd2HZ8Xyzg/4AW1i7ZTOjNeqIe3cOb8e08P1e9D1p3XQrt2NpIQDMDryo4XqKCts
- egi2OhlTdzIXuiaiHhZis6WZo0ILJSKrbUvnOBrVgZtCSmyae8+Lm+4ngwtNkFZmuvypKWi9F9f
- W99/cSr4N9ve7rhKNNtgD44SANwrbsRSQFmHr3uL1mK0BxDzWKid3G8lynVhLIoap4KGk0ovit4
- M6X9Yjt8/RgUeFtzkKdtaLzIEN72ZD2FA7HFG/r7THF/TOk+dHPLKJzKlnm80f1wlzhFNy5fgax
- fMfyCJbMiNw7icpH3IU8pBDUlpR0mNa7dHqV1Bu6wqNmSXcAhfnl0MAFYN3nYsLeKUg==
-X-Google-Smtp-Source: AGHT+IFaiA+7X9E4TI/5x2CzmXHeCzQr7Gey3ajvhCV3/6yuwAK9Tsl795TL1NwmV6XcY3W80vt6fg==
-X-Received: by 2002:a05:6830:258a:b0:79a:2e2e:4f9d with SMTP id
- 46e09a7af769-7bc55a924a7mr496136a34.12.1759162047510; 
- Mon, 29 Sep 2025 09:07:27 -0700 (PDT)
+ bh=bAo1+v5DOO1OEXhjjo6i+1JL8gX7EZYhGDSt9lbvssI=;
+ b=nvbp+mdjhlNfmqiLO/l+mVkx3hAsUIRVlCV6WF6+9KvnXs7MSdDHYgc0JzOjMnpoec
+ iogUTVz9Q9q1eLrETUH6kJ8ftmWsQswkwLzobEmpeCdOPacs8Aj43JbENVPY2E+7cTXZ
+ +QKxC+jvIilP0HRfJiB+M3xCk4v1DeCcaa2VxRs3so+ckygKOpklCWc7qvAAF/4X8mMs
+ lvvXlHqQF6BkYtm1/jUZDQpy1Octdyh2cyvAphJJ9C+NNaEo3RLPtW+9MOiYVN0B0NWS
+ BTVfSutFxGURn7SW2VGateA+SvPuz3l5wVmNRkORQ0NAqiAH/W7Q23fu85jGgSaYPG0B
+ yCcw==
+X-Gm-Message-State: AOJu0YwyBEid1Vg3OAiGqQgsGK0y57h4BvJoMufzDPg1NhzpQ1ao5gd1
+ DcST6KxZk/I+T4Xjfr5HgDbgxXIs/XLUyelMZZMFOLiWxHUW3gGqd+/HbcVfMHlvOLywTzXAp0N
+ O8pJ9uAY=
+X-Gm-Gg: ASbGncthB8CsTJD+9/6F4Wh6kEHmL0hkI8pw0IRpNdb0HvsbD1viRbjibzO+2cCs5jv
+ 7/+JlkSnJrsek+8LDhE2g6cryFCAxIV3IOoxJ8VI7+7HE/mDBGKMa86Y2G27sGX8m6BH+Rja0el
+ ZXPRjPAmPXCqlXmso6vmxw4QamjfKzr/LOJZQeXI6e4Gt6CmhP+c4tdulqnnpBpgOpDG3HRMAuy
+ ISIMEOZZcnpQA+7w5vuEvxtRYcMOZSTHmEP34Ur3jZk3jwM6y8iH03TeWg/LZ8RHR+QF4qvk5xz
+ BgkBGen7MTmmHN3FnstoPsAapSyqQ/C+KZ8k74jqlfgkWZv4kb8YhKOvK30//V3PwdraQ3JvhWK
+ mBUfe6KEBvc5RjtXE5xPwhDsSFcHXLRvAy0NCb9PCr3otbog88JiATDebyhDlg+1Nag==
+X-Google-Smtp-Source: AGHT+IHEIMA0uxWgg9zRLausQ7+YWzoOpfs+JCGYCAfDIbKkXPfCCRrl5Dv4IEisBnFlBRjKRyMCqw==
+X-Received: by 2002:a05:6830:2585:b0:7ae:dbc5:4705 with SMTP id
+ 46e09a7af769-7aedbc56212mr5726528a34.27.1759162048229; 
+ Mon, 29 Sep 2025 09:07:28 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a23e1682f4sm2689213a34.22.2025.09.29.09.07.26
+ 46e09a7af769-7a23e1682f4sm2689213a34.22.2025.09.29.09.07.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 29 Sep 2025 09:07:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: bigunclemax@gmail.com
-Cc: Heiko Schocher <hs@nabladev.com>, 
- Wojciech Szamocki <wojciech.szamocki@nokia.com>, 
- Dinh Nguyen <dinguyen@kernel.org>, u-boot@lists.denx.de
-In-Reply-To: <20250926100530.732938-1-bigunclemax@gmail.com>
-References: <20250926100530.732938-1-bigunclemax@gmail.com>
-Subject: Re: [PATCH v1] i2c: designware_i2c: Don't warn if reset DT
- property is not present
-Message-Id: <175916204661.360535.7538811434667491772.b4-ty@konsulko.com>
-Date: Mon, 29 Sep 2025 10:07:26 -0600
+To: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
+In-Reply-To: <20240717-b4-config-v1-1-0bc9e80ef582@flygoat.com>
+References: <20240717-b4-config-v1-1-0bc9e80ef582@flygoat.com>
+Subject: Re: [PATCH] b4-config: configure `b4` for U-Boot
+Message-Id: <175916204764.360535.9670952964716641436.b4-ty@konsulko.com>
+Date: Mon, 29 Sep 2025 10:07:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,19 +94,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Sep 2025 13:05:26 +0300, bigunclemax@gmail.com wrote:
+On Wed, 17 Jul 2024 23:12:59 +0800, Jiaxun Yang wrote:
 
-> If reset property is missing in DT, then we get this warning:
-> 	designware_i2c@0: Can't get reset: -2
+> `b4` is a commandline tool to make patch-based development easier[1]
 > 
-> Avoid this by checking if reset DT property is present, first.
+> Provide a .b4-config file to match U-Boot's patch preference so it will
+> be easier for people to use b4 with U-Boot development.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] i2c: designware_i2c: Don't warn if reset DT property is not present
-      commit: 522a58af836598918758b41b110a73f35b9335ba
+[1/1] b4-config: configure `b4` for U-Boot
+      commit: 26efc940c865a04d345ac9d39f71746fc2821da6
 -- 
 Tom
 
