@@ -4,63 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F837CAC5B5
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 15:09:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 578A3CAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 15:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E435833E9;
-	Mon, 29 Sep 2025 17:09:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B887B83071;
+	Mon, 29 Sep 2025 17:13:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="TZSFfH7J";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Cta/E4ZD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4671B8341C; Mon, 29 Sep 2025 17:09:27 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 839088329F; Mon, 29 Sep 2025 17:13:12 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77920832C8
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 17:09:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 498AC82A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 17:13:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 17F4E1A0FAE;
- Mon, 29 Sep 2025 15:09:24 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id CBB764E40DEC;
+ Mon, 29 Sep 2025 15:13:09 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id D56D6606AE;
- Mon, 29 Sep 2025 15:09:23 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 8B163606AE;
+ Mon, 29 Sep 2025 15:13:09 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D5FB9102F16F4; 
- Mon, 29 Sep 2025 17:09:14 +0200 (CEST)
+ with ESMTPSA id 84D0E102F16F4; 
+ Mon, 29 Sep 2025 17:13:02 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759158563; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=lTD18vd2Pbp/DP+emuLeju/kvkOcELPvR0FpifC1yNc=;
- b=TZSFfH7Jh7on5jx/75At2rJa03Zpei54djtI0bw/oxAudM5TF7ivekIHPexHPslvGFQkFX
- 0d3dz43QCUBofV4TryKpXzPm1HYeALQ5diNpT0SQY9gHbj76+2c/RpinuS54s+Z8t4eKR/
- hCoMcKTSrfkDDDWfNopbRW/hxSLFY4F/k0NGm7uM9nMe8M8I6cN6HDUFqwxw2qNOKpjiTc
- 6ObPkoc6zS2Ix0LIvp+aR5nMMTAQuMf2pOyeKe+NmctF2kBtUlrZ+wcXODThZnJbL0xi0e
- QSedOei6N0uIsN71TNUnzVD4+bbQOTRqXNwhwDnYouId94HbstuMSo6V+eiJPw==
-Date: Mon, 29 Sep 2025 17:09:12 +0200
+ t=1759158788; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=yQM39gYkfqQoLLd29DS3pKKPI8kwV9AUKgXPfsry93c=;
+ b=Cta/E4ZDs+clBloAhZhhejzUHmjNM+PS9oOUH9P9V3OmNt8a8jhJADgAXNoa85wEICN27j
+ 9o8MrwEXTaHmzHQViHvPYcJL3+Mcj00rwQPF1gTcEuxaHgU8jclDsNjMApcnljJHHa58sE
+ q7lJmheC0eayoF24ZMrevEzCLhLzAmnXpIbc6HooI9Ast/xHdsxqBqGUJjAuki65jQ3hA7
+ wWoxgVFWHDii6gbPDZsJLAbRRCenPsZ9piwEgQBzrdn2wPzt6x1RKOTTnKQhI1qfJ6pghr
+ B+nb5B5M1jOIdxSUjAvxCXt0xDpU0uOoLRtIVFWusb5GJYZNEY/sq0M7tZnzxg==
 From: Kory Maincent <kory.maincent@bootlin.com>
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>
-Cc: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- <thomas.petazzoni@bootlin.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] Revert "board: st: stm32mp1: Clean env_get_location()"
-Message-ID: <20250929170912.3bee3f9d@kmaincent-XPS-13-7390>
-In-Reply-To: <55d0805b-dcb2-4277-a4da-f4c26b48a2dd@foss.st.com>
-References: <20250917141736.59732-1-kory.maincent@bootlin.com>
- <55d0805b-dcb2-4277-a4da-f4c26b48a2dd@foss.st.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+To: u-boot@lists.denx.de
+Cc: Sagar Patel <sagarmp@cs.unc.edu>,
+ Kory Maincent <kory.maincent@bootlin.com>, thomas.petazzoni@bootlin.com,
+ Tom Rini <trini@konsulko.com>, Hendrik Donner <hd@os-cillation.de>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH] checkpatch: use python3 to find codespell dictionary
+Date: Mon, 29 Sep 2025 17:12:51 +0200
+Message-ID: <20250929151252.1005683-1-kory.maincent@bootlin.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,30 +71,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Sep 2025 16:16:35 +0200
-Patrice CHOTARD <patrice.chotard@foss.st.com> wrote:
+From: Sagar Patel <sagarmp@cs.unc.edu>
 
-> On 9/17/25 16:17, Kory Maincent wrote:
-> > This reverts commit d37641c61ba212241c38e3fd22f0335fc0bebc96.
-> >=20
-> > Restore support for environment storage in EXT4 filesystem on eMMC boot.
-> > The previous cleanup incorrectly removed this fallback option which is
-> > needed for boards that store their environment in an EXT4 partition.
-> >=20
-> > This configuration is OS-specific rather than board-dependent and should
-> > remain as it is configurable via menuconfig. Even if it is not described
-> > in ST defconfigs people may have enabled it in their defconfig.
-> >=20
-> > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+Import Linux patch to locate codespell dictionary:
+https://lore.kernel.org/lkml/20220309180048.147672-1-sagarmp@cs.unc.edu/
 
-> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+codespell requires Python 3.6 or above, but on some systems, the python
+executable is a Python 2.7 interpreter.  In this case, searching for the
+dictionary fails, subsequently making codespell fail:
 
-Hello,
+  No codespell typos will be found - file '/usr/share/codespell/dictionary.txt': No such file or directory
 
-Any news from the maintainers? Is there a reason for not being merge?
+So, use python3 to remove ambiguity.
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+In addition, when searching for dictionary.txt, do not check if the
+codespell executable exists since,
+
+ - checkpatch.pl only uses dictionary.txt, not the codespell
+   executable.
+
+ - codespell can be installed via a Python package manager, in which
+   case the codespell executable may not be present in a typical $PATH,
+   but a dictionary does exist.
+
+Signed-off-by: Sagar Patel <sagarmp@cs.unc.edu>
+Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+---
+ scripts/checkpatch.pl | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index 763287e02b1..b0ee126bd89 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -337,7 +337,7 @@ if ($user_codespellfile) {
+ } elsif (!(-f $codespellfile)) {
+ 	# If /usr/share/codespell/dictionary.txt is not present, try to find it
+ 	# under codespell's install directory: <codespell_root>/data/dictionary.txt
+-	if (($codespell || $help) && which("codespell") ne "" && which("python") ne "") {
++	if (($codespell || $help) && which("python3") ne "") {
+ 		my $python_codespell_dict = << "EOF";
+ 
+ import os.path as op
+@@ -347,7 +347,7 @@ codespell_file = op.join(codespell_dir, 'data', 'dictionary.txt')
+ print(codespell_file, end='')
+ EOF
+ 
+-		my $codespell_dict = `python -c "$python_codespell_dict" 2> /dev/null`;
++		my $codespell_dict = `python3 -c "$python_codespell_dict" 2> /dev/null`;
+ 		$codespellfile = $codespell_dict if (-f $codespell_dict);
+ 	}
+ }
+-- 
+2.43.0
+
