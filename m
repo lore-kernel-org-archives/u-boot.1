@@ -4,120 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9B19CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 21:00:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86EFECAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 21:03:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40CB48319C;
-	Mon, 29 Sep 2025 23:00:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E3C368329F;
+	Mon, 29 Sep 2025 23:03:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F4AtJJkg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r8acTiNL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA434832DA; Mon, 29 Sep 2025 23:00:26 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 1AF4F833E9; Mon, 29 Sep 2025 23:03:52 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7013082A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 23:00:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61EBC8319C
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 23:03:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-4de2c597965so33436491cf.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:00:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-646670c29dfso772559eaf.2
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:03:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759179623; x=1759784423; darn=lists.denx.de;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wogJR2283/xFRAufiEcuMu7iWtvkU+S+omUGdr6KEjw=;
- b=F4AtJJkg9D0Y0/X92nW0cHzuGZb960FKBB+n82AFSr4FDGO9eRMVmr5vhlJwcDVZno
- h3zD5ud5FvdHOJ2Mdzbyu0Nb3NA5EB5ZuFPiT4RzCbhdKMi0vgeq+cVEgwfL+8XPK3eC
- yqzHQzB1ptJyJqt0BZ7btaOBzlZ9dWCzCQMC01nIcGSc80w+L0bRPnD5SxElrvIeVNj/
- sTM2lnJDpSeJzDU9SvjsDe1KpXKwyam2QjOuwnTS9+wFUoY1IZLGkeXeO45yGynpj7Nn
- cj/+bEcFMKF1wLUay+7PYGQzQTLmO+qQS9G/DOusI+njnJGWztQKOScTbSxdRm8dcbNU
- hMbA==
+ d=konsulko.com; s=google; t=1759179828; x=1759784628; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FMuR5kjiavXnzCoYtYX227DDG3yMeZp5/b5r39N2vHA=;
+ b=r8acTiNLqwUaudC6rjb8DoASh0zDFEbmoyJtbf9TaSd7vyAGPLlj1voyad9UWzhyzu
+ 3ryRVT2K9RGkfZ3NFWJCNnN2YwI6N4EkDXZalp0q+Kb2P75btGz/3k/l51vG3rKhBtqH
+ hIvgQ8SuRkGbH8oY/8wjoSAAtkY125XC+ntb4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759179623; x=1759784423;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=wogJR2283/xFRAufiEcuMu7iWtvkU+S+omUGdr6KEjw=;
- b=uoRwLWyDjzEfnuA4OcWRWExIByXm4N4/Ipfy6dIomg2n+md3gTtestgaDxTHCi8n0H
- jFMs000C/6H+tRag6YQlr3KXWelrDss3OTlPUe8qKNv6NgfsmiH9U5bFEo8hl+Onewxv
- dheVHb4SsxU2gPTAc61gyk7NknKsfvpCMq8e/oaLO8EnVavZyRacuK5yGqfk+HQVxVMK
- /3CpfXTsrZ4Gyk4EOhnlBCoqM5ZBg505TlZaZxK+uwhBYnkKuPAQsptCodA3tHM4XP0Y
- ISdcpzi62EGwIEALmHkgWWUZCh2+AvBplcnx218IvWuyllqDOeVPPk1TnkJH/9WqCkfO
- UVAw==
-X-Gm-Message-State: AOJu0YzHE8oZJRPqezGcE6BW9X61c2YrWZ/EEZndqzdYr3z68apdhn33
- 1gBnnBPtaqBrOWWqKC9i5ZvE9jZv3k/RY+N22lMadhfN6uaYa4gCD8954MmvYB4HIDOHc+BfoJd
- 7Qgst
-X-Gm-Gg: ASbGnct60DZrjF1DL8sx6lHSP9CdepPJ8Tm1HFBw8B4F1mtXj8Nv3JJxvIY3ogr9hUX
- lGjkzwJwowtArphrpnx/1C42e3dFQu7xipq2GlsoQ3kkiheNq/7GypP7wbyYl2plIr15BYH18Hv
- mQT8OCG7BJn5M0ninZfaFDzO2NWtVscG3jKL1nRgZNeNII3FpX2IvvMQnYF33vYWNFIFDe5vUic
- ZlN3EByw2cQqTc3JkucvKHtFbXAzaYm6NFigVrLsz9V+zLP3eh4H/UDnN5TVLFtCvl5EIGifmup
- 6a9fFjlxuq+89/ZPJRHw3jfgzmaN04CVyK79br3a3VTwJzAqesy0IXviQaIrRogtg3w61M5n1/J
- L4YJP2KQ1Vq2XVZywOwMjJU0mv9TodsqJ95DvrXYO0YQeDfF+q/gu3wXOl07BnEPog4EiyHVlcy
- k6JhBEgEgxxKzofM3hlE4w+tjE
-X-Google-Smtp-Source: AGHT+IEU7OqcWJRlHsDRJvZIaBoLLACMq8XEPJvboEbMehtFjHlxwnFx5YJL5qnt+xQk/j1+UD2PTQ==
-X-Received: by 2002:a05:622a:606:b0:4b5:ea1f:77ec with SMTP id
- d75a77b69052e-4da41d1c757mr214394311cf.0.1759179621650; 
- Mon, 29 Sep 2025 14:00:21 -0700 (PDT)
-Received: from fauth-a2-smtp.messagingengine.com
- (fauth-a2-smtp.messagingengine.com. [103.168.172.201])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4db11227c23sm84527231cf.40.2025.09.29.14.00.21
+ d=1e100.net; s=20230601; t=1759179828; x=1759784628;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FMuR5kjiavXnzCoYtYX227DDG3yMeZp5/b5r39N2vHA=;
+ b=UWNeGF9FLaNaN9Fx+Swe1qgcNtbEb1/i46/GTFCi2pRgh2nSDU0NYFqNiow4LoaseN
+ Phr3iqaox3UU/UOEgDLZ18yRBiuDSblFrPhc68pqrTE94RC/6cAADv2Kzhqtkof9RU3L
+ kbrm6xmy3/2nT5jws3EcRauwkekRp0Qyw4ca82NpXebE0GSg+GhmDm2mX9ERTWonMNQp
+ +9pl4X9B/f+JP47ENob2uWdfI6HOyqFyT4AV2PveHilfZcMjroXYUecBTCMamPKQZA7v
+ 5gOZONDirTF8swCS7Jax7h7aFY4zv6y15MDRhibZGMMEzQfLPH1LPpX/vmuxcFq0D4YD
+ 18TA==
+X-Gm-Message-State: AOJu0YxHt7bragZfUCmuQTNLyVjViwyG+AUxWX8kYoWKr9FvpGpBJbb5
+ ym6L3wcgZHYJfer+62yJXiyrfUsODhT2b+8KRqtp2cXXiv8PznhkxnCmsm0QS2WLXwRxKHSmxRD
+ CWwd6jL8=
+X-Gm-Gg: ASbGncuYEoR+da6q1cUSmLtaP0Hr/H3Lxp9yEYHQSzEIoUaQfSxInYtoEOOnv4BZ8zu
+ RDFcY6EHJRDHCTW9j8g8eEot3Bp9T9tTDQ4zBDjSTERJ6ZCjR4aBK0BaD4P1hf/LJA8j5lM1xvt
+ 2eoyHuR/L7qHwnfX1w29OwaAzgWhv0hCfH+yfxpy2shgIKthm46zn2CY/clKdGtCC7kNpQXjkKa
+ 5sr8EY3g5c9436shMmyUNeP1Zsy7lSTYbapu+U/scrJbDitPUqyKST0SBtu1Ci8/M1fjs48lWOi
+ nfXPU2nStXocE56/s4HB2MHkwHhYwNL2kPVuTmBh0BB72FZ1s9utX/WfWclLerk4oufY3UDbakp
+ K2ZNID/7LWr2/m945c9ibvXofMfCfH+ND9bTJLaazgaj/NYEKq8Q8Fz9/
+X-Google-Smtp-Source: AGHT+IG0vZC+zltnMsxzMUHbkNVaolNIw4ck+mLdh3H+Tn6iw4ehADu1cjAXTxAm+GCSGUGpN8zRfA==
+X-Received: by 2002:a05:6820:3308:b0:642:eb77:96d5 with SMTP id
+ 006d021491bc7-642eb962743mr3822019eaf.8.1759179828048; 
+ Mon, 29 Sep 2025 14:03:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-63b27309219sm1341117eaf.20.2025.09.29.14.03.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 14:00:21 -0700 (PDT)
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfauth.phl.internal (Postfix) with ESMTP id D0381F40068;
- Mon, 29 Sep 2025 17:00:20 -0400 (EDT)
-Received: from phl-imap-07 ([10.202.2.97])
- by phl-compute-05.internal (MEProxy); Mon, 29 Sep 2025 17:00:20 -0400
-X-ME-Sender: <xms:ZPPaaIrzKQVZJWIb0EqlCmuiOUKunhqN5iZ8BtUTeZNYcI58cJ2xYw>
- <xme:ZPPaaJeBce4IYV0LNn7yAuaFfWbRC0YlEh2cVWV5A5Vng-oW0Ox4dzkLt47rA1JM-
- v5fJq483fFxtDKdPD6iP1U_Hc38mJFBXT5Kl6AQwD4TzVaAYepYewI>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdejledtfecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefoggffhffvvefkjghfufgtgfesthhqredtredtjeenucfhrhhomhepfdflrghvihgv
- rhcuvfhirgdfuceojhgrvhhivghrrdhtihgrsehlihhnrghrohdrohhrgheqnecuggftrf
- grthhtvghrnhephfeftedvhffgieefuedufeduuedvhfeuheetfedtvdekhedtteeviefg
- keehtdeknecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiii
- gvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehfrghsthhmrghilhdomhgvshhmthhp
- rghuthhhphgvrhhsohhnrghlihhthidqudehvdekkeelheekfedqfedufeeigedvleeiqd
- hjrghvihgvrhdrthhirgeppehlihhnrghrohdrohhrghesjhgvthhmrdhmvgdpnhgspghr
- tghpthhtohepvddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepthhrihhniheskh
- honhhsuhhlkhhordgtohhmpdhrtghpthhtohepuhdqsghoohhtsehlihhsthhsrdguvghn
- gidruggv
-X-ME-Proxy: <xmx:ZPPaaDVRYLnfgZU-51mFPD557hHXfnsqE7lgvbqwq7Wrlxcq32rBiw>
- <xmx:ZPPaaJh6rnEUWNl1DEhPtap4q0yD9VOC2qDkusfh38lMcBOCVq436A>
- <xmx:ZPPaaG9AVecgAKbf8brDTqDgWtDiLZbKjoJIn1irQ71ZFrZRbpipgg>
- <xmx:ZPPaaLAUHF1AHmFdqmnlT1i_zL7frFF2SAoRHXjI__QK1WTOCgkV6A>
- <xmx:ZPPaaLKhX22rgOzughkwagNxyCmQtI7FvZh_nTSq4mS8cvgzpaIgsYAD>
-Feedback-ID: idd3648b2:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 95D551EA0068; Mon, 29 Sep 2025 17:00:20 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
-MIME-Version: 1.0
-X-ThreadId: Abu5ZorqbLls
-Date: Mon, 29 Sep 2025 15:00:00 -0600
-From: "Javier Tia" <javier.tia@linaro.org>
-To: "Tom Rini" <trini@konsulko.com>
+ Mon, 29 Sep 2025 14:03:47 -0700 (PDT)
+Date: Mon, 29 Sep 2025 15:03:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Javier Tia <javier.tia@linaro.org>
 Cc: u-boot@lists.denx.de
-Message-Id: <4a26bcd5-75a0-4dcc-ba2e-8569cbbb031e@app.fastmail.com>
-In-Reply-To: <20250929205024.GP6093@bill-the-cat>
+Subject: Re: [PATCH 2/2] b4-config: Simplify configuration by relying on
+ default b4 maintainer
+Message-ID: <20250929210345.GR6093@bill-the-cat>
 References: <20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org>
  <20250929-b4-docs-v1-2-a56c1a1856c5@linaro.org>
  <20250929205024.GP6093@bill-the-cat>
-Subject: Re: [PATCH 2/2] b4-config: Simplify configuration by relying on
- default b4 maintainer
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+ <4a26bcd5-75a0-4dcc-ba2e-8569cbbb031e@app.fastmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="buiWF3s69ktg0VZj"
+Content-Disposition: inline
+In-Reply-To: <4a26bcd5-75a0-4dcc-ba2e-8569cbbb031e@app.fastmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,38 +100,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Mon, Sep 29, 2025, at 2:50 PM, Tom Rini wrote:
-> On Mon, Sep 29, 2025 at 02:39:29PM -0600, Javier Tia wrote:
->
->> Remove explicit settings for send-auto-to-cmd and send-auto-cc-cmd fr=
-om
->> the project=E2=80=99s .b4-config. The b4 tool provides sensible defau=
-lts that
->> automatically invoke scripts/get_maintainer.pl with recommended
->> parameters, making the custom overrides unnecessary.
->>=20
->> This simplifies the configuration file, reduces maintenance overhead,
->> and ensures contributors benefit from ongoing improvements in b4=E2=80=
+--buiWF3s69ktg0VZj
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Sep 29, 2025 at 03:00:00PM -0600, Javier Tia wrote:
+
+> Hi Tom,
+>=20
+> On Mon, Sep 29, 2025, at 2:50 PM, Tom Rini wrote:
+> > On Mon, Sep 29, 2025 at 02:39:29PM -0600, Javier Tia wrote:
+> >
+> >> Remove explicit settings for send-auto-to-cmd and send-auto-cc-cmd from
+> >> the project=E2=80=99s .b4-config. The b4 tool provides sensible defaul=
+ts that
+> >> automatically invoke scripts/get_maintainer.pl with recommended
+> >> parameters, making the custom overrides unnecessary.
+> >>=20
+> >> This simplifies the configuration file, reduces maintenance overhead,
+> >> and ensures contributors benefit from ongoing improvements in b4=E2=80=
 =99s
->> built-in maintainer discovery.
->>=20
->> Signed-off-by: Javier Tia <javier.tia@linaro.org>
->
-> Sorry, but we just today had the thread on why the upstream defaults
-> aren't *quite* right.
->
-> https://lore.kernel.org/u-boot/20250929160453.GI6093@bill-the-cat/T/#m=
-3d26d2ca4c42d620260fedaeca5f869a41fe26e5
+> >> built-in maintainer discovery.
+> >>=20
+> >> Signed-off-by: Javier Tia <javier.tia@linaro.org>
+> >
+> > Sorry, but we just today had the thread on why the upstream defaults
+> > aren't *quite* right.
+> >
+> > https://lore.kernel.org/u-boot/20250929160453.GI6093@bill-the-cat/T/#m3=
+d26d2ca4c42d620260fedaeca5f869a41fe26e5
+>=20
+> I missed that. Dropping b4-config changes in the next series. Thanks!
 
-I missed that. Dropping b4-config changes in the next series. Thanks!
-
-> --=20
-> Tom
->
-> Attachments:
-> * signature.asc
+Unless there's other feedback, I'll just "b4 shazam -S -P 1 ..." this ;)
 
 --=20
-=C2=BB Javier Tia =E2=9C=8D
+Tom
+
+--buiWF3s69ktg0VZj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNr0MAAKCRAr4qD1Cr/k
+CkVVAPwK9WenJUOGl6jwx5cnN6DVfZ2cQ4iMLBiZg2YPGsk5HwD+OKwc1AQt34fB
+GoObrMzTlxMy4VXi0czkM1hRdvPbUgQ=
+=YYSo
+-----END PGP SIGNATURE-----
+
+--buiWF3s69ktg0VZj--
