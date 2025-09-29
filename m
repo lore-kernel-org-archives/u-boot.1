@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 395F6CAC5B5
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 06:11:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F14CAC5B5
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 06:14:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 317518206E;
-	Mon, 29 Sep 2025 08:11:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC4A98206E;
+	Mon, 29 Sep 2025 08:14:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="rmMZaMa/";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="b1LP7NXm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60B4482A9E; Mon, 29 Sep 2025 08:11:56 +0200 (CEST)
-Received: from CH4PR04CU002.outbound.protection.outlook.com
- (mail-northcentralusazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c105::7])
+ id 9E4F683071; Mon, 29 Sep 2025 08:14:33 +0200 (CEST)
+Received: from PH7PR06CU001.outbound.protection.outlook.com
+ (mail-westus3azlp170100009.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c107::9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BC988144A
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 08:11:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 471A18144A
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 08:14:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ceuhr8m/JlTyLjrw/ghZFvmCFLIqShkWOBW3OleQaw5xJuXKCND0hiqrfG28mIXK0z1s4xi8yI35vnCQ+EnHRwW8EEb2dl1qoU/7TTXaWqy9HXAyRBFCWn8aVa9YDyUj32llE1w46nJQOjqL8hyi4USP7B6oH3uQLugujFtoOUlcMhwPnxQEoUZNbpStdpKAhKXufSCjVsWdl49Jur0OaYB/nHDlCy6WqMr2qSoe+trwnhhMVIKOcw4NiH7HUwKiNtRw/cHOJyrqUDpU+zwuOo4XQnpf0mxTBdy5B0lcAMXOsYwxe7ELxyWm0muMyQ5ADBzpNpuNCk7tfjnwVzFJmg==
+ b=Yq19eNY7kEfxLTPVksKbJlStADgpVm0u5uz6F3GSKLqe24vE4GTnSAoq17RTdGFaX2AMa7FuDidcAKJOXxXgeNZCYrGLtwHQO23WQcFMky69elE55N9YMHtuB0BSjAlHMkZkwYFQQP5PW9GGKwq6dc+JAn9g0hSJQoBBzYppPGhEY09uuvwUBiXuXhymA2jw1NsEkloYY4i8a3GvQn6EhUdKkauSKzV/pO4otIhiCAJHAB4EbiYxN2nyYhY43e/edITK4A4N6x46qk+aI9i3SITQ1PDoh5GHo/qiwCuy8GY1EHPM0nRH5aA2PCx7LHsggLceqiXdn70KuLznxOf76g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VAYv2TVdRLUq+GOnxDMUmjf1qHPYUEt2gPc7585Ir7U=;
- b=kg84eL7LVbx7eJcSZqVJm7ULTSXm+iowyGNPzxK85EhBpu32p7mwqFG1RHubADe9d9pn7OYOH4qzKvzI2Tgf3YwWzqothi4l9J1CMsAjxhs26vhUlJY7iUz+Ua8LXyKs2d6RpZuX93mEEAyOb+DzT/vPn4Y5N6jmeuUmXu8QTBuvX8SaR5jKKwJHiHIyY+DCzlfNff+vcOfaTkNdY5VjuaHZe+byPMWatsbAs661oGn6NDElt2IG/YC8d+JNhtIDL3OVG7h9YlSqJBDnHbww4TlhMhJgyUWDsGODwRh0NrwEeOouk0O21DZI4OstMVWAkJhI/nn+mbb3Q3Gnj43UIQ==
+ bh=a0j+4UvqkDOyq4AAEGZfB2TXHqYdevhMMxKb6aTj7mM=;
+ b=ekSWB8g0TPaFTVx9juTyL6tDfcOYFzIbi6LDWZvSwr/dnqG5W1nJb0M0R90ecXmEtYJwb1l2nAXfUp/iRVc9hARHTF+M/oHvx6YOwphsBs3ditVyTUpfsb54knvDO6JaVMDEFrsL+k+XW4xRvPaKSK+TvrgTHqX3MkRe8RaGZZqtc670ZFsLR4363TjUgdwpww8l53v7fhaplfJh4rzYK/SJN67HHzTfHN3ivwz/5rs7veHge6WW/89ph8fSR/+QzShHzB8p2/tLwnnuQZEVYMAE+rsWXtc8a9kmHwS1jH6Fa5NWjMKCdvwZBFAiVoHxXHormFZX0AWDnCijeZWoIQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VAYv2TVdRLUq+GOnxDMUmjf1qHPYUEt2gPc7585Ir7U=;
- b=rmMZaMa/Z/EpLq74waG3ceagVPDYAsSgn+q7OLGPiiiJo69o0QzkMKw1bU1aXa+LTyacj0L7JIJi3FuNuJobB7VlT3IRMgqx2lP+U+zlLzCvZnwaVbpojXOWpzvUvPyweti7k5fePdgdIGwB2YhkHNrKAjm/ETlWIiDOFjoeDuw=
+ bh=a0j+4UvqkDOyq4AAEGZfB2TXHqYdevhMMxKb6aTj7mM=;
+ b=b1LP7NXmHQ/8Xp7ptWjL37cKg5Hrke36bGK44Vf2p2U4NjAIuCjG+lSDBOV9j7wQV/xqOMxzQP8wpadVe3CZjhgEtAy0p5XkskEuJUJfLaiPTMY/gzSLhZ2sJNxmg2FC9En5RTxRnSU470dibvKV7Fjce7UtmG2vStNDn6B90kY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by CH3PR12MB7500.namprd12.prod.outlook.com (2603:10b6:610:148::17)
+ by SA1PR12MB8859.namprd12.prod.outlook.com (2603:10b6:806:37c::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Mon, 29 Sep
- 2025 06:11:48 +0000
+ 2025 06:14:27 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.9160.008; Mon, 29 Sep 2025
- 06:11:48 +0000
-Message-ID: <b672e123-68ab-4772-8b7e-01b3fe916fa6@amd.com>
-Date: Mon, 29 Sep 2025 08:11:38 +0200
+ 06:14:27 +0000
+Message-ID: <67073eb8-2416-44ca-a97e-04ab5bcb3ab9@amd.com>
+Date: Mon, 29 Sep 2025 08:14:19 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Fix DTOVL warning about graphs in kv/kr260
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@amd.com
-Cc: Nithish Kumar Naroju <nithishkumar.naroju@amd.com>,
- Rohit Visavalia <rohit.visavalia@amd.com>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <576630cc9696e21bef15bd1f0ca35e396adc4eca.1758529693.git.michal.simek@amd.com>
+Subject: Re: [PATCH] mkimage: add register initialization file support to
+ zynqmpbif
+To: "Erich E. Hoover" <erich.e.hoover@gmail.com>, u-boot@lists.denx.de
+Cc: Mike Looijmans <mike.looijmans@topic.nl>,
+ Michal Simek <michal.simek@xilinx.com>
+References: <CAEU2+vrO5KGeoWkDZGOkmL408R6SHqdGhq315cGq+mbq3XBz4g@mail.gmail.com>
 Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -107,103 +107,102 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <576630cc9696e21bef15bd1f0ca35e396adc4eca.1758529693.git.michal.simek@amd.com>
+In-Reply-To: <CAEU2+vrO5KGeoWkDZGOkmL408R6SHqdGhq315cGq+mbq3XBz4g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR08CA0255.eurprd08.prod.outlook.com
- (2603:10a6:803:dc::28) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VE1PR03CA0014.eurprd03.prod.outlook.com
+ (2603:10a6:802:a0::26) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CH3PR12MB7500:EE_
-X-MS-Office365-Filtering-Correlation-Id: 82b742b0-3476-4a87-7833-08ddff1f12bd
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SA1PR12MB8859:EE_
+X-MS-Office365-Filtering-Correlation-Id: db5007a0-f42e-4191-6070-08ddff1f71b7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?cGh0SDZocjBqNS9lVk9nNG1MTUl3ejRvUXFIdlJxZHdYdktXTUNRRU4vOU1Z?=
- =?utf-8?B?M3l0a3o5eTg3Ni92QXJUNTAwU3Z2VkhxTXIyaGhMWTdManBKc2UzK2dCc0E0?=
- =?utf-8?B?c015M0lsSUtxMmVwWnJMOGVKUVNlVkgrUTIvSGZwNVFBd2VidUFLSnpoN0Zs?=
- =?utf-8?B?QUVKLzFMcytpZXFVZHFoTDJnTHlCOEE4RE1IMWloK3UxUjJFa2VuSkdmT1hk?=
- =?utf-8?B?Qks1WVVQM0VvSktvY3dSY0txRnBQck93L1R6azlHaVVBdzJWVEJpc3dqQXl2?=
- =?utf-8?B?WG4yelRRemJINWhzd2Qrc04valhSSVFpcitQaHB6cXg2OFViSGd6S0lWcThx?=
- =?utf-8?B?WEtKa1VqditvNWRlYkIvTjZVek5EVjVtYnJ4SVUyTkw1Rkd6UldQUHgvd2tY?=
- =?utf-8?B?aTdGZXRQY1VaaEZPUllrNlBpamcvc0psMG9wTWlMT3lPR1M1SzdzUlFNU2p6?=
- =?utf-8?B?bkJ2OExpcVJIY2QrOHovaUZvMXNUdDJBOHdYWkZoM2V1ZG1jOEFXSVBhUDZM?=
- =?utf-8?B?VGJ3d2lodXFFaHJvNWtoaUUvaDVVRloweHFZYTJucDUrbGRZb2lDd1llMFVB?=
- =?utf-8?B?by9aN2ErN0RZVzVLZVRaRjg0U0lZWmIxcXM1Z3NwcDFhdjZYMnU3M3JrMVI2?=
- =?utf-8?B?ai9iUXlta3l5eUltMlZ5TGUvVWlpclFOYnpnYWdUMHB2bW8rNmE5QUZyQ0xk?=
- =?utf-8?B?TXVnNWJjMGZMdXdVY2lpQ0FmWEZYc0ZpWWJ6SWlPL0pvVkNiWEF6eENEQkdL?=
- =?utf-8?B?S3hCbVRYVVVkd1NheDdweCtYWU5hMHcvM1pLREpJT3lteGIrTk5wWFVyWFFE?=
- =?utf-8?B?T0VFNWpYU3FzOVJGV0xnUUhING5FQysxSXM5YkdOWEFXdFA1QzMwQTBzSUY2?=
- =?utf-8?B?MktIZ3BZbHh5RUswM0hlT3lyZWo4R1hXYU1ZVFF2TlIyOGh0eTlLVGNLUDFR?=
- =?utf-8?B?cjVTNW41ck4yUXJpRXNsY0tqcE5KUjNoNGxkZFpuZGlvR3IvY0xKL3BkT1ly?=
- =?utf-8?B?dEw3Y2x5R2dtR2Zib2lyQTZLMFJ1YmhWRUlhNmVucElSaDBXNXEyV29zK05I?=
- =?utf-8?B?c2tXM216NnFhZXkxM01kYjF2Zmw2b1ZnU1pFNXppVlh1MmNweUdlclhRTjhG?=
- =?utf-8?B?WE9oZUNKWEx2dnB2VWFjSFBmTFlYMDRFZ2R5Rm5oSlFQMDV1NmdmM2pIRytW?=
- =?utf-8?B?SnpLV01DWmx5QWJJOXYvMzh6QjJ2c2lYZnkrQ2tGdnlNbFZSd0NFTWpsdVBp?=
- =?utf-8?B?MkxjL21oNytVYWFxNDBQNlEzM3Q0d3NMVUFWTVZVSUhSdmNkWW5zblIvZ2Fw?=
- =?utf-8?B?RUNCbGRld3JWUWF1NDNTNm4xc1ZKcDNYL0NuakdTOC9DSSsxNDVMV1FDL3BT?=
- =?utf-8?B?enJnbFg0NWdoVGhJRnVoVGwyMGhZNUlKWnRVV1Zidk00WmlWYUxWZXJKR1BT?=
- =?utf-8?B?SHVQb3RGZHJzSDE4Rk5Ib1RiNEVweEI5bnJLL3hRUE5GZmVPVWQ3V0xHcDZ0?=
- =?utf-8?B?aU1KTWxVOGRpTmtsbUR1TVY2U21aWG1nb2dyR3YxY2FIUHdONTlZajZwTkdE?=
- =?utf-8?B?KytEazZVQU5aRWc2ckYwVE9XTlhrQ1ViejdWTlA3K0IvTEtDcDF0SEVJTzhk?=
- =?utf-8?B?ZWJ4OFdCREl4NXZOZnlhZUw1V2srM3JWMkd5QVZFYXVHQ1o1M2NJa2VNYzYy?=
- =?utf-8?B?N3p4V1BWMEtvTGt0NXZpUG85bEJmOGsvaEh1eHZzQllGakdrUU1JbTFneTZ3?=
- =?utf-8?B?UzhoMk5vV3JZVTJiV0FSOXFJNWRIZ3NsMzJHTHFzQWNSRGhFK0srNEdCeTdY?=
- =?utf-8?B?M1d0S1J4Q3J3NTBsckpySlVSREttUVU5RGZZK1ZHekwvTjZkemkrbU5JN3Rv?=
- =?utf-8?B?VlNoYXNSTHJhVnp1OVpVendIVlM1QS9WYUdxT0JoK25BUVRsVlVPaFh6T2tV?=
- =?utf-8?Q?lQFgmLhyUqbkhwaSAeuCKvgxt9D4artl?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?UUI4UlpyNXdQQkcxUTFvTHgvdVJaYitHTDBIOERmRlFrK1d0aHJpZjRNcTV2?=
+ =?utf-8?B?TlQyc1c0MXlMTTFNb3J0SWxhY0FkaWdScWxuSXd5anhJWWRBb3BsbTJXa3Bj?=
+ =?utf-8?B?MUN1ZktLRlBvOFNya0tSMHFPTWRhOVZkTnkwYXV3YVd5RWZMRmVkdUp1MmxD?=
+ =?utf-8?B?c2Zrdk5NZkJRUm05VlYyOGc3L25QdzlMWW9jeDZtYk0ybzZMZkJhZnptRU1Z?=
+ =?utf-8?B?cnppSEdRTXNJOHd3RjcrRFozTWI1elFlKzBmbEdMcm5lQUlQTWx6RVprU1pC?=
+ =?utf-8?B?SXM3Y0t4eFZjdHBTVzRTRDlRY1Q2ZkVLMFZLUVM2RVhVdXRKWjdpUEtTcmRj?=
+ =?utf-8?B?amtKU29nVVVWb21COW5hWFZSV1dab2RkNEJQWCtGWGZIcUNWUVVRMGh5UEtQ?=
+ =?utf-8?B?dlNkZ1V1M29KL0JRb3FmQ1YxWGdZMzFmWUJndlhCSlRQZ3dSanRGa1NaQjhI?=
+ =?utf-8?B?c2FGZDM5NHZOakx5bC9qYUllTkFVQnhLdkNFVW1kc0F3NEJ6VG9paW9Ga2R3?=
+ =?utf-8?B?L0tuV2d3eXNMaUFqdkNVTElGS0dHclN5cnhVT0lqY2pYVG1UbGtsMitHVGdq?=
+ =?utf-8?B?Q2s4bGJ2Z3NibTVUWFRid1A3RWwrV2UxbkN4RzFCZjVSQ2s3ajI3Rk4vOE5P?=
+ =?utf-8?B?TFRKb2x2dGJYaEFGQ2tpeS9Sd0JiVnJHZ2xPbkpXd0RuNmt5N0RLRWxjRFpO?=
+ =?utf-8?B?dUMwNUVmb083QTEwdjR5TDB5aU1WMHp6bk1nOHBJdmNwbUFwcFNXeFBQVWdv?=
+ =?utf-8?B?RzVaazFvSDRmdTF5c25YYWJSWVM3ZTh0VFJiUTZjenNkY2ZPOHg1ZWJ1RFpY?=
+ =?utf-8?B?MmpldXpzeEM3L3hFNW9wVURxcXowcUJSOFhaTHN5MHVpeGtlYUcvVDRRZFB1?=
+ =?utf-8?B?SlQ3WHEvZmt5ODNQcUM5L0Y3MFgvekM4dHNwMkxnc0Rtc2FsT1lIbE0zN2VK?=
+ =?utf-8?B?Y2hZWHZIckNKb1ZoNGVaVW9Ocmx4VGJwSDl3a1pEaHNvMSt0aC93WUhDNEY3?=
+ =?utf-8?B?WmpiZllYc1BoVmFmaTRLaks2cU4zVjRHdFcxZFlPdTFwK0xPbUFabjlmSElD?=
+ =?utf-8?B?L0pWeTNaZkdSbnNLTlQ2aHArRUcrSmxkZ0xTN25pYm91T3d4Q0V2U3ozMHJC?=
+ =?utf-8?B?QncyNjA2VkIrbTN0d2ZYNGJTdkJOeURIV1Bvdis5VHJoSHo5SjI1d3F5N0E1?=
+ =?utf-8?B?cWNXd0Q5WWNlTzM0SGptMTFtQXptZXZFZEk4UGF2UHdvVHh2MGhldTc1T0Fp?=
+ =?utf-8?B?YkRBNVd5VVpUWFVMYWNYaktMemxNSEFMUnp1TDZoYmtrbTgzOSt2NEowNmlx?=
+ =?utf-8?B?UXE1NkxxQm40dFpacFRLa0FFa3h6Z1hjWktlLzM3R3F6cDdONHMvYW5WNlBq?=
+ =?utf-8?B?dmcvaTlaeXNzaVVEaUV4K1h6R2w0alRLTFkvTDg3UzhIakRaaWs2c2VHMDhM?=
+ =?utf-8?B?UmhLcUtVNGdidjNESHZwWVlFTXE5aFZGcHg1UjkvTXB4aVVWYW1YNEJXV0kw?=
+ =?utf-8?B?SXBMRjVMc0J6SDU5VnNCblZCWWlmek9PVHUxT0lHWjRNeW9md1NlV1JaR0cz?=
+ =?utf-8?B?TGNhWGhTU0w2ZEV6cVJQa2hXMlNCYUc5dkJTRWYvc3J1emtxSG5NMitJcno3?=
+ =?utf-8?B?VUkycnNKNVFZSlBPRnNwQk11YVZ0aW01WEZ6aTNhNUdGVTNFMFF2eWpySFFi?=
+ =?utf-8?B?emg3NnQ1OU43bFpwTzlUUElVbHdKWXJxT0dyMk9sajYxSStIc1lCLzVPN3dz?=
+ =?utf-8?B?bllLUEk5T3k4di9WTFhkM0ZWQlJXVEdML2VaTHFxM0JHWER5c3VPaW9Wa2JD?=
+ =?utf-8?B?SjVxdzM3U2h0NGlqbE5jTmRieWgxRDdKWEFXUTYzcmZpYXpYazhCelNYeFoz?=
+ =?utf-8?B?aTJtUjNwMjFLNkJyS1dFVGo2amNOQXV2MThmTU5LMythY0FkRlhkMUMyemFU?=
+ =?utf-8?Q?tZMN/RgefM7cmUyIG4c4Wgb+5It2xRBq?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(366016)(376014)(7053199007); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eUNibHZjZ1ZoWGFyMFVYajNXcktqSXhxNXM5TDdTYnNvWFhpUmNSMmxTdlI5?=
- =?utf-8?B?Q1M1T0tLTXU0YmpCSTBWanFoRUJPTGFQUUE2dkhIaTFoTHpldk5PcmRGU3p3?=
- =?utf-8?B?ZHIwMHpQbjR6U3BzTGtyNUdKUmxLaDRpZ1NGdGpSeGc5RllvNG1odXFOVS93?=
- =?utf-8?B?bU1iSGxERDA5QWJyRndROENTTFVWcWxKejdUN3IycVBUYkg4d25HYzN2RUcx?=
- =?utf-8?B?VVd2Zk45OFVkMlFEekF3Z0g2WUdocXpEVWhudGhjL1I3eWtwYmY0QWg2cUV3?=
- =?utf-8?B?Q0tnS1AzYTNuaE5GRnhxaTcrTjNER0Fab05hMTNOcVNzdThUb2JZbGpnQmJH?=
- =?utf-8?B?ZTU4VWVJNGFEaVJmZTFRZUNtNWNGMGVFM0VJbE5uNDhSeGhhNEpMR2pnZHB4?=
- =?utf-8?B?UjZZeVFHYmpkM083c0t5SkN5aVhkSExJY0JzRC9vM20wM3c5a1hrZ1hPOWEw?=
- =?utf-8?B?MFVsOVoyeU41ZEN0NkR4bVhNUnppVU1CYUd6WmZZK0h6RmdKdnN2dUhETDJz?=
- =?utf-8?B?QjltOVB5UWxtOUF0SGJXQkVLbWlnN0lwWWNyUmlLMFZCTEFXTC9Sb0k2Z2wr?=
- =?utf-8?B?c3lCbzB4cDI4cG9BUUhtZEZJcm95cGxrRERQMUhlU21YTllaMWFzTjQzWkE1?=
- =?utf-8?B?aDEwTFA0MldjdnVmd25KdHVRK2laUFk5UHBKKzZNbkUycGt5QTExYVNENVNS?=
- =?utf-8?B?N2ZYTWFGUGg5M0duL0RzSGJ4UTlKRHFmN0dCQk9VbkUyZjV2T1lzSTlrR3Zt?=
- =?utf-8?B?bmJGSTFadm1sSy9xMG1ObnN6M2ZJOHd6OFhYRlBWb1lnYUZLbUxxSFJoZmZI?=
- =?utf-8?B?dDNEdFNMS0ozOCtXVUttQ3VnQ0g0b3ZWRSsxMmZCTERMRThWMVRoTjQ5QWln?=
- =?utf-8?B?aEJ4d1dHSThaNEVqbkxqV09wR3NJVTJnbEhnQm1iMFFhYkFwNVNpNlBkQi9S?=
- =?utf-8?B?Z0VCS2QyMlEzdUVoeG12dGdXSlZ1QU9GZDkwNWtHREdWSEF5WXMyR1RMTzR4?=
- =?utf-8?B?OGhWOVVJTnlQR3ZoZG53bG9qZUo2MUpaaGRDemZTSDQ5ZVBDOU0xQWlWQm1I?=
- =?utf-8?B?MVVLMERxdXlxaGRyK3lwODk4YldwZ245RVlJSmh5a2JzRDk5T2t2M3JNalI5?=
- =?utf-8?B?UXB0blk3ZmFaS2hTY2NuQ2ZNTnpvZHRHOGZHTC84bGp6YlRrdVF5aHNHVGc4?=
- =?utf-8?B?dm5TWnlLSkdtb1ZtNjNQS0Q5R2ZCeWYxU0orZ1dGL21scVZDL29oZHYzN0xk?=
- =?utf-8?B?RUgxenorUG54UFdJV1JVSkxNWWRGQlJDbHNmMFZzVnNLZ1htcC9qUnliSkh4?=
- =?utf-8?B?cUhqb0hhQU9nd2J5R0FURmN4TDlZd3docnpkQW5SZnB3VWJnNVVnYlFKMGtV?=
- =?utf-8?B?TGVJNEcvaUFtTng1dWdocldwRncwL1dPUlZkdGZsZVNNWnNmcTBpZXFHSUZF?=
- =?utf-8?B?LzJXZEdtdWhIWmxpOVdUdFpmRFJsRlZyK1ZSakpCM0NIczFaQWhxTHc0Z3pJ?=
- =?utf-8?B?T3pQbTRhSTlVNUdhbmJMdTI1N0Z2UElKM1kvVy94dmdoNFBjUm83bzcvaEhF?=
- =?utf-8?B?QzBZSjhzVVVsT0xDcGZTUTBaSk5VdllOWURiSFkyM1Z0Vjg2S3NCYWFqNVJ4?=
- =?utf-8?B?WWZSNFRnUVdVV3gxSkRrVnJQSXRSWWlrUE1MTklDOS84NVRLbS9pOW5nNGxZ?=
- =?utf-8?B?SldrZjcxbkdsMk1oRGV1V0t4aWNuTjlzT3NWc25CdGlLK2lRaVFMVzVVRG83?=
- =?utf-8?B?eXhBbjlEaldyOGhwUEZHdG5jaGFJVE43V2FVRmhodXkxZEpMVGhxVXVwV3hV?=
- =?utf-8?B?ZWMxeVpONjFKLzR0bGtvK29qdHVYMTZSdGNwajBkSC83MXAyWEc4aUdjdzds?=
- =?utf-8?B?SWlPQUpoYjZhaytTdDBMQ284LzZNUisxY0RRQUxRL2REQzdnL0dPNUtBVCtk?=
- =?utf-8?B?cG53U2puZGdnRXdZbHZaUEM2N21sbjk3NFZ0czdUVkRzWnRCanA0RkNSWlU3?=
- =?utf-8?B?N2RLUG4zTk5uN2J2dmFwMU01eDh5ZDFIbUJLMVM2eFphTHF2elNHUkdQS1Q1?=
- =?utf-8?B?UlJ6MG9XRTM1RGVSR3RPWkk0ZENIUVE0T1podHA1TW9POTREaW9PUGh0S0h6?=
- =?utf-8?Q?9EC1n6uL4wuuDV2do+PMssGKg?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Y1N5TUxKK1dlRHNPTVk0NTYvajVIQlliZnZ5emtLc1RjZnN3TXR3UUZKN2JX?=
+ =?utf-8?B?SCtCZi94WStNN0JvUUdyb1NZSmZtR2tSelY2K2lCUlJ3bVNZRUtUQi9DZVY5?=
+ =?utf-8?B?ckVIUlRwOHliazdaNjRoYm15WWZtcGVjTjNuZU1Yd0FMTWZtYkc2RG5tbFJW?=
+ =?utf-8?B?dzBQZ0lLb2l0ZlJIVVVpdm1jVXl3Q2FrRUJ6OVZlR3AwUVJvMUlQdjFsUGNl?=
+ =?utf-8?B?cWo0UEY1c0luOURscGM4OXlJT0wrZHdyZmpmQ3R3aGpjbXZjaWdWdlRHa2gv?=
+ =?utf-8?B?b0tnSTVUcHlhcnBab0l4Q092aC9nYjJFRkxXMTJSVXk5cVF1UGFyMzdNbHF2?=
+ =?utf-8?B?Nm1ncmRQQjR3V3AzWXh0UkU4VXFXM1RsMWdHWkNBd1QvUGNrQVBTRTkvZGFj?=
+ =?utf-8?B?cW9QblZ2TDFQUjRpNm00cUpwdXlFLzhadEpNem5id3hnckRJY09pSFJ3aXBZ?=
+ =?utf-8?B?Z1dnMHRWcENlSnV1N0pzNmN4NUl4YkM3bHRTcGlqb2RIUC84Yi9XZlV2U1ly?=
+ =?utf-8?B?dUZLQUZWMFlqR0tISVlVWG9zaVBNMkh6VTRJL0x1eFlXSXdlQ1kvNmZxQzBy?=
+ =?utf-8?B?bzhaUU9lTE1nL2hSYzF0UGlEa1lINWRTWHM2eHEzS0s1b0t4NUhmeXZEbXlx?=
+ =?utf-8?B?R3h2aDdsMHJSZzZweTRLSWxrRGEzcHRrQ0Uwelp5ZHYrVk53VS9DODhTbFBn?=
+ =?utf-8?B?L0VaL1pYeEZnRjZOUFBtelNzQzJYL1NFazZ1TDFodVBTU1FUZlQ4UFMrZElB?=
+ =?utf-8?B?STk4dlQ4Vk05WnJsQ0t4dE1FeVVzRmJOWGNwNXlZRG9NZmVyTTUxTmtBejll?=
+ =?utf-8?B?OXRjMmxLT1JUeENkSHREaTNVSFdiN3NGSUpwazY4THpDVHI2KzhkVGZiVWRn?=
+ =?utf-8?B?UE9oSUNieXRyTTA3eFIxNnpZMG85NmVmd29FdVRTVy9SNldRR3cxNGp5ZEVK?=
+ =?utf-8?B?N1ZmOGQzbFhXK2tlbVA4NDhHY1k4alM4RUsvQVZZeFI0ZGVHZ3h2ck5zb0RT?=
+ =?utf-8?B?R0Q3TXJHTTRNN0VIUWFzVUNyRFNSTy9sY21mWFB2aEJNLzhHSDhUbU9pMnUw?=
+ =?utf-8?B?dkpvUXJtUVdrYk81ZXFHcUszUm1DR1FScEhXWlp3NHAwbGNiclkxelN4SWc2?=
+ =?utf-8?B?OFhKZG1Pd05hWWpQbHhFSXJKVGx3SE8rSWxDQllON0VDeDBkb3MrTjhTU25E?=
+ =?utf-8?B?a213c0dKaW4vbTNUUDRGMnJmSFNSYkVoOHRmT2xPeGxWcnYzUnl0WkdrY3lk?=
+ =?utf-8?B?NGkyeXVSRXRpc2FSN2pUY1ppRE5Ba3kzT2R5anhSVk1weUdZUm5MTlNqV3lw?=
+ =?utf-8?B?Q3V2OXJVaU90ZEhSTEJRWEcwV096dkVyOExUaXZEZ1JsMGQ5YnpROVo1a3Iw?=
+ =?utf-8?B?RWNsRkNjS3hvSFlTKzVKekEwTGxjUmRvK3RTQlhCODFCVEw4Q0RHaHRrM0xt?=
+ =?utf-8?B?dHp0WlV3WDJRSmRPSllvTWZnUFlFeVFJMTNCczRUQjRqYTFnZk1VbllvUzVp?=
+ =?utf-8?B?VkpOMG1CZk9RemhScWo5bS9uNmZLaysyNWhaZ2c0Qml3UllMTFhHZ0hWMmQv?=
+ =?utf-8?B?K2Fma0xYeXhkbm0zdlAvSytlazF1dmVDV2xmc2hjOWlRbVp3aDZKNVpXL3I1?=
+ =?utf-8?B?bDhkZ3lNSklJUHJHNjhSdm54SDhxU1FwZGxVMHI3Z2FGQms1d3FYTk53dm8w?=
+ =?utf-8?B?bUZ6SEpoRjgreXpDWjFEdFRKcmwyLzhwUDVqWkU2KzRHTzZudkszUkwwR2ZC?=
+ =?utf-8?B?RWRCb3FTY01iaVhyN1BKcVNxdWdUNUp3clZ2QzU0QTZ2a3NDUHhlcVZIdEEr?=
+ =?utf-8?B?R24zTDVmNUJHR3BlYUdNN25KMzY0cEFYZGcwY0xMQ3F6dy9VR0ZiQ2ttMUJt?=
+ =?utf-8?B?OXE1Z3dyWDNwdlRZamZWSXdTUmI1T0RrZmsvd2JXSG5Gak1sUHhKc29WbHEv?=
+ =?utf-8?B?Q3FxQitZTExBMTFRK2dzOWdNejJwZGl2WE9TNitYTUltYWJ6ZkFVOHlpV1VR?=
+ =?utf-8?B?K1lpMmhzU0ZUdWNCLytGeFhYV3VOc1o2QWxUd1NYOXlsRHYxVHROb0VCQW1W?=
+ =?utf-8?B?blp2dHdnSVV6VHh2ZWFJTmZxYWJHMzlkRm5mcVl5eHIvckMxcnF5RkRpM1c4?=
+ =?utf-8?Q?ER+yCa3T6U7cHVRs1mqhVpCTD?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82b742b0-3476-4a87-7833-08ddff1f12bd
+X-MS-Exchange-CrossTenant-Network-Message-Id: db5007a0-f42e-4191-6070-08ddff1f71b7
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2025 06:11:48.3322 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2025 06:14:27.6372 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YwOqWEFsSgeoamWcqDIDjbQhYqAarYRnssAfJYFNrr5IphGlUKVaq6FDPX2GNjNu
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7500
+X-MS-Exchange-CrossTenant-UserPrincipalName: aC8X69TSDrXLjhOqK/+8CF1toR8EcwY2+UqDRv+H3L/j4k0/A1cyb3YNpEo+V8IM
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8859
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -222,131 +221,131 @@ X-Virus-Status: Clean
 
 
 
-On 9/22/25 10:28, Michal Simek wrote:
-> DTC is generating warnings about missing port like:
-> DTOVL   arch/arm/dts/zynqmp-smk-k24-revA-sck-kv-g-revB.dtb
->   arch/arm/dts/zynqmp-sck-kv-g-revA.dtbo: Warning (graph_port):
->   /fragment@5/__overlay__: graph port node name should be 'port'
-> ...
+On 9/16/25 23:56, Erich E. Hoover wrote:
 > 
-> That's why change description and add it directly to dpsub mode to contain
-> full description with also port.
+> The ZynqMP Boot Image Format allows specifying the register
+> initialization file with the "[init]" attribute.  Since this
+> feature is already supported by the "zynqmpimage" backend, this
+> patch implements a binding to that existing support.
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Erich E. Hoover <erich.e.hoover@gmail.com>
 > ---
+>   tools/zynqmpbif.c   | 16 ++++++++++++++--
+>   tools/zynqmpimage.c |  4 ++--
+>   tools/zynqmpimage.h |  2 ++
+>   3 files changed, 18 insertions(+), 4 deletions(-)
 > 
->   arch/arm/dts/zynqmp-sck-kr-g-revA.dtso | 10 ++++++----
->   arch/arm/dts/zynqmp-sck-kr-g-revB.dtso | 10 ++++++----
->   arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 12 +++++++-----
->   arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 12 +++++++-----
->   4 files changed, 26 insertions(+), 18 deletions(-)
+> diff --git a/tools/zynqmpbif.c b/tools/zynqmpbif.c
+> index 82ce0ac1a52..546b9e4fd9d 100644
+> --- a/tools/zynqmpbif.c
+> +++ b/tools/zynqmpbif.c
+> @@ -191,6 +191,7 @@ static char *parse_partition_owner(char *line,
+> struct bif_entry *bf)
+>   }
 > 
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> index b92dcb86e87e..88396d089f43 100644
-> --- a/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> @@ -154,11 +154,13 @@
->   	phy-names = "dp-phy0";
->   	phys = <&psgtr 1 PHY_TYPE_DP 0 1>;
->   	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
-> -};
->   
-> -&out_dp {
-> -	dpsub_dp_out: endpoint {
-> -		remote-endpoint = <&dpcon_in>;
-> +	ports {
-> +		out_dp: port@5 {
-> +			dpsub_dp_out: endpoint {
-> +				remote-endpoint = <&dpcon_in>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> index 99ad220d13d6..e041a962d89e 100644
-> --- a/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> @@ -155,11 +155,13 @@
->   	phy-names = "dp-phy0";
->   	phys = <&psgtr 1 PHY_TYPE_DP 0 1>;
->   	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
-> -};
->   
-> -&out_dp {
-> -	dpsub_dp_out: endpoint {
-> -		remote-endpoint = <&dpcon_in>;
-> +	ports {
-> +		out_dp: port@5 {
-> +			dpsub_dp_out: endpoint {
-> +				remote-endpoint = <&dpcon_in>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> index d7351a17d3e8..fbbebbea80cb 100644
-> --- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> @@ -3,7 +3,7 @@
->    * dts file for KV260 revA Carrier Card
->    *
->    * (C) Copyright 2020 - 2022, Xilinx, Inc.
-> - * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
-> + * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
->    *
->    * SD level shifter:
->    * "A" - A01 board un-modified (NXP)
-> @@ -131,11 +131,13 @@
->   	phy-names = "dp-phy0", "dp-phy1";
->   	phys = <&psgtr 1 PHY_TYPE_DP 0 0>, <&psgtr 0 PHY_TYPE_DP 1 0>;
->   	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
-> -};
->   
-> -&out_dp {
-> -	dpsub_dp_out: endpoint {
-> -		remote-endpoint = <&dpcon_in>;
-> +	ports {
-> +		out_dp: port@5 {
-> +			dpsub_dp_out: endpoint {
-> +				remote-endpoint = <&dpcon_in>;
-> +			};
-> +		};
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-> index a4ae37ebaccf..87f94f8ef9d8 100644
-> --- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-> +++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-> @@ -3,7 +3,7 @@
->    * dts file for KV260 revA Carrier Card
->    *
->    * (C) Copyright 2020 - 2022, Xilinx, Inc.
-> - * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
-> + * (C) Copyright 2022 - 2025, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    */
-> @@ -116,11 +116,13 @@
->   	phy-names = "dp-phy0", "dp-phy1";
->   	phys = <&psgtr 1 PHY_TYPE_DP 0 0>, <&psgtr 0 PHY_TYPE_DP 1 0>;
->   	assigned-clock-rates = <27000000>, <25000000>, <300000000>;
-> -};
->   
-> -&out_dp {
-> -	dpsub_dp_out: endpoint {
-> -		remote-endpoint = <&dpcon_in>;
-> +	ports {
-> +		out_dp: port@5 {
-> +			dpsub_dp_out: endpoint {
-> +				remote-endpoint = <&dpcon_in>;
-> +			};
-> +		};
->   	};
->   };
->   
+>   static const struct bif_flags bif_flags[] = {
+> +    { "init", BIF_FLAG_INIT },
+>       { "fsbl_config", BIF_FLAG_FSBL_CONFIG },
+>       { "trustzone", BIF_FLAG_TZ },
+>       { "pmufw_image", BIF_FLAG_PMUFW_IMAGE },
+> @@ -279,7 +280,7 @@ static int bif_add_blob(const void *data, size_t
+> len, size_t *offset)
+>       return 0;
+>   }
+> 
+> -static int bif_init(void)
+> +static int bif_initialize(void)
+>   {
+>       struct zynqmp_header header = { { 0 } };
+>       int r;
+> @@ -316,6 +317,15 @@ static int bif_add_pmufw(struct bif_entry *bf,
+> const char *data, size_t len)
+>       return 0;
+>   }
+> 
+> +static int bif_init(struct bif_entry *init)
+> +{
+> +    /* User can pass in text file with init list */
+> +    if (strlen(init->filename))
+> +        zynqmpimage_parse_initparams(bif_output.header, init->filename);
+> +
+> +    return 0;
+> +}
+> +
+>   static int bif_add_part(struct bif_entry *bf, const char *data, size_t len)
+>   {
+>       size_t parthdr_offset = 0;
+> @@ -340,6 +350,8 @@ static int bif_add_part(struct bif_entry *bf,
+> const char *data, size_t len)
+> 
+>       if (bf->flags & (1ULL << BIF_FLAG_PMUFW_IMAGE))
+>           return bif_add_pmufw(bf, data, len);
+> +    else if (bf->flags & (1ULL << BIF_FLAG_INIT))
+> +        return bif_init(bf);
+> 
+>       r = bif_add_blob(data, len, &bf->offset);
+>       if (r)
+> @@ -837,7 +849,7 @@ int zynqmpbif_copy_image(int outfd, struct
+> image_tool_params *mparams)
+>       uint32_t csum;
+>       int bldr = -1;
+> 
+> -    bif_init();
+> +    bif_initialize();
+> 
+>       /* Read .bif input file */
+>       bif = read_full_file(mparams->datafile, NULL);
+> diff --git a/tools/zynqmpimage.c b/tools/zynqmpimage.c
+> index 4db9877127e..eb79c0696cc 100644
+> --- a/tools/zynqmpimage.c
+> +++ b/tools/zynqmpimage.c
+> @@ -400,8 +400,8 @@ static void zynqmpimage_pmufw(struct zynqmp_header *zynqhdr,
+>       fclose(fpmu);
+>   }
+> 
+> -static void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
+> -    const char *filename)
+> +void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
+> +                  const char *filename)
+>   {
+>       FILE *fp;
+>       struct zynqmp_reginit reginit;
+> diff --git a/tools/zynqmpimage.h b/tools/zynqmpimage.h
+> index 7c47dc0763b..867fc5294a3 100644
+> --- a/tools/zynqmpimage.h
+> +++ b/tools/zynqmpimage.h
+> @@ -142,6 +142,8 @@ struct zynqmp_header {
+> 
+>   void zynqmpimage_default_header(struct zynqmp_header *ptr);
+>   void zynqmpimage_print_header(const void *ptr, struct
+> image_tool_params *params);
+> +void zynqmpimage_parse_initparams(struct zynqmp_header *zynqhdr,
+> +                  const char *filename);
+> 
+>   static inline struct image_header_table *
+>   zynqmp_get_iht(const struct zynqmp_header *zynqhdr)
+> --
+> 2.43.0
 
-Applied.
-M
+
+Not an issue with the patch but your patch is in utf-8 instead of plain text.
+Please try
+b4 am CAEU2+vrO5KGeoWkDZGOkmL408R6SHqdGhq315cGq+mbq3XBz4g@mail.gmail.com
+git am 
+./20250916_erich_e_hoover_mkimage_add_register_initialization_file_support_to_zynqmpbif.mbx
+Applying: mkimage: add register initialization file support to zynqmpbif
+error: corrupt patch at line 12
+Patch failed at 0001 mkimage: add register initialization file support to zynqmpbif
+hint: Use 'git am --show-current-patch=diff' to see the failed patch
+When you have resolved this problem, run "git am --continue".
+If you prefer to skip this patch, run "git am --skip" instead.
+
+Please fix it and send v2.
+
+Thanks,
+Michal
+
+
+
+
+
