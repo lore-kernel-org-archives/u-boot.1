@@ -4,53 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F767CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 07:33:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2228CCAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 08:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E1B28206E;
-	Mon, 29 Sep 2025 09:33:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A0B1809A5;
+	Mon, 29 Sep 2025 10:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CXccsdxD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="K6ZF5eth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C38682A9E; Mon, 29 Sep 2025 09:33:52 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
+ id 49B5D8206E; Mon, 29 Sep 2025 10:47:01 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C73CC808AF
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:33:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F282B808AF
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 10:46:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 2E41842BAA;
- Mon, 29 Sep 2025 07:33:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6BBFC4CEF4;
- Mon, 29 Sep 2025 07:33:42 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D97CA6234C;
+ Mon, 29 Sep 2025 08:46:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CC49C4CEF4;
+ Mon, 29 Sep 2025 08:46:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759131223;
- bh=HI7tSvgsfyTWW6WoyzLufFwOogKp3pkLBtA/GFWRL7k=;
+ s=k20201202; t=1759135617;
+ bh=1PFscZ2OFFXFCm6EHIhxzfBqde/7BMU74X3ZYuTQtm8=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=CXccsdxDtfrA3rAFwCFOQl93/KpTSrTfBUWi8Wcnew/jT/LeteW0pupYTSBmNa3nW
- q2WJVDNuk/3nJxbX4bxoPH2g8DY/n/MC3/8lcb8IotKQ3GXCXqydfzxGYbzBFyNwlo
- EJHAse7R8n+o7CqtkSf0AVNH7mhVb1RuvO/QuA5/xUG/WN+PnR6zr8RJkDKQu/aFq+
- N/8BoGlrdL1h89EYccaqNYWvJZtKVd9cj3EZVtyE7xDkeMqsUhWCq3EkHPVgnNoqh5
- U8VF9F69dSyoJZrsDGcT0n+j8UInFkox8b8Hg0UZxEQ2cc0ODvo9zPW/NlUUvci2Zw
- fi16+VlonfwZA==
+ b=K6ZF5ethqfnnXKoOPBWBH0AFqRHZbHWNMpmkZWKPKQlTNQsZa9Tp9cjBIupO0QPnm
+ YsOjIA4Y82FW04NFSWvxuZQ+PF/nkdLp3p4dWtnLGtOfXA9DTYl3bhK3Ty1U6s0TGl
+ MjUGvuvhzsMojeC4OUjkzD/nhWTmpdDAhyAJUw2eoby5gPK6UL7WtxJPJ5SEE96eK0
+ Vr93CrM4euBnhZPDSAUd+PRdkhj5AB9WCxLPG7Tqkt8C6Uh+0zSONZ1zeNNKwPkCtg
+ Kwc6PMA55f9j3tNllP/3uYZiyma50nL6rifDcHhlsqqQEmwOUR/gfvOSdfJmWT8I5O
+ xeDaQqtJpH8UQ==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Chance Yang <chance.yang@kneron.us>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, morgan.chang@kneron.us, Chance Yang
- <chance.yang@kneron.us>
-Subject: Re: [PATCH v2] fastboot: Fix has-slot command always returning yes
- for fb_nand
-In-Reply-To: <20250826-master-v2-1-30b787a2f9fd@kneron.us>
-References: <20250826-master-v2-1-30b787a2f9fd@kneron.us>
-Date: Mon, 29 Sep 2025 09:33:40 +0200
-Message-ID: <87h5wlk90r.fsf@kernel.org>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Stefano Babic
+ <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX
+ U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, Peng Fan
+ <peng.fan@nxp.com>, Troy Kisky <troy.kisky@boundarydevices.com>, Adrian
+ Alonso <adrian.alonso@nxp.com>, Lukasz Majewski <lukma@denx.de>, Mattijs
+ Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, Tim
+ Harvey <tharvey@gateworks.com>, Alice Guo <alice.guo@nxp.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 5/6] usb: dwc3: gadget: Add delay after software writes
+ DCTL in dwc3_gadget_run_stop()
+In-Reply-To: <20250720-imx95-v1-5-759619b47b1f@oss.nxp.com>
+References: <20250720-imx95-v1-0-759619b47b1f@oss.nxp.com>
+ <20250720-imx95-v1-5-759619b47b1f@oss.nxp.com>
+Date: Mon, 29 Sep 2025 10:46:55 +0200
+Message-ID: <87a52dk5mo.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -69,60 +74,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chance,
+Hi Alice,
 
 Thank you for the patch.
 
-On Tue, Aug 26, 2025 at 11:36, Chance Yang <chance.yang@kneron.us> wrote:
+On Sun, Jul 20, 2025 at 06:13, "Alice Guo (OSS)" <alice.guo@oss.nxp.com> wrote:
 
-> The issue was a mismatch in return value conventions between functions:
-> - getvar_get_part_info() expects >= 0 for success
-> - fb_nand_lookup() returns 0 on success, 1 on failure (from
-> mtdparts_init and find_dev_and_part)
+> From: Alice Guo <alice.guo@nxp.com>
 >
-> When partition didn't exist, fb_nand_lookup returned 1, but
-> fastboot_nand_get_part_info passed it directly to getvar_get_part_info,
-> which treated 1 >= 0 as success, causing has-slot to always return yes.
+> When using NXP UUU to download flash.bin to i.MX95 19x19 evk board, it
+> will get stuck in a loop at sdp_init() without this change.
 >
-> Fix by converting positive return values to -ENOENT in
-> fastboot_nand_get_part_info to match the expected error convention.
->
-> Signed-off-by: Chance Yang <chance.yang@kneron.us>
+> Signed-off-by: Alice Guo <alice.guo@nxp.com>
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+I see that a similar change exist in the Linux kernel:
+https://lore.kernel.org/all/20220901193625.8727-4-quic_wcheng@quicinc.com/
+
+Please mention this change in the commit message for v2.
+See the following example:
+https://lore.kernel.org/all/20250110-dwc2-dev-v4-7-987f4fd6f8b2@pigmoral.tech/
 
 > ---
-> Changes in v2:
-> - cover all the failure paths in fb_nand_lookup()
-> - Link to v1: https://lore.kernel.org/r/20250708-master-v1-1-574f8bec645d@kneron.us
-> ---
->  drivers/fastboot/fb_nand.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+>  drivers/usb/dwc3/gadget.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
-> index afc64fd5280717ae4041ed70268ccc01cfbb0496..6df3917e129556fef71640ebb1347c5eb86e648a 100644
-> --- a/drivers/fastboot/fb_nand.c
-> +++ b/drivers/fastboot/fb_nand.c
-> @@ -157,8 +157,13 @@ int fastboot_nand_get_part_info(const char *part_name,
->  				struct part_info **part_info, char *response)
->  {
->  	struct mtd_info *mtd = NULL;
-> +	int ret;
-> +
-> +	ret = fb_nand_lookup(part_name, &mtd, part_info, response);
-> +	if (ret)
-> +		return -ENOENT;
+> diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+> index 2b01113d54c..6b2b25c7aa5 100644
+> --- a/drivers/usb/dwc3/gadget.c
+> +++ b/drivers/usb/dwc3/gadget.c
+> @@ -1423,6 +1423,7 @@ static int dwc3_gadget_run_stop(struct dwc3 *dwc, int is_on, int suspend)
+>  	}
 >  
-> -	return fb_nand_lookup(part_name, &mtd, part_info, response);
-> +	return ret;
->  }
+>  	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
+> +	mdelay(2);
+
+Can you elaborate on why 1ms is not enough?
+
 >  
->  /**
+>  	do {
+>  		reg = dwc3_readl(dwc->regs, DWC3_DSTS);
 >
-> ---
-> base-commit: d1d53c252a4a746db5ebcdf0d6de3aa0feec504e
-> change-id: 20250708-master-b6a53395df05
->
-> Best regards,
 > -- 
-> Chance Yang <chance.yang@kneron.us>
+> 2.43.0
