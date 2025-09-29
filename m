@@ -4,79 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6848CCAC5B9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48B94CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:25:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CBD483526;
-	Mon, 29 Sep 2025 18:07:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 62D198319C;
+	Mon, 29 Sep 2025 18:25:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YDAPVTF7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v8kGeA9l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A23E283526; Mon, 29 Sep 2025 18:07:31 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id D9ACB832AD; Mon, 29 Sep 2025 18:25:27 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A46E8349B
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:07:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAE9182A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:25:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7a7c1ecd433so2420473a34.3
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:07:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-46e4c9083a0so16211255e9.0
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:25:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759162048; x=1759766848; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bAo1+v5DOO1OEXhjjo6i+1JL8gX7EZYhGDSt9lbvssI=;
- b=YDAPVTF7A8jBZzuCd23Y+6AnSTH7nvqtzvwvsX4V0Mvr3QC0y4OqHDXHEyaYZ2jX7e
- anY2qD8nkdUVD/RR6FYJzcznOnfyXazgzdlnJstERo6qYTePrWn1AMW+TNdS5+KRNAUC
- JYVeNjnIIdQhRb1RYng/0LAze/o9ZoJZ0GVc0=
+ d=linaro.org; s=google; t=1759163125; x=1759767925; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=eyz6rem9K2WedUjB6RgHwB0oizrcf0CCsbJKmtUL378=;
+ b=v8kGeA9ljeU1oBDhstWN3Cu5XO/jZ296e6G74C1gomZ06WxoYU9vo5KYJghVlHHs6x
+ aYaRkrAD//OryeQRrJ3gVOkbkROB9m3YsMfKXrgeqDsb28p+B1lEIou/ezW78lhcrAK4
+ oWlibIZNFntM04jIar6QVbkSOBC0MfYpXPUT/sa0uFiVGETi/0PHBSo634m+0tmvUPgs
+ 53w5h3rg7+n1oKjX0jdrRuEsIkFCr4YAs5SbZx9KciL8BDmMl1ni5dlQEdP8UJ3jMZAh
+ sz5kA+SWlKl4YrHTMT89OgeZdfkyyOGvg5dOQz821uAQSLHeHJmpmhfZ1T12JBYrA1+K
+ NKOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759162048; x=1759766848;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bAo1+v5DOO1OEXhjjo6i+1JL8gX7EZYhGDSt9lbvssI=;
- b=nvbp+mdjhlNfmqiLO/l+mVkx3hAsUIRVlCV6WF6+9KvnXs7MSdDHYgc0JzOjMnpoec
- iogUTVz9Q9q1eLrETUH6kJ8ftmWsQswkwLzobEmpeCdOPacs8Aj43JbENVPY2E+7cTXZ
- +QKxC+jvIilP0HRfJiB+M3xCk4v1DeCcaa2VxRs3so+ckygKOpklCWc7qvAAF/4X8mMs
- lvvXlHqQF6BkYtm1/jUZDQpy1Octdyh2cyvAphJJ9C+NNaEo3RLPtW+9MOiYVN0B0NWS
- BTVfSutFxGURn7SW2VGateA+SvPuz3l5wVmNRkORQ0NAqiAH/W7Q23fu85jGgSaYPG0B
- yCcw==
-X-Gm-Message-State: AOJu0YwyBEid1Vg3OAiGqQgsGK0y57h4BvJoMufzDPg1NhzpQ1ao5gd1
- DcST6KxZk/I+T4Xjfr5HgDbgxXIs/XLUyelMZZMFOLiWxHUW3gGqd+/HbcVfMHlvOLywTzXAp0N
- O8pJ9uAY=
-X-Gm-Gg: ASbGncthB8CsTJD+9/6F4Wh6kEHmL0hkI8pw0IRpNdb0HvsbD1viRbjibzO+2cCs5jv
- 7/+JlkSnJrsek+8LDhE2g6cryFCAxIV3IOoxJ8VI7+7HE/mDBGKMa86Y2G27sGX8m6BH+Rja0el
- ZXPRjPAmPXCqlXmso6vmxw4QamjfKzr/LOJZQeXI6e4Gt6CmhP+c4tdulqnnpBpgOpDG3HRMAuy
- ISIMEOZZcnpQA+7w5vuEvxtRYcMOZSTHmEP34Ur3jZk3jwM6y8iH03TeWg/LZ8RHR+QF4qvk5xz
- BgkBGen7MTmmHN3FnstoPsAapSyqQ/C+KZ8k74jqlfgkWZv4kb8YhKOvK30//V3PwdraQ3JvhWK
- mBUfe6KEBvc5RjtXE5xPwhDsSFcHXLRvAy0NCb9PCr3otbog88JiATDebyhDlg+1Nag==
-X-Google-Smtp-Source: AGHT+IHEIMA0uxWgg9zRLausQ7+YWzoOpfs+JCGYCAfDIbKkXPfCCRrl5Dv4IEisBnFlBRjKRyMCqw==
-X-Received: by 2002:a05:6830:2585:b0:7ae:dbc5:4705 with SMTP id
- 46e09a7af769-7aedbc56212mr5726528a34.27.1759162048229; 
- Mon, 29 Sep 2025 09:07:28 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ d=1e100.net; s=20230601; t=1759163125; x=1759767925;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eyz6rem9K2WedUjB6RgHwB0oizrcf0CCsbJKmtUL378=;
+ b=wi46v4gbeoX51ljBPrAza2lPq6R9xmRqfRHp2f/34e5tSCE8rbuVX6eFzv8BNZqQ1Y
+ 1hnVzB+NnxyA8+GKMosMDFCGO+ld0HKdt+CXqBs/uy3wyYlZ/mzmB1cQlvoRgsiQ24Je
+ S98TimCHSpAIvEcA8HDMdTJxxDQsHZFtRMEeTFAEdW6bno034fGZ1bntqz3lC5lY4XUA
+ 0DIN4Lm7FQo5ZRjdRqPewX2BxsFQhDbOBTKOGxGFPlHAXOtUV9VPgAk+wmI5GQeEh/kk
+ 4XtoiFYWUSK2cngEgZCZexQ/RMEs3II7WoBXUuoSiQYJX2C56uw3CoEPmuSY7no70JMl
+ P/Hw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWMM+IrUwtHoZxK2uvzD30GgWxxywOv1bdHxe0Fz3TOV0wSBEDA9FtNYb86Uzdphp8LLEEM6zE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzWAdYyRLuA0y2CMwLhjZlji/pNJblhWZuXKBWPT1WESrlYOPge
+ c+90MzYZEO5fG1WD+JjqoVXv1ylZYrkJaLhbfApcWYM1E1aEyn4GYAkmVkFvgRs2h41i8ufr55P
+ +BdlP
+X-Gm-Gg: ASbGncvZrzCB43RNnlHarMA6HKJ7dJ2T+E5hFFInOiOGxzBSUlaCsz3cmK7bkMqaoks
+ rWkaQWEgexuO6qiBp75d3mUcOI/xWp+T7I5g1RHXUP8835rhyMEJyqaolk2DzN+x9bB2c/kB94u
+ oW+CugenXtsFrgmd119wdN1/lp31re3csz1YNKRo2KGcaEvJl3RTHZfKTQ04NvGzN2hs+qErJie
+ KY1wuqVbuF8lOKBqgrQ4wiq+8DtIWQRoFLlC74UGXqkruN3QcB8/L8503Dw3Ja+P06olfbv8i3f
+ 0K0gDO1jJVoGFsuQvjugNwwcoFqgoOOXRZADYXBtAsGceUsY2mkJy/JOFBr3R/QEfRGEwPaGX+8
+ F5N0KdteoBO8akOJl3PMBW6eArD2icQBoJd83OL/q46nD4uCgHg==
+X-Google-Smtp-Source: AGHT+IGttufobb1GHH3gcBOMV/6SgRzs2y//AGvNm7pyp86blV21JYL8/xvPh9ijW4S4kmaTnkrQdg==
+X-Received: by 2002:a05:600c:46cd:b0:46e:3e50:e0e6 with SMTP id
+ 5b1f17b1804b1-46e58ad362cmr12410005e9.17.1759163125356; 
+ Mon, 29 Sep 2025 09:25:25 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:4bc3:3107:fbfe:562])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a23e1682f4sm2689213a34.22.2025.09.29.09.07.27
+ 5b1f17b1804b1-46e2ab31f1dsm230630035e9.13.2025.09.29.09.25.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 09:07:27 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Jiaxun Yang <jiaxun.yang@flygoat.com>
-In-Reply-To: <20240717-b4-config-v1-1-0bc9e80ef582@flygoat.com>
-References: <20240717-b4-config-v1-1-0bc9e80ef582@flygoat.com>
-Subject: Re: [PATCH] b4-config: configure `b4` for U-Boot
-Message-Id: <175916204764.360535.9670952964716641436.b4-ty@konsulko.com>
-Date: Mon, 29 Sep 2025 10:07:27 -0600
+ Mon, 29 Sep 2025 09:25:24 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Mon, 29 Sep 2025 17:25:23 +0100
+Subject: [PATCH] usb: gadget: atmel: Add missing null check
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20250929-atmel_usba_udc-v1-1-e1426271e12a@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAPKy2mgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDSyNL3cSS3NSc+NLipMT40pRkXQMTMwNTS1NLc0sjCyWgpoKi1LTMCrC
+ B0bG1tQAs0WusYAAAAA==
+X-Change-ID: 20250929-atmel_usba_udc-046059597928
+To: Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>
+Cc: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,20 +106,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Jul 2024 23:12:59 +0800, Jiaxun Yang wrote:
+Add in the missing null check for udc->driver that is present at other
+points in the function before it is dereferenced.
 
-> `b4` is a commandline tool to make patch-based development easier[1]
-> 
-> Provide a .b4-config file to match U-Boot's patch preference so it will
-> be easier for people to use b4 with U-Boot development.
-> 
-> 
+This issue was found by Smatch.
 
-Applied to u-boot/master, thanks!
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/usb/gadget/atmel_usba_udc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-[1/1] b4-config: configure `b4` for U-Boot
-      commit: 26efc940c865a04d345ac9d39f71746fc2821da6
+diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+index 72f68dba3a741b7f0aac8ba89b83eefb5e0cce4f..f7a92ded6dab187475249874db37d81a07bf5b9e 100644
+--- a/drivers/usb/gadget/atmel_usba_udc.c
++++ b/drivers/usb/gadget/atmel_usba_udc.c
+@@ -1147,7 +1147,7 @@ static int usba_udc_irq(struct usba_udc *udc)
+ 		reset_all_endpoints(udc);
+ 
+ 		if (udc->gadget.speed != USB_SPEED_UNKNOWN &&
+-		    udc->driver->disconnect) {
++		    udc->driver && udc->driver->disconnect) {
+ 			udc->gadget.speed = USB_SPEED_UNKNOWN;
+ 			spin_unlock(&udc->lock);
+ 			udc->driver->disconnect(&udc->gadget);
+
+---
+base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
+change-id: 20250929-atmel_usba_udc-046059597928
+
+Best regards,
 -- 
-Tom
-
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
