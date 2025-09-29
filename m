@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE0E1CAC5B5
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 12:37:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FFF1CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 12:54:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E1B983189;
-	Mon, 29 Sep 2025 14:37:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6895883071;
+	Mon, 29 Sep 2025 14:54:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="SZdJBkLP";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="JaIWnXgR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAFAC8319C; Mon, 29 Sep 2025 14:37:18 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id F116982A9E; Mon, 29 Sep 2025 14:54:45 +0200 (CEST)
+Received: from CY7PR03CU001.outbound.protection.outlook.com
+ (mail-westcentralusazlp170100005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c112::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB62A82A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:37:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D68E682A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:54:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jljFow3jSj97F0GfcaChHbepS/wfOFEJxPPAe9eeDvrLLpN23NW0D/maBdcBNJsJcLVYzEfy7x3+aqrlFHLvSZJ2bDF5RpS0GuiIvl5nEOlZpnXumcoBTGDP3Dm+DI7JNHvdXkZqFRBzthgdAsABoAnILNd9WZqOqrkYQlzoRzuH2L6IgH8SUw+lZSAk4xtXgD1BDSnm6TNKWnvFaHEqsoNmV32909UYOXQBCQFuJj8cPjmb1ISgQ7msLqLfY4i6uupYsdChFdMtiwV94drqJDL9wtjNanYSEQksr5ZeterkctkkA2yFTVkWajwjVa1gwLlxaJgQED9TGoDMn7pV/A==
+ b=h+I7WFn/yxJh9hIvtthz6bkFgiKNpdnb3cFgfVlOgtOo0mEicXG24DXROb1uAHsr5wwaqnnxRM/EU/ZJL6apHTc0BGVhxJnabpupML3LyJbuKZQk4PlhdjufLuG4zEBBYRlJb9mxwdzgmwULcEH19cyEEtvm1tn70zJu8GMpm4Z2iCs3GLCbEGFcRIxriuZs4CuaW+RlRQcntdKP6tOpLvITK1BT1hUKJi+aL+I4WKhqtvBoIJK2u86voQHReNQBEHJLiW8vW6S8qSJCKunSxp8S+1cxfZXmFXPqXH1bOQ2fa3SYktVXtzEkPpxHXE8ffA3VCFJGr88Vl/RjhfIjGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BkzpsXvNYFLHF0h84zd5RiGRnxX75KL97WfnTz8EFoQ=;
- b=uVJr/z8uJ6IbefTE7IuLGdflUQwGApznuN8Vr+p9fTM9ohcZ8vAGr49Wn52Cu6dYyGSDS77MvD8CBNVLFeeYx7lh93u8h5TEABciuudKGBJTor4BWQdraW2Mu44wLizawRWQksX5VYxRIZXVKygRMu/5pGoVDjuFPBi7tRWrrtKDAhq3XVWLgWhHZw+WbTcnLEEKTBs46xqwZiZsYA5e+4YByTlswbEzvdhSjDRdhagwC/Rf9mFsUBzGPPoKOKk+VJg4Qp8n5y8m2WNKCWfqNpqIamldx3In6m49FRy6U6Yl+fHD6MsBVR6EiYk2F7MwtAEbDAhjnz5SKqou0jaapA==
+ bh=dIVByXyY/Sf65SIia7nFCIkbDh35pa2k3DjrawdMEEc=;
+ b=YNm3+sIVn9Oj5JQ0Sqb2rsnD1AizWUMWprSjku5cEJa7xpchbq2sxZp8b3dZnyJiElQDX2EweM2vqRek068kbgmAMnt5pRaUu9DQEwWAPJB/NBU85x/lXVjRVMPd2CGltz51OzGj9j5sizx5RrSvbHlfm+uh9ZK1SNWnoe/Nizhu4e0e2JWSpXF79grfVGGLbodv+9xndC0Aljsz3TkBRndg733jgaPE6xF6Ro1rJrlnWyI13gfUTd28o9IuP5EzIGg0m6sBztl471i/WrAM2KJSVfcMIK0jNJLry2s4TErBU40vOw4Vj0ManA+zuEHe8DhyNZhsX7/6lJtNpth26Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BkzpsXvNYFLHF0h84zd5RiGRnxX75KL97WfnTz8EFoQ=;
- b=SZdJBkLP+C5Svf+fABi6tFMnKn9ovyBgkH00elrpDN7lGO46JdSKr4BcF1UXZfWdhdAuqknG/NU+5nAtl1mrK2HGIhPSNLd+Ma1gKLAHMvYfstx6tPvMLpy7nvW7Qb9VHVBfeH+phPdevSZkna+CJ1PFNMoGDsQcvaNjQPP9Hqw=
+ bh=dIVByXyY/Sf65SIia7nFCIkbDh35pa2k3DjrawdMEEc=;
+ b=JaIWnXgRtEAMXYgOdM5kKIrGf1H1w/mLxqcZwT+puSGuieZAD5ycawrnclNfsPmi6V/rSuPBdZpZF3mEB551AAje095Ea2fj7BVNYA4ufEmmqPGzooghP9l6N606jE45EC9JRfTaqEAgcqbJVAsk5cjpy/lv0QIiOCruEn6CTvY=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by CYXPR12MB9317.namprd12.prod.outlook.com (2603:10b6:930:e2::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Mon, 29 Sep
- 2025 12:37:10 +0000
+ by DS7PR12MB5936.namprd12.prod.outlook.com (2603:10b6:8:7f::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9160.16; Mon, 29 Sep 2025 12:54:35 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.9160.008; Mon, 29 Sep 2025
- 12:37:09 +0000
-Message-ID: <a69aecba-186e-4ce4-ba8f-2c72b1d94267@amd.com>
-Date: Mon, 29 Sep 2025 14:36:57 +0200
+ 12:54:34 +0000
+Message-ID: <cbf26fe2-1267-4965-807b-fa0805e61bea@amd.com>
+Date: Mon, 29 Sep 2025 14:54:17 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] env: spi: Fix gd->env_valid for the first write
-To: E Shattow <e@freeshell.de>, Marek Vasut <marek.vasut@mailbox.org>,
- u-boot@lists.denx.de, git@xilinx.com, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>
-Cc: Casey Connolly <casey.connolly@linaro.org>,
+Subject: Re: [PATCH] xilinx: Enable sntp command
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de, git@amd.com
+Cc: Anshul Dalal <anshuld@ti.com>, Fabio Estevam <festevam@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>
-References: <7a6ffee423f45507af680c63a86cc50fb9e3a5df.1757489188.git.michal.simek@amd.com>
- <1684bd0d-b831-43e6-8713-95a2675957db@mailbox.org>
- <39f7c9df-9a8a-447d-8689-4f99676fb1e8@amd.com>
- <48de987c-1255-4c90-8477-964d153809d3@amd.com>
- <401851f4-36e7-4e11-9d2e-e85753d916bf@mailbox.org>
- <e436dd80-3693-472b-b9f6-5d27a8310397@freeshell.de>
- <49902e34-a01d-422b-bd60-e97aef7d859e@amd.com>
- <88692c72-1c86-45d3-bf2b-1a21debc5785@freeshell.de>
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Herren <sputnik@on-the-web.ch>,
+ Padmarao Begari <padmarao.begari@amd.com>, Peng Fan <peng.fan@nxp.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ T Karthik Reddy <t.karthik.reddy@xilinx.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <8259ca2496dd8f6a25df566c43f16be019d75cb9.1759127081.git.michal.simek@amd.com>
+ <7ab73b44-8efc-47d6-9e6e-5ffd9ab0e3d7@mailbox.org>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -117,101 +118,103 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  otYa9+7v0j0WOBTJaj16LFxdSRq/jZ1y/EIHs3Ysd85mUWXOB8xZ6h+WEMzqAvOt02oWJVbr
  ZLqxG/3ScDXZEUJ6EDJVoLAK50zMk87ece2+4GWGOKfFsiDfh7fnEMXQcykxuowBYUD0tMd2
  mpwx1d8=
-In-Reply-To: <88692c72-1c86-45d3-bf2b-1a21debc5785@freeshell.de>
+In-Reply-To: <7ab73b44-8efc-47d6-9e6e-5ffd9ab0e3d7@mailbox.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR02CA0055.eurprd02.prod.outlook.com
- (2603:10a6:802:14::26) To SJ2PR12MB8109.namprd12.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VE1PR03CA0048.eurprd03.prod.outlook.com
+ (2603:10a6:803:118::37) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CYXPR12MB9317:EE_
-X-MS-Office365-Filtering-Correlation-Id: ba6c2430-a0a7-4c52-250a-08ddff54e85d
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS7PR12MB5936:EE_
+X-MS-Office365-Filtering-Correlation-Id: a695d970-b350-41ae-52bc-08ddff575709
+X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|7416014|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QnJqQk9WaEI1aEdrVkJBdDhNRmJyUk5WYXpKdnpETmxHNEt5QVRCTFVvd1pE?=
- =?utf-8?B?TXladXgwTjBXbm9OWmg1eFd3T0hoc2JETjBrYmJIelJGL2RBRnMzVzk0SHpo?=
- =?utf-8?B?VG9FVndsSkd5MGlVSHk2ZWRNRzdJTzhiQVU4b2VtNlNhWHVkcVAwaVd1aFdl?=
- =?utf-8?B?aUFpS3VqZTZSNFY0ZW1EV1BjLzRLQVJxU0JWcXlWV2dKQUxWalNpcWErSERq?=
- =?utf-8?B?M3NHMkJlQ214ZlJ2V3hCS05RTFFRMGlTMlhTdUlUbmpDRHI5ZGRLSm1RQUJs?=
- =?utf-8?B?ZXVLV0NheVVkTUlGZEo2dW5iNnhlNkU3T3ZPd1p5dDFDSGhoSlZZQzJ1aFpl?=
- =?utf-8?B?a292MDVNelNNM1E0TGd1ZmpJd24vZDJRWVpscjNET2h4bkpyOWhIWmsrSkRv?=
- =?utf-8?B?Smd5ZlJVU3Y2djFmMmkzNmZZbk4rNmtVb0wwZXV0Y2VsRzdjRFVEcjNveHht?=
- =?utf-8?B?cm9oYkdoY0JDWHllelBrSWtMMDBNRXBYd2x0aHo2VjdwNk1Fd1JWZGtwTUdj?=
- =?utf-8?B?eXo2ZVA4T3dqYzRLMEl6MVR6M0xVZkhZZjdGVlA1ODJMSnZDV3IrUVI0R3Jp?=
- =?utf-8?B?STBYYVNnMEtOVC9PZ0tSRTZKcmNYaU1BVmVkV3ZFemZXZkNjMkQ5cUZFN2tP?=
- =?utf-8?B?MXpRTGQwT1A0VmNKeERrY3VWY1d3TW5TWUxqMGhEMFJSZlNGZUxWS3o1Nldz?=
- =?utf-8?B?RkIvNlFkK2g4Wnp1Y1o4TkdzR0JSdG5YMWg4YnBmQ2hpM3hlVXRmaGYzYkZT?=
- =?utf-8?B?L0lJQlAyWjBuMHBoR05Tc2lWSUxja2NQQ2FBUlFoSm5uT0NFVFlySkFPMlRF?=
- =?utf-8?B?LzgvOTl1Mm9XVHljazJlRVdqQ1JHOEJxTTU1TXUzeFVMYjF4UlNPSFJBR1NR?=
- =?utf-8?B?TFdiS2w3MHF2ZjZ6RWdlSzJvZTRsem1ISW5RUktUdXRjWnZRR2J4REw5SHVV?=
- =?utf-8?B?MXJ4Z3Q3UGZ6dCtXV3czZ2hNczlCcjd0dmordTkrbTBPQmlOL0F3VjZ1SnVU?=
- =?utf-8?B?MlFnSFVBTGVhZW91ZXZyOUpBc3ZxMmRvN0l4MThRN0tZWXEvdTJkbEtpUmF3?=
- =?utf-8?B?QWpiVzk5MC9OdDVQRmdzbmJ1dGljU0ROYi9oNVplQjlIdVBjdklnTGwwL1dC?=
- =?utf-8?B?UE9Vby9TSk1lY0FiMGs0Z0tRK0o0NUFDSzB0MUVEOFZrVHNKVUlDSEdpd3Bw?=
- =?utf-8?B?UU84QW9FRVhML01hY21hVjNBRm4vOW5Ta21TRHhHQ1llZi80VHJ5Rm81anBh?=
- =?utf-8?B?dVBGSStRdDVHcE5acXdXVWFFRmFpRUoxd0JWYXo1OHdIc0c0YVhiS0Y0OFc1?=
- =?utf-8?B?SUhGMUtFVUdIL2hFYmMzWlBKUlpUdG03djlDMVpPYmpxcGczclE0SXU1d29R?=
- =?utf-8?B?SWgvMFNHeGF5ZVQ4Q3MwRERIQU9IMzd6R3NaVDdLQUZBV0JYazFYbTNaQldz?=
- =?utf-8?B?U0d5N3RDeGdXY3hYNGFHcTgrclpiZ2NkT0NhaE1ydjA1RUZrak1leUVUTkdI?=
- =?utf-8?B?ME5MT3htUVVtZGFsWUpSeDd6Y3kyOEs1L21NeGd6d0oyaDliakdrcjFKTWl0?=
- =?utf-8?B?QnppQUc1clF4M0xUSjBCYzU0VWRjUC9LL21HdldPQnh4aEZDLzJVNWhkTHpl?=
- =?utf-8?B?ZUtGUTQrT3lFUm5zckgvK2tWUktwQzdBMFlTaUNKSXd0K2wyeEU5VHVFVURB?=
- =?utf-8?B?UEM3TG5sVXdkTDRIL3MvSjJYd1hRb25vOXVBc3VoWWIxclB3T2dhdy9PQTVP?=
- =?utf-8?B?aUJvMjNCVVNaQ3VrN291bmZDZWtNditMa0ZVSmZoSFlmYU9UTkdnMjRVZ3NX?=
- =?utf-8?B?bks3dWx1eVV0YzJJRkNrc0VJUnk4dkxZbXdrWTR2UE4vS25Ra1ozSXFFMUJh?=
- =?utf-8?B?Wk5Ea1M4T0h5blR3N05LNUNYZWNrajVCN2VLYm02dnV0Y2c9PQ==?=
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?KytIT1BUVFRTUXpMTXpEVTNuSzhpY0JKMTVoWnEwbDcxeEpPNHh6R1ZTNG1V?=
+ =?utf-8?B?YUx4ZitSMmtCVkxnVUZIUVBHM203Q3lTbkNrS1lRWVVQK0NXV25PVXFBY0lK?=
+ =?utf-8?B?ZHdqMzhNM2VnWnJqL3ZSZkV2RWtTaDE4aXY1V0twQzdWeUx6OWlCUW56UElF?=
+ =?utf-8?B?R3hsMTR1djVMMm9XT2xmNmVYQ3dXeDFFSDBOWnYxNU16R29jZ3pURlU2em9Q?=
+ =?utf-8?B?TWJpeHJhNlhIZzJNb0I3QytCdnNYalJXbDF6V3Zaa29paVZqckd4eXdtRFNs?=
+ =?utf-8?B?M0QxK0VIa2tjcWtiNW1FY3N6RDc5czJnWEowYzlxMzl6clpzYjVKSW5LZUo5?=
+ =?utf-8?B?U0YyTittNTBSaUQybFd0WThYTlpjZkxzL2Y5SC83OGFLN2Y4MERhaC9KK0w2?=
+ =?utf-8?B?MUVYSko0S0VnN29FTlpORVhFb0xCQTFIa2JZcmJoZWg1N29GUlZFRTNNVTNr?=
+ =?utf-8?B?VHMxbDZVdDV0cjAvVkpFMW5ENjZCd2h5RXFEU3R0dWQ5K3VXSzVxVjBOcTdq?=
+ =?utf-8?B?NGdEVUZqS3ArdEtjQUphU0Z0MVZpV0c2NEJvMkJkTEJlSDhFTnZmOEREVExM?=
+ =?utf-8?B?QllwTUFBQzhiTEpTblFMUUh3a1pLcEpIM3d4SFIrNUY2dSsvMFBoYnM3Zzky?=
+ =?utf-8?B?MnBsRW9EY0NGcnRXZGkwZDRkZklvU055Z1plM2NFUnlkYWVtL3g2YVc0akQy?=
+ =?utf-8?B?WG5GTVpGY3FxVXBrVEIrOFRtekVxdEFhbjlkUkZldy9PVlYrTU8vVFRrc2Yx?=
+ =?utf-8?B?NndmOHlLeGlRTG5PbDM2bjRGbmsvcFdzTDlFRUxzcFBRMnVjWFFVNjRFRmFo?=
+ =?utf-8?B?TmFGbGVLdkpwbGVSZ2YrWGtBRTFTWjNvRWpUN1VJdTNIYXJNOWtoU2tTK0Iy?=
+ =?utf-8?B?L1dxdDhaTHA0blpKTjgyNy93Vkd0TVFvcXJ5aDRqMGViUkZUNWp4NjZuemR1?=
+ =?utf-8?B?citVVld1WmQzTEtQbGxRcEoyMDRuekw5ZnlKWWY2QWxGajNxelQ5ZVlJclhQ?=
+ =?utf-8?B?ZUdKSjROMXNHVlVHQStGWW1ZKzVFZkhvWmI0TWV3aHNoL0Q2QXFMWDQ1ZVRD?=
+ =?utf-8?B?VjZFU24rUkR6aTFRSXlZSGJsZFhreTcxc3dxZHp5NjFPa2lMald1QUJEUkxi?=
+ =?utf-8?B?TVM4aVlzUk5ZS0QyYmFZOGZ3VXl0TTdDcEV1K0E3WkJxM3pYdmdFWUREWGZr?=
+ =?utf-8?B?aGxGekI5TlljcVBPV1VOMWFoZ0lTb0ttWFlBaE1mZlJtaDYzN01PY2d6OEVl?=
+ =?utf-8?B?SDB3Qkh4RnU2Y0NMbE1BaFpweEZYUmVFNGJsQVJXVUpTcHR0QnViaUhQbFQz?=
+ =?utf-8?B?QWFETWZqWTFlZHNjZzB2ZTJ5c1NDMzB0cGxaeno0TmZJYVg2cURPSEdOUTd0?=
+ =?utf-8?B?UGgrQW9rTUo1VWFCa2xNWTlBT3BYd0xzbmhCMXZqUkpoRURaUXJienZmOS9t?=
+ =?utf-8?B?U1lMRVFjMEF2SHJSVktaRS93Y1k1Vi9yT2Jvb1p6TXBGbGQrdllURTJyYTU1?=
+ =?utf-8?B?TjFqdFhoZW91aVl1d1F2bElUaEVKckxZcG5McHVWOHAzZEZLR08zdFQ4Q0hp?=
+ =?utf-8?B?aS9XV3pZUjhUZWorc2NTQVNobmhwcUhQaGdjU2FFVmdCNUgwTmpiKzJ4S3J6?=
+ =?utf-8?B?aWtUM2tpRkIrbVRab0hVRGsydFNiU3pCZzQzYmtzMVNnSWppSWp0VHd6QlRG?=
+ =?utf-8?B?MVVhb3A5SXdQRXVraDN6ZjlCQXdvMlQ4ODJRVUVnc2orUlBXZENnekVDUW1p?=
+ =?utf-8?B?d2dpbnA2bzRjOFZXREx5VFF0RGJORGltZGxadFIxZlBmbncyclRqYWxQdmx4?=
+ =?utf-8?B?YUFPSjNZcFNrZ0NOV3JiNVAweWczTkZYQStuRllOUlVMNVFrZndUNEo2OXYr?=
+ =?utf-8?B?THdydC9GS0JWRGlKTGdjMWhZeGZTMEFkQkZZYTdiZDVMTW5zUUcwamFYMFNG?=
+ =?utf-8?Q?LInYt9Hxxj8h2lIY2wWE5FTegOfiW/2a?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(7416014)(376014); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(366016)(376014)(7416014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?d1UvUm9COVlpcXlnYzNqclZldmVCR0RrUlZNNjgxaE41Mm1iT2FSR29VTzFr?=
- =?utf-8?B?MWFPSG9iSDNWaXRzK2JLbEpGTnZpMVROWWxxMm5ZUWhvTFlydUtqZFZ0RGkw?=
- =?utf-8?B?SnVDQkxXTzBmNVF6SzdQV1ExN2RoWnZWV29pY1BWMXNmY1lOdThOdXp5eEU5?=
- =?utf-8?B?Y3EyaFpheDEzSWwvNmx3VjlHT3h1RzNyM0hjMStMZ0QyL0l6TmFRa2NxcTMv?=
- =?utf-8?B?OGowZlhFUzFtc0RPYnhmSnI2U1dsbFdjTnoyRitPNEdCNmw1NWRyL0NkTFdD?=
- =?utf-8?B?RVg5VEVpajhaeE13Y25DaHRXR0VVMnRTbDRyR2J4bGxpT25ScnFTVGhJSmhi?=
- =?utf-8?B?ZGx1NkhsRW44dUZpMGJtY0VHeGp4LzlJaVc2am1McGRjVW9iWENjVWZrbkg0?=
- =?utf-8?B?WmRaRlc1Zk9LWW5YdmNkTHA1M3o0OGZZcTQ5Y0NLckt3S2hUYUlPUUVwbXpY?=
- =?utf-8?B?dWQySUlrYUFFTmtPaWtSMloyQnoyQ0xxLzdmN0syMVhWT2RTTWh4Y3ZBQ09h?=
- =?utf-8?B?T2U2VmJrakhTOUdCZFBON1Qvb1VocE4yNkp3N2xmdzA3YkYvdFJ2a0x0aWhE?=
- =?utf-8?B?OEJJdTZrWk9DTDlHVU9RL3RLQUV0bzhnWGxXQ09HNjh6T0NIdUFyZU0yZmp1?=
- =?utf-8?B?dFk4ckRFRXFtVEp6Y3k4ZVY2ZU1paFhQc3ZCaENCNXFsWE9Ha0dwU0U4ZjNh?=
- =?utf-8?B?U0ducUdGcWRBcmkzd3dyRm5SYXhpMy9HWDI5ZElPTjFGOVpPamxBbm90U3N4?=
- =?utf-8?B?UlY5NC9KcEhrVmlNVDFleEhCbFdZbTlHL04xYmxqaGhlamZkL090aG5lTWFo?=
- =?utf-8?B?ZWtyS1k0cW9pazlraXBGS0RQdlI3ZWx2bEJHdUNFUGg0MzBaQStYNjd2T3hG?=
- =?utf-8?B?RjVVV01mUEZTUklWcnF3UTdnQ0o3cXZ1Vi85THVNek9ReGNmbnFvZjBJd3dt?=
- =?utf-8?B?Z04vOERPd01zeUUxRHpuc1lOWUtPclFwSlpkTmdsQTV6b0xCYUxNOXJQdzY0?=
- =?utf-8?B?OEEvQWdYS3ZKczdEaFdTNU1VeXpCUk85UzFIMzBKcVM2ZzlPdUFQQ0hKWW5h?=
- =?utf-8?B?cnh2cHhmWnppY3lYb3JrNHNqd3VjY203cjkxc25IYnZDT1N4NlhsYS90N2xX?=
- =?utf-8?B?eWxNbHVoZHJDQkQ5NzJNMWdEOGxjc1ZPS2VHSS9ybUtHUk55NUJpQnJiY0w1?=
- =?utf-8?B?R1hYSFRxUFRFZ3NBQ3I3c3RhV3NuRHphOVVlRTZtdWhNd2FxeFpycG50Q253?=
- =?utf-8?B?OGczT3NuMTk2OGZvdnFtK1BTczhuTTJjYlpzeEp2QUJ0OVdpd0J3R2V3eUNL?=
- =?utf-8?B?dXpXYWlMaE1nS2pyanZCWGhBbmtKcUgrMWJycVgvV1dUQUk5a3NEZVNaaXVa?=
- =?utf-8?B?TCtDY1dWRUsrcHZ0c0JzVFdHb3piaHY1MlJrVXhDT2JvS1JmSk84cTlZaVo5?=
- =?utf-8?B?UEFPWE96V1RFMmV2UDl6eXFFMUVacXlvMWZUanVXdzVIbjBpbk9kUUxOWmJU?=
- =?utf-8?B?ckZuZHlWK3REYjM5eVFOdHFOTzNNc2FmVXp2UTZWS1lGeVV6K1ZwVFNTRGwy?=
- =?utf-8?B?SWlyNldPbisyUWdaNWJ1MnorSXp4OExITG0vOTRiUW8xKzhLNnJMV3lYMUM0?=
- =?utf-8?B?TE5HNVp6cVhZRjF3LzhQM1ZzU2JCUm5lTnVjbDMrampyZDFIa0NRaWZWZWxG?=
- =?utf-8?B?VkVRTVl6VG1iUDVZakhDNHhCQUJ4MVFueERPZ09PNnVkRVhEVDdrTFVXN09i?=
- =?utf-8?B?TnplSEZPaXp2bEw2Z2thWDU3NmtJU0hHelM0MUN3OFlHbGUrZWQ1TnlwRWI3?=
- =?utf-8?B?NDhBWjFQeGdicityYU9FZllzRTc5RVRLWjExcm5yclZ3TXRQdVA4V2NvME96?=
- =?utf-8?B?RVU0ZVhNdlMzcXpPcHZEd0xjZFdPelhjWS9UZnB4M2ZWYXJEV1BSazI5cXd2?=
- =?utf-8?B?OVhFNHdNUHNhbjc2SUJBT0dxWmpVcEtvOGY0RzNiNjZxWkFlS2liRWtXK0g1?=
- =?utf-8?B?OVNRVmphTEl3YlRzb0VuSUlHK0FNeVlpTHZQSktzdzhMclJlOUE2cFducXNH?=
- =?utf-8?B?aXR1aFdmdXQ4YUc4M3RPUm5DZ0JDQWRac00wdlcvRnNVSnNKM3JZNHh3ZlFH?=
- =?utf-8?Q?sga/RHxks2Zu0h2BSuKynUkPr?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?REdSV0ZjUHpWbkUvTWpqMGtuNXZNSEpxODIyMHlTdm1TRFlNL1pZM3pOVllY?=
+ =?utf-8?B?c0o1WlRPbGc5KzRkNHBWMmlSc3RhWDRRY0E0VTVnWnRZRVg3YWMwcXFEcjJH?=
+ =?utf-8?B?dXFXMFBkM2QzZUpjdXhXeHBUV055RWxjM0VuSElPaytQYW5BZUxSZVpXc1Zp?=
+ =?utf-8?B?eWVub1JpNzh6UFNyRGgyU29SWXR4b05sSE53NmRHbjZSa0N4Um1QYzB5bHJZ?=
+ =?utf-8?B?NzZka3N0aDgybTVsZkZFblhyZmViOEUvT0pxOXJmM0U0c1RjdFNUT3FjMFZk?=
+ =?utf-8?B?YW9ST0E1cWhndXB0SGR6WU9zSzZBRHV1dUprcXdNbEZ0YjEwYVZCOHU3TEJw?=
+ =?utf-8?B?RncyRm1MRlFSa0ZwWHBGR0JLczNzUzl5Wk5rTHJwdjM2VFpsWHBocXRySkJ6?=
+ =?utf-8?B?bC8xMUYrMzlyZU5UNUxNNlNXK0NlakIxZno1MnhuZklkcFlkaHJnNkJmNkVO?=
+ =?utf-8?B?dDRsTUFaNVR5MTA2NzhUTGJEUml1MWx5SzdoNUdLUS9hSnBwVDAxWm5xdmRF?=
+ =?utf-8?B?Y1lxS2NBVzlqVHg5K01hOXJpQ1FTZFp4UFZWS0dyTUVXQXhUcmo5cnhQQkQr?=
+ =?utf-8?B?ZWRjVGUwbWYvb3JMaFhlb1E0WXhZbU9CSnhwUlZRbUhtWDVlaGtIcWxzVlZa?=
+ =?utf-8?B?VXZTVlpFd1F6YlFZdG1EY0J4SjNqek8xWDAwY1R3M1J1MHJWWTJjK3YrRmU0?=
+ =?utf-8?B?dURESnFsbi9FWVhDUHFucGpGOUVRN2psUVlPd1RDQTlMUFFmWi9aOWFWZTZI?=
+ =?utf-8?B?dGEveXczWTBZSnRVNXp2ZmhhU29maEVKZkJGMm5ac1hOc3pKR3pEVmZHUmx4?=
+ =?utf-8?B?L1Nkd1RGQ1RqR08xWmpvWWpTMm42Z3FlNWlWN3VyQUx3aE5SYS9pd1g3Q3Z0?=
+ =?utf-8?B?eWxSeEdHVElHN3VuNEQwcGNiSVdsenpraW1sU2hod3N0TEtPM2VYU0ZQL0V2?=
+ =?utf-8?B?dWZtcDJISnhIdnVvZCs2a1V5eUVDN1NqYmwxU1N5aXR6dFNORHJHYnBIT3ZF?=
+ =?utf-8?B?UUxpVEJ3aVNvQlFtVW5NWmIwbVlnMWkvb3Z6UlZQMmI2dnRkZDVJYnhNM3I4?=
+ =?utf-8?B?enZSQm92VUdpb3JGYmdmSTlpbjY1NnE5MFpxMU5tbGoyU0dMY0R3enhER1Bj?=
+ =?utf-8?B?aFM0VnhlbEhjK2REL2FWS0JzSHFvSGVmNDI3aU1uRlRObzJ4ajNDTnNBaHdN?=
+ =?utf-8?B?V3dGN3ZPWXB6NmhUeUhFK2YvYzVNUkVFcWE2NXM4SnlSckVFVnpqWi9BYVhE?=
+ =?utf-8?B?V0poVElqL3dXd2NtTlpKTS9RMUFHSUVvOVpseGFKb0h4N1Aydk9rc1BDMjl3?=
+ =?utf-8?B?YlltRHFtakFtbzl2WmFVOXpaUWtCU0Q2OStSajlFR0pWM3FZNkQ0Y3lqY24y?=
+ =?utf-8?B?VC9PWE5SUzdCSkREZ2VQSmEvNCt4cjFDdng0QWgwVFh2N3lhVGZBcGh2cTBW?=
+ =?utf-8?B?WEYzalRmeEtNRHgvMnVNNHJsNHVOMU9SMzlDWXpva2FOSFMvckovWHR2K3FH?=
+ =?utf-8?B?RHFPQjBDcU9jM2tEZWZ2TFlydWxRZmVYQjV6eDhKUmlzMDJ5aVZrYUJOQjhU?=
+ =?utf-8?B?MlV5c2tyWUZIKzhVWUY4blBQYWpNaXNJS0dYTnIweFVoODNiQk1GRFBmQzQ2?=
+ =?utf-8?B?TXdPN2xGZXo1alVGYjAwTkFCR0tncTllNHJ6ZUtCZXAybXlwZ0dESS9wU0FW?=
+ =?utf-8?B?WERoYjZ1WmUrNmhZbjhUSGFhTWo1NWttKzBDSzRycVlYNVo5V1MyNk5yeXhQ?=
+ =?utf-8?B?dFRyaG9UVkhJQjlFS29yRW00UVU3Tnczc1hVVXc3ODhsYmZqVWpIcHQybUlR?=
+ =?utf-8?B?OEdKbjJ2eWhsbVROVW5UdWdqbXQ3LzJVdmdNTzJBMzJQZ3YyMW1pUzhXMWJV?=
+ =?utf-8?B?c0lKYmZrSm9ENjZSUGlXdmFQV3VUVUZHWkFDUGlBQndmL1RNbzVuN0ZFa1hJ?=
+ =?utf-8?B?b3lsL050amVxWDUzeVQ2bE04T1B2K3d3c2xqanIrSGpyVlp2d3JWdWdGWjht?=
+ =?utf-8?B?c3VoNElQSXpzdHNaSjlLT0xXY1pTcGJwYTI3VW1JSkRxc1NFMTlMRHhWT2Jw?=
+ =?utf-8?B?MnU5aFBlNTY1d2xqSE5GVTN3WXpYLy9MZitXWURrV0x4RG9ndEpodXZ5Q2pD?=
+ =?utf-8?Q?oEClAen5jTi0JkMTVVt02VR6Z?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ba6c2430-a0a7-4c52-250a-08ddff54e85d
+X-MS-Exchange-CrossTenant-Network-Message-Id: a695d970-b350-41ae-52bc-08ddff575709
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2025 12:37:09.8902 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2025 12:54:34.8436 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: go7GMNDJ68omqEAiLLm/Apks2h8k+i8lee46CdQSPP2aUKMOj4fJixdCG4v9VmzR
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9317
+X-MS-Exchange-CrossTenant-UserPrincipalName: 67dBy66Il76Fl5EUVOiW4hA1BqnWtZ3ahtgEIZy76Mvy8+8o+zY8PJc/jRiZMcRC
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5936
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -230,200 +233,17 @@ X-Virus-Status: Clean
 
 
 
-On 9/29/25 11:49, E Shattow wrote:
-> Hi Michal,
-> 
-> On 9/29/25 00:08, Michal Simek wrote:
->>
->>
->> On 9/23/25 23:18, E Shattow wrote:
->>>
->>>
->>> On 9/22/25 07:51, Marek Vasut wrote:
->>>> On 9/22/25 4:02 PM, Michal Simek wrote:
->>>>>
->>>>>
->>>>> On 9/11/25 07:40, Michal Simek wrote:
->>>>>>
->>>>>>
->>>>>> On 9/11/25 05:28, Marek Vasut wrote:
->>>>>>> On 9/10/25 9:26 AM, Michal Simek wrote:
->>>>>>>> In case of ENV_INVALID (uninitialized variables) the first env
->>>>>>>> location
->>>>>>>> should be used for storing variables.
->>>>>>>> That's why change the logic how env_valid is setup to be aligned
->>>>>>>> with
->>>>>>>> offset calculation.
->>>>>>>> This will also fix the print about Valid environment is showing
->>>>>>>> proper
->>>>>>>> location where variables are saved for the first time.
->>>>>>>> And also fixes behavior where the first two writes were going to the
->>>>>>>> first location instead of the first to the first location and
->>>>>>>> second to
->>>>>>>> second location.
->>>>>>>>
->>>>>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
->>>>>>>> ---
->>>>>>>>
->>>>>>>> Changes in v2:
->>>>>>>> - Simplify commit message
->>>>>>>>
->>>>>>>> Origin commit message with more technical details.
->>>>>>>>
->>>>>>>> When both location for variables are not valid (or empty) gd-
->>>>>>>>> env_valid is
->>>>>>>> 0 (ENV_INVALID) which is setup by
->>>>>>>> env_sf_load()/env_import_redund()/env_check_redund() calls.
->>>>>>>>
->>>>>>>> When saveenv is called in case of SPI env_sf_save() is called which
->>>>>>>> contains logic which describes new/old variable locations.
->>>>>>>>
->>>>>>>> if (gd->env_valid == ENV_VALID) {
->>>>>>>>            env_new_offset = CONFIG_ENV_OFFSET_REDUND;
->>>>>>>>            env_offset = CONFIG_ENV_OFFSET;
->>>>>>>> } else {
->>>>>>>>            env_new_offset = CONFIG_ENV_OFFSET;
->>>>>>>>            env_offset = CONFIG_ENV_OFFSET_REDUND;
->>>>>>>> }
->>>>>>>>
->>>>>>>> In case of ENV_INVALID option the first location is used (else part)
->>>>>>>> and variables are saved with ENV_REDUND_ACTIVE flag.
->>>>>>>> The second location flag is rewritten to ENV_REDUND_OBSOLETE.
->>>>>>>>
->>>>>>>> And
->>>>>>>> gd->env_valid = gd->env_valid == ENV_REDUND ? ENV_VALID :
->>>>>>>> ENV_REDUND;
->>>>>>>> is executed. env_valid is ENV_INVALID that's why ENV_REDUND is setup
->>>>>>>> but that's not correct because the first location has been written
->>>>>>>> and not
->>>>>>>> the second one.
->>>>>>>> That is confirmed by
->>>>>>>> printf("Valid environment: %d\n", (int)gd->env_valid);
->>>>>>>> which is showing number 2 (ENV_REDUND).
->>>>>>>>
->>>>>>>> That's why change the logic how env_valid is setup to be aligned
->>>>>>>> with
->>>>>>>> offset calculation which also cover the case where initial state is
->>>>>>>> ENV_INVALID.
->>>>>>>> Then print about Valid environment is showing proper location where
->>>>>>>> variables are saved for the first time.
->>>>>>>> But also it is fixing behavior where the first two writes are going
->>>>>>>> to the
->>>>>>>> first location instead of the first to the first location and
->>>>>>>> second to
->>>>>>>> second location. Alternation is happening after it.
->>>>>>>>
->>>>>>>> v1: https://lore.kernel.org/
->>>>>>>> r/03aa59f72f47fe0ecafd1e1ca52cbb8a5a8f0446.1755613540.git.michal.simek@amd.com
->>>>>>> Sorry for not being clear, the original commit message structure and
->>>>>>> technical details were fine, it only needed slight rephrasing, in
->>>>>>> the original form it was very hard to understand. Can you please
->>>>>>> reinstate the original commit message and only clean it up slightly ?
->>>>>>
->>>>>> Can you exactly point me to part which wasn't clear? It has a lot of
->>>>>> details about flow and obviously it makes sense to me that's why I
->>>>>> would like you to point me to exact part which should be improved.
->>>>>
->>>>> What about this?
->>>>>
->>>
->>>>> When both SPI environment locations are invalid (gd->env_valid ==
->>>>> ENV_INVALID), the first call to saveenv writes to the primary location
->>>>> and sets the active flag. However, the logic for updating gd-
->>>>>> env_valid incorrectly sets it to ENV_REDUND, which does not match the
->>>>> actual location written. This causes the first two writes to target
->>>>> the same location, and alternation only begins after the second write.
->>>
->>> nit, the use of word "alternation" here reads as splitting (no
->>> duplication) the data one-by-one into multiple targets. I would give the
->>> game analogy of 52 playing cards and alternating to deal the cards to
->>> players, each player gets one card in a sequence of alternation; if
->>> there is more than one player in the game then no player will get all
->>> the cards from the action of dealing the cards.
->>
->> tbh before this patch I though that both copies are the same but that's
->> not how it is implemented.
->> It is switching from Location A to B and then to A, etc.
->>
-> 
-> Okay. That is also surprising for me.
-> 
->>>
->>>>>
->>>>> Update the logic to alternate gd->env_valid based on whether the last
->>>>> write was to the primary or redundant location, ensuring the first
->>>>> write sets ENV_VALID and subsequent writes alternate as expected. This
->>>>> aligns env_valid with the actual storage location and fixes the
->>>>> alternation sequence from the first write.
->>>>>
->>>>> With this change, the "Valid environment" printout correctly reflects
->>>>> the active location after each save, and the alternation between
->>>>> primary and redundant locations works as intended from the start.
->>>> Yes, perfect.
->>>
->>> I do not understand what this description is saying because alternation
->>> of write operations to multiple targets would not be redundant.
->>> Alternation with the meaning of "fail-over" is similarly not redundant.
->>
->> How the code is written is that you have location A and B.
->> And when you call saveenv variables are written to A.
->> And next saveenv variables are written to B.
->> Next to A, etc.
->>
->> It means unless you call saveenv twice you never get data in A and B equal.
->>
->> It means it is not alternation of write operations to multiple targets.
->> It is alternation of location where one complete write is done.
->>
->>>
->>> An alternative method has the meaning of "do something else, do not do
->>> this". In the common use, an alternative may have the meaning of "do
->>> something else if needed as fail-over from what is first being
->>> attempted". Do you intend for the meaning of "fail-over" and "duplicate"
->>> or "duplication" where you have written "alternate" and "alternation"?
->> I am not a native speaker but the word alternation between A/B sounds
->> the best for me.
->> Feel free to suggest how to describe it better.
->>
->> Thanks,
->> Michal
->>
-> 
-> This is not easy to describe with a small quantity of words. The common
-> phrases are "taking turns" and/or "round-robin".
-> 
-> It is clearer to say what this is not, as:
-> 
-> "... results in alternation of saveenv location with each invocation.
-> Data is not duplicated or striped between locations for any single
-> saveenv invocation."
-> 
-> I like your explanations, you understand the functionality and can
-> describe the problem clearly. I just do not expect that functionality
-> would be useful so without additional context and full explanation it
-> seems unlikely to be what you say it is. Thank you for expanding on the
-> meaning.
+On 9/29/25 14:13, Marek Vasut wrote:
+> On 9/29/25 8:24 AM, Michal Simek wrote:
+>> Enable SNTP commands on all Xilinx boards.
+> Look at #include in configs/ , that should let you deduplicate xilinx configs.
 
-What about this full description?
-M
+Good suggestion. We have actually started to use it for mbv defconfig in our soc 
+tree. It should be sent out soon.
 
-When both SPI environment locations are invalid (gd->env_valid == ENV_INVALID),
-the first call to saveenv writes to the primary location and sets the active 
-flag. However, the logic for updating gd->env_valid incorrectly sets it to 
-ENV_REDUND, which does not match the actual location written. This causes the 
-first two writes to target the same location, and round-robin switching only 
-begins after the second write.
+The only problem is to keep that config options aligned with Kconfig layout.
+Maybe you have any trick for it.
 
-Be aware that data is not duplicated or striped between locations
-for any single saveenv invocation.
-
-Update the logic to perform round-robin selection of the environment location
-based on whether the last write was to the primary or redundant location,
-ensuring the first write sets ENV_VALID and subsequent writes follow the
-round-robin pattern as expected. This keeps gd->env_valid consistent with
-the actual storage location and fixes the sequence from the very first write.
-
-With this change, the "Valid environment" printout correctly reflects the
-active location after each save, and round-robin switching between primary
-and redundant locations works as intended from the start.
+Thanks,
+Michal
 
