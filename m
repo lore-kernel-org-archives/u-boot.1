@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADF6CAC5B9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:07:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 718E9CAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAC148319C;
-	Mon, 29 Sep 2025 18:07:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3AEB18344E;
+	Mon, 29 Sep 2025 18:07:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TFJQ3Cui";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ukc5SWLi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E150832DA; Mon, 29 Sep 2025 18:07:23 +0200 (CEST)
-Received: from mail-oo1-xc33.google.com (mail-oo1-xc33.google.com
- [IPv6:2607:f8b0:4864:20::c33])
+ id E005F834E1; Mon, 29 Sep 2025 18:07:30 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A70582A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:07:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD2868341C
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:07:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc33.google.com with SMTP id
- 006d021491bc7-646d66626a4so478665eaf.0
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:07:20 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7b3e2a51678so1592469a34.1
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:07:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759162039; x=1759766839; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SFl8fh0p7b1fpaS2n9C5CYzVJuTqygHJKfXyM92LQ4I=;
- b=TFJQ3CuiWMX47sgSLgRLZu/aA4S/vpJnGH8tg4wNnjzj9EfjsjyUtVREa1FdyCfh1q
- tVvL5CCXc4Hu6hnP9f5vAy29Ui99/uQjFwYGTP7SWR8OpXmg+5+44pXJqsCjIvTsNYiF
- y3v1d19kmaiNhtVmIof9jGqspK9Z0yt428h+Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759162039; x=1759766839;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1759162047; x=1759766847; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SFl8fh0p7b1fpaS2n9C5CYzVJuTqygHJKfXyM92LQ4I=;
- b=o6lBxnPsVkv0cCX/V7C9zedgofUzjKZQ9hFvh8O/0m6M6kJZPyVCDbxBmpr/NzkwLP
- T90bTPgFvL9mxTxFKE0Hc9ZeJpKuCuGPr5f/URrWL7v2Ma4mxMdAUp+XRfbDCtVD1SVK
- YhNfbMVHxF6sVMgSaBsoLCspcHqcISOm34BNur1Jsmpj8JY3oUukCe28hoa3XXhux/4u
- jE1h8Kew7Tk63nlWPluOQD00Bzo8R7pnQM4AIVsMnO4N8zOusK9A6k/y/tzlgKTgbSF1
- uTrutuRpiccrBCsEKcKhjcZRsHogfXatwCcHLDQsCx5qpI2vCuLOPl6RE818saikBvLQ
- 7QMg==
+ bh=jgiL8BOEARhDjXQ5BQNhMMUH4hG0HZBxF78zElnTbfA=;
+ b=Ukc5SWLi1m5BkGK/Er+KBw005QgzFAVs+n62qR5vsf9p4YExALaQ25hs2F+BWZs7Pf
+ Cn6NiK2zbiCa5X+s+79QYzGAyuCxsgDzuu6b00zODNcUCHLnK4OvkzMuPjR5IqpOc1OY
+ 6zxpdoqosjsFQuICb6vwEY8cv786OVT68q5i8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759162047; x=1759766847;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jgiL8BOEARhDjXQ5BQNhMMUH4hG0HZBxF78zElnTbfA=;
+ b=n0A04xw6J5WtwPWbyoFjb5JAVjvilfp3H1u4BeIq9VWs98fKxoE3bHzzDd8J/YD84W
+ 9ob/s9kLcvmL53/wSINOQqv5eHvD5KN1nVDyNY6UmhZT2s/5SV/biLPrcMHPPyruDp/s
+ DVtatePdwpF7ZVrFcLSyzFxDLhlq36n2GD9nCr+AiL9PLE0XjZEq2qwKw646aVva00bw
+ VbW/M1NFgzHcKAsyXZJsO4aOOLkvraif099ELeSXBTbWrHgjB8KENEiqiC5YFzuQDgWq
+ XbpCk1Dv2xQKJUadcxFWbL2PRBH49sFKevOenG3XJiagSy5axtICKliNiH/SZJS3Vi5z
+ hsCQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdFpm2OsWVJLv2LVrkrOZ8jzZ93DgFvwN9uWiBdaoI3hl27465QojQvUwlInm5umC8AVkZObY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxPPTmfXlg2p3uKRWDSMjR9yysG2B+5O1gx5aO+hdJIcPdvXe1S
- M7hMZO+vhrmI7lRkhV5l69vtw+UQzBj+2DIstncg79wxwPlSXwvPiOHVXT2bn+0oqNASgP18AXc
- a03mqsuo=
-X-Gm-Gg: ASbGnctj+1GUAxqGH+FORc0DV166fy2v3QkOrLS6MPdaKcAt/PaFYISU1zZo2Q2cEgf
- lVi59xWDz+4gJJ9MmiBYKIlXX5j9QHan+7X2OlTj58Y2i8wkR2SxCMVltHd83bvALhuJIKSV2wp
- 1hNFONIj7G2+mXsikVWzf+2VrZkKA4HEhrm/sX8Vq30wINIWtnMutksOnuEKDuEdiqQFAiF2jIY
- j3ES141vBvBw8aOPEQli2TOop9ZTxVluo/B9ygZmpS5tZMUgqH7VEGdgrRjAR76S9EpAm2ToKwe
- oO7YjhT3Mf5FWnADePJ3+ARJq6TyY2ypRVw9FwTN2TdfVBFF1kNeSKzQP/TTzbfkQ8IUFbcxr5l
- KDBnXxSNbZHBbHyzOTroQBB3ISEZiyno04c+UhXJ8hAZfCQ6EZDRbbhEy
-X-Google-Smtp-Source: AGHT+IERNYAuOVLGA6vamFK2O6VtMZ8x4/q5HYFV3lRWXJMFvNmqB/sqjaFEonl0WnZ7BCRcRMU48A==
-X-Received: by 2002:a05:6820:827:b0:632:c3dc:2e48 with SMTP id
- 006d021491bc7-63a36599816mr8183483eaf.3.1759162039032; 
- Mon, 29 Sep 2025 09:07:19 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-63b25ef3fa4sm1220366eaf.14.2025.09.29.09.07.17
+ AJvYcCVw0iITtr3/xS3XDLMPUFiZ2F//zfNxL62PJ0RFWoPRQFVPKt6WtZsUPQKb5rRGSrteRy5p564=@lists.denx.de
+X-Gm-Message-State: AOJu0YwqqFFauRX3LV+xE8gw7ZEVcaoz068L6SP4Vla/fkn6/wRrH3cM
+ ryYtwA1xymLu4KBa9wsQll1+wi3xG62uGDVjbgks8EN8setTj+Pr9pJs7YgiNbA2JEg=
+X-Gm-Gg: ASbGncvsacqbT35o7cZgsBGBQ40RqM+eoiVFWr1zpnYIqjio/zN1OQQve8kul1pHdRd
+ gJ5OB1x/BOUjd2HZ8Xyzg/4AW1i7ZTOjNeqIe3cOb8e08P1e9D1p3XQrt2NpIQDMDryo4XqKCts
+ egi2OhlTdzIXuiaiHhZis6WZo0ILJSKrbUvnOBrVgZtCSmyae8+Lm+4ngwtNkFZmuvypKWi9F9f
+ W99/cSr4N9ve7rhKNNtgD44SANwrbsRSQFmHr3uL1mK0BxDzWKid3G8lynVhLIoap4KGk0ovit4
+ M6X9Yjt8/RgUeFtzkKdtaLzIEN72ZD2FA7HFG/r7THF/TOk+dHPLKJzKlnm80f1wlzhFNy5fgax
+ fMfyCJbMiNw7icpH3IU8pBDUlpR0mNa7dHqV1Bu6wqNmSXcAhfnl0MAFYN3nYsLeKUg==
+X-Google-Smtp-Source: AGHT+IFaiA+7X9E4TI/5x2CzmXHeCzQr7Gey3ajvhCV3/6yuwAK9Tsl795TL1NwmV6XcY3W80vt6fg==
+X-Received: by 2002:a05:6830:258a:b0:79a:2e2e:4f9d with SMTP id
+ 46e09a7af769-7bc55a924a7mr496136a34.12.1759162047510; 
+ Mon, 29 Sep 2025 09:07:27 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-97-42.totalplay.net. [189.203.97.42])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7a23e1682f4sm2689213a34.22.2025.09.29.09.07.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 09:07:18 -0700 (PDT)
-Date: Mon, 29 Sep 2025 10:07:16 -0600
+ Mon, 29 Sep 2025 09:07:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH] b4-config: configure `b4` for U-Boot
-Message-ID: <20250929160716.GA360299@bill-the-cat>
-References: <20240717-b4-config-v1-1-0bc9e80ef582@flygoat.com>
- <9caf5b15-971f-43e6-be8a-c6a2f4bd0bb1@cherry.de>
- <f7dca457-d947-4fe4-972d-2ce388d4311e@app.fastmail.com>
- <20240717180500.GT561963@bill-the-cat>
+To: bigunclemax@gmail.com
+Cc: Heiko Schocher <hs@nabladev.com>, 
+ Wojciech Szamocki <wojciech.szamocki@nokia.com>, 
+ Dinh Nguyen <dinguyen@kernel.org>, u-boot@lists.denx.de
+In-Reply-To: <20250926100530.732938-1-bigunclemax@gmail.com>
+References: <20250926100530.732938-1-bigunclemax@gmail.com>
+Subject: Re: [PATCH v1] i2c: designware_i2c: Don't warn if reset DT
+ property is not present
+Message-Id: <175916204661.360535.7538811434667491772.b4-ty@konsulko.com>
+Date: Mon, 29 Sep 2025 10:07:26 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1kjjDfrqVVqeP1t2"
-Content-Disposition: inline
-In-Reply-To: <20240717180500.GT561963@bill-the-cat>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,62 +100,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, 26 Sep 2025 13:05:26 +0300, bigunclemax@gmail.com wrote:
 
---1kjjDfrqVVqeP1t2
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> If reset property is missing in DT, then we get this warning:
+> 	designware_i2c@0: Can't get reset: -2
+> 
+> Avoid this by checking if reset DT property is present, first.
+> 
+> 
 
-On Wed, Jul 17, 2024 at 12:05:00PM -0600, Tom Rini wrote:
-> On Thu, Jul 18, 2024 at 12:44:03AM +0800, Jiaxun Yang wrote:
-> >=20
-> >=20
-> > =E5=9C=A82024=E5=B9=B47=E6=9C=8817=E6=97=A5=E4=B8=83=E6=9C=88 =E4=B8=8B=
-=E5=8D=8811:26=EF=BC=8CQuentin Schulz=E5=86=99=E9=81=93=EF=BC=9A
-> > > Hi Juaxun,
-> > >
-> > > On 7/17/24 5:12 PM, Jiaxun Yang wrote:
-> > >> `b4` is a commandline tool to make patch-based development easier[1]
-> > >>=20
-> > >> Provide a .b4-config file to match U-Boot's patch preference so it w=
-ill
-> > >> be easier for people to use b4 with U-Boot development.
-> > >>=20
-> > >
-> > > I've been using b4 with the default settings for a few months already=
-=20
-> > > (i.e. without arguments, without .b4-config), is there something=20
-> > > specific that made you want to override the default values?
-> > Hi Quentin,
-> >=20
-> > As per U-Boot's contributing guide [1], it is preferred to send patches=
- to
-> > u-boot@lists.denx.de and cc custodians.
-> >=20
-> > But B4's default behaviour is sending patches to custodians and Ccing
-> > mailing list.
-> >=20
-> > Thanks
-> > [1]: https://docs.u-boot.org/en/latest/develop/sending_patches.html
->=20
-> Honestly, it's not a big deal these days I think.
+Applied to u-boot/master, thanks!
 
-I'm applying this now because we had another thread where having b4 cc
-more people came up, and I missed at the time this patch was posted that
-it solved the problem we had. Sorry about that!
-
---=20
+[1/1] i2c: designware_i2c: Don't warn if reset DT property is not present
+      commit: 522a58af836598918758b41b110a73f35b9335ba
+-- 
 Tom
 
---1kjjDfrqVVqeP1t2
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNqutAAKCRAr4qD1Cr/k
-CpEFAPsE+2gzYFiAGVs11lnNCziarQHWFPupLeF/51RI5LbVtAD/cePUGANTd8bf
-akJHeVAxQAaa3PnC9wi6nwGm7amVWw4=
-=kzfS
------END PGP SIGNATURE-----
-
---1kjjDfrqVVqeP1t2--
