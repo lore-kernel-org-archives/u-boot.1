@@ -4,89 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B24CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 20:55:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 139F5CAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 20:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95714833E9;
-	Mon, 29 Sep 2025 22:55:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 785F88319C;
+	Mon, 29 Sep 2025 22:59:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="P4hghtL6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uIHu42ET";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 241B58341C; Mon, 29 Sep 2025 22:55:29 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id 73646832AD; Mon, 29 Sep 2025 22:59:18 +0200 (CEST)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D79A28329F
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 22:55:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F67882A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 22:59:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7b7325d8fb5so1278846a34.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 13:55:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=javier.tia@linaro.org
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-89018e97232so1050315241.0
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 13:59:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759179325; x=1759784125; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hJRen3WJ8Gz5s2N0JNw9EUfPOPVMdkiKN9gdRdgBwJA=;
- b=P4hghtL64zVMsnI2nd7WRmc8qLiatFsRAd/oMhu4lHyFzIXVDIWMQq1uLtP8+i2CNz
- 8Fhf5XQr7Air02ofHBDBcSRaYQlVwcYLDksNEQwwO9KLH94Am5d9WLZiomToRU9XTmyT
- ofQNGZMarygA7sitT+KDSdUjcf60WoKNw5wZw=
+ d=linaro.org; s=google; t=1759179554; x=1759784354; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=yVQ02PRUuSSPNLOT5GE3nUXkGUAaEpMc2UoZmQV2bpY=;
+ b=uIHu42ETYs3jWbQB7+McC9c+sAb0DnN6TT1jZgfS9+1jYsWnoGmJ11ZPngSmm6iK4y
+ mJJGVOFhIyZ7j20pxa/XukUvLGgsp470SLEh1b8jSoS9jzQb5OABgOB392X8k6Lonm+g
+ wSPrzV0wqG0Z0uklTZmhIOwTIYl0ir8xiv0vl93Z0TxqqkbXUfGna0oNTD+d+RbA4iyf
+ g2V9actr8RKrSLFUrb7Bi9rV2S7VeoUXul8PhgVqvwpOAf0bUnMUvNK434ESGXCfTgcH
+ JKmpEhB8tL+peW5Ysx2eEk8cL79Iqg0YGDicuj941FTOpp6McIG6ckZrpaAqrmEhsiSM
+ vDBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759179325; x=1759784125;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hJRen3WJ8Gz5s2N0JNw9EUfPOPVMdkiKN9gdRdgBwJA=;
- b=wthyCScGxi40X9D+ZTsUpfZKTOu2838uPQ9Ucqj+4KxfuGXzlmvmQlmhmJX+2JL4/j
- L3bal7SsEn0WsblSTgYlLCpFZwmrfxQhRHgsEGJ9wOSs7DUVCcjAShH91IbhikK6CXKF
- EY8iIwvP2yTBXKVY/GfY98q2/J5RCb9spuGSZPQQkNOaxnPjXQJM3i2SYoVQGHF3sY4t
- hlN+HaUWbpeVlj2eb55m/9cGzN0qIPiFKJHAFurVTCaTehTk87RI1dt6Ct2sxJUQCwjf
- KAw2Ngk4w/2RUIkUfaqJC+BRTltoWbrPAByPPu885ThXWjDRj6OG/xOBNQNKtosw+aLg
- PRLQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWVIj8sEs3Ja78Op4hM2wPgnffx7k6XMqC2GZrSuAaoQg02Vimm7dBufyU7qzTFb6YXf4aRmIM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz+0aZSiJwz5fx+yvjCyWKGwgu6DhKzsXQV6FUqGIJe8lE3rFE6
- YsdPf+M+TREeDhL0O2jeOA3jdZUp91wWakNV0zmNZLr9tVKXsoljvvtAHc5xnU16ljcNmFTroLU
- qzgJmpYU=
-X-Gm-Gg: ASbGncvqUsSsr5KmhU8OHV2nus7e+ht3XbgQulkOakZ4arziuvzRlYtveOIU1R64OQb
- IoMVL8sXk99nT6L7KoOD6IrWYQeqcnou0SX5OdTZo5yILHM7wdeeo6GBvkM1AHu4PV9z30g2vVE
- IgAFX401t+cAHjlga7TI9Aey78C9JQpWhquIkM/kuchUy74Q3UnyeIT9zuQOtXsz/bkleJUDlkM
- ue02NbRAhretqtSV6DS4PK+OLUW2XNNSHaWfitIylzlqk9LFr6oO56hkgclOTLMM0szP2iI0gtt
- 2Dsvyr7yvsLL+gEVeJrvyQOl8wg2+MnQ9l5gH7V5353zGlfUBR1/904GrE9iauZ3UEJ8jbCc2bq
- n/hvI3blSimSfSxBEe2wYop63/mGNtG4FavjX1Q4wZ8ot+usehi7ueUYjgj0sTEof3ZE=
-X-Google-Smtp-Source: AGHT+IER/sPD7WNoHN0bkgtjncXGLOWE9GDfPQdV4Gql8p5CR6+BIvanov/oWIyazK/eQx1Rq2Wt2Q==
-X-Received: by 2002:a05:6830:6ad5:b0:746:3226:c68f with SMTP id
- 46e09a7af769-7a801bde497mr9511786a34.4.1759179325558; 
- Mon, 29 Sep 2025 13:55:25 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7a6dc805845sm2454049a34.6.2025.09.29.13.55.24
+ d=1e100.net; s=20230601; t=1759179554; x=1759784354;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yVQ02PRUuSSPNLOT5GE3nUXkGUAaEpMc2UoZmQV2bpY=;
+ b=PV3DDikbwEQb74rskEkCb0TXTvxCTVOfsp74NZkDe9Lxi2r27WEdEZvSASeEv9asfr
+ 0LXbBULgbQpsMUlAvlQWExD2EoYx1fIeISPqHAVTV9/Oa5w3En/LVhgB0SeNZhO1ynPq
+ xZQ/HJoLfSCwBYRrgcGGMFVOOhx2wVP4OO3fVLDv9sRVptpU8rGHt41vV7JhNwObTlm9
+ vQ4BTd8G06jERPOkl2X5QaJ9k5HCEezNkogBCgSw5bOI4jvlLLkcXbyOPP6Lywe7LejR
+ EH1DCRpcdRjHVbTxZwHc6PzQjLKdCd51zj6zExkbYdOAl51wsf92IPOE6xQW7LUXWCWN
+ mjZw==
+X-Gm-Message-State: AOJu0YzG1KdplSPjgszTpQBM8vvgf7q92Hf9fz3IVvqtz4en90lnd7Z3
+ aWi4XNqajxUJ0xC4/caWXzYE4fiRNuh7tGPxtBfhOULh13+UcmiZVZUO5PTyfCe+Xvp8hMiZfUA
+ WNOs2
+X-Gm-Gg: ASbGncvgLzkAM9WXEvYwvwJKv/hIQMaJXT85sjEdAv4FBdCQXHJ0MYUMKPWQ6qFgj13
+ Z2o7k70Q524wIMUUY6ngz57XNA6eokUdesUm91Zi49QWU8b1UdtJkd7bnvBG47CBBNwhEvAe5HA
+ S5rJ8kRSGH9crIdTBP/SYPpEH2r2qrCCNkXWX8eTq/HcbMstWsxva46Tts3tkKJTJIVwPi2vVs2
+ c1C05JOjo3C10UBG58JhdOOQLWIVsbX39N1yNH6Audgp3BgoFlsiTnYH2pThcmnYLHZtfbpeajm
+ MKZNCUxC4NcVy9IWOL1Jy8e/BhJYTG8ZcgZmwd3CBxNRUb00G4B3mlm3pO//Audc7+o8JNm3VY3
+ q1GUNO3uFDzbgRWXc3/zkul83FvCuPEA7oy4d4pbj34r6he1yqYL8KjW/
+X-Google-Smtp-Source: AGHT+IEFeRppmoZNAtcGLt+OYgXxtmoEGksd1qENIfb9L196O7WSHb7pk8qC/V6P7C/cTBKv7aUMrg==
+X-Received: by 2002:a05:6102:c4a:b0:525:df9e:9365 with SMTP id
+ ada2fe7eead31-5accd2151f1mr7306696137.16.1759179553836; 
+ Mon, 29 Sep 2025 13:59:13 -0700 (PDT)
+Received: from jetm-rog-crosshair-hero-x870e.local ([177.93.10.188])
+ by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-916d878c126sm2610922241.11.2025.09.29.13.59.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 13:55:24 -0700 (PDT)
-Date: Mon, 29 Sep 2025 14:55:23 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Yao Zi <ziyao@disroot.org>
-Cc: Beiyan Yun <root@infi.wang>, u-boot@lists.denx.de
-Subject: Re: [PATCH RESEND 4/4] doc: bindings: add Aquantia PHY node's
- "firmware-name" binding
-Message-ID: <20250929205523.GQ6093@bill-the-cat>
-References: <20250923071315.276114-1-root@infi.wang>
- <20250923071315.276114-5-root@infi.wang> <aNKWLNH0ZhqFckNl@pie>
- <A93BFAC5-DB33-43E5-973B-58AF65EC23D2@infi.wang>
- <6689E83F-4029-4BD5-8AE9-20B9BC3D1A5C@infi.wang>
- <aNkyUAyL2mXvQ-KN@pie>
+ Mon, 29 Sep 2025 13:59:13 -0700 (PDT)
+From: Javier Tia <javier.tia@linaro.org>
+Date: Mon, 29 Sep 2025 14:58:54 -0600
+Subject: [PATCH v2] doc: Update coding style to recommend b4 for patch
+ submission
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="c3PPTtj+b4nApoKs"
-Content-Disposition: inline
-In-Reply-To: <aNkyUAyL2mXvQ-KN@pie>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250929-b4-docs-v2-1-478285f08639@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAA3z2mgC/2WMQQrCMBBFr1Jm7UgSTLCuvId0MSZpOyCJTCQoJ
+ Xc3duvq8z6Pt0GJwrHAZdhAYuXCOXUwhwH8SmmJyKEzGGWsGs2I9xOG7As6Fchap2blCLr9lDj
+ zey/dps4rl1eWzx6u+vf+N6pGhWSd16TPfez1wYkkH7MsMLXWvmEcX+ifAAAA
+X-Change-ID: 20250929-b4-docs-60da5560f06a
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Javier Tia <javier.tia@linaro.org>
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,125 +101,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Replace references to patman with b4 as the recommended tool for
+preparing and sending patches. b4 is widely adopted in the Linux kernel
+community and U-Boot ships with configuration to simplify its use with
+the project mailing list.
 
---c3PPTtj+b4nApoKs
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The updated guidelines describe how to prepare series with b4, handle
+cover letters and recipient lists, run style checks, and send patches
+safely. Instructions also highlight how to collect and apply review tags
+before resending.
 
-On Sun, Sep 28, 2025 at 01:04:16PM +0000, Yao Zi wrote:
-> On Fri, Sep 26, 2025 at 05:30:03PM +0800, Beiyan Yun wrote:
-> >=20
-> >=20
-> > > On 26 Sep 2025, at 4:22=E2=80=AFPM, Beiyan Yun <root@infi.wang> wrote:
-> > >=20
-> > >=20
-> > >=20
-> > >> On 23 Sep 2025, at 8:44=E2=80=AFPM, Yao Zi <ziyao@disroot.org <mailt=
-o:ziyao@disroot.org>> wrote:
-> > >>=20
-> > >> On Tue, Sep 23, 2025 at 03:13:01PM +0800, Beiyan Yun wrote:
-> > >>> With the switch to generic firmware loader, "firmware-name" binding
-> > >>> was introduced to define the firmware filename.
-> > >>> Provide the document and usage examples.
-> > >>>=20
-> > >>> Signed-off-by: Beiyan Yun <root@infi.wang <mailto:root@infi.wang> <=
-mailto:root@infi.wang>>
-> > >>=20
-> > >> IMO this patch should go before the driver change.
-> > >>=20
-> > >>> ---
-> > >>>=20
-> > >>> doc/device-tree-bindings/net/aquantia-phy.txt | 30 ++++++++++++++++=
-+++
-> > >>> 1 file changed, 30 insertions(+)
-> > >>>=20
-> > >>> diff --git a/doc/device-tree-bindings/net/aquantia-phy.txt b/doc/de=
-vice-tree-bindings/net/aquantia-phy.txt
-> > >>> index 7dd3d45df12..1227c04d04f 100644
-> > >>> --- a/doc/device-tree-bindings/net/aquantia-phy.txt
-> > >>> +++ b/doc/device-tree-bindings/net/aquantia-phy.txt
-> > >>> @@ -11,15 +11,45 @@ a custom firmware is needed for each integratio=
-n of a PHY.
-> > >>> Several optional bindings are defined that allow these configuratio=
-n points to
-> > >>> be driven by the PHY driver and reduce dependency on specific FW ve=
-rsions.
-> > >>>=20
-> > >>> +Aquantia PHY's firmware is often provided by PHY-resident SPI flas=
-h; if absent
-> > >>> +or outdated, U-Boot can upload firmware over MDIO during PHY initi=
-alization.
-> > >>> +The driver uploads only when the PHY reports missing firmware or a=
- fault.
-> > >>> +
-> > >>> Optional properties:
-> > >>> mdi-reversal: 0 or 1 indicating that reversal must be disabled/enab=
-led.
-> > >>>              Firmware default is used if the property is missing.
-> > >>> smb-addr:     I2C/SMBus address to use, firmware default is used if=
- the property
-> > >>>              is missing.
-> > >>> +firmware-name: String containing the filename of the PHY firmware =
-to load
-> > >>> +               (only when CONFIG_PHY_AQUANTIA_UPLOAD_FW is enabled=
-).
-> > >>=20
-> > >> This looks good to me, but I have a question: should we switch to the
-> > >> upstream binding for aquantia phys? It's already documented as
-> > >> marvell,aquantia.yaml, and we could avoid the burden of maintaining a
-> > >> separate binding file.
-> > >>=20
-> > >> The "firmware-name" property is already described in the upstream
-> > >> marvell,aquantia.yaml, and it only misses the smb-addr property. The
-> > >> only U-Boot boards making use of this property are fsl-sch-30841 and
-> > >> fsl-sch-30842, thus such conversion shouldn't be a big job.
-> > >=20
-> > > Good point. I=E2=80=99ll add a bit more info in related Kconfig optio=
-ns and drop the doc.
-> >=20
-> > Hmm, I=E2=80=99m a bit lost. Here=E2=80=99s some of my concerns:
-> >=20
-> > - Upstream binding has an optional nvmem cell as firmware source, such =
-mechanism
-> >    simply doesn=E2=80=99t exist in U-Boot. This could be misleading.
->=20
-> I think it's okay to support part of the binding in U-Boot: the goal is
-> to reuse upstream binding, avoiding the burden of maintaining a
-> duplication, and making it possible to share devicetree between kernel
-> and firmware (same binding means same ABI).
->=20
-> I did a brief search in the upstream dts tree, and found no consumer
-> of this nvmem-cells property, thus I don't think it's a problem, at
-> least for now.
->=20
-> > - About =E2=80=9Csmb-addr=E2=80=9D, what=E2=80=99s the best move? Do we=
- upstream them to Linux?
->=20
-> Yes, if it's really necesary for the phy to work. If you decide to
-> adapt the upstream binding in the series, then I suggest upstreaming the
-> property to dt-bindings first.
->=20
-> Anyway I think your original patch looks good to me as well, it isn't a
-> must (at least to me) to switch to the upstream binding.
+This change documents the preferred workflow for contributors and
+ensures consistency with common practices across related upstream
+communities.
 
-Figuring out how to use the upstream binding, and addressing issues /
-short-comings there is the best path forward. Maybe U-Boot will need
-some method for being able to load firmware blobs from nvme cells in the
-future for example.
+Signed-off-by: Javier Tia <javier.tia@linaro.org>
+---
+This small series updates U-Boot's contributor guidelines to sync with
+current best practices around Linux kernel patch submission. It should
+make contributing smoother for new developers.
 
---=20
-Tom
+The first patch updates doc/develop/codingstyle.rst to recommend the b4
+tool instead of patman as the standard workflow for preparing and
+sending patches. The revised documentation explains how to create and
+manage series, run style checks, handle cover letters, discover mailing
+list recipients, and collect review tags. This reflects widespread
+adoption of b4 in the Linux kernel community and ensures U-Boot
+contributors follow consistent, upstream-friendly practices.
+---
+Changes in v2:
 
---c3PPTtj+b4nApoKs
-Content-Type: application/pgp-signature; name="signature.asc"
+* Drop commit changing .b4-config
+* Link to v1: https://lore.kernel.org/r/20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org
+---
+ doc/develop/codingstyle.rst | 54 ++++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 48 insertions(+), 6 deletions(-)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
+index bc18b2ebb7b0fc875a299b9e2e5c64c3d6a8e2b3..8ed6babe4556423fe30effc504615e07a841f21a 100644
+--- a/doc/develop/codingstyle.rst
++++ b/doc/develop/codingstyle.rst
+@@ -23,13 +23,55 @@ The following rules apply:
+   <https://peps.python.org/pep-0008/>`_. Use `pylint
+   <https://github.com/pylint-dev/pylint>`_ for checking the code.
+ 
+-* Use patman to send your patches (``tools/patman/patman -H`` for full
+-  instructions). With a few tags in your commits this will check your patches
+-  and take care of emailing them.
++* Use the `b4 <https://git.kernel.org/pub/scm/utils/b4/b4.git/>`_ tool to prepare and
++  send your patches. b4 has become the preferred tool to sending patches for many
++  Linux kernel contributors, and U-Boot ships with a ready-to-use ``.b4-config`` that
++  targets ``u-boot@lists.denx.de`` and integrates with ``scripts/get_maintainer.pl`` for
++  recipient discovery.
+ 
+-* If you don't use patman, make sure to run ``scripts/checkpatch.pl``. For
+-  more information, read :doc:`checkpatch`. Note that this should be done
+-  *before* posting on the mailing list!
++  Start a topical series with ``b4 prep`` and keep the commits organised with
++  ``git rebase -i``. ``b4 prep --edit-cover`` opens an editor for the cover
++  letter, while ``b4 prep --auto-to-cc`` collects reviewers and maintainers from
++  both the configuration file and ``scripts/get_maintainer.pl``.
++
++  .. code-block:: bash
++
++     b4 prep -n mmc-fixes
++     git rebase -i origin/master
++     b4 prep --edit-cover
++     b4 prep --auto-to-cc
++
++  Run the style checks before sending. ``b4 prep --check`` wraps the existing
++  tooling so you see the output from ``scripts/checkpatch.pl`` alongside b4's
++  own validation. You can always invoke ``scripts/checkpatch.pl`` directly for
++  additional runs.
++
++  .. code-block:: bash
++
++     b4 prep --check
++
++  When the series is ready, use ``b4 send``. Begin with ``--dry-run`` to review
++  the generated emails and ``--reflect`` to copy yourself for records before
++  dispatching to ``u-boot@lists.denx.de``.
++
++  .. code-block:: bash
++
++     b4 send --dry-run
++     b4 send --reflect
++     b4 send
++
++  After reviews arrive, collect Acked-by/Tested-by tags with ``b4 trailers -u``
++  and fold them into your commits before resending the updated series.
++
++  .. code-block:: bash
++
++     b4 trailers -u
++     git rebase -i origin/master
++     b4 send
++
++* Run ``scripts/checkpatch.pl`` directly or via ``b4 prep --check`` so that all
++  issues are resolved *before* posting on the mailing list. For more information,
++  read :doc:`checkpatch`.
+ 
+ * Source files originating from different projects (for example the MTD
+   subsystem or the hush shell code from the BusyBox project) may, after
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNryOgAKCRAr4qD1Cr/k
-Cv3MAQD0CmRplZVtPVTYXdCqWu7rdKhVQe1LVnkMEU9Qv3yZtgD/XUroNvSp+zWC
-b9uLanJBnd+yjaOFoQA1R5G5N19dkQs=
-=vipA
------END PGP SIGNATURE-----
+---
+base-commit: 26efc940c865a04d345ac9d39f71746fc2821da6
+change-id: 20250929-b4-docs-60da5560f06a
 
---c3PPTtj+b4nApoKs--
+Best regards,
+-- 
+Javier Tia <javier.tia@linaro.org>
+
