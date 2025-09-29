@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86EFECAC5B9
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 21:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1F6CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 21:50:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3C368329F;
-	Mon, 29 Sep 2025 23:03:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 724168329F;
+	Mon, 29 Sep 2025 23:50:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r8acTiNL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k60+QpGZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AF4F833E9; Mon, 29 Sep 2025 23:03:52 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
+ id 446A08319C; Mon, 29 Sep 2025 23:50:47 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61EBC8319C
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 23:03:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30B668319C
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 23:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-646670c29dfso772559eaf.2
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:03:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-76c144b06fdso51134987b3.3
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759179828; x=1759784628; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FMuR5kjiavXnzCoYtYX227DDG3yMeZp5/b5r39N2vHA=;
- b=r8acTiNLqwUaudC6rjb8DoASh0zDFEbmoyJtbf9TaSd7vyAGPLlj1voyad9UWzhyzu
- 3ryRVT2K9RGkfZ3NFWJCNnN2YwI6N4EkDXZalp0q+Kb2P75btGz/3k/l51vG3rKhBtqH
- hIvgQ8SuRkGbH8oY/8wjoSAAtkY125XC+ntb4=
+ d=gmail.com; s=20230601; t=1759182643; x=1759787443; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CUBIO1zPUPoZHmaY/LZtCzPzDRPPdJVAbkDSpfyK7pU=;
+ b=k60+QpGZ6am2c9uE2W1z6UuPrMgdHPAejaPGl6nyn6PmbBhYle8KWJTU6hdIzPym4M
+ dK6Hb1C7HAbWNUVshwjDN66I9la0gWEl6wgImSm/MVmFqH58Y94ATBDt5fC7RGe4Jwiq
+ FGTq1rrL48x+NRLO5KkwCf8XQyy+8cYANqL3p0xdhzAuBCU9RL27zZP49wSgK+lPXmnT
+ Z5xmGNDZ3gyEo2QP5cgu4RbUWQmJF58USpgoRwQSmuCL7sBqZRDjDbg4I1HNEICmR79Y
+ NWckxeFC+bLRcZF2u28qnz3T5kzrNVK4oj9PM3SeP3dHTb0S7aqYU3nwIvugxnjT49ur
+ TnUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759179828; x=1759784628;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FMuR5kjiavXnzCoYtYX227DDG3yMeZp5/b5r39N2vHA=;
- b=UWNeGF9FLaNaN9Fx+Swe1qgcNtbEb1/i46/GTFCi2pRgh2nSDU0NYFqNiow4LoaseN
- Phr3iqaox3UU/UOEgDLZ18yRBiuDSblFrPhc68pqrTE94RC/6cAADv2Kzhqtkof9RU3L
- kbrm6xmy3/2nT5jws3EcRauwkekRp0Qyw4ca82NpXebE0GSg+GhmDm2mX9ERTWonMNQp
- +9pl4X9B/f+JP47ENob2uWdfI6HOyqFyT4AV2PveHilfZcMjroXYUecBTCMamPKQZA7v
- 5gOZONDirTF8swCS7Jax7h7aFY4zv6y15MDRhibZGMMEzQfLPH1LPpX/vmuxcFq0D4YD
- 18TA==
-X-Gm-Message-State: AOJu0YxHt7bragZfUCmuQTNLyVjViwyG+AUxWX8kYoWKr9FvpGpBJbb5
- ym6L3wcgZHYJfer+62yJXiyrfUsODhT2b+8KRqtp2cXXiv8PznhkxnCmsm0QS2WLXwRxKHSmxRD
- CWwd6jL8=
-X-Gm-Gg: ASbGncuYEoR+da6q1cUSmLtaP0Hr/H3Lxp9yEYHQSzEIoUaQfSxInYtoEOOnv4BZ8zu
- RDFcY6EHJRDHCTW9j8g8eEot3Bp9T9tTDQ4zBDjSTERJ6ZCjR4aBK0BaD4P1hf/LJA8j5lM1xvt
- 2eoyHuR/L7qHwnfX1w29OwaAzgWhv0hCfH+yfxpy2shgIKthm46zn2CY/clKdGtCC7kNpQXjkKa
- 5sr8EY3g5c9436shMmyUNeP1Zsy7lSTYbapu+U/scrJbDitPUqyKST0SBtu1Ci8/M1fjs48lWOi
- nfXPU2nStXocE56/s4HB2MHkwHhYwNL2kPVuTmBh0BB72FZ1s9utX/WfWclLerk4oufY3UDbakp
- K2ZNID/7LWr2/m945c9ibvXofMfCfH+ND9bTJLaazgaj/NYEKq8Q8Fz9/
-X-Google-Smtp-Source: AGHT+IG0vZC+zltnMsxzMUHbkNVaolNIw4ck+mLdh3H+Tn6iw4ehADu1cjAXTxAm+GCSGUGpN8zRfA==
-X-Received: by 2002:a05:6820:3308:b0:642:eb77:96d5 with SMTP id
- 006d021491bc7-642eb962743mr3822019eaf.8.1759179828048; 
- Mon, 29 Sep 2025 14:03:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-63b27309219sm1341117eaf.20.2025.09.29.14.03.46
+ d=1e100.net; s=20230601; t=1759182643; x=1759787443;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CUBIO1zPUPoZHmaY/LZtCzPzDRPPdJVAbkDSpfyK7pU=;
+ b=D2ujbik+2a6RIIo2tV+QF9NK9z6sTO0jly2JYqyGbJhPxCFiZ89PwcPDx88RgBTq2w
+ 1e6yolokgvFjbHDhjUuVW6mO/HQCsTk/x96J70GimVLLkhSv4HJ73rrGMPm7xqdpdAYO
+ 8zdRBOdV+RkIVCSkuC1My7BniEmMV5/i7FOcL4Lf1QEVC3/iHzomPrcvURm6sDUIX+3i
+ h+iJ3CwfWWQR7MbBtnXkTWotogb4tVXmwqcd3B8nXGuIRxnfFmweHf4zA+gu7cMun3wp
+ 13C+9CLAogdnK05qU58Czgf8KY9muuDc+nlMulIx96EmYQ3xFB2NLYcaHefAkdniB9gd
+ REVA==
+X-Gm-Message-State: AOJu0YzEAyDqmTF7LgOL8oGJjPKgDyrn7UZXSNO6vzryG+RA4M478lrq
+ WpYO/MRoflsKzcQuVF7m+7rgvKj/LqIdKwgDWDzD5/fuXYXPG/te3bXziiDZ8g==
+X-Gm-Gg: ASbGnctRpeap0poSPrDcBEXrUYpojKIypSfuxmTA3Xb+ikGyjrKXzVJB45Wist9IE4f
+ fd7bLeycqCOuxsPqFCP7DnCUwnjLM18bdlIXsbAizEkRJaSntajzgX91cRGEBv18ds7HpNwAvs5
+ JrW97BWSz6geclmSvfFEwUt3kKcmhFo836tUSo/D3zIH9HKrXm/4VeeYzSJ5qIaEkqcWy5FQhla
+ 1bkeqFT0QuVgGmyLGc4J4ruNs69rTDOZz9qUYIYbqSyqiUOz2487NmYcdtfHAblkQSlMbqVKnFu
+ NxVCRdEeoucgdKuIM6BEwLRPwZl4R9LoZyPpO2G/Wopc8ldWSc/3cfrTMp3mM3n4ly6CdRURHnG
+ LMQcXgaRxTGpz01OUKQ7I5I7MKu3OYypTL6z8nxM2SMAlNzO4hwPctimq/ocNy24zjWbm0R6rR4
+ fqYSoh6lyPEg==
+X-Google-Smtp-Source: AGHT+IGEvmtoIdRjf/NoKw3x/Le5dvyY73nMyMmPDW0OQcwwcePkgkmNNHYTcFce+LG3ui96QChppQ==
+X-Received: by 2002:a05:690c:15:b0:77e:a0c0:3ad9 with SMTP id
+ 00721157ae682-77ea0c0521dmr4778577b3.34.1759182643481; 
+ Mon, 29 Sep 2025 14:50:43 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ 956f58d0204a3-6361e8c25dasm3698366d50.4.2025.09.29.14.50.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 14:03:47 -0700 (PDT)
-Date: Mon, 29 Sep 2025 15:03:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Javier Tia <javier.tia@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] b4-config: Simplify configuration by relying on
- default b4 maintainer
-Message-ID: <20250929210345.GR6093@bill-the-cat>
-References: <20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org>
- <20250929-b4-docs-v1-2-a56c1a1856c5@linaro.org>
- <20250929205024.GP6093@bill-the-cat>
- <4a26bcd5-75a0-4dcc-ba2e-8569cbbb031e@app.fastmail.com>
+ Mon, 29 Sep 2025 14:50:42 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+	Stefan Roese <sr@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Stefan Roese <stefan.roese@mailbox.org>
+Subject: [PATCH] pci: mvebu: Unable to assign mbus windows for 2nd pcie
+ controller
+Date: Mon, 29 Sep 2025 14:49:12 -0700
+Message-ID: <20250929215006.6654-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="buiWF3s69ktg0VZj"
-Content-Disposition: inline
-In-Reply-To: <4a26bcd5-75a0-4dcc-ba2e-8569cbbb031e@app.fastmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,54 +99,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Correct the memory and IO mbus windows size increments in mvebu_pcie_bind.
 
---buiWF3s69ktg0VZj
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Currently, pcie1 controller resource_size(&mem) and resource_size(&io)
+checks result in a failure. This is because mem.end and io.end must be
+incremented at the end of pcie0 windows assignment.
 
-On Mon, Sep 29, 2025 at 03:00:00PM -0600, Javier Tia wrote:
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-> Hi Tom,
->=20
-> On Mon, Sep 29, 2025, at 2:50 PM, Tom Rini wrote:
-> > On Mon, Sep 29, 2025 at 02:39:29PM -0600, Javier Tia wrote:
-> >
-> >> Remove explicit settings for send-auto-to-cmd and send-auto-cc-cmd from
-> >> the project=E2=80=99s .b4-config. The b4 tool provides sensible defaul=
-ts that
-> >> automatically invoke scripts/get_maintainer.pl with recommended
-> >> parameters, making the custom overrides unnecessary.
-> >>=20
-> >> This simplifies the configuration file, reduces maintenance overhead,
-> >> and ensures contributors benefit from ongoing improvements in b4=E2=80=
-=99s
-> >> built-in maintainer discovery.
-> >>=20
-> >> Signed-off-by: Javier Tia <javier.tia@linaro.org>
-> >
-> > Sorry, but we just today had the thread on why the upstream defaults
-> > aren't *quite* right.
-> >
-> > https://lore.kernel.org/u-boot/20250929160453.GI6093@bill-the-cat/T/#m3=
-d26d2ca4c42d620260fedaeca5f869a41fe26e5
->=20
-> I missed that. Dropping b4-config changes in the next series. Thanks!
+ drivers/pci/pci_mvebu.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Unless there's other feedback, I'll just "b4 shazam -S -P 1 ..." this ;)
+diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
+index 77815513b76..3985bd59607 100644
+--- a/drivers/pci/pci_mvebu.c
++++ b/drivers/pci/pci_mvebu.c
+@@ -763,6 +763,7 @@ static int mvebu_pcie_bind(struct udevice *parent)
+ 			pcie->mem.start = mem.start;
+ 			pcie->mem.end = mem.start + SZ_128M - 1;
+ 			mem.start += SZ_128M;
++			mem.end = mem.start + SZ_128M - 1;
+ 		} else {
+ 			printf("%s: unable to assign mbus window for mem\n", pcie->name);
+ 			pcie->mem.start = 0;
+@@ -773,6 +774,7 @@ static int mvebu_pcie_bind(struct udevice *parent)
+ 			pcie->io.start = io.start;
+ 			pcie->io.end = io.start + SZ_64K - 1;
+ 			io.start += SZ_64K;
++			io.end = io.start + SZ_64K - 1;
+ 		} else {
+ 			printf("%s: unable to assign mbus window for io\n", pcie->name);
+ 			pcie->io.start = 0;
+-- 
+2.47.3
 
---=20
-Tom
-
---buiWF3s69ktg0VZj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNr0MAAKCRAr4qD1Cr/k
-CkVVAPwK9WenJUOGl6jwx5cnN6DVfZ2cQ4iMLBiZg2YPGsk5HwD+OKwc1AQt34fB
-GoObrMzTlxMy4VXi0czkM1hRdvPbUgQ=
-=YYSo
------END PGP SIGNATURE-----
-
---buiWF3s69ktg0VZj--
+base-commit: ce4cfd7c08136433a9ee9307e90c636102151f01
+branch: master
