@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F1F6CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 21:50:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38405CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 22:19:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 724168329F;
-	Mon, 29 Sep 2025 23:50:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F2C883071;
+	Tue, 30 Sep 2025 00:19:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k60+QpGZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yqD+qvHR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 446A08319C; Mon, 29 Sep 2025 23:50:47 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 761F8832DA; Tue, 30 Sep 2025 00:19:32 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30B668319C
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 23:50:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BBC9807B1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 00:19:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-76c144b06fdso51134987b3.3
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 14:50:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-7a79efc43e5so3814220a34.0
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 15:19:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759182643; x=1759787443; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759184367; x=1759789167; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CUBIO1zPUPoZHmaY/LZtCzPzDRPPdJVAbkDSpfyK7pU=;
- b=k60+QpGZ6am2c9uE2W1z6UuPrMgdHPAejaPGl6nyn6PmbBhYle8KWJTU6hdIzPym4M
- dK6Hb1C7HAbWNUVshwjDN66I9la0gWEl6wgImSm/MVmFqH58Y94ATBDt5fC7RGe4Jwiq
- FGTq1rrL48x+NRLO5KkwCf8XQyy+8cYANqL3p0xdhzAuBCU9RL27zZP49wSgK+lPXmnT
- Z5xmGNDZ3gyEo2QP5cgu4RbUWQmJF58USpgoRwQSmuCL7sBqZRDjDbg4I1HNEICmR79Y
- NWckxeFC+bLRcZF2u28qnz3T5kzrNVK4oj9PM3SeP3dHTb0S7aqYU3nwIvugxnjT49ur
- TnUw==
+ bh=tKFu70RJx362HanEz7cQKzukyp7KKcJY7wl0nhVb3ac=;
+ b=yqD+qvHRVzzBtLYP7+7hpqKpl13x3x3kLpyaLPQ92jWpHT1jzdPl8DW2+9RL2sj6fX
+ XAaa2gzymVWfuEXUcXmVUcm9XrkxEHChU3/EVXek0PYStXZ83huSSuDyIqPjkNTV0sqE
+ xI1ywvdlnrQ30CwLiRrNzfoifgesUoN8+6wECPKK+F48lUd14RbUQpltFCvZpRqRLqNt
+ lTyenMZFqpN8MCgdgKPDvCEA58wMGGgUeGMTgb4nDNoBMxg7wiWu/fKo0PT6Poy5C0NV
+ tKzuRyhCReRdJ1JVY8lVU8UyXrJaNcnZBiFEKTaLKtvtF1muQIJ0IO/gSyeT2GBTd5we
+ 64iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759182643; x=1759787443;
+ d=1e100.net; s=20230601; t=1759184367; x=1759789167;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CUBIO1zPUPoZHmaY/LZtCzPzDRPPdJVAbkDSpfyK7pU=;
- b=D2ujbik+2a6RIIo2tV+QF9NK9z6sTO0jly2JYqyGbJhPxCFiZ89PwcPDx88RgBTq2w
- 1e6yolokgvFjbHDhjUuVW6mO/HQCsTk/x96J70GimVLLkhSv4HJ73rrGMPm7xqdpdAYO
- 8zdRBOdV+RkIVCSkuC1My7BniEmMV5/i7FOcL4Lf1QEVC3/iHzomPrcvURm6sDUIX+3i
- h+iJ3CwfWWQR7MbBtnXkTWotogb4tVXmwqcd3B8nXGuIRxnfFmweHf4zA+gu7cMun3wp
- 13C+9CLAogdnK05qU58Czgf8KY9muuDc+nlMulIx96EmYQ3xFB2NLYcaHefAkdniB9gd
- REVA==
-X-Gm-Message-State: AOJu0YzEAyDqmTF7LgOL8oGJjPKgDyrn7UZXSNO6vzryG+RA4M478lrq
- WpYO/MRoflsKzcQuVF7m+7rgvKj/LqIdKwgDWDzD5/fuXYXPG/te3bXziiDZ8g==
-X-Gm-Gg: ASbGnctRpeap0poSPrDcBEXrUYpojKIypSfuxmTA3Xb+ikGyjrKXzVJB45Wist9IE4f
- fd7bLeycqCOuxsPqFCP7DnCUwnjLM18bdlIXsbAizEkRJaSntajzgX91cRGEBv18ds7HpNwAvs5
- JrW97BWSz6geclmSvfFEwUt3kKcmhFo836tUSo/D3zIH9HKrXm/4VeeYzSJ5qIaEkqcWy5FQhla
- 1bkeqFT0QuVgGmyLGc4J4ruNs69rTDOZz9qUYIYbqSyqiUOz2487NmYcdtfHAblkQSlMbqVKnFu
- NxVCRdEeoucgdKuIM6BEwLRPwZl4R9LoZyPpO2G/Wopc8ldWSc/3cfrTMp3mM3n4ly6CdRURHnG
- LMQcXgaRxTGpz01OUKQ7I5I7MKu3OYypTL6z8nxM2SMAlNzO4hwPctimq/ocNy24zjWbm0R6rR4
- fqYSoh6lyPEg==
-X-Google-Smtp-Source: AGHT+IGEvmtoIdRjf/NoKw3x/Le5dvyY73nMyMmPDW0OQcwwcePkgkmNNHYTcFce+LG3ui96QChppQ==
-X-Received: by 2002:a05:690c:15:b0:77e:a0c0:3ad9 with SMTP id
- 00721157ae682-77ea0c0521dmr4778577b3.34.1759182643481; 
- Mon, 29 Sep 2025 14:50:43 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- 956f58d0204a3-6361e8c25dasm3698366d50.4.2025.09.29.14.50.41
+ bh=tKFu70RJx362HanEz7cQKzukyp7KKcJY7wl0nhVb3ac=;
+ b=u3TZA83v5C7w0j4NyHiRcmovuFUOc7mHxRithM9mSFKy2lMfyY1T36X6OS0GSeOobI
+ QYJkM/Gf1G/bhMCpa2H987qU9AKB6hFRoRXg38iXihjJHlo0Hq1aNn5CgF2hwp+hCgnu
+ x97BrqDpDn/Q5jMH2JvdpTaWyaf5Lsol7yEddicxwFpq2fdYJ8dEg+kvEFaF5ZEO3cfI
+ T+T60SWfcjsCs9lEibdeWV005CM229ZoDvXsJ6Sdp/DoQz6JuqyAvdRH5r7A3euWOsxs
+ Cu1+8ukvmwqipgVGFeK1pTHLVM0R2WAKZNox0qriZ3Ie7li4VjQOXtwD1KkwXkSjw3lg
+ bXSg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXNzJNr3OIKTMohnAo6Qtv6NRJFg6Ch9/EGb5GDfD2gme6k7l6XoWEteapDRIq26otSvp1lCA8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZjrkdofvKfXZaLaK1pYOhxDECGSLhMmnDMrvfLVGjJtdpE0Hz
+ juivOHYRZNNCNBmmbl+EqIQQeyShJZkFgJHB24LV8a/JgQErhVqJQwV7cExMBMOwAMk=
+X-Gm-Gg: ASbGnctFcWG7MEd+a5sB5heB6C4kEbuXsotDLGG7DqWaZVYFytWhg2uWQbdl7j/Zawo
+ CyouVZyJHowJZ63R/cDHZfYrMVOGCXiYj+XDtc4GEGnLw2f0Dx5GzDfaQJ0C9cW7KSxzN/kAkeC
+ GWyQ9J6g4KqHsK62kXOOhSsNUiXjblsjeSey5KDKQOMm4VOy1Izpn96maz4zk7lzqvgzl2qrXOT
+ Tu4/wvTg/bIpt6gE0F4uMuef19yTawIh7U0I+Rv7Mv8a1YFflpARWC0sy4gjHAWZEbH5JONPRE2
+ hL5nRQrAcNksUDZ0Eo5cr2sYPoliyhyg9rrF3ecWJrprxsH5zrvPTVZupdzhrnokgpCQH4PAXwH
+ oCgo9Nf45HW+lqZAylVhrhO3Org==
+X-Google-Smtp-Source: AGHT+IEp18mM9bIL1EJV+V9dFd2aSCo0TrA317YxBFd1hWocpwRlo7244L6H9LtF3W3IEiX3xgpOdQ==
+X-Received: by 2002:a05:6830:2d8d:b0:790:710f:60e3 with SMTP id
+ 46e09a7af769-7a7ff0cf1c5mr5921296a34.23.1759184367548; 
+ Mon, 29 Sep 2025 15:19:27 -0700 (PDT)
+Received: from localhost ([136.49.61.16]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7a23193c8dasm2827856a34.4.2025.09.29.15.19.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 14:50:42 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>,
-	Stefan Roese <sr@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
- Stefan Roese <stefan.roese@mailbox.org>
-Subject: [PATCH] pci: mvebu: Unable to assign mbus windows for 2nd pcie
- controller
-Date: Mon, 29 Sep 2025 14:49:12 -0700
-Message-ID: <20250929215006.6654-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.47.3
+ Mon, 29 Sep 2025 15:19:27 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: Richard Weinberger <richard@nod.at>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] Revert "fdt: Make sure there is no stale initrd left"
+Date: Mon, 29 Sep 2025 17:19:26 -0500
+Message-Id: <20250929221926.29046-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,40 +98,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct the memory and IO mbus windows size increments in mvebu_pcie_bind.
+This reverts commit 9fe2e4b46458f9c4ec6b8115ebf18b4b26fe6127.
 
-Currently, pcie1 controller resource_size(&mem) and resource_size(&io)
-checks result in a failure. This is because mem.end and io.end must be
-incremented at the end of pcie0 windows assignment.
+Commit 9fe2e4b46458 ("fdt: Make sure there is no stale initrd left")
+introduces a regression in case when U-Boot transfers control to an EFI
+app which acts as a subsequent bootloading program. Such an app might
+try to set "linux,initrd-start" and "linux,initrd-end" fdt properties,
+but by that time those properties are already removed by the code added
+in the mentioned commit.
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+Particularly, the issue was observed on the E850-96 board where GBL EFI
+app [1] can't run Android successfully anymore. More specifically, the
+kernel can't see the ramdisk and panics with next messages:
+
+    /dev/root: Can't open blockdev
+    VFS: Cannot open root device "" or unknown-block(0,0): error -6
+    Please append a correct "root=" boot option; ...
+    Kernel panic - not syncing: VFS: Unable to mount root fs on
+    unknown-block(0,0)
+
+fdt_initrd() function (where initrd dts properties are removed) is
+called two times:
+
+1. First it's called by EFI boot manager (e.g. as a part of U-Boot
+Standard Boot mechanism) when it's installing FDT:
+
+    fdt_initrd
+    image_setup_libfdt
+    efi_install_fdt
+    efi_bootmgr_run
+    efi_mgr_boot
+
+It's already enough for EFI app to malfunction. But then it's also
+called second time:
+
+2. From the EFI app, via EFI DT fixup protocol:
+
+    fdt_initrd
+    image_setup_libfdt
+    efi_dt_fixup
+    struct efi_dt_fixup_protocol efi_dt_fixup_prot = {
+        .fixup = efi_dt_fixup
+    };
+
+See [2] for specific GBL code which sets those fdt properties and then
+runs DT fixup protocol callback.
+
+This issue was discussed [3], but no action was taken since then. Revert
+this patch for now, until a proper solution can be found.
+
+[1] https://source.android.com/docs/core/architecture/bootloader/generic-bootloader/gbl-dev
+[2] https://android.googlesource.com/platform/bootable/libbootloader/+/refs/heads/gbl-mainline/gbl/libgbl/src/android_boot/mod.rs#208
+[3] https://lists.denx.de/pipermail/u-boot/2025-July/593879.html
+
+Fixes: 9fe2e4b46458 ("fdt: Make sure there is no stale initrd left")
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
+ boot/fdt_support.c | 17 ++++-------------
+ 1 file changed, 4 insertions(+), 13 deletions(-)
 
- drivers/pci/pci_mvebu.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
-index 77815513b76..3985bd59607 100644
---- a/drivers/pci/pci_mvebu.c
-+++ b/drivers/pci/pci_mvebu.c
-@@ -763,6 +763,7 @@ static int mvebu_pcie_bind(struct udevice *parent)
- 			pcie->mem.start = mem.start;
- 			pcie->mem.end = mem.start + SZ_128M - 1;
- 			mem.start += SZ_128M;
-+			mem.end = mem.start + SZ_128M - 1;
- 		} else {
- 			printf("%s: unable to assign mbus window for mem\n", pcie->name);
- 			pcie->mem.start = 0;
-@@ -773,6 +774,7 @@ static int mvebu_pcie_bind(struct udevice *parent)
- 			pcie->io.start = io.start;
- 			pcie->io.end = io.start + SZ_64K - 1;
- 			io.start += SZ_64K;
-+			io.end = io.start + SZ_64K - 1;
- 		} else {
- 			printf("%s: unable to assign mbus window for io\n", pcie->name);
- 			pcie->io.start = 0;
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index b7331bb76b3e..92f2f534ee02 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -224,24 +224,15 @@ int fdt_initrd(void *fdt, ulong initrd_start, ulong initrd_end)
+ 	int is_u64;
+ 	uint64_t addr, size;
+ 
++	/* just return if the size of initrd is zero */
++	if (initrd_start == initrd_end)
++		return 0;
++
+ 	/* find or create "/chosen" node. */
+ 	nodeoffset = fdt_find_or_add_subnode(fdt, 0, "chosen");
+ 	if (nodeoffset < 0)
+ 		return nodeoffset;
+ 
+-	/*
+-	 * Although we didn't setup an initrd, there could be a stale
+-	 * initrd setting from the previous boot firmware in the live
+-	 * device tree. So, make sure there is no setting left if we
+-	 * don't want an initrd.
+-	 */
+-	if (initrd_start == initrd_end) {
+-		fdt_delprop(fdt, nodeoffset, "linux,initrd-start");
+-		fdt_delprop(fdt, nodeoffset, "linux,initrd-end");
+-
+-		return 0;
+-	}
+-
+ 	total = fdt_num_mem_rsv(fdt);
+ 
+ 	/*
 -- 
-2.47.3
+2.39.5
 
-base-commit: ce4cfd7c08136433a9ee9307e90c636102151f01
-branch: master
