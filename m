@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B651CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:50:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4454BCAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:53:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1F658319C;
-	Mon, 29 Sep 2025 18:50:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 91D8D832AD;
+	Mon, 29 Sep 2025 18:53:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qX+FEaXY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FBdPJzEi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13E9B8329F; Mon, 29 Sep 2025 18:50:49 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id 0AE8A832DA; Mon, 29 Sep 2025 18:53:15 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5B0D82A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:50:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC44682A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:53:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-378aa12c13dso1088942fac.2
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:50:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-46e3ea0445fso18081005e9.1
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:53:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759164645; x=1759769445; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xVITTbuBxeGx6OIdbQWQyCg9woLTv2+YWViT0NWrw9U=;
- b=qX+FEaXYCLaXJlkgaPDqXIXFLSkdKLjMf9J0t/HkaR0BDCAbkYyhwHJUcOlyMj284y
- nWUilXSU3y4ZZbct8rCRvFItLG9CfwIwjNuw/YXh36t2Y6lU7nO5oSHnx+U06WBgL+b0
- +YIIuKZle6aVon1zidKN3gg0JQUPaz9FStWIM=
+ d=linaro.org; s=google; t=1759164792; x=1759769592; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=T2NVRUncmMcTdoGCgChZKmtCY5IQrMfFmcWgNFDWJ8w=;
+ b=FBdPJzEiRtwvX9sZ7BbDwEguNWCH+veghfaC442Q+ajCIZL7qk1mYJ15fOvo4sEKY3
+ ti99kxsG2i+5xbdBg4maWae7lx9xEiG5ZlrTW+5teAwUM/bbC4LrRzFwyitNsbqVKg9O
+ alQFF1zdQGEndpW1S4T+RniWjE4bGMJDw4MLeGE4/anuvjk35nxaaudfdAQs2ECMumOP
+ uk+ymdnIA6wL5gjWN2T/ys3Pp5cfyi8vl/pSAfKz8ytTNTdCcYz1xdgOKiW84wz5MRY5
+ q62YB53SJLCoESqTVdFecpX6tshhKbVIX4MVpKXznKBfwXRyq/0RUgJbPBJOwfOq5urZ
+ dOrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759164645; x=1759769445;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xVITTbuBxeGx6OIdbQWQyCg9woLTv2+YWViT0NWrw9U=;
- b=GpYxQGvMVtBBbHw/TYih2Q8gm+sRHKn/+Zlw+ZtwY9xRVzuLu+SNvJBtdsBm2bKRT6
- CNKNRNMeMXd55wnxfNwSXdKG37VTjX0f9nRqBuZucZl6WCPyHjkJNd//tx9B3fMea+y/
- ZT8K8vPPB2qZkaGxobxzPrYpjM9/UmCH/gSu2rkunAK0nLPIB1hBGBx7mpu2XygP+U9N
- q4SIXR9Q7x8UaG05/yN2jFTAE1Aa2fjN28yIMocBl3ImSZJCaks3qsdIgINmLlSHhw2v
- atjXOW4Q/lpfWSAuKz1bcTMBZ/kk0bRKLMULZtBKd2penQwnU0IL80ciHJPUXP7hzJ8K
- 9bDw==
-X-Gm-Message-State: AOJu0Yzn16D/P7fmq4C9oHNMs1Q7Or3dB4JqUH6yU+dmtZe/XNkbEuuY
- ri8Ta3zgAq9/NkcaO2sLCO1w/aHsZ9aQA33paKXv26lkMpDs564CVvgmJOCx2kSX1BM=
-X-Gm-Gg: ASbGncuFm4ALhfrmK3v4lv5cWo4SYDAPn2t7uAKQkcqSFC8WAK83AR6LbT4nKGBVF6i
- vrawNWW2s2Ow6icVCXgclX56mU1FBXHcd+MXIzzYMv8wsXXNHxwJK1gBsPtLil9BIu9pykrbZGY
- HXibcHkvhYjYoecOOE5jxmqG/aLjl0krnERSeRxaLuYe5ius71R6UktAabDIcwiYRquzqfmQACJ
- 2NVxi22OZnvVTNeJQ0c4q7YjejZl6hoGjHOSKKt7CcL+GyhWJ/ZZMs+OAVnWG3uk4cm52C4LJq/
- ufSZkBVxqxCUpnCIox9U7NX/YqT8qlzzFpLYOTndfvvsb7bmShNQnjNipuN7K09pidBuzZFlJzu
- ZxmjjQKMGZm7Y6iXETgTr4zYoN11jwoNqvAsnrsjEXfuzZMcGhmNJXxgkDNmboqgQGcA=
-X-Google-Smtp-Source: AGHT+IGnTawSTgw3BfyUZ/2B9SWpn0rEQp/X7xGSPUnfAlxtHgopSm9TGFZP3PIYbWLmNtLSU3c52Q==
-X-Received: by 2002:a05:6871:691:b0:376:bfb7:18a with SMTP id
- 586e51a60fabf-376bfb704femr4711405fac.12.1759164645643; 
- Mon, 29 Sep 2025 09:50:45 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-363a15c108csm3722237fac.6.2025.09.29.09.50.44
+ d=1e100.net; s=20230601; t=1759164792; x=1759769592;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=T2NVRUncmMcTdoGCgChZKmtCY5IQrMfFmcWgNFDWJ8w=;
+ b=vTvvOuPxrqj/kViiFfeVT4iEHGfiKo8/GBEZWqDVps6nj/sAKa64FWJ5WDIOTGIrPM
+ 9X6LfG2YfyyBHKVGV3Q2vbP3y2vp4Bk/+UyrU7DA4dqnp31RyVtI/Xrrq/ktnlr2qF38
+ DF1eTNDWEaEtGH5mi1RefXY/s4eZugF9xbLtddocQD9JPsCReL9rlQcMjDsntRwL9h8P
+ qBLXGaEVlvoh+3yWrLUGaldQO8dYiMd4H2eRZK0M/L5pW6vY6pSg691uWvnCkBuNj2A9
+ 8w2gAqTSi1Y7JRtClScqKbUSM6+//RuE6a4t5GyncNFOSb3T8Jk2Y3lzYRuxPbi1BAb0
+ E8Xw==
+X-Gm-Message-State: AOJu0YwZTtZKOEnEy5eseerSBcezPHhCpKCVN1Yv2b0AzWhB6B4Db7eE
+ ktomkrdFqK6j6tROwZp6x7jUZoAzCrRAcQiRRGhdLRmVLABsWj0pfoKv3F4wxMxTirU=
+X-Gm-Gg: ASbGncvRW39z7w1zflIJE70JvSCfZgwezdJO1WvBBccFB4v8/ANU7l3uZSj1WDbrVEU
+ 6oFx8hh8hF6mueXxU6k1/TVQ7w4agMg837W/N6js/lyct10ViLUoQFkp5XavzKIbjGRx2RxAKyl
+ 7S0eXuty8G15HpXt39JCieX+cBVVFYkkK+TElfFyKZREULd+3IVCwtxmiSD+LT3tIQ1BWkQMEsN
+ kweLHULAfWK3FjBcwR0oY01i3tFU/UcLhRNa7kVARqKe1KVwsUlMgI2133MGgmgh/kV9ZdU2jDP
+ f/y7+Wa44GU6/mwivHYEvRsuNRBdJEBcDrYHVQu0+zLgJWlSRsUGepk15xT/zs+JiLPaJeii1gG
+ exCs87UgiDuwO92tByFVSfiwI05LKNXUDr44uz299I29X7x4OePxJIyY4+XVA
+X-Google-Smtp-Source: AGHT+IE9JLsUJcZvDbY8fZ0rdvT64fjHnCaAQ/jHMA5LEm0OD1aIyXhTr/XyOgRx27SLgIIW+vLLew==
+X-Received: by 2002:a05:600c:4743:b0:459:d451:3364 with SMTP id
+ 5b1f17b1804b1-46e329eb11cmr165270315e9.24.1759164792137; 
+ Mon, 29 Sep 2025 09:53:12 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:f9e:3c01:4bc3:3107:fbfe:562])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46e56f53802sm20501625e9.9.2025.09.29.09.53.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 09:50:45 -0700 (PDT)
-Date: Mon, 29 Sep 2025 10:50:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
- Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
-Cc: u-boot@lists.denx.de, qemu-devel@nongnu.org
-Subject: Re: [RFC PATCH] link principle license to COPYING
-Message-ID: <20250929165042.GJ6093@bill-the-cat>
-References: <20250929155142.1647606-1-alex.bennee@linaro.org>
+ Mon, 29 Sep 2025 09:53:11 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Mon, 29 Sep 2025 17:53:11 +0100
+Subject: [PATCH] usb: ehci: exynos: variable node should be signed
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YqbDlfIF4tdO4Ff2"
-Content-Disposition: inline
-In-Reply-To: <20250929155142.1647606-1-alex.bennee@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250929-ehci_exynos-v1-1-ca365752de84@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAHa52mgC/x3MQQqAIBBA0avIrBPUKLGrRETolLPRUAhDvHvS8
+ i3+r5AxEWZYWIWED2WKoUMODKw/woWcXDcooSZhlOHoLe1Y3hAzt1qMctbusEpCL+6EJ5X/tm6
+ tfc6UJXddAAAA
+X-Change-ID: 20250929-ehci_exynos-c703167dac21
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,45 +100,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+THe variable node is assigned to the return value of a function that
+returns an int. It is tested for being negative and then passed as an
+argument to a function that takes an int. So 'node' should not be
+declared as unsigned. Correct it.
 
---YqbDlfIF4tdO4Ff2
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This issue was found by Smatch.
 
-On Mon, Sep 29, 2025 at 04:51:42PM +0100, Alex Benn=E9e wrote:
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/usb/host/ehci-exynos.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-> Some license scanners are particularly dumb and when combined with
-> automatic license scanning for FLOSS accreditation on forges cause
-> problems on renewal. As GPL 2.0 applies to the core code link the main
-> licence text to COPYING to keep everything happy.
->=20
-> This caused issues for the QEMU project recently as we mirror (two!)
-> copies of u-boot in our project.
->=20
-> Signed-off-by: Alex Benn=E9e <alex.bennee@linaro.org>
+diff --git a/drivers/usb/host/ehci-exynos.c b/drivers/usb/host/ehci-exynos.c
+index 1e4a5a0b6f6ce3ff7e14ec16a5250eddb5a13139..e1fc04efd2e986f11eb2e3add74da84dce74f208 100644
+--- a/drivers/usb/host/ehci-exynos.c
++++ b/drivers/usb/host/ehci-exynos.c
+@@ -47,8 +47,7 @@ static int ehci_usb_of_to_plat(struct udevice *dev)
+ {
+ 	struct exynos_ehci_plat *plat = dev_get_plat(dev);
+ 	const void *blob = gd->fdt_blob;
+-	unsigned int node;
+-	int depth;
++	int node, depth;
+ 
+ 	/*
+ 	 * Get the base address for XHCI controller from the device node
 
-Since Daniel Berrang=E9 posted a similar patch 3 days ago, I assume the
-gitlab license renewal is coming up quickly.
+---
+base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
+change-id: 20250929-ehci_exynos-c703167dac21
 
-In principal, I'm fine with this and will apply a patch shortly.
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
-In practice, we've always had to get a human involved at Gitlab to get
-our license renewed as we're clearly within the required terms, it's
-just that we've also got some further reading people should do.
-
---=20
-Tom
-
---YqbDlfIF4tdO4Ff2
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNq43wAKCRAr4qD1Cr/k
-Cu55AQCHmOMrjFDOG0RcfUGNutZVV+3+e4LXNu/lm/0P5J5R7AEAmG7+T2HefuPo
-83fOeiF+BgJr6K15atQpptf267RUGQE=
-=YlHs
------END PGP SIGNATURE-----
-
---YqbDlfIF4tdO4Ff2--
