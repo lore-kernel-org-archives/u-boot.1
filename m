@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58F59CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 19:22:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2EFDCAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 19:52:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A596A8319C;
-	Mon, 29 Sep 2025 21:21:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A2088319C;
+	Mon, 29 Sep 2025 21:52:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="bsmwlUlz";
+	dkim=pass (1024-bit key; secure) header.d=kpnmail.nl header.i=@kpnmail.nl header.b="ZR2YtIqV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8102832AD; Mon, 29 Sep 2025 21:21:56 +0200 (CEST)
-Received: from mace.gateworks.com (mace.gateworks.com [174.136.5.171])
+ id CDCE08329F; Mon, 29 Sep 2025 21:52:54 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CC7B82A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 21:21:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CE5E82A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 21:52:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=none (p=none dis=none) header.from=openbsd.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=gateworks.com; s=gwtrack; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=T59WYALRxZMEOhaWpr5T08hzGvo6aGrBL+28J/62QIg=; b=bsmwlUlz5dKX+iOZk6NJAFnLPJ
- gfl+ge0ym11KrxpB70K8bY6G3ROwinexAtC0zLnYaP9nr6m9JZR1nLLN4BEjLNA351MZkw73ZBRHr
- XpEtAgboF/fbB9twZsurItlZjg2P1+nwpsFzPYJK/wIA5+frHTdIGbWS6aPO6jqBKv3M/lW7WTgUC
- 3nTV2kwhBZDA4z6Pop10ICmzbRkb9gk2MAHbw2KSXkhLNg+qQKrfelr8EzBoX/2nr7Tbb6UTcYyWD
- XNTAuv26oPeZp2TusRsx8bnyyrTXTFfbDvcqlKkLF55ExLXI7LyknTIiEu+GIwmPLeGCl2oDHHJbk
- KfJklm4A==;
-Received: from syn-068-189-091-139.biz.spectrum.com ([68.189.91.139]
- helo=chewbacca.pdc.gateworks.com)
- by mace.gateworks.com with esmtps (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1v3JRW-00ARBW-Sf;
- Mon, 29 Sep 2025 19:21:51 +0000
-Received: by chewbacca.pdc.gateworks.com (Postfix, from userid 1154)
- id 9B66D3083326; Mon, 29 Sep 2025 12:21:50 -0700 (PDT)
-From: Tim Harvey <tharvey@gateworks.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
- Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH] net: lwip: ensure alignment of packet buffers
-Date: Mon, 29 Sep 2025 12:21:49 -0700
-Message-Id: <20250929192149.3735435-1-tharvey@gateworks.com>
-X-Mailer: git-send-email 2.34.1
+ spf=fail smtp.mailfrom=kettenis@openbsd.org
+X-KPN-MessageId: e8e14948-9d6d-11f0-ad1a-005056999439
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id e8e14948-9d6d-11f0-ad1a-005056999439;
+ Mon, 29 Sep 2025 21:53:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kpnmail.nl; s=kpnmail01;
+ h=mime-version:message-id:date:subject:to:from;
+ bh=DcBWAHumYwDmM4bqp+X0zmD9gMIs+FGA586MkGUhadA=;
+ b=ZR2YtIqVSlaRoaw9LoiFK81RVpVHKulmFRNl6fOqyoC+yuQpROX02+mm6HHo9kyCrV6FteR7DFowR
+ KC7YrEoGM9xwFZzAgUY5Ay53KOhLvjCcWz0qO0fFbPcOMNNiDk3EpTrCOPgApOqwmcIKUdWi18FJq2
+ gzphXhMhTJRjKN6c=
+X-KPN-MID: 33|Gt+RfhSlzezOjzztKbALvxxifeVLDrGrwQzZJBKQZtUUgNJVHgdATzpFBPttecx
+ y0Pwx5uFO8hSKqZOiabMvMs5J9NeKyu1vb3yj7uLNGoI=
+X-KPN-VerifiedSender: No
+X-CMASSUN: 33|5wB9srYLpjtdf4HcIxg/AXBouxUoAsOh1U4J3p16dHjGZTSL6Aq7antw2SccZOf
+ N8Q1OTLaOcVp3HemAOFuoXw==
+X-Originating-IP: 80.61.163.207
+Received: from bizet.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id e1ce4240-9d6d-11f0-8d3e-00505699b758;
+ Mon, 29 Sep 2025 21:52:51 +0200 (CEST)
+From: Mark Kettenis <kettenis@openbsd.org>
+To: u-boot@lists.denx.de
+Cc: marex@denx.de,
+	trini@konsulko.com,
+	Mark Kettenis <kettenis@openbsd.org>
+Subject: [PATCH v2 0/3] Load ASMedia XHCI controller firmware
+Date: Mon, 29 Sep 2025 21:52:38 +0200
+Message-ID: <20250929195241.70351-1-kettenis@openbsd.org>
+X-Mailer: git-send-email 2.50.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -73,27 +74,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Network packet buffers should be aligned to PKTALIGN. Add a compiler
-attribute to ensure this.
+Some of the Apple desktop machine have a PCI ASMedia XHCI controller
+that needs firmware to be uploaded to function.  This firmware is
+placed on the EFI system partition by the Asahi installer.  So this
+series sets up a file system firmware loader that reads from that
+partition and ports the Linux driver that uploads this firmware to
+the controller.  With this series, users can use USB devices (such
+as a keyboard) when they are connected to USB ports handled by the
+ASMedia XHCI controller.  This includes the type-A ports on the
+M2 Mac mini for example.
 
-Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+I submitted the first version of this series over a year ago.  Sorry
+for letting this linger for so long.  Back then Marek Vasut provided
+some good feedback that I incorporated in this v2.  Back then we
+concluded that env_set() failures should print a warning instead of
+doing a bitwise or of the return value.  But env_set() already prints
+a warning, so it makes more sense to just ignore the return value.
+This is common practice in the U-Boot tree.
+
 ---
- net/lwip/net-lwip.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index 660ceb10cbe..aec05d55de6 100644
---- a/net/lwip/net-lwip.c
-+++ b/net/lwip/net-lwip.c
-@@ -30,7 +30,7 @@ void (*push_packet)(void *, int len) = 0;
- static int net_try_count;
- static int net_restarted;
- int net_restart_wrap;
--static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
-+static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN] __attribute__((aligned(PKTALIGN)));
- uchar *net_rx_packets[PKTBUFSRX];
- uchar *net_rx_packet;
- const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+Changes in v2:
+- Ignore env_set() return value
+- Sort readb_poll_sleep_timeout() before readl_poll_sleep_timeout()
+- Use read_poll_timeout() instead of open-coded timeout loops
+- Make asmedia_read_reg() return an error code
+
+
+Mark Kettenis (3):
+  apple: Set up file system firmware loader
+  iopoll: Add readb_poll_sleep_timeout
+  usb: xhci-pci: Load ASMedia XHCI controller firmware
+
+ MAINTAINERS                         |   1 +
+ arch/arm/mach-apple/board.c         |  59 ++++
+ drivers/usb/host/Kconfig            |  11 +
+ drivers/usb/host/Makefile           |   1 +
+ drivers/usb/host/xhci-pci-asmedia.c | 410 ++++++++++++++++++++++++++++
+ drivers/usb/host/xhci-pci.c         |   9 +
+ include/linux/iopoll.h              |   3 +
+ include/usb/xhci.h                  |   3 +
+ 8 files changed, 497 insertions(+)
+ create mode 100644 drivers/usb/host/xhci-pci-asmedia.c
+
 -- 
-2.34.1
+2.50.1
 
