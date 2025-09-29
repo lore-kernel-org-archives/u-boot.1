@@ -4,88 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0DE5CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 22:43:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97373CAC5B9
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 23:03:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E86EA83071;
-	Tue, 30 Sep 2025 00:43:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E87D983071;
+	Tue, 30 Sep 2025 01:03:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Sf2Lwx0c";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="vUcEA6tz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D0F5832DA; Tue, 30 Sep 2025 00:43:43 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 431C1832DA; Tue, 30 Sep 2025 01:03:48 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F297807B1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 00:43:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 42237828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 01:03:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-74526ca7a46so2023048a34.2
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 15:43:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759185820; x=1759790620; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5rBg8iR80JgndmnchDrpeaYKO81U0Hp3sBIGkyrNz6E=;
- b=Sf2Lwx0ctyH8VVtjjp+BhuaTklqE86ujGw1WABLBgwGqf+TjM9z9LFqwE0lB7wAFXR
- PfpceUcPj1ZUn8GKTDi0B+H5Nvuz2a6UBJAMdWt0yblCE06OMxaYgCvGH1pzybrMq6Wm
- DERNFjUDU0A/iDCVDpf5bEMDB4oGak++k+Tss=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759185820; x=1759790620;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5rBg8iR80JgndmnchDrpeaYKO81U0Hp3sBIGkyrNz6E=;
- b=O2Pugjd3rGNI21CoDWN0TwwkikeW75J5lcR+OuRplFPpoAaqTY837gvXfyS5v1Wvkw
- 9l0SBx/2kzCbBBGXrIzi0+X7c5H0MugcpOHrlc93cY33SyrIKUS3KyBPO+8HgeNMLXGT
- uUxQjmmVMuyTX2kh5JJWq1/geR76HAA7eaaBN7Pv8VpfvTST0Pte4OScmTXmOEa/udWf
- zjkzYVG2chK5YUeFX0Wu0AjJKDkM55UQ01wMrv+GRAGhInsIXMSKWfgYYj4hGcyQKgqx
- 9trN75Ojey8fR9fKyaCIFGp41dPcQ7Y+CSVxYq970HVztvXifobDWI405UVFEBPIQXW8
- 28Ug==
-X-Gm-Message-State: AOJu0YyIW6QYYv422DQdiVJagMPYkf77UCr0rQTfBJmsrn8ekZFFEnvP
- qa4A7RiogiSo4B27s7TQvJxU89tlZsicpGrfqBSiwrpFbkdRilsLd7JNzt1jFarKECbiLVQ8OtN
- DbfNzw4k=
-X-Gm-Gg: ASbGncvwo8A7wZ+w+8YWowP/ZmV0zwPHRLHL0ofHFQzIkI1Tqq6AylGHpAupYGfco2S
- H3T/qc2r0zcckn0yCpo5VjlGQgWebjntIUUaMSTUPnH2E2hozYQNHA7wNpTb3summxgAWRx/mbo
- L4iwZwwckoHwUbUd6pBiPtMdPIw1cOi7an38HxJ7wdyNcXzZl3IQ4AGNIXytSqKDOsKnCYoUmrr
- i8uAemyltXwy8cgexrxMK/Qk2jVsSXPvKY4ufLDN/nefwfBi/sLA93URMDT2x+rDNxhRGqhWl+x
- IyLyJgyGJrGJS2g+HY1shP8sYo2YePl1fcEuQ224oHjh2EHzWLOEgHbe5hZJpH+En6ovjYWHxUJ
- hRsHQtJujZGOdXjc2V/7a/Ao+7FELtx9miTCJ/JhrANuXSTiEawmGZ+T9
-X-Google-Smtp-Source: AGHT+IEzACS2ltiPAZsUwDDiDaxlkNew/lZEa9/0n0WTmWqEXvWtaz0prMkJu5Z9G5Ihb5BT7P8PSA==
-X-Received: by 2002:a9d:554e:0:b0:7aa:6d76:fd65 with SMTP id
- 46e09a7af769-7aa6d770139mr5579296a34.23.1759185820136; 
- Mon, 29 Sep 2025 15:43:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7acd75cae90sm2019358a34.36.2025.09.29.15.43.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 15:43:39 -0700 (PDT)
-Date: Mon, 29 Sep 2025 16:43:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Michal Simek <michal.simek@amd.com>, Pramod Kumar <pramod.kumar_1@nxp.com>,
- Tang Yuantian <andy.tang@nxp.com>, Mingkai Hu <mingkai.hu@nxp.com>,
- Ashish Kumar <Ashish.Kumar@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
- Wasim Khan <wasim.khan@nxp.com>, Udit Agarwal <udit.agarwal@nxp.com>,
- Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
- Manish Tomar <Manish.Tomar@nxp.com>,
- Conor Dooley <conor.dooley@microchip.com>,
- Jamie Gibbons <jamie.gibbons@microchip.com>,
- Aaron Williams <awilliams@marvell.com>,
- Mathew McBride <matt@traverse.com.au>
-Subject: U-Boot PHY_MSCC vs PHY_VITESSE
-Message-ID: <20250929224336.GS6093@bill-the-cat>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cbGvg2ds9z9tQL;
+ Tue, 30 Sep 2025 01:03:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1759187023;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ry6w9L1EScmBCHs2y9oQ5X+i8PliYDvImt+IFLhlDh8=;
+ b=vUcEA6tzaJm1oshGRXyICwnWfBTJVnUARrprtdx6L54WcVQec7WVt+YFq0/yz9l0sO0bba
+ 51nY4ZhKsxlEQJNPM6gUYOYUaEytLmNBqy/3AWwVARfdfaiQjLrlEHkEDWkILed07M3xKI
+ +d3+iliT91iWfKtMmNdrDTRCLu0wP+wj1KD/dW0SDk7SQCQYUUGIfVsXkSyephVFSh2Nkt
+ viXrckbLJWAOcNhd6N+LEbesGAby+N3ExrnuhR7pVnyuwkmfjD4558HRgRqcCNNRq3sTZf
+ jHaX9K2b4XeAZc/NsGCkXNYp+9lJnx182pS2RMWG+F8r6XMf9gmQq90YOQMzyQ==
+Message-ID: <c7163cf3-b108-45a1-8b03-0a09a0429032@mailbox.org>
+Date: Tue, 30 Sep 2025 01:03:41 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K0HhykDavSrWUbYI"
-Content-Disposition: inline
-X-Clacks-Overhead: GNU Terry Pratchett
+Subject: Re: [PATCH v2 1/3] apple: Set up file system firmware loader
+To: Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
+Cc: trini@konsulko.com
+References: <20250929195241.70351-1-kettenis@openbsd.org>
+ <20250929195241.70351-2-kettenis@openbsd.org>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20250929195241.70351-2-kettenis@openbsd.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: dc544dac730cfb6daa5
+X-MBO-RS-META: eown5tdwj31mfdxjm5risi836g648ux5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,40 +75,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 9/29/25 9:52 PM, Mark Kettenis wrote:
+> Find the appropriate EFI system partition on the internal NVMe
+> storage and set the U-Boot environment variables such that
+> the file system firmware loader can load firmware from it.
+> 
+> Signed-off-by: Mark Kettenis <kettenis@openbsd.org>
+> ---
+>   arch/arm/mach-apple/board.c | 59 +++++++++++++++++++++++++++++++++++++
+>   1 file changed, 59 insertions(+)
+> 
+> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+> index 4cd8979bdc2..d8b6787c705 100644
+> --- a/arch/arm/mach-apple/board.c
+> +++ b/arch/arm/mach-apple/board.c
+> @@ -8,6 +8,8 @@
+>   #include <efi_loader.h>
+>   #include <env.h>
+>   #include <lmb.h>
+> +#include <nvme.h>
+> +#include <part.h>
+>   
+>   #include <asm/armv8/mmu.h>
+>   #include <asm/global_data.h>
+> @@ -771,6 +773,60 @@ u64 get_page_table_size(void)
+>   	return SZ_256K;
+>   }
+>   
+> +static char *asahi_esp_devpart(void)
+> +{
+Maybe try request_firmware_into_buf_via_script() instead ?
 
---K0HhykDavSrWUbYI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+That might make this more flexible /wrt firmware location and user 
+preferences.
+-- 
+Best regards,
+Marek Vasut
 
-Hey all,
-
-As part of working on "allyesconfig" support I ran into the following
-problem. Both drivers/net/phy/mscc.c and drivers/net/phy/vitesse.c
-implement support for the VSC8584 PHY. The vitesse.c driver is much
-older and only had VSC8584 support added for a specific Freescale
-Layerscape platform whereas mscc.c is modern and been updated with
-newer PHYs as well. And we need one driver to support this phy, not two.
-I am inclined to remove support from vitesse.c. However, only 4
-platforms use the PHY_MSCC driver and everyone else uses PHY_VITESSE.
-
-I'm cc'ing all of the board maintainers (other than PowerPC platforms)
-that use PHY_VITESEE today to see what their feedback is on which way to
-go here. I'm ignoring PowerPC because that can just stay on the
-PHY_VITESSE driver based on timing of changes in git log.
-
---=20
-Tom
-
---K0HhykDavSrWUbYI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNsLlAAKCRAr4qD1Cr/k
-CnQxAQCIOlHA7HMPBxkqYBot7KR1nFUv3Pd7WzNI5324AdRBywD+JyuU9ebQIGfK
-vsTrHFpZ92wga2vHdkeytjJZy0lN5Ao=
-=wgiG
------END PGP SIGNATURE-----
-
---K0HhykDavSrWUbYI--
