@@ -4,83 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8F3CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 10:14:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEED3CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 10:22:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A0748206E;
-	Mon, 29 Sep 2025 12:14:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CCB9C83071;
+	Mon, 29 Sep 2025 12:22:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E7IELH2+";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="YDXRSWcr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CFDC82A9E; Mon, 29 Sep 2025 12:14:16 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3304C83192; Mon, 29 Sep 2025 12:22:06 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77FAB809A5
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 12:14:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 212FF8206E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 12:22:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-4ddf60466d4so34180361cf.2
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 03:14:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759140853; x=1759745653; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=XA1p9dDlihZlrribTMgAPwzhnEdM9mfqkQuuN4Yi9zQ=;
- b=E7IELH2+65H2d1/AyRgmUbz7p4hVEzmST1Jp2EI+UxVlyvnae8ZWGo5V8f7M5emGhn
- o1WX6UPtpgSOAy/YmN/gFa3wAdEOfGinluYCXmk6hO3cYV/akwvtRp4Y6c8I/SjD7i/q
- guevIGHT2wZ6U1jkwGEHIm2SwWdxTAVPk2AaCESRqj9u8EbHsFrgPsw5e8qaNDYHVqwb
- tPRK+NSJZa/LVi8oa1luA87bTOhxmRyc31EFXb+KXIvFggWmvtA9FlEswzBl0uGtAr8J
- Xfshxm+MSuP2jJVlLLSc/oMP7TqCckUDhWdPtEZpT7aN413xMTdiRQD0Ds7pFCxEIuh+
- NofQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759140853; x=1759745653;
- h=in-reply-to:content-disposition:mime-version:references:subject:cc
- :to:from:date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XA1p9dDlihZlrribTMgAPwzhnEdM9mfqkQuuN4Yi9zQ=;
- b=KaJ2f6fizgK0S4KbFgkUAEMdFTcxS2UZOXZR2gn50CwH0mq1FSfW3BG2KMdtpcucRy
- +PkSDyaC6yr4jrNSK2wbFR3RvGuLH/I4wFF3dMQOUtBBf7u7RwHoa/LHYAX5Yyy4POf/
- R8nqBcYq4u2DieSEUrYQZrBayKuVUdwdXmgdLEWjGcv0E316BrOQoeVkDzuSJNPywVBv
- TDSFkadXpkOUWmb4Ay0xX56Qdc3nQi2jLPjspirBq88G0GenSkB0kKVDqAHUuq5omQGf
- FNDY1xDZLPn0w7837rErDTM/zN0tUxYN7OVxv8e54fOOApUwFfu/ZArDanNePdDFobhx
- 767g==
-X-Gm-Message-State: AOJu0Yz1wI+QjAxLmliNlrSwC42FQFlOVqocc95sm/03eNkETBYgP76Q
- 2unz+QQ6sS5dn7L3v3YQht1Q+RpnP1wJPbUIKQvGWu5h5PyLeXLMdurcMwSDhQ==
-X-Gm-Gg: ASbGncsKUvfAHtAmHZfa5JyJUIFLtmALq38Ao8GQ3CwjASt7r2qtqsZvVJaCtFgufFH
- VxI1P2gyLYXac2hjvfehv++UXbGbLwWiCcu4U4T5fMOxPF59rYf5Tj6fGonLgecf9xa3FOTC9Uv
- /71nlCVJ7SsIIfP6PQ22b/KbjQdkvfWq5LoAYvD27oFv6qEKlAW/n7eLmQnOnMIndZuJXXW9ee3
- 8VhOcHpF58AROU/dkHb/UwG0dSi0dt3OlNJL/NBd0fvOsEqmzKophBPURWzc1oothtrXVETZCSi
- TcIu2pI5J6DoJLFww4jPX4MoGRuSYDWkVm2w+YCNTwkjAQ/yLH/gZ2ZvuuKtGC31+8cH8WKsnL6
- 4NFwhO/UdcuTWnP/eAGs7Z5LpRUUPaQY7C4iKaLonLAKc8z5PzH4PpLW7Sc3F/vEZSdZWlg==
-X-Google-Smtp-Source: AGHT+IFt1SUqxHvuxiiX7Hssd66zH9IEjm0kORy1FeEdEnzY181G1U40mBlZ70XMykdRjIkiPRN+gg==
-X-Received: by 2002:ac8:5fd3:0:b0:4d8:372b:e16a with SMTP id
- d75a77b69052e-4da481d96bcmr195826801cf.4.1759140853270; 
- Mon, 29 Sep 2025 03:14:13 -0700 (PDT)
-Received: from Ansuel-XPS. (host-95-249-236-54.retail.telecomitalia.it.
- [95.249.236.54]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4db09f19db1sm73108481cf.2.2025.09.29.03.14.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 03:14:12 -0700 (PDT)
-Message-ID: <68da5bf4.c80a0220.2f77f4.4c19@mx.google.com>
-X-Google-Original-Message-ID: <aNpb8ecIaLPzq8ir@Ansuel-XPS.>
-Date: Mon, 29 Sep 2025 12:14:09 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] test: led: Add missing ';'
-References: <20250925205026.3561694-1-trini@konsulko.com>
+ spf=pass smtp.mailfrom=lukma@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 798C2104DF1; Mon, 29 Sep 2025 12:22:02 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1759141323;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=vWhRQxkmc1ZiZrrgaOrB6MEEangUKyJEKbM+MOLOBxo=;
+ b=YDXRSWcrOdXNnC/mQE7BJDf+LcndhqFxdxb6PJwTYE87ZAPQw8Wdt5uKTB/dXCdxU5R4UF
+ v4CnEU5JRtkeN4d6zuMIU353qEKQ4p8yZb4MwVrFkFm49boRZRHowL50KBRohGHpxEFoYr
+ xtU/9CWcvqTKQ/0YSiiJpVabR+m1eS/kzT42S9EqCb1tZfdohzTKURMt4QafOdz4ARZFeP
+ nWbtRN/T0SVYtjGH6MDE4Ixg08KZ3HG/S/1cnlxD/IfibcieyvJAIZ6anMGdM+jO6lsP/p
+ EK6NVURHMvERcedJj7mM6iVcRRb8ZoAbdqiQH4fu2XrrL9x6fY/czkOhxhhP6Q==
+Date: Mon, 29 Sep 2025 12:22:01 +0200
+From: =?UTF-8?B?xYF1a2Fzeg==?= Majewski <lukma@nabladev.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v2] arm: gpio: Add set_flags callback to the Tegra gpio
+ driver
+Message-ID: <20250929122201.7215f650@wsk>
+In-Reply-To: <CAPVz0n3mm=84C25tDXxGaXbe_Dxygc+kSoADtx3NvhZoanX=LQ@mail.gmail.com>
+References: <20250922141617.225861-1-lukma@nabladev.com>
+ <CAPVz0n2iw7xZWFH46=fF3aPRjwx5QvQ0=yxY=v4tusNBj3qMvw@mail.gmail.com>
+ <20250929092338.08d6b00a@wsk>
+ <CAPVz0n3mm=84C25tDXxGaXbe_Dxygc+kSoADtx3NvhZoanX=LQ@mail.gmail.com>
+Organization: Nabla
+X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250925205026.3561694-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,68 +73,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 25, 2025 at 02:50:25PM -0600, Tom Rini wrote:
-> Some tests here had not been compile tested before submission and were
-> missing a ';' on the end of declaring struct udevice *dev. Add it.
-> 
-> Fixes: 9046279d92bb ("test: dm: Add tests for LED boot and activity")
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Christian Marangi <ansuelsmth@gmail.com>
-> ---
+Hi Svyatoslav,
 
-Sorry Tom for not catching this, I hoped the CI enabled these config.
+> =D0=BF=D0=BD, 29 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 10:23 =
+=C5=81ukasz Majewski <lukma@nabladev.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > Hi Svyatoslav,
+> > =20
+> > > =D0=BF=D0=BD, 22 =D0=B2=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 17:1=
+6 Lukasz Majewski <lukma@nabladev.com>
+> > > =D0=BF=D0=B8=D1=88=D0=B5: =20
+> > > >
+> > > > This patch adds support for the .set_flags callback.
+> > > > For now following flags are supported:
+> > > > - GPIOD_IS_AF (i.e. "alternate function").
+> > > > - GPIOD_IS_IN
+> > > > - GPIOD_IS_OUT
+> > > >
+> > > > Currently, the .set_flags in gpio-uclass.c (function
+> > > > dm_gpio_set_value()) is used before .set_value callback, so
+> > > > functionally replaces it. As a result the corresponding
+> > > > tegra_gpio_set_value() can be removed.
+> > > >
+> > > > Signed-off-by: Lukasz Majewski <lukma@nabladev.com>
+> > > > ---
+> > > >
+> > > > Changes for v2:
+> > > > - Fix the format specifier for flags in debug() function
+> > > > - Update commit message
+> > > > - Remove tegra_gpio_set_value() method (as it is functionally
+> > > > replaced by set_value()
+> > > > - Prevent from returning errors when flags =3D 0 (problem with
+> > > > e.g. I2C GPIO support)
+> > > > ---
+> > > >  drivers/gpio/tegra_gpio.c | 39
+> > > > +++++++++++++++++++++++---------------- 1 file changed, 23
+> > > > insertions(+), 16 deletions(-) =20
+> > >
+> > > Lukasz, thank you for this change I would really like to see it in
+> > > mainline. ATM I have no capabilities to debug =20
+> >
+> > You mean test if it works?
+> > =20
+> > > this and I will return
+> > > to it but that may not be soon unfortunately. =20
+> >
+> > This is a bit problematic for me, as:
+> >
+> > 1. Some future work depends on it (more details below).
+> > 2. The "set_flags()" callback seems like being now the one to be
+> > advised to being implemented and used.
+> >
+> >
+> >
+> > Can you predict when you will be able to come back to this task? Is
+> > this the matter of weeks or months?
+> > =20
+>=20
+> Weeks maybe, I will try to look into this when I have some spare time
+>=20
 
-Does the CI for these test use the SANDBOX defconfig?
+Ok.
 
-Just to prevent similar error in the future.
+> > > In case you really need
+> > > switch GPIO back to SFIO and Linux cannot handle this, you an use
+> > > dm_gpio_free to release gpios in board_preboot_os in the board as
+> > > a temporary measure. =20
+> >
+> > Yes, this is a temporary solution - i.e. dm_gpio_free() is supposed
+> > to "free" the pin. IMHO, the set_flags() shall be used, as I in
+> > fact do want to set the CFG_SFIO flag, not release the gpio.
+> > =20
+>=20
+> dm_gpio_free in tegra case calls CFG_SFIO
 
->  test/dm/led.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/test/dm/led.c b/test/dm/led.c
-> index 36652c2833a9..f41a2fb73fc0 100644
-> --- a/test/dm/led.c
-> +++ b/test/dm/led.c
-> @@ -162,7 +162,7 @@ DM_TEST(dm_test_led_blink, UTF_SCAN_PDATA | UTF_SCAN_FDT);
->  #ifdef CONFIG_LED_BOOT
->  static int dm_test_led_boot(struct unit_test_state *uts)
->  {
-> -	struct udevice *dev
-> +	struct udevice *dev;
->  
->  	/* options/u-boot/boot-led is set to phandle to "sandbox:green" */
->  	ut_assertok(led_get_by_label("sandbox:green", &dev));
-> @@ -180,7 +180,7 @@ DM_TEST(dm_test_led_boot, UTF_SCAN_PDATA | UTF_SCAN_FDT);
->  #ifndef CONFIG_LED_BLINK
->  static int dm_test_led_boot_blink(struct unit_test_state *uts)
->  {
-> -	struct udevice *dev
-> +	struct udevice *dev;
->  
->  	/* options/u-boot/boot-led is set to phandle to "sandbox:green" */
->  	ut_assertok(led_get_by_label("sandbox:green", &dev));
-> @@ -200,7 +200,7 @@ DM_TEST(dm_test_led_boot_blink, UTF_SCAN_PDATA | UTF_SCAN_FDT);
->  #ifdef CONFIG_LED_ACTIVITY
->  static int dm_test_led_activity(struct unit_test_state *uts)
->  {
-> -	struct udevice *dev
-> +	struct udevice *dev;
->  
->  	/* options/u-boot/activity-led is set to phandle to "sandbox:red" */
->  	ut_assertok(led_get_by_label("sandbox:red", &dev));
-> @@ -218,7 +218,7 @@ DM_TEST(dm_test_led_activity, UTF_SCAN_PDATA | UTF_SCAN_FDT);
->  #ifndef CONFIG_LED_BLINK
->  static int dm_test_led_activityt_blink(struct unit_test_state *uts)
->  {
-> -	struct udevice *dev
-> +	struct udevice *dev;
->  
->  	/* options/u-boot/activity-led is set to phandle to "sandbox:red" */
->  	ut_assertok(led_get_by_label("sandbox:red", &dev));
-> -- 
-> 2.43.0
-> 
+Yes, but as you said - this is not the "proper" solution.
 
--- 
-	Ansuel
+>=20
+> > >
+> > > Overall issue you are describing is not u-boot's it is kernels,
+> > > kernel must reconfigure gpios for proper work regardless of their
+> > > previous state. If it is not the case, then kernel device
+> > > configuration is incomplete or wrong. =20
+> >
+> > This is how the pinmux in Linux for Tegra is written. You can setup
+> > the PAD parameters, but you cannot set the pin's function.
+> > =20
+>=20
+> WDYM? Tegra30+ has per-pin configuration, this includes FUNCTION,
+> direction, tristate and pull for all pins
+
+With DTS pinmux description, you cannot change the PAD function
+(special vs gpio) in Linux. It is assumed that bootloader would set the
+function (which, yes, is IMHO a bug).
+
+>=20
+> > In other words - you have to do it in bootloader (u-boot in this
+> > case).
+> >
+> > In my case - customer uses the pin in u-boot as GPIO to check
+> > carrier board version, then the same pin in Linux is going to be
+> > used as special function one.
+> >
+> > Unfortunately, above "reconfiguration" cannot be done in Linux.
+> >
+> > As other "rework" of gpio code depends on it (use dm) - I would
+> > like to postpone my work until this functionality is available in
+> > mainline (and hence avoid "temporal solutions").
+> >
+> > --
+> > Best regards,
+> >
+> > Lukasz Majewski
+> >
+> > --
+> > Nabla Software Engineering GmbH
+> > HRB 40522 Augsburg
+> > Phone: +49 821 45592596
+> > E-Mail: office@nabladev.com
+> > Geschftsfhrer : Stefano Babic =20
+
+
+
+--=20
+Best regards,
+
+Lukasz Majewski
+
+--
+Nabla Software Engineering GmbH
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschftsfhrer : Stefano Babic
