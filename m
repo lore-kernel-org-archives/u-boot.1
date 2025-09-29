@@ -4,92 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75D29CAC5B0
-	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:40:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B651CAC5B0
+	for <u-boot@archiver.kernel.org>; Mon, 29 Sep 2025 16:50:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9ECE08319C;
-	Mon, 29 Sep 2025 18:40:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A1F658319C;
+	Mon, 29 Sep 2025 18:50:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pmUM3CQk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qX+FEaXY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 923E38329F; Mon, 29 Sep 2025 18:40:48 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 13E9B8329F; Mon, 29 Sep 2025 18:50:49 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6369682A9E
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:40:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5B0D82A9E
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 18:50:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-afcb78ead12so854638466b.1
- for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:40:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-378aa12c13dso1088942fac.2
+ for <u-boot@lists.denx.de>; Mon, 29 Sep 2025 09:50:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759164046; x=1759768846; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tmu0o3FrvduV3rd66M91Fet2RrzenpC8r8iZWfvrjvA=;
- b=pmUM3CQkpsrN1/PhLiwn5lFQR7Y6pR4bhXzywlXgkTWBurxrz3z5YR5j1oewTCBOcp
- IS68AVNYYqu4yk+O1Tc8LuPK0ZdQjMSbY+h/FYuK4X05+lQ5Snpq9G8HFJCK13Quq9EN
- Nd4Cw9I+FhKovMy+z3bfzawVJEAb6pc1cYZfSd/ulDv/q+uRTxh5WgY0L8UEvRThigrQ
- mNXXhK8EDXuqJGmkTx16dOlRMwlqZ38Lo7IZcybki5y35a6uO0eh2QpAfmsE843jWipA
- YW+tRTdPGhws9pIbLKgdBbnq7uSXbzMOSxfdzemWEcKTRzFyjFwshZ9DX0j2K1x4NTHa
- UR8w==
+ d=konsulko.com; s=google; t=1759164645; x=1759769445; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xVITTbuBxeGx6OIdbQWQyCg9woLTv2+YWViT0NWrw9U=;
+ b=qX+FEaXYCLaXJlkgaPDqXIXFLSkdKLjMf9J0t/HkaR0BDCAbkYyhwHJUcOlyMj284y
+ nWUilXSU3y4ZZbct8rCRvFItLG9CfwIwjNuw/YXh36t2Y6lU7nO5oSHnx+U06WBgL+b0
+ +YIIuKZle6aVon1zidKN3gg0JQUPaz9FStWIM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759164046; x=1759768846;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tmu0o3FrvduV3rd66M91Fet2RrzenpC8r8iZWfvrjvA=;
- b=sfeQNni6F8ztba8nLxPD/2T8TuSNj93D5JvkBP+bsj9MyMEcwCKZXy3qqeceShPfrj
- dq+AMqCBr1qfH3XdGjAdT0BtmvW8O/oXvJAboXerwMvUDgkZIX9fVxEES0t8O/ktH9+x
- VhaztK7xFBFMZHfxmv4Wf20IvjapZGcZ7FCzWNFLoTvtsmGAqxsJPHnlWNxkNZaITbgF
- ItggQ0i2nqmFKLqnhGdVouEiM5QyRgiOTeKWByypWVv4KNCLd3MaEamedPoTQwde5M4W
- wenXLBFZ5GbvYMwxaK/RtMN2+j8eR/TWjPL/fHyJF0Hppg2fBH3yATdA6P2NYdhrPdNu
- txKg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCxNRrPpfu/3MFtwSXNPh1/Rk2xZgtsI2bZJw3NTkldCyC9V1/IkguPFw+Wszv0L8ZcOjUNaI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzborhGKg33iLVPSs5TEtoGYoi94ptZXVuS+AXRujiSbPFGCwlt
- qaDH+t6DJoNOHbGBYFpW67c0WFh8w0erCJKxhekjYNqmjZN/7WoRNxxQY4BtvlLrnIw=
-X-Gm-Gg: ASbGnctmLXB9mX7ytozI9CinbhEQjswfCkJ4VRZ5T4wb4+Dqq9tmbgaGH5sHAhLfJKk
- uTUA1UTEIaIOmLx30+zRio8HZxquHbLVvAnXt3iCRYBrnVjpKXbHJVYgtqs1NdUleU+AnuITrGn
- FPndM8lLEvWBwhcwBlWQWLYiKdRzd0tsfAoXh+w94SpBufQ7RbCitmfyuFUP3FzCAiuU2dFEe+h
- hd2jZrr6mWfzFTdwLY3lthVFzVK/vQK8I4yoNJm670ltVWUUPDl8dC0xsiDoT9C6s2oIK8qVMPQ
- 4gUBawsfj6+6Pdwdf4u/X5bZZLA4zwbKZhWLCaSQ3nOeEDWMiP00p1PBoqx5z86/yDAEedOWb5S
- KCbAgsqQgoyTpRwwoOcxODgZcD/FduxjowNTHgYeBNS2ab8yAjw==
-X-Google-Smtp-Source: AGHT+IGAs35QpAb6G1epy+J0Ew1IYlmHXhevBrI1/sh/TfpywOGazx64rrlUem3DrXTHGj7digCR4w==
-X-Received: by 2002:a17:907:da8:b0:b3c:f0a4:b324 with SMTP id
- a640c23a62f3a-b3cf0a4bebamr687671166b.21.1759164045757; 
- Mon, 29 Sep 2025 09:40:45 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:f9e:3c01:4bc3:3107:fbfe:562])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b3b4271dea9sm479529566b.88.2025.09.29.09.40.44
+ d=1e100.net; s=20230601; t=1759164645; x=1759769445;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xVITTbuBxeGx6OIdbQWQyCg9woLTv2+YWViT0NWrw9U=;
+ b=GpYxQGvMVtBBbHw/TYih2Q8gm+sRHKn/+Zlw+ZtwY9xRVzuLu+SNvJBtdsBm2bKRT6
+ CNKNRNMeMXd55wnxfNwSXdKG37VTjX0f9nRqBuZucZl6WCPyHjkJNd//tx9B3fMea+y/
+ ZT8K8vPPB2qZkaGxobxzPrYpjM9/UmCH/gSu2rkunAK0nLPIB1hBGBx7mpu2XygP+U9N
+ q4SIXR9Q7x8UaG05/yN2jFTAE1Aa2fjN28yIMocBl3ImSZJCaks3qsdIgINmLlSHhw2v
+ atjXOW4Q/lpfWSAuKz1bcTMBZ/kk0bRKLMULZtBKd2penQwnU0IL80ciHJPUXP7hzJ8K
+ 9bDw==
+X-Gm-Message-State: AOJu0Yzn16D/P7fmq4C9oHNMs1Q7Or3dB4JqUH6yU+dmtZe/XNkbEuuY
+ ri8Ta3zgAq9/NkcaO2sLCO1w/aHsZ9aQA33paKXv26lkMpDs564CVvgmJOCx2kSX1BM=
+X-Gm-Gg: ASbGncuFm4ALhfrmK3v4lv5cWo4SYDAPn2t7uAKQkcqSFC8WAK83AR6LbT4nKGBVF6i
+ vrawNWW2s2Ow6icVCXgclX56mU1FBXHcd+MXIzzYMv8wsXXNHxwJK1gBsPtLil9BIu9pykrbZGY
+ HXibcHkvhYjYoecOOE5jxmqG/aLjl0krnERSeRxaLuYe5ius71R6UktAabDIcwiYRquzqfmQACJ
+ 2NVxi22OZnvVTNeJQ0c4q7YjejZl6hoGjHOSKKt7CcL+GyhWJ/ZZMs+OAVnWG3uk4cm52C4LJq/
+ ufSZkBVxqxCUpnCIox9U7NX/YqT8qlzzFpLYOTndfvvsb7bmShNQnjNipuN7K09pidBuzZFlJzu
+ ZxmjjQKMGZm7Y6iXETgTr4zYoN11jwoNqvAsnrsjEXfuzZMcGhmNJXxgkDNmboqgQGcA=
+X-Google-Smtp-Source: AGHT+IGnTawSTgw3BfyUZ/2B9SWpn0rEQp/X7xGSPUnfAlxtHgopSm9TGFZP3PIYbWLmNtLSU3c52Q==
+X-Received: by 2002:a05:6871:691:b0:376:bfb7:18a with SMTP id
+ 586e51a60fabf-376bfb704femr4711405fac.12.1759164645643; 
+ Mon, 29 Sep 2025 09:50:45 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-363a15c108csm3722237fac.6.2025.09.29.09.50.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Sep 2025 09:40:45 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 29 Sep 2025 17:40:43 +0100
-Subject: [PATCH] usb: dwc2: Add missing null check
+ Mon, 29 Sep 2025 09:50:45 -0700 (PDT)
+Date: Mon, 29 Sep 2025 10:50:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Alex =?iso-8859-1?Q?Benn=E9e?= <alex.bennee@linaro.org>,
+ Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>
+Cc: u-boot@lists.denx.de, qemu-devel@nongnu.org
+Subject: Re: [RFC PATCH] link principle license to COPYING
+Message-ID: <20250929165042.GJ6093@bill-the-cat>
+References: <20250929155142.1647606-1-alex.bennee@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250929-usb_dwc2-v1-1-863133dcbcde@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAIq22mgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDSyNL3dLipPiU8mQjXUsjkxSDFCOzlDQzIyWg8oKi1LTMCrBR0bG1tQC
- kLXs/WgAAAA==
-X-Change-ID: 20250929-usb_dwc2-924d0d26df62
-To: Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>
-Cc: Junhui Liu <junhui.liu@pigmoral.tech>, 
- Kongyang Liu <seashell11234455@gmail.com>, u-boot@lists.denx.de, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YqbDlfIF4tdO4Ff2"
+Content-Disposition: inline
+In-Reply-To: <20250929155142.1647606-1-alex.bennee@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,35 +96,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add in the missing null check for dev->driver that is present at other
-points in the function before it is dereferenced.
 
-This issue was found by Smatch.
+--YqbDlfIF4tdO4Ff2
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, Sep 29, 2025 at 04:51:42PM +0100, Alex Benn=E9e wrote:
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-index fca052b4556a7d2ae4fe516e39820611d7082e2f..5a7f50ebaa5579f67ea5dc9491d0d1f4d4b81ea1 100644
---- a/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c
-@@ -526,7 +526,7 @@ static int dwc2_udc_irq(int irq, void *_dev)
- 		if (gotgint & GOTGINT_SES_END_DET) {
- 			debug_cond(DEBUG_ISR, "\t\tSession End Detected\n");
- 			/* Let gadget detect disconnected state */
--			if (dev->driver->disconnect) {
-+			if (dev->driver && dev->driver->disconnect) {
- 				spin_unlock_irqrestore(&dev->lock, flags);
- 				dev->driver->disconnect(&dev->gadget);
- 				spin_lock_irqsave(&dev->lock, flags);
+> Some license scanners are particularly dumb and when combined with
+> automatic license scanning for FLOSS accreditation on forges cause
+> problems on renewal. As GPL 2.0 applies to the core code link the main
+> licence text to COPYING to keep everything happy.
+>=20
+> This caused issues for the QEMU project recently as we mirror (two!)
+> copies of u-boot in our project.
+>=20
+> Signed-off-by: Alex Benn=E9e <alex.bennee@linaro.org>
 
----
-base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
-change-id: 20250929-usb_dwc2-924d0d26df62
+Since Daniel Berrang=E9 posted a similar patch 3 days ago, I assume the
+gitlab license renewal is coming up quickly.
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+In principal, I'm fine with this and will apply a patch shortly.
 
+In practice, we've always had to get a human involved at Gitlab to get
+our license renewed as we're clearly within the required terms, it's
+just that we've also got some further reading people should do.
+
+--=20
+Tom
+
+--YqbDlfIF4tdO4Ff2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNq43wAKCRAr4qD1Cr/k
+Cu55AQCHmOMrjFDOG0RcfUGNutZVV+3+e4LXNu/lm/0P5J5R7AEAmG7+T2HefuPo
+83fOeiF+BgJr6K15atQpptf267RUGQE=
+=YlHs
+-----END PGP SIGNATURE-----
+
+--YqbDlfIF4tdO4Ff2--
