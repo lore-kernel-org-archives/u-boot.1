@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA39CAC5B8
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 08:20:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D963CAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 08:33:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EB7183045;
-	Tue, 30 Sep 2025 10:20:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C541D8344E;
+	Tue, 30 Sep 2025 10:33:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Ovnp5vVx";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1759221208;
+	bh=bpnUgM7BqY04l0I9P4JP0fYtARlfxQ/oP+x1s/0V9xQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=hyPtRVYb3/l+4YkuJy/6aQNMLDgE5fJaE67r8Zk0LwijTABwwWWcjJoxh/9C6Zev7
+	 hOQbOaRe3BZ8+s7Mt3ATx+IwxMJA62gM6Sh/s5mNapHZK4KPByNJDK0PXXRIbVkzQv
+	 hAoIsTBcJauwZtZok+0299nEXtTjWvdpaD+/5wIeca4jadmBWkVJ9TvmEu5YvOl1kd
+	 cMoPpj5hec4wdth8Kf/r6SM4StAGwZdbe8Pww/UxcMftxptKtyCyInaAZa9iRGWFA5
+	 c/RLyw5lDRVXdxkocRV9MVXggw4GJCDh0DYWg0LIj47XV4I0t8/SH4GyAKlIyJqzDU
+	 kUWj3kiO7L2aQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64D3783071; Tue, 30 Sep 2025 10:20:06 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CD7E48349B; Tue, 30 Sep 2025 10:33:27 +0200 (CEST)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E482D828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 10:20:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id D890A83045
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 10:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-26e68904f0eso57004425ad.0
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 01:20:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1759220402; x=1759825202;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0Kl5aYRA95bIjAdO6a9hfaTF3SUzw7ZQMhhJNN22X7Q=;
- b=Ovnp5vVxZ2sNOV93XmpHKSNd3f4vuA8g8z4Nee8+v3+UCR+Ru8P0xiGo1jLpSrPoaP
- 92oDqul3K3naWgGP168bWWWcRvlHtexoxF72g6m8vjrZtn77OZ/pP+Qas0SeGFHCTrf8
- WAUIqkj4O8aPjBeyX5FT+md04jbuSZa8lRP4o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759220402; x=1759825202;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0Kl5aYRA95bIjAdO6a9hfaTF3SUzw7ZQMhhJNN22X7Q=;
- b=JBDTI+kH1AvkvweTAgdB/cs9+kUtxUIex7+c1pEGwQGCvsv0CI3DJ4nh5uVshp00D3
- g4Ms/rKsKPhHqGOMHrNv09DcqLDlKpYRQJoBUmkkhaVjEbU9rPdvC/OVKIGGILLKcrsk
- FpquoyBLAHM0uXycsbPUHmRMvX4pknuiZLogfvKfYkPh1Wbdb2t3Hja+9bkcXLwqzGJ8
- sjZlrIZFbpqzRzBxfqZLB+77j5S8FP9PWaZtM4NKqPECyosICVVdcVPgM44xKPutnGHo
- hETrWNCQ1LrExvOvF9DQvPqpMbfHkBT9a7dI79rZqqAtJ3j27kIbmQB7ikfdDnXOiFWH
- 8DqQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXpxvGMtnmlZSX0mZoi5Bp0ihqdvjJZwYk97M8G0QWRsh+fP/cOKo3iXBdb0604YKAEYb3kzBo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVqas3hUaA4tinNBFEarrIMayyocljtKvPNX4N6e5zhxO/0sTe
- XR6Znq/NqleBDj0tGGSXJ6ei6HRCFoR0Sq8X95EZGQ94qploUoYXvPF0U7luka3+106aHd2A1XP
- U987r8GTeT79LpgGNZAKWCvEAfKaiRDyzJ/yEjQagLg==
-X-Gm-Gg: ASbGnctlMdXPEEo6x2j3Xjr0t4rPAffj3lnrT6LuKqH2vuxnNWwh9wOwhaDZvl2J75j
- nW3eX4KQiZFml8AghUTG+o1xpEPf+T5inhdbHD253nA91dolV69/QW3QU/ishSc3znmmzwsIHeD
- 0yTOLVx/PvUCNsqe0MKq+dofblOzcXaUbnBsk2ZB5xXvD9JuXEJ86rmin3IL4u6cZvXptcJUheU
- Ldb2gSUdDHrRYTge4/Vm8TBc6grNOAq5Mz3ops=
-X-Google-Smtp-Source: AGHT+IEGYA4y39sEIHiv7jfE2IQouf++5duITBM0e8/sofw6h8a5mfnLHqbY68DK96caKwgDzrxuDtPhXNVU0N5yZvM=
-X-Received: by 2002:a17:903:19ef:b0:274:3db8:e755 with SMTP id
- d9443c01a7336-27ed4a7ec49mr206885485ad.30.1759220401769; Tue, 30 Sep 2025
- 01:20:01 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="LC08RTeX"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1FDD31038C109; 
+ Tue, 30 Sep 2025 10:33:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1759221204; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ in-reply-to:references; bh=bpnUgM7BqY04l0I9P4JP0fYtARlfxQ/oP+x1s/0V9xQ=;
+ b=LC08RTeXIT0emjdR6lwdEGcHkRrKIQL+BTYLD9mTUJTVTWBLn1xsx5ZiS90XHZzOJ/TS8b
+ ZRJLBZwUQlqf5D4UTGAroRVxbaBwCNdgoa0NtR5AaeSq1XPsdFHB7BjEpPzP56YJDNQ7C4
+ f20AcZsjUf1LpatMDJLflt86+H4jXWonU8l5kduz47oP/9Hx4nIQKBd3CZKvSW5oWG5JJ0
+ JKkyKjhjRaRH63JURcrlQbWZ9gsA6ycQjyYPdOqLZs2HLgFaoD4rgnMgpuI437nTnaDT1o
+ xOnqRt7r4mSjsj1nvh2MQkF1UXXmMJYbm3U+KvEFaNnuGcoevrGQ8jPLeU23bA==
+Date: Tue, 30 Sep 2025 10:33:13 +0200
+From: Philip Oberfichtner <pro@denx.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
+ Anshul Dalal <anshuld@ti.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
+Subject: Re: [PATCH v3 2/5] Image size checks: Use HAS_SIZE_LIMIT consistently
+Message-ID: <aNuVyd1aSwdHw1vq@aristophanes>
+References: <20250903105653.335417-1-pro@denx.de>
+ <20250903105653.335417-3-pro@denx.de>
+ <20250905141959.GJ124814@bill-the-cat>
 MIME-Version: 1.0
-References: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
-In-Reply-To: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Tue, 30 Sep 2025 10:19:50 +0200
-X-Gm-Features: AS18NWCbrGYzwrZMmGjluEgilbdVZPEoUKR9ThYk2hZ5KhlZ4yJ53kHIew_w_bM
-Message-ID: <CAOf5uwkGo7bAFdR_bVu0S2Mdta6smR4NzDfV7fXu1anyPACNPQ@mail.gmail.com>
-Subject: Re: [PATCH v7 00/24] mtd: spinand: driver improvements
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>, 
- Cheng Ming Lin <chengminglin@mxic.com.tw>, Chuanhong Guo <gch981213@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Boris Brezillon <boris.brezillon@collabora.com>, 
- Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de, 
- Andreas Gnau <andreas.gnau@iopsys.eu>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250905141959.GJ124814@bill-the-cat>
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,146 +90,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all
+On Fri, Sep 05, 2025 at 08:19:59AM -0600, Tom Rini wrote:
+> On Wed, Sep 03, 2025 at 12:56:50PM +0200, Philip Oberfichtner wrote:
+> 
+> > Use a consistent logic for image size checks. No functional change.
+> > 
+> > Before this commit, there were two concurrent approaches of how image
+> > size checks are disabled: Whereas BOARD_SIZE_LIMIT was gated through a
+> > dedicated Kconfig symbol to achieve this, all the other size checks were
+> > disabled by assigning them a limit of zero bytes.
+> > 
+> > By this commit we achieve a consistent logic for size limiting, by
+> > introducing CONFIG_HAS_XXX_SIZE_LIMIT for all those options that don't
+> > have it yet.
+> > 
+> > Signed-off-by: Philip Oberfichtner <pro@denx.de>
+<...>
+> > diff --git a/arch/x86/cpu/apollolake/Kconfig b/arch/x86/cpu/apollolake/Kconfig
+> > index 5dd866ffcfe..d70e8def36f 100644
+> > --- a/arch/x86/cpu/apollolake/Kconfig
+> > +++ b/arch/x86/cpu/apollolake/Kconfig
+> > @@ -78,8 +78,11 @@ config MMCONF_BASE_ADDRESS
+> >  	hex
+> >  	default 0xe0000000
+> >  
+> > +config HAS_TPL_SIZE_LIMIT
+> > +	default y
+> > +
+> >  config TPL_SIZE_LIMIT
+> > -	default 0x7800
+> > +	default 0x7800 if HAS_TPL_SIZE_LIMIT
+> >  
+> >  config CPU_ADDR_BITS
+> >  	default 39
+> 
+> These should be "default y if .." in the main Kconfig entry for the
+> option.
 
-On Tue, Sep 30, 2025 at 2:21=E2=80=AFAM Mikhail Kshevetskiy
-<mikhail.kshevetskiy@iopsys.eu> wrote:
->
-> This patch series makes u-boot SPI NAND driver almost the same as in
-> linux-6.17. This provides the following improvements:
->  * it becomes easy to port changes from linux kernel
->  * more flash is supported
->  * spi drivers can accelerate flash reading/writing using spi-mem dirmap =
-API
->  * continuous reading mode was supported (for some flashes)
->  * OTP support was added (for some flashes)
->  * add support of special data recovery reading (for some flashes)
->  * bug fixes
->  * other minor improvements
->
-> The following linux kernel driver features was not implemented
->  * support of different ECC engines
->  * per operation maximum spi bus frequency
->
-> The code has been tested on Airoha AN7581 (64-bit) based boards
-> equipped with flash memory Micron MT29F2G01ABAGD
->
-> Additionally the patch series includes continuous reading mode fixes.
-> The corresponding linux patches were accepted to nand/next branch
-> of mtd/linux.git repository.
->
-> Changes v2:
->  * update patch description
->  * add fixes for continuous reading mode
->
-> Changes v3:
->  * fix duplication in patch description
->  * add more information about commits ported from linux kernel
->
-> Changes v4:
->  * the original authorship was preserved for several patches
->  * the code was synced with the latest shapshot of future linux-6.17-rc1
->  * spi-nand was replaced by spinand in patch description
->  * continuous reading mode fixes were updated
->
-> Changes v5:
->  * add missed SoB tags
->  * improve patch messages
->  * add tags for patches ported from linux
->  * drop continuous mode fixes (will be sent after corresponding linux fix=
-es)
->
-> Changes v6:
->  * improve patch messages
->
-> Changes v7:
->  * patches to fix continuous reading mode was added.
->
-> Alexander Lobakin (1):
->   mtd: spinand: core: add missing MODULE_DEVICE_TABLE()
->
-> Cheng Ming Lin (2):
->   mtd: spinand: Add support for setting plane select bits
->   mtd: spinand: Add read retry support
->
-> Daniel Golle (1):
->   mtd: spinand: set bitflip_threshold to 75% of ECC strength
->
-> Gabor Juhos (1):
->   mtd: spinand: propagate spinand_wait() errors from
->     spinand_write_page()
->
-> Mikhail Kshevetskiy (15):
->   spi: spi-mem: Extend SPI MEM ops to match Linux 6.16
->   mtd: spinand: Use the spi-mem dirmap API
->   mtd: spinand: Extend spinand_wait() to match Linux kernel
->     implementation
->   mtd: spinand: Make use of spinand_to_[mtd/nand]() helpers
->   mtd: spinand: Align logic for enabling ECC to match Linux kernel
->   mtd: spinand: Refactor spinand_init* functions
->   mtd: spinand: Refactor ECC/OOB functions
->   mtd: spinand: Sync core code and device support with Linux 6.10
->   mtd: spinand: add support of continuous reading mode
->   mtd: spinand: add OTP support
->   mtd: spinand: Enhance the logic when picking a variant
->   mtd: spinand: Sync core code and device support with Linux 6.17-rc1
->   mtd: spinand: fix direct mapping creation sizes
->   mtd: spinand: try a regular dirmap if creating a dirmap for continuous
->     reading fails
->   mtd: spinand: repeat reading in regular mode if continuous reading
->     fails
->
-> Miquel Raynal (2):
->   mtd: nand: Add a NAND page I/O request type
->   mtd: spinand: Add a ->configure_chip() hook
->
-> Takahiro Kuwano (2):
->   mtd: spinand: Remove write_enable_op() in markbad()
->   mtd: spinand: Introduce a way to avoid raw access
->
->  drivers/mtd/nand/spi/Makefile         |   5 +-
->  drivers/mtd/nand/spi/alliancememory.c | 155 ++++
->  drivers/mtd/nand/spi/ato.c            |  88 +++
->  drivers/mtd/nand/spi/core.c           | 975 +++++++++++++++++++-------
->  drivers/mtd/nand/spi/esmt.c           | 123 +++-
->  drivers/mtd/nand/spi/foresee.c        | 107 +++
->  drivers/mtd/nand/spi/gigadevice.c     |  86 ++-
->  drivers/mtd/nand/spi/macronix.c       | 289 ++++++--
->  drivers/mtd/nand/spi/micron.c         | 180 ++++-
->  drivers/mtd/nand/spi/otp.c            | 369 ++++++++++
->  drivers/mtd/nand/spi/paragon.c        |  24 +-
->  drivers/mtd/nand/spi/skyhigh.c        | 149 ++++
->  drivers/mtd/nand/spi/toshiba.c        |  63 +-
->  drivers/mtd/nand/spi/winbond.c        | 361 +++++++++-
->  drivers/mtd/nand/spi/xtx.c            |  20 +-
->  drivers/spi/spi-mem.c                 |  45 +-
->  include/linux/mtd/nand.h              | 157 ++++-
->  include/linux/mtd/spinand.h           | 374 ++++++++--
->  include/spi-mem.h                     |  93 ++-
->  19 files changed, 3154 insertions(+), 509 deletions(-)
->  create mode 100644 drivers/mtd/nand/spi/alliancememory.c
->  create mode 100644 drivers/mtd/nand/spi/ato.c
->  create mode 100644 drivers/mtd/nand/spi/foresee.c
->  create mode 100644 drivers/mtd/nand/spi/otp.c
->  create mode 100644 drivers/mtd/nand/spi/skyhigh.c
->
-> --
-> 2.51.0
->
+Not sure if I'm following you here. So you mean both of the defaults
+should be moved to common/spl/Kconfig.tpl? - like
 
-Long queue but I will pick them today, together with mtd patches
+	config HAS_TPL_SIZE_LIMIT
+		[...]
+		default y if INTEL_APOLLOLAKE
 
-Michael
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+	config TPL_SIZE_LIMIT
+		[...]
+		default 0x7800 if INTEL_APOLLOLAKE
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+> 
+> > diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
+> 
+> The reset of these, to Marek's point, show that we need to also add
+> "default y if .." for a number of other platforms too.
+
+Which platforms exactly?
+
+> At least the ones
+> where today we have default limits provided in Kconfig today.
+
+Besides the ones handled above, i.e.
+	arch/arm/mach-socfpga/Kconfig,
+	arch/mips/mach-mtmips/Kconfig and
+	arch/x86/cpu/apollolake/Kconfig,
+
+there aren't any.
+
+I myself am not very fond of changing that many defconfigs, but I still
+don't see a way of avoiding it. I guess it would become more clear if
+you concretely name a few examples.
+
+Best regards,
+Philip
