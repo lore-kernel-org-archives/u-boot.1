@@ -4,107 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B66CAC5B0
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:18:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7DF0CAC5B9
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:21:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F178828A2;
-	Tue, 30 Sep 2025 02:18:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=traverse.com.au
+	by phobos.denx.de (Postfix) with ESMTP id 47D32828A2;
+	Tue, 30 Sep 2025 02:21:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=traverse.com.au header.i=@traverse.com.au header.b="MvgDA0vs";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="WMmxEWuW";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="GthYOgL0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF85683045; Tue, 30 Sep 2025 02:18:22 +0200 (CEST)
-Received: from fout-a7-smtp.messagingengine.com
- (fout-a7-smtp.messagingengine.com [103.168.172.150])
+ id 87D95833E9; Tue, 30 Sep 2025 02:21:23 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E583F81D6A
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:18:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=traverse.com.au
+ by phobos.denx.de (Postfix) with ESMTPS id E810C81D6A
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:21:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matt@traverse.com.au
-Received: from phl-compute-01.internal (phl-compute-01.internal [10.202.2.41])
- by mailfout.phl.internal (Postfix) with ESMTP id D2C95EC025F;
- Mon, 29 Sep 2025 20:18:18 -0400 (EDT)
-Received: from phl-imap-18 ([10.202.2.89])
- by phl-compute-01.internal (MEProxy); Mon, 29 Sep 2025 20:18:18 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=traverse.com.au;
- h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:date:from:from:in-reply-to:in-reply-to:message-id
- :mime-version:references:reply-to:subject:subject:to:to; s=fm1;
- t=1759191498; x=1759277898; bh=2nI6NbeP53ISovYvxPcY8101uLw9HWaA
- NH2DkpZiBvc=; b=MvgDA0vsO9j9tYR/hyaKqh2CgVUJIW+Ed7UgKc9IKg4YqAgP
- TVp8CLVFTPbAxHjob8bR8FnpaJyFCe2BjZ4XiT9nUQ5PBlFlAkyD61Ny0WpXGXhB
- KzPdwZf4i/Awp+RWETgCNkZOWtQ+pnRY1V+BQ8e8yaPG4eYnAzHRzHVlImwGROYm
- CLNZpOVcJAXNGNXx6r0SbD9z28vu9YUo66AYUoaTIEV4xHMBTh3/0CZUX1G5CjT7
- 6Qao9vQGBCWlrsipG5nJg9ktfP5CljrJ/+w4Gz5xCEHOmzdyPh/eSsNjtJfOU2yg
- DT+lX/gFq5xTm1KGwvOHKVW8bPts1CLB/fdDcw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1759191498; x=
- 1759277898; bh=2nI6NbeP53ISovYvxPcY8101uLw9HWaANH2DkpZiBvc=; b=W
- MmxEWuW2jVtqBldkGur75zwqQcP5AZfXafaJanLjJPfiLdS2xDKFc0aFV9Hw015N
- sQnnd0cCjv9hzO/6jlCn4u63L+gL8gm5lRMRchIEveNsD5DJBhGLAQjmpglTS/qv
- U1OEvpMVWsEIuZkwhC+Fseh4m16OuPAY80y0f21eY99pS7VcP7AOi1Zq84/FT5hM
- TPsJa1Gmnddggyh6JOppxbaCG8Zr9A9cSiPkoe2kyeWGg61xN/a7ZPwriyr4ZMhA
- y9h/pRoms+kHv/DR63CcFHRD/9wDKslhtMkozEOZOKdV7tqcypiJ8o8lnnEvVhjN
- 7VNRQfXDof+tFr8GW0Qew==
-X-ME-Sender: <xms:yiHbaFqixYR0QeLdyZayTcu_QrJ5KAriCc-n6zUV1e4tlEwuLVSp2A>
- <xme:yiHbaCfQiaquOklT2-GC6Qd8PRjdYnGheGlzp4IfYSdb1wzH-pqLlGbXpU7ZFg_Yd
- LAl07zpvhLHVE_RQzWNGY71GwJxJ1m321GohYjGePjt9O43Z07gs8c>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdejleegvdcutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefoggffhffvvefkjghfufgtgfesthhqredtredtjeenucfhrhhomhepfdforghthhgv
- ficuofgtuehrihguvgdfuceomhgrthhtsehtrhgrvhgvrhhsvgdrtghomhdrrghuqeenuc
- ggtffrrghtthgvrhhnpeehgeetvdelffdtjeekhedtjeegvefhhffgueevveejkedttedv
- udfgkeetveetfeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfh
- hrohhmpehmrghtthesthhrrghvvghrshgvrdgtohhmrdgruhdpnhgspghrtghpthhtohep
- udehpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehmihgthhgrlhdrshhimhgvkh
- esrghmugdrtghomhdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdp
- rhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdprhgtphhtthhope
- grfihilhhlihgrmhhssehmrghrvhgvlhhlrdgtohhmpdhrtghpthhtoheptghonhhorhdr
- ughoohhlvgihsehmihgtrhhotghhihhprdgtohhmpdhrtghpthhtohepjhgrmhhivgdrgh
- hisggsohhnshesmhhitghrohgthhhiphdrtghomhdprhgtphhtthhopegrshhhihhshhdr
- khhumhgrrhesnhigphdrtghomhdprhgtphhtthhopehmrghnihhshhdrthhomhgrrhesnh
- igphdrtghomhdprhgtphhtthhopegrnhguhidrthgrnhhgsehngihprdgtohhm
-X-ME-Proxy: <xmx:yiHbaM6MnJHkCOHKKdLVl_rwtFeDxVWRk_MBvwqXrDJTfz0ujIjLBw>
- <xmx:yiHbaIQcRp-PUB2fydLD8xyIVRNNuQdlAKb-yO5X0gjp0VUoDEsFGA>
- <xmx:yiHbaBlc7zxpI0UfFNDF6B_DOnTp35SBvO1dpNA0INpwkky5yTtAdw>
- <xmx:yiHbaMTQG68HH7ShFWANYOi5vSfyCtz_GW_QShHWkYoBLLlHzxOxJA>
- <xmx:yiHbaOl2fc_rT1K1wAUitLzbnTPvS2hlz_OF1yQEwYbmi2tyNTqt5VX9>
-Feedback-ID: i426947f3:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 4E7DA15C008C; Mon, 29 Sep 2025 20:18:18 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o2RFcf6oxvAA91G2KAHobZkdTMBDZBbQ94h//62oDU2i8d60NIK42+VmXVso4B8FAV6LQXrkBTu9IjQZ+ORUntY5m8g7t9BlwftE8n3Uuxpt4EPLRgc72zlyH2MdtBYrxU5nr20xJQuUO/zqkSapncZlSs9GUuzqrcRdPri04FRjXPqiEsa8U/iFnr8sK0DBLt5cHcSQu/lD8iEKu/wl8wrzsXBUpzSpkclc/rjCDWnyBjSvrEOPJcETFJ7SUdCiuU1qGWcW5g8ZuGDw8QAT7HlXjFL83TFIvGuGyhcbp4KgSVdjjZ3bFi6Va/UW2WIrVMlnU6hSQNGoHlVukZmA/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ggsuynechNzz0LNDU0Vi1nEMIJvEAcF2pgkI8sh5qvQ=;
+ b=hNhuihUKEdEcmM6lL8Hks0DnDdCsAVun1fEkrAn44f7BkC68GUp0nlpXccKueekFuhh24RQa/RUPQIej7LTrPLbNQ4qiWp4U1fhOpw0L4Bl/Q9QLn2LbOrKrNH22JNvT8wMb+hKSIq2wY+nPICKBmU8ceE0WcJsy+5eeM9SFYXo9qsxQLpWAyQr3jfp1KZg21PjhUdioToMGnG7qc9zzB0PgRTUmV2izOnAUi274Y1yaI2oxvjVyY4HLb2ty8wYxe1IrrsZ5SchGx1yPuWu52JvyFoMQIDyzVNNJ0O0I/JO9LUg5xmeGDYJFXW6w3RTxCfc5wpj+Y0aHIMkdxztAuQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
+ dkim=pass header.d=iopsys.eu; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ggsuynechNzz0LNDU0Vi1nEMIJvEAcF2pgkI8sh5qvQ=;
+ b=GthYOgL0q9bQJjkXtlD8HpAwI/4+rQTrFghJkOva92rjsiqxN8HL0x4bEdZXecqS9N4QwANQtPGdYcs9wE5Qzdy1KHnmB3eIxe+tF1kxxJeOWAFNLuM78+ze025d2iwD0vKCuwqi3WG7hMf+ICBiND5H0E8LuhskYvs6xoIQjpJHIiTYOdnacbwt93NcrUHyFgbqWydxGZZJU3+JACuRzr2lbMjITYPqa2OH4ByVcuBlEbhdu54gInF3FGZgqwtKBJamAk5gQHMarDDPiEKLUQxNz6LNA12x2acoU3acNEniFOJ0ElFmS1h86m1YB0TORkwreY/ZrZBxig4e7WiVbQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=iopsys.eu;
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
+ by PAWPR08MB11512.eurprd08.prod.outlook.com (2603:10a6:102:50a::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.16; Tue, 30 Sep
+ 2025 00:21:19 +0000
+Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
+ ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9160.015; Tue, 30 Sep 2025
+ 00:21:19 +0000
+From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+To: Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
+ Cheng Ming Lin <chengminglin@mxic.com.tw>,
+ Chuanhong Guo <gch981213@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Andreas Gnau <andreas.gnau@iopsys.eu>
+Subject: [PATCH v7 01/24] spi: spi-mem: Extend SPI MEM ops to match Linux 6.16
+Date: Tue, 30 Sep 2025 03:20:46 +0300
+Message-ID: <20250930002109.3600886-2-mikhail.kshevetskiy@iopsys.eu>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
+References: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR4P281CA0317.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:eb::10) To GV2PR08MB8121.eurprd08.prod.outlook.com
+ (2603:10a6:150:7d::22)
 MIME-Version: 1.0
-X-ThreadId: ABIvpqsO4hGZ
-Date: Tue, 30 Sep 2025 10:16:56 +1000
-From: "Mathew McBride" <matt@traverse.com.au>
-To: "Tom Rini" <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: "Michal Simek" <michal.simek@amd.com>,
- "Pramod Kumar" <pramod.kumar_1@nxp.com>, "Tang Yuantian" <andy.tang@nxp.com>, 
- "Mingkai Hu" <mingkai.hu@nxp.com>, "Ashish Kumar" <Ashish.Kumar@nxp.com>,
- "Priyanka Jain" <priyanka.jain@nxp.com>, "Wasim Khan" <wasim.khan@nxp.com>,
- "Udit Agarwal" <udit.agarwal@nxp.com>,
- "Meenakshi Aggarwal" <meenakshi.aggarwal@nxp.com>,
- "Manish Tomar" <Manish.Tomar@nxp.com>,
- "Conor Dooley" <conor.dooley@microchip.com>,
- "Jamie Gibbons" <jamie.gibbons@microchip.com>,
- "Aaron Williams" <awilliams@marvell.com>
-Message-Id: <6aa43496-d104-4e72-bde3-6c1f01507e23@app.fastmail.com>
-In-Reply-To: <20250929224336.GS6093@bill-the-cat>
-References: <20250929224336.GS6093@bill-the-cat>
-Subject: Re: U-Boot PHY_MSCC vs PHY_VITESSE
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAWPR08MB11512:EE_
+X-MS-Office365-Filtering-Correlation-Id: 89311f2a-8440-4698-68e8-08ddffb746ea
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|7416014|52116014|1800799024|376014|366016|38350700014|921020; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3lJteG8Sn8ZKp+6bT3dAuQ1ews47+/QNsTU5kYx3nvCm7pXmwD8v45TJH1XW?=
+ =?us-ascii?Q?XJCKTPDSuoSoq1KaIAz34rlgaeIAmXj0K3LjUD3UMWO11iaBQV3PipPwA0Ma?=
+ =?us-ascii?Q?L85fY1Yoh3u+ltsNnwch7tKS0vV4yB+mQWwU0D6Co1YlIos2B0z/ptHmGSKx?=
+ =?us-ascii?Q?9X4Nl2slmce8L1zR9C3g45YCZOSNC8x/DgFr9+C+iLf7SNdGY2btVNdd8qL+?=
+ =?us-ascii?Q?+cZftl2fVKWNRiqMwj2hGw4J5dIUD5LeHGL3sMVmI2LCK0mfbVN9n6Nf3IVM?=
+ =?us-ascii?Q?uyW2rDI7R+VkIVvEB5SfblFlr402OeOCYgmkSnvyC34Y62q8TdX4HgMxPeQW?=
+ =?us-ascii?Q?+UcmroKukKWO6OXdPVuUkq7O9QIJSoZMXQH/3W7H+b7bJncblWeYicxK/CdY?=
+ =?us-ascii?Q?M9hBYzAIMJ/0udlrxPUV/DaslMwe2P43EKQS/q5kU62PxOtmavuFk5cNjC0p?=
+ =?us-ascii?Q?zXjx7Rc/RXvmTweBrrcn3f1yCgcmdZY/EJ4opJm5YMApao7J9SGK8eWrjdUV?=
+ =?us-ascii?Q?sSWs1DCQLsb1b4H0tVjemmi8EyOsNWH6UFq161Rx6Sf0cqN5ToZU7KSuCE2V?=
+ =?us-ascii?Q?6fhKCwMtLL5Vi+YKa/2Cp5le0UZiE8l/1QtxB6DgOfNNdgr9KzVWndzi1Yi5?=
+ =?us-ascii?Q?nbGIzG5cIaN9cKht2oO0x9ixwSkRDiQWdssY8tytcuUKEUvZRndSJwHr3gZe?=
+ =?us-ascii?Q?J6axPW13rRzT0qrOk2Q6q3UJDCjr+SldK7IMMc6TTvotwNCut0EYaXq8WkhB?=
+ =?us-ascii?Q?m9wRC4BYCrF2uyU+aTKCemg3t/7LejJg1uSsLigiO48e4L/1WZE9EkYrac7W?=
+ =?us-ascii?Q?YQ1FXuVxgrXLWU/0WU6ignL60qMYyX67CncYqKMZkFnSE/DTZG25QucckoKM?=
+ =?us-ascii?Q?sahPYp+dZiV46sHkqg5kPApgb+QNXRK4UV5NSECAhsWVdNkBfmInCdqs8cCs?=
+ =?us-ascii?Q?+DkJ++xdLWdYkTZvcm88T7TcA8OUGqceWcSWqsj3H0iquiIoa6OloI2WvYni?=
+ =?us-ascii?Q?GCuSEedPo3YtffQT+nDA/R9q+3d0ZwfGYcciU0WY+3t81oOLGNMwFOMzpO1y?=
+ =?us-ascii?Q?gm5zC36icw7zDU9X8vZeZq6bwFJOGOZaLUVhO8neBgglZHK4Iu1vuh9Fdnu9?=
+ =?us-ascii?Q?WtQYvsyufajhbLXz6iCMS3x2TYfgzp8gX0nkId81CrNsZ58wALDUZyLVhWbT?=
+ =?us-ascii?Q?Xz4m8D3VAIZTmN2SnLWKHAeFP/4EGRS+1qm2o4XAiA6+FKMHcQ1Fq5rok8SY?=
+ =?us-ascii?Q?7Syq/6r3/Vsp5hw+k7Yr0pa8ZxFsWBBUbOianN/C5EYSj693SiFNU2vEjV9v?=
+ =?us-ascii?Q?6ijP1YZIbbAtkxlXqtD3HVtWuCTPCJrmDoRNgyO/G14Aod3ND5+wjzb0Cox2?=
+ =?us-ascii?Q?NYr0vM9FDnBT3P/T1IHozm5tsIVzsoHfVP3rweII5WUUCQvubGEzjT444/xp?=
+ =?us-ascii?Q?JceDyjjycXBDbCoTIEJc+BWHWi/O+SU4+Yp0/T7wlB4mHwTay7z17vDAZYKd?=
+ =?us-ascii?Q?GRdZYK/NFeUNV7hdZGT7asvBtTN5zeIuKbvsRkwBcF9+iz9ZOG4LS0dR5w?=
+ =?us-ascii?Q?=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(7416014)(52116014)(1800799024)(376014)(366016)(38350700014)(921020);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?m8ZxHWGQY2GIBqDmMVz7ASXoFtOv0WQ+TmtVXH4U1vEJMUEnCSmA3AjmqeEf?=
+ =?us-ascii?Q?pn0Pe56IP6CjMTZKZEsmMBykrit3QzT1qLGYJ1SHgtXTMyQyaXemSEBoyhBn?=
+ =?us-ascii?Q?FUfQv5qqnKvxGXulKZ96UCtNEYxqFPGE/VPel2K/CbnISXrfUae1NHf9vTpZ?=
+ =?us-ascii?Q?UR4l0Bh3G4zLv8yXp5Hpa5Wx2MQZ65clBRsMVhyuyQVZBPC+LAzF3tBQuejr?=
+ =?us-ascii?Q?K5pZ1BYlFoL8XbOoxmr0pbuEBdRdiu62byCh7UzFrtF/+ebqirLYJCjen4v1?=
+ =?us-ascii?Q?ykcSq+vKtoAV3DxaZHGOFTLzEmD4rpm++VfUezL5eVyDDgP/zPODoSUyuc+V?=
+ =?us-ascii?Q?qN0r0iJ1jviMd59ZYKBn7S0LoNonqIWE/7Y1+t+z0n/GmB7ctX21KGe2HxL/?=
+ =?us-ascii?Q?/KvmZyqQShojXqcKWB/kRM5HJCcg9MfK66OlW/Ch00TxGlTX3gOPCVszVCX/?=
+ =?us-ascii?Q?JAnYDuzfBNoDWwovzpNOTUY+bnOKqIXvV/6xxN55WYq2mSROYi/4xNUb6Yi4?=
+ =?us-ascii?Q?w5wxPz6gz9lCxpmmo+HpASdzJOVYqf4rLA3cwoanRko/9j6a1IJdZp2oKULe?=
+ =?us-ascii?Q?lGZ8GOSOV9+u+h+sfpUiJkYfBDnceLFuqFK44k0gIH1gxMGb5k3bENpm0w5V?=
+ =?us-ascii?Q?wsOEAzRb59EqnnnwiJrGXNgHgLrKEXowL882hgK0RsOzLvE3zEJ9hbozrt7y?=
+ =?us-ascii?Q?U798eZCxLCfEmYZRWyGPCwMmDWp/x5Lk8dTtelh/LsvfQCZiukQ8tpwcNeaq?=
+ =?us-ascii?Q?DneolwGY12YjUuiy6vJUduUcGeKZAQn2P22P9bjP8i8J5YigNfi58ztuPkhn?=
+ =?us-ascii?Q?CzEFNbGuE6PAEgqzsLbBpglQFzkD/Vp1kyi+Bo2wjXZQU6A4LMgkmKVxwsiG?=
+ =?us-ascii?Q?/oPAi9AJHt0mfj3XgRslAp4GU8wgUTirVPDGi9EO8sE3l90x/9ZzooCX696J?=
+ =?us-ascii?Q?vs0rYFl5VZEt6wwBrgJgVq58K1W61e8SgSOTFPRUjd9E1exy0Proft70ZEim?=
+ =?us-ascii?Q?q7RMXAmTEKhGlfkCZ04+SMg65I303bZFg3Wghw3lVyn4svqP8VJpDav05vdE?=
+ =?us-ascii?Q?rc5RdR9S3JYukpbBFR/FNaUCDXDICvLhdpm7kWfJ/fHdYWNDhHsf9oGNW2YX?=
+ =?us-ascii?Q?V1ReQrJNCy5IAU/zIIux/22Ze2fgfmjVq0tba866y1cEktLM6lzZS13FBZuM?=
+ =?us-ascii?Q?ZnAy1wGnf+Vbsv8JrA3eqvjcqfOWeVr2l7tPHhmEVaQ2ug76O18GvDnXzPkP?=
+ =?us-ascii?Q?vz4rBVr8tBvrjKRuSHWWTN0RDwKno3+AkQRBQUU2DrRXlynSoerqquUI5n4p?=
+ =?us-ascii?Q?tMXYk4nBT/pDmJhVP8P3PgCGv0DnYm0dET5kTrZlbYiCsiHtPWeU9hDYC3Cl?=
+ =?us-ascii?Q?YZA8DTwJcxTEnOfaOvRcECYVBju5xq1h/m3I7OHlgZWb+sUABYf0QC23ffxh?=
+ =?us-ascii?Q?eCVG3LSP3iYVj2UuT8QWRjaPW5xNSkb0wa0U3/1VvU8VoVUmYQ957v+cdHRm?=
+ =?us-ascii?Q?b9gUTYVosNk4Sm/QAyZsYbBYr/ZDA2T8rhojDYuHx8G1nXeX2pNcWBjx4e9E?=
+ =?us-ascii?Q?dzQclAgcvnIhIwKhixOOPeA7CM4j5i1xJojdrYE+9Q7HDVQp88u0tnibxRwX?=
+ =?us-ascii?Q?f3ApftPgkKlBlZ2wFN/d+Jw=3D?=
+X-OriginatorOrg: iopsys.eu
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89311f2a-8440-4698-68e8-08ddffb746ea
+X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 00:21:19.3242 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OsfkO68WGEtmLRgHcf3QmLuU1/ypUoFK3nebc7DV1wJMvOPaLQ6e4RypgHvmoQ8k43qyELbSZcK8WbmyO5xGafV2Tw06EyKF+63PqkTpVfw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB11512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,57 +172,307 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This pulls in multiple changes from the Linux kernel in order to keep
+the code in sync. This also fixes octal mode support.
 
-On Tue, Sep 30, 2025, at 8:43 AM, Tom Rini wrote:
-> Hey all,
->=20
-> As part of working on "allyesconfig" support I ran into the following
-> problem. Both drivers/net/phy/mscc.c and drivers/net/phy/vitesse.c
-> implement support for the VSC8584 PHY. The vitesse.c driver is much
-> older and only had VSC8584 support added for a specific Freescale
-> Layerscape platform whereas mscc.c is modern and been updated with
-> newer PHYs as well. And we need one driver to support this phy, not tw=
-o.
-> I am inclined to remove support from vitesse.c. However, only 4
-> platforms use the PHY_MSCC driver and everyone else uses PHY_VITESSE.
->=20
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
+---
+ drivers/spi/spi-mem.c | 13 +++---
+ include/spi-mem.h     | 92 ++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 90 insertions(+), 15 deletions(-)
 
-At the moment mscc.c in U-Boot does not implement the particular PHY mod=
-el (VSC8514) that we use. This Quad GbE PHY was on a number on Freescale=
-/NXP QorIQ (PPC & Arm) dev boards. Until 2019 Freescale/NXP was selling =
-a licensed version of this chip ("F104S8A").
+diff --git a/drivers/spi/spi-mem.c b/drivers/spi/spi-mem.c
+index 3579b7d7db5..6f06650384c 100644
+--- a/drivers/spi/spi-mem.c
++++ b/drivers/spi/spi-mem.c
+@@ -120,18 +120,21 @@ static int spi_check_buswidth_req(struct spi_slave *slave, u8 buswidth, bool tx)
+ 		return 0;
+ 
+ 	case 2:
+-		if ((tx && (mode & (SPI_TX_DUAL | SPI_TX_QUAD))) ||
+-		    (!tx && (mode & (SPI_RX_DUAL | SPI_RX_QUAD))))
++		if ((tx &&
++		     (mode & (SPI_TX_DUAL | SPI_TX_QUAD | SPI_TX_OCTAL))) ||
++		    (!tx &&
++		     (mode & (SPI_RX_DUAL | SPI_RX_QUAD | SPI_RX_OCTAL))))
+ 			return 0;
+ 
+ 		break;
+ 
+ 	case 4:
+-		if ((tx && (mode & SPI_TX_QUAD)) ||
+-		    (!tx && (mode & SPI_RX_QUAD)))
++		if ((tx && (mode & (SPI_TX_QUAD | SPI_TX_OCTAL))) ||
++		    (!tx && (mode & (SPI_RX_QUAD | SPI_RX_OCTAL))))
+ 			return 0;
+ 
+ 		break;
++
+ 	case 8:
+ 		if ((tx && (mode & SPI_TX_OCTAL)) ||
+ 		    (!tx && (mode & SPI_RX_OCTAL)))
+@@ -300,7 +303,7 @@ int spi_mem_exec_op(struct spi_slave *slave, const struct spi_mem_op *op)
+ 		 * read path) and expect the core to use the regular SPI
+ 		 * interface in other cases.
+ 		 */
+-		if (!ret || ret != -ENOTSUPP) {
++		if (!ret || (ret != -ENOTSUPP && ret != -EOPNOTSUPP)) {
+ 			spi_release_bus(slave);
+ 			return ret;
+ 		}
+diff --git a/include/spi-mem.h b/include/spi-mem.h
+index 2eb05a2e5bc..e68e2b50e85 100644
+--- a/include/spi-mem.h
++++ b/include/spi-mem.h
+@@ -17,16 +17,32 @@ struct udevice;
+ 
+ #define SPI_MEM_OP_CMD(__opcode, __buswidth)			\
+ 	{							\
++		.nbytes = 1,					\
+ 		.buswidth = __buswidth,				\
+ 		.opcode = __opcode,				\
++	}
++
++#define SPI_MEM_DTR_OP_CMD(__opcode, __buswidth)		\
++	{							\
+ 		.nbytes = 1,					\
++		.opcode = __opcode,				\
++		.buswidth = __buswidth,				\
++		.dtr = true,					\
+ 	}
+ 
+ #define SPI_MEM_OP_ADDR(__nbytes, __val, __buswidth)		\
++	{							\
++		.nbytes = __nbytes,				\
++		.buswidth = __buswidth,				\
++		.val = __val,					\
++	}
++
++#define SPI_MEM_DTR_OP_ADDR(__nbytes, __val, __buswidth)	\
+ 	{							\
+ 		.nbytes = __nbytes,				\
+ 		.val = __val,					\
+ 		.buswidth = __buswidth,				\
++		.dtr = true,					\
+ 	}
+ 
+ #define SPI_MEM_OP_NO_ADDR	{ }
+@@ -37,22 +53,47 @@ struct udevice;
+ 		.buswidth = __buswidth,				\
+ 	}
+ 
++#define SPI_MEM_DTR_OP_DUMMY(__nbytes, __buswidth)		\
++	{							\
++		.nbytes = __nbytes,				\
++		.buswidth = __buswidth,				\
++		.dtr = true,					\
++	}
++
+ #define SPI_MEM_OP_NO_DUMMY	{ }
+ 
+ #define SPI_MEM_OP_DATA_IN(__nbytes, __buf, __buswidth)		\
++	{							\
++		.buswidth = __buswidth,				\
++		.dir = SPI_MEM_DATA_IN,				\
++		.nbytes = __nbytes,				\
++		.buf.in = __buf,				\
++	}
++
++#define SPI_MEM_DTR_OP_DATA_IN(__nbytes, __buf, __buswidth)	\
+ 	{							\
+ 		.dir = SPI_MEM_DATA_IN,				\
+ 		.nbytes = __nbytes,				\
+ 		.buf.in = __buf,				\
+ 		.buswidth = __buswidth,				\
++		.dtr = true,					\
+ 	}
+ 
+ #define SPI_MEM_OP_DATA_OUT(__nbytes, __buf, __buswidth)	\
++	{							\
++		.buswidth = __buswidth,				\
++		.dir = SPI_MEM_DATA_OUT,			\
++		.nbytes = __nbytes,				\
++		.buf.out = __buf,				\
++	}
++
++#define SPI_MEM_DTR_OP_DATA_OUT(__nbytes, __buf, __buswidth)	\
+ 	{							\
+ 		.dir = SPI_MEM_DATA_OUT,			\
+ 		.nbytes = __nbytes,				\
+ 		.buf.out = __buf,				\
+ 		.buswidth = __buswidth,				\
++		.dtr = true,					\
+ 	}
+ 
+ #define SPI_MEM_OP_NO_DATA	{ }
+@@ -62,7 +103,7 @@ struct udevice;
+  *			   transfer from the controller perspective
+  * @SPI_MEM_NO_DATA: no data transferred
+  * @SPI_MEM_DATA_IN: data coming from the SPI memory
+- * @SPI_MEM_DATA_OUT: data sent the SPI memory
++ * @SPI_MEM_DATA_OUT: data sent to the SPI memory
+  */
+ enum spi_mem_data_dir {
+ 	SPI_MEM_NO_DATA,
+@@ -70,6 +111,9 @@ enum spi_mem_data_dir {
+ 	SPI_MEM_DATA_OUT,
+ };
+ 
++#define SPI_MEM_OP_MAX_FREQ(__freq)				\
++	.max_freq = __freq
++
+ /**
+  * struct spi_mem_op - describes a SPI memory operation
+  * @cmd.nbytes: number of opcode bytes (only 1 or 2 are valid). The opcode is
+@@ -80,26 +124,35 @@ enum spi_mem_data_dir {
+  * @addr.nbytes: number of address bytes to send. Can be zero if the operation
+  *		 does not need to send an address
+  * @addr.buswidth: number of IO lines used to transmit the address cycles
++ * @addr.dtr: whether the address should be sent in DTR mode or not
+  * @addr.val: address value. This value is always sent MSB first on the bus.
+  *	      Note that only @addr.nbytes are taken into account in this
+  *	      address value, so users should make sure the value fits in the
+  *	      assigned number of bytes.
+- * @addr.dtr: whether the address should be sent in DTR mode or not
+  * @dummy.nbytes: number of dummy bytes to send after an opcode or address. Can
+  *		  be zero if the operation does not require dummy bytes
+  * @dummy.buswidth: number of IO lanes used to transmit the dummy bytes
+  * @dummy.dtr: whether the dummy bytes should be sent in DTR mode or not
+  * @data.buswidth: number of IO lanes used to send/receive the data
+  * @data.dtr: whether the data should be sent in DTR mode or not
++ * @data.ecc: whether error correction is required or not
++ * @data.swap16: whether the byte order of 16-bit words is swapped when read
++ *		 or written in Octal DTR mode compared to STR mode.
+  * @data.dir: direction of the transfer
+- * @data.buf.in: input buffer
+- * @data.buf.out: output buffer
++ * @data.nbytes: number of data bytes to send/receive. Can be zero if the
++ *		 operation does not involve transferring data
++ * @data.buf.in: input buffer (must be DMA-able)
++ * @data.buf.out: output buffer (must be DMA-able)
++ * @max_freq: frequency limitation wrt this operation. 0 means there is no
++ *	      specific constraint and the highest achievable frequency can be
++ *	      attempted.
+  */
+ struct spi_mem_op {
+ 	struct {
+ 		u8 nbytes;
+ 		u8 buswidth;
+ 		u8 dtr : 1;
++		u8 __pad : 7;
+ 		u16 opcode;
+ 	} cmd;
+ 
+@@ -107,6 +160,7 @@ struct spi_mem_op {
+ 		u8 nbytes;
+ 		u8 buswidth;
+ 		u8 dtr : 1;
++		u8 __pad : 7;
+ 		u64 val;
+ 	} addr;
+ 
+@@ -114,28 +168,35 @@ struct spi_mem_op {
+ 		u8 nbytes;
+ 		u8 buswidth;
+ 		u8 dtr : 1;
++		u8 __pad : 7;
+ 	} dummy;
+ 
+ 	struct {
+ 		u8 buswidth;
+ 		u8 dtr : 1;
++		u8 ecc : 1;
++		u8 swap16 : 1;
++		u8 __pad : 5;
+ 		enum spi_mem_data_dir dir;
+ 		unsigned int nbytes;
+-		/* buf.{in,out} must be DMA-able. */
+ 		union {
+ 			void *in;
+ 			const void *out;
+ 		} buf;
+ 	} data;
++
++	unsigned int max_freq;
+ };
+ 
+-#define SPI_MEM_OP(__cmd, __addr, __dummy, __data)		\
++#define SPI_MEM_OP(__cmd, __addr, __dummy, __data, ...)		\
+ 	{							\
+ 		.cmd = __cmd,					\
+ 		.addr = __addr,					\
+ 		.dummy = __dummy,				\
+ 		.data = __data,					\
++		__VA_ARGS__					\
+ 	}
++
+ /**
+  * struct spi_mem_dirmap_info - Direct mapping information
+  * @op_tmpl: operation template that should be used by the direct mapping when
+@@ -143,7 +204,7 @@ struct spi_mem_op {
+  * @offset: absolute offset this direct mapping is pointing to
+  * @length: length in byte of this direct mapping
+  *
+- * This information is used by the controller specific implementation to know
++ * These information are used by the controller specific implementation to know
+  * the portion of memory that is directly mapped and the spi_mem_op that should
+  * be used to access the device.
+  * A direct mapping is only valid for one direction (read or write) and this
+@@ -223,10 +284,12 @@ static inline void *spi_mem_get_drvdata(struct spi_mem *mem)
+ /**
+  * struct spi_controller_mem_ops - SPI memory operations
+  * @adjust_op_size: shrink the data xfer of an operation to match controller's
+- *		    limitations (can be alignment of max RX/TX size
++ *		    limitations (can be alignment or max RX/TX size
+  *		    limitations)
+  * @supports_op: check if an operation is supported by the controller
+  * @exec_op: execute a SPI memory operation
++ *           not all driver provides supports_op(), so it can return -EOPNOTSUPP
++ *           if the op is not supported by the driver/controller
+  * @dirmap_create: create a direct mapping descriptor that can later be used to
+  *		   access the memory device. This method is optional
+  * @dirmap_destroy: destroy a memory descriptor previous created by
+@@ -300,13 +363,16 @@ int spi_controller_dma_map_mem_op_data(struct spi_controller *ctlr,
+ void spi_controller_dma_unmap_mem_op_data(struct spi_controller *ctlr,
+ 					  const struct spi_mem_op *op,
+ 					  struct sg_table *sg);
++
++bool spi_mem_default_supports_op(struct spi_mem *mem,
++				 const struct spi_mem_op *op);
+ #else
+ static inline int
+ spi_controller_dma_map_mem_op_data(struct spi_controller *ctlr,
+ 				   const struct spi_mem_op *op,
+ 				   struct sg_table *sg)
+ {
+-	return -ENOSYS;
++	return -ENOTSUPP;
+ }
+ 
+ static inline void
+@@ -315,6 +381,13 @@ spi_controller_dma_unmap_mem_op_data(struct spi_controller *ctlr,
+ 				     struct sg_table *sg)
+ {
+ }
++
++static inline
++bool spi_mem_default_supports_op(struct spi_mem *mem,
++				 const struct spi_mem_op *op)
++{
++	return false;
++}
+ #endif /* CONFIG_SPI_MEM */
+ #endif /* __UBOOT__ */
+ 
+@@ -337,7 +410,6 @@ ssize_t spi_mem_dirmap_read(struct spi_mem_dirmap_desc *desc,
+ 			    u64 offs, size_t len, void *buf);
+ ssize_t spi_mem_dirmap_write(struct spi_mem_dirmap_desc *desc,
+ 			     u64 offs, size_t len, const void *buf);
+-
+ #ifndef __UBOOT__
+ int spi_mem_driver_register_with_owner(struct spi_mem_driver *drv,
+ 				       struct module *owner);
+-- 
+2.51.0
 
-The Linux version of mscc.c does support these PHYs, so we can bring acr=
-oss from that driver.
-However, many PHYs in this family have complicated errata workarounds, a=
-nd the VSC8514 is no exception.
-
-I have made some attempts to "port" the mscc.c support for VSC8514 (erra=
-tas included) before, but it's errata workaround method does not seem to=
- work as reliably in U-Boot as it does under Linux.
-
-(I also have my own version of vitesse.c which implements the errata wor=
-karound for VSC8514, derived directly from Microchips own SDK sources. U=
-nfortunately it's too messy to submit to U-Boot, but it has worked relia=
-bly for many years)=20
-
-> I'm cc'ing all of the board maintainers (other than PowerPC platforms)
-> that use PHY_VITESEE today to see what their feedback is on which way =
-to
-> go here. I'm ignoring PowerPC because that can just stay on the
-> PHY_VITESSE driver based on timing of changes in git log.
->=20
-I'm in favor (as far as board/traverse/ten64 goes) of migrating to mscc.=
-c, it is just a matter of finding the time to sit down and implement sup=
-port for the PHY I need (VSC8514).
-
-Best Regards,
-Matt
-
-> --=20
-> Tom
->=20
->=20
-> *Attachments:*
->  =E2=80=A2 signature.asc
