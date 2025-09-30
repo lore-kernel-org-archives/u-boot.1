@@ -4,147 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89C97CCA468
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 11:03:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE64CCA468
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 11:08:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3BA083526;
-	Tue, 30 Sep 2025 13:03:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id F074983045;
+	Tue, 30 Sep 2025 13:08:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="q4vP3puz";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="JqieNa1+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D163832AD; Tue, 30 Sep 2025 13:03:18 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D9F32832AD; Tue, 30 Sep 2025 13:08:48 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C78A2833E9
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 13:03:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D65CF828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 13:08:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o5dTilSwpqiSbhoxA3bEVgido+gv9BEi2mrobfru0ZEuFqJ3TFydyrMW7Blb2rtHxzK2h2eV/gQ55Hy8BjpRsXFQqksq1TdXxv7dLq+cO/CKWBfJhWlsd14oYwy/E8Sd2Eh+VYVTlDCHxICaD6fed4ZWwcRsdbiAu1ij/PIXGABvIRi8W5kryfDOaFJeiH+nvMCS3dluwol3h169hXf3oPKvPdWBIQetSHONMbagCpxkLiyj9CJGB8t6iog7nvXBkKqzQa+2+v8lm1pN6TUZF2PTFQJ6aS6hmzAUkoKA6jyIwKcrYz/K8Yh142ga1Gj+VPQlDx2vuDAWv4npus2PZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=I9zyZKyTQaSgm1lMkwiSZ+72DosDPiiYpBkGakO4iSM=;
- b=X/8ICiD3KZS7kgUmeSi71pluNdZh7CvFyJ6OT76VcUMktHbgAtd8ShsD7qupfdQ6z3oBX2BnM9nWvih0bqyOD+ea3VTJ3aOVCHZ5VuezsbtofGMLEDCk5G1plMRAsG7LsjfG0TTzxhFzgaxDy6OQpjV1Qv609n89qwk//pTwxelo3ODBT8nft++Cp4WbV7H+CmE/dPTc0vyhOAOSPZnuFHm2EGZ4ltt3mKyid1cIi/tUOnolWfIPDF8WovznAwVi4wFraSG9GAGOPNSdmhbSXPjs5mafcLJdS8lJJ1HoDwHsiEA8h2g0SP1ZjaC6SEg4dLTatNvzS6HrFu+lgnQq8Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=I9zyZKyTQaSgm1lMkwiSZ+72DosDPiiYpBkGakO4iSM=;
- b=q4vP3puzTJL6xFK+dON38xltom5YEyX/foQKCm0wqjCmjczLqkNFVYfsf3aDc085MvdVTQAgZ2ZUYY/seuheVeMwb0qNHIIMb8g17ljtLGtzFi7fL2gdx4TLHqxbxgueeXNz7+ovsaWZOzqbFcJ4cth9JztXJJRL0YRhSCb0FirtgfzKHrS5lv3ww6pQFtwvVM5KtDi7qStOOD6tKKQC5jk6+6L/xHCG1aIMTHMU5XsarZIypW7Da4qXBSCy3EWApIhoG6ZkZ9uYU/pG+w4YMRDxnPOM67gl8g9kpJ91PMVyLlTxksB26e2s+dIbmIrG9ihDUfUPsz5iIh7d7HLWcg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by GV2PR08MB11605.eurprd08.prod.outlook.com (2603:10a6:150:2d6::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Tue, 30 Sep
- 2025 11:03:09 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9160.015; Tue, 30 Sep 2025
- 11:03:09 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: [PATCH v6 0/2] cmd: mtd: fix benchmarking
-Date: Tue, 30 Sep 2025 14:03:00 +0300
-Message-ID: <20250930110302.4031642-1-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0354.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:18d::17) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-b3e25a4bfd5so435492666b.2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 04:08:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1759230526; x=1759835326; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=faA/P2pAoFbSxuLsFKoVz1wR15SohTpKdSQpC8qiNiM=;
+ b=JqieNa1++aLxi4GIu5yJ1sCsF5OEy+lNdjd6kSpGmcKZpfsd8Nt1P7mmMWtBdCWobO
+ EuBQeC351sD3ovifQ6gf5NLz/d9rtZ9lQlxOHV8nhQ2YLCr/jn5UpDwcg9df2umVoEvy
+ dIYLQaE5s1vWe1f6TZfxQapSHnzWJjA0U/4P8FRoNXFj2C07u5w3yFdKAh3emHkVhkq1
+ IYdV543+ziACdnavcSNK6NZRbZ5PTjKoad9OJsF6j4H9dwBMlhPMsA9VJLkweXWjhxDq
+ 3oeb6/m9fNmKTikVe4EXdHlNSlRfTOkh7/9Sc8Z6JhNQF6+FJJL52VEv5fgjwcOLHPAz
+ Eb7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759230526; x=1759835326;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=faA/P2pAoFbSxuLsFKoVz1wR15SohTpKdSQpC8qiNiM=;
+ b=AVb5FhsELdWs2a6VZzz5VW+XDD2GdUi/l/TC39dx0+6Ba1J7EMjJofIVvTkD5q6Y7X
+ v3c6HLSDqe4ABIJFPz/OZTf7hxvfpHrVImRAjdhfPPTH3VPjl2zM54YxRRbAtC8wbkIx
+ ACl2L4hiOOlhUOsoKC6KBkk0/XN+gEHAc7EN+zjJNb6jSFvU0bjnuxnBza6Zd5fdLm16
+ p6jSrTkRx71GF7G/oHzB8yRyjuMWouAucUP+kNGAHdIXAmZcng+L9N8M2JYkpWjMCZRh
+ odyfqa+c4UeMC4B7c/M+CdsIesZXxq48qm9sB4uCTty97N6k7RkFKVaH18qku0AoZwuS
+ wOrA==
+X-Gm-Message-State: AOJu0YwYIynTvv2V+O/zGufPA9dem5ep55F3wI1bhSNcH26Ih4KRmNl2
+ MkBBTCAWqVs1Faorb1eJS3n8fATvj76QUNH1aOQTcP61WGyhZqvSI3zugjiIHg==
+X-Gm-Gg: ASbGncs7GK/TfwlyLSZNlXeDuzv6qhTdi9wIUpAFhSoDuV5B/seMuXJHatFfDP3Zeqr
+ chKSvBW+DpU2dKX4h17CDOelco82YgA/IeVu0CwNoAxRKlMN6G0wqnsLnGQMRf9WYJ7pDLzrH4Y
+ jDoTZKl+cxYKAH3KOE8y9lVY9MFR+5JvI/w86xo9y4YNYpzbLo1x8ryphW7uBpZKriRNRrOPw1L
+ ApYeqfjsS7ksQa0uRWA+znHqwy5q5liBRoNOG9P1ryo/sBtueiKVoFRBikB5JE5J/4IkoD/BVAI
+ JNn2l9T5kGTuVLikzMSwXTV28YFr3L0KABiQ0IItYKUUSNCWy/2sGo517fSl42UfTRCeosWRhqi
+ XNiHqfnLb5cIfjuyNc/SM53UGY8tMrW6BHRcPsVUnDISR45chbJRGwtej/NaOQWUdiegSv+VQZE
+ Ek/PvxHf4/AH17ZN3sWCxiWcf00vNPAzO1viCinZath2HQkr9w
+X-Google-Smtp-Source: AGHT+IHBPBmHECK4sesOaPJyDIADNfFm8pQ0MhsvEUDTXYn8/CJnpwfZKu4eeDjcfpCpLKAD4TfzDQ==
+X-Received: by 2002:a17:907:608c:b0:b3c:3c8e:1886 with SMTP id
+ a640c23a62f3a-b3c3c8e23c5mr1141623266b.4.1759230525531; 
+ Tue, 30 Sep 2025 04:08:45 -0700 (PDT)
+Received: from development2.visionsystems.local (mail.visionsystems.de.
+ [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b35446f753csm1123101766b.55.2025.09.30.04.08.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Sep 2025 04:08:45 -0700 (PDT)
+From: yegorslists@googlemail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] doc: develop: fix grammar and syntax
+Date: Tue, 30 Sep 2025 13:08:39 +0200
+Message-Id: <20250930110839.3470553-1-yegorslists@googlemail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|GV2PR08MB11605:EE_
-X-MS-Office365-Filtering-Correlation-Id: db30f610-eae3-4a1f-e560-08de0010f0bb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?v4PL6aEl9+WHqHo8ISkYXhzqYEGma6t7DW1kKgIlv9dTFwKJ036nlTWbyHkj?=
- =?us-ascii?Q?q4RTJpwe9qM/YceeAg7FI0tP27CoSwcoYgI8ZYprj5Ijt8OebRlXin+sOz3j?=
- =?us-ascii?Q?PEElfcIxoU/B9zQ37KYuAhWqNY/oV8Pnl/ftkxYnQChK9IcxanbwxbUeyquv?=
- =?us-ascii?Q?d39WOunNn1HiOWD5Fs04SIQkkj7cgnVscgAmqhkn4C9ANR6rMgIg2FYw4lqh?=
- =?us-ascii?Q?YTQOi/ektbXfifCgyB1bJxzGDhosyGa8oiO18+BryGaYdL7C8F7IOzMifv0Z?=
- =?us-ascii?Q?8kOJQJBZnJfvmbAiplOPflDHcDxFNz/W+73sVoX5aOrA7ysaIxXEc5H4KDi3?=
- =?us-ascii?Q?FGOOFLdutueW9ZM2BfF1kjCv3KEb30kBPjevo9YV1p14FTYT/nC6birx84o7?=
- =?us-ascii?Q?bHBqdqqXxkxuZyoAksiWkGn6NiQi78PEQ6ABcYBUfjD6bOmMV5/zqy0DIhnX?=
- =?us-ascii?Q?rmEiaE1DpBgO+EiyhSA7x5dOdrICtsC1e3W6j1m7fqWJ+pQ9houkMAZXJquq?=
- =?us-ascii?Q?c+GBMJdVVNyiZex5iIYaNCajPWiH/8fLNhBuTrt7aSd52UEQlaG2VJL0Bfvp?=
- =?us-ascii?Q?1oWLxqWeUYGhzHmvMqiZQaiKTKxLdvTh54GKiIzovo9oNBjOMLpghvMdibRD?=
- =?us-ascii?Q?xt2PfvmUVA9hCJjpeWvDbFeC4RL4OiJBQwTFgyaJYRfAabf1gi142Fry/eRQ?=
- =?us-ascii?Q?5wLBFEgBvfkCs24nwFzpkYGbU1D2rFhshwTHBl9BHso42IEb8VJNHye0gA0n?=
- =?us-ascii?Q?AmAZbr8ZCNoWc2rrCaSrqjDeVwG5G9srVc2Bmi1k5kEMFcBgBNfy+66X9TJx?=
- =?us-ascii?Q?2turLr3z2W+I0VqYhnqW0O9+gvlk3NBr4GEFHAlk5tfVQJGQ2cLaCKnHI2ny?=
- =?us-ascii?Q?K7vrQAb4+zZJtZ2gCsJdEUtHdr3KVlmQIO02pScIEyBOEHEycSQwhIy76Vi5?=
- =?us-ascii?Q?teO6WMh0TMMFYerobqSu80d7Liu2OVF7pNFJ1fPAgOwLXliwwBRfoUXn14WD?=
- =?us-ascii?Q?epzXos5BxWzWe49WnKDIJ+fKVspU2kakhMMNPma9mwxrAU8ampcpJF3Pd7Tt?=
- =?us-ascii?Q?8gMZZoYVgHXNREvAuTer5UhkDV3huKXP7e5LTSCp67rTdew60S5VTNEvpTim?=
- =?us-ascii?Q?oxGeDzYDm4kHumvi72HDRW33HXbBeACL2T+K6meA5lctt6VRL4rI7KXw+ZIl?=
- =?us-ascii?Q?Wc4yy1VhOYT7SaYEEWBC3CXy0Y/Z3VOHD9aBgrZnK5BmIU9iM6PDG2fvKBIy?=
- =?us-ascii?Q?uWLcZlAysN4D+55pmFHqA08kbBncwSyYj27T9PjxbIsoFqJWoJSS0nkPxtFE?=
- =?us-ascii?Q?AL+OIxhlzMpGOi/gC4uL4PtgZHW7Fu7tplqgHO0nrx+wyTiZDxUv5lHivcbW?=
- =?us-ascii?Q?q4n2FifHut1hIW5XhGIJjqANyRZczrFpLsc/LI/asjw9HOqe37TF3Ha6fB10?=
- =?us-ascii?Q?QXiKvB/yBvxd+wGEh2Dji5k/o5LWGIIVhuPbc76Pk/77km0jS1xkKZmEl9qT?=
- =?us-ascii?Q?qtgSQVKvLm4JUZZySx8Fy3hB6wuFMLvgOsyg?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CeCxXksLCxIkwAj3WZoElWfLXgOjQlbaHR0fBmAyx7TBhSRSMKtQvV5P8POb?=
- =?us-ascii?Q?Gq2zIXIXWljaX++kEG6oT1BCZPASNkJcjDv/OWaTltRK7+uUDGi+NHovYUF6?=
- =?us-ascii?Q?K6HG9Z62j83H78PnFmQel9yOZQPrvB50mz0P4J0lD/lVeK9tEYYgNjESO3OW?=
- =?us-ascii?Q?amPZy6YthIucaXyrjDec1l8RZC+FNW3t5GFTwWM+RiVv7FYFae/zx71lVb6u?=
- =?us-ascii?Q?Qx7GWDObCxsJvzWA8M8QXmufWTTMGM2miH5V0waOKclk2BaEZnCuSizibHdc?=
- =?us-ascii?Q?7o9zRNqS6ik0ntwi4pE3GBMKiCpuS6MKMiYBlih94UEwT6oY0/qwanRy9kwa?=
- =?us-ascii?Q?ssZ1wSysfxp+gDMb7+JH5HhB2SY8OgOdZ6QKrBnGJzlIJIsrV6RtTGjcNtMC?=
- =?us-ascii?Q?npEdYNyrPEEbkgZ7w8MyXXc459UHSquH574drIZjTtnhRapjRp2ok7mLC+pE?=
- =?us-ascii?Q?2cXb0Iy3BCPMc0CQGtpw1UmVnu4yvW0laPN8V09sL9E9+GCTWXeJgVyoTwZ5?=
- =?us-ascii?Q?flhKtMhkXmc64IgRi5UHDJXBmxfRWVPtUVaA+svUD64uPzuXLc94L3Go7nYn?=
- =?us-ascii?Q?jPlxw9GR2atgg3JQZHDN7u7CEj1f9PO4pHhvQnCXONtBdbC1i11VP/7dd9TB?=
- =?us-ascii?Q?rrZYV/0joPFsUfB1c87ZF649veBXA5vl5/DTHT0eT/GTDkyTagUUUxjDHM7S?=
- =?us-ascii?Q?rDIO+u7ueOZuihX/wJly1PBAaLUC0ZxGdq4qxfH/Kib2KkMVTX7A/GOmriN2?=
- =?us-ascii?Q?PzfKe3Cx9o2lmJ7xa0hSn5R+f1NNw6RVMeM0CwbaA3cg5XYlUUEBUPX/JLQf?=
- =?us-ascii?Q?Tw7MtCymQQhgoG1+kPLRjHzwcDC/8ytYFvXR75y9pFdSCVbDUSEilYGdZUvr?=
- =?us-ascii?Q?GA7k4jd+zPOH5iBiKLghAgvjBSoMdNFnarQqHA9CD60Nny7x0K5QuxmRKgrN?=
- =?us-ascii?Q?POte0M4oSr0OBTM0ZZL6W0wxkX0TzscGWv0dijLNQqaMp0+ynFn4qVTxWriY?=
- =?us-ascii?Q?ZJpdAU9RVjGN1VUqrGsRIVG7TQvWxoUoF8pIdiXRO2+dCuMpeVge6aQl+sBF?=
- =?us-ascii?Q?3+/J1Hc5pP6G6hRzlVexwmsAyYaRY1b2Y0jbuSZyhTh/gKiSHJCFAmlJwP8B?=
- =?us-ascii?Q?WuJkr+QyKhZSTy7daB9fjWfY9gOiq9a14gNJM4OK4A3fCdiPYR9E1aRY4vG6?=
- =?us-ascii?Q?iHsU7cnwcnDX9N3aeIfaDtxviah+kQK3TyGayfziRfn69cZvAuNJOPzcgfKj?=
- =?us-ascii?Q?h9irSyB+oJrgHR054TLA6O7bpv9y6jgTiUe7QKAmExn3JHxhPeBPVDOH0XVp?=
- =?us-ascii?Q?s3pakNSqdKq+ZmfwFmtNDe4xx41tE5yj9At9tKyMNjs/UFUvgOKIRpgEZtJ0?=
- =?us-ascii?Q?D/1+Jw38m8aUrAjW8k3fO3LEcyg3FPPwMKbe3ZjQD7IDl00qP5lbAEK7Wp0W?=
- =?us-ascii?Q?iWa8CikvED35XuZXBblAWWRjM+nOE4v+Y7iBjgy/OSLusN0FBhYJ4P1PdNuw?=
- =?us-ascii?Q?x6TiWjNhvmq5t2E+gKduaK4TScWxvcyU5+aNrsPGakA3G8TDijSBKbIKURPw?=
- =?us-ascii?Q?Yvm/KdnqmArlM2TFIfrU4PCgAKlNdNdOL8HPKjPUPmJtHsDP3syzIIWJlrr1?=
- =?us-ascii?Q?wkJikvvEQTzpkAiNDnR+oak=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: db30f610-eae3-4a1f-e560-08de0010f0bb
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 11:03:09.4114 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2CKvzc4Rr+Ol1GBoNhBRdyt1gBr/tpwYJF/YHMeJoPQMtgKAKPdPX4a+WTgnbFRI3w7epIILB9TZM+xX0xEw2xumMefpsuDa9BDJtx0G11w=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB11605
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,35 +96,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patch series fixes speed calculation for nand device case and
-updates help to refer benchmark option presence.
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-Changes v2:
- * update commit message
- * 'Fixes:' tag was added
- * calculate speed a bit more precisely using a 64-bit math
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+---
+ doc/develop/devicetree/control.rst | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-Changes v3:
- * split on 2 patches
- * update help for 'mtd write' command as well
- * format help for 'mtd' command to align device names on the same collumn
-
-Changes v4:
- * attemt to sent incorrect patches (sorry for this)
-
-Changes v5:
- * really rebase on top of master branch
-
-Changes v6:
- * rebased on top of "cmd: mtd: markbad/nand_write_test/nand_read_test" branch
-
-Mikhail Kshevetskiy (2):
-  cmd: mtd: fix speed measurement in the speed benchmark
-  cmd: mtd: add benchmark option to the help
-
- cmd/mtd.c | 29 +++++++++++++++--------------
- 1 file changed, 15 insertions(+), 14 deletions(-)
-
+diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
+index 8811e1d5c23..c25b98683f8 100644
+--- a/doc/develop/devicetree/control.rst
++++ b/doc/develop/devicetree/control.rst
+@@ -79,7 +79,7 @@ regularly synced with the Linux kernel and hence no need for manual devicetree
+ sync. You may find that the `dts/upstream/` already has a suitable devicetree
+ file for your board. Look in `dts/upstream/src/<arch>/<vendor>`.
+ 
+-If not you might find other boards with suitable files that you can
++If not, you might find other boards with suitable files that you can
+ modify to your needs. Look in the board directories for files with a
+ .dts extension.
+ 
+@@ -98,7 +98,7 @@ Linux kernel release. To sync the `dts/upstream/` subtree, run::
+ 
+     ./tools/update-subtree.sh pull dts <devicetree-rebasing-release-tag>
+ 
+-If required it is also possible to cherry-pick fixes from the
++If required, it is also possible to cherry-pick fixes from the
+ devicetree-rebasing repository prior to next sync, usage::
+ 
+     ./tools/update-subtree.sh pick dts <devicetree-rebasing-commit-id>
+@@ -192,7 +192,7 @@ With `dts/upstream` Git subtree, it is ensured that devicetree files in U-Boot
+ are an exact copy of those in Linux kernel available under
+ `dts/upstream/src/<arch>/<vendor>`.
+ 
+-U-Boot is of course a very different project from Linux, e.g. it operates under
++U-Boot is, of course, a very different project from Linux, e.g. it operates under
+ much more restrictive memory and code-size constraints. Where Linux may use a
+ full clock driver with Common Clock Format (CCF) to find the input clock to the
+ UART, U-Boot typically wants to output a banner as early as possible before too
+@@ -212,7 +212,7 @@ order::
+    <CONFIG_SYS_VENDOR>-u-boot.dtsi
+    u-boot.dtsi
+ 
+-Only one of these is selected but of course you can #include another one within
++Only one of these is selected, but, of course, you can #include another one within
+ that file, to create a hierarchy of shared files.
+ 
+ 
+@@ -309,8 +309,8 @@ Limitations
+ Devicetrees can help reduce the complexity of supporting variants of boards
+ which use the same SOC / CPU.
+ 
+-However U-Boot is designed to build for a single architecture type and CPU
+-type. So for example it is not possible to build a single ARM binary
++However, U-Boot is designed to build for a single architecture type and CPU
++type. So, for example, it is not possible to build a single ARM binary
+ which runs on your AT91 and OMAP boards, relying on an fdt to configure
+ the various features. This is because you must select one of
+ the CPU families within arch/arm/cpu/arm926ejs (omap or at91) at build
+@@ -328,7 +328,7 @@ files are pulled in, and the fdt controls *how* those files work.
+ History
+ -------
+ 
+-U-Boot configuration was previous done using CONFIG options in the board
++U-Boot configuration was previously done using CONFIG options in the board
+ config file. This eventually got out of hand with nearly 10,000 options.
+ 
+ U-Boot adopted devicetrees around the same time as Linux and early boards
 -- 
-2.51.0
+2.34.1
 
