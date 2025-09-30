@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 912BDCAC5B9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 381D7CAC5B0
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:23:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 674AF836F0;
+	by phobos.denx.de (Postfix) with ESMTP id B2D8883741;
 	Tue, 30 Sep 2025 02:21:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="1RmzchJM";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="exZGEvIs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0085836B8; Tue, 30 Sep 2025 02:21:43 +0200 (CEST)
+ id 160568362A; Tue, 30 Sep 2025 02:21:44 +0200 (CEST)
 Received: from DUZPR83CU001.outbound.protection.outlook.com
  (mail-northeuropeazlp170120005.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7AC183677
+ by phobos.denx.de (Postfix) with ESMTPS id 2130783621
  for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:21:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=trFOcBTFMqt8HQDF6ejdWtT64FNMpmrMYlThqSlVqeBGg5LLahQtyL62/kaiHLsM2eZjp1HMBFD+mffg9uaaXCldHQmDbDj03tZ0SqEUl+w3OiVlwi52+VcMBoB/GtV1TO2aXYUozFOUlCBYJaar7JovICFUVSSUtFZ2wjjifsVn1LWR5rBxTjyymY979sAdv4b3Ff1GOxgOZdjOL8TbRUKPv1X5nypXq3FPEi9FP7ePo40IOxwenmn1Ah7LRIjC3BOoTa4L+E9Pb3X5vLddUIG47HZw5RUDjDbAm65GDWQGjvvriKVwwieFNLQ+GrbUU+LVZq7l6TNKTpwcwUDFOw==
+ b=v57F6YnvgQTAH7d5nlqYZbkKGp+jvs2HyLkldkT9v7+aPaIGtc++omhGCOrr1tN/y0Y7Nt7XhcBXP8izIR9Se/mZXJ8CjVb9p1QaqOjeXVPIwRPOr5W7F/1THm8648dCvTXgFJP8LBOUrp7qIbQ3Ra++MX/STjhiE86WBJntM461oKIlRAzlKrlUuL1og5towhiBGpaL+qTJHOhq9uTo/KAq05axSb5G7dK5QKOn3b5epIvX8w4LcyykA2S0T02AfnXDNZR22Aqmpdcuzx1cr98PaD0NRnaL2yTirrsw9P15E+Sy8cp5/nY6os2xNkSwh+h7PEZF5N3Ul5OVB0rhag==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qTNIrZcz9nqK+/iGkLDq+uMwqO3B9+nw0JvZX/al3ec=;
- b=vK9SMVIJKvW9wIDm4L5w9W67hrXhhztIwe77NA8Z+syb+bbgaJygprZJIrPDb+3qvzfpPf7dDSopcjvNEzfgnNUOOlQF9jBz/9r6vSHLeWOyUxO0th1iUY8Y134PwV4Rm5R0LkaWAKhpI7di52lxZ3H3s/LYxcI8c/ZgegNWrcnZyridgn7HLHyxkqscdgStfZIjH28cMGBa2lWjaU8cB4WG9NtgyJD2ZY0p7QFXitiqI72bAbwCyuJmCANokxy+rDU5Bsn5t253jbbMcEBihlkvf2s4sf8VD8ka/u3PlcwkYRf5eiZGUapzFBqv94OS+LzptkEVQkdULR7pDZ8htw==
+ bh=kOV7TPw+XJMsL2pnbmvmJTbYxOp1aAFrwxc989YQVGQ=;
+ b=jpVbAhAitKDjaGmbq8DCP06BaAkh4YSkBbbM7F9Q+4B+xnofsTtYgB4Nqa/2xe9r8JO3uMjghvOdeebBLrU7r3g1+Z1mwIu3t+TSpobjeR88kcMGchnAqg7w+EHaZvoeDexaIREAXjwAga2JBMe4C5+sBsJF0nGHU6oqVJTfCP5OgSAYoFZcsjCHCTcUNyRDk2di7+QTPtzce+zs2lG+e0PyPKW6KOwpcxwUqzJ3DNwI8Xof0+uDJUixS0tbVa9sYON5NmLkkjXFkJ6nvbUoghgXEIa5pMzIJhU6RXY32A73pK1ZktnGKNqvEqFXvT0SmG+WFc2M3j+/JPfwGTN3Kw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qTNIrZcz9nqK+/iGkLDq+uMwqO3B9+nw0JvZX/al3ec=;
- b=1RmzchJMCGbgs/u9uuUsQrC2H8oq6HHAiB19tdazXsQNWnuWKaM+AyNXgY0Tqmt/v9BGk5SCj85VGFNEgBl0PYsQbNMK1Dwd3A7pVilcERriUUC2GuJgDoiHwqE6v1uQm29EmbYupw9uD/HL8eA+6cqaZbrbjSnoSAg2UICS3CJEbF+zlhLSCBPLxhb0pFPYVWiskFznlI8den2gP9naZKXEn4hBiAqph8zG7uO8HYR0V1NXkuwBc797vfnjSixrMI2ACdzW9dAjLa+g5YKB7t90R+joGUfW9JMUVCN0YtKVDPPS283LCkIPxjOSbK4EXgwHJShHtRCfWl8L7gX82Q==
+ bh=kOV7TPw+XJMsL2pnbmvmJTbYxOp1aAFrwxc989YQVGQ=;
+ b=exZGEvIs/nNULbQ+dboGqluzbgBxQ4pHkNbeeZGF5haQDIrxeuVzpDa6u9xuw6Bcqfxwm/pZJ2tOfBNM3ev10A675krds+YEaNISGzDY8Yd3fe1f82MGaOUJVrn0MD6+SESGjBvMgmk2SKtlZ1VcMmTqq2tCE2RwdRiq9EA4Q9/jrK57CSwacZ78ZcAxe+nBC2Mzzw+O7+0cwMal4aorJnhPk80sXW5I4xZGFWg7iNXJXZ0Qq/BsmWgWWbj3GXjuercRRG26oMoBJwMPgCMobz9qM6FJP8/0WQDwT8u2UWszL8PeQiqT5IPdGoWVQ1/ZgP/DtZjsAF8IVWg6kZhI4g==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
@@ -67,9 +67,9 @@ To: Tom Rini <trini@konsulko.com>,
  Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: [PATCH v7 16/24] mtd: spinand: Add read retry support
-Date: Tue, 30 Sep 2025 03:21:01 +0300
-Message-ID: <20250930002109.3600886-17-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v7 15/24] mtd: spinand: add support of continuous reading mode
+Date: Tue, 30 Sep 2025 03:21:00 +0300
+Message-ID: <20250930002109.3600886-16-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
@@ -81,80 +81,80 @@ X-ClientProxiedBy: FR4P281CA0317.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAWPR08MB11512:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9f53f583-e882-4341-63d7-08ddffb75259
+X-MS-Office365-Filtering-Correlation-Id: 0147413a-71fa-4c1c-0239-08ddffb75197
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|52116014|1800799024|376014|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?X0mCPsf6PZJVSc1zeL6eC401ZlAedjlZfrhWeki8o54gA6ei9cEzI0eFow3Z?=
- =?us-ascii?Q?gDZnJG40o3cxzkheQvozbxg6ES8PMSGQZCiuK4IIkIcvZucJzt9cSQCDFANu?=
- =?us-ascii?Q?95mI9q3VqBONvjZlmnsEkG5zRt7KnlFZTxqtKf6C6umC/pgNuFuPGmkofNoR?=
- =?us-ascii?Q?m4qhENNtb40XxDpBbc9P/HAS0255RkAMpJ8jnPkDmwv73rgnhiebVmT7L1X0?=
- =?us-ascii?Q?NgoQTlfb2LhB1LK80edBqCyIHighGOotVFrpJQDaxdy8hlN/H3wdDQwJErFQ?=
- =?us-ascii?Q?uh1QI+15xnm2F8x6BvXCKRfElgIwp1iwNNmaswNByVQqCj5hXQnWwAkbgTxG?=
- =?us-ascii?Q?8DhwB7o1/zreJVUxTDOsL8ZGrECet55fZsBXN5DpWA4GKf08o4uwONNvXTXr?=
- =?us-ascii?Q?+N0m6cwvaUP4cYP/TlGfrY2t0ZnA2iAVIGGb8ofI+PK2B11k9IKXWlfMYJq7?=
- =?us-ascii?Q?sCe++Fcv2HeH5wirOSx48hendepBuvYo8P+i8Uf+QGEFUku2rHxVQiXKSPuT?=
- =?us-ascii?Q?/2Lh8sZhdvihQGLOM8jSws7TXhqJjMpd090wGXwgGRIAH+/Tcx34cq2Xavcu?=
- =?us-ascii?Q?S7UpkZ5NikhovQTHaU414jPTpgCQooVE3zUpwDLfwtqgBzsgnJILdirPhOKy?=
- =?us-ascii?Q?3/1uxG+VrkNDcfYGimBJKVsFwKaQZlkImVVOO4hALUnfcZFS2ButcLQyjdm5?=
- =?us-ascii?Q?Uztf/LfDfduEh+M9dcZceO5oyVvAnNXFAyj7WNhXroGlL3Sf2DnkNELTR573?=
- =?us-ascii?Q?QOcV3eBJAOhVY0vw9qwoRuthCpMEjvtmxjCg1jOusVRfz0aF5xd1FBt8xAIq?=
- =?us-ascii?Q?0iBRB4yLuqIGG4SnR+UGCoYilf9os0qVNFwcbY+N1eFaCh6Fyo60J1ng6a4r?=
- =?us-ascii?Q?HXXwXl01mKUAePiKzzSgiHe+qgz9bmINIlHtz0wr7x45DDagu9IAsFCviCS6?=
- =?us-ascii?Q?hsA/j+gSABsZQYYzh0RFhbJ8t9l9BN18E3XBCS1Y0Cb2NeYG/wWpt1NPGJbZ?=
- =?us-ascii?Q?y0NTp7k3yO98RtqFwOXVviQiWE8f7wwY8Mt/pdRTYRGUz4bI6iz0n6egWGQ2?=
- =?us-ascii?Q?hmCXI8eSYjULYf885Jn4WduiNE48U0dr2VgYoxzeh1RO+c9WQbXF7GRMghRB?=
- =?us-ascii?Q?1d8Qwwr8GZPZSkNPlFVIlha1BQ0Pc8I600O+yJ2PF4ttzPwumkEI+Lqv2jU9?=
- =?us-ascii?Q?8S3nMai5CzYhkUilZ1iq/2kKgfK8S+3hY7gJaaSgT5G33AQjLdp4VvbyOjL+?=
- =?us-ascii?Q?7b6DzJpqh5TpVG4M7l9aY0WqTLdol+m/U4JIKXW59XE3BQf3QvDbHkQ3JyH1?=
- =?us-ascii?Q?I8aX2o0U2a/FjuwA0XnaURQs6ZI2zvFJo6Di6MF4E1ocpLks54UqHmsjrREg?=
- =?us-ascii?Q?+90kxd4FVE0QcT1xqQJCtEhFo/IZYD6pucQ9tfjX6kWvIH4jIVq3slaHTnsO?=
- =?us-ascii?Q?+dNrsIT7HXKEbIztUiWgfCl+72kbukZRe8J17lW7PwxsAZ264QhVLpJ69/Mz?=
- =?us-ascii?Q?CinfwJTjZGVkIxVnES7xpCSODD8AeTiOddnU/a9jmipWsxm8LfyQSv7ePQ?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Qx5T6HTAGg9b0qOQBEIuzpj3roW9cbUS6gKOEdCdw11wOBjtCS/OP4F46nql?=
+ =?us-ascii?Q?/s8YzJFoosoH7M61SAPfG+fageULv8MOlKb9+2AJzS7PADk5oSHRelLk/KZi?=
+ =?us-ascii?Q?0dE4kF+ljW8CUU34cIIvLQvQE3uD3eZp0AafS9K/IV9jp+Ys5slwuGUyxs6N?=
+ =?us-ascii?Q?jvsPg3Kt+QuO2SssmwcUL93oTuSfbFtfpYSIV5fUwjILcPw4agE0GID0XVWy?=
+ =?us-ascii?Q?r+FrKoxytRvBS2y994ptseW/e6Vnu0IiyVtgyZqZghQWp14sxi/wpDIpILLm?=
+ =?us-ascii?Q?NNA8X1UnVq95AvUsNzUJuALWdyC9eElje2GZovYvXRNfLbyr7PBqOsFCOls+?=
+ =?us-ascii?Q?kz4nd2Pf+FxL2nhZAYYculCS255+jmlPy5JOzsLX1yM1pWk6WLVBpl3O7gVo?=
+ =?us-ascii?Q?CShNSH8ZzZ6GOdmQ3crVwevkYewl7a7JGElc3QqQA66Sy9ioTmlxKJ3/zUxG?=
+ =?us-ascii?Q?bmhwMNc3V2b68lizkJTy8LU5l+4z7cgBIWH4JfKwLB5MwB3LJYs8+SWr7ZcW?=
+ =?us-ascii?Q?7zYlVFKKBh2o7NzPahotVdKxy/RxH5AoLlEcJcBRC/VBqugIReCyV0FXbIa2?=
+ =?us-ascii?Q?Bw2cR78fce5RiXVG1r+ENrcE0SIkwJsqHT7RUEF2gIci9fy7p9WVIlnKLOT0?=
+ =?us-ascii?Q?UcEK5U61FXnwurNmS8THyOuogTA2K2ioiRl7wl2WD+HkATa7M/Q8aLaxOOUb?=
+ =?us-ascii?Q?S6G1EttEMCseYKOW1BBCyEqt7cTITuF8IW2WRzsH1uYGq2VApsANzQ3nhb/B?=
+ =?us-ascii?Q?BL9QbnAIBAOvJ112ryayuC9OA9vi6Eyx+FiBRUdV8Y+mBpUKkaJiUk8SUp9H?=
+ =?us-ascii?Q?A52awZ/Yz4decVDXw3GEM8LLcvH3gcPmHxUQUorRxdxzwUl3y6bKmIenFJ5W?=
+ =?us-ascii?Q?bqO6g8EWsHpnlsZyuntgW1UXxvfDVb2Obufh0BF8WBG9u708BIjY+a6QlXkB?=
+ =?us-ascii?Q?pMfOSy7R3S/xw8AjonDa9fY/EFjnlDK3nVDFYyhDWOEAmijXtrnOrpJdrPYG?=
+ =?us-ascii?Q?xFqCSqzvsTINmM7nK192G5t9Or2IViMhPeOXiZPQbSQkwF4OQrXV1rppgnij?=
+ =?us-ascii?Q?B8pnFGV3w8kzt/JYvH7NaHDl26n6zacbaEag1S3I421gUBcvB4zucQsJwEa3?=
+ =?us-ascii?Q?10RBUBGwV549nAAXu0bw1VzbDBo7buZVF2K+CD+7Qrj90uvbANlNBr2hXLVK?=
+ =?us-ascii?Q?BIzsoNo39SwdoTvvJbKgHJvoPJsvWcOP02zrjQ10xmvF4VzNzQQVh7iq7LMp?=
+ =?us-ascii?Q?fTII1D0QsWxAvIN6fn/pT6lzBxh5ympxxBPTqaWYg7UM/7SKNljxBohugLrs?=
+ =?us-ascii?Q?35qRyaJgbeW5yxxLCtIdZGy/4Wwkngbyu3y0JD7j0nhWCwirKA1vbfDW858f?=
+ =?us-ascii?Q?F0OVH+RIMq5Um7tl1tjS5nQIgzoNLwSO86qXCdah5cqArIhCP31lDwTyURdA?=
+ =?us-ascii?Q?JFNwYYDLD8zyQwEMp2t1h2EPc/2kXPC5R4WP5ID5Tb4QAf9v9pmw+55me5iP?=
+ =?us-ascii?Q?BAdpcDUJdn+ygRXcIf8orKZ4ctkvHvCAj498Ju33uqH/q4yzTByTivCLBg?=
  =?us-ascii?Q?=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(52116014)(1800799024)(376014)(366016)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ppSNeq9IIQJ+vDoY/OTabZiwKArad+fN2XSnE3zEwIC0T2OSwBkSxSKNUEjj?=
- =?us-ascii?Q?2ApLv1hTXFaIrNZm2hSVyY0mD3IWbtXz6Cl+yICFpreweKx4kuUNS5II0X1t?=
- =?us-ascii?Q?lwFP2wULVKLl6wIFu2WNOL8jFrsf2S8llRcgQPPgcWOae6uDowCKpiB29ddI?=
- =?us-ascii?Q?0ar50umj+yhviFwJVuvcYGSzhZQKPKcd6WukaLUudOpRbinr4NSk8ZkdQmso?=
- =?us-ascii?Q?MKXTfp38yFnLZFJ6IXG0TTjYQXpzVdVmk3kDjEeZNjsRUVp+KcMdSKrx+6vN?=
- =?us-ascii?Q?kXmXe3UqKJpFtf/7Z9nXlTzu8FDvD/x0q3btqU5x3QIYPwmGv5lTM/3h/+a1?=
- =?us-ascii?Q?QB0cn9Hpk/547U0aTzf/U5/tOUqGr/43FO6pEPY6vSnSO5+auQ67+FseNuFO?=
- =?us-ascii?Q?q4eYeCvHskQ3pw6CPlKwS/1eF2X/QqpSdNLEbMmcT46c8fhLWxLP1nTHyEd2?=
- =?us-ascii?Q?XjQVgm+ZEnAVy3NKwFHe5tZUQXqdPFvCPZREgtuLL0m1t5BIz5upA86sPD9l?=
- =?us-ascii?Q?GBXmH1at/HgsHa3dD2DlUqMwrlYvOf3Lp6EP4n2z3/547X3iBv5UqG6KiHD9?=
- =?us-ascii?Q?LOFh4L89qD3UuEA+QE6DlmsabcNpO+A+TK9altdiY4Bp42jWJJrQ3P/u4GRl?=
- =?us-ascii?Q?AHDowFa/3tAvqXUGfuCJDjACeMkM1+d1zdbZacgZ0QwN8Rqlbgis+U716Z7U?=
- =?us-ascii?Q?d2HklBsmYKys8UBByXFVKaYaBKQOvjudI0Et192rEJC3zZGwHXt8HgJpdqqw?=
- =?us-ascii?Q?To1+bRxk+hyIEU+ByN4mUkJ2yEdqVoTSmsfHwOHrG0HdGI9FjsPuDDyQvPX8?=
- =?us-ascii?Q?rVRx1DC3qo06ElSQyxJD7qY4GYJKZkwFua+Cv9xWC+IRR0eYpYJmF66Tooxw?=
- =?us-ascii?Q?YBPA6ZIf1xZo24qQK4OgLaWIAwuauMasFfu7lGGjxoeIPmRBVj1CRDbNRtGe?=
- =?us-ascii?Q?UfI+bh8kkqamAM1ugSMjO8Qc8CIyYhtdxNoHijR6UnWCbw+TKmdU/7GCn3DG?=
- =?us-ascii?Q?05RJSzjI1fvHMTEdGfudXdaavHAAe049uSV5N6gY/rvLLEzXiUpIWlYjYNtx?=
- =?us-ascii?Q?O4KzNdw4E3pYhyyNndnNomQ/LMKTnHKKbeJdYUJ9mUIfFe23XZmpQU0fbNmr?=
- =?us-ascii?Q?q+Yc9qz50BPoWrXdqn/QLsO2V/6SVuWXqMEtbcVEh3JzIb9tAgTJkui84JNR?=
- =?us-ascii?Q?pixA1Lv7OWoEP2a1xO7AckSXrjrrp39l6m94UvpKew+PVqJgOf11hZXbIuSo?=
- =?us-ascii?Q?rEOUd02ya1SAmulOrLdLxnNj+IfJKIqBp4I8vhQyADZ7ISxBMCEQQapJ9611?=
- =?us-ascii?Q?V6DqjrtaLGfjrfvDM5zGesBB01qndTffIAVcqOIvESHfoYcaeLIF+YSEk+RS?=
- =?us-ascii?Q?po8LD6s2mETahCqIED1+p7VpiTR+CvZMXBiWHqgPUooDzh05U29KI5O7KHPR?=
- =?us-ascii?Q?j/OlklF+dhEYE+Mt7Cz3j3+J3Y53fiX2FFgup1WA0y5OYiyREbCGSvWtDvCK?=
- =?us-ascii?Q?O7lJANAv99no5M/CH2J1OiRADA4f0d/tK1YeEwVRgZRgVNjW/Wg0lXy9KJyX?=
- =?us-ascii?Q?uue23kYCE1aYt6f+Jdafeg12Q/22C7L78jgkR6iPROemAel0vPX/B74VJqF3?=
- =?us-ascii?Q?hi9LP6bQrU6sZSaGMJ+6C/w=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?r3Kwasd6ZhtYw+HIX1jeo7nT8rDcLoAsQXW5QJ5fBs6Tb1pxz1G+eU6h/CaM?=
+ =?us-ascii?Q?pnkwM4gINwHb+nxKjroIJ2yq2NiKjyxzcdCvjygoFjby//xuE1jnrQ4w2Rot?=
+ =?us-ascii?Q?qNdxCPRLh3SNfnM1e5QeAI+bhsSdV2GMflUwwPRjZjJmFFrjiOZkR1BlT9Cl?=
+ =?us-ascii?Q?F047AUod/Xct+UqKyprUW72ZGKzB8f7D37/PpQ4XPtbITD7LNOtYkkGXdfwS?=
+ =?us-ascii?Q?j1KvPmq1oUA1KUTIOjMdHSopAUQ3Y0i8zORWVFg48FBlJmWNCaCGCsMWZlhb?=
+ =?us-ascii?Q?NRZqMBBcMvASkF26wu7h45lW6JqnKOuJSX64uHLLYYm1alqP/hmrmjnA+U6C?=
+ =?us-ascii?Q?BTiOV9x5EdsxvY51FwQLv/z3no/DJg+LBwTvC0fUiSANYtx8JzYpffpq9OZI?=
+ =?us-ascii?Q?18/f4pGlPF7e2U6KPETlTP3LD2FKYYef7+6CP+sEVE47ZjIBe7zNu6nxCrvb?=
+ =?us-ascii?Q?vlh5xYoT8OBRguMZddireN0WMmiIiXYO844D7DfIoDrD2sq3gSe2GTQzcReG?=
+ =?us-ascii?Q?8+8xJJBtYmGktuEYlzqRyMGHh9XX2jGnsryF2ih1gu1U1DmOve9ySU5TZ+S/?=
+ =?us-ascii?Q?hO9IStRG4mrZDWajQruqx8adLo4IZBg88AWsewL6SWTybCtKZLCf4b/nbSEl?=
+ =?us-ascii?Q?juBfWP7WGi85uObpYLEWprkuh9U+EzqywjFbuuudhFRL3/6e/686wU42MyDe?=
+ =?us-ascii?Q?BW8IJ+eUTl208xek22nxr9zap9UUcaFqDEFqJdoZcZslTLCXWMV7Eyu5o6VU?=
+ =?us-ascii?Q?9Gt5d6VT+Ep+K1PBou53/JOry84yZKiUgS60g6L7DcvmIWTB0gsC5Z89ZTtF?=
+ =?us-ascii?Q?rHV+nS97jVYVB+fVtuJs050oD4KXtWqBma2WrUPQosGIJeILPiqiW4MA90lS?=
+ =?us-ascii?Q?CUW6lohF8y0ui8mtnZtlYJKShnB6hvShxaFOMT9eWfxNgHFwc6hyNh3rnT12?=
+ =?us-ascii?Q?5zyrxLxezR3hw09Lpg8zJFLnE4eyDFqF9XcrkT1FBurSro1IiDL7jHfEsljJ?=
+ =?us-ascii?Q?7HoiS0LL1/UeoQJbXVPR2pTaEA2wYFuJQVEBe+jzPQdXsvEiIQbtHbeFVGoN?=
+ =?us-ascii?Q?QCxwzf9Y/e9SX0tmcJPlS4JCyPP65wQl8ifYa03RhYGR0zFAOuF6gdz/itSA?=
+ =?us-ascii?Q?xUrsFVc3tCABPpV+9FqYBLNvh8ezGB2N7mbbW0FRIkhry2oyUtonObDBWv7c?=
+ =?us-ascii?Q?JC0ES0UilB8Ql/lYTEn5bzJV/M5NY21aFt5pPYQNIk6AZnnzHvLo2WkEgQbv?=
+ =?us-ascii?Q?pHcdM1sUFWtodVAwBPBkvjj9ZpULZjbhOBt+lqtIL0YB42xMyHnLoA0gwhie?=
+ =?us-ascii?Q?xotyRzm1dqRqQJTlo2m4mYsxyd8SfV4lL5o+yH3p1OA7hAmpgCnkrdghpHlG?=
+ =?us-ascii?Q?oclnmyx1QqeoHUWD4nkOarfxZAkORTpB7rQpLRNqYTSA0rsG+cqGDwsF8+V0?=
+ =?us-ascii?Q?xU9goZ7PN2qCGnXqo9wDxljQoPEL+3qm6XulmML53ZMbVwSxRscE3pWak6zq?=
+ =?us-ascii?Q?28+kMLL7UOrxm34iyfIDGJVWZ+sjNOslTOWOz/razkoq2eofUI9bBjw8D+g1?=
+ =?us-ascii?Q?nd3JwY6dr/m/lXgYMuT5RO6+UozFokke0XFqQjAW+irM2AIaUNGqQdw4Ipj3?=
+ =?us-ascii?Q?0b9Pih0/We12YIH950jLU8E=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f53f583-e882-4341-63d7-08ddffb75259
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0147413a-71fa-4c1c-0239-08ddffb75197
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 00:21:38.3974 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 00:21:37.1490 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xkYs4l3+Zvdi4p4H33Jd3/hSI1c38fnMB1anN5mMisylUVcABU83KcwU8YpKenuAER/ZBMPYukTaMdhdF2hA+y+IsfugOakcT4o4CkQTvYk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: wPvfuf2HvC3F9UQpv9rYmhGlxuIiYkG7SZA9eRDNTz5J5eQZlhDI9jrKBHF6LEuI/O6hsPZ6V5YaSvxOoJtUtZFe2dzjvn9dehfkuQLMs8w=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB11512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -172,152 +172,599 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Cheng Ming Lin <chengminglin@mxic.com.tw>
+The code was ported from linux-6.12. The original continuous reading
+support was implemented by Miquel Raynal <miquel.raynal@bootlin.com>
+in linux commit 631cfdd0520d (mtd: spi-nand: Add continuous read support).
 
-When the host ECC fails to correct the data error of NAND device,
-there's a special read for data recovery method which can be setup
-by the host for the next read. There are several retry levels that
-can be attempted until the lost data is recovered or definitely
-assumed lost.
+Here is an original patch description:
+--------------------------------------
+A regular page read consist in:
+- Asking one page of content from the NAND array to be loaded in the
+  chip's SRAM,
+- Waiting for the operation to be done,
+- Retrieving the data (I/O phase) from the chip's SRAM.
 
-This is the port of linux commit
-f2cb43c98010 (mtd: spinand: Add read retry support)
+When reading several sequential pages, the above operation is repeated
+over and over. There is however a way to optimize these accesses, by
+enabling continuous reads. The feature requires the NAND chip to have a
+second internal SRAM area plus a bit of additional internal logic to
+trigger another internal transfer between the NAND array and the second
+SRAM area while the I/O phase is ongoing. Once the first I/O phase is
+done, the host can continue reading more data, continuously, as the chip
+will automatically switch to the second SRAM content (which has already
+been loaded) and in turns trigger the next load into the first SRAM area
+again.
 
-Signed-off-by: Cheng Ming Lin <chengminglin@mxic.com.tw>
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu> # U-Boot port
+From an instruction perspective, the command op-codes are different, but
+the same cycles are required. The only difference is that after a
+continuous read (which is stopped by a CS deassert), the host must
+observe a delay of tRST. However, because there is no guarantee in Linux
+regarding the actual state of the CS pin after a transfer (in order to
+speed-up the next transfer if targeting the same device), it was
+necessary to manually end the continuous read with a configuration
+register write operation.
+
+Continuous reads have two main drawbacks:
+* They only work on full pages (column address ignored)
+* Only the main data area is pulled, out-of-band bytes are not
+  accessible. Said otherwise, the feature can only be useful with on-die
+  ECC engines.
+
+Performance wise, measures have been performed on a Zynq platform using
+Macronix SPI-NAND controller with a Macronix chip (based on the
+flash_speed tool modified for testing sequential reads):
+- 1-1-1 mode: performances improved from +3% (2-pages) up to +10% after
+              a dozen pages.
+- 1-1-4 mode: performances improved from +15% (2-pages) up to +40% after
+              a dozen pages.
+
+This series is based on a previous work from Macronix engineer Jaime
+Liao.
+--------------------------------------
+
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- drivers/mtd/nand/spi/core.c | 35 +++++++++++++++++++++++++++++++++--
- include/linux/mtd/spinand.h | 15 +++++++++++++++
- 2 files changed, 48 insertions(+), 2 deletions(-)
+ drivers/mtd/nand/spi/core.c | 210 ++++++++++++++++++++++++++++++++----
+ include/linux/mtd/nand.h    |  90 ++++++++++++++--
+ include/linux/mtd/spinand.h |  19 +++-
+ 3 files changed, 291 insertions(+), 28 deletions(-)
 
 diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index d4777ec7c8f..33d0c27f788 100644
+index c04e82651fa..d4777ec7c8f 100644
 --- a/drivers/mtd/nand/spi/core.c
 +++ b/drivers/mtd/nand/spi/core.c
-@@ -687,11 +687,15 @@ static int spinand_mtd_regular_page_read(struct mtd_info *mtd, loff_t from,
+@@ -222,6 +222,13 @@ static int spinand_ecc_enable(struct spinand_device *spinand,
+ 			       enable ? CFG_ECC_ENABLE : 0);
+ }
+ 
++
++static int spinand_cont_read_enable(struct spinand_device *spinand,
++				    bool enable)
++{
++	return spinand->set_cont_read(spinand, enable);
++}
++
+ static int spinand_check_ecc_status(struct spinand_device *spinand, u8 status)
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+@@ -323,10 +330,22 @@ static int spinand_ondie_ecc_finish_io_req(struct nand_device *nand,
+ 
+ 	/* Finish a page read: check the status, report errors/bitflips */
+ 	ret = spinand_check_ecc_status(spinand, spinand->last_wait_status);
+-	if (ret == -EBADMSG)
++	if (ret == -EBADMSG) {
+ 		mtd->ecc_stats.failed++;
+-	else if (ret > 0)
+-		mtd->ecc_stats.corrected += ret;
++	} else if (ret > 0) {
++		unsigned int pages;
++
++		/*
++		 * Continuous reads don't allow us to get the detail,
++		 * so we may exagerate the actual number of corrected bitflips.
++		 */
++		if (!req->continuous)
++			pages = 1;
++		else
++			pages = req->datalen / nanddev_page_size(nand);
++
++		mtd->ecc_stats.corrected += ret * pages;
++	}
+ 
+ 	return ret;
+ }
+@@ -368,7 +387,11 @@ static int spinand_read_from_cache_op(struct spinand_device *spinand,
+ 
+ 	if (req->datalen) {
+ 		buf = spinand->databuf;
+-		nbytes = nanddev_page_size(nand);
++		if (!req->continuous)
++			nbytes = nanddev_page_size(nand);
++		else
++			nbytes = round_up(req->dataoffs + req->datalen,
++					  nanddev_page_size(nand));
+ 		column = 0;
+ 	}
+ 
+@@ -399,6 +422,13 @@ static int spinand_read_from_cache_op(struct spinand_device *spinand,
+ 		nbytes -= ret;
+ 		column += ret;
+ 		buf += ret;
++
++		/*
++		 * Dirmap accesses are allowed to toggle the CS.
++		 * Toggling the CS during a continuous read is forbidden.
++		 */
++		if (nbytes && req->continuous)
++			return -EIO;
+ 	}
+ 
+ 	if (req->datalen)
+@@ -651,24 +681,20 @@ static int spinand_write_page(struct spinand_device *spinand,
+ 	return spinand_ondie_ecc_finish_io_req(nand, (struct nand_page_io_req *)req);
+ }
+ 
+-static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
+-			    struct mtd_oob_ops *ops)
++static int spinand_mtd_regular_page_read(struct mtd_info *mtd, loff_t from,
++					 struct mtd_oob_ops *ops,
++					 unsigned int *max_bitflips)
  {
  	struct spinand_device *spinand = mtd_to_spinand(mtd);
  	struct nand_device *nand = mtd_to_nanddev(mtd);
-+	struct mtd_ecc_stats old_stats;
+-	unsigned int max_bitflips = 0;
  	struct nand_io_iter iter;
  	bool disable_ecc = false;
  	bool ecc_failed = false;
-+	unsigned int retry_mode = 0;
- 	int ret;
+-	int ret = 0;
++	int ret;
  
-+	old_stats = mtd->ecc_stats;
-+
- 	if (ops->mode == MTD_OPS_RAW || !mtd->ooblayout)
+-	if (ops->mode == MTD_OPS_RAW || !spinand->eccinfo.ooblayout)
++	if (ops->mode == MTD_OPS_RAW || !mtd->ooblayout)
  		disable_ecc = true;
  
-@@ -704,18 +708,43 @@ static int spinand_mtd_regular_page_read(struct mtd_info *mtd, loff_t from,
- 		if (ret)
- 			break;
- 
-+read_retry:
- 		ret = spinand_read_page(spinand, &iter.req);
- 		if (ret < 0 && ret != -EBADMSG)
- 			break;
- 
--		if (ret == -EBADMSG)
-+		if (ret == -EBADMSG && spinand->set_read_retry) {
-+			if (spinand->read_retries && (++retry_mode <= spinand->read_retries)) {
-+				ret = spinand->set_read_retry(spinand, retry_mode);
-+				if (ret < 0) {
-+					spinand->set_read_retry(spinand, 0);
-+					return ret;
-+				}
-+
-+				/* Reset ecc_stats; retry */
-+				mtd->ecc_stats = old_stats;
-+				goto read_retry;
-+			} else {
-+				/* No more retry modes; real failure */
-+				ecc_failed = true;
-+			}
-+		} else if (ret == -EBADMSG) {
+-#ifndef __UBOOT__
+-	mutex_lock(&spinand->lock);
+-#endif
+-
+ 	nanddev_io_for_each_page(nand, NAND_PAGE_READ, from, ops, &iter) {
+ 		schedule();
+ 		if (disable_ecc)
+@@ -685,18 +711,152 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
+ 		if (ret == -EBADMSG)
  			ecc_failed = true;
--		else
-+		} else {
- 			*max_bitflips = max_t(unsigned int, *max_bitflips, ret);
-+		}
+ 		else
+-			max_bitflips = max_t(unsigned int, max_bitflips, ret);
++			*max_bitflips = max_t(unsigned int, *max_bitflips, ret);
  
  		ret = 0;
  		ops->retlen += iter.req.datalen;
  		ops->oobretlen += iter.req.ooblen;
-+
-+		/* Reset to retry mode 0 */
-+		if (retry_mode) {
-+			retry_mode = 0;
-+			ret = spinand->set_read_retry(spinand, retry_mode);
-+			if (ret < 0)
-+				return ret;
-+		}
  	}
  
- 	if (ecc_failed && !ret)
-@@ -1309,6 +1338,8 @@ int spinand_match_and_init(struct spinand_device *spinand,
++	if (ecc_failed && !ret)
++		ret = -EBADMSG;
++
++	return ret;
++}
++
++static int spinand_mtd_continuous_page_read(struct mtd_info *mtd, loff_t from,
++					    struct mtd_oob_ops *ops,
++					    unsigned int *max_bitflips)
++{
++	struct spinand_device *spinand = mtd_to_spinand(mtd);
++	struct nand_device *nand = mtd_to_nanddev(mtd);
++	struct nand_io_iter iter;
++	u8 status;
++	int ret;
++
++	ret = spinand_cont_read_enable(spinand, true);
++	if (ret)
++		return ret;
++
++	/*
++	 * The cache is divided into two halves. While one half of the cache has
++	 * the requested data, the other half is loaded with the next chunk of data.
++	 * Therefore, the host can read out the data continuously from page to page.
++	 * Each data read must be a multiple of 4-bytes and full pages should be read;
++	 * otherwise, the data output might get out of sequence from one read command
++	 * to another.
++	 */
++	nanddev_io_for_each_block(nand, NAND_PAGE_READ, from, ops, &iter) {
++		schedule();
++		ret = spinand_select_target(spinand, iter.req.pos.target);
++		if (ret)
++			goto end_cont_read;
++
++		ret = spinand_ondie_ecc_prepare_io_req(nand, &iter.req);
++		if (ret)
++			goto end_cont_read;
++
++		ret = spinand_load_page_op(spinand, &iter.req);
++		if (ret)
++			goto end_cont_read;
++
++		ret = spinand_wait(spinand, SPINAND_READ_INITIAL_DELAY_US,
++				   SPINAND_READ_POLL_DELAY_US, NULL);
++		if (ret < 0)
++			goto end_cont_read;
++
++		ret = spinand_read_from_cache_op(spinand, &iter.req);
++		if (ret)
++			goto end_cont_read;
++
++		ops->retlen += iter.req.datalen;
++
++		ret = spinand_read_status(spinand, &status);
++		if (ret)
++			goto end_cont_read;
++
++		spinand_ondie_ecc_save_status(nand, status);
++
++		ret = spinand_ondie_ecc_finish_io_req(nand, &iter.req);
++		if (ret < 0)
++			goto end_cont_read;
++
++		*max_bitflips = max_t(unsigned int, *max_bitflips, ret);
++		ret = 0;
++	}
++
++end_cont_read:
++	/*
++	 * Once all the data has been read out, the host can either pull CS#
++	 * high and wait for tRST or manually clear the bit in the configuration
++	 * register to terminate the continuous read operation. We have no
++	 * guarantee the SPI controller drivers will effectively deassert the CS
++	 * when we expect them to, so take the register based approach.
++	 */
++	spinand_cont_read_enable(spinand, false);
++
++	return ret;
++}
++
++static void spinand_cont_read_init(struct spinand_device *spinand)
++{
++	/* OOBs cannot be retrieved so external/on-host ECC engine won't work */
++	if (spinand->set_cont_read) {
++		spinand->cont_read_possible = true;
++	}
++}
++
++static bool spinand_use_cont_read(struct mtd_info *mtd, loff_t from,
++				  struct mtd_oob_ops *ops)
++{
++	struct nand_device *nand = mtd_to_nanddev(mtd);
++	struct spinand_device *spinand = nand_to_spinand(nand);
++	struct nand_pos start_pos, end_pos;
++
++	if (!spinand->cont_read_possible)
++		return false;
++
++	/* OOBs won't be retrieved */
++	if (ops->ooblen || ops->oobbuf)
++		return false;
++
++	nanddev_offs_to_pos(nand, from, &start_pos);
++	nanddev_offs_to_pos(nand, from + ops->len - 1, &end_pos);
++
++	/*
++	 * Continuous reads never cross LUN boundaries. Some devices don't
++	 * support crossing planes boundaries. Some devices don't even support
++	 * crossing blocks boundaries. The common case being to read through UBI,
++	 * we will very rarely read two consequent blocks or more, so it is safer
++	 * and easier (can be improved) to only enable continuous reads when
++	 * reading within the same erase block.
++	 */
++	if (start_pos.target != end_pos.target ||
++	    start_pos.plane != end_pos.plane ||
++	    start_pos.eraseblock != end_pos.eraseblock)
++		return false;
++
++	return start_pos.page < end_pos.page;
++}
++
++static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
++			    struct mtd_oob_ops *ops)
++{
++	unsigned int max_bitflips = 0;
++	int ret;
++
++#ifndef __UBOOT__
++	mutex_lock(&spinand->lock);
++#endif
++
++	if (spinand_use_cont_read(mtd, from, ops))
++		ret = spinand_mtd_continuous_page_read(mtd, from, ops, &max_bitflips);
++	else
++		ret = spinand_mtd_regular_page_read(mtd, from, ops, &max_bitflips);
++
+ #ifndef __UBOOT__
+ 	mutex_unlock(&spinand->lock);
+ #endif
+-	if (ecc_failed && !ret)
+-		ret = -EBADMSG;
+ 
+ 	return ret ? ret : max_bitflips;
+ }
+@@ -833,6 +993,7 @@ static int spinand_mtd_block_markbad(struct mtd_info *mtd, loff_t offs)
+ #ifndef __UBOOT__
+ 	mutex_unlock(&spinand->lock);
+ #endif
++
+ 	return ret;
+ }
+ 
+@@ -858,6 +1019,7 @@ static int spinand_erase(struct nand_device *nand, const struct nand_pos *pos)
+ 			   SPINAND_ERASE_INITIAL_DELAY_US,
+ 			   SPINAND_ERASE_POLL_DELAY_US,
+ 			   &status);
++
+ 	if (!ret && (status & STATUS_ERASE_FAILED))
+ 		ret = -EIO;
+ 
+@@ -914,6 +1076,9 @@ static int spinand_create_dirmap(struct spinand_device *spinand,
+ 	};
+ 	struct spi_mem_dirmap_desc *desc;
+ 
++	if (spinand->cont_read_possible)
++		info.length = nanddev_eraseblock_size(nand);
++
+ 	/* The plane number is passed in MSB just above the column address */
+ 	info.offset = plane << fls(nand->memorg.pagesize);
+ 
+@@ -1143,6 +1308,7 @@ int spinand_match_and_init(struct spinand_device *spinand,
+ 		spinand->flags = table[i].flags;
  		spinand->id.len = 1 + table[i].devid.len;
  		spinand->select_target = table[i].select_target;
- 		spinand->set_cont_read = table[i].set_cont_read;
-+		spinand->read_retries = table[i].read_retries;
-+		spinand->set_read_retry = table[i].set_read_retry;
++		spinand->set_cont_read = table[i].set_cont_read;
  
  		op = spinand_select_op_variant(spinand,
  					       info->op_variants.read_cache);
+@@ -1268,9 +1434,8 @@ static int spinand_init(struct spinand_device *spinand)
+ 	 * may use this buffer for DMA access.
+ 	 * Memory allocated by devm_ does not guarantee DMA-safe alignment.
+ 	 */
+-	spinand->databuf = kzalloc(nanddev_page_size(nand) +
+-			       nanddev_per_page_oobsize(nand),
+-			       GFP_KERNEL);
++	spinand->databuf = kzalloc(nanddev_eraseblock_size(nand),
++				   GFP_KERNEL);
+ 	if (!spinand->databuf) {
+ 		ret = -ENOMEM;
+ 		goto err_free_bufs;
+@@ -1295,6 +1460,12 @@ static int spinand_init(struct spinand_device *spinand)
+ 	if (ret)
+ 		goto err_cleanup_nanddev;
+ 
++	/*
++	 * Continuous read can only be enabled with an on-die ECC engine, so the
++	 * ECC initialization must have happened previously.
++	 */
++	spinand_cont_read_init(spinand);
++
+ 	mtd->_read_oob = spinand_mtd_read;
+ 	mtd->_write_oob = spinand_mtd_write;
+ 	mtd->_block_isbad = spinand_mtd_block_isbad;
+@@ -1342,6 +1513,7 @@ static void spinand_cleanup(struct spinand_device *spinand)
+ {
+ 	struct nand_device *nand = spinand_to_nand(spinand);
+ 
++	spinand_ondie_ecc_cleanup_ctx(nand);
+ 	nanddev_cleanup(nand);
+ 	spinand_manufacturer_cleanup(spinand);
+ 	kfree(spinand->databuf);
+diff --git a/include/linux/mtd/nand.h b/include/linux/mtd/nand.h
+index 910ef56ed0c..9285edd5c4b 100644
+--- a/include/linux/mtd/nand.h
++++ b/include/linux/mtd/nand.h
+@@ -101,6 +101,8 @@ enum nand_page_io_req_type {
+  * @ooblen: the number of OOB bytes to read from/write to this page
+  * @oobbuf: buffer to store OOB data in or get OOB data from
+  * @mode: one of the %MTD_OPS_XXX mode
++ * @continuous: no need to start over the operation at the end of each page, the
++ * NAND device will automatically prepare the next one
+  *
+  * This object is used to pass per-page I/O requests to NAND sub-layers. This
+  * way all useful information are already formatted in a useful way and
+@@ -123,6 +125,7 @@ struct nand_page_io_req {
+ 		void *in;
+ 	} oobbuf;
+ 	int mode;
++	bool continuous;
+ };
+ 
+ /**
+@@ -638,19 +641,19 @@ static inline void nanddev_pos_next_page(struct nand_device *nand,
+ }
+ 
+ /**
+- * nand_io_iter_init - Initialize a NAND I/O iterator
++ * nand_io_page_iter_init - Initialize a NAND I/O iterator
+  * @nand: NAND device
+  * @offs: absolute offset
+  * @req: MTD request
+  * @iter: NAND I/O iterator
+  *
+  * Initializes a NAND iterator based on the information passed by the MTD
+- * layer.
++ * layer for page jumps.
+  */
+-static inline void nanddev_io_iter_init(struct nand_device *nand,
+-					enum nand_page_io_req_type reqtype,
+-					loff_t offs, struct mtd_oob_ops *req,
+-					struct nand_io_iter *iter)
++static inline void nanddev_io_page_iter_init(struct nand_device *nand,
++					     enum nand_page_io_req_type reqtype,
++					     loff_t offs, struct mtd_oob_ops *req,
++					     struct nand_io_iter *iter)
+ {
+ 	struct mtd_info *mtd = nanddev_to_mtd(nand);
+ 
+@@ -669,6 +672,43 @@ static inline void nanddev_io_iter_init(struct nand_device *nand,
+ 	iter->req.ooblen = min_t(unsigned int,
+ 				 iter->oobbytes_per_page - iter->req.ooboffs,
+ 				 iter->oobleft);
++	iter->req.continuous = false;
++}
++
++/**
++ * nand_io_block_iter_init - Initialize a NAND I/O iterator
++ * @nand: NAND device
++ * @offs: absolute offset
++ * @req: MTD request
++ * @iter: NAND I/O iterator
++ *
++ * Initializes a NAND iterator based on the information passed by the MTD
++ * layer for block jumps (no OOB)
++ *
++ * In practice only reads may leverage this iterator.
++ */
++static inline void nanddev_io_block_iter_init(struct nand_device *nand,
++					      enum nand_page_io_req_type reqtype,
++					      loff_t offs, struct mtd_oob_ops *req,
++					      struct nand_io_iter *iter)
++{
++	unsigned int offs_in_eb;
++
++	iter->req.type = reqtype;
++	iter->req.mode = req->mode;
++	iter->req.dataoffs = nanddev_offs_to_pos(nand, offs, &iter->req.pos);
++	iter->req.ooboffs = 0;
++	iter->oobbytes_per_page = 0;
++	iter->dataleft = req->len;
++	iter->oobleft = 0;
++	iter->req.databuf.in = req->datbuf;
++	offs_in_eb = (nand->memorg.pagesize * iter->req.pos.page) + iter->req.dataoffs;
++	iter->req.datalen = min_t(unsigned int,
++				  nanddev_eraseblock_size(nand) - offs_in_eb,
++				  iter->dataleft);
++	iter->req.oobbuf.in = NULL;
++	iter->req.ooblen = 0;
++	iter->req.continuous = true;
+ }
+ 
+ /**
+@@ -694,6 +734,25 @@ static inline void nanddev_io_iter_next_page(struct nand_device *nand,
+ 				 iter->oobleft);
+ }
+ 
++/**
++ * nand_io_iter_next_block - Move to the next block
++ * @nand: NAND device
++ * @iter: NAND I/O iterator
++ *
++ * Updates the @iter to point to the next block.
++ * No OOB handling available.
++ */
++static inline void nanddev_io_iter_next_block(struct nand_device *nand,
++					      struct nand_io_iter *iter)
++{
++	nanddev_pos_next_eraseblock(nand, &iter->req.pos);
++	iter->dataleft -= iter->req.datalen;
++	iter->req.databuf.in += iter->req.datalen;
++	iter->req.dataoffs = 0;
++	iter->req.datalen = min_t(unsigned int, nanddev_eraseblock_size(nand),
++				  iter->dataleft);
++}
++
+ /**
+  * nand_io_iter_end - Should end iteration or not
+  * @nand: NAND device
+@@ -722,13 +781,28 @@ static inline bool nanddev_io_iter_end(struct nand_device *nand,
+  * @req: MTD I/O request
+  * @iter: NAND I/O iterator
+  *
+- * Should be used for iterate over pages that are contained in an MTD request.
++ * Should be used for iterating over pages that are contained in an MTD request.
+  */
+ #define nanddev_io_for_each_page(nand, type, start, req, iter)		\
+-	for (nanddev_io_iter_init(nand, type, start, req, iter);	\
++	for (nanddev_io_page_iter_init(nand, type, start, req, iter);	\
+ 	     !nanddev_io_iter_end(nand, iter);				\
+ 	     nanddev_io_iter_next_page(nand, iter))
+ 
++/**
++ * nand_io_for_each_block - Iterate over all NAND pages contained in an MTD I/O
++ *			    request, one block at a time
++ * @nand: NAND device
++ * @start: start address to read/write from
++ * @req: MTD I/O request
++ * @iter: NAND I/O iterator
++ *
++ * Should be used for iterating over blocks that are contained in an MTD request.
++ */
++#define nanddev_io_for_each_block(nand, type, start, req, iter)		\
++	for (nanddev_io_block_iter_init(nand, type, start, req, iter);	\
++	     !nanddev_io_iter_end(nand, iter);				\
++	     nanddev_io_iter_next_block(nand, iter))
++
+ bool nanddev_isbad(struct nand_device *nand, const struct nand_pos *pos);
+ bool nanddev_isreserved(struct nand_device *nand, const struct nand_pos *pos);
+ int nanddev_markbad(struct nand_device *nand, const struct nand_pos *pos);
 diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
-index 2f8212e4037..44c616a4acf 100644
+index 63626c9c27c..2f8212e4037 100644
 --- a/include/linux/mtd/spinand.h
 +++ b/include/linux/mtd/spinand.h
-@@ -337,6 +337,8 @@ struct spinand_ecc_info {
+@@ -175,7 +175,7 @@
+ struct spinand_op;
+ struct spinand_device;
+ 
+-#define SPINAND_MAX_ID_LEN	4
++#define SPINAND_MAX_ID_LEN	5
+ /*
+  * For erase, write and read operation, we got the following timings :
+  * tBERS (erase) 1ms to 4ms
+@@ -336,6 +336,7 @@ struct spinand_ecc_info {
+  * @op_variants.update_cache: variants of the update-cache operation
   * @select_target: function used to select a target/die. Required only for
   *		   multi-die chips
-  * @set_cont_read: enable/disable continuous cached reads
-+ * @read_retries: the number of read retry modes supported
-+ * @set_read_retry: enable/disable read retry for data recovery
++ * @set_cont_read: enable/disable continuous cached reads
   *
   * Each SPI NAND manufacturer driver should have a spinand_info table
   * describing all the chips supported by the driver.
-@@ -357,6 +359,9 @@ struct spinand_info {
+@@ -354,6 +355,8 @@ struct spinand_info {
+ 	} op_variants;
+ 	int (*select_target)(struct spinand_device *spinand,
  			     unsigned int target);
- 	int (*set_cont_read)(struct spinand_device *spinand,
- 			     bool enable);
-+	unsigned int read_retries;
-+	int (*set_read_retry)(struct spinand_device *spinand,
-+			     unsigned int read_retry);
++	int (*set_cont_read)(struct spinand_device *spinand,
++			     bool enable);
  };
  
  #define SPINAND_ID(__method, ...)					\
-@@ -385,6 +390,10 @@ struct spinand_info {
- #define SPINAND_CONT_READ(__set_cont_read)				\
- 	.set_cont_read = __set_cont_read,
+@@ -379,6 +382,9 @@ struct spinand_info {
+ #define SPINAND_SELECT_TARGET(__func)					\
+ 	.select_target = __func,
  
-+#define SPINAND_READ_RETRY(__read_retries, __set_read_retry)		\
-+	.read_retries = __read_retries,					\
-+	.set_read_retry = __set_read_retry
++#define SPINAND_CONT_READ(__set_cont_read)				\
++	.set_cont_read = __set_cont_read,
 +
  #define SPINAND_INFO(__model, __id, __memorg, __eccreq, __op_variants,	\
  		     __flags, ...)					\
  	{								\
-@@ -435,6 +444,8 @@ struct spinand_dirmap {
-  *		actually relevant to enable this feature.
-  * @set_cont_read: Enable/disable the continuous read feature
+@@ -422,6 +428,12 @@ struct spinand_dirmap {
+  *		passed in spi_mem_op be DMA-able, so we can't based the bufs on
+  *		the stack
+  * @manufacturer: SPI NAND manufacturer information
++ * @cont_read_possible: Field filled by the core once the whole system
++ *		configuration is known to tell whether continuous reads are
++ *		suitable to use or not in general with this chip/configuration.
++ *		A per-transfer check must of course be done to ensure it is
++ *		actually relevant to enable this feature.
++ * @set_cont_read: Enable/disable the continuous read feature
   * @priv: manufacturer private data
-+ * @read_retries: the number of read retry modes supported
-+ * @set_read_retry: Enable/disable the read retry feature
   * @last_wait_status: status of the last wait operation that will be used in case
   *		      ->get_status() is not populated by the spinand device.
-  */
-@@ -475,6 +486,10 @@ struct spinand_device {
- 	bool cont_read_possible;
- 	int (*set_cont_read)(struct spinand_device *spinand,
- 			     bool enable);
+@@ -457,7 +469,12 @@ struct spinand_device {
+ 	u8 *scratchbuf;
+ 	const struct spinand_manufacturer *manufacturer;
+ 	void *priv;
 +
-+	unsigned int read_retries;
-+	int (*set_read_retry)(struct spinand_device *spinand,
-+			     unsigned int retry_mode);
+ 	u8 last_wait_status;
++
++	bool cont_read_possible;
++	int (*set_cont_read)(struct spinand_device *spinand,
++			     bool enable);
  };
  
  /**
