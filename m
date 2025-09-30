@@ -4,88 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A98CCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:57:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F879CCA470
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 10:00:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A392E83045;
-	Tue, 30 Sep 2025 11:57:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7850583510;
+	Tue, 30 Sep 2025 12:00:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y4zwn9xB";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Dz5oGVq2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DA2E8349B; Tue, 30 Sep 2025 11:57:48 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1CACD8352B; Tue, 30 Sep 2025 12:00:40 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6878B828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:57:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 977AC83045
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 12:00:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3ecdf2b1751so3812130f8f.0
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:57:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759226264; x=1759831064; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=H7sXk29mqPxm5xU9rlyQX3XYW6+uMBm5pWsLOBz6uvw=;
- b=y4zwn9xBoDfMUS3PMYtVJnOY3zPe0cpuSZM3gsI7//Ugrl1Q1utG0itn7eumaSJv5J
- D3rV24GgrBMMHhjuHkVbXMT9QxCma5l/SRQNjF+2XteRam7lIU9AQhlOrL4u7dwfHHpP
- oWLN4/D2Z+Lz3+otvh5Qbg6V7trQdjoIb/waUsVI1/NneTEDj6Fw0KTtscwrPoDCItB9
- eAh4NplTZB8OLaQfMbTGbkP7xAIF3zMc4IBhq4muwv4TOOwGbyuCS0BFwky30sEjKO2V
- VcXgUtlOpoIOdkfeyYVZiChUNL134okNpLicQ6YMv+RQyYzV/ytuk166Ufq8iEPUOZQa
- mXhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759226264; x=1759831064;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=H7sXk29mqPxm5xU9rlyQX3XYW6+uMBm5pWsLOBz6uvw=;
- b=dwdcrbolLp7oaIN1BhjJns3F9kDaECz7i0cGqQ3s1SaKRjyVR7buiVjQNq1fppkGI4
- aSz7PQU3qtxSQEkSrQxd37lwVgAxBm1zEhZQ5fuirDzDqvbxKMJZZEbObTpiLHv7Kcr/
- sn1cAxxwXqT/8ojvDRimvgR0o5ZmmlyC69r3fHA1BDe26gAm2/GVS6ew++JX2iddo0WC
- paDgF6NSoU17fcj5uq2hGlUHor9mlK85LXsvlFh6y4qcezZdTJ0kWJ5rOqyk+T9hwmJ0
- xlNXfRcM8LwbM3zP6h/sppU2jGztyFvExgqob6o52ezA1s+xMlIJxZwnYcLIR6fttY9u
- b8TQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXmKwSER4sIdfC2VgQlsSjEmGQqes6/vpeV8l5pUTg9lmawwES/0LsU6/kpt5vmArky1+IcVGU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz1em1x5XKfvAjTDxgpnuXIkFR47f4smr2AmEaTUAMnQW1djCFo
- s+fMFqxl49XdGI6i/DaMpMTcJxuWarbz55nHL7IODIZRfgSnM3baW94ir+VrRcEgBq4=
-X-Gm-Gg: ASbGncvQg5ZLtyziSsEy6co1qVJb+5mH0yKiKzQAib+3om+dfTNCSDBT8Pl/Ca//ALu
- qK0+HTTgyrlLFstPKgdhCWy6KW1YtLOmPTvJwyvHPOK2y6ZiOxqyaR9OxvHp/zmMv6ccSCLv3MU
- cUu1utT2qbNSfS4SgfUdNxY0T5MhRW85tAMP4D8gyDxF63EevjTnO1Z1IUO5QWs374YzfiaBWl/
- kUimoRabq1n/bhK0XTFmDvac8Firy/yE6KeDYEHP4UKm6jLdpndqXnStQxFhZgChsed3jm00ch0
- XvjRdhBsvwC2xoEha6yrpcX7mgUhfQvLT2iQi3vkITh9JNSN2OlxhKgR+U6NNx+NTHpxC+ADD0R
- PnJvF/fMJeu+xoGmGUzv22GcHjynPVozx/Eca5lizGwG2wImdOpWdBjEP
-X-Google-Smtp-Source: AGHT+IHexjyrPAQosSKF5IfZk2sJX/7jX8tMNNKcxodLpOrJjzsP0i43CfEQRbCVMnqKLguBI0wQVw==
-X-Received: by 2002:adf:8b47:0:b0:424:21ff:5151 with SMTP id
- ffacd0b85a97d-42421ff535fmr1661800f8f.5.1759226264294; 
- Tue, 30 Sep 2025 02:57:44 -0700 (PDT)
-Received: from [10.100.0.2] ([45.84.137.213]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fc5603161sm22334223f8f.35.2025.09.30.02.57.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 02:57:43 -0700 (PDT)
-Message-ID: <d7279d1b-9e6f-4715-af7b-3d30ee8388cc@linaro.org>
-Date: Tue, 30 Sep 2025 11:57:42 +0200
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 875C86046D;
+ Tue, 30 Sep 2025 10:00:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF4BBC4CEF0;
+ Tue, 30 Sep 2025 10:00:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1759226436;
+ bh=MkzXVrghr22T9grVJAuii9E0T5wUgC8g2oVQ/Z8Zkrc=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=Dz5oGVq28fw4l3xtLiLTgPL4ILNAkTIwDF0cY920oIuUMTwD7+WggxLYCYuUMk48s
+ 7fLgckkxxvJqIKY01wMDXn8zo2UwSyayGMjwshYvOXG7tz79Zmf0O0htAmmkzhEvFK
+ GI7TY76kjOF/Lp5MfrAfFLjRUh34Qe4RcVzCU4PKBG0FGEgjP9nkmyI4yK0Gvx2H/h
+ 3JjL6Tg8IUkcW4jf9Gp/3FzyS9t0Sx3YgcuZ13qT2+ljHqL6DskYhO1CapDl3zmWqT
+ ru4nOlR74MnU+5boIScHwGEHGydxhAelsB/ns3yG25m53U3MmeTAFRTHBydEZf0Fkn
+ YH2kBy7RUa16Q==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Javier Tia <javier.tia@linaro.org>
+Subject: Re: [PATCH v2] doc: Update coding style to recommend b4 for patch
+ submission
+In-Reply-To: <20250929-b4-docs-v2-1-478285f08639@linaro.org>
+References: <20250929-b4-docs-v2-1-478285f08639@linaro.org>
+Date: Tue, 30 Sep 2025 12:00:34 +0200
+Message-ID: <87frc4i7jx.fsf@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: lwip: ensure alignment of packet buffers
-To: Tim Harvey <tharvey@gateworks.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
-References: <20250929192149.3735435-1-tharvey@gateworks.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250929192149.3735435-1-tharvey@gateworks.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,35 +67,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+Hi Javier,
 
-On 9/29/25 21:21, Tim Harvey wrote:
-> Network packet buffers should be aligned to PKTALIGN. Add a compiler
-> attribute to ensure this.
-> 
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+On Mon, Sep 29, 2025 at 14:58, Javier Tia <javier.tia@linaro.org> wrote:
+
+> Replace references to patman with b4 as the recommended tool for
+> preparing and sending patches. b4 is widely adopted in the Linux kernel
+> community and U-Boot ships with configuration to simplify its use with
+> the project mailing list.
+>
+> The updated guidelines describe how to prepare series with b4, handle
+> cover letters and recipient lists, run style checks, and send patches
+> safely. Instructions also highlight how to collect and apply review tags
+> before resending.
+>
+> This change documents the preferred workflow for contributors and
+> ensures consistency with common practices across related upstream
+> communities.
+>
+> Signed-off-by: Javier Tia <javier.tia@linaro.org>
+
+Thank you for doing this! This is great.
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+
 > ---
->  net/lwip/net-lwip.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> index 660ceb10cbe..aec05d55de6 100644
-> --- a/net/lwip/net-lwip.c
-> +++ b/net/lwip/net-lwip.c
-> @@ -30,7 +30,7 @@ void (*push_packet)(void *, int len) = 0;
->  static int net_try_count;
->  static int net_restarted;
->  int net_restart_wrap;
-> -static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
-> +static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN] __attribute__((aligned(PKTALIGN)));
->  uchar *net_rx_packets[PKTBUFSRX];
->  uchar *net_rx_packet;
->  const u8 net_bcast_ethaddr[6] = { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
-
-I'd rather use the __aligned(x) macro from <linux/compiler_attributes.h>.
-No need to resend, I will update the patch locally before sending my next
-pull request for the net subsystem.
-
-Thanks,
--- 
-Jerome
+> This small series updates U-Boot's contributor guidelines to sync with
+> current best practices around Linux kernel patch submission. It should
+> make contributing smoother for new developers.
+>
+> The first patch updates doc/develop/codingstyle.rst to recommend the b4
+> tool instead of patman as the standard workflow for preparing and
+> sending patches. The revised documentation explains how to create and
+> manage series, run style checks, handle cover letters, discover mailing
+> list recipients, and collect review tags. This reflects widespread
+> adoption of b4 in the Linux kernel community and ensures U-Boot
+> contributors follow consistent, upstream-friendly practices.
+> ---
+> Changes in v2:
+>
+> * Drop commit changing .b4-config
+> * Link to v1: https://lore.kernel.org/r/20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org
+> ---
+>  doc/develop/codingstyle.rst | 54 ++++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 48 insertions(+), 6 deletions(-)
+>
+> diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
+> index bc18b2ebb7b0fc875a299b9e2e5c64c3d6a8e2b3..8ed6babe4556423fe30effc504615e07a841f21a 100644
+> --- a/doc/develop/codingstyle.rst
+> +++ b/doc/develop/codingstyle.rst
+> @@ -23,13 +23,55 @@ The following rules apply:
+>    <https://peps.python.org/pep-0008/>`_. Use `pylint
+>    <https://github.com/pylint-dev/pylint>`_ for checking the code.
+>  
+> -* Use patman to send your patches (``tools/patman/patman -H`` for full
+> -  instructions). With a few tags in your commits this will check your patches
+> -  and take care of emailing them.
+> +* Use the `b4 <https://git.kernel.org/pub/scm/utils/b4/b4.git/>`_ tool to prepare and
+> +  send your patches. b4 has become the preferred tool to sending patches for many
+> +  Linux kernel contributors, and U-Boot ships with a ready-to-use ``.b4-config`` that
+> +  targets ``u-boot@lists.denx.de`` and integrates with ``scripts/get_maintainer.pl`` for
+> +  recipient discovery.
+>  
+> -* If you don't use patman, make sure to run ``scripts/checkpatch.pl``. For
+> -  more information, read :doc:`checkpatch`. Note that this should be done
+> -  *before* posting on the mailing list!
+> +  Start a topical series with ``b4 prep`` and keep the commits organised with
+> +  ``git rebase -i``. ``b4 prep --edit-cover`` opens an editor for the cover
+> +  letter, while ``b4 prep --auto-to-cc`` collects reviewers and maintainers from
+> +  both the configuration file and ``scripts/get_maintainer.pl``.
+> +
+> +  .. code-block:: bash
+> +
+> +     b4 prep -n mmc-fixes
+> +     git rebase -i origin/master
+> +     b4 prep --edit-cover
+> +     b4 prep --auto-to-cc
+> +
+> +  Run the style checks before sending. ``b4 prep --check`` wraps the existing
+> +  tooling so you see the output from ``scripts/checkpatch.pl`` alongside b4's
+> +  own validation. You can always invoke ``scripts/checkpatch.pl`` directly for
+> +  additional runs.
+> +
+> +  .. code-block:: bash
+> +
+> +     b4 prep --check
+> +
+> +  When the series is ready, use ``b4 send``. Begin with ``--dry-run`` to review
+> +  the generated emails and ``--reflect`` to copy yourself for records before
+> +  dispatching to ``u-boot@lists.denx.de``.
+> +
+> +  .. code-block:: bash
+> +
+> +     b4 send --dry-run
+> +     b4 send --reflect
+> +     b4 send
+> +
+> +  After reviews arrive, collect Acked-by/Tested-by tags with ``b4 trailers -u``
+> +  and fold them into your commits before resending the updated series.
+> +
+> +  .. code-block:: bash
+> +
+> +     b4 trailers -u
+> +     git rebase -i origin/master
+> +     b4 send
+> +
+> +* Run ``scripts/checkpatch.pl`` directly or via ``b4 prep --check`` so that all
+> +  issues are resolved *before* posting on the mailing list. For more information,
+> +  read :doc:`checkpatch`.
+>  
+>  * Source files originating from different projects (for example the MTD
+>    subsystem or the hush shell code from the BusyBox project) may, after
+>
+> ---
+> base-commit: 26efc940c865a04d345ac9d39f71746fc2821da6
+> change-id: 20250929-b4-docs-60da5560f06a
+>
+> Best regards,
+> -- 
+> Javier Tia <javier.tia@linaro.org>
