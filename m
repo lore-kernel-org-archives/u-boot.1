@@ -4,76 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D963CAC5B8
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 08:33:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EA14CAC5B9
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:28:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C541D8344E;
-	Tue, 30 Sep 2025 10:33:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8119183045;
+	Tue, 30 Sep 2025 11:28:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1759221208;
-	bh=bpnUgM7BqY04l0I9P4JP0fYtARlfxQ/oP+x1s/0V9xQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=hyPtRVYb3/l+4YkuJy/6aQNMLDgE5fJaE67r8Zk0LwijTABwwWWcjJoxh/9C6Zev7
-	 hOQbOaRe3BZ8+s7Mt3ATx+IwxMJA62gM6Sh/s5mNapHZK4KPByNJDK0PXXRIbVkzQv
-	 hAoIsTBcJauwZtZok+0299nEXtTjWvdpaD+/5wIeca4jadmBWkVJ9TvmEu5YvOl1kd
-	 cMoPpj5hec4wdth8Kf/r6SM4StAGwZdbe8Pww/UxcMftxptKtyCyInaAZa9iRGWFA5
-	 c/RLyw5lDRVXdxkocRV9MVXggw4GJCDh0DYWg0LIj47XV4I0t8/SH4GyAKlIyJqzDU
-	 kUWj3kiO7L2aQ==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AwkDqhCk";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD7E48349B; Tue, 30 Sep 2025 10:33:27 +0200 (CEST)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 3D27983071; Tue, 30 Sep 2025 11:28:44 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D890A83045
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 10:33:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 30F29828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:28:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=pro@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="LC08RTeX"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 1FDD31038C109; 
- Tue, 30 Sep 2025 10:33:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1759221204; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- in-reply-to:references; bh=bpnUgM7BqY04l0I9P4JP0fYtARlfxQ/oP+x1s/0V9xQ=;
- b=LC08RTeXIT0emjdR6lwdEGcHkRrKIQL+BTYLD9mTUJTVTWBLn1xsx5ZiS90XHZzOJ/TS8b
- ZRJLBZwUQlqf5D4UTGAroRVxbaBwCNdgoa0NtR5AaeSq1XPsdFHB7BjEpPzP56YJDNQ7C4
- f20AcZsjUf1LpatMDJLflt86+H4jXWonU8l5kduz47oP/9Hx4nIQKBd3CZKvSW5oWG5JJ0
- JKkyKjhjRaRH63JURcrlQbWZ9gsA6ycQjyYPdOqLZs2HLgFaoD4rgnMgpuI437nTnaDT1o
- xOnqRt7r4mSjsj1nvh2MQkF1UXXmMJYbm3U+KvEFaNnuGcoevrGQ8jPLeU23bA==
-Date: Tue, 30 Sep 2025 10:33:13 +0200
-From: Philip Oberfichtner <pro@denx.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
- Anshul Dalal <anshuld@ti.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Greg Malysa <malysagreg@gmail.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Marek Vasut <marek.vasut@mailbox.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
- Trevor Woerner <twoerner@gmail.com>, Ye Li <ye.li@nxp.com>
-Subject: Re: [PATCH v3 2/5] Image size checks: Use HAS_SIZE_LIMIT consistently
-Message-ID: <aNuVyd1aSwdHw1vq@aristophanes>
-References: <20250903105653.335417-1-pro@denx.de>
- <20250903105653.335417-3-pro@denx.de>
- <20250905141959.GJ124814@bill-the-cat>
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 03C8D627DB;
+ Tue, 30 Sep 2025 09:28:41 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61885C4CEF0;
+ Tue, 30 Sep 2025 09:28:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1759224520;
+ bh=1kRP/pL1dTYgb62X4zPPvn4J0T327xepvIEKsOBTvaA=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=AwkDqhCkuMTU7NeCFY8vzJV43I4BCruPC1Rz0dblSv8ilDgUhJuFSvFavvgp3kiiK
+ UejUNwoAnrpRF8wdG8UHC8JytUB2z4ONwB1OY3a8xTNFwnawfmJQLFmyiZmQU84UER
+ YWzlFoGc37ZbJ3+0JTL+fUIcscDsdK0rtai1RwvPxs6T2IDA8Hrn2lW5+JPb4e34UX
+ eTQ+Q0IfC6vvF9ShgLiPe0FWHtXTvQeCgqB+FL5vjq5e9uMxtwKlpuz7QPp8GhouXo
+ YHcEa93gdpL7cRjWExIxgxgx+a2lPKNmFGt1O0+q5HKIyE6dcTHqPrTZYCRcM3SJ46
+ d/+FEK/CijS0g==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+Subject: Re: [PATCH v2 3/5] usb: gadget: Tighten the dependency for DWC2 OTG
+ support
+In-Reply-To: <20250926153034.3680674-3-trini@konsulko.com>
+References: <20250926153034.3680674-1-trini@konsulko.com>
+ <20250926153034.3680674-3-trini@konsulko.com>
+Date: Tue, 30 Sep 2025 11:28:38 +0200
+Message-ID: <87ldlwi915.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250905141959.GJ124814@bill-the-cat>
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,76 +69,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 05, 2025 at 08:19:59AM -0600, Tom Rini wrote:
-> On Wed, Sep 03, 2025 at 12:56:50PM +0200, Philip Oberfichtner wrote:
-> 
-> > Use a consistent logic for image size checks. No functional change.
-> > 
-> > Before this commit, there were two concurrent approaches of how image
-> > size checks are disabled: Whereas BOARD_SIZE_LIMIT was gated through a
-> > dedicated Kconfig symbol to achieve this, all the other size checks were
-> > disabled by assigning them a limit of zero bytes.
-> > 
-> > By this commit we achieve a consistent logic for size limiting, by
-> > introducing CONFIG_HAS_XXX_SIZE_LIMIT for all those options that don't
-> > have it yet.
-> > 
-> > Signed-off-by: Philip Oberfichtner <pro@denx.de>
-<...>
-> > diff --git a/arch/x86/cpu/apollolake/Kconfig b/arch/x86/cpu/apollolake/Kconfig
-> > index 5dd866ffcfe..d70e8def36f 100644
-> > --- a/arch/x86/cpu/apollolake/Kconfig
-> > +++ b/arch/x86/cpu/apollolake/Kconfig
-> > @@ -78,8 +78,11 @@ config MMCONF_BASE_ADDRESS
-> >  	hex
-> >  	default 0xe0000000
-> >  
-> > +config HAS_TPL_SIZE_LIMIT
-> > +	default y
-> > +
-> >  config TPL_SIZE_LIMIT
-> > -	default 0x7800
-> > +	default 0x7800 if HAS_TPL_SIZE_LIMIT
-> >  
-> >  config CPU_ADDR_BITS
-> >  	default 39
-> 
-> These should be "default y if .." in the main Kconfig entry for the
-> option.
+Hi Tom,
 
-Not sure if I'm following you here. So you mean both of the defaults
-should be moved to common/spl/Kconfig.tpl? - like
+Thank you for the patch.
 
-	config HAS_TPL_SIZE_LIMIT
-		[...]
-		default y if INTEL_APOLLOLAKE
+On Fri, Sep 26, 2025 at 09:30, Tom Rini <trini@konsulko.com> wrote:
 
+> The DWC2 OTG driver depends on an ARM-specific header file to compile,
+> so make it depend on ARM.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-	config TPL_SIZE_LIMIT
-		[...]
-		default 0x7800 if INTEL_APOLLOLAKE
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-> 
-> > diff --git a/configs/am62ax_evm_r5_defconfig b/configs/am62ax_evm_r5_defconfig
-> 
-> The reset of these, to Marek's point, show that we need to also add
-> "default y if .." for a number of other platforms too.
-
-Which platforms exactly?
-
-> At least the ones
-> where today we have default limits provided in Kconfig today.
-
-Besides the ones handled above, i.e.
-	arch/arm/mach-socfpga/Kconfig,
-	arch/mips/mach-mtmips/Kconfig and
-	arch/x86/cpu/apollolake/Kconfig,
-
-there aren't any.
-
-I myself am not very fond of changing that many defconfigs, but I still
-don't see a way of avoiding it. I guess it would become more clear if
-you concretely name a few examples.
-
-Best regards,
-Philip
+> ---
+> Changes in v2:
+> - None
+>
+> Cc: Marek Vasut <marek.vasut@mailbox.org>
+> ---
+>  drivers/usb/gadget/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+> index 0121f9872ae6..9065e14768ad 100644
+> --- a/drivers/usb/gadget/Kconfig
+> +++ b/drivers/usb/gadget/Kconfig
+> @@ -109,6 +109,7 @@ config USB_GADGET_AT91
+>  
+>  config USB_GADGET_DWC2_OTG
+>  	bool "DesignWare USB2.0 HS OTG controller (gadget mode)"
+> +	depends on ARM
+>  	select USB_GADGET_DUALSPEED
+>  	help
+>  	  The Designware USB2.0 high-speed gadget controller
+> -- 
+> 2.43.0
