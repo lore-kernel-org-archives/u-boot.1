@@ -4,159 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73E4FCAC5B9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:25:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50952CAC5B0
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 401C783804;
-	Tue, 30 Sep 2025 02:21:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id CECCD828A2;
+	Tue, 30 Sep 2025 02:32:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="DsNZ5Jmk";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EE048362A; Tue, 30 Sep 2025 02:21:55 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id 19AC283045; Tue, 30 Sep 2025 02:32:16 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CEC1836B8
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:21:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EB8181D6A
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:32:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ICfuhjzPRW49UC46Trs4K+fG9va6jcfiw26gL1YiCTWSTLRTpnjyCZ6aL4jm8xZUWlsN1cL65oKM8c6eFIHcmP0fJofb8NfAsMJ5WoI0NJgFOJPvOHez977KlU/oCn+QuhLXB8QXr/TffNL6Z1PtNn1l6n8JIlH91ECQ6mZ1CvNqzW/UcLtQWeikMW9/pv9NqVxDVPQeygiKH2caFAOdklFHYrmwOOY0I5JT7Okzno6WJPYw/8KbEpLj3JvWSQoGk144AgSJOdPtW9hP3+Rv59zHajj9MWUAi4IIqvrx4qsb/R7uwh7Q0fYl1W8UtsiKeJk6eI/Dciq/UVbKrjYr3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6GRaPgYgLw311/8D7jSI2lBsqvl6XU06Saq7ZvX1ouE=;
- b=Xg6+8NtXo+X4mYppIaqP311Nil297EoC4wxNKIxov+SMpapDF8cAvuQoUV1m8abcYL7HNpUAMwIXMJDkUBEEjxuCxlImL3CkGGHRI6VvCgsK86NNwRaPrxyaCPuA9dOp5tdnvfdUPbklcGQ3qrUKJUUQwUfmw+1z758fOHgC3lVSwOuNuYtyOy7AJQRUmUQUXsdynIREHQ51lemawpYALVZ+EIdIcBatm1NNme/KZXooZQhjcNmJ66C952vnwZjRjS6fGwrcWEyV/WcSDPvG/TsN81R66aQ/wQx6yVNAY+uJ8TFVHmEKB4E8vib4iaXAuyXoi6QEn8cy0QRurhZMXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6GRaPgYgLw311/8D7jSI2lBsqvl6XU06Saq7ZvX1ouE=;
- b=DsNZ5JmkIfcdw5uKFC0vO/lgpRwY3/748BUumcIJBsZ8yo4KNqPTx315YIe/nZzGz49TJjSzwKbNdMsoCe0O1wEF4J/od3ilwMrMqOuL2P86o62WlBEwhsVimFVVOWmLQ01APkmhBWSAbHUlTZw+djT7bBTOuGw2qht3wZjYOFJ+ZqN93c/fh8QTWx/QQh4yjKkr5sAY+2JvDhsweZjPLve7lyakuQSbYAmiw36XmlsuOVWKctt+WuB97lPIxHggjbtTO0DM8+fwFYu0jboq5bwGvJEKBNql8/7VL9mUc/122T2RGRwkYpxS9tXH+6DYYATvMoRmb1AfkuM5g9AOVw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by DU0PR08MB9417.eurprd08.prod.outlook.com (2603:10a6:10:420::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Tue, 30 Sep
- 2025 00:21:50 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9160.015; Tue, 30 Sep 2025
- 00:21:48 +0000
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-To: Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Cheng Ming Lin <chengminglin@mxic.com.tw>,
- Chuanhong Guo <gch981213@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
-Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: [PATCH v7 24/24] mtd: spinand: repeat reading in regular mode if
- continuous reading fails
-Date: Tue, 30 Sep 2025 03:21:09 +0300
-Message-ID: <20250930002109.3600886-25-mikhail.kshevetskiy@iopsys.eu>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
-References: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: FR4P281CA0317.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:eb::10) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.27.29]) (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id A5DF3B220123;
+ Tue, 30 Sep 2025 02:32:10 +0200 (CEST)
+Message-ID: <b5d83815-a4cc-43d1-a770-4553c3431e9e@freeshell.de>
+Date: Mon, 29 Sep 2025 17:32:08 -0700
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|DU0PR08MB9417:EE_
-X-MS-Office365-Filtering-Correlation-Id: 506498d7-b10f-47e4-02b0-08ddffb7586e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|7416014|52116014|1800799024|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Veu9vNlGVDwJSynjNw9/ilw276SS5ieRUC71Rj60Bjq4nY9gBPYnPE0h88sU?=
- =?us-ascii?Q?IHlfRBSr4mAy2jlV09blnHuf6XaPQ4RgtPl5qu/HSpL+3M90TAKOTeVwRo4f?=
- =?us-ascii?Q?OMXTPF6FMwp33ZhrexB0adThDkBFOJriCuw/hfds2ZZQtLrU+Vi6YfX6PS+q?=
- =?us-ascii?Q?mhKoHy8BvTAupL9Wub+GXdzkLpGMr0orJmSnO5eopHUgmCx+8O9mAr+lhvA4?=
- =?us-ascii?Q?S5vkve1cK0Hp6cK5pULpQ22u1TdD4nrt54E9Qe2DFMYaSDqvv6OF6OdAD5Wy?=
- =?us-ascii?Q?IMbnxGv27lvO9B/8z1uWhAcGQiLPxF4Ga+rsEgockDcG8fbIG8ATVrZumLxB?=
- =?us-ascii?Q?5BJAyYhv3jPRjHY/NU2f5DEdggHqEa071wPE6uHwtavijSdmMXclkFnfGUaq?=
- =?us-ascii?Q?nVxCPczfrPxGC+eD0dNAl6PZWPchoyiCxqmf0irAgfbezQsX6kdw01sz6GhW?=
- =?us-ascii?Q?DskSLpfHNAY1rYccpyZiZ7ShkK3QvnVl+3PCaett60dDLvmEqJKDQ1GM0kMj?=
- =?us-ascii?Q?MkuIrd76O/+qd+pFsgxFXabmx0A9MJiJ7hhakhIf8tz5hhU3GIyNKxG00/G0?=
- =?us-ascii?Q?LwzQz8jvk6vGPgryloncWOoV9MFeATTZRb5f4aIBEZ2FhPRY2eeFOzrJIQ3w?=
- =?us-ascii?Q?IUKGam6JQy54LeCVxyOgB17ca/xdlQsUaVpc9yYKH33Wrlz4b2qR4+81BaVB?=
- =?us-ascii?Q?i3owksPFfSFGZqHf9MOeCJxDOBSZay5FFj9Jd0/rzQ+mIysR34laQnmyjWjE?=
- =?us-ascii?Q?puqt4YBxfx4Pa8bU3LWtvltWRCVvK/VD9JIqEHOWJ8vc+WaynVveyW32rMzV?=
- =?us-ascii?Q?dCrUJlDFASGBd8NOFF4cMVoekpp4u2cqnLAy9gYxy1ksjaNdqjsMN9C12imj?=
- =?us-ascii?Q?iczsEeSviaT39nRrv1w+zXz8qD3LzNOzHqjM7edYOWRnzEy0PrVsvUXJLG4t?=
- =?us-ascii?Q?ocU8MZbHvT6GFHDfjeOSTIne+jJX7ervwt7gJaSo9vD4JhhGK2HSVGqSdrKG?=
- =?us-ascii?Q?Tcr7EjIN1Gk9L9maun4uEV8kCMCGidsmvnZs1F7716tB7zy54TV6xKA5Pf+N?=
- =?us-ascii?Q?Za4ayj/QeJA31T9QIlEcCZye/7o2m941Ti3MR4wM3XeA9xLjhGr+pSeKJ3Ip?=
- =?us-ascii?Q?N8zkqNaUwQZS8v0gONo1YCqBPdaDtTJpnicJkfvRm4lvAU1mCLXS5Tb27Af4?=
- =?us-ascii?Q?YH88C9NnRW6Rs94EEgpvpDF6dKj2V6LAGghRJQlVeW/uQ4YAH2la0olWm8tE?=
- =?us-ascii?Q?ptbamMr7kiZGLD7mbPbG4PVVU4gCv3tvGZU4fZaPDk2k9fPUkbTQQ3xlNcnk?=
- =?us-ascii?Q?FwUiz02tJ/Ev7ovReXdV7xzQ5d+37ODvGkhu/igRhNIyExSZjHUaqG2+/i3v?=
- =?us-ascii?Q?tGgTUMTmjDi7/o339fawe2+gg00KzdNDFIJYSdCupTavYdI4FOp4Dlf10DIL?=
- =?us-ascii?Q?ulxH7frmlqCuB1UdKmjVaVZf9mCsAWZ8P7F57Z4GSq+FFu9fxuhpPVRdVGi9?=
- =?us-ascii?Q?r44Rz3MQSFMrECsYfXjlARG5w/wIHMPn7CDbeFXpUMSR+Law81vcv/hmkA?=
- =?us-ascii?Q?=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(52116014)(1800799024)(366016)(38350700014)(921020);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?usWlIiVv7nzrejavUof2zS9hplJZlVELz9HenVEZBN1J2efr+WVherWFcqrw?=
- =?us-ascii?Q?p+RDWb/DsHKf6eg0SZntPhdNkglPrmYQloxZUrvAwMQ2vHIs5wh70UAwhWzP?=
- =?us-ascii?Q?6tIGt3xGZ4wajUPe5SclJNwgQ54/I52lXSXsgeQKymEr9N/SBsnzsTK4ywY6?=
- =?us-ascii?Q?7QW8C5m3HlpgsT9VH9ioH6kYOlPSPDxj6WC9ZVXNkDmapXM05Kt3ee4MKtqu?=
- =?us-ascii?Q?Os2Ombv/hVpvbcIckAtcJmjmOFVFxcnMlvbEDyLqJD49muE+UF6SvT1wHCXE?=
- =?us-ascii?Q?LoIQnLNQk90nmB3ZnrslFmF5d3cD0MFupwh++36LeBn4ZDg+mqfoZB2L4alx?=
- =?us-ascii?Q?+zktVPSEdce18aqdqI/iTcad1hYMB9kMRMnaoVtLspwbIHltfJVCxNS/5wrq?=
- =?us-ascii?Q?RIfGlCzIpn046f6ZPf7p5wKYaxRdyMGw3vS25R2zEMNSCFwIgUZObT87miI1?=
- =?us-ascii?Q?q72LCzpeqLdm+nSQ2cHrfn//osnh0FfOduxpPV39HP42oicr+Kl9rT84KBUD?=
- =?us-ascii?Q?YY8enxbWOXA8T/4vU6UMddkUNiJRt2Q+ZELdnbmU2iL7dW2LgakE7/zCMssH?=
- =?us-ascii?Q?OAMQYFDesFWFmiO+oJXH8QHTr+7J1qRKQMUTDJYFyRKFbw1M9mmxigTekElC?=
- =?us-ascii?Q?sH98bmrDdraCLL14MdqEDpNCIePP1RPqhdK7dAguS/O1vKVuTXbMSuiZ2KCj?=
- =?us-ascii?Q?O6NhFjXX4BwnQhe1TJwa5hNHpSfX7r8xIScPuczn+PwN90717y2kLMj3tcc3?=
- =?us-ascii?Q?8uy8kaHRYo7FPiWOzrrfRInek2jVtKuVopw4HenXkXewVgQ8TyB4l0wlm7TH?=
- =?us-ascii?Q?xAe0Fa0ciE4puT0r9WIK6eK35CWmiB1eAVtIa8eYV3n1A0wida2DGaRMuyD7?=
- =?us-ascii?Q?+zVQ8orLDORvMVxgpzdGx944fgqtRB8dCAXoX2SCCCBPRgw/XDEmMl++eOoH?=
- =?us-ascii?Q?oTRNEbIMyQr16WD9bBPNUSudrXtL3yD5mb2P9fwYvBa0ixsQpD1CSZllGixJ?=
- =?us-ascii?Q?oxS8afmm+xMiSxxFfyvCROLci+wnZe63QwBnesAVX7mmUvyprJLLi29u33x0?=
- =?us-ascii?Q?e1qrY8uhQ0+55oFo9oONY41Ymbwz/LrsUH9clTxbFFdVppPukL5gTKqIIDBg?=
- =?us-ascii?Q?JTJ9ykPjoH5XKub7KTlMWITzcNd6iPoptwwmn1VWdrL82i/glStSufVatgox?=
- =?us-ascii?Q?e30EZurKO6Q5ZcGUjdJePPXeo7ICS+NMuQPM3HrKEskdYyu3XUOu0iPir/x5?=
- =?us-ascii?Q?vQRdn+uXxc4hoWSWRQAJkyc1qBrGu2gsz3UIvHU7glP5BzqLx+J6uvU043oo?=
- =?us-ascii?Q?VPfp6Z9URrcNmpAeGrNAr/EqdTVQCWxOG9C3phKpyIANlcz3IEpOvFVCKFHd?=
- =?us-ascii?Q?ew7V77zSOQjVPjhf7/CP5W7nuVBfZzuZyjeFysI7wAUao9ydLAEuIHi7Dcnb?=
- =?us-ascii?Q?47NTsKghH6eNhiYeiSO6bK4ltKipL7VoNrU6taKApT9kxlizuJUYk9zBUqgh?=
- =?us-ascii?Q?R6DNZK9M/X0lj/EyLtEwIUfEgKhuu+p/g801m/s6T8zan9bzrml34JeVnxfJ?=
- =?us-ascii?Q?FAGfhbKk+fbiL5zb8LM22fALtyAatL14bjX6N0HgzjZfMpX+TyP/5YF+DBBT?=
- =?us-ascii?Q?qZrOj2nJVayyQ0mwOTGhBsw=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 506498d7-b10f-47e4-02b0-08ddffb7586e
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 00:21:48.5685 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CJsfGGkbDit2lvVHcRkMdmkFYawmJx2tBON5hgggJPo+G2h1sORhP4wVg41blyk62LlqOVbw1uejBerz0Ib/jhZK9kkpp7SKHgcF6NhS4GI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR08MB9417
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] env: spi: Fix gd->env_valid for the first write
+To: Michal Simek <michal.simek@amd.com>, Marek Vasut
+ <marek.vasut@mailbox.org>, u-boot@lists.denx.de, git@xilinx.com,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Casey Connolly <casey.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass <sjg@chromium.org>
+References: <7a6ffee423f45507af680c63a86cc50fb9e3a5df.1757489188.git.michal.simek@amd.com>
+ <1684bd0d-b831-43e6-8713-95a2675957db@mailbox.org>
+ <39f7c9df-9a8a-447d-8689-4f99676fb1e8@amd.com>
+ <48de987c-1255-4c90-8477-964d153809d3@amd.com>
+ <401851f4-36e7-4e11-9d2e-e85753d916bf@mailbox.org>
+ <e436dd80-3693-472b-b9f6-5d27a8310397@freeshell.de>
+ <49902e34-a01d-422b-bd60-e97aef7d859e@amd.com>
+ <88692c72-1c86-45d3-bf2b-1a21debc5785@freeshell.de>
+ <a69aecba-186e-4ce4-ba8f-2c72b1d94267@amd.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <a69aecba-186e-4ce4-ba8f-2c72b1d94267@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,73 +66,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Continuous reading may result in multiple flash pages reading in one
-operation. Unfortunately, not all spinand controllers support such
-large reading. They will read less data. Unfortunately, the operation
-can't be continued.
 
-In this case:
- * disable continuous reading on this (not good enough) spi controller
- * repeat reading in regular mode.
 
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
----
- drivers/mtd/nand/spi/core.c | 26 ++++++++++++++++++++++----
- 1 file changed, 22 insertions(+), 4 deletions(-)
+On 9/29/25 05:36, Michal Simek wrote:
+> 
+> 
+> On 9/29/25 11:49, E Shattow wrote:
+>> Hi Michal,
+>>
+>> On 9/29/25 00:08, Michal Simek wrote:
+>>>
+>>>
+>>> On 9/23/25 23:18, E Shattow wrote:
+>>>>
+>>>>
+>>>> On 9/22/25 07:51, Marek Vasut wrote:
+>>>>> On 9/22/25 4:02 PM, Michal Simek wrote:
+>>>>>>
+>>>>>>
+>>>>>> On 9/11/25 07:40, Michal Simek wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>> On 9/11/25 05:28, Marek Vasut wrote:
+>>>>>>>> On 9/10/25 9:26 AM, Michal Simek wrote:
+>>>>>>>>> In case of ENV_INVALID (uninitialized variables) the first env
+>>>>>>>>> location
+>>>>>>>>> should be used for storing variables.
+>>>>>>>>> That's why change the logic how env_valid is setup to be aligned
+>>>>>>>>> with
+>>>>>>>>> offset calculation.
+>>>>>>>>> This will also fix the print about Valid environment is showing
+>>>>>>>>> proper
+>>>>>>>>> location where variables are saved for the first time.
+>>>>>>>>> And also fixes behavior where the first two writes were going
+>>>>>>>>> to the
+>>>>>>>>> first location instead of the first to the first location and
+>>>>>>>>> second to
+>>>>>>>>> second location.
+>>>>>>>>>
+>>>>>>>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>>>>>>>>> ---
+>>>>>>>>>
+>>>>>>>>> Changes in v2:
+>>>>>>>>> - Simplify commit message
+>>>>>>>>>
+>>>>>>>>> Origin commit message with more technical details.
+>>>>>>>>>
+>>>>>>>>> When both location for variables are not valid (or empty) gd-
+>>>>>>>>>> env_valid is
+>>>>>>>>> 0 (ENV_INVALID) which is setup by
+>>>>>>>>> env_sf_load()/env_import_redund()/env_check_redund() calls.
+>>>>>>>>>
+>>>>>>>>> When saveenv is called in case of SPI env_sf_save() is called
+>>>>>>>>> which
+>>>>>>>>> contains logic which describes new/old variable locations.
+>>>>>>>>>
+>>>>>>>>> if (gd->env_valid == ENV_VALID) {
+>>>>>>>>>            env_new_offset = CONFIG_ENV_OFFSET_REDUND;
+>>>>>>>>>            env_offset = CONFIG_ENV_OFFSET;
+>>>>>>>>> } else {
+>>>>>>>>>            env_new_offset = CONFIG_ENV_OFFSET;
+>>>>>>>>>            env_offset = CONFIG_ENV_OFFSET_REDUND;
+>>>>>>>>> }
+>>>>>>>>>
+>>>>>>>>> In case of ENV_INVALID option the first location is used (else
+>>>>>>>>> part)
+>>>>>>>>> and variables are saved with ENV_REDUND_ACTIVE flag.
+>>>>>>>>> The second location flag is rewritten to ENV_REDUND_OBSOLETE.
+>>>>>>>>>
+>>>>>>>>> And
+>>>>>>>>> gd->env_valid = gd->env_valid == ENV_REDUND ? ENV_VALID :
+>>>>>>>>> ENV_REDUND;
+>>>>>>>>> is executed. env_valid is ENV_INVALID that's why ENV_REDUND is
+>>>>>>>>> setup
+>>>>>>>>> but that's not correct because the first location has been written
+>>>>>>>>> and not
+>>>>>>>>> the second one.
+>>>>>>>>> That is confirmed by
+>>>>>>>>> printf("Valid environment: %d\n", (int)gd->env_valid);
+>>>>>>>>> which is showing number 2 (ENV_REDUND).
+>>>>>>>>>
+>>>>>>>>> That's why change the logic how env_valid is setup to be aligned
+>>>>>>>>> with
+>>>>>>>>> offset calculation which also cover the case where initial
+>>>>>>>>> state is
+>>>>>>>>> ENV_INVALID.
+>>>>>>>>> Then print about Valid environment is showing proper location
+>>>>>>>>> where
+>>>>>>>>> variables are saved for the first time.
+>>>>>>>>> But also it is fixing behavior where the first two writes are
+>>>>>>>>> going
+>>>>>>>>> to the
+>>>>>>>>> first location instead of the first to the first location and
+>>>>>>>>> second to
+>>>>>>>>> second location. Alternation is happening after it.
+>>>>>>>>>
+>>>>>>>>> v1: https://lore.kernel.org/
+>>>>>>>>> r/03aa59f72f47fe0ecafd1e1ca52cbb8a5a8f0446.1755613540.git.michal.simek@amd.com
+>>>>>>>> Sorry for not being clear, the original commit message structure
+>>>>>>>> and
+>>>>>>>> technical details were fine, it only needed slight rephrasing, in
+>>>>>>>> the original form it was very hard to understand. Can you please
+>>>>>>>> reinstate the original commit message and only clean it up
+>>>>>>>> slightly ?
+>>>>>>>
+>>>>>>> Can you exactly point me to part which wasn't clear? It has a lot of
+>>>>>>> details about flow and obviously it makes sense to me that's why I
+>>>>>>> would like you to point me to exact part which should be improved.
+>>>>>>
+>>>>>> What about this?
+>>>>>>
+>>>>
+>>>>>> When both SPI environment locations are invalid (gd->env_valid ==
+>>>>>> ENV_INVALID), the first call to saveenv writes to the primary
+>>>>>> location
+>>>>>> and sets the active flag. However, the logic for updating gd-
+>>>>>>> env_valid incorrectly sets it to ENV_REDUND, which does not match
+>>>>>>> the
+>>>>>> actual location written. This causes the first two writes to target
+>>>>>> the same location, and alternation only begins after the second
+>>>>>> write.
+>>>>
+>>>> nit, the use of word "alternation" here reads as splitting (no
+>>>> duplication) the data one-by-one into multiple targets. I would give
+>>>> the
+>>>> game analogy of 52 playing cards and alternating to deal the cards to
+>>>> players, each player gets one card in a sequence of alternation; if
+>>>> there is more than one player in the game then no player will get all
+>>>> the cards from the action of dealing the cards.
+>>>
+>>> tbh before this patch I though that both copies are the same but that's
+>>> not how it is implemented.
+>>> It is switching from Location A to B and then to A, etc.
+>>>
+>>
+>> Okay. That is also surprising for me.
+>>
+>>>>
+>>>>>>
+>>>>>> Update the logic to alternate gd->env_valid based on whether the last
+>>>>>> write was to the primary or redundant location, ensuring the first
+>>>>>> write sets ENV_VALID and subsequent writes alternate as expected.
+>>>>>> This
+>>>>>> aligns env_valid with the actual storage location and fixes the
+>>>>>> alternation sequence from the first write.
+>>>>>>
+>>>>>> With this change, the "Valid environment" printout correctly reflects
+>>>>>> the active location after each save, and the alternation between
+>>>>>> primary and redundant locations works as intended from the start.
+>>>>> Yes, perfect.
+>>>>
+>>>> I do not understand what this description is saying because alternation
+>>>> of write operations to multiple targets would not be redundant.
+>>>> Alternation with the meaning of "fail-over" is similarly not redundant.
+>>>
+>>> How the code is written is that you have location A and B.
+>>> And when you call saveenv variables are written to A.
+>>> And next saveenv variables are written to B.
+>>> Next to A, etc.
+>>>
+>>> It means unless you call saveenv twice you never get data in A and B
+>>> equal.
+>>>
+>>> It means it is not alternation of write operations to multiple targets.
+>>> It is alternation of location where one complete write is done.
+>>>
+>>>>
+>>>> An alternative method has the meaning of "do something else, do not do
+>>>> this". In the common use, an alternative may have the meaning of "do
+>>>> something else if needed as fail-over from what is first being
+>>>> attempted". Do you intend for the meaning of "fail-over" and
+>>>> "duplicate"
+>>>> or "duplication" where you have written "alternate" and "alternation"?
+>>> I am not a native speaker but the word alternation between A/B sounds
+>>> the best for me.
+>>> Feel free to suggest how to describe it better.
+>>>
+>>> Thanks,
+>>> Michal
+>>>
+>>
+>> This is not easy to describe with a small quantity of words. The common
+>> phrases are "taking turns" and/or "round-robin".
+>>
+>> It is clearer to say what this is not, as:
+>>
+>> "... results in alternation of saveenv location with each invocation.
+>> Data is not duplicated or striped between locations for any single
+>> saveenv invocation."
+>>
+>> I like your explanations, you understand the functionality and can
+>> describe the problem clearly. I just do not expect that functionality
+>> would be useful so without additional context and full explanation it
+>> seems unlikely to be what you say it is. Thank you for expanding on the
+>> meaning.
+> 
+> What about this full description?
+> M
+> 
+> When both SPI environment locations are invalid (gd->env_valid ==
+> ENV_INVALID),
+> the first call to saveenv writes to the primary location and sets the
+> active flag. However, the logic for updating gd->env_valid incorrectly
+> sets it to ENV_REDUND, which does not match the actual location written.
+> This causes the first two writes to target the same location, and round-
+> robin switching only begins after the second write.
+> 
+> Be aware that data is not duplicated or striped between locations
+> for any single saveenv invocation.
+> 
+> Update the logic to perform round-robin selection of the environment
+> location
+> based on whether the last write was to the primary or redundant location,
+> ensuring the first write sets ENV_VALID and subsequent writes follow the
+> round-robin pattern as expected. This keeps gd->env_valid consistent with
+> the actual storage location and fixes the sequence from the very first
+> write.
+> 
+> With this change, the "Valid environment" printout correctly reflects the
+> active location after each save, and round-robin switching between primary
+> and redundant locations works as intended from the start.
+> 
 
-diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index 68a03ddee8b..0c435059546 100644
---- a/drivers/mtd/nand/spi/core.c
-+++ b/drivers/mtd/nand/spi/core.c
-@@ -427,8 +427,16 @@ static int spinand_read_from_cache_op(struct spinand_device *spinand,
- 		 * Dirmap accesses are allowed to toggle the CS.
- 		 * Toggling the CS during a continuous read is forbidden.
- 		 */
--		if (nbytes && req->continuous)
--			return -EIO;
-+		if (nbytes && req->continuous) {
-+			/*
-+			 * Spi controller with broken support of continuous
-+			 * reading was detected. Disable future use of
-+			 * continuous reading and return -EAGAIN to retry
-+			 * reading within regular mode.
-+			 */
-+			spinand->cont_read_possible = false;
-+			return -EAGAIN;
-+		}
- 	}
- 
- 	if (req->datalen)
-@@ -890,6 +898,7 @@ static bool spinand_use_cont_read(struct mtd_info *mtd, loff_t from,
- static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
- 			    struct mtd_oob_ops *ops)
- {
-+	struct spinand_device *spinand = mtd_to_spinand(mtd);
- 	unsigned int max_bitflips = 0;
- 	int ret;
- 
-@@ -897,10 +906,19 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
- 	mutex_lock(&spinand->lock);
- #endif
- 
--	if (spinand_use_cont_read(mtd, from, ops))
-+	if (spinand_use_cont_read(mtd, from, ops)) {
- 		ret = spinand_mtd_continuous_page_read(mtd, from, ops, &max_bitflips);
--	else
-+		if (ret == -EAGAIN && !spinand->cont_read_possible) {
-+			/*
-+			 * Spi controller with broken support of continuous
-+			 * reading was detected (see spinand_read_from_cache_op()),
-+			 * repeat reading in regular mode.
-+			 */
-+			ret = spinand_mtd_regular_page_read(mtd, from, ops, &max_bitflips);
-+		}
-+	} else {
- 		ret = spinand_mtd_regular_page_read(mtd, from, ops, &max_bitflips);
-+	}
- 
- #ifndef __UBOOT__
- 	mutex_unlock(&spinand->lock);
--- 
-2.51.0
+Michal, great and we can condense that to terms of location (and not so
+much write operations that are now the most confusing word use)?
 
+My edit is as following:
+
+START
+
+Update the environment location selection logic to perform
+{alternating,round-robin} selection of the environment location based on
+whether the last write from a call to saveenv was to the primary or
+redundant location. Ensure the {first,initial} {write,call to saveenv}
+correctly sets ENV_VALID so the subsequent calls to saveenv follow the
+{alternating,round-robin} pattern as expected. This keeps gd->env_valid
+consistent with the actual storage location and fixes the sequence from
+the very first write.
+
+Prior to this fix the {alternating,round-robin}
+{switching,change,assignment,selection} of locations would begin only
+after the second call to saveenv.
+
+With this change, the "Valid environment" printout correctly reflects
+the active location after each save, and round-robin switching between
+primary and redundant locations works as intended from the start.
+
+{in absense of a cover letter then insert triple-hyphen here so git will
+ignore the remainder with more technical details not intended for the
+commit message}
+
+This corrects the existing behavior that when both SPI environment
+locations are invalid (gd->env_valid == ENV_INVALID), updating
+gd->env_valid is incorrectly {selected as,set to,assigned as} ENV_REDUND
+and allowed the following call to saveenv to target the same location as
+the first call.
+
+Note that data write operations are not duplicated or striped between
+locations for any single call to saveenv. The location switching is
+being done between completed saveenv operations.
+
+END
+
+Here also are my notes and advice about word selection as might be
+suggested from the above:
+
+"following" may have a double meaning of both being a sequence and being
+a copy of or adjoined to.
+
+"subsequent" is more precise than "following" but not as common for easy
+understanding.
+
+"alternate" if you want the meaning of A-B-A-B for two locations, and
+possibly A-B-A-C-A-B-A-C-A-B-A-C (alternating, non-circular order) for
+more than two locations.
+
+"round-robin" if you want the meaning of "A-B-C-D-A-B-C-D-A-B-C-D", in
+that there will always be one-or-more locations taking turns in circular
+order.
+
+"the last write" can have the double meaning of "the previous write" and
+also not the most recent write operation, but I figure this out from
+context these two concepts are equivalent here.
+
+With this I have focused my attention to give possibly too much
+information :-)   Does that make more sense or is it less clear?
+
+Best regards,
+
+-E
