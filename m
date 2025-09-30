@@ -4,87 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F10EFCCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 16:06:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10EE6CAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 16:19:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D3E3832AD;
-	Tue, 30 Sep 2025 18:06:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 50D6882998;
+	Tue, 30 Sep 2025 18:19:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a/ERa0v7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VhOW2W7g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AA648349B; Tue, 30 Sep 2025 18:06:49 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id D43DA82998; Tue, 30 Sep 2025 18:19:44 +0200 (CEST)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90041802C1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 18:06:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABDB5800B1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 18:19:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-414f48bd5a7so4019009f8f.2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:06:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-42521ca36d6so30130285ab.3
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:19:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759248406; x=1759853206; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OiuSbI7g211UEO5GChSRVz7qI6UicdNTI645ZLK248s=;
- b=a/ERa0v7+zN/Hbay9h00lOPCvu2hvLxgbaVa927QQr97OVGf3+Ooi+93ABeSs9RhCG
- VcUxEsS/2VZJ3+v4HcokkjiK80ZOK7vKdNc84ZIejTCL/8h5iF2iWTUYcELuiC3mHDb5
- poQSGSIldPrKHMJ6Li7kSvMAB2G9uBnz+jIlnZE5H4/ZP0n6km9zVJcqfNjoYsyV+DcM
- Gmuwg2eqgLPij/btLrD2rLfVT/unf6hSDciiG6PbLiaE5dU/MX0x2osh82K1GnAb0Xog
- H+bbHPi5k0nXIOqhi2sptHcuooJaG1ZN9b1Q6MW3kzZAB9zWdTUQl80y79DztniV4adA
- 8j3g==
+ d=konsulko.com; s=google; t=1759249181; x=1759853981; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dxiJvw+N69B+AeyPJCzWkvSXNOTtdlmIWNsM59D42Lc=;
+ b=VhOW2W7gEzj7O2wg9P0d9QOykfeTKQUnu1hEGzroXsEdiUjkbsT7mTyT3lDINeK69M
+ oIq6AtEG2ctK59oSmj2C90ezbkJYZbLLyoheEn5KLlM+3HiHrTHaCkWs5ptHxuXRG+Ek
+ rF5jSpC5DLHs+aX2D4sTmLZBccOBMydRIAeZY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759248406; x=1759853206;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OiuSbI7g211UEO5GChSRVz7qI6UicdNTI645ZLK248s=;
- b=XRAw8PHjYkDmFGDGdPoo7S9WnTEGAdgOmjnlvT/RYrFFBYMFjH1curOAwZn0EreNJF
- RtCnQrYC88mbGzfWq5xAvDidk7kw/K+Uo9mHL/BfglJojI/mTXSXaRa1CTEudZzp9ck/
- qA8StQN5Nqbm9TD34HMci7auQr0/S//ywYFDwlb4q69ZRKN4Carfgwdtp0Bh4uIr32o9
- Fe3CZJm9ARYBW9p9cXAJRsD5zz1wzrXF1NymeupdBnuDpLQYV2Uv+AKOfzeaaoP7A6Yg
- pOPeX2xLMR3oEcRWOHrrR7AkVvTl/fvlCzSfODEEtvO2P8r+RKM1eQxGQ75x+qjwcPF9
- 1TjA==
-X-Gm-Message-State: AOJu0YxaKGortCscBJO6LJcCRwg5fGCjgfSB+qVBzlqh6bB6aoUSc6Ui
- JX0GXp233O+78Jk5V1BeZ0iqHeB7i/HKzG4z7ALVNdkxHg8agvTwFt1yArqCacu50Sw=
-X-Gm-Gg: ASbGncsOT6Gbuhxo/GZIZ8/AIYdkgPncpO4TonkNz+XiVKuCQ1hZSXIzfyxHUx236RP
- D7RXXuVDktTsvQGtyGyc1mHnv+TBhI1WgYbjafmiwGbHee8C4gVZFQSjSPRoym14T7LSQiHCUCX
- 6TlLOn24ijNPN53/jyOyjQpdYKh2rH+IABiPePXkZBm3LNQW3/Ylf5LZQ94prJW5sIzgxqWysXz
- Wm+uFaWXSegkfTImv9t9UnCPkMY5QYgaHIyNC8Rkamz4OX+HSYavyr4WXDXa6cpSkYGMwLgKn0C
- +H9xhY8S7sGM9dRuPwgxA+iPul5qbo3eGY+lv0TJ19Cf+MXxuUTGA21CoYItDasU2LeJ4vSJNjd
- G49LJq9R9/7m/mZa0zZekOGoEo0oGoUhSwnUWpti91ljiKwZbKqnK9mT0KxHCjnnWgnfE+wEV6y
- zKj00lzCLKcq9jPUVD9gI=
-X-Google-Smtp-Source: AGHT+IFjNNr7IHCEhtiUj9erjVkeSohZxkGPLmyXDtuywRTctb6fSruckZjfBEsLKukhy+/nqtAnwQ==
-X-Received: by 2002:a05:6000:420a:b0:3f0:9bf0:a369 with SMTP id
- ffacd0b85a97d-425577f34e9mr278637f8f.14.1759248405910; 
- Tue, 30 Sep 2025 09:06:45 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ebd:e301:aed:2018:ed42:d786])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fb72fb017sm23228178f8f.3.2025.09.30.09.06.45
+ d=1e100.net; s=20230601; t=1759249181; x=1759853981;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dxiJvw+N69B+AeyPJCzWkvSXNOTtdlmIWNsM59D42Lc=;
+ b=SMb3dtRO4iFhwhvUSxeLsLvhXR6Yz8XtG/FonhVJZCL7RPTEQ1SEms417SXcr71cJd
+ G4gnV8sKpd3KWFbO8WVJRyR5egNO7ONotM26MBS2hpC9oW9+wJcUZzBgFOV+N61cmjrw
+ Fb6zvj+9/uTgRWLyYpd4SOLBdLIDB+ucjLDDFdKGbwrf7odFnDZWsAKCAZ4igHYfJt+V
+ rsxrzSoRAFvtdKeKMJ7YkaP57snD5qz/9ivZu+PuWHsgiDR/hAg05OM7jXATsYYQyxm5
+ t4tMog9beZqUSeWuOVE4ZlPj60YzLgy86Tg/6hQAnSiqxOwDsHWheP+FB6VKSqURbLb1
+ NSZQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWLiR0MBWw4HpVJjk9leQlqNcID7IQV5p08dmfGRddrrALNZ9ZI9PzKLCsivn4uRZBnJVDs2QA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw0KyoV3gkicyTwIB+YXUHkS47s6ydSUTl1e0cZywtIqJEhbLkH
+ Kl5NO9Q5hB89qtZ/CiaTgJ2tZcTeEnRQlP1SwUYrSMx3iBdNHR/LUM0VjpnnHExeeJk=
+X-Gm-Gg: ASbGncsCQdGEfWMRsAJCYYWy8oPT03DRUtmERQUxEL4krTm4WPGlcUmuNT0LVlXILIh
+ xi3fzXVXS/Yjn2tF9sDWOHYpjnl3Z0wI/3/yOgKN31mHRExE6vSNW00/MKDvQwrz3vqWXqmmobD
+ 8qSeiNIFzOQrW21uGKLa4X8GBFnYqBKP8xLBLz8VCIMOEdvYI1DCIMuuqHDYNVYIqin1JlAakJ5
+ 7js3UXST2Lg/Zr4NiMt1HE+F9VW0KZTXs7+0kR1YNLoAmq06jQ+3eEBuDtBXZYFi14VEAt7PzHh
+ LGy6boqj9rmsnGibI/4vWlW10y6eVSZszrrD3Ma81sAeKsHERJevJbPaimP+fcBaJi227NeSh0m
+ czAaRK+RpQdc0jUqV5fI9ReBqtK62YQqe1Dt4otE+RYjAiadzfT8zNHhKcM/GBbzBuuxitLMijn
+ a/ILWwvKkV+jzJmRA=
+X-Google-Smtp-Source: AGHT+IGxY7OwK2UGzyTN+zX5s/gIks/+z2TA/NsBikl3jPTpfuYI07JlR0b4ntrM8h+nPZYmg3MfUA==
+X-Received: by 2002:a05:6e02:1a04:b0:423:fce3:9255 with SMTP id
+ e9e14a558f8ab-42d816236fdmr7379985ab.23.1759249181283; 
+ Tue, 30 Sep 2025 09:19:41 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-4295fef7c08sm38938165ab.38.2025.09.30.09.19.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Sep 2025 09:06:45 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 30 Sep 2025 17:06:44 +0100
-Subject: [PATCH] usb: ulpi: Incorrect operator used
+ Tue, 30 Sep 2025 09:19:40 -0700 (PDT)
+Date: Tue, 30 Sep 2025 10:19:37 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Conor.Dooley@microchip.com
+Cc: Jamie.Gibbons@microchip.com, u-boot@lists.denx.de,
+ Valentina.FernandezAlanis@microchip.com, Cyril.Jean@microchip.com,
+ ycliang@andestech.com
+Subject: Re: [PATCH] board: mpfs_icicle: fix pointer assignment in
+ board_fdt_blob_setup()
+Message-ID: <20250930161937.GF6093@bill-the-cat>
+References: <20250930154534.3914214-1-jamie.gibbons@microchip.com>
+ <20250930154837.GB6093@bill-the-cat>
+ <f6b35b7a-457b-48e9-bec7-df3e57b9f6ed@microchip.com>
+ <20250930155518.GC6093@bill-the-cat>
+ <6e30a206-a0c0-4ecf-9d69-6ce35f4a52b3@microchip.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250930-usb_ulpi-v1-1-26c929ca2ed1@linaro.org>
-X-B4-Tracking: v=1; b=H4sIABMA3GgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDS2MD3dLipPjSnIJM3UQLs8Q0w0QTE0vTVCWg8oKi1LTMCrBR0bG1tQC
- YG0/SWgAAAA==
-X-Change-ID: 20250930-usb_ulpi-a86af1a4495e
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SA7bljayBaHRhyR7"
+Content-Disposition: inline
+In-Reply-To: <6e30a206-a0c0-4ecf-9d69-6ce35f4a52b3@microchip.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,36 +105,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Combining two bits into a mask to be used so that the same write code
-can be used to set or reset bits in a register clearly needs to use the
-binary 'or' operator, not the binary 'and'. Fix it.
 
-This issue was found by Smatch.
+--SA7bljayBaHRhyR7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/usb/ulpi/ulpi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Sep 30, 2025 at 04:03:29PM +0000, Conor.Dooley@microchip.com wrote:
+> On 30/09/2025 16:55, Tom Rini wrote:
+> > On Tue, Sep 30, 2025 at 03:51:02PM +0000, Conor.Dooley@microchip.com wr=
+ote:
+> >> On 30/09/2025 16:48, Tom Rini wrote:
+> >>> On Tue, Sep 30, 2025 at 04:45:34PM +0100, Jamie Gibbons wrote:
+> >>>
+> >>>> Correct the assignment in board_fdt_blob_setup() to use *fdtp instea=
+d of
+> >>>> fdtp, ensuring the caller receives the correct FDT address. This
+> >>>> resolves an issue where the device tree pointer was not properly set=
+ due
+> >>>> to assigning to the local parameter rather than the dereferenced
+> >>>> pointer.
+> >>>>
+> >>>> Fixes: 63a8506580b6 ("board: mpfs_icicle: implement board_fdt_blob_s=
+etup()/board_fit_config_name_match()")
+> >>>
+> >>> This commit is not in master nor next, where is it? I think this is
+> >>> something that can be folded in to another patch and that patch
+> >>> re-posted. Thanks.
+> >>
+> >> It should be:
+> >> Fixes: 7c16ebba1ed ("board: mpfs_icicle: implement board_fdt_blob_setu=
+p()/board_fit_config_name_match()")
+> >> and the patch is
+> >> Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
+> >=20
+> > Ah. And that is in master, so this should be for v2025.10 then?
+> >=20
+>=20
+> Yeah, I would say so. It's not working correctly at the moment,
+> it's not just a theoretical problem.
 
-diff --git a/drivers/usb/ulpi/ulpi.c b/drivers/usb/ulpi/ulpi.c
-index 128adcbde134bc5a3b3705c3ddd932b540b54cd4..0e0f0e4983d33583aa6d3212ccffc9db9ab3bc29 100644
---- a/drivers/usb/ulpi/ulpi.c
-+++ b/drivers/usb/ulpi/ulpi.c
-@@ -127,7 +127,7 @@ int ulpi_set_vbus_indicator(struct ulpi_viewport *ulpi_vp, int external,
- 	if (val == ULPI_ERROR)
- 		return val;
- 
--	val = val & ~(ULPI_IFACE_PASSTHRU & ULPI_IFACE_EXTVBUS_COMPLEMENT);
-+	val = val & ~(ULPI_IFACE_PASSTHRU | ULPI_IFACE_EXTVBUS_COMPLEMENT);
- 	val |= flags;
- 	val = ulpi_write(ulpi_vp, &ulpi->iface_ctrl, val);
- 	if (val)
+I'll edit to have just the correct fixes tag when applying then, thanks.
 
----
-base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
-change-id: 20250930-usb_ulpi-a86af1a4495e
+--=20
+Tom
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+--SA7bljayBaHRhyR7
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNwDGQAKCRAr4qD1Cr/k
+CupxAPkBPo1JK8NXT6LUSUEkb50Zjr0stygYOzBRzjhCte+7OwEA2NfhmczxpHjn
+x7xCt8ZhGBZ2sEMjhNNT1tiBOZlY/gk=
+=QwIn
+-----END PGP SIGNATURE-----
+
+--SA7bljayBaHRhyR7--
