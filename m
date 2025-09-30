@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B78CAC5B8
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9AECAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:59:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37E7F83045;
-	Tue, 30 Sep 2025 09:58:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F64583045;
+	Tue, 30 Sep 2025 09:58:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r23liT2A";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="enuIKOOn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57E3983071; Tue, 30 Sep 2025 09:58:16 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 6FF218341C; Tue, 30 Sep 2025 09:58:58 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E2B2828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:58:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 168E6828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:58:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-46e2562e8cbso42943765e9.1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 00:58:13 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-46e47cca387so36283175e9.3
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 00:58:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759219093; x=1759823893; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759219135; x=1759823935; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=3PEUpJBRBy8UN5xjMz8pCuYSZkWwFwD21Wrt2JaMFmo=;
- b=r23liT2AyjpHSY0i1kJxlOq6ayf9YBcsYK9hjiFQYjF8pk/l56njXAeK2bIJLpQCEZ
- JTUZNR9NgkPg4Aui4CGGMXeHAkyBMHzu/6enEPg92lbWqMgDpYR8W7Z4f1bvC1Q21HvC
- lLfxMgzDKM5p8A74GuZac7rRUfzbuZv4ZW/LMYv3qmTpGoIWhisBLYS3S3yeZYf7QwJg
- tqm/zwpoaMszqZw/4T4JxZet768OKMvHjAT3/t70s3RtD5/ULeUkQcVN9Eanyrp46ABv
- 7polzdDZDP3GA/GChV9leoViWJ+vAu927U1CvSHygUMmKq7JoRC9ROrBql968qcKnF3d
- 9RvQ==
+ :reply-to; bh=X2XamG8G912J91oKQxlE+W/uOy1HE4QHFXdbbL0Ryd0=;
+ b=enuIKOOnG/sMlKTv9O5QLPD+mdifzVvEDSgfav4VJR1DbBbKWcdvdm5c+f5eSZrl8u
+ gztQk6ylAlx5sFUo3PQdcz6j0iI6zlrZRkCp85KH2eelaCosmTn3iZFJIO/Dv7tB12rp
+ /uAAMOJC7XUIt2N9/FQVd0NPXCR7uLUzdAoB7/HGu2bpyYVb5grKZNWKntufLlfDVEm7
+ ygnmzrs8xCIM6b0jtGr9PXhEv7dzd0QZ0WfEh/bZ7WN/b9vDcHhFq6nx6jx/KM7Zt4NA
+ j1HVC3l5AP0JBS9VzpLgiJR3C/esKZDbLmxpxxKuy1MF9rObq/u77KNr57RRApMvSAAM
+ VZZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759219093; x=1759823893;
+ d=1e100.net; s=20230601; t=1759219135; x=1759823935;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:from:references:cc:to:subject:reply-to:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=3PEUpJBRBy8UN5xjMz8pCuYSZkWwFwD21Wrt2JaMFmo=;
- b=Tcxgbp5iZ+2j5f/4Ef1mJZNR0cS7VSHr7klm6vH/pDLY+OdxhOx1eicmNgx8O+U4Vn
- 6SQmrMFKF4jzlXaBQOYPHweDyBy+Ib7HNWom743hbMxukRt7u+A6OBRGyHpg8k7Oxmw7
- fx261Y6JnACUScrUProOlfEh+Ggo9t0sK3e/NgVBfFncKTmBpkBmtw58VejptxcMsBdD
- mYJoWI18wc6wa5/qfIKv3Id9ohu5adhogbi3nwI2+mGy9d+iFmOFVaT/7LE5JZnWMB6b
- yC1iIvCnlyqaw/15toszLA/7IhxTe39iQKE9xxviZ3EBKlyXh7EDDSXRaSXuTCwepkHO
- JC7g==
+ bh=X2XamG8G912J91oKQxlE+W/uOy1HE4QHFXdbbL0Ryd0=;
+ b=V6oXYqR2PD9vYSkwlqqXhx13AiPaSXUBecszksqBCTI5+DUdw+YzyoUntZRnGlZAgk
+ xTGqBPc9RF4zeh4hDTeHRBAowcyk6pGd3aUXlJ9G1ZC/sPfFjhlMj8UH/UjZedj+uzCR
+ mtUfjOoZYPT14DKnDy8QjytSk0hT2Ed9ZZXN888FdVr+4ujpcyZdoqa9UtyZ+aHOgYEY
+ 8lZJac5gJeNy3/e9oXI97az27yp0vV2sN+3PMRN6FYXPqEW/U/MMgQU2pO5gG9hvvZ65
+ FyHJZ8i3VtLmzEk4KeLrc1/yl8Mj/k8ZawfjTmnIz6ZLnEvhVOnQ7snFXs3xH2na5w9Z
+ 3ptw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJoQ6wARDDksu8Vu/z1gz12FU7aGa+EOaerIB7tLxXyN22CtiTm2oeJDmuue0Z62KMd6RKssE=@lists.denx.de
-X-Gm-Message-State: AOJu0YzTTEkXE2HwsvTVP6uAZ2n3bIQLeFh3+2aSgolS7cghq7Lh6nRK
- K5FOLS5JFb6h3Vc03wM2tVwD0+1ec6jgqlroMFnzNnCOBWDjHnxlgbHwjZH/COqk7yc=
-X-Gm-Gg: ASbGncsZ1KZlbPFrtqRr2iFvyd7UiAp25ITcyCNTUTlztOHnWcWCBpGmLbcCfWRKe8f
- QtwoTdgx7Lt2Ol4seONkCYBPSKusHmnGPQsv97nH+0XwrBnSD8381kFpbUByAu+lqgrZyFAzolt
- yANOhjp/cQBkyPfrYnz31ORoatrUjfeG21HcAa0WANPaAcu9ZYyVVt8P3WXrCw0qSC+phq3F+X3
- LJ1HbxPVNHDOnO1X5aNClSZpUqS2q139Mn8wR76DMmmCZ1SRxKI0zSKtuXbGSCcgvl7UW2ZVwRA
- VMUBcMlYnEusV6jXk0sxsptpiB9x4JS4Hrgmql8Jvm5UNYAtfA/OF+dR2XOmZlsYaoXZ0sxdzoT
- Btfm51AqHzLFFgn5Wi89u+SsrV+2P5B8NynVtRcwelUeqBuXg0ol08v2xG8Y2LDtWrTQywh4uBl
- FPG7IUxFZOzBIV3WxNhGLB/4mU0JRb8kAwaYYQZYPMzjaN
-X-Google-Smtp-Source: AGHT+IEdqg9FXfGg+jK0zl+UH81V0oiBuTl5jT99IZRaYhflpgreZrl2i+oZ7w+/8cJqn5rWKE5fBQ==
-X-Received: by 2002:a05:600c:4650:b0:46e:2562:e7b8 with SMTP id
- 5b1f17b1804b1-46e329f9e64mr114184995e9.21.1759219092983; 
- Tue, 30 Sep 2025 00:58:12 -0700 (PDT)
+ AJvYcCWXEPbGyLLC0QsKLphrJdG7JSXUy9vMjckb9EYVVKpmWw3Fkb1p2GnlEUVcf0B7Yq9NoHTpNpY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz8DDrD0qwLzoEYtPqNw+NpH2xL1tgi1skAM8f7JSB6H5IxpqqE
+ zJ7W1kfb2ufu1y2S4ZBXmarD0V/XLk6ik6t4CJ06S3xGPOg+3cnyNCKWt1hYWUOKHxY=
+X-Gm-Gg: ASbGnctg6JvRAVhvrLRim8Z07VvixdvciGW9ltRiPcxyLXwJsgvSxyw9XTf0/MPwMZU
+ wIWzxnRDJ3/piFBkqmlincD891shDxgSUNcSqcm8K6QtvyQGymTDZvNId/X6r1VZ9UVhoNl5p7D
+ DsrOUh4xUz3ppI3Fi1KQp9rOPQzgubzsAZ702mQIH5Avy7VVRXF7hYo+zMSQY7ijy1o+DOAiDjc
+ RAG8Avu9KUrM/fM/gNp2axKrtW5CFIH08LwlIwQIO9auClX1R0GlZLjGFcRNfpi6Q5hjb54M6WV
+ MCv0gYQmJDnQwNdSSN0++ngCQi+26TNgq4mW01YtYUBi0OGBlFWRlm3AwUqJbpbc+mFPxEBFYI2
+ yWaXfsG4MWVLlGVCnZcQKKl1sG2StK5GfAOO42ctTkFxQzHdmZimeXCH+qMq1UeXewc5gI5p/Pr
+ lP8NUYORD9sPJgdpdgPQqA6SSPl8Vy54tVMWQSHZKbooRr
+X-Google-Smtp-Source: AGHT+IGpTWJJ2Ldbz+vZO1piAvsLLm6gmjjbPSNKx4GlnT3TahwKhgRP5Z5agGDfK6PPazUHmeT/qQ==
+X-Received: by 2002:a05:600c:c4a3:b0:46e:4882:94c7 with SMTP id
+ 5b1f17b1804b1-46e5e3b15b7mr3565815e9.28.1759219134765; 
+ Tue, 30 Sep 2025 00:58:54 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:9459:14e0:525e:d859?
  ([2a01:e0a:3d9:2080:9459:14e0:525e:d859])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e56f64d06sm43720215e9.12.2025.09.30.00.58.12
+ 5b1f17b1804b1-46e2ab4897bsm256573575e9.17.2025.09.30.00.58.54
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 00:58:12 -0700 (PDT)
-Message-ID: <24cc9575-9753-43b5-a9df-09beb8cb38ec@linaro.org>
-Date: Tue, 30 Sep 2025 09:58:11 +0200
+ Tue, 30 Sep 2025 00:58:54 -0700 (PDT)
+Message-ID: <3acecdb4-5fbe-4f97-8184-c0b864f7b371@linaro.org>
+Date: Tue, 30 Sep 2025 09:58:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] doc: Update coding style to recommend b4 for patch
+Subject: Re: [PATCH v2] doc: Update coding style to recommend b4 for patch
  submission
 To: Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>
-References: <20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org>
- <20250929-b4-docs-v1-1-a56c1a1856c5@linaro.org>
+References: <20250929-b4-docs-v2-1-478285f08639@linaro.org>
 From: Neil Armstrong <neil.armstrong@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
@@ -112,7 +111,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250929-b4-docs-v1-1-a56c1a1856c5@linaro.org>
+In-Reply-To: <20250929-b4-docs-v2-1-478285f08639@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,7 +131,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/29/25 22:39, Javier Tia wrote:
+On 9/29/25 22:58, Javier Tia wrote:
 > Replace references to patman with b4 as the recommended tool for
 > preparing and sending patches. b4 is widely adopted in the Linux kernel
 > community and U-Boot ships with configuration to simplify its use with
@@ -148,6 +147,23 @@ On 9/29/25 22:39, Javier Tia wrote:
 > communities.
 > 
 > Signed-off-by: Javier Tia <javier.tia@linaro.org>
+> ---
+> This small series updates U-Boot's contributor guidelines to sync with
+> current best practices around Linux kernel patch submission. It should
+> make contributing smoother for new developers.
+> 
+> The first patch updates doc/develop/codingstyle.rst to recommend the b4
+> tool instead of patman as the standard workflow for preparing and
+> sending patches. The revised documentation explains how to create and
+> manage series, run style checks, handle cover letters, discover mailing
+> list recipients, and collect review tags. This reflects widespread
+> adoption of b4 in the Linux kernel community and ensures U-Boot
+> contributors follow consistent, upstream-friendly practices.
+> ---
+> Changes in v2:
+> 
+> * Drop commit changing .b4-config
+> * Link to v1: https://lore.kernel.org/r/20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org
 > ---
 >   doc/develop/codingstyle.rst | 54 ++++++++++++++++++++++++++++++++++++++++-----
 >   1 file changed, 48 insertions(+), 6 deletions(-)
@@ -219,7 +235,12 @@ On 9/29/25 22:39, Javier Tia wrote:
 >   * Source files originating from different projects (for example the MTD
 >     subsystem or the hush shell code from the BusyBox project) may, after
 > 
+> ---
+> base-commit: 26efc940c865a04d345ac9d39f71746fc2821da6
+> change-id: 20250929-b4-docs-60da5560f06a
+> 
+> Best regards,
 
-LGTM
+Missed the v2, so adding it here aswell:
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
