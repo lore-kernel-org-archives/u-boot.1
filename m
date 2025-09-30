@@ -4,147 +4,158 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 819CBCAC5B8
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:10:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7494ECAC5B9
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 701C18349B;
-	Tue, 30 Sep 2025 09:10:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id E974483045;
+	Tue, 30 Sep 2025 09:20:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ecjKiAdA";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="kiFYX/PI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0F4F83071; Tue, 30 Sep 2025 09:10:04 +0200 (CEST)
-Received: from SN4PR0501CU005.outbound.protection.outlook.com
- (mail-southcentralusazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c10d::3])
+ id 65F6983071; Tue, 30 Sep 2025 07:37:52 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 041C283071
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:10:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DA09828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 07:37:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WixwZYClhYWWRuRa7jjZECrDsguCwbiIrP6wRRCfxVzRRRYsGELpUnUox6K9vxbLrjy/GTyK8/I+PwOmdWbvhdo6QLnPQaKMXsMJhpov4Nn1gfQ0FqmgHDuBmIjLBwru/2O7ctUfeqrkx5I5HKii14psPy0b8CO+mFG26f2ziIieyySWtlXD2FMaz4i8ARdTPXgqRZvktXT+yZyjwa+nY0MGYh/V7U4mUtgdlIT12z/MwNXtYVCV3IYh/YTSXSTg0D3cvlVun/OEZPzUl5FhXHHflUkC7S+7BD6EHxCxcwmfDGkAo5HogKNwaHCLf2BnUikdDCb0uSI5KfknZ1km4w==
+ b=inyZXs+LduxQ0J2JbEC++ua2zU6IVro4IVebdk7OuKXPHkT/ktxzF2JbFWkPReTwo8qbQ8eAjmAE7WlQSiP2YVA7lX6G4xu/P3ls+U+sjCO6KI/z/G7R+Ys7+zM7EBmyY1IuOApm78umsk175OcNfjF2VQF3Sj/7OPE/n4Q79Px8gwzoRJTp61XK/vKY73o1pU9h55VRCIr2DBK36oHs8FvrJ/IGokOQ3MgjMTr+Wp5fIv0oRBKAbuvqFyU6X7qEDO7aZGsf5gWEcOrsg3b/PaCcyUJgMcG3t3i+pArfxnAPSgFrrXGsHgEzSckf0eOkK6hr46Th0WN8wyG/PHEAQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8AgR3DlttYpQNv7B9WFLdUDV1wMjx7E546xsoVLaAs8=;
- b=OXGR1iJYQzuJrRGZC8ECO4BE88FEjQL3RTzKlZag2K+JwIbONwXXJAILg2yOgUSHJWqOxKlN10pJRxtfvuDMIaFEAdVkrjTZfWSy4NfCK92dn09ueRmY+sHb2BqOAxIWSSMUjC6QGVwGP7Nr0pPECofIHdBb5riGo7QQ22ZWTHuHMprW6/A9AC2Swuq7JAdxK0H+PrCNZiH63JIiZC3T+oqBDoTDSdtAjps+KaZyINJWrk3VrjwaD/jQPiYSeXZwNyrowC0xAsd24dpZ8g/24Luos80o10o4YoivcMcUBi+0F0hONo/5Gn/KtJFQZciTCoueDtPusb/kOvSKhnh/TQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=9zL1aQyf7QCX218pSfW/a3uKQp5vCxZSTY4fLvcQqTg=;
+ b=iCPFOmNGcPejx1AqdP3cBDQSWy8Ua9ZxbWNptmQGmDRfQWt4gZEfwUDB7YltnrnCp0NlGLIz5uc9bVnbXJOvG9uS+cKxViyOA+wZnz3LjFjojrgfdUX4fOQXFHVrQr9yaeELg2PgkwBkaSLl7wjy8g4gXB6urkAcRy+3yIjdajeQYO34WP8diiMTu9RO2rcRecQE/IZ7AIAaTbFCTC9EIhxm0KmZorkYpJRnhPqQc2BhiB/uSUo8SDc+X85NFlJOGZaMgduIy6wckZXn27egikOqK+MRjLuSdMzRGe8P+IHtu1hYy1PQSTK4awlg2/ZoSxTXvjUExCkoY6Uf405beQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
+ dkim=pass header.d=oss.nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
+ s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8AgR3DlttYpQNv7B9WFLdUDV1wMjx7E546xsoVLaAs8=;
- b=ecjKiAdAtYgk9+v83MBuEH2OwmQ4YOPM0yRUw3ubRohQ2uR5Llt51fwmavKMv24jZgkPbYO9ynpkIDP/suqDXEDei04tEtRLYiPZboHkGtoLz4INOqNqsJuxP9dNFOWFMrPNFO42I2qB3G7FUb2FS9Y1EwtqTNMJKEyqpzVvIDc=
-Received: from PH5P222CA0012.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:34b::8)
- by PH8PR12MB7375.namprd12.prod.outlook.com (2603:10b6:510:215::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.16; Tue, 30 Sep
- 2025 07:09:55 +0000
-Received: from CY4PEPF0000EE3C.namprd03.prod.outlook.com
- (2603:10b6:510:34b:cafe::ee) by PH5P222CA0012.outlook.office365.com
- (2603:10b6:510:34b::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9137.22 via Frontend Transport; Tue,
- 30 Sep 2025 07:09:58 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CY4PEPF0000EE3C.mail.protection.outlook.com (10.167.242.13) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9160.9 via Frontend Transport; Tue, 30 Sep 2025 07:09:54 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.2.2562.17; Tue, 30 Sep
- 2025 00:09:38 -0700
-Received: from satlexmb08.amd.com (10.181.42.217) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 30 Sep
- 2025 02:09:36 -0500
-Received: from localhost (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
- Transport; Tue, 30 Sep 2025 00:09:36 -0700
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@amd.com>, Tom Rini <trini@konsulko.com>
-CC: Anshul Dalal <anshuld@ti.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Padmarao Begari <padmarao.begari@amd.com>, 
- Prasad Kummari <prasad.kummari@amd.com>, Tejas Bhumkar
- <tejas.arvind.bhumkar@amd.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH] xilinx: Replace PHY_VITESSE by PHY_MSCC
-Date: Tue, 30 Sep 2025 09:09:26 +0200
-Message-ID: <0a441e488a29bd1c93677a6f63a4a04a3cc1c9f5.1759216164.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ bh=9zL1aQyf7QCX218pSfW/a3uKQp5vCxZSTY4fLvcQqTg=;
+ b=kiFYX/PIFHePPRASsmfDytp/U135lCuXfXTAsRKBXt5hlDx9fTkhfyS71DkydWk7Jfj9XQchYgDv8GQqn9RhQxHe1rx0T+su1LTOfwcpGoT4+spcPPAMZmLzcx28FT9yvzx2iD5OPzWOXZ3sPGj+zt/IDmvky94tsnuntt+0vYB9BdhOQ18Yo896mmGHLZ3J30+LnlBALH+FVd/3qHqyU0uvXen8a/nOBPz+FcSDJS9ShtOEm1JiPkk0ySfniEErue2owQfBcWdGHA0ERWrjnMKgQWMLq+yD4NEni3rzwdz5+2dEHr9mTP9KD7lZFglbZzgUzV7HhOwRlwmjaescrA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=oss.nxp.com;
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
+ by GV2PR04MB11423.eurprd04.prod.outlook.com (2603:10a6:150:2a3::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.17; Tue, 30 Sep
+ 2025 05:37:46 +0000
+Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
+ ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9160.015; Tue, 30 Sep 2025
+ 05:37:46 +0000
+Date: Tue, 30 Sep 2025 14:49:38 +0800
+From: Peng Fan <peng.fan@oss.nxp.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+ Pramod Kumar <pramod.kumar_1@nxp.com>,
+ Tang Yuantian <andy.tang@nxp.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Ashish Kumar <Ashish.Kumar@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Wasim Khan <wasim.khan@nxp.com>, Udit Agarwal <udit.agarwal@nxp.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
+ Manish Tomar <Manish.Tomar@nxp.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Aaron Williams <awilliams@marvell.com>,
+ Mathew McBride <matt@traverse.com.au>
+Subject: Re: U-Boot PHY_MSCC vs PHY_VITESSE
+Message-ID: <20250930064938.GB17703@nxa18884-linux.ap.freescale.net>
+References: <20250929224336.GS6093@bill-the-cat>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250929224336.GS6093@bill-the-cat>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-ClientProxiedBy: SG2PR03CA0114.apcprd03.prod.outlook.com
+ (2603:1096:4:91::18) To PAXPR04MB8459.eurprd04.prod.outlook.com
+ (2603:10a6:102:1da::15)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2713; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=KrgXd/WuvAlgrePtwoVpEfd6Gw6ri8mndWo4je8MU/0=;
- b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTcbtLYuHK/vN6RB5q7HlY9CW5euu2Uqk3v79vn3SS3F
- i1T4bxV3FHKwiDGwSArpsgynUnHYc23a0vFlkfmw8xhZQIZwsDFKQATWbCIkWHGed/+lZM4cneU
- Pz8W0nz8kB6X5vk3zN8Elb7Mrru8tE6dkeFo28nfB2u2Tj6wf+uqtbvLr3R4Ggufmaj/YJqJzJR
- NO9KZAQ==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3C:EE_|PH8PR12MB7375:EE_
-X-MS-Office365-Filtering-Correlation-Id: 44e8134d-e7eb-44c6-8f6b-08ddfff05b98
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|GV2PR04MB11423:EE_
+X-MS-Office365-Filtering-Correlation-Id: dee987e3-672c-42e2-7cf2-08ddffe37aab
+X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?tqpoA47XX++h5mz1mwNuCFVmL0dnkBqt06Lf0Bq3XcvFBd8s0P+dATYKpZxf?=
- =?us-ascii?Q?f1KUVUbKZ1F6Mc1v2lize3EUabKqH62KvndWhpH+qV+Po8Ev+ypzHKST8d9Z?=
- =?us-ascii?Q?zdanqloFpXUKAmOirGPc7q3LKTYqoubpe3XxdPfa9A6oPqIt/SpZn/6RTwh2?=
- =?us-ascii?Q?C7GA4d5trTMWgO5zhKJ2lJMfAZaOuxdYtlJXUCjSD+mSOFJACGcqPrLl8ntN?=
- =?us-ascii?Q?OWbYMn/AufEwL31VZ8Wu9gpedaMMS3cPfgzs/Y61jDkrykberA7fxzD4dFre?=
- =?us-ascii?Q?pqLy+9I/iBKZU+aivKGS9CMhxaOTZl4O5nVR8669aC7pNavJAnVGRL4QaHer?=
- =?us-ascii?Q?c9zm9YdUyk1TEoe8z58/YboVot/vUBWmVZKsKlC1IuUxZLTKGnuFQSfF0t8O?=
- =?us-ascii?Q?Q277FerVAL2vV/Yd6vOwiqnkjV8jyA8W4wvu6aMCI+9Sj9oqDMv2WglPdweh?=
- =?us-ascii?Q?R6psh9Gw09RdiOMdo59XtahVs5WLBeSVgMHb0gs88vk3mlORANhusKYhGujW?=
- =?us-ascii?Q?tGGws8ZoES+B+b+zuhDAy88WnrmGbotp6CNJ2iv8R3Y277H39xEyTy+7mlNh?=
- =?us-ascii?Q?cJPyuKkXq2Ba9Yj2AB6p1S+KssRC2O2/ZQuT322BrBkWEDvmvb48H6tAgays?=
- =?us-ascii?Q?XqPe9fzAIUhu3RbLU1a9RVKdp839+g29c2R4zQmhFgvh2t13W7V455D0TAHC?=
- =?us-ascii?Q?L6RMZnV5q5CPc8qmgFkHWsjArL0FilCOmMAH6sVKkU5jSQiqYUhLEyVeBDga?=
- =?us-ascii?Q?O9D2hEhaxSLNzUE+LMzSHUBHp+sgZ3FWBdrcgWCzm9NuZZhRQ00ZjHhKSNC8?=
- =?us-ascii?Q?cLjwmJDDL+/7Lx6oSsCGII2ESo+C3HTqxFyd9M6ss7zm3RvZs0kY68zMTzJ4?=
- =?us-ascii?Q?/RG0Oh6dLIoC6wjzQnU6gKHzDGBlx99v8m++tpOwhDMrjlJ1XTqtlaZTChBl?=
- =?us-ascii?Q?lcI4fu8HC/uNH2w0jFKaYnom/eX70YFYb1m8m/6WUVcYpWUfS5DYjoOomqQJ?=
- =?us-ascii?Q?SqgqwfaBfqoZsyOJTY8J6FoE77IUX1OAga6Xz1B3e/0TPJ9jVtpzH4LjkDW0?=
- =?us-ascii?Q?2nhJGSebsW2n7ikQNZGb7ARqfuovoOXR16RMDBNrl3/umEwfR6OyWHL7oVa4?=
- =?us-ascii?Q?kVlHVKe8+6EW3TBlc5JB4ACm8Iwl6jIz22+FBRr22NdZpFdKQNdhMuaJTegy?=
- =?us-ascii?Q?3YAO6QJDfGKXP2X3n2StQ4ZG6nRsEtEP+leuaGZGZ3eoSFSX6R577OZfoOkg?=
- =?us-ascii?Q?9lqAcR9RJc6U8tEKSRbjxl7+CLJal4TGkeHmAi1YWHxSNeioamggepOjarFf?=
- =?us-ascii?Q?6q8Q9eagnzrlKncviK7UO2K3Dw4ZoIsQc3EEyXWWfZC3EfXMZC+sVa2urV7J?=
- =?us-ascii?Q?k0vQbNHaWBl9bjRYMaou3Fu/D/gDNKQbZO/vNrjS12oeqn+VDCizrHAAnDCv?=
- =?us-ascii?Q?MJOnSE2rwf3yhyeKz7diKOuPbeYtOaMxYfoYPT8UpA+hTziqaxAikhPh2guP?=
- =?us-ascii?Q?GXH+2dkusDoEy8MJcwjRtGpEQJE7dPRtqM5GlX60DbNd7z44Y/Fbbwn0W2ho?=
- =?us-ascii?Q?1M1ElVQIW9vtVeoGC2M=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 07:09:54.9526 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44e8134d-e7eb-44c6-8f6b-08ddfff05b98
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE3C.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7375
+ ARA:13230040|19092799006|376014|1800799024|52116014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?CFKXnXmZzn3ASrSXNelSipNSYh8NJqnaNQLBv6tnGnuO+ZVr4dv8Bk3jpQBD?=
+ =?us-ascii?Q?s97JYarsJXTdfrZRLO4G0duoQSKRgUD1m3NaDHbb3G0Ph2HyBMn1DVbCVb8I?=
+ =?us-ascii?Q?zWqG8tj2D8NjqanYLuffM5bT+3rtKyu4GoNrUOjnY7w7c9nNWOlb4IeoVGUr?=
+ =?us-ascii?Q?5NksRrdWvDqqY3upzNHtUVgWgamqdVYTiG57/GiPaU2OrIHPUayOF6KvZQPa?=
+ =?us-ascii?Q?ZueZjKnOvw+pWTxcNeA8wYvAUQqCtC3uJojBDkbcRTaZppyVUndvfJl6IkbJ?=
+ =?us-ascii?Q?1Bb1XPggExHNee/4V/22y4tCCSNpfrsx+Yg7ZgpmDzMr8wHHCS8VUOnnBZlH?=
+ =?us-ascii?Q?ewWK1YP9dms4fYhehx4FRFfTaAx5zfvJYrgugeZf0U6WxMPzUVvcnJ33QTw/?=
+ =?us-ascii?Q?J+Fz8M+WUvqJgApSDS4k2flfew7Ls8F5uAuWkjpzbvlpvwRWXrnbNP2i96tH?=
+ =?us-ascii?Q?d2S48wD2nwymEYw+d0in+dNbhX/GeEavlgrGpBfjwbc3+W7UzJ9KTpl3ZNqZ?=
+ =?us-ascii?Q?Sc0O6X+wMMEsYHBhdvvMEw0NSClKKrmyxlbU5LijQIfd/8BEim3RhGRGfUyj?=
+ =?us-ascii?Q?T9lhI8Tvzm+ADCybvYeJAxRjsf90iOmw8QpzOcjPX1ds9erZW8xzrxmKrr76?=
+ =?us-ascii?Q?5Y4dOQxrMTQV7wOkjZZk5kDhISzZzRhzsDrK/VYGCSb9vjL0XrG6gt8NMs+X?=
+ =?us-ascii?Q?9W4k2LZ6XSfhe5z9LKhXWGB6y57BWA/HjyA6Opzx9slDfImAB9PYNV4RLXg+?=
+ =?us-ascii?Q?pCin2693MjSri42HryhxGS5ZE0awfrMCD4jdGPeMvUKFql+FoUzI9dvTqehS?=
+ =?us-ascii?Q?fzbep1M35lj6/sLbU7zsShQTuI1Gkd+d9WCdngYZMv+JclopZcYQ10SoM5Rk?=
+ =?us-ascii?Q?UdLLPshvJLiWbEibJbo8rHbWL82tkW+pm+B6QZ/NcJS3cwzwAtsMrhWMEgEV?=
+ =?us-ascii?Q?DNEWrhx/BD07PeGtyiw37D6IJgWgzDuCxw9d4vGWjRKvqBbB+kqXh3hceSKY?=
+ =?us-ascii?Q?6oWqywtUxBttZ9h2XuJTnGds8yTcpfrnSMFvWUrhWwytMi/zxW8IJK4TKCLD?=
+ =?us-ascii?Q?DZECMTsM8iQ2DibbmBuNoKC1m5C43pXMdDSmMH4g0jUyH/bygpFJjMfHHNuw?=
+ =?us-ascii?Q?EQiurzOOXnSyYbZGPtgXqsdvQz7hrrEuN44uLYKRNw+EjfX02lGGZJysPtVw?=
+ =?us-ascii?Q?2xh5SUEJVwUS9zs0TZgLqGHA08kNlZRO7zthHt1AHGSa2PMxVtDy+T1wkcD+?=
+ =?us-ascii?Q?RZgi5aO+jQ4HSBAbuSnLhUX9xjR/Vmo0edbamsRTauca+DxvrNdgeEcpDFln?=
+ =?us-ascii?Q?elaBeuybCR5M1JlmsQ2B4521Ia0R2CoEDngBnOBNrISr3fbOH45QJQCiOzme?=
+ =?us-ascii?Q?J0wr/sQzKzK1oNj9kphaKevyc0ygLZBIRzxAqUlzbcmCVnUsWqt7aXc6tbX+?=
+ =?us-ascii?Q?DBV+lrRfqGxjmtMezLqOny+MsjSFCn9Px+3CMt+VwnU8WoxdTV2yXGY7TA/c?=
+ =?us-ascii?Q?jQSvYVERUExccNRPUzJ4K6k4mq1xGI8qN7f+?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(19092799006)(376014)(1800799024)(52116014)(366016)(38350700014);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?6BFSGdMA1QCWAZ8+QjblTTJCJv5g2q1wzLxZiJXffi0ldQrxBwxokaIe9/WC?=
+ =?us-ascii?Q?LHWnYIinwIQEuO9ULi8Bjf00O3OOuFvkFvSrb5cj6EHvqgoNFvpUDw4I4NgT?=
+ =?us-ascii?Q?RvS3Yko0RN89uIQ09gX+A99V1NHvVDwEmW8Q+4PJzLo2anXlbckZ5zFxbzxG?=
+ =?us-ascii?Q?6nSLjUfMq8akJZiQBv6T+aTa/9QNKPIIM50AdDINdjKui/0kq4Z4XEV5yoGx?=
+ =?us-ascii?Q?eeROW1TDuo2i8pnNE0yzuUtNp8XU7HiWMrl/tNJoxKYgDVhm8sh9nJYLJ0wr?=
+ =?us-ascii?Q?qu3HRmKPSNMxymXVnUTfif7+MS701QgdOlTUiJmGlmVTd5539MdhNfGhv3Q4?=
+ =?us-ascii?Q?1jdeCMdZXOC63zgFVXF0rXHqH+Jn7jb0c1oVZNUyKEkS4gvrqJ52KkP/et2J?=
+ =?us-ascii?Q?JtN7WSI4jWaj1RbqJub05/sQTmxPfcqVwu2+IJLN0dPAd83fdCNpIyhphia4?=
+ =?us-ascii?Q?D+GWxyo9m18eD2Mpg6Qdtvuma+cR4O45lvQOIW/kWPh5hlQGrpfexRYvJT2o?=
+ =?us-ascii?Q?2qeCguY+m18WPW64bYpqVAvFUYfQ35SwrUJVs1OuOrIvbSrULLxRIeh7aD+N?=
+ =?us-ascii?Q?2xdZ8XhwIz00brsYtv1fLIAkp//z2ylYvpULhH6Df5QHN7dwAkg1NMBPBnF8?=
+ =?us-ascii?Q?7cvz+oEHQY2JeIIMoScUXddi+bsDs+Ept9fLU7E9ZlxnUQ0uNxFpEsHoogHz?=
+ =?us-ascii?Q?3P0uUqvYtjSDVUCc9mu65iR7HAfLmBPtkJ+3++6kXQlA3PJDcVmyZw05vbes?=
+ =?us-ascii?Q?7rh/m1xmHsViUe4M6+nyKu1Dn/t00VnVzwwT4O4p8cpDhYWjeWQKMW9Qp+5D?=
+ =?us-ascii?Q?kLx9wLBvK2S2o9088+ZQ8BhHE+KYQzL5geSu7qqrG4b9mutNfFz7XggQRLdg?=
+ =?us-ascii?Q?nWOkmmlGRghRA4oLP8z/x0pbzL8OmhtQTfp21VdaeH6/fCuuATH+H09P0KWJ?=
+ =?us-ascii?Q?8K/aX71xPDlHx0YCVXEEhRJWs6+ykXBkDLsVkvf7pvZ8tgw2r73cAmq3+zT/?=
+ =?us-ascii?Q?Onx59XLqz/QGOzigGaVqACQDHbS11En90LoKWkq06bavDgb2QAM7YOwVxSDC?=
+ =?us-ascii?Q?ibskMz+qNVKYdv3d2mk7RA0/SWsYtg9toQnsZhwER4i9htso5hYq5RuRJNai?=
+ =?us-ascii?Q?AKVfQNN/9EWT4ipb0O9W3czdWFEJQCHfodD0i64qgdEOcPPgOznxfWxYWp85?=
+ =?us-ascii?Q?J7IfqSSOEApDe+WOujjKpxhk5DpXN6dAw69A7K3yGPs3mnL0vHSeBDgMKdK4?=
+ =?us-ascii?Q?FsB95SpDkzljY26cD6e2iR0PRlE1Gr5FF3bdpscMgGZGmRbhU+88RbQBh4Ae?=
+ =?us-ascii?Q?x3hefVpi1KGZ4x5HVf1FVwBu0mGYPyG+Dl95fN6sOmZzigUufuJ8XYfOvpAd?=
+ =?us-ascii?Q?xx3tklxyySvi43egcKe8qcDTQVeWSFfRnFJylDgdNEv1y08fgUuofUxfUhLJ?=
+ =?us-ascii?Q?lf3rHkTqC/q72MJkYHe3BvDCv8QrEUZOBzml5sA3126yDJj+TLT7qK3PxKoE?=
+ =?us-ascii?Q?pOnWaJaxMgvOnjQnVBcaGBHqVg5J57iqoJDERBtQQLDMlx0179kvnix4XlUG?=
+ =?us-ascii?Q?T8+R3XsKl9sMYsVMIKvowxV844R7O1xEBa19pO14?=
+X-OriginatorOrg: oss.nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dee987e3-672c-42e2-7cf2-08ddffe37aab
+X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 05:37:46.0080 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UsLNziAd+FHzQkW1xMlhls1CaNU1kZmVNIvdXepf+QuPCc0tou4mBgXqwp1IpWVYdVoSZYq/bPg145CwlkcYqA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB11423
+X-Mailman-Approved-At: Tue, 30 Sep 2025 09:20:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -161,85 +172,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable MSCC phy driver instead of VITESSE. Vitesse driver is much older and
-is on the way out that's why switch to MSCC driver which covers VSC8531
-which is used on one Versal board.
+Hi Tom,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+On Mon, Sep 29, 2025 at 04:43:36PM -0600, Tom Rini wrote:
+>Hey all,
+>
+>As part of working on "allyesconfig" support I ran into the following
+>problem. Both drivers/net/phy/mscc.c and drivers/net/phy/vitesse.c
+>implement support for the VSC8584 PHY. The vitesse.c driver is much
+>older and only had VSC8584 support added for a specific Freescale
+>Layerscape platform whereas mscc.c is modern and been updated with
+>newer PHYs as well. And we need one driver to support this phy, not two.
+>I am inclined to remove support from vitesse.c. However, only 4
+>platforms use the PHY_MSCC driver and everyone else uses PHY_VITESSE.
+>
+>I'm cc'ing all of the board maintainers (other than PowerPC platforms)
+>that use PHY_VITESEE today to see what their feedback is on which way to
+>go here. I'm ignoring PowerPC because that can just stay on the
+>PHY_VITESSE driver based on timing of changes in git log.
 
- configs/amd_versal2_virt_defconfig       | 2 +-
- configs/xilinx_versal_net_virt_defconfig | 2 +-
- configs/xilinx_versal_virt_defconfig     | 2 +-
- configs/xilinx_zynqmp_virt_defconfig     | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+There are many Layerscape boards that we need to support are still using
+PHY_VITESEE. I need to check internal to ask for resources to help on
+the migration.  BTW, to support allyesconfig, is it feasible to
+make the two configs exclusive, saying "depends on !X".
 
-diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-index 4a7bc1951451..aca03ea50f16 100644
---- a/configs/amd_versal2_virt_defconfig
-+++ b/configs/amd_versal2_virt_defconfig
-@@ -108,10 +108,10 @@ CONFIG_SPI_FLASH_WINBOND=y
- # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
- CONFIG_SPI_FLASH_MTD=y
- CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_MSCC=y
- CONFIG_PHY_NATSEMI=y
- CONFIG_PHY_REALTEK=y
- CONFIG_PHY_TI_DP83867=y
--CONFIG_PHY_VITESSE=y
- CONFIG_PHY_FIXED=y
- CONFIG_DM_ETH_PHY=y
- CONFIG_PHY_GIGE=y
-diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-index 770bd0643c19..192ace8b530c 100644
---- a/configs/xilinx_versal_net_virt_defconfig
-+++ b/configs/xilinx_versal_net_virt_defconfig
-@@ -111,10 +111,10 @@ CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_SPI_FLASH_MTD=y
- CONFIG_PHY_ANEG_TIMEOUT=20000
- CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_MSCC=y
- CONFIG_PHY_NATSEMI=y
- CONFIG_PHY_REALTEK=y
- CONFIG_PHY_TI_DP83867=y
--CONFIG_PHY_VITESSE=y
- CONFIG_PHY_FIXED=y
- CONFIG_DM_ETH_PHY=y
- CONFIG_PHY_GIGE=y
-diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-index ac78dea587cd..18b972f8ba46 100644
---- a/configs/xilinx_versal_virt_defconfig
-+++ b/configs/xilinx_versal_virt_defconfig
-@@ -120,10 +120,10 @@ CONFIG_SPI_FLASH_MTD=y
- CONFIG_PHY_ANEG_TIMEOUT=20000
- CONFIG_PHY_ADIN=y
- CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_MSCC=y
- CONFIG_PHY_NATSEMI=y
- CONFIG_PHY_REALTEK=y
- CONFIG_PHY_TI_DP83867=y
--CONFIG_PHY_VITESSE=y
- CONFIG_PHY_FIXED=y
- CONFIG_DM_ETH_PHY=y
- CONFIG_PHY_GIGE=y
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index 6e4ba7269f85..525744b0f61e 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -171,10 +171,10 @@ CONFIG_PHY_ADIN=y
- CONFIG_PHY_MARVELL=y
- CONFIG_PHY_MICREL=y
- CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_PHY_MSCC=y
- CONFIG_PHY_NATSEMI=y
- CONFIG_PHY_REALTEK=y
- CONFIG_PHY_TI_DP83867=y
--CONFIG_PHY_VITESSE=y
- CONFIG_PHY_XILINX=y
- CONFIG_PHY_XILINX_GMII2RGMII=y
- CONFIG_PHY_FIXED=y
--- 
-2.43.0
+Thanks
+Peng
+>
+>-- 
+>Tom
 
-base-commit: 612074dc5d44e5695c30dcdea55e72f4285a4fe6
-branch: debian-sent3
+
