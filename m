@@ -4,84 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08C85CCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:37:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC5C9CAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:38:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF077800D7;
-	Tue, 30 Sep 2025 20:37:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23EDA800D7;
+	Tue, 30 Sep 2025 20:38:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zog/F1vy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CI4n0JuF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A7B2802C1; Tue, 30 Sep 2025 20:37:12 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 5603B828A2; Tue, 30 Sep 2025 20:38:04 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CA06800B1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:37:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3160A800B1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:38:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-46e47cca387so44403605e9.3
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:37:09 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-46e491a5b96so26420845e9.2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:38:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759257429; x=1759862229; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ONjENpCRmhqAi8gk6hWzUM8u623rvhaxpiHxoiPqHwY=;
- b=zog/F1vy5vWlLkQZR3DH1DZfd8xnD28cw+sMi1ywangm+sPs7Tio4O+rMVQF0lo7L3
- 3Fwkgc+UF/ah9t3LpbAgffbygwZuENM4OfQvsAw6APboh+2MtQZY06P+RMrZd8ELZFXb
- aQoy5hBG62CrOC/uRZn1z6KO48eMzstTYXWdNq2kRB18VRVFXN+HPAhGVpK2KvHv8WjP
- TnHE1DIpMecZu3jLYE76cIfUjGgZYTGvzJpXA703G9YCLnbEfVlMehKlUi9BmDPYm71q
- 3pJC6ZHLslNWdNeuDFTFcsAivzT6WWyEZX9/pXWptbbKTOuEEo3Aw3E2orVf0RYoydGu
- +KtQ==
+ d=linaro.org; s=google; t=1759257481; x=1759862281; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=OSEYf7DNHsue+2b7q22e1yCg1EEJ9hj4KsJ2xfjd+Xs=;
+ b=CI4n0JuFXVBySnY87Qampwyc6iHjUlAsrSZMZ0KFNA3zSQJRZ0dBXoeER7TEzTmLES
+ gPK5QXHX6BNR1lZh+rT5fn+VGRbWOC5BCdkO9WlwLmUHb0joIzkXKk4bQfr1ix9xZ438
+ tiygBiXW1ZDz5e++hQYYZi/9YKmkGx/yLX+8Ab2Gbaj3dzhchpDZ3WTsyR5DW4iN+KJ/
+ GAG+3k7oVoeG67KUDVp8IWUY9NI03kCVjNHyNg1UkK6Mjh89XyhgbhwBcIrC9wKUTAdm
+ WZSFAUfQVCRiTgJIFbxrWxNKsIMPr7APEdVH7YRk66Ca7YWJlDdRiYaMW2XhH5r44Gu2
+ vfTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759257429; x=1759862229;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ONjENpCRmhqAi8gk6hWzUM8u623rvhaxpiHxoiPqHwY=;
- b=PDFu/4px30PnIdUG+YS2cGe3bPe9Z9X+6SDGPVbe1ZMJ0Wbl1AKz3vcGknrHk0TsXR
- 5WzeFLyiVRKKv8jQeRaCEw48C9Agx3JPnhup+szoPmM49oP6RLJR/LFyF1fR4LWqqIDe
- IU7fmyKXNZGaaBCB6cz5qGvFeWJOeh+uy/GGx2Ap/ZkL0SRi7tQiMVPQ8Cxq7vNU8Vdl
- 8GYnZRBYxmEBumwt7m67lqNANAiFXC7/xDi1oeFMQ4vjZ/36cl4Z6nST+aAdO6s+afIf
- hgqz4YsE/y9/2gkPT07LgSc7O915XfKxGGX8BAi8KrlpKx5ZrKSq42lMpbhWZt4rmQMY
- ddCw==
+ d=1e100.net; s=20230601; t=1759257481; x=1759862281;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=OSEYf7DNHsue+2b7q22e1yCg1EEJ9hj4KsJ2xfjd+Xs=;
+ b=vAv1XqgF0g+bbVuXstd2WitdQ68Rfy+AHjcSLoRNY7epQD+IT4K5NDS4QZhQuFgR+O
+ EcUAE6OVBkrOWHvqpsXl4J3Hv+MJJwgXbq5LxI3mjkhnxG/UoPCV6j1MPXS53N7az6he
+ Dxl4muYwQ4HPLq/8S7OIz3LRAYjtxu8x/sk+uOibKT/cbIXwRCiqkB/6E0X+iv4gFECR
+ qSm8afzxmXS8wPY4pjPiokK8KubUtLVgujB7pt767j6EFRkQybddRT5CJR46BPVW1yvn
+ s5caJaJ5r3aWvz5Jd7KmKbZgUMZ2COcEUqP1LkkljtbMMVF7FPefRPWGJhn/pO/aU6IK
+ GPrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUdUUFokrWgTR32xdrMUzMkXaXoZioUC9gAOpcxqPWnFhlsjrv9o2a8GQkBS4yFcKxy64BF8nA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxqvCsyw0wXEGbcPuJU2jjdChVUytYK+KcPNNzYUCXpttWZy+iJ
- 1M7UpvwrbySTjBWXrhWCkS5muOOgrQOnyrkcLHGzXnAH6/s586k0v6rtGwws30c893k=
-X-Gm-Gg: ASbGnctIexhNMFi7WtpjWINn9ButQE7winRa+4Ul83ZOun7j3hxaaBQMFoD7+xJ3Dw6
- gHkj+B2BPwosvZs0hWOC7o5IGEGH62jrugNPmRGUZMTtBbXRF1ObILfdrafdIThFK0D8uliimUI
- XEtYzwR3OoMlXq7k4mYnB0s0rnnWdOJU4xIpzoOSrLVyieBo+6Tjx5VrjvmOSo1cx/6xkDkVf7I
- RCQnqLkc/hhQPT88cca43w1gKDGwDwYiRJ2vgkur7HSOj5G1eW0K+w+j2ZH9hixy+99EwdwRVNA
- IJZTLrDT3d3iIHVpy/HYhnmrRhFqY9RfYDPL2bO55buum8ctbd9nHM6FJVSvu8zLAmoWVPJ+8UK
- pPGN6WPKxLmMFdKWhc0l5FSNHBiwUn+soKZcntPW6oFQVtLzIQd7UGne24ZEtBoGxbLTLArGDAs
- bzmjNN9nhkWwGzL/6KsSKU36v+E2jZRPG3Rw==
-X-Google-Smtp-Source: AGHT+IGWQlHfGrMuIA7R4JZCPoXvtDiDSv4tTOgiLMZjF0GHz3YeALSoEY6c5vPFJbiSNNPqVjtugQ==
-X-Received: by 2002:a05:600c:37cc:b0:46e:3cd9:e56f with SMTP id
- 5b1f17b1804b1-46e6126ae01mr7415875e9.6.1759257428379; 
- Tue, 30 Sep 2025 11:37:08 -0700 (PDT)
+ AJvYcCW8advntp42KCnNca9CqBRorfE0A123bwV8Tro/f2VpCeDTNADX6z3jIozxto+c/XeMdQScyxs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxqUXQ5YL9iFHu+IRZRdLWyo5Vowu58S0rq7FCZbhoPgHxc5bJa
+ 9kL8/ewEPlI2LfrVmL5ZlfHXhIir+cL0dHGNSiSkhVxQdY0XwRAjFl/h7xvHpbGZRMY=
+X-Gm-Gg: ASbGncvnk0Xddfhqo7pNPME1+Cy6t8Fw+Pvr0cP4Fq5CRUOA9JLufQ2D4GjeXVf3mQQ
+ 49k3l570lmgx/2i0AHPpg2kv5jLWX4jBJfX5vAXjtZt61oiqa75R7dPZQZWPx2ol3ZabFN8gsVc
+ HLzFmHe52yqEjhGa4Z+OX4Bnd97V75ynCwDFuU5VdqFaWyz92WarfTgOoh/jMZyCnM0Rdb0cWO/
+ UiYdQGJ9SCk4BsjM1483PurQo9hhpksVr1SlZ6y6uQ/7vVZdiJ2QVog5VijaA9WGQdogr7qz719
+ /ABKtRPWYayVJYjF4tcYqI+BZQ0HFLeAkETAZbsvJkicjtxQXIP+Ac0mKmYP0/4j67A/NluLnhR
+ Ezr1D6dcgYpPHnazbC7WhnCBTHu/Au0fRAmW2P3zFcLMU5Orl2oPP0kVzqKXv0drLYXp5Z9TyvJ
+ N/9FZ1lTzjKK4vQEwkpdhnSvdLG6Va3p2p0A==
+X-Google-Smtp-Source: AGHT+IHy+pWaN7t46oAwNTX+kBV3ErY5Yu7TX8LO8tXlbODoL5G8zhJJS2FxManE5J/aTlzCbaBQaA==
+X-Received: by 2002:a05:600c:c093:b0:45b:4a98:91cf with SMTP id
+ 5b1f17b1804b1-46e61faa217mr388755e9.15.1759257480549; 
+ Tue, 30 Sep 2025 11:38:00 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:9459:14e0:525e:d859?
  ([2a01:e0a:3d9:2080:9459:14e0:525e:d859])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e619c3b75sm4430225e9.7.2025.09.30.11.37.07
+ 5b1f17b1804b1-46e5c44bd75sm19028615e9.4.2025.09.30.11.37.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 11:37:08 -0700 (PDT)
-Message-ID: <e59bed17-8d4b-4a08-9091-e8805f7df1d8@linaro.org>
-Date: Tue, 30 Sep 2025 20:37:07 +0200
+ Tue, 30 Sep 2025 11:38:00 -0700 (PDT)
+Message-ID: <25bcee75-b7f0-4775-98e2-bce17ac513b2@linaro.org>
+Date: Tue, 30 Sep 2025 20:37:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-next-20250930
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Subject: Re: [PATCH] qcom_defconfig: enable watchdog command
+To: Paul Sajna <sajattack@postmarketos.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250923-qcom_config_enable_cmd_wdt-v1-1-70cccf9f01e3@postmarketos.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -108,6 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
+In-Reply-To: <20250923-qcom_config_enable_cmd_wdt-v1-1-70cccf9f01e3@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -127,53 +132,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 9/24/25 04:05, Paul Sajna wrote:
+> CONFIG_WDT and CONFIG_WDT_QCOM were previously added in
+> https://source.denx.de/u-boot/u-boot/-/commit/530764de9fc8539cd2354501e9c42804bc4c4dac
+> 
+> U-Boot and Linux pet the watchdog by default,
+> but it's helpful to also have the command to control the watchdog,
+> (CONFIG_CMD_WDT)
+> so it can be manually disabled by the user, for example, if the kernel
+> is expected to stall during debugging with kgdb.
+> 
+> Signed-off-by: Paul Sajna <sajattack@postmarketos.org>
+> ---
+>   configs/qcom_defconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 86d7de89e7746e33f4385ca78c839b43319cd861..88595e5293418407dcaf1e7f8ee1b2b5f6bda4f5 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -44,6 +44,7 @@ CONFIG_CMD_EFIDEBUG=y
+>   CONFIG_CMD_RNG=y
+>   CONFIG_CMD_REGULATOR=y
+>   CONFIG_CMD_LOG=y
+> +CONFIG_CMD_WDT=y
+>   CONFIG_OF_LIVE=y
+>   CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+>   CONFIG_ENV_USE_DEFAULT_ENV_TEXT_FILE=y
+> 
+> ---
+> base-commit: 4d84fa1261eb27d57687f2e4c404a78b8653c183
+> change-id: 20250923-qcom_config_enable_cmd_wdt-c31e1a5f2e2a
+> 
+> Best regards,
 
-Here's a small set of Amlogic changes for the next release.
-
-Thanks,
-Neil
-
-The following changes since commit 9710d98e8942151fc0c62d54100d9d27e8263d04:
-
-   Merge tag 'doc-next-2025-09-27' of https://source.denx.de/u-boot/custodians/u-boot-efi into next (2025-09-27 09:49:01 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-next-20250930
-
-for you to fetch changes up to d521fa32cc692a44c7c11d4b2a86f371d614e727:
-
-   ARM: amlogic: fix JetHub D1 eth mac fallback generation (2025-09-30 20:32:15 +0200)
-
-----------------------------------------------------------------
-- set reversed bit when using internal phy on GXL SoCs
-- support gpio toggle command for amlogic gpio
-- fix saradc
-- remove unreachable in meson clk driver
-- Stop premature exit from for loop in meson pwm driver
-- fix JetHub D1 eth mac fallback generation
-
-----------------------------------------------------------------
-Andrew Goodbody (3):
-       adc: meson-saradc: uint cannot be less than zero
-       clk: meson: Remove unreachable code
-       pwm: meson: Stop premature exit from for loop
-
-Neil Armstrong (1):
-       net: mdio: mux-meson-gxl: set reversed bit when using internal phy
-
-Viacheslav Bocharov (1):
-       ARM: amlogic: fix JetHub D1 eth mac fallback generation
-
-Yang Xiwen (1):
-       pinctrl: meson: support gpio toggle command
-
-  board/amlogic/jethub-j100/jethub-j100.c | 22 +++++++++-------------
-  drivers/adc/meson-saradc.c              |  8 ++++----
-  drivers/clk/meson/g12a.c                |  2 --
-  drivers/net/mdio_mux_meson_gxl.c        |  3 ++-
-  drivers/pinctrl/meson/pinctrl-meson.c   | 20 +++++++++++++++++++-
-  drivers/pwm/pwm-meson.c                 |  3 ++-
-  6 files changed, 36 insertions(+), 22 deletions(-)
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
