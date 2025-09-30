@@ -4,65 +4,190 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13BA6CAC5B9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:34:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0616CAC5B9
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:45:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8441583045;
-	Tue, 30 Sep 2025 09:34:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 402D983045;
+	Tue, 30 Sep 2025 09:45:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i+Y9HU10";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="kNZwY30O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA9678341C; Tue, 30 Sep 2025 09:34:48 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 92D488349B; Tue, 30 Sep 2025 09:45:25 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8D6E828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:34:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 01674828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:45:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 4DD74444E3;
- Tue, 30 Sep 2025 07:34:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3F97C4CEF0;
- Tue, 30 Sep 2025 07:34:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759217684;
- bh=M3lf9jMf42m7zb1znP3AhVoeDzcdHwkn5OrEZ6CYpeQ=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=i+Y9HU10BIbk+d4dW5PwMX18XPCLiQL/p8eMOJ9Y9ZKURpFUA2sJtUGfQ5GviTICN
- L7yZAld01xRa1c9KjW5rZpq8tdKBsk9xCT60q3ZXXMCRqq4nPFHSgZq8U8gO0pCLe0
- nImeLg7ew6EAgQqLAErNDCIIqmm5i2fH6+UGTDX8lzw8ORFitl/0/l3gCbSV0zHlgV
- ai1JdBaH+eItFpaiZJCypjdmrWwXQ56baYyfoaeVAFTO/ZwmWGMz/GapxPA+Cx7rJ7
- b/I8ogWMAYHV1gNsEBmrs9g/yozrPRE/fbWzWCh7JhbAI0CZphn2QQhYZYDD2xvKsO
- 0S1sm1EUSR58w==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: george chan <gchan9527@gmail.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, George Chan via B4 Relay
- <devnull+gchan9527.gmail.com@kernel.org>, Tom Rini <trini@konsulko.com>,
- Casey Connolly <casey.connolly@linaro.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@kernel.org>, Lukasz
- Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: Re: [PATCH v4 3/6] bootm: Append bootargs value when
- bootmeth_android provide cmdline
-In-Reply-To: <CADgMGSuQbeDGfiBRxCFsUNOvTS7b6u4vqDR3RGGH-gEPwC8HQQ@mail.gmail.com>
-References: <20250630-sc7180-android-boot-v4-0-24cdb50e860f@gmail.com>
- <20250630-sc7180-android-boot-v4-3-24cdb50e860f@gmail.com>
- <871pqg4iar.fsf@kernel.org>
- <CADgMGSuN249mVLKja2r1cpN4Xn80CAkuv2F5rSizo3C_qaRpEA@mail.gmail.com>
- <871pqdaepm.fsf@kernel.org>
- <CADgMGSuQbeDGfiBRxCFsUNOvTS7b6u4vqDR3RGGH-gEPwC8HQQ@mail.gmail.com>
-Date: Tue, 30 Sep 2025 09:34:41 +0200
-Message-ID: <87zfacieb2.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=236888059d=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 58U7eNiO010369;
+ Tue, 30 Sep 2025 09:45:14 +0200
+Received: from duzpr83cu001.outbound.protection.outlook.com
+ (mail-northeuropeazon11012066.outbound.protection.outlook.com [52.101.66.66])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 49e6tet54y-2
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 30 Sep 2025 09:45:14 +0200 (MEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hQlYrep2ABc+u3dYiPfDs0Xhe3ebbXME7Gkx7tw5g1q0HJLECXS537DDxTEUJjFbdV1Fy6RLh3F8t7qtPvGwyXI1UmWhBJvCsS0Yi3g7T/0IvrehZCwNnSlDSAtZAijg9uGwuhlsYcnTWbg3agvlwK++DXmg/+5te5d4ty8zoBTwNrkSdavZGlR5NURVHsSbZGcaXb9rRbfz5an9g60V1ve95WnraPySE7fe2PT28jxgcvA3wFRJEDZcPLuZNQcJRnC7u833K+CKfvba+UY3iIl/hAR++2tYSVd8LQmrVlyQs6q3/W0DjKscc60SZV96weZTYVdMHu6KsChjj7Tkiw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MTteqOAT7AKOEOmF9YBQ0+jlgOd2XBh6wUBSC0R1634=;
+ b=W2F+f/oUKzwCsdfwCRmMwbZa+5oPvMQelmvYACbEP8BsTLtWWumxBCz6A5+VSVNkRrWBbO3+Vsy/bXMZ/DQCk3gdf6ktwZQUoYuPG9n8HhAWy8YOiBU4Pf+njhKl55Wl/tjXF8QnBpuJCZBO73myMmL5GK7m/ZkkgjcrdAmGMRs0xx5UkwNG/5uJcQoSyHR/izTVcgxabEX9h1e0C8KtxWxVzMYY2yYzoYaKnRY3THTl7QpW3gZeXApIkethAiBCNCpKMllXutgULDK5rWOPK/NDn10lGp5/poAcqIIZ54QBevlw21b+24qltoc5QI9AOAepEVxR6ga1Ox2+6qzZUg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=temperror (sender ip
+ is 164.130.1.43) smtp.rcpttodomain=bootlin.com
+ smtp.mailfrom=foss.st.com; 
+ dmarc=temperror action=none header.from=foss.st.com; dkim=none (message not
+ signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MTteqOAT7AKOEOmF9YBQ0+jlgOd2XBh6wUBSC0R1634=;
+ b=kNZwY30OXsWIibKgtzqYJRl2pcRxyFtydu2f9osvyM0VybWeChKPQQWtXlzm00AtpcqE/EQx/miKvBFounD0Fiq81KfWvTUsy1XmzA+MYWbM/BnTkqkTaKTpRy8SeuYT0wwaXxMtUTr2wfsfZZDehmUHecPVH91ptDQE5Pfk1p2DiKCh4rm/F5FTuSVO8H3wWR3eQZ0Sp4wmfuIv8p10IH2vQ58EjARxmcnD2bbWdYi3eJYnEI63wgF0+RAQl8YNvojoueA64HTeZUIQOd9WXEQD4QM9Crl9L6eUD8Zv5g6hj2iNxciiaLiKZLBizjjvt5MZLcWmXovaI8NHEwW+rQ==
+Received: from DU6P191CA0066.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:53e::6) by
+ DUZPR10MB8125.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4e0::14) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9160.17; Tue, 30 Sep 2025 07:45:10 +0000
+Received: from DB5PEPF00014B9A.eurprd02.prod.outlook.com
+ (2603:10a6:10:53e:cafe::3c) by DU6P191CA0066.outlook.office365.com
+ (2603:10a6:10:53e::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.17 via Frontend Transport; Tue,
+ 30 Sep 2025 07:45:04 +0000
+X-MS-Exchange-Authentication-Results: spf=temperror (sender IP is
+ 164.130.1.43) smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=temperror action=none header.from=foss.st.com;
+Received-SPF: TempError (protection.outlook.com: error in processing during
+ lookup of foss.st.com: DNS Timeout)
+Received: from smtpO365.st.com (164.130.1.43) by
+ DB5PEPF00014B9A.mail.protection.outlook.com (10.167.8.167) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9160.9 via Frontend Transport; Tue, 30 Sep 2025 07:45:09 +0000
+Received: from SHFDAG1NODE1.st.com (10.75.129.69) by smtpO365.st.com
+ (10.250.44.66) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 30 Sep
+ 2025 09:42:52 +0200
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Tue, 30 Sep
+ 2025 09:45:08 +0200
+Message-ID: <fd32f45e-a3c9-4170-8886-5a31dda0e4c9@foss.st.com>
+Date: Tue, 30 Sep 2025 09:45:08 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Revert "board: st: stm32mp1: Clean env_get_location()"
+To: Kory Maincent <kory.maincent@bootlin.com>
+CC: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ <thomas.petazzoni@bootlin.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>
+References: <20250917141736.59732-1-kory.maincent@bootlin.com>
+ <55d0805b-dcb2-4277-a4da-f4c26b48a2dd@foss.st.com>
+ <20250929170912.3bee3f9d@kmaincent-XPS-13-7390>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250929170912.3bee3f9d@kmaincent-XPS-13-7390>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B9A:EE_|DUZPR10MB8125:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b3fcbee-bb1c-413c-af84-08ddfff54821
+X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|82310400026|1800799024|36860700013|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?d1VoMDgvbmJpM0VEK1FRZXZDQWNHWlR6YVF0UnNnajhSVmZjSWpzVjhCcGtF?=
+ =?utf-8?B?bXNOWFA4b0MrNE8xUUczcktXbXZaT1I5dmoyc3RHVm0wMTd1OG1VMW80TVZK?=
+ =?utf-8?B?bEVYWnBIYTBFaGtzdUNHcmpWV1JYcFR2R1N0YXJQSmRFa3EvNXF3OEZGeXNi?=
+ =?utf-8?B?T0RwUndESW1DLzdBNUhPQkU5ejU1UVUrTXB4UmI5YkoxZm0ycHFGOVNlOWZV?=
+ =?utf-8?B?LzRzVzl6VHF4ako2dWZIQ3d6VGkzVTFoajB2Uk9sRlVuRWVLV29aSDIvYllv?=
+ =?utf-8?B?QVJuRVV3QUN1MmVrQUV1MTdvemdNaUVTK0xBMDRob2F0RkN5eFcvbTJFRUs0?=
+ =?utf-8?B?MXdaazkzOEQwVkl2RnovSHFxZk9PZGNjWlNEUGlFSmFRWUg4UmtDaHdMbkNz?=
+ =?utf-8?B?aXNYakJKc1Z4bENxanh6ZHlaQllRdElqdHcydXQzdTI1VWlSWlhLeVZKL0o4?=
+ =?utf-8?B?UWFLclhnaWhEZVRjUjFxNWE4M1M2MGpQS0ZWTThvcENLamk2U25BMjJwN05Y?=
+ =?utf-8?B?NUpqOXhXekplRjc3Q3l1OUg4WTJRWmhDNUh4NWJ5eGt2eEt6WU9MczJVeUlT?=
+ =?utf-8?B?dnZOK1J0V2dvcjZzUGpIc0J3TEt3TGkrQldjV3F6bEM4YkxFQ2Q0SVhDNVg2?=
+ =?utf-8?B?SEtCVUZ5V0NETk5BVEF4T0grQ0x4bXdEMnVTU1BPVUtkN0FnK1RaMUpQNDBn?=
+ =?utf-8?B?YzdVUHp1bEVTQnE5SklRcTUzZSt0Q3N5Z2FabERVc2p1R0lHMUVqWnkzZzd3?=
+ =?utf-8?B?TytsQ2hKM0l4ZkxYRE5KZENGUUtDSzRwVGs2MWVGNE9DRi85QVJVUUY5eEJ3?=
+ =?utf-8?B?RGtwQ3BKeEdhUVZEVExHK2ZSRlhEdlJSR3pGUlpDZzVtWDJBdEl5aE5nNC9N?=
+ =?utf-8?B?OXZmVzJ3MHpJeUw1dDJSMWg3eXlzN1BSQThhU3RWLzBRVTNqNVJoWmdZcjdE?=
+ =?utf-8?B?MFhZakhpQ3Jqb2JJNld5U3NzZWQ4QTMrV1V0NFdBVFZBWXphdU5PRXhqTUVa?=
+ =?utf-8?B?K3dhODk0K3Q1WlkxMlptanZmcUJqdFN6M3AxaGdvK245cU90RDhSNktWWGVa?=
+ =?utf-8?B?Qy9jYWtjRmpjdlo0aEFPY2Z3UGNuUTU5aExEQVdFeVpPQW1Td0FtRWRHSDNP?=
+ =?utf-8?B?MWorNmM2eUJXV2Q3V1pSZmE2b2ZIMWRCUXVKNVpBaUJjMnJZckZYTXBIZ0FV?=
+ =?utf-8?B?U01GVXhwU3hDaFZhS1lrWDA2MS9HM3hRQ0hFQ0tKekxkaXRJaCtyOTJ0Z1VE?=
+ =?utf-8?B?eS9sdzdmMWFsSy9KS0FwNTRnOWFzMDZhY0N5VzB2aXllTGdNS002ZkxjQVRK?=
+ =?utf-8?B?V0crQlBlNTNqQk81eGNnQlErRHJqbzc5M1pTNXByMmFWbVVPU2VHWUQ4OFNR?=
+ =?utf-8?B?ZXlSZE5PQ1UydFRFMktwUkFKNHhzcUk3UHo3RzM3WDZ6MUVMb0lrZ1pLcHZs?=
+ =?utf-8?B?MmhaeDBNdCtrNU9jNmVWa2hySEdnQ0JGQlVXU3IzUnZjdUJWVEkwYmpPNVF2?=
+ =?utf-8?B?eXJwamhCNnhZQW5LNUhDTnl3cTJRWUVGTTVCNjU4Uk1IN3NSa1BBQ2VyTStp?=
+ =?utf-8?B?aGN6Y08yOUJ2dFlEWkRnTjdkWVh3SDZOL3J1NnRVbS8wcXp2TzFSRVdRVmRl?=
+ =?utf-8?B?VXBpRTAwclZkaVFZbHBtQU5Uc2xPSndWY0VLWjhHZVNsOGdCR05vcnF3Q1BP?=
+ =?utf-8?B?a3RQWFFNZ0M5M1BRRlF2N3EvbWc2TVdpaUY1ekhEQWk1WU15V3llQW50TW5S?=
+ =?utf-8?B?bFZwa3E5SVd6NFIrdzU0eDB1V2o0eEYzZVJyYVJHNjVOVEhIV2lpYmFneTI1?=
+ =?utf-8?B?U3FKRUhkZkZ3eVVhbDhtKzdaT1ZrQTVIZVFTamp3THFkejBocytITGM3Ukpn?=
+ =?utf-8?B?NXZZK2JwWlU2eVFWTHowUkpQdGVhVkVTdGs1dzA5OXcvMGdEa3ZVT0FuSEF0?=
+ =?utf-8?B?bUd6ZHhxQ0xwbVRvSVovV2loeHQxRDN6QUkvSWVtWml2d3NPdGxGdm83bDl5?=
+ =?utf-8?B?aXBHSnR0cnpZR29VNW5SdHRqbWxVTHRCbUJwTDhNSEI4cnlXNi9VcmNLSFB2?=
+ =?utf-8?B?cDIzSGRYZk93WGNnMHlLR2xnK1QwZGJja1FwK2NTdHBacG5yTUpHeVVlRXRx?=
+ =?utf-8?Q?pFNk=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.43; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(82310400026)(1800799024)(36860700013)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 07:45:09.7277 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b3fcbee-bb1c-413c-af84-08ddfff54821
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.43];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B9A.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DUZPR10MB8125
+X-Proofpoint-GUID: O91e4KvMil_ooeWHstlYUUjGxQdXrMdv
+X-Proofpoint-ORIG-GUID: O91e4KvMil_ooeWHstlYUUjGxQdXrMdv
+X-Authority-Analysis: v=2.4 cv=IY+KmGqa c=1 sm=1 tr=0 ts=68db8a8a cx=c_pps
+ a=aENNojP290uMZkO2s5RJcg==:117 a=peP7VJn1Wk7OJvVWh4ABVQ==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=h8e1o3o8w34MuCiiGQrqVE4VwXA=:19
+ a=wKuvFiaSGQ0qltdbU6+NXLB8nM8=:19
+ a=Ol13hO9ccFRV9qXi2t6ftBPywas=:19 a=SAHXIHsbQyQA:10 a=IkcTkHD0fZMA:10
+ a=yJojWOMRYYMA:10 a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10 a=8b9GpE9nAAAA:8
+ a=P-IC7800AAAA:8 a=kSzfWeL1cq06ExgGgkwA:9 a=QEXdDO2ut3YA:10
+ a=T3LWEMljR5ZiDmsYVIUa:22 a=d3PnA9EDa4IxuAV0gXij:22
+ a=HhbK4dLum7pmb74im6QT:22 a=cPQSjfK2_nFv0Q5t_7PE:22 a=pHzHmUro8NiASowvMSCR:22
+ a=Ew2E2A-JSTLzCXPT_086:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUwOTI3MDAxNyBTYWx0ZWRfX7lAI2DKug63Y
+ C25oAVT/BtWQEac8Agz/BxXkDLKWTYue5tdZewhWiLQD1ke63PbC6DxVEmOOx768kMB9ZXjVOVE
+ +wCoWhM87N2i9Q+BhZ6vWUqmK1j031Q8mYHtUVqPI24jVVpBDbRnGWL5ZpVhi0KNPZhXhP323wx
+ U4vmi+/pTL6d0VyeSSzcZ69IRKXS4jAIwsF0JcBKk3qI6n2Q8XEQemNU5Zf3ScmbQmjOugkp7RH
+ AaDDeLWxK+CNUm1uCLFnDDqViKLPL20m0zufXFfqwyuPYMdsLob86Xd6ZAtASG93FWmaD5WrPen
+ 7lMhnQINcZOn8367S99gXOs4lMxEaFfiwfwfKIYa4VCG9s5PnGwyRxtEC3dfn2w/bu9uk5Givl7
+ PHNrHWJmc7izh2DEGo+FP+IOh4NG/Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-09-30_01,2025-09-29_04,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
+ adultscore=0
+ spamscore=0 lowpriorityscore=0 suspectscore=0 phishscore=0
+ priorityscore=1501 clxscore=1015 malwarescore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2509150000
+ definitions=main-2509270017
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,239 +204,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi George,
 
-On Sat, Jul 19, 2025 at 01:17, george chan <gchan9527@gmail.com> wrote:
 
-> Hi Mattijs,
->
-> Congrats to be a new dad.
-
-Thank you! Sorry for all the delays. I'm just back from paternity leave.
-I hope we can work together to get your patches merged.
-
->
-> =E5=9C=A8 2025=E5=B9=B47=E6=9C=8818=E6=97=A5=E9=80=B1=E4=BA=94 20:03=EF=
-=BC=8CMattijs Korpershoek <mkorpershoek@kernel.org> =E5=AF=AB=E9=81=93=EF=
-=BC=9A
->
->> Hi George,
->>
->> On Wed, Jul 16, 2025 at 19:55, george chan <gchan9527@gmail.com> wrote:
->>
->> > Hi Mattijs,
->> >
->> > Thx for reply.
->> >
->> > =E5=9C=A8 2025=E5=B9=B47=E6=9C=8816=E6=97=A5=E9=80=B1=E4=B8=89 17:05=
-=EF=BC=8CMattijs Korpershoek <mkorpershoek@kernel.org> =E5=AF=AB=E9=81=93=
-=EF=BC=9A
->> >
->> >> Hi George,
->> >>
->> >> Thank you for the patch.
->> >>
->> > ...
->> >
->> >>
->> >> > -     ret =3D env_set("bootargs", cmdline);
->> >> > +     ret =3D android_image_modify_bootargs_env(cmdline, NULL);
->> >>
->> >> I don't think it can be done this way. bootm_boot_start() is used in =
-the
->> >> ChromeOS bootmethod as well (boot/bootmeth_cros.c)
->> >>
->> >
->> > I got your point. I have 3 ideas come out.
->> >
->> > (1) The logic purposely empty the env bootargs, either developer don't
->> use
->> > env bootargs or those use cases touched bootargs in some early step. A=
-nd
->> > then wanna disregard previous u-boot bootmeth operation, and empty
->> bootargs
->> > for that ongoing bootmeth stage...well that's not congruent behavior; I
->> > have a gut feeling this is a bug or band-aid anyway, it closed the door
->> for
->>
->> Simon, is it *intentional* that override the bootargs variable in
->> commit daffb0be2c83 ("bootstd: cros: Add ARM support") ?
->>
->> Shouldn't we get the bootargs from the environment, and append cmdline
->> to the existing bootargs instead ?
->>
->>
->> > people (potentially abootimg) inject needed boot param between bootmeth
->> > stage. Perhaps, either clean up bootargs before bootmeth load stage, or
->> add
->> > kconfig to check and enable this logic, a better representation.
-
-If this is indeed a bug, maybe fixing it would be the easiest. Now that
-Simon is back, pinged him about this.
-
->> >
->> > (2) One more thing, the vendor_boot cmdline is not handle neither in
->> > original logic nor in url from you provided. So I can say the url one =
-is
->> > not capable for extended with Android boot img version > 2 since
->> > vendor_boot cmdline not handled.
->>
->> What do you mean by the vendor_boot cmdline is not handled?
->>
->
-> Yes I mean it. If origin/master logic (for fastboot, my test case) had go=
-ne
-> through android_image_get_kernel then this patch is not necessary.
->
->
->> When parsing the vendor_boot image, we go through
->> android_vendor_boot_image_v3_v4_parse_hdr()
->>
->> That function copies the vendor_boot cmdline with:
->>
->>         data->kcmdline_extra =3D hdr->cmdline;
->>
->
-> Yes and that it is. Since many routes now through bootm_boot_start() with
-> single cmdline so obviously vndboot_cmd is yet to finalized unless in
-> previous stage logic combine boot/vendor cmdline by purpose. So here a
-> better choice is to extend with 3rd param for vndrboot_cmdline. And let t=
-he
-> new bootm_boot_start_ex() for example to combine/modify.
->
-> for example:
-> Int bootm_boot_start_ex(ulong addr, const char *cmdline, const char
-> *vendor_cmdline) {
-> ...
-> ret =3D android_image_modify_bootargs_env(cmdline, vendor_cmdline);
-> ...
-> }
->
-> I did not do this way because it is a bit  clumsy. But in code maintain
-> point it might be good.
->
->
->> (to the struct andr_image_data).
->>
->> Later on, in android_image_get_kernel(), this gets copied to the
->> bootargs:
->>
->>         if (img_data.kcmdline_extra && *img_data.kcmdline_extra) {
->>                 if (*newbootargs) /* If there is something in newbootarg=
-s,
->> a space is needed */
->>                         strcat(newbootargs, " ");
->>                 strcat(newbootargs, img_data.kcmdline_extra);
->>         }
->>
->>         env_set("bootargs", newbootargs);
->>
->> >
->> > (3) I don't think it is very much different between your mentioned url
->> with
->> > my patch. There is nothing advanced, but just existing code logic reuse
->> and
->> > that logic handled vendor_cmdline in other path. I prefer code logic
->> reuse.
->>
->> The difference is that in the patch I've linked is that we only change
->> Android specific boot behaviour. So less risk to impact ChromeOS.
->>
->
-> Yes. As above suggested _ex() function to get around the limitation. Just
-> leave those old caller to stick with the old bootm_boot_start().
->
->
->> >
->> > And I believe above are not the important thing....
->> >
->> >>
->> >> Changing this would potentially break ChromeOS boot behaviour so I'd
->> >> prefer to find another solution.
->> >>
->> >> I know that TI has a downstream patch that changes bootmeth_android.c
->> >> instead:
->> >>
->> >>
->> >>
->> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=3Dti-u-boot-2024.0=
-4-next&id=3D9d802d798ac143e06ffe545606aa657a6c32cc63
->> >
->> >
->> > ...
->> >
->> >
->> >> Would that work for you?
->> >>
->> >>
->> > Well, the one from url also fine with me.
->> >
->> > The important thing is here. So as to ease the change with "minimal
->> impact"
->> > gets in. I can add one extra check to maintain original behavior in ca=
-se
->> > people have concern of breakage. Code example as below:
->> >
->> > + If (IS_ENABLED(CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS))
->> > +   ret =3D android_image_modify_bootargs_env(cmdline, NULL);
->> > + else
->> >       ret =3D env_set("bootargs", cmdline);
->> >
->> > This logic eliminated the concern, but it also limited those potential
->> use
->> > cases for Android boot header version > 2, unless the newly introduced
->> > CONFIG_ANDROID_BOOT_IMAGE_PREPEND_ENV_BOOTARGS is defined.
->>
->> I'm not sure about why this is better, as from what I understand we
->> handle vendor_boot cmdline properly already.
->>
->
-> This is my previous patch aimed to do....I moved all bootargs handling fr=
-om
-> android_image_get_kernel into a new function and reuse it in
-> bootm_boot_start. I am glad you have same assumption on how bootargs shou=
-ld
-> be handled.
->
->
->> Can you provide me with a test case or some example commands that show
->> that vendor_boot cmdline is not handled properly?
->>
->
-> May be above explain is enough?
->
->
->> >
->> > Or this one with good extendible.
->> > + /* Clean up bootargs purposely */
->> > + if (IS_ENABLED(SOME_FLAG))
->> > +    env_set("bootargs", "");
->> > + ret =3D android_image_modify_bootargs_env(cmdline, NULL);
->> >
->> > Either way. I prefer first one and can blindly apply without afford. I
->> > leave the idea above to people more concern with it. Please let me know
->> > your decision, I can provide one more revision later.
->>
->> I'm sorry there is so much back and forth on this series. I hope we can
->> come to a common agreement and get something merged.
->>
->
-> Yes I am struggle with this as well. If there are still some uncertain,
-> please consider merge patches with review-by and leave theose questioning
-> patch alone?
->
-> Thx again for reviewing.
->
+On 9/29/25 17:09, Kory Maincent wrote:
+> On Thu, 18 Sep 2025 16:16:35 +0200
+> Patrice CHOTARD <patrice.chotard@foss.st.com> wrote:
+> 
+>> On 9/17/25 16:17, Kory Maincent wrote:
+>>> This reverts commit d37641c61ba212241c38e3fd22f0335fc0bebc96.
+>>>
+>>> Restore support for environment storage in EXT4 filesystem on eMMC boot.
+>>> The previous cleanup incorrectly removed this fallback option which is
+>>> needed for boards that store their environment in an EXT4 partition.
+>>>
+>>> This configuration is OS-specific rather than board-dependent and should
+>>> remain as it is configurable via menuconfig. Even if it is not described
+>>> in ST defconfigs people may have enabled it in their defconfig.
+>>>
+>>> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> 
+>> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> 
+> Hello,
+> 
+> Any news from the maintainers? Is there a reason for not being merge?
+> 
 > Regards,
-> George
->
->
->> Thanks
->> Mattijs
->>
->> >
->> > Regards,
->> > George
->> >
->> >>
->>
+
+Hi Kory
+
+I expect to send a pull request before end of this week for master branch including your patch.
+
+Patrice
