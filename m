@@ -4,69 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE0ECCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 16:04:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F10EFCCA470
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 16:06:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F9D3832AD;
-	Tue, 30 Sep 2025 18:04:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D3E3832AD;
+	Tue, 30 Sep 2025 18:06:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="2j3I+FJb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="a/ERa0v7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 530EE82998; Tue, 30 Sep 2025 17:42:16 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4AA648349B; Tue, 30 Sep 2025 18:06:49 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD6B6800B1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 17:42:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=36105edbf=Jamie.Gibbons@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1759246934; x=1790782934;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=hFIqxBcyJvC2Wbl9bQoRfOZgPrQl7NqNiMBVbMMYjs0=;
- b=2j3I+FJbTVAJanx1+qTl0lWvd1ZCa22qDMJKvqIH6E8W8n8gcSPGc+eg
- 4WprLGJAi2IKfsBX8M0Ic/KyNU5kvuLSz+Stb7Y8Bn9c+3m1rkFEZz/D8
- 38Z3eu1PPmQg89w41QEpEr9OyVQRSrvP1PQyy8590yum99xio7HJr7V+N
- RrgkNWgpBIbbzUOf/E3ozm3geSIsHoTUu8x73Z4NwwK3vpuFDcmM0OON4
- yMYKuaiL3U8q6xdcl7MC7NlhRUpLBIbrI2cv1tzIFo5DGG7xQlfs/1bh7
- msXtsl4UQabd+3BZHKrBAc5AT7KqDVKm1Rhlx/04C6dycLkA8EF9mYmJ+ g==;
-X-CSE-ConnectionGUID: 1N1rS4BJQjCegOO/eYEJuA==
-X-CSE-MsgGUID: Zwce9WfRRfOFAKq1tPrgug==
-X-IronPort-AV: E=Sophos;i="6.18,304,1751266800"; d="scan'208";a="278546629"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 30 Sep 2025 08:42:12 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.87.72) by
- chn-vm-ex02.mchp-main.com (10.10.87.72) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Tue, 30 Sep 2025 08:41:48 -0700
-Received: from jamie-dev.microchip.com (10.10.85.11) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Tue, 30 Sep 2025 08:41:46 -0700
-From: Jamie Gibbons <jamie.gibbons@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: Conor Dooley <conor.dooley@microchip.com>, Valentina Fernandez Alanis
- <valentina.fernandezalanis@microchip.com>, Cyril Jean
- <cyril.jean@microchip.com>, Tom Rini <trini@konsulko.com>, Leo Yu-Chi Liang
- <ycliang@andestech.com>, <jamie.gibbons@microchip.com>
-Subject: [PATCH] board: mpfs_icicle: fix pointer assignment in
- board_fdt_blob_setup()
-Date: Tue, 30 Sep 2025 16:45:34 +0100
-Message-ID: <20250930154534.3914214-1-jamie.gibbons@microchip.com>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 90041802C1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 18:06:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-414f48bd5a7so4019009f8f.2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:06:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1759248406; x=1759853206; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=OiuSbI7g211UEO5GChSRVz7qI6UicdNTI645ZLK248s=;
+ b=a/ERa0v7+zN/Hbay9h00lOPCvu2hvLxgbaVa927QQr97OVGf3+Ooi+93ABeSs9RhCG
+ VcUxEsS/2VZJ3+v4HcokkjiK80ZOK7vKdNc84ZIejTCL/8h5iF2iWTUYcELuiC3mHDb5
+ poQSGSIldPrKHMJ6Li7kSvMAB2G9uBnz+jIlnZE5H4/ZP0n6km9zVJcqfNjoYsyV+DcM
+ Gmuwg2eqgLPij/btLrD2rLfVT/unf6hSDciiG6PbLiaE5dU/MX0x2osh82K1GnAb0Xog
+ H+bbHPi5k0nXIOqhi2sptHcuooJaG1ZN9b1Q6MW3kzZAB9zWdTUQl80y79DztniV4adA
+ 8j3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759248406; x=1759853206;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=OiuSbI7g211UEO5GChSRVz7qI6UicdNTI645ZLK248s=;
+ b=XRAw8PHjYkDmFGDGdPoo7S9WnTEGAdgOmjnlvT/RYrFFBYMFjH1curOAwZn0EreNJF
+ RtCnQrYC88mbGzfWq5xAvDidk7kw/K+Uo9mHL/BfglJojI/mTXSXaRa1CTEudZzp9ck/
+ qA8StQN5Nqbm9TD34HMci7auQr0/S//ywYFDwlb4q69ZRKN4Carfgwdtp0Bh4uIr32o9
+ Fe3CZJm9ARYBW9p9cXAJRsD5zz1wzrXF1NymeupdBnuDpLQYV2Uv+AKOfzeaaoP7A6Yg
+ pOPeX2xLMR3oEcRWOHrrR7AkVvTl/fvlCzSfODEEtvO2P8r+RKM1eQxGQ75x+qjwcPF9
+ 1TjA==
+X-Gm-Message-State: AOJu0YxaKGortCscBJO6LJcCRwg5fGCjgfSB+qVBzlqh6bB6aoUSc6Ui
+ JX0GXp233O+78Jk5V1BeZ0iqHeB7i/HKzG4z7ALVNdkxHg8agvTwFt1yArqCacu50Sw=
+X-Gm-Gg: ASbGncsOT6Gbuhxo/GZIZ8/AIYdkgPncpO4TonkNz+XiVKuCQ1hZSXIzfyxHUx236RP
+ D7RXXuVDktTsvQGtyGyc1mHnv+TBhI1WgYbjafmiwGbHee8C4gVZFQSjSPRoym14T7LSQiHCUCX
+ 6TlLOn24ijNPN53/jyOyjQpdYKh2rH+IABiPePXkZBm3LNQW3/Ylf5LZQ94prJW5sIzgxqWysXz
+ Wm+uFaWXSegkfTImv9t9UnCPkMY5QYgaHIyNC8Rkamz4OX+HSYavyr4WXDXa6cpSkYGMwLgKn0C
+ +H9xhY8S7sGM9dRuPwgxA+iPul5qbo3eGY+lv0TJ19Cf+MXxuUTGA21CoYItDasU2LeJ4vSJNjd
+ G49LJq9R9/7m/mZa0zZekOGoEo0oGoUhSwnUWpti91ljiKwZbKqnK9mT0KxHCjnnWgnfE+wEV6y
+ zKj00lzCLKcq9jPUVD9gI=
+X-Google-Smtp-Source: AGHT+IFjNNr7IHCEhtiUj9erjVkeSohZxkGPLmyXDtuywRTctb6fSruckZjfBEsLKukhy+/nqtAnwQ==
+X-Received: by 2002:a05:6000:420a:b0:3f0:9bf0:a369 with SMTP id
+ ffacd0b85a97d-425577f34e9mr278637f8f.14.1759248405910; 
+ Tue, 30 Sep 2025 09:06:45 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
+ ([2a0a:ef40:ebd:e301:aed:2018:ed42:d786])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-40fb72fb017sm23228178f8f.3.2025.09.30.09.06.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Sep 2025 09:06:45 -0700 (PDT)
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Date: Tue, 30 Sep 2025 17:06:44 +0100
+Subject: [PATCH] usb: ulpi: Incorrect operator used
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Mailman-Approved-At: Tue, 30 Sep 2025 18:04:55 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250930-usb_ulpi-v1-1-26c929ca2ed1@linaro.org>
+X-B4-Tracking: v=1; b=H4sIABMA3GgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDS2MD3dLipPjSnIJM3UQLs8Q0w0QTE0vTVCWg8oKi1LTMCrBR0bG1tQC
+ YG0/SWgAAAA==
+X-Change-ID: 20250930-usb_ulpi-a86af1a4495e
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,40 +101,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct the assignment in board_fdt_blob_setup() to use *fdtp instead of
-fdtp, ensuring the caller receives the correct FDT address. This
-resolves an issue where the device tree pointer was not properly set due
-to assigning to the local parameter rather than the dereferenced
-pointer.
+Combining two bits into a mask to be used so that the same write code
+can be used to set or reset bits in a register clearly needs to use the
+binary 'or' operator, not the binary 'and'. Fix it.
 
-Fixes: 63a8506580b6 ("board: mpfs_icicle: implement board_fdt_blob_setup()/board_fit_config_name_match()")
-Signed-off-by: Jamie Gibbons <jamie.gibbons@microchip.com>
+This issue was found by Smatch.
+
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- board/microchip/mpfs_icicle/mpfs_icicle.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/usb/ulpi/ulpi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/mpfs_icicle/mpfs_icicle.c
-index 30c0d2fff8f..6e5dc66b463 100644
---- a/board/microchip/mpfs_icicle/mpfs_icicle.c
-+++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
-@@ -74,7 +74,7 @@ int board_fit_config_name_match(const char *name)
+diff --git a/drivers/usb/ulpi/ulpi.c b/drivers/usb/ulpi/ulpi.c
+index 128adcbde134bc5a3b3705c3ddd932b540b54cd4..0e0f0e4983d33583aa6d3212ccffc9db9ab3bc29 100644
+--- a/drivers/usb/ulpi/ulpi.c
++++ b/drivers/usb/ulpi/ulpi.c
+@@ -127,7 +127,7 @@ int ulpi_set_vbus_indicator(struct ulpi_viewport *ulpi_vp, int external,
+ 	if (val == ULPI_ERROR)
+ 		return val;
  
- int board_fdt_blob_setup(void **fdtp)
- {
--	fdtp = (void *)_end;
-+	*fdtp = (void *)_end;
- 
- 	/*
- 	 * The devicetree provided by the previous stage is very minimal due to
-@@ -85,7 +85,7 @@ int board_fdt_blob_setup(void **fdtp)
- 	 */
- 	if (IS_ENABLED(CONFIG_OF_BOARD) && !IS_ENABLED(CONFIG_MULTI_DTB_FIT)) {
- 		if (gd->arch.firmware_fdt_addr)
--			fdtp = (void *)(uintptr_t)gd->arch.firmware_fdt_addr;
-+			*fdtp = (void *)(uintptr_t)gd->arch.firmware_fdt_addr;
- 	}
- 
- 	return 0;
+-	val = val & ~(ULPI_IFACE_PASSTHRU & ULPI_IFACE_EXTVBUS_COMPLEMENT);
++	val = val & ~(ULPI_IFACE_PASSTHRU | ULPI_IFACE_EXTVBUS_COMPLEMENT);
+ 	val |= flags;
+ 	val = ulpi_write(ulpi_vp, &ulpi->iface_ctrl, val);
+ 	if (val)
+
+---
+base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
+change-id: 20250930-usb_ulpi-a86af1a4495e
+
+Best regards,
 -- 
-2.43.0
+Andrew Goodbody <andrew.goodbody@linaro.org>
 
