@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAA2ECCA468
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:51:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61264CCA468
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 364CB83045;
-	Tue, 30 Sep 2025 11:51:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8885383045;
+	Tue, 30 Sep 2025 11:54:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="JbKqSASu";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cQ67U080";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 65C4D833E9; Tue, 30 Sep 2025 11:51:52 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ id 79F1E8341C; Tue, 30 Sep 2025 11:54:14 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1A96828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:51:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12BE6828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:54:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id D01B043961;
- Tue, 30 Sep 2025 09:51:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 624ACC4CEF0;
- Tue, 30 Sep 2025 09:51:47 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 74C6240A1D;
+ Tue, 30 Sep 2025 09:54:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04C7EC4CEF0;
+ Tue, 30 Sep 2025 09:54:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759225907;
- bh=AUqGe++zCrI5aU4E4pU/U3fba/sARnxTDgNf0ANasF0=;
+ s=k20201202; t=1759226050;
+ bh=SsTtd18TVIRrzc5vuUk9VmC5dZD8iMAL568xawFuN+A=;
  h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
- b=JbKqSASu/iyM2+Wv7iRTIqPvUP8ouuxzFobLVjK/K8+PXxInXPe/7vxRFS4cbYxxB
- gLEiy6jsVwPms4nKZi5O6Rr0zWpVv5O9fzLqlPZM5nvXQJ0nU4duHovSbXvXAuuIsW
- QYhgFrzooPpBW/ajIClIufINNABvUFWprG6Z+hcifGgYx4RppVDcXEvH9kYG/PM8/3
- RWVCqAK5CmHOVl1icrExFcKE6ME/+8SIE4eptAg1+iA9Kcd0wDC5ihpr64JKWqAvf7
- xKxa3LWQ/AHHc8wixxQgWlWz8FIJesjU4GSAOeq2i6NUHYP+NEsZ/zaBXhXj/sEllc
- aXoQbeIw06STg==
+ b=cQ67U080lKiXS1KSPelgXPl8cSDT3kO6hhgHLhU4XXV7HQU6HDEMl7RSSWoEhqTu4
+ tffmwT8Dz9oRjzIS8wjcNadOGItL4aXEYEZU1aVanY9qswtroXmw3WytySMtOce6lc
+ nfmS/iO7VO1k7huvOHIRJx7nZPnLEpOjUbaYt+liWQAJice79O86aXZrpw8D3uQR3t
+ /QWexW/GXCv5gYidGb1xSDmSI6WFjCLJktBKi9EvFE8ziGiAvvV7bnk+szyQ+G533a
+ XkM5bEd+3n2M6mmr2+oneRxMzKbCFr4OkqRAypNZVYrMeMi0oXoQlreXpT82NcBS7A
+ LC4R+Y5QGLMTQ==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
 To: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, 
  Tom Rini <trini@konsulko.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de
-In-Reply-To: <20250929-atmel_usba_udc-v1-1-e1426271e12a@linaro.org>
-References: <20250929-atmel_usba_udc-v1-1-e1426271e12a@linaro.org>
-Subject: Re: [PATCH] usb: gadget: atmel: Add missing null check
-Message-Id: <175922590555.1440114.13633426417316062299.b4-ty@kernel.org>
-Date: Tue, 30 Sep 2025 11:51:45 +0200
+Cc: Junhui Liu <junhui.liu@pigmoral.tech>, 
+ Kongyang Liu <seashell11234455@gmail.com>, u-boot@lists.denx.de
+In-Reply-To: <20250929-usb_dwc2-v1-1-863133dcbcde@linaro.org>
+References: <20250929-usb_dwc2-v1-1-863133dcbcde@linaro.org>
+Subject: Re: [PATCH] usb: dwc2: Add missing null check
+Message-Id: <175922604836.1440470.5677006425870296284.b4-ty@kernel.org>
+Date: Tue, 30 Sep 2025 11:54:08 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -72,8 +72,8 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Mon, 29 Sep 2025 17:25:23 +0100, Andrew Goodbody wrote:
-> Add in the missing null check for udc->driver that is present at other
+On Mon, 29 Sep 2025 17:40:43 +0100, Andrew Goodbody wrote:
+> Add in the missing null check for dev->driver that is present at other
 > points in the function before it is dereferenced.
 > 
 > This issue was found by Smatch.
@@ -82,8 +82,8 @@ On Mon, 29 Sep 2025 17:25:23 +0100, Andrew Goodbody wrote:
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
 
-[1/1] usb: gadget: atmel: Add missing null check
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/f58667587243ce652aaa7d0dd6557a2fb2da5020
+[1/1] usb: dwc2: Add missing null check
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/5ac61383b2db15b037e87bd353f726eafc49e181
 
 --
 Mattijs
