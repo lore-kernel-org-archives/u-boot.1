@@ -4,86 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310DECCA468
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 14:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A72CBCCA468
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 14:38:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6DAF8349B;
-	Tue, 30 Sep 2025 16:37:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F39C683526;
+	Tue, 30 Sep 2025 16:38:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JzTWLTHl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PQuyHw1u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 806DD834D4; Tue, 30 Sep 2025 16:37:54 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id DD2D983510; Tue, 30 Sep 2025 16:38:04 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04640802C1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 16:37:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F263583510
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 16:38:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-90926724bceso379072539f.1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 07:37:51 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-92aee734485so85848439f.1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 07:38:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759243071; x=1759847871; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759243080; x=1759847880; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jKCWLhHgb73l9RKGiBxKvpu1UeL8Bct7W/1hgKS9qeA=;
- b=JzTWLTHlBvhFC+MwsWXLYL1NLaCfHNEvc/XJejFZPzYBZrF9v8eQQv0C35QfozHU3Z
- epFJWBPeEJKmH2wrjstcByyr5eO+P0OyWzGxnoEKMwyHnHedF8AidPQv2BIUa9TFLGeJ
- ctSjfOYJzgD93TCuJVltHUDfT/NWLWbMn1tvA=
+ bh=q+MlOmqJJS30WlBmy7t2avgF941jzTipa1YyIUXso8M=;
+ b=PQuyHw1up81//urBLBo5KuJP9r7GXXqL2o1Dz8LxysA+6mEk8UfLDvivJWN2WEeL1z
+ TUAS3qzcNex/Dp9uu9mmVbD1h4SB8emxcayCpQsVJ5PpGNNUsJdwLd1PdBVa6HR1XRSJ
+ LrCKaQSaSuuFO+sguUFxByWnHxfJR/AQYnFFI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759243071; x=1759847871;
+ d=1e100.net; s=20230601; t=1759243080; x=1759847880;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jKCWLhHgb73l9RKGiBxKvpu1UeL8Bct7W/1hgKS9qeA=;
- b=HMd6pkx+I2Syv+qrZ497x2MjPRhnpXGQEw1ZNapl6GbBplU2++jPzVRu/JhOiTLOQe
- BmoGI7Ofc/6N85kjbCQhpKxM8mHJmc8CA02vo0rMYjmeTigR3PzRR0iBYNFkT3ytrpiM
- PewxMmnIa+cqqOGct96PxGsKzHJNQ5uUBr2hO/eVdtKuC5xULIT6Fl9ZhveYCXldJr7W
- vqCr5cYzHtJdsNhgGN1i6QHt7W0bd0Jkj27pSiQEobgls78CH3CVcbDFBsgG7mQS41go
- IFI1MbkT5ta43Q/QryibHd2a1LCa8fUwrbtuKVP57EO/jZl6mQNUrI5pb4VNyFcGcuOO
- S3Fg==
-X-Gm-Message-State: AOJu0YzQcjpg5fHjw+NpRJhgtuoMiEchI25tLVw4VhkkvorD4Eec1k6F
- X986PTWHolKPlBA6ujlnoOkSFrR7mZuRvTID1Vq8YIR/PxMY7n/1cDJ9L5KUSL9RKeI=
-X-Gm-Gg: ASbGncvMImVXSq9vDzQtx/R2co0YAubH8Zr1O8i+lGtLYmpnXJTaotE/0B3e2hfnYb5
- dOGUcYWhGo9wVi9mkL3aBKVK0oe+sjA0CmTQXHnsiXo25xg7Kuq4xQufVGSmWK3oPnVTniqWSSe
- kjJae42BCY6rw/rdtq0oh1ryOOlTPbDfRJP2G9rrzPvOL9tdyHe8RqWFOGpMcX9CsRYIVUyNXhP
- mV16wQxd5B38yO09SavW4VVYW/z+pSwq+EfcHKOgNtITURHcqNGFSbqJZN6Dm4eLPJvjDbJ81KK
- 4IzF0p54Usya21sFJAcbrTDdMtCP21RS/DMTR2qfWK5Gjvumz+thFsHmG6i0jBLcxWfqtfY4Doc
- nwThElTLZVxoV8hKkt+1jasyqL/Gkiaus7oTi+JQW8hmCOjq2irf+Y9Ut3hRbA9H0KxyAWvqP1m
- lMtxTnLsF9jKtSI8U=
-X-Google-Smtp-Source: AGHT+IHw2HZhQ/c/9f5Racrs/MYHE/jzLsRzUblCgrcA13lCfhcKCoNy69BxbiDH4PUWCKWsbGhIyA==
-X-Received: by 2002:a05:6e02:3804:b0:424:8114:3840 with SMTP id
- e9e14a558f8ab-42d8161d65bmr2033565ab.23.1759243070617; 
- Tue, 30 Sep 2025 07:37:50 -0700 (PDT)
+ bh=q+MlOmqJJS30WlBmy7t2avgF941jzTipa1YyIUXso8M=;
+ b=u0ZvxPFB7JUdsk5yojeNyBIbkULo4/OauB93WNb6rAyKDoLrAYBKkNGUo2Y6ztnVf0
+ fadTU8vgPhhK2ZqdKXuiNrcmix8zLVVBHR73jpyuK2yzrms6rqIBltd3K3ghv+tDTQLk
+ y6q7NFEyxQJTiSdz6vJZQiNHzQz3J+XdF1pukBiNHmmntZ73C/4NgaSc0FLXDtqFkGPm
+ eB2zDnTi0BgXZ445D6VQ/T3xNnUQGU0albvZEUMEm0OdLThKwVz1Pn0M31BKuYZbS8pk
+ GMMhJevzZNjgebo+2cdC/inW/8MAnFfqO2wecIUdmel6Hd/VUAJymA9WcubccHJCEUmn
+ n2ew==
+X-Gm-Message-State: AOJu0Yzt21n2P8T3fcWiMF5LmxhzxrpZnjLF0A6MsmM2hiEBHawThPj9
+ JehGrdQFSGFIBgS5YYLtmJPR0Wj9WG0//uOXCiT/o/rsLsSgaJhZCZYw9/OlW9u2miQ=
+X-Gm-Gg: ASbGnctwTuwPTUeXqtXJmWP2R42pPZeEwXsGo1W1FN9//wEnjYrbcS82FN1Ui4/hy0j
+ l+i+9afCc/vgNkN3Ez8blBJ34yZ+AHn8BfPU8DtoEVIFdUNk0scU8o6ahFvoKxXhdlrDZc4W8c3
+ oiQd0EXsqomb7G69K7fO5hQHEhqpRFQDxgDjc3GO3Dr5YqmHArwWP++oy//vIw+me0k2zrSQ50a
+ xPpzBVH3LmkWmC3BcpUlkzzuW9fVH7PyA3zNm6r2gRPPg69cN6yjtIR62CUQnJUV7ix2H5JW7Kq
+ 9dYWEb3D7LOiwwTFEtUanhheREoyW5GNkRDfUrvydUXjdorTvgykQi3vzGKXlqkeirRQ9ozAK1w
+ PHo6YX4rYfmXfavClyHlpq4zZSC4srUoGsq2rPPchuoVwwaugtByLW2kV8Ge7YPCHm12ClPkX/W
+ QwNB9A
+X-Google-Smtp-Source: AGHT+IEogENtvSUCi0/DvPiDvlu8tKjs2RFgyWbfrr4qbaINCLlzq+8REu1PbHMOZ2SBbofDYSlf0A==
+X-Received: by 2002:a05:6602:27c5:b0:8a3:70e4:9abb with SMTP id
+ ca18e2360f4ac-9379f9b77ebmr9074139f.0.1759243080374; 
+ Tue, 30 Sep 2025 07:38:00 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-4282de12fc8sm48762985ab.3.2025.09.30.07.37.49
+ ca18e2360f4ac-903fb455cf1sm521457939f.11.2025.09.30.07.37.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Sep 2025 07:37:49 -0700 (PDT)
-Date: Tue, 30 Sep 2025 08:37:47 -0600
+ Tue, 30 Sep 2025 07:37:59 -0700 (PDT)
+Date: Tue, 30 Sep 2025 08:37:56 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@amd.com, Anshul Dalal <anshuld@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Prasad Kummari <prasad.kummari@amd.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: Re: [PATCH] xilinx: Replace PHY_VITESSE by PHY_MSCC
-Message-ID: <20250930143747.GV6093@bill-the-cat>
-References: <0a441e488a29bd1c93677a6f63a4a04a3cc1c9f5.1759216164.git.michal.simek@amd.com>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>,
+ Pramod Kumar <pramod.kumar_1@nxp.com>,
+ Tang Yuantian <andy.tang@nxp.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Ashish Kumar <Ashish.Kumar@nxp.com>, Priyanka Jain <priyanka.jain@nxp.com>,
+ Wasim Khan <wasim.khan@nxp.com>, Udit Agarwal <udit.agarwal@nxp.com>,
+ Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
+ Manish Tomar <Manish.Tomar@nxp.com>,
+ Conor Dooley <conor.dooley@microchip.com>,
+ Jamie Gibbons <jamie.gibbons@microchip.com>,
+ Aaron Williams <awilliams@marvell.com>,
+ Mathew McBride <matt@traverse.com.au>
+Subject: Re: U-Boot PHY_MSCC vs PHY_VITESSE
+Message-ID: <20250930143756.GW6093@bill-the-cat>
+References: <20250929224336.GS6093@bill-the-cat>
+ <20250930064938.GB17703@nxa18884-linux.ap.freescale.net>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="T8xksdEOmjZPWc1W"
+ protocol="application/pgp-signature"; boundary="u1ZbiQ5XQpPVKTgZ"
 Content-Disposition: inline
-In-Reply-To: <0a441e488a29bd1c93677a6f63a4a04a3cc1c9f5.1759216164.git.michal.simek@amd.com>
+In-Reply-To: <20250930064938.GB17703@nxa18884-linux.ap.freescale.net>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,36 +108,54 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---T8xksdEOmjZPWc1W
+--u1ZbiQ5XQpPVKTgZ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 30, 2025 at 09:09:26AM +0200, Michal Simek wrote:
-
-> Enable MSCC phy driver instead of VITESSE. Vitesse driver is much older a=
-nd
-> is on the way out that's why switch to MSCC driver which covers VSC8531
-> which is used on one Versal board.
+On Tue, Sep 30, 2025 at 02:49:38PM +0800, Peng Fan wrote:
+> Hi Tom,
 >=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> On Mon, Sep 29, 2025 at 04:43:36PM -0600, Tom Rini wrote:
+> >Hey all,
+> >
+> >As part of working on "allyesconfig" support I ran into the following
+> >problem. Both drivers/net/phy/mscc.c and drivers/net/phy/vitesse.c
+> >implement support for the VSC8584 PHY. The vitesse.c driver is much
+> >older and only had VSC8584 support added for a specific Freescale
+> >Layerscape platform whereas mscc.c is modern and been updated with
+> >newer PHYs as well. And we need one driver to support this phy, not two.
+> >I am inclined to remove support from vitesse.c. However, only 4
+> >platforms use the PHY_MSCC driver and everyone else uses PHY_VITESSE.
+> >
+> >I'm cc'ing all of the board maintainers (other than PowerPC platforms)
+> >that use PHY_VITESEE today to see what their feedback is on which way to
+> >go here. I'm ignoring PowerPC because that can just stay on the
+> >PHY_VITESSE driver based on timing of changes in git log.
+>=20
+> There are many Layerscape boards that we need to support are still using
+> PHY_VITESEE. I need to check internal to ask for resources to help on
+> the migration.  BTW, to support allyesconfig, is it feasible to
+> make the two configs exclusive, saying "depends on !X".
 
-Thanks!
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+There are Kconfig workarounds available, but there's enough work to be
+done still that I'd rather see about fixing the root causes, or as a
+worst case here, remove the duplicate code from PHY_VITESSE and enable
+PHY_MSCC as well on the boards that need something from each driver
+still, if we can't switch them to the newer driver outright.
 
 --=20
 Tom
 
---T8xksdEOmjZPWc1W
+--u1ZbiQ5XQpPVKTgZ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNvrOwAKCRAr4qD1Cr/k
-ChJZAP9hzPkywcvLYQgTAt+DdwhezFJnO0Ap/IOv8nB6ybz/XwEAveDmJ5a1djWp
-BWAuB9a+TvF7g/Ev7Fr2nvVc6qrX6Q4=
-=+zO3
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNvrRAAKCRAr4qD1Cr/k
+ClfTAP93xM9xsJfvEgmWgoriQkYkQ7vBkBFHpxonACL82ojfhQD+IHbZaSpsWy2Z
+22orHgacub1iL5evMGv/ACxCBx7Sfg0=
+=WQGn
 -----END PGP SIGNATURE-----
 
---T8xksdEOmjZPWc1W--
+--u1ZbiQ5XQpPVKTgZ--
