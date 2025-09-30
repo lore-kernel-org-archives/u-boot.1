@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE64CCA468
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 11:08:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36DE1CCA468
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 12:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F074983045;
-	Tue, 30 Sep 2025 13:08:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7696D83045;
+	Tue, 30 Sep 2025 14:35:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="JqieNa1+";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="HQxf4zOd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9F32832AD; Tue, 30 Sep 2025 13:08:48 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id F3F6583071; Tue, 30 Sep 2025 14:35:27 +0200 (CEST)
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D65CF828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 13:08:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC400828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 14:35:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=yegorslists@googlemail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b3e25a4bfd5so435492666b.2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 04:08:46 -0700 (PDT)
+Received: by mail-lj1-x22f.google.com with SMTP id
+ 38308e7fff4ca-366ce79fbeeso52468341fa.0
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 05:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1759230526; x=1759835326; darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=faA/P2pAoFbSxuLsFKoVz1wR15SohTpKdSQpC8qiNiM=;
- b=JqieNa1++aLxi4GIu5yJ1sCsF5OEy+lNdjd6kSpGmcKZpfsd8Nt1P7mmMWtBdCWobO
- EuBQeC351sD3ovifQ6gf5NLz/d9rtZ9lQlxOHV8nhQ2YLCr/jn5UpDwcg9df2umVoEvy
- dIYLQaE5s1vWe1f6TZfxQapSHnzWJjA0U/4P8FRoNXFj2C07u5w3yFdKAh3emHkVhkq1
- IYdV543+ziACdnavcSNK6NZRbZ5PTjKoad9OJsF6j4H9dwBMlhPMsA9VJLkweXWjhxDq
- 3oeb6/m9fNmKTikVe4EXdHlNSlRfTOkh7/9Sc8Z6JhNQF6+FJJL52VEv5fgjwcOLHPAz
- Eb7g==
+ d=googlemail.com; s=20230601; t=1759235724; x=1759840524; darn=lists.denx.de; 
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0n43T3tIr/FIAgtt+HoXoSnQS8tZVBfzPacjlPniLAY=;
+ b=HQxf4zOdjmGI8OlGO5QqvVzDxJtojc9gb1Lao+ooXk9bQOblxfRr9BeFmIOl0sKkVQ
+ MS9n5/IEKsRDbEwv3pDyVn7ofvHhlkxsNRjPQgNiQXqe0BEFJs9tsams28XlnNXrF6to
+ RveWN+yH9GjVZuzMDX42zodylBpoUhIFj/QuMDGSIcwjcT/hq2sBEJM9kL2+b2AH9oIO
+ epy7KWwgLUPEBkYphyr9CemcAEUGQZtxfX/bO0/0Rheww6MZD8IQzUbpLdBLQm2zWWOr
+ QTfHE6ff8gu0C2h0mSn0l0hwIWvNAxbLESaVmN/CN7CE6im/ENKYb6pBUtMn6N3cWlsU
+ 5vzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759230526; x=1759835326;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=faA/P2pAoFbSxuLsFKoVz1wR15SohTpKdSQpC8qiNiM=;
- b=AVb5FhsELdWs2a6VZzz5VW+XDD2GdUi/l/TC39dx0+6Ba1J7EMjJofIVvTkD5q6Y7X
- v3c6HLSDqe4ABIJFPz/OZTf7hxvfpHrVImRAjdhfPPTH3VPjl2zM54YxRRbAtC8wbkIx
- ACl2L4hiOOlhUOsoKC6KBkk0/XN+gEHAc7EN+zjJNb6jSFvU0bjnuxnBza6Zd5fdLm16
- p6jSrTkRx71GF7G/oHzB8yRyjuMWouAucUP+kNGAHdIXAmZcng+L9N8M2JYkpWjMCZRh
- odyfqa+c4UeMC4B7c/M+CdsIesZXxq48qm9sB4uCTty97N6k7RkFKVaH18qku0AoZwuS
- wOrA==
-X-Gm-Message-State: AOJu0YwYIynTvv2V+O/zGufPA9dem5ep55F3wI1bhSNcH26Ih4KRmNl2
- MkBBTCAWqVs1Faorb1eJS3n8fATvj76QUNH1aOQTcP61WGyhZqvSI3zugjiIHg==
-X-Gm-Gg: ASbGncs7GK/TfwlyLSZNlXeDuzv6qhTdi9wIUpAFhSoDuV5B/seMuXJHatFfDP3Zeqr
- chKSvBW+DpU2dKX4h17CDOelco82YgA/IeVu0CwNoAxRKlMN6G0wqnsLnGQMRf9WYJ7pDLzrH4Y
- jDoTZKl+cxYKAH3KOE8y9lVY9MFR+5JvI/w86xo9y4YNYpzbLo1x8ryphW7uBpZKriRNRrOPw1L
- ApYeqfjsS7ksQa0uRWA+znHqwy5q5liBRoNOG9P1ryo/sBtueiKVoFRBikB5JE5J/4IkoD/BVAI
- JNn2l9T5kGTuVLikzMSwXTV28YFr3L0KABiQ0IItYKUUSNCWy/2sGo517fSl42UfTRCeosWRhqi
- XNiHqfnLb5cIfjuyNc/SM53UGY8tMrW6BHRcPsVUnDISR45chbJRGwtej/NaOQWUdiegSv+VQZE
- Ek/PvxHf4/AH17ZN3sWCxiWcf00vNPAzO1viCinZath2HQkr9w
-X-Google-Smtp-Source: AGHT+IHBPBmHECK4sesOaPJyDIADNfFm8pQ0MhsvEUDTXYn8/CJnpwfZKu4eeDjcfpCpLKAD4TfzDQ==
-X-Received: by 2002:a17:907:608c:b0:b3c:3c8e:1886 with SMTP id
- a640c23a62f3a-b3c3c8e23c5mr1141623266b.4.1759230525531; 
- Tue, 30 Sep 2025 04:08:45 -0700 (PDT)
-Received: from development2.visionsystems.local (mail.visionsystems.de.
- [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b35446f753csm1123101766b.55.2025.09.30.04.08.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Sep 2025 04:08:45 -0700 (PDT)
-From: yegorslists@googlemail.com
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Yegor Yefremov <yegorslists@googlemail.com>
-Subject: [PATCH] doc: develop: fix grammar and syntax
-Date: Tue, 30 Sep 2025 13:08:39 +0200
-Message-Id: <20250930110839.3470553-1-yegorslists@googlemail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1759235724; x=1759840524;
+ h=content-transfer-encoding:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0n43T3tIr/FIAgtt+HoXoSnQS8tZVBfzPacjlPniLAY=;
+ b=gaHxv8wyglOYQGWP3sqjyXysA64EPsIa8qX/3XIKjqy/xLJk1X8j6MDrOGapix7KVC
+ VUCNEXid2fHX5mIzG8C3dlK6xL+L8RINUUwXaw5CsWS6qOGXYEfRiQtFzXYm19pneb+a
+ 8tHfE5+fp82SXnFBW1H0Zl1m8kVnQQtzMvYG0XpG/BAH3t+e5/IR2h9mF8smUg2/WsBP
+ uk2/s/KVDqoq9ryP3PhndG57JbePCsOUw68UP7LZqjp0jtGKDdoyfL9t65bAs2Z4fYdV
+ e47kilp22qxjJ30qwF10Mkchfm20XeqpgWiq6U1MVpl02WhF0FTS4J7PrFMp/XOKvtxD
+ iBpA==
+X-Gm-Message-State: AOJu0YxBuf8miT2Vfg996pubeRrL+8cOxAKDiGpllZvba8hLlJXoq8Jr
+ xjtd9dT5u3fatsYAakXfaI+y+191VHRrDY34npyySO8duKRigWiGOCpKQqqFJ72ZHBOZRHO2RCt
+ BzfcRvhFH9zgnrHuuvwRqHHn8zyUPMEn0ChBi
+X-Gm-Gg: ASbGncsrU23IAqH2cQTtG21kZz15GuThX/v3gphcerG3AwLniIC5W/2fV99u1LxS2cn
+ +HGmmmbpY8AUigJtH1BjYZYqQKbBjrp4L8PqG41DD11INa4wSzfpcHPm4xCLkdwwt6gxv82UR0P
+ JphgPldLS1vQv3l26n05TPrWCuCBK6d+Fb0b2HvaHhN5mWbNMWExZjvznY03diTR3INJf7CbF8h
+ WeviQMxXAe5w5kWPCzFZ/ICsyYTfNbQiC/cT15rQn6VzjXdNM/K9Q==
+X-Google-Smtp-Source: AGHT+IFUcisjhCU7ajzuBalPCIz4OF6wRfF6hUoGqNPXdR84NTnrHayXQ07OovPjkk0Nf34I8Gz8WPKAqAbOf9RZi8c=
+X-Received: by 2002:a2e:a584:0:b0:36c:c5d0:715 with SMTP id
+ 38308e7fff4ca-36f7ec75688mr72537901fa.29.1759235724191; Tue, 30 Sep 2025
+ 05:35:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAGm1_ktFBBuogJjpO4mXZSv3ZvJxmgpVqgV=A8uRhc5RcALpJw@mail.gmail.com>
+In-Reply-To: <CAGm1_ktFBBuogJjpO4mXZSv3ZvJxmgpVqgV=A8uRhc5RcALpJw@mail.gmail.com>
+From: Yegor Yefremov <yegorslists@googlemail.com>
+Date: Tue, 30 Sep 2025 14:35:12 +0200
+X-Gm-Features: AS18NWDJEGy4ZyJruKBfxzLzF9UcwvSKEvECjjWSOsq2C6XpmVmGlg8bVnS2B5A
+Message-ID: <CAGm1_kvvPKfD_vwu6QAzqxS4L7xVBSfw+Xzmw5O8cN3axEYrAg@mail.gmail.com>
+Subject: Re: activity-led usage
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,73 +91,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Yegor Yefremov <yegorslists@googlemail.com>
+On Tue, Sep 30, 2025 at 12:29=E2=80=AFPM Yegor Yefremov
+<yegorslists@googlemail.com> wrote:
+>
+> Hi all,
+>
+> I added the following LED definition to the am335x-baltos.dts:
+>
+>         leds {
+>                 pinctrl-names =3D "default";
+>                 pinctrl-0 =3D <&user_leds>;
+>
+>                 compatible =3D "gpio-leds";
+>
+>                 led-power {
+>                         label =3D "led-red";
+>                         gpios =3D <&gpio3 0 GPIO_ACTIVE_LOW>;
+>                         default-state =3D "on";
+>                 };
+>         };
+>         user_leds: user-leds-pins {
+>                 pinctrl-single,pins =3D <
+>                         AM33XX_PADCONF(AM335X_PIN_MII1_COL,
+> PIN_OUTPUT_PULLDOWN, MUX_MODE7)     /* mii1_col.gpio3_0 PWR LED */
+>                 >;
+>         };
+>
+> The gpio-leds driver is working and I can toggle the led-red via the
+> led command.
+>
+> Then, I created an am335x-baltos-u-boot.dtsi file with the following cont=
+ent:
+>
+> / {
+>     config {
+>         u-boot,activity-led =3D "led-red";
+>     };
+> };
+>
+> I have also tried "led-power" instead of "led-red".
+>
+> In my final DTS files I have the following nodes:
+>
+>         leds {
+>                 pinctrl-names =3D "default";
+>                 pinctrl-0 =3D <0x56>;
+>                 compatible =3D "gpio-leds";
+>
+>                 led-power {
+>                         label =3D "led-red";
+>                         gpios =3D <0x57 0x00 0x01>;
+>                         default-state =3D "on";
+>                 };
+>         };
+>
+>         config {
+>                 u-boot,activity-led =3D "led-red";
+>         };
+>
+> U-Boot cannot find the activity-led node.
+> ofnode_options_get_by_phandle("activity-led", &led_node); returns -22,
+> because ofnode_path("/options/u-boot") fails.
+>
+> When driver debug is enabled, I also see the following messages:
+>
+> bind node config
+> Device 'config' has no compatible string
+>
+> My am335x-baltos-u-boot.dtsi code is similar to what I could find in
+> arch/arm/dts for the boot-led usage.
+>
+> Where should I debug further?
 
-Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
----
- doc/develop/devicetree/control.rst | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
-
-diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-index 8811e1d5c23..c25b98683f8 100644
---- a/doc/develop/devicetree/control.rst
-+++ b/doc/develop/devicetree/control.rst
-@@ -79,7 +79,7 @@ regularly synced with the Linux kernel and hence no need for manual devicetree
- sync. You may find that the `dts/upstream/` already has a suitable devicetree
- file for your board. Look in `dts/upstream/src/<arch>/<vendor>`.
- 
--If not you might find other boards with suitable files that you can
-+If not, you might find other boards with suitable files that you can
- modify to your needs. Look in the board directories for files with a
- .dts extension.
- 
-@@ -98,7 +98,7 @@ Linux kernel release. To sync the `dts/upstream/` subtree, run::
- 
-     ./tools/update-subtree.sh pull dts <devicetree-rebasing-release-tag>
- 
--If required it is also possible to cherry-pick fixes from the
-+If required, it is also possible to cherry-pick fixes from the
- devicetree-rebasing repository prior to next sync, usage::
- 
-     ./tools/update-subtree.sh pick dts <devicetree-rebasing-commit-id>
-@@ -192,7 +192,7 @@ With `dts/upstream` Git subtree, it is ensured that devicetree files in U-Boot
- are an exact copy of those in Linux kernel available under
- `dts/upstream/src/<arch>/<vendor>`.
- 
--U-Boot is of course a very different project from Linux, e.g. it operates under
-+U-Boot is, of course, a very different project from Linux, e.g. it operates under
- much more restrictive memory and code-size constraints. Where Linux may use a
- full clock driver with Common Clock Format (CCF) to find the input clock to the
- UART, U-Boot typically wants to output a banner as early as possible before too
-@@ -212,7 +212,7 @@ order::
-    <CONFIG_SYS_VENDOR>-u-boot.dtsi
-    u-boot.dtsi
- 
--Only one of these is selected but of course you can #include another one within
-+Only one of these is selected, but, of course, you can #include another one within
- that file, to create a hierarchy of shared files.
- 
- 
-@@ -309,8 +309,8 @@ Limitations
- Devicetrees can help reduce the complexity of supporting variants of boards
- which use the same SOC / CPU.
- 
--However U-Boot is designed to build for a single architecture type and CPU
--type. So for example it is not possible to build a single ARM binary
-+However, U-Boot is designed to build for a single architecture type and CPU
-+type. So, for example, it is not possible to build a single ARM binary
- which runs on your AT91 and OMAP boards, relying on an fdt to configure
- the various features. This is because you must select one of
- the CPU families within arch/arm/cpu/arm926ejs (omap or at91) at build
-@@ -328,7 +328,7 @@ files are pulled in, and the fdt controls *how* those files work.
- History
- -------
- 
--U-Boot configuration was previous done using CONFIG options in the board
-+U-Boot configuration was previously done using CONFIG options in the board
- config file. This eventually got out of hand with nearly 10,000 options.
- 
- U-Boot adopted devicetrees around the same time as Linux and early boards
--- 
-2.34.1
-
+Should activity-led be also mentioned in doc/device-tree-bindings/config.tx=
+t?
