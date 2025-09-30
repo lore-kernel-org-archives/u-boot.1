@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36DE1CCA468
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 12:35:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5606CCA468
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 12:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7696D83045;
-	Tue, 30 Sep 2025 14:35:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B495832AD;
+	Tue, 30 Sep 2025 14:41:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="HQxf4zOd";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JQnc4zZP";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="nfgDQkM4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3F6583071; Tue, 30 Sep 2025 14:35:27 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4AA99833E9; Tue, 30 Sep 2025 14:41:26 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC400828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 14:35:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=googlemail.com
+ by phobos.denx.de (Postfix) with ESMTPS id BE87D83045
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 14:41:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yegorslists@googlemail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-366ce79fbeeso52468341fa.0
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 05:35:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1759235724; x=1759840524; darn=lists.denx.de; 
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0n43T3tIr/FIAgtt+HoXoSnQS8tZVBfzPacjlPniLAY=;
- b=HQxf4zOdjmGI8OlGO5QqvVzDxJtojc9gb1Lao+ooXk9bQOblxfRr9BeFmIOl0sKkVQ
- MS9n5/IEKsRDbEwv3pDyVn7ofvHhlkxsNRjPQgNiQXqe0BEFJs9tsams28XlnNXrF6to
- RveWN+yH9GjVZuzMDX42zodylBpoUhIFj/QuMDGSIcwjcT/hq2sBEJM9kL2+b2AH9oIO
- epy7KWwgLUPEBkYphyr9CemcAEUGQZtxfX/bO0/0Rheww6MZD8IQzUbpLdBLQm2zWWOr
- QTfHE6ff8gu0C2h0mSn0l0hwIWvNAxbLESaVmN/CN7CE6im/ENKYb6pBUtMn6N3cWlsU
- 5vzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759235724; x=1759840524;
- h=content-transfer-encoding:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0n43T3tIr/FIAgtt+HoXoSnQS8tZVBfzPacjlPniLAY=;
- b=gaHxv8wyglOYQGWP3sqjyXysA64EPsIa8qX/3XIKjqy/xLJk1X8j6MDrOGapix7KVC
- VUCNEXid2fHX5mIzG8C3dlK6xL+L8RINUUwXaw5CsWS6qOGXYEfRiQtFzXYm19pneb+a
- 8tHfE5+fp82SXnFBW1H0Zl1m8kVnQQtzMvYG0XpG/BAH3t+e5/IR2h9mF8smUg2/WsBP
- uk2/s/KVDqoq9ryP3PhndG57JbePCsOUw68UP7LZqjp0jtGKDdoyfL9t65bAs2Z4fYdV
- e47kilp22qxjJ30qwF10Mkchfm20XeqpgWiq6U1MVpl02WhF0FTS4J7PrFMp/XOKvtxD
- iBpA==
-X-Gm-Message-State: AOJu0YxBuf8miT2Vfg996pubeRrL+8cOxAKDiGpllZvba8hLlJXoq8Jr
- xjtd9dT5u3fatsYAakXfaI+y+191VHRrDY34npyySO8duKRigWiGOCpKQqqFJ72ZHBOZRHO2RCt
- BzfcRvhFH9zgnrHuuvwRqHHn8zyUPMEn0ChBi
-X-Gm-Gg: ASbGncsrU23IAqH2cQTtG21kZz15GuThX/v3gphcerG3AwLniIC5W/2fV99u1LxS2cn
- +HGmmmbpY8AUigJtH1BjYZYqQKbBjrp4L8PqG41DD11INa4wSzfpcHPm4xCLkdwwt6gxv82UR0P
- JphgPldLS1vQv3l26n05TPrWCuCBK6d+Fb0b2HvaHhN5mWbNMWExZjvznY03diTR3INJf7CbF8h
- WeviQMxXAe5w5kWPCzFZ/ICsyYTfNbQiC/cT15rQn6VzjXdNM/K9Q==
-X-Google-Smtp-Source: AGHT+IFUcisjhCU7ajzuBalPCIz4OF6wRfF6hUoGqNPXdR84NTnrHayXQ07OovPjkk0Nf34I8Gz8WPKAqAbOf9RZi8c=
-X-Received: by 2002:a2e:a584:0:b0:36c:c5d0:715 with SMTP id
- 38308e7fff4ca-36f7ec75688mr72537901fa.29.1759235724191; Tue, 30 Sep 2025
- 05:35:24 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cbd372RbFz9tYd;
+ Tue, 30 Sep 2025 14:41:23 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1759236083;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LI//Vt2L+FiaAJiclKT0geGQflwiwnnudR7r8DPavqY=;
+ b=JQnc4zZPcnbLRTzEkv+ghESyRnLtSJgoXI57o4B59C6Myjc7l+cTiCdkEEOcBSYSCGCX6I
+ Nqc153nQIpHp+5Q9yAl5m1VBMqynkz0WyFIupetZ9pQOhi4uGBSW38tl/i0jL14L2BSYLY
+ 4SWyM2iH4fFcC7qBwR9fjcMf17mYkponduEXfd0XeXj9yycEwNX8pA/XeHoaflvN5zg5pY
+ 0Dpr9XUMswx7zqzv6qApI5gWxC8lA079uFpoe6qUaZ6Thr2XUTQE57vPybwMwGXVJQO8Ph
+ D+8osZtKoTEMOhsZoKJJ/q1KTnmVHppcw5dhbDZMDhHUbAmhva6rOJDtcXQgJw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=nfgDQkM4;
+ spf=pass (outgoing_mbo_mout: domain of stefan.roese@mailbox.org designates
+ 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=stefan.roese@mailbox.org
+Message-ID: <efe2806c-820d-4fc3-aa54-7650aa6a3180@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1759236081;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=LI//Vt2L+FiaAJiclKT0geGQflwiwnnudR7r8DPavqY=;
+ b=nfgDQkM4fVamxu3zG7jkLnLfGilRWTgQyEBVOqezldwDmK71VmASBG4gIXS8jJTY5acAwV
+ PmYwT3tGcMxgk4SDkYNumwJLnBPTDs8v2IZXaldp2C22Und7YJQoBKv8okQekF0wkbHqrl
+ PWzRq+hfqdTBX5EAvyF+oTmE+r/vXIOlVQ9gDRnNck2qCmMIX+9a2JquloPoZS16O00gU3
+ Lj5Jxihq+2yr6CLzuk+2uDnHnMCgmTvDB5b1K/94p4lV2yTE0x7Q9Iz9K5c/k2fLbiDAqA
+ OboqX2W0lH9byaAfc4Ak0Fc63Q1g+eBspxGJaQ0RrRlRnRPR5ykfS16CticTEA==
+Date: Tue, 30 Sep 2025 14:41:19 +0200
 MIME-Version: 1.0
-References: <CAGm1_ktFBBuogJjpO4mXZSv3ZvJxmgpVqgV=A8uRhc5RcALpJw@mail.gmail.com>
-In-Reply-To: <CAGm1_ktFBBuogJjpO4mXZSv3ZvJxmgpVqgV=A8uRhc5RcALpJw@mail.gmail.com>
-From: Yegor Yefremov <yegorslists@googlemail.com>
-Date: Tue, 30 Sep 2025 14:35:12 +0200
-X-Gm-Features: AS18NWDJEGy4ZyJruKBfxzLzF9UcwvSKEvECjjWSOsq2C6XpmVmGlg8bVnS2B5A
-Message-ID: <CAGm1_kvvPKfD_vwu6QAzqxS4L7xVBSfw+Xzmw5O8cN3axEYrAg@mail.gmail.com>
-Subject: Re: activity-led usage
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] pci: mvebu: Unable to assign mbus windows for 2nd pcie
+ controller
+To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Stefan Roese <stefan.roese@mailbox.org>
+References: <20250929215006.6654-1-mibodhi@gmail.com>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <20250929215006.6654-1-mibodhi@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: sk55yzaq31bpywq9idr6rwh38pk3nb3t
+X-MBO-RS-ID: 6f468fd958a6bdfa776
+X-Rspamd-Queue-Id: 4cbd372RbFz9tYd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,77 +94,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 30, 2025 at 12:29=E2=80=AFPM Yegor Yefremov
-<yegorslists@googlemail.com> wrote:
->
-> Hi all,
->
-> I added the following LED definition to the am335x-baltos.dts:
->
->         leds {
->                 pinctrl-names =3D "default";
->                 pinctrl-0 =3D <&user_leds>;
->
->                 compatible =3D "gpio-leds";
->
->                 led-power {
->                         label =3D "led-red";
->                         gpios =3D <&gpio3 0 GPIO_ACTIVE_LOW>;
->                         default-state =3D "on";
->                 };
->         };
->         user_leds: user-leds-pins {
->                 pinctrl-single,pins =3D <
->                         AM33XX_PADCONF(AM335X_PIN_MII1_COL,
-> PIN_OUTPUT_PULLDOWN, MUX_MODE7)     /* mii1_col.gpio3_0 PWR LED */
->                 >;
->         };
->
-> The gpio-leds driver is working and I can toggle the led-red via the
-> led command.
->
-> Then, I created an am335x-baltos-u-boot.dtsi file with the following cont=
-ent:
->
-> / {
->     config {
->         u-boot,activity-led =3D "led-red";
->     };
-> };
->
-> I have also tried "led-power" instead of "led-red".
->
-> In my final DTS files I have the following nodes:
->
->         leds {
->                 pinctrl-names =3D "default";
->                 pinctrl-0 =3D <0x56>;
->                 compatible =3D "gpio-leds";
->
->                 led-power {
->                         label =3D "led-red";
->                         gpios =3D <0x57 0x00 0x01>;
->                         default-state =3D "on";
->                 };
->         };
->
->         config {
->                 u-boot,activity-led =3D "led-red";
->         };
->
-> U-Boot cannot find the activity-led node.
-> ofnode_options_get_by_phandle("activity-led", &led_node); returns -22,
-> because ofnode_path("/options/u-boot") fails.
->
-> When driver debug is enabled, I also see the following messages:
->
-> bind node config
-> Device 'config' has no compatible string
->
-> My am335x-baltos-u-boot.dtsi code is similar to what I could find in
-> arch/arm/dts for the boot-led usage.
->
-> Where should I debug further?
+On 9/29/25 23:49, Tony Dinh wrote:
+> Correct the memory and IO mbus windows size increments in mvebu_pcie_bind.
+> 
+> Currently, pcie1 controller resource_size(&mem) and resource_size(&io)
+> checks result in a failure. This is because mem.end and io.end must be
+> incremented at the end of pcie0 windows assignment.
+> 
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> ---
+> 
+>   drivers/pci/pci_mvebu.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
+> index 77815513b76..3985bd59607 100644
+> --- a/drivers/pci/pci_mvebu.c
+> +++ b/drivers/pci/pci_mvebu.c
+> @@ -763,6 +763,7 @@ static int mvebu_pcie_bind(struct udevice *parent)
+>   			pcie->mem.start = mem.start;
+>   			pcie->mem.end = mem.start + SZ_128M - 1;
+>   			mem.start += SZ_128M;
+> +			mem.end = mem.start + SZ_128M - 1;
 
-Should activity-led be also mentioned in doc/device-tree-bindings/config.tx=
-t?
+Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+
+Thanks,
+Stefan
+
+>   		} else {
+>   			printf("%s: unable to assign mbus window for mem\n", pcie->name);
+>   			pcie->mem.start = 0;
+> @@ -773,6 +774,7 @@ static int mvebu_pcie_bind(struct udevice *parent)
+>   			pcie->io.start = io.start;
+>   			pcie->io.end = io.start + SZ_64K - 1;
+>   			io.start += SZ_64K;
+> +			io.end = io.start + SZ_64K - 1;
+>   		} else {
+>   			printf("%s: unable to assign mbus window for io\n", pcie->name);
+>   			pcie->io.start = 0;
+
