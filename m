@@ -4,123 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9822CCCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 14:09:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54D88CCA468
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 14:13:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0EFB81D6A;
-	Tue, 30 Sep 2025 16:09:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B1F9181D6A;
+	Tue, 30 Sep 2025 16:13:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nwTwyx34";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fl0YG/Kj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6AD883071; Tue, 30 Sep 2025 16:09:46 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id AEB13802C1; Tue, 30 Sep 2025 16:13:37 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C937A802C1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 16:09:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20312802C1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 16:13:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-8593bcdd909so626022185a.3
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 07:09:43 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b3be330b1f5so626270266b.1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 07:13:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759241382; x=1759846182; darn=lists.denx.de;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1759241614; x=1759846414; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GhLskseidjt0JGKTWba24DbbjIgpMpOpjZsKSwYVOCY=;
- b=nwTwyx34mfpw/3nmKPjLWSvy1aTetUNBFgoO2STXjsVdj0vT6S7OBYidPHbBAaWnbJ
- YNMIgDmHzY0F3HHKxUEiGXslpwcsPsOr6602omJ3QRyf2XWRBwRQs3ijcholu58TlK8B
- fo4LDV9gF9S8pgIX+V5vqIu0jXaV9/87LlS5QMZKNzFTJa8CZeAkXJE+8wnfu2Uq3kSa
- P2q3FUVjh460v7UzCxiEkD9rykukrmePXnTbFzs15goHmYfIAkTDOWr4ArxpdOdIV7S4
- IlsPtuw4UV1saq1term8mO+aI3l8L5MeocFjzCckogX2WtAUDTkepyHRG0L6D/OqiO2t
- GJhg==
+ bh=rfMvj05WOYY89FW3lNCXGBqo/QX1zHQD82XEITweOf4=;
+ b=fl0YG/KjewGlRBla0ObAXkk5KdGqc+LmFVJUw4H+DN702gpikmFyxT4KrGHFlOEs9U
+ YLf8uUBvF0IVbPsI0zz5GCEerLeUYJD07b0qt3c4x3hOgjBJSxTjY+A1UJQidPt3nX9i
+ IrADmVEDPAKDgSr0RVmzKS4ZXiFIp2LX53u7c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759241382; x=1759846182;
- h=content-transfer-encoding:subject:references:in-reply-to:message-id
- :cc:to:from:date:mime-version:feedback-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=GhLskseidjt0JGKTWba24DbbjIgpMpOpjZsKSwYVOCY=;
- b=OGv5PlNsIv0fhfqQwLeJLvOIBvnYdXkUuVJwYcADxZVOeBu9dviCyU+uML/1zccr9Q
- JpiAvO6fPgVlefS8gpshzQM+8Sh5pNQl8zB1ZaPijPCdQg9YIMhXp2T5jHJsONpqIfDS
- b/B+vy0xikGhB8x8P2XF2Ky8M4OAC87BbeZ5MIKNmouEMfdEWX0VGtoh5j8x+2Cj4WRK
- JZUcf6+vvkIDixheItRG4kt+deO43M3sV/AuwV0lv4/ifApT7n8iN9Ep3Ao8BlzAxWBO
- BGLT+v14j7gntuYwQNqPD4XYCJe0UAj701okNDJaP0Crqs13+UAOGtjZ2cRX1OwOpF1s
- u6cw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWjY/cGt27fGIYjpiJXcFrj3q+5v7CquurQayYNNjVtV4RHyiWXivXBNxO8mIEU5SXkI2WsWXY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz72uxt9gN0Kvq2V/sFshRjbcLUXQH028jYRxd1eMTkhHAAzuiM
- ZogsChjgRUhqO9zLVxjz7GqQFoaIE4aIfyjKpxlPym8skSLQf9GmMMSzLajGP7ZXcStWtfiU6J8
- 0cRnX
-X-Gm-Gg: ASbGncsINfYcOzcd5GDmDUrVSJPv+OolixQtnMRVlaRyPoCGkV4UgW9zx+1lpnqwD3e
- pW59wudRI8o2KaealixTzq8E5JrPBzkk4ZaVXQU2Qg7Bmq+EzRxFUfIHgqouDIQUDPNoqkxx0gt
- LB0g8Q7yjwKIqHzBR98f5pbZBN57doOfBHO7y0+3SROJEwk8TByM++QgOUaKnqyfnp08f5RmVaV
- FnV9q4PyoOs4hhB/xMPL+eAtmPxL3Y303i5SVnkMSTXiNr2xlQ+jFaNvvsZN65p3KUz9avmxzyi
- PLYfqDnENqWSdEMcrV2+O1koK09kswOtYiPKrKqKoYXFZv/bR0YXc4Fui0eblPYZibjoL5UDKQo
- ZFW7aHY511XS0E6T19xUMp9QswSkMGLos5yN53uDodNoQOikYAsW7mqbDNwUPgOtD0gSVgY8/Qf
- cStYIpM3Wcxids99N9uSc7e2Zwi03GJGO2x9lVlA==
-X-Google-Smtp-Source: AGHT+IE2s39AyszoW2KA+ERYszRc7U3vazQW91vieufhPiDFS/ML9JsLYbu49GOhbbJiGSURLKl+Mg==
-X-Received: by 2002:a05:620a:2a03:b0:862:bd48:9227 with SMTP id
- af79cd13be357-862bd4892c7mr1899188285a.75.1759241382269; 
- Tue, 30 Sep 2025 07:09:42 -0700 (PDT)
-Received: from fauth-a1-smtp.messagingengine.com
- (fauth-a1-smtp.messagingengine.com. [103.168.172.200])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-85c28a8a7b5sm1058932585a.26.2025.09.30.07.09.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Sep 2025 07:09:41 -0700 (PDT)
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfauth.phl.internal (Postfix) with ESMTP id 57F53F40068;
- Tue, 30 Sep 2025 10:09:41 -0400 (EDT)
-Received: from phl-imap-07 ([10.202.2.97])
- by phl-compute-05.internal (MEProxy); Tue, 30 Sep 2025 10:09:41 -0400
-X-ME-Sender: <xms:peTbaDVLqBTgG-_ZVgAyDtc2IUfXfKp5nD-WUWqgQpsyJ4c0ybcn2Q>
- <xme:peTbaGZ3pCW9ZEb-KS-yUqt-7b7wFcvrDWYDYzzW3IjBASJ7dRlJWVIEHlMZIAjzz
- 9n24nzxR1cnkGEPumZ2JCQTOufRBGVeqtsbBu3gjkpFoPKEbPj8qKQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeeffedrtdeggdekuddtjecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpuffrtefokffrpgfnqfghnecuuegr
- ihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjug
- hrpefoggffhffvvefkjghfufgtgfesthhqredtredtjeenucfhrhhomhepfdflrghvihgv
- rhcuvfhirgdfuceojhgrvhhivghrrdhtihgrsehlihhnrghrohdrohhrgheqnecuggftrf
- grthhtvghrnhepieehudekiedvueeuvefgieegveevgeeltedtkefghefhheetfeevffeg
- tdeuvdehnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghdpuhdqsghoohhtrdhorhhgpd
- hphihthhhonhdrohhrghdpghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgep
- tdenucfrrghrrghmpehmrghilhhfrhhomhepfhgrshhtmhgrihhlodhmvghsmhhtphgruh
- hthhhpvghrshhonhgrlhhithihqdduhedvkeekleehkeefqdefudefieegvdeliedqjhgr
- vhhivghrrdhtihgrpeeplhhinhgrrhhordhorhhgsehjvghtmhdrmhgvpdhnsggprhgtph
- htthhopeegpdhmohguvgepshhmthhpohhuthdprhgtphhtthhopehmkhhorhhpvghrshhh
- ohgvkheskhgvrhhnvghlrdhorhhgpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkh
- hordgtohhmpdhrtghpthhtohepnhgvihhlrdgrrhhmshhtrhhonhhgsehlihhnrghrohdr
- ohhrghdprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvg
-X-ME-Proxy: <xmx:peTbaA_e-LPyj3V6In1ZBzAeLeriMl5kKG-IdHybbb9fjTqQJKAZmQ>
- <xmx:peTbaGgUbMlNwWe2WHnMyEvq07cUcBKe8KlK28AFa2IuKdWPVeiTLQ>
- <xmx:peTbaAdWe4pLCqXJd3tHYJCUWjspgGiNjqUfBPi8_rn4VUNfMf1GfA>
- <xmx:peTbaNo42HSDopoyrZ8pxUu3yjrFIeJgEzsXP6cAaaxmIvxqiuqj-w>
- <xmx:peTbaFAkBwDu-BEstMkslYNkOJ6ZY3j4IIDt-Aj-hPGSEcj1lfyi2pjP>
-Feedback-ID: idd3648b2:Fastmail
-Received: by mailuser.phl.internal (Postfix, from userid 501)
- id 1D8F51EA0068; Tue, 30 Sep 2025 10:09:41 -0400 (EDT)
-X-Mailer: MessagingEngine.com Webmail Interface
+ d=1e100.net; s=20230601; t=1759241614; x=1759846414;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rfMvj05WOYY89FW3lNCXGBqo/QX1zHQD82XEITweOf4=;
+ b=TxlyGWH5rrL+1Ru22t91AzyLMlj/SqL+6LFPlm609x7k16rS2LaxXvy6lmZdbArlt5
+ MXZQ1E714RdCCIXKZn+rXtCRmvBbvkRqbUDkECvDlAQvQwERUnprmJDuAQwzexGzGeRi
+ on0H3rWY018MX3SYP0AotcrwCKleyagfc5VkgooyJZPbl5Di5RefwSpoIK5ZqzLfj+/3
+ gB+mdUZmYlpSEi1/IrUcx3OtFSb7+UL4aAIbSCUV0qnKUgaboDtZCAvGc+voTqlRzoNM
+ Bbtod/6bVPs3hy+JQ0dW7Ti94nLLXQcVLZHveShuFrHaGHlqViCKFhOW0qDrziZcWQ02
+ AUKA==
+X-Gm-Message-State: AOJu0Yw95hE7FmS84o7pie3V0y77n2Y1crFh2zyDf87rjKl/QPxWdl9P
+ 3XDWraRlKQWw7dL7vwojVkZtKmCfsLHWlAcxkzUYvFccQTdKGJmWLlXWvGnDmbhCboilPL1vG0i
+ 22muNaLunGy/MuSqgID+i5lHcl057e0R60tmOuLNJ
+X-Gm-Gg: ASbGncsvVecvhfJA5XZYK660N65Z34HTil3UmRxSSp9Mp15zSZhHu0rWyRFuN9ZomMH
+ EBGpuYrC+Cbh+jwLMCJ1dn1p/KqqSurLS3aQVRT1jertoyRyBsKF0KggcRXmo2Z6/aX6+oFa7v3
+ nWtzGe3k1mXzDdwnVn2yoMm7EaUX/z5QVxfLrw24oy4+zqCtNg8N0JLrRWC6AHedPE1hrdlCw8m
+ bEd1fJUOSujEIVIc8811stdsLBSOw==
+X-Google-Smtp-Source: AGHT+IEeeTicivLNDnKyja/bIIxyBAAOQzqlZttcjfhfMqydL6OtAY1ekm556vhifxpXHNTTgHBPWYznGJ65mDXzM5Q=
+X-Received: by 2002:a17:907:edc7:b0:b3d:5088:213d with SMTP id
+ a640c23a62f3a-b3d50882582mr913660166b.42.1759241614532; Tue, 30 Sep 2025
+ 07:13:34 -0700 (PDT)
 MIME-Version: 1.0
-X-ThreadId: AMtrVltxD7sc
-Date: Tue, 30 Sep 2025 08:09:05 -0600
-From: "Javier Tia" <javier.tia@linaro.org>
-To: "Mattijs Korpershoek" <mkorpershoek@kernel.org>, u-boot@lists.denx.de
-Cc: "Tom Rini" <trini@konsulko.com>,
- "Neil Armstrong" <neil.armstrong@linaro.org>
-Message-Id: <3f5986c7-918d-4c22-ab65-7d3017cdf8cb@app.fastmail.com>
-In-Reply-To: <87cy78hyhz.fsf@kernel.org>
-References: <20250930-b4-docs-v3-1-1fbf094347a8@linaro.org>
- <87cy78hyhz.fsf@kernel.org>
-Subject: Re: [PATCH v3] doc: Update coding style to recommend b4 for patch
- submission
-Content-Type: text/plain; charset=utf-8
+References: <CAGm1_ktFBBuogJjpO4mXZSv3ZvJxmgpVqgV=A8uRhc5RcALpJw@mail.gmail.com>
+ <CAGm1_kvvPKfD_vwu6QAzqxS4L7xVBSfw+Xzmw5O8cN3axEYrAg@mail.gmail.com>
+In-Reply-To: <CAGm1_kvvPKfD_vwu6QAzqxS4L7xVBSfw+Xzmw5O8cN3axEYrAg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 30 Sep 2025 08:13:23 -0600
+X-Gm-Features: AS18NWA1ylIPCWk8niBeB2FypRm5OhvPlmn7sSUNmDlfT3Ucu_kxMgyAIqJ6n-g
+Message-ID: <CAFLszTg59pV0o34LVjuo7vcJSsFYzCgtu8MouHPy3F-DwW=G4Q@mail.gmail.com>
+Subject: Re: activity-led usage
+To: Yegor Yefremov <yegorslists@googlemail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -138,173 +89,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattijis,
+Hi Yegor,
 
-On Tue, Sep 30, 2025, at 7:16 AM, Mattijs Korpershoek wrote:
-> Hi Javier,
+On Tue, 30 Sept 2025 at 06:35, Yegor Yefremov
+<yegorslists@googlemail.com> wrote:
 >
-> On Tue, Sep 30, 2025 at 06:53, Javier Tia <javier.tia@linaro.org> wrot=
-e:
->
->> Replace references to patman with b4 as the recommended tool for
->> preparing and sending patches. b4 is widely adopted in the Linux kern=
-el
->> community and U-Boot ships with configuration to simplify its use with
->> the project mailing list.
->>
->> The updated guidelines describe how to prepare series with b4, handle
->> cover letters and recipient lists, run style checks, and send patches
->> safely. Instructions also highlight how to collect and apply review t=
-ags
->> before resending.
->>
->> This change documents the preferred workflow for contributors and
->> ensures consistency with common practices across related upstream
->> communities.
->>
->> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
->> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> Signed-off-by: Javier Tia <javier.tia@linaro.org>
->> ---
->> This small series updates U-Boot's contributor guidelines to sync with
->> current best practices around Linux kernel patch submission. It should
->> make contributing smoother for new developers.
->>
->> The first patch updates doc/develop/codingstyle.rst to recommend the =
-b4
->> tool instead of patman as the standard workflow for preparing and
->> sending patches. The revised documentation explains how to create and
->> manage series, run style checks, handle cover letters, discover maili=
-ng
->> list recipients, and collect review tags. This reflects widespread
->> adoption of b4 in the Linux kernel community and ensures U-Boot
->> contributors follow consistent, upstream-friendly practices.
->> ---
->> Changes in v3:
->>
->> * Update trailers
->> * Link to v2: https://lore.kernel.org/r/20250929-b4-docs-v2-1-478285f=
-08639@linaro.org
->
-> No need to re-send a new version *only* for updating the trailers.
-> The maintainer (custodian) who will pick up this patch will do that for
-> you. See:
->
-> https://docs.u-boot.org/en/latest/develop/process.html#work-flow-of-a-=
-custodian
+> On Tue, Sep 30, 2025 at 12:29=E2=80=AFPM Yegor Yefremov
+> <yegorslists@googlemail.com> wrote:
+> >
+> > Hi all,
+> >
+> > I added the following LED definition to the am335x-baltos.dts:
+> >
+> >         leds {
+> >                 pinctrl-names =3D "default";
+> >                 pinctrl-0 =3D <&user_leds>;
+> >
+> >                 compatible =3D "gpio-leds";
+> >
+> >                 led-power {
+> >                         label =3D "led-red";
+> >                         gpios =3D <&gpio3 0 GPIO_ACTIVE_LOW>;
+> >                         default-state =3D "on";
+> >                 };
+> >         };
+> >         user_leds: user-leds-pins {
+> >                 pinctrl-single,pins =3D <
+> >                         AM33XX_PADCONF(AM335X_PIN_MII1_COL,
+> > PIN_OUTPUT_PULLDOWN, MUX_MODE7)     /* mii1_col.gpio3_0 PWR LED */
+> >                 >;
+> >         };
+> >
+> > The gpio-leds driver is working and I can toggle the led-red via the
+> > led command.
+> >
+> > Then, I created an am335x-baltos-u-boot.dtsi file with the following co=
+ntent:
+> >
+> > / {
+> >     config {
+> >         u-boot,activity-led =3D "led-red";
+> >     };
+> > };
+> >
+> > I have also tried "led-power" instead of "led-red".
+> >
+> > In my final DTS files I have the following nodes:
+> >
+> >         leds {
+> >                 pinctrl-names =3D "default";
+> >                 pinctrl-0 =3D <0x56>;
+> >                 compatible =3D "gpio-leds";
+> >
+> >                 led-power {
+> >                         label =3D "led-red";
+> >                         gpios =3D <0x57 0x00 0x01>;
+> >                         default-state =3D "on";
+> >                 };
+> >         };
+> >
+> >         config {
+> >                 u-boot,activity-led =3D "led-red";
+> >         };
+> >
+> > U-Boot cannot find the activity-led node.
+> > ofnode_options_get_by_phandle("activity-led", &led_node); returns -22,
+> > because ofnode_path("/options/u-boot") fails.
+> >
+> > When driver debug is enabled, I also see the following messages:
+> >
+> > bind node config
+> > Device 'config' has no compatible string
+> >
+> > My am335x-baltos-u-boot.dtsi code is similar to what I could find in
+> > arch/arm/dts for the boot-led usage.
+> >
+> > Where should I debug further?
 
-Thank you for pointing it out. I read it before, but at that time it was=
- not clear for me if updating the tags or trailers was a task for the co=
-ntributor or custodian.=20
+It is a bit confusing as there is still 'legacy' LED stuff in the
+tree. For your problem I would suggest checking that the LED device is
+configured correctly.
 
->>
->> Changes in v2:
->>
->> * Drop commit changing .b4-config
->> * Link to v1: https://lore.kernel.org/r/20250929-b4-docs-v1-0-a56c1a1=
-856c5@linaro.org
->> ---
->>  doc/develop/codingstyle.rst | 54 +++++++++++++++++++++++++++++++++++=
-+++++-----
->>  1 file changed, 48 insertions(+), 6 deletions(-)
->>
->> diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
->> index bc18b2ebb7b0fc875a299b9e2e5c64c3d6a8e2b3..8ed6babe4556423fe30ef=
-fc504615e07a841f21a 100644
->> --- a/doc/develop/codingstyle.rst
->> +++ b/doc/develop/codingstyle.rst
->> @@ -23,13 +23,55 @@ The following rules apply:
->>    <https://peps.python.org/pep-0008/>`_. Use `pylint
->>    <https://github.com/pylint-dev/pylint>`_ for checking the code.
->> =20
->> -* Use patman to send your patches (``tools/patman/patman -H`` for fu=
-ll
->> -  instructions). With a few tags in your commits this will check you=
-r patches
->> -  and take care of emailing them.
->> +* Use the `b4 <https://git.kernel.org/pub/scm/utils/b4/b4.git/>`_ to=
-ol to prepare and
->> +  send your patches. b4 has become the preferred tool to sending pat=
-ches for many
->> +  Linux kernel contributors, and U-Boot ships with a ready-to-use ``=
-.b4-config`` that
->> +  targets ``u-boot@lists.denx.de`` and integrates with ``scripts/get=
-_maintainer.pl`` for
->> +  recipient discovery.
->> =20
->> -* If you don't use patman, make sure to run ``scripts/checkpatch.pl`=
-`. For
->> -  more information, read :doc:`checkpatch`. Note that this should be=
- done
->> -  *before* posting on the mailing list!
->> +  Start a topical series with ``b4 prep`` and keep the commits organ=
-ised with
->> +  ``git rebase -i``. ``b4 prep --edit-cover`` opens an editor for th=
-e cover
->> +  letter, while ``b4 prep --auto-to-cc`` collects reviewers and main=
-tainers from
->> +  both the configuration file and ``scripts/get_maintainer.pl``.
->> +
->> +  .. code-block:: bash
->> +
->> +     b4 prep -n mmc-fixes
->> +     git rebase -i origin/master
->> +     b4 prep --edit-cover
->> +     b4 prep --auto-to-cc
->> +
->> +  Run the style checks before sending. ``b4 prep --check`` wraps the=
- existing
->> +  tooling so you see the output from ``scripts/checkpatch.pl`` along=
-side b4's
->> +  own validation. You can always invoke ``scripts/checkpatch.pl`` di=
-rectly for
->> +  additional runs.
->> +
->> +  .. code-block:: bash
->> +
->> +     b4 prep --check
->> +
->> +  When the series is ready, use ``b4 send``. Begin with ``--dry-run`=
-` to review
->> +  the generated emails and ``--reflect`` to copy yourself for record=
-s before
->> +  dispatching to ``u-boot@lists.denx.de``.
->> +
->> +  .. code-block:: bash
->> +
->> +     b4 send --dry-run
->> +     b4 send --reflect
->> +     b4 send
->> +
->> +  After reviews arrive, collect Acked-by/Tested-by tags with ``b4 tr=
-ailers -u``
->> +  and fold them into your commits before resending the updated serie=
-s.
->> +
->> +  .. code-block:: bash
->> +
->> +     b4 trailers -u
->> +     git rebase -i origin/master
->> +     b4 send
->> +
->> +* Run ``scripts/checkpatch.pl`` directly or via ``b4 prep --check`` =
-so that all
->> +  issues are resolved *before* posting on the mailing list. For more=
- information,
->> +  read :doc:`checkpatch`.
->> =20
->>  * Source files originating from different projects (for example the =
-MTD
->>    subsystem or the hush shell code from the BusyBox project) may, af=
-ter
->>
->> ---
->> base-commit: 26efc940c865a04d345ac9d39f71746fc2821da6
->> change-id: 20250929-b4-docs-60da5560f06a
->>
->> Best regards,
->> --=20
->> Javier Tia <javier.tia@linaro.org>
+For sandbox in test.dts you can see:
 
---=20
-=C2=BB Javier Tia =E2=9C=8D
+    options {
+        u-boot {
+            compatible =3D "u-boot,config";
+            boot-led =3D <&sandbox_led_green>;
+            activity-led =3D <&sandbox_led_red>;
+...
+        };
+    };
+
+Check that led_init() is being called in the LED uclass.
+
+>
+> Should activity-led be also mentioned in doc/device-tree-bindings/config.=
+txt?
+
+We should be using /options/u-boot for this[1]
+
+Regards,
+Simon
+
+[1] https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/=
+options/u-boot.yaml
