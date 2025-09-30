@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6548CAC5B9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:21:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF2C2CAC5B9
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 00:22:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4946A835C6;
-	Tue, 30 Sep 2025 02:21:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B9B9C834E1;
+	Tue, 30 Sep 2025 02:21:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="A2dwQXCi";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="bKlFxUTX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 480E0834E1; Tue, 30 Sep 2025 02:21:32 +0200 (CEST)
+ id A6644835AA; Tue, 30 Sep 2025 02:21:33 +0200 (CEST)
 Received: from OSPPR02CU001.outbound.protection.outlook.com
  (mail-norwayeastazlp170130007.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7AD88350A
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:21:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43B0983544
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:21:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HRFreKJYMxFsjSFkBtrUwVdpymy3yLSWwA3pThKD/2zMNH64vmdeIouTWC0e6EVs3EKXcX5RiK1peN1RjDO7sHAvTpoTouccyusML61tSzsgtEMoxL9EsW+PDlWDDUeMuHjPZobLtnmS83Kw8em4usBNdFNymIP2oXaHOVwweemtXZZTr0W7HDJkfJ+9N/Xg0SYUUf7gz2veYnk6r26qRCvVTv5T1k4xxiyIf+d6zvJBiMVN0BqNJgylzBlU2n9JobP41fObySKfcWCAFZan9Ew+LnDnxF0zZ1OUOaRdIkmVz67oTSLgWsH1KKjh3IOxEKXP71QHOlJCquHntT0M2Q==
+ b=xw6ETtUNB/T+5nSEYq8AZ5qIAAoUVXPvRkwEgnMlQPAhOdpE/+5ONGAF+XOdxoOxR3X2PYC+rgFjZQJiDf8CfxbyCjaqm89uBNyovp82oUNQq0NCx4c2EMnVg5cbY88FEGsMQGcgkgwe5Ti54+kKoNauGyvc/MpXU5rlvdpzju9mPUCA8xbnoyjmHFn/MQAPI0qTpXTYPHaW9HPqBKw6GhixhJJh556psabIesVETKoGKnzK2KmRaekzAcVARS+L9s+HC66ysdQkaBm8RLGJqx44EZr7a1d4uJ5y3F75lLOGb2fLHDlrbWdSU/Q4AWxZkxY1b3zEWYL7zi0tY3eDpg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=vTO59+Z5UMO5/En91MaGz9PznMuT16/Hsyhpko/Sl3s=;
- b=xjeBVVqiZRF1ywAhHKp6Hw8/oJzVpSkgJpAWXPl1SiPQfH4YkjqspNivtR0hwmTFWl0XU/gx3Vwco0XDnV5WNPrgcd2PGu2CRFgxB9Qn7FlA28H63bjnICJ08VRYqO2tXIeSw/pbfdCEl2LxFrIcveVtPlH8CT9zrbplLIrDEMNinq1IvuOdOMUz0R7laLaqRneDAdbHgZp8wW52mTUf9Mwo3uPLYCINur4QugtO76XM5mU+tlAnT3rdP+u1a6xKrV/k+UHniJGnsT6es3JU+mS8bU6z+YpOs965eoE8TQHBqtnnB+B54JXIdSRmnKud6Eq18324D8SUhijJXpGvyQ==
+ bh=6+7OLkHWHAr72HKO4DHCICKgVPTdLoBXoCXGS++luOs=;
+ b=JiGPC6lWb/58BiSTqs9wEQ2mZdDQE1GnfxmDOiPbjk3TerA4rKhxzTdyPPOQaF+NrBXlM4Ri6WLJKngJUdouAI4ZqufevsmFhc9lFtzTrFV/2LXc8M22xzgaddTvEABmxSShBLlgZ9uv0xg9qycQxeC79TIBli/41iXXdkvGUi2uFpZqSdGUKuqH1d53wRMH39gL5m1V/9/mW9+i1eIZy7iDOPl3oEHWNbfnjIhDDQGbU2A3VWUSixM0uKGbZSjg1Purq/7rVzJkhp0Fp9CUhzxe10cTgHPlzZFUPZSg9R7gZjAv6mPKLCOXq+GMTNzO6gjN9VWH0AZcOD2nKdPqCw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=vTO59+Z5UMO5/En91MaGz9PznMuT16/Hsyhpko/Sl3s=;
- b=A2dwQXCi3qa6H67O5shYzxfD0f5h1SYlNvH1M89BjtgDiHkpMPu2uY0gHfmcVeo7Oxo/DpHcdOX51jtl3lUQMJwCpaM3b+9d/9mCR/C9khOEMwYJpAfKAKSDkP2OLKS932GnpJCVYxQC/OFVt9zhor+RkXUarmow26OB5YUn2XYQNi8skzQBNtOoKB0jCSSj7ODPL21JeXdPlIEAWlbU+B1GhHgu3xJPb8AbT2pirSNUhs/5Kox/6343XQtns+zjhvvnELPfsgNZMYjF/w/GUyNKTZnQLTk/cea4aek9YD8lpzibwT0/ixLS7DbISelEskEJxOGbPo7EXnhQ3B5c5g==
+ bh=6+7OLkHWHAr72HKO4DHCICKgVPTdLoBXoCXGS++luOs=;
+ b=bKlFxUTXZaM+WThrj9FU9dJlMsYYLMGKLw8XKSFLA3TUUrK6CrF7UwYs534QO5WzckckyO2SLLUUsuN20r9SpEud0zioQhEypid+ajwfluYtxZiVL4inUmuaWuMUBM2NbPznzL7lcgUUsfbZwm1KyL2flVIXAbk/QMpTWR3h/bpEGs6xSvi92apYUxL1BQ5IbNHNCqr2JqYLHgMQjrhd7CtpJ6msFUCzG+4sSsnNWAr7nqjMDL02LdCySLEHi10260C3R9HVRPu+J8AV8mBgP29rlz00BzHbkv5TRSvaf1WXCvvrhlAwl8PWN8UgptbEqauxBCouKBd3A7YFZP+gaQ==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by PAWPR08MB11512.eurprd08.prod.outlook.com (2603:10a6:102:50a::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.16; Tue, 30 Sep
- 2025 00:21:28 +0000
+ 2025 00:21:29 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9160.015; Tue, 30 Sep 2025
- 00:21:28 +0000
+ 00:21:29 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Tom Rini <trini@konsulko.com>,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -67,9 +67,10 @@ To: Tom Rini <trini@konsulko.com>,
  Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: [PATCH v7 03/24] mtd: nand: Add a NAND page I/O request type
-Date: Tue, 30 Sep 2025 03:20:48 +0300
-Message-ID: <20250930002109.3600886-4-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH v7 05/24] mtd: spinand: Extend spinand_wait() to match Linux
+ kernel implementation
+Date: Tue, 30 Sep 2025 03:20:50 +0300
+Message-ID: <20250930002109.3600886-6-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
@@ -81,80 +82,80 @@ X-ClientProxiedBy: FR4P281CA0317.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|PAWPR08MB11512:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7e09ff63-cbe0-4e6f-3dda-08ddffb74882
+X-MS-Office365-Filtering-Correlation-Id: 85809edb-f0da-4d81-93c7-08ddffb74a0e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|7416014|52116014|1800799024|376014|366016|38350700014|921020; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4FN0oiFL0US2K7sxBewP6Qvx7FfMwaIHFDPOeZW8uB3it7+YJEneyvNSA3xh?=
- =?us-ascii?Q?qPPnitjq8fr8HvKqxIjBVdKtcFRixlLs9QuHX1bLN87oUbAQVBdEAZwjeOG4?=
- =?us-ascii?Q?wjKmWqNKdJMGRRY83AAIXiuwaF40zPGKRAcz+z/LUpGHLgf/noFfmH9R829s?=
- =?us-ascii?Q?5MM5e7O5FWmI1bBiFhcNk4Io1oqmfPFQt/4zFPXu9CixMny6jzMaxrcLMDrX?=
- =?us-ascii?Q?7MGUYiaWYdvo7iTppPsufZxSp9fWpHu45BP50h52Ni6mwOvQGQReVfPQpVAy?=
- =?us-ascii?Q?DkyiinIuhZLSr80CHft9wLgbZR69URMRMU8LhnETG7cCsUWQVp3mjxNy7ARp?=
- =?us-ascii?Q?Se4PveZ9qS0VXO8s3k1gn6+GMA6gRy1koyAjDETxWGVRUBZJhzfVhSwJL65n?=
- =?us-ascii?Q?33Bd8Hm30bAJ7+ziCOQUP5tNcgNUJnXVgbX/Dapje6xDrhSzIZu94BOSLdIO?=
- =?us-ascii?Q?NSHYNgHJOE4Sr++7rQ6N60XL8SURd76WydW/BUa9BG64B6Bk0N8dhU5s31Y7?=
- =?us-ascii?Q?SEszhf6F25f4lkEevi1OyecnalmYpS5w4k+2xoj/I9pvjlxOmyREwj9tyxhr?=
- =?us-ascii?Q?uVitz0/qSWnXUbD2ZQFngz92gLfc5bRt8QLewcTOMO7XbCuPteM6FnYb55l7?=
- =?us-ascii?Q?GPYWuQi6zY8OZkS9F7QNGWic2wV/pqCD29ezu5gLh4of/nkLi0/GR+yFdn9G?=
- =?us-ascii?Q?ffdamskMTLYNegqmVDKKe/O2p5DihKZ/I9fGXzvGq712u6vVP3c0K0bvsuAh?=
- =?us-ascii?Q?TL4Wz4bh5NopD1NgsIkc2gQNxxa0j1gB181tLj07Q2I3qxyRakBPp5yRr5V3?=
- =?us-ascii?Q?w4uCpnKnSs+UuMJ5bI/mCHWtUZqq9hNaZ//Y25J54NSTaRHY42JuQG6zU9+T?=
- =?us-ascii?Q?MZvw0gf/KGbp7JqO9AgDDvPP3KWjz/2gcLK5qX8GGQYaS3yjtypcdGmDnbpU?=
- =?us-ascii?Q?A4MCMcBju0a2kkVZt9mb6D4Wrz7g9z6NZ9K5t2sGb5J1Gf5iHEDftgMWdWS6?=
- =?us-ascii?Q?VXMilrgTI1vPGW8Ge83GGefxPIthITdmt/jfO9IpD4HcnsrwPb4t8EoKDQza?=
- =?us-ascii?Q?2M/BZNoSCxgNYYIcbagzwFTeKlWcRmEBoiDrQNGV5GrvCDYQiY9VzT/75TFA?=
- =?us-ascii?Q?8yiMXW+dncFDF2p+thPaPH1aG8JBzEof5gOFYcReDLQfXSBcypgRkoKvnXdw?=
- =?us-ascii?Q?smVdlW3X/d9SHd0WuDliFo6il7NmCuQNMLzMscQDV1q052q5CcjRsGusP8QQ?=
- =?us-ascii?Q?5aVkWOT4+44m/AoWJhShLUEcoevkU2faxzJgzkJ/dZtevjLt5v2c1NfbJe8X?=
- =?us-ascii?Q?ZvKvAtxP8V7Dp7MA/MiTTaueI3vR4s6vLJXcLTAUImyq2bG31gMk3A17Nfvk?=
- =?us-ascii?Q?pVP5nlELWX8Gdz9VOhcvp3EeHlK9F9lVL2j9egp0JnGZ9djKTW/VLSBMTs6H?=
- =?us-ascii?Q?5Fa5Z1RBrhYddh5htLebbSUCl9Ir6gdB2wpVE/wn6B77CHbUo9yAd8Ftim53?=
- =?us-ascii?Q?CIhrj0oJMVVoq67wMogG2tHoaRueirKgZ6xSrHKRjnVdllXA4/dx/zCC2Q?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BkioOIEtgpSOCEkP16dGyT+LCWiBG91DZkrmqPXElk4rvkiwZmbSAKHIPnN8?=
+ =?us-ascii?Q?T4Ke3Ej1p5zGstzdnSxM2HL5Je4CavmM1KQR+PYaDnRcrlO4+JFZQcVXVvsp?=
+ =?us-ascii?Q?YCcHve8ihJbiHUk353lq9uA/pKKWG2Nz+ICj79vQKCfzU+w6r3tV08usORyg?=
+ =?us-ascii?Q?R1FChL3KaJJ1v/J38qwnuMKQO1o4ufHJXUCKXgifAT0/ITmjJpyKKgJU2G2F?=
+ =?us-ascii?Q?EP22T8pzUBGo+eXJu+z2mv5KxzmVZj2s2DH6wxTiXoPhLaBu8l+x0p69v7Vl?=
+ =?us-ascii?Q?JrPJsEGFrileT0CynyBZ9DjVh4ZtWT4JL0NDK9Mh3m/egx4JxMJFy3SpOy60?=
+ =?us-ascii?Q?7Y9Adzn7O0lrHNspH/0HMqjMsb2Q/4sMX8wWXh9+LPYqeSoHUFJhlHidu2gH?=
+ =?us-ascii?Q?yxBoRw1X1WwieG1b5XMt74p6v/CeU0/VD0nAx0/MvqrCL5jgwrKnxzMdrfYa?=
+ =?us-ascii?Q?riYHmetMUkj0YcvE152QtBYtp7Vp2bQC3NMDbQS0MaVnndCSEmb46LbLDp2A?=
+ =?us-ascii?Q?DZkSUV8hkKOQHB/TuQZY5PMXrX03wk6LuPJpvNPsvsikJn7Xy2paHYT+lt9j?=
+ =?us-ascii?Q?GLgBboW6PEDhTxDEkNxe/04f+Lns3YTyuobLXy4Adp17ccrFfQn+WYOQYT7u?=
+ =?us-ascii?Q?gCMclahrnyj4ijMYUC0mDuaaGEVO2rAZh5yTbPVY30X5sv+82VUZ15ROTuRz?=
+ =?us-ascii?Q?ZlwncC62LzKYQHHO9xbwge57slO19OSrZljHxvCUOrm4vkoJaws7IKEUqzJw?=
+ =?us-ascii?Q?GiZnoBuYAz4DpmBw3bQUrMj4taXBsIhSwONEG45e4GU1ExsSizOqxw2hXIVw?=
+ =?us-ascii?Q?Njf5J358Jk91CnZr7RC+n4Ry0XbCnhrh3jApBWMGS13Gcc2eOV4M1fQz8/Ma?=
+ =?us-ascii?Q?gpdieCOqrdyJv06FbsJcqN7AmMK27VlIngiM2iBU2e8SlKhkCz9FmO9eB3hE?=
+ =?us-ascii?Q?tK1rMxebUq85JZ2/fT47KUaYtB/vD3ht8DzwMaRdzFhZhTZshHPS1mtoxdN7?=
+ =?us-ascii?Q?YoOK/FGi722vyw7cYwpR/YwmSUDckisZv18yH4HcsoFcSyi86Rdbq8esSGau?=
+ =?us-ascii?Q?2gSR+/CLngALlvkTwJDUOolAdYrtEsTk3Z1WJFWkKbGo83kM5b043AXWPhx0?=
+ =?us-ascii?Q?bX5anW7Qy3dgEJODP2E8MS6hH9sZtS0IjYzoKOKAEgoW/6kC+N6+iYERoqy2?=
+ =?us-ascii?Q?FA+jxpBTGG5MenfCQNNf8yQKk9p9aqxFgro5I+p/JaPcYbxpvOI5MKraksKg?=
+ =?us-ascii?Q?vObiK+7GM/24c2fQf4hmPDilZN7PAZz8sDyUpwU/LziLKmALjXIZsawYcxie?=
+ =?us-ascii?Q?xr1cZPLUks7zDG7QtExi6oun4HnKuRl1J6/i4FFLosir6MLZxNfHUkHBbUB4?=
+ =?us-ascii?Q?gSuLZYXgpsOWMa8+514BzAfWbqcAYjrd3B0QzGNOhJLsWapw2d2BY2mdGXyE?=
+ =?us-ascii?Q?ZgAk/E5zpVSF+gtl6JC3jdBxNVBIMUaBGezC/n7MJZQCRsqp54lhZUIHdZPJ?=
+ =?us-ascii?Q?khULJpFx4eOAHqSt1V3DE3aPcxWYKNpa0Chxgu3Kne4qLsu9bQkpOCJsfQ?=
  =?us-ascii?Q?=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(7416014)(52116014)(1800799024)(376014)(366016)(38350700014)(921020);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8OxTmnfiAzuBVkJnPeWg8ogkH4kOrX9tRZstLS4vGYkh+qcIhaEpNb5t5FXf?=
- =?us-ascii?Q?yd2Sqmo9TV5owq05XyA7RuH/zN96EF7RVhUGya0vPMxvRl/uduulJyWJqsvd?=
- =?us-ascii?Q?PhKFLF6ykROoDxFy0sKKOSDb//42Gp9wai3E7EMoUJItxkBJPGPKI9R4lOjD?=
- =?us-ascii?Q?PBjtIu/hXaTYpAbeCWYygzZGSg9XWrfFAzI0CwhrCwkS/InmwyoruH94rYxL?=
- =?us-ascii?Q?+E7Mf1qbFFGy7TfrNlJG9uYQqQpRr+hve3dup9EIse+g68oEXzQNR+bXhtGB?=
- =?us-ascii?Q?PEIZSv0znVCglYny0lJl47EUh5LR4kgU6YEGDQiTbo3WAsdP2lF18BJmaFWl?=
- =?us-ascii?Q?c3suowmSg97vDUaTQfkJpxxfu1KCwFe5FKBFHgK5XBxD+lop4S75U0kAtzFF?=
- =?us-ascii?Q?0VY9vXaIBL841S98ZQxzHWNKTK3wkO/Buh7GDdN8jD4lhjsXEvYcOh8131wX?=
- =?us-ascii?Q?DnDmOoVqsgVDakKBMYlQ1amGM6zWg6cMA2yB/M9WhblYSV4RAuQwFpJloAf2?=
- =?us-ascii?Q?dho0hnJEPbd2zZpVLphanxW6Zy3CrIHFtRA5ucW/ktR337NV/Clv3UbkKw2d?=
- =?us-ascii?Q?rRv2YOh9Ki46dZqGXetZefQlEt3bfF08x++8IHCEWu3/f0ILqgWFQ4pk8WyY?=
- =?us-ascii?Q?RyJ4bukyAOLijSF/6zL14WenagmHErAJBPxFlGnWKq5y+IDDNv9tYbOoFIBD?=
- =?us-ascii?Q?4NcnFlzjEBdLtSDV9yppoeifaK0CrvBca3OfTcgcMiQhpmqPYzgRoAl+zZBv?=
- =?us-ascii?Q?TnxfXB5wtOZ8rewsqNa4pVCwfjc4LN9M9Wlxpc2xn+SxLo0Gi8i/uD/I64Ow?=
- =?us-ascii?Q?04mWJcFYQzgCtUSzTnnJCLYJV+bSabWD7qaNCqAbQ+Rs0tvkVjHDbFXdRdT6?=
- =?us-ascii?Q?6ciYY5JjpEKGBfh5HsaKE8JH0czistvYyvVekt+hIpfBMnHTsjDqm9d8piAi?=
- =?us-ascii?Q?HuGxIxzYu1pi/egekpemDHdRRQzUpD19mSEZYgVy8rxAaKOFG8J1nOT1psha?=
- =?us-ascii?Q?ejK31LDXTjtz9hMHnjI8rKEL/xCikJbOAGr0eHDuPDmXX6W0OG83X+g/91G4?=
- =?us-ascii?Q?iZS2xxjOgq6zI7/ASavKu46+MkFrgoXayf3F1WCIkIKjuUxAlAb5xu1IGZd1?=
- =?us-ascii?Q?77bfYVmWdVH633BkKj6AZ48RKXGTL7JcLilQqlUK5QXc/j4OB5BDKtNsXyQH?=
- =?us-ascii?Q?ttax2i3KJ9sgBP7I3eG6EVWIYlarXLDZ9cAsOjtsE0rccJGJdfUvUyV9uboW?=
- =?us-ascii?Q?YWOCPnWF8cA+Wl5LUOfkki7XuA8im2Qy/iEUDlaP09vE5mkEmJcP31ggLzc5?=
- =?us-ascii?Q?rgIsLT/wEyNhx5Q1dzGgVTJXT+WiCfffXj8MyV2Nf1GiflIDbKAg5M4LoVWp?=
- =?us-ascii?Q?GK5lbXaRah60WX3IjQhZpDAOtWmXcpwTpHCTqAnNUkcVZecrsowX2VJwU1j6?=
- =?us-ascii?Q?u76cE8PhSCbD4auhwiOkN6FPNSQ9PaZhtMTSFHgEaPdr4a+v5hha2z6wDARf?=
- =?us-ascii?Q?60QTuDI5yZDDwbO1uUIHdL+IkflEFShTPJI/3LLcsIaj8OmyPwfnw0PNkHAH?=
- =?us-ascii?Q?7oTjmMr8zFamkBEGR3x51IyhwAFolcugw7vB/f3ceMRpXqjl3nHeLR+UKaNd?=
- =?us-ascii?Q?pV7cv6Yc5A//nntObff9Uaw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CUEoaNVGf+eReyjsoehPHA3AX14d9Cn2SKaZOOBv9L86NcGCeUza0ZJHOc+U?=
+ =?us-ascii?Q?Yd1sSARUskJXV7kHzMLmIzgl2hHrp7Ofw/lhi2rImeGsqAkESioiN7GPRB8L?=
+ =?us-ascii?Q?Ynk2cONE+EJJJbkKcVrRBvbXcjKIGAXMO+nKrF1zvsG8hYTScbC4rDRceGZ5?=
+ =?us-ascii?Q?e53Ta/AV+8D/8frQgYAzlUqENCb/wL+PdqXlDrD9GbBlc+P41RjXGrfmwAx5?=
+ =?us-ascii?Q?gRRhpAOyXx+l0bjNDzWg3z0gCBFGevw3LfjYnS5pP7nVFbREqhfHHuE7RVR4?=
+ =?us-ascii?Q?mtihC82XYdxKIpYR5vKr4i3z0WvTVpOR7BMRCIB4pWXVMKF2aykQJ8/l2rDf?=
+ =?us-ascii?Q?Lih6BpHgFNvjYzF94h8nIEYcGrew6kemwRJGC1pnod70d+0ttxuMcEDOenDO?=
+ =?us-ascii?Q?Z9vSqG1nGkGR863LCViCinQfbw23+gEpIJxqqxghDE4nZKAKZSFd93vIfgI3?=
+ =?us-ascii?Q?jAWzsHdF/UEJhfnPjgggFe5ajFnNFk3kYOo3f8ciHVxrjZtKQ3kQ5dpgKDjx?=
+ =?us-ascii?Q?FqVcPIA4G8sqSG71HlfYrZERm9spBDEPJgJ4B5vPfBjSh3bUhm+TbRuexGtC?=
+ =?us-ascii?Q?z0OPngdCDpMJ5tflsfmOf2TBXdSMwxPXLeYIyQ2jrmTDsREl6bYytIS6Hx8T?=
+ =?us-ascii?Q?6kSm5LCT+EfjdSikd2BML4jhbq4LguSXBFofKSc/hEzD6cXdm3AEHZ23VkyN?=
+ =?us-ascii?Q?KgQ7lAWpYyZUC4acC7itIJArl+9EOD42RtShkr7w4sNAlbjVmPXFIB7slbDr?=
+ =?us-ascii?Q?aJZz8AdfzZ6DJCe5rvSCQSxTzUE94uMvUYgLZaswTXDg8tNuDXv/ROCmKUib?=
+ =?us-ascii?Q?+nCJbv/gmXM2dTWaUK6iDfWLNtD8wnSY08AO/Xhd+detYHnIdDuBhF/V0M6m?=
+ =?us-ascii?Q?KFinqIsAk03qdqopm2vz6Jmnbp7y2dLER+clJ7lr68qjABTxyRThwscyPI7t?=
+ =?us-ascii?Q?Rxz8T20wVjFWotxgff06ek2+TtuEcQUwg2PEr+gafKGXUujG9bwnICuIQ9GE?=
+ =?us-ascii?Q?7+Ug5j4nL3OXkMiB0cART7kH7KSj2X85aAi5QFeqoCCXUJRm4d9KhsZO/1UD?=
+ =?us-ascii?Q?mRixue9101I/BWGmzcAzgQClX8MKY2g6Khe+nbJ1QyMG4ZDCoF306Sunn1lN?=
+ =?us-ascii?Q?aQ14aQlVpYBY9YExIecHndHfEjkeol47TF9SZ5MsvTM06KaIZso8mGQt5S9M?=
+ =?us-ascii?Q?nvKUDMjRs2D05OWKfpvCVDrlM6sUvRfIeI+XK7h244apHvEpQjnfvPHV18E3?=
+ =?us-ascii?Q?dvKbw7O8GTvV4AnMMK62hjy9MF7j0wgV4t5pN+FpF/phS2L7JcCqRbSCjBiG?=
+ =?us-ascii?Q?8Fv4RMINQyWXAvNfOelZYwmvDlMv1seUlDRnxvdyB1CRliSpp4mOgEdUI6Du?=
+ =?us-ascii?Q?POovgwu7xovZpAFkoFP7i0wGlD5KG+YjHLrGD6x3Wr+R4rYmqWSu0koeD6RX?=
+ =?us-ascii?Q?e71IzAKmx5QJnnfIqciIrilQ2LyKgwtCnrrgek604hgzGo7LPV1Dsri/rXHB?=
+ =?us-ascii?Q?YCFiEjYohyO6PDHz21XUBVK2yhgWF4YbQYsImvr4WNBNpJGHt4FQbIviEvBW?=
+ =?us-ascii?Q?f50zKIU1rl/Hq+nzm3D4BFHDcaHITe6Y/FLUVs6sK2cURNwYpG66nMHbdFzO?=
+ =?us-ascii?Q?sk0Xe7ydPmOBxTQ69VNKLdM=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e09ff63-cbe0-4e6f-3dda-08ddffb74882
+X-MS-Exchange-CrossTenant-Network-Message-Id: 85809edb-f0da-4d81-93c7-08ddffb74a0e
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 00:21:21.9049 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2025 00:21:24.4561 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 8LwmZsT30zk+V6Sbz+1uCIQHTtpVDrXJpgeSPPu51nKxFSnccqJpcp1/vmRnq6enO4LbLu6q08dmDlZVr0z8XGS0O3XBQUoXbeil16lvHyw=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3RCbnAt3oknyBsuvdUw+6YkO7/DgWKr98eoHw01leJX3qoQEQGOiGv7bVujTb3dNng33yJp1zCWOQJ5it6AbelyfFT7azlahoxuSk/t4s/Q=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR08MB11512
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -172,103 +173,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Miquel Raynal <miquel.raynal@bootlin.com>
+This aligns spinand_wait() with the linux kernel. Instead of calling into
+spi_mem_poll_status() which is not implemented in U-Boot, we code the
+polling logic and make sure that schedule() is called periodically.
 
-Use an enum to differentiate the type of I/O (reading or writing a
-page). Also update the request iterator.
-
-This is a port of linux commit
-701981cab016 ("mtd: nand: Add a NAND page I/O request type")
-
-Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Reviewed-by: Boris Brezillon <boris.brezillon@collabora.com>
-Link: https://lore.kernel.org/linux-mtd/20200827085208.16276-5-miquel.raynal@bootlin.com
-Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu> # U-Boot port
+Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- drivers/mtd/nand/spi/core.c |  4 ++--
- include/linux/mtd/nand.h    | 18 ++++++++++++++++--
- 2 files changed, 18 insertions(+), 4 deletions(-)
+ drivers/mtd/nand/spi/core.c | 47 +++++++++++++++++++++++++++++++------
+ include/linux/mtd/spinand.h | 22 +++++++++++++++++
+ 2 files changed, 62 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
-index c1b8b9627f2..d8abd03e919 100644
+index 34e5ac33c63..3b612bec274 100644
 --- a/drivers/mtd/nand/spi/core.c
 +++ b/drivers/mtd/nand/spi/core.c
-@@ -523,7 +523,7 @@ static int spinand_mtd_read(struct mtd_info *mtd, loff_t from,
- 	mutex_lock(&spinand->lock);
+@@ -32,6 +32,7 @@
+ #include <linux/bug.h>
+ #include <linux/mtd/spinand.h>
+ #include <linux/printk.h>
++#include <linux/delay.h>
  #endif
  
--	nanddev_io_for_each_page(nand, from, ops, &iter) {
-+	nanddev_io_for_each_page(nand, NAND_PAGE_READ, from, ops, &iter) {
- 		schedule();
- 		ret = spinand_select_target(spinand, iter.req.pos.target);
- 		if (ret)
-@@ -575,7 +575,7 @@ static int spinand_mtd_write(struct mtd_info *mtd, loff_t to,
- 	mutex_lock(&spinand->lock);
- #endif
+ struct spinand_plat {
+@@ -362,21 +363,41 @@ static int spinand_erase_op(struct spinand_device *spinand,
+ 	return spi_mem_exec_op(spinand->slave, &op);
+ }
  
--	nanddev_io_for_each_page(nand, to, ops, &iter) {
-+	nanddev_io_for_each_page(nand, NAND_PAGE_WRITE, to, ops, &iter) {
- 		schedule();
- 		ret = spinand_select_target(spinand, iter.req.pos.target);
- 		if (ret)
-diff --git a/include/linux/mtd/nand.h b/include/linux/mtd/nand.h
-index 651f8706df5..0afdaed5715 100644
---- a/include/linux/mtd/nand.h
-+++ b/include/linux/mtd/nand.h
-@@ -80,8 +80,19 @@ struct nand_pos {
- 	unsigned int page;
- };
- 
+-static int spinand_wait(struct spinand_device *spinand, u8 *s)
 +/**
-+ * enum nand_page_io_req_type - Direction of an I/O request
-+ * @NAND_PAGE_READ: from the chip, to the controller
-+ * @NAND_PAGE_WRITE: from the controller, to the chip
++ * spinand_wait() - Poll memory device status
++ * @spinand: the spinand device
++ * @initial_delay_us: delay in us before starting to poll
++ * @poll_delay_us: time to sleep between reads in us
++ * @s: the pointer to variable to store the value of REG_STATUS
++ *
++ * This function polls a status register (REG_STATUS) and returns when
++ * the STATUS_READY bit is 0 or when the timeout has expired.
++ *
++ * Return: 0 on success, a negative error code otherwise.
 + */
-+enum nand_page_io_req_type {
-+	NAND_PAGE_READ = 0,
-+	NAND_PAGE_WRITE,
-+};
-+
- /**
-  * struct nand_page_io_req - NAND I/O request object
-+ * @type: the type of page I/O: read or write
-  * @pos: the position this I/O request is targeting
-  * @dataoffs: the offset within the page
-  * @datalen: number of data bytes to read from/write to this page
-@@ -97,6 +108,7 @@ struct nand_pos {
-  * specific commands/operations.
-  */
- struct nand_page_io_req {
-+	enum nand_page_io_req_type type;
- 	struct nand_pos pos;
- 	unsigned int dataoffs;
- 	unsigned int datalen;
-@@ -613,11 +625,13 @@ static inline void nanddev_pos_next_page(struct nand_device *nand,
-  * layer.
-  */
- static inline void nanddev_io_iter_init(struct nand_device *nand,
-+					enum nand_page_io_req_type reqtype,
- 					loff_t offs, struct mtd_oob_ops *req,
- 					struct nand_io_iter *iter)
++static int spinand_wait(struct spinand_device *spinand,
++			unsigned long initial_delay_us,
++			unsigned long poll_delay_us,
++			u8 *s)
  {
- 	struct mtd_info *mtd = nanddev_to_mtd(nand);
+ 	unsigned long start, stop;
+ 	u8 status;
+ 	int ret;
  
-+	iter->req.type = reqtype;
- 	iter->req.mode = req->mode;
- 	iter->req.dataoffs = nanddev_offs_to_pos(nand, offs, &iter->req.pos);
- 	iter->req.ooboffs = req->ooboffs;
-@@ -687,8 +701,8 @@ static inline bool nanddev_io_iter_end(struct nand_device *nand,
-  *
-  * Should be used for iterate over pages that are contained in an MTD request.
-  */
--#define nanddev_io_for_each_page(nand, start, req, iter)		\
--	for (nanddev_io_iter_init(nand, start, req, iter);		\
-+#define nanddev_io_for_each_page(nand, type, start, req, iter)		\
-+	for (nanddev_io_iter_init(nand, type, start, req, iter);	\
- 	     !nanddev_io_iter_end(nand, iter);				\
- 	     nanddev_io_iter_next_page(nand, iter))
++	udelay(initial_delay_us);
+ 	start = get_timer(0);
+-	stop = 400;
++	stop = SPINAND_WAITRDY_TIMEOUT_MS;
+ 	do {
++		schedule();
++
+ 		ret = spinand_read_status(spinand, &status);
+ 		if (ret)
+ 			return ret;
  
+ 		if (!(status & STATUS_BUSY))
+ 			goto out;
++
++		udelay(poll_delay_us);
+ 	} while (get_timer(start) < stop);
+ 
+ 	/*
+@@ -418,7 +439,10 @@ static int spinand_reset_op(struct spinand_device *spinand)
+ 	if (ret)
+ 		return ret;
+ 
+-	return spinand_wait(spinand, NULL);
++	return spinand_wait(spinand,
++			    SPINAND_RESET_INITIAL_DELAY_US,
++			    SPINAND_RESET_POLL_DELAY_US,
++			    NULL);
+ }
+ 
+ static int spinand_lock_block(struct spinand_device *spinand, u8 lock)
+@@ -466,7 +490,10 @@ static int spinand_read_page(struct spinand_device *spinand,
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = spinand_wait(spinand, &status);
++	ret = spinand_wait(spinand,
++			   SPINAND_READ_INITIAL_DELAY_US,
++			   SPINAND_READ_POLL_DELAY_US,
++			   &status);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -498,9 +525,12 @@ static int spinand_write_page(struct spinand_device *spinand,
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = spinand_wait(spinand, &status);
++	ret = spinand_wait(spinand,
++			   SPINAND_WRITE_INITIAL_DELAY_US,
++			   SPINAND_WRITE_POLL_DELAY_US,
++			   &status);
+ 	if (!ret && (status & STATUS_PROG_FAILED))
+-		ret = -EIO;
++		return -EIO;
+ 
+ 	return ret;
+ }
+@@ -702,7 +732,10 @@ static int spinand_erase(struct nand_device *nand, const struct nand_pos *pos)
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = spinand_wait(spinand, &status);
++	ret = spinand_wait(spinand,
++			   SPINAND_ERASE_INITIAL_DELAY_US,
++			   SPINAND_ERASE_POLL_DELAY_US,
++			   &status);
+ 	if (!ret && (status & STATUS_ERASE_FAILED))
+ 		ret = -EIO;
+ 
+diff --git a/include/linux/mtd/spinand.h b/include/linux/mtd/spinand.h
+index 163269313f6..ba6c2ba149d 100644
+--- a/include/linux/mtd/spinand.h
++++ b/include/linux/mtd/spinand.h
+@@ -176,6 +176,28 @@ struct spinand_op;
+ struct spinand_device;
+ 
+ #define SPINAND_MAX_ID_LEN	4
++/*
++ * For erase, write and read operation, we got the following timings :
++ * tBERS (erase) 1ms to 4ms
++ * tPROG 300us to 400us
++ * tREAD 25us to 100us
++ * In order to minimize latency, the min value is divided by 4 for the
++ * initial delay, and dividing by 20 for the poll delay.
++ * For reset, 5us/10us/500us if the device is respectively
++ * reading/programming/erasing when the RESET occurs. Since we always
++ * issue a RESET when the device is IDLE, 5us is selected for both initial
++ * and poll delay.
++ */
++#define SPINAND_READ_INITIAL_DELAY_US	6
++#define SPINAND_READ_POLL_DELAY_US	5
++#define SPINAND_RESET_INITIAL_DELAY_US	5
++#define SPINAND_RESET_POLL_DELAY_US	5
++#define SPINAND_WRITE_INITIAL_DELAY_US	75
++#define SPINAND_WRITE_POLL_DELAY_US	15
++#define SPINAND_ERASE_INITIAL_DELAY_US	250
++#define SPINAND_ERASE_POLL_DELAY_US	50
++
++#define SPINAND_WAITRDY_TIMEOUT_MS	400
+ 
+ /**
+  * struct spinand_id - SPI NAND id structure
 -- 
 2.51.0
 
