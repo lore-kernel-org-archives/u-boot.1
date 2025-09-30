@@ -4,55 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EA14CAC5B9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:28:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D413CAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:29:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8119183045;
-	Tue, 30 Sep 2025 11:28:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 3D41F8349B;
+	Tue, 30 Sep 2025 11:29:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AwkDqhCk";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="IaOuQOnz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D27983071; Tue, 30 Sep 2025 11:28:44 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id B341F83071; Tue, 30 Sep 2025 10:18:18 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30F29828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:28:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id C8E5A828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 10:18:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 03C8D627DB;
- Tue, 30 Sep 2025 09:28:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61885C4CEF0;
- Tue, 30 Sep 2025 09:28:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759224520;
- bh=1kRP/pL1dTYgb62X4zPPvn4J0T327xepvIEKsOBTvaA=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=AwkDqhCkuMTU7NeCFY8vzJV43I4BCruPC1Rz0dblSv8ilDgUhJuFSvFavvgp3kiiK
- UejUNwoAnrpRF8wdG8UHC8JytUB2z4ONwB1OY3a8xTNFwnawfmJQLFmyiZmQU84UER
- YWzlFoGc37ZbJ3+0JTL+fUIcscDsdK0rtai1RwvPxs6T2IDA8Hrn2lW5+JPb4e34UX
- eTQ+Q0IfC6vvF9ShgLiPe0FWHtXTvQeCgqB+FL5vjq5e9uMxtwKlpuz7QPp8GhouXo
- YHcEa93gdpL7cRjWExIxgxgx+a2lPKNmFGt1O0+q5HKIyE6dcTHqPrTZYCRcM3SJ46
- d/+FEK/CijS0g==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [PATCH v2 3/5] usb: gadget: Tighten the dependency for DWC2 OTG
- support
-In-Reply-To: <20250926153034.3680674-3-trini@konsulko.com>
-References: <20250926153034.3680674-1-trini@konsulko.com>
- <20250926153034.3680674-3-trini@konsulko.com>
-Date: Tue, 30 Sep 2025 11:28:38 +0200
-Message-ID: <87ldlwi915.fsf@kernel.org>
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 7AB3A4E40E53;
+ Tue, 30 Sep 2025 08:18:16 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 4F85C606E4;
+ Tue, 30 Sep 2025 08:18:16 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 6A25D102F17B1; 
+ Tue, 30 Sep 2025 10:18:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1759220294; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=JQo4xWbtLITA+SMNj/VWjrQARin2q2KYPJaVi6pVGno=;
+ b=IaOuQOnzKs9Q/LNwYtrAgLPr6ic8RAqOkG3prJYKddhkk+fS05sIRkyxGEzfmM51u5dpZ2
+ bcLj51dRMyImzAyZvcZFqnf2OpJ1ebGBj4YJJbb8AAW99YbIDIqnSNMa5sCtNGSRaK85zo
+ itT/joAoFFI/IfAhsUNRuY2/Aca9ny34NWPIqefM0n3V2tRKvUs3klkQaYTVlrKtQiVjY3
+ obWuxb7y9w46puz9TCeq+61pE8Xhv7Mkb+qBBKqwohRB1scfdgRZux+Qpc8hWDkwAD7GAm
+ 1FxnGa4rN8BybBKtlqPrJ/Jn1qZhOAqsXo9PlptQvciTw+ffXW3FZ69FkCQ5AA==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Tom Rini <trini@konsulko.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Michael Trimarchi
+ <michael@amarulasolutions.com>,  Frieder Schrempf
+ <frieder.schrempf@kontron.de>,  Jagan Teki <jagan@amarulasolutions.com>,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,  Cheng Ming Lin
+ <chengminglin@mxic.com.tw>,  Chuanhong Guo <gch981213@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,  Boris Brezillon
+ <boris.brezillon@collabora.com>,  Alexander Dahl <ada@thorsis.com>,
+ u-boot@lists.denx.de,  Andreas Gnau <andreas.gnau@iopsys.eu>
+Subject: Re: [PATCH v7 00/24]  mtd: spinand: driver improvements
+In-Reply-To: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu> (Mikhail
+ Kshevetskiy's message of "Tue, 30 Sep 2025 03:20:45 +0300")
+References: <20250930002109.3600886-1-mikhail.kshevetskiy@iopsys.eu>
+User-Agent: mu4e 1.12.7; emacs 30.2
+Date: Tue, 30 Sep 2025 10:18:01 +0200
+Message-ID: <87wm5ggxqe.fsf@bootlin.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
+X-Mailman-Approved-At: Tue, 30 Sep 2025 11:29:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,39 +82,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hello,
 
-Thank you for the patch.
+On 30/09/2025 at 03:20:45 +03, Mikhail Kshevetskiy <mikhail.kshevetskiy@iop=
+sys.eu> wrote:
 
-On Fri, Sep 26, 2025 at 09:30, Tom Rini <trini@konsulko.com> wrote:
-
-> The DWC2 OTG driver depends on an ARM-specific header file to compile,
-> so make it depend on ARM.
+> This patch series makes u-boot SPI NAND driver almost the same as in
+> linux-6.17. This provides the following improvements:
+>  * it becomes easy to port changes from linux kernel
+>  * more flash is supported
+>  * spi drivers can accelerate flash reading/writing using spi-mem dirmap =
+API
+>  * continuous reading mode was supported (for some flashes)
+>  * OTP support was added (for some flashes)
+>  * add support of special data recovery reading (for some flashes)
+>  * bug fixes
+>  * other minor improvements
 >
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-> ---
-> Changes in v2:
-> - None
+> The following linux kernel driver features was not implemented
+>  * support of different ECC engines
+>  * per operation maximum spi bus frequency
 >
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> ---
->  drivers/usb/gadget/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+> The code has been tested on Airoha AN7581 (64-bit) based boards
+> equipped with flash memory Micron MT29F2G01ABAGD
 >
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index 0121f9872ae6..9065e14768ad 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -109,6 +109,7 @@ config USB_GADGET_AT91
->  
->  config USB_GADGET_DWC2_OTG
->  	bool "DesignWare USB2.0 HS OTG controller (gadget mode)"
-> +	depends on ARM
->  	select USB_GADGET_DUALSPEED
->  	help
->  	  The Designware USB2.0 high-speed gadget controller
-> -- 
-> 2.43.0
+> Additionally the patch series includes continuous reading mode fixes.
+> The corresponding linux patches were accepted to nand/next branch
+> of mtd/linux.git repository.
+
+I haven't formerly reviewed all the patches, but I am pleased to see
+this work moving forward and would like it to be merged.
+
+Acked-by: Miquel Raynal <miquel.raynal@bootlin.com>
+
+Thanks,
+Miqu=C3=A8l
