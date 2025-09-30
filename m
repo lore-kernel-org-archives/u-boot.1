@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F05FCCAC5B9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:47:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3941CCAC5B9
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EA8C83045;
-	Tue, 30 Sep 2025 09:47:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A8C3583045;
+	Tue, 30 Sep 2025 09:50:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TNOdIt4/";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TM++zHpL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37D2D83071; Tue, 30 Sep 2025 09:47:30 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 42C76834D4; Tue, 30 Sep 2025 09:50:15 +0200 (CEST)
+Received: from tor.source.kernel.org (tor.source.kernel.org
+ [IPv6:2600:3c04:e001:324:0:1991:8:25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FC15828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:47:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B48C828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:50:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 2404B62796;
- Tue, 30 Sep 2025 07:47:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7FA34C4CEF0;
- Tue, 30 Sep 2025 07:47:26 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 0A29F603FA;
+ Tue, 30 Sep 2025 07:50:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FAD7C116D0;
+ Tue, 30 Sep 2025 07:50:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759218446;
- bh=TjOoIDHJrUdzg5DlIM1wAjTOwJwecU/Am8+bcx7L9XI=;
+ s=k20201202; t=1759218611;
+ bh=8unLluqhNT0KJw2xAm88xaJnhxMu+Dgv2ks35FrOWDQ=;
  h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=TNOdIt4/wzJ+krUjN7yxujotbyMfkwC1VrwxG4gcLViiN6Hsfl+c9yFO6t/1y3RKF
- 3y3BFuxPL9NQ/eMEw1l/1MdY0vcjkYPHhP1dVQ2RKuLJaUMmukGUuSjaG9AH19pSCz
- JAAwSXaLkOLMC/TW/DpihJfoMwE2Q5J1RH7Zz/h6e+nieAhFEhXit7o6oMdYxEwJIq
- 2cazEc577BVuUyvx4iVRX2Hx9/nNXhu1fyALPDpK/0eWgSC5rVyiJabwyeDOtouNMI
- ZbnzMiAQc07KrWO7j/kflPBSNRd5I5uUCjakAdiykgMYcYg0U5MTR081fY4dR+7u9F
- TnWD3z1ViXsqQ==
+ b=TM++zHpLIk01sWypPsP36NG1PjbsZUr1Q1LtGo0BIBxTKFd6Ei0Gnbr4MHeeloQX5
+ E4h7JsPwQKAMLIsYeyDxaqjwL8T1bCRzfBGQRdhbInM5+2KCZKF2fPHRfnvCgc541g
+ kg6rfqotWe4vQcioN0d8DWejIcVCuOJ803PQUFBk9Jka4hz+wqutctEWCZ8Cn7VCtX
+ C4K/JogW0fxN87o5IHmbLhsRIF09VCEgSAJFQIn/urPmFfCkDsZMTtFDYDb2GgesYI
+ obdrT5NUBrPiKOFOVigdPQ/SFToAPVSAWSO+bAMHkEh0HNdmW6gKK+1omak82vZcGR
+ rXIFSfPgxn1Sw==
 From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, Marek Vasut
- <marex@denx.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Anshul Dalal
- <anshuld@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: Re: [PATCH RESEND] usb: dwc3: Remove redundant test
-In-Reply-To: <20250929-dwc3_ep0-v1-1-1d5c58933bde@linaro.org>
-References: <20250929-dwc3_ep0-v1-1-1d5c58933bde@linaro.org>
-Date: Tue, 30 Sep 2025 09:47:24 +0200
-Message-ID: <87wm5gidpv.fsf@kernel.org>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, Lukasz Majewski
+ <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>, Marek
+ Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Zixun LI <admin@hifiphile.com>, u-boot@lists.denx.de, Andrew Goodbody
+ <andrew.goodbody@linaro.org>
+Subject: Re: [PATCH] usb: gadget: atmel: Add missing null check
+In-Reply-To: <20250929-atmel_usba_udc-v1-1-e1426271e12a@linaro.org>
+References: <20250929-atmel_usba_udc-v1-1-e1426271e12a@linaro.org>
+Date: Tue, 30 Sep 2025 09:50:09 +0200
+Message-ID: <87tt0kidla.fsf@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -73,12 +74,10 @@ Hi Andrew,
 
 Thank you for the patch.
 
-On Mon, Sep 29, 2025 at 10:11, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
+On Mon, Sep 29, 2025 at 17:25, Andrew Goodbody <andrew.goodbody@linaro.org> wrote:
 
-> In dwc3_ep0_complete_data there is a test for 'r' being null and the
-> code will return at that point if so. After that point 'r' is guaranteed
-> to not be null and testing for that is redundant. Remove the test for
-> 'r' being non-null.
+> Add in the missing null check for udc->driver that is present at other
+> points in the function before it is dereferenced.
 >
 > This issue was found by Smatch.
 >
@@ -87,29 +86,26 @@ On Mon, Sep 29, 2025 at 10:11, Andrew Goodbody <andrew.goodbody@linaro.org> wrot
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
 > ---
->  drivers/usb/dwc3/ep0.c | 5 +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
+>  drivers/usb/gadget/atmel_usba_udc.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/drivers/usb/dwc3/ep0.c b/drivers/usb/dwc3/ep0.c
-> index c656cbe25ce6fad9ca1ef07aba131d30018db19d..680756532f0db16f7e6598df19f71bf2ab410820 100644
-> --- a/drivers/usb/dwc3/ep0.c
-> +++ b/drivers/usb/dwc3/ep0.c
-> @@ -799,10 +799,7 @@ static void dwc3_ep0_complete_data(struct dwc3 *dwc,
->  	status = DWC3_TRB_SIZE_TRBSTS(trb->size);
->  	if (status == DWC3_TRBSTS_SETUP_PENDING) {
->  		dev_dbg(dwc->dev, "Setup Pending received");
-> -
-> -		if (r)
-> -			dwc3_gadget_giveback(ep0, r, -ECONNRESET);
-> -
-> +		dwc3_gadget_giveback(ep0, r, -ECONNRESET);
->  		return;
->  	}
+> diff --git a/drivers/usb/gadget/atmel_usba_udc.c b/drivers/usb/gadget/atmel_usba_udc.c
+> index 72f68dba3a741b7f0aac8ba89b83eefb5e0cce4f..f7a92ded6dab187475249874db37d81a07bf5b9e 100644
+> --- a/drivers/usb/gadget/atmel_usba_udc.c
+> +++ b/drivers/usb/gadget/atmel_usba_udc.c
+> @@ -1147,7 +1147,7 @@ static int usba_udc_irq(struct usba_udc *udc)
+>  		reset_all_endpoints(udc);
 >  
+>  		if (udc->gadget.speed != USB_SPEED_UNKNOWN &&
+> -		    udc->driver->disconnect) {
+> +		    udc->driver && udc->driver->disconnect) {
+>  			udc->gadget.speed = USB_SPEED_UNKNOWN;
+>  			spin_unlock(&udc->lock);
+>  			udc->driver->disconnect(&udc->gadget);
 >
 > ---
-> base-commit: 44c4919e9dd6c162b237633ba689441eca9a149c
-> change-id: 20250925-dwc3_ep0-47c99180480d
+> base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
+> change-id: 20250929-atmel_usba_udc-046059597928
 >
 > Best regards,
 > -- 
