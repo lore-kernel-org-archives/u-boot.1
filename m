@@ -4,53 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D23CAC5B9
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E96B4CCA470
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 09:39:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EACF83045;
-	Tue, 30 Sep 2025 11:30:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 3B7A1833E9;
+	Tue, 30 Sep 2025 11:39:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WyL4Gmy/";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="ZIgSYq6a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6830C8341C; Tue, 30 Sep 2025 11:30:31 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CA902833E9; Tue, 30 Sep 2025 11:39:16 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BD4A828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:30:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9BF1828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:39:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 5AF106036C;
- Tue, 30 Sep 2025 09:30:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B6A99C4CEF0;
- Tue, 30 Sep 2025 09:30:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759224628;
- bh=nchPuXCxJFPwhJOUY7nCDgglUbJay8W2V5FlwjaHJ9A=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=WyL4Gmy/fK7W1BfhERfgUs21wmLoPEnGjqyy0c3lO2o/73B6Z1jemEFdZHZpyT1Yh
- vJc2bs738IIusUMJgTawqToVpUSG6GKpTDE2LlL2sz3LQuMeYPGauBrA+TkB3GZDA6
- bQWmLtRlwrcN0Frq9OvHf2+bHY5xqzkEpkR8UfsjKV2581WCCwFMgjAkt0Y944FBQh
- lZC9V/5rOP6jggVjxnOX1Cv/AvAeZsKiwyi7l+o5htPz864k4RSStt0zsQ05te6CQr
- 6Mbf9fp+91my0CsuvjzCjqtGJjmXy9EFTbq2HsTG30/vJroAOo/B3NEtgs0RtA0UPv
- y+F+MmMYaftiQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut@mailbox.org>
-Subject: Re: [PATCH v2 5/5] usb: gadget: Tighten CI_UDC dependencies
-In-Reply-To: <20250926153034.3680674-5-trini@konsulko.com>
-References: <20250926153034.3680674-1-trini@konsulko.com>
- <20250926153034.3680674-5-trini@konsulko.com>
-Date: Tue, 30 Sep 2025 11:30:25 +0200
-Message-ID: <87ikh0i8y6.fsf@kernel.org>
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-57a292a3a4bso6890981e87.3
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 02:39:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1759225153; x=1759829953; darn=lists.denx.de; 
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=olWh16kB+r0IeJ8XFNJnBjB7CcGsmHhV2sLmYEqFaVM=;
+ b=ZIgSYq6aXpRF8DWcsnRpyq2aoaehWflRvXhE3dhWQEgB9bCeWe6Ea3Hl3m7layzh+n
+ AYKRNk5F4SfzcAnNB6UQiIsVTtvXhDZkYDWs9R1ddXeGfOfot4USBailEUptsSd4lwKk
+ aGrmG8jOko4n47nB4u3sWlp3o07iNpzjj8SaRuqPCZwvPTjPJouVtGkfiq/QAmVZBKnb
+ PJ9bf0Bn5DOr1zieHGjgZN4lqGwMiomy4EOAkivVzMqxYlGM1FQ2BlliIo8h6P820iZX
+ 9hIKrBa7X9k5cmlmJ8bZFaO7kQ9fnBhGYi7EhfOG3VtrLmS0Jz0qmmCBHk1Thxa/8yfN
+ op9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759225153; x=1759829953;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=olWh16kB+r0IeJ8XFNJnBjB7CcGsmHhV2sLmYEqFaVM=;
+ b=OrbwRbaF3I6XW+n4/kq1gJsRZ8O8A4h6ZsOwjqbWJzxxxZ1J0N0tf0Dak8J2un5owR
+ fsx9RNNtfquDzfuSBFX4hiAaaazjU1k7osQttWdrxZJA1L/JEeNmlzdvOy7u6lTFlv19
+ kNbDWyAh4Arz2F8tacJz8ejxoFU6/oZJ+JK2vIqmCGZY1K634ZzpCvB3eDs27rnCvFxQ
+ o5u9Oh4WkkEh7gurdCl8pdErRv1U70JrAvQOingye5HhwLxYYBbadTFOziWpYIjxuT1J
+ +zlCdirgHg/8qeGtXNo4RnC/xhT4542RnoGvI8wyk3mZaxlWG++ilmaLqNVpj9vAX2G0
+ rtEQ==
+X-Gm-Message-State: AOJu0YwpYf/bFYF39jJGYiu+f+meXvCK9GAF80WUvhras6aLRFxWs9SN
+ RBRdNAsdTLvRbpA14r7VyHAsOPiAIHmHlRUUfL41+PvOEkgFJsn9MYX32XFrds91+744mAID/SG
+ QLNkfzaTDkeWAkiKctp3nyyFsr0WBi4iULEn4
+X-Gm-Gg: ASbGncu/LpYv+Fa7OJK+LAPlcV/MWj4rLTHocT0swO9wg0P4wQtY4GrzW1drg5NINp5
+ HvpTEIqPG4OEyCcg/zyH6/fgccCtQou/pNBtaoWczSIfYmhN1PZGEV/38D9uU3UMtWko83LZ/9r
+ 6phXG/viCteIZrfMBEuiqqn2xTY5qsEXA1jOe4J157uL3Sf+9uJilv0D5SkXzt7N5tx3EwL86Nu
+ WjFA95Un5E5nJO3YMRrVj9R/mewt8IA4mq0GDog6QCF/uwfnEWUNA==
+X-Google-Smtp-Source: AGHT+IEj3zYDAUozApEGXSCx4ti/YhoQikacVKBazfsdNs9/gKHgrD6FX1I1WsF+SxGKQJcWOKXpu8RnWoBW+FP0l/M=
+X-Received: by 2002:a05:6512:1113:b0:55f:536f:e895 with SMTP id
+ 2adb3069b0e04-582d3ba06camr6973175e87.45.1759225152799; Tue, 30 Sep 2025
+ 02:39:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+From: Yegor Yefremov <yegorslists@googlemail.com>
+Date: Tue, 30 Sep 2025 11:39:01 +0200
+X-Gm-Features: AS18NWAyM3zdYhpzK6jtG4KC8fXKlradQI1fB_fv9rQk3diN1hBKLSTB0yuLkAg
+Message-ID: <CAGm1_kuVn1WbwGRKD0HsPe+gkFc_aDA18mG5Rr50TS_oB6wPMw@mail.gmail.com>
+Subject: clk: ti: CLK_TI_CTRL name confusion
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,41 +86,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi all.
 
-Thank you for the patch.
+Why is CLK_TI_CTRL called "TI OMAP4 clock controller" and not "TI OMAP
+clock controller"?
+OMAP4 is not mentioned neither in the help text nor in the driver
+itself. Its ids  "ti,clkctrl" can be found in all OMAP clock DTSI
+files.
 
-On Fri, Sep 26, 2025 at 09:30, Tom Rini <trini@konsulko.com> wrote:
-
-> This driver cannot build when DM_USB_GADGET is enabled as both options
-> control building of files that use the same global namespace and
-> functionality. In this case make CI_UDC depend on DM_USB_GADGET being
-> disabled as non-DM support is the legacy choice.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-> ---
-> Changes in v2:
-> - None
->
-> Cc: Marek Vasut <marek.vasut@mailbox.org>
-> ---
->  drivers/usb/gadget/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-> index 9065e14768ad..9f817967a08b 100644
-> --- a/drivers/usb/gadget/Kconfig
-> +++ b/drivers/usb/gadget/Kconfig
-> @@ -152,6 +152,7 @@ config USB_GADGET_OS_DESCRIPTORS
->  
->  config CI_UDC
->  	bool "ChipIdea device controller"
-> +	depends on !DM_USB_GADGET
->  	select USB_GADGET_DUALSPEED
->  	help
->  	  Say Y here to enable device controller functionality of the
-> -- 
-> 2.43.0
+Best regards,
+Yegor
