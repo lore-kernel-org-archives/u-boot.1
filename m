@@ -4,84 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6F01CAC5BE
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 15:19:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6112FCCA468
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 15:26:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F28D1800D7;
-	Tue, 30 Sep 2025 17:19:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id C090081D6A;
+	Tue, 30 Sep 2025 17:26:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Of6EoREu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VDVgT8fo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A252B802C1; Tue, 30 Sep 2025 17:19:03 +0200 (CEST)
-Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
- [IPv6:2001:4860:4864:20::2c])
+ id 0708B828A2; Tue, 30 Sep 2025 17:26:31 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0B30800B1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 17:19:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07828800D7
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 17:26:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-oa1-x2c.google.com with SMTP id
- 586e51a60fabf-32bd4f1b671so4954114fac.0
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 08:19:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-4256f0fac67so57782525ab.2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 08:26:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1759245539; x=1759850339; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VkydziAR9o3Jnv5PH+/fdiDn5rLF/j4j3kdkm7mw+XI=;
- b=Of6EoREuPzgYplq7B0ObL0OU99ENoB6Rp/Ijf4W1dxv7JDG6ZINCIuwSj5cyX5mzOw
- abdrZgLMSpgz8fVkz+6pr90EHvwBlyfgPXj9RwfbxodlCbfjg7ZU9ExZxeSj/aM5dMuT
- NeGmWgyJ5ELZ/MWkVqtxwZ+YZAKPUuZ8Q3tUFqKDFNXvTxqVQjzvnrSgaMc3fbwIliGA
- +HAsvPSdLCU9fMsFaJap0MyGg/cyVI/9w5qxxQt2/OnLJdyaNcnNidnqm1G4IJktLjQb
- 1oRN8+UCrKniUrpzsJKp+O2HNoIQ7XXrq/kNsepzoLsrEWTGpmYFYE6igR5u5wVHCOGc
- p1FQ==
+ d=konsulko.com; s=google; t=1759245987; x=1759850787; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=alGarZWuDMLtcai34ZKxkI49E7qNRL/yeKPkoSFtwfc=;
+ b=VDVgT8fojucprwjgwYBsihuwEknmKp2dy0QkJJr2I0lh+tP6Em6R40R3aVoRUiYpGl
+ QFZkn12nCuk9Y/BbXmjgipgfVYhkFLLv8XcApKtgWNtMt9byJmIN1GsgUFF/Q1d/Pk8j
+ y6f3eKtdhfXzfnLLnspAwUiCpGReLwG8nf6mI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759245539; x=1759850339;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VkydziAR9o3Jnv5PH+/fdiDn5rLF/j4j3kdkm7mw+XI=;
- b=rId+pu86Ne6nspvK22eTU5nmWor9xOngfaK+Lbkzhgjf+0Gz77BTeyUCQkOfw/Gvny
- wDPw18mVJ32b0Pgv66J/hTDTZgd8+oG8Wju6Sq/tQOEDi4EWy/dCfsEfDfGY5fj1WpuE
- X7v4LCLnLlO5fRJ34OlWrGYTL5pfZNFsPGjB7bFL7wuVXxNptvEbN3X7NYVuFECCiSXj
- NNIremQq1GWY/sE/6CyD3lG1BY4ShVHbdwuLoMx3XJpkFwK2fmZJLugBrt5M4y8Tyxm3
- SXG+p1FVOEsUBtgSpW1cD1y1wQvqSlB7uRWcOQ2ECo3I4CUSF08nfxG1Jk7Pw196854+
- rajA==
+ d=1e100.net; s=20230601; t=1759245987; x=1759850787;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=alGarZWuDMLtcai34ZKxkI49E7qNRL/yeKPkoSFtwfc=;
+ b=TT8lHe6z/elAsLMpijQXHW/Ip6IpZfiovdQDrVFMRLhG82gIP4NPBruQ7Z+MAnVPcy
+ H9k5s0ReJ3YV8xPa/T5H18GdNnLsTcg+YsULZy/l86gxvlE9UxRk7jbKoRWI5ZjM7sN0
+ BOXsvyRKF52YqLu6mdAG3yJieZnuZXbtpEHbKI3W7s/S06KwfV0dJ+i5e9cSAv6p2bgu
+ Xs8K5gIsK6N8hVSBgg7CMeH6UzHkF/uQQM0TAetKPjOv6ke8m9xEte6FU9xJz4196ILU
+ 6RGZOFzEsrtBcnTkho/eYO01WImHlozCw+Cfi+xUQ+FdgQ/5W0Kko+jFk+drtqn3fVSW
+ mw6A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8PZhURJgHXSAt49Jij09O5nUG4cQ19/SjyMD4pxsfObEEUwuA0OWvWBG4hIU9R12MpeSHlUg=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfP/ulaMYYCyU+5YaVPaYNtY01Ab4EC8Pq+PnBJQbBpRGboMfv
- JiYwL8ia1twzPsFgjbNSnpO2pi1VABuhHkvHxB9Sw3JPiaXNJlxPe61tD0VzX+y4mcM/+mqpetS
- o5rLnfNjMVr3Tr3aKFeeh0h08jzxWS5OLVQeInoBvMw==
-X-Gm-Gg: ASbGncv4BAJfhFiiYjGJZZOU1vQWFy9hwaeizPBmzbcpsqU0ghjV5t2NBD5YgBzBgl2
- 4E0AH1OahVWs1kjqME+NP2Akmrvy1X4VKYpTssIevSbvJvNoigTxdCrLCA3dQxfJfF1LSJ8D6KZ
- J2u/uhwwi2lHAdvP97JHWZQHW8RcFRf2H80kDDEJW/nIW8yKZA1fb+VtljionLWw0sDpSoP/XYc
- 0EITrbvh+Vu/AlM0mRcNjP1S/QM6vY=
-X-Google-Smtp-Source: AGHT+IFyE4tH5y9/x7zmRSQIsJpX2UILX9dqrPXioaDQqonT+glaZY/zyH0q0nRGAL9cHIUTtu1lM1WqJEybbXobgBc=
-X-Received: by 2002:a05:6870:200e:b0:315:60a6:c28f with SMTP id
- 586e51a60fabf-39a8873c874mr179943fac.3.1759245539612; Tue, 30 Sep 2025
- 08:18:59 -0700 (PDT)
+ AJvYcCXNKy8I5u/MKzWqWnO9eXRbxguEqB5xug5sq0B9qhJ6BykgfGELu3MUiXLdTpqvFbcjklegz88=@lists.denx.de
+X-Gm-Message-State: AOJu0YwntAk71jqyrzX2EOjlSeUMS2GajxhNdwDS9STsW2kIfiNMgCCy
+ FsGAeKegcENDufL1CC3v5DVRnjGOH5VDNG1Z5rT8aVpenEadEO3FNyEknkxwKaPHYbc=
+X-Gm-Gg: ASbGncsYFgXchsdK1scxt3dDjERTpiHaW88PDfKgiJf2HMkcpzKtHwcdTDyPgwTvrqE
+ FE27RB56fSeN/Ig3RbxXpX6cJeYHbFaIpx3gpVNdmUCtAMIBh0jTsFE2vFznE3Mk8z45R+dhzGu
+ T2EBiUH7c6GTDatSzWhKqSzk5VbuJIm4bs/4ye1Om+6uqlW7rKwGaeLi0JTVhH8cy1T8dP3632d
+ nzWBhv94EMmYxQ61khWvcFqaaW52VTIbgLa0cqd/1Cbh8kp2SWXkGAVX20jb0Tt3osfpqmQWmpX
+ Ykh4pR37OvJB2paA2NTmUOLo/WCiFrtvLwqa6wvmoWm5hW3HLABYmQro7c8dQ3k1021KyDaRXu7
+ niix0kLh80nYc7lBsaHh6R80iL4Rpq8MmTfLhLXSxkiUKOtoHstn66XbGBuVekO07SDS17SomkE
+ RxIVj5
+X-Google-Smtp-Source: AGHT+IFY6U2o89gQfcScBJOX+puTML17x5zNNVm2h22uwC2hSxcJu3HPWMVbzyAt4fksci+HOeUkUA==
+X-Received: by 2002:a05:6e02:1d8e:b0:426:790e:5cfc with SMTP id
+ e9e14a558f8ab-42d815c6315mr5189595ab.13.1759245986613; 
+ Tue, 30 Sep 2025 08:26:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-42781e5eb90sm53207795ab.6.2025.09.30.08.26.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Sep 2025 08:26:25 -0700 (PDT)
+Date: Tue, 30 Sep 2025 09:26:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>
+Cc: Kory Maincent <kory.maincent@bootlin.com>,
+ uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ thomas.petazzoni@bootlin.com,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] Revert "board: st: stm32mp1: Clean env_get_location()"
+Message-ID: <20250930152623.GA6093@bill-the-cat>
+References: <20250917141736.59732-1-kory.maincent@bootlin.com>
+ <55d0805b-dcb2-4277-a4da-f4c26b48a2dd@foss.st.com>
+ <20250929170912.3bee3f9d@kmaincent-XPS-13-7390>
+ <fd32f45e-a3c9-4170-8886-5a31dda0e4c9@foss.st.com>
+ <20250930143732.GU6093@bill-the-cat>
+ <0b7c0f03-37ec-4aec-80e7-e26de4091560@foss.st.com>
 MIME-Version: 1.0
-References: <20250929192149.3735435-1-tharvey@gateworks.com>
- <d7279d1b-9e6f-4715-af7b-3d30ee8388cc@linaro.org>
-In-Reply-To: <d7279d1b-9e6f-4715-af7b-3d30ee8388cc@linaro.org>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 30 Sep 2025 08:18:48 -0700
-X-Gm-Features: AS18NWAtMGRqR6jbxoee-ur0mjqjLeraGRfWVtEbxYtQXts0P2UFLXITEXXVKiI
-Message-ID: <CAJ+vNU1+ix30XMgM33Q1u0CiQO9ODRTcgCAXGiO-m2K_AS5zhQ@mail.gmail.com>
-Subject: Re: [PATCH] net: lwip: ensure alignment of packet buffers
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2YU+vvlERECRjbnT"
+Content-Disposition: inline
+In-Reply-To: <0b7c0f03-37ec-4aec-80e7-e26de4091560@foss.st.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,45 +108,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 30, 2025 at 2:57=E2=80=AFAM Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Hi Tim,
->
-> On 9/29/25 21:21, Tim Harvey wrote:
-> > Network packet buffers should be aligned to PKTALIGN. Add a compiler
-> > attribute to ensure this.
-> >
-> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > ---
-> >  net/lwip/net-lwip.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-> > index 660ceb10cbe..aec05d55de6 100644
-> > --- a/net/lwip/net-lwip.c
-> > +++ b/net/lwip/net-lwip.c
-> > @@ -30,7 +30,7 @@ void (*push_packet)(void *, int len) =3D 0;
-> >  static int net_try_count;
-> >  static int net_restarted;
-> >  int net_restart_wrap;
-> > -static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN];
-> > +static uchar net_pkt_buf[(PKTBUFSRX) * PKTSIZE_ALIGN + PKTALIGN] __att=
-ribute__((aligned(PKTALIGN)));
-> >  uchar *net_rx_packets[PKTBUFSRX];
-> >  uchar *net_rx_packet;
-> >  const u8 net_bcast_ethaddr[6] =3D { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff=
- };
->
-> I'd rather use the __aligned(x) macro from <linux/compiler_attributes.h>.
-> No need to resend, I will update the patch locally before sending my next
-> pull request for the net subsystem.
->
 
-Hi Jerome,
+--2YU+vvlERECRjbnT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I'll make note of that - thanks for taking care of it.
+On Tue, Sep 30, 2025 at 05:09:26PM +0200, Patrice CHOTARD wrote:
+>=20
+>=20
+> On 9/30/25 16:37, Tom Rini wrote:
+> > On Tue, Sep 30, 2025 at 09:45:08AM +0200, Patrice CHOTARD wrote:
+> >>
+> >>
+> >> On 9/29/25 17:09, Kory Maincent wrote:
+> >>> On Thu, 18 Sep 2025 16:16:35 +0200
+> >>> Patrice CHOTARD <patrice.chotard@foss.st.com> wrote:
+> >>>
+> >>>> On 9/17/25 16:17, Kory Maincent wrote:
+> >>>>> This reverts commit d37641c61ba212241c38e3fd22f0335fc0bebc96.
+> >>>>>
+> >>>>> Restore support for environment storage in EXT4 filesystem on eMMC =
+boot.
+> >>>>> The previous cleanup incorrectly removed this fallback option which=
+ is
+> >>>>> needed for boards that store their environment in an EXT4 partition.
+> >>>>>
+> >>>>> This configuration is OS-specific rather than board-dependent and s=
+hould
+> >>>>> remain as it is configurable via menuconfig. Even if it is not desc=
+ribed
+> >>>>> in ST defconfigs people may have enabled it in their defconfig.
+> >>>>>
+> >>>>> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> >>>
+> >>>> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> >>>
+> >>> Hello,
+> >>>
+> >>> Any news from the maintainers? Is there a reason for not being merge?
+> >>>
+> >>> Regards,
+> >>
+> >> Hi Kory
+> >>
+> >> I expect to send a pull request before end of this week for master bra=
+nch including your patch.
+> >=20
+> > Since the release is Monday, I'd really prefer sooner this week to later
+> > this week if possible, thanks!
+> >=20
+> Hi Tom
+>=20
+> I am preparing the PR, it will be send today.
 
-Best Regards,
+Great, thanks, I appreciate it.
 
-Tim
+--=20
+Tom
+
+--2YU+vvlERECRjbnT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNv2mwAKCRAr4qD1Cr/k
+Cqo6AP9Y57qXKwHwsm2+S+6/kuWMSsUoGJepwWE8nlxPed7RdwEA1+B/ihqA+ECO
+85kZZTzJ+UlW+jKytXuWyWKJD3RZiQ4=
+=X/lv
+-----END PGP SIGNATURE-----
+
+--2YU+vvlERECRjbnT--
