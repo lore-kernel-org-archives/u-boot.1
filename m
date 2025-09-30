@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73D32CAC5B8
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:38:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50A38CCA470
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:38:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BE0D835B0;
-	Tue, 30 Sep 2025 20:38:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B4DFF832AD;
+	Tue, 30 Sep 2025 20:38:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I4q/8MbD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lHvVMRkT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 926D0835B0; Tue, 30 Sep 2025 20:38:34 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 0665D800D7; Tue, 30 Sep 2025 20:38:52 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A84008352B
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:38:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E7C8832AD
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:38:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-414f48bd785so3478839f8f.1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:38:32 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-3c68ac7e18aso4286931f8f.2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:38:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759257512; x=1759862312; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759257529; x=1759862329; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=q1hQ9S3P14hc2ct4VGoatp4JMBSQVbKxnZhD0u1UoUw=;
- b=I4q/8MbD7VOx8V9HgUQpt+HFiX09a7AEwpKTwinfP7b9/OP/H3+W+ei3Ji8ls5EN21
- UrujXaOB/Z8mFkBrTBfHFczh7YP728PzbOP0qmPYj5+m8+eR1D3qetfcvIodMwRTj7Lo
- tSOy0meEcUre6R1cQfRRIO1E9bNhjVOOzHS8LhRum5bgY+yL9ZkaD6F5ET+4rghDxLdj
- mf4+jBaXwV8vUOorUKa2eHqE2Ub0xWXzB8Jkw5LwiD/EI0FEhNycB8ZuJGzuSg2FxxhM
- jAOVdWSbpEEverm4kNnw9LQ9gtfU4JHGE+vuuubKRHRs8IuO2eApUE6vuPeKo9rmQJkH
- c9VQ==
+ :reply-to; bh=DWaiXN1vKIufAKLCcIBOQZ0ccL+0qUQsDaU7TSzQQmg=;
+ b=lHvVMRkT/94fCucSeHHlmZVa2raPuwleN9g0UrUqxvIABsZqjoU3Xm7PPvinzuMgbY
+ YjePXnaHyMkodCPE95MOjKRx66WMxKXy28pPov5m8obeHhRJCY79FH5EfdsjI8lSAgSM
+ QeGULbfdxDvhmu+kuGwu0zYqbZPwk8GsMartWLZvLzbVdvnAUcgtp9BxGIcvgyoBw5g9
+ iT/JNZ9YSGZKYEWMOae/in5S2JNHcMk1Z9jkC4U/pI0/s7c4jlGbXpfBUSsBtle7JJ84
+ 0HohbdArCPlPWXoJZHihBhmoSrGr8lPhak3k2pY6aTv5CeLhyQwzXx6dBCwjg9Z18+52
+ 1WsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759257512; x=1759862312;
+ d=1e100.net; s=20230601; t=1759257529; x=1759862329;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=q1hQ9S3P14hc2ct4VGoatp4JMBSQVbKxnZhD0u1UoUw=;
- b=AcKQLquH9/Lf7Wg/f2KrL43kUuY3MJnipcK1h+oiM5OyRXdvx3LTEUvctDMN8oZ9eU
- apNyE8givtXQSIJDJgcv7IrPTdS4UKeHYhzV6rJL0Z5C/cBaHW2bEGuxThyuyrZCW4wX
- aFOy6pSYOyrkaFaOzI3w30xeK2jTZPOLx6+nc4AL96ZdNVzaFFU8S9rflglB0Zq0WHGN
- 2D/m6q45YyyyzgXJaHOxr5EzWhayGKJ0jOzbIN73F6/Mu0XLbdZjUoyZIP1sweB4jcYL
- 0AC0+z3BVLlgiyrOG5VIpHk4nsj7YGRFgkIG6KlpwpY2imCE5geltK3aVvz7mrPKBlpK
- wo3A==
+ bh=DWaiXN1vKIufAKLCcIBOQZ0ccL+0qUQsDaU7TSzQQmg=;
+ b=t9wEAb4+De4tAcx0gOFgFQynpiJD9q2qVrWYGaVd1vsgxR0MtrrjLlHKh6fV/4zMqA
+ 3YpmlEHw68FMd8k6zqT+THlQ8XnTLtFvVs6vtb1sBhepfXd2kPJ7DnRJoSn3OOR8tXLV
+ hebM9r/IacfJLltvz7iUXj0+KZvFc1PqszGGQwBf7Hu7a895U38gVRnmviCzkianzUD9
+ RuLILC0TrPTtzWKccjsIgmeyib47kHWmtzG+8oPWWaMHLNE23YSp1xTWXLYHVmhamP7d
+ /7Sh076hJ85VLv8NuLAB8twZyIrEi4YgqUwRs0c+sxPMMGfZUKeLciERP4PNKznKBdlH
+ KLsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWDcOZWfDzeVR5wI0eSy3sd67SlBSZv5ISn0xtWchhmHykFQAlVD3+93t88eHwA0qV2x3pYzqo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw0WbOBubgxOBXu4em6uZAedVeuFRu9BlDv+z/nhjCybkbFNACf
- EcZm46Qm+J4OVnJq88XrfVmHVxGNIbi7VregEXnk4EKjcnbQy3JWIe/Ljz6dsUPnkZg=
-X-Gm-Gg: ASbGncsVs4yKcMfXcf0V2Bd2mmjPQ0+egPSEkhq9BmsGPfHEnIy55AA9V2z3awQzBi3
- yyvrki+vjmdvvwsoa0VCjMd2p2yfxX1rxObbv52adY2Fwm8hHxLC5kbckswxRtJ0t0MW0WAODw9
- HLXtSgoCqmUHPIbz7ppRaWz+EBpnnIbFlvZpK70q1AtQbllRjA4ug7M2mzIZOj4ZA6aMceozof9
- OJMuB0cvJRArUxCEtZ8NAIU1y4Qz9IUq3vQ1QVa2Kz8viM8KhrwSc7FZj9WL0qJLoqxeSdZeNMz
- SfcVmSMRYSfx0cW4OlrfxtKjISVI6dY4BsFYT717UvUUDKE1lt6Cq2/YMjuWdAlgAYZtMnoCdKy
- ztNLWd+JeRoETs8S4iVfLljC6Fsa+GiSx5kJGK06v9yHZGynv1dCGm4bCyqCm+lhA/o08zudXvG
- Q5T4yglF9URHIMSW8jTmoLNxHduI+BOMGZ0A==
-X-Google-Smtp-Source: AGHT+IGw2cBL5ZRYdjDJPr5O7xi+K7ILhjVRbMgJEOvXhfxCgtuwYHaL3TRGL6mpcnZ0ev59gOjEZA==
-X-Received: by 2002:a05:6000:18a6:b0:3fa:2316:c32 with SMTP id
- ffacd0b85a97d-42557820cfbmr533955f8f.57.1759257511705; 
- Tue, 30 Sep 2025 11:38:31 -0700 (PDT)
+ AJvYcCVJ6C1jpPKH5LAK9uWdxR/TcAeGrgO/FFv19RQMtUMVPFyI7Yh3SHlrpmInhCdAa4GB9xz54gw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZ1/F0WA59AgOxre3vMTN5MKFw4/5pt1Bm5uuUhk9EWSqh2UAk
+ 43b3VAfc6x5jxAm3BmZXyt0hBpoPVb+JDYVkfbrISMn4lUdRjbWP7A5Kki7ad/jGjPc=
+X-Gm-Gg: ASbGncscNED1Ke06/MvXmQj5rqMyiYgbGLi/fKiGefutog/V0szpveN0cs210ZvkrwA
+ A/RpHRwf7bQMzg/jfpFkFZrHguRdNdiTvTwFbCmfFLKJ8x85MdXbTBY5uQH2fnWvAt7TnZDfIfw
+ LuNdWBkzJRypjajZcZR9dDlWhS8wIICdYqsa9uv6Nlwp4PnRaiSwy5FmrcLpEdmitSARFczdNow
+ IGpACGTio4ieCplBvjs+Is/T2GsNogwyASJ3PoXJHeI0vORKJKG1E99mRqxnKiIbYHAPMNinYn/
+ oE8xgt654Vqv/fgDDTNq2+xstXyULRQuaJ0v13e/CWhblc5rhze88TQ+uKE2H3TFeae5T1IusgV
+ hDPt/KqPemh20TLeBpOUFwjL6OZBpkIwPoKLXHFbvRnUOWoPDmqOFJXofwnTgt9fhysAnNYvl24
+ 6sVS3OtTL3lsit/z2ASXOEaL+7vi9zo73ytA==
+X-Google-Smtp-Source: AGHT+IFrQe3UYaE2aJO8za3K4j5IzeIb/OxGFkTt+vW9iRFGqBYEa6suoprxez53O4+gjLV52hqAQg==
+X-Received: by 2002:a05:6000:2204:b0:3ee:b126:6b6 with SMTP id
+ ffacd0b85a97d-425578050abmr521989f8f.34.1759257529452; 
+ Tue, 30 Sep 2025 11:38:49 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:9459:14e0:525e:d859?
  ([2a01:e0a:3d9:2080:9459:14e0:525e:d859])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fb871d051sm24335154f8f.14.2025.09.30.11.38.30
+ 5b1f17b1804b1-46e61a18b76sm4333225e9.18.2025.09.30.11.38.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 11:38:31 -0700 (PDT)
-Message-ID: <f25dda44-ef48-4448-a6a5-b488365b72dd@linaro.org>
-Date: Tue, 30 Sep 2025 20:38:30 +0200
+ Tue, 30 Sep 2025 11:38:49 -0700 (PDT)
+Message-ID: <2f9588ff-3022-4fa1-962d-80264a28ed81@linaro.org>
+Date: Tue, 30 Sep 2025 20:38:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 3/5] serial: msm-geni: Update kconfig name for
- DEBUG_UART_MSM_GENI
+Subject: Re: [PATCH 4/5] doc: board/qualcomm: Clean up debug options for QUP
+ UART
 To: Luca Weiss <luca.weiss@fairphone.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 References: <20250924-2025-10-misc-v1-0-7e75842ca714@fairphone.com>
- <20250924-2025-10-misc-v1-3-7e75842ca714@fairphone.com>
+ <20250924-2025-10-misc-v1-4-7e75842ca714@fairphone.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -115,7 +115,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250924-2025-10-misc-v1-3-7e75842ca714@fairphone.com>
+In-Reply-To: <20250924-2025-10-misc-v1-4-7e75842ca714@fairphone.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -136,28 +136,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/24/25 13:30, Luca Weiss wrote:
-> The previous description "Qualcomm snapdragon" barely tells the user
-> anything, update the name so that it's clear which configs the user can
-> choose between, namely the older QUP driver, or the newer GENI driver.
+> CONFIG_BAUDRATE is not relevant for the QUP driver, and neither is
+> CONFIG_DEBUG_UART_SKIP_INIT so remove them from the doc.
 > 
 > Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 > ---
->   drivers/serial/Kconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   doc/board/qualcomm/debugging.rst | 2 --
+>   1 file changed, 2 deletions(-)
 > 
-> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-> index 1f2f2468eb0b32327785f4fcd184b2b6f03a15f6..ccbb40b34fef16e2561bc4bb3ca3284fa700988f 100644
-> --- a/drivers/serial/Kconfig
-> +++ b/drivers/serial/Kconfig
-> @@ -328,7 +328,7 @@ config DEBUG_UART_MSM
->   	  be available until the real driver-model serial is running.
+> diff --git a/doc/board/qualcomm/debugging.rst b/doc/board/qualcomm/debugging.rst
+> index c3289c9e4e346058943afd9c803cc44426841544..42821f6546c6425c4b55e1f89501b94bbf9d0623 100644
+> --- a/doc/board/qualcomm/debugging.rst
+> +++ b/doc/board/qualcomm/debugging.rst
+> @@ -42,7 +42,6 @@ Older boards (db410c and db820c)
 >   
->   config DEBUG_UART_MSM_GENI
-> -	bool "Qualcomm snapdragon"
-> +	bool "Qualcomm GENI UART debug"
->   	depends on ARCH_SNAPDRAGON
->   	help
->   	  Select this to enable a debug UART using the serial_msm driver. You
+>   Open ``configs/dragonboard<BOARD>_defconfig``
+>   
+> -	CONFIG_BAUDRATE=115200
+>   	CONFIG_DEBUG_UART=y
+>   	CONFIG_DEBUG_UART_ANNOUNCE=y
+>   	# db410c - 0x78b0000
+> @@ -50,7 +49,6 @@ Open ``configs/dragonboard<BOARD>_defconfig``
+>   	CONFIG_DEBUG_UART_BASE=0x75b0000
+>   	CONFIG_DEBUG_UART_MSM=y
+>   	CONFIG_DEBUG_UART_CLOCK=7372800
+> -	#CONFIG_DEBUG_UART_SKIP_INIT=y
+>   
+>   	CONFIG_LOG=y
+>   	CONFIG_HEXDUMP=y
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
