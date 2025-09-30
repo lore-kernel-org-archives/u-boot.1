@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E28CCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 15:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3110CAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 15:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B50EF835B9;
-	Tue, 30 Sep 2025 17:52:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1AE2D802C1;
+	Tue, 30 Sep 2025 17:55:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RjwHfB2y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DTACvyj7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9FCC80819; Tue, 30 Sep 2025 17:52:28 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id E078C80819; Tue, 30 Sep 2025 17:55:24 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABC32834E1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 17:52:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7407800B1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 17:55:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-46e2826d5c6so47030755e9.1
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 08:52:26 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-91179e3fe34so792539f.1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 08:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759247546; x=1759852346; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EasvUKQeDRvQG/q1/o8375dZ2ql8KbvaT4Hxlt3pz90=;
- b=RjwHfB2yl0oWUtEZdrpUJxNLiIf+GPDhsZH053y7UJOGtIoUNWLNK1L5BCA5bip4Cf
- rMSlPVa0g8mtY8L0Gj12ifYsyqIk/s9v3buaaq6zaybtRko4RbEQlDxJjh1UjUERewUo
- rV7FzhtOoSVnWrkWDF98wpPquvfiKNuFy7S/QqXh3aEjMnfVrQojswWHoEo+rGxLfvYk
- 21oceRzF7gSr9W9AjlaoNWtC9QMWcy9Gc+ReAV9EgKuVvAbV4/3Leqlwr/chzq2zqb8n
- RYMweaFCyxpDE9tA8a/hC6hqMuPcUvMSWiOoucVAKVkqC1aosnlXlIXygEWhZJi6WvdX
- SGiQ==
+ d=konsulko.com; s=google; t=1759247721; x=1759852521; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nv9YRtCcy5+BPGUuv/2Ln9+iwaXzwoOrwkTD/M8UUb0=;
+ b=DTACvyj7VG28WLzSIGxrPh8OJVrKG0zBDf7p/bYVRBNx2qDxECcfQio5SDGcOrW0NK
+ pQfu9Asd4pc9gSijBTTWycLlPeGxONr90w66Dwn3RIoGtcMUH3Zz8ta1lWrY2H/JGvdk
+ KAZEwDXo1Uc/6wVaF39zkQJNmqlZ14zABJizs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759247546; x=1759852346;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EasvUKQeDRvQG/q1/o8375dZ2ql8KbvaT4Hxlt3pz90=;
- b=ZnIwybjEb0j0EeQP7OlrAT3lnjv2HvxA+GGGeTsbBgruvcJx548tSxFBTfpy9nWIGL
- riIz9epBLYzmkJWf57KehW80jTCuRR7rMie/87d+z4B70G8+oXMiUOHfyMVKhopUdw/r
- Q/z0Hp5CrAM9Y2hY+qVtwG/JxfwuOhLVhH+fM5ARhmH3aG69XSIJN7mp5RwoCtKaafua
- ukgNP7RV9rtbjcMDW8bo3qH+W+r/sD5A1t1lDR/NNZce+TiKxVB/GyppUvse/z2SwfWs
- wHkVvXFm2/LPNendZnuzRIX9TLQcUuoNe372DTjWXV7YclLjwqBp9VjuTDjugdzJ7x+z
- Xo+g==
-X-Gm-Message-State: AOJu0YwFSIF0e1QdWyx/mr7lNzfcZOJa9knSg3mthDOYftGC+60enVM9
- RqHF6s+IrM/qF1ciFcK5zMKXNfL/J1XXg0bKx1ZXr/f9c5/FiHMsEcZWONMPOFyDRHRE2MZ9cv/
- 27XP8
-X-Gm-Gg: ASbGncuNCar80A1tPZ5seXrjBCj8u98DHW80BKXTsza1sEjdSb6rP5XjBvbj9IZbpkt
- w8nBG0pRcpc8K3IueNdD7MUjKh3JDHOoC0IaVEwYCLu8N50nYrnNHPiGnKeHZtRNossV2WA58zm
- 54cZHrpTFU8EVryYyZ/csx3cYkCJ+ABwT+785D1B1vAyeoqt4HSFuM0b9BqGoaGWXCwecQkmYq+
- asm82HZpdAqRMrJpiWaw+4w1u4HYnZdZwspQkKCMokLLMaXQKSxkOS2hKfzkqeTo+KBOa0hklC5
- 4ewA0g5cT0Vf+8LQZtkbjETgTBz3PWEgmuYB5jTJFENUfFXX3yRsoH41Mh/o5JN1TDUh5CIxNAm
- AgE2CYJdpg/K/cbS+f/sYzXgecVNZlxybUhp3zzDMGV7ZLb6HbMB7sVfbyIvNQo0zeL3r4S/e2G
- P9Ea3kg6y+
-X-Google-Smtp-Source: AGHT+IFQW/vFm8nvqrzN53RK48yeDjUay6z9dKuajWtkKhnRKAhFiFa2vdCE+koVtrdRGTfFzE6F3A==
-X-Received: by 2002:a05:600c:8119:b0:46e:4883:27d with SMTP id
- 5b1f17b1804b1-46e6128617amr3228215e9.30.1759247545867; 
- Tue, 30 Sep 2025 08:52:25 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ebd:e301:aed:2018:ed42:d786])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e56f3dcacsm64747165e9.2.2025.09.30.08.52.25
+ d=1e100.net; s=20230601; t=1759247721; x=1759852521;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nv9YRtCcy5+BPGUuv/2Ln9+iwaXzwoOrwkTD/M8UUb0=;
+ b=wAJXGFo2cqVBi6yUTer6Ir2iYMD1YEVkmPy+6bSzZG+jXZn/kl1mrenebiAmBUtYWB
+ 4f6m6RmDxQ7h/SaapCAbHE+3R7BdPn5TS0w3vmWnSWLVabyINzYQviFniSAQFtTzso6O
+ OFzQSZDa304HSSopyzNBZb9vl3pchbbiilNQ0UFJmaD9ROxoFOWlMF/UATBlacKWK0Xv
+ uZ1edSa5uYR8BshhSxtbqeijh2Pi7ZNd+A7cRE3uUYbjqo+YmRMTOY6lYF1KwMTr18s7
+ kp8YI+9Mm9YB/OU2TaMFqUJWOPNvetJON66+Aj95KPcAR5f+F+GSqBLOF6izANI9bDqK
+ khUw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUQfX/9ogyvowOsmCATSBu49ZSCAp0IqrQlsOW3vOBAYgw/YSWX8oHjMUdKSsTak8Cxax47pXM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxz7c/DaqwrAEhJFnIsZRt+ESCIFAe5hTWqmM24/dFYs2FKTdhe
+ 8zEetjJk/+lAtTHrM0wkAu+LNrKSjOKSCBTVdZAmgl28ZL30gXxG8wuF6KTatbhBt0Q=
+X-Gm-Gg: ASbGncsnhrYDQdsc++m4QUcFsI/WSaQaANc663Ju7yev37twtkXglSlSw9mSAuP79oA
+ fQQH2+hHEGkR38XaTvnYU0Bw/ofH36ZS5d6uvwbq5kOYFCY4MszPGDS1e5d4O7j3kzVG5qk48//
+ 1cd62Z8YF6ko+UN4uNFXV4YU9Hl6c+UdXTEIcT1xfr8BNJIj2opP7rsxMOFzYECmJaoc+5Ur0VL
+ 3j1RNn/zuU1To2fNkfqb9Jt0Ecm+Nr66FEa9M48y4BM20VCSHqExfaLMCM3i2+01ocnDoffWa1K
+ Z+pdjfpdNYsc0wz0Co/mfS+7Za8CwjG2lkUvIrMlRrqdzSuiVyJwlM466YTer1NhwJ2VMJL5wR5
+ ogSDj6UhpImFH2r0ZD2BPvhhXH1sHfDwsf+c4QaalqhIdHeQrfdDa714fNje1buEUZPKu79FEra
+ r9YXuW/Iakt2iDyWG0/HfvKQ+IVw==
+X-Google-Smtp-Source: AGHT+IESDWz3tkdSd5cMKJDnTDM4wqEZcPYir7tB0sL2UwLS78tfHLgwgHmWgchJO0RQTCS4ZXHFqg==
+X-Received: by 2002:a05:6602:2754:b0:917:664e:c00b with SMTP id
+ ca18e2360f4ac-930b0de69c8mr560373839f.9.1759247721429; 
+ Tue, 30 Sep 2025 08:55:21 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-56a6ae6ec63sm5996337173.73.2025.09.30.08.55.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Sep 2025 08:52:25 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 30 Sep 2025 16:52:24 +0100
-Subject: [PATCH 3/3] usb: musb-new: Cannot test unsigned member to be negative
+ Tue, 30 Sep 2025 08:55:20 -0700 (PDT)
+Date: Tue, 30 Sep 2025 09:55:18 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Conor.Dooley@microchip.com
+Cc: Jamie.Gibbons@microchip.com, u-boot@lists.denx.de,
+ Valentina.FernandezAlanis@microchip.com, Cyril.Jean@microchip.com,
+ ycliang@andestech.com
+Subject: Re: [PATCH] board: mpfs_icicle: fix pointer assignment in
+ board_fdt_blob_setup()
+Message-ID: <20250930155518.GC6093@bill-the-cat>
+References: <20250930154534.3914214-1-jamie.gibbons@microchip.com>
+ <20250930154837.GB6093@bill-the-cat>
+ <f6b35b7a-457b-48e9-bec7-df3e57b9f6ed@microchip.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250930-usb_musb-new-v1-3-be0c9b79a8a0@linaro.org>
-References: <20250930-usb_musb-new-v1-0-be0c9b79a8a0@linaro.org>
-In-Reply-To: <20250930-usb_musb-new-v1-0-be0c9b79a8a0@linaro.org>
-To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
- Lukasz Majewski <lukma@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: u-boot@lists.denx.de, Kory Maincent <kory.maincent@bootlin.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="d1QRIg1NMilb4Xg9"
+Content-Disposition: inline
+In-Reply-To: <f6b35b7a-457b-48e9-bec7-df3e57b9f6ed@microchip.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,152 +103,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-You cannot test an unsigned member of a struct for being negative, the
-test will always fail. Instead assign the return value of
-fdtdec_get_int, which returns an int, to a temporary variable declared
-as an int, so that it can be tested for being negative before being
-assigned to the unsigned struct member.
 
-This issue was found by Smatch.
+--d1QRIg1NMilb4Xg9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/usb/musb-new/omap2430.c | 34 +++++++++++++++++++++-------------
- drivers/usb/musb-new/ti-musb.c  | 28 +++++++++++++++++-----------
- 2 files changed, 38 insertions(+), 24 deletions(-)
+On Tue, Sep 30, 2025 at 03:51:02PM +0000, Conor.Dooley@microchip.com wrote:
+> On 30/09/2025 16:48, Tom Rini wrote:
+> > On Tue, Sep 30, 2025 at 04:45:34PM +0100, Jamie Gibbons wrote:
+> >=20
+> >> Correct the assignment in board_fdt_blob_setup() to use *fdtp instead =
+of
+> >> fdtp, ensuring the caller receives the correct FDT address. This
+> >> resolves an issue where the device tree pointer was not properly set d=
+ue
+> >> to assigning to the local parameter rather than the dereferenced
+> >> pointer.
+> >>
+> >> Fixes: 63a8506580b6 ("board: mpfs_icicle: implement board_fdt_blob_set=
+up()/board_fit_config_name_match()")
+> >=20
+> > This commit is not in master nor next, where is it? I think this is
+> > something that can be folded in to another patch and that patch
+> > re-posted. Thanks.
+>=20
+> It should be:
+> Fixes: 7c16ebba1ed ("board: mpfs_icicle: implement board_fdt_blob_setup()=
+/board_fit_config_name_match()")
+> and the patch is
+> Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
 
-diff --git a/drivers/usb/musb-new/omap2430.c b/drivers/usb/musb-new/omap2430.c
-index ba600d0110239164ca7c287ba6347e20d9ae2931..7fd6639013a7fcdaaf9aee38bdaddaa82a66f3a5 100644
---- a/drivers/usb/musb-new/omap2430.c
-+++ b/drivers/usb/musb-new/omap2430.c
-@@ -142,41 +142,49 @@ static int omap2430_musb_of_to_plat(struct udevice *dev)
- 	struct omap2430_musb_plat *plat = dev_get_plat(dev);
- 	const void *fdt = gd->fdt_blob;
- 	int node = dev_of_offset(dev);
-+	int ret;
- 
- 	plat->base = (void *)dev_read_addr_ptr(dev);
- 
--	plat->musb_config.multipoint = fdtdec_get_int(fdt, node, "multipoint",
--						      -1);
--	if (plat->musb_config.multipoint < 0) {
-+	ret = fdtdec_get_int(fdt, node, "multipoint", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB multipoint DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		plat->musb_config.multipoint = ret;
- 	}
- 
- 	plat->musb_config.dyn_fifo = 1;
--	plat->musb_config.num_eps = fdtdec_get_int(fdt, node, "num-eps", -1);
--	if (plat->musb_config.num_eps < 0) {
-+	ret = fdtdec_get_int(fdt, node, "num-eps", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB num-eps DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		plat->musb_config.num_eps = ret;
- 	}
- 
--	plat->musb_config.ram_bits = fdtdec_get_int(fdt, node, "ram-bits", -1);
--	if (plat->musb_config.ram_bits < 0) {
-+	ret = fdtdec_get_int(fdt, node, "ram-bits", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB ram-bits DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		plat->musb_config.ram_bits = ret;
- 	}
- 
--	plat->plat.power = fdtdec_get_int(fdt, node, "power", -1);
--	if (plat->plat.power < 0) {
-+	ret = fdtdec_get_int(fdt, node, "power", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB power DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		plat->plat.power = ret;
- 	}
- 
--	plat->otg_board_data.interface_type = fdtdec_get_int(fdt, node,
--							     "interface-type",
--							     -1);
--	if (plat->otg_board_data.interface_type < 0) {
-+	ret = fdtdec_get_int(fdt, node, "interface-type", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB interface-type DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		plat->otg_board_data.interface_type = ret;
- 	}
- 
- #if 0 /* In a perfect world, mode would be set to OTG, mode 3 from DT */
-diff --git a/drivers/usb/musb-new/ti-musb.c b/drivers/usb/musb-new/ti-musb.c
-index 967d0953875f734ceeb4bd4be610f9cc562ce430..bcd31adba522fc55190fc43fd2dbd2dec93a2731 100644
---- a/drivers/usb/musb-new/ti-musb.c
-+++ b/drivers/usb/musb-new/ti-musb.c
-@@ -86,6 +86,7 @@ static int ti_musb_of_to_plat(struct udevice *dev)
- 	int phys;
- 	int ctrl_mod;
- 	int usb_index;
-+	int ret;
- 	struct musb_hdrc_config *musb_config;
- 
- 	plat->base = devfdt_get_addr_index_ptr(dev, 1);
-@@ -108,35 +109,40 @@ static int ti_musb_of_to_plat(struct udevice *dev)
- 	musb_config = malloc(sizeof(struct musb_hdrc_config));
- 	memset(musb_config, 0, sizeof(struct musb_hdrc_config));
- 
--	musb_config->multipoint = fdtdec_get_int(fdt, node,
--						 "mentor,multipoint", -1);
--	if (musb_config->multipoint < 0) {
-+	ret = fdtdec_get_int(fdt, node, "mentor,multipoint", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB multipoint DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		musb_config->multipoint = ret;
- 	}
- 
- 	musb_config->dyn_fifo = 1;
- 
--	musb_config->num_eps = fdtdec_get_int(fdt, node, "mentor,num-eps",
--					      -1);
--	if (musb_config->num_eps < 0) {
-+	ret = fdtdec_get_int(fdt, node, "mentor,num-eps", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB num-eps DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		musb_config->num_eps = ret;
- 	}
- 
--	musb_config->ram_bits = fdtdec_get_int(fdt, node, "mentor,ram-bits",
--					       -1);
--	if (musb_config->ram_bits < 0) {
-+	ret = fdtdec_get_int(fdt, node, "mentor,ram-bits", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB ram-bits DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		musb_config->ram_bits = ret;
- 	}
- 
- 	plat->plat.config = musb_config;
- 
--	plat->plat.power = fdtdec_get_int(fdt, node, "mentor,power", -1);
--	if (plat->plat.power < 0) {
-+	ret = fdtdec_get_int(fdt, node, "mentor,power", -1);
-+	if (ret < 0) {
- 		pr_err("MUSB mentor,power DT entry missing\n");
- 		return -ENOENT;
-+	} else {
-+		plat->plat.power = ret;
- 	}
- 
- 	plat->plat.platform_ops = &musb_dsps_ops;
+Ah. And that is in master, so this should be for v2025.10 then?
 
--- 
-2.47.3
+--=20
+Tom
 
+--d1QRIg1NMilb4Xg9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaNv9ZgAKCRAr4qD1Cr/k
+CpS3AQD1VmqYfxe3ui57A+o+bAlI4VJ8LF2wGi9cI9OO5dZcOwEAlFwje/yAZXNQ
+U7sB5QOq4Uha3goVwGn8G48XBSZWzwQ=
+=wDuk
+-----END PGP SIGNATURE-----
+
+--d1QRIg1NMilb4Xg9--
