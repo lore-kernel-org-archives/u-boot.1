@@ -4,116 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9AECAC5B8
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 07:59:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C6CCAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 08:05:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F64583045;
-	Tue, 30 Sep 2025 09:58:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3464083045;
+	Tue, 30 Sep 2025 10:05:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=ew.tq-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="enuIKOOn";
+	dkim=pass (2048-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="aDGGkQbw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FF218341C; Tue, 30 Sep 2025 09:58:58 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C78EB8349B; Tue, 30 Sep 2025 10:05:50 +0200 (CEST)
+Received: from mx-relay49-hz3.antispameurope.com
+ (mx-relay49-hz3.antispameurope.com [94.100.134.238])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 168E6828A2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 09:58:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-46e47cca387so36283175e9.3
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 00:58:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759219135; x=1759823935; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=X2XamG8G912J91oKQxlE+W/uOy1HE4QHFXdbbL0Ryd0=;
- b=enuIKOOnG/sMlKTv9O5QLPD+mdifzVvEDSgfav4VJR1DbBbKWcdvdm5c+f5eSZrl8u
- gztQk6ylAlx5sFUo3PQdcz6j0iI6zlrZRkCp85KH2eelaCosmTn3iZFJIO/Dv7tB12rp
- /uAAMOJC7XUIt2N9/FQVd0NPXCR7uLUzdAoB7/HGu2bpyYVb5grKZNWKntufLlfDVEm7
- ygnmzrs8xCIM6b0jtGr9PXhEv7dzd0QZ0WfEh/bZ7WN/b9vDcHhFq6nx6jx/KM7Zt4NA
- j1HVC3l5AP0JBS9VzpLgiJR3C/esKZDbLmxpxxKuy1MF9rObq/u77KNr57RRApMvSAAM
- VZZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759219135; x=1759823935;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:from:references:cc:to:subject:reply-to:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=X2XamG8G912J91oKQxlE+W/uOy1HE4QHFXdbbL0Ryd0=;
- b=V6oXYqR2PD9vYSkwlqqXhx13AiPaSXUBecszksqBCTI5+DUdw+YzyoUntZRnGlZAgk
- xTGqBPc9RF4zeh4hDTeHRBAowcyk6pGd3aUXlJ9G1ZC/sPfFjhlMj8UH/UjZedj+uzCR
- mtUfjOoZYPT14DKnDy8QjytSk0hT2Ed9ZZXN888FdVr+4ujpcyZdoqa9UtyZ+aHOgYEY
- 8lZJac5gJeNy3/e9oXI97az27yp0vV2sN+3PMRN6FYXPqEW/U/MMgQU2pO5gG9hvvZ65
- FyHJZ8i3VtLmzEk4KeLrc1/yl8Mj/k8ZawfjTmnIz6ZLnEvhVOnQ7snFXs3xH2na5w9Z
- 3ptw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXEPbGyLLC0QsKLphrJdG7JSXUy9vMjckb9EYVVKpmWw3Fkb1p2GnlEUVcf0B7Yq9NoHTpNpY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz8DDrD0qwLzoEYtPqNw+NpH2xL1tgi1skAM8f7JSB6H5IxpqqE
- zJ7W1kfb2ufu1y2S4ZBXmarD0V/XLk6ik6t4CJ06S3xGPOg+3cnyNCKWt1hYWUOKHxY=
-X-Gm-Gg: ASbGnctg6JvRAVhvrLRim8Z07VvixdvciGW9ltRiPcxyLXwJsgvSxyw9XTf0/MPwMZU
- wIWzxnRDJ3/piFBkqmlincD891shDxgSUNcSqcm8K6QtvyQGymTDZvNId/X6r1VZ9UVhoNl5p7D
- DsrOUh4xUz3ppI3Fi1KQp9rOPQzgubzsAZ702mQIH5Avy7VVRXF7hYo+zMSQY7ijy1o+DOAiDjc
- RAG8Avu9KUrM/fM/gNp2axKrtW5CFIH08LwlIwQIO9auClX1R0GlZLjGFcRNfpi6Q5hjb54M6WV
- MCv0gYQmJDnQwNdSSN0++ngCQi+26TNgq4mW01YtYUBi0OGBlFWRlm3AwUqJbpbc+mFPxEBFYI2
- yWaXfsG4MWVLlGVCnZcQKKl1sG2StK5GfAOO42ctTkFxQzHdmZimeXCH+qMq1UeXewc5gI5p/Pr
- lP8NUYORD9sPJgdpdgPQqA6SSPl8Vy54tVMWQSHZKbooRr
-X-Google-Smtp-Source: AGHT+IGpTWJJ2Ldbz+vZO1piAvsLLm6gmjjbPSNKx4GlnT3TahwKhgRP5Z5agGDfK6PPazUHmeT/qQ==
-X-Received: by 2002:a05:600c:c4a3:b0:46e:4882:94c7 with SMTP id
- 5b1f17b1804b1-46e5e3b15b7mr3565815e9.28.1759219134765; 
- Tue, 30 Sep 2025 00:58:54 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:9459:14e0:525e:d859?
- ([2a01:e0a:3d9:2080:9459:14e0:525e:d859])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e2ab4897bsm256573575e9.17.2025.09.30.00.58.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 00:58:54 -0700 (PDT)
-Message-ID: <3acecdb4-5fbe-4f97-8184-c0b864f7b371@linaro.org>
-Date: Tue, 30 Sep 2025 09:58:53 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 279A8828A2
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 10:05:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=ew.tq-group.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=0361cc115b=matthias.schiffer@ew.tq-group.com
+ARC-Authentication-Results: i=1; mx-gate49-hz3.hornetsecurity.com 1; spf=pass
+ reason=mailfrom (ip=94.100.132.6,
+ headerfrom=ew.tq-group.com)
+ smtp.mailfrom=ew.tq-group.com
+ smtp.helo=hmail-p-smtp01-out04-hz1.hornetsecurity.com; dmarc=pass
+ header.from=ew.tq-group.com orig.disposition=pass
+ARC-Message-Signature: a=rsa-sha256;
+ bh=RZykwf2s1GuW5NH5m0bR+3kXlt2qat1iEArT+voiJH4=; c=relaxed/relaxed;
+ d=hornetsecurity.com; h=from:to:date:subject:mime-version:; i=1; s=hse1;
+ t=1759219547;
+ b=oceSVL/2fHh40S8m0Zwmcl6GDL5t2zYZnTrkmHpgQhr3edM13HQ0Pe2YBMywtuOC3vP0aaxV
+ Yp5LPsudCsVBNHeJFlslrDaudzcynDeVKalAs/2+uSp/W+dcqejlCvQeP+6A4fOYx4g+ZaHtGNt
+ rQYamDi0SQ6+Qkx9DUmKWEU0uRayDVWXxLDKGESb234yK47tDK5l0gQoujQAUhmw+6/rIh0c2Gt
+ dOuCe4k1nNRG6VOATJJYtemIEXZaEfWXgm40i+SUWhX8DOr4yMHrqT4F0z16epyAgNiAD/FnxOn
+ tdo1LeUXGFEh9j6w1oj4zuqr6yQ5pVX6dgsE1moBmQDmQ==
+ARC-Seal: a=rsa-sha256; cv=none; d=hornetsecurity.com; i=1; s=hse1;
+ t=1759219547;
+ b=iJCuBJ+s9FsmxV+StkbJZAesmzhLheATetrIlhEoKyf6unQmCwxEdaLfkxy8qbUgY8ClYL3s
+ O9Flu2nsK7G9bAxQ2LkDfcyewq3tNMGo2FyCT42tKeeOtsjWVNWWzu+auhZ7mPHbYwOeRgFSBs8
+ o96LaWPs7ftBe0Ed8W38lElv8wqcIPEbNEk7k1KOgkFj/WARkSnJBa1Q6KFHrzIAVYGvlwTatBL
+ 5t2sU3qDDduZDYKsZRSYB1y91MU4N4dF1osB1/ZdLjrLiosOqRVnoVoX6v2eF6cHQk2FMvBP8+a
+ bRcAUr0Ya+g594Bt+BdiU61in/xsftRWqfJ9SuSo8Hh4A==
+Received: from he-nlb01-hz1.hornetsecurity.com ([94.100.132.6]) by
+ mx-relay49-hz3.antispameurope.com; Tue, 30 Sep 2025 10:05:47 +0200
+Received: from schifferm-ubuntu.tq-net.de
+ (host-82-135-125-110.customer.m-online.net [82.135.125.110])
+ (Authenticated sender: matthias.schiffer@ew.tq-group.com)
+ by hmail-p-smtp01-out04-hz1.hornetsecurity.com (Postfix) with ESMTPSA id
+ 250AC220CEB; Tue, 30 Sep 2025 10:05:34 +0200 (CEST)
+From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Subject: [PATCH 2/2] net: ethernet: ti: am65-cpsw: fix up PHY mode for fixed
+ RGMII TX delay
+Date: Tue, 30 Sep 2025 10:05:11 +0200
+Message-ID: <21bad4e5c0be491fdd26de431b5253b6c87a8b24.1759218200.git.matthias.schiffer@ew.tq-group.com>
+X-Mailer: git-send-email 2.51.0
+In-Reply-To: <cover.1759218200.git.matthias.schiffer@ew.tq-group.com>
+References: <cover.1759218200.git.matthias.schiffer@ew.tq-group.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] doc: Update coding style to recommend b4 for patch
- submission
-To: Javier Tia <javier.tia@linaro.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20250929-b4-docs-v2-1-478285f08639@linaro.org>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250929-b4-docs-v2-1-478285f08639@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-cloud-security-sender: matthias.schiffer@ew.tq-group.com
+X-cloud-security-recipient: u-boot@lists.denx.de
+X-cloud-security-crypt: load encryption module
+X-cloud-security-Mailarchiv: E-Mail archived for:
+ matthias.schiffer@ew.tq-group.com
+X-cloud-security-Mailarchivtype: outbound
+X-cloud-security-Virusscan: CLEAN
+X-cloud-security-disclaimer: This E-Mail was scanned by E-Mailservice on
+ mx-relay49-hz3.antispameurope.com with 4cbVwt4LZTz3ybTb
+X-cloud-security-connect: he-nlb01-hz1.hornetsecurity.com[94.100.132.6], TLS=1,
+ IP=94.100.132.6
+X-cloud-security-Digest: 56536c1b7a75cd7f06628a21e7cad316
+X-cloud-security: scantime:2.079
+DKIM-Signature: a=rsa-sha256;
+ bh=RZykwf2s1GuW5NH5m0bR+3kXlt2qat1iEArT+voiJH4=; c=relaxed/relaxed;
+ d=ew.tq-group.com;
+ h=content-type:mime-version:subject:from:to:message-id:date; s=hse1;
+ t=1759219546; v=1;
+ b=aDGGkQbwed5xaKt8lbmAUsJvENTBTyH7x0dh6bjVaCSI76je5vBnaSYovamhAVoUqRBokRIi
+ r70c7Qd2g5SQ/VOGe9KEUKKPeOAjM1NTcsOwuYjG8sNnF1CdJZr+yL85Bc9PSOerTkMWMR1mg4Q
+ yjfWZdYHJawMFbFE4YUlHbt6vmjnseq8+WWqh/ZN2DF/EwrSvGjNVahacetl+hVFpcf01EMUeGx
+ bMbiGKSTmFUko3FZX9z9mowp1evmYqILiKS+oYGEA7+6dJJVnPvTUimt9flT6tIBcwy3E2ck2rN
+ cYVoGjnjaKj/kvo2tXBlUTRk3Vz489QNye9RUcPwMM1cQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,122 +106,127 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/29/25 22:58, Javier Tia wrote:
-> Replace references to patman with b4 as the recommended tool for
-> preparing and sending patches. b4 is widely adopted in the Linux kernel
-> community and U-Boot ships with configuration to simplify its use with
-> the project mailing list.
-> 
-> The updated guidelines describe how to prepare series with b4, handle
-> cover letters and recipient lists, run style checks, and send patches
-> safely. Instructions also highlight how to collect and apply review tags
-> before resending.
-> 
-> This change documents the preferred workflow for contributors and
-> ensures consistency with common practices across related upstream
-> communities.
-> 
-> Signed-off-by: Javier Tia <javier.tia@linaro.org>
-> ---
-> This small series updates U-Boot's contributor guidelines to sync with
-> current best practices around Linux kernel patch submission. It should
-> make contributing smoother for new developers.
-> 
-> The first patch updates doc/develop/codingstyle.rst to recommend the b4
-> tool instead of patman as the standard workflow for preparing and
-> sending patches. The revised documentation explains how to create and
-> manage series, run style checks, handle cover letters, discover mailing
-> list recipients, and collect review tags. This reflects widespread
-> adoption of b4 in the Linux kernel community and ensures U-Boot
-> contributors follow consistent, upstream-friendly practices.
-> ---
-> Changes in v2:
-> 
-> * Drop commit changing .b4-config
-> * Link to v1: https://lore.kernel.org/r/20250929-b4-docs-v1-0-a56c1a1856c5@linaro.org
-> ---
->   doc/develop/codingstyle.rst | 54 ++++++++++++++++++++++++++++++++++++++++-----
->   1 file changed, 48 insertions(+), 6 deletions(-)
-> 
-> diff --git a/doc/develop/codingstyle.rst b/doc/develop/codingstyle.rst
-> index bc18b2ebb7b0fc875a299b9e2e5c64c3d6a8e2b3..8ed6babe4556423fe30effc504615e07a841f21a 100644
-> --- a/doc/develop/codingstyle.rst
-> +++ b/doc/develop/codingstyle.rst
-> @@ -23,13 +23,55 @@ The following rules apply:
->     <https://peps.python.org/pep-0008/>`_. Use `pylint
->     <https://github.com/pylint-dev/pylint>`_ for checking the code.
->   
-> -* Use patman to send your patches (``tools/patman/patman -H`` for full
-> -  instructions). With a few tags in your commits this will check your patches
-> -  and take care of emailing them.
-> +* Use the `b4 <https://git.kernel.org/pub/scm/utils/b4/b4.git/>`_ tool to prepare and
-> +  send your patches. b4 has become the preferred tool to sending patches for many
-> +  Linux kernel contributors, and U-Boot ships with a ready-to-use ``.b4-config`` that
-> +  targets ``u-boot@lists.denx.de`` and integrates with ``scripts/get_maintainer.pl`` for
-> +  recipient discovery.
->   
-> -* If you don't use patman, make sure to run ``scripts/checkpatch.pl``. For
-> -  more information, read :doc:`checkpatch`. Note that this should be done
-> -  *before* posting on the mailing list!
-> +  Start a topical series with ``b4 prep`` and keep the commits organised with
-> +  ``git rebase -i``. ``b4 prep --edit-cover`` opens an editor for the cover
-> +  letter, while ``b4 prep --auto-to-cc`` collects reviewers and maintainers from
-> +  both the configuration file and ``scripts/get_maintainer.pl``.
-> +
-> +  .. code-block:: bash
-> +
-> +     b4 prep -n mmc-fixes
-> +     git rebase -i origin/master
-> +     b4 prep --edit-cover
-> +     b4 prep --auto-to-cc
-> +
-> +  Run the style checks before sending. ``b4 prep --check`` wraps the existing
-> +  tooling so you see the output from ``scripts/checkpatch.pl`` alongside b4's
-> +  own validation. You can always invoke ``scripts/checkpatch.pl`` directly for
-> +  additional runs.
-> +
-> +  .. code-block:: bash
-> +
-> +     b4 prep --check
-> +
-> +  When the series is ready, use ``b4 send``. Begin with ``--dry-run`` to review
-> +  the generated emails and ``--reflect`` to copy yourself for records before
-> +  dispatching to ``u-boot@lists.denx.de``.
-> +
-> +  .. code-block:: bash
-> +
-> +     b4 send --dry-run
-> +     b4 send --reflect
-> +     b4 send
-> +
-> +  After reviews arrive, collect Acked-by/Tested-by tags with ``b4 trailers -u``
-> +  and fold them into your commits before resending the updated series.
-> +
-> +  .. code-block:: bash
-> +
-> +     b4 trailers -u
-> +     git rebase -i origin/master
-> +     b4 send
-> +
-> +* Run ``scripts/checkpatch.pl`` directly or via ``b4 prep --check`` so that all
-> +  issues are resolved *before* posting on the mailing list. For more information,
-> +  read :doc:`checkpatch`.
->   
->   * Source files originating from different projects (for example the MTD
->     subsystem or the hush shell code from the BusyBox project) may, after
-> 
-> ---
-> base-commit: 26efc940c865a04d345ac9d39f71746fc2821da6
-> change-id: 20250929-b4-docs-60da5560f06a
-> 
-> Best regards,
+The am65-cpsw driver currently sets the SEL_RGMII_IDMODE flag in a MAC's
+mode register to enable or disable the TX delay. While this was supported
+for earlier generations of the CPSW controller, the datasheets of all
+modern TI SoCs using the am65-cpsw MAC state that the TX delay is fixed,
+and the SEL_RGMII_IDMODE bit is documented as reserved in most of them.
+Furthermore, while it was found that this bit does in fact disable the TX
+delay, [1] states that this setting is truly unsupported by TI and not
+just undocumented.
 
-Missed the v2, so adding it here aswell:
+Following the clarification of the rgmii* phy-mode values in the Linux
+DT bindings in [2], the Linux am65-cpsw driver was changed in [3] to
+account for the fixed TX delay by fixing up the mode passed to the PHY
+driver; a similar fixup already existed in the TI icssg-prueth driver.
+[4] followed up on this by explicitly clearing the SEL_RGMII_IDMODE flag
+to handle the case where it is set by the bootloader or other firmware
+before Linux.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+With the above changes, Device Trees that set the recommended "rgmii-id"
+mode are now appearing in Linux 6.17+. Avoid setting the unsupported
+SEL_RGMII_IDMODE flag for such Device Trees, and instead fix up the PHY
+interface mode, thus aligning the U-Boot driver with the Linux kernel.
+
+[1] https://www.spinics.net/lists/netdev/msg1112647.html
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c360eb0c3ccb95306704fd221442283ee82f1f58
+[3] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=ca13b249f291f4920466638d1adbfb3f9c8db6e9
+[4] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=a22d3b0d49d411e64ed07e30c2095035ecb30ed2
+
+Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+---
+ drivers/net/ti/am65-cpsw-nuss.c | 35 ++++++++++++++++++++-------------
+ 1 file changed, 21 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
+index 9b69f36d04d..ce1b38e9687 100644
+--- a/drivers/net/ti/am65-cpsw-nuss.c
++++ b/drivers/net/ti/am65-cpsw-nuss.c
+@@ -234,14 +234,11 @@ out:
+ #define AM65_GMII_SEL_MODE_RGMII	2
+ #define AM65_GMII_SEL_MODE_SGMII	3
+ 
+-#define AM65_GMII_SEL_RGMII_IDMODE	BIT(4)
+-
+ static int am65_cpsw_gmii_sel_k3(struct am65_cpsw_priv *priv,
+ 				 phy_interface_t phy_mode)
+ {
+ 	struct udevice *dev = priv->dev;
+ 	u32 offset, reg, phandle;
+-	bool rgmii_id = false;
+ 	fdt_addr_t gmii_sel;
+ 	u32 mode = 0;
+ 	ofnode node;
+@@ -278,12 +275,6 @@ static int am65_cpsw_gmii_sel_k3(struct am65_cpsw_priv *priv,
+ 		mode = AM65_GMII_SEL_MODE_RGMII;
+ 		break;
+ 
+-	case PHY_INTERFACE_MODE_RGMII_ID:
+-	case PHY_INTERFACE_MODE_RGMII_TXID:
+-		mode = AM65_GMII_SEL_MODE_RGMII;
+-		rgmii_id = true;
+-		break;
+-
+ 	case PHY_INTERFACE_MODE_SGMII:
+ 		mode = AM65_GMII_SEL_MODE_SGMII;
+ 		break;
+@@ -298,9 +289,6 @@ static int am65_cpsw_gmii_sel_k3(struct am65_cpsw_priv *priv,
+ 		break;
+ 	};
+ 
+-	if (rgmii_id)
+-		mode |= AM65_GMII_SEL_RGMII_IDMODE;
+-
+ 	reg = mode;
+ 	dev_dbg(dev, "gmii_sel PHY mode: %u, new gmii_sel: %08x\n",
+ 		phy_mode, reg);
+@@ -630,7 +618,7 @@ static int am65_cpsw_phy_init(struct udevice *dev)
+ 	u32 supported = PHY_GBIT_FEATURES;
+ 	int ret;
+ 
+-	phydev = dm_eth_phy_connect(dev);
++	phydev = dm_eth_phy_connect_interface(dev, pdata->phy_interface);
+ 	if (!phydev) {
+ 		dev_err(dev, "phy_connect() failed\n");
+ 		return -ENODEV;
+@@ -657,9 +645,28 @@ static int am65_cpsw_ofdata_parse_phy(struct udevice *dev)
+ 	dev_read_u32(dev, "reg", &priv->port_id);
+ 
+ 	pdata->phy_interface = dev_read_phy_mode(dev);
+-	if (pdata->phy_interface == PHY_INTERFACE_MODE_NA) {
++
++	/* CPSW controllers supported by this driver have a fixed internal TX
++	 * delay in RGMII mode. Fix up PHY mode to account for this and warn
++	 * about Device Trees that claim to have a TX delay on the PCB.
++	 */
++	switch (pdata->phy_interface) {
++	case PHY_INTERFACE_MODE_RGMII_ID:
++		pdata->phy_interface = PHY_INTERFACE_MODE_RGMII_RXID;
++		break;
++	case PHY_INTERFACE_MODE_RGMII_TXID:
++		pdata->phy_interface = PHY_INTERFACE_MODE_RGMII;
++		break;
++	case PHY_INTERFACE_MODE_RGMII:
++	case PHY_INTERFACE_MODE_RGMII_RXID:
++		dev_warn(dev,
++			 "RGMII mode without internal TX delay unsupported; please fix your Device Tree\n");
++		break;
++	case PHY_INTERFACE_MODE_NA:
+ 		dev_err(dev, "Invalid PHY mode, port %u\n", priv->port_id);
+ 		return -EINVAL;
++	default:
++		break;
+ 	}
+ 
+ 	dev_read_u32(dev, "max-speed", (u32 *)&pdata->max_speed);
+-- 
+TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
+Amtsgericht München, HRB 105018
+Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
+https://www.tq-group.com/
+
