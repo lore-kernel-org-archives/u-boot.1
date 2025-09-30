@@ -4,91 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50A38CCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA31ECAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:39:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4DFF832AD;
-	Tue, 30 Sep 2025 20:38:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 28B0880819;
+	Tue, 30 Sep 2025 20:39:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lHvVMRkT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FMwoAaQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0665D800D7; Tue, 30 Sep 2025 20:38:52 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 1580E835B0; Tue, 30 Sep 2025 20:39:02 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E7C8832AD
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:38:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 057D8835CB
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:39:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3c68ac7e18aso4286931f8f.2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:38:50 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3fa528f127fso147681f8f.1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:39:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759257529; x=1759862329; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759257539; x=1759862339; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=DWaiXN1vKIufAKLCcIBOQZ0ccL+0qUQsDaU7TSzQQmg=;
- b=lHvVMRkT/94fCucSeHHlmZVa2raPuwleN9g0UrUqxvIABsZqjoU3Xm7PPvinzuMgbY
- YjePXnaHyMkodCPE95MOjKRx66WMxKXy28pPov5m8obeHhRJCY79FH5EfdsjI8lSAgSM
- QeGULbfdxDvhmu+kuGwu0zYqbZPwk8GsMartWLZvLzbVdvnAUcgtp9BxGIcvgyoBw5g9
- iT/JNZ9YSGZKYEWMOae/in5S2JNHcMk1Z9jkC4U/pI0/s7c4jlGbXpfBUSsBtle7JJ84
- 0HohbdArCPlPWXoJZHihBhmoSrGr8lPhak3k2pY6aTv5CeLhyQwzXx6dBCwjg9Z18+52
- 1WsA==
+ :reply-to; bh=KEHMBUpyQlDsmEusN5JpLujBopgCP5c8q5jl66+2qkc=;
+ b=FMwoAaQjsC3ZejKwNPy77wRon38eBe0li/0+FAncpeROM/1R7lfFsCYm72ISAhsdx1
+ fJXyCVwUYcrWw6gyM9sstcQQqTIDWZoYi7pOoaCH1gDLQniJzdSyCcTpIll+UflRFN/b
+ tv/uY9zLTP2HojGwDOBE5JrzeYVxaTAnSYpnMn+NXPSaVVi13FND6bNUoufJYSzf14s8
+ seDl2YH9PKwRYk7BmPv/59zVyeZjHk6JotZwMApuPgP+f/QcfvDnx+BRbKwYeIebEYvv
+ ax4w7wAusjfORrZMSXfBwl9+xarzNQhlBG58ZH8NnECfgpdjiWxLfRIckRkOV19gmw91
+ ereA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759257529; x=1759862329;
+ d=1e100.net; s=20230601; t=1759257539; x=1759862339;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=DWaiXN1vKIufAKLCcIBOQZ0ccL+0qUQsDaU7TSzQQmg=;
- b=t9wEAb4+De4tAcx0gOFgFQynpiJD9q2qVrWYGaVd1vsgxR0MtrrjLlHKh6fV/4zMqA
- 3YpmlEHw68FMd8k6zqT+THlQ8XnTLtFvVs6vtb1sBhepfXd2kPJ7DnRJoSn3OOR8tXLV
- hebM9r/IacfJLltvz7iUXj0+KZvFc1PqszGGQwBf7Hu7a895U38gVRnmviCzkianzUD9
- RuLILC0TrPTtzWKccjsIgmeyib47kHWmtzG+8oPWWaMHLNE23YSp1xTWXLYHVmhamP7d
- /7Sh076hJ85VLv8NuLAB8twZyIrEi4YgqUwRs0c+sxPMMGfZUKeLciERP4PNKznKBdlH
- KLsw==
+ bh=KEHMBUpyQlDsmEusN5JpLujBopgCP5c8q5jl66+2qkc=;
+ b=LJS3i6+JGAQTT3k35Ch+c66MMcDnLlKDS8mkal3CAtJIYA01j5xIfjpPmRGuiBjqOd
+ FhItYuWcnx4AQ9oyy8qM2+q4o3GvBqYKuADK0HW8/zKN/SkCzWF6GoSoRykgUbL/UJp4
+ LZ3UiD7XtrmDOR2baGvLDpRkmPbBY9ik43DPZ94fprMozpggixJYyu596x9Xq0bg4a0l
+ 0HkXUf1uGd+cO7S1jyc/7iCxfO1ttncbSdEeEs/yjyfBjCpm81JKUJEkHa9yA92Bhp32
+ EZb0rtwZnLv/NloaD0njF/FdsSN/IxkfO3J7m3HTM8UX38aaF7hpPA7mh22q/03vy7dG
+ IAog==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJ6C1jpPKH5LAK9uWdxR/TcAeGrgO/FFv19RQMtUMVPFyI7Yh3SHlrpmInhCdAa4GB9xz54gw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZ1/F0WA59AgOxre3vMTN5MKFw4/5pt1Bm5uuUhk9EWSqh2UAk
- 43b3VAfc6x5jxAm3BmZXyt0hBpoPVb+JDYVkfbrISMn4lUdRjbWP7A5Kki7ad/jGjPc=
-X-Gm-Gg: ASbGncscNED1Ke06/MvXmQj5rqMyiYgbGLi/fKiGefutog/V0szpveN0cs210ZvkrwA
- A/RpHRwf7bQMzg/jfpFkFZrHguRdNdiTvTwFbCmfFLKJ8x85MdXbTBY5uQH2fnWvAt7TnZDfIfw
- LuNdWBkzJRypjajZcZR9dDlWhS8wIICdYqsa9uv6Nlwp4PnRaiSwy5FmrcLpEdmitSARFczdNow
- IGpACGTio4ieCplBvjs+Is/T2GsNogwyASJ3PoXJHeI0vORKJKG1E99mRqxnKiIbYHAPMNinYn/
- oE8xgt654Vqv/fgDDTNq2+xstXyULRQuaJ0v13e/CWhblc5rhze88TQ+uKE2H3TFeae5T1IusgV
- hDPt/KqPemh20TLeBpOUFwjL6OZBpkIwPoKLXHFbvRnUOWoPDmqOFJXofwnTgt9fhysAnNYvl24
- 6sVS3OtTL3lsit/z2ASXOEaL+7vi9zo73ytA==
-X-Google-Smtp-Source: AGHT+IFrQe3UYaE2aJO8za3K4j5IzeIb/OxGFkTt+vW9iRFGqBYEa6suoprxez53O4+gjLV52hqAQg==
-X-Received: by 2002:a05:6000:2204:b0:3ee:b126:6b6 with SMTP id
- ffacd0b85a97d-425578050abmr521989f8f.34.1759257529452; 
- Tue, 30 Sep 2025 11:38:49 -0700 (PDT)
+ AJvYcCUTWi0otoRQYtas/4xuxXZh5WvdPx3BpGfK3CMr97cBpPLPLmv/5H9l2xmReahAccS5cFVGXOw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwZa2c7CqWuVkNB0H4hWQRF9J1WsFt6g7T6UmMt3bRa/Do3hEUK
+ 1B8MtS+FvPJI3gzorpZ1jl7W4//XRJ6yBFYt5FHW2u1DtPbdmsyUQaPlk9zwi0Txb4I=
+X-Gm-Gg: ASbGncuZ1z0UQuxyOV+0T4pCVNST1Ems130D5AUgShWt62LmkM5q0f4/HeMmBer8GNK
+ oeExEijhVM58CIMjQo2toecuvR8vNwEqQdwIlhLOmEOxjNMuf/hEwrbqA9pxgSkFzKWmErRL9fj
+ ci/bhpn5NzK+LfwpNy6JdU1gThphtMoSz2lbzniqEsV/Rn9+DcUr86D5n9jN7viRT1diN1qOOB/
+ 8Jz5+T/jANE9spg9KFzFbYEnhbXIatKEzZugQjAKFuf5O6RKT2liq0mhdQHNlGpsjlvHs1qWnr5
+ Rh/JXfEMnhX5FrZ1991nxJYbWqB8Lj2ggeaslk6rRKoRkkeqpKHoJvKMCPL/O77lZ5i8zE14qcz
+ WXEX9YE3UXoGJGns7f+u251d/uYnztlYw3raV14fwwriWXPaV1nmYEPOAFcufDzzQnB4qQKNT6T
+ XQ2WNuz6jDjLRq+M9+8I7EZ8ysZchTIE0wtA==
+X-Google-Smtp-Source: AGHT+IGNv4DcHXqqMqBsvYfBNxybQ8g5oxm6FnHH+aLLcryL5l6C9l+jd4CnEExHcv9QRbrDoJwU5A==
+X-Received: by 2002:a5d:588a:0:b0:3df:22a3:d240 with SMTP id
+ ffacd0b85a97d-4240f26169cmr4732515f8f.4.1759257539263; 
+ Tue, 30 Sep 2025 11:38:59 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:9459:14e0:525e:d859?
  ([2a01:e0a:3d9:2080:9459:14e0:525e:d859])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e61a18b76sm4333225e9.18.2025.09.30.11.38.48
+ ffacd0b85a97d-40fc5602efdsm25027279f8f.34.2025.09.30.11.38.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 11:38:49 -0700 (PDT)
-Message-ID: <2f9588ff-3022-4fa1-962d-80264a28ed81@linaro.org>
-Date: Tue, 30 Sep 2025 20:38:48 +0200
+ Tue, 30 Sep 2025 11:38:58 -0700 (PDT)
+Message-ID: <da528302-9ff3-4824-b96f-c973fc1f3780@linaro.org>
+Date: Tue, 30 Sep 2025 20:38:57 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 4/5] doc: board/qualcomm: Clean up debug options for QUP
- UART
+Subject: Re: [PATCH 5/5] board/qualcomm: add debug config fragment for MSM8953
 To: Luca Weiss <luca.weiss@fairphone.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 References: <20250924-2025-10-misc-v1-0-7e75842ca714@fairphone.com>
- <20250924-2025-10-misc-v1-4-7e75842ca714@fairphone.com>
+ <20250924-2025-10-misc-v1-5-7e75842ca714@fairphone.com>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -115,7 +114,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250924-2025-10-misc-v1-4-7e75842ca714@fairphone.com>
+In-Reply-To: <20250924-2025-10-misc-v1-5-7e75842ca714@fairphone.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -136,34 +135,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/24/25 13:30, Luca Weiss wrote:
-> CONFIG_BAUDRATE is not relevant for the QUP driver, and neither is
-> CONFIG_DEBUG_UART_SKIP_INIT so remove them from the doc.
+> Add a fragment similar to others to enable earlycon.
 > 
 > Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
 > ---
->   doc/board/qualcomm/debugging.rst | 2 --
->   1 file changed, 2 deletions(-)
+>   board/qualcomm/debug-msm8953.config | 5 +++++
+>   1 file changed, 5 insertions(+)
 > 
-> diff --git a/doc/board/qualcomm/debugging.rst b/doc/board/qualcomm/debugging.rst
-> index c3289c9e4e346058943afd9c803cc44426841544..42821f6546c6425c4b55e1f89501b94bbf9d0623 100644
-> --- a/doc/board/qualcomm/debugging.rst
-> +++ b/doc/board/qualcomm/debugging.rst
-> @@ -42,7 +42,6 @@ Older boards (db410c and db820c)
->   
->   Open ``configs/dragonboard<BOARD>_defconfig``
->   
-> -	CONFIG_BAUDRATE=115200
->   	CONFIG_DEBUG_UART=y
->   	CONFIG_DEBUG_UART_ANNOUNCE=y
->   	# db410c - 0x78b0000
-> @@ -50,7 +49,6 @@ Open ``configs/dragonboard<BOARD>_defconfig``
->   	CONFIG_DEBUG_UART_BASE=0x75b0000
->   	CONFIG_DEBUG_UART_MSM=y
->   	CONFIG_DEBUG_UART_CLOCK=7372800
-> -	#CONFIG_DEBUG_UART_SKIP_INIT=y
->   
->   	CONFIG_LOG=y
->   	CONFIG_HEXDUMP=y
+> diff --git a/board/qualcomm/debug-msm8953.config b/board/qualcomm/debug-msm8953.config
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1ccd70d0d3f4209ad1dc323d59f9d4ba581dcb91
+> --- /dev/null
+> +++ b/board/qualcomm/debug-msm8953.config
+> @@ -0,0 +1,5 @@
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> +CONFIG_DEBUG_UART_BASE=0x78af000
+> +CONFIG_DEBUG_UART_MSM=y
+> +CONFIG_DEBUG_UART_CLOCK=7372800
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
