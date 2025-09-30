@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C2FACCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 829FCCAC5B8
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 18:42:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1A84800D7;
-	Tue, 30 Sep 2025 20:41:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1D714800D7;
+	Tue, 30 Sep 2025 20:42:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kZXeBivb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oOlfpH4C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13F72800B1; Tue, 30 Sep 2025 20:41:22 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id D970882998; Tue, 30 Sep 2025 20:42:03 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62BC1835D0
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:41:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F22B800B1
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 20:42:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-421851bcb25so1382595f8f.2
- for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:41:19 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-46e2c3b6d4cso47689995e9.3
+ for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 11:42:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759257679; x=1759862479; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759257721; x=1759862521; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=+B1WmXJ+tCxuTdS6YHf+agzAmlUYiEA402kCLZz4g8Y=;
- b=kZXeBivb+fQ1e9l9QMJaj34iA4vUgPg7DOoZPIfMMKowgSC9hpsJkXc1Y5hvjuYVT3
- xLJIgANWX8iPKYcwNS7H3KKM/VM8kSagjc9jCyLCmUc1rg5Rts5/53AadKYFr3xbmbxI
- SmCR7/fO5/XR9PJEopxOpXoLVsC3qL65p8+de3uqMi8IsngOVBits9l6WD2bUvwaZsFH
- /qp8QkBhwz6xUI833weo0nYf2Pr2pfUUHgq6uhCCss3bKKJ5ttxmDHeI+lPyDSXie1Gi
- eyD3CBHag9AJlHeyqCzxQXo5XzTEH7X3wzNKdXOYJCEM5/k2NWx3Uaff31YBw8uGs30y
- gNlQ==
+ :reply-to; bh=qresipSgS8fvybY8OpZMi4PNxXwa0WU2PKfp2r6pORc=;
+ b=oOlfpH4C/FPA7LzNQm8waj/8cJeH+x1VwL9LYI3oiD6Tpdbhs9h72iXEeuT6WtBxcT
+ AkXI1PN8iFmj3KaQP0FVFSMLo2WzqkxStuY2az/65+vRyszTgmJuyDuCrHiSf4B7gY8s
+ WH8urfA0rERUVBS1hONpSQRzD5BiVhE6TpVLXYm5/EkNYHYrtzyMUFnCNtAlctpDPLId
+ c1GHi5uBcJnbEHkE/xO9i5DFFWrCwGyhxOpBMiJjdok44Yzp8WKWu4tb9dov1u1b6D05
+ NP2v/WMmVR6W8f0BE39VB2S/j7PrK6HZpmq1pFAxeClCxaqQTDk4eSEfjia1l12qfmD6
+ fVSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759257679; x=1759862479;
+ d=1e100.net; s=20230601; t=1759257721; x=1759862521;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=+B1WmXJ+tCxuTdS6YHf+agzAmlUYiEA402kCLZz4g8Y=;
- b=Bbo3Vh61bPwD4P0IOyNMV49PcCPlhwHtjUbJdfEE42YSKziRN8EYoS0FYN2dbnVqsV
- lUUWMOtJmSEy6I+v/tVwj2dParXnklR/PlwvdKPb0nuc7gEL4Kn2m2K6Iqg//lvx5mjE
- lL1X7vIPa5Ais3JSAcaSi5joEuGDFU6GU0BoHCOezDBxwXwBzH694xmd1zEg0VZC5o05
- 0uDxlinmru93p8ZOaL60KAxLi8d5oLmmpgblPDjAuBJxlUXGCVjWwU2fischXPXazKIr
- B1dKaPsxCWTlhlt0iBzzn5wFbOEnSq3C2GN/vHtDB2JeKJ7B/Ca0EJnXw5ctigMfG7Kl
- 0vVQ==
-X-Gm-Message-State: AOJu0YzBg0kjlqreje49tm6VMDetgycSOPMwqsLX4rFnorh4cbwJ04OS
- a2yssbwjmute5tZ+D1Teu/yEYtKOEYaK84qHXZtQEFTSogvviAlMHwT4YbYEOIuPKbs=
-X-Gm-Gg: ASbGncsN8KMChMuobkDUGh9NE5SIs0eN6cYm8zTdc8/nRddvchGy9iK52Bq5aeGb+KB
- OIP1v/pAw+jJ92lJz3UnsQLJY1hgS/KDpj3EmP4HhuGBnthMODjEiebiWuKcJZSMu7Qwna2bvWm
- 4w+bD5Mg9ObQwSbQdA9RBxgxC//Bpd0Rc+mnae/+UHMCztPxfSN8b9zulImjrbllKpBam9KJwdh
- M/VHuh+vOEpCjktsftriLubteFJKy4VGJOv2+7Lh5cAByP5jTsYYAN0XINgjN1UuEOH6FKq5KQ0
- VciO0PbHj+U6x5armB8hNkovHveY3cKQFHlxlkfsKceFRJl07fRWs1Ve7kyRGHdoUN9AgHEuIg5
- 3MFxxymoABR1Z+CJtjY9et9MtMpawDnYAOcc6Urv8On6FJWiuwm0iOUjYTuaIVLWXM9tSBPpg5G
- uE9ceE3Et3+pFqfdTHnytX3Io=
-X-Google-Smtp-Source: AGHT+IEeFr4+p0l1oWeeQlG8nG/dV09rm9O138hdEdcimwOvUUZkUzfYuMOLK8RjUc7dL8aRtOgiwA==
-X-Received: by 2002:a05:6000:186f:b0:3ee:109a:3a83 with SMTP id
- ffacd0b85a97d-42557824f1emr543427f8f.29.1759257678722; 
- Tue, 30 Sep 2025 11:41:18 -0700 (PDT)
+ bh=qresipSgS8fvybY8OpZMi4PNxXwa0WU2PKfp2r6pORc=;
+ b=hcPP5dLQ8RRRROukXSjmG1OcDO6jrh5XqE/Afb6qSSv6RIvI4dBMMjAONf8gRd88q3
+ UgZZ7Ka7u7qsLKSHWg5G9SwntgYRur4XOz3c+IvN51j7B9hh5l2f0lnDAAiD++1hJm9z
+ OI+fDKEPQ5I+xt4wg5pju6HjV5wO9IM/VlfA+e+rD7YaqADVhnHmM/FMDmg+fz5NBh32
+ pxIdK/C3QuJiEaYR/+ZTi1yab9JAWAYdqNDmtOwOPnX9wJYCI/FiQjsJ1Iob/kTztbFA
+ 95yFOYuoZTjWJIOohh1wfUbgA7xU6HchsMdvybe0e94i7B1khBnaJNC743i52eJu3eiY
+ R/NA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXij6QeiqEm/GabgoXqdVaWiKcTOwGD698s/8W0WOzD5EMeP78XNbqAymfrXZCVnHNZYMglpl4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx5ZYO20T37dl2j4ZhiUpLbQAdM7iegzASDcUsM1pslCVyKIQS5
+ hjIZ7WXV/SAMmMntDW1b4J4OsPiuFm2U0Vw0/b8pFShgvmnYj2MWTUhFSsiHcfQ9Dhw=
+X-Gm-Gg: ASbGnctcyKyTnHnMJNlBOYJsRQX0MKcvRTCXSaIqoCpudryN0vpMC539j2fZJs1hdPp
+ 6fM4O7+ML23Hyge/4k2acjicYnaIQG1oQcDeKnhq2VeknVSHacLUBEID9YZ4V0Ud7umhfKK7LeT
+ BDN+1mSwa2Ik0yxAzIQteYhGJtO949hXST5lL75QMDZD7lnWVDkYhaClr0IQOeo7yPVni90IZJ4
+ EYLQgSXPCZi45JLiPoqbKaoypcBFZuCEgIwf5C4IpnUWUsNcMuH2It3qr9pXGtorZkDvVcu1lVF
+ iKeWefahojlu/9uJgOTa4arjTWrnZK0s2GaqnNzbrJXwUWeX6bI71EECMJnI2Z++miS/t3FitcW
+ yfDUsyqp+kWUGS96SeoxkKYq/QV3vQpntZ/eZ0TG25fVuGNHjvBKYr0/zEhVAVWNKK2lJT3y0qL
+ K/VqLsLaTfaGu6+KOG8XUcJUw=
+X-Google-Smtp-Source: AGHT+IEqVcKRGeWWnuDTg4j2FuMH9IluWIcsfaFXdYCi7Vrgl2U43FrDtUO/y4zw3EJ9ny7ru+AJiA==
+X-Received: by 2002:a05:6000:420b:b0:3ea:80ec:8552 with SMTP id
+ ffacd0b85a97d-4255781e566mr567128f8f.57.1759257720629; 
+ Tue, 30 Sep 2025 11:42:00 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:9459:14e0:525e:d859?
  ([2a01:e0a:3d9:2080:9459:14e0:525e:d859])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-40fc6921bcfsm25736759f8f.43.2025.09.30.11.41.17
+ ffacd0b85a97d-40fc82f2ff6sm23628002f8f.56.2025.09.30.11.41.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Sep 2025 11:41:18 -0700 (PDT)
-Message-ID: <d31dd41b-7ffa-42d9-9727-c6e36bfd5a80@linaro.org>
-Date: Tue, 30 Sep 2025 20:41:17 +0200
+ Tue, 30 Sep 2025 11:42:00 -0700 (PDT)
+Message-ID: <9615d8a8-0adb-4690-9296-101363f604be@linaro.org>
+Date: Tue, 30 Sep 2025 20:41:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 7/9] gpio: qcom: Support GPIOs on PM6350 PMIC
-To: Luca Weiss <luca.weiss@fairphone.com>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Casey Connolly <casey.connolly@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250917-sm6350-bringup-v2-0-13346fc2a2f6@fairphone.com>
- <20250917-sm6350-bringup-v2-7-13346fc2a2f6@fairphone.com>
+Subject: Re: [PATCH] qcom_defconfig: Enable pinctrl driver for SDM630/660
+To: Alexey Minnekhanov <alexeymin@minlexx.ru>,
+ Casey Connolly <casey.connolly@linaro.org>
+Cc: Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250914145620.1962735-1-alexeymin@minlexx.ru>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -112,7 +112,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250917-sm6350-bringup-v2-7-13346fc2a2f6@fairphone.com>
+In-Reply-To: <20250914145620.1962735-1-alexeymin@minlexx.ru>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -132,27 +132,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/17/25 14:47, Luca Weiss wrote:
-> The GPIOs on PM6350 work fine using the qcom_spmi_gpio driver and
-> enables the use of the Volume Up button Fairphone 4 smartphone.
+On 9/14/25 16:56, Alexey Minnekhanov wrote:
+> Pin controller driver for SDM630/636/660 SoCs was added in
+> b4420a0c9ed ("drivers: pinctrl: Add Qualcomm SDM630/660 TLMM driver"),
+> but not enabled in qcom_defconfig. Correct that omission.
 > 
-> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+> Signed-off-by: Alexey Minnekhanov <alexeymin@minlexx.ru>
 > ---
->   drivers/gpio/qcom_spmi_gpio.c | 1 +
+>   configs/qcom_defconfig | 1 +
 >   1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
-> index 22c8072534e9188445f0aaef5336863fd1da7a75..3f3c98e2d935a34bb030532025e8765a2dd2b186 100644
-> --- a/drivers/gpio/qcom_spmi_gpio.c
-> +++ b/drivers/gpio/qcom_spmi_gpio.c
-> @@ -743,6 +743,7 @@ static int qcom_spmi_pmic_gpio_probe(struct udevice *dev)
->   }
->   
->   static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
-> +	{ .compatible = "qcom,pm6350-gpio" },
->   	{ .compatible = "qcom,pm8550-gpio" },
->   	{ .compatible = "qcom,pm8550b-gpio" },
->   	{ .compatible = "qcom,pm8550ve-gpio" },
-> 
+> diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+> index 86d7de89e77..3acd57fb774 100644
+> --- a/configs/qcom_defconfig
+> +++ b/configs/qcom_defconfig
+> @@ -110,6 +110,7 @@ CONFIG_PINCTRL_QCOM_QCM2290=y
+>   CONFIG_PINCTRL_QCOM_QCS404=y
+>   CONFIG_PINCTRL_QCOM_SA8775P=y
+>   CONFIG_PINCTRL_QCOM_SC7280=y
+> +CONFIG_PINCTRL_QCOM_SDM660=y
+>   CONFIG_PINCTRL_QCOM_SDM845=y
+>   CONFIG_PINCTRL_QCOM_SM6115=y
+>   CONFIG_PINCTRL_QCOM_SM8150=y
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
