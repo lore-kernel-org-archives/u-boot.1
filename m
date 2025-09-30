@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8425DCCA470
-	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 15:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43F07CCA470
+	for <u-boot@archiver.kernel.org>; Tue, 30 Sep 2025 15:52:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6CF6802C1;
-	Tue, 30 Sep 2025 17:52:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 30CAB834D4;
+	Tue, 30 Sep 2025 17:52:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vUKUFhsv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ztwd6F8n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D007683526; Tue, 30 Sep 2025 17:52:26 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id E54FE800B1; Tue, 30 Sep 2025 17:52:26 +0200 (CEST)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E60A800B1
+ by phobos.denx.de (Postfix) with ESMTPS id 0221F83335
  for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 17:52:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-46e3af7889fso35916855e9.2
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-3f44000626bso3786830f8f.3
  for <u-boot@lists.denx.de>; Tue, 30 Sep 2025 08:52:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759247543; x=1759852343; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KXG2NAkZiKHsdjMBcf9vPuI0dLemThpXUu9bh2mjZZc=;
- b=vUKUFhsv2dtWyEtFUEo15f2oMfNLZ3JcAIYsR42xiF0IGhlMPdf8NA9DMTidWJkO1T
- rBJXl5nPt4UAWOchSagLT+k09HELlXS/dFDWzStC/5kEK2uQaeKQTgT3/xoWl/9QKb2B
- 2kfCu5YGHk/lemCCzv8sP1XE+SSQO2V4LQKjGxXGKiN+l9rkRSQSxkXRl0ZtccWf003/
- gwZ6uC/N2cMF3C2TUfysvkcWp0QqCPFJklaOLYZjzc5YZE1+dptE75A9bhp92EtrQOoi
- qStg5vbF6UZA0F7JubgB9OG2d5B9Pm3/F7ol6iXKg33uEzTts8RZghzRsx7Mj8Kaa5eb
- thuw==
+ d=linaro.org; s=google; t=1759247544; x=1759852344; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=wYPBbFOlnFi8XwomogB2dUHMhH5ng5yEHyiZ3X3UYRw=;
+ b=Ztwd6F8nWCh+v53L4yot+4iSJe4M281L5pyCRvurmhzBr4B/2QUX+SBcj/UNm/vnK0
+ ut+HP1lQ/eIbkiWHEfoRK5UxrP5/4ey0JrkiDioUJAbzy3VtBdsv6Vg11Fz41CnXaLpX
+ niQsf+I2Bxxm88wXTH+AsM/olUdtIDngpOKKc4VW3OC3eLmXBToAnRRVYozTCswSCSPg
+ R3+h4INa+wvGVM7JY7+WZGyck8M9ltPXl3FFXOv3zAcnB1F8Ziz7LMSz75GTEEyPmQN9
+ mEIWMob3nJd4ZJM032izksXVsCLMPoBx2fNYhUNP4AgpPA45Q40oRG+zWYbyMWPhCJx5
+ 2fQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759247543; x=1759852343;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KXG2NAkZiKHsdjMBcf9vPuI0dLemThpXUu9bh2mjZZc=;
- b=c6ZNtySH3UY5tPycqcWN8H/ZnTTluOtO6jBUv56N4i81+hQEDHDqAgJ68mWGOhmPAA
- JDtVUu3UqBjnRVqDBfK6Q1saBLN7fjD/Q6PDkyoqGUOFdl1lexZHsujBnOh0MOhqxQwE
- kp07BMGGO66qYzGd/SVLAk8a377ZYmUhuCTXCUtCCUPTNqiO08LfgGGYJdF6IGYr2IC0
- qcRhWJHVDPNSehUNH7ulvvLULxna/HfIyXgS2ZEawUQow+wCUtYOv8c275PHl66FAoBO
- gSsRzvLq6+LtkcdlBHrOKoVTntr+J9Aw/eO5Ec/yH9T/+LcSg4fVOWcf3rBbuS/FyUHt
- rPjQ==
-X-Gm-Message-State: AOJu0YzYjqbtiLkixNqZjPjOkZBBTTH7hKcjS+HkLEnYoicnB+PipFFM
- yPB9d4J0KV8XpDi6rskN9wxUbJsxQPdbUMvMTSa1fqTCFrInhhmVl4HQcurfAlbPg/Oa9M25Z07
- wROsx
-X-Gm-Gg: ASbGncuyeEjvVCd6yzCqOEWNtNsJhx9lijxsbbh/rYX22JHIP5AB4U5slT/2zomHETe
- 2OSN0vA2e69+JnT7bP87OJgQRyCZ3NgVjOs3exSjw0LoAcTcb6OGu9xvJ9rUJ5nikakXXLrHsyS
- TUmuOpxe1dvYzQXSQMKUGVTByD/PAey3quuQpCiBMUzIOQoKJ1wPP+SpIAa+a4EPO2Rxc9PdEkZ
- WlsVURb3wOKVAPNO5pzNoUdY4kpU1kDkl+xjjhDuTSBS/jM/fl9SFHfunfC+PgphvAfvV82RplP
- f2fq8Bdiaf0c+08I14m25XDWZv1YgVbprgm9uWcQSIVJwPb8XWk2fvT/ryBx2yf8aqMoSqxP/w0
- bFZGg4emTv8ZtwCZcJCt+TFf097QoeUAYC9oDQinE2QAWVrzD8i7IH6Z5kE/Cyx/+wXwtZBd5+T
- NhX1V4P9zU
-X-Google-Smtp-Source: AGHT+IGSzQIswEhGEpDz8aeHyQliaipwRmsNsbi5nTBZ+vbr2kzdCRLK1shrObWC9FNj4GagIm4B/Q==
-X-Received: by 2002:a05:600c:34cb:b0:45b:47e1:ef6d with SMTP id
- 5b1f17b1804b1-46e613dd3cemr2797565e9.36.1759247543591; 
- Tue, 30 Sep 2025 08:52:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759247544; x=1759852344;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wYPBbFOlnFi8XwomogB2dUHMhH5ng5yEHyiZ3X3UYRw=;
+ b=Y3pOAnRDSZdL9bAOo+aATfKPSSpGwKTyz6YXkH+KII/OhCRYb/hLaMqoHCzIxKal6e
+ qNYinvAVYlTeBC39QECcch8jpBima1fDTV1i5Dx/IBF6rVgFyRgYt4I+SK5tUrtavUay
+ pksbGYOTQ7xluJVkPFLlin73tHffTjMVA3pzSjZ/c7mUU9hQIwQP4JWTNKKiUh97q9ae
+ Gw2Km9Xdpx+DPyOpnn2y+K2c/27w5sJD8ZGIDpUGL3jwfXMmmEKmO87oE/X0HREZEIqE
+ iDMYn2H+fi1ndFp4biOobnZ1y05xhqjLr3q+Vnt+vE8+GlEJBWkrtWBjdFUC2C7exkBS
+ NkXA==
+X-Gm-Message-State: AOJu0YzIwgTjMpCdayBu60VgZOKZVV1wuyTMX1xEWGWOx0tqYWs8GRGn
+ Rj1Zdeau2CtFk034qjZAE8sK0uwbdJmI6WsRSoxtDfsmjXFY2Wm97OkiJXBiQMAoFwEpkkg5DOp
+ feUZ5
+X-Gm-Gg: ASbGncsGX9qfMC6HtMlfj+hU1Y9Kq8vB44E8FdNskzuiCgibzOHjeZxmMRt2wL9yOfZ
+ jbPX8TDCrYLIyWXg/StFoY+TmKeTlyvgpQ6nPuyKgJkMdgxvwddehuLjdHx4S5EDvbOoUzO7z/F
+ TQHCK9NS7vBq0qhTg3dNn4SSbKb5tgmb7lVW5Mi/9uUB7InZ5QT4EmOJFqYRbflI2aaVRAAXuMs
+ N22sHcoGhAnCWSWLQpJ1s1KtX78v3UKmbMl3u9y/a9n1fObEDxgLMtilNuF/hK+Ce3jkFU7jb2w
+ aEWI6E1F8S48/e9Hd/CO26ZWdBZz2i+oJSIcjrktzPYHZKdysw4uXU7kJkgEc1jXDfRHjrBpWJX
+ 3JSPsYCLlIR/5K/XKJiRmp+y6LQW6vuO097V6z28h17S7iW0Fyp8J97OefQjnD3xJpc/riz+N/8
+ GfpoVWJO2b
+X-Google-Smtp-Source: AGHT+IHBMVhwZHk1sgwAJakGAS3WpSwSqBfPR7dNRlnUweoN+hIg8JLzsL+vlsnuZT11OdC/TpoTRg==
+X-Received: by 2002:a05:6000:2dc5:b0:3fd:3bcc:c205 with SMTP id
+ ffacd0b85a97d-425577cbf81mr209255f8f.0.1759247544346; 
+ Tue, 30 Sep 2025 08:52:24 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:ebd:e301:aed:2018:ed42:d786])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e56f3dcacsm64747165e9.2.2025.09.30.08.52.22
+ 5b1f17b1804b1-46e56f3dcacsm64747165e9.2.2025.09.30.08.52.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 30 Sep 2025 08:52:23 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [PATCH 0/3] usb: musb-new: Address some Smatch issues
-Date: Tue, 30 Sep 2025 16:52:21 +0100
-Message-Id: <20250930-usb_musb-new-v1-0-be0c9b79a8a0@linaro.org>
+Date: Tue, 30 Sep 2025 16:52:22 +0100
+Subject: [PATCH 1/3] usb: musb-new: Null check before dereference
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALX822gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1MDS2MD3dLipPhcIKGbl1qum5piYJicaGaQlGhhqQTUUlCUmpZZATYuOra
- 2FgBTG+QjXgAAAA==
-X-Change-ID: 20250930-usb_musb-new-ed01ca60ba89
+Message-Id: <20250930-usb_musb-new-v1-1-be0c9b79a8a0@linaro.org>
+References: <20250930-usb_musb-new-v1-0-be0c9b79a8a0@linaro.org>
+In-Reply-To: <20250930-usb_musb-new-v1-0-be0c9b79a8a0@linaro.org>
 To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
  Lukasz Majewski <lukma@denx.de>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>
@@ -105,28 +103,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reported some issues with the musb-new driver which included a
-variable being dereferenced before being null checked, an array index
-being used before being limit checked and unsigned values being tested
-for being negative.
+A null check for the variable 'data' was introduced before dereferencing
+it for set_phy_power but other uses were not so protected. Add the null
+check for other dereferences of 'data'.
+
+This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-Andrew Goodbody (3):
-      usb: musb-new: Null check before dereference
-      usb: musb-new: Limit check array index before use
-      usb: musb-new: Cannot test unsigned member to be negative
+ drivers/usb/musb-new/am35x.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- drivers/usb/musb-new/am35x.c           |  4 ++--
- drivers/usb/musb-new/musb_gadget_ep0.c |  5 ++++-
- drivers/usb/musb-new/omap2430.c        | 34 +++++++++++++++++++++-------------
- drivers/usb/musb-new/ti-musb.c         | 28 +++++++++++++++++-----------
- 4 files changed, 44 insertions(+), 27 deletions(-)
----
-base-commit: 9710d98e8942151fc0c62d54100d9d27e8263d04
-change-id: 20250930-usb_musb-new-ed01ca60ba89
+diff --git a/drivers/usb/musb-new/am35x.c b/drivers/usb/musb-new/am35x.c
+index 42bc816e4f1e5ca0e6fa891c563fea65106e0b43..ca4d798642e731755473063df9507185b1d59205 100644
+--- a/drivers/usb/musb-new/am35x.c
++++ b/drivers/usb/musb-new/am35x.c
+@@ -402,7 +402,7 @@ static int am35x_musb_init(struct musb *musb)
+ #endif
+ 
+ 	/* Reset the musb */
+-	if (data->reset)
++	if (data && data->reset)
+ 		data->reset(data->dev);
+ 
+ 	/* Reset the controller */
+@@ -417,7 +417,7 @@ static int am35x_musb_init(struct musb *musb)
+ 	musb->isr = am35x_musb_interrupt;
+ 
+ 	/* clear level interrupt */
+-	if (data->clear_irq)
++	if (data && data->clear_irq)
+ 		data->clear_irq(data->dev);
+ 
+ 	return 0;
 
-Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.47.3
 
