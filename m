@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E2D5CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 21:30:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9F5ACCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 21:30:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A66483621;
-	Wed,  1 Oct 2025 23:29:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C09F683655;
+	Wed,  1 Oct 2025 23:29:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vdgxyt7n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CJ/WJEs0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6311A83621; Wed,  1 Oct 2025 23:29:43 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 99FB583653; Wed,  1 Oct 2025 23:29:45 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B07A7835FE
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 23:29:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63067835D8
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 23:29:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-42d8ad71a51so4351765ab.1
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 14:29:40 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-92790f12293so15657739f.2
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 14:29:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759354179; x=1759958979; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1759354181; x=1759958981; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T756nKl/ZMkcKp4lXQ7Cq9k6RZjWrGUphyE7x9sVBoE=;
- b=Vdgxyt7nhXVlbEANGjXGP/kUvnVtUkD6dfzWFVuo0p53Ek4w+a8eTWa0CJksLeYvH5
- oJH6bRQAn9rMPohhz7soamneFMVoNw8mdM3EfyAaT13cfau6FvufPAa29CUMZMTJ7vpd
- wBLBKfO6zOZGxsmRdn9qhc2dJwq3BqZQpKVVM=
+ bh=TjVWaYbtzi4TFqj/55vHtVVZZHZD4IDJyqahetrPrJ4=;
+ b=CJ/WJEs0AW/wN1+nCFB8+ad4ceHFzaLAaIlUOYyFM4ok8xqRpZXhqH2M9O0Px0ibKY
+ CTDGxSy35QMsZX4dxpMWAW+DHY1J4Jkyy2Lf5cMcsAM/DZK1ry6nn+1iTMOz+cKfd3Ji
+ FvLWDEyXYpgHqODfF0vTs2CYiZPBvXDIcOFQU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759354179; x=1759958979;
+ d=1e100.net; s=20230601; t=1759354181; x=1759958981;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=T756nKl/ZMkcKp4lXQ7Cq9k6RZjWrGUphyE7x9sVBoE=;
- b=ubN/EpTkspbzPYIk+a4v6OSFDCEk8UXsrC17Vh2zrM8q8j203aqAXp8nhnnCOuNrgo
- u/Xco6j8Fxr5XUrecYqdX6ja+2jnalKp3G785EreuuX+daB7ntjaaSBHnrI2zIzMyjwr
- zk/pSaKPgDJY2UD1I3AsuUonjQgkgqHW8wuRgZ6S+dBo2EWqm9GT4uRIskGxW4zCkL3J
- DdrIGt/366uTGf2rf0/lLxFPSiB/eN5HsX7xOkJ4QTQ91cOoZEy4E8l7+VBFLFaM8VN3
- YXBGqCQxRu0sehN0FCgw4BPFwsk/f/j8OGwON0Uayy8+mnlur75ws0JT/fgGPs1OMKf5
- H55Q==
-X-Gm-Message-State: AOJu0YyfhU8LGYObLDyHZcvA/YxArzb2802gcr/HhL5hDSDbf7DAzF8z
- OzqSFYcudLgypM6fSlqQYXjwI/Z/pUY1zt0fSEpYT/4rthCLAkvu16XT2zM+dS3NYqMzTTW30Bq
- v0l3CzvBm
-X-Gm-Gg: ASbGncuMr5jspcrD2PZ1AWPr6Rm0yDQ5eoHZZ1ZLJQlqqWwu0OpyCc4oCE96+BqUsDZ
- QAh2n4BeU9BKbivR76LSMLPRLBvczAS/Rkppipf/xuhxKS+nMbuR2D1Xha6+jtIiOvqUteEC1D2
- ua+pTsO8u6k7yENQMTf/a0sPEy9+rUdhuPJHq5mVP9fli6aWlmCE6z6sDsRDq4TQsLlygteRiL7
- iKnzAsDL+HxWV6BX7DAMMa2YT9/LAqWVkx4rnQk6O2AJ1sc+n00A8Hx8mYYF9qZ6uJd8CnEySC/
- VT1aU7ql+xtV4n+JoqdMj+qQAfKgKBaI7q/mPcrE3A57dFI6V74j1FpdYPvZ+erqgDHXKGfTJTF
- sonq/95MH/wlxnL/BQvHJ1eRr7od5mGDBK36CQH+e
-X-Google-Smtp-Source: AGHT+IFb63bOXdPmhAZTo3/Nl9l8/aN+e10j33MJedhWVG1CU9cH2sP6w5lZnWWHW4jQfmQVT2bHbA==
-X-Received: by 2002:a05:6e02:1a23:b0:425:70c5:61b3 with SMTP id
- e9e14a558f8ab-42d81647952mr74786165ab.27.1759354178897; 
- Wed, 01 Oct 2025 14:29:38 -0700 (PDT)
+ bh=TjVWaYbtzi4TFqj/55vHtVVZZHZD4IDJyqahetrPrJ4=;
+ b=OnZ8rKTeEhqJIpeG5fip4tlCzUf5hdbCyL445mAb6Yw6rA1jbJN76D45X01DXnsw6i
+ ywBxWmYn1pe8t4xxJWbIXjNLI46bpAnmsvymo2l+4Y2oVsmq6Q0GX+y24hB8pRV6JzDh
+ 9A1e+Rwk9uWn+5l6n9td2ob57GYVXHflztkBdn+ywN6y3+sSrVGgcXvE3akfrlCgRL+4
+ kQJLKDPHwZRVpmvPCyJq7R8tXEskBGW2I4bgCKBo7eUyA8AiCWBDrEFc2CXEY2F6PgLF
+ QKDrC8KzUlOi8ytbUeFlNMvhMvAxFI354CNpplbyCsbeR59mnJFHdHjPyUv19JPWYBOv
+ M6VQ==
+X-Gm-Message-State: AOJu0YxCqS0Ub7WoqXY0jvsZLAUFw/eEZH0Ggkzcfbhon2SLgAjXqgas
+ XzGKOHQvR1Qei6L6/mrwkA46K5huDAXAwRgK5hFeUSgFbpICe52vGwwUt2kJuc6u5qsaVueHFZf
+ T/b+cbegj
+X-Gm-Gg: ASbGncsHsaV4SmiWmNG8RHFiu8NYEcyHSctNFSX9pzAgTvRSz+INAoW7ywsnzfArJDQ
+ PMHcz9seR5vbURZt/FhTy3OiW0qUJvnEdLVMOne26biBwR1y6R54VWu3UV9+CpyawfaicUwEpDB
+ P0sY5eUzD59px2IUjWqyT0FPfPECzGBtNpFANeeCNRugE1YgjCns5YSMsq6/bjE3dnBPPDQcEth
+ F3xRGy02+tZwocoZsTGRtYIJkvwIlcF/Avc398ddGs7N7c75+9P1618y5qztdApIzH0UffXPmfq
+ zrPEdwQK79ZOEguYpjhO20EFQd0uruDUlDMDBnSLm9Wlw1zWKe81JO3+Rd65hDrRiYZ1354LayD
+ pJ592AvWT7OSiNT7U7+MtKHMHgWBmAo2+GOHt/7wE
+X-Google-Smtp-Source: AGHT+IGh8/Lh4RL/fOIrXzVs350KIPlPDiqCbM8b3m4JrDr/QjyxUNH+djpD1TpOYA7ug0E9hVfjsg==
+X-Received: by 2002:a92:cda8:0:b0:40b:db4:839b with SMTP id
+ e9e14a558f8ab-42d815abb60mr67845255ab.5.1759354180915; 
+ Wed, 01 Oct 2025 14:29:40 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-57b5ec09429sm202844173.55.2025.10.01.14.29.37
+ 8926c6da1cb9f-57b5ec09429sm202844173.55.2025.10.01.14.29.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 14:29:37 -0700 (PDT)
+ Wed, 01 Oct 2025 14:29:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 04/17] boot: Add more debugging to iter_incr()
-Date: Wed,  1 Oct 2025 15:26:29 -0600
-Message-ID: <20251001212649.3263574-5-sjg@chromium.org>
+Subject: [PATCH v2 05/17] boot: Move showing of bootflows out of the command
+Date: Wed,  1 Oct 2025 15:26:30 -0600
+Message-ID: <20251001212649.3263574-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251001212649.3263574-1-sjg@chromium.org>
 References: <20251001212649.3263574-1-sjg@chromium.org>
@@ -94,87 +96,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function is the core of the bootstd iteration. Add some debugging
-for the decisions it makes along the way, to make it easier to track
-what is going on.
+It is helpful in tests to be able to show the bootflow that is being
+examined. Move show_bootflow() into boot/ and rename it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Add a log_err() for an invalid state
 
- boot/bootflow.c | 24 ++++++++++++++++++++----
- 1 file changed, 20 insertions(+), 4 deletions(-)
+ boot/bootflow.c    | 57 ++++++++++++++++++++++++++++++++++++++
+ cmd/bootflow.c     | 68 ++--------------------------------------------
+ include/bootflow.h |  9 ++++++
+ 3 files changed, 69 insertions(+), 65 deletions(-)
 
 diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 5af3f6b3163..4595aa55f0f 100644
+index 4595aa55f0f..9aa9d449b7f 100644
 --- a/boot/bootflow.c
 +++ b/boot/bootflow.c
-@@ -193,14 +193,19 @@ static int iter_incr(struct bootflow_iter *iter)
- 	log_debug("entry: err=%d\n", iter->err);
- 	global = iter->doing_global;
+@@ -54,6 +54,63 @@ const char *bootflow_state_get_name(enum bootflow_state_t state)
+ 	return bootflow_state[state];
+ }
  
--	if (iter->err == BF_NO_MORE_DEVICES)
-+	if (iter->err == BF_NO_MORE_DEVICES) {
-+		log_debug("-> err: no more devices1\n");
- 		return BF_NO_MORE_DEVICES;
-+	}
- 
- 	/* Get the next boothmethod */
- 	if (++iter->cur_method < iter->num_methods) {
- 		iter->method = iter->method_order[iter->cur_method];
-+		log_debug("-> next method '%s'\n", iter->method->name);
- 		return 0;
- 	}
-+	log_debug("! no more methods: cur_method %d num_methods %d\n",
-+		  iter->cur_method, iter->num_methods);
- 
- 	/*
- 	 * If we have finished scanning the global bootmeths, start the
-@@ -217,8 +222,10 @@ static int iter_incr(struct bootflow_iter *iter)
- 		inc_dev = false;
- 	}
- 
--	if (iter->flags & BOOTFLOWIF_SINGLE_PARTITION)
-+	if (iter->flags & BOOTFLOWIF_SINGLE_PARTITION) {
-+		log_debug("-> single partition: no more devices\n");
- 		return BF_NO_MORE_DEVICES;
-+	}
- 
- 	/* No more bootmeths; start at the first one, and... */
- 	iter->cur_method = 0;
-@@ -226,11 +233,15 @@ static int iter_incr(struct bootflow_iter *iter)
- 
- 	if (iter->err != BF_NO_MORE_PARTS) {
- 		/* ...select next partition  */
--		if (++iter->part <= iter->max_part)
-+		if (++iter->part <= iter->max_part) {
-+			log_debug("-> next partition %d max %d\n", iter->part,
-+				  iter->max_part);
- 			return 0;
-+		}
- 	}
- 
- 	/* No more partitions; start at the first one and... */
-+	log_debug("! no more partitions\n");
- 	iter->part = 0;
- 
- 	/*
-@@ -324,8 +335,13 @@ static int iter_incr(struct bootflow_iter *iter)
- 	}
- 
- 	/* if there are no more bootdevs, give up */
--	if (ret)
-+	if (ret) {
-+		log_debug("-> no more bootdevs\n");
- 		return log_msg_ret("incr", BF_NO_MORE_DEVICES);
++/**
++ * report_bootflow_err() - Report where a bootflow failed
++ *
++ * When a bootflow does not make it to the 'loaded' state, something went wrong.
++ * Print a helpful message if there is an error
++ *
++ * @bflow: Bootflow to process
++ * @err: Error code (0 if none)
++ */
++static void report_bootflow_err(struct bootflow *bflow, int err)
++{
++	if (!err)
++		return;
++
++	/* Indent out to 'Method' */
++	printf("     ** ");
++
++	switch (bflow->state) {
++	case BOOTFLOWST_BASE:
++		printf("No media/partition found");
++		break;
++	case BOOTFLOWST_MEDIA:
++		printf("No partition found");
++		break;
++	case BOOTFLOWST_PART:
++		printf("No filesystem found");
++		break;
++	case BOOTFLOWST_FS:
++		printf("File not found");
++		break;
++	case BOOTFLOWST_FILE:
++		printf("File cannot be loaded");
++		break;
++	case BOOTFLOWST_READY:
++		printf("Ready");
++		break;
++	case BOOTFLOWST_COUNT:
++		log_err("Unexpected boot value of bootflow error %d",
++			 bflow->state);
++		break;
 +	}
 +
-+	log_debug("-> bootdev '%s' method '%s'\n", dev->name,
-+		  iter->method->name);
++	printf(", err=%dE\n", err);
++}
++
++void bootflow_show(int index, struct bootflow *bflow, bool errors)
++{
++	const char *name = bootflow_guess_label(bflow);
++
++	printf("%3x  %-11s  %-6s  %-9.9s %4x  %-25.25s %s\n", index,
++	       bflow->method ? bflow->method->name : "(none)",
++	       bootflow_state_get_name(bflow->state), name, bflow->part,
++	       bflow->name, bflow->fname ?: "");
++	if (errors)
++		report_bootflow_err(bflow, bflow->err);
++}
++
+ int bootflow_first_glob(struct bootflow **bflowp)
+ {
+ 	struct bootstd_priv *std;
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index 5b803d4ace5..46b2c8260d0 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -18,68 +18,6 @@
+ #include <log.h>
+ #include <mapmem.h>
  
- 	return 0;
- }
+-/**
+- * report_bootflow_err() - Report where a bootflow failed
+- *
+- * When a bootflow does not make it to the 'loaded' state, something went wrong.
+- * Print a helpful message if there is an error
+- *
+- * @bflow: Bootflow to process
+- * @err: Error code (0 if none)
+- */
+-static void report_bootflow_err(struct bootflow *bflow, int err)
+-{
+-	if (!err)
+-		return;
+-
+-	/* Indent out to 'Method' */
+-	printf("     ** ");
+-
+-	switch (bflow->state) {
+-	case BOOTFLOWST_BASE:
+-		printf("No media/partition found");
+-		break;
+-	case BOOTFLOWST_MEDIA:
+-		printf("No partition found");
+-		break;
+-	case BOOTFLOWST_PART:
+-		printf("No filesystem found");
+-		break;
+-	case BOOTFLOWST_FS:
+-		printf("File not found");
+-		break;
+-	case BOOTFLOWST_FILE:
+-		printf("File cannot be loaded");
+-		break;
+-	case BOOTFLOWST_READY:
+-		printf("Ready");
+-		break;
+-	case BOOTFLOWST_COUNT:
+-		break;
+-	}
+-
+-	printf(", err=%dE\n", err);
+-}
+-
+-/**
+- * show_bootflow() - Show the status of a bootflow
+- *
+- * @seq: Bootflow index
+- * @bflow: Bootflow to show
+- * @errors: True to show the error received, if any
+- */
+-static void show_bootflow(int index, struct bootflow *bflow, bool errors)
+-{
+-	const char *name = bootflow_guess_label(bflow);
+-
+-	printf("%3x  %-11s  %-6s  %-9.9s %4x  %-25.25s %s\n", index,
+-	       bflow->method ? bflow->method->name : "(none)",
+-	       bootflow_state_get_name(bflow->state), name, bflow->part,
+-	       bflow->name, bflow->fname ?: "");
+-	if (errors)
+-		report_bootflow_err(bflow, bflow->err);
+-}
+-
+ static void show_header(void)
+ {
+ 	printf("Seq  Method       State   Uclass    Part  Name                      Filename\n");
+@@ -233,7 +171,7 @@ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			return CMD_RET_FAILURE;
+ 		}
+ 		if (list)
+-			show_bootflow(i, &bflow, errors);
++			bootflow_show(i, &bflow, errors);
+ 		if (!menu && boot && !bflow.err)
+ 			bootflow_run_boot(&iter, &bflow);
+ 	}
+@@ -291,7 +229,7 @@ static int do_bootflow_list(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		     !ret;
+ 		     ret = bootdev_next_bootflow(&bflow), i++) {
+ 			num_valid += bflow->state == BOOTFLOWST_READY;
+-			show_bootflow(i, bflow, errors);
++			bootflow_show(i, bflow, errors);
+ 		}
+ 	} else {
+ 		printf("Showing all bootflows\n");
+@@ -300,7 +238,7 @@ static int do_bootflow_list(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		     !ret;
+ 		     ret = bootflow_next_glob(&bflow), i++) {
+ 			num_valid += bflow->state == BOOTFLOWST_READY;
+-			show_bootflow(i, bflow, errors);
++			bootflow_show(i, bflow, errors);
+ 		}
+ 	}
+ 	show_footer(i, num_valid);
+diff --git a/include/bootflow.h b/include/bootflow.h
+index 657e3731f11..b1efeee3259 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -700,4 +700,13 @@ int bootflow_menu_poll(struct expo *exp, int *seqp);
+  */
+ const char *bootflow_guess_label(const struct bootflow *bflow);
+ 
++/**
++ * bootflow_show() - Show the status of a bootflow
++ *
++ * @seq: Bootflow index
++ * @bflow: Bootflow to show
++ * @errors: True to show the error received, if any
++ */
++void bootflow_show(int index, struct bootflow *bflow, bool errors);
++
+ #endif
 -- 
 2.43.0
 
