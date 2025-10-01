@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 996C2CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB52DCAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50C95836B8;
-	Wed,  1 Oct 2025 22:31:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 57B548376C;
+	Wed,  1 Oct 2025 22:31:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FGcvOrS0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G1Ye09N2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF6A983734; Wed,  1 Oct 2025 22:31:00 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 7587183741; Wed,  1 Oct 2025 22:31:02 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 871E4836D3
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43E67836EE
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:31:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-43f912f9738so109771b6e.0
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:58 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-355102ff142so124152fac.0
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:31:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759350657; x=1759955457; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=Jlf6BWSlIgTt48r05fpKQJv3Ry0qTTqFWChQKOgyYaA=;
- b=FGcvOrS0Zoq3OQRSpciin1xZdXYiJabAdKH3o2tXr73xgBpJUlUWvBSHcZn2zap26k
- Vi9w3XvTaKU9ZSNBTpnuiqFM1Uj+5IeIUwIw4LGzjZoUe6wnKEmodnTpNK4tMNJwAC6+
- mvz4q6s6ZbLZnSXWE3PoX9bZknhSPgq8JK0LI=
+ d=konsulko.com; s=google; t=1759350659; x=1759955459; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pGae9EzlHpA0wMkjysYm3QiCl1wBR/K6Q3r8axhpHUI=;
+ b=G1Ye09N2ylM0Yw00GsEJaIx4AF9X8hzwJ9VcL+1Xw3P8LJoOm2tiO136U1jDGZxbAi
+ UFNrxqAYhsCj+tSyusvRTgVitvUTT5jHSA1z1wdE37BrTqHtXcGuaIVsPdgoO5oWb31U
+ NCN8r1PPpK6Kflpq3tyEKcV1L8zPnsR9IRjm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759350657; x=1759955457;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Jlf6BWSlIgTt48r05fpKQJv3Ry0qTTqFWChQKOgyYaA=;
- b=o3LEZv3zBqqA5AnOvkcFxQLV1Lmr6i5RoyPYd8ygbOnm23WDFMUEcOyi8uynncc0Aj
- nRtrUw+aSoz0LASHWwWtcHi5jm16A+UZb33ZQopv9u8vZzqBq5KLqAkVOe8I80XWW0Tv
- lJXqp039PX93YTo0/SIA7bOoGATfZiI8OFBFVLLxYegqebWDz7ckK59xvhMUJ6kiDLIY
- W5E4GVHzXWA1lkEz+iLS3qA+3K7xwNvEPr60kd/e7qixguOEOIHgsjTxQKhY4b24IrxN
- dySIq6Z8vZ1lJ6wTe3QICknMxSJUNjuqFJuucJYe0exkhuM3Zktn8waK3EIMyFO+Dmu8
- qxYw==
-X-Gm-Message-State: AOJu0YxObF3dF0L3N2A4RQT2X/mCnKiV0vadlxc/6v87RJBskQhzUmqj
- YWnRjRJOBb21U/qSPjyVmo1Rq6/Vh/l/WU6lXcnnvD+QGdQrREL2QNeF8QH6vnmgyDlXPSjAT5Y
- yB7QAxeg=
-X-Gm-Gg: ASbGncv8rawEkPZOEiWwob5g076L7KIDVETit7HXaeckHkIY93rPN7m/e/fXsZu3Xn3
- QepL7wfBOtysI5KgZ4dLgzvLmwEdCy5qSflO8zuMkW+I4ItqKA2ZNCbkOx9WU1R5uUfiHGekyl8
- Px1i9LfH9bp1HNdkoXjmmRJL2Yjc1eC0vfixM7ChBekTePlNA66apgAqoUImDsZfC0DBBo5JpYS
- 9Cu9GIgLpAtf8lzgSbJc07wD36zUC9kjaF9zS53bVO9eTAi8/mpZUVPv7naiU7qCOMmdvBBJb7b
- 18HoV/76rXHYK9y1aSLO+QXgLcysYmoxHbhxOksXNgLfRd03EVqaCB3hG5ktGv4/yAqTR9atA03
- oZ775b8ROwn/wL8Rf2oWeEeK54bs0plongoE6MNqUoHTRiMwM/7XNExvlH/msVDj8WbS+q/M9kx
- MsDZFEcCGP8i/nMignAQ==
-X-Google-Smtp-Source: AGHT+IHIh6JiNITAsi7TXnBwC26Aa+QsinTwV93HKS4dR+8XI8i46kLpmNP2dp/2ybbIz3PrwHLpEg==
-X-Received: by 2002:a05:6808:14c2:b0:43f:58af:39a with SMTP id
- 5614622812f47-43fb15bb0c2mr539236b6e.22.1759350657264; 
- Wed, 01 Oct 2025 13:30:57 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759350659; x=1759955459;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pGae9EzlHpA0wMkjysYm3QiCl1wBR/K6Q3r8axhpHUI=;
+ b=HUmsNLysyDvtgqZKQatFQpau4FtThV6H7G9TD8h3WveM23VXEytsGVwTNDjVbrE932
+ 6F8p74H/ZIR8pKVsXtdI/Y98+t4HZcyXm6wc13LDnK9MLjg1k+p7afJvDFglBQY6yPwn
+ q5PnwOMyTnai5n9OQ4+YlAYSsNr6MTUOTnB/h4eeUSoOQzaib2sLdzwCItVGapQvG7wf
+ u2XNkhktTkEcJneCHw2sWnmSebqC4clS2OUi4TbJ8femshlLN0gAVqxRbCZKybIGZIxi
+ zdXiLhPJiolOEKbGS5UKlImzkYI9C9w6/TKFgk38KmB6tMBl6Twmk81/watQWtD58UM2
+ gH9A==
+X-Gm-Message-State: AOJu0YwSdRlK8nsl52yuUzcJhBzws6RF/LoZwrzHhaBocAzaHcBCb0sV
+ S4sTGOsXPEU0HmUH8yqsrS/EmQa1x9rN3wBqghCnhqw9TMet964/dE770uJL8i/wo4fjj9veLno
+ R2DxDyDw=
+X-Gm-Gg: ASbGnctUKQ/UUE1hscTU76E6Hj/Avx2p19aSzUsMvzSGqCC+dZMVaqASNS2wUsaWNRx
+ ydWNEaG+eHRWc+EXFXBUPyPenUlKddziVYLGD7moldv6zK9q0OOCa3xHg/W9TwLzOHEIzaLnXCJ
+ P+a/4r3Ctjgt2Yra7im8rZuzEibmvUsieIu890E+zakg7BIFVA8S2BisfsVZw1Vy7OKHwgE0c2b
+ lu24dgHeRna9nVZwgYfkw+EbRJOECYkst9xDICYBD2cR22eQsSQZ7Z1tJAsILTcUQ2r3cOLgHiL
+ 41VkLsRRssXfBi/pnlRMbuWx3dy/usSeHnEGRfqlNDPcvZH8FRZJXkI2NL3hxp4xJSPlcUROIxR
+ pg2Dd/vjDOYrODb5FxNQ+3C7iwUe2jCl0O0KLzD56SD5xFRPSbS0xdICeykZWZIjx40xMj643zV
+ 5epdTbq3KrV0bt+nqqZQ==
+X-Google-Smtp-Source: AGHT+IFRvJMhI8LqJeCg8aJMPhpXHxmAjkQc0P8hFJ0jl4cLnO1fX29mrTa4/XYeNuzu7tvsc/0yfw==
+X-Received: by 2002:a05:6870:9114:b0:344:d813:6d4c with SMTP id
+ 586e51a60fabf-39b91c66d4cmr2655910fac.6.1759350658995; 
+ Wed, 01 Oct 2025 13:30:58 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43fb25a4c9asm87274b6e.25.2025.10.01.13.30.56
- for <u-boot@lists.denx.de>
+ 586e51a60fabf-3ab91e6835bsm215380fac.23.2025.10.01.13.30.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 13:30:56 -0700 (PDT)
+ Wed, 01 Oct 2025 13:30:58 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] spl: spl_sata: Add __maybe_unused decorator
-Date: Wed,  1 Oct 2025 14:30:55 -0600
-Message-ID: <20251001203055.2828514-1-trini@konsulko.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Yao Zi <ziyao@disroot.org>, Kongyang Liu <seashell11234455@gmail.com>
+Subject: [PATCH] clk: sophgo: Fix a warning about void returns value
+Date: Wed,  1 Oct 2025 14:30:57 -0600
+Message-ID: <20251001203057.2828531-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,35 +94,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is possible that we will not have enabled the options to call
-spl_sata_load_image_raw so use the __maybe_unused decorator to silence
-the compiler warning.
+The cv1800b_clk_setfield function returns void, but was doing "return
+writel(...);" and while seemingly having a void function return a void
+function is not a warning, when readl is a macro this problem is shown.
+Correct the code to instead simply call writel.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- common/spl/spl_sata.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+Cc: Lukasz Majewski <lukma@denx.de> (maintainer:CLOCK)
+Cc: Sean Anderson <seanga2@gmail.com> (maintainer:CLOCK)
+Cc: Yao Zi <ziyao@disroot.org>
+Cc: Kongyang Liu <seashell11234455@gmail.com>
+---
+ drivers/clk/sophgo/clk-common.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/spl/spl_sata.c b/common/spl/spl_sata.c
-index 67fc620d9bea..09f94e662fc2 100644
---- a/common/spl/spl_sata.c
-+++ b/common/spl/spl_sata.c
-@@ -14,10 +14,12 @@
- #include <errno.h>
- #include <fat.h>
- #include <image.h>
-+#include <linux/compiler.h>
+diff --git a/drivers/clk/sophgo/clk-common.h b/drivers/clk/sophgo/clk-common.h
+index a9e83d0d6899..a18673f397c3 100644
+--- a/drivers/clk/sophgo/clk-common.h
++++ b/drivers/clk/sophgo/clk-common.h
+@@ -70,7 +70,7 @@ cv1800b_clk_setfield(void *base, struct cv1800b_clk_regfield *field, u32 val)
+ 	u32 new_val = (readl(base + field->offset) & ~mask) |
+ 		      ((val << field->shift) & mask);
  
--static int spl_sata_load_image_raw(struct spl_image_info *spl_image,
--		struct spl_boot_device *bootdev,
--		struct blk_desc *stor_dev, unsigned long sector)
-+static int __maybe_unused spl_sata_load_image_raw(struct spl_image_info *spl_image,
-+						  struct spl_boot_device *bootdev,
-+						  struct blk_desc *stor_dev,
-+						  unsigned long sector)
- {
- 	struct legacy_img_hdr *header;
- 	unsigned long count;
+-	return writel(new_val, base + field->offset);
++	writel(new_val, base + field->offset);
+ }
+ 
+ #endif /* __CLK_SOPHGO_COMMON_H__ */
 -- 
 2.43.0
 
