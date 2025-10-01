@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB52DCAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D19CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:33:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57B548376C;
-	Wed,  1 Oct 2025 22:31:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A7C2283700;
+	Wed,  1 Oct 2025 22:31:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G1Ye09N2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SKJoqmDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7587183741; Wed,  1 Oct 2025 22:31:02 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 6A3A783775; Wed,  1 Oct 2025 22:31:04 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43E67836EE
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:31:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AC58836D3
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:31:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-355102ff142so124152fac.0
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:31:00 -0700 (PDT)
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-3544c64380eso370762fac.3
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:31:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759350659; x=1759955459; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pGae9EzlHpA0wMkjysYm3QiCl1wBR/K6Q3r8axhpHUI=;
- b=G1Ye09N2ylM0Yw00GsEJaIx4AF9X8hzwJ9VcL+1Xw3P8LJoOm2tiO136U1jDGZxbAi
- UFNrxqAYhsCj+tSyusvRTgVitvUTT5jHSA1z1wdE37BrTqHtXcGuaIVsPdgoO5oWb31U
- NCN8r1PPpK6Kflpq3tyEKcV1L8zPnsR9IRjm0=
+ d=konsulko.com; s=google; t=1759350661; x=1759955461; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LFoS+6pEzPt5XNlLPCURFvKZkebiYtFqa2Fqn+xqI10=;
+ b=SKJoqmDsE34hO+vbdzkm+v0rShLdtRvKxrbZtuOx7viU4mzjoC01PjTR1HPCoO2TWw
+ 4n+8WCZkz5a6eRpS4bNDtzOggZ9M+GQ3QRgPK4sq3NpfG9R2waSWml9weojHWvPmmn9v
+ o1ms+x4DV7I2k+wSp5jF5ilmclnG4id0eqM7c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759350659; x=1759955459;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pGae9EzlHpA0wMkjysYm3QiCl1wBR/K6Q3r8axhpHUI=;
- b=HUmsNLysyDvtgqZKQatFQpau4FtThV6H7G9TD8h3WveM23VXEytsGVwTNDjVbrE932
- 6F8p74H/ZIR8pKVsXtdI/Y98+t4HZcyXm6wc13LDnK9MLjg1k+p7afJvDFglBQY6yPwn
- q5PnwOMyTnai5n9OQ4+YlAYSsNr6MTUOTnB/h4eeUSoOQzaib2sLdzwCItVGapQvG7wf
- u2XNkhktTkEcJneCHw2sWnmSebqC4clS2OUi4TbJ8femshlLN0gAVqxRbCZKybIGZIxi
- zdXiLhPJiolOEKbGS5UKlImzkYI9C9w6/TKFgk38KmB6tMBl6Twmk81/watQWtD58UM2
- gH9A==
-X-Gm-Message-State: AOJu0YwSdRlK8nsl52yuUzcJhBzws6RF/LoZwrzHhaBocAzaHcBCb0sV
- S4sTGOsXPEU0HmUH8yqsrS/EmQa1x9rN3wBqghCnhqw9TMet964/dE770uJL8i/wo4fjj9veLno
- R2DxDyDw=
-X-Gm-Gg: ASbGnctUKQ/UUE1hscTU76E6Hj/Avx2p19aSzUsMvzSGqCC+dZMVaqASNS2wUsaWNRx
- ydWNEaG+eHRWc+EXFXBUPyPenUlKddziVYLGD7moldv6zK9q0OOCa3xHg/W9TwLzOHEIzaLnXCJ
- P+a/4r3Ctjgt2Yra7im8rZuzEibmvUsieIu890E+zakg7BIFVA8S2BisfsVZw1Vy7OKHwgE0c2b
- lu24dgHeRna9nVZwgYfkw+EbRJOECYkst9xDICYBD2cR22eQsSQZ7Z1tJAsILTcUQ2r3cOLgHiL
- 41VkLsRRssXfBi/pnlRMbuWx3dy/usSeHnEGRfqlNDPcvZH8FRZJXkI2NL3hxp4xJSPlcUROIxR
- pg2Dd/vjDOYrODb5FxNQ+3C7iwUe2jCl0O0KLzD56SD5xFRPSbS0xdICeykZWZIjx40xMj643zV
- 5epdTbq3KrV0bt+nqqZQ==
-X-Google-Smtp-Source: AGHT+IFRvJMhI8LqJeCg8aJMPhpXHxmAjkQc0P8hFJ0jl4cLnO1fX29mrTa4/XYeNuzu7tvsc/0yfw==
-X-Received: by 2002:a05:6870:9114:b0:344:d813:6d4c with SMTP id
- 586e51a60fabf-39b91c66d4cmr2655910fac.6.1759350658995; 
- Wed, 01 Oct 2025 13:30:58 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759350661; x=1759955461;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=LFoS+6pEzPt5XNlLPCURFvKZkebiYtFqa2Fqn+xqI10=;
+ b=dQXuUMwidXsijti8GlvZ2XgtWEgsWFvD9aaUsaAste9EWcRtcBU9SJL8YsyOKTxzXc
+ OjG7914/uUrHd9uNuIt63ORSBUJkuvx/UawClM0bNYVwLRl/lC4cPRzhQd8yddUA0s44
+ Y/Bfi0IugFm3gHnj5MEplDEoTc6sqmJIpwqbW0rYCMTaYE1SOYF+qKnXTnHPezOz5abI
+ NcXNbAca6iBzrFWlue7E5e7QB8O97ABIxCQ/rP9fw9LkDeqQJuigBAlaMhMh7NhCbuRG
+ lmfbZkKTkrqOh+ZwK2SsHStPg0NRKAzlzdTpeJ7cahkfHzGIaTeGycNDw+Tnc0n9rvsL
+ PLtg==
+X-Gm-Message-State: AOJu0YwdLtwyrY0uwgqlibI8e/wLY5mw/68RIMwXG/cWrFcFI4MJVtV2
+ pxO4NG+kQ7hJPZcNE8bb6lqlfrMPYpRwjaNXTQt5D/at5x/TPGwlNFWBS35o4OxJLL5Ejz1TlDJ
+ tgUVTuqY=
+X-Gm-Gg: ASbGnctvzPNzzGw8DepBdw2mFDEv7TUtaHqwvko66qTdYYOBfmIyVv4pi4Hvdfw8jwk
+ kiICJeIDPkwaphQY1sqR9t/mW/iYbiVa3LoxmXBosQel32G5zzugSe2iZ/al3HNVIAA+w0eHedc
+ RgtlSVuBA867x6szGnWg2CN3AgfELkrRgzfFiloE8rSQcFUfUpXdeIbWEa6/8wLtS9nWVOUVKoQ
+ XrdzrNXqi8163OqsTkrZXZaJOPRUZGEFtohMb8GvMtrvhempNJf3bKDhEhOFgtPEifLizlV1Azv
+ SZOQd6tZ8NMJZhtFcbvpguq3N7G69gtAhEnAjjl1SCkopreRj2MNaDvPIO5425uYLbM0fImpd9R
+ 27rCRHSzhre8Z6eDZ4PpWm3YKVI6Ez79/geGk1QGAyt3+7bhkGMewWvW5V0Ye3arvLpENTQtRne
+ raXiOFysY=
+X-Google-Smtp-Source: AGHT+IH0IqO1X0yrNS3G3etauNPDLQDRyGUCxlEWd5FdW/QTB7Vss5mje7SndVa/FizNYwz4sChBRw==
+X-Received: by 2002:a05:6870:71c4:b0:395:b63a:520a with SMTP id
+ 586e51a60fabf-39cd931c580mr2580795fac.22.1759350660914; 
+ Wed, 01 Oct 2025 13:31:00 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab91e6835bsm215380fac.23.2025.10.01.13.30.58
+ 46e09a7af769-7bf439d58e2sm112892a34.39.2025.10.01.13.30.59
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 13:30:58 -0700 (PDT)
+ Wed, 01 Oct 2025 13:31:00 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Yao Zi <ziyao@disroot.org>, Kongyang Liu <seashell11234455@gmail.com>
-Subject: [PATCH] clk: sophgo: Fix a warning about void returns value
-Date: Wed,  1 Oct 2025 14:30:57 -0600
-Message-ID: <20251001203057.2828531-1-trini@konsulko.com>
+Subject: [PATCH] boot: vbe: Make BOOTMETH_VBE_xxx a choice
+Date: Wed,  1 Oct 2025 14:30:59 -0600
+Message-ID: <20251001203059.2828551-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,34 +92,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The cv1800b_clk_setfield function returns void, but was doing "return
-writel(...);" and while seemingly having a void function return a void
-function is not a warning, when readl is a macro this problem is shown.
-Correct the code to instead simply call writel.
+It is not valid to enable multiple BOOTMETH_VBE_xxx methods, so make it
+a choice as to which will be enabled, and make the default choice be the
+current default.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Lukasz Majewski <lukma@denx.de> (maintainer:CLOCK)
-Cc: Sean Anderson <seanga2@gmail.com> (maintainer:CLOCK)
-Cc: Yao Zi <ziyao@disroot.org>
-Cc: Kongyang Liu <seashell11234455@gmail.com>
----
- drivers/clk/sophgo/clk-common.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ boot/Kconfig | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/clk/sophgo/clk-common.h b/drivers/clk/sophgo/clk-common.h
-index a9e83d0d6899..a18673f397c3 100644
---- a/drivers/clk/sophgo/clk-common.h
-+++ b/drivers/clk/sophgo/clk-common.h
-@@ -70,7 +70,7 @@ cv1800b_clk_setfield(void *base, struct cv1800b_clk_regfield *field, u32 val)
- 	u32 new_val = (readl(base + field->offset) & ~mask) |
- 		      ((val << field->shift) & mask);
+diff --git a/boot/Kconfig b/boot/Kconfig
+index eff05948b3a1..f21a67b2d3ee 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -712,9 +712,12 @@ config SPL_BOOTMETH_VBE_REQUEST
  
--	return writel(new_val, base + field->offset);
-+	writel(new_val, base + field->offset);
- }
+ 	  This is only useful if you are booting an OS direct from SPL.
  
- #endif /* __CLK_SOPHGO_COMMON_H__ */
++choice
++	prompt "Method for VBE to find the correct bootdev"
++	default BOOTMETH_VBE_SIMPLE
++
+ config BOOTMETH_VBE_SIMPLE
+ 	bool "Bootdev support for VBE 'simple' method"
+-	default y
+ 	imply SPL_CRC8 if SPL
+ 	imply VPL_CRC8 if VPL
+ 	help
+@@ -734,6 +737,8 @@ config BOOTMETH_VBE_ABREC
+ 	  verification step, a recovery image is booted. This method will
+ 	  eventually provide rollback protection as well.
+ 
++endchoice
++
+ if BOOTMETH_VBE_SIMPLE
+ 
+ config BOOTMETH_VBE_SIMPLE_OS
 -- 
 2.43.0
 
