@@ -4,89 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38200CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 10:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63845CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 10:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A839480107;
-	Wed,  1 Oct 2025 12:32:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 689C080107;
+	Wed,  1 Oct 2025 12:37:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y1mxSGHS";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sdZz15J1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5774181D6A; Wed,  1 Oct 2025 12:32:51 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id D8C7E82998; Wed,  1 Oct 2025 12:37:04 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 424CE800B1
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 12:32:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3792800B1
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 12:37:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-3ee64bc6b90so4432038f8f.0
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 03:32:49 -0700 (PDT)
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-46e6771c523so561195e9.1
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 03:37:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759314769; x=1759919569; darn=lists.denx.de;
- h=content-transfer-encoding:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SAgLrB7XaLmX+REuIux5pCJNC8bSEzO5pgafirmAvug=;
- b=y1mxSGHSI+B7PXZpKBcHoOlZXmUNE2AcsBT4Nu+yQZcEMBwaj7Osijzy5wSjbYK3jO
- DmTNtr+jupmF3I17RAqY5wT8q/PoY9I38Rg77qE9EIbj7s/rCvT79mBFx7QpU1Pr+1OR
- QmCKBirplnpn3FwsdFXw+PWhrGdy/IYy8maQ3qtCZLrl177/7LehPRmFqdMI4Ybzvavx
- p0z6GtnrA8Ja3o018ZT9cOTyNUavATgDCnzoiaYY371KgXU24qBgdPhLZ+3DOIs65gw1
- MU5fpZh4iYMpN+U+2g5hAn8hy9BvXKHGRKh+clSOA7VcDrcBvjLMjFTXXj/bVIy3NSAj
- 8NaQ==
+ d=linaro.org; s=google; t=1759315022; x=1759919822; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VWi3z0lab9bXyQWEIGEgNAZ/uq2cM8i1nh2QJRfpP1w=;
+ b=sdZz15J143hjDhBqG7qtQugmxSRxxmb06XGWju/snBSMZoTZLKlLfxsbG6DswanHH7
+ 2p8HnRrdjVJTMbxed58YUIbpZNuOB1kVLfiHLuUB6i9xifk43JsOA/dSsHmO1f8+T71S
+ nLokOq2v0G/OJrNuqu53+jAIIOF+R+TVA8lyMcOZxUp9iNO3zh5NZ30WK39w19IKP5XA
+ v7jfGrK3aeiyhNH4Rk/t5Ie1ngH665erWvFUXyUZiT1nc0Wd8z1cEsbHVN5PYPgKfmPO
+ S9O+DKHesIWk8EBcYlfptbTELa/6T/as4OCDggr+Kf2Eh6362BDhC4nVKn0rb77ndwLD
+ EnZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759314769; x=1759919569;
- h=content-transfer-encoding:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=SAgLrB7XaLmX+REuIux5pCJNC8bSEzO5pgafirmAvug=;
- b=mKieJU7YQ0A3E2bpn1GEziLXou0XhFqNo4Dp0scPReVXpRuyaPT32Bp52GD9dEwSYH
- 78IY85no8ml+bz0tlH1l20cTCDgYTJs/yXCy/21WmU6b8+hMmIgNuqiHgfo9OlTyKSYJ
- JxFj4qrIYceWN8kxxyrTJc18wJDvXoNEe4IV6HfEaYp9Br0hQr86Z9rGl8vLle02+XXv
- eOT1/NV6QR1HSnBiqx5sMEGljqEHXUVq0j9GaiU+OQlW/Cc/tjjKocb9vg7qE54pM75r
- EHT/IJkIvMraJsVDduwKuW6+pwUaioQW9DZzqlfWEpOsGdhrD9+sNA6Smnv8JIRchmFf
- yPew==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVeIH3qslo1YpdkKmkeISQY3D0M9CD4XeRlOcSE1SZVLWr5W7qgizLqyIgDOFhBYPckBeFqIdw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwN0LnKD/Nfc/JWW6SPGkSNjdO0QVRn4Y8VDVnpT4q8E/XIJi2N
- 5oPx9aHho0kr5uJHWB92tcG17r8zquqN1myIQi9Uz84xje0cd1qVnNmWKSoCyNz6PlI=
-X-Gm-Gg: ASbGncv3tqDEurAtuZKnICwMim7Mt2Yiw+jPDR3Oamf2Ou6K5aK6EPwIDuoCfrEOwqN
- 4MczZ4dDLDLkpzR9JyVO5m+EhwSe7atM1pgfpHH3KBTj5CqEG7waKu+Y/MZeOBfjpHMZ8O0D1Fb
- bJzHLeUE4ln1cWlsq74Tk3PNuEGtV6Tm3xTUsoHWveQfOuBUbLyIPHkg8BEWijdMQSyfCwVLYXp
- NmzKojyPoF55VzpXWwuH5FUSdB6Kt2Qz4toiv9E8Z0++VdlT81GW4ISiBh+geTTK5NFsDJHmxXa
- cgLbDs1D7rpR9cBbtThfKbtLGA/4hqu5EWSdkWy/kMN7B7meaV20uO5UcKUg9h5QRArClPGjVFJ
- aMPRInNCzTS5SjuT5BR8O9kFJTyWXEYYdnKKXUFXl3YkF732jqf2eLFqSd/oZN0ESAYd/5YzBi6
- z4pIpTXkDbtHGGrItrtPVxmdUBcQ==
-X-Google-Smtp-Source: AGHT+IGdQdpcS6Rt4bOTH98g6o5Cf9pXG1ePQdxzqPw7DWRrrMybTLcfeKqO+nVUDNA7woh5O16hYw==
-X-Received: by 2002:a05:6000:240c:b0:3ea:d9a7:43e4 with SMTP id
- ffacd0b85a97d-425578196damr2342817f8f.53.1759314768652; 
- Wed, 01 Oct 2025 03:32:48 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:ebd:e301:2e91:499c:12aa:e25c?
+ d=1e100.net; s=20230601; t=1759315022; x=1759919822;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VWi3z0lab9bXyQWEIGEgNAZ/uq2cM8i1nh2QJRfpP1w=;
+ b=Jj0UqjgxvsooRhdaiL9UODRRbID91knqbLQQPoKO0S3sEuzSkxVV3usMNxOHzS/5+O
+ CUSkEwfQdttL1eogSz709uJuTnfdjT27+USoWuNwYfylSI34HkvvGsj2ScQYjAktxVVK
+ QGP5EBQdZQ2gjCWT5ye06Cp3MquCFdRBmzX9b9rGG5618viVIhUxDQM1lKdEsX8xml2L
+ UqzTx+pqqGbHkIU7XtZaB3r+8cTEGwViQojrfiH/ddIyAIeGW/vb5HxGE0VoLUkoDCkQ
+ S6DV92/07TLU1BZICvWzQr/R6itlpVbjmDz4GME2oAOQTlubMRMfnB5GD24fGBAV3hAA
+ +Ukw==
+X-Gm-Message-State: AOJu0YzxY2sA8+5knpEVoJGRqmsTRW5vKJkANym/oNwXzLmZRAuQyxKD
+ s/qce2LPkB32W7qrRuFpYhNnsUOaw4Ir591P3Dc2vVDIf/MZmJ0Q8zq/8UQMGyiGWyI=
+X-Gm-Gg: ASbGncu+OEhw12RqIXFSYl1asjZ14q+dBPRdWF1tjzCWJVVu7ExMf/RvayiJ2Zrgz+l
+ GwlhUVDHaYazEKCo9nxTBVqFhlN1wAXoJluBXSIrL91FwbOdUOqsBnCQhM+8diziRJKZcxRqKV8
+ 9Jf2+/OCplSuoX5nHHJR/ajtoKm58MQOHBYBMe4ZdsBAS/BnFchAVZJ8I61jgZcvVFouAi6f8bF
+ Je6LpIbsV7yBAtZq4N1aUaAllfUd8KsI+Ay/Iug/aQKXW6GDSZtHrL9SUo0hwDhwONiKGad9qYd
+ zDMVLghn+AykC336ESljEdBQTtYsNohNfNQqMAULbiA6CgXHQO1Dv+p7RRbPtRj5OdPsyFLNZcP
+ kXtrtW4D4xdTGqpBT6UkSr4PZLLiSjUcwGyrkNbWwGSupfpvHnDVPmrjzmvH0YE6AI8ajf4ihCg
+ c=
+X-Google-Smtp-Source: AGHT+IEZBGt3DZBjgmbElNa2MJ0KaM3WoedzBkT0AQzDNu11a5I2rXhZTEukF21WEZULr68Oml2pOQ==
+X-Received: by 2002:a05:600c:1550:b0:46e:35eb:43a with SMTP id
+ 5b1f17b1804b1-46e6127bae6mr25487885e9.15.1759315022052; 
+ Wed, 01 Oct 2025 03:37:02 -0700 (PDT)
+Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:ebd:e301:2e91:499c:12aa:e25c])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e61a265f6sm32900955e9.20.2025.10.01.03.32.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 01 Oct 2025 03:32:48 -0700 (PDT)
-Message-ID: <1370613d-5b3c-4f87-845e-7f0de8eb7d0d@linaro.org>
-Date: Wed, 1 Oct 2025 11:32:47 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-GB
-To: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+ 5b1f17b1804b1-46e619b36f9sm33261415e9.19.2025.10.01.03.37.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Oct 2025 03:37:01 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: Smatch reported issue in Rockchip video
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Date: Wed, 01 Oct 2025 11:37:01 +0100
+Subject: [PATCH] video: rockchip: Set return code
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20251001-video_rockchip-v1-1-4933bdb56990@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAEwE3WgC/x3MTQqAIBBA4avIrBNG6f8qESE61RBkKEgg3j1p+
+ S3eyxApMEWYRYZAiSP7u0I1Auxp7oMku2rQqDuFqGRiR34L3l725EeadkQ3qWE01EONnkA7v/9
+ wWUv5AFBQjJhgAAAA
+X-Change-ID: 20251001-video_rockchip-a480d9178ae6
+To: u-boot@lists.denx.de
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,13 +104,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reports the following issue
+In rk_edp_start_aux_transaction the check for "AUX CH command reply
+received" returns ret as the error code but it has not been assigned a
+value so this could lead to the calling code silently ignoring the
+error. Instead return -EIO.
 
-drivers/video/rockchip/rk_edp.c:769 rk_edp_i2c_read() warn: ignoring 
-unreachable code.
+This issue was found by Smatch.
 
-Looking at the code, the warning is true, there is some code there that 
-is unreachable. It is not clear to me what the fix for this should be 
-but I will prepare a patch if someone could suggest what needs to be done.
+Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+---
+ drivers/video/rockchip/rk_edp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Andrew
+diff --git a/drivers/video/rockchip/rk_edp.c b/drivers/video/rockchip/rk_edp.c
+index 0ba68dbce3d126f8a3230435ffa0f780c1e08d61..7186abc9c6c93d05e774e61efa136bf98ff727df 100644
+--- a/drivers/video/rockchip/rk_edp.c
++++ b/drivers/video/rockchip/rk_edp.c
+@@ -216,7 +216,7 @@ static int rk_edp_start_aux_transaction(struct rk3288_edp *regs)
+ 	/* Is AUX CH command reply received? */
+ 	if (rk_edp_is_aux_reply(regs)) {
+ 		debug("AUX CH command reply failed!\n");
+-		return ret;
++		return -EIO;
+ 	}
+ 
+ 	/* Clear interrupt source for AUX CH access error */
+
+---
+base-commit: b2d5e46c67002e46ac339ef549ea18cf5adfcd87
+change-id: 20251001-video_rockchip-a480d9178ae6
+
+Best regards,
+-- 
+Andrew Goodbody <andrew.goodbody@linaro.org>
+
