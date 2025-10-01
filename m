@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A920CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 21:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0662ACCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 21:30:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E84083693;
-	Wed,  1 Oct 2025 23:29:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B03DA8365E;
+	Wed,  1 Oct 2025 23:29:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B0DPr3HX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WzGTzKpC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54A0483677; Wed,  1 Oct 2025 23:29:48 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 2E15983631; Wed,  1 Oct 2025 23:29:50 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31C55835D8
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 23:29:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 038DD83544
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 23:29:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-4256f0fac67so3498305ab.2
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 14:29:46 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-930a6c601b3so26281939f.3
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 14:29:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759354184; x=1759958984; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1759354186; x=1759958986; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iNebsohU/HTH7+iRxjI+zEowgFXueFHuq1JRC66kvSU=;
- b=B0DPr3HXFvEyoPKrUBgPal/OCB5OxYWh+7/yCyKuG7NbxmrZtmlZM9bhAAe8/HDZsj
- mxJSwGX9ZiCf3y6WOVwacuquW/Lx8WeW7DMRgSVeXMm3WYCsbT8d92WI6lU3QWRnXWt6
- tT5oM2E4uOl3IgvPGm+3+awOh2a6grirzJS8g=
+ bh=1OCbcYsUMfuKia/vAbPndgBEFHyhm5wDNIcytQjQuuQ=;
+ b=WzGTzKpChrR0ZPetWMJmHMzjb/voX0pc8C5EmPCQJRnFpdxrqN1KVGrdLZ7bWHdQ8p
+ /QYVJXUzbmeBnhfWqZa085TPtePGMVOZrItkrZ5OxJJt/ieTU2vlT4npl5TggUSmk1zA
+ b/D3qi96yh/XmrW9fNkfhT6pKs0jYkBe7UIFI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759354184; x=1759958984;
+ d=1e100.net; s=20230601; t=1759354186; x=1759958986;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iNebsohU/HTH7+iRxjI+zEowgFXueFHuq1JRC66kvSU=;
- b=NSqnyc3RGpGJZ8jw9raQJ4YoHtlnMSrcrC5Pnv94rARzgigE54+zKWQdnKMAUeQe3z
- i8/696rLrwWVw9SEzMFmChcbIFN1z30hbiy7M3CQtZPWOMpmdN3S1bKzg0R4R6NMqKS2
- WluI35FlPMMQGe4gMr4ilHIyJ7PBIU0nTXU33DkFG1iuoxHQV7p2yJLjrDMwr34QgFns
- GKa2JCI1nLyM01gDyvv0V6I3npq813Ij1x0r9oicWvRAMssBgDnMCzhxMsoD3WImUf3M
- jUBRJMxWR37+FX5UNIjP96UIbYwE9mot3T+Db1P4ZfyJ2aoGwHodMsmrEE74BmjKdhRJ
- o/kA==
-X-Gm-Message-State: AOJu0YyG45ID+f1B0IoNLfDqqXsS9o90FI5+23ik2SLTc9iCMYjk3oeS
- vBi8M9oBygTKGrx6NfxEGHV3NujWcB5F/NMcx8mb2PH3QQFurc2nlrgRQT/kbTf7ldiyaDx1jSJ
- 23cSpcwKY
-X-Gm-Gg: ASbGncux8B2royaI8VEKte13LYs/Q5t6KMLi4W2rrf02yuYRqvVhGABTELedZEA3KrK
- j1WefCAnOLSeEM55RZZfwCumhfUCJfpvZ03naLM1UOpobp4qSRTIvYcJihfuEt5P7GqTHWTp9ho
- +a5CxDZrF16OgrN3KmIJG6lKLr+vzlVg0kFmgX8XEuKUufeuvmAcakaxnx8MevSBGkTeouN4o8l
- prFNGAGW7TcXeAnADKbp0m9cUSylQHaLNFCtp/LK/qILbCD1UAP7JoZrvpyhE5Yicdhb4+YwmXc
- Du+GuYK32a1vqmv28CJH20qsuuXRKe6a5goarbyRsBLUPg5iuIADGzzM7mKBxwFaPW6B8/n+uJ5
- qpL49kAMGz1sgKOlvknBSB6OzqwXpSK7F7ex2teu+
-X-Google-Smtp-Source: AGHT+IF8UFBnKKOD4+qBcWldclTk8Q9UeS8yON6jq1espJ+smXO8nNgeqEO7n4B/tkG8A1LIAtmIdw==
-X-Received: by 2002:a05:6e02:4408:20b0:42d:84ec:b5cb with SMTP id
- e9e14a558f8ab-42d84ecb8c8mr34584385ab.7.1759354184383; 
- Wed, 01 Oct 2025 14:29:44 -0700 (PDT)
+ bh=1OCbcYsUMfuKia/vAbPndgBEFHyhm5wDNIcytQjQuuQ=;
+ b=ISwqXjOajV9iNHZZyiqLKVEmph++GM1uI/m6jWAaLYC2RjFPZ61PNBsLUNPxXgEIDj
+ MbMZZp88N4HQAKPHdXO1bHYPo8iaKJlxsMnOJo9cvXPoVCIBQQeuKG9CLS+kDHOFyMHX
+ c1Dzg4LsiigTlt+xAgLGDZv09Ebz8cfKMIy0F97BO8N+O2tiMseZgyA8MqoCaqp7+qMD
+ SP/hCf8ev7KoWiC2vcEI5cqk11aRgHTIen8aTWaPdCDk015CP7kD8QV22E4S+fjG1i/4
+ HL1la+ZmaIKUwNqCsAUydCKMErNG/CbzqpoZpQHzg0RiEALzSxBW6FJUM91+L1QvmM5X
+ KNrA==
+X-Gm-Message-State: AOJu0YyiHnlMFXDounCq0wno4Hqu6aeEbrixy8Z+cBDEC4WqpjMY5CwE
+ DM57142kLb3kbnXATYc63U4li3K1PseXMtIJEls/vGnhbprq4ta2rlVpOFybhOraIsLiBDWdBOx
+ Mg+fyH4mc
+X-Gm-Gg: ASbGncschFuY0H2beFaANyRzgWrAlLdcFGy3/KwsG9LL9sCp6OVfO3NudlVltLFp+21
+ iZ2KzbbtEe8qwFD+q3u2dKIPWxPAtepoepaaLlwMdpyi+W2luREmCIXa0mXvbunJQdPKoTrScdR
+ IhhVno+o7iycFu6Ms7y53oZmbysygow2OvWVYHN84DMKYh4SW2JNP8Ne2QM4DnOmJ5RQW5RRRsz
+ 7GhdoeH0U8PlxFQe722WqctAcTAh2l5a23/ye1+pDsNCMMTEaVsS9RQuU4YZKZr2Inh/NRflwQY
+ cYO65VQMm0w6kd/+dPEJoys2xCy9nbBs6keZMqqWe5slKE6/kIApkCz3LXHxPRgDiffPX5PEDrz
+ Prom8AEsLh7PrJsG9UjGga46rL8GvO/4Nis6JLY9q
+X-Google-Smtp-Source: AGHT+IFfOQRT3wNanHOHjvW2tlEDHEfMkDCnNjX8Toz6eGv6iqhJ23YdJfFbyYzUMnxBJ9H1Xy890A==
+X-Received: by 2002:a05:6e02:180b:b0:424:a3e:d79 with SMTP id
+ e9e14a558f8ab-42d8160eb1emr63030015ab.21.1759354185980; 
+ Wed, 01 Oct 2025 14:29:45 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-57b5ec09429sm202844173.55.2025.10.01.14.29.43
+ 8926c6da1cb9f-57b5ec09429sm202844173.55.2025.10.01.14.29.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 14:29:43 -0700 (PDT)
+ Wed, 01 Oct 2025 14:29:45 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Guillaume La Roque <glaroque@baylibre.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 07/17] boot: Update first_glob_method when dropping a
- bootmeth
-Date: Wed,  1 Oct 2025 15:26:32 -0600
-Message-ID: <20251001212649.3263574-8-sjg@chromium.org>
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 08/17] boot: Add a flag for whether there are global
+ bootmeths
+Date: Wed,  1 Oct 2025 15:26:33 -0600
+Message-ID: <20251001212649.3263574-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251001212649.3263574-1-sjg@chromium.org>
 References: <20251001212649.3263574-1-sjg@chromium.org>
@@ -98,71 +99,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For now we only support dropping non-global bootmeths from the
-iteration. Update first_glob_method in that case and add a few checks
-that things are correct.
+The current 'doing_global' refers to being in the state of processing
+global bootmeths. Since global bootmeths are currently used once at the
+start, it becomes false once the last global bootmeth has been used.
+
+In preparation for allowing bootmeths to run at other points in the
+bootstd interation, add a new 'have_global' flag which tracks whether
+there are any global bootmeths in the method_order[] list. It is set up
+when iteration starts. Unlike doing_global which resets back to false
+after the global bootmeths have been handled, once have_global is set to
+true, it remains true for the entire iteration process. This provides a
+quick check as to whether global-bootmeth processing is needed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootflow.c      | 6 ++++++
- test/boot/bootflow.c | 8 ++++++++
- 2 files changed, 14 insertions(+)
+ boot/bootmeth-uclass.c | 1 +
+ include/bootflow.h     | 2 ++
+ test/boot/bootflow.c   | 4 ++++
+ 3 files changed, 7 insertions(+)
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 9aa9d449b7f..cf7a3befe8d 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -167,11 +167,17 @@ int bootflow_iter_drop_bootmeth(struct bootflow_iter *iter,
- 	    iter->method_order[iter->cur_method] != bmeth)
- 		return -EINVAL;
- 
-+	log_debug("Dropping bootmeth '%s'\n", bmeth->name);
-+
- 	memmove(&iter->method_order[iter->cur_method],
- 		&iter->method_order[iter->cur_method + 1],
- 		(iter->num_methods - iter->cur_method - 1) * sizeof(void *));
- 
- 	iter->num_methods--;
-+	if (iter->first_glob_method > 0) {
-+		iter->first_glob_method--;
-+		log_debug("first_glob_method %d\n", iter->first_glob_method);
-+	}
- 
- 	return 0;
- }
+diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
+index 918d78ec2c9..e95a8a801c4 100644
+--- a/boot/bootmeth-uclass.c
++++ b/boot/bootmeth-uclass.c
+@@ -208,6 +208,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
+ 	    iter->first_glob_method != -1 && iter->first_glob_method != count) {
+ 		iter->cur_method = iter->first_glob_method;
+ 		iter->doing_global = true;
++		iter->have_global = true;
+ 	}
+ 	iter->method_order = order;
+ 	iter->num_methods = count;
+diff --git a/include/bootflow.h b/include/bootflow.h
+index b1efeee3259..157a16d44b9 100644
+--- a/include/bootflow.h
++++ b/include/bootflow.h
+@@ -255,6 +255,7 @@ enum bootflow_meth_flags_t {
+  * @cur_prio: Current priority being scanned
+  * @method_order: List of bootmeth devices to use, in order. The normal methods
+  *	appear first, then the global ones, if any
++ * @have_global: true if we have global bootmeths in @method_order[]
+  * @doing_global: true if we are iterating through the global bootmeths (which
+  *	happens before the normal ones)
+  * @method_flags: flags controlling which methods should be used for this @dev
+@@ -278,6 +279,7 @@ struct bootflow_iter {
+ 	int first_glob_method;
+ 	enum bootdev_prio_t cur_prio;
+ 	struct udevice **method_order;
++	bool have_global;
+ 	bool doing_global;
+ 	int method_flags;
+ };
 diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index f6661530848..a65fcd3d4e3 100644
+index a65fcd3d4e3..c766bfcf683 100644
 --- a/test/boot/bootflow.c
 +++ b/test/boot/bootflow.c
-@@ -483,7 +483,11 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
- 	/* Try to boot the bootmgr flow, which will fail */
- 	console_record_reset_enable();
- 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
-+
-+	/* at this point the global bootmeths are stranded above num_methods */
+@@ -308,6 +308,7 @@ static int bootflow_iter(struct unit_test_state *uts)
+ 	ut_asserteq_str("extlinux", iter.method->name);
+ 	ut_asserteq(0, bflow.err);
+ 	ut_assert(!iter.doing_global);
++	ut_assert(!iter.have_global);
+ 	ut_asserteq(-1, iter.first_glob_method);
+ 
+ 	/*
+@@ -406,6 +407,7 @@ static int bootflow_iter_glob(struct unit_test_state *uts)
+ 	bootflow_show(0, &bflow, true);
  	ut_asserteq(3, iter.num_methods);
-+	ut_assert(!iter.doing_global);
-+	ut_asserteq(3, iter.first_glob_method);
+ 	ut_assert(iter.doing_global);
++	ut_assert(iter.have_global);
+ 	ut_asserteq(2, iter.first_glob_method);
+ 
+ 	ut_asserteq(2, iter.cur_method);
+@@ -422,6 +424,7 @@ static int bootflow_iter_glob(struct unit_test_state *uts)
+ 	ut_asserteq(2, iter.num_methods);
+ 	ut_asserteq(2, iter.first_glob_method);
+ 	ut_assert(!iter.doing_global);
++	ut_assert(iter.have_global);
+ 
+ 	ut_asserteq(0, iter.cur_method);
+ 	ut_asserteq(0, iter.part);
+@@ -487,6 +490,7 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 	/* at this point the global bootmeths are stranded above num_methods */
+ 	ut_asserteq(3, iter.num_methods);
+ 	ut_assert(!iter.doing_global);
++	ut_assert(iter.have_global);
+ 	ut_asserteq(3, iter.first_glob_method);
  	ut_asserteq_str("sandbox", iter.method->name);
  	ut_assertok(inject_response(uts));
- 	ut_asserteq(-ENOTSUPP, bootflow_run_boot(&iter, &bflow));
-@@ -493,9 +497,13 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
- 
- 	/* Check that the sandbox bootmeth has been removed */
- 	ut_asserteq(2, iter.num_methods);
-+
- 	for (i = 0; i < iter.num_methods; i++)
- 		ut_assert(strcmp("sandbox", iter.method_order[i]->name));
- 
-+	/* the first global bootmeth is now down one place in the list */
-+	ut_asserteq(2, iter.first_glob_method);
-+
- 	return 0;
- }
- BOOTSTD_TEST(bootflow_iter_disable, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 -- 
 2.43.0
 
