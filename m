@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28731CCA474
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 15:36:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C54CDCAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 15:54:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AAAF81D6A;
-	Wed,  1 Oct 2025 17:36:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 18F4381D6A;
+	Wed,  1 Oct 2025 17:54:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qWV8pgQF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kAEg4tWx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E18681D6A; Wed,  1 Oct 2025 17:36:04 +0200 (CEST)
-Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
- [IPv6:2001:4860:4864:20::36])
+ id B21368328F; Wed,  1 Oct 2025 17:54:26 +0200 (CEST)
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
+ [IPv6:2607:f8b0:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EF6F800B1
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 17:36:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29EF3800B1
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 17:54:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x36.google.com with SMTP id
- 586e51a60fabf-30cce50dfb4so45899fac.0
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 08:36:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pg1-x52b.google.com with SMTP id
+ 41be03b00d2f7-b593def09e3so3828955a12.2
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 08:54:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759332960; x=1759937760; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VUEq+LqEg9AclBMwWNscYQwpczmdLx42UoB66h6uSKk=;
- b=qWV8pgQFaK5jpFTO+9xxt4RKZ6H6ApgpeB6f3GU3fptsUeA2L4ZOdVNBkcPePtEgIb
- 22XsBI+TOJ1Knw/7xcKxoIkpb5htEsnnqaV+DthdFtv4/dIUUGdTe9XtxE2ZXZ4uQtua
- NltP3APGwyeSO+Kp01YjQ0ANQnZjyc46j/WAA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759332960; x=1759937760;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1759334063; x=1759938863; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VUEq+LqEg9AclBMwWNscYQwpczmdLx42UoB66h6uSKk=;
- b=OaMJRPPr58f3RWmAKKVfdzJLQm7LwTKOy1EMAUhiWqLThogK0qHVyeySRpsVcZQhGh
- gpQAK2//UpRyzKtPSqMQX0Q7hFlbSeLczUslJtGF02OkF753TOGnEcCEMsUMI7hmgaB5
- z6np3rRcueZhI2JM0wZT2fK60gRL2/P6OqCCkblrcIdftWZTcqIUKyfBkjxH65fgOvdH
- JcPXQi8Yn3uzWgoMl1cKXEWFQoO/6/44d4P4ZJIPP9qaDNfi+Atcc/Jx4pX5J3RarrKu
- Tp6Pcz2f81spJ+OkGd8Ip+OrP8ggL9BfOEErcg7IOwMIJJ6OgAtLsMYslGo9uY0ho1ss
- bJjw==
-X-Gm-Message-State: AOJu0YwN5vRHOcWe2sREF5DnfcSFce3I5X19ddiC6TMUCUJAlatGHPDT
- lLEw0j35VSswlCMrqd6h2mIkzYBJG8Qi2Iby49i2rs5o80+d0AuVHvxFQE5MYm5W2rs=
-X-Gm-Gg: ASbGncurltp3CjAnPXQCD4F6xrRZYvEb3dCg5opznIg6wtR6WY9M/l2OepDU6I9vimh
- UfB3uPSyWfdE7xyq83OMg8KV+Me7m5B/S3tVFBO85xR4UopvpvpUdO7dJDlD1V2blWFSUrB1hXA
- tUgcyKeINANfJJnNWaq/Bku+ZVaiVwQWcslTJQrqT01rPI1onSk9qjCeKSVSyH8CZhE9pDd+09i
- p0aGjTqIvHQt1Px2A7LkpMcvk7iEg7pkSAXST3lwxRWn370ZykheFdY6P9pVvmWvyWLC60J9CH6
- DCsotfn3ZvqrO9CtWAaIVC0y6TlpGlKivuBotfqTSZLNYqqSVBF5jltRtpXlnxXic1p4Q5cWk3g
- qasVDsA8u1im1Fsp99Knok+fyT7GLbQ5nosWWP9hso1AsHOkvvtPNYw85E2cj3fUhRxIdlGlFS9
- Kk4oWG
-X-Google-Smtp-Source: AGHT+IHzD2SSgGx/aTMRvNxEvqJnkCnMROFra+ySAN1QwTB072objpBmPxiFlabUiptvQEE+Tov+7Q==
-X-Received: by 2002:a05:6871:7a3:b0:366:891:7be4 with SMTP id
- 586e51a60fabf-39badea1d58mr2014504fac.15.1759332960147; 
- Wed, 01 Oct 2025 08:36:00 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
- [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab962cbd4asm18550fac.30.2025.10.01.08.35.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 08:35:59 -0700 (PDT)
-Date: Wed, 1 Oct 2025 09:35:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Chawdhry, Manorit" <m-chawdhry@ti.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Andrew Davis <afd@ti.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH] clk: ti: Tighten some TI clock driver dependencies
-Message-ID: <20251001153557.GJ6093@bill-the-cat>
-References: <20250926153132.3680837-1-trini@konsulko.com>
- <99f08016-a451-498d-987c-d392d3e3e29c@ti.com>
+ bh=v0i/bUDueud3yxggxnpK1au66HYs8qfWTpoTVOx+koQ=;
+ b=kAEg4tWxAIqJMc9WreK4b1DYS4WOv8VcSmqME4YrAoj+CtHgp7ragQP6Z2nubf3CkG
+ sWZ6x9Fy6OqTCRje6JkH1MqyBYC85wlQW1tIjlvddmOvUF3nNAPEOvY6ttB9z37fuGWO
+ wQ/yzWWWptwhsKKrAPvVwj5oYIurZZxaj8AHAQ67CSQvOMv5EFkwCrOlO3xAhlai2yz6
+ R5EGWYkvCwojdG4idEPvLz39xRgJF1Y6c1ffzgvPTLY5oWg5d6qVmh2MNLGmMHemW/xI
+ 9W1QtUuTyZNpz/apby6ZvY2HOJenrKVDEZC0+R/VuI4Ho88ukn472vhFvqyitr6Y557G
+ 6mIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759334063; x=1759938863;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=v0i/bUDueud3yxggxnpK1au66HYs8qfWTpoTVOx+koQ=;
+ b=u3pKPi9QmGFNczJW7VuOZ5efy6HY2ykDds8GFoPo0wHLfLrfBjTp6EWYTo3TjZBKqP
+ 2AZ9nGc6FaHp96LICPRGohSASoBmpp/QsEfYEXn8Dk1mZosELuMmudni32xmq8FOZqg6
+ S2l+kvKkAlPKWs2eBjknuMgNGz/xzY449qtTB87+GjTNTSxXIVO8p/H9EmPMriGXDdez
+ 7MqAIf7u7VlZxZ/98iTSPZ6/Mg7QHYiBtwl9MF33XL2i3LRu2DeigythRdGkPAuBC1ul
+ /IPHJwo3qNqjl+y+hOJ2jRnTI00F7Pde8MMlj/wcfLvsnWxU6EN74qSR1zRnQPJ8CcO9
+ GQGw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWardbgjrlAXZ4fRpWaPfJmN7vw/cocL9cAWyovN21rKzJTacs0Vk8XBnOoLJv4uxqszJU83qA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxl1BaHvSnJuFZvfeVml7UDyJjql/9FH04yNu5Gt6eMhsnRg/GX
+ XCfE44GTEuvThvluZRjZxTWD03SSeZD5DGKErf6UjUjEjLg1SAG7fY1GVUeT0nDkTF2ZZmPphJo
+ JnWqwK7PqT3QBuPU5w2+On260jEorRy1mrG7EQB4kTA==
+X-Gm-Gg: ASbGncvnfzYWeaepQpOMXxvhYsNd2swk5LkWSspv8JffrHNW/jIHa6JmAdqH7KP+sxc
+ yvZIOWJuPH3aqN2pe4gS2/U2zfIXt3NAU5dJhW0he/d6p0nOVXtQl47xP/zsO3WUgcnMTN//9Mm
+ EjWiXBdYW3RrSlopJiT6Ez8pvbsTCThUFSDPmxwxzjz8imHD8AiXWvOuljf/ZWhCZSM9s/mBdaF
+ b6jaPQcbjqnypyXtCCuP7rfUL8SqDzS
+X-Google-Smtp-Source: AGHT+IEoAnfcCav/uR/wpDT1YpuM1tk14bldbXItmg52cjI3b4Xxxuh7mnXzXQz+IgoOP6ycQ6HdpALtA3LRYUl6xuA=
+X-Received: by 2002:a17:902:ef12:b0:25c:8745:4a58 with SMTP id
+ d9443c01a7336-28e7f28e671mr50144175ad.3.1759334062627; Wed, 01 Oct 2025
+ 08:54:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="B4RtYIgr3TCX7SKp"
-Content-Disposition: inline
-In-Reply-To: <99f08016-a451-498d-987c-d392d3e3e29c@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <b7c008b2-0a1f-4971-af4e-428faf818d4e@arm.com>
+ <ada31617-374d-4f87-97eb-c91da2c4e9b5@arm.com>
+ <20250929181133.GM6093@bill-the-cat>
+ <cbedfd39-85c7-415c-a401-91795408ebc8@arm.com>
+In-Reply-To: <cbedfd39-85c7-415c-a401-91795408ebc8@arm.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 1 Oct 2025 11:54:10 -0400
+X-Gm-Features: AS18NWAFWn7DwG0EtwUsT5JIldaFwNnaS5orFG9f5EeSlbzfmD0vqRyzYavdJFs
+Message-ID: <CAEfUkU+jQDQmeLm6Qw4dKGgN99eprzn-CEaRdHdAzBOmn3UT8Q@mail.gmail.com>
+Subject: Re: Transfer List Checksum Correction and Impact on Bloblist
+To: Harrison Mutai <harrison.mutai@arm.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ Simon Glass <sjg@chromium.org>, nd <nd@arm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,79 +99,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Harrison,
 
---B4RtYIgr3TCX7SKp
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, 30 Sept 2025 at 06:54, Harrison Mutai <harrison.mutai@arm.com> wrot=
+e:
+>
+> On 29/09/2025 19:11, Tom Rini wrote:
+> > On Fri, Sep 26, 2025 at 05:09:53PM +0100, Harrison Mutai wrote:
+> >> Hi all,
+> >>
+> >> We recently applied changes to the transfer list library [1] to correc=
+t the
+> >> checksum calculation. Previously, we used a simple byte-sum approach.
+> >> However, we later realized this contradicts the Firmware Handoff
+> >> specification, which states:
+> >>
+> >>> The checksum is set to a value such that the XOR over every byte in t=
+he
+> >>> {tl_base_pa, =E2=80=A6, tl_base_pa + used_size - 1} address range is =
+equal to 0.
+> >>
+> >> This discrepancy creates problems when interoperating with Bloblist.
+> >> Should Bloblist=E2=80=99s checksum calculation be updated to follow th=
+e same
+> >> XOR-based method?
+> >>
+> >> [1]
+> >> https://review.trustedfirmware.org/c/shared/transfer-list-library/+/42=
+548
+> >
+> > Erm, since this has been out in the wild so to speak, we can't just
+> > change the algorithm without bumping some cardinal. Or are there yet
+> > other implementations that were doing what the spec said?
+> >
+>
+> Raymond; Thanks for setting up the handoff tests. The next release for
+> TF-A is planned for mid-November [1].
+>
+> We=E2=80=99ve run into an issue where TF-A requires specific tags from th=
+e
+> transfer list library, but we can=E2=80=99t consume them due to the recen=
+t
+> checksum changes.
+>
+> Tom; As it stands, ours is the only implementation currently using the
+> updated checksum algorithm. There are two other consumers - OP-TEE and
+> EDK2. OP-TEE already has a patch in upstream review to move to the new
+> algorithm [2].
+>
 
-On Wed, Oct 01, 2025 at 05:08:46PM +0530, Chawdhry, Manorit wrote:
-> Hi Tom,
->=20
-> On 9/26/2025 9:01 PM, Tom Rini wrote:
-> > A few of the TI clock drivers cannot link without access to TI platform
-> > specific drivers and headers.  Express those requirements in Kconfig as
-> > well.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Lukasz Majewski <lukma@denx.de>
-> > Cc: Sean Anderson <seanga2@gmail.com>
-> > Cc: Manorit Chawdhry <m-chawdhry@ti.com>
-> > Cc: Andrew Davis <afd@ti.com>
-> > Cc: Udit Kumar <u-kumar1@ti.com>
-> > ---
-> >   drivers/clk/ti/Kconfig | 6 +++---
-> >   1 file changed, 3 insertions(+), 3 deletions(-)
-> >=20
-> > diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
-> > index e0f15f57f826..ba658c741c4d 100644
-> > --- a/drivers/clk/ti/Kconfig
-> > +++ b/drivers/clk/ti/Kconfig
-> > @@ -18,19 +18,19 @@ config CLK_TI_CTRL
-> >   config CLK_TI_DIVIDER
-> >   	bool "TI divider clock driver"
-> > -	depends on CLK && OF_CONTROL && CLK_CCF
-> > +	depends on CLK && OF_CONTROL && CLK_CCF && ARCH_OMAP2PLUS
-> >   	help
-> >   	  This enables the divider clock driver support on TI's SoCs.
-> >   config CLK_TI_GATE
-> >   	bool "TI gate clock driver"
-> > -	depends on CLK && OF_CONTROL
-> > +	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
-> >   	help
-> >   	  This enables the gate clock driver support on TI's SoCs.
-> >   config CLK_TI_MUX
-> >   	bool "TI mux clock driver"
-> > -	depends on CLK && OF_CONTROL && CLK_CCF
-> > +	depends on CLK && OF_CONTROL && CLK_CCF && ARCH_OMAP2PLUS
-> >   	help
-> >   	  This enables the mux clock driver support on TI's SoCs.
->=20
-> Do other Kconfigs' work in this file without access to TI platform specif=
-ic
-> drivers and headers? am wondering that every Kconfig in this file would
-> ideally be TI specific only..
+There is a question: How did you pass the OP-TEE CI test without U-Boot cha=
+nges?
+There is a CI check QEMUv8_check2 in OP-TEE that builds with Firmware
+Handoff enabled, but the manifest is pointing to U-Boot v2025.07-rc1.
+So I think unless you have merged the updated checksum to U-Boot and
+updated the OP-TEE manifest with that commit-id, otherwise
+QEMUv8_check2 will still fail due to the mismatching checksum
+algorithm.
 
-Ideally, long term we could build all of this on sandbox with
-allyesconfig and get static analysis done to it easily. But also yes,
-after this second patch here every driver has a ARCH dependency because
-the ones that wouldn't compile without a header caused others to fail to
-link. This also tells me that some of these options should be select'd
-by others, rather than everything being a question.
+Regards,
+Raymond
 
---=20
-Tom
-
---B4RtYIgr3TCX7SKp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaN1KVgAKCRAr4qD1Cr/k
-CqSBAQDOU/kNOrgWmHiyhJDA04nmYfC3sxO0W+o2drGIUvnorgD+P0XSDRHugQmf
-9Er/d3X5qX4lpsLgfYgWCopItXuySgw=
-=AF2z
------END PGP SIGNATURE-----
-
---B4RtYIgr3TCX7SKp--
+> I=E2=80=99ve also reached out to the author of the EDK2 implementation to=
+ make
+> them aware of the change.
+>
+> [1]
+> https://trustedfirmware-a.readthedocs.io/en/latest/about/release-informat=
+ion.html
+> [2] https://github.com/OP-TEE/optee_os/pull/7531
+>
