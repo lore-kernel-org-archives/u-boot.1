@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D663DCCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:31:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F669CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C50983693;
-	Wed,  1 Oct 2025 22:30:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 65EE08362A;
+	Wed,  1 Oct 2025 22:30:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZCE8Wq/1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fFwRRL0k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8411E83677; Wed,  1 Oct 2025 22:30:51 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 7E7CF836B4; Wed,  1 Oct 2025 22:30:53 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BD558349B
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6507983666
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-30ccec59b4bso274901fac.3
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:49 -0700 (PDT)
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-7b6ac55cf86so207155a34.1
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759350648; x=1759955448; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759350650; x=1759955450; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZbnjHwhSLrI5UnC23/E7wZHhK4bI+6sb4DEhSBlek3Q=;
- b=ZCE8Wq/16Us086WMIMxK1S+/5EHmoH98uTilhZDiW/F6+1UWMXp17xvaxRgMSyhiPU
- OFZI0cEVR3bpDQcyugrETF2C4OOMb9IeWZ7pOf2UyEtUuGUuBChvruxRT/bHVyCm/CYq
- nfbagOpfa4nxi6JDUJQ088STS2mVlU1hsTqFo=
+ bh=jcy1FEz/iRH95SPMbDr63qSnxFMOV5IT7wEb69da3+8=;
+ b=fFwRRL0kaY/QEAtnVzsdvhGXXgI/79EPpsl4YlcQMRexjwuX3uCTDc0emy1e9+PX76
+ 96uKDjsMek9Z1196c+9AoBY/SRZmg9Bfo3RE6LkEAWeNefbanWfVo17Y7CfMPH4ftYPa
+ 3q9GB/suQzW0T+wVzJoH445tsbulQr6gNo8ns=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759350648; x=1759955448;
+ d=1e100.net; s=20230601; t=1759350650; x=1759955450;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZbnjHwhSLrI5UnC23/E7wZHhK4bI+6sb4DEhSBlek3Q=;
- b=D32Gbw84RS76sJgloFfC1r1cCDDEY/NXusYcAHmAEwPsP1OELYoKC8V2v/NHAtEFmq
- x0mT1RUiRHSW4m+Vd03ZMXQ0UHcf1QAMfmAUTFE4BneML6IW8ihC+5N86D4X3B94MsMK
- knxycDEW+TtuTe5D1o9qZohb7vbZB631WtI+LROtJ4kuXIYL4ZY1GOSIYx1Qd7+kS0pA
- GQ2trgCbePdKozzP8l7eOVTAvrmijW0lYPIcReVbxZLVdx79AJJN1HIEG6KusGghKnkz
- amQyvb3nJ29GC2n2n9LfiAtHZ8z85hzqrP9Bd9AnIXC+riSX2w4YZxenrSbJPNWjnkw2
- N4/A==
-X-Gm-Message-State: AOJu0YwP7edwXgtFicdUYwAP//nDHWQu2b4fWGAECHMMlDz5Y5pMEMkR
- t+CXX5xs3QWazndJPfRMNKzGLdsiVpEioa38dnl0YN+3BjrtQw283mDtFnB8N+5XIpSHFnuP2qv
- QGl5fU0U=
-X-Gm-Gg: ASbGncszff6eG7kgnJGLQzmxeESI4u8t2wsgjrSn6Ay552c5QhvZB8D89goo3h4hUJz
- x/qXOM7qAKqlCO42fjRBa0bGf/UziCfIbHFZvEFSVpUx8KRS27u80bkoBWZb+6yO9AsLultDfif
- Jwh5+wcvQjUqMGWRrvhK5wWy9f/s9vbwoQqOrzXqPXqZsy21D0tRj6neDqSq0Fj2Jvf8LHr/2am
- sy370RBhEKzRAT1TZ0lNshbq/BAZzYvP9BF6+EKxE3CI5jtLp2bkjoST2s/TgIGLEdCCgS9KrfW
- 5ILjZsnLk/KcfnLWrMo05zvhhi/qJcJkI+F7py6806bfRmQtWcoRT07F6IdwLRnmlrx77yQKl8u
- 3gsVH+sDT6Xz2XfCiEPTbbjUsGW6DVrOoRBPHqobxN4yb4D75H/JnYzsUVoBSCci43RdBYBEt2T
- vVCbB1sqY=
-X-Google-Smtp-Source: AGHT+IFDKvWUdhvzxRBSSCQFUm+OKb8S9I7B5b7svUADctGRlJfjhaWOqI44xAp1wp0M5PBstYLisg==
-X-Received: by 2002:a05:6871:2317:b0:30b:7d90:1061 with SMTP id
- 586e51a60fabf-39b8fbbb5c9mr3364115fac.4.1759350648113; 
- Wed, 01 Oct 2025 13:30:48 -0700 (PDT)
+ bh=jcy1FEz/iRH95SPMbDr63qSnxFMOV5IT7wEb69da3+8=;
+ b=wzsm39qxRYjve0IEuiwJeh1+bNrR3tBGsdt4sNeV/e4zc7t7+0CYQmpSnQkl0avVMw
+ 5FO5C7ZrStVb3UJejo1apPgtZ6lseh5zpkmbsSx/wXPj4h/+q8JB0Y675dPUETSkGJ+g
+ E5/y6qIxBpjhge9+pUPrWasC4B8kjLYPubNQsZXESlDIHkZWxpdMzIjDJQFVsV0UWHqx
+ dpMVlkst3hMUxSiwJ8m75Qf/KeEA42m66+ZWjdxzV8VkhpQ+fEM2KrnxmV+FoPTOCc/P
+ Cop75Cy1ZqKEgbzVfmPshVyif08wPEVPK2rfZdqvLVX50EUjiEMKa+2/IVz29dQqzxSa
+ ShDg==
+X-Gm-Message-State: AOJu0YwQbzn/OE9hplp2tjf/2ermzpilPUyl7nmAjYeMUoU5iUMcFtQj
+ hcOTv24ABKU2+4CdKMu78cz5QRO+CulveU8K6w1bUPEvCedpcWxuZqb8VCRj9sfI7NUDOXrIayu
+ jbw7sssQ=
+X-Gm-Gg: ASbGncskDa1VCLjyf7sBljaG56UXRD5MmcHphlQb06/gX6SZCRfXQDl4KakqZE8g111
+ /PJgR83pT/3Y9pAyEzsDusrD+IJLL+nYHGRjhrlzIoEY4Sn4lyziDWGllNoTrK73eAGlpsx6nz5
+ zhKXCikkxyxY/VRgtPilM56w3JqlpMhs0pkWvyNaj802JZU9DBUJT+kLuss/85uhBaLk1EN2Iel
+ Tg4CN2GIcrHlCj0AEaiL5n1BPviHq4Vc3JMjtoOCBaokkjnS0X4f4ZASleRwjNM3Sq7zGxy+PtE
+ pc8bqyHnPojX1hl/ecIxI/seR49Ha8gymTyiwtBPD4cCZd4Km/J9vOEWK3YVVsJu3k1Kx0a4kvo
+ 2vypE5pCPLF+FtqH4uZR0z63YBfZki0koAvz4dIzLCDvv3BAHasVtU2mdDAGYIMFxmnFjGsXDpG
+ jm7ald6N+N7wPL74ydtg==
+X-Google-Smtp-Source: AGHT+IGfbbB5MXJcHyQdDj/qXaeKdPRXNqwDdi2KLJDWXZXRllou3kZ8Q+HVPXqtkFxUsyzgTxMtSg==
+X-Received: by 2002:a05:6830:3508:b0:745:a390:8662 with SMTP id
+ 46e09a7af769-7bdda569708mr3774160a34.13.1759350650069; 
+ Wed, 01 Oct 2025 13:30:50 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7bf43028b6asm116395a34.26.2025.10.01.13.30.46
+ 46e09a7af769-7bf439d2ccdsm113398a34.35.2025.10.01.13.30.49
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 13:30:47 -0700 (PDT)
+ Wed, 01 Oct 2025 13:30:49 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] video: Only build bridge code for the appropriate phase
-Date: Wed,  1 Oct 2025 14:30:46 -0600
-Message-ID: <20251001203046.2828415-1-trini@konsulko.com>
+Subject: [PATCH] dts: Make xPL_OF_PLATDATA depend on !COMPILE_TEST
+Date: Wed,  1 Oct 2025 14:30:48 -0600
+Message-ID: <20251001203048.2828430-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,27 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At this time, we can't make use of the video bridge code in xPL, and
-there is no symbol to enable it. Start by only descending to this
-directory when support in the future is enabled.
+When doing a COMPILE_TEST build it makes more sense to disable this
+feature and test the common path than it does to test the uncommon path
+of [ST]PL_OF_PLATDATA being enabled.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/video/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I thought about this a bit, and one thing is that we do uncover a number
+of drivers today which have partial OF_PLATDATA support but we have even
+more drivers which assume OF_PLATADATA is disabled and then fail to
+compile in xPL. This choice will give us the most overall coverage I
+believe.
+---
+ dts/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/video/Makefile b/drivers/video/Makefile
-index 984768ea156d..81164fea40cd 100644
---- a/drivers/video/Makefile
-+++ b/drivers/video/Makefile
-@@ -90,6 +90,6 @@ obj-$(CONFIG_VIDEO_VESA) += vesa.o
- obj-$(CONFIG_VIDEO_SEPS525) += seps525.o
- obj-$(CONFIG_VIDEO_ZYNQMP_DPSUB) += zynqmp/
+diff --git a/dts/Kconfig b/dts/Kconfig
+index 4e2622d48d04..070ffbfef587 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -455,7 +455,7 @@ config OF_REMOVE_PROPS
  
--obj-y += bridge/
-+obj-$(CONFIG_$(PHASE_)VIDEO_BRIDGE) += bridge/
- obj-y += sunxi/
- obj-y += tegra/
+ config SPL_OF_PLATDATA
+ 	bool "Generate platform data for use in SPL"
+-	depends on SPL_OF_CONTROL
++	depends on SPL_OF_CONTROL && !COMPILE_TEST
+ 	select DTOC
+ 	select SPL_OF_PLATDATA_DRIVER_RT if !SPL_OF_PLATDATA_INST
+ 	help
+@@ -542,7 +542,7 @@ config TPL_OF_REAL
+ 
+ config TPL_OF_PLATDATA
+ 	bool "Generate platform data for use in TPL"
+-	depends on TPL_OF_CONTROL
++	depends on TPL_OF_CONTROL && !COMPILE_TEST
+ 	select DTOC
+ 	select TPL_OF_PLATDATA_DRIVER_RT if !TPL_OF_PLATDATA_INST
+ 	help
 -- 
 2.43.0
 
