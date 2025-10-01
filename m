@@ -4,21 +4,21 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0002CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 23:23:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E72BCCD182
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 23:23:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D59F83526;
-	Thu,  2 Oct 2025 01:23:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE94B8344E;
+	Thu,  2 Oct 2025 01:23:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=cn-eng.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB28F835A2; Thu,  2 Oct 2025 01:23:01 +0200 (CEST)
+ id C5299828A2; Thu,  2 Oct 2025 01:23:02 +0200 (CEST)
 Received: from server.mars-solutions.it (server.mars-solutions.it
  [88.198.47.168])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA9F3828A2
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 01:22:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 190D08344E
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 01:23:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=cn-eng.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=apr@cn-eng.de
@@ -27,16 +27,19 @@ Received: from nb-apr.fritz.box (ip-078-043-169-169.um18.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by server.mars-solutions.it (Postfix) with ESMTPSA id 75EC476A206E;
+ by server.mars-solutions.it (Postfix) with ESMTPSA id B2E2776A2081;
  Thu,  2 Oct 2025 01:22:59 +0200 (CEST)
 From: Andreas Pretzsch <apr@cn-eng.de>
 To: u-boot@lists.denx.de
 Cc: Martin Schwan <m.schwan@phytec.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 0/2] bootstd: rauc: fix doc and info msg to reflect real flow
-Date: Thu,  2 Oct 2025 01:22:54 +0200
-Message-ID: <20251001232259.3599563-1-apr@cn-eng.de>
+Subject: [PATCH 1/2] bootstd: rauc: no valid slot fallback: fix info msg to
+ reflect real flow
+Date: Thu,  2 Oct 2025 01:22:55 +0200
+Message-ID: <20251001232259.3599563-2-apr@cn-eng.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20251001232259.3599563-1-apr@cn-eng.de>
+References: <20251001232259.3599563-1-apr@cn-eng.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -55,26 +58,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For the RAUC bootmethod, newly introduced in U-Boot 2025.10, both code
-and documentation contain some incorrect (maybe outdated) statements,
-so they do not reflect the real behaviour.
-This series corrects both the docs and one log_info in the code, to now
-reflect the real flow. Beside being visible in the code, all of it was
-tested on a real machine.
+If there is no more active slot found in find_active_slot(), like when
+all slots in BOOT_ORDER have a count of 0, the counters are reset to their
+default value CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES. The BOOT_ORDER is _not_
+changed, which is logically correct (especially for the case when there is
+only one (active) slot set, e.g. BOOT_ORDER only contains 'B', probably due
+to RAUC option prevent-late-fallback being set). Resetting the counters of
+inactive slots also does not harm here, and is fine as a generic solution.
 
-Despite the very late time in RC cycle, I suggest inclusion before release
-of U-Boot 2025.10, as the current statements are simply incorrect. Also I
-do not see any risk in these non-functional changes.
+But the log_info statement in this scenario
+  INFO: Resetting boot order and all slot tries
+is incorrect. Change this to
+  INFO: Resetting all slot tries to 3
+with the 3 being inserted by CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES.
 
-Andreas Pretzsch (2):
-  bootstd: rauc: no valid slot fallback: fix info msg to reflect real
-    flow
-  bootstd: rauc: extend and fix doc to reflect real flow
+Signed-off-by: Andreas Pretzsch <apr@cn-eng.de>
+---
+ boot/bootmeth_rauc.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- boot/bootmeth_rauc.c         |  3 ++-
- doc/develop/bootstd/rauc.rst | 19 +++++++++++++------
- 2 files changed, 15 insertions(+), 7 deletions(-)
-
+diff --git a/boot/bootmeth_rauc.c b/boot/bootmeth_rauc.c
+index 81a73046e83..f5d5a971e87 100644
+--- a/boot/bootmeth_rauc.c
++++ b/boot/bootmeth_rauc.c
+@@ -18,6 +18,7 @@
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <string.h>
++#include <linux/stringify.h>
+ #include <asm/cache.h>
+ 
+ /* Length of env var "BOOT_*_LEFT" */
+@@ -304,7 +305,7 @@ static int find_active_slot(char **slot_name, ulong *slot_tries)
+ 	if (!slot_found) {
+ 		if (IS_ENABLED(CONFIG_BOOTMETH_RAUC_RESET_ALL_ZERO_TRIES)) {
+ 			log_warning("WARNING: No valid slot found\n");
+-			log_info("INFO: Resetting boot order and all slot tries\n");
++			log_info("INFO: Resetting all slot tries to " __stringify(CONFIG_BOOTMETH_RAUC_DEFAULT_TRIES) "\n");
+ 			boot_order_list = str_to_list(CONFIG_BOOTMETH_RAUC_BOOT_ORDER);
+ 			for (i = 0; boot_order_list[i]; i++) {
+ 				sprintf(boot_left, "BOOT_%s_LEFT", boot_order_list[i]);
 -- 
 2.43.0
 
