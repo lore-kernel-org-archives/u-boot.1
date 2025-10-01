@@ -4,52 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0958CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 15:24:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28731CCA474
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 15:36:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C026081D6A;
-	Wed,  1 Oct 2025 17:24:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6AAAF81D6A;
+	Wed,  1 Oct 2025 17:36:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="VtPF7isi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qWV8pgQF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7604883335; Wed,  1 Oct 2025 17:24:28 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4E18681D6A; Wed,  1 Oct 2025 17:36:04 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCA65800B1
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 17:24:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8EF6F800B1
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 17:36:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id BA34761E73;
- Wed,  1 Oct 2025 15:24:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 20742C4CEF1;
- Wed,  1 Oct 2025 15:24:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1759332264;
- bh=PzpSS2pH/QIcqZbFs9ta5+TMJQLtQGr9YS9BzbApq1Q=;
- h=From:To:Cc:Subject:Date:From;
- b=VtPF7isinSC+OcbiDZMNlXLDs4nis/BSMZjVbSdHfDgNEECeFt9BtV/rl4i/lijHJ
- ISAk5Y2Zyfcje+TnO9jfEvDM4P9jpZl8O34CZx16yetxMe9bpPfmNvAmZqgbtbE/8h
- OtxKtuAK+V51KYUrWPtaO2Bp1V/R+mDtYm65f32qAT6iBF1SCi9/G/07ve+532Y8x/
- J39UY2xbYZ4s5gApm1hTQA1ffVOHAU8ps8VZldKsYWY/W/+YiRKobyPIBkEsTBK43q
- Oni6BeMM7snAoQ0iWLVhjzwB1tbgT9NWvWau8EQy9us9L4R3PhG0/1nu3LnoJnpvvV
- c3+NAsCsEYB7Q==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Chance Yang <chance.yang@kneron.us>,
- Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-dfu-next-20251001 into next
-Date: Wed, 01 Oct 2025 17:24:22 +0200
-Message-ID: <877bxeir15.fsf@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-30cce50dfb4so45899fac.0
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 08:36:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1759332960; x=1759937760; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VUEq+LqEg9AclBMwWNscYQwpczmdLx42UoB66h6uSKk=;
+ b=qWV8pgQFaK5jpFTO+9xxt4RKZ6H6ApgpeB6f3GU3fptsUeA2L4ZOdVNBkcPePtEgIb
+ 22XsBI+TOJ1Knw/7xcKxoIkpb5htEsnnqaV+DthdFtv4/dIUUGdTe9XtxE2ZXZ4uQtua
+ NltP3APGwyeSO+Kp01YjQ0ANQnZjyc46j/WAA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759332960; x=1759937760;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VUEq+LqEg9AclBMwWNscYQwpczmdLx42UoB66h6uSKk=;
+ b=OaMJRPPr58f3RWmAKKVfdzJLQm7LwTKOy1EMAUhiWqLThogK0qHVyeySRpsVcZQhGh
+ gpQAK2//UpRyzKtPSqMQX0Q7hFlbSeLczUslJtGF02OkF753TOGnEcCEMsUMI7hmgaB5
+ z6np3rRcueZhI2JM0wZT2fK60gRL2/P6OqCCkblrcIdftWZTcqIUKyfBkjxH65fgOvdH
+ JcPXQi8Yn3uzWgoMl1cKXEWFQoO/6/44d4P4ZJIPP9qaDNfi+Atcc/Jx4pX5J3RarrKu
+ Tp6Pcz2f81spJ+OkGd8Ip+OrP8ggL9BfOEErcg7IOwMIJJ6OgAtLsMYslGo9uY0ho1ss
+ bJjw==
+X-Gm-Message-State: AOJu0YwN5vRHOcWe2sREF5DnfcSFce3I5X19ddiC6TMUCUJAlatGHPDT
+ lLEw0j35VSswlCMrqd6h2mIkzYBJG8Qi2Iby49i2rs5o80+d0AuVHvxFQE5MYm5W2rs=
+X-Gm-Gg: ASbGncurltp3CjAnPXQCD4F6xrRZYvEb3dCg5opznIg6wtR6WY9M/l2OepDU6I9vimh
+ UfB3uPSyWfdE7xyq83OMg8KV+Me7m5B/S3tVFBO85xR4UopvpvpUdO7dJDlD1V2blWFSUrB1hXA
+ tUgcyKeINANfJJnNWaq/Bku+ZVaiVwQWcslTJQrqT01rPI1onSk9qjCeKSVSyH8CZhE9pDd+09i
+ p0aGjTqIvHQt1Px2A7LkpMcvk7iEg7pkSAXST3lwxRWn370ZykheFdY6P9pVvmWvyWLC60J9CH6
+ DCsotfn3ZvqrO9CtWAaIVC0y6TlpGlKivuBotfqTSZLNYqqSVBF5jltRtpXlnxXic1p4Q5cWk3g
+ qasVDsA8u1im1Fsp99Knok+fyT7GLbQ5nosWWP9hso1AsHOkvvtPNYw85E2cj3fUhRxIdlGlFS9
+ Kk4oWG
+X-Google-Smtp-Source: AGHT+IHzD2SSgGx/aTMRvNxEvqJnkCnMROFra+ySAN1QwTB072objpBmPxiFlabUiptvQEE+Tov+7Q==
+X-Received: by 2002:a05:6871:7a3:b0:366:891:7be4 with SMTP id
+ 586e51a60fabf-39badea1d58mr2014504fac.15.1759332960147; 
+ Wed, 01 Oct 2025 08:36:00 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ab962cbd4asm18550fac.30.2025.10.01.08.35.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 Oct 2025 08:35:59 -0700 (PDT)
+Date: Wed, 1 Oct 2025 09:35:57 -0600
+From: Tom Rini <trini@konsulko.com>
+To: "Chawdhry, Manorit" <m-chawdhry@ti.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Andrew Davis <afd@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH] clk: ti: Tighten some TI clock driver dependencies
+Message-ID: <20251001153557.GJ6093@bill-the-cat>
+References: <20250926153132.3680837-1-trini@konsulko.com>
+ <99f08016-a451-498d-987c-d392d3e3e29c@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="B4RtYIgr3TCX7SKp"
+Content-Disposition: inline
+In-Reply-To: <99f08016-a451-498d-987c-d392d3e3e29c@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,59 +99,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-I'm finally back from paternity leave.
-Thanks again for picking up the urgent things while I was away.
+--B4RtYIgr3TCX7SKp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Here is a small PR for next:
+On Wed, Oct 01, 2025 at 05:08:46PM +0530, Chawdhry, Manorit wrote:
+> Hi Tom,
+>=20
+> On 9/26/2025 9:01 PM, Tom Rini wrote:
+> > A few of the TI clock drivers cannot link without access to TI platform
+> > specific drivers and headers.  Express those requirements in Kconfig as
+> > well.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Lukasz Majewski <lukma@denx.de>
+> > Cc: Sean Anderson <seanga2@gmail.com>
+> > Cc: Manorit Chawdhry <m-chawdhry@ti.com>
+> > Cc: Andrew Davis <afd@ti.com>
+> > Cc: Udit Kumar <u-kumar1@ti.com>
+> > ---
+> >   drivers/clk/ti/Kconfig | 6 +++---
+> >   1 file changed, 3 insertions(+), 3 deletions(-)
+> >=20
+> > diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
+> > index e0f15f57f826..ba658c741c4d 100644
+> > --- a/drivers/clk/ti/Kconfig
+> > +++ b/drivers/clk/ti/Kconfig
+> > @@ -18,19 +18,19 @@ config CLK_TI_CTRL
+> >   config CLK_TI_DIVIDER
+> >   	bool "TI divider clock driver"
+> > -	depends on CLK && OF_CONTROL && CLK_CCF
+> > +	depends on CLK && OF_CONTROL && CLK_CCF && ARCH_OMAP2PLUS
+> >   	help
+> >   	  This enables the divider clock driver support on TI's SoCs.
+> >   config CLK_TI_GATE
+> >   	bool "TI gate clock driver"
+> > -	depends on CLK && OF_CONTROL
+> > +	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
+> >   	help
+> >   	  This enables the gate clock driver support on TI's SoCs.
+> >   config CLK_TI_MUX
+> >   	bool "TI mux clock driver"
+> > -	depends on CLK && OF_CONTROL && CLK_CCF
+> > +	depends on CLK && OF_CONTROL && CLK_CCF && ARCH_OMAP2PLUS
+> >   	help
+> >   	  This enables the mux clock driver support on TI's SoCs.
+>=20
+> Do other Kconfigs' work in this file without access to TI platform specif=
+ic
+> drivers and headers? am wondering that every Kconfig in this file would
+> ideally be TI specific only..
 
-Fastboot:
-- Fix has-slot command when using nand back-end.
+Ideally, long term we could build all of this on sandbox with
+allyesconfig and get static analysis done to it easily. But also yes,
+after this second patch here every driver has a ARCH dependency because
+the ones that wouldn't compile without a header caused others to fail to
+link. This also tells me that some of these options should be select'd
+by others, rather than everything being a question.
 
-USB gadget:
-- Add missing null checks to atmel, dwc2 drivers (smatch)
-- Remove redundant check in dwc3 gadget (smatch)
+--=20
+Tom
 
-CI:
-- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/27791
+--B4RtYIgr3TCX7SKp
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Regards,
-Mattijs
+-----BEGIN PGP SIGNATURE-----
 
-The following changes since commit 9710d98e8942151fc0c62d54100d9d27e8263d04:
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaN1KVgAKCRAr4qD1Cr/k
+CqSBAQDOU/kNOrgWmHiyhJDA04nmYfC3sxO0W+o2drGIUvnorgD+P0XSDRHugQmf
+9Er/d3X5qX4lpsLgfYgWCopItXuySgw=
+=AF2z
+-----END PGP SIGNATURE-----
 
-  Merge tag 'doc-next-2025-09-27' of https://source.denx.de/u-boot/custodians/u-boot-efi into next (2025-09-27 09:49:01 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-next-20251001
-
-for you to fetch changes up to 8cd4a5e94ba2ab73fde3301d6314549dd5a25cb4:
-
-  usb: dwc3: Remove redundant test (2025-09-30 11:55:23 +0200)
-
-----------------------------------------------------------------
-u-boot-dfu-next-20251001
-
-Fastboot:
-- Fix has-slot command when using nand back-end.
-
-USB gadget:
-- Add missing null checks to atmel, dwc2 drivers (smatch)
-- Remove redundant check in dwc3 gadget (smatch)
-
-----------------------------------------------------------------
-Andrew Goodbody (3):
-      usb: gadget: atmel: Add missing null check
-      usb: dwc2: Add missing null check
-      usb: dwc3: Remove redundant test
-
-Chance Yang (1):
-      fastboot: Fix has-slot command always returning yes for fb_nand
-
- drivers/fastboot/fb_nand.c                 | 7 ++++++-
- drivers/usb/dwc3/ep0.c                     | 5 +----
- drivers/usb/gadget/atmel_usba_udc.c        | 2 +-
- drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c | 2 +-
- 4 files changed, 9 insertions(+), 7 deletions(-)
+--B4RtYIgr3TCX7SKp--
