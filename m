@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDD5CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 13:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A69ECCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 13:21:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1F1B81D6A;
+	by phobos.denx.de (Postfix) with ESMTP id E918C83526;
 	Wed,  1 Oct 2025 15:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QlVtW+NI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YxoWiLa+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB48D835D0; Wed,  1 Oct 2025 15:21:25 +0200 (CEST)
+ id 039818344E; Wed,  1 Oct 2025 15:21:25 +0200 (CEST)
 Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
  [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A72118344E
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 15:21:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F26F83544
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 15:21:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
 Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b07d4d24d09so1364645366b.2
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 06:21:22 -0700 (PDT)
+ a640c23a62f3a-b457d93c155so354969166b.1
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 06:21:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759324882; x=1759929682; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1759324883; x=1759929683; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7oirO4392Q3ezp+UcVySoHf9KAwFXn8LTi8iIMQf06k=;
- b=QlVtW+NIc4PoviEvJnkHVQsOz6znzqe0RW36T9icaAK0t/GvaOIMbB9Z45A3Zid2am
- UWlE603DXJmhqyPBlTXqI7I0qR9ztol+2pjbRuKuR6F3agEYd9Uh+Kifs5eC45YSVjGc
- vvGRfwZ63uaZ+qgateoarb/lR9f5k8gOqKU5NRMaYxazNXBHdZOgvFQfUtO93FZrQCkV
- f7nIvaa0cZ3erKbwiQFM7AGm6QsbBweqsMSEBjEUyYq5iGspcdnCPn3+z4mZiT2hHmmk
- nN3hIe7DrC95b5Sarui2yCZ+0wrCFSsfO/rMGUa/MilE2/oxBLcsYnZEqMiDM52+2hF8
- 2V9g==
+ bh=JgKJ7pjPU+lj3lMpo+rSMpu6l2G+S4W7MhNmjrZblSs=;
+ b=YxoWiLa+ou6w8OAKiLxpxFyiITMzm9qm6FvkwBqkLtHNiwp2dQhKvG7znLLXKJtBNY
+ 4CV0hcF1s7PWVLQhIPABxkXbZSq546me+2p3Nsn2wwTHpWKVhTc8luzl7WO5fyb+DXpH
+ ewqKOjy58SouJt4oIDb28rFBEyVChZ7w5rqPZ7DDikrJ270de4fAKpWc8U9aoXqV4iiS
+ 15y1RDZfdgISnAUonDL0rolghcNwD+bpE2fcR3/OKQyD24/x6nmbiV2DiU7STnp3E1d7
+ gJxY0cQqbJiW7rNUdvdlO5Prcrb1cprZCaSbVQCV74VRkETq3L2V0l37luP/RkjEs+3n
+ rtNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759324882; x=1759929682;
+ d=1e100.net; s=20230601; t=1759324883; x=1759929683;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7oirO4392Q3ezp+UcVySoHf9KAwFXn8LTi8iIMQf06k=;
- b=DEDcPS22YxG6ZU908HVLKG//9aowxVl9Q6INqZzRUcvZWt/r8cNgKuqH0Tqov9mm4g
- IN6oEv1ArdXUdE89hntmvX8NkJdhXeBPCFDkA3oiRqWIibXR8RFOSfvOJ3Ax0bELClam
- ze7kHUd8sOb1Os+veeX3/X3KxYGms4hJYumTqhN6EXgLKrVuXSVZnK5I+KVpKVX0m4Bn
- pJLYWAIiyKbVvda5KBRjdODKxP2QAVEcW7zrJY7LztxfNF/SeZQyGvS/Q5ujyOiUzDw9
- sohHzxsiD858DssLMnGOJLuF33hwGve/gIloXaB+3AsUkIhuqsgCqmebUEWYpk48KtC9
- nyTQ==
+ bh=JgKJ7pjPU+lj3lMpo+rSMpu6l2G+S4W7MhNmjrZblSs=;
+ b=aLN5sthtvEONtohWCjCGvXiNZmHUKq9okInIebJFc2jQ3il7ihHtLuWJnmgtBoTKDf
+ 0LQyWqvDHRvRNIzPRgjGHjxICspBaeRywcgGNE0ndpTJwlNUaDpfRw6sXtt7lMnkOjNM
+ rM+BCBRnjhqhPtlzOn+FdQE4tbDytyeyLDqitcnZ0BhtD+8m+cC0wAQPuPAwadD0NBnS
+ /u5KwJ7eQ04IfIGBe3dxtD4FG1SbW0R+vBhCJSJzgTOuzp/pHcVpyDfY776q76ENc/FW
+ 71xmv/g9Fw0ygunwLVWnx1axI+WYceuYnb5LWH5CLZ9PdsO5Ze17Meac5ZV1cOCxx/fH
+ HKjA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXRl2Q1iBKNzjpyH2irGLT6SAk3LQ5+lcYBdRFpVG5Ji0Vn9z+6paIrebbfL6VSRR7vRF28/lo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8NTAO5OYJ6TDefWT0OHyPfR5bA7hN3KlmWIMIzFjSnNvCreS8
- EGATy6OZ4J3J5isYn6lrhG4IyxO3tiXKHCngW2yqihU54Y2ikqwdhzsW
-X-Gm-Gg: ASbGncsbEXircrc7DLg06nVGcROO/n9QFWJYBHtmxPPt49/h57Ad8Cwk5CT0nKoQfht
- Y4W3rbl8j358tzR+erjCo8LBFsw0nLM8aZ2Ff7kBrQZzM71Yo8VQhuz49WrTl4p8Worvg8G//P2
- zaspPQHJLZDEy39PzSnkO+0uXQ8uXpugoliAnSiMHXStU2DNbamLkpY7VDUtSxNnLyTtfCTyXCV
- l3piiDP8Hmj/oRIzyUqix2iMZ4TyhiuL3UJCF9yvj/5fMjGd+F1BhZ5iwBwEANmTfWLqDq4MJos
- 3a2jcLsCBNNEZFiMT1wthdXLx8ClEKXItg58AuO7yt1WEHj/6pSntE/vKvoJ2nZwwFnOroh5qDs
- QDjwIMcncJtd6BBVj1JxVS8c/cATo1x1/ZT1k/OIIdAr/ZII+H8S7Benh1Lgn1wpzIHYGXGq4NN
- PDVPyJ9l/cG+uZWRAW/GmJPASVinUKuRGjfnQVlTd1VI+gc7pWDNLTBHOZ6v4aIQ==
-X-Google-Smtp-Source: AGHT+IEtgwPOruHQUv++WpexvHFFlGKclpTKi0gEvPdPaq4bU0C8ilJltMBGf060ZCZtwTjc6nBZXA==
-X-Received: by 2002:a17:907:7294:b0:b0a:f3f3:a28 with SMTP id
- a640c23a62f3a-b46e585ce07mr423330866b.14.1759324882067; 
+ AJvYcCWrCUzrM8T59HKD/VqBI2KWM6csBK1hQfhNjKNxZ5GA9fUQ2CJs2G8YdzW+jd1jqArNtJAyh8c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxv7WzcrMMwmjOpDmQjZfxPAZdmbjjXAGcUn0Gc5OwEV2oNxRp/
+ edMKgxUfRhFZu0VYlyE+jXHCCtI3VaLvaXjSL3e+YWaHrFX8eHtlxBtW
+X-Gm-Gg: ASbGncv65+uMsXhVN4R1bI+Q1BXdncNlV108gZAZOgVRx+Ak3ljaWzndz2Cctl7Yvx4
+ XcLR+kgvs4eLWg+WcvR8hughRpkQevVOOz+T0uWhQdw7zzc1y7RtR1qIJakQXiMHYsKDUP3BWMd
+ Fgg/oscnt0VT/+FjzkPVAo0eEcbshMlP81NyvbvTjzztEvyvOWy0folzjrxv3Rz3zzT+/4Uc+ni
+ swdgzn53bhBMS3iXlHQMpkhXuLkfBcUWf+U5BpDujuICfBOhkR2Maigw/MX1+4OWtVifBz9IGn5
+ 27KwyGG7QK2y30g2tMlmIxoxOQ/04amJ1V/10u5iH2Dw6v+scNyzpdjqAIc77kuVv6jdIdtGAWQ
+ MlsHrd/fEnx7o0ScuOCiGSV6l8BLQYGuyQg8LpUlytKg3LN0OBCPrqQzbUY7EaWXxICljEqEpr6
+ dRirDxQmDcLOFUAiQyMwUWIHWCCkKOYy7aHdArQFg+sIpbUOixi1BADj1Of85TDA==
+X-Google-Smtp-Source: AGHT+IFgXb/Y7GrUZPnaZH7g4M9Y9IeyCRMt1iYqWVQr4G2jF3JPYw7UUFoya2GgsUgPUSl58Y9GIQ==
+X-Received: by 2002:a17:907:6d0b:b0:b46:d05d:fcba with SMTP id
+ a640c23a62f3a-b46e60316d3mr417787466b.33.1759324882687; 
  Wed, 01 Oct 2025 06:21:22 -0700 (PDT)
 Received: from emanuele-nb.corp.toradex.com
  (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b401d3d4124sm566956766b.75.2025.10.01.06.21.21
+ a640c23a62f3a-b401d3d4124sm566956766b.75.2025.10.01.06.21.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 06:21:21 -0700 (PDT)
+ Wed, 01 Oct 2025 06:21:22 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: Francesco Dolcini <francesco.dolcini@toradex.com>,
  Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v1 1/4] configs: apalis-imx6: enable USB Gadget OS Descriptors
+Subject: [PATCH v1 2/4] configs: colibri-*: enable USB Gadget OS Descriptors
  for fastboot
-Date: Wed,  1 Oct 2025 15:21:04 +0200
-Message-ID: <20251001132111.1490516-2-ghidoliemanuele@gmail.com>
+Date: Wed,  1 Oct 2025 15:21:05 +0200
+Message-ID: <20251001132111.1490516-3-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251001132111.1490516-1-ghidoliemanuele@gmail.com>
 References: <20251001132111.1490516-1-ghidoliemanuele@gmail.com>
@@ -112,14 +112,40 @@ Enable them in order to improve the user experience when fastboot is used.
 
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- configs/apalis_imx6_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/colibri-imx6ull-emmc_defconfig | 1 +
+ configs/colibri-imx6ull_defconfig      | 1 +
+ configs/colibri_imx6_defconfig         | 1 +
+ configs/colibri_imx7_defconfig         | 1 +
+ configs/colibri_imx7_emmc_defconfig    | 1 +
+ 5 files changed, 5 insertions(+)
 
-diff --git a/configs/apalis_imx6_defconfig b/configs/apalis_imx6_defconfig
-index 7d54205938e0..cd9811aca616 100644
---- a/configs/apalis_imx6_defconfig
-+++ b/configs/apalis_imx6_defconfig
-@@ -124,6 +124,7 @@ CONFIG_SPL_USB_GADGET=y
+diff --git a/configs/colibri-imx6ull-emmc_defconfig b/configs/colibri-imx6ull-emmc_defconfig
+index f1c6373c31e6..439ddeb8f0bc 100644
+--- a/configs/colibri-imx6ull-emmc_defconfig
++++ b/configs/colibri-imx6ull-emmc_defconfig
+@@ -90,5 +90,6 @@ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="Toradex"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
++CONFIG_USB_GADGET_OS_DESCRIPTORS=y
+ CONFIG_CI_UDC=y
+ CONFIG_IMX_WATCHDOG=y
+diff --git a/configs/colibri-imx6ull_defconfig b/configs/colibri-imx6ull_defconfig
+index 26e9b565bd51..1c400f9534d4 100644
+--- a/configs/colibri-imx6ull_defconfig
++++ b/configs/colibri-imx6ull_defconfig
+@@ -108,5 +108,6 @@ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="Toradex"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
++CONFIG_USB_GADGET_OS_DESCRIPTORS=y
+ CONFIG_CI_UDC=y
+ CONFIG_IMX_WATCHDOG=y
+diff --git a/configs/colibri_imx6_defconfig b/configs/colibri_imx6_defconfig
+index 1aea1d40c4e6..0f5abb51f766 100644
+--- a/configs/colibri_imx6_defconfig
++++ b/configs/colibri_imx6_defconfig
+@@ -119,6 +119,7 @@ CONFIG_SPL_USB_GADGET=y
  CONFIG_USB_GADGET_MANUFACTURER="Toradex"
  CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
  CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
@@ -127,6 +153,30 @@ index 7d54205938e0..cd9811aca616 100644
  CONFIG_CI_UDC=y
  CONFIG_SPL_USB_SDP_SUPPORT=y
  CONFIG_IMX_WATCHDOG=y
+diff --git a/configs/colibri_imx7_defconfig b/configs/colibri_imx7_defconfig
+index 6c24f59b28c4..5a415120bead 100644
+--- a/configs/colibri_imx7_defconfig
++++ b/configs/colibri_imx7_defconfig
+@@ -106,6 +106,7 @@ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="Toradex"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
++CONFIG_USB_GADGET_OS_DESCRIPTORS=y
+ CONFIG_CI_UDC=y
+ CONFIG_IMX_WATCHDOG=y
+ CONFIG_WDT=y
+diff --git a/configs/colibri_imx7_emmc_defconfig b/configs/colibri_imx7_emmc_defconfig
+index e23cc9935427..bae43fe45aa7 100644
+--- a/configs/colibri_imx7_emmc_defconfig
++++ b/configs/colibri_imx7_emmc_defconfig
+@@ -91,6 +91,7 @@ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="Toradex"
+ CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
++CONFIG_USB_GADGET_OS_DESCRIPTORS=y
+ CONFIG_CI_UDC=y
+ CONFIG_IMX_WATCHDOG=y
+ CONFIG_WDT=y
 -- 
 2.43.0
 
