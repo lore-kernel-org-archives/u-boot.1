@@ -4,215 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D50E7CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 06:21:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6F8CCAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 07:45:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64126800B1;
-	Wed,  1 Oct 2025 08:21:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 01983802C1;
+	Wed,  1 Oct 2025 09:45:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MSEI062S";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="NItR25Cu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51DB08328F; Wed,  1 Oct 2025 08:21:55 +0200 (CEST)
-Received: from DM5PR21CU001.outbound.protection.outlook.com
- (mail-centralusazlp170110009.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::9])
+ id 8DD24807C0; Wed,  1 Oct 2025 09:45:08 +0200 (CEST)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AD7E8004F
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 08:21:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C82AB800B1
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 09:45:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=pass smtp.mailfrom=M.Schwan@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=KRo82KUsxc2NahA/DR4Cj2vg0OOF0DjpWenCPPxTUGovCoN/y+RdCVUgSaOcLUfo7k8x+5pl6JFqMpHKnfnpyxZawZ/ZLbqIFL/6GcMhk3Qodb4SM2PyCmi7XJNLo15OjX8k9ePP3yIMH/eOV5iZitBcpYpEm8FPLn7N4LnAIyRWalNzeKRGyy3TKnAl9CzDgBoVAUwOSkbtWES0TwwvFOR7t9TtVU88x7gh2Y650lILGhKM02+TQRFOQwQOSsmz+wMthLisNUA0SU1kdYIFCeWiQcWQyBYKteVeuLeadFajhg+LcJJWk1gXi0UT3AKZUsAdOQK3CpbcrhAiU7ptPg==
+ b=UscRzniso/Pl1R1DVbIOsyTftgSWTH80AkYUmQatKZuyNXp2P/SfFVlSEojEXjkEmBwjfNVKdVAGzFahMC+BYUlBCdp3EHqbMytmXA3yR/st+sIuJgQLQKOfxTa8R7SAJLuyHOTbNdQtsz3IwqQqmy4xk+jnEgmlJJX9BMhs3hkKxe6PhX0NTiZtYOWPIYItm0gRUbSOTEZMJCNMXWzIKz/bsdZn6TzL8ky+QKAAG7peI/fa/caisTgvMzO0/W7ZNoN/w24nCyjxgbp2jezSfTN4PMDuVLY56IvHqR1bZKI2p2wEwp7Rutv1BZSzSkM6obsKT1MB4C0BkHwfeKqu2g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7uGbt1fK2+KaEp8WMNVlwgBgEYl823P7Ux9MbiMKsCg=;
- b=FfmpsnlXMgJWZohaXkMIN7s3s8dzOQb0Cq/Rr+1byWWeauyWY7H5oQFL+2Kli5AWL7ETWZkbQ7fJpquI/3II/0LpkcsaP16v7lpuxarT8KM5a8mmtAIH8MNn01s/0wtaOUCIM8kA6rssyMiXjuwKM3Z7DwEU73Zmmv0xB5U8dEuueXgx36m+TXpVk8qNEWuukuvEzysFYqE/u3pyK3m2Emu+dZozIRwqbBLMTMRusOccCozP2bCMsyj3JmuTRKuuYzBQ+DXtWtykhEgZpSL+Czk9oER0tb4kdg+3mUMpf9wvT/8wr5hJvCIASJwRyA0nwO0ACglwWvQ6kI0xQ+bW+Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=Iyf/wNqt4/bqhpa5QbBzTArkfl0xMtwM5xZkOSQZaKM=;
+ b=dGFe+zqsh7f7CpnsEjykd19Np+TtI9AduoBjYQ2NKmx2x3afpIo1sBPqDdhgSL6++LwvC3kAtKS0cSWdxN2d1sNCarQDu+AigKmc2XQWGlRz2By/I6yAXqLh9JTRVYGuI3OrDul/dJl4mVam7mc6gKDnE6MoxfYh22oY1XE1hORL9T+sZVowwaeNyHoGkANaVkIIF9oydn9TXbqhmoY8eoBTbIKMCKxoiurALsHevnry9CMHwOU8nzxHVauTm4nzCGcXH5d2PxpdXfygtLDif4feQ/c+LClu/kNZqWgPEu3FX9hDKHFgpf+PLx0+vwTb/ROD29MPycm53faY8maRZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7uGbt1fK2+KaEp8WMNVlwgBgEYl823P7Ux9MbiMKsCg=;
- b=MSEI062SNE/fJDoPUga7G8BwgMyAC0XaS38FL4I4UUGRXhF0NbRZO4dYP96yWrWcIx569sd/4rpvP6KPXkyeaxR/p4f1/1rEkfF50KtoOREdfUZiFOoRYBSpD0ifcBX3GCevLROm4tvKhKYGLqFQRxGIGMgyF0J8bnY7nZdod/Q=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by CY5PR12MB6527.namprd12.prod.outlook.com (2603:10b6:930:30::13)
+ bh=Iyf/wNqt4/bqhpa5QbBzTArkfl0xMtwM5xZkOSQZaKM=;
+ b=NItR25CuYc0V6nm6B+6Eqkj75DMEbMxIjU82/Fm4znMo9Ip5QpXyO8oWvywVInNZuFzKhs6J8JIE9qqnWai4Znf8ZPbXRbLQh7UbJusqBJ1gpO9wiyGZoIq/yYzy+IC/ELr9s7yZcvmoMzNZUjTHgpwBDHX9n0q4fbq4n4oipLeUZkK5o7DwVko2FUzoWi++a8qnZa6bWFWyfOAgSaIgSnXePTLPVKHUgR5LCA+rpSvbZ1yTfzCVLRgR/Dk0k6rcyn/eJ8ozWHrmPCnppmhClZOvVP7d63lGFOVn9Bz4oMKy0TbJaHXxShcjcXYg7W03LAVVOJhplhgNXPVnF+P/rg==
+Received: from AM0PR02CA0114.eurprd02.prod.outlook.com (2603:10a6:20b:28c::11)
+ by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.18; Wed, 1 Oct
- 2025 06:21:49 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::7f35:efe7:5e82:5e30%4]) with mapi id 15.20.9160.008; Wed, 1 Oct 2025
- 06:21:48 +0000
-Message-ID: <3a542bae-f530-4469-8898-50750e181723@amd.com>
-Date: Wed, 1 Oct 2025 08:21:34 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] spi: cadence-qspi: Remove cdns,is-dma property handling
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@amd.com
-Cc: Boon Khai Ng <boon.khai.ng@altera.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Naman Trivedi <naman.trivedimanojbhai@amd.com>,
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Prasad Kummari <prasad.kummari@amd.com>,
- Prasanth Babu Mantena <p-mantena@ti.com>,
- Ronald Wahl <ronald.wahl@legrand.com>,
- Senthil Nathan Thangaraj <senthilnathan.thangaraj@amd.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <c6a5b4bfe565668eb3299d5c5a5548a2163b129a.1758786568.git.michal.simek@amd.com>
-Content-Language: en-US
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- mpwx1d8=
-In-Reply-To: <c6a5b4bfe565668eb3299d5c5a5548a2163b129a.1758786568.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0210.eurprd06.prod.outlook.com
- (2603:10a6:802:2c::31) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ 2025 07:44:59 +0000
+Received: from AMS0EPF00000192.eurprd05.prod.outlook.com
+ (2603:10a6:20b:28c:cafe::28) by AM0PR02CA0114.outlook.office365.com
+ (2603:10a6:20b:28c::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.17 via Frontend Transport; Wed,
+ 1 Oct 2025 07:44:59 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Postix.phytec.de (91.26.50.189) by
+ AMS0EPF00000192.mail.protection.outlook.com (10.167.16.218) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9182.15 via Frontend Transport; Wed, 1 Oct 2025 07:44:59 +0000
+Received: from lws-schwan.phytec.de (172.25.32.51) by Postix.phytec.de
+ (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Wed, 1 Oct
+ 2025 09:44:58 +0200
+From: Martin Schwan <m.schwan@phytec.de>
+Date: Wed, 1 Oct 2025 09:44:37 +0200
+Subject: [PATCH] doc: pytest: Fix inline code and other formatting
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-ID: <20251001-fix-doc-pytest-usage-code-v1-1-51256aa7dd0d@phytec.de>
+X-B4-Tracking: v=1; b=H4sIAOTb3GgC/x2MQQqEMAwAvyI5G0iLHvQryx4kza652NKo7FL8u
+ 8HjwMw0MKkqBnPXoMqppnlzCH0HvC7bV1CTM0SKYyAK+NEfpsxY/rvYjoct7nBOglMYiCIPxDG
+ B96WKy8/79b6uG49gKMVrAAAA
+X-Change-ID: 20251001-fix-doc-pytest-usage-code-914002c40c2d
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Yannic Moog
+ <y.moog@phytec.de>
+X-Mailer: b4 0.14.2
+X-Originating-IP: [172.25.32.51]
+X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
+ (172.25.0.11)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CY5PR12MB6527:EE_
-X-MS-Office365-Filtering-Correlation-Id: 55eefde0-4a32-4da8-ac37-08de00b2cd7c
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-TrafficTypeDiagnostic: AMS0EPF00000192:EE_|AS4P195MB1456:EE_
+X-MS-Office365-Filtering-Correlation-Id: a1f9c37c-40da-447e-5d8f-08de00be6c1a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?M05NZFJUVkg1WlRpemhtVFc1Z1RyMUNuRlhLbDJMeDIrenFKbG84aXhYZEpW?=
- =?utf-8?B?SWVEamI2MGg0NEdqN0tsazl2TzlUR2ZnNmpvV0t3LzJCVE84dDl5azNYdDdH?=
- =?utf-8?B?WWZsbUc5WWNybTE1WlQ5bElSUmdtVnFxR0xYTVdHeFhZTmI4UmRGWnM4czMz?=
- =?utf-8?B?NWNicGcwbWNyUDFlSGw5NC9QK3dVeUVRaUhOTXg0b05IOGNCVC9qby9XaUZW?=
- =?utf-8?B?UEdFc2ZVVFlselJZSGFSTVdDaE1LZE9ISjFUZDEreDZMQ3l1REQvTkpvMFFk?=
- =?utf-8?B?N3lBcFJEcktIdHE2UnlGdVhiak5FeXRjcGlxVkxzMXFtTEM0RllRVWhKOGEy?=
- =?utf-8?B?cGVKVUdWTkFjWlFudWhZZDhKbHlaTjRSWnZRNmxBTDlTRGpSTmQ2WlNrM1BK?=
- =?utf-8?B?RUtlRXZaSk41VXVsT0pzTHE4UmdQQk1vQXplOG8vc09jRjYyT2xGRlRoZGJW?=
- =?utf-8?B?OVdsbnJFNzVNTkdka0ROZ256ZVRKeFQrQlU2ZUo2TlVoQlpINHhDakxDNjJ3?=
- =?utf-8?B?Y0t4Y1FJYkgzMVdLVzNCdnJ1dDY4SHhlMWU4MG1GamlkK0ljV1lab21XTExJ?=
- =?utf-8?B?aUpLV1pLYVlOSHhWdDdUSktXOHVwM1ZGaVA1Zlhody9wd2FKOGpVMGsyWnAr?=
- =?utf-8?B?bWZQU2pTQXNUSmFHMVQvU1RtR3NTQ01EZlJLTVBpaXhMbnk1eFY1WnE2L2Nq?=
- =?utf-8?B?aUhkNDhPRWZwbzQ0cVRwb05aY1dvaDNGU0JodDRyK0dZaTVGbUZGbjdVNlV2?=
- =?utf-8?B?c2NJU094cXJYSytyWWRJR245cEhCOTl0OTArbjQvNDdocDA5eFVQcjdvN2Z3?=
- =?utf-8?B?Uy9uSld3L1ZaSWRCNVk0WEg3UEp6cE9MdVZVODdaY29XRU03UHBaV0lXS1Uy?=
- =?utf-8?B?WWY0RmlybW5OV2QzaDU3a2pIaVMwTWxZSDAycThWUUtNY2N1bkZNS0lMdnRu?=
- =?utf-8?B?dFh0alMvQWwreE14UGxVczZERmdkY01YeThFZXgzT0lnNzhUdUZGMWFkTmor?=
- =?utf-8?B?TG04ODFTUVltSjVwTHVkUGdyVmpJd3F2TGxkTmx5bVNpUVdOakVGdy9ScjdH?=
- =?utf-8?B?Zk5aUEI4SXdoUTJ0NHVDK0tqR2ZiVlUzQnVLN2NTdnN4WWFvQ1IyVVdzdTRq?=
- =?utf-8?B?SkFDUDEwS1dEc1J0d2VIVTFIQ2hxNG54QVZIaDUxT1NTTUkzdk5LRStxdVFa?=
- =?utf-8?B?QkhzYk5wUTJ5ejdncU9oZXFzUGd0c0dFbFJkY3VCOVkyVFA2Q1pkc0pDUE9j?=
- =?utf-8?B?U0N2eFJRTHQ5UDVucGdHN0VjZE8xdW5JU0w1dkFwcE9YT3ZzWUJxbFpIZlVq?=
- =?utf-8?B?Q1hDaHdBdWkyMW55MjhKYTA0S2xCVFlTWHI2ajBPM2o3RHYzcXArN01TOUYw?=
- =?utf-8?B?SkNyekljd0EyYjhyRFJ3M3VxdWlnN21ndDFPbWYrR3dvVVJjNXE2UWJyYkIv?=
- =?utf-8?B?dGNpb01TTU1kblgwVnJUMnBLeFoyN1RzTEF4bTBYWC9QZEo2MmQrTHlOVmN5?=
- =?utf-8?B?aEdzeVV4S3o4RTRmTk93dnlsNC9jNlRCc2preVU2V2NNbjc0M1BwemFDRDNr?=
- =?utf-8?B?MFE3b28yeUxrWFFOSDdwL3BRa00wOFhodmdhT0xabDFQRnUyMlo2YWkvQ2o2?=
- =?utf-8?B?RkpTV3ZDQ1k0L0pENFVDODErei9aYjFheHVjU2R6cHBTUVlIRzVBWURmajdn?=
- =?utf-8?B?TkRyYnNmNjNxMjBsR1B6MFRYQzZlNkJxVk4wQVNsK2dvaFJvUWxoVmZsL0xm?=
- =?utf-8?B?bjB0aUhPK2VyTi9nRFlTOTV6ZndYazZXSHJ1NkRYUjMwVjVUaFRETFhSdFdM?=
- =?utf-8?B?NytwaXkzcnEvaUk3ZHZuKzZOMUN6WVBtYjBxZ0kyLzdxN0NjTjlDb0VjdTUv?=
- =?utf-8?B?N2hZemxEMUQyd0NyTWJheVYzZGpKdytwa0h3WTl5cVdXZHVkNVYyeVU0OHcz?=
- =?utf-8?Q?P2VihjpFp6zkKv+XM1N/6SqMCbbJ5sLC?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S0ZpczBkb3VKWHdIOWtsbVpGd0xZOEt1RDZ6T3FyM2orU2hYWU1yK01vc0pQ?=
- =?utf-8?B?clpjMVVvSXA0MzF2RlIvNzBpaW0zZWhzV1ZMNHppVTFTbDd0Ty8zVk5ONEk2?=
- =?utf-8?B?RjhUM0JhaDZqNGs3cmVCSnFVTldNVG1SdExwQUJHK3pVei9meERWYW5VNEJU?=
- =?utf-8?B?MTVPM25UYmZhSE9XaEFCRW9WWWN2NWtMcDhRRFRiN2JFQUc0R3NRRU10RzZJ?=
- =?utf-8?B?TklhK1h4WDlPdWY4SUt4SjIxaWdyOVhmRU1UQTFwNWhPL29qWXBvckdUUDlV?=
- =?utf-8?B?d1ptdnh5bzBPMVB1dkk4RWxuKzVHOGFySzhtbmluNVl2L3VkaURLY09lMDla?=
- =?utf-8?B?Q2VQR1BpeWF5alpGM3BGY0N4OHI2OVdkWGx2Vlh5UnNvOG5yUURKQzhOczYv?=
- =?utf-8?B?amJaRE5ueFl2L0N5TGNrREZ0L09MTUhScnhzeVNuSHpwbytsdDN0aW9Beklx?=
- =?utf-8?B?YjhXUEF1TVVoVG9rSmhBY2owMlVCdGhUNDB2VDViblV3cU5mT1hoa2pPa21M?=
- =?utf-8?B?RVQ4QlJrQlZGMnE3c1FSSmdXYy94UTBHMFprblpIWTUwRlhiTWFRT0tINFhS?=
- =?utf-8?B?cy9XeXdOLzBqVVlxODNaNzZYS3podlZNeEc3ZEpUT0p3MFpKMUJlRUdRNk5G?=
- =?utf-8?B?cVdNY2VwZk9OcVZMYTN4bitkUE1XaWltMWNiS3REYWZhcEF0Mk91ZDRMMk40?=
- =?utf-8?B?ckcrL2VHUERUSktsbktmSG82NnBnemZOTnZvZ2NzbEJ2dVAzR3VWWlU0R2hI?=
- =?utf-8?B?NDBmRUtMK2Z3WWcrK3kxSG82c1lUbEszdUs2SWJodFpPRHU1SGFBRjJFUzNM?=
- =?utf-8?B?TXhmcm1VWDIrdHp2RVIxMTQyT2dVbVR0SzgyajR5Smx2SG9Fb3ZNejZDcGhL?=
- =?utf-8?B?R3Z1enZlSDVTa2N2QlFmRmV6M1lGTElPM1VrVTZ2Sm5uckxkMzZEWmFBRWx6?=
- =?utf-8?B?T3VtMWNDNUNYcDZGOGV1MnBTQVRWMjRma3h4SldYR1MxTndRTTVEbGZLNDFF?=
- =?utf-8?B?cnRFUGNvQ2UzNXZ6VHVEdkZmTHFFUGduL0Y5MmpDbmhHM09mM1I3bU9Ed0FX?=
- =?utf-8?B?YVpmZUk0WlpQYXYvNWZsdXJhSlkxWUNoeFZqdUREZlBySFZLTHFUSFRUMmhl?=
- =?utf-8?B?R0w0L0tVcTZIc2R5aWhabjFPckN6Qll0VlJkQ1hxTm00ejBTQVRHbGtMbUgr?=
- =?utf-8?B?S3RTeVVJT0hWZFppSXB2aDZVbXpwUit5M2RVT2prZUp4WkRKbDEzWUtZUEsv?=
- =?utf-8?B?L1ZWekpMSlFrdUNHd1IrYUFyK1UvQTFGUGtYeFcrR3JhLzJTaHp5WjdMTFNh?=
- =?utf-8?B?Z1RHNUlWWC85YW1CbTVKNG5EQTlwMmVZWXpYbExEZmlqSWdIQmdja2wrS0lP?=
- =?utf-8?B?QU9yeWVmQUY0cFdyWFZqaEFQMVlpN3B4MmVrdHJicHlKaHZDczludFUxNHNs?=
- =?utf-8?B?U0RuMUF6cVUzR0lReE5taDNoeHJqTDc3Sm4xZnFQSnhPbEhTc0tFeUtOcXVK?=
- =?utf-8?B?UUczQm5OWnpFWUc5dG1LTW5vTUJNL1JiQnBLaGZxVUxpSlduTW5VejQ0Ti9v?=
- =?utf-8?B?Qk1zNlZOcjJqVkZtSXMyamJLNXYxQzIvYUQ4enAxM1g4Tmt6U1B0ak8yeVhJ?=
- =?utf-8?B?bGtESG4yNEowY1BVdGFnU0RnREc4Y1hwcjlwTUhHUnNDQjIrUG9oSCs1WEI4?=
- =?utf-8?B?cE04STR5aGxlWXZENEh3dU1FWlZ2T2w2bGZQaHVUZGZNWGRqUXRHUnVLdDlP?=
- =?utf-8?B?NC9yWkVyZzl5TmpCaGJzeWJEeTc1d05zU21PcHVLd3I2bkgvdkZOZHZIekJr?=
- =?utf-8?B?MHNPOWlwTE8rSU9OZ1l4NUVYUnI2TmtHREI0dlBjMVJ2aXZMMlBmZThiRU1E?=
- =?utf-8?B?TlFtT3lXTXkxemd0YzVZOFlhL1RsRFNxNHA3b25pZUNiUmRwOWcxQ3NnVnEw?=
- =?utf-8?B?anpOTGMrR3dMT1RpMVlhVXlQTVkyclRHYmxMc2Z4WGpOYkErYzMwTFlyTDZV?=
- =?utf-8?B?R3JMN0dzaDJZa0ovNVFMbFlicGEvTlg4Z2ZHeUNzMUU4ZEo5U2pESEJQN2t6?=
- =?utf-8?B?SUpaVEpvMThib3hFT2ZEMGZuN2ZLcE4yd3c4Qkt2bWhOYTRhVDcyZDhBTENW?=
- =?utf-8?Q?uyp0jnguVNV6TVKznec8YvBYn?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 55eefde0-4a32-4da8-ac37-08de00b2cd7c
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2025 06:21:48.7913 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cnfmH9cv+CDulyzaaKMzz/fMsucggXdZ00mJkinipr4EUAQnVDgmzhL8p1gOb9Zf
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6527
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|36860700013|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QTNuYUxCbXAzZTBoQUVPb3NpTW5ia01TUFExZXNqdWZwTFE3Sy85SG5DZVR3?=
+ =?utf-8?B?cU5rOWQxWDdMUkJsY2JQZkVhZzZWVUs3ZXRsZDZyQXZuOUFOWStTVHpldmdP?=
+ =?utf-8?B?SUJCZWlFSkdlSlJKQ1QwTnlsbDZKcHFUNWdFMEZxVjdzbkxTQ3J3eFkzSUFR?=
+ =?utf-8?B?WjRzNHVoRC9sQUI0UjQ5TTRQVmpyeWNSenlLNCtQWmhuRkpRRE82RjRlNlJK?=
+ =?utf-8?B?bkhIcXNySlNvMHM0ZVVjZDIzbDN6RStSNExpaDFFR3RiMTdRcXBoQnBOcWpE?=
+ =?utf-8?B?NlY2Q2hKQmpZNFNNbE16bVBzc2JGbmNFL2FOckNwdVNWREkvMkQ0K2wwWkxj?=
+ =?utf-8?B?MjhEbGVHU2NHVmFGbzN0K2N1Y0RMQlBGMHJIVEc5TlpSVTZyYmxDZ3labjBh?=
+ =?utf-8?B?NVBwWlBBOU00VnFsSUdYWE9uNTBTQWFlb0NpSkw5bzRwNlBTem4xRmsrd1FJ?=
+ =?utf-8?B?UDhqT2Fudk5KblY2dk5yNENLcnBNeHhPRFlrSjRoUW5aVHFKSW1zN2UyOUZ4?=
+ =?utf-8?B?N09kcmtOc2NkemZ1UkJudWgvbWNsWnMyQVVKZGx2WTdhdUhnVTQzQ1N6QkJl?=
+ =?utf-8?B?cXY1QTR4c2hLYVZmUE9wbFV1di9peDF6OWVZNklLa1gzdEQ1eVl1cU9SdktG?=
+ =?utf-8?B?RXk2OW95MXRJQTRDWlR6T0ppV1ZySTBzSGVjcTNUTTExNURBZjEvS2JOR2xG?=
+ =?utf-8?B?Vm03cjdhMCtMTWh4VWg2aFRQa1Rab3FRWGY2MnkrZWEzZXhpd051RmMvK1ho?=
+ =?utf-8?B?NGNMWDBuMHlpRXVxRG5wcTB0d1dmUStvc3F5Z2JBQVgrRTUrYXAyRWJvSkNs?=
+ =?utf-8?B?c1RkVzVmNTlXbEIvOWJaS0VTZGpvMlRDMmViQnNDZzc5OFhqTk0vYStpSHZp?=
+ =?utf-8?B?NFZ1N21KK3RLcmZZdGVvUVdYR29ITnV4bi9pVU1nZDhJYVA2MWNZenhpbldQ?=
+ =?utf-8?B?ZlVvRTJOYlFmUytzUEFtQ0pTR2ljM0w0dENmbFI1TnZhT3Z6SVNpZlpuQ2dr?=
+ =?utf-8?B?NlNzMktSNVp6Z2xrODFMOW5KVGFldGJEK044RkpQbW5QVXhQdEdpR0NSZ0oy?=
+ =?utf-8?B?d3liNWxmNzBYUytia2w0L0pUMmZGNytxdVlMTHpOVWRZdnMyMUxEc3FDc2ZO?=
+ =?utf-8?B?cG8rdWlmbFRTa2tVZ2NRZys0c0NVMEZqRmowaERsTzI4N0J2dGEvT1cxZVpq?=
+ =?utf-8?B?Q0V4Yzh1aDJxOWVJV2xvNWo3WldMRjRIRzdUcGZ6SnRrempjUDVMZjJtL3R6?=
+ =?utf-8?B?T01QTEx6Ni9rUW9KV0FodWJQT1k3eWlRRElmM2V0MnF6VWZteFpoWm12YW1s?=
+ =?utf-8?B?dXZXRWhIamFJMFJCd2JXMXZ2K2thU1BZT3J0Rlk2OVprKzl3WHgra0d4YmIr?=
+ =?utf-8?B?VWtUS2ZySGRQUm05aUJFNmxnWkwwZ0dWRE5JSThESXMrQmthejFVYUxsaVNr?=
+ =?utf-8?B?VS9DWEVWaWJYc091ZFo5cHJsNTRKWTk0Q1A1UlJ3M25yUEJsU0k3Y2dzdnVa?=
+ =?utf-8?B?NmI3SkFNTDBmbjhUeEM2ZDdlaEpIRGQyVEh4a2V5d3RIL3hHeHpuSFdncDBx?=
+ =?utf-8?B?SElOeFhaZk5UYUcrbEl6NVJpaTFDaUVaWTBYN3k1Zkh3Um0zWVJVRXdHYVpQ?=
+ =?utf-8?B?bXNhTklUblZvdDVCOXNMTjRac1lMY25xVWk5anRRMlM3Ym5TSmRJN1FQdDVP?=
+ =?utf-8?B?LzF5RnFoNGhST1BpMEFaakJ1em9aSm85OFFPNURyblpqSjU0aWJJclNxV2ho?=
+ =?utf-8?B?RVBucDZDU2FESUFWdU5hVzJjQmFQL2I5eEcrNkVSMDU0YlUxc0RPZFdiZ09m?=
+ =?utf-8?B?cTRtdnJnMmxoN3pkOVUyRHhja0VXeVRCS0NPNE1tMUhOOVVTaGhmQkdYZjdQ?=
+ =?utf-8?B?QnZYMFR4bSsyRENmTldEa05DWmUrMlp1djVKTTQ1V0lrZGFIcnBGY1ZDY296?=
+ =?utf-8?B?b2FSMUN3U25XVlJXaHN0d0Y2aThjV2tlall5OFBoaHB5dEdsaWY5NFliTHcr?=
+ =?utf-8?B?WUdRRTRUanJPRjR0Qk9RaEpmaHNXUEdvcWtiM2JTK1JUYWVLb1FUcUdEQXNr?=
+ =?utf-8?B?T3FVd2JxcGxVLytPWS9zTXRRNkVtWjBITlc4UGhjMFliY0k1RXNRckFXS3pz?=
+ =?utf-8?Q?Vw5c=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2025 07:44:59.0192 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a1f9c37c-40da-447e-5d8f-08de00be6c1a
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Postix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF00000192.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4P195MB1456
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -229,145 +158,435 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Mainly fix inline code and some other formatting mistakes. Inline code
+uses double backticks `` in reStructuredText instead of single backticks
+as in Markdown.
 
+Also fix some smaller formatting issues, such as excess colons before
+literal blocks.
 
-On 9/25/25 09:49, Michal Simek wrote:
-> Remove cdns,is-dma DT property handling. Property is not the part of DT
-> binding and it is also hardcoded to value 1 in all DTs that's why remove it
-> because none is also testing value 0.
-> If there is any use case when this configuration should be supported this
-> patch can be reverted.
-> 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
-> 
->   arch/arm/dts/versal-mini-ospi.dtsi     |  1 -
->   arch/arm/dts/versal-net-mini-ospi.dtsi |  1 -
->   drivers/spi/cadence_qspi.c             |  8 +-------
->   drivers/spi/cadence_qspi.h             |  5 -----
->   drivers/spi/cadence_qspi_apb.c         | 22 ----------------------
->   5 files changed, 1 insertion(+), 36 deletions(-)
-> 
-> diff --git a/arch/arm/dts/versal-mini-ospi.dtsi b/arch/arm/dts/versal-mini-ospi.dtsi
-> index eec2a08e7c70..6991f6a51db0 100644
-> --- a/arch/arm/dts/versal-mini-ospi.dtsi
-> +++ b/arch/arm/dts/versal-mini-ospi.dtsi
-> @@ -38,7 +38,6 @@
->   		num-cs = <1>;
->   		cdns,fifo-depth = <256>;
->   		cdns,fifo-width = <4>;
-> -		cdns,is-dma = <1>;
->   		cdns,trigger-address = <0xc0000000>;
->   		#address-cells = <1>;
->   		#size-cells = <0>;
-> diff --git a/arch/arm/dts/versal-net-mini-ospi.dtsi b/arch/arm/dts/versal-net-mini-ospi.dtsi
-> index 1c94b352dc97..d2d5ec8e5cbf 100644
-> --- a/arch/arm/dts/versal-net-mini-ospi.dtsi
-> +++ b/arch/arm/dts/versal-net-mini-ospi.dtsi
-> @@ -52,7 +52,6 @@
->   		num-cs = <1>;
->   		cdns,fifo-depth = <256>;
->   		cdns,fifo-width = <4>;
-> -		cdns,is-dma = <1>;
->   		cdns,is-stig-pgm = <1>;
->   		cdns,trigger-address = <0xc0000000>;
->   		#address-cells = <1>;
-> diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
-> index 599596f9f087..849bd930edf0 100644
-> --- a/drivers/spi/cadence_qspi.c
-> +++ b/drivers/spi/cadence_qspi.c
-> @@ -210,7 +210,6 @@ static int cadence_spi_probe(struct udevice *bus)
->   
->   	priv->regbase		= plat->regbase;
->   	priv->ahbbase		= plat->ahbbase;
-> -	priv->is_dma		= plat->is_dma;
->   	priv->is_decoded_cs	= plat->is_decoded_cs;
->   	priv->fifo_depth	= plat->fifo_depth;
->   	priv->fifo_width	= plat->fifo_width;
-> @@ -348,10 +347,7 @@ static int cadence_spi_mem_exec_op(struct spi_slave *spi,
->   	case CQSPI_READ:
->   		err = cadence_qspi_apb_read_setup(priv, op);
->   		if (!err) {
-> -			if (priv->is_dma)
-> -				err = cadence_qspi_apb_dma_read(priv, op);
-> -			else
-> -				err = cadence_qspi_apb_read_execute(priv, op);
-> +			err = cadence_qspi_apb_dma_read(priv, op);
->   		}
->   		break;
->   	case CQSPI_WRITE:
-> @@ -412,8 +408,6 @@ static int cadence_spi_of_to_plat(struct udevice *bus)
->   	if (plat->ahbsize >= SZ_8M)
->   		priv->use_dac_mode = true;
->   
-> -	plat->is_dma = dev_read_bool(bus, "cdns,is-dma");
-> -
->   	/* All other parameters are embedded in the child node */
->   	subnode = cadence_qspi_get_subnode(bus);
->   	if (!ofnode_valid(subnode)) {
-> diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
-> index 879e7f8dbfb8..10c4ad14cc05 100644
-> --- a/drivers/spi/cadence_qspi.h
-> +++ b/drivers/spi/cadence_qspi.h
-> @@ -223,8 +223,6 @@ struct cadence_spi_plat {
->   	u32		tchsh_ns;
->   	u32		tslch_ns;
->   	u32		quirks;
-> -
-> -	bool            is_dma;
->   };
->   
->   struct cadence_spi_priv {
-> @@ -261,7 +259,6 @@ struct cadence_spi_priv {
->   	bool		ddr_init;
->   	bool		is_decoded_cs;
->   	bool		use_dac_mode;
-> -	bool		is_dma;
->   
->   	/* Transaction protocol parameters. */
->   	u8		inst_width;
-> @@ -292,8 +289,6 @@ int cadence_qspi_apb_command_write(struct cadence_spi_priv *priv,
->   
->   int cadence_qspi_apb_read_setup(struct cadence_spi_priv *priv,
->   				const struct spi_mem_op *op);
-> -int cadence_qspi_apb_read_execute(struct cadence_spi_priv *priv,
-> -				  const struct spi_mem_op *op);
->   int cadence_qspi_apb_write_setup(struct cadence_spi_priv *priv,
->   				 const struct spi_mem_op *op);
->   int cadence_qspi_apb_write_execute(struct cadence_spi_priv *priv,
-> diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
-> index 4696c09f754b..243e29ae1c4f 100644
-> --- a/drivers/spi/cadence_qspi_apb.c
-> +++ b/drivers/spi/cadence_qspi_apb.c
-> @@ -764,28 +764,6 @@ failrd:
->   	return ret;
->   }
->   
-> -int cadence_qspi_apb_read_execute(struct cadence_spi_priv *priv,
-> -				  const struct spi_mem_op *op)
-> -{
-> -	u64 from = op->addr.val;
-> -	void *buf = op->data.buf.in;
-> -	size_t len = op->data.nbytes;
-> -
-> -	cadence_qspi_apb_enable_linear_mode(true);
-> -
-> -	if (priv->use_dac_mode && (from + len < priv->ahbsize)) {
-> -		if (len < 256 ||
-> -		    dma_memcpy(buf, priv->ahbbase + from, len) < 0) {
-> -			memcpy_fromio(buf, priv->ahbbase + from, len);
-> -		}
-> -		if (!cadence_qspi_wait_idle(priv->regbase))
-> -			return -EIO;
-> -		return 0;
-> -	}
-> -
-> -	return cadence_qspi_apb_indirect_read_execute(priv, len, buf);
-> -}
-> -
->   /* Opcode + Address (3/4 bytes) */
->   int cadence_qspi_apb_write_setup(struct cadence_spi_priv *priv,
->   				 const struct spi_mem_op *op)
+Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+---
+ doc/develop/pytest/usage.rst | 173 ++++++++++++++++++++++---------------------
+ 1 file changed, 87 insertions(+), 86 deletions(-)
 
-Applied.
-M
+diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
+index 779b2dbe24bafd387e3323432ef74a944884177d..596b03973791bd8bbf1b8070af83782c43b25a3a 100644
+--- a/doc/develop/pytest/usage.rst
++++ b/doc/develop/pytest/usage.rst
+@@ -27,8 +27,8 @@ the appropriate time.
+ 
+ In order to run the test suite at a minimum we require that both Python 3 and
+ pip for Python 3 are installed. All of the required python modules are
+-described in the requirements.txt file in the /test/py/ directory and can be
+-installed via the command
++described in the ``requirements.txt`` file in the ``/test/py/`` directory and
++can be installed via the command
+ 
+ .. code-block:: bash
+ 
+@@ -62,18 +62,18 @@ The test script supports either:
+   physical board, attach to the board's console stream, and reset the board.
+   Further details are described later.
+ 
+-The usage of the command 'sudo' is not allowed in tests. Using elevated
++The usage of the command ``sudo`` is not allowed in tests. Using elevated
+ priviledges can lead to security concerns. Furthermore not all users may have
+-administrator rights. Therefore the command 'sudo' must not be used in tests.
++administrator rights. Therefore the command ``sudo`` must not be used in tests.
+ To create disk images we have helper functions located in
+-`test/py/tests/fs_helper.py` which shall be used in any tests that require
++``test/py/tests/fs_helper.py`` which shall be used in any tests that require
+ creating disk images.
+ 
+ Using a Python sandbox to provide requirements
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ The recommended way to run the test suite, in order to ensure reproducibility
+-is to use a Python sandbox such as `python -m venv` to set up the necessary
++is to use a Python sandbox such as ``python -m venv`` to set up the necessary
+ environment.  This can be done via the following commands:
+ 
+ 
+@@ -95,19 +95,19 @@ application), simply execute:
+ 
+     ./test/py/test.py --bd sandbox --build
+ 
+-The `--bd` option tells the test suite which board type is being tested. This
++The ``--bd`` option tells the test suite which board type is being tested. This
+ lets the test suite know which features the board has, and hence exactly what
+ can be tested.
+ 
+-The `--build` option tells U-Boot to compile U-Boot. Alternatively, you may
++The ``--build`` option tells U-Boot to compile U-Boot. Alternatively, you may
+ omit this option and build U-Boot yourself, in whatever way you choose, before
+ running the test script.
+ 
+ The test script will attach to U-Boot, execute all valid tests for the board,
+ then print a summary of the test process. A complete log of the test session
+-will be written to `${build_dir}/test-log.html`. This is best viewed in a web
++will be written to ``${build_dir}/test-log.html``. This is best viewed in a web
+ browser, but may be read directly as plain text, perhaps with the aid of the
+-`html2text` utility.
++``html2text`` utility.
+ 
+ If sandbox crashes (e.g. with a segfault) you will see message like this::
+ 
+@@ -134,23 +134,23 @@ First install support for parallel tests::
+ 
+     sudo apt install python3-pytest-xdist
+ 
+-or:::
++or::
+ 
+     pip3 install pytest-xdist
+ 
+-Then run the tests in parallel using the -n flag::
++Then run the tests in parallel using the ``-n`` flag::
+ 
+     test/py/test.py -B sandbox --build --build-dir /tmp/b/sandbox -q -k \
+         'not slow and not bootstd and not spi_flash' -n16
+ 
+-You can also use `make pcheck` to run all tests in parallel. This uses a maximum
+-of 16 threads, since the setup time is significant and there are under 1000
+-tests.
++You can also use ``make pcheck`` to run all tests in parallel. This uses a
++maximum of 16 threads, since the setup time is significant and there are under
++1000 tests.
+ 
+-Note that the `test-log.html` output does not work correctly at present with
++Note that the ``test-log.html`` output does not work correctly at present with
+ parallel testing. All the threads write to it at once, so it is garbled.
+ 
+-Note that the `tools/` tests still run each tool's tests once after the other,
++Note that the ``tools/`` tests still run each tool's tests once after the other,
+ although within that, they do run in parallel. So for example, the buildman
+ tests run in parallel, then the binman tests run in parallel. There would be a
+ significant advantage to running them all in parallel together, but that would
+@@ -163,12 +163,12 @@ Testing under a debugger
+ ~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ If you need to run sandbox under a debugger, you may pass the command-line
+-option `--gdbserver COMM`. This causes two things to happens:
++option ``--gdbserver COMM``. This causes two things to happens:
+ 
+ - Instead of running U-Boot directly, it will be run under gdbserver, with
+-  debug communication via the channel `COMM`. You can attach a debugger to the
+-  sandbox process in order to debug it. See `man gdbserver` and the example
+-  below for details of valid values for `COMM`.
++  debug communication via the channel ``COMM``. You can attach a debugger to the
++  sandbox process in order to debug it. See ``man gdbserver`` and the example
++  below for details of valid values for ``COMM``.
+ - All timeouts in tests are disabled, allowing U-Boot an arbitrary amount of
+   time to execute commands. This is useful if U-Boot is stopped at a breakpoint
+   during debugging.
+@@ -187,7 +187,7 @@ Window 2:
+ 
+     gdb ./build-sandbox/u-boot -ex 'target remote localhost:1234'
+ 
+-Alternatively, you could leave off the `-ex` option and type the command
++Alternatively, you could leave off the ``-ex`` option and type the command
+ manually into gdb once it starts.
+ 
+ You can use any debugger you wish, as long as it speaks the gdb remote
+@@ -196,16 +196,17 @@ protocol, or any graphical wrapper around gdb.
+ Some tests deliberately cause the sandbox process to exit, e.g. to test the
+ reset command, or sandbox's CTRL-C handling. When this happens, you will need
+ to attach the debugger to the new sandbox instance. If these tests are not
+-relevant to your debugging session, you can skip them using pytest's -k
++relevant to your debugging session, you can skip them using pytest's ``-k``
+ command-line option; see the next section.
+ 
+ Command-line options
+ --------------------
+ 
+ --board-type, --bd, -B
+-  set the type of the board to be tested. For example, `sandbox` or `seaboard`.
++  set the type of the board to be tested. For example, ``sandbox`` or
++  ``seaboard``.
+ 
+---board-identity`, --id
++--board-identity, --id
+   sets the identity of the board to be tested. This allows differentiation
+   between multiple instances of the same type of physical board that are
+   attached to the same host machine. This parameter is not interpreted by th
+@@ -215,15 +216,15 @@ Command-line options
+ --build
+   indicates that the test script should compile U-Boot itself before running
+   the tests. If using this option, make sure that any environment variables
+-  required by the build process are already set, such as `$CROSS_COMPILE`.
++  required by the build process are already set, such as ``$CROSS_COMPILE``.
+ 
+ --buildman
+-  indicates that `--build` should use buildman to build U-Boot. There is no need
+-  to set $CROSS_COMPILE` in this case since buildman handles it.
++  indicates that ``--build`` should use buildman to build U-Boot. There is no
++  need to set ``$CROSS_COMPILE`` in this case since buildman handles it.
+ 
+ --build-dir
+   sets the directory containing the compiled U-Boot binaries. If omitted, this
+-  is `${source_dir}/build-${board_type}`.
++  is ``${source_dir}/build-${board_type}``.
+ 
+ --result-dir
+   sets the directory to write results, such as log files, into.
+@@ -266,10 +267,10 @@ Command-line options
+        <3.0s :    2.4s  | 1
+        <7.5s :    6.1s  | 1
+ 
+-`pytest` also implements a number of its own command-line options. Commonly used
+-options are mentioned below. Please see `pytest` documentation for complete
+-details. Execute `py.test --version` for a brief summary. Note that U-Boot's
+-test.py script passes all command-line arguments directly to `pytest` for
++pytest also implements a number of its own command-line options. Commonly used
++options are mentioned below. Please see pytest documentation for complete
++details. Execute ``py.test --version`` for a brief summary. Note that U-Boot's
++test.py script passes all command-line arguments directly to pytest for
+ processing.
+ 
+ -k
+@@ -277,13 +278,13 @@ processing.
+   option takes a single argument which is used to filter test names. Simple
+   logical operators are supported. For example:
+ 
+-  - `'-k ums'` runs only tests with "ums" in their name.
+-  - `'-k ut_dm'` runs only tests with "ut_dm" in their name. Note that in this
++  - ``-k ums`` runs only tests with "ums" in their name.
++  - ``-k ut_dm`` runs only tests with "ut_dm" in their name. Note that in this
+     case, "ut_dm" is a parameter to a test rather than the test name. The full
+     test name is e.g. "test_ut[ut_dm_leak]".
+-  - `'-k not reset'` runs everything except tests with "reset" in their name.
+-  - `'-k ut or hush'` runs only tests with "ut" or "hush" in their name.
+-  - `'-k not (ut or hush)'` runs everything except tests with "ut" or "hush" in
++  - ``-k not reset`` runs everything except tests with "reset" in their name.
++  - ``-k ut or hush`` runs only tests with "ut" or "hush" in their name.
++  - ``-k not (ut or hush)`` runs everything except tests with "ut" or "hush" in
+     their name.
+ 
+ -s
+@@ -297,7 +298,7 @@ The tools and techniques used to interact with real hardware will vary
+ radically between different host and target systems, and the whims of the user.
+ For this reason, the test suite does not attempt to directly interact with real
+ hardware in any way. Rather, it executes a standardized set of "hook" scripts
+-via `$PATH`. These scripts implement certain actions on behalf of the test
++via ``$PATH``. These scripts implement certain actions on behalf of the test
+ suite. This keeps the test suite simple and isolated from system variances
+ unrelated to U-Boot features.
+ 
+@@ -309,14 +310,14 @@ Environment variables
+ 
+ The following environment variables are set when running hook scripts:
+ 
+-- `UBOOT_BOARD_TYPE` the board type being tested.
+-- `UBOOT_BOARD_IDENTITY` the board identity being tested, or `na` if none was
+-  specified.
+-- `UBOOT_SOURCE_DIR` the U-Boot source directory.
+-- `UBOOT_TEST_PY_DIR` the full path to `test/py/` in the source directory.
+-- `UBOOT_BUILD_DIR` the U-Boot build directory.
+-- `UBOOT_RESULT_DIR` the test result directory.
+-- `UBOOT_PERSISTENT_DATA_DIR` the test persistent data directory.
++- ``UBOOT_BOARD_TYPE`` the board type being tested.
++- ``UBOOT_BOARD_IDENTITY`` the board identity being tested, or ``na`` if none
++  was specified.
++- ``UBOOT_SOURCE_DIR`` the U-Boot source directory.
++- ``UBOOT_TEST_PY_DIR`` the full path to ``test/py/`` in the source directory.
++- ``UBOOT_BUILD_DIR`` the U-Boot build directory.
++- ``UBOOT_RESULT_DIR`` the test result directory.
++- ``UBOOT_PERSISTENT_DATA_DIR`` the test persistent data directory.
+ 
+ u-boot-test-console
+ '''''''''''''''''''
+@@ -326,15 +327,15 @@ should be connected to the board's console. This process should continue to run
+ indefinitely, until killed. The test suite will run this script in parallel
+ with all other hooks.
+ 
+-This script may be implemented e.g. by executing `cu`, `kermit`, `conmux`, etc.
+-via exec().
++This script may be implemented e.g. by executing ``cu``, ``kermit``, ``conmux``,
++etc. via ``exec()``.
+ 
+ If you are able to run U-Boot under a hardware simulator such as QEMU, then
+ you would likely spawn that simulator from this script. However, note that
+-`u-boot-test-reset` may be called multiple times per test script run, and must
++``u-boot-test-reset`` may be called multiple times per test script run, and must
+ cause U-Boot to start execution from scratch each time. Hopefully your
+ simulator includes a virtual reset button! If not, you can launch the
+-simulator from `u-boot-test-reset` instead, while arranging for this console
++simulator from ``u-boot-test-reset`` instead, while arranging for this console
+ process to always communicate with the current simulator instance.
+ 
+ u-boot-test-flash
+@@ -357,7 +358,7 @@ the following cases:
+ - The board allows U-Boot to be downloaded directly into RAM, and executed
+   from there. Use of this feature will reduce wear on the board's flash, so
+   may be preferable if available, and if cold boot testing of U-Boot is not
+-  required. If this feature is used, the `u-boot-test-reset` script should
++  required. If this feature is used, the ``u-boot-test-reset`` script should
+   perform this download, since the board could conceivably be reset multiple
+   times in a single test run.
+ 
+@@ -386,8 +387,8 @@ to flash, pulsing the board's reset signal is likely all this script needs to
+ do. However, in some scenarios, this script may perform other actions. For
+ example, it may call out to some SoC- or board-specific vendor utility in order
+ to download the U-Boot binary directly into RAM and execute it. This would
+-avoid the need for `u-boot-test-flash` to actually write U-Boot to flash, thus
+-saving wear on the flash chip(s).
++avoid the need for ``u-boot-test-flash1`` to actually write U-Boot to flash,
++thus saving wear on the flash chip(s).
+ 
+ u-boot-test-release
+ '''''''''''''''''''
+@@ -407,11 +408,11 @@ Board-type-specific configuration
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ Each board has a different configuration and behaviour. Many of these
+-differences can be automatically detected by parsing the `.config` file in the
++differences can be automatically detected by parsing the ``.config`` file in the
+ build directory. However, some differences can't yet be handled automatically.
+ 
+-For each board, an optional Python module `u_boot_board_${board_type}` may exist
+-to provide board-specific information to the test script. Any global value
++For each board, an optional Python module ``u_boot_board_${board_type}`` may
++exist to provide board-specific information to the test script. Any global value
+ defined in these modules is available for use by any test function. The data
+ contained in these scripts must be purely derived from U-Boot source code.
+ Hence, these configuration files are part of the U-Boot source tree too.
+@@ -425,14 +426,14 @@ U-Boot configuration may support USB device mode and USB Mass Storage, but this
+ can only be tested if a USB cable is connected between the board and the host
+ machine running the test script.
+ 
+-For each board, optional Python modules `u_boot_boardenv_${board_type}` and
+-`u_boot_boardenv_${board_type}_${board_identity}` may exist to provide
++For each board, optional Python modules ``u_boot_boardenv_${board_type}`` and
++``u_boot_boardenv_${board_type}_${board_identity}`` may exist to provide
+ board-specific and board-identity-specific information to the test script. Any
+ global value defined in these modules is available for use by any test
+ function. The data contained in these is specific to a particular user's
+ hardware configuration. Hence, these configuration files are not part of the
+ U-Boot source tree, and should be installed outside of the source tree. Users
+-should set `$PYTHONPATH` prior to running the test script to allow these
++should set ``$PYTHONPATH`` prior to running the test script to allow these
+ modules to be loaded.
+ 
+ Board module parameter usage
+@@ -443,29 +444,29 @@ module:
+ 
+ - none at present
+ 
+-U-Boot `.config` feature usage
+-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++U-Boot ``.config`` feature usage
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+-The test scripts rely on various U-Boot `.config` features, either directly in
++The test scripts rely on various U-Boot ``.config`` features, either directly in
+ order to test those features, or indirectly in order to query information from
+ the running U-Boot instance in order to test other features.
+ 
+-One example is that testing of the `md` command requires knowledge of a RAM
++One example is that testing of the ``md`` command requires knowledge of a RAM
+ address to use for the test. This data is parsed from the output of the
+-`bdinfo` command, and hence relies on CONFIG_CMD_BDI being enabled.
++``bdinfo`` command, and hence relies on CONFIG_CMD_BDI being enabled.
+ 
+ For a complete list of dependencies, please search the test scripts for
+ instances of:
+ 
+-- `buildconfig.get(...`
+-- `@pytest.mark.buildconfigspec(...`
+-- `@pytest.mark.notbuildconfigspec(...`
++- ``buildconfig.get(...``
++- ``@pytest.mark.buildconfigspec(...``
++- ``@pytest.mark.notbuildconfigspec(...``
+ 
+ Complete invocation example
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+-Assuming that you have installed the hook scripts into $HOME/ubtest/bin, and
+-any required environment configuration Python modules into $HOME/ubtest/py,
++Assuming that you have installed the hook scripts into ``$HOME/ubtest/bin``, and
++any required environment configuration Python modules into ``$HOME/ubtest/py``,
+ then you would likely invoke the test script as follows:
+ 
+ If U-Boot has already been built:
+@@ -477,7 +478,7 @@ If U-Boot has already been built:
+     ./test/py/test.py --bd seaboard
+ 
+ If you want the test script to compile U-Boot for you too, then you likely
+-need to set `$CROSS_COMPILE` to allow this, and invoke the test script as
++need to set ``$CROSS_COMPILE`` to allow this, and invoke the test script as
+ follows:
+ 
+ .. code-block:: bash
+@@ -501,47 +502,47 @@ Writing tests
+ Please refer to the pytest documentation for details of writing pytest tests.
+ Details specific to the U-Boot test suite are described below.
+ 
+-A test fixture named `ubman` should be used by each test function. This
++A test fixture named ``ubman`` should be used by each test function. This
+ provides the means to interact with the U-Boot console, and retrieve board and
+ environment configuration information.
+ 
+-The function `ubman.run_command()` executes a shell command on the
++The function ``ubman.run_command()`` executes a shell command on the
+ U-Boot console, and returns all output from that command. This allows
+ validation or interpretation of the command output. This function validates
+ that certain strings are not seen on the U-Boot console. These include shell
+ error messages and the U-Boot sign-on message (in order to detect unexpected
+-board resets). See the source of `console_base.py` for a complete list of
++board resets). See the source of ``console_base.py`` for a complete list of
+ "bad" strings. Some test scenarios are expected to trigger these strings. Use
+-`ubman.disable_check()` to temporarily disable checking for specific
+-strings. See `test_unknown_cmd.py` for an example.
++``ubman.disable_check()`` to temporarily disable checking for specific
++strings. See ``test_unknown_cmd.py`` for an example.
+ 
+ Board- and board-environment configuration values may be accessed as sub-fields
+-of the `ubman.config` object, for example
+-`ubman.config.ram_base`.
++of the ``ubman.config`` object, for example
++``ubman.config.ram_base``.
+ 
+-Build configuration values (from `.config`) may be accessed via the dictionary
+-`ubman.config.buildconfig`, with keys equal to the Kconfig variable
++Build configuration values (from ``.config``) may be accessed via the dictionary
++``ubman.config.buildconfig``, with keys equal to the Kconfig variable
+ names.
+ 
+-A required configuration setting can be defined via a buildconfigspec()
++A required configuration setting can be defined via a ``buildconfigspec()``
+ annotation. The name of the configuration option is specified in lower case. The
+-following annotation for a test requires CONFIG_EFI_LOADER=y:
++following annotation for a test requires ``CONFIG_EFI_LOADER=y``:
+ 
+ .. code-block:: python
+ 
+     @pytest.mark.buildconfigspec('efi_loader')
+ 
+ Sometimes multiple configuration option supply the same functionality. If
+-multiple arguments are passed to buildconfigspec(), only one of the
++multiple arguments are passed to ``buildconfigspec()``, only one of the
+ configuration options needs to be set. The following annotation requires that
+-either of CONFIG_NET or CONFIG_NET_LWIP is set:
++either of ``CONFIG_NET`` or ``CONFIG_NET_LWIP`` is set:
+ 
+ .. code-block:: python
+ 
+     @pytest.mark.buildconfigspec('net', 'net lwip')
+ 
+-The notbuildconfigspec() annotation can be used to require a configuration
+-option not to be set. The following annotation requires CONFIG_RISCV=n:
++The ``notbuildconfigspec()`` annotation can be used to require a configuration
++option not to be set. The following annotation requires ``CONFIG_RISCV=n``:
+ 
+ .. code-block:: python
+ 
+
+---
+base-commit: a239b0b0b6dbe6a168969b8cd6e600cf85db278d
+change-id: 20251001-fix-doc-pytest-usage-code-914002c40c2d
+
+Best regards,
+-- 
+Martin Schwan <m.schwan@phytec.de>
+
