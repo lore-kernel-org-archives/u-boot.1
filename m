@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7C6CCCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AF9ECCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EECB2836B4;
-	Wed,  1 Oct 2025 22:30:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3BC8A836C8;
+	Wed,  1 Oct 2025 22:31:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q4yCqJV/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o6WrUdBG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CF29836A7; Wed,  1 Oct 2025 22:30:57 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
+ id 174A28349B; Wed,  1 Oct 2025 22:30:59 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1507A836A7
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8A51836B8
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-7ae21804971so113280a34.0
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:55 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7a7c1ecd433so161577a34.3
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759350654; x=1759955454; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759350655; x=1759955455; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=VOgiun4n8RNxiEhyzgtVZCzJe2GarRWsLhYt5w78nvg=;
- b=Q4yCqJV/fHkLsVV5USXDnN0jfy4jTlQf1UQL3dKYJSuAxsXgxaofWuNvlsAQiTUAvk
- 95kfwSfj/tfyq0FKawYPBzYMFHYUZnlpGfojouqOhrFmP+ApWJmFgIGHpW6nTXO+FTVf
- wJE2wtLu4MnIzfniiE7j+sxoUxosaZOCINCn4=
+ bh=ixh8TU52mofV5VoU9esWAM0JDg7b+9zfIjXs8fOxyL0=;
+ b=o6WrUdBGMCAG8ai2AoHCqxrK+EaR925OP8HHwLuFrjaXJJa8BxVEmWbRmPR4xZP6Nn
+ Rr9Aoug1bRO7TYSwyYd5zzOquK9+HU+LXzB8zSOo7e/Yfy+5YLTbq1wAbiMZ3PzVYdRn
+ D24OO7ME68J4cbSjOqULQA2nxwQ3qWU2iFAOY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759350654; x=1759955454;
+ d=1e100.net; s=20230601; t=1759350655; x=1759955455;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VOgiun4n8RNxiEhyzgtVZCzJe2GarRWsLhYt5w78nvg=;
- b=ll+1gFVI+sr/mzUAmVIoN7K8i+zW0vWxnJIfpZ+YXUN5J6HuylPXlHUTFxQ2RKWS5O
- 82ZVMVCwJs2xzsrSc0vhxS2eLg5W2F9pSpAyD/3i6aPq/5l1BpVipy9UNwMcZLlczFZq
- T8QldHXrcSpaJLHj8NEGQw89VyBpsT+iGSpDo5s/UeyLqHyDiOHJ9OyCQH47YoxDvAiz
- EZWaRYUInaeB3dzV+7roaeFc+w/Y4Q7YpB1FFCQAzkCeN/hv169aO5/k4nJxmLxSd5nS
- 67y+QgJ6dUEmJWH5qcNrLGlTnG/gHnw+v8O/D3ZdRcrGgrA9ivWH4skQAErAiGVn/WkS
- /Z6A==
-X-Gm-Message-State: AOJu0Yw+VGvV18Plf+cWa+cm22PFSF69xz9JNzq5AW15JO98e/Macs6b
- JXF5AcZyYP57Pu3NEPRnApaPIFWDkqkhIPO3nHiCyUvVQydeet3ts6DbiFNATfzJT3iKqsESuBB
- 8qy6K/kQ=
-X-Gm-Gg: ASbGncvAmtsLckgi2Zn5WBAK6GVJZMC+PEiUrn6A7BFCX+TNgEmbN+DTdbIbPoQgzjo
- zAPZN6MvObA7BmlUsGMDnLkyR2fHLwFXssRR0FLbx6eCo6REpoV7xt8w9g3qna3EiQ3FHVOlwnm
- YibowB+plY7iaoQbU6/pTIhcMP4LQNyo7gr7vcgPjiEefof588IN3DUIrAXR7XaurAq0BQylxh2
- cgsa1m56ot9TtIKrDWpb0b6JkiIpymovaYjS/LZ/lPN76liGTJQYDgX8ZaZSK1/FpJAs3H27bu1
- cbvCPJC6VsmH+M2V0tTyZs5T14fb+fCsAtUty32TPbwWQY2zOjdHYeZSXYnUzp8d5Bs5WYvB81t
- CH2rpXLW9CW4UUn6Kxag0MpCgPA8J4Z2iL6RJgsBxpRGREBr+rJp/dJKEnA8Br26tFj7KkDZqRO
- cFuaNA6CA=
-X-Google-Smtp-Source: AGHT+IFTEk9fzuyT/n0iHYv+9EOBtK8eQw5uEf8K+ANtzGfoqxU/NqYttZ4YktYpDy7vUxtudXMZzw==
-X-Received: by 2002:a05:6830:3c0d:b0:7b3:5908:34d8 with SMTP id
- 46e09a7af769-7bdda0883e0mr3283255a34.11.1759350653690; 
- Wed, 01 Oct 2025 13:30:53 -0700 (PDT)
+ bh=ixh8TU52mofV5VoU9esWAM0JDg7b+9zfIjXs8fOxyL0=;
+ b=gWfLGULX6XiHr2yfpKtEVuTXqV5xa+5pod/YuJWACUQLhvx/9NyAAt2z+EhUBhatRT
+ dZqHF2jft/pq5diBK0riuVwk6LP4kfZQVJJNKA0s+Y+WDqzwN/xfgPKfkvqiiuT1tpNw
+ t6XwYeV0eqrxbS5SwgBL8ygKsk3QcAP4Qps+FPykm0PJrg39wpBpfo0/TTB+5vYX/O+T
+ UHmJCxJaNE8T55OK5SyZheoibvYWPNAAOzKwBL9Ot6IbCVi9THaeyZDyhePjAVM8mq64
+ Qy3O726d38dvnv88nxaTwEjI/+wd+MHXlZtRxG7JSBo9/JHc9ECIgtfw+j/2YIUtoubg
+ NsyA==
+X-Gm-Message-State: AOJu0Yzr9HYj75ChaUy86pahL9CxM8NpEL7GalOipmOflq+ucQ2/gSkp
+ GT5K/Qtx0i8YBGTuHWzlIEQKVX7akaKysM/EjGP3bJ+LmMTp2WYWVv0zFupXMFa/K1d18gNuE9I
+ rw7fSy6k=
+X-Gm-Gg: ASbGnct6PVg5Nsp5uvB2yJ5Lh7Yg0AbTJkm5c88NZCAgP5P76bWNkuTWr4TmAFTmcaf
+ 7jxLtGFcHAFJDf5TYSQOC7kT2KFD9rT1DN/rZTb9WVSOrIejy9MRU81UlIE6Blt0Gc1yvSmSQQ2
+ KH6nWTQ+zTODNxBbtiiP/PCLEEsDiSIv9Jd43JJjBotZeAIc29mrbffK2m2xPMzqKafNfUzL0jw
+ gozT8b84yKF3AU8SyHTdDNo4odzQp8fLqCMIgiOXl8JnLp3kG+KRkbf23FjNgyJBDI6qocoIxPz
+ MLZeNlG5QIPbB2Um1MPwm5vUVMUT/xfTy/VLKTqT+B7zoz4fT2qRJPho0/JFXbtZ5DchoSVM6rJ
+ zeb5MhYKx8A9+oEOqwhHFchECYPZtE3xMScPKGZTUK3iiuSwXfVGG0OMDD0lK5tQlzR3VR0tFVs
+ L8crcUsio=
+X-Google-Smtp-Source: AGHT+IFvFIhgk5z4Sgi5NM+AJwZVhxfUM7UXNPz2VkoaAbUBCK1otaC/bETMSFFlxTXW91hoDwmx5Q==
+X-Received: by 2002:a05:6830:6ac7:b0:7b0:6c2e:7c13 with SMTP id
+ 46e09a7af769-7bddc94c2e3mr3401292a34.16.1759350655530; 
+ Wed, 01 Oct 2025 13:30:55 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-64e1bc8058bsm101285eaf.20.2025.10.01.13.30.53
+ 46e09a7af769-7bf3fdcf8b4sm122593a34.12.2025.10.01.13.30.54
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 13:30:53 -0700 (PDT)
+ Wed, 01 Oct 2025 13:30:54 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] iotrace: Finish migrating this to Kconfig
-Date: Wed,  1 Oct 2025 14:30:52 -0600
-Message-ID: <20251001203052.2828467-1-trini@konsulko.com>
+Subject: [PATCH] xPL: Make NAND_SUPPORT depend on !COMPILE_TEST
+Date: Wed,  1 Oct 2025 14:30:53 -0600
+Message-ID: <20251001203053.2828484-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,115 +92,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When I migrated this to Kconfig in commit 68e54040ccc3 ("sandbox: Move
-CONFIG_IO_TRACE to Kconfig") I didn't look hard enough for other
-details. As explained in the README, this is valid for ARM too. So start
-by making this be a prompted question and CMD_IOTRACE depend on IO_TRACE
-being enabled.  Next, migrate the information out of README and in to
-the appropriate help text for existing options in Kconfig. Finally, make
-this option be default y on SANDBOX but not selected as it's valid to
-build without it.
+In order to compile NAND_SUPPORT files we need non-zero values for
+various parts of the NAND chip that would be expected. Rather than start
+to dummy this up in Kconfig, make these options depend on !COMPILE_TEST
+to start with.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- README         | 22 ----------------------
- arch/Kconfig   |  1 -
- cmd/Kconfig    | 11 +++++++++++
- common/Kconfig | 11 ++++++++++-
- 4 files changed, 21 insertions(+), 24 deletions(-)
+ common/spl/Kconfig     | 1 +
+ common/spl/Kconfig.tpl | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/README b/README
-index 27cde241bef4..20a73bab802c 100644
---- a/README
-+++ b/README
-@@ -300,28 +300,6 @@ The following options need to be configured:
- 		Note that if the GPIO device uses I2C, then the I2C interface
- 		must also be configured. See I2C Support, below.
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index cb7b4179384b..defc8bd6a8ed 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -977,6 +977,7 @@ config SPL_MUSB_NEW
  
--- I/O tracing:
--		When CONFIG_IO_TRACE is selected, U-Boot intercepts all I/O
--		accesses and can checksum them or write a list of them out
--		to memory. See the 'iotrace' command for details. This is
--		useful for testing device drivers since it can confirm that
--		the driver behaves the same way before and after a code
--		change. Currently this is supported on sandbox and arm. To
--		add support for your architecture, add '#include <iotrace.h>'
--		to the bottom of arch/<arch>/include/asm/io.h and test.
--
--		Example output from the 'iotrace stats' command is below.
--		Note that if the trace buffer is exhausted, the checksum will
--		still continue to operate.
--
--			iotrace is enabled
--			Start:  10000000	(buffer start address)
--			Size:   00010000	(buffer size)
--			Offset: 00000120	(current buffer offset)
--			Output: 10000120	(start + offset)
--			Count:  00000018	(number of trace records)
--			CRC32:  9526fb66	(CRC32 of all trace records)
--
- - Timestamp Support:
- 
- 		When CONFIG_TIMESTAMP is selected, the timestamp
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 7e05e0c22634..3133f892f945 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -202,7 +202,6 @@ config SANDBOX
- 	select DM_SPI
- 	select DM_SPI_FLASH
- 	select GZIP_COMPRESSED
--	select IO_TRACE
- 	select LZO
- 	select MMC
- 	select MTD
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 5e5252ef1347..761b126e3271 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1308,12 +1308,23 @@ config CMD_IO
- 
- config CMD_IOTRACE
- 	bool "iotrace - Support for tracing I/O activity"
-+	depends on IO_TRACE
+ config SPL_NAND_SUPPORT
+ 	bool "Support NAND flash"
++	depends on !COMPILE_TEST
+ 	select SPL_LOAD_BLOCK
  	help
- 	  Provides an 'iotrace' command which supports recording I/O reads and
- 	  writes in a trace buffer in memory . It also maintains a checksum
- 	  of the trace records (even if space is exhausted) so that the
- 	  sequence of I/O accesses can be verified.
+ 	  Enable support for NAND (Negative AND) flash in SPL. NAND flash
+diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
+index a535b61ecd35..19ce3d92e65b 100644
+--- a/common/spl/Kconfig.tpl
++++ b/common/spl/Kconfig.tpl
+@@ -236,6 +236,7 @@ config TPL_MMC
  
-+	  Example output from the 'iotrace stats' command is below.
-+
-+		iotrace is enabled
-+		Start:  10000000	(buffer start address)
-+		Size:   00010000	(buffer size)
-+		Offset: 00000120	(current buffer offset)
-+		Output: 10000120	(start + offset)
-+		Count:  00000018	(number of trace records)
-+		CRC32:  9526fb66	(CRC32 of all trace records)
-+
- 	  When debugging drivers it is useful to see what I/O accesses were
- 	  done and in what order.
+ config TPL_NAND_SUPPORT
+ 	bool "Support NAND flash"
++	depends on !COMPILE_TEST
+ 	help
+ 	  Enable support for NAND in TPL. See SPL_NAND_SUPPORT for details.
  
-diff --git a/common/Kconfig b/common/Kconfig
-index 30bf225362ee..0c25a8fc866e 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1264,4 +1264,13 @@ config VPL_IMAGE_SIGN_INFO
- endif
- 
- config IO_TRACE
--	bool
-+	bool "Intercept and checksum all I/O accesses"
-+	depends on ARM || SANDBOX
-+	default y if SANDBOX
-+	help
-+	  When enabled, U-Boot intercepts all I/O accesses and can checksum
-+	  them or write a list of them out to memory. See the 'iotrace' command
-+	  for details. This is useful for testing device drivers since it can
-+	  confirm that the driver behaves the same way before and after a code
-+	  change. To add support for your architecture, add '#include
-+	  <iotrace.h>' to the bottom of arch/<arch>/include/asm/io.h and test.
 -- 
 2.43.0
 
