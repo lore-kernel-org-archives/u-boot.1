@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25A4CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 18:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95688CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:30:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 499BF81D6A;
-	Wed,  1 Oct 2025 20:33:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C5EF08344E;
+	Wed,  1 Oct 2025 22:30:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gvYX4D5l";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c3/E6PeC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5421C8328F; Wed,  1 Oct 2025 20:33:47 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id B74D3834D4; Wed,  1 Oct 2025 22:30:35 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D36DB800B1
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 20:33:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 569C381D6A
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-30cceb749d7so125503fac.2
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 11:33:44 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-36f51ac0595so157303fac.2
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759343623; x=1759948423; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=oEO5HVM1EqSsVr0geomh500Iogj9E/LbDIiQQRZVtoI=;
- b=gvYX4D5liYvckkztWn8xjQXHSjkrLzVZFLBmyIKb5uWv7P1L3jkPXHAYIalqUj7n7E
- L7CIPoiqDjB7nTE3etYL5m++Y6379F3wjjYZJxfHSGQqr52WmRJ8AzLHTREQf6rmv+a7
- EUzCvVElR/01xVZ9f7ZiknKHlVcCTJi3oZqD8=
+ d=konsulko.com; s=google; t=1759350632; x=1759955432; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=a2yFNQ7r4AmGqab/FrCgTw8vJumTQmC3gD+3twOBvik=;
+ b=c3/E6PeCx7DuhIyNc6dysPIjKYao4v0VZTvZHrCFtZXayjCF8Xm12/TqIZ1eE6UwiU
+ b/2wkhB0V2bqYBqSYpmFKN6NKuUIPng1V7t427o+laemule63cHfkcwDMBYdLUGJsMeb
+ YUcxJlDGvvxcD4X/lfpoRpXS9R72+I2DZANUg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759343623; x=1759948423;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oEO5HVM1EqSsVr0geomh500Iogj9E/LbDIiQQRZVtoI=;
- b=OxJ9nZvKIGUz9ft7i1Ed3phiqnT3EEQANwGiJsVLxfpwc5QDuH+5l05FQ0a7SBi9IR
- yjDTIGP4mOHYpry7+mqw94ngmM3BFSaH0EmRPG9aItqd9G12g6/u+0CabA4l8kHDA6ja
- 0Lrigl/VE5OPRpeUVOZxlTPhKr5pWs3yjFldH4NuXpYbYjOmybcIiqbsDlmu29LCTkkT
- WOe79G23UlgmrL+4t52pNZxgkfsw7WP+xPCbfAn1k5yJy+CYWZP/FUgs4M9QAHhtR9pf
- /txfCgHhOWoRcDPsy55D+3bQymcQ01ApDjeapl5FHpo9cV6+gL5FdXFYNj6Eu+keHWoc
- jD5g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWSn2xNTy2fAg8VB+thLA188y45Iv5mtCcS1AchqqxtpZAIA4Qm/uaWhE5y5bN2gFVeG8GBaF0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxpPM3fJ3OwO84Z5pN5VcvoSHx8PPLkwmlef8WBfAlFmDQp+HWv
- fLs98bqLLTRicTyhWmepRifHjymzDdQP+FlSAQXtj5nI/pNlU4vWiVj50Nmxa59mgpGgUhnakax
- kxWCuR6E=
-X-Gm-Gg: ASbGncuBVMU/VSbBSYHEQLUrsbP5Nmb8/Q+z9S1rWNRmp4Lr4Z6rRs8oxJXu839Ii4m
- TOoMXV/Y938qrKKkvGCRkErf5V2bdsM+bJz1cFAbToRSzDDDx94ogCCvaVxowAaKUrGmb87+3zK
- JRNxtovw+3ymDutnS1CU0qjeS5r9wOL8xPDHN8Qfu3M+OtoEl6lrjPaiBuS3k+xuMoUX1DiGI81
- iDt8IwONo3Q2tCvIr7ip9NgdTeBgXBDMu1V6PNRbjekXQlfUqj4jcgh1dZHTj1zcFx5udP/h62X
- T5IjgCyFGevlipTIdSKcaFuVYNC5nQ5sbWX5THdb+9nILbyaV0oHPiY96o8fMW/9OsLCHcStyPv
- lAHmZ9Ezkni52TogLPtgAwS0X7tEpgHCzrHmIRfFWiHzX7IxW2LR3NIPPco9tPyUryFYoGOmZIH
- js/lpJ
-X-Google-Smtp-Source: AGHT+IFtTcdJ6zbYX1m23vUuqm4taV9nA0ZPTqIWSWSNEhJuoTIsEDInh/uyRLvg0BXv8oy3F+/DGQ==
-X-Received: by 2002:a05:6870:312:b0:35e:59ce:6c39 with SMTP id
- 586e51a60fabf-39b91a79566mr2360512fac.8.1759343623488; 
- Wed, 01 Oct 2025 11:33:43 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-97-42.totalplay.net.
+ d=1e100.net; s=20230601; t=1759350632; x=1759955432;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a2yFNQ7r4AmGqab/FrCgTw8vJumTQmC3gD+3twOBvik=;
+ b=eAm8F07QIh3uB2qf4aSot2uDoHcaIQC4GfqLAUX/4AmNeGDwfkfBodWis0L3YdaTUE
+ sohUWLNrmCW519UN4DT5UCFhdsMtGjwPX/1h2F/0qmH5ijVmkt6bmBSqR5YVMo0K5PAa
+ QjAs/BSsrnFACOHRvLMmfvY8KFnVMANlasyL9lsAKpDxEANd+IJMD0ZrVcj8wTyrVS8/
+ fHqwEEEzlwElRBluK2dD/uTb2o5mSGWPKkKsWELod724RfeMk0DlZrfBWA0tOdnK26is
+ iwKUn9ZTGf+/bjmHROsxI/B3URF4w4EBiVy0aWJdyCS82fLQrmjrw4L+2HxPNUs6nyCk
+ XxPQ==
+X-Gm-Message-State: AOJu0YyK7ycQokmdSJ9IQk9W8TW2M7zmNvQ4U9uDwCvNb+oD9of/8u5r
+ /8GlgnDb2VU9zn7CaZUtno2iq2lEuQ2Y9SFQolSgnpVOR0AWkRpVSsTOeOsafIEKf9VUGqAXC+0
+ 0xLXAnio=
+X-Gm-Gg: ASbGncursVKSrsntajv+D0lgi7jRBphotTNzq0OuFL855jcnke1gf1Kslxzp7S5r8Ks
+ M7R0+CqKyRWA7g7p53SJ8Wr/+H2wXDZIXqk4pINIzv/ejfwpRk9pOTI0i/JFNOAd/0DYBKeZala
+ G1W1fK/eFdUpwGmnjl0gbyIeP7vyLztLSVJLV78Tk6L6CvKLtNDL9hbLGOFESpP0N4RN2lYd9kB
+ YdVJIokhUbDb+oeUgTsxQlydyutdYoRHZb0AT/1GdtoC7YSZ7sdrmNhBBzvs81ZfWQWjeYQnWnP
+ AfBBbq2sa4ub6NTc2Eh1Z+AfZjiHWe4A8CW9HuweeeK1QwOBjxY3j/qLqJ6FRKrb/OJZsf7y+U2
+ wK/LXTVa8QMwWBiv+rYhUdTK4JCYrGBYRdWEpGCGkfOID3lSAfpKQlk50eEaIwmgoS251BRxoGC
+ 3QMAvJrhY=
+X-Google-Smtp-Source: AGHT+IFBysa6M/ptD4y0DQ0v3hSzzWDgymcL7GxS29ZNwdSDjCbBGN/iR6jwznND09X6Dr/a5Dcksg==
+X-Received: by 2002:a05:6870:a3c9:b0:375:8591:7701 with SMTP id
+ 586e51a60fabf-39b8d44892amr2610557fac.9.1759350631874; 
+ Wed, 01 Oct 2025 13:30:31 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-64e1b7a87d2sm38706eaf.11.2025.10.01.11.33.42
+ 586e51a60fabf-3ab7ce5655dsm219888fac.13.2025.10.01.13.30.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 11:33:42 -0700 (PDT)
-Date: Wed, 1 Oct 2025 12:33:40 -0600
+ Wed, 01 Oct 2025 13:30:31 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH] b4-config: Improve b4 config for correct operation
-Message-ID: <20251001183340.GK6093@bill-the-cat>
-References: <20251001-fix_b4-v1-1-fc515dec0546@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Sergei Antonov <saproj@gmail.com>
+Subject: [PATCH] gpio: Remove FTGPIO0010 driver
+Date: Wed,  1 Oct 2025 14:30:29 -0600
+Message-ID: <20251001203029.2828194-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="O6GGy70NmVQetPiM"
-Content-Disposition: inline
-In-Reply-To: <20251001-fix_b4-v1-1-fc515dec0546@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,59 +93,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This driver has never been enabled and currently has build problems
+related in part to incorrect out_le32 calls. Remove it.
 
---O6GGy70NmVQetPiM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Sergei Antonov <saproj@gmail.com>
+---
+ drivers/gpio/Kconfig     |   6 ---
+ drivers/gpio/Makefile    |   1 -
+ drivers/gpio/ftgpio010.c | 110 ---------------------------------------
+ 3 files changed, 117 deletions(-)
+ delete mode 100644 drivers/gpio/ftgpio010.c
 
-On Wed, Oct 01, 2025 at 10:28:37AM +0100, Andrew Goodbody wrote:
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index 58e464106a30..db077e472a81 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -695,12 +695,6 @@ config SLG7XL45106_I2C_GPO
+ 	   8-bit gpo expander, all gpo lines are controlled by writing
+ 	   value into data register.
+ 
+-config FTGPIO010
+-	bool "Faraday Technology FTGPIO010 driver"
+-	depends on DM_GPIO
+-	help
+-	   Support for GPIOs on Faraday Technology's FTGPIO010 controller.
+-
+ config ADP5585_GPIO
+ 	bool "ADP5585 GPIO driver"
+ 	depends on DM_GPIO && DM_I2C
+diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+index 83e10c79b918..73c94329e36c 100644
+--- a/drivers/gpio/Makefile
++++ b/drivers/gpio/Makefile
+@@ -77,7 +77,6 @@ obj-$(CONFIG_SL28CPLD_GPIO)	+= sl28cpld-gpio.o
+ obj-$(CONFIG_ADP5588_GPIO)	+= adp5588_gpio.o
+ obj-$(CONFIG_ZYNQMP_GPIO_MODEPIN)	+= zynqmp_gpio_modepin.o
+ obj-$(CONFIG_SLG7XL45106_I2C_GPO)	+= gpio_slg7xl45106.o
+-obj-$(CONFIG_FTGPIO010)		+= ftgpio010.o
+ obj-$(CONFIG_$(PHASE_)ADP5585_GPIO)	+= adp5585_gpio.o
+ obj-$(CONFIG_RZG2L_GPIO)	+= rzg2l-gpio.o
+ obj-$(CONFIG_MPFS_GPIO)	+= mpfs_gpio.o
+diff --git a/drivers/gpio/ftgpio010.c b/drivers/gpio/ftgpio010.c
+deleted file mode 100644
+index 4cb550a540c6..000000000000
+--- a/drivers/gpio/ftgpio010.c
++++ /dev/null
+@@ -1,110 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Faraday Technology's FTGPIO010 controller.
+- */
+-
+-#include <dm.h>
+-#include <asm/io.h>
+-#include <asm/gpio.h>
+-
+-struct ftgpio010_regs {
+-	u32 out;
+-	u32 in;
+-	u32 direction;	// 1 - output
+-	u32 reserved;
+-	u32 set;
+-	u32 clear;
+-};
+-
+-struct ftgpio010_plat {
+-	struct ftgpio010_regs __iomem *regs;
+-};
+-
+-static int ftgpio010_direction_input(struct udevice *dev, unsigned int pin)
+-{
+-	struct ftgpio010_plat *plat = dev_get_plat(dev);
+-	struct ftgpio010_regs *const regs = plat->regs;
+-
+-	clrbits_le32(&regs->direction, 1 << pin);
+-	return 0;
+-}
+-
+-static int ftgpio010_direction_output(struct udevice *dev, unsigned int pin,
+-				      int val)
+-{
+-	struct ftgpio010_plat *plat = dev_get_plat(dev);
+-	struct ftgpio010_regs *const regs = plat->regs;
+-
+-	/* change the data first, then the direction. to avoid glitch */
+-	out_le32(val ? &regs->set : &regs->clear, 1 << pin);
+-	setbits_le32(&regs->direction, 1 << pin);
+-
+-	return 0;
+-}
+-
+-static int ftgpio010_get_value(struct udevice *dev, unsigned int pin)
+-{
+-	struct ftgpio010_plat *plat = dev_get_plat(dev);
+-	struct ftgpio010_regs *const regs = plat->regs;
+-
+-	return in_le32(&regs->in) >> pin & 1;
+-}
+-
+-static int ftgpio010_set_value(struct udevice *dev, unsigned int pin, int val)
+-{
+-	struct ftgpio010_plat *plat = dev_get_plat(dev);
+-	struct ftgpio010_regs *const regs = plat->regs;
+-
+-	out_le32(val ? &regs->set : &regs->clear, 1 << pin);
+-	return 0;
+-}
+-
+-static int ftgpio010_get_function(struct udevice *dev, unsigned int pin)
+-{
+-	struct ftgpio010_plat *plat = dev_get_plat(dev);
+-	struct ftgpio010_regs *const regs = plat->regs;
+-
+-	if (in_le32(&regs->direction) >> pin & 1)
+-		return GPIOF_OUTPUT;
+-	return GPIOF_INPUT;
+-}
+-
+-static int ftgpio010_probe(struct udevice *dev)
+-{
+-	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+-
+-	uc_priv->gpio_count = ofnode_read_u32_default(dev_ofnode(dev),
+-						      "nr-gpios", 32);
+-	return 0;
+-}
+-
+-static int ftgpio010_of_to_plat(struct udevice *dev)
+-{
+-	struct ftgpio010_plat *plat = dev_get_plat(dev);
+-
+-	plat->regs = dev_read_addr_ptr(dev);
+-	return 0;
+-}
+-
+-static const struct dm_gpio_ops ftgpio010_ops = {
+-	.direction_input	= ftgpio010_direction_input,
+-	.direction_output	= ftgpio010_direction_output,
+-	.get_value		= ftgpio010_get_value,
+-	.set_value		= ftgpio010_set_value,
+-	.get_function		= ftgpio010_get_function,
+-};
+-
+-static const struct udevice_id ftgpio010_ids[] = {
+-	{ .compatible = "faraday,ftgpio010" },
+-	{ }
+-};
+-
+-U_BOOT_DRIVER(ftgpio010) = {
+-	.name		= "ftgpio010",
+-	.id		= UCLASS_GPIO,
+-	.of_match	= ftgpio010_ids,
+-	.ops		= &ftgpio010_ops,
+-	.of_to_plat	= ftgpio010_of_to_plat,
+-	.plat_auto	= sizeof(struct ftgpio010_plat),
+-	.probe		= ftgpio010_probe,
+-};
+-- 
+2.43.0
 
-> The recent change to .b4-config resulted in some expected recipients not
-> being added to the address lists. Rework the commands so that all
-> expected recipients are added while maintaining the ordering from the
-> first change.
->=20
-> Fixes: 26efc940c86 ("b4-config: configure `b4` for U-Boot")
->=20
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->  .b4-config | 5 ++---
->  1 file changed, 2 insertions(+), 3 deletions(-)
->=20
-> diff --git a/.b4-config b/.b4-config
-> index 6ba10cf9b50e6acb8a789544d35a13641e6c0411..1f9ada793e652c99854e4d152=
-41734c9b3bfc117 100644
-> --- a/.b4-config
-> +++ b/.b4-config
-> @@ -2,6 +2,5 @@
->  # See https://b4.docs.kernel.org/en/latest/config.html
-> =20
->  [b4]
-> -    send-series-to =3D u-boot@lists.denx.de
-> -    send-auto-to-cmd =3D echo ""
-> -    send-auto-cc-cmd =3D scripts/get_maintainer.pl
-> +    send-auto-to-cmd =3D scripts/get_maintainer.pl --nogit --nogit-fallb=
-ack --nogit-chief-penguins --norolestats --nom
-> +    send-auto-cc-cmd =3D scripts/get_maintainer.pl --nogit-fallback --no=
-git-chief-penguins --norolestats --nol
-
-Ah, oops. I thought it would just default to our .get_maintainer.conf
-defaults, but I think those aren't quite right either at this point.
-Thanks!
-
---=20
-Tom
-
---O6GGy70NmVQetPiM
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaN10AQAKCRAr4qD1Cr/k
-CosQAP90CBH8sVZ5hoi1lr++Lcyh3T6FUHH/B68zeE3HfraaTAD7Bnb6/me0cP7k
-EYsNQhsGMJ5ii5q1UYGxjQXV83dVcg8=
-=aTbq
------END PGP SIGNATURE-----
-
---O6GGy70NmVQetPiM--
