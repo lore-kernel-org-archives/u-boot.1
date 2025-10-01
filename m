@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F669CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDD80CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:32:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65EE08362A;
-	Wed,  1 Oct 2025 22:30:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A92068352B;
+	Wed,  1 Oct 2025 22:30:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fFwRRL0k";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZirAU3DZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E7CF836B4; Wed,  1 Oct 2025 22:30:53 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 7F8B5836B8; Wed,  1 Oct 2025 22:30:55 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6507983666
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62DFC836AC
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7b6ac55cf86so207155a34.1
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:51 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7bc147fd11bso167056a34.3
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759350650; x=1759955450; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=jcy1FEz/iRH95SPMbDr63qSnxFMOV5IT7wEb69da3+8=;
- b=fFwRRL0kaY/QEAtnVzsdvhGXXgI/79EPpsl4YlcQMRexjwuX3uCTDc0emy1e9+PX76
- 96uKDjsMek9Z1196c+9AoBY/SRZmg9Bfo3RE6LkEAWeNefbanWfVo17Y7CfMPH4ftYPa
- 3q9GB/suQzW0T+wVzJoH445tsbulQr6gNo8ns=
+ d=konsulko.com; s=google; t=1759350652; x=1759955452; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EHEoLUf80+8DLp+9bkIRAL198mWiVX9d1lQLsz5q6qw=;
+ b=ZirAU3DZ9MnrLYPzSzQdnczNvQiu6AQS/HZeJo9JW571Cb+rNk8Km3xcqojkEsep8a
+ MT7aLL9S7ecp6sXyxQ7FIk0jcsLh1B1ULkC8IgzNAif7YgzSVORER4lhVEKTJcT1npmX
+ ckLpI9rcl0qE5IZDDGjl2qmGUkWHDSX9+LM2I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759350650; x=1759955450;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jcy1FEz/iRH95SPMbDr63qSnxFMOV5IT7wEb69da3+8=;
- b=wzsm39qxRYjve0IEuiwJeh1+bNrR3tBGsdt4sNeV/e4zc7t7+0CYQmpSnQkl0avVMw
- 5FO5C7ZrStVb3UJejo1apPgtZ6lseh5zpkmbsSx/wXPj4h/+q8JB0Y675dPUETSkGJ+g
- E5/y6qIxBpjhge9+pUPrWasC4B8kjLYPubNQsZXESlDIHkZWxpdMzIjDJQFVsV0UWHqx
- dpMVlkst3hMUxSiwJ8m75Qf/KeEA42m66+ZWjdxzV8VkhpQ+fEM2KrnxmV+FoPTOCc/P
- Cop75Cy1ZqKEgbzVfmPshVyif08wPEVPK2rfZdqvLVX50EUjiEMKa+2/IVz29dQqzxSa
- ShDg==
-X-Gm-Message-State: AOJu0YwQbzn/OE9hplp2tjf/2ermzpilPUyl7nmAjYeMUoU5iUMcFtQj
- hcOTv24ABKU2+4CdKMu78cz5QRO+CulveU8K6w1bUPEvCedpcWxuZqb8VCRj9sfI7NUDOXrIayu
- jbw7sssQ=
-X-Gm-Gg: ASbGncskDa1VCLjyf7sBljaG56UXRD5MmcHphlQb06/gX6SZCRfXQDl4KakqZE8g111
- /PJgR83pT/3Y9pAyEzsDusrD+IJLL+nYHGRjhrlzIoEY4Sn4lyziDWGllNoTrK73eAGlpsx6nz5
- zhKXCikkxyxY/VRgtPilM56w3JqlpMhs0pkWvyNaj802JZU9DBUJT+kLuss/85uhBaLk1EN2Iel
- Tg4CN2GIcrHlCj0AEaiL5n1BPviHq4Vc3JMjtoOCBaokkjnS0X4f4ZASleRwjNM3Sq7zGxy+PtE
- pc8bqyHnPojX1hl/ecIxI/seR49Ha8gymTyiwtBPD4cCZd4Km/J9vOEWK3YVVsJu3k1Kx0a4kvo
- 2vypE5pCPLF+FtqH4uZR0z63YBfZki0koAvz4dIzLCDvv3BAHasVtU2mdDAGYIMFxmnFjGsXDpG
- jm7ald6N+N7wPL74ydtg==
-X-Google-Smtp-Source: AGHT+IGfbbB5MXJcHyQdDj/qXaeKdPRXNqwDdi2KLJDWXZXRllou3kZ8Q+HVPXqtkFxUsyzgTxMtSg==
-X-Received: by 2002:a05:6830:3508:b0:745:a390:8662 with SMTP id
- 46e09a7af769-7bdda569708mr3774160a34.13.1759350650069; 
- Wed, 01 Oct 2025 13:30:50 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759350652; x=1759955452;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EHEoLUf80+8DLp+9bkIRAL198mWiVX9d1lQLsz5q6qw=;
+ b=MBPK77HeDlRs3G0ouyOtoSLUg36w0LT4Hnf6SR8TFwpbuen910L/RrcMqT6vGAlBOE
+ mLo8twSEBbJdrW7nVxZZwIi3MIAwlyHGW3uzwZtozeb9E6Vnma+1qo7qW+TbVlP3mDU9
+ HXkZjowPp7BbiEkQLMs2vT7awb/YpMNVAJ6yDGkj/udJdeTnpjl/JWz94lqfXXGGbtbA
+ ybnQpeMbs5muTsDMiXcnQIQA1YkrFDUWOOXYO2OtxWu8kR85AW6cVtYjWy0lYkGmjPzq
+ WSbOlC+z+4pBJZWNDnrozMyuq4o8FTD+KLRRm4aBJM5OQe2UgUYAhDTO+hHc/FM9FNq4
+ SAXA==
+X-Gm-Message-State: AOJu0Yz8ny659sc18DeMvNgYXeflaarRlBKnMIOt7GU6BsUSFahci0rp
+ LCyNqmWty/kAZSTLSLHBDHp7P2WqMloC8ZTrqB+dbrIWVwQHfczmaY5ETdBPFJjdANmPPV/ztrh
+ Wj4Dqzcg=
+X-Gm-Gg: ASbGncupuC3vIraVLfBtoLqIzFgUSmqp0JPARlMlaVyNyUDevU9cOj1ReljFeeiu57m
+ lwN1E+bDo0btcwqYSj0U6GV0/CGGQ15xZasMQklfc2TAUrE9LyiHtwjwrJPlifiwUpADb+lGOEW
+ 6orPiyFrXr5dCIWiZyCJuxECbcG8b/SE7r7m8PpWcmgkdBZ1soeUPemvKfWOB86EeGZEpRjApWB
+ uApbSfBPBvFbMIJuovJZuD580takIZmCtpkovVU+GqBnLFy2EJlk7nUxBlSEeFyTIfFBBwV5eF2
+ sm/bmrBkqmNdlcqskhGc509jk3J2mv5o6g+RFsDVlr83WcOnmp0oGu1jBmvlDsUoGbqJMzVTdwN
+ Sh1pu44AEYALkdjr70XYKiBfIoUBXIO4tHt8U7Q+yJx4uZihCv/0eOsspwOEzII4r+zw/VOzEfS
+ lxBKEXQ+c=
+X-Google-Smtp-Source: AGHT+IEBiA2gEuKno1NCa+BjPKaoZC25X2RWA+VEzN8oPvvsEhmWEcB/Lg2Sr4oOGTwxKZN6DmUyfQ==
+X-Received: by 2002:a05:6830:631a:b0:7af:353b:95f0 with SMTP id
+ 46e09a7af769-7bddb6029c0mr3029956a34.26.1759350652162; 
+ Wed, 01 Oct 2025 13:30:52 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7bf439d2ccdsm113398a34.35.2025.10.01.13.30.49
- for <u-boot@lists.denx.de>
+ 46e09a7af769-7bf43028c25sm115507a34.19.2025.10.01.13.30.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 13:30:49 -0700 (PDT)
+ Wed, 01 Oct 2025 13:30:51 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] dts: Make xPL_OF_PLATDATA depend on !COMPILE_TEST
-Date: Wed,  1 Oct 2025 14:30:48 -0600
-Message-ID: <20251001203048.2828430-1-trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH] uthreads: Make use of CONFIG_IS_ENABLED consistently
+Date: Wed,  1 Oct 2025 14:30:50 -0600
+Message-ID: <20251001203050.2828452-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,43 +93,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When doing a COMPILE_TEST build it makes more sense to disable this
-feature and test the common path than it does to test the uncommon path
-of [ST]PL_OF_PLATDATA being enabled.
+We do not yet support UTHREADS in xPL phases. However, we have the need
+to dummy out certain functions so that xPL can build when full U-Boot
+has UTHREADS enabled. Update the few places that need to use
+CONFIG_IS_ENABLED so that we have the correct dummy in xPL.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-I thought about this a bit, and one thing is that we do uncover a number
-of drivers today which have partial OF_PLATDATA support but we have even
-more drivers which assume OF_PLATADATA is disabled and then fail to
-compile in xPL. This choice will give us the most overall coverage I
-believe.
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- dts/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/uthread.h | 4 ++--
+ lib/Makefile      | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/dts/Kconfig b/dts/Kconfig
-index 4e2622d48d04..070ffbfef587 100644
---- a/dts/Kconfig
-+++ b/dts/Kconfig
-@@ -455,7 +455,7 @@ config OF_REMOVE_PROPS
+diff --git a/include/uthread.h b/include/uthread.h
+index 11a19aa94882..78dab77f196f 100644
+--- a/include/uthread.h
++++ b/include/uthread.h
+@@ -72,7 +72,7 @@ struct uthread_mutex {
  
- config SPL_OF_PLATDATA
- 	bool "Generate platform data for use in SPL"
--	depends on SPL_OF_CONTROL
-+	depends on SPL_OF_CONTROL && !COMPILE_TEST
- 	select DTOC
- 	select SPL_OF_PLATDATA_DRIVER_RT if !SPL_OF_PLATDATA_INST
- 	help
-@@ -542,7 +542,7 @@ config TPL_OF_REAL
+ #define UTHREAD_MUTEX_INITIALIZER { .state = UTHREAD_MUTEX_UNLOCKED }
  
- config TPL_OF_PLATDATA
- 	bool "Generate platform data for use in TPL"
--	depends on TPL_OF_CONTROL
-+	depends on TPL_OF_CONTROL && !COMPILE_TEST
- 	select DTOC
- 	select TPL_OF_PLATDATA_DRIVER_RT if !TPL_OF_PLATDATA_INST
- 	help
+-#ifdef CONFIG_UTHREAD
++#if CONFIG_IS_ENABLED(UTHREAD)
+ 
+ /**
+  * uthread_create() - Create a uthread object and make it ready for execution
+@@ -184,5 +184,5 @@ static inline bool uthread_grp_done(unsigned int grp_id)
+ #define uthread_mutex_trylock(_mutex) ({ 0 })
+ #define uthread_mutex_unlock(_mutex) ({ 0; })
+ 
+-#endif /* CONFIG_UTHREAD */
++#endif /* CONFIG_IS_ENABLED(UTHREAD) */
+ #endif /* _UTHREAD_H_ */
+diff --git a/lib/Makefile b/lib/Makefile
+index 2643bfc867cb..7a44babffaa7 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -159,7 +159,7 @@ obj-$(CONFIG_LIB_ELF) += elf.o
+ 
+ obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += semihosting.o
+ 
+-obj-$(CONFIG_UTHREAD) += uthread.o
++obj-$(CONFIG_$(PHASE_)UTHREAD) += uthread.o
+ 
+ #
+ # Build a fast OID lookup registry from include/linux/oid_registry.h
 -- 
 2.43.0
 
