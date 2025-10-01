@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45E44CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 13:21:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC6CCCCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 14:03:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 954F883622;
-	Wed,  1 Oct 2025 15:21:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0D00281D6A;
+	Wed,  1 Oct 2025 16:03:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IMskucDj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vq+iw3HL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 239D7800B1; Wed,  1 Oct 2025 15:21:27 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 8798C8328F; Wed,  1 Oct 2025 16:03:35 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FE9883335
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 15:21:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20EDC800B1
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 16:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b07e3a77b72so205515466b.0
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 06:21:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-46e3ea0445fso31841395e9.1
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 07:03:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759324885; x=1759929685; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1759327412; x=1759932212; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1xJ25pFc0SDzRPngGsgKDY5l3KmIw9EOG4qkfORYT2g=;
- b=IMskucDjYLEBhfFL3/xIpIE5ZhhB3a3UgNowYhznSrPM2LdC13loDvDC5ss+6FEWL7
- 828xfowDd+KNg97BAzu/bEFEkEqsPQ4F9M8VbBQg1iQWr5e9Wkpw3HOCoun954yiQVhe
- PS1fL+tc7esIvWHmFg5/IbPsXoz1efNp1PINT+/oVU5KZUdNo6jpJu2wfWXvsGk36gyV
- lljEthCxRCgSSFvw/hi2ifbSEUf7WHdLXt8s0k2JDjS32EdUw9c1nXAntnPYVgMI1BzI
- LjxcbbBan88MimOJ8NThM/kyH4VQoCBdSOM7AV4ryxeK609BVsZgppKemBpbldJK+dSM
- mQRw==
+ bh=Hac0adumesgKXwJM3mJZ8O4PYx4LIa7OwhcFBV6wXtk=;
+ b=vq+iw3HL7GZwynPjc93UqkfCsswQCe7epRyg7jUjymmRxQCeLqXM5vE3yQnp5/r5b8
+ qq8FsaJixNoS+0Iaq32TYULlsGNtz2TWfxYTO5wZNBK3U4YrhCz3Z2kRT94Y+rs1iB8m
+ kOKwfA23Da4+Dm6DIiuH219yPamX4RiUoh0Pp9p5e0d4H/bsTaEmrXZ5c5IXgpCdvsrt
+ kt6Qbd4c9Nu+xLmbKNkuxFsTfbe9fc8UP1AbTD6k2dcDr6FIhNHypG31cDs4WBbwlwUd
+ /3sw4ftqE3hV2IgMMd6UbIhxPnfa7kE6LdDTmaiAzwgPHWtZqsUwVWNCZevbz2Ra+2U7
+ VAjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759324885; x=1759929685;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1xJ25pFc0SDzRPngGsgKDY5l3KmIw9EOG4qkfORYT2g=;
- b=tQ3ac12Ok382wJkkY7gH13/Sk3iTpxlzrENyFqyvB8bMrhtu7JTNxJVRzy4Gw8Ps9c
- UJknK1JseJF4VkkN6+ncof+BpDrSdOr8Itp80dD+h+CNF8v38f0fQZuBJL1opJxjshwY
- fs1MxB7yZi2gUkknE4zn/itVUkfpCC0qyHROOMaCqKUup+OhBM7mPNztQHRozdAMhslN
- tG5HK9huI0/OV7TMB7UIJ0c4/nANlu+q6K7TuBRQhOkl0cled5E/FIEMSyJIuIDcV3TZ
- YHFJKcj6YJoP2MUZwTbMAELDin+edmmalGUI1Aj+eWYqI4VU0NlAwoAfHSTTi30ynJpp
- 86vw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVdnEQ7wSNN9n28L9YCxRiXca9jPBKKipU0HesTpmPX/GCRRp1ocArMSbDtRjtl1VhSn/DP1Gg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7JOZdDBWfSzNqZD/4umnCHSr25N6vsliEgM/XRFj8b/AQBzRW
- p6pZwkR5434BN9gQBrri/kXs7HCbVmnaK8FS96cW8jRUoGi9bLVHrO35
-X-Gm-Gg: ASbGncuDyJ5HLnyEfzmCArJyrUOdUbEMNWIbUzAWmQxFB7pL9xwKogMyGPDo9lmTISv
- R6djOfPqlWjGgYvu+oolxKQYsJPSY3IS3jn2VRN2XSbuE4dOaSRae/es9sotxTQVO7/63d/4ON/
- 8k7bQzYaHBEH42m79OijvglVcK9pEAk3V1iaQvQb2MiDf3UtTSwW18mtZczx/6FvRf3p0nS+40S
- lEkdWcUWTUHIx7w8DF3hHW10u3+w1fIxa3m2v1sfqaM5A5Ki5MOAMxB+JJ9YCk2yQs+gcd14RYz
- cTxgeevfwGEdB94pYgnMsE8ATBn/XjRWP15gSODkXpdo1AdS5FUTovIJJM/GoFme/MIEijt+BWo
- X0ZxeUvdJ8Si1JK85alh/iVaWONI9smsqhJj7Vw+UyqVaAgVLVezMDGv5GjLYNmNGVIQ87fjLLy
- c73dDQnituYfBhegQnqwwmAZJh34rrcWxKamgzH8zlNa9H2Iq4O8cW3pYwTUMngQ==
-X-Google-Smtp-Source: AGHT+IF3KyTFGSBHa9vxav8jeu5dOEBeUwUI8xmu/Elma2n9YcfQIc6vu/huypCUl/w9V/oIaV7hag==
-X-Received: by 2002:a17:906:c155:b0:b07:e258:4629 with SMTP id
- a640c23a62f3a-b4138d53c0cmr1050021766b.16.1759324884426; 
- Wed, 01 Oct 2025 06:21:24 -0700 (PDT)
-Received: from emanuele-nb.corp.toradex.com
- (248.201.173.83.static.wline.lns.sme.cust.swisscom.ch. [83.173.201.248])
+ d=1e100.net; s=20230601; t=1759327412; x=1759932212;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Hac0adumesgKXwJM3mJZ8O4PYx4LIa7OwhcFBV6wXtk=;
+ b=CyX492mktqMJu9I3wpjm45/ANw5+YvmmuGpOE+HDHVf4ajFkueotXVWCYBiKLgkHvk
+ lwREQmaaKhix5lsGgBmlSlidkCoWcJVce1oovokQZ6dggumVL8IjLUEoP3nxqe3DlkU+
+ we0f3TDyCv/OKCjKodhdQ7nZKdn5FvMD2EYhbwuPbCFIQa/bHVmJkT+20JC/DuNKoGzW
+ ev8779gv70qwSxZxZ9tr32sBuVbRDGBJdbsdCG44wdzkkK421kLv++syvX9PIDEKvbY7
+ XWjaEppMC64TSV1S+kG4uO6vKS1QlcthDoRzURFE/xt0yJqr2ekuhn2WCgZD+yAqX8vI
+ acXg==
+X-Gm-Message-State: AOJu0Yw5Xfv3qXdkSFZseTt/IHlpQ+yG/zkdTy0kHgZo+aWpfu0yBsnq
+ D6lWe4/9ljRIGFSr0lWaxxV4DEP2LlsgzMU/Z0upIxR+GUx0ty3/+/uuvlnkZrL21vU=
+X-Gm-Gg: ASbGnctESQlwGTpyY7ut4oZgU/4d4yBK8esyxSlO7khox97E0/aGCw5zZ9gjxJA2E8G
+ cOl9NZVnOxeA4xaRtTBq8xAdegFpTKZlkn3BvdJl5Ydh27JIGDM1M/ictTkEbHMf6zwpv5CIBfy
+ kD7Ri45UjMqiFhcJ4+GHd+qTI5513ZUbJ/P3yRYsVaTD1MgqcXFtn33dICD5+Zw48kotoskV17I
+ QwUaciBFQcDnnW8twWTHUsQpwu0fxNjZWoSk6JIc/l6G8WMt1S+7fbfGVsh7I12NDwY8B0WJHjt
+ KX0MZnzdF72qJz5dSMKiK7RSbzKs4r1RZaubPyh3ltogRSqr/LTKLZah0P/Rsxdy7WvqSjyU6Ci
+ KWpRvmYvErdCqAdYkKZTur/wcTRv3Imnk2vUqAot8larFh8L7AaxKhqJTEQfVZG3d6i3gAxXxaY
+ VWAnNQew7+H192eykr7Lz9ApKkDw==
+X-Google-Smtp-Source: AGHT+IGSyaBRJwDR6YoQ7mi0PcTE1No/MwsYse0Zm4PMn8EpiODjygNiQXrdHFh6/bC6pzyklHLOhg==
+X-Received: by 2002:a05:600c:8b37:b0:46e:4329:a4d1 with SMTP id
+ 5b1f17b1804b1-46e61202280mr34403145e9.4.1759327412522; 
+ Wed, 01 Oct 2025 07:03:32 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:ebd:e301:2e91:499c:12aa:e25c?
+ ([2a0a:ef40:ebd:e301:2e91:499c:12aa:e25c])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b401d3d4124sm566956766b.75.2025.10.01.06.21.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 06:21:24 -0700 (PDT)
-From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1 4/4] configs: toradex-smarc-imx8mp: enable USB Gadget OS
- Descriptors for fastboot
-Date: Wed,  1 Oct 2025 15:21:07 +0200
-Message-ID: <20251001132111.1490516-5-ghidoliemanuele@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251001132111.1490516-1-ghidoliemanuele@gmail.com>
-References: <20251001132111.1490516-1-ghidoliemanuele@gmail.com>
+ 5b1f17b1804b1-46e5b5e4922sm36273895e9.1.2025.10.01.07.03.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 01 Oct 2025 07:03:31 -0700 (PDT)
+Message-ID: <21c8099e-a2ba-4361-9351-221e10deae80@linaro.org>
+Date: Wed, 1 Oct 2025 15:03:31 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Content-Language: en-GB
+To: Anatolij Gustschin <ag.dev.uboot@gmail.com>,
+ Michal Simek <michal.simek@amd.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+Subject: Smatch reports for zynqmp video driver
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,28 +100,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Smatch reports the following two issues
 
-USB OS Descriptors are used to install and configure the device without
-requiring any user interaction on OS which support them (e.g. Windows).
-Enable them in order to improve the user experience when fastboot is used.
+drivers/video/zynqmp/zynqmp_dpsub.c:271 config_gfx_pipeline() error: 
+uninitialized symbol 'offset_matrix'.
+drivers/video/zynqmp/zynqmp_dpsub.c:277 config_gfx_pipeline() error: 
+uninitialized symbol 'csc_matrix'.
 
-Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
----
- configs/toradex-smarc-imx8mp_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Looking at the code, offset_matrix and csc_matrix are only initialised 
+if video->is_rgb is true. It looks almost as if the code for 
+video->is_rgb being false was never written. So I am not sure of the 
+correct fix for this.
 
-diff --git a/configs/toradex-smarc-imx8mp_defconfig b/configs/toradex-smarc-imx8mp_defconfig
-index f8a984f1e6b7..311ceaae4363 100644
---- a/configs/toradex-smarc-imx8mp_defconfig
-+++ b/configs/toradex-smarc-imx8mp_defconfig
-@@ -178,5 +178,6 @@ CONFIG_USB_GADGET=y
- CONFIG_USB_GADGET_MANUFACTURER="Toradex"
- CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
- CONFIG_USB_GADGET_PRODUCT_NUM=0x4000
-+CONFIG_USB_GADGET_OS_DESCRIPTORS=y
- CONFIG_IMX_WATCHDOG=y
- CONFIG_HEXDUMP=y
--- 
-2.43.0
-
+Andrew
