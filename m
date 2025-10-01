@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 349A8CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C23ACCA470
+	for <u-boot@archiver.kernel.org>; Wed,  1 Oct 2025 20:31:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED3F2835B9;
-	Wed,  1 Oct 2025 22:30:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3CAD6835CB;
+	Wed,  1 Oct 2025 22:30:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TbIIfneQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sYu7J0DY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31809835B3; Wed,  1 Oct 2025 22:30:39 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 0CF9C835B0; Wed,  1 Oct 2025 22:30:41 +0200 (CEST)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 171878352B
- for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96EC5835B0
+ for <u-boot@lists.denx.de>; Wed,  1 Oct 2025 22:30:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-30ccec59b4bso274738fac.3
- for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:37 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-30ccec928f6so144228fac.3
+ for <u-boot@lists.denx.de>; Wed, 01 Oct 2025 13:30:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759350636; x=1759955436; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759350637; x=1759955437; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=FeSxMEP7mxhib9KxWd4T+b546VVKOXTT++yQ1rU8Ewc=;
- b=TbIIfneQ4NBvnv1zqzAcxAk/GehDbJ3MjOex5uJGba9D/399YrzGBx0SZMEAqO+Rz6
- WQRN2P+R36/7qyo8YPhSsl/jF0N2SC4s+2L6mMkYqX7h9M+q/IYECHb3nYHklYzMvz5K
- qHWWt53JP+yUq0sUxVo4cGx023lvaZffVlUQI=
+ bh=eigfywbsjv7V8zDXlrWKAiMRu8fjZX4YIuz990JOMZ0=;
+ b=sYu7J0DYSpXuqLI3yPwtLiR74X3AVzLXG+EkmrMyKClGSZrd4vulhLaAtY242PN6WN
+ O4aGFwhAau7DPEE9GXUYLi/1gfDDlJizBqCVSwxZNjKdSmssTZ1X0c3VXVlB7igM1oO4
+ 27r31Q0rQr4fhwCbD0ETqLGAqTZtCxyxe3FSc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759350636; x=1759955436;
+ d=1e100.net; s=20230601; t=1759350637; x=1759955437;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FeSxMEP7mxhib9KxWd4T+b546VVKOXTT++yQ1rU8Ewc=;
- b=kUDGJ6aDuR+Bzx4PG8n6e4/g6mtmeQg3X3wxihp1aau1Z1fI9bAValk4kJ59Qln4Qk
- 6r8LtYJCJc53SKOPG/qPUyKE9TgnQ0aqDmgX0FziuCoNa1qVm5lqwU3W6vQ8Y80UEhAW
- 4feiZZhRaQkhG4qf414F8VfQ3ZkLNfDUaj6c0FeGd1pGZmC4lZYXcW8JFO2HcxzxnJG+
- rQVkRzi0OnSCY2fN0dh0m/2ChZVCcL2grq/kcR0l+qOOGLss6u9qX5Zak032CoDGOahf
- l0AS0lhX/O4AWW8keECNz4ziidyEY+ttEgYpuItYdfB+cTRS+OBS77c+HF8ifPYDdiGF
- mcXA==
-X-Gm-Message-State: AOJu0Yxv+q4CouHfTS/+BKtyZSf9Les1oencfT0IFAR1N4dWfGeC/03H
- +bAR9yJFna684cOJPK2rrD4zMLr6qpkn2NQCE/1Zvuquj94g01Mf/HV9JuzQDD4gTU/4ghuAeGA
- r7gPBZuM=
-X-Gm-Gg: ASbGnctinihWs5JyL0kt69y6T7JtbvAQpeaYvk8IMbtqlL5cUI8uEjgpFjzzO/zF06k
- T7MpHhgtpVqskIpdjnRn38srEdiYXyB/DJGjwz3AuWukeu0TBX7H9awp2z6RHGkl6g9qis+igG6
- EJ4bN9khfMa78A3RiIEAzk8+7i5Qxskv9v5/Z6ObZeEdFvpPYT7qbRPjJsL+xGk+tr6B8qANmYB
- CfVSPhZRCYrsjV/Lbf19bXVfgy2qCZCk4OalDO38gq1blosN4EQSU8GGbvzzHB2cwp6eegZqPDS
- ECcdTzJg8NEDMwHAsDBh9mdlqcI6NBCITF3tTqr4CeMEJcJ85YYjH+TLWw2Vkk+gg8b3k+0aRJ1
- GqJ3/gkjayg1MwRjNQsxvZd4MMqywf9EXuU9DfatG/cuINdcJjKn5WSRB+DeOBJP5qtC897U+QX
- NWhxTfdmg=
-X-Google-Smtp-Source: AGHT+IFL259htPUX++m2mgSOYp5tz3UeXOVOYq5Q72kEid5uBwtxXPtjeHSxAWTUhYwV89bc7mnaUg==
-X-Received: by 2002:a05:6871:808:b0:332:fc:dadc with SMTP id
- 586e51a60fabf-39bb0a0b4a8mr3445088fac.27.1759350635685; 
- Wed, 01 Oct 2025 13:30:35 -0700 (PDT)
+ bh=eigfywbsjv7V8zDXlrWKAiMRu8fjZX4YIuz990JOMZ0=;
+ b=rLOEDubNVvnaQKftjCqpkZRNwu3LshKkvfa4NPFLWfVEqOPcdgcOhmukUDRE5/vNfk
+ YRd8WsPA83Dmby+2Oh5d1r+3FplQFxG+mUq9s+MCuXzyqWCufG4Y4sFmIkwLOubml0U7
+ d5zkHhwlg3DYPvhKGIWi7JY4ngNRySlcnm415YshCveoGu4reasZwEWGBldhmzlCerLI
+ l6tDojxl9ede8wKlcdyBLRBw2a7zLvSOiy3acuWoLY6lXrv2Ev77C6EykmjADkU5VjiG
+ AhQEM7m5SX8j10yHyZotHUqMDkT42a9W5Sh12Qz0EeWxVY0SbU5aqD701oMNuWbQJ86e
+ Qnig==
+X-Gm-Message-State: AOJu0Ywyv439edgkhtAQai2Vl2F5mH9maW3NJqdO28C2Mzz6AXj9013U
+ QWS3nUKwoUzcQoKBoqR6YaaYULt3o+3XZf615mhR76JZf0Jd35dQpA1hVVwX7NRQH5aI7XCsZK+
+ UP++u2qE=
+X-Gm-Gg: ASbGncsZ93b68ygSL1iiSsFVrJEAYB4tajn1wnX3TmKrkxIvsK5v62hVYDMpu5xajWc
+ DtsAmNzL1qRdIiraotWdPjjB6nDKDEGV3jtWTgeKIIQaj0zGdNIxk3t7hzqFuUgnQ4fKyUjzyC6
+ ed0wUl+XYUmQFTpDtLZVUUiNQhDDa+QkdRaCcsFnenCtW6YR9LnwG2oA8vVs5w98ebYTwV98mxi
+ aEhE1O4EinrZGLv1BCs+slIq0iEhHIWoGsAKG2Hh3uRHBtatzfiJp2t+krcndkeGGSsRQHhjQlK
+ 30ufzLr0g0vHgaK/VWm7iKRpbTVsBxpA4rhgs5g5iHwGWIRh86z0atRaPh+JwLD63u7OS0hTUBH
+ 0gT39JMuNe42ggYT2Ejdz93nQjnoNpptX/4DhEcWDpyxYCLC2rmgE5ddHd5HEslhQ4jCNzIkhKn
+ hYLAG01wXrhsxmBSoRnQ==
+X-Google-Smtp-Source: AGHT+IGoluuLQ8CH5QkU3XphQC7XFkU1p68Yu+dnz7VcOVhrM5m7liJxDNmesx4mg5OgrU+gXyndFA==
+X-Received: by 2002:a05:6871:5825:b0:348:5d07:211e with SMTP id
+ 586e51a60fabf-39bb8449e2cmr3077799fac.44.1759350637333; 
+ Wed, 01 Oct 2025 13:30:37 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-97-42.totalplay.net.
  [189.203.97.42]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab930c8e7esm214035fac.24.2025.10.01.13.30.34
+ 586e51a60fabf-3ab913db079sm215417fac.20.2025.10.01.13.30.36
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Oct 2025 13:30:35 -0700 (PDT)
+ Wed, 01 Oct 2025 13:30:36 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] sandbox: Expand the BOOT_DEVICE enum
-Date: Wed,  1 Oct 2025 14:30:34 -0600
-Message-ID: <20251001203034.2828228-1-trini@konsulko.com>
+Subject: [PATCH] sandbox: Rework readX/writeX macros to be more like ARM
+Date: Wed,  1 Oct 2025 14:30:35 -0600
+Message-ID: <20251001203035.2828243-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,51 +92,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are many more BOOT_DEVICE values that need to be set in order for
-allyesconfig to build, so add missing ones here.
+The way that the current readX/writeX macros are implemented on sandbox
+means that when IO_TRACE is not enabled some code will throw up
+incorrect warnings due to how sandbox_{read,write} is implemented. We
+instead need to do the "uX __v; __v = sandbox..(..v); __v;" trick that
+ARM does.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/sandbox/include/asm/spl.h | 19 ++++++++++++++++---
- 1 file changed, 16 insertions(+), 3 deletions(-)
+ arch/sandbox/include/asm/io.h | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
-index d824b2123a25..df773a5e74ae 100644
---- a/arch/sandbox/include/asm/spl.h
-+++ b/arch/sandbox/include/asm/spl.h
-@@ -9,16 +9,29 @@
- struct spl_image_info;
+diff --git a/arch/sandbox/include/asm/io.h b/arch/sandbox/include/asm/io.h
+index cd3f5d6fd401..e3034b9c7032 100644
+--- a/arch/sandbox/include/asm/io.h
++++ b/arch/sandbox/include/asm/io.h
+@@ -44,17 +44,17 @@ phys_addr_t map_to_sysmem(const void *ptr);
+ unsigned long sandbox_read(const void *addr, enum sandboxio_size_t size);
+ void sandbox_write(void *addr, unsigned int val, enum sandboxio_size_t size);
  
- enum {
-+	BOOT_DEVICE_RAM,
- 	BOOT_DEVICE_MMC1,
- 	BOOT_DEVICE_MMC2,
- 	BOOT_DEVICE_MMC2_2,
-+	BOOT_DEVICE_NAND,
-+	BOOT_DEVICE_ONENAND,
-+	BOOT_DEVICE_NOR,
-+	BOOT_DEVICE_UART,
-+	BOOT_DEVICE_SPI,
-+	BOOT_DEVICE_USB,
-+	BOOT_DEVICE_USBETH,
-+	BOOT_DEVICE_SATA,
-+	BOOT_DEVICE_NVME,
-+	BOOT_DEVICE_I2C,
- 	BOOT_DEVICE_BOARD,
-+	BOOT_DEVICE_DFU,
-+	BOOT_DEVICE_XIP,
-+	BOOT_DEVICE_BOOTROM,
-+	BOOT_DEVICE_SMH,
- 	BOOT_DEVICE_VBE,
- 	BOOT_DEVICE_CPGMAC,
--	BOOT_DEVICE_NOR,
--	BOOT_DEVICE_SPI,
--	BOOT_DEVICE_NAND,
- 	BOOT_DEVICE_UPL,
-+	BOOT_DEVICE_NONE
- };
+-#define readb(addr) sandbox_read((const void *)addr, SB_SIZE_8)
+-#define readw(addr) sandbox_read((const void *)addr, SB_SIZE_16)
+-#define readl(addr) sandbox_read((const void *)addr, SB_SIZE_32)
++#define readb(addr) ({ u8 __v = sandbox_read((const void *)addr, SB_SIZE_8); __v; })
++#define readw(addr) ({ u16 __v = sandbox_read((const void *)addr, SB_SIZE_16); __v; })
++#define readl(addr) ({ u32 __v = sandbox_read((const void *)addr, SB_SIZE_32); __v; })
+ #ifdef CONFIG_64BIT
+-#define readq(addr) sandbox_read((const void *)addr, SB_SIZE_64)
++#define readq(addr) ({ u64 __v = sandbox_read((const void *)addr, SB_SIZE_64); __v; })
+ #endif
+-#define writeb(v, addr) sandbox_write((void *)addr, v, SB_SIZE_8)
+-#define writew(v, addr) sandbox_write((void *)addr, v, SB_SIZE_16)
+-#define writel(v, addr) sandbox_write((void *)addr, v, SB_SIZE_32)
++#define writeb(v, addr) ({ u8 __v = v; sandbox_write((void *)addr, __v, SB_SIZE_8); __v; })
++#define writew(v, addr) ({ u16 __v = v; sandbox_write((void *)addr, __v, SB_SIZE_16); __v; })
++#define writel(v, addr) ({ u32 __v = v; sandbox_write((void *)addr, __v, SB_SIZE_32); __v; })
+ #ifdef CONFIG_64BIT
+-#define writeq(v, addr) sandbox_write((void *)addr, v, SB_SIZE_64)
++#define writeq(v, addr) ({ u64 __v = v; sandbox_write((void *)addr, __v, SB_SIZE_64); __v; })
+ #endif
  
- /**
+ #define readb_relaxed			readb
 -- 
 2.43.0
 
