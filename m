@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A7A6CAC5B8
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 10:45:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B90CAC5B8
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 10:46:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B3D0831D3;
+	by phobos.denx.de (Postfix) with ESMTP id 9E3C9835C6;
 	Thu,  2 Oct 2025 12:45:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="iJxTx1cJ";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="E6/iMyCa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FD5B835B0; Thu,  2 Oct 2025 12:45:47 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 13E36831D3; Thu,  2 Oct 2025 12:45:48 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73342831D3
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 12:45:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4964781D6A
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 12:45:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-46e3cdc1a6aso5657375e9.1
- for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 03:45:44 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-46e3cdc1a6aso5657535e9.1
+ for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 03:45:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1759401944; x=1760006744;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1759401945; x=1760006745;
  darn=lists.denx.de; 
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Oc+0PLraCiyS3r29+ySmeIezhiOZFWn+aBbO95K+0Bo=;
- b=iJxTx1cJiYKM/Jq5KtaC5foF+kp5LdVN3m8YzybRyLhBLR//fxsbGcsM5o3/AkxTzD
- +d1LAjTi19YBp8TWT3VSS2CRSJ47XVwCVAIKaBbD8u2oA5U06F4dK/gv/pKbj9injPbd
- xTVzXE3H8IteVOQQRaaYBORD4HQpc+yQ83LQQUUAknaLlCBntl8LRN2mAI38IG1i0TVG
- Gr7lxn3uw7K20mnWBndSYlHXMT21OuVMb1Zc5LViDbf0sf7uJIhYDusiiqmLCjmrn4mh
- NFtCAFj90OTsD+lFSpVkw2nnJ0WQ9pkTHrwZVkpkYKbcCprP+AdlBLb7Rt0+jg4IjOiB
- MtSw==
+ :reply-to; bh=0yjbf/fcWZzvyzidpnpKO0xCWkzZXB5MUdjb0ejgwTM=;
+ b=E6/iMyCaQ624nDc+cv1x+juPz0QqOFO/s1EijU3uDUb4pWkqL9YPc98cl4GvwD/6Zo
+ tijxtl0JYEXLHVEZWXXbtE3f5pQmjf48gQMfMFPgWJ9j3BF3dpYshWryhqK/CVsPMok9
+ 6hBOn7stuGApjqMmFCI3KCbcEH4xatoE5YDHRU6aXQ+Saj/FoA7OKiE/LbdtSJFLOeAS
+ IrC+k5ydYFy7G9icAHNF4RcSZ/NjnfoM0WuGXeID1Cr0GF6+1ftkVbbow5vPlmxaOs/k
+ OYkAHxv6zNKS9LVniLfmjClU+9c7psXoJxrqdSCRdY45nkL0heyE/5UTXj5n59ZSJCLW
+ cM5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759401944; x=1760006744;
+ d=1e100.net; s=20230601; t=1759401945; x=1760006745;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Oc+0PLraCiyS3r29+ySmeIezhiOZFWn+aBbO95K+0Bo=;
- b=wHNQwlrzL07TjRXXDesz/Nrv7nOq1RN8r5+Q4yjAiu0E4CAxiR1F7807wBvugNezgv
- 2McEVyyVJTABPP+iG61IXt0gM1Y+p/voYjtNHx085MuS3s6l20VBYbEJ9pVPv3zjsGJq
- Ca5ju40EfYP+epA9YKixuTdzyrDfoME6A8P9S//AwnBi5PfakxGQCguub8CAhoYnEo+/
- /H4kK35dGeNT91kN63lb06IhDYaiYI/h+TCoCqd0XFh/1j4Ypai4OHq/TsM7Xh+vekhL
- 5oK8JLPCFmBnxvvCv2EdVUMEEHPLLGz8lyPcaMGzZKYWXBZJNTs/HV0Hr7RDhz/Cd8ca
- yH6g==
+ bh=0yjbf/fcWZzvyzidpnpKO0xCWkzZXB5MUdjb0ejgwTM=;
+ b=DIrRe7Dj2OrQVrqypp7VQCLdgK+MDBIMZsD2pIkSSUiSqy+QDJ7wpttyVy+dgfBmGS
+ 1sa65zpUDGdcFhEXdqa85LAftWEdfNIOUTf3I80UB/IApxBOJmsa8N63BL9T6TXEgLRg
+ QQtDlyucVHVvJeV9r1EA3BKOZlth7cJobb1deUyN5RVwlvlNagCqj7nkKJq+Igr8eZiJ
+ JUHdUf7lCDoSJSaCpKWzp9eHHjD/sqIbzj8ku8M8SVUJs441obdgFYY/M8rTtW91wVNC
+ R6WvY7QD4Wq/2uCJHReys5P0uJ9KwTTbqoSZ299J7FPrlC3DyyvUKEV39jG87SzruAzn
+ 6OkA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUN2KJkW0tFYpn59yroIRn/OVMuUywhMz0tovER6q5Gnx4OREi51x2dSsa+Q6w3lXd/Lw1H/oo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtbmRmyJaiQZtI8GMtE0DhOToUw+jZQkCZNP+HlfOg3xtW5mx1
- S/yB78hv8eR5psEjJoc9gJeJnyMi8j/VyXVCO3bcU+9JAmw6OiGx8vLQnPIpMmxxXnA=
-X-Gm-Gg: ASbGncuFNm0nJNkbapSOwZn+SDUDDrIw0YesHqTMMhnVVVQg+ViUdU9kVVmTrmcDGA3
- QJf1DBVN2SCj/dsCboDWlzJiIzyGRKimj1vZ9B/rjCuYCERenru0XXnOcWivGW1xOGL2xkcft32
- uG7PPhd4E+XNeQC9kZfWjpeWvGt/qn43uPlaGQVie9oOLZ9vuM6qhbCOTqkFmJ2TzP7OFh6cPq0
- 64mX00/bHMEBlBc7//Nhpe/xfgURAXn2iHkxOnAzV07WOKnx8nYtMRBjtsAxlw0aKHdJvEwRHhX
- sEqRhxRLWIj8fOGKX6vIxf4KjLb+KeqD/czHPCzB3YfbDQstkchLaeo8L4O8gAPsLE9wteBLvai
- Td/9d9dtEl06AqeXd/vss5TCJcsajLD7JUf8AjldqEDfO+tZoLA==
-X-Google-Smtp-Source: AGHT+IG6OcQQKiUpe9INBOmYRPSexAK1cKRTw6yVNar9iYiprsMkrTnMKhr5hyO7r9XuRBt0hQNjVg==
-X-Received: by 2002:a05:600c:254:b0:45d:d86b:b386 with SMTP id
- 5b1f17b1804b1-46e68c006c2mr18189115e9.14.1759401943609; 
- Thu, 02 Oct 2025 03:45:43 -0700 (PDT)
+ AJvYcCWOP5+U6SS9hubpA+HyglXD/SkmAxip7GTcvvUyC7/cKeuwBYRNN9K2lxp0ciAZHA2z99xSclM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwWc+a8ckJzFQNImo5RDKi+ReJdc8bzam6HWAzpoR2OKTIqYzRa
+ 8Gpz9vxerjpaV5fAjdPgyF5a3ySrC2p3WrcSsYNUx9xU/D1/wZa1+hZpK5bzz8TN9WXtFjuFB6Q
+ /RUTD6x4=
+X-Gm-Gg: ASbGncsl59s1Bf0ebS15MU0S9aCzUlmTyyom92Th7v2QWFLhOqdWMz2CTTy3fSvVIWc
+ 8FeeUO5aNcRyS2Fmrv57YMRrVvCUDtmqvmd1eib5C1B1UNqSgYxMhIcw5UII5/klaSFIbBkwtHr
+ iGdv+WacMdm0ivuCB362mbDV4yHCE2YkMHb0VJ9Zwg54B1fMVbYHH62PdmH33k8PTj1saZVaM5N
+ WVFp+EitNJTnPa6o8c3bMDNJNADy+DXenvGnUYQD/IFkibn4FUvEd1py8Vn1IybVFuOnNE+pIDR
+ tuGA5wIF12RL5zkQ63lF0lAlndA8e1xTkF5N3431feS247X6CxHjo79BjMmfJP91HDlWCm8hA/d
+ yJRczBTZLXlOCxa+kEYkGktCqlj/cqMeBrxG3vKlTtAYQ0ANY2w==
+X-Google-Smtp-Source: AGHT+IHfXjyzGJGuUl9JX5pAEi/EhLAEvNuzhPqrxEMfHzmBSODl8QfbQ7rqlal+3rzGgOiJH0C0NA==
+X-Received: by 2002:a05:600c:3b16:b0:45b:8ac2:9761 with SMTP id
+ 5b1f17b1804b1-46e68be325cmr20596335e9.13.1759401944444; 
+ Thu, 02 Oct 2025 03:45:44 -0700 (PDT)
 Received: from [127.0.1.1] ([2a01:e0a:e50:3860:51a7:9db7:1d49:a8ae])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8a6bbesm3081583f8f.12.2025.10.02.03.45.42
+ ffacd0b85a97d-4255d8a6bbesm3081583f8f.12.2025.10.02.03.45.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Oct 2025 03:45:42 -0700 (PDT)
+ Thu, 02 Oct 2025 03:45:44 -0700 (PDT)
 From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Date: Thu, 02 Oct 2025 12:45:34 +0200
-Subject: [PATCH tiU25.01  1/2] PENDING: fastboot: Implement Android
- bootloader locking with CONFIG_FASTBOOT_LOCKING
+Date: Thu, 02 Oct 2025 12:45:35 +0200
+Subject: [PATCH tiU25.01  2/2] PENDING: avb: Add automatic Root of Trust
+ integration for Android KeyMint
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251002-avb-v1-1-1f93543822ce@baylibre.com>
+Message-Id: <20251002-avb-v1-2-1f93543822ce@baylibre.com>
 References: <20251002-avb-v1-0-1f93543822ce@baylibre.com>
 In-Reply-To: <20251002-avb-v1-0-1f93543822ce@baylibre.com>
 To: linux-patch-review@list.ti.com, praneeth@ti.com, u-boot@lists.denx.de
@@ -102,919 +103,927 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add comprehensive Android Verified Boot security implementation with:
-- New CONFIG_FASTBOOT_LOCKING config option to enable/disable features
-- fastboot flashing lock/unlock commands with user confirmation
-- fastboot flashing lock_critical/unlock_critical for critical partitions
-- fastboot flashing get_unlock_ability command for unlock ability status
-- Device lock state verification before flash/erase operations
-- Critical partition protection (bootloader, radio, tiboot3, tispl, u-boot, etc.)
-- getvar support for unlocked, unlock_ability, and critical_unlocked states
-- Environment variable storage for lock states with graceful fallbacks
-- User confirmation prompts for unlock operations with safety warnings
+Implement automatic collection and storage of Root of Trust data during
+AVB verification for Android KeyMint attestation support.
 
-This implementation uses environment variables instead of OPTEE TA AVB:
-- device_unlocked: "1" if unlocked, "0" if locked
-- critical_unlocked: "1" if critical partitions unlocked, "0" if locked
-- fastboot.unlock_ability: "1" if unlock allowed, "0" if not
+Key features:
+- Automatic Root of Trust storage triggered by avb_slot_verify() calls
+- Integration in both AVB commands and Android bootloader flows
+- Enhanced device lock state detection with multiple fallback methods
+- Optimized public key handling with SHA-256 hashing for large keys
+- Comprehensive boot state mapping (GREEN/YELLOW/ORANGE/RED)
+- Secure storage via AVB TA in OP-TEE persistent storage
 
-When CONFIG_FASTBOOT_LOCKING is disabled, all locking functions return
-appropriate stub responses and devices behave as unlocked.
+Changes:
+- Add avb_store_root_of_trust_from_verification() with enhanced error handling
+- Integrate automatic storage in cmd/avb.c and boot/bootmeth_android.c
+- Add CONFIG_AVB_ROOT_OF_TRUST and CONFIG_CMD_AVB_ROT Kconfig options
+- Include avb_rot debug commands for testing and validation
+- Update AM62x Android configuration with proper dependencies
 
-This follows Android specification requirements for bootloader security
-and provides proper protection against unauthorized partition modifications
-on locked devices without requiring OPTEE TA AVB dependency.
+The Root of Trust data includes verified boot key, device lock state,
+verified boot state, boot image hash, and timestamp, enabling Android
+KeyMint to provide hardware-backed key attestation.
 
 Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 ---
- common/avb_verify.c           | 183 ++++++++++++++++-
- drivers/fastboot/Kconfig      |  21 ++
- drivers/fastboot/fb_command.c | 450 ++++++++++++++++++++++++++++++++++++++++++
- drivers/fastboot/fb_getvar.c  |  68 +++++++
- include/avb_verify.h          |   9 +
- include/fastboot.h            |   5 +
- 6 files changed, 729 insertions(+), 7 deletions(-)
+ boot/bootmeth_android.c     |  15 ++
+ cmd/Kconfig                 |  13 ++
+ cmd/Makefile                |   1 +
+ cmd/avb.c                   |  13 ++
+ cmd/cmd_avb_rot.c           | 129 +++++++++++
+ include/avb_root_of_trust.h |  50 +++++
+ lib/Kconfig                 |  18 ++
+ lib/Makefile                |   1 +
+ lib/avb_root_of_trust.c     | 534 ++++++++++++++++++++++++++++++++++++++++++++
+ 9 files changed, 774 insertions(+)
 
-diff --git a/common/avb_verify.c b/common/avb_verify.c
-index 29a3272579cf..48a73a630812 100644
---- a/common/avb_verify.c
-+++ b/common/avb_verify.c
-@@ -6,6 +6,7 @@
+diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+index 8c2bde10e171..ecb3c1e2ea12 100644
+--- a/boot/bootmeth_android.c
++++ b/boot/bootmeth_android.c
+@@ -11,6 +11,7 @@
+ #include <android_image.h>
+ #if CONFIG_IS_ENABLED(AVB_VERIFY)
  #include <avb_verify.h>
++#include <avb_root_of_trust.h>
+ #endif
+ #include <bcb.h>
  #include <blk.h>
- #include <cpu_func.h>
-+#include <env.h>
- #include <image.h>
- #include <malloc.h>
- #include <part.h>
-@@ -819,23 +820,191 @@ static AvbIOResult write_rollback_index(AvbOps *ops,
-  */
- static AvbIOResult read_is_device_unlocked(AvbOps *ops, bool *out_is_unlocked)
- {
--#ifndef CONFIG_OPTEE_TA_AVB
--	/* For now we always return that the device is unlocked. */
--	debug("%s: device locking is not implemented\n", __func__);
-+#if defined(CONFIG_OPTEE_TA_AVB) && defined(CONFIG_FASTBOOT_LOCKING)
-+	/* Use AVB TA when both TA_AVB and fastboot locking are enabled */
-+	AvbIOResult rc;
-+	struct tee_param param = { .attr = TEE_PARAM_ATTR_TYPE_VALUE_OUTPUT };
-+
-+	debug("%s: reading device lock state via AVB TA\n", __func__);
-+	rc = invoke_func(ops->user_data, TA_AVB_CMD_READ_LOCK_STATE, 1, &param);
-+	if (rc) {
-+		debug("%s: AVB TA failed (rc=%d), falling back to environment\n", __func__, rc);
-+		goto fallback_env;
-+	}
-+	*out_is_unlocked = !param.u.value.a;
-+	debug("%s: AVB TA returned lock_state=%llu (unlocked=%d)\n",
-+	      __func__, (unsigned long long)param.u.value.a, *out_is_unlocked);
-+	return AVB_IO_RESULT_OK;
+@@ -451,6 +452,18 @@ static int run_avb_verification(struct bootflow *bflow)
+ 				 AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
+ 				 &out_data);
  
-+fallback_env:
-+#endif
-+#ifdef CONFIG_FASTBOOT_LOCKING
-+	/* Use environment variable when fastboot locking is enabled */
-+	char *device_unlocked = env_get("device_unlocked");
-+
-+	debug("%s: reading device lock state via environment\n", __func__);
-+	*out_is_unlocked = (device_unlocked && !strcmp(device_unlocked, "1"));
-+	debug("%s: environment device_unlocked=%s (unlocked=%d)\n", __func__,
-+	      device_unlocked ? device_unlocked : "NULL", *out_is_unlocked);
-+	return AVB_IO_RESULT_OK;
-+#else
-+	/* For systems without fastboot locking, always return unlocked */
-+	debug("%s: device locking is not implemented, returning unlocked\n", __func__);
- 	*out_is_unlocked = true;
-+	return AVB_IO_RESULT_OK;
-+#endif
-+}
- 
-+/**
-+ * write_is_device_unlocked() - sets whether the device is unlocked
-+ *
-+ * @ops: contains AVB ops handlers
-+ * @is_unlocked: device unlock state to set, true if unlocked,
-+ *       false otherwise
-+ *
-+ * @return:
-+ *       AVB_IO_RESULT_OK: state is set successfully
-+ *       AVB_IO_RESULT_ERROR_IO: an error occurred
-+ */
-+AvbIOResult write_is_device_unlocked(AvbOps *ops, bool is_unlocked)
-+{
-+#ifdef CONFIG_OPTEE_TA_AVB
-+	/* Use AVB TA when available */
-+	AvbIOResult rc;
-+	struct tee_param param = { .attr = TEE_PARAM_ATTR_TYPE_VALUE_INPUT };
-+
-+	debug("%s: setting device lock state via AVB TA (unlocked=%d)\n", __func__, is_unlocked);
-+	/* TA expects lock state (opposite of unlock state) */
-+	param.u.value.a = !is_unlocked;
-+
-+	rc = invoke_func(ops->user_data, TA_AVB_CMD_WRITE_LOCK_STATE, 1, &param);
-+	if (rc != AVB_IO_RESULT_OK) {
-+		debug("%s: AVB TA failed (rc=%d)\n", __func__, rc);
-+		return rc;
++	if (CONFIG_IS_ENABLED(AVB_ROOT_OF_TRUST)) {
++		/* Store Root of Trust data immediately after AVB verification */
++		printf("INFO: [Bootmeth] Storing Root of Trust data from AVB verification...\n");
++		ret = avb_store_root_of_trust_from_verification(out_data,
++								result);
++		if (ret != 0)
++			printf("WARN: [Bootmeth] Failed to store Root of Trust data (ret=%d)\n",
++			       ret);
++		else
++			printf("INFO: [Bootmeth] Root of Trust data stored successfully\n");
 +	}
-+	debug("%s: AVB TA write successful\n", __func__);
- 	return AVB_IO_RESULT_OK;
++
+ 	if (!unlocked) {
+ 		/* When device is locked, we only accept AVB_SLOT_VERIFY_RESULT_OK */
+ 		if (result != AVB_SLOT_VERIFY_RESULT_OK) {
+@@ -496,6 +509,7 @@ static int run_avb_verification(struct bootflow *bflow)
+ 
+ 	return log_msg_ret("avb cmdline", ret);
+ }
++
  #else
-+	/* No AVB TA available */
-+	debug("%s: AVB TA not available\n", __func__);
-+	return AVB_IO_RESULT_ERROR_IO;
-+#endif
-+}
-+
-+/**
-+ * avb_is_device_unlocked() - checks if device is unlocked using AVB TA or environment
-+ *
-+ * This function can be called without AVB operations and will use the AVB TA
-+ * if available, otherwise fall back to environment variables.
-+ *
-+ * @return: true if device is unlocked, false if locked
-+ */
-+bool avb_is_device_unlocked(void)
-+{
-+#ifdef CONFIG_OPTEE_TA_AVB
-+	/* Try to use AVB TA if available */
-+	struct AvbOpsData *ops_data;
- 	AvbIOResult rc;
- 	struct tee_param param = { .attr = TEE_PARAM_ATTR_TYPE_VALUE_OUTPUT };
-+	bool is_unlocked;
+ static int run_avb_verification(struct bootflow *bflow)
+ {
+@@ -510,6 +524,7 @@ static int run_avb_verification(struct bootflow *bflow)
  
--	rc = invoke_func(ops->user_data, TA_AVB_CMD_READ_LOCK_STATE, 1, &param);
--	if (rc)
-+	/* Try to get AVB ops data - this is a best effort attempt */
-+	ops_data = (struct AvbOpsData *)avb_ops_alloc(0);
-+	if (ops_data) {
-+		debug("%s: reading device lock state via AVB TA\n", __func__);
-+		rc = invoke_func(ops_data, TA_AVB_CMD_READ_LOCK_STATE, 1, &param);
-+		if (rc == AVB_IO_RESULT_OK) {
-+			is_unlocked = !param.u.value.a;
-+			debug("%s: AVB TA returned lock_state=%llu (unlocked=%d)\n",
-+			      __func__, (unsigned long long)param.u.value.a, is_unlocked);
-+			avb_ops_free(&ops_data->ops);
-+			return is_unlocked;
-+		}
-+		debug("%s: AVB TA failed (rc=%d)\n", __func__, rc);
-+		avb_ops_free(&ops_data->ops);
-+	}
-+#endif
-+
-+	/* No AVB TA available or failed */
-+	debug("%s: AVB TA not available, returning false (locked)\n", __func__);
-+	return false;
-+}
-+
-+/* Forward declarations for static functions used by critical lock functions */
-+static AvbIOResult read_persistent_value(AvbOps *ops, const char *name,
-+					 size_t buffer_size, u8 *out_buffer,
-+					 size_t *out_num_bytes_read);
-+static AvbIOResult write_persistent_value(AvbOps *ops, const char *name,
-+					  size_t value_size, const u8 *value);
-+
-+/**
-+ * write_is_device_critical_unlocked() - sets whether the device critical
-+ * partitions are unlocked using AVB persistent values
-+ *
-+ * Uses a separate AVB persistent value "critical_unlocked" to manage critical lock state
-+ * independently from the standard device lock state.
-+ *
-+ * @ops: contains AVB ops handlers
-+ * @is_unlocked: device unlock state to write
-+ *
-+ * @return:
-+ *      AVB_IO_RESULT_OK, on success
-+ *      AVB_IO_RESULT_ERROR_*, on error
-+ */
-+AvbIOResult write_is_device_critical_unlocked(AvbOps *ops, bool is_unlocked)
-+{
-+	/* Use AVB persistent value for critical unlock state */
-+	AvbIOResult rc;
-+	u8 unlock_state = is_unlocked ? 1 : 0;
-+
-+	debug("%s: setting critical lock state via AVB persistent value (unlocked=%d)\n",
-+	      __func__, is_unlocked);
-+
-+	rc = write_persistent_value(ops, "critical_unlocked", 1, &unlock_state);
-+	if (rc != AVB_IO_RESULT_OK) {
-+		debug("%s: AVB persistent value write failed (rc=%d)\n", __func__, rc);
- 		return rc;
--	*out_is_unlocked = !param.u.value.a;
-+	}
-+	debug("%s: AVB persistent value write successful\n", __func__);
- 	return AVB_IO_RESULT_OK;
--#endif
-+}
-+
-+/**
-+ * avb_is_device_critical_unlocked() - checks if device critical partitions
-+ * are unlocked using AVB persistent values
-+ *
-+ * Uses a separate AVB persistent value "critical_unlocked" to check critical lock state
-+ * independently from the standard device lock state.
-+ *
-+ * @return: true if critical partitions are unlocked, false if locked
-+ */
-+bool avb_is_device_critical_unlocked(void)
-+{
-+	/* Use AVB persistent value for critical unlock state */
-+	AvbOps *ops;
-+	AvbIOResult rc;
-+	u8 unlock_state = 0;
-+	size_t num_bytes_read = 0;
-+
-+	ops = avb_ops_alloc(0);
-+	if (!ops)
-+		return false;  /* Default to locked if no AVB available */
-+
-+	debug("%s: reading critical lock state via AVB persistent value\n", __func__);
-+	rc = read_persistent_value(ops, "critical_unlocked", 1, &unlock_state, &num_bytes_read);
-+	if (rc != AVB_IO_RESULT_OK || num_bytes_read != 1) {
-+		debug("%s: AVB persistent value read failed (rc=%d, bytes=%zu)\n",
-+		      __func__, rc, num_bytes_read);
-+		avb_ops_free(ops);
-+		return false;  /* Default to locked if read fails */
-+	}
-+
-+	bool unlocked = (unlock_state == 1);
-+
-+	debug("%s: AVB persistent value critical_unlocked=%u (unlocked=%d)\n",
-+	      __func__, unlock_state, unlocked);
-+	avb_ops_free(ops);
-+	return unlocked;
+ 	return 0;
  }
++
+ #endif /* AVB_VERIFY */
  
- /**
-diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
-index 843171902ae6..77d83af2a685 100644
---- a/drivers/fastboot/Kconfig
-+++ b/drivers/fastboot/Kconfig
-@@ -264,6 +264,27 @@ config FASTBOOT_OEM_BOARD
- 	  command allows running vendor custom code defined in board/ files.
- 	  Otherwise, it will do nothing and send fastboot fail.
+ static int boot_android_normal(struct bootflow *bflow)
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 29de857ba7c2..e1841c97e709 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -3049,6 +3049,19 @@ config CMD_AVB
+ 	    avb write_part - write data to partition
+ 	    avb verify - run full verification chain
  
-+config FASTBOOT_LOCKING
-+	bool "Enable fastboot locking/unlocking commands"
++config CMD_AVB_ROT
++	bool "avb_rot - Android Verified Boot Root of Trust commands"
++	depends on AVB_ROOT_OF_TRUST
 +	help
-+	  This adds support for the Android fastboot locking commands:
-+	  - flashing lock
-+	  - flashing unlock
-+	  - flashing lock_critical
-+	  - flashing unlock_critical
-+	  - flashing get_unlock_ability
++	  Enables "avb_rot" command for Android Verified Boot Root of Trust
++	  functionality. This includes subcommands:
++	    avb_rot setup - Setup Root of Trust from AVB verification
++	    avb_rot legacy - Setup Root of Trust using legacy method
++	    avb_rot info - Show Root of Trust implementation information
 +
-+	  It also adds corresponding getvar support for unlocked, unlock_ability,
-+	  and critical_unlocked variables. The implementation uses environment
-+	  variables to store the lock states:
-+	  - device_unlocked: "1" if unlocked, "0" if locked
-+	  - critical_unlocked: "1" if critical partitions unlocked, "0" if locked
-+	  - fastboot.unlock_ability: "1" if unlock allowed, "0" if not
++	  These commands are useful for testing and debugging Root of Trust
++	  functionality during development and integration with Android KeyMint.
 +
-+	  When enabled, flash and erase commands will check lock state before
-+	  allowing operations on partitions. Critical partitions (bootloader,
-+	  tiboot3, tispl, u-boot, etc.) have additional protection.
-+
- endif # FASTBOOT
+ config CMD_STACKPROTECTOR_TEST
+ 	bool "Test command for stack protector"
+ 	depends on STACKPROTECTOR
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 36e79cc3c282..a246d6351b93 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -233,6 +233,7 @@ obj-$(CONFIG_CMD_BLOB) += blob.o
  
- endmenu
-diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-index 791088bc094d..bfb01c612064 100644
---- a/drivers/fastboot/fb_command.c
-+++ b/drivers/fastboot/fb_command.c
-@@ -5,6 +5,7 @@
+ # Android Verified Boot 2.0
+ obj-$(CONFIG_CMD_AVB) += avb.o
++obj-$(CONFIG_CMD_AVB_ROT) += cmd_avb_rot.o
  
+ # Foundries.IO SCP03
+ obj-$(CONFIG_CMD_SCP03) += scp03.o
+diff --git a/cmd/avb.c b/cmd/avb.c
+index 8fbd48ee5a21..ec23f3494daf 100644
+--- a/cmd/avb.c
++++ b/cmd/avb.c
+@@ -4,6 +4,7 @@
+  */
+ 
+ #include <avb_verify.h>
++#include <avb_root_of_trust.h>
  #include <command.h>
- #include <console.h>
-+#include <cli.h>
  #include <env.h>
- #include <fastboot.h>
- #include <fastboot-internal.h>
-@@ -14,7 +15,11 @@
- #include <part.h>
- #include <stdlib.h>
- #include <vsprintf.h>
-+#include <stdbool.h>
- #include <linux/printk.h>
-+#ifdef CONFIG_AVB_VERIFY
-+#include <avb_verify.h>
-+#endif
+ #include <image.h>
+@@ -288,6 +289,18 @@ int do_avb_verify_part(struct cmd_tbl *cmdtp, int flag,
+ 				AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
+ 				&out_data);
  
- /**
-  * image_size - final fastboot image size
-@@ -44,6 +49,14 @@ static void oem_partconf(char *, char *);
- static void oem_bootbus(char *, char *);
- static void oem_console(char *, char *);
- static void oem_board(char *, char *);
-+static void flashing_lock(char *, char *);
-+static void flashing_unlock(char *, char *);
-+static void flashing_lock_critical(char *, char *);
-+static void flashing_unlock_critical(char *, char *);
-+static void flashing_get_unlock_ability(char *, char *);
-+static bool is_device_locked(void);
-+static bool is_critical_partition(const char *partition);
-+static bool is_device_critical_locked(void);
- static void run_ucmd(char *, char *);
- static void run_acmd(char *, char *);
- 
-@@ -119,6 +132,28 @@ static const struct {
- 		.command = "oem board",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_BOARD, (oem_board), (NULL))
- 	},
-+	[FASTBOOT_COMMAND_FLASHING_LOCK] = {
-+		.command = "flashing lock",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_LOCKING, (flashing_lock), (NULL))
-+	},
-+	[FASTBOOT_COMMAND_FLASHING_UNLOCK] = {
-+		.command = "flashing unlock",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_LOCKING, (flashing_unlock), (NULL))
-+	},
-+	[FASTBOOT_COMMAND_FLASHING_LOCK_CRITICAL] = {
-+		.command = "flashing lock_critical",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_LOCKING, (flashing_lock_critical), (NULL))
-+	},
-+	[FASTBOOT_COMMAND_FLASHING_UNLOCK_CRITICAL] = {
-+		.command = "flashing unlock_critical",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_LOCKING, (flashing_unlock_critical), (NULL))
-+	},
-+	[FASTBOOT_COMMAND_FLASHING_GET_UNLOCK_ABILITY] = {
-+		.command = "flashing get_unlock_ability",
-+		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_LOCKING,
-+					      (flashing_get_unlock_ability),
-+					      (NULL))
-+	},
- 	[FASTBOOT_COMMAND_UCMD] = {
- 		.command = "UCmd",
- 		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
-@@ -338,6 +373,20 @@ void fastboot_data_complete(char *response)
-  */
- static void __maybe_unused flash(char *cmd_parameter, char *response)
- {
-+#if CONFIG_IS_ENABLED(FASTBOOT_LOCKING)
-+	/* Check if device is locked before allowing flash */
-+	if (is_device_locked()) {
-+		fastboot_fail("Device is locked. Cannot flash partitions", response);
-+		return;
++	/* Store Root of Trust data immediately after AVB verification */
++	if (IS_ENABLED(CONFIG_AVB_ROOT_OF_TRUST)) {
++		printf("INFO: Storing Root of Trust data from AVB verification...\n");
++		ret = avb_store_root_of_trust_from_verification(out_data,
++								slot_result);
++		if (ret != 0)
++			printf("WARN: Failed to store Root of Trust data (ret=%d)\n",
++			       ret);
++		else
++			printf("INFO: Root of Trust data stored successfully\n");
 +	}
 +
-+	/* Check if partition is critical and critical lock is enabled */
-+	if (is_critical_partition(cmd_parameter) && is_device_critical_locked()) {
-+		fastboot_fail("Critical partitions are locked. Cannot flash", response);
-+		return;
-+	}
-+#endif
-+
- 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
- 		fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr,
- 					 image_size, response);
-@@ -362,6 +411,20 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
-  */
- static void __maybe_unused erase(char *cmd_parameter, char *response)
- {
-+#if CONFIG_IS_ENABLED(FASTBOOT_LOCKING)
-+	/* Check if device is locked before allowing erase */
-+	if (is_device_locked()) {
-+		fastboot_fail("Device is locked. Cannot erase partitions", response);
-+		return;
-+	}
-+
-+	/* Check if partition is critical and critical lock is enabled */
-+	if (is_critical_partition(cmd_parameter) && is_device_critical_locked()) {
-+		fastboot_fail("Critical partitions are locked. Cannot erase", response);
-+		return;
-+	}
-+#endif
-+
- 	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
- 		fastboot_mmc_erase(cmd_parameter, response);
- 
-@@ -581,3 +644,390 @@ static void __maybe_unused oem_board(char *cmd_parameter, char *response)
- {
- 	fastboot_oem_board(cmd_parameter, (void *)fastboot_buf_addr, image_size, response);
- }
-+
-+#if CONFIG_IS_ENABLED(FASTBOOT_LOCKING)
-+/**
-+ * is_device_locked() - Check if device is locked
+ 	/*
+ 	 * LOCKED devices with custom root of trust setup is not supported (YELLOW)
+ 	 */
+diff --git a/cmd/cmd_avb_rot.c b/cmd/cmd_avb_rot.c
+new file mode 100644
+index 000000000000..d5bf5a9b86c5
+--- /dev/null
++++ b/cmd/cmd_avb_rot.c
+@@ -0,0 +1,129 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * U-Boot command for testing Root of Trust functionality
++ * Provides commands to setup and verify Root of Trust implementation
 + *
-+ * Returns: true if device is locked, false if unlocked
++ * Copyright (C) 2025 Baylibre
 + */
-+static bool is_device_locked(void)
-+{
-+#if CONFIG_IS_ENABLED(AVB_VERIFY) && defined(CONFIG_OPTEE_TA_AVB)
-+	/* Use AVB helper function when all AVB locking components are available */
-+	return !avb_is_device_unlocked();
-+#else
-+	/* Use environment variable */
-+	char *device_unlocked = env_get("device_unlocked");
 +
-+	return (!device_unlocked || strcmp(device_unlocked, "1") != 0);
-+#endif
++#include <command.h>
++#include <avb_root_of_trust.h>
++
++/*
++ * Command to setup Root of Trust using integrated AVB verification
++ */
++static int do_avb_setup_rot(struct cmd_tbl *cmdtp, int flag,
++			    int argc, char *const argv[])
++{
++	AvbOps *ops = NULL;
++	AvbSlotVerifyData *slot_data = NULL;
++	AvbSlotVerifyResult result;
++	static const char * const requested_partitions[] = {"boot", NULL};
++	int ret;
++
++	printf("Setting up Root of Trust with AVB verification...\n");
++
++	/* Initialize AVB operations */
++	ops = avb_ops_alloc(CONFIG_FASTBOOT_FLASH_MMC_DEV);
++	if (!ops) {
++		printf("ERROR: Failed to allocate AVB operations\n");
++		return CMD_RET_FAILURE;
++	}
++
++	/* Perform AVB verification */
++	result = avb_slot_verify(ops, requested_partitions, "",
++				 AVB_SLOT_VERIFY_FLAGS_NONE,
++				AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
++				&slot_data);
++
++	/* Store Root of Trust from verification results */
++	if (slot_data) {
++		ret = avb_store_root_of_trust_from_verification(slot_data, result);
++		if (ret) {
++			printf("ERROR: Root of Trust storage failed: %d\n", ret);
++			ret = CMD_RET_FAILURE;
++		} else {
++			printf("SUCCESS: Root of Trust stored from AVB verification\n");
++			ret = CMD_RET_SUCCESS;
++		}
++	} else {
++		printf("ERROR: No AVB verification data available\n");
++		ret = CMD_RET_FAILURE;
++	}
++
++	/* Display verification result */
++	switch (result) {
++	case AVB_SLOT_VERIFY_RESULT_OK:
++		printf("AVB Result: GREEN (verified and secure)\n");
++		break;
++	case AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX:
++		printf("AVB Result: YELLOW (verified with rollback error)\n");
++		break;
++	default:
++		printf("AVB Result: ORANGE/RED (verification failed)\n");
++		break;
++	}
++
++	/* Cleanup */
++	if (slot_data)
++		avb_slot_verify_data_free(slot_data);
++	avb_ops_free(ops);
++
++	return ret;
 +}
 +
-+/**
-+ * is_critical_partition() - Check if partition is critical
-+ *
-+ * @partition: Partition name to check
-+ *
-+ * Return: true if partition is critical, false otherwise
++/*
++ * Command to setup Root of Trust using legacy method (for testing)
 + */
-+static bool is_critical_partition(const char *partition)
++static int do_avb_setup_rot_legacy(struct cmd_tbl *cmdtp, int flag,
++				   int argc, char *const argv[])
 +{
-+	static const char * const critical_partitions[] = {
-+		"bootloader",
-+		"radio",
-+		"sbl1",
-+		"sbl2",
-+		"sbl3",
-+		"tz",
-+		"rpm",
-+		"aboot",
-+		"xbl",
-+		"xbl_config",
-+		"tiboot3",
-+		"tispl",
-+		"u-boot",
-+		NULL
-+	};
++	int ret;
++
++	printf("Setting up Root of Trust (legacy method)...\n");
++
++	ret = avb_setup_root_of_trust();
++	if (ret) {
++		printf("ERROR: Root of Trust setup failed: %d\n", ret);
++		return CMD_RET_FAILURE;
++	}
++
++	printf("SUCCESS: Root of Trust setup completed\n");
++	return CMD_RET_SUCCESS;
++}
++
++/*
++ * Command to show Root of Trust information
++ */
++static int do_avb_show_rot_info(struct cmd_tbl *cmdtp, int flag,
++				int argc, char *const argv[])
++{
++	avb_show_root_of_trust_info();
++	return CMD_RET_SUCCESS;
++}
++
++/*
++ * Main AVB Root of Trust command dispatcher
++ */
++static int do_avb_rot(struct cmd_tbl *cmdtp, int flag,
++		      int argc, char *const argv[])
++{
++	if (argc < 2)
++		return CMD_RET_USAGE;
++
++	if (strcmp(argv[1], "setup") == 0)
++		return do_avb_setup_rot(cmdtp, flag, argc - 1, argv + 1);
++	else if (strcmp(argv[1], "legacy") == 0)
++		return do_avb_setup_rot_legacy(cmdtp, flag, argc - 1, argv + 1);
++	else if (strcmp(argv[1], "info") == 0)
++		return do_avb_show_rot_info(cmdtp, flag, argc - 1, argv + 1);
++
++	return CMD_RET_USAGE;
++}
++
++U_BOOT_CMD(avb_rot, 3, 0, do_avb_rot,
++	   "Android Verified Boot Root of Trust commands",
++	   "setup  - Setup Root of Trust from AVB verification (recommended)\n"
++	   "avb_rot legacy - Setup Root of Trust using legacy method\n"
++	   "avb_rot info   - Show Root of Trust implementation information"
++);
+diff --git a/include/avb_root_of_trust.h b/include/avb_root_of_trust.h
+new file mode 100644
+index 000000000000..d8d08d99f587
+--- /dev/null
++++ b/include/avb_root_of_trust.h
+@@ -0,0 +1,50 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Root of Trust header for Android Verified Boot
++ * Defines interfaces for collecting and storing Root of Trust information
++ *
++ * Copyright (C) 2025 Baylibre
++ */
++
++#ifndef _AVB_ROOT_OF_TRUST_H_
++#define _AVB_ROOT_OF_TRUST_H_
++
++#include <avb_verify.h>
++
++/**
++ * Store Root of Trust from existing AVB verification data
++ *
++ * This function should be called immediately after AVB verification
++ * with the verification results to store Root of Trust information
++ * for later retrieval by the Android KeyMint service.
++ *
++ * @param slot_data AVB verification data containing VBMeta and boot images
++ * @param result AVB verification result indicating boot state
++ * @return 0 on success, negative error code on failure
++ */
++int avb_store_root_of_trust_from_verification(AvbSlotVerifyData *slot_data,
++					      AvbSlotVerifyResult result);
++
++/**
++ * Legacy Root of Trust setup function (deprecated)
++ *
++ * This function performs its own AVB verification. Use
++ * avb_store_root_of_trust_from_verification() instead for better
++ * integration with existing AVB verification flows.
++ *
++ * @return 0 on success, negative error code on failure
++ */
++int avb_setup_root_of_trust(void);
++
++/**
++ * Display Root of Trust implementation information
++ *
++ * Debug function to show current Root of Trust configuration
++ * and status. Useful for debugging and verification.
++ */
++void avb_show_root_of_trust_info(void);
++
++/* Environment variable for device lock state */
++#define AVB_DEVICE_LOCKED_ENV "avb_device_locked"
++
++#endif /* _AVB_ROOT_OF_TRUST_H_ */
+diff --git a/lib/Kconfig b/lib/Kconfig
+index fbc9de90669a..b81d4d3edc5a 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -551,6 +551,24 @@ config LIBAVB
+ 	  device. Introduces such features as boot chain of trust, rollback
+ 	  protection etc.
+ 
++config AVB_ROOT_OF_TRUST
++	bool "Android Verified Boot Root of Trust support"
++	depends on AVB_VERIFY
++	depends on OPTEE_TA_AVB
++	help
++	  This enables Root of Trust functionality for Android Verified Boot 2.0.
++	  Root of Trust provides cryptographic evidence of the device's boot state
++	  and verified boot chain to Android's KeyMint service for key attestation.
++
++	  When enabled, the bootloader will collect and store Root of Trust data
++	  during AVB verification, including the verified boot key, device lock
++	  state, verified boot state, and boot image hash. This data is securely
++	  stored via the AVB Trusted Application in OP-TEE for later retrieval
++	  by the Android KeyMint Trusted Application.
++
++	  This feature requires the AVB TA (CONFIG_OPTEE_TA_AVB) to be enabled
++	  to securely store and manage Root of Trust data.
++
+ endmenu
+ 
+ menu "Hashing Support"
+diff --git a/lib/Makefile b/lib/Makefile
+index 2643bfc867cb..ebabd18c46c8 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -93,6 +93,7 @@ obj-$(CONFIG_$(PHASE_)LZ4) += lz4_wrapper.o
+ obj-$(CONFIG_$(PHASE_)LIB_RATIONAL) += rational.o
+ 
+ obj-$(CONFIG_LIBAVB) += libavb/
++obj-$(CONFIG_AVB_ROOT_OF_TRUST) += avb_root_of_trust.o
+ 
+ obj-$(CONFIG_$(PHASE_)OF_LIBFDT) += libfdt/
+ obj-$(CONFIG_$(PHASE_)OF_REAL) += fdtdec_common.o fdtdec.o
+diff --git a/lib/avb_root_of_trust.c b/lib/avb_root_of_trust.c
+new file mode 100644
+index 000000000000..5e82423e12c0
+--- /dev/null
++++ b/lib/avb_root_of_trust.c
+@@ -0,0 +1,534 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Root of Trust implementation for Android Verified Boot
++ * This module collects and stores Root of Trust information from AVB
++ * verification for later retrieval by the KeyMint TA
++ *
++ * Copyright (C) 2025 Baylibre
++ */
++
++#include <avb_verify.h>
++#include <tee.h>
++#include <tee/optee_ta_avb.h>
++#include <u-boot/sha256.h>
++#include <stdio.h>
++#include <string.h>
++#include <env.h>
++#include <time.h>
++#include "libavb/libavb.h"
++
++/* Root of Trust structure for Android Verified Boot */
++struct avb_root_of_trust {
++	u8 verified_boot_key[32];    /* AVB public key */
++	u32 device_locked;           /* Device lock state */
++	u32 verified_boot_state;     /* Verified boot state */
++	u8 verified_boot_hash[32];   /* Boot image hash */
++	u64 timestamp;               /* Boot timestamp */
++} __packed;
++
++/* Root of Trust persistent storage name for AVB TA */
++#define ROT_PERSIST_NAME "avb_root_of_trust"
++
++/*
++ * Store Root of Trust data using AVB TA persistent storage
++ * This function stores the complete Root of Trust structure in one call
++ */
++static int avb_store_root_of_trust_persist(const struct avb_root_of_trust *rot)
++{
++	struct tee_open_session_arg session_arg;
++	struct tee_invoke_arg invoke_arg;
++	struct tee_param param[4];
++	struct tee_shm *shm_name, *shm_data;
++	struct udevice *tee_dev;
++	int ret;
++
++	if (!rot) {
++		printf("ERROR: Invalid Root of Trust data\n");
++		return -EINVAL;
++	}
++
++	/* Find TEE device */
++	tee_dev = tee_find_device(NULL, NULL, NULL, NULL);
++	if (!tee_dev) {
++		printf("ERROR: No TEE device found\n");
++		return -ENODEV;
++	}
++
++	/* Open session with AVB TA */
++	memset(&session_arg, 0, sizeof(session_arg));
++	const struct tee_optee_ta_uuid uuid = TA_AVB_UUID;
++
++	tee_optee_ta_uuid_to_octets(session_arg.uuid, &uuid);
++	session_arg.clnt_login = TEE_LOGIN_PUBLIC;
++
++	ret = tee_open_session(tee_dev, &session_arg, 0, NULL);
++	if (ret || session_arg.ret) {
++		printf("ERROR: [ROT] Failed to open AVB TA session: ret=%d, session_ret=0x%x\n",
++		       ret, session_arg.ret);
++		return -EIO;
++	}
++
++	/* Allocate shared memory for object name */
++	ret = tee_shm_alloc(tee_dev, strlen(ROT_PERSIST_NAME) + 1,
++			    TEE_SHM_ALLOC, &shm_name);
++	if (ret) {
++		printf("ERROR: Failed to allocate shared memory for name\n");
++		goto cleanup_session;
++	}
++
++	/* Allocate shared memory for Root of Trust data */
++	ret = tee_shm_alloc(tee_dev, sizeof(struct avb_root_of_trust),
++			    TEE_SHM_ALLOC, &shm_data);
++	if (ret) {
++		printf("ERROR: Failed to allocate shared memory for data\n");
++		goto cleanup_name;
++	}
++
++	/* Copy data to shared memory */
++	strcpy((char *)shm_name->addr, ROT_PERSIST_NAME);
++	memcpy(shm_data->addr, rot, sizeof(struct avb_root_of_trust));
++
++	/* Prepare invocation parameters */
++	memset(&invoke_arg, 0, sizeof(invoke_arg));
++	memset(param, 0, sizeof(param));
++
++	invoke_arg.func = TA_AVB_CMD_WRITE_PERSIST_VALUE;
++	invoke_arg.session = session_arg.session;
++
++	param[0].attr = TEE_PARAM_ATTR_TYPE_MEMREF_INPUT;
++	param[0].u.memref.shm = shm_name;
++	param[0].u.memref.size = strlen(ROT_PERSIST_NAME);
++
++	param[1].attr = TEE_PARAM_ATTR_TYPE_MEMREF_INPUT;
++	param[1].u.memref.shm = shm_data;
++	param[1].u.memref.size = sizeof(struct avb_root_of_trust);
++
++	/* Invoke AVB TA to store Root of Trust */
++	ret = tee_invoke_func(tee_dev, &invoke_arg, 4, param);
++	if (ret || invoke_arg.ret) {
++		printf("ERROR: Failed to store Root of Trust: 0x%x\n", invoke_arg.ret);
++		ret = -EIO;
++	} else {
++		printf("INFO: Root of Trust stored successfully in AVB persistent storage\n");
++		ret = 0;
++	}
++
++	tee_shm_free(shm_data);
++cleanup_name:
++	tee_shm_free(shm_name);
++cleanup_session:
++	tee_close_session(tee_dev, session_arg.session);
++	return ret;
++}
++
++/*
++ * Extract and store Root of Trust from existing AVB verification data
++ * This function is called after AVB verification is complete with the verification results
++ * Optimized version with enhanced error handling and device state detection
++ */
++int avb_store_root_of_trust_from_verification(AvbSlotVerifyData *slot_data,
++					      AvbSlotVerifyResult result)
++{
++	struct avb_root_of_trust rot;
++	int ret;
++
++	memset(&rot, 0, sizeof(rot));
++
++	printf("INFO: Extracting Root of Trust from AVB verification (result=%d)...\n", result);
++
++	/* Handle case where AVB verification failed or no data available */
++	if (!slot_data) {
++		printf("WARN: No AVB verification data available\n");
++		rot.verified_boot_state = AVB_RED;
++		/* Read actual lock state from AVB lib */
++		bool is_unlocked = avb_is_device_unlocked();
++
++		rot.device_locked = !is_unlocked;
++		rot.timestamp = 0; /* Will be set by bootloader timestamp */
++		goto store_rot;
++	}
++
++	/* Extract Root of Trust information from AVB verification data */
++	if (slot_data->vbmeta_images && slot_data->num_vbmeta_images > 0) {
++		AvbVBMetaData *vbmeta = &slot_data->vbmeta_images[0];
++
++		/* Extract AVB public key from VBMeta header */
++		if (vbmeta->vbmeta_data && vbmeta->vbmeta_size > 0) {
++			/* Parse VBMeta header to extract public key */
++			AvbVBMetaImageHeader header;
++
++			avb_vbmeta_image_header_to_host_byte_order
++				((const AvbVBMetaImageHeader *)
++				 vbmeta->vbmeta_data, &header);
++			if (header.public_key_size > 0 &&
++			    header.public_key_offset < vbmeta->vbmeta_size) {
++				u8 *public_key_data;
++
++				public_key_data = vbmeta->vbmeta_data +
++						  header.public_key_offset;
++
++				if (header.public_key_size <=
++				    sizeof(rot.verified_boot_key)) {
++					memcpy(rot.verified_boot_key,
++					       public_key_data,
++					       header.public_key_size);
++				} else {
++					/* Hash large public keys to fit in 32 bytes */
++					sha256_csum_wd(public_key_data,
++						       header.public_key_size,
++						       rot.verified_boot_key,
++						       CHUNKSZ_SHA256);
++				}
++			} else {
++				printf("WARN: No valid public key in VBMeta header\n");
++			}
++		} else {
++			printf("WARN: No VBMeta data available\n");
++		}
++
++		/* Calculate boot image hash from loaded partitions */
++		if (slot_data->loaded_partitions &&
++		    slot_data->num_loaded_partitions > 0) {
++			AvbPartitionData *boot_partition = NULL;
++			size_t i;
++
++			/* Find boot partition */
++			for (i = 0; i < slot_data->num_loaded_partitions;
++			     i++) {
++				if (strstr(slot_data->loaded_partitions[i].partition_name,
++					   "boot")) {
++					boot_partition =
++						&slot_data->loaded_partitions[i];
++					break;
++				}
++			}
++
++			if (boot_partition && boot_partition->data &&
++			    boot_partition->data_size > 0) {
++				sha256_csum_wd((unsigned char *)
++					       boot_partition->data,
++					       boot_partition->data_size,
++					       rot.verified_boot_hash,
++					       CHUNKSZ_SHA256);
++			} else {
++				printf("WARN: No boot partition data available for hash calculation\n");
++			}
++		} else {
++			printf("WARN: No loaded partitions available\n");
++		}
++	} else {
++		printf("WARN: No VBMeta images available\n");
++	}
++
++	/* Determine device lock state from AVB lib */
++	bool is_unlocked = avb_is_device_unlocked();
++
++	rot.device_locked = !is_unlocked;
++
++	/* Determine verified boot state based on AVB result and device state */
++	switch (result) {
++	case AVB_SLOT_VERIFY_RESULT_OK:
++		if (!rot.device_locked)
++			rot.verified_boot_state = AVB_ORANGE;
++		else
++			rot.verified_boot_state = AVB_GREEN;
++		break;
++	case AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX:
++		rot.verified_boot_state = AVB_YELLOW;
++		break;
++	case AVB_SLOT_VERIFY_RESULT_ERROR_OOM:
++	case AVB_SLOT_VERIFY_RESULT_ERROR_IO:
++	case AVB_SLOT_VERIFY_RESULT_ERROR_VERIFICATION:
++	case AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED:
++	default:
++		rot.verified_boot_state = AVB_RED;
++		break;
++	}
++
++	/* Record boot timestamp */
++	rot.timestamp = get_timer(0);
++
++store_rot:
++	/* Store Root of Trust via AVB TA persistent storage */
++	ret = avb_store_root_of_trust_persist(&rot);
++
++	printf("INFO: Root of Trust extraction %s (state=%s, locked=%s, result=%d)\n",
++	       ret ? "FAILED" : "COMPLETED",
++	       rot.verified_boot_state == AVB_GREEN ? "GREEN" :
++	       rot.verified_boot_state == AVB_YELLOW ? "YELLOW" :
++	       rot.verified_boot_state == AVB_ORANGE ? "ORANGE" : "RED",
++	       rot.device_locked ? "YES" : "NO",
++	       result);
++
++	return ret;
++}
++
++/*
++ * Legacy function for manual Root of Trust setup (deprecated)
++ * Use avb_store_root_of_trust_from_verification() instead
++ */
++int avb_setup_root_of_trust(void)
++{
++	AvbSlotVerifyData *slot_data = NULL;
++	AvbSlotVerifyResult result;
++	AvbOps *ops;
++	struct avb_root_of_trust rot;
++	static const char * const requested_partitions[] = {"boot", NULL};
++	int ret;
++
++	memset(&rot, 0, sizeof(rot));
++
++	printf("INFO: Setting up Root of Trust...\n");
++
++	/* Initialize AVB operations */
++	ops = avb_ops_alloc(CONFIG_FASTBOOT_FLASH_MMC_DEV);
++	if (!ops) {
++		printf("ERROR: Failed to allocate AVB operations\n");
++		return -ENOMEM;
++	}
++
++	/* Perform AVB slot verification */
++	result = avb_slot_verify(ops, requested_partitions, "", /* slot */
++				 AVB_SLOT_VERIFY_FLAGS_NONE,
++				 AVB_HASHTREE_ERROR_MODE_RESTART_AND_INVALIDATE,
++				 &slot_data);
++
++	/* Extract Root of Trust information from AVB verification */
++	if (slot_data && slot_data->vbmeta_images) {
++		AvbVBMetaData *vbmeta = &slot_data->vbmeta_images[0];
++
++		/* Extract AVB public key from VBMeta header (simplified) */
++		if (vbmeta->vbmeta_data && vbmeta->vbmeta_size > 0) {
++			AvbVBMetaImageHeader header;
++
++			avb_vbmeta_image_header_to_host_byte_order
++				((const AvbVBMetaImageHeader *)
++				 vbmeta->vbmeta_data, &header);
++			if (header.public_key_size > 0 &&
++			    header.public_key_offset < vbmeta->vbmeta_size) {
++				u8 *public_key_data;
++
++				public_key_data = vbmeta->vbmeta_data +
++						  header.public_key_offset;
++
++				if (header.public_key_size <=
++				    sizeof(rot.verified_boot_key)) {
++					memcpy(rot.verified_boot_key,
++					       public_key_data,
++					       header.public_key_size);
++				} else {
++					sha256_csum_wd(public_key_data,
++						       header.public_key_size,
++						       rot.verified_boot_key,
++						       CHUNKSZ_SHA256);
++				}
++			}
++		}
++
++		/* Determine verified boot state based on AVB result */
++		switch (result) {
++		case AVB_SLOT_VERIFY_RESULT_OK:
++			rot.verified_boot_state = AVB_GREEN;
++			printf("INFO: Boot state: GREEN (verified and secure)\n");
++			break;
++		case AVB_SLOT_VERIFY_RESULT_ERROR_ROLLBACK_INDEX:
++			rot.verified_boot_state = AVB_YELLOW;
++			printf("INFO: Boot state: YELLOW (verified with rollback error)\n");
++			break;
++		default:
++			rot.verified_boot_state = AVB_ORANGE;
++			printf("WARN: Boot state: ORANGE (not verified)\n");
++			break;
++		}
++
++		/* Get device lock state - FIXED: Read from AVB lib */
++		bool is_unlocked = avb_is_device_unlocked();
++
++		rot.device_locked = !is_unlocked;
++		printf("INFO: Device locked: %s (from AVB lib)\n",
++		       rot.device_locked ? "Yes" : "No");
++
++		/* Calculate boot image hash */
++		if (slot_data->loaded_partitions &&
++		    slot_data->loaded_partitions[0].data) {
++			sha256_csum_wd((unsigned char *)
++				       slot_data->loaded_partitions[0].data,
++				       slot_data->loaded_partitions[0].data_size,
++				       rot.verified_boot_hash,
++				       CHUNKSZ_SHA256);
++			printf("INFO: Calculated boot image hash\n");
++		}
++
++		/* Record boot timestamp */
++		rot.timestamp = get_timer(0);
++		printf("INFO: Boot timestamp: %llu\n", rot.timestamp);
++	} else {
++		printf("WARN: No VBMeta data available, using default Root of Trust\n");
++		rot.verified_boot_state = AVB_RED;
++		rot.device_locked = 0;
++		rot.timestamp = get_timer(0);
++	}
++
++	/* Store Root of Trust via AVB TA persistent storage */
++	ret = avb_store_root_of_trust_persist(&rot);
++
++	/* Cleanup AVB data structures */
++	if (slot_data)
++		avb_slot_verify_data_free(slot_data);
++	avb_ops_free(ops);
++
++	printf("WARN: Using legacy Root of Trust setup - consider integrating with AVB verification\n");
++	printf("INFO: Root of Trust setup %s\n",
++	       ret ? "FAILED" : "COMPLETED");
++	return ret;
++}
++
++/*
++ * Read and verify Root of Trust data from AVB TA persistent storage
++ * This function reads back what was stored and displays it for verification
++ */
++static int avb_read_and_verify_root_of_trust(void)
++{
++	struct tee_open_session_arg session_arg;
++	struct tee_invoke_arg invoke_arg;
++	struct tee_param param[4];
++	struct tee_shm *shm_name, *shm_data;
++	struct udevice *tee_dev;
++	struct avb_root_of_trust rot;
++	int ret;
 +	int i;
 +
-+	for (i = 0; critical_partitions[i]; i++)
-+		if (strcmp(partition, critical_partitions[i]) == 0)
-+			return true;
++	printf("INFO: Reading Root of Trust from AVB TA for verification...\n");
 +
-+	return false;
-+}
-+
-+/**
-+ * is_device_critical_locked() - Check if device critical partitions are locked
-+ *
-+ * Return: true if critical partitions are locked, false if unlocked
-+ */
-+static bool is_device_critical_locked(void)
-+{
-+#if CONFIG_IS_ENABLED(AVB_VERIFY)
-+	/* Use AVB helper function when AVB is available */
-+	return !avb_is_device_critical_unlocked();
-+#else
-+	/* Use environment variable */
-+	char *critical_unlocked = env_get("critical_unlocked");
-+
-+	return (!critical_unlocked || strcmp(critical_unlocked, "1") != 0);
-+#endif
-+}
-+
-+/**
-+ * flashing_lock() - Execute the flashing lock command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
-+ */
-+static void flashing_lock(char *cmd_parameter, char *response)
-+{
-+#if CONFIG_IS_ENABLED(AVB_VERIFY) && defined(CONFIG_OPTEE_TA_AVB)
-+	/* Use AVB infrastructure when all components are available */
-+	AvbOps *avb_ops = avb_ops_alloc(0);
-+
-+	if (avb_ops) {
-+		AvbIOResult result = write_is_device_unlocked(avb_ops, false);
-+
-+		avb_ops_free(avb_ops);
-+		if (result == AVB_IO_RESULT_OK)
-+			fastboot_okay(NULL, response);
-+		else
-+			fastboot_fail("Failed to lock device", response);
-+		return;
-+	}
-+	fastboot_fail("AVB not available", response);
-+#else
-+	/* Use environment variable when AVB not available */
-+	env_set("device_unlocked", "0");
-+	env_save();
-+	fastboot_okay(NULL, response);
-+#endif
-+}
-+
-+/**
-+ * flashing_unlock() - Execute the flashing unlock command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
-+ */
-+static void flashing_unlock(char *cmd_parameter, char *response)
-+{
-+	char *unlock_ability;
-+	char *confirm;
-+
-+	/* Check unlock_ability from environment */
-+	unlock_ability = env_get("fastboot.unlock_ability");
-+	if (!unlock_ability || strcmp(unlock_ability, "1") != 0) {
-+		fastboot_fail("Unlock not allowed. Enable OEM unlocking in Settings", response);
-+		return;
++	/* Get TEE device */
++	tee_dev = tee_find_device(NULL, NULL, NULL, NULL);
++	if (!tee_dev) {
++		printf("ERROR: Cannot find TEE device\n");
++		return -ENODEV;
 +	}
 +
-+	/* If already unlocked, nothing to do */
-+	if (!is_device_locked()) {
-+		printf("Device is already unlocked\n");
-+		fastboot_okay(NULL, response);
-+		return;
++	/* Allocate shared memory for storage name */
++	ret = tee_shm_alloc(tee_dev, strlen(ROT_PERSIST_NAME) + 1, 0, &shm_name);
++	if (ret) {
++		printf("ERROR: Cannot allocate TEE shared memory for name (ret=%d)\n", ret);
++		return -ENOMEM;
++	}
++	strcpy(shm_name->addr, ROT_PERSIST_NAME);
++
++	/* Allocate shared memory for Root of Trust data */
++	ret = tee_shm_alloc(tee_dev, sizeof(rot), 0, &shm_data);
++	if (ret) {
++		printf("ERROR: Cannot allocate TEE shared memory for data (ret=%d)\n", ret);
++		tee_shm_free(shm_name);
++		return -ENOMEM;
 +	}
 +
-+	/* Warning message */
++	/* Open session with AVB TA */
++	memset(&session_arg, 0, sizeof(session_arg));
++	const struct tee_optee_ta_uuid uuid = TA_AVB_UUID;
++
++	tee_optee_ta_uuid_to_octets(session_arg.uuid, &uuid);
++	session_arg.clnt_login = TEE_LOGIN_REE_KERNEL;
++
++	ret = tee_open_session(tee_dev, &session_arg, 0, NULL);
++	if (ret) {
++		printf("ERROR: Cannot open AVB TA session (ret=%d)\n", ret);
++		goto cleanup_shm;
++	}
++
++	/* Setup parameters for reading persistent value */
++	memset(param, 0, sizeof(param));
++	param[0].attr = TEE_PARAM_ATTR_TYPE_MEMREF_INPUT;
++	param[0].u.memref.shm = shm_name;
++	param[0].u.memref.size = strlen(ROT_PERSIST_NAME);
++	param[1].attr = TEE_PARAM_ATTR_TYPE_MEMREF_OUTPUT;
++	param[1].u.memref.shm = shm_data;
++	param[1].u.memref.size = sizeof(rot);
++
++	/* Invoke read persistent value command */
++	memset(&invoke_arg, 0, sizeof(invoke_arg));
++	invoke_arg.func = TA_AVB_CMD_READ_PERSIST_VALUE;
++	invoke_arg.session = session_arg.session;
++
++	ret = tee_invoke_func(tee_dev, &invoke_arg, 4, param);
++	if (ret || invoke_arg.ret) {
++		printf("WARN: Failed to read Root of Trust from AVB TA (ret=%d, ta_ret=%d)\n",
++		       ret, invoke_arg.ret);
++		if (invoke_arg.ret == TEE_ERROR_ITEM_NOT_FOUND)
++			printf("INFO: Root of Trust data was never stored in AVB TA\n");
++		else if (invoke_arg.ret == TEE_ERROR_SECURITY)
++			printf("INFO: Security error - AVB TA has no Root of Trust data\n");
++		ret = -ENOENT;
++		goto cleanup_session;
++	}
++
++	/* Copy data from shared memory */
++	memcpy(&rot, shm_data->addr, sizeof(rot));
++
++	printf("SUCCESS: Root of Trust data read from AVB TA:\n");
++	printf("  Device Locked: %s (%u)\n",
++	       rot.device_locked ? "YES" : "NO", rot.device_locked);
++	printf("  Verified Boot State: %u ", rot.verified_boot_state);
++	switch (rot.verified_boot_state) {
++	case 0:
++		printf("(GREEN - Verified)\n");
++		break;
++	case 1:
++		printf("(YELLOW - Custom key)\n");
++		break;
++	case 2:
++		printf("(ORANGE - Unverified)\n");
++		break;
++	case 3:
++		printf("(RED - Failed)\n");
++		break;
++	default:
++		printf("(UNKNOWN)\n");
++		break;
++	}
++	printf("  Boot Timestamp: %llu\n", rot.timestamp);
++
++	printf("  Verified Boot Key: ");
++	for (i = 0; i < 32; i++) {
++		printf("%02x", rot.verified_boot_key[i]);
++		if (i == 15)
++			printf("\n");
++	}
 +	printf("\n");
-+	printf("WARNING: Unlocking the bootloader will void your warranty\n");
-+	printf("and may compromise the security of your device.\n");
-+	printf("This will also erase all user data.\n");
++
++	printf("  Verified Boot Hash: ");
++	for (i = 0; i < 32; i++) {
++		printf("%02x", rot.verified_boot_hash[i]);
++		if (i == 15)
++			printf("\n");
++	}
 +	printf("\n");
-+	printf("Type 'yes' to confirm unlock: ");
 +
-+	/* Get user confirmation */
-+	confirm = malloc(16);
-+	if (!confirm) {
-+		fastboot_fail("Memory allocation failed", response);
-+		return;
-+	}
++	ret = 0;
 +
-+	/* For automated testing, check environment variable */
-+	char *auto_confirm = env_get("fastboot.unlock_confirm");
-+	if (auto_confirm && !strcmp(auto_confirm, "yes")) {
-+		strcpy(confirm, "yes");
-+		printf("yes (auto-confirmed)\n");
-+	} else {
-+		/* Read user input */
-+		if (!cli_readline_into_buffer("Confirm: ", confirm, 16)) {
-+			free(confirm);
-+			fastboot_fail("Unlock cancelled", response);
-+			return;
-+		}
-+	}
++cleanup_session:
++	tee_close_session(tee_dev, session_arg.session);
++cleanup_shm:
++	tee_shm_free(shm_data);
++	tee_shm_free(shm_name);
 +
-+	if (strcmp(confirm, "yes") != 0) {
-+		free(confirm);
-+		printf("Unlock cancelled\n");
-+		fastboot_fail("Unlock not confirmed", response);
-+		return;
-+	}
-+	free(confirm);
-+
-+#if CONFIG_IS_ENABLED(AVB_VERIFY) && defined(CONFIG_OPTEE_TA_AVB)
-+	/* Use AVB infrastructure when all components are available */
-+	AvbOps *avb_ops = avb_ops_alloc(0);
-+
-+	if (avb_ops) {
-+		AvbIOResult result = write_is_device_unlocked(avb_ops, true);
-+
-+		avb_ops_free(avb_ops);
-+		if (result == AVB_IO_RESULT_OK) {
-+			printf("WARNING: Factory reset recommended\n");
-+			fastboot_okay(NULL, response);
-+		} else {
-+			fastboot_fail("Failed to unlock device", response);
-+		}
-+		return;
-+	}
-+	fastboot_fail("AVB not available", response);
-+#else
-+	/* Use environment variable when AVB not available */
-+	env_set("device_unlocked", "1");
-+	env_save();
-+	printf("WARNING: Factory reset recommended\n");
-+	fastboot_okay(NULL, response);
-+#endif
++	return ret;
 +}
 +
-+/**
-+ * flashing_lock_critical() - Execute the flashing lock_critical command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
++/*
++ * Debug function to display Root of Trust information
++ * This can be called from U-Boot command line for debugging
 + */
-+static void flashing_lock_critical(char *cmd_parameter, char *response)
++void avb_show_root_of_trust_info(void)
 +{
-+	if (IS_ENABLED(CONFIG_AVB_VERIFY)) {
-+		/* Use AVB infrastructure when available */
-+		AvbOps *avb_ops = avb_ops_alloc(0);
++	printf("Root of Trust Implementation Status:\n");
++	printf("  - AVB integration: Enabled\n");
++	printf("  - TEE storage: Enabled\n");
++	printf("  - Persistent name: %s\n", ROT_PERSIST_NAME);
++	printf("  - Structure size: %zu bytes\n",
++	       sizeof(struct avb_root_of_trust));
 +
-+		if (avb_ops) {
-+			AvbIOResult result;
-+
-+			result = write_is_device_critical_unlocked(avb_ops,
-+								   false);
-+			avb_ops_free(avb_ops);
-+			if (result == AVB_IO_RESULT_OK)
-+				fastboot_okay(NULL, response);
-+			else
-+				fastboot_fail("Failed to lock critical partitions",
-+					      response);
-+			return;
-+		}
-+		fastboot_fail("AVB not available", response);
-+	} else {
-+		/* Use environment variable when AVB not available */
-+		env_set("critical_unlocked", "0");
-+		env_save();
-+		fastboot_okay(NULL, response);
-+	}
++	/* Try to read and display actual stored data */
++	printf("\nAttempting to read stored Root of Trust data:\n");
++	avb_read_and_verify_root_of_trust();
 +}
-+
-+/**
-+ * flashing_unlock_critical() - Execute the flashing unlock_critical command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
-+ */
-+static void flashing_unlock_critical(char *cmd_parameter, char *response)
-+{
-+	char *unlock_ability;
-+	char *confirm;
-+
-+	/* Check unlock_ability from environment */
-+	unlock_ability = env_get("fastboot.unlock_ability");
-+	if (!unlock_ability || strcmp(unlock_ability, "1") != 0) {
-+		fastboot_fail("Unlock not allowed. Enable OEM unlocking in Settings", response);
-+		return;
-+	}
-+
-+	/* If already unlocked, nothing to do */
-+	if (!is_device_critical_locked()) {
-+		printf("Critical partitions are already unlocked\n");
-+		fastboot_okay(NULL, response);
-+		return;
-+	}
-+
-+	/* Critical warning message */
-+	printf("\n");
-+	printf("CRITICAL WARNING: Unlocking critical partitions will\n");
-+	printf("allow modification of bootloader and radio firmware.\n");
-+	printf("This may PERMANENTLY DAMAGE your device and void warranty.\n");
-+	printf("This operation is intended for advanced development only.\n");
-+	printf("\n");
-+	printf("Type 'yes' to confirm critical unlock: ");
-+
-+	/* Get user confirmation */
-+	confirm = malloc(16);
-+	if (!confirm) {
-+		fastboot_fail("Memory allocation failed", response);
-+		return;
-+	}
-+
-+	/* For automated testing, check environment variable */
-+	char *auto_confirm = env_get("fastboot.unlock_critical_confirm");
-+
-+	if (auto_confirm && !strcmp(auto_confirm, "yes")) {
-+		strcpy(confirm, "yes");
-+		printf("yes (auto-confirmed)\n");
-+	} else {
-+		/* Read user input */
-+		if (!cli_readline_into_buffer("Confirm: ", confirm, 16)) {
-+			free(confirm);
-+			fastboot_fail("Critical unlock cancelled", response);
-+			return;
-+		}
-+	}
-+
-+	if (strcmp(confirm, "yes") != 0) {
-+		free(confirm);
-+		printf("Critical unlock cancelled\n");
-+		fastboot_fail("Critical unlock not confirmed", response);
-+		return;
-+	}
-+	free(confirm);
-+
-+	if (IS_ENABLED(CONFIG_AVB_VERIFY)) {
-+		/* Use AVB infrastructure when available */
-+		AvbOps *avb_ops = avb_ops_alloc(0);
-+
-+		if (avb_ops) {
-+			AvbIOResult result;
-+
-+			result = write_is_device_critical_unlocked(avb_ops,
-+								   true);
-+			avb_ops_free(avb_ops);
-+			if (result == AVB_IO_RESULT_OK) {
-+				printf("CRITICAL WARNING: Device may be permanently damaged\n");
-+				fastboot_okay(NULL, response);
-+			} else {
-+				fastboot_fail("Failed to unlock critical partitions",
-+					      response);
-+			}
-+			return;
-+		}
-+		fastboot_fail("AVB not available", response);
-+	} else {
-+		/* Use environment variable when AVB not available */
-+		env_set("critical_unlocked", "1");
-+		env_save();
-+		printf("CRITICAL WARNING: Device may be permanently damaged\n");
-+		fastboot_okay(NULL, response);
-+	}
-+}
-+
-+/**
-+ * flashing_get_unlock_ability() - Execute the flashing get_unlock_ability command
-+ *
-+ * @cmd_parameter: Pointer to command parameter
-+ * @response: Pointer to fastboot response buffer
-+ */
-+static void flashing_get_unlock_ability(char *cmd_parameter, char *response)
-+{
-+	char *unlock_ability;
-+
-+	/* Check fastboot unlock ability from environment */
-+	/* This property is set by Android HAL OemLock */
-+	unlock_ability = env_get("fastboot.unlock_ability");
-+	if (unlock_ability && !strcmp(unlock_ability, "1")) {
-+		fastboot_okay("1", response);
-+		printf("INFO: Unlock ability enabled by Android HAL\n");
-+	} else {
-+		fastboot_okay("0", response);
-+		printf("INFO: Unlock ability disabled (enable in Settings > Developer options > OEM unlocking)\n");
-+	}
-+}
-+
-+#else /* !CONFIG_IS_ENABLED(FASTBOOT_LOCKING) */
-+
-+/* Stub implementations when locking is disabled */
-+static bool __maybe_unused is_device_locked(void)
-+{
-+	return false;
-+}
-+
-+static bool __maybe_unused is_critical_partition(const char *partition)
-+{
-+	return false;
-+}
-+
-+static bool __maybe_unused is_device_critical_locked(void)
-+{
-+	return false;
-+}
-+
-+static void __maybe_unused flashing_lock(char *cmd_parameter, char *response)
-+{
-+	fastboot_fail("Locking not supported", response);
-+}
-+
-+static void __maybe_unused flashing_unlock(char *cmd_parameter, char *response)
-+{
-+	fastboot_fail("Unlocking not supported", response);
-+}
-+
-+static void __maybe_unused flashing_lock_critical(char *cmd_parameter,
-+						   char *response)
-+{
-+	fastboot_fail("Critical locking not supported", response);
-+}
-+
-+static void __maybe_unused flashing_unlock_critical(char *cmd_parameter,
-+						     char *response)
-+{
-+	fastboot_fail("Critical unlocking not supported", response);
-+}
-+
-+static void __maybe_unused flashing_get_unlock_ability(char *cmd_parameter,
-+							char *response)
-+{
-+	fastboot_okay("0", response);
-+}
-+
-+#endif /* CONFIG_IS_ENABLED(FASTBOOT_LOCKING) */
-diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-index 6775ea397ab6..2db7bde69ea5 100644
---- a/drivers/fastboot/fb_getvar.c
-+++ b/drivers/fastboot/fb_getvar.c
-@@ -27,6 +27,9 @@ static void getvar_has_slot(char *var_parameter, char *response);
- static void getvar_partition_type(char *part_name, char *response);
- static void getvar_partition_size(char *part_name, char *response);
- static void getvar_is_userspace(char *var_parameter, char *response);
-+static void getvar_unlocked(char *var_parameter, char *response);
-+static void getvar_unlock_ability(char *var_parameter, char *response);
-+static void getvar_critical_unlocked(char *var_parameter, char *response);
- 
- static const struct {
- 	const char *variable;
-@@ -91,6 +94,18 @@ static const struct {
- 		.variable = "is-userspace",
- 		.dispatch = getvar_is_userspace,
- 		.list = true
-+	}, {
-+		.variable = "unlocked",
-+		.dispatch = getvar_unlocked,
-+		.list = true
-+	}, {
-+		.variable = "unlock_ability",
-+		.dispatch = getvar_unlock_ability,
-+		.list = true
-+	}, {
-+		.variable = "critical_unlocked",
-+		.dispatch = getvar_critical_unlocked,
-+		.list = true
- 	}
- };
- 
-@@ -258,6 +273,59 @@ static void getvar_is_userspace(char *var_parameter, char *response)
- 	fastboot_okay("no", response);
- }
- 
-+#if CONFIG_IS_ENABLED(FASTBOOT_LOCKING)
-+static void getvar_unlocked(char *var_parameter, char *response)
-+{
-+	char *device_unlocked = env_get("device_unlocked");
-+
-+	if (device_unlocked && !strcmp(device_unlocked, "1"))
-+		fastboot_okay("yes", response);
-+	else
-+		fastboot_okay("no", response);
-+}
-+
-+static void getvar_unlock_ability(char *var_parameter, char *response)
-+{
-+	char *unlock_ability = env_get("fastboot.unlock_ability");
-+
-+	if (unlock_ability && !strcmp(unlock_ability, "1")) {
-+		fastboot_okay("1", response);
-+		printf("INFO: Unlock ability enabled by Android HAL\n");
-+	} else {
-+		fastboot_okay("0", response);
-+		printf("INFO: Unlock ability disabled (enable in Settings > Developer options > OEM unlocking)\n");
-+	}
-+}
-+
-+static void getvar_critical_unlocked(char *var_parameter, char *response)
-+{
-+	char *critical_unlocked = env_get("critical_unlocked");
-+
-+	if (critical_unlocked && !strcmp(critical_unlocked, "1"))
-+		fastboot_okay("yes", response);
-+	else
-+		fastboot_okay("no", response);
-+}
-+
-+#else /* !CONFIG_IS_ENABLED(FASTBOOT_LOCKING) */
-+
-+static void getvar_unlocked(char *var_parameter, char *response)
-+{
-+	fastboot_okay("yes", response);
-+}
-+
-+static void getvar_unlock_ability(char *var_parameter, char *response)
-+{
-+	fastboot_okay("0", response);
-+}
-+
-+static void getvar_critical_unlocked(char *var_parameter, char *response)
-+{
-+	fastboot_okay("yes", response);
-+}
-+
-+#endif /* CONFIG_IS_ENABLED(FASTBOOT_LOCKING) */
-+
- static int current_all_dispatch;
- void fastboot_getvar_all(char *response)
- {
-diff --git a/include/avb_verify.h b/include/avb_verify.h
-index 5d998b5a3027..29c028b74fdf 100644
---- a/include/avb_verify.h
-+++ b/include/avb_verify.h
-@@ -9,6 +9,7 @@
- #include <../lib/libavb/libavb.h>
- #include <mapmem.h>
- #include <mmc.h>
-+#include <stdbool.h>
- 
- #define AVB_MAX_ARGS			1024
- #define VERITY_TABLE_OPT_RESTART	"restart_on_corruption"
-@@ -54,6 +55,14 @@ char *avb_set_ignore_corruption(const char *cmdline);
- char *append_cmd_line(char *cmdline_orig, char *cmdline_new);
- const char *str_avb_io_error(AvbIOResult res);
- const char *str_avb_slot_error(AvbSlotVerifyResult res);
-+
-+/* Device lock state functions */
-+AvbIOResult write_is_device_unlocked(AvbOps *ops, bool is_unlocked);
-+bool avb_is_device_unlocked(void);
-+
-+/* Critical partitions lock state functions */
-+AvbIOResult write_is_device_critical_unlocked(AvbOps *ops, bool is_unlocked);
-+bool avb_is_device_critical_unlocked(void);
- /**
-  * ============================================================================
-  * I/O helper inline functions
-diff --git a/include/fastboot.h b/include/fastboot.h
-index b106d6177493..634758243552 100644
---- a/include/fastboot.h
-+++ b/include/fastboot.h
-@@ -51,6 +51,11 @@ enum {
- 	FASTBOOT_COMMAND_OEM_RUN,
- 	FASTBOOT_COMMAND_OEM_CONSOLE,
- 	FASTBOOT_COMMAND_OEM_BOARD,
-+	FASTBOOT_COMMAND_FLASHING_LOCK,
-+	FASTBOOT_COMMAND_FLASHING_UNLOCK,
-+	FASTBOOT_COMMAND_FLASHING_LOCK_CRITICAL,
-+	FASTBOOT_COMMAND_FLASHING_UNLOCK_CRITICAL,
-+	FASTBOOT_COMMAND_FLASHING_GET_UNLOCK_ABILITY,
- 	FASTBOOT_COMMAND_ACMD,
- 	FASTBOOT_COMMAND_UCMD,
- 	FASTBOOT_COMMAND_COUNT
 
 -- 
 2.34.1
