@@ -4,93 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F899CAC5B8
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 10:36:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE8ACAC5B0
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 10:45:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7373828A2;
-	Thu,  2 Oct 2025 12:36:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 17FE683526;
+	Thu,  2 Oct 2025 12:45:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gI7BauO6";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="f9B36vJi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12B0831D3; Thu,  2 Oct 2025 12:36:13 +0200 (CEST)
+ id 2C83A834D4; Thu,  2 Oct 2025 12:45:45 +0200 (CEST)
 Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
  [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22DB981D6A
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 12:36:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23B3181D6A
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 12:45:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
 Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-46b303f755aso6328535e9.1
- for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 03:36:11 -0700 (PDT)
+ 5b1f17b1804b1-46e3cdc1a6aso5657265e9.1
+ for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 03:45:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759401370; x=1760006170; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vCAkxwJM8XbSWMvJYawM+XdlKGPZWSZSLEj6AwV/FQg=;
- b=gI7BauO6XaHOPV00Dwbj6b/FZapL+ET6VukANPOTqvwqFBX6WGlB5CjpPfdY9+/E31
- Hx1whXUl1cvx5oToX8hanULS/YKeHY3JVTbSC0pyNgjxzSj+dMKjzWZd8Lz+eGQWQNIt
- FbWMZ2dwch8IxcMQfbfQ9E3aYHP89gwS1/+TtKj4feFcJyIbn/ZRE+1cHa3/WsvRxeh5
- AS8kgbVhL7F4CH8id8uh6WsvMsk2lUPHtcVUZuHB48Q4B0gI5zA4ZQHMjYT1PGmWMcJY
- lGfLEYvb8xnzeS0bCdlMoIOgV+f3IXZGcbbMZD1hf/8MeUnCIOtdcPZFgWq9PwvQKWpn
- COrQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1759401942; x=1760006742;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kGF2zAGIh8y59JBq3pJEoHk6DyK5ftWR1GQ9qXmnL/0=;
+ b=f9B36vJiSJs2uXUNWVVWfuR7jyE/Af945Ek3V3cx54hqhg+My7i1cAOL6G35wsnDSF
+ Im/UEoxpCVuCfiZ8XBoZJSyS5DFjNGtJynFTi03W3sXeeFJpOZwlH0PPSGzmWfYpUrCK
+ B+WbnKIUX2KXXX2o3ToCsU7Sy+W/+0lidJGkhQHB9LqHxFU0ySRip9ChprqAn0fAKBop
+ rcMdrfHKpnEUgSmpZAUYSXUD7cCBUyPyVMUzWd2XLm3+p/dPe73fx2yuy13Lpmpa7XMX
+ Dj/ZbrjzRf3cbIF+LO6HdH++5EJTzv1joPAUcbwpbmp5K60jBwh93Gb7Ik6pit7pk6qC
+ JiZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759401370; x=1760006170;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1759401942; x=1760006742;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vCAkxwJM8XbSWMvJYawM+XdlKGPZWSZSLEj6AwV/FQg=;
- b=PxFJwByu5p3dPkCHFjL1rVvCMWaZIWx3zqc426l7UVUgb4rfyiANaol0hSLIQOF5Nt
- i39Df6vK/2BCZFhd5OlZYGffXLevzmtFJSHZRiSxN+vuml13XwzwfbETBC4fiAojyRQ2
- TVy2qD6ZHIrctc2WKeJCu4Fru1JpLLDqCEGYoG+jXvrNxLbNzpyTa4ahAaviXBaYZhbt
- XLnILAUEILkyOr7m+YOGTxdeYCyjCQy69M4BBcrga4FvNJc+qC92t7kTMLypR/H9nNcr
- k96x4JS/DRjMzOU1TrEDFd9wFNRJWWJQXspQ3NwtUx+1OgLW+5bCzUycb8vB4htZFURs
- 7Leg==
+ bh=kGF2zAGIh8y59JBq3pJEoHk6DyK5ftWR1GQ9qXmnL/0=;
+ b=w3EYvcnQd9hvx8kW9sKzFpI1on3vtLJTElnV4RaA6cR1Ds/dWBxCzrGnvX1BAh+U7s
+ u8FVNm8DGg3NuGMxH3wJjnJmHu/Aq8f+ePcFzsRPDchpVNPLfqn2z5x6KpBfNf3Sk5XK
+ rXAB88Dwnb/PmMk3Ff2x/PmVrclXMVpDOfU8gWHIP8+WgF8674zLQjBLCXVwcaklyWUl
+ XJr8yem4H33KbPkdel9+pDOnLnD06fNSfSXdCJsCr5vCGYCtUbIsR005WfyXFRQRnEMR
+ 23JUzt/uDRYCI5uEwr5RM/Nvzx3veSz+LUFJSh50w09xdkij3zuU0PlQpw21Vaf1tHdw
+ mLAQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVkDB+IBQxYnZS7luARbRY3RUUbn0bogfvckz4NnOp3W2KBueUrt+OIjHZo4wjdREftA4Tm5kM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdwAxjxfH9puxn3YdHLgqP6ppldvkTVGFpdWxFS4IYPyST/Xoc
- Omj1nIt1chXmFu6Y7DkdgX9GzfXMULXbUCqn4xq5s3I6cht/dIdteElv+nxJp5auw9o=
-X-Gm-Gg: ASbGnctR9R58py2D276xLsiNMnTcb5Uau6OputJHqyJl0/fi1Hjj12LNwMU9qNdGlo9
- VJTgoaYDhzgwMmnPICEDV4gBeykVu3rdp8isPSpOVXzlP3wxfcfvI6ba6OxLVheNcmvhc7caKnW
- BsxGVJe2aPIRW8p1BXzGAMJV2+Egk6o+usFMEb27xqTUPj0y5ILM2Kx5eGwNE13k+QdRS26maVa
- PQEnO2jGcSOObZyK25KPEtPkoj1Du0Abc2UxwKrh29cKUWRidKnV5xErRW6p4h78DTrWMj0iDCE
- YaIQNEi4WG4gOgHokGgsstZqxUyJ+ZlHo4abuiupQ5q33NpQKK6eAOcxZ9vWfOeRukSjWcJdZzt
- ZaO6HoCiLjZHHql7h2FIaPfsf0T44glsiID6G74FDOR8x5rZ6LLkxVYRyEWarodbRJde0ahTKRU
- BVaRk=
-X-Google-Smtp-Source: AGHT+IF/8djHxn5Uv1Q4kUVkRFJaPpXdRxyUzgaYaNfME0/h81KLrI2rCSAjOYjBQBFQded5FA25eA==
-X-Received: by 2002:a05:600c:3505:b0:46d:5189:3583 with SMTP id
- 5b1f17b1804b1-46e611e12a7mr55579785e9.0.1759401370494; 
- Thu, 02 Oct 2025 03:36:10 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ebd:e301:a21d:c610:1e27:3706])
+ AJvYcCXR2Ebv6lvNOhT9Yy/bB1hN7YWNyyfkoyrzQ7VkYJtxK0G3A856t/nfMYx2eYf3k0j+gNANEdo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxXKtRrCpDJc7KRlhJR/dQfX6HeIkOSF1rUWPvfIp30bC7LMHzH
+ Xm862UwWzDa56ygQngWuQ1BfG467Xl93bcpgow4Mvn3DQilycr2atwnPDrfP8xUEr1o=
+X-Gm-Gg: ASbGnctnjOItGyii/yTD24gkUPcAAJXZkJWdF/YZ5vDfp7HAyHHYJqi21qlwO+fd1N5
+ oDWY4VhxGDIyWgzLoBAhkO3JWs0sNF3MoCr7aykYGnXk/Sr8BfkOggXPVk5PnzCcm+NiXFG20RX
+ 7wVk5fcxC2yZ2KLCZy2YdUdzRezKGI0jdbt/lxUBzLcyu91yyd4JhsSwoK7jyHq1DdPoHpv07MA
+ swmET3IMZpXuS/FvZzJ/8Rr3qYNbP9ADxy3BiYQ4Qm9Q6jaxGWsH8KcqA5sP7deptpBWg/731S3
+ UdmpctAbN14iEshcU+40TkvTn5GwbPRp6M4hdcBi7vLoyisbbBi8r2eS4TFqpCGplgOykJ6EZpT
+ 59qfiwedeaF+3u9NeyMmdNd1ymn4sgP88E6jfw+y+X1bki/pzFg==
+X-Google-Smtp-Source: AGHT+IGhJGJ2J+ExGkli4jqk+aKoX1iexSPxpfzTdVHCzLwiTd9y1XgwK21qn0WUhx64PCiP4WytAQ==
+X-Received: by 2002:a05:600c:15c5:b0:45b:910c:adf with SMTP id
+ 5b1f17b1804b1-46e68bef60emr14004255e9.12.1759401942473; 
+ Thu, 02 Oct 2025 03:45:42 -0700 (PDT)
+Received: from [127.0.1.1] ([2a01:e0a:e50:3860:51a7:9db7:1d49:a8ae])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e693bd655sm32282915e9.14.2025.10.02.03.36.09
+ ffacd0b85a97d-4255d8a6bbesm3081583f8f.12.2025.10.02.03.45.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Oct 2025 03:36:09 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 02 Oct 2025 11:36:09 +0100
-Subject: [PATCH] fs/squashfs: Ensure memory is freed by using unwind goto
+ Thu, 02 Oct 2025 03:45:42 -0700 (PDT)
+From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Subject: [PATCH tiU25.01 0/2] ANDROID: Add some features link to OPTEE TA AVB
+Date: Thu, 02 Oct 2025 12:45:33 +0200
+Message-Id: <20251002-avb-v1-0-1f93543822ce@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251002-fs_squashfs-v1-1-d72e624dd056@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAJhV3mgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAwMj3bTi+OLC0sTijLRi3dQ047REE0sji1RjYyWgjoKi1LTMCrBp0bG
- 1tQAYB0hwXQAAAA==
-X-Change-ID: 20251002-fs_squashfs-ef3fa4928e33
-To: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de
-Cc: Joao Marcos Costa <jmcosta944@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Andrea della Porta <andrea.porta@suse.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+X-B4-Tracking: v=1; b=H4sIAM1X3mgC/x3MQQqAIBBA0avIrDNGyaDu0SpaqE01GwsNCaS7J
+ y0ffH6BRJEpwSgKRMqc+AwVqhHgDxt2krxWg0ZtFKKWNjvZO+pQeRzQINTyirTx819muHnSpkU
+ lYHnfD02t/bVgAAAA
+To: linux-patch-review@list.ti.com, praneeth@ti.com, u-boot@lists.denx.de
+Cc: mfournier@baylibre.com, vishalm@ti.com, khilman@baylibre.com, 
+ "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+X-Mailer: b4 0.14.1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,40 +102,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Returning immediately from sqfs_read_nest is not consistent with other
-error checks in this function and can lead to memory leaks. Instead use
-the unwind goto used elsewhere to ensure that the memory is freed.
+This series add some Android features link to Android Verify Boot,
+device lock/unlock and keymint TA
 
-This issue was found by Smatch.
+- Add support of fastboot flashing lock/unlock  and
+lock_critical/unlock_critical with Optee TA AVB if supported or with env
+variable (for development only)
+- Add support of get root or trust with TA AVB and Keymint TA
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+This series will be upstream after release.
+
+Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 ---
- fs/squashfs/sqfs.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Guillaume La Roque (TI.com) (2):
+      PENDING: fastboot: Implement Android bootloader locking with CONFIG_FASTBOOT_LOCKING
+      PENDING: avb: Add automatic Root of Trust integration for Android KeyMint
 
-diff --git a/fs/squashfs/sqfs.c b/fs/squashfs/sqfs.c
-index 2dcdd60f68343f801bd73e318568fb030434ed31..4d3d83b75873f4d66f2dbd544ae6715f66f5d289 100644
---- a/fs/squashfs/sqfs.c
-+++ b/fs/squashfs/sqfs.c
-@@ -1584,8 +1584,10 @@ static int sqfs_read_nest(const char *filename, void *buf, loff_t offset,
- 	table_offset = frag_entry.start - (start * ctxt.cur_dev->blksz);
- 	n_blks = DIV_ROUND_UP(table_size + table_offset, ctxt.cur_dev->blksz);
- 
--	if (__builtin_mul_overflow(n_blks, ctxt.cur_dev->blksz, &buf_size))
--		return -EINVAL;
-+	if (__builtin_mul_overflow(n_blks, ctxt.cur_dev->blksz, &buf_size)) {
-+		ret = -EINVAL;
-+		goto out;
-+	}
- 
- 	fragment = malloc_cache_aligned(buf_size);
- 
-
+ boot/bootmeth_android.c       |  15 ++
+ cmd/Kconfig                   |  13 +
+ cmd/Makefile                  |   1 +
+ cmd/avb.c                     |  13 +
+ cmd/cmd_avb_rot.c             | 129 ++++++++++
+ common/avb_verify.c           | 183 ++++++++++++++-
+ drivers/fastboot/Kconfig      |  21 ++
+ drivers/fastboot/fb_command.c | 450 +++++++++++++++++++++++++++++++++++
+ drivers/fastboot/fb_getvar.c  |  68 ++++++
+ include/avb_root_of_trust.h   |  50 ++++
+ include/avb_verify.h          |   9 +
+ include/fastboot.h            |   5 +
+ lib/Kconfig                   |  18 ++
+ lib/Makefile                  |   1 +
+ lib/avb_root_of_trust.c       | 534 ++++++++++++++++++++++++++++++++++++++++++
+ 15 files changed, 1503 insertions(+), 7 deletions(-)
 ---
-base-commit: da47ddebd16a7e1047da8537fbf01558d2a89fcf
-change-id: 20251002-fs_squashfs-ef3fa4928e33
+base-commit: 5b93c3ec7f9d66dc40d062a47a4a880f7d346b7a
+change-id: 20251002-avb-6be401c09050
 
 Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 
