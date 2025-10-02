@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3116CAC5B0
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 14:02:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D0F0CAC5B8
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 14:09:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 589B1828A2;
-	Thu,  2 Oct 2025 16:02:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E7827828A2;
+	Thu,  2 Oct 2025 16:09:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ywu7kcka";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NRlIf8HK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC543834D4; Thu,  2 Oct 2025 16:02:15 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 47A97835A2; Thu,  2 Oct 2025 16:09:56 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD67780107
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 16:02:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C63680107
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 16:09:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-9298eba27c2so40933939f.3
- for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 07:02:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-62fa062a1abso1898755a12.2
+ for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 07:09:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759413732; x=1760018532; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vBbP6FFnRTH7WBHY/Ej3SJiitZHPpA7hYVb6IxKAR4E=;
- b=Ywu7kckapuvFn+yoUx3Tp9rEg6jHPpmVsOyC7oAH1VXqxrOVrKFzB4/YbdjWlDkj4w
- xf/0WaE2shhbVk3ed5FauOCGd/t2V7vFkpCDdhHMGfrwDyPUjW+91fZyF7yuUfMApQrv
- i8lxTC0sQcMCMuW8jBxpT9z+DMfH/rZj+YBHw=
+ d=linaro.org; s=google; t=1759414193; x=1760018993; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=TdD6/JZxmauQE1sek/sfC9nnwfm3RSr/rSyCr4VTT6o=;
+ b=NRlIf8HKSLBU0pUhnsFtepsT5feDGfxcIjoc0GvnjtlPOYXS1CydT4uxhVOWanS5u0
+ TYgU+EOFDqUznAIQVQezHTyeUDhfsnBTjmk5KNjaG8V+o3iv0jq8EAyjc5KIFvuE6ed0
+ KW/tEzA+zTlerpooF1wbOW11j+84YzZS3TkSY+3nYgWIdYN3bnJmiu0cdUHZHDCynA1p
+ fp/Od9r9fEWQyHsB31YDNI2UAHfGMkU1NPFJSzVOQnA/yiW8d2s6xIcFCBBCSJ6hKdCG
+ B6ID0sig8psk6hDNlR+3pPwqZMqOsYNQB0RohiTggPA+jQhtKprChdVN+liuvvVr3XGg
+ xHDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759413732; x=1760018532;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vBbP6FFnRTH7WBHY/Ej3SJiitZHPpA7hYVb6IxKAR4E=;
- b=dNYzS95uz7q9XXALGEcl+TbLc5OH00Y34WmRPWO3401XgnzoekzObSVqqGIAU0N6A8
- NCP/U/Prrjd4ft4zwwIOHWJJZa56acKlq+MvMP6SPR/EOZz8HAlR4gDX07O6Wp1qY+hx
- qCZJ1mWXjQUpql9iOfg1VUWKsHyIbh/jpW1NHAywB+awcai6wVQ2rtML7PvFXNgLR4Pe
- KN8xDMKL8Fs2w/JLqNCjBsUI8hqGGb8L5IyU2xM5MOZjH1wXuIWcKV6/zJte29kO0JjI
- WfSilIBphdf0Fne54ZtwL3Mpr5jtfb4isZtN2ES3mpacQkj7Zb857IFjEDPJmLVk2RDC
- 2MwQ==
-X-Gm-Message-State: AOJu0YwugwxfQwiwpJmCwhizSKC0USUtY+J/wh43k/AIVCtSSfJBBU8U
- +iHzYVBt/GLev+NpbofFJhgbScrNi+MKr7U24wAWhSruC+JoD3RF7GVOwTgriWVocIs=
-X-Gm-Gg: ASbGncvVHsw062Evgtld0sAPolpSPNgHglCE2meBJhw5++2tYjt3GG6UnudwB4ymKra
- 7KvmEpEjnNkA2xNaRn0JlGbOv/hchO1WpKJ4EeiyELIv+wo7a/+Co//1elMvXAQFb2lHAz/1ano
- FrG3SKL2Lrs6YzxSeQrE1OXYmYFrAuLuW/EwCneKoYlwaWlqK+g+yweuhPBmi8bm3zjdlKwNSRR
- JYlgU5xg+zgFe1CbGlcs2uuYB/HKi+I1x43cZaJyZ0+2Ot4rFw+so4aZqNMtuSz6o6iXKf+hSwv
- uS9CxW3Oq7kc6pZy0vWlXbZlLS/W7jzcySoU07sbqQYjUIVQpFP10ZZjkE7jw0ZZyGm8eLEKwOO
- fr/xbP+GUJ0jZT+1hfAzcEkn1M5z8wwIFVY+OVRFU92sx3PZRp/NjTj7o4LAg1xL710w3LyqH3u
- DIYCtO3einfg==
-X-Google-Smtp-Source: AGHT+IGJaTQWqyQ8Ca0jp4gZjdZluZyR9aCUhnGPKmBGKVQH0PA4sMC1NpLVYcS8IJSg6Hu6tpLDqQ==
-X-Received: by 2002:a05:6e02:1fcd:b0:42e:d95:b9e2 with SMTP id
- e9e14a558f8ab-42e0d95bdc2mr15385245ab.25.1759413730310; 
- Thu, 02 Oct 2025 07:02:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-42d8b215dd6sm10174525ab.14.2025.10.02.07.02.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Oct 2025 07:02:09 -0700 (PDT)
-Date: Thu, 2 Oct 2025 08:02:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Neha Malcom Francis <n-francis@ti.com>
-Subject: Re: [PATCH 4/7] doc: make pdfdocs: Ensure SVG files are converted to
- PDF before the compilation of *.tex files
-Message-ID: <20251002140206.GL6093@bill-the-cat>
-References: <20250825230044.GB124814@bill-the-cat>
- <CACAHuLCyX_32AQozgt-Wf18b7ia5m3nRJZ7bA=M9oM1mwh-OXA@mail.gmail.com>
- <20250827002317.GF124814@bill-the-cat>
- <CACAHuLB0uwUjnR58qgeoOcHO-PC5geYFuBKF4Mw+=UFjT9urRQ@mail.gmail.com>
- <CACAHuLDZzgF1a7wG8fwNZ1YnUruPgyd9MifY2COS1kQFsqXsTw@mail.gmail.com>
- <CACAHuLDp5COeBue8jt8U3s59UsTnzjFH33ThXVFXk7-XLCF1BQ@mail.gmail.com>
- <20250905230929.GN124814@bill-the-cat>
- <CACAHuLBgL2h+XYysfwYSOBcwyjrJRk7Z4X5Axr6PDDF_Xq17Rw@mail.gmail.com>
- <20250924005717.GG197373@bill-the-cat>
- <CACAHuLBdYcpXRP0MTeiz4AGUAScQ0zf=+81Ez+wXEP+fzyhUrw@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1759414193; x=1760018993;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=TdD6/JZxmauQE1sek/sfC9nnwfm3RSr/rSyCr4VTT6o=;
+ b=TPtVMHJkHz363a6IOfiLdLQjNbZcf4Vy592aCXiv5axpiPDvAcEmS3KzxiUEIew2Zv
+ w6QTOhspewVCWIASUhxUSYruoDMlb+gHrMq20gsP1Z88OqKl9Va/zkGDEfMZRPDJ4ZyA
+ galmGWPudz8OvrqIvxBIgYQ10FVKF4QOyJEQa3k60m/0qZ3cd7z0BCHWZ313D2xoyAd9
+ 8wQPQxBQElFNVuwzRuz//RRdux77LQ7q9IQOOvJnHG5SLsKSJuzR45ZBnmp9lmUdTMF5
+ 8JN77cOpAXYIhr+ud3IGy8VKjmlyOc4gel/FldvCgw2HMYInPWSWcTtQIjUdyuVNPgfr
+ lpcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU2tdtBNQG+youoawHht0mJdgOfb2X7XD9PIOsxtYt7XJ/DM2lGRCwiyfP2HsmsdUJ0J10Zp+g=@lists.denx.de
+X-Gm-Message-State: AOJu0YzOOrbY2aPAyx99EvfwPABEiXOYDhh06JrCksniQ2LWsEWt8iUr
+ DfjEpzeIljWtdu8uZlirCR9lz1J0luX9wVizwO5BOqHadHLM0FtzTVM4P7e8f4zQOxc=
+X-Gm-Gg: ASbGnctdBTcc8sa9tOhY2gHRJulzc+RnIPghXWxh2ddGxH8llwow7Umdnl6IkrNuKE9
+ qlDfiD36JIOfJ9g6sHxf6PELVGtxDttLCckRyBIpZWovRLTzEXZYHoeRv5uCK9OF8j9jHzqco+5
+ KmVVRZZKQPnvA4f8IiBH4ap7/ymEl/oZJj1tw8+9Bg1wwGEotNudGVelKGsNzq8/ItzOAeDXVSi
+ 06sjO/dAsRCOoJ9UT5ZjgdnVjaIvZZCOROO9SYU7NxYTi7VcUGK+YV4GxjK6JewDbUDmwsfnacn
+ 6irlsWagg65TgzUQq3VKXgGcSKTepTAWhQJbBhs+T72tI37tN8KJyeFkfrFMl0tf3Gnn7ExuxiK
+ 8hIx5Kev0A78KCbD8pY9e1YB6IxQFii8FYcdefWVPGxGNF5rzVL8f7k2DyVFKaBRVWm6x2jfLJv
+ H/LIzi+rjvFRd0nRXykEfNjIvPvqion77XMW93vJlL
+X-Google-Smtp-Source: AGHT+IEsW4MyXrgkC8+l38BVd5MqRpkwRQYC5BAgGHa//AnZBc4sM8vtmmX5hox/euZovtbIXqZejQ==
+X-Received: by 2002:a05:6402:50cf:b0:634:4d49:6b6f with SMTP id
+ 4fb4d7f45d1cf-63678ccd691mr9325899a12.26.1759414192769; 
+ Thu, 02 Oct 2025 07:09:52 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:ebd:e301:a21d:c610:1e27:3706?
+ ([2a0a:ef40:ebd:e301:a21d:c610:1e27:3706])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6376b3ab692sm1947253a12.6.2025.10.02.07.09.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 02 Oct 2025 07:09:52 -0700 (PDT)
+Message-ID: <ec159c7b-1263-4c1a-80d9-4214f6360e5f@linaro.org>
+Date: Thu, 2 Oct 2025 15:09:51 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+Gfpx+QFBLhsnp9G"
-Content-Disposition: inline
-In-Reply-To: <CACAHuLBdYcpXRP0MTeiz4AGUAScQ0zf=+81Ez+wXEP+fzyhUrw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fs: semihosting: Use correct variable for error check
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <sean.anderson@seco.com>,
+ u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20251002-fs_semihosting-v1-1-1124e6becc51@linaro.org>
+ <2780374a-3a85-4969-96df-34e331a53c53@gmx.de>
+ <6de97f77-c998-4cf5-8ff4-89a8d4813201@linaro.org>
+ <d8fe4794-118c-4b6e-84ba-c4872221e9c2@canonical.com>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <d8fe4794-118c-4b6e-84ba-c4872221e9c2@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,32 +107,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 02/10/2025 12:03, Heinrich Schuchardt wrote:
+> On 10/2/25 13:00, Andrew Goodbody wrote:
+>> On 02/10/2025 10:52, Heinrich Schuchardt wrote:
+>>> On 10/2/25 11:39, Andrew Goodbody wrote:
+>>>> After calling a function that can return an error, the test to detect
+>>>> that error should use the return value not a different variable. Fix 
+>>>> it.
+>>>>
+>>>> This issue was found by Smatch.
+>>>>
+>>>
+>>> Fixes: f676b45151c3 ("fs: Add semihosting filesystem")
+>>>
+>>>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>>>> ---
+>>>>   fs/semihostingfs.c | 2 +-
+>>>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/fs/semihostingfs.c b/fs/semihostingfs.c
+>>>> index 
+>>>> 77e39ca407e4d240a1fd573497c5b6b908816454..9d7a136b9ba9b035545b34b31df58e2d65de7db9 100644
+>>>> --- a/fs/semihostingfs.c
+>>>> +++ b/fs/semihostingfs.c
+>>>> @@ -35,7 +35,7 @@ static int smh_fs_read_at(const char *filename, 
+>>>> loff_t pos, void *buffer,
+>>>>       }
+>>>>       if (!maxsize) {
+>>>>           size = smh_flen(fd);
+>>>> -        if (ret < 0) {
+>>>> +        if (size < 0) {
+>>>
+>>> The ARM specification (https://developer.arm.com/documentation/ 
+>>> dui0203/ j/semihosting/semihosting-operations/sys-flen--0x0c-) has:
+>>>
+>>> SYS_FLEN (0x0C)
+>>>
+>>> Returns the length of a specified file.
+>>> On exit, R0 contains:
+>>>      the current length of the file object, if the call is successful
+>>>      -1 if an error occurs.
+>>>
+>>> Please, consider that the file length on 32bit systems may exceed 
+>>> 2^31 You must not consider this as an error.
+> 
+> How about changing the smh_flen() interface to:
+> 
+> int smh_flen(int fd, size_t *size)
 
---+Gfpx+QFBLhsnp9G
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+V2 coming.
 
-On Thu, Oct 02, 2025 at 01:06:27PM +0100, Adriano Carvalho wrote:
+Andrew
 
-> Is it ok to replace all instances of ".. image" with ".. kernel-image"
-> (65 occurrences / 17 files)?
+> Best regards
+> 
+> Heinrich
+> 
+>>>
+>>> %s/if (size < 0)/if (size == -1L)/
+>>
+>> Unfortunately that is not sufficient with the current code. smh_flen() 
+>> and others will call smh_errno() if the sys call returns -1 so other 
+>> error codes may possibly be returned. [1]
+>> This seems to be going well beyond the scope of my patch.
+>>
+>> Andrew
+>>
+>> 1. 80e62ccfa63 arm: smh: Return errno on error
+>>
+>>> Best regards
+>>>
+>>> Heinrich
+>>>
+>>>>               smh_close(fd);
+>>>>               return size;
+>>>>           }
+>>>>
+>>>> ---
+>>>> base-commit: da47ddebd16a7e1047da8537fbf01558d2a89fcf
+>>>> change-id: 20251002-fs_semihosting-85d697fbfcad
+>>>>
+>>>> Best regards,
+>>>
+>>
+> 
 
-Yes, that's fine. And a commit doing it makes sense, rather than one per
-file/directory.
-
---=20
-Tom
-
---+Gfpx+QFBLhsnp9G
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaN6F2wAKCRAr4qD1Cr/k
-CvegAQCSjRWjUY7und4HBCvpoRD8OAnsS0wGj7GVDl0QXID/3wEAxnEIqBJ/Lv7q
-FgXHZhXPLAl9lRsBS9HGL6Y0ZECkDQs=
-=w/p4
------END PGP SIGNATURE-----
-
---+Gfpx+QFBLhsnp9G--
