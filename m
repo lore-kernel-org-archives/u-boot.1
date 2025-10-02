@@ -4,46 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68F8BCAC5B0
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 17:25:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FEBCCAC5B8
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 19:30:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2201835A2;
-	Thu,  2 Oct 2025 19:25:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=cn-eng.de
+	by phobos.denx.de (Postfix) with ESMTP id 8749B828A2;
+	Thu,  2 Oct 2025 21:30:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AFA383621; Thu,  2 Oct 2025 19:25:55 +0200 (CEST)
-Received: from server.mars-solutions.it (server.mars-solutions.it
- [88.198.47.168])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88394834D4
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 19:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=cn-eng.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=apr@cn-eng.de
-Received: from ws-apr.fritz.box (ip-078-043-169-169.um18.pools.vodafone-ip.de
- [78.43.169.169])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
- server-digest SHA256) (No client certificate requested)
- by server.mars-solutions.it (Postfix) with ESMTPSA id 21D2276A2059;
- Thu,  2 Oct 2025 19:25:53 +0200 (CEST)
-Message-ID: <a47c21cc55ee6856a2c69ce20649e273ff32ef06.camel@cn-eng.de>
-Subject: Re: [PATCH 0/2] bootstd: rauc: fix doc and info msg to reflect real
- flow - test cases
-From: Andreas Pretzsch <apr@cn-eng.de>
-To: Simon Glass <sjg@chromium.org>, Martin Schwan <m.schwan@phytec.de>
-Cc: u-boot@lists.denx.de
-Date: Thu, 02 Oct 2025 19:25:52 +0200
-In-Reply-To: <CAFLszThMci29aiyCUfEwUpWjdncQ=KQZfvBsSz961=KYjy2u1A@mail.gmail.com>
-References: <20251001232259.3599563-1-apr@cn-eng.de>
- <CAFLszThMci29aiyCUfEwUpWjdncQ=KQZfvBsSz961=KYjy2u1A@mail.gmail.com>
-Organization: carpe noctem engineering
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.30.5-0ubuntu0.18.10.1 
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VtbDKhDL";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B24CB834D4; Thu,  2 Oct 2025 21:30:20 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 65F3781D6A
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 21:30:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-8c3414ad279so50094539f.2
+ for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 12:30:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1759433417; x=1760038217; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=+jLoUl/XOOYykS+i55Qg8iMiAUpvuZ1Smox1+oQMgrc=;
+ b=VtbDKhDLxh0GMK332FJg21h98Ok+XeGg9s9Nk0QUEd1HeIfOVRS8NvdiaREFHDzGz6
+ XVKywSzm5UDyJ8ijKIs79l7L++2EQNmdjz/SJRV2BE2VcPQVb/hiDlIh86i6pBz1Pv9f
+ 9+PUGZ/S5abnbflgvITxQwQm5ZkEX3W5sn0rU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759433417; x=1760038217;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+jLoUl/XOOYykS+i55Qg8iMiAUpvuZ1Smox1+oQMgrc=;
+ b=s1oJLTV4CyOeQyxGjrriIgtCdaDv3PUXYHxSW4Rd6hK2JwtBrJGE+/i1I05tlS7y2t
+ PEXXTHYxgCXTAJn1aktQS2vOiJqWKHOoCV+ecXJ+rBddwTWmVOlE6B94wwy4dETpVGcB
+ rCP5e0s93nH23jg7M14hTkW1J+IRi1lHOljSZTAGms7HjcaX4oJC1GyFCvqHIr5Q+r9P
+ CavuCxQt0NgFeLfrfiyBjadLDw3c7x9KPe4xI6eCGK4ktVFAtNNs+f6V+Gvux1L5U9DW
+ kNa2wdvewo/xhL+mwH0UcGzzJqpSuYdwM/rH7srX5HmwAaWmObsrxuuhI/hZdyfbvm2p
+ pPPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWu/5r2EJiWFSKNdhB+aZl5Ju+yAeiFQEAEqr99WuDo9zLF3p8RgQ4s0d/wDvzvj0A1PtLCXRU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw19sZS590uJYFT7fTVbx/qh7ovjsUnMDBx5HDgRNZiRI7cTFNX
+ ZyLhxHycuXUypIeZAOMB4c6cftR+hZ3aL2sDiiDxsP4lPp96t9jpaxQD+koxh5zbfo0=
+X-Gm-Gg: ASbGncvoEQz6/WxWRQwSHxh78C+W+MyOaLFmKROrdpMdfCQvl9f2jT68K0JLIqgYK56
+ GiIcEOmreSeNnx9Q10gDRxT0evRYrrezYk33fJR3SmUIPDnDVJwDlZZpkEfJJ6hwLznfsl/90D6
+ xm0aQpCJYmov+gHhprCe7fp2aMBNke6oF+7/2kDHeVX5teTsMTn3WX2MnKTdp4arGnHwFL70l8t
+ pDvYExDH2lqw9Z6r+rtkBqwmK8qcbYTojmzxuQVVemxDUSmsaK0CB9jbp6RVIzHX5VmD6c0DEoZ
+ pXTJ1/p8gAlX2KJbyuFXoOZ9HCz3UjQTnYvYiDW43miCa79+OwTd/NuzGVNo9CHdJmzs8zaSVbm
+ 0eUY5YyJlgndsAVkRQyhOBEoRYmqLUnNUzWnIJyC9XnE6WOZpChu/yN711xQtW+LZomL2AOnqPg
+ 4/NkcewmG6
+X-Google-Smtp-Source: AGHT+IHGo50ttuRkq1LsHCag3SrZjfTId+/kcFqdcUawp7SbDIN24+XUF4sHlexLm6j8KIF6dnczbQ==
+X-Received: by 2002:a05:6e02:1a41:b0:427:b642:235 with SMTP id
+ e9e14a558f8ab-42e7ad2771fmr8211745ab.10.1759433416966; 
+ Thu, 02 Oct 2025 12:30:16 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-57b5e9ec3basm1116108173.13.2025.10.02.12.30.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Oct 2025 12:30:16 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20251001-fix_b4-v1-1-fc515dec0546@linaro.org>
+References: <20251001-fix_b4-v1-1-fc515dec0546@linaro.org>
+Subject: Re: [PATCH] b4-config: Improve b4 config for correct operation
+Message-Id: <175943341605.3005048.14788976936333065602.b4-ty@konsulko.com>
+Date: Thu, 02 Oct 2025 13:30:16 -0600
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,51 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2025-10-02 at 10:30 -0600, Simon Glass wrote:
-> Hi,
+On Wed, 01 Oct 2025 10:28:37 +0100, Andrew Goodbody wrote:
+
+> The recent change to .b4-config resulted in some expected recipients not
+> being added to the address lists. Rework the commands so that all
+> expected recipients are added while maintaining the ordering from the
+> first change.
 > 
-> On Wed, 1 Oct 2025 at 17:22, Andreas Pretzsch <apr@cn-eng.de> wrote:
-> > For the RAUC bootmethod, newly introduced in U-Boot 2025.10
-> > [...]
-> > 
-> While we are talking about this bootmeth, does anyone know what
-> happened re a test for it?
+> Fixes: 26efc940c86 ("b4-config: configure `b4` for U-Boot")
+> 
+> [...]
 
-Guess you refer to test code for bootmeth-rauc. Honestly, no idea.
+Applied to u-boot/master, thanks!
 
-I just came to notice that there now is an official way, so bumped the
-U-Boot version to 2025.10 in a customer project. And stumbled upon some
-details, hence the fixes. I've got some more in the workqueue (mostly
-improve printouts what went wrong and extending documentation a bit),
-but none of it will be ready before 2025.10 release. Needs polish and
-testing. I'll send them in hopefully in time for 2025.11 merge window.
-
-A quick look in test/boot/bootmeth.c shows some tests for extlinux,
-efi, vbe simple. I guess the list check would be expandable for rauc,
-too. The fixed numbering might need some massage, but surely doable.
-
-But the real thing is to test the boot flow itself, and especially the
-switchover and fallback handling. Which in principle is comparable for
-all methods, but differ in detail. I can see you already wrote quite
-extensive test cases here, respect for that! However I haven't looked
-into them yet. But pretty sure this will be a task of days, not hours.
-
-While I'm happy to assist here, I realistically won't find the time to
-act as the main implementor.
-But maybe Martin Schwan already has some snippets prepared here ?
-Or we even might pull in the RAUC developers, to some extent at least ?
-I know their codebase includes an outstanding amount of test coverage,
-so there is appreciation for testing at least.
-
-Best regards,
-  Andreas
-
+[1/1] b4-config: Improve b4 config for correct operation
+      commit: 72f72fab00773f7ee89c9635e490908c0a058162
 -- 
-
-carpe noctem engineering
-Ingenieurbuero fuer Hard- & Software-Entwicklung Andreas Pretzsch
-Dipl.-Ing. (FH) Andreas Pretzsch      Phone: +49-(0)711-3908735-7
-Tuebinger Strasse 63                  email: apr@cn-eng.de
-70178 Stuttgart, Germany              VATIN: DE814841529
+Tom
 
 
