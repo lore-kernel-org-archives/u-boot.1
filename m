@@ -4,89 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54CA4CAC5B8
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 12:06:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED7DCAC5B0
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 12:56:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CA5B828A2;
-	Thu,  2 Oct 2025 14:06:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CFDE828A2;
+	Thu,  2 Oct 2025 14:56:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pqrs.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cUbt/6Ty";
+	dkim=pass (2048-bit key; unprotected) header.d=pqrs.dk header.i=@pqrs.dk header.b="Hh5xZdPS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 03FB3831D3; Thu,  2 Oct 2025 14:06:42 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E5CBA834D4; Thu,  2 Oct 2025 11:44:19 +0200 (CEST)
+Received: from out-180.mta1.migadu.com (out-180.mta1.migadu.com
+ [95.215.58.180])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 179AA81D6A
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 14:06:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F0C6828A2
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 11:44:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-62ec5f750f7so1575892a12.3
- for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 05:06:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759406799; x=1760011599; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YERmCLWpUmtJW08Qr3IOgn50tEHivlyOlQXrw/4Hf/o=;
- b=cUbt/6TyFax/qFVmer2rYUhXDW+vGAu0uu6MTSJX0AJyR+26kEGPjBlkFWYXgPp+eN
- rPATbiAgarRecQiGvZ8tQ/qHAjndzhw8xSW6SdM1re5HDbblA9sSQ8VZl9+ON0nswyNZ
- VqCSFIK9W8jRZTI5nyLfOJbmHFU48V89+l7FogQK4vVXRMZLqhgzs0DJ/reTtgjYRMsE
- xU7VwzeHck85GPYyBw8VlE7IGaWKEZw6cJomU6fYV9OlrxC3EjzjHsa0rJX1kEebKyuZ
- jFgZaljS+RIiX3Mm8Kc88hiMloFzBcaUc5PbZEsiwHv+xuJ+bunHJobFgBnCWLJ6o5fL
- /AZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759406799; x=1760011599;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YERmCLWpUmtJW08Qr3IOgn50tEHivlyOlQXrw/4Hf/o=;
- b=pykY4hzw0DmAcFgMCiZe1HJPVdaobVqSybASKAoUiS4aSAw8BQGJVVTIR6rwxw65OK
- E+d7LlGw0RuhL9HO8wqpTD+mDxjenNTBKKkFtB47zHGIbNs45RZhX9GMMh7kL4lzxVn9
- q+uIP/nn5mHIDzlXe1yUwPOQfEuKGCRiDDCTq9yOre4+/J//jUG2Q5lytFf7grhrBpGH
- VGG0q73o4KgVI3P50WYwpQ4j8Nb/YLQzb1Nbvj90bl0DoqCt+toYThmJ+5e2WOnmrs3c
- r3bcUYmPAAP9Wvc6PjsAbbY4qpn0x8eQdUofcCFEtFUKZ8PWUUDrQdTYzWISZMm46wVT
- T0yw==
-X-Gm-Message-State: AOJu0YzAt6agQxPUQ/CtSu2PFPGvgfDc5okHrgJsNiEagiqkL7a3s1i+
- 4VdCFhb+FyI/EJF0nLRFpek+5LDsLw7n8h7NC6kpwCSw2E07Qj9AZSTnUBhzno1FBXwtN0EdAgy
- MEQ75AdgI3L9rCEflx13uO0Vhz0HeboxPGvOMsv8=
-X-Gm-Gg: ASbGncsg1WwCuD/LFDOz+pqPGHEB1/Fej3wAp0Ygiyi9otkZtKbAZHAO2wzQVlZITKw
- tNbYd/NJ/d+jMXD8TFHQZxBxoM+3oxdgBIoLjRIC3X67kITuUH1pOi8YHKUOZk1NmowcxeCrKTh
- 5DmWSJs0KUfPlNRPWw4WaeZhuO1E8m/gQ9f3gCe+HyaIPRAOxnDt9fCHqu0f+E77HWwqPCO6bsp
- 0DWXy3JnArl/wqmReeWOPqH/s8zL7F2lkHFz0KdU4dYNsvoGEKjb9VRceUIKw==
-X-Google-Smtp-Source: AGHT+IHvGbuL4FmYoWacOWWXKRH1075KEy6otBQhm+qs1NCkFmKnq6+twsL9/o5s5ftB9LC3GBbJjIyBPdxcPbhHc3s=
-X-Received: by 2002:a05:6402:3549:b0:634:c2fc:7075 with SMTP id
- 4fb4d7f45d1cf-63678bb6d4emr7882281a12.10.1759406799162; Thu, 02 Oct 2025
- 05:06:39 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=pqrs.dk
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=alvin@pqrs.dk
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pqrs.dk; s=key1;
+ t=1759398255;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=BvcmkaFUuu+nqXSm9G1JQmduvnVBsVq1mauvvHN8ztA=;
+ b=Hh5xZdPS8nWxW9NjYG4clqE+je48mCLI4ODVKiPSyTUU9PjPiP/kHqjThHMpVOJdm0MV2c
+ oTGraHA+RsYsQLcy3fKBxOzxCTKRQcsqGRUEpFjcuBxNAhETAFPiUjx6Q//WuTLVqBNZ4I
+ opi/fjYTU86GLd0cjYPl1zJS1VyKh1OOygFT5tsjYP1L645exQqdZV1vpXiNX8RJmpBuWR
+ dzOaYUQYJVDncRfE0id8MHPfEbSxSsdbZjxuXnsLf4bRcOzh2O8Wkt7imJy3S0OLnmomqt
+ nE4cBHVXPE98gfISM+yWVmic33BBDVozk2PlPCkDUe3ALOPh8q015BN5dGW9cQ==
+From: =?utf-8?q?Alvin_=C5=A0ipraga?= <alvin@pqrs.dk>
+Date: Thu, 02 Oct 2025 11:43:36 +0200
+Subject: [PATCH] tftp: make TFTP ports unconditionally configurable
 MIME-Version: 1.0
-References: <20250825224459.682403-1-adrianocarvalho.pt@gmail.com>
- <20250825224459.682403-5-adrianocarvalho.pt@gmail.com>
- <20250825230044.GB124814@bill-the-cat>
- <CACAHuLCyX_32AQozgt-Wf18b7ia5m3nRJZ7bA=M9oM1mwh-OXA@mail.gmail.com>
- <20250827002317.GF124814@bill-the-cat>
- <CACAHuLB0uwUjnR58qgeoOcHO-PC5geYFuBKF4Mw+=UFjT9urRQ@mail.gmail.com>
- <CACAHuLDZzgF1a7wG8fwNZ1YnUruPgyd9MifY2COS1kQFsqXsTw@mail.gmail.com>
- <CACAHuLDp5COeBue8jt8U3s59UsTnzjFH33ThXVFXk7-XLCF1BQ@mail.gmail.com>
- <20250905230929.GN124814@bill-the-cat>
- <CACAHuLBgL2h+XYysfwYSOBcwyjrJRk7Z4X5Axr6PDDF_Xq17Rw@mail.gmail.com>
- <20250924005717.GG197373@bill-the-cat>
-In-Reply-To: <20250924005717.GG197373@bill-the-cat>
-From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-Date: Thu, 2 Oct 2025 13:06:27 +0100
-X-Gm-Features: AS18NWC_AwyDxaA1vbm6zMuQjZOdMF2WaZweIeD1-viUxZJlJgs9paB5F2tzPNU
-Message-ID: <CACAHuLBdYcpXRP0MTeiz4AGUAScQ0zf=+81Ez+wXEP+fzyhUrw@mail.gmail.com>
-Subject: Re: [PATCH 4/7] doc: make pdfdocs: Ensure SVG files are converted to
- PDF before the compilation of *.tex files
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Neha Malcom Francis <n-francis@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20251002-tftp-port-v1-1-96d04556b35c@pqrs.dk>
+X-B4-Tracking: v=1; b=H4sIAEdJ3mgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDAwMj3ZK0kgLdgvyiEl3DVAvzRHPLRDODJHMloPqCotS0zAqwWdGxtbU
+ AEQTxyFsAAAA=
+X-Change-ID: 20251002-tftp-port-1e87a79a60b7
+To: u-boot@lists.denx.de
+Cc: =?utf-8?q?Alvin_=C5=A0ipraga?= <alvin@pqrs.dk>
+X-Migadu-Flow: FLOW_OUT
+X-Mailman-Approved-At: Thu, 02 Oct 2025 14:55:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,20 +69,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Is it ok to replace all instances of ".. image" with ".. kernel-image"
-(65 occurrences / 17 files)?
+A few lines of code being guarded by the CONFIG_TFTP_PORT option seems
+an unnecessary restriction on the TFTP support provided by a vanilla
+U-Boot image. In cases where the TFTP server cannot run as superuser -
+and hence cannot run on the well-known port 69 - this quirk incurs a
+full reconfiguration and rebuild of the bootloader only in order to
+select the appropriate destination port.
 
-Com os melhores cumprimentos. / Best regards.
-Adriano Carvalho
+Remove the CONFIG_TFTP_PORT option entirely and make the tftpdstp and
+tftpsrcp variables always have an effect. Their being unset will mean
+that U-Boot behaves the same as if CONFIG_TFTP_PORT was unset. Update
+the documentation accordingly. And fix up the single board which was
+originally enabling this option.
 
-On Wed, 24 Sept 2025 at 01:57, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Sep 23, 2025 at 09:49:05PM +0100, Adriano Carvalho wrote:
->
-> > Ping. Any update on this?
->
-> Yes, a patch has been posted and is currently assigned to Heinrich. A
-> follow-up with a cleaner diagram has also been posted. If you would like
-> to rebase your work and in the cover list them as dependencies that
-> would be good. Thanks again for looking in to this!
-> [...]
+Signed-off-by: Alvin Šipraga <alvin@pqrs.dk>
+---
+---
+ configs/gurnard_defconfig |  1 -
+ doc/usage/cmd/tftpput.rst |  8 ++------
+ net/Kconfig               | 18 ------------------
+ net/tftp.c                |  3 +--
+ 4 files changed, 3 insertions(+), 27 deletions(-)
+
+diff --git a/configs/gurnard_defconfig b/configs/gurnard_defconfig
+index bde531a6003a2d7167767b3f509876137c7da1a8..85643f249aed65071005a157658c3dc11f44c619 100644
+--- a/configs/gurnard_defconfig
++++ b/configs/gurnard_defconfig
+@@ -42,7 +42,6 @@ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_NAND=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_NET_RETRY_COUNT=20
+-CONFIG_TFTP_PORT=y
+ CONFIG_TFTP_TSIZE=y
+ CONFIG_AT91_GPIO=y
+ CONFIG_GENERIC_ATMEL_MCI=y
+diff --git a/doc/usage/cmd/tftpput.rst b/doc/usage/cmd/tftpput.rst
+index 351c9faa38b9d8357c0e200d8cebd1f90344e0a6..2bcb3032cb2444926da28454eefdb2b128a7389f 100644
+--- a/doc/usage/cmd/tftpput.rst
++++ b/doc/usage/cmd/tftpput.rst
+@@ -19,9 +19,8 @@ Description
+ The tftpput command is used to transfer a file to a TFTP server.
+ 
+ By default the destination port is 69 and the source port is pseudo-random.
+-If CONFIG_TFTP_PORT=y, the environment variable *tftpsrcp* can be used to set
+-the source port and the environment variable *tftpdstp* can be used to set
+-the destination port.
++The environment variable *tftpsrcp* can be used to set the source port and the
++environment variable *tftpdstp* can be used to set the destination port.
+ 
+ address
+     memory address where the data starts
+@@ -75,9 +74,6 @@ The command is only available if CONFIG_CMD_TFTPPUT=y.
+ CONFIG_TFTP_BLOCKSIZE defines the size of the TFTP blocks sent. It defaults
+ to 1468 matching an ethernet MTU of 1500.
+ 
+-If CONFIG_TFTP_PORT=y, the environment variables *tftpsrcp* and *tftpdstp* can
+-be used to set the source and the destination ports.
+-
+ CONFIG_TFTP_WINDOWSIZE can be used to set the TFTP window size of transmits
+ after which an ACK response is required. The window size defaults to 1.
+ 
+diff --git a/net/Kconfig b/net/Kconfig
+index 40ec6bbce7614afde5a2a9f90d431f19a3654a41..7ba64d43b398415825921e7b61dc4c81e986618a 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -60,24 +60,6 @@ config SYS_FAULT_ECHO_LINK_DOWN
+ 	  this option is active, then CONFIG_SYS_FAULT_MII_ADDR also needs to
+ 	  be configured.
+ 
+-config TFTP_PORT
+-	bool "Set TFTP UDP source/destination ports via the environment"
+-	help
+-	  If this is defined, the environment variable tftpsrcp is used to
+-	  supply the TFTP UDP source port value.  If tftpsrcp isn't defined,
+-	  the normal pseudo-random port number generator is used.
+-
+-	  Also, the environment variable tftpdstp is used to supply the TFTP
+-	  UDP destination port value.  If tftpdstp isn't defined, the normal
+-	  port 69 is used.
+-
+-	  The purpose for tftpsrcp is to allow a TFTP server to blindly start
+-	  the TFTP transfer using the pre-configured target IP address and UDP
+-	  port. This has the effect of "punching through" the (Windows XP)
+-	  firewall, allowing the remainder of the TFTP transfer to proceed
+-	  normally.  A better solution is to properly configure the firewall,
+-	  but sometimes that is not allowed.
+-
+ config TFTP_WINDOWSIZE
+ 	int "TFTP window size"
+ 	default 1
+diff --git a/net/tftp.c b/net/tftp.c
+index 1ca9a5ea7cf6bac562006e2506ebcb17996a8c36..1760877107faef57107cb04c484157750ff63602 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -926,14 +926,13 @@ void tftp_start(enum proto_t protocol)
+ 	/* Use a pseudo-random port unless a specific port is set */
+ 	tftp_our_port = 1024 + (get_timer(0) % 3072);
+ 
+-#ifdef CONFIG_TFTP_PORT
+ 	ep = env_get("tftpdstp");
+ 	if (ep != NULL)
+ 		tftp_remote_port = simple_strtol(ep, NULL, 10);
+ 	ep = env_get("tftpsrcp");
+ 	if (ep != NULL)
+ 		tftp_our_port = simple_strtol(ep, NULL, 10);
+-#endif
++
+ 	tftp_cur_block = 0;
+ 	tftp_windowsize = 1;
+ 	tftp_last_nack = 0;
+
