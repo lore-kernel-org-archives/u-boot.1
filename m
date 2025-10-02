@@ -4,142 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F89CAC5B8
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 07:53:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF72CAC5B0
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 08:20:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6648834D4;
-	Thu,  2 Oct 2025 09:53:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2F9C5828A2;
+	Thu,  2 Oct 2025 10:20:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="SfCU8RkM";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AuUeDrvP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40CBF83526; Thu,  2 Oct 2025 09:53:41 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 68FCF8328F; Thu,  2 Oct 2025 10:20:03 +0200 (CEST)
+Received: from BL0PR03CU003.outbound.protection.outlook.com
+ (mail-eastusazlp170120007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c101::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3639C828A2
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 09:53:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFDEB80107
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 10:20:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1759391616; x=1759996416; i=xypron.glpk@gmx.de;
- bh=nv8a7ZpMT4ibcs1tHkIuxhOrT/FgaQYsdGlhzG0ZRpo=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=SfCU8RkMVEIpiPAGtb5xMObYNhuQM3acHMSABk49BFmX//GQXkOL2IqfFw10Eyfc
- MRmjzOZNFA5j0kGbulJ4jIe6/wK3PP91KZ712NBepBfydHnrcGOukVkPWQESuxVfp
- jhh4FfBi5J6CwS2iyp1iE/7ADgfz+dvaMk18V259k/RDUbCbfeHgGOQbtWinqTRb/
- 3S4ZSTCHg4U0lJzlstM3obZTYcGQptFW/EPCjZgF0CbqycxdEne6oDGvPAgQT1I47
- el1/01Auo6p/4ddoKW7Ef9LbFZzbwcR51n4ufYoyQIAiVQtmCqsxd18VnUTiEcnDX
- 08iB6tlAdbcnK2F99g==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MiJZE-1uP80n3qK6-00bEjw; Thu, 02
- Oct 2025 09:53:35 +0200
-Message-ID: <032cec91-0663-4084-b58c-44ea3773ee2e@gmx.de>
-Date: Thu, 2 Oct 2025 09:53:31 +0200
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=otm5APwxfQDd5upvffVlRwfdcLUhWAm6PV8wUV3MbfExghm+gWawUABGtvFpCh837YvhdhH6G7ZiWz3BV4ndt6K9lHKXvrZDkocqhBr6dq2Duq8/m9/EX8afqH72ntzdNYqX/+CTY1vWhjCFWk8Steq1JowcrglYI0uJY18FjQzI2hjxwyzRwJ3dMYB3jVZbs7z1opP7e87458aDnYCWf9nu9qmeJtlaEKIIHDGcWNWRHc55Domfr3s+NtJa+TdcgRv6ZUP8X5jvPan3Rp53KVoVlADn0WblDsGefjfkQC2pk/+/8l3o9DrYztX2e+YDu21DQ4xEin0AaZcvCFUvTw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cwu9pkdHuRHkV1YM4wK3o8sIZ1DF7enkU8LdqOle1Fc=;
+ b=jUpFZ1mkiMMYMjeHtoOZHmZWi1nS7aitOpHuG65j0a1T0GXrb5goaitfc21roClIejxz+qyITohCI4lsk3zkCJGS0afmgX0V+2NeKYB5kLs4IXmUfaoYNTXHZi//41oEb5Qd7UHwaFFzGjRFRQWOXbHFvinb/8/hzx9hvBGT4oVDoJCf8R52oCPA5ANDcmHZHLafSxq8N4vvi8Tc+pd6AhD1unyOB2PSaZJukWvo9E9SbQVxHH2mv73rpYAWMyL9zGX6HFDN8CbboEoj5Q+mVu5+A0eXrznVgwoY1wP1f4hlmxGdCXsH0l1x0j2qtrT1mLaAaJuk4fXnpF63yY2LjQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cwu9pkdHuRHkV1YM4wK3o8sIZ1DF7enkU8LdqOle1Fc=;
+ b=AuUeDrvPq8dP4ZqaC8Zvoo0/n74u20Mk5eBddp1cFKQBJ5y8wdkOqM66RbCpuZ/Ns41Y2WAjYNgJONmizyOAqVLKzPgFnmEWXNvhz7zj8m2vil4qOjnNsyLZBvSBUKSRo7LI3OmamiJagjMCH4EBIa3NOSPmkQFSj8a/Gvmb3v8=
+Received: from BN8PR12CA0003.namprd12.prod.outlook.com (2603:10b6:408:60::16)
+ by DM4PR12MB8557.namprd12.prod.outlook.com (2603:10b6:8:18b::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.18; Thu, 2 Oct
+ 2025 08:19:56 +0000
+Received: from BN2PEPF000044A7.namprd04.prod.outlook.com
+ (2603:10b6:408:60:cafe::f8) by BN8PR12CA0003.outlook.office365.com
+ (2603:10b6:408:60::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9182.14 via Frontend Transport; Thu,
+ 2 Oct 2025 08:19:55 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN2PEPF000044A7.mail.protection.outlook.com (10.167.243.101) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9182.15 via Frontend Transport; Thu, 2 Oct 2025 08:19:55 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 2 Oct
+ 2025 01:19:54 -0700
+Received: from localhost (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17 via Frontend
+ Transport; Thu, 2 Oct 2025 01:19:54 -0700
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: Anshul Dalal <anshuld@ti.com>, Fabio Estevam <festevam@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Martin Herren
+ <sputnik@on-the-web.ch>, Padmarao Begari <padmarao.begari@amd.com>, "Prasad
+ Kummari" <prasad.kummari@amd.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, Srinivas Goud
+ <srinivas.goud@amd.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Tejas Bhumkar
+ <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>, "Venkatesh
+ Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v2 2/2] xilinx: Enable SNTP/DATE commands and RTC
+Date: Thu, 2 Oct 2025 10:19:39 +0200
+Message-ID: <2605b1618a311efe4f35442c34e7cec973060630.1759393175.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <585f96d85b656803bd382ac25425d68998f24ed5.1759393175.git.michal.simek@amd.com>
+References: <585f96d85b656803bd382ac25425d68998f24ed5.1759393175.git.michal.simek@amd.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/17] boot: Improve comments related to global
- bootmeths
-To: Simon Glass <sjg@chromium.org>
-Cc: Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20251001212649.3263574-1-sjg@chromium.org>
- <20251001212649.3263574-2-sjg@chromium.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251001212649.3263574-2-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ZafIg2DZtvsMPwNxIH5fB+yDkC1d9EDjRQdR0KzLYDouGc6TWYj
- bYypyG0XedJEFtXPEdfnqe2lExXabi5PFD3oItA5qSplB1f+MdFClz3PtCdGn+IdVXxzFYY
- j1LMn7Jj1INpOj4US1Au/NJXdp2fCznrygUOgXD/ZRIOjL7nvPIi0OXdV7yL2aP8sSde+/0
- QMkR7OvD412JPyWL7fb0Q==
-UI-OutboundReport: notjunk:1;M01:P0:WgwiCUdXFNo=;ZO5dm0g4nYEnfaqiS3v1s0SJsUa
- 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
- T0Li12JKC+sEtp8Lg=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5515; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=X/k+uLYqcn13MStFETgNlMn253QGNCgPe3UtFy00fR0=;
+ b=owGbwMvMwCG2mv3fB7+vgl8ZT6slMWTcM50/6XxMw4kr1192xeRen6X0511g7Oxvqfd+OAsYG
+ oSUH53Z3VHKwiDGwSArpsgynUnHYc23a0vFlkfmw8xhZQIZwsDFKQATOTOXkeHU16uFNp+vvZ2V
+ HR3pUMVmf//t8S9JxW+9ub83bt8StqGQkeGW26q5si33lk5ZKBFVYK++JfKK067ySatdF17cURZ
+ 7u40XAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A7:EE_|DM4PR12MB8557:EE_
+X-MS-Office365-Filtering-Correlation-Id: b77943d1-a0f0-4725-6e4c-08de018c784f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|7416014|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?r0sYSE83v1IsJsR1YX+alfokgM5ACEQ/YXh1FvlQlaVznR7Vk1gcIxXzfsDd?=
+ =?us-ascii?Q?1J3blmKYABozZNbK0vTH7R7+fp0GcGj7JBQTqKCGCPHIDpp7U4bt1hZ0T/vY?=
+ =?us-ascii?Q?KX0yM9eiel/HLOmh3HVM/VNFUbh8NSADzgDS2QGnDyis/Gg7JAneuI+qIJhh?=
+ =?us-ascii?Q?r0bZbeYp7m0LEO+yjkW6HBG7+AA34JnXrQ/Rv76pnJmIXDVk7PVeJMboNngm?=
+ =?us-ascii?Q?D7dZ4/TkTpvJs5prk+J1LI3FtNDCLujKFpYbkPpjz/d1FpaaT82YH0AXQUjG?=
+ =?us-ascii?Q?MNg7BBzsh801m1V2EDtqUbizlWA8hubpIYK7F2VZqnVALQcE2pjAeGan8UWe?=
+ =?us-ascii?Q?HH90Zxg+pzZEURPvS1Grc+I54qyp22VNhfmSZMEBDOxEpCnIZM7Eb9sdm4Iy?=
+ =?us-ascii?Q?wfQ7X7FgztsY/yNoAcg6mBlhBu6wK56KlKblmOZFbCzbxu5hdR/++QfZ6WCN?=
+ =?us-ascii?Q?ZmawXT9W17y1OqnW+OdEJxHSjRnEmtgGgOnxCyJBOwXXrk9AxbTux6W40PA5?=
+ =?us-ascii?Q?awiaVVD71REQFM2a/sSJq0+/17Jr3FBsMVjEM2Auia3ZtKAtEZOx2tOBOb3s?=
+ =?us-ascii?Q?qg5owvkCFHaeUhxN/jBvDP19LJLWmXc8QcKnhqqG/qTprMm4WJOT42u7C9uZ?=
+ =?us-ascii?Q?BUTA+SGnFpRC9u/9AeuZpAgAwbN/3ym3bABNzqilrL+aqpukaTRSotQXYAyL?=
+ =?us-ascii?Q?/JHqjnKIul3IIn+/T41AmdTEweh/N/oTH5zMM9WgWaSP8ppWNuP1qdZ5nxPw?=
+ =?us-ascii?Q?MslrnKQMkcx5aP+osKIwXx/HraSVRqBhzPuH5z6CpSrb6+gXVsWvlYheP9N9?=
+ =?us-ascii?Q?6amW9Jdov37qLMI8p3EV+p9A0HotUZ0WDrkMoK0h1eQRFpTGS2ZEFTxLfwnM?=
+ =?us-ascii?Q?IYJIIkKSeRDG16OGb9ceG/Eu3nbBbi1nROH6ZKGmgAZfaNVu5gsIvw57UksD?=
+ =?us-ascii?Q?5c9XIao+EKJY6MiVPANKnMCgdt6fLyW40Z333d4BXxKYAdEP6WG5OOP46T/B?=
+ =?us-ascii?Q?VIxoZJqqXJQ/EZTFsXi7ZMqEB0CPu13iuhTCBGqhCQhkbImpwjF7hUdpiMO4?=
+ =?us-ascii?Q?xqlk8CKHdeE1tt4Kkauf+DzuTDnKthjvQhK6+ZtcJEfkyGKoIsLxntlYUGer?=
+ =?us-ascii?Q?4Mf03oxP7+iMLqMXJne6vQtpnENgnOxpXaX9dXFhy5V8dO2ylLee+SpGsNPG?=
+ =?us-ascii?Q?T/ihocneDZ6Fq/7hi8qb1b0Mg6QzKu+DUBaDYxZppJ7UQHCnyzWohopZc0+8?=
+ =?us-ascii?Q?bgIcYhFyaI8wM5h153/D6VpXcZPFUkGUcfXcPqI7GRCkv/YbHrLpYlcVMTeL?=
+ =?us-ascii?Q?0+I6iVWUGfdC1zi7BPvk85dXEtGWIKPuihJHFQ70XlI5eTFO2AWw8tqwKU3n?=
+ =?us-ascii?Q?9hh0Q0ggRtcrXeSypN3dcaW1P2QQaEHT9cMgOi1XkiQPdsPAZwKVgc7KaMlW?=
+ =?us-ascii?Q?2havhkLRn/fRDxlRpzjhtQVcgbw1Q4J14IP/GQzFmxXHeSo0Yo+atP3/91oT?=
+ =?us-ascii?Q?MXv1kkb9p4ohQFQZOWECvJkW9SM09TV3DokrYXAhEzg6A5uPd5BFEbMFUx9c?=
+ =?us-ascii?Q?Mih9/VZGo/NvQs3b+3I=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:satlexmb08.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(7416014)(376014)(36860700013)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2025 08:19:55.8276 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b77943d1-a0f0-4725-6e4c-08de018c784f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN2PEPF000044A7.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB8557
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -156,101 +164,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/1/25 23:26, Simon Glass wrote:
-> Add a few comments about global bootmeths and first_glob_method
->=20
-> Fix a broken line in bootmeth_setup_iter_order() while we are here.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+Enable SNTP/DATE commands on all Xilinx boards.
+Also enable RTC_EMULATION driver for platforms which don't have physical
+RTC. Enabling DM_RTC is enabling by default also CMD_DATE.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-> ---
->=20
-> (no changes since v1)
->=20
->   boot/bootflow.c        | 3 ++-
->   boot/bootmeth-uclass.c | 4 ++--
->   include/bootflow.h     | 3 ++-
->   test/boot/bootflow.c   | 2 +-
->   4 files changed, 7 insertions(+), 5 deletions(-)
->=20
-> diff --git a/boot/bootflow.c b/boot/bootflow.c
-> index d79f303486d..8f38a1ab940 100644
-> --- a/boot/bootflow.c
-> +++ b/boot/bootflow.c
-> @@ -147,7 +147,7 @@ static void bootflow_iter_set_dev(struct bootflow_it=
-er *iter,
->   			if (dev)
->   				printf("Scanning bootdev '%s':\n", dev->name);
->   			else if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) &&
-> -				ucp->flags & BOOTMETHF_GLOBAL)
-> +				 ucp->flags & BOOTMETHF_GLOBAL)
->   				printf("Scanning global bootmeth '%s':\n",
->   				iter->method->name);
->   			else
-> @@ -344,6 +344,7 @@ static int bootflow_check(struct bootflow_iter *iter=
-, struct bootflow *bflow)
->   	struct udevice *dev;
->   	int ret;
->  =20
-> +	/* handle global bootmeths if needed */
->   	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global) {
->   		bootflow_iter_set_dev(iter, NULL, 0);
->   		ret =3D bootmeth_get_bootflow(iter->method, bflow);
-> diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> index 188f6ea1895..918d78ec2c9 100644
-> --- a/boot/bootmeth-uclass.c
-> +++ b/boot/bootmeth-uclass.c
-> @@ -156,8 +156,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *=
-iter, bool include_global)
->   				}
->  =20
->   				ucp =3D dev_get_uclass_plat(dev);
-> -				is_global =3D ucp->flags &
-> -					BOOTMETHF_GLOBAL;
-> +				is_global =3D ucp->flags & BOOTMETHF_GLOBAL;
->   				if (is_global) {
->   					iter->first_glob_method =3D i;
->   					break;
-> @@ -204,6 +203,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *=
-iter, bool include_global)
->   		goto err_order;
->   	}
->  =20
-> +	/* start with the global bootmeths */
->   	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && include_global &&
->   	    iter->first_glob_method !=3D -1 && iter->first_glob_method !=3D c=
-ount) {
->   		iter->cur_method =3D iter->first_glob_method;
-> diff --git a/include/bootflow.h b/include/bootflow.h
-> index 32422067723..2ef6eb25cf5 100644
-> --- a/include/bootflow.h
-> +++ b/include/bootflow.h
-> @@ -250,7 +250,8 @@ enum bootflow_meth_flags_t {
->    * @cur_label: Current label being processed
->    * @num_methods: Number of bootmeth devices in @method_order
->    * @cur_method: Current method number, an index into @method_order
-> - * @first_glob_method: First global method, if any, else -1
-> + * @first_glob_method: Index of first global method within @method_orde=
-r[], if
-> + * any, else -1
->    * @cur_prio: Current priority being scanned
->    * @method_order: List of bootmeth devices to use, in order. The norma=
-l methods
->    *	appear first, then the global ones, if any
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> index 8de5a310add..7cd83dc7443 100644
-> --- a/test/boot/bootflow.c
-> +++ b/test/boot/bootflow.c
-> @@ -401,7 +401,7 @@ static int bootflow_system(struct unit_test_state *u=
-ts)
->   	ut_assertok(device_probe(dev));
->   	sandbox_set_fake_efi_mgr_dev(dev, true);
->  =20
-> -	/* We should get a single 'bootmgr' method right at the end */
-> +	/* We should get a single 'bootmgr' method at the start */
->   	bootstd_clear_glob();
->   	ut_assertok(run_command("bootflow scan -lH", 0));
->   	ut_assert_skip_to_line(
+Changes in v2:
+- Enable CMD_DATE via enabling DM_RTC with RTC emulation on boards which
+ don't have physical RTC
 
+I will look at moving some options to generic/shared file but not now.
+
+---
+ configs/amd_versal2_virt_defconfig       | 3 +++
+ configs/microblaze-generic_defconfig     | 3 +++
+ configs/xilinx_mbv32_defconfig           | 3 +++
+ configs/xilinx_versal_net_virt_defconfig | 3 +++
+ configs/xilinx_versal_virt_defconfig     | 3 +++
+ configs/xilinx_zynq_virt_defconfig       | 3 +++
+ configs/xilinx_zynqmp_kria_defconfig     | 1 +
+ configs/xilinx_zynqmp_virt_defconfig     | 1 +
+ 8 files changed, 20 insertions(+)
+
+diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
+index 72c53ef5f3aa..caf4aefe898d 100644
+--- a/configs/amd_versal2_virt_defconfig
++++ b/configs/amd_versal2_virt_defconfig
+@@ -48,6 +48,7 @@ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_UFS=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_SNTP=y
+ CONFIG_WGET_HTTPS=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EFIDEBUG=y
+@@ -120,6 +121,8 @@ CONFIG_POWER_DOMAIN=y
+ CONFIG_ZYNQMP_POWER_DOMAIN=y
+ CONFIG_RESET_SCMI=y
+ CONFIG_RESET_ZYNQMP=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_EMULATION=y
+ CONFIG_SCSI=y
+ CONFIG_ARM_DCC=y
+ CONFIG_PL01X_SERIAL=y
+diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
+index 07612ef5e932..0043aa8a9ab9 100644
+--- a/configs/microblaze-generic_defconfig
++++ b/configs/microblaze-generic_defconfig
+@@ -49,6 +49,7 @@ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_SAVES=y
+ CONFIG_BOOTP_BOOTFILESIZE=y
+ CONFIG_CMD_TFTPPUT=y
++CONFIG_CMD_SNTP=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_EMBED=y
+@@ -93,6 +94,8 @@ CONFIG_PHY_VITESSE=y
+ CONFIG_DM_ETH_PHY=y
+ CONFIG_XILINX_AXIEMAC=y
+ CONFIG_XILINX_EMACLITE=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_EMULATION=y
+ CONFIG_SYS_NS16550=y
+ CONFIG_XILINX_UARTLITE=y
+ CONFIG_XILINX_SPI=y
+diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
+index e3341179a682..88d9e5ce6b2b 100644
+--- a/configs/xilinx_mbv32_defconfig
++++ b/configs/xilinx_mbv32_defconfig
+@@ -32,10 +32,13 @@ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_HAVE_INIT_STACK=y
+ CONFIG_SPL_SYS_MALLOC=y
+ # CONFIG_CMD_MII is not set
++CONFIG_CMD_SNTP=y
+ CONFIG_CMD_TIMER=y
+ CONFIG_ENV_RELOC_GD_ENV_ADDR=y
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_DM_MTD=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_EMULATION=y
+ CONFIG_DEBUG_UART_ANNOUNCE=y
+ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_XILINX_UARTLITE=y
+diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
+index fb031d613190..323b56065660 100644
+--- a/configs/xilinx_versal_net_virt_defconfig
++++ b/configs/xilinx_versal_net_virt_defconfig
+@@ -46,6 +46,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+ CONFIG_CMD_MTD=y
+ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_SNTP=y
+ CONFIG_WGET_HTTPS=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EFIDEBUG=y
+@@ -122,6 +123,8 @@ CONFIG_ZYNQ_GEM=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_ZYNQMP_POWER_DOMAIN=y
+ CONFIG_RESET_ZYNQMP=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_EMULATION=y
+ CONFIG_ARM_DCC=y
+ CONFIG_PL01X_SERIAL=y
+ CONFIG_SOC_DEVICE=y
+diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
+index 39c7bd472ea5..bd6bfb7deacd 100644
+--- a/configs/xilinx_versal_virt_defconfig
++++ b/configs/xilinx_versal_virt_defconfig
+@@ -52,6 +52,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+ CONFIG_CMD_MTD=y
+ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_SNTP=y
+ CONFIG_WGET_HTTPS=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EFIDEBUG=y
+@@ -132,6 +133,8 @@ CONFIG_ZYNQ_GEM=y
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_ZYNQMP_POWER_DOMAIN=y
+ CONFIG_RESET_ZYNQMP=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_EMULATION=y
+ CONFIG_ARM_DCC=y
+ CONFIG_PL01X_SERIAL=y
+ CONFIG_SOC_XILINX_VERSAL=y
+diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
+index 4412f52bbd2e..a868e11411d0 100644
+--- a/configs/xilinx_zynq_virt_defconfig
++++ b/configs/xilinx_zynq_virt_defconfig
+@@ -71,6 +71,7 @@ CONFIG_CMD_MTD=y
+ CONFIG_CMD_NAND_LOCK_UNLOCK=y
+ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_SNTP=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EFIDEBUG=y
+ CONFIG_CMD_TIME=y
+@@ -138,6 +139,8 @@ CONFIG_DM_ETH_PHY=y
+ CONFIG_MII=y
+ CONFIG_ZYNQ_GEM=y
+ CONFIG_POWER_DOMAIN=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_EMULATION=y
+ CONFIG_ARM_DCC=y
+ CONFIG_ZYNQ_SERIAL=y
+ CONFIG_ZYNQ_SPI=y
+diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+index 332e94011877..8ad05e371892 100644
+--- a/configs/xilinx_zynqmp_kria_defconfig
++++ b/configs/xilinx_zynqmp_kria_defconfig
+@@ -82,6 +82,7 @@ CONFIG_CMD_SDRAM=y
+ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_SNTP=y
+ CONFIG_WGET_HTTPS=y
+ CONFIG_CMD_BMP=y
+ CONFIG_CMD_CACHE=y
+diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+index 6bb6a8c9e9ea..525744b0f61e 100644
+--- a/configs/xilinx_zynqmp_virt_defconfig
++++ b/configs/xilinx_zynqmp_virt_defconfig
+@@ -81,6 +81,7 @@ CONFIG_CMD_SDRAM=y
+ CONFIG_CMD_SF_TEST=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_SNTP=y
+ CONFIG_WGET_HTTPS=y
+ CONFIG_CMD_BMP=y
+ CONFIG_CMD_CACHE=y
+-- 
+2.43.0
+
+base-commit: b8889ad5d3a625505dca9ac9f0a164e7587baabd
