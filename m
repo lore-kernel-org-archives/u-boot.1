@@ -4,81 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 297F6CCD182
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:16:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE5ACCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:48:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32012836B4;
-	Fri,  3 Oct 2025 14:16:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A727836B4;
+	Fri,  3 Oct 2025 14:48:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zE3eBfuO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OKzcu3vJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 963A2836D3; Fri,  3 Oct 2025 14:15:59 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44DDC83693
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 14:15:57 +0200 (CEST)
+ id 71EED835A2; Thu,  2 Oct 2025 18:58:44 +0200 (CEST)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D0AA81D6A
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 18:58:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 593CFsOw3484808;
- Fri, 3 Oct 2025 07:15:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1759493754;
- bh=uV9SDi3HsY0NhRbI87T0M/6LPFlcNQOg1HfadHondCE=;
- h=From:Date:Subject:To:CC;
- b=zE3eBfuOLt3QrB/iUot7qyW7u1EYs2pS28YwxhCIGBaFvfdRTrerdSyUkHARE4KE6
- Y1YsRmubV8SFcDd8e0dyJp9LuoK+52f8eAxDAmWiO9NgM66SRD+qUSvqha9hA03NSD
- Yb6JR66Jqyzq4bfvFuaxcqWm71cPpobAgcdwOT+w=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 593CFsr91164955
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 3 Oct 2025 07:15:54 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 3
- Oct 2025 07:15:54 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 3 Oct 2025 07:15:54 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 593CFsvo3362628;
- Fri, 3 Oct 2025 07:15:54 -0500
-From: Bryan Brattlof <bb@ti.com>
-Date: Fri, 3 Oct 2025 07:15:45 -0500
-Subject: [PATCH -next] arm: dts: k3-am654: add vin-supply regulators for
- DDR
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mfournier@baylibre.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-57bb7ee3142so1373376e87.0
+ for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 09:58:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1759424321; x=1760029121;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8kyB0L1jXCzciR6FwHF7vq8CM9sJwLPWOOVhgdiu/l0=;
+ b=OKzcu3vJkTdr8nkeFN3Bis5MXed8cwF+IZnzi9VBqMIYQnPp8QRxqyLSb5DRS4v7rW
+ PC7RwpEbH8FBNaguIHAA3Gb70FRqh4434QVrYt2Cc2mSW4HAXfJ2B2k8ReeZM9JGGIFr
+ tV8v6ejcQZbgJ+LJQbcLfVudexlzqiH6wxl4Q4SEwrs9R7D+iKni3pTMdY31D69bmg+y
+ vyWylr7RDjjN0GFPzQEmCZsacAc/7CzymVnuG2jO7UmqQDVyIoZkefkiWtFt5E69DL6x
+ tw9gituhVkyf6fyAv7B1rTEtX+2pQEqAjnvuna45g/Vpqwk/C41/pF2Pn8bjlFlopMRe
+ mzSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759424321; x=1760029121;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8kyB0L1jXCzciR6FwHF7vq8CM9sJwLPWOOVhgdiu/l0=;
+ b=mI9E9xkIPwy3SOssYNVm8PpdrDfQhT/ENqMVs+fcorfu4RCH8xaiCfZF7SlcTIpfnP
+ yuhWb/Mfw/5Ys1y1fpci08jj0Ahdy7LvBSMYv43xWSvfJJrmxVvFOiHkbkV6hwGXPZuq
+ fk0jfKk3U1m4vUKHHXdpx985L3wcw8Dfcg8cmcp9/Y9X0D05Hv+00TCWI/27hxrigsml
+ 8rqtAw4sGoQJDJhpu4saVE/UzSF0BxAXPd7hv1EQ0Lpz5ODBIeC/oAnqMBG+QzJV2zdz
+ SerhmRfJ6ZSTeI8tgRZdMPmcH7aODU+CgmjG3+2HF3VdoIWVqRmRlPSgx1fFaN6Kl/Za
+ Ye4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXbAOc9ynqlAWDBMpO6TJPR7hM91EbpNQI7rj19ycvOLHLKX3incTcc1n+7OapARM05+MRfwIk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyHfDAw9oMZUpylC+EhHW/uJrZdRalbfjERgsmW6fWPIZx3q0oZ
+ jdr4NAo+sCsfGuhnao+kPiFxzj/J/WAcuISdSNJWtgzUWCmhw7plGAh9E0aZoopoCT66slyN0TY
+ nkJOgBgQWzb+X7rokyBIigjbmXmasK10Rygw5J+0EEg==
+X-Gm-Gg: ASbGncu8w27TwsQFni8C71ixFZvD5iL7l3nvRWMfBKtsbUfhT3GF+wtCNS4dfwDYE7c
+ Eykbr8tzinsOxQsR01zqHFtVDxxds8Ih9f9tf7E8WaOkWauVOUkRcwDnFkcmCt41ribdZnz0VCw
+ SSG2GiOfDfDE/OI57K+wKckdJKEcITRRMkpw5wT81UvwZjrMv3TlheGCJBWcywI0wmZHXs1MWaz
+ 4tsYHTtCQ1R7AzyO0eU9Ao3/rbFaaHIM1mzPY1ssTicxiu9T5NVGmXK7vtQU0U=
+X-Google-Smtp-Source: AGHT+IHZcTtKEkHBNnahuXKBWOGXaFdAHJv3GR7iOXTXhtw28fIHJdoNveAwrHoukuWWNcPYCyrsB/rmiE7R1TaYYxM=
+X-Received: by 2002:a05:6512:3f27:b0:57f:405:7afd with SMTP id
+ 2adb3069b0e04-58af9f6af1bmr2346164e87.30.1759424321532; Thu, 02 Oct 2025
+ 09:58:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251003-654-next-fix-v1-1-55d803b07d6e@ti.com>
-X-B4-Tracking: v=1; b=H4sIAHC+32gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAwMjXTNTE9281IoS3bTMCl1LC9O0ZEOLFGNzgyQloJaColSgMNi4aCW
- wMqXY2loAiLg7q2UAAAA=
-X-Change-ID: 20251002-654-next-fix-985fc18d370b
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Bryan Brattlof <bb@ti.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1220; i=bb@ti.com;
- h=from:subject:message-id; bh=2vHQu2SSFVE4DFMptcCYiZANAbyeaaMiBd9ZHL0bXSE=;
- b=owNCWmg5MUFZJlNZ62Dd0QAAan///37L133zr/batUcv/v8fuaL73N3X/e//7+8v977Zz2awA
- RtYDtQAxAA0NAaANAaaBoNAGgA0GgDQMmjJoaaADQGgGTIDTQMGgDQj0npEGjRo0DQNBoAGgyHq
- NPQhoGmmgGIaDCMj1A0B6gADJoZBpoPUAMmE0ZGQNDIDoNHlNB5JoyABozUaDQAHqeo0DJoGgaA
- DQAaANA0Gj0EGgNGhkNAaD1BpkDQJk7AotP0jwCkAADQPQxbMj5syCYn39YFohPz2SgNeCCZEm0
- y5YjbztL7NtXch50nwD20LHm4Q4pgE4BDP7TBeTE7jvuW2+XAA+XASQEMC6x6iebhdc0fTiEY1M
- bHEwlt0xNfccKRICjCtaMP2s9+dWJNz3EA/CDfCHkVxqSrB7JkCJh6vK0q2vwSUG6HLKAoQyGND
- ND7e1/eCCRc7IZbfLF/eO38gPE+w1fZIsJi2Ock+1mDMOVbkaOTIWJJ+Fmb5cHFtx9aaPFadKCC
- 3TQjQEJkV70+ivYoDiupwHJlAvdKpYCNlzBgY9MHRZmtrF+Oqdmlt4oBg9idvXH8KYFTxciRJLX
- JZ22ONjQ0M7Sm+5Hf+rMeye1wDgIJK4CAIXam6RojpaZLisQMQBPhieli1djtcRSNjHW/hCWZyK
- EEdgcZTkJ/4u5IpwoSHWwbuiA==
-X-Developer-Key: i=bb@ti.com; a=openpgp;
- fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20251002-avb-v1-0-1f93543822ce@baylibre.com>
+In-Reply-To: <20251002-avb-v1-0-1f93543822ce@baylibre.com>
+From: Maxime Fournier <mfournier@baylibre.com>
+Date: Thu, 2 Oct 2025 18:58:29 +0200
+X-Gm-Features: AS18NWDa3sJG0k8ZkLDV5MF54kZOBCm20d9r-tpAlngddoIkwfthyEJVNGkxfvo
+Message-ID: <CA+tTRfLcAKz4oNL+TDL30jAE8_a8mf=FNmvioYYSPPKLGH1kgQ@mail.gmail.com>
+Subject: Re: [PATCH tiU25.01 0/2] ANDROID: Add some features link to OPTEE TA
+ AVB
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>,
+ linux-patch-review@list.ti.com, 
+ u-boot@lists.denx.de, Praneeth Bajjuri <praneeth@ti.com>
+Cc: vishalm@ti.com, khilman@baylibre.com
+X-Mailman-Approved-At: Fri, 03 Oct 2025 14:48:13 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,45 +99,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As of f98d812e53534 ("power: regulator: Add vin-supply for GPIO and Fixed regulators")
-we must ensure the parent nodes of a regulator are present in DT if
-they are described in the vin-supply property
+ Acked-By: Maxime Fournier (TI.com) <mfournier@baylibre.com>
 
-For the am65x reference board the DRAM chips are fed by the 3v3 rail
-which is fed by the main 12v rail. Add the bootph properties to these
-DT nodes to prevent them from being pruned during the SPL build so we
-can enable power to the DRAM chips
+On Thu, Oct 2, 2025 at 12:45=E2=80=AFPM Guillaume La Roque (TI.com) <
+glaroque@baylibre.com> wrote:
 
-Signed-off-by: Bryan Brattlof <bb@ti.com>
----
- arch/arm/dts/k3-am654-base-board-u-boot.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-index 4fd188fa191b469d69b461b49b17635f914eb53e..baf5dd562f99310f3c8fe1d272cea2fd85164be0 100644
---- a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-@@ -17,6 +17,14 @@
- 	bootph-all;
- };
- 
-+&evm_12v0 {
-+	bootph-all;
-+};
-+
-+&vcc3v3_io {
-+	bootph-all;
-+};
-+
- &vtt_supply {
- 	bootph-all;
- };
-
----
-base-commit: aff68c8514858ddd8d2e508d47bede566511521b
-change-id: 20251002-654-next-fix-985fc18d370b
-
-Best regards,
--- 
-Bryan Brattlof <bb@ti.com>
-
+> This series add some Android features link to Android Verify Boot,
+> device lock/unlock and keymint TA
+>
+> - Add support of fastboot flashing lock/unlock  and
+> lock_critical/unlock_critical with Optee TA AVB if supported or with env
+> variable (for development only)
+> - Add support of get root or trust with TA AVB and Keymint TA
+>
+> This series will be upstream after release.
+>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+> ---
+> Guillaume La Roque (TI.com) (2):
+>       PENDING: fastboot: Implement Android bootloader locking with
+> CONFIG_FASTBOOT_LOCKING
+>       PENDING: avb: Add automatic Root of Trust integration for Android
+> KeyMint
+>
+>  boot/bootmeth_android.c       |  15 ++
+>  cmd/Kconfig                   |  13 +
+>  cmd/Makefile                  |   1 +
+>  cmd/avb.c                     |  13 +
+>  cmd/cmd_avb_rot.c             | 129 ++++++++++
+>  common/avb_verify.c           | 183 ++++++++++++++-
+>  drivers/fastboot/Kconfig      |  21 ++
+>  drivers/fastboot/fb_command.c | 450 +++++++++++++++++++++++++++++++++++
+>  drivers/fastboot/fb_getvar.c  |  68 ++++++
+>  include/avb_root_of_trust.h   |  50 ++++
+>  include/avb_verify.h          |   9 +
+>  include/fastboot.h            |   5 +
+>  lib/Kconfig                   |  18 ++
+>  lib/Makefile                  |   1 +
+>  lib/avb_root_of_trust.c       | 534
+> ++++++++++++++++++++++++++++++++++++++++++
+>  15 files changed, 1503 insertions(+), 7 deletions(-)
+> ---
+> base-commit: 5b93c3ec7f9d66dc40d062a47a4a880f7d346b7a
+> change-id: 20251002-avb-6be401c09050
+>
+> Best regards,
+> --
+> Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+>
+>
