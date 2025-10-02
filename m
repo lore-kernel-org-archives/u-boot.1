@@ -4,92 +4,219 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC6ABCAC5B8
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 14:32:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FDD5CAC5B8
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 14:36:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC2B2828A2;
-	Thu,  2 Oct 2025 16:32:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 120C8828A2;
+	Thu,  2 Oct 2025 16:36:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pmj/t+IZ";
+	dkim=pass (2048-bit key; unprotected) header.d=seco.com header.i=@seco.com header.b="SJsWARYG";
+	dkim=pass (2048-bit key) header.d=seco.com header.i=@seco.com header.b="SJsWARYG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56430831D3; Thu,  2 Oct 2025 16:32:38 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ED72A834D4; Thu,  2 Oct 2025 16:36:18 +0200 (CEST)
+Received: from DUZPR83CU001.outbound.protection.outlook.com
+ (mail-northeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1D4880107
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 16:32:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5611780107
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 16:36:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-45b4d89217aso6764925e9.2
- for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 07:32:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759415555; x=1760020355; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=D77esQB3zR31etLC3ez8X80mWn4MscRLsXo1Hv++Tjc=;
- b=Pmj/t+IZSLE3VE54Qkq0awbXKdQBKHRql4N8qXSfT90aG1jPI52Wj6ZQ8EULVnvU89
- RC9ZVNdQZCtPayxq3DWGoVs1sJ9+ZWUaBNaaA6bmtfVNI0kxKTGtIC36E10eDQMIKYS9
- R8ciWSS7ChMLEY/urSxKXBD2SwCOaGn/7Nf/Jane4rXA7PR9Z2gPxrsZ0GIiJghf3cCq
- sAMi3vrjJRSfXL27yHF4TB3jZt1pPFO0qQtNVpSwSEIRMIF5wrsDeTIW181mQ9ZEPSKd
- czrhF8uG7WZ8KuUIjKQkewz6/AZmqR/s7CLllzgcdqpDOkpcuTvyotJtkTE6S0Hx4PDF
- Cuvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759415555; x=1760020355;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=D77esQB3zR31etLC3ez8X80mWn4MscRLsXo1Hv++Tjc=;
- b=E3ESPK12PEQrQq2yQ3rLJtVfkGNZTE3whYzZhIatfMfv8yaXvWy5ZcRWvkVzcHiMQf
- KuTSjpUcoII/e+vozIObmtzoAkWDbgfY94BcOb0ZLTfdBePEJ1IgC/PCuGkBfN3S1bf8
- q1q5r/CndR6a8fYiNb/nNe3oCqP58KBQzId+B1HGglPgbtZhY4NByc77W4NfvX1gDvwt
- p2z76Ri4mmbsVbxFzQ5Mm7KH2H74SpZ8kmSXdTuUAxFZc9kwrXjEVqWkEtBhp2e9jgTO
- vwUulbmqgUGOJhyZposbZ3WlkvN4tHakOjajIeq4D5P3N4dD88SZ1JRX0VAujFcON2Ga
- m1cA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU8jV06AP/Pg56YTaR0L+xxQmLmO6BkEVMKSpVrLC9tieZ5t4gk9uCZkRzz60fEGHHfyLLjERM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9KgZijhwqbTjN05H95VUXO4NyBimI2zeN3cHyXOrffeiCyvXO
- 6fEMMOSn/gC1eVgqPKrb3ITzhvgP8TbJuHEEA5RAS6t4p/oX/05i7MVUr4OvhqfKlMA=
-X-Gm-Gg: ASbGncuIEHJyrXLCW5UzJwvWHC5jXCBZkrktv2F7M5oodkods1LFWPQjjXpwgABLL54
- wDe8pPu0pPA0daCz/W+FtO1d99kwvNP0+AvteXFVKb8C5V5g2Q/vKIvM5/eewSwH6LstECl9gIR
- f7cadAJICYilLNUqQtzR+HbeIn45MTupCKklZRU6vut0UmX1RzdViXu0Umc4/++CvEUxCl41aA1
- 7HS+ISK498EeVCmJHB2xKOMXMy/SSwKT6kHUSdjfElB7StXkfGqGpU4XjNBmFXTkgrPQnsuYJUW
- LxcSn4kKo61A03K2wPTBETia3IGyeTwkmFXs5faDvwp7NTZEeqD48E7MaYHmync/VKsyabl6ePd
- rkLzalwXmX9j794Ah0a7NB1nIPeLvA/SMPT6hfA8vdfhQEv0eaUNFZ+paXSz9coITb0VsZVCT+I
- sqBNA=
-X-Google-Smtp-Source: AGHT+IFtV9Isk8g7o47BUlmsT5HiuEqYT96jdngAHvgxzljX8Wpvd5WVGR3tY2N6ocJ+f88qCidWPg==
-X-Received: by 2002:a05:600c:5285:b0:46e:39e4:1721 with SMTP id
- 5b1f17b1804b1-46e6121adbamr60154835e9.12.1759415554956; 
- Thu, 02 Oct 2025 07:32:34 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ebd:e301:a21d:c610:1e27:3706])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8e9762sm3850861f8f.38.2025.10.02.07.32.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Oct 2025 07:32:34 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Thu, 02 Oct 2025 15:32:33 +0100
-Subject: [PATCH v2] fs: semihosting: Fixup smh_flen and smh_read against
- overflow
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251002-fs_semihosting-v2-1-c1783e4188d8@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAACN3mgC/3WMywrCMBBFf6XM2kgSTH2s/A8pkiaTdkATyZSgl
- Py7sXu5q3PhnBUYMyHDpVshYyGmFBvoXQdutnFCQb4xaKmNklKLwHfGJ82JF4qTOBnfn49hDM5
- 6aNIrY6D3FrwNjWfiJeXP1i/q9/5NFSXalD5gP6JzRl0fFG1O+5QnGGqtX1PlgyStAAAA
-X-Change-ID: 20251002-fs_semihosting-85d697fbfcad
-To: Sean Anderson <sean.anderson@seco.com>, u-boot@lists.denx.de, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Tom Rini <trini@konsulko.com>, 
+ spf=pass smtp.mailfrom=sean.anderson@seco.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=n6hB4oEXwr+yPwUNzPJb09gRso5Xn6FyV7pquTFfR4+aRE6rHRP8vH4JlBIinJih5ydOG2OKHk8XzUdPn636cxC72PGE6SqFjVTE6NkpNA//Rz69qI7VgDSB2yI2Z6YLjFYycjm7dggeNHnlnn/CsNT87YMS1t8nLRqLByUFXCP8k5rvjV8bflPSwOLVEWDVnflUyb1+b/BajU8yRn3uPWh3DlPmqiuVBugC3z1Ldw8qFWNHxpasHPbgi3OCox4WD+Zjqms/eIDUiqxB2GC9RXyrqM1issi1S+zl6L2zhDm7tCeFERjtdcVRJ1aaslcVWUz2COfeOFtdQcktRBYn/A==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=k+lpzGBmuf2Cq0OiIay10/N+l5yAFGwzaP3dHe+2t28=;
+ b=ELHSEAEfOjSgHdASRFYne1FCO6Kj3OfZ8YnHF65QoJupYmnjw/uCkSYTSbhDkPtpdPWhjg0EvtZLkKZRzZqPEc8lFxpZkd/DG3MQMnz6R9m/l5CdJrDb9oxNFj7+D78Z5yR6Z5EmKKija6aSdrpJzQIf3ldz2TeXmga/530JivInebFArjT23YlazFz0GeKFjLjbDUe8MAZbXNaTzOwxGeDQP/o0MoNjQX3iv2S2jgPJucH9c+tHnh2QfTdfDYDwlMAD5RRpLqa8VAK7sHDeCsZR+ZkY67LiHjBWbv/O2AprxkUJArQR8ZSTOx5geZ2a4ccZ3c5GAzZ1fA/ZzuOKPQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 20.160.56.86) smtp.rcpttodomain=canonical.com smtp.mailfrom=seco.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=seco.com;
+ dkim=pass (signature was verified) header.d=seco.com; arc=pass (0 oda=1
+ ltdi=1 spf=[1,1,smtp.mailfrom=seco.com] dkim=[1,1,header.d=seco.com]
+ dmarc=[1,1,header.from=seco.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k+lpzGBmuf2Cq0OiIay10/N+l5yAFGwzaP3dHe+2t28=;
+ b=SJsWARYGlH4onAhieTpp60DO1Gn9enYDRjjujCSMCO4298hq5pGcX4OE/s2VlmMFtTuPn3ejJF7YNRvCPUlhmaPR5MTm8hL6ukF8BlPTJZBWRw/YZtWhAHn4f70YnyhP76jEG+qMIYl1EfAzJBehM5bD1zKpNSZfsqAzdJ1begYHgz7KatNKPUy/NZFkq2LvgQbW+MxIPQjzKU66/EmQbkwMRjVze6RNqv0cKIp14j0Uye5ShXhESw7RTFmYFAKguKN2OSevDfGTccDrDwqk/RcsIDyTl6D+ww9HfQOIH9VNFgzWZOdowd5uR4g/HK1YCgt5MkFtRJEMdk2loM6B5w==
+Received: from AM0PR02CA0114.eurprd02.prod.outlook.com (2603:10a6:20b:28c::11)
+ by PA1PR03MB10625.eurprd03.prod.outlook.com (2603:10a6:102:492::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.18; Thu, 2 Oct
+ 2025 14:36:15 +0000
+Received: from AMS1EPF0000004A.eurprd04.prod.outlook.com
+ (2603:10a6:20b:28c:cafe::86) by AM0PR02CA0114.outlook.office365.com
+ (2603:10a6:20b:28c::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9160.17 via Frontend Transport; Thu,
+ 2 Oct 2025 14:36:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.160.56.86)
+ smtp.mailfrom=seco.com; dkim=pass (signature was verified)
+ header.d=seco.com;dmarc=pass action=none header.from=seco.com;
+Received-SPF: Pass (protection.outlook.com: domain of seco.com designates
+ 20.160.56.86 as permitted sender) receiver=protection.outlook.com;
+ client-ip=20.160.56.86; helo=repost-eu.tmcas.trendmicro.com; pr=C
+Received: from repost-eu.tmcas.trendmicro.com (20.160.56.86) by
+ AMS1EPF0000004A.mail.protection.outlook.com (10.167.16.134) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9182.15
+ via Frontend Transport; Thu, 2 Oct 2025 14:36:14 +0000
+Received: from outmta (unknown [192.168.82.132])
+ by repost-eu.tmcas.trendmicro.com (Trend Micro CAS) with ESMTP id
+ 8E6D92008161E; Thu, 02 Oct 2025 14:36:14 +0000 (UTC)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com (unknown
+ [52.101.84.124])
+ by repre.tmcas.trendmicro.com (Trend Micro CAS) with ESMTPS id 8BBC1200C4FEB; 
+ Thu, 02 Oct 2025 14:36:13 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iRcJvFWS0lWAJN/SnwH906YOG0xYoq0ZsdFxvVAf1d2bN/r4fpR2LGMadjh/a/uRNZjLIa78IGgSL7gDTQ2j+cG0VwhQ2g9Pi4B/qKycKsyzfChDIPraANCkOvnrpH2DHs6AU9P36qN20apO/+dGacqbB6rk6GNqaSepd7lGmbc3UCVdb+57KlQ+qJt6lpxgt3uxvZDxKPriOBjKOmE9dj+o+DoZWLRZ2W+vrCn5GsOU/Wb2aOXurx8DzcoSGfW3BcDfX/39FxNHH7f8Zhn0hHtCrVI1nYLlWOm87MuQ0/9m3ztWLACXWwgs+PfPk0stzsX1Sx8v/ls5zTV+r6krnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=k+lpzGBmuf2Cq0OiIay10/N+l5yAFGwzaP3dHe+2t28=;
+ b=MYvBF8iq4st6XAAv2QfBsPtF+Fjm9FLHKrYI54MNtRM/z6qGhcbq68TP4kdwBu9fFU1fZGoyQ71xxheAAbsWfWTDKYT6OW42mDY5Kjt3ywH4iA+Oq8TFUEEYdkWEXGM6ZWhlmajexoYDuu3azUUWZgBiKTBxlxZNNAfQ1HX5AiFqUGWjSmyx+GPdgr6tPBW3wBoG0UaSjeX9Fn+CJB8hD9uUwM8UWtRl0GIib1CFelYn3wkIBCXi5lQvPEJe5BhZWCyEnBLijw1LpoQ65Odvs3JaaD01hMFrhVc2VllO5MnfznPwxYy5PEDiqw8Tqk58kg/Arr5HanGbTTjxavW8rA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=seco.com; dmarc=pass action=none header.from=seco.com;
+ dkim=pass header.d=seco.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k+lpzGBmuf2Cq0OiIay10/N+l5yAFGwzaP3dHe+2t28=;
+ b=SJsWARYGlH4onAhieTpp60DO1Gn9enYDRjjujCSMCO4298hq5pGcX4OE/s2VlmMFtTuPn3ejJF7YNRvCPUlhmaPR5MTm8hL6ukF8BlPTJZBWRw/YZtWhAHn4f70YnyhP76jEG+qMIYl1EfAzJBehM5bD1zKpNSZfsqAzdJ1begYHgz7KatNKPUy/NZFkq2LvgQbW+MxIPQjzKU66/EmQbkwMRjVze6RNqv0cKIp14j0Uye5ShXhESw7RTFmYFAKguKN2OSevDfGTccDrDwqk/RcsIDyTl6D+ww9HfQOIH9VNFgzWZOdowd5uR4g/HK1YCgt5MkFtRJEMdk2loM6B5w==
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=seco.com;
+Received: from PAVPR03MB9020.eurprd03.prod.outlook.com (2603:10a6:102:329::6)
+ by DB9PR03MB8281.eurprd03.prod.outlook.com (2603:10a6:10:308::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.15; Thu, 2 Oct
+ 2025 14:36:11 +0000
+Received: from PAVPR03MB9020.eurprd03.prod.outlook.com
+ ([fe80::2174:a61d:5493:2ce]) by PAVPR03MB9020.eurprd03.prod.outlook.com
+ ([fe80::2174:a61d:5493:2ce%4]) with mapi id 15.20.9160.015; Thu, 2 Oct 2025
+ 14:36:11 +0000
+Message-ID: <7f274115-8fd1-46c3-866c-278569aca469@seco.com>
+Date: Thu, 2 Oct 2025 10:36:07 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] fs: semihosting: Use correct variable for error check
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20251002-fs_semihosting-v1-1-1124e6becc51@linaro.org>
+ <2780374a-3a85-4969-96df-34e331a53c53@gmx.de>
+Content-Language: en-US
+From: Sean Anderson <sean.anderson@seco.com>
+In-Reply-To: <2780374a-3a85-4969-96df-34e331a53c53@gmx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL1PR13CA0094.namprd13.prod.outlook.com
+ (2603:10b6:208:2b9::9) To PAVPR03MB9020.eurprd03.prod.outlook.com
+ (2603:10a6:102:329::6)
+MIME-Version: 1.0
+X-MS-TrafficTypeDiagnostic: PAVPR03MB9020:EE_|DB9PR03MB8281:EE_|AMS1EPF0000004A:EE_|PA1PR03MB10625:EE_
+X-MS-Office365-Filtering-Correlation-Id: ddfdf287-c10f-4594-ec25-08de01c10a5d
+X-TrendMicro-CAS-OUT-LOOP-IDENTIFIER: 656f966764b7fb185830381c646b41a1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?VHlXQnE3OSt2TFN3MWtCT1hPdHIxeXN4YUtBck5xQ2F1LzdlNWFmOW5ISUd0?=
+ =?utf-8?B?V0dmQTR3K0t6TG5JcU1NYjRaVVllMUQ2amltSEt2VmZoaVFycG9lK2dyT2h4?=
+ =?utf-8?B?ekZ3Z0p4aHNuZ0VObzhxWVpiM3J1NXA3aTVVKzd2Q1FxNDg1NkNFL0R3bmZp?=
+ =?utf-8?B?bDdhSU1TVXZTcVNQMFpaNjhzOWljRWRiZWZESjFxaUhNeFZFVktkaStBbWsv?=
+ =?utf-8?B?V1Z0K0RNbGJ0OE5sSDQ2ZXhjaFJpdTJycXFjK0tIdU8yK1ErMUxYSDZHQkVv?=
+ =?utf-8?B?TDVRSE1YQjJ3K0tDQ1dMVDNUNklXeFV0UWRIaTR2UzdtS2J0YVF0VEUxVkJU?=
+ =?utf-8?B?T1lFOTJFRDRheTF4WmxOTHgxeVdxbXUvdTBDeFdKNFY4QngrRm93NGQvbC9o?=
+ =?utf-8?B?MDlJcWJMTWZ6empLQ2d5eVFsZ1luVTdOa2tFMm9DckUyVm9BSkZDemdGQUlz?=
+ =?utf-8?B?cE81bTc0NDJJVFJRRi9UeGRmWVZiSzRlK0E3VTU3NWdZOW5MbDNDR1lTbENw?=
+ =?utf-8?B?ZlEzcUd5RUQxeGFCVzVJa29uMVlxY2ZXUmtBU2F2OWNFdXYwMGlCazV6RWI3?=
+ =?utf-8?B?UGN3MG1zb1A1UCtUcm9NcEVESGp2dnh3a09VODhkRUJCbVRxTXRPWHdIc3hG?=
+ =?utf-8?B?aWdtYjY5c2VhSk9wZytWSzFCa1phdWVGRkp3bi9Edm1PRUJXTXM0UUJ1Zy9N?=
+ =?utf-8?B?LzljSEpSQlI1RXRHcjM3ZWxyNzgzVktBYVNLcVA3VXJJa2FtUkxVOXdHNVpp?=
+ =?utf-8?B?UTM0SEpxZFJ0dW5VUkE2QkdKdTkramErbXZtLzR5bVR0SEVkNFVienA4bE5V?=
+ =?utf-8?B?bUQwdWdLaWpGTlhVck5mUkk2R0FwcnppeDk5ckhRY01wVVMxaXJaaHpTVnpH?=
+ =?utf-8?B?T0IvN2luTGZkdVdDeVVRRVBESEZtUnRJVHNsZkR2NEExTEFkNmxZYXpEaFZO?=
+ =?utf-8?B?dXp2Tk9ja1NRTjR0VGJzSkVWUDd3M0EwSHpwZ1JlSXcrcHF3MG1PcUhwZFJ1?=
+ =?utf-8?B?dkQ1WVRjVnJHSGd0UFp5ZmtmODBOTUszUjlZN3FFNGFVU3JIYmVFK1c1MVY2?=
+ =?utf-8?B?UU5jMTZ2RUUzeWxrcDEvbTJoQVdKT0wwNEkvTTluWTBGSmF4NFhUeTM3M0x2?=
+ =?utf-8?B?WWQ5QjF5YzliM3lkVXd0UU1YYjZxQjM2c0ROV1RxS3c5UXExL0pUeEZEZXNr?=
+ =?utf-8?B?aGExeVNKY3JsTzFKdmEvUXIxV2hLQmpFc1hxdzFza3RkakJ4aCtLUU9JSllG?=
+ =?utf-8?B?MXNkU2tOQmpRT2RhOWhyQ1UwWEY5eUZyTnpSaFpHa1Jka2E1ZDRSNWVpMkdT?=
+ =?utf-8?B?N2RLOGlrcHY1TkRVR05BajFnd1dQU2hFMmZRNklia1podnNJbEp3cjNWeUpa?=
+ =?utf-8?B?MitIZjRZdHphSnZ2cklVUWp6Y09IQVg4azVrbWpDWWMwN2NEaVMyL1diNWhp?=
+ =?utf-8?B?c3c5eFF1VzVJQkVGYlBCQ0ZncmFxVDA3eUZWMWdVRzd4NTg5UnQ1NmYzS1pu?=
+ =?utf-8?B?dVN3VHhzemszc0cvdWQ5THRBZlJraStWcC8rdUZvckxCY0VPcnViRTVjTzZp?=
+ =?utf-8?B?NlVNcVh5TnNkSHFRcjM0WnFnS3l3WVRpZ0RXeTV4bHJOYWFxNXZpVjZQWHhr?=
+ =?utf-8?B?a0g5WmphY2dZQmdkNWsyQloza21VSmh2QjJiN1VhVU9BZCtnWmpadUVyaVc1?=
+ =?utf-8?B?R3NnekRZUmJ6a3NXQzRJc3RXVkhuRnNENzlSWTlJYVBUWllMcXQyRGQ2eSs1?=
+ =?utf-8?B?V2NieEJ4alVqOS9KWngrZjc5b0NMUXAzUE5ISk9zTGNRYk42ZG9iMkVWUVo2?=
+ =?utf-8?B?bGtzM09iYWxUSjJmc3Q3d1hWMklJNUF1YkNVVTRXeitYaGJCL3Y4RmZxVU8x?=
+ =?utf-8?B?VWlZUUZ5Yi82Q29XcEVUOFpLYlhBMVREMVdwZDYrT0tTbFVNSCtaeXJpRnZP?=
+ =?utf-8?B?TUk3UzZXbHVka0ZaZ3VUSVNzYXQ2djJkSVV3UUdyeFZPR3IzTVk4OWpQSDQ2?=
+ =?utf-8?B?UDI4YVowbkN3PT0=?=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:PAVPR03MB9020.eurprd03.prod.outlook.com;
+ PTR:; CAT:NONE; SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1102;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR03MB8281
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS1EPF0000004A.eurprd04.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 7c197e8f-d974-4c81-e6b4-08de01c10808
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|35042699022|82310400026|14060799003|36860700013;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?N2FkeHFscWFjclc3L0pFU2R1TmhXZDZMMjR0dTZSYm9jcU9lSys2VVNSbGRq?=
+ =?utf-8?B?Z3BqNmprNWtuMVFkOUtUWGlIb0FuN1h5T2hzWVp6WSs4cUtwR3FabnoxdnhT?=
+ =?utf-8?B?Tml6RDhSSXZtbXArUkhpTTc5cFRYaUh1N29ERE1aS1NsSkk3MHFGK0hEYTRj?=
+ =?utf-8?B?a2ROYXZYRlZLYUo0SVM0dyttc3QyMFJpa1UyeUx3ZHZRYk02SjlhQmtVUEtE?=
+ =?utf-8?B?SHZ1TW9Kd211MEFsS2FGS0UzdjFQRTI5SzJuQjRWaXN0YnVkWHZlRlkyZVRN?=
+ =?utf-8?B?am5WV1FZajFqS1pIaTc1RlBxL3p6dEt2SWdXaVVneW12WUpkMXcvVzBJZE5T?=
+ =?utf-8?B?QkhHVHB3RjA3ZkF0UnVibjJ5SUJ5MWxBSHpsanR4WFBpek5EOGNhKzhhbHJI?=
+ =?utf-8?B?N2ZNZlhBYlp4SkFNSndXUzdLc3JldC9tT011M2lTTHh6N3JGeEtGc2cxSnV2?=
+ =?utf-8?B?eVZRUHVYU2hIazl0NnJ1U1IwaE1iRUk3d0NERVBuNEphV1pRQkZ0cDVET2pR?=
+ =?utf-8?B?T2ZEWUhQNDdNWlRjYUhNa3UyUk5Ea3N1Y2x6djNvN01YODBndVhScXExMUNB?=
+ =?utf-8?B?d25FRVdTNWsyTUdVVkFYeHhpVzYza2E0WkVJb0VkUUxSNFl2dTRmNG9rc3lO?=
+ =?utf-8?B?NFVqSElyb2dPTElESTJ3SCtuQTg4Vis3N0NSMTRvVlltRVAyLzdUdldLcXBn?=
+ =?utf-8?B?ck1RM2JibzdsRlloZHFhc0VRWU5hTDI1eENYcTEyQ1AyQmdWQm9PODdjd2Fa?=
+ =?utf-8?B?TExIY2NZNzh3YTZSOXZTbytaWEQxMmFlOVpZemI2WFZrTXJBdkxNUFFncDd4?=
+ =?utf-8?B?TG9qM2Q1R1p1VGZWUThPdW4yZnNsN0JaNmpldS9RMUxLeW5Nd1dHaG1WMXVz?=
+ =?utf-8?B?UGZ0REhJUXpJVExUT2RFa0M3STByWnRLTzc0TW42b01EVThQQitVOXowMThp?=
+ =?utf-8?B?RXdvbDJtMi9ET2VJb3FRaG5sNHA3Z0RiSVNPS1o5R0NMbjZoeHRJVkZkWk9n?=
+ =?utf-8?B?YVRxQmVZWXY0UXZNNzIyOE5CWGlzdDNuMENjVHkzUjU3V3dScXByaloybjE1?=
+ =?utf-8?B?bm1KMGNTWHNMU3JsK3BVL0RtcUIvcWpoT3RVa0szWG5CU0ZORE5vVmhWS1FV?=
+ =?utf-8?B?RHA0QXdzaGYyOGw3N3pEeElOTGI2eUQxQ0F1YXNHMVdheGJraHFZY21TRnFt?=
+ =?utf-8?B?REk4SVFtdno4cngwVmo4V0x2YXZXclp4UXdCTWh2UFZwclUzSVplbHZGRHcx?=
+ =?utf-8?B?NnRTYjI3aFphRW1VcHprTDZ5czBOOE5CbXRTcDQ5b1NmekpXT1JuVDVBMHZJ?=
+ =?utf-8?B?RkpTZThLeElXeGRLeUZJQ2o4aG9RYmRQM3dTUzREenFHRG5rQWViaStBQ0hq?=
+ =?utf-8?B?eVNFN3h6NTFSL3QyamxWcXNmWGFNa3FRR1h0czQ1aUJBS2tCejBjTzczWWJG?=
+ =?utf-8?B?VXpqTnRqNC9VenpLRS91anc5ZTJGWm9vUEZMdXJKMTkrWkdCcEdRL2pzcjNM?=
+ =?utf-8?B?SFlKQXAzOExuRkpsTGlVb0tWRUNlTW9tenU1aVNSOWZtY2pudFFKbFhoM24v?=
+ =?utf-8?B?bmJsZmFkU21kRExCbk1zaWpSQmRVa1hVQkZuSExGSXhHdmpIc0VnK1VsaTEr?=
+ =?utf-8?B?UU5yVk1XbVRjNW42elRNRnI0VjU2S1hpdVpnWFZsYVA5UDN5THR3WlFYK1Zv?=
+ =?utf-8?B?eklFbzAveG1wb3BoZUxSaXhaNzg2OCt2UTZQdjQ4Z0d0NGwzclhjampodkE3?=
+ =?utf-8?B?SW9qS0tZbmNUMnk4R0hhSXRkVTlZWis4NXNRWW83eFhOajRqY1RKTi8rTHA5?=
+ =?utf-8?B?MWliMVhIUVZ6N3pLYlNZODZpQnZDMWE0KytYL2RKQWpOa0Z0MUEzWmRyRE11?=
+ =?utf-8?B?REJRZFpWbW1ObUZyajFJOEVCTmxPY1dLSnh3SFJ0UTVOV0tuSXBXajEvdGRV?=
+ =?utf-8?B?N0xNd203bXpuVHhDQnQ0anlJTjFnc21OQjNQbnlVZjVxb20xYy81QlhzU0VG?=
+ =?utf-8?B?bVZkcTk0UXoxdEJTN1Y0TFVnaE1Sc1NVN3NoQWttQlBjdE1ZRjZWWHJSeE9X?=
+ =?utf-8?B?Q1AyRWM1WFN3ZVAwbVFxeWFXUkJTS1FIaHppcVkrQkZsc1NRU1R5RjQ0Z2Nm?=
+ =?utf-8?Q?Rktk=3D?=
+X-Forefront-Antispam-Report: CIP:20.160.56.86; CTRY:NL; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:repost-eu.tmcas.trendmicro.com;
+ PTR:repost-eu.tmcas.trendmicro.com; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(35042699022)(82310400026)(14060799003)(36860700013);
+ DIR:OUT; SFP:1102; 
+X-OriginatorOrg: seco.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2025 14:36:14.6977 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ddfdf287-c10f-4594-ec25-08de01c10a5d
+X-MS-Exchange-CrossTenant-Id: bebe97c3-6438-442e-ade3-ff17aa50e733
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bebe97c3-6438-442e-ade3-ff17aa50e733; Ip=[20.160.56.86];
+ Helo=[repost-eu.tmcas.trendmicro.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000004A.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR03MB10625
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,244 +233,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The sys calls SYS_FLEN and SYS_READ were being used in a way that did
-not allow for file sizes > 2^31. Fixing this required changing the
-signatures of the functions smh_flen and smh_read to allow file
-sizes up to 2^32 - 2 and also being able to return errors that could be
-tested for.
+On 10/2/25 05:52, Heinrich Schuchardt wrote:
+> On 10/2/25 11:39, Andrew Goodbody wrote:
+>> After calling a function that can return an error, the test to detect
+>> that error should use the return value not a different variable. Fix it.
+>>
+>> This issue was found by Smatch.
+>>
+> 
+> Fixes: f676b45151c3 ("fs: Add semihosting filesystem")
+> 
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   fs/semihostingfs.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/fs/semihostingfs.c b/fs/semihostingfs.c
+>> index 77e39ca407e4d240a1fd573497c5b6b908816454..9d7a136b9ba9b035545b34b31df58e2d65de7db9 100644
+>> --- a/fs/semihostingfs.c
+>> +++ b/fs/semihostingfs.c
+>> @@ -35,7 +35,7 @@ static int smh_fs_read_at(const char *filename, loff_t pos, void *buffer,
+>>       }
+>>       if (!maxsize) {
+>>           size = smh_flen(fd);
+>> -        if (ret < 0) {
+>> +        if (size < 0) {
+> 
+> The ARM specification (https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2fdeveloper.arm.com%2fdocumentation%2fdui0203%2fj%2fsemihosting%2fsemihosting%2doperations%2fsys%2dflen%2d%2d0x0c%2d&umid=f17ab8fc-2d9d-4cce-91e2-e7e66f117613&rct=1759398729&auth=d807158c60b7d2502abde8a2fc01f40662980862-e0799d2d4d61f93cae033d54733c8fa50ef84918) has:
+> 
+> SYS_FLEN (0x0C)
+> 
+> Returns the length of a specified file.
+> On exit, R0 contains:
+>     the current length of the file object, if the call is successful
+>     -1 if an error occurs.
+> 
+> Please, consider that the file length on 32bit systems may exceed 2^31 You must not consider this as an error.
+> 
+> %s/if (size < 0)/if (size == -1L)/
 
-This issue was found by Smatch.
+This cannot occur because on a 32-bit system SYS_FLEN only returns
+32-bits of information. The host must detect files that exceed 2 GiB in
+size and return -1 (simulating EOVERFLOW).
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
-Changes in v2:
-- Fixup smh_flen and smh_read to allow for > 2^31 byte files
-- Link to v1: https://lore.kernel.org/r/20251002-fs_semihosting-v1-1-1124e6becc51@linaro.org
----
- common/spl/spl_semihosting.c        | 13 +++++++------
- drivers/serial/serial_semihosting.c |  6 ++++--
- fs/semihostingfs.c                  | 13 +++++++------
- include/semihosting.h               | 13 +++++++------
- lib/semihosting.c                   | 25 +++++++++++++++++++------
- 5 files changed, 44 insertions(+), 26 deletions(-)
-
-diff --git a/common/spl/spl_semihosting.c b/common/spl/spl_semihosting.c
-index f36863fe48d25859ee9af67a67140893b6e9e262..fb578a274d0d937b2ed5bd13e505bcefd4491799 100644
---- a/common/spl/spl_semihosting.c
-+++ b/common/spl/spl_semihosting.c
-@@ -13,13 +13,14 @@ static ulong smh_fit_read(struct spl_load_info *load, ulong file_offset,
- 			  ulong size, void *buf)
- {
- 	long fd = *(long *)load->priv;
--	ulong ret;
-+	long ret;
-+	size_t bytes_read;
- 
- 	if (smh_seek(fd, file_offset))
- 		return 0;
- 
--	ret = smh_read(fd, buf, size);
--	return ret < 0 ? 0 : ret;
-+	ret = smh_read(fd, buf, size, &bytes_read);
-+	return ret < 0 ? 0 : bytes_read;
- }
- 
- static int spl_smh_load_image(struct spl_image_info *spl_image,
-@@ -27,7 +28,8 @@ static int spl_smh_load_image(struct spl_image_info *spl_image,
- {
- 	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
- 	int ret;
--	long fd, len;
-+	long fd;
-+	size_t len;
- 	struct spl_load_info load;
- 
- 	fd = smh_open(filename, MODE_READ | MODE_BINARY);
-@@ -36,12 +38,11 @@ static int spl_smh_load_image(struct spl_image_info *spl_image,
- 		return fd;
- 	}
- 
--	ret = smh_flen(fd);
-+	ret = smh_flen(fd, &len);
- 	if (ret < 0) {
- 		log_debug("could not get length of image: %d\n", ret);
- 		goto out;
- 	}
--	len = ret;
- 
- 	spl_load_init(&load, smh_fit_read, &fd, 1);
- 	ret = spl_load(spl_image, bootdev, &load, len, 0);
-diff --git a/drivers/serial/serial_semihosting.c b/drivers/serial/serial_semihosting.c
-index 56a5ec72428afdd97eccad739a46189380ba3e76..017b1f8eda84f5c25e09be7e970d0ebfdbf2ace0 100644
---- a/drivers/serial/serial_semihosting.c
-+++ b/drivers/serial/serial_semihosting.c
-@@ -25,11 +25,12 @@ static int smh_serial_getc(struct udevice *dev)
- {
- 	char ch = 0;
- 	struct smh_serial_priv *priv = dev_get_priv(dev);
-+	size_t bytes_read;
- 
- 	if (priv->infd < 0)
- 		return smh_getc();
- 
--	smh_read(priv->infd, &ch, sizeof(ch));
-+	smh_read(priv->infd, &ch, sizeof(ch), &bytes_read);
- 	return ch;
- }
- 
-@@ -140,11 +141,12 @@ static void smh_serial_setbrg(void)
- static int smh_serial_getc(void)
- {
- 	char ch = 0;
-+	size_t bytes_read;
- 
- 	if (infd < 0)
- 		return smh_getc();
- 
--	smh_read(infd, &ch, sizeof(ch));
-+	smh_read(infd, &ch, sizeof(ch), &bytes_read);
- 	return ch;
- }
- 
-diff --git a/fs/semihostingfs.c b/fs/semihostingfs.c
-index 77e39ca407e4d240a1fd573497c5b6b908816454..71b6634b0660e32cc63f7fc60ec1af8d3248433a 100644
---- a/fs/semihostingfs.c
-+++ b/fs/semihostingfs.c
-@@ -23,7 +23,8 @@ int smh_fs_set_blk_dev(struct blk_desc *rbdd, struct disk_partition *info)
- static int smh_fs_read_at(const char *filename, loff_t pos, void *buffer,
- 			  loff_t maxsize, loff_t *actread)
- {
--	long fd, size, ret;
-+	long fd, ret;
-+	size_t size;
- 
- 	fd = smh_open(filename, MODE_READ | MODE_BINARY);
- 	if (fd < 0)
-@@ -34,19 +35,19 @@ static int smh_fs_read_at(const char *filename, loff_t pos, void *buffer,
- 		return ret;
- 	}
- 	if (!maxsize) {
--		size = smh_flen(fd);
-+		ret = smh_flen(fd, &size);
- 		if (ret < 0) {
- 			smh_close(fd);
--			return size;
-+			return ret;
- 		}
- 
- 		maxsize = size;
- 	}
- 
--	size = smh_read(fd, buffer, maxsize);
-+	ret = smh_read(fd, buffer, maxsize, &size);
- 	smh_close(fd);
--	if (size < 0)
--		return size;
-+	if (ret < 0)
-+		return ret;
- 
- 	*actread = size;
- 	return 0;
-diff --git a/include/semihosting.h b/include/semihosting.h
-index 4e844cbad87bb1ae6bb365f87f3e7a8aeea445f4..60535199b9532ce16620aea3ca1ea741c5b73766 100644
---- a/include/semihosting.h
-+++ b/include/semihosting.h
-@@ -95,12 +95,12 @@ long smh_open(const char *fname, enum smh_open_mode mode);
-  * @fd: A file descriptor returned from smh_open()
-  * @memp: Pointer to a buffer of memory of at least @len bytes
-  * @len: The number of bytes to read
-+ * @read_len: Pointer which will be updated with actual bytes read on success,
-+ *  with 0 indicating %EOF
-  *
-- * Return:
-- * * The number of bytes read on success, with 0 indicating %EOF
-- * * A negative error on failure
-+ * Return: 0 on success or negative error on failure
-  */
--long smh_read(long fd, void *memp, size_t len);
-+long smh_read(long fd, void *memp, size_t len, size_t *read_len);
- 
- /**
-  * smh_write() - Write data to a file
-@@ -124,10 +124,11 @@ long smh_close(long fd);
- /**
-  * smh_flen() - Get the length of a file
-  * @fd: A file descriptor returned from smh_open()
-+ * @size: Pointer which will be updated with length of file on success
-  *
-- * Return: The length of the file, in bytes, or a negative error on failure
-+ * Return: 0 on success or negative error on failure
-  */
--long smh_flen(long fd);
-+int smh_flen(long fd, size_t *size);
- 
- /**
-  * smh_seek() - Seek to a position in a file
-diff --git a/lib/semihosting.c b/lib/semihosting.c
-index 9be5bffd30124777c4f8110065e6cca5640312ac..a0f42d41e4a7ad95023c684f6824bfc677ad25cd 100644
---- a/lib/semihosting.c
-+++ b/lib/semihosting.c
-@@ -93,9 +93,9 @@ struct smh_rdwr_s {
- 	size_t len;
- };
- 
--long smh_read(long fd, void *memp, size_t len)
-+long smh_read(long fd, void *memp, size_t len, size_t *read_len)
- {
--	long ret;
-+	size_t ret;
- 	struct smh_rdwr_s read;
- 
- 	debug("%s: fd %ld, memp %p, len %zu\n", __func__, fd, memp, len);
-@@ -105,9 +105,20 @@ long smh_read(long fd, void *memp, size_t len)
- 	read.len = len;
- 
- 	ret = smh_trap(SYSREAD, &read);
--	if (ret < 0)
-+	if (!ret) {
-+		/* Success */
-+		*read_len = len;
-+		return 0;
-+	} else if (ret == len) {
-+		/* EOF */
-+		*read_len = 0;
-+		return 0;
-+	} else {
-+		/* Partial success */
-+		*read_len = len - ret;
- 		return smh_errno();
--	return len - ret;
-+	}
-+
- }
- 
- long smh_write(long fd, const void *memp, size_t len, ulong *written)
-@@ -140,7 +151,7 @@ long smh_close(long fd)
- 	return 0;
- }
- 
--long smh_flen(long fd)
-+int smh_flen(long fd, size_t *size)
- {
- 	long ret;
- 
-@@ -149,7 +160,9 @@ long smh_flen(long fd)
- 	ret = smh_trap(SYSFLEN, &fd);
- 	if (ret == -1)
- 		return smh_errno();
--	return ret;
-+
-+	*size = (size_t)ret;
-+	return 0;
- }
- 
- long smh_seek(long fd, long pos)
-
----
-base-commit: da47ddebd16a7e1047da8537fbf01558d2a89fcf
-change-id: 20251002-fs_semihosting-85d697fbfcad
-
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+--Sean
