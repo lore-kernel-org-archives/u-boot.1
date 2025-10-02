@@ -4,144 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43150CAC5B8
-	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 11:21:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 713F0CAC5B8
+	for <u-boot@archiver.kernel.org>; Thu,  2 Oct 2025 11:28:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BBFF828A2;
-	Thu,  2 Oct 2025 13:21:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id DF947828A2;
+	Thu,  2 Oct 2025 13:28:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="hC4B1JtE";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="LJate/lF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49987831D3; Thu,  2 Oct 2025 13:21:05 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9A4FE8328F; Thu,  2 Oct 2025 13:28:20 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0A8181D6A
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 13:21:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3519B81D6A
+ for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 13:28:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=M.Schwan@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VaE3x/OBxrn2C8NEFlNDqMtcJYCMDpQboteOhfJ23OCG0ZHcZiMpMNLmJ6I6nhAIhNZoaa+1mfzNYjMcgTjvwbILg/OO1fk43HfpaE6+GwfrpV0vWkEvVIOvM0ww7LJHHj2RXLOGsEBaKEj27daj2w0pbiycnqAP90+m1F+ueNNjTniwhzoKdwgGKfNlltGLNDCqIK9xBERJNX8sOvMQRAvTDxZZpuKY4jTxM8P/cu0Mk7KpQXKVEbUFhO+myKlNgEDhoWjiX5rtHqM8J5ezHKGqW++LCutNrpFoAkYFwgst64cIsvBm7sl4PCVA/cRkqv/r0qAsYg4BfugJ/T0lzQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FXf7P2uDg+bwLnJaOJeDz7rciB+ah6ooekWLQRhdWlQ=;
- b=iXpdrP4o39ZpKjSe91JhexlouuxcXYnMq8SeX3Voy4BC1bho3/297fB/4xYLAjWL19jMWjyLPbtp4s4qx5HLG3/zlVL4S846tIjJTc+r8FtvN8FkryZgtt2ybeNHhDkEMJrj9ZVr5fzxoMAsGDZnWzpzOSF2Lc6qvnamQc9sd81vC7j4YqYfAx2zPl46SUvEKWi5nrbBHTutZawz8LwxQkalywXO2YaeuJEPgyrQD12ZAt4++ho4o1WYqUoPyquVJSKfoove5BZ5BFNiq2taoM+5tR45gu2zVPp/Oi730s+bygGOXX7JJDqZ+kb64S7O9SPLfueH7c+30O3vesWkFw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FXf7P2uDg+bwLnJaOJeDz7rciB+ah6ooekWLQRhdWlQ=;
- b=hC4B1JtEAtHfjxbm6pmFGOTsWn/oDmdw3D+asoraCaZWqhtHlVWHbAiMK5JEwRi9Vn8CtVKowZRvQ0KJaKMbukRGbK9f+3he8Z8MYodnF6st/AfY1Q+hmC82bpGMtCV89Qa+2Q6nvvZgYkS74MHdijWHK0wFv4H6Sk4ZQDAEtQKaK2W13b/iKpMa543cT1qtQQbQ3TuXSWUKu96qDlnjH6FftFDMdPPznu+4c+QUEpWz0t+03WTfdwso6EdR+yOXYQ4tsj5V3yj5nZ1CEKFBSH0+ILMogQfIt5H1+WGHGAN40nnwig616cW9CDiLUhCbkK2eIXH2VsqWhl1rE0Nn7A==
-Received: from DUZPR01CA0092.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4bb::27) by DB8P195MB0598.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:10:15b::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9160.18; Thu, 2 Oct
- 2025 11:20:56 +0000
-Received: from DU2PEPF00028D0B.eurprd03.prod.outlook.com
- (2603:10a6:10:4bb:cafe::6f) by DUZPR01CA0092.outlook.office365.com
- (2603:10a6:10:4bb::27) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9182.15 via Frontend Transport; Thu,
- 2 Oct 2025 11:21:02 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Postix.phytec.de (91.26.50.189) by
- DU2PEPF00028D0B.mail.protection.outlook.com (10.167.242.171) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9182.15 via Frontend Transport; Thu, 2 Oct 2025 11:20:56 +0000
-Received: from lws-schwan.phytec.de (172.25.32.51) by Postix.phytec.de
- (172.25.0.11) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.17; Thu, 2 Oct
- 2025 13:20:55 +0200
-From: Martin Schwan <m.schwan@phytec.de>
-Date: Thu, 2 Oct 2025 13:20:37 +0200
-Subject: [PATCH] board: phytec: phycore_imx8mp: Add rauc to bootmeths
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-58afb2f42e3so1071357e87.2
+ for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 04:28:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1759404497; x=1760009297; darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YCeX4x49mfa//fnCP/cqRsGwVmoxyBM9DFmTyhEKxN8=;
+ b=LJate/lFrpOEiyENoy5ak/mR8OQ+KrA7g2H/rHx4c4yNmH7o0GWlBt+fjMskAL8zPM
+ CE3ld0SEIBwt8H6Qob36cTPh249myUIG+vbkdkicC1RJS1q5PawBnU4aAuXX/Us+HvGP
+ VFE2arFe2WmBfQ/gww6MaCnPOrYBAjax0K3123Zn28HSSJ8GzfWTuIbkxM7vb+b6Xnim
+ ASQtr9QCx6049dPBjhrgmtB/9541YxL3/3Z9nqD2eFbCTWDFnwdBNclOJjJWGCdmEsBs
+ /5N3RloNL8BVJEC/NbQSTIq1ktPXvqhIheqKd+bX6RhnRDZ2y4uMJzPyRRla3UORRK4X
+ JL9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759404497; x=1760009297;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YCeX4x49mfa//fnCP/cqRsGwVmoxyBM9DFmTyhEKxN8=;
+ b=DEq0vNJarjLRk296HdxVeENhAho48/rKWzjl6IxVe3xs6k1SLNOzC/zTkf2xQDzelq
+ RwQvARW6aa04DYfQJnR3yrtLG8iwli/puLu0MtVLjZJozW+JIyaBWc+9y29Rf2xsMFv6
+ z2hTD8gBd8H69xXaAK4nP9PLuy5/gHH19WE+SUIlWbOS07kJVppOo9Zfpgh6uQpW7rVC
+ PCf4YUwWhxlwPelKnQlasQsY0ka9DmUTJNB2tcVzY+QQECDiu9x1eNKOjRR2NyUyul5y
+ RZpBqItKz/wHYWtA2wRPr09CJiuayb3oG7OCgrxTBJTBnS4eO/HqXg9KqYV0bwBFQVST
+ NH5A==
+X-Gm-Message-State: AOJu0YyTm4vIRjAAh2NbVhdcYtO04+U3EQcBAiBJOvloww04Q8OVBzJV
+ UMNSe9MUjet7oTAmU1OAH8IFTU14e7TB4PexqfN2k8/uhWrEcwXaL1jVgT3HIKgHsy1hsMV7g+e
+ SIwBLD9os7DPZeV714EnGiM+UrKO+4V4=
+X-Gm-Gg: ASbGnctSeZYGG7TZOriFy+tO148VuGoPQE3L8316rNaxpuhNWjXviogXkKmWOn7gqIf
+ 1NfTy2UNAyhsbzm05HsX3T44Rw8Q2rIyhEgLLCgMWz+SMSZpDrM46KZePsmCdTl/nEYZSd1hcSR
+ kUkCU29x58PHuLbbOsCtDLg6d7zCqHTp+0Ixc2+7gkymiSR63SzVjGLldASAFp9//mHB1e//NH7
+ mfortOUYiZAVvB07ux3s8cvqXalcVho
+X-Google-Smtp-Source: AGHT+IGk+dMdsQE9w1p1YkcC7PY5+9qRuTM/EAy3hgf1RiLjYsaPNY2us6vNCF8xbNIDEmq9ZwPA8jSoLxiKEzHNH3o=
+X-Received: by 2002:a05:6512:10d4:b0:568:af14:8a59 with SMTP id
+ 2adb3069b0e04-58af9f6af3cmr2185858e87.28.1759404497125; Thu, 02 Oct 2025
+ 04:28:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251002-wip-config-imx8m-bootmeth-rauc-v1-1-e54d43a6fd70@phytec.de>
-X-B4-Tracking: v=1; b=H4sIAARg3mgC/x3NOQ6AIBBA0auYqZ0EiPtVjIXioFMABtwS490ll
- q/5/4FIgSlClz0Q6OTI3iXIPAO9jm4h5DkZlFClFELhxRtq7wwvyPZuLE7e75b2FcN4aKxVZea
- 6NY0sSkiRLZDh+x/0w/t+hSLGV3AAAAA=
-X-Change-ID: 20251002-wip-config-imx8m-bootmeth-rauc-726fd79f8145
-To: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>, "Yannic
- Moog" <y.moog@phytec.de>
-CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
-X-Mailer: b4 0.14.2
-X-Originating-IP: [172.25.32.51]
-X-ClientProxiedBy: Postix.phytec.de (172.25.0.11) To Postix.phytec.de
- (172.25.0.11)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PEPF00028D0B:EE_|DB8P195MB0598:EE_
-X-MS-Office365-Filtering-Correlation-Id: 17d5f3a7-39ee-4c1d-e14b-08de01a5c1b5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|1800799024|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TEp2VDJFWXBWWFdib2hHNVpTSmRJMmJnOGR2U2lQYURUNklKODNmSElOZ1FT?=
- =?utf-8?B?OGNNcDVzSmJpNmpLVW9lZmVPc1NOUWVnTXdsWnJMSWRkMW1xUWpLc1l0alRT?=
- =?utf-8?B?WXBRa0ROUC9SRFRtSEkreGFHM1NoQmxiM0xOeVFHRmNiYlcwRng3VDcrU2lh?=
- =?utf-8?B?N29wWmlieGRsN21KWkI3dkkzSmFIbXBkdzE4b3AxK3RKNzdmb3ZoK0V5QmVV?=
- =?utf-8?B?bkQ5YVFFcFJnMHV3OHNWR0V6ZDlFTVA0d2FNZHBUT25HMzJpcS9NNmViZkty?=
- =?utf-8?B?azZMNDU4elFWZEwxalUwUmxoK0cwZWpqdEJjTC9NOWkvLzczR3FTWGYwaUFX?=
- =?utf-8?B?ZWQzU2hSZm9aY3R1QisvdnFCcjFMMFJhNVZWNEpBZDZaQlNCOVM2cktRZmt2?=
- =?utf-8?B?OFloT0JXT1VoYVRjK1dSV3JycWhkRm8rYnMxT0t5S2VWNGc1ZGtxUW5LVUxI?=
- =?utf-8?B?a2JlZzcxRjFyUThLLzQyTWlPVXdWcWhESXVyYUtib0hQbUREcEp3bmhhbTh0?=
- =?utf-8?B?aDB2TUw0QW8zYTc5V25aam9hcmNTaTlHeWdsZnEvMjVSUUQwQnlBeVlLYUk1?=
- =?utf-8?B?VzlPNUNVckZLcUpkbUNhdkY1YXBodUlYU0JWYS9OTzhvbWcwd28xcmI3M0JJ?=
- =?utf-8?B?SWdPcXlFZnBlLzdSUE4xTEhDYW1hcjdJVnpJdU03cE9lUS9xR2JPQUlFcVls?=
- =?utf-8?B?WDdhdVhsaFRPamsva0NRYVFjS3pQVDNYZmJJVG00N2MzbjN3NmViSzZIcm5C?=
- =?utf-8?B?NHA4SDJhRFlZWjZKZExXMVdPRDVwMGxmcnNIREw3VDBKQjRmVzBqWGtrVkds?=
- =?utf-8?B?WnFtcXlkUnRqNDl4b0RuKzhTekF0dEpTUjRGQlRQb2hYeS9PT3E1WVV5WWVP?=
- =?utf-8?B?SlRQZkZCVHhPVUtXNTh4Y3F6OE11YnNIZHpWMTBOeFlSZWVrSllaQVlTcVJY?=
- =?utf-8?B?UGlJOW9iU3hPaS9ScFhWdm85K01KQUlVYTRya0ZnT0xweE0rRFRWZWlrbjJu?=
- =?utf-8?B?NDdrZ0NOZFdsTkFISDNtekE5cEJjWTNpemNoVzlkS3huejYyWURuYWlkUXBo?=
- =?utf-8?B?emV2aTNVMlNsdWtIT1dkTTlJYVUyR1Z2QVVObXN1dWFFbHBpaUxKb3F2cmhj?=
- =?utf-8?B?bWNMaDR1UWNEdFdscmJEU0JNK244UzA1Q010M0o5WnJGUERXME5hdy9tdE1y?=
- =?utf-8?B?bkNUbTl2ZTcyVGhNQWxtV013VFBzYjJidm9ZR3JmeXlUT3haaDA5bmdwQXR6?=
- =?utf-8?B?ZUx6N1lIOGJwbGRsWXMvK0JoRDVLa0M4aGh3aTBsSnU3azZndmplNCtxUTlF?=
- =?utf-8?B?MnUrNkJ0a2JCbVI4eHJnVGJBanVwT1Rjc01XZ2NBVFlPUFdnTUFGbko5ZE5V?=
- =?utf-8?B?eTdjWWc2WnlzdFo1ZkRaMUUrYlNydWJHY2FwTTFOYmRkRFVIcFZVd3lBckg4?=
- =?utf-8?B?SXIwbndjNzJtNHYzVHduNTFaNzl2WDk0TzJhL3FQMkVJLzJNK2hpcTQ2a2Zq?=
- =?utf-8?B?KzMvR295RS9JWGNvUDFBdHJlU1JqTGVRWEhEMFlxQlRZYWFlaW1UanNHMTZQ?=
- =?utf-8?B?eGpWbDNuM3VGY3hpYURac2gwUXhxKzF4MmpJeG91dHcrNEtxcTdkT1AxVjVF?=
- =?utf-8?B?N0JwSzVmTVpnZmd1TnpQd3pvbG9hQSt5aVFybUdlK2drUWtzYk0yU0FNSjAw?=
- =?utf-8?B?TjAxNktjMGx3eDZkWVVsNU01bGdWZnA3MW8xQ2FpWk1rNFUvMUg1K0c1bW95?=
- =?utf-8?B?eXpQL0dhR1RZdUM4Z2tCc0h1Q1BSZHA2cWFYK010NGRZQXlVT1FtODNVNmVM?=
- =?utf-8?B?UWtXNlVFbnRoMDZZVFZ6ZCtCNzZyRVRGVTkxKzRlK24zTDNTNklldm5rVXJh?=
- =?utf-8?B?MHVGdnRMMlJuSHBVd3NscXRTVzFSYTl0Y3FCMElubjBCWWVQeVlrZ1dMY1pw?=
- =?utf-8?B?SE5tbXpDbW9udC9xYXRrdzdCaXo5V2Vpb0FNbFgzd3hMNTRxNTVGNFpITzNy?=
- =?utf-8?B?Mmh3aHlNb0tuUVppM3diNS8yQ3BsTk1RT253VFAremRhZ01LZXJDK3ZvdmRT?=
- =?utf-8?B?N1J3N1hBSVkwTE1Xejk2SFZialJud2piaGtLbENJTzNjaFYwNC9QZUZSbG1j?=
- =?utf-8?Q?WNZs=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:Postix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(1800799024)(36860700013)(376014); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2025 11:20:56.3660 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 17d5f3a7-39ee-4c1d-e14b-08de01a5c1b5
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Postix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DU2PEPF00028D0B.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8P195MB0598
+References: <CAGm1_ktFBBuogJjpO4mXZSv3ZvJxmgpVqgV=A8uRhc5RcALpJw@mail.gmail.com>
+ <CAGm1_kvvPKfD_vwu6QAzqxS4L7xVBSfw+Xzmw5O8cN3axEYrAg@mail.gmail.com>
+ <CAFLszTg59pV0o34LVjuo7vcJSsFYzCgtu8MouHPy3F-DwW=G4Q@mail.gmail.com>
+ <CAGm1_kvnxrAHMRwffYki6Zr8g11G2Bmr1GKRPcFfFL1T7xa8-Q@mail.gmail.com>
+ <CAFLszTjxyRknzscS1cG-=0jOnpzrTmn7LkHZsXknk5X+4v23gw@mail.gmail.com>
+ <CAGm1_ksvdRh+9uEBiYDYKUzYmJUSdwhsMnG_GLHaAMrbET_CGw@mail.gmail.com>
+ <afc99b8a-b50f-95ac-a763-8487e68f8c73@nabladev.com>
+In-Reply-To: <afc99b8a-b50f-95ac-a763-8487e68f8c73@nabladev.com>
+From: Yegor Yefremov <yegorslists@googlemail.com>
+Date: Thu, 2 Oct 2025 13:28:05 +0200
+X-Gm-Features: AS18NWDZCpfMdnzdxf7pDsY1nqupMZxv7N0XR3B8dxdwT1soA7Q8nyrbmX9QmwY
+Message-ID: <CAGm1_ksBZn6s27crrvNfuEcAjCNWyZfmm8h8uPyc0LXkiYLKkg@mail.gmail.com>
+Subject: Re: activity-led usage
+To: Heiko Schocher <hs@nabladev.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,36 +99,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add rauc to bootmeths variable if BOOTMETH_RAUC is enabled. This is
-setting a proper default for RAUC enabled systems.
+Hi Heiko,
 
-Signed-off-by: Martin Schwan <m.schwan@phytec.de>
----
- board/phytec/phycore_imx8mp/phycore_imx8mp.env | 4 ++++
- 1 file changed, 4 insertions(+)
+On Thu, Oct 2, 2025 at 10:26=E2=80=AFAM Heiko Schocher <hs@nabladev.com> wr=
+ote:
+>
+> Hello Yegor,
+>
+> On 02.10.25 10:22, Yegor Yefremov wrote:
+> > Hi Simon and Marek,
+> >
+> > On Wed, Oct 1, 2025 at 1:09=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
+rote:
+> >>
+> >> Hi Yegor,
+> >>
+> >> On Tue, 30 Sept 2025 at 08:48, Yegor Yefremov
+> >> <yegorslists@googlemail.com> wrote:
+> >>>
+> >>> Hi Simon,
+> >>>
+> >>> On Tue, Sep 30, 2025 at 4:13=E2=80=AFPM Simon Glass <sjg@chromium.org=
+> wrote:
+> >>>>
+> >>>> Hi Yegor,
+> >>>>
+> >>>> On Tue, 30 Sept 2025 at 06:35, Yegor Yefremov
+> >>>> <yegorslists@googlemail.com> wrote:
+> >>>>>
+> >>>>> On Tue, Sep 30, 2025 at 12:29=E2=80=AFPM Yegor Yefremov
+> >>>>> <yegorslists@googlemail.com> wrote:
+> >>>>>>
+> >>>>>> Hi all,
+> >>>>>>
+> >>>>>> I added the following LED definition to the am335x-baltos.dts:
+> >>>>>>
+> >>>>>>          leds {
+> >>>>>>                  pinctrl-names =3D "default";
+> >>>>>>                  pinctrl-0 =3D <&user_leds>;
+> >>>>>>
+> >>>>>>                  compatible =3D "gpio-leds";
+> >>>>>>
+> >>>>>>                  led-power {
+> >>>>>>                          label =3D "led-red";
+> >>>>>>                          gpios =3D <&gpio3 0 GPIO_ACTIVE_LOW>;
+> >>>>>>                          default-state =3D "on";
+> >>>>>>                  };
+> >>>>>>          };
+> >>>>>>          user_leds: user-leds-pins {
+> >>>>>>                  pinctrl-single,pins =3D <
+> >>>>>>                          AM33XX_PADCONF(AM335X_PIN_MII1_COL,
+> >>>>>> PIN_OUTPUT_PULLDOWN, MUX_MODE7)     /* mii1_col.gpio3_0 PWR LED */
+> >>>>>>                  >;
+> >>>>>>          };
+> >>>>>>
+> >>>>>> The gpio-leds driver is working and I can toggle the led-red via t=
+he
+> >>>>>> led command.
+> >>>>>>
+> >>>>>> Then, I created an am335x-baltos-u-boot.dtsi file with the followi=
+ng content:
+> >>>>>>
+> >>>>>> / {
+> >>>>>>      config {
+> >>>>>>          u-boot,activity-led =3D "led-red";
+> >>>>>>      };
+> >>>>>> };
+> >>>>>>
+> >>>>>> I have also tried "led-power" instead of "led-red".
+> >>>>>>
+> >>>>>> In my final DTS files I have the following nodes:
+> >>>>>>
+> >>>>>>          leds {
+> >>>>>>                  pinctrl-names =3D "default";
+> >>>>>>                  pinctrl-0 =3D <0x56>;
+> >>>>>>                  compatible =3D "gpio-leds";
+> >>>>>>
+> >>>>>>                  led-power {
+> >>>>>>                          label =3D "led-red";
+> >>>>>>                          gpios =3D <0x57 0x00 0x01>;
+> >>>>>>                          default-state =3D "on";
+> >>>>>>                  };
+> >>>>>>          };
+> >>>>>>
+> >>>>>>          config {
+> >>>>>>                  u-boot,activity-led =3D "led-red";
+> >>>>>>          };
+> >>>>>>
+> >>>>>> U-Boot cannot find the activity-led node.
+> >>>>>> ofnode_options_get_by_phandle("activity-led", &led_node); returns =
+-22,
+> >>>>>> because ofnode_path("/options/u-boot") fails.
+> >>>>>>
+> >>>>>> When driver debug is enabled, I also see the following messages:
+> >>>>>>
+> >>>>>> bind node config
+> >>>>>> Device 'config' has no compatible string
+> >>>>>>
+> >>>>>> My am335x-baltos-u-boot.dtsi code is similar to what I could find =
+in
+> >>>>>> arch/arm/dts for the boot-led usage.
+> >>>>>>
+> >>>>>> Where should I debug further?
+> >>>>
+> >>>> It is a bit confusing as there is still 'legacy' LED stuff in the
+> >>>> tree. For your problem I would suggest checking that the LED device =
+is
+> >>>> configured correctly.
+> >>>>
+> >>>> For sandbox in test.dts you can see:
+> >>>>
+> >>>>      options {
+> >>>>          u-boot {
+> >>>>              compatible =3D "u-boot,config";
+> >>>>              boot-led =3D <&sandbox_led_green>;
+> >>>>              activity-led =3D <&sandbox_led_red>;
+> >>>> ...
+> >>>>          };
+> >>>>      };
+> >>>>
+> >>>> Check that led_init() is being called in the LED uclass.
+> >>>
+> >>> It is working now using your suggestion. Thanks.
+> >>>
+> >>>>>
+> >>>>> Should activity-led be also mentioned in doc/device-tree-bindings/c=
+onfig.txt?
+> >>>>
+> >>>> We should be using /options/u-boot for this[1]
+> >>>
+> >>> This means, everything that can be found via the following command
+> >>> won't work and should be removed?
+> >>>
+> >>> grep -r --include=3D'*.dts[i]' boot-led arch/arm/dts
+> >>
+> >> Yes. I did a series to remove the legacy LED stuff last year but it
+> >> wasn't applied because people wanted me to do more, probably what you
+> >> are looking at doing now :-)
+> >
+> > This would be great if this patch series could be merged. Marek has a
+> > board (arch/arm/dts/stm32mp157a-dhcor-avenger96-u-boot.dtsi) that can
+> > be reworked too.
+> >
+> > AFAIK, led_activity_blink() is used very seldom. For example, in
+> > cmd/ubi.c it is only used for writing [1]. mmc is omitted completely.
+> > Is this intentional or is this functionality just missing?
+> >
+> > [1] https://github.com/u-boot/u-boot/blob/master/cmd/ubi.c#L494
+>
+> The commit which introduced this says:
+> """
+> commit 990f726ce797c040adda6d1e1bc6a21bd2b28657
+> Author: Christian Marangi <ansuelsmth@gmail.com>
+> Date:   Tue Oct 1 14:24:41 2024 +0200
+>
+>      ubi: implement support for LED activity
+>
+>      Implement support for LED activity. If the feature is enabled,
+>      make the defined ACTIVITY LED to signal ubi write operation.
+>
+>      Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+>      Reviewed-by: Simon Glass <sjg@chromium.org>
+> """
+>
+> So, at that time it was intentional ... yes ... but I ask me, why
+> we do not use this LED also on read operations...
 
-diff --git a/board/phytec/phycore_imx8mp/phycore_imx8mp.env b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-index 9a129a0a4bfc48f1fa70ea6e2f895acac3ca05d2..70044997adb8ad1e4a7c24faa52f9d78becb229e 100644
---- a/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-+++ b/board/phytec/phycore_imx8mp/phycore_imx8mp.env
-@@ -3,7 +3,11 @@ bootcmd=
- 		fastboot 0;
- 	fi;
- 	bootflow scan -lb;
-+#ifdef CONFIG_BOOTMETH_RAUC
-+bootmeths=rauc script efi
-+#else
- bootmeths=script efi
-+#endif
- boot_targets=mmc2 mmc1 usb ethernet
- bootenv_addr_r=0x49100000
- boot_script_dhcp=boot.scr.uimg
+So, in other words, patches are welcome :-)
 
----
-base-commit: 5b93c3ec7f9d66dc40d062a47a4a880f7d346b7a
-change-id: 20251002-wip-config-imx8m-bootmeth-rauc-726fd79f8145
-
-Best regards,
--- 
-Martin Schwan <m.schwan@phytec.de>
-
+Regards,
+Yegor
