@@ -4,89 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DB08CAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 14:54:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 821BDCAC5B0
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 16:16:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AE7B836C8;
-	Fri,  3 Oct 2025 16:54:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AD49883759;
+	Fri,  3 Oct 2025 18:16:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DWV+z0kP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j3KLB8AX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AF5E83775; Fri,  3 Oct 2025 16:54:38 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 6EDC483816; Fri,  3 Oct 2025 18:16:15 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1315F836C1
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 16:54:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E68D5836C8
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 18:16:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-46e542196c7so19910315e9.0
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 07:54:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-887764c2868so232269239f.1
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 09:16:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759503275; x=1760108075; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PKfmW3Rb6rhti7XoFmjJoaNhDHzmqx5+UfE0N2in7jA=;
- b=DWV+z0kPiSR2Z93AycGi/aXz2UPGn4Nl8lSwQfvYHBbgbdmKlI5847i+XT5iQLqWr+
- tTwNtspLNqbasnoCajVPd+XIaK70He51lvP391swEO6uYhWdj+MG//fMTR7er+C08o54
- HPmcT8xgVGMdnUnRL3oUnedi1KqYvhAWz3YNZ1PPs542w1j4Ys+xUvwPiTts2g46yXEV
- DeKNL3lp4IzCPCUJx0gbvoEnhT5PBzZ2tCMfDZ9KE0faD5eZYhgPfZg/aNM9IB/HVsSQ
- fEl2ydMu2i+CDWlLoC212ohjXV7wsiC/qEMyPK6WqrViWKY32g5YbK2xsexRT6t7YA+Y
- ZZdQ==
+ d=konsulko.com; s=google; t=1759508171; x=1760112971; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eFhM77IOzluNfqZ5lx66tt8HwM5SMnTAYqQXnP/7pn8=;
+ b=j3KLB8AXLgFjTu0wseBaKceK0ckndAO2uNIPKUokUmEiOHOSiw0BadF5lhJZpSk8ah
+ bjGuT9wELiatoAXDLu5oCmnu8lBGRwBJxtKyL6ThezTm8v8S9W3RaVNO9FjfLa+jumvC
+ LueZjmusbaquxTJBovlQYSjw7yhHqoXMM1B/Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759503275; x=1760108075;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PKfmW3Rb6rhti7XoFmjJoaNhDHzmqx5+UfE0N2in7jA=;
- b=DXhRi/4o+ahZzzgNpW/DNQq9meLfg+9k1Fn0yQF+3fk9NJ5UnhK2fJEP93dEbynRek
- Egiif4bTD3vCBHTz0Lxny/4ONHacFcdilhExwLTR0ZetD4P9dWrkPhhPhXCBkUHV0SXj
- Mb5g+bCPr4fJgBZUWXutkGwBj+kxsegwYW6WF9UHKFsqjNxtB4vFAyPfQ/fBN8oFhC/P
- elW8s5aOl7sGtHC++YUdwY6Y3tw8tShGboWvpRj1I/lMmCG9TZW7D0rQQ+mqrgU5VZr6
- ZvRu6KMenSPIYZI+/dScsmgeTFNJ6NNrlMlR4Damsq3uApITCd5z51coxpuwwjrj0g4u
- Adyg==
-X-Gm-Message-State: AOJu0YxwCKJzJRBU1CLMRlZcN71doajyyOJ/dM6SwXPrRKSMAfseklSO
- vYLn3VL3IarDeEEzop/wsotayHreZ495QClewFXfM/3juFHWNi25S7IHn8VZlnpOR/M=
-X-Gm-Gg: ASbGncvc3+fL/uwbj1NFcT1YBUkxIPF1OyfQdUtOd1ZwziObUDkjcaR1J0QVtsSKRra
- jeEQYa4VFTq6DODEzvYoarMrmCIyc6bYR/yrvlC78TmJBaU4jGyDM6HEBncTQrJ8wY3rDXImj7Q
- vi1DXgjdZwVMJWoH0IjZ6dqVb4GEpZH0YEFqfPJyJejk1IBt9AbfpNfKxQPmhZ4Qwi30+Z7ra8/
- Pq9XIljv6hzjMBcbqciVQR5+6JnJtqgPfKT7jrNZYLa/p1qvkFHKbvTSRCzBZ2KOqINVbQGmkj6
- lRehTtzZatnUYc/BYi93oRXYhRtAXD4D6/NeDadGXcP5MJaSRKWaNDOwAEVYroSIvXvcuQlTnSa
- Ij8lmEcPJNocCVYlA/zXoVD3sLsmcmsmwh8Jzq1tImSb76K5jazD4/GjP/33FIHMOQEcGSTjZqZ
- 5HmNA=
-X-Google-Smtp-Source: AGHT+IEyd92pT/ImZQAbnQBor+31g+cVk77Lo2g95PRE9NdgXs6MVTw79LWgv2g+URu4asTtziTYIw==
-X-Received: by 2002:a05:600d:11:b0:46e:6d12:ee2a with SMTP id
- 5b1f17b1804b1-46e6d12f14dmr31558665e9.16.1759503275450; 
- Fri, 03 Oct 2025 07:54:35 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:ebd:e301:a6dd:d590:166e:6c62])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e7234e5fdsm34208735e9.6.2025.10.03.07.54.34
+ d=1e100.net; s=20230601; t=1759508171; x=1760112971;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eFhM77IOzluNfqZ5lx66tt8HwM5SMnTAYqQXnP/7pn8=;
+ b=vTRjl/C60J0SDeHXRh3xQJFiaqhfC6ssLg/pCIz3lcJNKq69ECyag7qEB5h8F9ZIuv
+ GXnD/jQU2I6wLRlgiOyLR7FSaVSjfhYNAWEATweqzES2w43crUvU1vJnIEF7C5T0VOgm
+ DxurXVE10CU+gkrzkvizR9n+lJyIG5CKUz5kwp+3MQThml4X0SFP2jZ2HwRIYEbDK+oS
+ 6S4GtpYvty15UQESkVJMzs0g6x/QhPpeqOh0GNKCtFotzCN1d5vtZur0a9Zhrgzjekuy
+ EpN+KyOma2KNZHtE9Krk/CpKk2jEAlgAjVgQYm8ZcBV6P+/4VLwB+C9kwZt0lbFWfAuK
+ m69Q==
+X-Gm-Message-State: AOJu0Yx1GG+lHBkRFiXeBXQYjf+LINjrSySwyCqV53vbPQZkcO11z40V
+ NVLW3102Kqmrg27tOItIJCmeKKouy+SzZs50v7tiaWJskpZ6mEv03BKhf0kfDeZRYHUdpoPPxyw
+ 2nGvK8PM=
+X-Gm-Gg: ASbGncsdderRZnKv1NlyOf45duUnwCHuaILehyPRjelfxuJ94l2BOFjboHhH5KL/TMT
+ Sob3QDaaagHO3lQYxDiloYNS2G/gOis6EiftngAyHAYIqGFtEjICFRQrEN+LwP+RTAqpxK48bP/
+ FhSi1k69AZjWQdzaj8JLrimosQy6ZJkPAxocg+HHlam2cy3cefGTn3zHZeipwMhTkfcrQZZlQDz
+ qTDfR0kt6IHsB2mu9eYagjF/j00FUNCXYQpVbh3PfRoxILIPefYMs7ZHl0QJzgKFzqpXOrDia56
+ we4g5uAcq6L2A7q0SxZH58CEjlP3Z7wGouoOARAB4yKpmVswO99DAfK6U7WQHm8eDqWomzGdp/r
+ 03D9hKgI9CW1rBaB9wWJfpvQHnAqgevFq927Qyzvkkqr7RD8rczCsm9b0F4VEcForRwdZ7lebgl
+ dFt9AW5e6ZEPav7X9RMGI=
+X-Google-Smtp-Source: AGHT+IEk9km2l74GDgqFmZnjNrzLaSTb4JpW4S76/vtVZTUs4mb84Dt/YWZXwGjQNRHhxxEBjRJZwQ==
+X-Received: by 2002:a05:6e02:1d94:b0:42e:6de8:4a74 with SMTP id
+ e9e14a558f8ab-42e7ad972b4mr42592965ab.17.1759508171336; 
+ Fri, 03 Oct 2025 09:16:11 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-57b5ebc83basm2037701173.49.2025.10.03.09.16.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 07:54:34 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 03 Oct 2025 15:54:34 +0100
-Subject: [PATCH] efi_loader: Prevent leak of memory from tmp_files
+ Fri, 03 Oct 2025 09:16:10 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Martin Schwan <m.schwan@phytec.de>, Javier Tia <javier.tia@linaro.org>, 
+ Yegor Yefremov <yegorslists@googlemail.com>
+In-Reply-To: <b1655828-f404-46b1-8f33-85eb58ecd52a@gmx.de>
+References: <b1655828-f404-46b1-8f33-85eb58ecd52a@gmx.de>
+Subject: Re: [MASTER] Pull request doc-202510-rc6
+Message-Id: <175950817040.616824.8045776881091948390.b4-ty@konsulko.com>
+Date: Fri, 03 Oct 2025 10:16:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251003-efi_capsule-v1-1-07d5fd09b97f@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAKnj32gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAwNj3dS0zPjkxILi0pxUXROL5BRzo9SUZDODRCWgjoIioGwF2LTo2Np
- aAKpUabldAAAA
-X-Change-ID: 20251003-efi_capsule-48cd72edc60a
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,38 +99,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After the malloc of tmp_files and before its value is recorded an early
-exit will need to free tmp_files to prevent leaking that memory.
+On Fri, 03 Oct 2025 06:19:53 +0200, Heinrich Schuchardt wrote:
 
-This issue was found by Smatch.
+> The following documentation changes since commit
+> 72f72fab00773f7ee89c9635e490908c0a058162:
+> 
+>    b4-config: Improve b4 config for correct operation (2025-10-02
+> 11:30:15 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- lib/efi_loader/efi_capsule.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Merged into u-boot/master, thanks!
 
-diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
-index f19e78ae9d1e250f7bf8362f043877c6d10a9675..31b47a20186e036f6852c6baa4f353a5d7b97632 100644
---- a/lib/efi_loader/efi_capsule.c
-+++ b/lib/efi_loader/efi_capsule.c
-@@ -1096,8 +1096,10 @@ static efi_status_t efi_capsule_scan_dir(u16 ***files, unsigned int *num)
- 	while (1) {
- 		tmp_size = dirent_size;
- 		ret = EFI_CALL((*dirh->read)(dirh, &tmp_size, dirent));
--		if (ret != EFI_SUCCESS)
-+		if (ret != EFI_SUCCESS) {
-+			free(tmp_files);
- 			goto err;
-+		}
- 		if (!tmp_size)
- 			break;
- 
-
----
-base-commit: 8d22c596c6f82132c006ba89481275c60b5b0e2d
-change-id: 20251003-efi_capsule-48cd72edc60a
-
-Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+Tom
+
 
