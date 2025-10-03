@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 529BACCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFD00CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:48:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 219BC83775;
+	by phobos.denx.de (Postfix) with ESMTP id 726E98380F;
 	Fri,  3 Oct 2025 14:48:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="FqHlBtIp";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="lDBW/Hcy";
+	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="iNMrW3vu";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="a+oisHSV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EF96836D1; Fri,  3 Oct 2025 12:02:46 +0200 (CEST)
+ id B56E08366F; Fri,  3 Oct 2025 12:02:46 +0200 (CEST)
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 115208366F
+ by phobos.denx.de (Postfix) with ESMTPS id CB5FA836B4
  for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 12:02:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
@@ -28,24 +28,24 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=david.wronek@mainlining.org
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=To:Message-Id:Subject:Date:From; t=1759485672; bh=fEpgUVaAAmfCX+giTMNp4v1
- 9Ff5MD5Oa9HMuCYPROLE=; b=FqHlBtIpWM0I6tf+IZbIS5KMYTZEQG7fGn2Lu7SCWOPb4AcmoT
- uLtiXM9UzG32bhWyfMA0tVQsnpwW8BNT+7inumsJRm2LUs+QQVqiBF5QcBvuB0nYs9KBzT0vyKU
- e0Quxy4OfV9QSdTUh8xrMu8o+osXkxcT61U8DwQnMHHh5Ak22S4TPsjVQokE+cz5pMgn+PTuhrr
- ADQ1jt+p1vK1G+2Olp6Bplz0qoHea9kgt2IZR90Gm0K4ZqfhB9V+3XMKNzc+nnkuEs/uSvqETkg
- qzGis16LuLkxRa4LBG2SA71IEm0doBkr8bZKoFGdCYlTtHBAtUdc2KclDzCAAuPQgMw==;
+ h=To:Message-Id:Subject:Date:From; t=1759485670; bh=ei5osPSMsNy6t/XsCHHScoB
+ CHvSQctlh3uNxMEQhZ3I=; b=iNMrW3vuF6ERfPh6S3LlBJW+J/NTr6Mhss1S9HeyVpQRNowO2e
+ whPDHgOgoxAzmdBke7p1tn2HN6pwntYcJ99BaZW+7FsDMz/9FkIV8aZtTKF/S4xl7Z2hpku9Ea8
+ UQ+DUVhN530ec7aVq5jWg/Rs5i/eROXo/9sPupeNo+iWpkNX/wupnE0Uq3W6/iWRYEnSshQSpAT
+ C29mFID1DdoBhIGaSU51PhhxGzEV0Rzyez1dvnr7BXR8zUD64DeAGKQ98r2oE/eVhz4J2cnYaT9
+ Y8IGuCucktHmhfhNePNXURzwZZgPwMXDeIfhAprh1KD9jIxRgF6waeRqny0Oz97xsjw==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=To:Message-Id:Subject:Date:From; t=1759485672; bh=fEpgUVaAAmfCX+giTMNp4v1
- 9Ff5MD5Oa9HMuCYPROLE=; b=lDBW/Hcy2zF9EnSSEwDl8RQjFmp+w9Wimpd7hyrVNojMAFb+9M
- UTb1Uz6DV9NkI37/0aFwVsaHYY+46snUHdCQ==;
+ h=To:Message-Id:Subject:Date:From; t=1759485670; bh=ei5osPSMsNy6t/XsCHHScoB
+ CHvSQctlh3uNxMEQhZ3I=; b=a+oisHSVANXsajxgiua8xjsq5NDIYauATzEApNw2fH0RZ2RrZ9
+ ZidI6IgVyb/6T/7i3E01O7mK6qtMo2J/EqBg==;
 From: David Wronek <david.wronek@mainlining.org>
-Date: Fri, 03 Oct 2025 12:01:13 +0200
-Subject: [PATCH v2 5/5] gpio: qcom_spmi: add pm660l
+Date: Fri, 03 Oct 2025 12:01:09 +0200
+Subject: [PATCH v2 1/5] clk/stub: add sdm670 rpmh clock
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251003-sdm670-v2-5-52c0fa481286@mainlining.org>
+Message-Id: <20251003-sdm670-v2-1-52c0fa481286@mainlining.org>
 References: <20251003-sdm670-v2-0-52c0fa481286@mainlining.org>
 In-Reply-To: <20251003-sdm670-v2-0-52c0fa481286@mainlining.org>
 To: Alexey Minnekhanov <alexeymin@postmarketos.org>, 
@@ -65,11 +65,11 @@ Cc: linux@mainlining.org, ~postmarketos/upstreaming@lists.sr.ht,
  Sumit Garg <sumit.garg@oss.qualcomm.com>, 
  David Wronek <david.wronek@mainlining.org>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1759485669; l=774;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1759485669; l=746;
  i=david.wronek@mainlining.org; s=20250914; h=from:subject:message-id;
- bh=v4XYGqrrCaty+ws46Q0yxcD4tkyKS5feC7+2U2s93cM=;
- b=ilAg0Ba+9AyPzo6lZu8qALgts9oKZqqKDVtzF5VsORrUvqa5/YXC/WCcsizKyiyJvDeIJ1vsO
- hl9rfEgxK8zDG+r88q0mi/kiS/ui9Se5bRBeJfW4eDNaVCct28Whnch
+ bh=hBvjc1A6gbSlveolZ9s2Fs6hFKhpkV/+kjJM0GpvSZo=;
+ b=RsfHd8z8bGwmZa1RE3hyZG4/pZpcpssF+X5jJHvsH/AoCV7SelcoypX9sY3fYvz84BSobr01z
+ lAxBhAHRbcDDrruYXTcN/dy+z/DbKARybA9sPacoulPXtjcoJ6Kbiuh
 X-Developer-Key: i=david.wronek@mainlining.org; a=ed25519;
  pk=NtKhS1PfXjRIaJwWcYTu7JS0cX3GEmccZo+a6erVTfU=
 X-Mailman-Approved-At: Fri, 03 Oct 2025 14:48:13 +0200
@@ -89,26 +89,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is used for the volume keys on some SDM670 devices.
+Necessary for MMC to successfully probe all clocks.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: David Wronek <david.wronek@mainlining.org>
 ---
- drivers/gpio/qcom_spmi_gpio.c | 1 +
+ drivers/clk/clk-stub.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
-index 22c8072534e..220b77dfa93 100644
---- a/drivers/gpio/qcom_spmi_gpio.c
-+++ b/drivers/gpio/qcom_spmi_gpio.c
-@@ -743,6 +743,7 @@ static int qcom_spmi_pmic_gpio_probe(struct udevice *dev)
- }
+diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+index 5f5aca41d5b..d02107ff32a 100644
+--- a/drivers/clk/clk-stub.c
++++ b/drivers/clk/clk-stub.c
+@@ -50,6 +50,7 @@ static struct clk_ops stub_clk_ops = {
  
- static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
-+	{ .compatible = "qcom,pm660l-gpio" },
- 	{ .compatible = "qcom,pm8550-gpio" },
- 	{ .compatible = "qcom,pm8550b-gpio" },
- 	{ .compatible = "qcom,pm8550ve-gpio" },
+ static const struct udevice_id stub_clk_ids[] = {
+ 	{ .compatible = "qcom,rpmcc" },
++	{ .compatible = "qcom,sdm670-rpmh-clk" },
+ 	{ .compatible = "qcom,sdm845-rpmh-clk" },
+ 	{ .compatible = "qcom,sc7280-rpmh-clk" },
+ 	{ .compatible = "qcom,sm8150-rpmh-clk" },
 
 -- 
 2.51.0
