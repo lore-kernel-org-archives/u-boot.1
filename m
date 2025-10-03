@@ -4,89 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0980BCCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38BD9CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:37:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 837DE8386F;
-	Fri,  3 Oct 2025 22:19:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A4C3A8384C;
+	Fri,  3 Oct 2025 22:37:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A8Hwr7fm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VNOVcI99";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EDB98386F; Fri,  3 Oct 2025 22:19:54 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 18E708386F; Fri,  3 Oct 2025 22:37:43 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8FFA83826
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:19:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F09B983826
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-911520e43edso111056239f.0
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:19:51 -0700 (PDT)
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-42d7ef9a402so15301055ab.0
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:37:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759522790; x=1760127590; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759523859; x=1760128659; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bzW13syzouCQ+QhYu7UAU0gg3FDBN9r6oy9JL+gU1TY=;
- b=A8Hwr7fm2JipCOzrMZeMvEqCO5biXZZ8zXxWXx7OxMM8mTEt57VsMm6keAOVjqoOKJ
- MO2zKx5kHp17miiEAX7QgGtegOCPki9Kpb+4RScso1RVjEK85rhv8EV915ki2qLp1tSt
- OQ2pe9Ydar+Ozr5c0A4eY354y2/MAjzqMGYAo=
+ bh=wCL2oXe+K//D0CNqGymXIWCcYUk9QpKlHUJ/jeVdEAE=;
+ b=VNOVcI99Afr+erQXE72lYbRPtWZ5nDzCLUcChTI8mF2B7fxYDwOUm1c16dhOs+sz2Q
+ sv7B9hcKqrPmKnHdZiMtsqUEEZ2G1/bsTkCH14CEM6gQp1zciyw5u0SDg+y1tNmsP7s8
+ wtaxmO5vPj9Q6L+vAq9Xzr/S7L2pATkqkPd/s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759522790; x=1760127590;
+ d=1e100.net; s=20230601; t=1759523859; x=1760128659;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bzW13syzouCQ+QhYu7UAU0gg3FDBN9r6oy9JL+gU1TY=;
- b=QhOEgtllVFrdvcA7IV0mi+MH3ZvUnwp/vpxPzdSmGnExRWQsPcXyVG+XfTmyGPSQPF
- 6BnVIPRXM7XJfkFXnCqk2delkhVd+WdbPsPJGLG9E2gdQ3a1fyHpMa0xvHcl3fW/iCd4
- pfObiD2F0BtE9W9pxcQ1d5mgpEX4MF/uKue5K9zD06WU0z6hAuaSDN4o37xD/NQtVOlj
- npSaOv4GmItd/ptNWUoXLPgKUHvPd5dhhYhLQYNnzKV/6FWWGdsxGaLkQA4wt21+3GpM
- U2Lqjt2q0gOi3fdGZYRGdiiam2ZmQU9abzKIxRqdguhqDwQt9E1GRUzwGQHMXZvLo7tJ
- VOlA==
-X-Gm-Message-State: AOJu0Yzcw15fNssWf9iv9olbyD3N6+vGylKRMqEbp7JEZP6TF4RmjRw+
- Chm5uyybHfaumvTVLbp7Ig70YG4f//mvyrKN8wx2m4NAsA7CoBpPLCRmt1l14y0aonY=
-X-Gm-Gg: ASbGncvI5jMYV33lASFZxvOKIJuzUZ9KREQhFdumoAsjqFhhMmdAcRMEv36EQ26L4q1
- K3Xz0o+R7TxGkZqEPCdP51bBxSU35Z1iIYtHMu7uXDh2IBcnzUF/nvKpr2fXmu1aEGRelIR/rSU
- Po2mJiLdLwDP99d9ixISHDHrttxA6GiYhAC2etRKqW9n9472Z8sOGXtJV4rqrsQgM6r34MegsLu
- 66uBtuNXcC9I2EiBhj3AzzjtCL6kUSPjmE9Agh3ErZkp6IT1Kvs3k1aHFtcoLezETfjdUWNRr9R
- G5eG8jsGOuvcqxIT3UqMxAMjxWIXYsphUONe8gDrnChGwsFH33p6GYnxUPmEdInkMm2SbJn3q1L
- MV2ADiEBaY8m3vg/krigyUfgmxJMc8eANdcBVrys1X7K/uCxIhhLZgaH0k9ERrqJo5nNxPYOMfE
- cA6ZGMbUKBIw==
-X-Google-Smtp-Source: AGHT+IGHcjJothVxRynfEmv5QiwGkaVmC1V7BBai5I/TS7Nr1Zp9oKs/ETWG/4Jc2EWRKC0CKw0/NA==
-X-Received: by 2002:a05:6e02:148b:b0:42e:7a9d:f5ee with SMTP id
- e9e14a558f8ab-42e7ad86603mr54831665ab.15.1759522790522; 
- Fri, 03 Oct 2025 13:19:50 -0700 (PDT)
+ bh=wCL2oXe+K//D0CNqGymXIWCcYUk9QpKlHUJ/jeVdEAE=;
+ b=PZqAOpqo6+wSuoB+1X/Y6kzSPMynzrHQAVVhAujSIw8SABxSX7ZOqN9dr3czerH/3j
+ gTFVs6vqZGiqKcjeKVjcnQfSjqtMiwvPHNc5aondmU76IP7tsE6WZmN3RCZL3vT7xCka
+ O9ZugH8YGZW9W3gtUee8oa3vIG1scvmGQ+u9TIONi2wT5j6IieYWMO9CsWh9Ok/1kzr4
+ ZvtNn7v7Bjs2VPdnFArO8S2P/GWQ6QAjdEdEcjF6TJPch1mkF/C6GA8mRIJsat4RYN5M
+ SiNWE3wgLJKSELmAejts6MjfBIhYGNETn6wToQFHlX2JLltjhgr/vOUwfC9PqKp4DQEQ
+ w1kg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVnKfbPA/6RgakWvpk9dsm+itCy31APIwN/roIQ9mE7CxO4nmGJ+pVXL/ZTeg2EewVry64+f5s=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0GVl8wxKTHX6CEGV9HQphKKJH79T0DW8wK+P+HGvn4TQD+YwJ
+ F/+WbUpfdS6cEH7+V3RuxOjFH7Py6T9SZIiN8o3K6IkMthiXRxdP/bHWOMw4Gn9S+Gw=
+X-Gm-Gg: ASbGncssdAIgnpn0jKeWjhrA+A3FClZtppIZGpp1wAVjZtTPOOQDNtxfxDf59hiU0VQ
+ cvdfL0yI3/ve+ZE6BfIHu4W/8tdQVxvigYrtT9DNAv+UrD1013IiC4mEP/p2IgZjhs5bbtEK/dd
+ svnGzLwa296A7J9EjzmgsD+V19Fwu+R8G9/F5+d6MGW8yrIUaIbh+eZrblGb0J3skOCqksKL6pO
+ +7c+SSWucxUa/bI5pbN0H5CNWDR0sBekJTdKB5EwMo3kTgtI0W89yiuwfu3UcQBz9HSk+WtRcDp
+ 4SSm8TVNWaswf6dOGod85+a7IV+6HV+4hWZIEp0KStwjfAHYC+MvO6BOG3QXTjozswsgnvZ0hTD
+ tRCAV7SLV/rzwmn9v1xcI3dM6i7Dk+qHfROaJCVDP80ZCG+pNSxmHS5i6HLPmvd8fHtOEF+WL6U
+ OY8QlLKm+CBWC2/z3iLKDX
+X-Google-Smtp-Source: AGHT+IFeZb1Q6oc8ICVfnP+Dd3VqLwL6L5RTPKJkpD4MsZZHpy32fAz6afogZiU7b6XrNiiDkSe1Xw==
+X-Received: by 2002:a05:6e02:378b:b0:425:86d9:91ea with SMTP id
+ e9e14a558f8ab-42d8b215f76mr86140045ab.11.1759523859067; 
+ Fri, 03 Oct 2025 13:37:39 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-42d8b215dd6sm24630865ab.14.2025.10.03.13.19.49
+ 8926c6da1cb9f-57b5e9eb49fsm2235007173.1.2025.10.03.13.37.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 13:19:49 -0700 (PDT)
-Date: Fri, 3 Oct 2025 14:19:47 -0600
+ Fri, 03 Oct 2025 13:37:38 -0700 (PDT)
+Date: Fri, 3 Oct 2025 14:37:35 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Adriano Cordova <adrianox@gmail.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 3/5] configs: select CMD_BLOBLIST for Firmware Handoff
- testing
-Message-ID: <20251003201947.GV6093@bill-the-cat>
-References: <20251003192222.767882-1-raymond.mao@linaro.org>
- <20251003192222.767882-4-raymond.mao@linaro.org>
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 00/16] Convert extension support to UCLASS and adds its
+ support to boot flows
+Message-ID: <20251003203735.GW6093@bill-the-cat>
+References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Emil/7bTDZLmYe4+"
+ protocol="application/pgp-signature"; boundary="YtiZC8emcbeTvHvb"
 Content-Disposition: inline
-In-Reply-To: <20251003192222.767882-4-raymond.mao@linaro.org>
+In-Reply-To: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,33 +107,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Emil/7bTDZLmYe4+
+--YtiZC8emcbeTvHvb
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 03, 2025 at 12:22:17PM -0700, Raymond Mao wrote:
+On Fri, Oct 03, 2025 at 06:33:40PM +0200, Kory Maincent wrote:
 
-> Firmware Handoff tests will leverage the same board type 'qemu_arm64'
-> with a new board ID 'fw_handoff_tfa_optee', thus select CMD_BLOBLIST
-> in qemu_arm64_defconfig for running the test.
+> This series converts the extension board framework to use UCLASS as
+> requested by Simon Glass, then adds extension support to pxe_utils
+> and bootmeth_efi (not tested) to enable extension boards devicetree load
+> in the standard boot process.
 >=20
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> The UCLASS implementation provides one driver that manages all
+> extension boards (alternative would be one U-Boot device per
+> extension board). Simon is that what you would expect?
+>=20
+> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+This seems good overall, thanks! I'm assuming you were able to test this
+on a few platforms? Which platforms should we try and find someone to
+test this on to make sure there's no surprises down the line?
 
 --=20
 Tom
 
---Emil/7bTDZLmYe4+
+--YtiZC8emcbeTvHvb
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOAv4wAKCRAr4qD1Cr/k
-CnPIAP9qwGgGiXBpJ0pQ4HYrkHMMiHiCv5LtDoWcmanoCHvQtgEA4orthZdHyeDb
-4GEVsAQEVaDO+xA+G5UK5Upv1rLnzQQ=
-=7qPP
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOA0CwAKCRAr4qD1Cr/k
+CnX2AP9yKzDYdNxPnirUlwl0hvSmYEPq45VC9EzbwZcLPmSnuwEA+KypZWFQx9Rw
+9tuYea3A30V0WHwNNq3GvittncOJogE=
+=vG7K
 -----END PGP SIGNATURE-----
 
---Emil/7bTDZLmYe4+--
+--YtiZC8emcbeTvHvb--
