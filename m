@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 319F2CCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:19:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0980BCCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:19:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19D458386F;
-	Fri,  3 Oct 2025 22:19:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 837DE8386F;
+	Fri,  3 Oct 2025 22:19:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PWgim+ee";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A8Hwr7fm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A9F583870; Fri,  3 Oct 2025 22:19:00 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 0EDB98386F; Fri,  3 Oct 2025 22:19:54 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DA8683826
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:18:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8FFA83826
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:19:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-4242bb22132so25453135ab.3
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:18:58 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-911520e43edso111056239f.0
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:19:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759522737; x=1760127537; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759522790; x=1760127590; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eLkHjft4fmvRANPLz2ptkHQU1bExeMiL3B3LxpBrKRA=;
- b=PWgim+ee1M0NX8OyYgwLGlL+rFVKlKrYjFy+k7Edkjyr0d4vceUprVMqsBjFnotv1E
- INvzNnQHyZLW2hy2OqcVzRC661ZaUpopglBY2RA4I6uzlQJ1Tlv7EvE7ZkJq/AsAlKyT
- lk2HGdVhnXAiu2n2ntTcUvQcJPqzNpnsYXeSw=
+ bh=bzW13syzouCQ+QhYu7UAU0gg3FDBN9r6oy9JL+gU1TY=;
+ b=A8Hwr7fm2JipCOzrMZeMvEqCO5biXZZ8zXxWXx7OxMM8mTEt57VsMm6keAOVjqoOKJ
+ MO2zKx5kHp17miiEAX7QgGtegOCPki9Kpb+4RScso1RVjEK85rhv8EV915ki2qLp1tSt
+ OQ2pe9Ydar+Ozr5c0A4eY354y2/MAjzqMGYAo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759522737; x=1760127537;
+ d=1e100.net; s=20230601; t=1759522790; x=1760127590;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eLkHjft4fmvRANPLz2ptkHQU1bExeMiL3B3LxpBrKRA=;
- b=cHv5DaDLbcgi6i1H1SsbNxuZqlz7PQMXzsdOmMu+MgV0Hqrk2uHliU5kfhn36z/fmu
- GYvMVn48GbQL8JDFJqztgNvQSMYoUbw90XJpmlJ+SS3nOFg/QH0t5gPmwmq08NEoNdVl
- Ff192BqdUK95ZjJVAwjV4Lf5WK7vvIPLAFCmwoAgC989th/T47f9IDY1+w22+qlXngw4
- Db6SQuzpjF7Eev4kWrT6C3TIyGQbE/jG4ifTmZ9FuCYpA5XW2Z/GZhflEKpCj91AlQ6S
- AuEI43rhDMCmC+H7O9gkg7ljONiChFWGdlp5aZoNmGWM384XxIhObgU4bUacMuibkFnV
- dUDg==
-X-Gm-Message-State: AOJu0YxFxslNzz2ZvONKuzWgdiI3+9pGEI6wg/3cjgL6IwQxDTbFERQT
- gKoQlmeQtPx4zrx+jyEjFdNoLW3GFj+r5u4r1/hj6q4x2M9wMrko6nLBqUwjfVNy0Xc=
-X-Gm-Gg: ASbGncuMI21NeBinJi2Z2WADMDoEDArAMCkD5ncdA6/Ftb96GAjEIvBMn2FiJBtkFVY
- dnZcgsR6jvJd4el8y5H+11VernbEcn/dgpTSjnagh8kStim/HepusQd6JI2A1wIkklUwNfqn8fw
- FFbN0WHGYMYjEhNTl3g+SZzqcGLiSE/vzqWATipKQ0JULA/gyQcSNndLjUuW+KFWyAvx+frQMXL
- tfLfKz5WJxN3iuvHBs80J8uHKeWAzBzob1kvyWd5NDLSwfG10aIHlvvgixfSR2brqy6pmEYGrxT
- NQZ/IT4lkkm2d1t0WAw4jx9amsWdhGSGuyjFZMyefmsNbvjE2flo/5vBsQBkkFuolTrH/uOjATC
- syT8YnfXp8kShw3sIm/dSqW+4v04aybUG+ZSpB/Ofo1kcKsNOb9ZoOUMUL0h17dL+UMrRvQQzNn
- PN6Qq2vsDi+A==
-X-Google-Smtp-Source: AGHT+IHLKHPn4gd7O4FYwlaMJdH2wVP2E86dDPx0zk6s01rXjvy1Lnw0SnGMkX1gfTkTD8jzsgxVDA==
-X-Received: by 2002:a05:6e02:168e:b0:42d:8acf:a6e2 with SMTP id
- e9e14a558f8ab-42e7ad84328mr61370285ab.15.1759522736846; 
- Fri, 03 Oct 2025 13:18:56 -0700 (PDT)
+ bh=bzW13syzouCQ+QhYu7UAU0gg3FDBN9r6oy9JL+gU1TY=;
+ b=QhOEgtllVFrdvcA7IV0mi+MH3ZvUnwp/vpxPzdSmGnExRWQsPcXyVG+XfTmyGPSQPF
+ 6BnVIPRXM7XJfkFXnCqk2delkhVd+WdbPsPJGLG9E2gdQ3a1fyHpMa0xvHcl3fW/iCd4
+ pfObiD2F0BtE9W9pxcQ1d5mgpEX4MF/uKue5K9zD06WU0z6hAuaSDN4o37xD/NQtVOlj
+ npSaOv4GmItd/ptNWUoXLPgKUHvPd5dhhYhLQYNnzKV/6FWWGdsxGaLkQA4wt21+3GpM
+ U2Lqjt2q0gOi3fdGZYRGdiiam2ZmQU9abzKIxRqdguhqDwQt9E1GRUzwGQHMXZvLo7tJ
+ VOlA==
+X-Gm-Message-State: AOJu0Yzcw15fNssWf9iv9olbyD3N6+vGylKRMqEbp7JEZP6TF4RmjRw+
+ Chm5uyybHfaumvTVLbp7Ig70YG4f//mvyrKN8wx2m4NAsA7CoBpPLCRmt1l14y0aonY=
+X-Gm-Gg: ASbGncvI5jMYV33lASFZxvOKIJuzUZ9KREQhFdumoAsjqFhhMmdAcRMEv36EQ26L4q1
+ K3Xz0o+R7TxGkZqEPCdP51bBxSU35Z1iIYtHMu7uXDh2IBcnzUF/nvKpr2fXmu1aEGRelIR/rSU
+ Po2mJiLdLwDP99d9ixISHDHrttxA6GiYhAC2etRKqW9n9472Z8sOGXtJV4rqrsQgM6r34MegsLu
+ 66uBtuNXcC9I2EiBhj3AzzjtCL6kUSPjmE9Agh3ErZkp6IT1Kvs3k1aHFtcoLezETfjdUWNRr9R
+ G5eG8jsGOuvcqxIT3UqMxAMjxWIXYsphUONe8gDrnChGwsFH33p6GYnxUPmEdInkMm2SbJn3q1L
+ MV2ADiEBaY8m3vg/krigyUfgmxJMc8eANdcBVrys1X7K/uCxIhhLZgaH0k9ERrqJo5nNxPYOMfE
+ cA6ZGMbUKBIw==
+X-Google-Smtp-Source: AGHT+IGHcjJothVxRynfEmv5QiwGkaVmC1V7BBai5I/TS7Nr1Zp9oKs/ETWG/4Jc2EWRKC0CKw0/NA==
+X-Received: by 2002:a05:6e02:148b:b0:42e:7a9d:f5ee with SMTP id
+ e9e14a558f8ab-42e7ad86603mr54831665ab.15.1759522790522; 
+ Fri, 03 Oct 2025 13:19:50 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-42e7b754202sm12442415ab.11.2025.10.03.13.18.54
+ e9e14a558f8ab-42d8b215dd6sm24630865ab.14.2025.10.03.13.19.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 13:18:55 -0700 (PDT)
-Date: Fri, 3 Oct 2025 14:18:52 -0600
+ Fri, 03 Oct 2025 13:19:49 -0700 (PDT)
+Date: Fri, 3 Oct 2025 14:19:47 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Raymond Mao <raymond.mao@linaro.org>
 Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
@@ -77,16 +77,16 @@ Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
  Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 2/5] pytest: add test script to validate Firmware
- Handoff
-Message-ID: <20251003201852.GU6093@bill-the-cat>
+Subject: Re: [PATCH v2 3/5] configs: select CMD_BLOBLIST for Firmware Handoff
+ testing
+Message-ID: <20251003201947.GV6093@bill-the-cat>
 References: <20251003192222.767882-1-raymond.mao@linaro.org>
- <20251003192222.767882-3-raymond.mao@linaro.org>
+ <20251003192222.767882-4-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VhdxCyrQ8SUklnwZ"
+ protocol="application/pgp-signature"; boundary="Emil/7bTDZLmYe4+"
 Content-Disposition: inline
-In-Reply-To: <20251003192222.767882-3-raymond.mao@linaro.org>
+In-Reply-To: <20251003192222.767882-4-raymond.mao@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,49 +105,33 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---VhdxCyrQ8SUklnwZ
+--Emil/7bTDZLmYe4+
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 03, 2025 at 12:22:16PM -0700, Raymond Mao wrote:
+On Fri, Oct 03, 2025 at 12:22:17PM -0700, Raymond Mao wrote:
 
-> Add test cases to validate FDT and TPM eventlog handoff from TF-A
-> and OP-TEE via bloblist.
->=20
-> For FDT, the nodes 'reserved-memory' and 'firmware' appended by
-> OP-TEE indicates a successful handoff.
->=20
-> For TPM eventlog, the events 'SECURE_RT_EL3', 'SECURE_RT_EL1_OPTEE'
-> and 'SECURE_RT_EL1_OPTEE_EXTRA1' created by TF-A indicates a
-> successful handoff.
+> Firmware Handoff tests will leverage the same board type 'qemu_arm64'
+> with a new board ID 'fw_handoff_tfa_optee', thus select CMD_BLOBLIST
+> in qemu_arm64_defconfig for running the test.
 >=20
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in v2:
-> - Control the tests to depend on 'env__firmware_handoff_enabled'.
->=20
->  test/py/tests/test_fw_handoff.py | 108 +++++++++++++++++++++++++++++++
->  1 file changed, 108 insertions(+)
->  create mode 100644 test/py/tests/test_fw_handoff.py
 
-We should also be adding this to doc/develop/pytest/ as well, to make
-sure the documentation is formatted right. The output itself will be
-missing on readthedocs, sadly, as there's still some underlying bug to
-sort out with the integration.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---VhdxCyrQ8SUklnwZ
+--Emil/7bTDZLmYe4+
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOAvrAAKCRAr4qD1Cr/k
-CnUKAQD5r9b1yMsDQEEo9h5ZOFWSFNhKmOk92XPv9+cotuybcQEA9q3sWr7KKhuu
-IoTHCgaybZqq+Y8sru4IIKADbUlmJAU=
-=y+kt
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOAv4wAKCRAr4qD1Cr/k
+CnPIAP9qwGgGiXBpJ0pQ4HYrkHMMiHiCv5LtDoWcmanoCHvQtgEA4orthZdHyeDb
+4GEVsAQEVaDO+xA+G5UK5Upv1rLnzQQ=
+=7qPP
 -----END PGP SIGNATURE-----
 
---VhdxCyrQ8SUklnwZ--
+--Emil/7bTDZLmYe4+--
