@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC88CAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC26CCAC5B0
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:23:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9507838C5;
-	Fri,  3 Oct 2025 21:23:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27259838EC;
+	Fri,  3 Oct 2025 21:23:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NNMjGImJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dl23p8Zw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15DA68386F; Fri,  3 Oct 2025 21:23:01 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 7B493838EF; Fri,  3 Oct 2025 21:23:07 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0309E838CE
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:22:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF579838C2
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:23:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-92aee734485so111655839f.1
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:22:58 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-887764c2868so248939539f.1
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:23:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759519377; x=1760124177; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759519383; x=1760124183; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/wjjyTVKkQqgND/J+YvFO0/ETgFFj2XhC3kXF/pUeps=;
- b=NNMjGImJzAdnGROyz2DuYOiaspG9euqC5wuuauaa9JE9NJjYFuKN0q36Rwqk0reLUW
- B52IGGbQ20UDSMu5y9wzCiOG37wfgS5jIQrl2cKTqXfcycgS1bf9xwN69SipSlIWxZTH
- CN1TWO5hhySuvCMXolrvi9vPRDkJEV190YZbr3U8TXSBF2/3P5Jl5k74mniFLN/aQ8VH
- onmJKniscCHx0XVvubHCV0uFI++o4YsNn1HOaMHl7u9RYtIR8fjdVbnQQaayu+JZxztW
- UgUi21ijhg+00Cq3jh4sR0LuCJEMCbBK8DhYJlv7CZ34nYi6ThyzUvVtOQ8N2nWqh+Tj
- ssdQ==
+ bh=koiFUdA5JkNwpp3IOzmsZD+z21BOPXfiIr7fr0M7ie4=;
+ b=Dl23p8ZwaE7TALKEhRuOaljTjaX7pLzBxI1Aqd62sEUqnQJOEnSkoB2y94J0FVqazh
+ DmiY5YHksKBSYfvofu5ReRuKxVVlY/d2++T/HXjatco0FpVuCCkOE/O8Q6sl+mQUlzd3
+ 8l/u+H76fJYRV38LVZrnFRehHH4Mfs1eiB6hQZndE/g2W1X+zraCSrIjiv4AXuR69FMj
+ OUjbQOgN5KYYDy2/1o6sTXW6F0PrvKnIJs+NMnBNpEE0R8GL4TDMRYXyoTsc1xoCxSbT
+ lijGW6v4fuiox6FFChN11u+xwuYkDz92ecObRY7hhI45OKArES41Rj5hvhkVJODFSOc+
+ fE5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759519377; x=1760124177;
+ d=1e100.net; s=20230601; t=1759519383; x=1760124183;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/wjjyTVKkQqgND/J+YvFO0/ETgFFj2XhC3kXF/pUeps=;
- b=kD4mcccUyF2cL+RHzD46KatHtw+cO/MsrdUC4w3z6RcNRabfFGum1BMY3Ds3CaoSrh
- KfSvq0z3gJ/m37igvrgEemOkuAu69nNUd8m/+wzY1eu+4SHzi1WO5HMoaCD/mPmYlAa2
- yYl4HKCyPAN37Gh7jH6yJdbEs3+IT/FWyf6TLD1et0031A9PDHY6nbBJ9AowqtkMs2YJ
- pYBlRhVx6iJVr9IkcuNQNTb7nJgG9aagpOiN/39IZ3pP4wVA9kmFKZi7EUXZ84hZDhVO
- pGeUWWNbXjQRO7i5/IR0VN7WmzQ+mwgtcTmx/E5UEWg4zYpw0hg8dbOJ8MAlAGdOivvX
- G3BA==
-X-Gm-Message-State: AOJu0YyFOgG+ygBBA7amZQ35D+x9V/MEzA2gzDpNEhW9VE9dCzHpVSrB
- 7QRFifscdVAeIXe9E0SyR9EtYZE8QInocBGVuqid3h1dT38cVtXHBVeNrZEqb3KcQU18y3tnLR+
- ac3UH
-X-Gm-Gg: ASbGncuNvhFeA0ioHcg76lQjDaQ1UJSe+IIeJ7NeY7Ka1ByckTLMU+GrJnrHXwjjjJn
- O3aJ/uKCWH+E+jsX/QT0DN6fF6hGQvr6bycSiZUrQ3MogiEPIWVKA46W0d+FAdMxt/AHMR6kRKy
- XvPaMAKn1FI5DZOB90+Obr/oVD0P9vs210yENlmDYBfQIQsATcqC9xSM6nXGBSk6Tf0wnjb+S4r
- BVhjypI7wtp5CkA3P+zquZhKMkgcMRmx+j7BYe8RbemVNJG7PqWtl2FIrYpxbp0kkK0T726zS6s
- pJJAKhefREJ1Sd3s8pC8ojLMpwuYI9kfEh7eO2pp1w1XOwpe1MfNwJZ2SogiVKaKrYCnSUhp/OZ
- iBxfMn8CVyuafvNPBs/E318znvQ5WyT2sbjP7Grg3rzzgp1PPR9BuoUOVdOf+eYNj0kPWgnUPcx
- fusfCeCx8G
-X-Google-Smtp-Source: AGHT+IErJdb5shYpk3prNHcx9okMNF7dubKjGs1FHmWdZhs6x7998dfRtR3JqQMXYPskiaEPCTduqw==
-X-Received: by 2002:a05:6602:6429:b0:936:eded:d78a with SMTP id
- ca18e2360f4ac-93b9696e5ebmr547866339f.6.1759519377399; 
- Fri, 03 Oct 2025 12:22:57 -0700 (PDT)
+ bh=koiFUdA5JkNwpp3IOzmsZD+z21BOPXfiIr7fr0M7ie4=;
+ b=eZ0Llc8WOQ3q84BHewypQPV+Ys1pPHDdSgt7qoz8AtjzRxAV0A5Og8wPltMKK54f6c
+ qKtQLLePpmfjR+VcuOGHx/jA8ye7BHlSWw2RsyXXLYtlu6S8lMjYxLwlmUolVk110GPj
+ T7ldpzAIQT+SFB/le6+7poEopIQO0yCiobN5vmNMqXPbUB4nQatPVJY//A2UG91fve13
+ zqLQVxtCCXT0RLJk7g/ZRbLLnrX4drSbw8lNAO/8aVYaZ9JTZV9lxIHRGBwJXNOxAfJ5
+ LrDLhyoMO70D6gsklgyKTIOgyjKT3xXovbfhWq5SaMKMOotzs/tyv9wmXLqPvkeIQDrU
+ +tHQ==
+X-Gm-Message-State: AOJu0YzkY0LAMwdzFT+bwwnNuRWcvVVl9MnoGiCIv4sDt9F63NkI+Qjc
+ vTwVrkBp3d5kXs/3t2ZvZ3JWe9vipTAvI/Nscjx+uMJEOcgjJ4RvvEha3B04GsprmgM0uxDmNHp
+ jwCBt
+X-Gm-Gg: ASbGncsbd0C/p2ZCIkqCj5bt9oCONEQP7I3Lq2+PjoCstpv7gWXUP+4UOW0EU87fwRu
+ /B065ssg/WeF/bGX7RmtWE1i2CWE/997Kt/9gB4jO4ypiLb794WIXkvTVHOAQLcD0o8GiSNoj80
+ YTvwbG0MpkZ4Obg7nx5An6rMpf0sijkh9bgkViDsf35n2I3dINxPYgYseuCfPGH6xVvC29kFaqf
+ 9tQ4le0gcb9IRttKCbRV9ywIMAd1NeuBghX1/U/qrE5DlGtSDwJ/9JjRbvvkVcKk3euB8y04TcP
+ qCbmnRmZwL73JzLg8+u73kkPr/0y6P9f9ycnDTIXGNj64k5OCMuNUvsmrKQF6eR987zLihHQAPP
+ uDIqQef/9OK8fF5En4TDB+JNtCuSHfWXzlN1jdDtoYgb9D/OFrFwPL0txPNR3c+6QBynngO691Z
+ iVceLaNaFc
+X-Google-Smtp-Source: AGHT+IHRs9iHqa1fDvdUHrh0w7RBcs1RUbcgHXHXCJz9dEpBfhuAkSpHt3fo5QV1MXhYKbZijrU+LA==
+X-Received: by 2002:a05:6602:6519:b0:936:dfca:f79 with SMTP id
+ ca18e2360f4ac-93b969648f7mr429076539f.5.1759519383215; 
+ Fri, 03 Oct 2025 12:23:03 -0700 (PDT)
 Received: from ubuntu.localdomain ([209.227.150.67])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-93a7d81bf16sm208975239f.4.2025.10.03.12.22.55
+ ca18e2360f4ac-93a7d81bf16sm208975239f.4.2025.10.03.12.23.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 12:22:56 -0700 (PDT)
+ Fri, 03 Oct 2025 12:23:02 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -80,11 +80,11 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 3/5] configs: select CMD_BLOBLIST for Firmware Handoff
- testing
-Date: Fri,  3 Oct 2025 12:22:17 -0700
-Message-Id: <20251003192222.767882-4-raymond.mao@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH v2 4/5] ci: check existence of bl1 and fip in the test script
+Date: Fri,  3 Oct 2025 12:22:18 -0700
+Message-Id: <20251003192222.767882-5-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20251003192222.767882-1-raymond.mao@linaro.org>
 References: <20251003192222.767882-1-raymond.mao@linaro.org>
@@ -106,30 +106,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Firmware Handoff tests will leverage the same board type 'qemu_arm64'
-with a new board ID 'fw_handoff_tfa_optee', thus select CMD_BLOBLIST
-in qemu_arm64_defconfig for running the test.
+Check the existence of bl1 and fip from:
+1. /opt/tf-a/${board_type}_${board_ident}, if not exist, then;
+2. /opt/tf-a/${board_type}
+
+This change allows to test with TF-A with specified board ID only.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2:
-- None.
+- Initial patch.
 
- configs/qemu_arm64_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ .azure-pipelines.yml | 14 ++++++++++++--
+ .gitlab-ci.yml       | 14 ++++++++++++--
+ 2 files changed, 24 insertions(+), 4 deletions(-)
 
-diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
-index 358bb1aeeb9..0a43abf8fbf 100644
---- a/configs/qemu_arm64_defconfig
-+++ b/configs/qemu_arm64_defconfig
-@@ -32,6 +32,7 @@ CONFIG_CMD_SMBIOS=y
- CONFIG_CMD_BOOTZ=y
- CONFIG_CMD_BOOTEFI_SELFTEST=y
- CONFIG_CMD_NVEDIT_EFI=y
-+CONFIG_CMD_BLOBLIST=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_PCI=y
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 8209d2b329c..1382e4f6475 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -308,8 +308,18 @@ stages:
+               /opt/coreboot/cbfstool \${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom add-flat-binary -f \${UBOOT_TRAVIS_BUILD_DIR}/u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000;
+           fi
+           # If we have TF-A binaries, we need to use them.
+-          if [[ -d /opt/tf-a/"\${TEST_PY_BD}" ]]; then
+-            cp /opt/tf-a/"\${TEST_PY_BD}"/fip.bin /opt/tf-a/"\${TEST_PY_BD}"/bl1.bin /tmp;
++          tfa_dir=""
++          rm -f /tmp/fip.bin
++          rm -f /tmp/bl1.bin
++          if [[ -d /opt/tf-a/"\${TEST_PY_BD}\${TEST_PY_ID//--id /_}" ]]; then
++            tfa_dir="/opt/tf-a/\${TEST_PY_BD}\${TEST_PY_ID//--id /_}";
++          elif [[ -d /opt/tf-a/"\${TEST_PY_BD}" ]]; then
++            tfa_dir="/opt/tf-a/\${TEST_PY_BD}";
++          fi
++          if [[ -n "\$tfa_dir" ]]; then
++            cp "\$tfa_dir"/fip.bin "\$tfa_dir"/bl1.bin /tmp/;
++          fi
++          if [ -f /tmp/fip.bin ] && [ -f /tmp/bl1.bin ]; then
+             export fip=/tmp/fip.bin;
+             export bl1=/tmp/bl1.bin;
+             export PATH=/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3:\${PATH};
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 85401d3e09b..224485a2e64 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -97,8 +97,18 @@ stages:
+         /opt/coreboot/cbfstool ${UBOOT_TRAVIS_BUILD_DIR}/coreboot.rom add-flat-binary -f ${UBOOT_TRAVIS_BUILD_DIR}/u-boot.bin -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000;
+       fi
+     # If we have TF-A binaries, we need to use them.
+-    - if [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
+-        cp /opt/tf-a/"${TEST_PY_BD}"/fip.bin /opt/tf-a/"${TEST_PY_BD}"/bl1.bin /tmp/;
++    - tfa_dir=""
++    - rm -f /tmp/fip.bin
++    - rm -f /tmp/bl1.bin
++    - if [[ -d /opt/tf-a/"${TEST_PY_BD}${TEST_PY_ID//--id /_}" ]]; then
++        tfa_dir="/opt/tf-a/${TEST_PY_BD}${TEST_PY_ID//--id /_}";
++      elif [[ -d /opt/tf-a/"${TEST_PY_BD}" ]]; then
++        tfa_dir="/opt/tf-a/${TEST_PY_BD}";
++      fi
++    - if [[ -n "$tfa_dir" ]]; then
++        cp "$tfa_dir"/fip.bin "$tfa_dir"/bl1.bin /tmp/;
++      fi
++    - if [ -f /tmp/fip.bin ] && [ -f /tmp/bl1.bin ]; then
+         export fip=/tmp/fip.bin;
+         export bl1=/tmp/bl1.bin;
+         export PATH=/opt/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3:${PATH};
 -- 
 2.25.1
 
