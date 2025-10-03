@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44C09CAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:20:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35470CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:22:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B211783893;
-	Fri,  3 Oct 2025 21:20:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B479183826;
+	Fri,  3 Oct 2025 21:22:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JYtOFjiZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iwVZOFot";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02ACF838AE; Fri,  3 Oct 2025 21:20:06 +0200 (CEST)
+ id 173A383855; Fri,  3 Oct 2025 21:22:43 +0200 (CEST)
 Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
  [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF37783893
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:20:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE4B28381D
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:22:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
 Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-91524f5e6a8so224209439f.0
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:20:03 -0700 (PDT)
+ ca18e2360f4ac-938de0df471so211994639f.2
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759519202; x=1760124002; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DnZZ3dffgOidngzJZRrHGORRZf5auGxqLDSJH7a6oG8=;
- b=JYtOFjiZD6tg6aA5xccpyKBYwC92nKKu0p2UA5rdTmAJ8HCb6TW3Te3nHsSqTO6yHV
- 2anLDnf3TaM4Razn2L1xwgrXQECu3IYn2EaqHtKxksRODjjvDN4gbk8IiRY0IblXz+ll
- Rjq7q77OkZtLYuNNN8OhKUM8uomcSRl+70Uxdc4Eb8bVqeog8ex1CVUMXHapmTABITmD
- eQT5kAg3H2EU20wUuz9gPAABK0E6WWUYTCujd054c7aBaBy2ordHg/XcZFHL6sLG/A6+
- MwJg3pXAVee3GaMl/7mzNoFuTh0gCG2imV3X0+nugu/TkPHpEzbdlmnO/hcL5A0Vja3+
- eiyA==
+ d=linaro.org; s=google; t=1759519359; x=1760124159; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vYndtdyOjagLbHpYpDRX8NDxbvSojibwIfZSDUMT8JQ=;
+ b=iwVZOFotC4mpHTSYpN1+gqGalXf+DxUoK3ozDmE7AQDX41LTB1Xuf6TrmGLfgyqlIV
+ NHc6CD3cgazUCU+/2MF0NSNTUXNVbBZNaazq3ohAwLNj+G1Ze7l64XpHZ2pf+kxFGBFy
+ sBeJBC8dsoOfQEQgG8D5tXHR3F43qdWjyGQKh0M4qSQNA2qubxPfTmb2g9XV+0KqFVoS
+ Z125nnptzoWLGaM30rAkhTxYIcbnp0nf5CPA7ORSEpLJs0wzTU0Qu0JAgdmvCTov0w3K
+ E9JU1aCfdfx4g/5dh+/frpu/V4mrn13nYxxGH/Bt7jh+bhGLJ4IWcIN7YhTgr8oEGriH
+ BQzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759519202; x=1760124002;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=DnZZ3dffgOidngzJZRrHGORRZf5auGxqLDSJH7a6oG8=;
- b=XJTo3G/jvnYLGv3T3TTs7Ud1F2+fZaMmStAcLkEp/Tf8m9tuZRcjo6oGMFA0dlyNWj
- mRzmEcWGOx6JDW1BDPwEH1e/Ldgg0h6zcGGCH0VN0BJG2s9AHr2aNbaWrge7MvQPpOIE
- 2Kanvx/DXevL5kk6N9Cy5wUR22t7B4yRCIrrqKCNbIfiT6Ea0HheG2FcUXtBVkUQxVKe
- sLp5dHZ8isFpGOci0O3IJsAb0ZfakPjaPsNTI8/rSAoA3rpL1OF4yjBZoN5TcAMURgrg
- RKhf6xaMGvdGOCmeBN0uwdIxLKIU7KcYhvSSeZRIZX+C+0wyIpHFiAaJpUKHJHz1xQjr
- kkMw==
-X-Gm-Message-State: AOJu0Yxo/kbv3dD6H0byp4k0+ca1AQpVHbm/TFXNln0l/7TI4U0tJsmx
- 2t9hFF498OD4mzz/SnRa5EAKoF9Own4kWb7Kn+0n5tVs28krwjFbcKK6vvG//YsAqlAn1tSnXgK
- vDTLw
-X-Gm-Gg: ASbGnct9oQyUe/QVwLaf+cyGxrHX8z3CrUWZa+dfGtkdqGhEfu1YJ0ktWgwWaghrGWF
- baJtpMqHTTm0QwEYc1TFcUUvhQ5SRv40Q0LBuX3L0I9BFQQpXQHQndo26PQB8Jtk9p9hnZO6Jrt
- eZhpI92R/Bkouluww9TWmZER40qoqc4N9a8B/RcLKklDD2j6Fhfsvlo77K3plQxqLD70bz+Jd4n
- /SluPk/JAZG7taPPuBaimlsdTtg6VwGxPwbcyyKiRbDu5Wau+XkgVJV3ujYF4/NHkAMBp+f3cWq
- Kh2nNhy6x9jTjg89P7qGUZ5fJ6GGV6qR8AVIjqa8q9OQI1Kbx1JR7bd31PW5NbuGzzXsoIS7PWo
- Uc1Tk32VHH7CSnsh7BFvpccZkpscFD5enNyqxEFH+4m2iBiSejQ1K1dY9h2gfTvBDPShrDtR/cg
- OM5wPXDUCl
-X-Google-Smtp-Source: AGHT+IFQoU9JGxd0c8JqsopjPwItGmiNTOW2NSZ1Jyc+QFeTTTkPHwZyljMVypxcLAPI0vaNtfJptQ==
-X-Received: by 2002:a05:6602:1653:b0:913:34eb:5562 with SMTP id
- ca18e2360f4ac-93b96534104mr529133439f.0.1759519202127; 
- Fri, 03 Oct 2025 12:20:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759519359; x=1760124159;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vYndtdyOjagLbHpYpDRX8NDxbvSojibwIfZSDUMT8JQ=;
+ b=HQsv4B0UYipb7aMgJxYa7SaHsXYiHRkKSRdtoG2389vmG4T71eQ+gzp3qFP/5Bea4L
+ tyoeRUTo3PGOM57K7QIwu3M4HQW2+VyS9LjA0G3md/yiBW+jAAcXp2DLhuQpv7p94lkN
+ WEK+dTOuHs5xEgXQxNeMv5gQLksVEVVfUGRhPeVsoboLiE9eT0vXqWzNQtsHhKiL39G3
+ rIa1vdFAvLZFmgU2FGf/xq3DVZ8cMv4jPm5suD9MJOZBNSk2KxehA/Y0sBxen3hwKBaS
+ 5jE0PpbDmUs2hfwYGcLre+r6XolX1EvyTBQtn+yXRZb7MhmVCRHWz/a1kf/huS9tCPvY
+ Uu3w==
+X-Gm-Message-State: AOJu0Yx7SxXoXVSxM8evF+lFE2o99u9iN12d+yzkxMEfFgO8JRVm7GmU
+ Dm75JPT4bbkfpgLvdycwknnKTn3yYvcJ7wTDNbJsyoku2/NDCyh5SLGxLt/yGsCnM9CjonhTcwI
+ lhgFh
+X-Gm-Gg: ASbGncuJJHwmL1n/tL0eJ1LqhnojVPHOVD0LaFKS+FmxQnd7AJN0R8FIJjcUQSQ1OKY
+ /WXZUs3vZbQtsMXKqNOTFO1BEHiBf5wiCwwAk/sVSezX0xd8Vt7IgkdhHzbDpyE/RUeQ6b6AfU2
+ IoJHU3a75XtYnYbusBS2tudYNKimp8FHcKL5F2J/MlSZUEAUsSqpwXtBzNh0ubGCIKuTqhlBpFU
+ 9qLzGoX+Ii+dvZ7fahvP9ddhX0t8r3Pc/CxT4MptyYCejKQ4OmOyhPBYQ6lXoiK9xW9rQQwTv2G
+ STs0Et+uxE3TD5b0OmlxliniGOZ7ontDfvGKJ0v/tjrMRfNwVA16qkCqIZqv1+/KZdVpcoRQLFq
+ RkAZgORWJ5bVmprlI+szHkpFg1E/o6WOd7audEmuFUiC7Kgwu5xpIs8KHPiDGnxohNa5fQNPfxw
+ ==
+X-Google-Smtp-Source: AGHT+IFEMpZe22/iFaxHzagCB4X4/V9BvWGHb/iH5kBcJ6UP4QEZreECDVFxzPv6QT+QipZHBiZ21w==
+X-Received: by 2002:a05:6602:640e:b0:938:6d80:960e with SMTP id
+ ca18e2360f4ac-93b96ac2844mr555925639f.17.1759519359048; 
+ Fri, 03 Oct 2025 12:22:39 -0700 (PDT)
 Received: from ubuntu.localdomain ([209.227.150.67])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-93a8912bfd9sm213794139f.25.2025.10.03.12.20.00
+ ca18e2360f4ac-93a7d81bf16sm208975239f.4.2025.10.03.12.22.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 12:20:01 -0700 (PDT)
+ Fri, 03 Oct 2025 12:22:38 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -82,13 +81,10 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH u-boot-test-hooks 4/4] travis-ci: Introduce env for Firmware
- Handoff testing
-Date: Fri,  3 Oct 2025 12:19:13 -0700
-Message-Id: <20251003191918.767698-4-raymond.mao@linaro.org>
+Subject: [PATCH v2 0/5] Enable Firmware Handoff CI test on qemu_arm64
+Date: Fri,  3 Oct 2025 12:22:14 -0700
+Message-Id: <20251003192222.767882-1-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20251003191918.767698-1-raymond.mao@linaro.org>
-References: <20251003191918.767698-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -107,24 +103,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce board env for Firmware Handoff testing and enable it on
-qemu_arm64_fw_handoff_tfa_optee.
+This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
+1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
+2. build bl1 and fip with both Firmware Handoff and Measured Boot
+   enabled;
+3. pytest to validate the Firmware Handoff feature via bloblist by
+   checking the existence of expected FDT nodes and TPM events generated
+   and handed over from TF-A/OP-TEE.
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- .../u_boot_boardenv_qemu_arm64_fw_handoff_tfa_optee.py         | 3 +++
- 1 file changed, 3 insertions(+)
- create mode 100644 py/travis-ci/u_boot_boardenv_qemu_arm64_fw_handoff_tfa_optee.py
+Pre-requisite u-boot-test-hooks patches [2] are required.
 
-diff --git a/py/travis-ci/u_boot_boardenv_qemu_arm64_fw_handoff_tfa_optee.py b/py/travis-ci/u_boot_boardenv_qemu_arm64_fw_handoff_tfa_optee.py
-new file mode 100644
-index 0000000..8f1d5c8
---- /dev/null
-+++ b/py/travis-ci/u_boot_boardenv_qemu_arm64_fw_handoff_tfa_optee.py
-@@ -0,0 +1,3 @@
-+import os
-+
-+env__firmware_handoff_enabled = True
+[1] https://github.com/FirmwareHandoff/firmware_handoff
+[2] https://lore.kernel.org/u-boot/20251003191918.767698-1-raymond.mao@linaro.org/T/#t
+
+Raymond Mao (5):
+  docker: add OP-TEE and TF-A build for testing Firmware Handoff
+  pytest: add test script to validate Firmware Handoff
+  configs: select CMD_BLOBLIST for Firmware Handoff testing
+  ci: check existence of bl1 and fip in the test script
+  ci: add test entries for qemu_arm64_tfa_fw_handoff
+
+ .azure-pipelines.yml             |  18 +++++-
+ .gitlab-ci.yml                   |  21 +++++-
+ configs/qemu_arm64_defconfig     |   1 +
+ test/py/tests/test_fw_handoff.py | 108 +++++++++++++++++++++++++++++++
+ tools/docker/Dockerfile          |  74 ++++++++++++++++++++-
+ 5 files changed, 215 insertions(+), 7 deletions(-)
+ create mode 100644 test/py/tests/test_fw_handoff.py
+
 -- 
 2.25.1
 
