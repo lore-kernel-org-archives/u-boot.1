@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5569CCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:39:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C78B3CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:39:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2571683906;
-	Fri,  3 Oct 2025 22:39:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C888F838FA;
+	Fri,  3 Oct 2025 22:39:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AygiCIn5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F7QeMpgw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 599CB838F3; Fri,  3 Oct 2025 22:39:27 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 66B4D83914; Fri,  3 Oct 2025 22:39:29 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23D25838CE
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E6AAD838EC
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-91179e3fe34so133885039f.1
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:25 -0700 (PDT)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-90926724bceso219933139f.1
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759523964; x=1760128764; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=AabT5RfH65xmqzOFhm3OjYVpE/CWVX4ZcR60R4DY40Q=;
- b=AygiCIn5oQafMqB4GKNajLVp58FkD1YVqMADoUDjHsICYuwlQX+eIVc4czNBSKtC39
- 7xe1iDS1L0pv036k+CLiA4+UsPgkRKIrBmIS5NocvMQLeZzZqmupgugKLJNju2ZKwvEL
- Jl4bNYHJT6tpHTN/J5Xo3dWjXwNyt64Wj2F7k=
+ d=konsulko.com; s=google; t=1759523966; x=1760128766; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vqx/5dVUAHYQg8lAwHcvlU7rsx6KqUc3nXcoS5u4vmk=;
+ b=F7QeMpgwrV1VupEr7HKP6WJqc8mfJPqlqdb/vgIqCwGeemykkezpi2+sG2qZa1yXVr
+ Q1MwCG7EqshUwB6E3fVeo8ijY2axFl/OeQ4pajqcQ4884p9RdTWkS71x61X0g5SlTK2c
+ bvBgqoTkSY8HSM/N/d3gluZMU9/CEXq7QZw00=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759523964; x=1760128764;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AabT5RfH65xmqzOFhm3OjYVpE/CWVX4ZcR60R4DY40Q=;
- b=dlSOgnm0YNQO7ESCk6a1ZJNVFaZjTvBBed+37BkRe+hRmao1g7FsI+qIkl5Otl4zG9
- RwyPAFtaK+46Ku11nm7cZe8l0bsMrylAReoTZMwC1aWx5GbGpWzpt6JYDp871mF5Houf
- zWHw6WGrCfmUWxl3XSk3seV5ZJL/ojUiJpZU+mLDGCsBXaBV/BEUtjWu88JAm89DT0mg
- OcKgj5nFwHNRi86AtvSJkx/gksW/T0qfByolfjMzCOppGfrSq0L+h8pZv3wWLZasU8SB
- Qh+DkG2NBSu6n51hxCK/DaNaAzg4kluNPBxn6RkX6g+y9gGkrFug0XlV0TqUsoWkXOfa
- TvwQ==
-X-Gm-Message-State: AOJu0YzfGjKGg0lvCZLocuC8eEhJQ/w8+BhWvRlUM0qorcVwmBwoBEcQ
- e7QJao1nZt7j3JEnyJzS6nAaCl0DVQo9eIi/8J5/zApbZV00I1xAx2k//CQki/dfL0vaz6aqOPK
- AR3fccs8=
-X-Gm-Gg: ASbGnctidIE9q9/CyitCbjnrIBnzeCbWGG2Mxc+q8OGMdQZPSU0fpo51VsC16iIeKt5
- 5Og80SicNdzbmEYnnMEsdWw4o3gW889mfUKVhF0qtcatDK9qvbw3cXJxu8CnaetcC/fjkue2Uux
- akQ3EWEVPINvwz9IoQElP7ceZ3guybE7fQjDRl5vt4vK8lChXYY3IM6rSuix72C6/Xp1zgMhCMd
- lUb9bLLlPgV/nyEhjA7OmRUTZA9iNEtZ/PbjJWicOqbvsfQHzDS2h/LsIFvUKkoeahVgmq4RoW6
- UMDiWr9bFrCPH44RElafo5BqJyuHQ4zu+stiWXyg3IRg/GyPWV7gNgU1iR5CqmkrpaTw6YNgxPJ
- uhatIPyRtxjfmA7H37wtf5nEKjgDG9y5lVktGzkVd7JnZ6Idg2xE1i2l45n06zpcMmtW8ZhNVj8
- fiZYZtppHAF3sCp1lSaD2+AjE=
-X-Google-Smtp-Source: AGHT+IHZ7MNKbx3mtUzKK2fU+0Kv3ySEIRlutDJmtuNeO5nEFAccjnwq81QxNDU5duBWRNFcIbpigw==
-X-Received: by 2002:a05:6602:1602:b0:887:690b:2594 with SMTP id
- ca18e2360f4ac-93b96a35846mr622662739f.5.1759523963837; 
- Fri, 03 Oct 2025 13:39:23 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759523966; x=1760128766;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vqx/5dVUAHYQg8lAwHcvlU7rsx6KqUc3nXcoS5u4vmk=;
+ b=Ittg8TqD2ZJjcSvS6+YfpmvodMObxdHOsOQjWWoEc5YtouY4/96Asb7vZO6gZxGZxM
+ ejIkK+UoUncGx9Pkdptrj/hevUuvz6QeAH+1/zouhv7HObjc0GyJw4z0nE48Jf20pspC
+ FQSX9BD4zAT5tlQt+80FX+TQoUcFgMI4NMFxjH70CalMkPjhibIJna+tHJcQLxYabzuD
+ t84FcEHzUi2u4eag0bPuNqofWKDKu4wdjoiHXYeFIqYBKbjmQKYIbiYabRevXmHM/aUn
+ N+L8Vs3L56No/u+FslMWTbBqD/C0w7QOqmvaCiYgQQTgymxz3n/ctc/hfr5o4MuCw2r5
+ aXNg==
+X-Gm-Message-State: AOJu0Yy2epamxpdUD/DzJwQtbcq+K4vumLzMM2FRK5H46Ih2uRm9yvYx
+ Zyr4F5dN8KwjdfYXf2NmzSHewSWsmt3+2QPdgS7S/diyJL2Ehb+AbpGR74oHb2EqzKt85wfTBat
+ 3vnbcAmM=
+X-Gm-Gg: ASbGncv1J66WwgaqyJREpgoOgIn/m9jOsYwA7naMHL7/PFl2k8FcohQNbu1bw8Mtlb4
+ wSJ2jdqaSoR5gryGg0KZzUXeVpYM2g1YN7bVdgZRZrNZEYkKChTp8lvPfNFr4fIJBgmZI4xyIT0
+ oVyxWiJx5VQQu4Y6ZdTwjbJn+EEUymZOX4fRPhyO7/IdHn3zsxZ76UGBZcE98NflxcrbdR20vem
+ zDkZOyHutbBEsEadN4anklS3CBDPQwBIucBYv3xz0Yui5tYYT0umz7JuyebnwyXSrhd/vPlXqSX
+ Joz9wLCx8CWQbE4ZVSuTGEfMO8pPqICFtc/8XRiL/BujH6RRWUoxx74SIK16t0ulfkHgSsENlPd
+ eP0dzk+AKXbOdrIECey2QujQ6LltODLVunQmoSop0HadRLSQe8JY0/batfP3N4gOr23MC2QYFgZ
+ WrtnahTpxjsu+Eh9KYxuBKUgM=
+X-Google-Smtp-Source: AGHT+IFxd8LPE4l8yLeC97HSrUXKvdR4m05hPzKMhU+6iSFSSQA/u1HC2ppxgF9jd5J26T87LEmegg==
+X-Received: by 2002:a05:6602:6404:b0:911:c5f7:e4e with SMTP id
+ ca18e2360f4ac-93b9695dbb2mr535458339f.2.1759523965658; 
+ Fri, 03 Oct 2025 13:39:25 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-93b19d072b8sm198175639f.24.2025.10.03.13.39.22
+ 8926c6da1cb9f-57b5ea313d4sm2233514173.20.2025.10.03.13.39.24
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 13:39:23 -0700 (PDT)
+ Fri, 03 Oct 2025 13:39:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Marek Vasut <marek.vasut@mailbox.org>
-Subject: [PATCH] usb: gadget: spl: Add missing dependency for SPL_USB_GADGET
-Date: Fri,  3 Oct 2025 14:39:22 -0600
-Message-ID: <20251003203922.1029989-1-trini@konsulko.com>
+Subject: [PATCH] power: regulator: Correct dependencies on SPL_REGULATOR_PWM
+Date: Fri,  3 Oct 2025 14:39:24 -0600
+Message-ID: <20251003203924.1030022-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -94,30 +92,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It makes no sense to ask about nor enable SPL_USB_GADGET without
-SPL_FRAMEWORK being enabled. Attempting to do so leads to Kconfig noting
-dependency issues. Add the missing dependency.
+In order to enable and build with SPL_REGULATOR_PWM we need to have both
+SPL_DM_REGULATOR and SPL_DM_PWM enabled. Build-wise, we can have SPL
+have PWM regulator support without enabling it in U-Boot itself so drop
+that dependency.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Marek Vasut <marek.vasut@mailbox.org>
----
- drivers/usb/gadget/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/power/regulator/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index 882f082c9cdb..056eff4d942e 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -39,6 +39,7 @@ menuconfig USB_GADGET
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
+index 65b99e896562..1875e61967c0 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -143,7 +143,7 @@ config REGULATOR_PWM
  
- config SPL_USB_GADGET
- 	bool "USB Gadget Support in SPL"
-+	depends on SPL_FRAMEWORK
+ config SPL_REGULATOR_PWM
+ 	bool "Enable Driver for PWM regulators in SPL"
+-	depends on REGULATOR_PWM && SPL
++	depends on SPL_DM_REGULATOR && SPL && SPL_DM_PWM
  	help
- 	  Enable USB Gadget API which allows to enable USB device functions
- 	  in SPL.
+ 	  This config enables implementation of driver-model regulator uclass
+ 	  features for PWM regulators in SPL.
 -- 
 2.43.0
 
