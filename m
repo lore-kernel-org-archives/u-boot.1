@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D90ACCAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:48:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9853ACCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12E918382E;
+	by phobos.denx.de (Postfix) with ESMTP id 5B12E8383E;
 	Fri,  3 Oct 2025 14:48:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="KwrSqr7n";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="zOmTC3Q5";
+	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="FafUWGHt";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="KPyJc+os";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77F8F836B4; Fri,  3 Oct 2025 12:04:44 +0200 (CEST)
+ id 4DC2F836B4; Fri,  3 Oct 2025 12:09:29 +0200 (CEST)
 Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 702048366F
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 12:04:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47BAB8366F
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 12:09:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=mainlining.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=david.wronek@mainlining.org
 DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
  c=relaxed/relaxed; 
- h=To:Message-Id:Subject:Date:From; t=1759485671; bh=LN1AXF768lrQcVEMtqwfZVY
- OJo/in3WS6H76f9GvCc0=; b=KwrSqr7nU5Vlteabdchkfu1iiNr3A3twdvDTGGHmgZvoNehByw
- fzBIAHn618yVW+sxCDUcWWuyiE6xkrIDnRyA7QJ0/NxRn9mOU9gZzYV6u7yyADbIAN227gdTWck
- EzyTC4UlPmPYrOBFNEsLdpbXAFHS7M0xFYXUHI+4ieZBAMJoccZHKcbJbheaymrsK72Zz4tXmd9
- dYQwHubjjga1/uu+85D29SXyX+I6yq4vszciBi1Fn9bhhGchUzDoi9+uEkjDtfE380aFFuEgHmY
- Gbr540SXAnTHF+gJff4hGmoENLve/g2oyPFRyuWezqAPT7RQG1qbv3ip+ciLibMMOTQ==;
+ h=To:Message-Id:Subject:Date:From; t=1759485671; bh=DN8/fMM+8mMltSL8HhCttHq
+ Y+1h0olVVDAvD+GiDSJ4=; b=FafUWGHte/SxMAyJlQnf1kK8bvyD+/yx+fgIFtJRMjKviizaug
+ M7DmyngnMFmLpe1uA2RPHQQo9UvMw+R1WdDTF8kW+HoKgJVmj2l/CjzP9N8k5clFhMWVvPm2QMc
+ TUBLVz6IE9eoy9w/JsxuSyQb2/R2GwJZJ6f7vm9PE51zLsLNXAsYB+R5oaKN70rVfOVQvG/cgR+
+ LelE25UuqiXjuXN2czotKbbRParHJhDxcs12Vdw4B3/TRQiUs+XR5ATIcZrdaSaYoLG9iqq8KXd
+ VwnEvH6+9ufgPz0GgS8ATjjTCOV+OOy1ubFBt2IdiTcffoT3fOEGkVwOMgjHmmEXrgQ==;
 DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
  c=relaxed/relaxed; 
- h=To:Message-Id:Subject:Date:From; t=1759485671; bh=LN1AXF768lrQcVEMtqwfZVY
- OJo/in3WS6H76f9GvCc0=; b=zOmTC3Q5dY8jYSIN1r84ve4wh0HFMOfW63sUjpjggdwCj+26Ww
- VqmSC6ZWCjPeueZKJJu+dfh00iWdAlYbP2BA==;
+ h=To:Message-Id:Subject:Date:From; t=1759485671; bh=DN8/fMM+8mMltSL8HhCttHq
+ Y+1h0olVVDAvD+GiDSJ4=; b=KPyJc+osZ7hn3qZ8H+CjVF4Pau4RWW+PO8ED2lF+wfAgoDkyxH
+ 0hZsCl/3Qmfb+8C2ruukhaC2gedA5uLOc0DA==;
 From: David Wronek <david.wronek@mainlining.org>
-Date: Fri, 03 Oct 2025 12:01:10 +0200
-Subject: [PATCH v2 2/5] clk/qcom: sdm845: add support for sdm670
+Date: Fri, 03 Oct 2025 12:01:11 +0200
+Subject: [PATCH v2 3/5] pinctrl: qcom: add sdm670 pinctrl driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251003-sdm670-v2-2-52c0fa481286@mainlining.org>
+Message-Id: <20251003-sdm670-v2-3-52c0fa481286@mainlining.org>
 References: <20251003-sdm670-v2-0-52c0fa481286@mainlining.org>
 In-Reply-To: <20251003-sdm670-v2-0-52c0fa481286@mainlining.org>
 To: Alexey Minnekhanov <alexeymin@postmarketos.org>, 
@@ -65,11 +65,11 @@ Cc: linux@mainlining.org, ~postmarketos/upstreaming@lists.sr.ht,
  Sumit Garg <sumit.garg@oss.qualcomm.com>, 
  David Wronek <david.wronek@mainlining.org>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1759485669; l=7944;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1759485669; l=7383;
  i=david.wronek@mainlining.org; s=20250914; h=from:subject:message-id;
- bh=82SqQeEJH+Pk8SO04V+GaqVpXVJ5S2NWB1Uo3Z6w0WM=;
- b=eoBdcD5pNdZPH4QyieRsgFO3NO/9eMy1KFKaDfPWV4qsPJdtKZnex+k8c+kYvqTwlYivOGc3E
- w2mLymVt49FCZweyW5lSLD9Bq8S5V204k8xDAxiT676M2FeF342yF2e
+ bh=Qj6bZQ6Hxd8H34LVARUWoBC6bYgGf/sikMBbV5IbKRI=;
+ b=8jvFDgNKOShKlaD9cs5JuFd9fU9hTZsz6PK/p/Nf9j7mUHt3UjCne9mZqfhvlTTfflwwzSCaT
+ jxMmI/4+zaECQknQWt9gTJOb2GtLlmdW70GogiUWDtj3MT1KoLPNCVN
 X-Developer-Key: i=david.wronek@mainlining.org; a=ed25519;
  pk=NtKhS1PfXjRIaJwWcYTu7JS0cX3GEmccZo+a6erVTfU=
 X-Mailman-Approved-At: Fri, 03 Oct 2025 14:48:13 +0200
@@ -89,202 +89,298 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The global clock controller on SDM670 is similar to SDM845, so let's add
-support here.
+Add a pinctrl driver for the TLMM block found in the SDM670 SoC.
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: David Wronek <david.wronek@mainlining.org>
 ---
- drivers/clk/qcom/clock-sdm845.c | 127 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 127 insertions(+)
+ drivers/pinctrl/qcom/Kconfig          |   7 +
+ drivers/pinctrl/qcom/Makefile         |   1 +
+ drivers/pinctrl/qcom/pinctrl-sdm670.c | 247 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 255 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-index 5c8702ef2fe..c9a057cf6f9 100644
---- a/drivers/clk/qcom/clock-sdm845.c
-+++ b/drivers/clk/qcom/clock-sdm845.c
-@@ -23,6 +23,7 @@
- #define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf018
- #define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf030
- #define USB3_PRIM_PHY_AUX_CMD_RCGR 0xf05c
-+#define SDCC1_APPS_CLK_CMD_RCGR 0x26028
- #define SDCC2_APPS_CLK_CMD_RCGR 0x1400c
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index 21f81b66099..45f900e9383 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -68,6 +68,13 @@ config PINCTRL_QCOM_SC7280
+ 	help
+ 	  Say Y here to enable support for pinctrl on the Snapdragon SC7280 SoC,
  
- static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
-@@ -44,6 +45,18 @@ static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
- 	{ }
- };
- 
-+static const struct freq_tbl ftbl_gcc_sdcc1_apps_clk_src[] = {
-+	F(144000, CFG_CLK_SRC_CXO, 16, 3, 25),
-+	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
-+	F(20000000, CFG_CLK_SRC_GPLL0_EVEN, 5, 1, 3),
-+	F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 1, 2),
-+	F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
-+	F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
-+	F(192000000, CFG_CLK_SRC_GPLL6, 2, 0, 0),
-+	F(384000000, CFG_CLK_SRC_GPLL6, 1, 0, 0),
-+	{ }
++config PINCTRL_QCOM_SDM670
++	bool "Qualcomm SDM670 Pinctrl"
++	select PINCTRL_QCOM
++	help
++	  Say Y here to enable support for pinctrl on the Snapdragon SDM670 SoC,
++	  as well as the associated GPIO driver.
++
+ config PINCTRL_QCOM_SDM660
+ 	bool "Qualcomm SDM630/660 Pinctrl"
+ 	select PINCTRL_QCOM
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index 6cb53838e71..f43868363d6 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -13,6 +13,7 @@ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+ obj-$(CONFIG_PINCTRL_QCOM_SA8775P) += pinctrl-sa8775p.o
+ obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
+ obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
++obj-$(CONFIG_PINCTRL_QCOM_SDM670) += pinctrl-sdm670.o
+ obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+ obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+ obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-sdm670.c b/drivers/pinctrl/qcom/pinctrl-sdm670.c
+new file mode 100644
+index 00000000000..830fe7d826f
+--- /dev/null
++++ b/drivers/pinctrl/qcom/pinctrl-sdm670.c
+@@ -0,0 +1,247 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Qualcomm SDM670 pinctrl
++ *
++ * (C) Copyright 2025 David Wronek <david.wronek@mainlining.org>
++ */
++
++#include <dm.h>
++#include "pinctrl-qcom.h"
++
++#define NORTH	0x00500000
++#define SOUTH	0x00900000
++#define WEST	0x00100000
++
++#define MAX_PIN_NAME_LEN 32
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++
++static const struct pinctrl_function sdm670_pinctrl_functions[] = {
++	{ "gpio", 0 },
++	{ "blsp_uart2", 3 }, /* gpio 4 and 5, used for debug uart */
 +};
 +
- static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
- 	F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
- 	F(9600000, CFG_CLK_SRC_CXO, 2, 0, 0),
-@@ -55,6 +68,22 @@ static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
- 	{ }
- };
- 
-+static ulong sdm670_clk_set_rate(struct clk *clk, ulong rate)
-+{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct freq_tbl *freq;
++static const unsigned int sdm670_pin_offsets[] = {
++	[0] = SOUTH,
++	[1] = SOUTH,
++	[2] = SOUTH,
++	[3] = SOUTH,
++	[4] = NORTH,
++	[5] = NORTH,
++	[6] = NORTH,
++	[7] = NORTH,
++	[8] = WEST,
++	[9] = WEST,
++	[10] = NORTH,
++	[11] = NORTH,
++	[12] = SOUTH,
++	[13] = WEST,
++	[14] = WEST,
++	[15] = WEST,
++	[16] = WEST,
++	[17] = WEST,
++	[18] = WEST,
++	[19] = WEST,
++	[20] = WEST,
++	[21] = WEST,
++	[22] = WEST,
++	[23] = WEST,
++	[24] = WEST,
++	[25] = WEST,
++	[26] = WEST,
++	[27] = WEST,
++	[28] = WEST,
++	[29] = WEST,
++	[30] = WEST,
++	[31] = WEST,
++	[32] = WEST,
++	[33] = WEST,
++	[34] = WEST,
++	[35] = NORTH,
++	[36] = NORTH,
++	[37] = NORTH,
++	[38] = NORTH,
++	[39] = NORTH,
++	[40] = NORTH,
++	[41] = SOUTH,
++	[42] = SOUTH,
++	[43] = SOUTH,
++	[44] = SOUTH,
++	[45] = SOUTH,
++	[46] = SOUTH,
++	[47] = SOUTH,
++	[48] = SOUTH,
++	[49] = NORTH,
++	[50] = NORTH,
++	[51] = NORTH,
++	[52] = NORTH,
++	[53] = NORTH,
++	[54] = NORTH,
++	[55] = NORTH,
++	[56] = NORTH,
++	[57] = NORTH,
++	[65] = NORTH,
++	[66] = NORTH,
++	[67] = NORTH,
++	[68] = NORTH,
++	[75] = NORTH,
++	[76] = NORTH,
++	[77] = NORTH,
++	[78] = NORTH,
++	[79] = NORTH,
++	[80] = NORTH,
++	[81] = NORTH,
++	[82] = NORTH,
++	[83] = NORTH,
++	[84] = NORTH,
++	[85] = SOUTH,
++	[86] = SOUTH,
++	[87] = SOUTH,
++	[88] = SOUTH,
++	[89] = SOUTH,
++	[90] = SOUTH,
++	[91] = SOUTH,
++	[92] = SOUTH,
++	[93] = SOUTH,
++	[94] = SOUTH,
++	[95] = SOUTH,
++	[96] = SOUTH,
++	[97] = WEST,
++	[98] = WEST,
++	[99] = NORTH,
++	[100] = WEST,
++	[101] = WEST,
++	[102] = WEST,
++	[103] = WEST,
++	[105] = NORTH,
++	[106] = NORTH,
++	[107] = NORTH,
++	[108] = NORTH,
++	[109] = NORTH,
++	[110] = NORTH,
++	[111] = NORTH,
++	[112] = NORTH,
++	[113] = NORTH,
++	[114] = WEST,
++	[115] = WEST,
++	[116] = SOUTH,
++	[117] = NORTH,
++	[118] = NORTH,
++	[119] = NORTH,
++	[120] = NORTH,
++	[121] = NORTH,
++	[122] = NORTH,
++	[123] = NORTH,
++	[124] = NORTH,
++	[125] = NORTH,
++	[126] = NORTH,
++	[127] = WEST,
++	[128] = WEST,
++	[129] = WEST,
++	[130] = WEST,
++	[131] = WEST,
++	[132] = WEST,
++	[133] = NORTH,
++	[134] = NORTH,
++	[135] = WEST,
++	[136] = WEST,
++	[137] = WEST,
++	[138] = WEST,
++	[139] = WEST,
++	[140] = WEST,
++	[141] = WEST,
++	[142] = WEST,
++	[143] = WEST,
++	[144] = SOUTH,
++	[145] = SOUTH,
++	[146] = WEST,
++	[147] = WEST,
++	[148] = WEST,
++	[149] = WEST,
++};
 +
-+	switch (clk->id) {
-+	case GCC_SDCC1_APPS_CLK:
-+		freq = qcom_find_freq(ftbl_gcc_sdcc1_apps_clk_src, rate);
-+		clk_rcg_set_rate_mnd(priv->base, SDCC1_APPS_CLK_CMD_RCGR,
-+				     freq->pre_div, freq->m, freq->n, freq->src, 8);
-+		return freq->freq;
-+	default:
-+		return 0;
-+	}
++#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
++{							\
++	.name = pg_name,				\
++	.ctl_reg = ctl,					\
++	.io_reg = 0,					\
++	.pull_bit = pull,				\
++	.drv_bit = drv,					\
++	.oe_bit = -1,					\
++	.in_bit = -1,					\
++	.out_bit = -1,					\
 +}
 +
- static ulong sdm845_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -76,6 +105,54 @@ static ulong sdm845_clk_set_rate(struct clk *clk, ulong rate)
- 	}
- }
- 
-+static const struct gate_clk sdm670_clks[] = {
-+	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,		0x8201c, 0x00000001),
-+	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK,		0x0502c, 0x00000001),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,		0x5200c, 0x00000400),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,		0x5200c, 0x00000800),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK,		0x5200c, 0x00001000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK,		0x5200c, 0x00002000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S4_CLK,		0x5200c, 0x00004000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S5_CLK,		0x5200c, 0x00008000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S6_CLK,		0x5200c, 0x00010000),
-+	GATE_CLK(GCC_QUPV3_WRAP0_S7_CLK,		0x5200c, 0x00020000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK,		0x5200c, 0x00400000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK,		0x5200c, 0x00800000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK,		0x5200c, 0x02000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK,		0x5200c, 0x04000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK,		0x5200c, 0x08000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S6_CLK,		0x5200c, 0x10000000),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S7_CLK,		0x5200c, 0x20000000),
-+	GATE_CLK(GCC_QUPV3_WRAP_0_M_AHB_CLK,		0x5200c, 0x00000040),
-+	GATE_CLK(GCC_QUPV3_WRAP_0_S_AHB_CLK,		0x5200c, 0x00000080),
-+	GATE_CLK(GCC_QUPV3_WRAP_1_M_AHB_CLK,		0x5200c, 0x00100000),
-+	GATE_CLK(GCC_QUPV3_WRAP_1_S_AHB_CLK,		0x5200c, 0x00200000),
-+	GATE_CLK(GCC_SDCC1_AHB_CLK,			0x26008, 0x00000001),
-+	GATE_CLK(GCC_SDCC1_APPS_CLK,			0x26004, 0x00000001),
-+	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK,		0x2600c, 0x00000001),
-+	GATE_CLK(GCC_SDCC2_AHB_CLK,			0x14008, 0x00000001),
-+	GATE_CLK(GCC_SDCC2_APPS_CLK,			0x14004, 0x00000001),
-+	GATE_CLK(GCC_SDCC4_AHB_CLK,			0x16008, 0x00000001),
-+	GATE_CLK(GCC_SDCC4_APPS_CLK,			0x16004, 0x00000001),
-+	GATE_CLK(GCC_UFS_MEM_CLKREF_CLK,		0x8c000, 0x00000001),
-+	GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,		0x82024, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_AHB_CLK,			0x77010, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_AXI_CLK,			0x7700c, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,		0x77058, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,		0x7708c, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,		0x77018, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,		0x77014, 0x00000001),
-+	GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,		0x77054, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,		0x0f00c, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,		0x0f014, 0x00000001),
-+	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,		0x0f010, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_CLKREF_CLK,		0x8c008, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,		0x0f04c, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,		0x0f050, 0x00000001),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,		0x0f054, 0x00000001),
-+	GATE_CLK(GCC_USB_PHY_CFG_AHB2PHY_CLK,		0x6a004, 0x00000001),
-+};
-+
- static const struct gate_clk sdm845_clks[] = {
- 	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,		0x8201c, 0x00000001),
- 	GATE_CLK(GCC_AGGRE_USB3_SEC_AXI_CLK,		0x82020, 0x00000001),
-@@ -140,6 +217,28 @@ static const struct gate_clk sdm845_clks[] = {
- 	GATE_CLK(GCC_USB_PHY_CFG_AHB2PHY_CLK,		0x6a004, 0x00000001),
- };
- 
-+static int sdm670_clk_enable(struct clk *clk)
-+{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+
-+	debug("%s: clk %s\n", __func__, sdm670_clks[clk->id].name);
-+
-+	switch (clk->id) {
-+	case GCC_USB30_PRIM_MASTER_CLK:
-+		qcom_gate_clk_en(priv, GCC_USB_PHY_CFG_AHB2PHY_CLK);
-+		/* These numbers are just pulled from the frequency tables in the Linux driver */
-+		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
-+				     (4.5 * 2) - 1, 0, 0, 1 << 8, 8);
-+		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR,
-+				     1, 0, 0, 0, 8);
-+		clk_rcg_set_rate_mnd(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR,
-+				     1, 0, 0, 0, 8);
-+		break;
-+	}
-+
-+	return qcom_gate_clk_en(priv, clk->id);
++#define UFS_RESET(pg_name, offset)			\
++{							\
++	.name = pg_name,				\
++	.ctl_reg = offset,				\
++	.io_reg = offset + 0x4,				\
++	.pull_bit = 3,					\
++	.drv_bit = 0,					\
++	.oe_bit = -1,					\
++	.in_bit = -1,					\
++	.out_bit = 0,					\
 +}
 +
- static int sdm845_clk_enable(struct clk *clk)
- {
- 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -188,6 +287,17 @@ static const struct qcom_reset_map sdm845_gcc_resets[] = {
- 	[GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
- };
- 
-+static const struct qcom_power_map sdm670_gdscs[] = {
-+	[UFS_PHY_GDSC] = { 0x77004 },
-+	[USB30_PRIM_GDSC] = { 0xf004 },
-+	[HLOS1_VOTE_AGGRE_NOC_MMU_AUDIO_TBU_GDSC] = { 0x7d030 },
-+	[HLOS1_VOTE_AGGRE_NOC_MMU_TBU1_GDSC] = { 0x7d034 },
-+	[HLOS1_VOTE_AGGRE_NOC_MMU_TBU2_GDSC] = { 0x7d038 },
-+	[HLOS1_VOTE_MMNOC_MMU_TBU_HF0_GDSC] = { 0x7d040 },
-+	[HLOS1_VOTE_MMNOC_MMU_TBU_HF1_GDSC] = { 0x7d048 },
-+	[HLOS1_VOTE_MMNOC_MMU_TBU_SF_GDSC] = { 0x7d044 },
++static const struct msm_special_pin_data sdm670_special_pins_data[] = {
++	UFS_RESET("ufs_reset", 0x99d000),
++	SDC_QDSD_PINGROUP("sdc1_rclk", NORTH + 0x99000, 15, 0),
++	SDC_QDSD_PINGROUP("sdc1_clk",  NORTH + 0x99000, 13, 6),
++	SDC_QDSD_PINGROUP("sdc1_cmd",  NORTH + 0x99000, 11, 3),
++	SDC_QDSD_PINGROUP("sdc1_data", NORTH + 0x99000, 9,  0),
++	SDC_QDSD_PINGROUP("sdc2_clk",  NORTH + 0x9a000, 14, 6),
++	SDC_QDSD_PINGROUP("sdc2_cmd",  NORTH + 0x9a000, 11, 3),
++	SDC_QDSD_PINGROUP("sdc2_data", NORTH + 0x9a000, 9,  0),
 +};
 +
- static const struct qcom_power_map sdm845_gdscs[] = {
- 	[PCIE_0_GDSC] = { 0x6b004 },
- 	[PCIE_1_GDSC] = { 0x8d004 },
-@@ -292,6 +402,19 @@ static const char *const sdm845_rcg_names[] = {
- 	"GCC_UFS_PHY_PHY_AUX",
- };
- 
-+static struct msm_clk_data sdm670_clk_data = {
-+	/* Snapdragon 670 can function without its own exclusive resets. */
-+	.resets = sdm845_gcc_resets,
-+	.num_resets = ARRAY_SIZE(sdm845_gcc_resets),
-+	.clks = sdm670_clks,
-+	.num_clks = ARRAY_SIZE(sdm670_clks),
-+	.power_domains = sdm670_gdscs,
-+	.num_power_domains = ARRAY_SIZE(sdm670_gdscs),
++static const char *sdm670_get_function_name(struct udevice *dev, unsigned int selector)
++{
++	return sdm670_pinctrl_functions[selector].name;
++}
 +
-+	.enable = sdm670_clk_enable,
-+	.set_rate = sdm670_clk_set_rate,
-+};
++static const char *sdm670_get_pin_name(struct udevice *dev, unsigned int selector)
++{
++	if (selector >= 150 && selector <= 157)
++		snprintf(pin_name, MAX_PIN_NAME_LEN,
++			 sdm670_special_pins_data[selector - 150].name);
++	else
++		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
 +
- static struct msm_clk_data sdm845_clk_data = {
- 	.resets = sdm845_gcc_resets,
- 	.num_resets = ARRAY_SIZE(sdm845_gcc_resets),
-@@ -310,6 +433,10 @@ static struct msm_clk_data sdm845_clk_data = {
- };
- 
- static const struct udevice_id gcc_sdm845_of_match[] = {
-+	{
-+		.compatible = "qcom,gcc-sdm670",
-+		.data = (ulong)&sdm670_clk_data,
++	return pin_name;
++}
++
++static int sdm670_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
++{
++	if (selector >= 0 && selector < ARRAY_SIZE(sdm670_pinctrl_functions))
++		return sdm670_pinctrl_functions[selector].val;
++	return -EINVAL;
++}
++
++struct msm_pinctrl_data sdm670_data = {
++	.pin_data = {
++		.pin_offsets = sdm670_pin_offsets,
++		.pin_count = ARRAY_SIZE(sdm670_pin_offsets) + ARRAY_SIZE(sdm670_special_pins_data),
++		.special_pins_start = 150,
++		.special_pins_data = sdm670_special_pins_data,
 +	},
- 	{
- 		.compatible = "qcom,gcc-sdm845",
- 		.data = (ulong)&sdm845_clk_data,
++	.functions_count = ARRAY_SIZE(sdm670_pinctrl_functions),
++	.get_function_name = sdm670_get_function_name,
++	.get_function_mux = sdm670_get_function_mux,
++	.get_pin_name = sdm670_get_pin_name,
++};
++
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{
++		.compatible = "qcom,sdm670-tlmm",
++		.data = (ulong)&sdm670_data
++	},
++	{ /* Sentinel */ }
++};
++
++U_BOOT_DRIVER(pinctrl_ssdm670) = {
++	.name = "pinctrl_sdm670",
++	.id = UCLASS_NOP,
++	.of_match = msm_pinctrl_ids,
++	.ops = &msm_pinctrl_ops,
++	.bind = msm_pinctrl_bind,
++};
 
 -- 
 2.51.0
