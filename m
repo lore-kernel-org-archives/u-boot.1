@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73AEECCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 16:34:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DE59CCA472
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 16:35:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C91788386F;
-	Fri,  3 Oct 2025 18:34:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7CD0883885;
+	Fri,  3 Oct 2025 18:34:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Hn+lDp8f";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="tapl/W2D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17FF883869; Fri,  3 Oct 2025 18:34:26 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 5431C83759; Fri,  3 Oct 2025 18:34:31 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D935883855
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 18:34:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 662B983885
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 18:34:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 9617C1A10E6;
- Fri,  3 Oct 2025 16:34:23 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 1D4DC4E40E9F;
+ Fri,  3 Oct 2025 16:34:29 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 60EC060683;
- Fri,  3 Oct 2025 16:34:23 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D9F2D60683;
+ Fri,  3 Oct 2025 16:34:28 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CDF0A102F1CE7; 
- Fri,  3 Oct 2025 18:34:20 +0200 (CEST)
+ with ESMTPSA id 9C171102F1CFB; 
+ Fri,  3 Oct 2025 18:34:25 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759509262; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1759509267; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=CRxo8J5BC2gAixsicHzc/AlM7QerT56vRVRngnd5cZ8=;
- b=Hn+lDp8fpBagYDIvvnkdzCVVyTE7TW5RAoXhIVRstDkHotGciTBCNVrseM7NIUdfQcn8CO
- GlsFVARgLgTsqHpz1HkqSz/AGlIZbdDOD5KCQmbWDUflDTIdqceZR6flUPAFvdZBM1vQJe
- nOmU79UznX3/VagJt9IMupv93NsbqI/630tHSODZDdbuDK2QEj3NECfbMRR4eTe0cIvlVp
- rtuCE7H135XLo5XuY8wShQf9cHSJrfU96kpb5Q+qulWgjyemckEAGw8s+7P82KBvQnVNmF
- Tn020sEBtst1duRV1mQOf/Ub4QgwiQLQi7ELG29nfWokLaBGHFyldPcowjsFeA==
+ bh=3s1AJZkqLWydY2UGU45YXvybTPQDrBaZq8tzvcOHx/o=;
+ b=tapl/W2Dq2E2o/qF0i7a/RfZbDORKRsVRhIhqLx+7A6IDVk1AFfny71YaoVqrX+FGT4or/
+ RMgBwviT/d6dHDpHTWtgm0ruC5KdJG9M0/hqfCXZPCGTTLK3KB5coZyAmfCXJy8N1MYOAV
+ P1YPcfJ0Bd3WyChMrHB3ei7LQpIccloGQLsgK1CjVE+LUC01VD27TJhCnEAh/sXzN9GoB/
+ wRRWJBS4jTvJRGSnPTaeLeNbwFVn14rlMns0XqlvvaWxK5VGqvAF3qVKNju5O4BT6Ad2AT
+ NjN5lLyKJER+MNUNDeSloyzZ5eQGNZKHR+5BMfrufZhZLQPAYfzgh6Q8z3l6zw==
 From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Fri, 03 Oct 2025 18:33:44 +0200
-Subject: [PATCH 04/16] board: ti: Exclude cape detection from XPL builds
+Date: Fri, 03 Oct 2025 18:33:46 +0200
+Subject: [PATCH 06/16] board: ti: Convert cape detection to use UCLASS
+ framework
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251003-feature_sysboot_extension_board-v1-4-458b8bf85325@bootlin.com>
+Message-Id: <20251003-feature_sysboot_extension_board-v1-6-458b8bf85325@bootlin.com>
 References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 In-Reply-To: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,27 +81,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disable cape detection functionality in XPL (eXtended Program Loader)
-images to reduce size and complexity in the early boot stage.
+Migrate TI board cape detection from legacy extension support to the
+new UCLASS-based extension board framework.
 
 Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
- board/ti/common/Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ arch/arm/mach-omap2/am33xx/Kconfig |  2 +-
+ arch/arm/mach-omap2/omap5/Kconfig  |  2 +-
+ board/ti/common/cape_detect.c      | 24 +++++++++++-------------
+ 3 files changed, 13 insertions(+), 15 deletions(-)
 
-diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-index caf6b9fa8c1..ec8d314c332 100644
---- a/board/ti/common/Makefile
-+++ b/board/ti/common/Makefile
-@@ -2,6 +2,8 @@
- # Copyright (C) 2015-2016 Texas Instruments Incorporated - https://www.ti.com/
+diff --git a/arch/arm/mach-omap2/am33xx/Kconfig b/arch/arm/mach-omap2/am33xx/Kconfig
+index dff4f1cf202..77f7938305b 100644
+--- a/arch/arm/mach-omap2/am33xx/Kconfig
++++ b/arch/arm/mach-omap2/am33xx/Kconfig
+@@ -15,7 +15,7 @@ config TARGET_AM335X_EVM
+ 	select DM_GPIO
+ 	select DM_SERIAL
+ 	select TI_I2C_BOARD_DETECT
+-	select SUPPORT_EXTENSION_SCAN
++	select SUPPORT_DM_EXTENSION_SCAN
+ 	imply CMD_DM
+ 	imply SPL_DM
+ 	imply SPL_DM_SEQ_ALIAS
+diff --git a/arch/arm/mach-omap2/omap5/Kconfig b/arch/arm/mach-omap2/omap5/Kconfig
+index 5394529658b..819490a8cf8 100644
+--- a/arch/arm/mach-omap2/omap5/Kconfig
++++ b/arch/arm/mach-omap2/omap5/Kconfig
+@@ -38,7 +38,7 @@ config TARGET_AM57XX_EVM
+ 	select CMD_DDR3
+ 	select DRA7XX
+ 	select TI_I2C_BOARD_DETECT
+-	select SUPPORT_EXTENSION_SCAN
++	select SUPPORT_DM_EXTENSION_SCAN
+ 	imply DM_THERMAL
+ 	imply SCSI
+ 	imply SPL_THERMAL
+diff --git a/board/ti/common/cape_detect.c b/board/ti/common/cape_detect.c
+index 7786bdda5d1..23c93964dc3 100644
+--- a/board/ti/common/cape_detect.c
++++ b/board/ti/common/cape_detect.c
+@@ -22,7 +22,7 @@ static void sanitize_field(char *text, size_t size)
+ 	}
+ }
  
- obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
-+ifndef CONFIG_XPL_BUILD
- obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
-+endif
- obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
- obj-${CONFIG_ARCH_K3} += k3-ddr.o
+-int extension_board_scan(struct list_head *extension_list)
++static int ti_extension_board_scan(struct alist *extension_list)
+ {
+ 	unsigned char addr;
+ 	int num_capes = 0;
+@@ -31,7 +31,7 @@ int extension_board_scan(struct list_head *extension_list)
+ 		struct am335x_cape_eeprom_id eeprom_header;
+ 		char process_cape_part_number[17] = {'0'};
+ 		char process_cape_version[5] = {'0'};
+-		struct extension *cape;
++		struct extension cape = {0}, *_cape;
+ 		struct udevice *dev;
+ 		u8 cursor = 0;
+ 		int ret, i;
+@@ -78,22 +78,20 @@ int extension_board_scan(struct list_head *extension_list)
+ 
+ 		printf("BeagleBone Cape: %s (0x%x)\n", eeprom_header.board_name, addr);
+ 
+-		cape = calloc(1, sizeof(struct extension));
+-		if (!cape) {
+-			printf("Error in memory allocation\n");
+-			return num_capes;
+-		}
+-
+-		snprintf(cape->overlay, sizeof(cape->overlay), "%s-%s.dtbo",
++		snprintf(cape.overlay, sizeof(cape.overlay), "%s-%s.dtbo",
+ 			 process_cape_part_number, process_cape_version);
+-		strlcpy(cape->name, eeprom_header.board_name,
++		strlcpy(cape.name, eeprom_header.board_name,
+ 			sizeof(eeprom_header.board_name));
+-		strlcpy(cape->version, process_cape_version,
++		strlcpy(cape.version, process_cape_version,
+ 			sizeof(process_cape_version));
+-		strlcpy(cape->owner, eeprom_header.manufacturer,
++		strlcpy(cape.owner, eeprom_header.manufacturer,
+ 			sizeof(eeprom_header.manufacturer) + 1);
+-		list_add_tail(&cape->list, extension_list);
++		_cape = alist_add(extension_list, cape);
++		if (!_cape)
++			return -ENOMEM;
+ 		num_capes++;
+ 	}
+ 	return num_capes;
+ }
++
++U_BOOT_EXTENSION(cape, ti_extension_board_scan);
 
 -- 
 2.43.0
