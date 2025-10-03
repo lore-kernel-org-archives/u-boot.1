@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C78B3CCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:39:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F7DCCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:39:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C888F838FA;
-	Fri,  3 Oct 2025 22:39:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A95483903;
+	Fri,  3 Oct 2025 22:39:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F7QeMpgw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HSc9wDa5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66B4D83914; Fri,  3 Oct 2025 22:39:29 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 56909838FA; Fri,  3 Oct 2025 22:39:30 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6AAD838EC
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2152E838D2
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-90926724bceso219933139f.1
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:26 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-42f5e9e4314so8693345ab.0
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759523966; x=1760128766; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=vqx/5dVUAHYQg8lAwHcvlU7rsx6KqUc3nXcoS5u4vmk=;
- b=F7QeMpgwrV1VupEr7HKP6WJqc8mfJPqlqdb/vgIqCwGeemykkezpi2+sG2qZa1yXVr
- Q1MwCG7EqshUwB6E3fVeo8ijY2axFl/OeQ4pajqcQ4884p9RdTWkS71x61X0g5SlTK2c
- bvBgqoTkSY8HSM/N/d3gluZMU9/CEXq7QZw00=
+ d=konsulko.com; s=google; t=1759523967; x=1760128767; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ke6i0zCX+4qqmCLCEpoMoDjaaHIYqw+fdHlLlApbChk=;
+ b=HSc9wDa5+eL4/ofSOGbUCO+BATR7Y/7FqL2/ELm11AKUg2o0k3FuRD1NYO6czqlfN+
+ y5EUOZ0oxnbsJQk23sLX8WN8GnrCeyurc0bCPP6vynp3/SJog3EkBR4xokPUYWbcYNDg
+ QIlpsy0Q40sZw41iaeVtHRWHh8VN0cI0UpR9Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759523966; x=1760128766;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vqx/5dVUAHYQg8lAwHcvlU7rsx6KqUc3nXcoS5u4vmk=;
- b=Ittg8TqD2ZJjcSvS6+YfpmvodMObxdHOsOQjWWoEc5YtouY4/96Asb7vZO6gZxGZxM
- ejIkK+UoUncGx9Pkdptrj/hevUuvz6QeAH+1/zouhv7HObjc0GyJw4z0nE48Jf20pspC
- FQSX9BD4zAT5tlQt+80FX+TQoUcFgMI4NMFxjH70CalMkPjhibIJna+tHJcQLxYabzuD
- t84FcEHzUi2u4eag0bPuNqofWKDKu4wdjoiHXYeFIqYBKbjmQKYIbiYabRevXmHM/aUn
- N+L8Vs3L56No/u+FslMWTbBqD/C0w7QOqmvaCiYgQQTgymxz3n/ctc/hfr5o4MuCw2r5
- aXNg==
-X-Gm-Message-State: AOJu0Yy2epamxpdUD/DzJwQtbcq+K4vumLzMM2FRK5H46Ih2uRm9yvYx
- Zyr4F5dN8KwjdfYXf2NmzSHewSWsmt3+2QPdgS7S/diyJL2Ehb+AbpGR74oHb2EqzKt85wfTBat
- 3vnbcAmM=
-X-Gm-Gg: ASbGncv1J66WwgaqyJREpgoOgIn/m9jOsYwA7naMHL7/PFl2k8FcohQNbu1bw8Mtlb4
- wSJ2jdqaSoR5gryGg0KZzUXeVpYM2g1YN7bVdgZRZrNZEYkKChTp8lvPfNFr4fIJBgmZI4xyIT0
- oVyxWiJx5VQQu4Y6ZdTwjbJn+EEUymZOX4fRPhyO7/IdHn3zsxZ76UGBZcE98NflxcrbdR20vem
- zDkZOyHutbBEsEadN4anklS3CBDPQwBIucBYv3xz0Yui5tYYT0umz7JuyebnwyXSrhd/vPlXqSX
- Joz9wLCx8CWQbE4ZVSuTGEfMO8pPqICFtc/8XRiL/BujH6RRWUoxx74SIK16t0ulfkHgSsENlPd
- eP0dzk+AKXbOdrIECey2QujQ6LltODLVunQmoSop0HadRLSQe8JY0/batfP3N4gOr23MC2QYFgZ
- WrtnahTpxjsu+Eh9KYxuBKUgM=
-X-Google-Smtp-Source: AGHT+IFxd8LPE4l8yLeC97HSrUXKvdR4m05hPzKMhU+6iSFSSQA/u1HC2ppxgF9jd5J26T87LEmegg==
-X-Received: by 2002:a05:6602:6404:b0:911:c5f7:e4e with SMTP id
- ca18e2360f4ac-93b9695dbb2mr535458339f.2.1759523965658; 
- Fri, 03 Oct 2025 13:39:25 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1759523967; x=1760128767;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ke6i0zCX+4qqmCLCEpoMoDjaaHIYqw+fdHlLlApbChk=;
+ b=eNwxXspfiOihrpRFN2uBLykvexp4YVfos+HCI8hf75SsIlnZaoRkt5X9K9iPlI1uQ4
+ 0ZboF0OqeFzsDq9lrq4t4XPOAipfWb0zT3Y1RFNod7mYdqYfmMIt5U7mX1io4gL+FAZH
+ qELGjz9zO/elLcd1ik3hu+3C2YOdHKjIBvX0hW5epsXNdcYNvucx25WfDHpvNpr6cNQv
+ khjx1+4nc4ISTlxCjXUhpE37Zox2jIugkiFjAZrFAeyyDBNNl39nvq7uRxFuuDYjT0P6
+ imvba9YktWJt8ISoeISb6J+UPv8EjRU+G1IC/SvSwAWVL6UjiP7581H8WsvQIPnibwDD
+ C/wQ==
+X-Gm-Message-State: AOJu0Yx8q+EecirunoEfZNBVcUJ5bpNQV4EBDuPKi2pB8tVIU6Qyw2sp
+ QPeXsRvUxRuv92ypFmp7gCubxuh5xKsbQJjYuM4wv/5oyEz1JziW2a7xY3/qtSHaIk1cjvUFygx
+ 9CGtqhU4=
+X-Gm-Gg: ASbGnctIDt0QPXin4MUErEge/O2RQvLyvD2ulbQ/5PyqjvjrOsgYALxauwlRceVP8fF
+ 6DL4gt4K/bfM+ZXI15cs+9t+JcBv2/+nIvzzEd+hFlyd4zBuWbl4idAbHRp7Dx+S80JP7SPg81o
+ kDNdIHeYIxRLuWu9ej+TFLWD69pLZWkUsLBxftk0lU1IxpWttmm/ANtgDbY5KV+9yiUgGz8AlLL
+ UR430p5qOi9B61Zd/YitLW3tS8LI5mb4zZ8dP0YjZRDjUJtZmVAC77l8LZHpkvS3Ik93y6qngM5
+ Qzqhs25wyUhVovZEHos5L+gSispYivCD1m5xBN76egqAhnqpB9Opgi9NF4XwSBxJpJ+Liderapo
+ RZWC6jzs7BjOCXYzSiTVsuhRgcQSdNflxE39zYT0WnxJqskLDRRIxYZmeWP4Ok1ZPhPMSKFyQHJ
+ 61KjURoTOuBQ==
+X-Google-Smtp-Source: AGHT+IEqkeQMkouAIxuL/l73m4PVj/hCcggDFZBlWDYx/xiixHHziNgNb3HMqc6zEsHPVF65RSD2Zg==
+X-Received: by 2002:a05:6e02:2165:b0:425:8aea:7313 with SMTP id
+ e9e14a558f8ab-42e7ad6ea3bmr55502935ab.18.1759523966760; 
+ Fri, 03 Oct 2025 13:39:26 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-57b5ea313d4sm2233514173.20.2025.10.03.13.39.24
+ e9e14a558f8ab-42d8b1f3474sm24603555ab.9.2025.10.03.13.39.25
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 03 Oct 2025 13:39:25 -0700 (PDT)
+Date: Fri, 3 Oct 2025 14:39:23 -0600
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] power: regulator: Correct dependencies on SPL_REGULATOR_PWM
-Date: Fri,  3 Oct 2025 14:39:24 -0600
-Message-ID: <20251003203924.1030022-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Subject: Re: [PATCH] video: Add SPL_VIDEO_SYNC_CYCLIC_MS symbol
+Message-ID: <20251003203923.GY6093@bill-the-cat>
+References: <20251001203044.2828394-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="44HlKOR6c/dui/eQ"
+Content-Disposition: inline
+In-Reply-To: <20251001203044.2828394-1-trini@konsulko.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,29 +97,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to enable and build with SPL_REGULATOR_PWM we need to have both
-SPL_DM_REGULATOR and SPL_DM_PWM enabled. Build-wise, we can have SPL
-have PWM regulator support without enabling it in U-Boot itself so drop
-that dependency.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- drivers/power/regulator/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--44HlKOR6c/dui/eQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index 65b99e896562..1875e61967c0 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -143,7 +143,7 @@ config REGULATOR_PWM
- 
- config SPL_REGULATOR_PWM
- 	bool "Enable Driver for PWM regulators in SPL"
--	depends on REGULATOR_PWM && SPL
-+	depends on SPL_DM_REGULATOR && SPL && SPL_DM_PWM
- 	help
- 	  This config enables implementation of driver-model regulator uclass
- 	  features for PWM regulators in SPL.
--- 
-2.43.0
+On Wed, Oct 01, 2025 at 02:30:44PM -0600, Tom Rini wrote:
 
+> When compiling video-uclass.c for SPL and with SPL_CYCLIC enabled, we
+> also need to know SPL_VIDEO_SYNC_CYCLIC_MS as a value. This is most
+> easily resolved by adding a symbol to set this to the value of
+> VIDEO_SYNC_CYCLIC_MS as one shouldn't ever need these to differ.
+>=20
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  drivers/video/Kconfig | 5 +++++
+>  1 file changed, 5 insertions(+)
+
+Given that I've decided to go in the direction of not aiming for
+"allyesconfig" to support SPL right now, I'm going to defer this patch.
+It can be picked up later if needed.
+
+--=20
+Tom
+
+--44HlKOR6c/dui/eQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOA0ewAKCRAr4qD1Cr/k
+CocwAQDAjgk9OWS+NwgJ88J2fXY1E8pYbjXvaFfKmEKI91eBJAEAhGRjeFiSSBk7
+d6GEY/phXkJBmWreUXcjLCYHTec3tQs=
+=aR9N
+-----END PGP SIGNATURE-----
+
+--44HlKOR6c/dui/eQ--
