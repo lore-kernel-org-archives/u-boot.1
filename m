@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E394CCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:23:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC88CAC5B0
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68B4183870;
-	Fri,  3 Oct 2025 21:22:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E9507838C5;
+	Fri,  3 Oct 2025 21:23:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C0FC3EWN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NNMjGImJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E10E838AE; Fri,  3 Oct 2025 21:22:55 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 15DA68386F; Fri,  3 Oct 2025 21:23:01 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A5A18386F
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:22:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0309E838CE
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:22:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-91f6ccdbfc8so138191739f.1
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:22:53 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-92aee734485so111655839f.1
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:22:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759519371; x=1760124171; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759519377; x=1760124177; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lDrDJyDSfld5IdgdcCeS7JgvccMbVpIUA15xt9qq74Q=;
- b=C0FC3EWNW7DDc7/zcCYruOPNphhZOiqIqxAVah04kYKJaTg0dN/LyBXsQzr3LnnIdY
- jCkyeqa9D2JfKqYlEDzPwQszsSb5RzfFbG2rpwelIHFtD17VvmoQQfN5xxM0DKtJeSn+
- bA+cxsRNGNIYv14b6MAp9GS8C15/869q+FcS6F3L+zeL1ZkSxCpeyz1fHZT4W3EJqyTM
- SsdE5GnMSC5JhCNRXEHvVwA1ZBbhH+W1EUCjcnW4n7/Snwt/l+LTHjZ8JryghEWvF8Ki
- hna+C1ROGcAlFfRAUxvweQUqucfPOzJ2f2KM578F/hghec2yvlQwDK6Zb5lvM10lKidu
- 5zoA==
+ bh=/wjjyTVKkQqgND/J+YvFO0/ETgFFj2XhC3kXF/pUeps=;
+ b=NNMjGImJzAdnGROyz2DuYOiaspG9euqC5wuuauaa9JE9NJjYFuKN0q36Rwqk0reLUW
+ B52IGGbQ20UDSMu5y9wzCiOG37wfgS5jIQrl2cKTqXfcycgS1bf9xwN69SipSlIWxZTH
+ CN1TWO5hhySuvCMXolrvi9vPRDkJEV190YZbr3U8TXSBF2/3P5Jl5k74mniFLN/aQ8VH
+ onmJKniscCHx0XVvubHCV0uFI++o4YsNn1HOaMHl7u9RYtIR8fjdVbnQQaayu+JZxztW
+ UgUi21ijhg+00Cq3jh4sR0LuCJEMCbBK8DhYJlv7CZ34nYi6ThyzUvVtOQ8N2nWqh+Tj
+ ssdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759519371; x=1760124171;
+ d=1e100.net; s=20230601; t=1759519377; x=1760124177;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lDrDJyDSfld5IdgdcCeS7JgvccMbVpIUA15xt9qq74Q=;
- b=xOr08Y6uVmfMci9vi360tg1vwmh2sNPqhsJvzZC55MgLi/ZMFm1sXkQXWPrBJTrBa2
- jt1PQvSfnt3yf4YiaUQxa92Y5qh/H2BJL1MT3JzFWIFY+UMWSFwBEXq79MI5Di6HBrI7
- ZhzWD8D4BjxZxXjLh38beT6wEachgmVk6eypttdVJtumrNYZYWtIuyrAbO8Y2WDwF0Eu
- RstT5+Jedw1f2Mk0cN5UxJHHyCzoTQrfG6Dkjq8pfL6wdsdBM418gEBM6CCWL+uKAIU9
- CgmGocTspsk8/+ZWGCzSwHWUI9oFkDAj2a/38daCeSq8Ndlg9oMUcoXq/3ZWbq5pJ7vx
- R0gg==
-X-Gm-Message-State: AOJu0Yy3NAOQloyiWkV9KBhzNVNAXXxnckpVu+9y20g0UkKTA7vwYKsP
- CML8rPBwyOYk0wqHePRiipKfpsyvio8YMAnyI7DkBHwlllJFRNE/YQUfQiIZmRjIUTKog2JUjmF
- KKJpm
-X-Gm-Gg: ASbGnctF21uww+ib5icGPBa/HvdE5/+iLNAkqsvu+n+ftAiooRg3cGeAPyJCHjdx3sU
- cJ9/R8x67koGMFlZd44OeQtWF3fHEJVN5UKp6ZhqPs0mDueOj9i5nGhQpxKwCqTsK9VEhp0UqZO
- VlqS/W+U41SXszN/U9EBZ/beMfBHEIXQ3F+eA9F0ukJk9Ftwg5WwpChsYGT0KEJxNtndf2CPYem
- ibAtdZWFgcMw+bFm5RTDcGKL74YF8ZOuUcBB6hfnds/pfulok90hI+pGFRfrZ2SjufA8ClG30h1
- HQFJeImeHlddYDc9KiyfdaIaexW+RRNgDnG9ap59syN/TTei6PekRmdxiRNB8zjExh0Ubj6E9gD
- 5t2PZamdv17SSnBfZ3OOUJrCIieLmR9rzkvBns3G8rSou51vrta0ueILpBN3HXfNJHCODExIRvA
- ==
-X-Google-Smtp-Source: AGHT+IH+spSRlW2rowLomR+oC8KAkxBnTys8sYz5Ug9NErX9cv6CiuwUgbdx1j/qY0XwpPD4GAiqZg==
-X-Received: by 2002:a05:6602:150d:b0:886:fa71:f544 with SMTP id
- ca18e2360f4ac-93b96ae6ff4mr544785339f.17.1759519371567; 
- Fri, 03 Oct 2025 12:22:51 -0700 (PDT)
+ bh=/wjjyTVKkQqgND/J+YvFO0/ETgFFj2XhC3kXF/pUeps=;
+ b=kD4mcccUyF2cL+RHzD46KatHtw+cO/MsrdUC4w3z6RcNRabfFGum1BMY3Ds3CaoSrh
+ KfSvq0z3gJ/m37igvrgEemOkuAu69nNUd8m/+wzY1eu+4SHzi1WO5HMoaCD/mPmYlAa2
+ yYl4HKCyPAN37Gh7jH6yJdbEs3+IT/FWyf6TLD1et0031A9PDHY6nbBJ9AowqtkMs2YJ
+ pYBlRhVx6iJVr9IkcuNQNTb7nJgG9aagpOiN/39IZ3pP4wVA9kmFKZi7EUXZ84hZDhVO
+ pGeUWWNbXjQRO7i5/IR0VN7WmzQ+mwgtcTmx/E5UEWg4zYpw0hg8dbOJ8MAlAGdOivvX
+ G3BA==
+X-Gm-Message-State: AOJu0YyFOgG+ygBBA7amZQ35D+x9V/MEzA2gzDpNEhW9VE9dCzHpVSrB
+ 7QRFifscdVAeIXe9E0SyR9EtYZE8QInocBGVuqid3h1dT38cVtXHBVeNrZEqb3KcQU18y3tnLR+
+ ac3UH
+X-Gm-Gg: ASbGncuNvhFeA0ioHcg76lQjDaQ1UJSe+IIeJ7NeY7Ka1ByckTLMU+GrJnrHXwjjjJn
+ O3aJ/uKCWH+E+jsX/QT0DN6fF6hGQvr6bycSiZUrQ3MogiEPIWVKA46W0d+FAdMxt/AHMR6kRKy
+ XvPaMAKn1FI5DZOB90+Obr/oVD0P9vs210yENlmDYBfQIQsATcqC9xSM6nXGBSk6Tf0wnjb+S4r
+ BVhjypI7wtp5CkA3P+zquZhKMkgcMRmx+j7BYe8RbemVNJG7PqWtl2FIrYpxbp0kkK0T726zS6s
+ pJJAKhefREJ1Sd3s8pC8ojLMpwuYI9kfEh7eO2pp1w1XOwpe1MfNwJZ2SogiVKaKrYCnSUhp/OZ
+ iBxfMn8CVyuafvNPBs/E318znvQ5WyT2sbjP7Grg3rzzgp1PPR9BuoUOVdOf+eYNj0kPWgnUPcx
+ fusfCeCx8G
+X-Google-Smtp-Source: AGHT+IErJdb5shYpk3prNHcx9okMNF7dubKjGs1FHmWdZhs6x7998dfRtR3JqQMXYPskiaEPCTduqw==
+X-Received: by 2002:a05:6602:6429:b0:936:eded:d78a with SMTP id
+ ca18e2360f4ac-93b9696e5ebmr547866339f.6.1759519377399; 
+ Fri, 03 Oct 2025 12:22:57 -0700 (PDT)
 Received: from ubuntu.localdomain ([209.227.150.67])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-93a7d81bf16sm208975239f.4.2025.10.03.12.22.50
+ ca18e2360f4ac-93a7d81bf16sm208975239f.4.2025.10.03.12.22.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 12:22:50 -0700 (PDT)
+ Fri, 03 Oct 2025 12:22:56 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -81,9 +81,10 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH v2 2/5] pytest: add test script to validate Firmware Handoff
-Date: Fri,  3 Oct 2025 12:22:16 -0700
-Message-Id: <20251003192222.767882-3-raymond.mao@linaro.org>
+Subject: [PATCH v2 3/5] configs: select CMD_BLOBLIST for Firmware Handoff
+ testing
+Date: Fri,  3 Oct 2025 12:22:17 -0700
+Message-Id: <20251003192222.767882-4-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20251003192222.767882-1-raymond.mao@linaro.org>
 References: <20251003192222.767882-1-raymond.mao@linaro.org>
@@ -105,139 +106,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test cases to validate FDT and TPM eventlog handoff from TF-A
-and OP-TEE via bloblist.
-
-For FDT, the nodes 'reserved-memory' and 'firmware' appended by
-OP-TEE indicates a successful handoff.
-
-For TPM eventlog, the events 'SECURE_RT_EL3', 'SECURE_RT_EL1_OPTEE'
-and 'SECURE_RT_EL1_OPTEE_EXTRA1' created by TF-A indicates a
-successful handoff.
+Firmware Handoff tests will leverage the same board type 'qemu_arm64'
+with a new board ID 'fw_handoff_tfa_optee', thus select CMD_BLOBLIST
+in qemu_arm64_defconfig for running the test.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
 Changes in v2:
-- Control the tests to depend on 'env__firmware_handoff_enabled'.
+- None.
 
- test/py/tests/test_fw_handoff.py | 108 +++++++++++++++++++++++++++++++
- 1 file changed, 108 insertions(+)
- create mode 100644 test/py/tests/test_fw_handoff.py
+ configs/qemu_arm64_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/test/py/tests/test_fw_handoff.py b/test/py/tests/test_fw_handoff.py
-new file mode 100644
-index 00000000000..45f154665ef
---- /dev/null
-+++ b/test/py/tests/test_fw_handoff.py
-@@ -0,0 +1,108 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (c) 2025 Linaro Limited
-+# Author: Raymond Mao <raymond.mao@linaro.org>
-+#
-+# Validate Firmware Handoff from TF-A and OP-TEE
-+
-+"""
-+Note: This test relies on boardenv_* containing configuration values to define
-+whether Firmware Handoff is enabled for testing. Without this, this test
-+will be automatically skipped.
-+
-+For example:
-+
-+.. code-block:: python
-+
-+    # Boolean indicating whether Firmware Handoff is enabled on this board.
-+    # This variable may be omitted if its value is False.
-+    env__firmware_handoff_enabled = True
-+"""
-+
-+import pytest
-+import re
-+
-+def _norm_ws(s: str) -> str:
-+    """Normalize whitespace for robust comparisons."""
-+    return re.sub(r"\s+", " ", s).strip()
-+
-+@pytest.mark.buildconfigspec("bloblist")
-+@pytest.mark.buildconfigspec("cmd_bloblist")
-+@pytest.mark.buildconfigspec("of_control")
-+@pytest.mark.buildconfigspec("cmd_fdt")
-+def test_fw_handoff_dt(ubman):
-+    """Validate FDT handoff via bloblist."""
-+
-+    fh_en = ubman.config.env.get('env__firmware_handoff_enabled', False)
-+    if not fh_en:
-+        pytest.skip('Firmware Handoff is disabled')
-+
-+    bloblist = ubman.run_command("bloblist list")
-+    blob_fdt = re.search(r"^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+1\s+Control FDT\s*$",
-+                         bloblist, re.MULTILINE)
-+    assert blob_fdt, "Control FDT entry not found in bloblist"
-+
-+    blob_fdt_addr = int(blob_fdt.group(1), 16)
-+    ubman.run_command(f"fdt addr {blob_fdt_addr:x}")
-+
-+    reserved_a = ubman.run_command("fdt print /reserved-memory")
-+    firmware_a = ubman.run_command("fdt print /firmware")
-+
-+    fdt_addr_out = ubman.run_command("echo $fdt_addr")
-+    fdt_addr_match = re.search(r"(?:0x)?([0-9a-fA-F]+)", fdt_addr_out)
-+    assert fdt_addr_match, "Could not parse $fdt_addr"
-+
-+    fdt_addr = int(fdt_addr_match.group(1), 16)
-+    ubman.run_command(f"fdt addr {fdt_addr:x}")
-+
-+    reserved_b = ubman.run_command("fdt print /reserved-memory")
-+    firmware_b = ubman.run_command("fdt print /firmware")
-+
-+    # Normalize whitespace & compare
-+    assert _norm_ws(reserved_a) == _norm_ws(reserved_b), \
-+        "reserved-memory blocks differ between Control FDT and $fdt_addr FDT"
-+    assert _norm_ws(firmware_a) == _norm_ws(firmware_b), \
-+        "firmware blocks differ between Control FDT and $fdt_addr FDT"
-+
-+@pytest.mark.buildconfigspec("bloblist")
-+@pytest.mark.buildconfigspec("cmd_bloblist")
-+@pytest.mark.buildconfigspec("cmd_memory")
-+def test_fw_handoff_eventlog(ubman):
-+    """Validate TPM event log handoff via bloblist."""
-+
-+    fh_en = ubman.config.env.get('env__firmware_handoff_enabled', False)
-+    if not fh_en:
-+        pytest.skip('Firmware Handoff is disabled')
-+
-+    # Get the address and size of eventlog from the bloblist
-+    bloblist_output = ubman.run_command("bloblist list")
-+    evt_addr = None
-+    evt_size = None
-+    for line in bloblist_output.splitlines():
-+        if "TPM event log" in line:
-+            parts = line.strip().split()
-+            evt_addr = int(parts[0], 16)
-+            evt_size = int(parts[1], 16)
-+            break
-+
-+    assert evt_addr is not None and evt_size is not None, \
-+        "TPM event log not found in bloblist"
-+
-+    # Read byte from memory and extract printable ASCII from each line
-+    md_output = ubman.run_command(f"md.b {evt_addr:x} {evt_size}")
-+    ascii_log = ""
-+    for line in md_output.splitlines():
-+        match = re.search(r'([0-9a-f]+:.*?)((?:\s[0-9a-f]{2}){1,16})\s+(.*)', line)
-+        if match:
-+            ascii_part = match.group(3).strip()
-+            ascii_log += ascii_part
-+
-+    # The events created by TF-A are expected
-+    expected_keywords = [
-+        "SECURE_RT_EL3",
-+        "SECURE_RT_EL1_OPTEE",
-+        "SECURE_RT_EL1_OPTEE_EXTRA1"
-+    ]
-+
-+    for keyword in expected_keywords:
-+        assert keyword in ascii_log, f"Missing expected event: {keyword}"
+diff --git a/configs/qemu_arm64_defconfig b/configs/qemu_arm64_defconfig
+index 358bb1aeeb9..0a43abf8fbf 100644
+--- a/configs/qemu_arm64_defconfig
++++ b/configs/qemu_arm64_defconfig
+@@ -32,6 +32,7 @@ CONFIG_CMD_SMBIOS=y
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_BOOTEFI_SELFTEST=y
+ CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_BLOBLIST=y
+ CONFIG_CMD_DFU=y
+ CONFIG_CMD_MTD=y
+ CONFIG_CMD_PCI=y
 -- 
 2.25.1
 
