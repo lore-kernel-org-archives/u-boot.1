@@ -4,91 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E3ACCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 21:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44542CAC5B0
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 22:27:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 591C9838A0;
-	Fri,  3 Oct 2025 23:01:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D2EE8387E;
+	Sat,  4 Oct 2025 00:27:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C6WOylIY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kbKNZhqE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C35BB838A5; Fri,  3 Oct 2025 23:01:56 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 9775083887; Sat,  4 Oct 2025 00:27:19 +0200 (CEST)
+Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
+ [IPv6:2607:f8b0:4864:20::c2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C4CB8386F
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 23:01:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0662A8381D
+ for <u-boot@lists.denx.de>; Sat,  4 Oct 2025 00:27:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-42e6df6fe53so11270685ab.2
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 14:01:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-oo1-xc2f.google.com with SMTP id
+ 006d021491bc7-638135d9f65so1131176eaf.0
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 15:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759525313; x=1760130113; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=BFbqJ8O4Xcex29hkdLji41ActStYubYXxnBo2mt/Ecc=;
- b=C6WOylIYlUWgT3LnFGwQ/NNvSft6+S/eiUszcFFyTFp6RzRrF586uWospS55OjmRVE
- 6xOE7n7q8aN7wQ3AuWKu9sYrzE7cR4oHk8vnN7dgiESt2qCKIVxJbeMpZEU8NzbV4aCM
- VYd+sGhiVPoIfxvwt3c7kOrXOC+uQH+CWF1a8=
+ d=linaro.org; s=google; t=1759530436; x=1760135236; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TWRrkXJRYY257eBlNlAr3KjpMGDK4g102XSzMxbEKFk=;
+ b=kbKNZhqENoCq9sTHKhLFgSIebbawX6sKumo2uxObUPP4J+zQE1nCcrxoiwk2zk8O7I
+ 64n++INVgvMIR3xeBxSh9b6LqtURBbCLFLehoA12VlJgYI7RsVnAwRdk2ynHCYST/E5e
+ B7nGDp29fBINXPccJcMKMTeZCNjztGkpeCHDlV3nBFgYpo+B9ppU+a5+FIl7Xad9+E6G
+ P7/hqKJBBqoOpNZuoQTiwzZMyd1mUNvMDlitl8knmv2RsrOwDbUBwFNe938BOuR1PMIJ
+ X9v7AKPBeiXEejNNjngmBERGd1aQdHs0Ho8jImHcRf+n2NZUKsoSKH5LlqPt37QOg20O
+ k9pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759525313; x=1760130113;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BFbqJ8O4Xcex29hkdLji41ActStYubYXxnBo2mt/Ecc=;
- b=COdc3LmK0OqftWYxYnZKo41vKniuWo1C5pG2eE7pQRUuqP8J2WIdnJKXnGWdeadPvb
- hymbI2PH5eZlOmf2zQu5BG9JV+enfjawTBILVokFchhZzh0J94Abj4cysebTyU0bCKL6
- oBjOgWOk4BRVHJrijQhDJqrNdrc66LnQxTXtlTLaaOVyPGMmEUeKhA5/BaXw3p17dEeo
- wTDRC46z6qIFfi+fZKLIHm0NhEDFjeCgqpmpko7R1BVES41SciatC51mCDcmZyepcxdR
- fsO8C0adKO4W0/DqwS8ig0rTXQNpYLXGt2i7oDK+cfaPoO1W7MK7TPqyQqbVXjCzR7mY
- K7+w==
+ d=1e100.net; s=20230601; t=1759530436; x=1760135236;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TWRrkXJRYY257eBlNlAr3KjpMGDK4g102XSzMxbEKFk=;
+ b=VAQ8/nyw/9/ov4jZ4LKAey/t0B3xS8maoZ8+6wtcaVZl41QMmjWl3PwbFZObFiODSv
+ IXTBQx1aCqBIgkV0f8T1j73zUzYBN7Evqh2GzOyWC7WZiEGaS2Q8JyvggzCwkiKFhvVR
+ Kos5/mk+xfcFM9nAhdohxwaRrS/h9ztPipS1nsv1XxxKRU+PaHy4sBgRebhMzkNV9nlD
+ TiDpkpSJe5swVW4mZkduqnYpx+5kZVg0bg+w0Fq7yXnsF5MNvUDpSKjO9RH4pIP3itTg
+ f771z/rS/ezaD+2tbpK6V1hCWKk97GEt2R2iUyHcciEi0uKkDf7AFhNYGHvmUZwY2zai
+ c18g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVi3g7nGXX+X+QQHDFAhzN2SAX50zWOmGfFRsa7IZWA3c+y4U2Q1q1aU9wm7/whGfXQ25NDQFY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxn5g+TMW8BeNXN+2mx412+66fybe2j3xKBGXqsW5F/H4/bzjOZ
- w4rALthOkVAO2KcHX02YaYoZDTbxGY+puDupU+3gISckGpoTJW0FJ4qcVPd793GBWz0=
-X-Gm-Gg: ASbGncvy99NR/JhB86Ewl+1XRgNmDkdHHqVYSze3D6F7bSUDNOBMKAKohmMtYqNkxJe
- cb2Fh65wCx7KnqUGzw5Nt/AICHS/sFO49bLFJ12OEN+zu9suuCmNksj9m8XKWMVelNeY03IT/p2
- kYBZkFdNeYZ8I0jkAnWo8482rf89ypQ7du/FzDSRvxOdAqxpob++DjGHSYcRNaWIAnF7A8+bHR9
- Fwz3HsLKhZKgjGHSVIEpTQn/WxPoJaTwYhs0f8KZxkHklamvUjCIoW205Vj65IZQkFj/WcuLQ52
- 0QDe5MlTUqWPnYV+a/UcgTNZFj+GHj9pb/mGN7xusJp5mcr690HdqR9kRVMoXrZO+IwbSY2hb2V
- lB/630qnPGt7rKXZBAJ/hcbau8r4QDTbs66ZCPErVIwDUNWOk+Q2XPpnXSAdFEeA8PQaHDmnNCF
- 0sjLtgyrdAsw==
-X-Google-Smtp-Source: AGHT+IHo6YwsOd8g+YDpZdAPqoPol/XBuTzihjXRfzP81GbYkrhx6qf8ebabXgc+fFfCl23bqC9zyg==
-X-Received: by 2002:a92:cdaa:0:b0:42d:8a3f:eca4 with SMTP id
- e9e14a558f8ab-42e7ad2e15fmr58516905ab.14.1759525313078; 
- Fri, 03 Oct 2025 14:01:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-57b5ebc84dbsm2213550173.35.2025.10.03.14.01.51
+ AJvYcCU5jTbRkSFIPMu55FMeGD0kNhsuww+3tLnbj4mtsPVjoa9Ka8Kyqsvz5ZoKKaUEkvcKCfkBc9E=@lists.denx.de
+X-Gm-Message-State: AOJu0YwsuwQxtTLvYUOnQl0BaSwEVy6cncFdIOgsEH3F8NeeM9uTaicV
+ MIikvOCL/IjuXzSIg0sBmHE8OKo+pKrPwB2K6oS11QV69V4MBhHa8K79UDS/EWPB4t0=
+X-Gm-Gg: ASbGncugEHl0okrpG2QLJjOjc7ZAPEyerQSV0SlFmEd3YD/gDfVezMJIK5UVyvPLfHI
+ 2DMkwPqEDjsuoSWX1MK7xiloDpVQAHuDJ6xmGx4jyrmh4wC+VRV0ewRIRcTWkna4M8fqo0NDKjb
+ fkJZ6i/jhG30sEKDPEbCBNmQ8+uctwRJjccQiduBOdoocr+7raTQWA1E/uuOw0BP4IxYNl4ro+Y
+ MhU9FZzzO0z34Y625tHa1+sgWRVbQOGUsZZxhhBBisvjaS1/Gjs7npfwNITCjc2xtAkajGYXtmk
+ buFAt3meHv1HRa1jAXL5HUR/OUqIqUi+sq+DNJSBs7qnOorj62rU6c5dHZiQ3x5sY+cwjzbExph
+ u3lQTK22LtjjABRDhaX8BHLd3wOc6DyA46zxUEvwA5RWptrt27UrD/Qed3VEdfnhV
+X-Google-Smtp-Source: AGHT+IGB9ACwiDWBqAV7xtqyrApgqRqeT9HprJIi3X3T8Cd8nVUgrEtdlTobKi+VXk7oJQe2H4ghQA==
+X-Received: by 2002:a05:6870:a114:b0:315:8985:d81c with SMTP id
+ 586e51a60fabf-3b11ad3fe23mr2417412fac.11.1759530435691; 
+ Fri, 03 Oct 2025 15:27:15 -0700 (PDT)
+Received: from localhost ([136.49.61.16]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ab913db5fcsm1911814fac.22.2025.10.03.15.27.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 14:01:52 -0700 (PDT)
-Date: Fri, 3 Oct 2025 15:01:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Richard Weinberger <richard@sigma-star.at>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>,
- Richard Weinberger <richard@nod.at>, upstream@sigma-star.at,
- u-boot@lists.denx.de, ddrokosov@salutedevices.com, sjg@chromium.org,
- tharvey@gateworks.com, ilias.apalodimas@linaro.org,
- kojima.masahisa@socionext.com, upstream+uboot@sigma-star.at
-Subject: Re: [RFC, PATCH] fdt: Make sure there is no stale initrd left
-Message-ID: <20251003210149.GA6093@bill-the-cat>
-References: <20250529150213.27149-1-richard@nod.at>
- <CAPLW+4n42ctJC2j5vUnibcWNYr+V1t8jfmD7p1ju95q8R89C-Q@mail.gmail.com>
- <CAPLW+4=gQjdoQA0qy71iDwAJz-fqekfGsUbar00m0Rm65YTHhA@mail.gmail.com>
- <10664479.lqRGMn8q6B@nailgun>
+ Fri, 03 Oct 2025 15:27:15 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Simon Glass <sjg@chromium.org>,
+	Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Subject: [PATCH] bootstd: Fix bootflow info for efi_mgr
+Date: Fri,  3 Oct 2025 17:27:14 -0500
+Message-Id: <20251003222714.4921-1-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZIDIjWijU/nzyxFg"
-Content-Disposition: inline
-In-Reply-To: <10664479.lqRGMn8q6B@nailgun>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,48 +98,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+A "Synchronous Abort" CPU exception happens on an attempt to run the
+"bootflow info" command for a global boot method (e.g. efi_mgr):
 
---ZIDIjWijU/nzyxFg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+    => bootflow select 0
+    => bootflow info
 
-On Fri, Oct 03, 2025 at 09:09:20PM +0200, Richard Weinberger wrote:
-> Sam,
->=20
-> On Sonntag, 21. September 2025 01:01 Sam Protsenko wrote:
-> > Hey Richard,
-> >=20
-> > Did you have a chance to look into reworking this patch? I'm still
-> > carrying a revert locally (to make GBL EFI app work), and would like
-> > to get rid of it. Please advice if you have a plan on handling this in
-> > the near future.
->=20
-> Before my vacation I had a look but found no nice solution.
-> So, let's process with the revert.
->=20
-> My current way to work around the problem is having these commands in
-> my U-Boot scripts:
->=20
-> fdt addr $fdt_addr
-> fdt rm /chosen linux,initrd-start
-> fdt rm /chosen linux,initrd-end
+    "Synchronous Abort" handler, esr 0x96000006, far 0x8
 
-I do wonder if the best path forward is adding some opt-in CONFIG option
-here?
+It happens because do_bootflow_info() tries to dereference bflow->dev,
+which is NULL in case of efi_mgr. Add the corresponding check to prevent
+this NULL pointer dereference and make "bootflow info" command work
+properly for global boot methods.
 
---=20
-Tom
+Fixes: 2d653f686b6d ("bootstd: Add a bootflow command")
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+---
+ cmd/bootflow.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---ZIDIjWijU/nzyxFg
-Content-Type: application/pgp-signature; name="signature.asc"
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index 551dffbb8b89..081f64e12ce9 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -404,7 +404,7 @@ static int do_bootflow_info(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	}
+ 
+ 	printf("Name:      %s\n", bflow->name);
+-	printf("Device:    %s\n", bflow->dev->name);
++	printf("Device:    %s\n", bflow->dev ? bflow->dev->name : "(none)");
+ 	printf("Block dev: %s\n", bflow->blk ? bflow->blk->name : "(none)");
+ 	printf("Method:    %s\n", bflow->method->name);
+ 	printf("State:     %s\n", bootflow_state_get_name(bflow->state));
 
------BEGIN PGP SIGNATURE-----
+base-commit: d33b21b7e261691e8d6613a24cc9b0ececba3b01
+-- 
+2.39.5
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOA5ugAKCRAr4qD1Cr/k
-CoRaAP0cEqFPj2K2vKKLnvn02bSzTv6uIH/lLB0b0dIkdWhQ0QD/Y2qbDwSTHTa8
-8u+AkEJ8murCh52hwz3CjITCpLkGxQo=
-=hadM
------END PGP SIGNATURE-----
-
---ZIDIjWijU/nzyxFg--
