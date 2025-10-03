@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29F1DCCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:39:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5569CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C5747838A5;
-	Fri,  3 Oct 2025 22:39:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2571683906;
+	Fri,  3 Oct 2025 22:39:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VTyQUfxc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AygiCIn5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3727838E3; Fri,  3 Oct 2025 22:39:25 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 599CB838F3; Fri,  3 Oct 2025 22:39:27 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33BE7838A0
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23D25838CE
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-42e7b22e007so6242185ab.3
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:23 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-91179e3fe34so133885039f.1
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759523962; x=1760128762; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=m/A8+TvAzJPp3GxcH7VuNp6SCUNPgSbSxzLoOFmFfLI=;
- b=VTyQUfxcNKky3faeuXMLUmXdOx1bdUaDfDYCxmY7M7ANiYKMz0i9L8FDB18nuvtE5q
- PYk6q83ggFen+JHq90iiQvaDwB9nJno2eZsru4BLmnsEAlRalHoMA2UWheDWzZYrJ96P
- MdJFi3XY/JE1HcVKBXe0ytBtTQ9ZGhXel+jB8=
+ d=konsulko.com; s=google; t=1759523964; x=1760128764; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AabT5RfH65xmqzOFhm3OjYVpE/CWVX4ZcR60R4DY40Q=;
+ b=AygiCIn5oQafMqB4GKNajLVp58FkD1YVqMADoUDjHsICYuwlQX+eIVc4czNBSKtC39
+ 7xe1iDS1L0pv036k+CLiA4+UsPgkRKIrBmIS5NocvMQLeZzZqmupgugKLJNju2ZKwvEL
+ Jl4bNYHJT6tpHTN/J5Xo3dWjXwNyt64Wj2F7k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759523962; x=1760128762;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=m/A8+TvAzJPp3GxcH7VuNp6SCUNPgSbSxzLoOFmFfLI=;
- b=a2D+gp3K+zP9AM7hEWPwPS+Nm/7ycsOKcFlKOq03XprKXIIO5U1kYOPQO2SUChXB+1
- tLgsGWeFM28UKnUq4NKXsMDJmQmVrCaL/r3W/e9dlrE7+EmyZRl9bVHZJtLgFEtZiEak
- xSkgvtuH9F2dT/gcOa3t6XD88od1iYL08r1GwgTLUOxQSvgkL/dPH7ksN3iRxh3PcKDA
- QFQ4V/RcyIwXfaqF1JlVvE6ix7fiz7G4WxQBMkJ5ZbWmgEdPYxxfWp5YzlnYaa/dAMcz
- ks0xTNaepIyaxq9KbZc/LhNTxZaj4Vi1+IbP5XrCLriBoRiFX8wpwfxC9CMR2NYGf2Fp
- 5pJQ==
-X-Gm-Message-State: AOJu0YwRH+rzIC23ZGQ4xO6eVh6Tc+QnRntHRmekAzUN62aNs2nqR7Xg
- dtxalxvalWC4ZT+eBaMYXWtTVdCrGTB1+IFcaWF8Ow/SId7Rf1YmotuLdinyV2sSXHQSRN4vK+x
- ofmyzqs4=
-X-Gm-Gg: ASbGnct13uzEufRYsXC2KcKZw4EFGVlFOjXgvP1sZQvXY1uJXKy3LEdViWG7Xr4fXVm
- Ln0rTG9I4r+hbGwix3KEzK65vUUbnvZVtcpjT/ye47+NKVqHdzS6m0oeAGvWDiahYWfdIu3UxWP
- bdT+/2U7515z0rCyxMU8a2Gc2sjPg8I1AwDAR8E/cQyEC1RPOnxxZ/Uwi1ZSl5Mx4Od64BR7IUE
- JOedixflIu87d1gd5NSs0G8sic/Nj1SarzpbYystvUd6Uv8d0apGFYewVGC7UMZkj8eMrEbQ1aM
- 42NDvZSdBxtWeK9X+ZGid0LDEJU80rtDQSLbx0hD8DCFsYN6k1tkHAEFc6HAFysUCTwzvCT4/z1
- mH4PeUmV5/YoaQpxr5xN0q487xw0I844Lrtmau2HJ2tnzwJoH8Opka8EeQs2Q2EhAcyviwm+wfo
- VBp7IdRC8dmm+UnVkvC1C0Lts=
-X-Google-Smtp-Source: AGHT+IGHr7oj4BnQ8Ez+CvObguVQxGMdtea0FwF4ASSOpqLjFuhOFWPoKVGQ9FyxcYLnRoi576HJgw==
-X-Received: by 2002:a05:6e02:1546:b0:40d:e7d8:63fa with SMTP id
- e9e14a558f8ab-42e7adca144mr52662685ab.26.1759523961921; 
- Fri, 03 Oct 2025 13:39:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759523964; x=1760128764;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AabT5RfH65xmqzOFhm3OjYVpE/CWVX4ZcR60R4DY40Q=;
+ b=dlSOgnm0YNQO7ESCk6a1ZJNVFaZjTvBBed+37BkRe+hRmao1g7FsI+qIkl5Otl4zG9
+ RwyPAFtaK+46Ku11nm7cZe8l0bsMrylAReoTZMwC1aWx5GbGpWzpt6JYDp871mF5Houf
+ zWHw6WGrCfmUWxl3XSk3seV5ZJL/ojUiJpZU+mLDGCsBXaBV/BEUtjWu88JAm89DT0mg
+ OcKgj5nFwHNRi86AtvSJkx/gksW/T0qfByolfjMzCOppGfrSq0L+h8pZv3wWLZasU8SB
+ Qh+DkG2NBSu6n51hxCK/DaNaAzg4kluNPBxn6RkX6g+y9gGkrFug0XlV0TqUsoWkXOfa
+ TvwQ==
+X-Gm-Message-State: AOJu0YzfGjKGg0lvCZLocuC8eEhJQ/w8+BhWvRlUM0qorcVwmBwoBEcQ
+ e7QJao1nZt7j3JEnyJzS6nAaCl0DVQo9eIi/8J5/zApbZV00I1xAx2k//CQki/dfL0vaz6aqOPK
+ AR3fccs8=
+X-Gm-Gg: ASbGnctidIE9q9/CyitCbjnrIBnzeCbWGG2Mxc+q8OGMdQZPSU0fpo51VsC16iIeKt5
+ 5Og80SicNdzbmEYnnMEsdWw4o3gW889mfUKVhF0qtcatDK9qvbw3cXJxu8CnaetcC/fjkue2Uux
+ akQ3EWEVPINvwz9IoQElP7ceZ3guybE7fQjDRl5vt4vK8lChXYY3IM6rSuix72C6/Xp1zgMhCMd
+ lUb9bLLlPgV/nyEhjA7OmRUTZA9iNEtZ/PbjJWicOqbvsfQHzDS2h/LsIFvUKkoeahVgmq4RoW6
+ UMDiWr9bFrCPH44RElafo5BqJyuHQ4zu+stiWXyg3IRg/GyPWV7gNgU1iR5CqmkrpaTw6YNgxPJ
+ uhatIPyRtxjfmA7H37wtf5nEKjgDG9y5lVktGzkVd7JnZ6Idg2xE1i2l45n06zpcMmtW8ZhNVj8
+ fiZYZtppHAF3sCp1lSaD2+AjE=
+X-Google-Smtp-Source: AGHT+IHZ7MNKbx3mtUzKK2fU+0Kv3ySEIRlutDJmtuNeO5nEFAccjnwq81QxNDU5duBWRNFcIbpigw==
+X-Received: by 2002:a05:6602:1602:b0:887:690b:2594 with SMTP id
+ ca18e2360f4ac-93b96a35846mr622662739f.5.1759523963837; 
+ Fri, 03 Oct 2025 13:39:23 -0700 (PDT)
 Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-42d8b294ddfsm23908255ab.33.2025.10.03.13.39.21
- for <u-boot@lists.denx.de>
+ ca18e2360f4ac-93b19d072b8sm198175639f.24.2025.10.03.13.39.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 13:39:21 -0700 (PDT)
+ Fri, 03 Oct 2025 13:39:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] spl: FIT: Make SPL_LOAD_FIT_FULL depend on SPL_LOAD_FIT
-Date: Fri,  3 Oct 2025 14:39:20 -0600
-Message-ID: <20251003203920.1029967-1-trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Marek Vasut <marek.vasut@mailbox.org>
+Subject: [PATCH] usb: gadget: spl: Add missing dependency for SPL_USB_GADGET
+Date: Fri,  3 Oct 2025 14:39:22 -0600
+Message-ID: <20251003203922.1029989-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,67 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Today, only a few platforms enable SPL_LOAD_FIT_FULL, and all enable
-SPL_LOAD_FIT. As can be seen in usage, the FULL symbol is a superset of
-the first symbol, not an alternative. Update Kconfig entries based on
-this and simplify the only code which checks for either being set.
+It makes no sense to ask about nor enable SPL_USB_GADGET without
+SPL_FRAMEWORK being enabled. Attempting to do so leads to Kconfig noting
+dependency issues. Add the missing dependency.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- boot/Kconfig       | 4 ++--
- common/spl/Kconfig | 2 +-
- include/test/spl.h | 3 +--
- 3 files changed, 4 insertions(+), 5 deletions(-)
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Marek Vasut <marek.vasut@mailbox.org>
+---
+ drivers/usb/gadget/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index f21a67b2d3ee..8de99981b306 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -204,7 +204,7 @@ config SPL_FIT_FULL_CHECK
- config SPL_FIT_SIGNATURE
- 	bool "Enable signature verification of FIT firmware within SPL"
- 	depends on SPL_DM
--	depends on SPL_LOAD_FIT || SPL_LOAD_FIT_FULL
-+	depends on SPL_LOAD_FIT
- 	select FIT_SIGNATURE
- 	select SPL_FIT
- 	select SPL_CRYPTO
-@@ -282,7 +282,7 @@ config SPL_LOAD_FIT_APPLY_OVERLAY_BUF_SZ
+diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
+index 882f082c9cdb..056eff4d942e 100644
+--- a/drivers/usb/gadget/Kconfig
++++ b/drivers/usb/gadget/Kconfig
+@@ -39,6 +39,7 @@ menuconfig USB_GADGET
  
- config SPL_LOAD_FIT_FULL
- 	bool "Enable SPL loading U-Boot as a FIT (full fitImage features)"
--	select SPL_FIT
-+	depends on SPL_LOAD_FIT
+ config SPL_USB_GADGET
+ 	bool "USB Gadget Support in SPL"
++	depends on SPL_FRAMEWORK
  	help
- 	  Normally with the SPL framework a legacy image is generated as part
- 	  of the build. This contains U-Boot along with information as to
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 63f6f8d962fa..458dce01700a 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1574,7 +1574,7 @@ config SPL_AM33XX_ENABLE_RTC32K_OSC
- config SPL_OPTEE_IMAGE
- 	bool "Support OP-TEE Trusted OS image in SPL"
- 	depends on ARM
--	depends on SPL_LOAD_FIT || SPL_LOAD_FIT_FULL
-+	depends on SPL_LOAD_FIT
- 	help
- 	  OP-TEE is an open source Trusted OS which is loaded by SPL.
- 	  More detail at: https://github.com/OP-TEE/optee_os
-diff --git a/include/test/spl.h b/include/test/spl.h
-index 5fd28d927064..c5349b06e290 100644
---- a/include/test/spl.h
-+++ b/include/test/spl.h
-@@ -133,8 +133,7 @@ static inline bool image_supported(enum spl_test_image type)
- 		return IS_ENABLED(CONFIG_SPL_LOAD_IMX_CONTAINER);
- 	case FIT_INTERNAL:
- 	case FIT_EXTERNAL:
--		return IS_ENABLED(CONFIG_SPL_LOAD_FIT) ||
--		       IS_ENABLED(CONFIG_SPL_LOAD_FIT_FULL);
-+		return IS_ENABLED(CONFIG_SPL_LOAD_FIT);
- 	}
- 
- 	return false;
+ 	  Enable USB Gadget API which allows to enable USB device functions
+ 	  in SPL.
 -- 
 2.43.0
 
