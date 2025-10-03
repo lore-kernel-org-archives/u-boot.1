@@ -4,78 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB8C4CCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:40:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E3ACCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 21:02:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86C3583946;
-	Fri,  3 Oct 2025 22:39:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 591C9838A0;
+	Fri,  3 Oct 2025 23:01:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SWD0aLmG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C6WOylIY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66CE883826; Fri,  3 Oct 2025 22:39:39 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id C35BB838A5; Fri,  3 Oct 2025 23:01:56 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 432A083936
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C4CB8386F
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 23:01:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-42571b8abbaso24606115ab.0
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:37 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-42e6df6fe53so11270685ab.2
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 14:01:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759523976; x=1760128776; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=j8Xuo8j3fnDZ1kNNRRrJGXxXGYAlQU69kmL3U7n/FrU=;
- b=SWD0aLmGEuwLj/6ilbZHsW73bazDYFZlvsC8/CXeQDVOuWbLEtFzItoO3HlYlDe5pb
- mLnM07EO5DYqQhdmZ8prSx2ZJ7EoUpUteCH0Zzev2hnVMD6m3u8x4nmMKoLLgp+OjTuS
- jyZuD7HMtFjrUfWtcuN7mLFyEFFZhRHWsFtbY=
+ d=konsulko.com; s=google; t=1759525313; x=1760130113; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BFbqJ8O4Xcex29hkdLji41ActStYubYXxnBo2mt/Ecc=;
+ b=C6WOylIYlUWgT3LnFGwQ/NNvSft6+S/eiUszcFFyTFp6RzRrF586uWospS55OjmRVE
+ 6xOE7n7q8aN7wQ3AuWKu9sYrzE7cR4oHk8vnN7dgiESt2qCKIVxJbeMpZEU8NzbV4aCM
+ VYd+sGhiVPoIfxvwt3c7kOrXOC+uQH+CWF1a8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759523976; x=1760128776;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j8Xuo8j3fnDZ1kNNRRrJGXxXGYAlQU69kmL3U7n/FrU=;
- b=CRvjm9rlKfKXlqEvoB7p9TMBlc8KMTXI9n38bvEqMzTQhhlpUrGU+3J/pc0tU/GsRJ
- fouljJ7iCUIMxwsK6jpVxWFN+aBk8RppYKfpnm/l9L/ZUQCZyx49ZSFyFH2IgGCdLKOp
- b2M1qN4Yd52svVWbz1lb38VClFZWA/dy7KtsbbIEWlCEa8pssgZgps/xi1nQ1ppVxDzg
- vYTxL36H0cDh5Aax52cmLnApPvVTJsWmc3wftZLnL5hvj9hbcNrm/eHXj8Enz9ZX7EjV
- OJJWWl2nI/Q9ZNuGXCOhvq7NL+Fsh7Z+X6utPluiqVUX1kXs96YDT5BtPv3V/WxVfjpl
- UFAg==
-X-Gm-Message-State: AOJu0YwEar2MOw8/J7/M7fOpshX9Sgsh+Wjv5891qB8ttPKEWnyOjGba
- LUyPFt/4uUIVW/asH3ALmN3sRJ//jfmLm2AGurVjwSSjlzn8rXaLAjTgYcPx1OCzp1tXtWLu8Ig
- Hogqq3Q0=
-X-Gm-Gg: ASbGnctH/bxfcr8tl34yA9vJILBljwgjypBAPUBAFDq1oiUHlyA5eT+WNIUVJxIVYZQ
- CCYN5Z7QP1273FcewcM+BwKf+44nb5PfMcPJEQQh6KdwmuNv5tiw8zjGXIg3144F0znaQgvZQRt
- 2xthHZzWNeRtlz9WjlSNocQAE3KJLSU66KYYViX9lIiMlUgdyP5tHq7QetemMc/eQW0qjxImxjE
- JjB1ot+pwh8nbPMrp941MJTGeAjEKN/TfNXesud9vc86Y+BE6kC2kNybnef/bTb3xU4jMd5eSWD
- 0wq3MEsjI240EHXyhFZeeXj4UAiTfs0YbmXaBonjMV5pVTypqzPUZCGXNI9On0S8uyFZnO/PLRo
- CKG4h0ti9Udx7J0wbLJopT6pUWJxo8/VxYcaO5d69GT7e/7n201ZfTUiHulIIhMGfllu/idv1xP
- 0JpoJRMClBzb00CfOG9iecebw=
-X-Google-Smtp-Source: AGHT+IHwW+ngegzauK9Y+Wzm8PBGDMx8wD4bK847dlLc0D6kWGIIea3V03zQnnkHyPC7gZNd4eKR/Q==
-X-Received: by 2002:a05:6e02:190e:b0:423:fcd6:5488 with SMTP id
- e9e14a558f8ab-42e7ad16e68mr59910355ab.12.1759523976023; 
- Fri, 03 Oct 2025 13:39:36 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1759525313; x=1760130113;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BFbqJ8O4Xcex29hkdLji41ActStYubYXxnBo2mt/Ecc=;
+ b=COdc3LmK0OqftWYxYnZKo41vKniuWo1C5pG2eE7pQRUuqP8J2WIdnJKXnGWdeadPvb
+ hymbI2PH5eZlOmf2zQu5BG9JV+enfjawTBILVokFchhZzh0J94Abj4cysebTyU0bCKL6
+ oBjOgWOk4BRVHJrijQhDJqrNdrc66LnQxTXtlTLaaOVyPGMmEUeKhA5/BaXw3p17dEeo
+ wTDRC46z6qIFfi+fZKLIHm0NhEDFjeCgqpmpko7R1BVES41SciatC51mCDcmZyepcxdR
+ fsO8C0adKO4W0/DqwS8ig0rTXQNpYLXGt2i7oDK+cfaPoO1W7MK7TPqyQqbVXjCzR7mY
+ K7+w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVi3g7nGXX+X+QQHDFAhzN2SAX50zWOmGfFRsa7IZWA3c+y4U2Q1q1aU9wm7/whGfXQ25NDQFY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxn5g+TMW8BeNXN+2mx412+66fybe2j3xKBGXqsW5F/H4/bzjOZ
+ w4rALthOkVAO2KcHX02YaYoZDTbxGY+puDupU+3gISckGpoTJW0FJ4qcVPd793GBWz0=
+X-Gm-Gg: ASbGncvy99NR/JhB86Ewl+1XRgNmDkdHHqVYSze3D6F7bSUDNOBMKAKohmMtYqNkxJe
+ cb2Fh65wCx7KnqUGzw5Nt/AICHS/sFO49bLFJ12OEN+zu9suuCmNksj9m8XKWMVelNeY03IT/p2
+ kYBZkFdNeYZ8I0jkAnWo8482rf89ypQ7du/FzDSRvxOdAqxpob++DjGHSYcRNaWIAnF7A8+bHR9
+ Fwz3HsLKhZKgjGHSVIEpTQn/WxPoJaTwYhs0f8KZxkHklamvUjCIoW205Vj65IZQkFj/WcuLQ52
+ 0QDe5MlTUqWPnYV+a/UcgTNZFj+GHj9pb/mGN7xusJp5mcr690HdqR9kRVMoXrZO+IwbSY2hb2V
+ lB/630qnPGt7rKXZBAJ/hcbau8r4QDTbs66ZCPErVIwDUNWOk+Q2XPpnXSAdFEeA8PQaHDmnNCF
+ 0sjLtgyrdAsw==
+X-Google-Smtp-Source: AGHT+IHo6YwsOd8g+YDpZdAPqoPol/XBuTzihjXRfzP81GbYkrhx6qf8ebabXgc+fFfCl23bqC9zyg==
+X-Received: by 2002:a92:cdaa:0:b0:42d:8a3f:eca4 with SMTP id
+ e9e14a558f8ab-42e7ad2e15fmr58516905ab.14.1759525313078; 
+ Fri, 03 Oct 2025 14:01:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-42d8b2a4a22sm24939405ab.40.2025.10.03.13.39.35
- for <u-boot@lists.denx.de>
+ 8926c6da1cb9f-57b5ebc84dbsm2213550173.35.2025.10.03.14.01.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 13:39:35 -0700 (PDT)
+ Fri, 03 Oct 2025 14:01:52 -0700 (PDT)
+Date: Fri, 3 Oct 2025 15:01:49 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] global: Disable xPL phases when we have enabled COMPILE_TEST
-Date: Fri,  3 Oct 2025 14:39:34 -0600
-Message-ID: <20251003203934.1030125-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+To: Richard Weinberger <richard@sigma-star.at>
+Cc: Sam Protsenko <semen.protsenko@linaro.org>,
+ Richard Weinberger <richard@nod.at>, upstream@sigma-star.at,
+ u-boot@lists.denx.de, ddrokosov@salutedevices.com, sjg@chromium.org,
+ tharvey@gateworks.com, ilias.apalodimas@linaro.org,
+ kojima.masahisa@socionext.com, upstream+uboot@sigma-star.at
+Subject: Re: [RFC, PATCH] fdt: Make sure there is no stale initrd left
+Message-ID: <20251003210149.GA6093@bill-the-cat>
+References: <20250529150213.27149-1-richard@nod.at>
+ <CAPLW+4n42ctJC2j5vUnibcWNYr+V1t8jfmD7p1ju95q8R89C-Q@mail.gmail.com>
+ <CAPLW+4=gQjdoQA0qy71iDwAJz-fqekfGsUbar00m0Rm65YTHhA@mail.gmail.com>
+ <10664479.lqRGMn8q6B@nailgun>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZIDIjWijU/nzyxFg"
+Content-Disposition: inline
+In-Reply-To: <10664479.lqRGMn8q6B@nailgun>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,51 +105,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Due to how we implement the logic for selecting what should/shouldn't be
-built in a given phase it becomes extremely cumbersome to make these
-phases link when configured by "allyesconfig". As a starting point for
-being able to enable "allyesconfig" and expand our static coverage,
-disable all other phases in this case.
 
-Future work can be done to enable other phases as time and interest
-permit.
+--ZIDIjWijU/nzyxFg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- common/spl/Kconfig | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Fri, Oct 03, 2025 at 09:09:20PM +0200, Richard Weinberger wrote:
+> Sam,
+>=20
+> On Sonntag, 21. September 2025 01:01 Sam Protsenko wrote:
+> > Hey Richard,
+> >=20
+> > Did you have a chance to look into reworking this patch? I'm still
+> > carrying a revert locally (to make GBL EFI app work), and would like
+> > to get rid of it. Please advice if you have a plan on handling this in
+> > the near future.
+>=20
+> Before my vacation I had a look but found no nice solution.
+> So, let's process with the revert.
+>=20
+> My current way to work around the problem is having these commands in
+> my U-Boot scripts:
+>=20
+> fdt addr $fdt_addr
+> fdt rm /chosen linux,initrd-start
+> fdt rm /chosen linux,initrd-end
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 458dce01700a..debc59b1d713 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -12,7 +12,7 @@ config SPL_DFU_NO_RESET
- 
- config SPL
- 	bool "Enable SPL"
--	depends on SUPPORT_SPL
-+	depends on SUPPORT_SPL && !COMPILE_TEST
- 	help
- 	  If you want to build SPL as well as the normal image, say Y.
- 
-@@ -1630,7 +1630,7 @@ config SPL_AT91_MCK_BYPASS
- endmenu
- 
- config TPL
--	depends on SUPPORT_TPL
-+	depends on SUPPORT_TPL && !COMPILE_TEST
- 	bool "Enable TPL"
- 	help
- 	  If you want to build TPL as well as the normal image and SPL, say Y.
-@@ -1638,7 +1638,7 @@ config TPL
- source "common/spl/Kconfig.tpl"
- 
- config VPL
--	depends on SUPPORT_SPL
-+	depends on SUPPORT_SPL && !COMPILE_TEST
- 	bool "Enable VPL"
- 	help
- 	  If you want to build VPL as well as the normal image, TPL and SPL,
--- 
-2.43.0
+I do wonder if the best path forward is adding some opt-in CONFIG option
+here?
 
+--=20
+Tom
+
+--ZIDIjWijU/nzyxFg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOA5ugAKCRAr4qD1Cr/k
+CoRaAP0cEqFPj2K2vKKLnvn02bSzTv6uIH/lLB0b0dIkdWhQ0QD/Y2qbDwSTHTa8
+8u+AkEJ8murCh52hwz3CjITCpLkGxQo=
+=hadM
+-----END PGP SIGNATURE-----
+
+--ZIDIjWijU/nzyxFg--
