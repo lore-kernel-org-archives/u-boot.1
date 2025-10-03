@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67A1CCAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 10:43:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9813DCCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 10:43:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52939836D1;
+	by phobos.denx.de (Postfix) with ESMTP id 94DE383710;
 	Fri,  3 Oct 2025 12:42:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r5kTNRTN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eICsc8km";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84CED83693; Fri,  3 Oct 2025 12:42:55 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id D09E683700; Fri,  3 Oct 2025 12:42:56 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 992F6836B4
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 12:42:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 98103836C8
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 12:42:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-46e4473d7f6so12735845e9.1
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 03:42:53 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3ecdf2b1751so1377108f8f.0
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 03:42:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759488173; x=1760092973; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759488174; x=1760092974; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=sziUr5s5Y1GAAZ4Ae4FZvUWdzpnvNCBjvQd23D4w9Hg=;
- b=r5kTNRTNgPQGoEmXGiocntRYnFO1ZshOFpm/Ld8rMjvwuuOwUtLAQY2HJBifqblqZy
- ZdGc9o5MBnmokffN+3Pe+MNnjUa7Hhza4NjVSHtSNogBFRqPxFNB4jLniA5IW7pTQiS4
- WyZ0BdfHRQOMB7M2Mjm8nvB8tz4vMlpXxPIHhvLhCSHbnbMsu1cxAwzw2qwS65DaWiZs
- 6eEtEpX9WJKYhG0BJhJ66AXQx8K0/20WQqNe7oBu0gluxBBQhXwrDsoPc+eJ/n+Sbjok
- nWuZQITkhi/8iAGaMteGN+c/8y/UZVScISKeBajzgL+RJrCwUPZDux7xzXBZYNNEBVlo
- ZsnA==
+ :reply-to; bh=NNRthYsbe8gwYFTCgKmHT0Bhq2ZVQAJLmILuHITI3OA=;
+ b=eICsc8kmImDSnUI9mnni3Wj8iMzo6BGdJoe7WAbDUhx1hmnnFVXq2+Nkeof6ql4kNM
+ Xj+0WxupfEe6HhyEa7yQvrpZM3lip8FvgsQVYS4ZPxvXBpuH1CH6WDu6NWVGav2fw3RY
+ SCFkooPyM64ghMEuEX4ogOFR0lx6/+0/Vdk74WIoyYBB4UvmDgjCi7LNhr0jF9k2blt6
+ 6WY6xHf1vuCdh08qrMDROPYhQFBrs2T7z7rGsnYqfIk+U5DxOPZchhjD5vd7YpVJPZhB
+ Q3MCUQt7Etg6xlhhfTynjHjBZFS1cAEGT93vELwVFoWywZE8KJfsWOFv1tn/uuw3RjKZ
+ 80wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759488173; x=1760092973;
+ d=1e100.net; s=20230601; t=1759488174; x=1760092974;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sziUr5s5Y1GAAZ4Ae4FZvUWdzpnvNCBjvQd23D4w9Hg=;
- b=fsURlm2ReT9TUvKfzLurktRrJTYEbbX7Uee1Sksu3zyPdR7doD1lnkCego1iZ7k0sL
- w47sM/xmReHRQz8H9Ib5icooAS79OiJdpppArv0N+26QFqfNUvIflhmF38wg4uhxSBUF
- Z73afdfDR2nTmuOruWEVZqWOB2UuOWCxMVeC1PESxSrbC42l9exF269i0jaCWIOgGjbc
- 1OxqDIvBRrbRGxJkR+KYoaKtPCWCYb0hujKDHt7tLy98AG4ffn3qKpMovl9uNNf6HFMb
- 8qg1qvn85TO/Gellqx4QunKz4gk5cOHnVyvhTU1w5Ap8wbf0Uqg8INVoVQZf1oWnnD9h
- xoXw==
-X-Gm-Message-State: AOJu0YwtCgBMDu2JLAaAhfGysTpnictUe28LwhUB6yKjW9uAE6a9J5uT
- Uh5P6XUgRRfaevFLOn67EEVrDn5lsYhHwzBltBx8LMi/DIgup6K9XtSslMAqqlwnaeAu3pmYYnN
- APhyH
-X-Gm-Gg: ASbGncskjiK83d6vX/1ZQB6D+5viZpBlrPmJuoCpcC92KTIZ8fSv0lGzw57vhluT+61
- XJnbGfWhjyjqgHfnCe2TNTe1qFoO2A0RQOSbSucfZFO5ssWNawSIH/2xkrCVmyd9LC7npyl+EuT
- hL++K8ENOwwpnWwIWmALOZWRpt05J4a9nJ139XleOObJ90t93AIYuh2370vnxLdx2KnkxZwBiGl
- 9lXZ4H/Lt6zPU59VK970EkjmQs3cYcVKu+knfvgasIZ8SEUyTcvXidAkHavyhsdTg82HUUmnaRT
- qvasyxLQrCWmyTBmoMYVHsdh+Nrjgg1j3r0XPYW1eXblvu2JtkC4wV14dI1h3AaMfqzGxF79vk7
- lfObvEgK98gOFYIWiBxL685klG6PZNCesW1rwN4HllnuXPDsV7pOmwZ3fbP/0xziOSVXAIbF0CI
- SoFZc=
-X-Google-Smtp-Source: AGHT+IF8OEnIITyx7jxEikD3em9L774NXtDI1i4go8qvlo1qrMFk17OUtOeUKMh87kC8FTZxZcsnVA==
-X-Received: by 2002:a05:600c:4f08:b0:46e:4b79:551 with SMTP id
- 5b1f17b1804b1-46e7608b5camr4302335e9.31.1759488172930; 
- Fri, 03 Oct 2025 03:42:52 -0700 (PDT)
+ bh=NNRthYsbe8gwYFTCgKmHT0Bhq2ZVQAJLmILuHITI3OA=;
+ b=B7KgKetb4J60cH5Oiz657zaunHmcJLRS2CgVGjkOMoZ9ynIgSHrAuMAjSMDu0zVc8v
+ PRcCDpz/FTP5fimvnfX+RkSyToiBLKhNqDKxZ3/TiFxUC4WW0kHM7utLWhSALOLwEF32
+ g2JjFJWnq8VU8E6GbuPFghSobNFY2JCKIRYEdidB8ydjJ94Gd4s3WbOKmtF9WOlk+v+p
+ OFteog1iq3CSrwSwKRP4WK0YbgcXcNfdw1y3olDG3CsVOK4yuTplyQ4TLPR0VS4NDvt4
+ xTZQ6oDh9+HHe+9qziqoMhiY5lkwnRLWRReqbWZML8vQqC/M/xXKyAUuTKGdTOqnYrwL
+ CYsQ==
+X-Gm-Message-State: AOJu0YyZ30Zh3yJ0x8tTI+hY/+6S7Adv9/qyc2cr0WANdENALtxuXbNL
+ TJnQMhlsCMpclU32tzr0gnioz+nCgONfx3LQu4s85KsJ0GnLJBWVBrgaE6Ogta2t8q5LXaolQ9B
+ +OIiz
+X-Gm-Gg: ASbGncsIyLuZlANF/ZIMuYXGFn6CarFP6QYfFV7oE05D21aAhK/bXVE3UZ0Ll31etSv
+ xi9exexI1rv+16O20Stkhwg/3jmw1kMUiwooGrohSxPiK1kF7ETDkuQD6Q49qL1lSBBn06q2Bsp
+ gbT4QQ+cHvbfmCPrfa0SBvLzLdZkgmzn42UAfiz9FZqJWuBRmYtV3/zQB9VYa9TUX3OyiM5QkWD
+ P1AlgL6hOoWfk8B1GnINxrs9lCQ+TjBDBuTD00DYIRJRkleIVNeS02c33Q30D4ZdtLW/CiRw0O/
+ exTLHO/0XMLRwom7bcyX1zfwXVB0C4OkgrjlZ8Xy599+UwTrncW9fxTdZ2XvKQYswAJBmETQq9P
+ sBipCrcZGqvjr1NT/7XhfPgSIAbdIErhvPY4n47UEZsFE6h+2BiIsV3otz/GwgM/6/7yl/59sCV
+ uwTVY=
+X-Google-Smtp-Source: AGHT+IGLOiBKYdgFSK1CxHFDFcF9mDSiZezugM+muaZHUVj/866B1zMTRVR9x8BboAjiwQbNa8ha8A==
+X-Received: by 2002:a05:6000:2003:b0:3ec:ea73:a91e with SMTP id
+ ffacd0b85a97d-4256712a61bmr1683840f8f.12.1759488173960; 
+ Fri, 03 Oct 2025 03:42:53 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:ebd:e301:a6dd:d590:166e:6c62])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8f0846sm7470005f8f.45.2025.10.03.03.42.52
+ ffacd0b85a97d-4255d8f0846sm7470005f8f.45.2025.10.03.03.42.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 03:42:52 -0700 (PDT)
+ Fri, 03 Oct 2025 03:42:53 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Fri, 03 Oct 2025 11:42:50 +0100
-Subject: [PATCH 1/3] fs: ubifs: Ensure buf is freed before return
+Date: Fri, 03 Oct 2025 11:42:51 +0100
+Subject: [PATCH 2/3] fs: ubifs: Need to check return for being an error pointer
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251003-fs_ubifs-v1-1-a48d4861670a@linaro.org>
+Message-Id: <20251003-fs_ubifs-v1-2-a48d4861670a@linaro.org>
 References: <20251003-fs_ubifs-v1-0-a48d4861670a@linaro.org>
 In-Reply-To: <20251003-fs_ubifs-v1-0-a48d4861670a@linaro.org>
 To: u-boot@lists.denx.de
@@ -104,40 +104,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Returning directly after buf has been allocated will result in a memory
-leak. Instead set the error code and goto the common unwind code to
-ensure that buf will be freed before returning.
+The return value from alloc_super can be an error pointer so the error
+check needs to detect this as well as checking the pointer for being
+NULL.
 
 This issue was found by Smatch.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- fs/ubifs/lprops.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ fs/ubifs/super.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/ubifs/lprops.c b/fs/ubifs/lprops.c
-index a9e22abe6b401ecc4afb15c632dadbe23199c39f..74beb853b6e1da5076cbc8aad77ae26a76fa3580 100644
---- a/fs/ubifs/lprops.c
-+++ b/fs/ubifs/lprops.c
-@@ -1096,14 +1096,16 @@ static int scan_check_cb(struct ubifs_info *c,
- 		lst->empty_lebs += 1;
- 		lst->total_free += c->leb_size;
- 		lst->total_dark += ubifs_calc_dark(c, c->leb_size);
--		return LPT_SCAN_CONTINUE;
-+		ret = LPT_SCAN_CONTINUE;
-+		goto out;
- 	}
- 	if (lp->free + lp->dirty == c->leb_size &&
- 	    !(lp->flags & LPROPS_INDEX)) {
- 		lst->total_free  += lp->free;
- 		lst->total_dirty += lp->dirty;
- 		lst->total_dark  +=  ubifs_calc_dark(c, c->leb_size);
--		return LPT_SCAN_CONTINUE;
-+		ret = LPT_SCAN_CONTINUE;
-+		goto out;
- 	}
- 
- 	sleb = ubifs_scan(c, lnum, 0, buf, 0);
+diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
+index 7718081f0937ce038f5237256caadc40630ae050..b6004b88f4ea215fbdd41ec97da5f28d1eb5e96c 100644
+--- a/fs/ubifs/super.c
++++ b/fs/ubifs/super.c
+@@ -2425,7 +2425,7 @@ retry:
+ 	if (!s) {
+ 		spin_unlock(&sb_lock);
+ 		s = alloc_super(type, flags);
+-		if (!s)
++		if (IS_ERR_OR_NULL(s))
+ 			return ERR_PTR(-ENOMEM);
+ #ifndef __UBOOT__
+ 		goto retry;
 
 -- 
 2.47.3
