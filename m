@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBE7CCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 16:36:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4B6CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 16:36:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EF5A838AE;
-	Fri,  3 Oct 2025 18:34:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B905D83855;
+	Fri,  3 Oct 2025 18:34:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="tE0X1Vgg";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="0DX4CUsn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EADD838E7; Fri,  3 Oct 2025 18:34:52 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id 34C17838EC; Fri,  3 Oct 2025 18:34:54 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2858583839
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 18:34:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 462F483839
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 18:34:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id DAB341A10EB;
- Fri,  3 Oct 2025 16:34:49 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id F19C94E40EAE;
+ Fri,  3 Oct 2025 16:34:51 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id A055460683;
- Fri,  3 Oct 2025 16:34:49 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id C375260683;
+ Fri,  3 Oct 2025 16:34:51 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E94A9102F1CE7; 
- Fri,  3 Oct 2025 18:34:46 +0200 (CEST)
+ with ESMTPSA id 31E57102F1CFE; 
+ Fri,  3 Oct 2025 18:34:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759509288; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1759509291; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=3ZObnhSnzG9BgLowB3wvhHZk6ccjgoCQRtyu8oxL4UA=;
- b=tE0X1VggPT8hWElBB4tICrzes/tN6rhj9CRKK2yjO+bQtJwAwH2Qeyc5PGq1lu0ueeYJnl
- PF5bTQPzgjmA+i5hRWxPwLebjo2Y1l37evQ2upvG2vEzKZNkKYDRTj6x4gOOfg8E2edzPG
- xHMdKxhO5ojz5GAUEPhaUYgchQcqvRP8TNo/1vB4A8jJQJVGrKup1572ebC+LD5j4UQidD
- QzOUfwjyfCTIDaUN1CX/zkGYfzSHgHy3dd63BHIPhp4L+IKVMq7YMu8fDDtWMWjw0+r0Vr
- ispqzOoDbL+iozCd63hDI14eI7PA/BalysOCUUrWw0c98T4HMliCh6Xvv7VV9g==
+ bh=ateYx/7W0e2kqnzogxiOvAu0u9WLR6Zs2IP4GxHQR34=;
+ b=0DX4CUsnNkB0bqf+gG8XzhTv5rlORx4NEMOhlBv2ObgUU7DuXtNS+JKo0lUTfVou0tHaJ9
+ DIapqCt/rMrZg+ncvQG1HAZNuUW6xQzE3psGmTO9iAfwiN4T4Fx17qz/3NxpYo3LcdFZBm
+ 4lHHgyMiBkis87poMLBB87sJiLrNxynkjLYfHBXYoALVpxPnIC1GFE8OeR8ykv6jsOibSG
+ ToqoLoRDJVE5MGWQJT3Un5rOmNbEOiy5oS3a5IfSOCTgejaxbW2NknK8oWrMjCQ6DwrMwz
+ 8bvWAOeyvgrJf1CZu8R0om1/JGe+FBLeH/nSqoI1p4NCpwQEvxHIVNvY1mT5dw==
 From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Fri, 03 Oct 2025 18:33:55 +0200
-Subject: [PATCH 15/16] boot: bootmeth_efi: Refactor
- distro_efi_try_bootflow_files return logic
+Date: Fri, 03 Oct 2025 18:33:56 +0200
+Subject: [PATCH 16/16] boot: bootmeth_efi: Add extension board devicetree
+ overlay support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251003-feature_sysboot_extension_board-v1-15-458b8bf85325@bootlin.com>
+Message-Id: <20251003-feature_sysboot_extension_board-v1-16-458b8bf85325@bootlin.com>
 References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 In-Reply-To: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -81,60 +81,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simplify the return path in distro_efi_try_bootflow_files() to prepare
-for adding extension board support in a subsequent commit.
+Add support for scanning and applying extension board devicetree
+overlays during EFI boot. After loading the main board devicetree,
+the system now scans for available extension boards and applies their
+overlays automatically.
 
 Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
- boot/bootmeth_efi.c | 31 ++++++++++++++++---------------
- 1 file changed, 16 insertions(+), 15 deletions(-)
+
+Not yet tested, need to find a board with extension boards and supporting
+EFI boot. Roger Quadros could you test it on your side?
+---
+ boot/bootmeth_efi.c | 67 ++++++++++++++++++++++++++++++++++++++++++++---------
+ 1 file changed, 56 insertions(+), 11 deletions(-)
 
 diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index 0af23df3a4a..64de5c08b7b 100644
+index 64de5c08b7b..13726a13e07 100644
 --- a/boot/bootmeth_efi.c
 +++ b/boot/bootmeth_efi.c
-@@ -148,25 +148,26 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
- 			return log_msg_ret("fil", -ENOMEM);
- 	}
+@@ -16,6 +16,7 @@
+ #include <efi.h>
+ #include <efi_loader.h>
+ #include <env.h>
++#include <extension_board.h>
+ #include <fs.h>
+ #include <malloc.h>
+ #include <mapmem.h>
+@@ -99,8 +100,11 @@ static int distro_efi_check(struct udevice *dev, struct bootflow_iter *iter)
+ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 					 struct bootflow *bflow)
+ {
++	ulong fdt_addr, size, overlay_addr;
++	const struct extension *extension;
++	struct fdt_header *working_fdt;
+ 	struct blk_desc *desc = NULL;
+-	ulong fdt_addr, size;
++	struct alist *extension_list;
+ 	char fname[256];
+ 	int ret, seq;
  
--	if (!ret) {
--		bflow->fdt_size = size;
--		bflow->fdt_addr = fdt_addr;
--
--		/*
--		 * TODO: Apply extension overlay
--		 *
--		 * Here we need to load and apply the extension overlay. This is
--		 * not implemented. See do_extension_apply(). The extension
--		 * stuff needs an implementation in boot/extension.c so it is
--		 * separate from the command code. Really the extension stuff
--		 * should use the device tree and a uclass / driver interface
--		 * rather than implementing its own list
--		 */
--	} else {
-+	if (ret) {
- 		log_debug("No device tree available\n");
- 		bflow->flags |= BOOTFLOWF_USE_BUILTIN_FDT;
+@@ -157,16 +161,57 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 	bflow->fdt_size = size;
+ 	bflow->fdt_addr = fdt_addr;
+ 
+-	/*
+-	 * TODO: Apply extension overlay
+-	 *
+-	 * Here we need to load and apply the extension overlay. This is
+-	 * not implemented. See do_extension_apply(). The extension
+-	 * stuff needs an implementation in boot/extension.c so it is
+-	 * separate from the command code. Really the extension stuff
+-	 * should use the device tree and a uclass / driver interface
+-	 * rather than implementing its own list
+-	 */
++	if (!CONFIG_IS_ENABLED(SUPPORT_EXTENSION_SCAN))
 +		return 0;
- 	}
++
++	ret = extension_scan();
++	if (ret < 0)
++		return 0;
++
++	extension_list = extension_get_list();
++	if (!extension_list)
++		return 0;
++
++	working_fdt = map_sysmem(fdt_addr, 0);
++	if (fdt_check_header(working_fdt))
++		return 0;
++
++	overlay_addr = env_get_hex("extension_overlay_addr", 0);
++	if (!overlay_addr) {
++		log_debug("Environment extension_overlay_addr is missing\n");
++		return 0;
++	}
++
++	alist_for_each(extension, extension_list) {
++		char *overlay_file;
++		int len;
++
++		len = sizeof(EFI_DIRNAME) + strlen(extension->overlay);
++		overlay_file = calloc(1, len);
++		if (!overlay_file)
++			return -ENOMEM;
++
++		snprintf(overlay_file, len, "%s%s", EFI_DIRNAME,
++			 extension->overlay);
++
++		ret = bootmeth_common_read_file(dev, bflow, overlay_file,
++						overlay_addr,
++						(enum bootflow_img_t)IH_TYPE_FLATDT,
++						&size);
++		if (ret) {
++			log_debug("No device tree overlay\n");
++			free(overlay_file);
++			continue;
++		}
++
++		ret = extension_apply(working_fdt, size);
++		if (ret) {
++			free(overlay_file);
++			continue;
++		}
++		bflow->fdt_size += size;
++		free(overlay_file);
++	}
  
-+	bflow->fdt_size = size;
-+	bflow->fdt_addr = fdt_addr;
-+
-+	/*
-+	 * TODO: Apply extension overlay
-+	 *
-+	 * Here we need to load and apply the extension overlay. This is
-+	 * not implemented. See do_extension_apply(). The extension
-+	 * stuff needs an implementation in boot/extension.c so it is
-+	 * separate from the command code. Really the extension stuff
-+	 * should use the device tree and a uclass / driver interface
-+	 * rather than implementing its own list
-+	 */
-+
  	return 0;
  }
- 
 
 -- 
 2.43.0
