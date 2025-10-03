@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7894CCAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2E6ACAC5B0
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 19:19:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C00AB83826;
-	Fri,  3 Oct 2025 21:19:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 199B183855;
+	Fri,  3 Oct 2025 21:19:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sZtt4xsa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ijSsLhbq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E2E283835; Fri,  3 Oct 2025 21:19:43 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id D49138386F; Fri,  3 Oct 2025 21:19:51 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 246298381D
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:19:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B859883855
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 21:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-938bf212b72so91153339f.1
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:19:41 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-91f6ccdbfc8so138021739f.1
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 12:19:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759519179; x=1760123979; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jN/LF4zN+OFWN6tu+gBHPe2xxFkCoTxNJ/8kRz5TQ3A=;
- b=sZtt4xsaJE/DOZQbaDtGLCjvHiuiZkHyM0iaT9CXtFd9pBRcAzqNgBwzlRm13x5SGo
- T4lls1Dgd8mHBbdw0yNZmUW34Ocw1p1iT6gy7HwaHd+B2URDp7/MQ3X5cHP6t8m8xOGg
- d9s1ixP0iMj6Mh+CjygpyWxCQra9W5sMPGxwMer8hkNzmHhnbwvvh3DQ3IdOe23tuCoL
- TvR6l8IKYXcDmFEw54LngPF+pWxb1ChdiUfvNuaU0kkL5JKVdhXFRTJNJf/1jWGH3KzM
- IS3pdCX8jXiDyvtEpEKX9qDTYMhaQ/7UrMfiNvwec4OkMfs31y+O2MXRZXOLESoweVhP
- JN/A==
+ d=linaro.org; s=google; t=1759519188; x=1760123988; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=wDmED1920y5Z6Ple6Ml/5KorGZto/2xjS2qKP78q+B4=;
+ b=ijSsLhbqAEMvN1zMCWB5Oxjm4QX8GYx6MVaZLfwofqSWuR1N1xRAx+Bd2POz88ghnC
+ hRJ/Dsg7DG+75RCNIgE16huQpV75zEr2lLtaDYgwHdpWyacebOoQtlTHd9ZdORLWiTwI
+ QyLfzHX9YKkHcwrIPrEX9XLyp9XnLs3Thho3GOtSN8vNmoGk1mCi3NWLvasnArw5BjIk
+ HDVoj+tC3fIs34K0la5qkYZRSdV9rJMklrSxci4vTZE0zBEdvRypw4wU8tS0FPFtgc/f
+ 5a+5VrFIgHOPEcEjI7saLXcvki7qmH2iW3kEtS91sypq8PDq9898zGbZj8AH0UzpmlIv
+ 78Yw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759519179; x=1760123979;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jN/LF4zN+OFWN6tu+gBHPe2xxFkCoTxNJ/8kRz5TQ3A=;
- b=l1olfXDYAHk+im2iAkrNEFYh0SijtFu+8ONeVUCnOzMNo/sz8a2YMdvl+WOa+3vmd9
- lyiBTQWiNH/WfGy62IF9fokc4eoza0bnM/HYirYgE1pdW4EuXCP0/Id/jwDkCnLy+X8Q
- 06bOEGdakmIL6b9buqkXEwFeT5NRWrXaSLZlerHEFAwGn0HZcDo8rpn5K+UHF8K2A3/t
- oP31AiRJyFRbjGwGar4AwrefWm+K5pp59ieZIG9mbidf2XKPWFROSsfI63FZkFhBX8QP
- 4hPwYPTFsQgBAI7SstkYuVPBaaxba37RIcjFy62zAzaguj/f6yOxqqxMoH/Xy8fQyOSV
- NONQ==
-X-Gm-Message-State: AOJu0YwCw7MjWPEzk1E3yeX2N1S2iqZq8Lsp9Q2+/+I9vlK2+PA3TTG+
- 6e16S+HPkTJeWVMcqiPIVmpCz9RPV3Q5NjyT7eaZ9CjoBldGGJ+2Bq8GoJ1eF2cvl37hF0ZiDAc
- tNbBD
-X-Gm-Gg: ASbGncsao1avy9g5Vp4a8YuSaZ1jYShxz81DkJmOLHB4IRlFbIawGv8S+vWowBE8M0z
- FMWv8b1CbJgc3HgbjvVqkGEpiwIA65gtg+Ct6eo6tDak7FO6V4OpQuSlgd9HYF5kRxTqX5XAH4s
- DhXW1qqFEE03SZb4yO5WYwYIedxEr5BNsq6lo5FAdhMTf4jsFPb5e/wsTZnul/7/vzRBP+dvWrq
- 4pZrDsf+tFqlEK4MofWLfK5KJClRQbnro1Tgz6RbVfdyluQ3j9ejmnEaYnoH28EHZHosiRV9KSD
- 6PWXK97xVAmwYea/dSv4tYFysLLOqhcj8IVZCcvq2uudUZMB/NcDLWVDs0au1MM3w52dq3PB8Mc
- FUwefspWCW3D/+nlmF3HMBDhXxsUXUkkSOztHObtnvxH8T3IZIsa7bfylHMU6jKDOP35cBbl7Wz
- 4Fki3YYdNwK9JGfbRdK6U=
-X-Google-Smtp-Source: AGHT+IEa/5e/WQhQJi0wKkvqjIb4MjoXaH8ADA+hL6lGW1d9shoFH+aj8gJJtaehJ9q4ii58zD3dVw==
-X-Received: by 2002:a05:6602:1590:b0:92e:772:9323 with SMTP id
- ca18e2360f4ac-93b96b46dccmr561930939f.16.1759519179315; 
- Fri, 03 Oct 2025 12:19:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759519188; x=1760123988;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wDmED1920y5Z6Ple6Ml/5KorGZto/2xjS2qKP78q+B4=;
+ b=tX/wKTRKw394n9vK0JEWbDIU6U1PX5+ZCaK0DNQLJhmU8zfiQYZFmEiDPeTvmgNt3c
+ xKDl/dX+Y7ewvTVqm+f8FJ0pQuoubTCU7XQsOT0mcbo0UdxmGKInwGeTZ7C8AXiMtGmr
+ obu9ukzlHT57WuuGccrJGsZMvAwMYL0gd8XFcitIfRYCkxbPijr/+UgLhOXLmGrKCd5G
+ pbwOhZO8U3Mrj28W1hW/4T2/ehC//W5djmkezAtsDP34gZEaudsFX+2LPpgMH6UxzEEU
+ yAVR1WB5wM4tziTJKzy4h7LkH+kbMQjP2F6MFpjYqvLTPFiyeNf98WogEgXm6kcVBxGD
+ WWOg==
+X-Gm-Message-State: AOJu0YxtIfHP9ky9ktJg7omnKqjm+67RuQzSBIcneOzMZtbeZKtmpHYX
+ jx6lkQ10Pe3JK+oLvx+59rt/LN3ZjDpOVf/5KdVx2yiNXFf7MQPwuFfDLrF2+ccgswv1nZSCWme
+ JfWor
+X-Gm-Gg: ASbGncshXPdpjyTBiav2O6GpfyicRI/uESbM+fIB2sQUE8nFq1xKun3rXODgdaG1PlU
+ Vx9a5Cjw3ibqJHuJMUOIc9Eos5HyXjmykGfVe/3SuEtxqi/1ODUoKEhTrXxUECmP4oQTALs0MoX
+ jghjn/AtUzlX5zeHeYHISZ8Nw+Nj/JbgokDFS20lOm1uMUGMBXy0YaL1mSTWqmWdmJB0uLQjQIe
+ uWokwU6atvirjShKP241iPzWSpU+WZrmfCH33LhpTfKX5AIm6U0etSSXwIyxppcFCAyT4XmoMWF
+ 5sATMw7SzvF56QuMvTVL0Y8hwf4Xv88tU4518oV8REV3u1kXyZBJl8g59dITCLvtXIUIprFvY8i
+ y4cO7sfZofCWe6JlB9bUSzAF8e+BmFFjuz5u2lyCcSRqR7Nx5kKT50SLl5WHqfBKPhu/XWpJfje
+ NgJ7hAOItW
+X-Google-Smtp-Source: AGHT+IEB61uid8dbbBy+afZu/9uKBLWGK+fBUh41gDQqpBP/IyGvO4s/0CrZ5UnvLeoT+MHy5wE0dQ==
+X-Received: by 2002:a05:6602:158b:b0:8f3:bc41:1ab with SMTP id
+ ca18e2360f4ac-93b96a6c116mr537547439f.12.1759519188094; 
+ Fri, 03 Oct 2025 12:19:48 -0700 (PDT)
 Received: from ubuntu.localdomain ([209.227.150.67])
  by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-93a8912bfd9sm213794139f.25.2025.10.03.12.19.37
+ ca18e2360f4ac-93a8912bfd9sm213794139f.25.2025.10.03.12.19.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 12:19:38 -0700 (PDT)
+ Fri, 03 Oct 2025 12:19:47 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -79,12 +80,14 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH u-boot-test-hooks 1/4] travis-ci: Group the QEMU args
-Date: Fri,  3 Oct 2025 12:19:10 -0700
-Message-Id: <20251003191918.767698-1-raymond.mao@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH u-boot-test-hooks 2/4] bin: Run the conf without board_ident
+ as default
+Date: Fri,  3 Oct 2025 12:19:11 -0700
+Message-Id: <20251003191918.767698-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20251003191918.767698-1-raymond.mao@linaro.org>
+References: <20251003191918.767698-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -103,30 +106,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make grouping of QEMU args to break the long line and modernize it
-with '-m' and '-semihosting-config'.
+Set conf.${board_type} as the default config when no board_ident is
+specified. This helps to reuse a single config for multiple board
+identities.
+Hense, rename the conf.qemu_arm64_na to conf.qemu_arm64 so that it
+can be shared by all qemu_arm64 boards.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
 ---
- bin/travis-ci/conf.qemu_arm64_na | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ bin/travis-ci/{conf.qemu_arm64_na => conf.qemu_arm64} | 0
+ bin/u-boot-test-common                                | 6 +++++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+ rename bin/travis-ci/{conf.qemu_arm64_na => conf.qemu_arm64} (100%)
 
-diff --git a/bin/travis-ci/conf.qemu_arm64_na b/bin/travis-ci/conf.qemu_arm64_na
-index e195b5e..bd55ea8 100644
---- a/bin/travis-ci/conf.qemu_arm64_na
-+++ b/bin/travis-ci/conf.qemu_arm64_na
-@@ -24,7 +24,10 @@ console_impl=qemu
- qemu_machine="virt"
- qemu_helper_script="swtpm"
- qemu_binary="qemu-system-aarch64"
--qemu_extra_args="-cpu cortex-a57 -nographic -netdev user,id=net0,tftp=${UBOOT_TRAVIS_BUILD_DIR} -device e1000,netdev=net0 -device virtio-rng-pci -semihosting -chardev socket,id=chrtpm,path=/tmp/tpm/swtpm-sock -tpmdev emulator,id=tpm0,chardev=chrtpm -device tpm-tis-device,tpmdev=tpm0"
-+qemu_net_args="-netdev user,id=net0,tftp=${UBOOT_TRAVIS_BUILD_DIR} -device e1000,netdev=net0"
-+qemu_host_args="-semihosting-config enable=on,target=native"
-+qemu_tpm_args="-chardev socket,id=chrtpm,path=/tmp/tpm/swtpm-sock -tpmdev emulator,id=tpm0,chardev=chrtpm -device tpm-tis-device,tpmdev=tpm0"
-+qemu_extra_args="-m 4G -cpu cortex-a57 -nographic -device virtio-rng-pci -d unimp ${qemu_host_args} ${qemu_net_args} ${qemu_tpm_args}"
- qemu_kernel_args="-bios ${U_BOOT_BUILD_DIR}/u-boot.bin"
- reset_impl=none
- flash_impl=none
+diff --git a/bin/travis-ci/conf.qemu_arm64_na b/bin/travis-ci/conf.qemu_arm64
+similarity index 100%
+rename from bin/travis-ci/conf.qemu_arm64_na
+rename to bin/travis-ci/conf.qemu_arm64
+diff --git a/bin/u-boot-test-common b/bin/u-boot-test-common
+index 2c3b476..0e443d7 100755
+--- a/bin/u-boot-test-common
++++ b/bin/u-boot-test-common
+@@ -32,5 +32,9 @@ hostname="`hostname`"
+ if [ -n "${USE_LABGRID_SJG}" ]; then
+ 	. "${bin_dir}/${hostname}/conf.all"
+ else
+-	. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
++	if [ -f "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}" ]; then
++		. "${bin_dir}/${hostname}/conf.${board_type}_${board_ident}"
++	else
++		. "${bin_dir}/${hostname}/conf.${board_type}"
++	fi
+ fi
 -- 
 2.25.1
 
