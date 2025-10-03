@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F7DCCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:39:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F932CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 20:40:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A95483903;
-	Fri,  3 Oct 2025 22:39:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7185483919;
+	Fri,  3 Oct 2025 22:39:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HSc9wDa5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z+aTivjI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56909838FA; Fri,  3 Oct 2025 22:39:30 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 5C15183826; Fri,  3 Oct 2025 22:39:31 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2152E838D2
+ by phobos.denx.de (Postfix) with ESMTPS id 8647B83900
  for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 22:39:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-42f5e9e4314so8693345ab.0
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-42f5f2d237dso9270735ab.1
  for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 13:39:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1759523967; x=1760128767; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ke6i0zCX+4qqmCLCEpoMoDjaaHIYqw+fdHlLlApbChk=;
- b=HSc9wDa5+eL4/ofSOGbUCO+BATR7Y/7FqL2/ELm11AKUg2o0k3FuRD1NYO6czqlfN+
- y5EUOZ0oxnbsJQk23sLX8WN8GnrCeyurc0bCPP6vynp3/SJog3EkBR4xokPUYWbcYNDg
- QIlpsy0Q40sZw41iaeVtHRWHh8VN0cI0UpR9Y=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=B34zbaIZWUXTNF7+CSyBUH3g2E3yZMuljQgRXo84m5M=;
+ b=Z+aTivjIUtplkjr0tR5sjlPcBuclKI2Emhsiw8QlaW1pcvDZe2B/kC6kDKsaSIqZ11
+ EbcEyhE5vpF5e6feYi+fSr006laCSW2QYWGXOdqQDbFSh4zqOh7QMd/uVixaQIG8T2lE
+ qfTL0g0xUgra9sBezej01XG7zPofQ2NYmWq0U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1759523967; x=1760128767;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ke6i0zCX+4qqmCLCEpoMoDjaaHIYqw+fdHlLlApbChk=;
- b=eNwxXspfiOihrpRFN2uBLykvexp4YVfos+HCI8hf75SsIlnZaoRkt5X9K9iPlI1uQ4
- 0ZboF0OqeFzsDq9lrq4t4XPOAipfWb0zT3Y1RFNod7mYdqYfmMIt5U7mX1io4gL+FAZH
- qELGjz9zO/elLcd1ik3hu+3C2YOdHKjIBvX0hW5epsXNdcYNvucx25WfDHpvNpr6cNQv
- khjx1+4nc4ISTlxCjXUhpE37Zox2jIugkiFjAZrFAeyyDBNNl39nvq7uRxFuuDYjT0P6
- imvba9YktWJt8ISoeISb6J+UPv8EjRU+G1IC/SvSwAWVL6UjiP7581H8WsvQIPnibwDD
- C/wQ==
-X-Gm-Message-State: AOJu0Yx8q+EecirunoEfZNBVcUJ5bpNQV4EBDuPKi2pB8tVIU6Qyw2sp
- QPeXsRvUxRuv92ypFmp7gCubxuh5xKsbQJjYuM4wv/5oyEz1JziW2a7xY3/qtSHaIk1cjvUFygx
- 9CGtqhU4=
-X-Gm-Gg: ASbGnctIDt0QPXin4MUErEge/O2RQvLyvD2ulbQ/5PyqjvjrOsgYALxauwlRceVP8fF
- 6DL4gt4K/bfM+ZXI15cs+9t+JcBv2/+nIvzzEd+hFlyd4zBuWbl4idAbHRp7Dx+S80JP7SPg81o
- kDNdIHeYIxRLuWu9ej+TFLWD69pLZWkUsLBxftk0lU1IxpWttmm/ANtgDbY5KV+9yiUgGz8AlLL
- UR430p5qOi9B61Zd/YitLW3tS8LI5mb4zZ8dP0YjZRDjUJtZmVAC77l8LZHpkvS3Ik93y6qngM5
- Qzqhs25wyUhVovZEHos5L+gSispYivCD1m5xBN76egqAhnqpB9Opgi9NF4XwSBxJpJ+Liderapo
- RZWC6jzs7BjOCXYzSiTVsuhRgcQSdNflxE39zYT0WnxJqskLDRRIxYZmeWP4Ok1ZPhPMSKFyQHJ
- 61KjURoTOuBQ==
-X-Google-Smtp-Source: AGHT+IEqkeQMkouAIxuL/l73m4PVj/hCcggDFZBlWDYx/xiixHHziNgNb3HMqc6zEsHPVF65RSD2Zg==
-X-Received: by 2002:a05:6e02:2165:b0:425:8aea:7313 with SMTP id
- e9e14a558f8ab-42e7ad6ea3bmr55502935ab.18.1759523966760; 
- Fri, 03 Oct 2025 13:39:26 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=B34zbaIZWUXTNF7+CSyBUH3g2E3yZMuljQgRXo84m5M=;
+ b=ZVtvuBw5OuV+t8UYtq+Wni94/r2MzWzBO+F4M0o48CnSsGmFFxPplxbByf5BaKTnaS
+ 9qHbPHHalvmHQiCeZtxyyPfsD9npjxNIYmGsg5m2cz1u527Z+hIduKD9CXxp7X+XIdwL
+ MNn30K8EffIGLR2lH6z9TJauzUayniTOKVyV8RFQsPhS1r9jG4zmG9DfM1F54nwKH/YP
+ Zl2j2sWWacwDSb3h93/K8IBB9sBwTsV3fvy0l4leyvLQvPNyAMFi9weRsCaaJyt45ZFI
+ 5byyV4TkHRskxpPbgIvctRXTl9XAXW3Z0Dbm4ALlDcb/k9jtgKAJeIx2pkp0ZjdTKWad
+ F28w==
+X-Gm-Message-State: AOJu0Yzh9dXbEuxlLe/rObE5Sf4WYDXEzUUttOIf3EIJ4oI5t/gyD9zW
+ MtBNPN+St6xfgC9abXR4vwWADvAEu9STas/45nzXcm87G7FV/31ivo8kHmMYDJIJ/G7vnhQGOzN
+ aiTMJRco=
+X-Gm-Gg: ASbGncsEGbo/hLTda10yi8h5tp7XkivCtw9E3MsX0WJMuYNjlX1eFwh6tuqqPW0XhJ7
+ urxM3RpAysK9mtLRFCiiKRSCOQM6FGRYkMJpXaowXrf4siAt7/n0aIDbexEUV2WP/hRuh9RD//M
+ ovu0XgLSzySVbUfmbqyTVF16NsE2K5lu8MQXQLUAOKdxxhMWdgFhpdr+hxMtcHev7jNJzbKyHcw
+ Gxb131YlMk4ozAmCKRjM1apy++gJglCCUoZ8pV77+675lrEh/W12qgbYbPONigZCAll3Ri+enxC
+ UiO6JBVOFMp79L2WwxkTLEpMwwNUGyejSzYK8BV01GG4PLqU+OBeboHurR5Q9fhFL8iZLRUI/vM
+ NUK+vqrAmPPOlpaj/qaSTcK1rLeDa25SvV/zDKmZ6rKAPXvAgY1IoJpSl79pj0UgA92GNZ48HlL
+ hvcai5xvO+KXE+
+X-Google-Smtp-Source: AGHT+IGLUmHZpcommkShiDKMnB1V7DEMHOq8QpiWm+SHQpxcuc4hQYjAoL8X7t2gS+d6oNmEPc1Puw==
+X-Received: by 2002:a05:6e02:1989:b0:42e:72b5:f900 with SMTP id
+ e9e14a558f8ab-42e7ac36ef1mr58136455ab.0.1759523967302; 
+ Fri, 03 Oct 2025 13:39:27 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-42d8b1f3474sm24603555ab.9.2025.10.03.13.39.25
+ 8926c6da1cb9f-57b5ebc86f1sm2301266173.44.2025.10.03.13.39.26
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 13:39:25 -0700 (PDT)
-Date: Fri, 3 Oct 2025 14:39:23 -0600
+ Fri, 03 Oct 2025 13:39:26 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: Re: [PATCH] video: Add SPL_VIDEO_SYNC_CYCLIC_MS symbol
-Message-ID: <20251003203923.GY6093@bill-the-cat>
-References: <20251001203044.2828394-1-trini@konsulko.com>
+Subject: [PATCH] mmc: cv1800b_sdhci: Fix possible warning with
+ MMC_SUPPORTS_TUNING=n
+Date: Fri,  3 Oct 2025 14:39:25 -0600
+Message-ID: <20251003203925.1030037-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="44HlKOR6c/dui/eQ"
-Content-Disposition: inline
-In-Reply-To: <20251001203044.2828394-1-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,40 +93,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The function cv1800b_set_tap_delay is only called by
+cv1800b_execute_tuning. The latter is where we currently have the #if
+guard around MMC_SUPPORTS_TUNING, and so with the option disabled we
+have an unused function warning. Move the guard to cover both functions.
 
---44HlKOR6c/dui/eQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ drivers/mmc/cv1800b_sdhci.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Wed, Oct 01, 2025 at 02:30:44PM -0600, Tom Rini wrote:
+diff --git a/drivers/mmc/cv1800b_sdhci.c b/drivers/mmc/cv1800b_sdhci.c
+index 377e6a887df5..036e798f3741 100644
+--- a/drivers/mmc/cv1800b_sdhci.c
++++ b/drivers/mmc/cv1800b_sdhci.c
+@@ -19,6 +19,7 @@ struct cv1800b_sdhci_plat {
+ 	struct mmc mmc;
+ };
+ 
++#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
+ static void cv1800b_set_tap_delay(struct sdhci_host *host, u16 tap)
+ {
+ 	sdhci_writel(host, PHY_TX_SRC_INVERT | tap << 16, SDHCI_PHY_TX_RX_DLY);
+@@ -31,7 +32,6 @@ static void cv1800b_sdhci_reset(struct sdhci_host *host, u8 mask)
+ 		udelay(10);
+ }
+ 
+-#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
+ static int cv1800b_execute_tuning(struct mmc *mmc, u8 opcode)
+ {
+ 	struct sdhci_host *host = dev_get_priv(mmc->dev);
+-- 
+2.43.0
 
-> When compiling video-uclass.c for SPL and with SPL_CYCLIC enabled, we
-> also need to know SPL_VIDEO_SYNC_CYCLIC_MS as a value. This is most
-> easily resolved by adding a symbol to set this to the value of
-> VIDEO_SYNC_CYCLIC_MS as one shouldn't ever need these to differ.
->=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  drivers/video/Kconfig | 5 +++++
->  1 file changed, 5 insertions(+)
-
-Given that I've decided to go in the direction of not aiming for
-"allyesconfig" to support SPL right now, I'm going to defer this patch.
-It can be picked up later if needed.
-
---=20
-Tom
-
---44HlKOR6c/dui/eQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOA0ewAKCRAr4qD1Cr/k
-CocwAQDAjgk9OWS+NwgJ88J2fXY1E8pYbjXvaFfKmEKI91eBJAEAhGRjeFiSSBk7
-d6GEY/phXkJBmWreUXcjLCYHTec3tQs=
-=aR9N
------END PGP SIGNATURE-----
-
---44HlKOR6c/dui/eQ--
