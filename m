@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 423DECAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 16:36:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75F17CAC5B0
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 16:36:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64BB0838CE;
+	by phobos.denx.de (Postfix) with ESMTP id C6F74838D5;
 	Fri,  3 Oct 2025 18:34:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="tjtQYzZL";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="2CCDnYcH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAC25838D5; Fri,  3 Oct 2025 18:34:46 +0200 (CEST)
+ id 5302F838B7; Fri,  3 Oct 2025 18:34:48 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BF9583855
- for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 18:34:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48E26838CC
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 18:34:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id BB4FA4E40EA6;
- Fri,  3 Oct 2025 16:34:43 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id B74184E40EAA;
+ Fri,  3 Oct 2025 16:34:45 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 8BCDD60683;
- Fri,  3 Oct 2025 16:34:43 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 89D7660683;
+ Fri,  3 Oct 2025 16:34:45 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A6AA2102F1C5D; 
- Fri,  3 Oct 2025 18:34:40 +0200 (CEST)
+ with ESMTPSA id 127CE102F17C6; 
+ Fri,  3 Oct 2025 18:34:42 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759509282; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1759509284; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=P6ssM7l5zpvZqitY3pKznCEXAhs5onTkCvPGhAMA4k4=;
- b=tjtQYzZLL6I+XWBDuOWMQgcXWWFZvLQkRBm8MFRPGnH+IFv37nQ5VUSxyx7FCrn5eU8ULQ
- aR2BMxDZZTSmDG4JHDNJbETIAT7p2cG6RCvYMhd6ZpgaFCjGVN2PHPmr980qHV6lO+yKcg
- 9jKzAUQIUrM8T7F49dtmZNlKuBHh1Q48CvonmTAq+lopuFrvttZpjP554Ia7ra8+SBu01b
- siFkiwCLChI4qXjCbRiRGV13Us/Y7+gkcx/qi8DfA+puoXrM3ZtRPJsT6jOJq3ZsmULuKZ
- wWjKylR2i8RaRHibaA+tPjJgTn9hh3kYOO3K2VqqQrTJQJu41kQYQQLMT9G7xw==
+ bh=34+E8pdI1wzFTIAusimbSBpU2C1Wau/8WUpcYmbaDcY=;
+ b=2CCDnYcH0/fGrtgfJIbdF3J4fcNdkLoTADIYOyA0gsHrC4CkM51+HQlW8LTko+yBihc8at
+ Io6t8+Wi5d3MU8Fh1ssE++dqtWAordSZKz3cJYflrHnNydudLwgIRYgEcA7yg7udyHf2Yy
+ CVzdhV1N4ChH9uGdUpkhGp4COQp4XPSHbTmhK16ZhcuiuamKUGyLjJMVBNkySLMt/Fh5vA
+ AOkw9Bb83oY5neWdfni0zd48DEkLjn4xaEwl0U0OWLWSANNof8dy9QrcEygj+Gmxt1aYAI
+ Dly353yfOAvRhh+/BuwJV+J8ha0VQb+SZBP/f7qSCZhBDlDnrVGAEwDS/6tIUQ==
 From: Kory Maincent <kory.maincent@bootlin.com>
-Date: Fri, 03 Oct 2025 18:33:52 +0200
-Subject: [PATCH 12/16] boot: Remove legacy extension board support
+Date: Fri, 03 Oct 2025 18:33:53 +0200
+Subject: [PATCH 13/16] boot: extension: Move overlay apply custom logic to
+ command level
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20251003-feature_sysboot_extension_board-v1-12-458b8bf85325@bootlin.com>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251003-feature_sysboot_extension_board-v1-13-458b8bf85325@bootlin.com>
 References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 In-Reply-To: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,544 +81,265 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove the legacy extension board implementation now that all boards
-have been converted to use the new UCLASS-based framework. This
-eliminates 223 lines of legacy code while preserving functionality
-through the modern driver model approach.
+The extension_overlay_cmd environment variable approach is specific to
+the U-Boot extension_board command, while other boot flows (pxe_utils,
+bootstd) handle overlay loading differently.
+
+Move the extension_overlay_cmd execution out of the core extension
+framework to the command level. This decouples the framework from
+command-specific behavior and prepares for future extension support
+in other boot flows.
 
 Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
 ---
- MAINTAINERS                        |  1 -
- arch/Kconfig                       |  2 +-
- arch/arm/mach-imx/imx8m/Kconfig    |  4 +-
- arch/arm/mach-omap2/am33xx/Kconfig |  2 +-
- arch/arm/mach-omap2/omap5/Kconfig  |  2 +-
- arch/arm/mach-sunxi/Kconfig        |  2 +-
- boot/Kconfig                       |  3 --
- boot/Makefile                      |  3 +-
- boot/extension-uclass.c            | 18 +++----
- boot/extension.c                   | 97 --------------------------------------
- cmd/extension_board.c              | 74 ++++-------------------------
- include/extension_board.h          | 55 ++++++---------------
- 12 files changed, 38 insertions(+), 225 deletions(-)
+ boot/extension-uclass.c   | 68 +++--------------------------------
+ cmd/extension_board.c     | 92 +++++++++++++++++++++++++++++++++++++++++++++--
+ include/extension_board.h | 12 ++-----
+ 3 files changed, 98 insertions(+), 74 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 4afa5dfb020..af90e749b14 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1189,7 +1189,6 @@ S:	Maintained
- F:	board/sunxi/chip.c
- F:	board/ti/common/cape_detect.c
- F:	boot/extension-uclass.c
--F:	boot/extension.c
- F:	cmd/extension_board.c
- F:	include/extension_board.h
- 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 5bb65a29f8d..7e05e0c2263 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -215,7 +215,7 @@ config SANDBOX
- 	select SYSRESET_CMD_POWEROFF if CMD_POWEROFF
- 	select SYS_CACHE_SHIFT_4
- 	select IRQ
--	select SUPPORT_DM_EXTENSION_SCAN if CMDLINE
-+	select SUPPORT_EXTENSION_SCAN if CMDLINE
- 	select SUPPORT_ACPI
- 	imply BITREVERSE
- 	select BLOBLIST
-diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
-index 5324eff3084..e7bc154b805 100644
---- a/arch/arm/mach-imx/imx8m/Kconfig
-+++ b/arch/arm/mach-imx/imx8m/Kconfig
-@@ -359,14 +359,14 @@ config TARGET_IMX8MM_CL_IOT_GATE
- 	select IMX8MM
- 	select SUPPORT_SPL
- 	select IMX8M_LPDDR4
--	select SUPPORT_DM_EXTENSION_SCAN
-+	select SUPPORT_EXTENSION_SCAN
- 
- config TARGET_IMX8MM_CL_IOT_GATE_OPTEE
- 	bool "CompuLab iot-gate-imx8 with optee support"
- 	select IMX8MM
- 	select SUPPORT_SPL
- 	select IMX8M_LPDDR4
--	select SUPPORT_DM_EXTENSION_SCAN
-+	select SUPPORT_EXTENSION_SCAN
- 
- config TARGET_IMX8MP_RSB3720A1_4G
- 	bool "Support i.MX8MP RSB3720A1 4G"
-diff --git a/arch/arm/mach-omap2/am33xx/Kconfig b/arch/arm/mach-omap2/am33xx/Kconfig
-index 77f7938305b..dff4f1cf202 100644
---- a/arch/arm/mach-omap2/am33xx/Kconfig
-+++ b/arch/arm/mach-omap2/am33xx/Kconfig
-@@ -15,7 +15,7 @@ config TARGET_AM335X_EVM
- 	select DM_GPIO
- 	select DM_SERIAL
- 	select TI_I2C_BOARD_DETECT
--	select SUPPORT_DM_EXTENSION_SCAN
-+	select SUPPORT_EXTENSION_SCAN
- 	imply CMD_DM
- 	imply SPL_DM
- 	imply SPL_DM_SEQ_ALIAS
-diff --git a/arch/arm/mach-omap2/omap5/Kconfig b/arch/arm/mach-omap2/omap5/Kconfig
-index 819490a8cf8..5394529658b 100644
---- a/arch/arm/mach-omap2/omap5/Kconfig
-+++ b/arch/arm/mach-omap2/omap5/Kconfig
-@@ -38,7 +38,7 @@ config TARGET_AM57XX_EVM
- 	select CMD_DDR3
- 	select DRA7XX
- 	select TI_I2C_BOARD_DETECT
--	select SUPPORT_DM_EXTENSION_SCAN
-+	select SUPPORT_EXTENSION_SCAN
- 	imply DM_THERMAL
- 	imply SCSI
- 	imply SPL_THERMAL
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index f5696199516..b04ec671696 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -1223,7 +1223,7 @@ config BLUETOOTH_DT_DEVICE_FIXUP
- 
- config CHIP_DIP_SCAN
- 	bool "Enable DIPs detection for CHIP board"
--	select SUPPORT_DM_EXTENSION_SCAN
-+	select SUPPORT_EXTENSION_SCAN
- 	select W1
- 	select W1_GPIO
- 	select W1_EEPROM
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 159da81bec5..62aa301f18f 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -1909,9 +1909,6 @@ endif # OF_LIBFDT
- config SUPPORT_EXTENSION_SCAN
-         bool
- 
--config SUPPORT_DM_EXTENSION_SCAN
--        bool
--
- config USE_BOOTARGS
- 	bool "Enable boot arguments"
- 	help
-diff --git a/boot/Makefile b/boot/Makefile
-index aa26070fbb8..7fb56e7ef37 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -9,8 +9,7 @@ obj-$(CONFIG_BOOT_RETRY) += bootretry.o
- obj-$(CONFIG_CMD_BOOTM) += bootm.o bootm_os.o
- obj-$(CONFIG_CMD_BOOTZ) += bootm.o bootm_os.o
- obj-$(CONFIG_CMD_BOOTI) += bootm.o bootm_os.o
--obj-$(CONFIG_SUPPORT_EXTENSION_SCAN) += extension.o
--obj-$(CONFIG_SUPPORT_DM_EXTENSION_SCAN) += extension-uclass.o
-+obj-$(CONFIG_SUPPORT_EXTENSION_SCAN) += extension-uclass.o
- 
- obj-$(CONFIG_PXE_UTILS) += pxe_utils.o
- 
 diff --git a/boot/extension-uclass.c b/boot/extension-uclass.c
-index 9dfbeb60d20..1b21aa08944 100644
+index 1b21aa08944..840023fa84e 100644
 --- a/boot/extension-uclass.c
 +++ b/boot/extension-uclass.c
-@@ -61,7 +61,7 @@ static struct udevice *extension_get_dev(void)
- 	return NULL;
+@@ -104,92 +104,34 @@ int extension_scan(void)
+ 	return ops->scan(extension_list);
  }
  
--struct alist *dm_extension_get_list(void)
-+struct alist *extension_get_list(void)
+-static int _extension_apply(const struct extension *extension)
++int extension_apply(struct fdt_header *working_fdt, ulong size)
  {
- 	struct udevice *dev = extension_get_dev();
- 
-@@ -71,7 +71,7 @@ struct alist *dm_extension_get_list(void)
- 	return dev_get_priv(dev);
- }
- 
--int dm_extension_probe(struct udevice *dev)
-+int extension_probe(struct udevice *dev)
- {
- 	struct alist *extension_list = dev_get_priv(dev);
- 
-@@ -79,7 +79,7 @@ int dm_extension_probe(struct udevice *dev)
- 	return 0;
- }
- 
--int dm_extension_remove(struct udevice *dev)
-+int extension_remove(struct udevice *dev)
- {
- 	struct alist *extension_list = dev_get_priv(dev);
- 
-@@ -87,9 +87,9 @@ int dm_extension_remove(struct udevice *dev)
- 	return 0;
- }
- 
--int dm_extension_scan(void)
-+int extension_scan(void)
- {
--	struct alist *extension_list = dm_extension_get_list();
-+	struct alist *extension_list = extension_get_list();
- 	struct udevice *dev = extension_get_dev();
- 	const struct extension_ops *ops;
- 
-@@ -154,9 +154,9 @@ static int _extension_apply(const struct extension *extension)
- 	return ret;
- }
- 
--int dm_extension_apply(int extension_num)
-+int extension_apply(int extension_num)
- {
--	struct alist *extension_list = dm_extension_get_list();
-+	struct alist *extension_list = extension_get_list();
- 	const struct extension *extension;
- 
- 	if (!extension_list)
-@@ -172,9 +172,9 @@ int dm_extension_apply(int extension_num)
- 	return _extension_apply(extension);
- }
- 
--int dm_extension_apply_all(void)
-+int extension_apply_all(void)
- {
--	struct alist *extension_list = dm_extension_get_list();
-+	struct alist *extension_list = extension_get_list();
- 	const struct extension *extension;
+-	ulong extrasize, overlay_addr;
+ 	struct fdt_header *blob;
+-	char *overlay_cmd;
++	ulong overlay_addr;
  	int ret;
  
-diff --git a/boot/extension.c b/boot/extension.c
-deleted file mode 100644
-index fc9e1d398f4..00000000000
---- a/boot/extension.c
-+++ /dev/null
-@@ -1,97 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2025 Köry Maincent <kory.maincent@bootlin.com>
-- */
--
--#include <bootdev.h>
--#include <command.h>
--#include <env.h>
--#include <extension_board.h>
--#include <fdt_support.h>
--#include <malloc.h>
--#include <mapmem.h>
--
--int extension_apply(struct extension *extension)
--{
--	ulong extrasize, overlay_addr;
--	struct fdt_header *blob;
--	char *overlay_cmd;
--
 -	if (!working_fdt) {
 -		printf("No FDT memory address configured. Please configure\n"
 -		       "the FDT address via \"fdt addr <address>\" command.\n");
--		return CMD_RET_FAILURE;
+-		return -EINVAL;
 -	}
 -
 -	overlay_cmd = env_get("extension_overlay_cmd");
 -	if (!overlay_cmd) {
 -		printf("Environment extension_overlay_cmd is missing\n");
--		return CMD_RET_FAILURE;
+-		return -EINVAL;
 -	}
 -
--	overlay_addr = env_get_hex("extension_overlay_addr", 0);
--	if (!overlay_addr) {
--		printf("Environment extension_overlay_addr is missing\n");
--		return CMD_RET_FAILURE;
--	}
--
+ 	overlay_addr = env_get_hex("extension_overlay_addr", 0);
+ 	if (!overlay_addr) {
+ 		printf("Environment extension_overlay_addr is missing\n");
+ 		return -EINVAL;
+ 	}
+ 
 -	env_set("extension_overlay_name", extension->overlay);
--	if (run_command(overlay_cmd, 0) != 0)
--		return CMD_RET_FAILURE;
+-	ret = run_command(overlay_cmd, 0);
+-	if (ret)
+-		return ret;
 -
 -	extrasize = env_get_hex("filesize", 0);
 -	if (!extrasize)
--		return CMD_RET_FAILURE;
+-		return -EINVAL;
 -
 -	fdt_shrink_to_minimum(working_fdt, extrasize);
--
--	blob = map_sysmem(overlay_addr, 0);
--	if (!fdt_valid(&blob))
--		return CMD_RET_FAILURE;
--
--	/* apply method prints messages on error */
--	if (fdt_overlay_apply_verbose(working_fdt, blob))
--		return CMD_RET_FAILURE;
--
--	return CMD_RET_SUCCESS;
--}
--
--int extension_scan(bool show)
++	fdt_shrink_to_minimum(working_fdt, size);
+ 
+ 	blob = map_sysmem(overlay_addr, 0);
+ 	if (!fdt_valid(&blob)) {
+-		printf("Invalid overlay devicetree %s\n", extension->overlay);
++		printf("Invalid overlay devicetree\n");
+ 		return -EINVAL;
+ 	}
+ 
+ 	/* Apply method prints messages on error */
+ 	ret = fdt_overlay_apply_verbose(working_fdt, blob);
+ 	if (ret)
+-		printf("Failed to apply overlay %s\n", extension->overlay);
++		printf("Failed to apply overlay\n");
+ 
+ 	return ret;
+ }
+ 
+-int extension_apply(int extension_num)
 -{
--	struct extension *extension, *next;
--	int extension_num;
+-	struct alist *extension_list = extension_get_list();
+-	const struct extension *extension;
 -
--	list_for_each_entry_safe(extension, next, &extension_list, list) {
--		list_del(&extension->list);
--		free(extension);
+-	if (!extension_list)
+-		return -ENODEV;
+-
+-	extension = alist_get(extension_list, extension_num,
+-			      struct extension);
+-	if (!extension) {
+-		printf("Wrong extension number\n");
+-		return -ENODEV;
 -	}
--	extension_num = extension_board_scan(&extension_list);
--	if (show && extension_num >= 0)
--		printf("Found %d extension board(s).\n", extension_num);
 -
--	/* either the number of extensions, or -ve for error */
--	return extension_num;
+-	return _extension_apply(extension);
 -}
 -
--static int extension_bootdev_hunt(struct bootdev_hunter *info, bool show)
+-int extension_apply_all(void)
 -{
+-	struct alist *extension_list = extension_get_list();
+-	const struct extension *extension;
 -	int ret;
 -
--	ret = env_set_hex("extension_overlay_addr",
--			  env_get_hex("fdtoverlay_addr_r", 0));
--	if (ret)
--		return log_msg_ret("env", ret);
+-	if (!extension_list)
+-		return -ENODEV;
 -
--	ret = extension_scan(show);
--	if (ret < 0)
--		return log_msg_ret("ext", ret);
+-	alist_for_each(extension, extension_list) {
+-		ret = _extension_apply(extension);
+-		if (ret)
+-			return ret;
+-	}
 -
 -	return 0;
 -}
 -
--/* extensions should have a uclass - for now we use UCLASS_SIMPLE_BUS uclass */
--BOOTDEV_HUNTER(extension_bootdev_hunter) = {
--	.prio		= BOOTDEVP_1_PRE_SCAN,
--	.uclass		= UCLASS_SIMPLE_BUS,
--	.hunt		= extension_bootdev_hunt,
--};
+ UCLASS_DRIVER(extension) = {
+ 	.name	= "extension",
+ 	.id	= UCLASS_EXTENSION,
 diff --git a/cmd/extension_board.c b/cmd/extension_board.c
-index d70394f36c7..c373397e0fb 100644
+index c373397e0fb..86e4795ba8a 100644
 --- a/cmd/extension_board.c
 +++ b/cmd/extension_board.c
-@@ -9,46 +9,26 @@
+@@ -7,8 +7,90 @@
+ #include <alist.h>
+ #include <exports.h>
  #include <command.h>
++#include <env.h>
  #include <extension_board.h>
  
--LIST_HEAD(extension_list);
--
++static int
++cmd_extension_load_overlay_from_env(const struct extension *extension,
++				    ulong *filesize)
++{
++	ulong size, overlay_addr;
++	char *overlay_cmd;
++	int ret;
++
++	overlay_cmd = env_get("extension_overlay_cmd");
++	if (!overlay_cmd) {
++		printf("Environment extension_overlay_cmd is missing\n");
++		return -EINVAL;
++	}
++
++	overlay_addr = env_get_hex("extension_overlay_addr", 0);
++	if (!overlay_addr) {
++		printf("Environment extension_overlay_addr is missing\n");
++		return -EINVAL;
++	}
++
++	env_set("extension_overlay_name", extension->overlay);
++	ret = run_command(overlay_cmd, 0);
++	if (ret)
++		return ret;
++
++	size = env_get_hex("filesize", 0);
++	if (!size)
++		return -EINVAL;
++
++	*filesize = size;
++	return 0;
++}
++
++static int cmd_extension_apply(int extension_num)
++{
++	struct alist *extension_list = extension_get_list();
++	const struct extension *extension;
++	ulong size;
++	int ret;
++
++	if (!extension_list)
++		return -ENODEV;
++
++	extension = alist_get(extension_list, extension_num,
++			      struct extension);
++	if (!extension) {
++		printf("Wrong extension number\n");
++		return -ENODEV;
++	}
++
++	ret = cmd_extension_load_overlay_from_env(extension, &size);
++	if (ret)
++		return ret;
++
++	return extension_apply(working_fdt, size);
++}
++
++static int cmd_extension_apply_all(void)
++{
++	struct alist *extension_list = extension_get_list();
++	const struct extension *extension;
++	int ret;
++
++	if (!extension_list)
++		return -ENODEV;
++
++	alist_for_each(extension, extension_list) {
++		ulong size;
++
++		ret = cmd_extension_load_overlay_from_env(extension, &size);
++		if (ret)
++			return ret;
++
++		ret = extension_apply(working_fdt, size);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
  static int do_extension_list(struct cmd_tbl *cmdtp, int flag,
  			     int argc, char *const argv[])
  {
--#if CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
--	struct alist *dm_extension_list;
--#endif
-+	struct alist *extension_list;
- 	struct extension *extension;
- 	int i = 0;
- 
--#if CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
--	dm_extension_list = dm_extension_get_list();
--
--	if (!alist_get_ptr(dm_extension_list, 0)) {
-+	extension_list = extension_get_list();
-+	if (!alist_get_ptr(extension_list, 0)) {
- 		printf("No extension registered - Please run \"extension scan\"\n");
- 		return CMD_RET_SUCCESS;
- 	}
- 
--	alist_for_each(extension, dm_extension_list) {
-+	alist_for_each(extension, extension_list) {
- 		printf("Extension %d: %s\n", i++, extension->name);
- 		printf("\tManufacturer: \t\t%s\n", extension->owner);
- 		printf("\tVersion: \t\t%s\n", extension->version);
- 		printf("\tDevicetree overlay: \t%s\n", extension->overlay);
- 		printf("\tOther information: \t%s\n", extension->other);
- 	}
--#else
--	if (list_empty(&extension_list)) {
--		printf("No extension registered - Please run \"extension scan\"\n");
--		return CMD_RET_SUCCESS;
--	}
--
--	list_for_each_entry(extension, &extension_list, list) {
--		printf("Extension %d: %s\n", i++, extension->name);
--		printf("\tManufacturer: \t\t%s\n", extension->owner);
--		printf("\tVersion: \t\t%s\n", extension->version);
--		printf("\tDevicetree overlay: \t%s\n", extension->overlay);
--		printf("\tOther information: \t%s\n", extension->other);
--	}
--#endif
- 	return CMD_RET_SUCCESS;
- }
- 
-@@ -57,69 +37,31 @@ static int do_extension_scan(struct cmd_tbl *cmdtp, int flag,
- {
- 	int extension_num;
- 
--#if CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
--	extension_num = dm_extension_scan();
-+	extension_num = extension_scan();
- 	if (extension_num == -ENODEV)
- 		extension_num = 0;
- 	else if (extension_num < 0)
- 		return CMD_RET_FAILURE;
- 
- 	printf("Found %d extension board(s).\n", extension_num);
--#else
--	extension_num = extension_scan(true);
--	if (extension_num < 0 && extension_num != -ENODEV)
--		return CMD_RET_FAILURE;
--#endif
--
- 	return CMD_RET_SUCCESS;
- }
- 
- static int do_extension_apply(struct cmd_tbl *cmdtp, int flag,
- 			      int argc, char *const argv[])
- {
--#if !CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
--	struct extension *extension = NULL;
--	struct list_head *entry;
--	int i = 0;
--#endif
--	int extension_id, ret;
-+	int extension_id;
- 
+@@ -55,12 +137,18 @@ static int do_extension_apply(struct cmd_tbl *cmdtp, int flag,
  	if (argc < 2)
  		return CMD_RET_USAGE;
  
++	if (!working_fdt) {
++		printf("No FDT memory address configured. Please configure\n"
++		       "the FDT address via \"fdt addr <address>\" command.\n");
++		return -EINVAL;
++	}
++
  	if (strcmp(argv[1], "all") == 0) {
--		ret = CMD_RET_FAILURE;
--#if CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
--		if (dm_extension_apply_all())
-+		if (extension_apply_all())
+-		if (extension_apply_all())
++		if (cmd_extension_apply_all())
  			return CMD_RET_FAILURE;
--#else
--		list_for_each_entry(extension, &extension_list, list) {
--			ret = extension_apply(extension);
--			if (ret != CMD_RET_SUCCESS)
--				break;
--		}
--#endif
  	} else {
  		extension_id = simple_strtol(argv[1], NULL, 10);
--#if CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
--		if (dm_extension_apply(extension_id))
-+		if (extension_apply(extension_id))
+-		if (extension_apply(extension_id))
++		if (cmd_extension_apply(extension_id))
  			return CMD_RET_FAILURE;
--#else
--		list_for_each(entry, &extension_list) {
--			if (i == extension_id) {
--				extension = list_entry(entry, struct extension,  list);
--				break;
--			}
--			i++;
--		}
--
--		if (!extension) {
--			printf("Wrong extension number\n");
--			return CMD_RET_FAILURE;
--		}
--
--		ret = extension_apply(extension);
--#endif
  	}
  
- 	return CMD_RET_SUCCESS;
 diff --git a/include/extension_board.h b/include/extension_board.h
-index 78139cd7489..fc9c33ed354 100644
+index fc9c33ed354..e12c91abb4c 100644
 --- a/include/extension_board.h
 +++ b/include/extension_board.h
-@@ -14,47 +14,46 @@
- extern struct list_head extension_list;
+@@ -41,17 +41,11 @@ int extension_scan(void);
  
  /**
-- * dm_extension_get_list - Get the extension list
-+ * extension_get_list - Get the extension list
-  * Return: The extension alist pointer, or NULL if no such list exists.
-  */
--struct alist *dm_extension_get_list(void);
-+struct alist *extension_get_list(void);
- 
- /**
-- * dm_extension_probe - Probe extension device
-+ * extension_probe - Probe extension device
-  * @dev: Extension device that needs to be probed
+  * extension_apply - Apply extension board overlay to the devicetree
+- * @extension_num: Extension number to be applied
++ * @working_fdt: Pointer to working flattened device tree
++ * @size: Size of the devicetree overlay
   * Return: Zero on success, negative on failure.
   */
--int dm_extension_probe(struct udevice *dev);
-+int extension_probe(struct udevice *dev);
- 
- /**
-- * dm_extension_remove - Remove extension device
-+ * extension_remove - Remove extension device
-  * @dev: Extension device that needs to be removed
-  * Return: Zero on success, negative on failure.
-  */
--int dm_extension_remove(struct udevice *dev);
-+int extension_remove(struct udevice *dev);
- 
- /**
-- * dm_extension_scan - Scan extension boards available.
-+ * extension_scan - Scan extension boards available.
-  * Return: Zero on success, negative on failure.
-  */
--int dm_extension_scan(void);
-+int extension_scan(void);
- 
- /**
-- * dm_extension_apply - Apply extension board overlay to the devicetree
-+ * extension_apply - Apply extension board overlay to the devicetree
-  * @extension_num: Extension number to be applied
-  * Return: Zero on success, negative on failure.
-  */
--int dm_extension_apply(int extension_num);
-+int extension_apply(int extension_num);
- 
- /**
-- * dm_extension_apply_all - Apply all extension board overlays to the
-+ * extension_apply_all - Apply all extension board overlays to the
-  *			    devicetree
-  * Return: Zero on success, negative on failure.
-  */
--int dm_extension_apply_all(void);
-+int extension_apply_all(void);
+-int extension_apply(int extension_num);
+-
+-/**
+- * extension_apply_all - Apply all extension board overlays to the
+- *			    devicetree
+- * Return: Zero on success, negative on failure.
+- */
+-int extension_apply_all(void);
++int extension_apply(struct fdt_header *working_fdt, ulong size);
  
  struct extension {
--	struct list_head list;
  	char name[32];
- 	char owner[32];
- 	char version[32];
-@@ -76,38 +75,12 @@ struct extension_ops {
- 	U_BOOT_DRIVER(_name) = { \
- 		.name = #_name, \
- 		.id = UCLASS_EXTENSION, \
--		.probe = dm_extension_probe, \
--		.remove = dm_extension_remove, \
-+		.probe = extension_probe, \
-+		.remove = extension_remove, \
- 		.ops = &(struct extension_ops) { \
- 		       .scan = _scan_func, \
- 		       }, \
- 		.priv_auto = sizeof(struct alist), \
- 	}
- 
--/**
-- * extension_board_scan - Add system-specific function to scan extension board.
-- * @param extension_list	List of extension board information to update.
-- * Return: the number of extension.
-- *
-- * This function is called if CONFIG_CMD_EXTENSION is defined.
-- * Needs to fill the list extension_list with elements.
-- * Each element need to be allocated to an extension structure.
-- *
-- */
--int extension_board_scan(struct list_head *extension_list);
--
--/**
-- * extension_apply - Apply extension board overlay to the devicetree
-- * @extension: Extension to be applied
-- * Return: Zero on success, negative on failure.
-- */
--int extension_apply(struct extension *extension);
--
--/**
-- * extension_scan - Scan extension boards available.
-- * @show: Flag to enable verbose log
-- * Return: Zero on success, negative on failure.
-- */
--int extension_scan(bool show);
--
- #endif /* __EXTENSION_SUPPORT_H */
 
 -- 
 2.43.0
