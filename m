@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE5ACCA471
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:48:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 529BACCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 12:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A727836B4;
-	Fri,  3 Oct 2025 14:48:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 219BC83775;
+	Fri,  3 Oct 2025 14:48:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mainlining.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OKzcu3vJ";
+	dkim=pass (2048-bit key; unprotected) header.d=mainlining.org header.i=@mainlining.org header.b="FqHlBtIp";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="lDBW/Hcy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71EED835A2; Thu,  2 Oct 2025 18:58:44 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2EF96836D1; Fri,  3 Oct 2025 12:02:46 +0200 (CEST)
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D0AA81D6A
- for <u-boot@lists.denx.de>; Thu,  2 Oct 2025 18:58:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 115208366F
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 12:02:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=mainlining.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mfournier@baylibre.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-57bb7ee3142so1373376e87.0
- for <u-boot@lists.denx.de>; Thu, 02 Oct 2025 09:58:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1759424321; x=1760029121;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8kyB0L1jXCzciR6FwHF7vq8CM9sJwLPWOOVhgdiu/l0=;
- b=OKzcu3vJkTdr8nkeFN3Bis5MXed8cwF+IZnzi9VBqMIYQnPp8QRxqyLSb5DRS4v7rW
- PC7RwpEbH8FBNaguIHAA3Gb70FRqh4434QVrYt2Cc2mSW4HAXfJ2B2k8ReeZM9JGGIFr
- tV8v6ejcQZbgJ+LJQbcLfVudexlzqiH6wxl4Q4SEwrs9R7D+iKni3pTMdY31D69bmg+y
- vyWylr7RDjjN0GFPzQEmCZsacAc/7CzymVnuG2jO7UmqQDVyIoZkefkiWtFt5E69DL6x
- tw9gituhVkyf6fyAv7B1rTEtX+2pQEqAjnvuna45g/Vpqwk/C41/pF2Pn8bjlFlopMRe
- mzSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759424321; x=1760029121;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8kyB0L1jXCzciR6FwHF7vq8CM9sJwLPWOOVhgdiu/l0=;
- b=mI9E9xkIPwy3SOssYNVm8PpdrDfQhT/ENqMVs+fcorfu4RCH8xaiCfZF7SlcTIpfnP
- yuhWb/Mfw/5Ys1y1fpci08jj0Ahdy7LvBSMYv43xWSvfJJrmxVvFOiHkbkV6hwGXPZuq
- fk0jfKk3U1m4vUKHHXdpx985L3wcw8Dfcg8cmcp9/Y9X0D05Hv+00TCWI/27hxrigsml
- 8rqtAw4sGoQJDJhpu4saVE/UzSF0BxAXPd7hv1EQ0Lpz5ODBIeC/oAnqMBG+QzJV2zdz
- SerhmRfJ6ZSTeI8tgRZdMPmcH7aODU+CgmjG3+2HF3VdoIWVqRmRlPSgx1fFaN6Kl/Za
- Ye4A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXbAOc9ynqlAWDBMpO6TJPR7hM91EbpNQI7rj19ycvOLHLKX3incTcc1n+7OapARM05+MRfwIk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHfDAw9oMZUpylC+EhHW/uJrZdRalbfjERgsmW6fWPIZx3q0oZ
- jdr4NAo+sCsfGuhnao+kPiFxzj/J/WAcuISdSNJWtgzUWCmhw7plGAh9E0aZoopoCT66slyN0TY
- nkJOgBgQWzb+X7rokyBIigjbmXmasK10Rygw5J+0EEg==
-X-Gm-Gg: ASbGncu8w27TwsQFni8C71ixFZvD5iL7l3nvRWMfBKtsbUfhT3GF+wtCNS4dfwDYE7c
- Eykbr8tzinsOxQsR01zqHFtVDxxds8Ih9f9tf7E8WaOkWauVOUkRcwDnFkcmCt41ribdZnz0VCw
- SSG2GiOfDfDE/OI57K+wKckdJKEcITRRMkpw5wT81UvwZjrMv3TlheGCJBWcywI0wmZHXs1MWaz
- 4tsYHTtCQ1R7AzyO0eU9Ao3/rbFaaHIM1mzPY1ssTicxiu9T5NVGmXK7vtQU0U=
-X-Google-Smtp-Source: AGHT+IHZcTtKEkHBNnahuXKBWOGXaFdAHJv3GR7iOXTXhtw28fIHJdoNveAwrHoukuWWNcPYCyrsB/rmiE7R1TaYYxM=
-X-Received: by 2002:a05:6512:3f27:b0:57f:405:7afd with SMTP id
- 2adb3069b0e04-58af9f6af1bmr2346164e87.30.1759424321532; Thu, 02 Oct 2025
- 09:58:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=david.wronek@mainlining.org
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=To:Message-Id:Subject:Date:From; t=1759485672; bh=fEpgUVaAAmfCX+giTMNp4v1
+ 9Ff5MD5Oa9HMuCYPROLE=; b=FqHlBtIpWM0I6tf+IZbIS5KMYTZEQG7fGn2Lu7SCWOPb4AcmoT
+ uLtiXM9UzG32bhWyfMA0tVQsnpwW8BNT+7inumsJRm2LUs+QQVqiBF5QcBvuB0nYs9KBzT0vyKU
+ e0Quxy4OfV9QSdTUh8xrMu8o+osXkxcT61U8DwQnMHHh5Ak22S4TPsjVQokE+cz5pMgn+PTuhrr
+ ADQ1jt+p1vK1G+2Olp6Bplz0qoHea9kgt2IZR90Gm0K4ZqfhB9V+3XMKNzc+nnkuEs/uSvqETkg
+ qzGis16LuLkxRa4LBG2SA71IEm0doBkr8bZKoFGdCYlTtHBAtUdc2KclDzCAAuPQgMw==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org;
+ c=relaxed/relaxed; 
+ h=To:Message-Id:Subject:Date:From; t=1759485672; bh=fEpgUVaAAmfCX+giTMNp4v1
+ 9Ff5MD5Oa9HMuCYPROLE=; b=lDBW/Hcy2zF9EnSSEwDl8RQjFmp+w9Wimpd7hyrVNojMAFb+9M
+ UTb1Uz6DV9NkI37/0aFwVsaHYY+46snUHdCQ==;
+From: David Wronek <david.wronek@mainlining.org>
+Date: Fri, 03 Oct 2025 12:01:13 +0200
+Subject: [PATCH v2 5/5] gpio: qcom_spmi: add pm660l
 MIME-Version: 1.0
-References: <20251002-avb-v1-0-1f93543822ce@baylibre.com>
-In-Reply-To: <20251002-avb-v1-0-1f93543822ce@baylibre.com>
-From: Maxime Fournier <mfournier@baylibre.com>
-Date: Thu, 2 Oct 2025 18:58:29 +0200
-X-Gm-Features: AS18NWDa3sJG0k8ZkLDV5MF54kZOBCm20d9r-tpAlngddoIkwfthyEJVNGkxfvo
-Message-ID: <CA+tTRfLcAKz4oNL+TDL30jAE8_a8mf=FNmvioYYSPPKLGH1kgQ@mail.gmail.com>
-Subject: Re: [PATCH tiU25.01 0/2] ANDROID: Add some features link to OPTEE TA
- AVB
-To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>,
- linux-patch-review@list.ti.com, 
- u-boot@lists.denx.de, Praneeth Bajjuri <praneeth@ti.com>
-Cc: vishalm@ti.com, khilman@baylibre.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251003-sdm670-v2-5-52c0fa481286@mainlining.org>
+References: <20251003-sdm670-v2-0-52c0fa481286@mainlining.org>
+In-Reply-To: <20251003-sdm670-v2-0-52c0fa481286@mainlining.org>
+To: Alexey Minnekhanov <alexeymin@postmarketos.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Christopher Obbard <christopher.obbard@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Julius Lehmann <lehmanju@devpi.de>, Lukasz Majewski <lukma@denx.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Rui Miguel Silva <rui.silva@linaro.org>, Sam Day <me@samcday.com>, 
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, 
+ Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: linux@mainlining.org, ~postmarketos/upstreaming@lists.sr.ht, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io, 
+ Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+ David Wronek <david.wronek@mainlining.org>
+X-Mailer: b4 0.15-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1759485669; l=774;
+ i=david.wronek@mainlining.org; s=20250914; h=from:subject:message-id;
+ bh=v4XYGqrrCaty+ws46Q0yxcD4tkyKS5feC7+2U2s93cM=;
+ b=ilAg0Ba+9AyPzo6lZu8qALgts9oKZqqKDVtzF5VsORrUvqa5/YXC/WCcsizKyiyJvDeIJ1vsO
+ hl9rfEgxK8zDG+r88q0mi/kiS/ui9Se5bRBeJfW4eDNaVCct28Whnch
+X-Developer-Key: i=david.wronek@mainlining.org; a=ed25519;
+ pk=NtKhS1PfXjRIaJwWcYTu7JS0cX3GEmccZo+a6erVTfU=
 X-Mailman-Approved-At: Fri, 03 Oct 2025 14:48:13 +0200
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,52 +89,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Acked-By: Maxime Fournier (TI.com) <mfournier@baylibre.com>
+This is used for the volume keys on some SDM670 devices.
 
-On Thu, Oct 2, 2025 at 12:45=E2=80=AFPM Guillaume La Roque (TI.com) <
-glaroque@baylibre.com> wrote:
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: David Wronek <david.wronek@mainlining.org>
+---
+ drivers/gpio/qcom_spmi_gpio.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> This series add some Android features link to Android Verify Boot,
-> device lock/unlock and keymint TA
->
-> - Add support of fastboot flashing lock/unlock  and
-> lock_critical/unlock_critical with Optee TA AVB if supported or with env
-> variable (for development only)
-> - Add support of get root or trust with TA AVB and Keymint TA
->
-> This series will be upstream after release.
->
-> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
-> ---
-> Guillaume La Roque (TI.com) (2):
->       PENDING: fastboot: Implement Android bootloader locking with
-> CONFIG_FASTBOOT_LOCKING
->       PENDING: avb: Add automatic Root of Trust integration for Android
-> KeyMint
->
->  boot/bootmeth_android.c       |  15 ++
->  cmd/Kconfig                   |  13 +
->  cmd/Makefile                  |   1 +
->  cmd/avb.c                     |  13 +
->  cmd/cmd_avb_rot.c             | 129 ++++++++++
->  common/avb_verify.c           | 183 ++++++++++++++-
->  drivers/fastboot/Kconfig      |  21 ++
->  drivers/fastboot/fb_command.c | 450 +++++++++++++++++++++++++++++++++++
->  drivers/fastboot/fb_getvar.c  |  68 ++++++
->  include/avb_root_of_trust.h   |  50 ++++
->  include/avb_verify.h          |   9 +
->  include/fastboot.h            |   5 +
->  lib/Kconfig                   |  18 ++
->  lib/Makefile                  |   1 +
->  lib/avb_root_of_trust.c       | 534
-> ++++++++++++++++++++++++++++++++++++++++++
->  15 files changed, 1503 insertions(+), 7 deletions(-)
-> ---
-> base-commit: 5b93c3ec7f9d66dc40d062a47a4a880f7d346b7a
-> change-id: 20251002-avb-6be401c09050
->
-> Best regards,
-> --
-> Guillaume La Roque (TI.com) <glaroque@baylibre.com>
->
->
+diff --git a/drivers/gpio/qcom_spmi_gpio.c b/drivers/gpio/qcom_spmi_gpio.c
+index 22c8072534e..220b77dfa93 100644
+--- a/drivers/gpio/qcom_spmi_gpio.c
++++ b/drivers/gpio/qcom_spmi_gpio.c
+@@ -743,6 +743,7 @@ static int qcom_spmi_pmic_gpio_probe(struct udevice *dev)
+ }
+ 
+ static const struct udevice_id qcom_spmi_pmic_gpio_ids[] = {
++	{ .compatible = "qcom,pm660l-gpio" },
+ 	{ .compatible = "qcom,pm8550-gpio" },
+ 	{ .compatible = "qcom,pm8550b-gpio" },
+ 	{ .compatible = "qcom,pm8550ve-gpio" },
+
+-- 
+2.51.0
+
