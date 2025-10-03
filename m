@@ -4,84 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44542CAC5B0
-	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 22:27:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49EC3CCA471
+	for <u-boot@archiver.kernel.org>; Fri,  3 Oct 2025 22:45:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D2EE8387E;
-	Sat,  4 Oct 2025 00:27:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7F2918387E;
+	Sat,  4 Oct 2025 00:45:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kbKNZhqE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QwqRxKdM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9775083887; Sat,  4 Oct 2025 00:27:19 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 51D5883775; Fri,  3 Oct 2025 16:18:12 +0200 (CEST)
+Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
+ [IPv6:2607:f8b0:4864:20::e2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0662A8381D
- for <u-boot@lists.denx.de>; Sat,  4 Oct 2025 00:27:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 879C4836C1
+ for <u-boot@lists.denx.de>; Fri,  3 Oct 2025 16:18:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-638135d9f65so1131176eaf.0
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 15:27:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=jj251510319013@gmail.com
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-5d3fb34ba53so1881954137.1
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 07:18:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759530436; x=1760135236; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=TWRrkXJRYY257eBlNlAr3KjpMGDK4g102XSzMxbEKFk=;
- b=kbKNZhqENoCq9sTHKhLFgSIebbawX6sKumo2uxObUPP4J+zQE1nCcrxoiwk2zk8O7I
- 64n++INVgvMIR3xeBxSh9b6LqtURBbCLFLehoA12VlJgYI7RsVnAwRdk2ynHCYST/E5e
- B7nGDp29fBINXPccJcMKMTeZCNjztGkpeCHDlV3nBFgYpo+B9ppU+a5+FIl7Xad9+E6G
- P7/hqKJBBqoOpNZuoQTiwzZMyd1mUNvMDlitl8knmv2RsrOwDbUBwFNe938BOuR1PMIJ
- X9v7AKPBeiXEejNNjngmBERGd1aQdHs0Ho8jImHcRf+n2NZUKsoSKH5LlqPt37QOg20O
- k9pw==
+ d=gmail.com; s=20230601; t=1759501088; x=1760105888; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o/obcyREZ/oUsqHOEDjNU/6+rg9C+EJwQ4DI8F4/UFs=;
+ b=QwqRxKdMRY05V7d1gLYX0yCxaoKa1r0jgAZU6ta90INKVW+AW98IOfX4zfQtRhHu7q
+ WcS8Y0DLQtMkptdaABX61V7yjBSjI/O1yre0j37+DPtb1LbNVWlNLIz7G3lcqi0HL8np
+ oe3YVcAdUYdj2sYmMVC3QwMRjeNojgr7lu5W8wtiqsqNx7EaZTr/4TntzNcQDjKa5P2x
+ 7Mxtb7huXTjqQD7nPlE3Gi+mRk6seZvPTD6Pszn3RT92B7GyLnmPjvgZsK+HxK8yK4p8
+ c1UjgaikbvfK2XIQPEASQJyTUjGhRoqz6aH55jGtWFsSFTXJdToLO2EG8TnhMFFeCTOW
+ ZHlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759530436; x=1760135236;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TWRrkXJRYY257eBlNlAr3KjpMGDK4g102XSzMxbEKFk=;
- b=VAQ8/nyw/9/ov4jZ4LKAey/t0B3xS8maoZ8+6wtcaVZl41QMmjWl3PwbFZObFiODSv
- IXTBQx1aCqBIgkV0f8T1j73zUzYBN7Evqh2GzOyWC7WZiEGaS2Q8JyvggzCwkiKFhvVR
- Kos5/mk+xfcFM9nAhdohxwaRrS/h9ztPipS1nsv1XxxKRU+PaHy4sBgRebhMzkNV9nlD
- TiDpkpSJe5swVW4mZkduqnYpx+5kZVg0bg+w0Fq7yXnsF5MNvUDpSKjO9RH4pIP3itTg
- f771z/rS/ezaD+2tbpK6V1hCWKk97GEt2R2iUyHcciEi0uKkDf7AFhNYGHvmUZwY2zai
- c18g==
+ d=1e100.net; s=20230601; t=1759501088; x=1760105888;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o/obcyREZ/oUsqHOEDjNU/6+rg9C+EJwQ4DI8F4/UFs=;
+ b=LHD6ICiXdvUGaZeRihRJ1mpMoMqsvFX7QyiotjesYdhLnJbNYzGzt56Qa7hckaVh7C
+ QMoeutrUbDHkzw2odj06z9eZc1EZcrgfZIpfqMvNAb0gN2/Z1Qup/fD68DcTpDYHislJ
+ a9bfD5I/1YV1Ydy1LUR6+Rh5FcP/tUILCipdDSBBQ2ejlTmW/BMdCjrmkNHyfcmUw56f
+ 4A9Ak0iAiJMusnjNQYmwqMGRGHAQvkl2rxhJWSeB6P0FSoir2Y1iDHj4VXbZCIrHrTzh
+ XObb7SqXd2wg5SyD8evDAc3aiUh24idsRA5GyOOr4Qp5rYHBQ24m0fT65zK16lanm+YD
+ 2XpQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5jTbRkSFIPMu55FMeGD0kNhsuww+3tLnbj4mtsPVjoa9Ka8Kyqsvz5ZoKKaUEkvcKCfkBc9E=@lists.denx.de
-X-Gm-Message-State: AOJu0YwsuwQxtTLvYUOnQl0BaSwEVy6cncFdIOgsEH3F8NeeM9uTaicV
- MIikvOCL/IjuXzSIg0sBmHE8OKo+pKrPwB2K6oS11QV69V4MBhHa8K79UDS/EWPB4t0=
-X-Gm-Gg: ASbGncugEHl0okrpG2QLJjOjc7ZAPEyerQSV0SlFmEd3YD/gDfVezMJIK5UVyvPLfHI
- 2DMkwPqEDjsuoSWX1MK7xiloDpVQAHuDJ6xmGx4jyrmh4wC+VRV0ewRIRcTWkna4M8fqo0NDKjb
- fkJZ6i/jhG30sEKDPEbCBNmQ8+uctwRJjccQiduBOdoocr+7raTQWA1E/uuOw0BP4IxYNl4ro+Y
- MhU9FZzzO0z34Y625tHa1+sgWRVbQOGUsZZxhhBBisvjaS1/Gjs7npfwNITCjc2xtAkajGYXtmk
- buFAt3meHv1HRa1jAXL5HUR/OUqIqUi+sq+DNJSBs7qnOorj62rU6c5dHZiQ3x5sY+cwjzbExph
- u3lQTK22LtjjABRDhaX8BHLd3wOc6DyA46zxUEvwA5RWptrt27UrD/Qed3VEdfnhV
-X-Google-Smtp-Source: AGHT+IGB9ACwiDWBqAV7xtqyrApgqRqeT9HprJIi3X3T8Cd8nVUgrEtdlTobKi+VXk7oJQe2H4ghQA==
-X-Received: by 2002:a05:6870:a114:b0:315:8985:d81c with SMTP id
- 586e51a60fabf-3b11ad3fe23mr2417412fac.11.1759530435691; 
- Fri, 03 Oct 2025 15:27:15 -0700 (PDT)
-Received: from localhost ([136.49.61.16]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab913db5fcsm1911814fac.22.2025.10.03.15.27.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 03 Oct 2025 15:27:15 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Simon Glass <sjg@chromium.org>,
-	Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH] bootstd: Fix bootflow info for efi_mgr
-Date: Fri,  3 Oct 2025 17:27:14 -0500
-Message-Id: <20251003222714.4921-1-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.5
+ AJvYcCUMTiEFUlFWGtbEGqjkRUSaMD819qiCWiVRkrmauFproLfAp4E5N8HpCwJc+KhMqEQkL2ah/gI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4vpaRUIUys8D8yfX1dy0vI7JsRWmgg6m9cTeLmC5D/+i9aO1u
+ V6x1nZuetBNwq6RGr5GgfW3Y17VXc6FpcNW5mDbMC5Eldyfnx6MyMMGCFlIHI72tify9Zrq4zjp
+ KoVTUfxvJNL0msBXALCbWoE0qJfxScVI=
+X-Gm-Gg: ASbGncsLQ4gFdb6Pd2yfRaxg2oyS8W6D9U4sVEQziTEaDNXp9I73mX9uGXXrY65Jszd
+ 65jhllTnCPndJgbbkx0YHs9d4vGlaeqyLpuHH9aUJ7xTXQgalm0Wc9rBTx6yxiDEIQUmrK0Xgi+
+ KQIXRMm/9v0PzFwfCLActHtuTe29vKxKvjWBXWZCE8Sc/++HEUYLvz3TJdnQyTciYBGbPEzdSep
+ HevvuTz0NWpOMg8VWyE/Vp2ZAkQgRg=
+X-Google-Smtp-Source: AGHT+IEmaPvjLdq5yJSsnxwAqDROoZ6RRrRFeWA6U6ctG07FFDVZdL1XkXEy7F60W97aAdyBeMTqseLMd7AH++5eUPE=
+X-Received: by 2002:a05:6102:b15:b0:55d:cfa5:9d52 with SMTP id
+ ada2fe7eead31-5d41d1423e3mr1220808137.27.1759501087948; Fri, 03 Oct 2025
+ 07:18:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250914110021.4103-1-aristo.chen@canonical.com>
+ <20250924113733.uz6hozszbuynemtc@giddy>
+ <20250924114317.742ae4ntrb4mvuyq@expert>
+ <b07919da-f3fe-49ca-8f76-ab057d8af58a@freeshell.de>
+ <20250924135139.GH197373@bill-the-cat>
+ <20250924140524.fy46p7ifr4oxh5mc@uncooked>
+ <CAJwFiG+M8v3RA9=E296s8xc+NnK3HxwBspw30LsXUBMpzB18ew@mail.gmail.com>
+ <CAJwFiGJAkESqDDpsuMe1jxYcZD=G+m+2OFuSW3Jzqh4=Jxm_Qg@mail.gmail.com>
+ <CAFLszTiNSnyw86oi_k3F0okOmQn2U6pU7SwrQc0e-tGHd_Py=g@mail.gmail.com>
+ <CAJwFiGKD9mdSKiwhug4WdwbrAFe_dj3qq4DcDyznxZu+hQMDpA@mail.gmail.com>
+ <CAFLszTgOf2iM7C1X_NM+E3MwO=nNKMBi9f2rUX6e1GqS3kq8gg@mail.gmail.com>
+In-Reply-To: <CAFLszTgOf2iM7C1X_NM+E3MwO=nNKMBi9f2rUX6e1GqS3kq8gg@mail.gmail.com>
+From: Aristo Chen <jj251510319013@gmail.com>
+Date: Fri, 3 Oct 2025 22:17:31 +0800
+X-Gm-Features: AS18NWBdw7KBhRCLcwSIAdbbNcAgHWo-X0o1vIhkuUh8gF6eNe4S8PNWggMjb3I
+Message-ID: <CAJwFiGKRatcPK7-rcgR_66-LsM6omCVZj+ugqSX1dhb9a+ChSw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] mkimage: Detect FIT image load address overlaps
+ and fix related test/DTS issues
+To: Simon Glass <sjg@chromium.org>
+Cc: Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>,
+ E Shattow <e@freeshell.de>, 
+ u-boot@lists.denx.de, alpernebiyasak@gmail.com, al.kochet@gmail.com, 
+ paul.henrys_ext@softathome.com, bb@ti.com, y.moog@phytec.de, 
+ w.egorov@phytec.de, francesco.dolcini@toradex.com, ggiordano@phytec.com, 
+ n-francis@ti.com, afd@ti.com, d.schultz@phytec.de, d-gole@ti.com, 
+ ravi@prevas.dk, carlos.lopezr4096@gmail.com, quentin.schulz@cherry.de, 
+ alice.guo@nxp.com, Aristo Chen <aristo.chen@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sat, 04 Oct 2025 00:45:09 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,40 +113,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A "Synchronous Abort" CPU exception happens on an attempt to run the
-"bootflow info" command for a global boot method (e.g. efi_mgr):
+Hi Simon and all
 
-    => bootflow select 0
-    => bootflow info
+Simon Glass <sjg@chromium.org> =E6=96=BC 2025=E5=B9=B410=E6=9C=882=E6=97=A5=
+ =E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=8812:27=E5=AF=AB=E9=81=93=EF=BC=9A
+>
+> Hi Aristo,
+>
+> On Mon, 29 Sept 2025 at 08:20, Aristo Chen <jj251510319013@gmail.com> wro=
+te:
+> >
+> > Hi Simon
+> >
+> > Simon Glass <sjg@chromium.org> =E6=96=BC 2025=E5=B9=B49=E6=9C=8826=E6=
+=97=A5 =E9=80=B1=E4=BA=94 =E4=B8=8B=E5=8D=8810:49=E5=AF=AB=E9=81=93=EF=BC=
+=9A
+> > >
+> > > Hi Aristo,
+> > >
+> > > On Thu, 25 Sept 2025 at 07:50, Aristo Chen <jj251510319013@gmail.com>=
+ wrote:
+> > > >
+> > > > Aristo Chen <jj251510319013@gmail.com> =E6=96=BC 2025=E5=B9=B49=E6=
+=9C=8824=E6=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:33=E5=AF=AB=E9=81=
+=93=EF=BC=9A
+> > > > >
+> > > > > Nishanth Menon <nm@ti.com> =E6=96=BC 2025=E5=B9=B49=E6=9C=8824=E6=
+=97=A5 =E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8810:05=E5=AF=AB=E9=81=93=EF=BC=
+=9A
+> > > > > >
+> > > > > > On 07:51-20250924, Tom Rini wrote:
+> > > > > > > On Wed, Sep 24, 2025 at 06:31:23AM -0700, E Shattow wrote:
+> > > > > > > > Hi Aristo,
+> > > > > > > >
+> > > > > > > > On 9/24/25 04:43, Nishanth Menon wrote:
+> > > > > > > > > On 06:37-20250924, Nishanth Menon wrote:
+> > > > > > > > >> On 10:59-20250914, Aristo Chen wrote:
+> > > > > > > > >>> This patch series enhances FIT image robustness by addi=
+ng **memory
+> > > > > > > > >>> region overlap detection** to `mkimage` and fixing exis=
+ting overlaps
+> > > > > > > > >>> in DTS files and `binman` tests.
+> > > > > > > > >
+> > > > > > > > > [...]
+> > > > > > > > >>>
+> > > > > > > > >>
+> > > > > > > > >> Looks like i see a build regression in linux-next after =
+this series.
+> > > > > > > > >
+> > > > > > > > > I fat fingered that one.. sorry, I meant u-boot next.
+> > > > > > > > >
+> > > > > > > > >
+> > > > > > > > > Fails at commit 4d84fa1261eb, last pass was on commit d81=
+c1118580f
+> > > > > > > > >
+> > > > > > > > >>
+> > > > > > > > >> https://gist.github.com/nmenon/b2fc9e7680cc296062c7dced9=
+4105f76
+> > > > > > > > >
+> > > > > > > > > I  believe there are outstanding comments on V1 that have=
+'nt been
+> > > > > > > > > addressed either. Can we revert/drop this series for now =
+while the
+> > > > > > > > > comments are addressed?
+> > > > > > > > >
+> > > > > > > >
+> > > > > > > > Similar to Nishanth, I am seeing a build regression, itb.ma=
+p:
+> > > > > > >
+> > > > > > > Sorry for the noise all, I've reverted this in next now.
+> > > > > > >
+> > > > > >
+> > > > > > Thanks Tom.
+> > > > > > --
+> > > > > > Regards,
+> > > > > > Nishanth Menon
+> > > > > > Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A=
+3  1A34 DDB5 849D 1736 249D
+> > > > > > https://ti.com/opensource
+> > > > >
+> > > > > Apology for introducing the regression, I will find time to fix t=
+hem,
+> > > > > and thanks Tom for reverting my patch set to unblock others
+> > > > >
+> > > > > For TIFS stub entries on AM6x platforms and the starfive visionfi=
+ve2,
+> > > > > sounds like the image in the FIT will be selected during the runt=
+ime,
+> > > > > so they are not really overlapping each other. I will need to fig=
+ure
+> > > > > out other way instead
+> > > >
+> > > >
+> > > > Thank you all for the feedback on my FIT image overlap detection pa=
+tch
+> > > > series, and apology again for the issues that I introduced
+> > > >
+> > > > Currently what I have in my mind is to have the following 2 changes=
+ in
+> > > > my patch set
+> > > > ### 1. Add support for mutually exclusive image groups
+> > > > Some platforms load only one image from a group at runtime. In the
+> > > > device tree, we may have something like this
+> > > > ```
+> > > > tifsstub-hs {
+> > > >     // ... existing properties ...
+> > > >     mutually-exclusive-group =3D "tifsstub";
+> > > > };
+> > > > tifsstub-fs {
+> > > >     // ... existing properties ...
+> > > >     mutually-exclusive-group =3D "tifsstub";
+> > > > };
+> > > > ```
+> > > > The overlap checker would then skip validation between images in th=
+e
+> > > > same mutually-exclusive-group, while still catching genuine
+> > > > overlaps
+> > > >
+> > > > ### 2.  Change from build error to warning
+> > > > Given that there may be edge cases(such as
+> > > > starfive_visionfive2_defconfig) not covered by current CI pipelines=
+,
+> > > > changing overlap
+> > > > detection from a build-stopping error to a warning initially. This =
+would:
+> > > > - Alert developers to potential memory layout issues
+> > > > - Avoid breaking existing working configurations
+> > > > - Allow time to refine the detection logic based on community feedb=
+ack
+> > > > - Enable a gradual transition to stricter validation once the appro=
+ach is proven
+> > > > The warning could later become an error once we have confidence in =
+the
+> > > > detection accuracy across all supported platforms.
+> > > >
+> > > > Feel free to let me know if you have any concerns or suggestions
+> > >
+> > > We should try to have discussions on FIT on the spec github as well,
+> > > e.g. filing an issue at [1] and referring to it here. I'm not sure ho=
+w
+> > > to link github discussions to a mailing list, so that perhaps just
+> > > create an issue?. FIT is used by most firmware projects at this point=
+,
+> > > many of which don't follow this mailing list.
+> > >
+> > > Regards,
+> > > Simon
+> >
+> > I just opend an issue[1] in the github repo, I don't know if we should
+> > continue the discussion there or should
+> > we continue the discussion here in parallel?
+>
+> I don't know if it is possible to cc the mailing list from github or
+> vice versa. Probably the important thing is to have an issue so
+> non-U-Boot people can see it (as you have done with [1]).
+>
+> For now I've added a comment on your issue.
 
-    "Synchronous Abort" handler, esr 0x96000006, far 0x8
+Thanks for the feedback in the github issue!
 
-It happens because do_bootflow_info() tries to dereference bflow->dev,
-which is NULL in case of efi_mgr. Add the corresponding check to prevent
-this NULL pointer dereference and make "bootflow info" command work
-properly for global boot methods.
+Currently Ahmad Fatoum is suggesting to have multiple configurations
+and selecting
+between them at runtime instead of having a single intentionally
+conflicting configuration
 
-Fixes: 2d653f686b6d ("bootstd: Add a bootflow command")
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- cmd/bootflow.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I may need need input from TI folks whether this idea makes sense to you or=
+ not
 
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index 551dffbb8b89..081f64e12ce9 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -404,7 +404,7 @@ static int do_bootflow_info(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- 
- 	printf("Name:      %s\n", bflow->name);
--	printf("Device:    %s\n", bflow->dev->name);
-+	printf("Device:    %s\n", bflow->dev ? bflow->dev->name : "(none)");
- 	printf("Block dev: %s\n", bflow->blk ? bflow->blk->name : "(none)");
- 	printf("Method:    %s\n", bflow->method->name);
- 	printf("State:     %s\n", bootflow_state_get_name(bflow->state));
+I don't have the device to verify this concept, but I am happy to
+write some preliminary
+POC code
 
-base-commit: d33b21b7e261691e8d6613a24cc9b0ececba3b01
--- 
-2.39.5
+Best regards,
+Aristo
 
+>
+> >
+> > Best Regards,
+> > Aristo
+> >
+> > [1] https://github.com/open-source-firmware/flat-image-tree/issues/32
+> >
+> > >
+> > > >
+> > > > Thanks for your time and guidance!
+> > > > Aristo
+> > >
+> > > [1] https://github.com/open-source-firmware/flat-image-tree/issues
