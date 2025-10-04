@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4322FCAC5BB
-	for <u-boot@archiver.kernel.org>; Sat,  4 Oct 2025 20:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FC3ECAC5BB
+	for <u-boot@archiver.kernel.org>; Sat,  4 Oct 2025 20:48:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B3F283666;
-	Sat,  4 Oct 2025 22:48:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD617831D6;
+	Sat,  4 Oct 2025 22:48:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Whh4XM1t";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LksPjZ+I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AFD0834D4; Sat,  4 Oct 2025 22:48:27 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id DD52683693; Sat,  4 Oct 2025 22:48:28 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58022834D4
- for <u-boot@lists.denx.de>; Sat,  4 Oct 2025 22:48:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC5E380107
+ for <u-boot@lists.denx.de>; Sat,  4 Oct 2025 22:48:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-91179e3fe34so174068639f.1
- for <u-boot@lists.denx.de>; Sat, 04 Oct 2025 13:48:25 -0700 (PDT)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-92aee734585so135730239f.3
+ for <u-boot@lists.denx.de>; Sat, 04 Oct 2025 13:48:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759610904; x=1760215704; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759610905; x=1760215705; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a//hSec1bYs8L5fIK6yEMdtYLOH191Yw0/lqy/4fxmc=;
- b=Whh4XM1tSU9ScV2mKD+re+zl6ml3nMRFt68UnzK/jtBfxlDmgUk9FAdEAKjqjxJ47E
- ysAQZ4/MncfYlP2KQS+xlRHarzix9uue5Q5mFUg0zyBQTbgA822dN7MQIdD0LnaLzPj7
- awr6hloOX71LecU329dAivbMucXK6vv0ylfqc=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=+p80FRrJdNykEKPU3ohwi5HhDDUqqP4iWCIeTRvRLUU=;
+ b=LksPjZ+Ig9UpFurLOO0sfMlvrZOJWAaCUX5FyUs3jTr+1TU6cR0aDqxkksh/EkQLZw
+ VIpb/7/oU0/GdlwlvfEPxfVDSoAWvrjoxU+muF3fPvAIuzH8ghUyTFSNvTxCvaGMaqwR
+ JLaUGrJoeLSh3JURrOraqdxXW5z6nEHTeY6fA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759610904; x=1760215704;
+ d=1e100.net; s=20230601; t=1759610905; x=1760215705;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a//hSec1bYs8L5fIK6yEMdtYLOH191Yw0/lqy/4fxmc=;
- b=hZiAowngFhNl2HlybMWsrNo6xLIZpN1csquiEL8sO5+zB6pUfywHZijgdvC0zc70ZR
- 2r1JHSCX3ALtKCieQtKtG+xzmB3LIXo/SLMflV0ObYgAhKZROA44wj+BHRrpd7w9nZh3
- wIbEw6/ojf8kt9Z1Fs0olDR6PHnwJcGBJ2JWMmqUeXKRVwVk0qx7jqk0uCO2wCQ3qmrX
- 9XV/DTIlabL3AsppVL5KSwVu7Hot6oiyEwaHg+ayc2fWklTGIpo6c8mPoIBpeJX9pcG3
- KFLOv1h5+id+8PI+TNUXah1GolpVlQ8dyjCP6C6CbTAm8Q5j5IJh2Aob9O9yBD3cPtFe
- rM2A==
-X-Gm-Message-State: AOJu0Yxz6ALSqyG4Z5MjK2wPYtzZt4QlFRqgDpQnVBLsQc48Xb1mVycp
- XzELC/3QUn7tKi1/WVXNgZ7W6r0YNQBZf3dgCgO2IF/SwdpIGbD4p2l1GnUg1cbtsg/nke413hj
- OpsKMEaA=
-X-Gm-Gg: ASbGnctkTXzR/rO3y1BkJPCMBBd+lWjprZB8Y7IdomTwgivkzaWPEkP6e0/pgg3Qida
- A0YA8wvlQTx2ogs+0PqhCM4YkySDlTmnp+0OaxDis2ofCOiNYOVpMBweEyZXQ4sQYZHRLWGVaml
- FO/+CUvKu23Ju1i1MYnih4MKSk1yhOAxP83lFT8qXODfgJFtHbuoTbT9PZch267FQRtIz9veNDC
- QSzNH2cX+GOp//1tvjPXcEH4mmoZanFZleopTy3TM+zhqbJM8VWEHDVlGKOhW7MHzoSBqgk81/A
- OJQpDGqiXTjSDHhS7EzNBiB05T5tTPG9f7dQgwRx4aIYYhb88VfxXcZTWkgzVdXsUsW/mUyuckA
- iiWKRH4jP7lgYtgUYwarMwQHjR0XGPiX/637MgfajPh1C80dq1GMX2WgVnnQcWWhAK+q2kvz3ba
- oGlgRMmzHl
-X-Google-Smtp-Source: AGHT+IFcXugP0IPMT0pAtbFYubH2+klYYvwarShdQOwIaaUf3y0VF8U6oqPoshLWV+N0hnh0y+YPKQ==
-X-Received: by 2002:a05:6602:27d2:b0:91b:605f:1f0f with SMTP id
- ca18e2360f4ac-93b968bed16mr1035502839f.2.1759610904079; 
- Sat, 04 Oct 2025 13:48:24 -0700 (PDT)
+ bh=+p80FRrJdNykEKPU3ohwi5HhDDUqqP4iWCIeTRvRLUU=;
+ b=JUiLd+tIhcafIVZaW6nFlmQxaFkBYDm8MNvqJLQhQYhksLDwOp3fEHwTDUfU04iPc3
+ /BeQqqt8F/2tsOpHS3TqIbqdwTucPNwgtXS4x3FknDLSbA6RoLNT0kt+6OPx5cCTpPfB
+ aJ+SEAFyH56cjBfEJZSdtxsxIcxsWm5KQhZOKBevZ7UwlhehX8SOc7QM7LrVx4xJGn4q
+ g9wLI2se17OPw52nkhlsRUevJOipZnCH4ecOBgWbWiDvneY40QJDDnaluW0T6FU5OI+Z
+ nGLlkhWse7WR9oxVvFH7xpUKPLJoPM/b7Nfs/m0q0EvEzTH50koYxNrUOO38r04nPQy0
+ 3tMg==
+X-Gm-Message-State: AOJu0YxL4UCNQqNTOx8O8FWuZ18Xe2KSki1JQPNvJdeWylDzen0Q8Xa/
+ +CpAOstqpFe3xY5gMQ2JhPdw/bpeIMaELhm/vA4++La6umnC1HHpHDFruBXjvf4ZKKR/O2v21ln
+ nu49pZrE=
+X-Gm-Gg: ASbGncud09CKKQCQh0lPrFG4+uWV4bkcpMgEebVtO/pOvGbb88335eTHc6wSlwKseDS
+ LMweDqYA95X57EsgyRJf60qUxEJJc2673QgGXIMGZlGhpiEDDLOJOGVcY9lbe1IIh80hBJ2t1Tl
+ qgsIT0du4A5VI7ewAaSh2GonnjB4P1/KAQuLZGfKotDShQ8dcRn0u2uU/vpC/sE7Q6NLW9y3Swk
+ EM6f43XNZu89takgJjhdQUfbWwJZI/o0GXB2yLa0OSBit2cXbPSPoWy0dL1AfDvoPLX/hGYnKpm
+ qbH2xAlpRyOMMAAn8tTaaNtdOfzlr1OgthpoAONITkQcnuCrRhkvmUlM/lEKuL7U5Hd5WFKwfoF
+ CunuOEaUZhMOvWT/DiuvpfYef15IgxMTbVXTcqNSBnUSGcnSzY5uffmwx6VUiKbOud5rf7SB8QU
+ 1AExpskE0YegHn0pK9JSo=
+X-Google-Smtp-Source: AGHT+IGco3DO+KVYwYPLfT2aWO5vBxVjI/Pvzr2/Ni1j7A326bh1QC3yB0Fjy7RcMwgO0fcV+qZKWA==
+X-Received: by 2002:a05:6602:3c3:b0:922:6c20:45ef with SMTP id
+ ca18e2360f4ac-93b96977bdcmr1123971539f.7.1759610905534; 
+ Sat, 04 Oct 2025 13:48:25 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-93a88961d74sm321145039f.22.2025.10.04.13.48.22
+ ca18e2360f4ac-93a88961d74sm321145039f.22.2025.10.04.13.48.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 04 Oct 2025 13:48:23 -0700 (PDT)
+ Sat, 04 Oct 2025 13:48:24 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, yegorslists@googlemail.com
-Cc: lukma@denx.de, seanga2@gmail.com
-In-Reply-To: <20250922132700.4180174-1-yegorslists@googlemail.com>
-References: <20250922132700.4180174-1-yegorslists@googlemail.com>
-Subject: Re: [PATCH] clk: ti: fix K3 clock driver help texts
-Message-Id: <175961090286.3677446.7866815314560835265.b4-ty@konsulko.com>
-Date: Sat, 04 Oct 2025 14:48:22 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20251004193147.3671498-1-trini@konsulko.com>
+References: <20251004193147.3671498-1-trini@konsulko.com>
+Subject: Re: [PATCH] global: Add expected space between '#include' and
+ directive
+Message-Id: <175961090421.3677446.4034238401609440163.b4-ty@konsulko.com>
+Date: Sat, 04 Oct 2025 14:48:24 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,16 +96,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Sep 2025 15:27:00 +0200, yegorslists@googlemail.com wrote:
+On Sat, 04 Oct 2025 13:31:46 -0600, Tom Rini wrote:
 
-> Add "in SPL" to the SPL related driver help texts.
+> These files had '#include<file.h>' rather than '#include <file.h>' which
+> while functional is not the correct style.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] clk: ti: fix K3 clock driver help texts
-      commit: c23688d0533db87c533e415be7809b435080c7e4
+[1/1] global: Add expected space between '#include' and directive
+      commit: dc6c80056e21a27e28e1be62ac724302ef526841
 -- 
 Tom
 
