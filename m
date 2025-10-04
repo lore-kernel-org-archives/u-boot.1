@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8270ACAC5B0
-	for <u-boot@archiver.kernel.org>; Sat,  4 Oct 2025 02:04:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F8C5CCA471
+	for <u-boot@archiver.kernel.org>; Sat,  4 Oct 2025 02:06:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 947EC8386F;
-	Sat,  4 Oct 2025 04:04:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8F18D8386F;
+	Sat,  4 Oct 2025 04:06:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qZQPj9qW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ax7ZgAFz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2878083887; Sat,  4 Oct 2025 04:04:31 +0200 (CEST)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id 3AC0F838A0; Sat,  4 Oct 2025 04:06:30 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38CC98383E
- for <u-boot@lists.denx.de>; Sat,  4 Oct 2025 04:04:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5979F8383E
+ for <u-boot@lists.denx.de>; Sat,  4 Oct 2025 04:06:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-3322e6360bbso2879804a91.0
- for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 19:04:28 -0700 (PDT)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-78af3fe5b17so2471157b3a.2
+ for <u-boot@lists.denx.de>; Fri, 03 Oct 2025 19:06:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759543467; x=1760148267; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759543586; x=1760148386; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NGKDLDWKx5NWBOmPbvTVG7oOceNQF49OFL2OYBmW64w=;
- b=qZQPj9qWwxzKbo0TYwkjoXZH4wknOvHg5xZWTLP6Gjof7KAhPjw4pCvpU5zkIViJAu
- fTRYBJEumY305oJf1br6iyjrGA4Y9fOWqePP7GldLsNGc9IPtSuGJlRM9Rxu3yU1UtL2
- REdXnzPwVuAvBkpyd9wuYxbyS5X9XcZUtSrqqkHPR/qPmAHwIlHoFnu2/kcrsoWxZ9aY
- w3Z8QmN294oOPi0tmKDNAF1fCr+udt0KG/wX7mOv93oXhSrE3YFfpGD6r0DpF0SVc3qO
- +BggrPe2oJK9nUZeeGWfC39wmum0Ij7v/ZHdfFpkay0ZN39w1aY2RXG7aO5z0t0V4HIv
- StcA==
+ bh=0jpaGr1uF4D30xSd0dNPLK5dGTT8TkvjRrHWlirpjx0=;
+ b=ax7ZgAFzo+vT47U50JBXdqw9HTpzl4CM0KhjRMi/DIa7w3eRnKndCOMQL3KG02f20N
+ hDWue77jY9lkw5nl2HRJil9vNID03pk/I2KuTmpLFr0Cr405xhW97I6CEk5wpAezW2sb
+ 8Qlr7CRTZFQjyFNSg9ptbS56SSphXsEqbtNZWRrhrUNGxiZBwLLj0OgKFmRwGvlKOYll
+ Ku0Ri669JHE/JC1jilcDPP/Kol5h/oMV88ueqpMOkATsxYlVKFL1K91qpYiW7eKbdcRF
+ +1V+iGewJcW/GZYpJVpmclWekGx0r7A/XAUbQbDhY8bNFyuITQ2rvgjzUs6sP1BOGEGg
+ QNuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759543467; x=1760148267;
+ d=1e100.net; s=20230601; t=1759543586; x=1760148386;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NGKDLDWKx5NWBOmPbvTVG7oOceNQF49OFL2OYBmW64w=;
- b=e4G0UlkcFBUvsdB6BPrIwFioJ8/NhvfAswjyy61UbSd26SxKxOJyl2DCNkP0Bz72kU
- mVlJ9gvu+N4rMhQolM2Ad7fNL4zz13PoqHRbQsijLUy25N+/Z/GbOzBMdfYKeSz+diRZ
- rXk4t4nXU9dQaUc8lwQB5iqy8kBX6HNHss0v1ciXxS8HrI8bwHodplQV5dWhjbX8/cFx
- UUdMJVzWHZAO6WxgDhaHSDJGHV3u1HJW/xbFMKbg4FaUi3mdpFmPk9g1lGZYxY7KrTZS
- K1OXXzLkBkzRaiegbpQDFRJEMvaCFsGYa5cSKHhjY/wjz4Bs00pvukQ+ztovCH1T6rP1
- SZ+g==
-X-Gm-Message-State: AOJu0YwN3KPsydGqyZnWEjSgYJ59WARtxlUsu892MnYfpgocShfRkt44
- tlG7T8ayq9VThWUUhVPNzmSfvndEZz6n86e9tTXkxW4JiLiuOt9zwk4qS5DOAYz8ZbhTPVDAq2y
- GF+R2Ou3lZDTdvgri3T5y0nZVCHpAe+/+4DN+6DD8cw==
-X-Gm-Gg: ASbGncsu86WvYR+PnFFetmZfkjz7OJ8QByTzKQNME3/CRnmXpPauKfx5ktNiza4iJtS
- aJmIf1evPo0Y3UDw6ACxtd7n5si/vE4Dn49VtvBPhPp9FrpVt9KlxxlFFp4iEg4FomSmk0Uq7Xc
- jHRtR/KOP2M4PJXBxZc2hoyUfr+7ZNmUrUIbhrDa+z9kbTiHJMFPgqN7XxXiwBFu/em5D4duG6p
- v7QNkpQ4AIHujqw9AOeVgZPtQtxwp2YSFYMnwYt0sGJ3/psFHV9Twko6g==
-X-Google-Smtp-Source: AGHT+IE7t2YGMMNpc+D3RNCh+GdMioXcsI6h5UjTNVXuRXQ1IMy+/uSqbL2a80Jiu3NAyWjXqtCb4bChVhdLeGB8ABI=
-X-Received: by 2002:a17:902:d4d2:b0:267:9a29:7800 with SMTP id
- d9443c01a7336-28e9a6609b7mr57129255ad.59.1759543466683; Fri, 03 Oct 2025
- 19:04:26 -0700 (PDT)
+ bh=0jpaGr1uF4D30xSd0dNPLK5dGTT8TkvjRrHWlirpjx0=;
+ b=ajeVZBKcf1l47tKi53NmKaioM03Y/6H4/1OSxqOLATdLlSpQIrYMDJBUExc0RVz2qi
+ 3/9G5ioTsJO1TiiShGHbO3S5g6Jz3IAlGMrSZ8CIUVYgZ2a5gXItBvWLmHJroF6TmvDk
+ DTygPEaqCAX533O8KVlpY0OTvEZgT6ZHw6ORCHnkZqS7UdjLt2K+QIe8AG4ZVyDKSikK
+ 16VulwBkAIb4Zk0h/FuVzzlmJCgNowVuNYqA0KYBIbPk/dY6ZYma4ViydrI2NrnW7BES
+ bWv2dKXnBEQO3xLxQdTOlkjUfGx2wXAwpuYcUbBZMXotUQ5rh57lxvGc1wlGKsxcYRPh
+ WB7w==
+X-Gm-Message-State: AOJu0Yw2ZWWASIACKl29h1ZEXoesBqZp2a+hS/JtBRwVoTNenyxLGR+P
+ 2Nd/o6Jf5h7PFfDkJaslxMwwJJLuZhq1lAB6SU6UMckOkT929TaHwA2wXK9xw7Sb3GlsCpxluw2
+ wbM3se6ij+PAEJU3g2oR2I7hxFCquPS3FsTW6vN57vQ==
+X-Gm-Gg: ASbGncuigyREcN40Cc0gahNimV55B+xKD5O72iGZlNvv095Zz8VLr7G57WME9FxMYfj
+ zDtN47b3F1ZVy9MzjiBcQBuVid9TGjNwrqF1qabyoVUbanLwAp+nerPSgKKZTBtEnpBhQob/G7b
+ jCoJjL2XiHKVjBrHkMxukDhOOuMehs6E0YLxHimzJy6JAJvy4OZYJg/V+FzSxJvlweuvIiMHiH3
+ zTNxKcRN+JIfkjKcT6XUiJG6akCeg+X7gD+OILArrpzGnE=
+X-Google-Smtp-Source: AGHT+IFp6q+V8Pcm3J3VMYhv9nAQdnUhepJ+fuSdPqop+YjOp6iojXXGXvbcYnULnTadlFHHwuqkLLK8vQpTZZC5wog=
+X-Received: by 2002:a17:903:4b46:b0:268:5892:6a2e with SMTP id
+ d9443c01a7336-28e9a663317mr61873645ad.56.1759543585770; Fri, 03 Oct 2025
+ 19:06:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251003192222.767882-1-raymond.mao@linaro.org>
- <20251003201331.GS6093@bill-the-cat>
-In-Reply-To: <20251003201331.GS6093@bill-the-cat>
+ <20251003192222.767882-2-raymond.mao@linaro.org>
+ <20251003201718.GT6093@bill-the-cat>
+In-Reply-To: <20251003201718.GT6093@bill-the-cat>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Fri, 3 Oct 2025 22:04:14 -0400
-X-Gm-Features: AS18NWC2x_zw6rUbW2B9_dilnn4x4uLt8WrBW_HEhszcQ-cXOMuqqzYFUthaZLE
-Message-ID: <CAEfUkUJa=eTq4MkjosnN1SxA2Aq3ySTZrSiHj3474otN8VLjfw@mail.gmail.com>
-Subject: Re: [PATCH v2 0/5] Enable Firmware Handoff CI test on qemu_arm64
+Date: Fri, 3 Oct 2025 22:06:13 -0400
+X-Gm-Features: AS18NWA7RTrB6-k2jPPI37HdxizWjgUBiCT0QyLP8lvg1K6f3Rt2E2MfL7q4274
+Message-ID: <CAEfUkU+Z1dUc9mfEO8sSW4tZ40opX8n8T8cqGpo4DkDZ+SGX4A@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] docker: add OP-TEE and TF-A build for testing
+ Firmware Handoff
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
  Simon Glass <sjg@chromium.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -99,43 +101,146 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Fri, 3 Oct 2025 at 16:13, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 3 Oct 2025 at 16:17, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Oct 03, 2025 at 12:22:14PM -0700, Raymond Mao wrote:
+> On Fri, Oct 03, 2025 at 12:22:15PM -0700, Raymond Mao wrote:
 >
-> > This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
-> > 1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
-> > 2. build bl1 and fip with both Firmware Handoff and Measured Boot
-> >    enabled;
-> > 3. pytest to validate the Firmware Handoff feature via bloblist by
-> >    checking the existence of expected FDT nodes and TPM events generated
-> >    and handed over from TF-A/OP-TEE.
+> > Fetch OP-TEE (4.7.0), TF-A (v2.13.0), MbedTLS (v3.6) and build
+> > bl1 and fip with both Firmware Handoff and Measured Boot enabled.
 > >
-> > Pre-requisite u-boot-test-hooks patches [2] are required.
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in V2:
+> > - Move OP-TEE dependencies into the common group.
+> > - Fetch MbedTLS/TF-A and build bl1/fip in dockerfile instead of
+> >   post-buildman script.
+> > - Remove Trust Boot related build options.
 > >
-> > [1] https://github.com/FirmwareHandoff/firmware_handoff
-> > [2] https://lore.kernel.org/u-boot/20251003191918.767698-1-raymond.mao@linaro.org/T/#t
+> >  tools/docker/Dockerfile | 74 +++++++++++++++++++++++++++++++++++++++--
+> >  1 file changed, 71 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> > index 5b4c75f8400..0a213a7a61e 100644
+> > --- a/tools/docker/Dockerfile
+> > +++ b/tools/docker/Dockerfile
+> > @@ -58,6 +58,9 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
+> >  RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+> >      --mount=type=cache,target=/var/lib/apt,sharing=locked \
+> >      apt-get update && apt-get install -y \
+> > +     adb \
+> > +     acpica-tools \
+> > +     autoconf \
+> >       automake \
+> >       autopoint \
+> >       bc \
+> > @@ -65,21 +68,26 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+> >       bison \
+> >       build-essential \
+> >       byacc \
+> > +     ccache \
+> >       cgpt \
+> >       clang-18 \
+> >       coreutils \
+> >       cpio \
+> > +     cscope \
+> >       curl \
+> >       device-tree-compiler \
+> >       dosfstools \
+> >       e2fsprogs \
+> > +     e2tools \
+> >       efitools \
+> >       erofs-utils \
+> >       exfatprogs \
+> >       expect \
+> >       fakeroot \
+> > +     fastboot \
+> >       fdisk \
+> >       flex \
+> > +     ftp-upload \
+> >       gawk \
+> >       gdisk \
+> >       gettext \
+> > @@ -92,11 +100,20 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+> >       imagemagick \
+> >       inetutils-telnet \
+> >       iputils-ping \
+> > +     libattr1-dev \
+> > +     libcap-ng-dev \
+> >       libconfuse-dev \
+> > +     libfdt-dev \
+> > +     libftdi-dev \
+> >       libgit2-dev \
+> >       libjson-glib-dev \
+> > +     libglib2.0-dev \
+> > +     libgmp3-dev \
+> >       libgnutls28-dev \
+> >       libgnutls30 \
+> > +     libhidapi-dev \
+> > +     libmpc-dev \
+> > +     libncurses5-dev \
+> >       libpixman-1-dev \
+> >       libpython3-dev \
+> >       libsdl1.2-dev \
+> > @@ -110,9 +127,11 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+> >       lz4 \
+> >       lzma-alone \
+> >       lzop \
+> > +     make \
+> >       mount \
+> >       mtd-utils \
+> >       mtools \
+> > +     netcat \
+> >       net-tools \
+> >       ninja-build \
+> >       openssl \
+> > @@ -122,12 +141,16 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+> >       python-is-python3 \
+> >       python2.7 \
+> >       python3 \
+> > +     python3-cryptography \
+> >       python3-dev \
+> >       python3-pip \
+> > +     python3-pyelftools \
+> > +     python3-serial \
+> >       python3-sphinx \
+> >       python3-tomli \
+> >       python3-venv \
+> >       rpm2cpio \
+> > +     rsync \
+> >       sbsigntool \
+> >       socat \
+> >       softhsm2 \
+> > @@ -136,13 +159,20 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+> >       sudo \
+> >       swig \
+> >       texinfo \
+> > +     unzip \
+> >       util-linux \
+> >       uuid-dev \
+> >       vboot-kernel-utils \
+> >       vboot-utils \
+> > +     wget \
+> > +     xdg-utils \
+> >       xilinx-bootgen \
+> > +     xsltproc \
+> > +     xterm \
+> >       xxd \
+> > -     zip
+> > +     xz-utils \
+> > +     zip \
+> > +     zlib1g-dev
 >
-> Generally, the changes look good, thanks! Specifically, did you trigger
-> a CI run where you pointed Azure at a fork of u-boot-test-hooks with
-> your changes? I'm a little concerned about the fiptool change and I
-> don't see a CI run where qemu_arm64_optee.. was triggered, only:
-> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=12044&view=results
-> where it's not. Thanks!
+> Are some of these deps perhaps optional? I would hope we could build
+> without cscope and xterm, to pick randomly from the top and bottom of
+> the list. I ask since everything we add here makes the container larger,
+> and it's already very big. I'm almost wondering if we should (follow-up,
+> later) add a step where we remove things that tools we built needed, but
+> U-Boot doesn't need for build/tests.
 >
 
-That PR is missing the last commit (adding the CI jobs) and still
-pointing to the original test hooks.
-I have tested with my local docker container (has a test.sh that
-simulates the one from azure.yml, and points to my test hooks working
-branch) and all works.
-But when I triggered it this afternoon at:
-https://github.com/u-boot/u-boot/pull/818, I did see the failures...
+Actually those deps are grep from OP-TEE official docs, but yes, I can
+find out the ones which are not really necessary and then remove them.
 
-Hmmm, I will compare the log with the one I got from the local docker
-container to find the cause.
-
-Regards,
 Raymond
 
 > --
