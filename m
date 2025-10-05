@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7FBACCA472
-	for <u-boot@archiver.kernel.org>; Sun,  5 Oct 2025 22:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E404CCA472
+	for <u-boot@archiver.kernel.org>; Sun,  5 Oct 2025 22:13:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1059983622;
-	Mon,  6 Oct 2025 00:12:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81658835FE;
+	Mon,  6 Oct 2025 00:13:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A9Ix6qrZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dUIo4t7S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C9A0809A5; Mon,  6 Oct 2025 00:12:56 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 7CD4F809A5; Mon,  6 Oct 2025 00:13:00 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDD968361E
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 00:12:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4073835FE
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 00:12:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-46e326e4e99so26907185e9.1
- for <u-boot@lists.denx.de>; Sun, 05 Oct 2025 15:12:51 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-46e2826d5c6so32956135e9.1
+ for <u-boot@lists.denx.de>; Sun, 05 Oct 2025 15:12:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759702370; x=1760307170; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1759702377; x=1760307177; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=8DG5EYFiMKpDtRLcUK+2GLILNxw4rFTyZt++G8mtVdw=;
- b=A9Ix6qrZZnrH1VsdtNY2u8V33GiWeDxD+6/1XlS8qe/T7/wufZ8A2QgTSGFygtflQP
- qw0e/2hFkq6kaUyQtZC+wmMq1RHqy4xdCc6NYlEhnKznSQB7TaCtSZAMz8zHd2Jf578g
- clHfS3wwA6+sexf9eDjNjVppH0XDFlM12UNeUbmnO2G9wsA5e8ABsWAX+xJtuKhpUl2H
- nsZcmYgaom8IyCTSELy7dE2eF2LioYv1OXWP9wyy227E9d/H1nH+WbKgTNt6QIP1VROK
- c2z+h0bsdytM5AlkZ73OralobCa/f2LDlrggRvzjx4X2jOW94KdsiE0NtgBTIAM64O9O
- nE5g==
+ :reply-to; bh=lBKnaWLcww54SJZBCMiHdOmu/0ByJroc9WjFUkDWveo=;
+ b=dUIo4t7SMk6cS2xpYtP8CXpn4gu0B9mvcHz3FC+fwiAXxjZ1enQ3jtDDF3NUL9TCFv
+ j4kWxD/DwfskxommiU+aXLq07uJ3PPjIwKAO20Itrjoy5XTLeWx8Lg/lPKS/q9hjzIHp
+ Ie+23Z1+jHsO6kiLGd3dxqDKCrq7L/McvaQL2aLrmacVu2qsK6v8lB/If6NeOmWlnDWd
+ CnkSvr3u6+2jc39EfibwyhMC/HhL9p+39gtxy+RmAWfxN+dzhluQOEI5QS18T7CVnhnY
+ 2ZbO4H3u2ruIyu8efY38vCLqwjPn3of/M1FkTfxdnN26PpU0QrHx+djUHWK/9QX1xj4e
+ MyDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759702370; x=1760307170;
+ d=1e100.net; s=20230601; t=1759702377; x=1760307177;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8DG5EYFiMKpDtRLcUK+2GLILNxw4rFTyZt++G8mtVdw=;
- b=jZjArRaaFOASWN9eOYxO4JNUspO075ZTkuDA7m6yeRLBWjlyJsa2732CMobeCz1b2N
- ddO2CNTpmeSoDE8O28JyyAKhzOmSlM2MC1ngj/1Ddo6yz2z9P7jej4GkzZvc5/AgGpVC
- XqyMHCOdoFcYZ+i5IoyQn40FR0Xi/7t0/J48zXzVa9Vr9N42aE+QDBRbFRe+wcEh8kAx
- XXptDG07FbVkWzieStRcepXeWMWbN0uOdv817W14rnXwV/qcZ2Ek/Ko2dJh4SfuySfSQ
- eF7eF8nQWfeCLxruAQVhY2A+DZbDLy1aQAhraRkvSVS+IKHhdFWUsyUOASuELIRaJ9lC
- Pq3A==
+ bh=lBKnaWLcww54SJZBCMiHdOmu/0ByJroc9WjFUkDWveo=;
+ b=cFYngwNi55NKgp/GLeEWaE6/B61LCcu3j+prLCKdHSJDzh+9V5AJzOKcYVcvj6GSVE
+ zhsEszhMEEu9UR8/Ftx8VXFE0bMkGd+jSoSGsNGCNvuYSps4UIrwKLGFel0lQA+lhGen
+ MlKwZyLMlV6lIrksKTOhz/nNGaXojR/3ySblaQBOQGTsmTDwzkD5THeX7S/RsBqB0Opf
+ exDy/hMRGgFpNDUCi7TMYTBRu5yhAlQzUMPe4e2ZZ1V1SPs2AoNz9CN0kIwpUUVQu2qN
+ ecS+hvzIGsvdMLHfpDGztQ7TG072AmGs2DydIYkk5Iaw18kqPdolhonHJFG+a2qccL9Q
+ DRdQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUQP/LmNBybihgspL4d54NhPicByLrlPhpeo3OVnBTF7kx0ySArh2WMVXymMl4aW150CTIy3jo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwL2PLWE3kSSsAJ1fXULnHUnkUnuO9f3VSiuAychp/Z+DcRwYh0
- DErrKPTqj/ipyOtYmyEg2TRhxutBxXkhaZJqSI7UaMwHKG2fSJ31REgL
-X-Gm-Gg: ASbGncsmWAtDDRVsMuSFbnafW4dRnTLHlMLXOCLUdHDL7y0PPGpBndNUjiYWI0ue2+B
- Ivf2O66Qcrredbgp9AxYp9QBxzjdpJjYU+X49zBeboDg7JKDLN8FllzKoQGN3Osz6tJ5M9wKCn5
- Td7fLtCt8brBjsbbI6G1tg3DFLakLZgcXZcPjYjdsKOInVRSRl7MjL41ZGCHKpquibx4gb3tI4r
- 5BeFOE7XnyAS/MmEogXvexywvyerD1eRzgD7r22RkoKdkvC/9PnvJnuKG3aeGsjmXH/K9FTW+3e
- qM9Qk5PJ0XJJBFGi79l9fEMGYi273nD7yLcq5WlDMPtaV3JL+zJGeensjbtWW9Gk0C9TIdiYnrn
- IwgwrrvZ/oCfsbN0kVKDtloP0wb6aYHMVPNlXj6WIlMQjZLFDeicHWg==
-X-Google-Smtp-Source: AGHT+IEuySqLoBSzNoBhkP5v1q/JjdwCBci6gRKJCSOPgfqZp8RtL4aN3O9Q7+61vh4LebZVLJub/Q==
-X-Received: by 2002:a05:600c:6092:b0:45c:b6d3:a11d with SMTP id
- 5b1f17b1804b1-46e70c48dc8mr74199315e9.1.1759702370272; 
- Sun, 05 Oct 2025 15:12:50 -0700 (PDT)
+ AJvYcCX7bGwzNGGjzxhYXnNBAf6sWRS0Pn+VkIJCWsPWTr9pnSYIuEL0SVDS0Kh5EJk91AmFTqf6ulU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz1gGEPfk/mtdqGsMqbfKlYPKACSezvMWVXLKOHM9P36i/hZXhe
+ 98pU1dCW1cMTIfCS494/kNWcVwG4hkzLN+Kc0dmsrHwiRPky7yPZPT4B
+X-Gm-Gg: ASbGncul0nWr2DAW3b2yIHJz/35EDp2FbQe93B8EGKDLYcusoC9bezpA15PO7Uox2UC
+ EqfIE1M7XQjpas8oLR7m3XcM2rTebY2tRvDTgGBqC64xHKon8svhTjvZWpDrE41VHv0YxCTA/vj
+ fhYum8Yv7KCs68Q323fReL3Z5uzImUd0dcH9j7blVypqNjoDzCkqYI0jocc4yQYXPqIyRdHoLDB
+ D36PsB7dJBmA//XUEJszF4+4y5pubCq2aHpu3jiJ/BeUcMtzLJa573gG4BYTBT/ubucppgbV3SH
+ QpdPtlaQLzlwOYqh+nSaPCie38TNz0ueaMkIb1ywXutAW2j6nxv4c6mD4YA/uCoOd7zzy0tO0IE
+ IUq1S1k+SKKEA9QuxPi0Jm5Ic6Q4OJy9Jds7/IgvT/bQav8CHWv9ur5n6y9WHLo0R
+X-Google-Smtp-Source: AGHT+IHvgH2XbojwCNQYOLJZAwPWrb5yT35XWUSfy4Yhlql+dJToRsC9Dfo44AlV9FFO5twzpQmGCw==
+X-Received: by 2002:a05:600c:1986:b0:46e:4287:a85e with SMTP id
+ 5b1f17b1804b1-46e71109f78mr59959975e9.13.1759702376895; 
+ Sun, 05 Oct 2025 15:12:56 -0700 (PDT)
 Received: from N580G.. ([2001:8a0:ca4a:300:ec0a:68da:a550:d9c8])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e72375b31sm137370095e9.20.2025.10.05.15.12.48
+ 5b1f17b1804b1-46e72375b31sm137370095e9.20.2025.10.05.15.12.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 05 Oct 2025 15:12:49 -0700 (PDT)
+ Sun, 05 Oct 2025 15:12:56 -0700 (PDT)
 From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
  Robert Nelson <robertcnelson@gmail.com>,
@@ -79,22 +79,22 @@ To: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
  Simon Glass <sjg@chromium.org>,
  "GitAuthor: Adriano Carvalho" <adrianocarvalho.pt@gmail.com>,
  Bryan Brattlof <bb@ti.com>, Andrew Davis <afd@ti.com>,
- Udit Kumar <u-kumar1@ti.com>, Peter Robinson <pbrobinson@gmail.com>,
- Dhruva Gole <d-gole@ti.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Udit Kumar <u-kumar1@ti.com>, Dhruva Gole <d-gole@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Minkyu Kang <mk7.kang@samsung.com>,
  Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
  Chintan Vankar <c-vankar@ti.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Wadim Egorov <w.egorov@phytec.de>, Vitor Soares <vitor.soares@toradex.com>,
- Garrett Giordano <ggiordano@phytec.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Vitor Soares <vitor.soares@toradex.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Garrett Giordano <ggiordano@phytec.com>,
  Parth Pancholi <parth.pancholi@toradex.com>, E Shattow <e@freeshell.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  u-boot@lists.denx.de (open list)
-Subject: [PATCH v2 4/7] doc: make pdfdocs: Ensure SVG files are converted to
- PDF before the compilation of *.tex files
-Date: Sun,  5 Oct 2025 23:10:11 +0100
-Message-ID: <20251005221057.255029-5-adrianocarvalho.pt@gmail.com>
+Subject: [PATCH v2 5/7] doc: make pdfdocs: Update kfigure sphinx extension to
+ support inkscape as well
+Date: Sun,  5 Oct 2025 23:10:12 +0100
+Message-ID: <20251005221057.255029-6-adrianocarvalho.pt@gmail.com>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
 References: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
@@ -116,692 +116,466 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SVG files are not handled directly in the *.tex files. This commit
-replaces all instances of ".. image::" with ".. kernel-figure::". With
-this, the kfigure sphinx extension (already present) ensures that SVG
-files are converted to PDF before the compilation of *.tex files.
+As it is right now, kfigure relies on ImageMagick's convert. It,
+however, fails to convert some SVG files (see below). With this change,
+inkscape support is added. If present, inkscape is preferred over
+ImageMagick's convert.
 
-If I don't do this, this is what I get with
+With this change kfigure.py is an exact copy of the Linux kernel's at
+v6.17. I reviewed all the changes and, it seems to me that, only one
+change may cause trouble: logging uses a slightly different approach
+(logger v. kernellog).
+
+inkscape is also added as a dependency. Dockerfile updated as well.
+
+Without this change, this is what I get with
 docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025:
 
-uboot@35c89b9ab70e:~/u-boot$ make pdfdocs
 [...]
-xelatex  'android.tex'
+convert: unrecognized color `context-stroke' @ warning/color.c/GetColorCompliance/1057.
+convert: non-conforming drawing primitive definition `stroke' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/develop/pics/spl_before_reloc.svg /home/uboot/u-boot/doc/output/latex/spl_before_reloc.pdf
+convert: unrecognized color `context-stroke' @ warning/color.c/GetColorCompliance/1057.
+convert: non-conforming drawing primitive definition `stroke' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/develop/pics/spl_after_reloc.svg /home/uboot/u-boot/doc/output/latex/spl_after_reloc.pdf
+convert: non-conforming drawing primitive definition `Liberation' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/board/ti/img/ospi_sysfw2.svg /home/uboot/u-boot/doc/output/latex/ospi_sysfw2.pdf
+convert: non-conforming drawing primitive definition `Liberation' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/board/ti/img/ospi_sysfw-am64.svg /home/uboot/u-boot/doc/output/latex/ospi_sysfw-am64.pdf
+convert: non-conforming drawing primitive definition `Liberation' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/board/ti/img/emmc_am65x_evm_boot0.svg /home/uboot/u-boot/doc/output/latex/emmc_am65x_evm_boot0.pdf
+convert: non-conforming drawing primitive definition `Liberation' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/board/ti/img/ospi_sysfw.svg /home/uboot/u-boot/doc/output/latex/ospi_sysfw.pdf
+convert: non-conforming drawing primitive definition `Liberation' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/board/ti/img/emmc_j7200_evm_boot01.svg /home/uboot/u-boot/doc/output/latex/emmc_j7200_evm_boot01.pdf
+convert: non-conforming drawing primitive definition `Liberation' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/board/ti/img/emmc_j7200_evm_udafs.svg /home/uboot/u-boot/doc/output/latex/emmc_j7200_evm_udafs.pdf
+convert: non-conforming drawing primitive definition `Liberation' @ error/draw.c/RenderMVGContent/4414.
+WARNING: Error #1 when calling: /usr/bin/convert /home/uboot/u-boot/doc/board/ti/img/ospi_sysfw3.svg /home/uboot/u-boot/doc/output/latex/ospi_sysfw3.pdf
 [...]
-Output written on android.pdf (28 pages).
-[...]
-xelatex  'api.tex'
-[...]
-Output written on api.pdf (431 pages).
-[...]
-xelatex  'arch.tex'
-[...]
-Output written on arch.pdf (62 pages).
-[...]
-xelatex  'board.tex'
-[...]
-
-[152]
-Chapter 14.
-
-! LaTeX Error: Cannot determine size of graphic in boot_diagram_am62.svg (no Bo
-undingBox).
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...
-
-l.11422 ...ncludegraphics{{boot_diagram_am62}.svg}
-
-?
-! Emergency stop.
- ...
-
-[...]
-
-Output written on board.pdf (156 pages).
-Transcript written on board.log.
-make[2]: *** [Makefile:29: board.pdf] Error 1
-make[1]: *** [doc/Makefile:95: pdfdocs] Error 2
+build finished with problems, 9 warnings (with warnings treated as errors).
+make[1]: *** [doc/Makefile:84: latexdocs] Error 1
 make: *** [Makefile:2687: pdfdocs] Error 2
+
+To get the above the following line in /etc/ImageMagick-6/policy.xml
+needs to be deleted or commented out:
+
+<policy domain="coder" rights="none" pattern="PDF" />
+
+Otherwise, we'll get:
+
+convert: attempt to perform an operation not allowed by the security policy `PDF' @ error/constitute.c/IsCoderAuthorized/426.
+
+inkscape has the added advantage of this not being necessary.
 
 NOTE: This won't completely fix the pdfdocs target. See next commit(s).
 
 Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
 ---
- doc/board/beagle/am62x_beagleplay.rst     |  8 ++++----
- doc/board/beagle/am67a_beagley_ai.rst     |  6 +++---
- doc/board/beagle/j721e_beagleboneai64.rst | 10 +++++-----
- doc/board/samsung/e850-96.rst             |  2 +-
- doc/board/ti/am62ax_sk.rst                |  6 +++---
- doc/board/ti/am62px_sk.rst                |  8 ++++----
- doc/board/ti/am62x_sk.rst                 |  8 ++++----
- doc/board/ti/am64x_evm.rst                |  8 ++++----
- doc/board/ti/am65x_evm.rst                | 12 ++++++------
- doc/board/ti/j7200_evm.rst                | 10 +++++-----
- doc/board/ti/j721e_evm.rst                | 10 +++++-----
- doc/board/ti/j721s2_evm.rst               |  6 +++---
- doc/board/ti/j722s_evm.rst                |  6 +++---
- doc/board/ti/j784s4_evm.rst               |  8 ++++----
- doc/board/ti/k3.rst                       |  8 ++++----
- doc/develop/memory.rst                    |  4 ++--
- doc/develop/trace.rst                     | 10 +++++-----
- tools/patman/patman.rst                   |  2 +-
- 18 files changed, 66 insertions(+), 66 deletions(-)
+ doc/build/documentation.rst |   2 +
+ doc/sphinx/kfigure.py       | 212 ++++++++++++++++++++++++++----------
+ tools/docker/Dockerfile     |   1 +
+ 3 files changed, 158 insertions(+), 57 deletions(-)
 
-diff --git a/doc/board/beagle/am62x_beagleplay.rst b/doc/board/beagle/am62x_beagleplay.rst
-index bc71aabaac3..8188f0b41c9 100644
---- a/doc/board/beagle/am62x_beagleplay.rst
-+++ b/doc/board/beagle/am62x_beagleplay.rst
-@@ -23,7 +23,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: ../ti/img/boot_diagram_am62.svg
-+.. kernel-figure:: ../ti/img/boot_diagram_am62.svg
-   :alt: Boot flow diagram
- 
- - On this platform, 'TI Foundational Security' (TIFS) functions as the
-@@ -85,12 +85,12 @@ Image formats
- 
- - tiboot3.bin
- 
--.. image:: ../ti/img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: ../ti/img/multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: ../ti/img/tifsstub_dm_tispl.bin.svg
-+.. kernel-figure:: ../ti/img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- Additional hardware for U-Boot development
-@@ -172,7 +172,7 @@ Area (UDA) hardware partition of the eMMC. These components can vary
- significantly in size. The choice of keeping tiboot3.bin in boot0 or
- boot1 partition depends on A/B update requirements.
- 
--.. image:: img/beagleplay_emmc.svg
-+.. kernel-figure:: img/beagleplay_emmc.svg
-   :alt: eMMC partitions and boot file organization for BeaglePlay
- 
- The following are the steps from Linux shell to program eMMC:
-diff --git a/doc/board/beagle/am67a_beagley_ai.rst b/doc/board/beagle/am67a_beagley_ai.rst
-index 3d2fc4a3195..7113029f0ff 100644
---- a/doc/board/beagle/am67a_beagley_ai.rst
-+++ b/doc/board/beagle/am67a_beagley_ai.rst
-@@ -23,7 +23,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: ../ti/img/boot_diagram_k3_current.svg
-+.. kernel-figure:: ../ti/img/boot_diagram_k3_current.svg
-   :alt: Boot flow diagram
- 
- - On this platform, 'TI Foundational Security' (TIFS) functions as the
-@@ -84,12 +84,12 @@ Image formats
- 
- - tiboot3.bin
- 
--.. image:: ../ti/img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: ../ti/img/multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: ../ti/img/tifsstub_dm_tispl.bin.svg
-+.. kernel-figure:: ../ti/img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- Additional hardware for U-Boot development
-diff --git a/doc/board/beagle/j721e_beagleboneai64.rst b/doc/board/beagle/j721e_beagleboneai64.rst
-index a57bc743569..94bcce75a42 100644
---- a/doc/board/beagle/j721e_beagleboneai64.rst
-+++ b/doc/board/beagle/j721e_beagleboneai64.rst
-@@ -26,7 +26,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: ../ti/img/boot_diagram_j721e.svg
-+.. kernel-figure:: ../ti/img/boot_diagram_j721e.svg
-   :alt: Boot flow diagram
- 
- - On this platform, DMSC runs 'TI Foundational Security' (TIFS) which
-@@ -92,17 +92,17 @@ Image formats
- 
- - tiboot3.bin
- 
--.. image:: ../ti/img/no_multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: ../ti/img/no_multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: ../ti/img/dm_tispl.bin.svg
-+.. kernel-figure:: ../ti/img/dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- - sysfw.itb
- 
--.. image:: ../ti/img/sysfw.itb.svg
-+.. kernel-figure:: ../ti/img/sysfw.itb.svg
-   :alt: sysfw.itb image format
- 
- Additional hardware for U-Boot development
-@@ -184,7 +184,7 @@ Area (UDA) hardware partition of the eMMC. These components can vary
- significantly in size. The choice of keeping tiboot3.bin in boot0 or
- boot1 partition depends on A/B update requirements.
- 
--.. image:: img/beagleplay_emmc.svg
-+.. kernel-figure:: img/beagleplay_emmc.svg
-   :alt: eMMC partitions and boot file organization for BeagleBone AI-64
- 
- The following are the steps from Linux shell to program eMMC:
-diff --git a/doc/board/samsung/e850-96.rst b/doc/board/samsung/e850-96.rst
-index b435fa8b353..8e47dcbf5b6 100644
---- a/doc/board/samsung/e850-96.rst
-+++ b/doc/board/samsung/e850-96.rst
-@@ -28,7 +28,7 @@ Boot Flow
- 
- The boot path for Exynos850 is shown on the figure below.
- 
--.. image:: img/exynos850-boot-architecture.svg
-+.. kernel-figure:: img/exynos850-boot-architecture.svg
-   :alt: Exynos850 SoC boot flow
- 
- Legend:
-diff --git a/doc/board/ti/am62ax_sk.rst b/doc/board/ti/am62ax_sk.rst
-index 4dd998bcce9..8a45453c1a8 100644
---- a/doc/board/ti/am62ax_sk.rst
-+++ b/doc/board/ti/am62ax_sk.rst
-@@ -47,7 +47,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_am62.svg
-+.. kernel-figure:: img/boot_diagram_am62.svg
-   :alt: Boot flow diagram
- 
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -138,12 +138,12 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/tifsstub_dm_tispl.bin.svg
-+.. kernel-figure:: img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- Switch Setting for Boot Mode
-diff --git a/doc/board/ti/am62px_sk.rst b/doc/board/ti/am62px_sk.rst
-index a07d6a4da45..dc54a47dbb4 100644
---- a/doc/board/ti/am62px_sk.rst
-+++ b/doc/board/ti/am62px_sk.rst
-@@ -55,7 +55,7 @@ Boot Flow:
- The bootflow is exactly the same as all SoCs in the am62xxx extended SoC
- family. Below is the pictorial representation:
- 
--.. image:: img/boot_diagram_am62.svg
-+.. kernel-figure:: img/boot_diagram_am62.svg
-   :alt: Boot flow diagram
- 
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -152,12 +152,12 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/tifsstub_dm_tispl.bin.svg
-+.. kernel-figure:: img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- OSPI:
-@@ -181,7 +181,7 @@ over tftp and then flash those to OSPI at their respective addresses.
- 
- Flash layout for OSPI:
- 
--.. image:: img/ospi_sysfw2.svg
-+.. kernel-figure:: img/ospi_sysfw2.svg
-   :alt: OSPI flash partition layout
- 
- A53 SPL DDR Memory Layout
-diff --git a/doc/board/ti/am62x_sk.rst b/doc/board/ti/am62x_sk.rst
-index dab2970a85c..4ca668dfeab 100644
---- a/doc/board/ti/am62x_sk.rst
-+++ b/doc/board/ti/am62x_sk.rst
-@@ -46,7 +46,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_am62.svg
-+.. kernel-figure:: img/boot_diagram_am62.svg
-   :alt: Boot flow diagram
- 
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -174,12 +174,12 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/tifsstub_dm_tispl.bin.svg
-+.. kernel-figure:: img/tifsstub_dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- OSPI:
-@@ -203,7 +203,7 @@ over tftp and then flash those to OSPI at their respective addresses.
- 
- Flash layout for OSPI:
- 
--.. image:: img/ospi_sysfw2.svg
-+.. kernel-figure:: img/ospi_sysfw2.svg
-   :alt: OSPI flash partition layout
- 
- A53 SPL DDR Memory Layout
-diff --git a/doc/board/ti/am64x_evm.rst b/doc/board/ti/am64x_evm.rst
-index 65c4c456528..015b8cfb299 100644
---- a/doc/board/ti/am64x_evm.rst
-+++ b/doc/board/ti/am64x_evm.rst
-@@ -35,7 +35,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_am64.svg
-+.. kernel-figure:: img/boot_diagram_am64.svg
-   :alt: Boot flow diagram
- 
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -136,12 +136,12 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/nodm_tispl.bin.svg
-+.. kernel-figure:: img/nodm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- OSPI:
-@@ -165,7 +165,7 @@ over tftp and then flash those to OSPI at their respective addresses.
- 
- Flash layout for OSPI:
- 
--.. image:: img/ospi_sysfw-am64.svg
-+.. kernel-figure:: img/ospi_sysfw-am64.svg
-   :alt: OSPI flash partition layout
- 
- Switch Setting for Boot Mode
-diff --git a/doc/board/ti/am65x_evm.rst b/doc/board/ti/am65x_evm.rst
-index 60b08ceebf0..7be4c6eaf44 100644
---- a/doc/board/ti/am65x_evm.rst
-+++ b/doc/board/ti/am65x_evm.rst
-@@ -45,7 +45,7 @@ applications. This should happen before running Linux.
- 3. In production boot flow, we might not like to use full U-Boot,
- instead use Falcon boot flow to reduce boot time.
- 
--.. image:: img/boot_diagram_am65.svg
-+.. kernel-figure:: img/boot_diagram_am65.svg
-   :alt: Boot flow diagram
- 
- - Here DMSC acts as master and provides all the critical services. R5/A53
-@@ -141,17 +141,17 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/no_multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/no_multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/nodm_tispl.bin.svg
-+.. kernel-figure:: img/nodm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- - sysfw.itb
- 
--.. image:: img/sysfw.itb.svg
-+.. kernel-figure:: img/sysfw.itb.svg
-   :alt: sysfw.itb image format
- 
- eMMC:
-@@ -193,7 +193,7 @@ used:
- 
- eMMC layout:
- 
--.. image:: img/emmc_am65x_evm_boot0.svg
-+.. kernel-figure:: img/emmc_am65x_evm_boot0.svg
-   :alt: emmc boot partition layout
- 
- Kernel image and DT are expected to be present in the /boot folder of rootfs.
-@@ -229,7 +229,7 @@ addresses.
- 
- Flash layout for OSPI:
- 
--.. image:: img/ospi_sysfw.svg
-+.. kernel-figure:: img/ospi_sysfw.svg
-   :alt: OSPI flash partition layout
- 
- Kernel Image and DT are expected to be present in the /boot folder of UBIFS
-diff --git a/doc/board/ti/j7200_evm.rst b/doc/board/ti/j7200_evm.rst
-index 4fd2aff8354..b6e285ec621 100644
---- a/doc/board/ti/j7200_evm.rst
-+++ b/doc/board/ti/j7200_evm.rst
-@@ -34,7 +34,7 @@ Boot Flow:
- ----------
- Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_k3_current.svg
-+.. kernel-figure:: img/boot_diagram_k3_current.svg
-   :alt: Boot flow diagram
- 
- - Here DMSC acts as master and provides all the critical services. R5/A72
-@@ -135,12 +135,12 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/j7200_tiboot3.bin.svg
-+.. kernel-figure:: img/j7200_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. kernel-figure:: img/dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- Switch Setting for Boot Mode
-@@ -196,7 +196,7 @@ Current allocated size for tiboot3 size is 1MB, tispl is 2MB.
- Size of u-boot.img is taken 4MB for refernece,
- But this is subject to change depending upon atf, optee size
- 
--.. image:: img/emmc_j7200_evm_boot01.svg
-+.. kernel-figure:: img/emmc_j7200_evm_boot01.svg
-   :alt: Traditional eMMC boot partition layout
- 
- In case of UDA FS mode booting, following is layout.
-@@ -204,7 +204,7 @@ In case of UDA FS mode booting, following is layout.
- All boot images tiboot3.bin, tispl and u-boot should be written to
- fat formatted UDA FS as file.
- 
--.. image:: img/emmc_j7200_evm_udafs.svg
-+.. kernel-figure:: img/emmc_j7200_evm_udafs.svg
-   :alt: eMMC UDA boot partition layout
- 
- In case of booting from eMMC, write above images into raw or UDA FS.
-diff --git a/doc/board/ti/j721e_evm.rst b/doc/board/ti/j721e_evm.rst
-index 41c8d4c72a8..75994de8b60 100644
---- a/doc/board/ti/j721e_evm.rst
-+++ b/doc/board/ti/j721e_evm.rst
-@@ -39,7 +39,7 @@ Boot Flow:
- Boot flow is similar to that of AM65x SoC and extending it with remoteproc
- support. Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_j721e.svg
-+.. kernel-figure:: img/boot_diagram_j721e.svg
-   :alt: Boot flow diagram
- 
- - Here DMSC acts as master and provides all the critical services. R5/A72
-@@ -141,17 +141,17 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/no_multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/no_multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. kernel-figure:: img/dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- - sysfw.itb
- 
--.. image:: img/sysfw.itb.svg
-+.. kernel-figure:: img/sysfw.itb.svg
-   :alt: sysfw.itb image format
- 
- OSPI:
-@@ -178,7 +178,7 @@ addresses.
- 
- Flash layout for OSPI:
- 
--.. image:: img/ospi_sysfw.svg
-+.. kernel-figure:: img/ospi_sysfw.svg
-   :alt: OSPI flash partition layout
- 
- R5 Memory Map:
-diff --git a/doc/board/ti/j721s2_evm.rst b/doc/board/ti/j721s2_evm.rst
-index 21683b90b1a..1257c5a3ae9 100644
---- a/doc/board/ti/j721s2_evm.rst
-+++ b/doc/board/ti/j721s2_evm.rst
-@@ -42,7 +42,7 @@ Boot Flow:
- 
- Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_k3_current.svg
-+.. kernel-figure:: img/boot_diagram_k3_current.svg
- 
- - On this platform, "TI Foundational Security" (TIFS) functions as the
-   security enclave master while "Device Manager" (DM), also known as the
-@@ -152,11 +152,11 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/multi_cert_tiboot3.bin.svg
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. kernel-figure:: img/dm_tispl.bin.svg
- 
- R5 Memory Map:
- --------------
-diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
-index 9c53fa50858..ec3254d9ae7 100644
---- a/doc/board/ti/j722s_evm.rst
-+++ b/doc/board/ti/j722s_evm.rst
-@@ -32,7 +32,7 @@ Boot Flow:
- The bootflow is exactly the same as all SoCs in the am62xxx extended SoC
- family. Below is the pictorial representation:
- 
--.. image:: img/boot_diagram_k3_current.svg
-+.. kernel-figure:: img/boot_diagram_k3_current.svg
-   :alt: Boot flow diagram
- 
- - Here TIFS acts as master and provides all the critical services. R5/A53
-@@ -126,12 +126,12 @@ Image formats:
- 
- - tiboot3.bin
- 
--.. image:: img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/multi_cert_tiboot3.bin.svg
-   :alt: tiboot3.bin image format
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. kernel-figure:: img/dm_tispl.bin.svg
-   :alt: tispl.bin image format
- 
- A53 SPL DDR Memory Layout
-diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
-index 22442874110..a6bb11b9a91 100644
---- a/doc/board/ti/j784s4_evm.rst
-+++ b/doc/board/ti/j784s4_evm.rst
-@@ -41,7 +41,7 @@ Boot Flow
- ---------
- Below is the pictorial representation of boot flow:
- 
--.. image:: img/boot_diagram_k3_current.svg
-+.. kernel-figure:: img/boot_diagram_k3_current.svg
-     :alt: K3 boot flow
- 
- - On this platform, "TI Foundational Security" (TIFS) functions as the
-@@ -158,12 +158,12 @@ Image formats
- 
- - tiboot3.bin
- 
--.. image:: img/multi_cert_tiboot3.bin.svg
-+.. kernel-figure:: img/multi_cert_tiboot3.bin.svg
-     :alt: tiboot3.bin format
- 
- - tispl.bin
- 
--.. image:: img/dm_tispl.bin.svg
-+.. kernel-figure:: img/dm_tispl.bin.svg
-     :alt: tispl.bin format
- 
- OSPI:
-@@ -188,7 +188,7 @@ addresses.
- 
- Flash layout for OSPI NOR:
- 
--.. image:: img/ospi_sysfw3.svg
-+.. kernel-figure:: img/ospi_sysfw3.svg
-   :alt: OSPI NOR flash partition layout
- 
- R5 Memory Map
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index 01fb9411688..0b9a91bf6fa 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -61,7 +61,7 @@ boot media needed to load the binaries packaged inside `tiboot3.bin`,
- including a 32bit U-Boot SPL, (called the wakeup SPL) that ROM will jump
- to after it has finished loading everything into internal SRAM.
- 
--.. image:: img/boot_flow_01.svg
-+.. kernel-figure:: img/boot_flow_01.svg
-   :alt: Boot flow up to wakeup domain SPL
- 
- The wakeup SPL, running on a wakeup domain core, will initialize DDR and
-@@ -71,7 +71,7 @@ application cores inside the main domain to initialize the main domain,
- starting with Trusted Firmware-A (TF-A), before moving on to start
- OP-TEE and the main domain's U-Boot SPL.
- 
--.. image:: img/boot_flow_02.svg
-+.. kernel-figure:: img/boot_flow_02.svg
-   :alt: Boot flow up to main domain SPL
- 
- The main domain's SPL, running on a 64bit application core, has
-@@ -80,7 +80,7 @@ initialize even more peripherals needed to load in the `u-boot.img`
- which loads more firmware into the micro-controller & wakeup domains and
- finally prepare the main domain to run Linux.
- 
--.. image:: img/boot_flow_03.svg
-+.. kernel-figure:: img/boot_flow_03.svg
-   :alt: Complete boot flow up to Linux
- 
- This is the typical boot flow for all K3 based SoCs, however this flow
-@@ -691,7 +691,7 @@ generation device.
- 
- The overall structure of this setup is in the following figure.
- 
--.. image:: img/openocd-overview.svg
-+.. kernel-figure:: img/openocd-overview.svg
-   :alt: Overview of OpenOCD setup.
- 
- .. note::
-diff --git a/doc/develop/memory.rst b/doc/develop/memory.rst
-index 5177229630d..d7f842f3367 100644
---- a/doc/develop/memory.rst
-+++ b/doc/develop/memory.rst
-@@ -69,7 +69,7 @@ SPL Flow
-       Prior to setting up of the DRAM, the stack, malloc is defined as below
-       possibly sitting on a smaller readily available memory (SRAM etc.):
- 
--      .. image:: pics/spl_before_reloc.svg
-+      .. kernel-figure:: pics/spl_before_reloc.svg
-          :alt: contents of ready RAM before relocation in SPL
- 
-       Please see CONFIG_SPL_EARLY_BSS if BSS initialization is needed prior
-@@ -95,7 +95,7 @@ SPL Flow
- 
-       The final environment is setup and the system RAM now looks like this:
- 
--      .. image:: pics/spl_after_reloc.svg
-+      .. kernel-figure:: pics/spl_after_reloc.svg
-          :alt: contents of DRAM after relocation in SPL
- 
-       Again stack and gd are an optional move and may still remain in the
-diff --git a/doc/develop/trace.rst b/doc/develop/trace.rst
-index d3c8628d124..417f138fea2 100644
---- a/doc/develop/trace.rst
-+++ b/doc/develop/trace.rst
-@@ -111,7 +111,7 @@ Finally run kernelshark to display it (note it only works with `.dat` files!):
- Using this tool you can view the trace records and see the timestamp for each
- function.
- 
--.. image:: pics/kernelshark.png
-+.. kernel-figure:: pics/kernelshark.png
-   :width: 800
-   :alt: Kernelshark showing function-trace records
- 
-@@ -144,7 +144,7 @@ There is a -f option available to select a function graph:
- Again, you can use kernelshark or trace-cmd to look at the output. In this case
- you will see the time taken by each function shown against its exit record.
- 
--.. image:: pics/kernelshark_fg.png
-+.. kernel-figure:: pics/kernelshark_fg.png
-   :width: 800
-   :alt: Kernelshark showing function-graph records
- 
-@@ -188,11 +188,11 @@ command:
- You can load the .svg file into a viewer. If you use Chrome (and some other
- programs) you can click around and zoom in and out.
- 
--.. image:: pics/flamegraph.png
-+.. kernel-figure:: pics/flamegraph.png
-   :width: 800
-   :alt: Chrome showing the flamegraph.pl output
- 
--.. image:: pics/flamegraph_zoom.png
-+.. kernel-figure:: pics/flamegraph_zoom.png
-   :width: 800
-   :alt: Chrome showing zooming into the flamegraph.pl output
- 
-@@ -209,7 +209,7 @@ Note that trace collection does slow down execution so the timings will be
- inflated. They should be used to guide optimisation. For accurate boot timings,
- use bootstage.
- 
--.. image:: pics/flamegraph_timing.png
-+.. kernel-figure:: pics/flamegraph_timing.png
-   :width: 800
-   :alt: Chrome showing flamegraph.pl output with timing
- 
-diff --git a/tools/patman/patman.rst b/tools/patman/patman.rst
-index 549e203c254..44a97ac11a6 100644
---- a/tools/patman/patman.rst
-+++ b/tools/patman/patman.rst
-@@ -932,7 +932,7 @@ be sure to check out the help.
- 
- Here is a sample 'progress' view:
- 
--.. image:: pics/patman.jpg
-+.. kernel-figure:: pics/patman.jpg
-   :width: 800
-   :alt: Patman showing the progress view
- 
+diff --git a/doc/build/documentation.rst b/doc/build/documentation.rst
+index 483bdc42227..1342c71addd 100644
+--- a/doc/build/documentation.rst
++++ b/doc/build/documentation.rst
+@@ -18,6 +18,8 @@ the following dependencies are needed to build the documentation:
+ 
+ * texlive-xetex (if building the `PDF documentation`_ through the *pdfdocs* target)
+ 
++* inkscape (if building the `PDF documentation`_ through the *pdfdocs* target)
++
+ When submitting patches for documentation always build with KDOC_WERROR=1 to
+ treat warnings as errors.
+ 
+diff --git a/doc/sphinx/kfigure.py b/doc/sphinx/kfigure.py
+index dea7f91ef5a..ad495c0da27 100644
+--- a/doc/sphinx/kfigure.py
++++ b/doc/sphinx/kfigure.py
+@@ -1,6 +1,7 @@
+ # -*- coding: utf-8; mode: python -*-
++# SPDX-License-Identifier: GPL-2.0
+ # pylint: disable=C0103, R0903, R0912, R0915
+-u"""
++"""
+     scalable figure and image handling
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+@@ -31,10 +32,13 @@ u"""
+ 
+     * ``dot(1)``: Graphviz (https://www.graphviz.org). If Graphviz is not
+       available, the DOT language is inserted as literal-block.
++      For conversion to PDF, ``rsvg-convert(1)`` of librsvg
++      (https://gitlab.gnome.org/GNOME/librsvg) is used when available.
+ 
+     * SVG to PDF: To generate PDF, you need at least one of this tools:
+ 
+       - ``convert(1)``: ImageMagick (https://www.imagemagick.org)
++      - ``inkscape(1)``: Inkscape (https://inkscape.org/)
+ 
+     List of customizations:
+ 
+@@ -49,36 +53,21 @@ import os
+ from os import path
+ import subprocess
+ from hashlib import sha1
+-import sys
+-
++import re
+ from docutils import nodes
+ from docutils.statemachine import ViewList
+ from docutils.parsers.rst import directives
+ from docutils.parsers.rst.directives import images
+ import sphinx
+-
+ from sphinx.util.nodes import clean_astext
+-from six import iteritems
+-
+-import kernellog
+-
+-PY3 = sys.version_info[0] == 3
++from sphinx.util import logging
+ 
+-if PY3:
+-    _unicode = str
+-else:
+-    _unicode = unicode
+-
+-# Get Sphinx version
+-major, minor, patch = sphinx.version_info[:3]
+-if major == 1 and minor > 3:
+-    # patches.Figure only landed in Sphinx 1.4
+-    from sphinx.directives.patches import Figure  # pylint: disable=C0413
+-else:
+-    Figure = images.Figure
++Figure = images.Figure
+ 
+ __version__  = '1.0.0'
+ 
++logger = logging.getLogger('kfigure')
++
+ # simple helper
+ # -------------
+ 
+@@ -121,10 +110,20 @@ def pass_handle(self, node):           # pylint: disable=W0613
+ 
+ # Graphviz's dot(1) support
+ dot_cmd = None
++# dot(1) -Tpdf should be used
++dot_Tpdf = False
+ 
+ # ImageMagick' convert(1) support
+ convert_cmd = None
+ 
++# librsvg's rsvg-convert(1) support
++rsvg_convert_cmd = None
++
++# Inkscape's inkscape(1) support
++inkscape_cmd = None
++# Inkscape prior to 1.0 uses different command options
++inkscape_ver_one = False
++
+ 
+ def setup(app):
+     # check toolchain first
+@@ -167,28 +166,69 @@ def setup(app):
+ 
+ 
+ def setupTools(app):
+-    u"""
++    """
+     Check available build tools and log some *verbose* messages.
+ 
+     This function is called once, when the builder is initiated.
+     """
+-    global dot_cmd, convert_cmd   # pylint: disable=W0603
+-    kernellog.verbose(app, "kfigure: check installed tools ...")
++    global dot_cmd, dot_Tpdf, convert_cmd, rsvg_convert_cmd   # pylint: disable=W0603
++    global inkscape_cmd, inkscape_ver_one  # pylint: disable=W0603
++    logger.verbose("kfigure: check installed tools ...")
+ 
+     dot_cmd = which('dot')
+     convert_cmd = which('convert')
++    rsvg_convert_cmd = which('rsvg-convert')
++    inkscape_cmd = which('inkscape')
+ 
+     if dot_cmd:
+-        kernellog.verbose(app, "use dot(1) from: " + dot_cmd)
++        logger.verbose("use dot(1) from: " + dot_cmd)
++
++        try:
++            dot_Thelp_list = subprocess.check_output([dot_cmd, '-Thelp'],
++                                    stderr=subprocess.STDOUT)
++        except subprocess.CalledProcessError as err:
++            dot_Thelp_list = err.output
++            pass
++
++        dot_Tpdf_ptn = b'pdf'
++        dot_Tpdf = re.search(dot_Tpdf_ptn, dot_Thelp_list)
+     else:
+-        kernellog.warn(app, "dot(1) not found, for better output quality install "
+-                       "graphviz from https://www.graphviz.org")
+-    if convert_cmd:
+-        kernellog.verbose(app, "use convert(1) from: " + convert_cmd)
++        logger.warning(
++            "dot(1) not found, for better output quality install graphviz from https://www.graphviz.org"
++        )
++    if inkscape_cmd:
++        logger.verbose("use inkscape(1) from: " + inkscape_cmd)
++        inkscape_ver = subprocess.check_output([inkscape_cmd, '--version'],
++                                               stderr=subprocess.DEVNULL)
++        ver_one_ptn = b'Inkscape 1'
++        inkscape_ver_one = re.search(ver_one_ptn, inkscape_ver)
++        convert_cmd = None
++        rsvg_convert_cmd = None
++        dot_Tpdf = False
++
+     else:
+-        kernellog.warn(app,
+-            "convert(1) not found, for SVG to PDF conversion install "
+-            "ImageMagick (https://www.imagemagick.org)")
++        if convert_cmd:
++            logger.verbose("use convert(1) from: " + convert_cmd)
++        else:
++            logger.verbose(
++                "Neither inkscape(1) nor convert(1) found.\n"
++                "For SVG to PDF conversion, install either Inkscape (https://inkscape.org/) (preferred) or\n"
++                "ImageMagick (https://www.imagemagick.org)"
++            )
++
++        if rsvg_convert_cmd:
++            logger.verbose("use rsvg-convert(1) from: " + rsvg_convert_cmd)
++            logger.verbose("use 'dot -Tsvg' and rsvg-convert(1) for DOT -> PDF conversion")
++            dot_Tpdf = False
++        else:
++            logger.verbose(
++                "rsvg-convert(1) not found.\n"
++                "  SVG rendering of convert(1) is done by ImageMagick-native renderer."
++            )
++            if dot_Tpdf:
++                logger.verbose("use 'dot -Tpdf' for DOT -> PDF conversion")
++            else:
++                logger.verbose("use 'dot -Tsvg' and convert(1) for DOT -> PDF conversion")
+ 
+ 
+ # integrate conversion tools
+@@ -222,13 +262,12 @@ def convert_image(img_node, translator, src_fname=None):
+ 
+     # in kernel builds, use 'make SPHINXOPTS=-v' to see verbose messages
+ 
+-    kernellog.verbose(app, 'assert best format for: ' + img_node['uri'])
++    logger.verbose('assert best format for: ' + img_node['uri'])
+ 
+     if in_ext == '.dot':
+ 
+         if not dot_cmd:
+-            kernellog.verbose(app,
+-                              "dot from graphviz not available / include DOT raw.")
++            logger.verbose("dot from graphviz not available / include DOT raw.")
+             img_node.replace_self(file2literal(src_fname))
+ 
+         elif translator.builder.format == 'latex':
+@@ -254,9 +293,12 @@ def convert_image(img_node, translator, src_fname=None):
+     elif in_ext == '.svg':
+ 
+         if translator.builder.format == 'latex':
+-            if convert_cmd is None:
+-                kernellog.verbose(app,
+-                                  "no SVG to PDF conversion available / include SVG raw.")
++            if not inkscape_cmd and convert_cmd is None:
++                logger.warning(
++                    "no SVG to PDF conversion available / include SVG raw.\n"
++                    "Including large raw SVGs can cause xelatex error.\n"
++                    "Install Inkscape (preferred) or ImageMagick."
++                )
+                 img_node.replace_self(file2literal(src_fname))
+             else:
+                 dst_fname = path.join(translator.builder.outdir, fname + '.pdf')
+@@ -269,19 +311,25 @@ def convert_image(img_node, translator, src_fname=None):
+         _name = dst_fname[len(str(translator.builder.outdir)) + 1:]
+ 
+         if isNewer(dst_fname, src_fname):
+-            kernellog.verbose(app,
+-                              "convert: {out}/%s already exists and is newer" % _name)
++            logger.verbose("convert: {out}/%s already exists and is newer" % _name)
+ 
+         else:
+             ok = False
+             mkdir(path.dirname(dst_fname))
+ 
+             if in_ext == '.dot':
+-                kernellog.verbose(app, 'convert DOT to: {out}/' + _name)
+-                ok = dot2format(app, src_fname, dst_fname)
++                logger.verbose('convert DOT to: {out}/' + _name)
++                if translator.builder.format == 'latex' and not dot_Tpdf:
++                    svg_fname = path.join(translator.builder.outdir, fname + '.svg')
++                    ok1 = dot2format(app, src_fname, svg_fname)
++                    ok2 = svg2pdf_by_rsvg(app, svg_fname, dst_fname)
++                    ok = ok1 and ok2
++
++                else:
++                    ok = dot2format(app, src_fname, dst_fname)
+ 
+             elif in_ext == '.svg':
+-                kernellog.verbose(app, 'convert SVG to: {out}/' + _name)
++                logger.verbose('convert SVG to: {out}/' + _name)
+                 ok = svg2pdf(app, src_fname, dst_fname)
+ 
+             if not ok:
+@@ -310,27 +358,77 @@ def dot2format(app, dot_fname, out_fname):
+     with open(out_fname, "w") as out:
+         exit_code = subprocess.call(cmd, stdout = out)
+         if exit_code != 0:
+-            kernellog.warn(app,
++            logger.warning(
+                           "Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
+     return bool(exit_code == 0)
+ 
+ def svg2pdf(app, svg_fname, pdf_fname):
+-    """Converts SVG to PDF with ``convert(1)`` command.
++    """Converts SVG to PDF with ``inkscape(1)`` or ``convert(1)`` command.
+ 
+-    Uses ``convert(1)`` from ImageMagick (https://www.imagemagick.org) for
+-    conversion.  Returns ``True`` on success and ``False`` if an error occurred.
++    Uses ``inkscape(1)`` from Inkscape (https://inkscape.org/) or ``convert(1)``
++    from ImageMagick (https://www.imagemagick.org) for conversion.
++    Returns ``True`` on success and ``False`` if an error occurred.
+ 
+     * ``svg_fname`` pathname of the input SVG file with extension (``.svg``)
+     * ``pdf_name``  pathname of the output PDF file with extension (``.pdf``)
+ 
+     """
+     cmd = [convert_cmd, svg_fname, pdf_fname]
+-    # use stdout and stderr from parent
+-    exit_code = subprocess.call(cmd)
++    cmd_name = 'convert(1)'
++
++    if inkscape_cmd:
++        cmd_name = 'inkscape(1)'
++        if inkscape_ver_one:
++            cmd = [inkscape_cmd, '-o', pdf_fname, svg_fname]
++        else:
++            cmd = [inkscape_cmd, '-z', '--export-pdf=%s' % pdf_fname, svg_fname]
++
++    try:
++        warning_msg = subprocess.check_output(cmd, stderr=subprocess.STDOUT)
++        exit_code = 0
++    except subprocess.CalledProcessError as err:
++        warning_msg = err.output
++        exit_code = err.returncode
++        pass
++
+     if exit_code != 0:
+-        kernellog.warn(app, "Error #%d when calling: %s" % (exit_code, " ".join(cmd)))
++        logger.warning("Error #%d when calling: %s" %
++                            (exit_code, " ".join(cmd)))
++        if warning_msg:
++            logger.warning( "Warning msg from %s: %s" %
++                                (cmd_name, str(warning_msg, 'utf-8')))
++    elif warning_msg:
++        logger.verbose("Warning msg from %s (likely harmless):\n%s" %
++                            (cmd_name, str(warning_msg, 'utf-8')))
++
+     return bool(exit_code == 0)
+ 
++def svg2pdf_by_rsvg(app, svg_fname, pdf_fname):
++    """Convert SVG to PDF with ``rsvg-convert(1)`` command.
++
++    * ``svg_fname`` pathname of input SVG file, including extension ``.svg``
++    * ``pdf_fname`` pathname of output PDF file, including extension ``.pdf``
++
++    Input SVG file should be the one generated by ``dot2format()``.
++    SVG -> PDF conversion is done by ``rsvg-convert(1)``.
++
++    If ``rsvg-convert(1)`` is unavailable, fall back to ``svg2pdf()``.
++
++    """
++
++    if rsvg_convert_cmd is None:
++        ok = svg2pdf(app, svg_fname, pdf_fname)
++    else:
++        cmd = [rsvg_convert_cmd, '--format=pdf', '-o', pdf_fname, svg_fname]
++        # use stdout and stderr from parent
++        exit_code = subprocess.call(cmd)
++        if exit_code != 0:
++            logger.warning("Error #%d when calling: %s" %
++                                (exit_code, " ".join(cmd)))
++        ok = bool(exit_code == 0)
++
++    return ok
++
+ 
+ # image handling
+ # ---------------------
+@@ -348,7 +446,7 @@ class kernel_image(nodes.image):
+     pass
+ 
+ class KernelImage(images.Image):
+-    u"""KernelImage directive
++    """KernelImage directive
+ 
+     Earns everything from ``.. image::`` directive, except *remote URI* and
+     *glob* pattern. The KernelImage wraps a image node into a
+@@ -384,7 +482,7 @@ class kernel_figure(nodes.figure):
+     """Node for ``kernel-figure`` directive."""
+ 
+ class KernelFigure(Figure):
+-    u"""KernelImage directive
++    """KernelImage directive
+ 
+     Earns everything from ``.. figure::`` directive, except *remote URI* and
+     *glob* pattern.  The KernelFigure wraps a figure node into a kernel_figure
+@@ -421,15 +519,15 @@ def visit_kernel_render(self, node):
+     app = self.builder.app
+     srclang = node.get('srclang')
+ 
+-    kernellog.verbose(app, 'visit kernel-render node lang: "%s"' % (srclang))
++    logger.verbose('visit kernel-render node lang: "%s"' % srclang)
+ 
+     tmp_ext = RENDER_MARKUP_EXT.get(srclang, None)
+     if tmp_ext is None:
+-        kernellog.warn(app, 'kernel-render: "%s" unknown / include raw.' % (srclang))
++        logger.warning( 'kernel-render: "%s" unknown / include raw.' % srclang)
+         return
+ 
+     if not dot_cmd and tmp_ext == '.dot':
+-        kernellog.verbose(app, "dot from graphviz not available / include raw.")
++        logger.verbose("dot from graphviz not available / include raw.")
+         return
+ 
+     literal_block = node[0]
+@@ -460,7 +558,7 @@ class kernel_render(nodes.General, nodes.Inline, nodes.Element):
+     pass
+ 
+ class KernelRender(Figure):
+-    u"""KernelRender directive
++    """KernelRender directive
+ 
+     Render content by external tool.  Has all the options known from the
+     *figure*  directive, plus option ``caption``.  If ``caption`` has a
+@@ -540,7 +638,7 @@ def add_kernel_figure_to_std_domain(app, doctree):
+     docname = app.env.docname
+     labels = std.data["labels"]
+ 
+-    for name, explicit in iteritems(doctree.nametypes):
++    for name, explicit in doctree.nametypes.items():
+         if not explicit:
+             continue
+         labelid = doctree.nameids[name]
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 8e166eda4bc..50d71f5bf90 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -90,6 +90,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	help2man \
+ 	iasl \
+ 	imagemagick \
++	inkscape \
+ 	inetutils-telnet \
+ 	iputils-ping \
+ 	libconfuse-dev \
 -- 
 2.34.1
 
