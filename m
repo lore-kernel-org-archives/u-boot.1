@@ -4,89 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA13CAC5BB
-	for <u-boot@archiver.kernel.org>; Sun,  5 Oct 2025 11:57:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C0ECAC5B8
+	for <u-boot@archiver.kernel.org>; Sun,  5 Oct 2025 15:48:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EFFB809A5;
-	Sun,  5 Oct 2025 13:57:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0FF71809A5;
+	Sun,  5 Oct 2025 17:48:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IXx7m38i";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KX7VQNSU";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SOe06K1U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 442518206E; Sun,  5 Oct 2025 13:57:19 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5AD6C8206E; Sun,  5 Oct 2025 15:00:35 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 381A4807C0
- for <u-boot@lists.denx.de>; Sun,  5 Oct 2025 13:57:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AF52807C0
+ for <u-boot@lists.denx.de>; Sun,  5 Oct 2025 15:00:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-3ee12332f3dso3350674f8f.2
- for <u-boot@lists.denx.de>; Sun, 05 Oct 2025 04:57:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759665435; x=1760270235; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=hnX12dZ3jR9L8FkhTyaIx7D2+odZwvuHtr9Kwsz+FVI=;
- b=IXx7m38iGT/gUOknhu1dwbfeG41RdlC0QjWHhwPN8PR94Y3kiUmlDNgvbk4XKlZkCJ
- TfuJWPil88ozBllB8QQmHdNkRuZgNUk0HCIgEks4pLwSaaKCKDR2rau8ZA1WzwlJqcyG
- w5Ky3VC3Luk0B4va1pw8/U/Ea3OOFugfJZtIkxYZrysQQr0bqMBTyjab513zzXTb0yH+
- LB4LA3Fs1PqnkrXkbLzr+wDt6Nz+68rMzUJtRDhBFjdR4e8uPHcsBEu8BFvTpEeVoyEG
- YbTSkqHU6DDd/0baIVCpmV1+8zJFxgBW+h9KEK7F2k5rsgNBhHSJuX+SdSQ3d9ZFvDdx
- dCGg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759665435; x=1760270235;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=hnX12dZ3jR9L8FkhTyaIx7D2+odZwvuHtr9Kwsz+FVI=;
- b=k3X3vlvdpH0dBOTE4+wyxEVWl0ak3mJ3iSCrUuAx/zOtc9DW5jIqDJavbLobczFQb/
- TehAWmtb83cMMT/gFpwZv7wwlyUgoeWAZ2Eup9eZJ30g5/1modcoUCwehJUiAUr0wuwM
- phuHBYvMyq6vNSvOoqi/AIFwc9sm6uCbnj4+AmLU6fiThIpMigHvt+NgP4H9FqPrOG4Z
- X2Qz4Iwzv56JGVrFn3y/HhNEBQy94F7i5c5E0QkcKewpbN2W9v4iNUaDUm1uVb71f8kB
- eLjGqj8sB7JyCp4tx1vSsslr8XHo6lxPJLfWMY6RHUCLJn5x990WuY778bkqP+ZDPo2m
- /ttA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW94DTwRsEXzoFr89+N7FUWG+FV+Ep2VZtPxGVo0jmTaqgCluM0JM0Oo4O+t3iliYeGKsuLJzc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6mXB18xvhT9xsoybJQSaw5v8R4LEvy/ftjwUtKWMrb/Qmzpu1
- aTWn6zkuvwpoUcyZ+pUSauZX/3lMb1UEGyXwkoW9sUMp3wgFaXs5XBw0m0qjKULTC7s=
-X-Gm-Gg: ASbGncseprJmgTKKbqKNJTKNA838Qb2j0E1YsKyXTurwhDBYUbzPsdA2jYqEpuk552y
- Jzak8XpLmnsLBmoEMGeZJ1ObMrq2hHnUFf0EybaS904gky531SiQf7VIACa2nkFqLyDF3X62ZKz
- cRHrawIWubDHUBbplBWH98HMqYWwCzS+t3kVjXUSQe9FXYC6xaV6VEbHPk+cbb5HyjUQ+1XnSmG
- jLh+XRqL1un5m2SM5iG+afYSlVIetF4FI7TNLXwbY1Eqbiteqg9itPYeCkBV8Ji4O4B6qv32i9L
- m/YR3AGlW3VPfhFnD682SyOz+YdR0fpi0f5OqTlw6P3SSbwMd7EbXalUextSdqzeSnzjTdTpZPx
- phNREITQ295ivOBPvGqnjPs5pQuLB2nUpbqTB82I8GIcW43FqqhtcbyTw7NYOsItZPTU93/BKVz
- IJlTK942llvJNf+tZT9Gg=
-X-Google-Smtp-Source: AGHT+IF84G6yc8TllaJ8qa0FxfTuDNmXLhkwAmuI9/tx5EbnTWh7aMrJERgZQHWms2VW7/HYLLbIsw==
-X-Received: by 2002:a5d:588f:0:b0:415:b17:1e47 with SMTP id
- ffacd0b85a97d-425671c18c0mr6143455f8f.54.1759665435566; 
- Sun, 05 Oct 2025 04:57:15 -0700 (PDT)
-Received: from [192.168.3.103] (p57b4cc6f.dip0.t-ipconnect.de.
- [87.180.204.111]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8f01absm15997691f8f.44.2025.10.05.04.57.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 05 Oct 2025 04:57:13 -0700 (PDT)
-Message-ID: <45d131d2-c409-45f7-b8a9-fc5c3f6280de@linaro.org>
-Date: Sun, 5 Oct 2025 13:57:12 +0200
+ spf=pass smtp.mailfrom=marek.vasut+usb@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cfjDw29YJz9v6t;
+ Sun,  5 Oct 2025 15:00:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1759669232;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=it3U39oLOvwDVagCFGxdoXjOT1fDxhhisxMbxeXM/9Y=;
+ b=KX7VQNSU6Qpx3Z2YuhrzY4UgIDJRYKHzc9sHZ0PnA14dEH0TSpHMS/1vE1ijNB7D2TDVaS
+ ZlChz7o2CF3kwomC67dZEZo/PYueF2Bi8vTuaBqXfEJLQHZ3a84UbE+iFEqvdd1oHbXtJD
+ +sh0+MiIkaq6KfeBh/Q7kuobTE7cYK4p1MgQGZZ76n3kNwKRTJy16l2j3GR0ysyebGzTJ0
+ BOyAHdJgBDqh9xy50mimgSqqI9AemYLRKM2ImBYpwYRCqLywrwHDXHS+3t27SWg0cY3ZJj
+ EgF+IogSNXSN+u/tLjH7fIr22RkKhYVBYn16VyDFxO3QQUkHDDvqQ6mzPDaj4A==
+From: Marek Vasut <marek.vasut+usb@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1759669230;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=it3U39oLOvwDVagCFGxdoXjOT1fDxhhisxMbxeXM/9Y=;
+ b=SOe06K1UcoXwouWgFmmtoR5cyKy9SjIecLTfFPrI9/bJ09SYYaN9hArgwNHUPjBB26FS/k
+ yGEI6N/oGVnMM+OlQdYgUTcgMrLYw7KuXsTGgQdny612Myye24COh/siB59qRQBQJYKEs3
+ UUJ3cc0Xys4JMSl22V99gbUeV/BumdbM7HeI8P/n6XGZmEBzz7LG3VX0qe8c+vhwr7oqch
+ EzjkVPDo/6gTZ7q1heN2KJ58h3EFS+6bOb/+h1X3v33bCcasg5t5dcFwz/wCqMv8qY8kT3
+ VP3pDWLzkyxd53EEfq/6xTNHa3/LhpTQoAROOAcBlqP16poPqRA0tQdMb3ms+w==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+usb@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: [PULL] u-boot-usb/next
+Date: Sun,  5 Oct 2025 14:59:51 +0200
+Message-ID: <20251005130014.5562-1-marek.vasut+usb@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] phy; qcom: Rework Kconfig logic around MSM8916_USB_PHY
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
-References: <20251003203927.1030052-1-trini@konsulko.com>
-Content-Language: en-US, en-GB
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20251003203927.1030052-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: 17zccuhpadkgrd9xm95framf81ebxz3e
+X-MBO-RS-ID: 8134168dbe10b6774a2
+X-Mailman-Approved-At: Sun, 05 Oct 2025 17:48:18 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,41 +84,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The following changes since commit eede1fccec4d0adf1934d9a6f51ae6d3675351e7:
 
+  Merge patch series "Drop ATAGS for B&R boards" (2025-10-03 16:55:44 -0600)
 
-On 10/3/25 22:39, Tom Rini wrote:
-> This PHY driver is required by USB_EHCI_MSM and not useful on its own.
-> Rather than have it be a prompted option, it should (and currently is)
-> select'd by USB_EHCI_MSM. Remove the prompt for this option and then
-> correct the dependency chain (it must select PHY).
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+are available in the Git repository at:
 
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
+  git://source.denx.de/u-boot-usb.git next
 
-> ---
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Sumit Garg <sumit.garg@kernel.org>
-> Cc: u-boot-qcom@groups.io
-> ---
->   drivers/phy/qcom/Kconfig | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
-> index 61e5e2fca413..0dd69f7ffd0c 100644
-> --- a/drivers/phy/qcom/Kconfig
-> +++ b/drivers/phy/qcom/Kconfig
-> @@ -1,8 +1,8 @@
->   config MSM8916_USB_PHY
-> -	bool "Qualcomm MSM8916 USB PHY support"
-> -	depends on PHY
-> +	bool
-> +	select PHY
->   	help
-> -          Support the USB PHY in msm8916
-> +          Support the Qualcomm MSM8916 USB PHY
->   
->   	  This PHY is found on qualcomm dragonboard410c development board.
->   
+for you to fetch changes up to f4dd112a3822c86175d091362f5cce1029f0523b:
 
+  usb: onboard-hub: Make i2c-bus optional (2025-10-05 06:11:44 +0200)
+
+----------------------------------------------------------------
+Michal Simek (1):
+      usb: onboard-hub: Make i2c-bus optional
+
+ common/usb_onboard_hub.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
