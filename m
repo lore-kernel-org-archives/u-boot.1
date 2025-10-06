@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A8ACCA471
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 23:30:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D099DCCA470
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 23:31:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09ACE83ACD;
-	Tue,  7 Oct 2025 01:30:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D78583ABF;
+	Tue,  7 Oct 2025 01:31:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W4l9EALF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ED6eO/lg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0E8C83ACA; Tue,  7 Oct 2025 01:30:38 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 44AE983ACA; Tue,  7 Oct 2025 01:31:37 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB3EF83929
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 01:30:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3672983929
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 01:31:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6399706fd3cso3087099a12.2
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 16:30:36 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-62fca01f0d9so11206473a12.3
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 16:31:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759793436; x=1760398236; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1759793495; x=1760398295; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FVfw0/jfm4Fz223qX9pUn0Dyr11ae4SGRfqByTv4uTA=;
- b=W4l9EALFtZHEYsqxu5UnE81sgV7Kf0IMBFIQGp5mi/e9pEy6oiaPHwMptQd4+a3P5G
- gf1oGzDLejklKL1yL8pagHN5V0GJja4VtLh/Aw3KZyRXhHhitQiWc+UmrgyiBlnvJJI0
- g3ivIiiF/A7adhQrbqhks2AWBsCJY0VYuEq74=
+ bh=8uI4+Ou2oyIecL0EqCJ094uU6MjBqVGo3hsDn40mTnA=;
+ b=ED6eO/lgM2DyCBynU0XL0ThoyQLffqLgrlwyzTV/5noC4H/P5/VIpsaRg37B+UIYRl
+ mKFLlFlDLN/c5xlDoOFDij+I73ciBoUu0t4+3hOFy3PRu/aUtcbhUFXjwUnz/i8yizQe
+ QmmgEfZx7AaENr95nK2r7T+RGDwpOZxEc1zQo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759793436; x=1760398236;
+ d=1e100.net; s=20230601; t=1759793495; x=1760398295;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FVfw0/jfm4Fz223qX9pUn0Dyr11ae4SGRfqByTv4uTA=;
- b=dZU8ZDkNTdHFIbKlCK1Hboxyc7qUmVQ2T6JC5cZ2f+++gANkZc/0R0T5CCCkB8Q3Wf
- X9UJFFMPuaQkI1dX4jr+JOqXxmva4rnkVtT8aoYJrKhYsg1jt7AvgeMa+NLgrv9R3wTr
- yJbKzlbfJZ/hgJo78bq02vndIot3GCfcsozYbZ365mlpDWz8rLbM0VvT+41BNPJHIRxv
- WvVHugqV3ByxlOa0V37/zawhI8Am5q+ccXJJldUCQgjGnpTwJlW1czWVf2roPZdS/Rzh
- oqmhyX3cL7sYpNk+mI4ttrPfuytNVfXoxN8+98B/mstm0wMzoe0XgG7Elm3jL+3lG/tk
- MKIg==
-X-Gm-Message-State: AOJu0YwO56vwV6L+LOvl/Ew8SGKXdCDCGIWVSjbURQl6JhA/HdYsWmav
- Uk2LFeMzGmBLwjvUQiP+fSxjIUIb8RdwYEKydjOSAt3IpeT1uEl3jIXsO14W4C5xoeYbRPInsUW
- 3eWv1ewBPoMZm2h0Cqy6UHtQHBZY+aIOWsiQFgt1G
-X-Gm-Gg: ASbGncvV1ybECVtdbP9XTA9mFKp8jZw2PCykcYx7upG35W+kK8wAvcCFam8zZCpbXZs
- UcPq1QJB6VNbescl8lExmvx3j5t25lNhhCCWSeNFpHyYBoyJEa1xbG+epiUV1cyMc4NbRm9g1Dy
- zKh+G6UWYQBiOqt9QNFBJ8Qz9tO9+AXxG9v2XuSyNHG7SfUKmkInv37jv2sT71H33wlnN1I8XGV
- GNoK3RytQHIQzNnuLXEX1DEUERf82mq
-X-Google-Smtp-Source: AGHT+IEh1i7YRxllYsfHmFtR/A9L/dMR+D7NyhlwjD2JKk8VMWmsWXJ3NuqsHyAIZmg6U3Vh51jFHFjwK9oEMKQ0AfU=
-X-Received: by 2002:a05:6402:2110:b0:637:e2b8:605b with SMTP id
- 4fb4d7f45d1cf-639346c7b36mr14673041a12.5.1759793436321; Mon, 06 Oct 2025
- 16:30:36 -0700 (PDT)
+ bh=8uI4+Ou2oyIecL0EqCJ094uU6MjBqVGo3hsDn40mTnA=;
+ b=R08FX2++9D95woomORet4tFn0rcPlxlAXIJarCcK0wk1xL7q0fwEQnmJlsVMRDVxB0
+ 3XRdZ7cxCcIxJ8c69V1iDBDKdso3Cz9+nSQybR9VpqrVEPj8WO96vMcugV+3nufT7RKA
+ I7ve9p8ZCS5a+qTOIAOeORVBAFvqUxdK1dNs17/5BjzSsUiCZbRFLnUJRqe2SRB370MF
+ GnRiC9uVcXPvrycASw5kMUxxTR3VXZ5DgIj/u+ccKRG8HAIgovoSve8Qb/ADmbegjqn4
+ rlJvsoW+7IqVv4j7b/tD0i7DeoLltD047YLYTkbFDRIBai37GOqKD029qjj6q64t2iz7
+ 4Wyw==
+X-Gm-Message-State: AOJu0YyRrHVcmt/t8L683YlH41Dr3z8HRh8YG1cLTKJHh7fbnjsO3xAB
+ g09s4ZKnaIB76X7zkQxI90wc4Ww5Ewh9JjMbkCCpIV3b/wWws71hUbMDvLRnJ/bS23j7Cwde6OB
+ l2RRTfmXSEJin6U8zHgDGwGUH6TX0PUhY6qneYemtZzqoJ+jcIsR/fg==
+X-Gm-Gg: ASbGncu6rA/4dCDphqB9HLKoG5VhmCWgy7SBzclHxDR4e5R9yidJmXkEo7BTm7g2dvj
+ fO7OROp7rvplHutnztIZ2tYA1ctmXhqPo8DIvckj7IqqZeoXHiC3WQdc3B3t0Cg3tgdDYJWPHSQ
+ 1tmXi5DC5krnbZTS5Hvy5ZIK5dapJK5FpOkHZCZ/1ulJxDFRoSbEvojTCClBVuFxN7MF9Pmew/e
+ c8+JbGaSGRRwdPJuHY82RqqXHL7IFr1
+X-Google-Smtp-Source: AGHT+IGS9mX0BFlcrDpH9LnxYQmPyBKQnA3gGf5Qsmw2MQjniA9HxTTJ5bpAhTQVTmbIaICgCx3l60CC1cGFNiGQA14=
+X-Received: by 2002:a05:6402:909:b0:62f:6759:3b09 with SMTP id
+ 4fb4d7f45d1cf-63939c27be3mr13660672a12.30.1759793494651; Mon, 06 Oct 2025
+ 16:31:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251001212649.3263574-1-sjg@chromium.org>
- <20251001212649.3263574-6-sjg@chromium.org>
- <20251002201537.GO6093@bill-the-cat>
-In-Reply-To: <20251002201537.GO6093@bill-the-cat>
+ <20251001212649.3263574-17-sjg@chromium.org>
+ <20251002201546.GP6093@bill-the-cat>
+In-Reply-To: <20251002201546.GP6093@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Oct 2025 17:30:23 -0600
-X-Gm-Features: AS18NWCacvCqILYWjcVkq5x6FeKnTo1us1gRYfdiW4qTlNm9mae-1gGAy2yEN5I
-Message-ID: <CAFLszTigwz2mVfS=C6yXDnTMvdGxw=FsD36QCrpS2VOVSr+7nA@mail.gmail.com>
-Subject: Re: [PATCH v2 05/17] boot: Move showing of bootflows out of the
- command
+Date: Mon, 6 Oct 2025 17:31:23 -0600
+X-Gm-Features: AS18NWAWe7FpMI30Z2kAIqVL-ttLQLUZ7S--ZIT-XpbjgqEeY6tW6_qf2jySAts
+Message-ID: <CAFLszTiofxAigyXRGp3qREOd6tdjBDyZqkj9vsOu9U-TxCe3Rg@mail.gmail.com>
+Subject: Re: [PATCH v2 16/17] boot: Run the EFI bootmgr just before network
+ devices
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -95,40 +96,24 @@ Hi Tom,
 
 On Thu, 2 Oct 2025 at 14:15, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Oct 01, 2025 at 03:26:30PM -0600, Simon Glass wrote:
+> On Wed, Oct 01, 2025 at 03:26:41PM -0600, Simon Glass wrote:
 >
-> > It is helpful in tests to be able to show the bootflow that is being
-> > examined. Move show_bootflow() into boot/ and rename it.
+> > At present the EFI bootmgr scans all devices in the system before
+> > deciding which one to boot. Ideally it would use the bootstd iterator
+> > for this, but in the meantime, give it a lower priority, so it runs
+> > just before the network devices.
+> >
+> > Note that if there are no hunted network devices hunted, then it will
+> > run at the end, after all bootdevs are exhausted. In other words, it
+> > will always run.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v2:
-> > - Add a log_err() for an invalid state
-> >
-> >  boot/bootflow.c    | 57 ++++++++++++++++++++++++++++++++++++++
-> >  cmd/bootflow.c     | 68 ++--------------------------------------------
-> >  include/bootflow.h |  9 ++++++
-> >  3 files changed, 69 insertions(+), 65 deletions(-)
-> [snip]
-> > +     case BOOTFLOWST_COUNT:
-> > +             log_err("Unexpected boot value of bootflow error %d",
-> > +                      bflow->state);
 >
-> A small thing, checkpatch.pl catches that this isn't aligned with the '('
-> here as it should be.
+> This does not apply cleanly to master nor next as the test portion
+> fails to apply.
 
-OK. I'm unsure whether I really want this line anyway, since it
-increases code size.
+OK. I'm not sure what happened there but it could perhaps have been a
+timing problem. I'll try again when I send the next version.
 
->
-> A larger thing, and please correct me if I'm wrong, but on reading the
-> whole set of changes, this move + rename just means we're putting more
-> info in the test output, and nothing else?
-
-It will also appear if you have CONFIG BOOTSTD_FULL and use 'bootflow
-list' or 'bootflow scan -l'.
-
-Regards.
-
-Simon
+Regards,
+SImon
