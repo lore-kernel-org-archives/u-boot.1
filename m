@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B95CAC5B8
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 10:55:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C89CAC5B8
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 12:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C51B83655;
-	Mon,  6 Oct 2025 12:55:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B4EB835D0;
+	Mon,  6 Oct 2025 14:06:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AGkdYqYd";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NAoTR2wB";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="to62U8II";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B34C883695; Mon,  6 Oct 2025 12:55:00 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9F3A98365E; Mon,  6 Oct 2025 14:06:22 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 952B0835D0
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 12:54:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B7C4802C1
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 14:06:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-46b303f7469so30230735e9.1
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 03:54:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759748098; x=1760352898; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XYu/Q/XinCQ/0h5Tc/XajlctkwT3+C39qfnDeK1J0pY=;
- b=AGkdYqYd7zxY9W11I2TfCZUkWp3XZGMZoXhuurijjH2tyogjWrjlkxj+WE5qrwJ6Sb
- GyBmUMyaejli/kEjMhKWDw/n27IFO61qvb66EJIPophj5ZEoQuVl4XvRcGNTfDpNddeW
- JhZyOyh9p1QjzWgOnQxEg5l04lHtgOV6TeVVjik5WBAyHzstAhyuahPfccUCRO6FF/CK
- Lkl0WDZkw2AlbVj3Etzz2v5Xd9O2j1xxELID1p604C6T3e7vgo0EVfYMO4omM9Vc//W2
- 7t65diXAP9GmQLJy6DogTGiWM7tpn+CmXjztgsYDld2Go3qB6ll4tPfmpR3UJDYtRmf5
- LM8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759748098; x=1760352898;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XYu/Q/XinCQ/0h5Tc/XajlctkwT3+C39qfnDeK1J0pY=;
- b=Rd1mU77hvfYVHOw7CiJgs40Kbz72kmM0sdYuxV5zzfbyVidtYOh0hH5KvpcCcQLvh3
- LgJuYpsWRVbrvTqLpLNgwbggV60xcF7YLMnrZJnU1VOWM7CliHIG5QSQqALyxYxGhVyP
- wYCXZ0JL0QqdqMwjrtYfnNrgoninP3xZSdiO7JLbDKxAaazk2tVFFew7nuPsYE+b0vQU
- 0Ws2uDVmK788EbI709xG23x4rJUeen4uB6Ev5btNu8fYHEzpECksayX3GvnolBINSaKc
- aE0ky5flMEkMnvDh8u6OJn9eYXVdrJBPkC7D0V8wY6iT+bGicwAfv2sDhUZ5YL3tdpRJ
- CsdA==
-X-Gm-Message-State: AOJu0YyDpyLeQB2yr7DJojYXCtnISgtUVD8hQRnBJEBNZur05vh/XiKp
- sZXVXt0Ea1k9RHAkDoE5pez3hxKMQ9QXoZfjJgJc481LBUwChcZKKlKcfFW8zSwPiNQ=
-X-Gm-Gg: ASbGncugQ9d7KZ04/Q/b6ziI8N9F1BIBvmw7OuIBH5ZBo5AQluogH/reRHpdugA1sWR
- 0VVDABn+mdYEUVPcnXroHrIw3b9PlBc25bY/zVVkvWNc9vhk0QutA3eyI+UxRh7GQFqchMD4c5f
- OAZ7Q9sC4WIFjLvGyGBcdiV3jkaQE0tQATPf5g9uifAeZi0S10eIfPTaGxXejkWKb2XdKkUmbnF
- YtUGltCmpsRa/X9A8GSRhHLHqIRUdU4kyteYzgBygzL+aAkS7O3NFFh34OxiXh3eBDhOxPbnqgk
- gEZDdKYhfee0AqVkjmnqZZ4XF6f8Npa4oysVrr27sZ6vh6CpvEfxXXA8LUqtwdckVIDGb8hqq/w
- 1kNfoplUsqC4J3puWTOGiqZubRaSXyuKvQ8DpeQhiHqvMi+u/RCbx+EjeTI7Eb36Dg0FzReN8vG
- lU2A==
-X-Google-Smtp-Source: AGHT+IGN+pczvt2YgWbFjh9KMK0PxwKySkVhW+vxgF48ZEq2w4Kmp/pLBZhlXfDS1ST8l0h/ZNzC6w==
-X-Received: by 2002:a05:600c:8286:b0:46e:42fa:ffce with SMTP id
- 5b1f17b1804b1-46e710ffbb6mr66364115e9.2.1759748097977; 
- Mon, 06 Oct 2025 03:54:57 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:4601:d8c:ebdc:373e:b4a0])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8f4cc3sm20330061f8f.55.2025.10.06.03.54.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Oct 2025 03:54:57 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 06 Oct 2025 11:54:56 +0100
-Subject: [PATCH] test: Remove not needed null check
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cgHzw26SWz9sss;
+ Mon,  6 Oct 2025 14:06:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1759752380;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=G2jV+yCw0nlQF7KSet/hURKnFkU2OfZnuig64JJU+yM=;
+ b=NAoTR2wBJY727rPOy9rgokeeGWoQCwLr6UCCrsvVLBiXjlz1VgreBpMErs6A5fpje8+xre
+ tIDNpR65T7lFVt63FYI96y7lH9ooyYhyG0069cjwZ08Wa/quNKRUH0k/V5cAzIE4vzmmcU
+ YqxLjYB2esuYE81i95CQyZRvWOcL3dATSKq0r9kkJPpK/uSGp+pUFbSRfUC8Ke96USj+0W
+ KlE3+21T3tt6lcPO8Cp6aZlwxTX/mcn7fjGChEQSz9UcvCNAJfJ7JQVZvfDEtG1uMcXj+B
+ Ey+wQME62Ne721ACWNWMZAWf1DirP402TCxmuNvNNBaPCdjYi6D6oFk0DClQ1Q==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=to62U8II;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
+ 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut@mailbox.org
+Message-ID: <bbf07b05-f842-493f-acf0-5d1f08be26d1@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1759752378;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=G2jV+yCw0nlQF7KSet/hURKnFkU2OfZnuig64JJU+yM=;
+ b=to62U8II7MQaDEPGqyJAF71mop2cBSBw5dWmQLw2agrgLXINo+mPfzzxa556sWFI8Mtf4k
+ gPzy8ug2xlKi65Ab9oHguyLAKZUJJhM7Y704vXOTAOVw5yXKp8MSOXwItXAdtd+bySmapM
+ GgAVrUyAlGhOkdHsQYgsufK7zxbi+HGISByCHvJpIwNwrKhZpYT88Fc2NxC6Dh7gffPpsq
+ O5jEoOXs4nwWtwINfbYuqWsKNqWhJ3D7+WHVCShPDU1ZpN1JK5ZQeWDxMtP3bMpkaBmlqh
+ g0pP2pme7Jb1Dgk3WKXjDtXGCpYhrzWr+kqQtPR99bkWc9zyyt9xtfT/XQ0/XQ==
+Date: Mon, 6 Oct 2025 14:06:14 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251006-test_main-v1-1-51954a6e9ba6@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAP+f42gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAwMz3ZLU4pL43MTMPF0Li6TEpNQ0S1Njg0QloPqCotS0zAqwWdGxtbU
- AgH4JPlsAAAA=
-X-Change-ID: 20251006-test_main-88babef9530a
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Subject: Re: [U-Boot, v1, 1/1] net: phy: add paged PHY register accessors
+To: "Lucien.Jheng" <lucienzx159@gmail.com>, jerome.forissier@linaro.org,
+ skylake.huang@mediatek.com, s-vadapalli@ti.com,
+ paul.barker.ct@bp.renesas.com, marek.vasut+renesas@mailbox.org,
+ u-boot@lists.denx.de
+Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org
+References: <20251006044405.30376-1-lucienzx159@gmail.com>
+ <4fa8531c-e6c2-4a3a-b284-86c5bdd94530@mailbox.org>
+ <251a26cf-fef4-4d20-a278-881ca31ddb97@gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <251a26cf-fef4-4d20-a278-881ca31ddb97@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: hhxtzqamhdpid7ofx7js61pdmdrmk1jg
+X-MBO-RS-ID: de01faaec14e4e21ec8
+X-Rspamd-Queue-Id: 4cgHzw26SWz9sss
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,39 +98,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In ut_report() there is a null check for stats but stats was already
-dereferenced on the line before and is again dereferenced later in the
-same function. Also the two places where ut_report() is called from will
-have initialised the parameter so there is no chance that stats will be
-null. So to prevent static analysis complaining of a use before check
-just remove the check.
+On 10/6/25 1:59 PM, Lucien.Jheng wrote:
 
-This issue was found by Smatch.
+Hi,
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- test/test-main.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Marek Vasut 於 2025/10/6 下午 04:18 寫道:
+>> On 10/6/25 6:44 AM, Lucien.Jheng wrote:
+>>> Synchronize paged PHY helpers with Linux v4.16.
+>>
+>> Why such an old version , current LTS is 6.12 ?
+>>
+> I just meant to say that this patch was initially included in this 
+> commit. I'll adjust the wording here.
+> 
+> For the next version, I will write the commit message: "Synchronize 
+> paged PHY helpers with Linux v6.16."
 
-diff --git a/test/test-main.c b/test/test-main.c
-index cabc736a524eefacba44cf6fb31bd481f50938c6..3254325e8b153de465e8aab65930220228f2aae6 100644
---- a/test/test-main.c
-+++ b/test/test-main.c
-@@ -687,7 +687,7 @@ void ut_report(struct ut_stats *stats, int run_count)
- 	else
- 		printf("Tests");
- 	printf(" run: %d, ", stats->test_count);
--	if (stats && stats->test_count) {
-+	if (stats->test_count) {
- 		ulong dur = stats->duration_ms;
- 
- 		printf("%ld ms, average: %ld ms, ", dur,
+If you are synchronizing the headers with 6.16 fully (btw. 6.17 is out) 
+then sure. If you are pulling in single patch from older kernel version, 
+then refer to that kernel version. (I am a bit tired today, I hope it 
+makes sense)
 
----
-base-commit: c280c4f7e52f08255f491783b3143a3be1fc08b0
-change-id: 20251006-test_main-88babef9530a
+>>> linux commit
+>>> COMMIT 78ffc4acceff48522b92d8fbf8f4a0ffe78838b2
+>>> TITLE: net-phy-add-paged-phy-register-accessors.patch
+>>
+>> Please use the standard abbreviated format with 12+ letters SHA and 
+>> commit subject -- example: e37de002fac3 ("Prepare v2025.07")
+>>
+> OK, got it.
+>> [...]
 
-Best regards,
+
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+Best regards,
+Marek Vasut
