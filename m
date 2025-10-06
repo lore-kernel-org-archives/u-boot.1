@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25151CCA471
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 10:11:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED599CAC5B8
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 10:11:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25EF9835FE;
+	by phobos.denx.de (Postfix) with ESMTP id 682C783693;
 	Mon,  6 Oct 2025 12:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IOjD9bqv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eSSmH7u3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5AF383653; Mon,  6 Oct 2025 12:11:08 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 65A3283655; Mon,  6 Oct 2025 12:11:10 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB13C835C6
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 12:11:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B44C835FE
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 12:11:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 596AB3pH3526633;
- Mon, 6 Oct 2025 05:11:03 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 596AB4LG3977151;
+ Mon, 6 Oct 2025 05:11:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1759745463;
- bh=Jp7/xafMm6l8fNlv2qqj/gkubkkiSITH99AaRYmBEsY=;
+ s=ti-com-17Q1; t=1759745464;
+ bh=A6+XXdfRXAxrnyC4HoLyFsSzpfFtHPZdrwDLqJ+kWDs=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=IOjD9bqvjoqshOfQyk2vLZo+w4FODAxrFrg4RUDW+0UdrzCrTDaGoqHmBTq42VtF2
- /q9/AjAQKb5BZX8G3JZ37nZv+SOTY4V46L9SVB9dfTjZoA/rHfiYuqQxyyL86Kef1s
- yVmQmik5FzekyaWH79gG5WocTU6YxbcS/VRQ0tdg=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 596AB3HT4044645
+ b=eSSmH7u3RL+dRjecxAKgw7H8O2cWImC/+mlkJT00LgyD14dpsWQ48P6FHW0EGSxRd
+ /hf9EMQUunr5li+8YbVKv6YwH++Jx9wCV3r1ECtWkMutIrYLZnzPkAQo7reYp3e1q+
+ pI+oVWZd9wsfuOQs3FXTbjm2G7heLtXqeMt+bqac=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 596AB4Vn3234369
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 6 Oct 2025 05:11:03 -0500
-Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 6 Oct 2025 05:11:04 -0500
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 6
- Oct 2025 05:11:02 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE215.ent.ti.com
- (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2025 05:11:04 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 6 Oct 2025 05:11:02 -0500
+ Transport; Mon, 6 Oct 2025 05:11:04 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 596AB10s3511531;
- Mon, 6 Oct 2025 05:11:02 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 596AB3ks3511627;
+ Mon, 6 Oct 2025 05:11:03 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,10 +56,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH -next v3 1/7] spl: Kconfig: add SPL_OS_BOOT_SECURE config
- symbol
-Date: Mon, 6 Oct 2025 15:40:49 +0530
-Message-ID: <20251006101057.4172248-2-anshuld@ti.com>
+Subject: [PATCH -next v3 2/7] spl: mmc: split spl_mmc_do_fs_boot into
+ regular/os_boot
+Date: Mon, 6 Oct 2025 15:40:50 +0530
+Message-ID: <20251006101057.4172248-3-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251006101057.4172248-1-anshuld@ti.com>
 References: <20251006101057.4172248-1-anshuld@ti.com>
@@ -83,35 +83,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds the new SPL_OS_BOOT_SECURE symbol that enables secure
-boot flow in falcon mode. This symbol can be used to disable certain
-inherently insecure options during falcon boot.
+Currently the logic to handle falcon mode as well as the regular boot is
+inside spl_mmc_do_fs_boot, this prevents us from cleanly extending
+falcon mode functionality like toggleable fallback to U-Boot proper.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Therefore this patch splits the logic into spl_mmc_fs_load and
+spl_mmc_fs_load_os to handle the regular boot and falcon mode use case.
+
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- common/spl/Kconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ common/spl/spl_mmc.c | 80 +++++++++++++++++++++++++++-----------------
+ 1 file changed, 50 insertions(+), 30 deletions(-)
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index f34b96efc02..f20651c3769 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1206,6 +1206,14 @@ config SPL_OS_BOOT
- 	  Enable booting directly to an OS from SPL.
- 	  for more info read doc/README.falcon
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index cd56cf71055..c5585d8e0d2 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -193,6 +193,46 @@ int spl_start_uboot(void)
+ }
+ #endif
  
-+config SPL_OS_BOOT_SECURE
-+	bool "Allow Falcon Mode on secure devices"
-+	depends on SPL_OS_BOOT
-+	help
-+	  This allows for secure devices with signature verification capabilities
-+	  to use falcon mode by disabling certain inherently non-securable options
-+	  in the SPL boot flow.
++static int spl_mmc_fs_load_os(struct spl_image_info *spl_image,
++			      struct spl_boot_device *bootdev,
++			      struct blk_desc *blk_dev, int part)
++{
++	int err = -ENOSYS;
 +
- config SPL_PAYLOAD_ARGS_ADDR
- 	hex "Address in memory to load 'args' file for Falcon Mode to"
- 	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
++	if (CONFIG_IS_ENABLED(FS_FAT)) {
++		err = spl_load_image_fat_os(spl_image, bootdev, blk_dev, part);
++		if (!err)
++			return 0;
++	}
++	if (CONFIG_IS_ENABLED(FS_EXT4)) {
++		err = spl_load_image_ext_os(spl_image, bootdev, blk_dev, part);
++		if (!err)
++			return 0;
++	}
++
++	return err;
++}
++
++static int spl_mmc_fs_load(struct spl_image_info *spl_image,
++			   struct spl_boot_device *bootdev,
++			   struct blk_desc *blk_dev, int part, const char *file)
++{
++	int err = -ENOENT;
++
++	if (CONFIG_IS_ENABLED(FS_FAT)) {
++		err = spl_load_image_fat(spl_image, bootdev, blk_dev, part, file);
++		if (!err)
++			return 0;
++	}
++	if (CONFIG_IS_ENABLED(FS_EXT4)) {
++		err = spl_load_image_ext(spl_image, bootdev, blk_dev, part, file);
++		if (!err)
++			return 0;
++	}
++
++	return err;
++}
++
+ #ifdef CONFIG_SYS_MMCSD_FS_BOOT
+ static int spl_mmc_do_fs_boot(struct spl_image_info *spl_image,
+ 			      struct spl_boot_device *bootdev,
+@@ -225,42 +265,22 @@ static int spl_mmc_do_fs_boot(struct spl_image_info *spl_image,
+ 	}
+ #endif
+ 
+-#ifdef CONFIG_SPL_FS_FAT
+ 	if (!spl_start_uboot()) {
+-		ret = spl_load_image_fat_os(spl_image, bootdev, mmc_get_blk_desc(mmc),
+-					    partition);
++		ret = spl_mmc_fs_load_os(spl_image, bootdev,
++					 mmc_get_blk_desc(mmc), partition);
+ 		if (!ret)
+ 			return 0;
++		printf("%s, Failed to load falcon payload: %d\n", __func__,
++		       ret);
++		printf("Fallback to U-Boot\n");
+ 	}
+-#ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
+-	ret = spl_load_image_fat(spl_image, bootdev, mmc_get_blk_desc(mmc),
+-				 partition,
+-				 filename);
+-	if (!ret)
+-		return ret;
+-#endif
+-#endif
+-#ifdef CONFIG_SPL_FS_EXT4
+-	if (!spl_start_uboot()) {
+-		ret = spl_load_image_ext_os(spl_image, bootdev, mmc_get_blk_desc(mmc),
+-					    partition);
+-		if (!ret)
+-			return 0;
+-	}
+-#ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
+-	ret = spl_load_image_ext(spl_image, bootdev, mmc_get_blk_desc(mmc),
+-				 partition,
+-				 filename);
+-	if (!ret)
+-		return 0;
+-#endif
+-#endif
+-
+-#if defined(CONFIG_SPL_FS_FAT) || defined(CONFIG_SPL_FS_EXT4)
+-	ret = -ENOENT;
+-#endif
+ 
++#ifdef CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
++	return spl_mmc_fs_load(spl_image, bootdev, mmc_get_blk_desc(mmc),
++			       partition, filename);
++#else
+ 	return ret;
++#endif
+ }
+ #endif
+ 
 -- 
 2.51.0
 
