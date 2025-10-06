@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31DC9CCA470
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 20:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD338CCA470
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 20:38:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F21383C39;
-	Mon,  6 Oct 2025 22:38:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FAEC83C6E;
+	Mon,  6 Oct 2025 22:38:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AKKOYQMp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MJIGNNWN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A166C83C46; Mon,  6 Oct 2025 22:38:27 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 1EAC883D3C; Mon,  6 Oct 2025 22:38:31 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 239DF83C11
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 22:38:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2268F83C46
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 22:38:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-b3e9d633b78so764593866b.1
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 13:38:25 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-631df7b2dffso12487239a12.1
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 13:38:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759783104; x=1760387904; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1759783108; x=1760387908; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LjYHjiYZPKuad8fxThGO8YWK5bfex0TaaRrJmOb17ok=;
- b=AKKOYQMps2xDIUQGZPTvK78NO9w9bB2I8bxF5xg/O+MP8kQM2u3ragF8x8NFEC/dZq
- MfOY2RBdIA/IoRAvQcVZJRlbvw2yE23KtJkMvCDsYeJZP6YDksJ6Baph5tUtqFbrHkm4
- rqHajoEIcbN5EcoIeFneTiOedd4CDzf93KHWI=
+ bh=OZQ69eEX4cqTXuN+ztPwzSmArcsyuTnB4QRfcH3CiF8=;
+ b=MJIGNNWNJTQo7dUdYInGanceEPg8I9+f1S3gj3hbquyHrRdmgNMIUgQbSB4NrNtwXr
+ 9JWpgwN9ASIv7t3LJkv2BgafZP7dWerg85L9OXlGrFQbNt9O8G1mfsNSYYj2LsnxKdhj
+ zLU+i6HBVwrERDzAEQGbEencwM6EGqQh2sEkc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759783104; x=1760387904;
+ d=1e100.net; s=20230601; t=1759783108; x=1760387908;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LjYHjiYZPKuad8fxThGO8YWK5bfex0TaaRrJmOb17ok=;
- b=wyA9aobsvJkhllSJQ5HXz7lx014Bx6K27yL9NRabP2yx/M3YBAxYsoU9xlQrPczx2a
- KC6VzBNt3Eih5PsNMEq8M6n3QkWXAZoSV+EwB4bB07mPPIUEvugoP8AygffqL4Zgi+e/
- HGj5Bktbx6NweLvPd03kTmctCeeeJyElsW9mo/s99fTdZIbVAGveLo7aNzgE6/f2bjBp
- a7CP4V5L3yZzi1wxRWXCJFfAnxpmQgQG4X2sgMQy9/GYucf/YPKFIUZVhhB8VM3ORF84
- +3TzkGCfU2MBCI77jgiiHR12aV6Y7bYrN+ecjhqMPVqmqyl9N/sn0SA6exEOFpafT8YP
- Z1JA==
-X-Gm-Message-State: AOJu0YzIFryDmhYJWW2a3X28fwf8zrciOELBHXbBaH/lj7RojuhhvH0q
- P3JoACQPsIHynn1W6JovPmLC5/pTUR97rsUgMwa0AHPsEdN01fwPmiUDJOmZW4TdeL9MJcdzKoK
- RovNh6COz5goSmxFMcc2wUqua12agyAiz0PlwnvBE
-X-Gm-Gg: ASbGncuF6pgdKMU/flOGMZc+dy2TImOiGbXiMrI66Eqw2Rk92HbXDdreRA1ak7bjkaF
- LkhXq4Idma6tN3my4FQ9lqCvnkt9/Crk934gGrFdO/UWpraQMB0GlzEVjb1ds5If5ly2+lTFgFt
- v408W4vrxXS+/xgxzWwK0H5LfFX0zZQFYi5swpRHqFNowk0nTbLi8gsdXk6C4/Q56au+bUtzWex
- RlnKhUHR7Zm9+xqpU1vQbVgEV5mup23o9RpxdJo3Co=
-X-Google-Smtp-Source: AGHT+IFeXPoIOtr9L6Q0sQ7AA2DhKC7NyjN8wzdPVBxbY4YKCgmvSZ0B9fuvS2afRTRf42/5L66rPxgfqzvHsH+oKzU=
-X-Received: by 2002:a17:907:8991:b0:b33:821f:156e with SMTP id
- a640c23a62f3a-b4f4116a352mr125275266b.12.1759783104620; Mon, 06 Oct 2025
- 13:38:24 -0700 (PDT)
+ bh=OZQ69eEX4cqTXuN+ztPwzSmArcsyuTnB4QRfcH3CiF8=;
+ b=n16A/bhkVwU15uux/wolrI33Naa+R+WsMa26jhR4NTQ81g3eZONvzsSNxPpfH/M4/f
+ nzsgDVli8blpJJJxLLeIeVI/zJpP1s7/fJm6skmIhTQrPVE4WiPRhRR2B0RH7DA7wSnZ
+ TJJXN6zIN4lNWm0661Y1MJqZMI2JQqS2FYEqOTIglmznW0wCqXG/ZQj+GNuovrxL59rh
+ 4u8zRI3YJJN0txbbv89vPfGjRHHm73CQxbcjfqSgXbqBKW+eO9Mg6owys5jqCOrVzUFE
+ Sib2VR6XfIXltyXmwJ0Ccd1NIPbdwKbMQ+jEODQxQLfIzYegcB4Glr/NpTxllpaiGn0e
+ gDbw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgYgyXHy2Mv/qs/ZexZkGjtBhSYcAmc4ljdVQZmlff1HLcaurIMPCBOIteeuyeS0nU7PrxNds=@lists.denx.de
+X-Gm-Message-State: AOJu0YzX2qLhA1+EsYXkUgZzBpA5l7ap55OHu0TcyNLk+cydfWjKWt7v
+ au91SaOTCLVGyo5/8uN312zc0wEr8cvXixzTuuoXNWm4bCHA8ao1HSY9MvO8XPqtdaXpueztcT6
+ Ovjpa3fPt3BbyXISk3zoMPnaJQVeWXOyGG+5401t2
+X-Gm-Gg: ASbGnct/9/n8tXs2FLmIcYNpe9qMQ9xQGM7Wh4+7/Vi4cOLsPzXB25qUwnCJTOgFZYO
+ mqzvjBqYrU3yFWc3h3wXAATapKff2rT0cDuG/p3cEbuTlSvEeuE1Cy1AjlnetC3yKowG23T2D5l
+ 2wSox5lH+3QHNGAOeqbL/Xz8hXqVe7AX8uGuREtznFPVcVYez0XxDUwvPajkl12NjI1cBsfe9MA
+ e3AOWt6B0NnSMeqAveFKEn/pfb+JHWt1IXpoWgRwLw=
+X-Google-Smtp-Source: AGHT+IGFnnL6n7Lft+KBa2Hgv0RZWM3LcxpoPMETQ9RWH3w7EvLLQVxHgg7wQ0NfD2q0sgN83uw3bsuvaMeLKjOjW2c=
+X-Received: by 2002:a05:6402:510e:b0:633:ddd4:4e37 with SMTP id
+ 4fb4d7f45d1cf-639bb13493fmr999321a12.13.1759783108530; Mon, 06 Oct 2025
+ 13:38:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251006164506.380308-1-kory.maincent@bootlin.com>
-In-Reply-To: <20251006164506.380308-1-kory.maincent@bootlin.com>
+References: <20251006133903.58357-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251006133903.58357-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Oct 2025 14:38:10 -0600
-X-Gm-Features: AS18NWAi1RrHxGXHrR9qkYGw4te81y2WsAZuFxYeKVFVjD_Z9g2M6PopQLqwoS8
-Message-ID: <CAFLszTg+2-xRo1N3zzqY3BEUUqM989xifttbar_+mOE_X12PYg@mail.gmail.com>
-Subject: Re: [PATCH] test: Do not build expo and cedit test if no SDL
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: u-boot@lists.denx.de, thomas.petazzoni@bootlin.com, 
- Tom Rini <trini@konsulko.com>
+Date: Mon, 6 Oct 2025 14:38:15 -0600
+X-Gm-Features: AS18NWDMACLXHJRHU9rQrBgFeHiiSB5Qzfr_wmj_oCzrJV1-kuN8rpi3WYU5St0
+Message-ID: <CAFLszThOssxWF3ScW3MhhfzxY6MuOMuXeFbpN32ee_xDBzYaKw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: correctly check if the HTTP protocol is
+ found
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,22 +91,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kory,
-
-On Mon, 6 Oct 2025 at 10:45, Kory Maincent <kory.maincent@bootlin.com> wrote:
+On Mon, 6 Oct 2025 at 07:39, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> expo and cedit tests depend on the host having the SDL library.
-> Build these tests only if VIDEO_SANDBOX_SDL config is enabled.
+> In function efi_http_service_binding_destroy_child() phandler is created as
+> as a local variable. If efi_search_protocol() fails, phandler will hold a
+> random value from the stack. Even it is not zero, we must not use it.
 >
-> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> If efi_search_protocol() succeeds, the pointer has already be dereferenced,
+> so checking against NULL makes not sense here.
+>
+> If ChildHandle is not a valid UEFI handle, we must return
+> EFI_INVALID_PARAMETER.
+>
+> Use a single location for EFI_EXIT().
+>
+> Addresses-Coverity-ID: CID 531974 (Unchecked return value)
+> Fixes: 5753dc3f6572 ("efi_loader: Prevent dereference of uninitialised variable")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  test/boot/Makefile | 2 ++
->  1 file changed, 2 insertions(+)
+>  lib/efi_loader/efi_http.c | 16 +++++++++-------
+>  1 file changed, 9 insertions(+), 7 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-We should be careful that a future CI change doesn't cause these tests
-to stop running.
-
-
-- Simon
