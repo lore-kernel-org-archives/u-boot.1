@@ -4,86 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82889CCA470
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 21:44:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 525A3CCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 23:10:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE09883C91;
-	Mon,  6 Oct 2025 23:44:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E10F83A8E;
+	Tue,  7 Oct 2025 01:10:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tcu6iRm5";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4C3483CD2; Mon,  6 Oct 2025 23:44:42 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C821883C91
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 23:44:40 +0200 (CEST)
+ id 554D683A8F; Tue,  7 Oct 2025 01:10:03 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 8AA9783A8D
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 01:09:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-7a7d79839b2so4367996a34.3
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 14:44:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759787079; x=1760391879; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=rqcjjiqwTOQlMPDNDwtepzlWZ5HzqRC2RsUeaM3UJBA=;
- b=tcu6iRm5yIGjL1eNJ8n5KXijQbamoNTbP3YOt4Wu4h6MMR6Rk3RosjIEAq2rKXjiM4
- /fqXGEqapjGaHTftAEy+aJOoDfRliDZ4bhP3CO6Mio7+65xbxEEp+RvvkbZv9NhcdTfO
- k82gKwqOlSuq5yINRDZY1wwtdLsBaL4WecN/c=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759787079; x=1760391879;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rqcjjiqwTOQlMPDNDwtepzlWZ5HzqRC2RsUeaM3UJBA=;
- b=r3kiFOVKcFDDFMs9K0odIrSmjQHwrxwkY/buUEOqKjH8KQHR/X6rJUKbJcraR0CeNJ
- 2O9jCl07AHDpnXH07q3xC0iRVA93gnJeT0AyZtXciHa01FMPHDd0L/oLLNI/jUGRxbRd
- K3tX9faDBG/81dk1Ygy5T1jwUIH25gaqFv84Y8Oh7ISFyT32tTXGZ8GiC88gjq4CO1cp
- TUu+pEvLnWTOFBwiGt7J+H4G5NGtZXow+R6r8KTjsvlNdQCc3dmepHZWZymRKf6sMtqY
- ta1gsROINah73FLvfYF14W4glXz6AE+SS53X437BtBwk5JPz1exJfOr/kl7pCXxss5We
- e08g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVneZrEYViz28tCXN6LwZUASqRoPulIn9vhiHg1V92FJitww7OD39zo946xm7WJplOZgu2+JfI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwUseZ+wu0C5ugohfqIHuWFvvNMCQ2hgMnQKdanli1sBnFnJyAc
- 3lUrbjJD8HMhOrYJyvx2L3xO9BwJngcJri1DtuPzDO3RycwgOYeYXrT0OI5jQ9a3enU=
-X-Gm-Gg: ASbGncvQsxsW49Ee9ESRGdOFA/854HYqfV7jjfuUziPvCDFaktp0I8WWMS8HMHLvean
- jOKXnxTIJI3WhTcHVl0KHtlMsr+9UGLDfFo7fVYsvcBB1LGyQSljJ5vt0/SbkoccwdigvVz2fb5
- jsX+D5vhUJaHv4zktVG9nCUsXpceIvrzLiyc0lgiaUoK4Ga/KihWQCieijs9nWY2YbUhcFItcu1
- hXOwgaOEHq7eXlE4zn5RebqVqRuYKOLinRKJ3s4Q3nY47Y8FewuHYSr/EuHXplQuC9nIJny2ulV
- UttpHQM+zlikvM0rJXxFnEvwUAzLmDyr3Q2GuwmCaR3MTXZJrgek4nFxIZPlnZddt/MBU37OTA+
- BJkSFqYqfrPbBD9RUfiPVrOZ1mXYifTPa+ic0ozUHOVfuKpo8yBLsTPY7UzoMiylZbuuXSGUt/X
- j6Vwv/FAEEeQ==
-X-Google-Smtp-Source: AGHT+IGdI2qhXdNKPFWkDPapxKD9sjP2ETqq0Y7TnGKzbU2/E5DRpZpPoemx1zN44p7zCzmvE7xnUg==
-X-Received: by 2002:a05:6808:1818:b0:43f:7287:a5cb with SMTP id
- 5614622812f47-43fc17dce90mr6311253b6e.21.1759787079576; 
- Mon, 06 Oct 2025 14:44:39 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-64e188f3dd9sm2793461eaf.3.2025.10.06.14.44.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Oct 2025 14:44:38 -0700 (PDT)
-Date: Mon, 6 Oct 2025 15:44:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Kory Maincent <kory.maincent@bootlin.com>, u-boot@lists.denx.de,
- thomas.petazzoni@bootlin.com
-Subject: Re: [PATCH] test: Do not build expo and cedit test if no SDL
-Message-ID: <20251006214436.GE298503@bill-the-cat>
-References: <20251006164506.380308-1-kory.maincent@bootlin.com>
- <CAFLszTg+2-xRo1N3zzqY3BEUUqM989xifttbar_+mOE_X12PYg@mail.gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BA898150C;
+ Mon,  6 Oct 2025 16:09:50 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EE31D3F66E;
+ Mon,  6 Oct 2025 16:09:57 -0700 (PDT)
+Date: Tue, 7 Oct 2025 00:09:37 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+Cc: Rudi Horn <dyn-git@rudi-horn.de>, u-boot@lists.denx.de, linux-sunxi
+ <linux-sunxi@lists.linux.dev>
+Subject: Re: [PATCH] Fix detection of odd memory configurations on sunxi
+Message-ID: <20251007000937.5487380c@minigeek.lan>
+In-Reply-To: <20251005171635.1374da9d@minigeek.lan>
+References: <56f44755-fca8-4364-905e-685e79fd1aea@rudi-horn.de>
+ <20251005014021.4b1b035a@minigeek.lan>
+ <13857032.uLZWGnKmhe@jernej-laptop>
+ <20251005171635.1374da9d@minigeek.lan>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Grb792DNTJSp+LDm"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTg+2-xRo1N3zzqY3BEUUqM989xifttbar_+mOE_X12PYg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,45 +59,283 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, 5 Oct 2025 17:16:35 +0100
+Andre Przywara <andre.przywara@arm.com> wrote:
 
---Grb792DNTJSp+LDm
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Mon, Oct 06, 2025 at 02:38:10PM -0600, Simon Glass wrote:
-> Hi Kory,
+> On Sun, 05 Oct 2025 08:10:27 +0200
+> Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 >=20
-> On Mon, 6 Oct 2025 at 10:45, Kory Maincent <kory.maincent@bootlin.com> wr=
-ote:
-> >
-> > expo and cedit tests depend on the host having the SDL library.
-> > Build these tests only if VIDEO_SANDBOX_SDL config is enabled.
-> >
-> > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > ---
-> >  test/boot/Makefile | 2 ++
-> >  1 file changed, 2 insertions(+)
+> Hi,
 >=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> > Dne nedelja, 5. oktober 2025 ob 02:40:21 Srednjeevropski poletni =C4=8D=
+as je Andre Przywara napisal(a): =20
+> > > On Mon, 11 Aug 2025 09:35:19 +0200
+> > > Rudi Horn <dyn-git@rudi-horn.de> wrote:
+> > >=20
+> > > Hi Rudi,
+> > >=20
+> > > thanks for sending a patch to address this long-standing issue!
+> > >=20
+> > > But ... ;-)
+> > >    =20
+> > > > I encountered a bug where u-boot detects that my OrangePI zero 3 (w=
+ith=20
+> > > > 1.5GB) has 2GB and crashes.   =20
+> > >=20
+> > > As Jernej already said, this is a known limitation: we simply don't
+> > > support not-power-of-2 DRAM sizes at the moment.
+> > >    =20
+> > > > The orangepi u-boot source code contains an additional
+> > > > modification in the `mctl_calc_size` which removes a quarter of the=
+=20
+> > > > memory the
+> > > > calculated last address cannot be written to:
+> > > >=20
+> > > > https://github.com/orangepi-xunlong/u-boot-orangepi/blob/v2024.01/a=
+rch/arm/mach-sunxi/dram_sun50i_h616.c#L1365-L1368
+> > > >=20
+> > > > I'm not entirely sure if there is some specific logic that applies =
+to this
+> > > > modifier, but it does fix the issue on my system.   =20
+> > >=20
+> > > So can someone shed some light on how this is supposed to work? If I
+> > > understand the code correctly, it checks for *aliasing* between the
+> > > first and the last word of DRAM, which doesn't make much sense to me:=
+ I
+> > > would expect a simple write/verify to see if the last quarter of DRAM
+> > > is for real, or to check for a known aliasing pattern with this "odd"
+> > > setup (as in: last quarter is aliased to first or third quarter or
+> > > something), but checking those two words for aliasing seems wrong.   =
+=20
+> >=20
+> > Hm... I've never tested this patch on HW, so you might have a point. St=
+ill,
+> > I think testing for aliasing makes sense. Just writing and reading might
+> > not be enough due to possible caching (not necessarily in CPU). =20
 >=20
-> We should be careful that a future CI change doesn't cause these tests
-> to stop running.
+> Sure, aliasing trumps verifying, but it might be easier to test the
+> latter?
+>=20
+> > I should have some board with non-power-of-2 RAM size somewhere. I'll t=
+ry
+> > to find it and test this. =20
+>=20
+> I just realised that my Cubie A7A has 12GB(!) of DRAM, so I can actually =
+do
+> some experiments here, in U-Boot proper, after boot0 has initialised the =
+DRAM:
+> [5912]DRAM SIZE =3D12288 MBytes, para1 =3D a11a, para2 =3D 30001001, dram=
+_tpr13 =3D 10065
 
-Given how HOST_HAS_SDL is defined, CI will be fine.
+So I did some experiments on my board:
+I booted boot0 from SD card, to let it initialise all 12GB of DRAM,
+then to go to FEL. After that I loaded U-Boot into DRAM and started it.
+I hacked U-Boot to assume 16GB of DRAM, and mapped all memory above 4GB
+as device (non-cacheable). The observations are:
+- Memory beyond the 12GB real DRAM contains one of two distinct 32
+  byte long patterns, which alternate every 512MB:
+35fffffc0: 66666666 66666666 66666666 66666666  ffffffffffffffff
+35fffffd0: 66666666 66666666 66666666 66662626  ffffffffffff&&ff
+35fffffe0: 66666666 66666666 66666666 66666666  ffffffffffffffff
+35ffffff0: 66666666 66666666 66666666 66662626  ffffffffffff&&ff
+360000000: 99999999 99999999 99999999 99999999  ................
+360000010: 99999999 99999999 99999999 9b9b9999  ................
+360000020: 99999999 99999999 99999999 99999999  ................
+360000030: 99999999 99999999 99999999 9b9b9999  ................
+- values written there are ignored, the content stays at this initial patte=
+rn
+- with caches enabled, writes seem to stick, but that's in the cache only
+- this pattern does not appear anywhere else in DRAM
 
---=20
-Tom
+So this means any aliasing test wouldn't work, but we can do an
+accessibility test, I think the algorithm should be:
 
---Grb792DNTJSp+LDm
-Content-Type: application/pgp-signature; name="signature.asc"
+bool test_last_quarter(size_t size)
+{
+	uintptr_t addr =3D CFG_SYS_SDRAM_BASE + size / 4 * 3;
+	uint32_t orig, val;
 
------BEGIN PGP SIGNATURE-----
+	orig =3D readl(addr);
+	writel(~orig, addr);
+	val =3D readl(addr);
+	writel(orig, addr);
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOQ4RAAKCRAr4qD1Cr/k
-CtSPAQDLOnjjNz5rUEhQxtpHTz0WtnVULX76UBgzKhAZD0qVugEA5KyYmL143eyQ
-odaNVVK/ruhxs3rYynL2+jka90hrTwI=
-=VNX9
------END PGP SIGNATURE-----
+	return ~orig =3D=3D val;
+}
 
---Grb792DNTJSp+LDm--
+This would be SPL code, so with the MMU and thus caches off, and since
+all accesses go to the same memory address on the same core, we
+shouldn't need extra barriers (I think even the _relaxed versions
+should work).
+
+Can someone test this on a board with an "odd" memory size? It worked
+on a normal 4GB board (passing the test), and failed on my 12GB board,
+albeit running only in U-Boot proper.
+
+If this works, I will send a proper patch.
+
+Cheers,
+Andre
+
+>=20
+> > > And indeed the code also fires on a board with 512MB and 4GB, capping
+> > > the memory there as well (resulting in 384 MB and 3GB, respectively).
+> > > This is somewhat expected, as we never would expect aliasing between
+> > > those two particular words, I'd say.
+> > >=20
+> > > So since I don't have a board with an "uneven" DRAM size, can you
+> > > please test some ideas to detect this RAM setup?
+> > > - Read the content of the first word to not exist (@1.5GB), then write
+> > >   something else there, and see if you can read this back? Don't forg=
+et
+> > >   a write barrier (dsb();) when doing so.
+> > > - Write some test pattern to some known good DRAM locations, like the
+> > >   beginning of DRAM, @512MB, @1GB, and see if any of those values pop
+> > >   up @1.5GB, to see if there is an aliasing pattern?
+> > > - Can you post the exact label on that DRAM chip, so that we can see =
+if
+> > >   we find a datasheet? I'd be curious about the actual organisation of
+> > >   the DRAM array.
+> > >=20
+> > > Jernej, do you happen to know how those DRAM chips are organised? Do
+> > > they just feature a non-power-of-2 number of rows or columns?   =20
+> >=20
+> > I don't know details how such chips are organized internally. However,
+> > number of rows and columns was never power-of-2. =20
+>=20
+> Ah right, brain fart on my end, those are of course the exponents in the
+> calculation, so result in the eventual power-of-2 number. I then wonder
+> where the factor of 3 comes in, are there 6 banks, or 3 ranks (doubt
+> that)? I could not find a datasheet of one of those 12Gbit Samsung
+> chips yet.
+>=20
+> > Btw, I think I saw 3 GB DRAM boards too somewhere, but not sure where.
+> > Quick search confirms that 24 Gb DRAM chips also exists, so I would lea=
+ve
+> > this check as general 3/4 size fixup, not limited to any capacity. =20
+>=20
+> Oh, definitely, the only constant here would be the 3/4th. So the plan
+> would be to detect some oddity (either through aliasing or because of
+> missing DRAM cells at the end), then assume it's 3/4 of the detected
+> capacity.
+>=20
+> Cheers,
+> Andre
+>=20
+> >  =20
+> > >=20
+> > > Oh, and also this patch was heavily malformed - line breaks and spaces
+> > > instead of tabs. Please try to fix this. Simplest is probably "git
+> > > format-patch", then sending this via "git send-email". Your email
+> > > server seems to be postfix, so you could just give the SMTP details a=
+nd
+> > > credentials to git.
+> > >=20
+> > > Cheers,
+> > > Andre
+> > >=20
+> > >    =20
+> > > >=20
+> > > > I propose the following patch, but am open to any further suggestio=
+ns.
+> > > >=20
+> > > > Thanks,
+> > > > Rudi Horn
+> > > >=20
+> > > > Note: Submitted in my personal capacity and is not affiliated with =
+my=20
+> > > > employer.
+> > > >=20
+> > > >=20
+> > > >  From 2199f3b28e5fc853ed1921586358c33f3f1502d3 Mon Sep 17 00:00:00 =
+2001
+> > > > From: Rudi Horn <dyn-git@rudi-horn.de>
+> > > > Date: Mon, 11 Aug 2025 08:58:34 +0200
+> > > > Subject: [PATCH] arch: arm: mach-sonxi: Fix detection of odd memory
+> > > >   configurations
+> > > >=20
+> > > > Fix detection of odd memory configurations. Previously 1.5GB device=
+s were
+> > > > incorrectly detected as 2GB devices, causing u-boot to crash.
+> > > >=20
+> > > > Signed-off-by: Rudi Horn <dyn-git@rudi-horn.de>
+> > > > ---
+> > > >   arch/arm/include/asm/arch-sunxi/dram.h |  1 +
+> > > >   arch/arm/mach-sunxi/dram_dw_helpers.c  | 10 +++++++++-
+> > > >   arch/arm/mach-sunxi/dram_helpers.c     |  8 ++++++++
+> > > >   3 files changed, 18 insertions(+), 1 deletion(-)
+> > > >=20
+> > > > diff --git a/arch/arm/include/asm/arch-sunxi/dram.h=20
+> > > > b/arch/arm/include/asm/arch-sunxi/dram.h
+> > > > index 0eccb1e6c28..7580421ca77 100644
+> > > > --- a/arch/arm/include/asm/arch-sunxi/dram.h
+> > > > +++ b/arch/arm/include/asm/arch-sunxi/dram.h
+> > > > @@ -44,6 +44,7 @@
+> > > >   unsigned long sunxi_dram_init(void);
+> > > >   void mctl_await_completion(u32 *reg, u32 mask, u32 val);
+> > > >   bool mctl_mem_matches(u32 offset);
+> > > > +bool mctl_mem_matches_upto(u32 offset);
+> > > >   bool mctl_mem_matches_base(u32 offset, ulong base);
+> > > >=20
+> > > >   #endif /* _SUNXI_DRAM_H */
+> > > > diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c=20
+> > > > b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> > > > index 24767354935..5bcd2672465 100644
+> > > > --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
+> > > > +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> > > > @@ -146,5 +146,13 @@ unsigned long mctl_calc_size(const struct=20
+> > > > dram_config *config)
+> > > >          u8 width =3D config->bus_full_width ? 4 : 2;
+> > > >=20
+> > > >          /* 8 banks */
+> > > > -       return (1ULL << (config->cols + config->rows + 3)) * width =
+*=20
+> > > > config->ranks;
+> > > > +       unsigned long size =3D (1ULL << (config->cols + config->row=
+s + 3))=20
+> > > > * width * config->ranks;
+> > > > +
+> > > > +       /* some memory configurations such as 1.5GB rely on this to=
+=20
+> > > > compute the correct size */
+> > > > +       if (!mctl_mem_matches_upto(size)) {
+> > > > +               size =3D (size * 3) / 4;
+> > > > +               debug("capping memory at 0x%lx\n", size);
+> > > > +       }
+> > > > +
+> > > > +  return size;
+> > > >   }
+> > > > diff --git a/arch/arm/mach-sunxi/dram_helpers.c=20
+> > > > b/arch/arm/mach-sunxi/dram_helpers.c
+> > > > index 83dbe4ca98f..68c75fa07a6 100644
+> > > > --- a/arch/arm/mach-sunxi/dram_helpers.c
+> > > > +++ b/arch/arm/mach-sunxi/dram_helpers.c
+> > > > @@ -61,4 +61,12 @@ bool mctl_mem_matches(u32 offset)
+> > > >   {
+> > > >          return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
+> > > >   }
+> > > > +
+> > > > +/*
+> > > > + * Test if memory at offset matches memory at end of DRAM
+> > > > + */
+> > > > +bool mctl_mem_matches_upto(u32 offset)
+> > > > +{
+> > > > +       return mctl_mem_matches_base(offset - sizeof(u32),=20
+> > > > CFG_SYS_SDRAM_BASE);
+> > > > +}
+> > > >   #endif
+> > > > --
+> > > > 2.43.0
+> > > >    =20
+> > >=20
+> > >    =20
+> >=20
+> >=20
+> >=20
+> >=20
+> >  =20
+>=20
+>=20
+
