@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72C89CAC5B8
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 12:06:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC4DCCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 12:26:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B4EB835D0;
-	Mon,  6 Oct 2025 14:06:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8DE4C807B1;
+	Mon,  6 Oct 2025 14:26:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NAoTR2wB";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="to62U8II";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bCZktOA1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F3A98365E; Mon,  6 Oct 2025 14:06:22 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 718EC835B3; Mon,  6 Oct 2025 14:26:36 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B7C4802C1
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 14:06:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D2B3802C1
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 14:26:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cgHzw26SWz9sss;
- Mon,  6 Oct 2025 14:06:20 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1759752380;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=G2jV+yCw0nlQF7KSet/hURKnFkU2OfZnuig64JJU+yM=;
- b=NAoTR2wBJY727rPOy9rgokeeGWoQCwLr6UCCrsvVLBiXjlz1VgreBpMErs6A5fpje8+xre
- tIDNpR65T7lFVt63FYI96y7lH9ooyYhyG0069cjwZ08Wa/quNKRUH0k/V5cAzIE4vzmmcU
- YqxLjYB2esuYE81i95CQyZRvWOcL3dATSKq0r9kkJPpK/uSGp+pUFbSRfUC8Ke96USj+0W
- KlE3+21T3tt6lcPO8Cp6aZlwxTX/mcn7fjGChEQSz9UcvCNAJfJ7JQVZvfDEtG1uMcXj+B
- Ey+wQME62Ne721ACWNWMZAWf1DirP402TCxmuNvNNBaPCdjYi6D6oFk0DClQ1Q==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=to62U8II;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::2 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <bbf07b05-f842-493f-acf0-5d1f08be26d1@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1759752378;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=G2jV+yCw0nlQF7KSet/hURKnFkU2OfZnuig64JJU+yM=;
- b=to62U8II7MQaDEPGqyJAF71mop2cBSBw5dWmQLw2agrgLXINo+mPfzzxa556sWFI8Mtf4k
- gPzy8ug2xlKi65Ab9oHguyLAKZUJJhM7Y704vXOTAOVw5yXKp8MSOXwItXAdtd+bySmapM
- GgAVrUyAlGhOkdHsQYgsufK7zxbi+HGISByCHvJpIwNwrKhZpYT88Fc2NxC6Dh7gffPpsq
- O5jEoOXs4nwWtwINfbYuqWsKNqWhJ3D7+WHVCShPDU1ZpN1JK5ZQeWDxMtP3bMpkaBmlqh
- g0pP2pme7Jb1Dgk3WKXjDtXGCpYhrzWr+kqQtPR99bkWc9zyyt9xtfT/XQ0/XQ==
-Date: Mon, 6 Oct 2025 14:06:14 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b2e0513433bso755105466b.1
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 05:26:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1759753594; x=1760358394; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jOJtgKaUak3vZEv6eLSw++geEwuYVpXsL3a+Fpj9hQA=;
+ b=bCZktOA1ZSNrT6f/kc0QIS2lZitARYQoFanVDX+ryXC3YffZYwigRc3QUcdWCdkorz
+ 41pJjgQVsxI4uc94jiteQ9jy/a7wBxcqoCW+qEu9GQCRMT3GeMTpuSLR5fZcPXH5u809
+ fObGbIoKiM5wp0gSTOOMlpzEIAN2BSM2JZWO8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759753594; x=1760358394;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jOJtgKaUak3vZEv6eLSw++geEwuYVpXsL3a+Fpj9hQA=;
+ b=BOoMZTzNT6QaqrpBb+AlnQMt9yXWLBxVhokqhO9jIOK888m0fhDI/DEptErU1IBiBr
+ x+J3InVHV4PEHIKGyT3ovBfm2y68aAS+DgxtM7u+wlQQGgyzDrPe5AhM9M6ido0gXfiy
+ E75Jba8zz/Mk4o9fG0B3b3LbZ6cct8O0aMr4K8Vmipqkl9NfYWkpKokXe1Lfv3yvyZR9
+ NUby/1pDHd07LFYziOPDaMwsLVbTLooiBSiDIBN8l6Qg/jNSXYt4NvpwX8q+plEntx/T
+ Co8KyQed5eSYy1QZxUbiBae4CCdSK9iWOmprNm3zrA1SPXi1sYc0Ra+eRz8L9bzAVsvc
+ OauA==
+X-Gm-Message-State: AOJu0Ywfv6QRcCRmBnURtLCIe4zsks4elOMgxr19Qxodn+p/PBuPHeWH
+ s80jZJRu6w4FsUpRopsNmwzD4NcRpxbyC4eB/AvKoq8m4R8JsL2DxBvs2X9uI0Yj7HVgHREpaQ8
+ p+e5DrJdyjLrYMj8PdQr0nDO3D6yACQ4nqyzOIggB
+X-Gm-Gg: ASbGnctdKPbXofsJtg4XA0bABV2u64sNKCnfY9ousPSp7mjBj/ElA+m5nsy60syCBeU
+ MVDWO8z7B6O5qbIwHeR2T3mBVdsmdWmdM5mjd1k99vBTJzenvVsFSTmpxkM/y4b+m/enTsq9yMf
+ WTwSfawUfdNXyYSosAwvAUm8PSnLSiJOZ1M21ZxjpNsSevClRR8cdJhqznzPGz6NbKGIsCP5kEg
+ r7tqqJxzLXX3plrJ4HIBoY8SnDW8PC2OFbE+oHh
+X-Google-Smtp-Source: AGHT+IFJNMfUUulP0HS6M3/U0QKbSqylwPqfEsaepD6/a+3lpUFA15oQ58zWlmht9dQ4JsGQDkxBCio8Wy9C5HACh+M=
+X-Received: by 2002:a17:907:7286:b0:b3d:c47c:7ce9 with SMTP id
+ a640c23a62f3a-b49c40815bemr1616076866b.54.1759753593768; Mon, 06 Oct 2025
+ 05:26:33 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [U-Boot, v1, 1/1] net: phy: add paged PHY register accessors
-To: "Lucien.Jheng" <lucienzx159@gmail.com>, jerome.forissier@linaro.org,
- skylake.huang@mediatek.com, s-vadapalli@ti.com,
- paul.barker.ct@bp.renesas.com, marek.vasut+renesas@mailbox.org,
- u-boot@lists.denx.de
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org
-References: <20251006044405.30376-1-lucienzx159@gmail.com>
- <4fa8531c-e6c2-4a3a-b284-86c5bdd94530@mailbox.org>
- <251a26cf-fef4-4d20-a278-881ca31ddb97@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <251a26cf-fef4-4d20-a278-881ca31ddb97@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: hhxtzqamhdpid7ofx7js61pdmdrmk1jg
-X-MBO-RS-ID: de01faaec14e4e21ec8
-X-Rspamd-Queue-Id: 4cgHzw26SWz9sss
+References: <20251001203059.2828551-1-trini@konsulko.com>
+ <CAFLszTg8BFgpeYj7Gz-9ac5TVLaJJ5fs87oSeOfurSNT6dCa3w@mail.gmail.com>
+ <20251002170352.GM6093@bill-the-cat>
+In-Reply-To: <20251002170352.GM6093@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 6 Oct 2025 06:26:20 -0600
+X-Gm-Features: AS18NWBjuWdplERMg9Fo4rbDkUTXdjdKCYd3oHFJ9m92NMUV5N6jI42-mbYM4bE
+Message-ID: <CAFLszTjbcnUXzph86i4H9SUU8gZB32yUKMVZzAges_jo9BA16A@mail.gmail.com>
+Subject: Re: [PATCH] boot: vbe: Make BOOTMETH_VBE_xxx a choice
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,38 +88,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/6/25 1:59 PM, Lucien.Jheng wrote:
+Hi Tom,
 
-Hi,
+On Thu, 2 Oct 2025 at 11:03, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Oct 02, 2025 at 10:29:58AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 1 Oct 2025 at 14:33, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > It is not valid to enable multiple BOOTMETH_VBE_xxx methods
+> >
+> > Why is it not valid? That wasn't my intention.
+>
+> They fail to build because they both declare some of the same binman
+> syms:
+> $ grep 'binman_sym_declare(ulong, vpl, size)' boot/vbe*.c
+> boot/vbe_abrec_fw.c:binman_sym_declare(ulong, vpl, size);
+> boot/vbe_simple_fw.c:binman_sym_declare(ulong, vpl, size);
+> $ grep 'binman_sym_declare(ulong, vpl, image_pos)' boot/vbe*.c
+> boot/vbe_abrec_fw.c:binman_sym_declare(ulong, vpl, image_pos);
+> boot/vbe_simple_fw.c:binman_sym_declare(ulong, vpl, image_pos);
+>
+> Enabling both leads to link failures.
 
-> Marek Vasut 於 2025/10/6 下午 04:18 寫道:
->> On 10/6/25 6:44 AM, Lucien.Jheng wrote:
->>> Synchronize paged PHY helpers with Linux v4.16.
->>
->> Why such an old version , current LTS is 6.12 ?
->>
-> I just meant to say that this patch was initially included in this 
-> commit. I'll adjust the wording here.
-> 
-> For the next version, I will write the commit message: "Synchronize 
-> paged PHY helpers with Linux v6.16."
+OK, thanks. I'll need to fix it at some point...
 
-If you are synchronizing the headers with 6.16 fully (btw. 6.17 is out) 
-then sure. If you are pulling in single patch from older kernel version, 
-then refer to that kernel version. (I am a bit tired today, I hope it 
-makes sense)
-
->>> linux commit
->>> COMMIT 78ffc4acceff48522b92d8fbf8f4a0ffe78838b2
->>> TITLE: net-phy-add-paged-phy-register-accessors.patch
->>
->> Please use the standard abbreviated format with 12+ letters SHA and 
->> commit subject -- example: e37de002fac3 ("Prepare v2025.07")
->>
-> OK, got it.
->> [...]
-
-
--- 
-Best regards,
-Marek Vasut
+Regards,
+Simon
