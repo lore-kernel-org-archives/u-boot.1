@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0688DCCA471
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 15:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 919C6CCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 15:33:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7042783DB3;
-	Mon,  6 Oct 2025 17:31:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1650583BB5;
+	Mon,  6 Oct 2025 17:33:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z3JbIeAE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OpgRphv3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FBEC83DCA; Mon,  6 Oct 2025 17:31:35 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 5908183C46; Mon,  6 Oct 2025 17:33:35 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A91083DA7
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 17:31:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D738083A8E
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 17:33:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-46e3af7889fso31488175e9.2
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 08:31:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-42d7ef9a402so22918865ab.0
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 08:33:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759764692; x=1760369492; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=m0Yh6QBMLmUELFpLv36yR4P5bTfS+DKtNLcEgCbujcE=;
- b=Z3JbIeAEnFMfV8oXT/5L5byqoOHW6FqttIp+sooccLMpZV8gioBNi74J/hqe+rlN3S
- 04gp6o34gIhqJpQ62OXwRrTE2V3SqQvnjBekNMYGU7ebr3QNhFqj5uWPdsPB2BJ3A95I
- HZINtnojsDysWr9N4qylI3trBxr7FIJmXW136fl83KiAdJlJO4S0KhhPXEk2dOxmYqnp
- 4ssdGDv7gO2ggOV9KfqbrULRM8qBgehRD2KNTsm7GSgR+DuoMjcuwm7yKZT6ppW7afb7
- G7sDrSttiJyEtKomVEZCLriKF7bkRVPtiIe18kcQ0twNB21j6+UmlKjGRH7EBLyoS6qS
- G+1A==
+ d=konsulko.com; s=google; t=1759764811; x=1760369611; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=VLc5jPko28gENmGY15zDAzpoVLwoaYRfSVcgRpcXXQQ=;
+ b=OpgRphv3Kd0DacPByVL4ivgfC/1ta8Ket788os225ZDvpwdUO/vf4TCWr59F72HwpH
+ XlGoJ+HlmivYjF/Cn1fSnqEfYwMdqX4cCqViXnMaDLnxmk+9njH+r5bUAz+PR55vUKSm
+ +ZF8evCeDwz5RDBwkAbvgKRr2dcoOGzXZ2BQA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759764692; x=1760369492;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=m0Yh6QBMLmUELFpLv36yR4P5bTfS+DKtNLcEgCbujcE=;
- b=k3eCPlj4lZUIqbHneuF4oIpLQLklrjP3lsvc7fWfKmSgvD20o3dZ1JSE2QWRpoZrmP
- OPRIe/aXibZdSQsmgVHS5MxT53l4Zm92RkwnCJW+nNAS0hlDBrgJEo/ftZe6CWIZx87M
- elx8E7xg70GJheB0jKxMx6z4/TAMiSpIEHflCigS/sSMCq7ItaJn/Iy7LAoPKmtPbkp9
- bmo9IHjhL2EzpRN3liZfjW/1AQ6uU8t63nbuRawnRGMoypdRqb40pbqK9xJNpE6KqZ6y
- MWQedwqIO6yqs7QvizK/1I4lU183MSZwwksSR6VxbLUZcSoyhrf5zbAWDWoUCsy25zB+
- xjzg==
-X-Gm-Message-State: AOJu0Yw2Jrf9ub89KuUcwMBPhSmLBJsFA7HJa+CD+XkX3/ORN641PW8z
- BjrpCJx7AWfqJbKYSrlp853Z2NjI26fl1/6a2Utqm1mRS80leFMPGPxy0+NSYmGmb3U=
-X-Gm-Gg: ASbGncsBwpPyW7FYbcChrkH/u4fpfHj+N90xdhIhBJ7bmdwokyayBKz50zZitRJ5e2C
- zhBvg5BdiE2a9nAhVjoTKwyU2UtuzNE5usdprYGiBZaXLefVBbGotyZ5l0HokUl+PjIN2muxjBr
- YPEzn1hM2UWb45X5zY2LFR9NOHaIFzNvCXIA2YP8yoh/XDTHRCnJTiOULzGXgk/9HVRgtOyJCsI
- Va9lHdqKjQr8IXLrWdSQTevD7sAYdvsaNXgNM7F27FOWl5gIM/MXdR0sEzkl3Qx+mvas/kuc0O4
- STC76eJ54SgZWahEHmHhE0vE0lkSkQSvFM1OlV2NbqUTC24SQwwlSImQhV34H/C19z54tTVYrgu
- bjG3V7JO+eOxwEaZjrhBmsC4hFJMTHBM8MlL9tCMXZGJXbZpual5dMXOz+qQJokS73Z+Dd0awGq
- 30xQ==
-X-Google-Smtp-Source: AGHT+IEGzA9xxW8udad6YCajX+lfV8qLKrAUjzh63cxf5DMYs1/RjJ8F/QE16EK4wWV9CEv41d3REA==
-X-Received: by 2002:a05:600c:698c:b0:46e:36f8:1eb7 with SMTP id
- 5b1f17b1804b1-46e71124219mr88423525e9.10.1759764692004; 
- Mon, 06 Oct 2025 08:31:32 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:4601:d8c:ebdc:373e:b4a0])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e7234e58asm161112825e9.7.2025.10.06.08.31.31
+ d=1e100.net; s=20230601; t=1759764811; x=1760369611;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=VLc5jPko28gENmGY15zDAzpoVLwoaYRfSVcgRpcXXQQ=;
+ b=q8OkiXgLCmHCiXOxhdySzwYBSQbSabGB47RCRCJcBmlcYYN6wt020sAY2eU0+TUZ4I
+ 8hi4EKh1hnrTl6Zf6I2ExpqzxTb7zO6Zg75i+Pr668CjcfCcsNP20wCpwbXUk/aR/r8G
+ vcYu5VtPVYi1VlKE28xoBhPZylySNMstmZRoXXb67o0CFhvGxx7vt1GJ9ny09Wn7dOo9
+ JtUw3fhdd5Sl4UkSzERiE0CNYVTrPA0eF2/ThD8sWi0KrNJESpy6iTJOeQx9gP4lglmP
+ rp67xjOwjJI0c8YQxbeDuBEBru3axHn0YtznLQloevnWKlHpO25jRLaTZDEeBJ9AydDI
+ QVAw==
+X-Gm-Message-State: AOJu0YzmMLLMCivWgxGc+ORZo2vCJqIWi55FScs33rJQVjj+AQoBsZ++
+ AYihEXZanyrtmXcBvwX6jmCjIjGv5GZmXFiAUGCU7uh4AQ26LiWdGj4RaGhTp8DRp3QgdEb85fD
+ 4jflM6W8=
+X-Gm-Gg: ASbGncslzEM4nxpv8rH6wEMMjKINZwIu0/fwTWInZhu5BSEdTHPARFJge6hGshF7HE9
+ lNwb9HIvK26Gyrt/E86P1VB6uOyaj6MP30pg4jxFDPFMonVTbzgr4l1ATfdaxytgAArjAYuXaSd
+ kzi0PI1aU2T5OykBUylU46sJ3an4CDNngxyg+KluJNpNYEYbWWArR4QrFvzZY3WhEgo+iJkWAq6
+ HjcXIuHB5P0NpXBwvRnUYvDsQxzcKDzaYLbGVZFZIEgkO5Vy5YgWXnTmdZGzuzA0DiF8J78lNdu
+ TxwfGCCOnAG+Qssz3tUrWzt0lP036kjrohItKbpvh5XzclZJ8KdGeI3bCkRfAHRHl9mTS7c2dgl
+ 1sHCZzjh3S68qrDtE2KPAZoI0g30eaibwGUGLazfeFT58DFUAh31JTXnDEvjJvY1MXxyS0gdjGJ
+ yb/iyhWMjhgA==
+X-Google-Smtp-Source: AGHT+IHLMYWQvhlGC3pWcJKyvaMlxb4cRj8UZc5ASozFHBtgyV4HMRsHnIptGT6YXIj0jEy/nOXjAA==
+X-Received: by 2002:a05:6e02:3398:b0:424:4bc:4b33 with SMTP id
+ e9e14a558f8ab-42f7c349c8fmr535725ab.1.1759764811404; 
+ Mon, 06 Oct 2025 08:33:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-57b5ebc8488sm5061597173.46.2025.10.06.08.33.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Oct 2025 08:31:31 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 06 Oct 2025 16:31:31 +0100
-Subject: [PATCH RESEND] ufs: ti-j721e: Correct error detection
+ Mon, 06 Oct 2025 08:33:30 -0700 (PDT)
+Date: Mon, 6 Oct 2025 09:33:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Kory Maincent <kory.maincent@bootlin.com>
+Cc: u-boot@lists.denx.de, Alison Chaiken <alison@she-devel.com>
+Subject: Re: [PATCH] test: Update logic for video test
+Message-ID: <20251006153328.GA6303@bill-the-cat>
+References: <20250818165406.3194425-1-trini@konsulko.com>
+ <20251006171335.7b40302c@kmaincent-XPS-13-7390>
+ <20251006172224.0a8d1919@kmaincent-XPS-13-7390>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251006-ufs_ti-v1-1-f37bf96d3ade@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8/4ZeNziBvuzSKCP"
+Content-Disposition: inline
+In-Reply-To: <20251006172224.0a8d1919@kmaincent-XPS-13-7390>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,50 +99,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In ti_j721e_ufs_probe there is a call to clk_get_rate but the code after
-that attempts to detect an error from that call incorrectly uses
-IS_ERR_VALUE.  Instead the test should just be for regular error codes.
-The call returns an unsigned long so that needs to be cast to a signed type
-first of all.
 
-This issue was found by Smatch.
+--8/4ZeNziBvuzSKCP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/ufs/ti-j721e-ufs.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Mon, Oct 06, 2025 at 05:22:24PM +0200, Kory Maincent wrote:
+> On Mon, 6 Oct 2025 17:13:35 +0200
+> Kory Maincent <kory.maincent@bootlin.com> wrote:
+>=20
+> > On Mon, 18 Aug 2025 10:54:06 -0600
+> > Tom Rini <trini@konsulko.com> wrote:
+> >=20
+> > > The video test here is specific to the sandbox SDL video driver, so o=
+nly
+> > > build it when that is enabled rather than VIDEO is enabled. =20
+> >=20
+> > This broke the build of sandbox_defconfig:
+>=20
+> It seems CONFIG_SANDBOX_SDL=3Dy is missing in every sandbox defconfig, an=
+d it is
+> required to have CONFIG_VIDEO_SANDBOX_SDL enabled.
 
-diff --git a/drivers/ufs/ti-j721e-ufs.c b/drivers/ufs/ti-j721e-ufs.c
-index c5c08610ffd0422c9cf9d8e85b0396e6102cb29a..d50918912b2168db4e00c3cac0a9c54872a76602 100644
---- a/drivers/ufs/ti-j721e-ufs.c
-+++ b/drivers/ufs/ti-j721e-ufs.c
-@@ -17,7 +17,7 @@
- static int ti_j721e_ufs_probe(struct udevice *dev)
- {
- 	void __iomem *base;
--	unsigned int clock;
-+	unsigned long clock;
- 	struct clk clk;
- 	u32 reg = 0;
- 	int ret;
-@@ -29,9 +29,9 @@ static int ti_j721e_ufs_probe(struct udevice *dev)
- 	}
- 
- 	clock = clk_get_rate(&clk);
--	if (IS_ERR_VALUE(clock)) {
-+	if ((long)clock < 0) {
- 		dev_err(dev, "failed to get rate\n");
--		return ret;
-+		return clock;
- 	}
- 
- 	base = dev_remap_addr_index(dev, 0);
+How we detect SDL is kind of odd and could be improved. I suspect that
+VIDEO_SANDBOX_SDL needs to 'depends on SANDBOX_SDL' as part of the
+solution too.
 
----
-base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
-change-id: 20250813-ufs_ti-dd699eb6524e
+--=20
+Tom
 
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+--8/4ZeNziBvuzSKCP
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOPhQAAKCRAr4qD1Cr/k
+CsslAP4+S/J0KD2EuzADR5dMbAJcwdSaABT+YljfeOiD6EuBAwEAoJ6MuaI+DCSl
+t+TG41h8coxicsft2i69zH5nw/thDgw=
+=wi5v
+-----END PGP SIGNATURE-----
+
+--8/4ZeNziBvuzSKCP--
