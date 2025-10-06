@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC51CAC5B8
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 17:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84FF5CAC5B8
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 17:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24F0983D1A;
-	Mon,  6 Oct 2025 19:25:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 024D983AA8;
+	Mon,  6 Oct 2025 19:37:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Bj7FJFW2";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="A+sM/j0g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2053F83D52; Mon,  6 Oct 2025 19:25:09 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 95C6283B30; Mon,  6 Oct 2025 19:37:36 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A85983CCA
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 19:25:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CFA983918
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 19:37:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 596HP3d54105651;
- Mon, 6 Oct 2025 12:25:03 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 596HbUcp3595373;
+ Mon, 6 Oct 2025 12:37:30 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1759771504;
- bh=2TZh8lYcsHxQlEF33TBbSfsY8n1w3z8VvDlFYci+HaI=;
+ s=ti-com-17Q1; t=1759772250;
+ bh=okFr3dBARn+AKFyL64zaXQJrILK4dgMQHrjgmI7Rx9A=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Bj7FJFW2rTJZI8Ldy+aOuVo6fTqHaJWLb0KKd+niUGFGnypOjyVfUwZYWSFmxEb8p
- Ksx8ERnT2Rd+cxhCYSqmRaWjhUFd0ZzgnX6kZQPGmdS5IOzHqWbE0XI/pzwpNuX6JO
- DsHDd85fSZ4NfUq+p8ze0mkQI7y3CQQtu8Ef6p5I=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 596HP3sK3465605
+ b=A+sM/j0gjw8GD4gED6s7w+eyM2oJgt4xPMOlqmfsehhkqoz1K6XoCkiTG/aUTELpz
+ 8vewXfb1Y3oF5kMm3gl9stn3+7MPDpL9mp7pOoysg8j9AV1mki6XUD0l4ZzsFw3gn0
+ OSlIC3F/QRZ1KjkIBGcJr+g6RRwHAVOT2GTNy+1U=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 596HbUZh2389350
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 6 Oct 2025 12:25:03 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 6 Oct 2025 12:37:30 -0500
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 6
- Oct 2025 12:25:02 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2025 12:37:29 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 6 Oct 2025 12:25:02 -0500
+ Transport; Mon, 6 Oct 2025 12:37:29 -0500
 Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 596HOxxf4027508;
- Mon, 6 Oct 2025 12:25:00 -0500
-Message-ID: <27f03840-1849-49d5-8088-22377b61f54b@ti.com>
-Date: Mon, 6 Oct 2025 22:54:59 +0530
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 596HbQUp3802716;
+ Mon, 6 Oct 2025 12:37:27 -0500
+Message-ID: <cc8145e3-6f87-40e5-a28c-f55d9c3f04dd@ti.com>
+Date: Mon, 6 Oct 2025 23:07:25 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] ti_sci: Pointer is never assigned to
+Subject: Re: [PATCH 1/3] ti_sci: Prevent memory leak
 To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Dhruva
  Gole <d-gole@ti.com>, Moteen Shah <m-shah@ti.com>, Nishanth Menon
  <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, <u-kumar1@ti.com>
 References: <20251006-ti_sci-v1-0-9cef92e1022d@linaro.org>
- <20251006-ti_sci-v1-3-9cef92e1022d@linaro.org>
+ <20251006-ti_sci-v1-1-9cef92e1022d@linaro.org>
 Content-Language: en-US
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251006-ti_sci-v1-3-9cef92e1022d@linaro.org>
+In-Reply-To: <20251006-ti_sci-v1-1-9cef92e1022d@linaro.org>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -83,34 +83,72 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 10/6/2025 8:50 PM, Andrew Goodbody wrote:
-> The pointer resp is declared but never assigned a value but is then
-> dereferenced. Fix this by assigning the pointer to the message buffer.
+On 10/6/2025 8:49 PM, Andrew Goodbody wrote:
+> temp is assigned the pointer returned by malloc which is used without a
+> NULL check and then never freed. Add a NULL check and ensure temp is
+> freed on all return paths.
 >
 > This issue was found by Smatch.
 >
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->   drivers/firmware/ti_sci.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   drivers/firmware/ti_sci.c | 16 +++++++++++++---
+>   1 file changed, 13 insertions(+), 3 deletions(-)
 >
 > diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-> index bd8a8f6c6b35e9038f5fb9927927d5b664ae5a3a..6def152f00a9442fcd0037c8f4032235d8c7fdab 100644
+> index 8013afef304dfb70ab14150ddc49d43ebebb5902..f262da188f675b95ae217df418dc6df0364b4425 100644
 > --- a/drivers/firmware/ti_sci.c
 > +++ b/drivers/firmware/ti_sci.c
-> @@ -1365,6 +1365,8 @@ static int ti_sci_cmd_clk_get_parent(const struct ti_sci_handle *handle,
->   	if (ret)
->   		return ret;
->   
-> +	resp = xfer->tx_message.buf;
+> @@ -3084,17 +3084,24 @@ devm_ti_sci_get_of_resource(const struct ti_sci_handle *handle,
+>   		return ERR_PTR(sets);
+>   	}
+>   	temp = malloc(sets);
+> +	if (!temp)
+> +		return ERR_PTR(-ENOMEM);
 > +
 
-Thanks for catching this. buf is u32*, consider to do typecasting
-
-resp = (struct ti_sci_msg_resp_get_clock_parent *) xfer->tx_message.buf;
+I suggest to move malloc to devm_kmalloc,
 
 
->   	*parent_id = resp->parent_id;
+>   	sets /= sizeof(u32);
+>   	res->sets = sets;
 >   
->   	return ret;
+>   	res->desc = devm_kcalloc(dev, res->sets, sizeof(*res->desc),
+>   				 GFP_KERNEL);
+> -	if (!res->desc)
+> +	if (!res->desc) {
+> +		free(temp);
+>   		return ERR_PTR(-ENOMEM);
+> +	}
+>   
+>   	ret = dev_read_u32_array(dev, of_prop, temp, res->sets);
+> -	if (ret)
+> +	if (ret) {
+> +		free(temp);
+>   		return ERR_PTR(-EINVAL);
+> +	}
+>   
+>   	for (i = 0; i < res->sets; i++) {
+>   		resource_subtype = temp[i];
+> @@ -3119,10 +3126,13 @@ devm_ti_sci_get_of_resource(const struct ti_sci_handle *handle,
+>   		res->desc[i].res_map =
+>   			devm_kzalloc(dev, BITS_TO_LONGS(res->desc[i].num) *
+>   				     sizeof(*res->desc[i].res_map), GFP_KERNEL);
+> -		if (!res->desc[i].res_map)
+> +		if (!res->desc[i].res_map) {
+> +			free(temp);
+>   			return ERR_PTR(-ENOMEM);
+> +		}
+>   	}
+>   
+> +	free(temp);
+
+Please move to devm_kfree(temp),
+
+rest of free(temp) in if condition could be dropped.
+
+
+>   	if (valid_set)
+>   		return res;
+>   
 >
