@@ -4,66 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0108DCAC5B8
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 08:45:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC8CCCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 09:51:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 876EC831D6;
-	Mon,  6 Oct 2025 10:45:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id BD06083327;
+	Mon,  6 Oct 2025 11:51:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="z0hlMbHf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jQQV1aGT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD6D483327; Mon,  6 Oct 2025 10:45:13 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6831E834D4; Mon,  6 Oct 2025 11:51:31 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC64A82E34
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 10:45:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6295182E34
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 11:51:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 47F2D4E40F13;
- Mon,  6 Oct 2025 08:45:10 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 17ED8606B7;
- Mon,  6 Oct 2025 08:45:10 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 7682F102F197D; 
- Mon,  6 Oct 2025 10:44:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759740309; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=Mz2WUPpFZ15h/N0qiuPXiFL1BwAxUTgxZCs8ljba8gM=;
- b=z0hlMbHfk2voQdKlv4QTuwXt1aA/egxDG7bA82kl7tSukcgRTWm29I1KdLq4FmHuuHFKdu
- /eixz/l1ESJYkiO0dEvtU9dbizqbHCIcJxmGBJ0oEAdNqKHn7VbrOoxOJBr0WtDKEKMlBD
- K3xMwKpelAMxcAfPJ1lkAuvwpU6bWp3eRUMRVpXm6Q6HE6w6TbF+qA+twMbb4UB3ryPkDs
- T4OOmVGpnujF76pw9foaOnnYe75VLoXSbRlrCJYJm4mFrbIj7d6s5Pkx+7uUU49y/n2eRO
- 3eFsriQBr4YMxCKbqI5fdJeWkicPLLPhMTBbGBbRwnh9A8jRCK4QL6VUSy8vjg==
-Date: Mon, 6 Oct 2025 10:44:56 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Jagan
- Teki <jagan@amarulasolutions.com>, Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)"
- <paul.liu@linaro.org>
-Cc: Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 07/16] board: sunxi: Refactor CHIP board extension code
-Message-ID: <20251006104456.55252350@kmaincent-XPS-13-7390>
-In-Reply-To: <20251003-feature_sysboot_extension_board-v1-7-458b8bf85325@bootlin.com>
-References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
- <20251003-feature_sysboot_extension_board-v1-7-458b8bf85325@bootlin.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-46e33b260b9so45474305e9.2
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 02:51:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1759744288; x=1760349088; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2akMuI21XpI3YYtnva0T3GTWanHzgvoQbns5I3C9xG8=;
+ b=jQQV1aGTRkdAm5FQ8HbEuGBsvtCfHqHGfe55qQT5yMoOP6n4GZqKPhWBuhiHUQ/nHd
+ u1M7zMgPqEAJ6kLjCYpKMgLkjRFyop4wrbUFmKZ0rMYAABZBuk56/7cDMF5EUpioCpKc
+ TALTDJRx6P5092rN0YpsPZZ8C6g7Y8wpP17ti6iWC3vnAPJk6hNtiysAYmYvbiYYhKYu
+ pqpdi7eK2J4dunP35EG+AN9VAv60n86z+K6tEDEzBTzxYuvqXgWbFlZ8zbP4kRDTVd6q
+ g/rCrCqtVtredabF7L6xVV5pBmrj9uoV0Hsc8HShaYoZPeCT7PJko54C8beOb/84ogjs
+ 4ocA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759744288; x=1760349088;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2akMuI21XpI3YYtnva0T3GTWanHzgvoQbns5I3C9xG8=;
+ b=YhhqK/rqTSjsYG1SUEm/OxJG5yHoTU1UV4EjK62cNF2EQE/owUHqUgXnHENz1d+WwM
+ k6zy2dz0SMGtoqEGHexkj8b5eEt/nwT7vgjNUbRSwBwcmr+XbbmL7NeQFXWLShqs+DcZ
+ H98jw6VDS3kN2nqMKw+jWfXp1JiAMXDlk8ouRXwQD1If8/Vp6pk1sXdbgAGdesPm9ICM
+ u/TF+cUMGuq3jm9qdzTE7PR7EkUBG39Zn0M3At8/CxzlH3NL6QJXpGNmMzuFKfP9Fr0T
+ GTJfokkgiQnP8SKHAffQ3rX1kqzLLAcAp6YVNZEoOEYsDA+GJo9fC/xBjSltzuioEd7L
+ JWfQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU4khKVkvfII1i5XcU9Ml/7b9dhHpCdtdE33hK0stFI2j//IdRvlOaDubLaa+nbVUpv6vkqacE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxVKOpBvK9XzRV0G0myYU56CviX/QGY1b4EhjoQff9AwZu3afh1
+ v191h1TAf39zEXMpFfVOJdv1G8yQ+vtcnG8WggXEbtEbaFK79mjAGtBKh1q/g2YjB2w=
+X-Gm-Gg: ASbGncusVGa0zgOM/USisCPpSc2GVPE+KInsj52u8jIz1IS5BKk8j+L2O4LKOly0q9t
+ zgYw7/rX1/y69Yhwki6bHitoLIIqogi7sVeBUEEcBPpxwSGhmcTE4a7u6LwL+bVFnZI5KiN/3BJ
+ LW//CYw3JPPfRl/76tOWu7/TN69xsdjveO7eEphfO8NMHcR2hk9D4tVZfou0YHtR9ok9+iU73R2
+ ikwXuB24P2M3vq7QNdVynBMIsYHpCcaNt6H/6kvCDOKCf3Z/kM/DVL9X5yP3qi4wQpoDrnT2lAA
+ 4PCdrctNA+HxnlPCtIytYRONHZWaO6AkwzsNNVZR6K9wEuqqHxKkVuTSjtSeOI/XbIuOr8FwEsz
+ 1kkqpIsXjYs29crAaVNujD9S6sjW+GDhvGBeAxCAKFZPA/t7rGA1c4m+mPPRVW611hZUPmitZWJ
+ /ldA4iK4ppVA6ghMzdam+bMoro2hoLSDcRrb856w==
+X-Google-Smtp-Source: AGHT+IHIoAUvI7j/QpWi6VIEr+DGh+YeIjUmxjf0SOcib2CqhYe/ToVK/PO5xVaNRw/hWdswbSJmnQ==
+X-Received: by 2002:a05:600c:3b0f:b0:46e:59dd:1b4d with SMTP id
+ 5b1f17b1804b1-46e7110a268mr105179185e9.16.1759744287811; 
+ Mon, 06 Oct 2025 02:51:27 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:fed:4601:d8c:ebdc:373e:b4a0?
+ ([2a0a:ef40:fed:4601:d8c:ebdc:373e:b4a0])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46e619b8343sm251581045e9.2.2025.10.06.02.51.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 06 Oct 2025 02:51:27 -0700 (PDT)
+Message-ID: <2952aa96-5787-4414-9435-1846d2b35bd3@linaro.org>
+Date: Mon, 6 Oct 2025 10:51:26 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: Prevent leak of memory from tmp_files
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20251003-efi_capsule-v1-1-07d5fd09b97f@linaro.org>
+ <49d2c974-a2f1-44be-8d80-285154cf52d0@gmx.de>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <49d2c974-a2f1-44be-8d80-285154cf52d0@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,74 +106,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 03 Oct 2025 18:33:47 +0200
-Kory Maincent <kory.maincent@bootlin.com> wrote:
-
-> Clean up and improve code structure in the sunxi CHIP board extension
-> detection implementation.
-
-It seems I forgot to build test CHIP_defconfig because there is a build err=
-or
-here.
-
-pw-bot:cr
-
->=20
-> Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> ---
->  board/sunxi/chip.c | 16 ++++++++--------
->  1 file changed, 8 insertions(+), 8 deletions(-)
->=20
-> diff --git a/board/sunxi/chip.c b/board/sunxi/chip.c
-> index 270af2506d2..ea0d3a56f5f 100644
-> --- a/board/sunxi/chip.c
-> +++ b/board/sunxi/chip.c
-> @@ -42,13 +42,7 @@ struct dip_w1_header {
-> =20
->  int extension_board_scan(struct list_head *extension_list)
->  {
-> -	struct extension *dip;
-> -	struct dip_w1_header w1_header;
->  	struct udevice *bus, *dev;
-> -	u32 vid;
-> -	u16 pid;
-> -	int ret;
-> -
->  	int num_dip =3D 0;
-> =20
->  	sunxi_gpio_set_pull(SUNXI_GPD(2), SUNXI_GPIO_PULL_UP);
-> @@ -60,6 +54,12 @@ int extension_board_scan(struct list_head *extension_l=
-ist)
->  	}
-> =20
->  	for_each_w1_device(bus, &dev) {
-> +		struct dip_w1_header w1_header;
-> +		struct extension *dip;
-> +		u32 vid;
-> +		u16 pid;
-> +		int ret;
-> +
->  		if (w1_get_device_family(dev) !=3D W1_FAMILY_DS2431)
->  			continue;
-> =20
-> @@ -90,8 +90,8 @@ int extension_board_scan(struct list_head *extension_li=
-st)
-> =20
->  		snprintf(dip->overlay, sizeof(dip->overlay),
-> "dip-%x-%x.dtbo", vid, pid);
-> -		strncpy(dip->name, w1_header.product_name, 32);
-> -		strncpy(dip->owner, w1_header.vendor_name, 32);
-> +		strlcpy(dip->name, w1_header.product_name,
-> sizeof(dip->name));
-> +		strlcpy(dip->owner, w1_header.vendor_name,
-> sizeof(dip->owner)); list_add_tail(&dip->list, extension_list);
->  		num_dip++;
->  	}
->=20
+On 06/10/2025 08:47, Heinrich Schuchardt wrote:
+> On 10/3/25 16:54, Andrew Goodbody wrote:
+>> After the malloc of tmp_files and before its value is recorded an early
+>> exit will need to free tmp_files to prevent leaking that memory.
+>>
+>> This issue was found by Smatch.
+> 
+> Thank you for following up through all those issues indicated by static 
+> code analysis.
+> 
+> Tom could grant you access to Coverity to look at what is reported there 
+> (https://scan.coverity.com/projects/das-u-boot).
 
 
+Thanks Heinrich. Tom has already granted me access to Coverity. I am not 
+quite sure where my priorities will be next but I hope to at least look 
+at adding Smatch to CI.
 
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Andrew
+
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   lib/efi_loader/efi_capsule.c | 4 +++-
+>>   1 file changed, 3 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/lib/efi_loader/efi_capsule.c b/lib/efi_loader/efi_capsule.c
+>> index 
+>> f19e78ae9d1e250f7bf8362f043877c6d10a9675..31b47a20186e036f6852c6baa4f353a5d7b97632 100644
+>> --- a/lib/efi_loader/efi_capsule.c
+>> +++ b/lib/efi_loader/efi_capsule.c
+>> @@ -1096,8 +1096,10 @@ static efi_status_t efi_capsule_scan_dir(u16 
+>> ***files, unsigned int *num)
+>>       while (1) {
+>>           tmp_size = dirent_size;
+>>           ret = EFI_CALL((*dirh->read)(dirh, &tmp_size, dirent));
+>> -        if (ret != EFI_SUCCESS)
+>> +        if (ret != EFI_SUCCESS) {
+>> +            free(tmp_files);
+>>               goto err;
+>> +        }
+>>           if (!tmp_size)
+>>               break;
+> 
+> LGTM
+> 
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
