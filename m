@@ -4,74 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC4DCCA471
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 12:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45D26CCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 12:52:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DE4C807B1;
-	Mon,  6 Oct 2025 14:26:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AA5B3835B3;
+	Mon,  6 Oct 2025 14:52:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bCZktOA1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CsTV6bUv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 718EC835B3; Mon,  6 Oct 2025 14:26:36 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id C9D118365E; Mon,  6 Oct 2025 13:59:10 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D2B3802C1
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 14:26:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6385802C1
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 13:59:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-b2e0513433bso755105466b.1
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 05:26:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lucienzx159@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-76e4fc419a9so4373565b3a.0
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 04:59:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759753594; x=1760358394; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jOJtgKaUak3vZEv6eLSw++geEwuYVpXsL3a+Fpj9hQA=;
- b=bCZktOA1ZSNrT6f/kc0QIS2lZitARYQoFanVDX+ryXC3YffZYwigRc3QUcdWCdkorz
- 41pJjgQVsxI4uc94jiteQ9jy/a7wBxcqoCW+qEu9GQCRMT3GeMTpuSLR5fZcPXH5u809
- fObGbIoKiM5wp0gSTOOMlpzEIAN2BSM2JZWO8=
+ d=gmail.com; s=20230601; t=1759751947; x=1760356747; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=Ep9j7kF0pDFSGsReWQnkCCUBuGSgMxb9NziIwoWCUOQ=;
+ b=CsTV6bUvL3l5LlNEU9lrg8AMMHE1j3RkrlHxfIQnWNxh9bq4WH/VpGqUEj/XefCV+T
+ HLOZO+jJRDIhnWIHgV25i80thcxWZgXnDGz8FY/wVOwByTdvVtJS3i8TM96ROTSmA9sI
+ unwlt7g0hxcI/M7rV2HzCXVZOnKSV4ZIe+9xYIeuQ2+1UJ/EB+fNQdv5W05/y7Q7AS14
+ ytIyJ/yD/u/iCi0cGYAf/vTopFe1jUHnJ9rxCu0T6TZuDvlQSj57UwcgeDW4uC4LabEp
+ rd1wCbBJgLm3T6UB0wj+hgomhWf4cCDWtObiE+rzbFW52dAuw807p2eoX/FMDrtzO0eL
+ huZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759753594; x=1760358394;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jOJtgKaUak3vZEv6eLSw++geEwuYVpXsL3a+Fpj9hQA=;
- b=BOoMZTzNT6QaqrpBb+AlnQMt9yXWLBxVhokqhO9jIOK888m0fhDI/DEptErU1IBiBr
- x+J3InVHV4PEHIKGyT3ovBfm2y68aAS+DgxtM7u+wlQQGgyzDrPe5AhM9M6ido0gXfiy
- E75Jba8zz/Mk4o9fG0B3b3LbZ6cct8O0aMr4K8Vmipqkl9NfYWkpKokXe1Lfv3yvyZR9
- NUby/1pDHd07LFYziOPDaMwsLVbTLooiBSiDIBN8l6Qg/jNSXYt4NvpwX8q+plEntx/T
- Co8KyQed5eSYy1QZxUbiBae4CCdSK9iWOmprNm3zrA1SPXi1sYc0Ra+eRz8L9bzAVsvc
- OauA==
-X-Gm-Message-State: AOJu0Ywfv6QRcCRmBnURtLCIe4zsks4elOMgxr19Qxodn+p/PBuPHeWH
- s80jZJRu6w4FsUpRopsNmwzD4NcRpxbyC4eB/AvKoq8m4R8JsL2DxBvs2X9uI0Yj7HVgHREpaQ8
- p+e5DrJdyjLrYMj8PdQr0nDO3D6yACQ4nqyzOIggB
-X-Gm-Gg: ASbGnctdKPbXofsJtg4XA0bABV2u64sNKCnfY9ousPSp7mjBj/ElA+m5nsy60syCBeU
- MVDWO8z7B6O5qbIwHeR2T3mBVdsmdWmdM5mjd1k99vBTJzenvVsFSTmpxkM/y4b+m/enTsq9yMf
- WTwSfawUfdNXyYSosAwvAUm8PSnLSiJOZ1M21ZxjpNsSevClRR8cdJhqznzPGz6NbKGIsCP5kEg
- r7tqqJxzLXX3plrJ4HIBoY8SnDW8PC2OFbE+oHh
-X-Google-Smtp-Source: AGHT+IFJNMfUUulP0HS6M3/U0QKbSqylwPqfEsaepD6/a+3lpUFA15oQ58zWlmht9dQ4JsGQDkxBCio8Wy9C5HACh+M=
-X-Received: by 2002:a17:907:7286:b0:b3d:c47c:7ce9 with SMTP id
- a640c23a62f3a-b49c40815bemr1616076866b.54.1759753593768; Mon, 06 Oct 2025
- 05:26:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759751947; x=1760356747;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ep9j7kF0pDFSGsReWQnkCCUBuGSgMxb9NziIwoWCUOQ=;
+ b=ehQctu1P2zZtkNXH6/6WpCcngipJdN69EeK3rgDpf3/2d21UQ2IIjA+XL0ALWnoZQh
+ OhO8LXN33qlsfaqto3/nRb8rhoM/Ekdd+ucOVwpyui/DUyd96cEfpD20K8Zl/k5O+j1H
+ J20sl2OjyIFSZSVseui1gokOfsUNxbyUp+5keOs0dbOhIK7EJ1h0tNgdYY48Mo8WGwoX
+ y8+QdKYyrxwkg2x0KGsjai+x6zcOegykOyNkRH/J9YAVVDxinM7gg7TxriKJduXTLv4F
+ Pskm27HRMuDLzI31lyeakfiXNIFdmxRi67whyOs5blaQ4s1kLOjKP4sj12yuie14OlXL
+ 1GAw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWfoMHhL5P4RgnLq7eM+LVALmTM/idfyBHRyKzsLlW535N/4zED1IWjN4dapl4ZUeO+txp9FOQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyau4RF97Xh0Ul5eu6Rgw5z2DLcsBaFy9TCDnnh8wxrWGad0CXp
+ NyX3hyhoIJP6caUA4iG2TUr2vJZCPfcG2XCbNINxol6JV0XwggAEaoUR
+X-Gm-Gg: ASbGncsviADx0C0mg79QP33Yy9CZapXym/8cwcqgGyCoQFDnUwHqvsKAGjFLu//o72k
+ dMrqslU9d7byDd6uNZG4QtsNydmiIk2J2xu7cG7AqAtqyxZb0ExF6zHSJkugP+oLGZjyeFEqesT
+ qjiOGYN11jBblzsFNv7k67CPgJM4L5XNz31cQy+lAmoTDIxTeeVCH+9T/BWUiwxw1nBXMNRPC2a
+ 6qno3uJ2upsI7HrBskiMRiIy+UI4JxlKvqEBu5IAHl7b02akTlB7ag7O8SLoWjU3I2qvGmsMMop
+ 9XIQpbqq++tm71GGFOXUfQu86YW9BETJJIhC+5v5xwGz82g3035RKNbxgViaZN448xwZzZszSI7
+ P+0W1TS8k7htgUy5pqmzDXnbffv4jEqYKlmNrcH45Ct6TBIB16bs3387bXz4NqfS6VVSq3/IJr5
+ lBl5xDyQp/bDBvmFT24a6lrI+EnQ4Lc6HQ9nDkEcWI9w==
+X-Google-Smtp-Source: AGHT+IH8myyff6+PhYY17k5HZvDFFf/qL6KDg7R7FG8QYnH+3fey+yk9/0oT+1S1j5eWKxSxvdH1/A==
+X-Received: by 2002:a17:902:e787:b0:27a:6c30:49c with SMTP id
+ d9443c01a7336-28e9a5663ffmr146235875ad.27.1759751946971; 
+ Mon, 06 Oct 2025 04:59:06 -0700 (PDT)
+Received: from [192.168.0.5] (124-218-201-66.cm.dynamic.apol.com.tw.
+ [124.218.201.66]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-28e8d12bc5asm130014565ad.55.2025.10.06.04.59.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 06 Oct 2025 04:59:06 -0700 (PDT)
+Message-ID: <251a26cf-fef4-4d20-a278-881ca31ddb97@gmail.com>
+Date: Mon, 6 Oct 2025 19:59:01 +0800
 MIME-Version: 1.0
-References: <20251001203059.2828551-1-trini@konsulko.com>
- <CAFLszTg8BFgpeYj7Gz-9ac5TVLaJJ5fs87oSeOfurSNT6dCa3w@mail.gmail.com>
- <20251002170352.GM6093@bill-the-cat>
-In-Reply-To: <20251002170352.GM6093@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Oct 2025 06:26:20 -0600
-X-Gm-Features: AS18NWBjuWdplERMg9Fo4rbDkUTXdjdKCYd3oHFJ9m92NMUV5N6jI42-mbYM4bE
-Message-ID: <CAFLszTjbcnUXzph86i4H9SUU8gZB32yUKMVZzAges_jo9BA16A@mail.gmail.com>
-Subject: Re: [PATCH] boot: vbe: Make BOOTMETH_VBE_xxx a choice
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [U-Boot, v1, 1/1] net: phy: add paged PHY register accessors
+To: Marek Vasut <marek.vasut@mailbox.org>, jerome.forissier@linaro.org,
+ skylake.huang@mediatek.com, s-vadapalli@ti.com,
+ paul.barker.ct@bp.renesas.com, marek.vasut+renesas@mailbox.org,
+ u-boot@lists.denx.de
+Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org
+References: <20251006044405.30376-1-lucienzx159@gmail.com>
+ <4fa8531c-e6c2-4a3a-b284-86c5bdd94530@mailbox.org>
+Content-Language: en-US
+From: "Lucien.Jheng" <lucienzx159@gmail.com>
+In-Reply-To: <4fa8531c-e6c2-4a3a-b284-86c5bdd94530@mailbox.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 06 Oct 2025 14:52:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,31 +107,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marek
 
-On Thu, 2 Oct 2025 at 11:03, Tom Rini <trini@konsulko.com> wrote:
+Marek Vasut 於 2025/10/6 下午 04:18 寫道:
+> On 10/6/25 6:44 AM, Lucien.Jheng wrote:
+>> Synchronize paged PHY helpers with Linux v4.16.
 >
-> On Thu, Oct 02, 2025 at 10:29:58AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Wed, 1 Oct 2025 at 14:33, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > It is not valid to enable multiple BOOTMETH_VBE_xxx methods
-> >
-> > Why is it not valid? That wasn't my intention.
+> Why such an old version , current LTS is 6.12 ?
 >
-> They fail to build because they both declare some of the same binman
-> syms:
-> $ grep 'binman_sym_declare(ulong, vpl, size)' boot/vbe*.c
-> boot/vbe_abrec_fw.c:binman_sym_declare(ulong, vpl, size);
-> boot/vbe_simple_fw.c:binman_sym_declare(ulong, vpl, size);
-> $ grep 'binman_sym_declare(ulong, vpl, image_pos)' boot/vbe*.c
-> boot/vbe_abrec_fw.c:binman_sym_declare(ulong, vpl, image_pos);
-> boot/vbe_simple_fw.c:binman_sym_declare(ulong, vpl, image_pos);
->
-> Enabling both leads to link failures.
+I just meant to say that this patch was initially included in this 
+commit. I'll adjust the wording here.
 
-OK, thanks. I'll need to fix it at some point...
+For the next version, I will write the commit message: "Synchronize 
+paged PHY helpers with Linux v6.16."
 
-Regards,
-Simon
+>> linux commit
+>> COMMIT 78ffc4acceff48522b92d8fbf8f4a0ffe78838b2
+>> TITLE: net-phy-add-paged-phy-register-accessors.patch
+>
+> Please use the standard abbreviated format with 12+ letters SHA and 
+> commit subject -- example: e37de002fac3 ("Prepare v2025.07")
+>
+OK, got it.
+> [...]
