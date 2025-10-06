@@ -4,83 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C585CCA471
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 08:18:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 540F5CCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 08:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 767C18323A;
-	Mon,  6 Oct 2025 10:18:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 5690A835B0;
+	Mon,  6 Oct 2025 10:29:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="JIB48wh8";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="MXDxfYy0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uj3wD6da";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0DD283327; Mon,  6 Oct 2025 10:18:26 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82EF1807B1
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 10:18:21 +0200 (CEST)
+ id 100A98361E; Mon,  6 Oct 2025 10:29:07 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E0CC834D4
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 10:29:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cgBwl25ddz9sjY;
- Mon,  6 Oct 2025 10:18:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1759738695;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wZOFdg/gzg9vCWiXHPCtiR9jXuRrqCdGnkat7xUWFk4=;
- b=JIB48wh82uhbtJN2/fBXTclJIN9eV3x2LP1te6BQYYf7oeMfqo/21t4YYAtmrmv/brpkyC
- kvt8gCpvXMxJAU0tvfBLfwEE0nTCG56OnlNhRDwT616zThGPLoWshZ3Wq85pFKsNuproCY
- PiVGLwI0e2AysuxC8yqPxtTY9JHTNhYu2A2G8NjRHtLQMHoRhZ36CwewKL5mbNMKick14X
- 4Aa1cXYzJ9oRloXDTI3fkej8FmPjjcJlqoaNkTqnCCtq3JU6bJrVEfPWppAVc5zkJmXzGY
- Bwp5KHbNmzXqPk/1/AlE8acS5hQyYWMG2/XbEuL5NoTXomSZaOa5xpWNwZ7HDw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=MXDxfYy0;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut@mailbox.org designates
- 2001:67c:2050:b231:465::202 as permitted sender)
- smtp.mailfrom=marek.vasut@mailbox.org
-Message-ID: <4fa8531c-e6c2-4a3a-b284-86c5bdd94530@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1759738689;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wZOFdg/gzg9vCWiXHPCtiR9jXuRrqCdGnkat7xUWFk4=;
- b=MXDxfYy0duqnsh0WpDq3tCOr4GaLUKOqTOzLonlXGS+kb809ZMcrqUDSpDBB9vBLvwAdfh
- BsqyqmjKJFcCecYeQbrN2AzEhFCZCLWpl4igCVyPOyEnfHYf14SoclOb9NWKxZ5W7OaPJC
- byGwfu7pvzH/k5lI758KdVwpCjDDWvnRf2OgQ2jqe27nGi9UlVGJT3x83sgmZ32LXIO5Ua
- fUKRAlxLHefym/Atu9iZb4DOxJqQSWZ6tP89J0F2i0AWiZkRyJBJ/0EcjjsvDAkV/X+mu8
- W/9dP9ciGnE27AHX6yogG3n2tvJD9l+pEuqNyx2DHn1eF/fBRS2+DyjWjHBWOA==
-Date: Mon, 6 Oct 2025 10:18:02 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5968SuP83510989;
+ Mon, 6 Oct 2025 03:28:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1759739336;
+ bh=LZhs1rjE5KALvl2KrkwGIQO/DuoAdO0oAfNN58gw9Vc=;
+ h=From:To:CC:Subject:Date;
+ b=uj3wD6daTcFVgRMOeVRoykcZJcf1cD7Y00aKpqoo5jo56ZNMfgLVCsoQ3rl8McgH5
+ H7g3rAnKpEpP6iEx5O+M6LoIC2Mx0hHzSCEqg5wW1YsD3LKQRn+JHbJXBDYV/gPIOC
+ 0rBVLmnyUw48iEMUw9Xzx2Xk8YohMiQvUTSRvQjU=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5968Stsq2714276
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Mon, 6 Oct 2025 03:28:56 -0500
+Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 6
+ Oct 2025 03:28:55 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
+ (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 6 Oct 2025 03:28:55 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5968SsvP3386956;
+ Mon, 6 Oct 2025 03:28:54 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
+Subject: [PATCH -next v8 00/11] Add support for dynamic MMU configuration
+Date: Mon, 6 Oct 2025 13:58:38 +0530
+Message-ID: <20251006082852.4008937-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Subject: Re: [U-Boot, v1, 1/1] net: phy: add paged PHY register accessors
-To: "Lucien.Jheng" <lucienzx159@gmail.com>, jerome.forissier@linaro.org,
- skylake.huang@mediatek.com, s-vadapalli@ti.com,
- paul.barker.ct@bp.renesas.com, marek.vasut+renesas@mailbox.org,
- u-boot@lists.denx.de
-Cc: lucien.jheng@airoha.com, frank-w@public-files.de, daniel@makrotopia.org
-References: <20251006044405.30376-1-lucienzx159@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20251006044405.30376-1-lucienzx159@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 8fe9t594suhnkt53apybtd7s79h79dh7
-X-MBO-RS-ID: 8939ee9f5bfdec3bbd7
-X-Rspamd-Queue-Id: 4cgBwl25ddz9sjY
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,16 +81,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/6/25 6:44 AM, Lucien.Jheng wrote:
-> Synchronize paged PHY helpers with Linux v4.16.
+Hi all,
 
-Why such an old version , current LTS is 6.12 ?
+In U-Boot, TI only provides a single memory map for all k3 platforms, this
+does not scale for devices where atf and optee lie outside the range 0x80000000
+- 0x80080000 and 0x9e780000 - 0xa0000000 respectively.
 
-> linux commit
-> COMMIT 78ffc4acceff48522b92d8fbf8f4a0ffe78838b2
-> TITLE: net-phy-add-paged-phy-register-accessors.patch
+There are also issues for devices with < 2GiB of memory (eg am62SiP with 512MiB
+of RAM) as the maximum size for the first DRAM bank is hardcoded to 2GiB in the
+current memory map. Furthermore the second DRAM bank is mapped even for devices
+that only have a single bank.
 
-Please use the standard abbreviated format with 12+ letters SHA and 
-commit subject -- example: e37de002fac3 ("Prepare v2025.07")
+Therefore this patch set adds the required functionality to create the MMU table
+at runtime based on the device-tree.
 
-[...]
+The patch set has been build tested on all effected platforms but boot-tested
+only on TI's K3 EVMs, the beagleplay and phytec's phycore-am6* platforms.
+
+The following effected boards have not been boot tested:
+ - verdin-am62
+ - iot2050
+
+Best Wishes,
+Anshul
+---
+Changes in v8:
+ - Reserve extra space for page table entries for performing fixups
+v7: https://lore.kernel.org/u-boot/20250912121618.1074054-1-anshuld@ti.com/
+
+Changes in v7:
+ - Pick up R-by and Tested-by tags
+ - Use nobreak API for unmapping MMU region
+ - Better error messages and minor refactor
+v6: https://lore.kernel.org/u-boot/20250905081902.489345-1-anshuld@ti.com/
+
+Changes in v6:
+ - Make use of generic MMU APIs
+ - Extend core U-Boot functionality by adding mmu_unmap_reserved_mem and
+   mem_map_fix_dram_banks
+ - Keep same memory maps for SPL and U-Boot proper
+ - Add fdt fixups from SPL stage for reserved memory nodes
+v5: https://lore.kernel.org/u-boot/20250703133533.104758-1-anshuld@ti.com/
+
+Changes in v5:
+ - Don't create carveouts for every reserved-memory node
+ - Only create carveouts for ATF/OP-TEE
+ - Expand the call to k3_mem_map_init to vendor boards as well
+ - Map area for framebuffer for CONFIG_VIDEO=y platforms
+v4: https://lore.kernel.org/u-boot/20250618124210.1936140-1-anshuld@ti.com/
+
+Changes for v4:
+ - Add call to k3_mem_map_init for beagleplay
+ - Mark reserved regions as non-cacheable
+ - More debug logs
+v3: https://lore.kernel.org/u-boot/20250617135844.2873701-1-anshuld@ti.com/
+
+Changes for v3:
+ - Remove unused memory regions in SPL's map
+ - Add runtime addition of MMU entry for the framebuffer in SPL
+ - Refactor k3_mem_map_init to use standard u-boot APIs
+ - Unmap reserved-memory regions instead of keeping them uncached
+v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.com/
+
+Changes in v2:
+- Removed dependency to:
+  https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.com/
+---
+
+Anshul Dalal (11):
+  mach-k3: use minimal memory map for all K3
+  mach-k3: use custom enable_cache
+  arm: armv8: mmu: export mmu_setup
+  arm: armv8: invalidate dcache entries on dcache_enable
+  arm: armv8: mmu: add mem_map_fix_dram_banks
+  mach-k3: map all banks using mem_map_fix_dram_banks
+  arm: armv8: mmu: add mmu_unmap_reserved_mem
+  spl: split spl_board_fixups to arch/board specific
+  mach-k3: add reserved memory fixups for next boot stage
+  mach-k3: add carveouts for TFA and optee
+  arm: mach-k3: reserve space for page table entries
+
+ arch/arm/cpu/armv7m/cpu.c                  |  2 +-
+ arch/arm/cpu/armv8/cache_v8.c              | 58 ++++++++++++++++++++--
+ arch/arm/include/asm/armv8/mmu.h           | 24 +++++++++
+ arch/arm/mach-k3/arm64/arm64-mmu.c         | 40 +++++++--------
+ arch/arm/mach-k3/common.c                  | 55 ++++++++++++++++++++
+ arch/arm/mach-k3/include/mach/k3-ddr.h     |  6 +++
+ arch/arm/mach-rockchip/spl-boot-order.c    |  2 +-
+ arch/arm/mach-socfpga/spl_soc64.c          |  2 +-
+ board/beagle/beagley-ai/beagley-ai.c       |  2 +-
+ board/dhelectronics/dh_stm32mp1/board.c    |  2 +-
+ board/phytec/phycore_am62x/phycore-am62x.c |  2 +-
+ board/phytec/phycore_am64x/phycore-am64x.c |  2 +-
+ board/renesas/sparrowhawk/sparrowhawk.c    |  2 +-
+ board/starfive/visionfive2/spl.c           |  2 +-
+ board/ti/am62ax/evm.c                      |  2 +-
+ board/ti/am62px/evm.c                      |  2 +-
+ board/ti/am62x/evm.c                       |  2 +-
+ board/ti/am64x/evm.c                       |  2 +-
+ board/ti/j721e/evm.c                       |  2 +-
+ board/ti/j721s2/evm.c                      |  2 +-
+ board/ti/j722s/evm.c                       |  2 +-
+ board/ti/j784s4/evm.c                      |  2 +-
+ common/spl/spl.c                           | 12 +++--
+ include/spl.h                              | 12 +++--
+ 24 files changed, 191 insertions(+), 50 deletions(-)
+
+-- 
+2.51.0
+
