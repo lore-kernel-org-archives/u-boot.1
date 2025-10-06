@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022A2CCA471
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 23:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7067CCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 23:46:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B9F483B64;
-	Tue,  7 Oct 2025 01:45:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47F7983C46;
+	Tue,  7 Oct 2025 01:46:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ss0JGV5p";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="utO0MmYi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D83EB83BC4; Tue,  7 Oct 2025 01:45:06 +0200 (CEST)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 3B4C283C6C; Tue,  7 Oct 2025 01:46:35 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C71E83A45
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 01:45:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 095E983A45
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 01:46:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-64fdca63b41so138476eaf.2
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 16:45:04 -0700 (PDT)
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-31d8778ce02so4948211fac.1
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 16:46:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759794303; x=1760399103; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759794392; x=1760399192; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=7YC87GmoTNwuRjLYvwPkcguozWmJV6B0GJItlbWRsjQ=;
- b=ss0JGV5ptZBagrpT8erbDQHzIaxmHkuzUer7sfZyvQl9HjxiPk0DNezfUc1ooYbv5Y
- rOc6yOCKHq8sSr2j1BC8i/Iz26JZbJrO0BbGQk4Tsf2s4+4BO6nVOAh7fwZXybu/yD2f
- B0TveuDSw6BHf/F121dVpDdxbrtKkLI0k2Lfc=
+ bh=8attZgdBSr7EbpWDD8Qx4y+MgJ7pD9QUMWj/BUCZKww=;
+ b=utO0MmYiARTAv9OL18HK7WqKN4yD5fKj9XblmZ6j3pv1z1UlyWsuLzHkLlLJtksWf5
+ 9nIb3Pgrx/qLG8AYUHHHJXfMAI2K481KcMnxeRr+cvp0tijN2nwXtLCSeYQG+6foO86w
+ 5+X5e3V9nk7ZWJNBr6SoYwO6ibUqyFzEF8DAc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759794303; x=1760399103;
+ d=1e100.net; s=20230601; t=1759794392; x=1760399192;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7YC87GmoTNwuRjLYvwPkcguozWmJV6B0GJItlbWRsjQ=;
- b=kp325408v2jkcpAIbUOj72wsNulHvBGq/ij5a99pbJrbWhCX/5bXb6U/GiHJkOtLHm
- lzGlNYFJHImyQju0McCEIm0+HITjoOM14yWQB3MWuJoUaRlUaPN5WbzMsMJgtFYnsurh
- ulQebviZ7csJpIktv2Adfv2+mr+9vPS+/Xls0YbSwxndbyw5NcRjDysE7usFjaEU8nKL
- aHuuu/Nu/SCiA/sUih7x6o7m1mEFuA1Hr4uU5EJxMDy7WlwBfdma/iQxYj6QdcyrLpsw
- fQCyYIV2maWp2wcnW8wyg2wnNZL3JebS0T78x0WEG+qkN9v5U0s4ItC/JofymMN/Wxtz
- 5ydA==
-X-Gm-Message-State: AOJu0YyiWYXjVcKNQ7YcG30klGWM5V7YpdHMMUVilD5I2wKl4avUCRwx
- algZf3jKsAkXSl6COEOxqZSiMt24s+WxqE8p8SWlQ7+/D7D9jTD8AvveeUC1uc1oUOE=
-X-Gm-Gg: ASbGncvhMzNQWx90RDGtl8MawNKF07O6mU6BeDooL3wMVor+2kDk76OgufV0N8QvICW
- 8o3LFHAoTpGZFYwLWOl0CHMTTW4TWoQ9usNpV8wnhImpy+FIurDYoLhyffg1I0BFWSxe9PwMSZ/
- XdI2XtkBlThwocjsvUyA7CnkrkYs9C0gAMLV95gZJ2LQ+UB191kuTdF0o9XCUA8fv3s5C+d7LeK
- cYRuNkBh9f/qcnT0eNmod31AB8rT/izJVZZI2MNIVgFUJ79uV+In5MUohoFkhhH29wUp2cyn6/Y
- 9GVU5a4UUTKF8hxKAcHI4rOFdrKT1HBxVjmNn7ySVoopkqWgfi1YlhU4Y84PcSBxRG67/tFLeP3
- clGISgzmKalWqIJYIJc23YwXvv82LIBKIvbfashhE1zuSqUGuU4XQ9BwQEb4XkMqNayhfu+gEyf
- 5es/3V5rCYhw==
-X-Google-Smtp-Source: AGHT+IFq7jdzEqPp0C9NTWQcz7qv44C+N8APuj63Db+djfXVDySZ+SBDCAofGQ8wtaKy2pymrKswLQ==
-X-Received: by 2002:a05:6870:3190:b0:31d:8e9f:e422 with SMTP id
- 586e51a60fabf-3b1019ab1a0mr6910287fac.31.1759794303047; 
- Mon, 06 Oct 2025 16:45:03 -0700 (PDT)
+ bh=8attZgdBSr7EbpWDD8Qx4y+MgJ7pD9QUMWj/BUCZKww=;
+ b=rDE1LI3m0GKefOYiNgHzdNQcQ6AjS+4dt4GFWU/+Djj7yxDxINnz+JlAJZ9q4DI1KB
+ CkvoMVJJnn8WFLzayFpGA/DPPGw+sHWNbzW56nfov+Wc+3Wc8h8gx43Lqvf1J1tNjtl4
+ jLYePm64T2uz1E/AieZUmg4LHSVKa6OUSKr3B/ekQokrWZv7unCk4qt7JzvFJSy5z8Xj
+ J79e6SeTSOYygGYEClMTc86ukvO/yim/BzmPj2gvOoh4zOc89GL3UXoNdg3RYSA11g+5
+ h5EAKHZjYBzy6vn6sDOXR4YNtld5ZjQoT6nAv3TMg5ofcKYObH0jcz+E3IW3yA01S1tU
+ i8jw==
+X-Gm-Message-State: AOJu0Yzqnr1muxN9cI3U62EpzW5grvadKVhi2awu8EZnUlbufIZn8055
+ ni7Yep62EIzT50eMgMVG0xbonWp6mVZ1y/E4OskVvP4AA8Q9VGuyAyUPhIv0jPUt/h7vx/1ygx5
+ cwVH9k4c=
+X-Gm-Gg: ASbGncsfa9iryfPxZfwMLrwOrtQK3b10KgsDrIg8cy8mzArIZIAJkxRFsOx6KBnI8sy
+ ilxiBq0k9yuuSlGmLnF/c731Plcs57+cxJjQGRSDCDJELKpL9fCEb/592giTIWx8G9SsTSgWfqa
+ ER3qdNs8oA57Pn3NdH0HduOXAi4FA+95okpPOLByfYIiqnfEgG3trE0DEo9IH/HTFnnO0A7kr4R
+ ItdNUVb5X0hTq0NBU/Bqc6Bmi0hC2oPQxVuDcUySPccCmrWBv9Xw/1ioZnoEPD3Oa3V7XG6DT6m
+ c+Kq7G/hcNQ3M/5qjLUa9og2jGnWqMHjQBC/eG4aU1m6jkmJpwsbzbil5ZF9v94nbeicbFpZz7F
+ YjacAWMXgHYgmvUkgLkUHqHsIWZsnkSzoJh3hpfBFB+p2ctbEz0bjJLsOcQR5bZ/3gm+BFbwjVk
+ JR/2G6+r35Sw==
+X-Google-Smtp-Source: AGHT+IHw6jgi0a3wPk8tVTq1CS1RG0vOvfCQRxbsbgEkm8fu3k4KuUckNEZ/UjRxZEgFwzufUkxPzg==
+X-Received: by 2002:a05:6870:3281:b0:345:ee86:3565 with SMTP id
+ 586e51a60fabf-3be6a905120mr763212fac.4.1759794391596; 
+ Mon, 06 Oct 2025 16:46:31 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab94d983adsm4440129fac.27.2025.10.06.16.45.01
+ 46e09a7af769-7bf3f6104a2sm4206823a34.7.2025.10.06.16.46.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Oct 2025 16:45:02 -0700 (PDT)
-Date: Mon, 6 Oct 2025 17:45:00 -0600
+ Mon, 06 Oct 2025 16:46:30 -0700 (PDT)
+Date: Mon, 6 Oct 2025 17:46:28 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Guillaume La Roque <glaroque@baylibre.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH v2 05/17] boot: Move showing of bootflows out of the
- command
-Message-ID: <20251006234500.GG298503@bill-the-cat>
+Subject: Re: [PATCH v2 16/17] boot: Run the EFI bootmgr just before network
+ devices
+Message-ID: <20251006234628.GH298503@bill-the-cat>
 References: <20251001212649.3263574-1-sjg@chromium.org>
- <20251001212649.3263574-6-sjg@chromium.org>
- <20251002201537.GO6093@bill-the-cat>
- <CAFLszTigwz2mVfS=C6yXDnTMvdGxw=FsD36QCrpS2VOVSr+7nA@mail.gmail.com>
+ <20251001212649.3263574-17-sjg@chromium.org>
+ <20251002201546.GP6093@bill-the-cat>
+ <CAFLszTiofxAigyXRGp3qREOd6tdjBDyZqkj9vsOu9U-TxCe3Rg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2nX2KXF64H7GNV9U"
+ protocol="application/pgp-signature"; boundary="qI4ffp4ANvZgYC+X"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTigwz2mVfS=C6yXDnTMvdGxw=FsD36QCrpS2VOVSr+7nA@mail.gmail.com>
+In-Reply-To: <CAFLszTiofxAigyXRGp3qREOd6tdjBDyZqkj9vsOu9U-TxCe3Rg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,66 +105,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2nX2KXF64H7GNV9U
+--qI4ffp4ANvZgYC+X
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 06, 2025 at 05:30:23PM -0600, Simon Glass wrote:
+On Mon, Oct 06, 2025 at 05:31:23PM -0600, Simon Glass wrote:
 > Hi Tom,
 >=20
 > On Thu, 2 Oct 2025 at 14:15, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Wed, Oct 01, 2025 at 03:26:30PM -0600, Simon Glass wrote:
+> > On Wed, Oct 01, 2025 at 03:26:41PM -0600, Simon Glass wrote:
 > >
-> > > It is helpful in tests to be able to show the bootflow that is being
-> > > examined. Move show_bootflow() into boot/ and rename it.
+> > > At present the EFI bootmgr scans all devices in the system before
+> > > deciding which one to boot. Ideally it would use the bootstd iterator
+> > > for this, but in the meantime, give it a lower priority, so it runs
+> > > just before the network devices.
+> > >
+> > > Note that if there are no hunted network devices hunted, then it will
+> > > run at the end, after all bootdevs are exhausted. In other words, it
+> > > will always run.
 > > >
 > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v2:
-> > > - Add a log_err() for an invalid state
-> > >
-> > >  boot/bootflow.c    | 57 ++++++++++++++++++++++++++++++++++++++
-> > >  cmd/bootflow.c     | 68 ++------------------------------------------=
---
-> > >  include/bootflow.h |  9 ++++++
-> > >  3 files changed, 69 insertions(+), 65 deletions(-)
-> > [snip]
-> > > +     case BOOTFLOWST_COUNT:
-> > > +             log_err("Unexpected boot value of bootflow error %d",
-> > > +                      bflow->state);
 > >
-> > A small thing, checkpatch.pl catches that this isn't aligned with the '=
-('
-> > here as it should be.
+> > This does not apply cleanly to master nor next as the test portion
+> > fails to apply.
 >=20
-> OK. I'm unsure whether I really want this line anyway, since it
-> increases code size.
->=20
-> >
-> > A larger thing, and please correct me if I'm wrong, but on reading the
-> > whole set of changes, this move + rename just means we're putting more
-> > info in the test output, and nothing else?
->=20
-> It will also appear if you have CONFIG BOOTSTD_FULL and use 'bootflow
-> list' or 'bootflow scan -l'.
+> OK. I'm not sure what happened there but it could perhaps have been a
+> timing problem. I'll try again when I send the next version.
 
-But that should be the case before this patch as well, yes?
+I don't know what you mean by a timing problem but yes, please make sure
+to have something that's on top of master and documents any
+dependencies, thanks.
 
 --=20
 Tom
 
---2nX2KXF64H7GNV9U
+--qI4ffp4ANvZgYC+X
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaORUfAAKCRAr4qD1Cr/k
-CkFYAP4/2irp7EOxFvSsqSEI5g6Lhv+lCv/ktIP5zHwLUfLvZgEAk1n5Qui3ExV4
-zOWcDhUZMruXRpEE2sjpNnv9syKBqgA=
-=qg4P
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaORU1AAKCRAr4qD1Cr/k
+CpeqAQDI0mHsNtNjhGIGEPA8W9m1LL91mdg0ddc0BfuDquPKtwD/Xnk7dj4LdJDA
++gZSoBzXQolhXYnwMdPn7n0pmFpxzA4=
+=3W9Y
 -----END PGP SIGNATURE-----
 
---2nX2KXF64H7GNV9U--
+--qI4ffp4ANvZgYC+X--
