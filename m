@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 383EDCCA470
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 23:30:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A8ACCA471
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 23:30:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B433A83A8D;
-	Tue,  7 Oct 2025 01:30:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09ACE83ACD;
+	Tue,  7 Oct 2025 01:30:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X/mP5KWA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W4l9EALF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB1A583A94; Tue,  7 Oct 2025 01:30:31 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id E0E8C83ACA; Tue,  7 Oct 2025 01:30:38 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACEA283929
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 01:30:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB3EF83929
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 01:30:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-62fb48315ddso9851417a12.2
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 16:30:28 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-6399706fd3cso3087099a12.2
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 16:30:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759793428; x=1760398228; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1759793436; x=1760398236; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AyDwON0NkOjwafNfCXEoZmHwxGUG30mEtSKQNsazk5s=;
- b=X/mP5KWAljhrdm52sOsy5x9kVv4R87aQaM3KgsenvV/IKgP+0LijJai96lJ27c9/7z
- UgBWJ+csVaiTnl34NGV0JfEXpTgpK5za0kSdmJvHWs18mnTtsbfhMXq9p2N/zcgcIyl3
- cyWUUfhECybC49VAv4zM63XIBlrd8ceEwgnVs=
+ bh=FVfw0/jfm4Fz223qX9pUn0Dyr11ae4SGRfqByTv4uTA=;
+ b=W4l9EALFtZHEYsqxu5UnE81sgV7Kf0IMBFIQGp5mi/e9pEy6oiaPHwMptQd4+a3P5G
+ gf1oGzDLejklKL1yL8pagHN5V0GJja4VtLh/Aw3KZyRXhHhitQiWc+UmrgyiBlnvJJI0
+ g3ivIiiF/A7adhQrbqhks2AWBsCJY0VYuEq74=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759793428; x=1760398228;
+ d=1e100.net; s=20230601; t=1759793436; x=1760398236;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AyDwON0NkOjwafNfCXEoZmHwxGUG30mEtSKQNsazk5s=;
- b=CecEwlIsQoTNqGEWKCYoy+KCArJVj/LUAHGBw3ffVtsdIlzEuI98TDDdVioIRlU00U
- Zq7JEYlCGlj8pzj75pNiOs92b7AZYydqesn+nOawPUWQt5xt2sucQGTYnln/wxhvpubN
- RUf9dRbYnF8cc6oPonzUrtHMQ67faYZGQxtcH1uEUZRIt+6Ga4ejGDUNOqQigzZuDGe2
- FACTwcNMHt2pLToJx6wNWbWYHZgpP1vh+wiVufdQC99egVtWRQKPJi1tdH5RM/eU6FBt
- pGEm9dEgv1cqLu8JODe74Un/YSzWSCK5hbLbyGmvY8FR5YJ6f4tViOk50v0EeutOlhh8
- Q6nw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWegFggQ8enZFK3EM9LEQ6r2MsLMzz1d0+9Tn1KPuyr8GDR0YO1NdslijRfBeZ2KiaHkPf9TlE=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtNaVse9EwWAwdlkesrFnyOIADPOxHjaShibFrP86VhKdiU6vm
- T2413QED24HH2sr5IR7TpPUIt40Q269zl2U1O3q8Qv62gfCyKpd87oD979QzBlLlinCA9cP1dZh
- zTxnk2XsFhJhhJc6VTCQKa/cfuf8Djpn/Rezal1HE
-X-Gm-Gg: ASbGncvz9inGjIxK61U/lwCpUCnE+VQ96Fxev2l3q2a6YUqp1Z4JRfkHB82WA5gCdyv
- B3OYsfL+tPlL4j7Tnrx0QwkYeUFJtH7PWH7G1E+pNaLo1d1ONCH4IeoASa/7ncbjcvTG5QC3CgG
- miLNLQ2ovmgE0Fbndy1btAkrD0K8Adwrl27CBPyrmiWR/fskwDmNjqFMFexl26/SbyO5fPVCY7u
- aqqS7+b3jnzRRDrwp68BrqKu/AqhC5I
-X-Google-Smtp-Source: AGHT+IHTR9KTXOw7Z4Wq1SWRke2mUcvd7qPxZFYqu89idD6Z0Y7+WjJIuB8rmEeKMKud8csj2srj/t/lad3FJm9ETl0=
-X-Received: by 2002:a05:6402:5205:b0:634:ab25:3f72 with SMTP id
- 4fb4d7f45d1cf-639348f1206mr16350421a12.10.1759793428136; Mon, 06 Oct 2025
- 16:30:28 -0700 (PDT)
+ bh=FVfw0/jfm4Fz223qX9pUn0Dyr11ae4SGRfqByTv4uTA=;
+ b=dZU8ZDkNTdHFIbKlCK1Hboxyc7qUmVQ2T6JC5cZ2f+++gANkZc/0R0T5CCCkB8Q3Wf
+ X9UJFFMPuaQkI1dX4jr+JOqXxmva4rnkVtT8aoYJrKhYsg1jt7AvgeMa+NLgrv9R3wTr
+ yJbKzlbfJZ/hgJo78bq02vndIot3GCfcsozYbZ365mlpDWz8rLbM0VvT+41BNPJHIRxv
+ WvVHugqV3ByxlOa0V37/zawhI8Am5q+ccXJJldUCQgjGnpTwJlW1czWVf2roPZdS/Rzh
+ oqmhyX3cL7sYpNk+mI4ttrPfuytNVfXoxN8+98B/mstm0wMzoe0XgG7Elm3jL+3lG/tk
+ MKIg==
+X-Gm-Message-State: AOJu0YwO56vwV6L+LOvl/Ew8SGKXdCDCGIWVSjbURQl6JhA/HdYsWmav
+ Uk2LFeMzGmBLwjvUQiP+fSxjIUIb8RdwYEKydjOSAt3IpeT1uEl3jIXsO14W4C5xoeYbRPInsUW
+ 3eWv1ewBPoMZm2h0Cqy6UHtQHBZY+aIOWsiQFgt1G
+X-Gm-Gg: ASbGncvV1ybECVtdbP9XTA9mFKp8jZw2PCykcYx7upG35W+kK8wAvcCFam8zZCpbXZs
+ UcPq1QJB6VNbescl8lExmvx3j5t25lNhhCCWSeNFpHyYBoyJEa1xbG+epiUV1cyMc4NbRm9g1Dy
+ zKh+G6UWYQBiOqt9QNFBJ8Qz9tO9+AXxG9v2XuSyNHG7SfUKmkInv37jv2sT71H33wlnN1I8XGV
+ GNoK3RytQHIQzNnuLXEX1DEUERf82mq
+X-Google-Smtp-Source: AGHT+IEh1i7YRxllYsfHmFtR/A9L/dMR+D7NyhlwjD2JKk8VMWmsWXJ3NuqsHyAIZmg6U3Vh51jFHFjwK9oEMKQ0AfU=
+X-Received: by 2002:a05:6402:2110:b0:637:e2b8:605b with SMTP id
+ 4fb4d7f45d1cf-639346c7b36mr14673041a12.5.1759793436321; Mon, 06 Oct 2025
+ 16:30:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
- <20251003-feature_sysboot_extension_board-v1-6-458b8bf85325@bootlin.com>
- <CAFLszTj3j6bcm6PG1GLAHa6FfjpKOKL12P_ae4WZsJL4hbh-HA@mail.gmail.com>
- <20251006214428.GD298503@bill-the-cat>
-In-Reply-To: <20251006214428.GD298503@bill-the-cat>
+References: <20251001212649.3263574-1-sjg@chromium.org>
+ <20251001212649.3263574-6-sjg@chromium.org>
+ <20251002201537.GO6093@bill-the-cat>
+In-Reply-To: <20251002201537.GO6093@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 6 Oct 2025 17:30:15 -0600
-X-Gm-Features: AS18NWAcWYjXQGalLv3vSS3Gj2ZgCtD9xoDahRAArYSGMR3HVmA_bSbJce12iac
-Message-ID: <CAFLszTgLd7gHoU04QKAgHWNFQz_CS_XfeJCBkn58fu3UxUyurQ@mail.gmail.com>
-Subject: Re: [PATCH 06/16] board: ti: Convert cape detection to use UCLASS
- framework
+Date: Mon, 6 Oct 2025 17:30:23 -0600
+X-Gm-Features: AS18NWCacvCqILYWjcVkq5x6FeKnTo1us1gRYfdiW4qTlNm9mae-1gGAy2yEN5I
+Message-ID: <CAFLszTigwz2mVfS=C6yXDnTMvdGxw=FsD36QCrpS2VOVSr+7nA@mail.gmail.com>
+Subject: Re: [PATCH v2 05/17] boot: Move showing of bootflows out of the
+ command
 To: Tom Rini <trini@konsulko.com>
-Cc: Kory Maincent <kory.maincent@bootlin.com>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
- Mario Six <mario.six@gdsys.cc>, Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,124 +93,42 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 6 Oct 2025 at 15:44, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 2 Oct 2025 at 14:15, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Oct 06, 2025 at 02:38:23PM -0600, Simon Glass wrote:
-> > Hi Kory,
-> >
-> > On Fri, 3 Oct 2025 at 10:34, Kory Maincent <kory.maincent@bootlin.com> wrote:
-> > >
-> > > Migrate TI board cape detection from legacy extension support to the
-> > > new UCLASS-based extension board framework.
-> > >
-> > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > > ---
-> > >  arch/arm/mach-omap2/am33xx/Kconfig |  2 +-
-> > >  arch/arm/mach-omap2/omap5/Kconfig  |  2 +-
-> > >  board/ti/common/cape_detect.c      | 24 +++++++++++-------------
-> > >  3 files changed, 13 insertions(+), 15 deletions(-)
-> > >
-> > > diff --git a/arch/arm/mach-omap2/am33xx/Kconfig b/arch/arm/mach-omap2/am33xx/Kconfig
-> > > index dff4f1cf202..77f7938305b 100644
-> > > --- a/arch/arm/mach-omap2/am33xx/Kconfig
-> > > +++ b/arch/arm/mach-omap2/am33xx/Kconfig
-> > > @@ -15,7 +15,7 @@ config TARGET_AM335X_EVM
-> > >         select DM_GPIO
-> > >         select DM_SERIAL
-> > >         select TI_I2C_BOARD_DETECT
-> > > -       select SUPPORT_EXTENSION_SCAN
-> > > +       select SUPPORT_DM_EXTENSION_SCAN
-> > >         imply CMD_DM
-> > >         imply SPL_DM
-> > >         imply SPL_DM_SEQ_ALIAS
-> > > diff --git a/arch/arm/mach-omap2/omap5/Kconfig b/arch/arm/mach-omap2/omap5/Kconfig
-> > > index 5394529658b..819490a8cf8 100644
-> > > --- a/arch/arm/mach-omap2/omap5/Kconfig
-> > > +++ b/arch/arm/mach-omap2/omap5/Kconfig
-> > > @@ -38,7 +38,7 @@ config TARGET_AM57XX_EVM
-> > >         select CMD_DDR3
-> > >         select DRA7XX
-> > >         select TI_I2C_BOARD_DETECT
-> > > -       select SUPPORT_EXTENSION_SCAN
-> > > +       select SUPPORT_DM_EXTENSION_SCAN
-> > >         imply DM_THERMAL
-> > >         imply SCSI
-> > >         imply SPL_THERMAL
-> > > diff --git a/board/ti/common/cape_detect.c b/board/ti/common/cape_detect.c
-> > > index 7786bdda5d1..23c93964dc3 100644
-> > > --- a/board/ti/common/cape_detect.c
-> > > +++ b/board/ti/common/cape_detect.c
-> > > @@ -22,7 +22,7 @@ static void sanitize_field(char *text, size_t size)
-> > >         }
-> > >  }
-> > >
-> > > -int extension_board_scan(struct list_head *extension_list)
-> > > +static int ti_extension_board_scan(struct alist *extension_list)
-> > >  {
-> > >         unsigned char addr;
-> > >         int num_capes = 0;
-> > > @@ -31,7 +31,7 @@ int extension_board_scan(struct list_head *extension_list)
-> > >                 struct am335x_cape_eeprom_id eeprom_header;
-> > >                 char process_cape_part_number[17] = {'0'};
-> > >                 char process_cape_version[5] = {'0'};
-> > > -               struct extension *cape;
-> > > +               struct extension cape = {0}, *_cape;
-> > >                 struct udevice *dev;
-> > >                 u8 cursor = 0;
-> > >                 int ret, i;
-> > > @@ -78,22 +78,20 @@ int extension_board_scan(struct list_head *extension_list)
-> >
-> > I suppose that a method called scan() could be added to the uclass and
-> > implemented by this driver.
-> >
-> > >
-> > >                 printf("BeagleBone Cape: %s (0x%x)\n", eeprom_header.board_name, addr);
-> > >
-> > > -               cape = calloc(1, sizeof(struct extension));
-> > > -               if (!cape) {
-> > > -                       printf("Error in memory allocation\n");
-> > > -                       return num_capes;
-> > > -               }
-> > > -
-> > > -               snprintf(cape->overlay, sizeof(cape->overlay), "%s-%s.dtbo",
-> > > +               snprintf(cape.overlay, sizeof(cape.overlay), "%s-%s.dtbo",
-> > >                          process_cape_part_number, process_cape_version);
-> > > -               strlcpy(cape->name, eeprom_header.board_name,
-> > > +               strlcpy(cape.name, eeprom_header.board_name,
-> > >                         sizeof(eeprom_header.board_name));
-> > > -               strlcpy(cape->version, process_cape_version,
-> > > +               strlcpy(cape.version, process_cape_version,
-> > >                         sizeof(process_cape_version));
-> > > -               strlcpy(cape->owner, eeprom_header.manufacturer,
-> > > +               strlcpy(cape.owner, eeprom_header.manufacturer,
-> > >                         sizeof(eeprom_header.manufacturer) + 1);
-> > > -               list_add_tail(&cape->list, extension_list);
-> > > +               _cape = alist_add(extension_list, cape);
-> > > +               if (!_cape)
-> > > +                       return -ENOMEM;
-> > >                 num_capes++;
-> > >         }
-> > >         return num_capes;
-> > >  }
-> > > +
-> > > +U_BOOT_EXTENSION(cape, ti_extension_board_scan);
-> >
-> > Can the extension information go in the devicetree, so boards can
-> > select their scheme that way?
+> On Wed, Oct 01, 2025 at 03:26:30PM -0600, Simon Glass wrote:
 >
-> Since we're scanning to see what extension boards are present and so
-> what device tree overlays to apply, I don't think that can work?
+> > It is helpful in tests to be able to show the bootflow that is being
+> > examined. Move show_bootflow() into boot/ and rename it.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v2:
+> > - Add a log_err() for an invalid state
+> >
+> >  boot/bootflow.c    | 57 ++++++++++++++++++++++++++++++++++++++
+> >  cmd/bootflow.c     | 68 ++--------------------------------------------
+> >  include/bootflow.h |  9 ++++++
+> >  3 files changed, 69 insertions(+), 65 deletions(-)
+> [snip]
+> > +     case BOOTFLOWST_COUNT:
+> > +             log_err("Unexpected boot value of bootflow error %d",
+> > +                      bflow->state);
+>
+> A small thing, checkpatch.pl catches that this isn't aligned with the '('
+> here as it should be.
 
-My understanding is that the scanning process is board-specific. For
-example we would not want the Beagle mechanism to be compiled into
-rpi. The idea of scanning things in a board-specific way seems like a
-driver to me. Note there is also the SYSINFO uclass which can do
-similar things.
+OK. I'm unsure whether I really want this line anyway, since it
+increases code size.
 
-The overlays being applied here are additions to what should already
-be a fairly complete devicetree.
+>
+> A larger thing, and please correct me if I'm wrong, but on reading the
+> whole set of changes, this move + rename just means we're putting more
+> info in the test output, and nothing else?
 
-If this isn't possible, then where is the information known?
+It will also appear if you have CONFIG BOOTSTD_FULL and use 'bootflow
+list' or 'bootflow scan -l'.
 
-Regards,
-SImon
+Regards.
+
+Simon
