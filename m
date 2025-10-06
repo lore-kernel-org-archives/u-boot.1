@@ -4,83 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 370ACCCA471
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 15:09:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2D94CAC5B8
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 15:13:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67E6683D6E;
-	Mon,  6 Oct 2025 17:09:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4D42283DA6;
+	Mon,  6 Oct 2025 17:13:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GbPNvA2v";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="iXxFE15w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73ED183D8B; Mon,  6 Oct 2025 17:09:40 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2727483DA7; Mon,  6 Oct 2025 17:13:45 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C728E83C98
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 17:09:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6456783C98
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 17:13:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-46e37d10ed2so45260075e9.2
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 08:09:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759763377; x=1760368177; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=c60GofrJZMAC1wmGJeBtou2tJdigU4HHIzt+4DVlX6Y=;
- b=GbPNvA2v9bnqvxGHEgCzfisQ6dRWyVekBR5EvuTyR0mTolZhCiMFSnO1k5ecK6WUX8
- feT6Hl4Es/r4xUMmP+AnISwBS72jkWZXDTXhas008JBDK+/SkOj0MuTRdFkSjYV1jdl5
- hLUz5szWBOVJCVabQeSqH4Nul7mB0TO01Lwa+vUtLMe0tUieWKH3I2QJo3zr9bgIdmbh
- t1eaNcpxPfaHxiwJIcU4HT/5Tf4/ljR2sm/htgq7QS/u5Ws/zIoxePzSlwhPKDOM73oR
- eV5hoNSDC7YDP780hmnZSBwPHEWDmmhWSOo4PHtG7JvTkD87niKtrj60XcYZP69I6vCo
- Jp7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759763377; x=1760368177;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c60GofrJZMAC1wmGJeBtou2tJdigU4HHIzt+4DVlX6Y=;
- b=hmCryURorydBFZnMh62mcsefYVvFhqxWzSXB8luG8cmgcI8Oys3ptEkl/XTTGRfcpz
- dBraQSBo1RJebcAQB9fLQen+2xA4ECIrnmLiE0CuAXf6aYQZT0XBvhEXAXhOC/9pqpbw
- 5mX4rkgbK3pRnQ8uEqpjLFMTea9KPXLVqy/U/GIENXyVacI5b++JALqZP0U3JYKyVrPk
- dpSQ7GHnbbz5r+Dg2urbVesCs2sYzXpU3t/Z12OaNQjyqtNrabAfqmfmf61gfbSNTqMj
- vl9x/kRAp9HJuf/rW5xTABP1t6hAgEeaL7vIZJ6mY9tLRvgpksjd8pnO85g/SwSoEtu8
- KzEw==
-X-Gm-Message-State: AOJu0Yz9MarHpPrQXQoy6unjv+GL4hplNNqfJ+WeaY+CSeKCzHf6wmpP
- 5U5QUUfOVAj/fIavfDZx323Ihd9cws5GnaEAcbsPRfLzHmra8MRHFbLnWdiIV24oXOs=
-X-Gm-Gg: ASbGncud1gqzn9siOQtiUyj1IYjrovIZt4FwHLXTClQ1t6Qh7Sqy4k4rvYyC33Pyrrc
- Z+HW+ZLijbbnHDAmMLV4Kgcw0fTpZG1+oiAgtnDvkbFoF6kyg+ox8J4k9FhgoowN9P9GjtxCflm
- iPvK7+EIZTXabQrk3avS5DsL9qY0gqK9yDMprWV/w6d4gLE0FHBHVOmvWbaDW5g0VmA2roiLSnh
- Fm9KC8z5Qz0YZD9Lpcp+qhvUGxU9vgAT1uWtx1pBAbAPgw/jy32l0qIs0xiBh50Heuog3fQxN8g
- wG97FmO4LGJojd/LhuzxuaBSv49xpWU5kEQqLiL4CrRiOvi7k6YGgEqUjnyITZkPbxMdhT58cAY
- sdZay8OrLnjCVnBY9Y4kkSoFXsfwyT8OP74Sj5e2hib7zY9Vt/0YlPdUK0ctLBPMU3oasmbluqX
- xsPg==
-X-Google-Smtp-Source: AGHT+IF5WPf0GEjj+xxC25bYRqvD5V+sl5HRWXONn2/lyvYOf+b9JYGu7ueFA+4K374FFWM2/MehlA==
-X-Received: by 2002:a05:600c:5406:b0:46e:47cc:a17e with SMTP id
- 5b1f17b1804b1-46e71101ae7mr74793985e9.1.1759763377150; 
- Mon, 06 Oct 2025 08:09:37 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:4601:d8c:ebdc:373e:b4a0])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46e619b8507sm260664455e9.3.2025.10.06.08.09.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Oct 2025 08:09:36 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Mon, 06 Oct 2025 16:09:25 +0100
-Subject: [PATCH RESEND] spi: spi-uclass: Use unwind goto
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 8E99EC085CC;
+ Mon,  6 Oct 2025 15:13:23 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id A952F606EB;
+ Mon,  6 Oct 2025 15:13:38 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 8E9BF102F1D62; 
+ Mon,  6 Oct 2025 17:13:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1759763618; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=VG0fCuFBDLePTfN7+k2BUMz7yNqfn3+Vgspu9A9TDuU=;
+ b=iXxFE15wKpkqpYHK7GIzw06NOToY4GjJRDyEjAwCr9450pRUaZJoG9zrtO70Iq6auL1E5Z
+ Ych6f8ojzIZTBmzsHf2wosXkd+bZ5D3AiZB/Z06StaneLlfy8pqZ3wrKjM1bypqngYjdYL
+ TPhqno2Y7lab827d0+Wj3mbtmviX0xB/sY/37UKcFFo/sDGRshygCaqAMbJtS+gJRS8ydU
+ q3riKNRUbeKqS+pCBFXct8jL5G7+XH0FAbuKY4cjgG2Qd/sWKJYH/+R26aCfUEihpjT9Nd
+ XR5ZL0eM64urpSj6vWS0yXgZU5V9QsisapLbpvGRp1TV9+o7AFTPGMm2aRWrxA==
+Date: Mon, 6 Oct 2025 17:13:35 +0200
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Alison Chaiken <alison@she-devel.com>
+Subject: Re: [PATCH] test: Update logic for video test
+Message-ID: <20251006171335.7b40302c@kmaincent-XPS-13-7390>
+In-Reply-To: <20250818165406.3194425-1-trini@konsulko.com>
+References: <20250818165406.3194425-1-trini@konsulko.com>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251006-spi_uclass-v1-1-6dec8be15fbe@linaro.org>
-To: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,37 +73,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In _spi_get_bus_and_cs the check for stacked parallel support needing
-multiple chip select support does a direct return on error. Instead it
-should set the error code in ret and then use the unwind goto.
+On Mon, 18 Aug 2025 10:54:06 -0600
+Tom Rini <trini@konsulko.com> wrote:
 
-This issue was found by Smatch.
+> The video test here is specific to the sandbox SDL video driver, so only
+> build it when that is enabled rather than VIDEO is enabled.
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/spi/spi-uclass.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+This broke the build of sandbox_defconfig:
 
-diff --git a/drivers/spi/spi-uclass.c b/drivers/spi/spi-uclass.c
-index d6049753740b0637880958feb48e4f523e9c2927..49b584c648d6ffb273f9d5c3f3b773799d26a1fe 100644
---- a/drivers/spi/spi-uclass.c
-+++ b/drivers/spi/spi-uclass.c
-@@ -449,7 +449,8 @@ int _spi_get_bus_and_cs(int busnum, int cs, int speed, int mode,
- #if CONFIG_IS_ENABLED(SPI_STACKED_PARALLEL)
- 	if ((dev_read_bool(dev, "parallel-memories")) && !slave->multi_cs_cap) {
- 		dev_err(dev, "controller doesn't support multi CS\n");
--		return -EINVAL;
-+		ret = -EINVAL;
-+		goto err;
- 	}
- #endif
- 	/*
+/usr/bin/ld: /tmp/cc9hfosg.ltrans55.ltrans.o: in function `expo_render_imag=
+e':
+/home/kory/uboot/test/boot/expo.c:674:(.text+0x5eea): undefined reference t=
+o `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/expo.c:687:(.text+0x6196): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/expo.c:688:(.text+0x61ea): undefine=
+d reference to `video_check_copy_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/expo.c:696:(.text+0x62df): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/expo.c:699:(.text+0x63cb): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/expo.c:704:(.text+0x650b): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/expo.c:707:(.text+0x65fe): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/expo.c:733:(.text+0x68e9): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /tmp/cc9hfosg.ltrans56.ltrans.o:/home/kory/uboot/test/boot/ced=
+it.c:267: more undefined references to `video_compress_fb' follow
+/usr/bin/ld: /tmp/cc9hfosg.ltrans56.ltrans.o: in function `cedit_render':
+/home/kory/uboot/test/boot/cedit.c:268:(.text+0x63e): undefined reference t=
+o `video_check_copy_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:275:(.text+0x6c1): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:282:(.text+0x777): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:289:(.text+0x82d): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:296:(.text+0x8e3): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:303:(.text+0x999): undefine=
+d reference to `video_compress_fb'
+/usr/bin/ld: /tmp/cc9hfosg.ltrans56.ltrans.o:/home/kory/uboot/test/boot/ced=
+it.c:309: more undefined references to `video_compress_fb' follow
+/usr/bin/ld: /tmp/cc9hfosg.ltrans56.ltrans.o: in function `cedit_render_lin=
+eedit':
+/home/kory/uboot/test/boot/cedit.c:398:(.text+0x10b3): undefined reference =
+to `video_check_copy_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:405:(.text+0x1136): undefin=
+ed reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:413:(.text+0x11ec): undefin=
+ed reference to `video_compress_fb'
+/usr/bin/ld: /home/kory/uboot/test/boot/cedit.c:424:(.text+0x135b): undefin=
+ed
+reference to `video_compress_fb'
 
----
-base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
-change-id: 20250813-spi_uclass-9a13292c05f2
-
-Best regards,
--- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
-
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
