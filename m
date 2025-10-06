@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B0B2CAC5B8
-	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 15:39:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A22CAC5B8
+	for <u-boot@archiver.kernel.org>; Mon,  6 Oct 2025 15:40:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A26183DA7;
-	Mon,  6 Oct 2025 17:39:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A67DB83DE4;
+	Mon,  6 Oct 2025 17:40:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C4XxPBMO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y2J0PZ1v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11AD683DCA; Mon,  6 Oct 2025 17:39:08 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 6BC7E83804; Mon,  6 Oct 2025 15:25:02 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 920FF83C6E
- for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 17:39:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03A4083734
+ for <u-boot@lists.denx.de>; Mon,  6 Oct 2025 15:25:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-911520e43edso203001139f.0
- for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 08:39:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=danielcohen627@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-57bd7f0e5baso4668958e87.3
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 06:24:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759765142; x=1760369942; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Fn9QpfCwkHtLPQfCd031lUCH+xQPJ/T+GtVa2kwaW4E=;
- b=C4XxPBMOvBW2n4iFQ9SrtCwAFJQVmN4YS7fNIN3rz118HDGl2mypffeyri+ysSebtg
- MLoQdYYQIhqRgCWI4AU2fDXtntUq25WW6i2Yvm0iEVVTYi8QXFsEkQwTRviB6Ulh8tfT
- ZmUcjHTcH99MHh/L/8A7gyuO2VE1E88ZeOs4o=
+ d=gmail.com; s=20230601; t=1759757098; x=1760361898; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=VrMv3Ks13vNMkzMCBOwd4tAnYjsIuzEYI8TwOwkH0Jo=;
+ b=Y2J0PZ1vCnV7ZKYxjesdq3p45AROjdpN3DmW7Fr63+HEP93lv/5xVQOias4plwdDWU
+ 9Ub3nTjfnxmrDlhzag25utWxe7wfjPmrTcmzKHo8ghJKdZjugsEd/hpDzi8lWYek4cpe
+ 9EJswdxobJOMkfOCZudofUTOTx3BWzhaTBJO8jTEWeWmA0VKmB04Xq/PhssC3Dy0ZKR/
+ 5ZC2J2/a5B4stFrYy6aBR/p7/DmF783KHbgiwdQs2Z/mpPV+Othf130rn1gbfSLrIw2E
+ 6WSC0C+sDaUMu0aqL3YC9OGcUmW2GWae+OqQVdvoCLpXpNhGhJdS22C6JZplJ9vuvRfo
+ rOPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759765142; x=1760369942;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Fn9QpfCwkHtLPQfCd031lUCH+xQPJ/T+GtVa2kwaW4E=;
- b=dd0HdomD2/VKr7zRxXf5yUqtWQj2k1Rq29qIHfxCPJJcudeAAQzxAYwZsMGpPIe0b4
- yBVK5C9v7bLajQGz8T+dHoLZ0xloAVK7OXVdm/ms9NfoOjBdIDoAEhBo8mjA2Ne+g724
- LwmAIF4f7i3YbVADGjfdJjbiEERCidfMtiJ6VJGou3OrzMf6muiAox+YLn/CpwdqoLKI
- mf93B6TC1O0dRO/7vbUwvmsFmPv3a+FYx51Nu+zrCx4wOBEJWj/Fd7tig5rm3UPZrt+U
- I4FdfAmHNIXruiAoijfpwNPkOFAOceIRpqQlNo/puGpvjK9HrL7oG2sqHBKCtckvMtvX
- +BbQ==
-X-Gm-Message-State: AOJu0Yxx0LF+tb0zXfAOJgdNqfnUX7UKMLmMyGXXVdxLHKcRlmwF0Rae
- I6WbS3mmwK2Kk4hGIBWiDDVcjNb+O+Cv5PpA9MejiWhmo41NtFTbzYFxxHUvHzU3K9KeOvkAroy
- AoXW86yA=
-X-Gm-Gg: ASbGncuUGgM/BlsA/HicP9cikIZerNOfVsRDDX5N1jMWO4//ufxjgiFPdxgwZtU2drN
- gTQmDxVB3M+Am8+RcCfRUb45SDGBrpN60Ux6mUsCF9D59Paw6Qcyik41b3oZanYP7x3q0uuH4Cm
- XdBPFqdjQO5diWRx+6jx5icv/Y61GpPqE1iGk3mcFFXLtuOKrEA2Vpn4rEQgqnxt4NKLQeM0WD7
- TBieCeum/cVdNCKb9fml0Xh2Y7JY7DxUsGWm8zSSXSCXqe4TJCIQ3HdLiqvjCJUniVtyUuVP9on
- o6zF7xbaa2bbYmB5p2FNv/FJ1ewWu6Cacrm6n00ddIa+2hap7I8o5uViqSbKYAwHzR9mTO/gE1d
- csDugWqPWkw/k9U5P/Mqhv+voZw1mqLagyTo/BrmmFo6+GpHQjVdo6FCvoBKT2nTskUw/aF4xuo
- TzIZJO3UC4Zffj
-X-Google-Smtp-Source: AGHT+IGDrBnZI3x839WIml0SXfWHklPHsezSH7GFBDciZ6GcAIbRv/zsqFT/Y3x60NAORuwiPsrlLg==
-X-Received: by 2002:a05:6602:340b:b0:92f:4e37:2f29 with SMTP id
- ca18e2360f4ac-93b96a97a10mr1776931139f.15.1759765142156; 
- Mon, 06 Oct 2025 08:39:02 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-93a7e3a6ab7sm477928039f.12.2025.10.06.08.39.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Oct 2025 08:39:01 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Manorit Chawdhry <m-chawdhry@ti.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Andrew Davis <afd@ti.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v2] clk: ti: Tighten some TI clock driver dependencies
-Date: Mon,  6 Oct 2025 09:38:59 -0600
-Message-ID: <20251006153859.280336-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1759757098; x=1760361898;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=VrMv3Ks13vNMkzMCBOwd4tAnYjsIuzEYI8TwOwkH0Jo=;
+ b=fPaYANgApDU8MQ3n+UrAS/v6oU/m7oO9ikBMWcC2eiDlNSy61HvKkIqlihY2fhm9py
+ ZX/41EIqXKKVpjHe2NT+2lX13e7U70yWeIjZwTOQJ7aiYsXsGp2jDnbGB/8n4qZD8Aq+
+ +9Dk6uGmAWvYcdfbDeBm+0mLmymAmZPEqYNhKLTWl7rShCyAfgv+f+s+VpqsuG2+itt/
+ 9SLf1e8CMh9hKluB2lFa9HZnPPmDCx+xp2cYBRONMjXqsMg2AebsOQRQ9a7ehTJIkSpk
+ qyu8gRlKe6JlC4CS7orwBq0Tp5xox4MTpVHPtdACOIYmi491NUoBcRqjD02lYNj4E+i8
+ pMeg==
+X-Gm-Message-State: AOJu0Yywf0VTuDnncNjghwUakB6dA9BIwAR2vevJcVfNqzXyQgTY/q7l
+ FvI1/ltcKtjh5xhnwjooCQOj4FGaoK3FBittKY2kdHEpVQiyjV51L9DYvcoNE5MA8RnGRRsad5y
+ LEHeomvPzMDDalnq1A1XI2csHzxVlOa7bNZiu
+X-Gm-Gg: ASbGncuWTOArByuqECrkppgbWhYiOI4HI/K6LXuj4CBASjHT8AJ72cQaMvC868O62gb
+ 9be+AOEPfNzfVv2JiMQ8OeXtX26/d+gopDFHfmqufQsphO09111bDpYKCTmANvyvIqS2LNPJhgm
+ pS7/uFXCQWoTl3rzy3S2/0HNjfhd6p/whzcxTK4uViyrHAdtMtDUlmHM0NOVdocLqdeN/6ZdnEx
+ 0jQTXAQ+W4iup924ink73rSR06p5Q/wUqk3xZCsHNqNUrKYGoKQNot5dy7flfGOKA==
+X-Google-Smtp-Source: AGHT+IENGcyO/mRsmqQNmH0Q4pm3UsuI+L1A2l0N+H3qE86rHO8UoziacnbFDQmTV16WEcHh+xf3JTftCemtqKjEjCM=
+X-Received: by 2002:a05:6512:3e21:b0:579:f0fc:46f7 with SMTP id
+ 2adb3069b0e04-58cbbfc2e58mr4016353e87.56.1759757097904; Mon, 06 Oct 2025
+ 06:24:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Daniel Cohen <danielcohen627@gmail.com>
+Date: Mon, 6 Oct 2025 16:24:46 +0300
+X-Gm-Features: AS18NWDzW48dPUreHacFWYoLLFEeInxGIhxHb97ggsbawrj6AALRaA6tKzhu3wg
+Message-ID: <CAG9uNBS1aMcoAfjyd_pvewGKFHLEJni=rifNAe0+0SCf=H5vrQ@mail.gmail.com>
+Subject: 2 vulnerabilities found in net/nfs.c (integer overflows leading to
+ buffer overflow)
+To: u-boot@lists.denx.de, security@denx.de
+X-Mailman-Approved-At: Mon, 06 Oct 2025 17:40:22 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,57 +89,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Attempting to build with "allyesconfig" means that we try and build all
-available options for the sandbox platforms. Doing so exposes that the
-drivers under drivers/clk/ti/ can only be compiled or linked on
-ARCH_OMAP2PLUS platforms as some drivers require platform specific
-headers while other drivers depend on these first drivers to link.
-Express those requirements in Kconfig as well.
+Hi, I'm Daniel,
 
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-Changes in v2:
-- Make it clearer how I hit this problem, and that it's ARCH_OMAP2PLUS
-  specific drivers here.
-- Add Manorit's tag.
+I found two vulnerabilities that could get triggered through the nfs
+driver, in the functions:
+1. nfs_readlink_reply
+2. nfs_lookup_reply
+https://github.com/u-boot/u-boot/commit/cf3a4f1e86ecdd24f87b615051b49d8e1968c230
+https://github.com/u-boot/u-boot/commit/aa207cf3a6d68f39d64cd29057a4fb63943e9078
 
-Cc: Lukasz Majewski <lukma@denx.de>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: Andrew Davis <afd@ti.com>
-Cc: Udit Kumar <u-kumar1@ti.com>
----
- drivers/clk/ti/Kconfig | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+In the commits you can see the two functions have integer overflow in the
+bound check before the memcpy, since rlen is signed int and controlled by
+an attacker he can set rlen to a negative number and bypass the check:
 
-diff --git a/drivers/clk/ti/Kconfig b/drivers/clk/ti/Kconfig
-index fbcdefd889ae..ae39e94cc867 100644
---- a/drivers/clk/ti/Kconfig
-+++ b/drivers/clk/ti/Kconfig
-@@ -18,19 +18,19 @@ config CLK_TI_CTRL
- 
- config CLK_TI_DIVIDER
- 	bool "TI divider clock driver"
--	depends on CLK && OF_CONTROL && CLK_CCF
-+	depends on CLK && OF_CONTROL && CLK_CCF && ARCH_OMAP2PLUS
- 	help
- 	  This enables the divider clock driver support on TI's SoCs.
- 
- config CLK_TI_GATE
- 	bool "TI gate clock driver"
--	depends on CLK && OF_CONTROL
-+	depends on CLK && OF_CONTROL && ARCH_OMAP2PLUS
- 	help
- 	  This enables the gate clock driver support on TI's SoCs.
- 
- config CLK_TI_MUX
- 	bool "TI mux clock driver"
--	depends on CLK && OF_CONTROL && CLK_CCF
-+	depends on CLK && OF_CONTROL && CLK_CCF && ARCH_OMAP2PLUS
- 	help
- 	  This enables the mux clock driver support on TI's SoCs.
- 
--- 
-2.43.0
+if (((uchar *)&(rpc_pkt.u.reply.data[0]) - (uchar *)(&rpc_pkt) + rlen) >
+len)
 
+I also created a PoC triggering both of the vulnerabilities from a
+malicious remote server, leading to a crash in u-boot.
+
+Tested on latest commit on the master branch: 72f72fa
+
+This is my first vulnerability report,
+so if I missed any additional information please let me know.
+
+Best regards,
+Daniel S. Cohen
+
+LinkedIn <https://www.linkedin.com/in/unknownd4/> | GitHub
+<https://github.com/UnknownD4>
