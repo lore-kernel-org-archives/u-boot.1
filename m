@@ -4,144 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45832CCA470
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 10:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81EA6CCA470
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 10:33:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69C3F8409B;
-	Tue,  7 Oct 2025 12:27:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 97BBF84020;
+	Tue,  7 Oct 2025 12:33:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="hiM1nHXV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cr9a60zB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0C2A8409C; Tue,  7 Oct 2025 12:27:07 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E0218409A
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 12:27:05 +0200 (CEST)
+ id 95B4D8402F; Tue,  7 Oct 2025 12:32:59 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E1E28400E
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 12:32:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oTGCNHp60x9/bwCSJJaj4oYmo4RCjmEugSuHTgiB9Ofn/3xtAjx0cPXhbFmNWXfnxpAOpPAFzhcKOIQPjTNJAY0nbQzvz/sD5fTfNegLwRezsYdudLi77+igvkI3QFzwTnlj7bGsnASCeiL4dBLgLAT+77monb1kASW7yxBh2yotswTzvqgWv/GBm6u3HdlrxW9eeBnc+tJW/I4Yw8DGi9CKd3dVKeQU9dJJ9Jjn5gpnGxhYJq9G9lrVhKyr6TLfB2UDWE2le7WD5dAjO/CovbIX/TwHJs1pHOSlX7vjbE5GUulyfkq3H3a7bjBkAGcjIknrXsOyVvDdAeYCKAO8Jw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mt++K9us2m35D4lD6A0qsb8ahoeKtzh3wlp5jWiWk2k=;
- b=siTZwYXXpVzpdo1FKBhIKBQs0tv88jYDNoY+5McsaLKtlVo3zx3BF/4D7YTdjbu+VSCvsYLszg32BzTwIpOtedZh4Lgy/EU85bLMYlnvKozuwssDnmElvQsolQn+4VVKcijQ4QbTPtK4opMitjaT4yUdZEg3XVyFmhOdJMd1IR0EdSj8SCQOw7o6udImzoTG0X/EJ2RDZEn7TBvZ09jEJXe+WsaV0dA3KJvvFbZL6R4EKzMVNewaVbVAzPjsk4+LWrM1BKhasvBoIIXbfhCSPROU6fw3V8bKvVtqEsByDH6Dq3TcpYFrNBsY1OJkCt3pk7ntmSE90OcewFqRB2Wc4w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mt++K9us2m35D4lD6A0qsb8ahoeKtzh3wlp5jWiWk2k=;
- b=hiM1nHXVaxYS/Qxl2q27WGu6gTzlZIhONMO+yItoTC1SNAXLi9ralrwPz/5SP5vXsCFCJVBRlqGxPE9JPIfefItk/HLHBRjjZ9cIvAXXvwKzwofpe9O9ZkzpXOiB++1vDisClKnpH+/X27a7reyKi1bebIoTZpf5mIW5O1fgHEo=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by PA1PR10MB8918.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:441::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9182.20; Tue, 7 Oct
- 2025 10:26:59 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.9182.015; Tue, 7 Oct 2025
- 10:26:59 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] gpio: search gpio-line-names property in dm_gpio_lookup_name
-Date: Tue,  7 Oct 2025 12:26:37 +0200
-Message-ID: <20251007102637.792524-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0111.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::24) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 597AWrPP4189777;
+ Tue, 7 Oct 2025 05:32:53 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1759833173;
+ bh=AJtfH4vp1pZw/fs4w0QwbrPC29UohkzdNBHOIHOUzjk=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=cr9a60zBc2vFumlNpFsPc8mGJ7WDBB/OpGzqbY07mWRjxQdQ3Tv1UXy0IoTrpuhaA
+ EjVlUpSND3kz4gQGpDvmdvi514slMJCHFwJC2irwWwbsQojtZD30UyUbjdZr4V/lQ1
+ A5as0YfRFGUKoJ9b6xipaY5aTMqVFnnKh1mkDWuE=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 597AWrVO627247
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 7 Oct 2025 05:32:53 -0500
+Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 7
+ Oct 2025 05:32:53 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 7 Oct 2025 05:32:53 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 597AWpnD749685;
+ Tue, 7 Oct 2025 05:32:52 -0500
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PA1PR10MB8918:EE_
-X-MS-Office365-Filtering-Correlation-Id: 772f0989-5913-4e10-4936-08de058c0bed
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?VQUm9SRj1W/UN0sPEf/zjB0AASpgXRE285ER2+6Zr8rzb8P26WSByNtdOcbI?=
- =?us-ascii?Q?gxwhmU2o7phqPg34i9YsVH/1wYlZH89EcoPPV+KLm5KqFTMcF3ST2ZSHhWxG?=
- =?us-ascii?Q?h89tYfIKXkYgDzFyaBr0S4/UhnOSlO0QRQNnGXUCWBJniRBIae7C9Yx2P5GF?=
- =?us-ascii?Q?3KICpMC10822LvQ7mnf9UAis2vgddo6SmPL49HeMt5xmLaDaAUOvC9GiPTwM?=
- =?us-ascii?Q?6RjknoPG6p8rwR/4fHLmXiwSXATfXa/QJeHYinEY5eBInFCk2nh2Nal66Zvr?=
- =?us-ascii?Q?mhNAThzLy3M+hpDPlJbaTYLz3pn3u5aZaEf7mDXmZb/132AMtBkLZm1h3qHN?=
- =?us-ascii?Q?AR2ZlNN/xSndSZyduWtHzyKJNcYy1Fl/LfutOQH1dYJd60C2k9WSxnEgEOlu?=
- =?us-ascii?Q?AZ+sAOrnfBUz8oksTTWgCOvp4Ot3JDcmGQ6TQpiHhB/72MvcKn1muRQcHP8X?=
- =?us-ascii?Q?qaiR8zJuHjASmO3FPbYMVXvB8yHPIDYzVLxDH/57/+ED12Kfe9BjsPC5SGmv?=
- =?us-ascii?Q?438Mpd69xrFqxqgpPv/QlJHE1LvkL+rSBly9viNYZ3Zul7ycwGlJZZq6q8eE?=
- =?us-ascii?Q?rhU/W/uIIhAGz21YJVXbZDqhPmOSwwVwfPGA8I/uSkSveLGfXHcx1mkU+3SF?=
- =?us-ascii?Q?j3gO2Wmf06zvR7c72OH3M5RSDabtYTbeBabZ8/QtKoQOF5c9Kdeyd1KnMK+0?=
- =?us-ascii?Q?Q04gsJvjsUMVBBBUutQEof04EyT3pGKXf24rBD/SDJmQDW0hQRZyNV5CZxBa?=
- =?us-ascii?Q?BFRBWUbEMLCCb9m/h4vooNb9ydtzGQhyCd1DFjCHac/cTxouwxgFBXTGS+Md?=
- =?us-ascii?Q?E5M6307+OmZ3bE3M/woBW9BE9HDf0LBfamG9uP7ZIhzSBmuvjRnyRgo8AYvH?=
- =?us-ascii?Q?irsKZYVohuM1VbGvrjjhKcrEFu9eIf24gmcoDScJ+HGC+OGvhx4hG0opdy3E?=
- =?us-ascii?Q?hsYFDe6Vhp6BmiHNBhwB1ypeQjengHTDwvrcE+BLo1lwZ1i9QrELu/KJ5fBl?=
- =?us-ascii?Q?AWa4GCFTSRufP4nUkdK7L0GU3aZj7gC1C0f/k5FI1DfmYwHkxamNf1O4vYzd?=
- =?us-ascii?Q?0sQqZsk0g9d+ZW9Qij2u3fHoJos/Zxto1IzOEblGXl0SfzcQyVKARSOM7axf?=
- =?us-ascii?Q?iRV3u+dUfVC1rL9BfDT/JcDPLoaaYsynco0Q3c8I5+tXFJ64IZTKl6kctMrJ?=
- =?us-ascii?Q?kaIMcw/FFNcNkYJCzqRYPIlXV29J5/3u5OR8czMtEBzEly3NKuwNSUC8gbTv?=
- =?us-ascii?Q?jxaUzlWDro3TcoPkto7kN0wsBXNYX2V+bGNzrkwdiYbMw6s4cRQNyVsiLKzk?=
- =?us-ascii?Q?V7ocPGqPx4yd8XaW7HTqLovrvsf3oYDSfKXwhAb+61hf6bUNx4As8d9FwDCu?=
- =?us-ascii?Q?+b4NIYpZ5nU8DCpBZTwHBuMUGpu33tnZNe2DtOzA2l7TI4RvjHx8bIFKpm9u?=
- =?us-ascii?Q?ZdH2gl1Kg4HI96cQ5FnOJF/OKw2mTTzvJ4q+ThlKMKfYtEECzA20msne5LQB?=
- =?us-ascii?Q?qOQihqNLprPy/FAyE/YReXDkOVHVxcrbKWeb?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(1800799024)(366016)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?IKyR0qbDuyWFR0WmfGIdvDGVsRY8Nw9uP3dsQe3zoa0CWYqERoWQJRisHWNr?=
- =?us-ascii?Q?NcQGQxNVj3/9BG7+n/RnJ/70JcbKSpndjwvyJ4LCcAISKaH4d36PE5dCtR42?=
- =?us-ascii?Q?4iPDER3v7JVxeHoH7MCHzg2varIN8Pd8k9pqMd7iY10gS9xDmt7VOO7Iigj5?=
- =?us-ascii?Q?kR6kGubvibHh1jem/zFkexjQReRyR8mXL0Vu+7LB5GXNqfjvQa7cRZ8JyYH2?=
- =?us-ascii?Q?SwQbGR8o8IMnIGidPu+3856H8dN2Y9Abz1mobgskpcVa7IvFeesXdk6AHDsL?=
- =?us-ascii?Q?6XMRVk8C/hNZta51q8e+oRJXWqlFKuqomGuWVRZIn1Zeza8ffFj7jMOPjHBW?=
- =?us-ascii?Q?bKztR0TPN65bekgpjelKtrey0qrUmb0RkAKOjeAps3NNoNn6gJ7P2rMY7mj/?=
- =?us-ascii?Q?RM5tP28HCIKe3gMBpShiK7N8ffaZXhF8mYu/4mogWQVPNdzXHeYjoEJprRsW?=
- =?us-ascii?Q?PjzspxpRIOtp65BOhmOx9ns1Db5xyL1JnnyHowpORRrqwRewWstVOBMfuIRT?=
- =?us-ascii?Q?T58fGho5PDesBv5UIcd89nflXgodUn55AMzSohJKaJJ01TrkemrBFCmcahKq?=
- =?us-ascii?Q?99M53zsjL9k2YsU5B/UhF9Bjt/7Z04i7x3WBt5qelGzgBk6aWm9sEkCN2uKl?=
- =?us-ascii?Q?jZcSVZFaM6sDMEEyAm2Hrdlrbrug3AGfqwKc0zsmPdYxMsDDzXcNJfCPBIhG?=
- =?us-ascii?Q?PvYw9GzmM3ZEvSSEIYy9mwXrYA2fG19ZAHk7NuNHMyWbG58qpGZ/J1b+wO4W?=
- =?us-ascii?Q?TUx9eoCIR7c+20oOLtxHY7P+qgQakVMh7uTXLnbDP6VTuP3etQ/f5ttnvsJQ?=
- =?us-ascii?Q?MMJYNihMVVuPpWcxbLdRHmUFK6+ADlw3tYL2jvLRUcQMTD7KI7W1FSOa5JbE?=
- =?us-ascii?Q?LdEvQAaGfnO67lCX8Pn+0HdbQFXOApej4DL/viWmp4znGs+X+ciGV+JkgODu?=
- =?us-ascii?Q?M+/8o7dhde21Tfh2kul/CscGnSMSXglqn8QUEaml2E9wtEZb/NPVTQ+pwm9W?=
- =?us-ascii?Q?WT/zLZELNoQMOJnvY+30P+nPAKNIQznmOJfzmkRk8/eU90M5lPIEzLE6LXyj?=
- =?us-ascii?Q?GKSWyxcCnpvJfMq5GYfRVSut2bh73GO6MdUvcZ+RRGvLOfQCpkkv6xYhZ+dT?=
- =?us-ascii?Q?qMwq+Mlto6Qzpu3g/Ofb76IIPkDpGH1hpDldFUPqX+nqr6xrYM8P9b7fbxzW?=
- =?us-ascii?Q?78tM6kEUPtfGkQ/yA7n7JW63Yu/I2wLtq/aepZJjXtsVjyRKRETTuvvQlkMR?=
- =?us-ascii?Q?vHXG37JRhdQrwHksMApGwxLjVJnkSBbm1Si04AhHdsM/5KAAsXBiTHNnMENi?=
- =?us-ascii?Q?PrSrU0pP3ClxJGUKopC5tXN0JLWJqju2oTyxZy/e0hKKS+B+xYegbKykE6kM?=
- =?us-ascii?Q?h4UNQ+XFbpkKRpqiKGd+da254qZXVrauwkS/YNbr13UQKu8lOk2pCVlfJ0G4?=
- =?us-ascii?Q?uo2/HQSxY/uuigKdqkfW7m5GnpD59GkA9SzrcNEM5dHDCOm4gvoJCOuk1jj5?=
- =?us-ascii?Q?3kj09XuRMrDiLbxPo3NRTpx1Wg3BwbJNrUeGS9b634Ju3SEbeV8uSHp18Op1?=
- =?us-ascii?Q?aD/ptjrhPfixRtQKPOLRQPCa1zwNQqSdAd1rSdzO9N70dkVLG1frBDRLhrYv?=
- =?us-ascii?Q?KA=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 772f0989-5913-4e10-4936-08de058c0bed
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2025 10:26:59.0016 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ijowvRw0sjuImuTeZ2sNF0X6sF/RN4Ox2fRCib5V3bdGn8ZH8Ft64+1gEa7A3FYVLznm7FgSeZWlW0pD55STLd3KwmC1HfE2OX85/iRXdA0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR10MB8918
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 7 Oct 2025 16:02:51 +0530
+Message-ID: <DDC0SM36IAM0.FRMOZ81MG22S@ti.com>
+CC: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
+Subject: Re: [PATCH 1/3] arm: mach-k3: Rework spl/get_boot_device()
+From: Anshul Dalal <anshuld@ti.com>
+To: Wadim Egorov <w.egorov@phytec.de>, <trini@konsulko.com>, <afd@ti.com>,
+ <n-francis@ti.com>, <s-k6@ti.com>, <bb@ti.com>, <ggiordano@phytec.com>,
+ <b-padhi@ti.com>, <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251002130455.1795794-1-w.egorov@phytec.de>
+ <20251002130455.1795794-2-w.egorov@phytec.de>
+In-Reply-To: <20251002130455.1795794-2-w.egorov@phytec.de>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,60 +81,394 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In scripts as well as interactively, it's much nicer to be able to
-refer to GPIOs via their names defined in the device tree property
-"gpio-line-names", instead of the rather opaque names derived from the
-bank name with a _xx suffix. E.g.
+Hi Wadim, I have noted a few comments below but overall the patch set
+looks good to me.
 
-  gpio read factory_reset FACTORY_RESET
-  if test $factory_reset = 1 ; then ...
+On Thu Oct 2, 2025 at 6:34 PM IST, Wadim Egorov wrote:
+> Introduce a shared boot-device helper that translates DEVSTAT boot
+> modes via SoC-specific lookup tables. This replaces the per SoC
+> get_boot_device()/get_*_bootmedia() implementations and centralizes
+> the logic in boot-device.c while keeping the mapping data SoC-owned.
+>
+> Start with am62x as a reference implementation.
+>
+> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+> ---
+>  arch/arm/mach-k3/Makefile                     |   2 +-
+>  arch/arm/mach-k3/am62x/boot.c                 | 141 ++++++------------
+>  arch/arm/mach-k3/boot-device.c                |  90 +++++++++++
+>  arch/arm/mach-k3/boot-device.h                |  34 +++++
+>  arch/arm/mach-k3/include/mach/am62_hardware.h |   1 +
+>  5 files changed, 169 insertions(+), 99 deletions(-)
+>  create mode 100644 arch/arm/mach-k3/boot-device.c
+>  create mode 100644 arch/arm/mach-k3/boot-device.h
+>
+> diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+> index b2fd5810b67..7dc77328e5c 100644
+> --- a/arch/arm/mach-k3/Makefile
+> +++ b/arch/arm/mach-k3/Makefile
+> @@ -6,7 +6,7 @@
+>  obj-$(CONFIG_ARM64) +=3D arm64/
+>  obj-$(CONFIG_CPU_V7R) +=3D r5/
+>  obj-$(CONFIG_OF_LIBFDT) +=3D common_fdt.o
+> -obj-y +=3D common.o security.o k3-ddr.o
+> +obj-y +=3D common.o security.o k3-ddr.o boot-device.o
+>  obj-$(CONFIG_SOC_K3_AM62A7) +=3D am62ax/
+>  obj-$(CONFIG_SOC_K3_AM62P5) +=3D am62px/
+>  obj-$(CONFIG_SOC_K3_AM625) +=3D am62x/
+> diff --git a/arch/arm/mach-k3/am62x/boot.c b/arch/arm/mach-k3/am62x/boot.=
+c
+> index a3a6cda6bdb..06bd04da99f 100644
+> --- a/arch/arm/mach-k3/am62x/boot.c
+> +++ b/arch/arm/mach-k3/am62x/boot.c
+> @@ -3,104 +3,7 @@
+>  #include <asm/arch/hardware.h>
+>  #include <asm/arch/am62_spl.h>
+> =20
+> -static u32 __get_backup_bootmedia(u32 devstat)
+> -{
+> -	u32 bkup_bootmode =3D (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
+> -				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
+> -	u32 bkup_bootmode_cfg =3D
+> -			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
+> -				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
+> -
+> -	switch (bkup_bootmode) {
+> -	case BACKUP_BOOT_DEVICE_UART:
+> -		return BOOT_DEVICE_UART;
+> -
+> -	case BACKUP_BOOT_DEVICE_USB:
+> -		return BOOT_DEVICE_USB;
+> -
+> -	case BACKUP_BOOT_DEVICE_ETHERNET:
+> -		return BOOT_DEVICE_ETHERNET;
+> -
+> -	case BACKUP_BOOT_DEVICE_MMC:
+> -		if (bkup_bootmode_cfg)
+> -			return BOOT_DEVICE_MMC2;
+> -		return BOOT_DEVICE_MMC1;
+> -
+> -	case BACKUP_BOOT_DEVICE_SPI:
+> -		return BOOT_DEVICE_SPI;
+> -
+> -	case BACKUP_BOOT_DEVICE_I2C:
+> -		return BOOT_DEVICE_I2C;
+> -
+> -	case BACKUP_BOOT_DEVICE_DFU:
+> -		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
+> -			return BOOT_DEVICE_USB;
+> -		return BOOT_DEVICE_DFU;
+> -	};
+> -
+> -	return BOOT_DEVICE_RAM;
+> -}
+> -
+> -static u32 __get_primary_bootmedia(u32 devstat)
+> -{
+> -	u32 bootmode =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
+> -				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
+> -	u32 bootmode_cfg =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK)=
+ >>
+> -				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+> -
+> -	switch (bootmode) {
+> -	case BOOT_DEVICE_OSPI:
+> -		fallthrough;
+> -	case BOOT_DEVICE_QSPI:
+> -		fallthrough;
+> -	case BOOT_DEVICE_XSPI:
+> -		fallthrough;
+> -	case BOOT_DEVICE_SPI:
+> -		return BOOT_DEVICE_SPI;
+> -
+> -	case BOOT_DEVICE_ETHERNET_RGMII:
+> -		fallthrough;
+> -	case BOOT_DEVICE_ETHERNET_RMII:
+> -		return BOOT_DEVICE_ETHERNET;
+> -
+> -	case BOOT_DEVICE_EMMC:
+> -		return BOOT_DEVICE_MMC1;
+> -
+> -	case BOOT_DEVICE_MMC:
+> -		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
+> -				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
+> -			return BOOT_DEVICE_MMC2;
+> -		return BOOT_DEVICE_MMC1;
+> -
+> -	case BOOT_DEVICE_DFU:
+> -		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
+> -		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
+> -			return BOOT_DEVICE_USB;
+> -		return BOOT_DEVICE_DFU;
+> -
+> -	case BOOT_DEVICE_NOBOOT:
+> -		return BOOT_DEVICE_RAM;
+> -	}
+> -
+> -	return bootmode;
+> -}
+> -
+> -u32 get_boot_device(void)
+> -{
+> -	u32 devstat =3D readl(CTRLMMR_MAIN_DEVSTAT);
+> -	u32 bootmode =3D *(u32 *)(K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
+> -	u32 bootmedia;
+> -
+> -	if (bootmode =3D=3D K3_PRIMARY_BOOTMODE)
+> -		bootmedia =3D __get_primary_bootmedia(devstat);
+> -	else
+> -		bootmedia =3D __get_backup_bootmedia(devstat);
+> -
+> -	debug("%s: devstat =3D 0x%x bootmedia =3D 0x%x bootmode =3D %d\n",
+> -	      __func__, devstat, bootmedia, bootmode);
+> -
+> -	return bootmedia;
+> -}
+> +#include "../boot-device.h"
+> =20
+>  const char *get_reset_reason(void)
+>  {
+> @@ -141,3 +44,45 @@ const char *get_reset_reason(void)
+> =20
+>  	return "UNKNOWN";
+>  }
+> +
+> +static const struct k3_boot_map am62_boot_device_primary_table[] =3D {
+> +	{ BOOT_DEVICE_OSPI, 0, 0, 0, BOOT_DEVICE_SPI },
+> +	{ BOOT_DEVICE_QSPI, 0, 0, 0, BOOT_DEVICE_SPI },
+> +	{ BOOT_DEVICE_XSPI, 0, 0, 0, BOOT_DEVICE_SPI },
+> +	{ BOOT_DEVICE_SPI, 0, 0, 0, BOOT_DEVICE_SPI },
+> +	{ BOOT_DEVICE_ETHERNET_RGMII, 0, 0, 0, BOOT_DEVICE_ETHERNET },
+> +	{ BOOT_DEVICE_ETHERNET_RMII, 0, 0, 0, BOOT_DEVICE_ETHERNET },
+> +	{ BOOT_DEVICE_EMMC, 0, 0, 0, BOOT_DEVICE_MMC1 },
+> +	{ BOOT_DEVICE_MMC, MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK, MAIN_DEVSTAT_PRI=
+MARY_MMC_PORT_SHIFT, 1, BOOT_DEVICE_MMC2 },
+> +	{ BOOT_DEVICE_MMC, MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK, MAIN_DEVSTAT_PRI=
+MARY_MMC_PORT_SHIFT, 0, BOOT_DEVICE_MMC1 },
+> +	{ BOOT_DEVICE_DFU, MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK, MAIN_DEVSTAT_PRI=
+MARY_USB_MODE_SHIFT, 1, BOOT_DEVICE_USB },
+> +	{ BOOT_DEVICE_DFU, MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK, MAIN_DEVSTAT_PRI=
+MARY_USB_MODE_SHIFT, 0, BOOT_DEVICE_DFU },
+> +	{ BOOT_DEVICE_NOBOOT, 0, 0, 0, BOOT_DEVICE_RAM },
+> +};
+> +
+> +static const struct k3_boot_map am62_boot_device_backup_table[] =3D {
+> +	{ BACKUP_BOOT_DEVICE_UART, 0, 0, 0, BOOT_DEVICE_UART },
+> +	{ BACKUP_BOOT_DEVICE_USB, 0, 0, 0, BOOT_DEVICE_USB },
+> +	{ BACKUP_BOOT_DEVICE_ETHERNET, 0, 0, 0, BOOT_DEVICE_ETHERNET },
+> +	{ BACKUP_BOOT_DEVICE_MMC, 1, 0, 1, BOOT_DEVICE_MMC2 },
+> +	{ BACKUP_BOOT_DEVICE_MMC, 1, 0, 0, BOOT_DEVICE_MMC1 },
+> +	{ BACKUP_BOOT_DEVICE_SPI, 0, 0, 0, BOOT_DEVICE_SPI },
+> +	{ BACKUP_BOOT_DEVICE_I2C, 0, 0, 0, BOOT_DEVICE_I2C },
+> +	{ BACKUP_BOOT_DEVICE_DFU, MAIN_DEVSTAT_BACKUP_USB_MODE_MASK, 0, 0, BOOT=
+_DEVICE_DFU },
+> +	{ BACKUP_BOOT_DEVICE_DFU, MAIN_DEVSTAT_BACKUP_USB_MODE_MASK, 0, 1, BOOT=
+_DEVICE_USB },
+> +};
+> +
+> +static const struct k3_boot_device_info am62_boot_device_info =3D {
+> +	.boot_device_primary_table =3D am62_boot_device_primary_table,
+> +	.boot_device_primary_count =3D ARRAY_SIZE(am62_boot_device_primary_tabl=
+e),
+> +	.boot_device_backup_table =3D am62_boot_device_backup_table,
+> +	.boot_device_backup_count =3D ARRAY_SIZE(am62_boot_device_backup_table)=
+,
+> +	.main_devstat_reg =3D (void __iomem *)CTRLMMR_MAIN_DEVSTAT,
+> +	.wkup_devstat_reg =3D NULL,
+> +	.bootmode_addr =3D (void __iomem *)K3_BOOT_PARAM_TABLE_INDEX_OCRAM,
+> +};
+> +
+> +const struct k3_boot_device_info *k3_get_boot_device_info(void)
+> +{
+> +	return &am62_boot_device_info;
+> +}
+> diff --git a/arch/arm/mach-k3/boot-device.c b/arch/arm/mach-k3/boot-devic=
+e.c
+> new file mode 100644
+> index 00000000000..9431dae71fa
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/boot-device.c
+> @@ -0,0 +1,90 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + *  Copyright (C) 2025 PHYTEC Messtechnik GmbH
+> + *  Author: Wadim Egorov <w.egorov@phytec.de>
+> + */
+> +
+> +#include "boot-device.h"
+> +
+> +#include <asm/io.h>
+> +#include <asm/arch/hardware.h>
+> +#include <asm/arch/am62_spl.h>
+> +
 
-versus
+We shouldn't be including an am62x specific header in a mach-k3 file
+meant for multiple SoCs. Please refactor the macros used below so it's
+no longer required.
 
-  gpio read factory_reset gpio@481ac000_16
-  if test $factory_reset = 1 ; then ...
+One idea could be to let the SoC's boot.c handle parsing the devstat and
+bootmode (primary or not). With get_boot_device in boot-device.c only
+receiving the final bootmode and bootmode_cfg as part of the
+k3_boot_device_info struct.
 
-This is also consistent with the move on the linux/userspace side towards
-using line names instead of legacy chip+offset or the even more legacy
-global gpio numbering in sysfs.
+This would also allow Jacinto platforms to easily make use of this
+refactor since the handling of wkup and main devstat would be handled as
+part of the SoC's boot.c.
 
-As this seems to only add about ~50 bytes of code to U-Boot proper,
-and dm_gpio_lookup_name() most often ends up being GC'ed for SPL, so
-adds no overhead there, adding yet another config knob (or two, if it
-also needed an SPL variant) for this does not seem warranted.
+> +__weak const struct k3_boot_device_info *k3_get_boot_device_info(void)
+> +{
+> +	return NULL;
+> +}
+> +
+> +static u32 __get_backup_bootmedia(const struct k3_boot_device_info *info=
+, u32 devstat)
+> +{
+> +	u32 bkup_bootmode =3D (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
+> +			     MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
+> +	u32 bkup_bootmode_cfg =3D (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_M=
+ASK) >>
+> +				 MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
+> +	unsigned int i;
+> +
+> +	for (i =3D 0; i < info->boot_device_backup_count; i++) {
+> +		const struct k3_boot_map *m =3D &info->boot_device_backup_table[i];
+> +
+> +		if (bkup_bootmode !=3D m->mode)
+> +			continue;
+> +
+> +		if (m->cfg_mask =3D=3D 0)
+> +			return m->result;
+> +
+> +		if (((bkup_bootmode_cfg & m->cfg_mask) >> m->cfg_shift) =3D=3D m->cfg_=
+value)
+> +			return m->result;
+> +	}
+> +
+> +	return BOOT_DEVICE_RAM;
+> +}
+> +
+> +static u32 __get_primary_bootmedia(const struct k3_boot_device_info *inf=
+o, u32 devstat)
+> +{
+> +	u32 bootmode =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
+> +			MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
+> +	u32 bootmode_cfg =3D (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK)=
+ >>
+> +			MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+> +	unsigned int i;
+> +
+> +	for (i =3D 0; i < info->boot_device_primary_count; i++) {
+> +		const struct k3_boot_map *m =3D &info->boot_device_primary_table[i];
+> +
+> +		if (bootmode !=3D m->mode)
+> +			continue;
+> +
+> +		if (m->cfg_mask =3D=3D 0)
+> +			return m->result;
+> +
+> +		if (((bootmode_cfg & m->cfg_mask) >> m->cfg_shift) =3D=3D m->cfg_value=
+)
+> +			return m->result;
+> +	}
+> +
+> +	return bootmode;
+> +}
+> +
+> +u32 __weak get_boot_device(void)
+> +{
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- drivers/gpio/gpio-uclass.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+Having a k3 specific get_boot_device called by U-Boot's generic
+spl_boot_device from SoC's init file is convoluted.
 
-diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-index 3d9f8b32b8d..6b357a2671b 100644
---- a/drivers/gpio/gpio-uclass.c
-+++ b/drivers/gpio/gpio-uclass.c
-@@ -164,7 +164,7 @@ int dm_gpio_lookup_name(const char *name, struct gpio_desc *desc)
- 	for (uclass_first_device(UCLASS_GPIO, &dev);
- 	     dev;
- 	     uclass_next_device(&dev)) {
--		int len;
-+		int len, ret;
- 
- 		uc_priv = dev_get_uclass_priv(dev);
- 		if (numeric != -1) {
-@@ -188,6 +188,13 @@ int dm_gpio_lookup_name(const char *name, struct gpio_desc *desc)
- 		 */
- 		if (!dm_gpio_lookup_label(name, uc_priv, &offset))
- 			break;
-+
-+		/* Also search the "gpio-line-names" property in DT for a match. */
-+		ret = dev_read_stringlist_search(dev, "gpio-line-names", name);
-+		if (ret >= 0) {
-+			offset = ret;
-+			break;
-+		}
- 	}
- 
- 	if (!dev)
--- 
-2.51.0
+We should probably just replace get_boot_device with spl_boot_device in
+a later patch after this series.
 
+> +	const struct k3_boot_device_info *info =3D k3_get_boot_device_info();
+> +	u32 bootmode;
+> +	u32 main_devstat;
+> +	u32 bootmedia;
+> +
+> +	if (!info) {
+> +		pr_err("%s: no boot-device info for this SoC\n", __func__);
+> +		return BOOT_DEVICE_NOBOOT;
+> +	}
+> +
+> +	bootmode =3D readl(info->bootmode_addr);
+> +	main_devstat =3D readl(info->main_devstat_reg);
+> +
+> +	if (bootmode =3D=3D K3_PRIMARY_BOOTMODE)
+> +		bootmedia =3D __get_primary_bootmedia(info, main_devstat);
+> +	else
+> +		bootmedia =3D __get_backup_bootmedia(info, main_devstat);
+> +
+> +	debug("%s: devstat =3D 0x%x bootmedia =3D 0x%x bootmode =3D %d\n",
+> +	      __func__, main_devstat, bootmedia, bootmode);
+> +
+> +	return bootmedia;
+> +}
+> diff --git a/arch/arm/mach-k3/boot-device.h b/arch/arm/mach-k3/boot-devic=
+e.h
+> new file mode 100644
+> index 00000000000..965a4570710
+> --- /dev/null
+> +++ b/arch/arm/mach-k3/boot-device.h
+> @@ -0,0 +1,34 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + *  Copyright (C) 2025 PHYTEC Messtechnik GmbH
+> + *  Author: Wadim Egorov <w.egorov@phytec.de>
+> + */
+> +
+> +#ifndef _K3_BOOT_DEVICE_H
+> +#define _K3_BOOT_DEVICE_H
+> +
+> +#include <linux/types.h>
+> +#include <asm/io.h>
+> +
+> +/* Descriptor for mode + optional cfg test -> normalized device */
+> +struct k3_boot_map {
+> +	u32 mode;	/* Raw PRIMARY_BOOTMODE value */
+> +	u32 cfg_mask;	/* Bits in devstat-cfg to test (0 if none) */
+> +	u32 cfg_shift;	/* Shift right before comparing */
+> +	u32 cfg_value;	/* Desired value after mask+shift */
+> +	u32 result;	/* Normalized device to return */
+> +};
+> +
+
+Nit: This could be better documented following the standard '@' in a
+comment above the struct.
+
+> +struct k3_boot_device_info {
+> +	const struct k3_boot_map *boot_device_primary_table;
+> +	unsigned int boot_device_primary_count;
+> +	const struct k3_boot_map *boot_device_backup_table;
+> +	unsigned int boot_device_backup_count;
+> +	void __iomem *main_devstat_reg;
+> +	void __iomem *wkup_devstat_reg;
+> +	void __iomem *bootmode_addr;
+> +};
+> +
+> +const struct k3_boot_device_info *k3_get_boot_device_info(void);
+> +
+> +#endif /* _K3_BOOT_DEVICE_H */
+> diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mac=
+h-k3/include/mach/am62_hardware.h
+> index 2f5655bf24a..084f16bf2d2 100644
+> --- a/arch/arm/mach-k3/include/mach/am62_hardware.h
+> +++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
+> @@ -10,6 +10,7 @@
+>  #define __ASM_ARCH_AM62_HARDWARE_H
+> =20
+>  #include <config.h>
+> +#include <asm/io.h>
+
+Why do we need this header here?
+
+>  #ifndef __ASSEMBLY__
+>  #include <linux/bitops.h>
+>  #endif
+
+Acked-by: Anshul Dalal <anshuld@ti.com>
+
+Regards,
+Anshul
