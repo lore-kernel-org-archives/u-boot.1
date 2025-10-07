@@ -4,88 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2675BCCA472
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 12:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 827F6CCA470
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 12:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A3458409B;
-	Tue,  7 Oct 2025 14:04:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C62A483935;
+	Tue,  7 Oct 2025 14:14:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I+GzTWxx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xTUyVQ5i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DC9183FFE; Tue,  7 Oct 2025 14:04:22 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AE1A83918
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 14:04:20 +0200 (CEST)
+ id F071E83C9F; Tue,  7 Oct 2025 14:14:28 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AA8ED83918
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 14:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-46e6c8bc46eso40321795e9.3
- for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 05:04:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759838659; x=1760443459; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=n0fblgGKdEYLOGfpRIV8oY/h3Ymg6BBOVf5QD7oqncY=;
- b=I+GzTWxx1OOl4vZXo98N5yP78jCNaNcDVV8+STMO02cRfBd4teLHQewAoL8mIPzIH7
- y9bh1VwwPTcrfvFhSELDLttT4qZARXGkhKrQdxtWpIeV+F9nv459lwBMe+yAEnVZT+LQ
- TLmcixT+WwvAFMKyzYWN2TuJXZDf55uTu5w61vZmx/56bAd9qZypoh5lXPjc1KmCM/XA
- ZqX5RnPZFD3hEEJ6wWqpb6+3N9lLGw/QtB2LgStD57lI4Ouhf3uTkfH5wOLrvMmsKUYV
- Wppyv1IhYmiq0eK5Mn1KV0Ab4yhZbiWJeagJ/8EK3VLYPZdS9p1Bw02EQ7AOQJQpUBry
- qazQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759838659; x=1760443459;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=n0fblgGKdEYLOGfpRIV8oY/h3Ymg6BBOVf5QD7oqncY=;
- b=YvK5u6kbSd9cBsFtGFS8oAyys+LeIUf749Dq5Q35dKZnvRBhDoa9Ja1s9P8BmDH6Un
- HyWKNAaQFaWV2MVPZFR/ThrIyPMh+CdHVr+PjSJfKA2BaDK2NfQE8zGR/hOOg3DuuNFN
- fAv2OK8TsZqrKpvFg4Yz9lpg1xPKbceopjSbJ74HCR4w03Ab+fsfp4hQqNoKCWNHKYXx
- gKzkJMn8AXq1C0S6xO2wIsTLd2DY4HLSFeBIm3F15P71ZIwPl8CjeSTJ6Fy0IefQCffI
- 1adkrG0jAVfb7giFN1cDpgD7lVIBs54udgbCrujeSMVftbYL2wNjHZ6kVAB5NCxc78FG
- 1IHA==
-X-Gm-Message-State: AOJu0YxryG+seGjjAxx5Oq0zhWOyn9aPY5qKNR2KdPnnf0zHlzSSN/5e
- Ytnk+Z7bcxaNeP3ySQo5LyEJwzvZQwgiMAFC+RlF0LYN878++oGDGTTJrQkEYtdCL70=
-X-Gm-Gg: ASbGnctdbwyeWjmhqBi1A+FPPfAfdCNb3a6emo/+UQPWMBhXtP0+i44ZAdO5StEDqhH
- HcQtY+lsjqGfU7d20MhTBERZaiED/mLqzhRy2KKhpg+S8VF0IcOu1mrWKfnRt1F6c8o02ZDLiTN
- V1Wd6+AW4VUVYsywD0/m/Dqs0lrCZC1hv0t/uKz2rdIQpbYuSSlSI5gjHA02O1EKX+h2BSYUfmN
- b/EifJqBxsefH61zGjp/DVB1z/zFBXFezoKBtlXi4GpiSljZsJdhCQXv1Xm61pEkvOjP4EPmZ15
- GSZPQoSePGfnqbkjCcNIP3+NpKlQzFQnV01MuPeUj8+Sc74RaEv49jkjlCq617bDlCoMjD+V+Ks
- 8MFias0CedkSxlOQNIx0inKjpexPIvH3iSOYynx5fI/BL8kg33N9Bf2nr0A80INyGUtS26XcCBv
- iRA7GJpaH3bwc=
-X-Google-Smtp-Source: AGHT+IFlbB3+bCK/pUPVwzC4xAoCY6NnOYhQq+iyAxSU2jTr1GLyDAKKFnY2PQ9ldYU+Eb2loC22vQ==
-X-Received: by 2002:a05:600c:3b12:b0:46e:4e6d:79f4 with SMTP id
- 5b1f17b1804b1-46e7110efbemr109383105e9.15.1759838659437; 
- Tue, 07 Oct 2025 05:04:19 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:4601:c90:3de5:5f6:3a69])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8abf0bsm25109402f8f.17.2025.10.07.05.04.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Oct 2025 05:04:19 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Tue, 07 Oct 2025 13:04:18 +0100
-Subject: [PATCH v2 3/3] ti_sci: Pointer is never assigned to
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 597CELoj009216;
+ Tue, 7 Oct 2025 07:14:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1759839261;
+ bh=o0k4VXx6fTdfP7azgdmHmIhTzhUzCcvA9zy4rYF7Fco=;
+ h=Date:To:CC:Subject:From:References:In-Reply-To;
+ b=xTUyVQ5i4VzK3IVMz0Q4uCP24wieKUixhnKBqrc45q7Fce/tZb9XeQil/2hYfzGtG
+ w7OBB3hDRUk5R8F3vI+GZ9T+MXILbho0pBKwpnBuJsRtKUR0XUVz5C3W3j3mNAljwD
+ rKh1Qc6By1JoGiC+XVhJiDzDFsynTKbnRgHoJw44=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 597CELXi3579080
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Tue, 7 Oct 2025 07:14:21 -0500
+Received: from DFLE206.ent.ti.com (10.64.6.64) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 7
+ Oct 2025 07:14:21 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 7 Oct 2025 07:14:21 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 597CEKAY859349;
+ Tue, 7 Oct 2025 07:14:20 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251007-ti_sci-v2-3-7561d7ea07b2@linaro.org>
-References: <20251007-ti_sci-v2-0-7561d7ea07b2@linaro.org>
-In-Reply-To: <20251007-ti_sci-v2-0-7561d7ea07b2@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Moteen Shah <m-shah@ti.com>, 
- Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Tue, 7 Oct 2025 17:44:19 +0530
+Message-ID: <DDC2YB35829H.25C5UU32Q009E@ti.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Bhupesh Sharma <bhupesh.linux@gmail.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, Anshul
+ Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2] ufs: ti-j721e: Correct error detection
+From: Anshul Dalal <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251007-ufs_ti-v2-1-501f575b6947@linaro.org>
+In-Reply-To: <20251007-ufs_ti-v2-1-501f575b6947@linaro.org>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,30 +81,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The pointer resp is declared but never assigned a value but is then
-dereferenced. Fix this by assigning the pointer to the message buffer.
+On Tue Oct 7, 2025 at 5:12 PM IST, Andrew Goodbody wrote:
+> In ti_j721e_ufs_probe there is a call to clk_get_rate but the code after
+> that attempts to detect an error from that call incorrectly uses
+> IS_ERR_VALUE.  Instead the test should just be for regular error codes.
+> The call returns an unsigned long so that needs to be cast to a signed ty=
+pe
+> first of all.
+>
+> This issue was found by Smatch.
+>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 
-This issue was found by Smatch.
+Reviewed-by: Anshul Dalal <anshuld@ti.com>
 
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
----
- drivers/firmware/ti_sci.c | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index afe1ae13834d236015a3d5e4d8d4f9955ba8c822..91edbc7898132bc10fcf4bd6a71c1e7aebd5147d 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -1365,6 +1365,8 @@ static int ti_sci_cmd_clk_get_parent(const struct ti_sci_handle *handle,
- 	if (ret)
- 		return ret;
- 
-+	resp = (struct ti_sci_msg_resp_get_clock_parent *)xfer->tx_message.buf;
-+
- 	*parent_id = resp->parent_id;
- 
- 	return ret;
-
--- 
-2.47.3
-
+Regards,
+Anshul
