@@ -4,79 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8CCFCCA470
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 11:14:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0D7CCA472
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 11:23:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D9D383D86;
-	Tue,  7 Oct 2025 13:14:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9D3D083F20;
+	Tue,  7 Oct 2025 13:23:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TMuVueXG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dQA2xwSy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAD7983F56; Tue,  7 Oct 2025 13:14:09 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 8915A83F56; Tue,  7 Oct 2025 13:23:42 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 851ED8363D
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 13:14:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82B4683F1F
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 13:23:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b40f11a1027so1095216566b.2
- for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 04:14:07 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-373a56498b9so78063191fa.1
+ for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 04:23:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759835646; x=1760440446; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6/x5SG4a0Vv+3EUdbL31diXq7jmSnsHDLdlas8M1uM8=;
- b=TMuVueXGhlPOzQkFepDb8ELE1nmXfiXQo4hZ5uSOB1Ay6AePM57kxUYwv4bHecnw7s
- muLODFO9ISqiQ8coe+JvAdkokG1J5chI9YzQzN3zDHvopSP8PSJT3w8VN0TZ1IavrI21
- k+1xg5bg+4xy+UAt1Cc01sM2nl5gE06uz58yY=
+ d=gmail.com; s=20230601; t=1759836220; x=1760441020; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ahpkZS1Vg+w1MAArdhmLSLQ1Ndnf6vl+DWF1szD4T64=;
+ b=dQA2xwSyFHAevtquD5/U+jWxpxxRJLtlEAU4cYOdyGXxlg3RVA+xZQ2lBDUucG8srg
+ RsegSU0bKMP74PtsmlpnxD1q4JCqXvmKFB7MgU/F6eYRTRPOik/EPaibVPFVWN/VoTSu
+ WOyaJ/nHh8evnEyAzI/qgtElwxYN4gq2C+K2EntBrG18BJ4Y3Xi+M7P9ezk+DnNOnWK/
+ SKYKf4fFkrZ3oqUy77RcPz7IMwjnhEkh6IAufhjBiCsBu0TY1s8FwLyAHPFYUfEbUqEF
+ 1lKMxHCJRPS6h+osqT97AidYSkllwd5N30ekTW9pEGeAonPpeeE1pmDzEZta1YWjkqQ4
+ FocQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759835646; x=1760440446;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6/x5SG4a0Vv+3EUdbL31diXq7jmSnsHDLdlas8M1uM8=;
- b=NRd8myjyAECba94KKRC/oDJVHXy94XiGjRZLeHb29PsjHZBue+IQqK+6L9mo/ZpEZh
- rW5cGIf1rL71TnVdh3Pz70SioNisnr0XwMWaRITiiDmJduPSd1NzC/rMsx+TiWRS0OSF
- ZAHzozG87TBUhhwWQ4kSm54DRUg7r7OMEwQHSV9YDfNzjWSHvn7OLSwHxCYvLrCkudDU
- 3JYV9+B9P7lFgt7mzbvjQB6su1YedwZluYMSLJvxqJfVzMxtUty7+wgZSuWa/KyxXE99
- +nPMrw+f/sISzRhkqYN0Wc3/oqFTpQWaj2/auitu/CWqjMFiCP1h6U4kCUKmOoDMx4YD
- HJtw==
-X-Gm-Message-State: AOJu0YzNhPj6CXQORslZJDyv101qMm90pnrBYNakiuprq0WWZa6MSpCk
- 4SyK+VF11KdrfwIEU8SzOXC6gJk4NJ11IN7t6iSij6VeMrcVMrW7RoWWf1e3a8dSbSansxEy+aO
- mkAaEWoguq4MkoNm1dbYbFSq6Us2HGWXRFsNdzYqd
-X-Gm-Gg: ASbGncudxLuNd3a3K0A0JwqmHdgPQQKoW4hMFqiAvJNMt/Wgc1NgPm02bfFZC6SAm3A
- QQcJfgfCnytTqFS61zx92sB1KQ8HDaPVU6XlSpHhP6PLUxhsvdJY5VEyo8+NW5eD3OKxa6tThlq
- NnfAIN/v96OM8xA13B1QC+A2u9uM4QqFphxFnFeSB51y6qt2ZfHZ+yt4HWil+oMtSf6/zTfF7+o
- NJGOqKENOoIagrFYhQCrPdiwFcEog==
-X-Google-Smtp-Source: AGHT+IFqppGiH7t+J2RzyYfsk+P9e178aC5moW030Lm3IU8w0AYdMCHwgZ6wm20jROTpnaJ/cetXJjvgig52/X56I5U=
-X-Received: by 2002:a17:907:948f:b0:b3c:3c8e:189d with SMTP id
- a640c23a62f3a-b49c3932c56mr2055839466b.32.1759835646561; Tue, 07 Oct 2025
- 04:14:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759836220; x=1760441020;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ahpkZS1Vg+w1MAArdhmLSLQ1Ndnf6vl+DWF1szD4T64=;
+ b=mESUY5c1EtyXxCQIszYcBU88WNG6Z6wu+nBAIDNl+f7Grj3IMrjrWJI25Nn9y30nlh
+ XGIgifuL/5rpTofLo9EAHMIpR4lL/UKkAaaH9V5qrEAtbhQFWUIU3pFoGYQuWbGIBclk
+ reSr/zwWeB6TWTq3Tig5z+70om6+RVo83DywSvA0I92QgXiWxM7y/+CAptKcmUQKZaXm
+ dTgeGMiaGprwAyD6GBx9noNMbIUnCuY83ZL3i8FVbFA7zWaYgcFMBR3iEbq4Ic8/YRri
+ GuVjXC+B2Ee8MFZBaY5TQ3BVnwWOv1ekKHlVmhJCZ6o4m3i8En3Re7+2kplwCInUfw0y
+ k6mw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVNk2BW9IlozKRTmhKteRRgUOD4ICrwK2sLBS/9OqmnEDM0Qelq4297e/vNws/oGt6QqkGi2Y8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzJXq0MgO4o42RHTrRK9rn7Eeu0Uf4v3QextrirLf85GKDv+X9y
+ Izqu8YSiBAGSJeOi3XTTtkSx2C6YgdrWrspRcwxZYlmpvRWBzkqbmVTaEqlxADAU+kRen9sBym5
+ sJx0sGlvaUbLUBqaIrsix2bvV9rmLWG8=
+X-Gm-Gg: ASbGncvpxeqf+nwZLjQKmMy5kvrqWcW6+BIWm2O0xcVVMBEBxfd//IzKRKmdHGRchQU
+ AuuDI5hXfEmlxsRFAaZDYnZNN+z77dwCQiFTzLCYSQvcG0FBvV/UQjjIPA/5SWTXhBJomIvQyZF
+ NPKSZhFC8uADlOjOhY8JsWj01HVm1LiZadBH6PzSywJJrTMvTu22LR2EpP2OLUzJSLyiM47SV0C
+ qMSOobcp11Yy6PE3ce9kcWZkGfUKFqDC4WSv5ca88z4tAQJB4ErDKrrK2bEIng=
+X-Google-Smtp-Source: AGHT+IEZ5RaC0hqQu0fkjEyY4orw6X0jsXv9ZqHib6G2wQPdIyRcG5NDHzhIGEK5zyqVywDQcMZ2MRUoB1KSGzspCVc=
+X-Received: by 2002:a2e:a54a:0:b0:373:c272:d986 with SMTP id
+ 38308e7fff4ca-375f526e5b0mr9477041fa.17.1759836219495; Tue, 07 Oct 2025
+ 04:23:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251001212649.3263574-1-sjg@chromium.org>
- <20251001212649.3263574-6-sjg@chromium.org>
- <20251002201537.GO6093@bill-the-cat>
- <CAFLszTigwz2mVfS=C6yXDnTMvdGxw=FsD36QCrpS2VOVSr+7nA@mail.gmail.com>
- <20251006234500.GG298503@bill-the-cat>
-In-Reply-To: <20251006234500.GG298503@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 7 Oct 2025 05:13:55 -0600
-X-Gm-Features: AS18NWDFjkZ7KvFQYMT0OKPLhgJa_F5-_j2nzJSRbCFrST37Mr-j2j832EUNSfo
-Message-ID: <CAFLszTgEoEN=+QocxEXewkwe-wjOKeNRMn5YWSvHcOcaLR2qsA@mail.gmail.com>
-Subject: Re: [PATCH v2 05/17] boot: Move showing of bootflows out of the
- command
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
+References: <20250923-usbnetc-v1-0-507cddbe7214@oss.nxp.com>
+In-Reply-To: <20250923-usbnetc-v1-0-507cddbe7214@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 7 Oct 2025 08:23:28 -0300
+X-Gm-Features: AS18NWB4KveDY4xwB6VlrmpWA9DUL8zKwE9OEF7HhW_-CYTjpCp0WwK7-vbYPz0
+Message-ID: <CAOMZO5DArO=XT6NjUheyL5-ec-s0WxW9PxTNEBZ6QXvdGVG=9A@mail.gmail.com>
+Subject: Re: [PATCH 00/10] Enable USB and ENETC on i.MX943 EVK
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ Marek Vasut <marek.vasut@mailbox.org>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, 
+ Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>,
+ u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>, Frank Li <Frank.Li@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,53 +101,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marek,
 
-On Mon, 6 Oct 2025 at 17:45, Tom Rini <trini@konsulko.com> wrote:
+On Tue, Sep 23, 2025 at 8:12=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
 >
-> On Mon, Oct 06, 2025 at 05:30:23PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 2 Oct 2025 at 14:15, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Oct 01, 2025 at 03:26:30PM -0600, Simon Glass wrote:
-> > >
-> > > > It is helpful in tests to be able to show the bootflow that is being
-> > > > examined. Move show_bootflow() into boot/ and rename it.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > Changes in v2:
-> > > > - Add a log_err() for an invalid state
-> > > >
-> > > >  boot/bootflow.c    | 57 ++++++++++++++++++++++++++++++++++++++
-> > > >  cmd/bootflow.c     | 68 ++--------------------------------------------
-> > > >  include/bootflow.h |  9 ++++++
-> > > >  3 files changed, 69 insertions(+), 65 deletions(-)
-> > > [snip]
-> > > > +     case BOOTFLOWST_COUNT:
-> > > > +             log_err("Unexpected boot value of bootflow error %d",
-> > > > +                      bflow->state);
-> > >
-> > > A small thing, checkpatch.pl catches that this isn't aligned with the '('
-> > > here as it should be.
-> >
-> > OK. I'm unsure whether I really want this line anyway, since it
-> > increases code size.
-> >
-> > >
-> > > A larger thing, and please correct me if I'm wrong, but on reading the
-> > > whole set of changes, this move + rename just means we're putting more
-> > > info in the test output, and nothing else?
-> >
-> > It will also appear if you have CONFIG BOOTSTD_FULL and use 'bootflow
-> > list' or 'bootflow scan -l'.
+> Changes for v1:
+>  - Adding USB2 and USB3 device tree nodes with required PHY and
+>    regulator support.
+>  - Enabling ENETC1 and ENETC2.
+>  - Updating Kconfig and DTSI files to support these interfaces.
 >
-> But that should be the case before this patch as well, yes?
+> This series depends on "imx: add i.MX94 support".
 
-Yes, that's right. This is just moving the code into a place where it
-can be used from tests.
+Could you please help review the USB parts of this series?
 
-Regards,
-Simon
+Thanks
