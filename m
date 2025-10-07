@@ -4,89 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A218CCA470
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 19:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE589CCA470
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 20:03:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E58D83959;
-	Tue,  7 Oct 2025 21:48:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 25FF08397A;
+	Tue,  7 Oct 2025 22:03:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n7rKnmmb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NP4a9P71";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E97B8397A; Tue,  7 Oct 2025 21:48:25 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id 1E1B283981; Tue,  7 Oct 2025 22:03:08 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E21DF8394E
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 21:48:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EECE383959
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 22:03:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7a7b084ef77so3822681a34.2
- for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 12:48:22 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b00a9989633so56452166b.0
+ for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 13:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759866501; x=1760471301; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=19zllCZBio5ly3Lqg1UqLCTg8IfKbW2Pl/Y/tZsZRJc=;
- b=n7rKnmmbE19d0EXQQmJTSGoBNsMZN4XrWP4I4tLxKzgWipE6wW5Xp5zzlhkqwyfOjQ
- IQZNJ7ojPJ3RKI18/EECqDOjG6J1AiTFewqTOnwCCtzS0D/DAITlqMpU0zUfsnRA9vS4
- 1lO7Amf2IhMDli1zZPt/LXYyK2j+8/RyPr+Zw=
+ d=chromium.org; s=google; t=1759867385; x=1760472185; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=uoZjLi/ifuCSNxG5NCENgUxLEUUcJziWWKrdk6obHM8=;
+ b=NP4a9P71It4rgG4D8dRtwvMP5zrLndNs1aTPeDiLVR3M7B1V3Mn/oq/zXBUM+tZEMj
+ oTpUAwaqeJiul9PI4QMPRdAxrz/QwJC8A5agom3NFr0Dw8orbcXZSq2+FH7UgyEslIsH
+ 0PghXjCkfCA9Lk7sZE5OaI0p6DnTQs4+yCQwg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759866501; x=1760471301;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=19zllCZBio5ly3Lqg1UqLCTg8IfKbW2Pl/Y/tZsZRJc=;
- b=h4gqeKBkw+spJCJLvlw3J31bEkbJ2RAenXrskOtSw3s6sMgEmNLSE3iMACuS4QHfVd
- /ISaIkHF3SLgqjipaD1l6nH+E4rZi2jSChxqzX1wg5wnT+aVZJiMcMtBk3a0sZGtERZ+
- 3I2tZjE5gQZ0KDs7mzRKL9S2xhJAnG9RiVNqnJtuxkkub+kHd9oEpPWgKHXMu0vFQiT4
- OeAQ7wIYvAKjVuLxskVdWDhlWbhobFQnsApZRBUrlXrRMpH7J2/ngt8H3sVKAd6ummU5
- ApMNAWxh3PmiYzS2EwIKgvGR4i5I8RNaPg4xprbEaE4chHAcnIuK6p3tGkBwNTDF9f6J
- zt+A==
+ d=1e100.net; s=20230601; t=1759867385; x=1760472185;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uoZjLi/ifuCSNxG5NCENgUxLEUUcJziWWKrdk6obHM8=;
+ b=xBlucthwobKMPSI/EgmQQDNVqViRGT3YCv7JCpwf37yUaUMApp6t5lw6EGcIa0Zhew
+ ykiH0ClayU3IYUZ3Cs+B/5w6ma0kbV2DXauARkj6/UXWTTCvuHaOKRzJZoLzEIEMJHzw
+ Mr+Wt0BOkSFTjjcGQbhQbA62NqdqlTghRq/Q46DJONmFQT318sRlYqIWd2hQy8DxePE9
+ GjaD6x1ZN+fYoJU6YTYwKZzBEAXmcz/wSbPJBMfcXHc8hizfsJAWCa7ENjMmz5AIHAYq
+ OD+p+mVg0sO2gs5K7ZwOZOk//ZB3fAsYgQ4oftYi4P7nGcvL0CIecd8+OG5rdaF4SO5P
+ G9Lw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXByl6FxwtcEOsXCF6stJw/qa0x6KFm/k7XjszwCb9BHTvKqnUCh4O4uWE6Xveu4l4NMHNsTn8=@lists.denx.de
-X-Gm-Message-State: AOJu0YxBzMPlH9ogDFhqa/1yMs3NIUSFej0oFwbaq2xtqp3wIe4Mg1m2
- Jdoy+bg219JoSRaEAyNUNgg60rhoThug/JLlnhnakYZescArRW10yQBBCb8sQn/GZ8Y=
-X-Gm-Gg: ASbGncsFM6w+kj++g80v44Aqf0rM2tGExKDuBfc2+eTaxU5pn1ZeDLFwswf5bj3okXL
- UV4zIWp65x9xuJDxIGe7OztTszBvSaNm4DVXdC9kUSTwYVm3jspuoigYZeSpc/tyO3Ao/3qzHKS
- Bm+qT/F5ndh7dhbcWOvnMBhE7tgJAKc8BM/llWyOa0nb5Nn2NS35gGFEYE7G5WNjI3rzX129GAP
- yMWBGIkbrpLPqOiUSCleFg1lbcSWCtoBgX+oBBIa8iRvxdHPkD8DLaCSnDjp8qW8YLJP5BCsyuX
- eNNwx26Yc1ufMuLNQw0mj4IuioUtp1cEAIjhrMWxm93k3yi2mdjco7tqxDRh7BsGfoFF911yVPr
- yiOmHkU27WcwVKUk/BJ8JdcKlfke7/jsZupbHoCN5/Zp8vosczI2Y+EjhXmSS1dAsU0Ba0NTuW2
- z20SrD8vbd/Q==
-X-Google-Smtp-Source: AGHT+IEb9DTNwE5NC3U2tQ1RDovHBYCKdeQjyXcczTGy67BWLFiCXI6OuUkBbkpnEUX+Dsnd42mSQw==
-X-Received: by 2002:a05:6808:3086:b0:43c:8714:fe3c with SMTP id
- 5614622812f47-4417b4074c5mr415463b6e.51.1759866501458; 
- Tue, 07 Oct 2025 12:48:21 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-43fb25ca017sm3985707b6e.27.2025.10.07.12.48.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Oct 2025 12:48:20 -0700 (PDT)
-Date: Tue, 7 Oct 2025 13:48:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] bootstd: Fix bootflow info for efi_mgr
-Message-ID: <20251007194818.GP298503@bill-the-cat>
-References: <20251003222714.4921-1-semen.protsenko@linaro.org>
- <CAFLszTiic5c_ZwX4hWJEAx=VGXxR8KOsNw2AQwzh92G-PRncGA@mail.gmail.com>
- <CAPLW+4n_wCzhsyVYiz1AzA4R0Z32nkjOs31F8TDwZXpyUM-J4Q@mail.gmail.com>
+ AJvYcCUhWplvmNXEm/+MRmAmYRLWRy9VuE+I2Vtoku3jTHGzzlZFxHyCYIDo+02bSc5m6qhOky5JGU0=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw3cYw07750u9NomZiDufSddXXNStZ2z6YC0mng1btSl0yo/dN/
+ zRrEtvQxBmjWApUh3AMTafgRNRSozq2hQS5pKLnyXq9cDP+ufp36rkshHyzosOmicMzwPQUpUaD
+ UYqpgSt+vl8eyNoepoxRF7p5GLYHf7VYrZd93GS2Y
+X-Gm-Gg: ASbGnctKs+DnOQyugLqgR+YYBIruhnhVd+32+tctuQOBiokpbaGnIu4BwPL/fUDW/bf
+ 9zDI1wlSf2szQDZ1yiaGFYt4omN+vb63+dIlY0VdS+8YJ6eoSdFW381wVteJwMLPoMTnQyeEh0A
+ rek7SYRI4SztUe3iaM5BQ5iHEEcEIJBeFijJYhD62N+BjoQE4fU5f9bg02Zk1MNUntGFlcXMx9L
+ hIHERATmlpYK9ZWFYogTjsrrudiKg==
+X-Google-Smtp-Source: AGHT+IFSuBvApPG2VPD/ErOEq+BGEQ3SSYvQlu714aHsqU4WRpsldgXETxoCJSvPKhJLul0zOn7pXBvwG2iQ2+YZ3k4=
+X-Received: by 2002:a17:907:c297:b0:b3f:f6d:1d9e with SMTP id
+ a640c23a62f3a-b4f40789662mr645311166b.6.1759867385279; Tue, 07 Oct 2025
+ 13:03:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sQQqcF09hnnBo1Wo"
-Content-Disposition: inline
-In-Reply-To: <CAPLW+4n_wCzhsyVYiz1AzA4R0Z32nkjOs31F8TDwZXpyUM-J4Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
+ <20251003-feature_sysboot_extension_board-v1-6-458b8bf85325@bootlin.com>
+ <CAFLszTj3j6bcm6PG1GLAHa6FfjpKOKL12P_ae4WZsJL4hbh-HA@mail.gmail.com>
+ <20251006214428.GD298503@bill-the-cat>
+ <CAFLszTgLd7gHoU04QKAgHWNFQz_CS_XfeJCBkn58fu3UxUyurQ@mail.gmail.com>
+ <20251006234240.GF298503@bill-the-cat>
+ <20251007113213.75efa663@kmaincent-XPS-13-7390>
+ <20251007141148.GJ298503@bill-the-cat>
+ <20251007182938.368bf435@kmaincent-XPS-13-7390>
+ <20251007164207.GL298503@bill-the-cat>
+In-Reply-To: <20251007164207.GL298503@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 7 Oct 2025 14:02:53 -0600
+X-Gm-Features: AS18NWDxDxxT4aMjZdb_-hetvkYdn5NpD-HHfPmZYPHq9qHYPGdc-R2R6ew8xW8
+Message-ID: <CAFLszThB=o9Wq1K4XP1K_Oj+6db2ZuzK8kLw7KyGqCVqDBX7Gg@mail.gmail.com>
+Subject: Re: [PATCH 06/16] board: ti: Convert cape detection to use UCLASS
+ framework
+To: Tom Rini <trini@konsulko.com>
+Cc: Kory Maincent <kory.maincent@bootlin.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
+ Mario Six <mario.six@gdsys.cc>, Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,48 +105,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---sQQqcF09hnnBo1Wo
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 07, 2025 at 02:32:15PM -0500, Sam Protsenko wrote:
-> Hi Simon,
->=20
-> On Mon, Oct 6, 2025 at 3:40=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
->=20
-> [snip]
->=20
+On Tue, 7 Oct 2025 at 10:42, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Oct 07, 2025 at 06:29:38PM +0200, Kory Maincent wrote:
+> > On Tue, 7 Oct 2025 08:11:48 -0600
+> > Tom Rini <trini@konsulko.com> wrote:
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > > On Tue, Oct 07, 2025 at 11:32:13AM +0200, Kory Maincent wrote:
+> > > > On Mon, 6 Oct 2025 17:42:40 -0600
+> > > > Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > > On Mon, Oct 06, 2025 at 05:30:15PM -0600, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Mon, 6 Oct 2025 at 15:44, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Mon, Oct 06, 2025 at 02:38:23PM -0600, Simon Glass wrote:
+> > > > > > > > Hi Kory,
+> > > > > > > >
+> > > > > > > > On Fri, 3 Oct 2025 at 10:34, Kory Maincent
+> > > > > > > > <kory.maincent@bootlin.com> wrote:
+> > > > > > > > >
+> > > > > > > > > Migrate TI board cape detection from legacy extension support to
+> > > > > > > > > the new UCLASS-based extension board framework.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
+> > > >
+> > > > ...
+> > > >
+> > > > > > > > > -int extension_board_scan(struct list_head *extension_list)
+> > > > > > > > > +static int ti_extension_board_scan(struct alist *extension_list)
+> > > > > > > > >  {
+> > > > > > > > >         unsigned char addr;
+> > > > > > > > >         int num_capes = 0;
+> > > > > > > > > @@ -31,7 +31,7 @@ int extension_board_scan(struct list_head
+> > > > > > > > > *extension_list) struct am335x_cape_eeprom_id eeprom_header;
+> > > > > > > > >                 char process_cape_part_number[17] = {'0'};
+> > > > > > > > >                 char process_cape_version[5] = {'0'};
+> > > > > > > > > -               struct extension *cape;
+> > > > > > > > > +               struct extension cape = {0}, *_cape;
+> > > > > > > > >                 struct udevice *dev;
+> > > > > > > > >                 u8 cursor = 0;
+> > > > > > > > >                 int ret, i;
+> > > > > > > > > @@ -78,22 +78,20 @@ int extension_board_scan(struct list_head
+> > > > > > > > > *extension_list)
+> > > > > > > >
+> > > > > > > > I suppose that a method called scan() could be added to the uclass
+> > > > > > > > and implemented by this driver.
+> > > >
+> > > > I don't understand what do you mean by method? Is it different to the
+> > > > UBOOT driver scan ops I have designed?
+> > > >
+> > > > > > > > >                 printf("BeagleBone Cape: %s (0x%x)\n",
+> > > > > > > > > eeprom_header.board_name, addr);
+> > > > > > > > >
+> > > > > > > > > -               cape = calloc(1, sizeof(struct extension));
+> > > > > > > > > -               if (!cape) {
+> > > > > > > > > -                       printf("Error in memory allocation\n");
+> > > > > > > > > -                       return num_capes;
+> > > > > > > > > -               }
+> > > > > > > > > -
+> > > > > > > > > -               snprintf(cape->overlay, sizeof(cape->overlay),
+> > > > > > > > > "%s-%s.dtbo",
+> > > > > > > > > +               snprintf(cape.overlay, sizeof(cape.overlay),
+> > > > > > > > > "%s-%s.dtbo", process_cape_part_number, process_cape_version);
+> > > > > > > > > -               strlcpy(cape->name, eeprom_header.board_name,
+> > > > > > > > > +               strlcpy(cape.name, eeprom_header.board_name,
+> > > > > > > > >                         sizeof(eeprom_header.board_name));
+> > > > > > > > > -               strlcpy(cape->version, process_cape_version,
+> > > > > > > > > +               strlcpy(cape.version, process_cape_version,
+> > > > > > > > >                         sizeof(process_cape_version));
+> > > > > > > > > -               strlcpy(cape->owner, eeprom_header.manufacturer,
+> > > > > > > > > +               strlcpy(cape.owner, eeprom_header.manufacturer,
+> > > > > > > > >                         sizeof(eeprom_header.manufacturer) + 1);
+> > > > > > > > > -               list_add_tail(&cape->list, extension_list);
+> > > > > > > > > +               _cape = alist_add(extension_list, cape);
+> > > > > > > > > +               if (!_cape)
+> > > > > > > > > +                       return -ENOMEM;
+> > > > > > > > >                 num_capes++;
+> > > > > > > > >         }
+> > > > > > > > >         return num_capes;
+> > > > > > > > >  }
+> > > > > > > > > +
+> > > > > > > > > +U_BOOT_EXTENSION(cape, ti_extension_board_scan);
+> > > > > > > >
+> > > > > > > > Can the extension information go in the devicetree, so boards can
+> > > > > > > > select their scheme that way?
+> > > > > > >
+> > > > > > > Since we're scanning to see what extension boards are present and so
+> > > > > > > what device tree overlays to apply, I don't think that can work?
+> > > > > >
+> > > > > > My understanding is that the scanning process is board-specific. For
+> > > > > > example we would not want the Beagle mechanism to be compiled into
+> > > > > > rpi. The idea of scanning things in a board-specific way seems like a
+> > > > > > driver to me. Note there is also the SYSINFO uclass which can do
+> > > > > > similar things.
+> > > > > >
+> > > > > > The overlays being applied here are additions to what should already
+> > > > > > be a fairly complete devicetree.
+> > > > > >
+> > > > > > If this isn't possible, then where is the information known?
+> > > >
+> > > > Oh, so you would prefer to have something like the sysinfo drivers.
+> > > >
+> > > > > You're commenting on a patch to the TI specific code, that's only used
+> > > > > by TI SoC using platforms that opt-in to the externally defined EEPROM
+> > > > > format for these "capes". Perhaps your feedback would make more sense in
+> > > > > some other part of the patch series? But even then, I'm not sure it
+> > > > > makes sense?
+> > > >
+> > > > I am ok to move the cape scan detection code to a standalone driver with a
+> > > > devicetree compatible match. Just wondering what are the advantages to use
+> > > > standalone drivers instead of having the code in the specific board code as
+> > > > done in this series.
+> > >
+> > > I'm not sure there is an advantage. Especially since in theory we could
+> > > have more than one built in, and if ti_extension_board_scan(...) doesn't
+> > > find anything (because the EEPROM is missing/wrong) we could still then
+> > > call rpi_extension_board_scan(...) and look for that formatted type of
+> > > EEPROM and then chipanddip_extension_board_scan(...) and look for that
+> > > and so forth. These extensions are nominally discoverable and so don't
+> > > need device tree compatibles, was some of the point of all this I would
+> > > have sworn...
 > >
-> > If you like, you could an a test for this to bootflow_cmd_info()
+> > I think, he means a driver for each type of custom extension board scan
+> > functions (4 until now). The U-boot devicetree would be like this:
+> > extension_scan {
+> >       compatible = "bone-cape-scan";
+> > };
 > >
->=20
-> I remember the last time when I tried running bootstd tests they were
-> broken. Are they functional now? Also, do we have some short
-> documentation on running bootstd tests? If so, could you please
-> reference it. I mean, I can add the test, but unfortunately don't have
-> enough time to fix the broken test suite (if it's still broken).
+> > We could avoid the build of several extension drivers using Kconfig choice
+> > symbol to select only one builtin.
+> >
+> > On my side I don't really have opinions, it is a matter of code design. For now
+> > I don't see real argument to tilt the balance except to do something like
+> > sysinfo. We need more arguments from Simon.
+>
+> Yes, and needing to go back to modifying the device trees seems a step
+> backwards here, and something that will be hard to argue for upstream.
 
-I think any future regressions in this area are things that smatch would
-catch and we'll get that in CI soon enough. Coverity (and smatch) may or
-may not have also caught this, FWIW.
+How do you define the mechanism to read the cape (etc.) information?
+Presumably it is using a device which is already in the devicetree? So
+it is the actual extension mechanism that is not present, perhaps?
 
---=20
-Tom
+How does Linux model extensions?
 
---sQQqcF09hnnBo1Wo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOVufwAKCRAr4qD1Cr/k
-Cp0jAP9US+SoIGgnXaC8kkHiSEvTFbWVdnjubqG24kA962K+cQEA5Qlxmux9LueE
-/KEHjNBQRfYh2Tqd5utA/CSk+850GAY=
-=Tnpb
------END PGP SIGNATURE-----
-
---sQQqcF09hnnBo1Wo--
+Regards,
+Simon
