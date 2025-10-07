@@ -4,66 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D6E0CAC5B0
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 04:57:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F26ECCA470
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 06:44:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 440E7838E7;
-	Tue,  7 Oct 2025 06:57:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 812FA8323A;
+	Tue,  7 Oct 2025 08:44:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vb5AvrrL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NeqIniXT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E70C0839A8; Tue,  7 Oct 2025 06:57:34 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97BA28399B
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 06:57:32 +0200 (CEST)
+ id B691183631; Tue,  7 Oct 2025 08:44:15 +0200 (CEST)
+Received: from mail-yx1-xb130.google.com (mail-yx1-xb130.google.com
+ [IPv6:2607:f8b0:4864:20::b130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C3636809A5
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 08:44:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5974vRVh4137832;
- Mon, 6 Oct 2025 23:57:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1759813047;
- bh=32xOVUIA7i5IA4+a7ol3CITI/FxwGrWhamzCRiv8aLE=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=vb5AvrrL49xRFks35aWhWxy2uON8GJ+RLmNmIP6F4qfh8eFjxls1wTRAlWbrlRQrw
- ppEUL2So+BSFsx3o9y66LqKwzeWhWLhqEDygU0nkLGmZQml5+o6E8hh8an41zxePxv
- ekNu7JVHf8twDyLquHLfNpj2mNdois/YjEGm3Vqo=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5974vR1Y437195
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 6 Oct 2025 23:57:27 -0500
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 6
- Oct 2025 23:57:27 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 6 Oct 2025 23:57:26 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5974vPj8340368;
- Mon, 6 Oct 2025 23:57:26 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yx1-xb130.google.com with SMTP id
+ 956f58d0204a3-638d01a8719so6216226d50.2
+ for <u-boot@lists.denx.de>; Mon, 06 Oct 2025 23:44:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1759819451; x=1760424251; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+UNwrqgacbnH3eZMWxNAKMJho3HBcXdDGRsXT39Hxz0=;
+ b=NeqIniXTVBsgBpnzRKX8nap1vNh7laOHIOgkW2zQs0niKztyMjJ3KRYis5+EONFjlz
+ RMsjNoryXpZFlXEFPjKdcfcs/Xk4Wej8A+BXRQzNQs9Yn+oiqPpHxVGuT8cHhz7CmlTP
+ lbo7FFB+yaKDaaX39G//NNhzPVxxY/lk3PFl+qtIZ9Du3vTsm0Vw5egzKTpUJvsudnw1
+ dVf6yLZl+VzaQDtLyCvdlcCf4zj1pWYbXdueoYBAkjige8PiOyT+poT3yxEedfZ80Zlw
+ CN5DJYeGsQDAWPy0qUbGOAB3u1egSDX3l0k3HqYLquhGOhf0RA3v8m58MfUuaC/H3vP5
+ TNaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759819451; x=1760424251;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+UNwrqgacbnH3eZMWxNAKMJho3HBcXdDGRsXT39Hxz0=;
+ b=GIEDgMiVpwgErBWjhwk96e0JC7zzIM0REYY7HNS2AxRtjRnDxMwB+WivmsJkvcMVF5
+ +zX/tp1ZL+2xZP1U+Zgu0/5RpsMsQLqmiy8wCyRjz3vzUiG17NRVxXCRkQj7XF9Ml30/
+ 1VYkeCgMvY7QUCP215ec3/whLUUtZMNjzyz5Q70+RdUOF7SaZpoWunjZ8Ih88TsPYwp8
+ xlCOTnIZmnUk8ukAzoJ4cKewYtfDQdMxhN4DI/5AEFrF4rQj/xcSdb1dAD2MQ283q7Va
+ k96/BwDOf4ZLsqQzCnjxPeN3tywJKf5x8HOZ92gLuCgzv0388lkEotd1OvApXUCtC4kj
+ pJLQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX3ny+2oqlp4eANMnRUxQF910Pc6jcTXMY7tZULTd3cCegzbaKLz9mChp3yLJsA5k4TLons140=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQBBB+XRMKXRKsVDFUXKWQywWyegVNkkhauAs9PlcGu0rieIws
+ yeFtnkFgP8geB/75mjQ0QgEEtAv5MXO8893aTkThhsYblT0rtDrAX1AhFwFE05gX1ND7hn5x3go
+ b5fR4GpLmGkMsQgvI5Tk045auD6hSbagYMpaiB6BTCg==
+X-Gm-Gg: ASbGnctIV/m0LQ4CehO6nzJdsWhzgnvrHjmB266FZOk7S/GUecj3Xcmvnq0QFqEB9Wh
+ UvMSilb566/eUfMb8XBQKrFQ8oPJ6XOmiskFMuI/A+2DhFLFM6AdfRJO3Er1HANVSI/yi0oCJi8
+ LUfH4eg4Kks/na3vSnvUxovRrRGsBQuvHzbnQYdWDAB09nngxX9o1xq+/MHgL8vXkmbXbYL9Pt9
+ 6xVkisunXbycXUjBASV05tJUjllMKCvm5g=
+X-Google-Smtp-Source: AGHT+IFjL2mQygubch9k/PEK5tVYsGuKvNUUIp96hvMyuH4gKt/MGbDOy9BmhcCcyNuyYu4y1UP9hZ7gFWZ7cY9gunQ=
+X-Received: by 2002:a53:c043:0:20b0:636:1ee5:7745 with SMTP id
+ 956f58d0204a3-63b99f36944mr16775442d50.0.1759819451226; Mon, 06 Oct 2025
+ 23:44:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20251006133903.58357-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251006133903.58357-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 7 Oct 2025 09:43:35 +0300
+X-Gm-Features: AS18NWB0YLkA8Xncxy9jNpUnJgdUIhJhq8zpm6QVCh4ebTrohMZls7xN5zf9MaE
+Message-ID: <CAC_iWjJJdj=CEN14No6Wq4jZY8QyiNWJyE-ao4YzfTtYDM7ZVQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: correctly check if the HTTP protocol is
+ found
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Adriano Cordova <adrianox@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 7 Oct 2025 10:27:25 +0530
-Message-ID: <DDBTNSBH2KU8.2XX8EUHRR7MS1@ti.com>
-CC: <u-boot@lists.denx.de>
-Subject: Re: [PATCH RESEND] ufs: ti-j721e: Correct error detection
-From: Anshul Dalal <anshuld@ti.com>
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Bhupesh Sharma <bhupesh.linux@gmail.com>, Neha
- Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251006-ufs_ti-v1-1-f37bf96d3ade@linaro.org>
-In-Reply-To: <20251006-ufs_ti-v1-1-f37bf96d3ade@linaro.org>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,60 +94,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
-
-On Mon Oct 6, 2025 at 9:01 PM IST, Andrew Goodbody wrote:
-> In ti_j721e_ufs_probe there is a call to clk_get_rate but the code after
-> that attempts to detect an error from that call incorrectly uses
-> IS_ERR_VALUE.  Instead the test should just be for regular error codes.
-> The call returns an unsigned long so that needs to be cast to a signed ty=
-pe
-> first of all.
+On Mon, 6 Oct 2025 at 16:39, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> This issue was found by Smatch.
+> In function efi_http_service_binding_destroy_child() phandler is created as
+> as a local variable. If efi_search_protocol() fails, phandler will hold a
+> random value from the stack. Even it is not zero, we must not use it.
 >
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> If efi_search_protocol() succeeds, the pointer has already be dereferenced,
+> so checking against NULL makes not sense here.
+>
+> If ChildHandle is not a valid UEFI handle, we must return
+> EFI_INVALID_PARAMETER.
+>
+> Use a single location for EFI_EXIT().
+>
+> Addresses-Coverity-ID: CID 531974 (Unchecked return value)
+> Fixes: 5753dc3f6572 ("efi_loader: Prevent dereference of uninitialised variable")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  drivers/ufs/ti-j721e-ufs.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  lib/efi_loader/efi_http.c | 16 +++++++++-------
+>  1 file changed, 9 insertions(+), 7 deletions(-)
 >
-> diff --git a/drivers/ufs/ti-j721e-ufs.c b/drivers/ufs/ti-j721e-ufs.c
-> index c5c08610ffd0422c9cf9d8e85b0396e6102cb29a..d50918912b2168db4e00c3cac=
-0a9c54872a76602 100644
-> --- a/drivers/ufs/ti-j721e-ufs.c
-> +++ b/drivers/ufs/ti-j721e-ufs.c
-> @@ -17,7 +17,7 @@
->  static int ti_j721e_ufs_probe(struct udevice *dev)
->  {
->  	void __iomem *base;
-> -	unsigned int clock;
-> +	unsigned long clock;
->  	struct clk clk;
->  	u32 reg =3D 0;
->  	int ret;
-> @@ -29,9 +29,9 @@ static int ti_j721e_ufs_probe(struct udevice *dev)
->  	}
-> =20
->  	clock =3D clk_get_rate(&clk);
-> -	if (IS_ERR_VALUE(clock)) {
-> +	if ((long)clock < 0) {
-
-Should we be checking for clock =3D=3D 0 as well? Because clk_get_rate does
-return 0 on invalid clock.
-
-Regards,
-Anshul
-
->  		dev_err(dev, "failed to get rate\n");
-> -		return ret;
-> +		return clock;
->  	}
-> =20
->  	base =3D dev_remap_addr_index(dev, 0);
+> diff --git a/lib/efi_loader/efi_http.c b/lib/efi_loader/efi_http.c
+> index 9a0f2675132..2a606aa441e 100644
+> --- a/lib/efi_loader/efi_http.c
+> +++ b/lib/efi_loader/efi_http.c
+> @@ -460,14 +460,16 @@ static efi_status_t EFIAPI efi_http_service_binding_destroy_child(
+>         if (!child_handle)
+>                 return EFI_EXIT(EFI_INVALID_PARAMETER);
 >
-> ---
-> base-commit: 7807ed921314cd7af83fd88162d0b8c6fb20a9ca
-> change-id: 20250813-ufs_ti-dd699eb6524e
+> -       efi_search_protocol(child_handle, &efi_http_guid, &phandler);
+> -
+> -       if (!phandler)
+> -               return EFI_EXIT(EFI_UNSUPPORTED);
+> +       ret = efi_search_protocol(child_handle, &efi_http_guid, &phandler);
+> +       if (ret != EFI_SUCCESS) {
+> +               if (ret != EFI_INVALID_PARAMETER)
+> +                       ret = EFI_UNSUPPORTED;
+> +               goto out;
+> +       }
 >
-> Best regards,
+>         ret = efi_delete_handle(child_handle);
+>         if (ret != EFI_SUCCESS)
+> -               return EFI_EXIT(ret);
+> +               goto out;
+>
+>         http_instance = phandler->protocol_interface;
+>         efi_free_pool(http_instance->http_load_addr);
+> @@ -476,8 +478,8 @@ static efi_status_t EFIAPI efi_http_service_binding_destroy_child(
+>         free(phandler->protocol_interface);
+>
+>         num_instances--;
+> -
+> -       return EFI_EXIT(EFI_SUCCESS);
+> +out:
+> +       return EFI_EXIT(ret);
+>  }
+>
+>  /**
+> --
+> 2.51.0
+>
 
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
