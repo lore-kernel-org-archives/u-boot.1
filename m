@@ -4,73 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7B7CCA470
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 16:30:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21EFDCCA476
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 16:38:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0C1F83990;
-	Tue,  7 Oct 2025 18:30:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 26C54839E8;
+	Tue,  7 Oct 2025 18:38:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="r1Q3V+wq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d4zXEYOT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70091839A8; Tue,  7 Oct 2025 18:29:59 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3B580839F3; Tue,  7 Oct 2025 18:38:46 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 790FE83981
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 18:29:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FF54839A8
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 18:38:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id E589E1A11CB;
- Tue,  7 Oct 2025 16:29:54 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id B069A606C8;
- Tue,  7 Oct 2025 16:29:54 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A91C0102F172A; 
- Tue,  7 Oct 2025 18:29:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759854593; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=5LoT8n3/0h/UZsueuYr/wyQtX4GqmtguC86lS7sVcMI=;
- b=r1Q3V+wqg8ooLZycfOF88cpX3efT9MkBLxq9ZrETA6scNmW9odhV6+B5xEeUjLKP7vRhEy
- LuzkjB82DXtaqdTGvUQ0HMDXmZUlIXGzkZEB1jTFss5Lx/XsbXgvRPRu2+kAWmbIdKQcym
- lIUVIf5P8G+R99bDTMyGhRO0vq/EwuhA0wbX27SjXC8pU8qDzgp9X7tHursxPOoG0ujcNy
- xywfpYtdoQO7Wss3jeub4m2wnYbB8f9CoyuuwP4Cft4dgvWrkaLcijnwGvdDsAcllfey+R
- pMtP/dMmUCKgzYqoulzBsezXk4+g0Vef3pRcB1IQbDXkvHkNiMAFcbb8v1hrdw==
-Date: Tue, 7 Oct 2025 18:29:38 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede
- <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, Stefano Babic
- <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
- Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 06/16] board: ti: Convert cape detection to use UCLASS
- framework
-Message-ID: <20251007182938.368bf435@kmaincent-XPS-13-7390>
-In-Reply-To: <20251007141148.GJ298503@bill-the-cat>
-References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
- <20251003-feature_sysboot_extension_board-v1-6-458b8bf85325@bootlin.com>
- <CAFLszTj3j6bcm6PG1GLAHa6FfjpKOKL12P_ae4WZsJL4hbh-HA@mail.gmail.com>
- <20251006214428.GD298503@bill-the-cat>
- <CAFLszTgLd7gHoU04QKAgHWNFQz_CS_XfeJCBkn58fu3UxUyurQ@mail.gmail.com>
- <20251006234240.GF298503@bill-the-cat>
- <20251007113213.75efa663@kmaincent-XPS-13-7390>
- <20251007141148.GJ298503@bill-the-cat>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-628f29d68ecso15820923a12.3
+ for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 09:38:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759855124; x=1760459924; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=KfI7bC0XUh40D7aasB2j5Gms6LqNWxiMYl26PCUym28=;
+ b=d4zXEYOTyPOirgBArjQZKt1g+C3M99Xesabjn4q2xmuCxzKtrOBwG/0aCJGVFuGIIF
+ sMACbtHM7l/ZJ/SHqj/JIVUMSGzwMo7gNTksuYiaa2GuM0OcVWzQFeJ+lGdeHtBc8DAU
+ tWlKAXoAZHdd4YdZK8XXWdRh/cIVNrZs8izmC6x3zjf1MEw/gJQbvU30qPhc1TMx9/Wk
+ o20URp7W3fU3Rpn6m4Cjlu+iiLXrfNICVqbRILFBI5LdGJCLKXdQ8yi58NEdulOVsUmz
+ DAsYUGhW7hCm6DskH3e3YUu9IvDQ4DgdJtBgAAdGmWYeYlxODsAgtsdewi3lZdKlJast
+ /e6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759855124; x=1760459924;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KfI7bC0XUh40D7aasB2j5Gms6LqNWxiMYl26PCUym28=;
+ b=CbCA9Nse4Ww1IFxtVVEjHZNFtLcy+1cIIya/RI8se4EvT7qsKcR1eeJe63QZNmt1Go
+ hUaFa+L6fIdwH62RhnjewN8SO1BysqtnPRJCrvpbKG2wcsEeVWmB1Ns/UaZtXuaS1TWA
+ 772NBVP/YJ6oRaCf24BEOEXyIAAlzTNizsNK4GTy7hrvUySnZfWkCDFibLlsPJvys2Kk
+ MTOfQaGX3HIpLoHYruYyOIuFd54upEgD555mnyArcDirZmNeGX2p7+JSiSs0I1g05ClH
+ CSiPVxta/NHI0y1PY7Q7ugRe2jrv9Qq2bGjMPdRNTNPbhBqXdmn2zbXxeTdQk8dgoc+3
+ i4+A==
+X-Gm-Message-State: AOJu0YxDxjOg11t/Y8wRvwAmR/NIc2EDqRdJUe/iLiYP40VU533Wt/p8
+ 05YAggmHiKGxZG01V/grcEBdZCfmPjUfoYBTg5/rQ040Zha6vCAmUFk0J5o62E+PBKIP8Gho8CS
+ izkOfh9oZcCF0fsoBz7wPXZJmvdR1TPw=
+X-Gm-Gg: ASbGnct+2oiueHZeqB8ATg+hTTrlokWLKZwjQ7qZry99U2H70HB0CXTY43JHEWG8MBf
+ zq80RV6T26/LDeTEPQDUjO0AAc3ZkiN2PSKD6BFh3H7rOBobcQwtzBUyJBAS7b1DfM8fii/aAHx
+ +KvypSvMp5f20jpXJT9duYIvx5PFFQhe74VVlXl/iqgYTioNOgR7WoULKuikN44sJT4L34mZYKs
+ 9dUa3j6LlUPlEt9zDtpO8+U2N79IbgfsV7oapI6ZHSN6tzpG/VEwpTIGiCyzaEvgyjdOQ2gWOI3
+ OXwOzqy5aFEhBwQaUSlGEGbjCIqpyI/pD0d0SBg=
+X-Google-Smtp-Source: AGHT+IGYyggdMsO7iEtqEeyWTY8KjJ0NkT0bTLsMTu2xYxTJRazTh1CFJLEiqw3mh9Arc4n2aDCuPnf1fpUseg0ULKs=
+X-Received: by 2002:a05:6402:5c9:b0:61c:8114:8832 with SMTP id
+ 4fb4d7f45d1cf-639d5b86757mr40771a12.16.1759855123304; Tue, 07 Oct 2025
+ 09:38:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20251001212649.3263574-1-sjg@chromium.org>
+In-Reply-To: <20251001212649.3263574-1-sjg@chromium.org>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Tue, 7 Oct 2025 17:38:31 +0100
+X-Gm-Features: AS18NWD134Ml9fLp56fAypeKgGyoTl-Asxh_keVNpLLBxsr5uKw2sPx5_2PRFiU
+Message-ID: <CALeDE9Ovemog2AGN_Li8Ju12QKHOC0D30V2=KG00f0KsQ5aPkg@mail.gmail.com>
+Subject: Re: [PATCH v2 00/17] boot: Support priority for global bootmeths
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Martin Schwan <m.schwan@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,158 +96,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 7 Oct 2025 08:11:48 -0600
-Tom Rini <trini@konsulko.com> wrote:
+Hi Simon,
 
-> On Tue, Oct 07, 2025 at 11:32:13AM +0200, Kory Maincent wrote:
-> > On Mon, 6 Oct 2025 17:42:40 -0600
-> > Tom Rini <trini@konsulko.com> wrote:
-> >  =20
-> > > On Mon, Oct 06, 2025 at 05:30:15PM -0600, Simon Glass wrote: =20
-> > > > Hi Tom,
-> > > >=20
-> > > > On Mon, 6 Oct 2025 at 15:44, Tom Rini <trini@konsulko.com> wrote:  =
- =20
-> > > > >
-> > > > > On Mon, Oct 06, 2025 at 02:38:23PM -0600, Simon Glass wrote:   =20
-> > > > > > Hi Kory,
-> > > > > >
-> > > > > > On Fri, 3 Oct 2025 at 10:34, Kory Maincent
-> > > > > > <kory.maincent@bootlin.com> wrote:   =20
-> > > > > > >
-> > > > > > > Migrate TI board cape detection from legacy extension support=
- to
-> > > > > > > the new UCLASS-based extension board framework.
-> > > > > > >
-> > > > > > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com> =20
-> >=20
-> > ...
-> >  =20
-> > > > > > > -int extension_board_scan(struct list_head *extension_list)
-> > > > > > > +static int ti_extension_board_scan(struct alist *extension_l=
-ist)
-> > > > > > >  {
-> > > > > > >         unsigned char addr;
-> > > > > > >         int num_capes =3D 0;
-> > > > > > > @@ -31,7 +31,7 @@ int extension_board_scan(struct list_head
-> > > > > > > *extension_list) struct am335x_cape_eeprom_id eeprom_header;
-> > > > > > >                 char process_cape_part_number[17] =3D {'0'};
-> > > > > > >                 char process_cape_version[5] =3D {'0'};
-> > > > > > > -               struct extension *cape;
-> > > > > > > +               struct extension cape =3D {0}, *_cape;
-> > > > > > >                 struct udevice *dev;
-> > > > > > >                 u8 cursor =3D 0;
-> > > > > > >                 int ret, i;
-> > > > > > > @@ -78,22 +78,20 @@ int extension_board_scan(struct list_head
-> > > > > > > *extension_list)   =20
-> > > > > >
-> > > > > > I suppose that a method called scan() could be added to the ucl=
-ass
-> > > > > > and implemented by this driver. =20
-> >=20
-> > I don't understand what do you mean by method? Is it different to the
-> > UBOOT driver scan ops I have designed?=20
-> >  =20
-> > > > > > >                 printf("BeagleBone Cape: %s (0x%x)\n",
-> > > > > > > eeprom_header.board_name, addr);
-> > > > > > >
-> > > > > > > -               cape =3D calloc(1, sizeof(struct extension));
-> > > > > > > -               if (!cape) {
-> > > > > > > -                       printf("Error in memory allocation\n"=
-);
-> > > > > > > -                       return num_capes;
-> > > > > > > -               }
-> > > > > > > -
-> > > > > > > -               snprintf(cape->overlay, sizeof(cape->overlay),
-> > > > > > > "%s-%s.dtbo",
-> > > > > > > +               snprintf(cape.overlay, sizeof(cape.overlay),
-> > > > > > > "%s-%s.dtbo", process_cape_part_number, process_cape_version);
-> > > > > > > -               strlcpy(cape->name, eeprom_header.board_name,
-> > > > > > > +               strlcpy(cape.name, eeprom_header.board_name,
-> > > > > > >                         sizeof(eeprom_header.board_name));
-> > > > > > > -               strlcpy(cape->version, process_cape_version,
-> > > > > > > +               strlcpy(cape.version, process_cape_version,
-> > > > > > >                         sizeof(process_cape_version));
-> > > > > > > -               strlcpy(cape->owner, eeprom_header.manufactur=
-er,
-> > > > > > > +               strlcpy(cape.owner, eeprom_header.manufacture=
-r,
-> > > > > > >                         sizeof(eeprom_header.manufacturer) + =
-1);
-> > > > > > > -               list_add_tail(&cape->list, extension_list);
-> > > > > > > +               _cape =3D alist_add(extension_list, cape);
-> > > > > > > +               if (!_cape)
-> > > > > > > +                       return -ENOMEM;
-> > > > > > >                 num_capes++;
-> > > > > > >         }
-> > > > > > >         return num_capes;
-> > > > > > >  }
-> > > > > > > +
-> > > > > > > +U_BOOT_EXTENSION(cape, ti_extension_board_scan);   =20
-> > > > > >
-> > > > > > Can the extension information go in the devicetree, so boards c=
-an
-> > > > > > select their scheme that way?   =20
-> > > > >
-> > > > > Since we're scanning to see what extension boards are present and=
- so
-> > > > > what device tree overlays to apply, I don't think that can work? =
-  =20
-> > > >=20
-> > > > My understanding is that the scanning process is board-specific. For
-> > > > example we would not want the Beagle mechanism to be compiled into
-> > > > rpi. The idea of scanning things in a board-specific way seems like=
- a
-> > > > driver to me. Note there is also the SYSINFO uclass which can do
-> > > > similar things.
-> > > >
-> > > > The overlays being applied here are additions to what should already
-> > > > be a fairly complete devicetree.
-> > > >=20
-> > > > If this isn't possible, then where is the information known? =20
-> >=20
-> > Oh, so you would prefer to have something like the sysinfo drivers.
-> >   =20
-> > > You're commenting on a patch to the TI specific code, that's only used
-> > > by TI SoC using platforms that opt-in to the externally defined EEPROM
-> > > format for these "capes". Perhaps your feedback would make more sense=
- in
-> > > some other part of the patch series? But even then, I'm not sure it
-> > > makes sense? =20
-> >=20
-> > I am ok to move the cape scan detection code to a standalone driver wit=
-h a
-> > devicetree compatible match. Just wondering what are the advantages to =
-use
-> > standalone drivers instead of having the code in the specific board cod=
-e as
-> > done in this series. =20
->=20
-> I'm not sure there is an advantage. Especially since in theory we could
-> have more than one built in, and if ti_extension_board_scan(...) doesn't
-> find anything (because the EEPROM is missing/wrong) we could still then
-> call rpi_extension_board_scan(...) and look for that formatted type of
-> EEPROM and then chipanddip_extension_board_scan(...) and look for that
-> and so forth. These extensions are nominally discoverable and so don't
-> need device tree compatibles, was some of the point of all this I would
-> have sworn...
+Welcome back!
 
-I think, he means a driver for each type of custom extension board scan
-functions (4 until now). The U-boot devicetree would be like this:
-extension_scan {
-	compatible =3D "bone-cape-scan";=20
-};
+This is quite a large series making it quite hard to review.
 
-We could avoid the build of several extension drivers using Kconfig choice
-symbol to select only one builtin.
+> At present global bootmeths always run first, before all other
+> bootmeths. Optimisations in the code take advantage of this, putting
+> them at the end, so they can be used once and then forgotten.
 
-On my side I don't really have opinions, it is a matter of code design. For=
- now
-I don't see real argument to tilt the balance except to do something like
-sysinfo. We need more arguments from Simon.
+How often would you expect a device to actually want to enable and run
+all boot methods? EG I would expect an organisation who's making a
+general purpose devic to maybe want UEFI and extlinux, but likely not
+android, rauc and some of the other ones. I would think it's would be
+quite unusual for a device to enable everything and for a usecase
+specific device they'd probably want just one.
+
+> In some cases it is useful to run global bootmeths later in the boot.
+> For example, the EFI-bootmgr bootmeth may itself scan devices and the
+> network, so running it first can hold up the boot significantly for
+> boards not actually relying on EFI-bootmgr to boot.
+
+Exactly, would boards not relying on UEFI actually enable it at all,
+similarly if a device is not ever expecting to boot off a network they
+would disable it.
+
+> This series introduces a new field in global bootmeths which indicates
+> the priority, using the same scheme as is used with bootdev hunters.
+> Thus it is possible to insert the EFI-bootmgr bootmeth just before the
+> hunter for network bootdevs is invoked.
+>
+> Despite the simplicity of the concept and the relatively small series,
+> this is a fairly significant enhancement. It is also quite tricky to
+> implement, largely due to the way the original code was written, with
+> global bootmeths being a small, size-optimised add-on to the original
+> bootstd implementation.
+
+So we know it's complex but I'm still unsure what value it provides.
+
+> For now we only allow each global bootmeth to run at most once, but this
+> implementation is written in a way that we could relax that if needed.
+> Then the bootmeth itself could decide whether to run at any particular
+> point in the bootflow iteration.
+
+Why would we want to run them more than once?
+
+> Size growth is about 390 bytes on Thumb2 (e.g. firefly-rk3288) if
+> CONFIG_BOOTMETH_GLOBAL is enabled, which it normally is. With that
+> disabled (which saves about 4K on the same platform), there is no
+> growth.
+
+So what value does adding 4K by default to the firmware provide? All
+what makes something a global boot method vs a non global (local?)
+boot method?
+
+> Changes in v2:
+> - Add a log_err() for an invalid state
+> - Update commit message to indicate the bootmeth will always run
+> - Document how the priority was chosen
+> - Add a bit more detail suggested by Heinrich
+
+I think this series needs to be broken down into a couple of series.
+
+These looks like fixes mostly unrelated to and independent of the new feature:
+>   boot: Improve comments related to global bootmeths
+>   boot: Move obtaining the label into a common file
+>   boot: Add more debugging to iter_incr()
+>   boot: Move showing of bootflows out of the command
+>   boot: Move preparing bootdev into a function
+
+I think these are the bits that do the global stuff.
+>   boot: Add a new test for global bootmeths
+>   boot: Update first_glob_method when dropping a bootmeth
+>   boot: Add a flag for whether there are global bootmeths
+>   boot: Support rescanning the global bootmeths
+>   boot: Only run global bootmeths once each
+>   boot: Implement a priority for global bootmeths
+>   boot: Don't change the method count after global bootmeths
+>   boot: Run global bootmeths after all bootdevs are exhausted
+>   boot: Run the EFI bootmgr just before network devices
+>   boot: doc: Update for new global-bootmeth features
+
+Why do we want this? What does all bootmeths mean in this context?
+>   boot: Try all bootmeths on the final partition
+
+As I, and at least Tom, but I think others, have asked in the past
+please do smaller patchsets on single topics. If you need to do
+cleanups post them as a different dependent patch set.
+
+You have complained in the past that people don't review your series
+fast enough, but doing large sets like this with an inter mix of fixes
+and enhancements make it hard for people to review, eg I put this in
+my back log because of that exactly.
 
 Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Peter
+
+>  boot/bootflow.c                  | 318 ++++++++++++++++++++++++++++---
+>  boot/bootmeth-uclass.c           |  15 +-
+>  boot/bootmeth_efi_mgr.c          |   9 +
+>  cmd/bootflow.c                   |  66 +------
+>  doc/develop/bootstd/overview.rst |  40 +++-
+>  include/bootflow.h               |  39 +++-
+>  include/bootmeth.h               |   4 +
+>  test/boot/bootflow.c             |  75 +++++++-
+>  8 files changed, 457 insertions(+), 109 deletions(-)
+>
+> --
+> 2.43.0
+>
+> base-commit: aff68c8514858ddd8d2e508d47bede566511521b
+> branch: glob-us2
