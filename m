@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B78F7CCA476
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 08:18:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9167BCCD184
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 08:19:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0D6D838BB;
-	Tue,  7 Oct 2025 10:18:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2564838C2;
+	Tue,  7 Oct 2025 10:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=fris.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="fDIbxOcA";
+	dkim=pass (2048-bit key; unprotected) header.d=fris.de header.i=@fris.de header.b="yD1bB4hv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DA81838C2; Tue,  7 Oct 2025 10:18:19 +0200 (CEST)
-Received: from mail.fris.de (mail.fris.de [116.203.77.234])
+ id 8446383881; Tue,  7 Oct 2025 10:18:20 +0200 (CEST)
+Received: from mail.fris.de (mail.fris.de [IPv6:2a01:4f8:c2c:390b::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F9FC8386F
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 10:18:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B559C838BB
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 10:18:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=fris.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=frieder@fris.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=frieder@fris.de
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 11FB8C9A4B; Tue,  7 Oct 2025 10:18:16 +0200 (CEST)
+ with ESMTPSA id 1F5ADC9A4A; Tue,  7 Oct 2025 10:18:18 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fris.de; s=dkim;
- t=1759825096; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1759825098; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=HuJSOryuJDd+m6spMIudKrnmfdNy16Vs9ytxhibCHrg=;
- b=fDIbxOcAAo1K1GweDr0Z3ufStTE9Ublt3S2B/M3NqWz+92TC05tCV/4LwobCeHaslPSRcZ
- SAThSeBzOne9EwV5gM5zbrx2sfIOWmP0cDVSOQXIFGP3jEpNgfX8RyzYr6nFOKxKfJCEyj
- AL5sj5gTI8ow7TfaKZhJjNgFIbzy+ROUciPuuTkdNHtXcJok3akDQEWlkjeffHkevgBlPH
- qx1f6PBTLXFG4tVu9yuinGmzUNaQ4925QuUiUVNaAfLC8G8hreyKPEUfsj53vsaxNapPaz
- lnnSDoynNMgPBZa2Pq/+QUp7SP0a+QxH3WWYw8FWRKHq1zO42h1NnXA6KsWtoQ==
+ bh=2mEmwq9YZWwaYhDFGNE/2ZxuovBAHhQQsjGEuu31L6o=;
+ b=yD1bB4hvFBb9qk1Vjb6Vj+CErtwoGotwLcFjcdREMPZGxlbb1IaSK4G/gL44XOFWcx3hA4
+ Bv28/GP0X6hlXL3nyrBGGJBUsmrMDlZ7/lF3GU3Bhr8plemupC9Q2Kb+tsvwBBL7LPgDU1
+ G8I4tzect1ClN71iMq2WwNRVqjfkqESQtCMazccvKpQjkBnYvvTPYdhQ6TVsDWRRCHYVta
+ eJykTUBTw79FLsYTQj7ZnCQwC2bcc3T5qINYrJReo/zAvkhVeeQSD/O4IQgpYrVGrATaEW
+ PAC4gMR8g7QoOHhnpZKbC3PPu+YbLymGgL3JZ6inbpznT3sU6vWf0Vs1ALESPQ==
 From: Frieder Schrempf <frieder@fris.de>
 To: Frieder Schrempf <frieder.schrempf@kontron.de>,
  Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Cc: Eberhard Stoll <eberhard.stoll@kontron.de>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 04/13] imx: kontron-sl-mx8mm: Enable fixed regulators
-Date: Tue,  7 Oct 2025 10:16:01 +0200
-Message-ID: <20251007081640.61772-5-frieder@fris.de>
+Subject: [PATCH 05/13] imx: kontron-sl-mx8mm: Add support for EEPROM on OSM-S
+ module
+Date: Tue,  7 Oct 2025 10:16:02 +0200
+Message-ID: <20251007081640.61772-6-frieder@fris.de>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251007081640.61772-1-frieder@fris.de>
 References: <20251007081640.61772-1-frieder@fris.de>
@@ -68,29 +69,40 @@ X-Virus-Status: Clean
 
 From: Frieder Schrempf <frieder.schrempf@kontron.de>
 
-Enable support for using fixed regulators from the devicetree and
-auto enable them if requested.
-
-This way U-Boot will enable the CARRIER_PWR_EN signal of the OSM
-module automatically while initializing the board.
+Enable config options to access the EEPROM on the OSM-S i.MX8MM
+SoM module.
 
 Signed-off-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 ---
- configs/kontron-sl-mx8mm_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/kontron-sl-mx8mm_defconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/configs/kontron-sl-mx8mm_defconfig b/configs/kontron-sl-mx8mm_defconfig
-index 7b6ab1e217f..71dde10ee4f 100644
+index 71dde10ee4f..f11e58a8433 100644
 --- a/configs/kontron-sl-mx8mm_defconfig
 +++ b/configs/kontron-sl-mx8mm_defconfig
-@@ -131,6 +131,7 @@ CONFIG_DM_PMIC_PCA9450=y
- CONFIG_SPL_DM_PMIC_PCA9450=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_PCA9450=y
-+CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_RV3028=y
- CONFIG_RTC_RV8803=y
+@@ -60,6 +60,11 @@ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x58000
+ CONFIG_SPL_WATCHDOG=y
+ CONFIG_CMD_NVEDIT_EFI=y
++CONFIG_CMD_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
++CONFIG_SYS_EEPROM_SIZE=8192
++CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
++CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS=6
+ # CONFIG_CMD_LZMADEC is not set
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DFU=y
+@@ -100,6 +105,9 @@ CONFIG_CLK_IMX8MM=y
+ CONFIG_DFU_SF=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_I2C=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SPL_I2C_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_MMC_UHS_SUPPORT=y
 -- 
 2.51.0
 
