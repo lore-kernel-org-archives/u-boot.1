@@ -4,68 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CD9CCA476
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 14:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED41CCA470
+	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 15:14:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1FF38400F;
-	Tue,  7 Oct 2025 16:17:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 35D4783D9F;
+	Tue,  7 Oct 2025 17:14:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZqXwJzc3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vnj5ZmY4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 850FC84014; Tue,  7 Oct 2025 16:17:19 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B4BC83F6D
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 16:17:17 +0200 (CEST)
+ id D0F9283D92; Tue,  7 Oct 2025 17:14:44 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B2D5183DA9
+ for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 17:14:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 597EHEEe094595;
- Tue, 7 Oct 2025 09:17:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1759846634;
- bh=Nw5+Zyc+h9rx+C8By+DBCQoDx8ne5QDtVxsOwnA3cV4=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ZqXwJzc33JE7YN8tSS7f5A9Nqm5ylxyHbzByGzQB0rl44iAbZ/MMBfx1iNOcO6bnG
- r2y/QEsmPt/ShgjIgnRnj3p21I6+AHB8aMaOX0ys3+MwqpIeKx+GfGdmZZIxq8EvxE
- 5+gZe7UJDxRJGXCvZsY8Db6vMdcsuRQb99i08qWU=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 597EHECJ3031219
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Tue, 7 Oct 2025 09:17:14 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Tue, 7
- Oct 2025 09:17:14 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 7 Oct 2025 09:17:14 -0500
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 597EHBkJ1234689;
- Tue, 7 Oct 2025 09:17:12 -0500
-Message-ID: <64dcd5b6-8a19-4ce5-a872-42e66ff46f54@ti.com>
-Date: Tue, 7 Oct 2025 19:47:10 +0530
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-628f29d68ecso15627991a12.3
+ for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 08:14:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1759850082; x=1760454882; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=eqxX55MnrkitzNiU3GtVxC4ZuThv9ebO7jkwK+EfccM=;
+ b=Vnj5ZmY4HVCvAyvmV3Wvrrl+YJCoqCPrE8F//4pyNp78+Krezk9WV3MMK3Utkbs8J8
+ nUZYl6WtZlSnpfjidOmgJYkCAbXGb6yUTWrBxUOhOTFrw29yH7LlR027r9oSNuMBOgGq
+ hGug0rjm2MakxJI1fpDduIEjM6NwQM3vOc2Zk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759850082; x=1760454882;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eqxX55MnrkitzNiU3GtVxC4ZuThv9ebO7jkwK+EfccM=;
+ b=M4IfR9NbZ1hEhp2bMOR0Ed7DxHaP5zbSL2JlPhkyUQBS0mowLQwUSmIB3kpuiNeTm4
+ 0Gou+KrVHK3tkjHNG7sEADJ5cWE2RBituwBS+FoqWTsTmFbsIZ7YdLAk/c0MnAt+sdcl
+ xKwuJMnu0Zea5i9lawk28w1MD9/kWSOHOmv19CLucPZ6X/v23w5JbPiDNCcLpqjzvMHM
+ kHie+H+ar5N0eg2ZmhXeEORSoQROiJv+CXeJseZaE/1st00Q3uRSXGjANqa1S4PLZCpS
+ SY/t0K7ZdnXA0PsqseHQ0f14Bikh2YKTVaOZOn4P2bxDsLHPXgR7wBB8fgSt+MNBQlYe
+ VsGA==
+X-Gm-Message-State: AOJu0Yz/YjySvvqJ9BmTjjpy3biu/CnQ7AbBp3UTafw8n31bpcSMX+Zx
+ Qow6TxfPvZrz4G54ZSk/tVhlsZvnO6bwV9+Fhqa5mmXXTu3L5vGekE72XgKt1EqWm1072Ov6h0a
+ sAjuV6KYviTJ0Ji4dDo8kzGg0Q8/Co4uYJKxPh3QG
+X-Gm-Gg: ASbGnctsOgmZGVb1R03gNU/riJmDwLhk8sLgrcYeyVjkyfeVoNGLT76+MkplsZf8YCE
+ ZyZDx+LozXvFlkgiSjRwz40PSG5RbpgqfIZssukZGhx1oTz3AdvA7k93wQ/rKZSln+pVUjD3Nmj
+ t3WoaMfvpJ83on9MXsMYIGF/sIcYi6ZT6AubvoL8NSakiBD60F/msn451hrmN0ATqxWR45NCqKF
+ cIjSR8S9wPcAfniwcZA3eOKdN5ylQ==
+X-Google-Smtp-Source: AGHT+IFEs6cUSFrYQTKXm+/2wFZ0EE3f8V3lHppG3Y+g41NaG/x+NrnFCl+/gy7Xhmsuvy/3TacuxbMC0a4L8h43mh4=
+X-Received: by 2002:a05:6402:5c9:b0:638:66b1:e5b3 with SMTP id
+ 4fb4d7f45d1cf-639348cb8a2mr17923650a12.9.1759850082187; Tue, 07 Oct 2025
+ 08:14:42 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] ti_sci: Provide error code on error exit
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Dhruva
- Gole <d-gole@ti.com>, Moteen Shah <m-shah@ti.com>, Nishanth Menon
- <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-References: <20251007-ti_sci-v2-0-7561d7ea07b2@linaro.org>
- <20251007-ti_sci-v2-2-7561d7ea07b2@linaro.org>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251007-ti_sci-v2-2-7561d7ea07b2@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20251001212649.3263574-1-sjg@chromium.org>
+ <20251001212649.3263574-6-sjg@chromium.org>
+ <20251002201537.GO6093@bill-the-cat>
+ <CAFLszTigwz2mVfS=C6yXDnTMvdGxw=FsD36QCrpS2VOVSr+7nA@mail.gmail.com>
+ <20251006234500.GG298503@bill-the-cat>
+ <CAFLszTgEoEN=+QocxEXewkwe-wjOKeNRMn5YWSvHcOcaLR2qsA@mail.gmail.com>
+ <20251007135009.GI298503@bill-the-cat>
+In-Reply-To: <20251007135009.GI298503@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 7 Oct 2025 09:14:29 -0600
+X-Gm-Features: AS18NWC78G9BH6fDO1fGXlOnPalkMNJS8thxZjqmdYyWmBBPMS-ABXJoL-uXODs
+Message-ID: <CAFLszTjimWcKE8n991-ik-7fyhsesHsm5hrQwx7-FKSqgd48QQ@mail.gmail.com>
+Subject: Re: [PATCH v2 05/17] boot: Move showing of bootflows out of the
+ command
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,41 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andrew,
+Hi Tom,
 
-On 10/7/2025 5:34 PM, Andrew Goodbody wrote:
-> In ti_sci_get_response the check for message sequence will return ret
-> on a fail but ret will be 0 at that point. Instead return -EINVAL.
+On Tue, 7 Oct 2025 at 07:50, Tom Rini <trini@konsulko.com> wrote:
 >
-> This issue was found by Smatch.
+> On Tue, Oct 07, 2025 at 05:13:55AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 6 Oct 2025 at 17:45, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Oct 06, 2025 at 05:30:23PM -0600, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Thu, 2 Oct 2025 at 14:15, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Oct 01, 2025 at 03:26:30PM -0600, Simon Glass wrote:
+> > > > >
+> > > > > > It is helpful in tests to be able to show the bootflow that is being
+> > > > > > examined. Move show_bootflow() into boot/ and rename it.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > > > Changes in v2:
+> > > > > > - Add a log_err() for an invalid state
+> > > > > >
+> > > > > >  boot/bootflow.c    | 57 ++++++++++++++++++++++++++++++++++++++
+> > > > > >  cmd/bootflow.c     | 68 ++--------------------------------------------
+> > > > > >  include/bootflow.h |  9 ++++++
+> > > > > >  3 files changed, 69 insertions(+), 65 deletions(-)
+> > > > > [snip]
+> > > > > > +     case BOOTFLOWST_COUNT:
+> > > > > > +             log_err("Unexpected boot value of bootflow error %d",
+> > > > > > +                      bflow->state);
+> > > > >
+> > > > > A small thing, checkpatch.pl catches that this isn't aligned with the '('
+> > > > > here as it should be.
+> > > >
+> > > > OK. I'm unsure whether I really want this line anyway, since it
+> > > > increases code size.
+> > > >
+> > > > >
+> > > > > A larger thing, and please correct me if I'm wrong, but on reading the
+> > > > > whole set of changes, this move + rename just means we're putting more
+> > > > > info in the test output, and nothing else?
+> > > >
+> > > > It will also appear if you have CONFIG BOOTSTD_FULL and use 'bootflow
+> > > > list' or 'bootflow scan -l'.
+> > >
+> > > But that should be the case before this patch as well, yes?
+> >
+> > Yes, that's right. This is just moving the code into a place where it
+> > can be used from tests.
 >
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   drivers/firmware/ti_sci.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-> index 2042d88583766213e9d74dd17289cfd3562f0acb..afe1ae13834d236015a3d5e4d8d4f9955ba8c822 100644
-> --- a/drivers/firmware/ti_sci.c
-> +++ b/drivers/firmware/ti_sci.c
-> @@ -193,7 +193,7 @@ static int ti_sci_get_response(struct ti_sci_info *info,
->   	if (hdr->seq != info->seq) {
->   		dev_dbg(info->dev, "%s: Message for %d is not expected\n",
->   			__func__, hdr->seq);
-> -		return ret;
-> +		return -EINVAL;
+> But it's not being used from tests, with this series.
 
-I am looking on this patch, need to understand bit more , if this is 
-really failure or intentionally returning 0.
+Please see this one: 'boot: Add a new test for global bootmeths'
 
-if you look at other conditions, those are marked as dev_err, this 
-particular condition marked as dev_dbg.
-
-Please allow me some time.
-
-
-
->   	}
->   
->   	if (msg->len > info->desc->max_msg_size) {
->
+Regards,
+Simon
