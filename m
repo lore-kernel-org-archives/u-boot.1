@@ -4,72 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 762A3CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 08:05:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D215CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 08:05:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B07F83957;
+	by phobos.denx.de (Postfix) with ESMTP id D3E67839E8;
 	Wed,  8 Oct 2025 10:05:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=eds-india.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="orE7tHs4";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3832B83956; Wed,  8 Oct 2025 07:57:28 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.153.233])
+ id B49368397A; Wed,  8 Oct 2025 08:36:52 +0200 (CEST)
+Received: from sender3-of-o55.zoho.com (sender3-of-o55.zoho.com
+ [136.143.184.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5FBF8393F
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 07:57:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=369ecc0ec=Dharma.B@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1759903045; x=1791439045;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=sEPjzVtPfcoB2Sv+h1LUccGUcQrX/eMe9E8ydHYeovE=;
- b=orE7tHs4uhGLRbsMljfHg7DxasGeOxUXJVn9OOXQPvlVGQYC6Ic1L7YO
- /iJ5ya30E4CJugzZ5LFGP4K2Pxq9Sa0Ko/z2exWSDOs3yEWzmtz3jsdMF
- bnTSXarB8WtyDzKNaxPChPA9kAgmSRRyDcu6TwvLZPVUnqLsJeG6sf6KY
- LyZq6eMIa0jv48ttuMZYtzRn753dLcKxeD35OqWPkDz8KWvzomUbXpull
- BBiok4rFi654UMhPcVCtKtFRhgZ+HWPf9utulwkwiOVLeCajKjDO2OVFG
- sIXFewjmq5EJik9eZ4oPqRH3mo/erVBcfW22vmlVk7o3MJexjLou9xI6a w==;
-X-CSE-ConnectionGUID: MNDwbnlUTqupViu3hxj74w==
-X-CSE-MsgGUID: D9H0UcVlRNmlkzu+0zSeNQ==
-X-IronPort-AV: E=Sophos;i="6.18,323,1751266800"; d="scan'208";a="53535152"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa1.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 07 Oct 2025 22:57:23 -0700
-Received: from chn-vm-ex1.mchp-main.com (10.10.87.30) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.58; Tue, 7 Oct 2025 22:56:43 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
- chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.2.1748.10; Tue, 7 Oct 2025 22:56:43 -0700
-Received: from che-lt-i70843lx.microchip.com (10.10.85.11) by
- chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
- 15.1.2507.58 via Frontend Transport; Tue, 7 Oct 2025 22:56:40 -0700
-From: Dharma Balasubiramani <dharma.b@microchip.com>
-To: <u-boot@lists.denx.de>
-CC: Dharma Balasubiramani <dharma.b@microchip.com>, Balamanikandan Gunasundar
- <balamanikandan.gunasundar@microchip.com>, Eugen Hristev
- <eugen.hristev@linaro.org>, Manikandan Muralidharan
- <manikandan.m@microchip.com>, Miquel Raynal <miquel.raynal@bootlin.com>, "Tom
- Rini" <trini@konsulko.com>
-Subject: [PATCH] ARM: dts: sam9x60ek: select PIT as tick-timer
-Date: Wed, 8 Oct 2025 11:26:33 +0530
-Message-ID: <20251008055636.17462-1-dharma.b@microchip.com>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 452DB83942
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 08:36:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=eds-india.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=md.asadullah@eds-india.com
+ARC-Seal: i=1; a=rsa-sha256; t=1759905404; cv=none; 
+ d=zohomail.com; s=zohoarc; 
+ b=RvXluu+LG4xEx2IUCN2flQrwaliLEj0ZzPMIZ3cc2a9wpnuLG2qqoyNDOGS6tFVkfLE+m5T7d+yG2znveQcBO5ItbU3q7vV3UjWzfyefkgWvrJqiEaseCCxIyL8ADTTavQiI7a2+D7F5P0s2ys+YpAe/iB3FAx+1KC8a+QBM5tg=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com;
+ s=zohoarc; t=1759905404;
+ h=Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To;
+ bh=6IBOQA4M72hbGFUcq0MN0QpmD5I8kL0OcEW2eCfRXqs=; 
+ b=Dn9g7wMyRqX7ul2fu7ZQ2xwC5kFahdXqOgPfZAXSqXu46Ml0wR9h0GdXKsPpUMnCsExHzQSs0lTLQUF6pTLf0aKv96O4HegXjsFwPJ6ho576nxk2IveURkjdyElvifU5tkf57b0Uv/OiJjFu26lNT0z9+3UVNw8WFgnB1l7FuY8=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+ spf=pass  smtp.mailfrom=md.asadullah@eds-india.com;
+ dmarc=pass header.from=<md.asadullah@eds-india.com>
+Received: by mx.zohomail.com with SMTPS id 1759905402131883.049483352964;
+ Tue, 7 Oct 2025 23:36:42 -0700 (PDT)
+From: Asadeds <md.asadullah@eds-india.com>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com, linux-stm32@st-md-mailman.stormreply.com,
+ Asadeds <md.asadullah@eds-india.com>
+Subject: [PATCH] arm: stm32mp25: add ethernet support for stm32mp255 series
+Date: Wed,  8 Oct 2025 12:06:23 +0530
+Message-Id: <20251008063623.1233604-1-md.asadullah@eds-india.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-ZohoMailClient: External
 X-Mailman-Approved-At: Wed, 08 Oct 2025 10:05:29 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,34 +64,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot currently enables the UPLL during boot, which triggers a udelay()
-call that depends on the system tick timer. Since no explicit tick source
-is defined in the device tree, boot stalls on this board.
+Add missing CPU_STM32MP255* cases in get_eth_nb() so that U-Boot
+correctly reports 2 Ethernet interfaces on stm32mp255 devices.
+This fixes the "ethernet not found" error during boot.
 
-Define the "tick-timer" property under /chosen and point it to the PIT
-node, ensuring U-Boot uses the PIT as the tick source.
-
-Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting")
-Signed-off-by: Dharma Balasubiramani <dharma.b@microchip.com>
+Signed-off-by: Md Asadullah <md.asadullah@eds-india.com>
 ---
+ arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
- arch/arm/dts/sam9x60ek.dts | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/arch/arm/dts/sam9x60ek.dts b/arch/arm/dts/sam9x60ek.dts
-index 6521585ee9c..1c09c92ae18 100644
---- a/arch/arm/dts/sam9x60ek.dts
-+++ b/arch/arm/dts/sam9x60ek.dts
-@@ -17,6 +17,7 @@
- 	chosen {
- 		stdout-path = &dbgu;
- 		i2c0 = &flx0;
-+		tick-timer = &pit;
- 	};
- 
- 	clocks {
+diff --git a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
+index 0d199f6f903..48b452f01b1 100644
+--- a/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
++++ b/arch/arm/mach-stm32mp/stm32mp2/stm32mp25x.c
+@@ -78,6 +78,16 @@ int get_eth_nb(void)
+ 	case CPU_STM32MP257Axx:
+ 		nb_eth = 5; /* dual ETH with TSN support */
+ 		break;
++	case CPU_STM32MP255Dxx:
++		fallthrough;
++	case CPU_STM32MP255Axx:
++		fallthrough;
++	case CPU_STM32MP255Cxx:
++		fallthrough;
++	case CPU_STM32MP255Fxx:
++		fallthrough;
++		nb_eth = 2;
++		break;
+ 	case CPU_STM32MP253Fxx:
+ 		fallthrough;
+ 	case CPU_STM32MP253Dxx:
 -- 
-2.43.0
+2.34.1
 
-base-commit: 92dcb3ad5d98f494b2448a7345e1cb7eefa50278
-branch: master
