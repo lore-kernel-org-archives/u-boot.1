@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A30A9CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 16:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9E12CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 16:49:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A9F783A2A;
-	Wed,  8 Oct 2025 18:38:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 565C1839DE;
+	Wed,  8 Oct 2025 18:49:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JyVqMcq/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aPe7Bwk/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07D7283A5C; Wed,  8 Oct 2025 18:38:28 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 8FCEF83A2A; Wed,  8 Oct 2025 18:49:10 +0200 (CEST)
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D320B839DE
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 18:38:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48EEF839B9
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 18:49:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-7c0e8367d4eso17784a34.1
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 09:38:25 -0700 (PDT)
+Received: by mail-oi1-x233.google.com with SMTP id
+ 5614622812f47-44181f9e5b4so60196b6e.0
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 09:49:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759941504; x=1760546304; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759942147; x=1760546947; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2w81F8iiZLJDdZCLMDW5ECX6DEu69p9sPzaWDgCS8A4=;
- b=JyVqMcq/IOZfojANCOYbJAdR8nuXoQ2lyeCnuyFvRaKfSXXYVs2EU8nLL3Hkvzs/LJ
- NXqf7T68YSL7JPKYjiuwYKjj7wzkOWJcFC3aOqGdjLqkOcuO+Iz+HjHlU2JgoEuKczeU
- ikJcEzZSsEbX0rPmAW/swkK0rdcw7UtjhMQhY=
+ bh=apHc1MizMlqKwg6h5enoKrWWCK2tWvDKaoiQtKx9x5c=;
+ b=aPe7Bwk/6QT1R/2+iDMtRoh9P4waRrjZsSmEmP4xbpp74k8crHTANUXckdXHcOw+LR
+ SFAGjTCUeGn5AMwvZfEg57zGJvuRX/S+Q/BkSTYmMRd+E4xVhaXCoJgWVmSMEKB+rgFw
+ 2P4hWD/fl6W/aa8HhI0kYhYB36z+j9S0Hla1I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759941504; x=1760546304;
+ d=1e100.net; s=20230601; t=1759942147; x=1760546947;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2w81F8iiZLJDdZCLMDW5ECX6DEu69p9sPzaWDgCS8A4=;
- b=cdMKimCIY5RUu0YtoLp0LBlJgy4eQ2zdk16oQGNiDw9d9kdLS0ir8V2oNkv68k6hfp
- 5/TfxglDtTjhA3uQ6S3lHT2vnwvreXuq18SBldxOTHduWDjDpRmoxa9yA3dqPJGJi/lq
- odokZBUrbfz/5ejd1u+GVHEwELV/0c2pPELre9tsG+uFwg3eDY42BKRPeoofDH1A1r+S
- uNd4N/mFSqYdzAIK27Pmm6ZY8g05pYDpA4t24z3s4h4S2V9tz/Ab3MEXzdl/3JSpk+rP
- gh2nikO22MxvKrdmTWATgwLlYSUL0e7R78iUFNabNugjk1JsrxJMcDaJOjdpwMI4hHFD
- dIZA==
-X-Gm-Message-State: AOJu0Yw+O4u9JdrPPc+C6yYUjELUICai+hiTOEjNCu1V1bGMRR7xr4Y9
- aAtbeTp9u0iraSjKMlT9GXF/cp8D/GqvDLA467M8tPPnaVyghpVIoqYNiiLYXphND4Y=
-X-Gm-Gg: ASbGnctNN00KSZt9ixkLPtnzs5krNiOgzhVfB5dFkZnO5aiJr+4o8eJq1QZBTT+5wbL
- k+WPZymaelDhOL23D4i4JJSc068YZJKsmj60hUvKjZ6GA9E7AFTzrLWIMB8762+2vtSUvd5iwj9
- enrlsBYYqE6vG0lSMo/ge3V3waHRqjfsbSzWZmFhTtavqM4V/atSWcgVF4NV7kaGFTDrPGLmdeT
- e3ygJ18fKgy/IzoX9pVaug0ABaj5Zutc3G6OqJGFKFoh0vPMezbpH+CWJAbAhrvpPBSunjp1zOv
- FSOX+tgJDo0Ly2sWbE6c8Grk82LDKhS8VecrO9d0DEmM95Bp6r2mqqJoCelbssjyv0kTan3hmh0
- mxyI5z56GgPdB/dRXqJwf329foauAO2ykISXzq8t9OYxeIAp/C0GG7/Yrl15PpKTMYrWNT//kXr
- xBCnPgKuJulbZHbc4OXUNQ
-X-Google-Smtp-Source: AGHT+IH/6mmcLYk2Lw3rVCgBUXj9HuEhS75c/2xOTvlTH63laOc95AjFNhWy73p90bZft1KogIScZA==
-X-Received: by 2002:a05:6830:6613:b0:7bc:164c:58b2 with SMTP id
- 46e09a7af769-7c0df77f1e4mr2981666a34.12.1759941504555; 
- Wed, 08 Oct 2025 09:38:24 -0700 (PDT)
+ bh=apHc1MizMlqKwg6h5enoKrWWCK2tWvDKaoiQtKx9x5c=;
+ b=fyjs+Ffh17KJetrU30BstVyKrfWL2HKjqvZH/80/Q3K0g1IbtAx4NCvv/s9t5NDq1S
+ fjN5wmmn5T3eDlrMCXPJu5YgdMhSMMLbnzGfSDCla81RMM8j8xNUJXsljsasW6wktMS0
+ G6A6XG4hFUxODpC5EaMlEx2g2ipRaNTx+Flv1lPNSWJNniy+QwOwZ7s8wf8wgIvQAmhd
+ pHSwD2kIZR/b6xDS4FauPQT+s9y1UkJXndgbSMDLeJ9dWTOxLlszvUf7rotY7ZfZHILF
+ J+GpLd8nPhJDF1QsmSwqSH8DWQUsjzxwpA7IQo2VMymZUMw9gbeW2pKrzLjhJz6nQfE5
+ 92tQ==
+X-Gm-Message-State: AOJu0YzhQ3imvXczQeua67WE04EWQDpOaJIQqTPCet0O4ZmjHwVzX05R
+ cbEsdaguJJItSK6IAFAFRR2J/yt8/UqMWq7uhHHzEJihck3hbmAqJT/Etva5ccGJTWk=
+X-Gm-Gg: ASbGnctLbkDmBiTwEqH+Ib5D817MEB1orIHT6TsbyBIRQ86NG5PltOT603Wz5RB2/AB
+ rJBmYOK4Qjys0iOnO4qF3H7ggRRZ1l3vpsG+bF1YVqka36xe6AhN4zqGrZBcjG5wh/BeGZifAda
+ S90N0Nuj6BzX+4iilFUwmcz1jLPOz9K23o6cL3/hu3XK5IavZBZ/MVO/LGRZhkmNpp8PqMqLfPP
+ QIRWymB0D9JkHvAkPaBh0CmxtGH7je+Kb16mdIcpQANewQ/9E4yyGmN+8zyKi3CcI1Og3W7s/6A
+ lj/N6jpfqbxdYWJqCinpkiC1OuS6XVrTbUsAcQTK9oGR1if6mqx4jzwZnpDUckRyXQUdqfN4p1i
+ 7JF10+pwnAbTqO6Pi5I+jyDY1l9km91oO0F923WpJb+un+rhUZAehyWkeoeYnVcKJsLBT1WTGGX
+ z2NqPiJ2gb2w==
+X-Google-Smtp-Source: AGHT+IGZBEf/OxZtw/yOMA7XHbMAjXZ1bjhIH+LpMZwzUjPLpAZEfn6MqlC+fz+mcH/WSZYPKk17PQ==
+X-Received: by 2002:a05:6808:2209:b0:43f:5861:5152 with SMTP id
+ 5614622812f47-4417b2f7672mr2096533b6e.11.1759942146990; 
+ Wed, 08 Oct 2025 09:49:06 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7bf3f610041sm5878927a34.3.2025.10.08.09.38.22
+ 5614622812f47-44189af329asm84655b6e.2.2025.10.08.09.49.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 09:38:23 -0700 (PDT)
-Date: Wed, 8 Oct 2025 10:38:20 -0600
+ Wed, 08 Oct 2025 09:49:06 -0700 (PDT)
+Date: Wed, 8 Oct 2025 10:49:03 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Anshul Dalal <anshuld@ti.com>
 Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
  n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com,
  kever.yang@rock-chips.com, hl@rock-chips.com, tim@feathertop.org,
  marek.vasut+renesas@mailbox.org
-Subject: Re: [PATCH v1 1/2] spl: make args file optional in falcon mode
-Message-ID: <20251008163820.GC298503@bill-the-cat>
+Subject: Re: [PATCH v1 2/2] spl: prevent loading args file in secure falcon
+ mode
+Message-ID: <20251008164903.GD298503@bill-the-cat>
 References: <20251008113605.1055826-1-anshuld@ti.com>
- <20251008113605.1055826-2-anshuld@ti.com>
+ <20251008113605.1055826-3-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9Dk9DMgKSqulCmyl"
+ protocol="application/pgp-signature"; boundary="jjfa7/AfBebvnUuQ"
 Content-Disposition: inline
-In-Reply-To: <20251008113605.1055826-2-anshuld@ti.com>
+In-Reply-To: <20251008113605.1055826-3-anshuld@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,114 +102,37 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---9Dk9DMgKSqulCmyl
+--jjfa7/AfBebvnUuQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 08, 2025 at 05:06:03PM +0530, Anshul Dalal wrote:
-> Falcon mode loads a kernel file and an args file which is the
-> device-tree. However in the case of kernel file being a FIT that
-> contains the device-tree within it, loading the args file is not
-> required.
+On Wed, Oct 08, 2025 at 05:06:04PM +0530, Anshul Dalal wrote:
+
+> The expected payload for the SPL in secure falcon mode is a fitImage
+> that contains the kernel image and the DT. This removes the need to load
+> an additional args file, which exposes an additional attack vector since
+> it can not be verified.
 >=20
-> Therefore, this patch introduces a new SPL_OS_BOOT_ARGS config options
-> that allows us to enable or disable loading of the args file in falcon
-> mode.
+> Therefore this patch disables loading of the arg file when
+> SPL_OS_BOOT_SECURE is set.
 >=20
 > Signed-off-by: Anshul Dalal <anshuld@ti.com>
-[snip]
-> @@ -1266,7 +1273,8 @@ config SYS_MMCSD_RAW_MODE_ARGS_SECTOR
-> =20
->  config SYS_MMCSD_RAW_MODE_ARGS_SECTORS
->  	hex "Falcon mode: Number of sectors to load for 'args' from MMC"
-> -	depends on SPL_FALCON_BOOT_MMCSD && SYS_MMCSD_RAW_MODE_ARGS_SECTOR !=3D=
- 0x0
-> +	depends on SPL_FALCON_BOOT_MMCSD && SYS_MMCSD_RAW_MODE_ARGS_SECTOR !=3D=
- 0x0 \
-> +		&& SPL_OS_BOOT_ARGS
 
-In this case now that SYS_MMCSD_RAW_MODE_ARGS_SECTOR would only be set
-when "args" is being used (the 0x0 value was the workaround for "Using
-FIT, this doesn't exist"), we can just depend on 'SPL_FALCON_BOOT_MMCSD
-&& SPL_OS_BOOT_ARGS' here.
-
-> diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
-> index 93ef2d1c02c..f1cdbb6dbc4 100644
-> --- a/common/spl/spl_nand.c
-> +++ b/common/spl/spl_nand.c
-> @@ -79,7 +79,7 @@ static int spl_nand_load_element(struct spl_image_info =
-*spl_image,
->  static int spl_nand_load_image_os(struct spl_image_info *spl_image,
->  				  struct spl_boot_device *bootdev)
->  {
-> -	int *src, *dst, err;
-> +	__maybe_unused int *src, *dst, err;
->  	struct legacy_img_hdr *header =3D spl_get_load_buffer(0, sizeof(*header=
-));
-> =20
->  	/* load linux */
-> @@ -101,6 +101,7 @@ static int spl_nand_load_image_os(struct spl_image_in=
-fo *spl_image,
->  	if (err)
->  		return err;
-> =20
-> +#if IS_ENABLED(CONFIG_SPL_OS_BOOT_ARGS)
->  	/*
->  	 * load parameter image load to temp position since nand_spl_load_image
->  	 * reads a whole block which is typically larger than
-> @@ -116,6 +117,7 @@ static int spl_nand_load_image_os(struct spl_image_in=
-fo *spl_image,
->  	     src++, dst++) {
->  		writel(readl(src), dst);
->  	}
-> +#endif
-> =20
->  	return 0;
->  }
-
-I think we could rework this to:
-	if (IS_ENABLED(CONFIG_SPL_OS_BOOT_ARGS)) {
-		/*
-		 * load ...
-		 */
-		int *src, *dst;
-		...
-	}
-
-Instead. Especially since err will be used but src/dst not, in the
-no-args case. Or no, we can't because CONFIG_SPL_PAYLOAD_ARGS_ADDR will
-be undefined and fail to build? If so, we should still split the
-__maybe_unused line.
-
-> diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
-> index 6f9ff91bef7..77c77ce6809 100644
-> --- a/common/spl/spl_nor.c
-> +++ b/common/spl/spl_nor.c
-> @@ -69,7 +69,7 @@ static int spl_nor_load_image_os(struct spl_image_info =
-*spl_image,
->  	       (void *)(CONFIG_SYS_OS_BASE + sizeof(struct legacy_img_hdr)),
->  	       spl_image->size);
-> =20
-> -#ifdef CONFIG_SPL_PAYLOAD_ARGS_ADDR
-> +#if IS_ENABLED(CONFIG_SPL_OS_BOOT_ARGS)
->  	spl_image->arg =3D (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
->  #endif
-
-We can drop this hunk I think.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---9Dk9DMgKSqulCmyl
+--jjfa7/AfBebvnUuQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOaTeAAKCRAr4qD1Cr/k
-ClWbAQCD6IR+jWRncafRB1ehayHftg/9vMmEYWfSSvQ4GIcwBQD/djAdK+jErE/9
-RrsH+UWAYQL65TZ6HUpEPE+RJBepRQI=
-=OEpq
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOaV/AAKCRAr4qD1Cr/k
+CvLeAQCJF3P0bkAfogJh3P12/DAk6yp4fA5etpLnHM1mBAjLFgEAiTfAM2gHmmHu
+4hrP3LA7wWw83TG2MdmjErc8BA5iIQM=
+=MNHo
 -----END PGP SIGNATURE-----
 
---9Dk9DMgKSqulCmyl--
+--jjfa7/AfBebvnUuQ--
