@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C867CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 21:00:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E4CCAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 21:00:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A24D840C3;
-	Wed,  8 Oct 2025 22:59:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C98B840B0;
+	Wed,  8 Oct 2025 22:59:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XXEZjLg/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QxDvjJ0d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2721283A8E; Wed,  8 Oct 2025 22:59:50 +0200 (CEST)
+ id 8CB92840CF; Wed,  8 Oct 2025 22:59:51 +0200 (CEST)
 Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
  [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09B7383F6D
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 22:59:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78A8C83948
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 22:59:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7b00927607eso222784a34.0
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 13:59:47 -0700 (PDT)
+ 46e09a7af769-7b97ce4fc60so101882a34.0
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 13:59:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759957187; x=1760561987; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759957188; x=1760561988; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1WWnTLeWUQa3nDpfDoxymcbemZAglCQ8Q8C5hX8mSWQ=;
- b=XXEZjLg/UWzMWy7YaLgHKnV9OLMCH7MIZlPJo4ynpDGiuvtJ+njoPa39LBQzQZB2aA
- szEQYhfIdkHutZPxNyXebexlWqHtqbcYVCIVNBm56p9E9s/nTjIWP/3bAHlGzg0Nun0x
- 8Pk5HGNzvqp/VIdMZausOza1PKjE+fgfU5ctA=
+ bh=Oo0mDCCalKy5DFgZg3QJUBt/Yj00cvy44nlCTwKZE0Y=;
+ b=QxDvjJ0dcf9geWyEmNF5Uy9uITeFIXlCfeQZRNMD9NEhHXJyNCnS3fYAteK3cjj2IW
+ 0nuSyyN5euXnfn1Ktk51OpampA6G/KLFXBcBS8q6iQatw052AOil81IrLGy8GqNzUbvw
+ v7keIjJvTnM3Uy82SvnSNC9dVStSI/m/v6GOc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759957187; x=1760561987;
+ d=1e100.net; s=20230601; t=1759957188; x=1760561988;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1WWnTLeWUQa3nDpfDoxymcbemZAglCQ8Q8C5hX8mSWQ=;
- b=braIuZXeBGAfGWExy+SO5gN1TVN99xroI/+M/4OtV1gF0PzQX3OaTU1LfnrzFdsf3s
- PZa1U1er3wcSFJd/AqxARn0N8C3Bvmce8twebj77KQOeUK/m0mrP9eHZzKpf15YKqldK
- IMziyHolHYYPi+aLyqpHhTg6Tl2mXv5VBXct9klRuvlqL24slzYJDWfqvCyByFO99h8s
- lye59siZSoPWMNlrOLDw0sUiUNoIcfA5vewUmrith5Gv7RIp+UCk237nuuy7dd4izxGc
- 3LGkFseVxooq8Ru2wGvCRfi/IyQH9E8JyM6h34BiPAU5S+ouW79lP3+u3PDgVD3ncBSu
- NmaQ==
-X-Gm-Message-State: AOJu0YzcVXjB5eMBpoOBFrXGWKhZm4vfqbWhcDv8b0spscORPQxfsZjb
- a7szdEU+yl82wTpyM9zsRof2ZU2Q+B+Kay1D7R7MES5/E03sEOpjnsjgE/inmECfZP0=
-X-Gm-Gg: ASbGncszIz1f96UNhuh78k8bY4KGuBDfGNkHvSp7hBmSD9hXcniMKl98DPAlXS0Q4UE
- +X0RAg+fUX+Gwj+pymtVJ7AGUR219BqDqkhZbFRTn/HWR0ryT1z4bykONGCyd4F4uOhmj4lq/Lv
- LnzhPtPITKuaUkCe8sUUHFDNjywfMcMiR+pCk878xoPpVXf6PifdVBBer9JEabgxnBeagCx9aXz
- /9vaFRnx/S/8FUGAqjAG4BSaOL8FoSPQyjkVySnDCj9V2py908ii5nNTWvwxhtiepQKVZb0QPaG
- VIsP91HPw/YXvFRzSxU3TycmbjLgBKY7AJJYSZVx/H7cVU3rCCpZKptNApHP/UZsLaTW8ELKBJN
- ctRZiOyqMj7ifp6iKTjmIurrv9J0mQGVZePdI2zpnqE9Cgrg4eqF39y8WvgTH7TVIhF/Z2rXxu8
- pYfLQaBtn7
-X-Google-Smtp-Source: AGHT+IEVR/logAs6RYgq9PcJPPQ+v1eVrNFZK/JLMQnYpTLGAoAUoV4qygCRzQIysKSsq3SvZN2nIA==
-X-Received: by 2002:a05:6808:1a20:b0:43f:6f82:e16f with SMTP id
- 5614622812f47-4417b2fce76mr2943540b6e.12.1759957186712; 
- Wed, 08 Oct 2025 13:59:46 -0700 (PDT)
+ bh=Oo0mDCCalKy5DFgZg3QJUBt/Yj00cvy44nlCTwKZE0Y=;
+ b=mLC38uVRc++HuiDhJd7ZGxcQuoF1o/3byIL1w8og8tKoYQkFN0dFPe++c+OxiCCDlK
+ tsgW9u0qL7O9FgN4LVqXjpMG2Ndb8DD5PHR5rj1Tmke9vRyUh6CXihjkGn/Th+Md3rIu
+ zr8aUOumey8A5N59JgnObUSnLYYIZoVhWCMvmellZU6qwOoMq1rv13JbQVNMpLWGPv4o
+ uyPNsFExPg+MWo5XX39NRcIndKK8dM3esI68zjXApoJnzpYEKDLZemQyFOU9EsmAtdFO
+ Kvp/wPS1YrbbfnBS9Zbszn6h3PCV3JV1W5edPwrRmeUxkTKcSFjisNXExCsBMSD6iquj
+ psLQ==
+X-Gm-Message-State: AOJu0Yyvk+gXylzJGi30me1Ogk3OdigJON6dCcXjT1QSl130unGs9xfh
+ xOzxcDLeRQHfmJL7wS9vpWCb27lQQ9lE+fglUwJvBuZoAbh7ictliq8i6uCF3GKt5es=
+X-Gm-Gg: ASbGnctC4wZZhTo9iFVDoclAJuDpm8WU7iZbpP1NuQFgf+iw/rzqR9IB6ZX9BXPBgAW
+ xzpx2FjfdaExaXFs2pZZafwvOKuYYzFCm76a4PamkpCAAJnDKgBeazqYAeixrDACtUy8bX6U7B8
+ kNZUC6kOS9LgVIw245EX0z+ERRGXhA0iHFYRhVri1CMa6lU7XUM+ePZ50D/8L3g980vwKLsbJO/
+ XYNtTnXHC1A5tnHmYM9Iiv9kUW1S5/RbSkjSOfYqkGgXGAahbH6fpVWvz7DZqtYrTiPj3pLqr0o
+ Z2466OcmdmW6H3jTqcy/yui1A2dcng7X4+ExHHaGuIW13nGzUNcRg4Q9AH5a9TbDo0Iudoh4qV9
+ 4zxV1XRYD62lOAFMZFUm7WfpJkPcHgc5Wi/U4Erq3y1OiA89TPs2JA3QfQZ8TM6uDtqUxxI4ZQP
+ 6my5p8nQzLbiv03s59F30=
+X-Google-Smtp-Source: AGHT+IEuFuFz20j10gs3gzDSCDRNEv1gy1vFwOAvdAByE0UisuDrmlbP2nZuRQhu5eMBJf3v1/bOhw==
+X-Received: by 2002:a05:6808:17a8:b0:43d:43a5:ccaf with SMTP id
+ 5614622812f47-4417b47098bmr2122924b6e.43.1759957188243; 
+ Wed, 08 Oct 2025 13:59:48 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44189a67d27sm226052b6e.23.2025.10.08.13.59.45
+ 5614622812f47-44189a67d27sm226052b6e.23.2025.10.08.13.59.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 13:59:46 -0700 (PDT)
+ Wed, 08 Oct 2025 13:59:47 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-In-Reply-To: <20250906000507.284853-1-marek.vasut+renesas@mailbox.org>
-References: <20250906000507.284853-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 1/2] thermal: rcar_gen3: Add Renesas R-Car Gen3/Gen4
- and RZ/G2 thermal driver
-Message-Id: <175995718567.3059512.17298787766791080823.b4-ty@konsulko.com>
-Date: Wed, 08 Oct 2025 14:59:45 -0600
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Adam Ford <aford173@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ David Zang <davidzangcs@gmail.com>, Fabio Estevam <festevam@gmail.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Mathieu Othacehe <othacehe@gnu.org>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>, 
+ Ye Li <ye.li@nxp.com>
+In-Reply-To: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
+References: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] thermal: Convert .get_temp() return value to millicelsius
+Message-Id: <175995718691.3059512.8029181022233775258.b4-ty@konsulko.com>
+Date: Wed, 08 Oct 2025 14:59:46 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,29 +103,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 06 Sep 2025 02:04:19 +0200, Marek Vasut wrote:
+On Sat, 06 Sep 2025 02:05:33 +0200, Marek Vasut wrote:
 
-> Add support for R-Car Gen3/Gen4 and RZ/G2 thermal sensors.
-> Fuse readout support is present, including fallback trimming.
+> Linux kernel .get_temp() callback reports values in millicelsius,
+> U-Boot currently reports them in celsius. Align the two and report
+> in millicelsius. Update drivers accordingly. Update callsites that
+> use thermal_get_temp() as well.
 > 
-> Example usage using the 'temperature' command on R-Car V4H Sparrow Hawk:
-> 
-> "
-> => temperature list
-> | Device                        | Driver                        | Parent
-> | thermal-rcar-gen3-tsc.0       | thermal-rcar-gen3-tsc         | thermal@e6198000
-> | thermal-rcar-gen3-tsc.1       | thermal-rcar-gen3-tsc         | thermal@e6198000
-> | thermal-rcar-gen3-tsc.2       | thermal-rcar-gen3-tsc         | thermal@e6198000
-> | thermal-rcar-gen3-tsc.3       | thermal-rcar-gen3-tsc         | thermal@e6198000
+> The 'temperature' command now reports temperature in millicelsius
+> as well, with additional accuracy. This changes command line ABI
+> slightly.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/2] thermal: rcar_gen3: Add Renesas R-Car Gen3/Gen4 and RZ/G2 thermal driver
-      commit: 0581328b5812b1297204b520acf8b6bbb09e6700
-[2/2] arm64: renesas: Enable thermal driver on R-Car Gen3 and Gen4
-      commit: 79fe4655d67fb68e4172e45e8983815e26a4cd05
+[1/1] thermal: Convert .get_temp() return value to millicelsius
+      commit: 0ee639ff5af33342c6c2f4579e210d707abc9bc2
 -- 
 Tom
 
