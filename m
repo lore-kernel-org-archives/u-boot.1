@@ -4,116 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CC1CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 18:19:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAB75CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 18:20:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87B3D83A2A;
-	Wed,  8 Oct 2025 20:19:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F9DC839B9;
+	Wed,  8 Oct 2025 20:20:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eUnuM5AN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="J5w026OA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71F8583A5C; Wed,  8 Oct 2025 20:19:15 +0200 (CEST)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 401D583A2A; Wed,  8 Oct 2025 20:20:35 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 849858394E
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 20:19:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2946A8394E
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 20:20:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-46e3a50bc0fso1141865e9.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 11:19:13 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-43f715fb494so59235b6e.1
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 11:20:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759947553; x=1760552353; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Ws9q8wramlie7UeNvTQwmXuXwGp6E3Y7QR786Mnbj6Q=;
- b=eUnuM5ANMjHFoaz7OyxQRCdubusvit8pzzBt8nTgEZA+BxD6ubcFvOreF+ltxqsgWe
- sZ//eC4qOV0LhsNimmK4CWPD/y80FDkUV1701PSBT7UxXrfv33tJgQPVE64l9SxIz98Z
- Z/uTazlgEsUSnjHKJmpEU+rrLwF5w0JtScrTsXUYbDsXZreXnwv0vgld/UaHbTqU1sjB
- w7TZLEJ36lKbG+9u0x+38qkLhrGcsweqejDfYocMfxaxQXEUm9/OrXRLfdV9D8qttf97
- D8BhmHQcdNC4SxFTakuT/+OTsBLatm7WeqOpucrj2xrLF60cbEoe0C9xaZdpY7FKcO3P
- sC7A==
+ d=konsulko.com; s=google; t=1759947632; x=1760552432; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Qf1aHb1obK5lI7VeHqmhCGgJqQVEpyMlVrWlzzeaxrY=;
+ b=J5w026OAMkQuoUx2dnq9na7Iz3egl1GLXXJrAkRVGLfoLpdoI33V+ZExSoyLThH5Sd
+ xbKtjiIxjkDz2xfg10RsMPmK4yHyYLjCfwDiib7+ySgJFLW5c21ekYIm2wjeulgSYz23
+ Rw2DB9Vr56qhYSiRBWTtPRUfC9KhRAzXecIzw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759947553; x=1760552353;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=Ws9q8wramlie7UeNvTQwmXuXwGp6E3Y7QR786Mnbj6Q=;
- b=FSNSy2/j/ZrXuqZ3zV4KC/WlTgTV0GId1/U/jluN23Lo3O9bLj2cRzD1t+EfgP8FL/
- 2m6D/2ZfvfomjgHZRzMDoFzKvlNCVOvIK/sznUgdSbkMtGBgevMDXJiel4KF9jC0aEmK
- YmqpCeAFRu1TYM8tDHAfrqa6DPHhYgXSN98QmG0+5rxAOVAAPrzzKZq5+8FmX4OtgTq2
- lCMYEee9c3RdwTmkcBDxUXfnq9H1gR7Uv7b8TUWof0AjtCBX2e4WTwzFBpzKBU/yr0/I
- GmaG5RFeQIJRAwaEtGyhDdAMrQGgTuj5bTBb86iah2LFwZLg4WTa/3tuLPZtoSFdbA7S
- oLFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWsMnu096OJDZvzKTbFx0yOVEDWKqTJWbVJfJ0Ar5Nqsj93IqlypRalt9hmNvTL2LSXxVteqRY=@lists.denx.de
-X-Gm-Message-State: AOJu0YzaoYvSv3PX/hL2YbKoC2TFrnOK1/ffxl0zCl2B7eTz62+L3j7p
- m5iZr9RXZ2s3KeNDtTeIDIgKtSHGfGsCNbPoZV/PKjU52QywGuKMga8azghB6AA3R9w=
-X-Gm-Gg: ASbGncsWsgWxGZY9fo+hqqBRvLiq2J4Mxzb3Xu08DakqIW2UPhFc8dGa7ysXxrrf3iP
- EnDGwpKSSvfORCdPrFYLB0s7jrMNK4DDmkJqiGmomNm5UicroXX52827DHwq+ZQtWJEF/2B1oBA
- mFO8MwU2QGYPpeSgMVovr75D6lI1Hst4fD9LUXwS1C42lw3VxLrRLiQx4jtUS04abOA1FknF8sh
- hscJgRcPjjW1EJzX2v4qt9rEKKStIcqA2hwLZ5C+yJ/YG/gQAz5slGXtyTerfLnCdObB+p7/mUl
- beqOBQafzT9uxDBhZ4VnCw96UU8w5xcOKCmxKf+pMIjh00bbEgE/xEstFSBdbA/q78DSJ1Id5l6
- s1djqgzxwoWgKZ3WHLwGO7qp3gdcfWD0vGOK9kCKnJYHChtwDN9Cotd1YggkHghafYgj86OHaDY
- CBu0A3xh0ltanwM8By0xI=
-X-Google-Smtp-Source: AGHT+IFqcsmwtH+LgMVMqdFIdWLqTSkEZCcbjVp1a0IC/AkPdREZzuyilhEgjLbW6BX/Ia2AzKBV1Q==
-X-Received: by 2002:a05:600c:628d:b0:46e:396b:f5ae with SMTP id
- 5b1f17b1804b1-46fa9aa471cmr46049045e9.16.1759947552670; 
- Wed, 08 Oct 2025 11:19:12 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3d9:2080:b264:afbc:dee:3d?
- ([2a01:e0a:3d9:2080:b264:afbc:dee:3d])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8acc4csm30558816f8f.16.2025.10.08.11.19.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Oct 2025 11:19:12 -0700 (PDT)
-Message-ID: <35bdb934-d923-4dba-bef6-b3acfaa62f0d@linaro.org>
-Date: Wed, 8 Oct 2025 20:19:11 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] phy; qcom: Rework Kconfig logic around MSM8916_USB_PHY
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Casey Connolly <casey.connolly@linaro.org>,
+ d=1e100.net; s=20230601; t=1759947632; x=1760552432;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Qf1aHb1obK5lI7VeHqmhCGgJqQVEpyMlVrWlzzeaxrY=;
+ b=mzDCPR4uE++0MWqhinzjvwrGXg0V6/ToVkRqZRfXmadKWSW96CPWPYCuK4ui0kpoMJ
+ YAzWI6QFPJjHZakh8fqFf57nYbdAdtyYOJKdb50GlAznbJ5UelWRM29hl7GCr3qizjoR
+ aLCUBpiwHUJK/Yisv7giQe+9CjTErEYWOXGyQW5asEVPz2T7Jl8sHNIT1k96mrRtFpO0
+ CplZFGUSMRktURjaTne2ZitRWiFvdwoSk845TOOp1jZYAB41aCpB70+rKogz79WQkt7z
+ kQQzTcNUgBVIsAG+lZNpgjJ4puPuUzoNTsfPXbrDXMEiMaoaCITMZLdbVTjWJBLelOFQ
+ Lw1w==
+X-Gm-Message-State: AOJu0YxkdEFl8hjOOTGq6xR0Nav7ZHuhI9bZ+pD21Odf5DFmiHsi4MTD
+ YraufHXL0W6yAw0Wsx6g3npMQepGOC757qi37QRo2FmeQStRNwgxkARsMnHZfSghCIM=
+X-Gm-Gg: ASbGncsiljPmIZLxKoCYMuzAWR/9FzRTuLAf9llwjsaX2igwJ7aVaeFWYoBYcUNjrzg
+ V0C+5eVoyfOS50u/Qkt3m+M+wW8LYTDjhUYFDhgkTFIDk+4MUfrv+mcN8k1O3WW3yiN7+LhPJFp
+ Na9u6KWz/Q3AON7hNaHq5+HMPJ0AN9v1qxeqDjAx38bUrrNUpM8eEt+P9GZnIO7h9LKdBdDeBu7
+ aYbmxDmJ1uMStBN6jQzzg9wDzQz+yW1e10zj0PqOuLhxXkw7TKHSNPt3tnpTUxvpJ/xoWfhqZZ1
+ 4JW7ToO+Kf0p7KtMNmf2TsWg4hFRAVajNoxpkwS013nuyGe+TKOIG1PCVXCWIncD9uibPfVYD+p
+ yLh6P3xkWXSIZDqrwklLt8VmpRoZk6qwkV7ZHUMEGH4iInw76YNQ2RskNXiKoHH8K7m49E2VKMp
+ t5QUHsuKQtKg==
+X-Google-Smtp-Source: AGHT+IGmfDr2vzkc+BXx+OaW99Llti/RaL5R6io55gtffTSqgw7YBttsMDEH9iNNiENMsTyT1qPekg==
+X-Received: by 2002:a05:6808:5242:b0:43f:48e3:5791 with SMTP id
+ 5614622812f47-4417b2c3968mr2428296b6e.10.1759947631830; 
+ Wed, 08 Oct 2025 11:20:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-64e1b7a88ecsm4119847eaf.13.2025.10.08.11.20.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Oct 2025 11:20:30 -0700 (PDT)
+Date: Wed, 8 Oct 2025 12:20:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de, Casey Connolly <casey.connolly@linaro.org>,
  Sumit Garg <sumit.garg@kernel.org>, u-boot-qcom@groups.io
+Subject: Re: [PATCH] phy; qcom: Rework Kconfig logic around MSM8916_USB_PHY
+Message-ID: <20251008182028.GG298503@bill-the-cat>
 References: <20251003203927.1030052-1-trini@konsulko.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20251003203927.1030052-1-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <35bdb934-d923-4dba-bef6-b3acfaa62f0d@linaro.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ENnqz6lwPc4RaqFT"
+Content-Disposition: inline
+In-Reply-To: <35bdb934-d923-4dba-bef6-b3acfaa62f0d@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,47 +93,40 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/3/25 22:39, Tom Rini wrote:
-> This PHY driver is required by USB_EHCI_MSM and not useful on its own.
-> Rather than have it be a prompted option, it should (and currently is)
-> select'd by USB_EHCI_MSM. Remove the prompt for this option and then
-> correct the dependency chain (it must select PHY).
 
-Subject has ";" instead of ":".
+--ENnqz6lwPc4RaqFT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Neil
+On Wed, Oct 08, 2025 at 08:19:11PM +0200, Neil Armstrong wrote:
+> On 10/3/25 22:39, Tom Rini wrote:
+> > This PHY driver is required by USB_EHCI_MSM and not useful on its own.
+> > Rather than have it be a prompted option, it should (and currently is)
+> > select'd by USB_EHCI_MSM. Remove the prompt for this option and then
+> > correct the dependency chain (it must select PHY).
+>=20
+> Subject has ";" instead of ":".
 
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Casey Connolly <casey.connolly@linaro.org>
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Sumit Garg <sumit.garg@kernel.org>
-> Cc: u-boot-qcom@groups.io
-> ---
->   drivers/phy/qcom/Kconfig | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
-> index 61e5e2fca413..0dd69f7ffd0c 100644
-> --- a/drivers/phy/qcom/Kconfig
-> +++ b/drivers/phy/qcom/Kconfig
-> @@ -1,8 +1,8 @@
->   config MSM8916_USB_PHY
-> -	bool "Qualcomm MSM8916 USB PHY support"
-> -	depends on PHY
-> +	bool
-> +	select PHY
->   	help
-> -          Support the USB PHY in msm8916
-> +          Support the Qualcomm MSM8916 USB PHY
->   
->   	  This PHY is found on qualcomm dragonboard410c development board.
->   
+Fix that when applying please? Thanks.
 
+--=20
+Tom
+
+--ENnqz6lwPc4RaqFT
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOarZAAKCRAr4qD1Cr/k
+Cvw0AP4zuheVPoKB4RLd4nH6jCW+7C1MCigD2VuWf6yNU+i+UwEAmb655kXCyjjh
+ihrUdn3DecjpVrEMjRQ11Tq7HGpkJAI=
+=Qfp5
+-----END PGP SIGNATURE-----
+
+--ENnqz6lwPc4RaqFT--
