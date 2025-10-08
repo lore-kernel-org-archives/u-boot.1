@@ -4,88 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E539CCCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 09:24:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E501CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 10:01:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99F8D83D9F;
-	Wed,  8 Oct 2025 11:23:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5670483957;
+	Wed,  8 Oct 2025 12:00:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DgoedrHM";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="PCjdZbmD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00B4183C6C; Wed,  8 Oct 2025 11:23:42 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5C9778398C; Wed,  8 Oct 2025 12:00:58 +0200 (CEST)
+Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
+ [91.218.175.188])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A4F68393F
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 11:23:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 63E748389E
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 12:00:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3f0308469a4so4117706f8f.0
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 02:23:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759915420; x=1760520220; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=x5qN3X+lyCMiuCEz91dMeDXD6NEE1z2eR8uwgaijNdA=;
- b=DgoedrHMfu6T4QWej/WS9T8nlJ7msJ+Chg4JJomy0JDRfX87qA4r1wn527Thad8J0U
- JsPDi8oXeWNwBLMOURwHIgotufe6ZRW9V6doAKEo/Y+ge7SO3hJgK/yLCWV5AZxSo0Eo
- FiMQIPfO+b8EPe5ga8LEGRldApz3fyAwjc6mxb/5frjHIpiaNortSAKLwgaEpJpt+cQu
- bWIMUbz8IObjnkuxesQjwt4GgYVv7UZEXXBOUkDSC89mCQNG950V5i4Usa26PdSVDWm/
- q4Twla0WpDCBQAsrz60T+GlJIuboEsHfO4iFo52QCN1McPckiurt+uuDigcoutYWHmLv
- brug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759915420; x=1760520220;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x5qN3X+lyCMiuCEz91dMeDXD6NEE1z2eR8uwgaijNdA=;
- b=CdPnaPAmxjJMiMHiEXExsgGIbf3HoY2pWTVG0FA4EppcjNEZJ42XKt+Y0m+O2LdA+L
- doetGX1jwNEXw59HrpizIJ94EQNwTZacdHqJ7EivDrf6rD+vqdU467lvF/m4+MfC9qYV
- Y2EOk8wjIOaVsf0xJtqrqZeEnM6LFvlDY6gyGfPhbzISBiNOjfl9lrrHKQI0Ud+BrJFB
- BQYtC3Ft8O6nl5inWWqSh5toXGp7lgQz/AHar6SWXqzNPNd+jdau9DEnxXm2CfHcheq3
- gL+Xe7TBL0SpLcR308N12MoNZklYf9UTxFGmGknyx5UwYv81jUbDpaer017ooh+sjxqs
- +bUA==
-X-Gm-Message-State: AOJu0YxG9K92ubleX+lq8eBwSyf+JE5LULbhNsiJxbkfIE9d8mOx1U8S
- /VvrDGyIgKGL+oILw4FmHuIfCegv+etC7m3BSmdS6pOnTbDvqFPpnsxSSKdzk8ZUku8=
-X-Gm-Gg: ASbGnctuJJl/JlXkT0b9siul1ursdter+qpQnnj2WI/wz39OJlVUOI9ujH+i2PXW3Pj
- v1ucMGQoENF1txB66btLQ6vchu5Wkg/+0S4FWH/mhbIw9kGmP9RrSsJwxyMph56BKIoRFdDdaEA
- ObQg77O+okIpW/AeaJQoR6tLjTnR7jbP4759Aw93r6EjaKPj6xiRJFd3tmtJGgR1wHcs90Vjw2m
- gGmHTyJzvE+GhuWGARysiXT4SmGTXHt5v4W64F5/rYqIhA8eQ9vc85qoMzpR9youi3NTjm7jBMP
- wt2DfISyB0VxtFZYXwhrvzLAoARIlmRA/nl8kGBHVXSCwH4QJ/5mz4/by5jyRnwhwLYw4VBaY15
- S638v1MmbLRRWy/YkZC+/0aF951JejqE7jy+S6xbq7oArCsGwEEg/d/j4dW5Caar5dmSgFG3+nM
- BKMBs=
-X-Google-Smtp-Source: AGHT+IHYEc7t5IIOjk1yyGOrYxHtaMx1eK3mO/0YCapg/2/Gke4gbNLatF5rD+y3COW6p2gbj+YZdg==
-X-Received: by 2002:a05:6000:2c0e:b0:3df:c5e3:55fe with SMTP id
- ffacd0b85a97d-4266e7dff05mr1555837f8f.29.1759915420467; 
- Wed, 08 Oct 2025 02:23:40 -0700 (PDT)
-Received: from artemis2.elfringham.co.uk
- ([2a0a:ef40:fed:4601:5f9f:be0f:fb04:8dc4])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8e97fbsm28864715f8f.34.2025.10.08.02.23.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 02:23:39 -0700 (PDT)
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 08 Oct 2025 10:23:37 +0100
-Subject: [PATCH v3 3/3] ti_sci: Pointer is never assigned to valid value
+ spf=pass smtp.mailfrom=funderscore@postmarketos.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1759917654;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=krdCKpWgzuITZq8ci+xPDLpr/ltno1lJ9IyCrntY6Hk=;
+ b=PCjdZbmDO6eE7Hw0JHPl7IKiCV++BFUbwAOrl9jZ0a2PpdSeh2zZRHHr3ARh9mKCSDMNde
+ /kv+pyUZT2Ivfmg8RZriBlsfe6YV/72hPvVROr428sf0hE0KrqkuWgrV7A14+uoNr4xRtH
+ qgsEgZWVYgy+g1z8xoh/rgp/UoOEVJOiEWWIoZ04NMBVpm7iO1UF+wESrLy2WB9jUMYUT0
+ qUlRzeXtFnEK9bK1cA1ZaY99sKM4nk9eXI56VE7JBQNDx2yKotECNY0hc1GZbK8Bs25Eaa
+ 22Sh+B5c1ed8sZqj4/WPQqhT9nj35U0boPFNTIXkf9jGyqfsSWLdpd0CQ2eq/Q==
+From: Ferass El Hafidi <funderscore@postmarketos.org>
+Subject: [PATCH RFC v3 0/8] initial U-Boot SPL support on Amlogic GX SoCs
+Date: Wed, 08 Oct 2025 10:00:36 +0000
+Message-Id: <20251008-spl-gx-v3-0-5999637df4b9@postmarketos.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251008-ti_sci-v3-3-5866bf84adc6@linaro.org>
-References: <20251008-ti_sci-v3-0-5866bf84adc6@linaro.org>
-In-Reply-To: <20251008-ti_sci-v3-0-5866bf84adc6@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>, 
- Dhruva Gole <d-gole@ti.com>, Moteen Shah <m-shah@ti.com>, 
- Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-X-Mailer: b4 0.14.2
+X-B4-Tracking: v=1; b=H4sIAEQ25mgC/22OywrCMBBFf6XM2kgeDU1dCYIf4FZcpE3SBrUJS
+ QmV0n83BBQXLu/cOYe7QtTB6giHaoWgk43WTTmwXQX9KKdBI6tyBoopx4JhFP0DDQsipBYdF0q
+ xjkB+9kEbuxTRFS7nE9zycbRxduFV5ImUqnha3Hw8iSCMWMNarlpjuDRH7+L8lOGuZxf3LgzFl
+ OgPTb4rEs20MJxK2deNxvUfetu2N1Er0y/mAAAA
+X-Change-ID: 20250830-spl-gx-1148b58dd3b1
+To: Tom Rini <trini@konsulko.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Beniamino Galvani <b.galvani@gmail.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>, 
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
+ ~postmarketos/upstreaming@lists.sr.ht, 
+ Ferass El Hafidi <funderscore@postmarketos.org>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5458;
+ i=funderscore@postmarketos.org; h=from:subject:message-id;
+ bh=AxbYZWERgBCqBCRLU6npgSm1yzdUI1QjSpBHqWxs5bo=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBo5jZSXnRkC4ITqUiDjY7/Nu36DQyPrFUKo595q
+ aQ26MIqquyJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaOY2UgAKCRCEr8vQ14ma
+ Ax7gEACFiiu2km49/HmaOcFEObcUH0aEhtwJcK+kpPJxPDdzRWu6Q4ynnGZv8vNZzlAFLYYDdRL
+ mPCu4APL7LjoZhWlpP+xkgc+bMoFQYn6WfejqAxRUZW2RGPjj5CrAFoeGlognSaT5BNGV1mE0hx
+ vaO3xRsj+08QRIE7CODt1O2c68e+KYeyl/MoQGandm/xVZ3AAkAVDOtH8A6jZklQrBBC5/+dD8x
+ 3CkVZA4rpUtNdGj0qPHM+93Hdlqlei9eNaDwyd6BcgyKwWSuJqKMs0c6WLFZm2Zw4nm45XNXRLl
+ b2AOfZl/8gNODz1Z928lfzGKikgM+HXKxdMWRIzOYG8M82l/CeLfWMM3zHNNssFydEgC1HoxZQg
+ l9cD8UdK1HMoflHZSIspDkBhOV3YehIGpNCkJY2PR/MGC3/H0Mmsp71OocivlJmveyyBsqJwZrF
+ +szNJnTx8Md1zVnzhZbo+fHG7GCDSG+BnGHYNxCIUeFfMeKXhwZQaBbH+ABj8uoLrowK4KH551+
+ EX/Aa5wcMdJstjDAX6au6LPYvw9DAOVKxJcRlEqvGOWau0if2S8QZR+yRG6WBhKAP3KjQfUEfdE
+ zW+JFOU9lEAwxrUwP2U9qdUMo1r0eOvxTXSpX0UHoZXXg1IEAjUHJeA4OFiVfobu7TdfaYdo0rK
+ CqsKuUng9OWyJlQ==
+X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
+ fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,31 +93,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The pointer resp is declared but never assigned a value but is then
-dereferenced. Fix this by assigning the pointer to the message buffer.
+This RFC/RFT patch series adds support for U-Boot SPL booting on Amlogic
+GX SoCs, replacing the historical "bl2.bin" binary that runs as BL2 on
+these boards.
 
-This issue was found by Smatch.
+Boards tested:
+ - Libre Computer LaFrite (S805X, 512 MB)
+ - Libre Computer LePotato (S905X, 1 GB)
+ - Videostrong KII Pro (S905)
+ - Xiaomi Mi TV Stick (S805Y) - downstream defconfig [1]
+ - (ODROID-C2 (S905) - at some point early in development)
 
-Reviewed-by: Udit Kumar <u-kumar1@ti.com>
-Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+Each of these boards were tested booting mainline u-boot and TF-A BL31,
+either from an SD card or using Ymodem, and then booting to Linux.
+
+More testing is, of course, very much welcome.  In particular, further
+testing of other boards that could not be tested, of the ODROID-C2, and
+of the 2 GB LePotato would be appreciated.
+
+Currently known issues:
+ - LPDDR2/LPDDR3 support not implemented
+ - some DRAM rank modes are not supported
+ - eMMC booting is broken (pwrseq?)
+ - SPI boot is untested
+ - we are quite limited in space, so e.g. the clock driver does not fit
+   (TPL might be considered in the future)
+
+See doc/board/amlogic/spl.rst for building and installation instructions.
+
+This patch series depends on Jonas Karlman's amlimage work, which was
+sent in the mailing list [2].  It has been rebased for resending as part 
+of this patch series.  Thanks Jonas!
+
+I would like to also thank Libre Computer and MNT Research for donating
+boards to me and the rest of the linux-amlogic community for the
+invaluable help.
+
+[1]: https://scm.dersco.re/amlogic/u-boot-kii-pro.git/commit/?h=wip/spl-aquaman-2025.08&id=d030951d0aaac04f1e2cc8a8eb01eb662a782f21
+[2]: https://lore.kernel.org/all/20250103215904.2590769-1-jonas@kwiboo.se/
+
+Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- drivers/firmware/ti_sci.c | 2 ++
- 1 file changed, 2 insertions(+)
+Changes in v3:
+ - Do not depend on DEBUG_UART_BASE in the non-DM UART driver
+ - Grammar fixes in documentation
+ - amlimage: check digest type in _print_header, version in _verify_image
+ - Link to v2: https://lore.kernel.org/r/20250910-spl-gx-v2-0-8f52aac47e04@postmarketos.org
 
-diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index 534326be5ecedba1bf221d04d708b6db15f09706..6f57dcfe8de8f874318cd53372c798d182faae73 100644
---- a/drivers/firmware/ti_sci.c
-+++ b/drivers/firmware/ti_sci.c
-@@ -1365,6 +1365,8 @@ static int ti_sci_cmd_clk_get_parent(const struct ti_sci_handle *handle,
- 	if (ret)
- 		return ret;
- 
-+	resp = (struct ti_sci_msg_resp_get_clock_parent *)xfer->tx_message.buf;
-+
- 	*parent_id = resp->parent_id;
- 
- 	return ret;
+Changes in v2:
+ - Drop "mmc: meson_gx_mmc: don't bail if there is no clock driver",
+   given SPL does not use the DM MMC driver by default anyway
+ - Drop spurious DM_DRIVER_ALIAS from UART driver
+ - Document in send_scp() why it is only needed for GXBB
+ - Move GXBB/GXL-specific code to separate spl-gxbb/spl-gxl files
+ - Add a few defines for pll init
+ - Actually disable FIT image post-processing on GXL
+ - Add Neil's R-b tag (subset)
+ - Link to v1: https://lore.kernel.org/r/20250907-spl-gx-v1-0-37395d9ff5af@postmarketos.org
 
+---
+Ferass El Hafidi (7):
+      mmc: meson_gx_mmc: add minimal non-DM driver
+      serial: serial_meson: add minimal non-DM driver
+      arm: meson: initial u-boot SPL support for GX SoCs
+      arm: meson: spl: add support for SPL DRAM init
+      arm: dts: meson-gx-u-boot: add binman configuration for U-Boot SPL
+      board: amlogic: add kconfig fragments for SPL
+      doc: board: amlogic: add u-boot-spl documentation
+
+Jonas Karlman (1):
+      tools: mkimage: Add Amlogic Boot Image type
+
+ MAINTAINERS                                        |   1 +
+ arch/arm/dts/meson-gx-u-boot.dtsi                  | 142 +++++++
+ arch/arm/include/asm/arch-meson/clock-gx.h         |  14 +
+ arch/arm/include/asm/arch-meson/dram-gx.h          | 341 +++++++++++++++++
+ arch/arm/include/asm/arch-meson/dram-gxbb.h        | 168 +++++++++
+ arch/arm/include/asm/arch-meson/dram-gxl.h         | 193 ++++++++++
+ arch/arm/include/asm/arch-meson/dram-settings-gx.h | 296 +++++++++++++++
+ arch/arm/include/asm/arch-meson/dram-timings-gx.h  | 117 ++++++
+ arch/arm/include/asm/arch-meson/gx.h               |  41 ++
+ arch/arm/mach-meson/Kconfig                        | 112 +++++-
+ arch/arm/mach-meson/Makefile                       |  10 +
+ arch/arm/mach-meson/board-common.c                 |  11 +
+ arch/arm/mach-meson/dram-gx.c                      | 419 +++++++++++++++++++++
+ arch/arm/mach-meson/dram-gxbb.c                    | 174 +++++++++
+ arch/arm/mach-meson/dram-gxl.c                     | 167 ++++++++
+ arch/arm/mach-meson/spl-gx.c                       | 168 +++++++++
+ arch/arm/mach-meson/spl-gxbb.c                     | 113 ++++++
+ arch/arm/mach-meson/spl-gxl.c                      |  39 ++
+ arch/arm/mach-meson/spl.c                          | 123 ++++++
+ board/amlogic/p200/spl-odroid-c2.config            |  37 ++
+ board/amlogic/p200/spl-videostrong-kii-pro.config  |  38 ++
+ board/amlogic/p212/spl-libretech-cc-1gb.config     |  36 ++
+ board/amlogic/p212/spl-libretech-cc-2gb.config     |  38 ++
+ boot/image.c                                       |   1 +
+ doc/board/amlogic/index.rst                        |   1 +
+ doc/board/amlogic/pre-generated-fip.rst            |   9 +
+ doc/board/amlogic/spl.rst                          |  77 ++++
+ drivers/mmc/meson_gx_mmc.c                         |  75 +++-
+ drivers/serial/serial.c                            |   2 +
+ drivers/serial/serial_meson.c                      | 119 +++++-
+ include/image.h                                    |   1 +
+ tools/Makefile                                     |   1 +
+ tools/amlimage.c                                   | 254 +++++++++++++
+ 33 files changed, 3335 insertions(+), 3 deletions(-)
+---
+base-commit: 072264c4b3406aee50dad08355588577a547ab48
+change-id: 20250830-spl-gx-1148b58dd3b1
+
+Best regards,
 -- 
-2.47.3
+Ferass El Hafidi <funderscore@postmarketos.org>
 
