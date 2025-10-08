@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981FFCAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 20:31:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81255CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 20:41:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BC0A83A7A;
-	Wed,  8 Oct 2025 22:31:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C8E0683948;
+	Wed,  8 Oct 2025 22:41:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B5MvTZ+n";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fyi26ffv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECEA383A2A; Wed,  8 Oct 2025 22:31:17 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
+ id 27DFE8394A; Wed,  8 Oct 2025 22:41:23 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1D4783948
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 22:31:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F280383929
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 22:41:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-3c73e93eadfso39611fac.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 13:31:15 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-3327f8ed081so372370a91.1
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 13:41:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759955474; x=1760560274; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fGgGK/jMiaCwO/0jSfc0GNGOgmgcubuqCQVYsPts+PA=;
- b=B5MvTZ+nKAuddMF0yv2SyIKuTE+3xI3jRUA1EHvArAyRKd7lj51pYtjFeB79Szqd13
- hMkWk2Sg4sZy4EYsO4fvSq98SksU1M8UzSEmcjJF9JFUIaRp//X/ZHX4HCTCELs4ow+i
- lgd3Z962pl8Dby/4DEvNi4cJGSJZmaFRXNqR/ImCt9qIQmosp2SaPdDQLtaG1byHQmGH
- CyYDC8hNOJ+hyNivyVkV2MrLd3uY+gT+FvWm2xu5Ub5WIx5Wxc/toMUHvBFELiBjH8kY
- u7WPa7kxREEuRhMYN6OARTHCA5Ve4fVEi1CpDuzN9/Vt7M/zTp/J8S0mN7ej22Y3/GAL
- RRYQ==
+ d=gmail.com; s=20230601; t=1759956079; x=1760560879; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IX3LOffebHiEd8vYBHDKNQWEe/xQ2N7ABX2nfb1Sbcw=;
+ b=Fyi26ffvu4mIyPzKji501FOFiAYASDGyVQDmZt0zm9EhxPiG044BjT3qReaeNT5H1r
+ zvSKUHUWS62Kpa8T0u3rAigl0Vkm7bEDT2ZC6JC3N1KVyHwuNsxu8Qtifg+ke7dKeTLI
+ CB5boiEpSUkXCI1ePs0OFcVWziSPVv/NIb/Vmmhne5+70PXZT6gQE7044WUQIE4jIfpG
+ +efBu45YgAem5+JmCPJ28/Jxw1n/ziMateu8UMMR2Y8HWbYd64k3NPZNX/ET43trWtJ4
+ JTP7109rHrnnQhdNPIlv8Fiq33pOuqJQGnLkkg9GjRP5xgdqSYxXOr78NLG7JgNWqQ+m
+ Ibkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759955474; x=1760560274;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=fGgGK/jMiaCwO/0jSfc0GNGOgmgcubuqCQVYsPts+PA=;
- b=qBW64OdKekJncvzzUWpzPY8W54UwWL/aCTVc1Q+APfgJeigJUZ/72lttuxrFvtfD7I
- gTS/RZ+n3QPW/adT0QayDMh/g3iPzN7vRpwYiLsT8SrWVhxspPDe6cMDWRMXq5A5SP8F
- Vcrw355i7O7ajj0SRWpmqNTOGWvD47p5lkIS8+d4fJNMPrO+XVJ2UoL1jrlG0kYIABIg
- 0EBntwlbO+amTnd6Ban0jcQg5WZg9+q8igY/kKv3jvpX80BPL/dcGpqqD0rV76OiLjFj
- OKy+bDXq7VriyCLVzQgXm6VeVRwCxIpMd8TGDwHxR7EX8kItKqtIg6mvffv+8/bkf8PI
- 6Omg==
-X-Gm-Message-State: AOJu0Yw0Uvnp9WRjocu7RIQw1la3Q91GqD5RufZ6kxvwTHp+D/SgbEXC
- tBIh9YQjEDYx2gexyTQAj+cWZjAQ/B6RZ3nRkae4U6ELGWVoRrrmYyZ10eVd5bKDAK8HfGq4Tbo
- BzLrHjrbDDdH1qJq9Ew6aC4o5HpMObUnyQ/HM10pGlg==
-X-Gm-Gg: ASbGncvBHT58wPJsZInnjTentrIOdjk6UUCMXn9I9eS7rkoFKQ9r9wdowjzk6tkXW8T
- ZvPL9jJXBDYFQtHj1ZfGn1puitejSVtHJ9FYQRMY4h2bcbAIsdmGiyth9rOmaOuGgs941mypSV4
- 9FYc/f20ioD06oUiEGNMlcOttmem6tstDWb214ppxFFGrGitJiVsVSmXOXBR4xBEjsIg25xY0Bg
- XE+NafzOlaE0JAXhCKrNJINx/yrrwE=
-X-Google-Smtp-Source: AGHT+IGmWc3YD08+MNBhdULas9SStl9sX3SzvgxWKOormIgx1tDFTUl11mNOsXv5I9n4SFqnxtLttLxUZz5uHN26Yfc=
-X-Received: by 2002:a05:6870:1595:b0:321:ef6d:c736 with SMTP id
- 586e51a60fabf-3c0f51a5b62mr2872795fac.3.1759955474464; Wed, 08 Oct 2025
- 13:31:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759956079; x=1760560879;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=IX3LOffebHiEd8vYBHDKNQWEe/xQ2N7ABX2nfb1Sbcw=;
+ b=kcqkbEuhsiK+xwx7qI/PnLx0oxEb1AWnymoy8QWDjHNDLFhf606gKuVtmlkKzfSvll
+ v9Bjr/Hl98t/2IG9CMS8j5U5bnYF5ONHp92sRoj5NkqT2P1vMRuxoyMNW5aQRL8o0OEt
+ zEdDO9e/c6MAkteg4dOG14Bv7KJaKWL2ScSbbIsQ0Sjk6g5fWh3oQYVFOPcl7A0v3F4M
+ 6H28TofAQ2hkrNc/1nSV8wkEoCp7/SZKQjT+aBa2GeEXTrJw19md44jXGm3cAGGgGfPG
+ exDk347hTAqVh9vSMILTdXRtwL29UNNEbMDJ5S+qAdpJxKTvMV8po6fiDVUaE9AyQsKz
+ UFiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUedOXYLp/7zwctqKXC8ioRJNCl2LWYq1y2pRxa7Ebqs32+wKAtrwBJ8+vhTmyCdnNHsSmvT9A=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMw7YoEqrbBxsjC3VfH68PG+uEfMbs5VTNBy/plbSLLb/xkUWs
+ 76L/BZCOvKhkF9hoMQvgB9fDAgx/zlZgvPYaV9u2Ratnc0LWiXfh5DVb62KhaElY0JpePw==
+X-Gm-Gg: ASbGncsG1dvznOShkRxH2RRm14CQuUU+PBsCOZ/P5UpN9pzflLgvlm9zfETgshZU0kl
+ 6jcT/zgjOkgHmGmjkOBPEzdwi2MJ5+iefb0+3t+ua5GZUMw08NYJVDQDgpfo+1asUC4wgKWK4Ah
+ nVN2kkpH8qdLUosvYhpqW8PjVeftX8aHlU7rUMfEAOd6NJMjxA7yo7n7V8Fu6hSVVC6x1xzwTxH
+ NkuP8qXFnIMNgUw+0j7+vZEFJaZ69CjL9GHo9QZaqkuEWz728LpjuAWfGenRQkrkazMF74Vy8w+
+ axhObXIdAHSM/nRyb7YdElOr3EJy1NDwxodfcK2jgw/e0QTjgmN59xvPjGMMSUCDQd8qSTZgkzF
+ 7buuLxlffyhbEhChb8q/P2XRVLWvI+ABdAkK5nOjQRpOuMxBgDUd67TDViSWbytyM475SNc5W
+X-Google-Smtp-Source: AGHT+IHwVypPgrnAy7NAdUiyTmFDe6yYg8T6BFGxuQB7L7T2uwR5I/7tSK990HlZM/F2NYxNUa85vA==
+X-Received: by 2002:a17:90b:4a06:b0:32e:dd8c:dd2a with SMTP id
+ 98e67ed59e1d1-33b50f2c758mr6469561a91.0.1759956079246; 
+ Wed, 08 Oct 2025 13:41:19 -0700 (PDT)
+Received: from localhost.localdomain ([185.213.82.31])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-33b529eecf9sm1784683a91.4.2025.10.08.13.41.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Oct 2025 13:41:18 -0700 (PDT)
+From: Brian Sune <briansune@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] cmd/dma: documentation
+Date: Thu,  9 Oct 2025 04:41:03 +0800
+Message-ID: <20251008204103.1497-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.47.1.windows.1
 MIME-Version: 1.0
-References: <20251008174408.381-1-briansune@gmail.com>
- <20251008190713.GH298503@bill-the-cat>
- <CAN7C2SAaia8qV4sx-uMF2Y1GE4GW=WmmgSMHMApW0YoTzTqQOQ@mail.gmail.com>
- <20251008193306.GI298503@bill-the-cat>
- <CAN7C2SDaP65Eu914rAzNdhKG9oAUEeM9EhE-EEh2odONnBjWVw@mail.gmail.com>
- <20251008194613.GJ298503@bill-the-cat>
- <CAN7C2SDR9NLpmF3Pcd9QRVRk5gBrR2fciiPwccCsev7tpRYHJQ@mail.gmail.com>
- <20251008202412.GK298503@bill-the-cat>
-In-Reply-To: <20251008202412.GK298503@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 9 Oct 2025 04:31:02 +0800
-X-Gm-Features: AS18NWCk6OkubdngHlcIzYyGZc3F-CKWfQEn5y14Z0eOBu9zKvV1WDTz4IoYKJU
-Message-ID: <CAN7C2SDA9BP7rMPzCN6qakSDFF9BDjBQRJpMsSsHZwFynvGfBA@mail.gmail.com>
-Subject: Re: [PATCH v1] cmd/dma: documentation
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,24 +95,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B410=E6=9C=889=E6=97=A5 =
-=E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=884:24=E5=AF=AB=E9=81=93=EF=BC=9A
+This explains how
+to use the new U-Boot command 'dmareset'.
 
-> I'm not sure what's going on with your environment, sorry, you might
-> have to just push things to CI. All of those errors don't make any
-> sense. Docs are build that way as part of every CI run, so they aren't
-> generally speaking broken.
+Signed-off-by: Brian Sune <briansune@gmail.com>
+---
+ doc/usage/cmd/dmareset.rst | 55 ++++++++++++++++++++++++++++++++++++++
+ doc/usage/index.rst        |  1 +
+ 2 files changed, 56 insertions(+)
+ create mode 100644 doc/usage/cmd/dmareset.rst
 
-Aaaa. Python sometime is very touchy. So unless there are a general
-env that can be shared to test this is no good as well.
+diff --git a/doc/usage/cmd/dmareset.rst b/doc/usage/cmd/dmareset.rst
+new file mode 100644
+index 00000000000..d30f1d3e8d4
+--- /dev/null
++++ b/doc/usage/cmd/dmareset.rst
+@@ -0,0 +1,55 @@
++.. SPDX-License-Identifier: GPL-2.0+:
++
++.. index::
++   single: dmareset (command)
++
++dmareset command
++================
++
++Synopsis
++--------
++
++::
++
++    Usage: dmareset <channel 0-7> [<channel 0-7> ...]
++    dmareset - Release PL330 DMA channel reset(s) for SoCFPGA
++
++    Usage:
++    dmareset <channel 0-7> [<channel 0-7> ...]  - release reset for one or more DMA channels
++
++dmareset channel
++----------------
++
++Release the DMA channel reset *channel*.
++
++Parameters
++----------
++
++channel
++    DMA channel number
++
++Example
++-------
++
++Release DMA channel(s)::
++
++    => dmareset 0
++    PL330 DMA channel 0 reset released
++    => dmareset 1
++    PL330 DMA channel 1 reset released
++    => dmareset 0 1
++    PL330 DMA channel 0 reset released
++    PL330 DMA channel 1 reset released
++
++
++Configuration
++-------------
++
++The dmareset command is only available if CONFIG_CMD_C5_PL330_DMA=y in
++"Shell scripting commands".
++
++Return value
++------------
++
++If the command succeds the return PL330 DMA channel $? reset released.
++If an error occurs, the return Error: channel must be 0-7.
+diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+index 3a48521d5d5..809bf31b2ac 100644
+--- a/doc/usage/index.rst
++++ b/doc/usage/index.rst
+@@ -57,6 +57,7 @@ Shell commands
+    cmd/cpu
+    cmd/cpuid
+    cmd/cyclic
++   cmd/dmareset
+    cmd/dm
+    cmd/ebtupdate
+    cmd/echo
+-- 
+2.47.1.windows.1
 
-I do see a warning on the previous .rst so I fixed it and no warning relate=
-d
-to the new .rst file.
-
-I just patch as such can't do much no this.
-
-As for the built I had already use another system with 3.10 python.
-Yet still returns those thing on dry run. Very puzzling.
-
-Brian
