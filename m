@@ -4,81 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2AC3CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 12:53:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 276D3CCA472
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 12:54:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62F788394A;
-	Wed,  8 Oct 2025 14:53:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AEBFD8394A;
+	Wed,  8 Oct 2025 14:53:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FvnOe/5g";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SSiX57Fp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1613A8394E; Wed,  8 Oct 2025 14:53:30 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id EEEFC83DD8; Wed,  8 Oct 2025 14:53:58 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D328A838AE
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 14:53:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C8F02838AE
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 14:53:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-637e9f9f9fbso12177314a12.0
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 05:53:27 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-639e1e8c8c8so716245a12.1
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 05:53:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759928007; x=1760532807; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hYO1orsYZAgGB+zswvnfWyEBWw1c/4xpoX0dU4xQm8k=;
- b=FvnOe/5g5QklRwyj7qB/2QnOqnjzRFDA5oVXSRyBQ7PYmW93vr2ZOWwuvDKW8xLyTm
- 19GAsFD6Im6hEcyBOSPmHXcytJZoRZvLk62Yq5U/yCL/8gTw3NkiaUNZW3/jQ81joyY0
- 7uJ4O+lfWAaR6hZFd7XdEv6KeVwmqLuwuJwl0=
+ d=chromium.org; s=google; t=1759928036; x=1760532836; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cRPGetMEiBYOvruZxh4kixiyHnnhn+vD1w6W5T+Ctaw=;
+ b=SSiX57FpbKbrzbmaKcYPfoHk0ev7xQK71nzZGy4cq9iMteJ20PQqkpqyNfUUp+pAYF
+ VVHNwNB9pGrTHc0OVAm9T/zy8jkfof3ATFFwBurZOkrvAbKp3CZZnhiLvyxj9l7UGKx7
+ znteF4nNBv9ZZrZrKtGmvKGILZMIhYoHjtuN4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759928007; x=1760532807;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hYO1orsYZAgGB+zswvnfWyEBWw1c/4xpoX0dU4xQm8k=;
- b=dUTxRtq1ptuOfjnZq+3fc6HB0oU6n8gBRvLNDjLXxJAtA4CPtmzUrvrTmub+q6Nu+E
- 5WUiw5HUwWN/YbHTu//59YJ0uzDKDEyflNib7jYZsI20kWQ9RjrNaVj1eOXt9kdZ0oIh
- +xLUMBlG6DwZcqqi6CMPZgyCs9YoeDhfGecRVmvlkrSanhPwa7FmwCl4bcS0Q2yVrXy5
- kLTlIJl4Xr7yDbKoWhIC/zAJV5O/faEcZxJG6XjZbevtw4Th3LoJOJ7skVp2lPnBIRSn
- 9cJ3o7yNoyxH28KXd2IIJiwULJXNqRR4raabwrpvXIbC8mr01gBaJ8Ke7o9axclz1tB/
- sZqg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV58UdABv9JV/pwiZTUAqQ41PPojqNdcqEZmurAUjAYrBo9GJoZUCG8epEvlaubHIE4NbiApd4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKWZRfda6GY55rwIybecjl0DtzexmEV6LuBTgQYGoKJSGO9HMG
- eWAfCs/NNzXVVXi2n4YmdK2YhYyAcp5EGAuFEPsKdR4xsuNGHAQ9ViY2n4Xq8ueKx7eWwYWa6vw
- 8H4dCsxxMOCTjiXz+b2Kzb+tdS971KJyYBr2/jr9MOjUV7jFtGbymyw==
-X-Gm-Gg: ASbGncvOSnoF0/hoFwgETxZTQSpXS6w8LXfxlH9qKkiy+5YR/3+eOZD9CzVkJ/cdU/M
- EG9s6PmbJWfMHNc8gOGP6C2qkqY4vE/iOLPh+nqyXUqAg4WMjaGIpt59vvw7UboTFuqztcY0/zg
- PicXXy98pdDbq/S05Qtfe7WB8Z67tgT0lkI2Cr8DoO/5/ShOkfI09ZOqPN7gC3B5266i6vXMXY0
- Kaa7owub08A4E4K41nBqWuusKbg8A==
-X-Google-Smtp-Source: AGHT+IEoz4lEOMf0uv3Pm+5hQDHFZivKoSKhc0WRf1PlAQxVkrYiht5b6LrwVzNI3Sr2dZx2CvF9at0xIJgBPuLp5Pk=
-X-Received: by 2002:a05:6402:13ca:b0:634:5705:5705 with SMTP id
- 4fb4d7f45d1cf-639d5b88f41mr3148132a12.12.1759928007313; Wed, 08 Oct 2025
- 05:53:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1759928036; x=1760532836;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cRPGetMEiBYOvruZxh4kixiyHnnhn+vD1w6W5T+Ctaw=;
+ b=rhJi4mkHZPpFySgTyN4nsdYevrd9/JSsAMrBKuY3C+rZEFmdr1+N5nTI97Aby4SJOl
+ fOQlfi4Tt5B7saUAoTQzen5sz/l6hd1FZFqi5NSpnqWzt8xoJelSBNtjIYUiUaezJxYY
+ +NUj9uPIpJAUa61BAwSP5zDLOlU4sNEkrxq643OQwXhbEgj5TldGhgZ6o5S+0aX8rxpX
+ 1bNAa5of2BSrCJ8MhKHvFuRzxTHImJ/2Uzo2B2qKolhqExgxVzLDjNIWvvUMfOrUULOD
+ bpK9OFCmYD6O0f1JlyvdVTp4GKhG6oIeiQcIb+be0LEd8DAGOEVt1iW3ANs7hIIOzOyi
+ mLgw==
+X-Gm-Message-State: AOJu0YyBnqpdUAEwB318rrrE7iaPcKwqoyFtjMQmOK6YdK15GD1GyrPl
+ E9+gFTtAubGmcuprT+c9KVw1mUbKYgjugz0BHFan05ybGJuLPEPIvt66y0RhqtQqVPjxth2R22I
+ VoiH7GZuOhyx4JcqF3oR7zsmubbSY4FVzjkmt3RJQ1b6TnzFVWSw=
+X-Gm-Gg: ASbGnctUO3f8dDu8oigLcaS2SmprUUcdFrge2n+P1vf/0aAVmE3jsKQdPHiMPUDnNM/
+ W7afJCffKAhdGnxn3gIVvi3iS6hsePuCvaCltn8wHhA8HTgWinC4ZAIIJDqsLSL/x+jtoUVQzuY
+ RhYvGpskxczwHl3b1RqzkxApjnlV62Cnvve08GtJLzAwl09Zo7YXHmqIQdoVa16lSSWjsthJnbO
+ aOhGdUz2W7+rRiRhK5uPuOo+vU5VA==
+X-Google-Smtp-Source: AGHT+IHgh7/3hZvNUq8ii/MVXyW12UBHJTWEDjT2Drz+Elesd2JTNPCayCV6tEgqREYcBZj8opXLk28N9edtxQ6eOTw=
+X-Received: by 2002:a05:6402:2348:b0:639:ea7d:f674 with SMTP id
+ 4fb4d7f45d1cf-639ea7e6273mr780792a12.3.1759928036183; Wed, 08 Oct 2025
+ 05:53:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251003222714.4921-1-semen.protsenko@linaro.org>
- <CAFLszTiic5c_ZwX4hWJEAx=VGXxR8KOsNw2AQwzh92G-PRncGA@mail.gmail.com>
- <CAPLW+4n_wCzhsyVYiz1AzA4R0Z32nkjOs31F8TDwZXpyUM-J4Q@mail.gmail.com>
-In-Reply-To: <CAPLW+4n_wCzhsyVYiz1AzA4R0Z32nkjOs31F8TDwZXpyUM-J4Q@mail.gmail.com>
+References: <20251001212649.3263574-1-sjg@chromium.org>
+ <20251001212649.3263574-3-sjg@chromium.org>
+ <20251007181356.GO298503@bill-the-cat>
+In-Reply-To: <20251007181356.GO298503@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Oct 2025 06:53:15 -0600
-X-Gm-Features: AS18NWBtwvWEZQj9hl3ciVVon5HTt2Gj0H5-PM7byOwYXORqXCWAzwPbMJ-nGJY
-Message-ID: <CAFLszTh0AB5bA7oo6e9NZY7n0faMRxveWYD9sNbYmLUk=3D-TQ@mail.gmail.com>
-Subject: Re: [PATCH] bootstd: Fix bootflow info for efi_mgr
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
+Date: Wed, 8 Oct 2025 06:53:44 -0600
+X-Gm-Features: AS18NWCsEdOE3De_rzkPvkIofDE7i9AAaHL_rBUKPyyBIaYnFME9v1dGHeSq_Wg
+Message-ID: <CAFLszTieyj5_wTNCqsGryCses5a7DWpgVN9AUiJchmjPMViHTg@mail.gmail.com>
+Subject: Re: [PATCH v2 02/17] boot: Try all bootmeths on the final partition
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,40 +88,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+Hi Tom,
 
-On Tue, 7 Oct 2025 at 13:32, Sam Protsenko <semen.protsenko@linaro.org> wro=
-te:
+On Tue, 7 Oct 2025 at 12:13, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
+> On Wed, Oct 01, 2025 at 03:26:27PM -0600, Simon Glass wrote:
 >
-> On Mon, Oct 6, 2025 at 3:40=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
->
-> [snip]
->
+> > At present when one bootmeth fails on the final partition, the next
+> > bootmeth is not tried. Adjust the logic to go to the next bootmeth,
+> > which is the more natural behaviour.
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > If you like, you could an a test for this to bootflow_cmd_info()
-> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
 >
-> I remember the last time when I tried running bootstd tests they were
-> broken. Are they functional now? Also, do we have some short
-> documentation on running bootstd tests? If so, could you please
-> reference it. I mean, I can add the test, but unfortunately don't have
-> enough time to fix the broken test suite (if it's still broken).
+> My feedback on v1:
+> https://lore.kernel.org/u-boot/20250331174144.GI93000@bill-the-cat/
+> was that we need to do a documentation change when doing a behavior
+> change. And I cannot recall if this change here is because of reports of
+> problems or not.
 
-It runs in CI so I don't think it can be broken. But perhaps it
-doesn't work locally for you?
+This is a long time ago, but I think it might have been an
+inconsistency that I found myself. Otherwise I would probably have
+mentioned the person who reported it.
 
-You need to run test.py first (e.g. with -k bootstd) to get it to
-create the test files. After that you can just run sandbox with 'ut
-bootstd ...' which is a bit quicker.
-
-There is quite a bit of documentation too at [1]
+The documentation already implies the logic in this patch, as I see
+it. But please suggest any changes.
 
 Regards,
 Simon
-
-[1] https://docs.u-boot.org/en/latest/develop/testing.html
