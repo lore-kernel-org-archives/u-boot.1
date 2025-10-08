@@ -4,76 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD288CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 09:09:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F5CCCAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 09:20:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D11B2839B5;
-	Wed,  8 Oct 2025 11:09:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id D69008393F;
+	Wed,  8 Oct 2025 11:20:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="uwBmSbF2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M9991atU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A71CF839B5; Wed,  8 Oct 2025 11:09:00 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 64BD98398C; Wed,  8 Oct 2025 11:20:16 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D35D8393F
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 11:08:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C1E2838AE
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 11:20:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 9AA654E40F7F;
- Wed,  8 Oct 2025 09:08:57 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 6FF18606E5;
- Wed,  8 Oct 2025 09:08:57 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5A985102F213B; 
- Wed,  8 Oct 2025 11:08:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759914536; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=Z5hg/AfXvHmPIMPNecl1VzaZ8t+YbHUUNGGsg6TFMko=;
- b=uwBmSbF2FjRnUokZ5zL09GTHhxP/yHdgwtMMtGvvDTBSFRpPJQhvr8E6LLmpbIqfJiI8xJ
- PmuNMCbvyIP4RAnV28JXcQtsVXBPS6Ka3C4tTz6ejl+UxCc5StqzZyR3YXxqOFs119frfx
- XVlxqkbjlxkCAjQmdOvjmTzGThm0nNA8Tjv3E+AG8Wu8Rp6v6rryO2KgiRSmVl/GZQNPIu
- YU5PoCHvsUhGFg8AuppIi4af7Xp9uzs07SyE4XpZmMWyNUr/wyJUCAV5Lig59UkMGC8VsM
- TwFG6hSa1pZBtRm1ewf3fiz7rN0KAF+CWwQJSrwDkq3JGUmXsng6xMdpLY9+YA==
-Date: Wed, 8 Oct 2025 11:08:50 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede
- <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, Stefano Babic
- <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
- Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 06/16] board: ti: Convert cape detection to use UCLASS
- framework
-Message-ID: <20251008110850.43804e8e@kmaincent-XPS-13-7390>
-In-Reply-To: <20251007201336.GQ298503@bill-the-cat>
-References: <20251003-feature_sysboot_extension_board-v1-6-458b8bf85325@bootlin.com>
- <CAFLszTj3j6bcm6PG1GLAHa6FfjpKOKL12P_ae4WZsJL4hbh-HA@mail.gmail.com>
- <20251006214428.GD298503@bill-the-cat>
- <CAFLszTgLd7gHoU04QKAgHWNFQz_CS_XfeJCBkn58fu3UxUyurQ@mail.gmail.com>
- <20251006234240.GF298503@bill-the-cat>
- <20251007113213.75efa663@kmaincent-XPS-13-7390>
- <20251007141148.GJ298503@bill-the-cat>
- <20251007182938.368bf435@kmaincent-XPS-13-7390>
- <20251007164207.GL298503@bill-the-cat>
- <CAFLszThB=o9Wq1K4XP1K_Oj+6db2ZuzK8kLw7KyGqCVqDBX7Gg@mail.gmail.com>
- <20251007201336.GQ298503@bill-the-cat>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-46faa5b0372so4989985e9.1
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 02:20:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1759915213; x=1760520013; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vN1o7M0V3X9V65f6DoeWXXLnr7JosKEyin6DriQGBtM=;
+ b=M9991atU9NMN+Hz5tPPzlpKS0fP7D9/dEP782RjF5xv8cGkCzUK1wTr6jJu1xRP7Xl
+ 7FkgInnxiCQj7BW4Cx+76ZpOdlGNfc1yMk20JKHITTT0ZE0Ll9p9fxQPr09QmRIHsOJn
+ +/RDCehhvxi6J/W3rChXtm4UepBhnXCmuFsLbOeDWADf4i1K4KnUhyqa9EONCg2Envwx
+ lQ2/cRFfkN1owJYLdJrxdeyftdpDllxAxIpTn5/UoWLCaBWPn+bM1YoHc0WnY71JGu7L
+ FgHr1r7Sdv+mgH4qJiTjJ/eZUCUqKvo0wSnEJg19mbr4o3EYqpcRfad5et79zsKyK6Qs
+ M9+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759915213; x=1760520013;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vN1o7M0V3X9V65f6DoeWXXLnr7JosKEyin6DriQGBtM=;
+ b=uCmbf0zjhRW7+BpCTPPwb2PriBqArFJ/71F8MuDpwozxV/KGw8bpHvY3L0tOuH7hbx
+ rjoHmQESfDsTh9/WXt0mLnO/T4IBgmQXXwt6tlClHgCfZcy5AiW2Yiczefe/wMG90kVw
+ ilIrupqcIAbRp/q7m5y0z0SW/cKRlFTpEbWRMSy6lm2ZMP4I0+hconP/gzF8wvUKukja
+ ahPkyE3m8Lvsi2wyn/wstxsdKeRtz4my/0KWSQ+dMRkdcRj2M0mCPTuSigc4R6Rg6GZs
+ RKYQILbKxYR9PMUUf9fbDkGIRHVAdScLffvJUpSr75s75XCDTRJFjr/RGAafLej61wzu
+ 2m4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSXY8/gREhEQ4XFTmgwp4FzGcyGOYzJx0x6J+ZwPOYXbQOJECAVcBGdZDcFZjKxXcbzN8hgcE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+i9INb/Rtp2X7KRuSkMmHW+e9UBHHbw5ZRGmCFneQWJ34NutZ
+ l/+ZNCWDgkwPgQJpWCya1ZJstCWKpQnc1bRYTOfs7HeKs20WVmbnHlAmt3yxLznBX8c=
+X-Gm-Gg: ASbGnct2a8Ib+Ay3baR8ikC327LoD3u3pAEMbAKN3/7Hjs+8jd9DkfPOAP2XwUkUm81
+ 4pP1fP8Exay7cXD8Iwyc94/qkY1IXNo36fkFO+qrHtn0mZLtcByzF1zGJQq3WOGmBsKZySCpauQ
+ x0AIEoGqfA25GXU9tZkjslLgsODNJpRfNIEO1W4NOBVJAFOAnod0ykrSLUTH3fJin4M0exI2gGR
+ zN386g8AREqzQcYqTFYOIWm2DvU5cjAaWH2GevYu3qq7krgxqMec2OE2JeKsrWT/s4S9iPCPQiV
+ tXp8YRG8qrM7fmjmtvRLloBO9EtJto+oKHxivShb7qFCUnJXJB7B8LH/3TA2k4+a00e5vFkNrK7
+ U553T4WLENqcIVXW/gIlX7pb57KpBTnFQXyagaTvw7zE67nQd4z/U2zF9a5a9icEArn4H1HV1kA
+ ==
+X-Google-Smtp-Source: AGHT+IGeKXQ1OXACpckP4NHQO85gu+smvu2KClZJdy7W74y1wXdf79M39r1oLsM5KWuAvpkfyw0IqQ==
+X-Received: by 2002:a05:6000:2504:b0:3eb:f3de:1a87 with SMTP id
+ ffacd0b85a97d-4266e8e4483mr1584858f8f.56.1759915213048; 
+ Wed, 08 Oct 2025 02:20:13 -0700 (PDT)
+Received: from [192.168.7.93] ([212.114.21.58])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4255d8b0068sm29147055f8f.26.2025.10.08.02.20.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Oct 2025 02:20:12 -0700 (PDT)
+Message-ID: <f6fb56e3-f1ab-432a-8d08-89bdd63bd8df@linaro.org>
+Date: Wed, 8 Oct 2025 11:20:12 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] bootstd: make it possible to use tftp for netboot with
+ standardboot
+To: Tom Rini <trini@konsulko.com>, Benjamin Hahn <B.Hahn@phytec.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20250924-ip_dyn_bootstd-v3-1-f67864b81a79@phytec.de>
+ <20251007234906.GA577000@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20251007234906.GA577000@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,236 +104,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 7 Oct 2025 14:13:36 -0600
-Tom Rini <trini@konsulko.com> wrote:
+Hi Tom & all,
 
-> On Tue, Oct 07, 2025 at 02:02:53PM -0600, Simon Glass wrote:
-> > Hi,
-> >=20
-> > On Tue, 7 Oct 2025 at 10:42, Tom Rini <trini@konsulko.com> wrote: =20
-> > >
-> > > On Tue, Oct 07, 2025 at 06:29:38PM +0200, Kory Maincent wrote: =20
-> > > > On Tue, 7 Oct 2025 08:11:48 -0600
-> > > > Tom Rini <trini@konsulko.com> wrote:
-> > > > =20
-> > > > > On Tue, Oct 07, 2025 at 11:32:13AM +0200, Kory Maincent wrote: =20
-> > > > > > On Mon, 6 Oct 2025 17:42:40 -0600
-> > > > > > Tom Rini <trini@konsulko.com> wrote:
-> > > > > > =20
-> > > > > > > On Mon, Oct 06, 2025 at 05:30:15PM -0600, Simon Glass wrote: =
-=20
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Mon, 6 Oct 2025 at 15:44, Tom Rini <trini@konsulko.com>
-> > > > > > > > wrote: =20
-> > > > > > > > >
-> > > > > > > > > On Mon, Oct 06, 2025 at 02:38:23PM -0600, Simon Glass wro=
-te: =20
-> > > > > > > > > > Hi Kory,
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 3 Oct 2025 at 10:34, Kory Maincent
-> > > > > > > > > > <kory.maincent@bootlin.com> wrote: =20
-> > > > > > > > > > >
-> > > > > > > > > > > Migrate TI board cape detection from legacy extension
-> > > > > > > > > > > support to the new UCLASS-based extension board frame=
-work.
-> > > > > > > > > > >
-> > > > > > > > > > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.c=
-om> =20
-> > > > > >
-> > > > > > ...
-> > > > > > =20
-> > > > > > > > > > > -int extension_board_scan(struct list_head
-> > > > > > > > > > > *extension_list) +static int
-> > > > > > > > > > > ti_extension_board_scan(struct alist *extension_list)=
- {
-> > > > > > > > > > >         unsigned char addr;
-> > > > > > > > > > >         int num_capes =3D 0;
-> > > > > > > > > > > @@ -31,7 +31,7 @@ int extension_board_scan(struct
-> > > > > > > > > > > list_head *extension_list) struct am335x_cape_eeprom_=
-id
-> > > > > > > > > > > eeprom_header; char process_cape_part_number[17] =3D =
-{'0'};
-> > > > > > > > > > >                 char process_cape_version[5] =3D {'0'=
-};
-> > > > > > > > > > > -               struct extension *cape;
-> > > > > > > > > > > +               struct extension cape =3D {0}, *_cape;
-> > > > > > > > > > >                 struct udevice *dev;
-> > > > > > > > > > >                 u8 cursor =3D 0;
-> > > > > > > > > > >                 int ret, i;
-> > > > > > > > > > > @@ -78,22 +78,20 @@ int extension_board_scan(struct
-> > > > > > > > > > > list_head *extension_list) =20
-> > > > > > > > > >
-> > > > > > > > > > I suppose that a method called scan() could be added to=
- the
-> > > > > > > > > > uclass and implemented by this driver. =20
-> > > > > >
-> > > > > > I don't understand what do you mean by method? Is it different =
-to
-> > > > > > the UBOOT driver scan ops I have designed?
-> > > > > > =20
-> > > > > > > > > > >                 printf("BeagleBone Cape: %s (0x%x)\n",
-> > > > > > > > > > > eeprom_header.board_name, addr);
-> > > > > > > > > > >
-> > > > > > > > > > > -               cape =3D calloc(1, sizeof(struct
-> > > > > > > > > > > extension));
-> > > > > > > > > > > -               if (!cape) {
-> > > > > > > > > > > -                       printf("Error in memory
-> > > > > > > > > > > allocation\n");
-> > > > > > > > > > > -                       return num_capes;
-> > > > > > > > > > > -               }
-> > > > > > > > > > > -
-> > > > > > > > > > > -               snprintf(cape->overlay,
-> > > > > > > > > > > sizeof(cape->overlay), "%s-%s.dtbo",
-> > > > > > > > > > > +               snprintf(cape.overlay,
-> > > > > > > > > > > sizeof(cape.overlay), "%s-%s.dtbo",
-> > > > > > > > > > > process_cape_part_number, process_cape_version);
-> > > > > > > > > > > -               strlcpy(cape->name,
-> > > > > > > > > > > eeprom_header.board_name,
-> > > > > > > > > > > +               strlcpy(cape.name,
-> > > > > > > > > > > eeprom_header.board_name,
-> > > > > > > > > > > sizeof(eeprom_header.board_name));
-> > > > > > > > > > > -               strlcpy(cape->version,
-> > > > > > > > > > > process_cape_version,
-> > > > > > > > > > > +               strlcpy(cape.version,
-> > > > > > > > > > > process_cape_version, sizeof(process_cape_version));
-> > > > > > > > > > > -               strlcpy(cape->owner,
-> > > > > > > > > > > eeprom_header.manufacturer,
-> > > > > > > > > > > +               strlcpy(cape.owner,
-> > > > > > > > > > > eeprom_header.manufacturer,
-> > > > > > > > > > > sizeof(eeprom_header.manufacturer) + 1);
-> > > > > > > > > > > -               list_add_tail(&cape->list,
-> > > > > > > > > > > extension_list);
-> > > > > > > > > > > +               _cape =3D alist_add(extension_list, c=
-ape);
-> > > > > > > > > > > +               if (!_cape)
-> > > > > > > > > > > +                       return -ENOMEM;
-> > > > > > > > > > >                 num_capes++;
-> > > > > > > > > > >         }
-> > > > > > > > > > >         return num_capes;
-> > > > > > > > > > >  }
-> > > > > > > > > > > +
-> > > > > > > > > > > +U_BOOT_EXTENSION(cape, ti_extension_board_scan); =20
-> > > > > > > > > >
-> > > > > > > > > > Can the extension information go in the devicetree, so
-> > > > > > > > > > boards can select their scheme that way? =20
-> > > > > > > > >
-> > > > > > > > > Since we're scanning to see what extension boards are pre=
-sent
-> > > > > > > > > and so what device tree overlays to apply, I don't think =
-that
-> > > > > > > > > can work? =20
-> > > > > > > >
-> > > > > > > > My understanding is that the scanning process is
-> > > > > > > > board-specific. For example we would not want the Beagle
-> > > > > > > > mechanism to be compiled into rpi. The idea of scanning thi=
-ngs
-> > > > > > > > in a board-specific way seems like a driver to me. Note the=
-re
-> > > > > > > > is also the SYSINFO uclass which can do similar things.
-> > > > > > > >
-> > > > > > > > The overlays being applied here are additions to what should
-> > > > > > > > already be a fairly complete devicetree.
-> > > > > > > >
-> > > > > > > > If this isn't possible, then where is the information known=
-? =20
-> > > > > >
-> > > > > > Oh, so you would prefer to have something like the sysinfo driv=
-ers.
-> > > > > > =20
-> > > > > > > You're commenting on a patch to the TI specific code, that's =
-only
-> > > > > > > used by TI SoC using platforms that opt-in to the externally
-> > > > > > > defined EEPROM format for these "capes". Perhaps your feedback
-> > > > > > > would make more sense in some other part of the patch series?=
- But
-> > > > > > > even then, I'm not sure it makes sense? =20
-> > > > > >
-> > > > > > I am ok to move the cape scan detection code to a standalone dr=
-iver
-> > > > > > with a devicetree compatible match. Just wondering what are the
-> > > > > > advantages to use standalone drivers instead of having the code=
- in
-> > > > > > the specific board code as done in this series. =20
-> > > > >
-> > > > > I'm not sure there is an advantage. Especially since in theory we
-> > > > > could have more than one built in, and if
-> > > > > ti_extension_board_scan(...) doesn't find anything (because the
-> > > > > EEPROM is missing/wrong) we could still then call
-> > > > > rpi_extension_board_scan(...) and look for that formatted type of
-> > > > > EEPROM and then chipanddip_extension_board_scan(...) and look for
-> > > > > that and so forth. These extensions are nominally discoverable an=
-d so
-> > > > > don't need device tree compatibles, was some of the point of all =
-this
-> > > > > I would have sworn... =20
-> > > >
-> > > > I think, he means a driver for each type of custom extension board =
-scan
-> > > > functions (4 until now). The U-boot devicetree would be like this:
-> > > > extension_scan {
-> > > >       compatible =3D "bone-cape-scan";
-> > > > };
-> > > >
-> > > > We could avoid the build of several extension drivers using Kconfig
-> > > > choice symbol to select only one builtin.
-> > > >
-> > > > On my side I don't really have opinions, it is a matter of code des=
-ign.
-> > > > For now I don't see real argument to tilt the balance except to do
-> > > > something like sysinfo. We need more arguments from Simon. =20
-> > >
-> > > Yes, and needing to go back to modifying the device trees seems a step
-> > > backwards here, and something that will be hard to argue for upstream=
-. =20
-> >=20
-> > How do you define the mechanism to read the cape (etc.) information? =20
->=20
-> Well, a cape for the TI platforms has to have a properly formatted
-> EEPROM. I forget how the CHIP/DIP thing worked, but I believe it was
-> similar (since it originated in the same era). I also believe Pi is
-> similar as well.
+On 10/8/25 01:49, Tom Rini wrote:
+> On Wed, Sep 24, 2025 at 09:41:41AM +0200, Benjamin Hahn wrote:
+> 
+>> Add the option to load the bootscript with the tftp command (static IP)
+>> instead of the dhcp command (dynamic IP). For this a new function
+>> tftpb_run similar to dhcp_run, is needed. The selection of which command
+>> to use can be done with the ip_dyn environment variable, which can be
+>> set to yes or no. The ip_dyn variable was chosen as it is already in use
+>> on the imx platforms.
+>> Also edit the bootstd doc.
+>>
+>> Signed-off-by: Benjamin Hahn <B.Hahn@phytec.de>
+> 
+> OK, so this fails to build on qemu_arm64_lwip (and a few other lwip
+> targets) because tftpb_run was defined just for the legacy stack and not
+> lwIP too. But, and this is a question for Jerome too, why isn't dhcp_run
+> already in the common network file and instead written again in
+> net/lwip/dhcp.c?
 
-The DIP is detected reading the EEPROMs through the W1 bus.
-On the imx8mm-cl-iot-gate it is more complicated, it is done on probing
-devices on specific I2C addresses and reading GPIOs.
+No particular reason. This must have been an oversight when I introduced
+lwIP.
 
-> > Presumably it is using a device which is already in the devicetree? So
-> > it is the actual extension mechanism that is not present, perhaps?
-> >=20
-> > How does Linux model extensions? =20
->=20
-> Last I knew it doesn't and much discussion was had to arrive at that
-> point a decade or so ago. I believe FPGA stuff has been allowed since
-> then, but physical extensions not, and it's a bootloader problem. Which
-> is why we've been solving it for a while (it was more ad-hoc before Kory
-> did the current implementation in 2021).
+> And for both of you, can we perhaps have a common
+> function or functions? The lwIP one does handle tftp it looks like.
+> Thanks!
 
-Yes, Linux does not support loading external devicetree overlay, even in FP=
-GA
-subsystem. Even if the core of loading overlay is present for long ago, the=
- only
-real driver support has been done recently in PCI by Herv=C3=A9 for two PCI
-drivers:
-https://elixir.bootlin.com/linux/v6.17.1/source/drivers/misc/lan966x_pci.c
-https://elixir.bootlin.com/linux/v6.17.1/source/drivers/misc/rp1/rp1_pci.c
+Yeah. IMO, dhcp_run() should be common, but I'm not sure the NET_LWIP one
+is correct TBH. The comment "Assume DHCP was already performed" is
+suspicious and I'd rather use the NET one. That is, move dhcp_run() from
+cmd/net.c into net/net-common.c, discard dhcp_run() from net/lwip/dhcp.c,
+and see if that works as expected.
 
-Here the devicetree overlays are builtin in the drivers, the aim was to be =
-able
-to load the overlay from x86 boards.
-
-There is also a Linux discussion (with Herv=C3=A9 and Luca) on the generic =
-way to
-represent a connector in the devicetree, talking about a way to export
-devicetree symbols.
-After some thought, I don't think we should add something in the devicetree
-now, and wait for the final connector representation when it will land.
-Meanwhile we should stick to using board specific code.
-
-It it's ok for you I will send v2 keeping this design.
-
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Thanks,
+-- 
+Jerome
