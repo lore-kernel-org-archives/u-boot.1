@@ -4,82 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16A60CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 17:44:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4861CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 17:48:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4400A83927;
-	Wed,  8 Oct 2025 19:44:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C64583927;
+	Wed,  8 Oct 2025 19:48:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b5dCN2SK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cCdUyn0t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D898983929; Wed,  8 Oct 2025 19:44:27 +0200 (CEST)
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
- [IPv6:2607:f8b0:4864:20::52d])
+ id C06F583948; Wed,  8 Oct 2025 19:48:17 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8148F8391B
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 19:44:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B3AA8391B
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 19:48:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pg1-x52d.google.com with SMTP id
- 41be03b00d2f7-b523fb676efso24536a12.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 10:44:25 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-7bdfbc6ba5cso51686a34.1
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 10:48:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759945464; x=1760550264; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=G42N7sIPqLYmjlIGHvy3Z2vy02gS2pFQJTOdd+tGYks=;
- b=b5dCN2SKqUYRlwMA4kMziDN2NQjTWXEIi7Jyh8GtLcfl1UZxy8DwLA11bBuMEl2PTL
- Z6feUGtzixx54FvfKDDw6luhF2U5qlptFiRhmCMudzgezh4bfdB2EA3Dc9dWX39GctIp
- +j6Mv36lDeGdg1dF3LqYOBSBar5KMwnIlUkMuEC/KSqJ/SnQC63g1e7g3Cq79wyg8ix+
- NoaXbEXbnYKVTc6Om8+sltSfX8rXChvY7sjjQgJhdKSKVxtHNNwumFNvXXmJSEmp8SiI
- g8MtXB6N/RBIWrQMBJGePdPBZifqDg1sG53EgLZohxm9rqpTQc60uMNaWRDgj7rwEMRX
- 7UBw==
+ d=konsulko.com; s=google; t=1759945694; x=1760550494; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TB/KjrLsAKLYmOnf3lbNfN+A9Q/fjmNhqF4XS6DEQ1E=;
+ b=cCdUyn0tmH9QWx2g5z1fbcWDdu3Y/lFOnEX0cedxEP1aXUNPjgCAgzGAq5q3PUOL53
+ YmwUGkD232TXTdtMQynmnNL+3eHzB/nL+7/Zowf55mGD09jlZbb82VFM5ah1+P9ZW3H4
+ RPwdlsKr7LnKge99mr91afieq1yN61I81kyBc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759945464; x=1760550264;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=G42N7sIPqLYmjlIGHvy3Z2vy02gS2pFQJTOdd+tGYks=;
- b=lg0uxRJ7FNEJmflUVkRlwfak5AoVK4cnRNba4KaQDb2uuYO0BWeDqY4dYAGBHCRJ+k
- BRoQv52dLX6VSpiIRmrZmNGnEEEMuBT5ODeLTdA9OXnm9cREbrP4MhWiAL/yqpOGSpM0
- 4Or/4pYkmK26UGLXvBfFL5erUDM7stOb7eEKsU9lWvi2n3gNJvDSABK5MkmI8uBbNwcK
- AGs/Jma5tpipMJPTvgGd0QmP2Pg3IqHfx1FXdDlOsiRbKxqBX9EEwGjiJRYbIep84GM4
- +kmakicn/fhyYIiz528VKTc7BdvrlJ8oh2dInyZ85tXrEw4uaIItIrp/HFtkG8+25GE6
- hSPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV3b8mXMBMb8Lv+Lr7n5EffSzhyIlKaSbk1y7SwdIYBsY9sM6+fJkeF62xMNuHDg2wx7IOwqVE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxQyAwhUjkBBSitJ9oAnDzC8wNnT0gD3viHsHu52ceVj1SY7y9n
- UgICd2zNkqPQvLpxAeY11f60HWnMAu5NA2jDH4u/aGzyatsc9KELMU1UbqtqzGY9cbwnaA==
-X-Gm-Gg: ASbGnctmsez8gL6dml6aMN/7P3e/9533e73wtcrKxd4MYd59Vtfgi3soO7CVd9QEg4G
- ghVm5FUQCuSf2BKNakyVl2XJPeOsMT5F3S4nscNBh4HeR4jL8/ulVlaB0bgRCijI46TLDpHRhMv
- YhNir2AvwyRm8ITW9F3Ba6xprd6/3yXEvq75ZeNtzQevzGtLt2hGpb8yLIirP+pOGLXEQ1vywxh
- EQJA94KoR+ttVOFJDEk6cVgtQj8QV2lluiEsSIsDs+s3+NWJpJN+rF0iGH6e3weSqJwAhrHcGIZ
- utnewdtGM79qNezLh/AnTxYqqqdGjWr/oQ3VwWXKrgWWPOD8quCqUeG15o4YXmFsPWrd7aJs2Lu
- 1YYIp6Nb9DFDKbs8Zw9CkIyp3pKd1D+ZlDZIXchEABIVQXAdWDOnjGgRLh/PIzht0aZjpL3MkGP
- jVlXaxT4o=
-X-Google-Smtp-Source: AGHT+IEh4nyRuO8/CYxg0PSp+iOlqc9IzjsOx3qqwCBxEC+S0d/25SOBSbAoCJmkfuna5rPQSbZv8w==
-X-Received: by 2002:a17:902:dac2:b0:290:273f:1073 with SMTP id
- d9443c01a7336-290273f12a2mr62248625ad.20.1759945463754; 
- Wed, 08 Oct 2025 10:44:23 -0700 (PDT)
-Received: from localhost.localdomain ([185.213.82.31])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29034f36738sm3117545ad.87.2025.10.08.10.44.22
+ d=1e100.net; s=20230601; t=1759945694; x=1760550494;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TB/KjrLsAKLYmOnf3lbNfN+A9Q/fjmNhqF4XS6DEQ1E=;
+ b=aRQg+qR+vHqrgCkKjMsnB+YuXMiucstl90Vp5v9k/NMbAlm+OHbsqQkxgH35khB0eQ
+ Rc0Mh7pIZHsRxskbVmAvt9WVGPwt4MvjUnyNhicAEc7b68Q+Y0bovzQtb/wS5m4e08sm
+ Y98xeNVLniSGlSIMtE8Pp6Q0vl3X+ApLDz9kMzmTT2SnaXUw788w1fhwevlFlu0DZbZJ
+ hYZitqVW3Asost1zDmduC5nts2Jbg1TRrFfdnOendMnwbOp8pIyC/1eAuP1qTkfEGLRk
+ Byh/ABpSwBNbq5MJ8KIIgYqdsHbaHUBDRmZm5QJyvXkgprqpMvymkMf1JYbqHJWdChKW
+ zdRA==
+X-Gm-Message-State: AOJu0Yyz+xfcrMg1nLqNtev9f0SmGb7p+PvG5imnohqXE/hSJyxRTTnO
+ jnkrC5QhtKGk7Zi7dLyWsGcdRytSWZue2vfwTcWXA9Obbgcy4LedbdrZmTcV0dPMDTjBxem7fyD
+ 3GovQJaA=
+X-Gm-Gg: ASbGncuVS5wCIYLIj08ZOyTsWVQ3IcaluNDEc7nu7peTjqdwI+R1Ohx0EYy273rTyrN
+ DVHVitXJUqgsmruhUNNiz9dOJxNOSTUH4fFdxdd+YSTQwRwalp7DHRXXFw9VSFdmiB5oIfLTUmM
+ pKOC+vW6gJEArPxPq/YXCn9IJPl0Nmj8dSQWCY5F78eR0LCRlfEsXJvR7O2UL2N2hHsg3XL+33s
+ rP8CCq9Sw5B7sjefTTvuBSM3DlOT4QOyI3u1498R5Yj6r3h/6Fbh3P2QyanezMysVMLuQKEml2l
+ NKDx5WHZ+mdt6rq4LG6YfnawkkbkZ4oftM6NnuEyvzhDAfIJyWnGuzqPBnJHJnuAIS01UJt8MNd
+ T/s2kRX27H2k9O6rVbxRFmoFQSajXusAqswH2isGS5VPj1oel8BcqvCKppMslKuS6JM6AOvx2S1
+ oU/78q/yGDsCMdrvTb/YeM
+X-Google-Smtp-Source: AGHT+IEx/7aoBWNXlTubO03gO5X2n7q/aiehBpmWKQuiLfq+VNpDDWZrU8fAQZjEqbDmnhXV4TC8Qg==
+X-Received: by 2002:a05:6830:3591:b0:744:f0db:a1a6 with SMTP id
+ 46e09a7af769-7c0df7e9962mr2595820a34.34.1759945693807; 
+ Wed, 08 Oct 2025 10:48:13 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7bf435edd9csm6003390a34.34.2025.10.08.10.48.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 10:44:23 -0700 (PDT)
-From: Brian Sune <briansune@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1] cmd/dma: documentation
-Date: Thu,  9 Oct 2025 01:44:08 +0800
-Message-ID: <20251008174408.381-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.47.1.windows.1
+ Wed, 08 Oct 2025 10:48:13 -0700 (PDT)
+Date: Wed, 8 Oct 2025 11:48:11 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v2 02/17] boot: Try all bootmeths on the final partition
+Message-ID: <20251008174811.GF298503@bill-the-cat>
+References: <20251001212649.3263574-1-sjg@chromium.org>
+ <20251001212649.3263574-3-sjg@chromium.org>
+ <20251007181356.GO298503@bill-the-cat>
+ <CAFLszTieyj5_wTNCqsGryCses5a7DWpgVN9AUiJchmjPMViHTg@mail.gmail.com>
+ <20251008143415.GU298503@bill-the-cat>
+ <CAFLszTh=jWE0pefvXCpxvBZUtWWuJVem7f5HsYeJU1C7dkvq+g@mail.gmail.com>
+ <20251008145734.GX298503@bill-the-cat>
+ <CAFLszTjTOU1J=JPzDj-VV+mrewwAG4i04e22WQ+pKU-gND1pBA@mail.gmail.com>
+ <20251008162809.GB298503@bill-the-cat>
+ <CAFLszTjCqi8U7s8NgGq+ZpXf-Cqe3=fK2rLTY1UVMHqvkyrvDw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GvVkzW7SGVkuIzmP"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjCqi8U7s8NgGq+ZpXf-Cqe3=fK2rLTY1UVMHqvkyrvDw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,76 +106,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This explains how
-to use the new U-Boot command 'dmareset'.
 
-Signed-off-by: Brian Sune <briansune@gmail.com>
----
- doc/usage/cmd/dmareset.rst | 55 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
- create mode 100644 doc/usage/cmd/dmareset.rst
+--GvVkzW7SGVkuIzmP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/usage/cmd/dmareset.rst b/doc/usage/cmd/dmareset.rst
-new file mode 100644
-index 00000000000..cf48ad91c5c
---- /dev/null
-+++ b/doc/usage/cmd/dmareset.rst
-@@ -0,0 +1,55 @@
-+.. SPDX-License-Identifier: GPL-2.0+:
-+
-+.. index::
-+   single: dmareset (command)
-+
-+ command
-+===========
-+
-+Synopsis
-+--------
-+
-+::
-+
-+    Usage: dmareset <channel 0-7> [<channel 0-7> ...]
-+    dmareset - Release PL330 DMA channel reset(s) for SoCFPGA
-+
-+    Usage:
-+    dmareset <channel 0-7> [<channel 0-7> ...]  - release reset for one or more DMA channels
-+
-+dmareset channel
-+----------------
-+
-+Release the DMA channel reset *channel*.
-+
-+Parameters
-+----------
-+
-+channel
-+    DMA channel number
-+
-+Example
-+-------
-+
-+Release DMA channel(s)::
-+
-+    => dmareset 0
-+    PL330 DMA channel 0 reset released
-+    => dmareset 1
-+    PL330 DMA channel 1 reset released
-+    => dmareset 0 1
-+    PL330 DMA channel 0 reset released
-+    PL330 DMA channel 1 reset released
-+
-+
-+Configuration
-+-------------
-+
-+The dmareset command is only available if CONFIG_CMD_C5_PL330_DMA=y in
-+"Shell scripting commands".
-+
-+Return value
-+------------
-+
-+If the command succeds the return PL330 DMA channel $? reset released.
-+If an error occurs, the return Error: channel must be 0-7.
--- 
-2.47.1.windows.1
+On Wed, Oct 08, 2025 at 10:52:17AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 8 Oct 2025 at 10:28, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Oct 08, 2025 at 10:20:43AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 8 Oct 2025 at 08:57, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Oct 08, 2025 at 08:45:54AM -0600, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Wed, 8 Oct 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Wed, Oct 08, 2025 at 06:53:44AM -0600, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Tue, 7 Oct 2025 at 12:13, Tom Rini <trini@konsulko.com> wr=
+ote:
+> > > > > > > >
+> > > > > > > > On Wed, Oct 01, 2025 at 03:26:27PM -0600, Simon Glass wrote:
+> > > > > > > >
+> > > > > > > > > At present when one bootmeth fails on the final partition=
+, the next
+> > > > > > > > > bootmeth is not tried. Adjust the logic to go to the next=
+ bootmeth,
+> > > > > > > > > which is the more natural behaviour.
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > >
+> > > > > > > > My feedback on v1:
+> > > > > > > > https://lore.kernel.org/u-boot/20250331174144.GI93000@bill-=
+the-cat/
+> > > > > > > > was that we need to do a documentation change when doing a =
+behavior
+> > > > > > > > change. And I cannot recall if this change here is because =
+of reports of
+> > > > > > > > problems or not.
+> > > > > > >
+> > > > > > > This is a long time ago, but I think it might have been an
+> > > > > > > inconsistency that I found myself. Otherwise I would probably=
+ have
+> > > > > > > mentioned the person who reported it.
+> > > > > > >
+> > > > > > > The documentation already implies the logic in this patch, as=
+ I see
+> > > > > > > it. But please suggest any changes.
+> > > > > >
+> > > > > > OK, I guess it's because the commit message doesn't explain the=
+ bug
+> > > > > > clearly enough. Is this a correct description of the patch:
+> > > > > >
+> > > > > > At present, normally when one bootmeth fails on a partition, we=
+ move on
+> > > > > > and try the next bootmeth. However, this was not the case for t=
+he final
+> > > > > > partition due to a bug. Rework the logic so that all partitions=
+ are
+> > > > > > treated the same.
+> > > > >
+> > > > > We can certainly say that if you like. It is fair to say that the
+> > > > > algorithm is still being evolved as new things come up. Most of t=
+he
+> > > > > behaviour has been driven by new tests that I've written. The glo=
+bal
+> > > > > bootmeth is the biggest change since hunters were introduced, but=
+ I
+> > > > > suspect there will be more in future.
+> > > > >
+> > > > > I'm heading out later today but can probably send v3 series (with=
+ the
+> > > > > tweaks you've given) tomorrow. After that I'm not sure as I'm on
+> > > > > holiday for two weeks.
+> > > >
+> > > > Peter's feedback should be addressed too for a v3 (and not just set
+> > > > aside).
+> > >
+> > > Is that the email just received, or something from a different series
+> > > that I maybe missed from a while back?
+> >
+> > It was yesterday:
+> > https://lore.kernel.org/u-boot/CALeDE9Ovemog2AGN_Li8Ju12QKHOC0D30V2=3DK=
+G00f0KsQ5aPkg@mail.gmail.com/T/#m34f6e2c51fdfb275ba9930bfdc2ff349ee542b51
+>=20
+> OK, I replied. Would you like me to send the 5 separate patches he
+> mentions as a separate series?
 
+I think given what Andre said on the call (and that he'll test v2 to see
+if it addresses things) and what you said to Peter now, there's some
+misunderstandings of what the issues are still. So yes, splitting just
+those patches out to start with (and not reposting the rest) would be a
+good next step.
+
+--=20
+Tom
+
+--GvVkzW7SGVkuIzmP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOaj1AAKCRAr4qD1Cr/k
+CuePAPwL1DxC53QzeSc0Y4d9iqW+ptMc4FTnVn5NMpIkcTGTkwEAico0KXeNXj+X
+Q2Y+0KDGBjVPUlfj9/Pbzr6MiAb92gA=
+=jbuH
+-----END PGP SIGNATURE-----
+
+--GvVkzW7SGVkuIzmP--
