@@ -4,80 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F15B3CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 15:34:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E007FCCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 15:40:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79D7D83E42;
-	Wed,  8 Oct 2025 17:34:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C05BD83E42;
+	Wed,  8 Oct 2025 17:40:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VH2Niqga";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1493F83E8E; Wed,  8 Oct 2025 17:34:27 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 092A583A61
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 17:34:25 +0200 (CEST)
+ id 388D784014; Wed,  8 Oct 2025 17:40:01 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id DE9B083A61
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 17:39:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7a9c15464f7so2411087a34.2
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 08:34:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759937664; x=1760542464; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WH9w3wVpTLv0Y5vvWNZr/nFbOk0+rywuZIfOVXO5BZ0=;
- b=VH2NiqgazTvz1GfMqJiQvqVWl5I+uWHqivUyFHzxo0+c88IQX6zD0JmqNaTmZJg/1k
- qqQOs6VhS9IENpBILxQNjzCvpv3uzxDe2U1DiOWnU07nGvTVqmaTOgR4yVDpyYWAZXlp
- 8o3Bcag5Mr3dM+sfiY71ibfe+UvKQVqYoK0QEdtE+gpf+84GL7HWV6dJTiPYGpATAYXi
- TNzen7V+oPht2pRNf20cvSuLPZwDnWJ6KMtparSFtpUfTejNCtg//2Z5RvBZOb99x2ok
- CEmvlMXoJtb3BoEo9EX9u8Zl4B+hWHyUN//us/7gBN0BzPCF5oMGQu71IfZ2fdEE4Ebz
- cxGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759937664; x=1760542464;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WH9w3wVpTLv0Y5vvWNZr/nFbOk0+rywuZIfOVXO5BZ0=;
- b=o+X4VEI/ouFLnvDVFeDyj3knSAmU4Jz+HybBeisAL/qzdxh7l2EvVOf8O03AzsPMFB
- 865vpgOhNJXJnsU3JQE0OkNb0bN1BTq7eBkUgFZ02/P852rqlqfoazsbdciSyv0Hf21t
- WibqqPWiGIs/xRNy0odnjfP8b1CaNXaZqUb+ZlJrjF55SqOh77eqAGVWem3HP7tFh6Mb
- AbzTQrs2JRN6Jc0GhVDm8+LLHONTpmRproT22HYMrE8JnNPLFWDq40vFSGUxlAk/isZc
- ZjcGm4kPixgqrEICyDd/KBnsVCe8ECE0YXhw3edQkWiLbIOv5B6aj8G9BzsxiHc9HHfC
- ddeA==
-X-Gm-Message-State: AOJu0YwXtQcMHujED2DWJ2TsTVvsZKJFvQ4sAz3jdZqhz4nRrlfLDcIR
- U+u/DQ8mXpqIvjO2w9K+9b3M6W/Lz66KUEpsqRBkNACe8wXFa3S27EdMntBSsN3tUrAADZm0aB4
- viCofy7l6o4lJiBYsuujLtRxPklbdbmi+9Jnb74e/7w==
-X-Gm-Gg: ASbGncsWbvxWyfjmzxddyfbMedd+VVdIzB5U8U2zAuFkRz1sqnxQ4nq/lX2vsKRuW/G
- 0VKEtiBnhEC6NoP2osaM3NX4Ah8zcxskh4wmRUseD1r/1hJQa7fBunskLPAML0QPS2ZMXwK5acy
- WlgiGUBmf39y9+QyB3T+nzO6/d4i1P2mIuGsX/uySMOU6Hd0GqjnvRT2Cg5Qqm85e/LJLLnWxNg
- ViesAWC7BG7m8TvKu2O1JVr8bToTEc=
-X-Google-Smtp-Source: AGHT+IGslUWSJ+f8LoyqL8jS9rTq8p1Ld4vjaZBvbzEZVW8EqBhnsUGlWt6quzj+XsoVl6DFEjsFTTdSCnzAWChAOBc=
-X-Received: by 2002:a05:6830:2802:b0:73e:7f48:e6bc with SMTP id
- 46e09a7af769-7c0df7163f2mr2456342a34.2.1759937663774; Wed, 08 Oct 2025
- 08:34:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0C32A1CE0;
+ Wed,  8 Oct 2025 08:39:50 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C0AE43F66E;
+ Wed,  8 Oct 2025 08:39:56 -0700 (PDT)
+Date: Wed, 8 Oct 2025 16:39:54 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Emil Renner Berthing
+ <emil.renner.berthing@canonical.com>, Tom Rini <trini@konsulko.com>, Cody
+ Schuffelen <schuffelen@google.com>, Dmitrii Merkurev
+ <dimorinny@google.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Debbie Horsfall  <Debbie.Horsfall@arm.com>
+Subject: Re: [PATCH v2 1/1] virtio: blk: support block sizes exceeding 512
+ bytes
+Message-ID: <20251008163954.6da0f778@donnerap.manchester.arm.com>
+In-Reply-To: <20250830203954.25775-1-heinrich.schuchardt@canonical.com>
+References: <20250830203954.25775-1-heinrich.schuchardt@canonical.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-References: <20250913163913.395-1-briansune@gmail.com>
- <20250923181254.830-1-briansune@gmail.com>
- <175989732707.1794629.12743192393543638744.b4-ty@konsulko.com>
-In-Reply-To: <175989732707.1794629.12743192393543638744.b4-ty@konsulko.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Wed, 8 Oct 2025 23:34:11 +0800
-X-Gm-Features: AS18NWAyEHARK_oJM-f3E3oVqAEVvMcNxzjyiRHgDK4OKj-dMUysbJWXiczJOlo
-Message-ID: <CAN7C2SCedVQ5Z_5eAeC51M9zWKyqb_kkUcubzvJMSLiBy3rOhA@mail.gmail.com>
-Subject: Re: [PATCH v2] cmd/dma: implement dmareset command
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, quentin.schulz@cherry.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,14 +61,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B410=E6=9C=888=E6=97=A5 =
-=E9=80=B1=E4=B8=89 =E4=B8=8B=E5=8D=8812:22=E5=AF=AB=E9=81=93=EF=BC=9A
+On Sat, 30 Aug 2025 22:39:54 +0200
+Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
 
-> [1/1] cmd/dma: implement dmareset command
->       commit: 92dcb3ad5d98f494b2448a7345e1cb7eefa50278
-> --
-> Tom
+Hi Heinrich,
 
-May I ask do there are any documentation to show how to run this
-command on boot.scr
-Or possible during U-Boot setup?
+> QEMU allows to specify the logical block size via parameter
+> logical_block_size of a virtio-blk-device.
+> 
+> The communication channel via virtqueues remains based on 512 byte blocks
+> even if the logical_block_size is larger.
+> 
+> Consider the logical block size in the block device driver.
+> 
+> Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+> 	remove superfluous include linux/err.h
+> ---
+>  drivers/virtio/virtio_blk.c | 25 ++++++++++++++++++++++---
+>  1 file changed, 22 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+> index 2f999fc8bbe..4224e3c17f4 100644
+> --- a/drivers/virtio/virtio_blk.c
+> +++ b/drivers/virtio/virtio_blk.c
+> @@ -12,10 +12,17 @@
+>  #include <virtio_types.h>
+>  #include <virtio.h>
+>  #include <virtio_ring.h>
+> +#include <linux/log2.h>
+>  #include "virtio_blk.h"
+>  
+> +/**
+> + * struct virtio_blk_priv - private date for virtio block device
+> + */
+>  struct virtio_blk_priv {
+> +	/** @virtqueue - virtqueue to process */
+>  	struct virtqueue *vq;
+> +	/** @blksz_shift - log2 of block size divided by 512 */
+> +	u32 blksz_shift;
+>  };
+>  
+>  static const u32 feature[] = {
+> @@ -71,6 +78,8 @@ static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+>  	u8 status;
+>  	int ret;
+>  
+> +	sector <<= priv->blksz_shift;
+> +	blkcnt <<= priv->blksz_shift;
+>  	virtio_blk_init_header_sg(dev, sector, type, &out_hdr, &hdr_sg);
+>  	sgs[num_out++] = &hdr_sg;
+>  
+> @@ -109,7 +118,7 @@ static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+>  		;
+>  	log_debug("done\n");
+>  
+> -	return status == VIRTIO_BLK_S_OK ? blkcnt : -EIO;
+> +	return status == VIRTIO_BLK_S_OK ? blkcnt >> priv->blksz_shift : -EIO;
+>  }
+>  
+>  static ulong virtio_blk_read(struct udevice *dev, lbaint_t start,
+> @@ -177,15 +186,25 @@ static int virtio_blk_probe(struct udevice *dev)
+>  	struct blk_desc *desc = dev_get_uclass_plat(dev);
+>  	u64 cap;
+>  	int ret;
+> +	u32 blk_size;
+>  
+>  	ret = virtio_find_vqs(dev, 1, &priv->vq);
+>  	if (ret)
+>  		return ret;
+>  
+> -	desc->blksz = 512;
+> -	desc->log2blksz = 9;
+>  	virtio_cread(dev, struct virtio_blk_config, capacity, &cap);
+>  	desc->lba = cap;
+> +	if (!virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {
+
+Is that actually the right condition check? I would assume that we only
+query the blk_size field if the feature bit is *set*, not when it's
+cleared?
+We see a failure (virtio block device not registering), because blk_size is
+0 on the Arm FVP fast model, which is fine I think because the feature bit
+is clear as well.
+
+Cheers,
+Andre
+
+> +		virtio_cread(dev, struct virtio_blk_config, blk_size, &blk_size);
+> +		desc->blksz = blk_size;
+> +		if (!is_power_of_2(blk_size) || desc->blksz < 512)
+> +			return -EIO;
+> +	} else {
+> +		desc->blksz = 512;
+> +	}
+> +	desc->log2blksz = LOG2(desc->blksz);
+> +	priv->blksz_shift = desc->log2blksz - 9;
+> +	desc->lba >>= priv->blksz_shift;
+>  
+>  	return 0;
+>  }
+
