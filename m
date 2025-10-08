@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A12DCCA472
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:00:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED4F9CCA472
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:00:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AF5B83E21;
+	by phobos.denx.de (Postfix) with ESMTP id DF9F383E8A;
 	Wed,  8 Oct 2025 15:00:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=risingedge.co.za
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=risingedge.co.za header.i=@risingedge.co.za header.b="QxYXChzM";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=risingedge.co.za header.i=@risingedge.co.za header.b="OGFpXlTI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CB8D838E7; Wed,  8 Oct 2025 12:19:39 +0200 (CEST)
-Received: from outgoing8.flk.host-h.net (outgoing8.flk.host-h.net
- [188.40.212.2])
+ id 9DF8B8394E; Wed,  8 Oct 2025 13:45:01 +0200 (CEST)
+Received: from outgoing12.flk.host-h.net (outgoing12.flk.host-h.net
+ [188.40.208.242])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 200A3838E7
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 12:19:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 33AE783935
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 13:44:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=risingedge.co.za
 Authentication-Results: phobos.denx.de;
@@ -29,29 +29,29 @@ Authentication-Results: phobos.denx.de;
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=risingedge.co.za; s=xneelo; h=Content-Transfer-Encoding:MIME-Version:
  Message-Id:Date:Subject:Cc:To:From:reply-to:sender:bcc:in-reply-to:references
- :content-type; bh=lJW9XoxTJUBlqBnBnkNg4tAonwaKIhpuJuVi0b3ITow=; b=QxYXChzMXtr
- YpHFFAHqImLmWTKTjyGQrlcWMWI8Nluanam+T12Ilawlb6IryomDW7t4K3dP8SUtcMaC7mZQTq+T9
- 7nk9e9pCsp5PQkWueNgy7YQ9YnUTb3NyEOvGKsmStQyWbng+rCUTBI/00RBsE4TKgJh6xj6eWiz5M
- AFYI9h3zwvE35nTV+KxgPGtnmcS6Kpg+5Vxy0/IHS6QTU7Ni6XMpEkQtjytzk8ASr7ywl5kwpOR8c
- pX+UFnZEzI7f1QCo3TQI1qr/5P7NQJQh9aDA2fyhqEi8Dj5+85UaISq3ynHaJ8SMst073CjS3NeRo
- XhShbyNuWqBU16iF+Q6ts7w==;
+ :content-type; bh=e00ObByHLFiZMsbSZ2AGGMuPe3WDNHqipUfTla+dxHQ=; b=OGFpXlTIAFN
+ IPrubna6wVzcYbkU/lsojDZMR+Du/gbvPT+Ei0+xUaBqhmzccb4RjjWtqEvhXr63q79noLizeY68L
+ 2SXfGVX3mh3HCAsmgrFdNAjVp3hfI6smrd2wOeVpqL8l1SIRecZkKygMTpVCpeMODvRbSUUxI/s0e
+ lYS24evR2CO3WPijyRdjmqWRYFPnOVZ7ts0DSyHXgQSmYFBRRloPVm9LkH4UShDCNXoMGIlQeyK3o
+ Uu/H7etpAvSLHMYUjFVwT2FhyHCicbNFe4Lx3e29KSljw5KnAyCRZswXU5eS8HH+p4xZnS2r28BXG
+ yoDHG8srSLkfTjID9f5Nahg==;
 Received: from www31.flk1.host-h.net ([188.40.1.173])
- by antispam1-flk1.host-h.net with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ by antispam3-flk1.host-h.net with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
  (Exim 4.94.2) (envelope-from <justin.swartz@risingedge.co.za>)
- id 1v6RL6-006nRI-5c; Wed, 08 Oct 2025 12:19:35 +0200
-Received: from [41.144.192.111] (helo=localhost.localdomain)
+ id 1v6SbH-005FoM-L1; Wed, 08 Oct 2025 13:44:58 +0200
+Received: from [41.144.160.48] (helo=localhost.localdomain)
  by www31.flk1.host-h.net with esmtpsa
  (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
  (Exim 4.98) (envelope-from <justin.swartz@risingedge.co.za>)
- id 1v6RGZ-0000000E6xV-2XVf; Wed, 08 Oct 2025 12:19:28 +0200
+ id 1v6SbF-0000000F7wP-29GN; Wed, 08 Oct 2025 13:44:54 +0200
 From: Justin Swartz <justin.swartz@risingedge.co.za>
 To: u-boot@lists.denx.de
-Cc: Anshul Dalal <anshuld@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>,
+Cc: Heiko Schocher <hs@nabladev.com>, Anshul Dalal <anshuld@ti.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Tom Rini <trini@konsulko.com>,
  Justin Swartz <justin.swartz@risingedge.co.za>
-Subject: [PATCH v2] i2c: add support for the MT7621 I2C controller
-Date: Wed,  8 Oct 2025 12:22:56 +0200
-Message-Id: <20251008102256.26660-1-justin.swartz@risingedge.co.za>
+Subject: [PATCH v3] i2c: add support for the MT7621 I2C controller
+Date: Wed,  8 Oct 2025 13:48:31 +0200
+Message-Id: <20251008114831.30124-1-justin.swartz@risingedge.co.za>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Authenticated-Sender: justin.swartz@risingedge.co.za
@@ -61,22 +61,22 @@ X-SpamExperts-Username:
 Authentication-Results: host-h.net;
  auth=pass (login) smtp.auth=@risingedge.co.za
 X-SpamExperts-Outgoing-Class: ham
-X-SpamExperts-Outgoing-Evidence: SB/global_tokens (4.44668172378e-06)
+X-SpamExperts-Outgoing-Evidence: SB/global_tokens (5.89597630885e-06)
 X-Recommended-Action: accept
-X-Filter-ID: 9kzQTOBWQUFZTohSKvQbgI7ZDo5ubYELi59AwcWUnuV9prUnyDqHpVKSlhi1DZQO7lrDxpXGdikb
- kyoq+k04iyu2SmbhJN1U9FKs8X3+Nt0Io1idSgCc/506nnISAkPANvJkKIxakGlbxi+ggiqZlxxH
- xN7wu8yGEPLNcyeaFTi/bHMCl2gwTy01hqk0/dS1BMmyNbDn7R5kilAhwr3KtFb3AgNUGvQRnUF+
- Lycvfx+SVUSshQka8VpEeqGYZUq97tUTMtsYz/+qpxn6s5UUBohSnw9YyoGHx/ukuag1WKDVi/kr
- 0Xu6IEz8fH7EgizlKVFCXTS2zVmMeFsPQMyMp5ya4EnB7foI3WDAWEIqQR42kI22V3+6/8VpCe4k
+X-Filter-ID: 9kzQTOBWQUFZTohSKvQbgI7ZDo5ubYELi59AwcWUnuVO+/t2aplQ/j6bcZLk1YO/DS+biyXskYEe
+ g+7C7AhaqSu2SmbhJN1U9FKs8X3+Nt0Io1idSgCc/506nnISAkPANvJkKIxakGlbxi+ggiqZlxxH
+ xN7wu8yGEPLNcyeaFTh/vy7ZMxmR5JFl/EkmLZocBMmyNbDn7R5kilAhwr3KtFb3AgNUGvQRnUF+
+ Lycvfx+SVUSshQka8VpEeqGYZUq97tUTMtsYz/+qpxn6s5UUBohSnw9YyoGHx/ukuag1WKBLWDaO
+ GAC1PCRtpOZuVuRfKVFCXTS2zVmMeFsPQMyMp5ya4EnB7foI3WDAWEIqQR42kI22V3+6/8VpCe4k
  l4rBoCO4qTTFh+YfFhnsJKW+4WQB2ErbcicDbPONrkjWuIPYD7NLT3TvBNLPf1+s3ESe+GGIqRjk
- Mz2jvqlQOSgIbcgz0HNfKMPpYLUBoJLBZM6XMij7O2V2L0AboX+EfdzJxBXYqR8rw+1Lw2kJ3fBT
- Bm1pdOPvUXsumy9qz+DR+7I8b2mWzUfpIVeP3RFAuga1ETjipb+IvxQgrAqXkBPgtcQOtAzbEJD0
+ Mz2jvqlQOSgIbcgz0HNfKMPpYLUBoJLBZM5osPEcFdvDChHGzzG/2DZGDdAMPPDs+G2TVWh+OZy2
+ ibhxAXyvz/jhe3JVoldbA7RfTngKTu0U+LVXf0fkZGeo4+IxnD5RsHWGrebOgOiDgcQOtAzbEJD0
  J5zvvuxXWLDMTEHJxkHcn0U0sXllDChUra2jSUrHzCqLcnGnLvUPu7wqyT5p50x81ZKcmzCu2U1d
  /tz2WjctgTanzFRPpFjRYNkfT0SxaDnH630jsYUOVUv7R0WnMlj2BhV1G+dYLSTqBbQM0GOipkUx
- RQWgWa6jkNehtT2zCrwYY6YZboEdi/FhdlXsghxuloMf8aJT8fK+kKfVj3YYOrw1iCU2piUSRO8Y
- 096BVb+dchj6z3inj0Mh+NmK+RqMc4MO2aPNxnbakeChh8nToxk3U+z5OEESJwDPixZDKY7ycHlm
+ RQWgWa6jkNehtT2zCrwYY6YZboEdi/FhdlXsghxuloMf8aJT8fLQSjborGK0rXXtnSI4oloARO8Y
+ 096BVb+dchj6z3inj26aqKX06/04e7VINDS1/fzakeChh8nToxk3U+z5OEESJwDPixZDKY7ycHlm
  7nihPMgpHN4FHvYgngGaSQ1NkK7bXnvc/QlVk8IPjT4q0lwnsdiFdDCFcQsgFkL4G7F2AlPSj1go
- c+XFPZKuv0QbzokEOnyRi/EgzniLHBfogVk6CjObjnnrBfulPsX9liHTMtkLaDaJT89+vCAYuaCz
+ c+XFPZKuv0Qbzokipn8kQYraeLCIzEI5lwgbwLqKvBprUY79ku1ipstxpdkLaDaJT89+vCAYuaCz
  Je8DDnHSBTNmoGeKtgWrdSq2FQJqvyAO4gma0vZxb4FVmgv8/JVJ7b8MMWrmfscG4pYsY7Ygu1Tb
  2gZ9zMPJUYvOLD/L1mopYllOtY5g+EzINDbI9GTcfUTgA1F03UGU8jn2zP2Q1+bSzsrlZqvHCJlO
  /mio5g74qRE3On1333kxNg==
@@ -139,6 +139,17 @@ Signed-off-by: Justin Swartz <justin.swartz@risingedge.co.za>
 ---
 
 Notes:
+    [PATCH v3]
+    
+    - Add an empty line between variable declaration and code to
+      functions that did not have this separation.
+    
+    - Condense multi-line closing brace / else / opening brace
+      sequences into single lines consisting of "} else {" instead.
+    
+    - Relocate mt7621_i2c_check_ack()'s I2C_M_IGNORE_NAK flag check
+      to just after the last variable declaration.
+    
     [PATCH v2]
     
     - Add "REG_" prefix to I2C (Serial Master 0) register definitions.
@@ -153,8 +164,8 @@ Notes:
 
  drivers/i2c/Kconfig      |   7 +
  drivers/i2c/Makefile     |   1 +
- drivers/i2c/mt7621_i2c.c | 372 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 380 insertions(+)
+ drivers/i2c/mt7621_i2c.c | 375 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 383 insertions(+)
  create mode 100644 drivers/i2c/mt7621_i2c.c
 
 diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
@@ -189,10 +200,10 @@ index 42326db85f6..5fe30d0df4f 100644
  obj-$(CONFIG_SYS_I2C_OCORES) += ocores_i2c.o
 diff --git a/drivers/i2c/mt7621_i2c.c b/drivers/i2c/mt7621_i2c.c
 new file mode 100644
-index 00000000000..292e582fd8d
+index 00000000000..03c7e4c2b02
 --- /dev/null
 +++ b/drivers/i2c/mt7621_i2c.c
-@@ -0,0 +1,372 @@
+@@ -0,0 +1,375 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
 + * U-Boot driver for the MediaTek MT7621 I2C controller.
@@ -296,6 +307,7 @@ index 00000000000..292e582fd8d
 +static int mt7621_i2c_master_start(struct udevice *dev)
 +{
 +	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++
 +	writel(SM0CTL1_START | SM0CTL1_TRI, priv->base + REG_SM0CTL1);
 +	return mt7621_i2c_wait_idle(dev);
 +}
@@ -303,6 +315,7 @@ index 00000000000..292e582fd8d
 +static int mt7621_i2c_master_stop(struct udevice *dev)
 +{
 +	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++
 +	writel(SM0CTL1_STOP | SM0CTL1_TRI, priv->base + REG_SM0CTL1);
 +	return mt7621_i2c_wait_idle(dev);
 +}
@@ -310,30 +323,34 @@ index 00000000000..292e582fd8d
 +static int mt7621_i2c_master_cmd(struct udevice *dev, u32 cmd, int len)
 +{
 +	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++
 +	writel(cmd | SM0CTL1_TRI | SM0CTL1_PGLEN(len),
 +	       priv->base + REG_SM0CTL1);
++
 +	return mt7621_i2c_wait_idle(dev);
 +}
 +
 +static int mt7621_i2c_7bit_address(struct udevice *dev, struct i2c_msg *msg)
 +{
 +	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	u32 addr = msg->addr << 1;
 +
-+	u32 addr = (msg->addr << 1) | ((msg->flags & I2C_M_RD) ? 1 : 0);
++	if (msg->flags & I2C_M_RD)
++		addr |= 1;
++
 +	writel(addr, priv->base + REG_SM0D0);
-+
 +	return mt7621_i2c_master_cmd(dev, SM0CTL1_WRITE, 1);
 +}
 +
 +static int mt7621_i2c_10bit_address(struct udevice *dev, struct i2c_msg *msg)
 +{
 +	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
-+
 +	u16 addr = 0xf0 | ((msg->addr >> 7) & 0x06) | (msg->addr & 0xff) << 8;
++
 +	if (msg->flags & I2C_M_RD)
 +		addr |= 1;
-+	writel(addr, priv->base + REG_SM0D0);
 +
++	writel(addr, priv->base + REG_SM0D0);
 +	return mt7621_i2c_master_cmd(dev, SM0CTL1_WRITE, 2);
 +}
 +
@@ -345,9 +362,7 @@ index 00000000000..292e582fd8d
 +		ret = mt7621_i2c_10bit_address(dev, msg);
 +		if (ret)
 +			return ret;
-+	}
-+
-+	else {
++	} else {
 +		ret = mt7621_i2c_7bit_address(dev, msg);
 +		if (ret)
 +			return ret;
@@ -360,13 +375,12 @@ index 00000000000..292e582fd8d
 +				u32 length)
 +{
 +	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
-+
-+	if (msg->flags & I2C_M_IGNORE_NAK)
-+		return 0;
-+
 +	u32 status = *(volatile u32 *)(priv->base + REG_SM0CTL1);
 +	u32 expected = GENMASK(length - 1, 0);
 +	u32 mask = (expected << 16) & SM0CTL1_ACK_MASK;
++
++	if (msg->flags & I2C_M_IGNORE_NAK)
++		return 0;
 +	
 +	if ((status & mask) != mask)
 +		return -ENXIO;
@@ -457,8 +471,7 @@ index 00000000000..292e582fd8d
 +			ret = mt7621_i2c_master_read(dev, msg);
 +			if (ret)
 +				goto reset;
-+		}
-+		else {
++		} else {
 +			ret = mt7621_i2c_master_write(dev, msg);
 +			if (ret)
 +				goto reset;
@@ -512,6 +525,7 @@ index 00000000000..292e582fd8d
 +static int mt7621_i2c_of_to_plat(struct udevice *dev)
 +{
 +	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++
 +	priv->base = dev_remap_addr(dev);
 +	return 0;
 +}
