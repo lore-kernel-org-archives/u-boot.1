@@ -4,91 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6159BCAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 14:40:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63B0DCCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 14:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A68DF839DE;
-	Wed,  8 Oct 2025 16:40:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C9B6B839DE;
+	Wed,  8 Oct 2025 16:46:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lx1OE0rU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j6dMtZYR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A141983EAB; Wed,  8 Oct 2025 16:40:34 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id A25A483C91; Wed,  8 Oct 2025 16:46:08 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E157839DD
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 16:40:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69E9D839DD
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 16:46:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-634b774f135so13268169a12.2
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 07:40:32 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-b48d8deafaeso23293166b.1
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 07:46:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759934432; x=1760539232; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1759934766; x=1760539566; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y1sGjfui8e7kYmtcTtolq8+muSRDD8t4/+dSHrvHK4k=;
- b=lx1OE0rU/siMBScc0vK3jLJkOg7pQELQ+5dJrpdVyIJKK+7k3NNWiFa6T7yrCe2IYg
- Mf1lnaChk7lg9ilS5kWCECaThRKlZCyN3r+Vr+wsdVVs1teAOR5cCySY8dQQ/4s20vOM
- R1fg3gqS32zSyhdxlxNU5+Wmro/24B/m8cyFk=
+ bh=ZNFADBG0MvAC7ySoWOCyi6peZLi9cTCG70T+hsH7Qts=;
+ b=j6dMtZYRTH++qHK8wD6s9Q7j+p51K0yGGhT6+7a8XnHXR7OwMRyeCcUNybO6CNJGMg
+ +KIFA1jAsxKavgMq4cY9AR0Tlj+FdqOFXyOfn9xPY6wA6E5tMlMxGnYCVHDMBvn3kGqy
+ i9HKQ96J6CK5ArsY/PDR8/BzgSXiZrRfRlMfs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759934432; x=1760539232;
+ d=1e100.net; s=20230601; t=1759934766; x=1760539566;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y1sGjfui8e7kYmtcTtolq8+muSRDD8t4/+dSHrvHK4k=;
- b=h4QKXKpYnWf21PmdTvrl3vszZozlqTPbBvcKJmUWPmcFV25ZyGgL+nVUf6SgRNCDZ0
- 5WELdv0B61HRucxIVfkPXqMXIFV2lhaoTZZx9sYRjDQOTSTKQWcYLZGJVu995kL4tM47
- kQV2wfN6DjeyRdLGlSGCt9zvzr6wDEnl1B1lOXReMlxgZNk/IyjA4TBRVnnaps7YEipp
- moUFGkimJoMLHdDjk/n08vL0XgLR23gC0vSIpnvR9tYvkEqeabRpK4a/kzM45g1GLWa0
- W8GbvcFWBSeP1Utn7cDsmyN2NFyjTGVSe/lPCPGITBHcubHTtrVWrFbLDxhNH0DKWRb7
- nJsw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX+IUu67uYZQuYNJhmBKhfnXJfYG0Je0mq6o4TVvNVflSXMRC+qMbyAMPdkZc+/xbUkWW2+MXo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxtf5tIJR3jGCb7Cbx8jamLQT+5l4jNP5l0ZjgUz8g+LLnQZX9U
- hD4iqCzrKj9pm11Q7TiyCH95P+5rhx1tpNdBlokKMvjwKUW4mMOaTS1Me1lIIdUxQewnK1fRHDK
- E47akByoGeR5nblRcGDFlHNNNH1MTXOaid0xT5yai
-X-Gm-Gg: ASbGncuIfSqLS082JhnlNoQx5HYokHa72tGwEnOT/G5Co68ZwP98XyT2g0tyR0Iv7Yr
- Z06oEY/oRo/1LusOMh7qYBY/QSocbKCLeQIEIh5eJVH6mvK8TnF8NsEpW92MpORvYtSPbasNN5a
- xgUGt8Cjoq9eruwVrEPZcjn8Qb8AX5jOTa4BJs6bEHM852llXz6+JJrV/G7OK9dHU5AH+iJHewh
- eVsZLLdj1XEuW4fOt+gr9uIKcgLhw==
-X-Google-Smtp-Source: AGHT+IESEy5z3TGxg569yALxDDZ9h5lgpOsdXPkqRwlw7nbOtDtak0ZafN0y0n27wzjE/mQr1a7tLKWpQspMZH+rj54=
-X-Received: by 2002:a05:6402:210a:b0:636:7c68:6e31 with SMTP id
- 4fb4d7f45d1cf-639d5b43a4amr3178726a12.4.1759934431517; Wed, 08 Oct 2025
- 07:40:31 -0700 (PDT)
+ bh=ZNFADBG0MvAC7ySoWOCyi6peZLi9cTCG70T+hsH7Qts=;
+ b=C1iBaR6TkLAIn0JRPK7tWPKzcylS+IW1pKKmM9x5XaOnmcGncEjHg6MtOYeeokyVz+
+ HX3gtuSiJelxu1CGaGY+NOiOZL37iy7ByCR3J3hQ+brMFUEgdMowyb5EvWqxVc5u4Imb
+ emvCcF17+Wgad8QYIwDiEFE38zbSsvEeMwwV3Nexl8lhwQIfw5RXihurSRDoUL7kJ/WN
+ pr+nsgWcPvi6Qo46PeFttgpOcc0StrTbVQHIDdZWrIh35tkCA8QUzbjnWLEg3Mhk9G6y
+ 012+R9PdOnO9kkduI9eXitYe3h05w1/PV2lw3FFMzFeRed3qQgXYphgsJGzx6A0XAM5F
+ 5Hdw==
+X-Gm-Message-State: AOJu0YwWXAUW4P6zYNODLzUpSwNlNyfGSvwyHrW2ZW6qalxR5PQ3Pmak
+ V33wRy323Vc003cfoIDBbnVEbiTyto2giyNBeoZPS7w7d+FePSebMaYG5L1KEGHHyuf2MF979NI
+ hOqylavxaK1aMGnEAEAeAolCW8iPailQSC71qBulNtHJkbmVADe0=
+X-Gm-Gg: ASbGncu6U3aiykjeIddiU11N2IBV6z0xS/JIS1efZUm0ktisO47PVGObr/kZiKOs3Gx
+ LwxYrEz/uiGwbeu4xIZVmFdXWQ59tXJa1jSj/VL9E36altOGcPXZOT+4NzXGxEw+ksL+taogL2Z
+ BG7RvNhRUsI52mMk32xkv2xxhtJRSL7CkYqUr4dSFLKhHD5ZLTGcHNv1L9QRhQCFE9lO2h4E4n/
+ Obm3c//IYOu2yk5Xq1BSnIwrinfXQ==
+X-Google-Smtp-Source: AGHT+IHPImVwX8dwXyhRnAqvaMx0ozQ27KjNbE5arZihGAfRBoo9lstJigNZcjUExhziC3ey6KGGYaeswd8NqsAgKUU=
+X-Received: by 2002:a17:907:980f:b0:b42:9840:eac5 with SMTP id
+ a640c23a62f3a-b50acb0e645mr416567266b.61.1759934765804; Wed, 08 Oct 2025
+ 07:46:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251006214428.GD298503@bill-the-cat>
- <CAFLszTgLd7gHoU04QKAgHWNFQz_CS_XfeJCBkn58fu3UxUyurQ@mail.gmail.com>
- <20251006234240.GF298503@bill-the-cat>
- <20251007113213.75efa663@kmaincent-XPS-13-7390>
- <20251007141148.GJ298503@bill-the-cat>
- <20251007182938.368bf435@kmaincent-XPS-13-7390>
- <20251007164207.GL298503@bill-the-cat>
- <CAFLszThB=o9Wq1K4XP1K_Oj+6db2ZuzK8kLw7KyGqCVqDBX7Gg@mail.gmail.com>
- <20251007201336.GQ298503@bill-the-cat>
- <CAFLszTgX+BnH=wVjVb_5e0TifUP_At37Pz5500aPgsMb5bgRoA@mail.gmail.com>
- <20251008140905.GS298503@bill-the-cat>
-In-Reply-To: <20251008140905.GS298503@bill-the-cat>
+References: <20251001212649.3263574-1-sjg@chromium.org>
+ <20251001212649.3263574-3-sjg@chromium.org>
+ <20251007181356.GO298503@bill-the-cat>
+ <CAFLszTieyj5_wTNCqsGryCses5a7DWpgVN9AUiJchmjPMViHTg@mail.gmail.com>
+ <20251008143415.GU298503@bill-the-cat>
+In-Reply-To: <20251008143415.GU298503@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Oct 2025 08:40:19 -0600
-X-Gm-Features: AS18NWCj10LtKI7pKKX54zLtkENfl43zPOKjV5ErsfkP37Nco92Vl9-ElJNEdRY
-Message-ID: <CAFLszTgcnt-BkEppub389aE8vu3wgpWk+nO2opfaaAv1cJ85jw@mail.gmail.com>
-Subject: Re: [PATCH 06/16] board: ti: Convert cape detection to use UCLASS
- framework
+Date: Wed, 8 Oct 2025 08:45:54 -0600
+X-Gm-Features: AS18NWCVojinUSYB-cB0Err1ZsmO5jr9tLldDBwiE946HgZ9PWq2ZJBo3O2smQc
+Message-ID: <CAFLszTh=jWE0pefvXCpxvBZUtWWuJVem7f5HsYeJU1C7dkvq+g@mail.gmail.com>
+Subject: Re: [PATCH v2 02/17] boot: Try all bootmeths on the final partition
 To: Tom Rini <trini@konsulko.com>
-Cc: Kory Maincent <kory.maincent@bootlin.com>,
- Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
- Mario Six <mario.six@gdsys.cc>, Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,185 +92,51 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 8 Oct 2025 at 08:09, Tom Rini <trini@konsulko.com> wrote:
+On Wed, 8 Oct 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Wed, Oct 08, 2025 at 06:54:09AM -0600, Simon Glass wrote:
+> On Wed, Oct 08, 2025 at 06:53:44AM -0600, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, 7 Oct 2025 at 14:13, Tom Rini <trini@konsulko.com> wrote:
+> > On Tue, 7 Oct 2025 at 12:13, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Tue, Oct 07, 2025 at 02:02:53PM -0600, Simon Glass wrote:
-> > > > Hi,
+> > > On Wed, Oct 01, 2025 at 03:26:27PM -0600, Simon Glass wrote:
+> > >
+> > > > At present when one bootmeth fails on the final partition, the next
+> > > > bootmeth is not tried. Adjust the logic to go to the next bootmeth,
+> > > > which is the more natural behaviour.
 > > > >
-> > > > On Tue, 7 Oct 2025 at 10:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Oct 07, 2025 at 06:29:38PM +0200, Kory Maincent wrote:
-> > > > > > On Tue, 7 Oct 2025 08:11:48 -0600
-> > > > > > Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > > On Tue, Oct 07, 2025 at 11:32:13AM +0200, Kory Maincent wrote:
-> > > > > > > > On Mon, 6 Oct 2025 17:42:40 -0600
-> > > > > > > > Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > > On Mon, Oct 06, 2025 at 05:30:15PM -0600, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Mon, 6 Oct 2025 at 15:44, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Mon, Oct 06, 2025 at 02:38:23PM -0600, Simon Glass wrote:
-> > > > > > > > > > > > Hi Kory,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Fri, 3 Oct 2025 at 10:34, Kory Maincent
-> > > > > > > > > > > > <kory.maincent@bootlin.com> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Migrate TI board cape detection from legacy extension support to
-> > > > > > > > > > > > > the new UCLASS-based extension board framework.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > > > > > > >
-> > > > > > > > ...
-> > > > > > > >
-> > > > > > > > > > > > > -int extension_board_scan(struct list_head *extension_list)
-> > > > > > > > > > > > > +static int ti_extension_board_scan(struct alist *extension_list)
-> > > > > > > > > > > > >  {
-> > > > > > > > > > > > >         unsigned char addr;
-> > > > > > > > > > > > >         int num_capes = 0;
-> > > > > > > > > > > > > @@ -31,7 +31,7 @@ int extension_board_scan(struct list_head
-> > > > > > > > > > > > > *extension_list) struct am335x_cape_eeprom_id eeprom_header;
-> > > > > > > > > > > > >                 char process_cape_part_number[17] = {'0'};
-> > > > > > > > > > > > >                 char process_cape_version[5] = {'0'};
-> > > > > > > > > > > > > -               struct extension *cape;
-> > > > > > > > > > > > > +               struct extension cape = {0}, *_cape;
-> > > > > > > > > > > > >                 struct udevice *dev;
-> > > > > > > > > > > > >                 u8 cursor = 0;
-> > > > > > > > > > > > >                 int ret, i;
-> > > > > > > > > > > > > @@ -78,22 +78,20 @@ int extension_board_scan(struct list_head
-> > > > > > > > > > > > > *extension_list)
-> > > > > > > > > > > >
-> > > > > > > > > > > > I suppose that a method called scan() could be added to the uclass
-> > > > > > > > > > > > and implemented by this driver.
-> > > > > > > >
-> > > > > > > > I don't understand what do you mean by method? Is it different to the
-> > > > > > > > UBOOT driver scan ops I have designed?
-> > > > > > > >
-> > > > > > > > > > > > >                 printf("BeagleBone Cape: %s (0x%x)\n",
-> > > > > > > > > > > > > eeprom_header.board_name, addr);
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > -               cape = calloc(1, sizeof(struct extension));
-> > > > > > > > > > > > > -               if (!cape) {
-> > > > > > > > > > > > > -                       printf("Error in memory allocation\n");
-> > > > > > > > > > > > > -                       return num_capes;
-> > > > > > > > > > > > > -               }
-> > > > > > > > > > > > > -
-> > > > > > > > > > > > > -               snprintf(cape->overlay, sizeof(cape->overlay),
-> > > > > > > > > > > > > "%s-%s.dtbo",
-> > > > > > > > > > > > > +               snprintf(cape.overlay, sizeof(cape.overlay),
-> > > > > > > > > > > > > "%s-%s.dtbo", process_cape_part_number, process_cape_version);
-> > > > > > > > > > > > > -               strlcpy(cape->name, eeprom_header.board_name,
-> > > > > > > > > > > > > +               strlcpy(cape.name, eeprom_header.board_name,
-> > > > > > > > > > > > >                         sizeof(eeprom_header.board_name));
-> > > > > > > > > > > > > -               strlcpy(cape->version, process_cape_version,
-> > > > > > > > > > > > > +               strlcpy(cape.version, process_cape_version,
-> > > > > > > > > > > > >                         sizeof(process_cape_version));
-> > > > > > > > > > > > > -               strlcpy(cape->owner, eeprom_header.manufacturer,
-> > > > > > > > > > > > > +               strlcpy(cape.owner, eeprom_header.manufacturer,
-> > > > > > > > > > > > >                         sizeof(eeprom_header.manufacturer) + 1);
-> > > > > > > > > > > > > -               list_add_tail(&cape->list, extension_list);
-> > > > > > > > > > > > > +               _cape = alist_add(extension_list, cape);
-> > > > > > > > > > > > > +               if (!_cape)
-> > > > > > > > > > > > > +                       return -ENOMEM;
-> > > > > > > > > > > > >                 num_capes++;
-> > > > > > > > > > > > >         }
-> > > > > > > > > > > > >         return num_capes;
-> > > > > > > > > > > > >  }
-> > > > > > > > > > > > > +
-> > > > > > > > > > > > > +U_BOOT_EXTENSION(cape, ti_extension_board_scan);
-> > > > > > > > > > > >
-> > > > > > > > > > > > Can the extension information go in the devicetree, so boards can
-> > > > > > > > > > > > select their scheme that way?
-> > > > > > > > > > >
-> > > > > > > > > > > Since we're scanning to see what extension boards are present and so
-> > > > > > > > > > > what device tree overlays to apply, I don't think that can work?
-> > > > > > > > > >
-> > > > > > > > > > My understanding is that the scanning process is board-specific. For
-> > > > > > > > > > example we would not want the Beagle mechanism to be compiled into
-> > > > > > > > > > rpi. The idea of scanning things in a board-specific way seems like a
-> > > > > > > > > > driver to me. Note there is also the SYSINFO uclass which can do
-> > > > > > > > > > similar things.
-> > > > > > > > > >
-> > > > > > > > > > The overlays being applied here are additions to what should already
-> > > > > > > > > > be a fairly complete devicetree.
-> > > > > > > > > >
-> > > > > > > > > > If this isn't possible, then where is the information known?
-> > > > > > > >
-> > > > > > > > Oh, so you would prefer to have something like the sysinfo drivers.
-> > > > > > > >
-> > > > > > > > > You're commenting on a patch to the TI specific code, that's only used
-> > > > > > > > > by TI SoC using platforms that opt-in to the externally defined EEPROM
-> > > > > > > > > format for these "capes". Perhaps your feedback would make more sense in
-> > > > > > > > > some other part of the patch series? But even then, I'm not sure it
-> > > > > > > > > makes sense?
-> > > > > > > >
-> > > > > > > > I am ok to move the cape scan detection code to a standalone driver with a
-> > > > > > > > devicetree compatible match. Just wondering what are the advantages to use
-> > > > > > > > standalone drivers instead of having the code in the specific board code as
-> > > > > > > > done in this series.
-> > > > > > >
-> > > > > > > I'm not sure there is an advantage. Especially since in theory we could
-> > > > > > > have more than one built in, and if ti_extension_board_scan(...) doesn't
-> > > > > > > find anything (because the EEPROM is missing/wrong) we could still then
-> > > > > > > call rpi_extension_board_scan(...) and look for that formatted type of
-> > > > > > > EEPROM and then chipanddip_extension_board_scan(...) and look for that
-> > > > > > > and so forth. These extensions are nominally discoverable and so don't
-> > > > > > > need device tree compatibles, was some of the point of all this I would
-> > > > > > > have sworn...
-> > > > > >
-> > > > > > I think, he means a driver for each type of custom extension board scan
-> > > > > > functions (4 until now). The U-boot devicetree would be like this:
-> > > > > > extension_scan {
-> > > > > >       compatible = "bone-cape-scan";
-> > > > > > };
-> > > > > >
-> > > > > > We could avoid the build of several extension drivers using Kconfig choice
-> > > > > > symbol to select only one builtin.
-> > > > > >
-> > > > > > On my side I don't really have opinions, it is a matter of code design. For now
-> > > > > > I don't see real argument to tilt the balance except to do something like
-> > > > > > sysinfo. We need more arguments from Simon.
-> > > > >
-> > > > > Yes, and needing to go back to modifying the device trees seems a step
-> > > > > backwards here, and something that will be hard to argue for upstream.
-> > > >
-> > > > How do you define the mechanism to read the cape (etc.) information?
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > >
-> > > Well, a cape for the TI platforms has to have a properly formatted
-> > > EEPROM. I forget how the CHIP/DIP thing worked, but I believe it was
-> > > similar (since it originated in the same era). I also believe Pi is
-> > > similar as well.
-> > >
-> > > > Presumably it is using a device which is already in the devicetree? So
-> > > > it is the actual extension mechanism that is not present, perhaps?
-> > > >
-> > > > How does Linux model extensions?
-> > >
-> > > Last I knew it doesn't and much discussion was had to arrive at that
-> > > point a decade or so ago. I believe FPGA stuff has been allowed since
-> > > then, but physical extensions not, and it's a bootloader problem. Which
-> > > is why we've been solving it for a while (it was more ad-hoc before Kory
-> > > did the current implementation in 2021).
+> > > My feedback on v1:
+> > > https://lore.kernel.org/u-boot/20250331174144.GI93000@bill-the-cat/
+> > > was that we need to do a documentation change when doing a behavior
+> > > change. And I cannot recall if this change here is because of reports of
+> > > problems or not.
 > >
-> > OK, well the compatible string above at least allows a driver to be
-> > selected and all the board-specific stuff can go in there. Perhaps re
-> > can just reuse the sysinfo uclass? Perhaps we could talk about this in
-> > a future call?
+> > This is a long time ago, but I think it might have been an
+> > inconsistency that I found myself. Otherwise I would probably have
+> > mentioned the person who reported it.
+> >
+> > The documentation already implies the logic in this patch, as I see
+> > it. But please suggest any changes.
 >
-> I don't think we need to introduce more complexity here and Kory should
-> just v2 the current design, given the comments he noted in the other
-> half of the thread. It seems like some future kernel version may support
-> this use case more clearly and then maybe there'll be some compatible
-> string upstream to key off of.
+> OK, I guess it's because the commit message doesn't explain the bug
+> clearly enough. Is this a correct description of the patch:
+>
+> At present, normally when one bootmeth fails on a partition, we move on
+> and try the next bootmeth. However, this was not the case for the final
+> partition due to a bug. Rework the logic so that all partitions are
+> treated the same.
 
-OK, yes let's see v2.
+We can certainly say that if you like. It is fair to say that the
+algorithm is still being evolved as new things come up. Most of the
+behaviour has been driven by new tests that I've written. The global
+bootmeth is the biggest change since hunters were introduced, but I
+suspect there will be more in future.
+
+I'm heading out later today but can probably send v3 series (with the
+tweaks you've given) tomorrow. After that I'm not sure as I'm on
+holiday for two weeks.
 
 Regards,
 Simon
