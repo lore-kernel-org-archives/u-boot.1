@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93802CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 20:50:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2632CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 20:54:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE0BF83948;
-	Wed,  8 Oct 2025 22:50:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F04983948;
+	Wed,  8 Oct 2025 22:54:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YxQZiPXj";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QtTKOwVb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77207839B7; Wed,  8 Oct 2025 22:50:43 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 3AC8E83948; Wed,  8 Oct 2025 22:54:02 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 648A883930
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 22:50:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 232BD83930
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 22:54:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7a7c1ecd433so163662a34.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 13:50:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7ae21804971so97029a34.0
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 13:54:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759956640; x=1760561440; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gW8xm7l0IwfX0NRDLtjqWg8VVkf8CXQZJvkO3LTgQEE=;
- b=YxQZiPXjUSM3aYz/IyEe968QleDOdrv6mmxRGQn9ANxuYT8bMwfRQpjCOYCg2LRLOa
- 0MaZgLPtku7e19Ie2YgKOjrtd/SAavuVgdAae/aseMPy+T6CE9mQ2Dhf646zu1hriZrp
- ulc11O7/Z5bAftrfZSWhWVcgFGxdSe6cyOwFg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759956640; x=1760561440;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1759956839; x=1760561639; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gW8xm7l0IwfX0NRDLtjqWg8VVkf8CXQZJvkO3LTgQEE=;
- b=CFzFnGek8vurmipZu9w6UlTMJ9JFx4KoLKJLOpMhAbZBIWWqdesDUPZ9d9eJ6hcA44
- JWFxAds3ISCsaIVR71C/q4vUfIYWyAotKUVgMALH/X4UpMyHjJGA46dnNRiMw0SDI1t9
- N38t1VSv3CwXKEeFr9O2o0sdO91IjQV89y5jyFFb4NlaH4oOmJqm8psSICStjXW7RBIs
- CNgxb2MmTUZ+8piRX/4BkEIFm+u5J+Ckd8gcd86JWB7CWrEUgxqTnpRNB2i+dqjuzTF3
- M+EgHFJ+R4bCZkubURfY92XXLEEleihjWWS/1Hiy84pJuhoVbjmbRejsIvT+KZ/bLD/T
- +NCg==
-X-Gm-Message-State: AOJu0YzrB4l6ulS+Wh3SunxTsa8DzOsNVOvwNAn7ZlHbEfYSmnsqVyaD
- COO55dgj7Y41i9pPqaGcvt0TkYo8PwLE0cNl9tc7q/EBLb3vawSa2SGcEeBRZArkYUk=
-X-Gm-Gg: ASbGncsoDRuRwHWAEYzfY95o3I+6g7K/AvvXhSA3IDHljH8OzbsGld4MhxxU7WxDLKM
- aEsGNUJDQnqTvdVXMLJ2Wxvpc7N+Qddl7y04TPkux1Ph6Hw+6anfOPlic+AFhPTynqwI55meaWw
- nYKfGL9yCj/h6ynx4F5LqYwHSxcMJ0+ywhnJfvGm1bPwa0B2Vq/5P0SKBZlB7MJp481k/BvOXsT
- 3K9W9eUYYcuH4dsjvGHMUgBtDeUcuF/+uOUXTpkx6a2seVWSmjZsj1xrLkg2+s3j9i18XC7gyG9
- 8qX1zxPTwWc/88Ocs9lFCMd9X8+enFP/NHWEdqaxhVHrh90iVHWXqwTKoKQMkVGOt13+lkxTrGF
- pr+E8CmBXx9NL8osJ4Td5QpR0CFUxaGgrGqdQ80cyVCrPOUCQzdK3eR83nyFcKSyGJ3T7HomhJF
- +jr8LgOcwwgj2WqSSnAHsm
-X-Google-Smtp-Source: AGHT+IHyZhjuL9KeQl1aCmAT3hMxVDvMZTJJxEdJ3fUrRkzcWDV0a97/OYWXxUVyMXQtOQ1rKQLuQg==
-X-Received: by 2002:a05:6830:b8e:b0:7bb:385:5da8 with SMTP id
- 46e09a7af769-7c0df701c58mr3188235a34.9.1759956640134; 
- Wed, 08 Oct 2025 13:50:40 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7bf43028c25sm6136006a34.19.2025.10.08.13.50.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 13:50:39 -0700 (PDT)
-Date: Wed, 8 Oct 2025 14:50:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Brian Sune <briansune@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2] cmd/dma: documentation
-Message-ID: <20251008205037.GL298503@bill-the-cat>
-References: <20251008204103.1497-1-briansune@gmail.com>
+ bh=PwK3FvjfKTHG+9HGPxn6bP8LgBEawf37pbJd/pw4UBo=;
+ b=QtTKOwVbJfCp2npoHCQcTrST2g5LYWL00LSeNmBhz1tCDLHWIgBnsZxbSwdI+E5ZXU
+ Qwc41nMrs0rLfrLoNKhtc4x+g0e5MbnUiPqK94zCQq0G3OpaiNabW6D6fXdLVNpWRbmI
+ r57oYv+HCEmKaAJHUmaNTjLQhNikf8CTsWsV/F4E4k4KqtmowepSDu/eDGS7eQtQ8j10
+ 7UyPbP4QgwLWPAi6Yo2uIBe7Oik1/qWvTJAvz1kdj2yc4lfGY6ITGeGUvXrcKOdckAER
+ ZmA2ivbT3TsKUU0gm+8H9R4rl+QfOSwydK60cy/PDtjpH8ZbubEkmeDHJZq8I0rm6beZ
+ DlGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759956839; x=1760561639;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PwK3FvjfKTHG+9HGPxn6bP8LgBEawf37pbJd/pw4UBo=;
+ b=p0czdHTe/Rig1llQKf69aA9+StW3iq3GS70sk1R+0UPxvZoCGgf3xQvJ5nesKtQQ8t
+ uZlCrY7oLpeyn8MWscdMK/iZAZ8b87YO30WKZRfrIpWqcU6SRMuCqo02GM8I7WlN23h/
+ mdnPu1ZzY2vug0UNrChTqadKYaQI9PTmgfVtXIwe4IARx1wlqwM1zl7Y6QRnBJ2lZRFj
+ TMNKwOemcAV4dSKbUDDYeJSoj91iAatZn4cRYxmGUd6SxL7pOb38fhsLGZcebhfB54Os
+ /VrNOIVGDqu/Cr9paD5K9tGONZvCI0/UDl26QOmTLGYR2KuhOmkbmzSF9aOZer7nOa/D
+ HxPg==
+X-Gm-Message-State: AOJu0YwphJhY9SYw99+uXN1nrv4RlNGht3hwICxkTH3WTWdFI/Hlgo8q
+ +r2CSxo0NQfI9JUQUP/ISpmK9WwwLSwQ65dFZWPtJm07zgTAVSq16FgpRevwczkitCOS08zp0Of
+ hoGSO1tz2wW/Igop5yDxDNy6eI6ncoxvio7lkrqfW/Q==
+X-Gm-Gg: ASbGnctpBsGuuF0MHSZs+6in/f+M+1gix3iWVQK5c1MlbZPCS+pAiAjnRDyCcD/YTzA
+ VF6llCaMJgN0Z4p/AK01ZsN7pGvFVTcgBT9hMM8RTvbW2SYMMIhpeimbZatgb++CrpaJ6FNr8Dv
+ MzPSeeWi/JwVcP9pJHaF1zdAilwX4I4yowiEGriFcSK0p+wkKLB7IW/hRUCxjFJqnVjyPsRFCcc
+ kNQzYsggtBdx2Q+DPU6ciOpNzl22hI5Z8FxP0sL4A==
+X-Google-Smtp-Source: AGHT+IEhX5+qUUHK2klYaGrQN5tuJqWjTXCgjID48A5FnQrFPwaifDfTMEz+fkVVXCdWjDVoGmpK66MJ7qUgrm77w+I=
+X-Received: by 2002:a05:6830:61c7:b0:759:55bd:9597 with SMTP id
+ 46e09a7af769-7c0df7ff940mr3123716a34.26.1759956838906; Wed, 08 Oct 2025
+ 13:53:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pAHQ2iQd/Ev435yV"
-Content-Disposition: inline
-In-Reply-To: <20251008204103.1497-1-briansune@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251008204103.1497-1-briansune@gmail.com>
+ <20251008205037.GL298503@bill-the-cat>
+In-Reply-To: <20251008205037.GL298503@bill-the-cat>
+From: Sune Brian <briansune@gmail.com>
+Date: Thu, 9 Oct 2025 04:53:47 +0800
+X-Gm-Features: AS18NWA9ESuLAtrHsGZaMT6iTzOtlA2kOOD4TJqUr8kaNTsHSoXijTiz11TwfuM
+Message-ID: <CAN7C2SBPhtd3+jzmc48+4g+6bU6FO8QZmnYjWgsXQoH4YOjohg@mail.gmail.com>
+Subject: Re: [PATCH v2] cmd/dma: documentation
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,35 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B410=E6=9C=889=E6=97=A5 =
+=E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=884:50=E5=AF=AB=E9=81=93=EF=BC=9A
 
---pAHQ2iQd/Ev435yV
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+>
+> --
+> Tom
 
-On Thu, Oct 09, 2025 at 04:41:03AM +0800, Brian Sune wrote:
-
-> This explains how
-> to use the new U-Boot command 'dmareset'.
->=20
-> Signed-off-by: Brian Sune <briansune@gmail.com>
-
-I built this locally and no problems.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---pAHQ2iQd/Ev435yV
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaObOmgAKCRAr4qD1Cr/k
-Cud2AP0fB/tPTKqR7SZ1WmmwdFqzKst/QrquiWi96KldLKdtmQEAumNys/CimhIB
-5z8DNS/o6yl+fzl1/CntYBRvoRtNQQU=
-=gvZn
------END PGP SIGNATURE-----
-
---pAHQ2iQd/Ev435yV--
+Aaaaaa, no idea why my env no good.
+But at least you checked.
+Thank you.
