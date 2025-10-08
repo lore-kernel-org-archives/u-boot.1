@@ -4,84 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A518CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:50:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73F26CCA472
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:53:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 761E083D77;
-	Wed,  8 Oct 2025 15:50:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E931183D77;
+	Wed,  8 Oct 2025 15:53:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aKtrkoU1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b1YaTQzI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2AF183E21; Wed,  8 Oct 2025 15:50:56 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6EAA839B9
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 15:50:54 +0200 (CEST)
+ id 4479B83E8E; Wed,  8 Oct 2025 15:53:41 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CE3B83C91
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 15:53:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-59054fc6a45so3945055e87.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 06:50:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759931454; x=1760536254; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EYuNgkYKOmBjkx7e9zwatXnuxBg0zNmMkRokcfjdNwA=;
- b=aKtrkoU1s/6ePt6YANWbFF9VUUHSatdJ96I8rq0MW2LBllIEYphrZd3zuLVFzm9SJa
- tm1StPuufcKt4c8uRWVuE7b3GprXQEh3VE8MHWiailv0K2eDUtG/Na2DkLRWqAZf/nEd
- uxukbhyzqHzqm32yIrzPDCF2jb6RV7CZ3CibTsZYszmXn12VWOoLqeW7CwzpEymU8BBi
- 0XcrDxsPr1OYznHJA62uwJbv30Vqk93AtPXiKnfaKaxP+cFGkT4fQAToDRNfG3B9lapJ
- XhRKoDnt5zVEbWf3XxaIscIOXWfLBj7zbWHNNr7HBec0TU80vb1zRmyul/kaPO3CspnD
- J5nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759931454; x=1760536254;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EYuNgkYKOmBjkx7e9zwatXnuxBg0zNmMkRokcfjdNwA=;
- b=T8XmmBt4NknBHXhqs/ZWOzBqy/p2kJAaU6uKnB5BxEiSFHq6hZDZ7cfnVst/VVg+9F
- r3ZXzk36r6TiXVcUUtilWkOo8KBVyFe6wAw1zJo8zJDv03iWldpwcXqIKRPND9OWlVF8
- J/8DV3CZvRWOOYeP473T4UO1+GKrG5phvNwDl3U3PUuB5GhBJpZ0trpMCjyTJZKgof82
- j3WOcDRPEdnlX3q2uc1Gtlnf/7Vyxfi7kSgakDrjyAzr5jAKlKWDPnHQykRgcamumQrE
- /06vrYG+DOKCeVOZhi6pdGqHy/uo6uGHtO6fLiREgi8jhD73wDH6z20ezwYKlGuRnXH3
- IGwg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVTXc6nCd2G4T8U6JN34apwZOV3kMB78EZDpF2BknMNMNVbOHMQtrCLWLpz0/FcRcYFNz6p/wM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzlv6gC2CsKk+owEhiDxTK8hkw52lxnDxMg78TwOLo79mc666Vp
- fHYzgSikxQKxuuw7nWQuAm5sJsOlpZIycoALnPKVD8YTDitlpA068c2q75iBUWVIsb7NMlal7MU
- Ujg+JPnZ09wfbgVI0zoUlnxbp1VynYR4=
-X-Gm-Gg: ASbGncuFOGqVJUayjGfE/o0B8wELTIB31rtz4SXBrotkPFsirZK6tODaAwDxB1iXQnc
- /BoA4S8SbRbYZ846f2EryG65Zt03ZxcqZWU2CFkGlGoZDHT3tjm59cuvPfY0GS8BgMYlEJjWADY
- t4SXqG1H+9C5c1HZyEw5mxUwQShUAXR9+z85T+dZNQN/yl121KH6qBXeNJ3eirWrZyqsWSVumrj
- wAo+vut6ZDzMdELG+/QM993yWUVwjHTqb5WtOONP5+PeKvVbWFI34hrqm/x8Sg=
-X-Google-Smtp-Source: AGHT+IH9F9HYEQBkqebjf/mM1630+lhMHUNGQU5ESKIiytiEeh9FEH+yq7W5pPMI3so1nPSzwAzsWJJl4QtDVd3djdw=
-X-Received: by 2002:a05:6512:10d4:b0:58b:2b:ac7b with SMTP id
- 2adb3069b0e04-5906de8dbd1mr1063733e87.57.1759931453731; Wed, 08 Oct 2025
- 06:50:53 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 598DrXrW309183;
+ Wed, 8 Oct 2025 08:53:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1759931613;
+ bh=42LgPW1dZ9Z6GrpTUuhy7+xZBC/lR7THXwgSOq5EMc4=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=b1YaTQzIb2qPRBZ8IoTkA/Trsf26XVKY3P7r7VA5vUITbifyYp24hS/xkG3eENIyd
+ LCgln5zj+KAKRa5wqrklDE3zIJxthZKd7Gg2KtyBKg0I5bGpqhAwwqysLPE2ceofx2
+ ez4t49OYdtHmozF7wSscJVjrRE4THIriJnFiLU/s=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 598DrXhZ1497305
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Wed, 8 Oct 2025 08:53:33 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 8
+ Oct 2025 08:53:32 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 8 Oct 2025 08:53:33 -0500
+Received: from localhost (lcpd911.dhcp.ti.com [172.24.233.130])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 598DrW3v2867975;
+ Wed, 8 Oct 2025 08:53:32 -0500
+Date: Wed, 8 Oct 2025 19:23:31 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, <b-padhi@ti.com>, <vigneshr@ti.com>,
+ <trini@konsulko.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
+ <w.egorov@phytec.de>, <francesco.dolcini@toradex.com>,
+ <ggiordano@phytec.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
+ <xypron.glpk@gmx.de>
+Subject: Re: [PATCH -next v8 11/11] arm: mach-k3: reserve space for page
+ table entries
+Message-ID: <20251008135331.ypddmszr34e2b4yd@lcpd911>
+References: <20251006082852.4008937-1-anshuld@ti.com>
+ <20251006082852.4008937-12-anshuld@ti.com>
 MIME-Version: 1.0
-References: <20251007074503.21624-1-ernest.vanhoecke@toradex.com>
-In-Reply-To: <20251007074503.21624-1-ernest.vanhoecke@toradex.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 8 Oct 2025 10:50:42 -0300
-X-Gm-Features: AS18NWDONH4jhcD3f1pt98wO_7GnucPmlAJeRTVSUjBoW5HmE5ZK88wW8pA_Uuo
-Message-ID: <CAOMZO5CU5BtAa0DVjSOSa0-Sg2G1CJ6m49VVj2QHWh1=qCC_cg@mail.gmail.com>
-Subject: Re: [PATCH v1] arm: dts: imx8mp-toradex-smarc: migrate to OF_UPSTREAM
-To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, Peng Fan <peng.fan@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20251006082852.4008937-12-anshuld@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,24 +84,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ernest,
+On Oct 06, 2025 at 13:58:49 +0530, Anshul Dalal wrote:
+> With the memory map configuration being done dynamically, reserve extra
+> space during U-Boot relocation to ensure we have enough for the fixups.
+> 
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>  arch/arm/mach-k3/arm64/arm64-mmu.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+> index 479451452a2..f999af143fb 100644
+> --- a/arch/arm/mach-k3/arm64/arm64-mmu.c
+> +++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+> @@ -41,3 +41,8 @@ struct mm_region k3_mem_map[K3_MEM_MAP_LEN] = {
+>  };
+>  
+>  struct mm_region *mem_map = k3_mem_map;
+> +
+> +u64 get_page_table_size(void)
+> +{
+> +	return SZ_128K;
+> +}
 
-On Tue, Oct 7, 2025 at 4:45=E2=80=AFAM Ernest Van Hoecke
-<ernestvanhoecke@gmail.com> wrote:
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-> diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kc=
-onfig
-> index 74416a788473..c5da27bc366e 100644
-> --- a/arch/arm/mach-imx/imx8m/Kconfig
-> +++ b/arch/arm/mach-imx/imx8m/Kconfig
-> @@ -296,6 +296,7 @@ config TARGET_TORADEX_SMARC_IMX8MP
->         select IMX8MP
->         select SUPPORT_SPL
->         select IMX8M_LPDDR4
-> +       imply OF_UPSTREAM
-....
-
-> +CONFIG_OF_UPSTREAM=3Dy
-
-As you use 'imply OF_UPSTREAM' in the Kconfig, this
-CONFIG_OF_UPSTREAM=3Dy line is not needed and can be removed, right?
+-- 
+Best regards,
+Dhruva Gole
+Texas Instruments Incorporated
