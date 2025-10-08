@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 836F6CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 08:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01C79CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 09:08:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2BD283957;
-	Wed,  8 Oct 2025 10:12:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 36F4083942;
+	Wed,  8 Oct 2025 11:08:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gKOIy9X4";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="HB9SqWba";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A316839B5; Wed,  8 Oct 2025 10:12:08 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EA0783956
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 10:12:05 +0200 (CEST)
+ id 5B4FB8394E; Wed,  8 Oct 2025 11:08:31 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 060A18393F
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 11:08:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 5988C2og4000475;
- Wed, 8 Oct 2025 03:12:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1759911122;
- bh=wds4wMM1le2C4nyHPcH2p2jp7xM4j/Yl2g9+i4E8TpU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=gKOIy9X4dCts+esGFQc6WQMSsk/qpTzLaDOMOLX2TzmL0wkCMrq0WBAVPyhr178Gt
- Y4joPGFHZHoYj3S7xKgF6JC41sssm2iC9DXrXm/hM3G80yrnF+2JQSqdd8ZnUTD51q
- X5MSj74xbiaNSqaFyQQSvqfh1F8fKUBYJn8K3I0Y=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 5988C2M71309595
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 8 Oct 2025 03:12:02 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 8
- Oct 2025 03:12:02 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 8 Oct 2025 03:12:02 -0500
-Received: from [172.24.26.46] (lt5cd2489kgj.dhcp.ti.com [172.24.26.46])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 5988Bxfc2234840;
- Wed, 8 Oct 2025 03:11:59 -0500
-Message-ID: <ff186e1d-ec4f-4d10-b6d5-912aade0adc9@ti.com>
-Date: Wed, 8 Oct 2025 13:41:58 +0530
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=mathieu.dubois-briand@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 0416FC085F7;
+ Wed,  8 Oct 2025 09:08:10 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 6FB05606E5;
+ Wed,  8 Oct 2025 09:08:28 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C72DD102F213B; 
+ Wed,  8 Oct 2025 11:08:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1759914507; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=ZoA/WsOobli58/TKDzbj/ri5vx143N7Oa2+t1C8hTxc=;
+ b=HB9SqWbaz9sihhrep886uRjMStowjQ5D4od1k3bdxJNWaR0lHg+5cUlYGvrqG2uozqtgwl
+ BleVxyw5MEdK5zCTsdcrs7m6C1793G3lMpY3tIvhqeLCt6pDOLCG6aqmrsq2uPdOmc51kr
+ V7U6XFNdopvpBKa1183L/anrzenzbRqVY5crgVq00gThegt9H5+x5iiD518Br1b2Mi4X+6
+ k7J7P2kg3l9UT/E64SbMMDFdTvJwscnpDslAZCdsBbn4opzxWvFdjZUMorlQouth9PgnXT
+ g5NBJgMYcj7u1XCHrRMPkqegHtjsKpnjAnCKGRwylmTA75uIV2r4yDn85na5qg==
+From: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+Date: Wed, 08 Oct 2025 11:08:16 +0200
+Subject: [PATCH] imx93_frdm: Fix USB vendor ID
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] ti_sci: Provide error code on error exit
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Dhruva
- Gole <d-gole@ti.com>, Moteen Shah <m-shah@ti.com>, Nishanth Menon
- <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-References: <20251007-ti_sci-v2-0-7561d7ea07b2@linaro.org>
- <20251007-ti_sci-v2-2-7561d7ea07b2@linaro.org>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251007-ti_sci-v2-2-7561d7ea07b2@linaro.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251008-mathieu-frdm_imx93_fastboot-fix-v1-1-0dbee2f10b7c@bootlin.com>
+X-B4-Tracking: v=1; b=H4sIAP8p5mgC/x2NQQ6DIBAAv2L27CZAaxW/YoxBWXQPiAFsTIx/L
+ +lx5jBzQ6LIlKCvboj05cRhLyDrCpbN7Csh28KghGqkEB16kzemE120fmJ/6dfkTMpzCBkdX9i
+ 0H7u8ldSzFlAqR6Si/4dhfJ4fHrIp5nEAAAA=
+X-Change-ID: 20251008-mathieu-frdm_imx93_fastboot-fix-576dc4219b90
+To: u-boot@lists.denx.de
+Cc: Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Peng Fan <peng.fan@nxp.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <sjg@chromium.org>, 
+ Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1759914501; l=1002;
+ i=mathieu.dubois-briand@bootlin.com; s=20241219; h=from:subject:message-id;
+ bh=Hi+hcHO599gCdmWrregTeXe/BpPIAwjx/7BAlOamPp4=;
+ b=+jaOkWllPeHPOsNZAhg++qVhUYTCnYKsy+sZbPpBechNloj2KNOx0Og4SG4vFHiwcP6SENf9p
+ FWDrjErRqk+BRj8N9DAHYikggHIofTo2H1WP6Dj5sFhD3ysgQf0b4G0
+X-Developer-Key: i=mathieu.dubois-briand@bootlin.com; a=ed25519;
+ pk=1PVTmzPXfKvDwcPUzG0aqdGoKZJA3b9s+3DqRlm0Lww=
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,36 +84,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+NXP manufacturing tools expect the device to have the NXP 0x1fc9 vendor
+ID instead of 0x0525. This is the value already used by other i.MX8 and
+i.MX9 boards.
 
-On 10/7/2025 5:34 PM, Andrew Goodbody wrote:
-> In ti_sci_get_response the check for message sequence will return ret
-> on a fail but ret will be 0 at that point. Instead return -EINVAL.
->
-> This issue was found by Smatch.
->
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> ---
->   drivers/firmware/ti_sci.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-> index 2042d88583766213e9d74dd17289cfd3562f0acb..afe1ae13834d236015a3d5e4d8d4f9955ba8c822 100644
-> --- a/drivers/firmware/ti_sci.c
-> +++ b/drivers/firmware/ti_sci.c
-> @@ -193,7 +193,7 @@ static int ti_sci_get_response(struct ti_sci_info *info,
->   	if (hdr->seq != info->seq) {
->   		dev_dbg(info->dev, "%s: Message for %d is not expected\n",
->   			__func__, hdr->seq);
-> -		return ret;
-> +		return -EINVAL;
+Signed-off-by: Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
+---
+ configs/imx93_frdm_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-While you are at this,  Please change dev_dbg to dev_err,
+diff --git a/configs/imx93_frdm_defconfig b/configs/imx93_frdm_defconfig
+index eddd36c618d6..ae95c57218ce 100644
+--- a/configs/imx93_frdm_defconfig
++++ b/configs/imx93_frdm_defconfig
+@@ -127,7 +127,7 @@ CONFIG_USB=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="FSL"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x0525
++CONFIG_USB_GADGET_VENDOR_NUM=0x1fc9
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x0152
+ CONFIG_CI_UDC=y
+ CONFIG_ULP_WATCHDOG=y
 
-with this change, Please use
+---
+base-commit: 92dcb3ad5d98f494b2448a7345e1cb7eefa50278
+change-id: 20251008-mathieu-frdm_imx93_fastboot-fix-576dc4219b90
 
-Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+Best regards,
+-- 
+Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>
 
->   	}
->   
->   	if (msg->len > info->desc->max_msg_size) {
->
