@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD48CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 14:53:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87ED0CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 14:56:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BEA9839DE;
-	Wed,  8 Oct 2025 16:53:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0E658839DE;
+	Wed,  8 Oct 2025 16:56:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EJ/K+xNy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HtDvO9o0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA7FF83E8E; Wed,  8 Oct 2025 16:53:14 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id ABF9183F6D; Wed,  8 Oct 2025 16:56:29 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E629839DD
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 16:53:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA6D0839DD
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 16:56:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-639102bba31so12739222a12.2
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 07:53:12 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-6456dd98f36so3776202eaf.3
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 07:56:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759935192; x=1760539992; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CiXCFVbRPVA9ATcwl48JN8ME2xH8OKrn3eJR9czLscQ=;
- b=EJ/K+xNy+Tp7ShD8NXfUh/CbKU605ciQkRbeR6UXeHuP9WDTsExyl0IdEA67aEzxn/
- mEDuCpnoSl0Yyb8XNjPqr/cB+GacG5pQfeSLXQM1uVSwt/PCjnibEFNU5+wA9kVSh+n8
- 3y0ESdzwh2l6SUvzbG9DKkngwfOECcirQTfVQ=
+ d=konsulko.com; s=google; t=1759935385; x=1760540185; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QIJUcd5ndvcvrXlJ3hN2SIrf1BKxbd2ln3oN49i6fbk=;
+ b=HtDvO9o04nrbWkLFKZAC7grPj+NPe868jTa8UVVRlmmwH7mXiU7244WsTd8mjgNaRz
+ qO947KdBFMnhDsNM8nILElPYBkR5OcgvgecTg3yU/QhzhsGOA78R3Fk/OwUezbIa9PeK
+ c5my2KXI4l7q+KVRSV2znnm6GrKcIx2sZo9HQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759935192; x=1760539992;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CiXCFVbRPVA9ATcwl48JN8ME2xH8OKrn3eJR9czLscQ=;
- b=JyvlYLv9OmXtm/akydbhZR4OCJ+sxyrF2obK1f8ymPZyNBuLXxHjiGkvGg2s3dpvkE
- b4FNxO1Pgrz1+6/BA9f6UvtjKRqKJHMSo9501bAKBiGOrXaTMdE30yOXHiHkG9G+fNxd
- TCGpkPCxK67vIR/zwTrQSeiWJKZJpUloiiBRyNGhN16yXQuacxNWnMb3XD85rDuxSAap
- sLUL2sVp7v/Eelfqm0UYykUi70p30azbJrsc5DR6v6GgHcbpDWP11S3oF6+Zis/CIxSu
- O/HzdpdhMaBfUeXMP87fKPYRpHVnW3so000g6B0Cujm1uI4tj+qVvSh6NnSU10TJrdfs
- h0UQ==
+ d=1e100.net; s=20230601; t=1759935385; x=1760540185;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QIJUcd5ndvcvrXlJ3hN2SIrf1BKxbd2ln3oN49i6fbk=;
+ b=iQHd90WgSlPSDWGaFKlUm2kVzHspNPHwz+3mmdmuTLVl01h9qZNHltG+i57iS6SyNp
+ i6PwOQuz9ED7Ll66DetL8Zw34xs9Dajds0GEdXgixYJTQ6DNWvM1ULPTZ4AR4tHi06/T
+ znB0/2iqQOVRgrTt8/xqumRyq1PNRNR49kOltBU5ecPiw5WHhzGpCUGOzwt3oJ2ncE/Z
+ W9/ggjiR91mj32pPKaGHU15mSIXl2tKBjBsHTXhzoSBO3y1v8DWM5KzryNdGEX+T6e4J
+ c4AhiH/Il5wWNlW+d8hG+Y1INS5I7Ouo/bwgumkOeMYY7XUsjjptZUAJmH6uTRyW3gL9
+ NApw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUyrj5CAE5O28v4yvlDN4UhpVd9AHJnDVrPSIU+SXcfijzAY1GGyfpgmsxcyhVyrK776/vy9FA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3TMoOX0Q+2QKmKo6GBAvFYkjh5C3beoNMd2AjU4fSD53VO1Yu
- iJVv2j7TBD/GCKzA2GF6uDqLcuMvzX3So/dl94wHQZhOqOc40tJw/JIfHD9uZZIXrxOjFtajuuV
- LjsTghgI3hRPk4xszd/Jx0EHDQYW9FdaMMjtNXiwv
-X-Gm-Gg: ASbGnctfR5gflq/R3/6o2Qk8U3VcOzpvBBrrsYHA6dQLvM/GIHEcWi4YAGjD+h+VIYV
- 5Va2ochsE4S88UW6rlTHgAovGbLYcXCQSoy8feY8OGi8b65sKH0NwKpbX7Dr0ZU+BfYhZaPtB46
- GUutV3NraPDZZK5zg7naWAaLyIdmFyDWDj1CHgXNO8ngv7K1wfJ8V7cRmPTeaVAiw5V4ZOk9U3l
- YkfnNRZgKQczF2gAxChqYrYZCYd5Q==
-X-Google-Smtp-Source: AGHT+IGw1qFJy2igR6l5Qh0jHbEnSzOtPUjXpozuOibvkm2eplyKgXw8oXNqTd6YmsI/NyGtGkRgXRUOQy2HiYFiu5Y=
-X-Received: by 2002:a05:6402:2106:b0:634:5fb4:10e6 with SMTP id
- 4fb4d7f45d1cf-639d5c32aa1mr3453763a12.23.1759935191711; Wed, 08 Oct 2025
- 07:53:11 -0700 (PDT)
+ AJvYcCWN83RQ2FhStfzGGSUqBKUmeRPi6qOZtGXJxJNJeFzJ/dq0BDKVqPzrk/KNQLbOQJQJLGw+NWQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz5DUQXt1YKgNo1Selc2xcUp79u4WlYLBfyqo16p/2ugCw7fyaP
+ cO84jicM25uHY6KodVXOzZzywkHlyk/neYcghtBLYgmUmxfnc67YsUsGHxEcPVw/u0M=
+X-Gm-Gg: ASbGncvLKWMOpQCtEq8Chgnk9/zRXLl/xZe0S0IfcC0Gg5kEkSBRqfEP6iut06nMCZ7
+ mR/vkL2Y2fUQm2pScsWA2cK+9Q/lk2PUuQJjdsaHzVv8a9X8TRHLMRCcV2fGSK/D6XpHvNWGtcF
+ gMPcD9Pfz2l8k4miJ0IgXx/BJ+iVFUaMbS3BJfhyWj1dIYgLRKRbApzLkmAjtikuUQURf1AmE39
+ kBwtYxrZ6tycQfTgA+xu9nd0Iu2M0dGW9ho8kwKOw32wWqqGA9mmnp4rocQXwuvqWElbyBI4Res
+ voG0YS3C01NINpiD5ZkciTl+NxrAjVLFKzVuprkxP2cBtRlDwZw8SVMcqiP5OjLVIoUrRwBEIuY
+ 3UvlzX2QDrE8Z/rGjJTmz2dhQK/0HDCOQDkbl1NEjNHoW/UKyu9q/osepFsDR9PWDHnnIj/Vhj+
+ oHFAhO6Hjfyw==
+X-Google-Smtp-Source: AGHT+IGZxHf79C6P9SBCMDxDlcwcM9dokP3m294gw1LblcOPsdyw10cYGMTRPRWuqt3INFdPNApgeA==
+X-Received: by 2002:a05:6870:2108:b0:366:891:7be4 with SMTP id
+ 586e51a60fabf-3c0f6af2834mr2211916fac.15.1759935385600; 
+ Wed, 08 Oct 2025 07:56:25 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3ab7ce5655dsm6195845fac.13.2025.10.08.07.56.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Oct 2025 07:56:24 -0700 (PDT)
+Date: Wed, 8 Oct 2025 08:56:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>,
+ Mugunthan V N <mugunthanvnm@ti.com>
+Cc: Dharma Balasubiramani <dharma.b@microchip.com>, u-boot@lists.denx.de,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Manikandan Muralidharan <manikandan.m@microchip.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: Re: [PATCH] ARM: dts: sam9x60ek: select PIT as tick-timer
+Message-ID: <20251008145622.GW298503@bill-the-cat>
+References: <20251008055636.17462-1-dharma.b@microchip.com>
+ <4f2bcf39-2b8b-423c-8b36-db9a65573248@linaro.org>
 MIME-Version: 1.0
-References: <20251008-wip-bootmeth-rauc-tests-v1-1-3da21a731524@phytec.de>
- <20251008145017.GV298503@bill-the-cat>
-In-Reply-To: <20251008145017.GV298503@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Oct 2025 08:52:59 -0600
-X-Gm-Features: AS18NWDB3YEhmd8wW690fKJnH5I8MknibAcOshtedPRsridcyGjqRjCKcUH8YNs
-Message-ID: <CAFLszTgKH0=y=04dag8FGcMM6mb2+HTZ_HNQrjbRxppLn9hzpA@mail.gmail.com>
-Subject: Re: [PATCH] test: boot: Add test for bootmeth_rauc
-To: Tom Rini <trini@konsulko.com>
-Cc: Martin Schwan <m.schwan@phytec.de>, u-boot@lists.denx.de, 
- Andreas Pretzsch <apr@cn-eng.de>, upstream@lists.phytec.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="p2talMQn7pz1G5m+"
+Content-Disposition: inline
+In-Reply-To: <4f2bcf39-2b8b-423c-8b36-db9a65573248@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,79 +103,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 8 Oct 2025 at 08:50, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Oct 08, 2025 at 08:57:30AM +0200, Martin Schwan wrote:
->
-> > Add a simple unit test for testing the RAUC bootmethod. Provide only the
-> > very basic tests for now, running a scan and list, to verify correct
-> > detection of the RAUC bootmethod. More advanced boot tests of this
-> > bootmethod can be added in a separate patch.
-> >
-> > This requires another mmc image (mmc9) to contain the following
-> > partitions:
-> >
-> > 1. boot A: contains a dummy boot.scr
-> > 2. root A: contains an empty root filesystem
-> > 3. boot B: contains a dummy boot.scr
-> > 4. root B: contains an empty root filesystem
-> >
-> > The bootmeth_rauc scans all four partitions for existence and expects a
-> > boot script in each boot partition.
-> >
-> > Also add BOOTMETH_RAUC as a dependency on sandbox so that we can test
-> > this with:
-> >
-> > $ ./test/py/test.py -B sandbox --build -k test_ut # build the mmc9.img
-> > $ ./test/py/test.py -B sandbox --build -k bootflow_rauc
-> >
-> > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
->
-> I'm glad to see the tests. A question:
->
-> [snip]
-> > +    # Generate boot script
-> > +    script = '# dummy boot script'
-> > +    bootdir = os.path.join(mnt, 'boot')
-> > +    utils.run_and_log(ubman, f'mkdir -p {bootdir}')
-> > +    cmd_fname = os.path.join(bootdir, 'boot.cmd')
-> > +    scr_fname = os.path.join(bootdir, 'boot.scr')
-> > +    with open(cmd_fname, 'w', encoding='ascii') as outf:
-> > +        print(script, file=outf)
-> > +
-> > +    mkimage = os.path.join(ubman.config.build_dir, 'tools/mkimage')
-> > +    utils.run_and_log(
-> > +        ubman, f'{mkimage} -C none -A arm -T script -d {cmd_fname} {scr_fname}')
-> > +
-> > +    # Create boot filesystem image with boot script in it and copy to disk image
-> > +    fsfile = 'rauc_boot.img'
-> > +    utils.run_and_log(ubman, f'fallocate -l 8M {fsfile}')
-> > +    utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
-> > +    utils.run_and_log(ubman, ['sh', '-c', f'mcopy -vs -i {fsfile} {scr_fname} ::/'])
-> > +    utils.run_and_log(ubman, f'dd if={fsfile} of=mmc{mmc_dev}.img bs=1M seek=1 conv=notrunc')
-> > +    utils.run_and_log(ubman, f'dd if={fsfile} of=mmc{mmc_dev}.img bs=1M seek=19 conv=notrunc')
-> > +    utils.run_and_log(ubman, f'rm -f {fsfile} {cmd_fname} {scr_fname}')
-> > +
-> > +    # Create empty root filesystem image and copy to disk image
-> > +    fsfile = 'rauc_root.img'
-> > +    utils.run_and_log(ubman, f'fallocate -l 10M {fsfile}')
-> > +    utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
-> > +    utils.run_and_log(ubman, f'dd if={fsfile} of=mmc{mmc_dev}.img bs=1M seek=9 conv=notrunc')
-> > +    utils.run_and_log(ubman, f'dd if={fsfile} of=mmc{mmc_dev}.img bs=1M seek=27 conv=notrunc')
-> > +    utils.run_and_log(ubman, f'rm -f {fsfile}')
->
-> Can we use mk_fs from test/py/tests/fs_helper.py for this part? I know
-> we can't use setup_image without further changes to allow for 'spec' to
-> be passed (which may or may not be worth doing, I'm not sure) but I
-> think we can use mk_fs here? Thanks.
 
-+1
+--p2talMQn7pz1G5m+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Other than that:
+On Wed, Oct 08, 2025 at 10:21:41AM +0300, Eugen Hristev wrote:
+>=20
+>=20
+> On 10/8/25 08:56, Dharma Balasubiramani wrote:
+> > U-Boot currently enables the UPLL during boot, which triggers a udelay()
+> > call that depends on the system tick timer. Since no explicit tick sour=
+ce
+> > is defined in the device tree, boot stalls on this board.
+> >=20
+> > Define the "tick-timer" property under /chosen and point it to the PIT
+> > node, ensuring U-Boot uses the PIT as the tick source.
+> >=20
+> > Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while r=
+eparenting")
+> > Signed-off-by: Dharma Balasubiramani <dharma.b@microchip.com>
+> > ---
+> >=20
+> >  arch/arm/dts/sam9x60ek.dts | 1 +
+> >  1 file changed, 1 insertion(+)
+> >=20
+> > diff --git a/arch/arm/dts/sam9x60ek.dts b/arch/arm/dts/sam9x60ek.dts
+> > index 6521585ee9c..1c09c92ae18 100644
+> > --- a/arch/arm/dts/sam9x60ek.dts
+> > +++ b/arch/arm/dts/sam9x60ek.dts
+> > @@ -17,6 +17,7 @@
+> >  	chosen {
+> >  		stdout-path =3D &dbgu;
+> >  		i2c0 =3D &flx0;
+> > +		tick-timer =3D &pit;
+> >  	};
+> > =20
+> >  	clocks {
+>=20
+> This property is not in Linux DT and not documented in Linux.
+> Please move it to sam9x60ek-u-boot.dtsi
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Oof, yeah, that belongs in the -u-boot.dtsi and long term we need to
+rename it to u-boot,tick-timer and upstream it.
 
-and thanks for doing it.
+--=20
+Tom
 
-Regards,
-Simon
+--p2talMQn7pz1G5m+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOZ7lgAKCRAr4qD1Cr/k
+Cp5eAQCUCpMDn0lgp5qOViaVJ348dyLWRNgxuTp8kPgDI0bQvAD/c3/5e66OHgOS
+mcI/niv3yrY5EAB3oA/DfVb1Zfj7BQA=
+=xrhk
+-----END PGP SIGNATURE-----
+
+--p2talMQn7pz1G5m+--
