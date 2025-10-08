@@ -4,89 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E4CCAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 21:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01713CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 21:23:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C98B840B0;
-	Wed,  8 Oct 2025 22:59:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F26E839B1;
+	Wed,  8 Oct 2025 23:23:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QxDvjJ0d";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="XLXPVBhD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CB92840CF; Wed,  8 Oct 2025 22:59:51 +0200 (CEST)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 80201839B7; Wed,  8 Oct 2025 23:23:26 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78A8C83948
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 22:59:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 637938394A
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 23:23:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7b97ce4fc60so101882a34.0
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 13:59:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759957188; x=1760561988; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Oo0mDCCalKy5DFgZg3QJUBt/Yj00cvy44nlCTwKZE0Y=;
- b=QxDvjJ0dcf9geWyEmNF5Uy9uITeFIXlCfeQZRNMD9NEhHXJyNCnS3fYAteK3cjj2IW
- 0nuSyyN5euXnfn1Ktk51OpampA6G/KLFXBcBS8q6iQatw052AOil81IrLGy8GqNzUbvw
- v7keIjJvTnM3Uy82SvnSNC9dVStSI/m/v6GOc=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 743963F6B1
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 21:23:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1759958602;
+ bh=oSL4/vbYKP7g9zL5zmEUP9H4dAx+yg0xND+MLqJHr40=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=XLXPVBhD52ItVtA0JabybbQCU7cOmEJQYHc0exf+oROHukgs39qLluxm3XpSEU9nz
+ yBc8/Vk870zK+CaM/4LTGYcvS1lX+yLsG5THCFGu/CQzvmG5skizqpqgzu1pZePSE9
+ 7UMJn/7x9UT4JuhcJgd4+J9ntUas16TJ96kRhIAfmjRIvXwP6MdkMZrRfP8aTR/aV9
+ BCTAuzMeBC6yjD54qOr7tY1yQkrOLOqa35tePlxVE34fGpy2BZgrbq8/pFRmHCzk4V
+ Gc7Hc3uCs3SGnSuUS72u/2QhCyre6XfpUeafLLe1rU3b5We/kl31qlcF120RpI1/DI
+ 3XdiBtqnA7Zm8bysyeceLpMF1eNqWSANL9T6dBeDI4eXuvtiieBvoS7fNaIQ8UfgdH
+ hod4wC1xsfEJ9bBAn+attEN7C10gzHzh4cV56rv4atYcxHHUrykPB7OC5yNjpoD9NO
+ FFDMsZIrfdOW2u5sbo6TqV/M3tnp4QS/G7L3+q5AmvRyTxKlhJToTy6WNGSJ3fttWu
+ 8c9vFeS62wRItrINtQoYbG8wblbun4dENvXqiT6Iy6l5rrgOPXtQWQkfsdGR3khmFz
+ s/YREKG2wqtXyCZAcOZrPeo1AjsMExp2q30BQ0o3QBM48MZ54zkjW4sd8ZjKLgq4iA
+ yAr9Z3WUsvsRSQElyYwek0Lo=
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-3ecdf7b5c46so217457f8f.2
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 14:23:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759957188; x=1760561988;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Oo0mDCCalKy5DFgZg3QJUBt/Yj00cvy44nlCTwKZE0Y=;
- b=mLC38uVRc++HuiDhJd7ZGxcQuoF1o/3byIL1w8og8tKoYQkFN0dFPe++c+OxiCCDlK
- tsgW9u0qL7O9FgN4LVqXjpMG2Ndb8DD5PHR5rj1Tmke9vRyUh6CXihjkGn/Th+Md3rIu
- zr8aUOumey8A5N59JgnObUSnLYYIZoVhWCMvmellZU6qwOoMq1rv13JbQVNMpLWGPv4o
- uyPNsFExPg+MWo5XX39NRcIndKK8dM3esI68zjXApoJnzpYEKDLZemQyFOU9EsmAtdFO
- Kvp/wPS1YrbbfnBS9Zbszn6h3PCV3JV1W5edPwrRmeUxkTKcSFjisNXExCsBMSD6iquj
- psLQ==
-X-Gm-Message-State: AOJu0Yyvk+gXylzJGi30me1Ogk3OdigJON6dCcXjT1QSl130unGs9xfh
- xOzxcDLeRQHfmJL7wS9vpWCb27lQQ9lE+fglUwJvBuZoAbh7ictliq8i6uCF3GKt5es=
-X-Gm-Gg: ASbGnctC4wZZhTo9iFVDoclAJuDpm8WU7iZbpP1NuQFgf+iw/rzqR9IB6ZX9BXPBgAW
- xzpx2FjfdaExaXFs2pZZafwvOKuYYzFCm76a4PamkpCAAJnDKgBeazqYAeixrDACtUy8bX6U7B8
- kNZUC6kOS9LgVIw245EX0z+ERRGXhA0iHFYRhVri1CMa6lU7XUM+ePZ50D/8L3g980vwKLsbJO/
- XYNtTnXHC1A5tnHmYM9Iiv9kUW1S5/RbSkjSOfYqkGgXGAahbH6fpVWvz7DZqtYrTiPj3pLqr0o
- Z2466OcmdmW6H3jTqcy/yui1A2dcng7X4+ExHHaGuIW13nGzUNcRg4Q9AH5a9TbDo0Iudoh4qV9
- 4zxV1XRYD62lOAFMZFUm7WfpJkPcHgc5Wi/U4Erq3y1OiA89TPs2JA3QfQZ8TM6uDtqUxxI4ZQP
- 6my5p8nQzLbiv03s59F30=
-X-Google-Smtp-Source: AGHT+IEuFuFz20j10gs3gzDSCDRNEv1gy1vFwOAvdAByE0UisuDrmlbP2nZuRQhu5eMBJf3v1/bOhw==
-X-Received: by 2002:a05:6808:17a8:b0:43d:43a5:ccaf with SMTP id
- 5614622812f47-4417b47098bmr2122924b6e.43.1759957188243; 
- Wed, 08 Oct 2025 13:59:48 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44189a67d27sm226052b6e.23.2025.10.08.13.59.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 13:59:47 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Adam Ford <aford173@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- David Zang <davidzangcs@gmail.com>, Fabio Estevam <festevam@gmail.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Mathieu Othacehe <othacehe@gnu.org>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@nabladev.com>, 
- Ye Li <ye.li@nxp.com>
-In-Reply-To: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
-References: <20250906000609.284902-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH] thermal: Convert .get_temp() return value to millicelsius
-Message-Id: <175995718691.3059512.8029181022233775258.b4-ty@konsulko.com>
-Date: Wed, 08 Oct 2025 14:59:46 -0600
+ d=1e100.net; s=20230601; t=1759958602; x=1760563402;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=oSL4/vbYKP7g9zL5zmEUP9H4dAx+yg0xND+MLqJHr40=;
+ b=vCeWXBzFwaIuUWm8FrQ3UFqrucCV7J5DN5WgDTwWNwJ4l8B+4Ate2hai8K69NO2SdF
+ n3yN5cu6m204Zy/ug2i9+It33xF2REJjQzdye9tON2gdvMUIurOJuhYGulrZSDsr/zzg
+ aUIyK3exlFe3gDff1qhBulyTbnpTbyo7bfkBtoGT09FFoS9Tw1q6AWqHbpfzkwqeInHj
+ RQQE/feOY5ol9OXhDKt4ljPlvdw5eioMVsbW27GDnVxqhEMgEtmgoH8Fws6MjY8pN7w/
+ 3NC7wfITv93qNYgfwN3lCmmon84jEZxjwsosR9JPe7J7pP3pT6MYP/moK1V5dAdWnYH0
+ vcQw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVxEb1UFMCjPUt4SvI5JZKTOzuc/+7TV+MouHSGW5peU5Or8AJpQXibw30f4XHKPOoxDHBOwHg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwLACx1qp1wYATvXSni2bYkdOiJwWgJVeyU7JBbdH8neOMJsb2o
+ 0kXhUuV8JEVVW/a5e8MkL3VyWrHzzcofNrjQorAMcjRVUgY7SzmbWjYJUl2yuoTim75tlDXw7W3
+ GgtbimcilNZRuQi6ma2AlcQdwoPASLtWCYWQvt21xPTiXjZGi1ZCqEqcaLTdWL+WiJg5hHn0=
+X-Gm-Gg: ASbGncv89RlWu9Gn2O3fdyHwQErorKl6ab6C5WWUL0zyjytsy36hZTfWkySPvuhJ1ey
+ WXqPF1Cpm6vSkl2JYjzrMz20jSgLfyDX6vTV1c4kKyjqNuzdslPRRa/aOllBeBmrlC543BG7XsZ
+ JZphNLBVk8D5c6/gLJ3R19B4WfSJpsQtJtFyW9q/3nVRxyUanTb93xn4wJqplnnk1WScBKbEAUB
+ 0etuS5EZxur6feT3PQkxdRA/oXWcaO5dwbWEDYVx36Nn2yRvlWjKKlkiglZwFFc3Wjsj86aEofS
+ qcTVlXH5rlF8h8OyYdMUkXGs3Omw74FRlqeqSO9x2opFLaaZTcFiecWE59MFNocFr7Jj4IQNaX1
+ ZEn9+dHhR6Uc8UWlti+ccmHmQieCnyJa9nqOVdaL1wC0=
+X-Received: by 2002:a05:6000:25c3:b0:3ec:e276:f3d5 with SMTP id
+ ffacd0b85a97d-4266e8dabeamr3022979f8f.42.1759958601795; 
+ Wed, 08 Oct 2025 14:23:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHH7LnyJGmZ5gFGTxkSZpDKFHkNmmv93m4XfIL7DHUHHfqXqfxcGGIjMLxVpUYWtnFwx5GOrA==
+X-Received: by 2002:a05:6000:25c3:b0:3ec:e276:f3d5 with SMTP id
+ ffacd0b85a97d-4266e8dabeamr3022963f8f.42.1759958601313; 
+ Wed, 08 Oct 2025 14:23:21 -0700 (PDT)
+Received: from [192.168.103.116]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4255d8b005dsm31090216f8f.25.2025.10.08.14.23.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Oct 2025 14:23:19 -0700 (PDT)
+Message-ID: <6c36ea4b-a812-4fba-a72e-f2f951f07caa@canonical.com>
+Date: Wed, 8 Oct 2025 23:23:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] virtio: blk: support block sizes exceeding 512
+ bytes
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Tom Rini <trini@konsulko.com>, Cody Schuffelen <schuffelen@google.com>,
+ Dmitrii Merkurev <dimorinny@google.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Debbie Horsfall <Debbie.Horsfall@arm.com>
+References: <20250830203954.25775-1-heinrich.schuchardt@canonical.com>
+ <20251008163954.6da0f778@donnerap.manchester.arm.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251008163954.6da0f778@donnerap.manchester.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,24 +123,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 06 Sep 2025 02:05:33 +0200, Marek Vasut wrote:
-
-> Linux kernel .get_temp() callback reports values in millicelsius,
-> U-Boot currently reports them in celsius. Align the two and report
-> in millicelsius. Update drivers accordingly. Update callsites that
-> use thermal_get_temp() as well.
+On 10/8/25 17:39, Andre Przywara wrote:
+> On Sat, 30 Aug 2025 22:39:54 +0200
+> Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
 > 
-> The 'temperature' command now reports temperature in millicelsius
-> as well, with additional accuracy. This changes command line ABI
-> slightly.
+> Hi Heinrich,
 > 
-> [...]
+>> QEMU allows to specify the logical block size via parameter
+>> logical_block_size of a virtio-blk-device.
+>>
+>> The communication channel via virtqueues remains based on 512 byte blocks
+>> even if the logical_block_size is larger.
+>>
+>> Consider the logical block size in the block device driver.
+>>
+>> Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>> v2:
+>> 	remove superfluous include linux/err.h
+>> ---
+>>   drivers/virtio/virtio_blk.c | 25 ++++++++++++++++++++++---
+>>   1 file changed, 22 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+>> index 2f999fc8bbe..4224e3c17f4 100644
+>> --- a/drivers/virtio/virtio_blk.c
+>> +++ b/drivers/virtio/virtio_blk.c
+>> @@ -12,10 +12,17 @@
+>>   #include <virtio_types.h>
+>>   #include <virtio.h>
+>>   #include <virtio_ring.h>
+>> +#include <linux/log2.h>
+>>   #include "virtio_blk.h"
+>>   
+>> +/**
+>> + * struct virtio_blk_priv - private date for virtio block device
+>> + */
+>>   struct virtio_blk_priv {
+>> +	/** @virtqueue - virtqueue to process */
+>>   	struct virtqueue *vq;
+>> +	/** @blksz_shift - log2 of block size divided by 512 */
+>> +	u32 blksz_shift;
+>>   };
+>>   
+>>   static const u32 feature[] = {
+>> @@ -71,6 +78,8 @@ static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+>>   	u8 status;
+>>   	int ret;
+>>   
+>> +	sector <<= priv->blksz_shift;
+>> +	blkcnt <<= priv->blksz_shift;
+>>   	virtio_blk_init_header_sg(dev, sector, type, &out_hdr, &hdr_sg);
+>>   	sgs[num_out++] = &hdr_sg;
+>>   
+>> @@ -109,7 +118,7 @@ static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+>>   		;
+>>   	log_debug("done\n");
+>>   
+>> -	return status == VIRTIO_BLK_S_OK ? blkcnt : -EIO;
+>> +	return status == VIRTIO_BLK_S_OK ? blkcnt >> priv->blksz_shift : -EIO;
+>>   }
+>>   
+>>   static ulong virtio_blk_read(struct udevice *dev, lbaint_t start,
+>> @@ -177,15 +186,25 @@ static int virtio_blk_probe(struct udevice *dev)
+>>   	struct blk_desc *desc = dev_get_uclass_plat(dev);
+>>   	u64 cap;
+>>   	int ret;
+>> +	u32 blk_size;
+>>   
+>>   	ret = virtio_find_vqs(dev, 1, &priv->vq);
+>>   	if (ret)
+>>   		return ret;
+>>   
+>> -	desc->blksz = 512;
+>> -	desc->log2blksz = 9;
+>>   	virtio_cread(dev, struct virtio_blk_config, capacity, &cap);
+>>   	desc->lba = cap;
+>> +	if (!virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {
+> 
+> Is that actually the right condition check? I would assume that we only
+> query the blk_size field if the feature bit is *set*, not when it's
+> cleared?
+> We see a failure (virtio block device not registering), because blk_size is
+> 0 on the Arm FVP fast model, which is fine I think because the feature bit
+> is clear as well.
+> 
+> Cheers,
+> Andre
 
-Applied to u-boot/master, thanks!
+Hello Andre,
 
-[1/1] thermal: Convert .get_temp() return value to millicelsius
-      commit: 0ee639ff5af33342c6c2f4579e210d707abc9bc2
--- 
-Tom
+Thanks for sharing your test results.
 
+Looking at these QEMU lines, I think the evaluated feature flag is correct:
+
+pc-bios/s390-ccw/virtio.h:163:
+uint32_t blk_size; /* block size of device (if VIRTIO_BLK_F_BLK_SIZE) */
+
+include/standard-headers/linux/virtio_blk.h:72-73:
+/* block size of device (if VIRTIO_BLK_F_BLK_SIZE) */
+__virtio32 blk_size;
+
+virtio_has_feature() cannot detect a feature if is not in the feature 
+set of the U-Boot driver. See function virtio_uclass_child_pre_probe():
+
+     uc_priv->features = driver_features_legacy & device_features;
+
+VIRTIO_BLK_F_BLK_SIZE is missing in the feature set of virtio_blk.
+The not in front of virtio_has_feature() is wrong.
+
+Could you, please, retest with this diff:
+
+diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+index 4224e3c17f4..ec2e28b54f7 100644
+--- a/drivers/virtio/virtio_blk.c
++++ b/drivers/virtio/virtio_blk.c
+@@ -26,6 +26,7 @@ struct virtio_blk_priv {
+  };
+
+  static const u32 feature[] = {
++       VIRTIO_BLK_F_BLK_SIZE,
+         VIRTIO_BLK_F_WRITE_ZEROES
+  };
+
+@@ -194,7 +195,7 @@ static int virtio_blk_probe(struct udevice *dev)
+
+         virtio_cread(dev, struct virtio_blk_config, capacity, &cap);
+         desc->lba = cap;
+-       if (!virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {
++       if (virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {
+                 virtio_cread(dev, struct virtio_blk_config, blk_size, 
+&blk_size);
+                 desc->blksz = blk_size;
+                 if (!is_power_of_2(blk_size) || desc->blksz < 512)
+
+Best regards
+
+Heinrich
+
+> 
+>> +		virtio_cread(dev, struct virtio_blk_config, blk_size, &blk_size);
+>> +		desc->blksz = blk_size;
+>> +		if (!is_power_of_2(blk_size) || desc->blksz < 512)
+>> +			return -EIO;
+>> +	} else {
+>> +		desc->blksz = 512;
+>> +	}
+>> +	desc->log2blksz = LOG2(desc->blksz);
+>> +	priv->blksz_shift = desc->log2blksz - 9;
+>> +	desc->lba >>= priv->blksz_shift;
+>>   
+>>   	return 0;
+>>   }
+> 
 
