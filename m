@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90F10CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:31:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF457CCA472
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:32:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0450839B9;
-	Wed,  8 Oct 2025 15:31:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3BABD83E70;
+	Wed,  8 Oct 2025 15:32:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r1+ZY42G";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Dn+UJokJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F165B83E21; Wed,  8 Oct 2025 15:31:13 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 3DB4883E81; Wed,  8 Oct 2025 15:32:09 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEB998394A
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 15:31:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A1D788394A
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 15:32:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-46e3af7889fso45583865e9.2
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 06:31:10 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-46e4ad36541so79564025e9.0
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 06:32:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1759930270; x=1760535070; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1759930326; x=1760535126; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=oDh0lRX8+hZOTqS5Bp2oT/xfNgwI1WJoX/Z+c1xFIMg=;
- b=r1+ZY42GM6g0vgRyq0o/ZggSngyBa5IF+sFqRghM2uycjJCKcHChW5sqaHQirIIMEO
- dSADVFzZD3yYcYZjOpVcNq7ItkNsXQCHPCBZEqg00RUwb6XO4gLlTMs3W+FhMl6IT2VT
- VeM15yLwQpw2lGcNSmtMTiEtBtdOU5X0jv1RWAO4Nz56oIatOMiTAM3J1wCrXTs8jPVa
- DNVKNldfuGgtRMuzbbuth71Y1UHiekVXGP6rGv1WdlujETcpiSr5irXKCaHGclY9byW4
- 58SocSKrAfwRthf1rPKDYje3bqbrdmiUfTUZg2DE2AWayo/CHv0tlMMpEkbkWNfcrvbp
- KL9g==
+ :reply-to; bh=YgqAcqdwsZtKrDNEqhW0mAQ9TXRlwqN2/lT82nNiuZU=;
+ b=Dn+UJokJlOqhyr3EBHKGgm+iw/P0PurSoHY3Gp7MmYw6iiR2mynT0eALOjQM08dxsc
+ g+vC3monrYOrquv7/GS7lgiseTFR80wC7LTblJfnw6zTCiRKNzZH1tAu86BZ0P2R70Dd
+ sdzcQDe1W9gTf3ZumrmoMIqLhfS1Aki6M9xvoFDqicxCH+b+ONfHLi4T8OexflERfQe7
+ /1o6lCMjgtz9pxxzrQjRrEY6nZXl6lRyBb9JbR2YSVoxOb6S0wt8azlZdtfbhdTzm3R9
+ Ec8Alp1xkPqtjKLuom1qY7+NzIMbmxN6OXcrHsKpcRNVkPHqxxXK0WWHenuiUfkod2p4
+ kIfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759930270; x=1760535070;
+ d=1e100.net; s=20230601; t=1759930326; x=1760535126;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=oDh0lRX8+hZOTqS5Bp2oT/xfNgwI1WJoX/Z+c1xFIMg=;
- b=e6ppLufz95axPz9gv3UoLXW32rk58EZJkY21BgoEPUCGrhUZNQEJShYU+XDFwb2lMX
- fSxSXyanpw84QS5qVBoukigtInnyVRBZCnLNJY8DnAmGaJympOEfho8dxpPpLbNdMrvj
- xviFsRIUKQ93OO2TDDzjkMW/3KoDe+dspegzDWRGYnbK5WYbJ+ne3hHte/zlskDgxVG/
- QBz5gi5w0ksE0kO4skDsDiZd6ndGiBZ1nOrr1RBJBecQSGPyV89I51VchySWJzO2UYTx
- Sj2JMf1+1XhSoJOgSEyaJCeK1buNO8K5Nun9XT1F+PmzbnRhA4OL5006dTlLKQ+d4+gR
- Ps/w==
+ bh=YgqAcqdwsZtKrDNEqhW0mAQ9TXRlwqN2/lT82nNiuZU=;
+ b=fIcEZj+nRL8am4beYrBqDrhjUhx/Z+BlyLJhM1cuXn9mFVqOQy11mVYXPL0cBa9yCm
+ j60BRjfiXYbXABdnalFknuy0OPdTnJxoFzPh2js0HCLeyz00kSw7sxKaMTpNjXZM+Glz
+ dbWK/Hd5vxapZHDvoHQvF7pqiCYnVNIynHlPFVXVp6EPyCYEBcOsHfg6tLkcAAaM/8NM
+ rbspvZv4iWC94Co3I3oY24O/wNgad9d29MLRjWOlyYZkDaxIqq3Riv2pWwtDQIVNIQiX
+ OrdqJ2x3L/faV8jZqvITSQQuoBfsm81oLKS7TRYjcqw6SktjYKMiHwUzUNf4rDi/z9jo
+ PLow==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWrqirWCOjviL/Fmny84RqAn1h8RckRQCEbV4VqYHs6jWHI1QT6XPC8F+jp9SCmFzsbviov4ag=@lists.denx.de
-X-Gm-Message-State: AOJu0YxdaC3JR9+4ABDlkXY0RNqGj+UVIQGVOkpg+2ggAKkMMT2k7KLL
- 4VoiSHBfqM8QI31xdCXCL+kNARBA05YADH7n81+q4D4/AtiOfi88sv3RN3j7/iTRP6w=
-X-Gm-Gg: ASbGncvVtPkYw+kVc/mi0q58FML6DcJdDvTg6zzz/KVpVA+RQqe7Zjnv2J5pC4Iz250
- qkaovKMjh7v3Z0VJzGCte1ie4EtKP+QmfprbLQBW+/9f6o9OHzxQ9MVcMG00+x2tHHYahh/cRHB
- KM9sODlhaRb4I6u0/0YqIyn0YcFFUvP0lchnTDPeMI8Tc453BMWTykTLxCX9bHrIZgKecYxFoFc
- bk34N3G+kLMAs5GZY7+RMhXEkvBZ4h4LnNTeR9tGYvs7zSB1NZ8RXXej14/QPNkpqASMs47X009
- 4LCepcSOFGBg7B4lVjto6e2/aPG1BzTALZprhWWqOpsOkkIKgKp15Khu4czqhEqqtfkoezWLxmX
- 2rFKyqnv5lIJ75ErSVXZOw4YROL54W7h/6AE+Z8/9eBvT204tzn6Dq2vmDDaVNUTm/Y27ctYUY6
- SSKuH/f2RnW6Kyi4Y3cfU=
-X-Google-Smtp-Source: AGHT+IEiVSoC0qkB4ss4tHl06E/3yzS/aomHsh77+KTpAKRlZq0pW/04ZpCkvA8bBQqWd21fpejApQ==
-X-Received: by 2002:a05:600d:416a:b0:46e:3f75:da49 with SMTP id
- 5b1f17b1804b1-46fa9b11794mr21038735e9.37.1759930269893; 
- Wed, 08 Oct 2025 06:31:09 -0700 (PDT)
+ AJvYcCXZdzyRduwIDJCp/mXa+RCyTe8zGqRV/F6fu02cbQGKLxYKOAwHHadWdPbsuMQMTmZcZQ2jVYY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzhta48P2kps5dzsfOtS03Dg9unBAKgZIuZa4mBnMGh5ANNZ4H0
+ Xrd82aOkKf6uKVl+Nt4xEN72ifcWfXE3g7g+mFHgtdA65jnzHIsklp93qK6IbYjJxvo=
+X-Gm-Gg: ASbGnct/q+V1pKi5R0PU3Dnfz1NPQJZrBdVSDksbYCX1S1PX1GWPGzOzWVSoUfK+MbM
+ C4WptygmLxXr0T5z2enRqc5zfRbpeB+cz+yj6aWm/Ckq2Ojf688Q/bWWTTPif6zIBQl4bybp7+Q
+ wGa4WONWRKAfTgFk7Xc4OkWg/cvRnOtyPjqB46w6fma7EgkoV7a/n9kg0MlujzYDvUxxd6hmB8Z
+ UsXO8gJpcIlvxmKoTVUjuW2AFzQtntFtZ/vFgKuxZf8fdAUCAr0DqZ1zJiMYVUrDvrV1lt4maRr
+ Ak9EEKHJrm2O+HFzirM7dgzOaWA2M8hEgqYFppwLwFkcjXY4T6Vi2iWl2vzs98xT8JjVKHFBTsd
+ N10N9MN+lDfPEuvzvkuT9ZoPj+7IvwRB0OcGM8PuyalHyuWZhm36N4KO/1ZXaq3p/zm3eE0WvfG
+ +ODbJTMFHozUFK8qUvN7c=
+X-Google-Smtp-Source: AGHT+IHLdAs50k0OX6jYqMY+CcnkhOth8ZzSEib8d1AbJ4FbnXKeYssLenVs0CLaHA6Jbqr/W1xBWw==
+X-Received: by 2002:a05:600c:608b:b0:46d:b665:1d95 with SMTP id
+ 5b1f17b1804b1-46fa9b03b22mr23537215e9.32.1759930325871; 
+ Wed, 08 Oct 2025 06:32:05 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:3d9:2080:b264:afbc:dee:3d?
  ([2a01:e0a:3d9:2080:b264:afbc:dee:3d])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46fa9b622cdsm38082805e9.0.2025.10.08.06.31.09
+ 5b1f17b1804b1-46fa9d4c89esm37740255e9.13.2025.10.08.06.32.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 08 Oct 2025 06:31:09 -0700 (PDT)
-Message-ID: <9ca9f483-16dc-462b-93bf-22197e890886@linaro.org>
-Date: Wed, 8 Oct 2025 15:31:08 +0200
+ Wed, 08 Oct 2025 06:32:05 -0700 (PDT)
+Message-ID: <2edbf5ef-54ff-412a-9c5a-ce5b0ef913ce@linaro.org>
+Date: Wed, 8 Oct 2025 15:32:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH RFC v3 3/8] serial: serial_meson: add minimal non-DM driver
+Subject: Re: [PATCH RFC v3 4/8] arm: meson: initial u-boot SPL support for GX
+ SoCs
 To: Ferass El Hafidi <funderscore@postmarketos.org>,
  Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
@@ -89,7 +90,7 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  ~postmarketos/upstreaming@lists.sr.ht
 References: <20251008-spl-gx-v3-0-5999637df4b9@postmarketos.org>
- <20251008-spl-gx-v3-3-5999637df4b9@postmarketos.org>
+ <20251008-spl-gx-v3-4-5999637df4b9@postmarketos.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -116,7 +117,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20251008-spl-gx-v3-3-5999637df4b9@postmarketos.org>
+In-Reply-To: <20251008-spl-gx-v3-4-5999637df4b9@postmarketos.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -137,189 +138,701 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/8/25 12:00, Ferass El Hafidi wrote:
-> It is very limited and minimal, only implements putc/puts.
-> This minimal driver is intended to be used in SPL, and other
-> size-constrained situations.
+> Add initial boilerplate for U-Boot SPL support on Amlogic.
 > 
 > Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 > ---
->   drivers/serial/serial.c       |   2 +
->   drivers/serial/serial_meson.c | 119 +++++++++++++++++++++++++++++++++++++++++-
->   2 files changed, 120 insertions(+), 1 deletion(-)
+>   arch/arm/include/asm/arch-meson/clock-gx.h |  14 +++
+>   arch/arm/include/asm/arch-meson/gx.h       |  36 +++++++
+>   arch/arm/mach-meson/Kconfig                |  42 +++++++-
+>   arch/arm/mach-meson/Makefile               |   7 ++
+>   arch/arm/mach-meson/board-common.c         |  11 ++
+>   arch/arm/mach-meson/spl-gx.c               | 168 +++++++++++++++++++++++++++++
+>   arch/arm/mach-meson/spl-gxbb.c             | 113 +++++++++++++++++++
+>   arch/arm/mach-meson/spl-gxl.c              |  39 +++++++
+>   arch/arm/mach-meson/spl.c                  | 123 +++++++++++++++++++++
+>   9 files changed, 552 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/serial/serial.c b/drivers/serial/serial.c
-> index e10ca6eef768502ea32bf39a41ae2e3ccd168c66..c0b1eb3056181b95e1861f1ce08fcd82ff81eb71 100644
-> --- a/drivers/serial/serial.c
-> +++ b/drivers/serial/serial.c
-> @@ -129,6 +129,7 @@ serial_initfunc(pxa_serial_initialize);
->   serial_initfunc(smh_serial_initialize);
->   serial_initfunc(sh_serial_initialize);
->   serial_initfunc(mtk_serial_initialize);
-> +serial_initfunc(meson_serial_initialize);
+> diff --git a/arch/arm/include/asm/arch-meson/clock-gx.h b/arch/arm/include/asm/arch-meson/clock-gx.h
+> index 13a2e7688fc569d8a217b424306570514ab011f4..72e4bac7aad5bf2d7bdf6b1b0a83aefe1720bcf7 100644
+> --- a/arch/arm/include/asm/arch-meson/clock-gx.h
+> +++ b/arch/arm/include/asm/arch-meson/clock-gx.h
+> @@ -87,6 +87,7 @@
+>   #define HHI_VDAC_CNTL0			0x2F4 /* 0xbd offset in data sheet */
+>   #define HHI_VDAC_CNTL1			0x2F8 /* 0xbe offset in data sheet */
 >   
->   /**
->    * serial_register() - Register serial driver with serial driver core
-> @@ -167,6 +168,7 @@ int serial_initialize(void)
->   	smh_serial_initialize();
->   	sh_serial_initialize();
->   	mtk_serial_initialize();
-> +	meson_serial_initialize();
+> +#define HHI_SYS_PLL_CNTL1		0x2fc /* 0xbf offset in data sheet */
+>   #define HHI_SYS_PLL_CNTL		0x300 /* 0xc0 offset in data sheet */
+>   #define HHI_SYS_PLL_CNTL2		0x304 /* 0xc1 offset in data sheet */
+>   #define HHI_SYS_PLL_CNTL3		0x308 /* 0xc2 offset in data sheet */
+> @@ -114,4 +115,17 @@
 >   
->   	serial_assign(default_serial_console()->name);
+>   ulong meson_measure_clk_rate(unsigned int clk);
 >   
-> diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
-> index bb79b9729579a661084425d6b3c5357da31dc3c0..cc71381f87e1e2d192e5f4450f881c2a69511ca3 100644
-> --- a/drivers/serial/serial_meson.c
-> +++ b/drivers/serial/serial_meson.c
-> @@ -3,9 +3,11 @@
->    * (C) Copyright 2016 Beniamino Galvani <b.galvani@gmail.com>
->    */
->   
-> +#if CONFIG_IS_ENABLED(DM_SERIAL)
->   #include <dm.h>
-> -#include <errno.h>
->   #include <fdtdec.h>
-> +#endif
-> +#include <errno.h>
->   #include <linux/kernel.h>
->   #include <linux/bitops.h>
->   #include <linux/compiler.h>
-> @@ -25,6 +27,15 @@ struct meson_serial_plat {
->   	struct meson_uart *reg;
->   };
->   
-> +#if !CONFIG_IS_ENABLED(DM_SERIAL)
-> +/* UART base address */
-> +#if defined(CONFIG_MESON_GX)
-> +#define AML_UART_BASE	0xc81004c0
-> +#else /* G12A, AXG, ... */
-> +#define AML_UART_BASE	0xff803000
-> +#endif
+> +#if defined(CONFIG_SPL_BUILD)
+> +#define HHI_SCC_CNTL0_FINAL_MUX_SEL	BIT(11)
+> +#define HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL	BIT(10)
+> +#define HHI_SCC_CNTL0_MUX0_DIVN_TCNT	(0x3f << 4)
+> +#define HHI_SCC_CNTL0_MUX1_DIVN_TCNT	(0x3f << 20)
+> +#define HHI_SCC_CNTL0_POSTMUX0	BIT(2)
+> +#define HHI_SCC_CNTL0_POSTMUX1	BIT(18)
+> +#define HHI_SCC_CNTL0_PREMUX0	3
+> +#define HHI_SCC_CNTL0_PREMUX1	(3 << 16)
+> +#define HHI_SCC_CNTL0_DYN_ENABLE	BIT(26)
+> +#define HHI_SCC_CNTL0_BUSY	BIT(28)
 > +#endif
 > +
->   /* AML_UART_STATUS bits */
->   #define AML_UART_PARITY_ERR		BIT(16)
->   #define AML_UART_FRAME_ERR		BIT(17)
-> @@ -51,6 +62,7 @@ struct meson_serial_plat {
->   #define AML_UART_REG5_USE_NEW_BAUD	BIT(23) /* default 1 (use new baud rate register) */
->   #define AML_UART_REG5_BAUD_MASK		0x7fffff
+>   #endif
+> diff --git a/arch/arm/include/asm/arch-meson/gx.h b/arch/arm/include/asm/arch-meson/gx.h
+> index 8cfc6b00329f252bbf452dba00f8ad56b480c707..b4cb2a5ddbc9cef5d9133339c12aaa5bb62b4721 100644
+> --- a/arch/arm/include/asm/arch-meson/gx.h
+> +++ b/arch/arm/include/asm/arch-meson/gx.h
+> @@ -12,7 +12,10 @@
 >   
-> +#if CONFIG_IS_ENABLED(DM_SERIAL)
->   static u32 meson_calc_baud_divisor(ulong src_rate, u32 baud)
+>   #define GX_FIRMWARE_MEM_SIZE	0x1000000
+>   
+> +#define GX_MB_SRAM_BASE		0xd9013800
+>   #define GX_AOBUS_BASE		0xc8100000
+> +#define GX_SEC_HIU_MB_BASE	0xda83c400
+> +#define GX_SEC_AOBUS_BASE	0xda100000
+>   #define GX_PERIPHS_BASE	0xc8834400
+>   #define GX_HIU_BASE		0xc883c000
+>   #define GX_ETH_BASE		0xc9410000
+> @@ -24,6 +27,10 @@
+>   #define GX_AO_SEC_GP_CFG3	GX_AO_ADDR(0x93)
+>   #define GX_AO_SEC_GP_CFG4	GX_AO_ADDR(0x94)
+>   #define GX_AO_SEC_GP_CFG5	GX_AO_ADDR(0x95)
+> +#define GX_AO_SEC_SD_CFG15	GX_AO_ADDR(0x8f)
+> +
+> +#define GX_SEC_AO_ADDR(off)	(GX_SEC_AOBUS_BASE + ((off) << 2))
+> +#define GX_SEC_AO_SEC_GP_CFG0	GX_SEC_AO_ADDR(0x90)
+>   
+>   #define GX_AO_BOOT_DEVICE	0xF
+>   #define GX_AO_MEM_SIZE_MASK	0xFFFF0000
+> @@ -41,9 +48,38 @@
+>   #define GX_GPIO_IN(n)		GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 1)
+>   #define GX_GPIO_OUT(n)	GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 2)
+>   
+> +/* Mailbox registers */
+> +#define GX_SEC_HIU_MB_ADDR(off)	(GX_SEC_HIU_MB_BASE + ((off) << 2))
+> +#define GX_SEC_HIU_MAILBOX_SET_0	GX_SEC_HIU_MB_ADDR(0x01)
+> +#define GX_SEC_HIU_MAILBOX_STAT_0	GX_SEC_HIU_MB_ADDR(0x02)
+> +#define GX_SEC_HIU_MAILBOX_CLR_0	GX_SEC_HIU_MB_ADDR(0x03)
+> +
+> +/* Mailbox commands */
+> +#define GX_MB_CMD_SHA	0xc0de0001
+> +#define GX_MB_CMD_DATA	0xc0dec0de
+> +#define GX_MB_CMD_END	0xe00de00d
+> +#define GX_MB_CMD_OP_SHA	0xc0de0002
+> +#define GX_MB_CMD_DATA_LEN	0xc0dec0d0
+> +
+> +/* PIN_MUX registers */
+> +#define GX_PIN_MUX_REG1		(0xda834400 + (0x2d << 2))
+> +#define GX_PIN_MUX_REG2		(0xda834400 + (0x2e << 2))
+> +#define GX_PIN_MUX_REG3		(0xda834400 + (0x2f << 2))
+> +#define GX_PIN_MUX_REG7		(0xda834400 + (0x33 << 2))
+> +
+> +/* PWM registers */
+> +#define GX_PWM_PWM_B	(0xc1100000 + (0x2155 << 2))
+> +#define GX_PWM_PWM_D	(0xc1100000 + (0x2195 << 2))
+> +#define GX_PWM_MISC_REG_CD	(0xc1100000 + (0x2196 << 2))
+> +#define GX_PWM_MISC_REG_AB	(0xc1100000 + (0x2156 << 2))
+> +
+>   /* Non-DM MMC init */
+>   #if CONFIG_IS_ENABLED(MMC) && !CONFIG_IS_ENABLED(DM_MMC)
+>   struct mmc *meson_mmc_init(int mmc_no);
+>   #endif
+>   
+> +#if !CONFIG_IS_ENABLED(WDT_MESON_GXBB) && defined(CONFIG_SPL_BUILD)
+> +#define GX_WDT_CTRL_REG		0xc11098d0
+> +#endif
+> +
+>   #endif /* __GX_H__ */
+> diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+> index 7570f48e25fe477ce4dfb1eb608ed07b3a83d27f..8d1bf91e98b49822d036f10b5737a73247bc83c6 100644
+> --- a/arch/arm/mach-meson/Kconfig
+> +++ b/arch/arm/mach-meson/Kconfig
+> @@ -17,6 +17,8 @@ config MESON64_COMMON
+>   config MESON_GX
+>   	bool
+>   	select MESON64_COMMON
+> +	select SUPPORT_SPL
+> +	select BINMAN if SPL
+>   
+>   choice
+>   	prompt "Platform select"
+> @@ -69,7 +71,7 @@ config SYS_SOC
+>   	default "meson"
+>   
+>   config SYS_MALLOC_F_LEN
+> -	default 0x1000
+> +	default 0x2000
+>   
+>   config SYS_VENDOR
+>   	string "Vendor name"
+> @@ -93,4 +95,42 @@ config SYS_BOARD
+>   	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD> will
+>   	  be used.
+>   
+> +if MESON_GX && SPL
+> +config SPL_SYS_MALLOC_F_LEN
+> +	default 0x2000
+> +
+> +choice
+> +	prompt "Set VDDEE init voltage"
+> +	default SPL_MESON_GX_VDDEE_1000MV
+> +	help
+> +	  This option is used to set the VDDEE voltage on boot up.
+> +	  If unsure, leave it to the board default.
+> +
+> +config SPL_MESON_GX_VDDEE_1000MV
+> +	bool "Set VDDEE to 1000 mv"
+> +
+> +config SPL_MESON_GX_VDDEE_1100MV
+> +	bool "Set VDDEE to 1100 mv"
+> +
+> +endchoice
+> +
+> +choice
+> +	prompt "Set VCCK init voltage"
+> +	default SPL_MESON_GX_VCCK_1100MV
+> +	help
+> +	  This option is used to set the VCCK voltage on boot up.
+> +	  If unsure, leave it to the board default.
+> +
+> +config SPL_MESON_GX_VCCK_1000MV
+> +	bool "Set VCCK to 1000 mv"
+> +
+> +config SPL_MESON_GX_VCCK_1100MV
+> +	bool "Set VCCK to 1100 mv"
+> +
+> +config SPL_MESON_GX_VCCK_1120MV
+> +	bool "Set VCCK to 1120 mv"
+> +
+> +endchoice
+> +
+> +endif
+>   endif
+> diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
+> index 535b0878b9105e7a83729bea65fa4cd70cd4beac..798b20df78ad42b306f8ebac57e0acae167b70ee 100644
+> --- a/arch/arm/mach-meson/Makefile
+> +++ b/arch/arm/mach-meson/Makefile
+> @@ -4,6 +4,13 @@
+>   
+>   obj-y += board-common.o sm.o board-info.o
+>   obj-$(CONFIG_MESON_GX) += board-gx.o
+> +ifeq ($(CONFIG_SPL_BUILD),y)
+> +obj-$(CONFIG_MESON_GXBB) += spl-gxbb.o
+> +obj-$(CONFIG_MESON_GXL) += spl-gxl.o
+> +obj-$(CONFIG_MESON_GX) += spl-gx.o
+> +obj-$(CONFIG_MESON_GX) += spl.o
+> +endif
+> +
+>   obj-$(CONFIG_MESON_AXG) += board-axg.o
+>   obj-$(CONFIG_MESON_G12A) += board-g12a.o
+>   obj-$(CONFIG_MESON_A1) += board-a1.o
+> diff --git a/arch/arm/mach-meson/board-common.c b/arch/arm/mach-meson/board-common.c
+> index 39774c43049a40ed11578086603717571bedd23b..c243c46c0fc14e1f0910a50ed65ce46a36b8e9db 100644
+> --- a/arch/arm/mach-meson/board-common.c
+> +++ b/arch/arm/mach-meson/board-common.c
+> @@ -30,6 +30,7 @@ __weak int board_init(void)
+>   	return 0;
+>   }
+>   
+> +#ifndef CONFIG_SPL_BUILD
+>   int dram_init(void)
 >   {
->   	/*
-> @@ -245,6 +257,111 @@ U_BOOT_DRIVER(serial_meson) = {
->   	.plat_auto	= sizeof(struct meson_serial_plat),
->   };
+>   	const fdt64_t *val;
+> @@ -49,6 +50,7 @@ int dram_init(void)
 >   
-> +#else
-> +
-> +static int meson_serial_init(void)
-> +{
-> +	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
-> +	u32 val;
-> +
-> +	val = readl(&uart->control);
-> +	val |= (AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
-> +	writel(val, &uart->control);
-> +	val &= ~(AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
-> +	writel(val, &uart->control);
-> +	val |= (AML_UART_RX_EN | AML_UART_TX_EN);
-> +	writel(val, &uart->control);
-> +
-> +	return 0;
-> +}
-> +
-> +static int meson_serial_stop(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +static void meson_serial_setbrg(void)
-> +{
-> +}
-> +
-> +static void meson_serial_putc(const char ch)
-> +{
-> +	struct meson_uart *uart = (struct meson_uart *)AML_UART_BASE;
-> +
-> +	/* On '\n' also do '\r' */
-> +	if (ch == '\n')
-> +		meson_serial_putc('\r');
-> +
-> +	while (readl(&uart->status) & AML_UART_TX_FULL)
+>   	return 0;
+>   }
+> +#endif
+>   
+>   __weak int meson_ft_board_setup(void *blob, struct bd_info *bd)
+>   {
+> @@ -150,5 +152,14 @@ int board_late_init(void)
+>   
+>   void reset_cpu(void)
+>   {
+> +#if CONFIG_SPL_BUILD
+> +	/*
+> +	 * We do not have BL31 running yet, so no PSCI.
+> +	 * Instead, let the watchdog reset the board.
+> +	 */
+> +	for (;;)
 > +		;
+> +#else
+>   	psci_system_reset();
+> +#endif
+>   }
+> diff --git a/arch/arm/mach-meson/spl-gx.c b/arch/arm/mach-meson/spl-gx.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..a7d2b672421c4363f29fc2c63b67588d3aa77fef
+> --- /dev/null
+> +++ b/arch/arm/mach-meson/spl-gx.c
+> @@ -0,0 +1,168 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
+> + * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
+> + */
+> +#include <hang.h>
+> +#include <image.h>
+> +#include <spl.h>
+> +#include <vsprintf.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/boot.h>
+> +#include <asm/arch/clock-gx.h>
+> +#include <asm/arch/gx.h>
+> +#include <linux/delay.h>
 > +
-> +	writel(ch, &uart->wfifo);
+> +/* Meson GX SPL code */
+> +
+> +inline void cpu_pll_switch_to(int mode)
+> +{
+> +	u32 reg;
+> +
+> +	reg = readl(GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
+> +
+> +	while (reg & HHI_SCC_CNTL0_BUSY)
+> +		reg = readl(GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
+> +
+> +	reg |= HHI_SCC_CNTL0_DYN_ENABLE;
+> +
+> +	if (mode == 1) {
+> +		/* Switch to System PLL */
+> +		reg |= HHI_SCC_CNTL0_FINAL_MUX_SEL;
+> +	} else {
+> +		if (reg & HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL) {
+> +			reg = (reg & ~(HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL |
+> +				HHI_SCC_CNTL0_MUX0_DIVN_TCNT |
+> +				HHI_SCC_CNTL0_POSTMUX0 | HHI_SCC_CNTL0_PREMUX0));
+> +		} else {
+> +			reg = (reg & ~(HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL |
+> +				HHI_SCC_CNTL0_MUX1_DIVN_TCNT |
+> +				(HHI_SCC_CNTL0_POSTMUX1 | HHI_SCC_CNTL0_PREMUX1))) |
+> +				HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL;
+> +		}
+> +		/* Select dynamic mux */
+> +		reg = reg & ~(HHI_SCC_CNTL0_FINAL_MUX_SEL) /*final_mux_sel*/;
+> +	}
+> +	writel(reg, GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
 > +}
 > +
-> +static void meson_serial_puts(const char *s)
+> +int meson_pll_init(void)
 > +{
-> +	while (*s)
-> +		meson_serial_putc(*s++);
-> +}
+> +	clrbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL, 1 << 8);
+> +	cpu_pll_switch_to(0);
 > +
-> +static int meson_serial_getc(void)
-> +{
-> +	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
-> +	uint32_t status = readl(&uart->status);
+> +	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL6, 1 << 26);
+> +	udelay(100);
 > +
-> +	if (status & AML_UART_RX_EMPTY)
-> +		return -EAGAIN;
+> +	while (!((readl(GX_HIU_BASE + HHI_SYS_PLL_CNTL) >> 31) & 1)) {
+> +		if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+> +			setbits_32(GX_HIU_BASE + HHI_SYS_PLL_CNTL, 1 << 29);
+> +			writel(0x5ac80000, GX_HIU_BASE + HHI_SYS_PLL_CNTL2);
+> +			writel(0x8e452015, GX_HIU_BASE + HHI_SYS_PLL_CNTL3);
+> +			writel(0x401d40c, GX_HIU_BASE + HHI_SYS_PLL_CNTL4);
+> +			writel(0x870, GX_HIU_BASE + HHI_SYS_PLL_CNTL5);
+> +			writel((1 << 30) | (1 << 29) |
+> +				((0 << 16) | (1 << 9) |
+> +				(1536 / 24)), /* 1.5 GHz */
+> +				GX_HIU_BASE + HHI_SYS_PLL_CNTL);
+> +			clrbits_32(GX_HIU_BASE + HHI_SYS_PLL_CNTL, 1 << 29);
+> +		} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
+> +			writel(0xc4258100, GX_HIU_BASE + HHI_SYS_PLL_CNTL1);
+> +			writel(0xb7400000, GX_HIU_BASE + HHI_SYS_PLL_CNTL2);
+> +			writel(0xa59a288, GX_HIU_BASE + HHI_SYS_PLL_CNTL3);
+> +			writel(0x40002d, GX_HIU_BASE + HHI_SYS_PLL_CNTL4);
+> +			writel(0x7c700007, GX_HIU_BASE + HHI_SYS_PLL_CNTL5);
+> +			writel((1 << 30) | ((1 << 9) |
+> +				(1200 / 24)), /* 1.2 GHz */
+> +				GX_HIU_BASE + HHI_SYS_PLL_CNTL);
+> +		}
+> +		udelay(20);
+> +	}
+> +	cpu_pll_switch_to(1); /* Hook the CPU to the PLL divider output */
 > +
-> +	if (status & AML_UART_ERR) {
-> +		u32 val = readl(&uart->control);
+> +	if (IS_ENABLED(CONFIG_MESON_GXBB))
+> +		writel(0x10007, GX_HIU_BASE + HHI_MPLL_CNTL4);
+> +	else if (IS_ENABLED(CONFIG_MESON_GXL))
+> +		writel(0x10006, GX_HIU_BASE + HHI_MPLL_CNTL4);
 > +
-> +		/* Clear error */
-> +		val |= AML_UART_CLR_ERR;
-> +		writel(val, &uart->control);
-> +		val &= ~AML_UART_CLR_ERR;
-> +		writel(val, &uart->control);
+> +	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+> +	udelay(200);
 > +
-> +		/* Remove spurious byte from fifo */
-> +		readl(&uart->rfifo);
-> +		return -EIO;
+> +	writel(0x59C80000, GX_HIU_BASE + HHI_MPLL_CNTL2);
+> +	writel(0xCA45B822, GX_HIU_BASE + HHI_MPLL_CNTL3);
+> +
+> +	if (IS_ENABLED(CONFIG_MESON_GXBB))
+> +		writel(0xB5500E1A, GX_HIU_BASE + HHI_MPLL_CNTL5);
+> +	else if (IS_ENABLED(CONFIG_MESON_GXL))
+> +		writel(0x95520E1A, GX_HIU_BASE + HHI_MPLL_CNTL5);
+> +
+> +	writel(0xFC454545, GX_HIU_BASE + HHI_MPLL_CNTL6);
+> +
+> +	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+> +		writel((1 << 30) | (1 << 29) | (3 << 9) | (250 << 0), GX_HIU_BASE + HHI_MPLL_CNTL);
+> +		clrbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+> +	} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
+> +		writel((1 << 30) | (3 << 9) | (250 << 0), GX_HIU_BASE + HHI_MPLL_CNTL);
+> +	}
+> +	udelay(800);
+> +
+> +	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL4, 1 << 14);
+> +
+> +	while (!((readl(GX_HIU_BASE + HHI_MPLL_CNTL) >> 31) & 1)) {
+> +		if ((readl(GX_HIU_BASE + HHI_MPLL_CNTL) & (1 << 31)) != 0)
+> +			break;
+> +		setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+> +		udelay(1000);
+> +		clrbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
+> +		udelay(1000);
 > +	}
 > +
-> +	return readl(&uart->rfifo) & 0xff;
+> +	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
+> +		writel(0xFFF << 16, GX_HIU_BASE + HHI_MPLL_CNTL10);
+> +		writel(((7 << 16) | (1 << 15) | (1 << 14) | (4681 << 0)),
+> +		       GX_HIU_BASE + HHI_MPLL_CNTL7);
+> +		writel(((readl(GX_HIU_BASE + HHI_MPEG_CLK_CNTL) & (~((0x7 << 12) | (1 << 7) |
+> +			(0x7F << 0)))) | ((5 << 12) | (1 << 7)	| (2 << 0))),
+> +			GX_HIU_BASE + HHI_MPEG_CLK_CNTL);
+> +		setbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL, 1 << 8);
+> +		writel(((5 << 16) | (1 << 15) | (1 << 14) | (12524 << 0)),
+> +		       GX_HIU_BASE + HHI_MPLL_CNTL8);
+> +	} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
+> +		writel((1 << 12) | 3, GX_HIU_BASE + HHI_MPLL_CNTL10);
+> +		writel(0x5edb7, GX_HIU_BASE + HHI_MPLL_CNTL7);
+> +		clrbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL,
+> +			   (3 << 13) | (1 << 12) | (15 << 4) | 15);
+> +		setbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL,
+> +			   (1 << 14) | (1 << 12) | (1 << 8) | (2 << 6) | (1 << 1));
+> +		writel((4 << 16) | (7 << 13) | (1 << 8) | (5 << 4) | 10,
+> +		       GX_HIU_BASE + HHI_MPLL_CNTL8);
+> +	}
+> +
+> +	udelay(200);
+> +
+> +	/* TODO: Some error handling and timeouts... */
+> +	return 0;
 > +}
 > +
-> +static int meson_serial_tstc(void)
+> +#if CONFIG_IS_ENABLED(MMC) && !CONFIG_IS_ENABLED(DM_MMC)
+> +int board_mmc_init(struct bd_info *bis)
 > +{
-> +	struct meson_uart *const uart = (struct meson_uart *)AML_UART_BASE;
-> +	uint32_t status = readl(&uart->status);
+> +	int mmc_device;
 > +
-> +	if (status & AML_UART_RX_EMPTY)
-> +		return 0;
-> +	return 1;
+> +	switch (meson_get_boot_device()) {
+> +	case BOOT_DEVICE_SD:
+> +		mmc_device = 0;
+> +		break;
+> +	case BOOT_DEVICE_EMMC:
+> +		mmc_device = 1;
+> +		break;
+> +	default:
+> +		return -1;
+> +	}
+> +
+> +	if (!meson_mmc_init(mmc_device))
+> +		return -1;
+> +
+> +	return 0;
 > +}
+> +#endif
+> diff --git a/arch/arm/mach-meson/spl-gxbb.c b/arch/arm/mach-meson/spl-gxbb.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..954254bd9ad6d6006e10617a5361fa60f40f1e74
+> --- /dev/null
+> +++ b/arch/arm/mach-meson/spl-gxbb.c
+> @@ -0,0 +1,113 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
+> + * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
+> + */
+> +#include <image.h>
+> +#include <spl.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/gx.h>
+> +#include <linux/delay.h>
 > +
-> +struct serial_device meson_serial_device = {
-> +	.name	= "meson_serial",
-> +	.start	= meson_serial_init,
-> +	.stop	= meson_serial_stop,
-> +	.setbrg	= meson_serial_setbrg,
-> +	.getc	= meson_serial_getc,
-> +	.tstc	= meson_serial_tstc,
-> +	.putc	= meson_serial_putc,
-> +	.puts	= meson_serial_puts,
-> +};
-> +
-> +void meson_serial_initialize(void)
+> +#if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
+> +/*
+> + * This is only needed for GXBB because on GXL SCP firmware loading
+> + * has been moved to BL31.
+> + */
+> +inline void send_scp(void *addr, size_t size, const uint8_t *sha2,
+> +	uint32_t sha2_length)
 > +{
-> +	serial_register(&meson_serial_device);
+> +	int i;
+> +
+> +	puts("Trying to send the SCP firmware\n");
+> +	writel(size, GX_MB_SRAM_BASE);
+> +
+> +	udelay(500);
+> +
+> +	writel(GX_MB_CMD_DATA_LEN, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+> +	while (readl(GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4))
+> +		;
+> +	udelay(500);
+> +
+> +	memcpy((void *)GX_MB_SRAM_BASE, (const void *)sha2, sha2_length);
+> +	writel(GX_MB_CMD_SHA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+> +	while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
+> +		;
+> +	udelay(500);
+> +
+> +	for (i = 0; i < size; i += 1024) {
+> +		if (size >= i + 1024)
+> +			memcpy((void *)GX_MB_SRAM_BASE,
+> +			       (const void *)(unsigned long)(addr + i), 1024);
+> +		else if (size > i)
+> +			memcpy((void *)GX_MB_SRAM_BASE,
+> +			       (const void *)(unsigned long)(addr + i), (size - i));
+> +
+> +		writel(GX_MB_CMD_DATA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+> +		while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
+> +			;
+> +	}
+> +	writel(GX_MB_CMD_OP_SHA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
+> +
+> +	while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
+> +		;
+> +	udelay(500);
+> +
+> +	/* We transferred all of the SCP firmware. Running it */
+> +	writel(GX_MB_CMD_END, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
 > +}
 > +
-> +__weak struct serial_device *default_serial_console(void)
+> +void board_fit_image_post_process(const void *fit, int node, void **image, size_t *size)
 > +{
-> +	return &meson_serial_device;
-> +}
+> +	const char *name = fit_get_name(fit, node, NULL);
+> +	int noffset = 0, value_len;
+> +	u8 *value;
 > +
+> +	if (strcmp("scp", name) && strcmp("bl301", name))
+> +		return;
+> +
+> +	fdt_for_each_subnode(noffset, fit, node) {
+> +		if (strncmp(fit_get_name(fit, noffset, NULL),
+> +			    FIT_HASH_NODENAME, strlen(FIT_HASH_NODENAME)))
+> +			continue;
+> +
+> +		if (fit_image_hash_get_value(fit, noffset, &value, &value_len))
+> +			continue;
+> +
+> +		/* Send the SCP firmware to the SCP */
+> +		send_scp(*image, *size, value, value_len);
+> +		break;
+> +	}
+> +}
 > +#endif
 > +
->   #ifdef CONFIG_DEBUG_UART_MESON
->   
->   #include <debug_uart.h>
+> +void meson_power_init(void)
+> +{
+> +	/* TODO: Support more voltages */
+> +
+> +	/* Init PWM B */
+> +	clrsetbits_32(GX_PWM_MISC_REG_AB, 0x7f << 16, (1 << 23) | (1 << 1));
+> +
+> +	/* Set voltage */
+> +	if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1120MV))
+> +		writel(0x02001a, GX_PWM_PWM_B);
+> +	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1100MV))
+> +		writel(0x040018, GX_PWM_PWM_B);
+> +	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1000MV))
+> +		writel(0x0e000e, GX_PWM_PWM_B);
+> +
+> +	clrbits_32(GX_PIN_MUX_REG7, 1 << 22);
+> +	clrsetbits_32(GX_PIN_MUX_REG3, 1 << 22, 1 << 21);
+> +
+> +	/* Init PWM D */
+> +	clrsetbits_32(GX_PWM_MISC_REG_CD, 0x7f << 16, (1 << 23) | (1 << 1));
+> +
+> +	/* Set voltage */
+> +	if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1100MV))
+> +		writel(0x040018, GX_PWM_PWM_B);
+> +	else if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1000MV))
+> +		writel(0x0e000e, GX_PWM_PWM_B);
+> +
+> +	clrbits_32(GX_PIN_MUX_REG7, 1 << 23);
+> +	setbits_32(GX_PIN_MUX_REG3, 1 << 20);
+> +}
+> diff --git a/arch/arm/mach-meson/spl-gxl.c b/arch/arm/mach-meson/spl-gxl.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..07fff695be8db4f4717ea15ed44aebe9d9b48e58
+> --- /dev/null
+> +++ b/arch/arm/mach-meson/spl-gxl.c
+> @@ -0,0 +1,39 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
+> + * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
+> + */
+> +#include <spl.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/gx.h>
+> +
+> +void meson_power_init_gxl(void)
+> +{
+> +	/* TODO: Support more voltages */
+> +
+> +	/* Init PWM B */
+> +	clrsetbits_32(GX_PWM_MISC_REG_AB, 0x7f << 16, (1 << 23) | (1 << 1));
+> +
+> +	/* Set voltage */
+> +	if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1120MV))
+> +		writel(0x02001a, GX_PWM_PWM_B);
+> +	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1100MV))
+> +		writel(0x040018, GX_PWM_PWM_B);
+> +	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1000MV))
+> +		writel(0x0e000e, GX_PWM_PWM_B);
+> +
+> +	clrbits_32(GX_PIN_MUX_REG1, 1 << 10);
+> +	clrsetbits_32(GX_PIN_MUX_REG2, 1 << 5, 1 << 11);
+> +
+> +	/* Init PWM D */
+> +	clrsetbits_32(GX_PWM_MISC_REG_CD, 0x7f << 16, (1 << 23) | (1 << 1));
+> +
+> +	/* Set voltage */
+> +	if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1100MV))
+> +		writel(0x040018, GX_PWM_PWM_B);
+> +	else if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1000MV))
+> +		writel(0x0e000e, GX_PWM_PWM_B);
+> +
+> +	clrbits_32(GX_PIN_MUX_REG1, (1 << 9) | (1 << 11));
+> +	setbits_32(GX_PIN_MUX_REG2, 1 << 12);
+> +}
+> diff --git a/arch/arm/mach-meson/spl.c b/arch/arm/mach-meson/spl.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..b3565402972f81c3cfd5824ba49cd713c1329a9d
+> --- /dev/null
+> +++ b/arch/arm/mach-meson/spl.c
+> @@ -0,0 +1,123 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
+> + * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
+> + */
+> +#include <spl.h>
+> +#include <hang.h>
+> +#include <asm/io.h>
+> +#include <asm/spl.h>
+> +#include <asm/arch/boot.h>
+> +#include <vsprintf.h>
+> +#include <asm/ptrace.h>
+> +#include <asm/system.h>
+> +#include <atf_common.h>
+> +#include <image.h>
+> +#include <asm/arch/gx.h>
+> +#include <linux/delay.h>
+> +#include <asm/arch/clock-gx.h>
+> +
+> +u32 spl_boot_device(void)
+> +{
+> +	int boot_device = meson_get_boot_device();
+> +
+> +	switch (boot_device) {
+> +	case BOOT_DEVICE_EMMC:
+> +		return BOOT_DEVICE_MMC2;
+> +	case BOOT_DEVICE_SD:
+> +		return BOOT_DEVICE_MMC1;
+> +	/*
+> +	 * TODO: Get USB DFU to work
+> +	 * Right now we just panic when booted from USB.
+> +	 */
+> +	case BOOT_DEVICE_USB:
+> +		if (CONFIG_IS_ENABLED(YMODEM))
+> +			return BOOT_DEVICE_UART;
+> +		else
+> +			return BOOT_DEVICE_DFU;
+> +	}
+> +
+> +	panic("Unknown device %d\n", boot_device);
+> +	return BOOT_DEVICE_NONE; /* Never reached */
+> +}
+> +
+> +__weak struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+> +{
+> +	return (void *)CONFIG_TEXT_BASE + 0x4000000;
+> +}
+> +
+> +__weak void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
+> +{
+> +	/* HACK: use same fit load buffer address as for mmc raw */
+> +	return spl_get_load_buffer(0, fit_size);
+> +}
+> +
+> +__weak bool spl_load_simple_fit_skip_processing(void)
+> +{
+> +	return false;
+> +}
+> +
+> +/* To be defined in dram-${GENERATION}.c */
+> +__weak int dram_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +/* Placeholder functions to be defined in SoC-specific spl-... file */
+> +__weak void meson_power_init(void)
+> +{
+> +}
+> +
+> +__weak int meson_pll_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +void board_init_f(ulong dummy)
+> +{
+> +	int ret;
+> +
+> +	/* Restart execution at EL3 */
+> +	if (current_el() != 3) {
+> +		struct pt_regs regs = {0};
+> +		static struct entry_point_info spl_ep_info;
+> +
+> +		SET_PARAM_HEAD(&spl_ep_info, ATF_PARAM_BL31, ATF_VERSION_1, 0);
+> +		spl_ep_info.pc = CONFIG_SPL_TEXT_BASE;
+> +		spl_ep_info.spsr = SPSR_64(MODE_EL3, MODE_SP_ELX, DISABLE_ALL_EXECPTIONS);
+> +
+> +		regs.regs[0] = 0xc0000000;
+> +		regs.regs[1] = (unsigned long)&spl_ep_info;
+> +		smc_call(&regs);
+> +	}
+> +
+> +	meson_power_init();
+> +	ret = meson_pll_init();
+> +	if (ret) {
+> +		debug("meson_pll_init() failed: %d\n", ret);
+> +		return;
+> +	}
+> +
+> +	ret = dram_init();
+> +	if (ret) {
+> +		debug("dram_init() failed: %d\n", ret);
+> +		hang();
+> +	}
+> +
+> +	if (CONFIG_IS_ENABLED(OF_CONTROL)) {
+> +		ret = spl_early_init();
+> +		if (ret) {
+> +			debug("spl_early_init() failed: %d\n", ret);
+> +			hang();
+> +		}
+> +	}
+> +
+> +	spl_init();
+> +	icache_enable();
+> +	preloader_console_init();
+> +
+> +#if !CONFIG_IS_ENABLED(WDT_MESON_GXBB)
+> +	/* Disable watchdog */
+> +	clrbits_32(GX_WDT_CTRL_REG, (1 << 18) | (1 << 25));
+> +#endif
+> +}
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
