@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10799CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 09:23:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93526CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 09:23:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 052188393F;
+	by phobos.denx.de (Postfix) with ESMTP id 4E88383D46;
 	Wed,  8 Oct 2025 11:23:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r7iAh7IH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xgyZDIQ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1542C8393D; Wed,  8 Oct 2025 11:23:41 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 45A1B83D46; Wed,  8 Oct 2025 11:23:42 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EC7283A36
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 11:23:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 247F483C6C
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 11:23:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-421851bcb25so3779887f8f.2
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 02:23:39 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-46e3af7889fso43967725e9.2
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 02:23:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1759915419; x=1760520219; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=L4c3aBVas5y3bamKFMI4eG9pvEzF8tHS19Oto8Y4Q70=;
- b=r7iAh7IHZ+Qr94zeh4zhZj3MxkcUxI0d9eA0uFxlDV0auoxCrFF75Y9vAemFSIddK6
- BlCoT15aXi1dS/KUc99djZFZWPyNqA9ENV9UkA+9CLv2frYPBfXvVI3Iy9ONLFL+CTN0
- PzR4+DqVZ7GxF3t10btKoXoxaxU63L1cuNUsjzBeNOUcfcoKvPXPlCvij/TZKy9/F1mn
- UzjMupZscyrTUNCNB8C5LWXXYsSB7k5PB7szm3sSJy4kYQ/kspiG1y1HkVgmoADb7+Em
- jcR7QWdSqWWtrkU9fc4wpRkxZPSjdy5Go2J+Yiu9UIbCECCjuC01KkaN8Rt1tYHjoyL8
- Mq5g==
+ :reply-to; bh=Tc8JaS7h/mGEbGjj5RoUu70mJSQH1VGb4LNXKXULn3I=;
+ b=xgyZDIQ2VvdYorRu5Ej9Kqv/RoQGczPhJnuQG/6ZL57DIS3SYEPyGNFjsEHUFQma0A
+ Qe9v4gLyr3a7u5bRbJnu2T3SHwK3MorNOWgUmIDlxFxv0X5VCf7Pzy7/nHVLPmKaTZX9
+ XYTFE6B8nK7y5MH40BvB/TH81N3fBAGulHlam6c+FLDPt4Mf9XLp3cqroqZHwdbsp4Lb
+ COLU/7iRPFUtxUhCJmY80yARDQiNb+kZ64pa7IYW9Yfn6taGhJSZRIrKCvpkN2xwnTKx
+ TS+/b63Xk/AFG7Q/Rfk+QtBGaB2bkIdc+UXiEu0QFYTiaf6ypAQHC51w/hWwFhe0nDom
+ qJGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1759915419; x=1760520219;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=L4c3aBVas5y3bamKFMI4eG9pvEzF8tHS19Oto8Y4Q70=;
- b=Rk0lGTDiy06Cfn+p9DGb2GPFDtMOpqcjHm55hwrAYAEg06THhGyET2fZf4kLYUNz6n
- TkIXS4oS1Y++xV8AtkQHGYBcI7R+lRP2gHnLLwlyM82gxE81kUChV/gsMPYxTPDP4eAQ
- Lw77WsdffzrYm6f9MtqfxFiLnOT42rJ5a/1TpHgJewvSzIag1c8X/LTbAgV8wmNhBHzR
- 9+z9yrt/OshRoElFJRCDoFQl3HlwgX4lUbRBWzD/i8Jyb6KXExqKMc173naVWfKEGSFb
- FakwduwHHN9xUmZp2xtS59yamrhJ5r+Kq0aRbi0ym0uX86OXn9lFS6fgXo6y4I3479TY
- ZXBg==
-X-Gm-Message-State: AOJu0YwIoSYaJRXXz4Usk6tR3ZtqKColfj2x5prxxcv7rxowyQpZcfqh
- d40Y6uTpY7oCAmi0WoB3z6Zk7DFpAPV9ihzicO7Whnp79rB3TS9LFzaJwAn8gDCaGG4=
-X-Gm-Gg: ASbGncuqWYxrjk/vS9iPIol1vNqrhyfe2q5G6F76sTtsMdlOVy9kNpWrt6c+X1nqkL7
- J/sucxxb05QwDF5nrxRBjjOtrWWMa/3O4/H1OBYUd3XAogmwR2AvzYQ7+Y7t6U8Zbc9wu/dEhc/
- P5B84sSZ1vXslQEt3Nn1X1u1+QgOaHitii97txOtdNp7sXAe6k3cLHJuPH8+yjtMmMaL9XsRxC3
- TTk2Q4xBjtwdlGNNer4moSgGE4DmECvyAPcYFgdsqSnWrgR1QWy/vS+DSKtNnUOaz3VK+NWviaa
- 2Z3D5l6KohD9WnQEkQfvGapOJWG4IdWuT31xoF3ihK0S5c3v3e3asurW9n5ft/PAgEzMZVIxcO4
- LNs61Omu0bnSCGoYb/tlOR/IW52CFNiWc1aXjpFy5CcRuasu0p1AGPY5rfcVdRQsjVnOu5rwhaA
- SFfUA=
-X-Google-Smtp-Source: AGHT+IGZZL0owrPdLFseFjGTSza5B5zg5iUJC+T3T1NmqELeXGWnknge2RID9MZzXUvIK7a+XKfvrg==
-X-Received: by 2002:a5d:5f94:0:b0:40d:86d8:a180 with SMTP id
- ffacd0b85a97d-4266e7bf005mr1726326f8f.20.1759915418637; 
- Wed, 08 Oct 2025 02:23:38 -0700 (PDT)
+ bh=Tc8JaS7h/mGEbGjj5RoUu70mJSQH1VGb4LNXKXULn3I=;
+ b=MUj4cYox5rhl9pxHBpwdogRcoRkjqkfviSN5epVscnqkH4PjivzRkGJ99jq2pA5IPh
+ mMt6BmEY97is2+GMkBcSczaP+50sDe+ZNyhdaxFcE2vHC2AL9F9tFSyyCLTnmGqChBIS
+ 2drh/et2oBaJ1BlMG7y+6MB12SXRZ7i4pB46ZWf1OAzU6UGiC8GDw0Oe80IKyQrCbXox
+ cF1o7iuGziKNucD0kVQbmQhJ2GqIJVYnzdpJVgbeMejqr4J09mTp5DrimSYFD5PTzIXX
+ S49mNnNoFHed8pdxg60unFoRW3gw6US1DpU4ow4BWZikMlVQw1eD11yZifCDxwKXFk7G
+ 4Yww==
+X-Gm-Message-State: AOJu0YxZuWffh+LcqAGr6Wqj6WNZp9caxeOjfJYfr6D1V0BFs3tB6vDx
+ KyGpCcH8yRVyBTyL9VH5MLOEcvFaZ6uHKlzPDbfIzOzXpLyriDYFIQJjpUtoUhnALII=
+X-Gm-Gg: ASbGncvFydqFHZ+Mby6k18zpkrB1PzcA5B7CGd4MxdWIrUfoofar5E7hJoA0LcMFRtH
+ oGPAEKIUa1+sHyz1Nt4y6bjIbfTlaXkxC4QslwFJtvmrhsM5Ej2i7GLZuN5MvlQBGueVGwYwzYy
+ KYyS5tCk4GmS3vmdA0S/HXfUnsymy82DOEKk5YBwcDxSr5zOwjMyIg8xeTijASWIe6T0JYfVFw4
+ urX6M2XHmbtUt7FqiPru8lkk7AH27SYi8o+5l0HvfMixUtNBMS9tYdQp2ODyGSLXFPSgZN8hWPY
+ GYi4xT6uJAzPpvfpjHcHWpJ0JhONYxnTrHG3G0oaFV2WKz/cueRRzba3W8xg5/Dxe/Rl4Jj/u+2
+ CpDGs624ULC9UCcjvIpDKXi3nCTmem8AFRmcQzAlkv9BwTzNEyJqIBlRVk/7p+fZAvkT+EWpnQ+
+ Gn9/A=
+X-Google-Smtp-Source: AGHT+IHhcD7u74Iy3boif6wVPLSZQzSH4ts8rJr4jFiJfCsIk7PPRRqwStdUzam8byBWBxbi2hppxQ==
+X-Received: by 2002:a05:6000:40c7:b0:3e7:68b2:c556 with SMTP id
+ ffacd0b85a97d-4266726c44fmr1432577f8f.26.1759915419533; 
+ Wed, 08 Oct 2025 02:23:39 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:5f9f:be0f:fb04:8dc4])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4255d8e97fbsm28864715f8f.34.2025.10.08.02.23.37
+ ffacd0b85a97d-4255d8e97fbsm28864715f8f.34.2025.10.08.02.23.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 02:23:38 -0700 (PDT)
+ Wed, 08 Oct 2025 02:23:39 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 08 Oct 2025 10:23:35 +0100
-Subject: [PATCH v3 1/3] ti_sci: Prevent memory leak
+Date: Wed, 08 Oct 2025 10:23:36 +0100
+Subject: [PATCH v3 2/3] ti_sci: Provide error code on error exit
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251008-ti_sci-v3-1-5866bf84adc6@linaro.org>
+Message-Id: <20251008-ti_sci-v3-2-5866bf84adc6@linaro.org>
 References: <20251008-ti_sci-v3-0-5866bf84adc6@linaro.org>
 In-Reply-To: <20251008-ti_sci-v3-0-5866bf84adc6@linaro.org>
 To: Tom Rini <trini@konsulko.com>
@@ -102,42 +102,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-temp is assigned the pointer returned by malloc which is used without a
-NULL check and then never freed. Add a NULL check and ensure temp is
-freed on all return paths.
+In ti_sci_get_response the check for message sequence will return ret
+on a fail but ret will be 0 at that point. Instead return -EINVAL.
+Also change dev_dbg call to dev_err to be consistent with other error
+detection code in the same function.
 
 This issue was found by Smatch.
 
 Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/firmware/ti_sci.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ drivers/firmware/ti_sci.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-index 8013afef304dfb70ab14150ddc49d43ebebb5902..2042d88583766213e9d74dd17289cfd3562f0acb 100644
+index 2042d88583766213e9d74dd17289cfd3562f0acb..534326be5ecedba1bf221d04d708b6db15f09706 100644
 --- a/drivers/firmware/ti_sci.c
 +++ b/drivers/firmware/ti_sci.c
-@@ -3083,7 +3083,10 @@ devm_ti_sci_get_of_resource(const struct ti_sci_handle *handle,
- 		dev_err(dev, "%s resource type ids not available\n", of_prop);
- 		return ERR_PTR(sets);
- 	}
--	temp = malloc(sets);
-+	temp = devm_kmalloc(dev, sets, GFP_KERNEL);
-+	if (!temp)
-+		return ERR_PTR(-ENOMEM);
-+
- 	sets /= sizeof(u32);
- 	res->sets = sets;
+@@ -191,9 +191,9 @@ static int ti_sci_get_response(struct ti_sci_info *info,
  
-@@ -3123,6 +3126,7 @@ devm_ti_sci_get_of_resource(const struct ti_sci_handle *handle,
- 			return ERR_PTR(-ENOMEM);
+ 	/* Sanity check for message response */
+ 	if (hdr->seq != info->seq) {
+-		dev_dbg(info->dev, "%s: Message for %d is not expected\n",
++		dev_err(info->dev, "%s: Message for %d is not expected\n",
+ 			__func__, hdr->seq);
+-		return ret;
++		return -EINVAL;
  	}
  
-+	devm_kfree(dev, temp);
- 	if (valid_set)
- 		return res;
- 
+ 	if (msg->len > info->desc->max_msg_size) {
 
 -- 
 2.47.3
