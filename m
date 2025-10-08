@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA70DCCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 14:57:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D45CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 15:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6712B839DE;
-	Wed,  8 Oct 2025 16:57:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B19B1839DE;
+	Wed,  8 Oct 2025 17:01:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qeKp7z/d";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b+zxxIm/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EB2C83C91; Wed,  8 Oct 2025 16:57:41 +0200 (CEST)
-Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
- [IPv6:2001:4860:4864:20::31])
+ id F0D508401A; Wed,  8 Oct 2025 17:01:53 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3C70839DD
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 16:57:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA789839DD
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 17:01:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x31.google.com with SMTP id
- 586e51a60fabf-35ba7c71bfdso3948067fac.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 07:57:38 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7bc626c5461so2494470a34.3
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 08:01:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759935457; x=1760540257; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uqftDDlzIS1lTxEOoo6vaUS2rkaJZtB7ACn60fuI2kU=;
- b=qeKp7z/dBhBSJGmzMknZHiinMximv8Zo2KCZoY2UfU4Lg4mspWUsSvKXbGprbfAdAn
- 18879Fc9bjhyKcYfGM61HntIv3G9d2QW6n34oQ8ql0m7SejbkPtXqgFOow2i2AP9JkP6
- 8BmfTm3sJylewYpLvUbbWitBnTGmr1JOhfKQI=
+ d=konsulko.com; s=google; t=1759935710; x=1760540510; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DnsFaaD3/imZvQI6OaQzN8f6FCkECK9+LifZurrAosk=;
+ b=b+zxxIm/hyBgFQR74yrrPCJx5it0KNM8v0OPltx1nfEL1xSdYv16/OVJVt8DZU3Z6Z
+ TGi056ICMBceXwTK6mchqC/jkUCbA7A8dxM/pe5oMzTCJxfYvqIunSQqjyBYd4qFrD1w
+ YXwiRE71gKSQqswq4/RRYgocLBypI+ho+mR9Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759935457; x=1760540257;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uqftDDlzIS1lTxEOoo6vaUS2rkaJZtB7ACn60fuI2kU=;
- b=byZZzR4IVZu9m0h+DOvQYzMSWG/fexCC0f94UtANenevVMtpQPoinjFYKtoC0MUXfp
- l4El1VdONmjw3ZcWEN9MyWAZCmZ4pWKuST8R9o3iWKmzn+AuUDj1O7rlLCUyPWzVU7Dw
- sAaMM07o2jyQVT3B5p5YW1d+xZEBxf0xy/OcUqwaQmfhaotzBGsa5Kz2nwG1FjUtLKIK
- eHfIYJVdnjZVfu/J/0Nf2ZC8lKm2s9FLrZiiHO56r3smKPhKEXnWtRlqdEzTP3AhhGnW
- gb4OtxaehBOkrUOPUtXscs82FpYr7HdEDzsuzJh31KSJndJl2NNiH+QY/u454Tky8sjU
- gd5g==
-X-Gm-Message-State: AOJu0Yz/8zBGiyHXiGXzUfcetUWLoh9ShYBvZic4/Onzld/d3BistsdM
- Cq4+G/9TTWkO3NULJzwqLdAbuuBGjYJj0X37sq3vmZAwc4c4JAAOMpf/BiB1p1QJnJM=
-X-Gm-Gg: ASbGnctUpLhMPM5M/i+5E45i70ypT6z5lqDVhhGtZyrUx0Aqvd+a3iq++ZgQGSvSUbt
- yINkpavL0vDcTWlK6MTk8FHfU7mvJbVecxCbvI3Yn0uvqlbMqdIcUEEssgiW6Xg+CbZBXaEwrhZ
- vJk/3pEpDoX6wznu4KPg1frw7LzRr4LeIp381U2hgjLywSCY5dxjN7Yfuf8bOUTSi0Z657o5tQA
- 6u+lmWi94ieqiFd7NjjVwKtgouX0ZrXa7zdaAC0gdJLbtlr/EBqXzLiGj26i9Dxxi9dDp0SC67P
- qYWEdBbnAbkg5aZYVtTQDX+Fx3M6Eb+ABuW8YahcjK2aoyEjaohlxY89ZX+NaahFwBq04bWyqx9
- jI1wsp15/JLbHViqT+MFmB4QUhGWA6dkTW2KSyJQVYXbIiUof8RKm9yhm3hocm7nnMmD54kOMPK
- jy/HA5d7m1PA==
-X-Google-Smtp-Source: AGHT+IG7oQiiqLDMHGHm+d56C2kHx55euSQzFvzRR0Uo0CIAtqKEZC8TSzTk1V5h9lt23IaFtbQbTA==
-X-Received: by 2002:a05:6870:810c:b0:301:fec8:fc5 with SMTP id
- 586e51a60fabf-3c0f91a5af1mr1957328fac.23.1759935457468; 
- Wed, 08 Oct 2025 07:57:37 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1759935710; x=1760540510;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DnsFaaD3/imZvQI6OaQzN8f6FCkECK9+LifZurrAosk=;
+ b=XEogLmP0yCVrv5Eg9ALsuEAInFJUAT/34rCOHPnDBIhAFeKO+0MIqmMd8IIW50K4PI
+ 0RUZ2I6rrYafm3HtUHkkya51whcZ9ZRY+LBZuX5fwr6FhHMPdchfF2FHWwt03iUwcQ9w
+ sfwgsnjh4PfFx47Hl9aGGHywxRvCAKKxPzHy6JdN9P+MWxCpMQEvMTz4b5dfSmFnhTmA
+ EHyk7tID1FK8Jcwc9IfwNR8Zbfwxh1nw+HTBk8FuknF2QO74xCbisv+IQ90JkxajSD8k
+ u8vYSHfP7aZovWjSbbSCDlH4v+4Y7Zq0X5HPbeqCwgztTCZRpr3sCsu/i05sJyyRBsPA
+ sI7g==
+X-Gm-Message-State: AOJu0YwOc0rQAtrz06h+AXtwk532GqLxbOgeKfbwxRGmknz0BuddZFng
+ KMdyrzIp3hWdTh04iee0/4yT03I2uRqTxy5yrvYwQ2Vu+/AW0voe+syKDNne357KuLDM3+6uvOk
+ bUGj6L5U=
+X-Gm-Gg: ASbGncuvZXPAagw5lU+gwGmr6zkEvu6nA4iku2bIYHO9M7yxxnCZWcbr2Q0rbmCh9ib
+ DA+zPxLD7POh7bnIKGVG4nTZDCXVYn7gCQK2sT6VUV4xaznkXobz/w4QujFzHVC2RNqk3P04k5U
+ 1w4J9vhfXuCmXjpxlmEgf75d9oCI4TPRuL555/GgYAKvarGpWMWwGldjunvzyD7lkG8oYgXmDCB
+ Vxfn3yMgSL8mhNQVIsEjOitQpo7nui12T/sdohaMql7AMUPwEpJ6P5vTe2/W2VlpeCtbgkNltGU
+ QRrcww+8vWLDs/T3xNOLwXa48kirmp272xpWHiO6JhgIT/kJnL2pwnD7ltYAsDDUCQon+z2RaBP
+ 0hvycjD1MaEmBHz24MJyNL7IVFiPytfHCUrTfeCsMo4qIqI7CoSAOSgSZwWxj96PJL//QBiV0p9
+ Wd75q0CQ3fTaVjjTjn/hpRjL4=
+X-Google-Smtp-Source: AGHT+IHZC3lPhr/8E8Iya893chthIf2Mr1x0E/9qVCywYemkZfUMD4YhhKpFbTiizEKWSkz0yLTV8A==
+X-Received: by 2002:a05:6830:71a4:b0:7bf:75e6:5ba with SMTP id
+ 46e09a7af769-7c0df785687mr2848457a34.15.1759935710370; 
+ Wed, 08 Oct 2025 08:01:50 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab794be68fsm6162088fac.12.2025.10.08.07.57.36
+ 46e09a7af769-7bf89b23009sm3720166a34.20.2025.10.08.08.01.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 07:57:36 -0700 (PDT)
-Date: Wed, 8 Oct 2025 08:57:34 -0600
+ Wed, 08 Oct 2025 08:01:49 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v2 02/17] boot: Try all bootmeths on the final partition
-Message-ID: <20251008145734.GX298503@bill-the-cat>
-References: <20251001212649.3263574-1-sjg@chromium.org>
- <20251001212649.3263574-3-sjg@chromium.org>
- <20251007181356.GO298503@bill-the-cat>
- <CAFLszTieyj5_wTNCqsGryCses5a7DWpgVN9AUiJchmjPMViHTg@mail.gmail.com>
- <20251008143415.GU298503@bill-the-cat>
- <CAFLszTh=jWE0pefvXCpxvBZUtWWuJVem7f5HsYeJU1C7dkvq+g@mail.gmail.com>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v2] net: dwc_eth_ops: Correct check for FDT_64BIT
+Date: Wed,  8 Oct 2025 09:01:48 -0600
+Message-ID: <20251008150148.1859420-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vFe6R4k2IrurhU0e"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTh=jWE0pefvXCpxvBZUtWWuJVem7f5HsYeJU1C7dkvq+g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,79 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+There is no xPL_FDT_64BIT symbol and it would furthermore not likely
+make sense for there to be one. Correct this check to use
+IS_ENABLED and not CONFIG_IS_ENABLED.
 
---vFe6R4k2IrurhU0e
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Changes in v2:
+- Fix the commit message per Jerome
 
-On Wed, Oct 08, 2025 at 08:45:54AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 8 Oct 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Oct 08, 2025 at 06:53:44AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 7 Oct 2025 at 12:13, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Oct 01, 2025 at 03:26:27PM -0600, Simon Glass wrote:
-> > > >
-> > > > > At present when one bootmeth fails on the final partition, the ne=
-xt
-> > > > > bootmeth is not tried. Adjust the logic to go to the next bootmet=
-h,
-> > > > > which is the more natural behaviour.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > My feedback on v1:
-> > > > https://lore.kernel.org/u-boot/20250331174144.GI93000@bill-the-cat/
-> > > > was that we need to do a documentation change when doing a behavior
-> > > > change. And I cannot recall if this change here is because of repor=
-ts of
-> > > > problems or not.
-> > >
-> > > This is a long time ago, but I think it might have been an
-> > > inconsistency that I found myself. Otherwise I would probably have
-> > > mentioned the person who reported it.
-> > >
-> > > The documentation already implies the logic in this patch, as I see
-> > > it. But please suggest any changes.
-> >
-> > OK, I guess it's because the commit message doesn't explain the bug
-> > clearly enough. Is this a correct description of the patch:
-> >
-> > At present, normally when one bootmeth fails on a partition, we move on
-> > and try the next bootmeth. However, this was not the case for the final
-> > partition due to a bug. Rework the logic so that all partitions are
-> > treated the same.
->=20
-> We can certainly say that if you like. It is fair to say that the
-> algorithm is still being evolved as new things come up. Most of the
-> behaviour has been driven by new tests that I've written. The global
-> bootmeth is the biggest change since hunters were introduced, but I
-> suspect there will be more in future.
->=20
-> I'm heading out later today but can probably send v3 series (with the
-> tweaks you've given) tomorrow. After that I'm not sure as I'm on
-> holiday for two weeks.
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ drivers/net/dwc_eth_qos.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Peter's feedback should be addressed too for a v3 (and not just set
-aside).
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 551ee0ea6a02..a098916a674b 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1411,7 +1411,7 @@ static fdt_addr_t eqos_get_base_addr_common(struct udevice *dev, fdt_addr_t addr
+ 	struct eqos_priv *eqos = dev_get_priv(dev);
+ 
+ 	if (addr == FDT_ADDR_T_NONE) {
+-#if CONFIG_IS_ENABLED(FDT_64BIT)
++#if IS_ENABLED(CONFIG_FDT_64BIT)
+ 		dev_err(dev, "addr=0x%llx is invalid.\n", addr);
+ #else
+ 		dev_err(dev, "addr=0x%x is invalid.\n", addr);
+-- 
+2.43.0
 
---=20
-Tom
-
---vFe6R4k2IrurhU0e
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOZ73gAKCRAr4qD1Cr/k
-Cp/LAP0QJsPyGLUt9HOVW8pW5R8NJuyKk2y+Btr63o45RlRr3gD/RVyQEPNlnbsH
-iq2hDXxb/VwoitvU6L8Gr04oa2uaIgY=
-=+x2e
------END PGP SIGNATURE-----
-
---vFe6R4k2IrurhU0e--
