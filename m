@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D860CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 19:11:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B63C8CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 19:33:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76B4583927;
-	Wed,  8 Oct 2025 21:11:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 19219839B7;
+	Wed,  8 Oct 2025 21:33:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="V9xlkfbR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WGK2VTC6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CE3B8392E; Wed,  8 Oct 2025 21:11:18 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 76938839DD; Wed,  8 Oct 2025 21:33:13 +0200 (CEST)
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
+ [IPv6:2607:f8b0:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07B9883914
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 21:11:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 513388394E
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 21:33:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-79d36a6298dso90646a34.0
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 12:11:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x234.google.com with SMTP id
+ 5614622812f47-43f912f9738so155182b6e.0
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 12:33:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1759950675; x=1760555475; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m4Wp5vVdUQxuT6p/4H2GbnT+JlQbPgLjjBVK8VNc3c0=;
- b=V9xlkfbRqRPY29Zo6Ffg4H9AG/btg4xjK8QRt7qfWjbYfLVMTsiUpVmBvjzS3G1ykX
- hnLcPgMCTLgpckdrxARU4PRr4breqeO7owU/5nRKy1zn5+1MVE1Ua/wAmdgPq5XS7N0w
- 94VfQ3l3aGCadqkb7DyR/thqlIIRFl7Mkl+YdZvc+fOPZJaCkruWp6M/NW/Or1QS+KYP
- oNbDlRN4wS6UHHuyU1CLBNIQgLxBf4XpWBt2DQxJ5fwqKwqvf1dZD2Kd6Ppp58vxT/18
- 3fT6S3fiTHa5X4p8/CSxW8pZxlWM/H1VIvKlNVDFs7yud5raVfWfvtFxwv5geS3Q9TjO
- /3Kw==
+ d=konsulko.com; s=google; t=1759951990; x=1760556790; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5WXODrawxeiTE6zimCYQjLQWxDesByzsw4tP9tSqJL4=;
+ b=WGK2VTC63msaDKivxTn1+7SCjWylKhQ5lkxk8VKlpJrQ8U+MUGrT7BajHCHuc4sBP6
+ zya/q1GOzhTHpSJyTtoNtPPQCqNOAh1PdE9bT6pApE89ZRU7JzUOazsJ6jiezAkyUfJd
+ 3uazwQdVMNC04EIKijDzRjxsoayGpcZ8leFNA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759950675; x=1760555475;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m4Wp5vVdUQxuT6p/4H2GbnT+JlQbPgLjjBVK8VNc3c0=;
- b=IxB0WsCpTm3S5Q8B0FEMwZh9bfUgXjaarzI94rSrkgzVgyQdu4Tre4HMCHfwil4PAW
- emp89yg7ol7ybd+0OkaDVthwLHRurdt4B/xDox5NVjMX17gW9pBssKwJQmifxBsiY/MG
- aUsrFLlQniWXukzq7W40E3FRzC8g+M36qHUvdTyqhcBEx/mxtAS+Si1fU2xRWnfh7WQC
- d7d+4HRdCwIJ6p+kPO3zlMhs880ebpzomBleXFh0yMBd8j4+B4w8aZ/h5ugY1yFUg8RZ
- RtcXHbkRH2zBPbxtZVa0ONjMsLIm4bBryA5zKCXjKIpW9EJbkTorh44T2ech1QRtrXyR
- gT6w==
-X-Gm-Message-State: AOJu0YwqsaZ402qjolAV/U2KZAo2PRAy2mzJoumMxNQ9PPnDXfmcCo2j
- X7gmCTjo8PKQysjPmXwPw+Lnp5U8DY+hKK1nhj6RslBcfxbwWMw0uaAUq9UmD3uYBy0+bMYszWO
- X7XOlTrw31edWrBlzlYhs0WfTZ9GcFCmmIHmQE0SWHy8h
-X-Gm-Gg: ASbGnct6/Mmoa+Ylsmw1aFKSAKSkvbppTNqcyoMJPTJqp9z0C7Us0FPM5xLZVqe/rc6
- +kDKx6oRu63+1wZI3TW4U8oXPxHOBfglKtPQRmxOq+TQquvBRREd6+cAS3OfkDdH5CVlehkAqqU
- S3tAP9Ln3OPV8bbFqw3zM8SjOIzjadzq9oA8iVroFP49d2ygTf1Rc3hKD6Tudn4bkBtso2iKT8C
- 0eUgmjZ/ZP98E4wZVnUwPLCaXi40Wo=
-X-Google-Smtp-Source: AGHT+IG+rwTPtJxWpSeRFebq+SLeBU07tXQy+6u31Fi0FOiJJ8rSnWZxDzRJieM9i6gGHUDJhkogg+0ozxKy84mrdpE=
-X-Received: by 2002:a05:6830:2a0e:b0:78a:e6ee:a5e8 with SMTP id
- 46e09a7af769-7c0df703264mr2770994a34.8.1759950674710; Wed, 08 Oct 2025
- 12:11:14 -0700 (PDT)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1759951990; x=1760556790;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5WXODrawxeiTE6zimCYQjLQWxDesByzsw4tP9tSqJL4=;
+ b=cZVKaIOHYqzs9Xa3noCHd+9l6TAJRH8W6yY1seOk6BjIar0NXB8X9UbOgKD8MO003S
+ fhKJLCcne7EpNSEJ6DkeoRj2nbWYBf4nSX21qoYE4/yf3ROTAh+B7sLXVOc+MJsCjFAY
+ KydcTeXgQoVvcCK016yUC215Hg4JSWtSGmmxzdIgU3LUqJp8zS5QAlB3XsGXL9AMlA+U
+ /L0AC36Z66Kclh7mrND1l9/KKivKN4jHWMZVL1LOUayYTSz9kC0mHI1j5AsorqxYQ4ol
+ DGq2deiPXKpfyiz7Wf69HNDBHFolJYrNfq+PNDNNJ9c7aH50vlLih66e/xDJEtqNUKUC
+ QahA==
+X-Gm-Message-State: AOJu0YzbMtT719mPSNJoIK9RrN9gYMGebtlFNSTdGiSWUi9S+T6LCEfJ
+ GCfEm9X4LguUPXWjuihDO8fz4cxigSN6Dsqd2EPc/5o9FB/37lrfhE9dzOrr11wFbmdQPzQOnmw
+ We0Bm4eQ=
+X-Gm-Gg: ASbGncs8wAu/db31u/mzIONTOc8udmBJ7CHc/kRdT/iogjG0QQ4SHcvbem/FKBfkC/Y
+ LUDM948K71up9kn0Lj5Y5+MbGLmObFHXhyRArS9hauTkP0E2jeCyLHYixqZkgn0Noa21W3Je//b
+ XE3hL4Ko+b/OnE+S0p68eheGF0ndhtExT7oN7il+YI8L1iGVxp+81vrnjn/a8hcDA1XGvcR1mxt
+ s0GJ9Axom/NBeARe8zu+m57iobUfe9QebQ4lc+KDFbt71wy+dXjj6Cs3nxaAYiUL3L1uOTcWWoX
+ HGWT8ms1ijyqePBOjPBm9V7wiGfcGI2MMztFrNVm1MxaHriDcCob478hxK9kKOL98JQbszOfzeT
+ NpkeOguROxAC7iJa/75tlMJjdT8+Q24JhMubemRmk7dpI+Q+zlQAMX4x/6EKsrwnEJdcxXKj+Ix
+ Eg6bQCDjJN6g==
+X-Google-Smtp-Source: AGHT+IG8CFG8FowdZk6EeXE9Sc/gxcR5SwknrLFD/i3zTNPeTmeHaKw3QDO4kdNbmXit4p2WwZTy5g==
+X-Received: by 2002:a05:6808:11c8:b0:43f:49af:b849 with SMTP id
+ 5614622812f47-43fefc8c172mr4297586b6e.12.1759951989982; 
+ Wed, 08 Oct 2025 12:33:09 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44189a67868sm178068b6e.24.2025.10.08.12.33.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 08 Oct 2025 12:33:09 -0700 (PDT)
+Date: Wed, 8 Oct 2025 13:33:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sune Brian <briansune@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v1] cmd/dma: documentation
+Message-ID: <20251008193306.GI298503@bill-the-cat>
 References: <20251008174408.381-1-briansune@gmail.com>
  <20251008190713.GH298503@bill-the-cat>
-In-Reply-To: <20251008190713.GH298503@bill-the-cat>
-From: Sune Brian <briansune@gmail.com>
-Date: Thu, 9 Oct 2025 03:11:02 +0800
-X-Gm-Features: AS18NWDr__fEeeKGAsDMrQOz2lSR3PrclkmPADfzhYnAfv5L6TtI5og-0RFa9uM
-Message-ID: <CAN7C2SAaia8qV4sx-uMF2Y1GE4GW=WmmgSMHMApW0YoTzTqQOQ@mail.gmail.com>
-Subject: Re: [PATCH v1] cmd/dma: documentation
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <CAN7C2SAaia8qV4sx-uMF2Y1GE4GW=WmmgSMHMApW0YoTzTqQOQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="x8Z0uALEULBATQLw"
+Content-Disposition: inline
+In-Reply-To: <CAN7C2SAaia8qV4sx-uMF2Y1GE4GW=WmmgSMHMApW0YoTzTqQOQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,53 +99,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B410=E6=9C=889=E6=97=A5 =
-=E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=883:07=E5=AF=AB=E9=81=93=EF=BC=9A
->
-> On Thu, Oct 09, 2025 at 01:44:08AM +0800, Brian Sune wrote:
-> > This explains how
-> > to use the new U-Boot command 'dmareset'.
+
+--x8Z0uALEULBATQLw
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Oct 09, 2025 at 03:11:02AM +0800, Sune Brian wrote:
+> Tom Rini <trini@konsulko.com> =E6=96=BC 2025=E5=B9=B410=E6=9C=889=E6=97=
+=A5 =E9=80=B1=E5=9B=9B =E4=B8=8A=E5=8D=883:07=E5=AF=AB=E9=81=93=EF=BC=9A
 > >
-> > Signed-off-by: Brian Sune <briansune@gmail.com>
-> > ---
-> >  doc/usage/cmd/dmareset.rst | 55 ++++++++++++++++++++++++++++++++++++++
-> >  1 file changed, 55 insertions(+)
-> >  create mode 100644 doc/usage/cmd/dmareset.rst
->
-> This needs to be included in doc/usage/index.rst (alphabetically sorted
-> still) in the shell commands section. Also please do "make htmldocs
-> KDOC_WERROR=3D1" and make sure there's no complains for v2, I see some
-> style issues it will trigger. To build the docs a python venv is
+> > On Thu, Oct 09, 2025 at 01:44:08AM +0800, Brian Sune wrote:
+> > > This explains how
+> > > to use the new U-Boot command 'dmareset'.
+> > >
+> > > Signed-off-by: Brian Sune <briansune@gmail.com>
+> > > ---
+> > >  doc/usage/cmd/dmareset.rst | 55 ++++++++++++++++++++++++++++++++++++=
+++
+> > >  1 file changed, 55 insertions(+)
+> > >  create mode 100644 doc/usage/cmd/dmareset.rst
+> >
+> > This needs to be included in doc/usage/index.rst (alphabetically sorted
+> > still) in the shell commands section. Also please do "make htmldocs
+> > KDOC_WERROR=3D1" and make sure there's no complains for v2, I see some
+> > style issues it will trigger. To build the docs a python venv is
+>=20
+> I used the the checkpatch
+>=20
+> $ ./scripts/checkpatch.pl v1-0001-cmd-dma-documentation.patch
+> WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
+> #16:
+> new file mode 100644
+>=20
+> total: 0 errors, 1 warnings, 0 checks, 55 lines checked
+>=20
+> NOTE: For some of the reported defects, checkpatch may be able to
+>       mechanically convert to the typical style using --fix or --fix-inpl=
+ace.
+>=20
+> v1-0001-cmd-dma-documentation.patch has style problems, please review.
+>=20
+> NOTE: Ignored message types: COMPLEX_MACRO CONSIDER_KSTRTO ENOSYS
+> MINMAX MULTISTATEMENT_MACRO_USE_DO_WHILE
+> NETWORKING_BLOCK_COMMENT_STYLE PREFER_ETHER_ADDR_COPY USLEEP_RANGE
+>=20
+> NOTE: If any of the errors are false positives, please report
+>       them to the maintainer, see CHECKPATCH in MAINTAINERS.
+>=20
+>=20
+> > suggested and you'll need to pip install -r doc/sphinx/requirements.txt
+> > -r test/py/requirements.txt.  Thanks!
+> >
+> > --
+> > Tom
+>=20
+> The doc uses another checking tools?
 
-I used the the checkpatch
+We have an outstanding update to checkpatch.pl that may or may not be
+better for rST (as the kernel has been using it more and more), but this
+is analogous to compiler warnings when building code, checkpatch.pl
+won't catch that (but I manually enabled this driver in a build to check
+it before pushing).
 
-$ ./scripts/checkpatch.pl v1-0001-cmd-dma-documentation.patch
-WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
-#16:
-new file mode 100644
+--=20
+Tom
 
-total: 0 errors, 1 warnings, 0 checks, 55 lines checked
+--x8Z0uALEULBATQLw
+Content-Type: application/pgp-signature; name="signature.asc"
 
-NOTE: For some of the reported defects, checkpatch may be able to
-      mechanically convert to the typical style using --fix or --fix-inplac=
-e.
+-----BEGIN PGP SIGNATURE-----
 
-v1-0001-cmd-dma-documentation.patch has style problems, please review.
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOa8bwAKCRAr4qD1Cr/k
+CifgAQCHtAl18CMPfyBerZYH89k+U0zUIH+1G3rFP6wY7YJdIAD/Q+yxXAuUmMcy
+8pN4Sv+Y/KY3qegE9OwRTLno9hZI1A0=
+=ooKv
+-----END PGP SIGNATURE-----
 
-NOTE: Ignored message types: COMPLEX_MACRO CONSIDER_KSTRTO ENOSYS
-MINMAX MULTISTATEMENT_MACRO_USE_DO_WHILE
-NETWORKING_BLOCK_COMMENT_STYLE PREFER_ETHER_ADDR_COPY USLEEP_RANGE
-
-NOTE: If any of the errors are false positives, please report
-      them to the maintainer, see CHECKPATCH in MAINTAINERS.
-
-
-> suggested and you'll need to pip install -r doc/sphinx/requirements.txt
-> -r test/py/requirements.txt.  Thanks!
->
-> --
-> Tom
-
-The doc uses another checking tools?
-
-Brian
+--x8Z0uALEULBATQLw--
