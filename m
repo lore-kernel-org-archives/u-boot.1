@@ -4,75 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7EFDCCA476
-	for <u-boot@archiver.kernel.org>; Tue,  7 Oct 2025 23:51:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86115CCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 04:22:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C934383A5E;
-	Wed,  8 Oct 2025 01:50:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 4FAEF83981;
+	Wed,  8 Oct 2025 06:22:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="coZzHSte";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dQZk9xQC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7ADAB8397A; Tue,  7 Oct 2025 21:35:02 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 922F683979; Wed,  8 Oct 2025 06:22:05 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A32F838E7
- for <u-boot@lists.denx.de>; Tue,  7 Oct 2025 21:34:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 725E3838F8
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 06:22:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thomas.petazzoni@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 2C7F44E40F5C;
- Tue,  7 Oct 2025 19:34:59 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id F3F0D606C8;
- Tue,  7 Oct 2025 19:34:58 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id C3E4C102F217C; 
- Tue,  7 Oct 2025 21:34:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1759865698; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=fR4r9Dbdw3CcRnMYdSEPn87qZUbhU8sOgS0FW3nujeM=;
- b=coZzHStesyEoCA/lXEFukupNegRjEMQH3x2M5X0LLJtFiNUAghGHF3+rBHk49tYU2P+9Vb
- jKbUAZxXFne6ot2i0qMlsWA5zW1Zrn95dTDKmzRq/KancqnPjLq/6lYVZ3BUqn601G+hjt
- QiKEh/QmAo0FnKW8xZGn362pmPwMKM8wWbWfxv6Wpblsg4jep9tnIsagWSpP8lxK4qLeAT
- 8X9ouqOmybWdAEHyZfMP3VqIlLU+OampzN02uBJuD89ZP3Ggsk7fE79SNcYpeBaV1wq4Gw
- GSWaEnZJbY/pqByUvAGCtu9ijFrW2hALrP76BT/XdjybJaka3uKhQnK3Qm7iyw==
-Date: Tue, 7 Oct 2025 21:34:47 +0200
-From: Thomas Petazzoni <thomas.petazzoni@bootlin.com>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Jagan
- Teki <jagan@amarulasolutions.com>, Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)"
- <paul.liu@linaro.org>, Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth
- <praneeth@ti.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 06/16] board: ti: Convert cape detection to use UCLASS
- framework
-Message-ID: <20251007213447.4d3c5a1a@windsurf>
-In-Reply-To: <20251007182938.368bf435@kmaincent-XPS-13-7390>
-References: <20251003-feature_sysboot_extension_board-v1-0-458b8bf85325@bootlin.com>
- <20251003-feature_sysboot_extension_board-v1-6-458b8bf85325@bootlin.com>
- <CAFLszTj3j6bcm6PG1GLAHa6FfjpKOKL12P_ae4WZsJL4hbh-HA@mail.gmail.com>
- <20251006214428.GD298503@bill-the-cat>
- <CAFLszTgLd7gHoU04QKAgHWNFQz_CS_XfeJCBkn58fu3UxUyurQ@mail.gmail.com>
- <20251006234240.GF298503@bill-the-cat>
- <20251007113213.75efa663@kmaincent-XPS-13-7390>
- <20251007141148.GJ298503@bill-the-cat>
- <20251007182938.368bf435@kmaincent-XPS-13-7390>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.3.1 (GTK 3.24.43; x86_64-redhat-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7a32c0163bfso415887a34.1
+ for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 21:22:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1759897322; x=1760502122; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=+5tpJgjCTdxKCuBmOkYi8pR/rpSuqlxn3Aw+6PYDbJw=;
+ b=dQZk9xQCgex/EdunRANHbFXhSKW7XMhXYM0gFngNDW8h4o8L9T7z+ZQ9cnbA1J/MWC
+ EYzMOEVYW8Uwxq+iK+hRfYJLHuTFI+arqC7WhCi3EvSzW7BgkCSHfSW3njAxBk3yavNv
+ h40xi2ixSwjydqfQNPC7l5V+neXiQt622P3Qk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759897322; x=1760502122;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+5tpJgjCTdxKCuBmOkYi8pR/rpSuqlxn3Aw+6PYDbJw=;
+ b=XpI4rVeMUW+10XHV7DH/CogOLXUZjdGXrsSui40vmTnHEwkVTKBFleotlONh5v3zAA
+ YVp+BVzUtM2rWtaFX+nXiEyVjntsw3eXS4/gk82g+3OGUi5FtFZk3IbxMegUk1YRpIBR
+ Q4RPkDc3U4QMuJGsBTEEGrakoDaAQdJa5uHgNKfBf5+ceLo6G4/rViNO649l9kFmdkaw
+ rmgyobZgAVgnjapJV/gXh+WU9uVvhZ9ejNWyXln8Ohgkk1Yz7qOPg48WXELRE0Ylc/lc
+ AMLiR7DpqrC+k9igfp7ULpa70JJvydGdcqAMEuxNmfblEuxl93oZ/GKChA0kdS24EbzD
+ PGDg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXSkG1XSELR3SiMoaybZBwnKGN8z/oKVBhIZY2LNWWe4dtaHthRFbv40Eq0ovGoi02jbZUptY8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkOB/RWk5HWS1EBr9z5hFBy6sjCl8k0mHLLHEtEkVZBC24TR8c
+ Hw2pkQD4BmnXM70VtS6J/kHqm/7hXU8/+qR5YV8gIENTC5Dy1Vw6oDDXY8KkGicAv64=
+X-Gm-Gg: ASbGnctlWJ49FQXqIjfKMsRjbuh0HjK1BKXVRLonPPUmu5Ny2Sz3yDQLMvWx2Lg2fVb
+ 20AAHn2wy9d4dSsjlSSSsdVsf+8JizFDBWoNr66cYKtct4vzOH93+BuiE0XPm7YWaJIzcgFDmt4
+ BYzL+awjVWBJu+gGpt7TESAAdoSDNF5P3cYIuKSN9FQa/3xrgXSNmo8g4gnutkVC3sbGYjxbfaL
+ iCynQnjj50QM16U2YEg9J1m9eC1N8WEk2hddVZxK92d0wMxNftbysM+IyYfjElzk4W+/LWfs+mQ
+ 4hPM91GnNApqAIP+He2mC9YvEXvnetXeTKp2h9we3W/TvyDjbPnLVl4uWRHNXmwpqtrqA+Vc/nt
+ REUa9D7/oNnrSOEpXlt4uTxqeNMA3BdyBjMltYHJwQH8yzbVv/sSyF+NU9lP+6HOGGWd7KfnnXf
+ VqnWgAYnrKxfcKi+qjusQ=
+X-Google-Smtp-Source: AGHT+IFhzmo/qNHzA0BpSLoWchv4pa92E1KkUvOnSQpS9glTbwlSph2d64xSYwYdGBsk9BkqU0eLNw==
+X-Received: by 2002:a05:6808:6902:b0:43f:4ad3:df09 with SMTP id
+ 5614622812f47-43fefc09c07mr3121179b6e.10.1759897322057; 
+ Tue, 07 Oct 2025 21:22:02 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-64e1bc7f424sm3818016eaf.17.2025.10.07.21.22.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 07 Oct 2025 21:22:01 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ u-boot@lists.denx.de, Christian Marangi <ansuelsmth@gmail.com>
+In-Reply-To: <20250910083737.9263-1-ansuelsmth@gmail.com>
+References: <20250910083737.9263-1-ansuelsmth@gmail.com>
+Subject: Re: [PATCH v3] airoha: rework RAM size handling to support
+ multiple RAM size
+Message-Id: <175989732044.1794629.510734599893677442.b4-ty@konsulko.com>
+Date: Tue, 07 Oct 2025 22:22:00 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
-X-Mailman-Approved-At: Wed, 08 Oct 2025 01:50:35 +0200
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,26 +98,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+On Wed, 10 Sep 2025 10:37:35 +0200, Christian Marangi wrote:
 
-Sorry for jumping in the middle of the thread, but I only have a small
-comment.
+> There are multiple version of the same reference board with different
+> RAM size and it's not enough to base the RAM size entirely from DT. To
+> better support it use the get_ram_size way to scan for the actual RAM
+> size of Airoha SoC and increase the size of the memory map.
+> 
+> Also rework the memory map to account for 2 memory map. The first one of
+> 2GB for 32bit DMA and for safe usage of U-Boot. The second one for the
+> rest of the RAM since up to 8GB are supported.
+> 
+> [...]
 
-On Tue, 7 Oct 2025 18:29:38 +0200
-Kory Maincent <kory.maincent@bootlin.com> wrote:
+Applied to u-boot/master, thanks!
 
-> I think, he means a driver for each type of custom extension board scan
-> functions (4 until now). The U-boot devicetree would be like this:
-> extension_scan {
-> 	compatible = "bone-cape-scan"; 
-> };
-
-I'm far from being a DT binding maintainer, but I highly doubt this
-would be accepted by a DT binding maintainer as this doesn't describe
-HW at all.
-
-Thomas
+[1/1] airoha: rework RAM size handling to support multiple RAM size
+      commit: 726404a66c773d8ee1b2d25725f3a6ef470f1b3e
 -- 
-Thomas Petazzoni, co-owner and CEO, Bootlin
-Embedded Linux and Kernel engineering and training
-https://bootlin.com
+Tom
+
+
