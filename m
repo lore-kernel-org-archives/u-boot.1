@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87ED0CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 14:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA70DCCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 14:57:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E658839DE;
-	Wed,  8 Oct 2025 16:56:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6712B839DE;
+	Wed,  8 Oct 2025 16:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HtDvO9o0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qeKp7z/d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABF9183F6D; Wed,  8 Oct 2025 16:56:29 +0200 (CEST)
-Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
- [IPv6:2607:f8b0:4864:20::c30])
+ id 2EB2C83C91; Wed,  8 Oct 2025 16:57:41 +0200 (CEST)
+Received: from mail-oa1-x31.google.com (mail-oa1-x31.google.com
+ [IPv6:2001:4860:4864:20::31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA6D0839DD
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 16:56:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3C70839DD
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 16:57:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc30.google.com with SMTP id
- 006d021491bc7-6456dd98f36so3776202eaf.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 07:56:26 -0700 (PDT)
+Received: by mail-oa1-x31.google.com with SMTP id
+ 586e51a60fabf-35ba7c71bfdso3948067fac.3
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 07:57:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759935385; x=1760540185; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759935457; x=1760540257; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QIJUcd5ndvcvrXlJ3hN2SIrf1BKxbd2ln3oN49i6fbk=;
- b=HtDvO9o04nrbWkLFKZAC7grPj+NPe868jTa8UVVRlmmwH7mXiU7244WsTd8mjgNaRz
- qO947KdBFMnhDsNM8nILElPYBkR5OcgvgecTg3yU/QhzhsGOA78R3Fk/OwUezbIa9PeK
- c5my2KXI4l7q+KVRSV2znnm6GrKcIx2sZo9HQ=
+ bh=uqftDDlzIS1lTxEOoo6vaUS2rkaJZtB7ACn60fuI2kU=;
+ b=qeKp7z/dBhBSJGmzMknZHiinMximv8Zo2KCZoY2UfU4Lg4mspWUsSvKXbGprbfAdAn
+ 18879Fc9bjhyKcYfGM61HntIv3G9d2QW6n34oQ8ql0m7SejbkPtXqgFOow2i2AP9JkP6
+ 8BmfTm3sJylewYpLvUbbWitBnTGmr1JOhfKQI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759935385; x=1760540185;
+ d=1e100.net; s=20230601; t=1759935457; x=1760540257;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QIJUcd5ndvcvrXlJ3hN2SIrf1BKxbd2ln3oN49i6fbk=;
- b=iQHd90WgSlPSDWGaFKlUm2kVzHspNPHwz+3mmdmuTLVl01h9qZNHltG+i57iS6SyNp
- i6PwOQuz9ED7Ll66DetL8Zw34xs9Dajds0GEdXgixYJTQ6DNWvM1ULPTZ4AR4tHi06/T
- znB0/2iqQOVRgrTt8/xqumRyq1PNRNR49kOltBU5ecPiw5WHhzGpCUGOzwt3oJ2ncE/Z
- W9/ggjiR91mj32pPKaGHU15mSIXl2tKBjBsHTXhzoSBO3y1v8DWM5KzryNdGEX+T6e4J
- c4AhiH/Il5wWNlW+d8hG+Y1INS5I7Ouo/bwgumkOeMYY7XUsjjptZUAJmH6uTRyW3gL9
- NApw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWN83RQ2FhStfzGGSUqBKUmeRPi6qOZtGXJxJNJeFzJ/dq0BDKVqPzrk/KNQLbOQJQJLGw+NWQ=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz5DUQXt1YKgNo1Selc2xcUp79u4WlYLBfyqo16p/2ugCw7fyaP
- cO84jicM25uHY6KodVXOzZzywkHlyk/neYcghtBLYgmUmxfnc67YsUsGHxEcPVw/u0M=
-X-Gm-Gg: ASbGncvLKWMOpQCtEq8Chgnk9/zRXLl/xZe0S0IfcC0Gg5kEkSBRqfEP6iut06nMCZ7
- mR/vkL2Y2fUQm2pScsWA2cK+9Q/lk2PUuQJjdsaHzVv8a9X8TRHLMRCcV2fGSK/D6XpHvNWGtcF
- gMPcD9Pfz2l8k4miJ0IgXx/BJ+iVFUaMbS3BJfhyWj1dIYgLRKRbApzLkmAjtikuUQURf1AmE39
- kBwtYxrZ6tycQfTgA+xu9nd0Iu2M0dGW9ho8kwKOw32wWqqGA9mmnp4rocQXwuvqWElbyBI4Res
- voG0YS3C01NINpiD5ZkciTl+NxrAjVLFKzVuprkxP2cBtRlDwZw8SVMcqiP5OjLVIoUrRwBEIuY
- 3UvlzX2QDrE8Z/rGjJTmz2dhQK/0HDCOQDkbl1NEjNHoW/UKyu9q/osepFsDR9PWDHnnIj/Vhj+
- oHFAhO6Hjfyw==
-X-Google-Smtp-Source: AGHT+IGZxHf79C6P9SBCMDxDlcwcM9dokP3m294gw1LblcOPsdyw10cYGMTRPRWuqt3INFdPNApgeA==
-X-Received: by 2002:a05:6870:2108:b0:366:891:7be4 with SMTP id
- 586e51a60fabf-3c0f6af2834mr2211916fac.15.1759935385600; 
- Wed, 08 Oct 2025 07:56:25 -0700 (PDT)
+ bh=uqftDDlzIS1lTxEOoo6vaUS2rkaJZtB7ACn60fuI2kU=;
+ b=byZZzR4IVZu9m0h+DOvQYzMSWG/fexCC0f94UtANenevVMtpQPoinjFYKtoC0MUXfp
+ l4El1VdONmjw3ZcWEN9MyWAZCmZ4pWKuST8R9o3iWKmzn+AuUDj1O7rlLCUyPWzVU7Dw
+ sAaMM07o2jyQVT3B5p5YW1d+xZEBxf0xy/OcUqwaQmfhaotzBGsa5Kz2nwG1FjUtLKIK
+ eHfIYJVdnjZVfu/J/0Nf2ZC8lKm2s9FLrZiiHO56r3smKPhKEXnWtRlqdEzTP3AhhGnW
+ gb4OtxaehBOkrUOPUtXscs82FpYr7HdEDzsuzJh31KSJndJl2NNiH+QY/u454Tky8sjU
+ gd5g==
+X-Gm-Message-State: AOJu0Yz/8zBGiyHXiGXzUfcetUWLoh9ShYBvZic4/Onzld/d3BistsdM
+ Cq4+G/9TTWkO3NULJzwqLdAbuuBGjYJj0X37sq3vmZAwc4c4JAAOMpf/BiB1p1QJnJM=
+X-Gm-Gg: ASbGnctUpLhMPM5M/i+5E45i70ypT6z5lqDVhhGtZyrUx0Aqvd+a3iq++ZgQGSvSUbt
+ yINkpavL0vDcTWlK6MTk8FHfU7mvJbVecxCbvI3Yn0uvqlbMqdIcUEEssgiW6Xg+CbZBXaEwrhZ
+ vJk/3pEpDoX6wznu4KPg1frw7LzRr4LeIp381U2hgjLywSCY5dxjN7Yfuf8bOUTSi0Z657o5tQA
+ 6u+lmWi94ieqiFd7NjjVwKtgouX0ZrXa7zdaAC0gdJLbtlr/EBqXzLiGj26i9Dxxi9dDp0SC67P
+ qYWEdBbnAbkg5aZYVtTQDX+Fx3M6Eb+ABuW8YahcjK2aoyEjaohlxY89ZX+NaahFwBq04bWyqx9
+ jI1wsp15/JLbHViqT+MFmB4QUhGWA6dkTW2KSyJQVYXbIiUof8RKm9yhm3hocm7nnMmD54kOMPK
+ jy/HA5d7m1PA==
+X-Google-Smtp-Source: AGHT+IG7oQiiqLDMHGHm+d56C2kHx55euSQzFvzRR0Uo0CIAtqKEZC8TSzTk1V5h9lt23IaFtbQbTA==
+X-Received: by 2002:a05:6870:810c:b0:301:fec8:fc5 with SMTP id
+ 586e51a60fabf-3c0f91a5af1mr1957328fac.23.1759935457468; 
+ Wed, 08 Oct 2025 07:57:37 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab7ce5655dsm6195845fac.13.2025.10.08.07.56.24
+ 586e51a60fabf-3ab794be68fsm6162088fac.12.2025.10.08.07.57.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 08 Oct 2025 07:56:24 -0700 (PDT)
-Date: Wed, 8 Oct 2025 08:56:22 -0600
+ Wed, 08 Oct 2025 07:57:36 -0700 (PDT)
+Date: Wed, 8 Oct 2025 08:57:34 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>,
- Mugunthan V N <mugunthanvnm@ti.com>
-Cc: Dharma Balasubiramani <dharma.b@microchip.com>, u-boot@lists.denx.de,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- Manikandan Muralidharan <manikandan.m@microchip.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: Re: [PATCH] ARM: dts: sam9x60ek: select PIT as tick-timer
-Message-ID: <20251008145622.GW298503@bill-the-cat>
-References: <20251008055636.17462-1-dharma.b@microchip.com>
- <4f2bcf39-2b8b-423c-8b36-db9a65573248@linaro.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v2 02/17] boot: Try all bootmeths on the final partition
+Message-ID: <20251008145734.GX298503@bill-the-cat>
+References: <20251001212649.3263574-1-sjg@chromium.org>
+ <20251001212649.3263574-3-sjg@chromium.org>
+ <20251007181356.GO298503@bill-the-cat>
+ <CAFLszTieyj5_wTNCqsGryCses5a7DWpgVN9AUiJchmjPMViHTg@mail.gmail.com>
+ <20251008143415.GU298503@bill-the-cat>
+ <CAFLszTh=jWE0pefvXCpxvBZUtWWuJVem7f5HsYeJU1C7dkvq+g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="p2talMQn7pz1G5m+"
+ protocol="application/pgp-signature"; boundary="vFe6R4k2IrurhU0e"
 Content-Disposition: inline
-In-Reply-To: <4f2bcf39-2b8b-423c-8b36-db9a65573248@linaro.org>
+In-Reply-To: <CAFLszTh=jWE0pefvXCpxvBZUtWWuJVem7f5HsYeJU1C7dkvq+g@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,62 +102,78 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---p2talMQn7pz1G5m+
+--vFe6R4k2IrurhU0e
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 08, 2025 at 10:21:41AM +0300, Eugen Hristev wrote:
+On Wed, Oct 08, 2025 at 08:45:54AM -0600, Simon Glass wrote:
+> Hi Tom,
 >=20
+> On Wed, 8 Oct 2025 at 08:34, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Oct 08, 2025 at 06:53:44AM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 7 Oct 2025 at 12:13, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Oct 01, 2025 at 03:26:27PM -0600, Simon Glass wrote:
+> > > >
+> > > > > At present when one bootmeth fails on the final partition, the ne=
+xt
+> > > > > bootmeth is not tried. Adjust the logic to go to the next bootmet=
+h,
+> > > > > which is the more natural behaviour.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > >
+> > > > My feedback on v1:
+> > > > https://lore.kernel.org/u-boot/20250331174144.GI93000@bill-the-cat/
+> > > > was that we need to do a documentation change when doing a behavior
+> > > > change. And I cannot recall if this change here is because of repor=
+ts of
+> > > > problems or not.
+> > >
+> > > This is a long time ago, but I think it might have been an
+> > > inconsistency that I found myself. Otherwise I would probably have
+> > > mentioned the person who reported it.
+> > >
+> > > The documentation already implies the logic in this patch, as I see
+> > > it. But please suggest any changes.
+> >
+> > OK, I guess it's because the commit message doesn't explain the bug
+> > clearly enough. Is this a correct description of the patch:
+> >
+> > At present, normally when one bootmeth fails on a partition, we move on
+> > and try the next bootmeth. However, this was not the case for the final
+> > partition due to a bug. Rework the logic so that all partitions are
+> > treated the same.
 >=20
-> On 10/8/25 08:56, Dharma Balasubiramani wrote:
-> > U-Boot currently enables the UPLL during boot, which triggers a udelay()
-> > call that depends on the system tick timer. Since no explicit tick sour=
-ce
-> > is defined in the device tree, boot stalls on this board.
-> >=20
-> > Define the "tick-timer" property under /chosen and point it to the PIT
-> > node, ensuring U-Boot uses the PIT as the tick source.
-> >=20
-> > Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while r=
-eparenting")
-> > Signed-off-by: Dharma Balasubiramani <dharma.b@microchip.com>
-> > ---
-> >=20
-> >  arch/arm/dts/sam9x60ek.dts | 1 +
-> >  1 file changed, 1 insertion(+)
-> >=20
-> > diff --git a/arch/arm/dts/sam9x60ek.dts b/arch/arm/dts/sam9x60ek.dts
-> > index 6521585ee9c..1c09c92ae18 100644
-> > --- a/arch/arm/dts/sam9x60ek.dts
-> > +++ b/arch/arm/dts/sam9x60ek.dts
-> > @@ -17,6 +17,7 @@
-> >  	chosen {
-> >  		stdout-path =3D &dbgu;
-> >  		i2c0 =3D &flx0;
-> > +		tick-timer =3D &pit;
-> >  	};
-> > =20
-> >  	clocks {
+> We can certainly say that if you like. It is fair to say that the
+> algorithm is still being evolved as new things come up. Most of the
+> behaviour has been driven by new tests that I've written. The global
+> bootmeth is the biggest change since hunters were introduced, but I
+> suspect there will be more in future.
 >=20
-> This property is not in Linux DT and not documented in Linux.
-> Please move it to sam9x60ek-u-boot.dtsi
+> I'm heading out later today but can probably send v3 series (with the
+> tweaks you've given) tomorrow. After that I'm not sure as I'm on
+> holiday for two weeks.
 
-Oof, yeah, that belongs in the -u-boot.dtsi and long term we need to
-rename it to u-boot,tick-timer and upstream it.
+Peter's feedback should be addressed too for a v3 (and not just set
+aside).
 
 --=20
 Tom
 
---p2talMQn7pz1G5m+
+--vFe6R4k2IrurhU0e
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOZ7lgAKCRAr4qD1Cr/k
-Cp5eAQCUCpMDn0lgp5qOViaVJ348dyLWRNgxuTp8kPgDI0bQvAD/c3/5e66OHgOS
-mcI/niv3yrY5EAB3oA/DfVb1Zfj7BQA=
-=xrhk
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOZ73gAKCRAr4qD1Cr/k
+Cp/LAP0QJsPyGLUt9HOVW8pW5R8NJuyKk2y+Btr63o45RlRr3gD/RVyQEPNlnbsH
+iq2hDXxb/VwoitvU6L8Gr04oa2uaIgY=
+=+x2e
 -----END PGP SIGNATURE-----
 
---p2talMQn7pz1G5m+--
+--vFe6R4k2IrurhU0e--
