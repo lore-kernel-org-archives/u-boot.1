@@ -4,77 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56B08CAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 12:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A12DCCA472
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:00:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEC3283E23;
-	Wed,  8 Oct 2025 14:54:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9AF5B83E21;
+	Wed,  8 Oct 2025 15:00:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=risingedge.co.za
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DnRT3efg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=risingedge.co.za header.i=@risingedge.co.za header.b="QxYXChzM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3FDF83E70; Wed,  8 Oct 2025 14:54:35 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9CB8D838E7; Wed,  8 Oct 2025 12:19:39 +0200 (CEST)
+Received: from outgoing8.flk.host-h.net (outgoing8.flk.host-h.net
+ [188.40.212.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBED083E21
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 14:54:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 200A3838E7
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 12:19:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=risingedge.co.za
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-61feb87fe26so10921728a12.1
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 05:54:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759928073; x=1760532873; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ffMY/6JuKqf5HzJQdN6qByd1zkMDF6WtGhCKcfv5Rl0=;
- b=DnRT3efgVjZ1pXM9oMORDpYzPBn0ozttL4i2b18AqttxA5wcfUPBofX3X80FpRe/9d
- C2MgqNNl4n4nF9sVkefljHRoN8ZYm5ROJQOwQxC2Tmxo5X2VYAFlWKzJplEIqNdswUpa
- RQPtmkfUqAtIedS5jX60sY+nBtz7ltseDnkRw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759928073; x=1760532873;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ffMY/6JuKqf5HzJQdN6qByd1zkMDF6WtGhCKcfv5Rl0=;
- b=M52IP4dTFDZiinY3JuAKv8lXWZVi4FPpSGmnbLgDzcxnoANtFJUKjJhn21IZ53LGHc
- QmUjfoe+DiABzZhdYMsBECxRdbut8E23ReTCJhcdiEipz3rftWSVd89Gkr390/sn1bIE
- v1kkHsenMUXvPMoxSmNY95FlCkakg+Nl1zHzKUUeDNxNKiVo6UZVOgBwBcjJcpZMAGZW
- 6DM7tvrAynvH5i9u56ah7MQneNRdSomsIgTB41echl8gnZMvijwpwr8Q8+zOjAwIPDsx
- BLaW/pXCBADn9UbVpgKeWwDCaQtp45UkKUBc7qzcnY55NmGmx2LJCevUG5ZNXVhFmBAo
- 4UKQ==
-X-Gm-Message-State: AOJu0Yz0fOD7oZwACA0/fHIPQeqfw8uXY48a4s6eK75hM0GRll1GRITN
- pcpNdc+PGtiAe4h0k+8mUDHkga2AVh8dRQsd1z+MPZmUR9pZpU18cAwlatOiRD7TF6v53d1A3NR
- GZwayPRku1O8S80fLHY5Ds215Xec/0wupsDq1Fx+Wooub+BVkBRg=
-X-Gm-Gg: ASbGncsGHJ17EpSBYfs6qSMocp2MPPVIsy8eraajlQ77hRRBJHKJ7/0vs2GeW+A6xB5
- J9z8Dgf+jU3TtcmV6YYc3kt8pPQ/CWyHg0dENJcJmtp1eBljaZ5g+lq600Vn80onUrp0bzqJzPx
- +cQDHvSbwQpRuU6TtoBPzUGXQnjUnsCJyqNxTSrNbp4rVLVOCUiLwSfRu5fb4lodKF/Jy9VmiEy
- wQOKGK+cB5pKYHqGCYJk9wc7q2wng==
-X-Google-Smtp-Source: AGHT+IHCA5PKChZGn2IR8DcxAl0TdizlVwZFjMqY3B1i2PLr3jepdc1Lx35hvRTVK+QYltbEkpqQZE3ltq1aQqbzfrc=
-X-Received: by 2002:a05:6402:1d52:b0:633:57e8:ea3e with SMTP id
- 4fb4d7f45d1cf-639d5c6a5c7mr2642457a12.33.1759928073341; Wed, 08 Oct 2025
- 05:54:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=justin.swartz@risingedge.co.za
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=risingedge.co.za; s=xneelo; h=Content-Transfer-Encoding:MIME-Version:
+ Message-Id:Date:Subject:Cc:To:From:reply-to:sender:bcc:in-reply-to:references
+ :content-type; bh=lJW9XoxTJUBlqBnBnkNg4tAonwaKIhpuJuVi0b3ITow=; b=QxYXChzMXtr
+ YpHFFAHqImLmWTKTjyGQrlcWMWI8Nluanam+T12Ilawlb6IryomDW7t4K3dP8SUtcMaC7mZQTq+T9
+ 7nk9e9pCsp5PQkWueNgy7YQ9YnUTb3NyEOvGKsmStQyWbng+rCUTBI/00RBsE4TKgJh6xj6eWiz5M
+ AFYI9h3zwvE35nTV+KxgPGtnmcS6Kpg+5Vxy0/IHS6QTU7Ni6XMpEkQtjytzk8ASr7ywl5kwpOR8c
+ pX+UFnZEzI7f1QCo3TQI1qr/5P7NQJQh9aDA2fyhqEi8Dj5+85UaISq3ynHaJ8SMst073CjS3NeRo
+ XhShbyNuWqBU16iF+Q6ts7w==;
+Received: from www31.flk1.host-h.net ([188.40.1.173])
+ by antispam1-flk1.host-h.net with esmtpsa (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.94.2) (envelope-from <justin.swartz@risingedge.co.za>)
+ id 1v6RL6-006nRI-5c; Wed, 08 Oct 2025 12:19:35 +0200
+Received: from [41.144.192.111] (helo=localhost.localdomain)
+ by www31.flk1.host-h.net with esmtpsa
+ (TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256)
+ (Exim 4.98) (envelope-from <justin.swartz@risingedge.co.za>)
+ id 1v6RGZ-0000000E6xV-2XVf; Wed, 08 Oct 2025 12:19:28 +0200
+From: Justin Swartz <justin.swartz@risingedge.co.za>
+To: u-boot@lists.denx.de
+Cc: Anshul Dalal <anshuld@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Heiko Schocher <hs@nabladev.com>, Tom Rini <trini@konsulko.com>,
+ Justin Swartz <justin.swartz@risingedge.co.za>
+Subject: [PATCH v2] i2c: add support for the MT7621 I2C controller
+Date: Wed,  8 Oct 2025 12:22:56 +0200
+Message-Id: <20251008102256.26660-1-justin.swartz@risingedge.co.za>
 MIME-Version: 1.0
-References: <20251001212649.3263574-1-sjg@chromium.org>
- <20251001212649.3263574-7-sjg@chromium.org>
- <20251007175849.GN298503@bill-the-cat>
-In-Reply-To: <20251007175849.GN298503@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Oct 2025 06:54:21 -0600
-X-Gm-Features: AS18NWCBQ7WNgwek7ReHjeYSZGS_RqvBW4irunjk4pJMeRwHQ-rc5KusHqklYeA
-Message-ID: <CAFLszTjEDa-YueKQu7i5E7C=qP15HnEhLour0xynvws7P76SZg@mail.gmail.com>
-Subject: Re: [PATCH v2 06/17] boot: Add a new test for global bootmeths
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Authenticated-Sender: justin.swartz@risingedge.co.za
+X-Originating-IP: 188.40.1.173
+X-SpamExperts-Domain: risingedge.co.za
+X-SpamExperts-Username: 
+Authentication-Results: host-h.net;
+ auth=pass (login) smtp.auth=@risingedge.co.za
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: SB/global_tokens (4.44668172378e-06)
+X-Recommended-Action: accept
+X-Filter-ID: 9kzQTOBWQUFZTohSKvQbgI7ZDo5ubYELi59AwcWUnuV9prUnyDqHpVKSlhi1DZQO7lrDxpXGdikb
+ kyoq+k04iyu2SmbhJN1U9FKs8X3+Nt0Io1idSgCc/506nnISAkPANvJkKIxakGlbxi+ggiqZlxxH
+ xN7wu8yGEPLNcyeaFTi/bHMCl2gwTy01hqk0/dS1BMmyNbDn7R5kilAhwr3KtFb3AgNUGvQRnUF+
+ Lycvfx+SVUSshQka8VpEeqGYZUq97tUTMtsYz/+qpxn6s5UUBohSnw9YyoGHx/ukuag1WKDVi/kr
+ 0Xu6IEz8fH7EgizlKVFCXTS2zVmMeFsPQMyMp5ya4EnB7foI3WDAWEIqQR42kI22V3+6/8VpCe4k
+ l4rBoCO4qTTFh+YfFhnsJKW+4WQB2ErbcicDbPONrkjWuIPYD7NLT3TvBNLPf1+s3ESe+GGIqRjk
+ Mz2jvqlQOSgIbcgz0HNfKMPpYLUBoJLBZM6XMij7O2V2L0AboX+EfdzJxBXYqR8rw+1Lw2kJ3fBT
+ Bm1pdOPvUXsumy9qz+DR+7I8b2mWzUfpIVeP3RFAuga1ETjipb+IvxQgrAqXkBPgtcQOtAzbEJD0
+ J5zvvuxXWLDMTEHJxkHcn0U0sXllDChUra2jSUrHzCqLcnGnLvUPu7wqyT5p50x81ZKcmzCu2U1d
+ /tz2WjctgTanzFRPpFjRYNkfT0SxaDnH630jsYUOVUv7R0WnMlj2BhV1G+dYLSTqBbQM0GOipkUx
+ RQWgWa6jkNehtT2zCrwYY6YZboEdi/FhdlXsghxuloMf8aJT8fK+kKfVj3YYOrw1iCU2piUSRO8Y
+ 096BVb+dchj6z3inj0Mh+NmK+RqMc4MO2aPNxnbakeChh8nToxk3U+z5OEESJwDPixZDKY7ycHlm
+ 7nihPMgpHN4FHvYgngGaSQ1NkK7bXnvc/QlVk8IPjT4q0lwnsdiFdDCFcQsgFkL4G7F2AlPSj1go
+ c+XFPZKuv0QbzokEOnyRi/EgzniLHBfogVk6CjObjnnrBfulPsX9liHTMtkLaDaJT89+vCAYuaCz
+ Je8DDnHSBTNmoGeKtgWrdSq2FQJqvyAO4gma0vZxb4FVmgv8/JVJ7b8MMWrmfscG4pYsY7Ygu1Tb
+ 2gZ9zMPJUYvOLD/L1mopYllOtY5g+EzINDbI9GTcfUTgA1F03UGU8jn2zP2Q1+bSzsrlZqvHCJlO
+ /mio5g74qRE3On1333kxNg==
+X-Report-Abuse-To: spam@antispamquarantine.host-h.net
+X-Complaints-To: abuse@antispammaster.host-h.net
+X-Mailman-Approved-At: Wed, 08 Oct 2025 15:00:19 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,74 +99,470 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This commit introduces a port of the Linux kernel's driver for the
+Mediatek's MT7621 I2C controller.
 
-On Tue, 7 Oct 2025 at 11:58, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Oct 01, 2025 at 03:26:31PM -0600, Simon Glass wrote:
->
-> > These have different behaviour from normal bootmeths and we are about to
-> > enhance it. So add a test and also an extra check in bootflow_iter()
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> [snip]
-> > @@ -388,6 +390,49 @@ static int bootflow_iter(struct unit_test_state *uts)
-> >  BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
-> >
-> >  #if defined(CONFIG_SANDBOX) && defined(CONFIG_BOOTMETH_GLOBAL)
-> > +
-> > +/* Check iterating through available bootflows to test global bootmeths */
-> > +static int bootflow_iter_glob(struct unit_test_state *uts)
-> > +{
-> > +     struct bootflow_iter iter;
-> > +     struct bootflow bflow;
-> > +
-> > +     bootstd_clear_glob();
-> > +
-> > +     /* we should get the global bootmeth initially */
-> > +     ut_asserteq(-EINVAL,
-> > +                 bootflow_scan_first(NULL, NULL, &iter, BOOTFLOWIF_ALL |
-> > +                                     BOOTFLOWIF_SHOW, &bflow));
-> > +     bootflow_show(0, &bflow, true);
->
-> Here is the one call of bootflow_show outside of where show_bootflow is
-> called today, and bootflow_show is called by the end of this series.
->
-> > +     ut_asserteq(3, iter.num_methods);
-> > +     ut_assert(iter.doing_global);
-> > +     ut_asserteq(2, iter.first_glob_method);
-> > +
-> > +     ut_asserteq(2, iter.cur_method);
-> > +     ut_asserteq(0, iter.part);
-> > +     ut_asserteq(0, iter.max_part);
-> > +     ut_asserteq_str("firmware0", iter.method->name);
-> > +     ut_asserteq(0, bflow.err);
-> > +     bootflow_free(&bflow);
-> > +
-> > +     /* next we should get the first non-global bootmeth */
-> > +     ut_asserteq(-EPROTONOSUPPORT, bootflow_scan_next(&iter, &bflow));
-> > +
-> > +     /* at this point the global bootmeths are stranded above num_methods */
-> > +     ut_asserteq(2, iter.num_methods);
-> > +     ut_asserteq(2, iter.first_glob_method);
-> > +     ut_assert(!iter.doing_global);
-> > +
-> > +     ut_asserteq(0, iter.cur_method);
-> > +     ut_asserteq(0, iter.part);
-> > +     ut_asserteq(0, iter.max_part);
-> > +     ut_asserteq_str("extlinux", iter.method->name);
-> > +     ut_asserteq(0, bflow.err);
->
-> Nothing in the rest of this test is checking the output of strings, and
-> nor should it since the test is checking the struct itself to be as
-> expected. Am I missing something? If not, I don't think we should bother
-> with the previous patch.
+The port was undertaken as the existing driver intended for Mediatek
+I2C controllers (mtk_i2c.c) is not compatible with the MT7621.
 
-You're missing that when the test fails you need to try to figure out
-why...it is much easier to do that if it prints out info on the
-bootflow. In my case it was printing a completely different one.
+To use the driver:
 
-I'm happy to remove that line (and the patch) if you like.
+  1.  Ensure that the mode of the i2c pin group is
+      configured for "i2c" rather than "gpio".
 
-Regards,
-Simon
+  2.  Delete the existing (bitbanged) i2c node from
+      arch/mips/dts/mt7621.dtsi, or specify:
+
+        /delete-node/ &i2c;
+
+  3.  Declare:
+
+        i2c: i2c@1e000900 {
+                compatible = "mediatek,mt7621-i2c";
+                reg = <0x1e000900 0x100>;
+
+                clocks = <&clk50m>;
+                clock-names = "sys_clock";
+
+                resets = <&rstctrl RST_I2C>;
+                reset-names = "i2c_reset";
+
+                pinctrl-names = "default";
+                pinctrl-0 = <&i2c_pins>;
+
+                #address-cells = <1>;
+                #size-cells = <0>;
+                status = "okay";
+        };
+
+Signed-off-by: Justin Swartz <justin.swartz@risingedge.co.za>
+---
+
+Notes:
+    [PATCH v2]
+    
+    - Add "REG_" prefix to I2C (Serial Master 0) register definitions.
+    - Remove unused "PINT" (Peripheral Interrupt) register definitions.
+    - Adjust function definition style.
+    
+    - Refactor mt7621_i2c_check_ack() to accept the number of bytes
+      expected to have been acknowledged, instead of accepting a
+      literal value (which represents the acknowledgement status of
+      (up to) 8 bytes, encoded as 8 independent bit values) expected
+      in the SM0_ACK field (bits 23:16) of the SM0CTL1 register.
+
+ drivers/i2c/Kconfig      |   7 +
+ drivers/i2c/Makefile     |   1 +
+ drivers/i2c/mt7621_i2c.c | 372 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 380 insertions(+)
+ create mode 100644 drivers/i2c/mt7621_i2c.c
+
+diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
+index 108b24b3dd2..bdd3c60118c 100644
+--- a/drivers/i2c/Kconfig
++++ b/drivers/i2c/Kconfig
+@@ -308,6 +308,13 @@ config SYS_I2C_MTK
+ 	  If you want to use MediaTek I2C interface, say Y here.
+ 	  If unsure, say N.
+ 
++config SYS_I2C_MT7621
++	bool "Mediatek MT7621 I2C driver"
++	help
++	  This selects the Mediatek MT7621 I2C driver.
++	  If you want to use the MediaTek MT7621 I2C controller, say Y here.
++	  If unsure, say N.
++
+ config SYS_I2C_MICROCHIP
+ 	bool "Microchip I2C driver"
+ 	help
+diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
+index 42326db85f6..5fe30d0df4f 100644
+--- a/drivers/i2c/Makefile
++++ b/drivers/i2c/Makefile
+@@ -33,6 +33,7 @@ obj-$(CONFIG_SYS_I2C_MV) += mv_i2c.o
+ obj-$(CONFIG_SYS_I2C_MVTWSI) += mvtwsi.o
+ obj-$(CONFIG_SYS_I2C_MXC) += mxc_i2c.o
+ obj-$(CONFIG_SYS_I2C_MTK) += mtk_i2c.o
++obj-$(CONFIG_SYS_I2C_MT7621) += mt7621_i2c.o
+ obj-$(CONFIG_SYS_I2C_NEXELL) += nx_i2c.o
+ obj-$(CONFIG_SYS_I2C_NPCM) += npcm_i2c.o
+ obj-$(CONFIG_SYS_I2C_OCORES) += ocores_i2c.o
+diff --git a/drivers/i2c/mt7621_i2c.c b/drivers/i2c/mt7621_i2c.c
+new file mode 100644
+index 00000000000..292e582fd8d
+--- /dev/null
++++ b/drivers/i2c/mt7621_i2c.c
+@@ -0,0 +1,372 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * U-Boot driver for the MediaTek MT7621 I2C controller.
++ *
++ * Derived from the Linux kernel driver:
++ *   drivers/i2c/busses/i2c-mt7621.c
++ *
++ * Copyright (C) 2013 Steven Liu <steven_liu@mediatek.com>
++ * Copyright (C) 2014 Sittisak <sittisaks@hotmail.com>
++ * Copyright (C) 2016 Michael Lee <igvtee@gmail.com>
++ * Copyright (C) 2018 Jan Breuer <jan.breuer@jaybee.cz>
++ * Copyright (C) 2025 Justin Swartz <justin.swartz@risingedge.co.za>
++ */
++
++#include <asm/io.h>
++#include <dm/device.h>
++#include <dm/device_compat.h>
++#include <linux/delay.h>
++#include <linux/errno.h>
++#include <linux/printk.h>
++#include <dm.h>
++#include <clk.h>
++#include <common.h>
++#include <i2c.h>
++#include <log.h>
++#include <reset.h>
++
++#define REG_SM0CFG2                   0x28
++#define REG_SM0CTL0                   0x40
++#define REG_SM0CTL1                   0x44
++#define REG_SM0D0                     0x50
++#define REG_SM0D1                     0x54
++
++#define SM0CFG2_MODE_MANUAL           0
++
++#define SM0CTL0_ODRAIN                BIT(31)
++#define SM0CTL0_CLK_DIV_MASK          (0x7ff << 16)
++#define SM0CTL0_CLK_DIV_MAX           0x7ff
++#define SM0CTL0_EN                    BIT(1)
++#define SM0CTL0_SCL_STRETCH           BIT(0)
++
++#define SM0CTL1_TRI                   BIT(0)
++#define SM0CTL1_TRI_IDLE              0
++#define SM0CTL1_START                 (1 << 4)
++#define SM0CTL1_WRITE                 (2 << 4)
++#define SM0CTL1_STOP                  (3 << 4)
++#define SM0CTL1_READ_LAST             (4 << 4)
++#define SM0CTL1_READ                  (5 << 4)
++#define SM0CTL1_PGLEN(x)              ((((x) - 1) << 8) & SM0CTL1_PGLEN_MASK)
++#define SM0CTL1_PGLEN_MASK            (0x7 << 8)
++#define SM0CTL1_ACK_MASK              (0xff << 16)
++
++#define TIMEOUT_1SEC                  1000
++#define I2C_MAX_STD_MODE_FREQ         100000
++
++struct mt7621_i2c_priv
++{
++	void __iomem *base;
++	uint speed;
++	u32 clk_div;
++	struct clk clk;
++	struct reset_ctl reset_ctl;
++};
++
++static int mt7621_i2c_wait_idle(struct udevice *dev)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	ulong start_time = get_timer(0);
++	u32 value;
++
++	while (get_timer(start_time) < TIMEOUT_1SEC) {
++		value = readl(priv->base + REG_SM0CTL1);
++		if ((value & SM0CTL1_TRI) == SM0CTL1_TRI_IDLE)
++			return 0;
++
++		udelay(10);
++	}
++
++	return -ETIMEDOUT;
++}
++
++static int mt7621_i2c_reset(struct udevice *dev)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	u32 value;
++	
++	reset_assert(&priv->reset_ctl);
++	udelay(100);
++	reset_deassert(&priv->reset_ctl);
++	
++	value = readl(priv->base + REG_SM0CTL0);
++	value &= ~SM0CTL0_CLK_DIV_MASK;
++	value |= (priv->clk_div << 16) & SM0CTL0_CLK_DIV_MASK;
++	value |= SM0CTL0_EN | SM0CTL0_SCL_STRETCH;
++	writel(value, priv->base + REG_SM0CTL0);
++
++	writel(SM0CFG2_MODE_MANUAL, priv->base + REG_SM0CFG2);
++	return 0;
++}
++
++static int mt7621_i2c_master_start(struct udevice *dev)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	writel(SM0CTL1_START | SM0CTL1_TRI, priv->base + REG_SM0CTL1);
++	return mt7621_i2c_wait_idle(dev);
++}
++
++static int mt7621_i2c_master_stop(struct udevice *dev)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	writel(SM0CTL1_STOP | SM0CTL1_TRI, priv->base + REG_SM0CTL1);
++	return mt7621_i2c_wait_idle(dev);
++}
++
++static int mt7621_i2c_master_cmd(struct udevice *dev, u32 cmd, int len)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	writel(cmd | SM0CTL1_TRI | SM0CTL1_PGLEN(len),
++	       priv->base + REG_SM0CTL1);
++	return mt7621_i2c_wait_idle(dev);
++}
++
++static int mt7621_i2c_7bit_address(struct udevice *dev, struct i2c_msg *msg)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++
++	u32 addr = (msg->addr << 1) | ((msg->flags & I2C_M_RD) ? 1 : 0);
++	writel(addr, priv->base + REG_SM0D0);
++
++	return mt7621_i2c_master_cmd(dev, SM0CTL1_WRITE, 1);
++}
++
++static int mt7621_i2c_10bit_address(struct udevice *dev, struct i2c_msg *msg)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++
++	u16 addr = 0xf0 | ((msg->addr >> 7) & 0x06) | (msg->addr & 0xff) << 8;
++	if (msg->flags & I2C_M_RD)
++		addr |= 1;
++	writel(addr, priv->base + REG_SM0D0);
++
++	return mt7621_i2c_master_cmd(dev, SM0CTL1_WRITE, 2);
++}
++
++static int mt7621_i2c_address(struct udevice *dev, struct i2c_msg *msg)
++{
++	int ret;
++
++	if (msg->flags & I2C_M_TEN) {
++		ret = mt7621_i2c_10bit_address(dev, msg);
++		if (ret)
++			return ret;
++	}
++
++	else {
++		ret = mt7621_i2c_7bit_address(dev, msg);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int mt7621_i2c_check_ack(struct udevice *dev, struct i2c_msg *msg,
++				u32 length)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++
++	if (msg->flags & I2C_M_IGNORE_NAK)
++		return 0;
++
++	u32 status = *(volatile u32 *)(priv->base + REG_SM0CTL1);
++	u32 expected = GENMASK(length - 1, 0);
++	u32 mask = (expected << 16) & SM0CTL1_ACK_MASK;
++	
++	if ((status & mask) != mask)
++		return -ENXIO;
++
++	return 0;
++}
++
++static int mt7621_i2c_master_read(struct udevice *dev, struct i2c_msg *msg)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	int offset, length, last, ret;
++	u32 cmd;
++	u32 data[2];
++
++	for (offset = 0; offset < msg->len; offset += 8) {
++		if (msg->len - offset >= 8)
++			length = 8;
++		else
++			length = msg->len - offset;
++
++		last = msg->len - offset <= 8;
++		cmd = last ? SM0CTL1_READ_LAST : SM0CTL1_READ;
++		ret = mt7621_i2c_master_cmd(dev, cmd, length);
++		if (ret)
++			return ret;
++
++		data[0] = readl(priv->base + REG_SM0D0);
++		data[1] = readl(priv->base + REG_SM0D1);
++		memcpy(&msg->buf[offset], data, length);
++	}
++
++	return 0;
++}
++
++static int mt7621_i2c_master_write(struct udevice *dev, struct i2c_msg *msg)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	int offset, length, ret;
++	u32 data[2];
++
++	for (offset = 0; offset < msg->len; offset += 8) {
++		if (msg->len - offset >= 8)
++			length = 8;
++		else
++			length = msg->len - offset;
++
++		memcpy(data, &msg->buf[offset], length);
++		writel(data[0], priv->base + REG_SM0D0);
++		writel(data[1], priv->base + REG_SM0D1);
++		
++		ret = mt7621_i2c_master_cmd(dev, SM0CTL1_WRITE, length);
++		if (ret)
++			return ret;
++		
++		ret = mt7621_i2c_check_ack(dev, msg, length);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static int mt7621_i2c_xfer(struct udevice *dev, struct i2c_msg *msgs, int count)
++{
++	struct i2c_msg *msg;
++	int index, ret;
++	
++	for (index = 0; index < count; index++) {
++		msg = &msgs[index];
++		
++		ret = mt7621_i2c_wait_idle(dev);
++		if (ret)
++			goto reset;
++		
++		ret = mt7621_i2c_master_start(dev);
++		if (ret)
++			goto reset;
++		
++		ret = mt7621_i2c_address(dev, msg);
++		if (ret)
++			goto reset;
++		
++		ret = mt7621_i2c_check_ack(dev, msg, 1);
++		if (ret)
++			goto stop;
++		
++		if (msg->flags & I2C_M_RD) {
++			ret = mt7621_i2c_master_read(dev, msg);
++			if (ret)
++				goto reset;
++		}
++		else {
++			ret = mt7621_i2c_master_write(dev, msg);
++			if (ret)
++				goto reset;
++		}
++	}
++	
++	ret = mt7621_i2c_wait_idle(dev);
++	if (ret)
++		goto reset;
++
++	ret = mt7621_i2c_master_stop(dev);
++	if (ret)
++		goto reset;
++	
++	return 0;
++	
++stop:
++	ret = mt7621_i2c_master_stop(dev);
++	if (ret)
++		goto reset;
++	return -ENXIO;
++
++reset:
++	mt7621_i2c_reset(dev);
++	return ret;
++}
++
++static int mt7621_i2c_set_speed(struct udevice *dev, uint speed)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	ulong clk_rate = clk_get_rate(&priv->clk);
++
++	priv->speed = speed;
++	priv->clk_div = clk_rate / priv->speed - 1;
++
++	if (priv->clk_div < 99)
++		priv->clk_div = 99;
++
++	if (priv->clk_div > SM0CTL0_CLK_DIV_MAX)
++		priv->clk_div = SM0CTL0_CLK_DIV_MAX;
++	
++	return 0;
++}
++
++static const struct dm_i2c_ops mt7621_i2c_ops = {
++	.xfer          = mt7621_i2c_xfer,
++	.set_bus_speed = mt7621_i2c_set_speed,
++	.deblock       = mt7621_i2c_reset,
++};
++
++static int mt7621_i2c_of_to_plat(struct udevice *dev)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	priv->base = dev_remap_addr(dev);
++	return 0;
++}
++
++int mt7621_i2c_probe(struct udevice *dev)
++{
++	struct mt7621_i2c_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->base = dev_remap_addr(dev);
++	if (!priv->base) {
++		dev_err(dev, "failed to get base address\n");
++		return -EINVAL;
++	}
++
++	ret = clk_get_by_name(dev, "sys_clock", &priv->clk);
++	if (ret) {
++		dev_err(dev, "failed to get clock source\n");
++		return ret;
++	}
++
++	ret = reset_get_by_name(dev, "i2c_reset", &priv->reset_ctl);
++	if (ret) {
++		dev_err(dev, "failed to get reset control\n");
++		return ret;
++	}
++
++	ret = clk_enable(&priv->clk);
++	if (ret) {
++		dev_err(dev, "failed to enable clock\n");
++		return ret;
++	}
++
++	mt7621_i2c_set_speed(dev, I2C_MAX_STD_MODE_FREQ);
++	mt7621_i2c_reset(dev);
++
++	return 0;
++}
++
++static const struct udevice_id mt7621_i2c_ids[] = {
++	{ .compatible = "mediatek,mt7621-i2c" },
++	{ }
++};
++
++U_BOOT_DRIVER(mt7621_i2c) = {
++	.name       = "mt7621_i2c",
++	.id         = UCLASS_I2C,
++	.of_match   = mt7621_i2c_ids,
++	.of_to_plat = mt7621_i2c_of_to_plat,
++	.probe      = mt7621_i2c_probe,
++	.priv_auto  = sizeof(struct mt7621_i2c_priv),
++	.ops        = &mt7621_i2c_ops,
++};
+-- 
