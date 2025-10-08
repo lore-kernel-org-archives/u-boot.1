@@ -4,69 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3633BCAC5BB
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:41:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A518CAC5BB
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 13:50:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B70FF83D77;
-	Wed,  8 Oct 2025 15:41:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 761E083D77;
+	Wed,  8 Oct 2025 15:50:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="PpSAQSJt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aKtrkoU1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8807283E8E; Wed,  8 Oct 2025 15:41:09 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BDF1839DE
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 15:41:07 +0200 (CEST)
+ id B2AF183E21; Wed,  8 Oct 2025 15:50:56 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C6EAA839B9
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 15:50:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 598Df1FA4049212;
- Wed, 8 Oct 2025 08:41:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1759930861;
- bh=QebecCYAE+f9FqAKcLzNkeGj+aCgCCNN8K9/M7ZsZu4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=PpSAQSJtNOxrxf2TauD8EldJCkXz5vnICFI9A2n9oMO9LuLGBJT6lL/eoi35P4XpT
- R2CBEBKhEKSXkjG2xueBkA+ANL8KRUQCh3HfL8+PdBDFDiQOxifONfmFSz4gvSi5rh
- /bm+44/Q5h9MgGZbR+iW2GRfo+Dgl0yVRNU1qZdI=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 598Df1PQ185811
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 8 Oct 2025 08:41:01 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 8
- Oct 2025 08:41:01 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 8 Oct 2025 08:41:01 -0500
-Received: from localhost (lcpd911.dhcp.ti.com [172.24.233.130])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 598Df0sk2618904;
- Wed, 8 Oct 2025 08:41:00 -0500
-Date: Wed, 8 Oct 2025 19:10:59 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <b-padhi@ti.com>, <vigneshr@ti.com>,
- <trini@konsulko.com>, <nm@ti.com>, <robertcnelson@gmail.com>,
- <w.egorov@phytec.de>, <francesco.dolcini@toradex.com>,
- <ggiordano@phytec.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>,
- <u-kumar1@ti.com>, <devarsht@ti.com>, <ilias.apalodimas@linaro.org>,
- <xypron.glpk@gmx.de>
-Subject: Re: [PATCH -next v8 10/11] mach-k3: add carveouts for TFA and optee
-Message-ID: <20251008134059.4mzl3tvyhh63avoy@lcpd911>
-References: <20251006082852.4008937-1-anshuld@ti.com>
- <20251006082852.4008937-11-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-59054fc6a45so3945055e87.3
+ for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 06:50:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1759931454; x=1760536254; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EYuNgkYKOmBjkx7e9zwatXnuxBg0zNmMkRokcfjdNwA=;
+ b=aKtrkoU1s/6ePt6YANWbFF9VUUHSatdJ96I8rq0MW2LBllIEYphrZd3zuLVFzm9SJa
+ tm1StPuufcKt4c8uRWVuE7b3GprXQEh3VE8MHWiailv0K2eDUtG/Na2DkLRWqAZf/nEd
+ uxukbhyzqHzqm32yIrzPDCF2jb6RV7CZ3CibTsZYszmXn12VWOoLqeW7CwzpEymU8BBi
+ 0XcrDxsPr1OYznHJA62uwJbv30Vqk93AtPXiKnfaKaxP+cFGkT4fQAToDRNfG3B9lapJ
+ XhRKoDnt5zVEbWf3XxaIscIOXWfLBj7zbWHNNr7HBec0TU80vb1zRmyul/kaPO3CspnD
+ J5nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1759931454; x=1760536254;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EYuNgkYKOmBjkx7e9zwatXnuxBg0zNmMkRokcfjdNwA=;
+ b=T8XmmBt4NknBHXhqs/ZWOzBqy/p2kJAaU6uKnB5BxEiSFHq6hZDZ7cfnVst/VVg+9F
+ r3ZXzk36r6TiXVcUUtilWkOo8KBVyFe6wAw1zJo8zJDv03iWldpwcXqIKRPND9OWlVF8
+ J/8DV3CZvRWOOYeP473T4UO1+GKrG5phvNwDl3U3PUuB5GhBJpZ0trpMCjyTJZKgof82
+ j3WOcDRPEdnlX3q2uc1Gtlnf/7Vyxfi7kSgakDrjyAzr5jAKlKWDPnHQykRgcamumQrE
+ /06vrYG+DOKCeVOZhi6pdGqHy/uo6uGHtO6fLiREgi8jhD73wDH6z20ezwYKlGuRnXH3
+ IGwg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTXc6nCd2G4T8U6JN34apwZOV3kMB78EZDpF2BknMNMNVbOHMQtrCLWLpz0/FcRcYFNz6p/wM=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzlv6gC2CsKk+owEhiDxTK8hkw52lxnDxMg78TwOLo79mc666Vp
+ fHYzgSikxQKxuuw7nWQuAm5sJsOlpZIycoALnPKVD8YTDitlpA068c2q75iBUWVIsb7NMlal7MU
+ Ujg+JPnZ09wfbgVI0zoUlnxbp1VynYR4=
+X-Gm-Gg: ASbGncuFOGqVJUayjGfE/o0B8wELTIB31rtz4SXBrotkPFsirZK6tODaAwDxB1iXQnc
+ /BoA4S8SbRbYZ846f2EryG65Zt03ZxcqZWU2CFkGlGoZDHT3tjm59cuvPfY0GS8BgMYlEJjWADY
+ t4SXqG1H+9C5c1HZyEw5mxUwQShUAXR9+z85T+dZNQN/yl121KH6qBXeNJ3eirWrZyqsWSVumrj
+ wAo+vut6ZDzMdELG+/QM993yWUVwjHTqb5WtOONP5+PeKvVbWFI34hrqm/x8Sg=
+X-Google-Smtp-Source: AGHT+IH9F9HYEQBkqebjf/mM1630+lhMHUNGQU5ESKIiytiEeh9FEH+yq7W5pPMI3so1nPSzwAzsWJJl4QtDVd3djdw=
+X-Received: by 2002:a05:6512:10d4:b0:58b:2b:ac7b with SMTP id
+ 2adb3069b0e04-5906de8dbd1mr1063733e87.57.1759931453731; Wed, 08 Oct 2025
+ 06:50:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20251006082852.4008937-11-anshuld@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20251007074503.21624-1-ernest.vanhoecke@toradex.com>
+In-Reply-To: <20251007074503.21624-1-ernest.vanhoecke@toradex.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 8 Oct 2025 10:50:42 -0300
+X-Gm-Features: AS18NWDONH4jhcD3f1pt98wO_7GnucPmlAJeRTVSUjBoW5HmE5ZK88wW8pA_Uuo
+Message-ID: <CAOMZO5CU5BtAa0DVjSOSa0-Sg2G1CJ6m49VVj2QHWh1=qCC_cg@mail.gmail.com>
+Subject: Re: [PATCH v1] arm: dts: imx8mp-toradex-smarc: migrate to OF_UPSTREAM
+To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,72 +98,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Oct 06, 2025 at 13:58:48 +0530, Anshul Dalal wrote:
-> K3 platforms have reserved memory regions for TFA and OPTEE which should
-> be unmapped for U-Boot.
-> 
-> Therefore this patch adds the necessary fdt fixups to properly set the
-> load address for TFA/OPTEE and unmaps both by mmu_unmap_reserved_mem.
-> 
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> Tested-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  arch/arm/mach-k3/common.c | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
-> 
-> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> index 581a7246630..83562a07435 100644
-> --- a/arch/arm/mach-k3/common.c
-> +++ b/arch/arm/mach-k3/common.c
-> @@ -31,6 +31,7 @@
->  #include <dm/uclass-internal.h>
->  #include <dm/device-internal.h>
->  #include <asm/armv8/mmu.h>
-> +#include <mach/k3-common-fdt.h>
->  #include <mach/k3-ddr.h>
->  
->  #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
-> @@ -263,6 +264,7 @@ void board_prep_linux(struct bootm_headers *images)
->  
->  void enable_caches(void)
->  {
-> +	void *fdt = (void *)gd->fdt_blob;
->  	int ret;
->  
->  	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
-> @@ -273,6 +275,30 @@ void enable_caches(void)
->  
->  	mmu_setup();
->  
-> +	if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-> +		ret = fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
-> +					 0x80000);
-> +		if (ret)
-> +			debug("%s: Failed to perform tfa fixups (%s)\n",
-> +			      __func__, fdt_strerror(ret));
-> +		ret = mmu_unmap_reserved_mem("tfa");
-> +		if (ret)
-> +			debug("%s: Failed to unmap tfa reserved mem (%d)\n",
-> +			      __func__, ret);
-> +	}
-> +
-> +	if (CONFIG_K3_OPTEE_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-> +		ret = fdt_fixup_reserved(fdt, "optee",
-> +					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
-> +		if (ret)
-> +			debug("%s: Failed to perform optee fixups (%s)\n",
-> +			      __func__, fdt_strerror(ret));
-> +		ret = mmu_unmap_reserved_mem("optee");
-> +		if (ret)
-> +			debug("%s: Failed to unmap optee reserved mem (%d)\n",
-> +			      __func__, ret);
+Hi Ernest,
 
-All these are hardly "debug" messages. Use something like error() or
-pr_err?
-With that,
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
+On Tue, Oct 7, 2025 at 4:45=E2=80=AFAM Ernest Van Hoecke
+<ernestvanhoecke@gmail.com> wrote:
 
--- 
-Best regards,
-Dhruva Gole
-Texas Instruments Incorporated
+> diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kc=
+onfig
+> index 74416a788473..c5da27bc366e 100644
+> --- a/arch/arm/mach-imx/imx8m/Kconfig
+> +++ b/arch/arm/mach-imx/imx8m/Kconfig
+> @@ -296,6 +296,7 @@ config TARGET_TORADEX_SMARC_IMX8MP
+>         select IMX8MP
+>         select SUPPORT_SPL
+>         select IMX8M_LPDDR4
+> +       imply OF_UPSTREAM
+....
+
+> +CONFIG_OF_UPSTREAM=3Dy
+
+As you use 'imply OF_UPSTREAM' in the Kconfig, this
+CONFIG_OF_UPSTREAM=3Dy line is not needed and can be removed, right?
