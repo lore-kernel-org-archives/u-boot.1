@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDC59CCA470
-	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 04:22:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C0EACCA470
+	for <u-boot@archiver.kernel.org>; Wed,  8 Oct 2025 04:22:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 73E7183979;
-	Wed,  8 Oct 2025 06:22:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E0958394E;
+	Wed,  8 Oct 2025 06:22:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NnFYvwsf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lesg03J9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2718E839F3; Wed,  8 Oct 2025 06:22:10 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id 6F3D483979; Wed,  8 Oct 2025 06:22:10 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F74D838F8
- for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 06:22:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32A87839D9
+ for <u-boot@lists.denx.de>; Wed,  8 Oct 2025 06:22:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7a9c15464f7so2213948a34.2
- for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 21:22:06 -0700 (PDT)
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7b97ce4fc60so2144743a34.0
+ for <u-boot@lists.denx.de>; Tue, 07 Oct 2025 21:22:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1759897325; x=1760502125; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1759897327; x=1760502127; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=53j14+0WYsUnbtcrq2i67RTA2I3+ssq0ddQg5pFxTz8=;
- b=NnFYvwsf45v90/hAPeVEnrr6+ST+Htty/U8AQjprMp/RnxY2X4lW4k9/4e0MqzJnL7
- d4GL0M6bF3Tw+6NPrxg8/cmSvEiLFUuGEDRlJskpnSgveLevsU47234g8zDyXdcDAhWR
- 1BoOuzl1j9TY4OnOpNf0FQ4NDZrPrkDt+4Ca8=
+ bh=a3eGw+0rBzG4LjA4wOaZmx9NttOkpocJX7PFz6vCmf0=;
+ b=Lesg03J9C27QpmncnUBr9NHehhTPXfQrK5TyrVCXVzOakWbOI3KURp/K/2Npfusp+8
+ VA93b5H5mB+6FtOSqY/R8qxsFK0zLVlKEBjxuPtMdm3w5cwKTMU1kzC/LQGlQ/Y10VRM
+ HCqhuSxVRbkoKVig2Egg72Z7XzhhOKuOgNR2Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759897325; x=1760502125;
+ d=1e100.net; s=20230601; t=1759897327; x=1760502127;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=53j14+0WYsUnbtcrq2i67RTA2I3+ssq0ddQg5pFxTz8=;
- b=Dz8iD7HfxRPFa1CCJlmLmoPREmBMsYrN3nhDYOuI4qDC0Kmv3UDKH/q6Xso2Wu+h1b
- a7z74kOZiVz8vecTQjLnvy3I8yiFXbvNWrlNs+rLUfV7y2dcF4+Ev+Tm92OUBcGEghsZ
- WpNrxR4e9vn2HelYeXuNrLGuqfLYQSzmHmKviOTIANue++xoftLEzWJa5eNHl094x2sG
- AKPum9JWFmvnk/tDh7R1Y6RWwRYbrEAtUlPD5dnKQ6gKuwnYnOJVZm7GTDCvz/jcThA4
- TPPqyLJS6ODGvWUrgXEvtl7ccm/hDcA+JnkWH2OzhRQ/DDtwUG6WxyB3BrgqtWTRI/Rz
- aoig==
-X-Gm-Message-State: AOJu0Yxx2+p60TqpdkC0V/shbgeBmBLOxZn6009sbhrVQJUKl3Qx1pmC
- t6LYimXrkFxxnSTwYLW1y+5zz9zhtH+sD0ddMPeMrBEwaKwWkggcxxY+k4xzEIrvLu5pPDL6tZH
- os1HBGtg=
-X-Gm-Gg: ASbGncsBCnyCZmaDPkOEg7rwCxLGzH2SM/cJe6ToiV/jiMylXySuo36cErOjcNdARYV
- s64HD84UQMgOLx4Uhn6e8daxcquZr1wmlckLU4LlxOx/FNvERnS6/SaYLqOPFPbv8WOCBaxipdg
- FFXPKCvsRNMVzCBvsPfn5ZP1/yhe0B2kpMWNWVGkWJB35ylomn8CkG4PeOCdaXxALKuXb2fy9YI
- KH1vOzjY7Gqgob3rjVNwiLQo5PCg9CG1Gqajp0rVTU+UFliftED6ZxgkytWNyFpDwLWC3hH9xuh
- McQFqR9rSFVmncFZaJq+10EIQF6qXKHezeMKh4g5t+CmjXKgRIy0N0oWzVjJfJlt5ggIGbw/yba
- Jkr4HZNGGrNuRRFIhcGHbclJIon1opRMaPXnf/MY083/QEPwoE5qTd0Fo2x4JhAn2JuRPMiKqMm
- Vn5DZFXvUO
-X-Google-Smtp-Source: AGHT+IGE99aTg3EexEKPHBhhkO/2SVql7qvoQE+97DmFmTBapXaa5Hyrf6sTbp7GR5iACWLQKRm/bQ==
-X-Received: by 2002:a05:6830:621c:b0:746:dbc7:e3ee with SMTP id
- 46e09a7af769-7c0df715858mr1125090a34.4.1759897325409; 
- Tue, 07 Oct 2025 21:22:05 -0700 (PDT)
+ bh=a3eGw+0rBzG4LjA4wOaZmx9NttOkpocJX7PFz6vCmf0=;
+ b=PC/UwGHDE3e0reAvJV2AHMhcvGZWz4PLhTJ6xlPXQAz8rAYpaaD07kmZBnRRRHQt5G
+ Rgccfoc7pvjpTqSmNOXudCCg4uNXtxxlYrD/fy9fWwDQCggsuO9qbc0961k7UWp6LJtW
+ 6YvgOKrMpSZblwjkmtcMiCMQ9/7ZUE4eztPMThLgdlo5exjXaWG5GJUS4QuU/xeDWNdt
+ V64wmpEs+vsZIP6RLPboVMbR7pCs70CxErbRlDTJTRJ2QeuRH2Z/Tc7eHUHa57tqWYwV
+ uO+bNz3LPZ8DvIj3DQFp7JSn1tViY09g+l5y7PkVUfSof3f4hXQNim/5PhQSsxACYM/2
+ aA4g==
+X-Gm-Message-State: AOJu0YyVM27BFiH+ZmGbOH6afBMCV7c0ostdKzKuQL2daFm1dZ2Ebt5l
+ xjZYzzjd7a2p4eRs3JUqRh/gDDjKYlyAt6kkBvUOkG5oPo4Ix5RT70CfYKvP23brjNFkcHWEzJa
+ uk70P/Zw=
+X-Gm-Gg: ASbGnctx+9JRIV88jZch47+qvXa4VNIPI2E2IMofhvcULfLhwwKgxRs202gBuIZ5/Oo
+ IQ6cEnTZFzyfYeSs4EkgvNo+jFi18dsJEksOBGCP2RNr4hwXRQ3t1xrnfx+xbTRUWlyZUf+ilIt
+ 8XHexJ5qzOyeB9xHJF7ZtcxRDN11301Kb7pepz4hfWAFDNOZCpvAEyLHuen3oE6XmdOQLy6b8n2
+ qjtX5jI5YNb5Mv/1NHBm8yhKdX7hJCAsM6ElRewV6vNYlqqm6k7x8Gg5M4TxutSa/yVUaElB9rp
+ XDuZKfy6Qm/hONM+9vfEXWjQcX9+3C1Q6mSIEoWO81/5cGnHSooCfMgnOCvdrP5IqqqxSr8WtcS
+ hxmt6uo3DpHjrnV8ewuvApFupNb0boN0MsT68wMuPW2CNXt2HQuFJR6prDU/vNuRkuohTS+jXL2
+ eq6ZH834QN
+X-Google-Smtp-Source: AGHT+IE8y/VG/4aYXz3JtUKgqII4ywA7bPsUm6QeXK3DzswkMlGPFQF56yastMPa+fi0STvDQnmZpg==
+X-Received: by 2002:a05:6830:6084:b0:7b9:f432:dbaf with SMTP id
+ 46e09a7af769-7c0df7e5895mr1059687a34.23.1759897326940; 
+ Tue, 07 Oct 2025 21:22:06 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-64e1bc7f424sm3818016eaf.17.2025.10.07.21.22.04
+ 006d021491bc7-64e1bc7f424sm3818016eaf.17.2025.10.07.21.22.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 07 Oct 2025 21:22:04 -0700 (PDT)
+ Tue, 07 Oct 2025 21:22:06 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Maarten Brock <Maarten.Brock@sttls.nl>
-Cc: ilias.apalodimas@linaro.org, jerome.forissier@linaro.org, 
- Kory Maincent <kory.maincent@bootlin.com>, sjg@chromium.org
-In-Reply-To: <DB6PR05MB45511C9367B93E1E788A543F8312A@DB6PR05MB4551.eurprd05.prod.outlook.com>
-References: <DB6PR05MB4551D31271569EC04E8EC60F830CA@DB6PR05MB4551.eurprd05.prod.outlook.com>
- <20250919001117.GA974973@bill-the-cat>
- <DB6PR05MB455171F726E8D6E540141BAE8311A@DB6PR05MB4551.eurprd05.prod.outlook.com>
- <20250919141058.GT124814@bill-the-cat>
- <DB6PR05MB4551C51511978A6DF29228188311A@DB6PR05MB4551.eurprd05.prod.outlook.com>
- <DB6PR05MB45511C9367B93E1E788A543F8312A@DB6PR05MB4551.eurprd05.prod.outlook.com>
-Subject: Re: [PATCH v2] board: ti: am335x: Do not call disabled PMIC functions
-Message-Id: <175989732415.1794629.1852682825507307187.b4-ty@konsulko.com>
-Date: Tue, 07 Oct 2025 22:22:04 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: =?utf-8?q?Carlos_L=C3=B3pez?= <carlos.lopezr4096@gmail.com>, 
+ Aristo Chen <jj251510319013@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+In-Reply-To: <20250925134804.66689-1-marek.vasut+renesas@mailbox.org>
+References: <20250925134804.66689-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH] mkimage: Add help text for bundling TFA BL31 in
+ mkimage -f auto
+Message-Id: <175989732553.1794629.10094517268929790920.b4-ty@konsulko.com>
+Date: Tue, 07 Oct 2025 22:22:05 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -103,16 +100,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Sep 2025 09:22:48 +0000, Maarten Brock wrote:
+On Thu, 25 Sep 2025 15:47:35 +0200, Marek Vasut wrote:
 
-> When PMIC drivers are disabled their undefined functions cannot be called.
+> Add missing help text for the -y and -Y parameters of mkimage.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] board: ti: am335x: Do not call disabled PMIC functions
-      commit: 0b9ff08515927e82306bacbe7f27bb74119113ff
+[1/1] mkimage: Add help text for bundling TFA BL31 in mkimage -f auto
+      commit: e560735558e313be8e883f9efcf729997df8b30e
 -- 
 Tom
 
