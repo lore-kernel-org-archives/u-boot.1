@@ -4,79 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71B88CCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 21:29:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E9ACCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 21:29:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9DC5841F5;
-	Thu,  9 Oct 2025 23:29:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 181C7841EF;
+	Thu,  9 Oct 2025 23:29:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VwGd8OF/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hH+jTNrO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 842C8841F2; Thu,  9 Oct 2025 23:29:21 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 2BCB584205; Thu,  9 Oct 2025 23:29:24 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B018841EE
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 23:29:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 142B8841EE
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 23:29:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-63a1f3c0820so487198eaf.2
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 14:29:19 -0700 (PDT)
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-30cce872d9cso998945fac.1
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 14:29:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760045358; x=1760650158; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760045361; x=1760650161; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HculKbwO7aQi/W/2HZ53Xd/OvnMoRDRCTmhHtA6HLP4=;
- b=VwGd8OF/KsmlkIyyyy3qcRMSm1wF9bN/fnAqKDSXbJLuejv6iAbqHXpfrAGzXQhuUH
- CSfQgmKtEZ4BiBT8qkTmX6KMJH0oN8ryfKDs551kkpew6iLePP6X686//VjoUPQKc/BR
- hlGRWq7OEUHsh7mxIXo11NNv3SwncqQ6LiXkc=
+ bh=3iogqB3T8SYJ0sPWdsHP+GrKQRQ7OV7cC6JotJVcwuc=;
+ b=hH+jTNrOFuJ5nU6Mcukb0U5GM4aIZQwJ3/uRXuZ+pB8ijWwuvIEA3WV3Qvx9nFwDM7
+ uMtg9iWhxtTXCn/8hcQzMbFMz9GSUggFD4x8/w/UxlEmMQwFtAb1j0Tf+6ja3JHzlIeO
+ gT0trwClz/+dfqWUY9t8m8ye8nHc6q8o8OcmM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760045358; x=1760650158;
+ d=1e100.net; s=20230601; t=1760045361; x=1760650161;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HculKbwO7aQi/W/2HZ53Xd/OvnMoRDRCTmhHtA6HLP4=;
- b=VxHMf3CVNrC3FcrUIJqSbCl7LsL/tZd5rOv6eMsREKVSDO+Vs+56nyliJu68TphDfL
- fVS6znojD0UZD0BWI8oE+ZNX3ziBS/p1pBBtjcEjO7QhXSMGTASWJDBARcWGcW5qKURA
- bdLGU5uQxOgt49M2V/2ORwDYuoFBwvUpY7m1LXayl3UJa3ceiFxcbXriOi3hdYwT09gm
- ZU3P57z0emfiPMn1U4Eq4quKvAw7+Xaih3QQX/umi71NXYX9axmGRikwfDUCpJRvhOj3
- SGD5Hz3dl49FBDaovLDs2iMdNo6VM+1qAa80HaMERBzOK3rRwDGVuTcz8TOUzNE84ZJz
- ftZw==
-X-Gm-Message-State: AOJu0YyjUFL17mXLaBPzAtaJkbeSy7C8RfFMWeFG+SkUnOSAKFqmENHl
- 2dn9a9+EGqnjjmA9XoqdVMlGfLPtXSO0nIzqvfE2g68Nb2/2pzEhV5te7r/UDW+oPHoWEGjsin/
- tojtewN0=
-X-Gm-Gg: ASbGncucqBsJX7z6HXDEEGtrHV4Gxr0uIhuqeZJItxKS2qZpgsA/gr4qtMblvWxySxl
- MtI2aQanRrSkPeQj7TndMcWNx6fVQ3PeHILuvYJh+B9odxEqPGvn2GmdMC4nobjklQl/JUTZD0C
- 45YguBjOSlyLoLTJqd0zK4YnQcIeZXVsLfJbS92E/xWQW8MZq1LMriVqleOUMVD41HlRfUUmuQk
- /Kf9MHoEktOgpS28xdboTo3xX858Rd72ldwoDniU+5elTivsAvs2ynilvlDFUhXGUyHPb1KR/Ha
- tOuabbVtwuyiFiNE8FTVAEMeEAypw1T8wA5C+nKKRW7H9Uzj+n9rakJ0K/v/DVDeRQUcoiiuC1G
- 9DCMA3DhvWMK/yZ/oYLdwbotdnBjXD6VvU4RQsJrvSZBpSVxElvcXLLygJDPrRCmym77LFhY5W5
- 8oG3pNqA/nX01mR06ThyY=
-X-Google-Smtp-Source: AGHT+IGn9ePvQj5Dds7Ru80kNc0c9TR8e2rIp97OMTWdYxUTeIOFGQnmUnk7KKc/Xo6gQcMdnXV9Eg==
-X-Received: by 2002:a05:6870:d368:b0:349:de3c:bfc5 with SMTP id
- 586e51a60fabf-3c0f5a23d78mr4281949fac.7.1760045358019; 
- Thu, 09 Oct 2025 14:29:18 -0700 (PDT)
+ bh=3iogqB3T8SYJ0sPWdsHP+GrKQRQ7OV7cC6JotJVcwuc=;
+ b=lp07/xcRxdPsHuoJGVcQyl+qHTLmqpdxGl5VdII/rx6HNk+YpHv+J6ReNOGBJWOVDw
+ mdJaef45k2XGjFTIgc1A/V9i1LwvCQUgdfYL+uRmrxZ//sXgSma4X/DSytp+Ij7jviyk
+ xAtpTnWgH90pa82WT35eWX3iNT04y69XOtnZJdIFusE34S9h8wm/IW/QIncfz9zl2POU
+ 29SudJmLWjY/h9V11MiTG1Vvz2Quc3feupmv1nFwsmnCxOhnv6/PqLqdeblMJilCmeop
+ 4o1KYbtRzPBIYxxrmffthmu5k2BsEI0wVgeVAXXUckvZP9oYz1VLApI0oCmPsLyRs3+Q
+ O1tQ==
+X-Gm-Message-State: AOJu0YxwsFXQB/I3LStUSPbRbBmXnfX4nzeM0abTZHRrqgMKUINRkVu3
+ hgmOQkR1khCjTqLvTrglEKdkqHIBgJgYhVnFgtkj8/w7bgNWs7ub1lnEGi+In3860+I=
+X-Gm-Gg: ASbGncvFspOK2zpu/xtJGbDIILI2rIFHf3IAaemFpBCWDyi1Yog7GQHY9aEesbw3vdx
+ Oon1Fxu8ghJf21+XFTqNQvfjiiww51qyg93zTzrjkb6PC8pjg+21KkWRboh0ul5cJJ88ZolG3xI
+ lggxhxyZ2JjEi91szWwdXviFKqY+RjVdnl6VYl1WFxoDJATU8mOD6gPuwWc22RJ04himsMePtXY
+ CT4/bmM/z/ZJDMfTCfggbQ7kf+eSjSIZAiB5VjhG3ALQpCRqDdfND3+C1AaBsel4mBSKBP8v94v
+ i/7ijfEKsY1P5655nJJzdjNM4hsW+G6IJFrecULqaMurL8CTmj9QfselUFoo8YXh5Yuc47SMDtT
+ v2rEvfX9A3wSCN29aHoc0+QNN6oNH2WtWxXn/sAF+s0km05E9pnNJWeCXmTDjlMKnYk/+7dMgM0
+ sq7wERmJDm
+X-Google-Smtp-Source: AGHT+IEGcWu1PNFzxyXMU4gJf+4QpZqfPJZ/d6CcheoEvTS6ZjJk5vlpholpFUDCP/K0VL87y0vCXA==
+X-Received: by 2002:a05:6871:807:b0:31d:8e95:2f0d with SMTP id
+ 586e51a60fabf-3c0f62f8497mr4411828fac.2.1760045360765; 
+ Thu, 09 Oct 2025 14:29:20 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8cc4d3f55sm76479fac.3.2025.10.09.14.29.16
+ 586e51a60fabf-3c8cc4d3f55sm76479fac.3.2025.10.09.14.29.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 14:29:17 -0700 (PDT)
+ Thu, 09 Oct 2025 14:29:20 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251009193452.285267-1-festevam@gmail.com>
-References: <20251009193452.285267-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20251009
-Message-Id: <176004535690.1002224.18260213249086914705.b4-ty@konsulko.com>
-Date: Thu, 09 Oct 2025 15:29:16 -0600
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: "Lucien.Jheng" <lucienzx159@gmail.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Ryder Lee <ryder.lee@mediatek.com>, 
+ Sky Huang <SkyLake.Huang@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>
+In-Reply-To: <20250922114926.51984-1-marek.vasut+renesas@mailbox.org>
+References: <20250922114926.51984-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH 1/2] fw_loader: Split from fs_loader into separate
+ library file
+Message-Id: <176004535929.1002224.15767748603250054968.b4-ty@konsulko.com>
+Date: Thu, 09 Oct 2025 15:29:19 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,20 +104,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 09 Oct 2025 16:34:52 -0300, Fabio Estevam wrote:
+On Mon, 22 Sep 2025 13:48:27 +0200, Marek Vasut wrote:
 
-> Please pull from u-boot-imx/master, thanks.
+> The script based firmware loader does not use anything from the
+> fs_loader implementation. Separate it into its own library source
+> file and convert the mediatek PHY to use this separate code. This
+> should reduce the amount of code that is pulled in alongside the
+> firmware loader, as the FS loader is no longer included.
 > 
-> The following changes since commit 0eaa4b337336dbbe93395d1f2ccc18937eaafea2:
-> 
->   Merge branch 'next' (2025-10-06 13:20:24 -0600)
-> 
-> are available in the Git repository at:
 > 
 > [...]
 
-Merged into u-boot/master, thanks!
+Applied to u-boot/master, thanks!
 
+[1/2] fw_loader: Split from fs_loader into separate library file
+      commit: 8aa57934e52f254064338cfb2a445af9a1f592f9
+[2/2] fw_loader: Prefix the FW loader variables with the script prefix
+      commit: 50fc92938623be4a1cf1993c703812643afc9cdd
 -- 
 Tom
 
