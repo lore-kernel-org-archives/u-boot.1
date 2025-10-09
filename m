@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 117FFCCA470
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 09:30:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF68CCD187
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 09:30:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97CAD844AC;
-	Thu,  9 Oct 2025 11:30:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E1A08844A5;
+	Thu,  9 Oct 2025 11:30:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="go+Gt6hQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q6NmGbiT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD6AD844A9; Thu,  9 Oct 2025 11:30:23 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id B8297844B1; Thu,  9 Oct 2025 11:30:25 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 932E08447F
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 11:30:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DCDA844A5
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 11:30:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-92c781fd73aso71771539f.1
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 02:30:21 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-42486ed0706so4483485ab.0
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 02:30:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760002219; x=1760607019; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760002222; x=1760607022; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r299/a0HOwx0REUActoOKiZ9RCDAHitnvBGKcmR0P7A=;
- b=go+Gt6hQoTxFATPoX9rUfqy5ZQqu6qaLnKeqfxPZIF1wpUMpPurO0bhU3MSVxqFbKm
- jTspXBXKgBs+jg/55lgM23tkhiTcH7OrABvCYOiAgNYYiacIo7ndP9RCRR7p1iDANCjG
- ilNP2ZjziTYYUv5P8gXdm/ACyoA7mulbbAoDA=
+ bh=fO/mD54I9g2fcIOF5xKZCsTqZMXgz+OIIS5kJzv6kX0=;
+ b=Q6NmGbiTyr8Zpu45hQ/9zWz3Dquhy7PDCvg24i+hVfPjjfQoN1W7tzZsyiZFE7fPWr
+ ffY93y9MArxsWpEuv3VR9lhEHoJUwlskmmCcGY/0w/FMt7XciwlafwUh22I3FjvX6ERZ
+ 8uTWlP7KOY0ot5vtq4yLEC1vc+HclQP6qzRXU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760002219; x=1760607019;
+ d=1e100.net; s=20230601; t=1760002222; x=1760607022;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r299/a0HOwx0REUActoOKiZ9RCDAHitnvBGKcmR0P7A=;
- b=SdVWK5bc388Ua/pXDupfU+mD100TPRcqo95CfRnBNpFtxOt50iTWUkLvJIr02nhDei
- IxY2MyOElM+9380HLXnMFekn/sqWc6OiOfxQtaLz9RgJyuzZtZYpuffc/yJMHHm8NcR4
- o9NmrIQ8dG0cf6Y6QrKAmO2DMR7soiHobinKjXs1Nl+H8cTe8RYhSTIyvqHfGLIo2Ss+
- zGyq8VSvgkJyocYYK4lgUULCD+5vrMP8AUdZtsyo6DNfgjwQpNb0eDJp39zTgi4snKpw
- ECIQ6OUW4TwZMKwNukU3zfu/IzAKEp9XLGOT8C9NgSe4mN9qHbuZ2P5XPhQeZws3vDGC
- 3Icg==
-X-Gm-Message-State: AOJu0YyTww6zFMVTwxRszGTxm9AmWKN4/dsAAlm3C8BJosp8mtxlZ/p6
- GVq5QPrek8JYsON9xebP0Bz2m5+q3vOkcm1FCheNjapuob9z8eqrnvJ/beRFsWjP5KftYnePxYN
- 0eRlTf04e
-X-Gm-Gg: ASbGncu9eTCrok81H4S/4ZrPx0fQ7OyXA+HmlDzkruDBxHWDn0OI7nBUs9dnE6c22op
- 4DCGsxT4WbH/0xNVNY/d2ZmnlhAvE+t4tG98lGJpbB7Xuw01b68hJhT+QJQQFepkEjDxOgRmQxz
- yvkvlGK57dY5iP19PJX6XaUqINns3G1izL5VZgAovVIYIK87mKlheZf/JQTfqBVnaE5WjJyeBYB
- mXAKOjlysiZOHeIuvsSDj0/am1MhV+yXahaXkVsL49IVcPdyanPLanOK1uy2VO4bX14xY/t33go
- 97AbMBkRpraDPGqpO7e98qRli0g1ghz3CTWs/Mr/hku4mNjExpr1KRchKqRxOWRU99q6nSstFXo
- ldVS2U4pmGEe+blQqJ3oQemGzzLXUJdlpGW/BwtuP
-X-Google-Smtp-Source: AGHT+IGVCEpo9RU8zGadOdwrQopTRjZmmKO+wOpZqdBLpoOMRZFClZPA4i0phfjZB3bmrKzWxIxZPw==
-X-Received: by 2002:a05:6602:48b:b0:936:dfca:f6c with SMTP id
- ca18e2360f4ac-93bd192a620mr744300039f.10.1760002219549; 
- Thu, 09 Oct 2025 02:30:19 -0700 (PDT)
+ bh=fO/mD54I9g2fcIOF5xKZCsTqZMXgz+OIIS5kJzv6kX0=;
+ b=bLKMfhyhC6wUFuir6L6y4cPIiQKzRefPj6yduZtz9irOiF/i2kt4bNnHivjKCBnWp/
+ +JUHdtTcJnpLqcRDgN0nD4+cMcivsrbEt3ucXEyqb69jtnFYAnD6hrS4sm5FsF9Gg9v7
+ snsZOyUDvPtQdNaU6qOHd3lL98PiIC9oM1+gIHhwNGXF2xiJDa+7TL53O1ipWMtxDdhj
+ xJaq6L+xybFPXL3iLFST7L2YADe2lAY3V/qmNIO3eG+77k0MV52JuKoKjvPujqkGSlBg
+ xKLFZGlqj5OI9wDYn5IEDgxGBMH0TyX7Gl5w13lo7tAFXjJyTYJjGTO0l/2qjFRDVN7d
+ H8dg==
+X-Gm-Message-State: AOJu0YyM4XLCF3rvi3iBLiOytNAmv2pbx/YrNdLJQBV/MNiwq2pWgLca
+ VFInlzHKM28xKuJdmQ8M9IhJqlUE85QH6QpKeDUO4DI7xXD5FjlCuNzQ80iADDeEjNGUpMmisN5
+ 7Z7l+nRHf
+X-Gm-Gg: ASbGncunLB39J5feT9M8zdHCzoZHXu5959dv0RFhLJyGDjwC4wc3g0R7hktAHMO9KYc
+ bkwupJ2WqUGSeq564NacOs/+v5YPNvrAH1xnpXifJhBa2jmGxTw3WXEPy2nJSIFvv1m7jcsGK17
+ WeR0zzZjlyIzO+zbrQ+5JB1Jze9hNvfwCh4j0LZU5SVgqbWvTXHJFpnC6FqQUwJG6mSQtIpjkjj
+ HYqZ3/6onTwLLRTEyOrmdjqrahSxvolwdVfE4SHounYgJKdXZhBMXFat19YajIeN7XRfMTc9ed5
+ uO+nZxe1L+oI/NyZvJEVTpqNwNyIHSAD1G8NEEPvhC0HoxjVIdoBmGy02dT4BMdXtybovJuMsjK
+ OiRdeBr2BSJCOVxWIHWpxvXUhufVcP3t9ehflSDOalAWYsiNC0Zc=
+X-Google-Smtp-Source: AGHT+IFBYBsypi6ovjU0VLAnQZVxLyAcCh4w3Mql84p31Ianan/fdnjKCQfU/tYBP3N1Fxrgzw8mQw==
+X-Received: by 2002:a05:6e02:1806:b0:424:fd76:2a2d with SMTP id
+ e9e14a558f8ab-42f8740e314mr63346955ab.29.1760002221405; 
+ Thu, 09 Oct 2025 02:30:21 -0700 (PDT)
 Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-57b5ea300f7sm7839341173.16.2025.10.09.02.30.18
+ 8926c6da1cb9f-57b5ea300f7sm7839341173.16.2025.10.09.02.30.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 02:30:18 -0700 (PDT)
+ Thu, 09 Oct 2025 02:30:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
  Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH v4 1/4] boot: Improve comments related to global bootmeths
-Date: Thu,  9 Oct 2025 03:29:52 -0600
-Message-ID: <20251009092959.260121-2-sjg@chromium.org>
+ Moritz Fischer <moritzf@google.com>
+Subject: [PATCH v4 2/4] boot: Move obtaining the label into a common file
+Date: Thu,  9 Oct 2025 03:29:53 -0600
+Message-ID: <20251009092959.260121-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251009092959.260121-1-sjg@chromium.org>
 References: <20251009092959.260121-1-sjg@chromium.org>
@@ -102,74 +101,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a few comments about global bootmeths and first_glob_method
+The 'bootflow list' command supports looking at the EFI device-path when
+available. Move this piece into a common function so it can be used
+elsewhere.
+
+Use 'usb' instead of 'usb_mass_storage' for usb so that it fits in the
+column space.
+
+This updates the output from 'bootflow list'.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Drop the spacing changes
-
- boot/bootflow.c        | 1 +
- boot/bootmeth-uclass.c | 1 +
- include/bootflow.h     | 3 ++-
- test/boot/bootflow.c   | 2 +-
- 4 files changed, 5 insertions(+), 2 deletions(-)
+ boot/bootflow.c      | 19 +++++++++++++++++++
+ cmd/bootflow.c       |  8 +++++---
+ include/bootflow.h   |  8 ++++++++
+ test/boot/bootflow.c |  2 +-
+ 4 files changed, 33 insertions(+), 4 deletions(-)
 
 diff --git a/boot/bootflow.c b/boot/bootflow.c
-index d79f303486d..15df7069209 100644
+index 15df7069209..78df09f369d 100644
 --- a/boot/bootflow.c
 +++ b/boot/bootflow.c
-@@ -344,6 +344,7 @@ static int bootflow_check(struct bootflow_iter *iter, struct bootflow *bflow)
- 	struct udevice *dev;
- 	int ret;
+@@ -11,6 +11,7 @@
+ #include <bootmeth.h>
+ #include <bootstd.h>
+ #include <dm.h>
++#include <efi_device_path.h>
+ #include <env_internal.h>
+ #include <malloc.h>
+ #include <serial.h>
+@@ -1010,3 +1011,21 @@ int bootflow_get_seq(const struct bootflow *bflow)
  
-+	/* handle global bootmeths if needed */
- 	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global) {
- 		bootflow_iter_set_dev(iter, NULL, 0);
- 		ret = bootmeth_get_bootflow(iter->method, bflow);
-diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-index 188f6ea1895..bb2dd8447cf 100644
---- a/boot/bootmeth-uclass.c
-+++ b/boot/bootmeth-uclass.c
-@@ -204,6 +204,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
- 		goto err_order;
- 	}
- 
-+	/* start with the global bootmeths */
- 	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && include_global &&
- 	    iter->first_glob_method != -1 && iter->first_glob_method != count) {
- 		iter->cur_method = iter->first_glob_method;
+ 	return alist_calc_index(&std->bootflows, bflow);
+ }
++
++const char *bootflow_guess_label(const struct bootflow *bflow)
++{
++	const char *name = NULL;
++
++	if (bflow->dev) {
++		struct udevice *media = dev_get_parent(bflow->dev);
++
++		if (device_get_uclass_id(media) == UCLASS_MASS_STORAGE)
++			name = "usb";
++		else
++			name = dev_get_uclass_name(media);
++	}
++	if (!name)
++		name = "(none)";
++
++	return name;
++}
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index 551dffbb8b8..5b803d4ace5 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -70,10 +70,12 @@ static void report_bootflow_err(struct bootflow *bflow, int err)
+  */
+ static void show_bootflow(int index, struct bootflow *bflow, bool errors)
+ {
++	const char *name = bootflow_guess_label(bflow);
++
+ 	printf("%3x  %-11s  %-6s  %-9.9s %4x  %-25.25s %s\n", index,
+-	       bflow->method->name, bootflow_state_get_name(bflow->state),
+-	       bflow->dev ? dev_get_uclass_name(dev_get_parent(bflow->dev)) :
+-	       "(none)", bflow->part, bflow->name, bflow->fname ?: "");
++	       bflow->method ? bflow->method->name : "(none)",
++	       bootflow_state_get_name(bflow->state), name, bflow->part,
++	       bflow->name, bflow->fname ?: "");
+ 	if (errors)
+ 		report_bootflow_err(bflow, bflow->err);
+ }
 diff --git a/include/bootflow.h b/include/bootflow.h
-index 32422067723..2ef6eb25cf5 100644
+index 2ef6eb25cf5..657e3731f11 100644
 --- a/include/bootflow.h
 +++ b/include/bootflow.h
-@@ -250,7 +250,8 @@ enum bootflow_meth_flags_t {
-  * @cur_label: Current label being processed
-  * @num_methods: Number of bootmeth devices in @method_order
-  * @cur_method: Current method number, an index into @method_order
-- * @first_glob_method: First global method, if any, else -1
-+ * @first_glob_method: Index of first global method within @method_order[], if
-+ * any, else -1
-  * @cur_prio: Current priority being scanned
-  * @method_order: List of bootmeth devices to use, in order. The normal methods
-  *	appear first, then the global ones, if any
+@@ -692,4 +692,12 @@ int bootflow_menu_start(struct bootstd_priv *std, bool text_mode,
+  */
+ int bootflow_menu_poll(struct expo *exp, int *seqp);
+ 
++/**
++ * bootflow_guess_label() - Produce a plausible label for a bootflow
++ *
++ * This uses the uclass name or EFI device-path to come up with a useful label
++ * for display to the user. Ideally it will say "mmc", "usb", nvme", etc.
++ */
++const char *bootflow_guess_label(const struct bootflow *bflow);
++
+ #endif
 diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 8de5a310add..7cd83dc7443 100644
+index 7cd83dc7443..73fe3d34d0f 100644
 --- a/test/boot/bootflow.c
 +++ b/test/boot/bootflow.c
-@@ -401,7 +401,7 @@ static int bootflow_system(struct unit_test_state *uts)
- 	ut_assertok(device_probe(dev));
- 	sandbox_set_fake_efi_mgr_dev(dev, true);
- 
--	/* We should get a single 'bootmgr' method right at the end */
-+	/* We should get a single 'bootmgr' method at the start */
- 	bootstd_clear_glob();
- 	ut_assertok(run_command("bootflow scan -lH", 0));
- 	ut_assert_skip_to_line(
+@@ -1301,7 +1301,7 @@ static int bootflow_efi(struct unit_test_state *uts)
+ 	ut_assert_nextlinen("---");
+ 	ut_assert_nextlinen("  0  extlinux");
+ 	ut_assert_nextlinen(
+-		"  1  efi          ready   usb_mass_    1  usb_mass_storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
++		"  1  efi          ready   usb          1  usb_mass_storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
+ 	ut_assert_nextlinen("---");
+ 	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+ 	ut_assert_console_end();
 -- 
 2.43.0
 
