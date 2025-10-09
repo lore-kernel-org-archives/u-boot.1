@@ -4,84 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E712CCD183
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 21:29:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E3BCCD183
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 22:21:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C578841F2;
-	Thu,  9 Oct 2025 23:29:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2194883C94;
+	Fri, 10 Oct 2025 00:21:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hlE4neMy";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB02284209; Thu,  9 Oct 2025 23:29:25 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7811C84202
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 23:29:23 +0200 (CEST)
+ id 77F8683CEE; Fri, 10 Oct 2025 00:21:54 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id AB5BC83C62
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 00:21:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-3b15f0027d9so794098fac.2
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 14:29:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760045362; x=1760650162; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=yofQz3/O/G3//2iUYtA1UYamLNCxu9k1qm6empyggCk=;
- b=hlE4neMyDtfqiWQckAzGhnKAVqscOHhQg6qH/IjpulpEmzohzooemvplUMDixXA7Gr
- KKv/R/ROz/1ZKLDPYU5AA6r7pVrDtyd361AYdawfLLSq8ippszei1RRCMdEhJ/Dda7Ni
- V68NphZF9+t9VferaP4wWCaPNU7W+dxMlRChI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760045362; x=1760650162;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yofQz3/O/G3//2iUYtA1UYamLNCxu9k1qm6empyggCk=;
- b=P9/JOpJwM5eRl7OceOmLAb0fly9jBW7F8//wdspS320izZ/+LctYtWGJHSX4pIsc07
- EUFCC9DbFBg06TcHUNCAjLC50ATqIoGy7FeN6r1U9RYBmRD2rKWuF3uZHiuNXTwMR9ZL
- 7Gpf8Uzb3aA0YyVoIMjsS4xXrWauywILDG8r3D3U8yQO3KmIeIJmqjdTD+c7J2EHAK6K
- NXJt7jUXun/ibgcU81LF7s0EPMRPI/zlINdNFwIxJ/+Td3+9J3iAOxGMxDqzRna6G25r
- U126fqns4MppeAhL/VbODpV/LKMUvI49Qo7J9ZVtMtDO15gGFNv0C9RwAhVy4Gf+Bici
- OiCQ==
-X-Gm-Message-State: AOJu0YwEw5mJB9mikZEHBvxctj6CSXecfLj68eBGz/0kdzwEFQmOu8w4
- fqF743lMXSX1IxZUDOpD7t8miNISn9BJnUm1xsg27EBQR8+RANohEoJhRlqOzaBLaxHTwslkHBW
- qlKCPzsM=
-X-Gm-Gg: ASbGncs+fhodZ6Ew7uW6VRGMM6bXsUTCRk2uDvHsVPcKOm0XKuAF0x0w2ADhKV3vrHq
- tKTLkFgST69+VtIRh2aUFgfdyNEJZtFiUHf47UIMMKkfvRBcIKaGGR24iwfX0suYB2wpbf+vCLS
- d6YkzSOwdMQHsnLP8NggDnSDfFgEKrQFtCSSSGCHRoH6mZNZ36Q5G/LfSa796iebUzXMrI1z0+s
- s2Apuxj53NiyLcNjJODcTQg1ay3/lksz45TlobT3DkDzAdyY+8CHfKAm6y0VOEjU1HbvQqRqaul
- 0loG09YMVttBGN9YRUg6quw5qfhkoxmCKhqbNCGk/+Sc/oFDRRw8idpPgVRKiDrSC8/jKwsM+n3
- OqHojYjfV02tGZe7UVX86JCfXC6vurzNay3WyqEVu/9FFAG+onYW5XI8DfZy9fk2nqSRSZ350bN
- c+bRSZAQpX
-X-Google-Smtp-Source: AGHT+IGSgS83ypZ0Hly+2R8RoR9+r7rMwhPqQunWzQCGPzNflHuYl/Mx1vbC6Wd3rZ1qTjA2UxPxbw==
-X-Received: by 2002:a05:6870:26d:b0:367:c392:9f2c with SMTP id
- 586e51a60fabf-3c0f6af5dd6mr5014188fac.16.1760045362121; 
- Thu, 09 Oct 2025 14:29:22 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8cc4d3f55sm76479fac.3.2025.10.09.14.29.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 14:29:21 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-In-Reply-To: <20250927-scmi-v1-0-5e9354fb3bff@nxp.com>
-References: <20250927-scmi-v1-0-5e9354fb3bff@nxp.com>
-Subject: Re: [PATCH 00/10] firmware: scmi: various update
-Message-Id: <176004536091.1002224.14676119717082278442.b4-ty@konsulko.com>
-Date: Thu, 09 Oct 2025 15:29:20 -0600
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E46FC1758;
+ Thu,  9 Oct 2025 15:21:42 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B00063F59E;
+ Thu,  9 Oct 2025 15:21:49 -0700 (PDT)
+Date: Thu, 9 Oct 2025 23:21:27 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Paul Kocialkowski <paulk@sys-base.io>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Chen-Yu Tsai <wens@csie.org>, Icenowy Zheng
+ <icenowy@aosc.xyz>
+Subject: Re: [PATCH] sunxi: a133: Add NSI arbiter support to DRAM init
+Message-ID: <20251009232127.7cff2e40@minigeek.lan>
+In-Reply-To: <20251009171459.564592-1-paulk@sys-base.io>
+References: <20251009171459.564592-1-paulk@sys-base.io>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,44 +57,228 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 27 Sep 2025 00:06:13 +0800, Peng Fan (OSS) wrote:
+On Thu,  9 Oct 2025 19:14:59 +0200
+Paul Kocialkowski <paulk@sys-base.io> wrote:
 
-> Misc update on firmware scmi:
->  - Typo fix
->  - Use io helpers
->  - Use PAGE_SIZE for arm64
->  - Add IN_USE error code
->  - Add more error info
->  - Support scmi max rx timeout in mailbox
->  - Add myself as scmi maintainer, AKASHI contributed most code, but
->    seems he is not invovled in the developement anymore, I volunteer to
->    help here.
+Hi Paul,
+
+many thanks for sending this, it totally escaped me that we didn't
+setup the bus priorities on the A133!
+
+> In previous generations of Allwinner SoCs, the memory bus (MBUS) access
+> arbitration was configured as part of the DRAM top registers. This is no
+> longer the case starting with the A133, which has a dedicated base
+> address for the bus arbiter that is now called NSI instead of MBUS.
 > 
-> [...]
+> NSI appears to be a later iteration of MBUS design, with new dedicated
+> registers that resemble the previous MBUS ones. Despite NSI not being
+> documented in the manual, the A133 BSP includes a nsi driver with some
+> description of the registers. Like previous generations, it implements
+> port arbitration priority for DRAM access and also supports an optional
+> QoS mode based on bandwidth limits.
+> 
+> Configuring port arbitration priority is especially important to make
+> sure that critical masters are not starved by other less important
+> ones. This is especially the case with the display engine that needs
+> to be able to fetch pixels in time for scanout and can easily be
+> starved by CPU or GPU access.
+> 
+> This introduces support for the NSI arbiter in the A133 DRAM init
+> code. The list and order of available ports are highly SoC-specific
+> and the default config values are set to match the BSP's defaults.
+> 
+> Signed-off-by: Paul Kocialkowski <paulk@sys-base.io>
+> ---
+>  .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  4 ++
+>  .../include/asm/arch-sunxi/dram_sun50i_a133.h | 50 ++++++++++++++
+>  arch/arm/mach-sunxi/dram_sun50i_a133.c        | 65 ++++++++++++++++++-
+>  3 files changed, 118 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> index 2a9b086991c3..8e80c520706b 100644
+> --- a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> +++ b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> @@ -16,6 +16,10 @@
+>  
+>  #define SUNXI_GIC400_BASE		0x03020000
+>  
+> +#ifdef CONFIG_MACH_SUN50I_A133
+> +#define SUNXI_NSI_BASE			0x03100000
+> +#endif
+> +
+>  #ifdef CONFIG_MACH_SUN50I_H6
+>  #define SUNXI_DRAM_COM_BASE		0x04002000
+>  #define SUNXI_DRAM_CTL0_BASE		0x04003000
+> diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> index a5fc6ad36560..a526e55e7bb9 100644
+> --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> @@ -24,6 +24,56 @@ static inline int ns_to_t(int nanoseconds)
+>  	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
+>  }
+>  
+> +#define SUNXI_NSI_PORT_PRI_CFG_RD(v)	(((v) & 0x3) << 2)
+> +#define SUNXI_NSI_PORT_PRI_CFG_WR(v)	((v) & 0x3)
+> +#define SUNXI_NSI_PRI_LOWEST		0
+> +#define SUNXI_NSI_PRI_LOW		1
+> +#define SUNXI_NSI_PRI_HIGH		2
+> +#define SUNXI_NSI_PRI_HIGHEST		3
+> +#define SUNXI_NSI_QOS_SEL_OUTPUT	0
+> +#define SUNXI_NSI_QOS_SEL_INPUT		1
+> +
+> +struct sunxi_nsi_port_reg {
 
-Applied to u-boot/master, thanks!
+Do we really need a struct to describe an MMIO register frame?
+I started to get away from them, for the reasons please check the commit
+messages from one of those patches:
+https://source.denx.de/u-boot/u-boot/-/commit/0453a1d9bb15ee30e8b4b89b4936982dbb44d71d
 
-[01/10] firmware: scmi: Typo fix
-        commit: 92fe41caadfd01b6c31df12195b8a9b59ad4f4f5
-[02/10] firmware: scmi: smt: Use io helpers
-        commit: 8c48bae4f5783a1da95177e7d5d85c00e2ada0c3
-[03/10] firmware: scmi: smt: Dump more info
-        commit: 23e2b769220be4d3e35167492ef2cd915f647888
-[04/10] firmware: scmi: Add error code IN_USE
-        commit: eb7469eb1a32a02d024da254d34912c3fe741c7f
-[05/10] firmware: scmi: use PAGE_SIZE alignment for ARM64
-        commit: b2ae10970d40a26e955d6f763cda77948d8b4f7e
-[06/10] firmware: scmi: mailbox: Update timeout to 30ms
-        commit: f116ec5b9105ffa4792bfced12aab822e492ff5f
-[07/10] firmware: scmi: mailbox: Support arm,max_rx_timeout_ms
-        commit: 5e9fb0e5835ace9f9f7c6eceb3dd4cabc17487d4
-[08/10] clk: scmi: Replace log_debug with dev_dbg
-        commit: 0d71bc3a1bf82ad60fa4fb1b4441acde633249f1
-[09/10] cmd: scmi: Add pin control protocol name
-        commit: 5ea37da298777ce6fe53b51bd32e3e0614c61bbc
-[10/10] MAINTAINERS: Add an entry for SCMI
-        commit: 7828597f5430431281071b60289e46afed74ef94
--- 
-Tom
+So can we replace this with something like
+#define SUNXI_NSI_MODE_REG	0x10
 
+And, squinting from a distance, the A523 code looks like using the same
+per-device MMIO frame, with registers at 0x14 and 0x18 being written,
+with a distance of 0x200 between the devices. So maybe put this
+somewhere where the offsets can be shared between the SoCs?
+
+> +	u32 reserved0[4];
+> +	u32 mode;
+> +	u32 pri_cfg;
+> +	u32 io_cfg;
+> +	u32 reserved1[41];
+> +	u32 enable;
+> +	u32 clr;
+> +	u32 cycle;
+> +	u32 rq_rd;
+> +	u32 rq_wr;
+> +	u32 dt_rd;
+> +	u32 dt_wr;
+> +	u32 la_rd;
+> +	u32 la_wr;
+> +	u32 reserved2[71];
+> +};
+> +
+> +struct sunxi_nsi_reg {
+
+Same here, can you please similarly replace this with defines, and
+multiply this index with the frame size (0x200)?
+
+Otherwise this looks nice!
+
+Cheers,
+Andre
+
+> +	struct sunxi_nsi_port_reg cpu;
+> +	struct sunxi_nsi_port_reg gpu;
+> +	struct sunxi_nsi_port_reg sd1;
+> +	struct sunxi_nsi_port_reg mstg;
+> +	struct sunxi_nsi_port_reg gmac0;
+> +	struct sunxi_nsi_port_reg gmac1;
+> +	struct sunxi_nsi_port_reg usb0;
+> +	struct sunxi_nsi_port_reg usb1;
+> +	struct sunxi_nsi_port_reg ndfc;
+> +	struct sunxi_nsi_port_reg dmac;
+> +	struct sunxi_nsi_port_reg ce;
+> +	struct sunxi_nsi_port_reg de0;
+> +	struct sunxi_nsi_port_reg de1;
+> +	struct sunxi_nsi_port_reg ve;
+> +	struct sunxi_nsi_port_reg csi;
+> +	struct sunxi_nsi_port_reg isp;
+> +	struct sunxi_nsi_port_reg g2d;
+> +	struct sunxi_nsi_port_reg eink;
+> +	struct sunxi_nsi_port_reg iommu;
+> +	struct sunxi_nsi_port_reg cpus;
+> +};
+> +
+>  /* MBUS part is largely the same as in H6, except for one special register */
+>  #define MCTL_COM_UNK_008	0x008
+>  /* NOTE: This register has the same importance as mctl_ctl->clken in H616 */
+> diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> index 1496f99624dd..6327f00ff5ea 100644
+> --- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> +++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> @@ -69,6 +69,64 @@ static const u8 phy_init[] = {
+>  };
+>  #endif
+>  
+> +static void nsi_configure_port(struct sunxi_nsi_port_reg *port, u8 pri,
+> +			       u8 qos_sel)
+> +{
+> +	u32 pri_cfg;
+> +
+> +	/* QoS with bandwidth limits is not supported, disable it. */
+> +	writel(0, &port->mode);
+> +	writel(0, &port->enable);
+> +
+> +	/*
+> +	 * QoS direction selection should not be in use, but set it nevertheless
+> +	 * to match the BSP behavior (in case it has some other meaning).
+> +	 */
+> +	writel(qos_sel, &port->io_cfg);
+> +
+> +	/* Port priority is always active. */
+> +	pri_cfg = SUNXI_NSI_PORT_PRI_CFG_RD(pri) |
+> +		  SUNXI_NSI_PORT_PRI_CFG_WR(pri);
+> +
+> +	writel(pri_cfg, &port->pri_cfg);
+> +}
+> +
+> +static void nsi_set_master_priority(void)
+> +{
+> +	struct sunxi_nsi_reg *nsi = (struct sunxi_nsi_reg *)SUNXI_NSI_BASE;
+> +	struct {
+> +		struct sunxi_nsi_port_reg *port;
+> +		u8 pri;
+> +		u8 qos_sel;
+> +	} ports[] = {
+> +		{ &nsi->cpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->gpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->sd1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->mstg,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->gmac0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->gmac1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->usb0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->usb1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->ndfc,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->dmac,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->ce,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->de0,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->de1,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->ve,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->csi,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->isp,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->g2d,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->eink,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +		{ &nsi->iommu,	SUNXI_NSI_PRI_HIGHEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> +		{ &nsi->cpus,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> +	};
+> +	unsigned int i;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(ports); i++)
+> +		nsi_configure_port(ports[i].port, ports[i].pri,
+> +				   ports[i].qos_sel);
+> +}
+> +
+>  static void mctl_clk_init(u32 clk)
+>  {
+>  	void * const ccm = (void *)SUNXI_CCM_BASE;
+> @@ -1184,6 +1242,7 @@ static const struct dram_para para = {
+>  unsigned long sunxi_dram_init(void)
+>  {
+>  	struct dram_config config;
+> +	unsigned long size;
+>  
+>  	/* Writing to undocumented SYS_CFG area, according to user manual. */
+>  	setbits_le32(0x03000160, BIT(8));
+> @@ -1200,5 +1259,9 @@ unsigned long sunxi_dram_init(void)
+>  	      1U << config.bankgrps, 1U << config.ranks,
+>  	      16U << config.bus_full_width);
+>  
+> -	return calculate_dram_size(&config);
+> +	size = calculate_dram_size(&config);
+> +
+> +	nsi_set_master_priority();
+> +
+> +	return size;
+>  }
 
