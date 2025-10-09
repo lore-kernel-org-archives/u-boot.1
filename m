@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDC4BCCD185
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:53:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D527CCD185
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:53:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3BAD845A8;
-	Thu,  9 Oct 2025 16:51:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0DE80845AF;
+	Thu,  9 Oct 2025 16:51:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Jx4O3MJC";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="sppv7b17";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1FE383F0A; Thu,  9 Oct 2025 16:51:29 +0200 (CEST)
+ id B44B9845A9; Thu,  9 Oct 2025 16:51:31 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADB09845A1
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:51:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF2B584308
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:51:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 5B5474E40FB1;
- Thu,  9 Oct 2025 14:51:27 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 6FB594E40FB4;
+ Thu,  9 Oct 2025 14:51:29 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 31F596062C;
- Thu,  9 Oct 2025 14:51:27 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 45A0F6062C;
+ Thu,  9 Oct 2025 14:51:29 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id F1E6D102F21E8; 
- Thu,  9 Oct 2025 16:51:24 +0200 (CEST)
+ with ESMTPSA id BF1BC102F21E6; 
+ Thu,  9 Oct 2025 16:51:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760021486; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1760021488; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=SUz+zIltA1t/xDeJu86F3e0WxXqP4aPw7uyDhH3YcYA=;
- b=Jx4O3MJCTutljQ/s2ykKcztSFyZdf3pZtqqGhxQ6xtB5LxGvmXgHVHw4uFTAEgJzr/MjRX
- ChluE8V9Os2YSs5xjHGWxx9l7L8SE8MXNiGiDyOgiNoLhngAuLXu2QD7cvG8NovdY1uRhn
- WsmLlOQwaoQofiF3zfrRiek8ridIxPNl2O1sRS0k2Nvu05nUY/5D23xrcgnoHIVk2HPbg6
- ihUtnXR7yGjr56mg6RjiGDBIj0aLCzvAxmhsYwdSiK40RRNfMdqs7bAj9Ra3WDRUMM/v+n
- WxLbAhIiwt+eC6tHilcn+iGR//90yuZgf26uHnyYbDnGO03/m4vP1uiELtaG0g==
+ bh=tnyq7NO+CiGpFoCDBZQwWAr9drS1OQXRAojqVdxZucU=;
+ b=sppv7b179nezwUcd63jO3wkYscQ6rZIANi4KaFmI3mQCbO05/tq5U5HdnHH1FT2T+Q3CC3
+ ljQfrcgRJQfHVcEHafYhKR868lxqybRPEeN6NHEPEPN3smMCsog5O8587H4ZhGYNg4XaS0
+ i7PERbiYtRTls25uPxD1ZCTsXlCjNRajXr/YlbRPrcMm6aeIe4zRnop9nKA5ndA/6sGK1p
+ iGiMd/UeItA2vSu7a/6EUNutB3Ets9J6268zxZ0XF8PJQBqdAqXTsQ4PV9crKQ0XQSPT3n
+ bO690GKTNJLkM81/x0DTJPqNDIRN/m1MQ7YPEaB/noh6yX9MrKN2Ys8g/5Fgzg==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Thu, 09 Oct 2025 16:50:51 +0200
-Subject: [PATCH v2 15/18] boot: extension: Move overlay apply custom logic
- to command level
+Date: Thu, 09 Oct 2025 16:50:52 +0200
+Subject: [PATCH v2 16/18] boot: pxe_utils: Add extension board devicetree
+ overlay support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251009-feature_sysboot_extension_board-v2-15-e09b39e54de5@bootlin.com>
+Message-Id: <20251009-feature_sysboot_extension_board-v2-16-e09b39e54de5@bootlin.com>
 References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
 In-Reply-To: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -81,265 +81,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The extension_overlay_cmd environment variable approach is specific to
-the U-Boot extension_board command, while other boot flows (pxe_utils,
-bootstd) handle overlay loading differently.
+Add support for scanning and applying extension board devicetree
+overlays during PXE boot. After loading the main board devicetree,
+the system now scans for available extension boards and applies their
+overlays automatically.
 
-Move the extension_overlay_cmd execution out of the core extension
-framework to the command level. This decouples the framework from
-command-specific behavior and prepares for future extension support
-in other boot flows.
+This enables dynamic hardware configuration for systems with extension
+boards during boot scenarios which are using pxe_utils.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
- boot/extension-uclass.c   | 68 +++--------------------------------
- cmd/extension_board.c     | 92 +++++++++++++++++++++++++++++++++++++++++++++--
- include/extension_board.h | 12 ++-----
- 3 files changed, 98 insertions(+), 74 deletions(-)
+ boot/pxe_utils.c | 90 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 90 insertions(+)
 
-diff --git a/boot/extension-uclass.c b/boot/extension-uclass.c
-index 1b21aa08944..840023fa84e 100644
---- a/boot/extension-uclass.c
-+++ b/boot/extension-uclass.c
-@@ -104,92 +104,34 @@ int extension_scan(void)
- 	return ops->scan(extension_list);
- }
- 
--static int _extension_apply(const struct extension *extension)
-+int extension_apply(struct fdt_header *working_fdt, ulong size)
- {
--	ulong extrasize, overlay_addr;
- 	struct fdt_header *blob;
--	char *overlay_cmd;
-+	ulong overlay_addr;
- 	int ret;
- 
--	if (!working_fdt) {
--		printf("No FDT memory address configured. Please configure\n"
--		       "the FDT address via \"fdt addr <address>\" command.\n");
--		return -EINVAL;
--	}
--
--	overlay_cmd = env_get("extension_overlay_cmd");
--	if (!overlay_cmd) {
--		printf("Environment extension_overlay_cmd is missing\n");
--		return -EINVAL;
--	}
--
- 	overlay_addr = env_get_hex("extension_overlay_addr", 0);
- 	if (!overlay_addr) {
- 		printf("Environment extension_overlay_addr is missing\n");
- 		return -EINVAL;
- 	}
- 
--	env_set("extension_overlay_name", extension->overlay);
--	ret = run_command(overlay_cmd, 0);
--	if (ret)
--		return ret;
--
--	extrasize = env_get_hex("filesize", 0);
--	if (!extrasize)
--		return -EINVAL;
--
--	fdt_shrink_to_minimum(working_fdt, extrasize);
-+	fdt_shrink_to_minimum(working_fdt, size);
- 
- 	blob = map_sysmem(overlay_addr, 0);
- 	if (!fdt_valid(&blob)) {
--		printf("Invalid overlay devicetree %s\n", extension->overlay);
-+		printf("Invalid overlay devicetree\n");
- 		return -EINVAL;
- 	}
- 
- 	/* Apply method prints messages on error */
- 	ret = fdt_overlay_apply_verbose(working_fdt, blob);
- 	if (ret)
--		printf("Failed to apply overlay %s\n", extension->overlay);
-+		printf("Failed to apply overlay\n");
- 
- 	return ret;
- }
- 
--int extension_apply(int extension_num)
--{
--	struct alist *extension_list = extension_get_list();
--	const struct extension *extension;
--
--	if (!extension_list)
--		return -ENODEV;
--
--	extension = alist_get(extension_list, extension_num,
--			      struct extension);
--	if (!extension) {
--		printf("Wrong extension number\n");
--		return -ENODEV;
--	}
--
--	return _extension_apply(extension);
--}
--
--int extension_apply_all(void)
--{
--	struct alist *extension_list = extension_get_list();
--	const struct extension *extension;
--	int ret;
--
--	if (!extension_list)
--		return -ENODEV;
--
--	alist_for_each(extension, extension_list) {
--		ret = _extension_apply(extension);
--		if (ret)
--			return ret;
--	}
--
--	return 0;
--}
--
- UCLASS_DRIVER(extension) = {
- 	.name	= "extension",
- 	.id	= UCLASS_EXTENSION,
-diff --git a/cmd/extension_board.c b/cmd/extension_board.c
-index c373397e0fb..86e4795ba8a 100644
---- a/cmd/extension_board.c
-+++ b/cmd/extension_board.c
-@@ -7,8 +7,90 @@
- #include <alist.h>
- #include <exports.h>
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index eb4d7723481..f28fddfd8b3 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -10,6 +10,7 @@
  #include <command.h>
-+#include <env.h>
- #include <extension_board.h>
+ #include <dm.h>
+ #include <env.h>
++#include <extension_board.h>
+ #include <image.h>
+ #include <log.h>
+ #include <malloc.h>
+@@ -432,6 +433,93 @@ skip_overlay:
+ }
+ #endif
  
-+static int
-+cmd_extension_load_overlay_from_env(const struct extension *extension,
-+				    ulong *filesize)
++/*
++ * label_boot_extension - scan extension boards and load overlay associated
++ */
++
++static void label_boot_extension(struct pxe_context *ctx,
++				 struct pxe_label *label)
 +{
-+	ulong size, overlay_addr;
-+	char *overlay_cmd;
-+	int ret;
-+
-+	overlay_cmd = env_get("extension_overlay_cmd");
-+	if (!overlay_cmd) {
-+		printf("Environment extension_overlay_cmd is missing\n");
-+		return -EINVAL;
-+	}
-+
-+	overlay_addr = env_get_hex("extension_overlay_addr", 0);
-+	if (!overlay_addr) {
-+		printf("Environment extension_overlay_addr is missing\n");
-+		return -EINVAL;
-+	}
-+
-+	env_set("extension_overlay_name", extension->overlay);
-+	ret = run_command(overlay_cmd, 0);
-+	if (ret)
-+		return ret;
-+
-+	size = env_get_hex("filesize", 0);
-+	if (!size)
-+		return -EINVAL;
-+
-+	*filesize = size;
-+	return 0;
-+}
-+
-+static int cmd_extension_apply(int extension_num)
-+{
-+	struct alist *extension_list = extension_get_list();
++#if CONFIG_IS_ENABLED(SUPPORT_EXTENSION_SCAN)
 +	const struct extension *extension;
-+	ulong size;
-+	int ret;
++	struct fdt_header *working_fdt;
++	struct alist *extension_list;
++	int ret, dir_len, len;
++	char *overlay_dir;
++	const char *slash;
++	ulong fdt_addr;
 +
++	ret = extension_scan();
++	if (ret < 0)
++		return;
++
++	extension_list = extension_get_list();
 +	if (!extension_list)
-+		return -ENODEV;
++		return;
 +
-+	extension = alist_get(extension_list, extension_num,
-+			      struct extension);
-+	if (!extension) {
-+		printf("Wrong extension number\n");
-+		return -ENODEV;
++	/* Get the main fdt and map it */
++	fdt_addr = env_get_hex("fdt_addr_r", 0);
++	working_fdt = map_sysmem(fdt_addr, 0);
++	if (fdt_check_header(working_fdt))
++		return;
++
++	/* Use fdtdir for now as the overlay devicetree directory */
++	if (label->fdtdir) {
++		len = strlen(label->fdtdir);
++		if (!len)
++			slash = "./";
++		else if (label->fdtdir[len - 1] != '/')
++			slash = "/";
++		else
++			slash = "";
++
++		dir_len = strlen(label->fdtdir) + strlen(slash) + 1;
++		overlay_dir = calloc(1, len);
++		if (!overlay_dir)
++			return;
++
++		snprintf(overlay_dir, dir_len, "%s%s", label->fdtdir,
++			 slash);
++	} else {
++		dir_len = 2;
++		snprintf(overlay_dir, dir_len, "/");
 +	}
-+
-+	ret = cmd_extension_load_overlay_from_env(extension, &size);
-+	if (ret)
-+		return ret;
-+
-+	return extension_apply(working_fdt, size);
-+}
-+
-+static int cmd_extension_apply_all(void)
-+{
-+	struct alist *extension_list = extension_get_list();
-+	const struct extension *extension;
-+	int ret;
-+
-+	if (!extension_list)
-+		return -ENODEV;
 +
 +	alist_for_each(extension, extension_list) {
++		char *overlay_file;
 +		ulong size;
 +
-+		ret = cmd_extension_load_overlay_from_env(extension, &size);
-+		if (ret)
-+			return ret;
++		len = dir_len + strlen(extension->overlay);
++		overlay_file = calloc(1, len);
++		if (!overlay_file)
++			goto cleanup;
++
++		snprintf(overlay_file, len, "%s%s", overlay_dir,
++			 extension->overlay);
++
++		/* Load extension overlay file */
++		ret = get_relfile_envaddr(ctx, overlay_file,
++					  "extension_overlay_addr",
++					  (enum bootflow_img_t)IH_TYPE_FLATDT,
++					  &size);
++		if (ret < 0) {
++			free(overlay_file);
++			continue;
++		}
 +
 +		ret = extension_apply(working_fdt, size);
-+		if (ret)
-+			return ret;
++		if (ret) {
++			free(overlay_file);
++			continue;
++		}
++		free(overlay_file);
 +	}
 +
-+	return 0;
++cleanup:
++	free(overlay_dir);
++#endif
 +}
 +
- static int do_extension_list(struct cmd_tbl *cmdtp, int flag,
- 			     int argc, char *const argv[])
- {
-@@ -55,12 +137,18 @@ static int do_extension_apply(struct cmd_tbl *cmdtp, int flag,
- 	if (argc < 2)
- 		return CMD_RET_USAGE;
- 
-+	if (!working_fdt) {
-+		printf("No FDT memory address configured. Please configure\n"
-+		       "the FDT address via \"fdt addr <address>\" command.\n");
-+		return -EINVAL;
-+	}
-+
- 	if (strcmp(argv[1], "all") == 0) {
--		if (extension_apply_all())
-+		if (cmd_extension_apply_all())
- 			return CMD_RET_FAILURE;
- 	} else {
- 		extension_id = simple_strtol(argv[1], NULL, 10);
--		if (extension_apply(extension_id))
-+		if (cmd_extension_apply(extension_id))
- 			return CMD_RET_FAILURE;
- 	}
- 
-diff --git a/include/extension_board.h b/include/extension_board.h
-index fc9c33ed354..e12c91abb4c 100644
---- a/include/extension_board.h
-+++ b/include/extension_board.h
-@@ -41,17 +41,11 @@ int extension_scan(void);
- 
  /**
-  * extension_apply - Apply extension board overlay to the devicetree
-- * @extension_num: Extension number to be applied
-+ * @working_fdt: Pointer to working flattened device tree
-+ * @size: Size of the devicetree overlay
-  * Return: Zero on success, negative on failure.
-  */
--int extension_apply(int extension_num);
--
--/**
-- * extension_apply_all - Apply all extension board overlays to the
-- *			    devicetree
-- * Return: Zero on success, negative on failure.
-- */
--int extension_apply_all(void);
-+int extension_apply(struct fdt_header *working_fdt, ulong size);
- 
- struct extension {
- 	char name[32];
+  * label_boot() - Boot according to the contents of a pxe_label
+  *
+@@ -685,6 +773,8 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 			if (label->fdtoverlays)
+ 				label_boot_fdtoverlay(ctx, label);
+ #endif
++			label_boot_extension(ctx, label);
++
+ 		} else {
+ 			bootm_argv[3] = NULL;
+ 		}
 
 -- 
 2.43.0
