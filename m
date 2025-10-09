@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38421CCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 12:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8EF1CCD185
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 12:39:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B31FF83BC4;
-	Thu,  9 Oct 2025 14:34:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A8D0983A48;
+	Thu,  9 Oct 2025 14:39:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qfrgkMMy";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="qbMA3BtD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 45A0183C6D; Thu,  9 Oct 2025 14:34:42 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D136D83A3A
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 14:34:39 +0200 (CEST)
+ id BFE5083A4B; Thu,  9 Oct 2025 14:38:59 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org
+ [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D723B83A3A
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 14:38:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 599CYcBc533354;
- Thu, 9 Oct 2025 07:34:38 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760013278;
- bh=ezR/MsOTFFDcNSafhB79i3jp8MskHLyY9girqJk46og=;
- h=From:To:CC:Subject:Date;
- b=qfrgkMMyp/sdi9u8FUWYnsaDCAOefUDefp/yYs/9+c3KBkV8jAZIDYrsdUHDTE4Hs
- bvJ1uFjt4pL0RWD3KeTX5ELzq06JCn9tQlR2yk+bdjgM9+g+V0te6O56zsHa1VKwv1
- 2p78V5M/yL6HUhe38hTIonZ07/mCsQWQgWP3BrFg=
-Received: from DLEE211.ent.ti.com (dlee211.ent.ti.com [157.170.170.113])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 599CYcLI915335
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 9 Oct 2025 07:34:38 -0500
-Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE211.ent.ti.com
- (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 9 Oct
- 2025 07:34:37 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 9 Oct 2025 07:34:37 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 599CYaTI252854;
- Thu, 9 Oct 2025 07:34:37 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
- <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
- <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH v1] env: Kconfig: disable external env in secure os boot
-Date: Thu, 9 Oct 2025 18:04:34 +0530
-Message-ID: <20251009123435.960225-1-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sea.source.kernel.org (Postfix) with ESMTP id 3485444D16;
+ Thu,  9 Oct 2025 12:38:52 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB1ABC4CEE7;
+ Thu,  9 Oct 2025 12:38:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1760013532;
+ bh=VzksdcudeMN6sel9/1SAC7anjGje5C6H1KLSPItfwxA=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=qbMA3BtD05tNHrWtaQcAhGWpv9wBGkRt6iqzYoqqK6OmVaA4RHKw7GLnW8cSS6zy5
+ teh4gDhFo6dWA7uhn2iVngePRWCpsProsThP3Z+9MOMU1KT6Fz6g+mhVcyI0xyd1ot
+ 2zvdENECN+zAsLtLgy8oVbBZ3ZJ8cXapqYPv+/KP84VlRi3fd3RE/ta2beMup3Ge2A
+ LNKaS0dca6gVv15iK7e03IIDmUTgt0y+5/cRAqyRhqOFaMdXjbV4GlMf63SzuSNC0x
+ hd5IW02jKXz/Ftla9IXGzQP2rZTZhuQqkGhen1gCoPtRm9zY7wYru71EQZ0UswJW/E
+ oAZiwbEszxNtQ==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, Peng Fan
+ <peng.fan@nxp.com>, Troy Kisky <troy.kisky@boundarydevices.com>, Adrian
+ Alonso <adrian.alonso@nxp.com>, Lukasz Majewski <lukma@denx.de>, Marek
+ Vasut <marex@denx.de>, "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ Alice Guo <alice.guo@nxp.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: =?utf-8?B?5Zue5aSNOg==?= [PATCH 5/6] usb: dwc3: gadget: Add
+ delay after software writes DCTL in dwc3_gadget_run_stop()
+In-Reply-To: <PAXPR04MB964469BED1917590C26B835DE2EEA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+References: <20250720-imx95-v1-0-759619b47b1f@oss.nxp.com>
+ <20250720-imx95-v1-5-759619b47b1f@oss.nxp.com> <87a52dk5mo.fsf@kernel.org>
+ <PAXPR04MB964469BED1917590C26B835DE2EEA@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Date: Thu, 09 Oct 2025 14:38:49 +0200
+Message-ID: <878qhkw8py.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,84 +78,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Falcon mode uses falcon_image_file from the env during mmc fs boot, but
-external env can be compromised. Therefore disable access to external
-env by setting SPL_ENV_IS_NOWHERE when SPL_OS_BOOT_SECURE is set.
+Hi Alice,
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
-This is a standalone patch from an older RFC:
-https://lore.kernel.org/u-boot/20250911131414.3296697-16-anshuld@ti.com/
+On Thu, Oct 09, 2025 at 10:34, "Alice Guo (OSS)" <alice.guo@oss.nxp.com> wr=
+ote:
 
-Changes:
- - Add a `depends on !SPL_OS_BOOT_SECURE` for each SPL_ENV_IS_IN_*
+>> -----=E9=82=AE=E4=BB=B6=E5=8E=9F=E4=BB=B6-----
+>> =E5=8F=91=E4=BB=B6=E4=BA=BA: Mattijs Korpershoek <mkorpershoek@kernel.or=
+g>
+>> =E5=8F=91=E9=80=81=E6=97=B6=E9=97=B4: 2025=E5=B9=B49=E6=9C=8829=E6=97=A5=
+ 16:47
+>> =E6=94=B6=E4=BB=B6=E4=BA=BA: Alice Guo (OSS) <alice.guo@oss.nxp.com>; St=
+efano Babic
+>> <sbabic@nabladev.com>; Fabio Estevam <festevam@gmail.com>; dl-uboot-imx
+>> <uboot-imx@nxp.com>; Tom Rini <trini@konsulko.com>; Peng Fan
+>> <peng.fan@nxp.com>; Troy Kisky <troy.kisky@boundarydevices.com>; Adrian
+>> Alonso <adrian.alonso@nxp.com>; Lukasz Majewski <lukma@denx.de>; Mattijs
+>> Korpershoek <mkorpershoek@kernel.org>; Marek Vasut <marex@denx.de>;
+>> tharvey@gateworks.com; Alice Guo <alice.guo@nxp.com>
+>> =E6=8A=84=E9=80=81: u-boot@lists.denx.de
+>> =E4=B8=BB=E9=A2=98: Re: [PATCH 5/6] usb: dwc3: gadget: Add delay after s=
+oftware writes DCTL
+>> in dwc3_gadget_run_stop()
+>>=20
+>> Hi Alice,
+>>=20
+>> Thank you for the patch.
+>>=20
+>> On Sun, Jul 20, 2025 at 06:13, "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+>> wrote:
+>>=20
+>> > From: Alice Guo <alice.guo@nxp.com>
+>> >
+>> > When using NXP UUU to download flash.bin to i.MX95 19x19 evk board, it
+>> > will get stuck in a loop at sdp_init() without this change.
+>> >
+>> > Signed-off-by: Alice Guo <alice.guo@nxp.com>
+>>=20
+>> I see that a similar change exist in the Linux kernel:
+>> https://lore.kernel.org/all/20220901193625.8727-4-quic_wcheng@quicinc.com
+>> /
+>>=20
+>> Please mention this change in the commit message for v2.
+>> See the following example:
+>> https://lore.kernel.org/all/20250110-dwc2-dev-v4-7-987f4fd6f8b2@pigmoral=
+.te
+>> ch/
+>>=20
+>> > ---
+>> >  drivers/usb/dwc3/gadget.c | 1 +
+>> >  1 file changed, 1 insertion(+)
+>> >
+>> > diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+>> > index 2b01113d54c..6b2b25c7aa5 100644
+>> > --- a/drivers/usb/dwc3/gadget.c
+>> > +++ b/drivers/usb/dwc3/gadget.c
+>> > @@ -1423,6 +1423,7 @@ static int dwc3_gadget_run_stop(struct dwc3 *dwc,
+>> int is_on, int suspend)
+>> >  	}
+>> >
+>> >  	dwc3_writel(dwc->regs, DWC3_DCTL, reg);
+>> > +	mdelay(2);
+>>=20
+>> Can you elaborate on why 1ms is not enough?
+>>=20
+>
+> Apologies for the confusion that I previously replay this email from the =
+wrong email address.
+>
+> Hi Mattijs,
+>
+> Apologies for the confusion that I previously replay this email from the =
+wrong email address.
 
-Depends on:
-  [PATCH -next v3 1/7] spl: Kconfig: add SPL_OS_BOOT_SECURE config symbol:
-   - https://lore.kernel.org/u-boot/20251006101057.4172248-2-anshuld@ti.com/
----
- env/Kconfig | 7 +++++++
- 1 file changed, 7 insertions(+)
+No worries.
 
-diff --git a/env/Kconfig b/env/Kconfig
-index adea277470f..ce88d640156 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -827,12 +827,14 @@ if SPL_ENV_SUPPORT
- config SPL_ENV_IS_NOWHERE
- 	bool "SPL Environment is not stored"
- 	default y if ENV_IS_NOWHERE
-+	default y if SPL_OS_BOOT_SECURE
- 	help
- 	  Similar to ENV_IS_NOWHERE, used for SPL environment.
- 
- config SPL_ENV_IS_IN_MMC
- 	bool "SPL Environment in an MMC device"
- 	depends on !SPL_ENV_IS_NOWHERE
-+	depends on !SPL_OS_BOOT_SECURE
- 	depends on ENV_IS_IN_MMC
- 	default y
- 	help
-@@ -841,6 +843,7 @@ config SPL_ENV_IS_IN_MMC
- config SPL_ENV_IS_IN_FAT
- 	bool "SPL Environment is in a FAT filesystem"
- 	depends on !SPL_ENV_IS_NOWHERE
-+	depends on !SPL_OS_BOOT_SECURE
- 	depends on ENV_IS_IN_FAT
- 	default y
- 	help
-@@ -849,6 +852,7 @@ config SPL_ENV_IS_IN_FAT
- config SPL_ENV_IS_IN_EXT4
- 	bool "SPL Environment is in a EXT4 filesystem"
- 	depends on !SPL_ENV_IS_NOWHERE
-+	depends on !SPL_OS_BOOT_SECURE
- 	depends on ENV_IS_IN_EXT4
- 	default y
- 	help
-@@ -857,6 +861,7 @@ config SPL_ENV_IS_IN_EXT4
- config SPL_ENV_IS_IN_NAND
- 	bool "SPL Environment in a NAND device"
- 	depends on !SPL_ENV_IS_NOWHERE
-+	depends on !SPL_OS_BOOT_SECURE
- 	depends on ENV_IS_IN_NAND
- 	default y
- 	help
-@@ -865,6 +870,7 @@ config SPL_ENV_IS_IN_NAND
- config SPL_ENV_IS_IN_SPI_FLASH
- 	bool "SPL Environment is in SPI flash"
- 	depends on !SPL_ENV_IS_NOWHERE
-+	depends on !SPL_OS_BOOT_SECURE
- 	depends on ENV_IS_IN_SPI_FLASH
- 	default y
- 	help
-@@ -873,6 +879,7 @@ config SPL_ENV_IS_IN_SPI_FLASH
- config SPL_ENV_IS_IN_FLASH
- 	bool "SPL Environment in flash memory"
- 	depends on !SPL_ENV_IS_NOWHERE
-+	depends on !SPL_OS_BOOT_SECURE
- 	depends on ENV_IS_IN_FLASH
- 	default y
- 	help
--- 
-2.51.0
+>
+> This patch I submitted was indeed inspired by the change you mentioned in=
+ the Linux kernel. The mdelay(2) value was determined empirically during te=
+sting on our development board.
+>
+> However, after a deeper understanding of the driver, I believe the real r=
+oot cause is that the USB3 PHY was not properly initialized. When DWC3 is c=
+onfigured to DWC3_DSTS_SUPERSPEED in dwc3_gadget_start(), enumeration fails=
+ because the PHY is not ready and cannot complete the electrical and protoc=
+ol-level handshake required by USB 3.0. The delay acts as a workaround to c=
+ompensate for the missing hardware initialization or timing issues. Once th=
+e PHY driver (phy-imx8mq-usb.c) is added and properly initializes the USB3 =
+PHY, the delay is no longer needed.
+>
+> The updated changes are included in the patch set titled "Enable USB and =
+ENETC on i.MX943 EVK", specifically in patch 6 and patch 7:
+> https://patchwork.ozlabs.org/project/uboot/patch/20250923-usbnetc-v1-6-50=
+7cddbe7214@oss.nxp.com/
+> https://patchwork.ozlabs.org/project/uboot/patch/20250923-usbnetc-v1-7-50=
+7cddbe7214@oss.nxp.com/
+>
+> Thanks for the feedback!
 
+I see, thanks for taking the time answer me. And glad you could solve
+this properly by enabling the PHY driver.
+
+>
+> Best regards,
+> Alice Guo
