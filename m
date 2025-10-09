@@ -4,81 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E54B2CCD185
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 12:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B00CCD185
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 12:31:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C26B83A3A;
-	Thu,  9 Oct 2025 14:29:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E88E583A3A;
+	Thu,  9 Oct 2025 14:31:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j0MwmVlr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F114A8r2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB22783A3B; Thu,  9 Oct 2025 14:29:04 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id B431E83A3A; Thu,  9 Oct 2025 14:31:11 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21C0783A2B
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 14:29:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5D81C83A2B
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 14:31:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-62ecd3c21d3so1436808a12.0
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 05:29:02 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-4060b4b1200so980271f8f.3
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 05:31:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760012941; x=1760617741; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DUVYd2HN2lP4B5+TR5ZwoY9i0/MdiHQVXq9X3kJAcAQ=;
- b=j0MwmVlrWoNz3r9I0AoMg/BP/LHs3z6fAVZ4U8lv2uAGl/P/FW6qwrx/cFQcY152/W
- q2ht7W0z1GHIWQGA0A6U3aTfRreKVtg5g/dP2zn/7PcZCzV/hNjl/TRYivBH9+kd5+ve
- U7v2enkY7pgefd9du9XNS4+5mESHiuNIFYNC0=
+ d=linaro.org; s=google; t=1760013068; x=1760617868; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=h7+r3HsiC4p/YM7GWsnZZEWU/tAK1fazg2r57gcHHEE=;
+ b=F114A8r2ms4UqGoLgGqSJmu2pjwT6vTJYegISOqv/Pzr8E3fvB0OmhRvYcsEQS/bdF
+ Hcz2L+lm0o08pz7pflNu7ESyngFrkO4hoQp0qHOyNGl/IHJTfSC+ci4dC7OkaKrG6Dax
+ NDA6LUx8jyiUsyjYX93FNOQV/x5LVpz2vi9dnVM1EIsqsJFxK7aysD74CjbF/5u5o7Ka
+ emCy/k/+B0f8p/yS59YjA/B8QM8NtyJ4uDauc5PqZphdsbo/Qlf92sYPB6rAIJmOS/+0
+ zJTRRs0u6/ZT1DL3m/8HXjl7+tYUuU4nMrxyQHPQnn9caECfPftdLMqfYz7ZjpAl3NUn
+ MbTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760012941; x=1760617741;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1760013068; x=1760617868;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DUVYd2HN2lP4B5+TR5ZwoY9i0/MdiHQVXq9X3kJAcAQ=;
- b=A6qEhTdI1vyZzrjlRwPaQ8OHtA7kNCXKqDeKFhCJs1gu6+N2gAzrcf5NOXhE7dph18
- Hu5nBF50gz9zeQTx9vGgOYNIRFwk7obBHYlMxKz6YTy1jKuiVohR50hLBSJxpwckeZK4
- H3dJM/onyHGjgAOBht4QEx+aIY9g4paCaniNGmMq7L5kWcuv0MpLy6RxnmVbGSMEO0QF
- XGEDGJJ+didw1LV8iptPEA+xPvdOey0YIPYFAcQtmvwYzPHYvAqgVRTk1qQAl9jnXbms
- O/CXrU+ozRvK8RwDuKgIRFMJmDe8xk6RGsluaftM0vl7sKD45I3ZwLKcHM0nWpP41uMY
- u4gw==
-X-Gm-Message-State: AOJu0Yxz3mp+AlDKSjTAzljg1TIM3J4Qm+h9mo5KvlNLuF2sT1fwXAqJ
- jgO1zc4za4LTgl4fD6A0icy2XY97BFQ9jC32trpbZRw3C4qCDgyzP1u7WGKhDX6iUne+IDEyz/4
- eHO6e+t0IZ/QiSN1i4Tz1KuT6Y4lN0vHU+UXKvxtDv8wA2qyWemx4Jz6D
-X-Gm-Gg: ASbGncsd95qSP3M/xGZLJAQIIJdV1Ebcv9iAWKgLIB5hFrTL+ygm0cFdumAIpkcQjb7
- qj1ub1XAikbClDtEOYwv4k1taZZRdAXEPhYx4hLEath/cB7PCd+ygyhiSoIJ2Bshh3SzK2B9wIq
- I6ohlu/7l+BmW2Xl1MA3tJOT2ucWBDu2MSWMJoOqQDutaKrhn1AleFA99DbY+mfhxV/klf1WmP4
- crJ2LPSmnTbsujx5syoVHvqyrpu7L6f
-X-Google-Smtp-Source: AGHT+IH5Q6oT6AS6lLy2o7Qb8NO8XUeqJsjmzGqsmLRAg/TZLm0k/tVGiCquut3TDIoOeeNw1LTR9IKmEXJtE/NcavA=
-X-Received: by 2002:a05:6402:2812:b0:632:d9b:271e with SMTP id
- 4fb4d7f45d1cf-639d5c3630emr7341951a12.22.1760012941375; Thu, 09 Oct 2025
- 05:29:01 -0700 (PDT)
+ bh=h7+r3HsiC4p/YM7GWsnZZEWU/tAK1fazg2r57gcHHEE=;
+ b=pqnyyhdIBLdmMkmCEU8AmQ2A7u4ZAlVErSWgdjWE/DS7jSGyHZsKpCnkNWgutCSk4W
+ sAsc+gkTWWX9odsD6KPq9qO6oSOgKy3CQO752HtiQ6pnIXPRJuuBSpJbiVRSO6YuWzxY
+ dZBJxngpS5S1I+x76AXOZGcW6lA8cODvaFaWw+b9FhCNPQXqlGvp4dhHwxq3f6Q1hM2y
+ itwKZdAdKznfgQPGKLP1QTyirRniXucZBmEaotli6cHpB0nWHDHNB9leeYKg0iKCiE28
+ sVZy9BicSPz/Y5wvjUGV9Xtr5n5lLWqeI3p+3XRuskQDj+RDCLJWVOcVjCPVsKU+dPsV
+ qBZQ==
+X-Gm-Message-State: AOJu0YyhtVj39Xd5hUCZ5CEnokFVp5hvLREs0IMEVg925aZ98uUzzcU+
+ Ej38AVg3D/yfu3g5p47O2KI3s5nxd3VZGtaBbxDxZpFMJzB0I4i7YCR07mimGN1+19fnFwgKsHO
+ cO5bYCO8=
+X-Gm-Gg: ASbGncv6O0hxvEEy3GlhCjOFqU+uGO58opbl0IE232mHlHade8HnJ1KfBSaRtX0fQGp
+ LwPz7Rcf2I+ni8brFxLPy0nyYqHcTViJXcBOTu+ItFbTxzaLFgr3ktnamXRRUKIcDhF56BZn2cy
+ tRg2Za3nmHDmhCYb7Q2Kdx9tTkKinblhMoYsFE16Jn++AxPIWW2X5SZcQ0uiqV7EUT5pCszS2hz
+ 1oUHTsv48QUFisHi9YER80cXMrAJBfPQJk1lw5l0oCRgRvmWYtqYCixvpS58GOKTaBiuiaa2B13
+ LAk+nl+1HLK/CpEvyDGkhyi0VZ7ayFrZGcPolE3xHDKQKoqfSc0CRiMNcJhVePuo3tVJA2GlE36
+ wLQCR6B9XtgtyvxqIf6pm9i0viIU+5owYIBrciuz40UjK1ZQazYR9bouKcHU=
+X-Google-Smtp-Source: AGHT+IHV8NEecl4iCxTGJIPgQBhGe8rAdm2FLvLHuEEdmXwl+hgVq6WpEzPtfzNwgd6ai3SMtzoNFw==
+X-Received: by 2002:a05:6000:401f:b0:3e9:a1cb:ea8f with SMTP id
+ ffacd0b85a97d-4267260e2famr5315750f8f.52.1760013068428; 
+ Thu, 09 Oct 2025 05:31:08 -0700 (PDT)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:86ff:a12c:54e9:8445])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46faf183b6dsm45516265e9.17.2025.10.09.05.31.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Oct 2025 05:31:08 -0700 (PDT)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: U-Boot mailing list <u-boot@lists.denx.de>
+Cc: Benjamin Hahn <B.Hahn@phytec.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+Subject: [PATCH] net: make dhcp_run() common for NET and NET_LWIP
+Date: Thu,  9 Oct 2025 14:30:14 +0200
+Message-ID: <20251009123034.2441110-1-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20251008-topic-interconnect-next-v2-0-c46e94dd328e@linaro.org>
- <20251008-topic-interconnect-next-v2-1-c46e94dd328e@linaro.org>
- <CAFLszTi3cNihLKOvJhrm1GLYdxQKvkv-66Fdr6m90+vvdUtMMg@mail.gmail.com>
- <d0e157af-c5e7-45ee-9f8f-6b9a523d5505@linaro.org>
- <CAFLszTgemVk0tSMpBiMfgnh4LGaVKnOpGWa0N8WwE2Spf+ZUWA@mail.gmail.com>
- <8324c7c6-dcfb-4fe8-a9d3-9ab19fdac36c@linaro.org>
-In-Reply-To: <8324c7c6-dcfb-4fe8-a9d3-9ab19fdac36c@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 9 Oct 2025 06:28:48 -0600
-X-Gm-Features: AS18NWAVKaZtgexk872WbZmtiyM49aoZ8ozrY14xkNI6i0rR8SRSnZ6j-bMKYYk
-Message-ID: <CAFLszTi9omZ372BocVZ39nHbgofM5in=Nz4yvCXrHVEgoJPiQg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/7] Introduce the Interconnect Subsystem
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Mario Six <mario.six@gdsys.cc>, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,217 +103,192 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+THere are currently two implementations of dhcp_run(): one in cmd/net.c
+for NET and one in net/lwip/dhcp.c for NET_LWIP. There is no
+justification for that. Therefore, move the NET version into
+net/net-common.c to be used by both stacks, and drop the NET_LWIP
+version which by the way does not look totally correct.
 
-On Thu, 9 Oct 2025 at 05:54, Neil Armstrong <neil.armstrong@linaro.org> wrote:
->
-> On 10/9/25 13:16, Simon Glass wrote:
-> > Hi Neil,
-> >
-> > On Thu, 9 Oct 2025 at 02:18, Neil Armstrong <neil.armstrong@linaro.org> wrote:
-> >>
-> >> Hi,
-> >>
-> >> On 10/9/25 02:25, Simon Glass wrote:
-> >>> Hi Neil,
-> >>>
-> >>> On Wed, 8 Oct 2025 at 09:31, Neil Armstrong <neil.armstrong@linaro.org> wrote:
-> >>>>
-> >>>> Let's introduce the Interconnect subsystem based on the Linux framework
-> >>>> which is used to vote for bandwidth across multiple SoC busses.
-> >>>>
-> >>>> Each bus endpoints are materialised as "nodes" which are linked together,
-> >>>> and the DT will specify a pair of nodes to enable and set a bandwidth
-> >>>> on the route between those endpoints.
-> >>>>
-> >>>> The hardware resources that provide those nodes and provides the way
-> >>>> to vote for the bandwidth are called "providers".
-> >>>>
-> >>>> The Interconnect uclass code is heavily based on the Linux one, with
-> >>>> some small differences:
-> >>>> - nodes are allocated as udevices instead of Linux idr_alloc()
-> >>>> - tag management is minimal, only normal xlate is supported
-> >>>> - dynamic IDs is not implemented
-> >>>> - getting nodes states at probe is not implemented
-> >>>> - providers are probed on demand while the nodes links are traversed
-> >>>> - nodes are populated on bind
-> >>>>
-> >>>> Fully tested with associated DM test suite.
-> >>>>
-> >>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> >>>> ---
-> >>>>    drivers/Kconfig                            |   2 +
-> >>>>    drivers/Makefile                           |   1 +
-> >>>>    drivers/interconnect/Kconfig               |  10 +
-> >>>>    drivers/interconnect/Makefile              |   6 +
-> >>>>    drivers/interconnect/interconnect-uclass.c | 548 +++++++++++++++++++++++++++++
-> >>>>    include/dm/uclass-id.h                     |   2 +
-> >>>>    include/interconnect-uclass.h              |  74 ++++
-> >>>>    include/interconnect.h                     |  81 +++++
-> >>>>    8 files changed, 724 insertions(+)
-> >>>
-> >>> 'interconnect' is such a long and vague word :-)
-> >>
-> >> I didn't chose the name => https://docs.kernel.org/driver-api/interconnect.html
-> >>
-> >> I don't see why we should take a different name in U-Boot.
-> >>
-> >> But I can definitely use "Generic System Interconnect" in the documentation
-> >> and commit messages if it's clearer.
-> >
-> > Yes, we should use the same name. Docs can help.
-> >
-> >>
-> >>>
-> >>> There seems to be a piece missing here. The uclass should have
-> >>> operations, so that it makes sense for different drivers to implement
-> >>> the methods. I see some there, but also a lot of direct calls from the
-> >>> test to sandbox. I see quite a few functions which lack a struct
-> >>> udevice * - I suspect I am missing something?
-> >>>
-> >>> We normally have a ..._get_ops() macro in the uclass header. Also we
-> >>> normally have stub functions which get the ops and call the function.
-> >>>
-> >>> I see code to remove children, but driver model does this
-> >>> automatically[1]. Same with bind(). If there is a bug in this, can you
-> >>> give a few details, or ideally a test case?
-> >>
-> >> All of this is present and well thought, I went into multiple designs:
-> >> - interconnect uclass provides ops -> interconnect_ops, icc_node doesn't
-> >>     provide any ops since they are just internal objects
-> >> - there's only a single direct call to the sandbox driver to get the
-> >>     setting resulting of the aggregate() & set() op calls, this is purely for
-> >>     validation of the calculations, the sandbox-interconnect-test only uses
-> >>     the public inteconnect.h API
-> >
-> > OK, I missed that.
-> >
-> >> - For the lack of udevice, it's because I did use the same interconnect API which
-> >>     return a "icc_path" private structure which contains a set of interconnect
-> >>     nodes which forms path across the different providers.
-> >
-> > We do a similar think with clk, although the function signature is
-> > different in U-Boot from Linux.
-> >
-> > I assume the caller would be a driver? If so, passing in a struct
-> > icc_path * might be more efficient than using malloc() each time.
->
-> I'm not against that but the size of icc_path depends on it's size:
->
-> +struct icc_path {
-> +       size_t num_nodes;
-> +       struct icc_req reqs[];
-> +};
->
-> So we would still need to alloc the reqs anyway and expose the internals
-> with no benefits.
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+Suggested-by: Tom Rini <trini@konsulko.com>
+---
 
-Indeed. Sometimes in U-Boot we use fixed sizes to avoid realloc(), but
-I'm not sure if it makes sense here.
+ cmd/net.c            | 36 ++----------------------------------
+ include/net-common.h | 10 ++++++++++
+ include/net-lwip.h   |  1 -
+ net/lwip/dhcp.c      | 22 ----------------------
+ net/net-common.c     | 35 +++++++++++++++++++++++++++++++++++
+ 5 files changed, 47 insertions(+), 57 deletions(-)
 
->
-> >
-> >>
-> >>     Setting a bandwidth on a node is meaningless, same for interconnect providers,
-> >>     this is why we set a bandwidth on a set of nodes, which get aggregated with the
-> >>     other path votes from other devices.
-> >>
-> >>     The key here is the "nodes" which are subdevices of interconnect providers
-> >>     created at bind time, and gets referenced in icc_path objects.
-> >>
-> >>     I made sure we can't remove either interconnect devices or icc_node devices
-> >>     if they are still referenced in an active icc_path.
-> >
-> > OK
-> >
-> >>     This is the reason of the device_remove() & device_unbind() calls in the test
-> >>     to make sure we're not left with dangling pointers to non-existent icc_node
-> >>     and providers devices.
-> >
-> > The specific code is this:
-> >
-> > +       device_foreach_child(pos, dev) {
-> > +               debug("%s(pos=%s)\n", __func__, pos->name);
-> > +               ret = device_remove(pos, DM_REMOVE_NORMAL);
-> > +               if (ret)
-> > +                       return ret;
-> > +       }
-> >
-> > This is in the pre_remove() method. But if you just remove that code,
-> > doesn't driver model remove the children anyway?
->
-> No it only removes the children from the same driver:
-> =============><=====================
-> int device_chld_remove(struct udevice *dev, struct driver *drv,
->                        uint flags)
-> {
->
-> <snip>
->
->         device_foreach_child_safe(pos, n, dev) {
->                 int ret;
->
->                 if (drv && (pos->driver != drv))
->                         continue;
-> =============><=====================
-> Same for unbind.
->
-> Added in https://lists.denx.de/pipermail/u-boot/2018-June/332597.html with the bind/unbind command.
+diff --git a/cmd/net.c b/cmd/net.c
+index 886735ea14f6..24099764493e 100644
+--- a/cmd/net.c
++++ b/cmd/net.c
+@@ -134,8 +134,8 @@ U_BOOT_CMD(dhcp6,	3,	1,	do_dhcp6,
+ #endif
+ 
+ #if defined(CONFIG_CMD_DHCP)
+-static int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
+-		   char *const argv[])
++int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
++	    char *const argv[])
+ {
+ 	return netboot_common(DHCP, cmdtp, argc, argv);
+ }
+@@ -145,38 +145,6 @@ U_BOOT_CMD(
+ 	"boot image via network using DHCP/TFTP protocol",
+ 	"[loadAddress] [[hostIPaddr:]bootfilename]"
+ );
+-
+-int dhcp_run(ulong addr, const char *fname, bool autoload)
+-{
+-	char *dhcp_argv[] = {"dhcp", NULL, (char *)fname, NULL};
+-	struct cmd_tbl cmdtp = {};	/* dummy */
+-	char file_addr[17];
+-	int old_autoload;
+-	int ret, result;
+-
+-	log_debug("addr=%lx, fname=%s, autoload=%d\n", addr, fname, autoload);
+-	old_autoload = env_get_yesno("autoload");
+-	ret = env_set("autoload", autoload ? "y" : "n");
+-	if (ret)
+-		return log_msg_ret("en1", -EINVAL);
+-
+-	if (autoload) {
+-		sprintf(file_addr, "%lx", addr);
+-		dhcp_argv[1] = file_addr;
+-	}
+-
+-	result = do_dhcp(&cmdtp, 0, !autoload ? 1 : fname ? 3 : 2, dhcp_argv);
+-
+-	ret = env_set("autoload", old_autoload == -1 ? NULL :
+-		      old_autoload ? "y" : "n");
+-	if (ret)
+-		return log_msg_ret("en2", -EINVAL);
+-
+-	if (result)
+-		return log_msg_ret("res", -ENOENT);
+-
+-	return 0;
+-}
+ #endif
+ 
+ #if defined(CONFIG_CMD_NFS)
+diff --git a/include/net-common.h b/include/net-common.h
+index 1112af381a98..78d98e5bba07 100644
+--- a/include/net-common.h
++++ b/include/net-common.h
+@@ -479,6 +479,16 @@ int net_loop(enum proto_t protocol);
+  */
+ int dhcp_run(ulong addr, const char *fname, bool autoload);
+ 
++/**
++ * do_dhcp - Run the dhcp command
++ *
++ * @cmdtp: Unused
++ * @flag: Command flags (CMD_FLAG_...)
++ * @argc: Number of arguments
++ * @argv: List of arguments
++ * Return: result (see enum command_ret_t)
++ */
++int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ 
+ /**
+  * do_ping - Run the ping command
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index e88e2186635b..c910def5719e 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -50,7 +50,6 @@ int net_lwip_dns_resolve(char *name_or_ip, ip_addr_t *ip);
+  */
+ bool wget_validate_uri(char *uri);
+ 
+-int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+ 
+diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+index 531bf2c67057..b798014ebcb9 100644
+--- a/net/lwip/dhcp.c
++++ b/net/lwip/dhcp.c
+@@ -150,25 +150,3 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 	return CMD_RET_SUCCESS;
+ }
+-
+-int dhcp_run(ulong addr, const char *fname, bool autoload)
+-{
+-	char *dhcp_argv[] = {"dhcp", NULL, };
+-#ifdef CONFIG_CMD_TFTPBOOT
+-	char *tftp_argv[] = {"tftpboot", boot_file_name, NULL, };
+-#endif
+-	struct cmd_tbl cmdtp = {};	/* dummy */
+-
+-	if (autoload) {
+-#ifdef CONFIG_CMD_TFTPBOOT
+-		/* Assume DHCP was already performed */
+-		if (boot_file_name[0])
+-			return do_tftpb(&cmdtp, 0, 2, tftp_argv);
+-		return 0;
+-#else
+-		return -EOPNOTSUPP;
+-#endif
+-	}
+-
+-	return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
+-}
+diff --git a/net/net-common.c b/net/net-common.c
+index b064557d5241..442b05975581 100644
+--- a/net/net-common.c
++++ b/net/net-common.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0
+ 
+ #include <dm/uclass.h>
++#include <env.h>
+ #include <net-common.h>
+ #include <linux/time.h>
+ #include <rtc.h>
+@@ -48,3 +49,37 @@ void net_sntp_set_rtc(u32 seconds)
+ 	       tm.tm_year, tm.tm_mon, tm.tm_mday,
+ 	       tm.tm_hour, tm.tm_min, tm.tm_sec);
+ }
++
++#if defined(CONFIG_CMD_DHCP)
++int dhcp_run(ulong addr, const char *fname, bool autoload)
++{
++	char *dhcp_argv[] = {"dhcp", NULL, (char *)fname, NULL};
++	struct cmd_tbl cmdtp = {};	/* dummy */
++	char file_addr[17];
++	int old_autoload;
++	int ret, result;
++
++	log_debug("addr=%lx, fname=%s, autoload=%d\n", addr, fname, autoload);
++	old_autoload = env_get_yesno("autoload");
++	ret = env_set("autoload", autoload ? "y" : "n");
++	if (ret)
++		return log_msg_ret("en1", -EINVAL);
++
++	if (autoload) {
++		sprintf(file_addr, "%lx", addr);
++		dhcp_argv[1] = file_addr;
++	}
++
++	result = do_dhcp(&cmdtp, 0, !autoload ? 1 : fname ? 3 : 2, dhcp_argv);
++
++	ret = env_set("autoload", old_autoload == -1 ? NULL :
++		      old_autoload ? "y" : "n");
++	if (ret)
++		return log_msg_ret("en2", -EINVAL);
++
++	if (result)
++		return log_msg_ret("res", -ENOENT);
++
++	return 0;
++}
++#endif
+-- 
+2.48.1
 
-Ick, that is a bug.
-
->
-> So perhaps I'm doing something unintended here, I was
-> also expecting removing/unbinding a device would remove all the
-> childs whatever the uclass.
-
-Yes, it should be fixed.
-
-Regards,
-Simon
-
->
-> Neil
->
-> >
-> >>
-> >> Note I won't re-invent a new API here, the api in interconnect.h is fine and
-> >> works well, I made sure to use all U-Boot driver model offers to avoir allocating
-> >> random objects myself, and keep the interconnect core functions strictly
-> >> identical to the kernel, making it:
-> >> - well integrated in DM (on-demand probe, nodes as DM devices)
-> >> - resulting with the same results as in Linux
-> >> - using the same API
-> >> - easy to sync back from Linux
-> >> - easy to port a driver from Linux
-> >
-> > Yes that sounds good.
-> >
-> >>
-> >>>
-> >>> Also, please can you add:
-> >>>
-> >>> - comments to the header file, at least
-> >>> - something in doc/
-> >>> - a command to list things / provide information
-> >>
-> >> Yep, I'll add those.
-> >
-> > OK thanks.
-> >
-> >>
-> >> Thanks,
-> >> Neil
-> >>
-> >>>
-> >>> Great to see the automated tests!
-> >>>
-> >>> Regards,
-> >>> Simon
-> >>>
-> >>> [1] https://docs.u-boot.org/en/latest/develop/driver-model/design.html#removal-stage
-> >>
-> >
-> > Regards,
-> > Simon
->
+base-commit: 92dcb3ad5d98f494b2448a7345e1cb7eefa50278
+branch: net-dhcp_run
