@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498EFCCA471
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 04:10:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 722BCCCA470
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 04:11:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFEE883948;
-	Thu,  9 Oct 2025 06:10:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EED2E8386B;
+	Thu,  9 Oct 2025 06:11:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="TAhbN29O";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="DhFCnfdI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87DBE8387E; Thu,  9 Oct 2025 06:10:01 +0200 (CEST)
+ id EABF68386D; Thu,  9 Oct 2025 06:11:52 +0200 (CEST)
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A91F783869
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 06:09:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20C7683869
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 06:11:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3CB1F100210; Thu,  9 Oct 2025 06:09:56 +0200 (CEST)
+ with ESMTPSA id 80586100210; Thu,  9 Oct 2025 06:11:49 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1759982997;
+ s=dkim; t=1759983110;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=RN5X4a81V+C+rr/FPf5plDnxWw8We9m/q3nZFDRDU3Y=;
- b=TAhbN29OIv0GUspsGO+6Jew7sO5zcMvPufsIwnS3bjO7tg9d24OPCnDbFamV+toQyS6fDP
- bLhI/sK1sV9E2aCb9E2ET+NClXADHMvVDeUYKfTI0MtA/y8BxVvBex7M5MRYGIPJEILMKW
- aPxhvUQCj+v0fmwy+tp/RIOFOvHtxT17J0+YyTO/Nj4GCP4LYl1rDUK8UA7NI6db6QbSMX
- 9DhAcT1J4OmSXcJNWGiyzDG5RfiEQzyPHnd5byqyfh98IElzOKZKHdbxpTLkMjJPHerhzp
- WB2fG39w4hJiv71dsdBrQkr9OHcn6sncyFpFpTJ3QkBo7mWMZbnlFGXIku3NfA==
-Message-ID: <11a87178-41f2-e7ed-b845-ac76059adade@nabladev.com>
-Date: Thu, 9 Oct 2025 06:10:20 +0200
+ bh=mhCzetlfqLsZXfj2yOwaZ7xgPPi/7VmHYzdPmqAqg9o=;
+ b=DhFCnfdIyPp4zFvnzOFNeM5b4tBZf61C7FafwXMR46+tY45JIw+2KopmSqcdhg0E06LLUQ
+ GC8JBUV64BEIe9gVhCLhHuS9coYZlNT2M9sbZtWEjOJu30GghuSkPZbCBXd1qzWO7DplLK
+ TMtmDbGF4A0hBb18VyFu/vUauetp39RZCwZzCF4mKP+5+TJfEoO56IOIA0zSobdiJQWSze
+ BgWV8LlquZdXlVtuiUrFiDuGFn78BSComw2fOvpdShOIbmMOwAvZBsKzU4EPpOIIcohAWB
+ z91157KzmUFAu3DMVMMmiPGkZJEuUwDn2ES+DLLZZ4hT55CeYNO+f5/TNgxIuA==
+Message-ID: <b17aec83-faac-b2ff-3166-5d765c59cd1c@nabladev.com>
+Date: Thu, 9 Oct 2025 06:12:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH] mtd: ubi: Remove test that always fails
+Subject: Re: [RESEND PATCH] drivers/mtd/ubispl/ubispl.c: limit copy size
 Content-Language: en-US
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de, Kyungmin Park <kmpark@infradead.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250801-mtd_ubi-v1-1-496e6ff7d287@linaro.org>
+To: Benedikt Spranger <b.spranger@linutronix.de>
+Cc: Tom Rini <trini@konsulko.com>, John Ogness <john.ogness@linutronix.de>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+References: <20250917091417.545-1-b.spranger@linutronix.de>
 From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20250801-mtd_ubi-v1-1-496e6ff7d287@linaro.org>
+In-Reply-To: <20250917091417.545-1-b.spranger@linutronix.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -69,19 +69,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Andrew,
+Hello Benedikt,
 
-On 01.08.25 13:49, Andrew Goodbody wrote:
-> When checking the VID header of a static volume there is an early test
-> for data_size == 0 so testing for that condition again is guaranteed to
-> fail. Just remove this piece of code.
+On 17.09.25 11:14, Benedikt Spranger wrote:
+> The fastmap VID header is embedded in struct ubi_scan_info. During fastmap
+> scan, the header is copied into struct ubi_scan_info, if valid. The former
+> code mixed up the amount of copied bytes and copied more bytes than
+> nessesary. This had no side effect, since the affected struct members are
+> uninitialized at that point and overwritten later.
 > 
-> This issue was found by Smatch.
+> Limit the copied bytes to the VID header size.
 > 
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> Signed-off-by: Benedikt Spranger <b.spranger@linutronix.de>
+> Reported-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->   drivers/mtd/ubi/io.c | 7 +------
->   1 file changed, 1 insertion(+), 6 deletions(-)
+>   drivers/mtd/ubispl/ubispl.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 
 Applied to u-boot-ubi
 
