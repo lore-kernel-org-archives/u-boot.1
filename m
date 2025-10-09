@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4663BCCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 19:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A868CCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 19:35:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDACA84241;
-	Thu,  9 Oct 2025 21:06:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 704DA83C94;
+	Thu,  9 Oct 2025 21:35:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bK8Dq/Uq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="i5t0/BaS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6C0684241; Thu,  9 Oct 2025 21:06:55 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 8962E83CEE; Thu,  9 Oct 2025 21:35:00 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C35378423D
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 21:06:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01EA583C62
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 21:34:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-378aa12c13dso443868fac.2
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 12:06:53 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-782bfd0a977so1199155b3a.3
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 12:34:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760036812; x=1760641612; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Rr9+UYOOTI8qO5KvmUZTs/vVUTs6hIu9sDHNg14OrZE=;
- b=bK8Dq/UqqOYTQma1DYqyooTuotnmb+NiF1JjF2FWnhUe+RXdFoL095nFYJk2z+8+Ga
- VJJ85rJi+w0kAJYcCOiXjjAaRPcPPzyyr5ZZaXMnHU6tA1tVsgJ+UHmFjHyBpbA/3VYz
- FaZKkv27HgJ6DdpUM15W/g4sXUBZXD4rhtro8=
+ d=gmail.com; s=20230601; t=1760038496; x=1760643296; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+g2Giuh+7uWuhWkdqpdQ1y4FRGRBTgf/tsgeEgmdBQI=;
+ b=i5t0/BaSUm4DCryhs68Axtd2EcgKiF1pkGGz7C8IuIo9uzAkowMxt2MItpic5AgZuQ
+ XqrRkwkFh2N7ln9wjKh4I3Z9Yg+60NOpFC6UBRuZbK3kcNsJTowV2OLh7uE2CmH6loK5
+ m1wxIIX8cy4HrZUv3QRRXJqLeHvWowBtSyouXkTwn9nyF/fO2TQqfs8w9DEsy77HcFAe
+ Y123DAZhe25HKtFEndJ2mV2CUDDTKmTiSvDsfH0eg5wXZ7fv8EFK6XhkqYKKw3Ps7tGL
+ An1657/eeltjxc8bFjYJDdRlpqqxgcBpkfUyZGhcnnxS/tblZOcQXmZvFmp0Htj8P3Vr
+ ka5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760036812; x=1760641612;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Rr9+UYOOTI8qO5KvmUZTs/vVUTs6hIu9sDHNg14OrZE=;
- b=qDgvIUdJ8KvnKSJ7LuiVVqAlyJOGcCoVfexgjeo5BuuyDHbjy1Osyvz/0Q9dqdp7MC
- cYD/YBG0WnAq9nd5yzOUCte3oCOZ9WWVoupQTUm2Xsskxn8jR9gdYc/oNT/CtjkoCQH6
- Dx6FywqexVFvum+mGCDYfz4f2ZpryV3hV/ihturw1vri8JpgljnVxNFovHIAoO2SEpz1
- tLtOZQYCSyBdCJdgvh6TvPK8cuM9OoNxusUe3O/bkbCaEDkODRFFYcbsnfW2KkuilRzo
- FI0Dd2IjrSbtyG5SHTf7tm0KY6TtQEMNyVe2z32bjCKwz0/6WoCXaS4LOUJtPNl+jrB8
- kPdw==
-X-Gm-Message-State: AOJu0YzM8CxEFNoNi0BySW5JkxxFwtfpFVC5DdC+pnOLOV8IicxKDMmu
- 0jHi/eFUOeSUz8q6pk8CvZQp1hZVPOJxZorau9xzSUL0TOMfxf4K0i3oun3sPdgd9sk=
-X-Gm-Gg: ASbGncteUfQ2r6IgdGuuJ3wqoVCKUiqxizd22YULa7Imdccqt/WmyAk9D52zmn2IK07
- 73z3A9+cUpwGS13brvhQ1Q8Yc6Z2+W603EFJdbzi/1CBpbLpcPtwFAm+A9Vh4ijjTo30Jd/rqa3
- 1dKVWpNwCIS9ssgakWpQ9E/Y11dyl2Lu1ZMV77fpph2B95RswejFH2LJxURp4GH2hPp2Vywxo9Z
- 8roT6cuF8kEE2iOFo57DLZWc+l4RS6pc+Rq8HQ/rrc9z96Zy0ZtC2xxWNpDz3XiWVkiTiZywT0v
- uqX8WaeyQZMq3VXaheaLjDq6x/PAlVSBcdCKDVz5/wh7XNM8LWlg+7ozWVjIgcVAidb+ZJx6ik/
- azd19Qa+mrfLUM40GHN6OqkwDVt8tEYZTFwDVclx9AOmAejOD/U3TPwOUufwxLJhz4i+JPgfjmh
- N012oQpvyd4g==
-X-Google-Smtp-Source: AGHT+IHo2CCRrIvQFRSjro9rY+nA3GrIz3dfbCbaCHGle4xeOGMFX/bzEb5lpupAd11DIgP+PXP5Qw==
-X-Received: by 2002:a05:6870:828f:b0:377:8166:9376 with SMTP id
- 586e51a60fabf-3c0f6d1ff0dmr4179974fac.28.1760036812035; 
- Thu, 09 Oct 2025 12:06:52 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8e80a22sm127020fac.13.2025.10.09.12.06.50
+ d=1e100.net; s=20230601; t=1760038496; x=1760643296;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+g2Giuh+7uWuhWkdqpdQ1y4FRGRBTgf/tsgeEgmdBQI=;
+ b=Hf9kzhyTGH6rr6nNZLBbuiDbIpItY5Mb+Y7f5tW9DrjXwDV6QWKv9DhvLEs3WeE8tC
+ yg3lq4j0YSDLDm/BjHKlNIqm4JKtpJCm3twvNtEeASobd8lRKpoXUUyaPNMD/7S7ozpp
+ lBvyVBSvcLTUyRrx8dho0f3eAcBcGz8HNvH0b3/uoSNjr9h0B6CqEMtT1fiPFY+HCnAb
+ OKAxgIy4wh0gqWgsKWwiJYTUOrlgPpgaCwZEjborOUTf3TujLG5XdKZgkE4F/NGMeqIe
+ cPzVIGEVuv0XbeeRHWRm0eROzci8EU3PbmwO19BovCoWLnC5WXXxVVqHng9l3NbadHbJ
+ m9Iw==
+X-Gm-Message-State: AOJu0YyGyQDhulUwGlBVvSbICG4GNgXV908EGOdkgqIr7Eu3c0RZ9dlJ
+ JLYqSCeGidibPi+A7a+x7BITOj1pJ9HdbaucoEvpDS0W3RM5iK1bA7/V7tW81A==
+X-Gm-Gg: ASbGncs09JfHsTcYxm0msttmEKPEjS0jtRNL/gx+orLYsyu17b+Xe+D5StDO2AkWX5Z
+ kagUPsnSTTeGBgPfAOOanHGf5lKLoTkHrpWRTyfG9uQ+UYU9a4DD8lZTlNpaRJUDfnrkQvh1Hmr
+ L/Ult2oO4iUsWmZW/DAr2MIUOzZyDTjd9a1jgAHiH5lv9+6ntW2UkGHtT2t3tQqM7TqmGy7z0wd
+ o5s4iHk1kgTByN5UaZ90kTkik7E0hYfVmPkzv4uvy0ZTyqcjisVl69cOpKL0l42THaL9JIIX8iy
+ usaPlBjkt3Mzm13KjURdvvrFPOPS+rcAnfY2MYcKt447ttBFIgaVOM95w/VtmEa4EFDSCLiZcbh
+ DZUixkw91YaCR2A76RAVJK2+R2cOA3KR37N8Pw/SBK/ZOtBy+j4VZdRf2UMboeyfbf/qysd8=
+X-Google-Smtp-Source: AGHT+IGq/wKQmJuAI22HVDAmdzXamLmAgEBpdE1jUGIqanqBjL0s8e15H8fOgVVNhUWMUChRm3HHhw==
+X-Received: by 2002:a05:6a20:938c:b0:2e9:e7a0:ecfa with SMTP id
+ adf61e73a8af0-32da83e6b57mr10837056637.49.1760038496434; 
+ Thu, 09 Oct 2025 12:34:56 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:2b8f:a7eb:6996:aa6d])
+ by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-b678df952b9sm394279a12.46.2025.10.09.12.34.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 12:06:51 -0700 (PDT)
-Date: Thu, 9 Oct 2025 13:06:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
- n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
-Subject: Re: [PATCH v1] env: Kconfig: disable external env in secure os boot
-Message-ID: <20251009190649.GT298503@bill-the-cat>
-References: <20251009123435.960225-1-anshuld@ti.com>
+ Thu, 09 Oct 2025 12:34:55 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20251009
+Date: Thu,  9 Oct 2025 16:34:52 -0300
+Message-Id: <20251009193452.285267-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="z5/c0y7PPe/wg1O8"
-Content-Disposition: inline
-In-Reply-To: <20251009123435.960225-1-anshuld@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,34 +94,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---z5/c0y7PPe/wg1O8
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please pull from u-boot-imx/master, thanks.
 
-On Thu, Oct 09, 2025 at 06:04:34PM +0530, Anshul Dalal wrote:
+The following changes since commit 0eaa4b337336dbbe93395d1f2ccc18937eaafea2:
 
-> Falcon mode uses falcon_image_file from the env during mmc fs boot, but
-> external env can be compromised. Therefore disable access to external
-> env by setting SPL_ENV_IS_NOWHERE when SPL_OS_BOOT_SECURE is set.
->=20
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+  Merge branch 'next' (2025-10-06 13:20:24 -0600)
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+are available in the Git repository at:
 
---=20
-Tom
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20251009
 
---z5/c0y7PPe/wg1O8
-Content-Type: application/pgp-signature; name="signature.asc"
+for you to fetch changes up to 15bed125d769e16c688907b504c6d9b60c20b089:
 
------BEGIN PGP SIGNATURE-----
+  arm: dts: imx8mp-toradex-smarc: migrate to OF_UPSTREAM (2025-10-09 14:57:09 -0300)
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOgHyAAKCRAr4qD1Cr/k
-Ci7OAP49ariSo3pwayrQqDNdtNRcrSA0HQWoBku1jImI0Zr0fwD9HTnSxOTjbCq7
-xlry6rYbdXHA5bfJ1LPDK3CpdvSlbwM=
-=Mzpl
------END PGP SIGNATURE-----
+u-boot-imx-master-20251009
+--------------------------
 
---z5/c0y7PPe/wg1O8--
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/27872
+
+- Several improvements for kontron-sl-mx8mm.
+- Add rauc to bootmeths to phycore_imx8mp.
+- Fix imx93_frdm USB vendor ID.
+----------------------------------------------------------------
+Eberhard Stoll (1):
+      imx: kontron-sl-mx8mm: Force default environment for serial loader boot
+
+Ernest Van Hoecke (1):
+      arm: dts: imx8mp-toradex-smarc: migrate to OF_UPSTREAM
+
+Frieder Schrempf (12):
+      imx: kontron-sl-mx8mm: Increase CONFIG_SPL_MAX_SIZE
+      imx: kontron-sl-mx8mm: Enable SDP support for loading via USB
+      imx: kontron-sl-mx8mm: Remove deprecation warning for old modules
+      imx: kontron-sl-mx8mm: Enable fixed regulators
+      imx: kontron-sl-mx8mm: Add support for EEPROM on OSM-S module
+      imx: kontron-sl-mx8mm: Use eMMC boot part for environment if booting from eMMC
+      imx: kontron-sl-mx8mm: Export current env config to devicetree
+      imx: kontron-sl-mx8mm: Enable multiple useful commands, drivers and features
+      imx: kontron-sl-mx8mm: Enable standard boot and disable legacy distro boot
+      imx: kontron-sl-mx8mm: Enable USB hub on BL i.MX8MM OSM-S board
+      imx: kontron-sl-mx8mm: Autostart fastboot if booted from USB
+      imx: kontron-sl-mx8mm: Convert to OF_UPSTREAM
+
+Martin Schwan (1):
+      board: phytec: phycore_imx8mp: Add rauc to bootmeths
+
+Mathieu Dubois-Briand (1):
+      imx93_frdm: Fix USB vendor ID
+
+ arch/arm/dts/Makefile                             |    2 -
+ arch/arm/dts/imx8mm-kontron-bl-common-u-boot.dtsi |   16 +
+ arch/arm/dts/imx8mm-kontron-bl-osm-s.dts          |  376 ------
+ arch/arm/dts/imx8mm-kontron-bl.dts                |  355 ------
+ arch/arm/dts/imx8mm-kontron-osm-s.dtsi            |  335 ------
+ arch/arm/dts/imx8mm-kontron-sl.dtsi               |  314 -----
+ arch/arm/dts/imx8mp-toradex-smarc-dev.dts         |  297 -----
+ arch/arm/dts/imx8mp-toradex-smarc.dtsi            | 1284 ---------------------
+ arch/arm/mach-imx/imx8m/Kconfig                   |    1 +
+ board/kontron/sl-mx8mm/sl-mx8mm.c                 |  102 +-
+ board/kontron/sl-mx8mm/spl.c                      |   11 -
+ board/phytec/phycore_imx8mp/phycore_imx8mp.env    |    4 +
+ configs/imx93_frdm_defconfig                      |    2 +-
+ configs/kontron-sl-mx8mm_defconfig                |   75 +-
+ configs/toradex-smarc-imx8mp_defconfig            |    2 +-
+ include/configs/kontron-sl-mx8mm.h                |   12 -
+ 16 files changed, 190 insertions(+), 2998 deletions(-)
+ delete mode 100644 arch/arm/dts/imx8mm-kontron-bl-osm-s.dts
+ delete mode 100644 arch/arm/dts/imx8mm-kontron-bl.dts
+ delete mode 100644 arch/arm/dts/imx8mm-kontron-osm-s.dtsi
+ delete mode 100644 arch/arm/dts/imx8mm-kontron-sl.dtsi
+ delete mode 100644 arch/arm/dts/imx8mp-toradex-smarc-dev.dts
+ delete mode 100644 arch/arm/dts/imx8mp-toradex-smarc.dtsi
