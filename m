@@ -4,85 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E689BCCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6321ACCD187
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:31:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E5E184528;
-	Thu,  9 Oct 2025 16:26:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A5A0884522;
+	Thu,  9 Oct 2025 16:31:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kpU/JFHy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZvtHwaKO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81F7D84529; Thu,  9 Oct 2025 16:26:08 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id 5200B84528; Thu,  9 Oct 2025 16:31:01 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D734C843E8
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:26:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CD0184112
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:30:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-7b7325d8fb5so690088a34.1
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 07:26:05 -0700 (PDT)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-6477f91713aso464210eaf.2
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 07:30:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760019964; x=1760624764; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Jl7M2UIgBRB0yTEsCcIdVNijf2OC7XMWNDZ5YceAm9Y=;
- b=kpU/JFHy9iNi7M4s7+WG8MfXQ6twpnzLHjghMn/EWsJpPLM6y4XCLcvqr1xJ2kpWKv
- xd1JAhpd8phSUTB2IoDtd5x4ZR5xeb35Vcb9P9WUnVw10f8AGE0xvB7YtQGVgt2nn7D5
- jwKIKm5MNmePpfTzRzbRIj/2RiaTmV1W/I42I=
+ d=konsulko.com; s=google; t=1760020258; x=1760625058; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=iKxAb5iVpmZ+X2kSgcm6lIvkM5dDs4VzQwN+UojGLxM=;
+ b=ZvtHwaKOv/cWXowa5V23itlxzl0E0SjKfR3WEJutOU1Iem8yVpIUsQdW1jcxXHMy7r
+ tZON0KDcBliyOC7Ay2es6IQVm8agfRv8z7kYUmB2vcXY9Lk/FRA/EGPR/GugNfxzXyTm
+ lx6A+2KGLluv++kp1s6DsU042ex6rj85ybgvQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760019964; x=1760624764;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Jl7M2UIgBRB0yTEsCcIdVNijf2OC7XMWNDZ5YceAm9Y=;
- b=K7ms74abBaDcFhS7LuJ0UQM7Wi2M8Et4FVRKGeO/h2f6QxUUTMx4um5TgYczVSYP3N
- RQMTuAIqO5dfJ5ZQc5zUOz/jF7+ntguaU2r1DFZM8TFRB3z85/afDshBR+N+6uTb7ap0
- 2Fq2DpLoQUg/RVho/k86O9QqMxm1DcfF1/jcnOyCx8gV6gehc5yNvluvIJPFOW+3myYv
- XfjLv/36MQUyNSoruayD9nHkmVLB3munqYC15llsJ92Uio/QryHMjoFP861A8O52sIqy
- 4+olJ6k6j/Nd67sg4OsfVO/roRbTs5Pwh1FZixyERJ9BPd8MtWa5raFp2jLnni3HHbPH
- 7w0A==
-X-Gm-Message-State: AOJu0YypC4dsxiElanAd/kcA/80UThV5+8myQVplCl4WfIsUYRUOLBuO
- rmqsGgAqRgiCQXRoEBJRpyPHvJcm6PHDkSNrciSiprwMgvQcq/fcRkDxabeNxo0Xkns=
-X-Gm-Gg: ASbGncvOxekRol4MPe5T9DbO5BQRgpH3Z4Z7NuvvgVCNzSRnHwtHghY94J/9wJgGg0N
- MmtJHcU4vhdRHOj4dpzD5hAEz1k4GZs7/1cmx33saulVQv0gGJWmChF9z2qdCKBlyPX0UbSDlUU
- dAKPgVM8NmmnJvuCZ7OAergGqBj1sbKSDUT6HlMSunEO6FJEZpLdvj9S/dZByNHfzOgjHJdmyW0
- iAezhXOPFKabUHaaEqe1SofHTfcS77IsI0WQSagFAfCLBQ3oP5DhR6A0kqKnAe7sXbKNPXpqWeN
- OT4lpuGvJequYyKgN/e0D5ctKCg9LQv9XqG6nmKQftjNZQXG3PEST2KUvi47O9JppQ4WebhbWXZ
- r9cOVBcLmRrYd9rds6fTRKOjcHHuXSrPjhWrfOUrYUlFQ7QTdlpTAZ1/Kl6wTjaXw7cFUongIYn
- l9Meiq+/QGUw==
-X-Google-Smtp-Source: AGHT+IG6lS58GTQgg5gZ5qNcKV41PRZ3YJyLruG9lGi3G424TYv/bhtsuht1b/Xa2xc/Zc5Ns6UKfA==
-X-Received: by 2002:a05:6830:6b09:b0:790:710f:60e3 with SMTP id
- 46e09a7af769-7c0df79b845mr4306963a34.23.1760019964483; 
- Thu, 09 Oct 2025 07:26:04 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1760020258; x=1760625058;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=iKxAb5iVpmZ+X2kSgcm6lIvkM5dDs4VzQwN+UojGLxM=;
+ b=mtOiUod/kqPvx/x8QlGpH7JkVHABDKOYuJaRd23//UMXzZqMtyC1IUftEncsfwoP0/
+ 3DrRLj1wVotzUuSnICl+zQZATiz0Uh+dOmJN6KiEtcWJvBzIyiLNJuCdw658X3ksVNZ2
+ mZdJ6CAeEK2ajhOl1GN8Zs7Fyp/wQ1xCGJXu7shlpNm5vC6aetb3T2xTc0z0ma+TuNbW
+ hiGsD0sDn5D4kInKRg/KlJfxGi1Tu4oMzZzm/br4P4OeskKjgdwisCBsGZHbQtOm4EW/
+ Fi6tARGqrnQW9ghocmI8l5d70fOt14r6kozDZHU+WCdNBdok1N8tCJbPgBfGvcnWmf6I
+ ppzQ==
+X-Gm-Message-State: AOJu0YygGydPOvdFhRw/l4G3BowH47+moUE/JKcbggGPXWtlpAajVfGK
+ 5yj2UvnUXR1IGy2f3GBuPjm+o0bFZkyIbjN0hjTppryAZutZXeNRVW3Y8Ybjk/8pT44ymQiQwfX
+ 4eWQB3i4=
+X-Gm-Gg: ASbGncuXwNpLZ685BKytWASzAYccDYRhPU+uAumvn/EOHpZmVXDYvv/iFoeGpnPL9Ls
+ 2nX4jVQhZLyXaCyNS3Cd+RJo8J60k7ff9LxcThVg1gLA+Z4Xfe1etUlIp9QWG56iHwmu87m5NaG
+ Rks7PKER45Z9oXihi60C44xPAKyginOtTi41metNselotPvCfQf5/hyT5uYcbbieZMSAUVytng6
+ 36yJ9RCID/MlrmeTQjaVQeYTKUEEKmqu0qQFAS8dxzAehZmfVxM4kFmOwIYAyczt+TZCKV7HqeF
+ 8uTHmrgJb6v0QlE4kk7AUcQl3kM5vJZIPo7BYWaTPuKkEBtojMwShFfVWso9TP1+EA4wWXrb5da
+ bwcS77xMl3U4EeJmeMBuoCLsLF9FQeLijbufoixTuJn8lfpBCI1CJUgJyASyGIWYcS2HiYHdq0b
+ x5W79PYDElF979
+X-Google-Smtp-Source: AGHT+IF7ASRR+0N3yR3aMiTmTO8CrASSiBXMRkUvExUpsFIU5Sx8ZNmyl3KJdscRjs1HmdynNJlKYA==
+X-Received: by 2002:a05:6870:b402:b0:306:ed52:c174 with SMTP id
+ 586e51a60fabf-3c0f68e260dmr3370625fac.12.1760020257613; 
+ Thu, 09 Oct 2025 07:30:57 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7bf439d2aadsm6533645a34.36.2025.10.09.07.26.03
+ 586e51a60fabf-3ab7ce5655dsm7005710fac.13.2025.10.09.07.30.56
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 07:26:03 -0700 (PDT)
-Date: Thu, 9 Oct 2025 08:26:01 -0600
+ Thu, 09 Oct 2025 07:30:57 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: [PATCH] nand: atmel: Rework ATMEL_EBI and DM_NAND_ATMEL
- interaction
-Message-ID: <20251009142601.GN298503@bill-the-cat>
-References: <20250926153136.3680867-1-trini@konsulko.com>
- <e4db9bab-9de2-4810-ab19-7654be60dae5@linaro.org>
+To: u-boot@lists.denx.de
+Subject: [u-boot-test-hooks][PATCH] labgrid-trini: Quick update for labgrid
+ v25.0.x and later
+Date: Thu,  9 Oct 2025 08:30:55 -0600
+Message-ID: <20251009143055.3161450-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jwFaH7bdAxFD7RJl"
-Content-Disposition: inline
-In-Reply-To: <e4db9bab-9de2-4810-ab19-7654be60dae5@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,74 +93,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Starting with v25.0.0 LG_CROSSBAR has been replaced with LG_COORDINATOR
+(and the whole crossbar to coordinator transition is well documented
+upstream). Update our usage.
 
---jwFaH7bdAxFD7RJl
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ README.md                | 2 +-
+ bin/common.labgrid-trini | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-On Thu, Oct 09, 2025 at 12:48:29PM +0300, Eugen Hristev wrote:
->=20
->=20
-> On 9/26/25 18:31, Tom Rini wrote:
-> > The way that the NAND driver under DM_NAND_ATMEL is probed is by the
-> > dummy memory driver controlled by ATMEL_EBI. Rather than require that
-> > for NAND to work both be enabled, make NAND select ATMEL_EBI and do not
-> > prompt for ATMEL_EBI as it only triggers the probe for NAND.
-> >=20
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> > Cc: Eugen Hristev <eugen.hristev@linaro.org>
-> > Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> > Cc: Michael Trimarchi <michael@amarulasolutions.com>
-> > ---
-> >  drivers/memory/Kconfig       | 2 +-
-> >  drivers/mtd/nand/raw/Kconfig | 1 +
-> >  2 files changed, 2 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
-> > index eaee739c6aab..591d9d9c6569 100644
-> > --- a/drivers/memory/Kconfig
-> > +++ b/drivers/memory/Kconfig
-> > @@ -14,7 +14,7 @@ config MEMORY
-> >  	  For now this uclass has no methods yet.
-> > =20
-> >  config ATMEL_EBI
-> > -	bool "Support for Atmel EBI"
-> > +	bool
-> >  	help
-> >  	  Driver for Atmel EBI controller. This is a dummy
-> >  	  driver. Doesn't provide an access to EBI controller. Select
-> > diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-> > index aa4bb2a0595c..f083113486ed 100644
-> > --- a/drivers/mtd/nand/raw/Kconfig
-> > +++ b/drivers/mtd/nand/raw/Kconfig
-> > @@ -50,6 +50,7 @@ config SYS_NAND_NO_SUBPAGE_WRITE
-> >  config DM_NAND_ATMEL
-> >  	bool "Support Atmel NAND controller with DM support"
-> >  	depends on ARCH_AT91
->=20
-> Which branch is this patch based on ?
-> I have a conflict because this line ^^ is missing in master ("depends on
-> ARCH_AT91")
-> Is there another patch for that ?
+diff --git a/README.md b/README.md
+index ecf8a46c4a58..6171669228cf 100644
+--- a/README.md
++++ b/README.md
+@@ -253,7 +253,7 @@ That should be all that is needed.
+ An alternate implementation requires setting the following environment
+ variables must be set as per your lab:
+ 
+-- `LG_CROSSBAR` must point at the crossbar service.
++- `LG_COORDINATOR` must point at the labgrid coordinator service.
+ - `LG_PLACE` must point at the device under test.
+ - `LG_ENV` must point at the labgrid yaml file that describes your lab.
+ 
+diff --git a/bin/common.labgrid-trini b/bin/common.labgrid-trini
+index e07107462a5e..b3c7d07ca7f0 100644
+--- a/bin/common.labgrid-trini
++++ b/bin/common.labgrid-trini
+@@ -19,8 +19,8 @@
+ # DEALINGS IN THE SOFTWARE.
+ 
+ # Ensure we have all environment variables set
+-if [ -z "${LG_CROSSBAR}" ]; then
+-	echo "LG_CROSSBAR is unset";
++if [ -z "${LG_COORDINATOR}" ]; then
++	echo "LG_COORDINATOR is unset";
+ 	exit 1;
+ fi
+ 
+-- 
+2.43.0
 
-Ugh, yes, sorry, this patch depends on:
-https://patchwork.ozlabs.org/project/uboot/patch/20250711151604.2224243-1-t=
-rini@konsulko.com/
-
---=20
-Tom
-
---jwFaH7bdAxFD7RJl
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOfF9gAKCRAr4qD1Cr/k
-CgyQAP4/5R8NlEEQoxI4hAFwTajuNY9p3fYQVNdd21YprRT7pAEAjj3J8V/x7l7M
-90Q8xML48Ql7c2qjneZd9G8jgBjn+QE=
-=7L9/
------END PGP SIGNATURE-----
-
---jwFaH7bdAxFD7RJl--
