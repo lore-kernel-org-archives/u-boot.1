@@ -4,79 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EB1CAC5BB
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 01:25:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498EFCCA471
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 04:10:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D38AD83984;
-	Thu,  9 Oct 2025 03:25:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id DFEE883948;
+	Thu,  9 Oct 2025 06:10:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="rzw2ritS";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="TAhbN29O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B10683987; Thu,  9 Oct 2025 03:25:12 +0200 (CEST)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ id 87DBE8387E; Thu,  9 Oct 2025 06:10:01 +0200 (CEST)
+Received: from mx.nabladev.com (mx.nabladev.com
+ [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D81AD8394A
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 03:25:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: c40b9104a4ae11f0b33aeb1e7f16c2b6-20251009
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:To:From:Subject:Message-ID;
- bh=ggpd8Z39ybk9LPDIEgEPE3p67WsuZsD1/kbRZUnwmfo=; 
- b=rzw2ritS8KFBgTMUkY23habZxw3AQx5UnSdRHZ/XNxR/gj/4zuk3+1vfh1PSC2NYzzL0wzFgPKYfWWqN/2ivTthzBaS1/t4JUMk4vEUEcNNdjNvN82bfj6JkiV+2JLtJdAe1cP98HMqCa0vXlCjblECJuKRBkcUGX9Si5KDKwT0=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.6, REQID:14858e6e-8142-471c-ba3a-aa02b2c88a40, IP:0,
- UR
- L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
- elease,TS:0
-X-CID-META: VersionHash:a9d874c, CLOUDID:1ec73102-eaf8-4c8c-94de-0bc39887e077,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|888|898,TC:-5,Co
- ntent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:nil,Bulk:nil,QS:nil,BEC:nil,
- COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: c40b9104a4ae11f0b33aeb1e7f16c2b6-20251009
-Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
- mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 337309546; Thu, 09 Oct 2025 09:24:56 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1748.26; Thu, 9 Oct 2025 09:24:55 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1748.10 via Frontend Transport; Thu, 9 Oct 2025 09:24:53 +0800
-Message-ID: <c004df0c9f556aaf530a14898c933c5c657d3510.camel@mediatek.com>
-Subject: Re: [PATCH] ARM: dts: build DTs for MT7987 RFB
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Daniel Golle <daniel@makrotopia.org>, Tom Rini <trini@konsulko.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Greg Malysa <malysagreg@gmail.com>, "Oliver
- Gaskell" <Oliver.Gaskell@analog.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Andre Przywara <andre.przywara@arm.com>,
- Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>, "Michal
- Simek" <michal.simek@amd.com>, Johan Jonker <jbx6244@gmail.com>, Jan Kiszka
- <jan.kiszka@siemens.com>, <u-boot@lists.denx.de>
-Date: Thu, 9 Oct 2025 09:24:53 +0800
-In-Reply-To: <a4d4096d6b80a2b6f5bc800426380cdc60d9b037.1759413509.git.daniel@makrotopia.org>
-References: <a4d4096d6b80a2b6f5bc800426380cdc60d9b037.1759413509.git.daniel@makrotopia.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ by phobos.denx.de (Postfix) with ESMTPS id A91F783869
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 06:09:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=nabladev.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 3CB1F100210; Thu,  9 Oct 2025 06:09:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
+ s=dkim; t=1759982997;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=RN5X4a81V+C+rr/FPf5plDnxWw8We9m/q3nZFDRDU3Y=;
+ b=TAhbN29OIv0GUspsGO+6Jew7sO5zcMvPufsIwnS3bjO7tg9d24OPCnDbFamV+toQyS6fDP
+ bLhI/sK1sV9E2aCb9E2ET+NClXADHMvVDeUYKfTI0MtA/y8BxVvBex7M5MRYGIPJEILMKW
+ aPxhvUQCj+v0fmwy+tp/RIOFOvHtxT17J0+YyTO/Nj4GCP4LYl1rDUK8UA7NI6db6QbSMX
+ 9DhAcT1J4OmSXcJNWGiyzDG5RfiEQzyPHnd5byqyfh98IElzOKZKHdbxpTLkMjJPHerhzp
+ WB2fG39w4hJiv71dsdBrQkr9OHcn6sncyFpFpTJ3QkBo7mWMZbnlFGXIku3NfA==
+Message-ID: <11a87178-41f2-e7ed-b845-ac76059adade@nabladev.com>
+Date: Thu, 9 Oct 2025 06:10:20 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-MTK: N
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH] mtd: ubi: Remove test that always fails
+Content-Language: en-US
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de, Kyungmin Park <kmpark@infradead.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250801-mtd_ubi-v1-1-496e6ff7d287@linaro.org>
+From: Heiko Schocher <hs@nabladev.com>
+In-Reply-To: <20250801-mtd_ubi-v1-1-496e6ff7d287@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,45 +69,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Daniel,
+Hello Andrew,
 
-On Thu, 2025-10-02 at 14:59 +0100, Daniel Golle wrote:
-> External email : Please do not click links or open attachments until
-> you have verified the sender or the content.
+On 01.08.25 13:49, Andrew Goodbody wrote:
+> When checking the VID header of a static volume there is an early test
+> for data_size == 0 so testing for that condition again is guaranteed to
+> fail. Just remove this piece of code.
 > 
+> This issue was found by Smatch.
 > 
-> Compile the added device tree sources into blobs, which was forgotten
-> when adding the source files.
-> 
-> Fixes: 2d6962e0618 (arm: mediatek: add support for MediaTek MT7987
-> SoC)
-> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
->  arch/arm/dts/Makefile | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 7c8cf3a5a1d..a36967b916e 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -1131,6 +1131,9 @@ dtb-$(CONFIG_ARCH_MEDIATEK) += \
->         mt7986b-sd-rfb.dtb \
->         mt7986a-emmc-rfb.dtb \
->         mt7986b-emmc-rfb.dtb \
-> +       mt7987a-emmc-rfb.dtb \
-> +       mt7987a-rfb.dtb \
-> +       mt7987a-sd-rfb.dtb \
+>   drivers/mtd/ubi/io.c | 7 +------
+>   1 file changed, 1 insertion(+), 6 deletions(-)
 
-I'd suggest to use
+Applied to u-boot-ubi
 
-obj-$(CONFIG_TARGET_MT7987) = mt7987a-emmc-rfb.dtb \
-	mt7987a-rfb.dtb \
-	mt7987a-sd-rfb.dtb \
+Thanks!
 
->         mt7988-rfb.dtb \
->         mt7988-sd-rfb.dtb \
->         mt8183-pumpkin.dtb \
-> --
-> 2.51.0
-> 
-
+bye,
+Heiko
+-- 
+Nabla Software Engineering
+HRB 40522 Augsburg
+Phone: +49 821 45592596
+E-Mail: office@nabladev.com
+Geschäftsführer : Stefano Babic
