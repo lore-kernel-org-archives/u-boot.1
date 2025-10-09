@@ -4,79 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75A37CCD183
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 22:24:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2709CCD183
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 22:42:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B40C5841B1;
-	Fri, 10 Oct 2025 00:23:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F341841B1;
+	Fri, 10 Oct 2025 00:42:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lw26j1DD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Py3SmcXd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D71F5841B8; Fri, 10 Oct 2025 00:23:58 +0200 (CEST)
-Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
- [IPv6:2607:f8b0:4864:20::c32])
+ id 11987841B8; Fri, 10 Oct 2025 00:42:19 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4A6683C62
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 00:23:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D0BA840F5
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 00:42:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc32.google.com with SMTP id
- 006d021491bc7-63f03676bdcso411244eaf.0
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 15:23:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-57a59124323so1839909e87.2
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 15:42:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760048635; x=1760653435; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=5RoiXpDduPrRA2xFUoGTKsoM/hWLjwhymJCtXsAwdj4=;
- b=Lw26j1DD0Le+rZXgx7mLMpRPVki7/iiI0ubv8QWuPn5wJvYs0aVTu1QZkmCkxWbqTQ
- 65lz310SGYrphpAovNTM7AsmWVRdwmb/MDKffAm9S3ZEcSkMKx7/35ABqc4MbnnCLmfU
- gP2dFji4FLl25BjCOz8AC2NEIop1nLhdq8RCY=
+ d=gmail.com; s=20230601; t=1760049736; x=1760654536; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lc9qZ470x10gnZxZQcnsOLlAr8HEeAve1sEeUzrIc9Y=;
+ b=Py3SmcXdfklveKfgTKxYsvLPVj2ygNMSKZFg9Tez9QTh+9SzXALoRd1cScCs2FQnUz
+ tZQwuuaHmBWx/aZsMpH8IdxWr03KJgK89IJgnHd4fjitRa9wJTAWPNwOqu3Fm7TpAd+h
+ KxwrV1Hku2ynaFsk++7ezCikcYL7vE0Dj4phdec6LhxSstN+vOsFo98A7bUPHA0gkDnK
+ RG+J3GL6iIBvZnGyAfWOI5JM/5qbn/b+L2j33HAqO35VxjsqqNvmJ3YI9EZSRIBE9KGY
+ sJK//tjHcZWCryQA1oN9sVqkOnh8HRaM3G64EAz4f8LCRhm6CfH6G2fqjLY1jdOAGeKH
+ GQQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760048635; x=1760653435;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5RoiXpDduPrRA2xFUoGTKsoM/hWLjwhymJCtXsAwdj4=;
- b=saQpBFvpoRdKI278jZldQhny2I7Lct5QiAVDZED0Z+j6AdLYApbYgzc1jwXN27flQp
- GkqF0VqM5qU6irz/E68yQmp4zW7wjWQiCsSclTHt+ahOrPl3MfxwY+wHYFAHNeNN+BTI
- dNhEmFgV7JbiiAVLPamIpHVaco5CMKjIeXFhWiywGHPWKu5tagxHarnViMJRrQDG4Bls
- qM78Nuw0845wIVqb/F3wKlp1H+L15RCx/IEzRsUAp7l8LpqI0Lpwbpfq0VaP108uHC9O
- VGQlduGzTJG/7hN087XFxvU13TdNptyz8RtHi6ETvz8kjAK5GBoIbBrBi4SN83GPy8/Q
- hOtw==
-X-Gm-Message-State: AOJu0YyAPl309bU1JGJedVYXfzE9520O9wCtDkcxK5MeRzp7atT8N8O9
- qk1xJI3U45Ro6XxJBobMOJNom3bueo8Ar23EOLWmx5j8qQ6iOiv2nL3CbIhCq8Q/ou7xL7dlj+e
- T93HbNsg=
-X-Gm-Gg: ASbGncuBa9lDqq5vJr/dw4E9eY8+c2GDX55XwDMqGehiYxZTgFF09tOpb2MHxQz6HMv
- kEvOrMaTaV8sGAh0PJU26ra1BIHwWVYD76kHghKVo+Im1ganoV2ZYsCcjeet4I+V1IEF6TS3qS2
- Niz2DN7Teywk0NF8RdtRUqz8FNzxRwB0uWYDkAlogwI8TwQCrK1S2qK2Ov/pKlYf8I7VIZLWa7o
- T3GXh+HjyfeA1S0lPZx1ej3CMfijGvfOdm9OcqFkhyvppxikeWqxbts+SZi1icurs9sRynFeLxd
- wIgYMfnhxreOdcsesDTbPspXrYfzFakQ9BCy15jMDgdEX03xMaVIhH9xC3ArX85sSqYfZuy7JV+
- SNAHY4RoAZzJh66rBUbQqAYAHNo22v0edeR1CCKyvYp0YW0N4rDa2c1d+q0liA1NE1weA5E1hr/
- nqZlySQ30mn8TF
-X-Google-Smtp-Source: AGHT+IEnhT3jISW6WyOn3E8JwQu4sEUTrY39uEEzTlDBh+/IxyKCzks/tl7qku8HwisDUdc9pkbVCw==
-X-Received: by 2002:a05:6870:17a1:b0:321:fcf1:e845 with SMTP id
- 586e51a60fabf-3c0f63f0f60mr4033547fac.19.1760048635349; 
- Thu, 09 Oct 2025 15:23:55 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8bb1408sm302067fac.11.2025.10.09.15.23.54
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 15:23:54 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [u-boot-test-hooks][PATCH] labgrid-trini: Fix logic in sd-mux flash
- wrapper
-Date: Thu,  9 Oct 2025 16:23:53 -0600
-Message-ID: <20251009222353.1010313-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1760049736; x=1760654536;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lc9qZ470x10gnZxZQcnsOLlAr8HEeAve1sEeUzrIc9Y=;
+ b=gzc2zZIlAlaLY1I2eQyqUYw2w6DL7jGJFSOcq5DN/OxePjQWxsI7Q0uSOo3Miuw7io
+ KG/WtescHZ54YEQ+AQfoDi9nwBF9mCWxw3AlhtBPx9szUFdnrrWayeZlJzDy1OeiZw4R
+ oSEoOfpYS9fz+DPus/myCTKVNQ+4WmlyfrB73X/AP1xvmIJOIsIWbooDOsPOc46QhNSH
+ DLZhtaLUnOu/UCSCF9MIXHaIkrxjjSdT08ydjP1cqSFJ1hzcz4s62/xTZbZEPW03P8OT
+ I05EobvNWR/gQYbxt2BrrC0dFHr6E0n7bEtAmF7Vv5RAJFOuObzgGg7tRKchXnXnWPKh
+ xu1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXA8wnyxlhnxk1LzgccOk76djoRzzoI+o/siAdnTnIEmulZpdUKTJLDL0LOK8t1+5tkabOLr7Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yye0R2Ex53q6YHlKqu6ILu0KgnIegLXJr3VNXHsPAP6mrxgxplK
+ Ornf+Tt68Kp5c3XQvmlGDlm4us/Hq6l2dctnqoYnAQsJwdzHBZnWSZ0U+0Bnq2r49dnrK5uLYle
+ Q2u0AmvUwqeFbg2iHQTzCymfTdUCJMGWBkg==
+X-Gm-Gg: ASbGncuYH8wfAbXP1nroqOOnb1niehKjBdwICwrQ7PSZD0yB8MrjpJq228xCU0MhuH/
+ WPz+WD/4iCTU58VK1KCb3UqBe+Ce23vpTyeSEEDiXGtmDhrbo/5fg1GzVkm1av8WdcwBVjMHzkN
+ 8e/Pdl5QtqDqGMN8r8LXZOpjqiSfAEeLTVrj2DEUxnKO4utz+DmhHiTwDZknfC9Xy5nX0KMIaZT
+ 4MDF23mVTSQR+MY/RNL0ytA1bOEQ4WJu2TtdJDX/TYvbrWRrsFK0QXDXzchtHE=
+X-Google-Smtp-Source: AGHT+IFSbWCNazLsIL8/Fpqmv/nIA8D4172o5r4QDK89+N7oLoq/19o7dEWFIbNaG83EgMIQ57zg2lEtKzo1NHCsAj0=
+X-Received: by 2002:a05:6512:607:20b0:590:7af0:837a with SMTP id
+ 2adb3069b0e04-5907af0868emr1326205e87.12.1760049736221; Thu, 09 Oct 2025
+ 15:42:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250923-usbnetc-v1-0-507cddbe7214@oss.nxp.com>
+ <CAOMZO5DArO=XT6NjUheyL5-ec-s0WxW9PxTNEBZ6QXvdGVG=9A@mail.gmail.com>
+ <c5f7315f-f5f0-48ab-83f4-9472c1c37fd7@mailbox.org>
+In-Reply-To: <c5f7315f-f5f0-48ab-83f4-9472c1c37fd7@mailbox.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 9 Oct 2025 19:42:04 -0300
+X-Gm-Features: AS18NWAQlOhspdtXItSftDtfs8WSt9889UYbHfDWVYyvWNJ-wn2_NvMXJp5VABk
+Message-ID: <CAOMZO5CPQNJhRcZVOedcHfRq0j5pxf3T8rkRmAgQGmCddMNJaQ@mail.gmail.com>
+Subject: Re: [PATCH 00/10] Enable USB and ENETC on i.MX943 EVK
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@nabladev.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Alice Guo <alice.guo@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de, Ye Li <ye.li@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, Jacky Bai <ping.bai@nxp.com>,
+ Frank Li <Frank.Li@nxp.com>, Marek Vasut <marek.vasut@mailbox.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,27 +103,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We need to pass the normal first/second argument to the raw writer from
-the labgrid wrapper that controls access to the sd-mux.
+Hi Alice,
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- bin/flash.labgrid-trini.sd-mux | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Oct 7, 2025 at 8:27=E2=80=AFAM Marek Vasut <marek.vasut@mailbox.org=
+> wrote:
 
-diff --git a/bin/flash.labgrid-trini.sd-mux b/bin/flash.labgrid-trini.sd-mux
-index a9648dc1dadc..dd3f55568f6e 100644
---- a/bin/flash.labgrid-trini.sd-mux
-+++ b/bin/flash.labgrid-trini.sd-mux
-@@ -25,7 +25,7 @@ echo "switching sd-mux to host"
- labgrid-client sd-mux host
- #let mmc have some time to initialize to be available for udisks
- sleep 1
--. writer.${flash_writer}
-+. writer.${flash_writer} ${raw_device} ${U_BOOT_BUILD_DIR}
- 
- echo "switching sd-mux to dut"
- labgrid-client sd-mux dut
--- 
-2.43.0
+> I don't think I ever received the entire series, can Alice please resend
+> it and CC me on ALL the patches ?
 
+Please resend the series with Marek on Cc on all the patches.
+
+Thanks
