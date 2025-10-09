@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C09BCAC5BB
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 00:25:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EB1CAC5BB
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 01:25:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BACF48394A;
-	Thu,  9 Oct 2025 02:25:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D38AD83984;
+	Thu,  9 Oct 2025 03:25:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UVFaqwc8";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="rzw2ritS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 494E183987; Thu,  9 Oct 2025 02:25:22 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0B10683987; Thu,  9 Oct 2025 03:25:12 +0200 (CEST)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A94D783948
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 02:25:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D81AD8394A
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 03:25:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-6394b4ff908so650802a12.3
- for <u-boot@lists.denx.de>; Wed, 08 Oct 2025 17:25:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1759969519; x=1760574319; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F3QMSwFsGIfVykKdbgBuRARnsu/rbOV0R5FL0vAbWrA=;
- b=UVFaqwc8YxgjWHIx0RUPBQdo4FkcvKfTwM0Pd1r8WWjphwsKy7mWJn6QwCLh8W6jr9
- uy7L9YOK/1KaTs3RwKPMxCk6op5qFFgiCnVG0oEmoUTvHYk4LIIFpS50TFYi2h4TDeN4
- XxDmtdtYyoA7xI0NdlFjs4+8yhZTo5RIsB7gc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1759969519; x=1760574319;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=F3QMSwFsGIfVykKdbgBuRARnsu/rbOV0R5FL0vAbWrA=;
- b=PSVPT4V8A2gBFeai21EYbwyWbEX1axH0zmE6SzoxYlGkWkRzWce3iZC7Oo4aXX6taj
- NFpcbom5WrU59NsVvfRgIWFWFlnx5PmhrWlB9GEbt4Nzqml9z5CTW6x/rHA10x1CZL3+
- b7PzXgyZTbbJQ/kc1uidyKrYbBpDY4wK6YTBbFjavBR4Iv7F7rBVAE2Z8EqwHcYXJW3a
- bKmfLwqXG3QJWXFpzLfOUZNtnuR2eNkMMGOwQBsxDPoJz22iHEodO5hvl+Kh6WLsYbVf
- 0UzCupeJ8ycKmiUyoEhQSEwdWhc+fH2BbrXkotWL9tiAtIO7r8+m9KXfn+q1i/pS0D42
- Ctcw==
-X-Gm-Message-State: AOJu0Yw7g+rdU2tv32lV/Xk1wdyT2pa+vah/5rcb58TB2gzIMSPC34Vc
- LQLUfhkqbEUV4VKDlvB10pPPn35FhxTmk6lukvfw+m5oBnCg32s9mN+9WZ9rABsisuDMcW1YM7b
- Vw3IbU7cl8buZkvT6vGHArTFxqZt7LDNSZPfn5mtm
-X-Gm-Gg: ASbGnctwKmOr7zmCedEmP0G7LSm3kDQuy8rLIiRR+d+Yr2SCzpBMQa7q3qBOlYxs334
- QwjS7OnihtnsMYd11wrg6wAZdJLAzd21VxJV1PrQlsvmhbQfhZmyfHrIiTg9Z2vixSpvtDGANib
- tFK85c9lddeXYVuJyjEy+GpkXoyL91Oe6uuU/KXMsJiOK9YRsoPuzDF+DuMDKG/rhWqKDdYcq+1
- kQV2PGswj9CCAX/M7QZv9Q+p7JpRM3v
-X-Google-Smtp-Source: AGHT+IE3pn/HFPSQSOXCVTM/eGC3Pwh4HNXVYzSavlCk0rjdSbRQERDPLIleyC9DBjemRTJWnagXm2Gd3FB1DZBd+VM=
-X-Received: by 2002:a05:6402:848:b0:637:8faa:9e0a with SMTP id
- 4fb4d7f45d1cf-639d5c5a3d4mr4781026a12.30.1759969519109; Wed, 08 Oct 2025
- 17:25:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251008-topic-interconnect-next-v2-0-c46e94dd328e@linaro.org>
- <20251008-topic-interconnect-next-v2-1-c46e94dd328e@linaro.org>
-In-Reply-To: <20251008-topic-interconnect-next-v2-1-c46e94dd328e@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 8 Oct 2025 18:25:05 -0600
-X-Gm-Features: AS18NWARD3XuapXVwTCk8VBnYEz7_VSkXeTq2jj1V5uDC00vkWGELu6-sz1uA1k
-Message-ID: <CAFLszTi3cNihLKOvJhrm1GLYdxQKvkv-66Fdr6m90+vvdUtMMg@mail.gmail.com>
-Subject: Re: [PATCH v2 1/7] Introduce the Interconnect Subsystem
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Mario Six <mario.six@gdsys.cc>, u-boot-qcom@groups.io
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: c40b9104a4ae11f0b33aeb1e7f16c2b6-20251009
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:To:From:Subject:Message-ID;
+ bh=ggpd8Z39ybk9LPDIEgEPE3p67WsuZsD1/kbRZUnwmfo=; 
+ b=rzw2ritS8KFBgTMUkY23habZxw3AQx5UnSdRHZ/XNxR/gj/4zuk3+1vfh1PSC2NYzzL0wzFgPKYfWWqN/2ivTthzBaS1/t4JUMk4vEUEcNNdjNvN82bfj6JkiV+2JLtJdAe1cP98HMqCa0vXlCjblECJuKRBkcUGX9Si5KDKwT0=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.3.6, REQID:14858e6e-8142-471c-ba3a-aa02b2c88a40, IP:0,
+ UR
+ L:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
+ elease,TS:0
+X-CID-META: VersionHash:a9d874c, CLOUDID:1ec73102-eaf8-4c8c-94de-0bc39887e077,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102|836|888|898,TC:-5,Co
+ ntent:0|15|50,EDM:-3,IP:nil,URL:0,File:130,RT:nil,Bulk:nil,QS:nil,BEC:nil,
+ COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 2,SSN|SDN
+X-CID-BAS: 2,SSN|SDN,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
+X-UUID: c40b9104a4ae11f0b33aeb1e7f16c2b6-20251009
+Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 337309546; Thu, 09 Oct 2025 09:24:56 +0800
+Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
+ MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1748.26; Thu, 9 Oct 2025 09:24:55 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1748.10 via Frontend Transport; Thu, 9 Oct 2025 09:24:53 +0800
+Message-ID: <c004df0c9f556aaf530a14898c933c5c657d3510.camel@mediatek.com>
+Subject: Re: [PATCH] ARM: dts: build DTs for MT7987 RFB
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: Daniel Golle <daniel@makrotopia.org>, Tom Rini <trini@konsulko.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Greg Malysa <malysagreg@gmail.com>, "Oliver
+ Gaskell" <Oliver.Gaskell@analog.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, Andre Przywara <andre.przywara@arm.com>,
+ Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>, "Michal
+ Simek" <michal.simek@amd.com>, Johan Jonker <jbx6244@gmail.com>, Jan Kiszka
+ <jan.kiszka@siemens.com>, <u-boot@lists.denx.de>
+Date: Thu, 9 Oct 2025 09:24:53 +0800
+In-Reply-To: <a4d4096d6b80a2b6f5bc800426380cdc60d9b037.1759413509.git.daniel@makrotopia.org>
+References: <a4d4096d6b80a2b6f5bc800426380cdc60d9b037.1759413509.git.daniel@makrotopia.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,67 +93,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+Hi Daniel,
 
-On Wed, 8 Oct 2025 at 09:31, Neil Armstrong <neil.armstrong@linaro.org> wrote:
->
-> Let's introduce the Interconnect subsystem based on the Linux framework
-> which is used to vote for bandwidth across multiple SoC busses.
->
-> Each bus endpoints are materialised as "nodes" which are linked together,
-> and the DT will specify a pair of nodes to enable and set a bandwidth
-> on the route between those endpoints.
->
-> The hardware resources that provide those nodes and provides the way
-> to vote for the bandwidth are called "providers".
->
-> The Interconnect uclass code is heavily based on the Linux one, with
-> some small differences:
-> - nodes are allocated as udevices instead of Linux idr_alloc()
-> - tag management is minimal, only normal xlate is supported
-> - dynamic IDs is not implemented
-> - getting nodes states at probe is not implemented
-> - providers are probed on demand while the nodes links are traversed
-> - nodes are populated on bind
->
-> Fully tested with associated DM test suite.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+On Thu, 2025-10-02 at 14:59 +0100, Daniel Golle wrote:
+> External email : Please do not click links or open attachments until
+> you have verified the sender or the content.
+> 
+> 
+> Compile the added device tree sources into blobs, which was forgotten
+> when adding the source files.
+> 
+> Fixes: 2d6962e0618 (arm: mediatek: add support for MediaTek MT7987
+> SoC)
+> Signed-off-by: Daniel Golle <daniel@makrotopia.org>
 > ---
->  drivers/Kconfig                            |   2 +
->  drivers/Makefile                           |   1 +
->  drivers/interconnect/Kconfig               |  10 +
->  drivers/interconnect/Makefile              |   6 +
->  drivers/interconnect/interconnect-uclass.c | 548 +++++++++++++++++++++++++++++
->  include/dm/uclass-id.h                     |   2 +
->  include/interconnect-uclass.h              |  74 ++++
->  include/interconnect.h                     |  81 +++++
->  8 files changed, 724 insertions(+)
+>  arch/arm/dts/Makefile | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 7c8cf3a5a1d..a36967b916e 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1131,6 +1131,9 @@ dtb-$(CONFIG_ARCH_MEDIATEK) += \
+>         mt7986b-sd-rfb.dtb \
+>         mt7986a-emmc-rfb.dtb \
+>         mt7986b-emmc-rfb.dtb \
+> +       mt7987a-emmc-rfb.dtb \
+> +       mt7987a-rfb.dtb \
+> +       mt7987a-sd-rfb.dtb \
 
-'interconnect' is such a long and vague word :-)
+I'd suggest to use
 
-There seems to be a piece missing here. The uclass should have
-operations, so that it makes sense for different drivers to implement
-the methods. I see some there, but also a lot of direct calls from the
-test to sandbox. I see quite a few functions which lack a struct
-udevice * - I suspect I am missing something?
+obj-$(CONFIG_TARGET_MT7987) = mt7987a-emmc-rfb.dtb \
+	mt7987a-rfb.dtb \
+	mt7987a-sd-rfb.dtb \
 
-We normally have a ..._get_ops() macro in the uclass header. Also we
-normally have stub functions which get the ops and call the function.
+>         mt7988-rfb.dtb \
+>         mt7988-sd-rfb.dtb \
+>         mt8183-pumpkin.dtb \
+> --
+> 2.51.0
+> 
 
-I see code to remove children, but driver model does this
-automatically[1]. Same with bind(). If there is a bug in this, can you
-give a few details, or ideally a test case?
-
-Also, please can you add:
-
-- comments to the header file, at least
-- something in doc/
-- a command to list things / provide information
-
-Great to see the automated tests!
-
-Regards,
-Simon
-
-[1] https://docs.u-boot.org/en/latest/develop/driver-model/design.html#removal-stage
