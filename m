@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D4BCCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:09:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B114CCD185
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:09:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12C6884408;
+	by phobos.denx.de (Postfix) with ESMTP id 7620A8450D;
 	Thu,  9 Oct 2025 16:09:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="CTtH2+pK";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Yl6KoYIK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EF0F8416B; Thu,  9 Oct 2025 16:09:09 +0200 (CEST)
+ id 5685A844D2; Thu,  9 Oct 2025 16:09:10 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91D448416B
+ by phobos.denx.de (Postfix) with ESMTPS id D231084329
  for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:09:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=237798162a=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 599DLL78000974;
- Thu, 9 Oct 2025 16:09:06 +0200
-Received: from as8pr04cu009.outbound.protection.outlook.com
- (mail-westeuropeazon11011015.outbound.protection.outlook.com [52.101.70.15])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 49nv6h4asd-2
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 599DRl4I010913;
+ Thu, 9 Oct 2025 16:09:07 +0200
+Received: from am0pr02cu008.outbound.protection.outlook.com
+ (mail-westeuropeazon11013031.outbound.protection.outlook.com [52.101.72.31])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 49nv6h4at7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 09 Oct 2025 16:09:06 +0200 (MEST)
+ Thu, 09 Oct 2025 16:09:05 +0200 (MEST)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UWh3hGuXdoU7OoszITlmjl/m674ceTOYDxwaNldILaEpWRDcpT8po3Q24EuWF4Hum11atpThdVg8Y3s/+0h/OF0M067PJq1Z4M+y4+ToeNbm0+Waa/3Qe3ZTII9ZnoamoVMnTdjxx/q6TVuFKf5aOIDR2EfLqvC1y5NVc6Z91GgyOO3q4tXem38uThbIeQ5pc4htLd+UoO8vAbEO4pIcCDP9TBCPf/gihgxf9EJGAb8IxG/x8+xlIGEplnlHla3mA+aDokcaslsDB0/V2H/P18aDitOlBEV0dlXqLJF/dG5MYRdtdsL0A0/e1NWyR8GcLFkNFxI4RGwM8qtkAbQELA==
+ b=jBpJpGiqD2YEpQLFWPeMy3TH/9UP4YlqYfoZM3l4EZCRyIOxoZ7rmlW+QdLwEYdsyExnMENyGoRaNqfpRGX6tXIhmWtscp+msIeP+e2HE9EPxWuQgwaGR0ns920CoHZf3hXvC7JUADGS202921uPPS4qX3DDje0OtgZQz1GQ26mRIa5lFdl8weU88vR5lZqLkpfIsmUBJL87FoPw4iSbSTToBVygm5sYjDVqBP6ctl6sH5BhXl+zIfGQm4JznPYa8cNokwMEvO/SprUHN6b+T9mgaKhC8eMTUVJVsASn3FwEWvGRPjp1Ii/jk9yrLrVJxjqv0+7JwTHgMfegQlSTqw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2+XtzXLE0G6c3ftawFLQVffsYg7BKcgNLCRBEyirxe0=;
- b=UZaF7A3CirtKvQQqkuTMnxl2tAOm9bKa0qk8mAIPtGiGWwU3+4btExFQdP2v430dnRvs1I+xvP4mTOx37Kib70ZMwDceHtfnsczDUXQSEGUOXjGw454jllPVGd1vKaxW45rWp4e65CubEGoT6qmoUQjs2JDXgzvkhMjw3qfhmZGsCRvzPf/fvYLdVB57hIqD/sGrOAstbFcJaNZ+TqgdkqkbGhCJXM0Qq3iLESeGzNymxXDn22tnGKZPCCIp1seZPVHcvI29T0O6kuXvCFFzuu5DsmbEt2GGIrcRjJP50UvZj26Czw1vW7l+R2vqR2DCmVwLQ2h6a6lVSe1hf5+w0A==
+ bh=V3evPSFtnoO6nsnLEngSX2a2bK5B/qbobvty/T3eSjI=;
+ b=W79K5KdtZgJRitl45cJg38sMLl8D2KvF6nlDry3S81vnXHaQc537Wzi9PR7+07WYs4ydMNCPtopZ7kDyg/6wLbcsLhnfhu8eeFJqCJt9GJ5ymbQuxKTDDnomtKZ9+pBoQj/NlApcVz4TW4uxuOTJgeT+ZMJd+nXpWZfWgsvu+PuDvAfL8V2nADXylTM7GIeaJi0fx9WUa9ZOj/sOAQyEBbLMPysuGfbwO4OhZPyTzfaxDrQmpxutN0UJon1p2LYYpFO+xL2Xj5yvNliPbaK5HDOoiPLhaaLk2P7y13DeOfmdvXY+vaI0v5VB5vbfBJQ/bqAe3JTRUH0sE5eNWKZDEQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
  164.130.1.43) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
  dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
@@ -48,18 +48,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2+XtzXLE0G6c3ftawFLQVffsYg7BKcgNLCRBEyirxe0=;
- b=CTtH2+pKty0Wp2IcfPyt/1wOC9Z3eDxAqpvqG/pEwEBGCEw1Kop3AT9A6Yx9aGDct3n1KHxjP3HqdJ6idz3+1gCDmPOsrviso1ds58JknTYaiyb1zQ9sPrPN2B+OFxDKyH+bDP4weCrA9W/HGDRfjtf+7mnuYqDiO6MNosloqM0Z9EhLBW1e1BRE+9JUvWHeZAI3l1oLWAtBytbq1tfnastIwsTu4MAfN8VIa34GC1Bx/0gcjTp1KAoZCSNPyblmOY2PXtFIJzvNf+rmIx5hZWQuVwSZ28BUxYjZFkjB+GR4S16livFIMFZbnzEP0GtuXlIKH0S9nrcTrmGz+9IjKA==
-Received: from DB9PR01CA0011.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:1d8::16) by PAXPR10MB5688.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:247::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.10; Thu, 9 Oct
+ bh=V3evPSFtnoO6nsnLEngSX2a2bK5B/qbobvty/T3eSjI=;
+ b=Yl6KoYIKwTZPyxfbmc4Dz/rMSOidjGdxc8qZA1ZfsXvu6cCmv+Q5LaO2u3+19K8T3E71zsiG72biA501Jn9XoLIcLfmmnYR7fa1CMoRpJNSoyKG0l+NsuLNGeWuOjTDp1wV9lDGHPEWbh99owFfgfJOpRWyMRw8xeD1FykUXjeEGCMTHWFmj+dgJBq2VOsGLLim6wNUaefOCECwyzxlZGShL1whXOVPT4uaZaqYsixOeNNcsB5qRPNUrb436azUP2TxzNzOPKH/SyI7Jh1SAd4ERLKFYUnld5M4g/Bj6IuG9AEL4WFzuMgmtVKj9Eg4nwKfGnRGPkJb0k2u6KMdCXg==
+Received: from DUZP191CA0039.EURP191.PROD.OUTLOOK.COM (2603:10a6:10:4f8::13)
+ by VI0PR10MB9392.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:2cf::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9182.16; Thu, 9 Oct
  2025 14:08:56 +0000
-Received: from DB1PEPF000509F9.eurprd02.prod.outlook.com
- (2603:10a6:10:1d8:cafe::10) by DB9PR01CA0011.outlook.office365.com
- (2603:10a6:10:1d8::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9182.20 via Frontend Transport; Thu,
- 9 Oct 2025 14:08:44 +0000
+Received: from DB5PEPF00014B89.eurprd02.prod.outlook.com
+ (2603:10a6:10:4f8:cafe::95) by DUZP191CA0039.outlook.office365.com
+ (2603:10a6:10:4f8::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9203.10 via Frontend Transport; Thu,
+ 9 Oct 2025 14:08:54 +0000
 X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.43)
  smtp.mailfrom=foss.st.com; dkim=none (message not signed)
  header.d=none;dmarc=fail action=none header.from=foss.st.com;
@@ -67,27 +67,28 @@ Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
  designate 164.130.1.43 as permitted sender) receiver=protection.outlook.com;
  client-ip=164.130.1.43; helo=smtpO365.st.com;
 Received: from smtpO365.st.com (164.130.1.43) by
- DB1PEPF000509F9.mail.protection.outlook.com (10.167.242.155) with Microsoft
+ DB5PEPF00014B89.mail.protection.outlook.com (10.167.8.197) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.20.9203.9 via Frontend Transport; Thu, 9 Oct 2025 14:08:56 +0000
 Received: from SHFDAG1NODE1.st.com (10.75.129.69) by smtpO365.st.com
  (10.250.44.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 9 Oct
- 2025 15:52:02 +0200
+ 2025 15:52:07 +0200
 Received: from localhost (10.48.87.93) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Thu, 9 Oct
- 2025 15:54:22 +0200
+ 2025 15:54:27 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Kory Maincent
- <kory.maincent@bootlin.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Cheick Traore
+ <cheick.traore@foss.st.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 02/11] board: st: Update LED management for stm32mp1
-Date: Thu, 9 Oct 2025 15:53:56 +0200
-Message-ID: <20251009135417.282290-3-patrice.chotard@foss.st.com>
+Subject: [PATCH v1 08/11] configs: stm32mp13: Enable LED_BOOT for
+ stm32mp13_defconfig
+Date: Thu, 9 Oct 2025 15:54:02 +0200
+Message-ID: <20251009135417.282290-9-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251009135417.282290-1-patrice.chotard@foss.st.com>
 References: <20251009135417.282290-1-patrice.chotard@foss.st.com>
@@ -99,68 +100,67 @@ X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB1PEPF000509F9:EE_|PAXPR10MB5688:EE_
-X-MS-Office365-Filtering-Correlation-Id: c5660a3a-40ca-4776-2d04-08de073d62af
-X-LD-Processed: 75e027c9-20d5-47d5-b82f-77d7cd041e8f,ExtAddr
+X-MS-TrafficTypeDiagnostic: DB5PEPF00014B89:EE_|VI0PR10MB9392:EE_
+X-MS-Office365-Filtering-Correlation-Id: bcaea889-ee3c-49ab-5eba-08de073d62b1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|36860700013|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Qkz5BsKy7H3iLigI0S1YO2Fvg24g6uahtXiiXgyK7DONxC+ewUD+2SLXfiPt?=
- =?us-ascii?Q?sA93Mdgu0HBZp8T1Kn3IY/1cXteakDVqjR0nBG/jOxBjEZ8DJqeBEkorM7CG?=
- =?us-ascii?Q?haeIuEBRRIBFha0m+e4IgGkbPA/xNad9C3LC9Ab+C/xuvl+ycXhO37KaaEHc?=
- =?us-ascii?Q?oMk7xzjg/p5osZtIo6JkQqKse9ogl+pJuK7AMJsMZU1EUfD+IpeCLo6LkkoX?=
- =?us-ascii?Q?auLNgREuTWN56AFAUGiAwA33sDNU8UGry/kDBCiY1yzQ29CAeypmstl1EVjq?=
- =?us-ascii?Q?WB5hOQtv2NOjrkNzzjekvKaFVMOjfvH+pWmDT0+IuPbNfYDI724v+TAploHZ?=
- =?us-ascii?Q?uA4zcqsdSUUDmo/K8Xd+CGVV/QRsFg71OL/oFAMldwitVkovCiB2lRsTQvQJ?=
- =?us-ascii?Q?qC1d0IEJVgUHIrydxIEy36TVvq6vtp9dc+em8L8Q7clEMWnd1jMyTjuypLTi?=
- =?us-ascii?Q?V79k1mC01nwDtXyuXktay8Acm1pCulPfcaGefJUsWpz7GnePWW8Yww5vO18l?=
- =?us-ascii?Q?e2Ig/j0At0+YGozOJr+GZE/KwnG9EPNBQH85Novn693mmEAPCaSDWXCsVFve?=
- =?us-ascii?Q?g9o5ISpp+QUpvtOiBJr+3tXVYKorPSBFbihTX5pDC+9iCEubcJJco8CTJUWz?=
- =?us-ascii?Q?3DMDl676nypkdzqm0SpMvHQUaOe+6kz6Y9BkLBteRIg6QUXOT6xr4oBz2ePx?=
- =?us-ascii?Q?HfMjBfruCFIdggaq06e4uDCY16L890xHDlfO0tuw1dXaMd38UNocVwg4Y8vL?=
- =?us-ascii?Q?Fji5niZ83LmB/hY7mR+Ik71bWYMwSMrmFNSqstmGMhCKYtGOphvTY0PQoUdp?=
- =?us-ascii?Q?aa27Ewd88v0pRPWpzFj6B9URnY25H5ZtZVKrcNv2xe+1H/hkl32SO8CRlIHl?=
- =?us-ascii?Q?xU4MB6d2ipDN+k/ubhmud7aMlj9Jp1ZFwTtsb4dzaTKeT3plUzpWRAjTqpAZ?=
- =?us-ascii?Q?rEADVTsQHIC2TqQxfIxxL0Q66FKumvevcbRqWzkU5PAhCJT7SflkNtQ+7evk?=
- =?us-ascii?Q?NRKGVYwOvp+OxP2WAc35i9+A6xPh5EiTwL0ZGBye8uXZegI6Ppe2ZNuP1TfT?=
- =?us-ascii?Q?IY0H5MUA0nlYHEGQiy6mnc5e7Xuaxpzx77tG7OT0ERGTCXpn2maExcfSbX0a?=
- =?us-ascii?Q?Q9yKqUj+05rxy3NRGt4u+ujWfuRSUsX+1WOHQgQK/BiFKUXssoQuMrEA0Mzt?=
- =?us-ascii?Q?q13EyiUEDH535l0Z6uTc+etpD5UgoJbCVSdivi5THxehS8WP0uWvpn3SBkgQ?=
- =?us-ascii?Q?FhPnOJjg+Rp+FbhmhyPu8tRQgMGg3do6PPhMBd6v3p/rxsggHpVvur7mKXAJ?=
- =?us-ascii?Q?sZTbTkuXH0pfffvp/zj/agxO8F3lDpsOwLBts7wmhlgOW+8XWPltZIxl4XFj?=
- =?us-ascii?Q?f09oaWQ7ftoNVtZRt7Np53jeJ0/rrNIvLFVbEAp1m8p1/46tM3mcCasd9diW?=
- =?us-ascii?Q?QGuHpWpYQC+5O14PKnTvF2FnEjEDmdxxyRuP2UyVC4PvnAGKYyY8QfeoeAT1?=
- =?us-ascii?Q?WVZB/kPJslRX64rlTgV0g7roArMowBsQTH350lXZCTTzUnlWDR+qNEvLykqk?=
- =?us-ascii?Q?RE6f6WWzjWJtNllpTtE=3D?=
+ ARA:13230040|1800799024|36860700013|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dn/aLtQRF7ZIgHw8VW6WIh1MLBOUOpDqjbxiQcSlrcGJN/gKxSdhSEEU5o78?=
+ =?us-ascii?Q?CpmKHFH2OEwFMdRKk2KwcIjweiVIIUjeo65J902ZGb92gWp8q0CtSyazEw6W?=
+ =?us-ascii?Q?UuErx+aLBlLT9Ih4NCOr1nP5G1BJsoXPRilsjIZHamOWXQtN8/LGtjqf0HQS?=
+ =?us-ascii?Q?5ebbSMNb+KmZeR4FXZPP7wQcGqzrwy7BcvMmsx7Txp/vLdCK6T3G2gL3YluR?=
+ =?us-ascii?Q?bCI4eZI21qyElCqLDzIf5nkXQh36p7zAcA9NIMoA0aVF6XU7C/9ZwxsiK2rp?=
+ =?us-ascii?Q?k58B0jLLN80/Xf1pmVI4RQZmsI0zVqddVTbnEnoFN9pb5oTsil5ACQtFqUoh?=
+ =?us-ascii?Q?4cagyrYzs+bAk6zozCUZyhvwjCzUyTdj6tHmT47mGf556cJCdzRiPfIkiDND?=
+ =?us-ascii?Q?aMnFh9pGZxymSISY3ynwrahWBUN847OizT7AjGCFI/4Lna5ltC6SOb4HGhHg?=
+ =?us-ascii?Q?ah6+0wrjKTeIVWq8mXRNaAdASLwXIiAUuhI/auUF30fOdjj61y4jPVmEJ5NP?=
+ =?us-ascii?Q?OgBzcLFm68CKo5YMf4k5ZbctFl3vPseSIZtT2zEfbpORsYnZ9aRklXyhD34o?=
+ =?us-ascii?Q?qB6dXmUe3y8KoQVqhUBpyX992stKtDphaB9qi5U9EU9J7kWfCj8CJ/XR16UX?=
+ =?us-ascii?Q?JXx2a8C6yIGeVe6UJA1kTLq4p2neCou6DMGkhw6/gj2eTJgyU+EruWdyWbda?=
+ =?us-ascii?Q?jTTk+ZHQZ9ZDxV7brt9PstIY/D24/xSCIIuuEELNPcpu9+WsC6L3/y8IIsoU?=
+ =?us-ascii?Q?ULRnE0a+2A4ZeoXf0ziSa7G2e5UUykfi3OqJPjzQ4ESsq2AuCiB1m7uyaoC4?=
+ =?us-ascii?Q?7GdA99FV69+9F8Ejsprovh9yJc+RCe1F69w5tmtLijumG55F/rS5SIeTSngB?=
+ =?us-ascii?Q?rWnrQJf0xDvWS2ETsTh4AA0y3TJMIkVsZw6z8fgSkQDyUuAYqoZcdFso9iAv?=
+ =?us-ascii?Q?UTgDoqzc1d6awPNn79/REQj8vbIEV2wzd/CDmO9vM/ft0kItYTiUQHelQkHS?=
+ =?us-ascii?Q?n9OCd+jsf6xTlAxBnn0BGnv9Lma5WvlgeDcPlzos5lZdgPoUCwD0FypRS7sr?=
+ =?us-ascii?Q?PcvZ1kFBOmjkVuHKvBBZknKgINVKh3lMHiFclhVAls1nkNrFS/W0nG5mh2nC?=
+ =?us-ascii?Q?Rh7IKvRsbQxDGXlKccX2lJBVoOp3O9yHTq4jnTFjAjrGJ8tNjcPbHJC0APfz?=
+ =?us-ascii?Q?NN2kslsKT0Knz5Z5jMy11UbL/AAvP8PqbI2jhN9OfBJetlieoCvWhFrF/o+2?=
+ =?us-ascii?Q?iLok36ZsKurdF4iPjSixSm5T+oVV/EBtJ5yHGP7jCdBD6e+6Lm7C4adq7aKA?=
+ =?us-ascii?Q?k/MtqvaM+vRzIL49i6HqaUqeky436gMXT/ebudf4coVAA3NzuWQfs425TjR9?=
+ =?us-ascii?Q?+Hh/ibgJ+gCRyeLbQZFenpvJT8E3hEf8lGMVHFkr8ucLNB+Y6pdlKBo59YkW?=
+ =?us-ascii?Q?XAi/ZQ+CPG2l5AWumdJHUVLqzQc4kIEhcdULDk2bgsJKw4oyi2yFbUAqXqZL?=
+ =?us-ascii?Q?sMBKD+CE0WIv6yJxFFu7giMhQ+XQ9Fre7NXzEOgpW4QV2AVNuExRDz0hY0pq?=
+ =?us-ascii?Q?KvswB2EmPlonqRJ4Kow=3D?=
 X-Forefront-Antispam-Report: CIP:164.130.1.43; CTRY:IT; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(36860700013)(376014)(1800799024); DIR:OUT;
+ SFS:(13230040)(1800799024)(36860700013)(82310400026)(376014); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2025 14:08:56.2085 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c5660a3a-40ca-4776-2d04-08de073d62af
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2025 14:08:56.2083 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bcaea889-ee3c-49ab-5eba-08de073d62b1
 X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.43];
  Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB1PEPF000509F9.eurprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DB5PEPF00014B89.eurprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR10MB5688
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA4MDEyMSBTYWx0ZWRfXzH90hpD8D1+E
- k+pxRvWvNPlqjgoOnzOIkcVp0pY3/F845Q1DCvGen3q9wexaNNSN0PTqQ1CnKSA5AQ5jPwRCg+E
- mb+swj1JNvLZlbQX8MSQOURdT3a8RZ9HipQR9tFgKVPJtSRPvAtPtXjtMSvTqQH8KUxlCO+SYdR
- 5n4CeEuKLBGT+ccVGis8oTd9CiG2sX+OvQgonbX80EkEtcmihXNnxyX8MV0wYnvYB5dli9fBy9C
- zodn3Wr3Q4Xdjb6BPKO7vuaqq5LIi2MSpSSh1CaLrxHZQ8zMO/6g2c7eEJiWMwxzKvo7j1TreOt
- KiO+sj5mwDuwZVf2oEXJKJPYtvTTn4ywAJlJDzwj79s+A0q9vGt3p9xf3fyKIjBxWMBVYvFhE26
- X3flSTOti8oOlT3n/RwD5f/Kf+Z/JQ==
-X-Proofpoint-GUID: oTQVUngqkev6UZcXR_efrdtnAo8kflIC
-X-Authority-Analysis: v=2.4 cv=K6kv3iWI c=1 sm=1 tr=0 ts=68e7c202 cx=c_pps
- a=xGQISz8XFlhUdCZTtops1g==:117 a=peP7VJn1Wk7OJvVWh4ABVQ==:17
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR10MB9392
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA4MDEyMSBTYWx0ZWRfX36+xyXJaAQXH
+ alHTAM+aP3WaZWgc957HgAVARpfKgvf2GQwfHMhGSLaBbDRnFmKeRuZglOC+HHbwg0etJYs2Ioe
+ Ok9QRegBBJiDOHWk82TC++EwUxxbSVavUF7yhOfbQ6rWXdAnGQeNUACAVCDdfMRL9dYwQBiIwFu
+ K/ZpWenG7WqBgaiyFEwj0nn92AyULcR+YuMzPElC+kzQBidu0yYLBvkC7yjuMPoyb2Iy53LsfcJ
+ VmL8efn0R3SnGygn8v0I7hHjUaYFtuoPX5x19MAuIeiz3jA52wya0mLcXO5VViAsj6mgiY7pybY
+ xTsPqACKS4FwE4XRQqqBBEGnjrV5kJdEYdalFyOL1Qj7y0Nhg8+BwqD2iAR1AzU8+3fxSpg5f8S
+ dgTh079EoFDxmsKnSls9y7u4NE+y2w==
+X-Proofpoint-GUID: ez9zG13HVuZqOTKWHOSoEanNrAAMZp9z
+X-Authority-Analysis: v=2.4 cv=K6kv3iWI c=1 sm=1 tr=0 ts=68e7c201 cx=c_pps
+ a=a6tTacaDLMSVGfVoTJ2NOw==:117 a=peP7VJn1Wk7OJvVWh4ABVQ==:17
  a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=XWp4PHTOCikA:10 a=x6icFKpwvdMA:10
- a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10 a=8b9GpE9nAAAA:8 a=xZieeVS6YiIlyQuzhbEA:9
+ a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10 a=8b9GpE9nAAAA:8 a=SxxZRTMbgU000sIlMgoA:9
  a=T3LWEMljR5ZiDmsYVIUa:22
-X-Proofpoint-ORIG-GUID: oTQVUngqkev6UZcXR_efrdtnAo8kflIC
+X-Proofpoint-ORIG-GUID: ez9zG13HVuZqOTKWHOSoEanNrAAMZp9z
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
  definitions=2025-10-09_04,2025-10-06_01,2025-03-28_01
@@ -186,101 +186,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove get_led() and setup_led() which became obsolete since
-led_boot_on() introduction. led_boot_on() is automatically called
-from board_r.c
+Enable LED_BOOT to use led_boot_on/off() API in board file.
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- board/st/stm32mp1/stm32mp1.c | 45 ++++--------------------------------
- 1 file changed, 4 insertions(+), 41 deletions(-)
+ configs/stm32mp13_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/st/stm32mp1/stm32mp1.c b/board/st/stm32mp1/stm32mp1.c
-index cb5cab9f36a..af681dd82ef 100644
---- a/board/st/stm32mp1/stm32mp1.c
-+++ b/board/st/stm32mp1/stm32mp1.c
-@@ -247,41 +247,6 @@ int g_dnl_bind_fixup(struct usb_device_descriptor *dev, const char *name)
- }
- #endif /* CONFIG_USB_GADGET_DOWNLOAD */
- 
--static int get_led(struct udevice **dev, char *led_string)
--{
--	const char *led_name;
--	int ret;
--
--	led_name = ofnode_conf_read_str(led_string);
--	if (!led_name) {
--		log_debug("could not find %s config string\n", led_string);
--		return -ENOENT;
--	}
--	ret = led_get_by_label(led_name, dev);
--	if (ret) {
--		log_debug("get=%d\n", ret);
--		return ret;
--	}
--
--	return 0;
--}
--
--static int setup_led(enum led_state_t cmd)
--{
--	struct udevice *dev;
--	int ret;
--
--	if (!CONFIG_IS_ENABLED(LED))
--		return 0;
--
--	ret = get_led(&dev, "u-boot,boot-led");
--	if (ret)
--		return ret;
--
--	ret = led_set_state(dev, cmd);
--	return ret;
--}
--
- static void __maybe_unused led_error_blink(u32 nb_blink)
- {
- 	int ret;
-@@ -292,9 +257,9 @@ static void __maybe_unused led_error_blink(u32 nb_blink)
- 		return;
- 
- 	if (CONFIG_IS_ENABLED(LED)) {
--		ret = get_led(&led, "u-boot,error-led");
-+		ret = led_get_by_label("led-red", &led);
- 		if (!ret) {
--			/* make u-boot,error-led blinking */
-+			/* make led-red blinking */
- 			/* if U32_MAX and 125ms interval, for 17.02 years */
- 			for (i = 0; i < 2 * nb_blink; i++) {
- 				led_set_state(led, LEDST_TOGGLE);
-@@ -418,7 +383,7 @@ static int board_check_usb_power(void)
- 	 * If highest and lowest value are either both below
- 	 * USB_LOW_THRESHOLD_UV or both above USB_LOW_THRESHOLD_UV, that
- 	 * means USB TYPE-C is in unattached mode, this is an issue, make
--	 * u-boot,error-led blinking and stop boot process.
-+	 * led-red blinking and stop boot process.
- 	 */
- 	if ((max_uV > USB_LOW_THRESHOLD_UV &&
- 	     min_uV > USB_LOW_THRESHOLD_UV) ||
-@@ -672,8 +637,6 @@ int board_init(void)
- 	if (IS_ENABLED(CONFIG_ARMV7_NONSEC))
- 		sysconf_init();
- 
--	setup_led(LEDST_ON);
--
- #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- 	efi_guid_t image_type_guid = STM32MP_FIP_IMAGE_GUID;
- 
-@@ -736,7 +699,7 @@ int board_late_init(void)
- 
- void board_quiesce_devices(void)
- {
--	setup_led(LEDST_OFF);
-+	led_boot_off();
- }
- 
- enum env_location env_get_location(enum env_operation op, int prio)
+diff --git a/configs/stm32mp13_defconfig b/configs/stm32mp13_defconfig
+index 3283e910219..7367525dda0 100644
+--- a/configs/stm32mp13_defconfig
++++ b/configs/stm32mp13_defconfig
+@@ -72,6 +72,7 @@ CONFIG_GPIO_HOG=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_STM32F7=y
+ CONFIG_LED=y
++CONFIG_LED_BOOT=y
+ CONFIG_LED_GPIO=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_STM32_SDMMC2=y
 -- 
 2.43.0
 
