@@ -4,84 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE01DCCD187
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 09:30:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 780F6CCD187
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 09:48:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76F78844BA;
-	Thu,  9 Oct 2025 11:30:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D6D818448F;
+	Thu,  9 Oct 2025 11:48:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P4M1wlH1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Eh3rkHYG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DE0A844C0; Thu,  9 Oct 2025 11:30:30 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 383AA84497; Thu,  9 Oct 2025 11:48:34 +0200 (CEST)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6D45844BA
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 11:30:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F37048447E
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 11:48:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-4259247208aso5473205ab.3
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 02:30:27 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-46e47cca387so7663695e9.3
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 02:48:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760002226; x=1760607026; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rg3XCPOuzGZGrhxAaGybzGEJeEqQYd0mgfaeyweCyr4=;
- b=P4M1wlH1VUqo+NeT8bX1fNoNlUg0BRAeEWBkrTHXbxZBSAQPOIbtfMb7I71/KAttBf
- A8N1I/xvGOrtiB1vZ/9s4r0IyJl7ybmCnDU3pY0BLoksuQYHlTxb13qu4tmBiWpPdB/x
- cHZXXV7hC2W0s/+dfU0a/NuHXiNxFPfVajVoc=
+ d=linaro.org; s=google; t=1760003311; x=1760608111; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=HFZ6NQPR9ohq4smQ1H6LMQIhaRZmzpvpJNp9b11M69k=;
+ b=Eh3rkHYGUu38yVwWEAity+05fODfsX/iLUbOftFDHdyr3CQ1aHhXhmMg7dBcN/Bayc
+ ywexZ+Mr8O/j0z96zB3Fk3A8G7TbqzpK/qUhm+Njq8EpEl5s+ii6JuebnjMahgJ0xckB
+ o/0tsVYAwWTiWjWlGOWe3+on7QdjxxUXodfXOaHbsvKFg5hhl3XO7TKpTy/c7CElvgwG
+ H7Qh4JroD8nO8kZMvzvtHX9N6PqDlyWg7H/H6xjAYxNx631QN87+BlSexPRXmRc/Vydg
+ Oe1OmsUfgD22rCrvmsvKx/EhYnVSWLf6CbnvbSHC0nBN8kn5vaNgE711FCbHGlbl/9GW
+ qBjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760002226; x=1760607026;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rg3XCPOuzGZGrhxAaGybzGEJeEqQYd0mgfaeyweCyr4=;
- b=PGplNuciOGcDmCwVSorGxEge0q0ZFXJnBjljD0BkYi7yZXuxmaWAzZQjlNb3cjmuId
- NA/PHbtyBHbqe2qBwwzhn2WGugWfYCThsoKNcbogkvPfgOjrt9Hz9pSf5omYUs598d9w
- N/MOw0qnVPnWwaAcP36L/wcmMst2cTABTJ0P8gKbfQ+awAzGmZILSF1DtZvZ7VEZwiEv
- paWmKQDOMOJnb8jL8OfLUwbvCi4JNdxSknfiVsoba9oBLWcZD2btsl8VWX/8HoCSuFuv
- EOUYNmSpBUNkKb4uyVvOTwdwPaQbWsQS7lhviYdzh8fQLmQG18rgRBT5fcObwskYnJME
- Xm6A==
-X-Gm-Message-State: AOJu0YzowUwlScLbmkO4UkRUb88eRva2XbyKIN0RNwlnXwAaa5ccDLWD
- AbsA4P5+JYC/IMJ/l/9RZgAZ9B/uwkC8ER/SRY58ZvFc3+QoLmCFonqmFJBoYWwumHM7hF2WfCU
- AdMww8W1k
-X-Gm-Gg: ASbGncuVzb0voRteD5A5glzTrpVNH1vL0kTHW5a0mmWiSczkpAHrAgVb42R73iUeZp+
- eZ6L4ftJ6R09X1ZpFz8m1m129jOnm/BXKvhxwXnBxxUpWJdFKOsLUM+fKP/HWUTuRYdn2TBLTsD
- JhQxw71Y53+10WcS7BXXtDUF9ksnbxQHC3F2uDkVwGldPYgnDZZm9vq/iCBOWr2uZVpbQW2GKwA
- y+tadJARBAS0YyMi251rNf6QuDrSI94x49M75UGefipUjLOU7S83mCvlaheRw3v5SNfVQAxWK3Q
- OmRYaQO4NEOLwDB4Tu0RT52UQEgoYZ8Oi9Vn8xxdRFebnQVFmFiX18jNwafk0i93s3UUaZL8G1h
- 75N1CWTZDeyKXL244Jcw77j5R5t+Zj0T1YLKzgygfRGwGL7APFEA=
-X-Google-Smtp-Source: AGHT+IHXDjlFObZ9vFDGfteFbnftC3KlFO8YRcwaYEsqCcw8LZ5gDJa1AEF2S+ZuNG3Sd3fqq15/0A==
-X-Received: by 2002:a05:6e02:378f:b0:42d:8c18:94d3 with SMTP id
- e9e14a558f8ab-42f87419d18mr70079265ab.29.1760002226015; 
- Thu, 09 Oct 2025 02:30:26 -0700 (PDT)
-Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-57b5ea300f7sm7839341173.16.2025.10.09.02.30.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 02:30:25 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
- Simon Glass <sjg@chromium.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>
-Subject: [PATCH v4 4/4] boot: Move preparing bootdev into a function
-Date: Thu,  9 Oct 2025 03:29:55 -0600
-Message-ID: <20251009092959.260121-5-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251009092959.260121-1-sjg@chromium.org>
-References: <20251009092959.260121-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1760003311; x=1760608111;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HFZ6NQPR9ohq4smQ1H6LMQIhaRZmzpvpJNp9b11M69k=;
+ b=XGXtyEjnExdZlwFkRYE69e5/jZxVCGaFCF23A9NcQ1p5J9/OclRA00+Wox88GI44aL
+ /SPepqFP4IXdwn9GEY3kCpZjMU5Z99n4tpjLcy0EzRmriGLzmjP8q8vmr7IL7Amfbb/z
+ RRRrO4QF0rtcYwj+OLwHttWZfnn4F6nVH2hH7I87+XKKKfib5QnCIs3ANqKkPauTUfac
+ ZmB7C4nnQer4nLuMJEo3hhlLQCnRmUsbZra7Uof2YshNk8u6oARCm8tANnuIavaiUoVO
+ cIKLHAzBH0zTgAXCohUEoxVz9XgTH7rtx0rhOdv1Q5CMzckzkXGDQbYpwnv/vMEBKT0m
+ s+hA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXauoCVtVlRIv/fYOqbKXdeykoorG0Y4e2HcjrztiL9jPIugl8WXU91hS7R08XpW1HMnS7sQ2c=@lists.denx.de
+X-Gm-Message-State: AOJu0YzkRJnm4gWm5/6TxlsBepTMosvNcL1zp/sI7u7szR2eRY1knpLT
+ obWXdNsRotKcIge0MRcpiiou7p+V0atPQSaxm7cQk9nJKQqyheREC/7MQNRvwQihsFo=
+X-Gm-Gg: ASbGncsmz2mCX2ntzkEkjPcAAzVmjSUXC6/YB9OpD1nNbznsFihv9P39fRfJei5yxx9
+ pG0IepWGr8MefPAJJCBgnZXgeGl217Ed9l9C1PBPD0+OcDjaiuLhUQL4TpavvJbBaebj5bBnaqP
+ gxzSYf/33mnK2FuEjAf/LmVuj3FWhwOh2Bp+TFo7msUXFA+rbJ2yn5Vucz649pW+5kZH1WI075p
+ sgVjYvT66JHY3mHwXj+3VgVGCBKjZwGZLngPlBu5yb3KUJX+tbsYzrTp//sMcSGSU95Q+iWMomP
+ MU0Gv4jY8GV9c23QjBApPQ25ktYY0ZeJp28OIXPMrSY5o//ypNOwZCo7hXzFbjvYrhjsCOiBCjZ
+ Onpda1P+gJBwelJ5b2CYViilzPSdH8zbAjwMQ5kv5i4fdCHamlHrMpu7eTCD8rppTeJ+SLFEsga
+ Rys3E=
+X-Google-Smtp-Source: AGHT+IE99wlAOKHR23AhIhfltoE9nL1Br2iPr+1HEQHtnCXi1bsn6hvhykE9ruSbEOmUBI0rkGQdLg==
+X-Received: by 2002:a05:600c:83ce:b0:46e:394b:49b7 with SMTP id
+ 5b1f17b1804b1-46fa9b16597mr42198285e9.37.1760003311412; 
+ Thu, 09 Oct 2025 02:48:31 -0700 (PDT)
+Received: from [192.168.0.36] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46fa9d6269asm76530035e9.15.2025.10.09.02.48.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Oct 2025 02:48:30 -0700 (PDT)
+Message-ID: <e4db9bab-9de2-4810-ab19-7654be60dae5@linaro.org>
+Date: Thu, 9 Oct 2025 12:48:29 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nand: atmel: Rework ATMEL_EBI and DM_NAND_ATMEL
+ interaction
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20250926153136.3680867-1-trini@konsulko.com>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20250926153136.3680867-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,76 +104,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The code at the end of iter_inc() is already somewhat tortuous. Before
-making it worse, move it into a function.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
 
-(no changes since v1)
+On 9/26/25 18:31, Tom Rini wrote:
+> The way that the NAND driver under DM_NAND_ATMEL is probed is by the
+> dummy memory driver controlled by ATMEL_EBI. Rather than require that
+> for NAND to work both be enabled, make NAND select ATMEL_EBI and do not
+> prompt for ATMEL_EBI as it only triggers the probe for NAND.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Eugen Hristev <eugen.hristev@linaro.org>
+> Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> Cc: Michael Trimarchi <michael@amarulasolutions.com>
+> ---
+>  drivers/memory/Kconfig       | 2 +-
+>  drivers/mtd/nand/raw/Kconfig | 1 +
+>  2 files changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
+> index eaee739c6aab..591d9d9c6569 100644
+> --- a/drivers/memory/Kconfig
+> +++ b/drivers/memory/Kconfig
+> @@ -14,7 +14,7 @@ config MEMORY
+>  	  For now this uclass has no methods yet.
+>  
+>  config ATMEL_EBI
+> -	bool "Support for Atmel EBI"
+> +	bool
+>  	help
+>  	  Driver for Atmel EBI controller. This is a dummy
+>  	  driver. Doesn't provide an access to EBI controller. Select
+> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+> index aa4bb2a0595c..f083113486ed 100644
+> --- a/drivers/mtd/nand/raw/Kconfig
+> +++ b/drivers/mtd/nand/raw/Kconfig
+> @@ -50,6 +50,7 @@ config SYS_NAND_NO_SUBPAGE_WRITE
+>  config DM_NAND_ATMEL
+>  	bool "Support Atmel NAND controller with DM support"
+>  	depends on ARCH_AT91
 
- boot/bootflow.c | 40 +++++++++++++++++++++++++++++-----------
- 1 file changed, 29 insertions(+), 11 deletions(-)
+Which branch is this patch based on ?
+I have a conflict because this line ^^ is missing in master ("depends on
+ARCH_AT91")
+Is there another patch for that ?
 
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index de69e27bec7..b1eae28b6fd 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -178,6 +178,32 @@ static void scan_next_in_uclass(struct udevice **devp)
- 	*devp = dev;
- }
- 
-+/**
-+ * prepare_bootdev() - Get ready to use a bootdev
-+ *
-+ * @iter: Bootflow iterator being used
-+ * @dev: UCLASS_BOOTDEV device to use
-+ * @method_flags: Method flag for the bootdev
-+ * Return 0 if OK, -ve if the bootdev failed to probe
-+ */
-+static int prepare_bootdev(struct bootflow_iter *iter, struct udevice *dev,
-+			   int method_flags)
-+{
-+	int ret;
-+
-+	/*
-+	 * Probe the bootdev. This does not probe any attached block device,
-+	 * since they are siblings
-+	 */
-+	ret = device_probe(dev);
-+	log_debug("probe %s %d\n", dev->name, ret);
-+	if (ret)
-+		return log_msg_ret("probe", ret);
-+	bootflow_iter_set_dev(iter, dev, method_flags);
-+
-+	return 0;
-+}
-+
- /**
-  * iter_incr() - Move to the next item (method, part, bootdev)
-  *
-@@ -321,18 +347,10 @@ static int iter_incr(struct bootflow_iter *iter)
- 		}
- 		log_debug("ret=%d, dev=%p %s\n", ret, dev,
- 			  dev ? dev->name : "none");
--		if (ret) {
-+		if (ret)
- 			bootflow_iter_set_dev(iter, NULL, 0);
--		} else {
--			/*
--			 * Probe the bootdev. This does not probe any attached
--			 * block device, since they are siblings
--			 */
--			ret = device_probe(dev);
--			log_debug("probe %s %d\n", dev->name, ret);
--			if (!log_msg_ret("probe", ret))
--				bootflow_iter_set_dev(iter, dev, method_flags);
--		}
-+		else
-+			ret = prepare_bootdev(iter, dev, method_flags);
- 	}
- 
- 	/* if there are no more bootdevs, give up */
--- 
-2.43.0
+> +	select ATMEL_EBI
+>  	select SYS_NAND_SELF_INIT
+>  	imply SYS_NAND_USE_FLASH_BBT
+>  	help
 
