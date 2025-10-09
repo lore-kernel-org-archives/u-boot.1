@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A8E0CCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 13:18:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3FFCCCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 13:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2183C8441D;
-	Thu,  9 Oct 2025 15:18:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 67055844A9;
+	Thu,  9 Oct 2025 15:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R8PcT7rp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tgHS/nSQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC66A844F7; Thu,  9 Oct 2025 15:18:18 +0200 (CEST)
-Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
- [IPv6:2607:f8b0:4864:20::e2c])
+ id 5F09B84509; Thu,  9 Oct 2025 15:18:19 +0200 (CEST)
+Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
+ [IPv6:2607:f8b0:4864:20::e2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D4E2843E8
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 15:18:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4278C84461
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 15:18:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-vs1-xe2c.google.com with SMTP id
- ada2fe7eead31-5ce093debf6so961996137.1
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 06:18:16 -0700 (PDT)
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-5c7fda918feso1145179137.0
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 06:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760015895; x=1760620695; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3Mi4KYTAl+zu9v8DLzcZVMf8EVaUqa6zDLgsGnqYpZk=;
- b=R8PcT7rpnQu6w6vzBZcDy/OzD39Ej89tuYEfAueH8MiL2W4eh16FZh+iECxLiVS2tS
- U4hIkLiEM73LIHUAyPm+8zVW6mDYdkslpID46y2UiUfhKRLjYN59R4+wsmr2SXvU60XS
- CKewqfKDhfD+kfgN0KyaILP6IR7ect5Uz3GqHg34Tu8TH3SnV4Pj9cZCW8q1gm0U+pj6
- j+uNWzXL9lyCLJxiu84Y5cYQ16cURdGpQc0OqeXDK5RFwv1eOQKmbUoq8FWWuy3PdkUR
- Gkbkjap9JpcEE+pI6bXJuVlL/YLz/S5u8JzKwKwfYKPATknAOKKTfSPdYsFPdIAoW7G1
- Ge/Q==
+ d=linaro.org; s=google; t=1760015896; x=1760620696; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=t0meANmABfpOyAjp5EPSfynnjLxzjF1QODoPdexKXtc=;
+ b=tgHS/nSQdiSNoMsjNFgaIEI7aoek3Gvx0aatpFPFmDEhr/erGV7jvjmKCVxBpPtYcG
+ AzeJaVVUL2/i1UJi0GtbTsceM7gZosSTS+GkxJAH2tDkBim00nPDAnVKegSjiVsI7AGT
+ IzC6jLimsKezjPIJbcqZlzSOpnJ4AiJIN45mvRAohlT508V2idIzaPY27H+KECH6yuwy
+ YXZC0+iakE+kpDrZEc8r3cVWTE6kM4Nbl4OD3hyG6JSw7JOH+GBrsiLNMA09FVFHExjo
+ FWOYT+NralTd3c4SKn0IgBWXcSOHpsiIUjstKE7oGXdYh5QHUa8JUCzbAcYhBIDRJBHn
+ IpZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760015895; x=1760620695;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3Mi4KYTAl+zu9v8DLzcZVMf8EVaUqa6zDLgsGnqYpZk=;
- b=xLhOcg9/yIEn0HZ3/vmsbQcJ0ctdw8mk7xzrFJkQ7XivQqvPEATBp9WH5w5CBhXD5E
- qcZqdnpu6deEV8bx4AwfPuOuxxayPTRA/fEZ5rwknvv87/EYlQezJLqRvOQGQ6UGWyXK
- OwQncPaW//V7HXvydwl0YdxOABfeHZ6Xocr0GzCo1w5yViVmq474ysKyVPncTVx/sbqU
- PP/4f1WdTyfCb0SYQ9OrAuECbKUPQCjqtLsLaZX+UuY3I5NaShquRfOswyzbfa8RE7/T
- 6dJMa4wzv1UJNoX6Y+6SKw0D+34oXbXaHSZ3EqSx2iQjbvyT5wsOYoTr02tNuRRNcsoG
- h4bg==
-X-Gm-Message-State: AOJu0YxsBMs6QU0Xk1w0Y8G5oMOyyl4IEW9vW0BO51SPbebUUV5xe+dM
- KxOKJQ3J7mcedn7vDlNny9uWsvT0lsU+B8OJM7RtC+cPYlym7N4FkecYj90dJf8CTRw=
-X-Gm-Gg: ASbGncs0KLQq8oPeJmwVwKqi5EzGSZzcFt6GCA9TCNXvd2VI4tO7PNqJUnDBLAxdGlU
- lW+bF0IsvrANUdv62mZTo+42CMuzlClptNvptR4AbOlRCj4mFoY4coaWoZ7a/za4l1QgxkFh7kD
- mYW6Olo9WZJ91xDWE951gV+c9vVlLRXHkz0UsXoKQ5vmi5kixjOQR+EfqO/dOWLG1Jh3P3SeZdw
- qPaG2HEyOCh7b0QjlqxNafNve0E97w14xv/FQDkwpt1smR1p4dM3UkgQ858J4XmoRCqeTRDR5vO
- mqcdjwoqOTfmUbOQdNnb33fTHhjAncE4jhWveETOcMLk8GtakZCot0l7FHmkXqnkW6V4M0bG/y6
- WHbig74Yru1QQE+r+HzHsYBIQLoOn8xAy1X/gCS8Kwh7rEnugMKUQsMIz4tRgTuzS4eBvqUkb/g
- WLhPr29sEc
-X-Google-Smtp-Source: AGHT+IFKyFkctHsoIqA7Vzqf0ybCJheFqlQD0gyUqZzdk392gfoXQ4oXaGZ38drlllJdIpvx7S2HcQ==
-X-Received: by 2002:a05:6102:a4e:b0:528:92b8:6c3e with SMTP id
- ada2fe7eead31-5d5e21ce95amr3560796137.1.1760015895003; 
- Thu, 09 Oct 2025 06:18:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1760015896; x=1760620696;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=t0meANmABfpOyAjp5EPSfynnjLxzjF1QODoPdexKXtc=;
+ b=iXo/Ik6URu9Ixu24JzXQlMXehh/PWLyAp5Bp7P/d7LViEwcCmXt6QI5V24jBpvhVVD
+ pKV2C+ZPForNpggJxM38lHvz8nh4gc/4nUMNpByZDQXy6uqTwSqJ0O0VAcfHItCIUBAn
+ 0d0nlDVfLWfmPes186WVOvTOBr9c/NECcXbmVMDWubUa+EInEY/CvCB1x8n86xIGGapx
+ FQcy7loNK1xL3uxkQFwRPnleWd3v+zsNOv6zgrIpI/VetVKjYuje7Wo3ZDfBtzzsJqg7
+ ya9Pkp2AggIjEopbibiscYabTF0UKY4ZRmuUGWcYSBlvZVWWo040RmJAg06H7ymdNVR2
+ EqPA==
+X-Gm-Message-State: AOJu0Yx40gaIy8c+fGxVAHavvKAHJrQHyL5XYm+NK3aKPwxtp9AACWu0
+ aCoCkpBsT5fTA4wPInKHEavnuov8NUihyrMa6P98sw6G50rNbWyVk7y0H9+CuFOTMpv16hco5SJ
+ VflSQ
+X-Gm-Gg: ASbGnctjy5J+NnHprrL+phsAFv9bk0I+x6oMK+GStno8yTPptbzm1MWP2pWb850sEzB
+ qdl7F6ntXl2sipCzmU0GSnOYl5Koj92yflBkTsb8Qden2wAzvzD1eW3MnYlwVRXKpfuh9XSlpdv
+ R2bEAlyHGKpZ0rxRowf0MRse8lGKuMk29kcL4gwdRSoey+vpybi43OdhiH2VaBnX2pJmalg5Bfs
+ rs1G3pLhuTiyv45xUr/kryvBGX2aK3JtxCEhjdRGyfW1MoN7Sw6eyG/uPSkTjLRCXGJl2nKnm2u
+ fWuvJUKQGdvBCP5aDzAJGnS3LPVnSJBw8HAgKxVOsLuCCuScMftxpEE+jXO2svR7/50UNiDv6iv
+ yapbbVRIOD6jLExlksJQM4cokjpZLtEjZnvSzNOYsIqgnsNknJ21otAFHY72roJ7v1tNeiNH4Hg
+ DYxjcu6+qJdKZIOdynFiA=
+X-Google-Smtp-Source: AGHT+IFVVJHeGjPJLkqkg2u4yspJqk74Uys3OCQ6zH/PbRyIpagK/3WRAUFJIbHe0FtUmNWNNuulmg==
+X-Received: by 2002:a05:6102:3311:b0:5d5:f6ae:38f3 with SMTP id
+ ada2fe7eead31-5d5f6ae3ebcmr595646137.42.1760015896057; 
+ Thu, 09 Oct 2025 06:18:16 -0700 (PDT)
 Received: from jetm-rog-crosshair-hero-x870e.local ([177.93.10.181])
  by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-5d5d3835333sm2400604137.3.2025.10.09.06.18.14
+ ada2fe7eead31-5d5d3835333sm2400604137.3.2025.10.09.06.18.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 06:18:14 -0700 (PDT)
+ Thu, 09 Oct 2025 06:18:15 -0700 (PDT)
 From: Javier Tia <javier.tia@linaro.org>
-Subject: [PATCH v8 0/2] Improve disk image detection in efi_bootmgr
-Date: Thu, 09 Oct 2025 07:17:45 -0600
-Message-Id: <20251009-detect_disk_image_type-v8-0-a8b50a3b4acf@linaro.org>
+Date: Thu, 09 Oct 2025 07:17:46 -0600
+Subject: [PATCH v8 1/2] part: Export part_driver_lookup_type for external use
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAPm152gC/x3MSwqAIBRG4a3EHSeYFFhbiRDRv7pED1SiiPaeN
- PwG5zwUERiRuuKhgJMj71uGLgtys90mCPbZpKRqKim18EhwyXiOi+HVTjDpPiDqUdZWWe1b3VK
- Oj4CRr3/cD+/7AZHqZphoAAAA
-X-Change-ID: 20251008-detect_disk_image_type-4f04a2a8d989
+Message-Id: <20251009-detect_disk_image_type-v8-1-a8b50a3b4acf@linaro.org>
+References: <20251009-detect_disk_image_type-v8-0-a8b50a3b4acf@linaro.org>
+In-Reply-To: <20251009-detect_disk_image_type-v8-0-a8b50a3b4acf@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
@@ -102,59 +101,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enhances the process for identifying disk images within the EFI boot
-manager. Utilize part_driver_lookup_type() to verify the validity of a
-downloaded file as a disk image, rather than depending on file
-extensions.
+Make part_driver_lookup_type non-static so it can be used outside
+part.c. This allows external callers to determine the appropriate
+partition driver for a block device, enabling more flexible handling of
+partition types.
 
-part_driver_lookup_type() is now used in the prepare_loaded_image()
-function in the EFI boot manager to detect partitions on a block device
-created from a downloaded image. This allows the boot manager to boot
-from any disk image that can be recognized by a partition driver, not
-just ISO and IMG images.
-
-Update prepare_loaded_image() to create the ramdisk block device
-internally, obtain the blk_desc and use part_driver_lookup_type() to
-detect a valid partition table.
-
-In try_load_from_uri_path(), try prepare_loaded_image() first to detect
-disk images, and fall back to PE-COFF detection only if that fails.
-
-Include part.h in the EFI loader and export part_driver_lookup_type and
-add its prototype and documentation in include/part.h. This makes the
-partition-driver lookup available to other code paths that need to
-detect partition tables on a block descriptor.
-
----
-Changes in v8:
-- Cleanup part_driver_lookup_type history after being removed and added
-  again.
-- Passing CI: https://github.com/u-boot/u-boot/pull/816
-
-- v7 link: https://lore.kernel.org/u-boot/20250925224838.567562-1-javier.tia@linaro.org/
-- v6 link: https://lore.kernel.org/u-boot/20250924233120.454116-1-javier.tia@linaro.org/
-- v5 link: https://lore.kernel.org/u-boot/20250905172330.135550-1-javier.tia@linaro.org/
-- v4 link: https://lore.kernel.org/u-boot/20250903214417.431985-1-javier.tia@linaro.org/
-- v3 link: https://lore.kernel.org/u-boot/20250829155415.90634-1-javier.tia@linaro.org/
-- v2 link: https://lore.kernel.org/u-boot/20250808213627.649669-1-javier.tia@linaro.org/
-- v1 link: https://lore.kernel.org/u-boot/20250805162158.117876-1-javier.tia@linaro.org/
+Add a prototype and kernel-doc comment in part.h to document the
+function contract. Provide a stub inline implementation returning NULL
+when partition support is disabled, ensuring build consistency across
+configurations.
 
 Signed-off-by: Javier Tia <javier.tia@linaro.org>
-
 ---
-Javier Tia (2):
-      part: Export part_driver_lookup_type for external use
-      efi_loader: Improve disk image detection in efi_bootmgr
+ disk/part.c    | 18 +-----------------
+ include/part.h | 21 +++++++++++++++++++++
+ 2 files changed, 22 insertions(+), 17 deletions(-)
 
- disk/part.c                  | 18 +---------------
- include/part.h               | 21 +++++++++++++++++++
- lib/efi_loader/efi_bootmgr.c | 49 +++++++++++++++++++++++++++++++-------------
- 3 files changed, 57 insertions(+), 31 deletions(-)
----
-base-commit: 0ee639ff5af33342c6c2f4579e210d707abc9bc2
-change-id: 20251008-detect_disk_image_type-4f04a2a8d989
+diff --git a/disk/part.c b/disk/part.c
+index 66e2b3a7219..be2b45d5a29 100644
+--- a/disk/part.c
++++ b/disk/part.c
+@@ -47,23 +47,7 @@ static struct part_driver *part_driver_get_type(int part_type)
+ 	return NULL;
+ }
+ 
+-/**
+- * part_driver_lookup_type() - Look up the partition driver for a blk device
+- *
+- * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each parition driver
+- * against the blk device to see if there is a valid partition table acceptable
+- * to that driver.
+- *
+- * If @desc->part_type is already set, it just returns the driver for that
+- * type, without testing if the driver can find a valid partition on the
+- * descriptor.
+- *
+- * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
+- *
+- * @dev_desc: Device descriptor
+- * Return: Driver found, or NULL if none
+- */
+-static struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
++struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
+ {
+ 	struct part_driver *drv =
+ 		ll_entry_start(struct part_driver, part_driver);
+diff --git a/include/part.h b/include/part.h
+index b772fb34c8a..6caaa6526aa 100644
+--- a/include/part.h
++++ b/include/part.h
+@@ -727,6 +727,24 @@ int part_get_type_by_name(const char *name);
+  */
+ int part_get_bootable(struct blk_desc *desc);
+ 
++/**
++ * part_driver_lookup_type() - Look up the partition driver for a blk device
++ *
++ * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each partition driver
++ * against the blk device to see if there is a valid partition table acceptable
++ * to that driver.
++ *
++ * If @desc->part_type is already set, it just returns the driver for that
++ * type, without testing if the driver can find a valid partition on the
++ * descriptor.
++ *
++ * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
++ *
++ * @desc: Device descriptor
++ * Return: Driver found, or NULL if none
++ */
++struct part_driver *part_driver_lookup_type(struct blk_desc *desc);
++
+ #else
+ static inline int part_driver_get_count(void)
+ { return 0; }
+@@ -737,6 +755,9 @@ static inline struct part_driver *part_driver_get_first(void)
+ static inline bool part_get_bootable(struct blk_desc *desc)
+ { return false; }
+ 
++static inline struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
++{ return NULL; }
++
+ #endif /* CONFIG_PARTITIONS */
+ 
+ #endif /* _PART_H */
 
-Best regards,
 -- 
-Javier Tia <javier.tia@linaro.org>
+2.51.0
 
