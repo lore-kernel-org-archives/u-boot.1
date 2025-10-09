@@ -4,61 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE466CCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 12:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35293CCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 12:58:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D3C083EAC;
-	Thu,  9 Oct 2025 14:53:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id B6300840F5;
+	Thu,  9 Oct 2025 14:58:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=qti.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="XClkXuW6";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="WlNKU1NB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26B7D840E4; Thu,  9 Oct 2025 14:53:06 +0200 (CEST)
-Received: from sea.source.kernel.org (sea.source.kernel.org
- [IPv6:2600:3c0a:e001:78e:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 291268393C; Thu,  9 Oct 2025 08:05:59 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D396E83A4B
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 14:53:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id CD46A8393C
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 08:05:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=qti.qualcomm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sea.source.kernel.org (Postfix) with ESMTP id 5246B48E32;
- Thu,  9 Oct 2025 12:53:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B15F1C4CEE7;
- Thu,  9 Oct 2025 12:53:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760014382;
- bh=KBe7UB7psDtn63FItLmNiQ7x1rj+YiwCIVJaeeqlDkU=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=XClkXuW6UFosLBGu+rO+80yOMg24wVTthfesS13CCJfgAiQg32/W5ZGWFD0po6eWM
- Gl/4ngHms7EnlyIIp20o9ANO8JYMM9pgY2xzuqstiat1JaS9d/z1fHvDHO+OuC4nWx
- VXru5WmhjcmpQ2UQZg/7laUYnuuzy0cJY84r6XP8bjoaEkzXHT6dglqjcPVWcIcTNd
- nvJGZjnhG0MMzAq/NH+mT7jx244sUZUMtYrCuuQZ/2HZgnhHVqAtvCuGjTga8d1ohZ
- suTX+0LTq9/0ogQt3/B3XtSkKD5+DHW0udrKTZjhurOvcnd4TJiKb+f2jJhZMVBeOJ
- bYoL99Sy0JZmQ==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, Guillaume La Roque
- <glaroque@baylibre.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Maximilian Brune
- <maximilian.brune@9elements.com>, Moritz Fischer <moritzf@google.com>, Sam
- Protsenko <semen.protsenko@linaro.org>
-Subject: Re: [PATCH v4 1/4] boot: Improve comments related to global bootmeths
-In-Reply-To: <20251009092959.260121-2-sjg@chromium.org>
-References: <20251009092959.260121-1-sjg@chromium.org>
- <20251009092959.260121-2-sjg@chromium.org>
-Date: Thu, 09 Oct 2025 14:52:59 +0200
-Message-ID: <87347sw82c.fsf@kernel.org>
+ spf=pass smtp.mailfrom=venkyada@qualcomm.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 598I5cNS002380
+ for <u-boot@lists.denx.de>; Thu, 9 Oct 2025 06:05:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=vwQyPEjGYUzHe+b9w4SAgoH2RmIyBuAqpk4
+ PxJkeyTE=; b=WlNKU1NB9f72pjHq/r1/8hYn6OUC5dNztHwf2k2kdFBCUhIQ/T6
+ rYXplK4h3tYmq0D5Ayb4COGET7utp5MyfuVRGXrG2kn/5Du4denbHQtPJXNQJoMC
+ smAEA6shHRD/WIXbXbqqDWSlqbn2JxeDwHznwmPvGDvUtFZBfSpt9Xqu2wO9bpYp
+ N5CQqXWIVLSL7ocPz2Bgh/rEucfpbOUz/1HhzfnquURxVfuwu8389jx0+Uzv/Kh1
+ YF8aY7hU1WcXYhKzr6qB4fXG0DAOVhBZbxOW6lNwYJBgAD8YPeF+VIlcAbUKqa2X
+ k+ArtfBdZEJyn55ZpeH0aEhdLjGnVJVqvNg==
+Received: from apblrppmta01.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 49nv4ksnvs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 06:05:54 +0000 (GMT)
+Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
+ by APBLRPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 59965pQm004236
+ for <u-boot@lists.denx.de>; Thu, 9 Oct 2025 06:05:51 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 49jvnmb95x-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT)
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 06:05:51 +0000
+Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com
+ [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 59965prS004231
+ for <u-boot@lists.denx.de>; Thu, 9 Oct 2025 06:05:51 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-venkyada-hyd.qualcomm.com
+ [10.147.253.48])
+ by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 59965pjK004230
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 09 Oct 2025 06:05:51 +0000
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4799199)
+ id 271115C3; Thu,  9 Oct 2025 11:35:50 +0530 (+0530)
+From: Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>
+To: u-boot@lists.denx.de
+Cc: venkyada@qti.qualcomm.com
+Subject: [PATCH] .mailmap: update e-mail address for Abbarapu Venkatesh Yadav
+Date: Thu,  9 Oct 2025 11:35:46 +0530
+Message-Id: <20251009060546.1596688-1-venkyada@qti.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA4MDEyMSBTYWx0ZWRfX/8HwBtSHbqxD
+ KGZHaEFP0jYG4J+aAXB/rBCp8LRwafpuDHVM4pHskHF0be332lXQaIsgvrLuT0BRCJl1IC+W87U
+ Aq/su36Uu4UB1Ekd02Ea/McvjwhXcX9qo8QhYVhoHe2tMDKcPn8NJgDWfZMBPLsV78Vcyd/23vj
+ d2+P7ecF/7IJSe1Z4KMQ6sCc41X2JYZz6IwjC6oA0AdX13YCjONI74cQbC7O+iGZ35sihCMm0tm
+ 2SrhZNEdgTt98aQW/xbOlRpb5j9MWmsUCaXYdBkuRLeAZouRDSd4M8byBx3mwmfVszNbpIoIr8H
+ BoB6gU/f+2PYUljOtrVUOck/E7QjsSAE3cQmbNYrbf/oUxUxX5Eb9meTzIGeUDRLLvhfCX7HppX
+ XOcvlsg47/q2DllLTncOhsbfERm9Sg==
+X-Authority-Analysis: v=2.4 cv=CbcFJbrl c=1 sm=1 tr=0 ts=68e750c2 cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=x6icFKpwvdMA:10 a=EUspDBNiAAAA:8 a=k-42gJp3AAAA:8 a=sozttTNsAAAA:8
+ a=zd2uoN0lAAAA:8 a=Am4ss40yAAAA:8 a=6ohNodAXAAAA:8 a=YNz4dp2XrEg6_m3QogAA:9
+ a=uCSXFHLys93vLW5PjgO_:22 a=lf-hbUz_c89dky27wAWH:22 a=0gLUg1G2xj6MhZ7RLP3J:22
+X-Proofpoint-GUID: jeH7CjoLGJQgA8imb4rfMs-L9QXuMwE9
+X-Proofpoint-ORIG-GUID: jeH7CjoLGJQgA8imb4rfMs-L9QXuMwE9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-09_01,2025-10-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 priorityscore=1501 malwarescore=0 spamscore=0 impostorscore=0
+ lowpriorityscore=0 bulkscore=0 clxscore=1011 phishscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510080121
+X-Mailman-Approved-At: Thu, 09 Oct 2025 14:58:33 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,82 +115,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Update e-mail address.
 
-Thank you for the patch.
+Signed-off-by: Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>
+---
+ .mailmap | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Thu, Oct 09, 2025 at 03:29, Simon Glass <sjg@chromium.org> wrote:
+diff --git a/.mailmap b/.mailmap
+index f15697ca2df..f1b93d168e9 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -140,7 +140,7 @@ Tom Rini <trini@konsulko.com> <trini@ti.com>
+ Tomas Thoresen <tomas.thoresen@amd.com> <tomast@xilinx.com>
+ TsiChung Liew <Tsi-Chung.Liew@freescale.com>
+ Varalaxmi Bingi <varalaxmi.bingi@amd.com> <varalaxmi.bingi@xilinx.com>
+-Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com> <venkatesh.abbarapu@xilinx.com>
++Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>
+ Vikhyat Goyal <vikhyat.goyal@amd.com> <vikhyat.goyal@xilinx.com>
+ Vishal Patel <vishal.patel@amd.com> <vishal.patel@xilinx.com>
+ Wolfgang Denk <wd@denx.de> <wd@atlas.denx.de>
+-- 
+2.34.1
 
-> Add a few comments about global bootmeths and first_glob_method
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-> ---
->
-> (no changes since v3)
->
-> Changes in v3:
-> - Drop the spacing changes
->
->  boot/bootflow.c        | 1 +
->  boot/bootmeth-uclass.c | 1 +
->  include/bootflow.h     | 3 ++-
->  test/boot/bootflow.c   | 2 +-
->  4 files changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/bootflow.c b/boot/bootflow.c
-> index d79f303486d..15df7069209 100644
-> --- a/boot/bootflow.c
-> +++ b/boot/bootflow.c
-> @@ -344,6 +344,7 @@ static int bootflow_check(struct bootflow_iter *iter, struct bootflow *bflow)
->  	struct udevice *dev;
->  	int ret;
->  
-> +	/* handle global bootmeths if needed */
->  	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global) {
->  		bootflow_iter_set_dev(iter, NULL, 0);
->  		ret = bootmeth_get_bootflow(iter->method, bflow);
-> diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> index 188f6ea1895..bb2dd8447cf 100644
-> --- a/boot/bootmeth-uclass.c
-> +++ b/boot/bootmeth-uclass.c
-> @@ -204,6 +204,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *iter, bool include_global)
->  		goto err_order;
->  	}
->  
-> +	/* start with the global bootmeths */
->  	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && include_global &&
->  	    iter->first_glob_method != -1 && iter->first_glob_method != count) {
->  		iter->cur_method = iter->first_glob_method;
-> diff --git a/include/bootflow.h b/include/bootflow.h
-> index 32422067723..2ef6eb25cf5 100644
-> --- a/include/bootflow.h
-> +++ b/include/bootflow.h
-> @@ -250,7 +250,8 @@ enum bootflow_meth_flags_t {
->   * @cur_label: Current label being processed
->   * @num_methods: Number of bootmeth devices in @method_order
->   * @cur_method: Current method number, an index into @method_order
-> - * @first_glob_method: First global method, if any, else -1
-> + * @first_glob_method: Index of first global method within @method_order[], if
-> + * any, else -1
->   * @cur_prio: Current priority being scanned
->   * @method_order: List of bootmeth devices to use, in order. The normal methods
->   *	appear first, then the global ones, if any
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> index 8de5a310add..7cd83dc7443 100644
-> --- a/test/boot/bootflow.c
-> +++ b/test/boot/bootflow.c
-> @@ -401,7 +401,7 @@ static int bootflow_system(struct unit_test_state *uts)
->  	ut_assertok(device_probe(dev));
->  	sandbox_set_fake_efi_mgr_dev(dev, true);
->  
-> -	/* We should get a single 'bootmgr' method right at the end */
-> +	/* We should get a single 'bootmgr' method at the start */
->  	bootstd_clear_glob();
->  	ut_assertok(run_command("bootflow scan -lH", 0));
->  	ut_assert_skip_to_line(
-> -- 
-> 2.43.0
