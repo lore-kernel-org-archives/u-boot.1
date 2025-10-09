@@ -4,43 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D346CCD183
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 17:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 740AACCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 17:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88DA9842D2;
-	Thu,  9 Oct 2025 19:17:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
+	by phobos.denx.de (Postfix) with ESMTP id DE383840F5;
+	Thu,  9 Oct 2025 19:24:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mse/P2ol";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E021B844AE; Thu,  9 Oct 2025 19:17:30 +0200 (CEST)
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E156784582; Thu,  9 Oct 2025 19:24:34 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 973E4840F5
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 19:17:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C850583F0A
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 19:24:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=sys-base.io
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paulk@sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
- by leonov.paulk.fr (Postfix) with ESMTPS id A42891F00056
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 17:17:27 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
- id 2E50EB0404E; Thu,  9 Oct 2025 17:17:27 +0000 (UTC)
-Received: from shepard (unknown [192.168.1.65])
- by laika.paulk.fr (Postfix) with ESMTP id 75749B0404C;
- Thu,  9 Oct 2025 17:17:00 +0000 (UTC)
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Chen-Yu Tsai <wens@csie.org>,
- Icenowy Zheng <icenowy@aosc.xyz>, Paul Kocialkowski <paulk@sys-base.io>
-Subject: [PATCH] sunxi: a133: Add NSI arbiter support to DRAM init
-Date: Thu,  9 Oct 2025 19:14:59 +0200
-Message-ID: <20251009171459.564592-1-paulk@sys-base.io>
-X-Mailer: git-send-email 2.50.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7ab0012e05aso841598a34.1
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 10:24:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760030671; x=1760635471; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dWH6pse1DJdZlFm4jiBM0KSbbZhSCPAhM0XgW/kpx5s=;
+ b=Mse/P2olpSohtvuS3VyAQ2gtz+HNTFxD62/6gkggZnPn2Xiwr3rbGNKggys2bfhJih
+ zGKlCnk2S3+H3pJsEUbfVT9z58GS0PvLm02TbWXpdNCwOnaSwmrdszj75iLsaJ3XaGbD
+ UHb7cJsbYOY0FAlLi4P9qc/cKR9NKR2FJ8t8o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760030671; x=1760635471;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dWH6pse1DJdZlFm4jiBM0KSbbZhSCPAhM0XgW/kpx5s=;
+ b=jATC7KIJqs/MdwSjnnyVuftnWGQ1NVgJplkju0BKKIZubhe8n75snVaTqO2oHVPlCA
+ 4pI0VzCeWL+elF5eP6nWk/OMymYnedhi3kgVPYLGZ9DxkauKjXekfASnOUSwobFI6EMC
+ LoainIdyIj4WVQCQO44g8GqVuWOi3Gb5D9txuTIVPcsplLyDSYpkGttCyt2fBVuWHPWC
+ PLj7fu/kGvrtoI3NmY+1k4JjSOmZ5uSSPw0JkoV6pUhiyAr3GmCjuGnm1dQ2VzxYJ75t
+ 0nu2YgsZdptVT6CBMO5c5zXKkDF68RI8gx7jHgmFFCXOEgTU3r+kjYvJo0Nv8zTA25NJ
+ nZkw==
+X-Gm-Message-State: AOJu0YzLupIqW3pobxARhNg9yzPCah4Vg5R4uO5OAt+J1GW7Kb/ljfQK
+ q6pTlB+rPmxU5CIUXQCaVkIjtNbdqoquZM4K+KVqSpQdCUBXOydFcOgMkOtMdbSlr/o=
+X-Gm-Gg: ASbGncvFJ52E3dhJGFJ6hYP9s5NTuZgIul6YBKtErLCJWfzUtBjS19anMoSTBcQmmaZ
+ zrmz2OqByOY+d9/oRNZR2O7mnVIfpbKkwmFKhwqqKauHPbYK4u9fn0ATwtuFAS3Jk/QKu0Ki91F
+ rKUocFim3GYMwOh3hYLsOKm/fOVVaB6z9tFeESwPfDOSDITsQVBZ7wPT+rUFaoPRaN54xUwCtNK
+ EGvv3UmAwsz8esLuijI+tvKQQFOq2Va3NtuS8LZynsjkv+KwkMBkgl31MTVYyPd/yAo4ABvDhnO
+ Snrjt9aSDRi61myNIaeoCEzoQy7jSAJX9A+XNmfFvNDbCaoahj9DEXHs9AyMFIhlOqs2xdGvkQk
+ vUplwTf5km3yFtTzFEBVRBt12PPjCIhohj7qoYi0u/naQAGdomz0X4QbIo+3rmkYxRg0VT+sFfZ
+ wRny1tlU8lIMcC2D6tT+Tl
+X-Google-Smtp-Source: AGHT+IGfOy/WdmalbOh3pqFURC2H2cLkCbdTvKzgH66bc3bBLcop74Jq0NCaLSQ11FpkS6SbMR9img==
+X-Received: by 2002:a05:6830:82d1:b0:7ae:b6cd:b0de with SMTP id
+ 46e09a7af769-7c0df78a0a4mr4941996a34.24.1760030671559; 
+ Thu, 09 Oct 2025 10:24:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c0f90fa46fsm28655a34.19.2025.10.09.10.24.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Oct 2025 10:24:30 -0700 (PDT)
+Date: Thu, 9 Oct 2025 11:24:28 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>
+Subject: Re: [PATCH v4 2/4] boot: Move obtaining the label into a common file
+Message-ID: <20251009172428.GP298503@bill-the-cat>
+References: <20251009092959.260121-1-sjg@chromium.org>
+ <20251009092959.260121-3-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="djoXKycTAXHyF3VR"
+Content-Disposition: inline
+In-Reply-To: <20251009092959.260121-3-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,199 +104,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In previous generations of Allwinner SoCs, the memory bus (MBUS) access
-arbitration was configured as part of the DRAM top registers. This is no
-longer the case starting with the A133, which has a dedicated base
-address for the bus arbiter that is now called NSI instead of MBUS.
 
-NSI appears to be a later iteration of MBUS design, with new dedicated
-registers that resemble the previous MBUS ones. Despite NSI not being
-documented in the manual, the A133 BSP includes a nsi driver with some
-description of the registers. Like previous generations, it implements
-port arbitration priority for DRAM access and also supports an optional
-QoS mode based on bandwidth limits.
+--djoXKycTAXHyF3VR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Configuring port arbitration priority is especially important to make
-sure that critical masters are not starved by other less important
-ones. This is especially the case with the display engine that needs
-to be able to fetch pixels in time for scanout and can easily be
-starved by CPU or GPU access.
+On Thu, Oct 09, 2025 at 03:29:53AM -0600, Simon Glass wrote:
 
-This introduces support for the NSI arbiter in the A133 DRAM init
-code. The list and order of available ports are highly SoC-specific
-and the default config values are set to match the BSP's defaults.
+> The 'bootflow list' command supports looking at the EFI device-path when
+> available. Move this piece into a common function so it can be used
+> elsewhere.
 
-Signed-off-by: Paul Kocialkowski <paulk@sys-base.io>
----
- .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  4 ++
- .../include/asm/arch-sunxi/dram_sun50i_a133.h | 50 ++++++++++++++
- arch/arm/mach-sunxi/dram_sun50i_a133.c        | 65 ++++++++++++++++++-
- 3 files changed, 118 insertions(+), 1 deletion(-)
+The point of this was to enable the show_bootflow->bootflow_show chnage,
+so should be dropped.
 
-diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
-index 2a9b086991c3..8e80c520706b 100644
---- a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
-+++ b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
-@@ -16,6 +16,10 @@
- 
- #define SUNXI_GIC400_BASE		0x03020000
- 
-+#ifdef CONFIG_MACH_SUN50I_A133
-+#define SUNXI_NSI_BASE			0x03100000
-+#endif
-+
- #ifdef CONFIG_MACH_SUN50I_H6
- #define SUNXI_DRAM_COM_BASE		0x04002000
- #define SUNXI_DRAM_CTL0_BASE		0x04003000
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-index a5fc6ad36560..a526e55e7bb9 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
-@@ -24,6 +24,56 @@ static inline int ns_to_t(int nanoseconds)
- 	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
- }
- 
-+#define SUNXI_NSI_PORT_PRI_CFG_RD(v)	(((v) & 0x3) << 2)
-+#define SUNXI_NSI_PORT_PRI_CFG_WR(v)	((v) & 0x3)
-+#define SUNXI_NSI_PRI_LOWEST		0
-+#define SUNXI_NSI_PRI_LOW		1
-+#define SUNXI_NSI_PRI_HIGH		2
-+#define SUNXI_NSI_PRI_HIGHEST		3
-+#define SUNXI_NSI_QOS_SEL_OUTPUT	0
-+#define SUNXI_NSI_QOS_SEL_INPUT		1
-+
-+struct sunxi_nsi_port_reg {
-+	u32 reserved0[4];
-+	u32 mode;
-+	u32 pri_cfg;
-+	u32 io_cfg;
-+	u32 reserved1[41];
-+	u32 enable;
-+	u32 clr;
-+	u32 cycle;
-+	u32 rq_rd;
-+	u32 rq_wr;
-+	u32 dt_rd;
-+	u32 dt_wr;
-+	u32 la_rd;
-+	u32 la_wr;
-+	u32 reserved2[71];
-+};
-+
-+struct sunxi_nsi_reg {
-+	struct sunxi_nsi_port_reg cpu;
-+	struct sunxi_nsi_port_reg gpu;
-+	struct sunxi_nsi_port_reg sd1;
-+	struct sunxi_nsi_port_reg mstg;
-+	struct sunxi_nsi_port_reg gmac0;
-+	struct sunxi_nsi_port_reg gmac1;
-+	struct sunxi_nsi_port_reg usb0;
-+	struct sunxi_nsi_port_reg usb1;
-+	struct sunxi_nsi_port_reg ndfc;
-+	struct sunxi_nsi_port_reg dmac;
-+	struct sunxi_nsi_port_reg ce;
-+	struct sunxi_nsi_port_reg de0;
-+	struct sunxi_nsi_port_reg de1;
-+	struct sunxi_nsi_port_reg ve;
-+	struct sunxi_nsi_port_reg csi;
-+	struct sunxi_nsi_port_reg isp;
-+	struct sunxi_nsi_port_reg g2d;
-+	struct sunxi_nsi_port_reg eink;
-+	struct sunxi_nsi_port_reg iommu;
-+	struct sunxi_nsi_port_reg cpus;
-+};
-+
- /* MBUS part is largely the same as in H6, except for one special register */
- #define MCTL_COM_UNK_008	0x008
- /* NOTE: This register has the same importance as mctl_ctl->clken in H616 */
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach-sunxi/dram_sun50i_a133.c
-index 1496f99624dd..6327f00ff5ea 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
-@@ -69,6 +69,64 @@ static const u8 phy_init[] = {
- };
- #endif
- 
-+static void nsi_configure_port(struct sunxi_nsi_port_reg *port, u8 pri,
-+			       u8 qos_sel)
-+{
-+	u32 pri_cfg;
-+
-+	/* QoS with bandwidth limits is not supported, disable it. */
-+	writel(0, &port->mode);
-+	writel(0, &port->enable);
-+
-+	/*
-+	 * QoS direction selection should not be in use, but set it nevertheless
-+	 * to match the BSP behavior (in case it has some other meaning).
-+	 */
-+	writel(qos_sel, &port->io_cfg);
-+
-+	/* Port priority is always active. */
-+	pri_cfg = SUNXI_NSI_PORT_PRI_CFG_RD(pri) |
-+		  SUNXI_NSI_PORT_PRI_CFG_WR(pri);
-+
-+	writel(pri_cfg, &port->pri_cfg);
-+}
-+
-+static void nsi_set_master_priority(void)
-+{
-+	struct sunxi_nsi_reg *nsi = (struct sunxi_nsi_reg *)SUNXI_NSI_BASE;
-+	struct {
-+		struct sunxi_nsi_port_reg *port;
-+		u8 pri;
-+		u8 qos_sel;
-+	} ports[] = {
-+		{ &nsi->cpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->gpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->sd1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->mstg,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->gmac0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->gmac1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->usb0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->usb1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->ndfc,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->dmac,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->ce,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->de0,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->de1,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->ve,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->csi,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->isp,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->g2d,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->eink,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+		{ &nsi->iommu,	SUNXI_NSI_PRI_HIGHEST,	SUNXI_NSI_QOS_SEL_INPUT },
-+		{ &nsi->cpus,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
-+	};
-+	unsigned int i;
-+
-+	for (i = 0; i < ARRAY_SIZE(ports); i++)
-+		nsi_configure_port(ports[i].port, ports[i].pri,
-+				   ports[i].qos_sel);
-+}
-+
- static void mctl_clk_init(u32 clk)
- {
- 	void * const ccm = (void *)SUNXI_CCM_BASE;
-@@ -1184,6 +1242,7 @@ static const struct dram_para para = {
- unsigned long sunxi_dram_init(void)
- {
- 	struct dram_config config;
-+	unsigned long size;
- 
- 	/* Writing to undocumented SYS_CFG area, according to user manual. */
- 	setbits_le32(0x03000160, BIT(8));
-@@ -1200,5 +1259,9 @@ unsigned long sunxi_dram_init(void)
- 	      1U << config.bankgrps, 1U << config.ranks,
- 	      16U << config.bus_full_width);
- 
--	return calculate_dram_size(&config);
-+	size = calculate_dram_size(&config);
-+
-+	nsi_set_master_priority();
-+
-+	return size;
- }
--- 
-2.50.1
+> Use 'usb' instead of 'usb_mass_storage' for usb so that it fits in the
+> column space.
+>=20
+> This updates the output from 'bootflow list'.
 
+And this is unrelated and should be its own patch. Wikipedia says USB
+MSC or UMS are the common short forms for USB Mass Storage devices, and
+we should use one of them to have the output be more precise (since we
+support USB networking devices for example).
+
+--=20
+Tom
+
+--djoXKycTAXHyF3VR
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOfvyAAKCRAr4qD1Cr/k
+CthhAQD9++X2o55uSScnKDJT1HpYo+7mFqrUxFE9HlX6mJwG6gD+JuVasrFIYbEh
+H8Z2Koy2ZR4l/36AnCdm3lECS4nhKAY=
+=lx7K
+-----END PGP SIGNATURE-----
+
+--djoXKycTAXHyF3VR--
