@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6321ACCD187
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:31:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C63BCCD185
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:51:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5A0884522;
-	Thu,  9 Oct 2025 16:31:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4AD3584308;
+	Thu,  9 Oct 2025 16:51:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZvtHwaKO";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="K/hIswks";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5200B84528; Thu,  9 Oct 2025 16:31:01 +0200 (CEST)
-Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
- [IPv6:2607:f8b0:4864:20::c29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4E06284408; Thu,  9 Oct 2025 16:50:59 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CD0184112
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:30:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C43D83F0A
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:50:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc29.google.com with SMTP id
- 006d021491bc7-6477f91713aso464210eaf.2
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 07:30:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760020258; x=1760625058; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=iKxAb5iVpmZ+X2kSgcm6lIvkM5dDs4VzQwN+UojGLxM=;
- b=ZvtHwaKOv/cWXowa5V23itlxzl0E0SjKfR3WEJutOU1Iem8yVpIUsQdW1jcxXHMy7r
- tZON0KDcBliyOC7Ay2es6IQVm8agfRv8z7kYUmB2vcXY9Lk/FRA/EGPR/GugNfxzXyTm
- lx6A+2KGLluv++kp1s6DsU042ex6rj85ybgvQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760020258; x=1760625058;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iKxAb5iVpmZ+X2kSgcm6lIvkM5dDs4VzQwN+UojGLxM=;
- b=mtOiUod/kqPvx/x8QlGpH7JkVHABDKOYuJaRd23//UMXzZqMtyC1IUftEncsfwoP0/
- 3DrRLj1wVotzUuSnICl+zQZATiz0Uh+dOmJN6KiEtcWJvBzIyiLNJuCdw658X3ksVNZ2
- mZdJ6CAeEK2ajhOl1GN8Zs7Fyp/wQ1xCGJXu7shlpNm5vC6aetb3T2xTc0z0ma+TuNbW
- hiGsD0sDn5D4kInKRg/KlJfxGi1Tu4oMzZzm/br4P4OeskKjgdwisCBsGZHbQtOm4EW/
- Fi6tARGqrnQW9ghocmI8l5d70fOt14r6kozDZHU+WCdNBdok1N8tCJbPgBfGvcnWmf6I
- ppzQ==
-X-Gm-Message-State: AOJu0YygGydPOvdFhRw/l4G3BowH47+moUE/JKcbggGPXWtlpAajVfGK
- 5yj2UvnUXR1IGy2f3GBuPjm+o0bFZkyIbjN0hjTppryAZutZXeNRVW3Y8Ybjk/8pT44ymQiQwfX
- 4eWQB3i4=
-X-Gm-Gg: ASbGncuXwNpLZ685BKytWASzAYccDYRhPU+uAumvn/EOHpZmVXDYvv/iFoeGpnPL9Ls
- 2nX4jVQhZLyXaCyNS3Cd+RJo8J60k7ff9LxcThVg1gLA+Z4Xfe1etUlIp9QWG56iHwmu87m5NaG
- Rks7PKER45Z9oXihi60C44xPAKyginOtTi41metNselotPvCfQf5/hyT5uYcbbieZMSAUVytng6
- 36yJ9RCID/MlrmeTQjaVQeYTKUEEKmqu0qQFAS8dxzAehZmfVxM4kFmOwIYAyczt+TZCKV7HqeF
- 8uTHmrgJb6v0QlE4kk7AUcQl3kM5vJZIPo7BYWaTPuKkEBtojMwShFfVWso9TP1+EA4wWXrb5da
- bwcS77xMl3U4EeJmeMBuoCLsLF9FQeLijbufoixTuJn8lfpBCI1CJUgJyASyGIWYcS2HiYHdq0b
- x5W79PYDElF979
-X-Google-Smtp-Source: AGHT+IF7ASRR+0N3yR3aMiTmTO8CrASSiBXMRkUvExUpsFIU5Sx8ZNmyl3KJdscRjs1HmdynNJlKYA==
-X-Received: by 2002:a05:6870:b402:b0:306:ed52:c174 with SMTP id
- 586e51a60fabf-3c0f68e260dmr3370625fac.12.1760020257613; 
- Thu, 09 Oct 2025 07:30:57 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3ab7ce5655dsm7005710fac.13.2025.10.09.07.30.56
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 07:30:57 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [u-boot-test-hooks][PATCH] labgrid-trini: Quick update for labgrid
- v25.0.x and later
-Date: Thu,  9 Oct 2025 08:30:55 -0600
-Message-ID: <20251009143055.3161450-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 0A1D21A1243;
+ Thu,  9 Oct 2025 14:50:56 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id CDE5D6062C;
+ Thu,  9 Oct 2025 14:50:55 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 19897102F21E6; 
+ Thu,  9 Oct 2025 16:50:45 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1760021454; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=dLzD+IETChr8sDYvTwV+xEENH2Ircd24SrFHbhUBJ5g=;
+ b=K/hIswksznb8CHZO+gHaGBy/Loc/rK8c9OdBXb3CwY+mJO8p4wiyttenc8/6NfvURl2Ovg
+ eRQODPXelwaIrFgh6XTOhM33wKzdnhaF5o44vL+zE3FQ7xBcU5rLOpMukSNjmp5NS9UU1G
+ Em1lKSsuGn0sT1F8NZ6YAcUB0PSEE7WfjRdAE7Q1619X25hjxrw9wRkFZkLcllDQLiAS0p
+ ZQNQqC3liMWztpe7HMJgUTXYQpvkVETTj5tb+A4omuXeOaHDjgp0NkoqZTVgaDg4/qTbjU
+ b4DCRIVtCZmcSMdSJxU4pEtQQl2SJf2xOvHbYTgQLJm5rqF1ohyekLyGukCnYw==
+From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Subject: [PATCH v2 00/18] Convert extension support to UCLASS and adds its
+ support to boot flows
+Date: Thu, 09 Oct 2025 16:50:36 +0200
+Message-Id: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIALzL52gC/4WNQQ6CMBREr0L+2prfYrG48h6GEEo/0kRb01YCI
+ dzdwgVcvsnMmxUiBUsRbsUKgSYbrXcZxKmAfuzck5g1mUGgkFjzig3UpW+gNi5Re59amhO5fdV
+ q3wXDaqmMQbwKWUnIlk+gwc7Hw6PJPNqYfFiOw4nv6eHmiOVf98QZsotUWulByVLI+157WXfu/
+ Ruabdt+f3Cnb9AAAAA=
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, 
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Cc: Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+X-Mailer: b4 0.15-dev-8cb71
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,44 +82,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Starting with v25.0.0 LG_CROSSBAR has been replaced with LG_COORDINATOR
-(and the whole crossbar to coordinator transition is well documented
-upstream). Update our usage.
+This series converts the extension board framework to use UCLASS as
+requested by Simon Glass, then adds extension support to pxe_utils
+and bootmeth_efi (not tested) to enable extension boards devicetree load
+in the standard boot process.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+I can't test the imx8 extension scan enabled by the
+imx8mm-cl-iot-gate_defconfig as I don't have this board.
+I also can't test the efi bootmeth change as I don't have such board.
+
+Changes in v2:
+- Fixes few build errors.
+- Add patches to move the extension support and board scan out of XPL
+  images build.
+
+Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
- README.md                | 2 +-
- bin/common.labgrid-trini | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+Kory Maincent (TI.com) (18):
+      MAINTAINERS: Add maintainer for extension board support
+      boot: Move extension board support from cmd/ to boot/
+      boot: Add UCLASS support for extension boards
+      board: ti: Exclude cape detection from XPL builds
+      board: ti: Refactor cape detection code for readability
+      board: ti: Convert cape detection to use UCLASS framework
+      board: sunxi: Exclude DIP detection from XPL builds
+      board: sunxi: Refactor CHIP board extension code
+      board: sunxi: Convert extension support to UCLASS framework
+      board: sandbox: Improve extension board scan implementation
+      board: sandbox: Convert extension support to UCLASS framework
+      board: compulab: Exclude compulab extension board detection from XPL builds
+      board: compulab: Convert imx8mm-cl-iot-gate to UCLASS extension framework
+      boot: Remove legacy extension board support
+      boot: extension: Move overlay apply custom logic to command level
+      boot: pxe_utils: Add extension board devicetree overlay support
+      boot: bootmeth_efi: Refactor distro_efi_try_bootflow_files return logic
+      boot: bootmeth_efi: Add extension board devicetree overlay support
 
-diff --git a/README.md b/README.md
-index ecf8a46c4a58..6171669228cf 100644
---- a/README.md
-+++ b/README.md
-@@ -253,7 +253,7 @@ That should be all that is needed.
- An alternate implementation requires setting the following environment
- variables must be set as per your lab:
- 
--- `LG_CROSSBAR` must point at the crossbar service.
-+- `LG_COORDINATOR` must point at the labgrid coordinator service.
- - `LG_PLACE` must point at the device under test.
- - `LG_ENV` must point at the labgrid yaml file that describes your lab.
- 
-diff --git a/bin/common.labgrid-trini b/bin/common.labgrid-trini
-index e07107462a5e..b3c7d07ca7f0 100644
---- a/bin/common.labgrid-trini
-+++ b/bin/common.labgrid-trini
-@@ -19,8 +19,8 @@
- # DEALINGS IN THE SOFTWARE.
- 
- # Ensure we have all environment variables set
--if [ -z "${LG_CROSSBAR}" ]; then
--	echo "LG_CROSSBAR is unset";
-+if [ -z "${LG_COORDINATOR}" ]; then
-+	echo "LG_COORDINATOR is unset";
- 	exit 1;
- fi
- 
+ MAINTAINERS                                        |   9 +
+ .../imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c        |  67 ++++----
+ board/sandbox/sandbox.c                            |  22 ++-
+ board/sunxi/Makefile                               |   2 +-
+ board/sunxi/chip.c                                 |  32 ++--
+ board/ti/common/Makefile                           |   2 +-
+ board/ti/common/cape_detect.c                      |  52 +++---
+ boot/Kconfig                                       |   3 +
+ boot/Makefile                                      |   1 +
+ boot/bootmeth_efi.c                                |  78 +++++++--
+ boot/extension-uclass.c                            | 138 ++++++++++++++++
+ boot/pxe_utils.c                                   |  90 ++++++++++
+ cmd/Kconfig                                        |   3 -
+ cmd/extension_board.c                              | 183 ++++++++++-----------
+ doc/usage/cmd/extension.rst                        |  24 +--
+ include/dm/uclass-id.h                             |   1 +
+ include/extension_board.h                          |  71 ++++++--
+ 17 files changed, 547 insertions(+), 231 deletions(-)
+---
+base-commit: 8e7f8c1248e8adfb525a2a4ea56ebf7e54ff5d7a
+change-id: 20250916-feature_sysboot_extension_board-958dd0072565
+
+Best regards,
 -- 
-2.43.0
+Köry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
 
