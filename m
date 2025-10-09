@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BC5DCCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:52:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F541CCD185
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:52:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED4F284575;
-	Thu,  9 Oct 2025 16:51:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40A0A84528;
+	Thu,  9 Oct 2025 16:51:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Z99LFggt";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="rLbHEO9C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C1ED84571; Thu,  9 Oct 2025 16:51:12 +0200 (CEST)
+ id 49B4E8457E; Thu,  9 Oct 2025 16:51:14 +0200 (CEST)
 Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4044F83F0A
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:51:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6740083F0A
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:51:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id E80EE1A1245;
- Thu,  9 Oct 2025 14:51:09 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 1C4511A1243;
+ Thu,  9 Oct 2025 14:51:12 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id BDB276062C;
- Thu,  9 Oct 2025 14:51:09 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E7BB36062C;
+ Thu,  9 Oct 2025 14:51:11 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 23F32102F21EE; 
- Thu,  9 Oct 2025 16:51:07 +0200 (CEST)
+ with ESMTPSA id 41FDB102F21EF; 
+ Thu,  9 Oct 2025 16:51:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760021468; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1760021471; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=u8lvoISWRYZi75RNgeNf+uwFBm4XXO7i6GLmcjMM8YY=;
- b=Z99LFggt1ChYdnjFE0VJqmcqarAvkmMpcQWaGDXrrzxaEzCYGAxLncXRWgKBVbtZwEafD7
- VAbncMP+8MJu66+zjcbkDYUHJKAh40qypJruiqQnLv26HSANVO2t5YcdovBMEUw+PFYSE5
- 9Scr058yrtpd3qhpD/07G7Jj3sVEOpXrO/FYyAw7G5capPx54kxo7QfbFZ/c4UQ2tU4Ssl
- fKTWqXEXDpE/wvlTt5t0QKJvIYkKPfHzU6spXyred7xgUFVnEUAx3vv+VnP7wNTTVSV4sv
- wTzvaSI6jpKIDbi70u9ZLkQtgV1oaukBmj0b1NQ02ib34iSzEPjR7r4hEE0PXw==
+ bh=MbK6KBfXLx1BzQGK+3BDEnBi9am5ZVPF5vk3b6/9LYE=;
+ b=rLbHEO9CRX59gSAaSBYZPvVX1ROQHYb5HAv83YSFZkKTYUW+VEMGRPzhzV8vHjmzMnps4T
+ ZXutHG39kNw23HenbfAkZ7LW/M1lMMNnfd9Onc3xCCEcHFl7HI7Fb6xyM+eEu/Y6H9XIVr
+ oRF++cz/2k1aVmtrdgpepFD7uUTjdM+p3LcwmRdxWrsg8/D9gXq5jSkzRfFSuHo3AqELzY
+ aQOqB1gCpOVsXCaxXmiMJSP9gBaUyPvtCj43LrXdw4WoyQPCR0MGbK88tDLTneFHDIKKPi
+ 2EuPjgk66LsrxWslO7kW1Jhr3eBlXid9w9wtxZ/oWa86LnYsDkZl8zu8CUd/dw==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Thu, 09 Oct 2025 16:50:43 +0200
-Subject: [PATCH v2 07/18] board: sunxi: Exclude DIP detection from XPL builds
+Date: Thu, 09 Oct 2025 16:50:44 +0200
+Subject: [PATCH v2 08/18] board: sunxi: Refactor CHIP board extension code
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251009-feature_sysboot_extension_board-v2-7-e09b39e54de5@bootlin.com>
+Message-Id: <20251009-feature_sysboot_extension_board-v2-8-e09b39e54de5@bootlin.com>
 References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
 In-Reply-To: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,28 +80,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disable DIP detection functionality in XPL (eXtended Program Loader)
-images to reduce size and complexity in the early boot stage.
+Clean up and improve code structure in the sunxi CHIP board extension
+detection implementation.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
 
-Change in v2:
-- New patch.
+Changes in v2:
+- Fix a build error.
 ---
- board/sunxi/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/sunxi/chip.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/board/sunxi/Makefile b/board/sunxi/Makefile
-index d96b7897b6c..ee82493117a 100644
---- a/board/sunxi/Makefile
-+++ b/board/sunxi/Makefile
-@@ -11,4 +11,4 @@ obj-$(CONFIG_SUN7I_GMAC)	+= gmac.o
- obj-$(CONFIG_MACH_SUN4I)	+= dram_sun4i_auto.o
- obj-$(CONFIG_MACH_SUN5I)	+= dram_sun5i_auto.o
- obj-$(CONFIG_MACH_SUN7I)	+= dram_sun5i_auto.o
--obj-$(CONFIG_CHIP_DIP_SCAN)	+= chip.o
-+obj-$(CONFIG_$(PHASE_)CHIP_DIP_SCAN)	+= chip.o
+diff --git a/board/sunxi/chip.c b/board/sunxi/chip.c
+index 270af2506d2..5e5ec0d1d89 100644
+--- a/board/sunxi/chip.c
++++ b/board/sunxi/chip.c
+@@ -42,14 +42,9 @@ struct dip_w1_header {
+ 
+ int extension_board_scan(struct list_head *extension_list)
+ {
+-	struct extension *dip;
+-	struct dip_w1_header w1_header;
+ 	struct udevice *bus, *dev;
+-	u32 vid;
+-	u16 pid;
+-	int ret;
+-
+ 	int num_dip = 0;
++	int ret;
+ 
+ 	sunxi_gpio_set_pull(SUNXI_GPD(2), SUNXI_GPIO_PULL_UP);
+ 
+@@ -60,6 +55,11 @@ int extension_board_scan(struct list_head *extension_list)
+ 	}
+ 
+ 	for_each_w1_device(bus, &dev) {
++		struct dip_w1_header w1_header;
++		struct extension *dip;
++		u32 vid;
++		u16 pid;
++
+ 		if (w1_get_device_family(dev) != W1_FAMILY_DS2431)
+ 			continue;
+ 
+@@ -90,8 +90,8 @@ int extension_board_scan(struct list_head *extension_list)
+ 
+ 		snprintf(dip->overlay, sizeof(dip->overlay), "dip-%x-%x.dtbo",
+ 			 vid, pid);
+-		strncpy(dip->name, w1_header.product_name, 32);
+-		strncpy(dip->owner, w1_header.vendor_name, 32);
++		strlcpy(dip->name, w1_header.product_name, sizeof(dip->name));
++		strlcpy(dip->owner, w1_header.vendor_name, sizeof(dip->owner));
+ 		list_add_tail(&dip->list, extension_list);
+ 		num_dip++;
+ 	}
 
 -- 
 2.43.0
