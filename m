@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 355DDCCD185
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:21:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E689BCCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:26:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9834084562;
-	Thu,  9 Oct 2025 16:19:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E5E184528;
+	Thu,  9 Oct 2025 16:26:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TnEZ743Y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kpU/JFHy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C192C84523; Thu,  9 Oct 2025 16:19:08 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 81F7D84529; Thu,  9 Oct 2025 16:26:08 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9701E840D5
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:19:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D734C843E8
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:26:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-43f47280160so621474b6e.0
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 07:19:05 -0700 (PDT)
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-7b7325d8fb5so690088a34.1
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 07:26:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760019544; x=1760624344; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GeBoU+iWdh/b2GDzku1V+uW4QIBPDEEZqdV4jtqgwhQ=;
- b=TnEZ743YisqJD0lJ9nNVLgHP8/Jy/wXTAHeKQrSGitVVMS1hmO7Pl93Sz7gF4ponSK
- 7cr18JMtBOq5LN01unRXjcHfckDR3X2kb25sISs4cSSqZb0k+42TYLvAQpV2nInqGOfU
- 5LNvY72g93pUNRL1L0B72nRl+SDN1kf87IMSQ=
+ d=konsulko.com; s=google; t=1760019964; x=1760624764; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Jl7M2UIgBRB0yTEsCcIdVNijf2OC7XMWNDZ5YceAm9Y=;
+ b=kpU/JFHy9iNi7M4s7+WG8MfXQ6twpnzLHjghMn/EWsJpPLM6y4XCLcvqr1xJ2kpWKv
+ xd1JAhpd8phSUTB2IoDtd5x4ZR5xeb35Vcb9P9WUnVw10f8AGE0xvB7YtQGVgt2nn7D5
+ jwKIKm5MNmePpfTzRzbRIj/2RiaTmV1W/I42I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760019544; x=1760624344;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GeBoU+iWdh/b2GDzku1V+uW4QIBPDEEZqdV4jtqgwhQ=;
- b=o3VQJ0qX2FQCvU+cAWT5XbdrfpLQ+9VSviY4KpVdh09LsVLDFLJYKNF1HoqDMIzSpL
- qlh8DNBY5faCHyRAZQnC0ya+BCizvHbVI0VEjp2lnrRhIDPgcWvlAv87jvhWh4RTRnJX
- +zwuyC0PqNTjCQEd0/3q+6ZZf6EinhLh/+wvhOxexMJXwKToKDW6IWZvqkPazkyXu66s
- hDPLkMHAygwg5m2lqAEZWR8vXwvTAC6Eut6wWkdwVjUPIyET0N3M3yOKiJqDw3PoHCQe
- CZKJXHxOz40SXZb4l2WrOjbFXk+GCNaTm0AiRUdzk6TvEuWtu8SEvBQzhUXIJ9HGwh83
- F80Q==
-X-Gm-Message-State: AOJu0YwBl7lBfQdHrzhK5r8Tr2hgAL3iutyNExUIZReOAiXpXnMDE9mo
- 8vbZrHpCze6FWA3MKn4PisKc+Y8DXF1sMlWzLFQG8BBB92YVx0WfoWGZA08qD0AfbSfBLXJjfqr
- uANQ3k6E=
-X-Gm-Gg: ASbGncujNH1nTrpg2by+qMqhHct/tE4mk2xMMzU28m1e7vsDHmLE1buyMcPib2IX+Zu
- eI6cIW+pwJEeX369PfytPwWwjRNaPAKiJpcXVnnE+8RabKSTq0VR8Fy7SokMpuD9dZkjPEluJdl
- Eh1txHikxJdNfPzTY5rUABFR0R1z1zETSXRXQlPIWHvC574p35TBAElSs6O9S71irNpHCl/z0op
- 50zHASL3hj1bqY115Nd/OpyMxZUOki1R+5wJ3hnpu9ncIb2VQGx9fLT8N9VyhRB1A8tL5BsUcmQ
- n9NY7CCeX+Ql9qcqkUrTR+PiyQYLbsh1VYCMHJVDvlThJ1Bibgb6NNdK9heDL4VKQOpeB4phQdi
- HlMOLn/viv4lLlcaVnS/iiapiarGj2KrqALYPMa/BTqwi2e4CuFPAHeycAtFDlRaWhxkPB2ALGG
- aFJGXnjfKz
-X-Google-Smtp-Source: AGHT+IEAO24I4EMvVw1HM8vbs4KNdSUMtvV6FAutFNGKhnvpZlmj0+6Ba+DxhlnjAPla2dfjvZ92/w==
-X-Received: by 2002:a05:6808:189c:b0:43f:7287:a5df with SMTP id
- 5614622812f47-4417b416fdemr3554970b6e.26.1760019544126; 
- Thu, 09 Oct 2025 07:19:04 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1760019964; x=1760624764;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Jl7M2UIgBRB0yTEsCcIdVNijf2OC7XMWNDZ5YceAm9Y=;
+ b=K7ms74abBaDcFhS7LuJ0UQM7Wi2M8Et4FVRKGeO/h2f6QxUUTMx4um5TgYczVSYP3N
+ RQMTuAIqO5dfJ5ZQc5zUOz/jF7+ntguaU2r1DFZM8TFRB3z85/afDshBR+N+6uTb7ap0
+ 2Fq2DpLoQUg/RVho/k86O9QqMxm1DcfF1/jcnOyCx8gV6gehc5yNvluvIJPFOW+3myYv
+ XfjLv/36MQUyNSoruayD9nHkmVLB3munqYC15llsJ92Uio/QryHMjoFP861A8O52sIqy
+ 4+olJ6k6j/Nd67sg4OsfVO/roRbTs5Pwh1FZixyERJ9BPd8MtWa5raFp2jLnni3HHbPH
+ 7w0A==
+X-Gm-Message-State: AOJu0YypC4dsxiElanAd/kcA/80UThV5+8myQVplCl4WfIsUYRUOLBuO
+ rmqsGgAqRgiCQXRoEBJRpyPHvJcm6PHDkSNrciSiprwMgvQcq/fcRkDxabeNxo0Xkns=
+X-Gm-Gg: ASbGncvOxekRol4MPe5T9DbO5BQRgpH3Z4Z7NuvvgVCNzSRnHwtHghY94J/9wJgGg0N
+ MmtJHcU4vhdRHOj4dpzD5hAEz1k4GZs7/1cmx33saulVQv0gGJWmChF9z2qdCKBlyPX0UbSDlUU
+ dAKPgVM8NmmnJvuCZ7OAergGqBj1sbKSDUT6HlMSunEO6FJEZpLdvj9S/dZByNHfzOgjHJdmyW0
+ iAezhXOPFKabUHaaEqe1SofHTfcS77IsI0WQSagFAfCLBQ3oP5DhR6A0kqKnAe7sXbKNPXpqWeN
+ OT4lpuGvJequYyKgN/e0D5ctKCg9LQv9XqG6nmKQftjNZQXG3PEST2KUvi47O9JppQ4WebhbWXZ
+ r9cOVBcLmRrYd9rds6fTRKOjcHHuXSrPjhWrfOUrYUlFQ7QTdlpTAZ1/Kl6wTjaXw7cFUongIYn
+ l9Meiq+/QGUw==
+X-Google-Smtp-Source: AGHT+IG6lS58GTQgg5gZ5qNcKV41PRZ3YJyLruG9lGi3G424TYv/bhtsuht1b/Xa2xc/Zc5Ns6UKfA==
+X-Received: by 2002:a05:6830:6b09:b0:790:710f:60e3 with SMTP id
+ 46e09a7af769-7c0df79b845mr4306963a34.23.1760019964483; 
+ Thu, 09 Oct 2025 07:26:04 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c0e333b875sm1221258a34.17.2025.10.09.07.19.03
+ 46e09a7af769-7bf439d2aadsm6533645a34.36.2025.10.09.07.26.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 07:19:03 -0700 (PDT)
+ Thu, 09 Oct 2025 07:26:03 -0700 (PDT)
+Date: Thu, 9 Oct 2025 08:26:01 -0600
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Kory Maincent <kory.maincent@bootlin.com>
-Cc: thomas.petazzoni@bootlin.com, Hendrik Donner <hd@os-cillation.de>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250929172434.1034898-1-kory.maincent@bootlin.com>
-References: <20250929172434.1034898-1-kory.maincent@bootlin.com>
-Subject: Re: [PATCH] scripts/checkpatch.pl: Resync with v6.17
-Message-Id: <176001954319.3159859.9221993956774349475.b4-ty@konsulko.com>
-Date: Thu, 09 Oct 2025 08:19:03 -0600
+To: Eugen Hristev <eugen.hristev@linaro.org>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: Re: [PATCH] nand: atmel: Rework ATMEL_EBI and DM_NAND_ATMEL
+ interaction
+Message-ID: <20251009142601.GN298503@bill-the-cat>
+References: <20250926153136.3680867-1-trini@konsulko.com>
+ <e4db9bab-9de2-4810-ab19-7654be60dae5@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jwFaH7bdAxFD7RJl"
+Content-Disposition: inline
+In-Reply-To: <e4db9bab-9de2-4810-ab19-7654be60dae5@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,23 +99,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 29 Sep 2025 19:24:32 +0200, Kory Maincent wrote:
 
-> This resyncs us with the version found in v6.17 of the Linux kernel with
-> the following exceptions:
-> - Keep our u-boot specific tests / code area.
-> - Keep the location of our checkpatch.rst
-> - Change the "use strscpy" test as we don't have that to strlcpy
-> - Keep debug/printf in the list for $logFunctions
-> - Keep checks to "env" files
-> 
-> [...]
+--jwFaH7bdAxFD7RJl
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Applied to u-boot/master, thanks!
+On Thu, Oct 09, 2025 at 12:48:29PM +0300, Eugen Hristev wrote:
+>=20
+>=20
+> On 9/26/25 18:31, Tom Rini wrote:
+> > The way that the NAND driver under DM_NAND_ATMEL is probed is by the
+> > dummy memory driver controlled by ATMEL_EBI. Rather than require that
+> > for NAND to work both be enabled, make NAND select ATMEL_EBI and do not
+> > prompt for ATMEL_EBI as it only triggers the probe for NAND.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Eugen Hristev <eugen.hristev@linaro.org>
+> > Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> > Cc: Michael Trimarchi <michael@amarulasolutions.com>
+> > ---
+> >  drivers/memory/Kconfig       | 2 +-
+> >  drivers/mtd/nand/raw/Kconfig | 1 +
+> >  2 files changed, 2 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
+> > index eaee739c6aab..591d9d9c6569 100644
+> > --- a/drivers/memory/Kconfig
+> > +++ b/drivers/memory/Kconfig
+> > @@ -14,7 +14,7 @@ config MEMORY
+> >  	  For now this uclass has no methods yet.
+> > =20
+> >  config ATMEL_EBI
+> > -	bool "Support for Atmel EBI"
+> > +	bool
+> >  	help
+> >  	  Driver for Atmel EBI controller. This is a dummy
+> >  	  driver. Doesn't provide an access to EBI controller. Select
+> > diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+> > index aa4bb2a0595c..f083113486ed 100644
+> > --- a/drivers/mtd/nand/raw/Kconfig
+> > +++ b/drivers/mtd/nand/raw/Kconfig
+> > @@ -50,6 +50,7 @@ config SYS_NAND_NO_SUBPAGE_WRITE
+> >  config DM_NAND_ATMEL
+> >  	bool "Support Atmel NAND controller with DM support"
+> >  	depends on ARCH_AT91
+>=20
+> Which branch is this patch based on ?
+> I have a conflict because this line ^^ is missing in master ("depends on
+> ARCH_AT91")
+> Is there another patch for that ?
 
-[1/1] scripts/checkpatch.pl: Resync with v6.17
-      commit: ddde9ac63d71a4336e27cb49d011b67c7e5255c5
--- 
+Ugh, yes, sorry, this patch depends on:
+https://patchwork.ozlabs.org/project/uboot/patch/20250711151604.2224243-1-t=
+rini@konsulko.com/
+
+--=20
 Tom
 
+--jwFaH7bdAxFD7RJl
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOfF9gAKCRAr4qD1Cr/k
+CgyQAP4/5R8NlEEQoxI4hAFwTajuNY9p3fYQVNdd21YprRT7pAEAjj3J8V/x7l7M
+90Q8xML48Ql7c2qjneZd9G8jgBjn+QE=
+=7L9/
+-----END PGP SIGNATURE-----
+
+--jwFaH7bdAxFD7RJl--
