@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E4DCCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 18:34:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 444B4CCD183
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 19:06:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3FF083CF7;
-	Thu,  9 Oct 2025 20:34:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 854CD84238;
+	Thu,  9 Oct 2025 21:06:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kaMDr3/P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Nuj4HU0A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADB8B83D01; Thu,  9 Oct 2025 20:34:39 +0200 (CEST)
-Received: from mail-yx1-xb12e.google.com (mail-yx1-xb12e.google.com
- [IPv6:2607:f8b0:4864:20::b12e])
+ id E203D8423A; Thu,  9 Oct 2025 21:06:47 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A785B83CF5
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 20:34:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 731C38422F
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 21:06:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yx1-xb12e.google.com with SMTP id
- 956f58d0204a3-6353f2937f3so1679348d50.3
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 11:34:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-43f645f162aso771711b6e.1
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 12:06:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760034875; x=1760639675; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f9EmbxKJ3TAp9ncgziLHSiV25Fe4nqftdBp/zxfVPpQ=;
- b=kaMDr3/P2+UC8OcoUEFAXCGtym/OJEE9cVhesCjGj+Zc9G1q/KfqV6k1E/nggC/y90
- ahsqqAwZt0kP1YzVRpM/Ozm2RxeFBAya3nTmEKilpRldBc80AkGmQSB22zTYw3yP/YAw
- b9RT1jt9VzWUwVcaeG+uvgYfUPLw+CYu0sL2DVYk4+/nt2OQMZFE6Oun3yJOvLp/vbt9
- dypB5ntWS3XvPCE3M4y+9leqdV1clBB0tVkRrIXRqgBvSAr2AyY6SRNRIdZr9OPknNVy
- PwggqsdqQ6PpKKcG8ztJYnAQxcYU2CBfCqUCmUOtP2Q3Kyf4072IgcLu+9ZTiXpeEHJQ
- Iohw==
+ d=konsulko.com; s=google; t=1760036804; x=1760641604; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=9vYbAxWR61SSh/qNxgrhexYQFnz3DHOrTZTPmjuyN2E=;
+ b=Nuj4HU0ACZ2/R53RRsvQDILHCKfdr1/eh3AihDSDLpsfdlgrj6nW9MfLa8WFIB/JU0
+ Gdl3RbQ1vVN0o93u9M1xw+B/sHPjVF/olwD/+o2Mu/oM/BJ7HwPiv7CpPa/Tigq4EjpQ
+ ZO2mIQcQ3o2oiBZie5GhHK09NQluXkJNloT+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760034875; x=1760639675;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=f9EmbxKJ3TAp9ncgziLHSiV25Fe4nqftdBp/zxfVPpQ=;
- b=skcK5tdula4bjtbXXNkA1BW5Zeey1IgdgTMJ9SIXuVqR2DdX7ZJAuz4G21ghVR+Pxm
- +fTCQFyzeIVfPp0AIe96W8h62rOC9rNzzJxZvE197cCqTNPsSd3D56emsdJb4aSM9Ocs
- cSWdGSPk/1yHZuUCXiXNKVx4aPVLTT/GXT2Gmj+r/07kzua4vyFZCaZfoLXbt69KoflN
- OZ6s5cViVSRHpsmUHfIvN+fkRVwAwPR2iwDf2AOwkSDvqfU7LNvpNiayI8Pi0ZeeJh2y
- 4c6jU3+ab6e9x6bZ0Y8HJ90jYi4eGwl+dsufflyHbsp8ucx9EjGy1/Kwpe8xk9oDOOEC
- 8I+Q==
-X-Gm-Message-State: AOJu0Yz1AgKUwI5tseTak99Mk3rnylMXK48tGI7jhoYjg+tJbznfWCrV
- GHcHaPP5vyoJUAaB9LSjq1jMep63jOGZlrKUsCs3y+GedN0u7uZfOKxQvSuCj/h/+Oo0zWaEKzo
- h5MRxMYLLcQqpNpQXvgryt8WvwkIqPLii0SCKZ10Q2A==
-X-Gm-Gg: ASbGncsY6Aa6XSaJSB1EMKE0mR4ca+SHnMVbYf75eBhqjbsBOU+YCPfUq++oTohCNoh
- GJbOMgR8JTIdjK9sp88ZYgzks9s6N2+/nRpCuGLxnsPu2Ayt+1mxf+xnCm6Sov8+Jjn6ipuTGP8
- C6rY2eXZRd/OXGaFT2qKtpZ98T9t/17T1L85nynHxOQdTkJkYObkFfTi93cBm9sNau7IlXHdzIM
- 8hF8iix7IvuRcopckajj2uZgtk90pdyXDFwqSlAY8kSt2l4jJDGtZQWbnHviFvCnloQBQ==
-X-Google-Smtp-Source: AGHT+IHuzmBjh9e8VYUkTlvIHBhus5fVj/b5BTYT2RGuAVuhEURYHGPi0HKT9+S2GDZexrMEOQ41imjP89Duw7682i8=
-X-Received: by 2002:a05:690e:164b:b0:636:13ab:b5b6 with SMTP id
- 956f58d0204a3-63ccb85e78cmr7301325d50.13.1760034875391; Thu, 09 Oct 2025
- 11:34:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251009092959.260121-1-sjg@chromium.org>
- <20251009092959.260121-2-sjg@chromium.org>
-In-Reply-To: <20251009092959.260121-2-sjg@chromium.org>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 9 Oct 2025 13:34:24 -0500
-X-Gm-Features: AS18NWB8HAJWmShOmAEX6kE2-4p0I8w7RrN_FLLSdZYJGxhKTyjaPPn9YeWdrU8
-Message-ID: <CAPLW+4mAKfrAj8pxWFZ2DDS=ux9ZQa7Cyi1mP+oMGCRMUuDfyw@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] boot: Improve comments related to global bootmeths
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ d=1e100.net; s=20230601; t=1760036804; x=1760641604;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9vYbAxWR61SSh/qNxgrhexYQFnz3DHOrTZTPmjuyN2E=;
+ b=EpPVIdZEN5vFz7qMDo0k1LeQi02Wsd78Mxj6qRFFlFVgQZkHQXTcikUPLmoNsfyMVi
+ 7JLGI5+FW5Di+btq+Et1RSA3EMiea6Lr9i2LuzY1KZD0f2p5NG039oQPoCJVRpztwqih
+ xrqTr69MRz7gWe7OlCd47iQoRfShWyKCSEjw4mO2H94KaUpum7ZU2CxvVl/SbRs7guhA
+ +2KjoLSxXfufVaCvmCI00+KJZR9n/F6rsI/oUE3B47kQ46RufC41ztdCjCMKHDwugPPc
+ W3rtXFgkf2DV1G7Dvp8zj0nn5lr+fri4pbhMRR0Vg0W6kaGFjlDLaITvV+E2AwusSzA8
+ 0nRg==
+X-Gm-Message-State: AOJu0YxeVqgeAYpTTzAmJqBkDog4MK5dKvPdc5Jc2BznxuN4wPFXXyIY
+ kLXAqjGcU/p3h2FLNOubvwwhvCgsHaK49rM6ySxPnn+mLY+5+C38BJVUi9Aib5O/2Hk=
+X-Gm-Gg: ASbGncs/E2UeBlAVa8+KiqxWFRV6N/F19K2XWDHW9qPyhh2aBKr+wASUWpViiDal3Bh
+ PO2SK94D3af6rDqMVjDYjxc9nykxQrv+9AJ8vGkvMeDAySXPIAq127s7AFQvF2S2eTn2J8PkCZv
+ BprxDGmHZrq808keAXloxFZFWS8mewQiyOTcObSpnTwqEwPGLQM9YjXjCQJXGNLCvkmr6hKOVvR
+ Z5AsXXCXglC8HDbKbhx7gp8sdp+GPLLp8KVYPPmRV/T43apeUTukLJ4svC82IEYJPN825rF9ygl
+ zbU/LLtB1pYNrjyAduYXfZcCylq86SYJoyMeMgd6mrPBDIBEBtCoOLoED8jWzFu1wQrDFmXMeg5
+ ovXJBnI7UkXd+tDNPyQ4bwlhNm73qhH+j99DWnV8A8nu5yKqDc429TkBTZ7LhU+b2MDVVpaN8iN
+ l0x1+DNtB4XQ==
+X-Google-Smtp-Source: AGHT+IEjCwMQRsU730WHRtG5cYvkB3DMCKM5kdhCn8JbcoY5MW0Kzrx4gmoA5cKnAU7DXDHkPoXQZA==
+X-Received: by 2002:a05:6808:bc4:b0:43b:ea80:d169 with SMTP id
+ 5614622812f47-43fefc053a3mr5553918b6e.8.1760036804097; 
+ Thu, 09 Oct 2025 12:06:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c0f911aacesm114233a34.27.2025.10.09.12.06.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 09 Oct 2025 12:06:43 -0700 (PDT)
+Date: Thu, 9 Oct 2025 13:06:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heiko Schocher <hs@nabladev.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Maximilian Brune <maximilian.brune@9elements.com>, 
- Moritz Fischer <moritzf@google.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Yegor Yefremov <yegorslists@googlemail.com>,
+ Benedikt Spranger <b.spranger@linutronix.de>
+Subject: Re: Please pull u-boot-ubi
+Message-ID: <20251009190641.GS298503@bill-the-cat>
+References: <1f803ccd-9743-9be8-a594-58fcfeb0f687@nabladev.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3U9IbJrIU3n33uVE"
+Content-Disposition: inline
+In-Reply-To: <1f803ccd-9743-9be8-a594-58fcfeb0f687@nabladev.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,86 +99,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 9, 2025 at 4:30=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Add a few comments about global bootmeths and first_glob_method
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
 
-Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+--3U9IbJrIU3n33uVE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->
-> (no changes since v3)
->
-> Changes in v3:
-> - Drop the spacing changes
->
->  boot/bootflow.c        | 1 +
->  boot/bootmeth-uclass.c | 1 +
->  include/bootflow.h     | 3 ++-
->  test/boot/bootflow.c   | 2 +-
->  4 files changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/boot/bootflow.c b/boot/bootflow.c
-> index d79f303486d..15df7069209 100644
-> --- a/boot/bootflow.c
-> +++ b/boot/bootflow.c
-> @@ -344,6 +344,7 @@ static int bootflow_check(struct bootflow_iter *iter,=
- struct bootflow *bflow)
->         struct udevice *dev;
->         int ret;
->
-> +       /* handle global bootmeths if needed */
->         if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global) {
->                 bootflow_iter_set_dev(iter, NULL, 0);
->                 ret =3D bootmeth_get_bootflow(iter->method, bflow);
-> diff --git a/boot/bootmeth-uclass.c b/boot/bootmeth-uclass.c
-> index 188f6ea1895..bb2dd8447cf 100644
-> --- a/boot/bootmeth-uclass.c
-> +++ b/boot/bootmeth-uclass.c
-> @@ -204,6 +204,7 @@ int bootmeth_setup_iter_order(struct bootflow_iter *i=
-ter, bool include_global)
->                 goto err_order;
->         }
->
-> +       /* start with the global bootmeths */
->         if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && include_global &&
->             iter->first_glob_method !=3D -1 && iter->first_glob_method !=
-=3D count) {
->                 iter->cur_method =3D iter->first_glob_method;
-> diff --git a/include/bootflow.h b/include/bootflow.h
-> index 32422067723..2ef6eb25cf5 100644
-> --- a/include/bootflow.h
-> +++ b/include/bootflow.h
-> @@ -250,7 +250,8 @@ enum bootflow_meth_flags_t {
->   * @cur_label: Current label being processed
->   * @num_methods: Number of bootmeth devices in @method_order
->   * @cur_method: Current method number, an index into @method_order
-> - * @first_glob_method: First global method, if any, else -1
-> + * @first_glob_method: Index of first global method within @method_order=
-[], if
-> + * any, else -1
->   * @cur_prio: Current priority being scanned
->   * @method_order: List of bootmeth devices to use, in order. The normal =
-methods
->   *     appear first, then the global ones, if any
-> diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-> index 8de5a310add..7cd83dc7443 100644
-> --- a/test/boot/bootflow.c
-> +++ b/test/boot/bootflow.c
-> @@ -401,7 +401,7 @@ static int bootflow_system(struct unit_test_state *ut=
-s)
->         ut_assertok(device_probe(dev));
->         sandbox_set_fake_efi_mgr_dev(dev, true);
->
-> -       /* We should get a single 'bootmgr' method right at the end */
-> +       /* We should get a single 'bootmgr' method at the start */
->         bootstd_clear_glob();
->         ut_assertok(run_command("bootflow scan -lH", 0));
->         ut_assert_skip_to_line(
-> --
-> 2.43.0
->
+On Thu, Oct 09, 2025 at 06:23:06AM +0200, Heiko Schocher wrote:
+
+> Hello Tom,
+>=20
+> please pull
+>=20
+> The following changes since commit 92dcb3ad5d98f494b2448a7345e1cb7eefa502=
+78:
+>=20
+>   cmd/dma: implement dmareset command (2025-10-07 17:49:15 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-ubi.git tags/ubi-for-2026.0=
+1-rc1
+
+Can you please update the .git/config here so that it looks like:
+[remote "origin"]
+	...
+	url =3D https://source.denx.de/u-boot/custodians/u-boot-ubi.git
+	pushurl =3D git@source.denx.de:u-boot/custodians/u-boot-ubi.git
+
+Then "b4 pr" will be able to fetch it for me :)
+
+> for you to fetch changes up to 0cab29ff467e297064a9fc30200347bda06ee0c4:
+>=20
+>   fs: ubifs: Fix and rework error handling in ubifs_finddir (2025-10-08 1=
+1:36:05 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--3U9IbJrIU3n33uVE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOgHvQAKCRAr4qD1Cr/k
+CpZTAQDPrWpc8Sxl3T0ihbIiGKYNGMPxpi8a04fQ00/hazivjwD+PMePfMmKGcAW
++R+eq5fKqArJ4/cbbA2HteXoQGAfgAU=
+=JGnx
+-----END PGP SIGNATURE-----
+
+--3U9IbJrIU3n33uVE--
