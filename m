@@ -4,86 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71E1CCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 13:18:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86D55CCD185
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 13:41:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A95E684509;
-	Thu,  9 Oct 2025 15:18:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BC13A83D9C;
+	Thu,  9 Oct 2025 15:41:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mw6Zic5K";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xim6JwTg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D070D84461; Thu,  9 Oct 2025 15:18:20 +0200 (CEST)
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [IPv6:2607:f8b0:4864:20::936])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97B1C844F0
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 15:18:18 +0200 (CEST)
+ id 4F0AF83E2B; Thu,  9 Oct 2025 15:41:28 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EEC0D83D8B
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 15:41:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=javier.tia@linaro.org
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-930a1bb7b50so388839241.1
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 06:18:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760015897; x=1760620697; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=Ptb/7UXUBKd3JFPr2BJ/TYKZvFZQrmRYIVX2X+iJQ3M=;
- b=mw6Zic5KjQ+6n06JJXoFYvgZ04p628DyUdWz6tIn/A8cfUJsKYA31RGXqVyCKvfSVX
- iPSo6MmIvWWuZbyP17yGe+NS/0Ike1xkoHakcWfCK9JNKP5KQ3RO2bI3BdzCoEDN4zKX
- fVUsaT8ApvvFyoXUSUbRFHaa8lSgOkVU/kxtu7jrhp8C81v39iILnlezRz3P+nYalROi
- Kvn0MuHi5L+zNT12iWNeNf3Lg1PwExzaBQHcCP6lAx6r9vaDT4Ivw+mDTyXEapL7Lsig
- gzB0je//KvqC5FpeEupvvBcTJ5PibiDuhudK0KfCpStpoNqxVMXM1WtQNwYA1nKHaLct
- TTgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760015897; x=1760620697;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ptb/7UXUBKd3JFPr2BJ/TYKZvFZQrmRYIVX2X+iJQ3M=;
- b=GrXxyrfkW8XpFR/x1k7q2fiEnb9mnCKkuH0V1FQEgKPc0XgRqhmdSyD3uYRyShdBk/
- lCmhVNehd0lxRHqzKBiEt3Y+XWnfhFLQE5zF++GACOwCGaQHwhY2mP+umEpbyiIJjpWL
- SzCzD5d2Oh0HaR4wiqS0HC8LWJaU1YXND7WVP+CMG4VYUI27N5qpudAhsRZZw1MM8Jn+
- k8ob2C/hO1VhTR6U0oM/CWGUdo8bDWLatuArCAMTYbd+/iF6Iswe0CDoZNybkcYn5TC5
- /oqNVswOwT2HUIqGMBZ22W1KkWTxtoNCsjnbA45qilGAYYC5icJJRvJYwdoXOnTCb7Nh
- gbMg==
-X-Gm-Message-State: AOJu0Yy7S4b/IIcYtY6Fbx0w7yvFN4D8ZqsTmlmKG6PDdSp8C7gduwds
- U9mh6V3I/Y3IFbZUghnTEPC9Ali9cBQtSbZEEeug742+5P3W2ujjNkOX4BeOeaQPYQI=
-X-Gm-Gg: ASbGnctp/CdRdxyB9FfFa0W76v5nPpQTodTztrFUqo2zfLirj26oDHuzVeFcry/U5rA
- pxHBeDQK46pGH/j5vJmuVaxeGMXpWcB1cfEa8FiUDJxfJDo44ODg6tyR3/cfIGEa+w+AoDZ21sQ
- XoncIZ8e82nZH/Mev6cDC49ddwipKTvLfuauBXMUx2gfxPgU+yb6IWDLOS8721iBQtlEk5B38br
- dKBqvxzHjh5Kwiiiy7jcStXW/4ICqxdn8a92WxoyRM3v2orCAGFTa2H3YVlCP5nl8CY68zRT/Pq
- WUvSq1z4Zu42T2uiU9Nrk8s6wPmFjfR4zY7AHwyt75Dw/Pvn2try8EYGGf8/gmC4gsNSx9OmZiQ
- Hi6Zk816DSSHcXXLnYGQSRwewyNlKtWM4JJpN5h/0pVw1s1QKJK/sufjHkdTAJqPVfbtgcenAiZ
- t7QXq56sVS
-X-Google-Smtp-Source: AGHT+IF5tFNlSHVQ9yxpv9OoWivJpp4mcES9zgwIyhNtJPxwN455jFYN2ceRrxkLNgEwdyCpS/XYww==
-X-Received: by 2002:a05:6102:c50:b0:523:712d:44a1 with SMTP id
- ada2fe7eead31-5d5e23644b3mr2901985137.19.1760015897366; 
- Thu, 09 Oct 2025 06:18:17 -0700 (PDT)
-Received: from jetm-rog-crosshair-hero-x870e.local ([177.93.10.181])
- by smtp.gmail.com with ESMTPSA id
- ada2fe7eead31-5d5d3835333sm2400604137.3.2025.10.09.06.18.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 09 Oct 2025 06:18:16 -0700 (PDT)
-From: Javier Tia <javier.tia@linaro.org>
-Date: Thu, 09 Oct 2025 07:17:47 -0600
-Subject: [PATCH v8 2/2] efi_loader: Improve disk image detection in efi_bootmgr
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 599DfISw470307;
+ Thu, 9 Oct 2025 08:41:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1760017278;
+ bh=5qteyt4CHk+iBKD+M206Si4+rL+revcQLSnAjtRRlSM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=xim6JwTgArK3YZSjSw1NX9C9pmC5oQDMT4scpmtUhlt0AvQOF96H+FsNl1e4kxI76
+ cID67hG1qTrqOOqOWVn+UTAQ+d2ra9kJryTigSAy2KOe8Ky0t3IscM2qGncT/+n+rk
+ llNsOOwlLcXCk53Xo7lU+CXJOd6Qbcs1vZiHIuBU=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 599DfIlJ1467374
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Thu, 9 Oct 2025 08:41:18 -0500
+Received: from DLEE215.ent.ti.com (157.170.170.118) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Thu, 9
+ Oct 2025 08:41:17 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE215.ent.ti.com
+ (157.170.170.118) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 9 Oct 2025 08:41:17 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 599DfGs4095886;
+ Thu, 9 Oct 2025 08:41:17 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251009-detect_disk_image_type-v8-2-a8b50a3b4acf@linaro.org>
-References: <20251009-detect_disk_image_type-v8-0-a8b50a3b4acf@linaro.org>
-In-Reply-To: <20251009-detect_disk_image_type-v8-0-a8b50a3b4acf@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Javier Tia <javier.tia@linaro.org>
-X-Mailer: b4 0.14.3
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Thu, 9 Oct 2025 19:11:15 +0530
+Message-ID: <DDDU1YJHMWCT.2WOBI5DIYDCG1@ti.com>
+From: Anshul Dalal <anshuld@ti.com>
+To: Bryan Brattlof <bb@ti.com>, Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>, <u-kumar1@ti.com>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
+Subject: Re: [PATCH -next v8 11/11] arm: mach-k3: reserve space for page
+ table entries
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251006082852.4008937-1-anshuld@ti.com>
+ <20251006082852.4008937-12-anshuld@ti.com>
+ <20251008150303.zzf4vxshdap3pdpb@bryanbrattlof.com>
+In-Reply-To: <20251008150303.zzf4vxshdap3pdpb@bryanbrattlof.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,129 +86,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enhances the process for identifying disk images within the EFI boot
-manager. Utilize part_driver_lookup_type() to verify the validity of a
-downloaded file as a disk image, rather than depending on file
-extensions.
+On Wed Oct 8, 2025 at 8:33 PM IST, Bryan Brattlof wrote:
+> On October  6, 2025 thus sayeth Anshul Dalal:
+>> With the memory map configuration being done dynamically, reserve extra
+>> space during U-Boot relocation to ensure we have enough for the fixups.
+>>=20
+>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>> ---
+>>  arch/arm/mach-k3/arm64/arm64-mmu.c | 5 +++++
+>>  1 file changed, 5 insertions(+)
+>>=20
+>> diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64=
+/arm64-mmu.c
+>> index 479451452a2..f999af143fb 100644
+>> --- a/arch/arm/mach-k3/arm64/arm64-mmu.c
+>> +++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+>> @@ -41,3 +41,8 @@ struct mm_region k3_mem_map[K3_MEM_MAP_LEN] =3D {
+>>  };
+>> =20
+>>  struct mm_region *mem_map =3D k3_mem_map;
+>> +
+>> +u64 get_page_table_size(void)
+>> +{
+>> +	return SZ_128K;
+>> +}
+>
+> How are we calculating this size? With 2^39 addresses this should bring=
+=20
+> us into the MBs of TLB data.=20
+>
+> I see we limit U-Boot to 512 entries, but that doesn't match this either
+>
 
-part_driver_lookup_type() is now used in the prepare_loaded_image()
-function in the EFI boot manager to detect partitions on a block device
-created from a downloaded image. This allows the boot manager to boot
-from any disk image that can be recognized by a partition driver, not
-just ISO and IMG images.
+Of the current K3 devices, the largest reported size for the fixed up
+memory maps was ~32KiB with AM62 SiP (TFA@80000000 and TEE@80080000).
 
-Update prepare_loaded_image() to create the ramdisk block device
-internally, obtain the blk_desc and use part_driver_lookup_type() to
-detect a valid partition table.
+With the carveouts not aligned to 2MiB, maximum size I saw was ~64KiB.
+So with an added 2x margin of safety, I arrived at 128KiB ;)
 
-In try_load_from_uri_path(), try prepare_loaded_image() first to detect
-disk images, and fall back to PE-COFF detection only if that fails.
+This is enough for all current K3 devices and we can always increase it
+later if need be. As the panic we would get is pretty self explanatory:
 
-Signed-off-by: Javier Tia <javier.tia@linaro.org>
----
- lib/efi_loader/efi_bootmgr.c | 49 +++++++++++++++++++++++++++++++-------------
- 1 file changed, 35 insertions(+), 14 deletions(-)
+  Insufficient RAM for page table: 0x3000 > 0x2000. Please increase the siz=
+e in get_page_table_size()
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 662993fb809..d472dde158a 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -17,6 +17,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <net.h>
-+#include <part.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <asm/unaligned.h>
-@@ -347,6 +348,9 @@ static efi_status_t fill_default_file_path(struct udevice *blk,
-  * @dp:		pointer to default file device path
-  * @blk:	pointer to created blk udevice
-  * Return:	status code
-+ *
-+ * This function handles device creation internally and performs cleanup
-+ * on error paths.
-  */
- static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
- 					 struct efi_device_path **dp,
-@@ -355,10 +359,31 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
- 	u64 pages;
- 	efi_status_t ret;
- 	struct udevice *ramdisk_blk;
-+	struct blk_desc *desc;
-+	struct part_driver *part_drv;
- 
-+	/* Create the ramdisk block device internally */
- 	ramdisk_blk = mount_image(label, addr, size);
--	if (!ramdisk_blk)
--		return EFI_LOAD_ERROR;
-+	if (!ramdisk_blk) {
-+		log_err("Failed to create ramdisk block device\n");
-+		return EFI_DEVICE_ERROR;
-+	}
-+
-+	/* Get the block descriptor and detect partitions */
-+	desc = dev_get_uclass_plat(ramdisk_blk);
-+	if (!desc) {
-+		log_err("Failed to get block descriptor\n");
-+		ret = EFI_DEVICE_ERROR;
-+		goto err;
-+	}
-+
-+	/* Use part_driver_lookup_type for comprehensive partition detection */
-+	part_drv = part_driver_lookup_type(desc);
-+	if (!part_drv) {
-+		log_err("Image is not a valid disk image\n");
-+		ret = EFI_INVALID_PARAMETER;
-+		goto err;
-+	}
- 
- 	ret = fill_default_file_path(ramdisk_blk, dp);
- 	if (ret != EFI_SUCCESS) {
-@@ -407,7 +432,7 @@ static efi_status_t efi_bootmgr_release_uridp(struct uridp_context *ctx)
- 	if (!ctx)
- 		return ret;
- 
--	/* cleanup for iso or img image */
-+	/* cleanup for disk image */
- 	if (ctx->ramdisk_blk_dev) {
- 		ret = efi_add_memory_map(ctx->image_addr, ctx->image_size,
- 					 EFI_CONVENTIONAL_MEMORY);
-@@ -466,7 +491,6 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- {
- 	char *s;
- 	int err;
--	int uri_len;
- 	efi_status_t ret;
- 	void *source_buffer;
- 	efi_uintn_t source_size;
-@@ -516,18 +540,15 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
- 	image_size = ALIGN(image_size, SZ_2M);
- 
- 	/*
--	 * If the file extension is ".iso" or ".img", mount it and try to load
--	 * the default file.
--	 * If the file is PE-COFF image, load the downloaded file.
-+	 * Check if the downloaded file is a disk image or PE-COFF image.
-+	 * Try disk image detection first using prepare_loaded_image().
- 	 */
--	uri_len = strlen(uridp->uri);
--	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
--	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
--		ret = prepare_loaded_image(lo_label, image_addr, image_size,
--					   &loaded_dp, &blk);
--		if (ret != EFI_SUCCESS)
--			goto err;
- 
-+	/* First, try to treat the image as a disk image */
-+	ret = prepare_loaded_image(lo_label, image_addr, image_size,
-+				   &loaded_dp, &blk);
-+	if (ret == EFI_SUCCESS) {
-+		/* Image is a disk image, set up for disk boot */
- 		source_buffer = NULL;
- 		source_size = 0;
- 	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
-
--- 
-2.51.0
-
+Regards,
+Anshul
