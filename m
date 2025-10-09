@@ -4,84 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6FDCCCD183
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 15:20:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B52FBCCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 15:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35F6784461;
-	Thu,  9 Oct 2025 17:20:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 29C3384529;
+	Thu,  9 Oct 2025 17:21:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="B4NlWYkc";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 892C8844AE; Thu,  9 Oct 2025 17:20:04 +0200 (CEST)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2C0C8421F
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 17:20:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ id B2F4184534; Thu,  9 Oct 2025 17:21:49 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 41DC984461
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 17:21:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-27d3540a43fso10843205ad.3
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 08:20:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1760023199; x=1760627999;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=osKdUEZAMNBNNVHA3ZhvtUtPJJCBLxytYrjkYlLr/mI=;
- b=B4NlWYkcM7dHQKuPMNKBWYJm0Rw0T15lg+BR/7f86yfBQmB0U5IG7wtERMyR95mJAu
- Jd9vyWsl10/8g/HfK9cmbDoCR2E42sZwQtYGMTeQiPuCmKqxxpY+d6DA2SR7EB1zc5id
- yiDpy/5czQKMOUg11brd9adz59uElAevE0eDE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760023199; x=1760627999;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=osKdUEZAMNBNNVHA3ZhvtUtPJJCBLxytYrjkYlLr/mI=;
- b=evug7hSAZiqP6IKKEPOFEij/4nWNDv2oZ9/7xZrzL45Ft0Wur4kdpV3uJf1WB1WcI7
- v/Mvb2QAz/Xwll/6KFbRrkB811AUtFU4iPO34iHpCjqXFBJj8z96kQnuzgZDCsdB/5Jq
- iiOZ8kTem+Y4IdivFabEFRP6G35w6jtF0QRf1kv8VG4/Z0+mG1xKMLSWONT0ekijkscf
- LX0fKr+O2NzjfPRJ6k0kwUum9XJ9TQl3TpkeRWcL9i36QHwfZm3s5fYoxDTQMOnqpZ2l
- zZp0ZmEk9Tw4sLufIHLWGJU3Fl5dAfxKKLHIpqCgCU0dnDxUhtz/CXbWexiwGvDt3V6K
- X5EQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU2yZHmSqvBgV8B58mLxjUJlqwXZMvgPIXY2KHxFTn4pOteFdges5z83mkNGynMkmYWzX7m1qw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUL7h6onTp5AHIT9taEeAjovJ1k/LY09H3gsAHV0liU41Yg5hv
- 69fcd3FoJ8RdHWbtUUFOndwyi5pedAJ1Hn8CA9aho+j3l+S1F4P35LZT/ibMh+922YxA/zB0OaF
- ywG6bJtiCDRXu7TZrHKFicxTmEyM8IPVJ6MjBHO7ynCivKDKIWpMsKf0=
-X-Gm-Gg: ASbGncvJK4Y+QBQrD5k9HfZQ3N/YcOf2UxKHUoXZiyrwmeZIlw2uBfpat2zzk6FLp4W
- 2/+VX7unmt5j3Q+nIyvAD9wJCOClBJpzSWuM3z62H4m+5HCTlKjcMhrTF53qRNA7ERfYnaIJ/K3
- kNI589KCz6wWEjEcier7L+WVXvGbzw9XYF0AgB4wnbpfRp/oWfxxycpFFD6TsxTay6KfPYHJglG
- ygAKy/sEZ0v2P70euwsEpDXXKq2P0UN5n/hg3J+G0WhArj+ubb4j8HbrcFo48w=
-X-Google-Smtp-Source: AGHT+IGVhhv9ek0PrJhTzq+EuZf6YsMYsEIvAT4toy87BeDwo+3ZrhFcIJcoiDluORsd0cl5CACrIvQF1TUnSmkc2AU=
-X-Received: by 2002:a17:903:1aa4:b0:27c:a35a:1321 with SMTP id
- d9443c01a7336-290272e6f79mr88364465ad.51.1760023198760; Thu, 09 Oct 2025
- 08:19:58 -0700 (PDT)
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7C6B91688;
+ Thu,  9 Oct 2025 08:21:38 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4734D3F59E;
+ Thu,  9 Oct 2025 08:21:45 -0700 (PDT)
+Date: Thu, 9 Oct 2025 16:21:41 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Emil Renner Berthing
+ <emil.renner.berthing@canonical.com>, Tom Rini <trini@konsulko.com>, Cody
+ Schuffelen <schuffelen@google.com>, Dmitrii Merkurev
+ <dimorinny@google.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Debbie Horsfall <Debbie.Horsfall@arm.com>
+Subject: Re: [PATCH v2 1/1] virtio: blk: support block sizes exceeding 512
+ bytes
+Message-ID: <20251009162141.1f3337cd@donnerap.manchester.arm.com>
+In-Reply-To: <6c36ea4b-a812-4fba-a72e-f2f951f07caa@canonical.com>
+References: <20250830203954.25775-1-heinrich.schuchardt@canonical.com>
+ <20251008163954.6da0f778@donnerap.manchester.arm.com>
+ <6c36ea4b-a812-4fba-a72e-f2f951f07caa@canonical.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-References: <20250926153136.3680867-1-trini@konsulko.com>
- <e4db9bab-9de2-4810-ab19-7654be60dae5@linaro.org>
- <20251009142601.GN298503@bill-the-cat>
- <0372ee71-0b8a-449f-983e-63ef024e5ac3@linaro.org>
- <20251009151117.GO298503@bill-the-cat>
-In-Reply-To: <20251009151117.GO298503@bill-the-cat>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 9 Oct 2025 17:19:47 +0200
-X-Gm-Features: AS18NWAVo6-dGdn7IRUtAnpahAE-b2sPExpO6Tl_QpHwU41rGTAhLBU7fxqGFz4
-Message-ID: <CAOf5uw=xmKDbqbBog_ZzNmQSdNFtsfKx4SH8w=2aPzwGVu2bZQ@mail.gmail.com>
-Subject: Re: [PATCH] nand: atmel: Rework ATMEL_EBI and DM_NAND_ATMEL
- interaction
-To: Tom Rini <trini@konsulko.com>
-Cc: Eugen Hristev <eugen.hristev@linaro.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,93 +63,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+On Wed, 8 Oct 2025 23:23:17 +0200
+Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
 
-I will add to my queue that I have now with patches, I have already
-prepared a branch
+Hi Heinrich,
 
-Michael
+thanks for the quick reply!
 
-On Thu, Oct 9, 2025 at 5:11=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Oct 09, 2025 at 05:58:48PM +0300, Eugen Hristev wrote:
-> >
-> >
-> > On 10/9/25 17:26, Tom Rini wrote:
-> > > On Thu, Oct 09, 2025 at 12:48:29PM +0300, Eugen Hristev wrote:
-> > >>
-> > >>
-> > >> On 9/26/25 18:31, Tom Rini wrote:
-> > >>> The way that the NAND driver under DM_NAND_ATMEL is probed is by th=
-e
-> > >>> dummy memory driver controlled by ATMEL_EBI. Rather than require th=
-at
-> > >>> for NAND to work both be enabled, make NAND select ATMEL_EBI and do=
- not
-> > >>> prompt for ATMEL_EBI as it only triggers the probe for NAND.
-> > >>>
-> > >>> Signed-off-by: Tom Rini <trini@konsulko.com>
-> > >>> ---
-> > >>> Cc: Eugen Hristev <eugen.hristev@linaro.org>
-> > >>> Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> > >>> Cc: Michael Trimarchi <michael@amarulasolutions.com>
-> > >>> ---
-> > >>>  drivers/memory/Kconfig       | 2 +-
-> > >>>  drivers/mtd/nand/raw/Kconfig | 1 +
-> > >>>  2 files changed, 2 insertions(+), 1 deletion(-)
-> > >>>
-> > >>> diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
-> > >>> index eaee739c6aab..591d9d9c6569 100644
-> > >>> --- a/drivers/memory/Kconfig
-> > >>> +++ b/drivers/memory/Kconfig
-> > >>> @@ -14,7 +14,7 @@ config MEMORY
-> > >>>     For now this uclass has no methods yet.
-> > >>>
-> > >>>  config ATMEL_EBI
-> > >>> - bool "Support for Atmel EBI"
-> > >>> + bool
-> > >>>   help
-> > >>>     Driver for Atmel EBI controller. This is a dummy
-> > >>>     driver. Doesn't provide an access to EBI controller. Select
-> > >>> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kc=
-onfig
-> > >>> index aa4bb2a0595c..f083113486ed 100644
-> > >>> --- a/drivers/mtd/nand/raw/Kconfig
-> > >>> +++ b/drivers/mtd/nand/raw/Kconfig
-> > >>> @@ -50,6 +50,7 @@ config SYS_NAND_NO_SUBPAGE_WRITE
-> > >>>  config DM_NAND_ATMEL
-> > >>>   bool "Support Atmel NAND controller with DM support"
-> > >>>   depends on ARCH_AT91
-> > >>
-> > >> Which branch is this patch based on ?
-> > >> I have a conflict because this line ^^ is missing in master ("depend=
-s on
-> > >> ARCH_AT91")
-> > >> Is there another patch for that ?
-> > >
-> > > Ugh, yes, sorry, this patch depends on:
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20250711151604.22242=
-43-1-trini@konsulko.com/
-> > >
-> >
-> > Then maybe Dario can pick this up together with the dependency patch ?
->
-> Works for me, Dario?
->
-> --
-> Tom
+> On 10/8/25 17:39, Andre Przywara wrote:
+> > On Sat, 30 Aug 2025 22:39:54 +0200
+> > Heinrich Schuchardt <heinrich.schuchardt@canonical.com> wrote:
+> > 
+> > Hi Heinrich,
+> >   
+> >> QEMU allows to specify the logical block size via parameter
+> >> logical_block_size of a virtio-blk-device.
+> >>
+> >> The communication channel via virtqueues remains based on 512 byte blocks
+> >> even if the logical_block_size is larger.
+> >>
+> >> Consider the logical block size in the block device driver.
+> >>
+> >> Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+> >> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> >> ---
+> >> v2:
+> >> 	remove superfluous include linux/err.h
+> >> ---
+> >>   drivers/virtio/virtio_blk.c | 25 ++++++++++++++++++++++---
+> >>   1 file changed, 22 insertions(+), 3 deletions(-)
+> >>
+> >> diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+> >> index 2f999fc8bbe..4224e3c17f4 100644
+> >> --- a/drivers/virtio/virtio_blk.c
+> >> +++ b/drivers/virtio/virtio_blk.c
+> >> @@ -12,10 +12,17 @@
+> >>   #include <virtio_types.h>
+> >>   #include <virtio.h>
+> >>   #include <virtio_ring.h>
+> >> +#include <linux/log2.h>
+> >>   #include "virtio_blk.h"
+> >>   
+> >> +/**
+> >> + * struct virtio_blk_priv - private date for virtio block device
+> >> + */
+> >>   struct virtio_blk_priv {
+> >> +	/** @virtqueue - virtqueue to process */
+> >>   	struct virtqueue *vq;
+> >> +	/** @blksz_shift - log2 of block size divided by 512 */
+> >> +	u32 blksz_shift;
+> >>   };
+> >>   
+> >>   static const u32 feature[] = {
+> >> @@ -71,6 +78,8 @@ static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+> >>   	u8 status;
+> >>   	int ret;
+> >>   
+> >> +	sector <<= priv->blksz_shift;
+> >> +	blkcnt <<= priv->blksz_shift;
+> >>   	virtio_blk_init_header_sg(dev, sector, type, &out_hdr, &hdr_sg);
+> >>   	sgs[num_out++] = &hdr_sg;
+> >>   
+> >> @@ -109,7 +118,7 @@ static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+> >>   		;
+> >>   	log_debug("done\n");
+> >>   
+> >> -	return status == VIRTIO_BLK_S_OK ? blkcnt : -EIO;
+> >> +	return status == VIRTIO_BLK_S_OK ? blkcnt >> priv->blksz_shift : -EIO;
+> >>   }
+> >>   
+> >>   static ulong virtio_blk_read(struct udevice *dev, lbaint_t start,
+> >> @@ -177,15 +186,25 @@ static int virtio_blk_probe(struct udevice *dev)
+> >>   	struct blk_desc *desc = dev_get_uclass_plat(dev);
+> >>   	u64 cap;
+> >>   	int ret;
+> >> +	u32 blk_size;
+> >>   
+> >>   	ret = virtio_find_vqs(dev, 1, &priv->vq);
+> >>   	if (ret)
+> >>   		return ret;
+> >>   
+> >> -	desc->blksz = 512;
+> >> -	desc->log2blksz = 9;
+> >>   	virtio_cread(dev, struct virtio_blk_config, capacity, &cap);
+> >>   	desc->lba = cap;
+> >> +	if (!virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {  
+> > 
+> > Is that actually the right condition check? I would assume that we only
+> > query the blk_size field if the feature bit is *set*, not when it's
+> > cleared?
+> > We see a failure (virtio block device not registering), because blk_size is
+> > 0 on the Arm FVP fast model, which is fine I think because the feature bit
+> > is clear as well.
+> > 
+> > Cheers,
+> > Andre  
+> 
+> Hello Andre,
+> 
+> Thanks for sharing your test results.
+> 
+> Looking at these QEMU lines, I think the evaluated feature flag is correct:
+> 
+> pc-bios/s390-ccw/virtio.h:163:
+> uint32_t blk_size; /* block size of device (if VIRTIO_BLK_F_BLK_SIZE) */
+> 
+> include/standard-headers/linux/virtio_blk.h:72-73:
+> /* block size of device (if VIRTIO_BLK_F_BLK_SIZE) */
+> __virtio32 blk_size;
+> 
+> virtio_has_feature() cannot detect a feature if is not in the feature 
+> set of the U-Boot driver. See function virtio_uclass_child_pre_probe():
+> 
+>      uc_priv->features = driver_features_legacy & device_features;
+> 
+> VIRTIO_BLK_F_BLK_SIZE is missing in the feature set of virtio_blk.
+> The not in front of virtio_has_feature() is wrong.
 
+Ah, indeed a double whammy: the feature bit was filtered, AND the logic
+twisted, that's why it worked.
 
+I applied your patch, and tested with the FVP and with QEMU, trying both
+block sizes there: seems to work fine now.
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+Are you going to send a proper patch (since you have it already)?
+If so, add: Reported-by: Debbie Horsfall <debbie.horsfall@arm.com>,
+because she found the issue.
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Thanks!
+Andre
+
+> 
+> Could you, please, retest with this diff:
+> 
+> diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+> index 4224e3c17f4..ec2e28b54f7 100644
+> --- a/drivers/virtio/virtio_blk.c
+> +++ b/drivers/virtio/virtio_blk.c
+> @@ -26,6 +26,7 @@ struct virtio_blk_priv {
+>   };
+> 
+>   static const u32 feature[] = {
+> +       VIRTIO_BLK_F_BLK_SIZE,
+>          VIRTIO_BLK_F_WRITE_ZEROES
+>   };
+> 
+> @@ -194,7 +195,7 @@ static int virtio_blk_probe(struct udevice *dev)
+> 
+>          virtio_cread(dev, struct virtio_blk_config, capacity, &cap);
+>          desc->lba = cap;
+> -       if (!virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {
+> +       if (virtio_has_feature(dev, VIRTIO_BLK_F_BLK_SIZE)) {
+>                  virtio_cread(dev, struct virtio_blk_config, blk_size, 
+> &blk_size);
+>                  desc->blksz = blk_size;
+>                  if (!is_power_of_2(blk_size) || desc->blksz < 512)
+> 
+> Best regards
+> 
+> Heinrich
+> 
+> >   
+> >> +		virtio_cread(dev, struct virtio_blk_config, blk_size, &blk_size);
+> >> +		desc->blksz = blk_size;
+> >> +		if (!is_power_of_2(blk_size) || desc->blksz < 512)
+> >> +			return -EIO;
+> >> +	} else {
+> >> +		desc->blksz = 512;
+> >> +	}
+> >> +	desc->log2blksz = LOG2(desc->blksz);
+> >> +	priv->blksz_shift = desc->log2blksz - 9;
+> >> +	desc->lba >>= priv->blksz_shift;
+> >>   
+> >>   	return 0;
+> >>   }  
+> >   
+> 
+
