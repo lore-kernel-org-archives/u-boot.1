@@ -4,67 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02A1DCCD184
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CC54CCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 14:58:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CF90845B8;
-	Thu,  9 Oct 2025 16:51:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 069DE844AE;
+	Thu,  9 Oct 2025 16:58:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="oDnvXSnd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZBidN/iJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93469845B8; Thu,  9 Oct 2025 16:51:36 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 88FF684529; Thu,  9 Oct 2025 16:58:53 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8908845A3
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:51:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BABDA84181
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 16:58:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 613571A1243;
- Thu,  9 Oct 2025 14:51:34 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 35F596062C;
- Thu,  9 Oct 2025 14:51:34 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A2FC2102F21EC; 
- Thu,  9 Oct 2025 16:51:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760021493; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=sCWPVSSrCqFDcj3qMxpsBl7axK8PpinNn2HGuLOMqMk=;
- b=oDnvXSnd0JxMOp4MZ/a2Kdq8wI9XP2VjW+JPPmJ0V6sjMbStjLlYR6T46Lu4cMhnUmCwYH
- tTJduW79Tx+Lq7oJUjwlnC4IfVpszOVTAM7Y36hsXeuklOXudwhAQmCm87Lx9lZmKfXHu4
- sCutKy1xxXjRKItHGsnON0BHkIz5wRK587O6jbqBYpxsc1lo1pg54Qom+O5jX/goDa1b5c
- jm0zoYbI/VqOe+2g0DnCn1bivF+hji6/WGYB5gIUEm0X3aaz5/CH+q8lbH7iiGlXi8nnEk
- jIlC/4R7pxeIRHuuIFZKTbFYeIGk+WqCXlGnV5OeCmfRkpQC3Zl76lzr9O3uQQ==
-From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Thu, 09 Oct 2025 16:50:54 +0200
-Subject: [PATCH v2 18/18] boot: bootmeth_efi: Add extension board
- devicetree overlay support
+ spf=pass smtp.mailfrom=eugen.hristev@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-46e3a50bc0fso8454575e9.3
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 07:58:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760021930; x=1760626730; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=q1QHzv38hjfVgxFhcwPwNkHEucnQjlJhu3TV+yDBSCI=;
+ b=ZBidN/iJ30kzypD3AemYoIgGgHv3Lfz5sGKoCmsCmSJ8K9COKI9ORmDiNiRSWvXCaQ
+ rpGNXCUPUF7hwDJnOd3uFevOVie6TwlQEvWgCsv2dRLPvudzN9QB3x0Uj1IYtjqrTGmf
+ drrNrb8rob+tcYVT9lg5IdJTO/5xexqNP9WcOEs5bBI+HzEJC/xAVZDj4RpdNtpUwVXQ
+ F2YB9URSVdnZbM7mZftzrq2rP19ufRFAk5M7LNUo8GEaGoEgYX6tob/X5rUNYaBNUqBv
+ o2xy5QrSQheVuDAeBcKX1DwUCTNVC+KnoGzHX+nbTB4eqlogDnPTl00SceuWNVlY+XhF
+ ExXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760021930; x=1760626730;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=q1QHzv38hjfVgxFhcwPwNkHEucnQjlJhu3TV+yDBSCI=;
+ b=BtcGUKivOTPajTbwQklLQXiIhhpnmTcNSkXnoh9Wz5cH6m1z8bZc6TJMQJhLGoFvD8
+ he3A449dpPQFTP8nNGE8IW8h9e9CzWgz9dDnHPHiNLmlkqrm6vz73cKZK919ky9CxEBq
+ uNT98g/GJVbwVBQviHQP2wsoNFHvhxABb+n14eO46+u47SDU4jjHjMj7M5gGsYmIySPg
+ 3iQhObYeIJ5JYDT/q3yzDjiRDrYYPoq0HIcRtcLwz1q1/Z9gIoWSM8rTQ9BWeowm+5k5
+ fWTuFmYSX5O1tj+tGMveVUGOTf147h1JXVnlCMDhJmqWacuvQ+sPeUtNC1lDRlH5JwZv
+ eQCA==
+X-Gm-Message-State: AOJu0Yw6UwiVfr6GwlAabYwrA9FgiiITonM27/REcv9kHk9e4lZJgZkn
+ iMF3OSv42hYSLHR5v8pybGvyQ0lKfmGlxodsW3HdG0USAlc1GH2ejFXN6DVljjwoZpXLUaJS78Z
+ ZE0SPG60=
+X-Gm-Gg: ASbGnctACWqTl2EzjYiMNyQBqO3J/qkUCj1N38iKgajTjytqKJJAvNdbwsu9ZY/hzmQ
+ 0nWhr79cCub63bAnQAWi5eH3Bi45M/lrQMHYSEDIa4XmE1zryi471K2DuPs0BZwD8DwgVPmeP/i
+ o6yoF9n3muCbeuHEC/qEz3IK+M6H7tJpPqdSWAwFmESu9JmdWuex3KqEWbGVSaJDcgnMDtxu+Jg
+ Z5panXRWsxUKqk7Qz7wdEtvo6YuHwka6CITsP/qWgTdqov1JYRbXBZ/MlvLHj1aZj4B7/Vmp/Aw
+ 1A6WAkTz1m7nABNdhnhZHyX2f4xsC5kEOBrRf+5nRIwYBu2cDsCs4KgqAjysPw/o8O/b+nDqTGa
+ QMcXWzdAOFBswqDW5/gMeaOkjjYxX18b7Za20+8Ihmljf2DJmA84lhtGPUs+AFSmhPrRS
+X-Google-Smtp-Source: AGHT+IGbpyFcGNO1AWIcMaoJF9n7Quor2TWKyHEWyvTjWTiy/+XjAZaM7fzHsxdeTWxQdVquTqcSWg==
+X-Received: by 2002:a05:600c:5488:b0:46e:45f7:34fc with SMTP id
+ 5b1f17b1804b1-46fa9b105ffmr54605685e9.29.1760021929973; 
+ Thu, 09 Oct 2025 07:58:49 -0700 (PDT)
+Received: from [192.168.0.36] ([82.76.24.202])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4255d8f0853sm35798213f8f.50.2025.10.09.07.58.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 09 Oct 2025 07:58:49 -0700 (PDT)
+Message-ID: <0372ee71-0b8a-449f-983e-63ef024e5ac3@linaro.org>
+Date: Thu, 9 Oct 2025 17:58:48 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] nand: atmel: Rework ATMEL_EBI and DM_NAND_ATMEL
+ interaction
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+References: <20250926153136.3680867-1-trini@konsulko.com>
+ <e4db9bab-9de2-4810-ab19-7654be60dae5@linaro.org>
+ <20251009142601.GN298503@bill-the-cat>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@linaro.org>
+In-Reply-To: <20251009142601.GN298503@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251009-feature_sysboot_extension_board-v2-18-e09b39e54de5@bootlin.com>
-References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
-In-Reply-To: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, 
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Cc: Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-X-Mailer: b4 0.15-dev-8cb71
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,114 +104,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for scanning and applying extension board devicetree
-overlays during EFI boot. After loading the main board devicetree,
-the system now scans for available extension boards and applies their
-overlays automatically.
 
-Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
----
 
-Not yet tested, need to find a board with extension boards and supporting
-EFI boot. Roger Quadros could you test it on your side?
----
- boot/bootmeth_efi.c | 67 ++++++++++++++++++++++++++++++++++++++++++++---------
- 1 file changed, 56 insertions(+), 11 deletions(-)
+On 10/9/25 17:26, Tom Rini wrote:
+> On Thu, Oct 09, 2025 at 12:48:29PM +0300, Eugen Hristev wrote:
+>>
+>>
+>> On 9/26/25 18:31, Tom Rini wrote:
+>>> The way that the NAND driver under DM_NAND_ATMEL is probed is by the
+>>> dummy memory driver controlled by ATMEL_EBI. Rather than require that
+>>> for NAND to work both be enabled, make NAND select ATMEL_EBI and do not
+>>> prompt for ATMEL_EBI as it only triggers the probe for NAND.
+>>>
+>>> Signed-off-by: Tom Rini <trini@konsulko.com>
+>>> ---
+>>> Cc: Eugen Hristev <eugen.hristev@linaro.org>
+>>> Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+>>> Cc: Michael Trimarchi <michael@amarulasolutions.com>
+>>> ---
+>>>  drivers/memory/Kconfig       | 2 +-
+>>>  drivers/mtd/nand/raw/Kconfig | 1 +
+>>>  2 files changed, 2 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/memory/Kconfig b/drivers/memory/Kconfig
+>>> index eaee739c6aab..591d9d9c6569 100644
+>>> --- a/drivers/memory/Kconfig
+>>> +++ b/drivers/memory/Kconfig
+>>> @@ -14,7 +14,7 @@ config MEMORY
+>>>  	  For now this uclass has no methods yet.
+>>>  
+>>>  config ATMEL_EBI
+>>> -	bool "Support for Atmel EBI"
+>>> +	bool
+>>>  	help
+>>>  	  Driver for Atmel EBI controller. This is a dummy
+>>>  	  driver. Doesn't provide an access to EBI controller. Select
+>>> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+>>> index aa4bb2a0595c..f083113486ed 100644
+>>> --- a/drivers/mtd/nand/raw/Kconfig
+>>> +++ b/drivers/mtd/nand/raw/Kconfig
+>>> @@ -50,6 +50,7 @@ config SYS_NAND_NO_SUBPAGE_WRITE
+>>>  config DM_NAND_ATMEL
+>>>  	bool "Support Atmel NAND controller with DM support"
+>>>  	depends on ARCH_AT91
+>>
+>> Which branch is this patch based on ?
+>> I have a conflict because this line ^^ is missing in master ("depends on
+>> ARCH_AT91")
+>> Is there another patch for that ?
+> 
+> Ugh, yes, sorry, this patch depends on:
+> https://patchwork.ozlabs.org/project/uboot/patch/20250711151604.2224243-1-trini@konsulko.com/
+> 
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index 64de5c08b7b..13726a13e07 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -16,6 +16,7 @@
- #include <efi.h>
- #include <efi_loader.h>
- #include <env.h>
-+#include <extension_board.h>
- #include <fs.h>
- #include <malloc.h>
- #include <mapmem.h>
-@@ -99,8 +100,11 @@ static int distro_efi_check(struct udevice *dev, struct bootflow_iter *iter)
- static int distro_efi_try_bootflow_files(struct udevice *dev,
- 					 struct bootflow *bflow)
- {
-+	ulong fdt_addr, size, overlay_addr;
-+	const struct extension *extension;
-+	struct fdt_header *working_fdt;
- 	struct blk_desc *desc = NULL;
--	ulong fdt_addr, size;
-+	struct alist *extension_list;
- 	char fname[256];
- 	int ret, seq;
- 
-@@ -157,16 +161,57 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
- 	bflow->fdt_size = size;
- 	bflow->fdt_addr = fdt_addr;
- 
--	/*
--	 * TODO: Apply extension overlay
--	 *
--	 * Here we need to load and apply the extension overlay. This is
--	 * not implemented. See do_extension_apply(). The extension
--	 * stuff needs an implementation in boot/extension.c so it is
--	 * separate from the command code. Really the extension stuff
--	 * should use the device tree and a uclass / driver interface
--	 * rather than implementing its own list
--	 */
-+	if (!CONFIG_IS_ENABLED(SUPPORT_EXTENSION_SCAN))
-+		return 0;
-+
-+	ret = extension_scan();
-+	if (ret < 0)
-+		return 0;
-+
-+	extension_list = extension_get_list();
-+	if (!extension_list)
-+		return 0;
-+
-+	working_fdt = map_sysmem(fdt_addr, 0);
-+	if (fdt_check_header(working_fdt))
-+		return 0;
-+
-+	overlay_addr = env_get_hex("extension_overlay_addr", 0);
-+	if (!overlay_addr) {
-+		log_debug("Environment extension_overlay_addr is missing\n");
-+		return 0;
-+	}
-+
-+	alist_for_each(extension, extension_list) {
-+		char *overlay_file;
-+		int len;
-+
-+		len = sizeof(EFI_DIRNAME) + strlen(extension->overlay);
-+		overlay_file = calloc(1, len);
-+		if (!overlay_file)
-+			return -ENOMEM;
-+
-+		snprintf(overlay_file, len, "%s%s", EFI_DIRNAME,
-+			 extension->overlay);
-+
-+		ret = bootmeth_common_read_file(dev, bflow, overlay_file,
-+						overlay_addr,
-+						(enum bootflow_img_t)IH_TYPE_FLATDT,
-+						&size);
-+		if (ret) {
-+			log_debug("No device tree overlay\n");
-+			free(overlay_file);
-+			continue;
-+		}
-+
-+		ret = extension_apply(working_fdt, size);
-+		if (ret) {
-+			free(overlay_file);
-+			continue;
-+		}
-+		bflow->fdt_size += size;
-+		free(overlay_file);
-+	}
- 
- 	return 0;
- }
-
--- 
-2.43.0
-
+Then maybe Dario can pick this up together with the dependency patch ?
