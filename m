@@ -4,79 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2BF0CCD183
-	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 19:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98020CCD184
+	for <u-boot@archiver.kernel.org>; Thu,  9 Oct 2025 19:37:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2995C8423A;
-	Thu,  9 Oct 2025 21:36:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A90438423A;
+	Thu,  9 Oct 2025 21:37:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WRq7xrbS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j7M5S0qT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C19CC8423D; Thu,  9 Oct 2025 21:36:48 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 1BFE084241; Thu,  9 Oct 2025 21:37:23 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D59AE83C94
- for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 21:36:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 334B483C94
+ for <u-boot@lists.denx.de>; Thu,  9 Oct 2025 21:37:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-36a6a39752bso12867031fa.0
- for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 12:36:46 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-57edfeaa05aso1688943e87.0
+ for <u-boot@lists.denx.de>; Thu, 09 Oct 2025 12:37:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760038606; x=1760643406; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1760038640; x=1760643440; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=T5OZO9zx5c5D4AJhERenEW9ZetaxubxbChIJIhSsMIQ=;
- b=WRq7xrbSZVw234PsCQM5xggSKs9QDZe9TGAhVxd9FXKx0OultCd2Wkv5JYJyl51AFk
- bo0IjEFL3NeMqu9AgFDo8zpU3Zgqzvd+TO5Z8p8APo8eu40W+wSY49XcODyfF3qWIMBv
- 9Ruwj4oegiC6/ykJSzRN+fI4r8OLSd8kj5YxAgB54FGPH51pnvxCR9rJCMQ48an3hHPp
- 1VzwI8cRGzDUuusI5M9pi/H9Fyg1WcFpvKPmdiuHxHsyEswXVssYZtc37LiXYl7STz1j
- 06Yv9yGCesX4IMAWVE2XCF5HdFS1ZmjdNKTU92MTk1sG20dMp1lDIQrMB6R6XuSJ08XK
- jBIQ==
+ bh=ZDWVcZi4k72xwDtjtF2sMPAi3cnp2Dp0yjiPKV8NuI8=;
+ b=j7M5S0qTRFH8t3oOPkGMXJd3Gl4cwx0TKNxfGoaeo9v+3nMfJ3XTMDyU5Qgumr1vdV
+ 9BiT0gmpKORBgqZIKYCuXZumssS/UyteSyKB0p53wj7EKUPH6MtVVA9DnDk+q1QMWJ0n
+ RwvEpjrjCfGhahZ0GrVxqQrd6eYeJ6d0DDNnrw8igciJldSmGlKJEq9X0oJN8s8QrsPU
+ t5qIqO1h9XIXx+f1oCmeWXYP+JkDp6/DBoFvY9RqDfbttIGqjMeio7WEBAS1CwISCFTK
+ ub+EX2mWTuqQSofHTBG79ZLSJahI6aZewborMbYFTqb817W28UQ/iNzJSEQ8MPnX+God
+ uUGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760038606; x=1760643406;
+ d=1e100.net; s=20230601; t=1760038640; x=1760643440;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=T5OZO9zx5c5D4AJhERenEW9ZetaxubxbChIJIhSsMIQ=;
- b=SrpH0t9UZbaYwL8eK5soir5N6dMKOjL20ea2wtubrKi2UAtBURHVBLHnw2n1Gn2q2f
- q7fg/Lg8uxIdjZFRfnSXrlPvmQ5gxZmlidc8p3Jg46MMNUXVksw+vxguN6wWdjabyT3B
- ARtOt9bm2+5ySVvdUBcFIJlq5Ct1I9MVNJnT6S5LfUc0AG0PtdNPQHOrSIGL+LI8zs2A
- FRPFfxSR7yduMIjMQ1OMIWExTjYi54Qu3Pw0BG0XpdgZvjpZooXFMWRCp6ISj3X39PXN
- RiIeO3xwhbhEnDGeT3eDWPwRwrwfxYfiZnbRk0WzSnsoN7FKH+iDKikkSGBrzKB9woo+
- RWCA==
+ bh=ZDWVcZi4k72xwDtjtF2sMPAi3cnp2Dp0yjiPKV8NuI8=;
+ b=hfkgMlsswB5JaVrhLvUdLXdSqFREFVNx3V8vrlgoItJDyUWZ4FowPsy7OSdtTOHTgh
+ OFuToJ60CaPEjyNsd4D62okHAi1GhMZi+4PKkrzzyf+POZU2Xlc3hlopvDHVSGxdwBFh
+ uR2iVeDtXpBGyZ+c4AUHphx322Tv6loh/Df28ODqCLsON0OhbX7iKA9fdEXnkkT92kaz
+ 5jJ6i7FDnqONlOKrjs1RxJgWr3KWQpnYg7EqgYTCZYfw6ptT1ihf57LP+owHj/A+nsRX
+ ANpOlQmOGaVIAufkeXY5zYVr9oanQF+NCct9oKjdOnbUBPGE0DqLCKwu9mTOsamy42If
+ YvjQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVs/brbVqXLq0aW7shNuO7ArE1D+yfmplEVh98G0Ok2XKNGHDhzOhIGedrBiVeJ+x3aie1AjPo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz76XDBkMl5S+ePPZ4f1+/pKwdaqxdpugNvsexhOuZ/uDfVirSe
- S66mXDVJCc4OytnUSGki1JkDmxyLWTSID7+nHb2MnAWNvLtmr8mYUdsZhvzcrV/cGEuHe5qJu+Z
- cvIvVtLZY7TobDaQGAmYR5lYt8Sj/xPY=
-X-Gm-Gg: ASbGncv0Kri2vaG1WEO/FfqcB6k46W74663lMOAKNlAAgrGbmpCJF7JX0Y4k4ZiVfKk
- 67+yrE15y+SA/I2cakKs7KA59bpFwuRkIv4HCHnAlCT3niDDitq8gUibIoxP6nk0gKF5aYyhzdL
- ecm4Y4WhyGOPCNnrBEXhRzLsqyDOIcHOcgvNiZvP9U6jVXpHm2dncpO5o8g3fopXw2URCX9xZw+
- 16qn1UD31OFMrrR96QlgE1+VuxhhAPyYLRXwIBRe/X3f0xzyK9oGDzj4Y9+V+M=
-X-Google-Smtp-Source: AGHT+IF/ZpJAvkswYFeNoX3T7f31CugMd7y8o0udBpNo6Ow2Nk5PVW6pwbiIsoYIP4zkz2VEmcE4FH9e1GxNLDChvRU=
-X-Received: by 2002:a05:651c:3608:b0:364:f7e2:3908 with SMTP id
- 38308e7fff4ca-37609e0fbbcmr23966781fa.26.1760038605417; Thu, 09 Oct 2025
- 12:36:45 -0700 (PDT)
+ AJvYcCXTFfKj4EKNAwUfT80qvuvP/l10CYX3QBwJO3wF10IABLxQ1WQk38Jjb7lRlU9Zu4e6jlW+NB8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4JSvFjgSLd2vU62/tiASzPcJUUGp2vE5Cz3C9ICmi7QdpsMud
+ zqIRTX9G72KirHPnRSfkMXj1a277475JgWerEZeaHjsbL/fqKEglqTDZ2obhIcV+SKJA/pjNxS7
+ x3WVPwtrDWKVKygoIMg5EjSefEPKmFh4=
+X-Gm-Gg: ASbGncurFedFXvITqlrfujq4KP9RGBgLJ5Q/H3Dtq4zJ+Tw+sp6zGBGS1v/iE0EoC0p
+ WxmUHDfy3la6y3kYqRL/lAX0zaaVyURi5Ed1om8J6K8CDd2+NhZiCQf8Z1cF2VM27EWGfk4xbd4
+ WJH+lhM6DEzYYlimyaGKcqbZUkd/yKO+RBgYl7cqE1pCsgVuYs0JGJg4TKPdoEQ80kkfNHtJtLN
+ XshWNqgr2R7LfbEL3f7znCQX4t+XVp56pW9QJQ4bdMj8T8HGLl0PotK+4be0LQ=
+X-Google-Smtp-Source: AGHT+IFDL7LIfb/+M38BXHrMCDEncYSBY5TwLt25hVFHn2dBDvE2ypiTJcNK514vU9GISDJhrdEpJv0LR3gTwD1J8yk=
+X-Received: by 2002:a05:6512:68b:b0:576:d5d0:bb81 with SMTP id
+ 2adb3069b0e04-5906dae6c4fmr2273636e87.37.1760038640330; Thu, 09 Oct 2025
+ 12:37:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251002-wip-config-imx8m-bootmeth-rauc-v1-1-e54d43a6fd70@phytec.de>
-In-Reply-To: <20251002-wip-config-imx8m-bootmeth-rauc-v1-1-e54d43a6fd70@phytec.de>
+References: <20251007081640.61772-1-frieder@fris.de>
+In-Reply-To: <20251007081640.61772-1-frieder@fris.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 9 Oct 2025 16:36:30 -0300
-X-Gm-Features: AS18NWDb23vyxetSUahDs7OJVuOHdqVdCLTP5AZ-WSa6terLfg30-CGSeG_qoZc
-Message-ID: <CAOMZO5ARMyp7HEOq1Qk6x-G5+NqoYArByEhQfPJeA8ZVmgsU=w@mail.gmail.com>
-Subject: Re: [PATCH] board: phytec: phycore_imx8mp: Add rauc to bootmeths
-To: Martin Schwan <m.schwan@phytec.de>
-Cc: Tom Rini <trini@konsulko.com>, Teresa Remmet <t.remmet@phytec.de>, 
- Yannic Moog <y.moog@phytec.de>, u-boot@lists.denx.de, upstream@lists.phytec.de
+Date: Thu, 9 Oct 2025 16:37:08 -0300
+X-Gm-Features: AS18NWCmlfr5xqctMxd2JcXNovUCsxPPEM0FJG1c5oh-e4l51pmur9Ej-A9MKuE
+Message-ID: <CAOMZO5AbOp5poMz4L6+FKDKXJ=KhW3hrVXE3XMcFDKUjNAtbDQ@mail.gmail.com>
+Subject: Re: [PATCH 00/13] Misc changes for Kontron i.MX8MM SoMs and Boards
+To: Frieder Schrempf <frieder@fris.de>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Stefano Babic <sbabic@nabladev.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>, 
+ Eberhard Stoll <eberhard.stoll@kontron.de>,
+ Garrett Giordano <ggiordano@phytec.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@oss.qualcomm.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,12 +107,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 2, 2025 at 8:21=E2=80=AFAM Martin Schwan <m.schwan@phytec.de> w=
+On Tue, Oct 7, 2025 at 5:18=E2=80=AFAM Frieder Schrempf <frieder@fris.de> w=
 rote:
 >
-> Add rauc to bootmeths variable if BOOTMETH_RAUC is enabled. This is
-> setting a proper default for RAUC enabled systems.
+> From: Frieder Schrempf <frieder.schrempf@kontron.de>
 >
-> Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+> This is a collection of various patches that we have collected
+> downstream and the conversion to OF_UPSTREAM.
 
-Applied, thanks.
+Applied the series, thanks.
