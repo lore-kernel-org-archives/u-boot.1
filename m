@@ -4,84 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E028CCCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:31:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18A65CCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:46:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CDD983FEC;
-	Fri, 10 Oct 2025 13:31:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 337CC83FB0;
+	Fri, 10 Oct 2025 13:46:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f44FRWRY";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Hedw5+eg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1083183F91; Fri, 10 Oct 2025 13:31:27 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E675183FB0; Fri, 10 Oct 2025 13:46:01 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5D7C83FE6
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:31:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B924B83F91
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:45:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-63963066fb0so3904478a12.3
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:31:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760095884; x=1760700684; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=94/jqGLzm7xZbaN/mP+bkKP5JsSk/r4u9qnWWhWqJ7c=;
- b=f44FRWRYSbmRzAqCK2lxvJmS0vZoychr0g0M9nAHqqYNmeA9yAucV+bO338P+eUsSa
- mOY9LOfO3fs3h1ZjNHdSN6aTamWMsqQrFZlqxQ3vNvFLYtpzNkI0TqAR8aOJI/FzI4Bm
- r4ixjRpdsk1e6q4kl9PcuHqJHUVccruOebPn0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760095884; x=1760700684;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=94/jqGLzm7xZbaN/mP+bkKP5JsSk/r4u9qnWWhWqJ7c=;
- b=QVS4KHrZWR07OouyWAgtKpf9QlZ3s8BJTT3NXNIwGhuINUaUCeqrWD9t0XKnYZNuu0
- BkZOsg6bUdgaqf+YmpkEXtcoOePEMYJ7QSvZ3qKQ/XAKrjbIcIjePNtP1ZVfaTx5Nf+y
- rREJwvwARqxSUrDMej7RwGOH7i5V6UkiD1I6MIs2q+pYguIbLDLK5ftpwT5Ai2gKVOWN
- cUE8AOg8xwTrDu+XEC1+BqX15iMwHdvJuta3DoEOku+JqsEurUiR9ziqTrZzN87HxaTn
- 72TJi5Q2rfmoPIMt+GqHvOoLEFxYi+b+T3HvHkHXFPkHB5qgDixvFVE2VTsROLIYCskW
- DZuw==
-X-Gm-Message-State: AOJu0YwhLeo/HWgxV73hNMeHihVGW6JBZGB+YyOqOSbsmf7bOuXFMXKK
- 8UkT8BiW42WkQWR+v3efT34dIIbS/gV71WYU1aBwNQrK6/PzKLUvYklxvPfJ/+y208Gtn5/C/fq
- ufG6Uf4ybb1/gjbjtUaw9zWQbyVI6PM20KHbZO72F
-X-Gm-Gg: ASbGnct05l1fIiF7f/ls4VCJPq1QBmiQQHimEsFxI97BgVR8/u2UILPmjaROp9JUJ0Z
- 16fdty4RfbpKI07wa8Gj2dUmJQj/DuT5Z4ww8tXEm2Fy/I913OzMOb6caPFohzJ2sPFSmiJQLfa
- SwMESJ+bXAL+h8+aQZ/cYAnEcLxhi38Bgwk2bTJX7xqkpJi/DYn3DY8JP6jYZmvhwt2Bi3e0+0y
- v7pPH2xvpZZntDQzF+owg==
-X-Google-Smtp-Source: AGHT+IFPSvp5gNrwuhf5z4O0SVtM5uA0pJlg9inKhoCDqfAu10HM24U+pwmPqAPlUAoe4haVsovq844ZU1+IrKlUJjY=
-X-Received: by 2002:a05:6402:13d1:b0:634:ab80:d84b with SMTP id
- 4fb4d7f45d1cf-639d5c5a3f8mr10266173a12.32.1760095884022; Fri, 10 Oct 2025
- 04:31:24 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1760096759; x=1760701559; i=xypron.glpk@gmx.de;
+ bh=zWZp7JcKhUkAWAZQy7aBRsGny7nBu0tKEmPkd0nOU10=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=Hedw5+eggpfd9skub5V798SRKFe6arkti9hOq9EvRHQLCr2B0veGUjRMUI6fePkW
+ UvXJ6RoOEx3+0FY7+7ZDGd9idW55iKIyrha7ihxpYiCPJfYO6sDQIX72/cqKlSX5U
+ 1ctuyDg+5aHeYtZMQisaYuBIbUK7qT9BLYp8whYSWDz4X7WgAdkwGwSFgHFbFWh4w
+ 8/7mwGUCBYped/jAyWuLk4+wjc9tT/yUra0SZuT086+0cHFaMHxgfljy4VTNp0PtH
+ CYSUuEJ/JjSzT1/c6gTutiRSu1e/UPkJqA5ezb+/+Kxj5xDtbcvOVE4CjUme1Rw9k
+ BMtapIctOQjD5ckAcg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MxlzC-1uK1tJ0HVO-00zwsy; Fri, 10
+ Oct 2025 13:45:59 +0200
+Message-ID: <f5da6554-6e58-4162-95a6-1e8a64b66d05@gmx.de>
+Date: Fri, 10 Oct 2025 13:45:53 +0200
 MIME-Version: 1.0
-References: <20251008-topic-interconnect-next-v2-0-c46e94dd328e@linaro.org>
- <20251008-topic-interconnect-next-v2-1-c46e94dd328e@linaro.org>
- <CAFLszTi3cNihLKOvJhrm1GLYdxQKvkv-66Fdr6m90+vvdUtMMg@mail.gmail.com>
- <d0e157af-c5e7-45ee-9f8f-6b9a523d5505@linaro.org>
- <CAFLszTgemVk0tSMpBiMfgnh4LGaVKnOpGWa0N8WwE2Spf+ZUWA@mail.gmail.com>
- <8324c7c6-dcfb-4fe8-a9d3-9ab19fdac36c@linaro.org>
- <CAFLszTi9omZ372BocVZ39nHbgofM5in=Nz4yvCXrHVEgoJPiQg@mail.gmail.com>
- <c6694467-8efb-404d-862d-4df62dd60db6@linaro.org>
- <bfd6fcbb-2c7b-4463-b0ba-ea0a01a09ecd@linaro.org>
-In-Reply-To: <bfd6fcbb-2c7b-4463-b0ba-ea0a01a09ecd@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Oct 2025 12:31:11 +0100
-X-Gm-Features: AS18NWAE_9P6PNniZfd-f7_FiauAOtJM6s5nsTSVgyPUjsTiQ2b1Pqy8TpVIjEw
-Message-ID: <CAFLszTjDt__zEwcy4jioy9vgY+Sv52Ryz0b95JtFTT76-BTT2Q@mail.gmail.com>
-Subject: Re: [PATCH v2 1/7] Introduce the Interconnect Subsystem
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Casey Connolly <casey.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Mario Six <mario.six@gdsys.cc>, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: Use ESRT_FW_TYPE_SYSTEMFIRMWARE instead of
+ ESRT_FW_TYPE_UNKNOWN
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20251010105933.25581-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251010105933.25581-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:B3ThLiAi0MhN/BQnd+hGbp07k3kk1dV3/tz1h1Y71HSEQKN1HKg
+ V8LuO7TIWPRHRM3kEecxQ6klI0xxS0ZEu5cTT5/zpchCqSa1wO4QIEqPdlPft6eTGfBLE9+
+ l7yIArfopPHc77O3SRkYMQI880Z+kjX8PyCCvLwYeacJYqRW5nJNKvXDBFxhad7qmBUB5py
+ 43AFOQ+Bc8FNcX0Zo7+Jw==
+UI-OutboundReport: notjunk:1;M01:P0:bFXCvWXe2gg=;rzi3qiI+nBfpsWLLULnopotBmcd
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,190 +150,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+On 10/10/25 12:59, Ilias Apalodimas wrote:
+> We currently set the firmware image type to ESRT_FW_TYPE_UNKNOWN.
+>=20
+> The spec defines the following:
+> ESRT_FW_TYPE_UNKNOWN 0x00000000
+> ESRT_FW_TYPE_SYSTEMFIRMWARE 0x00000001
+> ESRT_FW_TYPE_DEVICEFIRMWARE 0x00000002
+> ESRT_FW_TYPE_UEFIDRIVER 0x00000003
+>=20
+> Since we don't support updating DEVICEFIRMWARE or UEFIDRIVER types,
+> let's switch over to SYSTEMFIRMWARE which seems more appropriate.
+>=20
+> Suggested-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-On Thu, 9 Oct 2025 at 17:48, Neil Armstrong <neil.armstrong@linaro.org> wrote:
->
-> On 10/9/25 18:43, Neil Armstrong wrote:
-> > On 10/9/25 14:28, Simon Glass wrote:
-> >> Hi Neil,
-> >>
-> >> On Thu, 9 Oct 2025 at 05:54, Neil Armstrong <neil.armstrong@linaro.org> wrote:
-> >>>
-> >>> On 10/9/25 13:16, Simon Glass wrote:
-> >>>> Hi Neil,
-> >>>>
-> >>>> On Thu, 9 Oct 2025 at 02:18, Neil Armstrong <neil.armstrong@linaro.org> wrote:
-> >>>>>
-> >>>>> Hi,
-> >>>>>
-> >>>>> On 10/9/25 02:25, Simon Glass wrote:
-> >>>>>> Hi Neil,
-> >>>>>>
-> >>>>>> On Wed, 8 Oct 2025 at 09:31, Neil Armstrong <neil.armstrong@linaro.org> wrote:
-> >>>>>>>
-> >>>>>>> Let's introduce the Interconnect subsystem based on the Linux framework
-> >>>>>>> which is used to vote for bandwidth across multiple SoC busses.
-> >>>>>>>
-> >>>>>>> Each bus endpoints are materialised as "nodes" which are linked together,
-> >>>>>>> and the DT will specify a pair of nodes to enable and set a bandwidth
-> >>>>>>> on the route between those endpoints.
-> >>>>>>>
-> >>>>>>> The hardware resources that provide those nodes and provides the way
-> >>>>>>> to vote for the bandwidth are called "providers".
-> >>>>>>>
-> >>>>>>> The Interconnect uclass code is heavily based on the Linux one, with
-> >>>>>>> some small differences:
-> >>>>>>> - nodes are allocated as udevices instead of Linux idr_alloc()
-> >>>>>>> - tag management is minimal, only normal xlate is supported
-> >>>>>>> - dynamic IDs is not implemented
-> >>>>>>> - getting nodes states at probe is not implemented
-> >>>>>>> - providers are probed on demand while the nodes links are traversed
-> >>>>>>> - nodes are populated on bind
-> >>>>>>>
-> >>>>>>> Fully tested with associated DM test suite.
-> >>>>>>>
-> >>>>>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> >>>>>>> ---
-> >>>>>>>     drivers/Kconfig                            |   2 +
-> >>>>>>>     drivers/Makefile                           |   1 +
-> >>>>>>>     drivers/interconnect/Kconfig               |  10 +
-> >>>>>>>     drivers/interconnect/Makefile              |   6 +
-> >>>>>>>     drivers/interconnect/interconnect-uclass.c | 548 +++++++++++++++++++++++++++++
-> >>>>>>>     include/dm/uclass-id.h                     |   2 +
-> >>>>>>>     include/interconnect-uclass.h              |  74 ++++
-> >>>>>>>     include/interconnect.h                     |  81 +++++
-> >>>>>>>     8 files changed, 724 insertions(+)
-> >>>>>>
-> >>>>>> 'interconnect' is such a long and vague word :-)
-> >>>>>
-> >>>>> I didn't chose the name => https://docs.kernel.org/driver-api/interconnect.html
-> >>>>>
-> >>>>> I don't see why we should take a different name in U-Boot.
-> >>>>>
-> >>>>> But I can definitely use "Generic System Interconnect" in the documentation
-> >>>>> and commit messages if it's clearer.
-> >>>>
-> >>>> Yes, we should use the same name. Docs can help.
-> >>>>
-> >>>>>
-> >>>>>>
-> >>>>>> There seems to be a piece missing here. The uclass should have
-> >>>>>> operations, so that it makes sense for different drivers to implement
-> >>>>>> the methods. I see some there, but also a lot of direct calls from the
-> >>>>>> test to sandbox. I see quite a few functions which lack a struct
-> >>>>>> udevice * - I suspect I am missing something?
-> >>>>>>
-> >>>>>> We normally have a ..._get_ops() macro in the uclass header. Also we
-> >>>>>> normally have stub functions which get the ops and call the function.
-> >>>>>>
-> >>>>>> I see code to remove children, but driver model does this
-> >>>>>> automatically[1]. Same with bind(). If there is a bug in this, can you
-> >>>>>> give a few details, or ideally a test case?
-> >>>>>
-> >>>>> All of this is present and well thought, I went into multiple designs:
-> >>>>> - interconnect uclass provides ops -> interconnect_ops, icc_node doesn't
-> >>>>>      provide any ops since they are just internal objects
-> >>>>> - there's only a single direct call to the sandbox driver to get the
-> >>>>>      setting resulting of the aggregate() & set() op calls, this is purely for
-> >>>>>      validation of the calculations, the sandbox-interconnect-test only uses
-> >>>>>      the public inteconnect.h API
-> >>>>
-> >>>> OK, I missed that.
-> >>>>
-> >>>>> - For the lack of udevice, it's because I did use the same interconnect API which
-> >>>>>      return a "icc_path" private structure which contains a set of interconnect
-> >>>>>      nodes which forms path across the different providers.
-> >>>>
-> >>>> We do a similar think with clk, although the function signature is
-> >>>> different in U-Boot from Linux.
-> >>>>
-> >>>> I assume the caller would be a driver? If so, passing in a struct
-> >>>> icc_path * might be more efficient than using malloc() each time.
-> >>>
-> >>> I'm not against that but the size of icc_path depends on it's size:
-> >>>
-> >>> +struct icc_path {
-> >>> +       size_t num_nodes;
-> >>> +       struct icc_req reqs[];
-> >>> +};
-> >>>
-> >>> So we would still need to alloc the reqs anyway and expose the internals
-> >>> with no benefits.
-> >>
-> >> Indeed. Sometimes in U-Boot we use fixed sizes to avoid realloc(), but
-> >> I'm not sure if it makes sense here.
-> >>
-> >>>
-> >>>>
-> >>>>>
-> >>>>>      Setting a bandwidth on a node is meaningless, same for interconnect providers,
-> >>>>>      this is why we set a bandwidth on a set of nodes, which get aggregated with the
-> >>>>>      other path votes from other devices.
-> >>>>>
-> >>>>>      The key here is the "nodes" which are subdevices of interconnect providers
-> >>>>>      created at bind time, and gets referenced in icc_path objects.
-> >>>>>
-> >>>>>      I made sure we can't remove either interconnect devices or icc_node devices
-> >>>>>      if they are still referenced in an active icc_path.
-> >>>>
-> >>>> OK
-> >>>>
-> >>>>>      This is the reason of the device_remove() & device_unbind() calls in the test
-> >>>>>      to make sure we're not left with dangling pointers to non-existent icc_node
-> >>>>>      and providers devices.
-> >>>>
-> >>>> The specific code is this:
-> >>>>
-> >>>> +       device_foreach_child(pos, dev) {
-> >>>> +               debug("%s(pos=%s)\n", __func__, pos->name);
-> >>>> +               ret = device_remove(pos, DM_REMOVE_NORMAL);
-> >>>> +               if (ret)
-> >>>> +                       return ret;
-> >>>> +       }
-> >>>>
-> >>>> This is in the pre_remove() method. But if you just remove that code,
-> >>>> doesn't driver model remove the children anyway?
-> >>>
-> >>> No it only removes the children from the same driver:
-> >>> =============><=====================
-> >>> int device_chld_remove(struct udevice *dev, struct driver *drv,
-> >>>                         uint flags)
-> >>> {
-> >>>
-> >>> <snip>
-> >>>
-> >>>          device_foreach_child_safe(pos, n, dev) {
-> >>>                  int ret;
-> >>>
-> >>>                  if (drv && (pos->driver != drv))
-> >>>                          continue;
-> >>> =============><=====================
-> >>> Same for unbind.
-> >>>
-> >>> Added in https://lists.denx.de/pipermail/u-boot/2018-June/332597.html with the bind/unbind command.
-> >>
-> >> Ick, that is a bug.
-> >>
-> >>>
-> >>> So perhaps I'm doing something unintended here, I was
-> >>> also expecting removing/unbinding a device would remove all the
-> >>> childs whatever the uclass.
-> >>
-> >> Yes, it should be fixed.
-> >
-> > I guess it should be fixed and a test case added.
-> >
-> > Should I handle this ?
->
-> Wait the code is right, but still it doesn't work properly.
->
-> I'll investigate further to understand.
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-OK...I'm not sure what that patch was about, but if the command needs
-to work that way you could create a new function, e.g.
-device_remove_by_drv() which only removes things for particular
-drivers?
+> ---
+>   lib/efi_loader/efi_esrt.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/lib/efi_loader/efi_esrt.c b/lib/efi_loader/efi_esrt.c
+> index e235c8fe91c6..3cc389eb11cd 100644
+> --- a/lib/efi_loader/efi_esrt.c
+> +++ b/lib/efi_loader/efi_esrt.c
+> @@ -236,7 +236,7 @@ efi_status_t efi_esrt_add_from_fmp(struct efi_firmwa=
+re_management_protocol *fmp)
+>   	 * TODO: set the field image_type depending on the FW image type
+>   	 * defined in a platform basis.
+>   	 */
+> -	u32 image_type =3D ESRT_FW_TYPE_UNKNOWN;
+> +	u32 image_type =3D ESRT_FW_TYPE_SYSTEMFIRMWARE;
+>  =20
+>   	/* TODO: set the capsule flags as a function of the FW image type. */
+>   	u32 flags =3D 0;
 
-Regards,
-Simon
