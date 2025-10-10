@@ -4,86 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDBC5CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:24:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22CFDCCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:39:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31B408443A;
-	Fri, 10 Oct 2025 21:23:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 60CF7842C7;
+	Fri, 10 Oct 2025 21:39:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q8UxVpK8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SdgOcGtI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E845F84047; Fri, 10 Oct 2025 21:23:29 +0200 (CEST)
-Received: from mail-oa1-x33.google.com (mail-oa1-x33.google.com
- [IPv6:2001:4860:4864:20::33])
+ id 9052184040; Fri, 10 Oct 2025 21:39:14 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E08458432E
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:23:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD14A84040
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:39:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x33.google.com with SMTP id
- 586e51a60fabf-3627a1979a0so1668476fac.1
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:23:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-634b774f135so4056262a12.2
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:39:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760124206; x=1760729006; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1760125150; x=1760729950; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FzmKreXHHRP2+pD3dEsiraCbggozt92S5TzWnPGg/+I=;
- b=q8UxVpK8DJzDrIak3LVNe7VrNb0kPw0uxEqJq5SpO3hB4DzfAPfydzyqLoCDwfHqln
- nda8nJEcflUtzupyFq0/CgV032qzhJqC+FYoMhytRhwYS/B4xZPLNqWXH9NK2MNrFXeR
- IpZlRBcFnt5w/TRfupBrezDb8ilEQxyNCwCBQ=
+ bh=5cLCRYerlnKVNCqQF1pMi1edx8JWA7mHtnP3N2pCeHE=;
+ b=SdgOcGtISdYxPpQqc24FPe8CNdZWazfzHn09kIvVix6EzsREq49t3dIFEhueXzXynn
+ +kkZ2AU6SVe4TQILHZPEP7m4M19Okgga6DvQiBgEN4w82Ri5ky808cCgtkA1rCWtGrWm
+ JPIKzbeVPJIQW+h3byE24iOty3ggLun2dQDkR3Pa6NeprlHlcZDjeG0I4RqDUWhtU7cx
+ 8BBmWx2AK5l1CbGXAz9j/NwZKandyxiAkaqnkgeN/eLCPtz6mB+7lNrC47If8CjL1tE/
+ cvdj0SfcT3HypXoZN717guEKc0sVIegZX+7Ozh4uZIJS3T0wuvsDXH/m4xEGqR/bJOmK
+ srTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760124206; x=1760729006;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1760125150; x=1760729950;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FzmKreXHHRP2+pD3dEsiraCbggozt92S5TzWnPGg/+I=;
- b=AqKrmEDtKfczllx6eU868W4UhkHfQzan7B/MLUMgHkKamlywWFsMUxMz3bt+03kJ6a
- Ywaatf2mRAFNDMPVozKYJ76TnTuvdJpvca9I2ED/HWvJJclh1/dPKWC08o7xSqX4saY3
- J8cn/YFUwZdUKB2bhZuSpkrrmteHPBIU474FRrFNwt/Hj57Pn3l7xrsFhQE606Vg3pru
- sztVlZ/P6uRLirVPzJUIvnlUeXwZuM4p9vu/4i0bJ4apH+yZjS/otsqB/2NQWXHy+7m4
- 5Oe/Uquwr8YdXdUEC6m9Ncw54Tcl7ClEeR8dnILHzIV3tgpcaZ6EmE9hxrHFJbq92Vhc
- g2NA==
+ bh=5cLCRYerlnKVNCqQF1pMi1edx8JWA7mHtnP3N2pCeHE=;
+ b=QygL5HABKQ/EOvu1k4KW6HvxcFKOo6PS5oJd6kIkYziEsRqfYDLlfyXNEyZ9r+utx+
+ oYMsuDh7p/31/NpPEiJUoWqC+ugeTPmsGnQI7Q3jywUj5acu7f7aAG9kNfgQ8rIRtZqy
+ 7FHu3OShL5TX6i65/L+QOmDDC49JGyqS36R5i3KXb11gb4/yY/46VZ+lKsQCNU/9cmUL
+ HK5jTfQr7T7z1sl5GM4RFEUeRnptQ5MZbGoBmHb76gVibjd7swij7u49oVOgUyxA4ZUs
+ 9jZ9Aqi4G5owrY8ZNAA50X0laKPbJvbnQ3Kyd9LYITnHoxSmr0kdBKXsQ29PKI6E7+Dv
+ n6LA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVZ3ISoOvZJBJlaA0cDQsBYTLmEYhjirCu9Dz33HXe+l4EEvcNh3fLMOxKSJRxNqZx5gY89GsI=@lists.denx.de
-X-Gm-Message-State: AOJu0YwST6eHmrxFUYqXNZHFi+CR6LIuCr21pdQ5grT4a99kBg7GK4ob
- hYMqCCHeXrZOJM5M/BB6rUBIS1if6otvMZ5t8YiALJUpocp3Vd6mP98BBASRXhCSqgc=
-X-Gm-Gg: ASbGncvaF5jlEMa+ILtA+oZT6Of2CFcfV2Mqm8eT8cVYbk3FCmJZJOWgz5N46h8CPr3
- ltXXzoGhLeTja5/LO5BwZtaahjjvZCAiKBOZ/G4cuXapxXJDN4Rytx/2D+qgxYcRL2b1ZPATlqT
- aLSBmqaIPRwoK60S+znwZbikcOEfKlfSHDqp9yWqttkNeXLjW3jn2buskuCr1dTmW3YeiKRpAst
- UAY7t+OrK39jYKamEkV0iEPhO23kndSlkHtufTBTDc5tZy9PB8G16Bn+MSM9Q4ALTEUhmIACfhh
- HI6vWsusiieIdFU73Sj/O0J786y7v8UWGVaFNN76m+L5vDfFDdnsFsqm+RE/eG3Ycv6aL5gtjUR
- LTK9KUE4L5cbDrKrhI3+OMAzjwOTikL6AA8l8IJGL0rzFDMCGSW2D4zPegfvJdhoHNmXIUqf6hy
- VaCfU=
-X-Google-Smtp-Source: AGHT+IEKtgn4IpI3r73x3fpTLtdiTP0hxJm19Dm8ekb6x0ZlDNBXU3dk51atHxpz6lARjYS7qclUAQ==
-X-Received: by 2002:a05:6870:888d:b0:33c:25d:17e7 with SMTP id
- 586e51a60fabf-3c0fa068db4mr5488362fac.48.1760124206518; 
- Fri, 10 Oct 2025 12:23:26 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8f581ecsm1155832fac.25.2025.10.10.12.23.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Oct 2025 12:23:26 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Fabio Estevam <festevam@gmail.com>, 
- Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de
-In-Reply-To: <20251001132111.1490516-1-ghidoliemanuele@gmail.com>
-References: <20251001132111.1490516-1-ghidoliemanuele@gmail.com>
-Subject: Re: [PATCH v1 0/4] configs: toradex: enable USB Gadget OS Descriptors
-Message-Id: <176012420572.1180358.7401989723523689449.b4-ty@konsulko.com>
-Date: Fri, 10 Oct 2025 13:23:25 -0600
+ AJvYcCUxl9xuIMmxkcpkBvLazdj66HBWNz39g4DZSk0IWc6xFGuOaOyeLGaZmihXTHAt6Yx1SipMWZU=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAQT3qFSHl+LLsxawF5FZIyQ7Caz+RH7I6lXuX454kZ7knN/sp
+ QGxycRwN6rHQg2JtVDtxe6yn8+j07wugCaXazA9KoCO379+tJioqGmyRUvOUNs42bUIOJgEKBRT
+ pFiXX6kyDZAQG2plI/IVlBhC9RZ4IiYI=
+X-Gm-Gg: ASbGncsfFfNhxFiaRq6TilKGX2cYHnvtqhw1w2CsbwOFGaM2iGOSI7Zu4hTP8UqyzKm
+ z1/4PH3PSeDgbjamXAfycm/QkDIPQOEJrA4IDBb4tzq4ttrz2WnXWTkAHY8mfnG9RnvFlrDMLFu
+ e2GD2w4s7gzHSJdJevi14HVC5oBZdJxFb3G4ukkrCF5Yu+7yIWZ1WUlV4cIu9/bgXAPmKToe3nA
+ lkbAaao/MmJEk5PMjLMxRJr8hk=
+X-Google-Smtp-Source: AGHT+IFihUKfrxkTbHoQkTPkk3X6ypKbTIwMnWtdeDw3PcOVgk5mjLZ9TyWXMWTYbM5GvWRcqkEfj+4dbGA2AS7VpOY=
+X-Received: by 2002:a05:6402:348a:b0:639:f54d:9274 with SMTP id
+ 4fb4d7f45d1cf-639f54d9c20mr7534831a12.2.1760125150056; Fri, 10 Oct 2025
+ 12:39:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20251010053056.32495-1-mibodhi@gmail.com>
+ <20251010142835.GY298503@bill-the-cat>
+In-Reply-To: <20251010142835.GY298503@bill-the-cat>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Fri, 10 Oct 2025 12:38:58 -0700
+X-Gm-Features: AS18NWAfCNP-FS5eB5KeDUdLC3Q6yajYBi9WSsKVP-1XPKn1fbENwUYXL-_z1Fk
+Message-ID: <CAJaLiFyYGJjO=BjvL3HXAfbE1V2bwB_CSkcOTC6tQTJAR_DMVA@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>, 
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>, 
+ Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,35 +101,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 Oct 2025 15:21:03 +0200, Emanuele Ghidoli wrote:
+Hi Tom & Simon,
 
-> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> 
-> USB OS Descriptors are used to install and configure the device without
-> requiring any user interaction on OS which support them (e.g. Windows).
-> Enable them in order to improve the user experience when fastboot is used.
-> 
-> Emanuele Ghidoli (4):
->   configs: apalis-imx6: enable USB Gadget OS Descriptors for fastboot
->   configs: colibri-*: enable USB Gadget OS Descriptors for fastboot
->   configs: verdin-imx8m[mp]: enable USB Gadget OS Descriptors for
->     fastboot
->   configs: toradex-smarc-imx8mp: enable USB Gadget OS Descriptors for
->     fastboot
-> 
-> [...]
+On Fri, Oct 10, 2025 at 7:28=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Thu, Oct 09, 2025 at 10:29:17PM -0700, Tony Dinh wrote:
+>
+> > Make it possible to disable CMD_PXE.
+> > Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX config.
+> > In extlinux_boot(), invoke pxe utils only when
+> > CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
+> >
+> > This patch results in about 9K reduction in image size when
+> > PXE boot is disabled.
+> >
+> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > ---
+> >
+> >  boot/Kconfig             |  3 +--
+> >  boot/bootmeth_extlinux.c | 18 ++++++++++--------
+> >  2 files changed, 11 insertions(+), 10 deletions(-)
+>
+> Is some part of the symbol logic here wrong? A challenge is that "PXE"
+> is also where the logic to parse extlinux.conf style files came from,
+> and I thought we had split those two out. And then there's this:
+>
+> >
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index 2993cd7f9ba..403ce4c3d46 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
+> >       select CMD_PART if PARTITIONS
+> >       select CMD_DHCP if CMD_NET
+> >       select CMD_PING if CMD_NET
+> > -     select CMD_PXE if CMD_NET
+> >       select CMD_BOOTI if ARM64
+> >       select CMD_BOOTZ if ARM && !ARM64
+> >       imply CMD_MII if NET
+> > +     imply CMD_PXE if CMD_NET
+>
+> This is one of the things where defaults isn't supposed to be so easy to
+> get out of. How many platforms are you wanting to then disable CMD_PXE
+> on to save space?
 
-Applied to u-boot/master, thanks!
+I'm simply trying to compile out PXE for a board that I'm working on!
+The only thing I need is booting with scripts on a block device. And
+it looks like we have to include everything in bootstd to use it. It
+seems wrong to make the image a lot larger than needed for boards that
+never use a specific feature.
 
-[1/4] configs: apalis-imx6: enable USB Gadget OS Descriptors for fastboot
-      commit: d748154ff17d8b9e09b4e3df194c5bae49ea454d
-[2/4] configs: colibri-*: enable USB Gadget OS Descriptors for fastboot
-      commit: 4580222b87b474fa2aaed52f1644aed090bfcf20
-[3/4] configs: verdin-imx8m[mp]: enable USB Gadget OS Descriptors for fastboot
-      commit: 86901e07492989ed680b7219986b5cc2f7a36bdc
-[4/4] configs: toradex-smarc-imx8mp: enable USB Gadget OS Descriptors for fastboot
-      commit: 6052e225fa04d5a8262e251430acc5e28c1a7e6b
--- 
-Tom
+I would agree about  "defaults isn't supposed to be so easy to get out
+of". But in this case (and similarly in other CMD_x), CMD_PXE brings
+in all dependencies for PXE including pxe_utils.
 
+All the best,
+Tony
 
+>
+> --
+> Tom
