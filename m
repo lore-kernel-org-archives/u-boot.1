@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FEF2CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8276CAC5BB
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D13D684209;
-	Fri, 10 Oct 2025 07:54:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22219841EF;
+	Fri, 10 Oct 2025 07:54:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pPVKPNPd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pi4aZNwB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1012B841F4; Fri, 10 Oct 2025 07:54:09 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 14EFF84214; Fri, 10 Oct 2025 07:54:11 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3A2B8402E
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:54:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF2B6841F2
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:54:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5s0fQ621132;
- Fri, 10 Oct 2025 00:54:00 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5s4A9248369;
+ Fri, 10 Oct 2025 00:54:04 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760075640;
- bh=bssnhN4l+BIz06FJ1eTOEgz2fAbSRLTDKSyxc7k1GMI=;
+ s=ti-com-17Q1; t=1760075644;
+ bh=bOeadQkXKPJ3FbdGHkEWRNFKY0BtH2zurWretIqUq7Q=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pPVKPNPdUiJ++yxAmmpTkQglUOlXudEezAKuzsxqS1sNqlbghJ4UuvMIR3+V1IYyi
- YtSjxWxcZ6EoyiB4dLrBeMBXE0cCttf6cXqR15TFlzpAapvvOeDIItocKMALhDtKoC
- bnhQSJJpSmfWoc8Pgquzj7kGYOAD7K3tXl189DBQ=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5s0XU1979077
+ b=Pi4aZNwB85JT38bLH6pKX4R9DlU9hDiDcIEcQmhe9yzINA6ogeEzZNsQDPDY+yj1O
+ YHOFv8jcdjYcVY/0zxVDuz5mV1Y6Ct1X9GvUvByhjIQWCDR9jyR2B2715TFsy8H+gL
+ qNaAn1GW2FJlDQFvAcnYakPd9T8yIz0C9mA5wxbY=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5s47k1458395
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 10 Oct 2025 00:54:00 -0500
-Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 10 Oct 2025 00:54:04 -0500
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
- Oct 2025 00:54:00 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
- (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2025 00:54:04 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 00:54:00 -0500
+ Transport; Fri, 10 Oct 2025 00:54:04 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5rxL31175993;
- Fri, 10 Oct 2025 00:53:59 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5s36N1408265;
+ Fri, 10 Oct 2025 00:54:03 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,10 +57,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v9 09/11] mach-k3: add reserved memory fixups for next boot
- stage
-Date: Fri, 10 Oct 2025 11:23:35 +0530
-Message-ID: <20251010055340.2574743-10-anshuld@ti.com>
+Subject: [PATCH v9 11/11] arm: mach-k3: reserve space for page table entries
+Date: Fri, 10 Oct 2025 11:23:37 +0530
+Message-ID: <20251010055340.2574743-12-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010055340.2574743-1-anshuld@ti.com>
 References: <20251010055340.2574743-1-anshuld@ti.com>
@@ -84,50 +83,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The boot flow in K3 platforms requires the subsequent boot stages to be
-aware of the memory reserved for previous boot binaries. In the regular
-boot sequence of:
-
-R5 SPL -> ATF -> OP-TEE -> A-core SPL -> U-Boot -> Kernel,
-
-Both A-core SPL and U-Boot should be made aware of the memory reserved
-for ATF and OP-TEE from their device-tree. Currently this information is
-absent.
-
-Therefore this patch adds the reserved-memory regions as part of
-spl_perform_arch_fixups for the next stage's DT. This is called during
-both R5 and A-core SPL which fixes up the DT for their respective next
-stages: A-core SPL and U-Boot proper.
+With the memory map configuration being done dynamically, reserve extra
+space during U-Boot relocation to ensure we have enough for the fixups.
 
 Reviewed-by: Dhruva Gole <d-gole@ti.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
-Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/mach-k3/common.c | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ arch/arm/mach-k3/arm64/arm64-mmu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 0a73b1fa296..581a7246630 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -321,6 +321,17 @@ static __maybe_unused void k3_dma_remove(void)
- 		pr_warn("DMA Device not found (err=%d)\n", rc);
- }
+diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+index 479451452a2..f999af143fb 100644
+--- a/arch/arm/mach-k3/arm64/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+@@ -41,3 +41,8 @@ struct mm_region k3_mem_map[K3_MEM_MAP_LEN] = {
+ };
  
-+void spl_perform_arch_fixups(struct spl_image_info *spl_image)
+ struct mm_region *mem_map = k3_mem_map;
++
++u64 get_page_table_size(void)
 +{
-+	void *fdt = spl_image_fdt_addr(spl_image);
-+
-+	if (!fdt)
-+		return;
-+
-+	fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR, 0x80000);
-+	fdt_fixup_reserved(fdt, "optee", CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
++	return SZ_128K;
 +}
-+
- void spl_board_prepare_for_boot(void)
- {
- #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
 -- 
 2.51.0
 
