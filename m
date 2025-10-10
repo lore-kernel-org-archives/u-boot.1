@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D778CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:07:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 482FDCCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:13:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FB4E83F69;
-	Fri, 10 Oct 2025 13:07:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A25EE83F6A;
+	Fri, 10 Oct 2025 13:13:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zRoqyPPu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gX7ys12+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E36E683FB0; Fri, 10 Oct 2025 13:07:06 +0200 (CEST)
-Received: from mail-yx1-xb12a.google.com (mail-yx1-xb12a.google.com
- [IPv6:2607:f8b0:4864:20::b12a])
+ id BC9F683F91; Fri, 10 Oct 2025 13:13:20 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D381083F59
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:07:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E030583F69
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:13:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12a.google.com with SMTP id
- 956f58d0204a3-63bcfcb800aso2137246d50.0
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:07:04 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-63a10267219so2640725a12.0
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:13:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760094424; x=1760699224; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760094798; x=1760699598; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CEvirJXDI1KNHPjLUhKKEmh1ZDY45tOiYbF52Fo/79Q=;
- b=zRoqyPPuHhqjTJ3tieGV7MpTCuPF70rllQqzFCcEjYj+UwXCgXQZB+cmPYXVodndce
- EVgNGCa1Vjv0Pc2Ga+2LkDxNQHogMB6aScSOXznesuQXwmQ+3/6RkEdZAPasQFvpKP8Z
- gMV6C8V8UfzUp3EXRbG+a1X9HMzt4ww4X47ehfJpUDdEcqXYODu201dnkUf7H9z6uit3
- G+ejnmFhxSolrk88dRXeOIDcF3ixNM+xQRNqNB0eVrphAb8ZHn0tOyoEGK2kPLN36tRY
- oXP1XAl1SvMOki0nUvvGtWCS7d9O+R6yD4JZADlFvlHltTIcCP5cVgxyZry1gfEQtPar
- f5gg==
+ bh=zRLH+ojoamXHFJTFK8xmaH1SF/1Ucdy17+u1gu5oasY=;
+ b=gX7ys12+r5dGvO4nicSf/20JeCW0FVUZWn5GrPHEuhUi2jm1pJWUGNNQzmuAFeO0Tm
+ zL6hfbnVoVqScE+QC+CF1qvQ/aj5BniDT89q0iZU4NAji9MaVHSMvK1nDJb0QlB3c33G
+ ZhyQhuMH3mDvAUfUCeDQRQYCXX0wyDOFISYkg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760094424; x=1760699224;
+ d=1e100.net; s=20230601; t=1760094798; x=1760699598;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CEvirJXDI1KNHPjLUhKKEmh1ZDY45tOiYbF52Fo/79Q=;
- b=fz2DvZIuUeOGX2eLH1+M7WjDHxIvGRA1bBZ/juBI1S3Wi1NHRxq32W2xe5rd5yxTC6
- 5+d2aistUE/jgWPUpCYC+CN+XAhRw1d70Q4ijmFU01WFLd0kIRLyr6mQxhdua9frzkE/
- e1o5dZGqb4q1UDLdZvETrANwKoYharEu+6k638PMTyTKX+51RQTtuCgCKMaWeEwGbFvB
- OMEZjziq1fg/+91yNVXsR/9LOon12jn/eEvSsQXhyHKs20GyTfhnD9/IiMFMX7krBMHR
- u0EgPneAXelIaCXyO4K+AlPVDmzBBMqePZO2et7KPE3+XeOSjmjr/FbaDgj4EKNltNZ1
- C5fQ==
-X-Gm-Message-State: AOJu0YwCLbxPh+mhLNlgTtpZrL04S6WdzkhB87yaWz8SIBkWFyGweqRe
- 7MO4FWZEq5tKP+elDw8YoGXVlDePxJzcf+penY+5Jhol3edFsESSGHoMw4N7kEdfgiDqiNFC0s5
- acSfpWvbmbgxh2kLvnWSDKg1u/dYgAN/7M7S9/WRy8g==
-X-Gm-Gg: ASbGncutP6Go3MuEeBOPwetiAgCYbi9CdKAOloXW4Kx7AOg7ocPDH9BvQFe4DQLI5lJ
- YdNdyjNTylRdpxUfWfdF6Zo+tbjARejCqiRF5rqWQBN87iOr56bhLHesWaSBEZzzSXcZyG3kPhk
- GDqvPWTfP6g+8bjl20nVXrKMhEsFEtbdY+BzlD0Ll2pyYN8z3BqHKE85qo+0aT5+5ZIbWIqtkdQ
- SWbDqwzpHnhXNXcLW+4to6S/0cSHjpC2I6fIWzjolQcQBp/7P6ZJL4sJaE35bGnQkUKTi5IGimt
- QrWOudovdUbhQRxblZL7
-X-Google-Smtp-Source: AGHT+IEUiRrCCaSUz9vUDympXXevMrG66wCwXctBc7eKC/RQhoisF53hxSPzvZce8rWtBIIOIO3HQxG1fmgvYEZSlzI=
-X-Received: by 2002:a05:690e:1587:10b0:63c:e90c:a6dc with SMTP id
- 956f58d0204a3-63ce90caca1mr2741952d50.8.1760094423640; Fri, 10 Oct 2025
- 04:07:03 -0700 (PDT)
+ bh=zRLH+ojoamXHFJTFK8xmaH1SF/1Ucdy17+u1gu5oasY=;
+ b=EbmS4cE30sZLjxvINyzXeMaY0IoBb5qCMyieqDedYxQa7SeMmH8C59Finz64uIjyu7
+ XISXyYHnd0oMN8ukcfi4xTGkjPB/AXRcMd4UCZT6UY9ttK+3BXG+BGl3/B84GDRGzoK4
+ bX/8xlFesXy0UtcMWXGaj2pRz/spbYzyqeWj6X/j3dheZYdbkDOJweqZU6BU9J9Xcf0s
+ ErjpB0W1M+uzUYYwo4Yk0ON9kXTZB5j/oGQEdzMIb6N3TL5WHqaIG5eh5miaGANZnHev
+ z7hC5+sVouxuYz1YsY7eSMJX/I+e76CzFod11Ey9cV1IlleDzgQCmAtQsXBH5AeKDLtE
+ sD6g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXthrczNtwGrm38t1HFYHSYk5bRVpaiirbG6FdzGQWfFmfIDneXLd6AAuo25YtneP0Gz9FfYvU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxahKIPKqe5OkCrJVQ7yxQaVg4JTHvbJN+0bCo6s6bxMoKjFP4G
+ fRFc1A6thFxd8FhFULOnne0udF0aDvxydtkKi2mQSixREKyIhvftu4zVTTWzDIIHlSF3QpLS/mT
+ 5wso4iqRF08OUeG9NL0rJO3Q9Kj0FQx6RQgdezLeY
+X-Gm-Gg: ASbGnctWX2mYpdBC67Tp2VZBxhmWabsEKsJgDeidp72q8D7buK80WWky5mUlK8AoEN5
+ 7GeK0c5dQjzHz3dtrs/zhG51LnvQtxFiLCR3EB6BbkmsBazpnQ12Uv86FOsOdwPJqVP4MSbo3qg
+ cML7i6mzJVzk9bJ6q3K95UFi/AV4KQ+XF0mzjAXcUH9KTkp328xjMz8DRpO3irDAis6k6DlX3le
+ 9vBofqE3izW+iMsOtjLyQ==
+X-Google-Smtp-Source: AGHT+IFHWEkWVNK8VJm98jXAvSkNgCJuJWi3qpxD+IwL6WSt9ch+5lFJ5EvkAboZlXe3uENAJ6K+7Rsm6yCZ93SDMX8=
+X-Received: by 2002:a05:6402:350d:b0:639:f77d:6e5f with SMTP id
+ 4fb4d7f45d1cf-639f77d75d8mr6675719a12.17.1760094798354; Fri, 10 Oct 2025
+ 04:13:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251009-detect_disk_image_type-v8-0-a8b50a3b4acf@linaro.org>
- <20251009-detect_disk_image_type-v8-1-a8b50a3b4acf@linaro.org>
-In-Reply-To: <20251009-detect_disk_image_type-v8-1-a8b50a3b4acf@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 10 Oct 2025 14:06:27 +0300
-X-Gm-Features: AS18NWDoS_VWLYs8kXMBwly1x6THzyelt0kT1SUxWNZUyzrtLXBckG8EZkV73u8
-Message-ID: <CAC_iWjJ-=C9VdBZsqnxKOf2K8UNSrhJhDgU6XuOSf4bsFrpyaQ@mail.gmail.com>
-Subject: Re: [PATCH v8 1/2] part: Export part_driver_lookup_type for external
- use
-To: Javier Tia <javier.tia@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
+ <20251009-feature_sysboot_extension_board-v2-1-e09b39e54de5@bootlin.com>
+In-Reply-To: <20251009-feature_sysboot_extension_board-v2-1-e09b39e54de5@bootlin.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 10 Oct 2025 12:13:04 +0100
+X-Gm-Features: AS18NWC5y4cXjGSkGkVBCFpEIyMmpWGslqOL6PJheYsQf06CxMckX_H7GYt6rcM
+Message-ID: <CAFLszTg=Tq9812czjKNkQ+sF74JBE12iO0XzX0LEWVO8b2zVzQ@mail.gmail.com>
+Subject: Re: [PATCH v2 01/18] MAINTAINERS: Add maintainer for extension board
+ support
+To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
+ Mario Six <mario.six@gdsys.cc>, Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,98 +96,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Javier,
-
-On Thu, 9 Oct 2025 at 16:18, Javier Tia <javier.tia@linaro.org> wrote:
+On Thu, 9 Oct 2025 at 15:50, Kory Maincent (TI.com)
+<kory.maincent@bootlin.com> wrote:
 >
-> Make part_driver_lookup_type non-static so it can be used outside
-> part.c. This allows external callers to determine the appropriate
-> partition driver for a block device, enabling more flexible handling of
-> partition types.
+> Add myself as maintainer for the extension board support that was
+> originally added to track ongoing development and maintenance.
 >
-> Add a prototype and kernel-doc comment in part.h to document the
-> function contract. Provide a stub inline implementation returning NULL
-> when partition support is disabled, ensuring build consistency across
-> configurations.
->
-> Signed-off-by: Javier Tia <javier.tia@linaro.org>
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
+> Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 > ---
->  disk/part.c    | 18 +-----------------
->  include/part.h | 21 +++++++++++++++++++++
->  2 files changed, 22 insertions(+), 17 deletions(-)
+>  MAINTAINERS | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 >
-> diff --git a/disk/part.c b/disk/part.c
-> index 66e2b3a7219..be2b45d5a29 100644
-> --- a/disk/part.c
-> +++ b/disk/part.c
-> @@ -47,23 +47,7 @@ static struct part_driver *part_driver_get_type(int part_type)
->         return NULL;
->  }
->
-> -/**
-> - * part_driver_lookup_type() - Look up the partition driver for a blk device
-> - *
-> - * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each parition driver
-> - * against the blk device to see if there is a valid partition table acceptable
-> - * to that driver.
-> - *
-> - * If @desc->part_type is already set, it just returns the driver for that
-> - * type, without testing if the driver can find a valid partition on the
-> - * descriptor.
-> - *
-> - * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
-> - *
-> - * @dev_desc: Device descriptor
-> - * Return: Driver found, or NULL if none
-> - */
-> -static struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
-> +struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
->  {
->         struct part_driver *drv =
->                 ll_entry_start(struct part_driver, part_driver);
-> diff --git a/include/part.h b/include/part.h
-> index b772fb34c8a..6caaa6526aa 100644
-> --- a/include/part.h
-> +++ b/include/part.h
-> @@ -727,6 +727,24 @@ int part_get_type_by_name(const char *name);
->   */
->  int part_get_bootable(struct blk_desc *desc);
->
-> +/**
-> + * part_driver_lookup_type() - Look up the partition driver for a blk device
-> + *
-> + * If @desc->part_type is PART_TYPE_UNKNOWN, this checks each partition driver
-> + * against the blk device to see if there is a valid partition table acceptable
-> + * to that driver.
-> + *
-> + * If @desc->part_type is already set, it just returns the driver for that
-> + * type, without testing if the driver can find a valid partition on the
-> + * descriptor.
-> + *
-> + * On success it updates @desc->part_type if set to PART_TYPE_UNKNOWN on entry
-> + *
-> + * @desc: Device descriptor
-> + * Return: Driver found, or NULL if none
-> + */
-> +struct part_driver *part_driver_lookup_type(struct blk_desc *desc);
-> +
->  #else
->  static inline int part_driver_get_count(void)
->  { return 0; }
-> @@ -737,6 +755,9 @@ static inline struct part_driver *part_driver_get_first(void)
->  static inline bool part_get_bootable(struct blk_desc *desc)
->  { return false; }
->
-> +static inline struct part_driver *part_driver_lookup_type(struct blk_desc *desc)
-> +{ return NULL; }
-> +
->  #endif /* CONFIG_PARTITIONS */
->
->  #endif /* _PART_H */
->
-> --
-> 2.51.0
->
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
