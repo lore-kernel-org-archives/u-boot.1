@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71972CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE839CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:14:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04BF583FC1;
-	Fri, 10 Oct 2025 13:13:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C80483FCF;
+	Fri, 10 Oct 2025 13:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VwZAjEej";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JO5wTN4B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30C4583FF0; Fri, 10 Oct 2025 13:13:48 +0200 (CEST)
+ id E00A28402E; Fri, 10 Oct 2025 13:14:03 +0200 (CEST)
 Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
  [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2114483F6A
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:13:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1EB383F6A
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:14:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-33226dc4fc9so1808489a91.1
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:13:46 -0700 (PDT)
+ 98e67ed59e1d1-33082c95fd0so2503229a91.1
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:14:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760094824; x=1760699624; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760094840; x=1760699640; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wahR28t7Sna0hox9NKcg2BqvF8vsol1U9Q05U3ubb70=;
- b=VwZAjEejLzOg3B/CViYr+ZCKb99BmB2a0lsaeQhH7jvlzqSD2+HwoftFY9wjaZSHHf
- TI+b5Jdls612bjtP3WGfrcZ4RUg5DDlnSYYP7w880SILgsasDgZWhwSVNitOnXtYMiY+
- o26qRGyWh59rFw3WlLJTGg3Sfohr+TdWAl7ZY=
+ bh=c3+E49RV6Twk2bJey5/yur2qI7swITuzLKD4Hv1ixtM=;
+ b=JO5wTN4B1Y/8/fE4j8yqFaMyguL2H0xVWZv+ctMxneAxNQtsvWqcUixjeitrPuajDs
+ HLya13jSUu4QOiLKEE0guZWYIkHB1TmX4McT6QF1uq4VG5QUaeLKUCFou7v3NY4+33Tr
+ ZuZOKwnXMvJbTJB4ID9Q10Hz6iaCMPa2fME28=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760094824; x=1760699624;
+ d=1e100.net; s=20230601; t=1760094840; x=1760699640;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wahR28t7Sna0hox9NKcg2BqvF8vsol1U9Q05U3ubb70=;
- b=oz1LfWHK80mDkVf5bqtO9xHiDHezESYO9YosyYokjptwvBwf+3LbTuZInciHDOH7wC
- js4w3S4gPV/hoBNgv2FMJ97mtJ5B/rrANXKpUU9nmwTZP9g0JvPwiaPelR12AHwHSSzg
- rUQ7eJlPffn5sm1vJZ7qk0T6FqDvj/YQbjqWwdgGWNnGT4gTj085ziYXkEq88GAZVHac
- uKHIg/IKw+xmno3Ssf61dOA34wWQO5wR5xn9rhw2Ps0kYqCEPtF43cLGJREm3rF9wneE
- HmYvhB2+6iOPYgEiGo1SqIKnjM4PIgFjvu1Lp7sxlmTALOhl3i+Mzvq49pWqPSMcvUw4
- zd+g==
+ bh=c3+E49RV6Twk2bJey5/yur2qI7swITuzLKD4Hv1ixtM=;
+ b=M/kR17NeibnTwJuRWpWKuqbTrTbgDRWRTdgI5K2K9Q9SWWHuxQB0kegU8SlUvubPDx
+ KrQ9Blp6XC0+/ukUNw+OU/pd69R7eEVLlyHBURYN7UxyhS/JNxeY5b+Od1fAQEUyzLd2
+ 22J3ruQ+rfXHAROVsVOjMiFsTxWA6qrBn6OlSjvGPC0Syr0L76WNmk90knlm/8qlLtJm
+ 6zgkelNhFtlhSSc8NEn3Kc4nFqUSZrPAPwLVpL/07iH1fVFraQFTAlCwo2G8vDIuTMwq
+ 8hidd6/SBfnCuoXoLOIO3pbCpZ1Km9iQNpCBzOOOXoqeC9pbZk1sOcObQlpgba6cCnL8
+ ZKaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCRZ86NA4HtASAX35tNij/kAtur7sS0i+9v8HbilfwwbtpZDT04dEc9wid+9seeoXeGhZMYVA=@lists.denx.de
-X-Gm-Message-State: AOJu0YylKQwIxQ/xhDYMSbGWkGs24vIUIpdZf6l5OyWl7Qo5baBy75lL
- hRVOWGLCrNyvegihS0DcdwuglrGscsRSjBEbppvBka/XaOHsO2/5hGJCHveM8QAVIL1THjLdCNw
- u4g/Tpe4VsGNMoysZSrqR+VmaPVALpB+Vjmnq33mT
-X-Gm-Gg: ASbGncvh/vy63398v0jww4vnnVJ4v5I2v7Kn9Fe7RlO9CqPCgbLGFax0sQhBgmbrv7Q
- yJ/fef1EXlk4NM3syx4CIIhBL/5oju66nltq6bovl6+zPCOISJg1DofEb5NU3oYb211jnMPqxF0
- RaKLC5MRMch++C6M6TkZxNl/Fo8MAh8z701Z/IqE2bAc4WapZpZZMjTy6uBTAfiDjNo+d8lhZKW
- wDq8pBEf8e7zjd4hT754Zm+Y+lcJs7X
-X-Google-Smtp-Source: AGHT+IEfRoCt8Va6ucXwg/SrsJOQBX35JolV8ORXocRRuCcOO4blOMkYAubvGuxGj202/SEpYOUlWUyjxFSunTBQ5z8=
-X-Received: by 2002:a17:90b:1810:b0:32e:52aa:3973 with SMTP id
- 98e67ed59e1d1-33b51125090mr15379861a91.8.1760094824615; Fri, 10 Oct 2025
- 04:13:44 -0700 (PDT)
+ AJvYcCWiYg3t/yA9Qi0m1bA2ne3vB8ZKpY29NmD/Cjf/H/YAkgV8i+xq/XOnVI7ZPjHuk2oYRK0tgP8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyWWEh7jZB3p9aeVE8J9z8ZzakZPSACnPA3mY77Sb+fReO9Irrd
+ cI6p0KpGujul9OZDrD+gYd9b9hiiCW+POp3I7vvephkQbIFSRi7+cXwOEcd6D2aQjsWQqPXzcBD
+ DrxwRRnxikrrwRZJyejlBWCtqp2n+ph/Rj/NEA7mH
+X-Gm-Gg: ASbGncsS70HIi84sAfSHe2oaNGe/eBXgiK7odMgnt9xV6iWYrAW3R+UBPSdjCyHKuKb
+ 5SyMOfMysxe6DmBYVu2pxhAm1tkTzxt8QWuZaTyXqTIr7ctBU7VRFXE/SUwmwvIz+qPwrWfuhnP
+ z5umZ4YXgbKFj55HDU7qhX0e7cDFXZ5pQ+Yh1IZXx4WydMzpOY5pMVM4sjmsMh+H7XF/xla+sxI
+ FgH8UKw35PH5O4q/tcxUJcPheOPI/PB
+X-Google-Smtp-Source: AGHT+IGmDTSK0vshScv3Vu+tR9Bx/pohe44eQeh0+kdOtJi0gw3UQxVPanSbYAG0ADveyq5jaKRpKUkgWNYhvSPe55Y=
+X-Received: by 2002:a17:90b:33cb:b0:330:3fb8:3885 with SMTP id
+ 98e67ed59e1d1-33b513b355fmr16819672a91.18.1760094840286; Fri, 10 Oct 2025
+ 04:14:00 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
- <20251009-feature_sysboot_extension_board-v2-11-e09b39e54de5@bootlin.com>
-In-Reply-To: <20251009-feature_sysboot_extension_board-v2-11-e09b39e54de5@bootlin.com>
+ <20251009-feature_sysboot_extension_board-v2-10-e09b39e54de5@bootlin.com>
+In-Reply-To: <20251009-feature_sysboot_extension_board-v2-10-e09b39e54de5@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Oct 2025 12:13:18 +0100
-X-Gm-Features: AS18NWB7wPlY5ULQe6Ys53a628Wa7oy0p-nP8oARCEmnZGvzzIj3Rn-H6hiFvoo
-Message-ID: <CAFLszTjxABb8h9Ewet5fMm3nWu44FCzOVmXd6ifmveWZb+rQ8Q@mail.gmail.com>
-Subject: Re: [PATCH v2 11/18] board: sandbox: Convert extension support to
- UCLASS framework
+Date: Fri, 10 Oct 2025 12:13:15 +0100
+X-Gm-Features: AS18NWBQVxOhGrQpnI7lWC6BAxtFglDWrosMnn8q_5eo_CiVbKsTmQigB0RI54I
+Message-ID: <CAFLszTh9QRw27=e6AK_cheN+2QmvNJhSsT8zFBCt9d6LMwnULA@mail.gmail.com>
+Subject: Re: [PATCH v2 10/18] board: sandbox: Improve extension board scan
+ implementation
 To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
@@ -99,13 +99,13 @@ X-Virus-Status: Clean
 On Thu, 9 Oct 2025 at 15:51, Kory Maincent (TI.com)
 <kory.maincent@bootlin.com> wrote:
 >
-> Migrate sandbox extension board detection from legacy implementation to
-> the new UCLASS-based extension board framework.
+> Enhance the extension board scanning code in sandbox with better error
+> handling and code organization.
 >
 > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 > ---
->  arch/Kconfig            |  2 +-
->  board/sandbox/sandbox.c | 24 ++++++++++++------------
->  2 files changed, 13 insertions(+), 13 deletions(-)
+>  board/sandbox/sandbox.c | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
