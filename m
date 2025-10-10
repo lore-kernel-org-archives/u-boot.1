@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED06CAC5BB
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 10:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AC16CAC5BB
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 10:36:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B645083F85;
-	Fri, 10 Oct 2025 12:36:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FF1683FB0;
+	Fri, 10 Oct 2025 12:36:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JibRvWVu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sl/eKYu4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0CB383FC1; Fri, 10 Oct 2025 12:36:24 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 49D3C83FC9; Fri, 10 Oct 2025 12:36:36 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 014F383F69
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:36:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DB2F83F69
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:36:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-b4736e043f9so278214766b.0
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 03:36:22 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-639fe77bb29so2735129a12.1
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 03:36:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760092582; x=1760697382; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760092594; x=1760697394; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KG2b5ritEn6q8Vt3s0FdM1VFI52V55W+i+RTods0SSs=;
- b=JibRvWVu5gj3ZsOXKjGhl+gY2LUEGnY/US4XE3LhvudPEa3FHvNPrVtmlZdWG090IO
- a3+5kNBK9zsSOGwCFDcyv67jCuNkeoS8HyFeeHFDeFKJHZzLWRuUCh3Ub6cgDXJhlXTr
- /8dNCZlAwliOdwt/4WLtKg6AE4Zsk9+kJhNks=
+ bh=HcQjc7s3L/klzs6MvpjFrW9gvlkJ6j80WHNKCn6LT5Y=;
+ b=Sl/eKYu4hJGub499iROBOcFQprBEOR2uvuXiaPyHoO57cDLKGmgaMQwpsjamM2wRvx
+ x7O/DhsZqYd26ksLRFeaH56+lINT4M7UcgSoB3nDEmiYOmIxyWMQJ2SY4w1lYHYgkGRf
+ +HUooHyU571Zv562Qavza2knLGtxnDqAdoSuY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760092582; x=1760697382;
+ d=1e100.net; s=20230601; t=1760092594; x=1760697394;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=KG2b5ritEn6q8Vt3s0FdM1VFI52V55W+i+RTods0SSs=;
- b=np3/7XJEQPUWP81/W6Wb3aJCav0HvTAg3wuGpi+ZVRU2XavWd59AgyVIWt7DSr33lZ
- nwwhhLtum3EqmtAaf00GJWDU3eS6XPrj9ud9zbd5iwB2aCDhJiJqw6Gl66QDnVvyrHk0
- C75OJdZQpWWjlshJQDFkW8GntKODxf/eBlNpzJhjVDF3X99GclrHX0TB4/ZuKlzl+3Me
- nYeU83iExet3J/a6QCzaykicAEpee4O6L3C65IUvYQqInPJOOjvucMeG+QWbK65sOY8A
- nvkmqSF6yp4fT+F4wWxAsluBAazzCq8j5fBuHQoCQnTNOAifLmINk30Sm4kUK3IudF0t
- VGUw==
-X-Gm-Message-State: AOJu0YzumwdxHd+0OQu/B5NOhBr8mt7jN8y0Qbf66Ew/5uzOLm7pUKqc
- AI3Sdf12VL7qsDD4gSuVpRKxnb+apsqox/gXvFd7h1586vYNtz8tvsyzqk5+peJ6TvOMKXqJ54i
- 8nnSIo2vJT9YxcCjaIcRgUeQe2zzVH8KGlEGvYaj3
-X-Gm-Gg: ASbGncseqeo2rR4luokRfWwt9wlGmUz4zqXA8LcfeeYPAYN3eyId3X8l5NG5jvDhfIE
- SbxsV55usVJkyRXYnOhNLPS1V1XheRjCKcNbPul5E4YqlLZaifqPuWu4+Eq9/Ghhw1bAK9tH4vt
- GgBQgEyfT+d5Z7C3Gud1H16I3+SI+UaRf2YhF8gK38K66TdLqjuOXkjFVrqQ3fBNQqRQw98Y5aT
- 5jmnPtpQWbhqEP61NSI2F8NqpBjIP5C
-X-Google-Smtp-Source: AGHT+IFScPvmeDvJtCZVvh5vnV4KfwphU5SNN7AKrXgqaiFV5XabHv9Lm6lJ0X5zOZ21goOXLXk2ja8ffIeRfXbz/lI=
-X-Received: by 2002:a17:907:6e88:b0:b31:ec30:c678 with SMTP id
- a640c23a62f3a-b50aca11be1mr1367693866b.57.1760092582468; Fri, 10 Oct 2025
- 03:36:22 -0700 (PDT)
+ bh=HcQjc7s3L/klzs6MvpjFrW9gvlkJ6j80WHNKCn6LT5Y=;
+ b=xOwv34zBdF7ZZzvFzeWWiQ50dz8bmzDV6rqI+XZEkqTO3x95wO6a+Kr6k6LtWIYdzP
+ zkOuatXAOA2jASlSNfLppRXXrnTAVkdpNH5xQKwGRyv6G9UisQTUj68sDb6ILMjpoDB3
+ IB7d19+sSbbfBzv9s7EkTuxF2ffLEEM4DMwFV27ze/xXT3KDXjYJzC4UPz1+0Q6r71fk
+ Rxn09piu8ErfwcMdlAB/HbseMhT6cf05eU7HGvJxH5cHh8QalKphn+ibKkUqeJRyfa5E
+ zmcPDO8nsfSyjeagTxfO21MJcZMZO8AMdhcbqVnf1GE44LqLLweELAlkFH4PoZBfOZSs
+ j22A==
+X-Gm-Message-State: AOJu0YxIWYZZjIQq6FEsfYTWrAECDkdQaAeaq4nB7CBQOEtL3HjPRgNp
+ R1UZ9C9tC8tm5D5uuNI4snO9/zCYjt7PNGXK8Wwi4TzlVOwvnsuAZgJW2vES0eBOgj31qh/aJbM
+ I0ibkZJ+vvoZsJMC0pXvpsmVPtjRAJgIylNCYa/PE
+X-Gm-Gg: ASbGncvnVPwO1cJDgsVcXNhHTTTlCzp+M1fGqGwOgT0moaL5PDitwDofY3JWk82O1UM
+ mlOVn4+C6VQY0vCs0jinPTrf70mbAUZLkz9YMiriLP5I88r+h9NCFlLe+V/2JLeN8TDSEb2kQEC
+ ME/zMr9LbrX8ePfcc28jIjRiT+lDNOqDkV4UmJXc/2rtWBqq/WneU6cPtCwnSZDieutyv/XcR9I
+ R6rCA2s4KZYJJt/dmU9PQ6BXrG3LQwn
+X-Google-Smtp-Source: AGHT+IHrZ/D6TfGYIYmArXU0c/TxO3XHSnLV0OhkMX1HgiP1d46HJFFrJ3rvFdOi2L9XslG5ChcD2E9FsxcThrQEOgY=
+X-Received: by 2002:a05:6402:3488:b0:639:fbd0:4e4a with SMTP id
+ 4fb4d7f45d1cf-639fbd050e3mr4936783a12.21.1760092593941; Fri, 10 Oct 2025
+ 03:36:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251009092959.260121-1-sjg@chromium.org>
- <20251009092959.260121-4-sjg@chromium.org>
- <20251009173052.GQ298503@bill-the-cat>
-In-Reply-To: <20251009173052.GQ298503@bill-the-cat>
+ <20251009092959.260121-5-sjg@chromium.org>
+ <20251009173522.GR298503@bill-the-cat>
+In-Reply-To: <20251009173522.GR298503@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Oct 2025 11:36:10 +0100
-X-Gm-Features: AS18NWB-Db9dwT5dOD-2mp14sH58f4NzslytYjj4DU-yCWX_EH9LO_ttKQbUIV0
-Message-ID: <CAFLszTi2HuZLmebJB+kUsL3_J+aqVdCdP5XFSEoY1Dy5C3E2wA@mail.gmail.com>
-Subject: Re: [PATCH v4 3/4] boot: Add more debugging to iter_incr()
+Date: Fri, 10 Oct 2025 11:36:20 +0100
+X-Gm-Features: AS18NWCluFTtwpVQjRdfCZ8GOZxass_ZzkDtvDHzzez7KSON3wyrOYZLG8KKsaM
+Message-ID: <CAFLszTisxbgD3WLLQNvfi5MO1Mhbk2V_cCEnMQSod=eE8Phijg@mail.gmail.com>
+Subject: Re: [PATCH v4 4/4] boot: Move preparing bootdev into a function
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>,
@@ -94,79 +94,24 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 9 Oct 2025 at 18:30, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 9 Oct 2025 at 18:35, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Oct 09, 2025 at 03:29:54AM -0600, Simon Glass wrote:
+> On Thu, Oct 09, 2025 at 03:29:55AM -0600, Simon Glass wrote:
 >
-> > This function is the core of the bootstd iteration. Add some debugging
-> > for the decisions it makes along the way, to make it easier to track
-> > what is going on.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  boot/bootflow.c | 23 +++++++++++++++++++----
-> >  1 file changed, 19 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/boot/bootflow.c b/boot/bootflow.c
-> > index 78df09f369d..de69e27bec7 100644
-> > --- a/boot/bootflow.c
-> > +++ b/boot/bootflow.c
-> > @@ -193,8 +193,10 @@ static int iter_incr(struct bootflow_iter *iter)
-> >       log_debug("entry: err=%d\n", iter->err);
-> >       global = iter->doing_global;
-> >
-> > -     if (iter->err == BF_NO_MORE_DEVICES)
-> > +     if (iter->err == BF_NO_MORE_DEVICES) {
-> > +             log_debug("-> err: no more devices1\n");
-> >               return BF_NO_MORE_DEVICES;
-> > +     }
+> > The code at the end of iter_inc() is already somewhat tortuous. Before
+> > making it worse, move it into a function.
 >
-> Thinking more about what I said in the previous iteration about git
-> blame history, ones like this should be log_msg_ret (the history on
-> "when did the test for == BF_NO_MORE_DEVICES come from is unchanged, but
-> now you can have debug statements when enabled).
+> This is not a great commit message. Taking a look at v2 as a whole, the
+> reason to extract this logic from the end of iter_inc is because you
+> will be checking it in multiple places. That is a good reason to move
+> the code. Adding another 5 lines of code (a single if test) alone would
+> not be.
 
-Yes we can add that as well, but I still want to have the log_debug()
-as this doesn't require enabling CONFIG_LOG_ERROR_RETURN. That feature
-produces a lot of output even in normal operation since it shows
-errors dealt with by higher level code. It is really only designed to
-find the source of a particular error when you are stuck.
+OK, so how about:
 
->
-> [snip]
-> > @@ -228,11 +234,15 @@ static int iter_incr(struct bootflow_iter *iter)
-> >
-> >       if (iter->err != BF_NO_MORE_PARTS) {
-> >               /* ...select next partition  */
-> > -             if (++iter->part <= iter->max_part)
-> > +             if (++iter->part <= iter->max_part) {
-> > +                     log_debug("-> next partition %d max %d\n", iter->part,
-> > +                               iter->max_part);
-> >                       return 0;
-> > +             }
->
-> Shouldn't this be a debug message instead in the caller?
-
-I am trying to log_debug() every exit from this function...so you can
-see the entry and then which path it took.
-
->
-> [snip]
-> > @@ -326,8 +336,13 @@ static int iter_incr(struct bootflow_iter *iter)
-> >       }
-> >
-> >       /* if there are no more bootdevs, give up */
-> > -     if (ret)
-> > +     if (ret) {
-> > +             log_debug("-> no more bootdevs\n");
-> >               return log_msg_ret("incr", BF_NO_MORE_DEVICES);
-> > +     }
->
-> Then do we actually need both a log_debug and a log_msg_ret?
-
-Please see above.
+The code at the end of iter_inc() is already somewhat tortuous. A future
+series needs to call it in from two places in iter_inc(), so move it
+into a function.
 
 Regards,
+Simon
