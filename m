@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F16FCCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 17:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FA60CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 17:39:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC3C583FB0;
-	Fri, 10 Oct 2025 19:36:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7941783955;
+	Fri, 10 Oct 2025 19:39:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TnVtX+Yn";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="Zqx/+BlH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4462483FF0; Fri, 10 Oct 2025 19:36:39 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 1062B83906; Fri, 10 Oct 2025 19:39:11 +0200 (CEST)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 300F183FAA
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 19:36:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36FE2838E5
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 19:39:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-36ce5686d75so1634669fac.3
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 10:36:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-28e7cd6dbc0so26483135ad.0
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 10:39:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760117796; x=1760722596; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=gGfJzVFAJl6H2cXzoORLx+qj3glMcBJcsxJbDfr1kp0=;
- b=TnVtX+YnB5nQB/q0C/XB2C0ZEXIujGj2Z/gxjW0t1UrFVlDSjiozwocc8Z5cgkqixu
- Tt2yL2NkyOcfnXqo+t8AolJBpUa/eRpDdnL0/HppEGRDFBp7BG93eUHVQ4UmYy1jpFHQ
- 5D9Gw4D80bD+/1JpnscavTa6SOvw4sduSH9sM=
+ d=amarulasolutions.com; s=google; t=1760117946; x=1760722746;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hGsVginqEVUbXj/T86W+YsDi93zcMjIB75S76PHfY8E=;
+ b=Zqx/+BlHRV8G39GWrXoGtAkHvLp0UxmiSjcoKGgJwHfEgzJl8TZ8in/gf9cFWq2NNA
+ oO0K8Otw75mGZKtxHqVDUuWw29GZMnJKOpuThIwrNwYV16ATqMRTfNtc2nRC3WwW3KmC
+ tS+OvsLNXv8nuxgkf2fupGIo0bApIO0sPPD60=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760117796; x=1760722596;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gGfJzVFAJl6H2cXzoORLx+qj3glMcBJcsxJbDfr1kp0=;
- b=sihVm6nylw7PHLF3xXdRfTpeFA4Iwd/oodp2HIOiSre02lxdY6Hlj5zUI8NEG5yWB6
- I38JUmOIBkRVwmucGOv13dlMSGrQmO06iRpPeEtvgHyI0nFE/fja4YXtfVWy0Z9GvDmu
- DB08TFjNbIu+xMCGxshREU3QVUUDorEmef6dOQthr6+7HPg6OsQpzkga/J1ZvDbQXKff
- lhJhd9ui82oHLMRk29k1TQ1GDkIRtKjhuBewFe/bEf6ttC2T8OnS8X0gok7gDyt0MDKx
- angzrhZwXrW/x0HtatmQbGg9qy5PxMtcPe53pBBwzjqyPBX4zfwD2neOaiWg05+Ig/e8
- U8jw==
-X-Gm-Message-State: AOJu0YyBrb/xZSzvr/VP6mkFkPmJ0uwfVuD4/SX7LFQy5psG2lPf17Xm
- Q7QXDAf9bXvwVEru+k0Li9sEVUDOCuuKl+H0gdZr0Nk0jrpg0tpNCGKVSjRypJV24Z0QHdWXfqc
- G7t/TQns=
-X-Gm-Gg: ASbGncsL2GfehdIS/Yk5eKPG+EFIm4a40e2L7S1zbwjgBylS7qeDP112ksEGS2Z1dP3
- /WV4pR8IikYvrY7ZAH6ou4joiyzaG/PDQ/4YJQNrCGfXuWpxH1xMwhlPkV49bgP31Rjdwyy+OXY
- m+m0sRNGhSG789N8xzmluyntTQbLkzMipZck8g6m+bff3hu/hB8Jf2D88ISW8rUM5huodlCbmKr
- JS7V1y90Qf9HNWgwv7eHn76+W+O6d9OXQSx8HAx8Mw1oCallYWKZXhWFMCyO9Z2+j+Faont0slu
- ho8pL1FvFZG0SLxXzlS2KSO5BCfFnAsmjM0ewkcTDbeTrV1adx6RuTmgqvIhLHj6PEgUudrTo5C
- DScrmYFc2W6NOoqEmD2n15Oy9Qw6RlVd9Ij3078abkPAlVPXjygsBZGRBQYoGcy8XfrFEMihlIt
- SmCjD+pAY=
-X-Google-Smtp-Source: AGHT+IGw7Ckq9XIGg1y73TuPmJSWK0jWtyfnSvfaJWBLuZqGkLL2rWgkdZyoTdQ6h8SDta0fNlrFHg==
-X-Received: by 2002:a05:6870:46a9:b0:332:2463:8c88 with SMTP id
- 586e51a60fabf-3c0f9e7240amr6328378fac.37.1760117795704; 
- Fri, 10 Oct 2025 10:36:35 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8b6984bsm1045885fac.8.2025.10.10.10.36.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Oct 2025 10:36:35 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Subject: [PATCH] net: phy: Make driver overloading get_phy_id depend on
- !COMPILE_TEST
-Date: Fri, 10 Oct 2025 11:36:33 -0600
-Message-ID: <20251010173633.1170642-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1760117946; x=1760722746;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hGsVginqEVUbXj/T86W+YsDi93zcMjIB75S76PHfY8E=;
+ b=TB+G3dlclJv7Oc2UAn+aq+8Up/CZJBRV3irn3Y0ctkOiNRL+6Jupc8Z+756MQ6r6oZ
+ zrrQJVomzzMlsSbTyDMsEWv5YJi2DB9LcaXc3hUQwriUH/Vqdehx9zoT/yMEN1CjswgV
+ kz7dHicyCIg5ZTi4ARWqhzCYeZcE0LLW8/txCQKiI1IiQ+sUM6ACtV5cJHpwOPwIX5y2
+ QQIyVn0WuZf7dxjKMjv2VKhnfX6U1NMGyNc6uGuZFrF0x67aIKF6970FLV7CvYXtWUOn
+ 8xLHRR2U5c7spP4GnjjPY6tC9oWNxzRgqWgLUGnJx+Stdx4TQE4pCeZA9KKr80CYGy0i
+ 8UAA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/NTP/z7Wv1fz1oMWbgfnwkddrxJAPTJJJODe7RLadHrkvBY1xsZzhmsYknQyCtUxUVSeARuM=@lists.denx.de
+X-Gm-Message-State: AOJu0YziTOTU5XP0XL1xlYC3UDKmGChc1x3OMeCUFaq0OTnxpzKsl0nj
+ yPhI9Q5oUL5imKlOTzSm2clj9uRZ66rHgj+hNdZHR6SRp9GRFEDpr8F5qmx0TACFU/rRwSxWSR6
+ F3xCmdnaGQa3ebHPZdvotu1PCGGHaz5FOXm3dUZILig==
+X-Gm-Gg: ASbGnctItTa87R2UEdtCuyIvRAe8bXT6Vs56IX8iGcI1KlKejQM0omVN28TDxwMtMwK
+ LJQD1hxLnWhkYDRkqbLBIs5DxVfabIlOn7uj9DQ5jbeBT8a10XZ2T35e4kUFGYjnpAnCHmOmBLK
+ 4cQgS9QC7gJa/DVMF2L9vKi+o9knDXY1KYnxC3AnnL51TfL+8Cu2AQFgwayyIEA1cUgq4wxf64E
+ bjrzmqAjAalceLy+ob647Skd7PQRwMNvfVC69I5XqBNRarRDFbOd0ud1ZIzdOhqImOY
+X-Google-Smtp-Source: AGHT+IEsDQBr5HxzBGcJw9a9aHH4o+VAIowwb5mZ7+4j9FTUrUAP3miBx5ougyxaEd1Ee3mGk8sQRsWKuKyeqVZLeTI=
+X-Received: by 2002:a17:902:c94c:b0:27e:f201:ec94 with SMTP id
+ d9443c01a7336-29027373e8cmr175213495ad.18.1760117946180; Fri, 10 Oct 2025
+ 10:39:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251010165103.1572444-1-mikhail.kshevetskiy@iopsys.eu>
+ <d5cc0678-5d8a-4ff4-973d-6b5a41f2fa4e@gmx.de>
+In-Reply-To: <d5cc0678-5d8a-4ff4-973d-6b5a41f2fa4e@gmx.de>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 10 Oct 2025 19:38:55 +0200
+X-Gm-Features: AS18NWBEj3IrHF8P8S5MvlauVsLfT4IX0m1PT1GJYy0RqrFZ9UZMl_6qGtGt8WQ
+Message-ID: <CAOf5uwk_PmCfPiDTkXQWVJajT4KtgoXKvFgCTtapjc4_PycaPA@mail.gmail.com>
+Subject: Re: [PATCH] cmd: mtd: benchmark: use lldiv() instead of 64-bit
+ division
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Andreas Gnau <andreas.gnau@iopsys.eu>, 
+ Tom Rini <trini@konsulko.com>, Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,47 +98,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With commit 597fe041a85f ("net/phy: enable get_phy_id redefinable") we
-made get_phy_id a public but weak function, so that PHY drivers that had
-required non-standard ways of getting the PHY ID could be supported.
-However, overloading a weak function multiple times is (rightly) a link
-error. At this point, we have two PHYs which make use of this feature,
-so make both of them only available when COMPILE_TEST is unset, as part
-of being able to support "allyesconfig" in the future.
+Hi
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-I thought about this a bit, and looking around very quickly in the linux
-kernel, I don't see how this is abstracted there. Given some of the
-comments in the two phy drivers that use this, I'm also not sure we
-could use some other abstraction here as this function is called during
-probe to figure out what we have.
+On Fri, Oct 10, 2025 at 7:28=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
+>
+> On 10/10/25 18:51, Mikhail Kshevetskiy wrote:
+> > As was noted by Heinrich Schuchardt, some SoCs may not support 64-bit
+> > divisions. Fix an issue by using lldiv() instead.
+>
+> Thank you for the patch.
+>
+> It is on top of
+> cmd: mtd: fix speed measurement in the speed benchmark
+> https://patchwork.ozlabs.org/project/uboot/patch/20251010124115.1545865-5=
+-mikhail.kshevetskiy@iopsys.eu/
+>
+> Adding it to the series might make Tom's life easier.
+>
+> >
+> > Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> > ---
+> >   cmd/mtd.c | 3 ++-
+> >   1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/cmd/mtd.c b/cmd/mtd.c
+> > index acd886da6da..2bc9fea697c 100644
+> > --- a/cmd/mtd.c
+> > +++ b/cmd/mtd.c
+> > @@ -10,6 +10,7 @@
+> >
+> >   #include <command.h>
+> >   #include <console.h>
+> > +#include <div64.h>
+> >   #include <led.h>
+> >   #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
+> >   #include <hexdump.h>
+> > @@ -595,7 +596,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int fla=
+g, int argc,
+> >
+> >       if (benchmark && bench_start) {
+> >               bench_end =3D timer_get_us();
+> > -             speed =3D (len * 1000000) / (bench_end - bench_start);
+> > +             speed =3D lldiv(len * 1000000, bench_end - bench_start);
+>
+> Here you assume that the benchmark never takes more than 4294 seconds
+> and thus the difference will be less than U32_MAX. This looks reasonable
+> to me.
+>
+> >               printf("%s speed: %lukiB/s\n",
+> >                      read ? "Read" : "Write",
+> >                      (unsigned long)(speed / 1024));
+>
+> You further assume that the compiler implements this u64 division
+> as >> 10. You could be explicit about this.
 
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
----
- drivers/net/phy/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+The series is taken already, so it means apply now on top of tom tree
 
-diff --git a/drivers/net/phy/Kconfig b/drivers/net/phy/Kconfig
-index 185c6a3156e2..018be98705a2 100644
---- a/drivers/net/phy/Kconfig
-+++ b/drivers/net/phy/Kconfig
-@@ -56,6 +56,7 @@ endif # B53_SWITCH
- 
- config MV88E61XX_SWITCH
- 	bool "Marvell MV88E61xx Ethernet switch PHY support."
-+	depends on !COMPILE_TEST
- 
- if MV88E61XX_SWITCH
- 
-@@ -119,6 +120,7 @@ config PHY_BROADCOM
- 
- config PHY_CORTINA
- 	bool "Cortina Ethernet PHYs support"
-+	depends on !COMPILE_TEST
- 
- config SYS_CORTINA_NO_FW_UPLOAD
- 	bool "Cortina firmware loading support"
--- 
-2.43.0
+Michael
 
+>
+> Best regards
+>
+> Heinrich
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
