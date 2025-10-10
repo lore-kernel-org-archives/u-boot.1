@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D1CDCCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4162CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:10:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02A948425A;
-	Fri, 10 Oct 2025 21:09:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D345842CD;
+	Fri, 10 Oct 2025 21:09:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="lUi4o9oa";
+	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="H8ZrVyV1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C6D1845D3; Fri, 10 Oct 2025 21:08:58 +0200 (CEST)
+ id E0ADA84374; Fri, 10 Oct 2025 21:08:58 +0200 (CEST)
 Received: from DB3PR0202CU003.outbound.protection.outlook.com
  (mail-northeuropeazlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c200::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2575583F8F
+ by phobos.denx.de (Postfix) with ESMTPS id F268083914
  for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:08:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=iopsys.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jPQonbQMDm8PeaBhFfNSjHK8e2IJI8I9jQRku4ILKIyfto3HrG8jpaTrbnE7JsgSILbnntnLi+oAiKx1mOAhROWl6LRirLt9Z60w8po9cT/egXH5LjoYPfyUbW2zPuEF4z2JmuhgCDqAgtrGjyzTu6uUkULrnV0EVKwOi2k1s/gFbn291Ij5bwilp87ap9D6JoA+kO/FxzpD8dOsCw9dzq+FfyqpVVdGDCMJohs0HZ9cB9fNkOa5KR09gmQc+JMFN8qjxGwphIqveDRtgWu98TJp5aSY1oh36gzzPVAP6vmtE/QhrCEE7814ZhCGluSTVrP7xwaSJqObHO/ppM9a7A==
+ b=o8h4vYNzuko3QkcShg7R7hNUpago7tg0KojbFlAfqniBQxSun5SPJlM43znjjLFOoDIYIROgtCUgovbs1E4MDddjGd64LiMLbPY1R1gZ+hpNAVdIwuvb1+6IsVvq0YoGfMYeMMrSRF1nZwkJWHCVwRs5IdEQjHC/ggXfv/r2CKC14hLoGdlatiRjrjSmTv7ercsrb+R6N0CM55zssInNYKgP3Suoj1WK7M11/jXxQhde50VIMlg9No+RZpsjBQLUATuyBr8saeUZ16zCMAgPvd1ji3wPwxD+h16VcjcI8Ses6Tmi4/hT3h7gfQtrqvolAOTz5JT0lXeRqb2SzDIjUw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aJ66iu/8tVdZCSSwPPSIEO6eoccWk4Wvuaz3uCRubKU=;
- b=F6nHMa4bwCh4+uVrANL3Po2dQXVujnnIghAnmKLXoZ/uRP+l5eVbChA3WUq//0CR7NXdClkKHbFETdM8oPllZ8872jNrhbVjf0XuoLxulep4X5wVDcdkmGGqG08UiyHZ26fz7Zjq+6LdCFkeJpYdjPnMLawLYc9VCfUH2UAX55mmntKsSvhHkEGbYMSViUT85MEUrRpH1Dbo1IKE+V87Ww2zgicLcPf+/mHHsqs+Yz/oMdlH0+5dJx1z7XVmqPOoiAiCSpMjyayJiLgYTNI1Fxh0wVlP6NTzb7o8rluAXcUr/++BOBjIYi0BfchlwLcDrX/GHH4fcGWlA3CtjAw8Dg==
+ bh=Z+2utjrtVEAmyAMOxh+J1hWqn8/aeFTOIGWM6rMA8/E=;
+ b=XCB8amEU68pv4VZaZvztzCyYFV7ok+DIFXSLWMQoXI7vadkHAKSjC0sE2wwff6lUHXYUrRl7lOyTKu38y6Hwsqy7cyPvJvJKrI5tdDk526NLiWBZyhbrGA0EkpMVuKiUf3QUmG1aKJF2+cRu1yp5EdnGbfQNPEM8be5X8zUK3cVvdi3l8zCnO3k4hT499rZxSnpPh0uz91t1xXkF2v7ZT5TaqyEyndpeB5e1Fj8EhGpYgbyL+fGsNkHK10Yom7skwCu0b3g88mVxkqBv2cBHBqLoXlTWob2qaFWPxLTDrKFw9uV3zdRDIDh7SenoDRtqaLWZMV77m8Jd3C1ej15PLA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
  dkim=pass header.d=iopsys.eu; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aJ66iu/8tVdZCSSwPPSIEO6eoccWk4Wvuaz3uCRubKU=;
- b=lUi4o9oaZJlxZJkL8Ryqv3XmfMx8ZMyjbV4mfbOtXV5Ci5pfOrhT/PXrppcgtztffjkUDN1/Ie0DjoQ6Gza53/+jFyBFcCgxvC6RmjgYx80Aysy3Xt/x+AOTUkolEPDGoj4Mjr7Njxc/7BHEQVf9VMHU4puR0exiMPNluo+p356XfIslaNFZtT8f8LZzjjiBs44TcalcFI0s02ZiKWAlTeWtgOCd7lcRqHnBUjmhyAaVsWugp/emvOlHNAiAlJ2K6vZQXsBd19k+cV3YMQSh8zd9LfEx/BfB7xyonrDj8otkoytiFD3lyeosKTJF7L1GJI1QrTgb5IkZq8pJOsEmtA==
+ bh=Z+2utjrtVEAmyAMOxh+J1hWqn8/aeFTOIGWM6rMA8/E=;
+ b=H8ZrVyV1Ny8XY7Wml5xkptfY3NWieiAFTDwKFwh2p3Hl4i9/qlYZFkVBEvpY1k1X3TReWV5yPoyxF8si+WfdnFuoWHOSlZHHteeBDQxbMaJW5WRdWAhxvBegD8/fuVHACMmsgNRBE02+ZGQ59eiJDX0ecTOVXuHPzN3NjcySi5RhL4/KOVDAdbylxnT2J4HGVUQOuFDeNXk0BK/uJ7mMmKmPVei6u88MpzSVsljLH0HKjXn1xTc3Wj44QGsAh1DjVRxjhIR5QUuRktMgmmnRo8cv3kInDn2XYMv8geVfpYjED8ThU49XD28cbN7n4y0P4a9uY4RqgbAhaG7aKaP3QA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=iopsys.eu;
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
  by AS8PR08MB8371.eurprd08.prod.outlook.com (2603:10a6:20b:56a::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.10; Fri, 10 Oct
- 2025 19:08:54 +0000
+ 2025 19:08:55 +0000
 Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
  ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9203.009; Fri, 10 Oct 2025
- 19:08:54 +0000
+ 19:08:55 +0000
 From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Christian Marangi <ansuelsmth@gmail.com>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
 Cc: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
  Andreas Gnau <andreas.gnau@iopsys.eu>
-Subject: [PATCH 06/11] spi: airoha: reduce the number of modification of
- REG_SPI_NFI_CNFG and REG_SPI_NFI_SECCUS_SIZE registers
-Date: Fri, 10 Oct 2025 22:08:36 +0300
-Message-ID: <20251010190841.1590130-7-mikhail.kshevetskiy@iopsys.eu>
+Subject: [PATCH 07/11] spi: airoha: set custom sector size equal to flash page
+ size
+Date: Fri, 10 Oct 2025 22:08:37 +0300
+Message-ID: <20251010190841.1590130-8-mikhail.kshevetskiy@iopsys.eu>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010190841.1590130-1-mikhail.kshevetskiy@iopsys.eu>
 References: <20251010190841.1590130-1-mikhail.kshevetskiy@iopsys.eu>
@@ -73,79 +73,79 @@ X-ClientProxiedBy: GVX0EPF00014AE1.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|AS8PR08MB8371:EE_
-X-MS-Office365-Filtering-Correlation-Id: a4a8ad99-3523-4646-34c0-08de083074cb
+X-MS-Office365-Filtering-Correlation-Id: bda3aa4f-cf68-410c-0409-08de0830755d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|366016|376014|52116014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?bD1SktBK4YL4waO452HFZQMf7ZEnRoafNSoB1ICztca6HRRitTqKsM4WVICS?=
- =?us-ascii?Q?ghzirUlQit046F+1oGG/6OWs4OFfcVWBff505ulrvy+nDm6OHtJaoEcdAS2g?=
- =?us-ascii?Q?4v8zpkjqlWExR+ccXjKU2hM3IThCDWDt3sjbtueotlf/oHwGL2fsvlMDBWXJ?=
- =?us-ascii?Q?vum/Qff5O157rFkz+VHvePt+5ctgKPgua/d9W889Jv/K02DOQjRsTRdhez+k?=
- =?us-ascii?Q?Alm7PEzF9H1PjxQyE6UMyYcj1qeJneTngNypzkiK8L3vlKlAThGbLmsGob8R?=
- =?us-ascii?Q?8Hwj6sarMpCVMG5nhOeXjyzTUfkp/Ep4DfYNTKyH3UzfRUxAaMPOstxfzwhn?=
- =?us-ascii?Q?UeJZko3n/bEacJBCGznYNR6L23EXZDfrjbOdXCLUKzWQ2I9mHoMeQJpRCmfQ?=
- =?us-ascii?Q?thHsSsf8DEl70IuRugd8I9F0I8cfFHQloAZlFdUm7rv2/kcKvfewSxtZ6grW?=
- =?us-ascii?Q?9gPI4jUPwF/9bzWq+GE/z3ezRmoDzjQ8YHXZM4OvVHOSuL/3T8kgvVYkNy4U?=
- =?us-ascii?Q?jEtQ1gK3ZllFVfPBg9KMP8oVmNNc4VRth+NKi4gqlDBF6+oNX4bzFo5WK5fz?=
- =?us-ascii?Q?MUKcOwiEKr86kkae5UVQplo5JGf14a9PZ2JEdeSoz3eW+LQJGtPlyv8UqnwA?=
- =?us-ascii?Q?PWQJaq1THC2Ec46eoEZbNWsl1lWp5gS9+mNNnJRpazSOGUdOuUh3mrPE3Znc?=
- =?us-ascii?Q?DgPBLOx3y/sxkkmdS4JA9b1NVHYKgU0ea5pUe18ixra+W8QO2bwU8r/vJbZV?=
- =?us-ascii?Q?N024STgJM1mQBV06vl7d4J9oOrbTzlRaE8kmp2sFlHFSBFpFaL/34VyemngI?=
- =?us-ascii?Q?Ma0bgVVwceflBVusQgDAADt4dARW6U9ZIJHAc6txYDggJTQsMtiaSqVaIWAy?=
- =?us-ascii?Q?ex1V8WMEeyP+OM5cf4+6sxOSuuYJNsL7+5wfnFDSLTJ/z6mCm2bbaiIYWjgK?=
- =?us-ascii?Q?pEqtIxuoRW805sk1u1qKl4vGxWhWaWhngvq6r6lUzPrt2EIL/5Fwu2tkDDmC?=
- =?us-ascii?Q?JyfXFKwcDU+qOeWsiCIwS05ITu7yWaIybdXEw29shC0ilOUjiFV5bQ2yyb65?=
- =?us-ascii?Q?IBpuGHDnjyAMPHpV4cFtnPN4xeD2G4+86sNzZmlmRjCPIlbjBhMXTq2MQ+n/?=
- =?us-ascii?Q?QZcLoC0CDpbf+BGdNs1e3eLZHiceu2AstEPaD6whqg1sMlAcwU1Hw2TzKSyb?=
- =?us-ascii?Q?kMg6ER5YU4CF/oQHmav6hgbJ+DeDgjCis/5mEEEXJS3BnwI1UDFTwtTPDs34?=
- =?us-ascii?Q?zdyJr+8OGboPIuBG6PyHnnE3ZMGgm4chCSx1EsOISAgrUquYQzQTUz7q4I6u?=
- =?us-ascii?Q?a5irofOwXuncveNbPcQhOd9dddNrVDH1DxN3BuT2vS4hDduZDXo3p4NdENzg?=
- =?us-ascii?Q?hMGQKyBUoQON94E13Mg4YPxKZJ8MCD94uEM54x1kbKNHn52FhfdY3AaE7ak/?=
- =?us-ascii?Q?LEELmKgLwAW/XYGRo0DLRodT6Q1/JW56xViKv8cbXuo0KI4Dz7QlEfaom62b?=
- =?us-ascii?Q?limUSjVfj1qp2Ma/eVY4eMAyUciz800zY8Uz?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fKROtIQtlqs9X/0GT3qqwrOl+FBPQpNGwKI3kGm0qB2G01VhjaL2ZTxjx5/J?=
+ =?us-ascii?Q?VT7Tflwjs6SaTmfIsEK+cGSpG+1/vIqPz+wRq+8FJNT9gCsabaPOnR9Vy2XF?=
+ =?us-ascii?Q?nwV7/ILZ1k6LVDLNCeCtSeO0s6X7MNtpu18AT7SgYih+/TYOq+B5EUjcPgSm?=
+ =?us-ascii?Q?NW//VMBUMtQkPMXELUjiBeeCTHQe3j56jXP1PohtdagM+rbPcrenBsiTb4HC?=
+ =?us-ascii?Q?98X1XTJUnUoZjzq47+gRtwLQ33hgz32ySQiQXY4lHfjFZDzuWoKg1kUrg0b4?=
+ =?us-ascii?Q?ITUaTGuQpZEScSFoljA5f8GbfDTr3wiRA9Kav4KDS4W9o+CVoVOX9b0e/xgf?=
+ =?us-ascii?Q?H0qf05TBmr7075PVY7KSx/WQTKJvAmvRsrs+ZkttS6K9isXyorgBar9VZMdy?=
+ =?us-ascii?Q?Rk4cQ49rQu7Vqagid3ubSncTJHBzu5g2D6TgDmHO5mEe+j5FBkCVGTOLfOjL?=
+ =?us-ascii?Q?HaLbJGml60Kq61YzkjTqhusIth/ytR0o/5Y+NiozI6Y7srsV0rkWKEjV6DBz?=
+ =?us-ascii?Q?qLENps7uzcEbkQysI5B08QD2giEok4bAIHEA+B2/x08jheC91Ry2yCShFJ3g?=
+ =?us-ascii?Q?7KVoBFjbwcVz3sm5t3WLJzzkAZTKgnET6B0pjKO5eSntAJrYhstdKxzb9rT/?=
+ =?us-ascii?Q?pXTTISLQDbdzsTmCl/Pjrs3noGGgwgZN7qxSmefL+n0jMbqo9l7VGKlseUTj?=
+ =?us-ascii?Q?TnpBDg3WbTPqVdoO4YeyeOkmZwB1GlKTlCdM6B4eWK6tehmdx82f7jKk/i7E?=
+ =?us-ascii?Q?jQ9HxYlkECajdA4AZ08ZYcBmwT/Km5joFF/B43FqJRGd0yqDBZ0vyc446NiR?=
+ =?us-ascii?Q?ZMh6kB6qOciatwkxZbzBpgD1oZ1g4k6aj2cRhuWxOJTG9k4rPxIEp8/rc9cz?=
+ =?us-ascii?Q?DUD0JMa3kZZVNdsbrIN60D4cQ1So8in1dvJEEvkGkv38wnp+R2YgcVgCnnC5?=
+ =?us-ascii?Q?wlt+bwbOboB1G9z4cAOeIfEZqi6BSu1CvLFX9C5urAkFVwjbWIVFtZ8ghQ1q?=
+ =?us-ascii?Q?SN9Z+1Pz1MN5xuRn0BTVQShTp0MRSn4DgNP1RgJtF69WVZXSmyQDNUlR4On2?=
+ =?us-ascii?Q?ChO3npVpQ4k6Yqo8EJ1IbbGCNqkgn29RGziOhBPNI09yONTe6q/SAFU9WjR0?=
+ =?us-ascii?Q?V9Zau1NmfpwzOyLmz0kdtimKTMQun3qUr8TAHE6owWZopepV2HVItIWNxAMU?=
+ =?us-ascii?Q?RfenUP7PhW/l3X+quN388p0iE/vFJBvqrefSgmRKthN2y0SofLarFRz3IFGD?=
+ =?us-ascii?Q?BoWTpvwfe5NM00v10K8oyQ3JTTw+ucLLBvzEtl599+jC+4kMVoTEXOBJgM9e?=
+ =?us-ascii?Q?TWoH4rJ9Su9NVtVLw23LmqbVh/yqaf3J7auDuwV4vdmebQThV5ftQiwPDy4j?=
+ =?us-ascii?Q?2+u8HWtP1US6QFDQVyBBFDJnpVHSD559UWzKJfLNo6gW4paQxbGH9CI7DkIs?=
+ =?us-ascii?Q?wVJTxXYAX+YeEiwzo+5ITAidXMTZjI61jxtPaGaYe28LgcytIb9U2maMEIfN?=
+ =?us-ascii?Q?zkNi5BaXIXPlkpurKrfvUp2s/6v8jg0vghR1?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(366016)(376014)(52116014)(1800799024)(38350700014); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?iIcR66LpzSjOpwYXJrAIobx+3G3PX+n1kteHI29wRsN5ENZYRXFxXzfXcNnd?=
- =?us-ascii?Q?SGjnWci8hBnw1YtoDs959UjzO/Y6cAtexIr7qH1tdSsCEeWqUWVYsaDhkw9x?=
- =?us-ascii?Q?AhhfVuLFn6trfsEQx+JNuVDKHWvtfGojpICrueKL4Q7NhW2+/k5Y2d/AB8V8?=
- =?us-ascii?Q?9MeixTz2/t8VLWKN5ISC7+KkXxcFe1eXV3etHn9H7+JvG8aeahvSAQsdJAnq?=
- =?us-ascii?Q?Hf0fb+8bmsgK2y9OQI8JB6AM2WsUTW4KXp6lciHbIsUILIfNmBO7AJlF3lb2?=
- =?us-ascii?Q?9KpU1yEukcGiHoiTY2wGWsV9nQhEXe3M4Nd+W4YlxoFm2dn2jwCGzeOSbiE3?=
- =?us-ascii?Q?k2pp3/OCS1BnPnOlQVmrnGNvMTiBNV2lgd6EZ98zEvEbf9sKy3yf8S40cjao?=
- =?us-ascii?Q?AUocmpH7RASo5tlTgOTfKDGeZPaLznE0ms1bBGzrKa/s48tsIAymHYwkxo4+?=
- =?us-ascii?Q?7nGkE2Dc7MF4lQYE91GmXaazhVfltVhCi07icnqzy0t8nhqW/1WQN3gZMNY5?=
- =?us-ascii?Q?jL5dztcxiOT6HYUIUMUhAdyX2HE2r6k6xhrzzD6Mbo7ux3EH9Tsv7L5RxJA3?=
- =?us-ascii?Q?AA7aFUDqneugxx6Apg7oI0PEiyq3D/K5NPgtoOP9nxrKCl38/v39eGguGvMC?=
- =?us-ascii?Q?36XvMTuThzKqtw6WzB3e+PSXW9xI/TrOi5f3c6j82GIyTJjPBoE1peq9DiF+?=
- =?us-ascii?Q?+ji0uc4fur8Nz27w2oNfbVO9HQ8Qb7jmA1aS3IP0HZdbOWA0AuiMu5uxK3PE?=
- =?us-ascii?Q?I+nAE0bre/TeW/rPzWVICUYETtymZdx2CvCqAbSDNIBcJi7IUEfV4A//ZwAB?=
- =?us-ascii?Q?H0KQglq+DB/sfubqiWCvF2Gvo0TCR4Ur5LJ+0U1hvbp4yGey2jENXJKan17B?=
- =?us-ascii?Q?IBRTrgvgJLYhiZHx/X+BNhJ4gert1KCEPtFd5UW7nt95e2dR3DhyTuqGjSsg?=
- =?us-ascii?Q?dnScTGrOmro8m+71ocpjLz6ktqJaDnxf0I04WeqI9RqZYqIJq3eb2hmEB4vN?=
- =?us-ascii?Q?o5YlpGecQzULVl5tmCbNbu5aCODMfEFxUML29IMARzvEvW16pC6DN1CNlyQR?=
- =?us-ascii?Q?ESMgPhLxwztDnRhpPVm1Wzo1dUViA91pXckg7UDD5gQN6E5piFAAbFq13KtU?=
- =?us-ascii?Q?5i9QAc6Le4vA15TT3AwT1lPf7xbk2Xt+Jt2hz4TnntWbePErEoS/Eg4Uj52p?=
- =?us-ascii?Q?CQBcM4rerMc0L+j/UTLfNH87V/MtDGfiZFU5FKWGsHOxciw7DA40Uof5/wMf?=
- =?us-ascii?Q?DkY57Hzt+z3nqvJ7rlftAijTEsLBE5nby6exyuUe6x2aN+JdpQO3sSZ5/c07?=
- =?us-ascii?Q?1TOeWvzryE+Z98hyvKLrrw7yJxmIV3K2Xw9QSIwbMBs13AMwNYXzURxzZIz2?=
- =?us-ascii?Q?wWHY2DbVIWnExS2Q9lfd/gq+m/pQE3+hA5YZaVmPb5i4K60VPbWpRWg79obV?=
- =?us-ascii?Q?Tzz8mjIqm9wGxzTqao23FLwJOIOf02M470aD+Kv0kNFlsb1oYC8HYWvJPJjD?=
- =?us-ascii?Q?W7pPCXTbJLozM0kHHf91izAMIPHTLhAPs9zZuiE80qcjYYq+CYi7ltXeX2cW?=
- =?us-ascii?Q?M+BU0d7a3wxth46Agw31bXLzMz9cJH8OgsMzywJrXqc/8idiViSVXSn+eYY5?=
- =?us-ascii?Q?ub1QcuK0RQWAaOssO/IDlHg=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CKS/WX9P0y4ItByZD5obaP2FoR8POQHetgyniMdf+B0rlAZ+DNaDr4Em9Lgm?=
+ =?us-ascii?Q?vFSsOf4eOPe6lREbyZoaiGsVTSZ7RdVW6UUDDRHmWF/vD35QtHBvtmPwhTfS?=
+ =?us-ascii?Q?19e7j3Nd4qelzEjdGag5IEG+XbYjn8qyKkBeLKKmE/eQAKzFI+PMAGiOIRmp?=
+ =?us-ascii?Q?Qii3U7JRqjbd2srMJcSaVxIt0CIuPPPyNJqU1kgsKmCfnB8mR+5PxOdHz/cE?=
+ =?us-ascii?Q?k6jVwctIr184RJR58SnzV/lBOXQw2+9FQKjSriZ50vC4LGWOa8567P2D6uyj?=
+ =?us-ascii?Q?1+o7yPljKqWnHP3IKlVncM57YL09lbncFJYBMf/cQC75pqvHa6+nLkvtkY+n?=
+ =?us-ascii?Q?7hX/EuFAAyhI9LPWuZRGGrei0ULpwfPs1UkrvdgE3azXsHQyu6xO8QZkqpCC?=
+ =?us-ascii?Q?IC9JumaC7ooPFEPPYFyq6ZHaEIY8PvIrwRI/5VX3rltu/24jElZGuyhbWglz?=
+ =?us-ascii?Q?l+zVei2qg0DspBtRMdts1Q+6cdJRKNMgGSjebyw6fyddNzLiE8jEd83iy9mB?=
+ =?us-ascii?Q?Geetp0r+yI/fqEBvPi25Kt1YAlV3prQ1dWcpTCoc1TXrBoIlXHj5lIxKK0GZ?=
+ =?us-ascii?Q?tL/xt3lo7iCAAL6CrpmLs1MROReCfrFP87oHXOAimU664bfLIl39999bXMBu?=
+ =?us-ascii?Q?F0Zszj65sAbZQHbtjr+aX33cIUQKP0urBHYsJvHdM35cYLXb61YUIkVOi2/V?=
+ =?us-ascii?Q?qu9Ap8TLYBBRCnXovaQNSxWp8Q0F8W82CkL/7W2aqwyELlcUsgzsXpkzNxDT?=
+ =?us-ascii?Q?bz3QQBf+NTPfMe1JrtQqOQfMbWMd6cM8aOI+rJjDcSkCOvRkDNxu/ZMeII+i?=
+ =?us-ascii?Q?bLU/tq5K5KmDsZWOZcERpiMIRFWLDOUf8zFFQO3s6PKnv9Rdh8qZJ8JmzZ49?=
+ =?us-ascii?Q?FfDVJSiyX2t+fblcRhbBip1NLSFOC6M9bVHtUbR58eyB0LDf3m96Xry/fHAc?=
+ =?us-ascii?Q?2iLisrdwzymx0ir9Rr1xPQu2MJAVZD0wox5MsVRflXgcCqU384R5wDBIoDSz?=
+ =?us-ascii?Q?bGj9PBWabDon82BId74p1P3LaxyRuIWwf2s25Y7BYjiCPEZ1AGMXCOv54byu?=
+ =?us-ascii?Q?CUjYTnjqJ+Ca9m+mmclGbXiXgksKTSwzP9BG2Z9ySVTuXvEndtJe+fe8Cj/u?=
+ =?us-ascii?Q?ocfENl7hV+M4LDfiOJ5Dlaya8+rBAYf6CGq5DkX8GKG8aNPrHPlW/n5e8oZ+?=
+ =?us-ascii?Q?soJDklKHWyUwzSz+p5m1Uc+CWuNBttNQ7xJ/uS35tAPi/3OmsE9hytD2+G0T?=
+ =?us-ascii?Q?fPArRFhn1AtomT/3BZtNKBWLNPxD0lgO+ocPpwqVIYo8N7x77tamNhZRpYpg?=
+ =?us-ascii?Q?LTLc9Uxk3gyY5y4DA0ETe+jDyKsQ0u3rRkCGQZIHz/oo+ngmnXCAUeCxi4Fx?=
+ =?us-ascii?Q?2ISq8+R9wN/86vSFG1FsRrXANc/NFd0wf93Lg7D4tpwVnQBE86TkGb6R+cc4?=
+ =?us-ascii?Q?muyLCkNqiURB2lS393v1o2vTNSeyiCXSokEobRcXJyKfz0R0niAA8jnU+vrA?=
+ =?us-ascii?Q?fd2wnQM+rkjWYinq3cNipvcXQR79KDwJP4IvdUph+ksqyeyrhRRY26qh9XFT?=
+ =?us-ascii?Q?HhFozGeEei+vwzLv4k2C1NSeXowiUgfUYP5P6SLjmA9ZFWnUcdX1lr1Z+3b3?=
+ =?us-ascii?Q?0IqTefs5jmEI1WjVtSgJl38=3D?=
 X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4a8ad99-3523-4646-34c0-08de083074cb
+X-MS-Exchange-CrossTenant-Network-Message-Id: bda3aa4f-cf68-410c-0409-08de0830755d
 X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2025 19:08:54.6825 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2025 19:08:55.5577 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: I2jmW98Gf6VsRqup+m0Wpq0rPrb6PPEGwdepenUCqnz9o1nS6ezmD1Ct6e6nLGuIjpv1fSlAzs61Q+3gN1ntZqCwGSvA40+g5pzsN+LVGmk=
+X-MS-Exchange-CrossTenant-UserPrincipalName: bIkp3T29/+RUuMgWx0FkjS3I96Ib2Q3/cSBa+/fAxXMeNmESWEX7JreRPDExshaiZw7qwsMXbL4qFUoHMA2uJawPjuRrjRMJA2e2DdrEtys=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR08MB8371
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -163,198 +163,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This just reduce the number of modification of REG_SPI_NFI_CNFG and
-REG_SPI_NFI_SECCUS_SIZE registers during dirmap operation.
+Set custom sector size equal to flash page size including oob. Thus we
+will always read a single sector. The maximum custom sector size is
+8187, so all possible flash sector sizes are supported.
 
 This patch is a necessary step to avoid usage of flash specific
 parameters.
 
 Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
 ---
- drivers/spi/airoha_snfi_spi.c | 135 +++++++++++++++++++++++++---------
- 1 file changed, 102 insertions(+), 33 deletions(-)
+ drivers/spi/airoha_snfi_spi.c | 35 +++++++++++++++++++----------------
+ 1 file changed, 19 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/spi/airoha_snfi_spi.c b/drivers/spi/airoha_snfi_spi.c
-index 71e4fc13924..55eb6d85884 100644
+index 55eb6d85884..03108dcf82a 100644
 --- a/drivers/spi/airoha_snfi_spi.c
 +++ b/drivers/spi/airoha_snfi_spi.c
-@@ -641,7 +641,48 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	if (err < 0)
+@@ -515,7 +515,7 @@ static int airoha_snand_nfi_config(struct airoha_snand_priv *priv)
  		return err;
  
--	err = airoha_snand_nfi_config(priv);
-+	/* NFI reset */
-+	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
-+			   SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
-+	if (err)
-+		goto error_dma_mode_off;
+ 	/* sec num */
+-	val = FIELD_PREP(SPI_NFI_SEC_NUM, priv->nfi_cfg.sec_num);
++	val = FIELD_PREP(SPI_NFI_SEC_NUM, 1);
+ 	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CON,
+ 				 SPI_NFI_SEC_NUM, val);
+ 	if (err)
+@@ -528,7 +528,8 @@ static int airoha_snand_nfi_config(struct airoha_snand_priv *priv)
+ 		return err;
+ 
+ 	/* set cust sec size */
+-	val = FIELD_PREP(SPI_NFI_CUS_SEC_SIZE, priv->nfi_cfg.sec_size);
++	val = FIELD_PREP(SPI_NFI_CUS_SEC_SIZE,
++			 priv->nfi_cfg.sec_size * priv->nfi_cfg.sec_num);
+ 	return regmap_update_bits(priv->regmap_nfi,
+ 				  REG_SPI_NFI_SECCUS_SIZE,
+ 				  SPI_NFI_CUS_SEC_SIZE, val);
+@@ -610,8 +611,11 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
+ 	u8 *txrx_buf = priv->txrx_buf;
+ 	dma_addr_t dma_addr;
+ 	u32 val, rd_mode, opcode;
++	size_t bytes;
+ 	int err;
+ 
++	bytes = priv->nfi_cfg.sec_num * priv->nfi_cfg.sec_size;
 +
-+	/* NFI configure:
-+	 *   - No AutoFDM (custom sector size (SECCUS) register will be used)
-+	 *   - No SoC's hardware ECC (flash internal ECC will be used)
-+	 *   - Use burst mode (faster, but requires 16 byte alignment for addresses)
-+	 *   - Setup for reading (SPI_NFI_READ_MODE)
-+	 *   - Setup reading command: FIELD_PREP(SPI_NFI_OPMODE, 6)
-+	 *   - Use DMA instead of PIO for data reading
-+	 */
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
-+				 SPI_NFI_DMA_MODE |
-+				 SPI_NFI_READ_MODE |
-+				 SPI_NFI_DMA_BURST_EN |
-+				 SPI_NFI_HW_ECC_EN |
-+				 SPI_NFI_AUTO_FDM_EN |
-+				 SPI_NFI_OPMODE,
-+				 SPI_NFI_DMA_MODE |
-+				 SPI_NFI_READ_MODE |
-+				 SPI_NFI_DMA_BURST_EN |
-+				 FIELD_PREP(SPI_NFI_OPMODE, 6));
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	/* Set number of sector will be read */
-+	val = FIELD_PREP(SPI_NFI_SEC_NUM, priv->nfi_cfg.sec_num);
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CON,
-+				 SPI_NFI_SEC_NUM, val);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	/* Set custom sector size */
-+	val = priv->nfi_cfg.sec_size;
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SECCUS_SIZE,
-+				 SPI_NFI_CUS_SEC_SIZE |
-+				 SPI_NFI_CUS_SEC_SIZE_EN,
-+				 FIELD_PREP(SPI_NFI_CUS_SEC_SIZE, val) |
-+				 SPI_NFI_CUS_SEC_SIZE_EN);
+ 	/*
+ 	 * DUALIO and QUADIO opcodes are not supported by the spi controller,
+ 	 * replace them with supported opcodes.
+@@ -670,18 +674,17 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
+ 		goto error_dma_mode_off;
+ 
+ 	/* Set number of sector will be read */
+-	val = FIELD_PREP(SPI_NFI_SEC_NUM, priv->nfi_cfg.sec_num);
+ 	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CON,
+-				 SPI_NFI_SEC_NUM, val);
++				 SPI_NFI_SEC_NUM,
++				 FIELD_PREP(SPI_NFI_SEC_NUM, 1));
  	if (err)
  		goto error_dma_mode_off;
  
-@@ -654,7 +695,14 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_unmap;
- 
--	/* set cust sec size */
-+	/*
-+	 * Setup transfer length
-+	 * ---------------------
-+	 * The following rule MUST be met:
-+	 *     transfer_length =
-+	 *        = NFI_SNF_MISC_CTL2.read_data_byte_number =
-+	 *        = NFI_CON.sector_number * NFI_SECCUS.custom_sector_size
-+	 */
- 	val = priv->nfi_cfg.sec_size * priv->nfi_cfg.sec_num;
- 	val = FIELD_PREP(SPI_NFI_READ_DATA_BYTE_NUM, val);
- 	err = regmap_update_bits(priv->regmap_nfi,
-@@ -681,18 +729,6 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_unmap;
- 
--	/* set nfi read */
--	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
--				 SPI_NFI_OPMODE,
--				 FIELD_PREP(SPI_NFI_OPMODE, 6));
--	if (err)
--		goto error_dma_unmap;
--
--	err = regmap_set_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
--			      SPI_NFI_READ_MODE | SPI_NFI_DMA_MODE);
--	if (err)
--		goto error_dma_unmap;
--
- 	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CMD, 0x0);
- 	if (err)
- 		goto error_dma_unmap;
-@@ -783,7 +819,48 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err < 0)
- 		return err;
- 
--	err = airoha_snand_nfi_config(priv);
-+	/* NFI reset */
-+	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CON,
-+			   SPI_NFI_FIFO_FLUSH | SPI_NFI_RST);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	/*
-+	 * NFI configure:
-+	 *   - No AutoFDM (custom sector size (SECCUS) register will be used)
-+	 *   - No SoC's hardware ECC (flash internal ECC will be used)
-+	 *   - Use burst mode (faster, but requires 16 byte alignment for addresses)
-+	 *   - Setup for writing (SPI_NFI_READ_MODE bit is cleared)
-+	 *   - Setup writing command: FIELD_PREP(SPI_NFI_OPMODE, 3)
-+	 *   - Use DMA instead of PIO for data writing
-+	 */
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
-+				 SPI_NFI_DMA_MODE |
-+				 SPI_NFI_READ_MODE |
-+				 SPI_NFI_DMA_BURST_EN |
-+				 SPI_NFI_HW_ECC_EN |
-+				 SPI_NFI_AUTO_FDM_EN |
-+				 SPI_NFI_OPMODE,
-+				 SPI_NFI_DMA_MODE |
-+				 SPI_NFI_DMA_BURST_EN |
-+				 FIELD_PREP(SPI_NFI_OPMODE, 3));
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	/* Set number of sector will be written */
-+	val = FIELD_PREP(SPI_NFI_SEC_NUM, priv->nfi_cfg.sec_num);
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CON,
-+				 SPI_NFI_SEC_NUM, val);
-+	if (err)
-+		goto error_dma_mode_off;
-+
-+	/* Set custom sector size */
-+	val = priv->nfi_cfg.sec_size;
-+	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SECCUS_SIZE,
-+				 SPI_NFI_CUS_SEC_SIZE |
-+				 SPI_NFI_CUS_SEC_SIZE_EN,
-+				 FIELD_PREP(SPI_NFI_CUS_SEC_SIZE, val) |
-+				 SPI_NFI_CUS_SEC_SIZE_EN);
+ 	/* Set custom sector size */
+-	val = priv->nfi_cfg.sec_size;
+ 	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SECCUS_SIZE,
+ 				 SPI_NFI_CUS_SEC_SIZE |
+ 				 SPI_NFI_CUS_SEC_SIZE_EN,
+-				 FIELD_PREP(SPI_NFI_CUS_SEC_SIZE, val) |
++				 FIELD_PREP(SPI_NFI_CUS_SEC_SIZE, bytes) |
+ 				 SPI_NFI_CUS_SEC_SIZE_EN);
  	if (err)
  		goto error_dma_mode_off;
- 
-@@ -796,8 +873,16 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
- 	if (err)
- 		goto error_dma_unmap;
- 
--	val = FIELD_PREP(SPI_NFI_PROG_LOAD_BYTE_NUM,
--			 priv->nfi_cfg.sec_size * priv->nfi_cfg.sec_num);
-+	/*
-+	 * Setup transfer length
-+	 * ---------------------
-+	 * The following rule MUST be met:
-+	 *     transfer_length =
-+	 *        = NFI_SNF_MISC_CTL2.write_data_byte_number =
-+	 *        = NFI_CON.sector_number * NFI_SECCUS.custom_sector_size
-+	 */
-+	val = priv->nfi_cfg.sec_size * priv->nfi_cfg.sec_num;
-+	val = FIELD_PREP(SPI_NFI_PROG_LOAD_BYTE_NUM, val);
+@@ -703,11 +706,10 @@ static ssize_t airoha_snand_dirmap_read(struct spi_mem_dirmap_desc *desc,
+ 	 *        = NFI_SNF_MISC_CTL2.read_data_byte_number =
+ 	 *        = NFI_CON.sector_number * NFI_SECCUS.custom_sector_size
+ 	 */
+-	val = priv->nfi_cfg.sec_size * priv->nfi_cfg.sec_num;
+-	val = FIELD_PREP(SPI_NFI_READ_DATA_BYTE_NUM, val);
  	err = regmap_update_bits(priv->regmap_nfi,
  				 REG_SPI_NFI_SNF_MISC_CTL2,
- 				 SPI_NFI_PROG_LOAD_BYTE_NUM, val);
-@@ -822,22 +907,6 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
+-				 SPI_NFI_READ_DATA_BYTE_NUM, val);
++				 SPI_NFI_READ_DATA_BYTE_NUM,
++				 FIELD_PREP(SPI_NFI_READ_DATA_BYTE_NUM, bytes));
  	if (err)
  		goto error_dma_unmap;
  
--	err = regmap_clear_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
--				SPI_NFI_READ_MODE);
--	if (err)
--		goto error_dma_unmap;
--
--	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
--				 SPI_NFI_OPMODE,
--				 FIELD_PREP(SPI_NFI_OPMODE, 3));
--	if (err)
--		goto error_dma_unmap;
--
--	err = regmap_set_bits(priv->regmap_nfi, REG_SPI_NFI_CNFG,
--			      SPI_NFI_DMA_MODE);
--	if (err)
--		goto error_dma_unmap;
--
- 	err = regmap_write(priv->regmap_nfi, REG_SPI_NFI_CMD, 0x80);
+@@ -796,8 +798,11 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
+ 	u8 *txrx_buf = priv->txrx_buf;
+ 	dma_addr_t dma_addr;
+ 	u32 wr_mode, val, opcode;
++	size_t bytes;
+ 	int err;
+ 
++	bytes = priv->nfi_cfg.sec_num * priv->nfi_cfg.sec_size;
++
+ 	opcode = desc->info.op_tmpl.cmd.opcode;
+ 	switch (opcode) {
+ 	case SPI_NAND_OP_PROGRAM_LOAD_SINGLE:
+@@ -848,18 +853,17 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
+ 		goto error_dma_mode_off;
+ 
+ 	/* Set number of sector will be written */
+-	val = FIELD_PREP(SPI_NFI_SEC_NUM, priv->nfi_cfg.sec_num);
+ 	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_CON,
+-				 SPI_NFI_SEC_NUM, val);
++				 SPI_NFI_SEC_NUM,
++				 FIELD_PREP(SPI_NFI_SEC_NUM, 1));
+ 	if (err)
+ 		goto error_dma_mode_off;
+ 
+ 	/* Set custom sector size */
+-	val = priv->nfi_cfg.sec_size;
+ 	err = regmap_update_bits(priv->regmap_nfi, REG_SPI_NFI_SECCUS_SIZE,
+ 				 SPI_NFI_CUS_SEC_SIZE |
+ 				 SPI_NFI_CUS_SEC_SIZE_EN,
+-				 FIELD_PREP(SPI_NFI_CUS_SEC_SIZE, val) |
++				 FIELD_PREP(SPI_NFI_CUS_SEC_SIZE, bytes) |
+ 				 SPI_NFI_CUS_SEC_SIZE_EN);
+ 	if (err)
+ 		goto error_dma_mode_off;
+@@ -881,11 +885,10 @@ static ssize_t airoha_snand_dirmap_write(struct spi_mem_dirmap_desc *desc,
+ 	 *        = NFI_SNF_MISC_CTL2.write_data_byte_number =
+ 	 *        = NFI_CON.sector_number * NFI_SECCUS.custom_sector_size
+ 	 */
+-	val = priv->nfi_cfg.sec_size * priv->nfi_cfg.sec_num;
+-	val = FIELD_PREP(SPI_NFI_PROG_LOAD_BYTE_NUM, val);
+ 	err = regmap_update_bits(priv->regmap_nfi,
+ 				 REG_SPI_NFI_SNF_MISC_CTL2,
+-				 SPI_NFI_PROG_LOAD_BYTE_NUM, val);
++				 SPI_NFI_PROG_LOAD_BYTE_NUM,
++				 FIELD_PREP(SPI_NFI_PROG_LOAD_BYTE_NUM, bytes));
  	if (err)
  		goto error_dma_unmap;
+ 
 -- 
 2.51.0
 
