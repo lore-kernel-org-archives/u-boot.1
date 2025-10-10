@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA85ECCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:54:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7CC9CAC5BB
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:54:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E11683FDE;
-	Fri, 10 Oct 2025 07:53:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A7847840A6;
+	Fri, 10 Oct 2025 07:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CpPXOnUf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IAn4aSl3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82DC4840D5; Fri, 10 Oct 2025 07:53:55 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id E6CD183FC6; Fri, 10 Oct 2025 07:53:55 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C3E083FF0
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:53:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAF5683FDE
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:53:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5rlKV248341;
- Fri, 10 Oct 2025 00:53:47 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5rjFJ177097;
+ Fri, 10 Oct 2025 00:53:45 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760075627;
- bh=g7TK7VmUJnhH5OPpjnLRJDv02B0k9ljpO6bXG9UPgXk=;
+ s=ti-com-17Q1; t=1760075625;
+ bh=wbbuxHplBS08EPZUGXzcNtjZchZH2D3DKkU0e96Q+DU=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=CpPXOnUffcTNAojVSJTROBzXk+z6UAPcsh38A0bdhu5FnHkVE2hBCXyHXGMvxKCDK
- 9CJUxhXpoo4P2amDCWiDWKF60W79M13I/75c50xoKkFEBLbUQ8ieSg1WJ42cFvQVPJ
- 9KcmIyfkiniSyvT+qWlONZ+dmAQdKiRlra8WUHY4=
-Received: from DFLE200.ent.ti.com (dfle200.ent.ti.com [10.64.6.58])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5rlIW568502
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 10 Oct 2025 00:53:47 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 10 Oct
- 2025 00:53:47 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ b=IAn4aSl3hAiODc+B+1BKgOLbRzCbuQ/qx3IZKM70atpJxJM8UMV8gsuORyMxDsU1I
+ 6M6r32lQEyYwNoPKfvhWiXItSW95a6pYfrYKSAmUi+ey21q7c0yQpCi7elkQkc6x4p
+ 58Xw7Eiich7CJ+z0HNl++z3espfxAH2346N/ag6Y=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5rj8A839191
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 10 Oct 2025 00:53:45 -0500
+Received: from DFLE209.ent.ti.com (10.64.6.67) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
+ Oct 2025 00:53:45 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE209.ent.ti.com
+ (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 00:53:47 -0500
+ Transport; Fri, 10 Oct 2025 00:53:45 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5rjGI1175849;
- Fri, 10 Oct 2025 00:53:46 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5rh6q1175823;
+ Fri, 10 Oct 2025 00:53:44 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,9 +57,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v9 02/11] mach-k3: use custom enable_cache
-Date: Fri, 10 Oct 2025 11:23:28 +0530
-Message-ID: <20251010055340.2574743-3-anshuld@ti.com>
+Subject: [PATCH v9 01/11] mach-k3: use minimal memory map for all K3
+Date: Fri, 10 Oct 2025 11:23:27 +0530
+Message-ID: <20251010055340.2574743-2-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010055340.2574743-1-anshuld@ti.com>
 References: <20251010055340.2574743-1-anshuld@ti.com>
@@ -83,44 +83,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot's provided enable_caches enforces the following sequence:
-icache_enable -> mmu_setup (as part of dcache_enable) -> dcache_enable
+The K3 family of SoCs encompasses a wide variety of devices with varying
+DDR configurations and memory carveout requirements, the current static
+memory map provides basic support for TI EVMs but does not scale well
+for newer platforms (such as AM62SiP with 512MiB of RAM).
 
-Whereas for K3 devices, we would like to add entries to the provided
-static array (k3_mem_map) as per gd->bd->bi_dram and then call mmu_setup
-to configure the MMU but also create carveouts for TFA/TEE before we
-enable caches to prevent speculative accesses to the region. Thus the
-following desired sequence:
-
-add dram banks -> mmu_setup -> carveout TFA/TEE -> icache/dcache enable
-
-Therefore this patch adds K3's own implementation of enable_cache for
-ARM64, allowing for greater control over the cache enablement sequence.
+Therefore this patch replaces the existing memory map with a minimal
+one, that could be more easily modified at runtime.
 
 Reviewed-by: Dhruva Gole <d-gole@ti.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/mach-k3/common.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ arch/arm/mach-k3/arm64/arm64-mmu.c | 32 ++++++++++--------------------
+ 1 file changed, 10 insertions(+), 22 deletions(-)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 5483ac9906c..7f2a4e6260e 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -258,6 +258,12 @@ void board_prep_linux(struct bootm_headers *images)
- 				 ROUND(images->os.end,
- 				       CONFIG_SYS_CACHELINE_SIZE));
- }
-+
-+void enable_caches(void)
-+{
-+	icache_enable();
-+	dcache_enable();
-+}
- #endif
+diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+index 0e07b1b7ce0..79650a7e346 100644
+--- a/arch/arm/mach-k3/arm64/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+@@ -11,42 +11,30 @@
  
- void spl_enable_cache(void)
+ #include <asm/system.h>
+ #include <asm/armv8/mmu.h>
++#include <linux/sizes.h>
+ 
+ struct mm_region k3_mem_map[] = {
+-	{
++	{ /* SoC Peripherals */
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+ 		.size = 0x80000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, {
+-		.virt = 0x80000000UL,
+-		.phys = 0x80000000UL,
+-		.size = 0x1e780000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
+-		.virt = 0xa0000000UL,
+-		.phys = 0xa0000000UL,
+-		.size = 0x60000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
+-		.virt = 0x880000000UL,
+-		.phys = 0x880000000UL,
+-		.size = 0x80000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
++	}, { /* Flash Peripherals */
+ 		.virt = 0x500000000UL,
+ 		.phys = 0x500000000UL,
+ 		.size = 0x380000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, {
+-		/* List terminator */
++	}, { /* First DRAM Bank of size 2G */
++		.virt = CFG_SYS_SDRAM_BASE,
++		.phys = CFG_SYS_SDRAM_BASE,
++		.size = SZ_2G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, { /* List terminator */
+ 		0,
+ 	}
+ };
 -- 
 2.51.0
 
