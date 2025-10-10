@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6687CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:23:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942FBCCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:24:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2D2A84301;
-	Fri, 10 Oct 2025 21:23:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1435283FA7;
+	Fri, 10 Oct 2025 21:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N4fDD3pf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I2FWbokk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0675583FA7; Fri, 10 Oct 2025 21:23:26 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 087588425A; Fri, 10 Oct 2025 21:23:27 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DEC58425A
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:23:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11E0E8426E
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:23:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-30cce892b7dso1311237fac.1
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:23:23 -0700 (PDT)
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-35ba7c71bfdso1255877fac.3
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:23:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760124203; x=1760729003; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760124204; x=1760729004; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=UB0x9bU47SNh+qTGuCqgzGXFJFpq3aNZrfeqaBA3/e8=;
- b=N4fDD3pfDyYEFr1HRtO5LidGT9uZBcn6YcJWMnyqVZ0eShTAhZeMzxrwxgXW3E+Z5r
- L7xgapGRZY58ZdomgrNXa1V6noAlJ6FaUTOnzXqITTPxDH2LpKNwWZgr6orE7QoGqMMF
- SAXXwKDeDCJ9b9L+cJ4zmmruz7YNLIC3TJ34E=
+ :reply-to; bh=nkd3VkSjxnAtVw1M7B4RN8rFRcSWzJG3wlMg/I6figM=;
+ b=I2FWbokkja9DY+5X0dkSMxGATBoiMfktksc/It46ud6y6EbCm+yXnUglValZwT10eQ
+ +qPSOHM4Zkg/k1qU379H6XsYiC9LInU2EJt600Y9tl6OOGy1sUdwphMc9p8yIbMij40i
+ IlA7bDyPDrVaH0TcSq/gEEMLOgIfzcLqeaQ1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760124203; x=1760729003;
+ d=1e100.net; s=20230601; t=1760124204; x=1760729004;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UB0x9bU47SNh+qTGuCqgzGXFJFpq3aNZrfeqaBA3/e8=;
- b=REKFZgr0stxG9H6C5NAXQu2T54bX4Pvd3YfaoPFRJQUvTkwgSEj3l4YH1ot4ys1eSM
- JjYGgCy8j/Q9JUKCIdb9fjti89nBHWRAcp6rzOpKpdTOuEq/4Afj1j9NaR5xUvjOwI0O
- NZnujH437j21F5NOJ2xPxq+GJbbKyezYadHU4SFS7N7KCcWOCueUoQvKsk9rl4WsMPB+
- Hv/cSFyXyH3xlg+B/90a6U9QUJMe6UQvi1n6JChLSpERvx/+7kt1W1Nmr4GrrJeHL47g
- Gqu1uLJfWGnv8d3193hChApSbzObM7udhn41PUS94DLfDhSOlO+67jnr/kbUCKazktLR
- fEzQ==
-X-Gm-Message-State: AOJu0Yzd3kOWh/bPqs36t8O5LF9JAIGEVyusWN2oFuCP2a+flWi4x/af
- 0p2BrIO24OS0/9lXTlHx1EWrT1hnmkKwoXnSUMWoOdRLXHdxS5P3l08Id13LR29ZQb/Xuhm+V2M
- 8Dl4d9iA=
-X-Gm-Gg: ASbGnctLotlmj5rHZSgBz9f706S48G4BlukV5J96kwrugl7N/Qr8i91uR+GWLnlIctQ
- uDAQEHnbf18QsT+YkdEC7hGGWz1bz6V8cYULkOuQ6h9RHTUom/q/XWibllHKJ9e9xkoAi+BbMxz
- dhaeTQddeE4nyBzyhdWOFpN7u1wTrJoRW0oBUfE8UJa7RevkXMiaGtexecs5I1mh+wSUAc03gBc
- ytcAnMnKg9QRMCwCtSjvVr+fuLt7YEclJfnWnZZJEEGZixj9KEn2mv+eAlTOPhUjnNFRqE2Yczy
- GOKphOc4xqCBAHzDLT9Gr3l95Fx8LL80kPguPP38vnspqVr3P5hXbbFMZUoqvmke1v+8bfY2lwo
- l2gNIZsRinlAN1eu5L3TPX2UvzTuRtQ2cBAFWoxs4HlIEN7k3zBg9FFVBhqS59hK7Dzhl3d/2dL
- wCYWgLhqDMbsLSAaoAzFGsueVJ
-X-Google-Smtp-Source: AGHT+IHak4dp4NTkK+7ezFNUMw9IiSXCqM1b+PruE08JUkS3/8BRSepVpEpXWs2nYTwVG5DlmKHVQA==
-X-Received: by 2002:a05:6870:d152:b0:2ff:89c8:44f4 with SMTP id
- 586e51a60fabf-3c0f61fc644mr5652962fac.11.1760124202687; 
- Fri, 10 Oct 2025 12:23:22 -0700 (PDT)
+ bh=nkd3VkSjxnAtVw1M7B4RN8rFRcSWzJG3wlMg/I6figM=;
+ b=m+j2snWtjuTnOwgjuzhQMa4aBPNVSJFBRETRHpGB3jgGW4Rsvzr1Y2ry6WUNw7anRZ
+ aba1233Fu4GKKp6kyFJDJdc55SfMHrl1FKgX4l5XrzSjNch7DAv2qznLFbbTTPQoSbQn
+ rnTyJ1QuAQyiQs2jChbfoS4hIh6IxPfOvhUTVv8LmJXlFw5Wh15KBTS/oofmaPsIWGTr
+ qGyd6m2N0pToJhhAxefmA98fXE8G/xlzextoq95Eht4M8hwf0Qvy3QyN+SnuGECWchBD
+ l6ossFtpyJDD4lqPjmHDfckGN7Y0UZGNC3yeRqnNqaJmKmcGXro3VFjIfYb23YWi5ffz
+ tfbg==
+X-Gm-Message-State: AOJu0YwuXIOaFOfU7nq8wnfDV8R53/gZ7en0X1VdtO8nO+nbEy7Rt5oq
+ ev22DCabx8IPCC85G4KoRSAobHRhelfadyK1gG+ESufLdWNpqUwVSDajuOnDwnVN05P+vzC+brg
+ vPZCEi2o=
+X-Gm-Gg: ASbGnctU8bzqM7qkdcC9dDQWHtqUyYkUMtAldKy4OdPBDMWlPrVVFNil7Jb0webTsT/
+ zsY4VpWo+amyNbfIpYcgAr0DDB9Xcpfsz9PD/Mv1HXZg1Dqgu1cnlCfmzk1Nn+RnjXBfacB+shW
+ 9k6J2WXg/lgIt8XYmWpYq/InSOHzUCpRhJQJ4+KvsfPBFqerBDeIeR6E11feaU99m4aS09zjeQs
+ 6dkpT5lwrxZoTlbQYhLf5XUsMm8r7geWkxSgJWOsV3twzr3sKJPFJdq9cv5LNBk/5BmHAdtjvmy
+ M7zhu6P1KHvSsDNDr5XYk+KixaVrMEe0NmQh1v6SThVLSN08wBbaM74gChywgwy7QaqgOks8jjq
+ WTJX5/GyHayO2EeQWraka59cQ5dW0TW94Z4xL4RzgPbEZbTFcJQRFDq/aGO+ALBj9mAdrcIWawU
+ ZHyVQ=
+X-Google-Smtp-Source: AGHT+IHYjEpjxZxCVW9/TiqAvMKplok6pWc4wq/Yr2XnnlgPREdcKf/cfNY3R8Y+aDHjkJGosF7JSg==
+X-Received: by 2002:a05:6870:f618:b0:377:77cb:e091 with SMTP id
+ 586e51a60fabf-3c0f66ec625mr6030158fac.14.1760124203706; 
+ Fri, 10 Oct 2025 12:23:23 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8f581ecsm1155832fac.25.2025.10.10.12.23.21
+ 586e51a60fabf-3c8c8f581ecsm1155832fac.25.2025.10.10.12.23.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Oct 2025 12:23:22 -0700 (PDT)
+ Fri, 10 Oct 2025 12:23:23 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251001203032.2828213-1-trini@konsulko.com>
-References: <20251001203032.2828213-1-trini@konsulko.com>
-Subject: Re: [PATCH] dts: Set a default value for DEFAULT_DEVICE_TREE for
- SANDBOX
-Message-Id: <176012420189.1180358.457766542212876692.b4-ty@konsulko.com>
-Date: Fri, 10 Oct 2025 13:23:21 -0600
+In-Reply-To: <20251001203055.2828514-1-trini@konsulko.com>
+References: <20251001203055.2828514-1-trini@konsulko.com>
+Subject: Re: [PATCH] spl: spl_sata: Add __maybe_unused decorator
+Message-Id: <176012420280.1180358.8081180111830574764.b4-ty@konsulko.com>
+Date: Fri, 10 Oct 2025 13:23:22 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 Oct 2025 14:30:32 -0600, Tom Rini wrote:
+On Wed, 01 Oct 2025 14:30:55 -0600, Tom Rini wrote:
 
-> As part of building with "allyesconfig" we need to have the correct
-> default value for the sandbox architecture provided here.
+> It is possible that we will not have enabled the options to call
+> spl_sata_load_image_raw so use the __maybe_unused decorator to silence
+> the compiler warning.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] dts: Set a default value for DEFAULT_DEVICE_TREE for SANDBOX
-      commit: 3da6f00af38c7db9c28ca455ad72f552fdaf7713
+[1/1] spl: spl_sata: Add __maybe_unused decorator
+      commit: a574f8a3e504bed1baaef00c6ba1ac395e43be43
 -- 
 Tom
 
