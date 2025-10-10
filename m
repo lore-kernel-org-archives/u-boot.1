@@ -4,71 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99870CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 16:57:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF97ECCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 17:28:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E0CD83F2B;
-	Fri, 10 Oct 2025 18:57:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0840483FB0;
+	Fri, 10 Oct 2025 19:28:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IqmQroNq";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="c0QEBe/O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C7183F4B; Fri, 10 Oct 2025 18:57:20 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B73783F17
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 18:57:17 +0200 (CEST)
+ id 94FC883FCB; Fri, 10 Oct 2025 19:28:50 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 29AB683FAA
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 19:28:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-mcarthur@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59AGvEhp809888;
- Fri, 10 Oct 2025 11:57:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760115434;
- bh=Zt6bnkQg2AqZBmwMNgNnfjjZPo+Xuq5VvMIuHsSb9Ks=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=IqmQroNqIptlNsoOtntjT9VQO5WTJsTZCzvqQFwQxoQR3eyioQqIzNqvozfPg8qhV
- jQj+Ruwnrze5mYE1eAZVsVaCM1WOiexDKjDmdipYIE2oIZOVnOIO6ZAs4POKxxhhDN
- 2XKByOYDJ1KCP18m1jFrJ9ORqU0fTF9q/5Hh0Zjc=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59AGvEW11815164
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 10 Oct 2025 11:57:14 -0500
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
- Oct 2025 11:57:13 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 11:57:13 -0500
-Received: from [128.247.81.24] (uda0499903.dhcp.ti.com [128.247.81.24])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59AGvDoZ1946323;
- Fri, 10 Oct 2025 11:57:13 -0500
-Message-ID: <6f908eb6-06b5-46ca-8dfd-a7d0961b7577@ti.com>
-Date: Fri, 10 Oct 2025 11:57:13 -0500
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1760117327; x=1760722127; i=xypron.glpk@gmx.de;
+ bh=a4XaWnI4uoHvcLJnwPLv0+nwNLX0MpPvJcxQButMZZE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=c0QEBe/O55Jj03fiL0ngZdKa+lWfDpYD92Jq0Atsazf4UF9UqXRBL3vKreEcKKyZ
+ t9n663LsxbP5WMf5FJ25ioo8rOAghlM5aqrnaeXVHgdtog71LqBx1fEYwoYwiAH28
+ aF3iKrRXany2iNJbDWyzdQGBc3ploo0D8DncY4eR/drhZsMksL9LLabCB+jShGgHq
+ ruDjXf/rWQxO2eNj0c3LeNqNJtKonTI+GACZSCtEj8Ca7nzC/josJ8uff7ZeH85zd
+ ZsFNnO30HNl+/ai1kamNxHwpy/8tW1vX/UlOggE1b82vk4zmWkN1qFdIuvyIPlfw5
+ L7vbyE6l0NTCf5jSjg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MwQTF-1uHNHu1Elp-00qxCi; Fri, 10
+ Oct 2025 19:28:47 +0200
+Message-ID: <d5cc0678-5d8a-4ff4-973d-6b5a41f2fa4e@gmx.de>
+Date: Fri, 10 Oct 2025 19:28:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] ufs: Add bRefClkFreq attribute setting
-To: "Kumar, Udit" <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-CC: Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
- <trini@konsulko.com>, Neha Malcom Francis <n-francis@ti.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>
-References: <20250827185056.954640-1-j-mcarthur@ti.com>
- <20250827185056.954640-3-j-mcarthur@ti.com>
- <61aa6b3f-9ee8-41a8-a5f2-79c19fbfaea8@ti.com>
+Subject: Re: [PATCH] cmd: mtd: benchmark: use lldiv() instead of 64-bit
+ division
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: Andreas Gnau <andreas.gnau@iopsys.eu>, Tom Rini <trini@konsulko.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20251010165103.1572444-1-mikhail.kshevetskiy@iopsys.eu>
 Content-Language: en-US
-From: Jared McArthur <j-mcarthur@ti.com>
-In-Reply-To: <61aa6b3f-9ee8-41a8-a5f2-79c19fbfaea8@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251010165103.1572444-1-mikhail.kshevetskiy@iopsys.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:A8KlVVh0TkjMw3UhsVkp7Pa+i37TyslBSDRJEO/7MDhad44E5ct
+ qPBs4Jk7HsKeavqK/nuwZFOwCXOmuIhhfOIPkymWszzkn5hQg7rlo3XHpunj9zUB/9XnM/1
+ 48TwC5C2bb9MC3a86IuRQkpUrjBz0eFKFqVG1u0hLgWsf3KGV89xHeGTyyZYCjyt5B5qFSS
+ ZsCzo14BWqgd1X9uZXR9w==
+UI-OutboundReport: notjunk:1;M01:P0:8vn762cuTiU=;alcV7xMa0TLkAcfy1JLb9yuk6Dk
+ +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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,198 +153,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/9/25 10:57, Kumar, Udit wrote:
-> 
-> On 8/28/2025 12:20 AM, Jared McArthur wrote:
->> A UFS device needs its bRefClkFreq attribute set to the correct value
->> before switching to high speed. If bRefClkFreq is set to the wrong
->> value, all transactions after the power mode change will fail.
->>
->> The bRefClkFreq depends on the host controller and the device.
->> Query the device's current bRefClkFreq and compare with the ref_clk
->> specified in the device-tree. If the two differ, set the bRefClkFreq
->> to the device-tree's ref_clk frequency.
->>
->> Taken from Linux kernel v6.17 (drivers/ufs/core/ufshcd.c and
->> include/ufs/ufs.h) and ported to U-Boot.
-> 
->> This patch depends on the previous patch: "ufs: Add support for
->> sending UFS attribute requests"
-> 
-> Since this is same series, you can drop above from commit message
-> 
+On 10/10/25 18:51, Mikhail Kshevetskiy wrote:
+> As was noted by Heinrich Schuchardt, some SoCs may not support 64-bit
+> divisions. Fix an issue by using lldiv() instead.
 
-Will do.
+Thank you for the patch.
 
-> 
->> Signed-off-by: Jared McArthur <j-mcarthur@ti.com>
->> ---
->>   drivers/ufs/ufs.c | 89 +++++++++++++++++++++++++++++++++++++++++++++++
->>   drivers/ufs/ufs.h | 10 ++++++
->>   2 files changed, 99 insertions(+)
->>
->> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
->> index 9e67dd86232..4bffbf87749 100644
->> --- a/drivers/ufs/ufs.c
->> +++ b/drivers/ufs/ufs.c
->> @@ -10,6 +10,7 @@
->>     #include <bouncebuf.h>
->>   #include <charset.h>
->> +#include <clk.h>
->>   #include <dm.h>
->>   #include <log.h>
->>   #include <dm/device_compat.h>
->> @@ -1773,6 +1774,92 @@ out:
->>       return err;
->>   }
->>   +struct ufs_ref_clk {
->> +    unsigned long freq_hz;
->> +    enum ufs_ref_clk_freq val;
->> +};
->> +
->> +static const struct ufs_ref_clk ufs_ref_clk_freqs[] = {
->> +    {19200000, REF_CLK_FREQ_19_2_MHZ},
->> +    {26000000, REF_CLK_FREQ_26_MHZ},
->> +    {38400000, REF_CLK_FREQ_38_4_MHZ},
->> +    {52000000, REF_CLK_FREQ_52_MHZ},
->> +    {0, REF_CLK_FREQ_INVAL},
->> +};
->> +
->> +static enum ufs_ref_clk_freq
->> +ufs_get_bref_clk_from_hz(unsigned long freq)
->> +{
->> +    int i;
->> +
->> +    for (i = 0; ufs_ref_clk_freqs[i].freq_hz; i++)
->> +        if (ufs_ref_clk_freqs[i].freq_hz == freq)
->> +            return ufs_ref_clk_freqs[i].val;
->> +
->> +    return REF_CLK_FREQ_INVAL;
->> +}
->> +
->> +void ufshcd_parse_dev_ref_clk_freq(struct ufs_hba *hba, struct clk *refclk)
->> +{
->> +    unsigned long freq;
->> +
->> +    freq = clk_get_rate(refclk);
->> +
->> +    hba->dev_ref_clk_freq =
->> +        ufs_get_bref_clk_from_hz(freq);
-> 
-> I understand this is backport but  I don't see real use of dev_ref_clk_freq variable ,
-> 
-> I suggest to drop dev_ref_clk_freq varaible and return freq index from this function instead of void.
-> 
+It is on top of
+cmd: mtd: fix speed measurement in the speed benchmark
+https://patchwork.ozlabs.org/project/uboot/patch/20251010124115.1545865-5-=
+mikhail.kshevetskiy@iopsys.eu/
 
-Noted.
+Adding it to the series might make Tom's life easier.
 
-> 
->> +
->> +    if (hba->dev_ref_clk_freq == REF_CLK_FREQ_INVAL)
->> +        dev_err(hba->dev,
->> +            "invalid ref_clk setting = %ld\n", freq);
->> +}
->> +
->> +static int ufshcd_set_dev_ref_clk(struct ufs_hba *hba)
->> +{
->> +    int err;
->> +    struct clk *ref_clk;
->> +    u32 host_ref_clk_freq;
->> +    u32 dev_ref_clk_freq;
->> +
->> +    /* get ref_clk */
->> +    ref_clk = devm_clk_get(hba->dev, "ref_clk");
->> +    if (IS_ERR((const void *)ref_clk)) {
->> +        err = PTR_ERR(ref_clk);
->> +        goto out;
->> +    }
->> +
->> +    ufshcd_parse_dev_ref_clk_freq(hba, ref_clk);
->> +    host_ref_clk_freq = hba->dev_ref_clk_freq;
-> 
-> host_ref_clk_freq = ufshcd_parse_dev_ref_clk_freq(hba, ref_clk);
-> 
-> and check for error code here
-> 
-> If you agree with above change, then please use
-> 
-> Reviewed-by: Udit Kumar <u-kumar1@ti.com>  in next version
-> 
-> 
+>=20
+> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+> ---
+>   cmd/mtd.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/cmd/mtd.c b/cmd/mtd.c
+> index acd886da6da..2bc9fea697c 100644
+> --- a/cmd/mtd.c
+> +++ b/cmd/mtd.c
+> @@ -10,6 +10,7 @@
+>  =20
+>   #include <command.h>
+>   #include <console.h>
+> +#include <div64.h>
+>   #include <led.h>
+>   #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
+>   #include <hexdump.h>
+> @@ -595,7 +596,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag=
+, int argc,
+>  =20
+>   	if (benchmark && bench_start) {
+>   		bench_end =3D timer_get_us();
+> -		speed =3D (len * 1000000) / (bench_end - bench_start);
+> +		speed =3D lldiv(len * 1000000, bench_end - bench_start);
 
-I think the two edits (one change) are reasonable.
+Here you assume that the benchmark never takes more than 4294 seconds=20
+and thus the difference will be less than U32_MAX. This looks reasonable=
+=20
+to me.
 
->> +
->> +    if (host_ref_clk_freq == REF_CLK_FREQ_INVAL)
->> +        goto out;
->> +
->> +    err = ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_READ_ATTR,
->> +                      QUERY_ATTR_IDN_REF_CLK_FREQ, 0, 0, &dev_ref_clk_freq);
->> +
->> +    if (err) {
->> +        dev_err(hba->dev, "failed reading bRefClkFreq. err = %d\n", err);
->> +        goto out;
->> +    }
->> +
->> +    if (dev_ref_clk_freq == host_ref_clk_freq)
->> +        goto out; /* nothing to update */
->> +
->> +    err = ufshcd_query_attr_retry(hba, UPIU_QUERY_OPCODE_WRITE_ATTR,
->> +                      QUERY_ATTR_IDN_REF_CLK_FREQ, 0, 0, &host_ref_clk_freq);
->> +
->> +    if (err) {
->> +        dev_err(hba->dev, "bRefClkFreq setting to %lu Hz failed\n",
->> +            ufs_ref_clk_freqs[host_ref_clk_freq].freq_hz);
->> +        goto out;
->> +    }
->> +
->> +    dev_dbg(hba->dev, "bRefClkFreq setting to %lu Hz succeeded\n",
->> +        ufs_ref_clk_freqs[host_ref_clk_freq].freq_hz);
->> +
->> +out:
->> +    return err;
->> +}
->> +
->>   /**
->>    * ufshcd_get_max_pwr_mode - reads the max power mode negotiated with device
->>    */
->> @@ -2000,6 +2087,8 @@ static int ufs_start(struct ufs_hba *hba)
->>           return ret;
->>       }
->>   +    ufshcd_set_dev_ref_clk(hba);
->> +
->>       if (ufshcd_get_max_pwr_mode(hba)) {
->>           dev_err(hba->dev,
->>               "%s: Failed getting max supported power mode\n",
->> diff --git a/drivers/ufs/ufs.h b/drivers/ufs/ufs.h
->> index 53137fae3a8..def39d4ad24 100644
->> --- a/drivers/ufs/ufs.h
->> +++ b/drivers/ufs/ufs.h
->> @@ -172,6 +172,15 @@ enum query_opcode {
->>       UPIU_QUERY_OPCODE_TOGGLE_FLAG    = 0x8,
->>   };
->>   +/* bRefClkFreq attribute values */
->> +enum ufs_ref_clk_freq {
->> +    REF_CLK_FREQ_19_2_MHZ    = 0,
->> +    REF_CLK_FREQ_26_MHZ    = 1,
->> +    REF_CLK_FREQ_38_4_MHZ    = 2,
->> +    REF_CLK_FREQ_52_MHZ    = 3,
->> +    REF_CLK_FREQ_INVAL    = -1,
->> +};
->> +
->>   /* Query response result code */
->>   enum {
->>       QUERY_RESULT_SUCCESS                    = 0x00,
->> @@ -684,6 +693,7 @@ struct ufs_hba {
->>       u32            capabilities;
->>       u32            version;
->>       u32            intr_mask;
->> +    enum ufs_ref_clk_freq dev_ref_clk_freq;
-> 
->>       enum ufshcd_quirks    quirks;
->>         /* Virtual memory reference */
+>   		printf("%s speed: %lukiB/s\n",
+>   		       read ? "Read" : "Write",
+>   		       (unsigned long)(speed / 1024));
 
--- 
-Best,
-Jared McArthur
+You further assume that the compiler implements this u64 division
+as >> 10. You could be explicit about this.
 
+Best regards
+
+Heinrich
