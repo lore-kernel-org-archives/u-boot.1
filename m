@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C2D7CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:54:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 811EBCAC5BB
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2FC6841A2;
-	Fri, 10 Oct 2025 07:54:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3DBCE841E3;
+	Fri, 10 Oct 2025 07:54:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X5wMnbEI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o6Bmfnke";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EA278419E; Fri, 10 Oct 2025 07:54:04 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 9070C841B1; Fri, 10 Oct 2025 07:54:06 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0610A8402E
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:54:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C4DB841A2
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:54:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5rt55621104;
- Fri, 10 Oct 2025 00:53:55 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5rvQr177121;
+ Fri, 10 Oct 2025 00:53:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760075635;
- bh=yzwqXF+fGMZCBBZT7i0WgaLfhODlppnmsaLUOurrdts=;
+ s=ti-com-17Q1; t=1760075637;
+ bh=S7vARuRionn4k7lMTPvI4B1m/rJ9LgVL3Pk+PG/FWGo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=X5wMnbEI2daFbuY+FRjxXr43RQjr+liarLAn2O6y5huaRzAwMwj11qV1jKNmbNUlv
- 1xMK68JK/HZ/+njwpt484XD2NfITekOBTnn9VNbq+6rHrrtxU7d6GZKrNhNpAZ/0CJ
- AtZ+M9jx1sco07QWjt4leSCq9oeUb0s+8kW30Rbw=
-Received: from DFLE212.ent.ti.com (dfle212.ent.ti.com [10.64.6.70])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5rsjY1458275
+ b=o6BmfnkepHsEZZsdi6Af/vMUs8XMQIa1wF+JgecXL2opQhwSy0Z5it1/yXreigkTp
+ dT8loVAlmgcGBy4QNQTN9KoobWp3aaYxnLl+UzdDVNWWAR5YICJ3WSlEED3g4SlSkz
+ hanTMIu15+XbmMZ+OCNPuQf5rrycP1HxqnkT5AX8=
+Received: from DFLE206.ent.ti.com (dfle206.ent.ti.com [10.64.6.64])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5rveK568539
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 10 Oct 2025 00:53:55 -0500
-Received: from DFLE213.ent.ti.com (10.64.6.71) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 10 Oct 2025 00:53:57 -0500
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE206.ent.ti.com
+ (10.64.6.64) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 10 Oct
- 2025 00:53:54 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 00:53:56 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 00:53:54 -0500
+ Transport; Fri, 10 Oct 2025 00:53:56 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5rrIE1408043;
- Fri, 10 Oct 2025 00:53:54 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5rt2E1175967;
+ Fri, 10 Oct 2025 00:53:56 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,9 +57,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v9 06/11] mach-k3: map all banks using mem_map_fix_dram_banks
-Date: Fri, 10 Oct 2025 11:23:32 +0530
-Message-ID: <20251010055340.2574743-7-anshuld@ti.com>
+Subject: [PATCH v9 07/11] arm: armv8: mmu: add mmu_unmap_reserved_mem
+Date: Fri, 10 Oct 2025 11:23:33 +0530
+Message-ID: <20251010055340.2574743-8-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010055340.2574743-1-anshuld@ti.com>
 References: <20251010055340.2574743-1-anshuld@ti.com>
@@ -83,88 +83,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The static memory map for K3 (k3_mem_map) only maps the first DRAM bank
-and therefore doesn't scale for platforms with multiple memory banks.
+For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
+the MMU's page tables, done by mmu_setup.
 
-This patch modifies enable_caches to add mem_map_fix_dram_banks which
-appends all the memory banks to k3_mem_map before calling mmu_setup.
+Though this works well for simpler platforms, it makes creating runtime
+carveouts by modifying the static array at runtime exceedingly complex
+like in mach-snapdragon/board.c.
+
+Creation of such carveouts is much better handled by APIs such as
+mmu_change_region_attr once the page tables are configured. Usually such
+carveouts are configured via the device-tree's reserved-memory node
+which provides the address and size for the carveout.
+
+Therefore this patch adds mmu_unmap_reserved_mem which acts as a wrapper
+over mmu_change_region_attr, helping unmap a reserved-memory region.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/mach-k3/arm64/arm64-mmu.c     | 5 +++--
- arch/arm/mach-k3/common.c              | 9 +++++++++
- arch/arm/mach-k3/include/mach/k3-ddr.h | 6 ++++++
- 3 files changed, 18 insertions(+), 2 deletions(-)
+ arch/arm/cpu/armv8/cache_v8.c    | 23 +++++++++++++++++++++++
+ arch/arm/include/asm/armv8/mmu.h |  9 +++++++++
+ 2 files changed, 32 insertions(+)
 
-diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
-index 79650a7e346..479451452a2 100644
---- a/arch/arm/mach-k3/arm64/arm64-mmu.c
-+++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
-@@ -12,8 +12,9 @@
- #include <asm/system.h>
- #include <asm/armv8/mmu.h>
- #include <linux/sizes.h>
-+#include <mach/k3-ddr.h>
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index cdf17d5f396..74814601483 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -86,6 +86,29 @@ int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs)
  
--struct mm_region k3_mem_map[] = {
-+struct mm_region k3_mem_map[K3_MEM_MAP_LEN] = {
- 	{ /* SoC Peripherals */
- 		.virt = 0x0UL,
- 		.phys = 0x0UL,
-@@ -28,7 +29,7 @@ struct mm_region k3_mem_map[] = {
- 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
- 			 PTE_BLOCK_NON_SHARE |
- 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
--	}, { /* First DRAM Bank of size 2G */
-+	}, [K3_MEM_MAP_FIRST_BANK_IDX] = { /* First DRAM Bank of size 2G */
- 		.virt = CFG_SYS_SDRAM_BASE,
- 		.phys = CFG_SYS_SDRAM_BASE,
- 		.size = SZ_2G,
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index ea287ba1226..0a73b1fa296 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -31,6 +31,7 @@
- #include <dm/uclass-internal.h>
- #include <dm/device-internal.h>
- #include <asm/armv8/mmu.h>
-+#include <mach/k3-ddr.h>
- 
- #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
- #define PROC_BOOT_STATUS_FLAG_R5_WFI		0x00000002
-@@ -262,6 +263,14 @@ void board_prep_linux(struct bootm_headers *images)
- 
- void enable_caches(void)
- {
+ 	return 0;
+ }
++
++int mmu_unmap_reserved_mem(const char *name)
++{
++	void *fdt = (void *)gd->fdt_blob;
++	char node_path[128];
++	fdt_addr_t addr;
++	fdt_size_t size;
 +	int ret;
 +
-+	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
-+				     PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+					     PTE_BLOCK_INNER_SHARE);
-+	if (ret)
-+		debug("%s: Failed to setup dram banks\n", __func__);
++	snprintf(node_path, sizeof(node_path), "/reserved-memory/%s", name);
++	ret = fdt_path_offset(fdt, node_path);
++	if (ret < 0)
++		return ret;
 +
- 	mmu_setup();
- 
- 	icache_enable();
-diff --git a/arch/arm/mach-k3/include/mach/k3-ddr.h b/arch/arm/mach-k3/include/mach/k3-ddr.h
-index 39e6725bb9b..207e60b2763 100644
---- a/arch/arm/mach-k3/include/mach/k3-ddr.h
-+++ b/arch/arm/mach-k3/include/mach/k3-ddr.h
-@@ -8,6 +8,12 @@
- 
- #include <spl.h>
- 
-+/* We need 3 extra entries for:
-+ *   SoC peripherals, flash and the sentinel value.
++	addr = fdtdec_get_addr_size(fdt, ret, "reg", &size);
++	if (addr == FDT_ADDR_T_NONE)
++		return -1;
++
++	mmu_change_region_attr_nobreak(addr, size, PTE_TYPE_FAULT);
++
++	return 0;
++}
++
+ u64 get_tcr(u64 *pips, u64 *pva_bits)
+ {
+ 	int el = get_effective_el();
+diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
+index 257352f216e..fbd64e649ff 100644
+--- a/arch/arm/include/asm/armv8/mmu.h
++++ b/arch/arm/include/asm/armv8/mmu.h
+@@ -206,6 +206,15 @@ void setup_pgtables(void);
+  * @len: The size of mem_map
+  */
+ int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs);
++
++/**
++ * mmu_unmap_reserved_mem() - Unmaps a reserved-memory node as PTE_TYPE_FAULT
++ * once MMU is configured by mmu_setup.
++ *
++ * @name: The name of the node under "/reserved-memory/" path
 + */
-+#define K3_MEM_MAP_LEN			((CONFIG_NR_DRAM_BANKS) + 3)
-+#define K3_MEM_MAP_FIRST_BANK_IDX	2
++int mmu_unmap_reserved_mem(const char *name);
 +
- int dram_init(void);
- int dram_init_banksize(void);
+ u64 get_tcr(u64 *pips, u64 *pva_bits);
  
+ /**
 -- 
 2.51.0
 
