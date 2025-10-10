@@ -4,168 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 830BCCCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 17:40:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18806CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:07:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB2D5838E7;
-	Fri, 10 Oct 2025 19:40:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+	by phobos.denx.de (Postfix) with ESMTP id E893383C62;
+	Fri, 10 Oct 2025 21:07:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=iopsys.eu header.i=@iopsys.eu header.b="nfUUXYb6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Cc0nTjVM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9045583906; Fri, 10 Oct 2025 19:40:06 +0200 (CEST)
-Received: from AS8PR04CU009.outbound.protection.outlook.com
- (mail-westeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C9EFD83F7F; Fri, 10 Oct 2025 21:07:14 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E314838E5
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 19:40:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9CB083826
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:07:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=iopsys.eu
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mikhail.kshevetskiy@genexis.eu
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=D0dzzpDMqts2eo2M8/XNmGvxfwqnVFe5HJDt9hCV+Nh9RfFvIMwtet5VLdr/x7AZvw8/es50p4fUyUNxl9Q1oB12JXQaH6QXjXl/iElUiFNWHF3SaGnYFBNMkLg0uoFhHv8yfT7NvyIvXopLTMnEBhWQctBbQXSlTJL2ykK30YpphALHCzuNOdxgSjOZRKjhuCj7CrjDzwqYL6uYr1zwD3J6rARS+wjiRJreKGwxO+4SE+zBW3VV+Iyznk/ns4DtyEu4IuIIweUoKPyF2pOWhA9XjQmUJbeGQ5TyHm302uy9SRxwb7IxW7IF+uIrqx3V2af0Z3G5bJpCYy/AqDW/JQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gbuRnDj8zhImyiTPjt0Nxs8CWo9ogxL/+uGSH8rEA5Y=;
- b=eXYzaWTz6YTnQ3YqB78d5hkfU3ikbwbJBL7EWExOAQE24j3fjDaTVNEcaeJ90C5Hbrjw8IcAX07bTikhSKoSCfLt1J8YOPnpP49VHfhPxF+kbVgVkEYhTpIRIriOGbQVeQwS8pLw60RO2HOlmYrE4s3kWzfHufoOlKrUbOCKOlhSsAs4O/+4ry2o2UhtK9AuUTMDrks6bFnpfTd3OpFv8+x5MVQZ+oQ8WqyIMLJHBcobLsz3bEfBxVCxukeVzemb/gTnVJJbsxNAMXfVLeOFesc9bRLEKDvip/HQ5q4wU7T5PPpoqcJSlbg+kJ9cLDeIzZjfLjvgmJcIt6GVvv3Sfw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=genexis.eu; dmarc=pass action=none header.from=iopsys.eu;
- dkim=pass header.d=iopsys.eu; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iopsys.eu; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gbuRnDj8zhImyiTPjt0Nxs8CWo9ogxL/+uGSH8rEA5Y=;
- b=nfUUXYb6iKANdeIVHE2O+q0+760DCsbi7t7wp2h435fh3nBeLwyB0eEaNT05HgDWVX1KNRZXR5p4RhJs1jHUF8nB7TziDAKvIv+C2ohnrNkVP7/N+sRfZovvqAvqm0whc+PglTUTWofrVtWsKslCq7teE3dmAWFwOnljQetn0kP8rRcz/LdN+qvJUXZIjEQxhPIhikLhZ8d96cuBVhi7N2lSAlm9U+dotnPUKo8c8Ew85sS+Ahos9AQo9HAseLM1upgQrhwHF1IWpspFb0D4luJwuODCit40yR1VeXsp9zRdw1HGP4lMPE86h8VT/JSWQ3X+W0rbcq131VTQ/yUqxA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=iopsys.eu;
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com (2603:10a6:150:7d::22)
- by VE1PR08MB5823.eurprd08.prod.outlook.com (2603:10a6:800:1a5::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.9; Fri, 10 Oct
- 2025 17:39:59 +0000
-Received: from GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0]) by GV2PR08MB8121.eurprd08.prod.outlook.com
- ([fe80::4cd3:da80:2532:daa0%3]) with mapi id 15.20.9203.009; Fri, 10 Oct 2025
- 17:39:59 +0000
-Message-ID: <47feb61e-88dd-4708-82ad-7f736f45087d@iopsys.eu>
-Date: Fri, 10 Oct 2025 20:39:57 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: mtd: benchmark: use lldiv() instead of 64-bit
- division
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Andreas Gnau <andreas.gnau@iopsys.eu>, Tom Rini <trini@konsulko.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20251010165103.1572444-1-mikhail.kshevetskiy@iopsys.eu>
- <d5cc0678-5d8a-4ff4-973d-6b5a41f2fa4e@gmx.de>
- <CAOf5uwk_PmCfPiDTkXQWVJajT4KtgoXKvFgCTtapjc4_PycaPA@mail.gmail.com>
-From: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Content-Language: en-US, ru-RU
-In-Reply-To: <CAOf5uwk_PmCfPiDTkXQWVJajT4KtgoXKvFgCTtapjc4_PycaPA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: GV2PEPF0000383A.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:144:1:0:5:0:a) To GV2PR08MB8121.eurprd08.prod.outlook.com
- (2603:10a6:150:7d::22)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2680cf68265so18619385ad.2
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:07:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760123230; x=1760728030; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=01SIPK4rYYFjLehCVovdOjFUUM6DAqRr8h/ABLPCqWQ=;
+ b=Cc0nTjVMaD7zEXh9FJVM+EysXKqcAWznhiiWxEixoXK1s50QLmMh6joEQmL9N/+Cfl
+ v0JmmmRyHk8WHq5bm1qfq47kTjq11/TiRfzoX4dm0GmKRHrwlSMHvNeOoz8Fgm0hL5j/
+ 2K+L1HjIFBCvesVR4YCipFUD4dYPvys2dpLkdTxQyCN7iduRcpzIfo+fuzOhYwRM4UwF
+ SrSXGXa9JGfsyrxJObs4r9dNJH2QnPfUSzkP9/42Pm1HAqghW10Hn4YA+7f/gp6amNUi
+ xWSIX9n8eqnmD3edx7RTfgriGNa70/FLufa48syiFX7Pa2PChjEj0+4PxQqywONLgAIs
+ OxCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760123230; x=1760728030;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=01SIPK4rYYFjLehCVovdOjFUUM6DAqRr8h/ABLPCqWQ=;
+ b=BxpPvKoWfi8Q/Yjl9m3WudRA7OOQIGIJ34hzId/8mTKy0kPXi8tedtYXQCmytLs/84
+ oGlXUt2GE9Hy2LaKys5UnqNVeoEit2WfWVqoV4EIDTURmnS5xHw2GlR4Fto9rLDg7njW
+ OtykqLUB8bDFn73+x+UD9q8Hy7jDToq6cm56a1yyAJDMhTo5pMTQxxdEbkWUcfaf3qhK
+ GR55edaofUqrek7lWf1gPMPdEixhwMlkbSSqc1NJATvzmMRTqnsApzSnvx6pgPzvY7dx
+ 5sl5q83p51Jqn4NDUwkP9A3H4yh57Psqsh66NdAj+p34m+vxmeMaKtKlKg4gKVsN+3qN
+ TDnw==
+X-Gm-Message-State: AOJu0YzjXS2tfGNJteI/r0LT5d2+KtZ5VdZ11lk84qzYFuXpOKedP+Bn
+ YEGEjUkiRbU2QyC36iGHX5LEeJj2JAUoG9VZJz0snzCkZl+sbacz/idZhdoc05gq6D2MUi6FV2e
+ JVZ9dBN3wpU0mh/JZZwROR894oJA6pOFCBjgXrA+EEQ==
+X-Gm-Gg: ASbGncvBGNR5ikbB2rf6AycQDBh9krc0jE2Cr2pEYacWQyKW5y5XR/1g5sGpdUWHmnW
+ 83DP1lsWzkH5s6pQryJqIhfsB2qCtZSZ7FPyzt0bDkA+c7ByhVhfpPpiiTs9PUEEP+Bb3I3tc/R
+ tk/pkIVekcW+CQX0+3pIa5Pin4FNeEjRXDFaPZvI6HbAk8mbcF3DfHgkLWSu//8bCT3Uc575pE3
+ SHpU9z0l2jcUz4WcoCmLURUM36UNKE=
+X-Google-Smtp-Source: AGHT+IE0ZjEaNFEMz6WAbSkqZdedfFTNDF2lm11DmhYQ8w/Olky5a7kB6/1TBWtu5h1y3RQsGRpwqkpLDpSVfvKAK/w=
+X-Received: by 2002:a17:902:ef10:b0:27e:eabd:4b41 with SMTP id
+ d9443c01a7336-29027216505mr181069875ad.7.1760123229808; Fri, 10 Oct 2025
+ 12:07:09 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR08MB8121:EE_|VE1PR08MB5823:EE_
-X-MS-Office365-Filtering-Correlation-Id: 511f2677-d9ae-4538-d2b3-08de082408dc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?dXBVUUt2dTZsS3liZXJaaFpVSGhoS0J1UUxXOVp4bzZpcmwvd2w1L0hkbnVJ?=
- =?utf-8?B?QlE4VUNoQTBIS2ZEYkhzdGhicWZqamV4aVRXUGtoV3Vsck1mRDBod3FTdXZp?=
- =?utf-8?B?UFAvMnNSRkRFZG1zTTFDTWNhNWQ1Rm1BTHRiNkZxd2Z1MkxEWDdWRkdWekt3?=
- =?utf-8?B?MHFkQnF1Nlhhd2dHSy9NZTdNUkI3SzZEZWw5U1h2THFsUWlNTzFEOFkyM0ts?=
- =?utf-8?B?djJGekVYeHBZRVplN2VjMzg3cDNYVTk4Z3E4RVJnd2NqSUw5WnNtQzlxSXU4?=
- =?utf-8?B?eFFwYU4zZElITEw2NnpVTjlta3FQT1JmZFl1aS9sOFhBaUJKZnM2SlhSRmdH?=
- =?utf-8?B?VzlGZzZZRmxhYW5NUjVjK1Vvb2NOVlZBLzY2VTRBalU4TUpXU3FBWUhlMFZ0?=
- =?utf-8?B?eDFqaUoybDJBVWV6anNPcTQ5bVl3TlVDRzA2MGJlajk4QVVzRWFtREZobUkv?=
- =?utf-8?B?amR4NklmQ0ZJdnVuYlNCYWN4SElZbDl4T3hKM1hjTlBScTNTclhjSk9QTFdh?=
- =?utf-8?B?dWJQZlowcEF2RlJ1akFXay84ckNpT2FvSGRySHZMcjFOQ3V3UkN2S2t1aVhQ?=
- =?utf-8?B?SXcvckg5ZjhwYVpvdFNSTW5DY1pDc0F3TUhmUHZsSkwrblVPTGtGaXhBZGsv?=
- =?utf-8?B?TVg1MVFGNVpEbWR3djhQeThRYXpnNk4wczNJTTdTdE1VWEpLTnN6UGJkcnB2?=
- =?utf-8?B?ZXR3Qzh4YkR6VzZ3djg2bmlrb083SkRoTkVqa2lFaDFLYnZwTjB6a3lvRktF?=
- =?utf-8?B?RElabHM1eStVR081N240TndCZnBOSmRKQVpnTFR2RHFseEFPYk9XbnVOaVcv?=
- =?utf-8?B?emRLQ0RSaGRncjdaTGxLNTRROXF2MWhYems2OGp2V3ZpTWJBenNpZ0UvMGti?=
- =?utf-8?B?d1lMVGh0alJyQVU5R3YyZUhlemFWcHVkZ0tNL20yV2phRXhPbGpvT2VBUDRZ?=
- =?utf-8?B?Q25vKzduVDg5WmxicmdoZkk1aGZ0R1Z2cGZGYXVzNytxYzRoM1I0eHBCU2Mx?=
- =?utf-8?B?TTN4dUJqNWZ6VHpTd2xIMkVmRWdoNDNYeWFXZFhLKzVmZHlKa3pOZlhFSkVW?=
- =?utf-8?B?VUVMcEVZVnpUdHZncUhoRG83NkN0emJPR08wTmlkamJMSC9wbDhGNmhpa29Z?=
- =?utf-8?B?SkQ2V1dwcUdKbHd1MC9HMnVZVVF4a2NMU01rVW02REhhbDJKSzA0NGtoWFJT?=
- =?utf-8?B?bVc4ME9hUEhlWUgwQUNQQmxzdGppU3RDNm8yQXM3ZysyY0hodVNYSVdKK0Rx?=
- =?utf-8?B?NmFOemZHanRRcngveU1PL1FyRHdEeDZDd3lFVXVPUk02Vmd3amNOdnZ1QklX?=
- =?utf-8?B?eExlVWdVdlExY01GV3dGcExmQSszaXN4UVQ5NWdtQXYzSHJRZVp5USt1UmFG?=
- =?utf-8?B?b1NKM1M0OWZhOGRkTzJ5NXRMa0x5Vk12NXFKUC8xYzVlOUtPNmZyeVN0SFh4?=
- =?utf-8?B?OFdwQTllNXMybEkyWjNNQUVjOHVBb0xNNkJEbGZSSmt2bE1TK3JSWFNsWEQx?=
- =?utf-8?B?SzZ4VmQyZ1d2SWN6TEhtbHNSVTF4dlB2STFIc1NLUjJ3Z1VQeWZKRUxhaEpL?=
- =?utf-8?B?UkU0Ump1OTU4eUJIOExIV3RCYitZOWZHeE5rQm41ZkEvbkQxMm1yYURQOEhH?=
- =?utf-8?B?SngrZTBSbFFhTEJDb2tXWGRIQkNuNVlqMjFoQnVNYzR2TjZmUGFqb1N2dGg2?=
- =?utf-8?B?VnFxQTNybGQwNkN4T3Q2YnM4Qm55bDFOS28xMHNPUnI5SHZKczh5ZVlxeW4z?=
- =?utf-8?B?KzliSXh2Ry8vMHpIdUFxV0w3ZDZGWXdYUWk5Z3IrK3NaaFZMOVN3UzJrQXkr?=
- =?utf-8?B?OXRzTUJUdkJIRWd3cEI1bk5GRkhyZEhxSjJhRjM3NlppNm5uZE1IV3kwcW1j?=
- =?utf-8?B?STBaR3VzVHJUa3pHckw5Y1VrQ2M3TkNVcUxEMUFVVHFhSWp4ZFE2TkdTb01t?=
- =?utf-8?B?U2l6NUEyNE9aeEIvbmhZWWhTd3hKa0ZmelBqUzlieVByQStBTUx1Z3hyNlVC?=
- =?utf-8?B?anphcGg5R3ZnPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:GV2PR08MB8121.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Ulh6dVNPR0pNQkxOMU00WjFoazJVUE9WVURRV3hKRWphQ21tK2M3aHk0dWpX?=
- =?utf-8?B?dnhjZGZoWVA2N0xrWE9sS3VYUGRVVnJITEI2QXludWJ0VjBObDVxdytwRWNU?=
- =?utf-8?B?UUVlNUhZSGFCYlRZdURGVERZS2Q2dG5ZNWxKalhhME85S0JEdkxERExuN0hZ?=
- =?utf-8?B?bWJJZFJCZFVyRDBLTjA2RVIyMUh3dWN0YzNEZGhCUm1uRk5idHFJUGw2NXFM?=
- =?utf-8?B?R25SYWh2YWtzaW5ORnQyalBqWHlRclo0YTd4dEgvS3F4cjl5Nmsyb0l2eUpm?=
- =?utf-8?B?V1FxWW9UNG1KM1lTK0c2WnNHTmpxTTVsTUFRTEhlTEVaUTdLMVc3NTN2Q0o4?=
- =?utf-8?B?SExodGZRZDlBT3lyUFRJU0t1WkhyNktJME83T0lUdEpUdlgra09hWm5ERVAv?=
- =?utf-8?B?b3crRGplWUtzL2JzVlVmSTZ1MGYrME9kT0t3ZS9aZEN4NHNZb0xBQ01DMDQ3?=
- =?utf-8?B?S3FIYXV6RGREcFpQdW9CT0pTSXpIeUlDV245OUQ5MmdWd2tUcWJqQTJ2NHpl?=
- =?utf-8?B?b09GYndGRWgvV1lZL0ZEQXBCOUg5NFhDYW9rRnV0Y0tScFpnZ0JqTkVDWFJz?=
- =?utf-8?B?ZU84bTlDeDJ3WXV3NEJNeVRsNWt0K0xVNFIyeFdQZ0Y1QUM5eWFxM2V6bWcr?=
- =?utf-8?B?cHhqanEvVjRWM1k4cGlhUEFrZEFLa0dTS3lHcnAvVmxKek4vNDhPWVYvckMw?=
- =?utf-8?B?ZktqUk9VZHhna1NCeWlKVzMxeG45cGg3NXgyRDRrQ093cG5MNUtha201Zmdn?=
- =?utf-8?B?SUQwZjREa21tV0tVbXVZK1Ntb29JZEYyVDF4aENCNTZkM0hUOVZsNEFQcFE3?=
- =?utf-8?B?QmZudVprVit3bXM4NzhDRm1waGZrSW1RaDYzZjM4dzR2OWxpV2U4MlNKOGdR?=
- =?utf-8?B?UWMvN2xyK2o1QXU0dzRFcm9qd2tIWXplSVpPS3FtSS9QK2FCVTAySUtjK1RE?=
- =?utf-8?B?L3ZrNHM3ajJXeXM2TlBRL2pLYWE1WVZPMWtlTnRoTC9hRmF6Mkw4YVVxTnhU?=
- =?utf-8?B?b1RwMHY5ZTRFVXdJSFFDc3BRc3FHdU9FNnFYMkw3TGU1eFZleXhhdWNYZFNF?=
- =?utf-8?B?VHBSYkNuZXNQSXdyallpVzNHRnN3dmg4MnA3bW1QMXhGaEI2R1BUYWhMOTRZ?=
- =?utf-8?B?Rjd5bXhhZGZFYlI2R2o4dTQzbTBnN29aZDQ1MDZWMHJSOURPeXdEdGdUMVFk?=
- =?utf-8?B?a3pFWGl0b3BxT2FvUTJUUlphc3V6ODlMN0pZRFJhY051RzUxNnJuTlpVY3k1?=
- =?utf-8?B?K1dHZWJOQi9MaVdhZWpCUVJVNDlLajZ1cFd6bHF4SVlCR213VVFJbkFERXdS?=
- =?utf-8?B?N1RGTytxNGdwM05MRWF5akRMeU9oclQwOEVhampYRFJQMzBkbXlpRlVabVNs?=
- =?utf-8?B?bW1IRlFwYXNINHVSZGtHRjUrMDVXNkhDZ2hLUU9mNG5YdkdCclRuMlA2cWh5?=
- =?utf-8?B?T0dNcmQyd1hXandzQlhac0l5Mmd0Y1dCVzdhUzdIejNOMWJQd3NyTFcyN0gw?=
- =?utf-8?B?ODhLSDBubnRIdTdrU2VMUHBPM0tWQXNqQzBJbnRYYXJIdnpUbUc3bC9mQjJC?=
- =?utf-8?B?QmdIeStRWVhmRENReVozQ3NYRFIwdWthZ0FGVmZDYWs4TEduR1hRTkIzdXNY?=
- =?utf-8?B?QXZJeFd0U0dLL3VybXluTzl6RVBBUlJxMC9nMUhoSkJiZUhhdnRzSFFIMzRy?=
- =?utf-8?B?NWlQRDcwdWEvRjFydVdIMEJXamQrY1F0VE9RNG94WVZpY3Y1cHRNQllBb3VH?=
- =?utf-8?B?UkRaSWxIaHBhUWNERzhhR09mUFkwTUZackpYakdrL3pFQlhIZTBPMjFoZEFB?=
- =?utf-8?B?NWIrd2VqR1UvR0x5ZzNlMlZic0JKVTZpSno4Q2xOSDVJK2s0dGpwQXZlOFRi?=
- =?utf-8?B?cERyYWI3ZXRRWnllVnhUOGIxbXF0NnBoNnUweHFxS2tVcTlzRldOWFlUYW9Z?=
- =?utf-8?B?Vk9uR2lOWFQ5MjhPU2NSanhjZ1YxejJMNmxVRzJJYlFDc0lvRTBhSC9kMjRH?=
- =?utf-8?B?R1l0dkFYMTIrOXJiSVJkMTlCSklOSXNiRGIwVmd5bFRWRWdCOHQxMFZONk8z?=
- =?utf-8?B?QmwrT1hYZnB1REl5Z2RER05QWmtVcVNKeFdzQ3UrdHdEVUVWSGlLYVMycEZ5?=
- =?utf-8?B?WkJhRDFGeWJJRjQydW5uRUptenQyOHBESXN6RVRZUWl2V3lzQ3UyeFh3bjdt?=
- =?utf-8?Q?OfNZOYATozCBAHtll4+DAGc=3D?=
-X-OriginatorOrg: iopsys.eu
-X-MS-Exchange-CrossTenant-Network-Message-Id: 511f2677-d9ae-4538-d2b3-08de082408dc
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR08MB8121.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2025 17:39:59.5103 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8d891be1-7bce-4216-9a99-bee9de02ba58
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RKcWAoayv+vCuvvvhOORZ/XtZxs78o8s3MfJA25yNkq5pjmbQSvgqhxlOKwXlb/f7/jwKOT1cDzLvkbQj8k1ctRxzWUn2S50LakX5kF+zt8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5823
+References: <20251010144517.3573014-1-raymond.mao@linaro.org>
+ <20251010144517.3573014-2-raymond.mao@linaro.org>
+ <91ea6f19-8a58-4890-9421-fdc5cd7f09e0@linaro.org>
+In-Reply-To: <91ea6f19-8a58-4890-9421-fdc5cd7f09e0@linaro.org>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 10 Oct 2025 15:06:56 -0400
+X-Gm-Features: AS18NWDo7Ace-24ScXOl5VARqrOovI02QEnhjzA_E2yToL9hmgqOsyb72B9rkjE
+Message-ID: <CAEfUkU+aOmxUnwhq8dS-S-wPiSoregTM6HSRR5exhGTnZBK82A@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] docker: add OP-TEE and TF-A build for testing
+ Firmware Handoff
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,61 +98,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-yes, it's already rebased in top
+Hi Jerome,
 
-On 10.10.2025 20:38, Michael Nazzareno Trimarchi wrote:
-> Hi
+On Fri, 10 Oct 2025 at 11:11, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> On Fri, Oct 10, 2025 at 7:28 PM Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->> On 10/10/25 18:51, Mikhail Kshevetskiy wrote:
->>> As was noted by Heinrich Schuchardt, some SoCs may not support 64-bit
->>> divisions. Fix an issue by using lldiv() instead.
->> Thank you for the patch.
->>
->> It is on top of
->> cmd: mtd: fix speed measurement in the speed benchmark
->> https://patchwork.ozlabs.org/project/uboot/patch/20251010124115.1545865-5-mikhail.kshevetskiy@iopsys.eu/
->>
->> Adding it to the series might make Tom's life easier.
->>
->>> Signed-off-by: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
->>> ---
->>>   cmd/mtd.c | 3 ++-
->>>   1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/cmd/mtd.c b/cmd/mtd.c
->>> index acd886da6da..2bc9fea697c 100644
->>> --- a/cmd/mtd.c
->>> +++ b/cmd/mtd.c
->>> @@ -10,6 +10,7 @@
->>>
->>>   #include <command.h>
->>>   #include <console.h>
->>> +#include <div64.h>
->>>   #include <led.h>
->>>   #if CONFIG_IS_ENABLED(CMD_MTD_OTP)
->>>   #include <hexdump.h>
->>> @@ -595,7 +596,7 @@ static int do_mtd_io(struct cmd_tbl *cmdtp, int flag, int argc,
->>>
->>>       if (benchmark && bench_start) {
->>>               bench_end = timer_get_us();
->>> -             speed = (len * 1000000) / (bench_end - bench_start);
->>> +             speed = lldiv(len * 1000000, bench_end - bench_start);
->> Here you assume that the benchmark never takes more than 4294 seconds
->> and thus the difference will be less than U32_MAX. This looks reasonable
->> to me.
->>
->>>               printf("%s speed: %lukiB/s\n",
->>>                      read ? "Read" : "Write",
->>>                      (unsigned long)(speed / 1024));
->> You further assume that the compiler implements this u64 division
->> as >> 10. You could be explicit about this.
-> The series is taken already, so it means apply now on top of tom tree
+> Hi Raymond,
 >
-> Michael
+> On 10/10/25 16:45, Raymond Mao wrote:
+> > Fetch OP-TEE (4.7.0), TF-A (v2.13.0), MbedTLS (v3.6) and build
+> > bl1 and fip with both Firmware Handoff and Measured Boot enabled.
+> >
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in V2:
+> > - Move OP-TEE dependencies into the common group.
+> > - Fetch MbedTLS/TF-A and build bl1/fip in dockerfile instead of
+> >   post-buildman script.
+> > - Remove Trust Boot related build options.
+> > Changes in V3:
+> > - Clean-up of OP-TEE deps.
+> >
+> >  tools/docker/Dockerfile | 44 +++++++++++++++++++++++++++++++++++++++--
+> >  1 file changed, 42 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> > index 5b4c75f8400..51d07b1482c 100644
+> > --- a/tools/docker/Dockerfile
+> > +++ b/tools/docker/Dockerfile
+> > @@ -122,8 +122,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+> >       python-is-python3 \
+> >       python2.7 \
+> >       python3 \
+> > +     python3-cryptography \
+> >       python3-dev \
+> >       python3-pip \
+> > +     python3-pyelftools \
+> >       python3-sphinx \
+> >       python3-tomli \
+> >       python3-venv \
+> > @@ -227,10 +229,30 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+> >       make -j$(nproc) all install && \
+> >       rm -rf /tmp/qemu
+> >
+> > -# Build fiptool
+> > +# Build OP-TEE for qemu_arm64
+> > +RUN git clone https://github.com/OP-TEE/optee_os.git /tmp/optee_os && \
+> > +     cd /tmp/optee_os/ && \
+> > +     git checkout 4.7.0 && \
+> > +     make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
 >
->> Best regards
->>
->> Heinrich
+> OK
 >
+> > +             CROSS_COMPILE_core=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
 >
+> Not needed (eventually defaults to $(CROSS_COMPILE))
+>
+
+Removing CROSS_COMPILE_core prompts "aarch64-linux-gnu-gcc: command
+not found", I think we need CROSS_COMPILE64 instead.
+
+> > +             CROSS_COMPILE32=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi- \
+>
+> OK
+>
+> > +             CROSS_COMPILE_ta_arm32=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi- \
+> > +             CROSS_COMPILE_ta_arm64=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
+> > +             ARCH=arm \
+> > +             CFG_ARM64_core=y \
+>
+> All 4 lines not needed (defaults)
+>
+
+Dito, removing CROSS_COMPILE_ta_arm64 prompts "aarch64-linux-gnu-gcc:
+command not found".
+I think for v4.7.0:
+CROSS_COMPILE_ta_arm64 defaults to CROSS_COMPILE64;
+CROSS_COMPILE_ta_arm32 defaults to CROSS_COMPILE32;
+CROSS_COMPILE32 defaults to CROSS_COMPILE.
+CROSS_COMPILE_core defaults to CROSS_COMPILE64 when CFG_ARM64_core=y.
+
+So actually CROSS_COMPILE and CROSS_COMPILE64 are required at least.
+
+Regards,
+Raymond
+
+
+> > +             CFG_TRANSFER_LIST=y CFG_MAP_EXT_DT_SECURE=y \
+> > +             PLATFORM=vexpress-qemu_armv8a CFG_RPMB_FS=y \
+>
+> OK
+>
+> > +             CFG_RPMB_FS_DEV_ID=0 CFG_CORE_HEAP_SIZE=524288 CFG_RPMB_WRITE_KEY=y \
+>
+> CFG_RPMB_FS_DEV_ID=0 not needed (default)
+>
+> > +             CFG_CORE_HEAP_SIZE=524288 CFG_CORE_DYN_SHM=y CFG_RPMB_TESTKEY=y \
+>
+> CFG_CORE_DYN_SHM=y not needed (default)
+>
+> > +             CFG_RPMB_WRITE_KEY=1 \
+>
+> Already set above
+>
+> > +             CFG_REE_FS=n CFG_CORE_ARM64_PA_BITS=48  \
+>
+> OK
+>
+> > +             CFG_TEE_CORE_LOG_LEVEL=4 CFG_TEE_TA_LOG_LEVEL=1 DEBUG=y
+>
+> CFG_TEE_TA_LOG_LEVEL=1 not needed (default).
+> Would the CFG_TEE_CORE_LOG_LEVEL (2 == LOG_LEVEL_ERROR) and DEBUG (disabled) be OK?
+>
+> > +
+> > +# Build fiptool, bl1 and fip for fvp and qemu_arm64
+> > +RUN git clone --branch mbedtls-3.6 https://github.com/ARMmbed/mbedtls.git /tmp/mbedtls
+> >  RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a && \
+> >       cd /tmp/tf-a/ && \
+> > -     git checkout v2.12.0 && \
+> > +     git checkout v2.13.0 && \
+> >       make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
+> >               PLAT=fvp BL33=/dev/null -j$(nproc) all fip && \
+> >       mkdir -p /usr/local/bin /opt/tf-a/vexpress_fvp && \
+> > @@ -243,6 +265,24 @@ RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/t
+> >       mkdir -p /opt/tf-a/vexpress_fvp_bloblist && \
+> >       cp build/fvp/release/fip.bin build/fvp/release/bl1.bin \
+> >               /opt/tf-a/vexpress_fvp_bloblist/ && \
+> > +     make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
+> > +             PLAT=qemu \
+> > +             BL33=/dev/null \
+> > +             BL32=/tmp/optee_os/out/arm-plat-vexpress/core/tee-header_v2.bin \
+> > +             BL32_EXTRA1=/tmp/optee_os/out/arm-plat-vexpress/core/tee-pager_v2.bin \
+> > +             BL32_EXTRA2=/tmp/optee_os/out/arm-plat-vexpress/core/tee-pageable_v2.bin \
+> > +             BL32_RAM_LOCATION=tdram SPD=opteed \
+> > +             TRANSFER_LIST=1 E=0 \
+> > +             MEASURED_BOOT=1 \
+> > +             EVENT_LOG_LEVEL=10 \
+> > +             MBOOT_EL_HASH_ALG=sha256 \
+> > +             MBEDTLS_DIR=/tmp/mbedtls \
+> > +             -j$(nproc) all fip && \
+> > +     mkdir -p /opt/tf-a/qemu_arm64_fw_handoff_tfa_optee && \
+> > +     cp build/qemu/release/fip.bin build/qemu/release/bl1.bin \
+> > +             /opt/tf-a/qemu_arm64_fw_handoff_tfa_optee/ && \
+> > +     rm -rf /tmp/optee_os && \
+> > +     rm -rf /tmp/mbedtls && \
+> >       rm -rf /tmp/tf-a
+> >
+> >  # Download the Arm Architecture FVP platform. This file is double compressed.
+>
+> Thanks,
+> --
+> Jerome
