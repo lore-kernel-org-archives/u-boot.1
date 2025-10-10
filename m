@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD93CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E028CCCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:31:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7312683FCF;
-	Fri, 10 Oct 2025 13:20:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2CDD983FEC;
+	Fri, 10 Oct 2025 13:31:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y9WOsGVa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="f44FRWRY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79CA183FC1; Fri, 10 Oct 2025 13:20:25 +0200 (CEST)
-Received: from mail-yx1-xb12c.google.com (mail-yx1-xb12c.google.com
- [IPv6:2607:f8b0:4864:20::b12c])
+ id 1083183F91; Fri, 10 Oct 2025 13:31:27 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C99483FC1
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:20:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5D7C83FE6
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:31:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb12c.google.com with SMTP id
- 956f58d0204a3-635c9db8a16so1924779d50.0
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:20:23 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-63963066fb0so3904478a12.3
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:31:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760095222; x=1760700022; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760095884; x=1760700684; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ife7oOTgKrqjjZMBoXKZIwquaz07FoXhotbNtKTztaA=;
- b=Y9WOsGVai+BSIwp+qtHFU4AAfrYawDjO/xc39Iwy0hbwduFWU5CiAXM9hnEXf23OKu
- sNooh69l8Q0evrxBd4E+Py3PMZK2laSAaVdsB7FM3MSeei1X9Swl9+YcTGDfSw2DJWRE
- 3mvMIYfVj0Tz9enw82ygqh2NCDDu1RCFVKFoiC3nq/AAC54DYcy9xKErZ7Z4vgGiD5JB
- bRrV1doETBBihV9zLtqRiJ52nlGs8oQ9Z2U9LBAj9orOUdYw6m0jXYWm1FwXNwyZdVSY
- XLGFsm0EV99cvnGGxH2mQvPokr5B0iGa10+V0Eq4FS+WxH9I6SeViQ6gFPQxLdRsOshD
- ZU+Q==
+ bh=94/jqGLzm7xZbaN/mP+bkKP5JsSk/r4u9qnWWhWqJ7c=;
+ b=f44FRWRYSbmRzAqCK2lxvJmS0vZoychr0g0M9nAHqqYNmeA9yAucV+bO338P+eUsSa
+ mOY9LOfO3fs3h1ZjNHdSN6aTamWMsqQrFZlqxQ3vNvFLYtpzNkI0TqAR8aOJI/FzI4Bm
+ r4ixjRpdsk1e6q4kl9PcuHqJHUVccruOebPn0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760095222; x=1760700022;
+ d=1e100.net; s=20230601; t=1760095884; x=1760700684;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ife7oOTgKrqjjZMBoXKZIwquaz07FoXhotbNtKTztaA=;
- b=jZuKPn97AcRp7SyvndvFj6lb/7lpDJQ/ufbWm+5zNOg6zqfCDrWXHrc+6uWVxxPZxu
- A41Qq7A1zNKxk2MLt/7hjm9H1bO3mU2el/01AA520gO4mw3/ZdtfI5jivNpxs0odmZg9
- JDxblby67dPVwdM8DFcQWrfe0A9i1yX21MXBnnvhcXyxPYoVdLpZMEuvRBU0pVxjM0cL
- 5Y1pO6GFKr8vGzJ9f0JgfbsNZclv5bWvXtuViOxgMxeq+eLmrfCDNNiTQpSvwj5e3cAx
- LgBYrht7oYsAi6UHWwcmnFbhKgYeWRDbpjytWusqwFhEiWvL1mjoL/Q0LGOC1A/wWcff
- Tt1Q==
-X-Gm-Message-State: AOJu0YzByJotoBgcrUL5tZuImlPDR+QSMwKH5nW8m381igTyRGIaef2W
- PGtYvU/hUkvRAKOQiJJOvFwuffFCXf61LkTwz57tTeyBfqpJQxWubzIUFD8ZbsnHoKSNdkyM+AF
- M9eOkN/e+jTXKY87RLcZT0sBYXmkvcJD4Om2cCBnY0Q==
-X-Gm-Gg: ASbGnctNp28CiWjeZga2Xos/r22+inAZ929VCMPWt/uWOP+gWkfnjzo0HfSI+2szg4s
- d7CCEK97EkGczSfCp/UszsXMPbW6kHnjmszK86yMGMphT0n6nKLNoVJlJAFKuJy85J12rHjVndN
- bAUCamRvBw3NUUsZqKuy4+XaAsTfhuj/D5q4oGECBJccXpniXlJHt7JlL1BcmNqhoQ+3kaf1e7F
- sAbq1krIR7rUpRdz+I6bqkyD3d81CSb54GSJDKXsDD/RSRjsHSi2me5bm99f+4T4IJm+4J/qMoq
- K8MvGFzLkDAQVVyzXe+b
-X-Google-Smtp-Source: AGHT+IEPpR1LPy4d2va624hzPp/+OmMNsYivDBgwyrTx6vg/Mw+l04fURSrTtj3dGuz84MUnUpgZV4GAgR6yjvU8DpE=
-X-Received: by 2002:a05:690e:345:b0:62a:42ce:b7b9 with SMTP id
- 956f58d0204a3-63ccb872a12mr8236090d50.1.1760095222166; Fri, 10 Oct 2025
- 04:20:22 -0700 (PDT)
+ bh=94/jqGLzm7xZbaN/mP+bkKP5JsSk/r4u9qnWWhWqJ7c=;
+ b=QVS4KHrZWR07OouyWAgtKpf9QlZ3s8BJTT3NXNIwGhuINUaUCeqrWD9t0XKnYZNuu0
+ BkZOsg6bUdgaqf+YmpkEXtcoOePEMYJ7QSvZ3qKQ/XAKrjbIcIjePNtP1ZVfaTx5Nf+y
+ rREJwvwARqxSUrDMej7RwGOH7i5V6UkiD1I6MIs2q+pYguIbLDLK5ftpwT5Ai2gKVOWN
+ cUE8AOg8xwTrDu+XEC1+BqX15iMwHdvJuta3DoEOku+JqsEurUiR9ziqTrZzN87HxaTn
+ 72TJi5Q2rfmoPIMt+GqHvOoLEFxYi+b+T3HvHkHXFPkHB5qgDixvFVE2VTsROLIYCskW
+ DZuw==
+X-Gm-Message-State: AOJu0YwhLeo/HWgxV73hNMeHihVGW6JBZGB+YyOqOSbsmf7bOuXFMXKK
+ 8UkT8BiW42WkQWR+v3efT34dIIbS/gV71WYU1aBwNQrK6/PzKLUvYklxvPfJ/+y208Gtn5/C/fq
+ ufG6Uf4ybb1/gjbjtUaw9zWQbyVI6PM20KHbZO72F
+X-Gm-Gg: ASbGnct05l1fIiF7f/ls4VCJPq1QBmiQQHimEsFxI97BgVR8/u2UILPmjaROp9JUJ0Z
+ 16fdty4RfbpKI07wa8Gj2dUmJQj/DuT5Z4ww8tXEm2Fy/I913OzMOb6caPFohzJ2sPFSmiJQLfa
+ SwMESJ+bXAL+h8+aQZ/cYAnEcLxhi38Bgwk2bTJX7xqkpJi/DYn3DY8JP6jYZmvhwt2Bi3e0+0y
+ v7pPH2xvpZZntDQzF+owg==
+X-Google-Smtp-Source: AGHT+IFPSvp5gNrwuhf5z4O0SVtM5uA0pJlg9inKhoCDqfAu10HM24U+pwmPqAPlUAoe4haVsovq844ZU1+IrKlUJjY=
+X-Received: by 2002:a05:6402:13d1:b0:634:ab80:d84b with SMTP id
+ 4fb4d7f45d1cf-639d5c5a3f8mr10266173a12.32.1760095884022; Fri, 10 Oct 2025
+ 04:31:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251009-detect_disk_image_type-v8-0-a8b50a3b4acf@linaro.org>
- <20251009-detect_disk_image_type-v8-2-a8b50a3b4acf@linaro.org>
-In-Reply-To: <20251009-detect_disk_image_type-v8-2-a8b50a3b4acf@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 10 Oct 2025 14:19:46 +0300
-X-Gm-Features: AS18NWBpMtD4E4yb8Pg3VDS0MULhIqAemi_aOPQBgtLJcAfY_1kSfag7mra4V10
-Message-ID: <CAC_iWjK96Xzv0TwQ3CCp+2q84d0hZ7w0Qr154vM0C38aThyR=g@mail.gmail.com>
-Subject: Re: [PATCH v8 2/2] efi_loader: Improve disk image detection in
- efi_bootmgr
-To: Javier Tia <javier.tia@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20251008-topic-interconnect-next-v2-0-c46e94dd328e@linaro.org>
+ <20251008-topic-interconnect-next-v2-1-c46e94dd328e@linaro.org>
+ <CAFLszTi3cNihLKOvJhrm1GLYdxQKvkv-66Fdr6m90+vvdUtMMg@mail.gmail.com>
+ <d0e157af-c5e7-45ee-9f8f-6b9a523d5505@linaro.org>
+ <CAFLszTgemVk0tSMpBiMfgnh4LGaVKnOpGWa0N8WwE2Spf+ZUWA@mail.gmail.com>
+ <8324c7c6-dcfb-4fe8-a9d3-9ab19fdac36c@linaro.org>
+ <CAFLszTi9omZ372BocVZ39nHbgofM5in=Nz4yvCXrHVEgoJPiQg@mail.gmail.com>
+ <c6694467-8efb-404d-862d-4df62dd60db6@linaro.org>
+ <bfd6fcbb-2c7b-4463-b0ba-ea0a01a09ecd@linaro.org>
+In-Reply-To: <bfd6fcbb-2c7b-4463-b0ba-ea0a01a09ecd@linaro.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 10 Oct 2025 12:31:11 +0100
+X-Gm-Features: AS18NWAE_9P6PNniZfd-f7_FiauAOtJM6s5nsTSVgyPUjsTiQ2b1Pqy8TpVIjEw
+Message-ID: <CAFLszTjDt__zEwcy4jioy9vgY+Sv52Ryz0b95JtFTT76-BTT2Q@mail.gmail.com>
+Subject: Re: [PATCH v2 1/7] Introduce the Interconnect Subsystem
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Casey Connolly <casey.connolly@linaro.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Mario Six <mario.six@gdsys.cc>, u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,71 +98,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 9 Oct 2025 at 16:18, Javier Tia <javier.tia@linaro.org> wrote:
->
-> Enhances the process for identifying disk images within the EFI boot
-> manager. Utilize part_driver_lookup_type() to verify the validity of a
-> downloaded file as a disk image, rather than depending on file
-> extensions.
->
-> part_driver_lookup_type() is now used in the prepare_loaded_image()
-> function in the EFI boot manager to detect partitions on a block device
-> created from a downloaded image. This allows the boot manager to boot
-> from any disk image that can be recognized by a partition driver, not
-> just ISO and IMG images.
->
-> Update prepare_loaded_image() to create the ramdisk block device
-> internally, obtain the blk_desc and use part_driver_lookup_type() to
-> detect a valid partition table.
->
-> In try_load_from_uri_path(), try prepare_loaded_image() first to detect
-> disk images, and fall back to PE-COFF detection only if that fails.
->
-> Signed-off-by: Javier Tia <javier.tia@linaro.org>
-> ---
->  lib/efi_loader/efi_bootmgr.c | 49 +++++++++++++++++++++++++++++++-------------
->  1 file changed, 35 insertions(+), 14 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 662993fb809..d472dde158a 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -17,6 +17,7 @@
->  #include <log.h>
->  #include <malloc.h>
->  #include <net.h>
-> +#include <part.h>
->  #include <efi_loader.h>
->  #include <efi_variable.h>
->  #include <asm/unaligned.h>
-> @@ -347,6 +348,9 @@ static efi_status_t fill_default_file_path(struct udevice *blk,
->   * @dp:                pointer to default file device path
->   * @blk:       pointer to created blk udevice
->   * Return:     status code
-> + *
-> + * This function handles device creation internally and performs cleanup
-> + * on error paths.
->   */
->  static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
->                                          struct efi_device_path **dp,
-> @@ -355,10 +359,31 @@ static efi_status_t prepare_loaded_image(u16 *label, ulong addr, ulong size,
->         u64 pages;
->         efi_status_t ret;
->         struct udevice *ramdisk_blk;
-> +       struct blk_desc *desc;
-> +       struct part_driver *part_drv;
->
-> +       /* Create the ramdisk block device internally */
->         ramdisk_blk = mount_image(label, addr, size);
-> -       if (!ramdisk_blk)
-> -               return EFI_LOAD_ERROR;
-> +       if (!ramdisk_blk) {
-> +               log_err("Failed to create ramdisk block device\n");
+Hi Neil,
 
-I think this needs to be a log_warning() because we might be booting an EFI app.
-Heinrich any preference?
+On Thu, 9 Oct 2025 at 17:48, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+>
+> On 10/9/25 18:43, Neil Armstrong wrote:
+> > On 10/9/25 14:28, Simon Glass wrote:
+> >> Hi Neil,
+> >>
+> >> On Thu, 9 Oct 2025 at 05:54, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+> >>>
+> >>> On 10/9/25 13:16, Simon Glass wrote:
+> >>>> Hi Neil,
+> >>>>
+> >>>> On Thu, 9 Oct 2025 at 02:18, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+> >>>>>
+> >>>>> Hi,
+> >>>>>
+> >>>>> On 10/9/25 02:25, Simon Glass wrote:
+> >>>>>> Hi Neil,
+> >>>>>>
+> >>>>>> On Wed, 8 Oct 2025 at 09:31, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+> >>>>>>>
+> >>>>>>> Let's introduce the Interconnect subsystem based on the Linux framework
+> >>>>>>> which is used to vote for bandwidth across multiple SoC busses.
+> >>>>>>>
+> >>>>>>> Each bus endpoints are materialised as "nodes" which are linked together,
+> >>>>>>> and the DT will specify a pair of nodes to enable and set a bandwidth
+> >>>>>>> on the route between those endpoints.
+> >>>>>>>
+> >>>>>>> The hardware resources that provide those nodes and provides the way
+> >>>>>>> to vote for the bandwidth are called "providers".
+> >>>>>>>
+> >>>>>>> The Interconnect uclass code is heavily based on the Linux one, with
+> >>>>>>> some small differences:
+> >>>>>>> - nodes are allocated as udevices instead of Linux idr_alloc()
+> >>>>>>> - tag management is minimal, only normal xlate is supported
+> >>>>>>> - dynamic IDs is not implemented
+> >>>>>>> - getting nodes states at probe is not implemented
+> >>>>>>> - providers are probed on demand while the nodes links are traversed
+> >>>>>>> - nodes are populated on bind
+> >>>>>>>
+> >>>>>>> Fully tested with associated DM test suite.
+> >>>>>>>
+> >>>>>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> >>>>>>> ---
+> >>>>>>>     drivers/Kconfig                            |   2 +
+> >>>>>>>     drivers/Makefile                           |   1 +
+> >>>>>>>     drivers/interconnect/Kconfig               |  10 +
+> >>>>>>>     drivers/interconnect/Makefile              |   6 +
+> >>>>>>>     drivers/interconnect/interconnect-uclass.c | 548 +++++++++++++++++++++++++++++
+> >>>>>>>     include/dm/uclass-id.h                     |   2 +
+> >>>>>>>     include/interconnect-uclass.h              |  74 ++++
+> >>>>>>>     include/interconnect.h                     |  81 +++++
+> >>>>>>>     8 files changed, 724 insertions(+)
+> >>>>>>
+> >>>>>> 'interconnect' is such a long and vague word :-)
+> >>>>>
+> >>>>> I didn't chose the name => https://docs.kernel.org/driver-api/interconnect.html
+> >>>>>
+> >>>>> I don't see why we should take a different name in U-Boot.
+> >>>>>
+> >>>>> But I can definitely use "Generic System Interconnect" in the documentation
+> >>>>> and commit messages if it's clearer.
+> >>>>
+> >>>> Yes, we should use the same name. Docs can help.
+> >>>>
+> >>>>>
+> >>>>>>
+> >>>>>> There seems to be a piece missing here. The uclass should have
+> >>>>>> operations, so that it makes sense for different drivers to implement
+> >>>>>> the methods. I see some there, but also a lot of direct calls from the
+> >>>>>> test to sandbox. I see quite a few functions which lack a struct
+> >>>>>> udevice * - I suspect I am missing something?
+> >>>>>>
+> >>>>>> We normally have a ..._get_ops() macro in the uclass header. Also we
+> >>>>>> normally have stub functions which get the ops and call the function.
+> >>>>>>
+> >>>>>> I see code to remove children, but driver model does this
+> >>>>>> automatically[1]. Same with bind(). If there is a bug in this, can you
+> >>>>>> give a few details, or ideally a test case?
+> >>>>>
+> >>>>> All of this is present and well thought, I went into multiple designs:
+> >>>>> - interconnect uclass provides ops -> interconnect_ops, icc_node doesn't
+> >>>>>      provide any ops since they are just internal objects
+> >>>>> - there's only a single direct call to the sandbox driver to get the
+> >>>>>      setting resulting of the aggregate() & set() op calls, this is purely for
+> >>>>>      validation of the calculations, the sandbox-interconnect-test only uses
+> >>>>>      the public inteconnect.h API
+> >>>>
+> >>>> OK, I missed that.
+> >>>>
+> >>>>> - For the lack of udevice, it's because I did use the same interconnect API which
+> >>>>>      return a "icc_path" private structure which contains a set of interconnect
+> >>>>>      nodes which forms path across the different providers.
+> >>>>
+> >>>> We do a similar think with clk, although the function signature is
+> >>>> different in U-Boot from Linux.
+> >>>>
+> >>>> I assume the caller would be a driver? If so, passing in a struct
+> >>>> icc_path * might be more efficient than using malloc() each time.
+> >>>
+> >>> I'm not against that but the size of icc_path depends on it's size:
+> >>>
+> >>> +struct icc_path {
+> >>> +       size_t num_nodes;
+> >>> +       struct icc_req reqs[];
+> >>> +};
+> >>>
+> >>> So we would still need to alloc the reqs anyway and expose the internals
+> >>> with no benefits.
+> >>
+> >> Indeed. Sometimes in U-Boot we use fixed sizes to avoid realloc(), but
+> >> I'm not sure if it makes sense here.
+> >>
+> >>>
+> >>>>
+> >>>>>
+> >>>>>      Setting a bandwidth on a node is meaningless, same for interconnect providers,
+> >>>>>      this is why we set a bandwidth on a set of nodes, which get aggregated with the
+> >>>>>      other path votes from other devices.
+> >>>>>
+> >>>>>      The key here is the "nodes" which are subdevices of interconnect providers
+> >>>>>      created at bind time, and gets referenced in icc_path objects.
+> >>>>>
+> >>>>>      I made sure we can't remove either interconnect devices or icc_node devices
+> >>>>>      if they are still referenced in an active icc_path.
+> >>>>
+> >>>> OK
+> >>>>
+> >>>>>      This is the reason of the device_remove() & device_unbind() calls in the test
+> >>>>>      to make sure we're not left with dangling pointers to non-existent icc_node
+> >>>>>      and providers devices.
+> >>>>
+> >>>> The specific code is this:
+> >>>>
+> >>>> +       device_foreach_child(pos, dev) {
+> >>>> +               debug("%s(pos=%s)\n", __func__, pos->name);
+> >>>> +               ret = device_remove(pos, DM_REMOVE_NORMAL);
+> >>>> +               if (ret)
+> >>>> +                       return ret;
+> >>>> +       }
+> >>>>
+> >>>> This is in the pre_remove() method. But if you just remove that code,
+> >>>> doesn't driver model remove the children anyway?
+> >>>
+> >>> No it only removes the children from the same driver:
+> >>> =============><=====================
+> >>> int device_chld_remove(struct udevice *dev, struct driver *drv,
+> >>>                         uint flags)
+> >>> {
+> >>>
+> >>> <snip>
+> >>>
+> >>>          device_foreach_child_safe(pos, n, dev) {
+> >>>                  int ret;
+> >>>
+> >>>                  if (drv && (pos->driver != drv))
+> >>>                          continue;
+> >>> =============><=====================
+> >>> Same for unbind.
+> >>>
+> >>> Added in https://lists.denx.de/pipermail/u-boot/2018-June/332597.html with the bind/unbind command.
+> >>
+> >> Ick, that is a bug.
+> >>
+> >>>
+> >>> So perhaps I'm doing something unintended here, I was
+> >>> also expecting removing/unbinding a device would remove all the
+> >>> childs whatever the uclass.
+> >>
+> >> Yes, it should be fixed.
+> >
+> > I guess it should be fixed and a test case added.
+> >
+> > Should I handle this ?
+>
+> Wait the code is right, but still it doesn't work properly.
+>
+> I'll investigate further to understand.
 
-[....]
+OK...I'm not sure what that patch was about, but if the command needs
+to work that way you could create a new function, e.g.
+device_remove_by_drv() which only removes things for particular
+drivers?
 
-Other than that
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Regards,
+Simon
