@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29DFCCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 14:46:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E7ACCCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 14:46:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBD64843C0;
-	Fri, 10 Oct 2025 16:46:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2ADB7845DB;
+	Fri, 10 Oct 2025 16:46:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C57nJVba";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eOIEkBvC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A02F78445C; Fri, 10 Oct 2025 16:46:09 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 5DB84845DD; Fri, 10 Oct 2025 16:46:16 +0200 (CEST)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E18D84258
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 16:46:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EE4E84258
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 16:46:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-87a092251eeso32865436d6.0
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:46:07 -0700 (PDT)
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-4dfd1f48d4cso16787371cf.0
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:46:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760107566; x=1760712366; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1760107573; x=1760712373; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B+LGmx3DAIwfpmLQe8jK7ffHnfYARHF7agHv8mNy5xY=;
- b=C57nJVbaBlA01cBcI8bmbn/g9HBWzfCPD56GhBJt3P94o73Fd/seDPQdMUQ0TyJmeo
- YzXDnNe1BL4zdlB+65+kNdZgFy2SFFde06oxb4AFvE5J0LWio1jy5B1hCIgwWvqmFepz
- dD1thGUaNpVOiaQr16JzlLdE1fzS9l506NPpI4o5FF76arzsjEvjXB/ecQ0xfMypxdBo
- 3T3dZ4zegNGyZXyiNiLfhMnyDwuf4zNZbQBo64wvJV/5mOpyiJTk70SNPUc8s7o11W6Q
- k0RLkczTVt08whJoTbNq1glbwjzF55ELV43jK7ZAdDAmpQ0fsSy+lzP/i1f4neOOf0cI
- xo2A==
+ bh=nw0Z4OhikAl1XqKYhi/r7zFUS/jwT8pFrq/kDHuuGlY=;
+ b=eOIEkBvCMxQcUS4kD5y+DWc2Pa9uBxmPaLcD69P7DVb/oeq6TU5/erQwKOwmExxdMP
+ ZcS14Nbxg1/sXlA3JXp2TQaoSFG9cB75yA2vaT+HAKd+NlbZqaRwPiBy7ui9z4LVG7w6
+ 1IWzGBIZIZ16rDqGd1cjfNyHVWjZN0vkJZFSGS6wfE0IYrTvHa56iQErnncCHVEwyO65
+ vTvI9oeuLDlpHaBjlOgwhKXBzjQ798YM5NyRdcO6QgDYD974pduZPpnRR27+zCiavTKq
+ TuoeL7d1oCXjWWXLY4WJx2hpgDMz9usCFc+noVQI/Ww9mpE6zcseV4uxEk0l0ZWY0BQV
+ VQxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760107566; x=1760712366;
+ d=1e100.net; s=20230601; t=1760107573; x=1760712373;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B+LGmx3DAIwfpmLQe8jK7ffHnfYARHF7agHv8mNy5xY=;
- b=Le5Ab9RE3jLbROnzj6WyB8BaQfw4t9/ZWm+GAHax5juRAB2k76oZFlMCEAyZG500/W
- +2GH3casNInY8rlIg9GUTMNnssc1Mv+qPuJBhDhaveFPmc5IUQVXGvBoK0YGo4pLCzn9
- jalEonruD1wMJOX6Fn2qXS350SOpjyyBaMv03zmUBSK6MbHjMJfv01LooEpA5FOZgj8u
- iO4p6b3xqOYJMz2x3FNZDBzrHqAwdcBS+p71nHMA18tZgryiTsCZ+eF/DWk76hUtyGFe
- ccLDyfHcNNog7tPJcC+HQdzQB0NgsfCBb+Gj1iNayfvA2ahEgjd1MamDOVoyq3Qrm8iX
- EIKg==
-X-Gm-Message-State: AOJu0YwuiOI9xjaFHEwL/UqaERFEjkG2tO69e00YdCTTjW9T0/p1g3cg
- 0ymLefU6zNlaZ3AkHMcYkV15zqYuALxCRydH49mP1WtTWyI7fFynt2Q3RMy7eBqh+slMFoX2c8t
- O01gN
-X-Gm-Gg: ASbGncvibrW247YXlMalyEMJ3b4pAGCsMcPMj4iHZ5I2m66VXlO2o1nGLO9m2TE1KDA
- DqsBRrHeZac+O6onNIZPzUKhPnJgLMhWOEwlNp65CBOsL5btLV6H0xFSvwFsuX+KAouF0bsdpVh
- W3HWZbh4x1uStuZMeVfjKRnQxtpCX5pNdeiWo++y3m6/xkoLruW/WA1hrEUqbvEwLs39Fyj9ftL
- iT4g9nxEEzUQBiAeNeYdBapBqEAwG9VJK7MTGLBLMlnxcHWfItTHKlPH6a2I6Rk5Vhk99vEmDrw
- i4fXZcVJ+W3Fv3TLmhVIzEs4OF3BsMCrUyqX3e4Yp+UtoqJFaxwUaruJPBekA5cT3c3RnNScgZa
- KArBoAbwCLA21RlQr8w02vmoBoNdZH/SdzruyNU7xJRwm3JxGmoPhic8b8IMTRCGCGX3cEFnNb0
- swPGI=
-X-Google-Smtp-Source: AGHT+IGTncWukOr45kL+hCHkT+rFK4AoZMtAg5Hh5YWpKCO+X6kv1wCg+kyBc5WtOAIxrQ5fqsf1Cg==
-X-Received: by 2002:a05:6214:5018:b0:7e6:7392:f7df with SMTP id
- 6a1803df08f44-87b3a784170mr152432566d6.6.1760107565504; 
- Fri, 10 Oct 2025 07:46:05 -0700 (PDT)
+ bh=nw0Z4OhikAl1XqKYhi/r7zFUS/jwT8pFrq/kDHuuGlY=;
+ b=c3khn9YpvpaHNAaKAax8pGEXzVSjQaRSNgz1omPkWVHdssjPtqsqfNEZ2UO6w0ykrn
+ QLWoVm754iSdaSw9bq+5dfrsh9fPnDJBsekn74I/EKLXmo0PR8I6MkuS9XL5aEvRIzjV
+ 7FxlEhw3t4Y0Nmn0rtbYQ4E0q7pX5Ye1qbsSYQh8B0eqUiptnOEBKS3/LlQAjfqkax4B
+ khbZbCAk+vwhB6g+TCDUxR0+8fihvqTJnPEzqWeDfnLzNWQDrPBuYDSpGav3fXL8N+Xr
+ XtGjo8aIq8GVL6f7dQUrpsshevY0k4cOvFp0BEROAXicZsspLFraTUfhqCFwaAgMfqnr
+ IikQ==
+X-Gm-Message-State: AOJu0YwARYjnYgGmp6/IkyUC3WbXD1fJKn3g14Xh/ZDjiMYM+/KHIAQx
+ I+w0kcw+XPs/hmxepo5qFAFRzk05X91ylwAjk3U4VSiWZj18Y4Sz4rkreRNFcOKsJAvOOobAL/5
+ 5/mUG
+X-Gm-Gg: ASbGncuFgAJFSLVObLAjBQ4A+3F0GqdlffbYwM7+yIqrS1cDcuMIWzKBq/gHFr+zb6w
+ QPXo9o/DJwsYRJRgf34i0oiuQsPB2+k5qEKjFJrE5xBuyDN+TpdpocWYZBeoh6PQmxcbUtE5bFz
+ dZgj8hNlTlQQmyez1x2PMC1caWZvmGgNf+6CMisnu/Bsnb9el9ZAPOGNftbyepiDAZKQqKAZa9h
+ Aa5vJ6D3oV3ijtrp78yKPwvYa3LxUzeDWGfmBrFs0kGLTvejLO1+1YsHP4Lj72wIrIWtbGW4/Vg
+ k9u/a2IqoNDaJ9l6yAGA0C1Efd6QJXiJLuVovx4pVA9fiNetW4rjw6dE0VzKhb+ZsbxCpgWUp0x
+ MZpdk3cHfXfNhWNZeyD4SkMVgi7M4kQq2augsXXt+xH9Lyrfel9E7uumLkFG4TLsdhjxM5XC89K
+ BALlw=
+X-Google-Smtp-Source: AGHT+IFGqUX53W7wK/cRe1fZnBEiHjbexT7YPzootq5F/fdzHDpXmB0J/MQkrE1p7Jr2aqZVRnzeYg==
+X-Received: by 2002:ac8:5d05:0:b0:4e4:2006:b009 with SMTP id
+ d75a77b69052e-4e6eaccc55cmr151062001cf.17.1760107572806; 
+ Fri, 10 Oct 2025 07:46:12 -0700 (PDT)
 Received: from ubuntu.localdomain ([209.227.150.67])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-87bc3479344sm17686306d6.17.2025.10.10.07.46.04
+ 6a1803df08f44-87bc3479344sm17686306d6.17.2025.10.10.07.46.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Oct 2025 07:46:04 -0700 (PDT)
+ Fri, 10 Oct 2025 07:46:12 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
@@ -82,9 +82,9 @@ Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH v3 5/6] ci: rename conf.qemu_arm64_na to conf.qemu_arm64
-Date: Fri, 10 Oct 2025 07:45:09 -0700
-Message-Id: <20251010144517.3573014-6-raymond.mao@linaro.org>
+Subject: [PATCH v3 6/6] ci: add test entries for qemu_arm64_tfa_fw_handoff
+Date: Fri, 10 Oct 2025 07:45:10 -0700
+Message-Id: <20251010144517.3573014-7-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20251010144517.3573014-1-raymond.mao@linaro.org>
 References: <20251010144517.3573014-1-raymond.mao@linaro.org>
@@ -106,46 +106,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test-hooks config file has been renamed by [1], thus update the
-name where it is used by the script.
-
-[1] https://lore.kernel.org/u-boot/20251003191918.767698-2-raymond.mao@linaro.org/
+Add qemu_arm64_tfa_fw_handoff test entries to azure and gitlab
+pipelines.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
+Changes in v2:
+- None.
 Changes in v3:
-- Initial patch.
+- None.
 
- .azure-pipelines.yml | 2 +-
- .gitlab-ci.yml       | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ .azure-pipelines.yml | 4 ++++
+ .gitlab-ci.yml       | 7 +++++++
+ 2 files changed, 11 insertions(+)
 
 diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
-index 1382e4f6475..4bf4d9e763b 100644
+index 4bf4d9e763b..6948ad6b4b6 100644
 --- a/.azure-pipelines.yml
 +++ b/.azure-pipelines.yml
-@@ -254,7 +254,7 @@ stages:
-           git clone --depth=1 https://github.com/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
-           # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
-           # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
--          ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-+          ln -s conf.qemu_arm64 /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-           ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
-           ln -s travis-ci /tmp/uboot-test-hooks/bin/\`hostname\`
-           ln -s travis-ci /tmp/uboot-test-hooks/py/\`hostname\`
+@@ -477,6 +477,10 @@ stages:
+         qemu_arm64_lwip:
+           TEST_PY_BD: "qemu_arm64_lwip"
+           TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
++        qemu_arm64_tfa_fw_handoff:
++          TEST_PY_BD: "qemu_arm64"
++          TEST_PY_ID: "--id fw_handoff_tfa_optee"
++          TEST_PY_TEST_SPEC: "test_fw_handoff"
+         qemu_arm_sbsa_ref:
+           TEST_PY_BD: "qemu-arm-sbsa"
+           TEST_PY_TEST_SPEC: "not sleep"
 diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 224485a2e64..5ae02176167 100644
+index 5ae02176167..e20e6c6d43f 100644
 --- a/.gitlab-ci.yml
 +++ b/.gitlab-ci.yml
-@@ -39,7 +39,7 @@ stages:
-     - git clone --depth=1 https://source.denx.de/u-boot/u-boot-test-hooks /tmp/uboot-test-hooks
-     # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
-     # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
--    - ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-+    - ln -s conf.qemu_arm64 /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-     - ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
-     - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
-     - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
+@@ -409,6 +409,13 @@ qemu_arm64_lwip test.py:
+     TEST_PY_TEST_SPEC: "test_net_dhcp or test_net_ping or test_net_tftpboot"
+   <<: *buildman_and_testpy_dfn
+ 
++qemu_arm64_tfa_fw_handoff test.py:
++  variables:
++    TEST_PY_BD: "qemu_arm64"
++    TEST_PY_ID: "--id fw_handoff_tfa_optee"
++    TEST_PY_TEST_SPEC: "test_fw_handoff"
++  <<: *buildman_and_testpy_dfn
++
+ qemu_arm_sbsa test.py:
+   variables:
+     TEST_PY_BD: "qemu-arm-sbsa"
 -- 
 2.25.1
 
