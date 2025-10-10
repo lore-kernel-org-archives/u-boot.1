@@ -4,136 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB265CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 21:40:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC553CCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 21:41:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CF518404D;
-	Fri, 10 Oct 2025 23:40:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 694798403D;
+	Fri, 10 Oct 2025 23:41:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="FuZn0J94";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AwwIPEcb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB5EE8432E; Fri, 10 Oct 2025 23:40:46 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CAEC48403E; Fri, 10 Oct 2025 23:41:04 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC95983F8E
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 23:40:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EA1A841E6
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 23:41:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1760132444; x=1760737244; i=xypron.glpk@gmx.de;
- bh=DLFqvO4CZQ+hcQOtGBsdLNJayB3AqUJJu6awqRk9MV8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=FuZn0J94uywf1WjZKiaGfxzCSTuxj2ZlP+3cijPpSv2NWFR2zcJTIXUH9DlBCOav
- DCRYVCMbrAuJtCa7E6XZTxYU3pLuzNRfur8ADi8MHnrjDuVKGXdGzkLtllpqQ2J2N
- I+eyklSBMjGoteEE18j5fk98/wH7/F5dal1DnYZ6pbUZh7GJpD2GIbqAQd9n16yRs
- rwIF0bUp8+GJySjkH9NoIwX3qvUV0V0sj9a6D7DpZwRfV/QmsyS/cHOtup7UHXAk2
- bXSs0tZ6Rcidbz24Zw4QXacqsAAWCoASl8U5hXbTDfCcxqOtc7AphI+oUD4XIBrOp
- D+K4LHH/nklbNChZoA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M89L1-1vBzgN0oHj-00CF1a; Fri, 10
- Oct 2025 23:40:44 +0200
-Message-ID: <4ac4a2a7-814f-4407-b1ea-f5f57d3bbd7d@gmx.de>
-Date: Fri, 10 Oct 2025 23:40:43 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-43fc147aee3so485056b6e.1
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 14:41:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760132460; x=1760737260; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Bwjl9ktuSxJiPsfvjI4Iu5k8iRZh0sAaBP//yTQf+JM=;
+ b=AwwIPEcb54zqvAlpkVAqNlhmhJLpE8cbWLSDJTNyZCy7hC8yIxIjjJKLWNUj45a6i3
+ dksr4MCM2VqMsbchWMg+lMO/Ggms2JaIcHg1NIDBfMorM9pgqmPFH4lYfdGcmk5UothO
+ K8HRPQbuzSNT2lPUZjBdOrAbim2AGV1fMBdRE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760132460; x=1760737260;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Bwjl9ktuSxJiPsfvjI4Iu5k8iRZh0sAaBP//yTQf+JM=;
+ b=SHkFAXpIVxNUsVTN8GZvYpyjLc+Q42s2Fzh4/8R3ofhLT6T4qqgQhi87odiKKgUVIM
+ QEDL6aGmeg5f2W6IWh91F/vG4RdBOvY4fFtAbfRTHLb5KMG2w3P26yTWV/nYDj5dYnoB
+ 7TrZ/+3rXTaTc6/IfPN6FyHgzTQjZaQJq6aT6+uVV4CLlPBrwS7nM298UD8DBywlI+Tl
+ MI5qiHLP3DVDL22+HtlVsBZgsHJ1Jayf/vH0jAPyYn9JunvmKdwSd0CQeKG1CAiJ0lKi
+ VT3N+u8Mo97uBbVHVX7QxpFQfnMvmtd9HXs+n5XNGHxhtnK7ftkzIV6+23/qG51sSvZa
+ fGqw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWsitFjdjYETWUiP+6N5K9aZvRjwJM5MkKXK+uJMdtVGm/RVm9j4AnJtR4DJcUW55VbKpkpk4w=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz0VZ4+vy2dv3oWhGtp3ZHGe3o0UQYG6wBFRHCXJ7d+hZzg6UIi
+ a11Wh3hxC6yH/h1Gz55r2yVOrqMCKugzOQV3NljAIXdoyFoB6DN1nRC9Xd+Q15cn3Rc=
+X-Gm-Gg: ASbGncuK6Bm1HmuivQslYEzJxfP9sdWWZF2t61K8L/veZBFXwBZ/WbDt54thymamU2r
+ yZgdjC/tcfBUVtoeq2/842rYB+lNewwKBcaL5PkkfPR1LNd7uZpMXSarMsrMQNcVr94D2MBloSA
+ nvI77T1lEPsvbvIN2MvHDndSa677ep0FO2FwGLQGdCC7q8QHoaOMqp1/+xvsXTecVTyRu+0YhjX
+ 3U7YPsk7tBwHJ3DxfcPUTGlG9juYTA9p9UuplUTQSjJS8U8B6/nDxZ2lUDzQ4qu+ugplt5XjahL
+ xeEmebV0UD8VyElpwu5lSL7RjoECGLSElONZiZJ+4V12kk3MHiuvcHUsqqEY570Vp8aYxco/LGm
+ HNBeetHHDdaum2nD9VIOMjH6HJCBmDHnx4pPCDi4CV8PPGb4dhkRYKaUazoaFqKQY7Y40MLPpqP
+ IRd+5mwVKCVFLWMew=
+X-Google-Smtp-Source: AGHT+IHyVdLoOYtxAVUVtu5le18HYrF55faF4Ymjr0OZK38625Hn3iMSFccQ4wZt3T2dT0hREQcBQA==
+X-Received: by 2002:a05:6808:50a7:b0:43f:a2eb:861f with SMTP id
+ 5614622812f47-4417b2bbcbfmr5827019b6e.8.1760132460203; 
+ Fri, 10 Oct 2025 14:41:00 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4419889ffa4sm938538b6e.10.2025.10.10.14.40.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Oct 2025 14:40:58 -0700 (PDT)
+Date: Fri, 10 Oct 2025 15:40:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
+Message-ID: <20251010214056.GH298503@bill-the-cat>
+References: <20251010053056.32495-1-mibodhi@gmail.com>
+ <20251010142835.GY298503@bill-the-cat>
+ <CAJaLiFyYGJjO=BjvL3HXAfbE1V2bwB_CSkcOTC6tQTJAR_DMVA@mail.gmail.com>
+ <20251010200724.GF298503@bill-the-cat>
+ <CAJaLiFyTVXY4c+zS0RNPwCgzbzH968a2Zgo5s=AYh9y0wu800g@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFH DO NOT APPLY] test/py: Update to pytest 8.0.2
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20251010134330.1094378-1-trini@konsulko.com>
- <20251010134410.1094470-1-trini@konsulko.com>
- <d407b3a6-3945-416f-95fa-160da63ca8fb@gmx.de>
- <20251010141809.GX298503@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251010141809.GX298503@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lMt+eAUbPhhQFIrGjW8gra4UMfzlHV2nDxcL5d83u5lpxUcbw3e
- nIAQABcaM2sPSmEOePql1MOYSN7VgYiS3xibRYHzPAidNK8jg8dGsjDClmDjkFGB7QUiZ8s
- FMaBConDi8ZfXj6CsjUIOrjnhy9aBPb4SbJbtTTT9R75bATedWKW3/Q4CW+tiptEgNcbWOZ
- ByXxtwhJBiEkniURt4BCw==
-UI-OutboundReport: notjunk:1;M01:P0:FG5/a22NYPc=;EYOma4owrDcs/tH+4UzTeR1KJqe
- +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
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="fPUuK9Nx9H8f8vte"
+Content-Disposition: inline
+In-Reply-To: <CAJaLiFyTVXY4c+zS0RNPwCgzbzH968a2Zgo5s=AYh9y0wu800g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,35 +108,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/10/25 16:18, Tom Rini wrote:
-> On Fri, Oct 10, 2025 at 03:47:14PM +0200, Heinrich Schuchardt wrote:
->> On 10/10/25 15:44, Tom Rini wrote:
->>> This is not intended to apply directly as currently it leads to the
->>> sandbox.py (and sandbox build with clang) tests failing as the efi
->>> selftest now has 4 failures when before it had zero.
->>>
->>> Signed-off-by: Tom Rini <trini@konsulko.com>
->>
->> Why wouldn't we try to move to the current release 8.4.2?
+
+--fPUuK9Nx9H8f8vte
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Oct 10, 2025 at 01:59:43PM -0700, Tony Dinh wrote:
+> Hi Tom,
 >=20
-> My first move was to 8.4.2, which had this failure. I jumped back to
-> 7.4.5 which doesn't (so that we can move forward with newer labgrid
-> support). I then started slowly incrementing to see when the failure was
-> introduced (as it can be helpful to look at the upstream changelogs to
-> have an idea why our tests now fail) and luckily it seems to be in the
-> 8.0.x range.
+> On Fri, Oct 10, 2025 at 1:07=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
+> >
+> > On Fri, Oct 10, 2025 at 12:38:58PM -0700, Tony Dinh wrote:
+> > > Hi Tom & Simon,
+> > >
+> > > On Fri, Oct 10, 2025 at 7:28=E2=80=AFAM Tom Rini <trini@konsulko.com>=
+ wrote:
+> > > >
+> > > > On Thu, Oct 09, 2025 at 10:29:17PM -0700, Tony Dinh wrote:
+> > > >
+> > > > > Make it possible to disable CMD_PXE.
+> > > > > Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX confi=
+g.
+> > > > > In extlinux_boot(), invoke pxe utils only when
+> > > > > CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
+> > > > >
+> > > > > This patch results in about 9K reduction in image size when
+> > > > > PXE boot is disabled.
+> > > > >
+> > > > > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > > > > ---
+> > > > >
+> > > > >  boot/Kconfig             |  3 +--
+> > > > >  boot/bootmeth_extlinux.c | 18 ++++++++++--------
+> > > > >  2 files changed, 11 insertions(+), 10 deletions(-)
+> > > >
+> > > > Is some part of the symbol logic here wrong? A challenge is that "P=
+XE"
+> > > > is also where the logic to parse extlinux.conf style files came fro=
+m,
+> > > > and I thought we had split those two out. And then there's this:
+> > > >
+> > > > >
+> > > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > > index 2993cd7f9ba..403ce4c3d46 100644
+> > > > > --- a/boot/Kconfig
+> > > > > +++ b/boot/Kconfig
+> > > > > @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
+> > > > >       select CMD_PART if PARTITIONS
+> > > > >       select CMD_DHCP if CMD_NET
+> > > > >       select CMD_PING if CMD_NET
+> > > > > -     select CMD_PXE if CMD_NET
+> > > > >       select CMD_BOOTI if ARM64
+> > > > >       select CMD_BOOTZ if ARM && !ARM64
+> > > > >       imply CMD_MII if NET
+> > > > > +     imply CMD_PXE if CMD_NET
+> > > >
+> > > > This is one of the things where defaults isn't supposed to be so ea=
+sy to
+> > > > get out of. How many platforms are you wanting to then disable CMD_=
+PXE
+> > > > on to save space?
+> > >
+> > > I'm simply trying to compile out PXE for a board that I'm working on!
+> > > The only thing I need is booting with scripts on a block device. And
+> > > it looks like we have to include everything in bootstd to use it. It
+> > > seems wrong to make the image a lot larger than needed for boards that
+> > > never use a specific feature.
+> > >
+> > > I would agree about  "defaults isn't supposed to be so easy to get out
+> > > of". But in this case (and similarly in other CMD_x), CMD_PXE brings
+> > > in all dependencies for PXE including pxe_utils.
+> >
+> > So, as a preface, it's quite likely that we do need to tweak some of the
+> > Kconfig logic here. To help better understand the use case:
+> > - Does this platform have networking devices in U-Boot?
+> > - Are you wanting to support arbitrary off the shelf OS distributions?
 >=20
+> Yes to both. Networking is enabled in U-Boot, but not used for
+> booting. And it should boot various off-the-shell OS. U-Boot is on a
+> 512KB partition on SPI flash (why I want to keep u-boot image as small
+> as possible).
 
-The issue is due to a change of the sequence in which tests are running.
+This is the hard case then. The point of the options is that if you
+enable them, all of the common cases like network booting work. Without
+knowing the device itself, I'm unsure why no one would ever use the
+network to install the OS.
 
-test/py/tests/test_efi_bootmgr.py before=20
-test/py/tests/test_efi_secboot/*. With newer pytest it is running after=20
-the secure boot tests.
+I suspect you need to look for where you can change "select
+something-boot-standard" to "imply something-boot-standard" and then
+turn it off for your platform, and turn on what you want to support for
+it. It's taking the Kconfig change you proposed to start with one step
+further.
 
-Cf.
-[PATCH 1/1] test: uninstall PK after secboot tests
-https://lore.kernel.org/u-boot/20251010205514.GG298503@bill-the-cat/T/#t
+--=20
+Tom
 
-Best regards
+--fPUuK9Nx9H8f8vte
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Heinrich
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOl9ZAAKCRAr4qD1Cr/k
+CouSAPwOhNWZP46C80Su/gRcAKAcp4aUIuhPZqQ/mc+40NbXMwD/aeG4XYdyYABE
+OB+q1N1jFPaAJd+Qr2ifEK5MCG9pJw8=
+=pJtL
+-----END PGP SIGNATURE-----
+
+--fPUuK9Nx9H8f8vte--
