@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE839CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:14:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F55CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:14:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C80483FCF;
-	Fri, 10 Oct 2025 13:14:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9CD2984040;
+	Fri, 10 Oct 2025 13:14:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JO5wTN4B";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Jfeg7um7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E00A28402E; Fri, 10 Oct 2025 13:14:03 +0200 (CEST)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 68CD483F6A; Fri, 10 Oct 2025 13:14:08 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1EB383F6A
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:14:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58A7C84040
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:14:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-33082c95fd0so2503229a91.1
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:14:01 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-32ed19ce5a3so1786628a91.0
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:14:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760094840; x=1760699640; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760094845; x=1760699645; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=c3+E49RV6Twk2bJey5/yur2qI7swITuzLKD4Hv1ixtM=;
- b=JO5wTN4B1Y/8/fE4j8yqFaMyguL2H0xVWZv+ctMxneAxNQtsvWqcUixjeitrPuajDs
- HLya13jSUu4QOiLKEE0guZWYIkHB1TmX4McT6QF1uq4VG5QUaeLKUCFou7v3NY4+33Tr
- ZuZOKwnXMvJbTJB4ID9Q10Hz6iaCMPa2fME28=
+ bh=hMU8mspSgnfdiceJYStNQ87yNEV6+5OHj7OHDhCQI6s=;
+ b=Jfeg7um7ramaLTe6T75Y14Hnc+UXgmd3nGkDmKMVi/bCCWI3Hr2qYbcnXT+l0x9mpJ
+ 0BugQ3n5OQiXCkeJnnH5w86ZVSa9P3FcICytSGg/oEz8Mte60sBiUnnPfHOuvDEi1odS
+ 4cv0V1wVXE0guirvPTr9hI+9U0p729wVnGtvg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760094840; x=1760699640;
+ d=1e100.net; s=20230601; t=1760094845; x=1760699645;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=c3+E49RV6Twk2bJey5/yur2qI7swITuzLKD4Hv1ixtM=;
- b=M/kR17NeibnTwJuRWpWKuqbTrTbgDRWRTdgI5K2K9Q9SWWHuxQB0kegU8SlUvubPDx
- KrQ9Blp6XC0+/ukUNw+OU/pd69R7eEVLlyHBURYN7UxyhS/JNxeY5b+Od1fAQEUyzLd2
- 22J3ruQ+rfXHAROVsVOjMiFsTxWA6qrBn6OlSjvGPC0Syr0L76WNmk90knlm/8qlLtJm
- 6zgkelNhFtlhSSc8NEn3Kc4nFqUSZrPAPwLVpL/07iH1fVFraQFTAlCwo2G8vDIuTMwq
- 8hidd6/SBfnCuoXoLOIO3pbCpZ1Km9iQNpCBzOOOXoqeC9pbZk1sOcObQlpgba6cCnL8
- ZKaQ==
+ bh=hMU8mspSgnfdiceJYStNQ87yNEV6+5OHj7OHDhCQI6s=;
+ b=WKOsF30VF5G78BVzq9Vis26UIKaYqB+P9aMeYfSl0MMbPRvQracWlJ6MbksDX++CqF
+ eQ4vpGL/n5fXTHJz+ctAAB43evpFznu4NLSddh49PGC+LWWOdR6umrRzKW/VOXmFXDia
+ 8GfP8mcnSOW06plaMynMYqhlyTmQjaEHWjeusrW//PDkByZgcUHBkYKNBJoWKah6bLz5
+ mb/EQmwyQlPR4e/pHyAEuxdFHxfkEyhGRFHM0SJ9EBMDcmdV3TRMlpk4UCSx/SGzmNMp
+ lnvdUBLQvCdikL3GbazgEfDEXZZhDDQ+vZA1vuKyUXnszBaB4HXO+RUrPoB2DSNiell8
+ 1tbA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiYg3t/yA9Qi0m1bA2ne3vB8ZKpY29NmD/Cjf/H/YAkgV8i+xq/XOnVI7ZPjHuk2oYRK0tgP8=@lists.denx.de
-X-Gm-Message-State: AOJu0YyWWEh7jZB3p9aeVE8J9z8ZzakZPSACnPA3mY77Sb+fReO9Irrd
- cI6p0KpGujul9OZDrD+gYd9b9hiiCW+POp3I7vvephkQbIFSRi7+cXwOEcd6D2aQjsWQqPXzcBD
- DrxwRRnxikrrwRZJyejlBWCtqp2n+ph/Rj/NEA7mH
-X-Gm-Gg: ASbGncsS70HIi84sAfSHe2oaNGe/eBXgiK7odMgnt9xV6iWYrAW3R+UBPSdjCyHKuKb
- 5SyMOfMysxe6DmBYVu2pxhAm1tkTzxt8QWuZaTyXqTIr7ctBU7VRFXE/SUwmwvIz+qPwrWfuhnP
- z5umZ4YXgbKFj55HDU7qhX0e7cDFXZ5pQ+Yh1IZXx4WydMzpOY5pMVM4sjmsMh+H7XF/xla+sxI
- FgH8UKw35PH5O4q/tcxUJcPheOPI/PB
-X-Google-Smtp-Source: AGHT+IGmDTSK0vshScv3Vu+tR9Bx/pohe44eQeh0+kdOtJi0gw3UQxVPanSbYAG0ADveyq5jaKRpKUkgWNYhvSPe55Y=
-X-Received: by 2002:a17:90b:33cb:b0:330:3fb8:3885 with SMTP id
- 98e67ed59e1d1-33b513b355fmr16819672a91.18.1760094840286; Fri, 10 Oct 2025
- 04:14:00 -0700 (PDT)
+ AJvYcCW8/xkJZmaGNSxFDTI+Iqyl2sRXscy7QDvdi/XtaU/Ywetx/ZyMfjzcwny2gQrWi2n45KUEy2I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzh5UBe/N9uLVMz6yiGUnsUTiXXuhZAthcRq4oqSDSUWBSSnP4f
+ k0HSXPguTpd33UV2IEUOYac59ogdaVj5uTqZrQlqhU1PKtNM46NKD+/djN3g5sE5ybDN2Crn4jJ
+ lwz1CRZW56rqUoVwgN6b1VIjG3ngY5Y5RUDnWCoaE
+X-Gm-Gg: ASbGncs+24IoT2NVHGS/kx92TGGjYXXe+0OIK2uA5ury6vqdyyZt8iNZPU4G0sh0yPX
+ 0H+K0J1AAuARXTyuYsxX99HJ+HSX+jkfrGkb+dPViaqQSw/5+A2619CxLFdimvOMsQ9HbSkg06X
+ No0ug654qmxm4dk4CJFmb3YsTq01rbbaatxyn4jAvmBQQGTmDam7xezbuS/IQWbdCwwkBvWX8Fr
+ FgpIKvZTRUQYOQWsMAHU5Fg5/NC7LJg
+X-Google-Smtp-Source: AGHT+IFI+Q3zUfGp8j+kRi2j4qwEVG8vo/Cd2F2y5hMS7VufdCwlB0dNn5nV47I/kgFKF2Jd8retS8L0+3DQPEgy7G8=
+X-Received: by 2002:a17:90b:3e81:b0:338:2ed3:affb with SMTP id
+ 98e67ed59e1d1-33b5138e372mr13958844a91.26.1760094844898; Fri, 10 Oct 2025
+ 04:14:04 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
- <20251009-feature_sysboot_extension_board-v2-10-e09b39e54de5@bootlin.com>
-In-Reply-To: <20251009-feature_sysboot_extension_board-v2-10-e09b39e54de5@bootlin.com>
+ <20251009-feature_sysboot_extension_board-v2-15-e09b39e54de5@bootlin.com>
+In-Reply-To: <20251009-feature_sysboot_extension_board-v2-15-e09b39e54de5@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Oct 2025 12:13:15 +0100
-X-Gm-Features: AS18NWBQVxOhGrQpnI7lWC6BAxtFglDWrosMnn8q_5eo_CiVbKsTmQigB0RI54I
-Message-ID: <CAFLszTh9QRw27=e6AK_cheN+2QmvNJhSsT8zFBCt9d6LMwnULA@mail.gmail.com>
-Subject: Re: [PATCH v2 10/18] board: sandbox: Improve extension board scan
- implementation
+Date: Fri, 10 Oct 2025 12:13:28 +0100
+X-Gm-Features: AS18NWB5LDL6xYlrxH69KdbCPdpZPg2esJSox9iSX5ILN1ghunlRE3bDYWKh6XA
+Message-ID: <CAFLszTjuO6cdkd7xPaHiBbMQtKYz3JQwtN4_t_EgjMz5F8G8xA@mail.gmail.com>
+Subject: Re: [PATCH v2 15/18] boot: extension: Move overlay apply custom logic
+ to command level
 To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
@@ -99,13 +99,20 @@ X-Virus-Status: Clean
 On Thu, 9 Oct 2025 at 15:51, Kory Maincent (TI.com)
 <kory.maincent@bootlin.com> wrote:
 >
-> Enhance the extension board scanning code in sandbox with better error
-> handling and code organization.
+> The extension_overlay_cmd environment variable approach is specific to
+> the U-Boot extension_board command, while other boot flows (pxe_utils,
+> bootstd) handle overlay loading differently.
+>
+> Move the extension_overlay_cmd execution out of the core extension
+> framework to the command level. This decouples the framework from
+> command-specific behavior and prepares for future extension support
+> in other boot flows.
 >
 > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 > ---
->  board/sandbox/sandbox.c | 6 +++++-
->  1 file changed, 5 insertions(+), 1 deletion(-)
->
+>  boot/extension-uclass.c   | 68 +++--------------------------------
+>  cmd/extension_board.c     | 92 +++++++++++++++++++++++++++++++++++++++++++++--
+>  include/extension_board.h | 12 ++-----
+>  3 files changed, 98 insertions(+), 74 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
