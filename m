@@ -4,68 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D9B2CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 12:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 853CBCCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 12:40:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 227378419E;
-	Fri, 10 Oct 2025 14:33:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id C87278410C;
+	Fri, 10 Oct 2025 14:40:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="i2fBOqoT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QiF7UvRG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8E37841B8; Fri, 10 Oct 2025 14:33:52 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFB0A8410C
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 14:33:49 +0200 (CEST)
+ id 21B018419E; Fri, 10 Oct 2025 14:40:56 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CC05E83F91
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 14:40:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 1A4274E40FDA;
- Fri, 10 Oct 2025 12:33:49 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id CA6D660667;
- Fri, 10 Oct 2025 12:33:48 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id CAD39102F2216; 
- Fri, 10 Oct 2025 14:33:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760099627; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=EXJ/A9ldGOygIrsH2Pji/cn6LySeJLxMlTwylDqMZ3c=;
- b=i2fBOqoTyn+jidEQFiOq/o5DtPniw/yxt/u9YXrqnJAj7q9BEzS/Zh0f+jq5gbzfRCKyFN
- R9XcXav/N4y0NS8QOVTx1iG2PheweGff2MR+3+Qf1gTRb9fz7PYk/YNAOI6FitTxZFEdzr
- 4Xpj5DhEd8fyEKl31WUUyBRclulMf6vt3bpLqI/W6kP55iB8bnIFobr152zN/MxNZNvImJ
- q+Xx166J8j3PnWO89nR50/JQf8ojhAUu9FBaV7CB5iTKQn7iIT8IYvSRI5kxwqoNlthc9Y
- zep1hXa2iyEJliS8crdCbaAZtBoK6+iOgG4/2/SNqdBoQECuVa1PiVglXGlyTA==
-Date: Fri, 10 Oct 2025 14:33:37 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede
- <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, Stefano Babic
- <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
- Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 02/18] boot: Move extension board support from cmd/
- to boot/
-Message-ID: <20251010143326.4d4994f1@kmaincent-XPS-13-7390>
-In-Reply-To: <CAFLszTiM+HwkeT5Fi_fQchqpLxyHZ+-_Ykqs4b4OCBWWyvW30Q@mail.gmail.com>
-References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
- <20251009-feature_sysboot_extension_board-v2-2-e09b39e54de5@bootlin.com>
- <CAFLszTiM+HwkeT5Fi_fQchqpLxyHZ+-_Ykqs4b4OCBWWyvW30Q@mail.gmail.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59ACemtu316769;
+ Fri, 10 Oct 2025 07:40:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1760100048;
+ bh=rvzNxLh2yMzeaJuyTd04RPaWpZRLcihIaquzoaGbRQk=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=QiF7UvRGR+hwo091WORq/M33aqz77gM2EL62TVnzOTyLG0LDK4P2sR8tSYs/EiNTN
+ hLGM0LAiePxLZaXNu3iK2OP6igmsL1+L67/DjPVYGqW2mChzRu3jKlaXXR4KcqVJFy
+ ohk7CNJS1HqrJjOye70/TDeCWeSLX1mqMGf4PhRE=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59ACemfJ1676613
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 10 Oct 2025 07:40:48 -0500
+Received: from DLEE201.ent.ti.com (157.170.170.76) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
+ Oct 2025 07:40:47 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 10 Oct 2025 07:40:48 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59ACek9q1883808;
+ Fri, 10 Oct 2025 07:40:47 -0500
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset="UTF-8"
+Date: Fri, 10 Oct 2025 18:10:46 +0530
+Message-ID: <DDENE6PUEYC5.336FBXFRUSHM4@ti.com>
+CC: <u-boot@lists.denx.de>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
+ <devarsht@ti.com>, <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v9 05/11] arm: armv8: mmu: add mem_map_fix_dram_banks
+From: Anshul Dalal <anshuld@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Anshul Dalal
+ <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251010055340.2574743-1-anshuld@ti.com>
+ <20251010055340.2574743-6-anshuld@ti.com>
+ <CAC_iWjJGbmO9-EDN4HQ7EP1ee=6ZPd_8M8Sgv9Pkq0=orUU5-A@mail.gmail.com>
+In-Reply-To: <CAC_iWjJGbmO9-EDN4HQ7EP1ee=6ZPd_8M8Sgv9Pkq0=orUU5-A@mail.gmail.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,41 +86,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 10 Oct 2025 12:13:05 +0100
-Simon Glass <sjg@chromium.org> wrote:
+On Fri Oct 10, 2025 at 5:29 PM IST, Ilias Apalodimas wrote:
+> On Fri, 10 Oct 2025 at 08:53, Anshul Dalal <anshuld@ti.com> wrote:
+>>
+>> For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
+>> the MMU as part of mmu_setup.
+>>
+>> But since the exact configuration of memory banks might not be known at
+>> build time, many platforms such as imx9, versal2 etc. utilize
+>> gd->bd->bi_dram to configure the static map at runtime.
+>>
+>> Therefore this patch adds a new API mem_map_fix_dram_banks that modifies
+>> the static map in a similar way. Allowing the caller to map all dram
+>> banks by just passing the index to last entry in their mem_map and it's
+>> length.
+>>
+>> Reviewed-by: Dhruva Gole <d-gole@ti.com>
+>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>> Tested-by: Wadim Egorov <w.egorov@phytec.de>
+>> ---
+>>  arch/arm/cpu/armv8/cache_v8.c    | 28 ++++++++++++++++++++++++++++
+>>  arch/arm/include/asm/armv8/mmu.h | 10 ++++++++++
+>>  2 files changed, 38 insertions(+)
+>>
+>> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8=
+.c
+>> index 74c78cb2fb0..cdf17d5f396 100644
+>> --- a/arch/arm/cpu/armv8/cache_v8.c
+>> +++ b/arch/arm/cpu/armv8/cache_v8.c
+>> @@ -58,6 +58,34 @@ static int get_effective_el(void)
+>>         return el;
+>>  }
+>>
+>> +int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 at=
+trs)
+>
+> Nit, but perhaps mem_map_from_dram_banks() is a better name?
+>
 
-> Hi Kory,
->=20
-> On Thu, 9 Oct 2025 at 15:50, Kory Maincent (TI.com)
-> <kory.maincent@bootlin.com> wrote:
-> >
-> > Relocate extension board support from cmd/ to boot/ directory in
-> > preparation for converting the extension framework to use UCLASS.
-> > Also improve code style by applying reverse Christmas tree ordering.
-> >
-> > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
-> > ---
-> >  MAINTAINERS               |  1 +
-> >  boot/Kconfig              |  3 ++
-> >  boot/Makefile             |  1 +
-> >  boot/extension.c          | 97
-> > ++++++++++++++++++++++++++++++++++++++++++++++ cmd/Kconfig             =
-  |
-> > 3 -- cmd/extension_board.c     | 99
-> > ++--------------------------------------------- include/extension_board=
-.h |
-> > 16 ++++++++ 7 files changed, 122 insertions(+), 98 deletions(-) =20
->=20
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->=20
-> I didn't know the name for this, but I like this style too. Just in
-> time for Christmas!
+Yeah, that's more descriptive of the actual functionality. Will fix in
+the next revision.
 
-Ahah I usually write it xmas tree but it seems my brain has written it
-differently.
+>> +{
+>> +       unsigned int i;
+>> +       int ret =3D fdtdec_setup_memory_banksize();
+>> +
+>> +       if (ret) {
+>> +               printf("%s: Failed to setup dram banks\n", __func__);
+>> +               return ret;
+>
+> We already include <log.h>, so I prefer using log_err() etc.
+>
 
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Sounds good to me, will fix.
+
+Thanks for the review!
+Anshul
