@@ -4,69 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9DEECCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 13:46:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB03ECCD18A
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 13:47:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF91A845BA;
-	Fri, 10 Oct 2025 15:45:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 37D11842C3;
+	Fri, 10 Oct 2025 15:47:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NmPk2OXT";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="JVAvPkKh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 422CB845B4; Fri, 10 Oct 2025 15:45:00 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B24578445C
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 15:44:57 +0200 (CEST)
+ id E64EA843B6; Fri, 10 Oct 2025 15:47:19 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D098842C2
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 15:47:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59ADiprq256451;
- Fri, 10 Oct 2025 08:44:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760103891;
- bh=2VaTe6k7cfi0AwDxVrv59ItbPVB7txv22Y69K/oH6eg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=NmPk2OXTrLhKpiKhhV9sYDy+f0Woa2/APgrJJZFBRGSxyXD8WF88CQ1XRblW9OiIS
- j68AbLBZHcmIGv5K2aCz/t5R5UfC5oZrcSg+QzTGkJsWpRas/PHjM0FF1wZo/LhKfO
- c/MNyhpqSLINZHMEQCDkM0NXCe3w9Cq7m9BSAYx4=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59ADip2i2237655
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 10 Oct 2025 08:44:51 -0500
-Received: from DLEE210.ent.ti.com (157.170.170.112) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
- Oct 2025 08:44:50 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE210.ent.ti.com
- (157.170.170.112) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 08:44:50 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59ADin8I1722208;
- Fri, 10 Oct 2025 08:44:50 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
- <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
- <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
- <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v10 10/11] mach-k3: add carveouts for TFA and optee
-Date: Fri, 10 Oct 2025 19:14:16 +0530
-Message-ID: <20251010134424.3835757-11-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251010134424.3835757-1-anshuld@ti.com>
-References: <20251010134424.3835757-1-anshuld@ti.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 689FC3F7CD
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:47:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1760104037;
+ bh=kWiLNACgocLZeUOAjpdazg6w9sAv7cWPLBh11p9m4JI=;
+ h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+ In-Reply-To:Content-Type;
+ b=JVAvPkKhbjtsp9p5/SIewDmn7UURc5O7Hcx2hw85A7tsbX5lAORMHgW0FUuhZKDlo
+ Ff5gmu+98Lh3ZJD+XlfCitgBvA5tD+XgGupEAL8VfpvLvWYJHV9EQlCwr9Y/GajMpy
+ F/ijQm4LmmnbPXXpKhSgWyhZ1DEb+y6Gze5bvDTk0xF0ikTo0OxxTCuw2/FzSq27mA
+ kSBS2GKI5CDRROTvLSZl+DqEZZkovGD050QFvBpfyADvDmx7+TNo/FVFuZZ8C686Xb
+ XWQHjCV2+E1nJ7++ZtJnbgKNnL5kzdLu+bXaxCRpHROp3iGm5HQlhPQV32lNh7/vAC
+ Tr+7Kh0gNdoajYeM81PA2YPUkXcGdxVSLkRuj8J1MlNAq7/FP5wTHydfTllgf/VzQp
+ 8FhjePEJ3KK6JXEvG9RBEbXXBFRox/Pnq8wLjKZYNuCsU9HLt6TyFl9sJVZvDfl+zL
+ WHGVvzh1kHEDROqcoxSZr+dKPZniyrHN2xcIdM8YaCkOVy8cCufbxTRfoQDxTsjrH4
+ Wd/lVsAMHTkvFuYjQZPw1pl4d7nXBC1wwceXxyLeLRKmLqrBOqNleCVSYzCtdjc6oO
+ NfIob2fqyMDMuLjoPESKRGoWamjTlcoc1osDnvzd4lZMb2zHKIfy5JW6ID43OVdC2P
+ aT15Or7h2nKgG/PYL/NVjU7Y=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3ed9557f976so1848441f8f.3
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 06:47:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760104037; x=1760708837;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:user-agent:mime-version:date:message-id:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kWiLNACgocLZeUOAjpdazg6w9sAv7cWPLBh11p9m4JI=;
+ b=GeKeZRe60I46nkIQ2bI4K23WhKBVAfDNT4u4F7mNkDURfb5Q5gUG26zkCvhaWsDqn3
+ Wx6EIvtoVAeOZhdH7FjWxNtbfAdsrUasBtRkJZ9c42AlnHINyWU4g4D19QgNXa42hGr9
+ NXPC62jFITNxb3tlf57qy6TZOizXzSuAejsaDUAO94w7+L0BpHmSUZZaDFvqYmFZDndD
+ COSkR6KDXbY9Plhri1eIS95/LvDrJfUivCgVaH0vU/TWUGkSBp3YVLtybYy4sZWvX6sK
+ EPLu0gCW4dNlvWPuLI+xhg+oeMDJYPjAISusgNqH6tci/upiyzL5rOyPjBOUJJekCKJ1
+ iA8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWYoPq3Aju0S8lT3Zl0JU3BdgGGiPvOSAL2qo2wQqYx1YP1mXlyRkBlJ0bTcHEAYRjdD/WMOeI=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywhmlf+vcSm+9qANXBXw/SRmjXZ8bgAvaqGDcolrrauoD8w097W
+ pz0eF3C4siL4kR8lM/HUCoqEYCOo9+2r5zAyaMGnZqM6xJ6hx/2qjZoTUpGh4PQgirdanrITmvY
+ 2nXsjSjmdUJ1Lf4pcy3KbFaxMIjQS2YNS6EPDo1U89M+96s8P3TId+RaMpU/eY9UD+pKp9d8=
+X-Gm-Gg: ASbGncsquYZvsw8m33x1iLq/JN8kW6FBQsJ/aNNclBA+45+myaE2KULcOdt+HmTkAxL
+ m11SCmtHke2La1bzNWG1FLvN1C/cAfmyOFcZ3S1FG3FQRidtJlNyS6VrKMcJhfUx+pp4w/jDC6K
+ VaOuF09nEGyDmmSYc9AwB4t9/Y7xI0pAnRLnvBFoqehbHbsoxJk1an+0thTBbbpdci4OGmoMzvR
+ p8WiG2pSqEUIMqH1PUk2kY80jH+szKERAfEFsWOQADVQ13Hgzu760aqXMPJ+jlXgSFfj26WmBtS
+ dpUzR4bVhAUyGxHNl3Y6wJ6vxeRfMjLFyu+0UbfuegiwJYik1onraAZ9/W0txlKuFHwhcE8L4z+
+ sWeCfwJ3oDT01sx3w7v2pO5U4iwxSLkg=
+X-Received: by 2002:a05:6000:2408:b0:414:6fe6:8fbd with SMTP id
+ ffacd0b85a97d-4266e8de55dmr7517101f8f.54.1760104036922; 
+ Fri, 10 Oct 2025 06:47:16 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHCSvuOxxUbcx20w1eDY6NPQcpIAFJay3HpsNYaIlAP33mffq7WfK9GkmLycNxUfp6NQdj/ew==
+X-Received: by 2002:a05:6000:2408:b0:414:6fe6:8fbd with SMTP id
+ ffacd0b85a97d-4266e8de55dmr7517083f8f.54.1760104036555; 
+ Fri, 10 Oct 2025 06:47:16 -0700 (PDT)
+Received: from [192.168.103.116]
+ (dynamic-046-114-109-147.46.114.pool.telefonica.de. [46.114.109.147])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46fb492e6ddsm55860055e9.0.2025.10.10.06.47.15
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Oct 2025 06:47:15 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+X-Google-Original-From: Heinrich Schuchardt <xypron.debian@gmx.de>
+Message-ID: <d407b3a6-3945-416f-95fa-160da63ca8fb@gmx.de>
+Date: Fri, 10 Oct 2025 15:47:14 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFH DO NOT APPLY] test/py: Update to pytest 8.0.2
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <20251010134330.1094378-1-trini@konsulko.com>
+ <20251010134410.1094470-1-trini@konsulko.com>
+Content-Language: en-US
+In-Reply-To: <20251010134410.1094470-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,70 +119,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-K3 platforms have reserved memory regions for TFA and OPTEE which should
-be unmapped for U-Boot.
+On 10/10/25 15:44, Tom Rini wrote:
+> This is not intended to apply directly as currently it leads to the
+> sandbox.py (and sandbox build with clang) tests failing as the efi
+> selftest now has 4 failures when before it had zero.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-Therefore this patch adds the necessary fdt fixups to properly set the
-load address for TFA/OPTEE and unmaps both by mmu_unmap_reserved_mem.
+Why wouldn't we try to move to the current release 8.4.2?
 
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
-Tested-by: Wadim Egorov <w.egorov@phytec.de>
----
- arch/arm/mach-k3/common.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+For reference Ubuntu 25.10 uses 8.3.5.
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index f734f10b605..f32edf64fbb 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -31,6 +31,7 @@
- #include <dm/uclass-internal.h>
- #include <dm/device-internal.h>
- #include <asm/armv8/mmu.h>
-+#include <mach/k3-common-fdt.h>
- #include <mach/k3-ddr.h>
- 
- #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
-@@ -263,6 +264,7 @@ void board_prep_linux(struct bootm_headers *images)
- 
- void enable_caches(void)
- {
-+	void *fdt = (void *)gd->fdt_blob;
- 	int ret;
- 
- 	ret = mem_map_from_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
-@@ -273,6 +275,30 @@ void enable_caches(void)
- 
- 	mmu_setup();
- 
-+	if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-+		ret = fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
-+					 0x80000);
-+		if (ret)
-+			printf("%s: Failed to perform tfa fixups (%s)\n",
-+			       __func__, fdt_strerror(ret));
-+		ret = mmu_unmap_reserved_mem("tfa");
-+		if (ret)
-+			printf("%s: Failed to unmap tfa reserved mem (%d)\n",
-+			       __func__, ret);
-+	}
-+
-+	if (CONFIG_K3_OPTEE_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-+		ret = fdt_fixup_reserved(fdt, "optee",
-+					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
-+		if (ret)
-+			printf("%s: Failed to perform optee fixups (%s)\n",
-+			       __func__, fdt_strerror(ret));
-+		ret = mmu_unmap_reserved_mem("optee");
-+		if (ret)
-+			printf("%s: Failed to unmap optee reserved mem (%d)\n",
-+			       __func__, ret);
-+	}
-+
- 	icache_enable();
- 	dcache_enable();
- }
--- 
-2.51.0
+Best regards
+
+Heinrich
+
+> ---
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> ---
+>   test/py/requirements.txt | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/test/py/requirements.txt b/test/py/requirements.txt
+> index 672a58ae3584..4eefe374435c 100644
+> --- a/test/py/requirements.txt
+> +++ b/test/py/requirements.txt
+> @@ -1,5 +1,5 @@
+>   filelock==3.0.12
+>   pycryptodomex==3.21.0
+> -pytest==7.4.4
+> +pytest==8.0.2
+>   pytest-xdist==2.5.0
+>   FATtools==1.0.42
 
