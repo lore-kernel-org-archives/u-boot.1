@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F268CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 10:35:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1287CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 10:36:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 915C583F85;
-	Fri, 10 Oct 2025 12:35:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E25A83FB0;
+	Fri, 10 Oct 2025 12:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X6PPegJ5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GzR6JG/w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53B0183FA8; Fri, 10 Oct 2025 12:35:34 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 523B983FB5; Fri, 10 Oct 2025 12:36:09 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FB0F83F69
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:35:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8094583F69
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:36:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-637dbabdb32so3638566a12.2
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 03:35:32 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-63963066fb0so3797555a12.3
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 03:36:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760092532; x=1760697332; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760092567; x=1760697367; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4KFL7DboHUzOxeN6sDdAdBZZZGP4ynWFriZA+nQ+Lk8=;
- b=X6PPegJ5qeB5feJaBPapV8Y8wN713tw4/DJrkzIfLc0jeowTO0T2ip98Zh4T+g1jOY
- DIIiAYVrzuKKFYIp+aIEhJaX0KwOwiVodwZul5tE0g4sumb2fc+OnVycWqihxQevqWuT
- UXv3XdhGtVsFFXYK4NM1ojoSCH0ZVNudGJoU4=
+ bh=JQ9fXeCdRNBD2MvrCymSrbrU0O6xW7lQgmOtLkW6Gv4=;
+ b=GzR6JG/wp5EFee46Yp6udGW1OuGGEByj8cI9OgVmcLh5JvHfWNxI5wIpSzgHGuuf2N
+ 74y9WDDJzzz8gRcvyC354BEfpGWdgUtud3Ef2B/4rbSEsO7w/vL7BwZWkf2nth9w90ck
+ yq6DfzBjQUApcA7/JFk2Bj1jAw38umep5ZNNw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760092532; x=1760697332;
+ d=1e100.net; s=20230601; t=1760092567; x=1760697367;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4KFL7DboHUzOxeN6sDdAdBZZZGP4ynWFriZA+nQ+Lk8=;
- b=j+jRFn+uPqGXJSC9UXSHID6xmYmhAbZqureIGsJ2ikR569fgnuEtEMAPxZTiwEcDGO
- 5ZFmVRrcGKneEXcDGCszmlxs+BcMjba7uHBn8zDVMENaWu+ONM92qcjWiCDUjkQWkY21
- xUnSqmRj0ceUItKDKQ9zRL9EejrF6dUOPREakt23GtCdyO++yesmIrFBcNo8IBJn+kkr
- +Q2c7wZMwTe1H/B8fIDvNed/kSLU3PoDgqDVt97S+F84VMnoj80MVkczNh0ES2RJbyIP
- VEFhkh7a6U0EFWOQCYTq1yIl08Eal1YjDaQzmhc5bDl+X71OsyV4WooUiIJattxIEjpO
- zlVw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDknCf3XMhUhDOLSUU0SdeyKAEGsUTqc9lVkw+9gFZWOM8Y7PcyQf+y+Mr9CjVu7sffsskLWE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxiGqvPmr4W9/0/CM/elHg9PoL2R2WdmL+X5Lu67oAetbbTq4wf
- 27H/DX+qFVfpvlyTBAyCIuBUxEpESZsB1vsBHQXzCv/TqPa+NST3uTY4BiNfGLPRdsoAFOSJmmA
- vIdB7OmEEbBPHKsKT7hRP55x5AA9CK8SzdN5qqMvS
-X-Gm-Gg: ASbGncs/psuPtbzt35yAQqgxN2R7/wtRcjNibZYH24vyJt0AOW1PuSSoJ6NhSFGfrpJ
- hNKHpK2h+PcUcwRI1nI/f5QE/A2AqVqQTNTOv3CG35oucSIrkLPv3iQOIV50mpsHfzvMyycZHLd
- P33SGhcDJle5+jT+KQlgweEFvNJyrhG7e225E7be9+dYwBI651aOBCipbEH9MuQiFxe/PkIoQTZ
- QjPbJAB4LXXroX8Ujejm79AnQ6oEXBK
-X-Google-Smtp-Source: AGHT+IHcDjrWezDVfMgFl/k2Qkf1Ki2gkbZjj9LhXMe4ORDt1giGMqS/ZUPevDuCQWGEPtEg/ptz8hByYIrtzf2R5y0=
-X-Received: by 2002:a05:6402:1ed2:b0:639:d9de:3c59 with SMTP id
- 4fb4d7f45d1cf-639d9de3ddamr9047142a12.5.1760092531735; Fri, 10 Oct 2025
- 03:35:31 -0700 (PDT)
+ bh=JQ9fXeCdRNBD2MvrCymSrbrU0O6xW7lQgmOtLkW6Gv4=;
+ b=B7HXg0r1+fARa4ZdUd7Q4TStZuPgNY04xPfaHWcXPMZDXyq3KQ6INvDCvvExgDLZlW
+ DkBvwReCgI/NojRNSQS/NmjRJHI4X4yuAPCg2aKcpUi3zVWYQYb7NcteEkziM0rzljj+
+ 2wtzZsrFUf7dVHXsEo0dJ6D8AuoufYvlcgD4JIaRkoRIacLGP3q8ML1AH9FNPiuaqWPa
+ dqpMv8JQ1ULReHvIGxC1ed5qaUHXoA7ktorQi54+SU10w/TrMKaKwveyMdwscqMzdk80
+ cd2lP6osBu7OTpzSWhOqBy/7kuB1aeOSCnJCB95Zk/cKq29rrsGvpxD37xngGq4sbTKl
+ xgAA==
+X-Gm-Message-State: AOJu0Yy1TDFckTybg8SUnpWUnwKwiH2gUiyJ6co4jdWXeFXf4DnZPDMm
+ fML6Cy5Yke6qish5vysQTIUVK4GPYyyn/VqwqNuBSyPqqgXasyWhkQzpznhG0BPL8Q8JLEsL+7m
+ nkbYCq0JUt8tNYCjgcbxISSyrsYPBONga3+5FXhC5
+X-Gm-Gg: ASbGncvyXJPm+QtdUhnUgsOfVL+gyronzswtkDiIwuH/CBiMfLC91sJmBXnjZKaHYJP
+ JhhtJAAr95cVUdH9kYWvxzJaRsMoqtF8ZmyivtWq/qmxBH1GAlHW1Gk8MnILXGPebQuh+X0VCQQ
+ d/uwvf5X29SKxo0+tgR/oJc7Vq96jRCvl75AgL485VfZxyj4Utx2lx9qpcfwPGwySYtWGndhMNI
+ iaqLAK997WgAKGqjO+zFuTiSN+PkyMz
+X-Google-Smtp-Source: AGHT+IFn1K8L7aJYgvoXKlHjm3+obRN8HmocL41IklsKBhbnPE9pVUMha5QJ2u5HspyKV9Tugr2rVJ/38nQBnuVv190=
+X-Received: by 2002:a05:6402:5241:b0:638:d495:50a7 with SMTP id
+ 4fb4d7f45d1cf-639d5b8b694mr11214138a12.16.1760092566984; Fri, 10 Oct 2025
+ 03:36:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251010053056.32495-1-mibodhi@gmail.com>
-In-Reply-To: <20251010053056.32495-1-mibodhi@gmail.com>
+References: <20251009092959.260121-1-sjg@chromium.org>
+ <20251009092959.260121-3-sjg@chromium.org>
+ <20251009172428.GP298503@bill-the-cat>
+In-Reply-To: <20251009172428.GP298503@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Oct 2025 11:35:17 +0100
-X-Gm-Features: AS18NWA3jAODmEnrwvNLkkV-HCjznkcpGaKEPwHCWymgkzsZw5uhA9l8mxIr4v8
-Message-ID: <CAFLszTj5OAohhe6WtANXg+1h9VKUWASj7EUDzvPLdvXDXPi=+A@mail.gmail.com>
-Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, 
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>, 
- Peter Robinson <pbrobinson@gmail.com>
+Date: Fri, 10 Oct 2025 11:35:54 +0100
+X-Gm-Features: AS18NWD_qS_Qo_tMeJEZGm7R3WWfDheBdlSRl_LDF6yNSA-Hk3FiLie9nGWuFfs
+Message-ID: <CAFLszThKqdoRwqSbazWgdw27q9RxJorTwkLmRzZ9FAV48S7gdg@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] boot: Move obtaining the label into a common file
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Moritz Fischer <moritzf@google.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,86 +95,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
+Hi Tom,
 
-On Fri, 10 Oct 2025 at 06:31, Tony Dinh <mibodhi@gmail.com> wrote:
+On Thu, 9 Oct 2025 at 18:24, Tom Rini <trini@konsulko.com> wrote:
 >
-> Make it possible to disable CMD_PXE.
-> Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX config.
-> In extlinux_boot(), invoke pxe utils only when
-> CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
+> On Thu, Oct 09, 2025 at 03:29:53AM -0600, Simon Glass wrote:
 >
-> This patch results in about 9K reduction in image size when
-> PXE boot is disabled.
+> > The 'bootflow list' command supports looking at the EFI device-path when
+> > available. Move this piece into a common function so it can be used
+> > elsewhere.
 >
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
->
->  boot/Kconfig             |  3 +--
->  boot/bootmeth_extlinux.c | 18 ++++++++++--------
->  2 files changed, 11 insertions(+), 10 deletions(-)
->
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 2993cd7f9ba..403ce4c3d46 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
->         select CMD_PART if PARTITIONS
->         select CMD_DHCP if CMD_NET
->         select CMD_PING if CMD_NET
-> -       select CMD_PXE if CMD_NET
->         select CMD_BOOTI if ARM64
->         select CMD_BOOTZ if ARM && !ARM64
->         imply CMD_MII if NET
-> +       imply CMD_PXE if CMD_NET
->
->  config BOOT_DEFAULTS
->         bool  # Common defaults for standard boot and distroboot
-> @@ -575,7 +575,6 @@ config BOOTMETH_CROS
->
->  config BOOTMETH_EXTLINUX
->         bool "Bootdev support for extlinux boot"
-> -       select PXE_UTILS
->         default y
->         help
->           Enables support for extlinux boot using bootdevs. This makes the
-> diff --git a/boot/bootmeth_extlinux.c b/boot/bootmeth_extlinux.c
-> index 921d721a27b..ceac41a1370 100644
-> --- a/boot/bootmeth_extlinux.c
-> +++ b/boot/bootmeth_extlinux.c
-> @@ -188,14 +188,16 @@ static int extlinux_boot(struct udevice *dev, struct bootflow *bflow)
->
->         plat = dev_get_plat(dev);
->
-> -       ret = pxe_setup_ctx(&ctx, &cmdtp, extlinux_getfile, &info, true,
-> -                           bflow->fname, false, plat->use_fallback);
-> -       if (ret)
-> -               return log_msg_ret("ctx", -EINVAL);
-> -
-> -       ret = pxe_process(&ctx, addr, false);
-> -       if (ret)
-> -               return log_msg_ret("bread", -EINVAL);
-> +       if (IS_ENABLED(CONFIG_BOOTMETH_EXTLINUX_PXE)) {
-> +               ret = pxe_setup_ctx(&ctx, &cmdtp, extlinux_getfile, &info, true,
-> +                                   bflow->fname, false, plat->use_fallback);
-> +               if (ret)
-> +                       return log_msg_ret("ctx", -EINVAL);
-> +
-> +               ret = pxe_process(&ctx, addr, false);
-> +               if (ret)
-> +                       return log_msg_ret("bread", -EINVAL);
-> +       }
+> The point of this was to enable the show_bootflow->bootflow_show chnage,
+> so should be dropped.
 
-But if you disable that, what use is the extlinux bootmeth?
+OK.
 
 >
->         return 0;
->  }
-> --
-> 2.47.3
+> > Use 'usb' instead of 'usb_mass_storage' for usb so that it fits in the
+> > column space.
+> >
+> > This updates the output from 'bootflow list'.
 >
-> base-commit: 7e1456a5f62fae19012beda3750aab1e21284fbf
-> branch: master
+> And this is unrelated and should be its own patch. Wikipedia says USB
+> MSC or UMS are the common short forms for USB Mass Storage devices, and
+> we should use one of them to have the output be more precise (since we
+> support USB networking devices for example).
+
+Ok I can move it into its own patch.
+
+Are you wanting this to say 'ums' instead of 'usb' ? Will anyone know
+what that means?
+
+Re the second point, at least in U-Boot a USB Ethernet device shows as
+'ethernet', i.e. the interface doesn't matter. We don't have logic to
+look a level deeper, at present.
 
 Regards,
 Simon
