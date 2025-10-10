@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8276CAC5BB
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5834BCCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:55:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22219841EF;
+	by phobos.denx.de (Postfix) with ESMTP id 621908421A;
 	Fri, 10 Oct 2025 07:54:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pi4aZNwB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o4cVKFgb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14EFF84214; Fri, 10 Oct 2025 07:54:11 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 219B78402E; Fri, 10 Oct 2025 07:54:11 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF2B6841F2
+ by phobos.denx.de (Postfix) with ESMTPS id C915A841EF
  for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:54:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
 Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5s4A9248369;
- Fri, 10 Oct 2025 00:54:04 -0500
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5s2Kj177133;
+ Fri, 10 Oct 2025 00:54:02 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760075644;
- bh=bOeadQkXKPJ3FbdGHkEWRNFKY0BtH2zurWretIqUq7Q=;
+ s=ti-com-17Q1; t=1760075642;
+ bh=l6qZlmcOi55gCA0oan7hzlsnvLajOfBHA4vAb6iiHLk=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Pi4aZNwB85JT38bLH6pKX4R9DlU9hDiDcIEcQmhe9yzINA6ogeEzZNsQDPDY+yj1O
- YHOFv8jcdjYcVY/0zxVDuz5mV1Y6Ct1X9GvUvByhjIQWCDR9jyR2B2715TFsy8H+gL
- qNaAn1GW2FJlDQFvAcnYakPd9T8yIz0C9mA5wxbY=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5s47k1458395
+ b=o4cVKFgbciUOtml/4x8ntLanJ5ZQc1b5vyGPP4WP+BmKTBLWB60Z+COGNULBvRaOj
+ m8AHQjltt7CD+9cw6qfQWsuTdBQbUs/RzwiuMxEuLCMaAtufwFN6gXQGXSFDZ1t7Op
+ M4tOiO6cOxuneO6sKc3HQ4z61Kc+3vq8wkIJl7B8=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5s2pl1458326
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 10 Oct 2025 00:54:04 -0500
-Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 10 Oct 2025 00:54:02 -0500
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
- Oct 2025 00:54:04 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
- (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2025 00:54:02 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 00:54:04 -0500
+ Transport; Fri, 10 Oct 2025 00:54:02 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5s36N1408265;
- Fri, 10 Oct 2025 00:54:03 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5s1Tx1408174;
+ Fri, 10 Oct 2025 00:54:01 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,9 +57,9 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v9 11/11] arm: mach-k3: reserve space for page table entries
-Date: Fri, 10 Oct 2025 11:23:37 +0530
-Message-ID: <20251010055340.2574743-12-anshuld@ti.com>
+Subject: [PATCH v9 10/11] mach-k3: add carveouts for TFA and optee
+Date: Fri, 10 Oct 2025 11:23:36 +0530
+Message-ID: <20251010055340.2574743-11-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010055340.2574743-1-anshuld@ti.com>
 References: <20251010055340.2574743-1-anshuld@ti.com>
@@ -83,28 +83,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the memory map configuration being done dynamically, reserve extra
-space during U-Boot relocation to ensure we have enough for the fixups.
+K3 platforms have reserved memory regions for TFA and OPTEE which should
+be unmapped for U-Boot.
+
+Therefore this patch adds the necessary fdt fixups to properly set the
+load address for TFA/OPTEE and unmaps both by mmu_unmap_reserved_mem.
 
 Reviewed-by: Dhruva Gole <d-gole@ti.com>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/mach-k3/arm64/arm64-mmu.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/arm/mach-k3/common.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
 
-diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
-index 479451452a2..f999af143fb 100644
---- a/arch/arm/mach-k3/arm64/arm64-mmu.c
-+++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
-@@ -41,3 +41,8 @@ struct mm_region k3_mem_map[K3_MEM_MAP_LEN] = {
- };
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index 581a7246630..bba359b8bde 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -31,6 +31,7 @@
+ #include <dm/uclass-internal.h>
+ #include <dm/device-internal.h>
+ #include <asm/armv8/mmu.h>
++#include <mach/k3-common-fdt.h>
+ #include <mach/k3-ddr.h>
  
- struct mm_region *mem_map = k3_mem_map;
+ #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
+@@ -263,6 +264,7 @@ void board_prep_linux(struct bootm_headers *images)
+ 
+ void enable_caches(void)
+ {
++	void *fdt = (void *)gd->fdt_blob;
+ 	int ret;
+ 
+ 	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
+@@ -273,6 +275,30 @@ void enable_caches(void)
+ 
+ 	mmu_setup();
+ 
++	if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
++		ret = fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
++					 0x80000);
++		if (ret)
++			printf("%s: Failed to perform tfa fixups (%s)\n",
++			       __func__, fdt_strerror(ret));
++		ret = mmu_unmap_reserved_mem("tfa");
++		if (ret)
++			printf("%s: Failed to unmap tfa reserved mem (%d)\n",
++			       __func__, ret);
++	}
 +
-+u64 get_page_table_size(void)
-+{
-+	return SZ_128K;
-+}
++	if (CONFIG_K3_OPTEE_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
++		ret = fdt_fixup_reserved(fdt, "optee",
++					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
++		if (ret)
++			printf("%s: Failed to perform optee fixups (%s)\n",
++			       __func__, fdt_strerror(ret));
++		ret = mmu_unmap_reserved_mem("optee");
++		if (ret)
++			printf("%s: Failed to unmap optee reserved mem (%d)\n",
++			       __func__, ret);
++	}
++
+ 	icache_enable();
+ 	dcache_enable();
+ }
 -- 
 2.51.0
 
