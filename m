@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AC16CAC5BB
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 10:36:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 351B9CCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 10:59:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FF1683FB0;
-	Fri, 10 Oct 2025 12:36:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6E9B383F69;
+	Fri, 10 Oct 2025 12:59:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sl/eKYu4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HBdBSbAP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D3C83FC9; Fri, 10 Oct 2025 12:36:36 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 78D0783F6A; Fri, 10 Oct 2025 12:59:54 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DB2F83F69
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:36:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 434B283F59
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:59:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-639fe77bb29so2735129a12.1
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 03:36:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-46e384dfde0so18287085e9.2
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 03:59:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760092594; x=1760697394; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HcQjc7s3L/klzs6MvpjFrW9gvlkJ6j80WHNKCn6LT5Y=;
- b=Sl/eKYu4hJGub499iROBOcFQprBEOR2uvuXiaPyHoO57cDLKGmgaMQwpsjamM2wRvx
- x7O/DhsZqYd26ksLRFeaH56+lINT4M7UcgSoB3nDEmiYOmIxyWMQJ2SY4w1lYHYgkGRf
- +HUooHyU571Zv562Qavza2knLGtxnDqAdoSuY=
+ d=linaro.org; s=google; t=1760093992; x=1760698792; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SJg5d2gXAWMCE3jzrT/fEVfy4yFR4IjB/qFKV2UOVj0=;
+ b=HBdBSbAPxTDEnNXYKmlwglTvkS6wTUFfl0tBAI03z5FQGrdGDV/knHII48l9fkI2s8
+ e7VgJ0jXudZyBnbMU82pWMYmtB3ZlQl5b03vRKzA83RW04lgbCw2XdMdSuRPXdARvd9E
+ 8AhdP/mr5hMQwmrvqJsZHWKRERQOh81/hHWvAR5Cd5MhodiF8BrrAeo0KYrPcQY0xS7d
+ SYDNc50Sic4fVtskEb4dSlPKCI96vXqBpcKgDoH7gcrEQ9RWizIZ4uHpgjWhtsRoRxba
+ dUJqROucJdO4O+DWZNmXhAjLyG38RwS+syNyfBLquLvHMq9lqqba8rp00tJ0kbRd6len
+ +Pvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760092594; x=1760697394;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1760093992; x=1760698792;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HcQjc7s3L/klzs6MvpjFrW9gvlkJ6j80WHNKCn6LT5Y=;
- b=xOwv34zBdF7ZZzvFzeWWiQ50dz8bmzDV6rqI+XZEkqTO3x95wO6a+Kr6k6LtWIYdzP
- zkOuatXAOA2jASlSNfLppRXXrnTAVkdpNH5xQKwGRyv6G9UisQTUj68sDb6ILMjpoDB3
- IB7d19+sSbbfBzv9s7EkTuxF2ffLEEM4DMwFV27ze/xXT3KDXjYJzC4UPz1+0Q6r71fk
- Rxn09piu8ErfwcMdlAB/HbseMhT6cf05eU7HGvJxH5cHh8QalKphn+ibKkUqeJRyfa5E
- zmcPDO8nsfSyjeagTxfO21MJcZMZO8AMdhcbqVnf1GE44LqLLweELAlkFH4PoZBfOZSs
- j22A==
-X-Gm-Message-State: AOJu0YxIWYZZjIQq6FEsfYTWrAECDkdQaAeaq4nB7CBQOEtL3HjPRgNp
- R1UZ9C9tC8tm5D5uuNI4snO9/zCYjt7PNGXK8Wwi4TzlVOwvnsuAZgJW2vES0eBOgj31qh/aJbM
- I0ibkZJ+vvoZsJMC0pXvpsmVPtjRAJgIylNCYa/PE
-X-Gm-Gg: ASbGncvnVPwO1cJDgsVcXNhHTTTlCzp+M1fGqGwOgT0moaL5PDitwDofY3JWk82O1UM
- mlOVn4+C6VQY0vCs0jinPTrf70mbAUZLkz9YMiriLP5I88r+h9NCFlLe+V/2JLeN8TDSEb2kQEC
- ME/zMr9LbrX8ePfcc28jIjRiT+lDNOqDkV4UmJXc/2rtWBqq/WneU6cPtCwnSZDieutyv/XcR9I
- R6rCA2s4KZYJJt/dmU9PQ6BXrG3LQwn
-X-Google-Smtp-Source: AGHT+IHrZ/D6TfGYIYmArXU0c/TxO3XHSnLV0OhkMX1HgiP1d46HJFFrJ3rvFdOi2L9XslG5ChcD2E9FsxcThrQEOgY=
-X-Received: by 2002:a05:6402:3488:b0:639:fbd0:4e4a with SMTP id
- 4fb4d7f45d1cf-639fbd050e3mr4936783a12.21.1760092593941; Fri, 10 Oct 2025
- 03:36:33 -0700 (PDT)
+ bh=SJg5d2gXAWMCE3jzrT/fEVfy4yFR4IjB/qFKV2UOVj0=;
+ b=WWRt2zxGjOhMsQ5ijzFwhb4qj+gzvn1794oVj4ZR3fT5gdtgcQfp364PJGHt0mlIYF
+ L15NYuNmexPRxwDB1CSkZqbNTwbsGFayzQCizYJnzTrx8QbFwTyC/qe46+m/uTQJ728E
+ 58Rn1rDU3McVt6sCvpbVhJXTx7CHtOe6a2z9VXZ4k/IKu2nnf1YsN4fuBqlZ+f/gwYiW
+ +MAi7d2egC5rPb77Mvz6qjFMnoTf3Om2/uFvnU0sC5J4pwFvJAgDr3mliOYi7yDVQewG
+ 09Gcz22WTb2lKlXe51COCoTzAV9cxRb6hHhN0qW7PoZlGnqe/xbOCruvIgSaacbzHIGj
+ al4w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVk3QPEgEEXmrXOaW7rQCUzlaAx6r5OG1ccbRavIdux5boKF8uoqU4K7sqvf0vjvLvbQ04YDIg=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAeLQRIK4HRQRWm/XqtlCE+de/dZJbAqX6DsSb9Fw530ZWyb2j
+ oIBRnM3qPDqWt3rXvI9HK5DbGOzzP4oxxsBAAxcGx7424NdO0NHbMN/xWoTeOlxseDI=
+X-Gm-Gg: ASbGncuBRyFRoJqaOaf+82CZ3E0X/FZOHLGeOIBdeM2Nl1vFMed2MNHCjvfGgOS30wm
+ NuYVP+CI6ZHGCull4EQe6vdxiekmqUN25qsaQIkrx6hQXgKXnvYPdUMOCtiakubRjgnw72PcFqZ
+ sY1FDt6mjKCEuikhjVJdkhD8aqM+KL9oKQmIxS0rQ5dItscCKhFNpGgZOwWHZ4tVi9Qx1RjS9y5
+ av+P5HeE1PqtwOSW8D4F6ovS8387snCheVxCtS2LmTOxXG9kKtUQteJQAhqSPVeUI64sQoSK0p0
+ FRVrXJaUxNKY8IzeM1sAq9BpYS+EUgIxCu+22eIuVl0HPGJd+r4QaWkKo44IQZ7/Ut9AVkRxJIN
+ liV0nMWDknOGmBpnDOjUkMz2OcZfkpRIwOL3xtwt43V1lmBiQIrLuLEzP
+X-Google-Smtp-Source: AGHT+IHp/1vSqtWeLvOwmIOECgk+MuNFeduBFvDB+iSdcARGVnoBFsl01SMixouwklR8+bo3LVMq+w==
+X-Received: by 2002:a05:600d:42c2:b0:46f:aaa3:a6cb with SMTP id
+ 5b1f17b1804b1-46faaa3a789mr50813375e9.14.1760093991696; 
+ Fri, 10 Oct 2025 03:59:51 -0700 (PDT)
+Received: from hera ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-46fb489197dsm44222375e9.10.2025.10.10.03.59.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Oct 2025 03:59:51 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: Use ESRT_FW_TYPE_SYSTEMFIRMWARE instead of
+ ESRT_FW_TYPE_UNKNOWN
+Date: Fri, 10 Oct 2025 13:59:31 +0300
+Message-ID: <20251010105933.25581-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251009092959.260121-1-sjg@chromium.org>
- <20251009092959.260121-5-sjg@chromium.org>
- <20251009173522.GR298503@bill-the-cat>
-In-Reply-To: <20251009173522.GR298503@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Oct 2025 11:36:20 +0100
-X-Gm-Features: AS18NWCluFTtwpVQjRdfCZ8GOZxass_ZzkDtvDHzzez7KSON3wyrOYZLG8KKsaM
-Message-ID: <CAFLszTisxbgD3WLLQNvfi5MO1Mhbk2V_cCEnMQSod=eE8Phijg@mail.gmail.com>
-Subject: Re: [PATCH v4 4/4] boot: Move preparing bootdev into a function
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,26 +99,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+We currently set the firmware image type to ESRT_FW_TYPE_UNKNOWN.
 
-On Thu, 9 Oct 2025 at 18:35, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Oct 09, 2025 at 03:29:55AM -0600, Simon Glass wrote:
->
-> > The code at the end of iter_inc() is already somewhat tortuous. Before
-> > making it worse, move it into a function.
->
-> This is not a great commit message. Taking a look at v2 as a whole, the
-> reason to extract this logic from the end of iter_inc is because you
-> will be checking it in multiple places. That is a good reason to move
-> the code. Adding another 5 lines of code (a single if test) alone would
-> not be.
+The spec defines the following:
+ESRT_FW_TYPE_UNKNOWN 0x00000000
+ESRT_FW_TYPE_SYSTEMFIRMWARE 0x00000001
+ESRT_FW_TYPE_DEVICEFIRMWARE 0x00000002
+ESRT_FW_TYPE_UEFIDRIVER 0x00000003
 
-OK, so how about:
+Since we don't support updating DEVICEFIRMWARE or UEFIDRIVER types,
+let's switch over to SYSTEMFIRMWARE which seems more appropriate.
 
-The code at the end of iter_inc() is already somewhat tortuous. A future
-series needs to call it in from two places in iter_inc(), so move it
-into a function.
+Suggested-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_esrt.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Regards,
-Simon
+diff --git a/lib/efi_loader/efi_esrt.c b/lib/efi_loader/efi_esrt.c
+index e235c8fe91c6..3cc389eb11cd 100644
+--- a/lib/efi_loader/efi_esrt.c
++++ b/lib/efi_loader/efi_esrt.c
+@@ -236,7 +236,7 @@ efi_status_t efi_esrt_add_from_fmp(struct efi_firmware_management_protocol *fmp)
+ 	 * TODO: set the field image_type depending on the FW image type
+ 	 * defined in a platform basis.
+ 	 */
+-	u32 image_type = ESRT_FW_TYPE_UNKNOWN;
++	u32 image_type = ESRT_FW_TYPE_SYSTEMFIRMWARE;
+ 
+ 	/* TODO: set the capsule flags as a function of the FW image type. */
+ 	u32 flags = 0;
+-- 
+2.51.0
+
