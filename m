@@ -4,87 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22CFDCCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:39:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DE72CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:56:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 60CF7842C7;
-	Fri, 10 Oct 2025 21:39:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D817984047;
+	Fri, 10 Oct 2025 21:56:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SdgOcGtI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YEknJGu7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9052184040; Fri, 10 Oct 2025 21:39:14 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD14A84040
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:39:10 +0200 (CEST)
+ id 7AD4584047; Fri, 10 Oct 2025 21:56:03 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E14A083F8E
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:56:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-634b774f135so4056262a12.2
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:39:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760125150; x=1760729950; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5cLCRYerlnKVNCqQF1pMi1edx8JWA7mHtnP3N2pCeHE=;
- b=SdgOcGtISdYxPpQqc24FPe8CNdZWazfzHn09kIvVix6EzsREq49t3dIFEhueXzXynn
- +kkZ2AU6SVe4TQILHZPEP7m4M19Okgga6DvQiBgEN4w82Ri5ky808cCgtkA1rCWtGrWm
- JPIKzbeVPJIQW+h3byE24iOty3ggLun2dQDkR3Pa6NeprlHlcZDjeG0I4RqDUWhtU7cx
- 8BBmWx2AK5l1CbGXAz9j/NwZKandyxiAkaqnkgeN/eLCPtz6mB+7lNrC47If8CjL1tE/
- cvdj0SfcT3HypXoZN717guEKc0sVIegZX+7Ozh4uZIJS3T0wuvsDXH/m4xEGqR/bJOmK
- srTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760125150; x=1760729950;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5cLCRYerlnKVNCqQF1pMi1edx8JWA7mHtnP3N2pCeHE=;
- b=QygL5HABKQ/EOvu1k4KW6HvxcFKOo6PS5oJd6kIkYziEsRqfYDLlfyXNEyZ9r+utx+
- oYMsuDh7p/31/NpPEiJUoWqC+ugeTPmsGnQI7Q3jywUj5acu7f7aAG9kNfgQ8rIRtZqy
- 7FHu3OShL5TX6i65/L+QOmDDC49JGyqS36R5i3KXb11gb4/yY/46VZ+lKsQCNU/9cmUL
- HK5jTfQr7T7z1sl5GM4RFEUeRnptQ5MZbGoBmHb76gVibjd7swij7u49oVOgUyxA4ZUs
- 9jZ9Aqi4G5owrY8ZNAA50X0laKPbJvbnQ3Kyd9LYITnHoxSmr0kdBKXsQ29PKI6E7+Dv
- n6LA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUxl9xuIMmxkcpkBvLazdj66HBWNz39g4DZSk0IWc6xFGuOaOyeLGaZmihXTHAt6Yx1SipMWZU=@lists.denx.de
-X-Gm-Message-State: AOJu0YyAQT3qFSHl+LLsxawF5FZIyQ7Caz+RH7I6lXuX454kZ7knN/sp
- QGxycRwN6rHQg2JtVDtxe6yn8+j07wugCaXazA9KoCO379+tJioqGmyRUvOUNs42bUIOJgEKBRT
- pFiXX6kyDZAQG2plI/IVlBhC9RZ4IiYI=
-X-Gm-Gg: ASbGncsfFfNhxFiaRq6TilKGX2cYHnvtqhw1w2CsbwOFGaM2iGOSI7Zu4hTP8UqyzKm
- z1/4PH3PSeDgbjamXAfycm/QkDIPQOEJrA4IDBb4tzq4ttrz2WnXWTkAHY8mfnG9RnvFlrDMLFu
- e2GD2w4s7gzHSJdJevi14HVC5oBZdJxFb3G4ukkrCF5Yu+7yIWZ1WUlV4cIu9/bgXAPmKToe3nA
- lkbAaao/MmJEk5PMjLMxRJr8hk=
-X-Google-Smtp-Source: AGHT+IFihUKfrxkTbHoQkTPkk3X6ypKbTIwMnWtdeDw3PcOVgk5mjLZ9TyWXMWTYbM5GvWRcqkEfj+4dbGA2AS7VpOY=
-X-Received: by 2002:a05:6402:348a:b0:639:f54d:9274 with SMTP id
- 4fb4d7f45d1cf-639f54d9c20mr7534831a12.2.1760125150056; Fri, 10 Oct 2025
- 12:39:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=j-mcarthur@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59AJtvOO386861;
+ Fri, 10 Oct 2025 14:55:57 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1760126157;
+ bh=j+KU736Fmhm4Hb1gdnxY4nZyQmq6kvbcdngq9tIU01o=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=YEknJGu7iRgbOqCi6XqDwzIc4gmhH99pUk5qN3QYTu/dkGM/uxxZI1mEWJfYBL7MK
+ jIvNQDTG2h+QfQvp0zeEmxry+eFqDP7mw7bvPqNMryfUU3u3MO6RZqT17PFvmbBNox
+ GsboF2/avLCJt5cPYdubiCz+j5aN2wLsIEwGTjEs=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59AJtvnD1284209
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 10 Oct 2025 14:55:57 -0500
+Received: from DLEE211.ent.ti.com (157.170.170.113) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
+ Oct 2025 14:55:57 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 10 Oct 2025 14:55:57 -0500
+Received: from localhost (uda0499903.dhcp.ti.com [128.247.81.24])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59AJtvJL2389430;
+ Fri, 10 Oct 2025 14:55:57 -0500
+From: Jared McArthur <j-mcarthur@ti.com>
+To: <u-boot@lists.denx.de>
+CC: <marek.vasut+renesas@mailbox.org>, <j-mcarthur@ti.com>,
+ <trini@konsulko.com>, <n-francis@ti.com>, <bhupesh.linux@gmail.com>,
+ <neil.armstrong@linaro.org>, <u-kumar1@ti.com>, <bb@ti.com>
+Subject: [PATCH v2 1/2] ufs: Add support for sending UFS attribute requests
+Date: Fri, 10 Oct 2025 14:55:55 -0500
+Message-ID: <20251010195556.1772611-2-j-mcarthur@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20251010195556.1772611-1-j-mcarthur@ti.com>
+References: <20251010195556.1772611-1-j-mcarthur@ti.com>
 MIME-Version: 1.0
-References: <20251010053056.32495-1-mibodhi@gmail.com>
- <20251010142835.GY298503@bill-the-cat>
-In-Reply-To: <20251010142835.GY298503@bill-the-cat>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 10 Oct 2025 12:38:58 -0700
-X-Gm-Features: AS18NWAfCNP-FS5eB5KeDUdLC3Q6yajYBi9WSsKVP-1XPKn1fbENwUYXL-_z1Fk
-Message-ID: <CAJaLiFyYGJjO=BjvL3HXAfbE1V2bwB_CSkcOTC6tQTJAR_DMVA@mail.gmail.com>
-Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martin Schwan <m.schwan@phytec.de>, 
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>, 
- Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,64 +81,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom & Simon,
+Some UFS attributes must be set before a UFS device is initialized.
+Add ufshcd_query_attr and ufshcd_query_attr_retry to send UFS
+attribute requests.
 
-On Fri, Oct 10, 2025 at 7:28=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Thu, Oct 09, 2025 at 10:29:17PM -0700, Tony Dinh wrote:
->
-> > Make it possible to disable CMD_PXE.
-> > Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX config.
-> > In extlinux_boot(), invoke pxe utils only when
-> > CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
-> >
-> > This patch results in about 9K reduction in image size when
-> > PXE boot is disabled.
-> >
-> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> > ---
-> >
-> >  boot/Kconfig             |  3 +--
-> >  boot/bootmeth_extlinux.c | 18 ++++++++++--------
-> >  2 files changed, 11 insertions(+), 10 deletions(-)
->
-> Is some part of the symbol logic here wrong? A challenge is that "PXE"
-> is also where the logic to parse extlinux.conf style files came from,
-> and I thought we had split those two out. And then there's this:
->
-> >
-> > diff --git a/boot/Kconfig b/boot/Kconfig
-> > index 2993cd7f9ba..403ce4c3d46 100644
-> > --- a/boot/Kconfig
-> > +++ b/boot/Kconfig
-> > @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
-> >       select CMD_PART if PARTITIONS
-> >       select CMD_DHCP if CMD_NET
-> >       select CMD_PING if CMD_NET
-> > -     select CMD_PXE if CMD_NET
-> >       select CMD_BOOTI if ARM64
-> >       select CMD_BOOTZ if ARM && !ARM64
-> >       imply CMD_MII if NET
-> > +     imply CMD_PXE if CMD_NET
->
-> This is one of the things where defaults isn't supposed to be so easy to
-> get out of. How many platforms are you wanting to then disable CMD_PXE
-> on to save space?
+Taken from Linux Kernel v6.17 (drivers/ufs/core/ufshcd.c) and ported
+to U-Boot.
 
-I'm simply trying to compile out PXE for a board that I'm working on!
-The only thing I need is booting with scripts on a block device. And
-it looks like we have to include everything in bootstd to use it. It
-seems wrong to make the image a lot larger than needed for boards that
-never use a specific feature.
+Signed-off-by: Jared McArthur <j-mcarthur@ti.com>
+Reviewed-by: Bryan Brattlof <bb@ti.com>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ drivers/ufs/ufs.c | 95 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 95 insertions(+)
 
-I would agree about  "defaults isn't supposed to be so easy to get out
-of". But in this case (and similarly in other CMD_x), CMD_PXE brings
-in all dependencies for PXE including pxe_utils.
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index f7d8c40c..005c212f 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -1110,6 +1110,101 @@ static int ufshcd_query_flag_retry(struct ufs_hba *hba,
+ 	return ret;
+ }
+ 
++/**
++ * ufshcd_query_attr - API function for sending attribute requests
++ * @hba: per-adapter instance
++ * @opcode: attribute opcode
++ * @idn: attribute idn to access
++ * @index: index field
++ * @selector: selector field
++ * @attr_val: the attribute value after the query request completes
++ *
++ * Return: 0 for success, non-zero in case of failure.
++ */
++int ufshcd_query_attr(struct ufs_hba *hba, enum query_opcode opcode,
++		      enum attr_idn idn, u8 index, u8 selector, u32 *attr_val)
++{
++	struct ufs_query_req *request = NULL;
++	struct ufs_query_res *response = NULL;
++	int err;
++
++	if (!attr_val) {
++		dev_err(hba->dev,
++			"%s: attribute value required for opcode 0x%x\n",
++			__func__, opcode);
++		return -EINVAL;
++	}
++
++	ufshcd_init_query(hba, &request, &response, opcode, idn, index, selector);
++
++	switch (opcode) {
++	case UPIU_QUERY_OPCODE_WRITE_ATTR:
++		request->query_func = UPIU_QUERY_FUNC_STANDARD_WRITE_REQUEST;
++		request->upiu_req.value = cpu_to_be32(*attr_val);
++		break;
++	case UPIU_QUERY_OPCODE_READ_ATTR:
++		request->query_func = UPIU_QUERY_FUNC_STANDARD_READ_REQUEST;
++		break;
++	default:
++		dev_err(hba->dev,
++			"%s: Expected query attr opcode but got = 0x%.2x\n",
++			__func__, opcode);
++		err = -EINVAL;
++		goto out;
++	}
++
++	err = ufshcd_exec_dev_cmd(hba, DEV_CMD_TYPE_QUERY, QUERY_REQ_TIMEOUT);
++
++	if (err) {
++		dev_err(hba->dev,
++			"%s: opcode 0x%.2x for idn %d failed, index %d, err = %d\n",
++			__func__, opcode, idn, index, err);
++		goto out;
++	}
++
++	*attr_val = be32_to_cpu(response->upiu_res.value);
++
++out:
++	return err;
++}
++
++/**
++ * ufshcd_query_attr_retry() - API function for sending query
++ * attribute with retries
++ * @hba: per-adapter instance
++ * @opcode: attribute opcode
++ * @idn: attribute idn to access
++ * @index: index field
++ * @selector: selector field
++ * @attr_val: the attribute value after the query request
++ * completes
++ *
++ * Return: 0 for success, non-zero in case of failure.
++ */
++int ufshcd_query_attr_retry(struct ufs_hba *hba, enum query_opcode opcode,
++			    enum attr_idn idn, u8 index, u8 selector,
++			    u32 *attr_val)
++{
++	int ret = 0;
++	u32 retries;
++
++	for (retries = QUERY_REQ_RETRIES; retries > 0; retries--) {
++		ret = ufshcd_query_attr(hba, opcode, idn, index, selector, attr_val);
++		if (ret)
++			dev_dbg(hba->dev,
++				"%s: failed with error %d, retries %d\n",
++				__func__, ret, retries);
++		else
++			break;
++	}
++
++	if (ret)
++		dev_err(hba->dev,
++			"%s: query attribute, idn %d, failed with error %d after %d retries\n",
++			__func__, idn, ret, QUERY_REQ_RETRIES);
++	return ret;
++}
++
+ static int __ufshcd_query_descriptor(struct ufs_hba *hba,
+ 				     enum query_opcode opcode,
+ 				     enum desc_idn idn, u8 index, u8 selector,
+-- 
+2.34.1
 
-All the best,
-Tony
-
->
-> --
-> Tom
