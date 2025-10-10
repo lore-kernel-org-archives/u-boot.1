@@ -4,63 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BC43CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 14:13:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EA64CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 14:15:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D79FC83F7B;
-	Fri, 10 Oct 2025 16:13:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id ADB2D83F7B;
+	Fri, 10 Oct 2025 16:15:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=qti.qualcomm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KM6BI/Jw";
+	dkim=pass (2048-bit key; unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.b="aKxwMbUx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40DC883FCB; Fri, 10 Oct 2025 16:13:08 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BE6B083FCF; Fri, 10 Oct 2025 07:12:19 +0200 (CEST)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE97083F4D
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 16:13:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 7B0B183FC1
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:12:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=qti.qualcomm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id DE0296265D;
- Fri, 10 Oct 2025 14:13:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40781C4CEF1;
- Fri, 10 Oct 2025 14:13:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1760105584;
- bh=usiJxBzwOpjTGsYcLYbyCDjQOI/vkeNWkeqW2Ri3+MA=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=KM6BI/JwFu88kgIUtEJ2kjUXRCgn4kLzYg3gSwFqq7on2AJyX/sr5w2lVlE+S4gGm
- eO48Cl+gHtVbn/YF81l3eTsBPc6PA79sjKIqvLOTrPrbJxpyQt4x8ItWhljq13i+mz
- Wv5ynG/34AQZtYnyqjyHvff3CYXwocU82mmjH/OFx0ZO/27KcwfL0Yc+asLgQD1q/+
- 8/CNQqZCZsxKzpYbXi7F659tqdCRVRBR7Qz7CscS+wX6JuhYyIPMuRHiYwhj6zdfAZ
- KmP2r4/HXE68zZymFb6OGwEvhY5WxXqGKMRTEeb/3rNR2pmuF5zPBdG+r1/X9m8UT7
- L1IdiTFufiiFw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Jagan Teki
- <jagan@amarulasolutions.com>, Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)"
- <paul.liu@linaro.org>
-Cc: Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
- "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Subject: Re: [PATCH v2 01/18] MAINTAINERS: Add maintainer for extension
- board support
-In-Reply-To: <20251009-feature_sysboot_extension_board-v2-1-e09b39e54de5@bootlin.com>
-References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
- <20251009-feature_sysboot_extension_board-v2-1-e09b39e54de5@bootlin.com>
-Date: Fri, 10 Oct 2025 16:13:02 +0200
-Message-ID: <87tt06vo9d.fsf@kernel.org>
+ spf=pass smtp.mailfrom=venkyada@qualcomm.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59A1xrnh012475;
+ Fri, 10 Oct 2025 05:12:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+ cc:content-transfer-encoding:date:from:message-id:mime-version
+ :subject:to; s=qcppdkim1; bh=KON6nVOhlmvXQsh7Q8No6+OwewAWrV/Af2u
+ E4gD0AWM=; b=aKxwMbUx/0HJnfFT2gyXVrjzdtQieZl6JL6BvG35fPBvsrnVWz2
+ aW1OphAEqSGFMNV3vYS7/Smhfso49nZ2Ojb9M5P5T/mbEViiEjOZ+tStvFTrP4tw
+ 27RQ04apmaG/zjWUSGbji8ko5p/IsZUlZChXaNIU78eFYqLzBwne6pizIxVvvg+Q
+ /id3l9c/voDjMj2nssw+sS1WbHKNjE9rbglBYfQprTnu/Uf5NKzdMn6bR8E6iedG
+ LPvDaTxJkhR6uTqSLP2bZsLrLekKcINVwA7Wm/9blpxecb2/b+0dM5Ek1Hvwzj6u
+ 3qGZHkpqnYAHN2CfrfaLif+tp8X3URnoYdg==
+Received: from apblrppmta01.qualcomm.com
+ (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 49nv4kn5xf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Oct 2025 05:12:09 +0000 (GMT)
+Received: from pps.filterd (APBLRPPMTA01.qualcomm.com [127.0.0.1])
+ by APBLRPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTP id 59A5C6W1025354; 
+ Fri, 10 Oct 2025 05:12:07 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+ by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 49jvnmhhwy-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Oct 2025 05:12:06 +0000
+Received: from APBLRPPMTA01.qualcomm.com (APBLRPPMTA01.qualcomm.com
+ [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 59A5C6Zt025349;
+ Fri, 10 Oct 2025 05:12:06 GMT
+Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-venkyada-hyd.qualcomm.com
+ [10.147.253.48])
+ by APBLRPPMTA01.qualcomm.com (PPS) with ESMTPS id 59A5C6bZ025348
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 10 Oct 2025 05:12:06 +0000
+Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4799199)
+ id A25A45CD; Fri, 10 Oct 2025 10:42:05 +0530 (+0530)
+From: Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>
+To: u-boot@lists.denx.de, casey.connolly@linaro.org, neil.armstrong@linaro.org,
+ sumit.garg@kernel.org
+Cc: Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>
+Subject: [PATCH] qcom_defconfig: Enable meminfo command with mapping
+Date: Fri, 10 Oct 2025 10:42:00 +0530
+Message-Id: <20251010051200.2313081-1-venkyada@qti.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Authority-Analysis: v=2.4 cv=dojWylg4 c=1 sm=1 tr=0 ts=68e895aa cx=c_pps
+ a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=x6icFKpwvdMA:10 a=EUspDBNiAAAA:8 a=I2Hi_JKZDb_k5NqPZYcA:9
+X-Proofpoint-GUID: 1CPShELU3kxPZlRtQ_vtqd3DuNYVXtrN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDA4MDEyMSBTYWx0ZWRfX/vaLInYU5Bw5
+ TRqTII71AqzYf2RsG0RGhg4yVoTPWc1YP56PQ4tc96u3ExQ16QL+6MkIDBdv2bbrlNNrTtqvozd
+ lqhx6MPh8wkEMtp7TyhCB6EoD4u4BCoE5mGqZL4kkgyLAdBAvAo/WGPCwrxs+neKfOOlOfCDfz0
+ daCOZhryL+mygBWi1RiWR3nJapXBA9dT5DxbJAgW+NSfXLk4PaMmFQjEPjYQVVrfOGYUp7rFvH2
+ JpwijsBMsSXruwRZr5jB+ie7UblfiEoYQfPtcK7SQgLeF76UsOKukrHIdB/ghq2Fpk6uAXvmA6G
+ 9ZnZbyH8EwQosE+3IipvjlmRTRRdEREa697ICmmTD2RD8I6D5agIuNbpCj6dc68kBesv5mSiwkR
+ UZXNAT1mi9IRV+70WI/0LNawkZJRjg==
+X-Proofpoint-ORIG-GUID: 1CPShELU3kxPZlRtQ_vtqd3DuNYVXtrN
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1117,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-10_01,2025-10-06_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 impostorscore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
+ bulkscore=0 spamscore=0 priorityscore=1501 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510080121
+X-Mailman-Approved-At: Fri, 10 Oct 2025 16:15:51 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,42 +114,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kory,
+Enable meminfo command to be able to see where things are mapped.
 
-Welcome to the MAINTAINERS file.
+Signed-off-by: Abbarapu Venkatesh Yadav <venkyada@qti.qualcomm.com>
+---
+ configs/qcom_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Thu, Oct 09, 2025 at 16:50, "Kory Maincent (TI.com)" <kory.maincent@bootlin.com> wrote:
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 8d1269b4634..4c00cf91166 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -29,6 +29,8 @@ CONFIG_CMD_EEPROM=y
+ CONFIG_SYS_I2C_EEPROM_BUS=2
+ CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+ CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
+ # CONFIG_CMD_BIND is not set
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_DFU=y
+-- 
+2.34.1
 
-> Add myself as maintainer for the extension board support that was
-> originally added to track ongoing development and maintenance.
->
-> Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-
-> ---
->  MAINTAINERS | 8 ++++++++
->  1 file changed, 8 insertions(+)
->
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 12043a1f82e..e411e266c94 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1182,6 +1182,14 @@ F:	scripts/event_dump.py
->  F:	test/common/event.c
->  F:	test/py/tests/test_event_dump.py
->  
-> +EXTENSION
-> +M:	Kory Maincent <kory.maincent@bootlin.com>
-> +S:	Maintained
-> +F:	board/sunxi/chip.c
-> +F:	board/ti/common/cape_detect.c
-> +F:	cmd/extension_board.c
-> +F:	include/extension_board.h
-> +
->  FASTBOOT
->  M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
->  S:	Maintained
->
-> -- 
-> 2.43.0
