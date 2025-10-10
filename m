@@ -4,69 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5834BCCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38DFDCCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 10:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 621908421A;
-	Fri, 10 Oct 2025 07:54:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 771E583F69;
+	Fri, 10 Oct 2025 12:20:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="o4cVKFgb";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 219B78402E; Fri, 10 Oct 2025 07:54:11 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C915A841EF
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:54:08 +0200 (CEST)
+ id C8B7283F85; Fri, 10 Oct 2025 12:20:44 +0200 (CEST)
+Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 38D2883303
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5s2Kj177133;
- Fri, 10 Oct 2025 00:54:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760075642;
- bh=l6qZlmcOi55gCA0oan7hzlsnvLajOfBHA4vAb6iiHLk=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=o4cVKFgbciUOtml/4x8ntLanJ5ZQc1b5vyGPP4WP+BmKTBLWB60Z+COGNULBvRaOj
- m8AHQjltt7CD+9cw6qfQWsuTdBQbUs/RzwiuMxEuLCMaAtufwFN6gXQGXSFDZ1t7Op
- M4tOiO6cOxuneO6sKc3HQ4z61Kc+3vq8wkIJl7B8=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5s2pl1458326
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 10 Oct 2025 00:54:02 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
- Oct 2025 00:54:02 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 00:54:02 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5s1Tx1408174;
- Fri, 10 Oct 2025 00:54:01 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
- <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
- <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
- <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v9 10/11] mach-k3: add carveouts for TFA and optee
-Date: Fri, 10 Oct 2025 11:23:36 +0530
-Message-ID: <20251010055340.2574743-11-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251010055340.2574743-1-anshuld@ti.com>
-References: <20251010055340.2574743-1-anshuld@ti.com>
+ dmarc=none (p=none dis=none) header.from=sys-base.io
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=paulk@sys-base.io
+Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
+ by leonov.paulk.fr (Postfix) with ESMTPS id AFC9E1F00056
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 10:20:28 +0000 (UTC)
+Received: by laika.paulk.fr (Postfix, from userid 65534)
+ id 8921FB040C7; Fri, 10 Oct 2025 10:20:27 +0000 (UTC)
+Received: from collins (unknown [192.168.1.1])
+ by laika.paulk.fr (Postfix) with ESMTPSA id DB8ECB040BC;
+ Fri, 10 Oct 2025 10:20:25 +0000 (UTC)
+Date: Fri, 10 Oct 2025 12:20:23 +0200
+From: Paul Kocialkowski <paulk@sys-base.io>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Chen-Yu Tsai <wens@csie.org>, Icenowy Zheng <icenowy@aosc.xyz>
+Subject: Re: [PATCH] sunxi: a133: Add NSI arbiter support to DRAM init
+Message-ID: <aOjd5xKdRD7g3SAi@collins>
+References: <20251009171459.564592-1-paulk@sys-base.io>
+ <20251009232127.7cff2e40@minigeek.lan>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="6oYoWhtY2uqEXjVG"
+Content-Disposition: inline
+In-Reply-To: <20251009232127.7cff2e40@minigeek.lan>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,70 +61,296 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-K3 platforms have reserved memory regions for TFA and OPTEE which should
-be unmapped for U-Boot.
 
-Therefore this patch adds the necessary fdt fixups to properly set the
-load address for TFA/OPTEE and unmaps both by mmu_unmap_reserved_mem.
+--6oYoWhtY2uqEXjVG
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
-Tested-by: Wadim Egorov <w.egorov@phytec.de>
----
- arch/arm/mach-k3/common.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+Hi Andre,
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 581a7246630..bba359b8bde 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -31,6 +31,7 @@
- #include <dm/uclass-internal.h>
- #include <dm/device-internal.h>
- #include <asm/armv8/mmu.h>
-+#include <mach/k3-common-fdt.h>
- #include <mach/k3-ddr.h>
- 
- #define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
-@@ -263,6 +264,7 @@ void board_prep_linux(struct bootm_headers *images)
- 
- void enable_caches(void)
- {
-+	void *fdt = (void *)gd->fdt_blob;
- 	int ret;
- 
- 	ret = mem_map_fix_dram_banks(K3_MEM_MAP_FIRST_BANK_IDX, K3_MEM_MAP_LEN,
-@@ -273,6 +275,30 @@ void enable_caches(void)
- 
- 	mmu_setup();
- 
-+	if (CONFIG_K3_ATF_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-+		ret = fdt_fixup_reserved(fdt, "tfa", CONFIG_K3_ATF_LOAD_ADDR,
-+					 0x80000);
-+		if (ret)
-+			printf("%s: Failed to perform tfa fixups (%s)\n",
-+			       __func__, fdt_strerror(ret));
-+		ret = mmu_unmap_reserved_mem("tfa");
-+		if (ret)
-+			printf("%s: Failed to unmap tfa reserved mem (%d)\n",
-+			       __func__, ret);
-+	}
-+
-+	if (CONFIG_K3_OPTEE_LOAD_ADDR >= CFG_SYS_SDRAM_BASE) {
-+		ret = fdt_fixup_reserved(fdt, "optee",
-+					 CONFIG_K3_OPTEE_LOAD_ADDR, 0x1800000);
-+		if (ret)
-+			printf("%s: Failed to perform optee fixups (%s)\n",
-+			       __func__, fdt_strerror(ret));
-+		ret = mmu_unmap_reserved_mem("optee");
-+		if (ret)
-+			printf("%s: Failed to unmap optee reserved mem (%d)\n",
-+			       __func__, ret);
-+	}
-+
- 	icache_enable();
- 	dcache_enable();
- }
--- 
-2.51.0
+Le Thu 09 Oct 25, 23:21, Andre Przywara a =C3=A9crit :
+> On Thu,  9 Oct 2025 19:14:59 +0200
+> Paul Kocialkowski <paulk@sys-base.io> wrote:
+>=20
+> Hi Paul,
+>=20
+> many thanks for sending this, it totally escaped me that we didn't
+> setup the bus priorities on the A133!
 
+And for the record this solves a display glitch issue that happens whenever=
+ the
+GPU is rendering. It would probably also happen with big CPU loads.
+
+> > In previous generations of Allwinner SoCs, the memory bus (MBUS) access
+> > arbitration was configured as part of the DRAM top registers. This is no
+> > longer the case starting with the A133, which has a dedicated base
+> > address for the bus arbiter that is now called NSI instead of MBUS.
+> >=20
+> > NSI appears to be a later iteration of MBUS design, with new dedicated
+> > registers that resemble the previous MBUS ones. Despite NSI not being
+> > documented in the manual, the A133 BSP includes a nsi driver with some
+> > description of the registers. Like previous generations, it implements
+> > port arbitration priority for DRAM access and also supports an optional
+> > QoS mode based on bandwidth limits.
+> >=20
+> > Configuring port arbitration priority is especially important to make
+> > sure that critical masters are not starved by other less important
+> > ones. This is especially the case with the display engine that needs
+> > to be able to fetch pixels in time for scanout and can easily be
+> > starved by CPU or GPU access.
+> >=20
+> > This introduces support for the NSI arbiter in the A133 DRAM init
+> > code. The list and order of available ports are highly SoC-specific
+> > and the default config values are set to match the BSP's defaults.
+> >=20
+> > Signed-off-by: Paul Kocialkowski <paulk@sys-base.io>
+> > ---
+> >  .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |  4 ++
+> >  .../include/asm/arch-sunxi/dram_sun50i_a133.h | 50 ++++++++++++++
+> >  arch/arm/mach-sunxi/dram_sun50i_a133.c        | 65 ++++++++++++++++++-
+> >  3 files changed, 118 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h b/arch/arm=
+/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> > index 2a9b086991c3..8e80c520706b 100644
+> > --- a/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> > +++ b/arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h
+> > @@ -16,6 +16,10 @@
+> > =20
+> >  #define SUNXI_GIC400_BASE		0x03020000
+> > =20
+> > +#ifdef CONFIG_MACH_SUN50I_A133
+> > +#define SUNXI_NSI_BASE			0x03100000
+> > +#endif
+> > +
+> >  #ifdef CONFIG_MACH_SUN50I_H6
+> >  #define SUNXI_DRAM_COM_BASE		0x04002000
+> >  #define SUNXI_DRAM_CTL0_BASE		0x04003000
+> > diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h b/arch/=
+arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> > index a5fc6ad36560..a526e55e7bb9 100644
+> > --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> > +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_a133.h
+> > @@ -24,6 +24,56 @@ static inline int ns_to_t(int nanoseconds)
+> >  	return DIV_ROUND_UP(ctrl_freq * nanoseconds, 1000);
+> >  }
+> > =20
+> > +#define SUNXI_NSI_PORT_PRI_CFG_RD(v)	(((v) & 0x3) << 2)
+> > +#define SUNXI_NSI_PORT_PRI_CFG_WR(v)	((v) & 0x3)
+> > +#define SUNXI_NSI_PRI_LOWEST		0
+> > +#define SUNXI_NSI_PRI_LOW		1
+> > +#define SUNXI_NSI_PRI_HIGH		2
+> > +#define SUNXI_NSI_PRI_HIGHEST		3
+> > +#define SUNXI_NSI_QOS_SEL_OUTPUT	0
+> > +#define SUNXI_NSI_QOS_SEL_INPUT		1
+> > +
+> > +struct sunxi_nsi_port_reg {
+>=20
+> Do we really need a struct to describe an MMIO register frame?
+
+Well I did that because other code around DRAM does it, and IIRC it's said =
+to
+be the preferred way to do things in u-boot. Personally I've always felt li=
+ke
+this approach is a bit fragile, but when in Rome, do as the Romans do.
+It doesn't really cause problems in practice.
+
+> I started to get away from them, for the reasons please check the commit
+> messages from one of those patches:
+> https://source.denx.de/u-boot/u-boot/-/commit/0453a1d9bb15ee30e8b4b89b493=
+6982dbb44d71d
+
+I pretty much agree with all the points raised in the message.
+
+> So can we replace this with something like
+> #define SUNXI_NSI_MODE_REG	0x10
+
+Sure thing.
+
+> And, squinting from a distance, the A523 code looks like using the same
+> per-device MMIO frame, with registers at 0x14 and 0x18 being written,
+> with a distance of 0x200 between the devices. So maybe put this
+> somewhere where the offsets can be shared between the SoCs?
+
+Ah that's what I suspected, without actually looking at the hardware.
+So the port registers are likely the same, but I guess the list of ports
+is different, so that would need to stay a133-specific.
+
+> > +	u32 reserved0[4];
+> > +	u32 mode;
+> > +	u32 pri_cfg;
+> > +	u32 io_cfg;
+> > +	u32 reserved1[41];
+> > +	u32 enable;
+> > +	u32 clr;
+> > +	u32 cycle;
+> > +	u32 rq_rd;
+> > +	u32 rq_wr;
+> > +	u32 dt_rd;
+> > +	u32 dt_wr;
+> > +	u32 la_rd;
+> > +	u32 la_wr;
+> > +	u32 reserved2[71];
+> > +};
+> > +
+> > +struct sunxi_nsi_reg {
+>=20
+> Same here, can you please similarly replace this with defines, and
+> multiply this index with the frame size (0x200)?
+
+Yes sure and I'll rework things to have an explicit list of port indexes.
+
+> Otherwise this looks nice!
+>=20
+> Cheers,
+> Andre
+>=20
+> > +	struct sunxi_nsi_port_reg cpu;
+> > +	struct sunxi_nsi_port_reg gpu;
+> > +	struct sunxi_nsi_port_reg sd1;
+> > +	struct sunxi_nsi_port_reg mstg;
+> > +	struct sunxi_nsi_port_reg gmac0;
+> > +	struct sunxi_nsi_port_reg gmac1;
+> > +	struct sunxi_nsi_port_reg usb0;
+> > +	struct sunxi_nsi_port_reg usb1;
+> > +	struct sunxi_nsi_port_reg ndfc;
+> > +	struct sunxi_nsi_port_reg dmac;
+> > +	struct sunxi_nsi_port_reg ce;
+> > +	struct sunxi_nsi_port_reg de0;
+> > +	struct sunxi_nsi_port_reg de1;
+> > +	struct sunxi_nsi_port_reg ve;
+> > +	struct sunxi_nsi_port_reg csi;
+> > +	struct sunxi_nsi_port_reg isp;
+> > +	struct sunxi_nsi_port_reg g2d;
+> > +	struct sunxi_nsi_port_reg eink;
+> > +	struct sunxi_nsi_port_reg iommu;
+> > +	struct sunxi_nsi_port_reg cpus;
+> > +};
+> > +
+> >  /* MBUS part is largely the same as in H6, except for one special regi=
+ster */
+> >  #define MCTL_COM_UNK_008	0x008
+> >  /* NOTE: This register has the same importance as mctl_ctl->clken in H=
+616 */
+> > diff --git a/arch/arm/mach-sunxi/dram_sun50i_a133.c b/arch/arm/mach-sun=
+xi/dram_sun50i_a133.c
+> > index 1496f99624dd..6327f00ff5ea 100644
+> > --- a/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> > +++ b/arch/arm/mach-sunxi/dram_sun50i_a133.c
+> > @@ -69,6 +69,64 @@ static const u8 phy_init[] =3D {
+> >  };
+> >  #endif
+> > =20
+> > +static void nsi_configure_port(struct sunxi_nsi_port_reg *port, u8 pri,
+> > +			       u8 qos_sel)
+> > +{
+> > +	u32 pri_cfg;
+> > +
+> > +	/* QoS with bandwidth limits is not supported, disable it. */
+> > +	writel(0, &port->mode);
+> > +	writel(0, &port->enable);
+> > +
+> > +	/*
+> > +	 * QoS direction selection should not be in use, but set it neverthel=
+ess
+> > +	 * to match the BSP behavior (in case it has some other meaning).
+> > +	 */
+> > +	writel(qos_sel, &port->io_cfg);
+> > +
+> > +	/* Port priority is always active. */
+> > +	pri_cfg =3D SUNXI_NSI_PORT_PRI_CFG_RD(pri) |
+> > +		  SUNXI_NSI_PORT_PRI_CFG_WR(pri);
+> > +
+> > +	writel(pri_cfg, &port->pri_cfg);
+> > +}
+> > +
+> > +static void nsi_set_master_priority(void)
+> > +{
+> > +	struct sunxi_nsi_reg *nsi =3D (struct sunxi_nsi_reg *)SUNXI_NSI_BASE;
+> > +	struct {
+> > +		struct sunxi_nsi_port_reg *port;
+> > +		u8 pri;
+> > +		u8 qos_sel;
+> > +	} ports[] =3D {
+> > +		{ &nsi->cpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->gpu,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->sd1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->mstg,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->gmac0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->gmac1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->usb0,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->usb1,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->ndfc,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->dmac,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->ce,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->de0,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->de1,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->ve,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->csi,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->isp,	SUNXI_NSI_PRI_HIGH,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->g2d,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->eink,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +		{ &nsi->iommu,	SUNXI_NSI_PRI_HIGHEST,	SUNXI_NSI_QOS_SEL_INPUT },
+> > +		{ &nsi->cpus,	SUNXI_NSI_PRI_LOWEST,	SUNXI_NSI_QOS_SEL_OUTPUT },
+> > +	};
+> > +	unsigned int i;
+> > +
+> > +	for (i =3D 0; i < ARRAY_SIZE(ports); i++)
+> > +		nsi_configure_port(ports[i].port, ports[i].pri,
+> > +				   ports[i].qos_sel);
+> > +}
+> > +
+> >  static void mctl_clk_init(u32 clk)
+> >  {
+> >  	void * const ccm =3D (void *)SUNXI_CCM_BASE;
+> > @@ -1184,6 +1242,7 @@ static const struct dram_para para =3D {
+> >  unsigned long sunxi_dram_init(void)
+> >  {
+> >  	struct dram_config config;
+> > +	unsigned long size;
+> > =20
+> >  	/* Writing to undocumented SYS_CFG area, according to user manual. */
+> >  	setbits_le32(0x03000160, BIT(8));
+> > @@ -1200,5 +1259,9 @@ unsigned long sunxi_dram_init(void)
+> >  	      1U << config.bankgrps, 1U << config.ranks,
+> >  	      16U << config.bus_full_width);
+> > =20
+> > -	return calculate_dram_size(&config);
+> > +	size =3D calculate_dram_size(&config);
+> > +
+> > +	nsi_set_master_priority();
+> > +
+> > +	return size;
+> >  }
+>=20
+
+--=20
+Paul Kocialkowski,
+
+Independent contractor - sys-base - https://www.sys-base.io/
+Free software developer - https://www.paulk.fr/
+
+Expert in multimedia, graphics and embedded hardware support with Linux.
+
+--6oYoWhtY2uqEXjVG
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmjo3ecACgkQhP3B6o/u
+lQxglA/+JUSv+sMkyLJC8wzVAzR0C6VNSSZkfl3ANfuGLEzCYSEitvF/kuRgqHoU
+GLdscplbzQnV0oyBL6Jwkd58uZFeTLeBRphLPQ9qdKJh0pi1P+0pf4pU2u6LTR4i
+OdRd1hKpKQnL4nmu6N3dHern2rRAwOhFq0XOuSrG1OQBzwVMJ0DtIha3dPHTdVJR
+Dk1/s+QABFWpIv4NGNtFWex0QV5y2+hO73npbVhwRuscbxPu1kOPKQF7dRTJ9FDQ
+IOwNcdcMLlMTbyqFk75HjyfGM+pC17pZm+rOlSx/qyPdPFD6NaIvRKJQ/m7PjD33
+iTYJJjATtWwRTfkbVXUn1eO6wTBkCiE6hjFNWiyPcxt3V4ZdOfQtH8jsrenvFLgU
+28AhBHB9tmavCo618fDJju0491O40VduGV5airUwW9EuBgqg7K617zlmbot+pu8u
+ndTkySf55XVmnHf1o9OGCgHHWO+l1wNOGosAOU8TnEaouNP6cS8wr39kRT6CdRuJ
+pbCdJP470Qu7AIlitxQlVyQurg9kzL7n+K0f9MUmv9+7CbNlSPPls7s97fqAtSyJ
+UGcLJzKy/ZZH6NR80DGYfBMPn1EeVTj4wFHUwB0Mdt2Ssnwqdfpm5UVYMu46dQCr
+Hf6c9GOUOq/CvDYgiNGWuWmc4mhMCeonszZkQPxFcH6unnBnaw8=
+=EZHj
+-----END PGP SIGNATURE-----
+
+--6oYoWhtY2uqEXjVG--
