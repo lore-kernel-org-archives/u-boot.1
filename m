@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AEA5CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4545CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 05:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B814840C1;
-	Fri, 10 Oct 2025 07:54:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7BB0683FC6;
+	Fri, 10 Oct 2025 07:54:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nKfI0vYO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KfYZyorY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3055284197; Fri, 10 Oct 2025 07:54:00 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id F13A983FC6; Fri, 10 Oct 2025 07:54:00 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D45B8402E
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:53:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2D94840E4
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 07:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5rrnS697594;
- Fri, 10 Oct 2025 00:53:53 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59A5rpve621100;
+ Fri, 10 Oct 2025 00:53:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760075633;
- bh=dhDoECXirtL3vxMH8ycmUd5DO4jiGOKAjbhhnx6+Ems=;
+ s=ti-com-17Q1; t=1760075631;
+ bh=pfVyjIf0Q5S5wlsfn9N1QCPQrGq9+5ROryOgwm5OyR4=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=nKfI0vYOqV+wiZnr4WD2C8Vd/QratrRb70gHfbOSCxMdQca7leEtmVwewwgePq1ND
- uiltbamTdDpRREQc7obQv3tIKHo+7n4agvLyGYmKxU+kDXz0Q76toYWmbzGdEgehIo
- ePj7lXyqFxnVJc3HlJ0J94VLGxYIBbhOZxa0p0Mw=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5rr121978977
+ b=KfYZyorYy8CAUWyGtGxkH2kmCYtBnLZlelkRorcwEZDOQGsVMppM24wWPt5AHJYq6
+ E/pzfzPsEEY6mbF1zM5XzCgZqktf+fJuwVeXsd8g8s7oQpkpeonsQc4Y84rkcKFWIY
+ fuKdUuCZi3+GwHVbjsDhf/+d5HOeTnz5/67ryhH0=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59A5rpQd1458261
  (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Fri, 10 Oct 2025 00:53:53 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 10 Oct 2025 00:53:51 -0500
+Received: from DFLE208.ent.ti.com (10.64.6.66) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
- Oct 2025 00:53:52 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2025 00:53:50 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE208.ent.ti.com
+ (10.64.6.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 00:53:52 -0500
+ Transport; Fri, 10 Oct 2025 00:53:50 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5rpNT1175918;
- Fri, 10 Oct 2025 00:53:52 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59A5rnAe1175889;
+ Fri, 10 Oct 2025 00:53:50 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,9 +57,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v9 05/11] arm: armv8: mmu: add mem_map_fix_dram_banks
-Date: Fri, 10 Oct 2025 11:23:31 +0530
-Message-ID: <20251010055340.2574743-6-anshuld@ti.com>
+Subject: [PATCH v9 04/11] arm: armv8: invalidate dcache entries on
+ dcache_enable
+Date: Fri, 10 Oct 2025 11:23:30 +0530
+Message-ID: <20251010055340.2574743-5-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010055340.2574743-1-anshuld@ti.com>
 References: <20251010055340.2574743-1-anshuld@ti.com>
@@ -83,88 +84,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
-the MMU as part of mmu_setup.
+In dcache_enable, currently the dcache entries are only invalidated when
+the MMU is not enabled. This causes issues when dcache_enable is called
+with the MMU already configured, in such cases the existing dcache
+entries are not flushed which might result in un-expected behavior.
 
-But since the exact configuration of memory banks might not be known at
-build time, many platforms such as imx9, versal2 etc. utilize
-gd->bd->bi_dram to configure the static map at runtime.
-
-Therefore this patch adds a new API mem_map_fix_dram_banks that modifies
-the static map in a similar way. Allowing the caller to map all dram
-banks by just passing the index to last entry in their mem_map and it's
-length.
+This patch invalidates the cache entries on every call of dcache_enable
+before enabling dcache (by setting CR_C). This makes dcache_enable
+behave similar to icache_enable as well.
 
 Reviewed-by: Dhruva Gole <d-gole@ti.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- arch/arm/cpu/armv8/cache_v8.c    | 28 ++++++++++++++++++++++++++++
- arch/arm/include/asm/armv8/mmu.h | 10 ++++++++++
- 2 files changed, 38 insertions(+)
+ arch/arm/cpu/armv8/cache_v8.c | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 74c78cb2fb0..cdf17d5f396 100644
+index a7899857658..74c78cb2fb0 100644
 --- a/arch/arm/cpu/armv8/cache_v8.c
 +++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -58,6 +58,34 @@ static int get_effective_el(void)
- 	return el;
+@@ -830,16 +830,15 @@ void flush_dcache_range(unsigned long start, unsigned long stop)
+ void dcache_enable(void)
+ {
+ 	/* The data cache is not active unless the mmu is enabled */
+-	if (!(get_sctlr() & CR_M)) {
+-		invalidate_dcache_all();
+-		__asm_invalidate_tlb_all();
++	if (!mmu_status())
+ 		mmu_setup();
+-	}
+ 
+ 	/* Set up page tables only once (it is done also by mmu_setup()) */
+ 	if (!gd->arch.tlb_fillptr)
+ 		setup_all_pgtables();
+ 
++	invalidate_dcache_all();
++	__asm_invalidate_tlb_all();
+ 	set_sctlr(get_sctlr() | CR_C);
  }
  
-+int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs)
-+{
-+	unsigned int i;
-+	int ret = fdtdec_setup_memory_banksize();
-+
-+	if (ret) {
-+		printf("%s: Failed to setup dram banks\n", __func__);
-+		return ret;
-+	}
-+
-+	if (index + CONFIG_NR_DRAM_BANKS >= len) {
-+		printf("%s: Provided mem_map array has insufficient size for DRAM entries\n",
-+		       __func__);
-+		return -ENOMEM;
-+	}
-+
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		mem_map[index].virt = gd->bd->bi_dram[i].start;
-+		mem_map[index].phys = gd->bd->bi_dram[i].start;
-+		mem_map[index].size = gd->bd->bi_dram[i].size;
-+		mem_map[index].attrs = attrs;
-+		index++;
-+	}
-+
-+	memset(&mem_map[index], 0, sizeof(mem_map[index]));
-+
-+	return 0;
-+}
- u64 get_tcr(u64 *pips, u64 *pva_bits)
- {
- 	int el = get_effective_el();
-diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-index 3807c702fb6..257352f216e 100644
---- a/arch/arm/include/asm/armv8/mmu.h
-+++ b/arch/arm/include/asm/armv8/mmu.h
-@@ -194,8 +194,18 @@ struct mm_region {
- 	u64 attrs;
- };
- 
-+/* Used as the memory map for MMU configuration by mmu_setup */
- extern struct mm_region *mem_map;
- void setup_pgtables(void);
-+
-+/**
-+ * mem_map_fix_dram_banks() - Populate mem_map with entries corresponding to
-+ * dram banks as per the gd. This should be called prior to mmu_setup.
-+ *
-+ * @index: The entry in mem_map to start the over-write
-+ * @len: The size of mem_map
-+ */
-+int mem_map_fix_dram_banks(unsigned int index, unsigned int len, u64 attrs);
- u64 get_tcr(u64 *pips, u64 *pva_bits);
- 
- /**
 -- 
 2.51.0
 
