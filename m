@@ -4,96 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377F6CCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 15:11:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A281CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 15:56:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C4038427F;
-	Fri, 10 Oct 2025 17:11:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F2F183FA7;
+	Fri, 10 Oct 2025 17:56:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kI1SwfZ3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iSzvqGZ5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 158348436C; Fri, 10 Oct 2025 17:11:37 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id C1A9F83FA7; Fri, 10 Oct 2025 17:56:55 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D78C584248
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 17:11:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9CE4183F8F
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 17:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-46e6674caa5so11548295e9.0
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 08:11:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-43f489502e5so1042915b6e.1
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 08:56:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760109094; x=1760713894; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Q39N3nl/GzuvlExy4mDoU8s8lZLw7CJtvWxn5waWgK4=;
- b=kI1SwfZ36NAcY78Z7PKCBIXF+RUsXdPB8jCYVRCPvvS131DLAUbOMXnmtmzrgAt3fj
- 5rnZZzNL9Gjtot48g7bguOUX1xg5PkiPntvc7mPpOM4T9onHPxNdqxecEsSuVgHBevgm
- LxwQcRqZwL9rRj8GcmJJfzmEHSG4nmk7TrkPkqeg8cnb+rtQvvvUQlXra01FtmZnJOHT
- OgX/S4iOhtaO9G2BbdWelMYqB8aAR9+kP8+XR2QuxnPe0zxQbnevBb0khVHj+CqJIiRz
- 1GeXmpxGoowjns0F16y41MFkfPQwJeSHy3ySzWD7RGKQcZpaHpLgwBSOGww+bTTq63+1
- rFfQ==
+ d=konsulko.com; s=google; t=1760111812; x=1760716612; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=OqegRSAq23d9An6IQfZNLtnKjMkNlYGHW9/gHMBARDk=;
+ b=iSzvqGZ52+YjBlaReazM0n6UVzckm8GE2GOJeCWEhU6cs6Ccgil+jprumweXsIpw3F
+ eYYlNmuNRfCwqnJs03cQbeSQ+IvnuQsNAhuWqz9g3JRMQe/kN3doswxbg5LKVw73nX04
+ hTVpNnc8llWU2J8yRkLSa9ieItY9npsGxwVzA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760109094; x=1760713894;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Q39N3nl/GzuvlExy4mDoU8s8lZLw7CJtvWxn5waWgK4=;
- b=cKiIlVsa4+5NRHCuG+/OnxOgNiLnnEfvwxSoLX6EdTdfaDkXjVXWI8JHNOfBLVhL5o
- Cob8sod6TVq0T2ZaUypckwhkL2+8v3DnO4BGkEgzTkw1fCQ2BJTTBRlW5NBMQ16OElp3
- b+erWSRteIUTV5OtCzGDiQNicG+HtH0j6yp3FR3gFVymOeS968/Jrege2qUVGw9qXvbN
- JEEV3my/ZmK5aalPbfj+gmwdOrSXWBAsteegPlFufT/Aq1KRvnvqrHAuf/N8JMtWgVnD
- 79QpaOen07j6mrXx28zgvfjEirk4eeSVofAhEsbtdtpHj6qfsY9GN5htpBTM2x0RKWDs
- Dwow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVk7KiaFly/cv+MAPnc7XZd9njH0hsvrLgSkhpYbi66DvyPv6ZYjLqevB/pz27OybZPT5fCgYU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxJAvhTiWvsaOyKt901eVS6LQVoBP2Fj6vholb8HIyprBy0V3bR
- Y8mmTKbqvwKhuWyRa3iMBirEd9Tyh0nbOQFfA1Qze4IYmKOH/y83A0ppuM6m5FKRdjw=
-X-Gm-Gg: ASbGncvxAFPjtvzEXd4xTk13hb4t1ErNRBNJ6wR1wK3h9sYbzF/EgGjJvHPWQ3qDkQ1
- mPK/xrTKPriC0siKwxkNTEnjFrhBQv3CJv5p5lbEGt9lmLlNC1lHyHMRf0CXFMoOtLrCsICqUrt
- cg05lzL+4OvxZsDWzwPYEjIQGk87SDYvNtUfvFVQV5wT6CtbdxDM+NUTItwRLYdVON0OW1F5hpR
- my4dHFrwW/7LME7opCLlb/rKL6XVqy6cECO16KDwyWSEWyP1YaIVkJLUudkyHGwvW5bNgF4/gqV
- qioqKGp4aAruy9kuL5+EfydToxzMvxMXgdPNGf4tWZJTTPllLgj7mXTy/3Ag5oqK0JIhSkwT+eq
- BJ9bYZeY3/tUrpBoJYF346XhVEpgkYhqHkKunzpei4fY1TRgYaKKxA7w8JFoLwyJ+KL85g5EZRF
- H5ieX2MENNIGt5UEZlM4e/ANPpMIdE08+HF0M=
-X-Google-Smtp-Source: AGHT+IE+DRhsWv2da39DSem7ygIk91St5by6rOBcMKatCxUtSVfIvdn7PSJOvPqufEP1zkU/uiqKlQ==
-X-Received: by 2002:a05:600c:450e:b0:46e:1a60:c995 with SMTP id
- 5b1f17b1804b1-46fa9e8dcc7mr92210415e9.2.1760109094260; 
- Fri, 10 Oct 2025 08:11:34 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:a3db:a2bf:105e:da6e?
- ([2a01:e0a:3cb:7bb0:a3db:a2bf:105e:da6e])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46fb4983053sm50004235e9.8.2025.10.10.08.11.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Oct 2025 08:11:34 -0700 (PDT)
-Message-ID: <91ea6f19-8a58-4890-9421-fdc5cd7f09e0@linaro.org>
-Date: Fri, 10 Oct 2025 17:11:33 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] docker: add OP-TEE and TF-A build for testing
- Firmware Handoff
-To: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen
- <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ d=1e100.net; s=20230601; t=1760111812; x=1760716612;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OqegRSAq23d9An6IQfZNLtnKjMkNlYGHW9/gHMBARDk=;
+ b=QtqxYZXVjHbTPST8P9aM6kuqwu3yj1r32pcjZKE47dvjXedsoBYysbkVtknCjtiYXQ
+ +dm8u6006BNyMBREzYXebfuaX5NJmQncrB8WNW8NG7fwICsSBEFnOFnG0bTzmcOHnEuR
+ mXtEYw4KArUjHD4K8WotzBAPEHRvv5O/lcUnpSUn+OB/rP1fL0IeEPv5QWepgyi3Fqxd
+ zVXOPtqTy7/tNQKqrBJCcn5yoD3JD8swnAb/nhwFaJSKM7dMTBBg1jkbwXUTlx5GeOYR
+ fkD7kogJrLL9hN8Du0dNddCx/+/CrM4tc5Ls47B6iLbH4wUIs/Yl0nQHk2UKo23cGqBm
+ 4yaA==
+X-Gm-Message-State: AOJu0YxADVaPtDIsUIyrQLhe1wjKYjvKqMtUTgo+XCj3m2bratF4yo7v
+ DbbBjsLBBDbBwKYC0+Jk/PqmldEPLGcc4EXjKGleynTP9nSvg+Q3KJzvqoWv7V18g0M=
+X-Gm-Gg: ASbGncsyQx2pjmgzT+8QpHps3Ue/45McoSMTJ5FeQIux90V//BM9I3P6Aq4taA//+9m
+ uG12iWqx8rbnkpUYURYQOUQH4n5O30dc/hJBVbUcNXKd7xhcBFhu40tk6RoNKECh+mF1AE9NBh7
+ smA5SkWSIN1JJk+zn86EqLAuyh9CU0Y/uzGzrbr5tvISjtBko6+t/aBgNo8nPI9UO8VX7DgN41o
+ F9pftgIo1lUZmIZviJPSfBti5ZTjBkmdDGiYebg19UUiFpUDCp2IwWQU04UFVq35TNeULErL5NO
+ 07kcDYZXmsFLJ/4XxI5dCv8YYGhI4bZHqFDTVhjq4z8S9eVANRZ0WzunZ6J9Ps744i7mFaDRru3
+ 3eFCv2q3XMIhy8Arqp4HQXCjvRlsqR5xg7VsWDhCDtpDJCCLEX1yjDcvOLt3krn+NNAjgMh9P9q
+ 0WBVsC
+X-Google-Smtp-Source: AGHT+IHDmXmbvJyIUqLMD4V9disa7OINJwzI1xPJ5R3J3wRGum/kho7mHWPRcW5DmMLak1xblOdufg==
+X-Received: by 2002:a05:6808:1588:b0:43f:7287:a5d0 with SMTP id
+ 5614622812f47-4417b3bee6fmr6014065b6e.34.1760111812281; 
+ Fri, 10 Oct 2025 08:56:52 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-4419889ffa4sm716371b6e.10.2025.10.10.08.56.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 10 Oct 2025 08:56:51 -0700 (PDT)
+Date: Fri, 10 Oct 2025 09:56:49 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: Re: [PATCH v3 2/6] pytest: add test script to validate Firmware
+ Handoff
+Message-ID: <20251010155649.GC298503@bill-the-cat>
 References: <20251010144517.3573014-1-raymond.mao@linaro.org>
- <20251010144517.3573014-2-raymond.mao@linaro.org>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20251010144517.3573014-2-raymond.mao@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <20251010144517.3573014-3-raymond.mao@linaro.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4qVk/L7dQH3Z4sMq"
+Content-Disposition: inline
+In-Reply-To: <20251010144517.3573014-3-raymond.mao@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,130 +105,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
 
-On 10/10/25 16:45, Raymond Mao wrote:
-> Fetch OP-TEE (4.7.0), TF-A (v2.13.0), MbedTLS (v3.6) and build
-> bl1 and fip with both Firmware Handoff and Measured Boot enabled.
-> 
+--4qVk/L7dQH3Z4sMq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Oct 10, 2025 at 07:45:06AM -0700, Raymond Mao wrote:
+
+> Add test cases to validate FDT and TPM eventlog handoff from TF-A
+> and OP-TEE via bloblist.
+>=20
+> For FDT, the nodes 'reserved-memory' and 'firmware' appended by
+> OP-TEE indicates a successful handoff.
+>=20
+> For TPM eventlog, the events 'SECURE_RT_EL3', 'SECURE_RT_EL1_OPTEE'
+> and 'SECURE_RT_EL1_OPTEE_EXTRA1' created by TF-A indicates a
+> successful handoff.
+>=20
 > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> ---
-> Changes in V2:
-> - Move OP-TEE dependencies into the common group.
-> - Fetch MbedTLS/TF-A and build bl1/fip in dockerfile instead of
->   post-buildman script.
-> - Remove Trust Boot related build options.
-> Changes in V3:
-> - Clean-up of OP-TEE deps.
-> 
->  tools/docker/Dockerfile | 44 +++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 42 insertions(+), 2 deletions(-)
-> 
-> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
-> index 5b4c75f8400..51d07b1482c 100644
-> --- a/tools/docker/Dockerfile
-> +++ b/tools/docker/Dockerfile
-> @@ -122,8 +122,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
->  	python-is-python3 \
->  	python2.7 \
->  	python3 \
-> +	python3-cryptography \
->  	python3-dev \
->  	python3-pip \
-> +	python3-pyelftools \
->  	python3-sphinx \
->  	python3-tomli \
->  	python3-venv \
-> @@ -227,10 +229,30 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
->  	make -j$(nproc) all install && \
->  	rm -rf /tmp/qemu
->  
-> -# Build fiptool
-> +# Build OP-TEE for qemu_arm64
-> +RUN git clone https://github.com/OP-TEE/optee_os.git /tmp/optee_os && \
-> +	cd /tmp/optee_os/ && \
-> +	git checkout 4.7.0 && \
-> +	make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
 
-OK
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
-> +		CROSS_COMPILE_core=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
+--=20
+Tom
 
-Not needed (eventually defaults to $(CROSS_COMPILE))
+--4qVk/L7dQH3Z4sMq
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> +		CROSS_COMPILE32=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi- \
+-----BEGIN PGP SIGNATURE-----
 
-OK
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOksvQAKCRAr4qD1Cr/k
+CniMAP9Pg7CVTWw1PLSLjeE7KDgD3f6Jo7DLnvBu5Xt7ir5aPQEAg3D2ZZ+nt+1s
+HktNFUBq/fX9D4Hga4UuogpLKlhNqwQ=
+=DRAn
+-----END PGP SIGNATURE-----
 
-> +		CROSS_COMPILE_ta_arm32=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi- \
-> +		CROSS_COMPILE_ta_arm64=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
-> +		ARCH=arm \
-> +		CFG_ARM64_core=y \
-
-All 4 lines not needed (defaults)
-
-> +		CFG_TRANSFER_LIST=y CFG_MAP_EXT_DT_SECURE=y \
-> +		PLATFORM=vexpress-qemu_armv8a CFG_RPMB_FS=y \
-
-OK
-
-> +		CFG_RPMB_FS_DEV_ID=0 CFG_CORE_HEAP_SIZE=524288 CFG_RPMB_WRITE_KEY=y \
-
-CFG_RPMB_FS_DEV_ID=0 not needed (default)
-
-> +		CFG_CORE_HEAP_SIZE=524288 CFG_CORE_DYN_SHM=y CFG_RPMB_TESTKEY=y \
-
-CFG_CORE_DYN_SHM=y not needed (default)
-
-> +		CFG_RPMB_WRITE_KEY=1 \
-
-Already set above
-
-> +		CFG_REE_FS=n CFG_CORE_ARM64_PA_BITS=48  \
-
-OK
-
-> +		CFG_TEE_CORE_LOG_LEVEL=4 CFG_TEE_TA_LOG_LEVEL=1 DEBUG=y
-
-CFG_TEE_TA_LOG_LEVEL=1 not needed (default).
-Would the CFG_TEE_CORE_LOG_LEVEL (2 == LOG_LEVEL_ERROR) and DEBUG (disabled) be OK?
-
-> +
-> +# Build fiptool, bl1 and fip for fvp and qemu_arm64
-> +RUN git clone --branch mbedtls-3.6 https://github.com/ARMmbed/mbedtls.git /tmp/mbedtls
->  RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a && \
->  	cd /tmp/tf-a/ && \
-> -	git checkout v2.12.0 && \
-> +	git checkout v2.13.0 && \
->  	make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
->  		PLAT=fvp BL33=/dev/null -j$(nproc) all fip && \
->  	mkdir -p /usr/local/bin /opt/tf-a/vexpress_fvp && \
-> @@ -243,6 +265,24 @@ RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/t
->  	mkdir -p /opt/tf-a/vexpress_fvp_bloblist && \
->  	cp build/fvp/release/fip.bin build/fvp/release/bl1.bin \
->  		/opt/tf-a/vexpress_fvp_bloblist/ && \
-> +	make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
-> +		PLAT=qemu \
-> +		BL33=/dev/null \
-> +		BL32=/tmp/optee_os/out/arm-plat-vexpress/core/tee-header_v2.bin \
-> +		BL32_EXTRA1=/tmp/optee_os/out/arm-plat-vexpress/core/tee-pager_v2.bin \
-> +		BL32_EXTRA2=/tmp/optee_os/out/arm-plat-vexpress/core/tee-pageable_v2.bin \
-> +		BL32_RAM_LOCATION=tdram SPD=opteed \
-> +		TRANSFER_LIST=1 E=0 \
-> +		MEASURED_BOOT=1 \
-> +		EVENT_LOG_LEVEL=10 \
-> +		MBOOT_EL_HASH_ALG=sha256 \
-> +		MBEDTLS_DIR=/tmp/mbedtls \
-> +		-j$(nproc) all fip && \
-> +	mkdir -p /opt/tf-a/qemu_arm64_fw_handoff_tfa_optee && \
-> +	cp build/qemu/release/fip.bin build/qemu/release/bl1.bin \
-> +		/opt/tf-a/qemu_arm64_fw_handoff_tfa_optee/ && \
-> +	rm -rf /tmp/optee_os && \
-> +	rm -rf /tmp/mbedtls && \
->  	rm -rf /tmp/tf-a
->  
->  # Download the Arm Architecture FVP platform. This file is double compressed.
-
-Thanks,
--- 
-Jerome
+--4qVk/L7dQH3Z4sMq--
