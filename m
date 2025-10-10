@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3CD6CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:14:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D884CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 11:15:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7926D840E4;
-	Fri, 10 Oct 2025 13:14:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE0F58419D;
+	Fri, 10 Oct 2025 13:14:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fALaDvIL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="POWncwgN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E287D8410C; Fri, 10 Oct 2025 13:14:51 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 266FD83FC1; Fri, 10 Oct 2025 13:14:55 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22FCE840E4
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:14:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5551783FE6
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 13:14:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-639e34ffa69so2947127a12.3
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:14:50 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-b3c2db014easo376233066b.0
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 04:14:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760094889; x=1760699689; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760094893; x=1760699693; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mZ5l6axcPX1Jv/UrOwLivJxk9kOV0uJRMNh9tqF1tQ0=;
- b=fALaDvILvVb4UQyFuXKv3zwaRP/0BrpWnf5QJv5XrsCPCyZ3bnIGWT6xbxVrJmtCUI
- tbxCOBnv7p4ZMe8oA/dNYloDseRQJMuhkf+GazIe35IjdNKi2sYlAx7QQE9pTVr5vghW
- mKwzlsdhSoCiXA7L0DWVDSnPGnaxcu+N1vDoU=
+ bh=EruilifVWk7v6K7uo/dkBWd1jIPoqHjEri5V8ACJCrA=;
+ b=POWncwgNAPWcLZaD+xQM8dV/0R7H1tCPaH6KCj1vzEt2ZTaIhUDjOI4rzxS1VZmpzv
+ kKyITe2hayGdE5RgYuauBAqUW2g9NHbjraOb3+HgS1Ejgo6/ohGqu7+zWzu7MdP9zQAk
+ Nh45ti7BICOydfzo3MnP4uHf7FFnZuKjPdCTw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760094889; x=1760699689;
+ d=1e100.net; s=20230601; t=1760094893; x=1760699693;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mZ5l6axcPX1Jv/UrOwLivJxk9kOV0uJRMNh9tqF1tQ0=;
- b=dnesr+UH75oxT3PpHb77NA0Mhye0vRCHZjy4a/774p/88TMXNZ5GDxUJruoTdgDk86
- Mo8OTv+uPAPJXIAUHRb//MYBv4IokYyQYa/VKE4q0Zo9vGw+Ar3eqrPhvD5ClLd3RZmH
- H8M/My1CHQ2IlJzNLDntdKby1p9Bt2iSAd9dKv2EizbTs9L7mxjAOkGaGDs2CYgaTml6
- I7X0CADCMlS1niWX9Rtyg+1FurPga6I+1XznSDQ96kZYHazL/0NVVzheTPQcfZeL0EJL
- PVhT/KdV7OHxNURvled3xXlJGRKCJnBPa12tDNiRU6fM+AlVD/dXLsq2sMi90ixAL/XY
- UMFg==
+ bh=EruilifVWk7v6K7uo/dkBWd1jIPoqHjEri5V8ACJCrA=;
+ b=sInu0f62GVmXIYN0QddVX9HsTmzyOLNOI5ynI+NxfLUJ8XsSMiSsdm9G34dCDHmoNi
+ awck98gLWGoyonjpOkns8pHJaZ0grbuzXRymKQA0VM4TETAIW+QWEZI0813p0BH5O++N
+ /M/3aQUifksKUs9TLXtCfCJQ4JCTAK8/Ov9WN9EWd4NgdlwpiggniqR9HoiGlT6TaG2x
+ F6IYURyqE4rZcvcrP0whMoCaZDOJV5u+RRB97fZKlp/xGUtHw32e0kED+vpQ/+zxrtIf
+ UTzYQhAObjbgrps4rmazrT4ww68DfGiuwwv7/PUMKPpt+bXun/5Jk5OHs6CxeyTlHFFD
+ 7urQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLyNVshrscERyNR6naggoenlhpSEciftXAHIFpT/eF6sJWGepb2Fx2c1zxb/JCuunf1j7MxSQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxDyFq5BEqWl5HXojvWodAbYrFupCcAilp+CiQRib8cmlLhjxn
- W1RXEZcGRMBp2jBF1MihWBojrAUlqF0tMXH5YK4zTvZTXlg4ivb36JvjRafbhmLtVEvsZBy6BzG
- QXi+NiOdqQgrL7fEkZRHNj27/7hJ86rbeut6+Sf14
-X-Gm-Gg: ASbGncvyKAhHnGXwONaxNZ1yT2l1p5HGL0dDsuGciio7XTtC4fandaHDPXXge8PN/OB
- oYKbpELuUQoV/P24vbGUSywH6DZDyfcWLLMFB8rMLWdEPZhoWxcGUXOe/wx8aIkbJm/bur3ixMK
- WhmO309v86N/nnS0OZiMkZv/tOEYUlcGJwBNzt51aAJg3aTQVi2d3sGbgOv9nmttr+pw1B2ZqEz
- jLAwke7zIWG5TsVl1CsuA==
-X-Google-Smtp-Source: AGHT+IG8Htjz2aciej4nEUhnfClXUsJ7g6jlf6KtvQrK52SJGJcNYm210rf8oKHib267YHAh6OpQ+oDYluMVvFblmV0=
-X-Received: by 2002:a17:907:3f21:b0:b4f:ee15:8ae8 with SMTP id
- a640c23a62f3a-b50ace22a13mr1153636766b.58.1760094889654; Fri, 10 Oct 2025
- 04:14:49 -0700 (PDT)
+ AJvYcCXm9+AQFMtYnJjNsW79fD+ZsrefZVL9vKSvpfxfYDNE2ty1qKbdrDbYC3TZ4yN3pUvhdtlPc4E=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0dVoWt+VfCAHfUmoli6ZAIo+uwtaqwFn5PBVd1x0dAKczN59E
+ tCtujxEtxdPrG+oImlxZTjEQoE2YqPxyHu9nd8TCNA+w7ccabcWQvVjXQph0Wa7SoZwchHuEkRO
+ jIuch2tMUl5zP1K2z7Gyk4NxhVbu+QU8wpm+rF87h
+X-Gm-Gg: ASbGncshAeEebr/hTjYokTvSvqbj2Kn19geIyInG3nMKzEwy/uPPWca6W+LhhlFZvEC
+ 1ZY8arCk4yUAdDylyZAyF4mE4Eda9ZkMu0pMKG5nr5WUhFgnCD52Gj5H6g/AA+GCuIJmwoWuDDv
+ ahjqZC9b2V/C1zbHp8sLCvNAC5qRn2ggdw7kwyYf3cGnllShxLXeFPB6PZrqWBkZLOpXXS3IMjx
+ BRiHNIpDjf2UO1IsWrI5A==
+X-Google-Smtp-Source: AGHT+IEJmK29DeOUIYpTZ7UVauKVVZknkiobHtWHpiFIaCDEc49A2TF/5+xah+OyvGCoG6iQmA0aHte7hTQ24ZElG3A=
+X-Received: by 2002:a17:907:961b:b0:b3a:ecc1:7769 with SMTP id
+ a640c23a62f3a-b50ac0cb195mr1150829266b.52.1760094892793; Fri, 10 Oct 2025
+ 04:14:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
- <20251009-feature_sysboot_extension_board-v2-17-e09b39e54de5@bootlin.com>
-In-Reply-To: <20251009-feature_sysboot_extension_board-v2-17-e09b39e54de5@bootlin.com>
+ <20251009-feature_sysboot_extension_board-v2-18-e09b39e54de5@bootlin.com>
+In-Reply-To: <20251009-feature_sysboot_extension_board-v2-18-e09b39e54de5@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 10 Oct 2025 12:13:34 +0100
-X-Gm-Features: AS18NWCo85uuci1wh-NIHS4DdVYscDgalRJ2e0M8DUSmW0hxFQe6X-hw9h0fZyk
-Message-ID: <CAFLszTjZGxK3_O9_OXTNHCwEkZXmZz5epXbH5wEdQ-1QNHcyCA@mail.gmail.com>
-Subject: Re: [PATCH v2 17/18] boot: bootmeth_efi: Refactor
- distro_efi_try_bootflow_files return logic
+Date: Fri, 10 Oct 2025 12:13:36 +0100
+X-Gm-Features: AS18NWCm-m348UvnL2spQhPYhrhlWmN3WxpMHc-Uq7ZJmru9atU_YMJaIzcKf6s
+Message-ID: <CAFLszTh1hnxNUYDDkSjWj+nca8xtE8ZPFLnQCzHUyQkLtsJ91g@mail.gmail.com>
+Subject: Re: [PATCH v2 18/18] boot: bootmeth_efi: Add extension board
+ devicetree overlay support
 To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
@@ -99,12 +99,20 @@ X-Virus-Status: Clean
 On Thu, 9 Oct 2025 at 15:51, Kory Maincent (TI.com)
 <kory.maincent@bootlin.com> wrote:
 >
-> Simplify the return path in distro_efi_try_bootflow_files() to prepare
-> for adding extension board support in a subsequent commit.
+> Add support for scanning and applying extension board devicetree
+> overlays during EFI boot. After loading the main board devicetree,
+> the system now scans for available extension boards and applies their
+> overlays automatically.
 >
 > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 > ---
->  boot/bootmeth_efi.c | 31 ++++++++++++++++---------------
->  1 file changed, 16 insertions(+), 15 deletions(-)
+>
+> Not yet tested, need to find a board with extension boards and supporting
+> EFI boot. Roger Quadros could you test it on your side?
+> ---
+>  boot/bootmeth_efi.c | 67 ++++++++++++++++++++++++++++++++++++++++++++---------
+>  1 file changed, 56 insertions(+), 11 deletions(-)
+
+Very nice!
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
