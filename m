@@ -4,133 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C99CCCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 21:36:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB265CCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 21:40:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6F6D83F8E;
-	Fri, 10 Oct 2025 23:36:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 1CF518404D;
+	Fri, 10 Oct 2025 23:40:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="LV0SRGoW";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="FuZn0J94";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1B6F83FB0; Fri, 10 Oct 2025 23:36:29 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DB5EE8432E; Fri, 10 Oct 2025 23:40:46 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D0FA83906
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 23:36:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id AC95983F8E
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 23:40:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3ee64bc6b85so2662207f8f.3
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 14:36:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1760132187; x=1760736987; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=f9Gf/LCpHZK5dQhjArtBvDC8tOfgKEu7/eQXm0ArTf4=;
- b=LV0SRGoWtpTeRp3k77/EWaQjXaNT/iydIS9TB81giq+g+JsoNVnyHGtpwnwiV9jalU
- Es9PHrAcB9TvCWXv1rNtqoEkW1u6v4bro+dRH18nggqLqjoAzMHQvH81P0QvarcYEWeL
- 8ihbo9aMDWUJam/2kSefhuFFsf6PQEdjoLnMHCa77/4W8hhAT+ltp+196F4OvyO5VCAi
- sbxgJkMjCabXiBz3YyT7UGyi3TTEYF+Uy/IP4E7/Fgjj9jIBen0m6HVnO1M7EaGLgcWV
- swnHQeZxYh0N4m+Jtbg/ozzqtXIyCnAqal4sEsFjeuhMyDB5ehR/tGSult87OaTlDk/V
- Cr1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760132187; x=1760736987;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f9Gf/LCpHZK5dQhjArtBvDC8tOfgKEu7/eQXm0ArTf4=;
- b=CvTHHf1viuRklsJLvvl/2T16iC1Xy+NnX2+Cw0l/3fPmFbJNzBWa41slXFdcpYCZ6J
- poHM2Is92nmY9PCGAWJIDzv5hg6uRBH6XPUoF+SPdlq0C6e8FwY6VYwnKFm03zwAlBaD
- b+bYqnauEnjgauCs5Mz6qOCwFU55bRNhJ0ZBpU48UWKI8tMUDv/TBJsH/m4gmpAMv1nf
- LsJivFUJzo2rxdJJjk8uipvlNDhpROGE2U211ei/Db+Fqq+JTlLXxDfnJ/GWKXpUFAGU
- fkfUfRDjxbEVb+zpCkEzppAaB+q/qTG+80CL5pdkjE9hgBGKYmj8QGVsJNB6OArlrmCl
- BGdA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUiYe4uj1FaQ1dfVK5Q9+NChArqAaBA3yzRS2atwIbQV42GFGdvK8fnOudsfMaoCOugq2Fttas=@lists.denx.de
-X-Gm-Message-State: AOJu0YyqT3CXstEM2qT52GQTfJgC1pxVOffj7qlFbp8b5WWMufpzWwjO
- eiqxAjfYNnppdFqrikC9BObe/5nZbcBCItPzDSP9h/xVcyzKMMY927ioCRWEENFxKPY=
-X-Gm-Gg: ASbGnctqsyHEwQ2JgfBbCHa4CuyBcueDLm14qzS57R/pkxxfCzzXMzqZ3s/G+c7REwX
- ctmcXwx4d2euGf36ijxcoQbtduenQJKWZZzGm0SbNsjkAazY4QiQmGasiIyosUysBeQBak5JKm/
- ZbILgCJBmfM4Ea8UjnDo+zGDfmGZTZiO+VeK3HJyxtJEwis5qOE74Dri+hdR8B0y9Q54u+RJ0rb
- FGj8oiWuioxSKWWlfpsRiCFop3zgMs3OuNuSdw8cQ1Ly1ZBhxNNatBRb1p2/aXRZSL1n0wc69kp
- XBQcJGwe7NoApZf63iO/Hq+W4JvANn3d4DyCjtEjVOZAkBYwSsG18J21aGQK+TRao9MV9yWVgmF
- W6s/5TlgQ9BoiXIxMOgjYi25etYVki2YyiU0H8tXJQ9bFgPD58j0Hsw==
-X-Google-Smtp-Source: AGHT+IF9R/c7Rahy/JUKb39id6817Rx348tXV/ZIopYo/V2y63ST6KpcSrLhPjTEB4xuJ7d2alFZfw==
-X-Received: by 2002:a05:6000:430e:b0:3e7:d199:7889 with SMTP id
- ffacd0b85a97d-4266e7c4ed5mr10104269f8f.27.1760132187466; 
- Fri, 10 Oct 2025 14:36:27 -0700 (PDT)
-Received: from [192.168.2.177] ([91.116.220.47])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-426ce5e1206sm5754499f8f.43.2025.10.10.14.36.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 10 Oct 2025 14:36:27 -0700 (PDT)
-Message-ID: <83d5b542-e648-4849-80c3-a3073242f72c@suse.com>
-Date: Fri, 10 Oct 2025 23:36:25 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1760132444; x=1760737244; i=xypron.glpk@gmx.de;
+ bh=DLFqvO4CZQ+hcQOtGBsdLNJayB3AqUJJu6awqRk9MV8=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=FuZn0J94uywf1WjZKiaGfxzCSTuxj2ZlP+3cijPpSv2NWFR2zcJTIXUH9DlBCOav
+ DCRYVCMbrAuJtCa7E6XZTxYU3pLuzNRfur8ADi8MHnrjDuVKGXdGzkLtllpqQ2J2N
+ I+eyklSBMjGoteEE18j5fk98/wH7/F5dal1DnYZ6pbUZh7GJpD2GIbqAQd9n16yRs
+ rwIF0bUp8+GJySjkH9NoIwX3qvUV0V0sj9a6D7DpZwRfV/QmsyS/cHOtup7UHXAk2
+ bXSs0tZ6Rcidbz24Zw4QXacqsAAWCoASl8U5hXbTDfCcxqOtc7AphI+oUD4XIBrOp
+ D+K4LHH/nklbNChZoA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M89L1-1vBzgN0oHj-00CF1a; Fri, 10
+ Oct 2025 23:40:44 +0200
+Message-ID: <4ac4a2a7-814f-4407-b1ea-f5f57d3bbd7d@gmx.de>
+Date: Fri, 10 Oct 2025 23:40:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] Improve RaspBerry Pi 5 support part1: Fixes
-To: Torsten Duwe <duwe@lst.de>, Simon Glass <sjg@chromium.org>
-Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-References: <20251010161442.410C4227AAE@verein.lst.de>
-Content-Language: en-US, ca-ES, es-ES
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20251010161442.410C4227AAE@verein.lst.de>
+Subject: Re: [PATCH RFH DO NOT APPLY] test/py: Update to pytest 8.0.2
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20251010134330.1094378-1-trini@konsulko.com>
+ <20251010134410.1094470-1-trini@konsulko.com>
+ <d407b3a6-3945-416f-95fa-160da63ca8fb@gmx.de>
+ <20251010141809.GX298503@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251010141809.GX298503@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:lMt+eAUbPhhQFIrGjW8gra4UMfzlHV2nDxcL5d83u5lpxUcbw3e
+ nIAQABcaM2sPSmEOePql1MOYSN7VgYiS3xibRYHzPAidNK8jg8dGsjDClmDjkFGB7QUiZ8s
+ FMaBConDi8ZfXj6CsjUIOrjnhy9aBPb4SbJbtTTT9R75bATedWKW3/Q4CW+tiptEgNcbWOZ
+ ByXxtwhJBiEkniURt4BCw==
+UI-OutboundReport: notjunk:1;M01:P0:FG5/a22NYPc=;EYOma4owrDcs/tH+4UzTeR1KJqe
+ +PEIJNxQwioAZgOIU7XDcdX2u0WK8X+QbFo3OfpP+M7jQ8YLM3k8dXE9tooLA/h0LMcs5WlhU
+ UFU8+hJyC+t5bCv/3cGAccAeZikEgDQf0KeSkIAe25WEnDCCjf3kG5AHAYcnaJL6dRApo1eiv
+ lE5kBchCQqFHk+N2oPQy5d6QUtmiEMbbBqLiOXwWdbUq3DDXLLFXomvkkVBTnHUo0olADokNg
+ 2BQyvwT+TaEWrMh6HnYxq544Bo1x7uUgtMm1bFRReXY4D15NKePTdslTsm9Dp6ob6Xgf77XEr
+ AgLZMfLKuuGgYeLTvpAsqz43n6Ozz+5I6+JBvsgFZLAiNFsbTrmsz5VVSk4VnW2FLmFk5wcdt
+ 8b2gHK6p9etc2fcXuz+tjnjTPOFfv1Y9JjUqRHgCHk3UbN2l9LBTKcxsoAYO2EbjRzqjS6092
+ GPtHR1K9kTron7WZ7el/6tWMoppZ8lWfwt+Jn7/bkeNQwBW27ETcruXhfNERCz4J9W43nW+0k
+ tzwChEehPBTWyFLR3bROQ6IAj9cWexxgdwX9ni5/stEP5DLSgI8B4dV5fg9r84RDTopM7s3mY
+ D9OBuqefwcclKjPdls1JfB9gRyw7nWbJZVDN6HFCcfX3X9tCJu8txxjzel7PvBjrYFqy8TXZa
+ 9TqlPBgPA+Ksndqt96oCKSAFJq6qUXKfEMHwNRgpQNbo9VIJjDrU6xldI5Exz1whIn6AbqeYg
+ FwPOBjXt9L55gidAQbGh+sIEe+FRAYmcoe9UTksej6zynLvrNl9Zzh/v8y1PeMb9BRMuVfnlV
+ MEU0uf+hf2vuLQqvkwCLVhfj+iDGWId+t+Pq+kj/QtefDIyORwrBZwOmh0GaA98dM0Xfxh2n1
+ gwkBfpQVaJRukzHXFhIGiahwcX0Sry7Fg3qPAJnYq029Sl6T4Cu4eyCMI6/4bsS6+3AuIy2Hg
+ jXsVX6tlGv+LNBHGTIwOJYKg2xuaxnZoyA+kvsV9Efyau78/DO3fyrumHujbAODMFSYq6N8Bk
+ rddC2I7kkEYHda5H6XqxnTwWinm0GA0bwjAxGkvRihFHW/2iKs2dJqnUoXv6RYMwQklKLiw79
+ vIzTElcJbPlDZFnpe5iNaP4KAe/IEbAB3aM1DRVzxeXiS4n+u1VrgTbdfia9nL7R+r5hE4JPU
+ i3XSEElUS/z1qnFdwxK3HSAfrRYLHxwfMjLzCdPCThvkp/fyZ2t1rbC+mgHkYeyYugYJ2lHLF
+ 8qb4k8+ErpzP+LoLiSEw2kgvCExvRBfKeZk/tBgrofyFofFGbBMM3u5fUb+cDoQ9KR3Z/zL4n
+ u8TTapZ7aQoU1YUEuktan6b3UZgTMDxnzzKq72TwDtm9+s5qudQdEe7ckbb/LVT+UbA9A/q7d
+ 5865mY6lOere8x0J1NZGVc8vujO1QFxapLC8cK4b2VYOFsHGiAeS+5AIPy3JdXMsuXE1zM3pK
+ BPXYA/vbbQw1xNg6/ttqI6elRwUtAcyBBTb5pD4QvKvvqb1YcnORISnYKgC10fDbPoSUgyTLm
+ 8EDimu9UEn7KdzaynMWpQDTzkixejMUpi8sTwsY2o9tjwpzHUjQRp0y3H9tglslMsMadBmEfu
+ bnlE1om9JF4gg/rr33DztFNj2VGgWmqMTg1pQUj3vzin5DsEEsSK4NL68elLEZ0X4Mu6X3XGE
+ 4IvNiStSkpUz//62TdovdIBF8p9+4dYM/uZU+04wTRi/6BrTU3Lqm1N9vI1y0zcLLg82h2oGP
+ N3JT+H89XOFJ3b7qQJMpbMUs9wXOnMpk1Bz1ggJYf8RjQr3mtX8DhRJJ6tBGrwC1boIrSJriL
+ lHFa8+HTMRaWsMMcmG9RI5nasY4nvIQKO7I1qsdgsC1FCxntwwsRlYYzJbOHxvlCc1+gGpEnL
+ 3A8UVwkohNzjQWoFuhO9v3LQ5uHpJLdBQed0cE9EE2LGIg6c8CVxn32+cC6FilYNkai+QSHvo
+ quzAYu+q/EWU3EWPJ9b1JRP08CmtSJnv6ndFk2yETlGhv/I6O37iFLHH5j6/TGtSemGVjH8jW
+ ZoO8Hfq5YiH4oGRAnPnNyDekbliMiYg9m6uSZo1eovKCWbjUrD3HwGAoAgXjrQEfaKpXvpz7W
+ yK96AJiGV26pDJ6nuyOotvZSrekc6r2KYMO0KrgnW+21wlta/57iuMTKuDguUM1ywItB34/1L
+ kpfm51kpUZ4Bwp97/PyKwQLlssePFXZiMA45nfL6ole8FT5x+mgQt7wZEIin1l5EKhrEk86f+
+ QqbSjiE0B+pyUW08vdbZG122ndKfBqqVa9sQvrjgAE1rKvVdwvgTT2QQa7KugOfThqFVf5PbB
+ bufD/bPe/WCCygNY42Q/CvFV7AgLV8fSuaIbtJyEDCjHNAKxPJOiXQ49tcVlFW0gtp4rAHw9v
+ zfj3auFVHpDbdoQYpbcod1jt0B4E6wO7emEoFJe3/j6hnvrlIo0WfC0qqf1/ae67uB/yHSUha
+ 3qmHxaf3oNNOWfD64olAYWZ+Us93KWHTmBWrEZJkhzhqLRCNoWAf6luITAT928zxLV6cWcjRC
+ baDE+cZ2aYdLWjoScVehUlhk/J21aZ1QZq5u9UJ65ycFDa9zxQyRkmzUCkfSIKbStUwgqN14d
+ iPheis0vuRxkBqqbgXxI41tcVPTFaAy2E+4O0mc36IuHxlYarq/hf/azFZfjdMHHZcBdl2Uo0
+ 9i6mdQVg3fHTQXrnRLBdXe4KVkXDnxOQxtTk3EdBQo1Q+od/Wx/v+bFd/GxTr0R9VVBIVAbqm
+ ge0zSsDkoNKh+cJo9uAeSVvT/yySvT7aVPoONo6/YHcFcJhbebLu/6slCM0hE4HV7le0u3OHy
+ uoCGAm2MGQa57WJpEQvmGn4O7pwNJm91MiKBLFYV+EzX9EAkjEZzartPhFJQhr6K7GBy5Gpbd
+ NCve+4R9qP1nlsPlrqQ8vwVE8b1mhO5W0rBrel5dmH1UHb7DS0oPOtPXXP5DreK7OHljcvteb
+ kYblkidpsmyls/JaO88hYz8RtPyerUgPyQPYfi9u5ZbWNJkwCKIEakFBvRO3d1Hd2ch+d915f
+ cdvZZgWgW3jcC8zrefXvGLCP/Fw8ieu+HBueOo1u7UhzerHv9MPcydACcYe1M5kXk0XldWtXw
+ hjAfLkEyPO5OtfwWPGHVbHFch0bUs2NxjMCMfdUAi0VzbXIF0nRwgxKJ2+obGAhncN3X98r3D
+ +RWI0zuODSGjUD1y9GPiHIKN3uSdJEWCWX0msiFW43hFbKG43d/bcu4sdKS+B9qf+v0cdYcez
+ sgHY1BuZkuyquTCF9IC1XGMBhhI1OvwpZPW5zE3yNpeao34gT3lmxwgurRC+0rZCAtZf9ldlu
+ V2t4j8HlhTIeZt18Qwy0GCpsOduBKpsLeMloCjpfyOQ0kzxSCVYMX+Hsjb28Y+PshJtMzLTtO
+ g/Dbl3VRbUrOGylZSoI6IvjzaLElMnABjS+192fhZ8ywkRKhcYN9lpwlFQZ8ubOuri9NF6CBl
+ Sn9L2K6n2ZpBJsnXbsWSCOlHCkVzcp/ZJXGWXT5Aq28ri+bhjo31GmR86emaUcTB8cvvhSvYq
+ vueOSNg4WlDZEndWuEtufHq79VST8Ym1ogVA7oAwW/sNy7NwrcxV4/NjN3jqPyZV8E2cWdLSK
+ cCRh1nMWTbTHUUvcs+dXt+PR7CfoQMU15gsJqfFNPs4AgUHEAr8lUv/av367fX8ncpKQoBDHH
+ YeOGOzDX4xi3WsADdr8D6pFFeDWGAoh/m3Pf+7EuzARxDODBhEEPX2pmqFuQ66fIfyA1ybZ/c
+ UmhIRBo8CnRwGODkZc0GPgIlRwCRYevmluWKM6HACS0T64tN4Ggz+fHPXz6CD748IdZ0CIK4k
+ IVoEYTesfeAev4EHccdVnOwfdsvx8V6jBTD7hou3rf8pJnLc2okfyuj5+JD44QmkgD7M+O0CL
+ rAXhhsV/5PaOAAJRi3J+Ur0pklL/XEw/3yTmV5BHU9c+LMvGp9fEaBy/QNFNPKvEOw6hNSuix
+ c//3vcckbbHOf+qEzlLhg3Y+OpIeDQpbpIhupiMs87SafhaX9YMCmXJnFtXwKDTp1s9ly9wWw
+ /hcnfsbAKTlyoGQn4yqEXMm2QdFAuOnscxOR1cLxsSwb+EX8qHG3e7sIDvrdsiHLv8NaiadEf
+ kerLzDzgm1YeVUFBPtBMCsl/g25lM1Uf9DI7EP4qGjJ8W7LRS1R3J6EZGpn1XpM/nfPTe7qzK
+ TwypOzbuVqpgKotdvuf3zWkhxt8xtyuvfhdzeu7ZPMcNYUfFsN/zfc/P93jHRgXJEjR12QV7D
+ EZp+y4qqHnCIokKrvwhOuH8Ro6eIYkaBZ1hG5AOAsy9M+r0ymS0CaHq5aZ+/YBSdy5mWysyNq
+ dRXTQOlj5vsR6Gf4OzvGGko30m76qdvUcUjd07ORJu9g6yUOWsr1QIv/9asXWy0A3zwKzcqiG
+ DkdrWP399YVd1dl7taZThwcfqENMse2YAyR4/FsUmqyM++S6c8w1LvKUMaCHGCvxd+QeNvefL
+ vvIUu/AuLtIGWYpwvmi5hoXifjzpngc7T3ahOyJUxizwJDMjLqJbtGwWBU7HsjwVm1pz+BGec
+ S/Leyen8cXRsFyJZ/Au7hnmW49VcSxi05jItYTA4T2D/pMjZOS72gbfKQGgKBl+suQdpU53V3
+ DdVgdTveUtHZFCQfltwH9MWtRSOQmQY1JUFYHYYvv+WrJwcIRc7TkaRrElXk8zxMyvvh7C/JM
+ FBuVIjp8xbm1w3zuCUhjnlqEkJna/N512oHI/EsTK+66WDjIsUhC1iPIDijxnz3VQc8Vaatoa
+ Cd1KZKuK6ADunPd3f6KtIyv0+vqBUzUVTCsaL3mr3F9YPA30w1eSgG5ZfSQDqnKEqfF0CGyem
+ QCZnhbxwCFuauSWouoapLsH+tSqTN3pfYYPhsRsOJLhw1AfaTBhogjVsO2GgXJztwgaCoZLXW
+ CAVuY5sZCRIirQUugB/qWZvQviF8Bw+A1yufZwNW3LuZKvusysp99R74pEfSuGBIyqVpta3KZ
+ jDyCbtUDycLJ2saBcXkIEbudk70KjorHm4FK+HT6RZfoRXPhnTeKk7es
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,29 +150,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Torsten,
+On 10/10/25 16:18, Tom Rini wrote:
+> On Fri, Oct 10, 2025 at 03:47:14PM +0200, Heinrich Schuchardt wrote:
+>> On 10/10/25 15:44, Tom Rini wrote:
+>>> This is not intended to apply directly as currently it leads to the
+>>> sandbox.py (and sandbox build with clang) tests failing as the efi
+>>> selftest now has 4 failures when before it had zero.
+>>>
+>>> Signed-off-by: Tom Rini <trini@konsulko.com>
+>>
+>> Why wouldn't we try to move to the current release 8.4.2?
+>=20
+> My first move was to 8.4.2, which had this failure. I jumped back to
+> 7.4.5 which doesn't (so that we can move forward with newer labgrid
+> support). I then started slowly incrementing to see when the failure was
+> introduced (as it can be helpful to look at the upstream changelogs to
+> have an idea why our tests now fail) and luckily it seems to be in the
+> 8.0.x range.
+>=20
 
-On 10/10/2025 18:14, Torsten Duwe wrote:
-> Hi all,
-> 
-> This series is basically a resend of Oleksii Moisieiev's from February[0].
-> I forward-ported the code where neccessary, rephrased some explanations,
-> retested and reshuffled the changes, grouping them into at least 3 parts:
-> 
->       1: Fixes
->       2: PCIe support for the bcm2712
->       3: RP1 chip and MACB ethernet support
-> 
-> Haven't tried USB yet, but with the full series NVMe boot is working,
-> and I get a "file not found" from my DHCP/TFTP server.
-> 
-> Let's start with the fixes, they should be undisputable. Credits go
-> to the epam guys for tracking these down. Patches should apply cleanly
-> on 2025.10 and on current master [ecdc3872a767].
-> 
+The issue is due to a change of the sequence in which tests are running.
 
-Sounds good, but please use ./scripts/get_maintainer.pl to get all the emails 
-you should send this series to.
+test/py/tests/test_efi_bootmgr.py before=20
+test/py/tests/test_efi_secboot/*. With newer pytest it is running after=20
+the secure boot tests.
 
-Best regards,
-Matthias
+Cf.
+[PATCH 1/1] test: uninstall PK after secboot tests
+https://lore.kernel.org/u-boot/20251010205514.GG298503@bill-the-cat/T/#t
+
+Best regards
+
+Heinrich
