@@ -4,82 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB40BCCA476
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54633CCD185
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 19:24:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9081584047;
+	by phobos.denx.de (Postfix) with ESMTP id D9BEB8432E;
 	Fri, 10 Oct 2025 21:23:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mvYcmCup";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pSMGd/yw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 102F48433B; Fri, 10 Oct 2025 21:23:28 +0200 (CEST)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id EB5EB8442B; Fri, 10 Oct 2025 21:23:28 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FB2083F8E
+ by phobos.denx.de (Postfix) with ESMTPS id EAA4784057
  for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 21:23:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-35bdcaf79e7so1694802fac.0
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-64439bef307so705092eaf.3
  for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 12:23:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760124205; x=1760729005; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760124206; x=1760729006; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n4QzzB9d/6oz2Wf0cdSnASDLkG3DrD4RNj8qllmqzck=;
- b=mvYcmCupffnZJ9vp7GQK9StUdxRaQ/xt7tReq7+DIyiE2T3ZHNCgxTBbW50dwsHRbJ
- TvkfDFnrKfbPVmnthUMkMo5WBEqWKS5JSy+tL3+yf1TbyVlqhtqm1UbJvWjE7zqFU904
- B3J6p8ee7aeRWnY6zAh34NVTVMUP6LK3pUOqE=
+ bh=KXTuSpTzRX++g6ZnlXMimRdQCLL4Q7vktxN6CjJwR6g=;
+ b=pSMGd/yw+0D/Un4CNmdCRyJpLuTMyrSn7pxWlgPTo+m99XOeSl/WImKYlCkqYImiBt
+ H4AInxiN5W8qH3mdSwwqMVXB7wWeyCr9VUlfaFy4zABMJ9sKuBHrgqxnX+CUUoNDUWTv
+ 8bHl9sfl4Fg4ZDIa8bPr2Kexda03cpiB7DeMI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760124205; x=1760729005;
+ d=1e100.net; s=20230601; t=1760124206; x=1760729006;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n4QzzB9d/6oz2Wf0cdSnASDLkG3DrD4RNj8qllmqzck=;
- b=FqlobEBfybVoAS7gjPeX/GgzNXYu7ICITKkY+gYsxwn3mze3ria/GdJMjKTn7M+rlo
- 6bEjKl+jFDIM1uV4wB3/Z+m8IsfDw3P9oQPE0mZz79G6PKkvgEQKoQ6IrfaUlX0zKwfa
- mT07hKItdvLDcblRNzeI9mny9xi7omG7cMyTb/BwXnf1oHzW7kn5cYsQv2OsKHiVpTyw
- GjWwpthJ5v3JB+ylnP51PGiSywDG4ZGDArFtmTwoqq2JSfCilIbng6LkjGL8uf2noCPD
- fLW56EUhwEMABDeYjfFlbLk3Sl3wyQAD09r0ryhW1imCGw7+2fK5LglkKtFSwt6QOEs3
- gB6A==
-X-Gm-Message-State: AOJu0Yy+gni6x/ZDlMTsN5VY1weQG6wwhNyxD7xiSNrcjRkD5VrHc0er
- h+oJZicv7ZR7GtQt2PphGvHS9j3sh3XUocpnosHZoK5OHJKwvhDKAvOBOKZns7ksCos=
-X-Gm-Gg: ASbGnctqjUusUGCYcohloxt3slkPdLeaGhMfWaEbIbk9r96WLkh0/N9TfMjUZBE0kxq
- EMnjq/+caEB+pYSWWDbdWaqujQOp+ZNbtWwTdyVFH7ZfL85ezwlkfAQBFT5jQooNvECCHXaTvCb
- Bv6PftJlHgW4s4dbLv6yUZzMNYSCmx3vD+UaMwKk93cPpqymUX84ZNaj+Ak3XhxKBVeUMZB1vlX
- hU6e03XH+Bsx04FGK+8ugXPgWIOqBO8YEgZiWcp1Y5zNnqhghUuZ50VelafcVE+XhO3dO8DUo4j
- 7hmLOKyaYqy5YspkBf2+cQFbzbxh4L2s10W5Bpnlx+9/N8LcTTxZ1Jy+R4F4pgMDzrmNMiH009I
- N22QBGQXXH4WhiQTYowJm+170yQ/nsTlOKCM10OHw9KPiNIVX0sAxMPwGKzkj4LL+Stv1Ez/B7z
- NhP0M=
-X-Google-Smtp-Source: AGHT+IGDcqrKRk2dpx2e2rcvTaE8rRSplMrLhZ1qk1jh63ULCtxSbJTJKR6xQXmi4pLXIt17peZ1Yg==
-X-Received: by 2002:a05:6871:6a0:b0:30b:efe2:c1b6 with SMTP id
- 586e51a60fabf-3c0f81e9c9fmr6647005fac.24.1760124204641; 
- Fri, 10 Oct 2025 12:23:24 -0700 (PDT)
+ bh=KXTuSpTzRX++g6ZnlXMimRdQCLL4Q7vktxN6CjJwR6g=;
+ b=VD/K5+ug0IIi6UgCIzoAx9O+lfg+PXISFxItDqw6Azf+k4Ajb5ra69iWVUNLFcJpui
+ OBROKDSFwFcrk4b2Wv0CoAgLOIkiJ3PqM6LXHJEKATAOGPTmM91I5WrHB0ThbkZirT1o
+ qK5uLccXfKmB8NlXGggj7vqRmg7bFqv0vOI8yLUWMqdu8upGn+tMxd82fdY6ysLuvXcy
+ O9JL3B68SlKBynqIvhAi44VOiimRNPIImm3EALkB51Vq6fRWEfglH8PypYMTAKg1IVX9
+ kmKClUow+QxHQzk14SK80cgfJWvR5t6ys+8ubq7g0uGijdKLCzbm/9XPo4lbjwuEMEGR
+ UhXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVbdjs84LL7wNWdcp+hqOWI85ssHzC2e8VE/pOPKaHHN7PmHGJpJrSDJ3xYVzdsd2eSw6GlJTY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw50OXkwCfvASaIAKtlgNUEYlwRK7RVpzshLGHmil6mUeVQCYcu
+ HTsI8EZhqCG6e6ANs3u0pnP2o71Ozmn97gCsL1hjjmQAzSR0greukpVwRh5197BCclJhYLRdmMn
+ xMG1Dwdw=
+X-Gm-Gg: ASbGncveNvRVLqv7PiVsAS1bFzirt8SO58UphfbJNJXGicJd1JoUdJAViu8DyunUdJN
+ KVVb5yuETWwgS7wVMdbBRE/uk4m4PSTjf6S1OsYdYEed7sGc76cGElDtXOvjLKDm7ytL0naqXzC
+ I0iNnQ600e4MA68R2pmUMl+45gUkpKSyLOdfX/KqAJQMZDjzmwZo2ISZdPGTZvPgA5rO/Cw+ypL
+ b7wMe8S74P4RGEycl1Nf+gkRmEBsT1hfLG9Rd2fGtNTCf7rdIJ1NnpfBiUVROzf5rFpTMUoOfYs
+ 7hnUo/7aHO1ojUuBbgE/NbnSXHvjjYKYiAVnRBF5TLVrtjrjhMdXf3u1A0agGlTniMojBtVyvyC
+ cNDh3UV+YbnKZ1ovRFxUvqmas1X8j/6fjpRx/RcaoNJ3+5orCsuZaJZkRNSdZzA4aLmxGCBlAxQ
+ 7H2qpKhZT6jVyeQw==
+X-Google-Smtp-Source: AGHT+IGZDAaBxmVSs+VutjNQ8PAEOo12mdPvNK02DG0MKyxoQpprR6EFATMLFx+h2fOHedHIJxntQQ==
+X-Received: by 2002:a05:6870:330b:b0:315:ab22:8833 with SMTP id
+ 586e51a60fabf-3c0f8daf997mr6278191fac.38.1760124205605; 
+ Fri, 10 Oct 2025 12:23:25 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8f581ecsm1155832fac.25.2025.10.10.12.23.23
+ 586e51a60fabf-3c8c8f581ecsm1155832fac.25.2025.10.10.12.23.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Oct 2025 12:23:24 -0700 (PDT)
+ Fri, 10 Oct 2025 12:23:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com
-In-Reply-To: <cover.1759218200.git.matthias.schiffer@ew.tq-group.com>
-References: <cover.1759218200.git.matthias.schiffer@ew.tq-group.com>
-Subject: Re: [PATCH 0/2] am65-cpsw-nuss phy_interface_t fixup for fixed TX
- delay
-Message-Id: <176012420381.1180358.12293445850993917376.b4-ty@konsulko.com>
-Date: Fri, 10 Oct 2025 13:23:23 -0600
+To: Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de
+In-Reply-To: <20251001131839.1488633-1-ghidoliemanuele@gmail.com>
+References: <20251001131839.1488633-1-ghidoliemanuele@gmail.com>
+Subject: Re: [PATCH v1 0/2] configs: verdin-am*: enable USB Gadget OS
+ Descriptors
+Message-Id: <176012420482.1180358.11552929433813063983.b4-ty@konsulko.com>
+Date: Fri, 10 Oct 2025 13:23:24 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -100,23 +101,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 30 Sep 2025 10:05:09 +0200, Matthias Schiffer wrote:
+On Wed, 01 Oct 2025 15:18:33 +0200, Emanuele Ghidoli wrote:
 
-> Following a discussion on the LKML [1], there has been a clarification
-> of the correct use of the rgmii(/-rxid/-txid/-it) phy-modes [2] - namely,
-> that they don't describe the interface at the MAC or PHY boundary, but
-> whether the PCB traces add delays or not (where it is
-> implementation-defined whether the delays are added on the MAC or PHY
-> side in the latter case).
+> From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+> 
+> USB OS Descriptors are used to install and configure the device without
+> requiring any user interaction on OS which support them (e.g. Windows).
+> Enable them in order to improve the user experience when fastboot is used.
+> 
+> Toradex Easy Installer takes advantage of USB OS Descriptors to load
+> itself via USB recovery.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/2] net: mdio-uclass: introduce dm_eth_phy_connect_interface()
-      commit: 8db554dcbb2374a2dea130af56d781732070beb7
-[2/2] net: ethernet: ti: am65-cpsw: fix up PHY mode for fixed RGMII TX delay
-      commit: 4b10bcfdef9cb544ca80988fe36d307a622bcd21
+[1/2] configs: verdin-am62: enable USB Gadget OS Descriptors for fastboot
+      commit: 5e1e08549bdb750b93028c0ab958964283d9ba62
+[2/2] configs: verdin-am62p: enable USB Gadget OS Descriptors for fastboot
+      commit: 6a22d03164c9e428753461ec560b144769ca1562
 -- 
 Tom
 
