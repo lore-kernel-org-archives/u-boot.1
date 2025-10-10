@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E401CCD185
-	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 13:18:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6E40CCA476
+	for <u-boot@archiver.kernel.org>; Fri, 10 Oct 2025 13:19:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BA2084248;
-	Fri, 10 Oct 2025 15:18:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 81507842C3;
+	Fri, 10 Oct 2025 15:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UZTkVDk5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pCWJahnX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5A5B8410C; Fri, 10 Oct 2025 15:18:40 +0200 (CEST)
+ id 65E4583FF9; Fri, 10 Oct 2025 15:18:42 +0200 (CEST)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFB5283F91
- for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 15:18:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87D9983FF9
+ for <u-boot@lists.denx.de>; Fri, 10 Oct 2025 15:18:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59ADIaHE694407;
- Fri, 10 Oct 2025 08:18:36 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59ADIcw8694419;
+ Fri, 10 Oct 2025 08:18:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760102316;
- bh=YyuZOpt6Ftylz3zv9UUWc/wnqHAg00/w9qYjEdVxWXE=;
+ s=ti-com-17Q1; t=1760102318;
+ bh=4pLt0jotBfVuI46ZG0coqmpZIWXdFd5DDABxLPoSN58=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=UZTkVDk5PVH1M8je7buq61x/UwuRnuNnOudaKdlFI+s115D8fVViOOotszelfA939
- d+RctPWNZbRquUj28Z9Aew3oBWp9ScO66rFxsXmqVtJTTfzzxTwMYFXwHV1pzT3nZD
- wXkZet85sU9CuIz/6/JSkbnFlvsA/Fx5v63/NtMA=
-Received: from DFLE200.ent.ti.com (dfle200.ent.ti.com [10.64.6.58])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59ADIa7b816271
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 10 Oct 2025 08:18:36 -0500
-Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 10 Oct
- 2025 08:18:36 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE210.ent.ti.com
- (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ b=pCWJahnXwg7KgC/tM91EBMRZRgr5+oxJMTy39KThV0IFmrnw6bDjvUfefNH//iF/S
+ rWNyyU8stvKkPAGQlyUU+Wq1dy2pu+l2NSxrFe9NGsyClJAsyE/XFaC+KRAn0PIzlV
+ GiMzrun4NLhsSgqWaFubDniPJgZfKZ5ZBNuJHAq0=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59ADIcwm2224389
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
+ Fri, 10 Oct 2025 08:18:38 -0500
+Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Fri, 10
+ Oct 2025 08:18:38 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 10 Oct 2025 08:18:36 -0500
+ Transport; Fri, 10 Oct 2025 08:18:38 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59ADIY6p1692610;
- Fri, 10 Oct 2025 08:18:35 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59ADIaX01927932;
+ Fri, 10 Oct 2025 08:18:37 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
  <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH v1 2/5] board: ti: common: Kconfig: add CMD_SPL
-Date: Fri, 10 Oct 2025 18:48:24 +0530
-Message-ID: <20251010131829.3737258-3-anshuld@ti.com>
+Subject: [PATCH v1 3/5] arm: mach-k3: enable support for falcon mode
+Date: Fri, 10 Oct 2025 18:48:25 +0530
+Message-ID: <20251010131829.3737258-4-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251010131829.3737258-1-anshuld@ti.com>
 References: <20251010131829.3737258-1-anshuld@ti.com>
@@ -80,29 +80,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add CMD_CACHE to list of configs implied by TI_COMMON_CMD_OPTIONS. This
-allows the use of 'spl export'[1] command for preparing a device-tree
-for falcon boot.
+With CONFIG_SPL_OS_BOOT enabled, U-Boot checks for the return value of
+spl_start_uboot to select between falcon or the regular boot flow. With
+a return value of 0 implying falcon mode.
 
-[1]: https://docs.u-boot.org/en/v2025.10/develop/falcon.html#using-spl-command
+This patch overrides the weak definition form common/spl/spl.c to allow
+K3 devices to use falcon mode with SPL_OS_BOOT enabled.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- board/ti/common/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-k3/common.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
-index f481812247c..fa8260e3fa4 100644
---- a/board/ti/common/Kconfig
-+++ b/board/ti/common/Kconfig
-@@ -53,6 +53,7 @@ config TI_COMMON_CMD_OPTIONS
- 	imply CMD_REGULATOR if DM_REGULATOR
- 	imply CMD_SF if SPI_FLASH
- 	imply CMD_SPI
-+	imply CMD_SPL
- 	imply CMD_TIME
- 	imply CMD_USB if USB
- 
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index 5483ac9906c..41c96cbd4c5 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -425,3 +425,10 @@ release_proc_ctrl:
+ 	proc_ops->proc_release(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
+ 	return ret;
+ }
++
++#if CONFIG_IS_ENABLED(OS_BOOT)
++int spl_start_uboot(void)
++{
++	return 0;
++}
++#endif
 -- 
 2.51.0
 
