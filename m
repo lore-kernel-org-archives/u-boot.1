@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B55CCCD184
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 17:08:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CF75CCD184
+	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 17:08:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AADD838F3;
+	by phobos.denx.de (Postfix) with ESMTP id B813683A25;
 	Sat, 11 Oct 2025 19:07:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NWrzmvWp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T9oYZ355";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52F30838F3; Sat, 11 Oct 2025 19:07:30 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 1695783A26; Sat, 11 Oct 2025 19:07:31 +0200 (CEST)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 426DB83906
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 19:07:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03F1183927
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 19:07:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-7bc626c5461so972066a34.3
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-43f88d33872so1312038b6e.0
  for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 10:07:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760202447; x=1760807247; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760202448; x=1760807248; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xHRCFcp5+ncWQ6D8+HC1Im/pdcLUgFZNqFNPSYnbTTY=;
- b=NWrzmvWp7V0XXGa+Et44cHlXFHbQDy8n8EK01IJ81T5SaZlE88COsxbJJmKwegmf3C
- FQsFOFAuHE/ZWO0Z8eaR4KuY85S501kptqWTQPTTaDt9rAvjMAol0Orm1W+wL5Zf13av
- gLIUzkKkU4rabNIlNP7Uv/KcTSvJfULpidzi0=
+ :reply-to; bh=1sewUogXUBnDJvPiALneqIfL2LHDUXX8dI9/02LfXTU=;
+ b=T9oYZ355kPnPfSzMi8Wza94E6jAcn42QMTYPw+6e991A8PyFafe+56HU7mkURGaiNs
+ hx3uvJFxmuZ29/LLUxsSLdk8X925HNqERkvzFU1p3YHSZM86hEc7z5Ifw0K7cFIZc98o
+ yXw3/wUoZ8g7OxZgIzJwpqGpDnQDEWlJa2SPU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760202447; x=1760807247;
+ d=1e100.net; s=20230601; t=1760202448; x=1760807248;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xHRCFcp5+ncWQ6D8+HC1Im/pdcLUgFZNqFNPSYnbTTY=;
- b=SxPajdKrliopu3u3BPBXF6PlpRFypz2zQ0rYEumAuA3hzxkeA2rW6rdpITeKmGCnv9
- pp1Fh6XZY+fWSSS8OmTzCMlSIdkpZ+b4STjXW9J5IAE26ID0AV3vT8Fm1ZhuA7ULmJKA
- yeNpQcC5/TKXCOJ2EBRdGGVgtesEXAgJYmY/jcFc9SjUDI/gznDYbL8ELwYBkGsntHRN
- leIw2RCV2lyFiFxqF4oR5/YnU/mrAzTZ4MEhDTINEgmO+cLJcFywR+Bjv7AJy7FwnCki
- ONPlfscIBD9wTlTD2PNYwdTLlhgd4+OXrUw39yJN0JbpeLy/72gx5eISyGxWs0dZDJQy
- 9vWQ==
-X-Gm-Message-State: AOJu0Yw+j9Z7rgMXNa8iy3+fGLVzfD9+Eqx8IamtB415sCn5YGNKBL97
- QWt4Q/Se5/64qkzBBC36wGZOl48pozhEXiuqlGtLB6fL4MeRIU6GO0gSUCaeiwFZTj5fu/Iqd+5
- I9jYN72c=
-X-Gm-Gg: ASbGnct4MmOkTNlmoWyJSy4ZxIvuvF1fUs6CuCZe2yWUsvDfJeX9ILuNA4QTOKH3X2z
- djUfYrGK29evwDvgduci3aSyvJOVnq8nKiJp9O9ENvuAX2h/EAUMyujo/K9BgtNBE1NReRGFlHn
- fx8gY/7zNV7h53AhWmVNa7JrmwX6rUJKjdeNnE7d2Z6QT3NJxmY0jgRMl7iwO6tp49x2nM3hePx
- V8SbEdX17XhEvKqtKkq7MdjMu9FdLL928td1oeNWgSCny7BTdWZqgkxaHO4JPmJ+1Xhb56eo/4l
- AmFAfzSQC4VyMvvGP4gyZQyMMGalvgvibFv5Ir2BuWuy5i4G7gDOR5+T8gRl7XWCk48exZHPQhU
- l7/1M5VbdM15BHtBMh4DTqEDVEjOU5HaMjmnRIyJRVP3/o0d0hPDRfGgpyix+WeoQoF0eiol78x
- kbsIiaxb35LAqU3A==
-X-Google-Smtp-Source: AGHT+IEvrE2l19OgBFI4d8mgpFXXnXXq8XqPe+Aj+uwlgPh/Fx6qU2GUy1pEddLrnHngSIhn9VjmHQ==
-X-Received: by 2002:a05:6870:330b:b0:314:b6a6:68a1 with SMTP id
- 586e51a60fabf-3c0f9595ddemr7036338fac.41.1760202446920; 
- Sat, 11 Oct 2025 10:07:26 -0700 (PDT)
+ bh=1sewUogXUBnDJvPiALneqIfL2LHDUXX8dI9/02LfXTU=;
+ b=O9rH/r4b0AlVl671UnIiiPfTIniJGhuzTVlE9oscydZ6cZAxMgmhok1Xx6OeJ8P59a
+ yHhZ4auA2FlXq4O/f2y2j0tZm1uA7AAcfw4o2Oljh6Jmhzcq4rZdrzRIPbKiKs+H/BgS
+ sdHVp2ghJDbHQPmTupWjJ3qpHo2i9OtBQQ95zHZf+gRqpa8hpxJZP0vUwDVOKnXFoZF/
+ tI1jPF2+UZ6S55NfyIz3x/I/yrA6lxT2QKoz+Wc1AXQOAy/eSGT0vBMeKJIIwlshBfNK
+ d/7fnndzIUDS5kxWA6SnfTmiVqfhKzYdvklWytJOlLgC/LwEA+VfmOe2TNtMp6lYYU5c
+ fRIQ==
+X-Gm-Message-State: AOJu0YzjG0vRHtboS+s49GS6Uiet8dCf3+k3gtEs0D4yhxHBTA2uowjU
+ qlMrSJTSWO9beXToO9DYdUVFWwalG89X6kMV2pBZElH7hb2DRHHuBj7pDrhRqamOyOtYuC8b9KF
+ Nqd8pdWo=
+X-Gm-Gg: ASbGncsMvYcxNW7QmwpKRyoJsF3EvgpU/apdwiV1QMh997HKjgbr9MUjBcqqk94insu
+ gBa37JC3rHGy1T+EmOZkb2aR6/meADp9HdD0llwrpoF3ZbL8ZBvdlWcYbPfBCPYncBngR7/3Ebl
+ T0TrWWK4aLQsEQDxw8UdPSdhWzdqSaoACpk1V3LB2Nt/wco5ZzMX3A4BXQqMbwHx63u5j8kk9tn
+ 4EQ4lWTP6PeSnhJ758WmhiwZqYXEC9borR+lG/GhzzH088KqFTvjSF13/vArK6CPOKQtUQFcvwl
+ 5MR5/OxDjn+FusSfkAlvo1EgvqohR63qFPvnJf2+l32nkBs1RiYE8dNwg9pF3f9gpUHK/8qZor4
+ hqeS+UjRdVBEwUGjL6pUL0ZbSEQJb7Uvw5Kp2R4wDcRkRLUVCcdgsorvYT2uOVN5Jg6QNszrKKf
+ dHiVg=
+X-Google-Smtp-Source: AGHT+IH3wG5EICmvx5lZe2UrOzl9e7z/hnGCbulIOKw1cz74J28mOJjtjd7w4HmIgjOnV/4lLx9w0w==
+X-Received: by 2002:a05:6808:bd6:b0:441:8f74:fba with SMTP id
+ 5614622812f47-4418f74209emr4739393b6e.55.1760202447785; 
+ Sat, 11 Oct 2025 10:07:27 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8adcdfesm1970991fac.1.2025.10.11.10.07.26
+ 586e51a60fabf-3c8c8adcdfesm1970991fac.1.2025.10.11.10.07.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 11 Oct 2025 10:07:26 -0700 (PDT)
+ Sat, 11 Oct 2025 10:07:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251001203101.2828577-1-trini@konsulko.com>
-References: <20251001203101.2828577-1-trini@konsulko.com>
-Subject: Re: [PATCH] lz4: Do not disable LZ4_decompress_safe* for xPL
-Message-Id: <176020244612.1312138.682456160356797507.b4-ty@konsulko.com>
-Date: Sat, 11 Oct 2025 11:07:26 -0600
+In-Reply-To: <20251001203103.2828593-1-trini@konsulko.com>
+References: <20251001203103.2828593-1-trini@konsulko.com>
+Subject: Re: [PATCH] fs: Rework filesystem guards for xPL phases
+Message-Id: <176020244704.1312138.12681833543749662123.b4-ty@konsulko.com>
+Date: Sat, 11 Oct 2025 11:07:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,18 +95,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 01 Oct 2025 14:31:01 -0600, Tom Rini wrote:
+On Wed, 01 Oct 2025 14:31:03 -0600, Tom Rini wrote:
 
-> We should compile the LZ4_decompress_safe and
-> LZ4_decompress_safe_partial functions in SPL and they will be discarded
-> if unused.
+> When adding filesystems to the table in fs/fs.c we need to use
+> CONFIG_IS_ENABLED(FS_xxx) so that we only include references to a given
+> filesystem when CONFIG_FS_xxx or CONFIG_SPL_FS_xxx or similar are
+> enabled. Update the filesystems which weren't doing this to follow that
+> pattern.
 > 
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] lz4: Do not disable LZ4_decompress_safe* for xPL
-      commit: dde1515be5e2f6fdf3429b0d6d5ad6fa80e7715e
+[1/1] fs: Rework filesystem guards for xPL phases
+      commit: 42b353412517ecfc9ba93dcd7f31e0e3557af413
 -- 
 Tom
 
