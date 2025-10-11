@@ -4,68 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D12B8CCD184
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 09:56:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D64CCA476
+	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 12:03:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3503483CF5;
-	Sat, 11 Oct 2025 11:56:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E36283B8A;
+	Sat, 11 Oct 2025 14:03:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ekyYEp1B";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dVKTkYlJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAAC883E69; Sat, 11 Oct 2025 11:56:37 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E09883C94
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 11:56:35 +0200 (CEST)
+ id 0513583B8B; Sat, 11 Oct 2025 14:03:54 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1042883B7F
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 14:03:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59B9uXX1430131;
- Sat, 11 Oct 2025 04:56:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760176593;
- bh=3oE05m4vASwq6tqe7wrPDLM46GDgdf0hM0XHYpmWblA=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=ekyYEp1B5pDeWhSQmQRKIGxLZYLeNW4i4ulJbsNLM4gwmhCFS6DLXkeC7MTSo8Gba
- /8u5uvvgV0Z+xCfBp6f8flKXt57Fk+bZo/23N/hfxllGeLCwRsxLNWf//RhjoDGcP1
- 3BryCa4zZiiAz8XTf1ZWFF6H4bXw+d8fYAtAvSpA=
-Received: from DFLE205.ent.ti.com (dfle205.ent.ti.com [10.64.6.63])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59B9uXAE1451573
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sat, 11 Oct 2025 04:56:33 -0500
-Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sat, 11 Oct
- 2025 04:56:32 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sat, 11 Oct 2025 04:56:33 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59B9uV3w3247276;
- Sat, 11 Oct 2025 04:56:32 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-637e74e9104so3863567a12.1
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 05:03:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760184231; x=1760789031; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IaAzvL2xvKxVBIA6UGVhywcaMwS7oUIkFsgmUpKjuEc=;
+ b=dVKTkYlJWQ33Tc8azHwdHvdAyEM7ppP6j3GtBH0OgXOUofCHBuSVpkzSZugFc0z0GD
+ oFAILwnZxJrIIvnYWmFOJxHJgYrtGKPrVqq3OBlroCrfZu1TWzcF0/wnDsxAFdfzdL0Q
+ V8yPrPiHN7nIbPrqWKE6H6A9pSqkCWVr22CNOQuakRHlR80lXPJhp0dDt9wnp5SD5ecJ
+ Wca+kGBqzI3tMg56jR5U4lMVLsxqEc2m9Vuw3mqbCS9vo92PFJ4mQu2Fo16+VlpXiZGp
+ uYV4/m9YNXELQouXrnYnH+Qa0WOO9ldmpSP18ntztpcpJGm5uAp449WmUilQ89gNwnKC
+ 3C2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760184231; x=1760789031;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IaAzvL2xvKxVBIA6UGVhywcaMwS7oUIkFsgmUpKjuEc=;
+ b=BVnni+9vYKcwdQIXXNSz5skcy3iZVVD7vUquMpIAljeA/geUrtaEeqxj/YodtTlQZL
+ CNtd5duZTMqSBSsy0BxQ/6JHgKeQP1vgjuClroCMz4gKM47tVDDLxaEqkvdlKUFodUis
+ C/5uU8m4jTq1HviZt3FDZTS1kZnV+bouQfkkcif6YzbZvIrS46NqMU6dme6FJvex1vEW
+ qPmT4wTsv1m8OyQ0e15Ru+NWwxc0DFqth4ljyLldrhQ2nOYugs1+wJf4yhiCVB5f+NjF
+ B06GfkmeH18Wo1nYfHWK32DDGMuGqnt1n5jvJyS4qdYXP+fbkv6rB9B8wHwFZhCzOJev
+ 2MVQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWhggVPpgC/wV45Xy9LL76Q1Kuh3geQZyTL9FYuFSRS4RfWazwfwk91Yy2Z0eP8PHj67aRDHSk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxZbpHvN5xAhlXMU51OhlYOE3UZLTG2kNP8xaQOjX52+bv9Nx6D
+ 6UzYmZ9iOFZBQYQzsZJgoLHzd0bj3ef/NbIcoRjzpRPJHjIU7TP+d3ZQDeCmYY6aWT4uWd7B5Gy
+ 0tLD3LBfRTLNb/mFwtYOBkZSthBPBrFk=
+X-Gm-Gg: ASbGncv+3e92bjGJcmgXyYmIRZPukHlsr2Toav/yBVWwLJwfslT4JaovPEg5d3gTLt8
+ 7u6sdUfz9MvpOFsrE+QpXG6eXHunKINlzAtapCyyr1G/ferwEe3mfe8j4Sd17VlHXw3kxf4bxPY
+ hCQMITAtYeiw2hbafUH9/Ewtc6Soe3m20tsfNS6hZrPiGP8Em7marqCuLQX21GaBtYWlnF7Y5bQ
+ ODvuaTux7/qxUCOGxhiPCS7/hJpG8qsEnsCF85G1X16NhJjjnApQgEJ7NaK5rjKOmeqvUaxsvXe
+ 4HAew9H6pJ61Oj9oYw==
+X-Google-Smtp-Source: AGHT+IF63KTWzowD3wk/q8d1hgGA5gQmzAMPf62mywE3TC+Ag4KoRVXeErv2Y9o1mWNtgYfyWKhbj8x7TUsj5VVAqMI=
+X-Received: by 2002:a05:6402:354c:b0:639:fb11:993d with SMTP id
+ 4fb4d7f45d1cf-639fb119c17mr8837065a12.32.1760184231190; Sat, 11 Oct 2025
+ 05:03:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20251010053056.32495-1-mibodhi@gmail.com>
+ <20251010142835.GY298503@bill-the-cat>
+In-Reply-To: <20251010142835.GY298503@bill-the-cat>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Sat, 11 Oct 2025 13:03:39 +0100
+X-Gm-Features: AS18NWApOMUtHvDAg7tP4BFWkW-fwZhyKgcr6w__VPN5rassT86div0MvXo3-hA
+Message-ID: <CALeDE9P8VP6YKS1qoz3Dxga+h287GHzRvczCq0YDd4tOJxNXGQ@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
+To: Tom Rini <trini@konsulko.com>
+Cc: Tony Dinh <mibodhi@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martin Schwan <m.schwan@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>
 Content-Type: text/plain; charset="UTF-8"
-Date: Sat, 11 Oct 2025 15:26:31 +0530
-Message-ID: <DDFEIZ4KAA9A.3IE2L0TRWHNXQ@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <afd@ti.com>,
- <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>, <nm@ti.com>,
- <bb@ti.com>
-Subject: Re: [PATCH v1 3/5] arm: mach-k3: enable support for falcon mode
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251010131829.3737258-1-anshuld@ti.com>
- <20251010131829.3737258-4-anshuld@ti.com>
- <20251010160512.GE298503@bill-the-cat>
-In-Reply-To: <20251010160512.GE298503@bill-the-cat>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,52 +99,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Fri Oct 10, 2025 at 9:35 PM IST, Tom Rini wrote:
-> On Fri, Oct 10, 2025 at 06:48:25PM +0530, Anshul Dalal wrote:
+On Fri, 10 Oct 2025 at 15:28, Tom Rini <trini@konsulko.com> wrote:
 >
->> With CONFIG_SPL_OS_BOOT enabled, U-Boot checks for the return value of
->> spl_start_uboot to select between falcon or the regular boot flow. With
->> a return value of 0 implying falcon mode.
->>=20
->> This patch overrides the weak definition form common/spl/spl.c to allow
->> K3 devices to use falcon mode with SPL_OS_BOOT enabled.
->>=20
->> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->> ---
->>  arch/arm/mach-k3/common.c | 7 +++++++
->>  1 file changed, 7 insertions(+)
->>=20
->> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
->> index 5483ac9906c..41c96cbd4c5 100644
->> --- a/arch/arm/mach-k3/common.c
->> +++ b/arch/arm/mach-k3/common.c
->> @@ -425,3 +425,10 @@ release_proc_ctrl:
->>  	proc_ops->proc_release(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
->>  	return ret;
->>  }
->> +
->> +#if CONFIG_IS_ENABLED(OS_BOOT)
->> +int spl_start_uboot(void)
->> +{
->> +	return 0;
->> +}
->> +#endif
+> On Thu, Oct 09, 2025 at 10:29:17PM -0700, Tony Dinh wrote:
 >
-> I've seen this in other parts of the series too, sorry.
-> CONFIG_IS_ENABLED(OS_BOOT) doesn't make sense, it should be
+> > Make it possible to disable CMD_PXE.
+> > Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX config.
+> > In extlinux_boot(), invoke pxe utils only when
+> > CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
+> >
+> > This patch results in about 9K reduction in image size when
+> > PXE boot is disabled.
+> >
+> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > ---
+> >
+> >  boot/Kconfig             |  3 +--
+> >  boot/bootmeth_extlinux.c | 18 ++++++++++--------
+> >  2 files changed, 11 insertions(+), 10 deletions(-)
+>
+> Is some part of the symbol logic here wrong? A challenge is that "PXE"
+> is also where the logic to parse extlinux.conf style files came from,
+> and I thought we had split those two out. And then there's this:
+>
+> >
+> > diff --git a/boot/Kconfig b/boot/Kconfig
+> > index 2993cd7f9ba..403ce4c3d46 100644
+> > --- a/boot/Kconfig
+> > +++ b/boot/Kconfig
+> > @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
+> >       select CMD_PART if PARTITIONS
+> >       select CMD_DHCP if CMD_NET
+> >       select CMD_PING if CMD_NET
+> > -     select CMD_PXE if CMD_NET
+> >       select CMD_BOOTI if ARM64
+> >       select CMD_BOOTZ if ARM && !ARM64
+> >       imply CMD_MII if NET
+> > +     imply CMD_PXE if CMD_NET
+>
+> This is one of the things where defaults isn't supposed to be so easy to
+> get out of. How many platforms are you wanting to then disable CMD_PXE
+> on to save space?
 
-Is that because OS_BOOT by itself is meaningless and
-CONFIG_IS_ENABLED(OS_BOOT) would always fall to checking for
-CONFIG_SPL_OS_BOOT? I mostly stuck with CONFIG_IS_ENABLED to avoid the
-extra three characters when using IS_ENABLED instead.
+PXE is generally being removed in a lot of cases as it's not
+considered secure and now we have HTTP Boot there are other means of
+doing network booting so I think we'll see more and more situations
+where we want to disable PXE.
 
-> IS_ENABLED(CONFIG_SPL_OS_BOOT) or just a regular #ifdef. Also for this
-> example please add a comment to the function explaining why it's always
-> enabling falcon mode.
+This is actually something I've been meaning to look at so it's
+something I would love to see :)
 
-Will add an explantory comment in the next revision.
-
-Regards,
-Anshul
+Peter
