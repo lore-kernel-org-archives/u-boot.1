@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C18CCA476
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 18:09:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C088CCD184
+	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 18:09:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56C4983B21;
+	by phobos.denx.de (Postfix) with ESMTP id 9A8BD83B24;
 	Sat, 11 Oct 2025 20:07:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="BtJSbchy";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="sLkKp0g2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58D5783E11; Sat, 11 Oct 2025 11:14:42 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id A370683E11; Sat, 11 Oct 2025 11:14:49 +0200 (CEST)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3896A83C2B
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 11:14:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B780683C2B
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 11:14:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GKwwucxOQ/Rovu2F3i+G1HVmsC4BSwVmhyqnNlgq+d8c6wl7DLKmPyiH4EeZsgUz/EhKLxKWtHTK1WMMFVilUPBTLiFTy1RvOsHRleVscUD68Tim0hc4emNRjRKwpgs0BSfE59oegE/D2JQm/WTH2rFP4BsLXdAdr9Gn5vbwHhY86KSXRUSrbDUxZFb/IW6sY7uOtZpaK50FZTawiFE2nghgSPOkfsxmB8corIw/HNsIF5lpR9P+WLTy3B/4PLp9+/8+BnrGId3QoLkR3qphAW0/gP+1M8yYihUiVVXAz6G4y6vBnoZWRvIzLA/Wh9iiLZBlN/Qq36cDvaLY2bFE/w==
+ b=ee+KvRDD9LYFLtcQqhIh7/IBYrvRcCrIOmLaypHgyh+sAL/9HMPkqAifu6zJ/25QcQxWC+HziMTYHSDTa6zXxqm9WE+TM6YrLzbtEatiaxow7UHAT1hve6ZlZMpY78rGvO/kIvbpqm8DdH4Ec9+BCF2NnjWfiFlCIFcL+HM/+EU78Z3MHb5wVdqzo3Oyglg5+pd1jotbNPDY+qFPQV3mGs2ub8et2M99UOprLGQ0mwptt04H62j9iubRbe6vL3jJLKHLO/hzrsf6ib4aOZNouwjC7AZM/1o6nk1RsfwrdfHB62DMw3rv+oUcisL2ua01/0YtMVQBz4ZV5onXAxN2eg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CkcjCaAp/o/vhYose6vXIzYZm/p4ufGMXdCRP1XI1xw=;
- b=loWlAqw9BsKzJI3EruQ1rGdedjfW2EHK+09wTp63lLJdxe8blbua/WpPmB2XXJhYDA6KLuXvQB/7Ya82U6P8XKXaiZesC4vkl4qWWkx3+vPyMcI8hQF1Dn7ZS6LVZi6uT2gaojNv/J7xqmEI1AAKdnCp40nx4pFO648fxSzOV8SHiR3d79aQHUsOVfP2JoFLdaZ3eWCIHBVhS7R9uZfOFjDhZtC3WcIezs6IdHyAWS01pTHk12jwtEHEJZeZvbFsRJIj9H1Jv199cMfN2FPWU3MYKuCsg/OlmZA69DRMIuuCug0Up3bUduSx89nbLxBeXeE9nfbz66p+F329O/a2qQ==
+ bh=SOumPe5SjZrWxQCoNkSz1g5nlikV5njZ/DcTw7c36pQ=;
+ b=wSzbBEbvY7qsv0Tb2M+i8HZ2K6feQsG8aOsh+q64T0tdS7asFb4gsuCdrgP8XbVHhoCGA/QnJNMkKLA59XQE9bXKLdiGw/i1z3v45sOH5LMGW22inzC51Q8tiKuTVOuemJ9i2Yw3ci778JW5MJUBviIOL5qAwxGuxNykO0r83K6LytG3LkS/ZedLVHh+zs1d3wolw5P1J4pa0x/CoHAscqtrSEhB0wnyq4SS4kBWaNaGDEgfCIxPIYoaAYtiHk7fAsU32RHI6h0+UkAAKiYGloKXY6kvR40zkQSftMT5hOTV6g4GTB3HWqJNNixXYPnX1dXO+qMP6rV8jewcWgl+CA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CkcjCaAp/o/vhYose6vXIzYZm/p4ufGMXdCRP1XI1xw=;
- b=BtJSbchyobPQxqF/xFMRbhwul6Pdjt9ixNTrPGNw2BS/lsyt/THwU/fivoiM1YRDpSSR9ylpXFFTjp3yQWJCi28toOa+tVsycM2kbQTu0iyNDSBNdApX/Lr7diHWZUimzDbScDSuoRYfuYaS4HO3QhjyOJ5TI1/nnxwn5VRppt3NHYdiOatadAeEzZY1Dy4UvmolIuicqAwSYYGiBAINKVmclc2s1r+R/F6DZXP5O8CdUMjFoit1rnpUCcEyb2gBJYYNR2EAGt92H1EUOE04HH69cqQ9FuCpDL9q9oB1yTN/wPVYbuE9i0FlLkrLu7skvt7CAl1a5rcbdgEXsbApKg==
+ bh=SOumPe5SjZrWxQCoNkSz1g5nlikV5njZ/DcTw7c36pQ=;
+ b=sLkKp0g2Ty5/GEEOe60tieWYH3OlaM371qaPT6HrsRPxSsoQpe7yo+Cu7sKIWQ6JRmzeF8Uj819LOiiaP9dDExB3WASbfSLQUuo+1/j+j4wMlOdTcVygi82PxEosjFkooVN24kFvUuUjVGNC1HMYKFGfsXgSntCBYLhd3zlOY3pRx7hIeJiCnJj9KCkTjhCuF3OkONDvCxNsYJekUiw3DRmOxXRNQykXAXL+RLzECgGPTMjyuxPCTkh4LfFuCJukcqmHqnGrScN2VvHjoBXJcvYtFDa12OVtOgNRl9X8Vr7AjudTFl3oH788TLFvMtU4jBbcC/UfPAIL6FTRICDBgw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by DB8PR04MB7129.eurprd04.prod.outlook.com (2603:10a6:10:127::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.11; Sat, 11 Oct
- 2025 09:14:38 +0000
+ 2025 09:14:45 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%7]) with mapi id 15.20.9203.007; Sat, 11 Oct 2025
- 09:14:37 +0000
+ 09:14:45 +0000
 From: alice.guo@oss.nxp.com
-Date: Sat, 11 Oct 2025 17:12:56 +0800
-Subject: [PATCH v2 08/10] net: fsl_enetc: Add i.MX94 support to NETC block
- control driver
+Date: Sat, 11 Oct 2025 17:12:57 +0800
+Subject: [PATCH v2 09/10] net: fsl_enetc_mdio: Add support for phy-supply
+ property
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251011-imx943-v1-8-072b9ede2b4e@oss.nxp.com>
+Message-Id: <20251011-imx943-v1-9-072b9ede2b4e@oss.nxp.com>
 References: <20251011-imx943-v1-0-072b9ede2b4e@oss.nxp.com>
 In-Reply-To: <20251011-imx943-v1-0-072b9ede2b4e@oss.nxp.com>
 To: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
@@ -92,98 +92,98 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|DB8PR04MB7129:EE_
-X-MS-Office365-Filtering-Correlation-Id: 113090da-95dd-4ebd-c111-08de08a699fc
+X-MS-Office365-Filtering-Correlation-Id: d43a12f7-12d4-46bc-a344-08de08a69edc
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|19092799006|1800799024|7416014|376014|52116014|366016|38350700014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WnpQUjF0M21KNE96VzhPeWhkS05MTEFkcVZ0MDNYaGxsVDRmOTFhQ2t5L2pN?=
- =?utf-8?B?SURCUTdtb0tNc3V4N3NIZW1VdWVhd2Jsdzh4RFBHSjNRb2RQcWFvVStybFp3?=
- =?utf-8?B?SlJ1MmtwWFFXMlZMSElRa3QrNFZiNmplZW1uYkgwd2dNV0J4UGcxY2gxZHk5?=
- =?utf-8?B?TldLWjIzSmpGUHlMamJITXBvMms2TDR5c0JXVG41Z3k0Z2xsQVpOamNtaGs0?=
- =?utf-8?B?NUpsZktMejVLbXBYNDVLa3ZHQnFDMzhLSzJjbnVnRlcycWx2c29DdUdaRHVV?=
- =?utf-8?B?L1puN1U2ZmYwVDJ5L3J5ODR3UmJkanI0RUhQSDdCMHczWjRNdmVpNnlCWmhi?=
- =?utf-8?B?MGdKWTdrVE40amlyalk3UzlBeWZlWmVpVElQNmpNZExFc1ZMM3BZVGw1YlY5?=
- =?utf-8?B?WlBuQ3l5MWlyWlBYTjg4L1hwZHRhMTBkQnM4MVAvUzI3QXZWYXpubTRmQlN4?=
- =?utf-8?B?VitGd05CR1IxRS9ISHAzQjdUTGJEYTMxeTVrelpSZysyaGY5MDVpSzhWZ2dF?=
- =?utf-8?B?SHNyVnFzdUN3aXljQktyZ1BVbkhpdGdpTkgzRFNKSjg0cnlTSVBpZU55RWxz?=
- =?utf-8?B?aGlSaGJEbVRReDBNa2NqcDBZM21FMGJLejFPL08rV3AvbngrQ1pMRndXTGJM?=
- =?utf-8?B?WC84RWpTbnBCK3FnZU1OU3RTQmRWaXVWTHNla3hIMHMya0lJVGlTNVFDVWRi?=
- =?utf-8?B?OTVjMGVnZ1JRbWZiRWEydXhLU2t6bFRvU1FEQm80ZmFOcEUwUnVHWVBRU3pj?=
- =?utf-8?B?cjNONjhidzM2UEt2OFppNDk0OXBVaGdQejBiNFFFNWJlRU93a21wcUNVZ3Mv?=
- =?utf-8?B?QytTcVNlaHozV0g5Mzkxd3hmT3BLNUhjUHBYV20wYzNCYTBZZC9TeW5xR1dw?=
- =?utf-8?B?dDZCR0pselQvcnh3ZlR6VERxNTNvTGNZaVZHZDA2dktBVTdBYTM1YXRKYk15?=
- =?utf-8?B?ME8rV2hFWVkvY0E2dEs3OThiSmNwMGZkRFlXaXJ5Z0gvR1lmVWRQTTh1MWNM?=
- =?utf-8?B?SyszbDRLa2d1OG9TMnBQQUNZWlo4SnI0NmNDRGJkcERzNGNvOFZoSlM5ZGl0?=
- =?utf-8?B?Y0dUdDQ0Z254M1V3VmF5U0Y1QjlvTVpGOGpJOTU5bmVid3FJM3ZuM0lPV0Zq?=
- =?utf-8?B?VllvNzB5VnUzclRvc2dxU0NUakdHU3JYYXA2MTlreWhTV1VJWGw3bTllT09R?=
- =?utf-8?B?dG9NQ2tNaytaNXN1SHlyTlJoaXRkcFRaRUNjTTNaNmZ4UnNsdmVDMkdvbm5p?=
- =?utf-8?B?ZEVHZkUwQ05RcGp5aHFldXpKZ0h4SjRrUHJ2aVFlQ3U5N3lwRVZZZmNCVyt5?=
- =?utf-8?B?Q3lrbjF3bkN4UmpHZ2Nsa0RLNkRVWmdCOG4xYWtlM000MG50dWczZmFyZ0Z0?=
- =?utf-8?B?Qnh2UGhPWlB5aW50UE9lbG9rbFZ4MmhoYXg3VlN2K0d6ZGZ5VkJkTkhOdGdv?=
- =?utf-8?B?T3ZISG5DT3U1YnJoZjJDc3N4RTZPenl1UC9ZNURkblNCdXh4NFc1TUV0K2h4?=
- =?utf-8?B?OFVrSityeVJPQUluRGNhRW8rcmUrYUZFSVpsRzdRU0VhT0lSbkVhQjQ3a0dF?=
- =?utf-8?B?ek5CZm1CYnhwRFQ3Mi9xRUY5ZnREb21udGhtNmE0K282eW9nWmdTMUd1aURz?=
- =?utf-8?B?cDRySmZvNFJIeG5XUy9OSlR4Wm1GdGlibTJhU2RqSTByRU9FcWt3c1ROaFFr?=
- =?utf-8?B?Z3gvN09mRjJjcUh5NFNUcVJZdm9pUW9wblJBbms5SDZkSXNFc29weDZoTHRh?=
- =?utf-8?B?aWYySGpTS0JOc2NKbi9pQVF3UXdkZStMQ1lrUkhTSUxXQWV1bnpNL0ZOY3VY?=
- =?utf-8?B?Z0dpYllJN2lhQzRLbXBGVElaRm9XQ2JhZkpTd2hEMlZibFJCa2szL1llbHFw?=
- =?utf-8?B?VGdPM3J6dVgrMkFoRGJZTEozdzU1bGMwNThMb0dtSkdjNEV5WXMydVFMT2RX?=
- =?utf-8?B?UWZQNzJkYlNjbHJnUFNvOFYxZnMzcm9LejR3QmhJTEdOSnZvL2pqbkI2WXU3?=
- =?utf-8?B?R3h3UENyTmV3dmMvaGx4TXdsYVVWdVovUWZFRWh0UWNjNms4bFBrY1NrUEpk?=
- =?utf-8?Q?0wUEWh?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?bnA1ckQ2NGluNWlHakY5RjVHbUhxcGdMcUtJUnBVNUNlbW1tM1VYSFJVZjZm?=
+ =?utf-8?B?Q1VOTDgzeVNCaVJEOVBGWkY0UVhjZXZrNEZjVnBKSjNBcXRrZzUwMmZzdGxn?=
+ =?utf-8?B?TkZINmo5T2Yxc2NjWHljRVpVZVp5cUlydFRBT0ZQa1F3NGVxYWdvYlYvclhr?=
+ =?utf-8?B?MytDWk93Nmd6SW9ObmE1Z29welB4c1o1cjNnNEpKL3BhZlpUVUJtbG1OU1Fr?=
+ =?utf-8?B?STA5NmVxNlJuRmFTRThDQ25VSE82a3l4cDg5d1gwTWFVVW5CVW5UQnhKN3lp?=
+ =?utf-8?B?QVZXbDM2bmwxb2NsSUtMeVk4VFNQZG0wcmRuMWZ4cXZNSFJlV2hnenRZc2kw?=
+ =?utf-8?B?KzZDVDJuRWlVS1R4ZFRrc243NTdheUFYSWtrK1RCZVpjd0V2MXduWXArSndO?=
+ =?utf-8?B?S3BNNVJMWnZVdTViK0lUMERJeENsOVJna0Mram00M2RXajhqREdjbjJEM205?=
+ =?utf-8?B?VkZUSk1UcFZ0ZHFkRTFmZzYzOHA5YjVJM1R0TUJaMlFsUk1pM3F0Rk5zclk5?=
+ =?utf-8?B?M2RIRG9CRENOOWRudFhucDM0UGp2NEVjcmVENWgyV2pzb1JRR0pQRU1JZkNm?=
+ =?utf-8?B?ZFlQdFYzVTNRMnhobExxZ3ZIK0Iya0x0b1hnd1dka1hObGF4R2JYa3hGWHZW?=
+ =?utf-8?B?Yi9FYWJXa0dxZU92RVdLOXh3ZkVGTEhvYUNrdnRVWlZHSGtpRG8wR21jWUs3?=
+ =?utf-8?B?YVBWeGFZSEw4TUNwZUE3S0lzV3hsaXc5MUUva0U1ZG9vWFgvazJWUnZYdzhQ?=
+ =?utf-8?B?UGE3TVd0UHR1bEt0b3c0ZHluMWxmTmo5ejFPYVhsNHhlYjVsVVJiMU93N1BN?=
+ =?utf-8?B?VFo4TWcrUkdtVEUwdmZ4SVpaM1RWZkNxZUVVYnB3cllxaGFCNElwZEl6TVlF?=
+ =?utf-8?B?VGNKTTdFVFVLNkpGa0RZd3lFdUQvMGNaamVEQVB1SVA2Q0Z5RXF2cm1UZlgv?=
+ =?utf-8?B?c3BTaENYN1BZb2xZb0RDanN6Mkx1enVhZVpHTmkrZFBwV2F2ekZjalpQZmhq?=
+ =?utf-8?B?dVlHaVFLdmZvRUpIUWtVaXVrVS81c2tMYU13dFRCc213WnlzYU5pcUU3TzZt?=
+ =?utf-8?B?NEhPZkJJVFpyYlBiUUN5ZE1aamhzY093dXVhYWg1V1JJZ2dreDdrd08xOTUr?=
+ =?utf-8?B?Z3dyNGZBbFMrL0wvYlN3UlRHdzZDa2tCZ21BN2VRZVBBUHZ1SGFTcTQ4d2gr?=
+ =?utf-8?B?YWl1ODBNQXl3UUlRS1VmeDN2U3htQUFub0sxUjB2aW1vWS9pdWUwclpJdWJa?=
+ =?utf-8?B?VlRVT1Y3QlplRTdwbndVZm9uMGk3azNoanRMTjBRL2dtTC9aRE1JN095VHFa?=
+ =?utf-8?B?VUt3andlT2JYY0gzUzBBYTA2R1lhMEZmVk9lZFZXT2xZOFp2ZUtiNklWRm1I?=
+ =?utf-8?B?RWg4ZHZOYis4bDFmNWRkTWxuajRnY0EzUkowNTA3N3ZFS0premdsR25WK1RJ?=
+ =?utf-8?B?d05uWENqTTQwQmZNR3NHWmdiV3piUTFsT3BLc3JRaElvVnpMZFpRRkdwNGM1?=
+ =?utf-8?B?MlNPd0FydEtLQXlUN2lVOEpBd1IxSTZ0MW5MYVVuM1BUUVNqZXdZNmw5RE92?=
+ =?utf-8?B?K3BOdE9HRTlCYVV0bld5OGdSZTFYSXZWQ1UvamFZaGNqZEhia2Qwclo5UjU2?=
+ =?utf-8?B?TUxXcVVxZzNZRVRGb1Y4Yll5Y2hyUGZ3ajd2bU1xZXVraW1UTXhHTlRRanpE?=
+ =?utf-8?B?TCtXQ0RTODI1SVNXektlSWg2R2dmUFE5UHN2bjJwelpXQXJSNTljSFRxR1I1?=
+ =?utf-8?B?QmlZWlIzaTg4NUpUYTh2WWNjWmRqNnJNdHIwczV2V1hrYnBJNlViZzRMRGV6?=
+ =?utf-8?B?UU41NyszZlhLS21iNE5TQUV0Mm1aOW9qL3pyQ05TZWN2OUxCWFZIZDRhTWli?=
+ =?utf-8?B?Ky9OZ1hGNHZpc2dSUmhjTktkdlkxbTFNa0dFellPVXFZVFRBMkNoRVk0RFlo?=
+ =?utf-8?B?TXl0SHRUcTQ4VjV1SnRHU0RYd25QK3U4VkJxNElzZ05UZGFUeDhrbTlzdC9C?=
+ =?utf-8?B?dkxNNDAzMERSSmR2OVJvcDNnbEYxeHlyRnBIN0NUdmszOExQT2pNQnB6WFl0?=
+ =?utf-8?Q?ef0kEH?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(19092799006)(1800799024)(7416014)(376014)(52116014)(366016)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NFN2YVpCcmdSaWdPVzlkWDJTMHRibi9HZTNGdzRIcWRhdEpZL0R4K01CejJk?=
- =?utf-8?B?ektvOUFmWEkvM2RGK202N1BpdGpYZ25NS3FLM2lYMEQ5RnZvT3B2Y0VKMERa?=
- =?utf-8?B?MjNCclhnWUFLcnhEeldHNGRMczM5bDFDb1ZvK2dVSkdET0wwR1JGSytFT3gw?=
- =?utf-8?B?V1QyQmFlWUFPUXcxWitEUWlMd1YxeWdKeVl5L0I5S3IyenNHZTBJai92OHpr?=
- =?utf-8?B?ZlJRcGlBejVTdkgwa2FZZ2ZoZ1NtdkZIWU9DaEt1SmFlY0M5ZGNqajNZR1Bi?=
- =?utf-8?B?UzZVZHFpZTZaS08weUkxRk5ZdU9lNjZsRG01VFhaWVBVSVRJSlFJL0pHV3Zi?=
- =?utf-8?B?eXExZkxoSVhXTEtodGRwNFhmTHQ0UE04VXIvak5laXdJL1VCWG5iMk1HVFl6?=
- =?utf-8?B?a3huanUxc0o3aHBpT3FXUTY5eWlKUSsrTWV4Zkd6VHU4TWZaejBuUnJXQ1g1?=
- =?utf-8?B?TGJtZEV5R3VnQndOSHNndVZ1MGMvSkpYK3UyQVJUb0l1VkNNa2FneTVHUVZI?=
- =?utf-8?B?LzN2ZWRTTXBaSFlxWTMvQVRmVVBISm9ZdkxWSTllVkx4c1ozQVFTR1Q3aGYy?=
- =?utf-8?B?WEc2bVFzREhoTjVqaURNaFo4eXJNYkRzZXRlM29XQWZHSG5MYWdoQktzM2cv?=
- =?utf-8?B?Smk4cHBZM1NOVkI1WDB5VkN5UEpXN2k5VytaSDZGeW5vMnpTaUpReTJPS05p?=
- =?utf-8?B?djRzdjQzSVE1bE9FSHFBVi8wL2xIZUcrM0NsOUJYMFFYWUlUNk0rNXluWXhJ?=
- =?utf-8?B?RTNpaWNaSGtnNmYxRndNeFdXZHg1eFdvOWFQVHJtSjQwVzkxUUxmcHZHbkIw?=
- =?utf-8?B?eE5ndmxMU2poR1ZVUi8vbjROeEM4RnlGb2pzVHZacnZWSkdMUDgzaUxqLzBt?=
- =?utf-8?B?aWtVRXNNTmlOMUp6MFNYR3g2MkRtWkptTERGaVF4dzlQZExkTGhBTGFJemdo?=
- =?utf-8?B?bDJpRmc4bFl0QXcxcmlUQ29paFYwM1B2VGg2QTFSY1BvV0phR2haMHlhNncv?=
- =?utf-8?B?cnloN2lPWWJ1cXF1T2J6S1dSRGJJRmpKamcxTDdMd0pHUS9QS28xbXI5TUNh?=
- =?utf-8?B?SXVYN2R0bGVVUE1tbHU5NzI4Tkh3N0N6R3NvM0ZtZWE4ZlZRNWd0Zmc4clVy?=
- =?utf-8?B?a1p2dm9rWSt4ZXBjb2lGQkRyS1BZQVhYenpEc3V3T2hYOU9kN1lRSXVaaXNt?=
- =?utf-8?B?dEE4bk9JeE1QeXJZTExrSmw5cmR5dUhoR1RNYmFyVExic0R3RFFsQ1VTcXFz?=
- =?utf-8?B?VWRVVjYzN1J2K25WRkZGVVZmbE41WDY4TlpCUXppY2JRNUs2WWRJN1Q3UFoy?=
- =?utf-8?B?ckVBUEwydzk1ejcvRFRWZ3VIZmtHSWJCdDIrTWVpSUhMZHBQa1FaY3dUN2lV?=
- =?utf-8?B?SWZUdk1lOEJIOERlcklta3JxYjBubXo3akpyTWVtUXd1Qko3cTVoTlJkUkVK?=
- =?utf-8?B?d1dkcGVabE94Zk9XbTRrc2tnNi80K1VLSlJyb1FDVS83V1p5T1YwTGdrTHBy?=
- =?utf-8?B?bnZza2ZHZk0wbFFBbUJiSFNmUE5PZWhxTm52YjRCcjR1MzcyUFdueEpFQS8y?=
- =?utf-8?B?VTI5R3FtbFhMaEZrYnZ1WUthOHd4R3lhU3Rhd01JSEdOdys3dDRsUHF2cnJ2?=
- =?utf-8?B?V29IcFZWWlBSMHVER0kyaTJKMGN2TVlvb1ZJOW9oQnhXR0VqUjVUcmlWT2Ry?=
- =?utf-8?B?Y0xDVUVqRXI3c3pVaXVWdDRRWERFQ3VLbUdsaDA1MERoUFRmMU81VVlsd0pK?=
- =?utf-8?B?TXExQzZpSHdWd1Q4MGR3TFJBNWUrb1FGU0x1aW5rY3hrQnRic01PUERiUHF6?=
- =?utf-8?B?d1pQQkxUUlFUZGcvNmNKS3NZcnhoc1hFU2FDbTNMNkwyZWJOa0xxeGRDTWF1?=
- =?utf-8?B?bWF6NVJmc2RmRUp0L3h2c1RQbm9hZVl2Tm5NSFl6ZUZZTC9NSExPQ0YwOGNC?=
- =?utf-8?B?QnRxY05JOStDYXc1SXBxZGZJYzhMaGVsQ09QVCtuaUNZeXBnSkZrSXFUOFBD?=
- =?utf-8?B?Z3lmQU5MYVlPOGgvZUtpTDZPakQrNzA0cTMvQmcyanA2dTlnejdvQ0RITFQy?=
- =?utf-8?B?azdZUzQ2UU1razZWdDB6ZUVLWVIwY3BETkdRQmx0dmJjcVFkUzhZOUJBYUJw?=
- =?utf-8?Q?z/P67uWhnpGBUKGIXrJV2auHX?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z3VJTXdKSHF0cFRpOCtZbmp0ZXJBQ0ZuSWRDOHZUQkZ5VFFqRmxOcXVFaXps?=
+ =?utf-8?B?SnFndWMxZUVvQUE2b282VHY2VGJqa2J1a1BZOXdYbmpVdzVzZU4yaWFvcFpO?=
+ =?utf-8?B?NTZEUmJmWi9Ya2dyaTVKMTVPRTk2UEFyMnpvNi9DU2dnMk96WEFjcHB0VG1w?=
+ =?utf-8?B?ekMxeUljcnJpYlFOMURLS2s3eFkyMVJ5d2tEbExJSXRZTU4yMnhma1VsUUY1?=
+ =?utf-8?B?bDBxSVJKZ2hmMU5vVWdFWFFZWVRVRngyUENvRXR1TGczdDdIMEVpMkJkbkFR?=
+ =?utf-8?B?Si9Kd0FaTmxjei9QYk03NVdtZFkzOUJjOFBadUtrWC9lYmc2WTFwZi81VTBh?=
+ =?utf-8?B?M3o1TUJSbzRvNmZPekZhNG1iYVkwZml2eFphVC9MWEpJbGNWL2lFenRNUnRN?=
+ =?utf-8?B?bDE1YVNDT3dCUkR2WkV3UXN2T0F2TkFxOE4ySkw4TkZyQXBWc3RES1NoT29Y?=
+ =?utf-8?B?NU84aE5tanhIZWJHRWZqSjY0QUc4Q3BqSEV1cDFnd1YyK2xsbUNZS3lYQno5?=
+ =?utf-8?B?MUFwTVdIUFpNVm12RXVwUERXSlduVzFYUkxFcmlKTUIrSDFOdkJYSU5Vdk5n?=
+ =?utf-8?B?bnNKQlNMSUZzbUNLSU1qNDFEL2MrdG9zNjkzQTN6RFk0ZHhnY2J6bVliMXAr?=
+ =?utf-8?B?Z3JXZDdlVHZxUFVlelBockdKK3lKbmpvOEIwam85d01BZEtHK2lhYVVweGtB?=
+ =?utf-8?B?TXJXNEt2UksyVG8xSGhja3BpcXk2bWFrZWVRYnJLYzVrdVFxQmQvdmx3aWNF?=
+ =?utf-8?B?NFR2QlJMcDYzZU4xcURjNmZIQXZycTFtZWN0ejNVano2QUc2MGxGcHRpdUJa?=
+ =?utf-8?B?WlRuQXdRRUJJT1NpTlBDZE90cEhnTnV0MXlIeUJpUkY5S2NRb3JPdENocXlF?=
+ =?utf-8?B?ODJsWkdrQXJRc1hUVjJMbWpmVDl4YnVJZU1MMlZFU0hUUnl5L214WTZOMHhL?=
+ =?utf-8?B?TkN2OTB2NGhNTGt2TmkybXhhY2RmbDZJK3hpRWRrZyszdkpOdHcxNDBTeGY5?=
+ =?utf-8?B?ZGtNNnNFb0o2L2t2Q3o0SC9rc0ZNNi9sWjhUamtGTTRNY3gxNHlnRmpFc2x6?=
+ =?utf-8?B?bVJGZ09BdVZXNld0L05KS3FwSllpY0o1ZEZ4c2dYam12dUlmVk9LL0lHOCta?=
+ =?utf-8?B?TTIyTnp1ZXFsVm5DUVpFL1EySWVQUmxyVXlma1FVKzZGY05ob0NTSDVPaGx5?=
+ =?utf-8?B?MG5UUGVLZjhrak1oeFlRZTJKc3VlSElhd0JNUkRKRjlyOGVvRWtRMFhWaGN3?=
+ =?utf-8?B?UGFyMWdwOWl4TS9UOGxzTVY0U0xoZGVVRFhBbERvcm5sZHZXNnYrSlNPRVhR?=
+ =?utf-8?B?L1RFdTNGTHdzU1VtTnlYekR0QiswNlBjTk5RTUNPbzVZRGdBRkQrdkx1Qlhl?=
+ =?utf-8?B?MlJjMDF4VkU5RURCR25zVmF1cjhqdHJYUjlRVmthSjZ4L1ZuWmI4VlNSazNS?=
+ =?utf-8?B?b2Vja3YwNUU4ZnJ6eTBDZTA1L1phQW10TUtCZm5PMU8zVC96clg4cWdnN3ky?=
+ =?utf-8?B?eVkzdDRrQ3FyMUs3WlkxS1p5QmxVR2dzUTM3am42K1BDNnhkMjFwOG4rZGVw?=
+ =?utf-8?B?NHZtL1E0Rk1ONzhVWlhJaGhTaCtlbkxoaWZKLzRBY3R2VW5Ob3c0NFVMMGpn?=
+ =?utf-8?B?S1RBK3hhTW5VT1RRdm9BN2traWZFTW1yTkduc0NzMVVhVm5xV3JoQ0hYY0JX?=
+ =?utf-8?B?bDlVNG9aSFVzOVpzRjJhRTJJTFczTzhuakVNVDFwUlZyZERYSlE5WHJMNysy?=
+ =?utf-8?B?NnhvYzMwZ0hmN3RPdDkvblZZTXE0cUpVa3Z6WXpmWFVjK1JHMnp5YkxIWlRK?=
+ =?utf-8?B?L3A3Mmx5elR6NUlHRjhqK3RSaTUrYk03ZFpLNmNueGtBZjFYZkxrbVI5TVhq?=
+ =?utf-8?B?Z3RyZGlGc29UckZ4ZXJwYmtJUGYxUW9MZGN6SE4vdlBYRXk4Ym4wMTZZMjhF?=
+ =?utf-8?B?Z0xFV3MzVFNFUTBRVnk4Rkc1UEN0YUpMTWhXSWVoL2FtZ1R3L2ptaWlMdmlX?=
+ =?utf-8?B?dUJtalZyK3FEVmw0Y0R4NnJTU3VaOXFwdENjL3g2bExRM2hPMVM0WFZXbDIr?=
+ =?utf-8?B?dWRDRllWY1pMK3VFWmk2b3VScjRVcXdXVUwwUkdQL1lnT243d3JCcTNDNVZJ?=
+ =?utf-8?Q?9IPQyI2rHxIinao/YLISQD0DJ?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 113090da-95dd-4ebd-c111-08de08a699fc
+X-MS-Exchange-CrossTenant-Network-Message-Id: d43a12f7-12d4-46bc-a344-08de08a69edc
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Oct 2025 09:14:37.5797 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Oct 2025 09:14:45.7687 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CRbACC54tJjG1Xs4sXVilSaVjqQkdJGfqX7s00C0A7o57+SqVLAQ3yF2kNKKqdWQX7fPmOvya5++y5L48s/XSQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: LroqMLlwCFwPKrsUWzeyPOSAaPZlBCwbbSoiqJuV9wB8ZsvReGN9prLVgUbc8P6m2G+p55Y/eqmq82A+qwhS2g==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR04MB7129
 X-Mailman-Approved-At: Sat, 11 Oct 2025 20:07:05 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -204,461 +204,66 @@ X-Virus-Status: Clean
 
 From: Ye Li <ye.li@nxp.com>
 
-Extend the NETC block control driver to support the i.MX94 SoC.
+Add support for the optional 'phy-supply' property in the ENETC MDIO
+driver. This allows the driver to enable and manage the PHY's power
+supply via the regulator framework when specified in device tree.
 
-Acked-by: Peng Fan <peng.fan@nxp.com>
-Reviewed-by: Jacky Bai <ping.bai@nxp.com>
 Signed-off-by: Ye Li <ye.li@nxp.com>
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 ---
- drivers/net/Kconfig                   |   5 +-
- drivers/net/fsl_enetc_netc_blk_ctrl.c | 338 +++++++++++++++++++++++++++++++++-
- 2 files changed, 333 insertions(+), 10 deletions(-)
+ drivers/net/fsl_enetc_mdio.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 7ae28c4e0d5..b292f7a6c42 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -1002,8 +1002,9 @@ config FSL_ENETC
+diff --git a/drivers/net/fsl_enetc_mdio.c b/drivers/net/fsl_enetc_mdio.c
+index c1d491f2c5a..3d76d92a62a 100644
+--- a/drivers/net/fsl_enetc_mdio.c
++++ b/drivers/net/fsl_enetc_mdio.c
+@@ -11,6 +11,8 @@
+ #include <asm/io.h>
+ #include <asm/processor.h>
+ #include <miiphy.h>
++#include <linux/delay.h>
++#include <power/regulator.h>
  
- config FSL_ENETC_NETC_BLK_CTRL
- 	bool "NXP ENETC NETC blocks control driver"
--	depends on FSL_ENETC && IMX95
--	default y if IMX95
-+	depends on FSL_ENETC
-+	depends on IMX95 || IMX94
-+	default y if IMX95 || IMX94
- 	help
- 	  This driver configures Integrated Endpoint Register Block (IERB) and
- 	  Privileged Register Block (PRB) of NETC. For i.MX platforms, it also
-diff --git a/drivers/net/fsl_enetc_netc_blk_ctrl.c b/drivers/net/fsl_enetc_netc_blk_ctrl.c
-index fecd66eb15a..42e25ac8d5f 100644
---- a/drivers/net/fsl_enetc_netc_blk_ctrl.c
-+++ b/drivers/net/fsl_enetc_netc_blk_ctrl.c
-@@ -43,6 +43,19 @@
- #define PCS_PROT_SFI			BIT(4)
- #define PCS_PROT_10G_SXGMII		BIT(6)
+ #include "fsl_enetc.h"
  
-+#define IMX94_MISC_SOC_CONTROL		0x0
-+#define SEL_XPCS_1			BIT(1)
-+#define IMX94_XPCS_PORT_0		0x0
-+#define IMX94_XPCS_PORT_1		0x1
-+
-+#define IMX94_EXT_PIN_CONTROL		0x10
-+#define MAC2_MAC3_SEL			BIT(1)
-+
-+#define IMX94_CFG_LINK_PCS_PROT(a)	(0x14 + (a) * 4)
-+#define IMX94_NETC_LINK_CFG(a)		(0x4c + (a) * 4)
-+#define NETC_LINK_CFG_MII_PROT		GENMASK(3, 0)
-+#define NETC_LINK_CFG_IO_VAR		GENMASK(19, 16)
-+
- /* NETC privileged register block register */
- #define PRB_NETCRR			0x100
- #define  NETCRR_SR			BIT(0)
-@@ -55,6 +68,7 @@
- /* NETC integrated endpoint register block register */
- #define IERB_EMDIOFAUXR			0x344
- #define IERB_T0FAUXR			0x444
-+#define IERB_ETBCR(a)			(0x300c + 0x100 * (a))
- #define IERB_EFAUXR(a)			(0x3044 + 0x100 * (a))
- #define IERB_VFAUXR(a)			(0x4004 + 0x40 * (a))
- #define FAUXR_LDID			GENMASK(3, 0)
-@@ -64,6 +78,26 @@
- #define IMX95_ENETC1_BUS_DEVFN		0x40
- #define IMX95_ENETC2_BUS_DEVFN		0x80
+@@ -135,6 +137,8 @@ static int enetc_mdio_probe(struct udevice *dev)
+ 	struct pci_child_plat *pplat = dev_get_parent_plat(dev);
+ 	struct enetc_mdio_priv *priv = dev_get_priv(dev);
+ 	u16 cmd = PCI_COMMAND_MEMORY;
++	int ret;
++	struct udevice *supply = NULL;
  
-+#define IMX94_ENETC3_BUS_DEVFN		0x0
-+#define IMX94_TIMER0_BUS_DEVFN		0x1
-+#define IMX94_SWITCH_BUS_DEVFN		0x2
-+#define IMX94_ENETC0_BUS_DEVFN		0x100
-+#define IMX94_TIMER1_BUS_DEVFN		0x101
-+#define IMX94_ENETC1_BUS_DEVFN		0x140
-+#define IMX94_ENETC2_BUS_DEVFN		0x180
-+#define IMX94_TIMER2_BUS_DEVFN		0x181
-+#define IMX94_ENETC0_LINK		3
-+#define IMX94_ENETC1_LINK		4
-+#define IMX94_ENETC2_LINK		5
-+#define IMX94_ENETC0_OFFSET		0
-+#define IMX94_ENETC1_OFFSET		1
-+#define IMX94_ENETC2_OFFSET		2
-+#define IMX94_SWITCH_PORT2		2
-+#define IMX94_SWITCH_CPU_PORT		3
-+#define IMX94_TIMER0_ID			0
-+#define IMX94_TIMER1_ID			1
-+#define IMX94_TIMER2_ID			2
-+
- /* Flags for different platforms */
- #define NETC_HAS_NETCMIX		BIT(0)
+ 	priv->regs_base = dm_pci_map_bar(dev, PCI_BASE_ADDRESS_0, 0, 0, PCI_REGION_TYPE, 0);
+ 	if (!priv->regs_base) {
+@@ -144,6 +148,27 @@ static int enetc_mdio_probe(struct udevice *dev)
  
-@@ -73,6 +107,15 @@ struct netc_blk_ctrl {
- 	void __iomem *netcmix;
- };
+ 	priv->regs_base += ENETC_MDIO_BASE;
  
-+struct netc_devinfo {
-+	int (*netcmix_init)(struct udevice *dev);
-+	int (*ierb_init)(struct udevice *dev);
-+	void (*xpcs_port_init)(struct netc_blk_ctrl *priv, int port);
-+};
-+
-+static struct netc_blk_ctrl *netc_bc;
-+static struct netc_devinfo *netc_di;
-+
- static void netc_reg_write(void __iomem *base, u32 offset, u32 val)
- {
- 	writel(val, base + offset);
-@@ -183,6 +226,150 @@ static int imx95_netcmix_init(struct udevice *dev)
- 	return 0;
- }
- 
-+static int imx94_enetc_get_link_num(ofnode np)
-+{
-+	int bus_devfn;
-+
-+	bus_devfn = netc_of_pci_get_bus_devfn(np);
-+	if (bus_devfn < 0)
-+		return -EINVAL;
-+
-+	/* Parse ENETC link number */
-+	switch (bus_devfn) {
-+	case IMX94_ENETC0_BUS_DEVFN:
-+		return IMX94_ENETC0_LINK;
-+	case IMX94_ENETC1_BUS_DEVFN:
-+		return IMX94_ENETC1_LINK;
-+	case IMX94_ENETC2_BUS_DEVFN:
-+		return IMX94_ENETC2_LINK;
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static int imx94_link_config(struct netc_blk_ctrl *priv,
-+			     ofnode np, int link_id)
-+{
-+	phy_interface_t interface;
-+	int mii_proto;
-+	u32 val;
-+
-+	interface = ofnode_read_phy_mode(np);
-+	if (interface == -1)
-+		return -EINVAL;
-+
-+	mii_proto = netc_get_link_mii_protocol(interface);
-+	if (mii_proto < 0)
-+		return -EINVAL;
-+
-+	val = mii_proto & NETC_LINK_CFG_MII_PROT;
-+	if (mii_proto == MII_PROT_SERIAL) {
-+		int pcs_proto = PCS_PROT_1G_SGMII;
-+
-+		if (pcs_proto == PHY_INTERFACE_MODE_2500BASEX)
-+			pcs_proto = PCS_PROT_2500M_SGMII;
-+
-+		netc_reg_write(priv->netcmix, IMX94_CFG_LINK_PCS_PROT(link_id),
-+			       pcs_proto);
-+		val = u32_replace_bits(val, IO_VAR_16FF_16G_SERDES,
-+				       NETC_LINK_CFG_IO_VAR);
-+	}
-+
-+	netc_reg_write(priv->netcmix, IMX94_NETC_LINK_CFG(link_id), val);
-+
-+	if (link_id == IMX94_ENETC0_LINK) {
-+		val = netc_reg_read(priv->netcmix, IMX94_EXT_PIN_CONTROL);
-+		val |= MAC2_MAC3_SEL;
-+		netc_reg_write(priv->netcmix, IMX94_EXT_PIN_CONTROL, val);
-+	}
-+
-+	return 0;
-+}
-+
-+static int imx94_enetc_link_config(struct netc_blk_ctrl *priv,
-+				   ofnode np, bool *enetc0_en)
-+{
-+	int link_id;
-+
-+	link_id = imx94_enetc_get_link_num(np);
-+	if (link_id < 0)
-+		return -EINVAL;
-+
-+	if (link_id == IMX94_ENETC0_LINK)
-+		*enetc0_en = true;
-+
-+	return imx94_link_config(priv, np, link_id);
-+}
-+
-+static int imx94_switch_link_config(struct netc_blk_ctrl *priv,
-+				    ofnode np, bool *swp2_en)
-+{
-+	ofnode ports, child;
-+	int port_id, err = 0;
-+
-+	ports = ofnode_find_subnode(np, "ports");
-+	if (!ofnode_valid(ports))
-+		ports = ofnode_find_subnode(np, "ethernet-ports");
-+	if (!ofnode_valid(ports))
-+		return -ENODEV;
-+
-+	ofnode_for_each_subnode(child, ports) {
-+		if (ofnode_read_u32(child, "reg", &port_id) < 0) {
-+			err = -ENODEV;
-+			goto end;
++	if (CONFIG_IS_ENABLED(DM_REGULATOR)) {
++		ret = device_get_supply_regulator(dev, "phy-supply",
++						  &supply);
++		if (ret && ret != -ENOENT) {
++			printf("%s: device_get_supply_regulator failed: %d\n",
++			       __func__, ret);
++			return ret;
 +		}
 +
-+		if (port_id == IMX94_SWITCH_CPU_PORT)
-+			continue;
++		if (supply) {
++			regulator_set_enable(supply, false);
++			mdelay(100);
 +
-+		if (port_id == IMX94_SWITCH_PORT2)
-+			*swp2_en = true;
-+
-+		err = imx94_link_config(priv, child, port_id);
-+		if (err)
-+			goto end;
-+	}
-+
-+end:
-+	return err;
-+}
-+
-+static int imx94_netcmix_init(struct udevice *dev)
-+{
-+	struct netc_blk_ctrl *priv = dev_get_priv(dev);
-+	ofnode child, gchild;
-+	bool enetc0_en = false, swp2_en = false;
-+	int err;
-+
-+	dev_for_each_subnode(child, dev) {
-+		if (!ofnode_is_enabled(child))
-+			continue;
-+
-+		ofnode_for_each_subnode(gchild, child) {
-+			if (!ofnode_is_enabled(gchild))
-+				continue;
-+
-+			if (ofnode_device_is_compatible(gchild, "pci1131,e101")) {
-+				err = imx94_enetc_link_config(priv, gchild, &enetc0_en);
-+				if (err)
-+					return err;
-+			} else if (ofnode_device_is_compatible(gchild, "pci1131,eef2")) {
-+				err = imx94_switch_link_config(priv, gchild, &swp2_en);
-+				if (err)
-+					return err;
++			ret = regulator_set_enable_if_allowed(supply, true);
++			if (ret) {
++				printf("%s: Error enabling phy supply\n", dev->name);
++				return ret;
 +			}
 +		}
 +	}
 +
-+	if (enetc0_en && swp2_en) {
-+		dev_err(dev, "Cannot enable swp2 and enetc0 at the same time\n");
-+
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
- static bool netc_ierb_is_locked(struct netc_blk_ctrl *priv)
- {
- 	return !!(netc_reg_read(priv->prb, PRB_NETCRR) & NETCRR_LOCK);
-@@ -238,9 +425,99 @@ static int imx95_ierb_init(struct udevice *dev)
- 	return 0;
- }
- 
-+static int imx94_enetc_get_enetc_offset(ofnode np)
-+{
-+	int bus_devfn;
-+
-+	bus_devfn = netc_of_pci_get_bus_devfn(np);
-+	if (bus_devfn < 0)
-+		return -EINVAL;
-+
-+	/* Parse ENETC offset */
-+	switch (bus_devfn) {
-+	case IMX94_ENETC0_BUS_DEVFN:
-+		return IMX94_ENETC0_OFFSET;
-+	case IMX94_ENETC1_BUS_DEVFN:
-+		return IMX94_ENETC1_OFFSET;
-+	case IMX94_ENETC2_BUS_DEVFN:
-+		return IMX94_ENETC2_OFFSET;
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static int imx94_enetc_get_timer_id(ofnode np)
-+{
-+	int bus_devfn;
-+
-+	bus_devfn = netc_of_pci_get_bus_devfn(np);
-+	if (bus_devfn < 0)
-+		return -EINVAL;
-+
-+	/* Parse ENETC PTP timer ID */
-+	switch (bus_devfn) {
-+	case IMX94_TIMER0_BUS_DEVFN:
-+		return IMX94_TIMER0_ID;
-+	case IMX94_TIMER1_BUS_DEVFN:
-+		return IMX94_TIMER1_ID;
-+	case IMX94_TIMER2_BUS_DEVFN:
-+		return IMX94_TIMER2_ID;
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static int imx94_enetc_update_tid(struct netc_blk_ctrl *priv, ofnode pf_np)
-+{
-+	ofnode timer_np;
-+	int offset, tid;
-+
-+	offset = imx94_enetc_get_enetc_offset(pf_np);
-+	if (offset < 0) {
-+		printf("Find unknown PF node.\n");
-+		return offset;
-+	}
-+
-+	timer_np = ofnode_parse_phandle(pf_np, "nxp,ptp-timer", 0);
-+	if (!ofnode_valid(timer_np)) {
-+		/*
-+		 * If nxp,ptp-timer is not set, the first timer of the bus
-+		 * where enetc is located will be used as the default timer.
-+		 */
-+		tid = IMX94_TIMER1_ID;
-+		goto update_reg;
-+	}
-+
-+	tid = imx94_enetc_get_timer_id(timer_np);
-+	if (tid < 0) {
-+		printf("Incorrect bus/devfn of ptp-timer.\n");
-+		return tid;
-+	}
-+
-+update_reg:
-+	netc_reg_write(priv->ierb, IERB_ETBCR(offset), tid);
-+
-+	return 0;
-+}
-+
-+static int imx94_ierb_init(struct udevice *dev)
-+{
-+	struct netc_blk_ctrl *priv = dev_get_priv(dev);
-+	ofnode bus_np, pf_np;
-+	int ret = 0;
-+
-+	dev_for_each_subnode(bus_np, dev)
-+		ofnode_for_each_subnode(pf_np, bus_np)
-+			if (ofnode_device_is_compatible(pf_np, "pci1131,e101"))
-+				ret = imx94_enetc_update_tid(priv, pf_np);
-+
-+	return ret;
-+}
-+
- static int netc_ierb_init(struct udevice *dev)
- {
- 	struct netc_blk_ctrl *priv = dev_get_priv(dev);
-+	struct netc_devinfo *devinfo = (struct netc_devinfo *)dev_get_driver_data(dev);
- 	int err;
- 
- 	if (netc_ierb_is_locked(priv)) {
-@@ -251,9 +528,11 @@ static int netc_ierb_init(struct udevice *dev)
- 		}
- 	}
- 
--	err = imx95_ierb_init(dev);
--	if (err)
--		return err;
-+	if (devinfo->ierb_init) {
-+		err = devinfo->ierb_init(dev);
-+		if (err)
-+			return err;
-+	}
- 
- 	err = netc_lock_ierb(priv);
- 	if (err) {
-@@ -264,6 +543,31 @@ static int netc_ierb_init(struct udevice *dev)
- 	return 0;
- }
- 
-+static void imx94_netc_xpcs_port_init(struct netc_blk_ctrl *priv, int port)
-+{
-+	u32 val;
-+
-+	val = netc_reg_read(priv->netcmix, IMX94_MISC_SOC_CONTROL);
-+	if (port == IMX94_XPCS_PORT_1)
-+		val |= SEL_XPCS_1;
-+	else
-+		val &= ~SEL_XPCS_1;
-+	netc_reg_write(priv->netcmix, IMX94_MISC_SOC_CONTROL, val);
-+}
-+
-+void netc_xpcs_port_init(int port)
-+{
-+	struct netc_blk_ctrl *priv = netc_bc;
-+	struct netc_devinfo *devinfo;
-+
-+	if (!priv)
-+		return;
-+
-+	devinfo = netc_di;
-+	if (devinfo->xpcs_port_init)
-+		devinfo->xpcs_port_init(priv, port);
-+}
-+
- static int netc_prb_check_error(struct netc_blk_ctrl *priv)
- {
- 	if (netc_reg_read(priv->prb, PRB_NETCSR) & NETCSR_ERROR)
-@@ -272,14 +576,27 @@ static int netc_prb_check_error(struct netc_blk_ctrl *priv)
- 	return 0;
- }
- 
-+static const struct netc_devinfo imx95_devinfo = {
-+	.netcmix_init = imx95_netcmix_init,
-+	.ierb_init = imx95_ierb_init,
-+};
-+
-+static const struct netc_devinfo imx94_devinfo = {
-+	.netcmix_init = imx94_netcmix_init,
-+	.ierb_init = imx94_ierb_init,
-+	.xpcs_port_init = imx94_netc_xpcs_port_init,
-+};
-+
- static const struct udevice_id netc_blk_ctrl_match[] = {
--	{ .compatible = "nxp,imx95-netc-blk-ctrl" },
-+	{ .compatible = "nxp,imx95-netc-blk-ctrl", .data = (ulong)&imx95_devinfo },
-+	{ .compatible = "nxp,imx94-netc-blk-ctrl", .data = (ulong)&imx94_devinfo },
- 	{},
- };
- 
- static int netc_blk_ctrl_probe(struct udevice *dev)
- {
- 	struct netc_blk_ctrl *priv = dev_get_priv(dev);
-+	struct netc_devinfo *devinfo = (struct netc_devinfo *)dev_get_driver_data(dev);
- 	struct clk *ipg_clk;
- 	fdt_addr_t regs;
- 	int err;
-@@ -318,10 +635,12 @@ static int netc_blk_ctrl_probe(struct udevice *dev)
- 
- 	priv->netcmix = (void __iomem *)regs;
- 
--	err = imx95_netcmix_init(dev);
--	if (err) {
--		dev_err(dev, "Initializing NETCMIX failed\n");
--		return err;
-+	if (devinfo->netcmix_init) {
-+		err = devinfo->netcmix_init(dev);
-+		if (err) {
-+			dev_err(dev, "Initializing NETCMIX failed\n");
-+			return err;
-+		}
- 	}
- 
- 	err = netc_ierb_init(dev);
-@@ -333,6 +652,9 @@ static int netc_blk_ctrl_probe(struct udevice *dev)
- 	if (netc_prb_check_error(priv) < 0)
- 		dev_warn(dev, "The current IERB configuration is invalid\n");
- 
-+	netc_bc = priv;
-+	netc_di = devinfo;
-+
- 	return 0;
- }
+ 	if (pplat->vendor == PCI_VENDOR_ID_PHILIPS)	/* i.MX95 */
+ 		cmd |= PCI_COMMAND_MASTER;
  
 
 -- 
