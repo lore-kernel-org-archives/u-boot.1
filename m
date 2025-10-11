@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7D64CCA476
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 12:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72783CCD184
+	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 12:06:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E36283B8A;
-	Sat, 11 Oct 2025 14:03:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E9CDB83C16;
+	Sat, 11 Oct 2025 14:06:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dVKTkYlJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nW3iMIQj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0513583B8B; Sat, 11 Oct 2025 14:03:54 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 6BF3083BB5; Sat, 11 Oct 2025 14:06:40 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1042883B7F
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 14:03:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B68483B8A
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 14:06:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-637e74e9104so3863567a12.1
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 05:03:52 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-639e1e8c8c8so5644610a12.1
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 05:06:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760184231; x=1760789031; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1760184398; x=1760789198; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IaAzvL2xvKxVBIA6UGVhywcaMwS7oUIkFsgmUpKjuEc=;
- b=dVKTkYlJWQ33Tc8azHwdHvdAyEM7ppP6j3GtBH0OgXOUofCHBuSVpkzSZugFc0z0GD
- oFAILwnZxJrIIvnYWmFOJxHJgYrtGKPrVqq3OBlroCrfZu1TWzcF0/wnDsxAFdfzdL0Q
- V8yPrPiHN7nIbPrqWKE6H6A9pSqkCWVr22CNOQuakRHlR80lXPJhp0dDt9wnp5SD5ecJ
- Wca+kGBqzI3tMg56jR5U4lMVLsxqEc2m9Vuw3mqbCS9vo92PFJ4mQu2Fo16+VlpXiZGp
- uYV4/m9YNXELQouXrnYnH+Qa0WOO9ldmpSP18ntztpcpJGm5uAp449WmUilQ89gNwnKC
- 3C2w==
+ bh=GFOTeLMMPPUqPpgc8O80JjaPkcCbs1X6asVv05MtC34=;
+ b=nW3iMIQjnWOXg47PDYa7CrNcld9zd3XMc9OsUw4exzRMCQCb6uKyiVhfZtnaOsoK78
+ JFVEWVWwq8x5EB61W9WpImco5kUYbmWi5Y+NFPS91WWE4vxzaL+rAsRm9H7RSFjCeBZU
+ mMEAg4FYwrFuX+TIgIM+ETbL+qsqquy5HGe4ZPKLyfiokbqaqAlhSMhUfjrsxHGZdMIq
+ VPqj9KFND8JGGXhjoYVNdEG81jXlt7A8tYRBT5n03VpyUvohzNv1NLqN/LpAIIJiedog
+ 8al92Y0cQvP/A6RrCQc+RyBDLLcH7IAFaUKPiqHp3xY70UuhSw+QmPl/9d5qSfaEEjCR
+ lkpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760184231; x=1760789031;
+ d=1e100.net; s=20230601; t=1760184398; x=1760789198;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IaAzvL2xvKxVBIA6UGVhywcaMwS7oUIkFsgmUpKjuEc=;
- b=BVnni+9vYKcwdQIXXNSz5skcy3iZVVD7vUquMpIAljeA/geUrtaEeqxj/YodtTlQZL
- CNtd5duZTMqSBSsy0BxQ/6JHgKeQP1vgjuClroCMz4gKM47tVDDLxaEqkvdlKUFodUis
- C/5uU8m4jTq1HviZt3FDZTS1kZnV+bouQfkkcif6YzbZvIrS46NqMU6dme6FJvex1vEW
- qPmT4wTsv1m8OyQ0e15Ru+NWwxc0DFqth4ljyLldrhQ2nOYugs1+wJf4yhiCVB5f+NjF
- B06GfkmeH18Wo1nYfHWK32DDGMuGqnt1n5jvJyS4qdYXP+fbkv6rB9B8wHwFZhCzOJev
- 2MVQ==
+ bh=GFOTeLMMPPUqPpgc8O80JjaPkcCbs1X6asVv05MtC34=;
+ b=P80wWy4cmeHdNycazrOXWZ5jCU6lAhCuFysEt1h59Ax+G5Pzd8CU8qT6xT6iMofFwK
+ L8KfZXYGSFDI0+KJpn0S9N9cYY5Y99aJAVHTGVvWTMPY3/QNn+h59j1w3dEjOaoS/rsh
+ zvTwUhgM9KCqn1yWNqaarAFhtpCH3mnLf57kQvK9EksTzSDtJqknn4+CqJRguktlraK2
+ LcoMP4ijSLrlOzM6kU/p7uROJDHhF276jcB8xcTLOmYmJzhAoneFZ/abl21T5Ii8f6UU
+ 1V8P+PQxurkmh4tP5lFfK+GiGisvKTcS8WldqsYcMM9o52qqhrCp0O68dKX7fts3wB0u
+ BuJw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhggVPpgC/wV45Xy9LL76Q1Kuh3geQZyTL9FYuFSRS4RfWazwfwk91Yy2Z0eP8PHj67aRDHSk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxZbpHvN5xAhlXMU51OhlYOE3UZLTG2kNP8xaQOjX52+bv9Nx6D
- 6UzYmZ9iOFZBQYQzsZJgoLHzd0bj3ef/NbIcoRjzpRPJHjIU7TP+d3ZQDeCmYY6aWT4uWd7B5Gy
- 0tLD3LBfRTLNb/mFwtYOBkZSthBPBrFk=
-X-Gm-Gg: ASbGncv+3e92bjGJcmgXyYmIRZPukHlsr2Toav/yBVWwLJwfslT4JaovPEg5d3gTLt8
- 7u6sdUfz9MvpOFsrE+QpXG6eXHunKINlzAtapCyyr1G/ferwEe3mfe8j4Sd17VlHXw3kxf4bxPY
- hCQMITAtYeiw2hbafUH9/Ewtc6Soe3m20tsfNS6hZrPiGP8Em7marqCuLQX21GaBtYWlnF7Y5bQ
- ODvuaTux7/qxUCOGxhiPCS7/hJpG8qsEnsCF85G1X16NhJjjnApQgEJ7NaK5rjKOmeqvUaxsvXe
- 4HAew9H6pJ61Oj9oYw==
-X-Google-Smtp-Source: AGHT+IF63KTWzowD3wk/q8d1hgGA5gQmzAMPf62mywE3TC+Ag4KoRVXeErv2Y9o1mWNtgYfyWKhbj8x7TUsj5VVAqMI=
-X-Received: by 2002:a05:6402:354c:b0:639:fb11:993d with SMTP id
- 4fb4d7f45d1cf-639fb119c17mr8837065a12.32.1760184231190; Sat, 11 Oct 2025
- 05:03:51 -0700 (PDT)
+ AJvYcCXfV/iA6mkYmVUA38YXlTvWYNJPny42GOxQA13fHosWrcKRt5PZ/VaeWdfv73KgLVO355LNwBE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4cx2yJ4gxveULVEa7BtnkpzuY0u1CRQTocdjVQBN10YugVXI9
+ TRizLdUXRHbmL4wntwPjLXV5HXdALZkvEPCCTIg5Ib4zrbkaZiesdULHyizm78sPgYGk8Fmn4xT
+ 70sXw8CucdO3fZEi5T/ZziEG96GNXFhs=
+X-Gm-Gg: ASbGncsuhe+hrg18EUJZW+DmravQJJDr8gmGfKyLvBWk8zNZdvsoJqeALkowWwpZpf3
+ Td9+i7iluUvVu9abo1Q5H3GlZqwkje9jdSWNIA/BMlOoo2PIDp9H5Ou/nFgAD9RbFkFAmFk3Qbz
+ 2lpni6ItR68+uqorLqzQtdvPgkM8/WAjx7sz1PbKlJ/KelITVcUxnMyv0HffHgGvhdfhqY08S6a
+ X7m8DjHs5h0C8b8OGTyCq08lUeCmVctrIH+1l5HpQWnqBQ17jWrVbSlA3xQ9rZKTTpyqIxt2KXK
+ fXSVU1A=
+X-Google-Smtp-Source: AGHT+IFvPMvPNcEpfCojCHNVQ4utKH4tKz0zPtOaCLnYoM0nhkL+n5UYmI4eOepvx9GTeE+L0U6MekwX1zmyNOpAIAY=
+X-Received: by 2002:a05:6402:3554:b0:639:fb11:9935 with SMTP id
+ 4fb4d7f45d1cf-639fb119b08mr8366965a12.4.1760184397603; Sat, 11 Oct 2025
+ 05:06:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251010053056.32495-1-mibodhi@gmail.com>
- <20251010142835.GY298503@bill-the-cat>
-In-Reply-To: <20251010142835.GY298503@bill-the-cat>
+References: <20251010161442.410C4227AAE@verein.lst.de>
+ <83d5b542-e648-4849-80c3-a3073242f72c@suse.com>
+In-Reply-To: <83d5b542-e648-4849-80c3-a3073242f72c@suse.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sat, 11 Oct 2025 13:03:39 +0100
-X-Gm-Features: AS18NWApOMUtHvDAg7tP4BFWkW-fwZhyKgcr6w__VPN5rassT86div0MvXo3-hA
-Message-ID: <CALeDE9P8VP6YKS1qoz3Dxga+h287GHzRvczCq0YDd4tOJxNXGQ@mail.gmail.com>
-Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
-To: Tom Rini <trini@konsulko.com>
-Cc: Tony Dinh <mibodhi@gmail.com>, Simon Glass <sjg@chromium.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martin Schwan <m.schwan@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>
+Date: Sat, 11 Oct 2025 13:06:26 +0100
+X-Gm-Features: AS18NWANpncGmC93kWc9OdCTXFr_-Ck2T2BK5GSbWQGEvdylYOtz5MllfjeVk4o
+Message-ID: <CALeDE9O4i3asHZ2TKKJKbFae=8gkOAZFOs4sCFGFWhvtgRCv9A@mail.gmail.com>
+Subject: Re: [PATCH 0/4] Improve RaspBerry Pi 5 support part1: Fixes
+To: Matthias Brugger <mbrugger@suse.com>
+Cc: Torsten Duwe <duwe@lst.de>, Simon Glass <sjg@chromium.org>, 
+ Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,54 +97,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 10 Oct 2025 at 15:28, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 10 Oct 2025 at 22:36, Matthias Brugger <mbrugger@suse.com> wrote:
 >
-> On Thu, Oct 09, 2025 at 10:29:17PM -0700, Tony Dinh wrote:
+> Hi Torsten,
 >
-> > Make it possible to disable CMD_PXE.
-> > Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX config.
-> > In extlinux_boot(), invoke pxe utils only when
-> > CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
+> On 10/10/2025 18:14, Torsten Duwe wrote:
+> > Hi all,
 > >
-> > This patch results in about 9K reduction in image size when
-> > PXE boot is disabled.
+> > This series is basically a resend of Oleksii Moisieiev's from February[0].
+> > I forward-ported the code where neccessary, rephrased some explanations,
+> > retested and reshuffled the changes, grouping them into at least 3 parts:
 > >
-> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> > ---
+> >       1: Fixes
+> >       2: PCIe support for the bcm2712
+> >       3: RP1 chip and MACB ethernet support
 > >
-> >  boot/Kconfig             |  3 +--
-> >  boot/bootmeth_extlinux.c | 18 ++++++++++--------
-> >  2 files changed, 11 insertions(+), 10 deletions(-)
->
-> Is some part of the symbol logic here wrong? A challenge is that "PXE"
-> is also where the logic to parse extlinux.conf style files came from,
-> and I thought we had split those two out. And then there's this:
->
+> > Haven't tried USB yet, but with the full series NVMe boot is working,
+> > and I get a "file not found" from my DHCP/TFTP server.
 > >
-> > diff --git a/boot/Kconfig b/boot/Kconfig
-> > index 2993cd7f9ba..403ce4c3d46 100644
-> > --- a/boot/Kconfig
-> > +++ b/boot/Kconfig
-> > @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
-> >       select CMD_PART if PARTITIONS
-> >       select CMD_DHCP if CMD_NET
-> >       select CMD_PING if CMD_NET
-> > -     select CMD_PXE if CMD_NET
-> >       select CMD_BOOTI if ARM64
-> >       select CMD_BOOTZ if ARM && !ARM64
-> >       imply CMD_MII if NET
-> > +     imply CMD_PXE if CMD_NET
+> > Let's start with the fixes, they should be undisputable. Credits go
+> > to the epam guys for tracking these down. Patches should apply cleanly
+> > on 2025.10 and on current master [ecdc3872a767].
+> >
 >
-> This is one of the things where defaults isn't supposed to be so easy to
-> get out of. How many platforms are you wanting to then disable CMD_PXE
-> on to save space?
+> Sounds good, but please use ./scripts/get_maintainer.pl to get all the emails
+> you should send this series to.
 
-PXE is generally being removed in a lot of cases as it's not
-considered secure and now we have HTTP Boot there are other means of
-doing network booting so I think we'll see more and more situations
-where we want to disable PXE.
-
-This is actually something I've been meaning to look at so it's
-something I would love to see :)
-
-Peter
+Yes, for example you don't include me as one of the maintainers of the RPi :)
