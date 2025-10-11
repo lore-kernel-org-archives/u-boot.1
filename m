@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A15FCCA476
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 19:18:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E50CCA476
+	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 19:18:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92BA583AD5;
+	by phobos.denx.de (Postfix) with ESMTP id CE4AA83AEC;
 	Sat, 11 Oct 2025 21:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=mentallysanemainliners.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="EuHYtM59";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="pARW54cL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8056783A5F; Sat, 11 Oct 2025 21:11:27 +0200 (CEST)
+ id B5DE683A2B; Sat, 11 Oct 2025 21:11:27 +0200 (CEST)
 Received: from sendmail.purelymail.com (sendmail.purelymail.com
  [34.202.193.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6483883AC5
+ by phobos.denx.de (Postfix) with ESMTPS id A238083AB8
  for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 21:11:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=mentallysanemainliners.org
@@ -28,22 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=igor.belwon@mentallysanemainliners.org
 Authentication-Results: purelymail.com; auth=pass
 DKIM-Signature: a=rsa-sha256;
- b=EuHYtM59EY3afq0whc4o/W6Ya6EDNhY6rvzNOWZPt7RUyBb9CaR3bwGkTwFa+5ENPPcQNFgDTf645qRpVV2NqO/VPxZTJ5Bs72gvB0uLKf3Bi+oFe30pB4ohreJVsPP4d4xWQtSFFKFPMhELAdojadmedB2aKjCI80Yq5MKIrnaAGBfv4MChjNNgM+lPirDTDkXvACabfcro4PgcD7YAhu0XNUI8u+9937aHjG6/IXkTfuBAl9QkR2aHcf+YnAYMOO2qi53z6Pu8H32z1BqzYVctYdq8vN/4mL3hxRPDs+tCYgaDbrcBFM2KxcSGGqcl54l0Vp+YilpZUrIWOx8D9A==;
+ b=pARW54cLryPTXPitzXQqemH8PUoWhbt1sx0zLcTd862CJXY0hijSNogdGp3Ip/U2ql5o07K4mEad7LZ3uTbwa7oWkuXSrV0xIl+s/ECIiqqr9G8o47TL/QdN4niU101487Kt+iyLvG2emjO+LJffLdblpgaHHgXSGIr9uWN2HLmBvCW5/I9h/3KyIyc8s+AOVUPSZCeWhMIbmvjEWkL4zOu7ASGA7o9nNuh7DE/JWh2iUCL6iOwRBMlYFbxDCRFkiBkVsSVtR9oI00WEbILKmenHkQwud9mk0hJJchTGQZT7/Zv+briDYMP/UAmfSPGcu+GNZqQwk7Rq0Ztk4rSUPg==;
  s=purelymail1; d=purelymail.com; v=1;
- bh=P1EAMr477SrwKD1E9zPIneBqVwRCi2ESwj8rb4HPKlk=;
+ bh=H9Dk56u1g95MqxMPmFfb462Pz8jhJutA6M9Z2dgCoQk=;
  h=Feedback-ID:Received:From:Date:Subject:To; 
 Feedback-ID: 68247:10037:null:purelymail
 X-Pm-Original-To: u-boot@lists.denx.de
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 1058243981; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Sat, 11 Oct 2025 19:11:08 +0000 (UTC)
+ Sat, 11 Oct 2025 19:10:59 +0000 (UTC)
 From: Igor Belwon <igor.belwon@mentallysanemainliners.org>
-Date: Sat, 11 Oct 2025 21:10:07 +0200
-Subject: [PATCH 4/4] MAINTAINERS: Add UFS to MediaTek section
+Date: Sat, 11 Oct 2025 21:10:05 +0200
+Subject: [PATCH 2/4] ufs: unipro: Add PA_SCRAMBLING property
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251011-mtk-ufs-uboot-v1-4-a05f991ee150@mentallysanemainliners.org>
+Message-Id: <20251011-mtk-ufs-uboot-v1-2-a05f991ee150@mentallysanemainliners.org>
 References: <20251011-mtk-ufs-uboot-v1-0-a05f991ee150@mentallysanemainliners.org>
 In-Reply-To: <20251011-mtk-ufs-uboot-v1-0-a05f991ee150@mentallysanemainliners.org>
 To: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
@@ -76,11 +76,11 @@ Cc: Tom Rini <trini@konsulko.com>, Ryder Lee <ryder.lee@mediatek.com>,
  Igor Belwon <igor.belwon@mentallysanemainliners.org>, 
  ~postmarketos/upstreaming@lists.sr.ht
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1760209846; l=1012;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1760209846; l=752;
  i=igor.belwon@mentallysanemainliners.org; s=20250908;
- h=from:subject:message-id; bh=P1EAMr477SrwKD1E9zPIneBqVwRCi2ESwj8rb4HPKlk=;
- b=2yBPMGqPqyyThxA+5tm1Ac7QHyjePmeSaCGVeHx4/Uoz3DiQR8MAtWl6y8ekjHKNh2jgpgKcL
- OLD2SfYkxKAA1drC5knV/XRxQRwqtpT9TI6aDdKJnQyLvVoQqicIcNd
+ h=from:subject:message-id; bh=H9Dk56u1g95MqxMPmFfb462Pz8jhJutA6M9Z2dgCoQk=;
+ b=JX+/q3yZaTSw6QBOCCWwTj9DxaqA4/AnQGVgh2zMrfIaXB+9Zg5FIf05/TMF+2gm57Th2s5rN
+ QKm0BMTt1PjDX4PIxBI8dzas1DCdGhix6kjHvEsAh/5hMapAI7M2w+w
 X-Developer-Key: i=igor.belwon@mentallysanemainliners.org; a=ed25519;
  pk=t9Kz6B3jEwJD7YAKcp8XftfEz7SUSlGbrsfFlbrrFwA=
 X-Mailman-Approved-At: Sat, 11 Oct 2025 21:17:18 +0200
@@ -100,34 +100,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the UFS driver files to the ARM MediaTek section in MAINTAINERS.
-Add myself as its maintainer.
+This property is required for proper I/O access on the MediaTek MT6878
+UFS controller, and is part of UniPro specifications.
 
 Signed-off-by: Igor Belwon <igor.belwon@mentallysanemainliners.org>
 ---
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/ufs/unipro.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1db1070d5f8d2fb74836bc8e55ca13fe6b292d93..30b2b602d2f3edeb6dc54f9d65211a372de9b896 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -410,6 +410,7 @@ ARM MEDIATEK
- M:	Ryder Lee <ryder.lee@mediatek.com>
- M:	Weijie Gao <weijie.gao@mediatek.com>
- M:	Chunfeng Yun <chunfeng.yun@mediatek.com>
-+M:	Igor Belwon <igor.belwon@mentallysanemainliners.org>
- R:	GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
- S:	Maintained
- F:	arch/arm/mach-mediatek/
-@@ -433,6 +434,7 @@ F:	drivers/spi/mtk_snfi_spi.c
- F:	drivers/spi/mtk_spim.c
- F:	drivers/spi/mtk_snor.c
- F:	drivers/timer/mtk_timer.c
-+F:	drivers/ufs/ufs-mediatek*
- F:	drivers/usb/host/xhci-mtk.c
- F:	drivers/usb/mtu3/
- F:	drivers/watchdog/mtk_wdt.c
+diff --git a/drivers/ufs/unipro.h b/drivers/ufs/unipro.h
+index 56833602b77abbfa4abff5f2b57461986fe815dc..bde1490397cdc043d37e118eb98a1baff04021f2 100644
+--- a/drivers/ufs/unipro.h
++++ b/drivers/ufs/unipro.h
+@@ -125,6 +125,7 @@
+ #define PA_RXPWRSTATUS		0x1582
+ #define PA_RXGEAR		0x1583
+ #define PA_RXTERMINATION	0x1584
++#define PA_SCRAMBLING           0x1585
+ #define PA_MAXRXPWMGEAR		0x1586
+ #define PA_MAXRXHSGEAR		0x1587
+ #define PA_PACPREQTIMEOUT	0x1590
 
 -- 
 2.51.0
