@@ -4,82 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9042DCCD183
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 07:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4099CCD184
+	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 07:21:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A7A983CEE;
-	Sat, 11 Oct 2025 09:21:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5661B83E11;
+	Sat, 11 Oct 2025 09:21:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ScyX/rve";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HPkYWu/n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D281183D40; Sat, 11 Oct 2025 09:21:12 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id CDAAA83E46; Sat, 11 Oct 2025 09:21:29 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CA0583C2B
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 09:21:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B7B883C2B
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 09:21:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-6318855a83fso5998775a12.2
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 00:21:10 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-62ec5f750f7so4806863a12.3
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 00:21:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760167270; x=1760772070; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760167287; x=1760772087; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yWeV+fVOzYdVwRibt5O6ks4p/pjwkwDY1nQkNpevLGo=;
- b=ScyX/rve4iUBuOKK17CpQYZzNNTNgh+yerwhROG7oISjKvi3NcXqk0Lnx1/p7oZt3M
- WFKFhID36s9Je06y6d4/Xll89NYjAKucoQfOgK87bgKm71EiFv8SRBuaYiVTSwtDDuPB
- tJnUyt9JLQMv8KbQQogYnVm8k5sTK7ryGiQkk=
+ bh=B7a+20HaA1pLuDuXBMOfcDEcmk6RQ37D70SQ3JCDpFI=;
+ b=HPkYWu/n4YVwN5yPCaraD1/24lmzBvJowCIJL49BduCiIxZfaok/pbuIQgeAmD4vKU
+ +ZmM9hG+e7V5PYEyH68E5vRNvLvYlM9W2MIIEMuFL/eIdSQN3rlFMC2YVJxRDG3LzPYs
+ QZnbt6eCJvf3IoEIV80NmZwz0K+/aXvsR1DMk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760167270; x=1760772070;
+ d=1e100.net; s=20230601; t=1760167287; x=1760772087;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yWeV+fVOzYdVwRibt5O6ks4p/pjwkwDY1nQkNpevLGo=;
- b=VJK2Bcr72PsTW0uEEKHlMIp1NCLgh++kF6MFIeC407TZRmGhXDaq+ufx0UGvtjfert
- j4OfDTpGedeGP6WwUa5qjMtrvhYQa2QmogiTugE0IeZD4k5Tef4OXXnyv0Ewi1rMnWpx
- mmr43FTzPcTaKpmWAm62pItzrqaBy4URsZ06CnYtzxooTZebpooocBU0Ph+OIW3v+5Jg
- E+eyy+7k5U0mybSMXqYiMmG1ibP3gzZjHnPsikY4GLIHuYv7YFID4+mrVsNkreS8o1UE
- 06B9afytWS1ZDF1d/FxtMODm3KYEMVTqaiHDJS0Z9U2mnRGigA/cvk64t8Kms+4h7dYz
- FuNQ==
+ bh=B7a+20HaA1pLuDuXBMOfcDEcmk6RQ37D70SQ3JCDpFI=;
+ b=sk7uqiQN8DZss1ob56egAnq+BvVZRQajg7GI9k8zaPrRubWcOGgWwOCNUg3I1g2fwb
+ NQjdzRo2RVL5VFlJMdNhXkLbErByqTajhjuRWriEr6SxzQBq8awogLIShaJPJgmXMHyb
+ xPQvrTSEmIBVGDdlaeCILdZuA0qGWM8jP4okquPHM0TM/AEIIzHLPegkXHhD2lANDNMf
+ K3tc4UJtZMGyBxUf4SL6j/2x9Bhv/Thb79kBhs5AWn+gGv9fsT0Kk9ADRUuCiLDSCNpS
+ QY/deidjjNgcY9w1JyjiGCyTjDkO8pJoySQDo9jQ/hexHEU2axbVM1Fn3X+3bt3i3efj
+ TXqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU0PN186qjM5pQ06O//qf92KTgHChV0oUbBKyeBqSGK01GzUqGnCb2aEcuH2MuabweyVuK427s=@lists.denx.de
-X-Gm-Message-State: AOJu0YywWisP/9qsgSqGiwx+JoLK9UIqoqqDnOMglD17esw4FX2KrpCF
- 6xYpSJM3f9Mtgyhw1Pwr7/ogUx6Mr4TIAKLrVYBzzfKndmF4FpdwGk2WIXzJOc+kYZqGRaWufly
- J4Uf9+o5+ypINm5O7FEvNclYk2kQi3WjgFeRJv0h/
-X-Gm-Gg: ASbGncvUj/vvMAU+gscg0yvnDCTmG2+hW/D6sdX2ilRw9ItBQDgkBcumsZm/z7mh+nM
- vYMMC18c6vewyMQtRN7gsUsr+1fJW2WtcLT2YQpywPP+PsO4YqfrO0deXVJHcc4zU+OS4W92NGR
- Cj+q/OMVVoLqLc/mQ/Liir+kqvp9b9wPT0t2O47ZLyAVNy992LbfRFGkoYFkE0DxmtVxkMSsu0c
- ZB+R7NKAon5EYeiMT6jx7GmFS0HnwlrxzHUDjkocl/bJJ8=
-X-Google-Smtp-Source: AGHT+IHpR896IKtDYCC1rMDtV2t5vO+7godM4bgKfPvmq+RTf/vCs2HrIov7eKXih+SkiXGFiskXBv9WFG+v0lCajCg=
-X-Received: by 2002:a05:6402:5cb:b0:634:518b:c431 with SMTP id
- 4fb4d7f45d1cf-639d5b8af38mr10050005a12.11.1760167269839; Sat, 11 Oct 2025
- 00:21:09 -0700 (PDT)
+ AJvYcCWTbPzVD1FGAQJZzgG+80AzkWHT39MFQt5wYH5iMRAqmJn6IR9CPuiwKAle5Mlfy9Ba1mDIMD8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2UrremNce+r16Gni4mi98S1WAD7py6OFPRib99WXCWK2XYIyK
+ NqX18Zz390hZF7m2SpgepTXnpyRw9zzo1jYil1Xa/N6Lwi5XZyPo0uCCXEOOT9S4fydZKBVviTS
+ 9z61PI3KhvHTPIx9bjHNPyQMyPcn5TRhDDjuGUfBT
+X-Gm-Gg: ASbGncuvaeYiKsD0SXrehvK+nEVVoYpSJfv9sL/SUBhfpET1Sm4dkR6yECJ42YMpv7x
+ B6QZNWGtbfXyozASMKiSem1hzxBnaGO1pqwBlgiNSiQ75GMBrt93oK3YAA5JL2aaE4+u4ECK5JG
+ 3xvtnHTj8pKOCmjYBdgRK65A9f9pQJMWv6n9yBhLfyj4aGZLqvC+7GlK3+7SeIm4U5ODWHxbiCc
+ aYmdGGzDapM6mDud3wHWZ8hDem/f0QIU1Im
+X-Google-Smtp-Source: AGHT+IFMyPK+uD7JNmYuiSp33UiYyL7+WFIVfiDjcNjulMgTrYXo3fJ5AwX0xU99VFrNwgVIBSvZ00nSP+ejRUOLNwo=
+X-Received: by 2002:a05:6402:13d1:b0:633:7b1e:9aa3 with SMTP id
+ 4fb4d7f45d1cf-639d5c6f39emr12709644a12.34.1760167286935; Sat, 11 Oct 2025
+ 00:21:26 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
- <20251009-feature_sysboot_extension_board-v2-3-e09b39e54de5@bootlin.com>
- <CAFLszTg-i7cDiN57pqat=bYwqucCOGqW6oh1CvnJz7-UhKaCwA@mail.gmail.com>
- <20251010153500.5bec4e20@kmaincent-XPS-13-7390>
-In-Reply-To: <20251010153500.5bec4e20@kmaincent-XPS-13-7390>
+References: <20251009092959.260121-1-sjg@chromium.org>
+ <20251009092959.260121-3-sjg@chromium.org>
+ <20251009172428.GP298503@bill-the-cat>
+ <CAFLszThKqdoRwqSbazWgdw27q9RxJorTwkLmRzZ9FAV48S7gdg@mail.gmail.com>
+ <87wm52vobc.fsf@kernel.org> <20251010143950.GB298503@bill-the-cat>
+In-Reply-To: <20251010143950.GB298503@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 11 Oct 2025 08:20:58 +0100
-X-Gm-Features: AS18NWDh2hf_wq6eD6Rl6VU47qCilzJKg69B3kXmuJkks4hsds6Y9oYu8sz8INs
-Message-ID: <CAFLszTjLmq0r9uTYR-irzzSN63G1Lpd0iWiwW9npLSraNB1Y_g@mail.gmail.com>
-Subject: Re: [PATCH v2 03/18] boot: Add UCLASS support for extension boards
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
- Mario Six <mario.six@gdsys.cc>, Stefano Babic <sbabic@nabladev.com>, 
- Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Date: Sat, 11 Oct 2025 08:21:15 +0100
+X-Gm-Features: AS18NWBBUoTkMkHISUXPvQ8SM2rCEJ8pYer4Sgh_Q1aoDzmKsHroziNcn9O3OIE
+Message-ID: <CAFLszTiYNZpuKpA7JyyjrvCysN3KCsQcv0UkU+RhvLb05u=Vzg@mail.gmail.com>
+Subject: Re: [PATCH v4 2/4] boot: Move obtaining the label into a common file
+To: Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>, u-boot@lists.denx.de, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,232 +99,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kory,
+Hi Tom,
 
-On Fri, 10 Oct 2025 at 14:35, Kory Maincent <kory.maincent@bootlin.com> wrote:
+On Fri, 10 Oct 2025 at 15:39, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, 10 Oct 2025 12:13:11 +0100
-> Simon Glass <sjg@chromium.org> wrote:
->
-> > Hi Kory,
+> On Fri, Oct 10, 2025 at 04:11:51PM +0200, Mattijs Korpershoek wrote:
+> > On Fri, Oct 10, 2025 at 11:35, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Thu, 9 Oct 2025 at 15:51, Kory Maincent (TI.com)
-> > <kory.maincent@bootlin.com> wrote:
+> > > Hi Tom,
 > > >
-> > > Introduce UCLASS-based extension board support to enable more
-> > > standardized and automatic loading of extension board device tree
-> > > overlays in preparation for integration with bootstd and pxe_utils.
+> > > On Thu, 9 Oct 2025 at 18:24, Tom Rini <trini@konsulko.com> wrote:
+> > >>
+> > >> On Thu, Oct 09, 2025 at 03:29:53AM -0600, Simon Glass wrote:
+> > >>
+> > >> > The 'bootflow list' command supports looking at the EFI device-path when
+> > >> > available. Move this piece into a common function so it can be used
+> > >> > elsewhere.
+> > >>
+> > >> The point of this was to enable the show_bootflow->bootflow_show chnage,
+> > >> so should be dropped.
 > > >
-> > > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
->
-> ...
->
-> > > +
-> > > +#include <alist.h>
-> > > +#include <command.h>
-> > > +#include <dm/device-internal.h>
-> > > +#include <dm/lists.h>
-> > > +#include <dm/uclass.h>
-> > > +#include <env.h>
-> > > +#include <extension_board.h>
-> > > +#include <fdt_support.h>
-> > > +#include <malloc.h>
-> > > +#include <mapmem.h>
-> >
-> > nit: Please correct the ordering
-> >
-> > https://docs.u-boot.org/en/latest/develop/codingstyle.html#include-files
->
-> Oh didn't know this rule.
->
-> > > +
-> > > +DECLARE_GLOBAL_DATA_PTR;
-> > > +
-> > > +/* For now, bind the extension device manually if none are found */
-> > > +static struct udevice *extension_get_dev(void)
-> >
-> > This should really return the error rather than gobbling it. Normally
-> > we use 'int' as the return value, so:
-> >
-> > static int extension_get_dev(struct udevice *devp)
->
-> You mean rather this then:
-> static int extension_get_dev(struct udevice **devp)
-
-Yes that's right. In fact you can probably drop this function and use
-'uclass_first_device_err(UCLASS_EXTENSION, &dev)' ? The pre-relocation
-check shouldn't be needed.
-
->
-> >
-> > > +{
-> > > +       struct driver *drv = ll_entry_start(struct driver, driver);
-> > > +       const int n_ents = ll_entry_count(struct driver, driver);
-> > > +       struct udevice *dev;
-> > > +       int i, ret;
-> > > +
-> > > +       /* These are not needed before relocation */
-> > > +       if (!(gd->flags & GD_FLG_RELOC))
-> > > +               return NULL;
-> > > +
-> > > +       uclass_first_device(UCLASS_EXTENSION, &dev);
-> > > +       if (dev)
-> > > +               return dev;
-> > > +
-> > > +       /* Create the extension device if not already bound */
-> > > +       for (i = 0; i < n_ents; i++, drv++) {
-> > > +               if (drv->id == UCLASS_EXTENSION) {
-> >
-> > If this is really what you want, you might as well just put a
-> > U_BOOT_DRVINFO() declaration in the source. Then driver model does it
-> > for you. We are supposed to use the devicetree, but it seems that that
-> > idea is WIP at best.
->
-> Oh I will use this MACRO instead.
->
-> > > +int dm_extension_scan(void)
-> > > +{
-> > > +       struct alist *extension_list = dm_extension_get_list();
-> > > +       struct udevice *dev = extension_get_dev();
-> > > +       const struct extension_ops *ops;
-> > > +
-> > > +       if (!dev || !extension_list)
-> > > +               return -ENODEV;
-> > > +
-> > > +       ops = device_get_ops(dev);
-> >
-> > extension_get_ops()
->
-> Is it really needed as it is used only once.
-
-Not needed, just a convention, which I'd like to keep if we can.
-
->
-> >
-> > > +       if (!ops->scan)
-> > > +               return -ENODEV;
-> >
-> > That is normally -ENOSYS - at this point we have a device, it's just
-> > that it doesn't have the require method.
-> >
-> > But it seem strange to me to allow a device that has no means to scan.
->
-> Yes, maybe this check is useless indeed, as it is the only action done by the
-> board code.
->
-> ...
->
-> > > @@ -13,9 +14,28 @@ LIST_HEAD(extension_list);
-> > >  static int do_extension_list(struct cmd_tbl *cmdtp, int flag,
-> > >                              int argc, char *const argv[])
-> > >  {
-> > > +#if CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
-> > > +       struct alist *dm_extension_list;
-> > > +#endif
-> > >         struct extension *extension;
-> > >         int i = 0;
+> > > OK.
 > > >
-> > > +#if CONFIG_IS_ENABLED(SUPPORT_DM_EXTENSION_SCAN)
-> >
-> > Is it possible to use if() ? Perhaps at the end of your series, when
-> > all the conversions are done and you can delete the old code?
->
-> As all these macro check are removed when the conversion is done I didn't
-> bother to use if() because I would have to take care of define but not used
-> warnings.
-
-Ah OK, then it doesn't matter. I had forgotten that.
-
->
-> ...
->
-> > > +/**
-> > > + * dm_extension_get_list - Get the extension list
-> > > + * Return: The extension alist pointer, or NULL if no such list exists.
-> >
-> > caller must free the list?
->
-> No.
-
-OK, then perhaps just note that the caller must not free it
-
->
-> > > + */
-> > > +struct alist *dm_extension_get_list(void);
-> >
-> > Is this the list of all extensions from all extension devices?
->
-> yes.
->
-> > > +/**
-> > > + * dm_extension_apply - Apply extension board overlay to the devicetree
-> > > + * @extension_num: Extension number to be applied
-> > > + * Return: Zero on success, negative on failure.
-> > > + */
-> > > +int dm_extension_apply(int extension_num);
-> >
-> > The uclass should have a method like apply(struct uclass *dev, int
-> > extension_num). Is the numbering global across all devices?
->
-> We currently support only one extension driver loaded at a time, therefore we
-> don't currently need this uclass parameter.
-> We will change the API when we will have several scan method possible at the
-> same time but I can't test it for now. I don't think we will have such cases
-> soon and maybe the devicetree WIP support will be ok at that time.
-
-OK, I hadn't picked that up but it makes sense. We can always change
-it later, as you say. But I would like to see an apply() method in
-extension_ops, so that it actually looks like a driver.
-
->
-> > > +
-> > > +/**
-> > > + * dm_extension_apply_all - Apply all extension board overlays to the
-> > > + *                         devicetree
-> > > + * Return: Zero on success, negative on failure.
-> > > + */
-> > > +int dm_extension_apply_all(void);
-> > > +
-> > >  struct extension {
-> > >         struct list_head list;
-> > >         char name[32];
-> > > @@ -20,6 +62,28 @@ struct extension {
-> > >         char other[32];
-> > >  };
-> >
-> > At some point in this series, please comment this struct
->
-> Ok I will add a patch to add comment on this.
->
-> >
+> > >>
+> > >> > Use 'usb' instead of 'usb_mass_storage' for usb so that it fits in the
+> > >> > column space.
+> > >> >
+> > >> > This updates the output from 'bootflow list'.
+> > >>
+> > >> And this is unrelated and should be its own patch. Wikipedia says USB
+> > >> MSC or UMS are the common short forms for USB Mass Storage devices, and
+> > >> we should use one of them to have the output be more precise (since we
+> > >> support USB networking devices for example).
 > > >
-> > > +struct extension_ops {
-> > > +       /**
-> > > +        * scan - Add system-specific function to scan extension boards.
-> > > +        * @dev: extension device to use
+> > > Ok I can move it into its own patch.
+> > >
+> > > Are you wanting this to say 'ums' instead of 'usb' ? Will anyone know
+> > > what that means?
 > >
-> > need to document extension_list here - I believe it is a list of
-> > struct extension? Or is it struct extension * ?
+> > Search for 'ums' gives the following U-Boot documentation:
+> >
+> > https://docs.u-boot.org/en/latest/usage/cmd/ums.html#ums-command
+> >
+> > Where the acronym is documented.
+> > This is also the acronym used by the cmd (to configure usb gadget as USB
+> > Mass Storage).
+> >
+> > So I'd say it's a reasonable acronym
 >
-> Oop some code leftover here.
->
-> >
-> > > +        * Return: The number of extension or a negative value in case of
-> > > +        *         error.
-> > > +        */
-> > > +       int (*scan)(struct alist *extension_list);
-> >
-> > This is a bit of a strange uclass function! Since you are probing
-> > drivers in this uclass, you can iterate through them using
-> > uclass_foreach...() etc.
-> >
-> > I am guessing that you just need to add a struct udevice * as the first arg.
->
-> As I said there is only one drivers loaded at a time supported for now.
+> Thanks.
 
-There are a lot of things with only one device / driver, but passing
-the device in is how these work. If you don't want to do this, we can
-always worry about it later, if needed.
+OK so I'll update this to show 'ums'.
+
+>
+> > > Re the second point, at least in U-Boot a USB Ethernet device shows as
+> > > 'ethernet', i.e. the interface doesn't matter. We don't have logic to
+> > > look a level deeper, at present.
+>
+> And this is unfortunate and confusing then because it'd be really good
+> to know if I'm talking about the USB ethernet I plugged in or the
+> ethernet port on the board. Made more confusing in turn by the platforms
+> (more historical than modern I *think*) where that ethernet port on the
+> SBC itself is wired in via USB.
+
+A user can only tell that with something like 'dm tree' today. Perhaps
+this is outside of the scope of this patch, but what would you like it
+to show if it is USB Ethernet? Are you asking for code which checks
+for this and shows 'usb_ether' or similar?
+
+I still know of boards which use on-board USB for Ethernet, but more
+historical as you say.
 
 Regards,
 Simon
