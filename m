@@ -4,56 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F26CCD18A
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 09:08:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 889A3CCD183
+	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 09:10:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3039D83CF7;
-	Sat, 11 Oct 2025 11:07:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id ED44083C2B;
+	Sat, 11 Oct 2025 11:10:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JPB5W9M1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="INKV4OZh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C69F483A8D; Sat, 11 Oct 2025 11:07:56 +0200 (CEST)
-Received: from mail-m32104.qiye.163.com (mail-m32104.qiye.163.com
- [220.197.32.104])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0631683CF5; Sat, 11 Oct 2025 11:10:47 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B12183C2B
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 11:07:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1FE7283C16
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 11:10:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=shawn.lin@rock-chips.com
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTP id 258ca67fa;
- Sat, 11 Oct 2025 17:07:49 +0800 (GMT+08:00)
-From: Shawn Lin <shawn.lin@rock-chips.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>, YiFeng Zhao <zyf@rock-chips.com>,
- u-boot@lists.denx.de, Heiko Stuebner <heiko@sntech.de>,
- Shawn Lin <shawn.lin@rock-chips.com>
-Subject: [PATCH 2/2] ufs: rockchip: Add initial support
-Date: Sat, 11 Oct 2025 17:07:33 +0800
-Message-Id: <1760173653-65277-2-git-send-email-shawn.lin@rock-chips.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1760173653-65277-1-git-send-email-shawn.lin@rock-chips.com>
-References: <1760173653-65277-1-git-send-email-shawn.lin@rock-chips.com>
-X-HM-Tid: 0a99d286bcdf09cckunmb65a6b81128c97
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh4YHlZCThgaT0MdHktCGEtWFRQJFh
- oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
- hVSktLVUpCS0tZBg++
-DKIM-Signature: a=rsa-sha256;
- b=JPB5W9M1rEphypxUu91xbbjB2CWukuQZM7B1ZWSM1ttIebj8pfXziSaBRT4kD1rVgcRqu3M4fNiHy3eA47xRJA6E5TF20Q6ypU4U/6k0CRN+k4RwrelNh2ArGpf7Nz2jTp7qlx6mbqVoGOHpsCpSVlySBrYuIwBBXN4WvUF+b0I=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=XWVO3pExgN7QxqKGceCxc58TL3c2J/+drjBjCfRWot8=;
- h=date:mime-version:subject:message-id:from;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=adrianocarvalho.pt@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-63994113841so5019519a12.3
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 02:10:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760173844; x=1760778644; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=EXvP+SDMVur+HbhhYCNfq1/SoIMjIkyz6JraI3cBg+o=;
+ b=INKV4OZhdosaZTJG3UMiojowYQ25OV5cHjGiUatQrqwleLVZleQ3I1gAehm0om5IHQ
+ Qt5JZ62HyxKQWSwIkVGp3DuX98m0QzUJSpcUU0mqJ9dG30T2D8DkK9H5CEsgeMn8hFrk
+ 3q/RM9qEtlETaFhuSo8vO+2QNU+uyOGNtKR3gl0Nn0SglRTnn2vZpu5r3HxoD2LPvGDd
+ BV9i6Q84HdvtbYftFuMLFNLVEc0m/wUXVeB9nu9K9LPK8sY31nDUqrPfNyCFMVZTtqdn
+ 3//FyE+PZ7/n1hP1+dkeFevB0nucCD0Uuv/I4azx398dOi+pn+w9ntrYNeqBiQPkSTtx
+ el6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760173844; x=1760778644;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EXvP+SDMVur+HbhhYCNfq1/SoIMjIkyz6JraI3cBg+o=;
+ b=sSNWmIUX3JpDTaZLftsVkQfuyl5v0SqGp87/0X4r0t1eVJGDPqzw6BAHUIWtRI0xC2
+ N09mdgxgeVk0hJm4F/oCnTaoDtOUhpSgPMEz7JBYxZx3ycB0D87KR6J78ifeU2QzzdXx
+ 5fcGEX0r+UT5h8OlkJppIiIuibwE/+yVWO6y1TMYX0n441bOMZUaMos+S4dcCph4i6Rr
+ d3BFC+l6OJVOVSvE54N7JFBhYPoudmqn3bFvDa0kaWYzx5qr1882DJcdIqXPEkO8T6Fw
+ ugF931tTX63Ese+wo7t7eXYvVGNRjUDPjgBn5AhEja6rtBEFVwwYkzlBgrfk/72Jsn9N
+ yhBQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUDsPjdsFGrvfOb+lbYlLD54/DEJYcsDmiZtkAqN0aGr3DxkBjSp7C0Jn3haKSgC8q6oooVuQU=@lists.denx.de
+X-Gm-Message-State: AOJu0YypnRYJN94hxopIk+ejw3VOdlPY0X9UOa6fBYOmiVQhEHFuQYFi
+ q0+fDxjEA2KAUretph3wFuKWlkXeLMXDdk2mBZnKP7htwniXh+xqMQQSmZ+iaLiWbkw08NMf8HU
+ 5NT81Tk+++wcyHCsWDeL2rLCba1w3Fyo=
+X-Gm-Gg: ASbGnctRlt76spi0ZOGxDWfp4NhEFuHSUebf1dmxFA9WNnK3wSJ2YnvlB/mTP42APQM
+ KdyHmtgyEcyVhy9k23U7J7Rx1SY+Cl/aEKEG8JOtaZZgcJbCnV1vQZ9RdlxeaZiR0Se/wUdkT9M
+ G0ZOyWwO9gPRwULxnG8nj2W8k2s3a0gu27NJZcRKTFlq58xzMu+76hc0OKJA6Y+uUYOMyvfphMY
+ dWGEPScLDpT3FEhBY4GwnCUV4gviI9ZaYUuhmkdA5mzskyoFyYymmLEkxqTr5CJ93dO
+X-Google-Smtp-Source: AGHT+IH5Iob8ays0uW/8nt/mx9JwjAkrdvn4+Zb/2cQhAzeYNgbhLrC9kKEwTF6dfLzTj2UJoWIa3TbX+Ck5NgFNPUo=
+X-Received: by 2002:a05:6402:2707:b0:638:df2f:b8fb with SMTP id
+ 4fb4d7f45d1cf-639d5c2dbaemr13279512a12.19.1760173844278; Sat, 11 Oct 2025
+ 02:10:44 -0700 (PDT)
+MIME-Version: 1.0
+References: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
+ <20251006170748.GH6303@bill-the-cat>
+In-Reply-To: <20251006170748.GH6303@bill-the-cat>
+From: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+Date: Sat, 11 Oct 2025 10:10:32 +0100
+X-Gm-Features: AS18NWCG0n-IGzl-FQreKYHJ-m4CoQbXoguPpgMVdjBn_4q2LHiMJA0S1z8ThY8
+Message-ID: <CACAHuLAXPE19ZwmGbP=i4tg0VFB=76Ew5bs9BWOiDog+FjWvrg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] doc: make pdfdocs: Address issues with the make
+ pdfdocs target
+To: Tom Rini <trini@konsulko.com>
+Cc: Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Apurva Nandan <a-nandan@ti.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Davis <afd@ti.com>, 
+ Bryan Brattlof <bb@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Dhruva Gole <d-gole@ti.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Anshul Dalal <anshuld@ti.com>,
+ Chintan Vankar <c-vankar@ti.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Garrett Giordano <ggiordano@phytec.com>,
+ Vitor Soares <vitor.soares@toradex.com>, 
+ Parth Pancholi <parth.pancholi@toradex.com>, E Shattow <e@freeshell.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ open list <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,400 +111,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds initial support for UFS controller on Rockchip
-platforms.
+On Mon, 6 Oct 2025 at 18:07, Tom Rini <trini@konsulko.com> wrote:
+> [...]
+> Can you please follow-up (or in v3 if there's real comments) with adding
+> adding make pdfdocs to the CI targets that already do htmldocs/infodocs
+> ? Thanks again for working on all this!
+>
+> --
+> Tom
 
-Signed-off-by: Shawn Lin <shawn.lin@rock-chips.com>
----
- MAINTAINERS                |   1 +
- drivers/ufs/Kconfig        |   9 ++
- drivers/ufs/Makefile       |   1 +
- drivers/ufs/ufs-rockchip.c | 211 +++++++++++++++++++++++++++++++++++++
- drivers/ufs/ufs-rockchip.h | 115 ++++++++++++++++++++
- 5 files changed, 337 insertions(+)
- create mode 100644 drivers/ufs/ufs-rockchip.c
- create mode 100644 drivers/ufs/ufs-rockchip.h
+Sure. I'll wait a bit to see if there are any comments.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 671903605d1..ee4ab3711b3 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -575,6 +575,7 @@ F:	drivers/mmc/rockchip_dw_mmc.c
- F:	drivers/pinctrl/rockchip/
- F:	drivers/ram/rockchip/
- F:	drivers/sysreset/sysreset_rockchip.c
-+F:	drivers/ufs/*rockchip*
- F:	drivers/video/rockchip/
- F:	tools/rkcommon.c
- F:	tools/rkcommon.h
-diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-index b08ca08b07c..3d367855173 100644
---- a/drivers/ufs/Kconfig
-+++ b/drivers/ufs/Kconfig
-@@ -33,6 +33,15 @@ config QCOM_UFS
- 	  This selects the platform driver for the UFS host
- 	  controller present on Qualcomm Snapdragon SoCs.
- 
-+config ROCKCHIP_UFS
-+	bool "Rockchip specific hooks to UFS controller platform driver"
-+	depends on UFS
-+	help
-+	  This selects the Rockchip specific additions to UFSHCD platform driver.
-+
-+	  Select this if you have UFS controller on Rockchip chipset.
-+	  If unsure, say N.
-+
- config TI_J721E_UFS
- 	bool "Glue Layer driver for UFS on TI J721E devices"
- 	help
-diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-index 2a378e45111..41e910cfc51 100644
---- a/drivers/ufs/Makefile
-+++ b/drivers/ufs/Makefile
-@@ -9,4 +9,5 @@ obj-$(CONFIG_QCOM_UFS) += ufs-qcom.o
- obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
- obj-$(CONFIG_UFS_PCI) += ufs-pci.o
- obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
-+obj-$(CONFIG_ROCKCHIP_UFS) += ufs-rockchip.o
- obj-$(CONFIG_UFS_AMD_VERSAL2) += ufs-amd-versal2.o ufshcd-dwc.o
-diff --git a/drivers/ufs/ufs-rockchip.c b/drivers/ufs/ufs-rockchip.c
-new file mode 100644
-index 00000000000..e121215ec78
---- /dev/null
-+++ b/drivers/ufs/ufs-rockchip.c
-@@ -0,0 +1,211 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Rockchip UFS Host Controller driver
-+ *
-+ * Copyright (C) 2025 Rockchip Electronics Co.Ltd.
-+ */
-+
-+#include <asm/io.h>
-+#include <clk.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/ioport.h>
-+#include <reset.h>
-+#include <ufs.h>
-+
-+#include "ufs.h"
-+#include "unipro.h"
-+#include "ufs-rockchip.h"
-+
-+static int ufs_rockchip_hce_enable_notify(struct ufs_hba *hba,
-+					  enum ufs_notify_change_status status)
-+{
-+	int err = 0;
-+
-+	if (status != POST_CHANGE)
-+		return 0;
-+
-+	ufshcd_dme_reset(hba);
-+	ufshcd_dme_enable(hba);
-+
-+	if (hba->ops->phy_initialization) {
-+		err = hba->ops->phy_initialization(hba);
-+		if (err)
-+			dev_err(hba->dev,
-+				"Phy init failed (%d)\n", err);
-+	}
-+
-+	return err;
-+}
-+
-+static void ufs_rockchip_rk3576_phy_parameter_init(struct ufs_hba *hba)
-+{
-+	struct ufs_rockchip_host *host = dev_get_priv(hba->dev);
-+
-+	ufs_sys_writel(host->mphy_base, 0x80, CMN_REG23);
-+	ufs_sys_writel(host->mphy_base, 0xB5, TRSV0_REG14);
-+	ufs_sys_writel(host->mphy_base, 0xB5, TRSV1_REG14);
-+	ufs_sys_writel(host->mphy_base, 0x03, TRSV0_REG15);
-+	ufs_sys_writel(host->mphy_base, 0x03, TRSV1_REG15);
-+	ufs_sys_writel(host->mphy_base, 0x38, TRSV0_REG08);
-+	ufs_sys_writel(host->mphy_base, 0x38, TRSV1_REG08);
-+	ufs_sys_writel(host->mphy_base, 0x50, TRSV0_REG29);
-+	ufs_sys_writel(host->mphy_base, 0x50, TRSV1_REG29);
-+	ufs_sys_writel(host->mphy_base, 0x80, TRSV0_REG2E);
-+	ufs_sys_writel(host->mphy_base, 0x80, TRSV1_REG2E);
-+	ufs_sys_writel(host->mphy_base, 0x18, TRSV0_REG3C);
-+	ufs_sys_writel(host->mphy_base, 0x18, TRSV1_REG3C);
-+	ufs_sys_writel(host->mphy_base, 0x03, TRSV0_REG16);
-+	ufs_sys_writel(host->mphy_base, 0x03, TRSV1_REG16);
-+	ufs_sys_writel(host->mphy_base, 0x20, TRSV0_REG17);
-+	ufs_sys_writel(host->mphy_base, 0x20, TRSV1_REG17);
-+	ufs_sys_writel(host->mphy_base, 0xC0, TRSV0_REG18);
-+	ufs_sys_writel(host->mphy_base, 0xC0, TRSV1_REG18);
-+	ufs_sys_writel(host->mphy_base, 0x03, CMN_REG25);
-+	ufs_sys_writel(host->mphy_base, 0x03, TRSV0_REG3D);
-+	ufs_sys_writel(host->mphy_base, 0x03, TRSV1_REG3D);
-+	ufs_sys_writel(host->mphy_base, 0xC0, CMN_REG23);
-+	udelay(1);
-+	ufs_sys_writel(host->mphy_base, 0x00, CMN_REG23);
-+	udelay(200);
-+}
-+
-+static int ufs_rockchip_rk3576_phy_init(struct ufs_hba *hba)
-+{
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(PA_LOCAL_TX_LCC_ENABLE, 0x0), 0x0);
-+	/* enable the mphy DME_SET cfg */
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(MPHY_CFG, 0x0), MPHY_CFG_ENABLE);
-+	for (int i = 0; i < 2; i++) {
-+		/* Configuration M-TX */
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_CLK_PRD, SEL_TX_LANE0 + i), 0x06);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_CLK_PRD_EN, SEL_TX_LANE0 + i), 0x02);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_LINERESET_VALUE, SEL_TX_LANE0 + i), 0x44);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_LINERESET_PVALUE1, SEL_TX_LANE0 + i), 0xe6);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_LINERESET_PVALUE2, SEL_TX_LANE0 + i), 0x07);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_TASE_VALUE, SEL_TX_LANE0 + i), 0x93);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_BASE_NVALUE, SEL_TX_LANE0 + i), 0xc9);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_TX_POWER_SAVING_CTRL, SEL_TX_LANE0 + i), 0x00);
-+		/* Configuration M-RX */
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_CLK_PRD, SEL_RX_LANE0 + i), 0x06);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_CLK_PRD_EN, SEL_RX_LANE0 + i), 0x00);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_LINERESET_VALUE, SEL_RX_LANE0 + i), 0x58);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_LINERESET_PVALUE1, SEL_RX_LANE0 + i), 0x8c);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_LINERESET_PVALUE2, SEL_RX_LANE0 + i), 0x02);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_LINERESET_OPTION, SEL_RX_LANE0 + i), 0xf6);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_POWER_SAVING_CTRL, SEL_RX_LANE0 + i), 0x69);
-+		ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(VND_RX_SAVE_DET_CTRL, SEL_RX_LANE0 + i), 0x18);
-+	}
-+
-+	/* disable the mphy DME_SET cfg */
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(MPHY_CFG, 0x0), MPHY_CFG_DISABLE);
-+
-+	ufs_rockchip_rk3576_phy_parameter_init(hba);
-+
-+	/* start link up */
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(MIB_T_DBG_CPORT_TX_ENDIAN, 0), 0x0);
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(MIB_T_DBG_CPORT_RX_ENDIAN, 0), 0x0);
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(N_DEVICEID, 0), 0x0);
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(N_DEVICEID_VALID, 0), 0x1);
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(T_PEERDEVICEID, 0), 0x1);
-+	ufshcd_dme_set(hba, UIC_ARG_MIB_SEL(T_CONNECTIONSTATE, 0), 0x1);
-+
-+	return 0;
-+}
-+
-+static int ufs_rockchip_common_init(struct ufs_hba *hba)
-+{
-+	struct udevice *dev = hba->dev;
-+	struct ufs_rockchip_host *host = dev_get_priv(dev);
-+	struct resource res;
-+	int err = 0;
-+
-+	/* system control register for hci */
-+	err = dev_read_resource_byname(dev, "hci_grf", &res);
-+	if (err) {
-+		dev_err(dev, "cannot ioremap for hci system control register\n");
-+		return -ENODEV;
-+	}
-+	host->ufs_sys_ctrl = (void *)(res.start);
-+
-+	/* system control register for mphy */
-+	err = dev_read_resource_byname(dev, "mphy_grf", &res);
-+	if (err) {
-+		dev_err(dev, "cannot ioremap for mphy system control register\n");
-+		return -ENODEV;
-+	}
-+	host->ufs_phy_ctrl = (void *)(res.start);
-+
-+	/* mphy base register */
-+	err = dev_read_resource_byname(dev, "mphy", &res);
-+	if (err) {
-+		dev_err(dev, "cannot ioremap for mphy base register\n");
-+		return -ENODEV;
-+	}
-+	host->mphy_base = (void *)(res.start);
-+
-+	host->phy_config_mode = dev_read_u32_default(dev, "ufs-phy-config-mode", 0);
-+
-+	err = reset_get_bulk(dev, &host->rsts);
-+	if (err) {
-+		dev_err(dev, "Can't get reset: %d\n", err);
-+		return err;
-+	}
-+
-+	host->hba = hba;
-+
-+	return 0;
-+}
-+
-+static int ufs_rockchip_rk3576_init(struct ufs_hba *hba)
-+{
-+	int ret = 0;
-+
-+	ret = ufs_rockchip_common_init(hba);
-+	if (ret) {
-+		dev_err(hba->dev, "%s: ufs common init fail\n", __func__);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static struct ufs_hba_ops ufs_hba_rk3576_vops = {
-+	.init = ufs_rockchip_rk3576_init,
-+	.phy_initialization = ufs_rockchip_rk3576_phy_init,
-+	.hce_enable_notify = ufs_rockchip_hce_enable_notify,
-+};
-+
-+static const struct udevice_id ufs_rockchip_of_match[] = {
-+	{ .compatible = "rockchip,rk3576-ufshc", .data = (ulong)&ufs_hba_rk3576_vops},
-+	{},
-+};
-+
-+static int ufs_rockchip_probe(struct udevice *dev)
-+{
-+	struct ufs_hba_ops *ops = (struct ufs_hba_ops *)dev_get_driver_data(dev);
-+	int err;
-+
-+	err = ufshcd_probe(dev, ops);
-+	if (err)
-+		dev_err(dev, "ufshcd_pltfrm_init() failed %d\n", err);
-+
-+	return err;
-+}
-+
-+static int ufs_rockchip_bind(struct udevice *dev)
-+{
-+	struct udevice *scsi_dev;
-+
-+	return ufs_scsi_bind(dev, &scsi_dev);
-+}
-+
-+U_BOOT_DRIVER(ti_j721e_ufs) = {
-+	.name		= "ufshcd-rockchip",
-+	.id		= UCLASS_UFS,
-+	.of_match	= ufs_rockchip_of_match,
-+	.probe		= ufs_rockchip_probe,
-+	.bind		= ufs_rockchip_bind,
-+	.priv_auto	= sizeof(struct ufs_rockchip_host),
-+};
-diff --git a/drivers/ufs/ufs-rockchip.h b/drivers/ufs/ufs-rockchip.h
-new file mode 100644
-index 00000000000..c552747fa75
---- /dev/null
-+++ b/drivers/ufs/ufs-rockchip.h
-@@ -0,0 +1,115 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Rockchip UFS Host Controller driver
-+ *
-+ * Copyright (C) 2025 Rockchip Electronics Co.Ltd.
-+ */
-+
-+#ifndef _UFS_ROCKCHIP_H_
-+#define _UFS_ROCKCHIP_H_
-+
-+#define UFS_MAX_CLKS 3
-+
-+#define SEL_TX_LANE0			0x0 
-+#define SEL_TX_LANE1			0x1
-+#define SEL_TX_LANE2 0x2
-+#define SEL_TX_LANE3 0x3
-+#define SEL_RX_LANE0 0x4
-+#define SEL_RX_LANE1 0x5
-+#define SEL_RX_LANE2 0x6
-+#define SEL_RX_LANE3 0x7
-+
-+#define VND_TX_CLK_PRD                  0xAA
-+#define VND_TX_CLK_PRD_EN               0xA9
-+#define VND_TX_LINERESET_PVALUE2        0xAB
-+#define VND_TX_LINERESET_PVALUE1        0xAC
-+#define VND_TX_LINERESET_VALUE          0xAD
-+#define VND_TX_BASE_NVALUE              0x93
-+#define VND_TX_TASE_VALUE               0x94
-+#define VND_TX_POWER_SAVING_CTRL        0x7F
-+#define VND_RX_CLK_PRD                  0x12
-+#define VND_RX_CLK_PRD_EN               0x11
-+#define VND_RX_LINERESET_PVALUE2        0x1B
-+#define VND_RX_LINERESET_PVALUE1        0x1C
-+#define VND_RX_LINERESET_VALUE          0x1D
-+#define VND_RX_LINERESET_OPTION         0x25
-+#define VND_RX_POWER_SAVING_CTRL        0x2F
-+#define VND_RX_SAVE_DET_CTRL            0x1E
-+
-+#define CMN_REG23                       0x8C
-+#define CMN_REG25                       0x94
-+#define TRSV0_REG08                     0xE0
-+#define TRSV1_REG08                     0x220
-+#define TRSV0_REG14                     0x110
-+#define TRSV1_REG14                     0x250
-+#define TRSV0_REG15                     0x134
-+#define TRSV1_REG15                     0x274
-+#define TRSV0_REG16                     0x128
-+#define TRSV1_REG16                     0x268
-+#define TRSV0_REG17                     0x12C
-+#define TRSV1_REG17                     0x26c
-+#define TRSV0_REG18                     0x120
-+#define TRSV1_REG18                     0x260
-+#define TRSV0_REG29                     0x164
-+#define TRSV1_REG29                     0x2A4
-+#define TRSV0_REG2E                     0x178
-+#define TRSV1_REG2E                     0x2B8
-+#define TRSV0_REG3C                     0x1B0
-+#define TRSV1_REG3C                     0x2F0
-+#define TRSV0_REG3D                     0x1B4
-+#define TRSV1_REG3D                     0x2F4
-+
-+#define MPHY_CFG                        0x200
-+#define MPHY_CFG_ENABLE                 0x40
-+#define MPHY_CFG_DISABLE                0x0
-+
-+#define MIB_T_DBG_CPORT_TX_ENDIAN	0xc022
-+#define MIB_T_DBG_CPORT_RX_ENDIAN	0xc023
-+
-+/* Vendor specific attributes */
-+enum dwc_specific_registers {
-+	DWC_UFS_REG_HCLKDIV	= 0xFC,
-+};
-+
-+/* Clock Divider Values: Hex equivalent of frequency in MHz */
-+enum clk_div_values {
-+	DWC_UFS_REG_HCLKDIV_DIV_62_5	= 0x3e,
-+	DWC_UFS_REG_HCLKDIV_DIV_125	= 0x7d,
-+	DWC_UFS_REG_HCLKDIV_DIV_200	= 0xc8,
-+};
-+
-+/* Selector Index */
-+enum selector_index {
-+	SELIND_LN0_TX		= 0x00,
-+	SELIND_LN1_TX		= 0x01,
-+	SELIND_LN0_RX		= 0x04,
-+	SELIND_LN1_RX		= 0x05,
-+};
-+
-+struct ufshcd_dme_attr_val {
-+	u32 attr_sel;
-+	u32 mib_val;
-+	u8 peer;
-+};
-+
-+struct ufs_rockchip_host {
-+	struct ufs_hba *hba;
-+	void __iomem *ufs_phy_ctrl;
-+	void __iomem *ufs_sys_ctrl;
-+	void __iomem *mphy_base;
-+	struct reset_ctl_bulk rsts;
-+	struct clk ref_out_clk;
-+	uint64_t caps;
-+	uint32_t phy_config_mode;
-+	bool in_suspend;
-+};
-+
-+#define	ufs_sys_writel(base, val, reg)		\
-+	writel((val), (base) + (reg))
-+#define ufs_sys_readl(base, reg) readl((base) + (reg))
-+#define ufs_sys_set_bits(base, mask, reg)	\
-+	ufs_sys_writel((base), ((mask) | (ufs_sys_readl((base), (reg)))), (reg))
-+#define ufs_sys_ctrl_clr_bits(base, mask, reg)	\
-+	ufs_sys_writel((base), ((~(mask)) & (ufs_sys_readl((base), (reg)))), (reg))
-+
-+#endif /* _UFS_ROCKCHIP_H_ */
--- 
-2.43.0
-
+Com os melhores cumprimentos. / Best regards.
+Adriano Carvalho
