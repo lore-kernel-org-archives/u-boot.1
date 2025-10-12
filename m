@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DB0CCD187
-	for <u-boot@archiver.kernel.org>; Sun, 12 Oct 2025 19:05:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC9DCCD187
+	for <u-boot@archiver.kernel.org>; Sun, 12 Oct 2025 19:07:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0444C83816;
-	Sun, 12 Oct 2025 21:05:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6B76283816;
+	Sun, 12 Oct 2025 21:07:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="grONMubj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LnK1OmAE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 599978381D; Sun, 12 Oct 2025 21:05:41 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
+ id 870CC83826; Sun, 12 Oct 2025 21:07:20 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3442983775
- for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 21:05:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E36C83775
+ for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 21:07:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3544c64380eso4616860fac.3
- for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 12:05:39 -0700 (PDT)
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-79d36a6298dso1331076a34.0
+ for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 12:07:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760295938; x=1760900738; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760296037; x=1760900837; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=8ifVMlCyEHslrMdGPU42WIthSKe3m5rAPOvY4mPU0tY=;
- b=grONMubjcpkTUj3MkJKHlYSIKJ2uGjgODx7/+WMCbdIao8RDKO+uyiIzlLn05+KPsh
- YcD/2raPn3TWPKd/hruRkLwMXtV5yULFT9KgHgOojoaeVqB22Cdu79wwdJkXn//MYkDJ
- DYY8i4QcAD+7c3UaqFCSezS1KinFGLCJ8CcIo=
+ bh=Q+xf4Tbd4s0GnSsEcTynUeU6yC10Nv37rXfuHYGnT44=;
+ b=LnK1OmAEDKGNkMEYPHg37UlF4cauTlzity5j8jGVPKf8Z7q1s7J/a/q0LO6/qDCsgs
+ TnJsG5OzAhOK5QuFtZak1FppynFRtYt8pdFK0gqO+UeIEU3aMI7RxVS7Ln92fJiAF97b
+ RHPNy2O4B8cdrw7JJuxHWt6V3OGh6hA3LlirA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760295938; x=1760900738;
+ d=1e100.net; s=20230601; t=1760296037; x=1760900837;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8ifVMlCyEHslrMdGPU42WIthSKe3m5rAPOvY4mPU0tY=;
- b=NmAplqoagnMkn/mAdWiyk8Hl1XasCetL4dukQDZVbIi6ERbYhGsEELTJBmaLjFOvw3
- vI38r9gdOm08XQO9JbfLv+A/SIKf5baM7Is4EVcgXc+RgM1TdFkSUl7rXOBWuI7K/dGi
- 8unExGTQhPllg6fATCYurgjjc2ATGRlKSK3G8lw07hz4LXZZVpL2rBLLButGzHIbHoxm
- Da5LLVBIblumZDY1g9Ti9ESDqRN8cyIbdv86iVRWUptI1xMyxf3SFHkHE1LNhFNpoqLo
- O0QRp5j+Q0aKLpBy8HJLMeCVfoqa3BkZUnvNW1ePbpUV3U/FT1NEOGuChCZC5HYVTFoJ
- L78A==
-X-Gm-Message-State: AOJu0YzqUMickYPcQSEiGuqQEKGcJ1if5KBgxfFXYGa/JausHMmr2lc7
- wdv/xBE6OF/s64YTiEGurMipiFAdb6msqTXSuqcdUrzCmdnCo8MXAupbnfuG5v+NIhY=
-X-Gm-Gg: ASbGncvTj4FJHvux7Qobyi3ys+7y1K7MJ458HnVS9ucTTp1za3q8fdQzd/NxKcwK7IE
- 9pp0hGIagORKTyHKgnDlLtlP+f0jfbO9x3bNVxbEWuArunF/avxH39JP+8otgeL2DsIKA4jv+Af
- j11t8j61IC8oR6/lwA2G6Mc9zv2BSWswO6SWqH/l371qbiSsxCgL8jpyWsmf/iSl6eUISjh4Ja8
- fB8bj+Fwf9cboqtlT7h0+nrWeiisQ9ZuXrbUCN8PrE6YIEJdsMGtoXP22D1BatmCHkdqENmkJYp
- AHiKtJM0OcEXpubTuisQ0ktL9WclpwAuusfugwtkLYmFlKrrMGcejKtUKPtvteqCuxc+8sWjyVq
- tO703vZGshrwHcxdfipbnDHCHf4ooFySYnFRS8zjHncJ48+4pGiJ1PF+akMNw1V9IjmKU0828qW
- bjPUVGCQMfPXDS0fA=
-X-Google-Smtp-Source: AGHT+IHhBmo2K0ZVjCINm6O0XDom6ZrHhpHRYCywhjUAink0xpm7WCYxr7iKNlRcx6F8ZR+yf6mP5A==
-X-Received: by 2002:a05:6870:d611:b0:332:3a47:9a05 with SMTP id
- 586e51a60fabf-3c0fa07d954mr8473274fac.26.1760295937912; 
- Sun, 12 Oct 2025 12:05:37 -0700 (PDT)
+ bh=Q+xf4Tbd4s0GnSsEcTynUeU6yC10Nv37rXfuHYGnT44=;
+ b=vgQJpL53V0viQeQJcThhff8psDNFhgsf3x3tRPXqBZqtSGSfsxpUTL/Q5xMBre7ydr
+ EQcpLc8/qFf7uzmp9/bIOy3+GxtlOkDSQaIlbkmLU+yQxmZgsEGFVuleWLD6luIfrazV
+ SbDtLXZi+FrK0ne0OkcpRUznyWVk30i3CFwD0rVE0G66Lc8O+2IXDVW9G7fYA+/m7oAj
+ qpvapudqenM4tOFXcVHnDmL607ofOmdluZXhYJ7K2dFY/Z1HemvLpJg6fyGbfvMSpLJI
+ 9/TiHLTzgEmffFCGj8Gtjc6trJkF+rBOBu+P8yIIusPzMgHwA2Isjuz2rXFq9ppOPRPt
+ UhpQ==
+X-Gm-Message-State: AOJu0YzW6D+xD0enoTK7J8ACLNYA7q9S5eLYJvrRH1wwAm7SG/NqYRZx
+ q1zID1RpmxY1BFnUUYlknnFwsLmmO9UdubNYvEsJFeq44Xhy4yaMrs6toWvLoKnN4XvsuuBSywf
+ 5jG/Kcdc=
+X-Gm-Gg: ASbGncstMElrauElEgsYqJQ1erlMzDAGMlP25JMOaI5Uwp9C+tfftCn11qaoS6U+sbA
+ JafpU7ykEVI/ftC+icx9KLx+8bAo1M8b8Dd15Ce6vyjdKkvzboL0TgNKw8RyBm+l0zy1SfNvz4L
+ q0R838mqkqa0JM/LY1DuZnNnEYFlVoC4ZGSLO4TxDl9qFcp5wyqkqhOyuJvLR9ALLf8sduhhCSZ
+ iAZqhtHxFLKZgxwJqcfWmU15CtCOFqyppfznp/NtyBTOTpzPV32VIFCCXLK8yqWfxoqSyH+p2ID
+ LR7z10OfEi49mtiO4Lp5muq+zwMzPCJp+xT561+rMuneH2/yTbeCcl6s26B77SSfTbVwI7MaoRI
+ j4GfVI0iV6HtHs8hUNzg+cqgDGdoqu7IPAgcGvn/C6nbjzW1MlWLCTx39GFFs+yffFwEkFr1fnJ
+ NA0B7DlP0fnwEmkg4=
+X-Google-Smtp-Source: AGHT+IHZmhOfFhKEzR+ALuN52JKhJU0lCH5UexCjNjK49beST3/Mu6KG1WN/QgEl9tbciz5dcTjsyA==
+X-Received: by 2002:a05:6830:6682:b0:7ab:e6fc:9f0e with SMTP id
+ 46e09a7af769-7c0df7be3e3mr10806910a34.27.1760296037022; 
+ Sun, 12 Oct 2025 12:07:17 -0700 (PDT)
 Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
  [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8e80a38sm2847167fac.15.2025.10.12.12.05.36
+ 46e09a7af769-7c0f911ab1csm2833171a34.28.2025.10.12.12.07.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Oct 2025 12:05:36 -0700 (PDT)
-Date: Sun, 12 Oct 2025 13:05:34 -0600
+ Sun, 12 Oct 2025 12:07:15 -0700 (PDT)
+Date: Sun, 12 Oct 2025 13:07:13 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Cc: u-boot@lists.denx.de, marex@denx.de, tien.fong.chee@altera.com
-Subject: Re: [PATCH] gpio: dwapb: Enable SPL support for DWAPB GPIO driver
-Message-ID: <20251012190534.GA6113@bill-the-cat>
-References: <20251012185558.23808-1-tanmay.kathpalia@altera.com>
+To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20251012190713.GB6113@bill-the-cat>
+References: <20251011180636.GM298503@bill-the-cat>
+ <ef6da754-8217-42ac-bde4-8752cbd3090d@iopsys.eu>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FJoR+KHoRU2n9Zk+"
+ protocol="application/pgp-signature"; boundary="VF8fv/mvX+D4+3j/"
 Content-Disposition: inline
-In-Reply-To: <20251012185558.23808-1-tanmay.kathpalia@altera.com>
+In-Reply-To: <ef6da754-8217-42ac-bde4-8752cbd3090d@iopsys.eu>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,75 +100,92 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FJoR+KHoRU2n9Zk+
-Content-Type: text/plain; charset=us-ascii
+--VF8fv/mvX+D4+3j/
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 12, 2025 at 11:55:58AM -0700, Tanmay Kathpalia wrote:
-> Add SPL_DWAPB_GPIO configuration option to enable the Designware APB
-> GPIO driver in SPL builds.
+On Sun, Oct 12, 2025 at 05:22:15PM +0300, Mikhail Kshevetskiy wrote:
 >=20
-> Changes:
-> - Add SPL_DWAPB_GPIO Kconfig option with SPL_DM_GPIO dependency
-> - Update Makefile to use CONFIG_$(XPL_)DWAPB_GPIO pattern for
->   conditional compilation in both SPL and main U-Boot builds
+> On 11.10.2025 21:06, Tom Rini wrote:
+> > I think unfortunately the report email for when I merged in -next was
+> > lost somewhere / wasn't sent. I may be able to get the details out the
+> > dashboard.
+> >
+> > ---------- Forwarded message ---------
+> > From: <scan-admin@coverity.com>
+> > Date: Fri, Oct 10, 2025 at 7:08=E2=80=AFPM
+> > Subject: New Defects reported by Coverity Scan for Das U-Boot
+> > To: <tom.rini@gmail.com>
+> >
+> >
+> > Hi,
+> >
+> > Please find the latest report on new defect(s) introduced to *Das U-Boo=
+t*
+> > found with Coverity Scan.
+> >
+> >    - *New Defects Found:* 1
+> >    - *Defects Shown:* Showing 1 of 1 defect(s)
+> >
+> > Defect Details
+> >
+> > ** CID 537478:       Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
+> > /drivers/spi/spi-mem.c: 528           in spi_mem_calc_op_duration()
+> >
+> >
+> > _______________________________________________________________________=
+______________________
+> > *** CID 537478:         Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
+> > /drivers/spi/spi-mem.c: 528             in spi_mem_calc_op_duration()
+> > 522     	ncycles +=3D ((op->addr.nbytes * 8) / op->addr.buswidth) /
+> > (op->addr.dtr ? 2 : 1);
+> > 523
+> > 524     	/* Dummy bytes are optional for some SPI flash memory operatio=
+ns */
+> > 525     	if (op->dummy.nbytes)
+> > 526     		ncycles +=3D ((op->dummy.nbytes * 8) / op->dummy.buswidth) /
+> > (op->dummy.dtr ? 2 : 1);
+> > 527
+> >>>>     CID 537478:         Integer handling issues  (OVERFLOW_BEFORE_WI=
+DEN)
+> >>>>     Potentially overflowing expression "op->data.nbytes * 8U" with t=
+ype "unsigned int" (32 bits, unsigned) is evaluated using 32-bit arithmetic=
+, and then used in a context that expects an expression of type "u64" (64 b=
+its, unsigned).
+> > 528     	ncycles +=3D ((op->data.nbytes * 8) / op->data.buswidth) /
+> > (op->data.dtr ? 2 : 1);
 >=20
-> Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-> ---
->  drivers/gpio/Kconfig  | 8 ++++++++
->  drivers/gpio/Makefile | 2 +-
->  2 files changed, 9 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-> index db077e472a8..00bf974c0f3 100644
-> --- a/drivers/gpio/Kconfig
-> +++ b/drivers/gpio/Kconfig
-> @@ -138,6 +138,14 @@ config DWAPB_GPIO
->  	help
->  	  Support for the Designware APB GPIO driver.
-> =20
-> +config SPL_DWAPB_GPIO
-> +	bool "DWAPB GPIO driver in SPL"
-> +	depends on SPL_DM_GPIO
-> +	help
-> +	  Support for the Designware APB GPIO driver in SPL.
-> +
-> +	  If unsure, say N.
-> +
->  config AT91_GPIO
->  	bool "AT91 PIO GPIO driver"
->  	depends on ARCH_AT91
-> diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-> index 73c94329e36..da2c02b32da 100644
-> --- a/drivers/gpio/Makefile
-> +++ b/drivers/gpio/Makefile
-> @@ -4,12 +4,12 @@
->  # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-> =20
->  ifndef CONFIG_XPL_BUILD
-> -obj-$(CONFIG_DWAPB_GPIO)	+=3D dwapb_gpio.o
->  obj-$(CONFIG_AXP_GPIO)		+=3D axp_gpio.o
->  obj-$(CONFIG_DM_74X164)		+=3D 74x164_gpio.o
->  endif
->  obj-$(CONFIG_$(PHASE_)DM_GPIO) +=3D gpio-uclass.o
-> =20
-> +obj-$(CONFIG_$(XPL_)DWAPB_GPIO)		+=3D dwapb_gpio.o
+> op->data.nbytes=C2=A0 comes from file drivers/mtd/nand/spi/core.c, functi=
+on
+> spinand_select_op_variant().
+> According to the code the max value of op->data.nbytes is
+>=20
+> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nanddev_per_page_oobsize(nand)=
+ + nanddev_page_size(nand)
+>=20
+> thus it's slightly more than 4Kb (I never seen flashes with page size
+> large than 4Kb). According to this estimation the overflow will never
+> happen.
+>=20
+> If it make sense, I can try to do something with it
 
-This should be PHASE_ not XPL_.
+Yes, please see what you can do about it and thanks for explaining that
+it shouldn't be an actual problem.
 
 --=20
 Tom
 
---FJoR+KHoRU2n9Zk+
+--VF8fv/mvX+D4+3j/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOv7+wAKCRAr4qD1Cr/k
-Ci6KAQDb8UwxThFf0TVAY6LY9O1GXESS6hsf0553EroI/FDIMQD+JhrbYbIqLe6h
-vy80FCQabsmYGamwCCagHmpLt2qrVAc=
-=7GXm
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOv8YQAKCRAr4qD1Cr/k
+Cr2rAPsHNWL0MdHe6Ty90xi4TctgNhdswemA7NXjhN+cHx0IVQEAwI7VB7sdKjHh
+VmMTs9T3d4d/8owWz8vFv5P0cazBQgE=
+=kYjh
 -----END PGP SIGNATURE-----
 
---FJoR+KHoRU2n9Zk+--
+--VF8fv/mvX+D4+3j/--
