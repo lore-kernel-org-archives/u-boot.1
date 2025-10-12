@@ -4,85 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC9DCCD187
-	for <u-boot@archiver.kernel.org>; Sun, 12 Oct 2025 19:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72ED6CCD184
+	for <u-boot@archiver.kernel.org>; Sun, 12 Oct 2025 21:50:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B76283816;
-	Sun, 12 Oct 2025 21:07:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A68E783804;
+	Sun, 12 Oct 2025 23:50:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LnK1OmAE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 870CC83826; Sun, 12 Oct 2025 21:07:20 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2191383807; Sun, 12 Oct 2025 23:50:06 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E36C83775
- for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 21:07:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BA36837E2
+ for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 23:50:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-79d36a6298dso1331076a34.0
- for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 12:07:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760296037; x=1760900837; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Q+xf4Tbd4s0GnSsEcTynUeU6yC10Nv37rXfuHYGnT44=;
- b=LnK1OmAEDKGNkMEYPHg37UlF4cauTlzity5j8jGVPKf8Z7q1s7J/a/q0LO6/qDCsgs
- TnJsG5OzAhOK5QuFtZak1FppynFRtYt8pdFK0gqO+UeIEU3aMI7RxVS7Ln92fJiAF97b
- RHPNy2O4B8cdrw7JJuxHWt6V3OGh6hA3LlirA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760296037; x=1760900837;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q+xf4Tbd4s0GnSsEcTynUeU6yC10Nv37rXfuHYGnT44=;
- b=vgQJpL53V0viQeQJcThhff8psDNFhgsf3x3tRPXqBZqtSGSfsxpUTL/Q5xMBre7ydr
- EQcpLc8/qFf7uzmp9/bIOy3+GxtlOkDSQaIlbkmLU+yQxmZgsEGFVuleWLD6luIfrazV
- SbDtLXZi+FrK0ne0OkcpRUznyWVk30i3CFwD0rVE0G66Lc8O+2IXDVW9G7fYA+/m7oAj
- qpvapudqenM4tOFXcVHnDmL607ofOmdluZXhYJ7K2dFY/Z1HemvLpJg6fyGbfvMSpLJI
- 9/TiHLTzgEmffFCGj8Gtjc6trJkF+rBOBu+P8yIIusPzMgHwA2Isjuz2rXFq9ppOPRPt
- UhpQ==
-X-Gm-Message-State: AOJu0YzW6D+xD0enoTK7J8ACLNYA7q9S5eLYJvrRH1wwAm7SG/NqYRZx
- q1zID1RpmxY1BFnUUYlknnFwsLmmO9UdubNYvEsJFeq44Xhy4yaMrs6toWvLoKnN4XvsuuBSywf
- 5jG/Kcdc=
-X-Gm-Gg: ASbGncstMElrauElEgsYqJQ1erlMzDAGMlP25JMOaI5Uwp9C+tfftCn11qaoS6U+sbA
- JafpU7ykEVI/ftC+icx9KLx+8bAo1M8b8Dd15Ce6vyjdKkvzboL0TgNKw8RyBm+l0zy1SfNvz4L
- q0R838mqkqa0JM/LY1DuZnNnEYFlVoC4ZGSLO4TxDl9qFcp5wyqkqhOyuJvLR9ALLf8sduhhCSZ
- iAZqhtHxFLKZgxwJqcfWmU15CtCOFqyppfznp/NtyBTOTpzPV32VIFCCXLK8yqWfxoqSyH+p2ID
- LR7z10OfEi49mtiO4Lp5muq+zwMzPCJp+xT561+rMuneH2/yTbeCcl6s26B77SSfTbVwI7MaoRI
- j4GfVI0iV6HtHs8hUNzg+cqgDGdoqu7IPAgcGvn/C6nbjzW1MlWLCTx39GFFs+yffFwEkFr1fnJ
- NA0B7DlP0fnwEmkg4=
-X-Google-Smtp-Source: AGHT+IHZmhOfFhKEzR+ALuN52JKhJU0lCH5UexCjNjK49beST3/Mu6KG1WN/QgEl9tbciz5dcTjsyA==
-X-Received: by 2002:a05:6830:6682:b0:7ab:e6fc:9f0e with SMTP id
- 46e09a7af769-7c0df7be3e3mr10806910a34.27.1760296037022; 
- Sun, 12 Oct 2025 12:07:17 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c0f911ab1csm2833171a34.28.2025.10.12.12.07.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 12 Oct 2025 12:07:15 -0700 (PDT)
-Date: Sun, 12 Oct 2025 13:07:13 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>
-Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20251012190713.GB6113@bill-the-cat>
-References: <20251011180636.GM298503@bill-the-cat>
- <ef6da754-8217-42ac-bde4-8752cbd3090d@iopsys.eu>
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.63.236])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 9DD75B2200ED;
+ Sun, 12 Oct 2025 23:50:01 +0200 (CEST)
+Message-ID: <eae25847-b568-433a-9244-4443a2e6316b@freeshell.de>
+Date: Sun, 12 Oct 2025 14:49:59 -0700
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VF8fv/mvX+D4+3j/"
-Content-Disposition: inline
-In-Reply-To: <ef6da754-8217-42ac-bde4-8752cbd3090d@iopsys.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Revert "riscv: Add a Zalrsc-only alternative for
+ synchronization in start.S"
+To: Yao Zi <ziyao@disroot.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
+ "Chia-Wei, Wang" <chiawei_wang@aspeedtech.com>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+References: <20250925160148.21624-1-ziyao@disroot.org>
+ <9113dd29-b862-4722-96d7-ad6d51219050@freeshell.de> <aNYSirEoll4m18QW@pie>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <aNYSirEoll4m18QW@pie>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,93 +59,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Leo (and Tom?) please give Yao the attention they deserve for their
+contributions, starfive_visionfive2 has been broken for several weeks by
+this error and the revert needs to happen sooner rather than later. Thanks!
 
---VF8fv/mvX+D4+3j/
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Yao,
 
-On Sun, Oct 12, 2025 at 05:22:15PM +0300, Mikhail Kshevetskiy wrote:
->=20
-> On 11.10.2025 21:06, Tom Rini wrote:
-> > I think unfortunately the report email for when I merged in -next was
-> > lost somewhere / wasn't sent. I may be able to get the details out the
-> > dashboard.
-> >
-> > ---------- Forwarded message ---------
-> > From: <scan-admin@coverity.com>
-> > Date: Fri, Oct 10, 2025 at 7:08=E2=80=AFPM
-> > Subject: New Defects reported by Coverity Scan for Das U-Boot
-> > To: <tom.rini@gmail.com>
-> >
-> >
-> > Hi,
-> >
-> > Please find the latest report on new defect(s) introduced to *Das U-Boo=
-t*
-> > found with Coverity Scan.
-> >
-> >    - *New Defects Found:* 1
-> >    - *Defects Shown:* Showing 1 of 1 defect(s)
-> >
-> > Defect Details
-> >
-> > ** CID 537478:       Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
-> > /drivers/spi/spi-mem.c: 528           in spi_mem_calc_op_duration()
-> >
-> >
-> > _______________________________________________________________________=
-______________________
-> > *** CID 537478:         Integer handling issues  (OVERFLOW_BEFORE_WIDEN)
-> > /drivers/spi/spi-mem.c: 528             in spi_mem_calc_op_duration()
-> > 522     	ncycles +=3D ((op->addr.nbytes * 8) / op->addr.buswidth) /
-> > (op->addr.dtr ? 2 : 1);
-> > 523
-> > 524     	/* Dummy bytes are optional for some SPI flash memory operatio=
-ns */
-> > 525     	if (op->dummy.nbytes)
-> > 526     		ncycles +=3D ((op->dummy.nbytes * 8) / op->dummy.buswidth) /
-> > (op->dummy.dtr ? 2 : 1);
-> > 527
-> >>>>     CID 537478:         Integer handling issues  (OVERFLOW_BEFORE_WI=
-DEN)
-> >>>>     Potentially overflowing expression "op->data.nbytes * 8U" with t=
-ype "unsigned int" (32 bits, unsigned) is evaluated using 32-bit arithmetic=
-, and then used in a context that expects an expression of type "u64" (64 b=
-its, unsigned).
-> > 528     	ncycles +=3D ((op->data.nbytes * 8) / op->data.buswidth) /
-> > (op->data.dtr ? 2 : 1);
->=20
->=20
-> op->data.nbytes=C2=A0 comes from file drivers/mtd/nand/spi/core.c, functi=
-on
-> spinand_select_op_variant().
-> According to the code the max value of op->data.nbytes is
->=20
-> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 nanddev_per_page_oobsize(nand)=
- + nanddev_page_size(nand)
->=20
-> thus it's slightly more than 4Kb (I never seen flashes with page size
-> large than 4Kb). According to this estimation the overflow will never
-> happen.
->=20
-> If it make sense, I can try to do something with it
+On 9/25/25 21:11, Yao Zi wrote:
+> On Thu, Sep 25, 2025 at 09:27:25AM -0700, E Shattow wrote:
+>>
+>>
+>> On 9/25/25 09:01, Yao Zi wrote:
+>>> This reverts commit a681cfecb4346107212f377e2075f6eb1bdc6a2b.
+>>>
+>>> It has been reported that the commit causes boot regression for SPL on
+>>> StarFive VisionFive 2 or compatible boards. Inspecting the code, I did
+>>> spot one logic error for deciding whether Zaamo or Zalrsc is used, and
+>>> it's still unclear what exactly causes the regression, let's revert it
+>>> for now.
+>>>
+>>> Reported-by: E Shattow <e@freeshell.de>
+>>> Link: https://lore.kernel.org/u-boot/1871663e-b918-4351-9e9e-97f9a4c73733@freeshell.de/
+>>> Signed-off-by: Yao Zi <ziyao@disroot.org>
+>>> ---
+>>>
+>>> The original series causing the problem[1] contains 3 patches, and I
+>>> think it should be enough to revert the change of start.S only, since
+>>> the others touch no code, and should be relatively safe. I'll fix the
+>>> reverted change up and get it work on VisionFive 2 when I got my new
+>>> board. Sorry for the inconvenience.
+>>>
+>>> [1]: https://lore.kernel.org/u-boot/20250902081932.21103-1-ziyao@disroot.org/
+>>>
+>>>  arch/riscv/cpu/start.S | 26 +-------------------------
+>>>  1 file changed, 1 insertion(+), 25 deletions(-)
+>>>
+>>> diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
+>>> index 6324ff585d4..7bafdfd390a 100644
+>>> --- a/arch/riscv/cpu/start.S
+>>> +++ b/arch/riscv/cpu/start.S
+>>> @@ -151,15 +151,8 @@ call_harts_early_init:
+>>>  	 */
+>>>  	la	t0, hart_lottery
+>>>  	li	t1, 1
+>>> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+>>>  	amoswap.w s2, t1, 0(t0)
+>>>  	bnez	s2, wait_for_gd_init
+>>> -#else
+>>> -	lr.w	s2, (t0)
+>>> -	bnez	s2, wait_for_gd_init
+>>> -	sc.w	s2, t1, (t0)
+>>> -	bnez	s2, wait_for_gd_init
+>>> -#endif
+>>>  #else
+>>>  	/*
+>>>  	 * FIXME: gp is set before it is initialized. If an XIP U-Boot ever
+>>> @@ -184,12 +177,7 @@ call_harts_early_init:
+>>>  #if !CONFIG_IS_ENABLED(XIP)
+>>>  #ifdef CONFIG_AVAILABLE_HARTS
+>>>  	la	t0, available_harts_lock
+>>> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+>>>  	amoswap.w.rl zero, zero, 0(t0)
+>>> -#else
+>>> -	fence	rw, w
+>>> -	sw	zero, 0(t0)
+>>> -#endif
+>>>  #endif
+>>>  
+>>>  wait_for_gd_init:
+>>> @@ -202,14 +190,7 @@ wait_for_gd_init:
+>>>  #ifdef CONFIG_AVAILABLE_HARTS
+>>>  	la	t0, available_harts_lock
+>>>  	li	t1, 1
+>>> -1:
+>>> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+>>> -	amoswap.w.aq t1, t1, 0(t0)
+>>> -#else
+>>> -	lr.w.aq	t1, 0(t0)
+>>> -	bnez	t1, 1b
+>>> -	sc.w.rl t1, t1, 0(t0)
+>>> -#endif
+>>> +1:	amoswap.w.aq t1, t1, 0(t0)
+>>>  	bnez	t1, 1b
+>>>  
+>>>  	/* register available harts in the available_harts mask */
+>>> @@ -219,12 +200,7 @@ wait_for_gd_init:
+>>>  	or	t2, t2, t1
+>>>  	SREG	t2, GD_AVAILABLE_HARTS(gp)
+>>>  
+>>> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+>>>  	amoswap.w.rl zero, zero, 0(t0)
+>>> -#else
+>>> -	fence	rw, w
+>>> -	sw	zero, 0(t0)
+>>> -#endif
+>>>  #endif
+>>>  
+>>>  	/*
+>>
+>> Argument in favor of reverting three patches in the series are as: I do
+>> not understand the use of invisible config symbols in this way for a
+>> transition of something so dependent on toolchain implementation. How
+>> would I express this from menuconfig selections without directly editing
+>> symbols in the config ?
+> 
+> I'm not sure what do you mean about "invisible", the two newly
+> introduced Kconfig symbols have their description, are visible in
+> menuconfig and thus could be changed by hand manually.
 
-Yes, please see what you can do about it and thanks for explaining that
-it shouldn't be an actual problem.
+Invisible means you cannot select the option with menuconfig. Visible
+symbols show up as user-selectable in the menuconfig interface.
 
---=20
-Tom
+> 
+> I introduced these symbols for describing whether Zaamo/Zalrsc is
+> availalbe on the targetted platform, and expecting one of them to be
+> explicitly disabled by board-level config if a platform doesn't support
+> Zalrsc or Zaamo, like how CONFIG_RISCV_ISA_A is tackled in
+> ibex-ast2700_defconfig.
+> 
+>> I only have some JH7110 boards (and one EIC7700X there is not U-Boot for
+>> this upstream yet) that I can offer to do some testing for, what all
+>> hardware for should this affect?  It's every riscv board ?
+> 
+> Technically speaking, yes, it introduces two Kconfig symbols that change
+> the logic of determining the ISA extension string for a build, so every
+> board is "affected".
 
---VF8fv/mvX+D4+3j/
-Content-Type: application/pgp-signature; name="signature.asc"
+Yes, then this is a failure to test affected configurations, and further
+a failure to communicate this fact in the series and in the commit
+message. Now the `git bisect` story is utterly broken for visionfive2
+for a month worth of commits since.
 
------BEGIN PGP SIGNATURE-----
+Because of some unfortunate luck the mail host I am using was offline
+for maintenance when your series posted. I was not aware of this
+breaking change sooner or else I would have resolved my own concerns now
+by having tested and found the error then, and especially if there was
+another revision or two of the series that made some mention asking to
+test this hardware specifically.
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaOv8YQAKCRAr4qD1Cr/k
-Cr2rAPsHNWL0MdHe6Ty90xi4TctgNhdswemA7NXjhN+cHx0IVQEAwI7VB7sdKjHh
-VmMTs9T3d4d/8owWz8vFv5P0cazBQgE=
-=kYjh
------END PGP SIGNATURE-----
+> 
+> However, among all the RISC-V board-level configs we've already
+> supported, only ibex-ast2700_defconfig explicitly disables
+> CONFIG_RISCV_ISA_A, which means all other ports are compiled with "a"
+> extension contained in ISA extension string before. For these ports, "a"
+> will still be added to the ISA extension string, since
+> CONFIG_RISCV_ISA_ZAAMO and CONFIG_RISCV_ISA_ZALRSC are default to "y".
+> 
+> For ibex-ast2700_defconfig, as long as we adjust the defconfig to
+> disable CONFIG_RISCV_ISA_ZAAMO and CONFIG_RISCV_ISA_ZALRSC, it will be
+> built with the same ISA extension string as before (without "a"), too,
+> which is done in PATCH 2.
+> 
+> I only revert PATCH 3 since it really causes problems: I'm willing to
+> rework it, and since it depends on PATCH 1, 2, they'll be probably added
+> back as-is latter when I send v3 if they have been reverted together. If
+> it's the case, I think reverting only PATCH 3 makes Git log clearer.
+> 
+> If it's found PATCH 1, 2 really break something, I'm willing to revert
+> them. Thanks for the comment.
 
---VF8fv/mvX+D4+3j/--
+It is not helpful to argue about code which you did not communicate
+upfront of what was tested and what was not. I would trust your opinion
+however it is equally important to verify your assertions, and that has
+not been done properly.
+
+> 
+>> Anyhow a revert of this one patch in the series is the minimum to
+>> restore working SPL for starfive visionfive2 (as Star64, and Mars
+>> CM/Lite). Thanks, Yao!
+>>
+>> Acked-by: E Shattow <e@freeshell.de>
+>>
+> 
+> Best regards,
+> Yao Zi
+
+I emphasize that I appreciate your work, Yao.
+
+Sincerely,
+
+-E
