@@ -4,88 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3908FCCD184
-	for <u-boot@archiver.kernel.org>; Sat, 11 Oct 2025 19:41:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A1CACCD184
+	for <u-boot@archiver.kernel.org>; Sun, 12 Oct 2025 06:44:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82B6C83A5F;
-	Sat, 11 Oct 2025 21:41:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BA49B83893;
+	Sun, 12 Oct 2025 08:44:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DnNnnxQ4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XytoKvx0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C688183A8C; Sat, 11 Oct 2025 21:41:20 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 14BB68388D; Sun, 12 Oct 2025 08:44:27 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0FE483A25
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 21:41:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88C8183885
+ for <u-boot@lists.denx.de>; Sun, 12 Oct 2025 08:44:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-63a0375d7b6so5300278a12.2
- for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 12:41:18 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-42e2c336adcso12259715ab.1
+ for <u-boot@lists.denx.de>; Sat, 11 Oct 2025 23:44:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760211678; x=1760816478; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=tJZtg9RSD7PS8hwiuIp/ju0SxUOf5aANECVrC0zXb14=;
- b=DnNnnxQ43kk1uqkjixfMOMPdU2JKJt3APuzmFj5Aw5AtHKraToMccWtfPgeeG0KXvk
- nYpQWZGXIValnoV6o+54r0ZnzrkbR92YdNuZLIcl9uEWFo6gcv+fT60GkgjWD+hcmv8I
- vEqkAjBkNlOLzLALvSli5/apQZ/l0wLjKIpBdX0/moULLNor5xKG2AiByiHpu+ICjQCa
- +uZ2wkfHcq2af29J3rowEN2JU1mFhh3FJ5nBF4aJVR0/3gAw4o5pUVwmAgNHxr94xSPz
- pgQQ1fet6eGvHLsAELAXcHESFJXr63vyIsTSvrn5gQTOALLpNIgAb6AlJEEyPc8gqPk8
- f5Rg==
+ d=chromium.org; s=google; t=1760251462; x=1760856262; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=LRjDmGM8lXHMYSUBPa2CwH0Wnuh6PRUdvhRrbwcPm6k=;
+ b=XytoKvx0SPrjGGOudrf4pjqyju9tkBWI6gsnE3+howfxWsN/H3LOAjlhkeqrHuK2Tv
+ EbqtujEe1Kz0pp1wDkUAWjh5ITHPxFAVhIRY7IyDcBqx3qkpQVs2OtegKhrlaNFGD+5D
+ TMgdjn2zBkbCm7FZl6TBfAlGix5nZGB45xvso=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760211678; x=1760816478;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=tJZtg9RSD7PS8hwiuIp/ju0SxUOf5aANECVrC0zXb14=;
- b=nR2oqJy2apFu1Ld2CiUuObgls+kBr/Mp+StoR/eVYYpjAJZGjxEd0DHhVfmPeXsv9Y
- ItNzzp3ANijaZPXGyMdJ6w//kswAnT7Nf9TiZ2Qjw5iQHtszLTKnt5FSIcAspV/r2TP8
- OoVxdHl0rthMaYexIORLXFOplS92hnAskoSOXoG8ZhV0aVuBwkvOajnTe3u2pgRNNfSp
- mFYpinr1kUqrNCN2S9iW4zIXnf/wVZHwcFOsBfu5yHrAl2HJdqOPgblkUa8tnPYDlBBj
- 6hJrWaQeCkrGB3oHtHlr9UKg1cl1FnhdyHtXGxxmB3T6jlHqQu0XfRET+39KnPhn/Uu3
- H9XQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW27+iinnyWRBZEauQdt41IxIcDelMznz0doyhOFW+OGhkbVOwurD9XMCgqgd5qqHiixqA6IjQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyGTk6sDMj0rcfP9kvqtZxka4FedeM1mw4G3Q11wamo8FNjU2QR
- UJpzh4OWQcw7RkpmuQTDu6vnWHrU/cemPlPjKK2tGdk2BzXYgoC0Fx9v7eER0EYKMRDv9gfC3RS
- r7Sh7d7pU1CXhPVloQeDNAv9p6redG6E=
-X-Gm-Gg: ASbGncvKlICuKc73lQI+DWosGH5sGJ6yu4f5zTNu47BAqAw8YAk9bT3joS2nu90jL/m
- TnDMhT8eApDm1ifSdgFxddKOECpoQKw1gD+QXOUrU2fyRWdN2dPEazZt0AV7Ylc5nUN4QKcOl19
- sCTu3ZgnHXMrJRyUouiV1qRBN8xOBPdv6c0zHfody538WPwrUXpl0H+8pUwhEEl+SqZrVM+IfAE
- KinWHApbb33rY250hzu0JtPLf8=
-X-Google-Smtp-Source: AGHT+IEppF9FkThujxCfYdeiVnQ1pHHV4/kFZ9RO2en4CszZB1oo06zeGx3N9NuH/5WFzwvhsQ4A83M3FjMTvQwrQ+g=
-X-Received: by 2002:a05:6402:1ed1:b0:637:dfb1:3395 with SMTP id
- 4fb4d7f45d1cf-639d5b5f58emr14490243a12.8.1760211678037; Sat, 11 Oct 2025
- 12:41:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251010053056.32495-1-mibodhi@gmail.com>
- <20251010142835.GY298503@bill-the-cat>
- <CALeDE9P8VP6YKS1qoz3Dxga+h287GHzRvczCq0YDd4tOJxNXGQ@mail.gmail.com>
- <20251011143713.GI298503@bill-the-cat>
-In-Reply-To: <20251011143713.GI298503@bill-the-cat>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Sat, 11 Oct 2025 12:41:06 -0700
-X-Gm-Features: AS18NWCWjgvlXK1ToBj5v6DSl6nFnwhdOsrmn76MHI_pibYfjs1STbRDXEMWfwg
-Message-ID: <CAJaLiFyNCD1i_3=y_jF6Kyj8jGpAY3qwBwO=DMxB=BFGc-oXoQ@mail.gmail.com>
-Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
-To: Tom Rini <trini@konsulko.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martin Schwan <m.schwan@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ d=1e100.net; s=20230601; t=1760251462; x=1760856262;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LRjDmGM8lXHMYSUBPa2CwH0Wnuh6PRUdvhRrbwcPm6k=;
+ b=PIcLFBKu2hu48RXzYGITjzfHhQYgwccxm1qH5CMymt+5wd9hulneSrd1UzC81tipLZ
+ 1FEThqiM8Js2cFtDQI2TwjFsQDn5N856tefxsp8lxEzyR2Y1pMhaH/x/M1wyZi3Q+GfD
+ kJbGg+3qv0kAQijzfdj1er4W9eEVY7wR0/aW5v0jENSDHlErmvlUsZsr2P/XVr6GW/zr
+ 22xQBCnjxq4RYMm9NRlw2sU6UhDfx6lUDsZ7AqRuCNBZRszw1Hk2O8lfsQgWIemoUpPY
+ V26fhc62CURBSW+MqgD2m95DSONCcO6JdrthYLc2vdYNcDPHYjqxfKqXeUIbgrPupmpa
+ u4/Q==
+X-Gm-Message-State: AOJu0YwbuFeP7B3fwcx8vM1/yKcLFh85LvS2wSuSZLsrbROQgLyyDto8
+ 8kukjE3t9vv0issSg/znWSgZEvbd8Ou+PGbfT4vtPMAxXWax/zXpKwlaX+Mn8AN+BUNu97kliE7
+ THmfVOjWrvvc=
+X-Gm-Gg: ASbGncs3HO0KneARrAP07Z3E2oFdpEjNP3EEn/zmhAwexcPQwezY4v1p4Cvi1s4l7P0
+ CNx5BwdijL84hAgN3yXYKKrtYrOsTbIDnUGaYUqInAl+I+wr1GHfDUfi2TxcZEdtRjj/kfYtCLk
+ GR3pwOtGPcyC/bUv1AoTVbU/ZBs59LCaur3le673ps3HlHQyRnmkgw3j3pGpgJWXFNSstc9hanv
+ hWZYoK2r+slIx+mvyZMxFCsEMHQY7ABdE5mgbwbfFbJY1gXy+FIu9EFLhT0GC7Qd3CnvsxcAwXf
+ +BzczYHxe1MiaT+3iWejIZi5eyFid/Q+oh6O0QtoEZXKYqA9TSLBhNiwJf1d0vUbvt8Qscgvvmj
+ mSVbPhlWUKowXranb1Cj3AlMoLJJM77FEVLg=
+X-Google-Smtp-Source: AGHT+IFtJXhD6eigAhST6JFxjtUpzsrBi7E7G13ztj0aWkS4eb0L1ahGlEhvhwRhDz7xOmlRlyTI+Q==
+X-Received: by 2002:a92:c26b:0:b0:42f:983e:e53a with SMTP id
+ e9e14a558f8ab-42f983ee702mr131363955ab.29.1760251462144; 
+ Sat, 11 Oct 2025 23:44:22 -0700 (PDT)
+Received: from chromium.org ([73.34.74.121]) by smtp.gmail.com with ESMTPSA id
+ e9e14a558f8ab-42f90343080sm38109625ab.22.2025.10.11.23.44.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 11 Oct 2025 23:44:20 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH v5 0/4] boot: Precursor series for global bootmeths
+Date: Sun, 12 Oct 2025 00:43:52 -0600
+Message-ID: <20251012064412.2892979-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,81 +100,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Oct 11, 2025 at 7:37=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Sat, Oct 11, 2025 at 01:03:39PM +0100, Peter Robinson wrote:
-> > On Fri, 10 Oct 2025 at 15:28, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Oct 09, 2025 at 10:29:17PM -0700, Tony Dinh wrote:
-> > >
-> > > > Make it possible to disable CMD_PXE.
-> > > > Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX config.
-> > > > In extlinux_boot(), invoke pxe utils only when
-> > > > CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
-> > > >
-> > > > This patch results in about 9K reduction in image size when
-> > > > PXE boot is disabled.
-> > > >
-> > > > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> > > > ---
-> > > >
-> > > >  boot/Kconfig             |  3 +--
-> > > >  boot/bootmeth_extlinux.c | 18 ++++++++++--------
-> > > >  2 files changed, 11 insertions(+), 10 deletions(-)
-> > >
-> > > Is some part of the symbol logic here wrong? A challenge is that "PXE=
-"
-> > > is also where the logic to parse extlinux.conf style files came from,
-> > > and I thought we had split those two out. And then there's this:
-> > >
-> > > >
-> > > > diff --git a/boot/Kconfig b/boot/Kconfig
-> > > > index 2993cd7f9ba..403ce4c3d46 100644
-> > > > --- a/boot/Kconfig
-> > > > +++ b/boot/Kconfig
-> > > > @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
-> > > >       select CMD_PART if PARTITIONS
-> > > >       select CMD_DHCP if CMD_NET
-> > > >       select CMD_PING if CMD_NET
-> > > > -     select CMD_PXE if CMD_NET
-> > > >       select CMD_BOOTI if ARM64
-> > > >       select CMD_BOOTZ if ARM && !ARM64
-> > > >       imply CMD_MII if NET
-> > > > +     imply CMD_PXE if CMD_NET
-> > >
-> > > This is one of the things where defaults isn't supposed to be so easy=
- to
-> > > get out of. How many platforms are you wanting to then disable CMD_PX=
-E
-> > > on to save space?
-> >
-> > PXE is generally being removed in a lot of cases as it's not
-> > considered secure and now we have HTTP Boot there are other means of
-> > doing network booting so I think we'll see more and more situations
-> > where we want to disable PXE.
-> >
-> > This is actually something I've been meaning to look at so it's
-> > something I would love to see :)
+This series contains a few patches pulled out from the global-bootmeth
+series. No functional change is intended.
 
-Glad to hear :)
+I left out this one:
 
->
-> And in the world where we also can't just remove ATAGS support because
-> distros (Debian at least) still boots some modern platforms via ATAGS +
-> appended device tree, the high level options for "boot this anywhere"
-> need to perhaps be different from "very modern requirements only
-> distro". I'm not objecting to be clear.
+   boot: Move showing of bootflows out of the command
 
-As Tom suggested previously, perhaps looking from a different angle.
-We can disable BOOTSTD_FULL and then try adding only options that are
-needed for a board. Unfortunately this approach did not work when I
-tried it in the past. It seems for bootstd to work well, we need to
-take the whole thing by enabling BOOTSTD_FULL.
+since Tom has already said he doesn't want it.
 
-All the best,
-Tony
+Changes in v5:
+- Move 'usb' rename into a separate patch
+- Rework commit message
 
->
-> --
-> Tom
+Changes in v4:
+- Series pulled out from previous glob-us3 series
+- Drop patch 'Add more debugging to iter_incr()'
+
+Changes in v3:
+- Drop the spacing changes
+
+Simon Glass (4):
+  boot: Improve comments related to global bootmeths
+  boot: Move obtaining the label into a common file
+  boot: Rename usb to ums
+  boot: Move preparing bootdev into a function
+
+ boot/bootflow.c        | 60 ++++++++++++++++++++++++++++++++++--------
+ boot/bootmeth-uclass.c |  1 +
+ cmd/bootflow.c         |  8 +++---
+ include/bootflow.h     | 11 +++++++-
+ test/boot/bootflow.c   |  4 +--
+ 5 files changed, 67 insertions(+), 17 deletions(-)
+
+-- 
+2.43.0
+
+base-commit: 48f21e66e360552c75d70a50421d0e0ed1f59e90
+branch: glob-us5
