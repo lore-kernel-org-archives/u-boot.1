@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 704FBCCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 13:34:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD149CCD18D
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 13:34:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7707F83993;
-	Mon, 13 Oct 2025 15:33:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5E0E839A8;
+	Mon, 13 Oct 2025 15:33:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="nx6i8Yrs";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="E1zRVl+h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A3D2839B5; Mon, 13 Oct 2025 15:33:04 +0200 (CEST)
-Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
+ id D4F9C839C7; Mon, 13 Oct 2025 15:33:05 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A202839A7
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 15:33:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4A3083981
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 15:33:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id B8A4F4E41067;
- Mon, 13 Oct 2025 13:33:01 +0000 (UTC)
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 8CA591A133B;
+ Mon, 13 Oct 2025 13:33:03 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 8CD30606C6;
- Mon, 13 Oct 2025 13:33:01 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 63D19606C6;
+ Mon, 13 Oct 2025 13:33:03 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5AD01102F226E; 
- Mon, 13 Oct 2025 15:32:59 +0200 (CEST)
+ with ESMTPSA id 33590102F2271; 
+ Mon, 13 Oct 2025 15:33:01 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760362380; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1760362382; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=MbK6KBfXLx1BzQGK+3BDEnBi9am5ZVPF5vk3b6/9LYE=;
- b=nx6i8YrsLFk5Vk5vT/Zh5iNtG5DMGvBV6WLhCr6/HZRkYW7gdWYKNybgtffFFsGRXcngKn
- EgVVU80uZ0psXk5CAT2HUHiBoJiR9OUFj78EYsJXy5qNjuVnPoRsf53hDHUO3nBqq0RZk+
- TtwF1N2HDibwyV/MwDMq9tzWgvOKZsL8dQgUASLFjGWR7cOkDXcTtcf52YQG3ZXz7pPnZE
- tBaqyp/jhCtUGp04I9u7gmPm2HUrzHnA8KFYNt5ievY4evVXOEKhmR3JPDiObzxSjNfDJw
- GHkHzIALXdFpesBC6hCfgpyCAL2QJnpA8XxyOjUA9wDAtNt5HVEkI2ULUjgAxQ==
+ bh=5XFxqE/v6nPQwGkdxm/Igk+wj7LsHcJ1QJFv6MfqA3g=;
+ b=E1zRVl+h2wNvLN/i3RgPbxVBiG/RUubBrh1KCdsfw/Rs5FQZ9dx+ZcRbgZug3fSDTz2hWp
+ YeCH5YWQiqK3Ir9WkWcoo82Nbaa4ErgXSk5wsnrY4rlggFW3vCprRG83xWB8UVWEjf6V+r
+ T/s5kEPRGDh+sY5hQdHlnDHM22LRFwZNQfON5AZ2U5CdsRgXt+60mC94xocF4Q1/053sDs
+ vuhHdRFKPTjkAIlcIXx6Ml5uJ89xH7Pk1rXYtAOivLAFOlpfRNrCh18qTPaGc3D4lBI4uR
+ kVl7JizKDvXYU4g5IkX+vOy7o2a/C07xl9Jm1e+rbC0NHZ2P7ckyHD62CMiS1w==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Mon, 13 Oct 2025 15:32:36 +0200
-Subject: [PATCH v3 11/20] board: sunxi: Refactor CHIP board extension code
+Date: Mon, 13 Oct 2025 15:32:37 +0200
+Subject: [PATCH v3 12/20] board: sunxi: Convert extension support to UCLASS
+ framework
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251013-feature_sysboot_extension_board-v3-11-04067b7422a5@bootlin.com>
+Message-Id: <20251013-feature_sysboot_extension_board-v3-12-04067b7422a5@bootlin.com>
 References: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
 In-Reply-To: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,61 +81,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clean up and improve code structure in the sunxi CHIP board extension
-detection implementation.
+Migrate sunxi board extension detection from legacy implementation to
+the new UCLASS-based extension board framework.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
 
-Changes in v2:
-- Fix a build error.
----
- board/sunxi/chip.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+Change in v3:
+- Use U_BOOT_DRVINFO.
 
+Changes in v2:
+- Fix build error.
+---
+ arch/arm/mach-sunxi/Kconfig |  2 +-
+ board/sunxi/chip.c          | 26 ++++++++++++++------------
+ 2 files changed, 15 insertions(+), 13 deletions(-)
+
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index b04ec671696..f5696199516 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -1223,7 +1223,7 @@ config BLUETOOTH_DT_DEVICE_FIXUP
+ 
+ config CHIP_DIP_SCAN
+ 	bool "Enable DIPs detection for CHIP board"
+-	select SUPPORT_EXTENSION_SCAN
++	select SUPPORT_DM_EXTENSION_SCAN
+ 	select W1
+ 	select W1_GPIO
+ 	select W1_EEPROM
 diff --git a/board/sunxi/chip.c b/board/sunxi/chip.c
-index 270af2506d2..5e5ec0d1d89 100644
+index 5e5ec0d1d89..b60a739df41 100644
 --- a/board/sunxi/chip.c
 +++ b/board/sunxi/chip.c
-@@ -42,14 +42,9 @@ struct dip_w1_header {
+@@ -40,7 +40,8 @@ struct dip_w1_header {
+ 	u8      data[16];               /* user data, per-dip specific */
+ } __packed;
  
- int extension_board_scan(struct list_head *extension_list)
+-int extension_board_scan(struct list_head *extension_list)
++static int sunxi_extension_board_scan(struct udevice *udev,
++				      struct alist *extension_list)
  {
--	struct extension *dip;
--	struct dip_w1_header w1_header;
  	struct udevice *bus, *dev;
--	u32 vid;
--	u16 pid;
--	int ret;
--
  	int num_dip = 0;
-+	int ret;
- 
- 	sunxi_gpio_set_pull(SUNXI_GPD(2), SUNXI_GPIO_PULL_UP);
- 
-@@ -60,6 +55,11 @@ int extension_board_scan(struct list_head *extension_list)
+@@ -55,8 +56,8 @@ int extension_board_scan(struct list_head *extension_list)
  	}
  
  	for_each_w1_device(bus, &dev) {
-+		struct dip_w1_header w1_header;
-+		struct extension *dip;
-+		u32 vid;
-+		u16 pid;
-+
- 		if (w1_get_device_family(dev) != W1_FAMILY_DS2431)
- 			continue;
++		struct extension dip = {0};
+ 		struct dip_w1_header w1_header;
+-		struct extension *dip;
+ 		u32 vid;
+ 		u16 pid;
  
-@@ -90,8 +90,8 @@ int extension_board_scan(struct list_head *extension_list)
+@@ -82,18 +83,19 @@ int extension_board_scan(struct list_head *extension_list)
+ 		       w1_header.product_name, pid,
+ 		       w1_header.vendor_name, vid);
  
- 		snprintf(dip->overlay, sizeof(dip->overlay), "dip-%x-%x.dtbo",
+-		dip = calloc(1, sizeof(struct extension));
+-		if (!dip) {
+-			printf("Error in memory allocation\n");
+-			return num_dip;
+-		}
+-
+-		snprintf(dip->overlay, sizeof(dip->overlay), "dip-%x-%x.dtbo",
++		snprintf(dip.overlay, sizeof(dip.overlay), "dip-%x-%x.dtbo",
  			 vid, pid);
--		strncpy(dip->name, w1_header.product_name, 32);
--		strncpy(dip->owner, w1_header.vendor_name, 32);
-+		strlcpy(dip->name, w1_header.product_name, sizeof(dip->name));
-+		strlcpy(dip->owner, w1_header.vendor_name, sizeof(dip->owner));
- 		list_add_tail(&dip->list, extension_list);
+-		strlcpy(dip->name, w1_header.product_name, sizeof(dip->name));
+-		strlcpy(dip->owner, w1_header.vendor_name, sizeof(dip->owner));
+-		list_add_tail(&dip->list, extension_list);
++		strlcpy(dip.name, w1_header.product_name, sizeof(dip.name));
++		strlcpy(dip.owner, w1_header.vendor_name, sizeof(dip.owner));
++		if (!alist_add(extension_list, dip))
++			return -ENOMEM;
  		num_dip++;
  	}
+ 	return num_dip;
+ }
++
++U_BOOT_EXTENSION(dip, sunxi_extension_board_scan);
++
++U_BOOT_DRVINFO(dip) = {
++	.name = "dip",
++};
 
 -- 
 2.43.0
