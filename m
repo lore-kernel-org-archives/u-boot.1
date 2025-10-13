@@ -4,93 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D6E9CCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 16:57:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C693CCD183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 18:02:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FE1F836F0;
-	Mon, 13 Oct 2025 18:57:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 66713838D7;
+	Mon, 13 Oct 2025 20:02:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JrQwT+Kc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vwwU6xTA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BC3483700; Mon, 13 Oct 2025 18:57:14 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BA43836C8
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 18:57:12 +0200 (CEST)
+ id 2684583935; Mon, 13 Oct 2025 20:02:45 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 04F718382A
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 20:02:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7b6ac55cf86so3056608a34.1
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 09:57:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760374631; x=1760979431; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=L8n4/pCwgLBsQaIxvJyvZcY+3UAMQanB9Cnnu1mW4Ps=;
- b=JrQwT+KcqqxIc6RH+Ot22bCxdmwcXl8Vf8H85+xgAQ0L7Vvd17ZbuUPXwe5lY2d7IQ
- IzxujN+Y3ncmbJYrgmy95DCcEv46gYmWdBkGOpqmxSeYiAwbAHrpsyW9NKC7CZqovwu7
- ljbsnJ5L8K6KaELa7CInh3tnfTVhv8kLAnxSQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760374631; x=1760979431;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L8n4/pCwgLBsQaIxvJyvZcY+3UAMQanB9Cnnu1mW4Ps=;
- b=mIOd01oFHQpcq7z2v6dwe/KovbUYQLimFW2uievcFUXX1KlXV6w1KPZsqkvVYfks56
- Y/dVIKz/0/l/C3WDdh3JcPHQhUYbfC/eE0VAaNXQg2ml1XfjWpvJdpZrz5/NCsr3x3gx
- M+nVXiylc6Or90zgAzPgrW1TzcdT3pWL0eeJ7tQUs9nUYJmCrHZw9ujJxEg+oOXbScvE
- jqlVIsu9sVliFd/0kk5SHYY1u3aHGJZZCoOe1ph5ZwY7BaCmNh42Q6KVWyihGES+KrRu
- 9PnevT8IBZocCjve9h3QjlKbyyFHZvpOdgDugWJXT81hxVUEwOciDDeULfTvLR3qFz9G
- 6E5Q==
-X-Gm-Message-State: AOJu0YxdGBuAZb6Yy+ui3iZJt5pGqa6+GhE9WmlTv56jj0ar0fgUgOT6
- T2RIEsRPvvXzDekWBjdh5OJlGgvp4CpuOuv0geRz6Vhk7YjpXNhj7yyQX2+kkrEfVUs=
-X-Gm-Gg: ASbGncuipZnXv43PpYZ2BWIKS46xhOX9m3YxB0vczK6w/6Oe9QSkHjoaGrnFf57DpF9
- c6moz53ElQS9+tA8CxYif+bJySFJaU2fzXM5kLDTi0P2G/xjMj9RuzYGFRulJr9O4cWQDGdvucd
- rAGQIkCv32pQNi6jFmV9CXoHhxUEJji9tPR0by27xx+jSOGpVQhVU22Sy01fMLab/uGNcXx96js
- 1+Jib9/3fd6lgHFabuIJ1a6uQkLvJgl58mq3SyRlmtLn5Z80Dx5NL4JgavnoR5uxbHvSdOw/dOP
- HPB8nLZDtg7bhKnudQFb7lB8qwTnTAsvvJw0Kd0Bj7wFnfa4wS0wBevLZVipmyVkXDu/8ldRbCl
- R48LvajHzPYpIL2ZxpznTzDzRyRFUlrHR8Lu1o6PuX7VMwRZEdlLadkqvNTzh0afahZ4tyq+bBz
- 8YXAl2
-X-Google-Smtp-Source: AGHT+IG0QawEruEP5tiiEM7KkHOk5Co/OHovI40YiWrs2ClPDH2hG40HsMTmBkPrTP4WeG+eHnjg3g==
-X-Received: by 2002:a05:6830:6507:b0:7ba:8107:d559 with SMTP id
- 46e09a7af769-7c0df7be2a6mr10601330a34.26.1760374630688; 
- Mon, 13 Oct 2025 09:57:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c0f90687e8sm3651237a34.15.2025.10.13.09.57.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Oct 2025 09:57:09 -0700 (PDT)
-Date: Mon, 13 Oct 2025 10:57:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>
-Subject: Re: [PATCH v4 3/4] boot: Add more debugging to iter_incr()
-Message-ID: <20251013165707.GK6113@bill-the-cat>
-References: <20251009092959.260121-1-sjg@chromium.org>
- <20251009092959.260121-4-sjg@chromium.org>
- <20251009173052.GQ298503@bill-the-cat>
- <CAFLszTi2HuZLmebJB+kUsL3_J+aqVdCdP5XFSEoY1Dy5C3E2wA@mail.gmail.com>
- <20251010143528.GZ298503@bill-the-cat>
- <CAFLszTh+K2Yr0OtZ_cNk9YrrGxg3KAv2SEppK=a-g1sw=hncLg@mail.gmail.com>
- <20251013141544.GD6113@bill-the-cat>
- <CAFLszTiOrWfEboYV+=xf0t1wdqeEhbo-SdjAquNCncMRxTur6A@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59DI2ZgU1400267;
+ Mon, 13 Oct 2025 13:02:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1760378555;
+ bh=gNxuHoxRsc7GYkqIxDHrk2jZFbS3La1oF/94kWkw46o=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=vwwU6xTAKSc1dueCSBbeniFNNtcdmnjdgstRvvuLxEhQfTC2pd3b38dAiToI1f3YF
+ MxSi9eAePM1iv+8pCtotXG9VwtyKTfC6CQRJuFi0Bdu2geX03NRjS3VMyTgXB9fUXb
+ V/bgc7mNITIyB05fV22nxILbbseX8raa8QIHEVTw=
+Received: from DLEE213.ent.ti.com (dlee213.ent.ti.com [157.170.170.116])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59DI2YPc3141828
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 13 Oct 2025 13:02:34 -0500
+Received: from DLEE200.ent.ti.com (157.170.170.75) by DLEE213.ent.ti.com
+ (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 13 Oct
+ 2025 13:02:34 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE200.ent.ti.com
+ (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 13 Oct 2025 13:02:34 -0500
+Received: from [10.250.148.111] ([10.250.148.111])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59DI2H0e2241867;
+ Mon, 13 Oct 2025 13:02:21 -0500
+Message-ID: <8be42ffa-c2fc-4954-bcee-3baddb50a7d9@ti.com>
+Date: Mon, 13 Oct 2025 23:32:14 +0530
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5SUsWpnhC5xLtUpO"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTiOrWfEboYV+=xf0t1wdqeEhbo-SdjAquNCncMRxTur6A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/11] remoteproc: Add support for i.MX8M[M/N/P/Q] and
+ i.MX93
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, <u-boot@lists.denx.de>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>, Stefano Babic
+ <sbabic@nabladev.com>
+CC: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Beleswar Padhi
+ <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>,
+ Andrew Davis <afd@ti.com>, Judith Mendez <jm@ti.com>,
+ Ryan Eatmon <reatmon@ti.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Peng Fan <peng.fan@nxp.com>
+References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,159 +90,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---5SUsWpnhC5xLtUpO
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/13/2025 8:19 AM, Peng Fan (OSS) wrote:
+> This patch series introduces remoteproc support for NXP i.MX8M and i.MX93
+> platforms. Most of the i.MX-specific logic is ported from the Linux kernel to
+> ensure compatibility and maintainability.
+>
+> The existing bootaux command in U-Boot only supports loading raw binary images.
+> However, this approach fails when the remote processor firmware contains
+> sections that must be loaded into both TCM and DDR. To address this limitation,
+> need to use remoteproc framework ELF loader, enabling proper loading of
+> segmented firmware images.
+>
+> Patch Summary:
+>
+> Patches 1–2: Import memcpy_io and memset_io from the Linux kernel and enable
+>               them in the remoteproc subsystem.
 
-On Mon, Oct 13, 2025 at 04:12:03PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 13 Oct 2025 at 15:15, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sat, Oct 11, 2025 at 08:19:53AM +0100, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 10 Oct 2025 at 15:35, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Oct 10, 2025 at 11:36:10AM +0100, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Thu, 9 Oct 2025 at 18:30, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Oct 09, 2025 at 03:29:54AM -0600, Simon Glass wrote:
-> > > > > >
-> > > > > > > This function is the core of the bootstd iteration. Add some =
-debugging
-> > > > > > > for the decisions it makes along the way, to make it easier t=
-o track
-> > > > > > > what is going on.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > (no changes since v1)
-> > > > > > >
-> > > > > > >  boot/bootflow.c | 23 +++++++++++++++++++----
-> > > > > > >  1 file changed, 19 insertions(+), 4 deletions(-)
-> > > > > > >
-> > > > > > > diff --git a/boot/bootflow.c b/boot/bootflow.c
-> > > > > > > index 78df09f369d..de69e27bec7 100644
-> > > > > > > --- a/boot/bootflow.c
-> > > > > > > +++ b/boot/bootflow.c
-> > > > > > > @@ -193,8 +193,10 @@ static int iter_incr(struct bootflow_ite=
-r *iter)
-> > > > > > >       log_debug("entry: err=3D%d\n", iter->err);
-> > > > > > >       global =3D iter->doing_global;
-> > > > > > >
-> > > > > > > -     if (iter->err =3D=3D BF_NO_MORE_DEVICES)
-> > > > > > > +     if (iter->err =3D=3D BF_NO_MORE_DEVICES) {
-> > > > > > > +             log_debug("-> err: no more devices1\n");
-> > > > > > >               return BF_NO_MORE_DEVICES;
-> > > > > > > +     }
-> > > > > >
-> > > > > > Thinking more about what I said in the previous iteration about=
- git
-> > > > > > blame history, ones like this should be log_msg_ret (the histor=
-y on
-> > > > > > "when did the test for =3D=3D BF_NO_MORE_DEVICES come from is u=
-nchanged, but
-> > > > > > now you can have debug statements when enabled).
-> > > > >
-> > > > > Yes we can add that as well, but I still want to have the log_deb=
-ug()
-> > > > > as this doesn't require enabling CONFIG_LOG_ERROR_RETURN. That fe=
-ature
-> > > > > produces a lot of output even in normal operation since it shows
-> > > > > errors dealt with by higher level code. It is really only designe=
-d to
-> > > > > find the source of a particular error when you are stuck.
-> > > > >
-> > > > > >
-> > > > > > [snip]
-> > > > > > > @@ -228,11 +234,15 @@ static int iter_incr(struct bootflow_it=
-er *iter)
-> > > > > > >
-> > > > > > >       if (iter->err !=3D BF_NO_MORE_PARTS) {
-> > > > > > >               /* ...select next partition  */
-> > > > > > > -             if (++iter->part <=3D iter->max_part)
-> > > > > > > +             if (++iter->part <=3D iter->max_part) {
-> > > > > > > +                     log_debug("-> next partition %d max %d\=
-n", iter->part,
-> > > > > > > +                               iter->max_part);
-> > > > > > >                       return 0;
-> > > > > > > +             }
-> > > > > >
-> > > > > > Shouldn't this be a debug message instead in the caller?
-> > > > >
-> > > > > I am trying to log_debug() every exit from this function...so you=
- can
-> > > > > see the entry and then which path it took.
-> > > > >
-> > > > > >
-> > > > > > [snip]
-> > > > > > > @@ -326,8 +336,13 @@ static int iter_incr(struct bootflow_ite=
-r *iter)
-> > > > > > >       }
-> > > > > > >
-> > > > > > >       /* if there are no more bootdevs, give up */
-> > > > > > > -     if (ret)
-> > > > > > > +     if (ret) {
-> > > > > > > +             log_debug("-> no more bootdevs\n");
-> > > > > > >               return log_msg_ret("incr", BF_NO_MORE_DEVICES);
-> > > > > > > +     }
-> > > > > >
-> > > > > > Then do we actually need both a log_debug and a log_msg_ret?
-> > > > >
-> > > > > Please see above.
-> > > >
-> > > > I guess my question is, but why? Is this something that's going to =
-be
-> > > > debugged frequently? Why doesn't every function have meaningful text
-> > > > string log_debug messages, just in case? And then why bother with
-> > > > log_msg_ret at all?
-> > >
-> > > I have found myself in this function quite a few times, trying to work
-> > > out what it is up to, so I decided to add more debugging.
-> > >
-> > > Anyway, would you like to just drop this patch, or something else?
-> >
-> > I'd like to fix the underlying problem so that we don't have a similar
-> > discussion on your next series. As yes, I think in general all of these
-> > patches to add more detailed logging on top of log_msg_ret logging are
-> > too much. And I gather you're debugging these problems on real hardware
-> > where using some source level debugger with sandbox isn't an option?
->=20
-> What is the underlying problem?
+which CPU arch, you are using. I assume this is ARM-64 then I see 
+already defined in
 
-Patch and code churn (and so history churn) for no functional changes
-and increased reviewer load.
+https://elixir.bootlin.com/u-boot/v2025.10/source/arch/arm/include/asm/io.h#L471 
 
-> The debugging was useful with the EFI app where it is sort-of possible
-> to use a debugger, but is a bit painful. I ended up comparing logs to
-> figure it out. Debuggers are not easy when the function being debugged
-> is called dozens of times.
->=20
-> I can imagine it being useful when someone reports a problem with the
-> iteration...we could just turn on the option and the person could post
-> a dump.
->=20
-> Anyway, I'm happy to drop this patch.
 
-Thanks.
 
---=20
-Tom
-
---5SUsWpnhC5xLtUpO
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO0vXwAKCRAr4qD1Cr/k
-Cq6BAQDkZCPOiznsD1g+lYyLLwBOU/bPUlwaier659MhcnUNdwD/UQsmG31X7MFb
-1DoHJ9ZqoYK1//fofapwGjBLx9tzJwU=
-=Em0/
------END PGP SIGNATURE-----
-
---5SUsWpnhC5xLtUpO--
+> Patches 3–11: Add platform-specific remoteproc support for i.MX8M and i.MX93.
+> Patch 6: Temporarily adds Cortex-M nodes to x-u-boot.dtsi since they are not
+>           yet available in the upstream Linux device tree. These nodes can be
+> 	 removed once they are merged upstream.
+>
+> NXP internal R-b tags are kept, because the patches are directly
+> cherry-picked from NXP LTS tree.
+>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+> Peng Fan (11):
+>        lib: Import iomem_copy from Linux Kernel
+>        remoteproc: Extend device_to_virt with a is_iomem parameter
+>        remoteproc: Add imx_rproc driver to support NXP i.MX8MP/N
+>        remoteproc: imx_rproc: Support i.MX8MQ/M
+>        remoteproc: imx_rproc: Add support for i.MX93 CM33
+>        arm: dts: imx8m: Add remoteproc node
+>        imx8mp: Enable remoteproc for i.MX8MP EVK
+>        imx8mm: Enable remoteproc for i.MX8MM EVK
+>        imx8mn: Enable remoteproc for i.MX8MN EVK
+>        imx8mq: Enable remoteproc for i.MX8MQ EVK
+>        imx93: Enable remoteproc for i.MX93-EVK/QSB/FRDM
+>
+>   MAINTAINERS                           |   1 +
+>   arch/arm/dts/imx8mm-u-boot.dtsi       |   4 +
+>   arch/arm/dts/imx8mn-u-boot.dtsi       |   4 +
+>   arch/arm/dts/imx8mp-u-boot.dtsi       |   4 +
+>   arch/arm/dts/imx8mq-u-boot.dtsi       |   4 +
+>   arch/arm/mach-imx/imx8m/Kconfig       |  20 ++
+>   arch/arm/mach-imx/imx9/Kconfig        |  12 ++
+>   drivers/remoteproc/Kconfig            |   7 +
+>   drivers/remoteproc/Makefile           |   1 +
+>   drivers/remoteproc/imx_rproc.c        | 370 ++++++++++++++++++++++++++++++++++
+>   drivers/remoteproc/imx_rproc.h        |  56 +++++
+>   drivers/remoteproc/renesas_apmu.c     |   3 +-
+>   drivers/remoteproc/rproc-elf-loader.c |  93 ++++++---
+>   drivers/remoteproc/sandbox_testproc.c |   3 +-
+>   drivers/remoteproc/stm32_copro.c      |   3 +-
+>   drivers/remoteproc/ti_k3_dsp_rproc.c  |   2 +-
+>   drivers/remoteproc/ti_k3_r5f_rproc.c  |   2 +-
+>   include/asm-generic/io.h              |  37 ++++
+>   include/remoteproc.h                  |   3 +-
+>   lib/Makefile                          |   1 +
+>   lib/iomem_copy.c                      | 136 +++++++++++++
+>   21 files changed, 731 insertions(+), 35 deletions(-)
+> ---
+> base-commit: 48f21e66e360552c75d70a50421d0e0ed1f59e90
+> change-id: 20251012-imx-rproc-383db752c3f7
+>
+> Best regards,
