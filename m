@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96ED9CCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 13:32:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E23CCD183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 13:32:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D315E838BB;
-	Mon, 13 Oct 2025 15:32:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20AF2838D2;
+	Mon, 13 Oct 2025 15:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="gAxSlcUE";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="LYnbjigB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FC33838C1; Mon, 13 Oct 2025 15:32:44 +0200 (CEST)
+ id 990F4838C1; Mon, 13 Oct 2025 15:32:45 +0200 (CEST)
 Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99119837E4
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 15:32:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 172298383E
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 15:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 00B74C093AE;
- Mon, 13 Oct 2025 13:32:22 +0000 (UTC)
+ by smtpout-04.galae.net (Postfix) with ESMTPS id B360DC093AF;
+ Mon, 13 Oct 2025 13:32:23 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id DBA43606C6;
- Mon, 13 Oct 2025 13:32:40 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id A63E7606C6;
+ Mon, 13 Oct 2025 13:32:42 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 4C1A9102F2263; 
- Mon, 13 Oct 2025 15:32:28 +0200 (CEST)
+ with ESMTPSA id 2D1BA102F224D; 
+ Mon, 13 Oct 2025 15:32:40 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760362359; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding; bh=XU98oKRTr/RXCr/nwwLMWJjaxJrTh81eHG4HfM88OFY=;
- b=gAxSlcUEEbyeQ7FxpjDRXFL+WRLtvp9hC0PW6Vx0UJimhHUb+aSfkwBkkwrVDFjndva6e7
- ion5/WMVwQykAXb7IRaQ9DMyHCeNphQc5g/1Qhgxeun/TiU1Vk/8LDTJx2xE7reewWz8PU
- xtu0A3NlJp498H0iCm08XKj2wocc8zhJWYS7HkFM3qOZRDNSl1jfUkrlXwMWSmhFPCl8Ei
- kMC+O5eQZ8REluAa9Cc9n8/o89KBk7f26XAL7y9WpUyqRaPDQ79qL6n8//siygH9A3C7Ra
- o7bWksHP/aQvEFyD6I+jakdK73yiL0KyqOz8Oy1n77bixIivKnihZFVcDRswzQ==
+ t=1760362361; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=FHr/DjBd4F29pmKYX3P4sWO6KGWp0qZyXLMbZ05J8UU=;
+ b=LYnbjigBP2I6cfCkUO5ddaTh9FILytyGPwdISikV5sqjUVuD7KQnOt7Sj4qoLB6q8LDfPa
+ knF2Iy5GEf/+wRCmGAsF7ypa2YK74qX273HJY9fZVIijuWZmcEW0nCIB8upWcpahOIdIwV
+ O+pRvwhBgq/xIYAlDdaKWgoxZ3jXBuUGG5rIFwCgFT3wcDXWJFpy/y6xN5TRPOKok+UcaJ
+ DMFZViY5jpxeVtLMUy8s1AUtCZAPaXcBfeS1lgiBSSqcCdB0NG060D8H9n2BuvGh6kV8xO
+ ywHFh7n0twzegZ/SfoEY6uvSexChAbIUKwQjvCjxT6eUEmwKmjrI81gBg2+tKg==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Subject: [PATCH v3 00/20] Convert extension support to UCLASS and adds its
- support to boot flows
-Date: Mon, 13 Oct 2025 15:32:25 +0200
-Message-Id: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
+Date: Mon, 13 Oct 2025 15:32:26 +0200
+Subject: [PATCH v3 01/20] MAINTAINERS: Add maintainer for extension board
+ support
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAGn/7GgC/4XNQQ7CIBAF0KsY1mIolAquvIcxTSlTS6JgAEmbp
- ncXujJuuvyT+e8vKIA3ENDlsCAPyQTjbA7seED92NkHYKNzRpRQTmTV4AG6+PHQhjko52ILUwR
- bWq1ynddYcqE1IWfKG46y8vYwmGlbuN1zHk2Izs/bYKrKdbMrQtiunSpMcM2FEmoQnFF+LW9PY
- 0+9e6GiJ/oryn2RZhGIVEwCrzX8ieu6fgGGXRg3IgEAAA==
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251013-feature_sysboot_extension_board-v3-1-04067b7422a5@bootlin.com>
+References: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
+In-Reply-To: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Jagan Teki <jagan@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>, 
@@ -83,80 +82,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series converts the extension board framework to use UCLASS as
-requested by Simon Glass, then adds extension support to pxe_utils
-and bootmeth_efi (not tested) to enable extension boards devicetree load
-in the standard boot process.
-
-I can't test the imx8 extension scan enabled by the
-imx8mm-cl-iot-gate_defconfig as I don't have this board.
-I also can't test the efi bootmeth change as I don't have such board.
-
-Changes in v3:
-- Reorder the patches inside the series as several config were broken
-  in the middle of the series.
-- Use U_BOOT_DRVINFO macro instead of manually bind the drivers.
-- Use uclass_first_device_err instead of extension_get_dev function.
-- Made few fixes in documentation and Kconfig dependency.
-- Made few changes of error value returned.
-- Add a patch to document the extension structure.
-- Add a patch to fix CAPE_EEPROM_BUS_NUM Kconfig dependency
-
-Changes in v2:
-- Fixes few build errors.
-- Add patches to move the extension support and board scan out of XPL
-  images build.
+Add myself as maintainer for the extension board support that was
+originally added to track ongoing development and maintenance.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 ---
-Kory Maincent (TI.com) (20):
-      MAINTAINERS: Add maintainer for extension board support
-      board: ti: Exclude cape detection from XPL builds
-      board: ti: Fix CAPE_EEPROM_BUS_NUM Kconfig dependency
-      board: sunxi: Exclude DIP detection from XPL builds
-      board: compulab: Exclude compulab extension board detection from XPL builds
-      include: extension_board: Document the extension structure
-      boot: Move extension board support from cmd/ to boot/
-      boot: Add UCLASS support for extension boards
-      board: ti: Refactor cape detection code for readability
-      board: ti: Convert cape detection to use UCLASS framework
-      board: sunxi: Refactor CHIP board extension code
-      board: sunxi: Convert extension support to UCLASS framework
-      board: sandbox: Improve extension board scan implementation
-      board: sandbox: Convert extension support to UCLASS framework
-      board: compulab: Convert imx8mm-cl-iot-gate to UCLASS extension framework
-      boot: Remove legacy extension board support
-      boot: extension: Move overlay apply custom logic to command level
-      boot: pxe_utils: Add extension board devicetree overlay support
-      boot: bootmeth_efi: Refactor distro_efi_try_bootflow_files return logic
-      boot: bootmeth_efi: Add extension board devicetree overlay support
+ MAINTAINERS | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
- MAINTAINERS                                        |   9 +
- .../imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c        |  70 ++++----
- board/sandbox/sandbox.c                            |  26 ++-
- board/sunxi/Makefile                               |   2 +-
- board/sunxi/chip.c                                 |  36 ++--
- board/ti/common/Kconfig                            |   2 +-
- board/ti/common/Makefile                           |   2 +-
- board/ti/common/cape_detect.c                      |  56 ++++---
- boot/Kconfig                                       |   4 +
- boot/Makefile                                      |   1 +
- boot/bootmeth_efi.c                                |  79 +++++++--
- boot/extension-uclass.c                            |  93 +++++++++++
- boot/pxe_utils.c                                   |  92 +++++++++++
- cmd/Kconfig                                        |   3 -
- cmd/extension_board.c                              | 183 ++++++++++-----------
- doc/usage/cmd/extension.rst                        |  29 ++--
- include/dm/uclass-id.h                             |   1 +
- include/extension_board.h                          |  85 ++++++++--
- 18 files changed, 541 insertions(+), 232 deletions(-)
----
-base-commit: 8e7f8c1248e8adfb525a2a4ea56ebf7e54ff5d7a
-change-id: 20250916-feature_sysboot_extension_board-958dd0072565
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 12043a1f82e..e411e266c94 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1182,6 +1182,14 @@ F:	scripts/event_dump.py
+ F:	test/common/event.c
+ F:	test/py/tests/test_event_dump.py
+ 
++EXTENSION
++M:	Kory Maincent <kory.maincent@bootlin.com>
++S:	Maintained
++F:	board/sunxi/chip.c
++F:	board/ti/common/cape_detect.c
++F:	cmd/extension_board.c
++F:	include/extension_board.h
++
+ FASTBOOT
+ M:	Mattijs Korpershoek <mkorpershoek@kernel.org>
+ S:	Maintained
 
-Best regards,
 -- 
-Köry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+2.43.0
 
