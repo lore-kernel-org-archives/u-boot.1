@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A45CCCCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 13:41:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3A3CCCD18D
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 13:41:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22D7D83977;
-	Mon, 13 Oct 2025 15:41:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6382283936;
+	Mon, 13 Oct 2025 15:41:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="F0pOWAGF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KBRLI2q9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E1283965; Mon, 13 Oct 2025 15:41:38 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 42C6183993; Mon, 13 Oct 2025 15:41:41 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 301DA8383E
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 15:41:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51B328383E
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 15:41:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-631787faf35so8368512a12.3
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 06:41:36 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-63994113841so7929797a12.3
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 06:41:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760362896; x=1760967696; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760362899; x=1760967699; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M1eITCYmZX6O6TOCoM7idJ9RH3ITjso1LMOoIXdPrBU=;
- b=F0pOWAGF+fZMn9Q6aBqmiTKcWQ0+b3jV1D2TqIK2CWXZYESaCW9c9u/J4jLyTqLy54
- N0npUg116LLeKg6IhCr6MoBN8QRalVplmoes77cNSm5p3/8OgxULd+z5PKkFq48PzWUY
- ScyOOPfqax4eC+iM5yYU3nlAyd2yrN2c5BD0k=
+ bh=FOlTfnG8prg/boPamWZt60NmPr9zPEJMelcKqY7k4GA=;
+ b=KBRLI2q9F0TM0zeQJy9Po1u4lhnk/A8l2Z8xE509BAT41he0idwWFDQsXO9VsiuWNf
+ 2Kb3hvr/Dr7IA5T9oUxQqGvskCjrvSVOJaSUcG49sTWiJHGdDVNqEHmrUOkvO+ukYZaG
+ kMVP+DdHWnpOlfzJGFKaVPqxov7OkefNRLiDQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760362896; x=1760967696;
+ d=1e100.net; s=20230601; t=1760362899; x=1760967699;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=M1eITCYmZX6O6TOCoM7idJ9RH3ITjso1LMOoIXdPrBU=;
- b=g3D0W+EFgfc3C8yDmKIxNsWsH0hqWjtsvy/6sOVHCnRgklBxgIzpszJ7XmCrciwNY5
- F9orPKqAehNGk/nHfcTsdRRY+45oEmJU2mrbsMRwCMnmURH+yVt4EqsIw+TBXTAibjm0
- RfRf9DSDvhrUX8jYctMeMwhpxe3lcPQ5vmd4J6iqRW7Xt97Q+ANxUmuICcawtLmR5ms5
- AkXn1Z44ZlyW2YwaINcSeRJ0rYfQL0R/CSHWLB0q2oalbGH7ZT6XfJ6vqWhHMOBrP/2I
- hiZ/0pFJvzvpXE7ynNgTmXMp9YxB+phX3UbrE4Z8gvgPq5at0gtnGoWYpIVv9E/yx2uj
- NrDA==
+ bh=FOlTfnG8prg/boPamWZt60NmPr9zPEJMelcKqY7k4GA=;
+ b=f4jc8cMDUAIkmgYb7IMN9jvZvFAEWrIXqClZPNQoLG0Nd0bMEcD6GvdrUhmNGevoDa
+ rcqhWxQBNxRUYhgzt31awVQIcRXwZbZfL++qxw4xdet4xOOTCxGPiyknbz6rO4uoqkTW
+ gOyQmE7JyXyOc8nmfmc/bj5Y2z7+NnUbkJ4fxPR8gPjVSk+8F+W3RlaNMTZeFy/HFVrQ
+ e7qqRa1o5sUOeaiDm7RrrxE7UgWALE/en3RxbI5B6tCbg7pV/95vlzdw6j3bUPGpm8Wx
+ MngiuLc3xoAKlj4GY1aaioSs2Yq4FLObMvAapwLGUDhNU/WDiN8g1xX82iaLlzB271r2
+ ZMpg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXSTZjrR25uw28a9fMAHrFnf3+DltONUhngoca1u/6U0VU5u8j2JknQbPNuCYoYFCi3lc5B4Kc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyvs4IqpzEPZ+7q6tmpsvgMuJ5pc0HI6nOv4hEDRLut2ml113cF
- Am7aLWBipD0kfeaTzHfTd99oe6hZCRAShjV8QNsLI9VGfpakLD53AvNCJ3o4ivDrbIt1Vyv0rg0
- XYM5UnmGIlxibMeCEhwx/lkdRRebrmKqr5RDavGVY
-X-Gm-Gg: ASbGnctlezCUDg74spedly4NDQEAO1wiItICEbw8urj+0TtE/91rg4q+c2ZhBxBb5eg
- KMHjIdBBZ9Nnr/tPmWlNqCXpnGoXRSD1oJEr0gn1Whr1pgRrSWbg2bhdCrHP3AFuXYg0HgAoJI+
- ZFcsNdPmztDjX8gkrUm5Rbfo+3s9MV4vp2hcGDUn/L8iUIhqYPk1hhPvxWyixD6Y+Ah27Y0TIsp
- lOfozH1YBC57q5T/MTfUGCfvJ8A17/y+6JvqyivAt+kHAS+k6Wc3TJMciKsGDDmqif/Qw==
-X-Google-Smtp-Source: AGHT+IFY28zEDMDLi/7vbejdsy+0Ii9vF+t0eDTK2UFs3MOP97Y7etFeQNLbbs1SWoFvkJlcISBz4bl2a0On20xRLkA=
-X-Received: by 2002:a05:6402:d0b:b0:637:e581:714b with SMTP id
- 4fb4d7f45d1cf-639d5c44856mr19356301a12.21.1760362895613; Mon, 13 Oct 2025
- 06:41:35 -0700 (PDT)
+ AJvYcCVmYX8gPzuKKE6sCnCrmK5psBGAsyamXztDfkMo0nS+Yxf+s5HEkTnNeQPgi2Xbfoj23C7cMs4=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvNefN0vlEkGbkh8hJCiYQvXcMgExzyz2HiWLbmPu7KRS/IQtB
+ zaQHHmsgv1cY0qc9876O+RwPGwsG9KL3uzmWcViB1kl7VQvcvxc6WF9gJHOKIHSMjVx33iOy6+v
+ +rQiOPgrDibmgjNf67yC2UuyBMti6YbQ/PN1YfKaR
+X-Gm-Gg: ASbGnculkZ7l+y1qFK6uBl5+eNAebBQPVHsvVOknzO3t0pEMWzDi233/uTezFkfy62S
+ MXI+l0ZgKve+9gh96IQ/t7ysbsCk16jtTfNA9Npb5k/r5RAZd5V5tP3YEx2dc6QYLW0dih9dJvs
+ UWTobxBOS32NM/309yXpMJKSzuds3/i7qZdhZSDNsB6noS5+SKXtHC93Vtov3rERsNw761gA58w
+ 3X2KotV/5A9CHmlpXwndTtBZytx/mV2DgcIFjuJ7uK2/YaDeu9FuU7qiG7TUqmVuYri4w==
+X-Google-Smtp-Source: AGHT+IHaa3V9+QrT2EQ6JhP/4xMH+RZU/8APOYbgt65djq4KCNFDxd2LQxzInEvhIY77uIaEno61R94M0kV36jzTCH4=
+X-Received: by 2002:a05:6402:40c8:b0:62b:63f8:cdbb with SMTP id
+ 4fb4d7f45d1cf-639d5c4c1e1mr18401688a12.25.1760362898723; Mon, 13 Oct 2025
+ 06:41:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251012064412.2892979-1-sjg@chromium.org>
- <20251012064412.2892979-3-sjg@chromium.org>
- <88c25ace-fa91-4f30-8697-9f65cf98959b@gmx.de>
-In-Reply-To: <88c25ace-fa91-4f30-8697-9f65cf98959b@gmx.de>
+ <20251012064412.2892979-4-sjg@chromium.org>
+ <476e7a6a-1371-43de-9c23-7a70e70619c4@gmx.de>
+In-Reply-To: <476e7a6a-1371-43de-9c23-7a70e70619c4@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Oct 2025 14:41:22 +0100
-X-Gm-Features: AS18NWC3AeWTg7dp7zbUt_btavbzMB7nYS5wdE50AQFRLAyj57TILz2Q2G2RySs
-Message-ID: <CAFLszTgwZLiMpq6g6_ru4-CKWO4ATJbiDbxWLx3aiVfCiP9POw@mail.gmail.com>
-Subject: Re: [PATCH v5 2/4] boot: Move obtaining the label into a common file
+Date: Mon, 13 Oct 2025 14:41:24 +0100
+X-Gm-Features: AS18NWBV-1AGD0HW0gbagbxedbRewnO-vUDsVsj6eeHCv_EB_A1kaunpyysA0aE
+Message-ID: <CAFLszTiPoFVwBUbMBSBRr336WTU7qtoaOUT46Dt3uKWkoWGSww@mail.gmail.com>
+Subject: Re: [PATCH v5 3/4] boot: Rename usb to ums
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Maximilian Brune <maximilian.brune@9elements.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
  Moritz Fischer <moritzf@google.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -97,135 +98,83 @@ X-Virus-Status: Clean
 
 Hi Heinrich,
 
-On Mon, 13 Oct 2025 at 11:01, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Mon, 13 Oct 2025 at 11:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
 > On 10/12/25 08:43, Simon Glass wrote:
-> > The 'bootflow list' command supports looking at the EFI device-path when
-> > available. Move this piece into a common function so it can be used
-> > elsewhere.
-> >
-> > This updates the output from 'bootflow list'.
+> > The name 'usb' is quite generic and could apply to any USB device.
+> > Rename it 'ums', for USB Mass Storage.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Suggested-by: Tom Rini <trini@konsulko.com>
 > > ---
 > >
-> > Changes in v5:
-> > - Move 'usb' rename into a separate patch
+> > (no changes since v1)
 > >
-> >   boot/bootflow.c    | 16 ++++++++++++++++
-> >   cmd/bootflow.c     |  8 +++++---
-> >   include/bootflow.h |  8 ++++++++
-> >   3 files changed, 29 insertions(+), 3 deletions(-)
+> >   boot/bootflow.c      | 5 ++++-
+> >   include/bootflow.h   | 2 +-
+> >   test/boot/bootflow.c | 2 +-
+> >   3 files changed, 6 insertions(+), 3 deletions(-)
 > >
 > > diff --git a/boot/bootflow.c b/boot/bootflow.c
-> > index 15df7069209..6485d473d69 100644
+> > index 6485d473d69..13f086167ab 100644
 > > --- a/boot/bootflow.c
 > > +++ b/boot/bootflow.c
-> > @@ -11,6 +11,7 @@
-> >   #include <bootmeth.h>
-> >   #include <bootstd.h>
-> >   #include <dm.h>
-> > +#include <efi_device_path.h>
-> >   #include <env_internal.h>
-> >   #include <malloc.h>
-> >   #include <serial.h>
-> > @@ -1010,3 +1011,18 @@ int bootflow_get_seq(const struct bootflow *bflow)
+> > @@ -1019,7 +1019,10 @@ const char *bootflow_guess_label(const struct bootflow *bflow)
+> >       if (bflow->dev) {
+> >               struct udevice *media = dev_get_parent(bflow->dev);
 > >
-> >       return alist_calc_index(&std->bootflows, bflow);
-> >   }
-> > +
-> > +const char *bootflow_guess_label(const struct bootflow *bflow)
-> > +{
-> > +     const char *name = NULL;
+> > -             name = dev_get_uclass_name(media);
+> > +             if (device_get_uclass_id(media) == UCLASS_MASS_STORAGE)
+> > +                     name = "ums";
 >
-> Why would you not return bootflow->name if it is allocated?
+> Using a different label ('ums') here than we use for the load command
+> ('usb') just leads to confusing users.
+>
+> We should use the same label for USB mass storage devices everywhere. Or
+> use a long label like 'USB block device'.
 
-This is intended to show the label of the bootdev which produced the
-bootflow. If you look below you can see that the bootflow name is
-already shown, so we don't want to show it twice.
+OK, well we can just drop this patch. It was a suggestion from a few
+people, but I'm not a huge fan of it either. We only have room for 8
+characters here at present.
 
->
-> > +
-> > +     if (bflow->dev) {
-> > +             struct udevice *media = dev_get_parent(bflow->dev);
-> > +
-> > +             name = dev_get_uclass_name(media);
-> > +     }
-> > +     if (!name)
-> > +             name = "(none)";
->
-> Label "(none)" makes no sense to bootflows created for BOOTMETHF_GLOBAL.
-> Can't we return a string for the bootmeth instead?
-
-Similarly, the bootmeth name is already shown. See below.
-
->
-> > +
-> > +     return name;
-> > +}
-> > diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-> > index 551dffbb8b8..5b803d4ace5 100644
-> > --- a/cmd/bootflow.c
-> > +++ b/cmd/bootflow.c
-> > @@ -70,10 +70,12 @@ static void report_bootflow_err(struct bootflow *bflow, int err)
-> >    */
-> >   static void show_bootflow(int index, struct bootflow *bflow, bool errors)
-> >   {
-> > +     const char *name = bootflow_guess_label(bflow);
->
-> Why would we guess a name if bflow->name != NULL?
-
-It isn't the name we are trying to guess, it is the bootdev. We are
-trying to show a friendly name for the bootdev.
-
->
-> > +
-> >       printf("%3x  %-11s  %-6s  %-9.9s %4x  %-25.25s %s\n", index,
-> > -            bflow->method->name, bootflow_state_get_name(bflow->state),
-> > -            bflow->dev ? dev_get_uclass_name(dev_get_parent(bflow->dev)) :
-> > -            "(none)", bflow->part, bflow->name, bflow->fname ?: "");
-> > +            bflow->method ? bflow->method->name : "(none)",
-> > +            bootflow_state_get_name(bflow->state), name, bflow->part,
-> > +            bflow->name, bflow->fname ?: "");
-> >       if (errors)
-> >               report_bootflow_err(bflow, bflow->err);
-> >   }
-> > diff --git a/include/bootflow.h b/include/bootflow.h
-> > index 2ef6eb25cf5..657e3731f11 100644
-> > --- a/include/bootflow.h
-> > +++ b/include/bootflow.h
-> > @@ -692,4 +692,12 @@ int bootflow_menu_start(struct bootstd_priv *std, bool text_mode,
-> >    */
-> >   int bootflow_menu_poll(struct expo *exp, int *seqp);
-> >
-> > +/**
-> > + * bootflow_guess_label() - Produce a plausible label for a bootflow
-> > + *
-> > + * This uses the uclass name or EFI device-path to come up with a useful label
-> > + * for display to the user. Ideally it will say "mmc", "usb", nvme", etc.
->
-> Please, describe the fallback.
->
-> The documentation is comprehensible but unfortunately incomplete for
-> what we want to generate in doc/api
->
-> Please, add '@bootflow:', 'Return:'.
-> cf.
-> https://www.kernel.org/doc/html/v4.16/doc-guide/kernel-doc.html#function-documentation
->
-
-OK
+Regards,
+Simon
 
 
+>
 > Best regards
 >
 > Heinrich
 >
-> > + */
-> > +const char *bootflow_guess_label(const struct bootflow *bflow);
-> > +
-> >   #endif
+> > +             else
+> > +                     name = dev_get_uclass_name(media);
+> >       }
+> >       if (!name)
+> >               name = "(none)";
+> > diff --git a/include/bootflow.h b/include/bootflow.h
+> > index 657e3731f11..2aa00a9b1db 100644
+> > --- a/include/bootflow.h
+> > +++ b/include/bootflow.h
+> > @@ -696,7 +696,7 @@ int bootflow_menu_poll(struct expo *exp, int *seqp);
+> >    * bootflow_guess_label() - Produce a plausible label for a bootflow
+> >    *
+> >    * This uses the uclass name or EFI device-path to come up with a useful label
+> > - * for display to the user. Ideally it will say "mmc", "usb", nvme", etc.
+> > + * for display to the user. Ideally it will say "mmc", "ums", nvme", etc.
+> >    */
+> >   const char *bootflow_guess_label(const struct bootflow *bflow);
+> >
+> > diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+> > index 7cd83dc7443..b777708f5d6 100644
+> > --- a/test/boot/bootflow.c
+> > +++ b/test/boot/bootflow.c
+> > @@ -1301,7 +1301,7 @@ static int bootflow_efi(struct unit_test_state *uts)
+> >       ut_assert_nextlinen("---");
+> >       ut_assert_nextlinen("  0  extlinux");
+> >       ut_assert_nextlinen(
+> > -             "  1  efi          ready   usb_mass_    1  usb_mass_storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
+> > +             "  1  efi          ready   ums          1  usb_mass_storage.lun0.boo /EFI/BOOT/BOOTSBOX.EFI");
+> >       ut_assert_nextlinen("---");
+> >       ut_assert_skip_to_line("(2 bootflows, 2 valid)");
+> >       ut_assert_console_end();
 >
-
-Regards,
-Simon
