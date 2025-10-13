@@ -4,69 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D13CCA476
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 12:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32D95CCA476
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 13:09:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20A518363D;
-	Mon, 13 Oct 2025 14:45:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id B1E6283768;
+	Mon, 13 Oct 2025 15:09:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Tj15SMNw";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="TckBxXfK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2752F83768; Mon, 13 Oct 2025 14:45:52 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3A178837E4; Mon, 13 Oct 2025 15:09:11 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C269B82B20
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 14:45:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54147836F0
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 15:09:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 305281A1344;
- Mon, 13 Oct 2025 12:45:49 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id EF8BA606C6;
- Mon, 13 Oct 2025 12:45:48 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E5A67102F224D; 
- Mon, 13 Oct 2025 14:45:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760359548; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=wWLQRvzCCSGPQkj0nVzbt9T6mziXv/6FRh6UmPSp9yE=;
- b=Tj15SMNwG08wpbYH3i9FZAOS75ifsHHksxCOW5hUkf54otdH9gczxbu5CPvpbkl7J/diXV
- LciEQ4YwGMrsO8MC65jJOr+LBkFqZAFifph+Dw1GGlgNPjpi77ZtRiloCIV09xdoKvGOYu
- 9EQDxFbp4KHmtGF8LD3+KW+l3XPzbC0ltIJYzSo4j/FciYJqQOPE4CCeJBvorMVAtln802
- ub6up7gYXxcTg/ljDcIUSU9q7oMOB4Sl5Ub8nCNFxCsGryv+NlE+1yvNlK9QLNkr9Wp/+C
- x5hv8vW5Q/Ovd/AL9ks/Ahh8CRg/Q8Msny4pfuD19Ypl2BHf2Ix2U6OKxHuoeQ==
-Date: Mon, 13 Oct 2025 14:45:32 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede
- <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, Stefano Babic
- <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
- Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 03/18] boot: Add UCLASS support for extension boards
-Message-ID: <20251013144532.381e4ad5@kmaincent-XPS-13-7390>
-In-Reply-To: <CAFLszTjLmq0r9uTYR-irzzSN63G1Lpd0iWiwW9npLSraNB1Y_g@mail.gmail.com>
-References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
- <20251009-feature_sysboot_extension_board-v2-3-e09b39e54de5@bootlin.com>
- <CAFLszTg-i7cDiN57pqat=bYwqucCOGqW6oh1CvnJz7-UhKaCwA@mail.gmail.com>
- <20251010153500.5bec4e20@kmaincent-XPS-13-7390>
- <CAFLszTjLmq0r9uTYR-irzzSN63G1Lpd0iWiwW9npLSraNB1Y_g@mail.gmail.com>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-637dbabdb32so8271244a12.2
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 06:09:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1760360948; x=1760965748; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Obkx4/tIWs1su35wRBPZSbH1fC8HystjrJG0MtbjPso=;
+ b=TckBxXfKNZ9+lDfN9T0XSr7GVP5OibGaDYTFGlHIKs/xpauQbYNZLeH/jqht6EndUn
+ Va/DJtNQx+J+KUPuWN49gvnZARJaDJcLWU9KZ4z3YHOxJJpA38hiuqaSScBL5cVTNvG2
+ THk6pc9NTd3QIlLfPH83Ti3Kk3CKMzJpa+15CYOHCQ6AKeMttHtdVeNw8mD9LjHgd2cS
+ x5IZaTFuQyQ51T/bcDTVlekAG/ICzYWac7UbI45nys6Fzihz7R0ZZF9vSu0LCjgtNWVm
+ +xhG1S0wKeoEIMrTmHUU0tic2H7ZpVDARfSZHT711oao3AifOeeYy1ksURBgGFvOT7Yk
+ zt+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760360948; x=1760965748;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Obkx4/tIWs1su35wRBPZSbH1fC8HystjrJG0MtbjPso=;
+ b=Bc4+g8zak3q4r092PGrfDqRt8IO/4Q7pQMPz1qJlNgj0xJWWYFxr4yJQ/F22H3Nt7d
+ 2Cm+Ppoj8Yv+y9fr6Nb+EgAzn3v1lPJXEjFrRQZdjOgsP6RWNZdaVkfGimzXmB6T1SSk
+ Y5psEybOpwVbZ4zvzDk24xTjXZj0uoiC/1qyzPDr0vYvduvwDJFrINiv+XazCpChKkvC
+ GcYjTSDAiIGuLHC/EPOPTY26xPxXQ/9ptNU2MRJTpU95wEsLtuNjz69hYBpAITvU8Dt5
+ xDhQVkh+Z1zv7oQ5seQFgNpwa4Hz6Xoovdxp4zL2NfAvivr18krWoQTUCVsAGvBM0H0j
+ M8fg==
+X-Gm-Message-State: AOJu0YysCyVSY4oOYrRjI8y2eZn953PwipCh15G4fGT0Ou9gXYmOduQB
+ RLYj3Izdw8ZZbOWEs97Q4PJVAiudVPeDwrE8IOa0S73S5hZ/LgH8FAVZa13IxA==
+X-Gm-Gg: ASbGncuupfXZ25eIodMjWzSEaaOFHWrRJJoL+ffNVCRL1m8SZmcsaAIb1aC+Zb3HJ5A
+ 9k/xcHMnj3psskkIHToUr6vqHCo83vqs5NamhFq9cPG22uYO0Ve/y9gw6L6Sg3rmxmelci+P6xF
+ WF5Cs9zNahylJvO5xH+UzrZm6osAAzXvvXyIh+2WhAhbz4/cOoUNsdhDC2v9Jrk88sXccLaKs11
+ FTErBp2iQaz9dmKwWETiip4x2Q32pS0gIGsJc8IKW1l6tHBW/eulkUNQdJigJYhV3y59PqJ5F1Z
+ 5S9J2g3EgEYOWZtG4lWWDMst9Ztc519cazdKmjJpu4hPKk7NaiGSjPAn2yyWiQJaici9UCqSSxP
+ ZLmXCzVrLMFGC/Mdq4l4uohbqRe9/l86iONUtYXu5P4GcLWVZn4twYPXJFEyqwcvhsAOor2+SqT
+ ljAJ4IpwP1tYPqRHGNOMoGuMuM7H6ybzTm
+X-Google-Smtp-Source: AGHT+IHdux6R8KewwjoKqSyV+eOin7QEoVGHQuM+Vdj0/1Pe0KJKAZmZPgIWj9MZuwLajT6aUD0idg==
+X-Received: by 2002:a17:906:f590:b0:b4b:dd7e:65ea with SMTP id
+ a640c23a62f3a-b50abfd3a41mr2016626766b.35.1760360947848; 
+ Mon, 13 Oct 2025 06:09:07 -0700 (PDT)
+Received: from development2.visionsystems.local (mail.visionsystems.de.
+ [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b55d61ccb09sm891262266b.19.2025.10.13.06.09.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Oct 2025 06:09:07 -0700 (PDT)
+From: yegorslists@googlemail.com
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] arm: baltos: enable TI_SYSC and CLK drivers
+Date: Mon, 13 Oct 2025 15:09:02 +0200
+Message-Id: <20251013130902.74719-1-yegorslists@googlemail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,52 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 11 Oct 2025 08:20:58 +0100
-Simon Glass <sjg@chromium.org> wrote:
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-> Hi Kory,
->=20
-> On Fri, 10 Oct 2025 at 14:35, Kory Maincent <kory.maincent@bootlin.com> w=
-rote:
-> >
-> > On Fri, 10 Oct 2025 12:13:11 +0100
-> > Simon Glass <sjg@chromium.org> wrote:
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+---
+ configs/am335x_baltos_defconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-...
+diff --git a/configs/am335x_baltos_defconfig b/configs/am335x_baltos_defconfig
+index 5c43503ff32..93a5fb94adf 100644
+--- a/configs/am335x_baltos_defconfig
++++ b/configs/am335x_baltos_defconfig
+@@ -53,8 +53,9 @@ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+ CONFIG_VERSION_VARIABLE=y
+ CONFIG_NET_RETRY_COUNT=10
+ CONFIG_BOOTP_SEND_HOSTNAME=y
+-# CONFIG_TI_SYSC is not set
+ CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_CLK=y
++CONFIG_CLK_TI_CTRL=y
+ CONFIG_DM_I2C=y
+ CONFIG_SPL_SYS_I2C_LEGACY=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+-- 
+2.34.1
 
-> > > > +/**
-> > > > + * dm_extension_apply - Apply extension board overlay to the devic=
-etree
-> > > > + * @extension_num: Extension number to be applied
-> > > > + * Return: Zero on success, negative on failure.
-> > > > + */
-> > > > +int dm_extension_apply(int extension_num); =20
-> > >
-> > > The uclass should have a method like apply(struct uclass *dev, int
-> > > extension_num). Is the numbering global across all devices? =20
-> >
-> > We currently support only one extension driver loaded at a time, theref=
-ore
-> > we don't currently need this uclass parameter.
-> > We will change the API when we will have several scan method possible a=
-t the
-> > same time but I can't test it for now. I don't think we will have such =
-cases
-> > soon and maybe the devicetree WIP support will be ok at that time. =20
->=20
-> OK, I hadn't picked that up but it makes sense. We can always change
-> it later, as you say. But I would like to see an apply() method in
-> extension_ops, so that it actually looks like a driver.
-
-Are you sure adding an apply ops method make sense? It is not something dri=
-ver
-or board specific. Do you want to have an apply driver ops set to the same
-generic apply function for all drivers?=20
-
-Ok for the rest.
-
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
