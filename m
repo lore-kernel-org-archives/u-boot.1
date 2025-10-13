@@ -4,75 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF876CCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 18:11:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 052AFCCD183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 21:08:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 643B58398C;
-	Mon, 13 Oct 2025 20:11:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 17D4583710;
+	Mon, 13 Oct 2025 23:07:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=iki.fi
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bl16bhbU";
+	dkim=pass (1024-bit key; secure) header.d=iki.fi header.i=@iki.fi header.b="m4yMZAPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52BE78398D; Mon, 13 Oct 2025 20:11:44 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1359C838D7
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 20:11:41 +0200 (CEST)
+ id EA5E1839CA; Mon, 13 Oct 2025 20:36:52 +0200 (CEST)
+Received: from meesny.iki.fi (meesny.iki.fi [IPv6:2001:67c:2b0:1c1::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E487D838D7
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 20:36:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59DIBYXw1401820;
- Mon, 13 Oct 2025 13:11:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760379094;
- bh=Jvf6UcX2kV9lNR7zMCYsv2INRwGvHCaVIWefhAOeSOo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=bl16bhbUPvOhaDC8NDM54/uNZ7SC+PtzRDP5j42QGkbH8kpGIq6zVNnun3MOhQoQ7
- jqwli2YKsUo0lHr5gtyqLI3zcGA1EWwvzcX8R4gFOYOoRNi89up5ZNXBFaaHsxrPzE
- sHBb4lVoRrekf9p+SLLcndBTdWpwVmQEi5K/W9ko=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59DIBXhQ3362273
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 13 Oct 2025 13:11:33 -0500
-Received: from DFLE203.ent.ti.com (10.64.6.61) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 13
- Oct 2025 13:11:33 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 13 Oct 2025 13:11:33 -0500
-Received: from [10.250.148.111] ([10.250.148.111])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59DIBQrR2487479;
- Mon, 13 Oct 2025 13:11:27 -0500
-Message-ID: <eac85809-2d75-434b-a107-3bbcf1807710@ti.com>
-Date: Mon, 13 Oct 2025 23:41:25 +0530
+ dmarc=none (p=none dis=none) header.from=iki.fi
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marko.makela@iki.fi
+Received: from kehys.lan (dsl-hkibng22-50ddbb-117.dhcp.inet.fi
+ [80.221.187.117])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
+ server-digest SHA256) (No client certificate requested)
+ (Authenticated sender: msmakela)
+ by meesny.iki.fi (Postfix) with ESMTPSA id 4clmKB1DhJzyQf
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 21:36:46 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi; s=meesny;
+ t=1760380606;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=OAtp/ruVpHxtlYByU1kn5tD3QhXLrd242rqCs5nPIHw=;
+ b=m4yMZAPm6QvZF74EEtnZ0lpt0DjPOTRQV1hPJn2AMF0xziaqeoASpqe2ojnH5ykJgxmZv7
+ tMKVcuG1TQl2OwNjbPL6jNuSkpH9HmXDnGXnbCZdeXzXFJ5N0963fBimWO5CmtSATNm4Nl
+ upcosCTikY5Vruk+tVgeFJCiU1jRGKY=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=iki.fi;
+ s=meesny; t=1760380606;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=OAtp/ruVpHxtlYByU1kn5tD3QhXLrd242rqCs5nPIHw=;
+ b=ojnubeRejA92KkFcWoOYaKtcxCeLnPj/GCvifYo17p8zHigrsM+XX630eh6zRAp4XLtWyD
+ QbV6AUO+tSSlHwYoBtzdxZ3epc58iB7EUVS05ZDVqvlbhMdWOcE72K9nnmIyU3CSdr1HNS
+ fJyAKutsALTKHgD3r+cJurpGcyNWFzA=
+ARC-Authentication-Results: i=1; ORIGINATING;
+ auth=pass smtp.auth=msmakela smtp.mailfrom=marko.makela@iki.fi
+ARC-Seal: i=1; s=meesny; d=iki.fi; t=1760380606; a=rsa-sha256; cv=none;
+ b=eSthRDKYJs+5kZzLZBNVot/i9Ht3jiSKeg6kdDvAvJSxGKx817SkJmO3GK7PgTM+Slh3MO
+ VenQmWNZc1r3ZBuAdY04DaNKIy/0yLuuyJgA7xZGnJrrN0tgFi0eaq2aE378vPTXBJGl0o
+ WmRfFv/rx/udXuQaXHjDfTB6AQ6WyKs=
+Date: Mon, 13 Oct 2025 21:36:44 +0300
+From: Marko =?iso-8859-1?B?TeRrZWzk?= <marko.makela@iki.fi>
+To: u-boot@lists.denx.de
+Subject: How to use ECDSA for signature verification?
+Message-ID: <aO1GvGrXUw-co84_@kehys.lan>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/11] lib: Import iomem_copy from Linux Kernel
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, <u-boot@lists.denx.de>,
- <uboot-stm32@st-md-mailman.stormreply.com>, "NXP i.MX U-Boot Team"
- <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>, Stefano Babic
- <sbabic@nabladev.com>
-CC: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Beleswar Padhi
- <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Andrew Davis <afd@ti.com>, Judith Mendez <jm@ti.com>,
- Ryan Eatmon <reatmon@ti.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Peng Fan <peng.fan@nxp.com>, <u-kumar1@ti.com>
-References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
- <20251013-imx-rproc-v1-1-fb43a3fafcd0@nxp.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251013-imx-rproc-v1-1-fb43a3fafcd0@nxp.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 13 Oct 2025 23:07:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,59 +83,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
-On 10/13/2025 8:19 AM, Peng Fan (OSS) wrote:
-> From: Peng Fan <peng.fan@nxp.com>
->
-> memcpy_{from,to}io and memset_io is needed for i.MX8M to write
-> TCM area. So import the APIs from Linux Kernel 6.17.
->
-> Reviewed-by: Ye Li <ye.li@nxp.com>
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> ---
->   include/asm-generic/io.h |  37 +++++++++++++
->   lib/Makefile             |   1 +
->   lib/iomem_copy.c         | 136 +++++++++++++++++++++++++++++++++++++++++++++++
+Yesterday, I successfully built the u-boot master branch with 
+CONFIG_FIT_SIGNATURE=y and CONFIG_RSA=y and got the signature 
+verification working with sha256,rsa2048.
 
->   3 files changed, 174 insertions(+)
->
-> diff --git a/include/asm-generic/io.h b/include/asm-generic/io.h
-> index 13d99cfb5973399209c00adee0080ff83414c064..cf981ad3501f935c714b7580536540e7aba249c1 100644
-> --- a/include/asm-generic/io.h
-> +++ b/include/asm-generic/io.h
-> @@ -3,6 +3,7 @@
->    * Generic I/O functions.
->    *
->    * Copyright (c) 2016 Imagination Technologies Ltd.
-> + * Copyright 2025 NXP
->    */
->   
->   #ifndef __ASM_GENERIC_IO_H__
-> @@ -453,5 +454,41 @@ static inline void iowrite64_rep(volatile void __iomem *addr,
->   #endif
->   #endif /* CONFIG_64BIT */
->   
-> +#ifndef memset_io
+Today, I wanted to try out CONFIG_ECDSA=y, but I am facing some trouble.  
+I am generating the key and trying to add its public part to the device 
+tree blob as with fdt_add_pubkey as follows:
 
-If you are on arm, then
+openssl ecparam -name secp521r1 -genkey -noout -out dev-private.pem
+openssl ec -in dev-private.pem -pubout -out dev.pem
+cd u-boot
+make ...
+cp u-boot.dtb u-pubkey.dtb
+tools/fdt_add_pubkey -a sha512,secp521r1 -n dev -k .. -r conf u-pubkey.dtb
 
-arch/arm/include/asm/io.h defines these io functions, for ARM64 and 
-non-ARM64 platform,
+The next step would be to run make EXT_DTB=u-pubkey.dtb ... so that the 
+public key will be embedded and the signature verification will be 
+enabled in the final u-boot.img.
 
-In your SOC, how this works.
+Alas, the fdt_add_pubkey command would crash in SIGSEGV in alloc_ctx().  
+I figured out that the hash algorithm is not being looked up and 
+assigned. Maybe this is not necessary for the -a sha256,rsa2048 which I 
+was successfully using previously. The following patch fixes the 
+SIGSEGV:
 
-> +/**
-> + * memset_io -	Set a range of I/O memory to a constant value
-> + * @addr:	The beginning of the I/O-memory range to set
-> + * @val:	The value to set the memory to
-> + * @count:	The number of bytes to set
-> + *
-> + * Set a range of I/O memory to a given value.
-> + */
-> +void memset_io(volatile void __iomem *addr, int val, size_t count);
-> +#endif
-> +
-> +#ifndef memcpy_fromio
-> +/**
-> [..]
+diff --git a/tools/fdt_add_pubkey.c b/tools/fdt_add_pubkey.c
+index 5582d7a8efe..4f7028cc15c 100644
+--- a/tools/fdt_add_pubkey.c
++++ b/tools/fdt_add_pubkey.c
+@@ -73,9 +73,10 @@ static void reset_info(struct image_sign_info *info)
+  	info->keyname = keyname;
+  	info->name = algo_name;
+  	info->require_keys = require_keys;
++	info->checksum = image_get_checksum_algo(algo_name);
+  	info->crypto = image_get_crypto_algo(algo_name);
+  
+-	if (!info->crypto) {
++	if (!info->checksum || !info->crypto) {
+  		fprintf(stderr, "Unsupported signature algorithm '%s'\n",
+  			algo_name);
+  		exit(EXIT_FAILURE);
 
+However, with the above patch applied, I am facing the next trouble:
+tools/fdt_add_pubkey -a sha512,secp521r1 -n dev -k .. -r conf u-boot-key.dtb
+Can not read key from '../dev.pem'
+tools/fdt_add_pubkey: Cannot add public key to FIT blob: Unknown error -5
+
+In GDB, I can see that read_key() in lib/ecdsa/ecdsa-libcrypto.c would 
+invoke PEM_read_PrivateKey(), which I assume will fail, because 
+../dev.pem only contains a public key. In the planned deployment, the 
+private key would be private to a HSM or an external service. Moreover, 
+I do not understand why fdt_add_pubkey would attempt to access a private 
+key in the first place; that should only be needed for signing the 
+fitImage. Both prepare_ctx() and ecdsa_add_verify_data() would return 
+-5, which main() is reporting to stderr.
+
+Has some way of using ECDSA based signature verification been tested?  
+The reason why I would like to avoid RSA is that it is not thought to be 
+quantum-secure, or secure against a cryptalalytic attack by a quantum 
+computer.
+
+With best regards,
+
+	Marko Mäkelä
