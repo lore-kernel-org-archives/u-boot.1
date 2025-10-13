@@ -4,88 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C266ACCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 15:56:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D6E9CCD183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 16:57:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35EF383734;
-	Mon, 13 Oct 2025 17:56:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 4FE1F836F0;
+	Mon, 13 Oct 2025 18:57:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="oozObr9+";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JrQwT+Kc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06D10838D7; Mon, 13 Oct 2025 17:56:49 +0200 (CEST)
-Received: from mx4.sberdevices.ru (mx4.sberdevices.ru [176.109.96.46])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5BC3483700; Mon, 13 Oct 2025 18:57:14 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 571FE82BA7
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 17:56:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1BA43836C8
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 18:57:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eabachinin@salutedevices.com
-Received: from p-antispam-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx4.sberdevices.ru (Postfix) with ESMTP id 961AE40015;
- Mon, 13 Oct 2025 18:56:45 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx4.sberdevices.ru 961AE40015
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=post; t=1760371005;
- bh=7HxfK8wxuYPnZ46+cv43F2A0imFKD7uFbXfw52FrLNI=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=oozObr9+2g2XVJu9de8RIaef24Ge+GNwOBODoHRSuDvszYU3mSNyLThOf/x0493zg
- eFTkaU7tQmpGW2brjFnkPqz9m0O4yNUpZeFI6i+4lpHztRBBXr6PKs3w9o8f9RdF4w
- halUoOf8eQnj7jTAZQOd542TfVnRZJyoZa6N4zP72cF/Hg8qgeLzNQcImQ9Z2v//8J
- b5Bdpfj8y8GmA0GMIJ7PfVnpYuO+tP8uYKmrcAL6z71nq1XxZqAVJVGNtQqVi/nUA/
- KpxEgvehBjP8QOyf61qqjGv/D157Mi/QU/ncrVLRct1nNfG+pxYPmbviGjylQHirB/
- krCVnTMPgl95A==
-Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
- [172.24.201.216])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client CN "sberdevices.ru", Issuer "R13" (verified OK))
- by mx4.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 13 Oct 2025 18:56:42 +0300 (MSK)
-Date: Mon, 13 Oct 2025 18:56:41 +0300
-From: Evgeny Bachinin <eabachinin@salutedevices.com>
-To: Ferass El Hafidi <funderscore@postmarketos.org>
-CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, Viacheslav
- Bocharov <adeep@lexina.in>, Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Ferass El Hafidi <funderscore@tauchgang.dev>,
- <~postmarketos/upstreaming@lists.sr.ht>
-Subject: Re: [PATCH v2] arm: meson: add support for EFI capsule updates
-Message-ID: <b6d4pmkbz4xjbyj62ytbupledbql2p4ogm3jtvbwzapak5ykyz@varyesq35qq5>
-References: <20251011-meson-capsule-v2-1-53a8be6595ce@postmarketos.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7b6ac55cf86so3056608a34.1
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 09:57:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760374631; x=1760979431; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=L8n4/pCwgLBsQaIxvJyvZcY+3UAMQanB9Cnnu1mW4Ps=;
+ b=JrQwT+KcqqxIc6RH+Ot22bCxdmwcXl8Vf8H85+xgAQ0L7Vvd17ZbuUPXwe5lY2d7IQ
+ IzxujN+Y3ncmbJYrgmy95DCcEv46gYmWdBkGOpqmxSeYiAwbAHrpsyW9NKC7CZqovwu7
+ ljbsnJ5L8K6KaELa7CInh3tnfTVhv8kLAnxSQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760374631; x=1760979431;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L8n4/pCwgLBsQaIxvJyvZcY+3UAMQanB9Cnnu1mW4Ps=;
+ b=mIOd01oFHQpcq7z2v6dwe/KovbUYQLimFW2uievcFUXX1KlXV6w1KPZsqkvVYfks56
+ Y/dVIKz/0/l/C3WDdh3JcPHQhUYbfC/eE0VAaNXQg2ml1XfjWpvJdpZrz5/NCsr3x3gx
+ M+nVXiylc6Or90zgAzPgrW1TzcdT3pWL0eeJ7tQUs9nUYJmCrHZw9ujJxEg+oOXbScvE
+ jqlVIsu9sVliFd/0kk5SHYY1u3aHGJZZCoOe1ph5ZwY7BaCmNh42Q6KVWyihGES+KrRu
+ 9PnevT8IBZocCjve9h3QjlKbyyFHZvpOdgDugWJXT81hxVUEwOciDDeULfTvLR3qFz9G
+ 6E5Q==
+X-Gm-Message-State: AOJu0YxdGBuAZb6Yy+ui3iZJt5pGqa6+GhE9WmlTv56jj0ar0fgUgOT6
+ T2RIEsRPvvXzDekWBjdh5OJlGgvp4CpuOuv0geRz6Vhk7YjpXNhj7yyQX2+kkrEfVUs=
+X-Gm-Gg: ASbGncuipZnXv43PpYZ2BWIKS46xhOX9m3YxB0vczK6w/6Oe9QSkHjoaGrnFf57DpF9
+ c6moz53ElQS9+tA8CxYif+bJySFJaU2fzXM5kLDTi0P2G/xjMj9RuzYGFRulJr9O4cWQDGdvucd
+ rAGQIkCv32pQNi6jFmV9CXoHhxUEJji9tPR0by27xx+jSOGpVQhVU22Sy01fMLab/uGNcXx96js
+ 1+Jib9/3fd6lgHFabuIJ1a6uQkLvJgl58mq3SyRlmtLn5Z80Dx5NL4JgavnoR5uxbHvSdOw/dOP
+ HPB8nLZDtg7bhKnudQFb7lB8qwTnTAsvvJw0Kd0Bj7wFnfa4wS0wBevLZVipmyVkXDu/8ldRbCl
+ R48LvajHzPYpIL2ZxpznTzDzRyRFUlrHR8Lu1o6PuX7VMwRZEdlLadkqvNTzh0afahZ4tyq+bBz
+ 8YXAl2
+X-Google-Smtp-Source: AGHT+IG0QawEruEP5tiiEM7KkHOk5Co/OHovI40YiWrs2ClPDH2hG40HsMTmBkPrTP4WeG+eHnjg3g==
+X-Received: by 2002:a05:6830:6507:b0:7ba:8107:d559 with SMTP id
+ 46e09a7af769-7c0df7be2a6mr10601330a34.26.1760374630688; 
+ Mon, 13 Oct 2025 09:57:10 -0700 (PDT)
+Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c0f90687e8sm3651237a34.15.2025.10.13.09.57.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Oct 2025 09:57:09 -0700 (PDT)
+Date: Mon, 13 Oct 2025 10:57:07 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>
+Subject: Re: [PATCH v4 3/4] boot: Add more debugging to iter_incr()
+Message-ID: <20251013165707.GK6113@bill-the-cat>
+References: <20251009092959.260121-1-sjg@chromium.org>
+ <20251009092959.260121-4-sjg@chromium.org>
+ <20251009173052.GQ298503@bill-the-cat>
+ <CAFLszTi2HuZLmebJB+kUsL3_J+aqVdCdP5XFSEoY1Dy5C3E2wA@mail.gmail.com>
+ <20251010143528.GZ298503@bill-the-cat>
+ <CAFLszTh+K2Yr0OtZ_cNk9YrrGxg3KAv2SEppK=a-g1sw=hncLg@mail.gmail.com>
+ <20251013141544.GD6113@bill-the-cat>
+ <CAFLszTiOrWfEboYV+=xf0t1wdqeEhbo-SdjAquNCncMRxTur6A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5SUsWpnhC5xLtUpO"
 Content-Disposition: inline
-In-Reply-To: <20251011-meson-capsule-v2-1-53a8be6595ce@postmarketos.org>
-User-Agent: NeoMutt/20231006
-X-Originating-IP: [172.28.6.129]
-X-ClientProxiedBy: p-exch-cas-a-m1.sberdevices.ru (172.24.201.216) To
- p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
-X-KSMG-AntiPhishing: NotDetected, bases: 2025/10/13 15:03:00
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
-X-KSMG-AntiSpam-Info: LuaCore: 71 0.3.71
- ee78c3da48e828d2b9b16d6d0b31328b8b240a3c, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- smtp.sberdevices.ru:7.1.1,5.0.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
- lore.kernel.org:7.1.1, {Tracking_References_header}, FromAlignment: s
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiSpam-Lua-Profiles: 197037 [Oct 13 2025]
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Version: 6.1.1.11
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.1.1.8310,
- bases: 2025/10/13 14:30:00 #27909416
-X-KSMG-AntiVirus-Status: NotDetected, skipped
-X-KSMG-KATA-Status: Not Scanned
-X-KSMG-LinksScanning: NotDetected, bases: 2025/10/13 15:53:00
-X-KSMG-Message-Action: skipped
-X-KSMG-Rule-ID: 5
+In-Reply-To: <CAFLszTiOrWfEboYV+=xf0t1wdqeEhbo-SdjAquNCncMRxTur6A@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,184 +108,159 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-Thank you
+--5SUsWpnhC5xLtUpO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 11, 2025 at 06:16:23PM +0000, Ferass El Hafidi wrote:
-> Previously, few Amlogic devices supported EFI capsule updates.
-> Generally only the Libre Computer ones with SPI flash supported it,
-> thanks to board-specific code.
-> 
-> This commit commonises capsule update support across supported
-> Amlogic boards.  Similar to Qualcomm's support for it, the dfu string
-> and firmware name is automatically generated at runtime depending on
-> which device we are booted from.  Right now this supports flashing to
-> the eMMC/SD and SPI flash.
-> 
-> As usual, the capsule UUID is automatically generated.  You can get it
-> by enabling CONFIG_CMD_EFIDEBUG and running:
-> 
-> 	=> efidebug capsule esrt
-> 	========================================
-> 	ESRT: fw_resource_count=1
-> 	ESRT: fw_resource_count_max=1
-> 	ESRT: fw_resource_version=1
-> 	[entry 0]==============================
-> 	ESRT: fw_class=796180D4-AAB2-50F1-B16A-53DFF9CA89B2
-> 	ESRT: fw_type=unknown
-> 	ESRT: fw_version=0
-> 	ESRT: lowest_supported_fw_version=0
-> 	ESRT: capsule_flags=0
-> 	ESRT: last_attempt_version=0
-> 	ESRT: last_attempt_status=success
-> 	========================================
-> 
-> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
-> ---
-> Currently EFI capsule updates are only supported on the following
-> Amlogic-based boards:
-> 
->  - Libre Computer AML-S805X-AC
->  - Libre Computer AML-A311D-CC
->  - Libre Computer AML-S905D3-CC
-> 
-> This is done with board-specific configuration in board/libre-computer/.
-> 
-> With this patch, EFI capsule updates can now work on most of the other
-> Amlogic boards supported by u-boot, such as the Libre Computer
-> AML-S905X-CC, without the need for board-specific configuration
-> beforehand.
-> 
-> Please note that flashing to the eMMC bootX partitions is not yet
-> supported.
-> ---
-> Changes in v2:
->  - Don't run meson_setup_capsule unless CONFIG_DFU and CONFIG_EFI_LOADER
->    are enabled
->  - Coding style fixes
->  - Return when boot device is unsupported
->  - Link to v1: https://lore.kernel.org/r/20251007-meson-capsule-v1-1-6175f7b4cf9e@postmarketos.org
-> ---
->  arch/arm/include/asm/arch-meson/boot.h |  2 ++
->  arch/arm/mach-meson/Makefile           |  2 +-
->  arch/arm/mach-meson/board-common.c     |  5 +++
->  arch/arm/mach-meson/capsule.c          | 61 ++++++++++++++++++++++++++++++++++
->  4 files changed, 69 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/include/asm/arch-meson/boot.h b/arch/arm/include/asm/arch-meson/boot.h
-> index a11dfde719e3e48e10bcb1f6b1b84eb8586ca9e7..e66b45983fe2f5d81f83642c01502a72773213b2 100644
-> --- a/arch/arm/include/asm/arch-meson/boot.h
-> +++ b/arch/arm/include/asm/arch-meson/boot.h
-> @@ -21,6 +21,8 @@ int meson_get_boot_device(void);
->  
->  int meson_get_soc_rev(char *buff, size_t buff_len);
->  
-> +void meson_setup_capsule(void);
-> +
->  /**
->   * meson_get_socinfo - retrieve cpu_id of the Amlogic SoC
->   *
-> diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
-> index 535b0878b9105e7a83729bea65fa4cd70cd4beac..640921e2b8e9b4777f0b212991edea26de2987d4 100644
-> --- a/arch/arm/mach-meson/Makefile
-> +++ b/arch/arm/mach-meson/Makefile
-> @@ -2,7 +2,7 @@
->  #
->  # Copyright (c) 2016 Beniamino Galvani <b.galvani@gmail.com>
->  
-> -obj-y += board-common.o sm.o board-info.o
-> +obj-y += board-common.o sm.o board-info.o capsule.o
->  obj-$(CONFIG_MESON_GX) += board-gx.o
->  obj-$(CONFIG_MESON_AXG) += board-axg.o
->  obj-$(CONFIG_MESON_G12A) += board-g12a.o
-> diff --git a/arch/arm/mach-meson/board-common.c b/arch/arm/mach-meson/board-common.c
-> index 39774c43049a40ed11578086603717571bedd23b..e8012604c33376ee031b89bbfcf16ef34d6dec73 100644
-> --- a/arch/arm/mach-meson/board-common.c
-> +++ b/arch/arm/mach-meson/board-common.c
-> @@ -145,6 +145,11 @@ int board_late_init(void)
->  {
->  	meson_set_boot_source();
->  
-> +	if (CONFIG_IS_ENABLED(DFU) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-> +		/* Generate dfu_string for EFI capsule updates */
-> +		meson_setup_capsule();
-> +	}
-> +
->  	return meson_board_late_init();
->  }
->  
-> diff --git a/arch/arm/mach-meson/capsule.c b/arch/arm/mach-meson/capsule.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..6e968a59c2cf26db179e11caac1eb6c3f76b2d2c
-> --- /dev/null
-> +++ b/arch/arm/mach-meson/capsule.c
-> @@ -0,0 +1,61 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2025, Ferass El Hafidi <funderscore@postmarketos.org>
-> + */
-> +
-> +#include <asm/arch/boot.h>
-> +#include <dm.h>
-> +#include <efi_loader.h>
-> +#include <mmc.h>
-> +
-> +/*
-> + * To be able to support multiple devices and flash to the correct one we need
-> + * to automatically generate the dfu_string and fw_name to match the device we
-> + * are booted from. This is done by meson_setup_capsule() which is then called
-> + * in board_late_init(). Right now we support EFI capsule updates on SPI flash,
-> + * eMMC and SD cards.
-> + */
-> +struct efi_fw_image fw_images[] = {
-> +	{
-> +		.image_index = 1,
-> +	},
-> +};
-> +
-> +struct efi_capsule_update_info update_info = {
-> +	.dfu_string = NULL, /* to be set in meson_capsule_setup */
-> +	.num_images = ARRAY_SIZE(fw_images),
-> +	.images = fw_images,
-> +};
-> +
-> +/*
-> + * TODO: Support usecase e.g. FIT image on eMMC + SPL on SD.
-> + */
-> +void meson_setup_capsule(void)
-> +{
-> +	static char dfu_string[32] = { 0 };
-> +	int mmc_devnum = 0; /* mmc0 => SD card */
-> +	u32 max_size = 0x2000; /* 4 MB (MMC sectors are 512 bytes each) */
-> +	u32 offset = 0x1; /* offset for flashing to eMMC/SD */
-> +	int boot_device = meson_get_boot_device();
-> +
-> +	switch (boot_device) {
-> +	case BOOT_DEVICE_EMMC:
-> +		mmc_devnum = 1; /* mmc1 is always eMMC */
-> +		fallthrough;
-> +	case BOOT_DEVICE_SD:
-> +		snprintf(dfu_string, 32, "mmc %d=u-boot.bin raw %d %d", mmc_devnum, offset, max_size);
-> +		fw_images[0].fw_name = u"U_BOOT_MESON_MMC";
-> +		break;
-> +	case BOOT_DEVICE_SPI:
-> +		/* We assume there's only one SPI flash */
-> +		fw_images[0].fw_name = u"U_BOOT_MESON_SPI";
-> +		snprintf(dfu_string, 32, "sf 0:0=u-boot.bin raw 0 %d", max_size);
-> +		break;
-> +	default:
-> +		debug("setup_capsule: Boot device %d unsupported\n", boot_device);
-> +		return;
-> +	}
-> +	debug("EFI Capsule DFU string: %s", dfu_string);
-> +
-> +	update_info.dfu_string = dfu_string;
-> +}
-> 
-> ---
-> base-commit: 072264c4b3406aee50dad08355588577a547ab48
-> change-id: 20251007-meson-capsule-a19539e0a54e
-> 
-> Best regards,
+On Mon, Oct 13, 2025 at 04:12:03PM +0100, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 13 Oct 2025 at 15:15, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Oct 11, 2025 at 08:19:53AM +0100, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 10 Oct 2025 at 15:35, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Fri, Oct 10, 2025 at 11:36:10AM +0100, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Thu, 9 Oct 2025 at 18:30, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Oct 09, 2025 at 03:29:54AM -0600, Simon Glass wrote:
+> > > > > >
+> > > > > > > This function is the core of the bootstd iteration. Add some =
+debugging
+> > > > > > > for the decisions it makes along the way, to make it easier t=
+o track
+> > > > > > > what is going on.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > >
+> > > > > > > (no changes since v1)
+> > > > > > >
+> > > > > > >  boot/bootflow.c | 23 +++++++++++++++++++----
+> > > > > > >  1 file changed, 19 insertions(+), 4 deletions(-)
+> > > > > > >
+> > > > > > > diff --git a/boot/bootflow.c b/boot/bootflow.c
+> > > > > > > index 78df09f369d..de69e27bec7 100644
+> > > > > > > --- a/boot/bootflow.c
+> > > > > > > +++ b/boot/bootflow.c
+> > > > > > > @@ -193,8 +193,10 @@ static int iter_incr(struct bootflow_ite=
+r *iter)
+> > > > > > >       log_debug("entry: err=3D%d\n", iter->err);
+> > > > > > >       global =3D iter->doing_global;
+> > > > > > >
+> > > > > > > -     if (iter->err =3D=3D BF_NO_MORE_DEVICES)
+> > > > > > > +     if (iter->err =3D=3D BF_NO_MORE_DEVICES) {
+> > > > > > > +             log_debug("-> err: no more devices1\n");
+> > > > > > >               return BF_NO_MORE_DEVICES;
+> > > > > > > +     }
+> > > > > >
+> > > > > > Thinking more about what I said in the previous iteration about=
+ git
+> > > > > > blame history, ones like this should be log_msg_ret (the histor=
+y on
+> > > > > > "when did the test for =3D=3D BF_NO_MORE_DEVICES come from is u=
+nchanged, but
+> > > > > > now you can have debug statements when enabled).
+> > > > >
+> > > > > Yes we can add that as well, but I still want to have the log_deb=
+ug()
+> > > > > as this doesn't require enabling CONFIG_LOG_ERROR_RETURN. That fe=
+ature
+> > > > > produces a lot of output even in normal operation since it shows
+> > > > > errors dealt with by higher level code. It is really only designe=
+d to
+> > > > > find the source of a particular error when you are stuck.
+> > > > >
+> > > > > >
+> > > > > > [snip]
+> > > > > > > @@ -228,11 +234,15 @@ static int iter_incr(struct bootflow_it=
+er *iter)
+> > > > > > >
+> > > > > > >       if (iter->err !=3D BF_NO_MORE_PARTS) {
+> > > > > > >               /* ...select next partition  */
+> > > > > > > -             if (++iter->part <=3D iter->max_part)
+> > > > > > > +             if (++iter->part <=3D iter->max_part) {
+> > > > > > > +                     log_debug("-> next partition %d max %d\=
+n", iter->part,
+> > > > > > > +                               iter->max_part);
+> > > > > > >                       return 0;
+> > > > > > > +             }
+> > > > > >
+> > > > > > Shouldn't this be a debug message instead in the caller?
+> > > > >
+> > > > > I am trying to log_debug() every exit from this function...so you=
+ can
+> > > > > see the entry and then which path it took.
+> > > > >
+> > > > > >
+> > > > > > [snip]
+> > > > > > > @@ -326,8 +336,13 @@ static int iter_incr(struct bootflow_ite=
+r *iter)
+> > > > > > >       }
+> > > > > > >
+> > > > > > >       /* if there are no more bootdevs, give up */
+> > > > > > > -     if (ret)
+> > > > > > > +     if (ret) {
+> > > > > > > +             log_debug("-> no more bootdevs\n");
+> > > > > > >               return log_msg_ret("incr", BF_NO_MORE_DEVICES);
+> > > > > > > +     }
+> > > > > >
+> > > > > > Then do we actually need both a log_debug and a log_msg_ret?
+> > > > >
+> > > > > Please see above.
+> > > >
+> > > > I guess my question is, but why? Is this something that's going to =
+be
+> > > > debugged frequently? Why doesn't every function have meaningful text
+> > > > string log_debug messages, just in case? And then why bother with
+> > > > log_msg_ret at all?
+> > >
+> > > I have found myself in this function quite a few times, trying to work
+> > > out what it is up to, so I decided to add more debugging.
+> > >
+> > > Anyway, would you like to just drop this patch, or something else?
+> >
+> > I'd like to fix the underlying problem so that we don't have a similar
+> > discussion on your next series. As yes, I think in general all of these
+> > patches to add more detailed logging on top of log_msg_ret logging are
+> > too much. And I gather you're debugging these problems on real hardware
+> > where using some source level debugger with sandbox isn't an option?
+>=20
+> What is the underlying problem?
 
-Reviewed-by: Evgeny Bachinin <EABachinin@salutedevices.com>
+Patch and code churn (and so history churn) for no functional changes
+and increased reviewer load.
 
+> The debugging was useful with the EFI app where it is sort-of possible
+> to use a debugger, but is a bit painful. I ended up comparing logs to
+> figure it out. Debuggers are not easy when the function being debugged
+> is called dozens of times.
+>=20
+> I can imagine it being useful when someone reports a problem with the
+> iteration...we could just turn on the option and the person could post
+> a dump.
+>=20
+> Anyway, I'm happy to drop this patch.
+
+Thanks.
+
+--=20
+Tom
+
+--5SUsWpnhC5xLtUpO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO0vXwAKCRAr4qD1Cr/k
+Cq6BAQDkZCPOiznsD1g+lYyLLwBOU/bPUlwaier659MhcnUNdwD/UQsmG31X7MFb
+1DoHJ9ZqoYK1//fofapwGjBLx9tzJwU=
+=Em0/
+-----END PGP SIGNATURE-----
+
+--5SUsWpnhC5xLtUpO--
