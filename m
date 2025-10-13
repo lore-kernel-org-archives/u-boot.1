@@ -4,82 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E9B4CCD18D
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 15:12:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BB0CCD183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 15:19:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3980B838D7;
-	Mon, 13 Oct 2025 17:12:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CDB8883677;
+	Mon, 13 Oct 2025 17:19:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DnnWZPl0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wqvqOa6Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E01D8382A; Mon, 13 Oct 2025 17:12:21 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id A5C3B83835; Mon, 13 Oct 2025 17:19:33 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C216838D7
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 17:12:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C373E83621
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 17:19:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-637e9f9f9fbso8368083a12.0
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 08:12:19 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-46faa5b0372so26619035e9.1
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 08:19:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760368339; x=1760973139; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qqv9V++8+3noaS09ndlWfdz9SEc2GpjApA8wKp1sr5U=;
- b=DnnWZPl02qRIY/qv/Mf8EZav21YmA2FOHJ0qIlmI8W4JYcQ3Ff9MuGvjBt6SSVKsqq
- rLPVRlYveA+Op+LWFDvLN1qBfLVZkiRVz0y8ZNNqQ/w8Zcg80ec2AH4PTCzSDu4SKDq6
- oXIuCn7qQICe1ESPoz7ed/DHeAirqDPAb+RPc=
+ d=linaro.org; s=google; t=1760368770; x=1760973570; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=qyDQibH3GP02Qld7r/g/yjwGFwxvaPZIL4OlSKFyeHk=;
+ b=wqvqOa6Ytovh2GG5KFvS+CA1z8JqSXia+AGFPr5tSljwfxPTVMFRpRJEbSKyeDxKgj
+ 2S49H2zECfXb+xcl4KAKta4JOYTKR38RbWYRMJ08kvkJnqQO0sEQWjcofXh6XlRlgpAr
+ Mkplxxv/KPUHT6Qo2qEX+ceooa43zQo13PDpiXKb72CQLata0PtuvINp3u88o5TiVpSV
+ 0ki+hYyK3DZQBYB8Zv8XAeO5n5YMC3dEoY7eR8VjVpSEehuSvAmZiUNw6Hi8akw8Eh91
+ wO1JDB9Y19n9F1LACoLzr9wXX9wj87iq69YghlTtE9tfZABZSDrgiW2SKN+HAGwoDp0J
+ wwLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760368339; x=1760973139;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qqv9V++8+3noaS09ndlWfdz9SEc2GpjApA8wKp1sr5U=;
- b=SVVW+77FYfvnL6GxQcKCEW77YECCwhHU3o++PT9I27ztHPEcnxZkfb95eRX//izXgr
- duT+36lWlgaIeCmsKvU7FVVXgDkUfmZW6sjV9Br/7m+a4yGWA3b1eEp7uYkkvHEQahS2
- Wu486yZZtI8mh6njmo+P27LcpOg9Nm23ZKHLIC/Rdwk2posgtEDOTyywBrt9hwnvleqT
- 00KV/UZ1SOJaBknSEe3F1Cw6FQFH2ylTXuSPyUg/Gvb07RJ2J66/z7BIl0KG5iYb8dWE
- ZRYR/9mBsCbIrNWOH1CYDGxQf0tiwGQMO6B539qLxZ2va0ZyAW+xdGngX+CAfosZLpT2
- yt8A==
-X-Gm-Message-State: AOJu0YzwF+5KWvxuwdZyO50lnXm4gv32TgKXS6Pj7PHX+YbmEr55IhFH
- v39q7SGEefDAuSBQgvdQMBjLzP1LE51efCgmxzrtYXf6fQ/C+4z1tBvGccNO4lU3j5zBncE/gc2
- Rc+TQ/QiT9wIv/rGGXvOPaNw5PuZlokTgC7Ty8BOJ
-X-Gm-Gg: ASbGnctN/NBStHAqh8I831hEoMNgxI5FCjrZK1aScehfVD8q2N0FwrOylIL6QgKhJqY
- Kc3v4acQyxUk2H22v6+XmEsQrHfPZ2XHWkFaft5RhEsApDIW4YmiC16v6etwOAZrKLYArKZhko/
- txzW9By/s1burwb28UfMYByn3z43VW5FnoTV44SacsBhmbAbBkDMdoHTqbgDdoOqoHZI1Tr0unV
- DQOPdc6dPE6ZT045B484BXYtM9kDovurR8+bJHfrz0ETmJt3qLmZa2xTdR+HS/TKlrM/w==
-X-Google-Smtp-Source: AGHT+IHlkuoKYScKngQKzdr9LWb13K8EkojvFechA1Lzo0f94eo2aPnehDSdIq/tpiuWrXqIXUDsWIj90daKAw/MOfg=
-X-Received: by 2002:a05:6402:278f:b0:637:e022:5280 with SMTP id
- 4fb4d7f45d1cf-639d5b577a9mr19083918a12.5.1760368338522; Mon, 13 Oct 2025
- 08:12:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1760368770; x=1760973570;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=qyDQibH3GP02Qld7r/g/yjwGFwxvaPZIL4OlSKFyeHk=;
+ b=ucfr5ZI+l4CDSMzOR3q+9V7O1LK1zBuTZlF97mp+yh7w9BIloxG8tc9fY2OVNg5hnY
+ LJ/EkhNvFNTgPvO9U6SQ3peRChaLhdr12n90nPDUaA7AOnsazIFzocdyQpMRB8oDMPiv
+ 2PKkmR2IODtu9Yx91bpdxT0ooe0j6oWarQAauB3UmIWppCkj1D4n6Ssu5v1C6bRwZVga
+ JRepwvzyGobL83AJ6CxGzawQLk3bg/NqyMxLtJKWvOaVpWUsPB78+YBuCSg1W1uU78Ro
+ u7uXnfZw6YlcOxiTDHyk7WXMxcNmgIr0eX3aRddtoFJZZ9a+dYc2RosVfR/53dQf8LRU
+ A76Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWhJba/LzDSY+4vFkDeZM9dGxHvdasuPERVDkwQXLbHw4wPGizI3pCMUi8BDgFkTWTfrtk+rvw=@lists.denx.de
+X-Gm-Message-State: AOJu0YyhJ0uLxe+TWEiEj6dbrwAuvsqaojzHBmUjxYAn1i3NxX+kmFRF
+ 387ZiMQm++hH4XhDWFSqsKRcEI5+cM08WKjgA4sQ6apoOO5MzQZCNeUtgY9OLjb2UGk=
+X-Gm-Gg: ASbGnctlq2tGgujOvvfyoiklFdS1yzJQQ21t4qEwRLleb/UiIQHmGU7WGP7J1liRlR7
+ gaZyoKk2WcAkjeHPyjd/Cbr2O+V8L5+TfQGbm/CTVmuklG4tnw/cyUbM8WON+vgFkvtvrs3Ktpa
+ KWusWGgd+cRYjjajgHxTj1tm8K4/V2qC5Tkw9Fb93B2p/h6GnWm8AHCvD3m23pJgfTPd4DRK9+7
+ N/gGmBOdBQQmUB/BlDOJs5G6NSZ0Xh7Owg1NL1LpbCg/bUd1zujiwap5NGyqvEcLhSPPuIZaiB6
+ xbQoHBr2S8pgYW02HqIcnQVmlpr6FCg1/mmAA3RzF0HuOFW+ShNeJF4C/8Vvgvlg1YYSIG/2moQ
+ O0rhiIxQDMN1r3JK+pmSJrwZo6RqeQnwvBX4t9zWTOAr6UUdI1AoYctGDMSnkKCmum2o+BgC3xF
+ 3bPNscl2Y6AFnUwkAi5+Wo7NHd/G0B9lwE66Dq2qP8eN8=
+X-Google-Smtp-Source: AGHT+IHbjvXCpyeaQgq0b72GdntppyngaiZxgYqoIPBNCOZIW4AU2SjimyQu5qm1FYnw4VdQhXTKPA==
+X-Received: by 2002:a05:600c:888d:b0:468:9e79:bee0 with SMTP id
+ 5b1f17b1804b1-46fa9b939e4mr105853285e9.0.1760368769869; 
+ Mon, 13 Oct 2025 08:19:29 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:3d9:2080:4087:80b7:cd5a:8def?
+ ([2a01:e0a:3d9:2080:4087:80b7:cd5a:8def])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-426ce5833dcsm18698881f8f.19.2025.10.13.08.19.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 13 Oct 2025 08:19:29 -0700 (PDT)
+Message-ID: <e00f5976-ab51-481c-8460-07a7a945acd6@linaro.org>
+Date: Mon, 13 Oct 2025 17:19:28 +0200
 MIME-Version: 1.0
-References: <20251009092959.260121-1-sjg@chromium.org>
- <20251009092959.260121-4-sjg@chromium.org>
- <20251009173052.GQ298503@bill-the-cat>
- <CAFLszTi2HuZLmebJB+kUsL3_J+aqVdCdP5XFSEoY1Dy5C3E2wA@mail.gmail.com>
- <20251010143528.GZ298503@bill-the-cat>
- <CAFLszTh+K2Yr0OtZ_cNk9YrrGxg3KAv2SEppK=a-g1sw=hncLg@mail.gmail.com>
- <20251013141544.GD6113@bill-the-cat>
-In-Reply-To: <20251013141544.GD6113@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 13 Oct 2025 16:12:03 +0100
-X-Gm-Features: AS18NWBuiptx8QkbLdy3-2Srvnq5Yus8mdaHi0plq7735B2LAklzx1yYiN2rVfs
-Message-ID: <CAFLszTiOrWfEboYV+=xf0t1wdqeEhbo-SdjAquNCncMRxTur6A@mail.gmail.com>
-Subject: Re: [PATCH v4 3/4] boot: Add more debugging to iter_incr()
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v2] arm: meson: add support for EFI capsule updates
+To: Ferass El Hafidi <funderscore@postmarketos.org>,
+ u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Viacheslav Bocharov <adeep@lexina.in>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Ferass El Hafidi <funderscore@tauchgang.dev>,
+ ~postmarketos/upstreaming@lists.sr.ht
+References: <20251011-meson-capsule-v2-1-53a8be6595ce@postmarketos.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20251011-meson-capsule-v2-1-53a8be6595ce@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,126 +129,187 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 10/11/25 20:16, Ferass El Hafidi wrote:
+> Previously, few Amlogic devices supported EFI capsule updates.
+> Generally only the Libre Computer ones with SPI flash supported it,
+> thanks to board-specific code.
+> 
+> This commit commonises capsule update support across supported
+> Amlogic boards.  Similar to Qualcomm's support for it, the dfu string
+> and firmware name is automatically generated at runtime depending on
+> which device we are booted from.  Right now this supports flashing to
+> the eMMC/SD and SPI flash.
+> 
+> As usual, the capsule UUID is automatically generated.  You can get it
+> by enabling CONFIG_CMD_EFIDEBUG and running:
+> 
+> 	=> efidebug capsule esrt
+> 	========================================
+> 	ESRT: fw_resource_count=1
+> 	ESRT: fw_resource_count_max=1
+> 	ESRT: fw_resource_version=1
+> 	[entry 0]==============================
+> 	ESRT: fw_class=796180D4-AAB2-50F1-B16A-53DFF9CA89B2
+> 	ESRT: fw_type=unknown
+> 	ESRT: fw_version=0
+> 	ESRT: lowest_supported_fw_version=0
+> 	ESRT: capsule_flags=0
+> 	ESRT: last_attempt_version=0
+> 	ESRT: last_attempt_status=success
+> 	========================================
+> 
+> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+> ---
+> Currently EFI capsule updates are only supported on the following
+> Amlogic-based boards:
+> 
+>   - Libre Computer AML-S805X-AC
+>   - Libre Computer AML-A311D-CC
+>   - Libre Computer AML-S905D3-CC
+> 
+> This is done with board-specific configuration in board/libre-computer/.
+> 
+> With this patch, EFI capsule updates can now work on most of the other
+> Amlogic boards supported by u-boot, such as the Libre Computer
+> AML-S905X-CC, without the need for board-specific configuration
+> beforehand.
+> 
+> Please note that flashing to the eMMC bootX partitions is not yet
+> supported.
+> ---
+> Changes in v2:
+>   - Don't run meson_setup_capsule unless CONFIG_DFU and CONFIG_EFI_LOADER
+>     are enabled
+>   - Coding style fixes
+>   - Return when boot device is unsupported
+>   - Link to v1: https://lore.kernel.org/r/20251007-meson-capsule-v1-1-6175f7b4cf9e@postmarketos.org
+> ---
+>   arch/arm/include/asm/arch-meson/boot.h |  2 ++
+>   arch/arm/mach-meson/Makefile           |  2 +-
+>   arch/arm/mach-meson/board-common.c     |  5 +++
+>   arch/arm/mach-meson/capsule.c          | 61 ++++++++++++++++++++++++++++++++++
+>   4 files changed, 69 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-meson/boot.h b/arch/arm/include/asm/arch-meson/boot.h
+> index a11dfde719e3e48e10bcb1f6b1b84eb8586ca9e7..e66b45983fe2f5d81f83642c01502a72773213b2 100644
+> --- a/arch/arm/include/asm/arch-meson/boot.h
+> +++ b/arch/arm/include/asm/arch-meson/boot.h
+> @@ -21,6 +21,8 @@ int meson_get_boot_device(void);
+>   
+>   int meson_get_soc_rev(char *buff, size_t buff_len);
+>   
+> +void meson_setup_capsule(void);
+> +
+>   /**
+>    * meson_get_socinfo - retrieve cpu_id of the Amlogic SoC
+>    *
+> diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
+> index 535b0878b9105e7a83729bea65fa4cd70cd4beac..640921e2b8e9b4777f0b212991edea26de2987d4 100644
+> --- a/arch/arm/mach-meson/Makefile
+> +++ b/arch/arm/mach-meson/Makefile
+> @@ -2,7 +2,7 @@
+>   #
+>   # Copyright (c) 2016 Beniamino Galvani <b.galvani@gmail.com>
+>   
+> -obj-y += board-common.o sm.o board-info.o
+> +obj-y += board-common.o sm.o board-info.o capsule.o
+>   obj-$(CONFIG_MESON_GX) += board-gx.o
+>   obj-$(CONFIG_MESON_AXG) += board-axg.o
+>   obj-$(CONFIG_MESON_G12A) += board-g12a.o
+> diff --git a/arch/arm/mach-meson/board-common.c b/arch/arm/mach-meson/board-common.c
+> index 39774c43049a40ed11578086603717571bedd23b..e8012604c33376ee031b89bbfcf16ef34d6dec73 100644
+> --- a/arch/arm/mach-meson/board-common.c
+> +++ b/arch/arm/mach-meson/board-common.c
+> @@ -145,6 +145,11 @@ int board_late_init(void)
+>   {
+>   	meson_set_boot_source();
+>   
+> +	if (CONFIG_IS_ENABLED(DFU) && CONFIG_IS_ENABLED(EFI_LOADER)) {
+> +		/* Generate dfu_string for EFI capsule updates */
+> +		meson_setup_capsule();
+> +	}
+> +
+>   	return meson_board_late_init();
+>   }
+>   
+> diff --git a/arch/arm/mach-meson/capsule.c b/arch/arm/mach-meson/capsule.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..6e968a59c2cf26db179e11caac1eb6c3f76b2d2c
+> --- /dev/null
+> +++ b/arch/arm/mach-meson/capsule.c
+> @@ -0,0 +1,61 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright (c) 2025, Ferass El Hafidi <funderscore@postmarketos.org>
+> + */
+> +
+> +#include <asm/arch/boot.h>
+> +#include <dm.h>
+> +#include <efi_loader.h>
+> +#include <mmc.h>
+> +
+> +/*
+> + * To be able to support multiple devices and flash to the correct one we need
+> + * to automatically generate the dfu_string and fw_name to match the device we
+> + * are booted from. This is done by meson_setup_capsule() which is then called
+> + * in board_late_init(). Right now we support EFI capsule updates on SPI flash,
+> + * eMMC and SD cards.
+> + */
+> +struct efi_fw_image fw_images[] = {
+> +	{
+> +		.image_index = 1,
+> +	},
+> +};
+> +
+> +struct efi_capsule_update_info update_info = {
+> +	.dfu_string = NULL, /* to be set in meson_capsule_setup */
+> +	.num_images = ARRAY_SIZE(fw_images),
+> +	.images = fw_images,
+> +};
+> +
+> +/*
+> + * TODO: Support usecase e.g. FIT image on eMMC + SPL on SD.
+> + */
+> +void meson_setup_capsule(void)
+> +{
+> +	static char dfu_string[32] = { 0 };
+> +	int mmc_devnum = 0; /* mmc0 => SD card */
+> +	u32 max_size = 0x2000; /* 4 MB (MMC sectors are 512 bytes each) */
+> +	u32 offset = 0x1; /* offset for flashing to eMMC/SD */
+> +	int boot_device = meson_get_boot_device();
+> +
+> +	switch (boot_device) {
+> +	case BOOT_DEVICE_EMMC:
+> +		mmc_devnum = 1; /* mmc1 is always eMMC */
+> +		fallthrough;
+> +	case BOOT_DEVICE_SD:
+> +		snprintf(dfu_string, 32, "mmc %d=u-boot.bin raw %d %d", mmc_devnum, offset, max_size);
+> +		fw_images[0].fw_name = u"U_BOOT_MESON_MMC";
+> +		break;
+> +	case BOOT_DEVICE_SPI:
+> +		/* We assume there's only one SPI flash */
+> +		fw_images[0].fw_name = u"U_BOOT_MESON_SPI";
+> +		snprintf(dfu_string, 32, "sf 0:0=u-boot.bin raw 0 %d", max_size);
+> +		break;
+> +	default:
+> +		debug("setup_capsule: Boot device %d unsupported\n", boot_device);
+> +		return;
+> +	}
+> +	debug("EFI Capsule DFU string: %s", dfu_string);
+> +
+> +	update_info.dfu_string = dfu_string;
+> +}
+> 
+> ---
+> base-commit: 072264c4b3406aee50dad08355588577a547ab48
+> change-id: 20251007-meson-capsule-a19539e0a54e
+> 
+> Best regards,
 
-On Mon, 13 Oct 2025 at 15:15, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Oct 11, 2025 at 08:19:53AM +0100, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 10 Oct 2025 at 15:35, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Oct 10, 2025 at 11:36:10AM +0100, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 9 Oct 2025 at 18:30, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Oct 09, 2025 at 03:29:54AM -0600, Simon Glass wrote:
-> > > > >
-> > > > > > This function is the core of the bootstd iteration. Add some debugging
-> > > > > > for the decisions it makes along the way, to make it easier to track
-> > > > > > what is going on.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v1)
-> > > > > >
-> > > > > >  boot/bootflow.c | 23 +++++++++++++++++++----
-> > > > > >  1 file changed, 19 insertions(+), 4 deletions(-)
-> > > > > >
-> > > > > > diff --git a/boot/bootflow.c b/boot/bootflow.c
-> > > > > > index 78df09f369d..de69e27bec7 100644
-> > > > > > --- a/boot/bootflow.c
-> > > > > > +++ b/boot/bootflow.c
-> > > > > > @@ -193,8 +193,10 @@ static int iter_incr(struct bootflow_iter *iter)
-> > > > > >       log_debug("entry: err=%d\n", iter->err);
-> > > > > >       global = iter->doing_global;
-> > > > > >
-> > > > > > -     if (iter->err == BF_NO_MORE_DEVICES)
-> > > > > > +     if (iter->err == BF_NO_MORE_DEVICES) {
-> > > > > > +             log_debug("-> err: no more devices1\n");
-> > > > > >               return BF_NO_MORE_DEVICES;
-> > > > > > +     }
-> > > > >
-> > > > > Thinking more about what I said in the previous iteration about git
-> > > > > blame history, ones like this should be log_msg_ret (the history on
-> > > > > "when did the test for == BF_NO_MORE_DEVICES come from is unchanged, but
-> > > > > now you can have debug statements when enabled).
-> > > >
-> > > > Yes we can add that as well, but I still want to have the log_debug()
-> > > > as this doesn't require enabling CONFIG_LOG_ERROR_RETURN. That feature
-> > > > produces a lot of output even in normal operation since it shows
-> > > > errors dealt with by higher level code. It is really only designed to
-> > > > find the source of a particular error when you are stuck.
-> > > >
-> > > > >
-> > > > > [snip]
-> > > > > > @@ -228,11 +234,15 @@ static int iter_incr(struct bootflow_iter *iter)
-> > > > > >
-> > > > > >       if (iter->err != BF_NO_MORE_PARTS) {
-> > > > > >               /* ...select next partition  */
-> > > > > > -             if (++iter->part <= iter->max_part)
-> > > > > > +             if (++iter->part <= iter->max_part) {
-> > > > > > +                     log_debug("-> next partition %d max %d\n", iter->part,
-> > > > > > +                               iter->max_part);
-> > > > > >                       return 0;
-> > > > > > +             }
-> > > > >
-> > > > > Shouldn't this be a debug message instead in the caller?
-> > > >
-> > > > I am trying to log_debug() every exit from this function...so you can
-> > > > see the entry and then which path it took.
-> > > >
-> > > > >
-> > > > > [snip]
-> > > > > > @@ -326,8 +336,13 @@ static int iter_incr(struct bootflow_iter *iter)
-> > > > > >       }
-> > > > > >
-> > > > > >       /* if there are no more bootdevs, give up */
-> > > > > > -     if (ret)
-> > > > > > +     if (ret) {
-> > > > > > +             log_debug("-> no more bootdevs\n");
-> > > > > >               return log_msg_ret("incr", BF_NO_MORE_DEVICES);
-> > > > > > +     }
-> > > > >
-> > > > > Then do we actually need both a log_debug and a log_msg_ret?
-> > > >
-> > > > Please see above.
-> > >
-> > > I guess my question is, but why? Is this something that's going to be
-> > > debugged frequently? Why doesn't every function have meaningful text
-> > > string log_debug messages, just in case? And then why bother with
-> > > log_msg_ret at all?
-> >
-> > I have found myself in this function quite a few times, trying to work
-> > out what it is up to, so I decided to add more debugging.
-> >
-> > Anyway, would you like to just drop this patch, or something else?
->
-> I'd like to fix the underlying problem so that we don't have a similar
-> discussion on your next series. As yes, I think in general all of these
-> patches to add more detailed logging on top of log_msg_ret logging are
-> too much. And I gather you're debugging these problems on real hardware
-> where using some source level debugger with sandbox isn't an option?
-
-What is the underlying problem?
-
-The debugging was useful with the EFI app where it is sort-of possible
-to use a debugger, but is a bit painful. I ended up comparing logs to
-figure it out. Debuggers are not easy when the function being debugged
-is called dozens of times.
-
-I can imagine it being useful when someone reports a problem with the
-iteration...we could just turn on the option and the person could post
-a dump.
-
-Anyway, I'm happy to drop this patch.
-
-Regards,
-Simon
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
