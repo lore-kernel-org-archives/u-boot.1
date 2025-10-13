@@ -4,64 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89694CCD184
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 03:58:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C280CCD187
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 04:56:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF29B807B1;
-	Tue, 14 Oct 2025 05:58:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CFF93807B1;
+	Tue, 14 Oct 2025 06:56:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timmermann.space
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UCpRsJKf";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53D58809A5; Tue, 14 Oct 2025 05:58:09 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 845CA80422
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 05:58:06 +0200 (CEST)
+ id 165AD838D7; Tue, 14 Oct 2025 01:16:26 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 344E1837E2
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 01:16:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=timmermann.space
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59E3w4fP1054249;
- Mon, 13 Oct 2025 22:58:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760414284;
- bh=qZL2AHMQLFGFg/R1s10g9R9MwGZ2MLEdYdujvERBLQE=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=UCpRsJKfhCoFBzTS97T2uz/7qwZAmbl9K0y6YAcdjgULRGopmYbHP328LiXIWr4zX
- G6j7E18nGdnfQkvQOYBMxv7HSnoZav33nKEny0r/bPDpx/YgxBENYxvy+gDhDRGT4H
- S4Z2v10rY1N9mhtaSVsL5HAb6q4YZcJLM/WxhPO8=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59E3w4Zv149543
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Mon, 13 Oct 2025 22:58:04 -0500
-Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Mon, 13
- Oct 2025 22:58:03 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
- (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 13 Oct 2025 22:58:04 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59E3w23g3153407;
- Mon, 13 Oct 2025 22:58:03 -0500
+ spf=pass smtp.mailfrom=uboot@timmermann.space
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cltWp2l8Tz9tMS;
+ Tue, 14 Oct 2025 01:16:22 +0200 (CEST)
+Authentication-Results: outgoing_mbo_mout; dkim=none;
+ spf=pass (outgoing_mbo_mout: domain of uboot@timmermann.space designates
+ 2001:67c:2050:b231:465::102 as permitted sender)
+ smtp.mailfrom=uboot@timmermann.space
+From: Lukas Timmermann <uboot@timmermann.space>
+To: u-boot@lists.denx.de
+Cc: Lukas Timmermann <uboot@timmermann.space>
+Subject: [RFC PATCH 0/2] Modern pinctrl for Exynos5250 devices
+Date: Tue, 14 Oct 2025 01:14:00 +0200
+Message-ID: <20251013231542.821799-1-uboot@timmermann.space>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Tue, 14 Oct 2025 09:28:02 +0530
-Message-ID: <DDHQS4TT6S6Y.1N61MTMFVTJBP@ti.com>
-CC: <trini@konsulko.com>
-Subject: Re: [PATCH] arm: baltos: enable TI_SYSC and CLK drivers
-From: Anshul Dalal <anshuld@ti.com>
-To: <yegorslists@googlemail.com>, <u-boot@lists.denx.de>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251013130902.74719-1-yegorslists@googlemail.com>
-In-Reply-To: <20251013130902.74719-1-yegorslists@googlemail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4cltWp2l8Tz9tMS
+X-Mailman-Approved-At: Tue, 14 Oct 2025 06:56:55 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,37 +60,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yegor,
+This patch adds the necessary files to use a modern pinctrl driver
+with an exynos5250 SoC. The changes are well tested and are working.
+GPIO isn't implemented right now, as the older s5p_gpio driver needs
+to be disabled for the newer driver to work.
 
-On Mon Oct 13, 2025 at 6:39 PM IST, yegorslists wrote:
-> From: Yegor Yefremov <yegorslists@googlemail.com>
->
+All changes were tested with soon-to-be upstreamed DTs for the
+Linux kernel. The tested device is a Google Nexus 10 (samsung-manta).
+U-Boot was ported to that device and will be upstreamed into U-Boot
+soon.
 
-Could you explain a bit more about why this change is needed in the
-commit description?
+I don't have much experience with the mailing list workflow, u-boot
+or driver development in general. I apologize for any mistakes I might
+do.
 
-Regards,
-Anshul
+Signed-off-by: Lukas Timmermann <uboot@timmermann.space>
 
-> Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
-> ---
->  configs/am335x_baltos_defconfig | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/configs/am335x_baltos_defconfig b/configs/am335x_baltos_defc=
-onfig
-> index 5c43503ff32..93a5fb94adf 100644
-> --- a/configs/am335x_baltos_defconfig
-> +++ b/configs/am335x_baltos_defconfig
-> @@ -53,8 +53,9 @@ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=3Dy
->  CONFIG_VERSION_VARIABLE=3Dy
->  CONFIG_NET_RETRY_COUNT=3D10
->  CONFIG_BOOTP_SEND_HOSTNAME=3Dy
-> -# CONFIG_TI_SYSC is not set
->  CONFIG_BOOTCOUNT_LIMIT=3Dy
-> +CONFIG_CLK=3Dy
-> +CONFIG_CLK_TI_CTRL=3Dy
->  CONFIG_DM_I2C=3Dy
->  CONFIG_SPL_SYS_I2C_LEGACY=3Dy
->  CONFIG_SYS_I2C_EEPROM_ADDR=3D0x50
+Lukas Timmermann (2):
+  gpio: s5p_gpio: Add config option for s5p_gpio driver
+  pinctrl: exynos: add exynos5250 driver
 
+ MAINTAINERS                                 |   5 +
+ arch/arm/mach-exynos/pinmux.c               |  18 ++++
+ drivers/gpio/Kconfig                        |   7 ++
+ drivers/gpio/Makefile                       |   2 +-
+ drivers/pinctrl/exynos/Kconfig              |   8 ++
+ drivers/pinctrl/exynos/Makefile             |   1 +
+ drivers/pinctrl/exynos/pinctrl-exynos5250.c | 100 ++++++++++++++++++++
+ 7 files changed, 140 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/pinctrl/exynos/pinctrl-exynos5250.c
+
+-- 
+2.51.0
+
+base-commit: ebf4cce0b009e45b1d4e778603b74fae5ea29678
+branch: lat3st/samsung-manta
