@@ -4,91 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DBF7CCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 15:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3069CCD18D
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 15:40:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A6E83621;
-	Mon, 13 Oct 2025 17:34:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D9B0838C1;
+	Mon, 13 Oct 2025 17:40:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BaZIogEI";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="fBDWLdqX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 161E083677; Mon, 13 Oct 2025 17:34:43 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0C00883835; Mon, 13 Oct 2025 11:32:52 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E90EA835C6
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 17:34:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7c0e357ab51so3753184a34.2
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 08:34:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760369679; x=1760974479; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=/qhzOEppngBktT8AXHXBHbzdaPl/4Ht42jigu/mCGl8=;
- b=BaZIogEIhleC/gi05L/gH3R+9itJkLJOVB3/6Uup2+taYz6GcFEl8qNh/dEOB101wA
- xhuQfjtUr6leqbeJgQOobiHZK0rnqUSOItCn3x1RrDqI5ALooyE9CMWylry0XmeasSfx
- r2k7slatQxRlEIo794G1vDbaI04Qkf3iLje80=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760369679; x=1760974479;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=/qhzOEppngBktT8AXHXBHbzdaPl/4Ht42jigu/mCGl8=;
- b=t7G/ecpYVlcQByPImkHVUhMULeYIqh4X8gKRQu5tlUloPbRFfm1y9yAMx7b6wyeahc
- 903jUcQ2xYAP11b1RN8RqvdAPggzX1St4wztfi/zXR4ts81noOClSGlYyZ2mk+LLnFgw
- +nPrB/VjSXF2+QWy3vgcrD8WzuUnRufEuQo18KqqrDGOuO4/F+I25uoXN7sIYt0iUK5q
- /rivT76cEY2Upun+XNhYtI5sDJdhPHwccQHFarSvLdYMYEnMSPl3SEy459oB9Ea0aFH4
- 8gjizpcwoTORmgH9SQkymBeDIASyOltaLzuF4+906O4xsDoWCVq8F2/7X5fqQafYKPIp
- KkXQ==
-X-Gm-Message-State: AOJu0YzIinEx8yzGVw+aAHoSiQYadUTPo/Qnj5tbToA3gk0BKaMvu9My
- JXVXZ80M9K3Bv95Lg2h+6MkwDs0PIjdKAZUQE9B8/Ho7br1qEkVeyjm2/nL/YRhZua4=
-X-Gm-Gg: ASbGncuAkiM/Vg3450H4rNDtItAic+43lBY71X1H9ox5N0JdTNaiO5n775Is8FOCHpe
- JBh900PduXAHmQA+0VkpWeme6oF0kyW8nbJ5t77CNvTPrcIaBUoSbT6+a5qEYitaBXlxAxZB4ke
- FOih8c5BCTwHE/NfNSyQQ/rBhRyxvVEGBVCME8rBEjK+9gZ0jaFLd4jU6qtAvUQ/elmjnRkExER
- cEzWGkyc2U33YdBUj/JN8yYDRwr8MFciOTa+06VGvceGUXU3OOgJM93YkccWqs8s81Jkl+wHT/x
- eorFx45LzIBdiietlAWh0C/UmKzGNqCdy2W4NHUO+IgGYK48AVQ+ZlMxmHC05IBfXr0MR/nmGY3
- p+S5IoL+PVd8iLPtGzwhsnrkSzxW7R2AulcCjI7SVk/a5PwhK/Vcz+4QBvBXUlU7QtjnOIke203
- l8CE0VWERobJ4/s6s=
-X-Google-Smtp-Source: AGHT+IEbVoetUAjVbOZbDfZh7pJ5lKam6+sCzy1cPUjBKnyG/8M5DQ3g0IeGj8u+fkHZ7HvNtYnOOg==
-X-Received: by 2002:a05:6808:bce:b0:438:bdb0:89b6 with SMTP id
- 5614622812f47-4417b3d487amr9679515b6e.34.1760369679601; 
- Mon, 13 Oct 2025 08:34:39 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4419894eafdsm2500480b6e.20.2025.10.13.08.34.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Oct 2025 08:34:38 -0700 (PDT)
-Date: Mon, 13 Oct 2025 09:34:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Peter Robinson <pbrobinson@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>
-Subject: Re: [PATCH v5 2/4] boot: Move obtaining the label into a common file
-Message-ID: <20251013153436.GI6113@bill-the-cat>
-References: <20251012064412.2892979-1-sjg@chromium.org>
- <20251012064412.2892979-3-sjg@chromium.org>
- <20251013141339.GC6113@bill-the-cat>
- <CAFLszThGU4_+=jUc09HvZSMpk3XyMuyXv_hquY=dTRECS2xOYw@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 9215D83741
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 11:32:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=37475b72b=Dharma.B@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1760347970; x=1791883970;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=ZM7o9D4w41IdAS9WH8WIXAsdMHKyLPStgGpHhCv0HCg=;
+ b=fBDWLdqXKxly6/YBgKRsC9RoZYrHr1IIAVkUr19toMkPUIfCzsOd3M5H
+ tQ9azJQ4jB5bzhe0GNqGCgg9az90cjBwd3XOMoZFozqBXMIZXuzr4GhQk
+ XxwBN7VU/bCzspmi25nVRf8phw2kjOwJIiTXeCv4Cy9O5fi4RSjfmQmah
+ lU1ipTaaeWOQr114jUVTmALM6To80O8qjzGZNtzocCZ3mHSUfH5xHqm7R
+ rc5r2bSKrWTg0j2mTPgfcIgNkNv2QAz04+E3J+FrBuTvQa8WSykwKUi2M
+ gHEOk7uTkKH5rLIXauIGXbbeI40qzs/Y9L1jKPL4nPy2suFDkrlp+o2JK Q==;
+X-CSE-ConnectionGUID: 3JXCmaLLTQesVdpj+bVk8g==
+X-CSE-MsgGUID: iHbKtj1oQae9pL1oo/DjDA==
+X-IronPort-AV: E=Sophos;i="6.19,225,1754982000"; d="scan'208";a="279054317"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 13 Oct 2025 02:32:48 -0700
+Received: from chn-vm-ex1.mchp-main.com (10.10.87.30) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.58; Mon, 13 Oct 2025 02:32:27 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.87.152) by
+ chn-vm-ex1.mchp-main.com (10.10.87.30) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.2.2562.27; Mon, 13 Oct 2025 02:32:27 -0700
+Received: from che-lt-i70843lx.microchip.com (10.10.85.11) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
+ 15.1.2507.58 via Frontend Transport; Mon, 13 Oct 2025 02:32:24 -0700
+From: Dharma Balasubiramani <dharma.b@microchip.com>
+To: <u-boot@lists.denx.de>
+CC: Dharma Balasubiramani <dharma.b@microchip.com>, Eugen Hristev
+ <eugen.hristev@linaro.org>, Miquel Raynal <miquel.raynal@bootlin.com>, "Tom
+ Rini" <trini@konsulko.com>
+Subject: [PATCH v2] ARM: dts: sam9x60ek: select PIT as tick-timer
+Date: Mon, 13 Oct 2025 15:02:18 +0530
+Message-ID: <20251013093220.32833-1-dharma.b@microchip.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nxD73K7ojTDp4gz+"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThGU4_+=jUc09HvZSMpk3XyMuyXv_hquY=dTRECS2xOYw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Mailman-Approved-At: Mon, 13 Oct 2025 17:40:45 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,51 +85,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+U-Boot currently enables the UPLL during boot, which triggers a udelay()
+call that depends on the system tick timer. Since no explicit tick source
+is defined in the device tree, boot stalls on this board.
 
---nxD73K7ojTDp4gz+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Define the "tick-timer" property under /chosen and point it to the PIT
+node, ensuring U-Boot uses the PIT as the tick source.
 
-On Mon, Oct 13, 2025 at 04:11:59PM +0100, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 13 Oct 2025 at 15:13, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sun, Oct 12, 2025 at 12:43:54AM -0600, Simon Glass wrote:
-> >
-> > > The 'bootflow list' command supports looking at the EFI device-path w=
-hen
-> > > available. Move this piece into a common function so it can be used
-> > > elsewhere.
-> > >
-> > > This updates the output from 'bootflow list'.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> >
-> > You were supposed to drop this patch since it was only needed for
-> > another patch you have dropped. Thanks.
->=20
-> Oh I didn't know that. So in fact are there only two patches remaining?:
->=20
-> boot: Move preparing bootdev into a function
-> boot: Improve comments related to global bootmeths
+Fixes: ac30d90f3367 ("clk: Ensure the parent clocks are enabled while reparenting")
+Signed-off-by: Dharma Balasubiramani <dharma.b@microchip.com>
 
-Yes, thanks. And if there's no further feedback I'll just grab those
-parts of this series.
+---
 
---=20
-Tom
+Changes in v2:
+- Moved the 'tick-timer' property to sam9x60ek-u-boot.dtsi.
 
---nxD73K7ojTDp4gz+
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/arm/dts/sam9x60ek-u-boot.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
 
------BEGIN PGP SIGNATURE-----
+diff --git a/arch/arm/dts/sam9x60ek-u-boot.dtsi b/arch/arm/dts/sam9x60ek-u-boot.dtsi
+index fd2afa8a2fa..ef329b33b7e 100644
+--- a/arch/arm/dts/sam9x60ek-u-boot.dtsi
++++ b/arch/arm/dts/sam9x60ek-u-boot.dtsi
+@@ -8,6 +8,7 @@
+ / {
+ 	chosen {
+ 		bootph-all;
++		tick-timer = &pit;
+ 	};
+ 
+ 	ahb {
+-- 
+2.43.0
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO0cBQAKCRAr4qD1Cr/k
-Ct5BAP9SusWPIoF3vQ0wrqj7iu2LajLSo9ExCmFy9g8d9QLQvgD8CQPlil+E4wN2
-liPxJWfH9e6y9IQczW8AenY4lgo7FQQ=
-=TnmB
------END PGP SIGNATURE-----
-
---nxD73K7ojTDp4gz+--
+base-commit: eea470fd7f6a0db9fbdf8ab187a8b522dbb49c10
+branch: master
