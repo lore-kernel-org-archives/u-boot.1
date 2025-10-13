@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC25CCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 12:02:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D13CCA476
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 12:45:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5393383741;
-	Mon, 13 Oct 2025 14:02:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
+	by phobos.denx.de (Postfix) with ESMTP id 20A518363D;
+	Mon, 13 Oct 2025 14:45:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="ex/ogsAC";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Tj15SMNw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4832183768; Mon, 13 Oct 2025 14:02:52 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2752F83768; Mon, 13 Oct 2025 14:45:52 +0200 (CEST)
+Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5726083734
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 14:02:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=googlemail.com
+ by phobos.denx.de (Postfix) with ESMTPS id C269B82B20
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 14:45:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yegorslists@googlemail.com
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-59054fc6a45so886040e87.3
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 05:02:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=googlemail.com; s=20230601; t=1760356969; x=1760961769; darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=q6dbK2vZMVZmEIeONfcgpswLfT4t2TRVrdOshQ12MRA=;
- b=ex/ogsACCYlGnGKx2scjkbaxHNWGPfyXKL8i1exA7wjIufwPMSw68VI9bTE0FXcgKp
- /PIYUrqvJ6GhT3EOOgHmBChkOLvkOmkEifS8NLMhARPHjzculSVXk0q1XhVEvDDjLlZY
- c2k6QEIrwK5ggvIMwTckAB+0pmpCMEG1N4/rvBYGyEsSbNGzBEQYZDPyzYwGj1+eMoGg
- PDhkM6+tGHVrtWNyhm15J996psfpygbiE2p/6njsnnQuskVl1LlczEFgHXdAigzKnndP
- Q9Z0TifZWfJinYEs+odU92Xev8wbeEJh0uV7udArO89l7aOAP0ilyNvT8BE+ec8AcWqZ
- MfZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760356969; x=1760961769;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=q6dbK2vZMVZmEIeONfcgpswLfT4t2TRVrdOshQ12MRA=;
- b=MvbIwQdHlAe2QC0JXT/TqbDTvhkd18C1lHeaPzg+c91nljX2jl0Rkk19GkYRtTKggm
- qHPUMlSNIdG079qnZoBVu9C8vTZ2/CKTPLpUaSWUjjpAs42EZH1wJUw4HfPOZ35l7Q9R
- arSls5FFlMvtexm+mr4m6g34gGX1VcXTh/hBve/TtJ27EZ4mQuCBV0CyzplPWlCDsxTd
- 5uQA673J46Ei0ixV7w6pOJzN69Z9SqOA9HgFA7nLyqJ4dAH/1PFXOOOqxQDjAc+rNmJq
- y6BG5Qorz5UE6LWntw8baFQfQzIn6eU8eVByF2Lejdk3spsHf4wCH95Zknc8Kkg4hDZ2
- EfPQ==
-X-Gm-Message-State: AOJu0YwZzNta+tFWQB8MlCMTn6OXSQklHkRYk04q2yHqKAc6Z/Dl74dY
- udRQZf2EDrcamUubUfTbD8EBYmhLjR6LGNrSBdl8ZBBqXoFVRxuSEtgaHIYldqMh0rK1QopV602
- fYhrVom80j0KBlbjTLLeNgyj+/2XVfA4iTGgA
-X-Gm-Gg: ASbGncsLslWob6YVdVEQ3cLMNsM6Xc9JZWUxrLc5gLkCav/pHBuRtAID3OAx7/ZDkCr
- dMWrInzUpDdUuHJXG65U6jy5UukgcqAGX7ph/ypwCSsd6oYIbWWFfO6ajgMjygOA+bH4xtfuQN1
- yN+qXw2JWk0agjgaLRetLAU7nnNEOch5lndh5rJM28UftCBe+dJOE4771zcZ1S1S+qa9QJYnZy0
- Xc2YmIlSfz+SC3OD4q1DM7h8HU=
-X-Google-Smtp-Source: AGHT+IGMV9n/SlM9LU9BWdX6h011uzRX8ShgVpZAgO76j0/oRwFFc//zqjIe6SGudJ61kefaUITsp0voVZELCX8Jym8=
-X-Received: by 2002:a05:6512:3b98:b0:577:5ea7:1484 with SMTP id
- 2adb3069b0e04-5906db04033mr5719092e87.6.1760356968554; Mon, 13 Oct 2025
- 05:02:48 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-02.galae.net (Postfix) with ESMTPS id 305281A1344;
+ Mon, 13 Oct 2025 12:45:49 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id EF8BA606C6;
+ Mon, 13 Oct 2025 12:45:48 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E5A67102F224D; 
+ Mon, 13 Oct 2025 14:45:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1760359548; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=wWLQRvzCCSGPQkj0nVzbt9T6mziXv/6FRh6UmPSp9yE=;
+ b=Tj15SMNwG08wpbYH3i9FZAOS75ifsHHksxCOW5hUkf54otdH9gczxbu5CPvpbkl7J/diXV
+ LciEQ4YwGMrsO8MC65jJOr+LBkFqZAFifph+Dw1GGlgNPjpi77ZtRiloCIV09xdoKvGOYu
+ 9EQDxFbp4KHmtGF8LD3+KW+l3XPzbC0ltIJYzSo4j/FciYJqQOPE4CCeJBvorMVAtln802
+ ub6up7gYXxcTg/ljDcIUSU9q7oMOB4Sl5Ub8nCNFxCsGryv+NlE+1yvNlK9QLNkr9Wp/+C
+ x5hv8vW5Q/Ovd/AL9ks/Ahh8CRg/Q8Msny4pfuD19Ypl2BHf2Ix2U6OKxHuoeQ==
+Date: Mon, 13 Oct 2025 14:45:32 +0200
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Hans de Goede
+ <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, Stefano Babic
+ <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
+ Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 03/18] boot: Add UCLASS support for extension boards
+Message-ID: <20251013144532.381e4ad5@kmaincent-XPS-13-7390>
+In-Reply-To: <CAFLszTjLmq0r9uTYR-irzzSN63G1Lpd0iWiwW9npLSraNB1Y_g@mail.gmail.com>
+References: <20251009-feature_sysboot_extension_board-v2-0-e09b39e54de5@bootlin.com>
+ <20251009-feature_sysboot_extension_board-v2-3-e09b39e54de5@bootlin.com>
+ <CAFLszTg-i7cDiN57pqat=bYwqucCOGqW6oh1CvnJz7-UhKaCwA@mail.gmail.com>
+ <20251010153500.5bec4e20@kmaincent-XPS-13-7390>
+ <CAFLszTjLmq0r9uTYR-irzzSN63G1Lpd0iWiwW9npLSraNB1Y_g@mail.gmail.com>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-From: Yegor Yefremov <yegorslists@googlemail.com>
-Date: Mon, 13 Oct 2025 14:02:36 +0200
-X-Gm-Features: AS18NWAbKNi-nEH0J3tKcJ3cUwFzMQYawuOwZHk0xkZsWAQRSZnB8MVRGu6tRe8
-Message-ID: <CAGm1_kvA1GohbO-=+oC6q0p3bnEznvSZ+ubFGmWz_c5prMSWPg@mail.gmail.com>
-Subject: gitignore for mkimage files
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,21 +83,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi All,
+On Sat, 11 Oct 2025 08:20:58 +0100
+Simon Glass <sjg@chromium.org> wrote:
 
-after building an image via stm32mp15_dhcom_basic_defconfig, I got two
-files that were not covered by .gitignore:
+> Hi Kory,
+>=20
+> On Fri, 10 Oct 2025 at 14:35, Kory Maincent <kory.maincent@bootlin.com> w=
+rote:
+> >
+> > On Fri, 10 Oct 2025 12:13:11 +0100
+> > Simon Glass <sjg@chromium.org> wrote:
 
-mkimage-out.spl-stm32.mkimage
-mkimage.spl-stm32.mkimage
+...
 
-So far, I found only the following entry in the .gitignore file:
+> > > > +/**
+> > > > + * dm_extension_apply - Apply extension board overlay to the devic=
+etree
+> > > > + * @extension_num: Extension number to be applied
+> > > > + * Return: Zero on success, negative on failure.
+> > > > + */
+> > > > +int dm_extension_apply(int extension_num); =20
+> > >
+> > > The uclass should have a method like apply(struct uclass *dev, int
+> > > extension_num). Is the numbering global across all devices? =20
+> >
+> > We currently support only one extension driver loaded at a time, theref=
+ore
+> > we don't currently need this uclass parameter.
+> > We will change the API when we will have several scan method possible a=
+t the
+> > same time but I can't test it for now. I don't think we will have such =
+cases
+> > soon and maybe the devicetree WIP support will be ok at that time. =20
+>=20
+> OK, I hadn't picked that up but it makes sense. We can always change
+> it later, as you say. But I would like to see an apply() method in
+> extension_ops, so that it actually looks like a driver.
 
-/mkimage-in-simple-bin*
+Are you sure adding an apply ops method make sense? It is not something dri=
+ver
+or board specific. Do you want to have an apply driver ops set to the same
+generic apply function for all drivers?=20
 
-What about adding such an entry?
-
-/mkimage*mkimage
+Ok for the rest.
 
 Regards,
-Yegor
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
