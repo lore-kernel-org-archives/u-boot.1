@@ -4,83 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE713CCD183
-	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 21:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB4DCCD183
+	for <u-boot@archiver.kernel.org>; Mon, 13 Oct 2025 21:17:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E6DB83710;
-	Mon, 13 Oct 2025 23:08:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A7EB83935;
+	Mon, 13 Oct 2025 23:17:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FRQvPv1E";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cN2/RsfX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4717838D7; Mon, 13 Oct 2025 23:08:43 +0200 (CEST)
-Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
- [IPv6:2001:4860:4864:20::29])
+ id DABD08394E; Mon, 13 Oct 2025 23:17:33 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01B03836F0
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 23:08:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C528783710
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 23:17:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x29.google.com with SMTP id
- 586e51a60fabf-36c9859b036so2981472fac.0
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 14:08:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-63a10267219so2192707a12.0
+ for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 14:17:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760389720; x=1760994520; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IStlbUPncs5alORQ0XtvSVvkbUg85ZJGPwbbog4YKfQ=;
- b=FRQvPv1EUVVzQzbpzJvgGtKniBfzXZ7OzI9SiMgkYVP1JqlwAirztzsNSOrCJyHZYv
- EY5e8fOxyoR5mW6oiW0COeum91nEzLrkFNrgPeugAorrPRfMGet6rDoLSyFSuQu2LO5f
- vSQBTuoW2xaZOLR4RMK+qSShuRMlYF4Nhy1nk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760389720; x=1760994520;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1760390251; x=1760995051; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IStlbUPncs5alORQ0XtvSVvkbUg85ZJGPwbbog4YKfQ=;
- b=iGeIZ09OD/sHCvL/2Tr4jkNXZH9RycJ79h4dmcJuCFJ1xx/i+hhBiGoDRZHxXRXvt/
- F5MA+FQx7ggMD08J37HKX6xF5Q+r4O5R3gTOwBjrG6xskxxqGUtmt+hylXDBHbPyAsPY
- Po7RdFJ4N8bvzQ2p+3lU6j5vKVLztlsUGJWtDezgeDj49khPp3sMXKj3ixENlzVg4FbJ
- Q2b9PGxRbU1uU8r6LTDYmUt5oTB3Gfc3+zp7efsb0x4z1jfFqq4AMXSxeuUG8Eef8W0H
- AxZOj1S2LfoN8rhsc01O9N12okzyhSa/WoHkXWWWHM4Ue5eI93Rs2Q4aKuYHp28F0M2B
- XzSQ==
-X-Gm-Message-State: AOJu0YzUL3RoETWB2JUUOPJtTaRdu2bEelJnKChQLwkWenEdsSylrLjH
- 8R04eTCMqM+FLWu2az8PSXdwjNWKA2W66I/X2YLwaLjiGY6cKSC9dMKUFm99ggonQKM=
-X-Gm-Gg: ASbGnctBEn91vhyk/PAHCmR/JrOnuZcm40hD+oT9MM2Y8W+f/lQ50Zt7+GBYGNN0GCb
- kT5CfvYw+hTGzaDBA3FI7J/DMVjhePD6PvWMtC86hHILnyzstj0IQ2y2CnVKsBs5C/alH7bOu35
- wdqjDdyrewcsDPfyIo4uamfo5OfS14zz4T5Os2Bp/+dxrDA3Na0Tb8lIikDFPOYBMBEFmhFZ9s+
- /xT5/i8crkVtrVxUG+BjMhwS4APMzKnhc5wEi4z6XLeRLs5aq5AJZSOw67na12C+6q5FXAGBIR4
- Uw+KJRMLDsLUMAinLb6cemD/5lqf7HSZ14Ky9X9MkDn74m3Hc1MpkhGBvx0zGdgU8vn0VAgU+Rw
- apehYet1nowTWTY0llsEIdH9oOw/nV2+OJhpW9FzO2j3wL8Sv123HYN2kwrtqxSJk+U0HnUajmr
- S2Ioh50gXuOyAjlRQ=
-X-Google-Smtp-Source: AGHT+IEOBhhlZ6DcXu5VjGWMpJQcqwh+d/vveQSiPFby381W+PcvfhZQDgNaVFQ1N/msQHw0keBCsw==
-X-Received: by 2002:a05:6871:207:b0:315:8d77:4a22 with SMTP id
- 586e51a60fabf-3be6eb3b65amr11882138fac.23.1760389719672; 
- Mon, 13 Oct 2025 14:08:39 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8f67c7csm3828813fac.27.2025.10.13.14.08.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Oct 2025 14:08:38 -0700 (PDT)
-Date: Mon, 13 Oct 2025 15:08:36 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Martin Schwan <m.schwan@phytec.de>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Andreas Pretzsch <apr@cn-eng.de>, upstream@lists.phytec.de
-Subject: Re: [PATCH v2] test: boot: Add test for bootmeth_rauc
-Message-ID: <20251013210836.GL6113@bill-the-cat>
-References: <20251009-wip-bootmeth-rauc-tests-v2-1-08fbd3738e0a@phytec.de>
+ bh=UQpwCHbYkCwMdjwTSl24xTwpil4lUhynthtflpO6QCI=;
+ b=cN2/RsfXt/WXXTKlNjPGtoBY8Tvz/QzYFxclwxGllIwnQS8JWhFHvuQIKANtZGPqvC
+ lMoli4sxRq55XletNhR2c4bnVmEbd/OndhFCEzsBlV28lWGn9f9kgTQmLzCffF660Jqt
+ k3imnPkrMQjkbBj5mBKGzFCkHGqx1LffBH9kM7y2Xm//nqvk9wqRV+vpwwaHmYhsYRUA
+ HZZFCq0uqFRZNo/MnKk5ELzRjQMAkldsOpYM7rWDlEpXZk7GPhHuJjSljChIWauCzIIA
+ R0lDX5DMiEs2RH72ObyhU0uGkuE1d5ySuKQEsgHF3tJp152Q8xONHH6ZuGCObxU+1qPj
+ 4png==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760390251; x=1760995051;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UQpwCHbYkCwMdjwTSl24xTwpil4lUhynthtflpO6QCI=;
+ b=cSldRCOIUJj38APPxXrfdbT+lH9RRAOolOBWm9WkeFkFQF4CcwImKKzVj6WtupXrk5
+ 4nfSqekUX25LN4cvo0HO+wCravqxs27hKAwZKUP6FI/wL+GqOftI1L92OAzNJSazwjIG
+ DoO4MEaUtcHzFGmlk9eS8JU0Jfm/H82D5etzQxJENqXSx2ErsZhan1x2GzQEsGfGgVCO
+ LidSnEjTYZy/Mgo49BKC/5hP440+5yb3C7F+ILS1GxNYlIjyAZp85tj1CJF8TYeaD1kP
+ Kvu2YSP6TAxevoyNCCbXRlnAJlPKjrZ6YVWN1TQkhuINmFUs6MzH3ZwIIYEQc9bQQwTI
+ 6AEg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWmflfugtYaBBL4POkmQbH7woSA/FGcp4Zv8cOCEfq7ZGLykDDbcLf1kqMwWkkt/fKsz0XgjVA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxkPtBOvkhqJ5/zgg5Xuz/esDNB18BWVrkyJwlPJiXz0WzWrpZ6
+ uGu/Hl6hfRYKx7QVaUVi5iRFND6mncWDIvmauUkplSJ1t7Dh7cldRj3eNX2x4B0i+elTh6rtiFR
+ a6hW+fPKVofo8amJpWIfYav6mzCUTqoU=
+X-Gm-Gg: ASbGncuDKjjemCfeaKP1Iq9KPgBNR1O/9YAvfCPAsaf3jvrkA4blDYvurptIOp2vkG1
+ hpI8ICNSwMPj6giR0W5GQsf4ndc7Ko52JzACQV+DcuGMuA6SVlcrEahzowIpKXWKCa852qaFkhP
+ eAm7kURqXO9Sl+BV9LYMnRznzqiAMtVFDdYuOEn39vJ/JtYrR6a3qvy1ZT1Vf/kSn6oMiEbAWr8
+ 74bWvcYTIbqcipLFX69nkd5aRI7Ccm8OFaUpg==
+X-Google-Smtp-Source: AGHT+IEqq/Fqk8rxnA6KlKQWXmt1TK/Gs281FVZANWq6Wih2sqMQh1hSRch0DFiXX31DsFzKvWP+R3JKVh9KVUO+u3E=
+X-Received: by 2002:a05:6402:50c6:b0:634:c377:e1ae with SMTP id
+ 4fb4d7f45d1cf-639d615df4bmr22705870a12.14.1760390250998; Mon, 13 Oct 2025
+ 14:17:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IlfhejPxQYu81Aoq"
-Content-Disposition: inline
-In-Reply-To: <20251009-wip-bootmeth-rauc-tests-v2-1-08fbd3738e0a@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20251010053056.32495-1-mibodhi@gmail.com>
+ <20251010142835.GY298503@bill-the-cat>
+ <CALeDE9P8VP6YKS1qoz3Dxga+h287GHzRvczCq0YDd4tOJxNXGQ@mail.gmail.com>
+ <20251011143713.GI298503@bill-the-cat>
+ <CAJaLiFyNCD1i_3=y_jF6Kyj8jGpAY3qwBwO=DMxB=BFGc-oXoQ@mail.gmail.com>
+ <CAFLszTh8azMKW7jmQF8sY-mCkWCPZnP6U=evRPV5hVMO9DdneA@mail.gmail.com>
+ <CAJaLiFwHfrw4Fg16vH3RPD1PDqQMaA=tmecaf8CUi8cNE9D4Bg@mail.gmail.com>
+ <20251013144016.GG6113@bill-the-cat>
+In-Reply-To: <20251013144016.GG6113@bill-the-cat>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Mon, 13 Oct 2025 14:17:18 -0700
+X-Gm-Features: AS18NWCDQwyKETMTsZYG4p-TOIu-5Kj5SPMC69Xx4v3-CGDP_8k117AQw6FePSw
+Message-ID: <CAJaLiFz-UQfHgsvB59kYGW0=tiKzKeN7bHYH5hZrVDFKRGOrFQ@mail.gmail.com>
+Subject: Re: [PATCH] bootstd: Allow PXE boot to be disabled
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Martin Schwan <m.schwan@phytec.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,84 +106,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---IlfhejPxQYu81Aoq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Oct 13, 2025 at 7:40=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Sun, Oct 12, 2025 at 08:12:59PM -0700, Tony Dinh wrote:
+> > Hi Simon,
+> >
+> > On Sat, Oct 11, 2025 at 11:52=E2=80=AFPM Simon Glass <sjg@chromium.org>=
+ wrote:
+> > >
+> > > Hi Tony,
+> > >
+> > > On Sat, 11 Oct 2025 at 20:41, Tony Dinh <mibodhi@gmail.com> wrote:
+> > > >
+> > > > On Sat, Oct 11, 2025 at 7:37=E2=80=AFAM Tom Rini <trini@konsulko.co=
+m> wrote:
+> > > > >
+> > > > > On Sat, Oct 11, 2025 at 01:03:39PM +0100, Peter Robinson wrote:
+> > > > > > On Fri, 10 Oct 2025 at 15:28, Tom Rini <trini@konsulko.com> wro=
+te:
+> > > > > > >
+> > > > > > > On Thu, Oct 09, 2025 at 10:29:17PM -0700, Tony Dinh wrote:
+> > > > > > >
+> > > > > > > > Make it possible to disable CMD_PXE.
+> > > > > > > > Remove unnecessary PXE_UTILS selection in BOOTMETH_EXTLINUX=
+ config.
+> > > > > > > > In extlinux_boot(), invoke pxe utils only when
+> > > > > > > > CONFIG_BOOTMETH_EXTLINUX_PXE is enabled.
+> > > > > > > >
+> > > > > > > > This patch results in about 9K reduction in image size when
+> > > > > > > > PXE boot is disabled.
+> > > > > > > >
+> > > > > > > > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > > > > > > > ---
+> > > > > > > >
+> > > > > > > >  boot/Kconfig             |  3 +--
+> > > > > > > >  boot/bootmeth_extlinux.c | 18 ++++++++++--------
+> > > > > > > >  2 files changed, 11 insertions(+), 10 deletions(-)
+> > > > > > >
+> > > > > > > Is some part of the symbol logic here wrong? A challenge is t=
+hat "PXE"
+> > > > > > > is also where the logic to parse extlinux.conf style files ca=
+me from,
+> > > > > > > and I thought we had split those two out. And then there's th=
+is:
+> > > > > > >
+> > > > > > > >
+> > > > > > > > diff --git a/boot/Kconfig b/boot/Kconfig
+> > > > > > > > index 2993cd7f9ba..403ce4c3d46 100644
+> > > > > > > > --- a/boot/Kconfig
+> > > > > > > > +++ b/boot/Kconfig
+> > > > > > > > @@ -421,10 +421,10 @@ config BOOT_DEFAULTS_CMDS
+> > > > > > > >       select CMD_PART if PARTITIONS
+> > > > > > > >       select CMD_DHCP if CMD_NET
+> > > > > > > >       select CMD_PING if CMD_NET
+> > > > > > > > -     select CMD_PXE if CMD_NET
+> > > > > > > >       select CMD_BOOTI if ARM64
+> > > > > > > >       select CMD_BOOTZ if ARM && !ARM64
+> > > > > > > >       imply CMD_MII if NET
+> > > > > > > > +     imply CMD_PXE if CMD_NET
+> > >
+> > > If you only want scripts, then perhaps you can enable just what you
+> > > need, e.g. BOOTMETH_SCRIPT? You may need to disable BOOT_DEFAULTS and
+> > > choose your own options.
+> >
+> > Indeed, that was a missing config when I tried with BOOTSTD_FULL
+> > disabled. But there is more, please see below.
+> >
+> > >
+> > > > > > >
+> > > > > > > This is one of the things where defaults isn't supposed to be=
+ so easy to
+> > > > > > > get out of. How many platforms are you wanting to then disabl=
+e CMD_PXE
+> > > > > > > on to save space?
+> > > > > >
+> > > > > > PXE is generally being removed in a lot of cases as it's not
+> > > > > > considered secure and now we have HTTP Boot there are other mea=
+ns of
+> > > > > > doing network booting so I think we'll see more and more situat=
+ions
+> > > > > > where we want to disable PXE.
+> > > > > >
+> > > > > > This is actually something I've been meaning to look at so it's
+> > > > > > something I would love to see :)
+> > > >
+> > > > Glad to hear :)
+> > > >
+> > > > >
+> > > > > And in the world where we also can't just remove ATAGS support be=
+cause
+> > > > > distros (Debian at least) still boots some modern platforms via A=
+TAGS +
+> > > > > appended device tree, the high level options for "boot this anywh=
+ere"
+> > > > > need to perhaps be different from "very modern requirements only
+> > > > > distro". I'm not objecting to be clear.
+> > > >
+> > > > As Tom suggested previously, perhaps looking from a different angle=
+.
+> > > > We can disable BOOTSTD_FULL and then try adding only options that a=
+re
+> > > > needed for a board. Unfortunately this approach did not work when I
+> > > > tried it in the past. It seems for bootstd to work well, we need to
+> > > > take the whole thing by enabling BOOTSTD_FULL.
+> > >
+> > > If you end up trying it again, please give a few details here as we
+> > > might be able to improve this. When bootstd was first introduced we
+> > > had very tight code-size constraints, so quite a few features are onl=
+y
+> > > provided if BOOTSTD_FULL is enabled. Tom has suggested enabling more
+> > > features in the base implementation but we haven't really figured out
+> > > which.
+> >
+> > The problem is when a board already has enabled BOOTSTD_FULL or has
+> > been updated with Distro Boot (CONFIG_DISTRO_DEFAULTS), all the
+> > necessary configurations such as ext2, ext4, efi partition,... are
+> > implied, therefore were removed from board defconfig. They must be
+> > added back.
+> >
+> > I actually tried this just now and it does work booting a script from
+> > USB drive with this combination:
+> >
+> > CONFIG_BOOTMETH_SCRIPT=3Dy
+> > CONFIG_DISTRO_DEFAULTS=3Dy    (this also selects CMD_PXE, but it's OK
+> > for this test)
+> > # CONFIG_BOOTSTD_FULL is not set
+> >
+> > I think it's quite cumbersome to add each of the necessary configs
+> > back to the board defconfig. Not as easy as removing CMD_PXE, or other
+> > CMD_x to remove a capability.
+>
+> There's two parts to this. In turns of changing the defconfig to start
+> with, you shouldn't need to "add back", if you do:
+> $ make foo_defconfig
+> $ make menuconfig # Disable full, etc
+> $ make savedefconfig
+> $ cp defconfig configs/foo_defconfig
 
-On Thu, Oct 09, 2025 at 09:06:12AM +0200, Martin Schwan wrote:
+Of course you're right! "make menuconfig" works as described above.
 
-> Add a simple unit test for testing the RAUC bootmethod. Provide only the
-> very basic tests for now, running a scan and list, to verify correct
-> detection of the RAUC bootmethod. More advanced boot tests of this
-> bootmethod can be added in a separate patch.
->=20
-> This requires another mmc image (mmc9) to contain the following
-> partitions:
->=20
-> 1. boot A: contains a dummy boot.scr
-> 2. root A: contains an empty root filesystem
-> 3. boot B: contains a dummy boot.scr
-> 4. root B: contains an empty root filesystem
->=20
-> The bootmeth_rauc scans all four partitions for existence and expects a
-> boot script in each boot partition.
->=20
-> Also add BOOTMETH_RAUC as a dependency on sandbox so that we can test
-> this with:
->=20
-> $ ./test/py/test.py -B sandbox --build -k test_ut # build the mmc9.img
-> $ ./test/py/test.py -B sandbox --build -k bootflow_rauc
->=20
-> Signed-off-by: Martin Schwan <m.schwan@phytec.de>
-> ---
-> Changes in v2:
-> - Use mk_fs() instead of calling fallocate/mkfs/mcopy individually for
->   the boot and root partitions in mmc9.img
-> - Link to v1: https://lore.kernel.org/r/20251008-wip-bootmeth-rauc-tests-=
-v1-1-3da21a731524@phytec.de
-> ---
->  arch/sandbox/dts/test.dts |  8 +++++++
->  configs/sandbox_defconfig |  1 +
->  test/boot/bootflow.c      | 57 +++++++++++++++++++++++++++++++++++++++++=
-++++++
->  test/py/tests/test_ut.py  | 44 ++++++++++++++++++++++++++++++++++++
->  4 files changed, 110 insertions(+)
+Thanks,
+Tony
 
-This doesn't work now:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-___________________________ test_ut_dm_init_bootstd _______________________=
-_____
-test/py/tests/test_ut.py:604: in test_ut_dm_init_bootstd
-    setup_rauc_image(ubman)
-test/py/tests/test_ut.py:581: in setup_rauc_image
-    fs_helper.mk_fs(ubman.config, fs, 0x800000, fsfile.split('.')[0], bootd=
-ir)
-test/py/tests/fs_helper.py:68: in mk_fs
-    check_call(f'mcopy -i {fs_img} -vsmpQ {src_dir}/* ::/', shell=3DTrue)
-/usr/lib/python3.10/subprocess.py:369: in check_call
-    raise CalledProcessError(retcode, cmd)
-E   subprocess.CalledProcessError: Command 'mcopy -i /tmp/sandbox/persisten=
-t-data/rauc_boot.fat32.img -vsmpQ /tmp/sandbox/persistent-data/boot/* ::/' =
-returned non-zero exit status 1.
------------------------------ Captured stdout call ------------------------=
------
-
---=20
-Tom
-
---IlfhejPxQYu81Aoq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO1qUQAKCRAr4qD1Cr/k
-CsZVAP9eXOlSn+rNunLorMFwJhTJnEE3G6ERYbPob8JuEXluJAD+JH1XWGjgG6oN
-/thv6KwBWf2kUIVs856WyDONHM/h4gM=
-=kIo2
------END PGP SIGNATURE-----
-
---IlfhejPxQYu81Aoq--
+>
+> But the second part is that yes, it's at least currently intentional to
+> be cumbersome to break the "all stock distributions work in all expected
+> use cases" option. If you have networking, networking works in U-Boot,
+> but you're not allowing users to install distros over the network like
+> they should be able to expect to, it shouldn't be easy.
+>
+> I am open to splitting the current option up in to multiple parts, along
+> the lines of legacy options, modern options, disk options, network
+> options since as Peter noted earlier in this thread, PXE is going away
+> in favour of HTTP(s) boot. But we still have lots of legacy boards and
+> distros to support.
+>
+> --
+> Tom
