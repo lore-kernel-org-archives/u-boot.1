@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64F01CCD184
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 16:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E6ECCD184
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 16:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8E4D8312A;
-	Tue, 14 Oct 2025 18:03:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4234C834D4;
+	Tue, 14 Oct 2025 18:03:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="poMy/a9x";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o/Hb470H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12BE7834E5; Tue, 14 Oct 2025 18:03:54 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 9C59D807B1; Tue, 14 Oct 2025 18:03:54 +0200 (CEST)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0583807B1
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 18:03:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99A11833BF
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 18:03:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-421851bcb25so2570491f8f.2
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 09:03:51 -0700 (PDT)
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-3f0ae439b56so3313739f8f.3
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 09:03:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760457831; x=1761062631; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lqf/9ETwkExouuXV3BvnMhWpGLR2tL3yi+9oTXOLF4I=;
- b=poMy/a9xQEQyRik/N8I9In1rI5RXFtg4WXz/AJqvVPWALIBwdfYtwCzs+LYhLQZPhi
- +wk6csIhWOKsSGWGUZH2VaQhc6YHSlzwTSe3UONxOKmnkfwNhFFhDvold0qW5bzFGhvl
- hVej8zmOwerYQ4hFMxQZ9VOpFPwBr9LKDLdISvPxr+d+dfBGXhmzshMAi2Boj2k+yYLa
- /SduD5kLU/+L6WvGH9Hy57w8dsPXzh/f4gyGYQwv9Fj/vnUIdpO7PSb036px8IH9PYDA
- HUvGozeMb4hypA/0XRHb8mC6/y9HWngZOWD6lKBNRIQYX9w7ofuH5OEI8kYTjk/z5Trd
- MVMg==
+ d=linaro.org; s=google; t=1760457832; x=1761062632; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=doa4CD18DO9P4hy6BoVbKsEtPYGTk+3enzJe/ChRLy8=;
+ b=o/Hb470HeRnW3x591PytP0q7S4YGnMhuJv7hn6k3/POy6wCiEZ1V2aEcNva1ZmnpxF
+ BuHJWrGIyhVZI10u2Ilmm+7lGHrxEMSOaCn3Mp8Nnw0NnGu4B6PrTG5a21flMnCIlVeK
+ 2ed2uEySHorMBUhUnFVoy36PNsMUc/3ADn9gw83jvXTzXDg/zZKmV40I742KvbyCw+/9
+ 36mp6ZGaL8liXFavwSTI8mBhiXNIYBswUe+reLx2Mpqm62/WDsyskb6kFdjHKV9ZIeeI
+ 0UZliSXQZ7nSNXf1ynQIOEjFBN/+hZlu/OMDWjTDeNS8RI7+toiSDkCWDT4wrqg9Wzm+
+ oogg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760457831; x=1761062631;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lqf/9ETwkExouuXV3BvnMhWpGLR2tL3yi+9oTXOLF4I=;
- b=l6eZaN/o4IG4aq3kbBizzeAFWJDEXn8ojOEP+BcvXj7ReCd1pV8kkfTlRfEbRo627k
- bWAha6y7IxmU9TbO94ESsJgG7N3fizOwOYyikrMOdQgrhH3mR2kqSiJt3WaA8GbG1LT9
- ZBHIf8WYZSVja1X/gB3rtKiJC1EG06aXGNgXQtZUPtBgbZhXk1DH6fzhEk6/6qJzy4NS
- 7MCwPchHor9shxFEku9hXeG+9fMfAkPaEw/iRV+9GoCg1UapALXJhMdict6yf/+E//H4
- jDFT1T+Ux/JJUlKdiPq00flNFWVqjLgvLIED4dPAnImOLAMbEOmky16sKRaHPzGG8eeh
- uPvw==
+ d=1e100.net; s=20230601; t=1760457832; x=1761062632;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=doa4CD18DO9P4hy6BoVbKsEtPYGTk+3enzJe/ChRLy8=;
+ b=eBbzHACYMJZmdkILlOeczGQjpqlkq2oVIysm55OWaocZVFGJ7BMHAJgD+bKu/8DNga
+ Ju0WpSF3cSQDq8ZLUoWxu5WBEBaXR+5aqW7toDnLPliZGIy/XG/uDONIVn5ve58Vf13b
+ dVajE/QIJZp6BWY7vx5PGG/xUQG8K1AEJimKTZc89AF9M+YgH3tHgqGtuunK3jcMucdB
+ QeHB0IgUD7QjVbXkMYj1xTOpR2HJbl+79c+nXqXBygYktEFbF0n1VCY132fpu0h9m+7Z
+ qxxIYh9yJ10BLjflJ10wxUruP7z/HEkSidxj2KSQBxXrA2ueRVbrLaXxznkauxxwzxX3
+ 2lmg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJIlM5Oaq33MPVQRgXWyqi7TSJTfPvwVhnDOd5Bj+mqm8hRTY9g3UZZyJB3B/zQAH3IweM+Xo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy8AZBrFyjD1EVGqHJmjZS+9EOFxEBC/xdsli2W+h6R4M8XQA1G
- b42qNRjoHWdddEhFz+YQztdw+LN/5VsD5ovtlmBNlGr/GQMLVXuuIDVXj/sPM2Dzj0o=
-X-Gm-Gg: ASbGncuJTXuHMWPLV4LpnVIbPOgbD8kXStBjUSsat9TSZuWNNAyazTBT92WIkeYrmqo
- Yn65+Nlmu1K9k1/uCV3RkO0fzpVxpevuOa5cfj7vDXxkYrXb3BL/MYBYH4OwBtXlfYYQlmP7fDo
- /gd04yzJ/lm2oiSbtFyvhH8KEQCy1gyYGCscbG1m5yjxs5YJaw1THcNI7mqs2/2WUOXkxQ6G8pB
- YisUW7lxYpqJkdg04HQtOyzc2d4181htDQejc/Mmz8fYpBmj7sx8fvwJXCX8J5JHweDf6PlrWWd
- DQJlilkPfb/B2nHLxOv7cqTimeou7N1AKSVVxFIiBkK3PedR3DW37kaXhhiEP9Lq5JpSeM+QBzw
- FWL9bn5GHhkVI8marT9Puz+jMX58zrKETzmZqNtoW200FQRaRaAe9OwrcMh47RBX0EDrWDJ66TD
- 10cTzM5HB8
-X-Google-Smtp-Source: AGHT+IF/5Wmmv1ua6T3LAiGhyoCba6UK6TERqk/0RKZpmKsCLikI8yx0DU/RfcGgRmOcFjJF+/X0jA==
-X-Received: by 2002:a05:6000:40ca:b0:3f1:2671:6d9e with SMTP id
- ffacd0b85a97d-42666ac61a1mr14186370f8f.1.1760457831134; 
+ AJvYcCU8WU8YNQPv7eBV4ySciOaiInnhKhSVbeYnfK0sEK3YP+pv74NEYNtTfy1tkN2n0WgL6BQVl7E=@lists.denx.de
+X-Gm-Message-State: AOJu0YyeRt4xV/K9PUAOV4o3Q3f0yiFMEPm9ht2yQ3SP981PwN0vn6YY
+ apuoH3CUZy7xca1EPiEAeNK9K60Lm8+/4HRO8BmoEOkPG7yxjOkV+QZUVvPYPxCLF1Q=
+X-Gm-Gg: ASbGncsieTMfY8mAqcFVGgzdKPGski+hJeEl4g7qSQAecnhKBvzaH53Hhxpz2DxW6ot
+ C7ddbAwEzCPXxUr0kuFpB6aaDADwt4DGwBVSX3nelt6ZydGED/Q++LPB99p+JjuB9LGhfYq8OR0
+ EGF+UGnywTIGnUwDSGLn+04xZoUGzHYzC/fHjvdXz5i77aNoWL7NRZkm6tfCDI/wd8ohU1OdlkZ
+ kkpsl6+GzxyvfypJkSGIfqCJ8BqKEyZs+qPeTLDOtG0T/BfctcauvKtLvPdXrx1h/8cW7/xeSAK
+ NIoFMBTmJ0K0IzNuapLd8e0f5xucGm+hEwrIgXt1UoFxPijDL4QKzDyWQqrBTFbBrYBPpDRyOqa
+ vUN9pvbE5FqWprR+18HP/FsFYLbEynOru9ww/ShX3Fx5i1E/aaBf5Eqq0zTo1SXPfxC/adBv4iA
+ ==
+X-Google-Smtp-Source: AGHT+IF7j1rMeiLKBA4wDa9RsqMq0R3apwr6DWQQo9pYnY65PcWG62DbHGSHciC+Ud7MYPbawKVuSQ==
+X-Received: by 2002:a05:6000:2283:b0:3f3:ba4:29d7 with SMTP id
+ ffacd0b85a97d-4266e8db63cmr14405319f8f.43.1760457831972; 
  Tue, 14 Oct 2025 09:03:51 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:216f:297d:c441:f2cf])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-426ce57cce5sm24864380f8f.1.2025.10.14.09.03.50
+ ffacd0b85a97d-426ce57cce5sm24864380f8f.1.2025.10.14.09.03.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Oct 2025 09:03:50 -0700 (PDT)
+ Tue, 14 Oct 2025 09:03:51 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [PATCH v4 0/2] fs: semihosting: Test correct variable and fix API
-Date: Tue, 14 Oct 2025 17:03:49 +0100
-Message-Id: <20251014-fs_semihosting-v4-0-6f2bc490175b@linaro.org>
+Date: Tue, 14 Oct 2025 17:03:50 +0100
+Subject: [PATCH v4 1/2] fs: semihosting: Fixup smh_read against overflow
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGV07mgC/33M0QrCIBTG8VcJrzOmzs111XtExKbH7UBp6JBi7
- N1zuypGca6+A7//RCIEhEiOu4kESBjRuzzK/Y7ooXU9UDR5E15wyYqCUxuvEe44+Dii66mSpmp
- q21ndGpLRI4DF5xo8X/IeMI4+vNZ+Ysv3Zyoxmo/xEqoOtJbsdEPXBn/woSdLK/H/nmevWa0El
- EwpozZefHqx8SJ7aSsDTVdbzuWXn+f5DdZQDsEtAQAA
-X-Change-ID: 20251002-fs_semihosting-85d697fbfcad
+Message-Id: <20251014-fs_semihosting-v4-1-6f2bc490175b@linaro.org>
+References: <20251014-fs_semihosting-v4-0-6f2bc490175b@linaro.org>
+In-Reply-To: <20251014-fs_semihosting-v4-0-6f2bc490175b@linaro.org>
 To: Sean Anderson <sean.anderson@seco.com>, u-boot@lists.denx.de, 
  Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Tom Rini <trini@konsulko.com>, 
@@ -106,43 +103,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Smatch reported an issue that the wrong variable was being tested after
-a call to smh_flen(). Investigating this showed that the API was being
-used incorrectly and attempted to return negative errors through an
-unsigned return value. This in turn also limited the returns to being
-less than 2GB. This series allows the use of file sizes up to 4GB - 2
-and also corrects the error detection.
+The sys call SYS_READ was being used in a way that did not allow for
+file sizes > 2^31. Fixing this required changing the signature of the
+function to allow file sizes up to 2^32 - 2 and also being able to
+return errors that could be tested for.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-Changes in v4:
-- Split out changes to smh_read into separate patch
-- Link to v3: https://lore.kernel.org/r/20251003-fs_semihosting-v3-1-5f6de9b7f225@linaro.org
-
-Changes in v3:
-- V2 missed fixing up one use of smh_flen, fix it
-- Link to v2: https://lore.kernel.org/r/20251002-fs_semihosting-v2-1-c1783e4188d8@linaro.org
-
-Changes in v2:
-- Fixup smh_flen and smh_read to allow for > 2^31 byte files
-- Link to v1: https://lore.kernel.org/r/20251002-fs_semihosting-v1-1-1124e6becc51@linaro.org
-
----
-Andrew Goodbody (2):
-      fs: semihosting: Fixup smh_read against overflow
-      fs: semihosting: Fixup smh_flen against overflow
-
- common/spl/spl_semihosting.c        | 13 +++++++------
+ common/spl/spl_semihosting.c        |  7 ++++---
  drivers/serial/serial_semihosting.c |  6 ++++--
- fs/semihostingfs.c                  | 23 +++++++++++++----------
- include/semihosting.h               | 13 +++++++------
- lib/semihosting.c                   | 28 ++++++++++++++++++++++------
- 5 files changed, 53 insertions(+), 30 deletions(-)
----
-base-commit: ecdc3872a767fb045be3296d4317ae978a14b022
-change-id: 20251002-fs_semihosting-85d697fbfcad
+ fs/semihostingfs.c                  |  9 +++++----
+ include/semihosting.h               |  8 ++++----
+ lib/semihosting.c                   | 22 ++++++++++++++++++----
+ 5 files changed, 35 insertions(+), 17 deletions(-)
 
-Best regards,
+diff --git a/common/spl/spl_semihosting.c b/common/spl/spl_semihosting.c
+index f36863fe48d25859ee9af67a67140893b6e9e262..cff6f5351e265136b3effe483fd5d641fdd109f8 100644
+--- a/common/spl/spl_semihosting.c
++++ b/common/spl/spl_semihosting.c
+@@ -13,13 +13,14 @@ static ulong smh_fit_read(struct spl_load_info *load, ulong file_offset,
+ 			  ulong size, void *buf)
+ {
+ 	long fd = *(long *)load->priv;
+-	ulong ret;
++	long ret;
++	size_t bytes_read;
+ 
+ 	if (smh_seek(fd, file_offset))
+ 		return 0;
+ 
+-	ret = smh_read(fd, buf, size);
+-	return ret < 0 ? 0 : ret;
++	ret = smh_read(fd, buf, size, &bytes_read);
++	return ret < 0 ? 0 : bytes_read;
+ }
+ 
+ static int spl_smh_load_image(struct spl_image_info *spl_image,
+diff --git a/drivers/serial/serial_semihosting.c b/drivers/serial/serial_semihosting.c
+index 56a5ec72428afdd97eccad739a46189380ba3e76..017b1f8eda84f5c25e09be7e970d0ebfdbf2ace0 100644
+--- a/drivers/serial/serial_semihosting.c
++++ b/drivers/serial/serial_semihosting.c
+@@ -25,11 +25,12 @@ static int smh_serial_getc(struct udevice *dev)
+ {
+ 	char ch = 0;
+ 	struct smh_serial_priv *priv = dev_get_priv(dev);
++	size_t bytes_read;
+ 
+ 	if (priv->infd < 0)
+ 		return smh_getc();
+ 
+-	smh_read(priv->infd, &ch, sizeof(ch));
++	smh_read(priv->infd, &ch, sizeof(ch), &bytes_read);
+ 	return ch;
+ }
+ 
+@@ -140,11 +141,12 @@ static void smh_serial_setbrg(void)
+ static int smh_serial_getc(void)
+ {
+ 	char ch = 0;
++	size_t bytes_read;
+ 
+ 	if (infd < 0)
+ 		return smh_getc();
+ 
+-	smh_read(infd, &ch, sizeof(ch));
++	smh_read(infd, &ch, sizeof(ch), &bytes_read);
+ 	return ch;
+ }
+ 
+diff --git a/fs/semihostingfs.c b/fs/semihostingfs.c
+index 77e39ca407e4d240a1fd573497c5b6b908816454..15f58d578b65f7dbbadce19093546f5bdb46c0c3 100644
+--- a/fs/semihostingfs.c
++++ b/fs/semihostingfs.c
+@@ -23,7 +23,8 @@ int smh_fs_set_blk_dev(struct blk_desc *rbdd, struct disk_partition *info)
+ static int smh_fs_read_at(const char *filename, loff_t pos, void *buffer,
+ 			  loff_t maxsize, loff_t *actread)
+ {
+-	long fd, size, ret;
++	long fd, ret;
++	size_t size;
+ 
+ 	fd = smh_open(filename, MODE_READ | MODE_BINARY);
+ 	if (fd < 0)
+@@ -43,10 +44,10 @@ static int smh_fs_read_at(const char *filename, loff_t pos, void *buffer,
+ 		maxsize = size;
+ 	}
+ 
+-	size = smh_read(fd, buffer, maxsize);
++	ret = smh_read(fd, buffer, maxsize, &size);
+ 	smh_close(fd);
+-	if (size < 0)
+-		return size;
++	if (ret < 0)
++		return ret;
+ 
+ 	*actread = size;
+ 	return 0;
+diff --git a/include/semihosting.h b/include/semihosting.h
+index 4e844cbad87bb1ae6bb365f87f3e7a8aeea445f4..42832d86c711ff04e91b6b739c80629253f6d30a 100644
+--- a/include/semihosting.h
++++ b/include/semihosting.h
+@@ -95,12 +95,12 @@ long smh_open(const char *fname, enum smh_open_mode mode);
+  * @fd: A file descriptor returned from smh_open()
+  * @memp: Pointer to a buffer of memory of at least @len bytes
+  * @len: The number of bytes to read
++ * @read_len: Pointer which will be updated with actual bytes read on success,
++ *  with 0 indicating %EOF
+  *
+- * Return:
+- * * The number of bytes read on success, with 0 indicating %EOF
+- * * A negative error on failure
++ * Return: 0 on success or negative error on failure
+  */
+-long smh_read(long fd, void *memp, size_t len);
++long smh_read(long fd, void *memp, size_t len, size_t *read_len);
+ 
+ /**
+  * smh_write() - Write data to a file
+diff --git a/lib/semihosting.c b/lib/semihosting.c
+index 9be5bffd30124777c4f8110065e6cca5640312ac..e49b16b0aa34ab04b6c8949a3e7cab539fdbef82 100644
+--- a/lib/semihosting.c
++++ b/lib/semihosting.c
+@@ -93,9 +93,9 @@ struct smh_rdwr_s {
+ 	size_t len;
+ };
+ 
+-long smh_read(long fd, void *memp, size_t len)
++long smh_read(long fd, void *memp, size_t len, size_t *read_len)
+ {
+-	long ret;
++	size_t ret;
+ 	struct smh_rdwr_s read;
+ 
+ 	debug("%s: fd %ld, memp %p, len %zu\n", __func__, fd, memp, len);
+@@ -105,9 +105,23 @@ long smh_read(long fd, void *memp, size_t len)
+ 	read.len = len;
+ 
+ 	ret = smh_trap(SYSREAD, &read);
+-	if (ret < 0)
++	if (!ret) {
++		/* Success */
++		*read_len = len;
++		return 0;
++	} else if (ret == len) {
++		/* EOF */
++		*read_len = 0;
++		return 0;
++	} else if ((long)ret == -1) {
++		*read_len = 0;
+ 		return smh_errno();
+-	return len - ret;
++	} else {
++		/* Partial success */
++		*read_len = len - ret;
++		return 0;
++	}
++
+ }
+ 
+ long smh_write(long fd, const void *memp, size_t len, ulong *written)
+
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.47.3
 
