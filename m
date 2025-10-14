@@ -4,41 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FB79CCD184
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 18:26:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E0F9CCD184
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 19:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B51D580107;
-	Tue, 14 Oct 2025 20:26:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 8E2BB80107;
+	Tue, 14 Oct 2025 21:41:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=psihoexpert.ro header.i=@psihoexpert.ro header.b="BUFR7AD6";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C50D807B1; Tue, 14 Oct 2025 20:26:27 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ id D9639807B1; Tue, 14 Oct 2025 21:41:35 +0200 (CEST)
+Received: from mx1.wiredblade.com (mx1.wiredblade.com [162.216.242.36])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CD5E800D7
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 20:26:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DADE0800D7
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 21:41:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=psihoexpert.ro
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [98.97.63.107])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 2471BB2202A0;
- Tue, 14 Oct 2025 20:26:23 +0200 (CEST)
-Message-ID: <f9931130-96cb-41bf-9be2-6a390085bcad@freeshell.de>
-Date: Tue, 14 Oct 2025 11:26:21 -0700
+ spf=pass smtp.mailfrom=m95d+git@psihoexpert.ro
+dkim-signature: v=1; a=rsa-sha256; d=psihoexpert.ro; s=dynu;
+ c=relaxed/relaxed; q=dns/txt;
+ h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:In-Reply-To:References;
+ bh=Qajaz/K6P1tnUFudwWsHmyrJdctTZI+5ddRWLqTl4t8=;
+ b=BUFR7AD6LXJ0tVrUfPbVoHP91ZQ2GE5Ypl873nTwU1LsB9yfvb3OA6SiYnL0wAurlob3fXPtv0MdierbvGS81o25GiE9j7emNMps+EBgpOZKneYbyNUrnZ2Gv668ojaOhmePlihn3DRCev9dPQXvpqxnAvTIYZuMgjT45wMrWKWg3ndEtK+57/HIVuMlHMYVcUe3MSPnmUAc+aUCpGKw8Zn9/T7AH5nrHaVqcng93f4mxC3VjakQNE2uCT
+ iuUm4FMLge9j+M+mhlcxDuGXWjfNBkcUKE0EsUr9gUBfFTVl4yG5VUG4hfhb5r3GrAHPa83Fwn7m3Yb7gBLXW74ej07A==
+Received: from GRAPHRT (188-24-192-7.rdsnet.ro [188.24.192.7])
+ by mx1.wiredblade.com with ESMTPSA
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256)
+ ; Tue, 14 Oct 2025 19:41:17 +0000
+Date: Tue, 14 Oct 2025 22:41:25 +0300
+From: Marius Dinu <m95d+git@psihoexpert.ro>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Marius Dinu <m95d+git@psihoexpert.ro>, u-boot@lists.denx.de
+Subject: Re: [bug] can't start watchdog on RK3288
+Message-ID: <aO6nZTCUtgnZdN7G@GRAPHRT>
+References: <aO5F+z0n5ETHZZGt@GRAPHRT>
+ <CALeDE9M1nfBSM6jLer1uqtzf+b8eZq_33ALA7_mSKC5k53OoQw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Merge cherry-pick tag 'riscv-dt-for-v6.18' of
- https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux into soc/dt
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20251013215239.19059-2-e@freeshell.de>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20251013215239.19059-2-e@freeshell.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALeDE9M1nfBSM6jLer1uqtzf+b8eZq_33ALA7_mSKC5k53OoQw@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,51 +63,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Postscript,
-
-On 10/13/25 14:52, E Shattow wrote:
-> Cherry-pick RISC-V Misc Devicetrees for v6.18 (Starfive, SiFive, Microchip)
+On Tue, 2025-10-14 19.12.23 ++0100, Peter Robinson wrote:
+> Hi,
 > 
-> * tag 'riscv-dt-for-v6.18' of https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux:
->   riscv: dts: starfive: add Milk-V Mars CM Lite system-on-module
->   dt-bindings: riscv: starfive: add milkv,marscm-lite
->   riscv: dts: starfive: add Milk-V Mars CM system-on-module
->   dt-bindings: riscv: starfive: add milkv,marscm-emmc
->   riscv: dts: starfive: add common board dtsi for Milk-V Mars CM variants
->   riscv: dts: microchip: add a device tree for Discovery Kit
->   dt-bindings: riscv: microchip: document Discovery Kit
->   riscv: dts: microchip: rename icicle kit ccc clock and other minor fixes
->   riscv: dts: microchip: add icicle kit with production device
->   dt-bindings: riscv: microchip: document icicle kit with production device
->   riscv: dts: microchip: add common board dtsi for icicle kit variants
->   riscv: dts: starfive: jh7110-common: drop mmc post-power-on-delay-ms
->   riscv: dts: starfive: jh7110-common: drop no-mmc property from mmc1
->   riscv: dts: starfive: jh7110: bootph-pre-ram hinting needed by boot loader
->   riscv: dts: starfive: jh7110: add DMC memory controller
->   dt-bindings: memory-controllers: add StarFive JH7110 SoC DMC
->   riscv: dts: starfive: jh7110-common: drop no-sdio property from mmc1
->   riscv: dts: microchip: Minor whitespace cleanup
->   dt-bindings: riscv: Add SiFive vendor extensions description
+> > I have a bug to report. I tried starting the watchdog on Asus TinkerBoard S
+> > (Rockchip RK3288), but it's not working. I investigated a little bit. Here's
+> > what I found so far:
 > 
-> Link: https://lore.kernel.org/r/20250924-frighten-magazine-ee2f16e64638@spud
-> 
-> [ upstream commit: 8c0650e0cef283fb31aca5dc7c72b891ff121a88 ]
-> 
-> (cherry picked from commit 31727e081d77f1cde5ec261a72e0c33dae7ee3c2)
-...snip...
+> What version of U-Boot is this? Does the watchdog work in Linux?
 
-Although this is probably okay to take, I cannot vouch for the parts
-that touch platforms other than starfive jh7110. Talking on IRC about
-how this should be done I learned that taking a merge commit is possible
-for U-Boot maintainer to resolve later without too much trouble.
+Github master from 2025-07-29.
+In Linux I can start busybox watchdog and there are no errros. I can see
+class/watchdog/watchdog0/timeleft counting down and being reset, so it appears
+to be working, but I never tried to let it reset the system.
 
-Individual commits are what I intended (and did not understand how to
-do). I would like to instead do this as just the commits I am interested in.
-
-I will be sending a series to make the control.rst document more helpful
-in this regard, and probably add a "log" operation to the
-tools/update-subtree.sh script. There's a logical step missing between
-adding the remote repository already knowing what the commit id is, and
-firstly explaining how to obtain that commit id.
-
--E
