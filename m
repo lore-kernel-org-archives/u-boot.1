@@ -4,82 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 246B8CCD187
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 05:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7A60CCD187
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 07:41:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81B08809A5;
-	Tue, 14 Oct 2025 07:20:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E49C0807B1;
+	Tue, 14 Oct 2025 09:41:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XGMjpl5o";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="QeNhgbJm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB3608206E; Tue, 14 Oct 2025 07:20:43 +0200 (CEST)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DCC38809A5; Tue, 14 Oct 2025 09:22:24 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47ACC807B1
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 07:20:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AEE3080422
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 09:22:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-28a5b8b12a1so44110685ad.0
- for <u-boot@lists.denx.de>; Mon, 13 Oct 2025 22:20:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760419240; x=1761024040; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OCPKp6V1dRMoSh9h9mgFapdW3eLNLcAsJLCf96iYRaI=;
- b=XGMjpl5oDFaXVyDLyrDdkxLQwq4We11XGu4kAyvCQtCNq8GCfBTOgH3d+zVrMqjBcW
- dR00yMYEQXxKXYrjcXH16wFaP7CGntWyZEPjMUdVf5bgA+SGTrjpoqrA473WQQZUTaA6
- gKV6V0FN5sJE5VSvt+BkmXf2Mg/4/d44HJ11VWT3/l+g5WLrZm1T1JUW3cOgSkjjCEXj
- KrrRlYfogVTdRsNnzcyB/DYiT4TBXb/tcY4yFnoVWPSvHjew2rGvWMUHiqe5tvcnacS2
- wdt59X/iu8f/spB8OU2NPrXNXJJu6RNdNvFyKvydXRC5YCV1VAM20GiXdP0JFInKBlYk
- O+UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760419240; x=1761024040;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OCPKp6V1dRMoSh9h9mgFapdW3eLNLcAsJLCf96iYRaI=;
- b=A0RBrTo3TX4syXMOL7IX1SEM5s9ru2RICLiRAQbd991+bVSL++3ejZyU+pd0LWZ8oX
- +oQcO+pdUYNBOy6RxNa2eV6CERIBXkoRbpDWX/kknVNfbJMwfGKbBuiSV/PQNKf9MBHM
- t60VXEYky1Q43NkynGwV31ZckIJfRcsrUzoVx3Jx8nO77Eu5SeazZxQvATc3hqjYO2LL
- ZBk/9DXb/sPyEt9dySdTlHyGnb3wpWOEcfq/YTBDqFRpObMH5bymcQX/s2mmlccmaphA
- kbjfIdzyOwO0oIiF7GbWC8z56c40fqSQlCaRDe/epE9eXr6dcjQhQq48/KlAEYFgpSyE
- mtdQ==
-X-Gm-Message-State: AOJu0YzIoNKdjszYQQAwX/OuZBiu33I5/AG5CFqz1kE+xvkkYu6oScL9
- 5XAjcvh6v0vP1e/tUjGVLvmz5aIeVGASWJD8geKb379JC9NPL8uJgJhs
-X-Gm-Gg: ASbGncu09QXzhOKJrQkF7BsQGoLUxssixG8c8qUKnNZ7yieGxH57vti8GDb0mltO7V2
- k89NVtkVIJy0dNmwq0rILnlPQJEzjTZkLl9+HePHl+zYYaoD9xuoT83e0qPNfjd5it3kHr4CcZ4
- K8yl0FaV7fhCRIgI0Gkkl5biV9l2A7ueP/CzCF4M8RgLKAnh+XJU9UBmmZE6XUtar//z2LWFRoS
- pamfO6AAh8n9FKU/UE3Alr/FtIIpxXiQ70XifPFjAyDsG2UUVRIjLUXuVoW4YPO9zH3cCf/Eqto
- f1BcZN2aI+CjWg3SY4UYlwQBI89L+Vn/vKwX7Kldi0KLE7rqwzu/6plKP7IOpaXIqP/D97/HAfY
- o1T/knmP1/uwFX87jrQu9t1zsseHvxO7kF03jqzdwd82KX+V50ULS
-X-Google-Smtp-Source: AGHT+IF+Ug4CQrF5i0zQUkmY8RyQEE3z2Dms97xK5UAYJfFYVKNdGGZ7UXgwZmQhkeU78/h/3pmeFQ==
-X-Received: by 2002:a17:903:1b44:b0:279:a5bb:54e2 with SMTP id
- d9443c01a7336-29027379a7dmr283873845ad.20.1760419239595; 
- Mon, 13 Oct 2025 22:20:39 -0700 (PDT)
-Received: from cs20-buildserver.. ([2402:7500:402:b3a0:218b:9154:d891:e95f])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-29034f35e62sm151464465ad.88.2025.10.13.22.20.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 13 Oct 2025 22:20:39 -0700 (PDT)
-From: Jim Liu <jim.t90615@gmail.com>
-X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
-To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, marek.vasut+renesas@mailbox.org,
- paul.barker.ct@bp.renesas.com, trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1] net: designware: fix bitbang init error
-Date: Tue, 14 Oct 2025 13:20:05 +0800
-Message-Id: <20251014052005.307902-1-JJLIU0@nuvoton.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 6DF17260B4;
+ Tue, 14 Oct 2025 09:22:21 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id ySDQ4ZysZz7s; Tue, 14 Oct 2025 09:22:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1760426540; bh=Y3JWWvjj43z9zBQuj3qzmimPSH6gzgRvSxgpeKrkKyU=;
+ h=From:Date:Subject:To:Cc;
+ b=QeNhgbJmcVniD/av7G3+WHJEQ8WG9h1P8KpT/hEpYvYQubDm23I30HH85gTrChsTK
+ oOBsmMCXjB68Sc90XD9klzSjIHK1MlY4n3uRyvOqQn7u8jEcGLqkqr594Re25/+Bdh
+ 5YajsnJJtymFbCkem5HeiWQ6uIgkG1CaORpyhkqPl7HQJO+4Jw0ePsWLWWaQWMpAi5
+ NuqV75CPWLhTGBz59CbAvCVvyQ8ZjO3pps7imLTgjCYuadGNPHThewqiEK5hfiYBGE
+ S7lLy5kqSrmmoFaGtnx+h3iqA3NiHM+Y0dJ/RWmrnLIa9vBCfKr480QVcR5niZ8hyR
+ XJOAhyIcT4jTQ==
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+Date: Tue, 14 Oct 2025 12:52:10 +0530
+Subject: [PATCH] armv8: implement workaround for broken CNTFRQ_EL0 value
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251014-armv8-broken-cntfrq-v1-1-b63f9c69ffcb@disroot.org>
+X-B4-Tracking: v=1; b=H4sIACH67WgC/x3M3QpAQBBA4VfRXJva9Ze8ilwsZphkMSspeXeby
+ +/inAcCqVCAJnlA6ZIgm4+waQLD7PxEKGM0ZCYrrbEFOl2vGnvdFvI4+JP1QM5Lw1XNPVcEsdy
+ VWO7/2nbv+wH/h77uZQAAAA==
+X-Change-ID: 20251014-armv8-broken-cntfrq-f350f68fbf6e
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1760426538; l=2327;
+ i=kauschluss@disroot.org; s=20250202; h=from:subject:message-id;
+ bh=Y3JWWvjj43z9zBQuj3qzmimPSH6gzgRvSxgpeKrkKyU=;
+ b=c8BIa1ALfXwTQ0mO2uf+yiF2k1wDLBOs3xDq9Lk3gifQ+5B9G4a0ybhxTnIXJMez0KvgkF1tu
+ xjVaIca9mCtA4YIh/0Byl9PRUMvHu6VXkbjxUXs05Bz6ruwT3citjVA
+X-Developer-Key: i=kauschluss@disroot.org; a=ed25519;
+ pk=h2xeR+V2I1+GrfDPAhZa3M+NWA0Cnbdkkq1bH3ct1hE=
+X-Mailman-Approved-At: Tue, 14 Oct 2025 09:41:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,42 +78,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Synchronous Abort and reset errors occurred due
-to incorrect parameter passing during initialization.
+In devices where the U-Boot is used as a secondary bootloader, we rely
+on the device's primary bootloader to implement CNTFRQ_EL0. However,
+this reliance may lead to a non-functional timer in broken firmware.
 
-Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+For instance, some versions of Samsung's S-Boot don't implement it. It's
+also not possible to set it in the U-Boot, because it's booted in a lower
+exception level. CNTFRQ_EL0 is reported to be 0.
+
+Thus, the only solution is to add a config option which, when enabled,
+returns a hard coded value (CONFIG_COUNTER_FREQUENCY) instead of querying
+CNTFRQ_EL0.
+
+Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 ---
- drivers/net/designware.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ arch/arm/cpu/armv8/Kconfig         | 9 +++++++++
+ arch/arm/cpu/armv8/generic_timer.c | 4 ++++
+ 2 files changed, 13 insertions(+)
 
-diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index 2fd92cf16bb..132a9afa2a6 100644
---- a/drivers/net/designware.c
-+++ b/drivers/net/designware.c
-@@ -125,6 +125,14 @@ static int dw_mdio_reset(struct mii_dev *bus)
+diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
+index 199335cd6040d30a355a7fd5448a449fa7f550fb..d54d874b7caea200e1c05f522d8affe6d239a102 100644
+--- a/arch/arm/cpu/armv8/Kconfig
++++ b/arch/arm/cpu/armv8/Kconfig
+@@ -4,6 +4,15 @@ config CMO_BY_VA_ONLY
+ 	bool "Force cache maintenance to be exclusively by VA"
+ 	depends on !SYS_DISABLE_DCACHE_OPS
  
- 	return __dw_mdio_reset(dev);
++config ARMV8_CNTFRQ_BROKEN
++	bool "Fix broken ARMv8 generic timer"
++	depends on COUNTER_FREQUENCY > 0
++	depends on SYS_ARCH_TIMER
++	help
++	  Say Y here if there is no trustable firmware present which sets
++	  CNTFRQ_EL0 frequency before U-Boot. U-Boot will use the
++	  CONFIG_COUNTER_FREQUENCY value as the reported frequency.
++
+ config ARMV8_SPL_EXCEPTION_VECTORS
+ 	bool "Install crash dump exception vectors"
+ 	depends on SPL
+diff --git a/arch/arm/cpu/armv8/generic_timer.c b/arch/arm/cpu/armv8/generic_timer.c
+index 1de7ec596fc7cbbc3e78a241f163bc0a4fcad6b6..409570cf6fda79527e296b958368b552900524b1 100644
+--- a/arch/arm/cpu/armv8/generic_timer.c
++++ b/arch/arm/cpu/armv8/generic_timer.c
+@@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
+ unsigned long notrace get_tbclk(void)
+ {
+ 	unsigned long cntfrq;
++
++	if (IS_ENABLED(CONFIG_ARMV8_CNTFRQ_BROKEN))
++		return CONFIG_COUNTER_FREQUENCY;
++
+ 	asm volatile("mrs %0, cntfrq_el0" : "=r" (cntfrq));
+ 	return cntfrq;
  }
-+
-+static int dw_bb_mdio_reset(struct mii_dev *bus)
-+{
-+	struct dw_eth_dev *priv = bus->priv;
-+
-+	return __dw_mdio_reset(priv->dev);
-+}
-+
- #endif
- 
- #if IS_ENABLED(CONFIG_DM_MDIO)
-@@ -348,7 +356,7 @@ static int dw_bb_mdio_init(const char *name, struct udevice *dev)
- 	bus->read = dw_bb_miiphy_read;
- 	bus->write = dw_bb_miiphy_write;
- #if CONFIG_IS_ENABLED(DM_GPIO)
--	bus->reset = dw_mdio_reset;
-+	bus->reset = dw_bb_mdio_reset;
- #endif
- 	bus->priv = dwpriv;
- 
+
+---
+base-commit: a5b3be1a37e19646b9d36c91f11b23f568be4f21
+change-id: 20251014-armv8-broken-cntfrq-f350f68fbf6e
+
+Best regards,
 -- 
-2.34.1
+Kaustabh Chakraborty <kauschluss@disroot.org>
 
