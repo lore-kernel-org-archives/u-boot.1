@@ -4,61 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4B6FCCD18E
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 08:57:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E530DCCD187
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 09:01:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E04C807C0;
-	Tue, 14 Oct 2025 10:57:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6DB8C82BA7;
+	Tue, 14 Oct 2025 11:01:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="FZoGh7WQ";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qpqzJuLS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B091B82991; Tue, 14 Oct 2025 10:57:07 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id A670882FC7; Tue, 14 Oct 2025 11:01:09 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDE9880422
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 10:57:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75EA1807C0
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 11:01:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=stefan.roese@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cm7Pq6zrKz9t8d;
- Tue, 14 Oct 2025 10:57:03 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cm7VT0LKWz9tBF;
+ Tue, 14 Oct 2025 11:01:05 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1760432224;
+ s=mail20150812; t=1760432465;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=KfUr//XicS+RxAJlHGgjGEjMpZLHePjqgf29lLiINSE=;
- b=FZoGh7WQYLF1clinamRSNtL3u/jl4vBzg00dziHN3uWHCIeSQwc6ngJC5kh87zlDuPs8pj
- m+ox273HyIMAOaMnBn7rmBj376IOR3yydrIhjuVIuwVxiqWqrCfU/3M01l6xe4oP86P/14
- GYIKrASQEHbXoZy7qesVh5+I2A0ko61gMBbvrrvI0OLi9waECYhf/8hICcFCqcJ483GEjg
- kgDQaaNfZn+cJL6mQ35pC5sSOXtnlPgwI4ihL2WptEkX/s9ORU2gYOYJkX4c2/pPJ5qpIu
- DUXL5KsLqaHZ8uiIes04nYGzGTMFiyKbDPUAkhsyZ15WOkjNVkt6qvdxsRtWpw==
-Message-ID: <380aa5b9-4993-44a6-b32f-9794f68b1926@mailbox.org>
-Date: Tue, 14 Oct 2025 10:57:02 +0200
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=anf2uwehGW5z0u9vLbXQRaIKu/grFvVBXTYRWsRVca8=;
+ b=qpqzJuLSvoduPbAY2G+CmZxzeuTteWt8C0wo6QgoYUsmGozylvAlCMcUyIUZnqkhpQzpoX
+ KRkwglLW0ceOmrO9YC4dbEclHTQWDHL5jIepCIV/pHej2Mz+24tlwyWyeqD0XuLSyNgiRs
+ MEqKmulOhjVXeuBVUqZjlYFZngTUOGw0Cab0jpEJJMsko7qajXHypAzGcOIq5iglp+1fnt
+ yKQZ6yITawR6jlVNy9W2Wt5m0VmDZAQcJhHJy5KpeKcTJedPSnkle2mWkHzWTvFeJjUt+f
+ IsGpEbH7wDwAanAwx/+eL51oTMK1U9YNiFrsIACpkaYp/LcdDNIZSaESeNVioQ==
+Message-ID: <9f898b02-9d85-4e2a-9686-c59b1fcc16ae@mailbox.org>
+Date: Tue, 14 Oct 2025 11:01:02 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] pci: mvebu: Unable to assign mbus windows for 2nd pcie
- controller
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20250929215006.6654-1-mibodhi@gmail.com>
- <efe2806c-820d-4fc3-aa54-7650aa6a3180@mailbox.org>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 From: Stefan Roese <stefan.roese@mailbox.org>
-In-Reply-To: <efe2806c-820d-4fc3-aa54-7650aa6a3180@mailbox.org>
+Subject: Please pull u-boot-marvell/master
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 3f6s8s3rrnckcn4t3ks4bs76wo1ijnxn
-X-MBO-RS-ID: dcd1d137d25637f9ce6
+X-MBO-RS-ID: 23ac03f3feeafbd8470
+X-MBO-RS-META: eri1rcxwi6uxdg961yssy6e8eccjygeb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,35 +70,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/30/25 14:41, Stefan Roese wrote:
-> On 9/29/25 23:49, Tony Dinh wrote:
->> Correct the memory and IO mbus windows size increments in 
->> mvebu_pcie_bind.
->>
->> Currently, pcie1 controller resource_size(&mem) and resource_size(&io)
->> checks result in a failure. This is because mem.end and io.end must be
->> incremented at the end of pcie0 windows assignment.
->>
->> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
->> ---
->>
->>   drivers/pci/pci_mvebu.c | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
->> index 77815513b76..3985bd59607 100644
->> --- a/drivers/pci/pci_mvebu.c
->> +++ b/drivers/pci/pci_mvebu.c
->> @@ -763,6 +763,7 @@ static int mvebu_pcie_bind(struct udevice *parent)
->>               pcie->mem.start = mem.start;
->>               pcie->mem.end = mem.start + SZ_128M - 1;
->>               mem.start += SZ_128M;
->> +            mem.end = mem.start + SZ_128M - 1;
-> 
-> Reviewed-by: Stefan Roese <stefan.roese@mailbox.org>
+Hi Tom,
 
-Applied to u-boot-marvell/master
+please pull this batch of Marvell related patches:
+
+----------------------------------------------------------------
+- sata_mv / octeontx_hsmmc: Smatch fixes / patches (Andrew)
+- dts: pxa1908: convert to OF_UPSTREAM (Duje)
+- phy: marvell: Tighten MVEBU_COMPHY_SUPPORT dependencies (Tom)
+- pci: mvebu: Unable to assign mbus windows for 2nd pcie controller (Tony)
+----------------------------------------------------------------
+
+Here the Azure build, without any issues:
+
+https://dev.azure.com/sr0718/u-boot/_build/results?buildId=398&view=results
 
 Thanks,
 Stefan
+
+The following changes since commit 48f21e66e360552c75d70a50421d0e0ed1f59e90:
+
+   fs: jffs2: Remove always true test (2025-10-10 14:27:59 -0600)
+
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-marvell.git 
+tags/u-boot-marvell-20251014
+
+for you to fetch changes up to 81598d19ca7d60724c403a3ed4a10840e177288b:
+
+   pci: mvebu: Unable to assign mbus windows for 2nd pcie controller 
+(2025-10-13 16:13:21 +0200)
+
+----------------------------------------------------------------
+Andrew Goodbody (3):
+       sata: sata_mv: Remove always true test
+       mmc: octeontx_hsmmc: Need parens in expression
+       mmc: octeontx_hsmmc: Remove impossible test
+
+Duje Mihanović (1):
+       ARM: dts: pxa1908: convert to OF_UPSTREAM
+
+Tom Rini (1):
+       phy: marvell: Tighten MVEBU_COMPHY_SUPPORT dependencies
+
+Tony Dinh (1):
+       pci: mvebu: Unable to assign mbus windows for 2nd pcie controller
+
+  arch/arm/Kconfig                                   |   1 +
+  .../dts/pxa1908-samsung-coreprimevelte-u-boot.dtsi |  20 ++++
+  arch/arm/dts/pxa1908-samsung-coreprimevelte.dts    |  74 --------------
+  arch/arm/dts/pxa1908.dtsi                          | 106 
+---------------------
+  configs/coreprimevelte_defconfig                   |   7 +-
+  drivers/ata/sata_mv.c                              |  43 ++++-----
+  drivers/mmc/octeontx_hsmmc.c                       |   5 +-
+  drivers/pci/pci_mvebu.c                            |   2 +
+  drivers/phy/marvell/Kconfig                        |   1 +
+  9 files changed, 47 insertions(+), 212 deletions(-)
+  create mode 100644 arch/arm/dts/pxa1908-samsung-coreprimevelte-u-boot.dtsi
+  delete mode 100644 arch/arm/dts/pxa1908-samsung-coreprimevelte.dts
+  delete mode 100644 arch/arm/dts/pxa1908.dtsi
 
