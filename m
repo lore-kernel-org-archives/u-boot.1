@@ -4,96 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6B6BCCD184
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 14:22:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BDB9CCD192
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 15:14:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 617978312A;
-	Tue, 14 Oct 2025 16:22:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 498CE807B1;
+	Tue, 14 Oct 2025 17:14:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sdZdSo+i";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="dHNv4VxE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66186807B1; Tue, 14 Oct 2025 16:22:52 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id DF7FC8312A; Tue, 14 Oct 2025 17:14:38 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 400608312A
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 16:22:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 866A080107
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 17:14:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-43f86ddb3f4so1940060b6e.2
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 07:22:50 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-b4f323cf89bso973816066b.2
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 08:14:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760451769; x=1761056569; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wEctA2w32PuSWWYU82c3qHcdGNcSRYtbljYtH4SLUwo=;
- b=sdZdSo+iueGoBK04yW+1E1yHkAHneZt+NtWvsxlvyZ+sYDi4ETVz1Mu4PpzbK7Z8D6
- Hdb2dbUbfrdN7OKv0P6VJJ0EPVX+3tQ2uNkeacFmtXDBa9OGGZOpyBjMJf35Mdr5/1ze
- wRNIlPWWjdM2ILBAoiQtDuD5Hxqr75sheEg+M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760451769; x=1761056569;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1760454876; x=1761059676;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wEctA2w32PuSWWYU82c3qHcdGNcSRYtbljYtH4SLUwo=;
- b=FuzQC/q2J9RLtiwpD9fCxDWcL0zUkn4UhcwkfeiFvS9SZKYPuDg5VFGMJeRV+7/4YX
- u4smkG+3sHx5SOuhj8azEF+44VrbDP52fC04sI9zlovCxXO1hToyvNc38rCbBDDQFGkf
- Fki1ENxXM9Eq+kU8RyYV4SKvVBuqwU8L4dkMYRtWa/je8tHZg/S37i3r0zktMgJCDVit
- TaWpZ1kemfimxhQAnesiVlybdAJI3raq/ABEJ6/4V7aqs5wOfdRTgGKoumV+c+xzuhnb
- PO4EU+KvNELCCIp1EnQX0HkhPYxN+H4Yp2EWcqLkr/GySEh6lZDC0hxDkS1DpgAn929q
- pYyg==
-X-Gm-Message-State: AOJu0YyS+ZlVc0UirC0v5S4uGsZUZL3tO6RjytoAntikmSYfAz0GIr5L
- oW2WiiIw0+FEU4ZtO3RRJFJhX/lba4wcTUsdayY4Oz2FpNitJ9U6OJzvcr84x9zVLUX0X4HIm4Q
- lMt9KY98=
-X-Gm-Gg: ASbGncsr7AGXrMbfT1u2CP41ipmvbV1RKVrdvwGQQxDmdqrmZzxzXogQt7i2gmH7gTB
- TtoDsul0w0lb9crPE6crhfJDhThaxge9wr9YnaSbQNluuTLjyPyP+ljy8ltzDPoe6bKouoR0Omy
- +8rZEETSlxekG+YwlUapv1Sk/Z5r19JmrIHXoL7om4wylscZHasEScVOSTpvYJvbNEYbUJeETuN
- 43TnaBowe00DJUWqGPk8SJcOIxyVxkLiJMwLbGYP6QXSnlJbxPCSVabDsDN13XHXQa/busy7JZi
- O5HaNKfXscAlse6s7+FDdqt0z3oOEmD8cHrrD9fJf9U1Hsfios7OvJs9tOzGkcDa1boMQ7O5UFk
- IMX74cb4KjLi0kTtWSNEFrVEBSNwzRpa6vhjZbHD/2bMotA2k5xrgE+IGsVz6W2vkSIusfk8aUb
- xCvQxDafS4RYa/2Ow=
-X-Google-Smtp-Source: AGHT+IEO4yXH3btx6YtaIrGCEzO2V4az5eDsxsBzdNQFztf7auFgMO+dkcNe3IwJed1xSvF+yIDYJg==
-X-Received: by 2002:a05:6808:5290:b0:437:dade:463f with SMTP id
- 5614622812f47-4417b3dae8bmr11498957b6e.34.1760451768924; 
- Tue, 14 Oct 2025 07:22:48 -0700 (PDT)
-Received: from bill-the-cat (fixed-189-203-106-235.totalplay.net.
- [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4419887fd8bsm3320246b6e.2.2025.10.14.07.22.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Oct 2025 07:22:48 -0700 (PDT)
-Date: Tue, 14 Oct 2025 08:22:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Udit Kumar <u-kumar1@ti.com>, Beleswar Padhi <b-padhi@ti.com>,
- Hari Nagalla <hnagalla@ti.com>, Andrew Davis <afd@ti.com>,
- Judith Mendez <jm@ti.com>, Ryan Eatmon <reatmon@ti.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH 06/11] arm: dts: imx8m: Add remoteproc node
-Message-ID: <20251014142245.GN6113@bill-the-cat>
-References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
- <20251013-imx-rproc-v1-6-fb43a3fafcd0@nxp.com>
- <20251013155546.GJ6113@bill-the-cat>
- <20251014015037.GA31468@nxa18884-linux.ap.freescale.net>
+ bh=fQ2/l+GDmpBi0NY9SU8IDx2zM7PZVPBo+05aUkfaAj4=;
+ b=dHNv4VxErSiTdBPFJICGHF3PG0j67Jq3i974RNCfahPHmkrq+JtFiHMz2H6W847yi6
+ gvDrXxfGLqTqmaaB2rsE4DoyNsarM7weBTzwaT7In1/DLnEYq04kYze7kjhXRkyRfRNn
+ ZgCMckQMpxTpl6FaZGt0sYrAKIBb3lNl+/pLKwo1WRaD/y7C4+VdTFKv7SsEpQ4olTqq
+ eahUFrmEI0r5IdJ5X0Xlae5QXEv2mJmOG0+WTOo6G6SgLaU6h1QN6RQpANG67mSib2BX
+ u87Bz62OkFUi6qXWslWDggQE3xc00F7HmZsA9IoWdZoplLz+tjo6huS29RLcx120/jMS
+ WLQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760454876; x=1761059676;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=fQ2/l+GDmpBi0NY9SU8IDx2zM7PZVPBo+05aUkfaAj4=;
+ b=PA+VPCAv1079bgFh4FpIGXnrRMF+bHVgvR4e24EQZN+AD+GSb/NIjm9rGB4qa1+G/C
+ RzHj5rNIz7lhFzmo/zpjseTw31gdfadMwhLEBx7kezldVU7Br4J9ntXWZQijRtl5IEUp
+ JJaSk+8afnHUC1IYSQHPe9rIXN7WzDIZ5bFE3oaHjdt3uygY7uBMkAdi8Axs0qeQfq3e
+ l9ua8U6W3Hx7djLJOmqSPNSDsT0JcPqJcMqutgPg/HLW7E2r2CsAFb5fhCQvJQO+VemI
+ mGrupExKkAAB1hZlp32cFJm9n8k6ADUJZSgyj6MIxkk6b2/U10FCnFf2VBNtP/fuByTm
+ CJ3Q==
+X-Gm-Message-State: AOJu0YxSeeKx3+Ds0QlbrGSawmHh1/NaFu5jBXb4yPg/TYpD4e0QfxoU
+ UpNGuBTPhsiu4CAlVQWPyfHBkSuAAldXzBQiyKVtTsUuOK4Q8FJm4tblThUUNw4fUZBGRxPZ58b
+ hMOv/2g==
+X-Gm-Gg: ASbGncvocT08GcPwiLwnkGzjB4o61+haPTMrAZdOR9WMoB2qGak2LYNl772jb5BT4IN
+ A3vG3mOqwuztG7b/ggAJQJ21nYoy2ttqsWGQWuODFTARkEOXkynwy+EzZ/lwpHjmRwv+6sXxvJm
+ yQKa0n9lNQpqofUW7H68m8C9D7kbZOcjCP6KWZY1Smf0yGvRj5LlovZMW6HAmxtGTXpb3yYiuZr
+ eq5kdScYcb0Z/3s9pBhyFobNemA1/v4RxhcWV94djpdirmHfmPyLxb8RSmXSoNUbA0ycgYNQP8W
+ GL2ZX+dKpmuzHGOMb//NauNqEiPxWSoeWiK5Y3nb/QVrbyxrmFtp/Xd/MeLXzOgYukA8RLBFblU
+ pX6PngBrkYPmUibFOE9VLwJ43CLMVVUc3BJJUNCIgBV4=
+X-Google-Smtp-Source: AGHT+IFtKHWYAumG2id1psBXKdJPel2V4TWzLXXyV38rg2+hSRRHYbyJYspBYodtzXoDdcMbbn4U3w==
+X-Received: by 2002:a17:907:6ea9:b0:b0b:f228:25a with SMTP id
+ a640c23a62f3a-b50ac8e5713mr2507805866b.64.1760454875757; 
+ Tue, 14 Oct 2025 08:14:35 -0700 (PDT)
+Received: from [10.254.183.223] ([149.199.62.131])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b5cccdaa0f9sm2431866b.45.2025.10.14.08.14.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 14 Oct 2025 08:14:35 -0700 (PDT)
+Message-ID: <4ffe0d16-3b4f-4a00-a3dc-7dcd7239f5f1@monstr.eu>
+Date: Tue, 14 Oct 2025 17:14:30 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sxPSYHK7ToevmQhX"
-Content-Disposition: inline
-In-Reply-To: <20251014015037.GA31468@nxa18884-linux.ap.freescale.net>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Michal Simek <monstr@monstr.eu>
+Subject: [GIT PULL] AMD/Xilinx changes for 2026-01-rc1 v2
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,56 +98,179 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---sxPSYHK7ToevmQhX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+please pull these patches to your tree.
+I have also took FWU patches which are only for our platform.
 
-On Tue, Oct 14, 2025 at 09:50:37AM +0800, Peng Fan wrote:
-> Hi Tom,
->=20
-> On Mon, Oct 13, 2025 at 09:55:46AM -0600, Tom Rini wrote:
-> >On Mon, Oct 13, 2025 at 10:49:25AM +0800, Peng Fan (OSS) wrote:
-> >> From: Peng Fan <peng.fan@nxp.com>
-> >>=20
-> >> Add CM7/4 nodes for i.MX8MQ/M/N/P.
-> >>=20
-> >> Reviewed-by: Ye Li <ye.li@nxp.com>
-> >> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> >> ---
-> >>  arch/arm/dts/imx8mm-u-boot.dtsi | 4 ++++
-> >>  arch/arm/dts/imx8mn-u-boot.dtsi | 4 ++++
-> >>  arch/arm/dts/imx8mp-u-boot.dtsi | 4 ++++
-> >>  arch/arm/dts/imx8mq-u-boot.dtsi | 4 ++++
-> >>  4 files changed, 16 insertions(+)
-> >
-> >Why is this in the u-boot.dtsi? We have
->=20
-> I am preparing the Linux dts patches and will send out for reviewing.
-> Before those lands into Linux dts, we need that in imx8m*-u-boot.dtsi.
-> After linux side done, we could clean up the imx8m*-u-boot.dtsi
->=20
-> >dts/upstream/Bindings/remoteproc/fsl,imx-rproc.yaml and so your updates
-> >here should be compatible with that, yes?
->=20
-> Yes. Per the dt-bindings, only compatible is required and that is what
-> this patch added.
+Thanks,
+Michal
 
-OK, thanks.
+The following changes since commit eea470fd7f6a0db9fbdf8ab187a8b522dbb49c10:
 
---=20
-Tom
+   Subtree merge tag 'v6.17-dts' of dts repo [1] into dts/upstream (2025-10-08 
+15:01:20 -0600)
 
---sxPSYHK7ToevmQhX
-Content-Type: application/pgp-signature; name="signature.asc"
+are available in the Git repository at:
 
------BEGIN PGP SIGNATURE-----
+   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
+tags/xilinx-for-v2026.01-rc1-v2
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO5ctQAKCRAr4qD1Cr/k
-ChkfAP9vI0N2x92olno4Rl/jM5lq5dysXJzNscQfBDyTWnRDBQD/W32QcDdXcJz7
-j7IViYMlPNrfFox1W111yOB7BbTFDA0=
-=rltC
------END PGP SIGNATURE-----
+for you to fetch changes up to a040578d8270ed8788d7663808ea63ce5ffd7840:
 
---sxPSYHK7ToevmQhX--
+   spi: cadence-qspi: Remove cdns,is-dma property handling (2025-10-14 16:00:45 
++0200)
+
+----------------------------------------------------------------
+AMD/Xilinx/FPGA changes for v2026.01-rc1 v2
+
+zynqmp:
+- DT updates
+- Enable new commands
+
+mbv:
+- Simplify defconfigs
+
+clk:
+- Separate legacy handler and use SMC handler
+
+misc:
+- Tighten TTC Kconfig dependency
+
+net:
+- Add 10GBE support to Gem
+
+pwm:
+- cadence-ttc: Fix array sizes
+
+fwu:
+- Add platform hook support
+
+spi:
+- Remove undocumented cdns,is-dma property
+
+video:
+- Fix DPSUB RGB handling
+
+----------------------------------------------------------------
+Andrew Goodbody (2):
+       pwm: cadence-ttc: Insufficient elements in array
+       video: zynqmp: Prevent use of uninitialised variables
+
+Michal Simek (15):
+       clk: xilinx: Call generic smc_call_handler()
+       clk: xilinx: Separate legacy format to own handler
+       arm64: zynqmp: Remove undocumented arasan, has-mdma property
+       arm64: zynqmp: Remove RTC calibration from sm-k26
+       arm64: zynqmp: Remove "ti,tps53679" property
+       arm64: zynqmp: Fix incomplete comment in zynqmp-sc-vn-p-b2197-00-revA.dtso
+       arm64: zynqmp: Enable PSCI 1.0
+       arm64: zynqmp: Update compatible string for tps546X24
+       arm64: zynqmp: Introduce DP port labels
+       arm64: zynqmp: Enable DP for kr260, kv260, zcu100, zcu102, zcu104, zcu111
+       arm64: zynqmp: Add pmw_fan label to k26
+       arm64: zynqmp: Fix DTOVL warning about graphs in kv/kr260
+       xilinx: Replace PHY_VITESSE by PHY_MSCC
+       xilinx: Enable SNTP/DATE commands and RTC
+       spi: cadence-qspi: Remove cdns,is-dma property handling
+
+Naman Trivedi (1):
+       drivers: firmware: update xilinx_pm_request to support max payload
+
+Padmarao Begari (4):
+       arm64: xilinx: Add i2c mux idle disconnect property
+       FWU: Add platform hook support for fwu metata
+       board: xilinx: update guid based on metadata
+       xilinx: mbv: Remove redundancy in MB-V defconfigs
+
+Quanyang Wang (1):
+       arm64: zynqmp: Disable coresight by default
+
+Radhey Shyam Pandey (1):
+       arm64: zynqmp: Revert usb node drive strength and slew rate for zcu106
+
+Tom Rini (1):
+       timer: Tighten CADENCE_TTC_TIMER dependencies
+
+Venkatesh Yadav Abbarapu (1):
+       drivers: net: Add versal2 10GBE device support
+
+  arch/arm/dts/versal-mini-ospi.dtsi             |   1 -
+  arch/arm/dts/versal-net-mini-ospi.dtsi         |   1 -
+  arch/arm/dts/zynqmp-g-a2197-00-revA.dts        |   2 +-
+  arch/arm/dts/zynqmp-m-a2197-01-revA.dts        |   2 +-
+  arch/arm/dts/zynqmp-m-a2197-02-revA.dts        |   2 +-
+  arch/arm/dts/zynqmp-m-a2197-03-revA.dts        |   2 +-
+  arch/arm/dts/zynqmp-mini-nand.dts              |   1 -
+  arch/arm/dts/zynqmp-p-a2197-00-revA.dts        |   2 +-
+  arch/arm/dts/zynqmp-sc-vek280-revA.dtso        |   1 +
+  arch/arm/dts/zynqmp-sc-vhk158-revA.dtso        |   2 +
+  arch/arm/dts/zynqmp-sc-vm-p-m1369-00-revA.dtso |  28 ++---
+  arch/arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso |  16 +--
+  arch/arm/dts/zynqmp-sc-vpk120-revB.dtso        |   2 +
+  arch/arm/dts/zynqmp-sc-vpk180-revA.dtso        |   1 +
+  arch/arm/dts/zynqmp-sc-vpk180-revB.dtso        |   1 +
+  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso         |  19 ++++
+  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso         |   2 +-
+  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso         |  21 +++-
+  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso         |   4 +-
+  arch/arm/dts/zynqmp-sm-k26-revA.dts            |   3 +-
+  arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts     |   2 +-
+  arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts       |   1 -
+  arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts       |   1 -
+  arch/arm/dts/zynqmp-zcu100-revC.dts            |  18 +++
+  arch/arm/dts/zynqmp-zcu102-revA.dts            |  18 +++
+  arch/arm/dts/zynqmp-zcu104-revA.dts            |  18 +++
+  arch/arm/dts/zynqmp-zcu104-revC.dts            |  18 +++
+  arch/arm/dts/zynqmp-zcu106-revA.dts            |  14 +--
+  arch/arm/dts/zynqmp-zcu111-revA.dts            |  18 +++
+  arch/arm/dts/zynqmp.dtsi                       |  18 +--
+  arch/arm/mach-zynqmp/aes.c                     |   3 +-
+  arch/arm/mach-zynqmp/cpu.c                     |   4 +-
+  arch/arm/mach-zynqmp/zynqmp.c                  |  10 +-
+  board/xilinx/common/board.c                    |  27 +++++
+  board/xilinx/zynqmp/zynqmp.c                   |   2 +-
+  configs/amd_versal2_virt_defconfig             |   5 +-
+  configs/microblaze-generic_defconfig           |   3 +
+  configs/xilinx_mbv32_defconfig                 |   3 +
+  configs/xilinx_mbv32_smode_defconfig           |  49 +-------
+  configs/xilinx_mbv64_defconfig                 |  47 +-------
+  configs/xilinx_mbv64_smode_defconfig           |  50 +-------
+  configs/xilinx_versal_net_virt_defconfig       |   5 +-
+  configs/xilinx_versal_virt_defconfig           |   5 +-
+  configs/xilinx_zynq_virt_defconfig             |   3 +
+  configs/xilinx_zynqmp_kria_defconfig           |   1 +
+  configs/xilinx_zynqmp_virt_defconfig           |   3 +-
+  drivers/clk/clk_versal.c                       |  55 +++++----
+  drivers/firmware/firmware-zynqmp.c             |  36 +++---
+  drivers/fpga/versalpl.c                        |   5 +-
+  drivers/fpga/zynqmppl.c                        |   8 +-
+  drivers/gpio/zynqmp_gpio_modepin.c             |   4 +-
+  drivers/mmc/zynq_sdhci.c                       |  13 ++-
+  drivers/net/zynq_gem.c                         |  95 +++++++++++++++-
+  drivers/pinctrl/pinctrl-zynqmp.c               |  24 ++--
+  drivers/power/domain/zynqmp-power-domain.c     |   2 +-
+  drivers/pwm/pwm-cadence-ttc.c                  |  10 +-
+  drivers/reset/reset-zynqmp.c                   |   2 +-
+  drivers/soc/soc_amd_versal2.c                  |   2 +-
+  drivers/soc/soc_xilinx_versal.c                |   2 +-
+  drivers/soc/soc_xilinx_versal_net.c            |   2 +-
+  drivers/soc/soc_xilinx_zynqmp.c                |   2 +-
+  drivers/spi/cadence_ospi_versal.c              |   4 +-
+  drivers/spi/cadence_qspi.c                     |  10 +-
+  drivers/spi/cadence_qspi.h                     |   5 -
+  drivers/spi/cadence_qspi_apb.c                 | 119 --------------------
+  drivers/timer/Kconfig                          |   2 +-
+  drivers/video/zynqmp/zynqmp_dpsub.c            |  12 +-
+  include/fwu.h                                  |  11 ++
+  include/zynqmp_firmware.h                      |   8 +-
+  lib/fwu_updates/fwu.c                          |  18 +++
+  70 files changed, 481 insertions(+), 429 deletions(-)
+
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
