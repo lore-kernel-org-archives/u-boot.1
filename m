@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BDB9CCD192
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 15:14:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BACFECCD184
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 15:47:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 498CE807B1;
-	Tue, 14 Oct 2025 17:14:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 03E6B8312A;
+	Tue, 14 Oct 2025 17:47:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="dHNv4VxE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gslCIu9O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF7FC8312A; Tue, 14 Oct 2025 17:14:38 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id C698483303; Tue, 14 Oct 2025 17:47:34 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 866A080107
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 17:14:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C3E180107
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 17:47:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b4f323cf89bso973816066b.2
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 08:14:36 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-441c44f5536so596495b6e.1
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 08:47:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1760454876; x=1761059676;
- darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=fQ2/l+GDmpBi0NY9SU8IDx2zM7PZVPBo+05aUkfaAj4=;
- b=dHNv4VxErSiTdBPFJICGHF3PG0j67Jq3i974RNCfahPHmkrq+JtFiHMz2H6W847yi6
- gvDrXxfGLqTqmaaB2rsE4DoyNsarM7weBTzwaT7In1/DLnEYq04kYze7kjhXRkyRfRNn
- ZgCMckQMpxTpl6FaZGt0sYrAKIBb3lNl+/pLKwo1WRaD/y7C4+VdTFKv7SsEpQ4olTqq
- eahUFrmEI0r5IdJ5X0Xlae5QXEv2mJmOG0+WTOo6G6SgLaU6h1QN6RQpANG67mSib2BX
- u87Bz62OkFUi6qXWslWDggQE3xc00F7HmZsA9IoWdZoplLz+tjo6huS29RLcx120/jMS
- WLQQ==
+ d=konsulko.com; s=google; t=1760456851; x=1761061651; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=bE4N4vggT230o/77+hkAvenX3UN6HTVsM8swqlRm94I=;
+ b=gslCIu9O/qEp+xibAzfdG4uSl3rQz22qEwEL4w/PZDmrtDPcZ2MCb0eGZ5/I5LMgVf
+ c4cnjADbi+pVpj3WsFs3Zo5Fo8V1k4/SE+kSC+faW5eooOIu+E09OG94NF0UGd4tuWyr
+ GYE1NpoKA/etkGzkHdZF4LBWZb2ZndB4NHhW4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760454876; x=1761059676;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=fQ2/l+GDmpBi0NY9SU8IDx2zM7PZVPBo+05aUkfaAj4=;
- b=PA+VPCAv1079bgFh4FpIGXnrRMF+bHVgvR4e24EQZN+AD+GSb/NIjm9rGB4qa1+G/C
- RzHj5rNIz7lhFzmo/zpjseTw31gdfadMwhLEBx7kezldVU7Br4J9ntXWZQijRtl5IEUp
- JJaSk+8afnHUC1IYSQHPe9rIXN7WzDIZ5bFE3oaHjdt3uygY7uBMkAdi8Axs0qeQfq3e
- l9ua8U6W3Hx7djLJOmqSPNSDsT0JcPqJcMqutgPg/HLW7E2r2CsAFb5fhCQvJQO+VemI
- mGrupExKkAAB1hZlp32cFJm9n8k6ADUJZSgyj6MIxkk6b2/U10FCnFf2VBNtP/fuByTm
- CJ3Q==
-X-Gm-Message-State: AOJu0YxSeeKx3+Ds0QlbrGSawmHh1/NaFu5jBXb4yPg/TYpD4e0QfxoU
- UpNGuBTPhsiu4CAlVQWPyfHBkSuAAldXzBQiyKVtTsUuOK4Q8FJm4tblThUUNw4fUZBGRxPZ58b
- hMOv/2g==
-X-Gm-Gg: ASbGncvocT08GcPwiLwnkGzjB4o61+haPTMrAZdOR9WMoB2qGak2LYNl772jb5BT4IN
- A3vG3mOqwuztG7b/ggAJQJ21nYoy2ttqsWGQWuODFTARkEOXkynwy+EzZ/lwpHjmRwv+6sXxvJm
- yQKa0n9lNQpqofUW7H68m8C9D7kbZOcjCP6KWZY1Smf0yGvRj5LlovZMW6HAmxtGTXpb3yYiuZr
- eq5kdScYcb0Z/3s9pBhyFobNemA1/v4RxhcWV94djpdirmHfmPyLxb8RSmXSoNUbA0ycgYNQP8W
- GL2ZX+dKpmuzHGOMb//NauNqEiPxWSoeWiK5Y3nb/QVrbyxrmFtp/Xd/MeLXzOgYukA8RLBFblU
- pX6PngBrkYPmUibFOE9VLwJ43CLMVVUc3BJJUNCIgBV4=
-X-Google-Smtp-Source: AGHT+IFtKHWYAumG2id1psBXKdJPel2V4TWzLXXyV38rg2+hSRRHYbyJYspBYodtzXoDdcMbbn4U3w==
-X-Received: by 2002:a17:907:6ea9:b0:b0b:f228:25a with SMTP id
- a640c23a62f3a-b50ac8e5713mr2507805866b.64.1760454875757; 
- Tue, 14 Oct 2025 08:14:35 -0700 (PDT)
-Received: from [10.254.183.223] ([149.199.62.131])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b5cccdaa0f9sm2431866b.45.2025.10.14.08.14.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 14 Oct 2025 08:14:35 -0700 (PDT)
-Message-ID: <4ffe0d16-3b4f-4a00-a3dc-7dcd7239f5f1@monstr.eu>
-Date: Tue, 14 Oct 2025 17:14:30 +0200
+ d=1e100.net; s=20230601; t=1760456851; x=1761061651;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bE4N4vggT230o/77+hkAvenX3UN6HTVsM8swqlRm94I=;
+ b=rmrz+lDm29VTAMZ8cKc8jEfte9aEOAkMCZXTe/WpK6I1mTD74SA/c4cr99LPtEmoye
+ 7bECK1UOnl7Pe5wgnF8kpaHkgMONimao9KmEjvO0PCnOgMzJq50kSXqOOA2aOSh4al3z
+ lZLPx8ErFmpHCM5hXiKXpMjQhmTzdD7H57wPdyzwyuj2OFPjctxfAWPs+meVawCEYAsX
+ KGXizd1nCTKFe9773LwbvRc4eHniltKH18fbjK5eyxl2XpoEhuVT//H7n9xvy+b0N8Le
+ P2YqGz6CQ+DwIvF+1jBQNjA6cR3li74cwI0wkZNewkWoCuFIHpaBlycA3U744bOwC2jP
+ oehw==
+X-Gm-Message-State: AOJu0YwOsLc/oRyn0dtd26C/hfA0kyCorCEaVmTZ7EFUEGtz/+GIXITE
+ +RrbULzSPAP7Zpsx6rWh0fmXhvgfHMhWrbiqSPSOsT2VK2MazURLzXOYKxcjTk+cmHkWhcjXRfP
+ JHUtsM88=
+X-Gm-Gg: ASbGnct/cFsmDz2kmh8bDBxB5TAPvxKh9sfSW2MSHrzxBUVpuAiuvv15g7Cc1EIXTs+
+ HMaEgDUNaLjWylYm/I9P4i41eDIAgYv8ogghoNILEglUaJB5Au66LP5ln/kkMct/7C3ct9iDQ2u
+ i1RNIWFTEwHTEKTV0yEPOxMWq/81Ne50ZQa7gMsan1IpnunnYUNwrG3SeGrKPoFOK6elX/+pbT8
+ HOTZT2ZY4G4PIA6lHZKfI2fdvwqaizVo1i1U5IsSEzqJtKEUhMiR/RgYYLbP+pcfgb4OFwhQ4vu
+ BxNZ5MLfM910SbqBihHAtGuy57WLwa1mcEx+EXwAgLEdrlqQWp5w4NIJaGCzI7a9AzCu9XwxWGq
+ +lq62vB01CUbKAJ2i/Vkqhc47KoQlF4yEntB4+U9ZBfARYVs3cMRwgWF819zWKTVaGDIapJqEmc
+ GvmZM=
+X-Google-Smtp-Source: AGHT+IHFipQQHgOgQld/Nnt6RbmNkgW6ek97uKEOq/bBPj2D8oXXYodL+Idl52cLfEvNSaKtBXOA0Q==
+X-Received: by 2002:a05:6808:5290:b0:43f:1e42:9e89 with SMTP id
+ 5614622812f47-4417b3e0d64mr11607540b6e.45.1760456851291; 
+ Tue, 14 Oct 2025 08:47:31 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-189-203-106-235.totalplay.net.
+ [189.203.106.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-441da0b0544sm1455048b6e.25.2025.10.14.08.47.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 14 Oct 2025 08:47:30 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <9f898b02-9d85-4e2a-9686-c59b1fcc16ae@mailbox.org>
+References: <9f898b02-9d85-4e2a-9686-c59b1fcc16ae@mailbox.org>
+Subject: Re: Please pull u-boot-marvell/master
+Message-Id: <176045685043.294229.6266071017444179678.b4-ty@konsulko.com>
+Date: Tue, 14 Oct 2025 09:47:30 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] AMD/Xilinx changes for 2026-01-rc1 v2
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,179 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, 14 Oct 2025 11:01:02 +0200, Stefan Roese wrote:
 
-please pull these patches to your tree.
-I have also took FWU patches which are only for our platform.
+> please pull this batch of Marvell related patches:
+> 
+> ----------------------------------------------------------------
+> - sata_mv / octeontx_hsmmc: Smatch fixes / patches (Andrew)
+> - dts: pxa1908: convert to OF_UPSTREAM (Duje)
+> - phy: marvell: Tighten MVEBU_COMPHY_SUPPORT dependencies (Tom)
+> - pci: mvebu: Unable to assign mbus windows for 2nd pcie controller (Tony)
+> ----------------------------------------------------------------
+> 
+> [...]
 
-Thanks,
-Michal
-
-The following changes since commit eea470fd7f6a0db9fbdf8ab187a8b522dbb49c10:
-
-   Subtree merge tag 'v6.17-dts' of dts repo [1] into dts/upstream (2025-10-08 
-15:01:20 -0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2026.01-rc1-v2
-
-for you to fetch changes up to a040578d8270ed8788d7663808ea63ce5ffd7840:
-
-   spi: cadence-qspi: Remove cdns,is-dma property handling (2025-10-14 16:00:45 
-+0200)
-
-----------------------------------------------------------------
-AMD/Xilinx/FPGA changes for v2026.01-rc1 v2
-
-zynqmp:
-- DT updates
-- Enable new commands
-
-mbv:
-- Simplify defconfigs
-
-clk:
-- Separate legacy handler and use SMC handler
-
-misc:
-- Tighten TTC Kconfig dependency
-
-net:
-- Add 10GBE support to Gem
-
-pwm:
-- cadence-ttc: Fix array sizes
-
-fwu:
-- Add platform hook support
-
-spi:
-- Remove undocumented cdns,is-dma property
-
-video:
-- Fix DPSUB RGB handling
-
-----------------------------------------------------------------
-Andrew Goodbody (2):
-       pwm: cadence-ttc: Insufficient elements in array
-       video: zynqmp: Prevent use of uninitialised variables
-
-Michal Simek (15):
-       clk: xilinx: Call generic smc_call_handler()
-       clk: xilinx: Separate legacy format to own handler
-       arm64: zynqmp: Remove undocumented arasan, has-mdma property
-       arm64: zynqmp: Remove RTC calibration from sm-k26
-       arm64: zynqmp: Remove "ti,tps53679" property
-       arm64: zynqmp: Fix incomplete comment in zynqmp-sc-vn-p-b2197-00-revA.dtso
-       arm64: zynqmp: Enable PSCI 1.0
-       arm64: zynqmp: Update compatible string for tps546X24
-       arm64: zynqmp: Introduce DP port labels
-       arm64: zynqmp: Enable DP for kr260, kv260, zcu100, zcu102, zcu104, zcu111
-       arm64: zynqmp: Add pmw_fan label to k26
-       arm64: zynqmp: Fix DTOVL warning about graphs in kv/kr260
-       xilinx: Replace PHY_VITESSE by PHY_MSCC
-       xilinx: Enable SNTP/DATE commands and RTC
-       spi: cadence-qspi: Remove cdns,is-dma property handling
-
-Naman Trivedi (1):
-       drivers: firmware: update xilinx_pm_request to support max payload
-
-Padmarao Begari (4):
-       arm64: xilinx: Add i2c mux idle disconnect property
-       FWU: Add platform hook support for fwu metata
-       board: xilinx: update guid based on metadata
-       xilinx: mbv: Remove redundancy in MB-V defconfigs
-
-Quanyang Wang (1):
-       arm64: zynqmp: Disable coresight by default
-
-Radhey Shyam Pandey (1):
-       arm64: zynqmp: Revert usb node drive strength and slew rate for zcu106
-
-Tom Rini (1):
-       timer: Tighten CADENCE_TTC_TIMER dependencies
-
-Venkatesh Yadav Abbarapu (1):
-       drivers: net: Add versal2 10GBE device support
-
-  arch/arm/dts/versal-mini-ospi.dtsi             |   1 -
-  arch/arm/dts/versal-net-mini-ospi.dtsi         |   1 -
-  arch/arm/dts/zynqmp-g-a2197-00-revA.dts        |   2 +-
-  arch/arm/dts/zynqmp-m-a2197-01-revA.dts        |   2 +-
-  arch/arm/dts/zynqmp-m-a2197-02-revA.dts        |   2 +-
-  arch/arm/dts/zynqmp-m-a2197-03-revA.dts        |   2 +-
-  arch/arm/dts/zynqmp-mini-nand.dts              |   1 -
-  arch/arm/dts/zynqmp-p-a2197-00-revA.dts        |   2 +-
-  arch/arm/dts/zynqmp-sc-vek280-revA.dtso        |   1 +
-  arch/arm/dts/zynqmp-sc-vhk158-revA.dtso        |   2 +
-  arch/arm/dts/zynqmp-sc-vm-p-m1369-00-revA.dtso |  28 ++---
-  arch/arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso |  16 +--
-  arch/arm/dts/zynqmp-sc-vpk120-revB.dtso        |   2 +
-  arch/arm/dts/zynqmp-sc-vpk180-revA.dtso        |   1 +
-  arch/arm/dts/zynqmp-sc-vpk180-revB.dtso        |   1 +
-  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso         |  19 ++++
-  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso         |   2 +-
-  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso         |  21 +++-
-  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso         |   4 +-
-  arch/arm/dts/zynqmp-sm-k26-revA.dts            |   3 +-
-  arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts     |   2 +-
-  arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts       |   1 -
-  arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts       |   1 -
-  arch/arm/dts/zynqmp-zcu100-revC.dts            |  18 +++
-  arch/arm/dts/zynqmp-zcu102-revA.dts            |  18 +++
-  arch/arm/dts/zynqmp-zcu104-revA.dts            |  18 +++
-  arch/arm/dts/zynqmp-zcu104-revC.dts            |  18 +++
-  arch/arm/dts/zynqmp-zcu106-revA.dts            |  14 +--
-  arch/arm/dts/zynqmp-zcu111-revA.dts            |  18 +++
-  arch/arm/dts/zynqmp.dtsi                       |  18 +--
-  arch/arm/mach-zynqmp/aes.c                     |   3 +-
-  arch/arm/mach-zynqmp/cpu.c                     |   4 +-
-  arch/arm/mach-zynqmp/zynqmp.c                  |  10 +-
-  board/xilinx/common/board.c                    |  27 +++++
-  board/xilinx/zynqmp/zynqmp.c                   |   2 +-
-  configs/amd_versal2_virt_defconfig             |   5 +-
-  configs/microblaze-generic_defconfig           |   3 +
-  configs/xilinx_mbv32_defconfig                 |   3 +
-  configs/xilinx_mbv32_smode_defconfig           |  49 +-------
-  configs/xilinx_mbv64_defconfig                 |  47 +-------
-  configs/xilinx_mbv64_smode_defconfig           |  50 +-------
-  configs/xilinx_versal_net_virt_defconfig       |   5 +-
-  configs/xilinx_versal_virt_defconfig           |   5 +-
-  configs/xilinx_zynq_virt_defconfig             |   3 +
-  configs/xilinx_zynqmp_kria_defconfig           |   1 +
-  configs/xilinx_zynqmp_virt_defconfig           |   3 +-
-  drivers/clk/clk_versal.c                       |  55 +++++----
-  drivers/firmware/firmware-zynqmp.c             |  36 +++---
-  drivers/fpga/versalpl.c                        |   5 +-
-  drivers/fpga/zynqmppl.c                        |   8 +-
-  drivers/gpio/zynqmp_gpio_modepin.c             |   4 +-
-  drivers/mmc/zynq_sdhci.c                       |  13 ++-
-  drivers/net/zynq_gem.c                         |  95 +++++++++++++++-
-  drivers/pinctrl/pinctrl-zynqmp.c               |  24 ++--
-  drivers/power/domain/zynqmp-power-domain.c     |   2 +-
-  drivers/pwm/pwm-cadence-ttc.c                  |  10 +-
-  drivers/reset/reset-zynqmp.c                   |   2 +-
-  drivers/soc/soc_amd_versal2.c                  |   2 +-
-  drivers/soc/soc_xilinx_versal.c                |   2 +-
-  drivers/soc/soc_xilinx_versal_net.c            |   2 +-
-  drivers/soc/soc_xilinx_zynqmp.c                |   2 +-
-  drivers/spi/cadence_ospi_versal.c              |   4 +-
-  drivers/spi/cadence_qspi.c                     |  10 +-
-  drivers/spi/cadence_qspi.h                     |   5 -
-  drivers/spi/cadence_qspi_apb.c                 | 119 --------------------
-  drivers/timer/Kconfig                          |   2 +-
-  drivers/video/zynqmp/zynqmp_dpsub.c            |  12 +-
-  include/fwu.h                                  |  11 ++
-  include/zynqmp_firmware.h                      |   8 +-
-  lib/fwu_updates/fwu.c                          |  18 +++
-  70 files changed, 481 insertions(+), 429 deletions(-)
+Merged into u-boot/master, thanks!
 
 -- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+Tom
+
+
