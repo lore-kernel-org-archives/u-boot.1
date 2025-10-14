@@ -4,83 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3107ECCD187
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 09:49:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15981CCD184
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 09:59:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64B4280422;
-	Tue, 14 Oct 2025 11:49:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2C7D480422;
+	Tue, 14 Oct 2025 11:59:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jnbbOdp3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sSsB4ZoD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A850D807B1; Tue, 14 Oct 2025 11:49:28 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D385802C1
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 11:49:26 +0200 (CEST)
+ id 009A48206E; Tue, 14 Oct 2025 11:59:52 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EDEC802C1
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 11:59:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-46e3af7889fso27782535e9.2
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 02:49:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760435366; x=1761040166; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6PNOX7IpwmKt+hxSPNtNdA6aUs38E4Syei0U9GCN4V8=;
- b=jnbbOdp331zaLOitzHeGE1Uom5GAs2E5t4+lzWul6ovJ7UWEevN5KpwsuWM7C/2xx4
- Cgim7ZrrXAiX1DO2aYdRcD7bp7Z0iUe5GjgJoKElFGDVFhoZ1QAjbx6TyqxqwM2JEj8x
- OH6P4cSfXcaZMHeOHLdqZegX1pQLLw5c+T1bmnWev3XksT+1WanVNPndG5s0y6TQPTLy
- 12Qe9kh2qNLRTiCEr/B0ffhyCqOT60GhdU+TzHRhj+VDzY8mT57hjqLBcpWcWl4m+UXp
- S4izN5A5Wpz7WJqZI2zbyYQZKUbhszLAiQiW+QEMGWMuQiL8AJVOJ1iIxcrlEJjGctNh
- l6HA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760435366; x=1761040166;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6PNOX7IpwmKt+hxSPNtNdA6aUs38E4Syei0U9GCN4V8=;
- b=LmTsw44WAHF7py69fB5S22tT2TqCbQ6BJbd5262NbjMf34sivl6D77CD+5HZbktJME
- jtGN5jM/RIl323Ba+1zhZKT5ND88OHimUSm4c9cqGGNw9mc45N+iI/trK9y5excDKod6
- D3XJsV7KugETca/vbxkK0+Qo/k0ZqGQbA/UwfYJEAioXXbVY2vG3fYAsl4bdGv+7gHNx
- OG7XD8uT4j00bE/VWqcl4EA4DBBQ/RjR74bWizGLqwn8K2H+MUyCPinOFtt34G53A1mp
- 2rRqRkQpzNX6iuCP4Jod4I38TMqANcWDtzkOWyi4Fb0RjTPJZEO/5Y2c/DBrzZhrNvU+
- Hzqg==
-X-Gm-Message-State: AOJu0YzdwItJPAN0fDoVs2+iGSxORHKapEefdxuKIdE4fT0ARgqYloVP
- owC/ZJqZuI33y9kbl3/9SNBeEOHDl71qjoa5S9wfzSXQq0LHbGsFqDNlrmj6B1zaCdKxBFJBY2Z
- r8LUh
-X-Gm-Gg: ASbGncv7/kpqwyG5BnfMy1tPKrxxNEZ6RKYsxepMDHrjktQbp3GntDE6tqXmKgk9enj
- FEWxAqD5GcF4Hbkqv9GTgWPMvx3KdRtpRiq6ryzZocytS1XQDLlzg+XLOEsynShk0HEFnVamLdE
- CLwsYhFcWRJVSn++oSy4+792ESNeL9eei+CGJcHtH+tkHkbsUB7Q/COX1a9r/Hrp37zJurHu882
- YTtK3uGb0AuoPtndH8IuvF8V2Yln31b/J+7H3KumQS9VSuFa9JWt7m2/G0zOBUC0TZctOha3fyr
- NuPAP9lhlP3fpiWjISipRziwLBj2PoFEEN0507+QLkMHlQsnJltBJQVGIDgKUmtPB4XtCUafIZw
- ZUkSXW9lsZ38nsE7qPN4zWsSUAdKqSvZXL95VM8YjSHi0qfseGBB/JQe6G3Rkt3O3UwECo93nd8
- 6wfq5dusu3ByRFQXeKaeSr+eTBRA==
-X-Google-Smtp-Source: AGHT+IH1zeEozuSr9n8LDqSApLPApoZsaZefEkzOMpe9idEFdaHmrLYlZ7Gr+ME9RKerEuQ1YDqtqA==
-X-Received: by 2002:a05:600c:1d18:b0:46e:3901:4a25 with SMTP id
- 5b1f17b1804b1-46fa9aef67bmr141832095e9.20.1760435365756; 
- Tue, 14 Oct 2025 02:49:25 -0700 (PDT)
-Received: from hera ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-46fb4983053sm231159515e9.8.2025.10.14.02.49.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 14 Oct 2025 02:49:25 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: u-boot@lists.denx.de,
-	trini@konsulko.com,
-	xypron.glpk@gmx.de
-Cc: javier.tia@linaro.org
-Subject: Pull request for mix-next-14102025
-Date: Tue, 14 Oct 2025 12:49:15 +0300
-Message-ID: <20251014094915.15693-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.51.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59E9xgK51041174;
+ Tue, 14 Oct 2025 04:59:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1760435982;
+ bh=KBwvFWJx3s8V7Siqs+VGOJoIlO3RKW6ee2VF5g29rXk=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=sSsB4ZoD6jyDnPpzAVVGKBon6QHQ1bVTK2FsfMOOwuwzLTPaNM7+VEVcZl8ZNy5JU
+ lGihFNYDG2VUM2hHS/wTD3DMtmzbctp8WRjANchkGI8sx9JympiN6/Yj/HcwqrK/T1
+ Pu+on7i2A63Ku8g2H+JR9zaBFrV8HDyAysHdwe7M=
+Received: from DLEE203.ent.ti.com (dlee203.ent.ti.com [157.170.170.78])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59E9xgpn356800
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 14 Oct 2025 04:59:42 -0500
+Received: from DLEE212.ent.ti.com (157.170.170.114) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 14 Oct
+ 2025 04:59:41 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Tue, 14 Oct 2025 04:59:41 -0500
+Received: from [172.24.26.46] (lt5cd2489kgj.dhcp.ti.com [172.24.26.46])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59E9xZYk3607441;
+ Tue, 14 Oct 2025 04:59:36 -0500
+Message-ID: <d548843d-9342-43fa-8d18-f44105feff20@ti.com>
+Date: Tue, 14 Oct 2025 15:29:35 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/11] remoteproc: Add support for i.MX8M[M/N/P/Q] and
+ i.MX93
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, <u-boot@lists.denx.de>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, "NXP i.MX U-Boot Team"
+ <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>, Stefano Babic
+ <sbabic@nabladev.com>
+CC: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Beleswar Padhi
+ <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>,
+ Andrew Davis <afd@ti.com>, Judith Mendez <jm@ti.com>,
+ Ryan Eatmon <reatmon@ti.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Peng Fan <peng.fan@nxp.com>, <u-kumar1@ti.com>
+References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,63 +89,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A multi-pr including some EFI, TEE and TPM changes.
-Since the changes are small I included all of them in a single PR. 
-Let me know if you prefer 3 different ones.
+Hi Peng
 
-The following changes since commit 4e4a9de31de2a5f395ee25c59e4026422fbcb27e:
+On 10/13/2025 8:19 AM, Peng Fan (OSS) wrote:
+> This patch series introduces remoteproc support for NXP i.MX8M and i.MX93
+> platforms. Most of the i.MX-specific logic is ported from the Linux kernel to
+> ensure compatibility and maintainability.
+>
+> The existing bootaux command in U-Boot only supports loading raw binary images.
+> However, this approach fails when the remote processor firmware contains
+> sections that must be loaded into both TCM and DDR. To address this limitation,
+> need to use remoteproc framework ELF loader, enabling proper loading of
+> segmented firmware images.
 
-  Merge branch 'next' of git://source.denx.de/u-boot-usb into next (2025-10-05 09:50:57 -0600)
 
-are available in the Git repository at:
+I am not sure, what problem you are facing to load fw having section in 
+TCM and DDR both,  with current frame-work.
 
-  https://source.denx.de/u-boot/custodians/u-boot-tpm/ tags/mix-next-14102025
+There are few drivers, using both TCM and DDR and working ok ref[0]
 
-for you to fetch changes up to 377bc19fd92074bd32e6b29b9133037238ca54dd:
+[0] 
+https://elixir.bootlin.com/u-boot/v2025.10/source/drivers/remoteproc/ti_k3_r5f_rproc.c#L110 
 
-  tpm: Make U_BOOT_DRIVER entries unique (2025-10-14 10:42:27 +0300)
 
-The CI seems happy
-https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/27905
 
-Heinrich, I changed a log_err() to log_warning() as explained here [0].
-Please let me know if you have any objections.
 
-[00 https://lore.kernel.org/u-boot/CAC_iWjK96Xzv0TwQ3CCp+2q84d0hZ7w0Qr154vM0C38aThyR=g@mail.gmail.com/
 
-Please pull!
-/Ilias
-
-----------------------------------------------------------------
-TPM changes:
-Make all drive names defined with U_BOOT_DRIVER unique
-
-TEE changes:
-Rework things such that sandbox will also traverse the optee directory
-when SANDBOX_TEE is enabled, but only build one of the optee-specific
-files when OPTEE is enabled.
-
-EFI changes:
-Up to now we were relying on the file extension to accept and load
-an image over HTTP. We expected images to be either .iso or .img.
-
-By wiring up internal existing functions we can try to mount any
-file extension and reject it only if mounting fails.
-part_driver_lookup_type
-
-----------------------------------------------------------------
-Javier Tia (2):
-      part: Export part_driver_lookup_type for external use
-      efi_loader: Improve disk image detection in efi_bootmgr
-
-Tom Rini (2):
-      tee: Rework Makefile logic
-      tpm: Make U_BOOT_DRIVER entries unique
-
- disk/part.c                    | 18 +---------------
- drivers/tee/Makefile           |  4 +---
- drivers/tee/optee/Makefile     |  2 +-
- drivers/tpm/tpm_tis_infineon.c |  2 +-
- include/part.h                 | 21 ++++++++++++++++++
- lib/efi_loader/efi_bootmgr.c   | 49 ++++++++++++++++++++++++++++++------------
- 6 files changed, 60 insertions(+), 36 deletions(-)
+>
+> Patch Summary:
+>
+> Patches 1–2: Import memcpy_io and memset_io from the Linux kernel and enable
+>               them in the remoteproc subsystem.
+> Patches 3–11: Add platform-specific remoteproc support for i.MX8M and i.MX93.
+> Patch 6: Temporarily adds Cortex-M nodes to x-u-boot.dtsi since they are not
+>           yet available in the upstream Linux device tree. These nodes can be
+> 	 removed once they are merged upstream.
+>
+> NXP internal R-b tags are kept, because the patches are directly
+> cherry-picked from NXP LTS tree.
+>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+> Peng Fan (11):
+>        lib: Import iomem_copy from Linux Kernel
+>        remoteproc: Extend device_to_virt with a is_iomem parameter
+>        remoteproc: Add imx_rproc driver to support NXP i.MX8MP/N
+>        remoteproc: imx_rproc: Support i.MX8MQ/M
+>        remoteproc: imx_rproc: Add support for i.MX93 CM33
+>        arm: dts: imx8m: Add remoteproc node
+>        imx8mp: Enable remoteproc for i.MX8MP EVK
+>        imx8mm: Enable remoteproc for i.MX8MM EVK
+>        imx8mn: Enable remoteproc for i.MX8MN EVK
+>        imx8mq: Enable remoteproc for i.MX8MQ EVK
+>        imx93: Enable remoteproc for i.MX93-EVK/QSB/FRDM
+>
+>   MAINTAINERS                           |   1 +
+>   arch/arm/dts/imx8mm-u-boot.dtsi       |   4 +
+>   arch/arm/dts/imx8mn-u-boot.dtsi       |   4 +
+>   arch/arm/dts/imx8mp-u-boot.dtsi       |   4 +
+>   arch/arm/dts/imx8mq-u-boot.dtsi       |   4 +
+>   arch/arm/mach-imx/imx8m/Kconfig       |  20 ++
+>   arch/arm/mach-imx/imx9/Kconfig        |  12 ++
+>   drivers/remoteproc/Kconfig            |   7 +
+>   drivers/remoteproc/Makefile           |   1 +
+>   drivers/remoteproc/imx_rproc.c        | 370 ++++++++++++++++++++++++++++++++++
+>   drivers/remoteproc/imx_rproc.h        |  56 +++++
+>   drivers/remoteproc/renesas_apmu.c     |   3 +-
+>   drivers/remoteproc/rproc-elf-loader.c |  93 ++++++---
+>   drivers/remoteproc/sandbox_testproc.c |   3 +-
+>   drivers/remoteproc/stm32_copro.c      |   3 +-
+>   drivers/remoteproc/ti_k3_dsp_rproc.c  |   2 +-
+>   drivers/remoteproc/ti_k3_r5f_rproc.c  |   2 +-
+>   include/asm-generic/io.h              |  37 ++++
+>   include/remoteproc.h                  |   3 +-
+>   lib/Makefile                          |   1 +
+>   lib/iomem_copy.c                      | 136 +++++++++++++
+>   21 files changed, 731 insertions(+), 35 deletions(-)
+> ---
+> base-commit: 48f21e66e360552c75d70a50421d0e0ed1f59e90
+> change-id: 20251012-imx-rproc-383db752c3f7
+>
+> Best regards,
