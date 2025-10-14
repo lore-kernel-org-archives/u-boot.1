@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2360CCCD18E
-	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 09:32:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EB09CCD184
+	for <u-boot@archiver.kernel.org>; Tue, 14 Oct 2025 09:35:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FE0080422;
-	Tue, 14 Oct 2025 11:32:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 48F8E80422;
+	Tue, 14 Oct 2025 11:35:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rrFBFCVN";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="GIKVVoWi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DAB2802C1; Tue, 14 Oct 2025 11:32:46 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56D01802C1
- for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 11:32:43 +0200 (CEST)
+ id B001E8206E; Tue, 14 Oct 2025 11:35:00 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 473C9802C1
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 11:34:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59E9WZDG1473547;
- Tue, 14 Oct 2025 04:32:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760434355;
- bh=ETELdLTaDIgegWwWitY1xc/IQ1VZ1EtovLBThwx+6pY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=rrFBFCVNwy1MdV/ZHV58MHCya+FWxnWu8IPObBT7NoJWujxm/aeWRAsZ+JADiJsYU
- IXooj3oqVeeBc+LAO5ZWnBRSKHFvEj5zIX7bGm6w2v3kdzvFhaaTWAMwA/ejYdcQ43
- yRQakNtHvDVir0K1ltsLTQHTKhfXNxz1Jrg8lJlM=
-Received: from DLEE200.ent.ti.com (dlee200.ent.ti.com [157.170.170.75])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59E9WZo93707178
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 14 Oct 2025 04:32:35 -0500
-Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE200.ent.ti.com
- (157.170.170.75) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Tue, 14 Oct
- 2025 04:32:34 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Tue, 14 Oct 2025 04:32:34 -0500
-Received: from [172.24.26.46] (lt5cd2489kgj.dhcp.ti.com [172.24.26.46])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59E9WSdX3345174;
- Tue, 14 Oct 2025 04:32:29 -0500
-Message-ID: <27408a77-7656-409f-a466-252d9a6fca78@ti.com>
-Date: Tue, 14 Oct 2025 15:02:28 +0530
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-59093250a7bso3801056e87.3
+ for <u-boot@lists.denx.de>; Tue, 14 Oct 2025 02:34:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1760434497; x=1761039297; darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=bDm5ryImQc9srJfg7Ldm7Tk3MDRY6XA8GJy+nnyndPA=;
+ b=GIKVVoWipIk8A5+OqWCNFOgvquX2CIFcnfNd5Z0xStcaWUzqqp8v9lyPga8LkRxdeb
+ 71LW881+74Gwo8ouDQ5qkEH7IGaELOpnkOvhiPJcxyiYdpaUxjx/124EbGQyS3J4F8bo
+ D9vQyUJuouVVAPvfuA7maNYi3yh9Tzr9AbuVgurAueFOC7vkbhv0EoodtvAlES7mHm9b
+ WPAQo3i6eNR7LeOZMD/zR39+MYOs4Ag1QIYnHJRKP5VGiteHPoR9fG25xKHy/iK4p5pK
+ y95V+wEO2WV4qO8ACCOAR7+1FLFYWRwtQWka9/i+4/1iE6xpM/s7Bh751T7zJHpdvent
+ 3nKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760434497; x=1761039297;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=bDm5ryImQc9srJfg7Ldm7Tk3MDRY6XA8GJy+nnyndPA=;
+ b=ednIs1yClNErPfWWNjwfurznf1lbmstS/wihhy6nJmPIhLmBCTvR5BFyFcVyx7Cwod
+ kzIpBJ6bmAWyl+tSJMKpr90ulfTQLdDKtT1JXugFMgLxii9vNlOVAZlp5EXWQbbVGkSP
+ qOhH75L9OsgMq12QDlCpQPhv9xv9Yu5gkW3yDOMFs9GUGNuqEgddtQKA5wCrqW1MPFUH
+ iY/mR/g8Oz5BBxB2ETUusRYA2BgzCyk/k+A9HZcqrUo/67zSy7jXhVCqNF7BNal8xUtK
+ B4fmkLTeGyZmk9cmrgAwBeH5CzlPdg9dkfR5dgn1Y0K3f8oWztj8NFz/uJ2dtofXr10P
+ ZCzQ==
+X-Gm-Message-State: AOJu0YwNwwuzeFpwgRQ2oP7RfhAeioYPL4pA7z1jV2eNK4D/W2GJfcxt
+ 732F+Kl400LcjEDeuQ6NG4RrozW9v2uzRetyZocizEqYTlhldUQUjmhDZgmpnEjnl7wc7QYnTWO
+ EVoLsbP2NV988JijGNvYpTrFAjPeXvBWf1Iq2
+X-Gm-Gg: ASbGncsZ7VbcVTzbZAJ3tz5zlo/OMLQkLu51htVATkAXRdpO9i8qX4uRgAWGJiu3flc
+ BJeR9QQmLLjggcQddQE2811tpsOu5H6Wa4Y+LPbH9p53SuVLx5tCedFcGyrXxB1Gv+p8+f3AAwn
+ nTBPDmUVbFE40d5orYe1E0WKg/GXg2PWeCre3eAb2j+SCjy3bCMiiGeipVNVwh2NNQEbz8xlts9
+ YIf7/o41ESdyEiB5ZmoNUzyvcQ=
+X-Google-Smtp-Source: AGHT+IFaUqRlNpU1knLe62xEzCOXW7PD2h7ujuPSN/22MLu3Ip3eiopIUw58O4Wqeu+1juqOT4GJh9e1TP5D1g4/rkQ=
+X-Received: by 2002:a05:6512:1315:b0:560:9993:f14d with SMTP id
+ 2adb3069b0e04-5906db0ce60mr6945732e87.3.1760434497355; Tue, 14 Oct 2025
+ 02:34:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/11] lib: Import iomem_copy from Linux Kernel
-To: Peng Fan <peng.fan@oss.nxp.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <uboot-stm32@st-md-mailman.stormreply.com>, "NXP
- i.MX U-Boot Team" <uboot-imx@nxp.com>, Fabio Estevam <festevam@gmail.com>,
- Stefano Babic <sbabic@nabladev.com>, Ye Li <ye.li@nxp.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Beleswar Padhi
- <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Andrew Davis <afd@ti.com>, Judith Mendez <jm@ti.com>,
- Ryan Eatmon <reatmon@ti.com>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Peng Fan <peng.fan@nxp.com>, <u-kumar1@ti.com>
-References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
- <20251013-imx-rproc-v1-1-fb43a3fafcd0@nxp.com>
- <eac85809-2d75-434b-a107-3bbcf1807710@ti.com>
- <20251014020126.GB31468@nxa18884-linux.ap.freescale.net>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20251014020126.GB31468@nxa18884-linux.ap.freescale.net>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20251013130902.74719-1-yegorslists@googlemail.com>
+ <DDHQS4TT6S6Y.1N61MTMFVTJBP@ti.com>
+ <CAGm1_ktEZBu+MRThxW_BMF-S3qqPQ0AErArDoLGjC4qwTse9fw@mail.gmail.com>
+In-Reply-To: <CAGm1_ktEZBu+MRThxW_BMF-S3qqPQ0AErArDoLGjC4qwTse9fw@mail.gmail.com>
+From: Yegor Yefremov <yegorslists@googlemail.com>
+Date: Tue, 14 Oct 2025 11:34:42 +0200
+X-Gm-Features: AS18NWCE-dlyUynlTseJt7c_NZ1qV2HvdNHuejNUTDZ11-tfGYhvBkUhR2nYbeE
+Message-ID: <CAGm1_kv=cUG1JQu=XKOS2bWJao3Qe9m23Aojt-6GT0d_CH=inQ@mail.gmail.com>
+Subject: Re: [PATCH] arm: baltos: enable TI_SYSC and CLK drivers
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,74 +94,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng.
-
-On 10/14/2025 7:31 AM, Peng Fan wrote:
-> On Mon, Oct 13, 2025 at 11:41:25PM +0530, Kumar, Udit wrote:
->> On 10/13/2025 8:19 AM, Peng Fan (OSS) wrote:
->>> From: Peng Fan <peng.fan@nxp.com>
->>>
->>> memcpy_{from,to}io and memset_io is needed for i.MX8M to write
->>> TCM area. So import the APIs from Linux Kernel 6.17.
->>>
->>> Reviewed-by: Ye Li <ye.li@nxp.com>
->>> Signed-off-by: Peng Fan <peng.fan@nxp.com>
->>> ---
->>>    include/asm-generic/io.h |  37 +++++++++++++
->>>    lib/Makefile             |   1 +
->>>    lib/iomem_copy.c         | 136 +++++++++++++++++++++++++++++++++++++++++++++++
->>>    3 files changed, 174 insertions(+)
->>>
->>> diff --git a/include/asm-generic/io.h b/include/asm-generic/io.h
->>> index 13d99cfb5973399209c00adee0080ff83414c064..cf981ad3501f935c714b7580536540e7aba249c1 100644
->>> --- a/include/asm-generic/io.h
->>> +++ b/include/asm-generic/io.h
->>> @@ -3,6 +3,7 @@
->>>     * Generic I/O functions.
->>>     *
->>>     * Copyright (c) 2016 Imagination Technologies Ltd.
->>> + * Copyright 2025 NXP
->>>     */
->>>    #ifndef __ASM_GENERIC_IO_H__
->>> @@ -453,5 +454,41 @@ static inline void iowrite64_rep(volatile void __iomem *addr,
->>>    #endif
->>>    #endif /* CONFIG_64BIT */
->>> +#ifndef memset_io
->> If you are on arm, then
->>
->> arch/arm/include/asm/io.h defines these io functions, for ARM64 and non-ARM64
->> platform,
->>
->> In your SOC, how this works.
-> Thanks for pointing this out, I thought these helpers were not defined,
-> so I import this file from Linux. So on my platform, the arm64 io helpers
-> are used, the functions in this file are not used because there is
-> "#ifndef xx".
+On Tue, Oct 14, 2025 at 11:28=E2=80=AFAM Yegor Yefremov
+<yegorslists@googlemail.com> wrote:
 >
-> But anyway, for non-ARM/ARM64 platforms, this file is still useful.
+> Hi Anshul, Tom,
 >
-> I could drop this if you prefer. Or keep this for other ARCH.
-
-
-if you are test on other ARCH, please keep otherwise, you can drop this.
-
-
-
+> On Tue, Oct 14, 2025 at 5:58=E2=80=AFAM Anshul Dalal <anshuld@ti.com> wro=
+te:
+> >
+> > Hi Yegor,
+> >
+> > On Mon Oct 13, 2025 at 6:39 PM IST, yegorslists wrote:
+> > > From: Yegor Yefremov <yegorslists@googlemail.com>
+> > >
+> >
+> > Could you explain a bit more about why this change is needed in the
+> > commit description?
 >
-> Thanks
-> Peng
+> Both are required for GPIO drivers to work. At least, for the OF setup.
 >
->>> +/**
->>> + * memset_io -	Set a range of I/O memory to a constant value
->>> + * @addr:	The beginning of the I/O-memory range to set
->>> + * @val:	The value to set the memory to
->>> + * @count:	The number of bytes to set
->>> + *
->>> + * Set a range of I/O memory to a given value.
->>> + */
->>> +void memset_io(volatile void __iomem *addr, int val, size_t count);
->>> +#endif
->>> +
->>> +#ifndef memcpy_fromio
->>> +/**
->>> [..]
+> Should I add this description or can we embed them as dependencies for
+> CONFIG_OMAP_GPIO?
+
+This is what I get when TI_SYSC is enabled but CONFIG_CLK_TI_CTRL driver no=
+t:
+
+ti_sysc target-module@7000: failed to get fck clock
+ti_sysc target-module@4c000: failed to get fck clock
+ti_sysc target-module@ac000: failed to get fck clock
+ti_sysc target-module@ae000: failed to get fck clock
+
+If only TI_SYSC is missing, then GPIO won't work but without any error outp=
+ut.
+
+P.S. I still don't have an answer to this question [1]
+
+[1] https://lists.denx.de/pipermail/u-boot/2025-September/599390.html
+
+> Regards,
+> Yegor
+>
+> > Regards,
+> > Anshul
+> >
+> > > Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
+> > > ---
+> > >  configs/am335x_baltos_defconfig | 3 ++-
+> > >  1 file changed, 2 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/configs/am335x_baltos_defconfig b/configs/am335x_baltos_=
+defconfig
+> > > index 5c43503ff32..93a5fb94adf 100644
+> > > --- a/configs/am335x_baltos_defconfig
+> > > +++ b/configs/am335x_baltos_defconfig
+> > > @@ -53,8 +53,9 @@ CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=3Dy
+> > >  CONFIG_VERSION_VARIABLE=3Dy
+> > >  CONFIG_NET_RETRY_COUNT=3D10
+> > >  CONFIG_BOOTP_SEND_HOSTNAME=3Dy
+> > > -# CONFIG_TI_SYSC is not set
+> > >  CONFIG_BOOTCOUNT_LIMIT=3Dy
+> > > +CONFIG_CLK=3Dy
+> > > +CONFIG_CLK_TI_CTRL=3Dy
+> > >  CONFIG_DM_I2C=3Dy
+> > >  CONFIG_SPL_SYS_I2C_LEGACY=3Dy
+> > >  CONFIG_SYS_I2C_EEPROM_ADDR=3D0x50
+> >
