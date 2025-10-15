@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD5E6CCD193
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 22:19:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C112CCD193
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 22:57:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DDDB8323A;
-	Thu, 16 Oct 2025 00:19:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97F33835B3;
+	Thu, 16 Oct 2025 00:57:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UJZDkBvQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UZB2MOSK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A7AE829E7; Thu, 16 Oct 2025 00:19:39 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id 6275D835A2; Thu, 16 Oct 2025 00:57:30 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13BDF829E7
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 00:19:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A591829E7
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 00:57:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-3799fc8ada6so36860fac.1
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 15:19:37 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7a7d79839b2so83676a34.3
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 15:57:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760566776; x=1761171576; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=hpiHJQ90iSDFTRhYv8QTU73TkuVEd9ObQkHs6Bk71NQ=;
- b=UJZDkBvQGCfrIv/WyLbK6YjkFMZVl+DhB8p5ShZ9oCh44xpyykN936cIUp+NZB+3SI
- tcuPLwDqygS7SJVwuukwIPDV6nIGBxmD8M5ARH/36na5iVXHYU40Hxq8mLcXv3XxTu6W
- XJFXVzJRkZrupKaPmTJIGSVGYK+5vQ/JbMCaI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760566776; x=1761171576;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1760569047; x=1761173847; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hpiHJQ90iSDFTRhYv8QTU73TkuVEd9ObQkHs6Bk71NQ=;
- b=BjRRGgTP8n5CrNCOsRc7ZkmMfA540mocK4AIOKNz55ZR+Y9uRtI02Zvmr2C3dHDAFv
- X41+S3v14rXS2oAPHrexUhx1wE3OF1WMisvmo5QQorXpye8i5mjhN77JHgTQj3i5LkOU
- 8rXFbgwJ9m/8AAxtPl0+RTIS9+sMTrx/dm6nnAkZLjVI8EI8NAS2eufDT8ecjFowXCe8
- 5Inq7+wcp7aOk07oJAiuIs5/T/3iCbK/4LSWENa11MYHstTTevhrnXolALT5EIF/3n6O
- wvgKOjl1gkJk2yu+z3ELgc6M0wlPJYFY7kEvxALU1g9DxBmzwWWJLm9011dEa96U1k/o
- i0vA==
-X-Gm-Message-State: AOJu0YyovNEqSdSll2po+hde4MOIvHRpLYq4brJ5yYzQL5h7FEcltDHR
- GZp0n/S9V2jAmzqU26HHqqHyJs7dl1a3WBtTpiKfsFtkgBac0oO4LFZ2ZyPlvQapYOA=
-X-Gm-Gg: ASbGnct15rx01nA7tMGUNqA4Ij1fbUwlsO1INcgZQatCrzjhBf6W8mlxBBmnbiAztzT
- cOevyztPFyaekTznC0INSJEld2z1fCoM0JjPlslWlCYrwbESuwaPRB0q/HqweBWWsO7sJf3qKcm
- WyBKV2hELciyM6NAUziB9qZJJQ4b1KEiMBZC3j/zMNJPeo7jm2q7Jdu1nHG4UOcvnIrbYxYyfFy
- znK5ngrVsuE0IlzZzkkZzFe/5QykRkDlV0u2UdihumETPD5RB9IuuCvfRKSb+kgmIUsszcRr+oD
- i9vSuq1Okj7tssKlYEUtRWO9O1NlnwtISn3FOtOoU4WEgr/nYxhsGcsp1ANPuj4LY1vIQY26Z++
- QfjDHDkvUoxBUmGdh/ZmlTAoD7yhPMd6/wMIVsMt5Zmri2ZKdyUFOyF2GlN/Avp717x/Vm3Uc4A
- untYAAyYFq7Ju4khLoph5gAr3BAkhRO61C+symzzM=
-X-Google-Smtp-Source: AGHT+IHDZ4sNvyrhvdmP3QnPVLOukWQZdrXidG9padQ5QLFPJyPHzg7DxOvlTIcZXyXp8xBYwihyww==
-X-Received: by 2002:a05:6870:17a0:b0:332:8989:4ef8 with SMTP id
- 586e51a60fabf-3c0f6d386c8mr12321941fac.31.1760566775783; 
- Wed, 15 Oct 2025 15:19:35 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ bh=0XyaHwB7PdeIKHQsu92fRFGsNlImaGfdKU+WX48Y2ao=;
+ b=UZB2MOSKAqqd+RFawZij5mP8hCeEQ2HxFqcTxDv6qnmFGSyfTK6nEtVJSUYP9Fe98c
+ 2YyrQFacXIvcybDH5raBHTpKU101t+O2QHeaf7EDQoJ51rVvau6qf9tweisF78mupG65
+ abe0ymMHlA5Qq6DwoHSOf7YWNuUpQD/+i+Jxk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760569047; x=1761173847;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0XyaHwB7PdeIKHQsu92fRFGsNlImaGfdKU+WX48Y2ao=;
+ b=p2YC3xsWhEBeWWUtT3dBkaY0ZC5dx5pDBZAFVQZad/ql1CGR4473+xJhedRbz7N9xl
+ 6BHQPTyBGTDYDdzTpeSrw7FIyoTonxcHQAmUdi1k5jpySlOh2zt8tVqWIbBwxtqnjPx2
+ mjOSi8NiPHXzj4FWs1wIIyT0CrdnH1DdiSxYGAKGipYam1Fw85lZ+e5yxEdlOmJKxBot
+ fslZlgCNcHDoPC+K0cCWwE431KMVAZPLmjeIZh5ub44Li7btt9Wx94Ph7AjMWFWhvfpF
+ mFKmmTyS6IFwvYYxk11+8NnIvFe+yQA0LtDzP5FZAWgtOeNarqlmrbHZ7robYbz0tag0
+ sYlw==
+X-Gm-Message-State: AOJu0YzN5lENMVGHcvyz+GbNFF9AsQPnNdo5Jl1XIi/NGLleYJ2Q1c8l
+ Czb3q5G0l9Z3/f0vb7cROfBuN42vBOtFrnvMlgrO/K4KJg45U1DmoqkY0A2V5OP3KXw=
+X-Gm-Gg: ASbGncti9d4El5ihXLujnZVRocnYTlTpsYfITfziaXvgHYCYpbN2H751SkRIInm1ZV0
+ GnK0IEEYpYANji2DUVfUSLlhVmOLi6iRN+R/3bQEMR2MgHMPRsCeelwhG53/T/jKNxgVGWpnoJV
+ N06aLEYqCF1iaTrvr+kunpMlnrzDSKb9amU2xkh4IqrRog3iG28jfxKuG9nrGwWZPzYdcuGp2R/
+ WkzIrRh+D18dYpcNLqNGPdl8gt8S6SvucyKPMUba/sSMjDLYHkLK0lHjZW2R5wnw+jEHWgn10J2
+ BZyVS9XPJGP6jHE9EdwXAQLMSjV3q4VwvzdnQE56DGiV1UUkWzI4sKUqeFGIWRRPsW244Hvkfho
+ 7bj0x+U0Hj4Q8xjFRqQiWkI4iTSE0eq1ONznVhHncy+IujbOg8sOE5A7Xy1tXSuLV6Wilj1sFf1
+ Ba3J5+Nql4JXZgT5HU2mCrJrjoa1iCkfhyvRT/wg==
+X-Google-Smtp-Source: AGHT+IGDzIt3yfWhhJhonq9kOzTxiV0Kj734ROtny16XmTi7D2eHVtT9jbgiegajrV+p1dbct57eeg==
+X-Received: by 2002:a05:6830:350b:b0:74b:a74d:8d2e with SMTP id
+ 46e09a7af769-7c0df7fd774mr16103456a34.26.1760569047023; 
+ Wed, 15 Oct 2025 15:57:27 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8b69aa7sm5737658fac.9.2025.10.15.15.19.34
+ 46e09a7af769-7c0f911af78sm5774854a34.29.2025.10.15.15.57.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 15:19:34 -0700 (PDT)
-Date: Wed, 15 Oct 2025 16:19:33 -0600
+ Wed, 15 Oct 2025 15:57:26 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: "Manea, Alexandru (Alexandru)" <amanea@avaya.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: Uboot upgrade from 2016 to 2020
-Message-ID: <20251015221933.GW6113@bill-the-cat>
-References: <SJ0PR15MB475808D1A536E7E2993BDD1DDCEBA@SJ0PR15MB4758.namprd15.prod.outlook.com>
+To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20251006-test_main-v1-1-51954a6e9ba6@linaro.org>
+References: <20251006-test_main-v1-1-51954a6e9ba6@linaro.org>
+Subject: Re: [PATCH] test: Remove not needed null check
+Message-Id: <176056904603.760819.5881670306598571688.b4-ty@konsulko.com>
+Date: Wed, 15 Oct 2025 16:57:26 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="bkYH23d5+kddtODb"
-Content-Disposition: inline
-In-Reply-To: <SJ0PR15MB475808D1A536E7E2993BDD1DDCEBA@SJ0PR15MB4758.namprd15.prod.outlook.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,45 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 06 Oct 2025 11:54:56 +0100, Andrew Goodbody wrote:
 
---bkYH23d5+kddtODb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> In ut_report() there is a null check for stats but stats was already
+> dereferenced on the line before and is again dereferenced later in the
+> same function. Also the two places where ut_report() is called from will
+> have initialised the parameter so there is no chance that stats will be
+> null. So to prevent static analysis complaining of a use before check
+> just remove the check.
+> 
+> [...]
 
-On Tue, Oct 14, 2025 at 10:21:37AM +0000, Manea, Alexandru (Alexandru) wrot=
-e:
+Applied to u-boot/master, thanks!
 
-> Hi,
->=20
-> I have an issue with upgrading our sources to use the 2020.04 uboot rathe=
-r than the one working now on our system which is 2016.
-> After adding all our board changes, I can see the SPL loading and setting=
- DDR and TLB entries but once it tries to jump to uboot from mmc_boot() it =
-hangs and I can't get to see anything...has anyone encountered this? Is the=
-re something I can do to make sure uboot is actually being jumped to or why=
- the hang? I've set the offsets to go to the _start_e500: instructions like=
- the old uboot. I can share the traces I have if needed. Looking forward to=
- an answer.
-
-There might have been some issue with certain PowerPC platforms
-introduced after the v2016.xx releases and fixed later than v2020.04,
-and git log might help. Of course, it would be better still if you could
-move to current mainline and then help with PowerPC maintenance, as we
-do need more people helping there. Thanks.
-
---=20
+[1/1] test: Remove not needed null check
+      commit: aebf3a98bffa80c3e8f38f3a768bcd78ccbf401a
+-- 
 Tom
 
---bkYH23d5+kddtODb
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPAd9AAKCRAr4qD1Cr/k
-CgNDAQC3dKDtFp1YKQ8fOf0gZaB2KGoubnWWJtEHj+klN6X41AD/cNi8XhWe2DdB
-fHZErunR6sB7EFCuwXurAuZ2QVQXAw0=
-=KIF/
------END PGP SIGNATURE-----
-
---bkYH23d5+kddtODb--
