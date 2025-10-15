@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31AD2CCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:46:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F516CCD194
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:46:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9F1F83303;
-	Wed, 15 Oct 2025 17:45:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B890836C1;
+	Wed, 15 Oct 2025 17:45:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZuWyy5vd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gdHIRFgO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E80D6800D7; Wed, 15 Oct 2025 17:45:19 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 03D2E800D7; Wed, 15 Oct 2025 17:45:24 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8B8E836AC
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 17:45:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB1BA836C1
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 17:45:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-58affa66f2bso7191880e87.1
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 08:45:17 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-57dfd0b6cd7so7563578e87.0
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 08:45:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760543115; x=1761147915; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760543118; x=1761147918; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WvNySyQbiwr0s6yzqSsuW3crmcfwnUYEzqTgLCEUz14=;
- b=ZuWyy5vd35FS8BhGPONYgWMS0jWe0Q2MydtffHuUWHryzq1jb/i2MQfhf06QiWODpc
- Y8NGBpknRP8cenaZyitJaj14UWPkFhkcK9hFXnXTTrn3eKkt/R3owmJWOcIX4nq6URus
- UY8Wt9xWb72BG5v3LzxHgybZFLDEBX8k3/yUs=
+ bh=2Z0BYrjAGHiAzrYqldXXm89MqA19kOWOQIt5zXdSvFY=;
+ b=gdHIRFgOeloXBu5gWRdOzvMLPHrXSrek5e7+sChlsgD3ntj0k+WM7Bf+/6hSCEylFV
+ /42cLNoiPBFdRsSvhGh21Wh/fzMXreM+STdtqqEasif4pW3Kp65TACScEGh98P28g4bn
+ TdTiLBOouHzoHSFlrVwUgpmnNum4435U70KPQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760543115; x=1761147915;
+ d=1e100.net; s=20230601; t=1760543119; x=1761147919;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WvNySyQbiwr0s6yzqSsuW3crmcfwnUYEzqTgLCEUz14=;
- b=eSj8+61tITtDpY4kMbV9g0NpKouEnH2csw75s+G4Ae5AJvG9C7brsS0I7LAs7TAUh1
- 8MuaGyKIVEc+Z+lKRJikVELVk3tQlsuMeJXebs2ylG4WpYhxoLkATPKS1Fxbe1ZrUWrc
- dvDdu2CwCTq1nW5G3zgfOmFoHcXN95Fi8iQNV7OO2emSD9I1Vjk6+ewiiHhEVRsRTsSX
- Beau8i9fiy+FMAiGQm+LQA5SOTycUufxbEBBLlbdNxqtalaueFQ5XlZtnYsErQ7Fn7uZ
- HZvmchMOAHUNLX6CElFjsEPTmac68J4/zOJdC2+urpfivN/RdkprxhWHLyZ6TxLmzdd9
- p7tQ==
-X-Gm-Message-State: AOJu0Yy1oyQG/+xXmbuaAaj4ElVYuj3gBhbM7VeXxYEnHCmxI8Wv7V1j
- TTFuPEgwxaz3QSBLo+9q8WVuPvBjUmn9UPGOFUXWa9PJ/YDBlmUrFQcr35jDD4/ikPGWsxGtoyQ
- m/l8eTcwlrn0=
-X-Gm-Gg: ASbGncvztFO5fEDgpzOHi2xV0aGaLZmSFiOvHzqkA1WZycQpNL8roe7MGwM3V/5gDJS
- JaRFtwKcVWmo4XT4dtzSZ1FlEaxY/IQc8F6mdH5aUsw/KDW5X/Ue4+ByU2Pkjpq5K5uSoQyF8Wk
- HGrh6MtmSCkvSS0HgDUVkqCmXqWtI8aE/54y5qfpqCNqlJsj7nN92uvhvXWnQwNFwkFCS6Emo5G
- sBAbT0dqWZMJJenmy2AqwsS6O8AKwShlTRxm1V0B/A2TwWVlDytHKZzAdb8xVvinndjQfLoI5nM
- o5jTTxRokE3yW9QAYh0V/BIaUYVyfSS5VTOyaobJJtAs4ZliyPyxUyRqnKer0S9eBi1g8Xw/wpZ
- ELdkVOQSfJMDJpUTZjQnpHdzjvUoLpg6/6beePUR2ztUMd6IU
-X-Google-Smtp-Source: AGHT+IGlv3nPFk6k8tZ/QTLHnGpLXNAMi5Gn3PSwjZtZctF8GsE1C4v4adb8RmsHuq0mdjdNg8n1/A==
-X-Received: by 2002:a05:6512:b89:b0:55c:c971:2250 with SMTP id
- 2adb3069b0e04-5906dd518a3mr8051262e87.28.1760543114608; 
- Wed, 15 Oct 2025 08:45:14 -0700 (PDT)
+ bh=2Z0BYrjAGHiAzrYqldXXm89MqA19kOWOQIt5zXdSvFY=;
+ b=haHEfGIe3ZhDBo0ui7IVBA8Am2HGGUBgATG6VbtMyb75BBS74TyAWxNDISLrdwszqM
+ CZgn8QbrH9imNcb+WguSdkhKBLKcTYbcNfzC0cgOdJNH+1OSnY58r8kfVPf0oAGmfOJz
+ Wc8yvuDOXtdEIRJj/OdNCq/Fhl+M86vvwjrpi6z3jad0R3Q7xMY0p/lnklQYQm4ycMCC
+ P+SfGUo+A9wZrXaOoOggzqXc2qx3+EWx1YH9E28pbPGo6jZxvbx4krmsMOFfabNzT5mk
+ zV0sbsY9ztsn4DlnkiXi4GUC1BkPvpOJcwVGnV086brAxobTzmccG7i19wcpoVZRqyZe
+ WBdQ==
+X-Gm-Message-State: AOJu0YxQoNv5KDgwvIXJkTwBIRcVoBfL2utDe9jyhU0jtes5ownZYpvs
+ zoddTyK374VPbsqocPWSAuiIW5ZEqF1aESe8U/Cb8ZQ/43ronuo1qwlyXVP4DtDLPof2dEPBmZC
+ FhPTZjhc007M=
+X-Gm-Gg: ASbGncsCqMkGz1Sizrpb56qFUpoxljnhs4Mt5XZqXbvRL+0KYh23HMnFAMPVORZZJe5
+ JF6STTxn+gLmVCpgHBfXNlpVg88cjdBKN9b0Wwys6l6+IHA+TTcByDfjMZpujVCNq5c80jGDuA3
+ h2FVdOLyCmLxGoCZ/rJChRROHWg4/mLy3opMKt5MT/oYZgYJHzVI5dnE8NQlOWWBQNw+v9x7Awy
+ Ajmy85e6hrejQ2KZVHhw1Ygtevt1W7vgrCfgTiuyR6ITdyM5GuXGguqzS9x/5rwSS7lk2kHzYGy
+ jYd6Zvdh9HdtxC0eLjPU/ol7jI04gz/l6yilGYYH0xh9zhsKUEsNCWJ20erxk7ZsryELYQTZMj7
+ nAMo7tQuaf+ybytNGtJ8yY00dOjVVpThC76BIyQ==
+X-Google-Smtp-Source: AGHT+IHfc7U3UzhnidYpXIuHr/6IINLa4dshDHRmwUZIHN4xKRiiPBXBjnI3QU/qLSQIWM82PYgvHw==
+X-Received: by 2002:a05:6512:3f28:b0:581:f381:4ebe with SMTP id
+ 2adb3069b0e04-5906d88b1c8mr8293300e87.22.1760543118504; 
+ Wed, 15 Oct 2025 08:45:18 -0700 (PDT)
 Received: from chromium.org ([91.209.212.108])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-59088563cbesm6363777e87.64.2025.10.15.08.45.10
+ 2adb3069b0e04-59088563cbesm6363777e87.64.2025.10.15.08.45.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 08:45:12 -0700 (PDT)
+ Wed, 15 Oct 2025 08:45:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Martin Schwan <m.schwan@phytec.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>,
- Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH v4 09/11] boot: Don't change the method count after global
- bootmeths
-Date: Wed, 15 Oct 2025 16:44:12 +0100
-Message-ID: <20251015154423.908468-10-sjg@chromium.org>
+ Moritz Fischer <moritzf@google.com>
+Subject: [PATCH v4 10/11] boot: Run global bootmeths after all bootdevs are
+ exhausted
+Date: Wed, 15 Oct 2025 16:44:13 +0100
+Message-ID: <20251015154423.908468-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251015154423.908468-1-sjg@chromium.org>
 References: <20251015154423.908468-1-sjg@chromium.org>
@@ -103,89 +101,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present before scanning global bootmeths, the iterator sets the
-method count to the index of the first global bootmeth. Now that we
-support scanning the global bootmeths multiple times, we must leave this
-count alone.
+When there are no more bootdevs we should still go through the global
+bootmeths, since some may not have yet been used, if their priority has
+not yet come up.
 
-Check against have_global and first_glob_method instead.
+Add a final check for this at the end of the iterator.
+
+Update the documentation to match the new behaviour of global bootmeths.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- boot/bootflow.c      | 18 ++++++++++++++----
- test/boot/bootflow.c |  6 +++---
- 2 files changed, 17 insertions(+), 7 deletions(-)
+Changes in v3:
+- Pull doc changes into this patch
+
+Changes in v2:
+- Add a bit more detail suggested by Heinrich
+
+ boot/bootflow.c                  | 23 ++++++++++++++++++
+ doc/develop/bootstd/overview.rst | 40 +++++++++++++++++++++++++++-----
+ 2 files changed, 57 insertions(+), 6 deletions(-)
 
 diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 1a4cd0e28e8..38b8af916b2 100644
+index 38b8af916b2..d8a4a81a838 100644
 --- a/boot/bootflow.c
 +++ b/boot/bootflow.c
-@@ -304,9 +304,20 @@ static int iter_incr(struct bootflow_iter *iter)
- 	for (iter->cur_method++; iter->cur_method < iter->num_methods;
- 	     iter->cur_method++) {
- 		/* loop until we find a global bootmeth we haven't used */
--		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global &&
--		    !bootmeth_glob_allowed(iter, iter->cur_method))
--			continue;
-+		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global) {
-+			if (!bootmeth_glob_allowed(iter, iter->cur_method))
-+				continue;
+@@ -354,6 +354,18 @@ static int iter_incr(struct bootflow_iter *iter)
+ 			return 0;
+ 		}
+ 
++		/* if this was the final global bootmeth check, we are done */
++		if (iter->cur_prio == BOOTDEVP_COUNT) {
++			log_debug("-> done global bootmeths\n");
 +
-+			iter->method = iter->method_order[iter->cur_method];
-+			log_debug("-> next global method '%s'\n",
-+				  iter->method->name);
-+			return 0;
++			/* print the same message as bootflow_iter_set_dev() */
++			if ((iter->flags & (BOOTFLOWIF_SHOW |
++					    BOOTFLOWIF_SINGLE_DEV)) ==
++					    BOOTFLOWIF_SHOW)
++				printf("No more bootdevs\n");
++			return BF_NO_MORE_DEVICES;
 +		}
 +
-+		/* at this point we are only considering non-global bootmeths */
-+		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->have_global &&
-+		    iter->cur_method >= iter->first_glob_method)
-+			break;
- 
- 		iter->method = iter->method_order[iter->cur_method];
- 		return 0;
-@@ -317,7 +328,6 @@ static int iter_incr(struct bootflow_iter *iter)
- 	 * normal bootdev scan
- 	 */
- 	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && global) {
--		iter->num_methods = iter->first_glob_method;
- 		iter->doing_global = false;
- 
  		/*
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 8317dee1e20..20297136e3f 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -426,7 +426,7 @@ static int bootflow_iter_glob(struct unit_test_state *uts)
- 	ut_asserteq(-EPROTONOSUPPORT, bootflow_scan_next(&iter, &bflow));
+ 		 * Don't move to the next dev as we haven't tried this
+ 		 * one yet!
+@@ -459,6 +471,17 @@ static int iter_incr(struct bootflow_iter *iter)
+ 			ret = prepare_bootdev(iter, dev, method_flags, true);
+ 	}
  
- 	/* at this point the global bootmeths are stranded above num_methods */
--	ut_asserteq(2, iter.num_methods);
-+	ut_asserteq(3, iter.num_methods);
- 	ut_asserteq(2, iter.first_glob_method);
- 	ut_assert(!iter.doing_global);
- 	ut_assert(iter.have_global);
-@@ -493,7 +493,7 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
- 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
++	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && ret) {
++		log_debug("no more bootdevs, trying global\n");
++
++		/* allow global bootmeths with any priority */
++		iter->cur_prio = BOOTDEVP_COUNT;
++		if (!next_glob_bootmeth(iter)) {
++			log_debug("-> next method '%s'\n", iter->method->name);
++			return 0;
++		}
++	}
++
+ 	/* if there are no more bootdevs, give up */
+ 	if (ret)
+ 		return log_msg_ret("incr", BF_NO_MORE_DEVICES);
+diff --git a/doc/develop/bootstd/overview.rst b/doc/develop/bootstd/overview.rst
+index 0a237359575..e36cde4d360 100644
+--- a/doc/develop/bootstd/overview.rst
++++ b/doc/develop/bootstd/overview.rst
+@@ -133,7 +133,8 @@ which scans for available bootflows, optionally listing each find it finds (-l)
+ and trying to boot it (-b).
  
- 	/* at this point the global bootmeths are stranded above num_methods */
--	ut_asserteq(3, iter.num_methods);
-+	ut_asserteq(4, iter.num_methods);
- 	ut_assert(!iter.doing_global);
- 	ut_assert(iter.have_global);
- 	ut_asserteq(3, iter.first_glob_method);
-@@ -505,7 +505,7 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
- 	ut_assert_console_end();
+ When global bootmeths are available, these are typically checked before the
+-above bootdev scanning.
++above bootdev scanning, but it is possible provide a priority to make them
++run later, by setting the glob_prio field in the driver's bind() method.
  
- 	/* Check that the sandbox bootmeth has been removed */
--	ut_asserteq(2, iter.num_methods);
-+	ut_asserteq(3, iter.num_methods);
  
- 	for (i = 0; i < iter.num_methods; i++)
- 		ut_assert(strcmp("sandbox", iter.method_order[i]->name));
+ Controlling ordering
+@@ -612,9 +613,9 @@ simply copied into the iterator. Either way, the `method_order` array it set up,
+ along with `num_methods`.
+ 
+ Note that global bootmeths are always put at the end of the ordering. If any are
+-present, `cur_method` is set to the first one, so that global bootmeths are done
+-first. Once all have been used, these bootmeths are dropped from the iteration.
+-When there are no global bootmeths, `cur_method` is set to 0.
++present, `cur_method` is set to the first one, so that global bootmeths are
++processed first, so long as their priority allows it. Bootstd keeps track of
++which global bootmeths have been used, to make sure they are only used once.
+ 
+ At this point the iterator is ready to use, with the first bootmeth selected.
+ Most of the other fields are 0. This means that the current partition
+@@ -714,8 +715,35 @@ to the next partition, or bootdev, for example. The special values
+ `BF_NO_MORE_PARTS` and `BF_NO_MORE_DEVICES` handle this. When `iter_incr` sees
+ `BF_NO_MORE_PARTS` it knows that it should immediately move to the next bootdev.
+ When it sees `BF_NO_MORE_DEVICES` it knows that there is nothing more it can do
+-so it should immediately return. The caller of `iter_incr()` is responsible for
+-updating the `err` field, based on the return value it sees.
++so it should immediately run any unused global bootmeths and then return. The
++caller of `iter_incr()` is responsible for updating the `err` field, based on
++the return value it sees.
++
++Global bootmeths can have a non-zero priority, which indicates where in the
++iteration sequence they should run. Each time a new bootdev is produced by a
++hunter, all of the global bootmeths are first checked to see if they should run
++before this new bootdev. For example, if the bootdev was produced by a hunter
++with priority BOOTDEVP_6_NET_BASE, then a quick check is made for global
++bootmeths with that priority or less. If there are any, they run before the new
++bootdev is processed.
++
++Assuming they are enabled and the iteration sequence runs right to the end, all
++global bootmeths will be used. This is handled by a special case at the end of
++iter_incr(), where it processes amy so-far-unused global bootmeths.
++
++It is important to note the special nature of global bootmeths, with respect to
++priority. If there are two normal bootmeths and a global one, the normal ones
++are run for each bootdev, but the global one is independent of bootdevs. The
++order might be:
++
++    bootdev priority 3: normal-1, normal-3
++    global-2, prio 4
++    bootdev priority 5: normal-1, normal-3
++
++Of course if a specific bootmeth ordering is provided, then this overrides the
++default ordering. Global bootmeths must be listed at the end, reflecting their
++hybrid nature (they are bootmeths but operate on the system as a whole, not on
++a particular bootdev).
+ 
+ The above describes the iteration process at a high level. It is basically a
+ very simple increment function with a checker called `bootflow_check()` that
 -- 
 2.43.0
 
