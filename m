@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05EFFCCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 16:27:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E37CCCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 16:27:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0811783824;
+	by phobos.denx.de (Postfix) with ESMTP id 5099683837;
 	Wed, 15 Oct 2025 18:26:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="JpJxPk7t";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="q9V8enhc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30D9E83303; Wed, 15 Oct 2025 18:26:20 +0200 (CEST)
-Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com
- [IPv6:2001:41d0:203:375::aa])
+ id 8B4B083775; Wed, 15 Oct 2025 18:26:21 +0200 (CEST)
+Received: from out-182.mta1.migadu.com (out-182.mta1.migadu.com
+ [95.215.58.182])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B01B8357F
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 18:26:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FD4D83700
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 18:26:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,24 +29,24 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1760545577;
+ s=key1; t=1760545578;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iCzjoNx85kQjnqtELcVZiI/0ZNha2YwcXg2IRVevnj8=;
- b=JpJxPk7tdiR7T6WbxlfRYjsYPHX/xZ3u32zNmM0pXF0YgMPgqCNMXFQ1cMExjTyM2iq0yJ
- NW7miSyXdhhE/jZnAIphJWFU/zxpRMyKm2sWfeJjRCdqq3F6WAcNDT6H2FomQbfXs/Q6C4
- /ORuxf3DkioPX4/cIVSg7d3pU8LOwbVeSgl4kqbSYQw/yrlHr4qFX5TigEvrHIYxB6CAyb
- Kvt1iOKb8O23BEmsN0YNEuMpEDFhNydRmRJRkMkJzEw06pAHrn6c88TAqcOfvZ3L/IALV9
- yG+K4ovJD6QG7B14VNQw7GIl/UduaeyKqq7gpUYretqaT6hyb3jCLzueBnv/mg==
+ bh=cuJqrWKtu7VsE0URuDvhagUwHbmI9qkM01nIi7FYQ4U=;
+ b=q9V8enhcTqpBMAW1J5seXwEEEdTF1URyFEcekQQG1khsFH9GOuFs543VjIarBLY/l9CEC3
+ Aw3TI+8EDXPVrjrzUYeZk7pVJBQnFccsT7dnSNfvOtlqaL73w6HRdB6Bjs0nXBD00wLda9
+ NqcfVLjCNHPesAhEyptKYMKApxvt+srfmPqVajNb0TdZbG6ffG8IKpjAinIgXzeMbATSH7
+ jHSNjWs7lFWuPQO6b2Iz3CPxg57N9Hc9jFjIkOexzFdA4pbXDCSb2z5llfAB98FHmlTWMM
+ INxUudlSJI3RHB0kztQCoEmRD5nS6G2CNhedcqAvNFniNa//Yqn8ZkHWXmDJUw==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 15 Oct 2025 16:25:54 +0000
-Subject: [PATCH v4 7/8] board: amlogic: add kconfig fragments for SPL
+Date: Wed, 15 Oct 2025 16:25:55 +0000
+Subject: [PATCH v4 8/8] doc: board: amlogic: add u-boot-spl documentation
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20251015-spl-gx-v4-7-f5d7fe03225b@postmarketos.org>
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251015-spl-gx-v4-8-f5d7fe03225b@postmarketos.org>
 References: <20251015-spl-gx-v4-0-f5d7fe03225b@postmarketos.org>
 In-Reply-To: <20251015-spl-gx-v4-0-f5d7fe03225b@postmarketos.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -57,21 +57,21 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  ~postmarketos/upstreaming@lists.sr.ht, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5624;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4585;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=n9dcM1NaWv1N3tiHVLTyEWnkCB0OZsXRcVilFoSK+pA=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBo78sfZZGbJAzF6qkeA0raXdqmqqOMHQow1rwGC
- Mao7wMyfAiJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaO/LHwAKCRCEr8vQ14ma
- A8PQEACjMOWTsWQ7fxRqWqv45Wc1qk2BtqPwsgfKSSHylD1VCqCV60/QrVuCwjRVLd7PoyqlukZ
- wiSgPzoUCpAk4jLt6o5F2jvUrQWxIb+Rn8BLyYVxu36mBRNlwn4HbLMjKWk8VKE2ouIiNU4ziu5
- WiSN7BLtKCdw2g5YbyIyXm8+pqYtCTv5HhJpAzgomTOuuoRTq3ZKuyM22qVIQetx9eOMbAk0I7u
- W/kZTBalmxRN3FjYc47k5ecrYyzPXo4Q4eCbDsrivRHRXLcED4I0siudfQUHxodn5+TSnUw4Rz1
- TMExeUM2HDsHFFFeZAijpd/VnaLviGOhy8Jbkl783k0+FFlMu0NbuPJ33QBCGfbwjtA4cMGH6j1
- Zk6uiX3n7QKQsd3AM/gLj1Cciw71PU6KSKsbEzOzlv/8A7WkVH2zOK67+okNwv3fgK+8Jc/nABW
- VzvmrxuyXO7z1UbI8eTvl1HZ2lz3MPyAzRyolU67H6qFveiCumnHvCC5r0JGybFd5L27ub1Lp6C
- a/ukhvKAoCtb0ZZQTqx5jfceH3hmr3QuFMgCFzMzg5r6f4CfJ2SeELVUVYu6BoR2SK0yNbjiZhO
- V7DqZjossgbQAyU4ofeCnUwD1zo268Sm8rGfr2V0Xhyh/m5x47KmMCFwgCwyyFn1eLVAvnu25EX
- KbzFMNCI0GzoIJg==
+ bh=/VeS5u4ZbzPkuGtKCKD3nwCO7JAbRhgfDqmfzoien60=;
+ b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBo78sgRrp71Bfq6GKaXBUU+biEemzPofr4NCH0K
+ r9P6fEl1PKJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaO/LIAAKCRCEr8vQ14ma
+ A4vDD/kB5dQLV6SdMRkMXRYMAWluL1Q0+JkBCHaHpzBk12gW2Ux0q8xfN7QoMtkTSND2KZjyhwI
+ duhj9MV+DH3DHtYRQ0fRiKsiCa50qC6VHvR0f3F6P5031ByeZwMKXdmS4Kj1WBH8LRusOKCFNai
+ XL9s3bFV6GhQDDVSmK1sATjajKx1NrmHtyP4N8nQaqSQ8GVCnOAm3y4J+JSkThlRX9O1RWAIRMF
+ ZsA5Bkg6Qsb0DyGzj1MrZF7szdxEfTXCHx3k9lwsEHlwHjFF0bT4bT500ld0pVov27cU6/fRaP5
+ aLPxo8rz0v7MT2XWYANKZ55d+WMsrqXLGfV7zZGm55LdqGI40wgttHFkiuab++Z5vnph9gdxqM1
+ kTD0PHpGNyEDGfV7WJK81p15R+aGZX9OaZFohqY+7AqaeQpF5t9o7HXLCdwL+oRGlQ5jPMk55Bo
+ xyddwCFflI+W3o70k0lH9HTUcdcmqI3E19sNWHTWv+TB8OUhfoE995io9ZHzZi8OjCnI+OT7hUZ
+ wtLLe/+xhEhKMNfsyuzJBgOiu2+n3lLkMc3/CPs8o8y1MoesMpXVC4I50TgVkeAFfPqi9hnKmSJ
+ nOUfNi+6bRJ/uK3LnQsK4ssxd1NoXZDBPkRfXsTmrtsIDiyBkXDYMYlzqT6PDYfmQA7fVQpA7vI
+ 2UAVV9xc9v0jtZw==
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -91,191 +91,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add kconfig fragments for building SPL binaries for:
- · ODROID-C2
- · Videostrong KII Pro
- · Libre Computer LePotato (1 GB and 2 GB variants)
+Add building and usage instructions for SPL.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- board/amlogic/p200/spl-odroid-c2.config           | 37 ++++++++++++++++++++++
- board/amlogic/p200/spl-videostrong-kii-pro.config | 38 +++++++++++++++++++++++
- board/amlogic/p212/spl-libretech-cc-1gb.config    | 35 +++++++++++++++++++++
- board/amlogic/p212/spl-libretech-cc-2gb.config    | 37 ++++++++++++++++++++++
- 4 files changed, 147 insertions(+)
+ doc/board/amlogic/index.rst             |  1 +
+ doc/board/amlogic/pre-generated-fip.rst |  9 ++++
+ doc/board/amlogic/spl.rst               | 77 +++++++++++++++++++++++++++++++++
+ 3 files changed, 87 insertions(+)
 
-diff --git a/board/amlogic/p200/spl-odroid-c2.config b/board/amlogic/p200/spl-odroid-c2.config
+diff --git a/doc/board/amlogic/index.rst b/doc/board/amlogic/index.rst
+index dcd935224ac..23380ac33f2 100644
+--- a/doc/board/amlogic/index.rst
++++ b/doc/board/amlogic/index.rst
+@@ -78,6 +78,7 @@ Boot Documentation
+ 
+    boot-flow
+    pre-generated-fip
++   spl
+ 
+ Board Documentation
+ -------------------
+diff --git a/doc/board/amlogic/pre-generated-fip.rst b/doc/board/amlogic/pre-generated-fip.rst
+index 6a43d776d43..d820bd09115 100644
+--- a/doc/board/amlogic/pre-generated-fip.rst
++++ b/doc/board/amlogic/pre-generated-fip.rst
+@@ -98,6 +98,13 @@ The repo also provides the following files used with GXBB boards:
+ The repo also supports the open-source 'gxlimg' signing tool that can be used to sign
+ U-Boot binaries for GXL/GXM/G12A/G12B/SM1 boards: https://github.com/repk/gxlimg
+ 
++The following binaries can be replaced with open-source implementations:
++
++- bl2.bin (GXBB and GXL only)
++- bl31.img (GXBB, GXL, AXG and G12A only)
++
++Refer to `Experimental U-Boot SPL Support`_ if you wish to replace them.
++
+ Licensing
+ ---------
+ 
+@@ -129,3 +136,5 @@ clarified. The current Amlogic distribution licence is below:
+     // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+     // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++
++.. _`Experimental U-Boot SPL Support`: spl.rst
+diff --git a/doc/board/amlogic/spl.rst b/doc/board/amlogic/spl.rst
 new file mode 100644
-index 00000000000..d5ea295bc6d
+index 00000000000..d4223090fe9
 --- /dev/null
-+++ b/board/amlogic/p200/spl-odroid-c2.config
-@@ -0,0 +1,37 @@
-+#
-+# U-Boot SPL fragment for odroid-c2
-+#
++++ b/doc/board/amlogic/spl.rst
+@@ -0,0 +1,77 @@
++.. SPDX-License-Identifier: GPL-2.0+
 +
-+CONFIG_SPL=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SPL_TEXT_BASE=0xd9001000
-+CONFIG_SPL_STACK=0xd9013000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0xd900c000
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x1000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+# CONFIG_SPL_SERIAL_PRESENT is not set
-+# CONFIG_SPL_SHA1 is not set
++Experimental U-Boot SPL Support
++===============================
 +
-+# Enable MMC and serial drivers
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
++There's some experimental support for some Amlogic SoCs, in U-Boot SPL.  It
++replaces the proprietary bl2.bin blob used for DRAM init.  Currently Meson GX
++SoCs (GXBB, GXL) are supported.
 +
-+# Image things
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
-+CONFIG_SPL_MAX_SIZE=0xb000
-+CONFIG_SPL_PAD_TO=0x1fe00
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_OF_CONTROL=y
-+# DRAM configuration
-+CONFIG_DRAM_SIZE=2048
-+CONFIG_DRAM_2T_MODE=y
-+CONFIG_DRAM_TWO_IDENTICAL_RANKS=y
-diff --git a/board/amlogic/p200/spl-videostrong-kii-pro.config b/board/amlogic/p200/spl-videostrong-kii-pro.config
-new file mode 100644
-index 00000000000..5b3ba9d9908
---- /dev/null
-+++ b/board/amlogic/p200/spl-videostrong-kii-pro.config
-@@ -0,0 +1,38 @@
-+#
-+# U-Boot SPL fragment for videostrong-kii-pro
-+#
++A subset of Amlogic boards have SPL enabled.  These boards have been tested and
++are known to work to an extent.
 +
-+CONFIG_SPL=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SPL_TEXT_BASE=0xd9001000
-+CONFIG_SPL_STACK=0xd9013000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0xd900c000
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x1000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+# CONFIG_SPL_SERIAL_PRESENT is not set
-+# CONFIG_SPL_SHA1 is not set
 +
-+# Enable MMC and serial drivers
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
++Building Arm Trusted Firmware (TF-A)
++------------------------------------
 +
-+# Image things
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_FIT_IMAGE_POST_PROCESS=y
-+CONFIG_SPL_MAX_SIZE=0xb000
-+CONFIG_SPL_PAD_TO=0x1fe00
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_OF_CONTROL=y
-+# DRAM configuration
-+CONFIG_DRAM_SIZE=2048
-+CONFIG_DRAM_2T_MODE=y
-+CONFIG_DRAM_TWO_DIFF_RANKS=y
++This U-Boot SPL port requires the BL31 stage of mainline Arm Trusted
++Firmware-A firmware. It provides an open source implementation of secure
++software for Armv8-A. Build it with:
 +
-diff --git a/board/amlogic/p212/spl-libretech-cc-1gb.config b/board/amlogic/p212/spl-libretech-cc-1gb.config
-new file mode 100644
-index 00000000000..0969f9b7444
---- /dev/null
-+++ b/board/amlogic/p212/spl-libretech-cc-1gb.config
-@@ -0,0 +1,35 @@
-+#
-+# U-Boot SPL fragment for libretech-cc (1 GB variant)
-+#
++.. code-block:: bash
 +
-+CONFIG_SPL=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SPL_TEXT_BASE=0xd9001000
-+CONFIG_SPL_STACK=0xd9013000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0xd900c000
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x1000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+# CONFIG_SPL_SERIAL_PRESENT is not set
-+# CONFIG_SPL_SHA1 is not set
++    $ git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
++    $ cd trusted-firmware-a
++    $ make CROSS_COMPILE=aarch64-linux-gnu- PLAT=your_soc DEBUG=1
 +
-+# Enable MMC and serial drivers
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
++Replace ``your_soc`` with the SoC target you wish to build for. For GXBB it's
++``gxbb`` and for GXL it's ``gxl``.
 +
-+# Image things
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_MAX_SIZE=0xb000
-+CONFIG_SPL_PAD_TO=0x1fe00
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_OF_CONTROL=y
-+# DRAM configuration
-+CONFIG_DRAM_2T_MODE=y
-+CONFIG_DRAM_DQS_CORR=y
-diff --git a/board/amlogic/p212/spl-libretech-cc-2gb.config b/board/amlogic/p212/spl-libretech-cc-2gb.config
-new file mode 100644
-index 00000000000..e2d9cc765cb
---- /dev/null
-+++ b/board/amlogic/p212/spl-libretech-cc-2gb.config
-@@ -0,0 +1,37 @@
-+#
-+# U-Boot SPL fragment for libretech-cc (2 GB variant)
-+#
 +
-+CONFIG_SPL=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SPL_TEXT_BASE=0xd9001000
-+CONFIG_SPL_STACK=0xd9013000
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0xd900c000
-+CONFIG_SPL_HAVE_INIT_STACK=y
-+CONFIG_SPL_BSS_MAX_SIZE=0x1000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+# CONFIG_SPL_SERIAL_PRESENT is not set
-+# CONFIG_SPL_SHA1 is not set
++Building a bl30_new.bin binary
++------------------------------
 +
-+# Enable MMC and serial drivers
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x100
-+# CONFIG_SYS_MMCSD_FS_BOOT is not set
++``bl30_new.bin`` has both ``bl30.bin`` and ``bl301.bin`` binary blobs
++bundled. The former is the proper system control processor firmware and the
++latter is a "plug-in" for board-specific DVFS/suspend-resume parameters. For
++more info you may wish to read this page: `Pre-Generated FIP File Repo`_.
 +
-+# Image things
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_MAX_SIZE=0xb000
-+CONFIG_SPL_PAD_TO=0x1fe00
-+CONFIG_SPL_ATF=y
-+CONFIG_SPL_OF_CONTROL=y
-+# DRAM configuration
-+CONFIG_DRAM_SIZE=2048
-+CONFIG_DRAM_2T_MODE=y
-+CONFIG_DRAM_DQS_CORR=y
-+CONFIG_DRAM_TWO_IDENTICAL_RANKS=y
++To build using the FIP file repo, simply issue the following commands:
++
++.. code-block:: bash
++
++    $ cd amlogic-boot-fip/your_board
++    $ make bl30_new.bin
++
++
++.. _`Pre-Generated FIP File Repo`: pre-generated-fip.rst
++
++
++U-Boot compilation
++------------------
++
++U-Boot SPL is not enabled by default, instead there are config fragments that
++can be used to enable it, with per-board configuration:
++
++- ``spl-libretech-cc-1gb.config``: 1 GB LePotato board
++- ``spl-libretech-cc-2gb.config``: 2 GB LePotato board
++- ``spl-odroid-c2.config``: ODROID-C2
++- ``spl-videostrong-kii-pro.config``: Videostrong KII Pro
++
++Pick one of them then:
++
++.. code-block:: bash
++
++    $ export CROSS_COMPILE=aarch64-linux-gnu-
++    $ export BL31=path/to/tf-a/bl31.bin                 # Upstream TF-A BL31 binary
++    $ export SCP=path/to/bl30_new.bin                   # bl30_new.bin binary
++    $ make <yourboardname>_defconfig spl-<yourboardname>.config
++    $ make
++
++Write to SD:
++
++.. code-block:: bash
++
++    $ DEV=/dev/boot_device
++    $ dd if=u-boot-meson-with-spl.bin of=$DEV conv=fsync,notrunc bs=512 seek=1
++
 
 -- 
 2.51.0
