@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D1ABCCD194
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:57:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4AACCD194
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:57:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3BAE83837;
+	by phobos.denx.de (Postfix) with ESMTP id E9AEF83847;
 	Wed, 15 Oct 2025 17:55:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vgs5SxV9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s/lyvFgS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 555878357F; Wed, 15 Oct 2025 16:32:46 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 4D029835B0; Wed, 15 Oct 2025 16:32:48 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 631D8835B0
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:32:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E7BD835C6
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-46e3a50bc0fso49016195e9.3
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:32:44 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-46e491a5b96so38958865e9.2
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:32:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538764; x=1761143564; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1760538766; x=1761143566; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=N3rljvq9KOA7AJzz2MxpZB3DqMsIJEB0N/Yw0c/kKeI=;
- b=vgs5SxV9dEPg0X0DGQ69ymQR1g2GPlY3fRpFSBDM/tWVqv7igaOpuFUJ38/snHT8ZS
- qQ975IsVUcS03qPWEikdrFs+VfvY4rRhpWXdeTts0YXFCIthZP5YYOnWoE+EoDPhsCRp
- +SuoSbsaMEG4zhMCt2WTbSKC0Odd/D2itTS3WD8Rs0Zx+MwmCjEVnrzIyl45fvt82kiu
- o1XIumTVtX0ZorPI+JHjrAoDn5p/9L8dc/NHBBzuexKVaXB+nG3qmTjcvv4qchIXgJoX
- iuyW7WlL+rCIMgSZehzuYIXWwW3nk+vTJEZ7kMkp0oNIL7iiyFV2UMQF4BF0XnlYyWuR
- IwRg==
+ :reply-to; bh=49jSWRHsss//EBfN7zOwUemnNlZQX5Z/2fmZ0qpW5eQ=;
+ b=s/lyvFgS3ZVTyzyYCmP/5XC0/R48HEjJL3AyCZZfFv7+hz8xCOQjGOXK926+SQGY0q
+ P9BsX+rJLeNTeKUpRE50e/0LGDDgITJEbYHbO4J/8PdQDarnOEEKrWIXr89LjOzmuILK
+ bubrurSJGa59lHlrP214S3qVic12re3eMyh8HxDWzzpEeY9wpybPEMnJaStoGcnzE4Xi
+ qBzh7nriNTzNZW8tk5bxAsT6AOuyQuc+LqIzDZLXTE2yIczyQ/yVrmwrulviZk+5fbsW
+ rB8Vmy7sOS1k1q7lpdI8AFKp4YY6JHAtlcifs+sySF4qxP3TBzLilcTlDZXDJZZPp4oN
+ DQYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538764; x=1761143564;
+ d=1e100.net; s=20230601; t=1760538766; x=1761143566;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=N3rljvq9KOA7AJzz2MxpZB3DqMsIJEB0N/Yw0c/kKeI=;
- b=KIzwJ+oAmW2oE0yfIMPunvaZNe4HPSKH3Io6eMfndyZxDZfBE/+6e4fNV//oBIBv1C
- TC5LUXl2mBnsT3LYHvw7KzZCaG1Uc2UrPCJSv5DncfYgLWlnWPiCYgyaAbd5aZ8G+x3z
- Y1Q9Cu1w8awxPBHsFuyZqarrsaJxV6AIF+QHT0WBvVNcfkDPpzkm4lMZtJdXAH9jA6ZW
- NkGHp0i6DRmtGVDWRYZ3Za90O3TM5zxFId35z6+gVANP4LH1lOFsnAqbO3ES6EWCtVmx
- 7tBbkqHgo9II6FbiNG2qOcOwsWb1EUSm+DrKHJFEaZOJmywBpDohkj0D7v6r3i5qAWfd
- bEEQ==
+ bh=49jSWRHsss//EBfN7zOwUemnNlZQX5Z/2fmZ0qpW5eQ=;
+ b=uD+0BqidMZTEd2iWcA5Zq8OPzwYVqTxlBkU4Y1u2s6nzw1eFPhMa84v4wCzKPCSS+0
+ KufX60gBkQcHA5xQOP1l1KADhqQmEl8W3G5fuB/5TWNBFQRDR5y5VbWVPMpD3Yncak1L
+ unBIYQvCUoq4LyN0SqBiR23jM5CY3fYvGhVRE+M3WJCL08m8tbLI4qVrXtoGGLK6uCVD
+ KCVCh//upZTb1zShZyPCtfXaxx7/MCOa+8n5i8pR2gugVJitucO4oyc7eSp4nZma15U2
+ nFKI/WExqziB3FBvqb5zjoVQy1CZ2cQqi2qVPS9WXGz1oBh588W8P/kscHLwuANt4vLT
+ tJyQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWPWrx6KPYHTFnvu8HND5ZQAuJJwkgC7FXooJ+niHyTyXex+S2kfyRZL+nr447sfn7Phk3Qjhs=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrQy0iw7ozsLCn9JqdOEvpdsGhWXTEkZ7mVSz/9SlagXrefL5I
- YC4W4KhrAJPAg+NB2IguqRLeOVA1PKtFHYgnFkFeqeC0dSbgZlecrvr1pyGDoF+j2qM=
-X-Gm-Gg: ASbGncslllBZ55Kyf0RyLEdkIhIaeMLniSdHE4+clLid5hXSK/XukymXCDI4dTSlOwe
- gzYvtJHkQ/8PjzbAoeJ37uLSUYooJs8Asv62vb/CyBaMZqHtm5On48QbS72H9apYEbKcsEtvbk2
- XJnZEUwOdllprFIDIsAnPJGhPQgb2yJ9iC2QnRwD70S5XLX7ytkX3unewgAQW3e+SWak6azAy1w
- 3PlfLFudnF18GLoVBAm4tY7SgMz6cUpU49l2M+witxGbC5V1nSChDYzA3dCNzUNonZ4AZ733bqb
- hM6wSmeoj/Lml6ZJgBc3H002n+kCCdtmRFU/C7SUVhwmzPEm5mA6KyujnjlBZWPFrtvNFnGSXxs
- wBailxIy6GIjC4BKRb+2Y9Ps1qzF5uDwoP6CTpdHkWKHUzrhPogIbHKdGLmOyH5huas2NTWXzxQ
+ AJvYcCWX7RcQsTyvAwlK1o3J7aj/ykzXh1IvafyD7f07WWxYLhCh1w0niBtq2fjAXxAeI6SNDoNfsNU=@lists.denx.de
+X-Gm-Message-State: AOJu0YwOcODmP1w7LQp3K3UVWSJJ2H9n9aotgUiroksYHzoYcHujkWhV
+ N9o9OplqZGWq0Rki8ywYvuLmJRNddJYZARIPHVbAMfc1J/TWS5iMYSevenR3KX1xgDw=
+X-Gm-Gg: ASbGncsG5EN8UZiT25YrHGl1lMGLrXBjo3RqcVQDqTEWf9tbn9dgw0/LnE6E+Xq3dI1
+ qlGLli0GmJvvJ22CvYz6W4qXOzNfMCzz6nirjHLuUmZWI5WzhbDW3o7rcnktW+9KlhTbpZ8bpIZ
+ xZsdRbIfLSLww7TIYY4QN7slWk4fQNQYhnE+evA+KMPucRs4WhNG4RcZRlEGnXkVxxEFSUPlfIg
+ +uBlLOD+JJZSvgCGsSCZ/JcAxs3d2XnN35IJQRiO/CaD9kib/9PbS37+OCY76GBbT9xvuJdDySD
+ nbsM1DG9i24Y2LI0Q/K9PahJfVYzPK+/62yKSRlZQ1fe1mH3kgh/iszk1omIFvKAQfa8+JxCxmd
+ Ukb9qmezfzjQ58L7QZ909rqzstj6nGtXR7OOKAWnyugJwhF0gCo7fqUfS44wPfaO/28hwAHXo/w
  ==
-X-Google-Smtp-Source: AGHT+IGZBE/wvC/OR16B1nm/Lbel1Icf+lV5KoD+pC7Gi//18a7APy+0r1AOjyOP5ulUf0ZTDMkeQw==
-X-Received: by 2002:a05:600c:a40c:b0:46f:b43a:aee1 with SMTP id
- 5b1f17b1804b1-46fb43aaf16mr87846415e9.38.1760538763766; 
- Wed, 15 Oct 2025 07:32:43 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE61xZ44uz8zMhdoQ8tBs0hpzL01dSTtaZwdHp/BnAZL3FSDzrFGhj1LePLNzK4t2rGWJb6kg==
+X-Received: by 2002:a05:600c:530e:b0:46e:4c90:81d0 with SMTP id
+ 5b1f17b1804b1-46fa9a8f1c5mr206392935e9.2.1760538765676; 
+ Wed, 15 Oct 2025 07:32:45 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.42
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:32:43 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:45 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:16 +0100
-Subject: [PATCH 11/24] clk: altera: Remove negative error returns from
+Date: Wed, 15 Oct 2025 15:32:17 +0100
+Subject: [PATCH 12/24] clk: uniphier: Remove negative error returns from
  clk_get_rate
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251015-clk_ops-v1-11-5f80f827407e@linaro.org>
+Message-Id: <20251015-clk_ops-v1-12-5f80f827407e@linaro.org>
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
@@ -158,50 +158,22 @@ codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/clk/altera/clk-agilex.c  | 2 +-
- drivers/clk/altera/clk-agilex5.c | 2 +-
- drivers/clk/altera/clk-n5x.c     | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ drivers/clk/uniphier/clk-uniphier-core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/altera/clk-agilex.c b/drivers/clk/altera/clk-agilex.c
-index fdbf834bb2f6ae85025a2d11f25f8b1de025871d..7f57e2b1c5d722ba0c8f49eb0849e57ee0ed4d4e 100644
---- a/drivers/clk/altera/clk-agilex.c
-+++ b/drivers/clk/altera/clk-agilex.c
-@@ -639,7 +639,7 @@ static ulong socfpga_clk_get_rate(struct clk *clk)
- 	case AGILEX_NAND_CLK:
- 		return clk_get_l4_mp_clk_hz(plat) / 4;
- 	default:
--		return -ENXIO;
-+		return 0;
- 	}
- }
+diff --git a/drivers/clk/uniphier/clk-uniphier-core.c b/drivers/clk/uniphier/clk-uniphier-core.c
+index 33369c93916b06a68f81db056988bd4954adae4c..32e1d7efb86e835a47e0c51bf913fbca4dcb6071 100644
+--- a/drivers/clk/uniphier/clk-uniphier-core.c
++++ b/drivers/clk/uniphier/clk-uniphier-core.c
+@@ -168,7 +168,7 @@ static unsigned long uniphier_clk_get_rate(struct clk *clk)
  
-diff --git a/drivers/clk/altera/clk-agilex5.c b/drivers/clk/altera/clk-agilex5.c
-index fb1e72ffc5cdef4d641982daf2b57f185ec327c8..90495082203cee0791a26aec2ee38d3f3ac0aff0 100644
---- a/drivers/clk/altera/clk-agilex5.c
-+++ b/drivers/clk/altera/clk-agilex5.c
-@@ -705,7 +705,7 @@ static ulong socfpga_clk_get_rate(struct clk *clk)
- 	case AGILEX5_NAND_X_CLK:
- 		return clk_get_l4_mp_clk_hz(plat);
- 	default:
--		return -ENXIO;
+ 	data = uniphier_clk_get_data(priv, clk->id);
+ 	if (!data)
+-		return -ENODEV;
 +		return 0;
- 	}
- }
  
-diff --git a/drivers/clk/altera/clk-n5x.c b/drivers/clk/altera/clk-n5x.c
-index 9e4e7a1d90879bf89cb07212b9d3c894bb203fc7..2340e9890f501b0760d159a66431c521df2bb2f1 100644
---- a/drivers/clk/altera/clk-n5x.c
-+++ b/drivers/clk/altera/clk-n5x.c
-@@ -436,7 +436,7 @@ static ulong socfpga_clk_get_rate(struct clk *clk)
- 	case N5X_NAND_CLK:
- 		return clk_get_l4_mp_clk_hz(plat) / 4;
- 	default:
--		return -ENXIO;
-+		return 0;
- 	}
+ 	return __uniphier_clk_get_rate(priv, data);
  }
- 
 
 -- 
 2.47.3
