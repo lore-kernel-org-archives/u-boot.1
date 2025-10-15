@@ -4,159 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 390A6CCD184
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 02:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33784CCD190
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 06:33:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B79580107;
-	Wed, 15 Oct 2025 04:05:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C0818313B;
+	Wed, 15 Oct 2025 08:33:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=norik.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="Z+G/Ynmx";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=norik.com header.i=@norik.com header.b="Gf9Efq9x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43168807B1; Wed, 15 Oct 2025 04:05:01 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
+ id D67A68323A; Wed, 15 Oct 2025 08:33:53 +0200 (CEST)
+Received: from cp2.siel.si (cp2.siel.si [46.19.12.180])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AFFB800D7
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 04:04:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74B3680107
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 08:33:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PR8QKW7hK8pwAfrXdxbfvSwqm0Z8x7b/zkxkST50jMGGHSzsy8vM3d5JgaRjxlxUOpkvkfZHlu43Une1H0x7kpaN1fitoQKAtNfu0F5Z/8gcDm1Zlx3+k1ZS6rbVkW3lNZrC6PQJj0ozjvVRxLgxj0xRFnOD75zC+vCq1loG8vSxyShDPk0ZX7kdZ7tbcrZ2mZ1dLxY7k1rGzIDiYDey5fldplVxfd91ekLZr8jDJv0MuLNEndUcWvHdHJg/Yf3685SDBG2S/4pJagAwviaG/wRY08rCGfs1H2DIbUsjbYFOPGSED6WAsj+j6sIVsB8S3VgXOkzXxGWp0PdFgkreIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ufkId0gtfeEetUBG4fs5kz8lhF+mY75ltFfAmm9xSUQ=;
- b=XYC6E4yXci5gXAH1sll07IO6uSVi455+oUWijTJdU6woCoCHe26MwHB5Mj1tk7kGsMAEApMnGvKj2qeED7pA7DWntR5iCjvDPTGvWzcwQUF1EMnHhDP+I1MBOdwBleVRcElPrR9zmNFWRwCHCe4veIqE+pdWOoJ0nSZMmrG8JTRgwSxmAeiHw0yuCeXUiIiwoPDx+ThcGa61Li4mQDYHn2zKQHde0DcCwBLe7m3BfuV6Ssn7nTrVDTE2Ui5fyM83Wy3TeN9RST4XFQOxCDd99G+eYZYEDjSnPIwJFoSv+GVfm9kmjhSes7HZBhuKuUzdWPa9LMKfl8Xwf7Mh+SZ++Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ufkId0gtfeEetUBG4fs5kz8lhF+mY75ltFfAmm9xSUQ=;
- b=Z+G/YnmxxnUUAKGzudSWqBKBStDQ7wk3l1/S+yEQc/UB9aKmogiL4879cf5gywznGLgZm17Kgp4T67tk8dD6RnkJJq6EuBtZCsE4IFAdwqw09jqPmx46dkp/vCP0cg/ST24PALlb6wfXRiYjtCh6gf3PPe730TcQY8rz2eS0p46j/dJBG4qA/Qz9qtEsfxkk3j758whWX5RCaYqR3FMnDoPC/Dwl9l1stdtPi4EOdDcEvlJ0qVVMScnOea4heNRpvrlBGo1ITI22rcymxukTtufylyhmtNP7nkoc80/DA5WqU7OS5XTXJAnTdex7Pjezt+K4QcIxaq/GxcMlrY7gHQ==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AS8PR04MB8024.eurprd04.prod.outlook.com (2603:10a6:20b:2a3::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.10; Wed, 15 Oct
- 2025 02:04:57 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9228.010; Wed, 15 Oct 2025
- 02:04:56 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>, "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "uboot-stm32@st-md-mailman.stormreply.com"
- <uboot-stm32@st-md-mailman.stormreply.com>, dl-uboot-imx <uboot-imx@nxp.com>, 
- Fabio Estevam <festevam@gmail.com>, Stefano Babic <sbabic@nabladev.com>
-CC: Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Beleswar Padhi
- <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>, Andrew Davis <afd@ti.com>,
- Judith Mendez <jm@ti.com>, Ryan Eatmon <reatmon@ti.com>, Oliver Gaskell
- <Oliver.Gaskell@analog.com>
-Subject: RE: [PATCH 00/11] remoteproc: Add support for i.MX8M[M/N/P/Q] and
- i.MX93
-Thread-Topic: [PATCH 00/11] remoteproc: Add support for i.MX8M[M/N/P/Q] and
- i.MX93
-Thread-Index: AQHcO+HinAN2+SqaeUGcXhctSkuHsLTBarmAgAEM7YA=
-Date: Wed, 15 Oct 2025 02:04:56 +0000
-Message-ID: <PAXPR04MB84591171BC097C3ED0BBD3FC88E8A@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20251013-imx-rproc-v1-0-fb43a3fafcd0@nxp.com>
- <d548843d-9342-43fa-8d18-f44105feff20@ti.com>
-In-Reply-To: <d548843d-9342-43fa-8d18-f44105feff20@ti.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AS8PR04MB8024:EE_
-x-ms-office365-filtering-correlation-id: 0350c1da-75b4-4c72-401c-08de0b8f3d41
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|19092799006|7416014|376014|366016|1800799024|38070700021; 
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?D3fH29Upi7gydwiJ+i0j0ArkdZdUmhYH2acY3Gy0h10bRiQW3jfDpbH6Hp?=
- =?iso-8859-1?Q?aJ0/hYrDgg3L+WAM+Sn2Etq6Ebknq6G4B8lhK4WhCQdkma8hOy/ZIUd/Kx?=
- =?iso-8859-1?Q?KXE9Tv85Hdpaf+2Kybxt7F/Vw33v9309LHsOg+dWbpXRekNyWsHxdg2ek4?=
- =?iso-8859-1?Q?PhTsdWg/P61UD1Q+iu9S8mfjpXK9AfjxFE2ylKkpXfdWR/G02uKkNJiKgR?=
- =?iso-8859-1?Q?v65RBuKoLGtuy+m2cWEDoaxLrxlGS6Sr3xt4HMklLl2azmb+xDRjOfupEB?=
- =?iso-8859-1?Q?o2tC1PI7SXopuqSS2RW3nskrlFd8SFHzFvrj6OAWvhcP2LLS57X9Lk6RtO?=
- =?iso-8859-1?Q?fpROD+mq37o0D6IBIM8iyX2oremRHzciANdlJ84cuysfxriwM1Q9Oarby4?=
- =?iso-8859-1?Q?KQ8pMXrAKLDmA7FAlrm9QkxrTpKxiTkCvLqSR+4DqF7eMbU0J+0YTWBcmZ?=
- =?iso-8859-1?Q?Y9wJpJ0Yb6ywNJoxavBYzbAp7odloJNnfBrclms9RYGKsvnDXxBNIv8c8U?=
- =?iso-8859-1?Q?lyVY7xNss1UNhLQPR0udzJD70sB56vJP/pzMMv3hvIHm7va9LBch4ra2yp?=
- =?iso-8859-1?Q?bmkOJBjR1AIOoWoDq3vSu1VMx65wEdITELmVyshzfuPqDM4L1puf9CIv4I?=
- =?iso-8859-1?Q?q80rJ1QJxyc8kXm6jwDFC6o2qiCbf16jh41fgie7HJ4l0DbMep02xDhaTx?=
- =?iso-8859-1?Q?SoEB+Cq+8nlvA2avVAzWZ9LfTE8rZLxmQR+t+3qOMfH0UJbaOqYubtxYCs?=
- =?iso-8859-1?Q?5YbqZNbBRApYHjwsjv7LBuTeAmOO/2O23/7hADFmX7G3nb+91EgZmIhxA0?=
- =?iso-8859-1?Q?LBllGmtuhKwO0A4KBvAhB55g61j56CUbfxlI5yvXJZZan6QGbadxN3MTr7?=
- =?iso-8859-1?Q?EIRVxf6/ohhtyN/dC0+Ntr+glv9aFE3Kf3KeCcMucmo9AXZ0P8WUZIajcw?=
- =?iso-8859-1?Q?t40aoloW4criFLy6qjJ3gNtoMheHuwpSG2uAGHPIaWGvLkD2WAdqMLTG/i?=
- =?iso-8859-1?Q?lc5BrOL9HK9yxvHYlVS2M/HOmO9ARs25O+2x2mdm3igxhWP4+lF4Az5qtF?=
- =?iso-8859-1?Q?PxGetfUIhm17rsqL/nSyEIy7M9aspi5Yrqk3sE5FfAEl+rrHba5Mg9jMDs?=
- =?iso-8859-1?Q?V1HIAIfNHkpbO+kfej9QLkgiEgGI1ZZpRWSsS3mvOQ8SzzAhCsrx96IxAU?=
- =?iso-8859-1?Q?lyFmctBVF/q5IcbmXkfkRKq5b8rFN23YpONQgUxQM4jBnO4bhf+hrLIoUf?=
- =?iso-8859-1?Q?IFlhcN5pagw7br+sqRera2k1G3Ksv/LZ3QvTA7jGeGjKqRD+1z5FDZ6fAA?=
- =?iso-8859-1?Q?EvFfJi3+GVgzll0YNBtkgNQQ6zomUuoMuN63Tou3O19nONnPQ09uG/7Hga?=
- =?iso-8859-1?Q?YQTp27WCv6CFYSvOWqdGA9/cYYt4ur8cf5w0DksRQs6qtVWJpms35yz4L7?=
- =?iso-8859-1?Q?CUlf0vr0Mt7/Hbaul0M2vI5VzwC9IGez2f9ozYUadH9vFWPNDXxeEAs4/b?=
- =?iso-8859-1?Q?0JpdRANLQ9hznPduZxnH6vtx73qMYTL3VDck5bcbeY6+uJaSzome5vHRrc?=
- =?iso-8859-1?Q?pBqT1XhiWFXWajc4qPAtIs/kwhmr?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(7416014)(376014)(366016)(1800799024)(38070700021);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?PHk+y1gWjQRI+wEc4jCzrIDVrH7C46Od1EPG6GZH8z+Nd0hry9RR0so8pt?=
- =?iso-8859-1?Q?hZLxeU0U9XYWB5QuIfnkemZUUn3NvXOTzzddzLTWJ+fLwH6JNTkQDbfra9?=
- =?iso-8859-1?Q?FB7Ov/v04uD9EpF4d1eDV1zxSYXARqlXRbUwPY0mo6nDnKSFFF4WXhUgWj?=
- =?iso-8859-1?Q?xb84KI2RHvs5CqGgRWf3tivmUb3T5Ggb9A+IhWnxCqqgSpqgLrX3AX+JDh?=
- =?iso-8859-1?Q?7ct6XL+nqDjnltj9d84z8UfxKVvAK3QWzZb8CylqfVQMZCVdcZ3bAcyjh1?=
- =?iso-8859-1?Q?1VLkkWF39JIdOxTxl+9rcrrsUnDww8CNjBTb+WdOpFwVJuklj3HgizOoqO?=
- =?iso-8859-1?Q?+ed8ZovDM+vCI2kfLnweFJnZLyuQ1eOhnU2P9+vSjuyHkRx22J23f9JYya?=
- =?iso-8859-1?Q?wGaLYPutxKRWnGB1kwUseaKMJw7e6g0znkeUQwcP8+256Q5+Pdlto546BL?=
- =?iso-8859-1?Q?3wITdJ6h65nARSVqCYMk4ak1EKDetvAjYLIwzfS5vg/xY72AjcFmU0kpOS?=
- =?iso-8859-1?Q?ypUfr1z8L/8iJ9M1APK8DfkIfmphDVXMhJEiIdIIka/k/HBhk4IigDLqG8?=
- =?iso-8859-1?Q?Y7wHJR/KGLSJTgEDUuuohmnmyXq3QId+CQ7prv7PSpvh4csPVyxMKq1iEH?=
- =?iso-8859-1?Q?bLWQ+bwgWDzkb7Kfg7SsjArprxunKgLYGDMXz6Aidw2Q6nhjMdxwQPF+Bk?=
- =?iso-8859-1?Q?0BguHH3J9FwO4YHvzqefwAQ3GdUn7Hf7gTasvzKTGJ3bZ3cz4FnlZ75wE7?=
- =?iso-8859-1?Q?sbr/ImrS/D8RGXh+1JTpOv3drUbM6L0VY5ISQtTE7psqEzKeqajqNSDHST?=
- =?iso-8859-1?Q?db8IbPiBqO3VVVjf54rmx0cok39wLeYBPdK6+Qy+fzZSIHRHdrV9FSwCDm?=
- =?iso-8859-1?Q?7PytRhVZGzzgq9KXEWYNDo3kch4s26AiFKRlMV8Fo4SGu65Wr8WvDwn1No?=
- =?iso-8859-1?Q?zXglYJj7qW6yqGLfC9+qXvGjZd9zulvu1rf/B1aoDUwrhnShJch3dSgrAP?=
- =?iso-8859-1?Q?csHnrgzs66J7G2eUbQFsGQJLlNO4zgN4ajpmorr11orzbq5panD985XrGl?=
- =?iso-8859-1?Q?r2BpcD7Gav9XGMS+4jah5NZt7svt9onBrEo8tEvMIcVUb8XTlPrYhmTPBk?=
- =?iso-8859-1?Q?NQMldNUr3t6MDh9z2wy1VY0sJ6hl4SMpBylcXssz/lQ/TRksos813e/4kA?=
- =?iso-8859-1?Q?ajDNd3T4+LqV+hhxC8U15ntiLRr7d2tugz4o1CojUx26INHuenQBNsw5EJ?=
- =?iso-8859-1?Q?eWlnAkaa40RYWPspfCvAZPno4FsZECVvL5OEvuiWQvq1Wfva2EOMBiDnyA?=
- =?iso-8859-1?Q?U/d7lJw9f7UpHlmmrI3scTJ/scqwp3ZZcQymEGXcLHWmMEPN9bYbsKfWB1?=
- =?iso-8859-1?Q?Fz75cvIyKvfMQiZ1viS+LSMJ5ysIzjS9zuRypPvow5IYGqksAWix69jOK9?=
- =?iso-8859-1?Q?PvU4p2i4y/kKb2Sr9FZsPI+3uODXI5eKi860VbtLrna4LLlIPdEkhdRgA7?=
- =?iso-8859-1?Q?RZqmWiW/4Hh/oo38xo4mcgMe9kRLwPh7gVTD5fa7xPe4m25EanDnxiQruv?=
- =?iso-8859-1?Q?IDnXQeBvVFdSCeCvWuxULHm8WEE7t8nT4lhZBayjCIKla/emkFRp27caBW?=
- =?iso-8859-1?Q?gSg642+x5L1jI=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=none (p=none dis=none) header.from=norik.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=primoz.fiser@norik.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=norik.com; 
+ s=default;
+ h=Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:
+ Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:Content-Description:
+ Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+ In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=GCATA22seekNI6YMNy0bbnJPu/RptgT52+DXecXWPfg=; b=Gf9Efq9xuymxaufmmjOED7SGB7
+ pGfEzXcdfD9ill33yiVJPvpatRMXyEjQQnR5rAU+p+kImKSMYAfumDchRU6RyhstZcyN4NEsw5UFN
+ Bk2qooq/eRVTl3WJ5Vd9yU2XV79GiOxyIBELdKumEZtUdLB7uwrUC3OrAxBVLgEv1pUeHkzXFl8QY
+ HStoIaelg+OxsyrCapC9L8+ivwCybWG7hXwyhmmQOA94wP42nTArB6etESJGxt/3LNx/+rlP+JYlV
+ efSdoEwOlbMssnVA755zFfLQs+U7oq6mGlCBE8v48DklYLVUWi8qvhOKJwxwyHAeD3hAfjG7SVloN
+ 7o3VmH9A==;
+Received: from 89-212-21-243.static.t-2.net ([89.212.21.243]:46388
+ helo=localhost.localdomain)
+ by cp2.siel.si with esmtpsa  (TLS1.3) tls TLS_AES_256_GCM_SHA384
+ (Exim 4.98.2) (envelope-from <primoz.fiser@norik.com>)
+ id 1v8v55-0000000HWWp-1ycC; Wed, 15 Oct 2025 08:33:48 +0200
+From: Primoz Fiser <primoz.fiser@norik.com>
+To: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>,
+ Ye Li <ye.li@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de,
+	upstream@lists.phytec.de
+Subject: [PATCH] thermal: imx_tmu: Always set thermal trips from fuses
+Date: Wed, 15 Oct 2025 08:33:47 +0200
+Message-Id: <20251015063347.518171-1-primoz.fiser@norik.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0350c1da-75b4-4c72-401c-08de0b8f3d41
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Oct 2025 02:04:56.8937 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: lIZscCUqRJHAN1KVhD0YU8H740Ml55okn1G9LeAtKMumOpEV/E3ox6YK4awgJVLDjQCB7X9B+Tnl0UfkTuIwAA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8024
+Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse,
+ please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cp2.siel.si
+X-AntiAbuse: Original Domain - lists.denx.de
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - norik.com
+X-Get-Message-Sender-Via: cp2.siel.si: authenticated_id: primoz.fiser@norik.com
+X-Authenticated-Sender: cp2.siel.si: primoz.fiser@norik.com
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -173,38 +82,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Subject: Re: [PATCH 00/11] remoteproc: Add support for
-> i.MX8M[M/N/P/Q] and i.MX93
->=20
-> Hi Peng
->=20
-> On 10/13/2025 8:19 AM, Peng Fan (OSS) wrote:
-> > This patch series introduces remoteproc support for NXP i.MX8M and
-> > i.MX93 platforms. Most of the i.MX-specific logic is ported from the
-> > Linux kernel to ensure compatibility and maintainability.
-> >
-> > The existing bootaux command in U-Boot only supports loading raw
-> binary images.
-> > However, this approach fails when the remote processor firmware
-> > contains sections that must be loaded into both TCM and DDR. To
-> > address this limitation, need to use remoteproc framework ELF loader,
-> > enabling proper loading of segmented firmware images.
->=20
->=20
-> I am not sure, what problem you are facing to load fw having section in
-> TCM and DDR both,=A0 with current frame-work.
->=20
-> There are few drivers, using both TCM and DDR and working ok ref[0]
+NXP i.MX SoCs are available in different temperature grades. By default,
+device-tree contains only thermal trips for consumer grade parts. On the
+other hand, part temp grade fuse can be used to determine thermal trip
+points. We already do this in imx_tmu_bind() function. Now, factor out
+this functionality to a standalone function imx_tmu_set_trips() and use
+it for both cases. This fixes an issue where 'cpu-thermal' child device
+would set different thermal trips than the parent 'tmu@44482000' sensor,
+depending on which gets used.
 
-We have customers are building a very large image for the remote
-cores inside i.MX. But the TCM size is not large enough, so they need
-use TCM and DDR both, some sections in TCM, some sections in DDR.
+Signed-off-by: Primoz Fiser <primoz.fiser@norik.com>
+---
+ drivers/thermal/imx_tmu.c | 33 +++++++++++++--------------------
+ 1 file changed, 13 insertions(+), 20 deletions(-)
 
-No issue with current framework, it is i.MX bootaux command not
-support the above request.
+diff --git a/drivers/thermal/imx_tmu.c b/drivers/thermal/imx_tmu.c
+index 51a072e23c6c..c8389d507ee3 100644
+--- a/drivers/thermal/imx_tmu.c
++++ b/drivers/thermal/imx_tmu.c
+@@ -532,6 +532,16 @@ static int imx_tmu_enable_msite(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static void imx_tmu_set_trips(struct imx_tmu_plat *pdata)
++{
++	int minc, maxc;
++
++	/* default alert/crit temps based on temp grade */
++	get_cpu_temp_grade(&minc, &maxc);
++	pdata->critical = maxc * 1000;
++	pdata->alert = (maxc - 10) * 1000;
++}
++
+ static int imx_tmu_bind(struct udevice *dev)
+ {
+ 	struct imx_tmu_plat *pdata = dev_get_plat(dev);
+@@ -539,7 +549,6 @@ static int imx_tmu_bind(struct udevice *dev)
+ 	ofnode node, offset;
+ 	const char *name;
+ 	const void *prop;
+-	int minc, maxc;
+ 
+ 	dev_dbg(dev, "%s\n", __func__);
+ 
+@@ -548,10 +557,7 @@ static int imx_tmu_bind(struct udevice *dev)
+ 		return 0;
+ 
+ 	pdata->zone_node = 1;
+-	/* default alert/crit temps based on temp grade */
+-	get_cpu_temp_grade(&minc, &maxc);
+-	pdata->critical = maxc * 1000;
+-	pdata->alert = (maxc - 10) * 1000;
++	imx_tmu_set_trips(pdata);
+ 
+ 	node = ofnode_path("/thermal-zones");
+ 	ofnode_for_each_subnode(offset, node) {
+@@ -572,7 +578,7 @@ static int imx_tmu_parse_fdt(struct udevice *dev)
+ {
+ 	struct imx_tmu_plat *pdata = dev_get_plat(dev), *p_parent_data;
+ 	struct ofnode_phandle_args args;
+-	ofnode trips_np, cpu_thermal_np;
++	ofnode cpu_thermal_np;
+ 	int ret;
+ 
+ 	dev_dbg(dev, "%s\n", __func__);
+@@ -612,20 +618,7 @@ static int imx_tmu_parse_fdt(struct udevice *dev)
+ 	pdata->polling_delay = dev_read_u32_default(dev, "polling-delay",
+ 						    IMX_TMU_POLLING_DELAY_MS);
+ 
+-	trips_np = ofnode_path("/thermal-zones/cpu-thermal/trips");
+-	ofnode_for_each_subnode(trips_np, trips_np) {
+-		const char *type;
+-
+-		type = ofnode_get_property(trips_np, "type", NULL);
+-		if (!type)
+-			continue;
+-		if (!strcmp(type, "critical"))
+-			pdata->critical = ofnode_read_u32_default(trips_np, "temperature", 85);
+-		else if (strcmp(type, "passive") == 0)
+-			pdata->alert = ofnode_read_u32_default(trips_np, "temperature", 80);
+-		else
+-			continue;
+-	}
++	imx_tmu_set_trips(pdata);
+ 
+ 	dev_dbg(dev, "id %d polling_delay %d, critical %d, alert %d\n",
+ 		pdata->id, pdata->polling_delay, pdata->critical, pdata->alert);
+-- 
+2.34.1
 
-Thanks,
-Peng.
-
->=20
-> [0]
