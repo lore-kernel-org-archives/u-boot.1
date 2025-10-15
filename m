@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82443CCD193
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 10:47:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3D36CCD193
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 10:47:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A664C835FE;
-	Wed, 15 Oct 2025 12:47:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EBE2B80107;
+	Wed, 15 Oct 2025 12:47:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EBdIMgam";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eEg5L+DO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18F7780107; Wed, 15 Oct 2025 12:47:15 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id E2DF88313B; Wed, 15 Oct 2025 12:47:17 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28D94834D4
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 12:47:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CA5580107
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 12:47:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59FAlBVB1824285;
- Wed, 15 Oct 2025 05:47:11 -0500
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59FAlD8H1736242;
+ Wed, 15 Oct 2025 05:47:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760525231;
- bh=lQ16JfD5MVNyaVEUXc/oryxx6+AhqiptPePsJtxRXnw=;
+ s=ti-com-17Q1; t=1760525233;
+ bh=gKV3SRfUzN7SeIQatqXcBImL6Um2zlARTH4l12I5c58=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=EBdIMgamEFk01JmNY+mlpjumm/X3WtijSaqgqU9HBtGY4clcO5wDemrqDXXQrfgtx
- geTvSl066I3QPwojp/lCbZsA0tIHM0M96hiBaYaB/b6HD/d1hQ1GpchrKTyM5P7RJf
- E890Ewo1AF2WHQS28M/Kqs9XKThE3gCcumnbCFkE=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59FAlBTB349491
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-SHA256 bits=128 verify=FAIL);
- Wed, 15 Oct 2025 05:47:11 -0500
-Received: from DFLE200.ent.ti.com (10.64.6.58) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.55; Wed, 15
- Oct 2025 05:47:11 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
+ b=eEg5L+DOsXhe8L8J1tCKlR5CGesPufUXrjsTwlNaulZ/Ev2Ni2+j4Yc+szQl1DsuR
+ 3ap1PzfVEZoNJFN1a6O97QbQREKgTbXlQJ5cF3hqbWWVgkC7sh5JfCoksHfw6lFG1p
+ hU4SqUdnPk2apMIq66G8W1WPmxSncRy6XXq0nIzA=
+Received: from DFLE215.ent.ti.com (dfle215.ent.ti.com [10.64.6.73])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59FAlD691166534
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 15 Oct 2025 05:47:13 -0500
+Received: from DFLE201.ent.ti.com (10.64.6.59) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 15 Oct
+ 2025 05:47:13 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE201.ent.ti.com
+ (10.64.6.59) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 15 Oct 2025 05:47:11 -0500
+ Transport; Wed, 15 Oct 2025 05:47:13 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59FAlAi81778514;
- Wed, 15 Oct 2025 05:47:10 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59FAlB5d1778527;
+ Wed, 15 Oct 2025 05:47:12 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, <b-liu@ti.com>,
  <nm@ti.com>, <bb@ti.com>
-Subject: [PATCH v2 3/5] arm: mach-k3: enable support for falcon mode
-Date: Wed, 15 Oct 2025 16:16:45 +0530
-Message-ID: <20251015104702.3726411-4-anshuld@ti.com>
+Subject: [PATCH v2 4/5] doc: develop: add docs for secure falcon mode
+Date: Wed, 15 Oct 2025 16:16:46 +0530
+Message-ID: <20251015104702.3726411-5-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251015104702.3726411-1-anshuld@ti.com>
 References: <20251015104702.3726411-1-anshuld@ti.com>
@@ -80,37 +80,287 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With CONFIG_SPL_OS_BOOT enabled, U-Boot checks for the return value of
-spl_start_uboot to select between falcon or the regular boot flow. Where
-a return value of 0 means 'boot to linux'.
+This patch documents the newly added SPL_OS_BOOT_SECURE option that
+enables authenticated boot in falcon mode.
 
-This patch overrides the weak definition form common/spl/spl.c to allow
-K3 devices to use falcon mode with SPL_OS_BOOT enabled.
+The document provides steps for using secure falcon mode on ARM64 taking
+TI's AM62x EVM as an example.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- arch/arm/mach-k3/common.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ doc/develop/falcon.rst | 252 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 252 insertions(+)
 
-diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-index 5483ac9906c..c1a4aa1cf9d 100644
---- a/arch/arm/mach-k3/common.c
-+++ b/arch/arm/mach-k3/common.c
-@@ -303,6 +303,14 @@ static __maybe_unused void k3_dma_remove(void)
- 		pr_warn("DMA Device not found (err=%d)\n", rc);
- }
+diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
+index 5689d5b93a7..528a9c389bf 100644
+--- a/doc/develop/falcon.rst
++++ b/doc/develop/falcon.rst
+@@ -82,6 +82,14 @@ CONFIG_CMD_SPL_WRITE_SIZE
+ CONFIG_SPL_OS_BOOT
+     Activate Falcon Mode.
  
-+#ifdef CONFIG_SPL_OS_BOOT
-+int spl_start_uboot(void)
-+{
-+	/* Always boot to linux on Cortex A SPL with CONFIG_SPL_OS_BOOT set */
-+	return 0;
-+}
-+#endif
++CONFIG_SPL_OS_BOOT_ARGS
++    Allow SPL to load args file for the kernel in Falcon Mode. This option can
++    be disabled if the device-tree is packaged directly in the FIT payload.
 +
- void spl_board_prepare_for_boot(void)
- {
- #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF))
++CONFIG_SPL_OS_BOOT_SECURE
++    Enable secure boot for Falcon Mode, which provides an additional layer of
++    security by authenticating the boot process using a signed FIT image.
++
+ Function that a board must implement
+ ------------------------------------
+ 
+@@ -187,6 +195,250 @@ Falcon Mode was presented at the RMLL 2012. Slides are available at:
+ 
+ http://schedule2012.rmll.info/IMG/pdf/LSM2012_UbootFalconMode_Babic.pdf
+ 
++Secure Falcon Mode
++------------------
++
++Introduction
++~~~~~~~~~~~~
++
++Secure Falcon Mode is an enhancement to Falcon Mode that provides additional
++security features. It authenticates the boot process using a signed FIT Image
++and restricts certain features that are inherently insecure.
++
++Configuration
++~~~~~~~~~~~~~
++
++To enable Secure Falcon Mode, the ``CONFIG_SPL_OS_BOOT_SECURE`` option must be
++set. This option modifies the behavior of Falcon Mode in the following ways:
++
++1. Fallback Mechanism:
++^^^^^^^^^^^^^^^^^^^^^^
++
++Unlike regular Falcon Mode, which falls back to the standard U-Boot boot flow
++if kernel booting fails, Secure Falcon Mode disables this fallback mechanism. If
++the secure boot process fails, the boot process will not proceed.
++
++2. Signed FIT Image:
++^^^^^^^^^^^^^^^^^^^^
++
++Secure Falcon Mode requires a signed FIT, which contains the kernel and
++device tree, to boot the system. The ``falcon_args_file`` environment variable
++is ignored, and instead, the device tree is read from the signed FIT. This
++ensures the authenticity and integrity of the boot process.
++
++Example
++~~~~~~~
++
++Secure falcon mode can be enabled on TI AM62x EVM as follows with SD boot mode:
++
++1. Prepare the device-tree:
++^^^^^^^^^^^^^^^^^^^^^^^^^^^
++
++To optimize performance, the SPL in Falcon Mode expects the FIT to contain a
++device-tree with fixups already applied. Such a device-tree can be generated
++using the spl export command as follows:
++
++**Setting bootargs**
++
++Set the bootargs environment variable to the desired value:
++
++.. prompt:: bash =>
++
++        env set bootargs 'console=ttyS2,115200n8 root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait'
++
++**Read FIT from SD**
++
++Load the FIT image from the SD card:
++
++.. prompt:: bash =>
++
++        load mmc 1:2 0x90000000 /boot/fitImage
++
++**Generate device-tree**
++
++Use the ``spl export`` command to generate a device-tree with fixups applied:
++
++.. prompt:: bash =>
++
++        spl export fdt 0x90000000
++
++**Save the device-tree**
++
++Write the generated device-tree to the SD card:
++
++.. prompt:: bash =>
++
++        fatwrite mmc 1:1 $fdtargsaddr k3-am625-sk-falcon.dtb $fdtargslen
++
++2. Create the FIT Image:
++^^^^^^^^^^^^^^^^^^^^^^^^
++
++Create a new FIT image that includes the fixed device-tree generated in the
++previous step. You will also need to add a signature node to the SPL's DTB
++containing the keys to authenticate the new FIT.
++
++Create a ``fitImage.its`` file with the following contents:
++
++.. code-block:: dts
++
++    /dts-v1/;
++
++    / {
++        description = "Kernel fitImage";
++        #address-cells = <1>;
++
++        images {
++            kernel {
++                description = "Linux kernel";
++                data = /incbin/("Image");
++                type = "kernel";
++                arch = "arm64";
++                os = "linux";
++                compression = "none";
++                load = <0x82000000>;
++                entry = <0x82000000>;
++                hash-1 {
++                    algo = "sha512";
++                };
++            };
++
++            fdt-falcon {
++                description = "Flattened Device Tree blob";
++                data = /incbin/("k3-am625-sk-falcon.dtb");
++                type = "flat_dt";
++                arch = "arm64";
++                compression = "none";
++                load = <0x88000000>;
++                entry = <0x88000000>;
++                hash-1 {
++                    algo = "sha512";
++                };
++            };
++        };
++
++        configurations {
++            default = "conf-ti_am625";
++
++            conf-ti_am625 {
++                description = "Linux kernel, FDT blob";
++                kernel = "kernel";
++                fdt = "fdt-falcon";
++                hash-1 {
++                    algo = "sha512";
++                };
++
++                signature-1 {
++                    algo = "sha512,rsa4096";
++                    key-name-hint = "custMpk";
++                    padding = "pkcs-1.5";
++                    sign-images = "kernel", "fdt-falcon";
++                };
++            };
++        };
++    };
++
++Then, use the mkimage tool to create the FIT image and modify SPL's DTB:
++
++.. prompt:: bash $
++
++        tools/mkimage -f fitImage.its -K build/spl/dts/ti/k3-am625-sk.dtb -k arch/arm/mach-k3/keys -r fitImage
++
++3. Rebuild U-Boot SPL:
++^^^^^^^^^^^^^^^^^^^^^^
++
++With the newly created ``fitImage`` written to the boot partition of the SD card
++and the keys added to the SPL's device-tree, you can rebuild the SPL with the
++following configuration fragment to enable Falcon Mode:
++
++::
++
++        CONFIG_SPL_OS_BOOT=y
++        CONFIG_SPL_OS_BOOT_SECURE=y
++        CONFIG_SPL_FIT_SIGNATURE=y
++        CONFIG_SPL_RSA=y
++
++        # Only support MMC falcon mode
++        CONFIG_SPL_SPI_FLASH_SUPPORT=n
++        CONFIG_SPL_NOR_SUPPORT=n
++        CONFIG_SPL_NAND_SUPPORT=n
++
++        # We don't need TIFS authenticating the FIT
++        CONFIG_SPL_FIT_IMAGE_POST_PROCESS=n
++
++        # Modify memory map to allow more space for the larger FIT
++        CONFIG_SPL_STACK_R_ADDR=0x88000000
++        CONFIG_SPL_LOAD_FIT_ADDRESS=0x82000000
++        CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x4000000
++
++Console Log
++~~~~~~~~~~~
++
++The following console log output shows the boot process with Secure Falcon Mode
++enabled:
++
++::
++
++        U-Boot SPL 2025.10-rc5-00482-ge14055bfa9d1-dirty (Oct 09 2025 - 14:31:50 +0530)
++        SYSFW ABI: 4.0 (firmware rev 0x000b '11.0.7--v11.00.07 (Fancy Rat)')
++        SPL initial stack usage: 1968 bytes
++        Trying to boot from MMC2
++        ## Checking hash(es) for config conf-ti_am625 ... sha512,rsa4096:custMpk+ OK
++        ## Checking hash(es) for Image kernel ... sha512+ OK
++        ## Checking hash(es) for Image fdt-falcon ... sha512+ OK
++        [    0.000000] Booting Linux on physical CPU 0x0000000000 [0x410fd034]
++        [    0.000000] Linux version 6.6.58-ti-01497-ga7758da17c28-dirty (oe-user@oe-host) (aarch64-oe-linux-gcc (GCC) 14.2.0, GNU ld (GNU Binutils) 2.43.1
++        .20241111) #1 SMP PREEMPT Wed Nov 27 13:23:15 UTC 2024
++        [    0.000000] KASLR enabled
++        [    0.000000] Machine model: Texas Instruments AM625 SK
++        [    0.000000] efi: UEFI not found.
++        [    0.000000] Reserved memory: created CMA memory pool at 0x00000000f8000000, size 128 MiB
++        [    0.000000] OF: reserved mem: initialized node linux,cma, compatible id shared-dma-pool
++        [    0.000000] OF: reserved mem: 0x00000000f8000000..0x00000000ffffffff (131072 KiB) map reusable linux,cma
++        [    0.000000] OF: reserved mem: 0x0000000080000000..0x000000008007ffff (512 KiB) nomap non-reusable tfa@80000000
++        [    0.000000] OF: reserved mem: 0x000000009c700000..0x000000009c7fffff (1024 KiB) map non-reusable ramoops@9c700000
++        [    0.000000] Reserved memory: created DMA memory pool at 0x000000009c800000, size 3 MiB
++        [    0.000000] OF: reserved mem: initialized node ipc-memories@9c800000, compatible id shared-dma-pool
++        [    0.000000] OF: reserved mem: 0x000000009c800000..0x000000009cafffff (3072 KiB) nomap non-reusable ipc-memories@9c800000
++        [    0.000000] Reserved memory: created DMA memory pool at 0x000000009cb00000, size 1 MiB
++        [    0.000000] OF: reserved mem: initialized node m4f-dma-memory@9cb00000, compatible id shared-dma-pool
++        [    0.000000] OF: reserved mem: 0x000000009cb00000..0x000000009cbfffff (1024 KiB) nomap non-reusable m4f-dma-memory@9cb00000
++        [    0.000000] Reserved memory: created DMA memory pool at 0x000000009cc00000, size 14 MiB
++        [    0.000000] OF: reserved mem: initialized node m4f-memory@9cc00000, compatible id shared-dma-pool
++        [    0.000000] OF: reserved mem: 0x000000009cc00000..0x000000009d9fffff (14336 KiB) nomap non-reusable m4f-memory@9cc00000
++        [    0.000000] Reserved memory: created DMA memory pool at 0x000000009da00000, size 1 MiB
++        [    0.000000] OF: reserved mem: initialized node r5f-dma-memory@9da00000, compatible id shared-dma-pool
++        [    0.000000] OF: reserved mem: 0x000000009da00000..0x000000009dafffff (1024 KiB) nomap non-reusable r5f-dma-memory@9da00000
++        [    0.000000] Reserved memory: created DMA memory pool at 0x000000009db00000, size 12 MiB
++        [    0.000000] OF: reserved mem: initialized node r5f-memory@9db00000, compatible id shared-dma-pool
++        [    0.000000] OF: reserved mem: 0x000000009db00000..0x000000009e6fffff (12288 KiB) nomap non-reusable r5f-memory@9db00000
++        [    0.000000] OF: reserved mem: 0x000000009e800000..0x000000009fffffff (24576 KiB) nomap non-reusable optee@9e800000
++        [    0.000000] Zone ranges:
++        [    0.000000]   DMA      [mem 0x0000000080000000-0x00000000ffffffff]
++        [    0.000000]   DMA32    empty
++        [    0.000000]   Normal   empty
++        [    0.000000] Movable zone start for each node
++        [    0.000000] Early memory node ranges
++        [    0.000000]   node   0: [mem 0x0000000080000000-0x000000008007ffff]
++        [    0.000000]   node   0: [mem 0x0000000080080000-0x000000009c7fffff]
++        [    0.000000]   node   0: [mem 0x000000009c800000-0x000000009e6fffff]
++        [    0.000000]   node   0: [mem 0x000000009e700000-0x000000009e7fffff]
++        [    0.000000]   node   0: [mem 0x000000009e800000-0x000000009fffffff]
++        [    0.000000]   node   0: [mem 0x00000000a0000000-0x00000000ffffffff]
++        [    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x00000000ffffffff]
++        [    0.000000] psci: probing for conduit method from DT.
++        [    0.000000] psci: PSCIv1.1 detected in firmware.
++        [    0.000000] psci: Using standard PSCI v0.2 function IDs
++        [    0.000000] psci: Trusted OS migration not required
++        [    0.000000] psci: SMC Calling Convention v1.5
++        [    0.000000] percpu: Embedded 20 pages/cpu s43176 r8192 d30552 u81920
++        [    0.000000] Detected VIPT I-cache on CPU0
++        [    0.000000] CPU features: detected: GIC system register CPU interface
++        [    0.000000] CPU features: kernel page table isolation forced ON by KASLR
++        [    0.000000] CPU features: detected: Kernel page table isolation (KPTI)
++        [    0.000000] CPU features: detected: ARM erratum 845719
++        [    0.000000] alternatives: applying boot alternatives
++        [    0.000000] Kernel command line: console=ttyS2,115200n8 root=/dev/mmcblk1p2 rw rootfstype=ext4 rootwait
++
+ Falcon Mode Boot on RISC-V
+ --------------------------
+ 
 -- 
 2.51.0
 
