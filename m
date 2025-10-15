@@ -4,87 +4,169 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17AE5CCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 17:03:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1D8CCCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 17:12:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D2E5833F6;
-	Wed, 15 Oct 2025 19:03:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E410D833F6;
+	Wed, 15 Oct 2025 19:12:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MbkIei6M";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="gXlURPSB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A9083303; Wed, 15 Oct 2025 19:03:53 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8BD44835A2; Wed, 15 Oct 2025 19:11:59 +0200 (CEST)
+Received: from AM0PR02CU008.outbound.protection.outlook.com
+ (mail-westeuropeazlp170130006.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E26083303
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 19:03:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 46BD083303
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 19:11:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-3c9662c5fb1so174970fac.0
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 10:03:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760547830; x=1761152630; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RR5X9GDUbgIUNvffIeYoD9UoY9WV0lEvQZv9mmbebDY=;
- b=MbkIei6MYeS63w9igkANgMmYkSCo7g63pmOo8eKEn4Ss7dE8XHhJKgivG2x88wRH4p
- TGLjrEB7YG1DFyAd5DQ/zMwfi0llFrTglID+o+PqVomfohJonehYnV1xEHnI0hTKhKd9
- gZgyRh/MjM28Z4m+PCg5UoPGorgtcsRbJIsPA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760547830; x=1761152630;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RR5X9GDUbgIUNvffIeYoD9UoY9WV0lEvQZv9mmbebDY=;
- b=QDYTj+BqMyKRxOOzsUsyGmDfI/HXTG2cmH7Yp62boF/z7fvYf92AnOjUx2AMf//EV7
- DUua/CobaPN9cRCsDljrHfGf89VdEao1r/fx1BCtRBVZCgjB0vXiu8HJVO0p9ud3SWOw
- lkaPUJICWfUa2xIzdLdMWXmePW4CYvapyPqchIh7vwhpHKk2tdj7CMTElzzSAbKdUwgX
- KCjr9YGKMYfia5gFuou3v2d5P8ztpxpr1fcTdIhLzyAjheV4rm9CmnfAk4PojhbRY+pg
- wEBrcxvCFnOJ2X81OlLqwLuj41ygu49fT/ST8UkjXO9FukUsUKcah17PVcvMw3vaMJgS
- Jryg==
-X-Gm-Message-State: AOJu0YzJAhQPPRju7YLHxxUwr7iO5Etz2mfit54n18fkly2W7+LCy3VL
- H1UnQuiI7XBdko7+1b6f79peiVZimWaG3sGyp2/QtN4JckTL6VlA89Su0aWfrTg7bAE=
-X-Gm-Gg: ASbGncuHccAZmu6NrSXE9bN8R2dYuzADBQT4esI+cfpieVp77XvpMnTBMLQdJj4E0oy
- GVEJkY/kZ4VbhiFBJMlF69wRcmJZd1cOv/u6tWzpZmmOezQt4GbOeEEaRQf19Hq0wTt40c06tbv
- ne4i/VLdDrRZi7abESnr7kYmjBlcryEWr1746xg1EE7Tp/1R8MkFL4rheowMJs0ut/HjiC9Z6y7
- qxoD/qB4T+5KjAQCKdkAwL0fJOkuMBjndPwMG8UwgCRoFQ0Q2+PGkGZ4aacICwKADKBtJ0gdNz2
- SzE7j8k4qpMI7KiNVH8UACKmeP50kORNhq2vLx7/gzzg6XEFX0JStJjInkSsfbghfRficcq4Pb9
- TppxRE7CkSVhiutv8PhsiJOO+v/9ZexQW65zFPga3ijryoreqGTGVSg9Iq4LFaT3J9aF5gRywHN
- 8Ix9Jy
-X-Google-Smtp-Source: AGHT+IHjBl4+UGKRUh15OEANYpgnmXU6Vlgrn1CUFUb/WbBTEhOuTvAHNqQxhY4CIbajJpnSbSTc8w==
-X-Received: by 2002:a05:6870:e307:b0:31d:66fd:298d with SMTP id
- 586e51a60fabf-3c0f6d1ff02mr13148388fac.23.1760547826646; 
- Wed, 15 Oct 2025 10:03:46 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8c8e82749sm5461267fac.14.2025.10.15.10.03.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 10:03:45 -0700 (PDT)
-Date: Wed, 15 Oct 2025 11:03:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
- n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
-Subject: Re: [PATCH v1 3/5] arm: mach-k3: enable support for falcon mode
-Message-ID: <20251015170342.GR6113@bill-the-cat>
-References: <20251010131829.3737258-1-anshuld@ti.com>
- <20251010131829.3737258-4-anshuld@ti.com>
- <20251010160512.GE298503@bill-the-cat>
- <DDFEIZ4KAA9A.3IE2L0TRWHNXQ@ti.com>
- <DDIRVA05GD7I.PRFJAWPND0PE@ti.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=qcFF2IqBj5RSLGgPunsOT4JX7AwoRwwx98u0KbueInc46io3DoBD9bU3d84do+8HV4GbmXgvSO4QedRx2GafiqmlEkTMLHLjDxnSHsSy1PoDNKGs5e9wngJb8N5hbNPhrQcXs30unqcWYdkhnsLzof3BOLzmbvLwON4CiosM5vyZZ8vxNWteN/YiqzznNqWVdGaoUy/O1LNJ2U122jxBohy8KtNZadRxoZ2LAWzZDgVU5caga0p2vmtJo3as07LLBxN5zO41oyGutnQT5Uy3U1j1yaz4T7t+RKLun4ad6uid7xXQRjhpgjPPo979eYD7Im/Rtn4NtkVF2Gvaybkbzw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=uR1LOsMIe1FLXlWU9reazFY1IcUsrl4dzvBD3hcWIio=;
+ b=oE5P/NjxJfpeLcuThIIp7zRefvqWgfMSgjlyaJUDG0jhOp8ciiQ3MdKhPfeAcFeFM3ycsJ7Cqfj4T1ZkpVJmksmGup90mzjMTtvj01FCH421ndEHCqZNS00+Me6qCRVBfI53B1/6rz9sZR4IaPkE15cHyT8xXC2TTm3YCfrvySEHrpz3DhtGJOquXtdqInN3MQsukSNDRWNJYl+D5ke/S95IkNE2K160gaP1nI2fgwGlqQx+6NGSVP9+H3/gtKzVWz8U0JpatUHDgreGyNw6qrNDHgf4pXHcnKDYu2JjFGZR5KcKMWeeaheN9BHx+d7maI/u6Z3zTgPWmWqSMEfyXw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=uR1LOsMIe1FLXlWU9reazFY1IcUsrl4dzvBD3hcWIio=;
+ b=gXlURPSB/RT4ld5G6nUqqn+U/iNRgVYPnCEUkbEVo5Hl2xzgt68Ecex3EBy9a4shFAE7hT7jHBup1MshHSjPepCoDsjsBGqRc1Ia+G3IOlq+KYDcW3mRQwMreobHiHso5CVvD0OML7OjVzLYvj4uFPwi4nRZ1LrXlm8vJPje95I=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAXPR04MB8767.eurprd04.prod.outlook.com (2603:10a6:102:20e::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.11; Wed, 15 Oct
+ 2025 17:11:55 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9203.009; Wed, 15 Oct 2025
+ 17:11:55 +0000
+Message-ID: <fc4dbf76-cba2-495c-a4e6-e3f9fc770690@cherry.de>
+Date: Wed, 15 Oct 2025 19:11:54 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 6/8] arm: dts: meson-gx-u-boot: add binman
+ configuration for U-Boot SPL
+To: Ferass El Hafidi <funderscore@postmarketos.org>,
+ Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Beniamino Galvani <b.galvani@gmail.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ ~postmarketos/upstreaming@lists.sr.ht
+References: <20251015-spl-gx-v4-0-f5d7fe03225b@postmarketos.org>
+ <20251015-spl-gx-v4-6-f5d7fe03225b@postmarketos.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251015-spl-gx-v4-6-f5d7fe03225b@postmarketos.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR2P281CA0141.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:9e::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RW1gtFkwtCTZ7ihc"
-Content-Disposition: inline
-In-Reply-To: <DDIRVA05GD7I.PRFJAWPND0PE@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB8767:EE_
+X-MS-Office365-Filtering-Correlation-Id: daade51c-4d9d-47ad-699b-08de0c0df101
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|366016|7416014|376014|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OW56SGZ6ZnBTd2FqODFxQnpUV2ZLN3VVUFAzd3F2Y2MveTVkWnJYdjQ4bklr?=
+ =?utf-8?B?VVVTOGZBb1VpckQ5cHR3L1ZlWHE5dFNQVWdLZzFKSHUwMno0WTU5OGtNRXVX?=
+ =?utf-8?B?RXdRSU53Um5Oc3lORXRBbnNua0FQT1Z1NGxXdnRIRHZaa2R6TGdHdFV4bGV6?=
+ =?utf-8?B?WGQrOWtzSGRnTEVlbWpBRXZNNU1uelZpWmJxQnByRHV3am5DQjIrVHRsbDdD?=
+ =?utf-8?B?N3ZIUU9SWTRNQnVVTTBWV3d5OVRpV2lnU3FiN0NtL2x4OU5yMk5zd09jVDl3?=
+ =?utf-8?B?bTJONlBEYkZuSXNTeXg3MWFXaTd1SWV2VnNjTXBHcnB0UUQ0STZnbmJZSVlp?=
+ =?utf-8?B?YU1vREI0QzlHZW5rSm5kT29VcktVSStNazZUSUoxL08vaXdSMG5FMkNERXlk?=
+ =?utf-8?B?SHgzZ1FuODlqQTAxcjYrcW0zZ2oxTGJUMEdNMnhHV0FjR2lMMERCSzQ1clpH?=
+ =?utf-8?B?OXJtNW9uSFRFVG91L1B2S05qcnBZWEZGcExOVUt3cnN2R1Z1Z2FlU2JoZm9S?=
+ =?utf-8?B?Y05kVjYrYlhRb1BUTnR2UkN6aklLeVVNTUlkemVlT0dKRkZnQngrSVdhNzBY?=
+ =?utf-8?B?SkJyOUZnd3V5aFJHVU1ybVpSdEhtQU1KNjZTWVl0VldvYmVMY1paUjFoREp5?=
+ =?utf-8?B?bW91TlVvVHlWTWJpL1J5YUV4dGVaYXVzYk90VFZXMTlPeis0Q2VFdENkeTlm?=
+ =?utf-8?B?eVFBWnBIb2MrUXJudExDSHk1aWUzSjlLMk0xTi9yOW8ra3NXeTlkbGJzajBU?=
+ =?utf-8?B?UW9KY2lndWpoTjA2dFN5Z1dmM1FjRGhRMmc4T1V5ZXE1WlN2TFZ2NlUyanRk?=
+ =?utf-8?B?VDZMMDQ5VG5LbVY1S2ZCWjNiNW1EZThmWEdJcEh1SkdCYVRNQnU2V0hvK0d1?=
+ =?utf-8?B?clQyOWdGWFRYU3lrQ2RxN1dsVXRaSkpMRTZxVG9nR1lLQWdYZ3VZSWRpMGtR?=
+ =?utf-8?B?SThXbzJEV0ZPNUhwOURsYkN4dFU3Umx4UWZUWEZMSGs0T0krVVNQTXRGQ2Fn?=
+ =?utf-8?B?NWM0TWFiOHcySHNaNlMxODlDelVSQ3hhUDR3cW4rOHpHV2ZRTngxMFdadzhB?=
+ =?utf-8?B?QVR6UUpRaWNvNWpjSTN4T2VQNlRZN3hpRTVKeVE2cEI5bWF2MmRzblVuL0ha?=
+ =?utf-8?B?aURBWjZQd2YrUitTN3VUZG02MnZocUgyT0krOHF5RFdoVHVHR2JldUpuNWdX?=
+ =?utf-8?B?QWxVL2VSNlBXeVNuMk5lRU9iZUxkUzlEZnVaclIvY01EU3dYMUpCM043bHNz?=
+ =?utf-8?B?aUNjYWJSY1V4ZEViUmoxWTNsMEh0RVg5SGdaL1d5c2hWeUNza01FamVqQ0pI?=
+ =?utf-8?B?TUZyUHF5akd0RTlqQWdNMzNvMXloV1pJZnhITFN6Vkdwb1VlWThCcTltUjZG?=
+ =?utf-8?B?OTZFcjR5VlkxMjFvVzVnUCtDYTVaTjEzNzJwTWZoNy96YjFGRGt0WEJSWkxz?=
+ =?utf-8?B?VHVpdkF0VFhIdjRuNE5ic2EreERwcG5lQ0FYYms3MmtxTGIrWmF4NXlWdFhT?=
+ =?utf-8?B?b0J5TG41aHB3R2FpM3plUW4rd2xEL2RIRFpFUUgzbHNZS0E2UE0yZmtqanMz?=
+ =?utf-8?B?eU5aRzZFbzYzemkwRWpXR1E5TlgvYzBGak5PUFhMalpXRDkzQlZXRG1tZWd1?=
+ =?utf-8?B?ZVdPS2dJQWhkUjFjTXl4Q3M0SFB3dlZueVRGc3l2V0xRUkVqUE52QjFNL1h2?=
+ =?utf-8?B?WWhYbWZjbVpmSXFxOTczR1hiOEpEZUpicHlZTW1UM2lEd0NESzBmVlBFcWIy?=
+ =?utf-8?B?NWVRV2N1ZngrTmxjankyanZWZUhraEZDNndZMXptbGtKcUxmSUUrV1FZNW1P?=
+ =?utf-8?B?VHU0RzRlRzRuTGx5a2lKUjVJTFZOSmZiUUhVdTBhYmxyY1hnSkx0UW9Zakp0?=
+ =?utf-8?B?KzVGRmhLV0lwSTlvZnY2dklZeGpRSUorY20xZ3hXWjN2VHBDUG40bTZBSUxI?=
+ =?utf-8?Q?HhHPFeKyYT5iMF8Yqc1yxZjl0c9CmCvX?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(7416014)(376014)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Qi9JalpGbTArallmbFBCY3FFcFQwdHVMK0FydW1Fa2lmenVpOFRza0tydEVz?=
+ =?utf-8?B?aW5XODkvQWVnSXJaMTdiVVpZWDRMUEI4Vk4vSXU3bHNjTDV3S0NDS3pMWTdP?=
+ =?utf-8?B?QzFsZ2JMTmpwRXdCSkNJbldocTVnV0RPNXRqNnZrL2F3OTJjelNTaWRpWkYr?=
+ =?utf-8?B?dUlBcThGZmRGVGJ0K3Jnd1BhWXlTQ01ERHRHbUZHYXgwbGM0clBLeEdQdXlJ?=
+ =?utf-8?B?c3pONFV0YThMTnRCeThDaW1tT1JnU0Z2WFRHMkhqR0tmaXBDV0l2THlha0hx?=
+ =?utf-8?B?NnMrUnVXYm9yejhXaVhxZjdIeFdiWllTSSs1Z21WVFMreUR0SlZQRW1zZWlO?=
+ =?utf-8?B?eEVubWVUdkRQL1ZoRTFCbHZZaUdCUUgrbUFIeUlpY1pWTUVyRlltb0ZBNHFj?=
+ =?utf-8?B?YlZuWWttcktLOFM3Zy9IZk1HUys4RTlWMkdIM3dFejR0VVJ6NHJ3czcvMU5a?=
+ =?utf-8?B?NXJEQ2RXWk8yOFBQeklpQmFTRngza1o4RjU1SVpFTEdEZm1abE5tajEvTXZU?=
+ =?utf-8?B?ZVJxaUs0Ym1lQWNZQzZrM1ltSmdxcXU3b0tUNVN4UmMrdFJzeEdpRERqVHo0?=
+ =?utf-8?B?WWRXNG51b3lpT3lLSE9qU3NvakY0QW8yS3Y1SERzcDdhaE80M0sxMHpNMXJZ?=
+ =?utf-8?B?TjF0UWwwOTVLUDZySHplRjExTStGRXhBeGo3aUdsOXpFL3JZRXJ1N3kwWmJS?=
+ =?utf-8?B?RnVoMFpuNHlmZ0dwL1pHeWdlUjhBSmpWcWxDNnM2bitxTzFjQTN4K1ZCdHdi?=
+ =?utf-8?B?c2ZWei91U2Y2ZVJSQ2dRbGRNMC95QXMxTy92Sm8veE9EMEQ1QWJkcVJ3Slhp?=
+ =?utf-8?B?QTZuV1FibWJNMTJkMjJsNEs3Wm5XS1ZUdXdNTWtlY1dxcFZBd2dnMitzWHI5?=
+ =?utf-8?B?ajEyTjZpQkRoY3VQR2tyQkxmcHJ1SCsrRzlyRThxSjZiM1UzOUZtQ2xFOTBN?=
+ =?utf-8?B?THVGenVVYjJyOEtjakIvSzdJWDlmemcyUmpLQ2srbnY0S1VUZHpuQkRic3Fx?=
+ =?utf-8?B?WjB1a01RdVBzTVZFdHhkeXBGK1gzMU05bFRFMTNQUHptOWRZNGZyaWJUblpL?=
+ =?utf-8?B?WDM2SGpWMDNhOVBnNngwdXMyOXo3cTZRQXlvNnVGQzBvZFJ3Mkxuc2F4ZS80?=
+ =?utf-8?B?VUNUS2hGODlYUFdPWDgycEJiNDhwVU9JZk94UzBreVQ2QXhudys2V0E4STV0?=
+ =?utf-8?B?aHE2RmNPc3BobnUyWXBaVmIyeW9XNHhJVndIVHliWmNuOStjRTNUejJzVDVF?=
+ =?utf-8?B?RnBpTmtleVZORzIyQ0FaWkRSb3psRGhjNWRPdjRWQ3A2dzVkTkJNM2FRZjYv?=
+ =?utf-8?B?UDJyb3YzaWYzNmRyczZxWWVHRUYwd1pvT2t4ZGtURGxGUEt6dDJBRU1ROTBl?=
+ =?utf-8?B?OWlwbU83d2tEMWlZZEVMN2cwWkVUTmp3OGpXQ1AwWTRoSUIyWEovZGs1Yk5V?=
+ =?utf-8?B?TnBZaTFMVUplY3kyQmMrTm13alYxTnN4ZmxvVGFGUjlXNmx2WXFnNERjU0ZE?=
+ =?utf-8?B?bmRMazBVRXVMV0tYVVczTmJpOXdjSCtKSnJ4Q21leThxazVOSWJrNTArVU0x?=
+ =?utf-8?B?cFB1UFBXWXBMTU9qTDhzbmtFbWd6RnhDc3EyUVlKWUZ2L200WW04WmxVcWxq?=
+ =?utf-8?B?a2RyVGR3amEyYVJWVUJPdFA0OHlvMHV3ZlcrZDA2QVpuUmJFZS9pcEVRc1c0?=
+ =?utf-8?B?OEo2UzUrajhoN2habEtLK0RUeDl2RUlZOEl2SVVNZXRTOU9xL21IbHgyNW0w?=
+ =?utf-8?B?VVFmb0hRS3d0bXZObE1DZG91bFg2V0FPU2xOUXFKOUVXaEJhWGpVdjRBekpq?=
+ =?utf-8?B?U0t6NmFCU01rbkdBS09FRWdDTEg5WE1LY1NxRVlmTkE3bFNIVlZtQm1NQURI?=
+ =?utf-8?B?dlYwWjdvYmxmay9nWkdsanBlR2RtT0ppWGI2cVpocG43Ly80blUxSnpNcGxU?=
+ =?utf-8?B?RDIxWmhjbmxCS0xvLzRUYUtWOGFyTnhCYXJQMzU2R3VLelhLbHk4TzFEa2RJ?=
+ =?utf-8?B?eGVFMmVlVkhmQ0N2WVZHT2N4WU43UmpjVFh5bHlDSzk1T1k4UWxMQ3Z5UzZN?=
+ =?utf-8?B?bEVWWDJtZUJjMCt0VzNuOHRhVWl1SGc0bnhBcC9OUTFkL0RoY0dVRUJXOHRp?=
+ =?utf-8?B?ZFlFNExOaWdJalRRUUYyd0xhQXFTc0V3T2UzdVRhTlZHSWFKS2xVWm53eU9m?=
+ =?utf-8?B?ckE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: daade51c-4d9d-47ad-699b-08de0c0df101
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2025 17:11:55.2323 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8CDqH/JJ1I7QZKtwd5/Eca5qM6jLSkPjO+/zT/8PTZLhXvsBaA5ylm0IwOhhtydR3D8EjlxfwCsmqoTc8HdO0q72OIZI3Ev0N2oddjS+sL8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8767
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,78 +183,298 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ferass,
 
---RW1gtFkwtCTZ7ihc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/15/25 6:25 PM, Ferass El Hafidi wrote:
+> Add binman configuration to meson-gx-u-boot.dtsi to automate building
+> bootable images using amlimage.
+> 
+> Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
+> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-On Wed, Oct 15, 2025 at 02:31:49PM +0530, Anshul Dalal wrote:
-> On Sat Oct 11, 2025 at 3:26 PM IST, Anshul Dalal wrote:
-> > Hi Tom,
-> >
-> > On Fri Oct 10, 2025 at 9:35 PM IST, Tom Rini wrote:
-> >> On Fri, Oct 10, 2025 at 06:48:25PM +0530, Anshul Dalal wrote:
-> >>
-> >>> With CONFIG_SPL_OS_BOOT enabled, U-Boot checks for the return value of
-> >>> spl_start_uboot to select between falcon or the regular boot flow. Wi=
-th
-> >>> a return value of 0 implying falcon mode.
-> >>>=20
-> >>> This patch overrides the weak definition form common/spl/spl.c to all=
-ow
-> >>> K3 devices to use falcon mode with SPL_OS_BOOT enabled.
-> >>>=20
-> >>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> >>> ---
-> >>>  arch/arm/mach-k3/common.c | 7 +++++++
-> >>>  1 file changed, 7 insertions(+)
-> >>>=20
-> >>> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
-> >>> index 5483ac9906c..41c96cbd4c5 100644
-> >>> --- a/arch/arm/mach-k3/common.c
-> >>> +++ b/arch/arm/mach-k3/common.c
-> >>> @@ -425,3 +425,10 @@ release_proc_ctrl:
-> >>>  	proc_ops->proc_release(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
-> >>>  	return ret;
-> >>>  }
-> >>> +
-> >>> +#if CONFIG_IS_ENABLED(OS_BOOT)
-> >>> +int spl_start_uboot(void)
-> >>> +{
-> >>> +	return 0;
-> >>> +}
-> >>> +#endif
-> >>
-> >> I've seen this in other parts of the series too, sorry.
-> >> CONFIG_IS_ENABLED(OS_BOOT) doesn't make sense, it should be
-> >
-> > Is that because OS_BOOT by itself is meaningless and
-> > CONFIG_IS_ENABLED(OS_BOOT) would always fall to checking for
-> > CONFIG_SPL_OS_BOOT? I mostly stuck with CONFIG_IS_ENABLED to avoid the
-> > extra three characters when using IS_ENABLED instead.
-> >
->=20
-> Apparently there are quite a few instances of CONFIG_IS_ENABLED(OS_BOOT)
-> in the source even before this patch series. I'll change it to
-> IS_ENABLED for this series in a v2 but for the existing instances, I
-> think it's better to follow up with a clean up patch once all other
-> remaining falcon series are merged.
+Quick drive-by comments.
 
-Sounds good, thanks.
+> ---
+>   arch/arm/dts/meson-gx-u-boot.dtsi | 142 ++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 142 insertions(+)
+> 
+> diff --git a/arch/arm/dts/meson-gx-u-boot.dtsi b/arch/arm/dts/meson-gx-u-boot.dtsi
+> index 9e0620f395e..d05f869c06e 100644
+> --- a/arch/arm/dts/meson-gx-u-boot.dtsi
+> +++ b/arch/arm/dts/meson-gx-u-boot.dtsi
+> @@ -2,6 +2,7 @@
+>   /*
+>    * Copyright (c) 2019 BayLibre, SAS.
+>    * Author: Maxime Jourdan <mjourdan@baylibre.com>
+> + * Copyright (c) 2023 Ferass El Hafidi <funderscore@postmarketos.org>
+>    */
+>   
+>   / {
+> @@ -15,6 +16,16 @@
+>   	soc {
+>   		bootph-all;
+>   	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
 
---=20
-Tom
+I don't believe this is required for binman so please split into its own 
+commit with justification.
 
---RW1gtFkwtCTZ7ihc
-Content-Type: application/pgp-signature; name="signature.asc"
+> +#if defined(CONFIG_BINMAN)
+> +	binman: binman {
+> +		multiple-images;
+> +	};
+> +#endif
+>   };
+>   
+>   &vpu {
+> @@ -30,3 +41,134 @@
+>   	      <0x0 0xc883c000 0x0 0x1000>;
+>   	reg-names = "hdmitx", "hhi";
+>   };
+> +
+> +#if defined(CONFIG_MESON_GX) && defined(CONFIG_BINMAN)
 
------BEGIN PGP SIGNATURE-----
+Isn't MESON_GX implied since we are in meson-gx-u-boot.dtsi?
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO/T6wAKCRAr4qD1Cr/k
-CpphAP0TdqGlMDhnJ2E+Y9GpzAZZQUo/in9NfBW/u7G7fKSKFQD6AoG6ZB7S7IIC
-EPpsepwikEweH0CfGeNZiUwy9LWdhwU=
-=MaIY
------END PGP SIGNATURE-----
+> +/* binman configuration on GXBB and GXL */
+> +
+> +#if defined(CONFIG_MESON_GXBB)
+> +#define BL31_ADDR 0x10100000
+> +#else /* GXL */
+> +#define BL31_ADDR 0x05100000
+> +#endif
+> +
 
---RW1gtFkwtCTZ7ihc--
+First question is... can't this be derived from the binary already?
+
+On Rockchip we do
+
+fit,load;
+fit,entry;
+fit,data;
+
+for OP-TEE OS and TF-A though we do split the binaries into multiple 
+nodes (see @atf-SEQ and @tee-SEQ). I'm not sure if those properties are 
+applicable to only tee and atf nodes without a node for each segment, if 
+it isn't...
+
+I would highly recommend against doing this.
+
+I would instead have a
+
+arch/arm/dts/meson-gxbb-u-boot.dtsi with
+
+&fit {
+     atf {
+         entry = <0x10100000>;
+         load = <0x10100000>;
+     };
+};
+
+and have the default entry and load be 0x05100000 if that really is a 
+sensible default (otherwise put none in meson-gx-u-boot.dtsi and declare 
+it in each meson-gxXXX-u-boot.dtsi). Then your boards would include 
+meson-gxbb-u-boot.dtsi instead of meson-gx-u-boot.dtsi (and the former 
+DTSI would include the latter DTSI).
+
+The benefit is that it makes it much clearer what would be required to 
+support a new family/SoC of the Meson GX family. Or what exactly could 
+differ between families. But also keeps the main -u-boot.dtsi readable 
+(which is not that easy to do, see our horrendous rockchip-u-boot.dtsi :( )
+
+> +/*
+> + * On GXBB the base address of the SCP firmware doesn't matter as SPL will
+> + * send the firmware to the SCP anyway, and can get the base address from the
+> + * FIT. On GXL it matters, as BL31 is supposed to send the firmware, so set the
+> + * base address to what GXL BL2 would load the binary to.
+> + */
+> +#define  SCP_ADDR 0x13c0000
+> +
+> +&binman {
+> +	u-boot-amlogic {
+> +		filename = "u-boot-meson-with-spl.bin";
+> +		pad-byte = <0xff>;
+> +
+> +		mkimage {
+> +			filename = "spl/u-boot-spl-signed.bin";
+> +#if defined(CONFIG_MESON_GXBB)
+> +			args = "-n", "gxbb", "-T", "amlimage";
+> +#elif defined(CONFIG_MESON_GXL)
+> +			args = "-n", "gxl", "-T", "amlimage";
+> +#endif
+
+Same here as suggested for the load address of TF-A.
+
+On Rockchip we use CONFIG_SYS_SOC but I don't think you can on Amlogic.
+
+You could set SYS_SOC depending on MESON_GXBB/MESON_GXL/... in 
+arch/arm/mach-meson/Kconfig and be done with it, but there are some 
+side-effects (read SYS_SOC doc).
+
+Another way is to add
+
+&binman {
+     mkimage {
+         args = "-n", "gxbb", "-T", "amlimage";
+     };
+};
+
+to arch/arm/dts/meson-gxbb-u-boot.dtsi.
+
+> +
+> +			blob {
+> +				size = <0xb000>; /* The BootROM loads 48K max (header is 4K) */
+> +				filename = "spl/u-boot-spl.bin";
+> +			};
+
+I'm not sure this actually works? It would rely on a binary located at 
+spl/u-boot-spl.bin, which binman doesn't seem to be generating? Either 
+we;re missing something to generate it with binman, or something 
+external to binman generates it?
+
+Typically it is generated with:
+
+u-boot-spl {
+};
+
+?
+
+If you're trying to enforce a max size, then we have Kconfig symbols for 
+those, probably SPL_MAX_SIZE and then I believe binman enforces those 
+one way or another. If it doesn't, then many boards and architecture 
+have a problem and we should fix that so you can rely on it.
+
+> +		};
+> +
+> +		fit: fit {
+> +			description = "ATF and U-Boot images";
+> +			#address-cells = <1>;
+> +			fit,fdt-list = "of-list";
+> +			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+> +			fit,align = <512>;
+> +			offset = <CONFIG_SPL_PAD_TO>;
+> +
+> +			images {
+> +				u-boot {
+> +					description = "U-Boot";
+> +					type = "standalone";
+> +					os = "u-boot";
+> +					arch = "arm64";
+> +					compression = "none";
+> +					load = <CONFIG_TEXT_BASE>;
+> +					entry = <CONFIG_TEXT_BASE>;
+> +
+> +					u-boot-nodtb {
+> +					};
+
+Why no hash for U-Boot?
+
+> +				};
+> +
+> +				atf {
+> +					description = "ARM Trusted Firmware";
+> +					type = "firmware";
+> +					os = "arm-trusted-firmware";
+> +					arch = "arm64";
+> +					compression = "none";
+> +					load = <BL31_ADDR>;
+> +					entry = <BL31_ADDR>;
+> +
+> +					atf-bl31 {
+> +						filename = "bl31.bin";
+
+I believe this is already the case if you set BL31 environment variable 
+to bl31.bin. I would simply remove it and let the user decide what's 
+best for them. For binman this comes from the -a atf-bl31-path=${BL31} 
+argument.
+
+The benefit is that you can now point to a BL31 outside of U-Boot's 
+tree, which is super convenient for debugging TF-A, or with build 
+systems like Yocto or Buildroot.
+
+> +					};
+> +					hash {
+> +						algo = "sha256";
+> +					};
+
+This means your boards all need to have CONFIG_SPL_SHA256 if 
+CONFIG_SPL_FIT_SIGNATURE is provided otherwise the hash cannot be 
+verified. Please check if that is the case (enforced at the Kconfig 
+symbol-level would be best).
+
+> +				};
+> +
+> +				scp {
+> +					description = "SCP firmware";
+> +					type = "scp";
+> +					arch = "arm"; /* The Cortex-M core is used as SCP */
+> +					compression = "none";
+> +					load = <SCP_ADDR>;
+> +
+> +					scp {
+> +						filename = "scp.bin";
+> +					};
+
+I would recommend to attempt mimicking what's been done for atf-bl31 
+(then you need to add a new argument to the lists of arguments for 
+binman in the root Makefile). See above for benefits.
+
+> +					hash {
+> +						/*
+> +						 * The hash is used by the SCP and passed to it
+> +						 * by U-Boot SPL.
+> +						 */
+> +						algo = "sha256";
+> +					};
+> +				};
+> +
+> +				@fdt-SEQ {
+> +					description = "NAME";
+> +					type = "flat_dt";
+> +					compression = "none";
+
+why no hash for FDTs?
+
+> +				};
+> +
+> +			};
+> +			configurations {
+> +				default = "@config-DEFAULT-SEQ";
+> +				@config-SEQ {
+> +					description = "NAME.dtb";
+> +					fdt = "fdt-SEQ";
+> +					firmware = "atf";
+> +					loadables = "scp", "u-boot";
+> +				};
+> +			};
+> +		};
+> +	};
+> +};
+> +
+
+Is the below really related to adding binman configuration???
+
+> +&vpu {
+> +	/delete-property/ bootph-all;
+> +};
+> +
+> +&apb {
+> +	bootph-all;
+> +};
+> +
+> +&sd_emmc_b {
+> +	bootph-all;
+> +};
+> +
+> +&sd_emmc_c {
+> +	bootph-all;
+> +};
+> +#endif
+> 
+
+Cheers,
+Quentin
