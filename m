@@ -4,87 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D9DACCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 16:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17AE5CCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 17:03:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F29D833F6;
-	Wed, 15 Oct 2025 18:29:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D2E5833F6;
+	Wed, 15 Oct 2025 19:03:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jJVooIjI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MbkIei6M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CF0A835A2; Wed, 15 Oct 2025 18:29:05 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id 94A9083303; Wed, 15 Oct 2025 19:03:53 +0200 (CEST)
+Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
+ [IPv6:2001:4860:4864:20::2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBC8A83303
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 18:29:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E26083303
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 19:03:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-7a7d79839b2so5227491a34.3
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 09:29:02 -0700 (PDT)
+Received: by mail-oa1-x2b.google.com with SMTP id
+ 586e51a60fabf-3c9662c5fb1so174970fac.0
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 10:03:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760545741; x=1761150541; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760547830; x=1761152630; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Fns5PYFV6eXkII6i0cGOr5GZGGuYCfyCY0HVZS5uDQs=;
- b=jJVooIjIAt8Z7slU2ce59n9umQiyYJGJPGLz7Acc0opKB1nWIzeNjIJt30cnF1j89k
- K3gqkL53/h/7dmp0UbSXX3LIU4LvLIzOiiHciZPqoz9RFJ41v/mpzLkdnTcdnKjHvNG3
- g/ICmm3XmsLefsmEoKyFd/THPW4wP/qOpnq+E=
+ bh=RR5X9GDUbgIUNvffIeYoD9UoY9WV0lEvQZv9mmbebDY=;
+ b=MbkIei6MYeS63w9igkANgMmYkSCo7g63pmOo8eKEn4Ss7dE8XHhJKgivG2x88wRH4p
+ TGLjrEB7YG1DFyAd5DQ/zMwfi0llFrTglID+o+PqVomfohJonehYnV1xEHnI0hTKhKd9
+ gZgyRh/MjM28Z4m+PCg5UoPGorgtcsRbJIsPA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760545741; x=1761150541;
+ d=1e100.net; s=20230601; t=1760547830; x=1761152630;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Fns5PYFV6eXkII6i0cGOr5GZGGuYCfyCY0HVZS5uDQs=;
- b=UKGNXxqFpvMiCj7F/rgGaPl1zMfRvRp+jMUWsR6pKuu8stxdnfJ4dnxPAiGKFIDtXO
- 3bDtJGnMTJx7eBS9pKBOQIX+FmgOo/8IeA3VTmZNGVVWWANREhitI0y+4um+BmQe9fPt
- IbCbdoYB5Yh/29GEOsQmsXOS+36eEOIZAXbu7+7phbWrLO3dpDvbHnS7qrU/s93fByJ/
- SrvKykkcunc29hYqhxO/K/ZeW4LSq735nwIqyEXCQg6uOvp/RzRaF1w5ig4V+v+iMHYC
- f3F547+1GA9azLlGdTAKTVrenLuZsD5r/jwGv1Zos2RIIE+y7Lvf/iNSIikRj1MHgJhZ
- ghXA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW+3AdPYbm2jWSsEGma2a/aRP6G2A+r38DJTOINLfQH8ht824R7/3IuHoEkce5TbwCn8/3fk7U=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz3Ec15c6qzl0LbMJZe1M2kxNClUAIsmeFM57hBq9Z/lNBYs0Op
- /YE367Vv6kBx7joSmQWWgvlRc9WhbJZ2h3v9BM73uOhP+okI6d40uUUqlk4OuGucadI=
-X-Gm-Gg: ASbGncvdZzPC6fCt5yIyUJNolBRH1Kmno/1Imn19A3deeAnZDTEhmci2DMZEjEvG2oC
- YGi7plVfEVP06mzsSoJx+7qNxUv1KKbRzNPt3VLSHCIXZrhllU3T17DYG0MLhFihgRfmU7cdUME
- Js8nJMWOdjHDm0CChWg8ntwXUpDIPWopA538LVIqwaA6y+9g8zLvcxuEUshJ9EB3+eKs+sfL3hN
- 1Rsfn2xCZKH1bGhdVDFM7fn86KceZJ70Hhcn1rGQWmpJvKyIIeDa7V8oOw9k1LlHyEK2OerDL6E
- dCelu2Flyz+rBrxQlUd6nPsel9XdDmcbLTBjrEvCjkesNXDV2qiimrb/axp2tuRfDusEkJTPPr/
- xRaO+iVC4rucsGfZxeWPdMJVJvoqfsGl2Z8xNQxZ6DGw1jpRc+DTXRrOQwTSZYPd9AjiG2t1QtU
- VOPUEWoy5HLvEdEjo=
-X-Google-Smtp-Source: AGHT+IEGbK/TJ1au1MKwNJricHv4rbzl+5fWBrzs2Uufb9UEvdLpzGq5zPFK07elBcYXtFCn9Jiclw==
-X-Received: by 2002:a05:6830:61c7:b0:75a:3c7d:9826 with SMTP id
- 46e09a7af769-7c0df804a75mr12352015a34.29.1760545741516; 
- Wed, 15 Oct 2025 09:29:01 -0700 (PDT)
+ bh=RR5X9GDUbgIUNvffIeYoD9UoY9WV0lEvQZv9mmbebDY=;
+ b=QDYTj+BqMyKRxOOzsUsyGmDfI/HXTG2cmH7Yp62boF/z7fvYf92AnOjUx2AMf//EV7
+ DUua/CobaPN9cRCsDljrHfGf89VdEao1r/fx1BCtRBVZCgjB0vXiu8HJVO0p9ud3SWOw
+ lkaPUJICWfUa2xIzdLdMWXmePW4CYvapyPqchIh7vwhpHKk2tdj7CMTElzzSAbKdUwgX
+ KCjr9YGKMYfia5gFuou3v2d5P8ztpxpr1fcTdIhLzyAjheV4rm9CmnfAk4PojhbRY+pg
+ wEBrcxvCFnOJ2X81OlLqwLuj41ygu49fT/ST8UkjXO9FukUsUKcah17PVcvMw3vaMJgS
+ Jryg==
+X-Gm-Message-State: AOJu0YzJAhQPPRju7YLHxxUwr7iO5Etz2mfit54n18fkly2W7+LCy3VL
+ H1UnQuiI7XBdko7+1b6f79peiVZimWaG3sGyp2/QtN4JckTL6VlA89Su0aWfrTg7bAE=
+X-Gm-Gg: ASbGncuHccAZmu6NrSXE9bN8R2dYuzADBQT4esI+cfpieVp77XvpMnTBMLQdJj4E0oy
+ GVEJkY/kZ4VbhiFBJMlF69wRcmJZd1cOv/u6tWzpZmmOezQt4GbOeEEaRQf19Hq0wTt40c06tbv
+ ne4i/VLdDrRZi7abESnr7kYmjBlcryEWr1746xg1EE7Tp/1R8MkFL4rheowMJs0ut/HjiC9Z6y7
+ qxoD/qB4T+5KjAQCKdkAwL0fJOkuMBjndPwMG8UwgCRoFQ0Q2+PGkGZ4aacICwKADKBtJ0gdNz2
+ SzE7j8k4qpMI7KiNVH8UACKmeP50kORNhq2vLx7/gzzg6XEFX0JStJjInkSsfbghfRficcq4Pb9
+ TppxRE7CkSVhiutv8PhsiJOO+v/9ZexQW65zFPga3ijryoreqGTGVSg9Iq4LFaT3J9aF5gRywHN
+ 8Ix9Jy
+X-Google-Smtp-Source: AGHT+IHjBl4+UGKRUh15OEANYpgnmXU6Vlgrn1CUFUb/WbBTEhOuTvAHNqQxhY4CIbajJpnSbSTc8w==
+X-Received: by 2002:a05:6870:e307:b0:31d:66fd:298d with SMTP id
+ 586e51a60fabf-3c0f6d1ff02mr13148388fac.23.1760547826646; 
+ Wed, 15 Oct 2025 10:03:46 -0700 (PDT)
 Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c0f90fb4a0sm5441136a34.17.2025.10.15.09.29.00
+ 586e51a60fabf-3c8c8e82749sm5461267fac.14.2025.10.15.10.03.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 09:29:00 -0700 (PDT)
-Date: Wed, 15 Oct 2025 10:28:58 -0600
+ Wed, 15 Oct 2025 10:03:45 -0700 (PDT)
+Date: Wed, 15 Oct 2025 11:03:42 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <sean.anderson@seco.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] fs: semihosting: Use correct variable for error check
-Message-ID: <20251015162858.GA669557@bill-the-cat>
-References: <20251002-fs_semihosting-v1-1-1124e6becc51@linaro.org>
- <2780374a-3a85-4969-96df-34e331a53c53@gmx.de>
- <7f274115-8fd1-46c3-866c-278569aca469@seco.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com,
+ n-francis@ti.com, b-liu@ti.com, nm@ti.com, bb@ti.com
+Subject: Re: [PATCH v1 3/5] arm: mach-k3: enable support for falcon mode
+Message-ID: <20251015170342.GR6113@bill-the-cat>
+References: <20251010131829.3737258-1-anshuld@ti.com>
+ <20251010131829.3737258-4-anshuld@ti.com>
+ <20251010160512.GE298503@bill-the-cat>
+ <DDFEIZ4KAA9A.3IE2L0TRWHNXQ@ti.com>
+ <DDIRVA05GD7I.PRFJAWPND0PE@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="VxeW2LUK+0/FQG/m"
+ protocol="application/pgp-signature"; boundary="RW1gtFkwtCTZ7ihc"
 Content-Disposition: inline
-In-Reply-To: <7f274115-8fd1-46c3-866c-278569aca469@seco.com>
+In-Reply-To: <DDIRVA05GD7I.PRFJAWPND0PE@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,78 +102,77 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---VxeW2LUK+0/FQG/m
+--RW1gtFkwtCTZ7ihc
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 02, 2025 at 10:36:07AM -0400, Sean Anderson wrote:
-> On 10/2/25 05:52, Heinrich Schuchardt wrote:
-> > On 10/2/25 11:39, Andrew Goodbody wrote:
-> >> After calling a function that can return an error, the test to detect
-> >> that error should use the return value not a different variable. Fix i=
-t.
+On Wed, Oct 15, 2025 at 02:31:49PM +0530, Anshul Dalal wrote:
+> On Sat Oct 11, 2025 at 3:26 PM IST, Anshul Dalal wrote:
+> > Hi Tom,
+> >
+> > On Fri Oct 10, 2025 at 9:35 PM IST, Tom Rini wrote:
+> >> On Fri, Oct 10, 2025 at 06:48:25PM +0530, Anshul Dalal wrote:
 > >>
-> >> This issue was found by Smatch.
+> >>> With CONFIG_SPL_OS_BOOT enabled, U-Boot checks for the return value of
+> >>> spl_start_uboot to select between falcon or the regular boot flow. Wi=
+th
+> >>> a return value of 0 implying falcon mode.
+> >>>=20
+> >>> This patch overrides the weak definition form common/spl/spl.c to all=
+ow
+> >>> K3 devices to use falcon mode with SPL_OS_BOOT enabled.
+> >>>=20
+> >>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> >>> ---
+> >>>  arch/arm/mach-k3/common.c | 7 +++++++
+> >>>  1 file changed, 7 insertions(+)
+> >>>=20
+> >>> diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+> >>> index 5483ac9906c..41c96cbd4c5 100644
+> >>> --- a/arch/arm/mach-k3/common.c
+> >>> +++ b/arch/arm/mach-k3/common.c
+> >>> @@ -425,3 +425,10 @@ release_proc_ctrl:
+> >>>  	proc_ops->proc_release(ti_sci, PROC_ID_MCU_R5FSS0_CORE1);
+> >>>  	return ret;
+> >>>  }
+> >>> +
+> >>> +#if CONFIG_IS_ENABLED(OS_BOOT)
+> >>> +int spl_start_uboot(void)
+> >>> +{
+> >>> +	return 0;
+> >>> +}
+> >>> +#endif
 > >>
-> >=20
-> > Fixes: f676b45151c3 ("fs: Add semihosting filesystem")
-> >=20
-> >> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> >> ---
-> >>   fs/semihostingfs.c | 2 +-
-> >>   1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/fs/semihostingfs.c b/fs/semihostingfs.c
-> >> index 77e39ca407e4d240a1fd573497c5b6b908816454..9d7a136b9ba9b035545b34=
-b31df58e2d65de7db9 100644
-> >> --- a/fs/semihostingfs.c
-> >> +++ b/fs/semihostingfs.c
-> >> @@ -35,7 +35,7 @@ static int smh_fs_read_at(const char *filename, loff=
-_t pos, void *buffer,
-> >>       }
-> >>       if (!maxsize) {
-> >>           size =3D smh_flen(fd);
-> >> -        if (ret < 0) {
-> >> +        if (size < 0) {
-> >=20
-> > The ARM specification (https://cas5-0-urlprotect.trendmicro.com:443/wis=
-/clicktime/v1/query?url=3Dhttps%3a%2f%2fdeveloper.arm.com%2fdocumentation%2=
-fdui0203%2fj%2fsemihosting%2fsemihosting%2doperations%2fsys%2dflen%2d%2d0x0=
-c%2d&umid=3Df17ab8fc-2d9d-4cce-91e2-e7e66f117613&rct=3D1759398729&auth=3Dd8=
-07158c60b7d2502abde8a2fc01f40662980862-e0799d2d4d61f93cae033d54733c8fa50ef8=
-4918) has:
-> >=20
-> > SYS_FLEN (0x0C)
-> >=20
-> > Returns the length of a specified file.
-> > On exit, R0 contains:
-> >     the current length of the file object, if the call is successful
-> >     -1 if an error occurs.
-> >=20
-> > Please, consider that the file length on 32bit systems may exceed 2^31 =
-You must not consider this as an error.
-> >=20
-> > %s/if (size < 0)/if (size =3D=3D -1L)/
+> >> I've seen this in other parts of the series too, sorry.
+> >> CONFIG_IS_ENABLED(OS_BOOT) doesn't make sense, it should be
+> >
+> > Is that because OS_BOOT by itself is meaningless and
+> > CONFIG_IS_ENABLED(OS_BOOT) would always fall to checking for
+> > CONFIG_SPL_OS_BOOT? I mostly stuck with CONFIG_IS_ENABLED to avoid the
+> > extra three characters when using IS_ENABLED instead.
+> >
 >=20
-> This cannot occur because on a 32-bit system SYS_FLEN only returns
-> 32-bits of information. The host must detect files that exceed 2 GiB in
-> size and return -1 (simulating EOVERFLOW).
+> Apparently there are quite a few instances of CONFIG_IS_ENABLED(OS_BOOT)
+> in the source even before this patch series. I'll change it to
+> IS_ENABLED for this series in a v2 but for the existing instances, I
+> think it's better to follow up with a clean up patch once all other
+> remaining falcon series are merged.
 
-OK, but this is for 64-bit systems too, isn't it?
+Sounds good, thanks.
 
 --=20
 Tom
 
---VxeW2LUK+0/FQG/m
+--RW1gtFkwtCTZ7ihc
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO/LwgAKCRAr4qD1Cr/k
-CuAMAP9ew7ZicBHII6DrgOfwbdN0V5kmv9iBNcShfFKwyeHDogD/SLVknVmSzfMK
-/efAogx1xDbolo/CseCQXaQBJmp9pA0=
-=0Qhf
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO/T6wAKCRAr4qD1Cr/k
+CpphAP0TdqGlMDhnJ2E+Y9GpzAZZQUo/in9NfBW/u7G7fKSKFQD6AoG6ZB7S7IIC
+EPpsepwikEweH0CfGeNZiUwy9LWdhwU=
+=MaIY
 -----END PGP SIGNATURE-----
 
---VxeW2LUK+0/FQG/m--
+--RW1gtFkwtCTZ7ihc--
