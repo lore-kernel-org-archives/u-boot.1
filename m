@@ -4,78 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C112CCD193
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 22:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65CA9CCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 22:57:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97F33835B3;
-	Thu, 16 Oct 2025 00:57:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 155198361E;
+	Thu, 16 Oct 2025 00:57:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UZB2MOSK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TKGpS2Jo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6275D835A2; Thu, 16 Oct 2025 00:57:30 +0200 (CEST)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id D9DF2835FE; Thu, 16 Oct 2025 00:57:31 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A591829E7
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 00:57:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9529833F6
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 00:57:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-7a7d79839b2so83676a34.3
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 15:57:28 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7b7325d8fb5so81323a34.1
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 15:57:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760569047; x=1761173847; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760569048; x=1761173848; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0XyaHwB7PdeIKHQsu92fRFGsNlImaGfdKU+WX48Y2ao=;
- b=UZB2MOSKAqqd+RFawZij5mP8hCeEQ2HxFqcTxDv6qnmFGSyfTK6nEtVJSUYP9Fe98c
- 2YyrQFacXIvcybDH5raBHTpKU101t+O2QHeaf7EDQoJ51rVvau6qf9tweisF78mupG65
- abe0ymMHlA5Qq6DwoHSOf7YWNuUpQD/+i+Jxk=
+ bh=5VHFHy/R9EOD+SHzY2b2XjavvcyF2pWPmRw6O7DwuyQ=;
+ b=TKGpS2JoMIgtfju7ZLHbwS0r0LyW6ZCzUWCUlRAa2gGISvIPsPCJL3vDT5teUcK/0K
+ ZhmNZthPauB0ug2/t7y89BvsVvqrp79JkzpuRCTJMjGp/t3GdCNQhfpMkMmD/YW4DByb
+ GRfVUuZ/0Q8Rk6/xR25+LReD9wtFlfVtW2eWk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760569047; x=1761173847;
+ d=1e100.net; s=20230601; t=1760569048; x=1761173848;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0XyaHwB7PdeIKHQsu92fRFGsNlImaGfdKU+WX48Y2ao=;
- b=p2YC3xsWhEBeWWUtT3dBkaY0ZC5dx5pDBZAFVQZad/ql1CGR4473+xJhedRbz7N9xl
- 6BHQPTyBGTDYDdzTpeSrw7FIyoTonxcHQAmUdi1k5jpySlOh2zt8tVqWIbBwxtqnjPx2
- mjOSi8NiPHXzj4FWs1wIIyT0CrdnH1DdiSxYGAKGipYam1Fw85lZ+e5yxEdlOmJKxBot
- fslZlgCNcHDoPC+K0cCWwE431KMVAZPLmjeIZh5ub44Li7btt9Wx94Ph7AjMWFWhvfpF
- mFKmmTyS6IFwvYYxk11+8NnIvFe+yQA0LtDzP5FZAWgtOeNarqlmrbHZ7robYbz0tag0
- sYlw==
-X-Gm-Message-State: AOJu0YzN5lENMVGHcvyz+GbNFF9AsQPnNdo5Jl1XIi/NGLleYJ2Q1c8l
- Czb3q5G0l9Z3/f0vb7cROfBuN42vBOtFrnvMlgrO/K4KJg45U1DmoqkY0A2V5OP3KXw=
-X-Gm-Gg: ASbGncti9d4El5ihXLujnZVRocnYTlTpsYfITfziaXvgHYCYpbN2H751SkRIInm1ZV0
- GnK0IEEYpYANji2DUVfUSLlhVmOLi6iRN+R/3bQEMR2MgHMPRsCeelwhG53/T/jKNxgVGWpnoJV
- N06aLEYqCF1iaTrvr+kunpMlnrzDSKb9amU2xkh4IqrRog3iG28jfxKuG9nrGwWZPzYdcuGp2R/
- WkzIrRh+D18dYpcNLqNGPdl8gt8S6SvucyKPMUba/sSMjDLYHkLK0lHjZW2R5wnw+jEHWgn10J2
- BZyVS9XPJGP6jHE9EdwXAQLMSjV3q4VwvzdnQE56DGiV1UUkWzI4sKUqeFGIWRRPsW244Hvkfho
- 7bj0x+U0Hj4Q8xjFRqQiWkI4iTSE0eq1ONznVhHncy+IujbOg8sOE5A7Xy1tXSuLV6Wilj1sFf1
- Ba3J5+Nql4JXZgT5HU2mCrJrjoa1iCkfhyvRT/wg==
-X-Google-Smtp-Source: AGHT+IGDzIt3yfWhhJhonq9kOzTxiV0Kj734ROtny16XmTi7D2eHVtT9jbgiegajrV+p1dbct57eeg==
-X-Received: by 2002:a05:6830:350b:b0:74b:a74d:8d2e with SMTP id
- 46e09a7af769-7c0df7fd774mr16103456a34.26.1760569047023; 
- Wed, 15 Oct 2025 15:57:27 -0700 (PDT)
+ bh=5VHFHy/R9EOD+SHzY2b2XjavvcyF2pWPmRw6O7DwuyQ=;
+ b=oTLMdiJuk+v0uLX9x2/y4kQOnpS5B5VOEGmA+LGBdMXdOjNQiLyqQEjzKrrhLOzmor
+ hB8ydq1PQV+6KwseO+MsEkhECf+lam4U3WBSIgImiri4AcLR8TZdXJPr4HWD8RlETCp4
+ HBpR6wEXgJOpIUgGybmDvn16VSf6m/8nAyoyEkdYgXAkkqhEWL9gDk9YbVGdJpR7SQYG
+ T9AVhAiLqo59rEi5+l52mwCPCAkqhHUHeLnS8QS4JRvn3R/k8EUCIemYXvq5jQ9KSgY0
+ YUeWSVX8cvvU5gFl8QES75cezYmiOe+PDQAn+ktJCPwTTkz4bjROR0dqIXPveKLyaDto
+ 0jpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWuemghDPd0yNfjO8g14nbW1jVmDcvGn3WFRUvFSjaSAVoGXkRhTL9FSTZmfyHTCmU8F5TyMWg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyi59aG8trYYOAC1/thtTDCrMV15Cv5/vP8kADDIsyhmuPLdZu+
+ fdptZw3UHXzjY1qJiBCuhsisCpLF53vb1grblziYu0MHXWVHyYOGHTOrYjzyfuqbIu3lxHTzy8G
+ FSBkjWuY=
+X-Gm-Gg: ASbGncttQVU2O18nFS5zIozrn9mG0EjE7qv+ZQe2ImfxbOdzEDnHwQJ+X7gQ9XbAtnI
+ FgBsqYbWOJSm7F7iaglpVW8teQYjrl14pzLEBxVal57OQu48UP3jvoIQhX16lK5IWXLH2OtErEA
+ G27bDadi0B65RNOIxrIukCoq3oQJUnjEyBMpJVeaowsAtG5F5cZxx258cepOyD3w/J0LrNbkb6q
+ pvpX9j4rDIpf0keXx3rsdK83ugw4qYheYNQkMEl79kU/df1hin2fH9EQF2pI2PcQdqk1bXBmue6
+ BPjBsv2Mo20rHbcsqCjtBYrP7pgN33vb1DZE/cgmagaC1K/GQOiwzeKYwHV+OJqS2ipOu5CX6cv
+ 6M9fXG3ZktFXZa6vAca8lFXsDqCDzg65DmMPVEPhIl2YYEcBnod4YgsjCL0EGZt61V0gaNzEi7B
+ 4rCKNb/aT4ncIBFdW5teAs6qjsPoydwZJnhAiw3g==
+X-Google-Smtp-Source: AGHT+IF7vNRNOPlPP8uAxzvIXi1A3hBReEw1hQ4yKFrApqj/LoQnZFbrOFWiyNV1vujIpO6krKRlBQ==
+X-Received: by 2002:a05:6830:d8d:b0:7af:1d61:1055 with SMTP id
+ 46e09a7af769-7c0df784309mr19185845a34.21.1760569048583; 
+ Wed, 15 Oct 2025 15:57:28 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c0f911af78sm5774854a34.29.2025.10.15.15.57.26
+ 46e09a7af769-7c0f911af78sm5774854a34.29.2025.10.15.15.57.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 15:57:26 -0700 (PDT)
+ Wed, 15 Oct 2025 15:57:27 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20251006-test_main-v1-1-51954a6e9ba6@linaro.org>
-References: <20251006-test_main-v1-1-51954a6e9ba6@linaro.org>
-Subject: Re: [PATCH] test: Remove not needed null check
-Message-Id: <176056904603.760819.5881670306598571688.b4-ty@konsulko.com>
-Date: Wed, 15 Oct 2025 16:57:26 -0600
+To: Nishanth Menon <nm@ti.com>, Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Bryan Brattlof <bb@ti.com>, 
+ Andrew Davis <afd@ti.com>, Anshul Dalal <anshuld@ti.com>, 
+ Vaishnav Achath <vaishnav.a@ti.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
+In-Reply-To: <20251006154825.1557055-1-ernest.vanhoecke@toradex.com>
+References: <20251006154825.1557055-1-ernest.vanhoecke@toradex.com>
+Subject: Re: [PATCH v1] arm: dts: k3-am62p-verdin: migrate to OF_UPSTREAM
+Message-Id: <176056904717.760819.3985290306321734166.b4-ty@konsulko.com>
+Date: Wed, 15 Oct 2025 16:57:27 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,21 +103,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 06 Oct 2025 11:54:56 +0100, Andrew Goodbody wrote:
+On Mon, 06 Oct 2025 17:48:20 +0200, Ernest Van Hoecke wrote:
 
-> In ut_report() there is a null check for stats but stats was already
-> dereferenced on the line before and is again dereferenced later in the
-> same function. Also the two places where ut_report() is called from will
-> have initialised the parameter so there is no chance that stats will be
-> null. So to prevent static analysis complaining of a use before check
-> just remove the check.
+> Enable CONFIG_OF_UPSTREAM to receive automatic
+> device tree updates for the Verdin AM62P.
+> 
+> Remove the now-obsolete device tree files:
+> - k3-am62p-verdin.dtsi
+> - k3-am62p-verdin-dev.dtsi
+> - k3-am62p-verdin-wifi.dtsi
+> - k3-am62p5-verdin-wifi-dev.dts
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] test: Remove not needed null check
-      commit: aebf3a98bffa80c3e8f38f3a768bcd78ccbf401a
+[1/1] arm: dts: k3-am62p-verdin: migrate to OF_UPSTREAM
+      commit: 77d11d2f7a374c23a0cbf81a98760c9e7613317e
 -- 
 Tom
 
