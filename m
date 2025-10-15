@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2928DCCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:58:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FA93CCD194
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F5E8838E7;
+	by phobos.denx.de (Postfix) with ESMTP id 94D85838EF;
 	Wed, 15 Oct 2025 17:55:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ReucQ6fB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jYaMHKlF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31D2B835B0; Wed, 15 Oct 2025 16:33:07 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 209DD8323A; Wed, 15 Oct 2025 16:33:10 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 49AD48313B
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:33:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 169868357F
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:33:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-46e2e6a708fso41589775e9.0
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:33:05 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-46e33b260b9so53838055e9.2
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:33:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538785; x=1761143585; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1760538786; x=1761143586; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=9oGBD9zwxOILT7ohOlit8rFNmou7uiQ/OKULCO/97Qk=;
- b=ReucQ6fBrSxL70tmjRqdQgo7YZOJRaA1v3EkwWBITjKDwx2Yd/gNdP50W0hLHIVKam
- pvaN13uPFp8c4AH4KBxnL9zgnUSzkHqy8Sy4FNs0QYT1AVPWH3ONeb+XRctfJpokpUTt
- 8IrnInM+Jmym+JzknwLu9mYCNfBs252n/Qfo4a1tnQH52xuWkCr1HO21JIw0vtCY55vU
- Hg3Dy9g3Q38uEgw03nbNbpeoQqcnMoeBxE/WYFT/aCI1TRQUogp0FxJZC5uExXZGQrjX
- OuDSMyLlSQ4g7HyRo7njRbXPO5Qoq6lrW2wkRvfyK968trZg0/kYoSuGg7oawfHdqvGs
- tryQ==
+ :reply-to; bh=ZtjuoaIn0U4yu07uuoXlyfcO+nTQuUSRN4E068cr5Lo=;
+ b=jYaMHKlFbb/QDm7BBTGaat/dZ8ATL1Fty+HrS3+tYtjv9Wlr0qXIgqb8njPcZ5YERR
+ 8zqKbfvK5ruoQVt874TeHhYGnvoZ0Q6c+KcoiK7d+fjPi4MtqAKwfz6wno7V7rf0XYWn
+ /W8lf/UmU2cjG7CTnlXZaN3CGfHGxV/4wl71Qb/FHbVH+ZEjH+TOPZqT4eQD0mM0+wcY
+ wuaqj1oUTZMJ8ClAO5doBkCtBZT705ZgOOG5gCN996kUMiz95/jaZTxmLw0MYNJWGVoi
+ 40NCZjrXXrV1ttM83URR/YdAiBtYMGqcKplaccz+pgvy84dh+GuvpbttTWUPmPCb758h
+ iN+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538785; x=1761143585;
+ d=1e100.net; s=20230601; t=1760538786; x=1761143586;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9oGBD9zwxOILT7ohOlit8rFNmou7uiQ/OKULCO/97Qk=;
- b=e/zKctF0+Ch5uxNUlH+z8x6UgGMs6bk6oYnZoB0Y7/Um1gkHcjnDZnBHau7FWwXGOi
- umygzElC8+DfwLVU9HJRkB1trh6zt/bpDcNcxTiDcbsGtgUhP7WSYwAxr536mcrAWn9f
- erV4TnCZzJvrjZv7/Oz4j6hItqS4+sX/mNx2xNbx78MhxhrbZk7qTH8Ri+XrELxYhtGd
- hGTUMe8P7uZqrL2eBhf5W1evPzmBuM7YhBe+/vZnmHj7LTSBnhqgFY35ek1CYZjp4UfW
- UQLGQE84HkAwZhH6WMYe+1Dc/F/QkYmJ4HhC4tLRBTb9NwkCgH4o4aNiFz+tV69hyHl9
- dlIA==
+ bh=ZtjuoaIn0U4yu07uuoXlyfcO+nTQuUSRN4E068cr5Lo=;
+ b=u1Iti5ZPHvTXg5bGlI4Zpk/p4hsomV7AQsbfnK/mRZgE99Rq44Q7HViEzKJKCGB17/
+ zTXdx2kiUfM97BUmRyRoqe05u/QslD1o5Sd73M5j5CZAUMS5Blrbw4T3o/pCuyOueLG9
+ Z7r+HXme3qKOUIgickDMlfMPnrxFQb8KbCjDkcCVWXdJLgtekNJbJuyV/bK2x/KWTYIL
+ ST8en20HJ0aE9CZ+402vrXfMA/vuBToLYXTI80RbiUW/KWvBC0XU8UxWJyBJZ17O017p
+ F0Lm7S1BCRCQxoz3smF5ktHLUe56TLauJBboEML0VJz0npakU0xnnTy3C0mYWSkZ/SYV
+ QGaQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvoNT32TMIjNUDFJ3Ke75W5Aw8JOCH0U//pvewSDtoWkMOG0Hr4laZdJbpY7hlMRHaunnuvpE=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywy8uqt4ppC7lVCF8iRBYP7v8uUrCpNSdlXsha82YHUpbzpXwgT
- jJxYqwMv0NlU9SrygaNMj6zNgulO3WeLKnu+d4mUDrxOLXxKN3fGmM7Na1PvgPH0rGs=
-X-Gm-Gg: ASbGnctwyCv3XPca0dTY5hxmnA+/vZN6BBEUqLkfMq1FMRtuDi0YezMnKPHg9oxwHuV
- LFHlB0IXHM8PvXEwzCxLwViN7CrYbVmdqntSGsWYEc6X2hafB/U6N7lNftvUr5tJddFyNMgq9vu
- vr0F4Hni6RYBYEOluyj6XMSxYcMdv+VgzfI8+IiiTcKvHhSBrWcwvvhxiDFcrwfq9eYfXoB87Vc
- RybLBUY0UApTSU1F3xlHw8hYfKJo1RkH4jA/esHBTtG2zg/u8tITKAabCCuT/+MmnzQg5rku4RG
- HQdFt2FsY4ikDZK2UG/PpRoIwPGo1TS3lIC8cHCFuJ/D/zMdCkhURRTYT9nQtxt8k/MxhY7oSbW
- j4yyDEwSev7j8rs/xcVs2fy8IAWW+WlmP472byNSioGa7oiwt80hKGfAFLLhmnoWtV53b1n991f
- 2VOTG1plTb
-X-Google-Smtp-Source: AGHT+IE+IxqzwB48mSjhb1Y0a03IfJLfxUFd+QgEaBnvgBt5TnjYffDJ96Xtz+ZB/k7CHTuEUm6mfQ==
-X-Received: by 2002:a05:600c:37cc:b0:46f:b42e:edcf with SMTP id
- 5b1f17b1804b1-46fb42eee39mr141973725e9.40.1760538784542; 
- Wed, 15 Oct 2025 07:33:04 -0700 (PDT)
+ AJvYcCVa8MRYhiNW2Pbcl080JRngVF5IrRCmYKAlFA9VJIRMZphP67rN7AUYfIvykTh3L+ducK6wpIY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzZJuAV/ztfELk6j0jnFjw5ieJ4WgRkeqqg+hcrIU9pj4LZNXV2
+ YVxYfD8S404u6H3aSjQM+mW67sW9dqJaXqVA8t6xyv5OkvhegwpCJuoeLMmG9fAbzeI=
+X-Gm-Gg: ASbGncuY3qeaYS7Sp1nWXznb3yjazash61fVGqMG9ws6tblv8DFRFg3KFhT5UbGJAW/
+ RKIeKzSSAhNiTSLFxDjIj1xrVp0hunL1ogTDQ+0zRuYpikOw3G7kTcjfviqgPlyExJLNxp4rIQ1
+ dkqByq3scbsgKGmZoXlJ5XCdzipn1yu7gq1lLijsifFGpGZGh7lFJyUB3tcVP/+DywoXUiCCYR6
+ hBxAvakuU4j9soYlxgkcbTbIuWg3Z3jstbFFsJwG6zG2siEuvWQ75saji+pKP2zGYsrxYr9cnuq
+ /ihtWgTJ7Jexq8l/cQEbrm2Zyym380HxzI6Khpy974NRUZtm+hk5/NMm4o2JDdA7SSwn6V+PUfH
+ ZwZABrATfRG7HNzObBeciUBMyEwhMa5vvLFbDjM9k61rWJYIom1j1G+rTa7OC4GVPZfG/jVn26w
+ ==
+X-Google-Smtp-Source: AGHT+IEdszMazYCX1mfKMEp6V/yCkwDB7tZvnNIFm4qDr/MLX7UV5zEV1LJQ9klORTW5GZniNL68Yg==
+X-Received: by 2002:a05:600c:c16d:b0:46e:36ba:9253 with SMTP id
+ 5b1f17b1804b1-46fa9aa1d5fmr225175385e9.15.1760538786474; 
+ Wed, 15 Oct 2025 07:33:06 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.33.02
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.33.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:33:04 -0700 (PDT)
+ Wed, 15 Oct 2025 07:33:05 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:27 +0100
-Subject: [PATCH 22/24] clk: sophgo: Remove negative error returns from
+Date: Wed, 15 Oct 2025 15:32:28 +0100
+Subject: [PATCH 23/24] clk: stm32: Remove negative error returns from
  clk_get_rate
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251015-clk_ops-v1-22-5f80f827407e@linaro.org>
+Message-Id: <20251015-clk_ops-v1-23-5f80f827407e@linaro.org>
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
@@ -158,22 +158,82 @@ codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/clk/sophgo/clk-cv1800b.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/stm32/clk-stm32-core.c | 4 ++--
+ drivers/clk/stm32/clk-stm32f.c     | 6 +++---
+ drivers/clk/stm32/clk-stm32h7.c    | 4 ++--
+ 3 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/clk/sophgo/clk-cv1800b.c b/drivers/clk/sophgo/clk-cv1800b.c
-index d946ea57a460ab223f89a79504f6c1d01f7c39f9..44f1cb36ba76294586d0075d575ccdddefd59cbd 100644
---- a/drivers/clk/sophgo/clk-cv1800b.c
-+++ b/drivers/clk/sophgo/clk-cv1800b.c
-@@ -704,7 +704,7 @@ static ulong cv1800b_clk_get_rate(struct clk *clk)
- 	int err = clk_get_by_id(CV1800B_CLK_ID_TRANSFORM(clk->id), &c);
+diff --git a/drivers/clk/stm32/clk-stm32-core.c b/drivers/clk/stm32/clk-stm32-core.c
+index 858f122db1a6db02eadc110a7b3e14192654d8ff..5220d49d4206808734f9838d3e55298cf6b163ab 100644
+--- a/drivers/clk/stm32/clk-stm32-core.c
++++ b/drivers/clk/stm32/clk-stm32-core.c
+@@ -106,11 +106,11 @@ static ulong stm32_clk_get_rate(struct clk *clk)
+ 	struct clk *c = NULL;
  
- 	if (err)
--		return err;
+ 	if (!clk->id || clk_get_by_id(clk->id, &c))
+-		return -ENOENT;
 +		return 0;
- 	return clk_get_rate(c);
+ 
+ 	ops = clk_dev_ops(c->dev);
+ 	if (!ops->get_rate)
+-		return -ENOSYS;
++		return 0;
+ 
+ 	return ops->get_rate(c);
+ }
+diff --git a/drivers/clk/stm32/clk-stm32f.c b/drivers/clk/stm32/clk-stm32f.c
+index fceb3c44b94e4e4f5249ff1bc99c7ae4adba4316..db64139d13d4b3fff74838d9e14ae6c5e61c7941 100644
+--- a/drivers/clk/stm32/clk-stm32f.c
++++ b/drivers/clk/stm32/clk-stm32f.c
+@@ -310,7 +310,7 @@ static unsigned long stm32_clk_get_pllsai_rate(struct stm32_clk *priv,
+ 		break;
+ 	default:
+ 		log_err("incorrect PLLSAI output %d\n", output);
+-		return -EINVAL;
++		return 0;
+ 	}
+ 
+ 	return (stm32_clk_get_pllsai_vco_rate(priv) / pll_div_output);
+@@ -414,7 +414,7 @@ static ulong stm32_clk_get_rate(struct clk *clk)
+ 		vco = (priv->hse_rate / pllm) * plln;
+ 		sysclk = vco / pllp;
+ 	} else {
+-		return -EINVAL;
++		return 0;
+ 	}
+ 
+ 	switch (clk->id) {
+@@ -491,7 +491,7 @@ static ulong stm32_clk_get_rate(struct clk *clk)
+ 
+ 	default:
+ 		dev_err(clk->dev, "clock index %ld out of range\n", clk->id);
+-		return -EINVAL;
++		return 0;
+ 	}
  }
  
+diff --git a/drivers/clk/stm32/clk-stm32h7.c b/drivers/clk/stm32/clk-stm32h7.c
+index df82db69738a5d9704592d5cdbec52125c0620a1..eb8fb72976b60c8016408693631470a0e369e8cb 100644
+--- a/drivers/clk/stm32/clk-stm32h7.c
++++ b/drivers/clk/stm32/clk-stm32h7.c
+@@ -573,7 +573,7 @@ static u32 stm32_get_PLL1_rate(struct stm32_rcc_regs *regs,
+ 		break;
+ 	}
+ 
+-	return -EINVAL;
++	return 0;
+ }
+ 
+ static u32 stm32_get_apb_psc(struct stm32_rcc_regs *regs, enum apb apb)
+@@ -780,7 +780,7 @@ static ulong stm32_clk_get_rate(struct clk *clk)
+ 	default:
+ 		dev_err(clk->dev, "unexpected gate_offset value (0x%x)\n",
+ 			gate_offset);
+-		return -EINVAL;
++		return 0;
+ 		break;
+ 	}
+ }
 
 -- 
 2.47.3
