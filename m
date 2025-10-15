@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E17ECCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:55:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B13ECCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B8FB835D0;
+	by phobos.denx.de (Postfix) with ESMTP id AC48083621;
 	Wed, 15 Oct 2025 17:55:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PLOMpFnZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GqCpDH+o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59652834D4; Wed, 15 Oct 2025 16:32:26 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id B42B9835C6; Wed, 15 Oct 2025 16:32:29 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 335A48357F
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:32:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EC31834D4
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:32:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-3ee1221ceaaso5506216f8f.3
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:32:24 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-46e52279279so48282785e9.3
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:32:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538743; x=1761143543; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1760538747; x=1761143547; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ma2chDb3vOw+DvVL+Elh8yWCMC9/MPlr8PtTT73X6dU=;
- b=PLOMpFnZWh/V2Wx3COVoiFL5ImdGTkbX6CzGDGQLzUFy+eVq3YvKpRQOeLmHt9vlHn
- F6vii8c85L5qdu8QNmwfDV33MVBZYuppA9S4jyGyPuZ6SQm2cve3WxqX3FGOK7wgf23F
- v/moWSNqihLCf5btGHo7g6OxOIiicC54lIHs+9rIl9M4Wn+2bR5bHMkENQjIhuCU0nY6
- v8IvdoL7wcWXQBd5q98amiRJZFKnPruDfIIwTh9zq22y9KZIRen2pwIEVhO/umpMVuDQ
- yszClXf+6xSCzWIMMhNvpt4ONIAFyp/NxjArRnWPBZAWmLrA2HQeI8px8KCaP9f7UEGo
- L+Xg==
+ :reply-to; bh=MbJGyCPupNXvdaZuspymNgL6rmLyPY5BcTTejfTvzn4=;
+ b=GqCpDH+o0Nt5KSS7JOzkc/Flt/2dPPeQF4bLv7rhgneBO1EtmEgCdqgfTOHehPwm3k
+ ECQb480qBBjpMz/0KKgGi+zmqu5OaxmzdoW0zeGFrMwFwdUHflIq8mYea583cHQ9ggKB
+ LaEEgLBOxjtFBJTsvybQRGoxL2UtJqohJO37p1KRJl4sHP2HUe4HWjbwmq3oecMlMwQE
+ eW6hOSxbP3F6TrP13Mmx8DvdeE981NAPo0kopOwVj0uqDmPsQENkZpjU8aoDT0YjcvCj
+ 8YRCUBQQO0FUkO88X7ymB/svRxIdQl9Xvoo0C99gUL1wYk3GgQBFu2xhm1+U4q+VB6jm
+ n2lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538743; x=1761143543;
+ d=1e100.net; s=20230601; t=1760538747; x=1761143547;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ma2chDb3vOw+DvVL+Elh8yWCMC9/MPlr8PtTT73X6dU=;
- b=elSGTPWNjlELyiWn33ksTMojERnT3nRXpkC4kmK/6jk4/TEbd4PLsGvZP/Afoi2POc
- oAQU/2I6s0+gVCIF68SYIHRfotWzDd5Vpo5mAwvU2OS4Gs5eSkxGuz0//k3FzBZTN64H
- BHiWyHeCRZVV2h9PnedkITIrcHy5QQw+9WPMi4i3NMGjPNQlStl/IWdtBRwjJAJNtmhg
- +c3fNUrBJ0Lq81MMrYxhOpNS7n50u4xhnQW4rc1vYssT5Q266UDyo72764jjGfBWPOam
- A4Ab7GXSsFLSFU8iB47TLbAS3k+0klpOJwOvuvID3i9aZRfMP14opzGPNb8aplZm+luB
- 9FQQ==
+ bh=MbJGyCPupNXvdaZuspymNgL6rmLyPY5BcTTejfTvzn4=;
+ b=wXDEqV038fmUfMzg/k8okeoMoaWsybSI2rrOw2IRYXu8hp7uevBbIE2fqp6cR3T3GD
+ /T2ofVI3QiF8E2SY8bNSvhbxLMDi8w8mQZqEgmwBQc0tHaclogE/lC7tqcd9savFn/Lz
+ BdZR3JA+C97FyrswsUNrla9Sjg1gSAqH1yrFiWb+K/iFhJGD2r464GtSO4F4532tNT/0
+ GjpKzOAX/GMAUOPItZG4CiuNGt6S5cnc/l9guWQzUWOq8BD3bG1aZ0YSKGLfGOKCeIeT
+ uiuikp+nM2CC4XFIztXaK6pd9Oa57R9waRJEU3/2K0oHw1pQ1yBW5vn+yB9jutwTgZmP
+ AUzw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXoUe8fmnP+dlNcbWxy/TMesSD8Ony3QxbwwryZJq6NT1OYOHZ3wBOIRBt6WDGIw/LgkmbkWZc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwiKLXNEG79WGOwY+AMV5b1jYZ1jjM9RxMTioAv0upWAUecJ05z
- MF6wkylIfX7H1YTAlmszl2V/9i3iQzDiC+KaCfPlDfY9abdU76MVsbGREpSPKlllJeg=
-X-Gm-Gg: ASbGncse6hTUnPIP7WSMIti6FWJB2lMgHfsV1RfkwOqXwmEicoq/+7fPJ9ydVjOoizU
- o1HrGYcxxzDqYnLlTLtErUthvBNq8QeO/UTXKCEAVGIswVDV9PgFUhRjhSqOncTl2cCMwPgBdP4
- CUDSppOz8A2r4JPJQimCStzMMOHjmUYRy9uJN2AH0fMLl9S8W51/Jy6icaL9QCa5hrPsnhHBj7E
- L05a0rgYqO0V8lB8DuSJiJmcctCaEldNFy8zusdcSnv+g5USYUAj7nj4UEwRqCzJvbEk7TQv917
- ZXcTsOW+4Unesc0Ng0GdnNabaLfWjpoiAi3PmsPh5bKoAUdYd+Nh+jc1BUlTmL350uqAcCBf0hg
- bx6NXaT6lNGianVQ4Bh4ciyQxv1Iq4+CCmWUsK7KCG15O7NgIdAY0otvXe/DiL3zWCKXWncsg7a
- NvU9H9cUzj
-X-Google-Smtp-Source: AGHT+IFxJ3tdTc9aXKyMZ7CBIzLF8xRR3KpTVUPPFRVIzybF4VytlYoKR7kxxnTeR6BEG36njzF8Fw==
-X-Received: by 2002:a05:6000:601:b0:426:d80c:2759 with SMTP id
- ffacd0b85a97d-426d80c2f3amr10817335f8f.25.1760538743325; 
- Wed, 15 Oct 2025 07:32:23 -0700 (PDT)
+ AJvYcCVLqZC8iuxYyuouQSw04TlnkGeYQjse6EH8Fn/vaDPSOwFBTP0FJtmQoMjshsgOHAmh/kyY+Ro=@lists.denx.de
+X-Gm-Message-State: AOJu0YxBayGPlpig/df2ASEmhTpPvGXsDe8ZmKCVop9xOrhHIowchM1e
+ sdp1lbbqz1lkrNw+jNiDK7xPmNASrmWBM9243uuo5EuWcSiIGMj9ReqyQqlY1DMahto=
+X-Gm-Gg: ASbGncvkDmaxj/XG264wfExnIFcMz3DV2s9exaN/tIPrpxnMzAmU7G+LGJFBEyILvMf
+ oVW3SWiWlcWAyiLPFgrlXbv9OVfB+NtWo0t464kTAlHzwbII4WpQJ+e1LcQlZMnNFjJbDpI5Sbh
+ 2jb/YxjzQwKuBsJQ16DIqL/mYf8m0cl9aY6DbnQSPb4uW7ntAeAtFlwY2omDcOWNbr/9gH/6Zta
+ QXi3Oshez6PgrqmWMD2V2JISfmXNy+tYwjdIHKcD0WFrjoEvmigozXTd3ztRwaPIsLfWgd2gZsy
+ NOX3jRWIlJKzQG3475vYWRfKWDhg6/T9toJLkXgoPuLN6G04aABNuyCB6Clyjino95tK6LgYWFX
+ 0AyaWbyFzFwo1Jvd/92HxFTYunBO8QdLc/UngyKeCkCi5Ld+U0HzqTsQsdIWZbKkwojsdKwKdS/
+ 6iS8WiENbd
+X-Google-Smtp-Source: AGHT+IGi5fNTGKvgaEXbnvfgUckaDznPDbpCkdyTHr9U1ivBHTEOZKwwP8TWWCIEcxcSc0ljuw95ww==
+X-Received: by 2002:a05:600d:d:b0:471:9da:5232 with SMTP id
+ 5b1f17b1804b1-47109da53bcmr1352065e9.15.1760538745360; 
+ Wed, 15 Oct 2025 07:32:25 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.21
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:32:22 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:24 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:06 +0100
-Subject: [PATCH 01/24] clk: meson: Remove negative error returns from
+Date: Wed, 15 Oct 2025 15:32:07 +0100
+Subject: [PATCH 02/24] clk: sifive: Remove negative error returns from
  clk_get_rate
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251015-clk_ops-v1-1-5f80f827407e@linaro.org>
+Message-Id: <20251015-clk_ops-v1-2-5f80f827407e@linaro.org>
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
@@ -158,299 +158,41 @@ codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/clk/meson/a1.c   | 10 +++++-----
- drivers/clk/meson/axg.c  | 10 +++++-----
- drivers/clk/meson/g12a.c | 36 ++++++++++++++++++------------------
- drivers/clk/meson/gxbb.c | 20 ++++++++++----------
- 4 files changed, 38 insertions(+), 38 deletions(-)
+ drivers/clk/sifive/sifive-prci.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-index a1b8d79149102183402f470a60511d5300d0232c..78cad13239ca174a30f88cb2b18191cea74d6248 100644
---- a/drivers/clk/meson/a1.c
-+++ b/drivers/clk/meson/a1.c
-@@ -359,7 +359,7 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
+diff --git a/drivers/clk/sifive/sifive-prci.c b/drivers/clk/sifive/sifive-prci.c
+index de55504b5c90785f8d5f1f66eb914847feb4a495..01fcc85ab23ff56886638cc0581b5389012de154 100644
+--- a/drivers/clk/sifive/sifive-prci.c
++++ b/drivers/clk/sifive/sifive-prci.c
+@@ -548,11 +548,11 @@ static ulong sifive_prci_parent_rate(struct __prci_clock *pc, struct prci_clk_de
+ 		}
  
- 	info = meson_clk_get_info(clk, id, MESON_CLK_DIV);
- 	if (IS_ERR(info))
--		return PTR_ERR(info);
-+		return 0;
- 
- 	/* Actual divider value is (field value + 1), hence the increment */
- 	n = GET_PARM_VALUE(priv, info->parm) + 1;
-@@ -402,7 +402,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
- 
- 	info = meson_clk_get_info(clk, id, MESON_CLK_ANY);
- 	if (IS_ERR(info))
--		return PTR_ERR(info);
-+		return 0;
- 
- 	pm = &info->parm[0];
- 	pn = &info->parm[1];
-@@ -411,7 +411,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
- 	m = GET_PARM_VALUE(priv, pm);
- 
- 	if (n == 0)
--		return -EINVAL;
-+		return 0;
- 
- 	parent = info->parents[0];
- 	parent_rate_mhz = meson_clk_get_rate_by_id(clk, parent) / 1000000;
-@@ -453,13 +453,13 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 
- 		ret = clk_get_by_name(clk->dev, info->name, &external_clk);
- 		if (ret)
--			return ret;
+ 		if (i >= data->num_clks)
+-			return -ENXIO;
 +			return 0;
  
- 		rate = clk_get_rate(&external_clk);
- 		break;
- 	}
- 	default:
--		rate = -EINVAL;
-+		rate = 0;
- 		break;
- 	}
- 
-diff --git a/drivers/clk/meson/axg.c b/drivers/clk/meson/axg.c
-index c421a622a587d2eddef70d28b65e560722cf7f62..e0b41811b0dfcc59f9a57366639ff2133209b697 100644
---- a/drivers/clk/meson/axg.c
-+++ b/drivers/clk/meson/axg.c
-@@ -104,7 +104,7 @@ static unsigned long meson_clk81_get_rate(struct clk *clk)
- 		parent_rate = XTAL_RATE;
- 		break;
- 	case 1:
--		return -ENOENT;
-+		return 0;
- 	default:
- 		parent_rate = meson_clk_get_rate_by_id(clk, parents[reg]);
- 	}
-@@ -123,7 +123,7 @@ static long mpll_rate_from_params(unsigned long parent_rate,
- 	unsigned long divisor = (SDM_DEN * n2) + sdm;
- 
- 	if (n2 < N2_MIN)
--		return -EINVAL;
-+		return 0;
- 
- 	return DIV_ROUND_UP_ULL((u64)parent_rate * SDM_DEN, divisor);
- }
-@@ -171,7 +171,7 @@ static ulong meson_mpll_get_rate(struct clk *clk, unsigned long id)
- 		pn2 = &meson_mpll2_parm[1];
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	parent_rate = meson_clk_get_rate_by_id(clk, CLKID_FIXED_PLL);
-@@ -219,7 +219,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
- 		pod = &meson_sys_pll_parm[2];
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	regmap_read(priv->map, pn->reg_off, &reg);
-@@ -272,7 +272,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 			rate = meson_clk81_get_rate(clk);
- 			break;
- 		}
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	debug("clock %lu has rate %lu\n", id, rate);
-diff --git a/drivers/clk/meson/g12a.c b/drivers/clk/meson/g12a.c
-index a7a42b2edb6a5b98612fb71fec6d17b1f3ab77c8..910b91e874bfdf6753ffc40bec7cd3a94e0b41ad 100644
---- a/drivers/clk/meson/g12a.c
-+++ b/drivers/clk/meson/g12a.c
-@@ -264,7 +264,7 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
- 		parent = meson_hdmi_div_parent;
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	regmap_read(priv->map, parm->reg_off, &reg);
-@@ -273,8 +273,8 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
- 	debug("%s: div of %ld is %d\n", __func__, id, reg + 1);
- 
- 	parent_rate = meson_clk_get_rate_by_id(clk, parent);
--	if (IS_ERR_VALUE(parent_rate))
--		return parent_rate;
-+	if (!parent_rate)
-+		return 0;
- 
- 	debug("%s: parent rate of %ld is %d\n", __func__, id, parent_rate);
- 
-@@ -323,12 +323,12 @@ static ulong meson_div_set_rate(struct clk *clk, unsigned long id, ulong rate,
- 		parent = meson_hdmi_div_parent;
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	parent_rate = meson_clk_get_rate_by_id(clk, parent);
--	if (IS_ERR_VALUE(parent_rate))
--		return parent_rate;
-+	if (!parent_rate)
-+		return 0;
- 
- 	debug("%s: parent rate of %ld is %ld\n", __func__, id, parent_rate);
- 
-@@ -348,15 +348,15 @@ static ulong meson_div_set_rate(struct clk *clk, unsigned long id, ulong rate,
- 			return ret;
- 
- 		parent_rate = meson_clk_get_rate_by_id(clk, parent);
--		if (IS_ERR_VALUE(parent_rate))
--			return parent_rate;
-+		if (!parent_rate)
+ 		p = &data->clks[i];
+ 		if (!p->pd || !p->ops->recalc_rate)
+-			return -ENXIO;
 +			return 0;
  
- 		new_div = DIV_ROUND_CLOSEST(parent_rate, rate);
- 
- 		debug("%s: new new div of %ld is %d\n", __func__, id, new_div);
- 
- 		if (!new_div || new_div > (1 << parm->width))
--			return -EINVAL;
-+			return 0;
+ 		return p->ops->recalc_rate(p, sifive_prci_parent_rate(p, data));
  	}
+@@ -572,11 +572,11 @@ static ulong sifive_prci_get_rate(struct clk *clk)
+ 		(struct prci_clk_desc *)dev_get_driver_data(clk->dev);
  
- 	debug("%s: setting div of %ld to %d\n", __func__, id, new_div);
-@@ -471,7 +471,7 @@ static ulong meson_mux_get_parent(struct clk *clk, unsigned long id)
- 		parents = meson_hdmi_mux_parents;
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	regmap_read(priv->map, parm->reg_off, &reg);
-@@ -560,8 +560,8 @@ static ulong meson_mux_get_rate(struct clk *clk, unsigned long id)
- {
- 	int parent = meson_mux_get_parent(clk, id);
- 
--	if (IS_ERR_VALUE(parent))
--		return parent;
-+	if (!parent)
+ 	if (data->num_clks <= clk->id)
+-		return -ENXIO;
 +		return 0;
  
- 	return meson_clk_get_rate_by_id(clk, parent);
+ 	pc = &data->clks[clk->id];
+ 	if (!pc->pd || !pc->ops->recalc_rate)
+-		return -ENXIO;
++		return 0;
+ 
+ 	return pc->ops->recalc_rate(pc, sifive_prci_parent_rate(pc, data));
  }
-@@ -588,7 +588,7 @@ static unsigned long meson_clk81_get_rate(struct clk *clk)
- 
- 	switch (reg) {
- 	case 1:
--		return -ENOENT;
-+		return 0;
- 	default:
- 		parent_rate = meson_clk_get_rate_by_id(clk, parents[reg]);
- 	}
-@@ -655,12 +655,12 @@ static ulong meson_mpll_get_rate(struct clk *clk, unsigned long id)
- 		pn2 = &meson_mpll2_parm[1];
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	parent_rate = meson_clk_get_rate_by_id(clk, CLKID_FIXED_PLL);
--	if (IS_ERR_VALUE(parent_rate))
--		return parent_rate;
-+	if (!parent_rate)
-+		return 0;
- 
- 	regmap_read(priv->map, psdm->reg_off, &reg);
- 	sdm = PARM_GET(psdm->width, psdm->shift, reg);
-@@ -711,7 +711,7 @@ static ulong meson_pll_get_rate(struct clk *clk, unsigned long id)
- 		pod = &meson_sys_pll_parm[2];
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	regmap_read(priv->map, pn->reg_off, &reg);
-@@ -851,7 +851,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 			rate = meson_clk81_get_rate(clk);
- 			break;
- 		}
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	debug("clock %lu has rate %lu\n", id, rate);
-diff --git a/drivers/clk/meson/gxbb.c b/drivers/clk/meson/gxbb.c
-index 51f124869c9c4043dfe047cf2f694bf59df7e87f..6dcfd084b8f93ade3fe1270db48f91f87cb61d26 100644
---- a/drivers/clk/meson/gxbb.c
-+++ b/drivers/clk/meson/gxbb.c
-@@ -306,7 +306,7 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
- 		parent = meson_hdmi_div_parent;
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	regmap_read(priv->map, parm->reg_off, &reg);
-@@ -315,8 +315,8 @@ static ulong meson_div_get_rate(struct clk *clk, unsigned long id)
- 	debug("%s: div of %ld is %d\n", __func__, id, reg + 1);
- 
- 	parent_rate = meson_clk_get_rate_by_id(clk, parent);
--	if (IS_ERR_VALUE(parent_rate))
--		return parent_rate;
-+	if (!parent_rate)
-+		return 0;
- 
- 	debug("%s: parent rate of %ld is %d\n", __func__, id, parent_rate);
- 
-@@ -596,8 +596,8 @@ static ulong meson_mux_get_rate(struct clk *clk, unsigned long id)
- {
- 	int parent = meson_mux_get_parent(clk, id);
- 
--	if (IS_ERR_VALUE(parent))
--		return parent;
-+	if (parent < 0)
-+		return 0;
- 
- 	return meson_clk_get_rate_by_id(clk, parent);
- }
-@@ -627,7 +627,7 @@ static unsigned long meson_clk81_get_rate(struct clk *clk)
- 		parent_rate = XTAL_RATE;
- 		break;
- 	case 1:
--		return -ENOENT;
-+		return 0;
- 	default:
- 		parent_rate = meson_clk_get_rate_by_id(clk, parents[reg]);
- 	}
-@@ -695,12 +695,12 @@ static ulong meson_mpll_get_rate(struct clk *clk, unsigned long id)
- 		pn2 = &meson_mpll2_parm[1];
- 		break;
- 	default:
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	parent_rate = meson_clk_get_rate_by_id(clk, CLKID_FIXED_PLL);
--	if (IS_ERR_VALUE(parent_rate))
--		return parent_rate;
-+	if (!parent_rate)
-+		return 0;
- 
- 	regmap_read(priv->map, psdm->reg_off, &reg);
- 	sdm = PARM_GET(psdm->width, psdm->shift, reg);
-@@ -833,7 +833,7 @@ static ulong meson_clk_get_rate_by_id(struct clk *clk, unsigned long id)
- 			rate = meson_clk81_get_rate(clk);
- 			break;
- 		}
--		return -ENOENT;
-+		return 0;
- 	}
- 
- 	debug("clock %lu has rate %lu\n", id, rate);
 
 -- 
 2.47.3
