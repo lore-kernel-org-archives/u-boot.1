@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B741CCD194
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 16:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC948CCD194
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 16:26:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C54AD836A4;
-	Wed, 15 Oct 2025 18:26:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 144DB833F6;
+	Wed, 15 Oct 2025 18:26:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="kU9Pc4Lm";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="GJtNgrKY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85E67835C6; Wed, 15 Oct 2025 18:26:17 +0200 (CEST)
-Received: from out-177.mta1.migadu.com (out-177.mta1.migadu.com
- [95.215.58.177])
+ id 07DD88357F; Wed, 15 Oct 2025 18:26:18 +0200 (CEST)
+Received: from out-171.mta1.migadu.com (out-171.mta1.migadu.com
+ [95.215.58.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 302118357F
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 18:26:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F32D835FD
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 18:26:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
@@ -29,24 +29,24 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1760545571;
+ s=key1; t=1760545574;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6oTenigJiI1JMHrHt+j/9TUNy9ElkH/GDaShU1g6fw0=;
- b=kU9Pc4LmQOE1yJIUl2k/QM/k37VH0E9IKpd6/BWtat0reAPMKFXKfbzlJGutm+h1tv4R4t
- GdMrG81peSULlH033L9hA+UOQSPdok2JKMGZKVE86b//dH1ApHx2QCf+NQ57GJdojHRRGg
- pkxxtwogI2+u8PfZrYns1qYZCcfx8r5j4jJVtUrjpqquHxSLZtFBRN/7xLi/DNl9Zvc5CF
- a2mrNFDmax3GG0HM0+r/AZgxk61hfy3xXJceEQEF8hf7Qw/Jmqb+1uogymP5JuO+ABZOjV
- 9tSST/gqvahRGCueKbasCraMdT4y5II02aYHpwGMIgZAeXGA6mdqL3mBpcYqsw==
+ bh=HyQz32oOUlTirdd48M9uTg66CKM7d5olHzLLn8PBFJI=;
+ b=GJtNgrKYxk0Ms21PC5IcN01xmUud1JAD4mrhMixgUhRffpyQw1WLG8tI01R7Fi3GZKrF5b
+ ZFv2XnFiCQJWNbXNpOOkcB0SSOZKP8vR8KknFm9sht9mjMoMAIESsFEC0pLGONDP/OIWY6
+ B4YMJR2H1JgEZbeUI8PS3ZYqLX1lftoObg5qdH3/jBrZNPKY/h2gj83v4TGGCKzhkkVSis
+ AHUoX9q4B+/MqZMsodiX7zO7qql+xnBd8/E52ZnRnyz5TJA1KRdqOgwpH3mfskC0YAR+ab
+ cKxpc/Y7To8klgxl84ZZAzJjW3jNCLrBHRXw8N2fyQymyp92+0gdcYX8GfP2zQ==
 From: Ferass El Hafidi <funderscore@postmarketos.org>
-Date: Wed, 15 Oct 2025 16:25:48 +0000
-Subject: [PATCH v4 1/8] tools: mkimage: Add Amlogic Boot Image type
+Date: Wed, 15 Oct 2025 16:25:51 +0000
+Subject: [PATCH v4 4/8] arm: meson: initial u-boot SPL support for GX SoCs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251015-spl-gx-v4-1-f5d7fe03225b@postmarketos.org>
+Message-Id: <20251015-spl-gx-v4-4-f5d7fe03225b@postmarketos.org>
 References: <20251015-spl-gx-v4-0-f5d7fe03225b@postmarketos.org>
 In-Reply-To: <20251015-spl-gx-v4-0-f5d7fe03225b@postmarketos.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -57,21 +57,21 @@ Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de, u-boot-amlogic@groups.io, 
  ~postmarketos/upstreaming@lists.sr.ht, 
  Ferass El Hafidi <funderscore@postmarketos.org>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10862;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=20942;
  i=funderscore@postmarketos.org; h=from:subject:message-id;
- bh=f4IcBu4xiLrscVdNFjCp18/IIPJlcqatNyglggzTdyI=;
- b=owEBbQKS/ZANAwAKAYSvy9DXiZoDAcsmYgBo78sdOXBumow54O3dH584T1bfyYeA9ruluz0eg
- qo7UGNIcimJAjMEAAEKAB0WIQQDAbw3+1VcrP15i+6Er8vQ14maAwUCaO/LHQAKCRCEr8vQ14ma
- A4fOEACcFGmJjsh8r7gCW//Z0gKUTj4X5DdtUICLX4GkKgEkPDeKBmJMAi4j4jxnmiKAyPZ5W+B
- sQpIlOJExwybJryw1rDwdhYxE8EO3s9+fxKYhLPlyEN9J4CWm8E6rsgJdOUGSFQidbEgd+dY/va
- JcT1rT7iNSsRF3akTFuHJGQKDdF7RRZyDFNZsj78Z5b41xJUx/P6/C7Vf6QQIoDM3NwB7Kff2Pw
- WirrIqu2tCm9b7FJzOzW28VErdbgQMpGnsjqOIvEsaQKvpuvtLLuqklbcupzkFlY8FYHu0vgM40
- s5jtLApedgsy11dZ2s9A01nCUIjhdXAh3SpWgirGrI0KojDMAiJi6yuYI6hLO0EUWIkD+l2qTSy
- iWmILJjORMYTQ0hraHeQSrFe0Q8O8cCL6ieQAa0X7n1SthXlTHgRqK0OGbwhClFOfasxaUEnCN7
- htKH335QkOMR+R5ED+KfiXXXhSdPreoNRrYP+zczbDfWZDR4/OycjfeCFp+SNkxRBstUts2JVXF
- p9/UYux10f+EEjShezjQ39gQ+bCOUJnFm2Qdqeq6f1Ndc1LWRjhrWDIDC/dVsxS/o4TB0PNQ1az
- gN+8k749ZFUXUgCcBI87tkb2Bxf6uFvEswOkamHxgEfw3riDLrgUj+rE2Y/cPzdwiHeNPoiA+s/
- cltMGJPFGZZjKhw==
+ bh=xyUWfAfJeIkL2qglMrVS6P9vfb340VN/V/pzPdnamHk=;
+ b=kA0DAAoBhK/L0NeJmgMByyZiAGjvyx6hUFPkUUJfPo41Rt+iLFoIIzpOmjojjPC6UNa0N57t8
+ okCMwQAAQoAHRYhBAMBvDf7VVys/XmL7oSvy9DXiZoDBQJo78seAAoJEISvy9DXiZoDOG4QAI8p
+ jO4ajhzAHP/g0owpmRD+a3fbIQPHW3Xu9AkfH/jI0UhvhDsbyTQCXqamMFhD/gDdkz6sv2+JX3H
+ WzstmQtJwfOp3gughS26YUXyKWL4ZqSuvL7+kJZqytqsuVot5VQRUuxjC6CpvIHzpl2/6EUca3t
+ YEkxxuwxz7EHuck6W5lzDdS2tT8ty80MrAlkjtz2soNo5ytWSkX9JtzQLzNSRrFVtDe0Mo1GOj/
+ c/h12OuwqAmNijosr3i+7DZvPEHaCw2ogeVYvY2ryIMlmsx3558/OtMA1JjR25qnaYENxBPhl2C
+ tjsnUuiPoZ2dKs6kha1SNnNjS3AJ1a69GAhtOlYB9WfUBDMPxq9RIfcgtqivUGZKMcr/DGM6j3g
+ SSwTA16YsZVTMuW1vj4YPK9xdeCBKhOD5BISWs+Ldt88ahYdGYLPWtW7pWpefeA40v/DV2d2Ivv
+ pGpp4BwHM09Bsec9AJqBtdG+sIHSfSZ3eo73SRGc9L2R89ijiB91RYuC5rJ3fpXIqKfzQHYOySk
+ P1qG6fa+H0ZqSHcRRMTJjwwHuHR1dJXjZmxhdc3OvupBavJZIp1+k+aneWFzGuMPIvLcn6IbInY
+ 3t53zpiyq6zXIErvyw/Rpx5m5l2sJi3QZ0HkohdXpuO9nGaj2OsJ3flB2oJ6FDlaY892fRvxeiK
+ PibQ8
 X-Developer-Key: i=funderscore@postmarketos.org; a=openpgp;
  fpr=0301BC37FB555CACFD798BEE84AFCBD0D7899A03
 X-Migadu-Flow: FLOW_OUT
@@ -91,361 +91,702 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jonas Karlman <jonas@kwiboo.se>
-
-Add support for creating an Amlogic Boot Image that pass CHK in BL1 on
-Amlogic AArch64 SoCs.
-
-Images can optionally be signed for secure boot scenario, however
-creation of signed images has not been implemented.
-
-Example of how to use it:
-  # Create an amlogic boot image
-  tools/mkimage -T amlimage -n gxbb -d u-boot-spl.bin u-boot-amlogic.bin
-
-  # List boot image header information
-  tools/mkimage -l u-boot-amlogic.bin
-
-  # Extract amlogic boot image payload
-  tools/dumpimage -T amlimage -o bl2-payload.bin u-boot-amlogic.bin
-
-Or with binman using something like:
-  binman {
-	u-boot-amlogic {
-		filename = "u-boot-amlogic.bin";
-		pad-byte = <0xff>;
-
-		mkimage {
-			filename = "bl2.bin";
-			args = "-n", "gxbb", "-T", "amlimage";
-
-			u-boot-spl {
-			};
-		};
-	};
-  };
+Add initial boilerplate for U-Boot SPL support on Amlogic.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-[Ferass: check digest type in _print_header, version in _verify_image]
 Signed-off-by: Ferass El Hafidi <funderscore@postmarketos.org>
 ---
- MAINTAINERS      |   1 +
- boot/image.c     |   1 +
- include/image.h  |   1 +
- tools/Makefile   |   1 +
- tools/amlimage.c | 255 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 259 insertions(+)
+ arch/arm/include/asm/arch-meson/clock-gx.h |  14 +++
+ arch/arm/include/asm/arch-meson/gx.h       |  36 +++++++
+ arch/arm/mach-meson/Kconfig                |  42 +++++++-
+ arch/arm/mach-meson/Makefile               |   7 ++
+ arch/arm/mach-meson/board-common.c         |  11 ++
+ arch/arm/mach-meson/spl-gx.c               | 168 +++++++++++++++++++++++++++++
+ arch/arm/mach-meson/spl-gxbb.c             | 113 +++++++++++++++++++
+ arch/arm/mach-meson/spl-gxl.c              |  39 +++++++
+ arch/arm/mach-meson/spl.c                  | 123 +++++++++++++++++++++
+ 9 files changed, 552 insertions(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 1db1070d5f8..e6c42bf1c7d 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -186,6 +186,7 @@ F:	drivers/video/meson/
- F:	drivers/watchdog/meson_gxbb_wdt.c
- F:	include/configs/meson64.h
- F:	include/configs/meson64_android.h
-+F:	tools/amlimage*
- F:	doc/board/amlogic/
- N:	meson
+diff --git a/arch/arm/include/asm/arch-meson/clock-gx.h b/arch/arm/include/asm/arch-meson/clock-gx.h
+index 13a2e7688fc..72e4bac7aad 100644
+--- a/arch/arm/include/asm/arch-meson/clock-gx.h
++++ b/arch/arm/include/asm/arch-meson/clock-gx.h
+@@ -87,6 +87,7 @@
+ #define HHI_VDAC_CNTL0			0x2F4 /* 0xbd offset in data sheet */
+ #define HHI_VDAC_CNTL1			0x2F8 /* 0xbe offset in data sheet */
  
-diff --git a/boot/image.c b/boot/image.c
-index abac2c7034b..dd96f712b6f 100644
---- a/boot/image.c
-+++ b/boot/image.c
-@@ -185,6 +185,7 @@ static const table_entry_t uimage_type[] = {
- 	{	IH_TYPE_STARFIVE_SPL, "sfspl", "StarFive SPL Image" },
- 	{	IH_TYPE_TFA_BL31, "tfa-bl31",  "TFA BL31 Image", },
- 	{	IH_TYPE_STM32IMAGE_V2, "stm32imagev2", "STMicroelectronics STM32 Image V2.0" },
-+	{	IH_TYPE_AMLIMAGE,   "amlimage",   "Amlogic Boot Image" },
- 	{	-1,		    "",		  "",			},
- };
++#define HHI_SYS_PLL_CNTL1		0x2fc /* 0xbf offset in data sheet */
+ #define HHI_SYS_PLL_CNTL		0x300 /* 0xc0 offset in data sheet */
+ #define HHI_SYS_PLL_CNTL2		0x304 /* 0xc1 offset in data sheet */
+ #define HHI_SYS_PLL_CNTL3		0x308 /* 0xc2 offset in data sheet */
+@@ -114,4 +115,17 @@
  
-diff --git a/include/image.h b/include/image.h
-index b695cc39447..be6356c93d6 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -234,6 +234,7 @@ enum image_type_t {
- 	IH_TYPE_STARFIVE_SPL,		/* StarFive SPL image */
- 	IH_TYPE_TFA_BL31,		/* TFA BL31 image */
- 	IH_TYPE_STM32IMAGE_V2,		/* STMicroelectronics STM32 Image V2.0 */
-+	IH_TYPE_AMLIMAGE,		/* Amlogic Boot Image */
+ ulong meson_measure_clk_rate(unsigned int clk);
  
- 	IH_TYPE_COUNT,			/* Number of image types */
- };
-diff --git a/tools/Makefile b/tools/Makefile
-index 02297e8c93a..59e1b2285fe 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -110,6 +110,7 @@ ROCKCHIP_OBS = generated/lib/rc4.o rkcommon.o rkimage.o rksd.o rkspi.o
++#if defined(CONFIG_SPL_BUILD)
++#define HHI_SCC_CNTL0_FINAL_MUX_SEL	BIT(11)
++#define HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL	BIT(10)
++#define HHI_SCC_CNTL0_MUX0_DIVN_TCNT	(0x3f << 4)
++#define HHI_SCC_CNTL0_MUX1_DIVN_TCNT	(0x3f << 20)
++#define HHI_SCC_CNTL0_POSTMUX0	BIT(2)
++#define HHI_SCC_CNTL0_POSTMUX1	BIT(18)
++#define HHI_SCC_CNTL0_PREMUX0	3
++#define HHI_SCC_CNTL0_PREMUX1	(3 << 16)
++#define HHI_SCC_CNTL0_DYN_ENABLE	BIT(26)
++#define HHI_SCC_CNTL0_BUSY	BIT(28)
++#endif
++
+ #endif
+diff --git a/arch/arm/include/asm/arch-meson/gx.h b/arch/arm/include/asm/arch-meson/gx.h
+index 8cfc6b00329..b4cb2a5ddbc 100644
+--- a/arch/arm/include/asm/arch-meson/gx.h
++++ b/arch/arm/include/asm/arch-meson/gx.h
+@@ -12,7 +12,10 @@
  
- # common objs for dumpimage and mkimage
- dumpimage-mkimage-objs := aisimage.o \
-+			amlimage.o \
- 			atmelimage.o \
- 			$(FIT_OBJS-y) \
- 			$(FIT_SIG_OBJS-y) \
-diff --git a/tools/amlimage.c b/tools/amlimage.c
+ #define GX_FIRMWARE_MEM_SIZE	0x1000000
+ 
++#define GX_MB_SRAM_BASE		0xd9013800
+ #define GX_AOBUS_BASE		0xc8100000
++#define GX_SEC_HIU_MB_BASE	0xda83c400
++#define GX_SEC_AOBUS_BASE	0xda100000
+ #define GX_PERIPHS_BASE	0xc8834400
+ #define GX_HIU_BASE		0xc883c000
+ #define GX_ETH_BASE		0xc9410000
+@@ -24,6 +27,10 @@
+ #define GX_AO_SEC_GP_CFG3	GX_AO_ADDR(0x93)
+ #define GX_AO_SEC_GP_CFG4	GX_AO_ADDR(0x94)
+ #define GX_AO_SEC_GP_CFG5	GX_AO_ADDR(0x95)
++#define GX_AO_SEC_SD_CFG15	GX_AO_ADDR(0x8f)
++
++#define GX_SEC_AO_ADDR(off)	(GX_SEC_AOBUS_BASE + ((off) << 2))
++#define GX_SEC_AO_SEC_GP_CFG0	GX_SEC_AO_ADDR(0x90)
+ 
+ #define GX_AO_BOOT_DEVICE	0xF
+ #define GX_AO_MEM_SIZE_MASK	0xFFFF0000
+@@ -41,9 +48,38 @@
+ #define GX_GPIO_IN(n)		GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 1)
+ #define GX_GPIO_OUT(n)	GX_PERIPHS_ADDR(_GX_GPIO_OFF(n) + 2)
+ 
++/* Mailbox registers */
++#define GX_SEC_HIU_MB_ADDR(off)	(GX_SEC_HIU_MB_BASE + ((off) << 2))
++#define GX_SEC_HIU_MAILBOX_SET_0	GX_SEC_HIU_MB_ADDR(0x01)
++#define GX_SEC_HIU_MAILBOX_STAT_0	GX_SEC_HIU_MB_ADDR(0x02)
++#define GX_SEC_HIU_MAILBOX_CLR_0	GX_SEC_HIU_MB_ADDR(0x03)
++
++/* Mailbox commands */
++#define GX_MB_CMD_SHA	0xc0de0001
++#define GX_MB_CMD_DATA	0xc0dec0de
++#define GX_MB_CMD_END	0xe00de00d
++#define GX_MB_CMD_OP_SHA	0xc0de0002
++#define GX_MB_CMD_DATA_LEN	0xc0dec0d0
++
++/* PIN_MUX registers */
++#define GX_PIN_MUX_REG1		(0xda834400 + (0x2d << 2))
++#define GX_PIN_MUX_REG2		(0xda834400 + (0x2e << 2))
++#define GX_PIN_MUX_REG3		(0xda834400 + (0x2f << 2))
++#define GX_PIN_MUX_REG7		(0xda834400 + (0x33 << 2))
++
++/* PWM registers */
++#define GX_PWM_PWM_B	(0xc1100000 + (0x2155 << 2))
++#define GX_PWM_PWM_D	(0xc1100000 + (0x2195 << 2))
++#define GX_PWM_MISC_REG_CD	(0xc1100000 + (0x2196 << 2))
++#define GX_PWM_MISC_REG_AB	(0xc1100000 + (0x2156 << 2))
++
+ /* Non-DM MMC init */
+ #if CONFIG_IS_ENABLED(MMC) && !CONFIG_IS_ENABLED(DM_MMC)
+ struct mmc *meson_mmc_init(int mmc_no);
+ #endif
+ 
++#if !CONFIG_IS_ENABLED(WDT_MESON_GXBB) && defined(CONFIG_SPL_BUILD)
++#define GX_WDT_CTRL_REG		0xc11098d0
++#endif
++
+ #endif /* __GX_H__ */
+diff --git a/arch/arm/mach-meson/Kconfig b/arch/arm/mach-meson/Kconfig
+index 7570f48e25f..8d1bf91e98b 100644
+--- a/arch/arm/mach-meson/Kconfig
++++ b/arch/arm/mach-meson/Kconfig
+@@ -17,6 +17,8 @@ config MESON64_COMMON
+ config MESON_GX
+ 	bool
+ 	select MESON64_COMMON
++	select SUPPORT_SPL
++	select BINMAN if SPL
+ 
+ choice
+ 	prompt "Platform select"
+@@ -69,7 +71,7 @@ config SYS_SOC
+ 	default "meson"
+ 
+ config SYS_MALLOC_F_LEN
+-	default 0x1000
++	default 0x2000
+ 
+ config SYS_VENDOR
+ 	string "Vendor name"
+@@ -93,4 +95,42 @@ config SYS_BOARD
+ 	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD> will
+ 	  be used.
+ 
++if MESON_GX && SPL
++config SPL_SYS_MALLOC_F_LEN
++	default 0x2000
++
++choice
++	prompt "Set VDDEE init voltage"
++	default SPL_MESON_GX_VDDEE_1000MV
++	help
++	  This option is used to set the VDDEE voltage on boot up.
++	  If unsure, leave it to the board default.
++
++config SPL_MESON_GX_VDDEE_1000MV
++	bool "Set VDDEE to 1000 mv"
++
++config SPL_MESON_GX_VDDEE_1100MV
++	bool "Set VDDEE to 1100 mv"
++
++endchoice
++
++choice
++	prompt "Set VCCK init voltage"
++	default SPL_MESON_GX_VCCK_1100MV
++	help
++	  This option is used to set the VCCK voltage on boot up.
++	  If unsure, leave it to the board default.
++
++config SPL_MESON_GX_VCCK_1000MV
++	bool "Set VCCK to 1000 mv"
++
++config SPL_MESON_GX_VCCK_1100MV
++	bool "Set VCCK to 1100 mv"
++
++config SPL_MESON_GX_VCCK_1120MV
++	bool "Set VCCK to 1120 mv"
++
++endchoice
++
++endif
+ endif
+diff --git a/arch/arm/mach-meson/Makefile b/arch/arm/mach-meson/Makefile
+index 535b0878b91..798b20df78a 100644
+--- a/arch/arm/mach-meson/Makefile
++++ b/arch/arm/mach-meson/Makefile
+@@ -4,6 +4,13 @@
+ 
+ obj-y += board-common.o sm.o board-info.o
+ obj-$(CONFIG_MESON_GX) += board-gx.o
++ifeq ($(CONFIG_SPL_BUILD),y)
++obj-$(CONFIG_MESON_GXBB) += spl-gxbb.o
++obj-$(CONFIG_MESON_GXL) += spl-gxl.o
++obj-$(CONFIG_MESON_GX) += spl-gx.o
++obj-$(CONFIG_MESON_GX) += spl.o
++endif
++
+ obj-$(CONFIG_MESON_AXG) += board-axg.o
+ obj-$(CONFIG_MESON_G12A) += board-g12a.o
+ obj-$(CONFIG_MESON_A1) += board-a1.o
+diff --git a/arch/arm/mach-meson/board-common.c b/arch/arm/mach-meson/board-common.c
+index 39774c43049..c243c46c0fc 100644
+--- a/arch/arm/mach-meson/board-common.c
++++ b/arch/arm/mach-meson/board-common.c
+@@ -30,6 +30,7 @@ __weak int board_init(void)
+ 	return 0;
+ }
+ 
++#ifndef CONFIG_SPL_BUILD
+ int dram_init(void)
+ {
+ 	const fdt64_t *val;
+@@ -49,6 +50,7 @@ int dram_init(void)
+ 
+ 	return 0;
+ }
++#endif
+ 
+ __weak int meson_ft_board_setup(void *blob, struct bd_info *bd)
+ {
+@@ -150,5 +152,14 @@ int board_late_init(void)
+ 
+ void reset_cpu(void)
+ {
++#if CONFIG_SPL_BUILD
++	/*
++	 * We do not have BL31 running yet, so no PSCI.
++	 * Instead, let the watchdog reset the board.
++	 */
++	for (;;)
++		;
++#else
+ 	psci_system_reset();
++#endif
+ }
+diff --git a/arch/arm/mach-meson/spl-gx.c b/arch/arm/mach-meson/spl-gx.c
 new file mode 100644
-index 00000000000..ecb06bc535b
+index 00000000000..a7d2b672421
 --- /dev/null
-+++ b/tools/amlimage.c
-@@ -0,0 +1,255 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+// Copyright Contributors to the U-Boot project.
-+
-+#include "imagetool.h"
-+#include <u-boot/sha256.h>
-+
++++ b/arch/arm/mach-meson/spl-gx.c
+@@ -0,0 +1,168 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Image contain data in the following order:
-+ *  Nonce	16 byte
-+ *  Header	64 byte
-+ *  Digest	32 byte
-+ *  Padding	align up to 4K
-+ *  Payload
++ * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
++ * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
 + */
++#include <hang.h>
++#include <image.h>
++#include <spl.h>
++#include <vsprintf.h>
++#include <asm/io.h>
++#include <asm/arch/boot.h>
++#include <asm/arch/clock-gx.h>
++#include <asm/arch/gx.h>
++#include <linux/delay.h>
 +
-+#define HEADER_MAGIC		0x4c4d4140	/* @AML */
-+#define HEADER_OFFSET		0x10		/* 16 */
-+#define HEADER_SIZE		0x40		/* 64 */
-+#define PAYLOAD_OFFSET		0x1000		/* 4096 */
++/* Meson GX SPL code */
 +
-+struct amlimage_header {
-+	uint32_t magic;
-+	uint32_t total_size;
-+	uint8_t header_size;
-+	uint8_t root_key_index;
-+	uint8_t version_major;
-+	uint8_t version_minor;
-+	uint32_t padding1;
-+	uint32_t digest_type;
-+	uint32_t digest_offset;
-+	uint32_t digest_size;
-+	uint32_t data_offset;
-+	uint32_t key_type;
-+	uint32_t key_offset;
-+	uint32_t key_size;
-+	uint32_t data_size;
-+	uint32_t payload_type;
-+	uint32_t payload_offset;
-+	uint32_t payload_size;
-+	uint32_t padding2;
-+} __packed;
-+
-+struct amlimage_variant {
-+	const char *name;
-+	const struct amlimage_header hdr;
-+};
-+
-+#define VARIANT(name, major, minor, size)	\
-+	{ name, { .magic = HEADER_MAGIC, .header_size = HEADER_SIZE, \
-+		  .version_major = major, .version_minor = minor, \
-+		  .payload_size = size, } }
-+
-+static const struct amlimage_variant variants[] = {
-+	VARIANT("gxbb", 1, 0, 0xb000),
-+	VARIANT("gxl",  1, 1, 0xb000),
-+	VARIANT("gxm",  1, 1, 0xb000),
-+	VARIANT("axg",  1, 1, 0xb000),
-+	VARIANT("g12a", 1, 1, 0xf000),
-+	VARIANT("g12b", 1, 1, 0xf000),
-+	VARIANT("sm1",  1, 1, 0xf000),
-+};
-+
-+static const struct amlimage_variant *amlimage_get_variant(const char *name)
++inline void cpu_pll_switch_to(int mode)
 +{
-+	if (!name)
-+		return NULL;
++	u32 reg;
 +
-+	for (int i = 0; i < ARRAY_SIZE(variants); i++)
-+		if (!strcmp(name, variants[i].name))
-+			return &variants[i];
++	reg = readl(GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
 +
-+	return NULL;
-+}
++	while (reg & HHI_SCC_CNTL0_BUSY)
++		reg = readl(GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
 +
-+static int amlimage_check_params(struct image_tool_params *params)
-+{
-+	const struct amlimage_variant *variant =
-+		amlimage_get_variant(params->imagename);
-+	int datafile_size;
++	reg |= HHI_SCC_CNTL0_DYN_ENABLE;
 +
-+	if (params->lflag || params->iflag)
-+		return EXIT_SUCCESS;
-+
-+	if (!variant) {
-+		fprintf(stderr, "%s: unsupported image name: %s\n",
-+			params->cmdname, params->imagename);
-+		exit(EXIT_FAILURE);
-+	}
-+
-+	datafile_size = imagetool_get_filesize(params, params->datafile);
-+	if (datafile_size < 0) {
-+		exit(EXIT_FAILURE);
-+	} else if (datafile_size > variant->hdr.payload_size) {
-+		fprintf(stderr, "%s: datafile is too large (%#x > %#x)\n",
-+			params->cmdname, datafile_size,
-+			variant->hdr.payload_size);
-+		exit(EXIT_FAILURE);
-+	}
-+
-+	return EXIT_SUCCESS;
-+}
-+
-+static int amlimage_verify_header(unsigned char *buf, int size,
-+				  struct image_tool_params *params)
-+{
-+	const struct amlimage_header *hdr = (void *)buf + HEADER_OFFSET;
-+
-+	if (size >= HEADER_OFFSET + HEADER_SIZE + SHA256_SUM_LEN &&
-+	    hdr->magic == HEADER_MAGIC && hdr->header_size == HEADER_SIZE &&
-+	    hdr->version_major == 1 && hdr->version_minor <= 1)
-+		return 0;
-+
-+	return -1;
-+}
-+
-+static void amlimage_print_header(const void *buf,
-+				  struct image_tool_params *params)
-+{
-+	const struct amlimage_header *hdr = buf + HEADER_OFFSET;
-+	uint8_t digest[SHA256_SUM_LEN];
-+	sha256_context ctx;
-+	bool valid;
-+
-+	printf("Amlogic Boot Image %" PRIu8 ".%" PRIu8 "\n",
-+	       hdr->version_major, hdr->version_minor);
-+	printf("Total size: %" PRIu32 "\n", hdr->total_size);
-+	printf("Digest %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
-+	       hdr->digest_type, hdr->digest_size, hdr->digest_offset);
-+	printf("Key %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
-+	       hdr->key_type, hdr->key_size, hdr->key_offset);
-+	printf("Payload %" PRIu32 ": %" PRIu32 " @ 0x%" PRIx32 "\n",
-+	       hdr->payload_type, hdr->payload_size, hdr->payload_offset);
-+
-+	if (hdr->digest_type == 0) {
-+		/* sha256 digest (normal boot) */
-+		sha256_starts(&ctx);
-+
-+		/* Header and data is used as input for sha256 digest */
-+		sha256_update(&ctx, (void *)hdr, hdr->header_size);
-+		sha256_update(&ctx, (void *)hdr + hdr->data_offset, hdr->data_size);
-+		sha256_finish(&ctx, digest);
-+
-+		valid = !memcmp((void *)hdr + hdr->digest_offset,
-+				digest, SHA256_SUM_LEN);
-+
-+		printf("Data: %" PRIu32 " @ 0x%" PRIx32 " - %s\n",
-+		       hdr->data_size, hdr->data_offset, valid ? "OK" : "BAD");
++	if (mode == 1) {
++		/* Switch to System PLL */
++		reg |= HHI_SCC_CNTL0_FINAL_MUX_SEL;
 +	} else {
-+		/* RSA (secure boot) */
-+		printf("Data: %" PRIu32 " @ 0x%" PRIx32 " - Secure Boot\n",
-+		       hdr->data_size, hdr->data_offset);
++		if (reg & HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL) {
++			reg = (reg & ~(HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL |
++				HHI_SCC_CNTL0_MUX0_DIVN_TCNT |
++				HHI_SCC_CNTL0_POSTMUX0 | HHI_SCC_CNTL0_PREMUX0));
++		} else {
++			reg = (reg & ~(HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL |
++				HHI_SCC_CNTL0_MUX1_DIVN_TCNT |
++				(HHI_SCC_CNTL0_POSTMUX1 | HHI_SCC_CNTL0_PREMUX1))) |
++				HHI_SCC_CNTL0_FINAL_DYN_MUX_SEL;
++		}
++		/* Select dynamic mux */
++		reg = reg & ~(HHI_SCC_CNTL0_FINAL_MUX_SEL) /*final_mux_sel*/;
 +	}
++	writel(reg, GX_HIU_BASE + HHI_SYS_CPU_CLK_CNTL0);
 +}
 +
-+static void amlimage_set_header(void *buf, struct stat *sbuf, int ifd,
-+				struct image_tool_params *params)
++int meson_pll_init(void)
 +{
-+	struct amlimage_header *hdr = buf + HEADER_OFFSET;
-+	sha256_context ctx;
++	clrbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL, 1 << 8);
++	cpu_pll_switch_to(0);
 +
-+	/* Use header size as initial size */
-+	hdr->total_size = hdr->header_size;
++	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL6, 1 << 26);
++	udelay(100);
 +
-+	/* Use sha256 digest (normal boot) */
-+	hdr->digest_type = 0;
-+	/* The sha256 digest is stored directly following the header */
-+	hdr->digest_offset = hdr->total_size;
-+	/* Unknown if this is used as block size instead of digest size */
-+	hdr->digest_size = 512;
-+	hdr->total_size += hdr->digest_size;
++	while (!((readl(GX_HIU_BASE + HHI_SYS_PLL_CNTL) >> 31) & 1)) {
++		if (IS_ENABLED(CONFIG_MESON_GXBB)) {
++			setbits_32(GX_HIU_BASE + HHI_SYS_PLL_CNTL, 1 << 29);
++			writel(0x5ac80000, GX_HIU_BASE + HHI_SYS_PLL_CNTL2);
++			writel(0x8e452015, GX_HIU_BASE + HHI_SYS_PLL_CNTL3);
++			writel(0x401d40c, GX_HIU_BASE + HHI_SYS_PLL_CNTL4);
++			writel(0x870, GX_HIU_BASE + HHI_SYS_PLL_CNTL5);
++			writel((1 << 30) | (1 << 29) |
++				((0 << 16) | (1 << 9) |
++				(1536 / 24)), /* 1.5 GHz */
++				GX_HIU_BASE + HHI_SYS_PLL_CNTL);
++			clrbits_32(GX_HIU_BASE + HHI_SYS_PLL_CNTL, 1 << 29);
++		} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
++			writel(0xc4258100, GX_HIU_BASE + HHI_SYS_PLL_CNTL1);
++			writel(0xb7400000, GX_HIU_BASE + HHI_SYS_PLL_CNTL2);
++			writel(0xa59a288, GX_HIU_BASE + HHI_SYS_PLL_CNTL3);
++			writel(0x40002d, GX_HIU_BASE + HHI_SYS_PLL_CNTL4);
++			writel(0x7c700007, GX_HIU_BASE + HHI_SYS_PLL_CNTL5);
++			writel((1 << 30) | ((1 << 9) |
++				(1200 / 24)), /* 1.2 GHz */
++				GX_HIU_BASE + HHI_SYS_PLL_CNTL);
++		}
++		udelay(20);
++	}
++	cpu_pll_switch_to(1); /* Hook the CPU to the PLL divider output */
 +
-+	/* Use key as padding so that payload ends up 4K aligned in TZRAM */
-+	hdr->key_type = 0;
-+	hdr->key_offset = hdr->total_size;
-+	hdr->key_size = PAYLOAD_OFFSET - HEADER_OFFSET - hdr->key_offset;
-+	hdr->total_size += hdr->key_size;
++	if (IS_ENABLED(CONFIG_MESON_GXBB))
++		writel(0x10007, GX_HIU_BASE + HHI_MPLL_CNTL4);
++	else if (IS_ENABLED(CONFIG_MESON_GXL))
++		writel(0x10006, GX_HIU_BASE + HHI_MPLL_CNTL4);
 +
-+	/* With padding above payload will have a 0x1000 offset in TZRAM */
-+	hdr->payload_type = 0;
-+	hdr->payload_offset = hdr->total_size;
-+	/* Payload size has already been copied from the variant header */
-+	hdr->total_size += hdr->payload_size;
++	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
++	udelay(200);
 +
-+	/* Set the data range to be used as input for sha256 digest */
-+	hdr->data_offset = hdr->digest_offset + SHA256_SUM_LEN;
-+	hdr->data_size = hdr->total_size - hdr->data_offset;
++	writel(0x59C80000, GX_HIU_BASE + HHI_MPLL_CNTL2);
++	writel(0xCA45B822, GX_HIU_BASE + HHI_MPLL_CNTL3);
 +
-+	sha256_starts(&ctx);
-+	/* Header and data is used as input for sha256 digest */
-+	sha256_update(&ctx, (void *)hdr, hdr->header_size);
-+	sha256_update(&ctx, (void *)hdr + hdr->data_offset, hdr->data_size);
-+	/* Write sha256 digest to the 32 bytes directly following the header */
-+	sha256_finish(&ctx, (void *)hdr + hdr->digest_offset);
-+}
++	if (IS_ENABLED(CONFIG_MESON_GXBB))
++		writel(0xB5500E1A, GX_HIU_BASE + HHI_MPLL_CNTL5);
++	else if (IS_ENABLED(CONFIG_MESON_GXL))
++		writel(0x95520E1A, GX_HIU_BASE + HHI_MPLL_CNTL5);
 +
-+static int amlimage_extract_subimage(void *buf,
-+				     struct image_tool_params *params)
-+{
-+	const struct amlimage_header *hdr = buf + HEADER_OFFSET;
++	writel(0xFC454545, GX_HIU_BASE + HHI_MPLL_CNTL6);
 +
-+	/* Save payload as the subimage */
-+	return imagetool_save_subimage(params->outfile,
-+				       (ulong)hdr + hdr->payload_offset,
-+				       hdr->payload_size);
-+}
++	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
++		writel((1 << 30) | (1 << 29) | (3 << 9) | (250 << 0), GX_HIU_BASE + HHI_MPLL_CNTL);
++		clrbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
++	} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
++		writel((1 << 30) | (3 << 9) | (250 << 0), GX_HIU_BASE + HHI_MPLL_CNTL);
++	}
++	udelay(800);
 +
-+static int amlimage_check_image_type(uint8_t type)
-+{
-+	if (type == IH_TYPE_AMLIMAGE)
-+		return EXIT_SUCCESS;
++	setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL4, 1 << 14);
 +
-+	return EXIT_FAILURE;
-+}
-+
-+static int amlimage_vrec_header(struct image_tool_params *params,
-+				struct image_type_params *tparams)
-+{
-+	const struct amlimage_variant *variant =
-+		amlimage_get_variant(params->imagename);
-+	const struct amlimage_header *hdr = &variant->hdr;
-+
-+	/* Use payload offset as header size, datafile will be appended */
-+	tparams->header_size = PAYLOAD_OFFSET;
-+
-+	tparams->hdr = calloc(1, tparams->header_size);
-+	if (!tparams->hdr) {
-+		fprintf(stderr, "%s: Can't alloc header: %s\n",
-+			params->cmdname, strerror(errno));
-+		exit(EXIT_FAILURE);
++	while (!((readl(GX_HIU_BASE + HHI_MPLL_CNTL) >> 31) & 1)) {
++		if ((readl(GX_HIU_BASE + HHI_MPLL_CNTL) & (1 << 31)) != 0)
++			break;
++		setbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
++		udelay(1000);
++		clrbits_32(GX_HIU_BASE + HHI_MPLL_CNTL, 1 << 29);
++		udelay(1000);
 +	}
 +
-+	/* Start with a copy of the variant header */
-+	memcpy(tparams->hdr + HEADER_OFFSET, hdr, hdr->header_size);
++	if (IS_ENABLED(CONFIG_MESON_GXBB)) {
++		writel(0xFFF << 16, GX_HIU_BASE + HHI_MPLL_CNTL10);
++		writel(((7 << 16) | (1 << 15) | (1 << 14) | (4681 << 0)),
++		       GX_HIU_BASE + HHI_MPLL_CNTL7);
++		writel(((readl(GX_HIU_BASE + HHI_MPEG_CLK_CNTL) & (~((0x7 << 12) | (1 << 7) |
++			(0x7F << 0)))) | ((5 << 12) | (1 << 7)	| (2 << 0))),
++			GX_HIU_BASE + HHI_MPEG_CLK_CNTL);
++		setbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL, 1 << 8);
++		writel(((5 << 16) | (1 << 15) | (1 << 14) | (12524 << 0)),
++		       GX_HIU_BASE + HHI_MPLL_CNTL8);
++	} else if (IS_ENABLED(CONFIG_MESON_GXL)) {
++		writel((1 << 12) | 3, GX_HIU_BASE + HHI_MPLL_CNTL10);
++		writel(0x5edb7, GX_HIU_BASE + HHI_MPLL_CNTL7);
++		clrbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL,
++			   (3 << 13) | (1 << 12) | (15 << 4) | 15);
++		setbits_32(GX_HIU_BASE + HHI_MPEG_CLK_CNTL,
++			   (1 << 14) | (1 << 12) | (1 << 8) | (2 << 6) | (1 << 1));
++		writel((4 << 16) | (7 << 13) | (1 << 8) | (5 << 4) | 10,
++		       GX_HIU_BASE + HHI_MPLL_CNTL8);
++	}
 +
-+	/* Pad up to payload size of the variant header */
-+	return hdr->payload_size - params->file_size;
++	udelay(200);
++
++	/* TODO: Some error handling and timeouts... */
++	return 0;
 +}
 +
++#if CONFIG_IS_ENABLED(MMC) && !CONFIG_IS_ENABLED(DM_MMC)
++int board_mmc_init(struct bd_info *bis)
++{
++	int mmc_device;
++
++	switch (meson_get_boot_device()) {
++	case BOOT_DEVICE_SD:
++		mmc_device = 0;
++		break;
++	case BOOT_DEVICE_EMMC:
++		mmc_device = 1;
++		break;
++	default:
++		return -1;
++	}
++
++	if (!meson_mmc_init(mmc_device))
++		return -1;
++
++	return 0;
++}
++#endif
+diff --git a/arch/arm/mach-meson/spl-gxbb.c b/arch/arm/mach-meson/spl-gxbb.c
+new file mode 100644
+index 00000000000..954254bd9ad
+--- /dev/null
++++ b/arch/arm/mach-meson/spl-gxbb.c
+@@ -0,0 +1,113 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * amlimage parameters
++ * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
++ * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
 + */
-+U_BOOT_IMAGE_TYPE(
-+	amlimage,
-+	"Amlogic Boot Image",
-+	0,
-+	NULL,
-+	amlimage_check_params,
-+	amlimage_verify_header,
-+	amlimage_print_header,
-+	amlimage_set_header,
-+	amlimage_extract_subimage,
-+	amlimage_check_image_type,
-+	NULL,
-+	amlimage_vrec_header
-+);
++#include <image.h>
++#include <spl.h>
++#include <asm/io.h>
++#include <asm/arch/gx.h>
++#include <linux/delay.h>
++
++#if CONFIG_IS_ENABLED(FIT_IMAGE_POST_PROCESS)
++/*
++ * This is only needed for GXBB because on GXL SCP firmware loading
++ * has been moved to BL31.
++ */
++inline void send_scp(void *addr, size_t size, const uint8_t *sha2,
++	uint32_t sha2_length)
++{
++	int i;
++
++	puts("Trying to send the SCP firmware\n");
++	writel(size, GX_MB_SRAM_BASE);
++
++	udelay(500);
++
++	writel(GX_MB_CMD_DATA_LEN, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
++	while (readl(GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4))
++		;
++	udelay(500);
++
++	memcpy((void *)GX_MB_SRAM_BASE, (const void *)sha2, sha2_length);
++	writel(GX_MB_CMD_SHA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
++	while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
++		;
++	udelay(500);
++
++	for (i = 0; i < size; i += 1024) {
++		if (size >= i + 1024)
++			memcpy((void *)GX_MB_SRAM_BASE,
++			       (const void *)(unsigned long)(addr + i), 1024);
++		else if (size > i)
++			memcpy((void *)GX_MB_SRAM_BASE,
++			       (const void *)(unsigned long)(addr + i), (size - i));
++
++		writel(GX_MB_CMD_DATA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
++		while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
++			;
++	}
++	writel(GX_MB_CMD_OP_SHA, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
++
++	while (readl(GX_SEC_HIU_MAILBOX_STAT_0 + 3 * 3 * 4))
++		;
++	udelay(500);
++
++	/* We transferred all of the SCP firmware. Running it */
++	writel(GX_MB_CMD_END, GX_SEC_HIU_MAILBOX_SET_0 + 3 * 3 * 4);
++}
++
++void board_fit_image_post_process(const void *fit, int node, void **image, size_t *size)
++{
++	const char *name = fit_get_name(fit, node, NULL);
++	int noffset = 0, value_len;
++	u8 *value;
++
++	if (strcmp("scp", name) && strcmp("bl301", name))
++		return;
++
++	fdt_for_each_subnode(noffset, fit, node) {
++		if (strncmp(fit_get_name(fit, noffset, NULL),
++			    FIT_HASH_NODENAME, strlen(FIT_HASH_NODENAME)))
++			continue;
++
++		if (fit_image_hash_get_value(fit, noffset, &value, &value_len))
++			continue;
++
++		/* Send the SCP firmware to the SCP */
++		send_scp(*image, *size, value, value_len);
++		break;
++	}
++}
++#endif
++
++void meson_power_init(void)
++{
++	/* TODO: Support more voltages */
++
++	/* Init PWM B */
++	clrsetbits_32(GX_PWM_MISC_REG_AB, 0x7f << 16, (1 << 23) | (1 << 1));
++
++	/* Set voltage */
++	if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1120MV))
++		writel(0x02001a, GX_PWM_PWM_B);
++	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1100MV))
++		writel(0x040018, GX_PWM_PWM_B);
++	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1000MV))
++		writel(0x0e000e, GX_PWM_PWM_B);
++
++	clrbits_32(GX_PIN_MUX_REG7, 1 << 22);
++	clrsetbits_32(GX_PIN_MUX_REG3, 1 << 22, 1 << 21);
++
++	/* Init PWM D */
++	clrsetbits_32(GX_PWM_MISC_REG_CD, 0x7f << 16, (1 << 23) | (1 << 1));
++
++	/* Set voltage */
++	if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1100MV))
++		writel(0x040018, GX_PWM_PWM_B);
++	else if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1000MV))
++		writel(0x0e000e, GX_PWM_PWM_B);
++
++	clrbits_32(GX_PIN_MUX_REG7, 1 << 23);
++	setbits_32(GX_PIN_MUX_REG3, 1 << 20);
++}
+diff --git a/arch/arm/mach-meson/spl-gxl.c b/arch/arm/mach-meson/spl-gxl.c
+new file mode 100644
+index 00000000000..07fff695be8
+--- /dev/null
++++ b/arch/arm/mach-meson/spl-gxl.c
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
++ * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
++ */
++#include <spl.h>
++#include <asm/io.h>
++#include <asm/arch/gx.h>
++
++void meson_power_init_gxl(void)
++{
++	/* TODO: Support more voltages */
++
++	/* Init PWM B */
++	clrsetbits_32(GX_PWM_MISC_REG_AB, 0x7f << 16, (1 << 23) | (1 << 1));
++
++	/* Set voltage */
++	if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1120MV))
++		writel(0x02001a, GX_PWM_PWM_B);
++	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1100MV))
++		writel(0x040018, GX_PWM_PWM_B);
++	else if (CONFIG_IS_ENABLED(MESON_GX_VCCK_1000MV))
++		writel(0x0e000e, GX_PWM_PWM_B);
++
++	clrbits_32(GX_PIN_MUX_REG1, 1 << 10);
++	clrsetbits_32(GX_PIN_MUX_REG2, 1 << 5, 1 << 11);
++
++	/* Init PWM D */
++	clrsetbits_32(GX_PWM_MISC_REG_CD, 0x7f << 16, (1 << 23) | (1 << 1));
++
++	/* Set voltage */
++	if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1100MV))
++		writel(0x040018, GX_PWM_PWM_B);
++	else if (CONFIG_IS_ENABLED(MESON_GX_VDDEE_1000MV))
++		writel(0x0e000e, GX_PWM_PWM_B);
++
++	clrbits_32(GX_PIN_MUX_REG1, (1 << 9) | (1 << 11));
++	setbits_32(GX_PIN_MUX_REG2, 1 << 12);
++}
+diff --git a/arch/arm/mach-meson/spl.c b/arch/arm/mach-meson/spl.c
+new file mode 100644
+index 00000000000..b3565402972
+--- /dev/null
++++ b/arch/arm/mach-meson/spl.c
+@@ -0,0 +1,123 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Portions Copyright (C) 2015, Amlogic, Inc. All rights reserved.
++ * Copyright (C) 2023, Ferass El Hafidi <funderscore@postmarketos.org>
++ */
++#include <spl.h>
++#include <hang.h>
++#include <asm/io.h>
++#include <asm/spl.h>
++#include <asm/arch/boot.h>
++#include <vsprintf.h>
++#include <asm/ptrace.h>
++#include <asm/system.h>
++#include <atf_common.h>
++#include <image.h>
++#include <asm/arch/gx.h>
++#include <linux/delay.h>
++#include <asm/arch/clock-gx.h>
++
++u32 spl_boot_device(void)
++{
++	int boot_device = meson_get_boot_device();
++
++	switch (boot_device) {
++	case BOOT_DEVICE_EMMC:
++		return BOOT_DEVICE_MMC2;
++	case BOOT_DEVICE_SD:
++		return BOOT_DEVICE_MMC1;
++	/*
++	 * TODO: Get USB DFU to work
++	 * Right now we just panic when booted from USB.
++	 */
++	case BOOT_DEVICE_USB:
++		if (CONFIG_IS_ENABLED(YMODEM))
++			return BOOT_DEVICE_UART;
++		else
++			return BOOT_DEVICE_DFU;
++	}
++
++	panic("Unknown device %d\n", boot_device);
++	return BOOT_DEVICE_NONE; /* Never reached */
++}
++
++__weak struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
++{
++	return (void *)CONFIG_TEXT_BASE + 0x4000000;
++}
++
++__weak void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
++{
++	/* HACK: use same fit load buffer address as for mmc raw */
++	return spl_get_load_buffer(0, fit_size);
++}
++
++__weak bool spl_load_simple_fit_skip_processing(void)
++{
++	return false;
++}
++
++/* To be defined in dram-${GENERATION}.c */
++__weak int dram_init(void)
++{
++	return 0;
++}
++
++/* Placeholder functions to be defined in SoC-specific spl-... file */
++__weak void meson_power_init(void)
++{
++}
++
++__weak int meson_pll_init(void)
++{
++	return 0;
++}
++
++void board_init_f(ulong dummy)
++{
++	int ret;
++
++	/* Restart execution at EL3 */
++	if (current_el() != 3) {
++		struct pt_regs regs = {0};
++		static struct entry_point_info spl_ep_info;
++
++		SET_PARAM_HEAD(&spl_ep_info, ATF_PARAM_BL31, ATF_VERSION_1, 0);
++		spl_ep_info.pc = CONFIG_SPL_TEXT_BASE;
++		spl_ep_info.spsr = SPSR_64(MODE_EL3, MODE_SP_ELX, DISABLE_ALL_EXECPTIONS);
++
++		regs.regs[0] = 0xc0000000;
++		regs.regs[1] = (unsigned long)&spl_ep_info;
++		smc_call(&regs);
++	}
++
++	meson_power_init();
++	ret = meson_pll_init();
++	if (ret) {
++		debug("meson_pll_init() failed: %d\n", ret);
++		return;
++	}
++
++	ret = dram_init();
++	if (ret) {
++		debug("dram_init() failed: %d\n", ret);
++		hang();
++	}
++
++	if (CONFIG_IS_ENABLED(OF_CONTROL)) {
++		ret = spl_early_init();
++		if (ret) {
++			debug("spl_early_init() failed: %d\n", ret);
++			hang();
++		}
++	}
++
++	spl_init();
++	icache_enable();
++	preloader_console_init();
++
++#if !CONFIG_IS_ENABLED(WDT_MESON_GXBB)
++	/* Disable watchdog */
++	clrbits_32(GX_WDT_CTRL_REG, (1 << 18) | (1 << 25));
++#endif
++}
 
 -- 
 2.51.0
