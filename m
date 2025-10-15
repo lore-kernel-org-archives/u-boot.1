@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6547ACCD18E
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 14:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A836CCD192
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 14:19:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ACBD8313B;
-	Wed, 15 Oct 2025 16:15:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 51ED08313B;
+	Wed, 15 Oct 2025 16:19:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ENVjVwER";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V2p+kPm0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFB03800D7; Wed, 15 Oct 2025 16:15:42 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id B6614832BC; Wed, 15 Oct 2025 16:19:08 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA5B08313B
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:15:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B8CF5800D7
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:19:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-7b4f7a856acso2525691a34.3
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:15:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-795be3a3644so52853856d6.0
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:19:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760537739; x=1761142539; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2+JoVB94YaL0A+0EG2gQimaIH3Vv1lKnlElCmPjhGVI=;
- b=ENVjVwER6tc3sacpiNDAEcg2KXYWVSDgWBh4a2TlCGxGD3RN5PRvpKZsa+weVC+dYp
- riSHnFnTK6tXlpoeAqkN0jifNkW58u5JlcVh7ZBdJuVyL7IQf6RPWPfoo0xI/IQ+tlpV
- CsTd2LxEf1fQZ4uF6/8iLHvmC7PK7Gt2/bneg=
+ d=linaro.org; s=google; t=1760537944; x=1761142744; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NGjUCu4WV2t2gTJdWz5MII0PATxl4FhRtaTawBTSw2M=;
+ b=V2p+kPm03jBIx24ECc+N/peqoGYy8QEO6Clkoa1JZU4Y3JR7CpWCjYl8zibjoTDsgU
+ KBse/BJLewF6o7Z+W7mReHk/eJhv6v9JMBlpfsSOKPwRnnytM7rs4cv2Xssrz+3d94Cm
+ LLP0M6ZE8+VdeRDPtRegM7YzFaAlqkYLDqaWvXxNB6DWAyhKcU2llyN/DzqGtFGD77uv
+ H1f4YDrVMtEP5S5kM2Ol/8g7PdRTlQkNkxwuO8nGjQomT2FXDDFXUqByw9wrOUwWozAm
+ mN9EaG4bKvoBBCWt8kqAm92TroZLKR8EPm+MIPP2tMDgB62SjJ2armVodjzqxEYyCPKw
+ 1E4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760537739; x=1761142539;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2+JoVB94YaL0A+0EG2gQimaIH3Vv1lKnlElCmPjhGVI=;
- b=UGbRIVjM1m3Uc7o8qbzYVzWHfpbdjXeK2hAPr3FYGMVJHvsi1xhBlo6nIxSSycz0t3
- L5Z/6lDN7e/gStWb069uadpBSY6XIpj8q3KVLcZJjP6n3Uo1cSh/p+dOTqNqPfHrVI4k
- wONdRY1ZjDaWoSQgTad8Oz2HVNKjZDo9tNmM8xL+N+ji/FPLKIT1VAvUmV475VXUMMzX
- gyEQOs1d8YoGyVb7LFUlD7jRGPrDedVv3zObfrHOTUa/g9oKtkB8CzJHWnkeXNiFPOTz
- 7ivI3b8tlOBUKT4loyGpP77rVYV+m3EMyu67l5x8uZiFqPWaUZE4t765qzhEcgeYzTK0
- 6BKg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVT8+ShGyB1ZL0C5SYTdy03ub/A5LRyA1dx6kPQuV+6rr1sGQzkLDfWIJYKvCRPO0mpvLbOtSg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwdpuC1Y/tfOOSjn97+R8v5Ez4rHDuoEWxrzVkjdTOvliBV+NdJ
- RjdIkJ5zuZMRDS+ap3TMQvDwDwzig+WCVA8f+ceDfTvC/GUnDt2GSKa7k6pg+hsjYzo=
-X-Gm-Gg: ASbGncu1bX+BEBwygFkXxOEo7MDs7SukzBE/NzABGIFgxw+GmPO6fIKRpknLEFNIWS8
- O810aWQapTMylFUzgN2xs5tt0XMrwVsvaP732OgzuyFIX53vmHcWHs/dIqUcYIOVDqB2SU48JB5
- aM7cFPep5YeSu+FzIeB4XtzbXSYkLnmvz2iBXLZLO9NZVMa9nDmazzZEMXnmQRySqVggZZ0pXcy
- eL60aeHbKCD2lwqIvOc+B9enHDPJW3PEpFaQPxcVp55LIDXlg0FIQNqVPrPp+hy6m21vdt4AuZs
- bYXG43EtWefbtp1cQa3v4oe+b9NPWAG9dkMOSrE8E536hpK1qO5tzg/zrgtF45BnDHKuIlwFWE3
- iEAbaMj84Y2epdNiutbaKHP+wPQ7eF63717Qwn5rLIESXh0jSuFgCopGnOhKDhR5e5iEi2c5fLD
- W7EUBMR99cN3GAAp8=
-X-Google-Smtp-Source: AGHT+IH6Qr5Z5sQo+ZQ6XiIo7UvKZXWfH8GSge9AVN+d6LP7qDFRcXLXEJ7Y0UbZu59Dw/r9SABDiQ==
-X-Received: by 2002:a05:6808:bd6:b0:441:8f74:f32 with SMTP id
- 5614622812f47-4418f741b5cmr9555885b6e.60.1760537738937; 
- Wed, 15 Oct 2025 07:15:38 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-4419887fd8bsm4001430b6e.2.2025.10.15.07.15.37
+ d=1e100.net; s=20230601; t=1760537944; x=1761142744;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NGjUCu4WV2t2gTJdWz5MII0PATxl4FhRtaTawBTSw2M=;
+ b=M2lTxW8Ng7LXwwpEZlRHR618t+q2ye/+OCMiQ17CB7sF2BmIY7qnMJGregM9A+K3VU
+ 0Myc4KGWYcEsHgQKipqxDCxrjStaGPKur5MDNm496QgJZCvbQTRsKRfiPPaMxI1pTyoB
+ BBE1+FPJ6D8oyxX9Z1NuuMLmQKxHt0HAR4gWnIJErInubTWsyprISYYrzpzggbeH3usy
+ yR5ocBnpQEOq5JmfkpjHxpjrAiWV/QWZzAHWl9MkRZ4tk17ByuRpqFTYHdUt/nfXi8ad
+ Qd8bGn4v0iafIMZgFVnBA56XIx0B3Xwpje1d6l8KjCrCwO9Brgz39q7Pv0rmcEDYv7lN
+ ngGg==
+X-Gm-Message-State: AOJu0YwW/1szMw0DfkB0uXbm/Zvi2OZZbfEQ+iAFqGRb1d0b183MbgSP
+ nNw3up3VxDS6pysj5k44LnhVWrhUpA9ctDo72halclfCZAbtTmW+ZIRihhZGv0ty43kPpebMus/
+ Phfa3
+X-Gm-Gg: ASbGncsLRt42MPg3Ck8SUuvf480saBmEyS9SDaWHQL1xf9d812TUB1eXDNz3C0sdeT5
+ DuH9mbzbUPS7GYVjqi2sDnMZ93gOQpF9tpcLc+enYLLGrZyVHx6Yh3p/lpisrO6zzilEr7bIeLV
+ akWJij/d7E3BvZjLGWnOYiw7/Lmal1LkMVtfaXbABHjkP6Tj90gDSazXpchy7CN1IytZoxbxo+3
+ zQ2evGnYlRqJl6hRJsD7LrijGIwpPnHHdrVKLxdxZLENZgUrBd9pqLnLKYpX5PJ81TIWpp7AahY
+ nhNT26G5WiPjaIVa1GenMK40LkiVL3/QWuyLkCNBFVTKbNr1YnFs6ubSqcj63lEBjWtFHtmgBgb
+ 4dV3xl1Y5UKSsjhfXGBTE7XwCv/kOKVe8za77qSSpxsOWWtNMRx84JR766ScUvc7dRqVr
+X-Google-Smtp-Source: AGHT+IEXxY7mqyP6Pe8n4R8hgYk7lcVist65yg4e808LruKx+OIPuVL+KGtU/COWMYw9g2rGsp1RLg==
+X-Received: by 2002:a05:6214:2a84:b0:71c:53c0:5674 with SMTP id
+ 6a1803df08f44-87b20feda87mr405030786d6.7.1760537943857; 
+ Wed, 15 Oct 2025 07:19:03 -0700 (PDT)
+Received: from ubuntu.localdomain ([209.227.150.67])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-87c0120c20esm19337466d6.5.2025.10.15.07.19.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:15:38 -0700 (PDT)
-Date: Wed, 15 Oct 2025 08:15:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- thomas.petazzoni@bootlin.com
-Subject: Re: [PATCH] test: Do not build expo and cedit test if no SDL
-Message-ID: <20251015141535.GO6113@bill-the-cat>
-References: <20251006164506.380308-1-kory.maincent@bootlin.com>
- <CAFLszTg+2-xRo1N3zzqY3BEUUqM989xifttbar_+mOE_X12PYg@mail.gmail.com>
- <20251006214436.GE298503@bill-the-cat>
- <20251015152538.7fccb0f6@kmaincent-XPS-13-7390>
+ Wed, 15 Oct 2025 07:19:03 -0700 (PDT)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH v4 0/6] Enable Firmware Handoff CI test on qemu_arm64
+Date: Wed, 15 Oct 2025 07:18:44 -0700
+Message-Id: <20251015141856.4168612-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wvUFBdE7LJK0Ow9C"
-Content-Disposition: inline
-In-Reply-To: <20251015152538.7fccb0f6@kmaincent-XPS-13-7390>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,58 +102,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
+1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
+2. build bl1 and fip with both Firmware Handoff and Measured Boot
+   enabled;
+3. pytest to validate the Firmware Handoff feature via bloblist by
+   checking the existence of expected FDT nodes and TPM events generated
+   and handed over from TF-A/OP-TEE.
 
---wvUFBdE7LJK0Ow9C
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Pre-requisite u-boot-test-hooks patches [2] are required.
+A test pipeline is triggered at [3] with hacking docker image [4] and
+test hooks [5].
 
-On Wed, Oct 15, 2025 at 03:25:38PM +0200, Kory Maincent wrote:
-> Hello Tom,
->=20
-> On Mon, 6 Oct 2025 15:44:36 -0600
-> Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Mon, Oct 06, 2025 at 02:38:10PM -0600, Simon Glass wrote:
-> > > Hi Kory,
-> > >=20
-> > > On Mon, 6 Oct 2025 at 10:45, Kory Maincent <kory.maincent@bootlin.com>
-> > > wrote: =20
-> > > >
-> > > > expo and cedit tests depend on the host having the SDL library.
-> > > > Build these tests only if VIDEO_SANDBOX_SDL config is enabled.
-> > > >
-> > > > Signed-off-by: Kory Maincent <kory.maincent@bootlin.com>
-> > > > ---
-> > > >  test/boot/Makefile | 2 ++
-> > > >  1 file changed, 2 insertions(+) =20
-> > >=20
-> > > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > >=20
-> > > We should be careful that a future CI change doesn't cause these tests
-> > > to stop running. =20
-> >=20
-> > Given how HOST_HAS_SDL is defined, CI will be fine.
->=20
-> What is the status on this fix? I see that it is still not merged. Is the=
-re a
-> reason for this?
+[1] https://github.com/FirmwareHandoff/firmware_handoff
+[2] https://lore.kernel.org/u-boot/20251003191918.767698-1-raymond.mao@linaro.org/T/#t
+[3] https://github.com/u-boot/u-boot/pull/818
+[4] https://hub.docker.com/repository/docker/raymondmao20200915/uboot-ci/tags/latest/sha256-bff18c1f2488d350e9e6e51c9987e24c36b3bfe110079aa0682964c815dd285a
+[5] https://github.com/raymo200915/u-boot-test-hooks/tree/eventlog_handoff_v2
 
-It's on my list to pick up very soon. The general window for applying
-patches is about 2 weeks to allow time for feedback.
+Raymond Mao (6):
+  docker: add OP-TEE and TF-A build for testing Firmware Handoff
+  pytest: add test script to validate Firmware Handoff
+  configs: select CMD_BLOBLIST for Firmware Handoff testing
+  ci: check existence of bl1 and fip in the test script
+  ci: rename conf.qemu_arm64_na to conf.qemu_arm64
+  ci: add test entries for qemu_arm64_tfa_fw_handoff
 
---=20
-Tom
+ .azure-pipelines.yml                   |  20 ++++-
+ .gitlab-ci.yml                         |  23 +++++-
+ configs/qemu_arm64_defconfig           |   1 +
+ doc/develop/pytest/test_fw_handoff.rst |   8 ++
+ test/py/tests/test_fw_handoff.py       | 108 +++++++++++++++++++++++++
+ tools/docker/Dockerfile                |  38 ++++++++-
+ 6 files changed, 190 insertions(+), 8 deletions(-)
+ create mode 100644 doc/develop/pytest/test_fw_handoff.rst
+ create mode 100644 test/py/tests/test_fw_handoff.py
 
---wvUFBdE7LJK0Ow9C
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+2.25.1
 
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaO+shAAKCRAr4qD1Cr/k
-Cs1ZAP99Bh53G+S/qyRlxd2fjRMGkbMAYdt7RfR8XqthK+SOEQD/b0uja05lBGqL
-pCvxkILBMzR25YA+fTF75Z8Q1jZ9KwQ=
-=zF0B
------END PGP SIGNATURE-----
-
---wvUFBdE7LJK0Ow9C--
