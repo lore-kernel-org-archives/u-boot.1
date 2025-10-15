@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02D23CCD194
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:46:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31AD2CCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:46:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94CDF83693;
-	Wed, 15 Oct 2025 17:45:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D9F1F83303;
+	Wed, 15 Oct 2025 17:45:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jnMzfO0C";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZuWyy5vd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 885AA83693; Wed, 15 Oct 2025 17:45:14 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id E80D6800D7; Wed, 15 Oct 2025 17:45:19 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A8C5836A3
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 17:45:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8B8E836AC
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 17:45:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-58afb2f42e3so8238830e87.2
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 08:45:12 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-58affa66f2bso7191880e87.1
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 08:45:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760543110; x=1761147910; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760543115; x=1761147915; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7h5QJJcIXVk+kHLKjMPCuigMAJ8Xtcu1FdwDT/xhRsU=;
- b=jnMzfO0CEH5gTfAehY4kO88h3oseoniVnRRON8ahac9xA5rvH3ofmEwDj0fKHbJA3M
- cj+fYmx6MK9gI7S87YSTrVO2TVaQdzQ2gRBYIDPhKdJZjS03CYDyfXljG/j/HXFavFmz
- Bp6mJziv8n7tGf8GYlSoEcSn5ghzGx5e9VoUo=
+ bh=WvNySyQbiwr0s6yzqSsuW3crmcfwnUYEzqTgLCEUz14=;
+ b=ZuWyy5vd35FS8BhGPONYgWMS0jWe0Q2MydtffHuUWHryzq1jb/i2MQfhf06QiWODpc
+ Y8NGBpknRP8cenaZyitJaj14UWPkFhkcK9hFXnXTTrn3eKkt/R3owmJWOcIX4nq6URus
+ UY8Wt9xWb72BG5v3LzxHgybZFLDEBX8k3/yUs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760543110; x=1761147910;
+ d=1e100.net; s=20230601; t=1760543115; x=1761147915;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7h5QJJcIXVk+kHLKjMPCuigMAJ8Xtcu1FdwDT/xhRsU=;
- b=wq4xNJc/L4yp23315/BgpcvUUYYe7mE4mWF+1uEmjM+NOtYXXdAzGzQ7ozkvL0i9Vo
- KAWIex6s7Rmrhdt/2f429pAlDrSvc+EU0f5hkds7LFEQmrzktNA3ufKzYIjePmTQ5YQN
- hNZdvwJ0AqdObCaGyoPJegsLvPFAP9ASR0YKUgreTrnFLd4hgRg50tFcfKfEmBTobP41
- lfxcfWK7hfPgcA0V46tCPJ/kAcCMLGJYRiWukZsvDcgP59oCUXZg9S/tDk2U+BHN0KPa
- PB3aSH4NrxwgMoxSqZkpZW+RE8CPFxeB7G9GQxr9BbLmfb56Iqx5fdc2J8uLwgnR19No
- kdAg==
-X-Gm-Message-State: AOJu0Yynl3UtTb5OcihvPHOFAiF/opHbLvFEFraHGzaqbcSexF2D732x
- Ze3Bt4AOtUPEfoHsXtTsO7VKfz16tnwW6OMFGHlcK/VvfwI/8FBigUaI7L8Uvm2dA4fWwCzt6fc
- gGnhFJ5V9IOQ=
-X-Gm-Gg: ASbGncvtvROyFvxx+jzU0bYovnCcn1h/WjB9V7nfWJ4J+wVb/aPrF9yLhd4kyKdgZ6p
- Ae+J+DMU22hZU5YfRyaO7InVCmtiqDZX+PsQyEX+JNOv9DQHclqNIT+o4XVoeiPwcWE/CvGs/CF
- cbjPjLxABgcOYQLmiA42bo8VRQV8n28wl5N5hI+3mJjUwdboBgt9WQt0Ch8hPXu5H/zxPfspIe4
- LCehPQMCk2Krp9ZZLJj6e1BGzrt7M0l8eaIVcL1fkbR11rnyLms++gi0Q1dZfoxEYVfK1g+kXnd
- fPUy4kWOYtDY26kks0olnYs8jxtgprM3d8IVnVh62YXDOl8hly7ITWC54O1qAOCH4hUDVf4ATea
- o0DrSH+GZnib3jBwGlroV4HPMul0HqcHHPPkd1g==
-X-Google-Smtp-Source: AGHT+IGdEYitzzX7FXHJmp4+C8LoNQsXoGswXZ8iKfqMGo63mnGIGfh8uxlJVbpL6ib3xuxsTVzZ2g==
-X-Received: by 2002:a05:6512:3a8e:b0:584:8e13:668c with SMTP id
- 2adb3069b0e04-5906dd741b0mr9395668e87.42.1760543109904; 
- Wed, 15 Oct 2025 08:45:09 -0700 (PDT)
+ bh=WvNySyQbiwr0s6yzqSsuW3crmcfwnUYEzqTgLCEUz14=;
+ b=eSj8+61tITtDpY4kMbV9g0NpKouEnH2csw75s+G4Ae5AJvG9C7brsS0I7LAs7TAUh1
+ 8MuaGyKIVEc+Z+lKRJikVELVk3tQlsuMeJXebs2ylG4WpYhxoLkATPKS1Fxbe1ZrUWrc
+ dvDdu2CwCTq1nW5G3zgfOmFoHcXN95Fi8iQNV7OO2emSD9I1Vjk6+ewiiHhEVRsRTsSX
+ Beau8i9fiy+FMAiGQm+LQA5SOTycUufxbEBBLlbdNxqtalaueFQ5XlZtnYsErQ7Fn7uZ
+ HZvmchMOAHUNLX6CElFjsEPTmac68J4/zOJdC2+urpfivN/RdkprxhWHLyZ6TxLmzdd9
+ p7tQ==
+X-Gm-Message-State: AOJu0Yy1oyQG/+xXmbuaAaj4ElVYuj3gBhbM7VeXxYEnHCmxI8Wv7V1j
+ TTFuPEgwxaz3QSBLo+9q8WVuPvBjUmn9UPGOFUXWa9PJ/YDBlmUrFQcr35jDD4/ikPGWsxGtoyQ
+ m/l8eTcwlrn0=
+X-Gm-Gg: ASbGncvztFO5fEDgpzOHi2xV0aGaLZmSFiOvHzqkA1WZycQpNL8roe7MGwM3V/5gDJS
+ JaRFtwKcVWmo4XT4dtzSZ1FlEaxY/IQc8F6mdH5aUsw/KDW5X/Ue4+ByU2Pkjpq5K5uSoQyF8Wk
+ HGrh6MtmSCkvSS0HgDUVkqCmXqWtI8aE/54y5qfpqCNqlJsj7nN92uvhvXWnQwNFwkFCS6Emo5G
+ sBAbT0dqWZMJJenmy2AqwsS6O8AKwShlTRxm1V0B/A2TwWVlDytHKZzAdb8xVvinndjQfLoI5nM
+ o5jTTxRokE3yW9QAYh0V/BIaUYVyfSS5VTOyaobJJtAs4ZliyPyxUyRqnKer0S9eBi1g8Xw/wpZ
+ ELdkVOQSfJMDJpUTZjQnpHdzjvUoLpg6/6beePUR2ztUMd6IU
+X-Google-Smtp-Source: AGHT+IGlv3nPFk6k8tZ/QTLHnGpLXNAMi5Gn3PSwjZtZctF8GsE1C4v4adb8RmsHuq0mdjdNg8n1/A==
+X-Received: by 2002:a05:6512:b89:b0:55c:c971:2250 with SMTP id
+ 2adb3069b0e04-5906dd518a3mr8051262e87.28.1760543114608; 
+ Wed, 15 Oct 2025 08:45:14 -0700 (PDT)
 Received: from chromium.org ([91.209.212.108])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-59088563cbesm6363777e87.64.2025.10.15.08.45.06
+ 2adb3069b0e04-59088563cbesm6363777e87.64.2025.10.15.08.45.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 08:45:08 -0700 (PDT)
+ Wed, 15 Oct 2025 08:45:12 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
  Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>,
  Sam Protsenko <semen.protsenko@linaro.org>
-Subject: [PATCH v4 08/11] boot: Implement a priority for global bootmeths
-Date: Wed, 15 Oct 2025 16:44:11 +0100
-Message-ID: <20251015154423.908468-9-sjg@chromium.org>
+Subject: [PATCH v4 09/11] boot: Don't change the method count after global
+ bootmeths
+Date: Wed, 15 Oct 2025 16:44:12 +0100
+Message-ID: <20251015154423.908468-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251015154423.908468-1-sjg@chromium.org>
 References: <20251015154423.908468-1-sjg@chromium.org>
@@ -100,87 +103,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow bootmeths to select when they want to run, using the bootdev
-priority. Provide a new bootmeth_glob_allowed() function which checks if
-a bootmeth is ready to use.
+At present before scanning global bootmeths, the iterator sets the
+method count to the index of the first global bootmeth. Now that we
+support scanning the global bootmeths multiple times, we must leave this
+count alone.
 
-Fix a comment in bootflow_system() which is a test for global bootmeths.
+Check against have_global and first_glob_method instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/bootflow.c    | 15 +++++++++++----
- include/bootflow.h |  2 +-
- include/bootmeth.h |  4 ++++
- 3 files changed, 16 insertions(+), 5 deletions(-)
+ boot/bootflow.c      | 18 ++++++++++++++----
+ test/boot/bootflow.c |  6 +++---
+ 2 files changed, 17 insertions(+), 7 deletions(-)
 
 diff --git a/boot/bootflow.c b/boot/bootflow.c
-index ca1fe741bab..1a4cd0e28e8 100644
+index 1a4cd0e28e8..38b8af916b2 100644
 --- a/boot/bootflow.c
 +++ b/boot/bootflow.c
-@@ -191,17 +191,24 @@ static void scan_next_in_uclass(struct udevice **devp)
-  * bootmeth_glob_allowed() - Check if a global bootmeth is usable at this point
-  *
-  * @iter: Bootflow iterator being used
-- * Return: true if the global bootmeth has not already been used
-+ * Return: true if the global bootmeth has a suitable priority and has not
-+ * already been used
-  */
- static bool bootmeth_glob_allowed(struct bootflow_iter *iter, int meth_seq)
- {
- 	struct udevice *meth = iter->method_order[meth_seq];
- 	bool done = iter->methods_done & BIT(meth_seq);
-+	struct bootmeth_uc_plat *ucp;
+@@ -304,9 +304,20 @@ static int iter_incr(struct bootflow_iter *iter)
+ 	for (iter->cur_method++; iter->cur_method < iter->num_methods;
+ 	     iter->cur_method++) {
+ 		/* loop until we find a global bootmeth we haven't used */
+-		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global &&
+-		    !bootmeth_glob_allowed(iter, iter->cur_method))
+-			continue;
++		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->doing_global) {
++			if (!bootmeth_glob_allowed(iter, iter->cur_method))
++				continue;
++
++			iter->method = iter->method_order[iter->cur_method];
++			log_debug("-> next global method '%s'\n",
++				  iter->method->name);
++			return 0;
++		}
++
++		/* at this point we are only considering non-global bootmeths */
++		if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && iter->have_global &&
++		    iter->cur_method >= iter->first_glob_method)
++			break;
  
--	log_debug("considering glob '%s': done %d\n", meth->name, done);
-+	ucp = dev_get_uclass_plat(meth);
-+	log_debug("considering glob '%s': done %d glob_prio %d\n", meth->name,
-+		  done, ucp->glob_prio);
+ 		iter->method = iter->method_order[iter->cur_method];
+ 		return 0;
+@@ -317,7 +328,6 @@ static int iter_incr(struct bootflow_iter *iter)
+ 	 * normal bootdev scan
+ 	 */
+ 	if (IS_ENABLED(CONFIG_BOOTMETH_GLOBAL) && global) {
+-		iter->num_methods = iter->first_glob_method;
+ 		iter->doing_global = false;
  
--	/* if this one has already been used, try the next */
--	if (done)
-+	/*
-+	 * if this one has already been used, or its priority is too low, try
-+	 * the next
-+	 */
-+	if (done || ucp->glob_prio > iter->cur_prio)
- 		return false;
+ 		/*
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 8317dee1e20..20297136e3f 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -426,7 +426,7 @@ static int bootflow_iter_glob(struct unit_test_state *uts)
+ 	ut_asserteq(-EPROTONOSUPPORT, bootflow_scan_next(&iter, &bflow));
  
- 	return true;
-diff --git a/include/bootflow.h b/include/bootflow.h
-index 059d38251b7..1cfdda403ac 100644
---- a/include/bootflow.h
-+++ b/include/bootflow.h
-@@ -262,7 +262,7 @@ enum {
-  *	appear first, then the global ones, if any
-  * @have_global: true if we have global bootmeths in @method_order[]
-  * @doing_global: true if we are iterating through the global bootmeths (which
-- *	happens before the normal ones)
-+ *	generally happens before the normal ones)
-  * @method_flags: flags controlling which methods should be used for this @dev
-  * (enum bootflow_meth_flags_t)
-  * @methods_done: indicates which methods have been processed, one bit for
-diff --git a/include/bootmeth.h b/include/bootmeth.h
-index 26de593a9a4..2a492dfd73a 100644
---- a/include/bootmeth.h
-+++ b/include/bootmeth.h
-@@ -30,10 +30,14 @@ enum bootmeth_flags {
-  *
-  * @desc: A long description of the bootmeth
-  * @flags: Flags for this bootmeth (enum bootmeth_flags)
-+ * @glob_prio: Priority for this bootmeth. If unset (0) the bootmeth is started
-+ * before all other bootmeths. Otherwise it is started before the iteration
-+ * reaches the given priority.
-  */
- struct bootmeth_uc_plat {
- 	const char *desc;
- 	int flags;
-+	enum bootdev_prio_t glob_prio;
- };
+ 	/* at this point the global bootmeths are stranded above num_methods */
+-	ut_asserteq(2, iter.num_methods);
++	ut_asserteq(3, iter.num_methods);
+ 	ut_asserteq(2, iter.first_glob_method);
+ 	ut_assert(!iter.doing_global);
+ 	ut_assert(iter.have_global);
+@@ -493,7 +493,7 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
  
- /** struct bootmeth_ops - Operations for boot methods */
+ 	/* at this point the global bootmeths are stranded above num_methods */
+-	ut_asserteq(3, iter.num_methods);
++	ut_asserteq(4, iter.num_methods);
+ 	ut_assert(!iter.doing_global);
+ 	ut_assert(iter.have_global);
+ 	ut_asserteq(3, iter.first_glob_method);
+@@ -505,7 +505,7 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 	ut_assert_console_end();
+ 
+ 	/* Check that the sandbox bootmeth has been removed */
+-	ut_asserteq(2, iter.num_methods);
++	ut_asserteq(3, iter.num_methods);
+ 
+ 	for (i = 0; i < iter.num_methods; i++)
+ 		ut_assert(strcmp("sandbox", iter.method_order[i]->name));
 -- 
 2.43.0
 
