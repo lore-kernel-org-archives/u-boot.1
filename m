@@ -4,48 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1421DCCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 07:49:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13581CCD193
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 08:39:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C9708313B;
-	Wed, 15 Oct 2025 09:49:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
+	by phobos.denx.de (Postfix) with ESMTP id 1AE358313B;
+	Wed, 15 Oct 2025 10:39:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 832A38323A; Wed, 15 Oct 2025 09:49:01 +0200 (CEST)
-Received: from metis.whiteo.stw.pengutronix.de
- (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ id A56B28323A; Wed, 15 Oct 2025 10:39:31 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B1F080107
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 09:48:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=pengutronix.de
+ by phobos.denx.de (Postfix) with ESMTPS id 41BF080107
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 10:39:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
-Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
- helo=[127.0.0.1])
- by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
- (envelope-from <a.fatoum@pengutronix.de>)
- id 1v8wFm-0001xP-Kg; Wed, 15 Oct 2025 09:48:58 +0200
-Message-ID: <e05ec920-c5cc-49b2-9cb5-8444bac84bd9@pengutronix.de>
-Date: Wed, 15 Oct 2025 09:48:57 +0200
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id E9A5AB220372;
+ Wed, 15 Oct 2025 10:39:27 +0200 (CEST)
+From: E Shattow <e@freeshell.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	E Shattow <e@freeshell.de>
+Subject: [RFC PATCH v1] tools: update-subtree.sh improve user experience
+Date: Wed, 15 Oct 2025 01:38:34 -0700
+Message-ID: <20251015083842.46057-1-e@freeshell.de>
+X-Mailer: git-send-email 2.50.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] armv8: implement workaround for broken CNTFRQ_EL0 value
-To: Kaustabh Chakraborty <kauschluss@disroot.org>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20251014-armv8-broken-cntfrq-v1-1-b63f9c69ffcb@disroot.org>
-Content-Language: en-US
-From: Ahmad Fatoum <a.fatoum@pengutronix.de>
-In-Reply-To: <20251014-armv8-broken-cntfrq-v1-1-b63f9c69ffcb@disroot.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
-X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
- SAEximRunCond expanded to false
-X-PTX-Original-Recipient: u-boot@lists.denx.de
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,81 +51,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Kaustabh,
+Makeover of the script:
+- Usage now explains at each step what is expected from the user.
+- Default branch name is no longer hard-coded and is queried when omitted.
+- Additional operations 'update' and 'log' close the logic gap between
+  expecting the user to provide a commit id and where from this commit id
+  should be obtained.
+- Use 'set -x' context to show git invocation where appropriate
+- Sort options for usage output
+- 'pick' operation detects merge commit id and displays suggested commits
 
-On 14.10.25 09:22, Kaustabh Chakraborty wrote:
-> In devices where the U-Boot is used as a secondary bootloader, we rely
-> on the device's primary bootloader to implement CNTFRQ_EL0. However,
-> this reliance may lead to a non-functional timer in broken firmware.
-> 
-> For instance, some versions of Samsung's S-Boot don't implement it. It's
-> also not possible to set it in the U-Boot, because it's booted in a lower
-> exception level. CNTFRQ_EL0 is reported to be 0.
-> 
-> Thus, the only solution is to add a config option which, when enabled,
-> returns a hard coded value (CONFIG_COUNTER_FREQUENCY) instead of querying
-> CNTFRQ_EL0.
+Additionally the LwIP remote is now using the Savannah mirror system:
 
-Why not read it from the clock-frequency property in the device tree?
+https://lists.gnu.org/archive/html/savannah-users/2025-05/msg00002.html
 
-This is what barebox is now doing, incidentally also for Samsung support, see:
-https://lore.kernel.org/barebox/20250729203659.1858575-3-ivo.ivanov.ivanov1@gmail.com/
+Signed-off-by: E Shattow <e@freeshell.de>
+---
 
-Cheers,
-Ahmad
+TODO v1:
 
-> 
-> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
-> ---
->  arch/arm/cpu/armv8/Kconfig         | 9 +++++++++
->  arch/arm/cpu/armv8/generic_timer.c | 4 ++++
->  2 files changed, 13 insertions(+)
-> 
-> diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
-> index 199335cd6040d30a355a7fd5448a449fa7f550fb..d54d874b7caea200e1c05f522d8affe6d239a102 100644
-> --- a/arch/arm/cpu/armv8/Kconfig
-> +++ b/arch/arm/cpu/armv8/Kconfig
-> @@ -4,6 +4,15 @@ config CMO_BY_VA_ONLY
->  	bool "Force cache maintenance to be exclusively by VA"
->  	depends on !SYS_DISABLE_DCACHE_OPS
->  
-> +config ARMV8_CNTFRQ_BROKEN
-> +	bool "Fix broken ARMv8 generic timer"
-> +	depends on COUNTER_FREQUENCY > 0
-> +	depends on SYS_ARCH_TIMER
-> +	help
-> +	  Say Y here if there is no trustable firmware present which sets
-> +	  CNTFRQ_EL0 frequency before U-Boot. U-Boot will use the
-> +	  CONFIG_COUNTER_FREQUENCY value as the reported frequency.
-> +
->  config ARMV8_SPL_EXCEPTION_VECTORS
->  	bool "Install crash dump exception vectors"
->  	depends on SPL
-> diff --git a/arch/arm/cpu/armv8/generic_timer.c b/arch/arm/cpu/armv8/generic_timer.c
-> index 1de7ec596fc7cbbc3e78a241f163bc0a4fcad6b6..409570cf6fda79527e296b958368b552900524b1 100644
-> --- a/arch/arm/cpu/armv8/generic_timer.c
-> +++ b/arch/arm/cpu/armv8/generic_timer.c
-> @@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
->  unsigned long notrace get_tbclk(void)
->  {
->  	unsigned long cntfrq;
-> +
-> +	if (IS_ENABLED(CONFIG_ARMV8_CNTFRQ_BROKEN))
-> +		return CONFIG_COUNTER_FREQUENCY;
-> +
->  	asm volatile("mrs %0, cntfrq_el0" : "=r" (cntfrq));
->  	return cntfrq;
->  }
-> 
-> ---
-> base-commit: a5b3be1a37e19646b9d36c91f11b23f568be4f21
-> change-id: 20251014-armv8-broken-cntfrq-f350f68fbf6e
-> 
-> Best regards,
+- 'update dts <tag>' should attempt to substitute tag with the branch containing the suspected tag.  How to do this?
 
+- 'log dts <tag>' should attempt to substitute tag with the branch containing the suspected tag.  How to do this?
 
+- list branch names where branch name given is invalid or possibly as an info operation i.e. "see info operation for list of tags and/or/branches".  How to do this?
+
+- 'pull dts invalid' takes awhile to fail, maybe pre-check if the tag exists before doing the pull action but only if that would be faster to fail. How to do this?
+
+- behavior of operations when disconnected from network is not well-characterized, yet.
+
+I think this script can add value by making it give helpful output and guide the user to a successful outcome. In most situations it should not be necessary to read documentation to use the script properly.
+
+-E
+
+---
+ tools/update-subtree.sh | 187 +++++++++++++++++++++++++++++-----------
+ 1 file changed, 138 insertions(+), 49 deletions(-)
+
+diff --git a/tools/update-subtree.sh b/tools/update-subtree.sh
+index 536b3318573..e0c59330f16 100755
+--- a/tools/update-subtree.sh
++++ b/tools/update-subtree.sh
+@@ -1,42 +1,39 @@
+ #!/bin/sh
+ # SPDX-License-Identifier: GPL-2.0+
+ #
+-# Copyright (c) 2024 Linaro Limited
++# update-subtree.sh: Pull changes from subtree repo into U-Boot
+ #
+-# Usage: from the top level U-Boot source tree, run:
+-# $ ./tools/update-subtree.sh pull <subtree-name> <release-tag>
+-# Or:
+-# $ ./tools/update-subtree.sh pick <subtree-name> <commit-id>
++# Copyright (c) 2024 Linaro Limited
+ #
+-# The script will pull changes from subtree repo into U-Boot.
+-# It will automatically create a squash/merge commit listing the commits
+-# imported.
+-
+-set -e
+-
+-print_usage() {
+-    echo "usage: $0 <op> <subtree-name> <ref>"
+-    echo "  <op>           pull or pick"
+-    echo "  <subtree-name> mbedtls or dts or lwip"
+-    echo "  <ref>          release tag [pull] or commit id [pick]"
+-}
+-
+-if [ $# -ne 3 ]; then
+-    print_usage
+-    exit 1
+-fi
+ 
+ op=$1
+ subtree_name=$2
+ ref=$3
+ 
++print_usage() {
++    echo "usage: $0 <op> <subtree> [ref]"
++    echo "    op        update    fetch <subtree> for [ref] branch"
++    echo "                        add remote <subtree> as needed"
++    echo "                        query default branch from remote if omitted"
++    echo "              log       view log for <subtree>/[ref] branch"
++    echo "                        add remote <subtree> as needed"
++    echo "                        query default branch from remote if omitted"
++    echo "              pick      create cherry-pick commit into U-Boot with"
++    echo "                        <subtree> for <ref> commit-id"
++    echo "              pull      create squash/merge commit into U-Boot with"
++    echo "                        <subtree> for <ref> release-tag"
++    echo "                        add remote <subtree> as needed"
++    echo ""
++    echo "    subtree   dts       device tree definitions extracted from the"
++    echo "                        Linux kernel source tree"
++    echo "              lwip      A Lightweight TCPIP stack"
++    echo "              mbedtls   C library that implements cryptographic"
++    echo "                        primatives, X.509 certificate manipulation"
++    echo "                        and the SSL/TLS and DTLS protocols"
++}
++
+ set_params() {
+     case "$subtree_name" in
+-        mbedtls)
+-            path=lib/mbedtls/external/mbedtls
+-            repo_url=https://github.com/Mbed-TLS/mbedtls.git
+-            remote_name="mbedtls_upstream"
+-            ;;
+         dts)
+             path=dts/upstream
+             repo_url=https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git
+@@ -44,9 +41,14 @@ set_params() {
+             ;;
+         lwip)
+             path=lib/lwip/lwip
+-            repo_url=https://git.savannah.gnu.org/git/lwip.git
++            repo_url=https://https.git.savannah.gnu.org/git/lwip.git
+             remote_name="lwip_upstream"
+             ;;
++        mbedtls)
++            path=lib/mbedtls/external/mbedtls
++            repo_url=https://github.com/Mbed-TLS/mbedtls.git
++            remote_name="mbedtls_upstream"
++            ;;
+         *)
+             echo "Invalid subtree name: $subtree_name"
+             print_usage
+@@ -54,32 +56,119 @@ set_params() {
+     esac
+ }
+ 
+-set_params
+-
+-merge_commit_msg=$(cat << EOF
+-Subtree merge tag '$ref' of $subtree_name repo [1] into $path
++set_remote() {
++    if [ -z "$(git remote get-url $remote_name 2>/dev/null)" ]; then
++        (set -x
++            git remote add $remote_name $repo_url
++        )
++    fi
++}
+ 
+-[1] $repo_url
+-EOF
+-)
++set_branch() {
++    if [ -z "$ref" ]; then
++        echo -n "Branch name omitted, query remote for default branch name... "
++        ref=$(git remote show $remote_name | grep -Po '(?<=HEAD branch:\s).*')
++        if [ $? -eq 0 ]; then
++            echo "$ref"
++        else
++            echo "Failed to query."
++            exit 1
++        fi
++    fi
++}
+ 
+-remote_add_and_fetch() {
+-    if [ -z "$(git remote get-url $remote_name 2>/dev/null)" ]; then
+-        echo "Warning: Script automatically adds new git remote via:"
+-        echo "    git remote add $remote_name \\"
+-        echo "        $repo_url"
+-        git remote add $remote_name $repo_url
++check_branch() {
++    (set -x
++        git show-ref --quiet "$remote_name"/"$ref"
++    )
++    if [ $? -ne 0 ] ; then
++        echo "TODO: lookup remote to determine if branch exists there"
++        echo "No such branch $remote_name/$ref"
++        echo "TODO: resolve if $ref is a tag and what branch it is from"
++        echo "Did you run \"$0 update $subtree_name $ref\" ?"
++        exit 1
+     fi
+-    git fetch $remote_name master
+ }
+ 
+-if [ "$op" = "pull" ]; then
+-    remote_add_and_fetch
+-    git subtree pull --prefix $path $remote_name "$ref" --squash -m "$merge_commit_msg"
+-elif [ "$op" = "pick" ]; then
+-    remote_add_and_fetch
+-    git cherry-pick -x --strategy=subtree -Xsubtree=$path/ "$ref"
+-else
++if [ $# -lt 1 ]; then
+     print_usage
+     exit 1
+ fi
++
++case "$op" in
++    update)
++        if [ $# -lt 2 ]; then
++            print_usage
++            exit 1
++        fi
++        set_params
++        set_remote
++        set_branch
++        (set -x
++            git fetch $remote_name $ref
++        )
++        ;;
++    log)
++        if [ $# -lt 2 ]; then
++            print_usage
++            exit 1
++        fi
++        set_params
++        set_remote
++        set_branch
++        check_branch
++        (set -x
++            git log $remote_name/$ref
++        )
++        ;;
++    pick)
++        if [ $# -lt 3 ]; then
++            print_usage
++            exit 1
++        fi
++        set_params
++        is_merge=$(set -x
++            git rev-list --no-walk --count --merges "$ref" 2>/dev/null
++        )
++        if [ $? -ne 0 ]; then
++            echo "Merge commit detection in pick failed for $ref."
++            echo "TODO: resolve if $ref exists in remote to guide suggestion."
++            echo "Did you run \"$0 update $subtree_name\" ?"
++            exit 1
++        fi
++        if [ $(($is_merge)) -gt 0 ]; then
++            echo "Merge commits are not allowed for pick operation."
++            echo "Did you want to pick one of the following commit-id instead?"
++            (set -x
++                git log --oneline "$ref"^1.."$ref"^2
++            )
++            exit 1
++        fi
++        (set -x
++            git cherry-pick -x --strategy=subtree -Xsubtree=$path/ "$ref"
++        )
++        ;;
++    pull)
++        if [ $# -lt 3 ]; then
++            print_usage
++            exit 1
++        fi
++        set_params
++        set_remote
++        # HEREDOC with tabs indent and syntax to ignore tabs:
++        merge_msg=$(cat <<-EOF
++		Subtree merge tag '$ref' of $subtree_name repo [1] into $path
++		
++		[1] $repo_url
++		EOF
++        )
++        (set -x
++            git subtree pull --prefix $path $remote_name "$ref" --squash -m "$merge_msg"
++        )
++        ;;
++    *)
++        echo "Invalid op: $op"
++        print_usage
++        exit 1
++        ;;
++esac
+
+base-commit: b1cc9a53d7ba8b85e77980417242420889273e86
 -- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+2.50.0
+
