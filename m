@@ -4,83 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803F8CCD185
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:57:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D014CCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:58:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D08CA83881;
-	Wed, 15 Oct 2025 17:55:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27C6583890;
+	Wed, 15 Oct 2025 17:55:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ukueOLgI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dHJBdf+3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E4EF834D4; Wed, 15 Oct 2025 16:32:54 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 1FDE1835B0; Wed, 15 Oct 2025 16:32:56 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 236B58313B
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:32:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2286C8313B
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 16:32:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3ee130237a8so5137555f8f.0
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:32:52 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-3ecde0be34eso596988f8f.1
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 07:32:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760538771; x=1761143571; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1760538773; x=1761143573; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=c2Ex94fmhlLv2i2Yx1QhQ917Ez/zRaZdOvJOV/zm02o=;
- b=ukueOLgIacMJcUUniqN3HdUPGX545SotpOKeB96aOqeFkXditxDjI5TgtSC5jkLJO1
- c9TJZjHQzkAWYskXT/+pScv98iD5vW/dE0S63iDVVCoCYllDn505e/76mxZTc45YnG8i
- 3RW+tgU7wtVeATak4dRW1y1JlT7wWdCSnjk3AWy+b8BPxPEDBBVDD/OqkHlzQyhdy7Rj
- gr4GQrcxmfraiCvEzEKmIPxPseeJU4kQiEkUhmNCpCYV3+jQ2IQRlHZFrSucHCCF2bJM
- z7nYeWfbnS1GxkSSqaB435wp3LDxg1dFfQczfqe/Ly25St/87SFWAj33uM+mWRJsRNBk
- 7q1w==
+ :reply-to; bh=mcQ8CXNf57aPhy6c7X3EkXw8uO2jY7I9YKfUXV5n+24=;
+ b=dHJBdf+3MwlsWtK3RMKDRT335BC+OhWG84pg6kabrXjYQRKr41snOirTt8YPbDiMwi
+ t3opH5x1Sxe9O4S4dnkZWk8aGe4OZZqbtIMvgCi/fixiIy7f9JE6K7noPi1I8z9gZJCw
+ sB0NyWBfWfPbZVio0hh6z/z4FdIIV8aHvEybKoIKwLCpcpvp+LZKgVvV54wwvUY4Niwa
+ PEKi6gfhFHnSTr5MqxaROrMLsDjfjo2dFuwtVw8nFuJUvcQvpgMful8SLKGmSe2yKwn7
+ AAVDDFcw1M0opf7kFoDeoxyHPAvtKZ3RwwM/vD+B8FRa6LxlczuMWiBnK+Mz1qL+W3RS
+ 3o4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760538771; x=1761143571;
+ d=1e100.net; s=20230601; t=1760538773; x=1761143573;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=c2Ex94fmhlLv2i2Yx1QhQ917Ez/zRaZdOvJOV/zm02o=;
- b=grtfmFpTcjhnPytlGtOrqrb8wLUov0IS3MOoJ2XYwhbuUbjiTu/Ts8PUaroLuEAApp
- hrRhWpGFObWEX6flbFSjy5sYTu+55GbEv5S9U/IxSBbVFcz85/2WfqP+qc6c8/swgvI9
- r79arZfGnmfyTDtOwBg3lz+adOGlzKhLwSPxKJOAb8kjlgKR5sXHHuFID96qk/dRd8iq
- x/z8bFLWVwGzd6VKfjtDCG4wLgZyzAxUisvbgMkggZsx39HriXY1gLFPVdcTxYYVRCN3
- Ea92AHPeeLXHJrwC3hD2amC6uyxs29krBNSiLbovO3v8y/zvHkBmGsd1U1d076/STnZ0
- ZT7A==
+ bh=mcQ8CXNf57aPhy6c7X3EkXw8uO2jY7I9YKfUXV5n+24=;
+ b=sLrkLlllCK9YzNdm7pi2zOrdH7tq2bvvc46WMLns507erdIHbn2ARwropLjL00YWzU
+ GpKf59PCEmLagLOg5YsaCgU3gFv6FKizaJeJ4iHorJyCn2lUSAcXIalTwsGRdjBSXhyO
+ kY0IjtsfXrcljrq7c3G9xfj/5yuEQVFvIOq8rGMgi4zsfbVzk1MXyi0rQ+lrlQ5vDx6B
+ qBOnQyNnRqy4zkGO01ia+HjwaYNTGT5ybzV5Td/joqYopQqBUwwztNy4fekulOk4qzVf
+ 0yaa2l6P1hWJNrtTHHeNjs4IqoN2yQ6sa5bF2iQe8WkmQJ2CKnekQlIvgfggQU0+hZ7/
+ IwIQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUyzaJfIjvnFmBtWsAtZB+286/coqpQelcZ1jTI+/vkh9wEg3K3AO5+adIf48KrjCwE+K4h9Y4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyM7qLmfa5eIXtScWcFOF1AlbjKLkx62RxL7AqyKxFyhVPlJ5nt
- uxlLtNRolVAYOly4Vl2Zu07DNG4ZtPLEsPWQv8Rw/FQsotiTvJ5bjHt6LzPs09dtWws=
-X-Gm-Gg: ASbGncuSJVTmHyoWxDvTpAnd5qE9BX9KLe7Co1+gEv/QRCdaV9sQ9ShQXB7QngQCIM3
- Jh16c4iwboeTqzUncUd24ukrDVy5xBsCW7LFNbMgf4sn6ADlwGN1Q74X68V7o+fBB8PfOQjh6ik
- bCbrGKD5inM/b2Kkt23/Inqpdpvdl+St4h4Fr6eauF9EK7163pPYSr5no7TK6EMFUAfJzforume
- VVCTEQG+ij96bfHSDGdzp3K1u5Vs+DOcYT26ESwGFwZgUiMWhKognNIR0Wl2S9r6oD/vGuGhHjF
- /f1sijLRVg5NErJx9EaGD0+Ox4winPNyUACvdUmNKwhZ4aLsNOrpuVbhkdYPHEYC0hGrYwnPezG
- 8yUErzXJnkJVSpmoeQDfdEcYMi/PKukAQjcpbuPs6v41PnWSx4dRHWEPxhDraGMh0+vRvrMXeOe
- Fsu70IeEsf
-X-Google-Smtp-Source: AGHT+IFntIZgc8kpwywcm6Ac1YodmDRVT9uEaIFSPv2xMkytU2MPV98wALWC7FxueiIlE7bJN1OwyA==
-X-Received: by 2002:a5d:5d88:0:b0:425:7e38:419f with SMTP id
- ffacd0b85a97d-42666ab867amr19302858f8f.16.1760538771388; 
- Wed, 15 Oct 2025 07:32:51 -0700 (PDT)
+ AJvYcCUXa69o9oVy+1fGvlBtkA8j6Sz4AFmvEQ/z7KJIWUkz1s6Ija01ohaK3/olUN0w4W3V2SlRnZA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yya/B+brf+8XruC1X0puCZSOiG8jasCnVLNe03qWWu9qq2lXCT5
+ OMVxzH09CcADbsKZ/RkEv0RCNrB93w4AdJVzsH7jJ5Rb0sfUBcGmh6e1rChrr5fbiDk=
+X-Gm-Gg: ASbGncvvBsNd8nQzqZp3QwY23z5NRwUJQbGFLyEPm+K2yNoqBzL2ceSbs23G3+Mg0PE
+ xWde99KIua5FQHskeenOETcAJBaLTDI2l0v6RuH/y3qiISCbSE85clJeX8xXzPAAVNcmHGwrW0A
+ YQv9rEy6OHEe4cagVDcxxq96xGpkl8hod6F4T4b4bfT4RZjQEBOdX4v8g8Y0tsYCVRkE8FFjipn
+ IPK9+BwdskK55o1p0MSy4kWH70lOZY6aWQkpX9mddfbb7K6jYtgfjlID7aHF/sLAQLh/i/9VVMN
+ /ToWDMNVpCUYypp79EmouNPz0BOmdpOR87YEwn/Z3Aox12irBDPi1YmVypBH+fIGXuv/Keo7WAG
+ wSE+PzFp5dT66IP6kR8/d4BLsm3dvmUFcL3MEcoPp5+zfc1PzT0wlikzoRofwn/jEodyYQvnfFg
+ ==
+X-Google-Smtp-Source: AGHT+IEl7LqZhV2V+mRAvIp9HPyRtytEkYU4/Cq3hS3UEvinHw9MpC6lhYRaIylvccqIzXRaAszpmA==
+X-Received: by 2002:a05:6000:1843:b0:3f5:3578:e538 with SMTP id
+ ffacd0b85a97d-426fb8b7789mr229863f8f.21.1760538773280; 
+ Wed, 15 Oct 2025 07:32:53 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:4b30:fdb5:8c7d:59b5])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.49
+ 5b1f17b1804b1-470ff15ef28sm43185915e9.5.2025.10.15.07.32.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 07:32:50 -0700 (PDT)
+ Wed, 15 Oct 2025 07:32:52 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Date: Wed, 15 Oct 2025 15:32:20 +0100
-Subject: [PATCH 15/24] clk: exynos: Remove negative error returns from
+Date: Wed, 15 Oct 2025 15:32:21 +0100
+Subject: [PATCH 16/24] clk: imx: Remove negative error returns from
  clk_get_rate
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251015-clk_ops-v1-15-5f80f827407e@linaro.org>
+Message-Id: <20251015-clk_ops-v1-16-5f80f827407e@linaro.org>
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
 To: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
@@ -158,22 +158,86 @@ codes through it.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
- drivers/clk/exynos/clk-exynos7420.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/clk/imx/clk-imx8qm.c    | 6 +++---
+ drivers/clk/imx/clk-imx8qxp.c   | 6 +++---
+ drivers/clk/imx/clk-imxrt1170.c | 2 +-
+ drivers/clk/imx/clk-pllv3.c     | 2 +-
+ 4 files changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/clk/exynos/clk-exynos7420.c b/drivers/clk/exynos/clk-exynos7420.c
-index 7de4e688f036d47adfa22c841400770b1b1ed3b3..494f5623259945376475c53dcd8d5b5fbf635b0f 100644
---- a/drivers/clk/exynos/clk-exynos7420.c
-+++ b/drivers/clk/exynos/clk-exynos7420.c
-@@ -199,7 +199,7 @@ static ulong exynos7420_peric1_get_rate(struct clk *clk)
- 	case SCLK_UART2:
- 		ret = clk_get_by_index(clk->dev, 3, &in_clk);
- 		if (ret < 0)
--			return ret;
+diff --git a/drivers/clk/imx/clk-imx8qm.c b/drivers/clk/imx/clk-imx8qm.c
+index 466d71786cfb2b1ffe617bd5c7ea7304238683c0..56db4ba262654a1e0837f1340800b115e2d9321f 100644
+--- a/drivers/clk/imx/clk-imx8qm.c
++++ b/drivers/clk/imx/clk-imx8qm.c
+@@ -135,16 +135,16 @@ ulong imx8_clk_get_rate(struct clk *clk)
+ 		    clk->id >= IMX8QM_CLK_END) {
+ 			printf("%s(Invalid clk ID #%lu)\n",
+ 			       __func__, clk->id);
+-			return -EINVAL;
 +			return 0;
- 		freq = clk_get_rate(&in_clk);
- 		break;
+ 		}
+-		return -EINVAL;
++		return 0;
+ 	};
+ 
+ 	ret = sc_pm_get_clock_rate(-1, resource, pm_clk,
+ 				   (sc_pm_clock_rate_t *)&rate);
+ 	if (ret) {
+ 		printf("%s err %d\n", __func__, ret);
+-		return ret;
++		return 0;
  	}
+ 
+ 	return rate;
+diff --git a/drivers/clk/imx/clk-imx8qxp.c b/drivers/clk/imx/clk-imx8qxp.c
+index 79098623bc8cc32d134b6cd8d21d990ae1bcd25a..cb7798ff0b963fb46573603873e99c993cc28ecc 100644
+--- a/drivers/clk/imx/clk-imx8qxp.c
++++ b/drivers/clk/imx/clk-imx8qxp.c
+@@ -128,16 +128,16 @@ ulong imx8_clk_get_rate(struct clk *clk)
+ 		    clk->id >= IMX8QXP_CLK_END) {
+ 			printf("%s(Invalid clk ID #%lu)\n",
+ 			       __func__, clk->id);
+-			return -EINVAL;
++			return 0;
+ 		}
+-		return -EINVAL;
++		return 0;
+ 	};
+ 
+ 	ret = sc_pm_get_clock_rate(-1, resource, pm_clk,
+ 				   (sc_pm_clock_rate_t *)&rate);
+ 	if (ret) {
+ 		printf("%s err %d\n", __func__, ret);
+-		return ret;
++		return 0;
+ 	}
+ 
+ 	return rate;
+diff --git a/drivers/clk/imx/clk-imxrt1170.c b/drivers/clk/imx/clk-imxrt1170.c
+index bfd5dd6c464457af1d9e19344e555a984a36ef2f..d2cec8f224c549996e0643617f774eced5bb9881 100644
+--- a/drivers/clk/imx/clk-imxrt1170.c
++++ b/drivers/clk/imx/clk-imxrt1170.c
+@@ -23,7 +23,7 @@ static ulong imxrt1170_clk_get_rate(struct clk *clk)
+ 
+ 	ret = clk_get_by_id(clk->id, &c);
+ 	if (ret)
+-		return ret;
++		return 0;
+ 
+ 	return clk_get_rate(c);
+ }
+diff --git a/drivers/clk/imx/clk-pllv3.c b/drivers/clk/imx/clk-pllv3.c
+index 85b6a9809e8dbcd1c73c0f914077b54fbae85f1f..bde95e950129ea54cb98e3ea37e49883b3911fd9 100644
+--- a/drivers/clk/imx/clk-pllv3.c
++++ b/drivers/clk/imx/clk-pllv3.c
+@@ -210,7 +210,7 @@ static ulong clk_pllv3_av_get_rate(struct clk *clk)
+ 	u64 temp64 = (u64)parent_rate;
+ 
+ 	if (mfd == 0)
+-		return -EIO;
++		return 0;
+ 
+ 	temp64 *= mfn;
+ 	do_div(temp64, mfd);
 
 -- 
 2.47.3
