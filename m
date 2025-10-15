@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E953ECCD194
-	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:45:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0621BCCD185
+	for <u-boot@archiver.kernel.org>; Wed, 15 Oct 2025 15:45:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2FFB8323A;
-	Wed, 15 Oct 2025 17:44:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E968F835B3;
+	Wed, 15 Oct 2025 17:44:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gsyeNTY8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="b1PavFfn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44B5D800D7; Wed, 15 Oct 2025 17:44:49 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id B2F99835FD; Wed, 15 Oct 2025 17:44:52 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B104835B0
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 17:44:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC815835B3
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 17:44:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-57d8ff3944dso7241322e87.3
- for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 08:44:47 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-373a1ab2081so64572751fa.3
+ for <u-boot@lists.denx.de>; Wed, 15 Oct 2025 08:44:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760543085; x=1761147885; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760543089; x=1761147889; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t+HJIZeu0+7laSLSvMjtjlt9YmM9BBOCW+FfJw6egmo=;
- b=gsyeNTY8Z3zl6la0gUu1muTXJQQnJ+DhiO0C0P2+WN1Hs0Rzeh85rfBM4UoRBoXoXs
- ReOH/aQJVgNaklBQ5KsxyqIAu6JSuUtbwBy78nECqM3cmkbESKzIkOXwiQO5rqaV/Y2g
- 00NkRYpoXEiFS8R4OcS68Xzjj0gEm9bxLefT0=
+ bh=1hV9/FJ0fiemrVvaC4ywj/U0q25Ve9h2sN1nLsQ7Me8=;
+ b=b1PavFfnv1a+UoOqcTNk6woWn57JEDZgeJrmyGjtg45kMgn6eNX4j/tH6vhs2UDnK9
+ lC5t11wiPBSSU9Ol7zqHlBuIiUv1+KEwZXcHnKSBgaq9/QO1gJZw+x3h1Knr4gb0IjjZ
+ Zz4sE2Plfp/f2Rn0/RSPC+LQdkwRFA1N/2QNs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760543085; x=1761147885;
+ d=1e100.net; s=20230601; t=1760543089; x=1761147889;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t+HJIZeu0+7laSLSvMjtjlt9YmM9BBOCW+FfJw6egmo=;
- b=iT9TQgDBxJxjjZP/CSh7abBWys15p+Anf7rn20zhmjUokMOcdaPj8M3u6mOQNTIAB4
- QcWsfiXKiSOE9T4QYSUPfWbrQ6R7wUpJ2laY8GyiwwX280ruuS/d2Mrd7lgL8deT6uMv
- xuuKnslXl5k0C3K06TVHCuYugVGW8c1Zg8PtxqjUpI55BJCoTd0qTHboe7czlmUh1Ja7
- usvGHPd/0mMzbdNZpm9zbMVm5kUp7Sr1gkLetyk0HtYg9Hr84OMAuiFzbu8jVjpRZXEO
- fVa7J2L0pwA9FyXfEBcA4QMwZM/3BWhdvbGQUStMe4yv7ME0LGe9TOCfD1a/MPETrx2V
- a10w==
-X-Gm-Message-State: AOJu0Ywlf2hd44i+z04EDuKnxppqONHJ+/3FN+a154lcKFO5EFg9jCks
- UVuMSAQ/w8MI8jjVrB0EQIdpifj6FWbMMkW3sCD5z5epZdNDkaZoUic9cXV3bZ/FMxu+/AexHlq
- 3I9zy+nWCKUw=
-X-Gm-Gg: ASbGncu+coFxSnYUQ+Yy5jyhJxatTxqMvTVoihmi9fwkZX5TfABkbKpUasePOkzAMl4
- QhNQq1Uaqo6/XCaDxFo/6Od6lN2/xSYjrkzw7xz4sUtA32K5BWidjbiEMzpyRXaQMfnTUPMxMiI
- qopbPs9JsEuKgFmvuaJGRl0SJptoE9H8LHU6A0h4FNWqn7okSH5TxqVQt6NUf3RPQP+3hhmTihS
- lAmNScyqXJfToLIyAKFl0mPoyj/1GE9x5+T4EWmijZyyrY37gw5EnMkfK2QwzFkbDYwUWEY5LUe
- 2WUf0dIMgd1M9g3wRGwscehNvHDs0yGm61AX6jL77YLj774+VC4g2C/7QU0Xb23mN5YVvo7w9j9
- q8ciDEYQG64qe6oM9vAk0BKb+3JamPOKjdyMJ1QavEMuxi5XF
-X-Google-Smtp-Source: AGHT+IFgTA51oh9t2xOLVdyb16OKG6u1P0ZDyv7NbanSvpvdbM1HHcYVa+uySUSYtUfikNypigN8jA==
-X-Received: by 2002:ac2:5e78:0:b0:57d:a4e9:5b00 with SMTP id
- 2adb3069b0e04-5906d8e5c65mr5358549e87.30.1760543085248; 
- Wed, 15 Oct 2025 08:44:45 -0700 (PDT)
+ bh=1hV9/FJ0fiemrVvaC4ywj/U0q25Ve9h2sN1nLsQ7Me8=;
+ b=rTmwSIR9fn07Aoll80GDfufg2NeldpxcUEVRy66WbW/upxmv1s8bu2El897oK/j9nT
+ gp3gkFPT2p08vxN+d5nJ35a7P/6xyoJUPD9QuWZEUH7P5QudZKYxIsvlpxkhzSnsKNmk
+ z2NuTweb2NW7uFmW0FENP+FX6jiIEPqVEQDk0I8jsfolj3oPAHpbjowSAqQoj5o2zfbw
+ Zy+tD/L5Fnsw/R8zrrQYglY9oBeUO+gtEVFj/lYB+TOzeztKxk6UatzMUBTTl8pJMmv5
+ BuprxjC7aAvBebNjJ5PEq7qoPXMMc9UeJhzRnDvAyvnW4a8p8ESajvyV/HsgQikhQ1f3
+ M3HQ==
+X-Gm-Message-State: AOJu0YxGbNRx0nzSNlBDnn/4v87X1ZrLZS1XuOQ8Mlp65hU6c92d/1M2
+ eEXDuA5nnNUf8jXZOseeKaQF38Mxu0EZRCl24iJef9XTlJmcE0NzGyXtFP9ITTGD48xS5IgtDrq
+ 8gkSWY0VorO4=
+X-Gm-Gg: ASbGnctOS5pwczRaoeM+vtNTUB3iJe2DKzCvZd6lOHx/mrhWNgWSAoiir8X+6x89K2z
+ okXW640WCWV2cjnpCMz3pc1YdzriiWt28ne8UsVmZJjmXk7xvI0qoN5lkNmKyDX9AHTurxVGCj8
+ n2tVO3PTq3z4AJH3jroVFnMagswMlwALLQZRxXhQmflWF8w79q+fODpOf6FL7EaqboIgvqmsR+n
+ TkYApF1A3UTRakpH5B6MPjohnHr/mlX8jkOHs518HMnBRPod4f79Jlk737pd/gzVFZBVwJV1cCd
+ uMbak2LU356SdWDV6diWhO94AXgloQUCi6JBVHsR5hnCtfvchILa2N9YW0ousKZhDUJ+YFtz6yl
+ Wlvcu8O60Jb5Hf5kQf3zzG7/94Qz3jqyCJ3+Y1yQlih7QZYo7
+X-Google-Smtp-Source: AGHT+IGhIpzZNiNl4M2CRzyCsNnsTE6v4mVIxAz9OL1OuSFvuJ4FEc4Be+l4l8fHHfpQcINIREu1lQ==
+X-Received: by 2002:a2e:b88e:0:b0:36d:a459:f0c6 with SMTP id
+ 38308e7fff4ca-37609cf2a61mr80392871fa.12.1760543088828; 
+ Wed, 15 Oct 2025 08:44:48 -0700 (PDT)
 Received: from chromium.org ([91.209.212.108])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-59088563cbesm6363777e87.64.2025.10.15.08.44.42
+ 2adb3069b0e04-59088563cbesm6363777e87.64.2025.10.15.08.44.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 15 Oct 2025 08:44:43 -0700 (PDT)
+ Wed, 15 Oct 2025 08:44:47 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Guillaume La Roque <glaroque@baylibre.com>,
+ Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Guillaume La Roque <glaroque@baylibre.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: [PATCH v4 02/11] boot: Add a new test for global bootmeths
-Date: Wed, 15 Oct 2025 16:44:05 +0100
-Message-ID: <20251015154423.908468-3-sjg@chromium.org>
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH v4 03/11] boot: Update first_glob_method when dropping a
+ bootmeth
+Date: Wed, 15 Oct 2025 16:44:06 +0100
+Message-ID: <20251015154423.908468-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20251015154423.908468-1-sjg@chromium.org>
 References: <20251015154423.908468-1-sjg@chromium.org>
@@ -97,80 +103,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These have different behaviour from normal bootmeths and we are about to
-enhance it. So add a test and also an extra check in bootflow_iter()
+For now we only support dropping non-global bootmeths from the
+iteration. Update first_glob_method in that case and add a few checks
+that things are correct.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v4:
-- Drop call to bootflow_show()
+(no changes since v1)
 
- test/boot/bootflow.c | 44 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+ boot/bootflow.c      | 6 ++++++
+ test/boot/bootflow.c | 8 ++++++++
+ 2 files changed, 14 insertions(+)
 
+diff --git a/boot/bootflow.c b/boot/bootflow.c
+index deb5f42ba65..62634a59a94 100644
+--- a/boot/bootflow.c
++++ b/boot/bootflow.c
+@@ -109,11 +109,17 @@ int bootflow_iter_drop_bootmeth(struct bootflow_iter *iter,
+ 	    iter->method_order[iter->cur_method] != bmeth)
+ 		return -EINVAL;
+ 
++	log_debug("Dropping bootmeth '%s'\n", bmeth->name);
++
+ 	memmove(&iter->method_order[iter->cur_method],
+ 		&iter->method_order[iter->cur_method + 1],
+ 		(iter->num_methods - iter->cur_method - 1) * sizeof(void *));
+ 
+ 	iter->num_methods--;
++	if (iter->first_glob_method > 0) {
++		iter->first_glob_method--;
++		log_debug("first_glob_method %d\n", iter->first_glob_method);
++	}
+ 
+ 	return 0;
+ }
 diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 7cd83dc7443..f3386a1eb31 100644
+index f3386a1eb31..07bf239485c 100644
 --- a/test/boot/bootflow.c
 +++ b/test/boot/bootflow.c
-@@ -307,6 +307,8 @@ static int bootflow_iter(struct unit_test_state *uts)
- 	ut_asserteq(0, iter.max_part);
- 	ut_asserteq_str("extlinux", iter.method->name);
- 	ut_asserteq(0, bflow.err);
-+	ut_assert(!iter.doing_global);
-+	ut_asserteq(-1, iter.first_glob_method);
- 
- 	/*
- 	 * This shows MEDIA even though there is none, since in
-@@ -388,6 +390,48 @@ static int bootflow_iter(struct unit_test_state *uts)
- BOOTSTD_TEST(bootflow_iter, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
- 
- #if defined(CONFIG_SANDBOX) && defined(CONFIG_BOOTMETH_GLOBAL)
-+
-+/* Check iterating through available bootflows to test global bootmeths */
-+static int bootflow_iter_glob(struct unit_test_state *uts)
-+{
-+	struct bootflow_iter iter;
-+	struct bootflow bflow;
-+
-+	bootstd_clear_glob();
-+
-+	/* we should get the global bootmeth initially */
-+	ut_asserteq(-EINVAL,
-+		    bootflow_scan_first(NULL, NULL, &iter, BOOTFLOWIF_ALL |
-+					BOOTFLOWIF_SHOW, &bflow));
-+	ut_asserteq(3, iter.num_methods);
-+	ut_assert(iter.doing_global);
-+	ut_asserteq(2, iter.first_glob_method);
-+
-+	ut_asserteq(2, iter.cur_method);
-+	ut_asserteq(0, iter.part);
-+	ut_asserteq(0, iter.max_part);
-+	ut_asserteq_str("firmware0", iter.method->name);
-+	ut_asserteq(0, bflow.err);
-+	bootflow_free(&bflow);
-+
-+	/* next we should get the first non-global bootmeth */
-+	ut_asserteq(-EPROTONOSUPPORT, bootflow_scan_next(&iter, &bflow));
+@@ -482,7 +482,11 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 	/* Try to boot the bootmgr flow, which will fail */
+ 	console_record_reset_enable();
+ 	ut_assertok(bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
 +
 +	/* at this point the global bootmeths are stranded above num_methods */
-+	ut_asserteq(2, iter.num_methods);
-+	ut_asserteq(2, iter.first_glob_method);
+ 	ut_asserteq(3, iter.num_methods);
 +	ut_assert(!iter.doing_global);
++	ut_asserteq(3, iter.first_glob_method);
+ 	ut_asserteq_str("sandbox", iter.method->name);
+ 	ut_assertok(inject_response(uts));
+ 	ut_asserteq(-ENOTSUPP, bootflow_run_boot(&iter, &bflow));
+@@ -492,9 +496,13 @@ static int bootflow_iter_disable(struct unit_test_state *uts)
+ 
+ 	/* Check that the sandbox bootmeth has been removed */
+ 	ut_asserteq(2, iter.num_methods);
 +
-+	ut_asserteq(0, iter.cur_method);
-+	ut_asserteq(0, iter.part);
-+	ut_asserteq(0, iter.max_part);
-+	ut_asserteq_str("extlinux", iter.method->name);
-+	ut_asserteq(0, bflow.err);
+ 	for (i = 0; i < iter.num_methods; i++)
+ 		ut_assert(strcmp("sandbox", iter.method_order[i]->name));
+ 
++	/* the first global bootmeth is now down one place in the list */
++	ut_asserteq(2, iter.first_glob_method);
 +
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_iter_glob, UTF_DM | UTF_SCAN_FDT);
-+
- /* Check using the system bootdev */
- static int bootflow_system(struct unit_test_state *uts)
- {
+ 	return 0;
+ }
+ BOOTSTD_TEST(bootflow_iter_disable, UTF_DM | UTF_SCAN_FDT | UTF_CONSOLE);
 -- 
 2.43.0
 
