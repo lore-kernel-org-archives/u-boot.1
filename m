@@ -4,144 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0087FCCD183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 12:52:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56D3CCCD183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 12:54:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4858F8367F;
-	Thu, 16 Oct 2025 14:52:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id BD721836D1;
+	Thu, 16 Oct 2025 14:54:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="U+exNX+a";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="h05b+WWY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FA65836AC; Thu, 16 Oct 2025 14:52:54 +0200 (CEST)
-Received: from AM0PR02CU008.outbound.protection.outlook.com
- (mail-westeuropeazlp170130006.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::6])
+ id E2984836EE; Thu, 16 Oct 2025 14:54:00 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F173283655
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 14:52:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBDA38367F
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 14:53:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rbJh1P6AiwHv0NBfL+dUCInN4dmdN+5SU4EKt6OF1SWIUbQDl6bCtEofr/gki8twQ6Jr+ho8lyfoqlxRgxq3q0uJ46wl+2oYRe6ob5WlmpF7p3L4RoWvkMPHVeEkwR4tcGhnBzuSFujUFrEO0OHpG4u9yCwKCCEjOEX3+or3VlCPQ9x7BhHHqy6ew1HsC0Q+Y8AO9eSpo6PzekXxoAlBLgvPQrAZLtI970KE6nfsVAc/YpvaUrCGNxpfvUTnT91zG2su1j7xJin0nMYA6xi+EKHUSZQ2VPrYRKkH+yGffDhozavTGGz4vk6hBpyBx5NuXQmaUFefQLSthXkKxUyD3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qObVmW5NSjd3eb9NRPM4hc68wzh4qxAP8atEi9Xlcl4=;
- b=zMuw9FqUJFGDqYjGX9mpCNYpjro9YOsiM1W2om1+48SKlurkkqH2Mj8kfqhzXev63NmD9Y3OYVQbjKLtgBKf/fLbNJ3912nm1D8wNgWxkMJ3/AO6OcVDP2BzonQLVdhYWdPvhnulLE3WuK8heVRXPaAKNuCM0iYqTIPPyGk7wQUUxHdek6p94GqK8aupuqGclYDedAlxamnNiw+3ycGc89eht/54UkLqMWvaoL9N9QN7zIH80hbgs2n2Vl0aMWfaDNtMJ0hxmk7a9iL6TZz2NJIDRfmHdsgCl0OsGqi5u5ImP2mJbr6uGsrUxOFVPIax1nEFuHid4xp30avOlaW5HA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qObVmW5NSjd3eb9NRPM4hc68wzh4qxAP8atEi9Xlcl4=;
- b=U+exNX+a5iJz8tx6as1zisY26rMjhZhTaP7Ruzx9eL1DBLtw7oKJMmjV1nus0lmeK2/1IVtVgA0bj4rky9SaTtvyJc23U+aVxbW6g4kfBbfiv9beJjEprR/1mz4UU8HjRoMF3Dvk1XdAEhQFGrEy1dEoCLraBU8tIRhRchjPwwc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
- by PA2PR10MB8477.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:41a::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.12; Thu, 16 Oct
- 2025 12:52:50 +0000
-Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.9228.005; Thu, 16 Oct 2025
- 12:52:50 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
-	Rasmus Villemoes <ravi@prevas.dk>
-Subject: [PATCH] cmd/part.c: implement "part name" subcommand
-Date: Thu, 16 Oct 2025 14:52:47 +0200
-Message-ID: <20251016125247.1594643-1-ravi@prevas.dk>
-X-Mailer: git-send-email 2.51.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0113.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:9::19) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:681::18)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1760619238; x=1761224038; i=xypron.glpk@gmx.de;
+ bh=ISGIQkQzgU2DwIRZJZTFSg+Y8OrhSBibhBQTa/9qGcI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=h05b+WWYXXWvM4HFSQBImFhPLPWk4daZp0emmoCnqD7Lz5Au0ZUAQlEOMP4lrILA
+ nRxCQY0xlHM0MkLmfFRllwhIB4/8EMQSptIGVV+aqkWzT3/64AuyOX0Tq0worZexG
+ OsOT4GGu9x+MGTycZ09JxGNpBDErDtPstuB7a0MM+PEvXNqlVgCU+1sVvLrlne7tx
+ Q6C+GL/TKDLuf16BdVnUh+WQO8516vVp02Lm/IuH5VAO2xPudk1CuF9Onpcb0Zw6D
+ 7DBw+brOSeVjKZDmByC1x3L7xacll2q1bSMZaoD7+fAMhWC0+hjRZTmQJ4vugneTb
+ hl08PkVuc+RNA61hdw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MNKlu-1uq4C73a7m-00Q8U7; Thu, 16
+ Oct 2025 14:53:57 +0200
+Message-ID: <55a322a8-2e3c-4936-998b-786e9e14565f@gmx.de>
+Date: Thu, 16 Oct 2025 14:53:50 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PA2PR10MB8477:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5e77dd12-5d46-47c7-6681-08de0cb2e9b3
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|1800799024|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?3a1LTCTZr7YOS+LVTwVBF0xyDZfOvaFDSp4GHQ1VIzB0pdkdGyc8BGuORVuB?=
- =?us-ascii?Q?4Zdu5gZ4ciYEve8w+55nED04uTrAXOpkvfO54G5cBzoyaINQy0xentDSzMaL?=
- =?us-ascii?Q?JzGHkU0vu0Hm/AQYGvLdpL2gMGlmJbDgzWq/d8WUML3tMWX/ravPnBkcwt66?=
- =?us-ascii?Q?O5/yeHXWpl0GKmSFK9HjKDx5PgOXwVGJPyV1X4or+Ot7ay4uDHopGo5JhVFe?=
- =?us-ascii?Q?7XGYfE8g+rZ/WdtoOh6EHqWRZLSLjl0nIBJNd36wU9Qk6AhUiKhcSzGuBOer?=
- =?us-ascii?Q?f3XrnJeg7K5MM94FoBjNjv6dbOuCJHMnKbw9CUcxw31BLqo3/IbjWXeJKVft?=
- =?us-ascii?Q?PIc6npCaNYlMd1JKxzZfh/9ChBode49pDmmbLY5k/YxQyGjS/OYkmiCLrX+R?=
- =?us-ascii?Q?XtpKFjayebeIuVu9+g/EM8QmVK8lVgX4Od6b6DNesR+MzLzqhjYBjO4LU3Ox?=
- =?us-ascii?Q?aGDUuIinkVxQLvMso4GpbinMLXHa802BS/wrjafR4+Q3m6qXJuysJMsUoOog?=
- =?us-ascii?Q?EHkaCk223GEye7io+/S/TfcgFybgpXxthEqgGG8ABZ161w5VKC4gNN0hvwCF?=
- =?us-ascii?Q?fOq2FEHNWmEBeUpg+fbMXhNI5ddba8pWvg+4g5jNYVuJGYduys64Ui+rDDzk?=
- =?us-ascii?Q?ZQtrBsqVZSS/tXEuOppFtgaw/072BuscyutQu5Q9FRywUgyLUvK3uTEOswg6?=
- =?us-ascii?Q?xj0ImSYCt0T6qH8TP05yoTorPbNEYbr429NSqFBwMEus+6hbOweOfCo6qjzM?=
- =?us-ascii?Q?qGS9Np4SWWqTi/DvuzrnDy3yTpKNO0NhIbekPN6gPyLFBImcN/k1iiTA6P61?=
- =?us-ascii?Q?rLKxSVXPWQP4/dqqld/fk199cX8ZXcinoXqZvKo/Nw9mcblbLOSNFkTAxoEw?=
- =?us-ascii?Q?28gjVqJ2I5+sC/vZDj237wKB25l1E600p7cHp7ec3INq7ZlXNkcqffTbWbTz?=
- =?us-ascii?Q?fg5hvGk0mm88yhlUcHSIYxXb7nbBsEQbFR/mFrxwrEZAlz8uQYhb/3WnOxjm?=
- =?us-ascii?Q?MFMxlUPtQHf3EPG/ZI+O5zal/XF2koqMs0oSZHim3zhUkUpv7sDCyqkDHxwi?=
- =?us-ascii?Q?jt95mbGNlSgj6YtPJ4AsBBbniUrULvzls7nUEIdhK0UoQtNSFMsehisEOE8E?=
- =?us-ascii?Q?8nhY137F8HMXeNMDcSfvz4ZZCKd0wPRhEL2N8UaaPOJFROEML4KDCTvEx61H?=
- =?us-ascii?Q?mbKI1YT4Men16NUqqwYH9U/mpCY3tcYzdHVd4v//mJy0qt+xtD9if5RMPTnY?=
- =?us-ascii?Q?WZR2XBC+dbsVq8RscZNbhMZB6bHTiP9g/CBgGEyIJgL1bzHH35/p2SPAkGwS?=
- =?us-ascii?Q?OsWXh3ClQr3n979xwGs+g3tML3eplHzzpI/Jyrr2HLCGIyIlaV06lGdcNYbw?=
- =?us-ascii?Q?h4OyaGxhgIFx8k7k2v9smthmBjSo8nbY9CbAhVVliqEHmP/mKgkKUmNPy4u5?=
- =?us-ascii?Q?BIOhqlzQAtjEhlZZXavKSXMzK7l+vBv8vIa/6BGkozaF7C3TbdZ195F2x+7x?=
- =?us-ascii?Q?Zplav4wVlxMoQmvk86EaySP2HZr1HeMRVSA3?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(1800799024)(366016)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?/DUikXjtrbV48/smUmfhcL3Ft/9HWvRVxkkyT7d/Hqo4VYIoz7kwa8JTmc1e?=
- =?us-ascii?Q?TIrgxqajTRWx8E3ALmCkXSputE1kKztJaz3lUCS4/4V4WfIv1XQKC+2Pr8gN?=
- =?us-ascii?Q?FSzVbaoUeHeuk2qWy5T7iFr+g+9Rlh4MSifTIUUSbv9tZ2CO6TjiZjQctF7m?=
- =?us-ascii?Q?gZrF+EuANJ3OJiDBcSAYU1unuH4IDBeLsCnJervs29nTlfS3gRpSIAkVJXGv?=
- =?us-ascii?Q?iRS/qn99zGYAdD+A3V5bbLDcy87i/zT8EyfPASMhmi3yylTc9ZoV/zbJFmIS?=
- =?us-ascii?Q?QI8pz+VlsTHQVp3g8EkSWA33j4HESjdtky61/nNA2OxHeh/3bx0uRBSVAXZw?=
- =?us-ascii?Q?tjgugsp1b4NBRdughVfUxfqM28Aj9z69itJz4PYEoGGg14c7i5Votn+/56Aq?=
- =?us-ascii?Q?qVO5jcKZqscUeev1JQ7sTWk2ZBZPMNr+7UYstIPwCsOq949woHYhoeoOK8X6?=
- =?us-ascii?Q?8VrrjZjKo/oe+Fl0+ccJXSBKWV1BgVJWCVHPX5X7wNbN0nVhHOEv4VMqIUUd?=
- =?us-ascii?Q?+rJ3aWCidu/KWQ0eOHmVvyX9KQ3TZJ1U6LBag7yPkfaVdrjupIqbJVWEZk8t?=
- =?us-ascii?Q?fj9/DHLL4kJfQsurmY3wudocXN3jo0jUgi3pvd2CIzKSzywOdIT91GS4Xvkg?=
- =?us-ascii?Q?WXvUp0ADhTku2V4jyqqSskpLXcGkIuQxUvm+PIUk/8M7kXhG7VLGreR0U7Zz?=
- =?us-ascii?Q?IoDHwTy31FK5HsibQJAyV+Oaa+42RSk9ZIXDM5UmiiMmCde11KvXqXLk55Pg?=
- =?us-ascii?Q?z072ce0Su0MV3kOpQILfbeQeRrqweNmrHD4oILEtYHVXcNhH97IkjQLfSmli?=
- =?us-ascii?Q?FafSSuxD6AE7w8VPS0L/ci1EG3dq5WP9RcBYaBwkW7to47WIxXDPZfIJ4eGU?=
- =?us-ascii?Q?ipQS20qkTMKRE1KRmi/Wc2OiSlj/z6sI8Tg7IN9caYbuOdj6ImE81F0LVe23?=
- =?us-ascii?Q?EiwSUjN8PI9TLSz6c9ViDrLiE1gVGHm0mOmNpqqiLUC5VVlRgbwc6D9jRMxj?=
- =?us-ascii?Q?rGjDUxrZ2/tXPYpRhDItN5Eo3w9nK5nMmPfTAMVpUQuJyCrTbi9RB1Ajic7j?=
- =?us-ascii?Q?YGcT1NH4e2OiPL7WeizC1R+cVvwWAkHu3/k9D5/8sc1/oDnKolxCYuwxmFv6?=
- =?us-ascii?Q?UaxQ6iVatqgBcubsy7Yt9rmhQxXNk+TgjkDuMtdB1ZLQW3kQU/JfRtPfkLjo?=
- =?us-ascii?Q?ZkcE55g3GRZVtfr4MUisuSTgwl4HQl7mCCrlLqog+BBRzDbY5QPIHoI1tV40?=
- =?us-ascii?Q?ekr8b23SUyuOh0PTPLB2SVe4sWDw7m60nLutDD3xmFno9Adhyzo2zFXZTHR1?=
- =?us-ascii?Q?3WgNjqjzFuB/uHNGjN96/7Y7RKrdhecWqTj5bzCduEYdwE/n+B7Esc+ODYZf?=
- =?us-ascii?Q?BOHuwiaooPHfYDY7eKsEZbdjO1347/zXKKMFXNuRCrUXQQNSLd9pvrTf5XSh?=
- =?us-ascii?Q?E9gH1fwIYQjol4IsRzyz5ySWCkyDPnqTZCzMD6yceVWRfZkzWIhZjYuYBTSh?=
- =?us-ascii?Q?K0kjIQz4moIYrhC5czQH9emztQspbwhHcnp7Xsz0ozy6qcY2uyz6BfTsR97b?=
- =?us-ascii?Q?UbvC6Yt28bgmgkJOfvAg8E5x+Or2VjJqsnL/jGXDByBblpdN5ZLppBAckasJ?=
- =?us-ascii?Q?hA=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5e77dd12-5d46-47c7-6681-08de0cb2e9b3
-X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2025 12:52:49.9476 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2CsQmWRhAHsJXRNyYhl0IXllz68NGO+X0ASBGnXifWQuSaHio/mcpfY+5G3TZISnpFrsDOjDdvM16I6rE/hlkWiDIFZxjbLCoccDQEPX42c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR10MB8477
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: make dhcp_run() common for NET and NET_LWIP
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Benjamin Hahn <B.Hahn@phytec.de>, Tom Rini <trini@konsulko.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ U-Boot mailing list <u-boot@lists.denx.de>
+References: <20251009123034.2441110-1-jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251009123034.2441110-1-jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:tTQQpfgzVP4d9l/dM7mvQwseMBiFA4qiFLwTJrsD9aeRiOoNrGi
+ DV2IVYhizLtcxVsOKOOcMd4y4yl3EpJrmQE4MpiF3p9/IJDe/q1lWOh19gJp5DXkprT4T9B
+ svRqrfPwWTcaMPJOAx4CkVyalU4YHk49vn2QuwhBb+pAEGKo1RCWwEP+iuXyyezMktdYBqL
+ t9TwtCNdOjgYPePTq0WWQ==
+UI-OutboundReport: notjunk:1;M01:P0:1kfKX4phZnA=;scIFq323elJSpnGL5seHozmKLgW
+ CZqJ4ARFzD/PRK4joQec4ODIh6duhDXZdfrHvdkb2Cc2u1Sepx22tuiYmpfsreB25l75EnoAa
+ yASw689mY7N2b6msn3nIkDQCTTyXd0aVw0ibg75mkxCJMWuy6m8Wc5ZIDr9+uUpU1qebsqhrD
+ 3TwOxdAj06bPcXW6mrAe3B0MAlMMpWph1zqRo+G0kpQUEGhyLqSQcAy0aqMrQUighEWwfvefa
+ 71x9m3kzI6sFeouP3vfzynpFb1a0ahpX48PqZA/wSvSvtxVxykC7fxkXBq84e7yJPeOtS+Wkq
+ 1dcNeEEtzv37QVrZTM8xdKy/VBmsHn/g/DzW/JM5uKMkpLwe46MmA0UNDehACsB56rZAjdK05
+ WkplX/ufFhKLknWkJnK5i6BF8UAdQj1wmFVaC4828v5cRnoEqoCIXeBFdASRNaKt8XbWN1vxi
+ K9JDMWOCEKNTwTIBbO7EahXu1zMa0bvE1PGrYzIvCn7Es1hRArrg0FO7gza2FyKpFQbaqG1pi
+ L6cP3qxUkTXVlI0lpgQvZ520RerkWH2D3MciQS2LOdjEXa04USkVA8SjMJgW4jwdrqUriWgi1
+ RPUad+mEw5U1XcYBaZ301hABVUeLiwLpxpAjvunc/9NVvQB/UHwLJn20Rhm91+ZCCODOHe06t
+ HqBj9LwEFvtrFeKPVt26PbywoTDZM9TSiygDC8JTKkRQlIZDJq6X2ugq6GQkYyRpFe1/3zbQW
+ ccl9PQ9JR1OjYazqA8Tw7nkaET5L0DHqk7MUVd3XJ05QzIkUVrfoqiOQYhs8VEpZjgL6k95vW
+ sQIJFRv644cfetCIcdPOIxc+1ICPXgNUL1VnhC3xHpBLNijPYHxZcU0q26HcCnxuoXSvcCwzP
+ Zg/D6RAIP/Pw5fZ4187ILivz4xY7hSNteMIoZZiVJQdwW8W+XZii824GZhHiAu5px/eGxosnD
+ dSZnqsiyLjH/UDpNw2WDRPKcdf6Jc0+uTHaE/bq1LppCnCnhik9VXd5tOOU09sXTlS4OdvfMd
+ FgW/HDdxLaxapuvRMs4NYlMwv23rEAvgXH73wNetSZEosnDIZTE6WN6Zy4kvdUvhYQc4A7+WH
+ 7E1a1SmycB3QacDt0IIhD1saZLr3ZUjEYHurHemUXrIXJWb+Fh7bnhmQYh9NIIGRH262UELbI
+ 877EjJ19teo/quxzDFx410wdiQgJClqkJUwJUpzkVqaaVM31WpjoHlEVXVZp+vJr9543avKdv
+ bEC6cGzV/j96Hza7bYpHjoQelR2ZYJA1pN+k9vxIl94N6WG0gM3JXAcRmnGvS7bJN5AvNmISi
+ glGRXAM0kypiyRsk/QuOerL0zOQF+XguTTokX0Wooyxg5ehBvwlPZ5BBZ5UnXJCTJaFgBvoAc
+ /Rs4N+Q0lCu4wC6jX5ARNUpHjKBXPP66009BbecWkgWu4Aka/eDIXLMTlyvmVL7LRNlLihg36
+ RXSHE1JWjmDqHaqeqIbZuI0JvGTP0pC4paUjC7PHSw6sq8ytCLmv+BoshvKYqrL5nZwks+/tV
+ QevKcwVAMnNy0qpcibMDhfLIva+R3Z4530k1OCrzSNANk2ARrlnxVfaeo1vYYghKGvYfO0URI
+ 0cYPzv0t831Xu0eYvHLX/mhk+b8IAYaupXKzG7mCXEEhYN05MFyAQPevfm3EUBVZu1YpFKEUU
+ +re1qAdkzMB4cBEdNHyVjclGBEUY3/5lePtOMH8rcAoyvXn7IcQf78Fl1mcjY0lCzKIoPUfE1
+ /zpEU41QXIdF1Y2W8sGLRL9+z7peSb3XgbHMCTo7HBO8qdErcPLCLJ2uxNWIkrV7WwMIXk4zj
+ 1dTQLYUGYMSxl21klAhWAKGp78xmLKZL/pXdCX4zjY1Vvd/Hf+SRa1gVgtXSA6KgD3x92MkHn
+ JUyLONr5gyLSgdMzrdx3jfscXABwUKyIM2BnLOKQvzYiPOmLn+bjEbwbRmIJdtm70F78S3FYx
+ ltrh8oFrBpI1W3E89UNStQePs/gApekUtcykS4use4R5nxRZaW3Shtx2noA7ckQcsDyxxqe0N
+ yvD+9WOhPKHhAM7P2SFDXvtlF486nzpPF/ZdKUU96dNvm47EDUyMlo0MIZ+IUyiHhpmNudRUK
+ 2SeUwETeEFBuh6BVSPK+lWSqrwNa9Pd3bAc2CSQvJRx4FftR+gIgtm987S/vt1n6NjGVWbUO2
+ zGzIon30M1yB6OZTeva+6ih42vyJvu3oczbihDpM424+eNOhZcNpDly8mfAFFF85ngaTDic57
+ EVCDI8DlsKcWJd0I3oScLFWDfHDusJ0Ls1raYpx+MPfRtH3ayrNRruIjlHrAVqLJdpb/xOW5P
+ RRUsDpqrN+ISTbKPsZrWnrceM8MZh0CFXQEd3uGgMDzI2I00K61EdgmYYZs3S9qAvQy9zCLoJ
+ YaGGZ7wzDbTb37aS7EerQlq0B8hhMocUenv/qDmgm9UI0WHpU+R3Xl7xtEZeQaN+hjJsgMFss
+ hJhadz52UolCmnWtZqBeVBB0t2yUR+WLuLXKBNiI62HCrwqEPhFSc8DsxSLVDrWaNWlHs0XvY
+ Fv/rLk/C1TfZ3wglEnjn8WuehC2sKT+LX3OBtHrrZkdmvPVjt32xkmBgqswG3/SupKqRMK5ZS
+ diZ2u73Bfn+/4lCdeyKbOkAyhNRMMp55jmmihkN4gEelVwFuQRT5SGx3NeyMcDXn3BMYiclhz
+ O0xMQFoyuPVvtaF9W3cF5ysK6NTdl/mA/ajIFPmMeLzAijVVCEKRUEFbLML0QsnV4PX8IiDXa
+ wcZv7oqWkJ7EsZsEo3cSBZ6KJkbedTXO+gpAlXKsFMsz+kEA5sZgH+1FIfXBVnJYjZpckaHeE
+ V3PaZIXgc0yssJXYCIsGp72lIzprKLYtTGI3MtL+NSkeBqxPD1z6ZQdYIeqBj5Fqp/DQ9f5/9
+ LL2krByx8XVbVop9zDJMJtwXWsVXSBc8jbZtwDNGVJtuRl/YCiubAGyYauuXmBxnnYr9nPg6v
+ FzcvfkXulRxbAjvxNGpOdtVFXekl6T1vdd5ePCzKDoHfjGGIPCd7GZwFU8iPANInSt5WlT8ac
+ Po0YsoPs4QCsY8o1JJiOMlbDOicgbQtlchBIEG4ntsgy2pwr09X8txq+rc2BwywlMah0NzgLO
+ quYjqR5//9hBtCN/vWnm4A905KLwDbpk/tbi8+FCkoMZv1EF/XI1VFgOlBpKi7ODTDxQD0z2Y
+ IOkLOVPRkeZC+fNyE8KcjF6hH8S6gXCSowoxV2NZAncEo8adG+6sEPpkeop/FfuVSNL8fSQfi
+ oAGA3bipOMj/TOULiHjTTlWFQ3VWbJ29h4LLHekNGaQIAaYk8VbveLHzbzZtljvc4DmTHzbyN
+ GY4/hs3wQVcjmADSmJ2g8BScsCtM91CLlXVG8j2OCxU8IkaZw5l9d7A9/rXbJ2hFXM7R5Tlgd
+ Nykpvkvx5ydsLZuzstAYb+Nsb9hEgQAatp9yXJSFh2vtVD/O08LAr61aynz0gDFHKtAInIWqS
+ lEzaMS963o18reMTw/yq9+THzXJE560VjjfjpYV7Aj+2Mpjh4tuN/d3BsV61+sCHjEmLUDpz0
+ 55Ds7KiC7Sgg2ZJkw8hkGBBv+pMLshS59TyJ0NqAmINxGcIDNbPvJt9/EHVXmTeWLh/4r/snT
+ sOsT490BTe5dCeJlc5G2rd25yR07C+XvNp43R1nctjv39zvYtHM23D9LcVHTJ3pG2dEJhotiO
+ EVTJoyOn+hRsjZW7ElfoM3IW13yXrXMSIq1DE9tc7x9goRDVcsfR35alq0ynd/JW9ug37x1jl
+ wkm/URLH1oxtFRFXhfESNXt0yLBJujicRBxwPx9LN1KhUSzZHS6LsDOYdVLFlOBXJ1yE3KVMx
+ lliZqAgKNtWKv4+ucfn9Z6OqoEQ88cklJ4pbhuJgeAqebsQQSpU8YGLh5KD/9WH0cc/ReEjBJ
+ i9R6z4YcEFbHhli50JQqTEAtxscIbTg9Aq/hdjqPgGT7Mileta+M96oPlMhE5f2CVIOTsY2Jk
+ 0+dvMAbb3KfThos/+TVPilFOgooxjbFB6/gwXrT3w8rJGxrfTcqQwfkd5CuH9sLL+FQJ72NpF
+ asKVRA9l4g+NH++C+gYRAyGhGPWAatXK1pQwT9lAHHBVIRmKRDxjkyrIGe47lD2UExYQUSS+f
+ KcUTZ7CkkWigb40mjzvEjZQhKR1XiR8veLqFldv3ThmLsGcIiglber64gd7RBilDgFd8kVSct
+ LWD54TNGQBUqvpLfn3Iqf6PsDj0bEffFKh58lfZvhmP1YMT1q1vxh+tSkgt0Zcc1HSeIeOwq8
+ juvRlUaTR6k1xOxN4ZL0/HpdSAycCgdwU/0WGQlXLOzURI+XlNlyUTd6yaqHINHtdBktYYTQb
+ Ex0w41R64G27A+HAWC0esBs9Vy9w8UGKOwUlBDQ82+k2OjQuWgI5j61AnukStjKYd/sjHE1F5
+ wU0UVxr8l62q506082Xo6pMDfzh2pLJyovBpKjtlaaGtaJr5gBKLFm2/rL0vSJ1brvwtBsBXH
+ rrDQDPk8lg7XyVvhtufYjXRu7fC0kgzi0w/P4H5VrEVoXXwJUHwNkeDzjUFRqIwnQz84ogSWk
+ MafQv3aCmPY3+WGyEVwwXOZoPNxnmgjg2DAIluo+IwuPnTqjGyubbEG6LYuCelEOVyxMAq1hs
+ 6xM/6yCJnf1g54UisS9jU9sDJBaEab/Dq3iMySBTuxpo4FV5chYkpMOBqb/o6bUjrHq8mFANu
+ 7tD9MutU+4w9KK5vLTCX8ETiu3l3EB8ar7UBYpHlZkbobo00HBH4skD8LkCZR+EHASCePOi8z
+ EhrxTCn37M5/nM2eyziD5Ec6pWXAwJ2lySWm0mcWKwIyTKFjhJXQ5qSHOAzQV7FG/pF8O1dCF
+ oAhJv1N3+E/tZZbtAKho1WcKT19RI8/SQXiKVeR5qmF/1vo8l0semFiNOCsgc3e3P7BnmFoRY
+ 0vtGn7ZkThfkB5FFwNJ0LJkgbgEf0oqZCADCmyRHQM0LKERZU8ZzjXmL8zYUNaqsTI2hClOY1
+ yOAN11ck0MH8QZfmOGhbbMCfnGhc638fKOfdaCqXWJ6zzwQok2Lyxn47hW1aQUgfm7fpi+LpC
+ bz4gXD/LOlGtmnYjYHw+CjSle7qIVQZ7PLcumufEXXJvZ3i
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -158,69 +155,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a natural buddy to the existing "part number", allowing one to
-get the partition name for a given partition number.
+On 10/9/25 14:30, Jerome Forissier wrote:
+> THere are currently two implementations of dhcp_run(): one in cmd/net.c
+> for NET and one in net/lwip/dhcp.c for NET_LWIP. There is no
+> justification for that. Therefore, move the NET version into
+> net/net-common.c to be used by both stacks, and drop the NET_LWIP
+> version which by the way does not look totally correct.
+>=20
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> ---
+>=20
+>   cmd/net.c            | 36 ++----------------------------------
+>   include/net-common.h | 10 ++++++++++
+>   include/net-lwip.h   |  1 -
+>   net/lwip/dhcp.c      | 22 ----------------------
+>   net/net-common.c     | 35 +++++++++++++++++++++++++++++++++++
+>   5 files changed, 47 insertions(+), 57 deletions(-)
+>=20
+> diff --git a/cmd/net.c b/cmd/net.c
+> index 886735ea14f6..24099764493e 100644
+> --- a/cmd/net.c
+> +++ b/cmd/net.c
+> @@ -134,8 +134,8 @@ U_BOOT_CMD(dhcp6,	3,	1,	do_dhcp6,
+>   #endif
+>  =20
+>   #if defined(CONFIG_CMD_DHCP)
+> -static int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
+> -		   char *const argv[])
+> +int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
+> +	    char *const argv[])
 
-Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
----
- cmd/part.c | 16 +++++++++++++++-
- 1 file changed, 15 insertions(+), 1 deletion(-)
+Thank you for all this clean up work.
 
-diff --git a/cmd/part.c b/cmd/part.c
-index db7bc5819c0..975a0a08a99 100644
---- a/cmd/part.c
-+++ b/cmd/part.c
-@@ -25,7 +25,8 @@
- enum cmd_part_info {
- 	CMD_PART_INFO_START = 0,
- 	CMD_PART_INFO_SIZE,
--	CMD_PART_INFO_NUMBER
-+	CMD_PART_INFO_NUMBER,
-+	CMD_PART_INFO_NAME,
- };
- 
- static int do_part_uuid(int argc, char *const argv[])
-@@ -154,6 +155,9 @@ static int do_part_info(int argc, char *const argv[], enum cmd_part_info param)
- 	case CMD_PART_INFO_NUMBER:
- 		snprintf(buf, sizeof(buf), "0x%x", part);
- 		break;
-+	case CMD_PART_INFO_NAME:
-+		snprintf(buf, sizeof(buf), "%s", info.name);
-+		break;
- 	default:
- 		printf("** Unknown cmd_part_info value: %d\n", param);
- 		return 1;
-@@ -182,6 +186,11 @@ static int do_part_number(int argc, char *const argv[])
- 	return do_part_info(argc, argv, CMD_PART_INFO_NUMBER);
- }
- 
-+static int do_part_name(int argc, char *const argv[])
-+{
-+	return do_part_info(argc, argv, CMD_PART_INFO_NAME);
-+}
-+
- static int do_part_set(int argc, char *const argv[])
- {
- 	const char *devname, *partstr, *typestr;
-@@ -273,6 +282,8 @@ static int do_part(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return do_part_size(argc - 2, argv + 2);
- 	else if (!strcmp(argv[1], "number"))
- 		return do_part_number(argc - 2, argv + 2);
-+	else if (!strcmp(argv[1], "name"))
-+		return do_part_name(argc - 2, argv + 2);
- 	else if (!strcmp(argv[1], "types"))
- 		return do_part_types(argc - 2, argv + 2);
- 	else if (!strcmp(argv[1], "set"))
-@@ -305,6 +316,9 @@ U_BOOT_CMD(
- 	"part number <interface> <dev> <part> <varname>\n"
- 	"    - set environment variable to the partition number using the partition name\n"
- 	"      part must be specified as partition name\n"
-+	"part name <interface> <dev> <part> <varname>\n"
-+	"    - set environment variable to the partition name using the partition number\n"
-+	"      part must be specified as partition number\n"
- #ifdef CONFIG_PARTITION_TYPE_GUID
- 	"part type <interface> <dev>:<part>\n"
- 	"    - print partition type\n"
--- 
-2.51.0
+Should we move the dhcp command to a new file cmd/dhcp.c to get rid of=20
+all the related '#if' statements?
+
+Best regards
+
+Heinrich
+
+>   {
+>   	return netboot_common(DHCP, cmdtp, argc, argv);
+>   }
+> @@ -145,38 +145,6 @@ U_BOOT_CMD(
+>   	"boot image via network using DHCP/TFTP protocol",
+>   	"[loadAddress] [[hostIPaddr:]bootfilename]"
+>   );
+> -
+> -int dhcp_run(ulong addr, const char *fname, bool autoload)
+> -{
+> -	char *dhcp_argv[] =3D {"dhcp", NULL, (char *)fname, NULL};
+> -	struct cmd_tbl cmdtp =3D {};	/* dummy */
+> -	char file_addr[17];
+> -	int old_autoload;
+> -	int ret, result;
+> -
+> -	log_debug("addr=3D%lx, fname=3D%s, autoload=3D%d\n", addr, fname, auto=
+load);
+> -	old_autoload =3D env_get_yesno("autoload");
+> -	ret =3D env_set("autoload", autoload ? "y" : "n");
+> -	if (ret)
+> -		return log_msg_ret("en1", -EINVAL);
+> -
+> -	if (autoload) {
+> -		sprintf(file_addr, "%lx", addr);
+> -		dhcp_argv[1] =3D file_addr;
+> -	}
+> -
+> -	result =3D do_dhcp(&cmdtp, 0, !autoload ? 1 : fname ? 3 : 2, dhcp_argv=
+);
+> -
+> -	ret =3D env_set("autoload", old_autoload =3D=3D -1 ? NULL :
+> -		      old_autoload ? "y" : "n");
+> -	if (ret)
+> -		return log_msg_ret("en2", -EINVAL);
+> -
+> -	if (result)
+> -		return log_msg_ret("res", -ENOENT);
+> -
+> -	return 0;
+> -}
+>   #endif
+>  =20
+>   #if defined(CONFIG_CMD_NFS)
+> diff --git a/include/net-common.h b/include/net-common.h
+> index 1112af381a98..78d98e5bba07 100644
+> --- a/include/net-common.h
+> +++ b/include/net-common.h
+> @@ -479,6 +479,16 @@ int net_loop(enum proto_t protocol);
+>    */
+>   int dhcp_run(ulong addr, const char *fname, bool autoload);
+>  =20
+> +/**
+> + * do_dhcp - Run the dhcp command
+> + *
+> + * @cmdtp: Unused
+> + * @flag: Command flags (CMD_FLAG_...)
+> + * @argc: Number of arguments
+> + * @argv: List of arguments
+> + * Return: result (see enum command_ret_t)
+> + */
+> +int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv=
+[]);
+>  =20
+>   /**
+>    * do_ping - Run the ping command
+> diff --git a/include/net-lwip.h b/include/net-lwip.h
+> index e88e2186635b..c910def5719e 100644
+> --- a/include/net-lwip.h
+> +++ b/include/net-lwip.h
+> @@ -50,7 +50,6 @@ int net_lwip_dns_resolve(char *name_or_ip, ip_addr_t *=
+ip);
+>    */
+>   bool wget_validate_uri(char *uri);
+>  =20
+> -int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv=
+[]);
+>   int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv=
+[]);
+>   int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const ar=
+gv[]);
+>  =20
+> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+> index 531bf2c67057..b798014ebcb9 100644
+> --- a/net/lwip/dhcp.c
+> +++ b/net/lwip/dhcp.c
+> @@ -150,25 +150,3 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int ar=
+gc, char *const argv[])
+>  =20
+>   	return CMD_RET_SUCCESS;
+>   }
+> -
+> -int dhcp_run(ulong addr, const char *fname, bool autoload)
+> -{
+> -	char *dhcp_argv[] =3D {"dhcp", NULL, };
+> -#ifdef CONFIG_CMD_TFTPBOOT
+> -	char *tftp_argv[] =3D {"tftpboot", boot_file_name, NULL, };
+> -#endif
+> -	struct cmd_tbl cmdtp =3D {};	/* dummy */
+> -
+> -	if (autoload) {
+> -#ifdef CONFIG_CMD_TFTPBOOT
+> -		/* Assume DHCP was already performed */
+> -		if (boot_file_name[0])
+> -			return do_tftpb(&cmdtp, 0, 2, tftp_argv);
+> -		return 0;
+> -#else
+> -		return -EOPNOTSUPP;
+> -#endif
+> -	}
+> -
+> -	return do_dhcp(&cmdtp, 0, 1, dhcp_argv);
+> -}
+> diff --git a/net/net-common.c b/net/net-common.c
+> index b064557d5241..442b05975581 100644
+> --- a/net/net-common.c
+> +++ b/net/net-common.c
+> @@ -1,6 +1,7 @@
+>   // SPDX-License-Identifier: GPL-2.0
+>  =20
+>   #include <dm/uclass.h>
+> +#include <env.h>
+>   #include <net-common.h>
+>   #include <linux/time.h>
+>   #include <rtc.h>
+> @@ -48,3 +49,37 @@ void net_sntp_set_rtc(u32 seconds)
+>   	       tm.tm_year, tm.tm_mon, tm.tm_mday,
+>   	       tm.tm_hour, tm.tm_min, tm.tm_sec);
+>   }
+> +
+> +#if defined(CONFIG_CMD_DHCP)
+> +int dhcp_run(ulong addr, const char *fname, bool autoload)
+> +{
+> +	char *dhcp_argv[] =3D {"dhcp", NULL, (char *)fname, NULL};
+> +	struct cmd_tbl cmdtp =3D {};	/* dummy */
+> +	char file_addr[17];
+> +	int old_autoload;
+> +	int ret, result;
+> +
+> +	log_debug("addr=3D%lx, fname=3D%s, autoload=3D%d\n", addr, fname, auto=
+load);
+> +	old_autoload =3D env_get_yesno("autoload");
+> +	ret =3D env_set("autoload", autoload ? "y" : "n");
+> +	if (ret)
+> +		return log_msg_ret("en1", -EINVAL);
+> +
+> +	if (autoload) {
+> +		sprintf(file_addr, "%lx", addr);
+> +		dhcp_argv[1] =3D file_addr;
+> +	}
+> +
+> +	result =3D do_dhcp(&cmdtp, 0, !autoload ? 1 : fname ? 3 : 2, dhcp_argv=
+);
+> +
+> +	ret =3D env_set("autoload", old_autoload =3D=3D -1 ? NULL :
+> +		      old_autoload ? "y" : "n");
+> +	if (ret)
+> +		return log_msg_ret("en2", -EINVAL);
+> +
+> +	if (result)
+> +		return log_msg_ret("res", -ENOENT);
+> +
+> +	return 0;
+> +}
+> +#endif
 
