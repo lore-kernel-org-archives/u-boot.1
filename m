@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E37CCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 17:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69812CCD199
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 17:38:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D728836A3;
-	Thu, 16 Oct 2025 19:38:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F4BD836F0;
+	Thu, 16 Oct 2025 19:38:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I6dv9MHC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ogyp1Uuf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B58F0836D1; Thu, 16 Oct 2025 19:38:24 +0200 (CEST)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id 8BAC98367F; Thu, 16 Oct 2025 19:38:25 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5858E8367F
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 19:38:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E41B836C1
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 19:38:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-74526ca79beso658502a34.0
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 10:38:22 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7b4f7a856acso334346a34.3
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 10:38:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760636301; x=1761241101; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760636302; x=1761241102; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a5ivtf4PfFsP8OT3Dtoi84r2f88T3pyq0xauRw5OhbU=;
- b=I6dv9MHC+5/nnVs+OKTbkg+i7x+Q28BB4WlVj3HbPIOceVmrN5pq1G/7B80fRUXvhM
- L+g5GucQ9bDbBgZ41z0wAflxhZXb3uHGUg5OQ6Qufb6cUUiQFYXDuUXCVZnkmzavsJYG
- NAScHUGC2kdWF8boHZBNJ3fmfRvVjCxPtQR04=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=S83AQMrjZiqRFrg+8y/PJaMGAxy3pHxlttYm7gUpHAI=;
+ b=Ogyp1UufI5VuTIQe3w5velJCl84dj1/LNyM8oqw/S0z+t2yzw/yewnAQiWfU7xIK65
+ LOSljQ+6XdiQZFG4kDR81nOSv6y/EJ0xZ9oUAo1IGXFKNJe6+BXMf5X+ZqU4brZOViin
+ SYxC6L9cjSP/cnNIKiwVgkm/curGAQcr7GGqw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760636301; x=1761241101;
+ d=1e100.net; s=20230601; t=1760636302; x=1761241102;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a5ivtf4PfFsP8OT3Dtoi84r2f88T3pyq0xauRw5OhbU=;
- b=oP1b0XkSZVIucbx1J6RZfmXIVgV9FUscbucBdLTvC8//cDTDpN1gG/hKWoPs67fQhb
- EoWS10nmCrTKoLal4osyoMIaOAWddjP6O1M7mI4jVaUS99DFiZUkmbX6haoZlZrANMOC
- xcIlY+LlXi787PiSEiT2K9efFIem7CE+gZ3KgBksU5mSgzXn4+Fww8pdKdFJpF0yypNr
- haKZkPBgTHlzBfK2T4J0/7vsWf1QFVSefiiykSVwU+vnc0IHClXvpljrlM+Rmi+nawFH
- ZWjE05R043IDf4zdsI6VKQwEI+PI95RFikqgCq99xCe1N0cYF7J8aUYUHp20q7C7r7VL
- C8oQ==
-X-Gm-Message-State: AOJu0YyWGaRfika40IcayZ9IaStbPrNK8DgEvtWljCVDIeT0KhJQvE5Q
- IG31lEi1Q1csNzIyr+vnh1O797WJ6l4UIjNvb64ZOYtTJflSnwyxBX5cl8yZQgys8sjB2+/xlF9
- EbDcKcCw=
-X-Gm-Gg: ASbGncum8Py6n5OuVfe+3dvEZBzYUU+pVmXLoSg28RYiuTOi5HqHkxm2bU0k/jlsU6J
- 60pfiEAL3gVHiTP2ElDZCtI2+Gd31Xy/iUqo8qxIWrNik7cypUVxpL9cYpLH2CeptCafYjo4NG2
- J4cVXHULGJj9U479v7nLNKXe5PweJwUxmm/pt9MZKQaF/00vKC6DnZhLrucPlIYEEto1HuB3Tz4
- o3J182C1e18OWq/xa8uJ+xq4y1Cffmaj1dGClLNMpnmhA/zTvgRhIk+j/2P0Z7Z9LKXuvggQOnj
- EW788oHlPQVJY216HaT8DAgfKSjcianu/GULblxBDqe9d5Ipl4f3xkXXz616TdOuUXJyGyQJC5I
- a+ecHU7so7oormdfhbR5Edzx+NfeddEVDdt5N2qOpKdRVpY/2IZveY7Yt8CHAmlYXPbfWMaVRao
- Q2JA1dC5ExGM4TLbe3XSw+L7Kps8yObtZ/jVK4cBKi59gCF7Z6
-X-Google-Smtp-Source: AGHT+IHXFJjx/CrXzGOAhSw0mGKu+evBwgjyL9jQRKHz3OLmEX5X6AIXx8H1X0Ptx4dOnu9lvxE2mA==
-X-Received: by 2002:a05:6830:6c15:b0:749:32a:6e79 with SMTP id
- 46e09a7af769-7c27cb7df6cmr249292a34.29.1760636301033; 
- Thu, 16 Oct 2025 10:38:21 -0700 (PDT)
+ bh=S83AQMrjZiqRFrg+8y/PJaMGAxy3pHxlttYm7gUpHAI=;
+ b=v7mtBxdt5LlJbX8VSHE0QNmWEw0M+YBIzcZBbxpkM6s75suAAO3K2NSf0rmhAzDvM7
+ uOvQDAoIej+afXim/ygpOusof1J/G5p46oiKuh6vm7B5s7gOZdZepwnoBKTQ2AtRHEtG
+ 9YYRHpgHH3QPmSq81jISwEkyDXG87JnkXYa1kTTg4Iz/9qdTcoUKb7uxP+vD+x7dx1y+
+ SwEmMSkzZmw650rRgEkhzQ8brQo35lzJqpf9EvuCJvXKG08CvWWlaVrMe4LhpuKCLD/l
+ CGckoBbhuW2GAjArWIPQbvmJyQAUddj4Yyg9hNOKuhEGOUp8b97Ze1qNfSjjY6DS1J8M
+ 92VA==
+X-Gm-Message-State: AOJu0YzEjA4rMPia7w9Yqh713zjTS/1rkhZPo51iEyR0VccOPd0StHTl
+ fA3HUxBP9PK+vxsuVg9rAnCeW6jK1iTvRLgVF5VvnreXEAU48oDU2d0K9vBJHXXkEv0=
+X-Gm-Gg: ASbGnct2Aopsr4DOJVtxMoQRLezaHRN2n7ugfO8oA2yhb1kkA9VXrXlFZyCzNH11Uyp
+ N5qPNXWBMeYpieuUQ5gkGv3YybH2/7YsXXDVsKOV/xL0jZARPizV5zkeka+vHUG3sp4Vcr3gdYA
+ hpVoncpaCIuvTS+zqtRCA/VpSFu6I6KmvjU/AIvcXKaUgHaEpF+gw1IdyaJTPuFxSfhacWHJ5TK
+ 3Ybx49WrxuYlw5FSEZDo00GL/ldJGrEy8fMX+g/uCoPTuCkpkR4w0hPuWj4adV4YcQXScNeY/Ob
+ yiGBkq9J4XrnX9ebCiFIAfkDZxNUy0U/IdgxEB9bJhSZ0hCGhkcFI1iIC1QZhP4XQM6zNP2Nn6e
+ R1LbwUM3tOQ4ZaYkP8X8nGrY94xKGliR67nI3O73/ouj/UFYupGQbAM6hF+V26X4r+m8G2IRbW8
+ i/4b/FjkupF/0El8GzktOKSAhQpl/wPD2XSyqJXwHMfJVhEMcw
+X-Google-Smtp-Source: AGHT+IE0kTIjbTU5WzRce/sIWOiWnhMoEHZPJqRwGBM/Wp8q/9qjCFT7fZfCio3+VSrYjYALCNzwlA==
+X-Received: by 2002:a05:6830:6d0e:b0:7c2:736f:ff98 with SMTP id
+ 46e09a7af769-7c27cc05050mr296535a34.30.1760636302220; 
+ Thu, 16 Oct 2025 10:38:22 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c27a206ac7sm335079a34.17.2025.10.16.10.38.19
+ 46e09a7af769-7c27a206ac7sm335079a34.17.2025.10.16.10.38.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 10:38:19 -0700 (PDT)
+ Thu, 16 Oct 2025 10:38:21 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com, e@freeshell.de, 
- ziyao@disroot.org
-In-Reply-To: <aPDgCxYfqFzxgsWb@swlinux02>
-References: <aPDgCxYfqFzxgsWb@swlinux02>
-Subject: Re: [GIT,PULL] u-boot-riscv/master
-Message-Id: <176063629917.212270.1145034876136991424.b4-ty@konsulko.com>
-Date: Thu, 16 Oct 2025 11:38:19 -0600
+To: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <bef2d7bb-25d5-4d41-821f-6aad1f565c95@mailbox.org>
+References: <bef2d7bb-25d5-4d41-821f-6aad1f565c95@mailbox.org>
+Subject: Re: Please pull u-boot-watchdog/master
+Message-Id: <176063630118.212270.16579390578025899998.b4-ty@konsulko.com>
+Date: Thu, 16 Oct 2025 11:38:21 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,15 +95,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Oct 2025 20:07:51 +0800, Leo Liang wrote:
+On Thu, 16 Oct 2025 14:34:48 +0200, Stefan Roese wrote:
 
-> The following changes since commit 2ba64e303b2706e5c42a6bf982326d632342ca66:
+> please pull this batch of WDT Kconfig related fixes:
 > 
->   Merge patch series "fix an7581 panic caused by attempt to support multiple RAM size" (2025-10-15 15:08:27 -0600)
+> ----------------------------------------------------------------
+> - watchdog: Tighten some driver dependencies in Kconfig (Tom)
+> ----------------------------------------------------------------
 > 
-> are available in the Git repository at:
-> 
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
+> Here the Azure build, without any issues:
 > 
 > [...]
 
