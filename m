@@ -4,152 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79C55CCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 13:06:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC30BCCD19A
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 13:06:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FC1883771;
-	Thu, 16 Oct 2025 15:06:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id ACA1983804;
+	Thu, 16 Oct 2025 15:06:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="acD4zXeE";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="SQQysX8u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F4090832BC; Thu, 16 Oct 2025 05:35:45 +0200 (CEST)
-Received: from PH8PR06CU001.outbound.protection.outlook.com
- (mail-westus3azlp170120001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c107::1])
+ id 16122829E7; Thu, 16 Oct 2025 06:54:20 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AF80800D7
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 05:35:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D02E180077
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 06:54:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OQs9f8CoaR5TvLQEFOFIynANlZCXqGCaPsBojBdCjLMc5uohoT2qTSkJ0RYNDA+L727wtYpPFn6pAIh2rwgKKYybg/chwhwXoC0rKWzPHU/AjMdOa810k8N1lals7AQO+QtwK0G3ewy+uWPOCljDWYb/EBl3XAlRDRbw74yMVyCP43Z5DJbjd084iFbTVP0gaDQ5zfoNWot+Ie4D/rCv/k4WphFnsfhtb3JePjYRMyPO2PInSkZxeiE/Kz4YRzmNKJTq33357DE37duic9gFbxKqvMhxSdoOu1zWJJt+wSTh0w0JLzCP9Hk4c53iGLltK0ho2lBgcEKxUHdsN+wlQQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YdxL7wcYBfklbGvgLSOX1c9PWXoiSVq+w3vrtZbowow=;
- b=tPNgnx07djDGTB+4EDFJrfeefHt8gB6hDXikEkPwbuhEzgI4yff/XId9WPZwNWOVUOBPekF+EVGRtdCsxEuwh0Lyg1USW4XD12q+Yl4f135+My5URQ+6NPFmzLHdFbbg9uUJi9o6Dzx8qkSBFQXOkWiG/aYvyE4ptbOJQDLLV1bsfaABQBuBU3bUJdgH6sOVibVB0biMZjlqsxJ+3XLfmBKCR3smekfza3W+o5gwBFEcJRVzGqmkCOi1a/8WAGZCsCIFd1WxEAl4WLmUDELkpS/Ph7A5YvKbRFNm11189hXI/b/JWJAz4RmJrKIhnYUDi070jlvI/kPXOjm80gINSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YdxL7wcYBfklbGvgLSOX1c9PWXoiSVq+w3vrtZbowow=;
- b=acD4zXeEZ4RSxtCP4p+7UVnJEZ6VvyGW/nnkdTgf2M0xsjVkLo43APevDdq9t4vvIpw1MFq6JNH7pG8BQPKH8LNtBvRLX8ujpF+Q7VQu/ABjGqcWSYCWP/4mNixrxAHpNF3J5YOVRi3IT3ko0owzR892lAnv1fb6Zc9ej662jRlHqIZEdviMVF9azT/5IJXpQMR1uLDBzLRovus1e7hzCFFykQz51sXdC7SwFA5oAxa0E9pGDFezPq5HzgXo4kVSr/UyInI47WJ3FDkF01Fqn0fOsLoaz8ZMdOMg9C10m2nC+4AdchGnmFrHHAAIkK3q5cbQ/nmrSGJIQwEMdbX3RQ==
-Received: from BY1PR03MB7190.namprd03.prod.outlook.com (2603:10b6:a03:52d::10)
- by SJ0PR03MB5549.namprd03.prod.outlook.com (2603:10b6:a03:281::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.12; Thu, 16 Oct
- 2025 03:35:40 +0000
-Received: from BY1PR03MB7190.namprd03.prod.outlook.com
- ([fe80::554b:ee27:5c43:7ea0]) by BY1PR03MB7190.namprd03.prod.outlook.com
- ([fe80::554b:ee27:5c43:7ea0%4]) with mapi id 15.20.9228.010; Thu, 16 Oct 2025
- 03:35:40 +0000
-From: "Ng, Boon Khai" <boon.khai.ng@altera.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Jagan Teki <jagan@amarulasolutions.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>, "Chee, Tien Fong" <tien.fong.chee@altera.com>
-Subject: RE: [PATCH v1 2/2] spi: Enable Kconfig and Makefile for xSPI
-Thread-Topic: [PATCH v1 2/2] spi: Enable Kconfig and Makefile for xSPI
-Thread-Index: AQHcPPNJE3oBiqbEs02CNISba3k18LTDyTEAgABYjHA=
-Date: Thu, 16 Oct 2025 03:35:40 +0000
-Message-ID: <BY1PR03MB7190AE015407D2A34A2B6131B4E9A@BY1PR03MB7190.namprd03.prod.outlook.com>
-References: <20251014101354.11182-1-boon.khai.ng@altera.com>
- <20251014101354.11182-3-boon.khai.ng@altera.com>
- <20251015221752.GV6113@bill-the-cat>
-In-Reply-To: <20251015221752.GV6113@bill-the-cat>
-Accept-Language: en-MY, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BY1PR03MB7190:EE_|SJ0PR03MB5549:EE_
-x-ms-office365-filtering-correlation-id: b3c07c5e-7ca2-4e67-ad69-08de0c651464
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|10070799003|1800799024|366016|38070700021; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?kfKMHGS/8XOnC10QMGUlRpYwnigVZNcX0DIEUMs154OmuoyBfjTnD9U+Uj8n?=
- =?us-ascii?Q?UOPAida5Ei1eOugkwOc6GnhcsnUHFZGeEq58de9mz77BJz/WQHkSvl24lhRH?=
- =?us-ascii?Q?W/IDsYwUdsEDmmp12poHFMcT5O72/JPLwLorrIyOh0zaumzgxnjhfh6LoiRL?=
- =?us-ascii?Q?Zzqm2NzRDYoJZtqoRdpGuL7mEAQCSKL1SdvN5msbj2lx0+Dys1YILvUcvme6?=
- =?us-ascii?Q?AD0Q58aphsDxvDvmG02mjJAws4o4U3l/X4fVnzvqgzeqjpTcOZXqrXryDysZ?=
- =?us-ascii?Q?U/qrxoEd0RsguPFF4oCtQ4kaGeBPhqQxlji+qvJ4DVkDfFAevT7hhs8tZC41?=
- =?us-ascii?Q?TTCkuBG2X2fXxxVNY4cltFgbuG5Ge5neS8KstmtfdwlrRPh+5p5jhrHBnIfP?=
- =?us-ascii?Q?7bNnvMg+QdEj4mzGhcprhR3qbaRcT4FYuB5femnAqx+tfR8oocSX/IQiAE9O?=
- =?us-ascii?Q?XfvtgrOsEBvFwZw+hMFggg0bwyFy0+4aiF+8tRNu2aigwuncc+R0S/kcBcJt?=
- =?us-ascii?Q?IImrilsm5MKlfee0UFB1KAisr6MnAzGFkfqxG4T3Y06vzu/lBAuHYhevHLAq?=
- =?us-ascii?Q?JRgo4e4uvYkF3afT0n4HpdGQJuG1D4PWtmA8kqbXQXXgr2EqLMeYSaMPtl1l?=
- =?us-ascii?Q?ynMTwhktPqTXXAWUVSgC1XVBAzsG5u5hcjtJASH5nA59jcTxjkB0l8p3K6Vi?=
- =?us-ascii?Q?Ya9CMSp249mzA2VthRjdW5B0BGIcTCM9HH9vowXUj7zadiOT/EyefWB1a7da?=
- =?us-ascii?Q?vSHFzBnZAWiGQ9nB+pDTEbE1+WcwHnAJBsf6fF44Z1CSrVQoIoOz73PBmEXH?=
- =?us-ascii?Q?ud4F2PgPWp0C711loJ1Jomwj18d2Ty2HTl+dl9rqWZ6WORzI9nKOeCvuK0CM?=
- =?us-ascii?Q?n5Q015mJZVUXvmsflWTsksFEn6Iu1uwU5mv8Lmnx2TBrmlG0juZnHIPuhmph?=
- =?us-ascii?Q?NKq8NOFX/+D1dRk7ssvZksBBBR5ATMQ4K5usr3+NXKcvxOoTjTY472o9kg45?=
- =?us-ascii?Q?A0cI3IESb0c3lyKJVgO3hZINniD6TLdKqULwam7Bj0Ppxlpp6/h4kZjH1dw0?=
- =?us-ascii?Q?/JxG+Vmy9hhEuta5Ne3zN0ZgeZytA933rcoyiy21f0qZ6WJVeJ4bQKy3nvjb?=
- =?us-ascii?Q?W3pCwjMeuQX+qjqJcbU0A4EB+kHAF+ZYqQ3t056BM07u5XE+BMaCMyZHx51P?=
- =?us-ascii?Q?0kdutTysXsyvdPm5T9Ujeq1FXkQWuYDGMeIJiXJyGzU6lSXGlTucfS+wIcxf?=
- =?us-ascii?Q?2mjDpCttqWAgATkQLWIZbdE6uFrtQRwEA7cuIAMSG5VpP0mX4GguboIbHgSa?=
- =?us-ascii?Q?3nqoDlKfVSwifZxcPF5PdnHyoI+ORV0vwNSQTWEwC87DA0zuWYs5iF8p48ht?=
- =?us-ascii?Q?ry2ncG9GAeNRiezosRqECzHEELUy2ND3du5Neynvot/fy3pIFEgyr3vyCUrZ?=
- =?us-ascii?Q?BFgwLqvNA3WinC3QLlGoGwERtswbFu3ChuPd5IRHdHXBMW8LV8SO7GRIeVML?=
- =?us-ascii?Q?DCaIKT0auMYcxedHPcFMSgH/2gbEDWzN6kpy?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BY1PR03MB7190.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(10070799003)(1800799024)(366016)(38070700021); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?G66tlKwYL5d446YVdCzolULHn1uOPqulaGpypEYpXgyPW5tGvSgoSpU7jpoL?=
- =?us-ascii?Q?hO5NPxIAuXl+PX6Oqtdjn0aF+RYTJzGxVYcu6zstBcgGe5QgsAn29kIitdrn?=
- =?us-ascii?Q?L9S/AeYGjZUKpealigUbXFuKFxFLHqetGkrr+LwITvyi4na1KmPr2vrV/Sm9?=
- =?us-ascii?Q?HWG6PxPAahAoffbEXwAvbqkQ7AOQ0A9OXu2bOJImDMFmRrfK+pJcXHnT0VtS?=
- =?us-ascii?Q?wLRO69033Om1FcUsTdJG5D0X48LdvIVKXjNVj1cx/3yhRxCHNzwqqXpEQ/3+?=
- =?us-ascii?Q?HZxvhM83H3bvDm3HPoLgIQTVtd/hGyJPwFsQRQ5GPaiNz9GVUwaj2ihCvKvq?=
- =?us-ascii?Q?OIEgJMNlp1QIM4Pyujza+JSu462xBA/8FQk2YMvJwU56ZG2hPj424ZNNv/5y?=
- =?us-ascii?Q?9448AGFX57EleJz9TVEKQJCkVRuCwgHFzgjHgWAc74ayPWvA3oxuDqOlLSxn?=
- =?us-ascii?Q?CfjamnnlC85fQoeG9RLw1AhVjY9iHuxXTshCRwISiA5X+DfOv7hd+j4jNp7I?=
- =?us-ascii?Q?WL8nTQtZ0xQ+kjE0DPv8a3wR3AmE68AONS2KEz02xZCPImuwE0Fx8z2+cJjn?=
- =?us-ascii?Q?O9VeXAKNNF8ZkWRKONKWEFC/PWFkjUvtuRfumSFP8GM/yh5eclc/E7sp+uDP?=
- =?us-ascii?Q?GlN/SuGqtx8F8X8ORpUzyeBrRz8fbZssnjiqiBE4mBf+05lnN9YtxHBUUGeK?=
- =?us-ascii?Q?kPxC+NGjmQNXPtRIN0yYC7rH1DGhxCPW2kCACPjsu6Yx4qyDeJ7a5upzvCDM?=
- =?us-ascii?Q?AN2oTYJ9IyskF5PdZ1/6RBc8TNAQxcxjFqmiTjMwkRZJGQc5rXMKpICLII6U?=
- =?us-ascii?Q?As3IiS88RuDqkJMofuRomDr0Yo8xxxypQ/ozdN8v5mTeTIzc/pgBPK3inkm5?=
- =?us-ascii?Q?x1LVYHAWLYkzJfo3gwJguc5PvsaAN0iSf4yqBcxopof7mOu2gYvycizXou37?=
- =?us-ascii?Q?ZXAj2haGdTSA157TcgVoF8+ycHkUI5VfqJfMIKSXDp3LDpQM7kx14x1utVJU?=
- =?us-ascii?Q?Uh3oDc5xA14WfNULP2iJ3osM0XPGcprftyDFZRfrzSyrc/H5THUGPZP+CyQW?=
- =?us-ascii?Q?ErxF7nqGtFM4fH49Z4TEGSrReqIAvYsnJw1r7H5N2cXGMBh093mjBeHNrHp+?=
- =?us-ascii?Q?ANOb/hnTepGBZqFZGRwbLKKvPyPnBzLh6vGy0S2aKmi+n0MovqYGbS8hsfda?=
- =?us-ascii?Q?F1puqfAlgnHm3gGCx0tCq9VEvVjzRhqfF1oeLX6BnkZolC9uomm7Iq5AL9Ks?=
- =?us-ascii?Q?6ijhvCIVmzO+Td6pBURvLcSvJZgkaSgN/o9I2hVTw5OGx6AsaNKCCkGlAPLF?=
- =?us-ascii?Q?xOLiZnYFRk5TH1yXM+U2ltOQmzoBSK91nq71tZ2mttmoZjZUxjs88bKdM9op?=
- =?us-ascii?Q?WsZ2ucsDwahvQYMaAc4nIZRoBcmIATf17aXvtRBF8nTNGrsR7lKvS2C5di0+?=
- =?us-ascii?Q?FfZWHjM5eZFsdiiuNT68wjL6IlGFmq3P/BG/MC7ADM1Ixvpfb/RF3fCeIBtS?=
- =?us-ascii?Q?AG/9vEFFBGmxznCordzkoRrhQd7hr++PsXnWhTPYXUOyMvFsWdAtmSmz9EzY?=
- =?us-ascii?Q?i50qFwNEQnbgKF9PdHE3fwldRMdx9L2V31CEyysDb0ccV7mqhlVoiWP3qBEX?=
- =?us-ascii?Q?0ARbKR3Um/WmqexW3WYHY47B91OPnTdQNB5P4QArlHvW?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 0C89B20D0D;
+ Thu, 16 Oct 2025 06:54:17 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id MW2-OO5HRg8L; Thu, 16 Oct 2025 06:54:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1760590456; bh=fs4oHPb2OIxpefS5s1KkAXnUyfFBSX6CJU84Y8g5d+s=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=SQQysX8u10sxBE4WuRt0pN6u2eXeg2DI/Xo2XjMDKPMXG3Ck5hp6oq/C0j7/KpxT9
+ kJQDTKhRkH+oZsUQ9LjCHCB800uZTg0JzHTWoiyP67RMW870PCbh3W8hthi/B4VTOA
+ vI8uR2EHRDLVE1THqQV+Nt0lqqzFVW35QoBoikBWaSXpC3gDOWv9KY9iVMITWaIwuL
+ q3QRc0hVfy1Vv6Y2A4kK/oEF4sw7fR+J2YVZquLQhVQ6F1VT+hMw5WJLHGxc9mR23L
+ tOteALgE77bdo7/EcnYI7anESZXEKlFXYOpaENlEDYrAaSIvl0KElcPSzHjOqvGiFw
+ kCP1skA4/IVDA==
+Date: Thu, 16 Oct 2025 04:53:40 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de, Paul Barker <paul@pbarker.dev>,
+ uboot-snps-arc@synopsys.com, Dai Okamura <okamura.dai@socionext.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ adsp-linux@analog.com, uboot-stm32@st-md-mailman.stormreply.com
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Stefan Roese <stefan.roese@mailbox.org>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Finley Xiao <finley.xiao@rock-chips.com>,
+ Joseph Chen <chenjh@rock-chips.com>,
+ Elaine Zhang <zhangqing@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Peng Fan <peng.fan@nxp.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Ye Li <ye.li@nxp.com>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Marek Vasut <marex@denx.de>, Alice Guo <alice.guo@nxp.com>,
+ Valentin Caron <valentin.caron@foss.st.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Heiko Schocher <hs@nabladev.com>,
+ Jonathan Currier <dullfire@yahoo.com>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, Sam Shih <sam.shih@mediatek.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Marek Vasut <marek.vasut@mailbox.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: Re: [PATCH 04/24] clk: thead: th1520-ap: Remove negative error
+ returns from clk_get_rate
+Message-ID: <aPB6VPMiOcUknoJO@pie>
+References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+ <20251015-clk_ops-v1-4-5f80f827407e@linaro.org>
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7190.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b3c07c5e-7ca2-4e67-ad69-08de0c651464
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Oct 2025 03:35:40.6078 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 6T66lWusHv8XnDWiUGe3z1VhMNKKq/Be2R17ciw1hAVpsqxbb315Myppa3jSmzowPbgKm/yiiJQaXeCPXfqZGQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5549
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251015-clk_ops-v1-4-5f80f827407e@linaro.org>
 X-Mailman-Approved-At: Thu, 16 Oct 2025 15:06:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -167,10 +121,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=20
-> This should be part of the first patch (and then the cover letter can be =
-follow
-> the '---' if you like, or retained).
->=20
+On Wed, Oct 15, 2025 at 03:32:09PM +0100, Andrew Goodbody wrote:
+> clk_get_rate() returns a ulong so do not attempt to pass negative error
+> codes through it.
+> 
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  drivers/clk/thead/clk-th1520-ap.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-Okay, will combine the Kconfig patch into the first patch.
+I want to switch to ccf_clk_* in the future, but this patch looks good
+to me as a fix alone.
+
+Acked-by: Yao Zi <ziyao@disroot.org>
+
+Tested on Lichee Pi 4A board with no regression found.
+
+Best regards,
+Yao Zi
+
+> diff --git a/drivers/clk/thead/clk-th1520-ap.c b/drivers/clk/thead/clk-th1520-ap.c
+> index 6899e1b595a7148a118d3a615d5dfea4b4fb5b96..e913621967eb131b534e8f5b928687967a02a30e 100644
+> --- a/drivers/clk/thead/clk-th1520-ap.c
+> +++ b/drivers/clk/thead/clk-th1520-ap.c
+> @@ -985,7 +985,7 @@ static ulong th1520_clk_get_rate(struct clk *clk)
+>  
+>  	ret = clk_get_by_id(clk->id, &c);
+>  	if (ret)
+> -		return ret;
+> +		return 0;
+>  
+>  	return clk_get_rate(c);
+>  }
+> 
+> -- 
+> 2.47.3
+> 
