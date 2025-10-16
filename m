@@ -4,85 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5603CCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 13:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DBA8CCD195
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 13:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3726C836A3;
-	Thu, 16 Oct 2025 15:27:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C7FC4836C8;
+	Thu, 16 Oct 2025 15:28:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LXqcvK5X";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="F5rGS444";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A66B836AC; Thu, 16 Oct 2025 15:27:52 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0FF37836D1; Thu, 16 Oct 2025 15:28:30 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B5AA8367F
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 15:27:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1999F836A3
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 15:28:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4710683a644so7440955e9.0
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 06:27:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760621270; x=1761226070; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=nD9MvvkBAqAzjYBYoS4qd/0bHMtuiR0JDjCot8lL+ng=;
- b=LXqcvK5XegQuGEGNpCUFBatp6esJeTljCpG2NXTfQjugMZVNRrxz/oo6rqBXMf1aG4
- gdKNrznaGTzgfUI8XfKZWpPYn9FmdqioTMH/sqHyZ0WAgn7AELYaK46KKZh4dvM8dVvB
- W6uJsCeYsETxt3ahPleSb05DBHaqa5+75oS1yyG99O3hYSTs34m6zMcVS+IsylzJ0LCT
- fCTje9Kc0bl1SkmEmxK05t0QgUjpH7J4lU7SEJZhGZ4ppvFF9TNN7KJUwCHKOnksxw2B
- XwKE/9o02FqL88me8oGLfnaePJ7569SBh0ln5pTepkew/4QB/GovmObNrJ2MFZpt0OUf
- inMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760621270; x=1761226070;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nD9MvvkBAqAzjYBYoS4qd/0bHMtuiR0JDjCot8lL+ng=;
- b=swdptt4EBjhe8Ra9IXAsj47zBT4JE3jOncDTehIPh1sveLqyEupFN6gcRyZnNwE+dO
- 8NrZm1HQwOz0vmbGXa3/WUtVK9YrI0/rikbpmtzILWH6Ep3mtG0SFoNmJamFVlFErS6g
- YtjI3ju9e8Aa36iePC6J3pMuOV5WbAT6lbeBBc4kC0jmqYbqJCe3ku1PawotPUF0/2fG
- MdTcYqJCQpDTY3k7b034z4/OwYagM1R+G/GPLyTXx+Ngf6uwnXOXdNN0tpc/UyHlEyzr
- dgi0k5gRwUb3e+W1z7SRPxw4jffAhHAnWxAlXF5WVPTeL7rHTmtFPlEv1+i51eAMQlo6
- aJDA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUJrPmFikPOJa9Wh92LNlcahuKP0MslWXFF9u9pbaS5bRkV5FpEYAiVYIgxJqRmIbTezil/iVs=@lists.denx.de
-X-Gm-Message-State: AOJu0YxtRd/DThvG//ROAQYtqGX0mt5Dmqh9cpdwDczLnbMV8UT8Fyfm
- Pvpyko9b0Ngdg1YPqs0vdQ0dAfGQZ5tCPeaiEIqp/N2JDOLXwdJrKEf6UOHJvb//4g0=
-X-Gm-Gg: ASbGncukW85lZ5q6oKA+kR2MoCGQTs5MHIHY5ArV5KIU7ZMmkBwL3MHDZET7OWMwrJG
- Z9eCkQ08xvw3Say8FCLPoARplZFxyr+Bu4GnIo8qG6dp1rNFOy5TsbvEeULq1f83X1OOO1YPAtL
- fmG0W5QMpvE6hUcL9XXlCLh74r1w5GYzqRbwWHjzxLrphMtCGzljSZEVT/aJ+AqHezE0m+I8toK
- Cuz0ZFYumLDJxuJRbV4S4UioczRBng7AEp+HT9k+HJM3WA0pnsmmk58AP90nPcscQz0YTc+1o2q
- s6IWqCpz7TQcWgPIS8nzFV8Sf+EPiCoFGX6KAQmpNoEbvnOiAwPBRnzTI4XN9D6s1A1yfb3Mrpv
- FtJdefyjw6JUO3YB43zSjvILqXD4JXdnDP7/f5IAcGmWjWGFvnXJBRMN9iGUKzaT/p9kCpt6aqn
- iKpO7W7lYqEdJ3TsJxochnMLioLOBpwashNNDCgiAfk2v4W9uv6vOkukL6PTQrI0k=
-X-Google-Smtp-Source: AGHT+IHfXU3ZaT5XNJuMs2Fay2dCXD5TYYwem+qLZetK+yiKRkVfzHS08Iq+TyUdQuCN3YeUpBH+cA==
-X-Received: by 2002:a05:600d:62eb:b0:471:6d1:9895 with SMTP id
- 5b1f17b1804b1-47109b58f90mr17486995e9.14.1760621269924; 
- Thu, 16 Oct 2025 06:27:49 -0700 (PDT)
-Received: from hades.. ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-471144b5c91sm24963155e9.11.2025.10.16.06.27.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 06:27:49 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: trini@konsulko.com
-Cc: raymond.mao@linaro.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Xu Zhang <423756212@qq.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH] arm: armv8: Make save_boot_params simpler
-Date: Thu, 16 Oct 2025 16:27:43 +0300
-Message-ID: <20251016132745.237295-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DlupAHEaqJ0KhgqPoYMJ+oKj+8XbdUeLlMyBuFuBGOWTCfBFrElBzHeezuTmxcLLQNRca8J77eyrPYDrnGOyEoVH658XU2QVXZo5yenVia7qa9PyIEOb0BmUa1RHJXm3isseyPio8TU4tECu8tYcOnpSd59UAI/u4/jVl+0sUL10q57Q5mVELXoa1asqBWRFk3N/mFIlI39C6HEE9K13wSeeLYAXlJnqjwCKKXpVObg82GwjZEzwvDYv6xYvQSqd1Bl+vRinmGJ3sngKoaLv1p8F85qAZptFujJ4F5g7IPPllN3hGAtJ0Py67vMZ9AsMj2Ws2oaB8Uy49b4Ncg8sCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=f1HLthdrrX6cEp4llODzSxy5TbrTpbXkefNs/7uzDMk=;
+ b=Enc1PIbHjKjyNB2iEUKo3wMJoJx0A222dDiYvF1M0K1xDzaavHLvXz0D6T5+w4eC6HacBH4qEgfgLfsxny0fKtmnAhSISwD5Uh05O/nNEYQ3qZDS/kezf3pVwZSlMtDx2QPcpYDyzoLH4M1s30PWK5cgGj4mdNMcezIzt+DLnndwGANJPI9xcMsyI2CRZSlKAx/qQXAy6mfsZ3ix+fhOAJLjuIqQX6+kbv8OgtY2lIxor/NZT6p2znDlPbVBu+2F1/WNzoyKmmbQDA7eIjLeNo7sDK8Kkesuum/n2c3flxfih85Lzr4L+LC+h/ISxztWNA1Q/s/ky62HSNH8OuuzXg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=f1HLthdrrX6cEp4llODzSxy5TbrTpbXkefNs/7uzDMk=;
+ b=F5rGS444rv8H7cKSmf6x6wKw2MGfG1CkOUUhHYjowujDu/if8o1L2sWDaUXVqFUqMimRmDcHxz4dL9kW0K4ZqTxNPq4k3wmfjcwbrpo+9o8ecc3QxXge/8ZHQYXqkpFPeun/qln26ZnOxnlxvdqHPWz/8sVWpcSP9aofabKwVJU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PA6PR04MB11801.eurprd04.prod.outlook.com (2603:10a6:102:51e::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.10; Thu, 16 Oct
+ 2025 13:28:26 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9228.010; Thu, 16 Oct 2025
+ 13:28:26 +0000
+Message-ID: <6e85c247-9624-472c-bbdb-b35be4fa03a4@cherry.de>
+Date: Thu, 16 Oct 2025 15:28:25 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd/part.c: implement "part name" subcommand
+To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>
+References: <20251016125247.1594643-1-ravi@prevas.dk>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251016125247.1594643-1-ravi@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR2P281CA0022.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:14::9) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA6PR04MB11801:EE_
+X-MS-Office365-Filtering-Correlation-Id: 89782d4b-61cd-4207-5477-08de0cb7e2da
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?VEE1LzJEbm1VTlY3RXhhN2RXK004eEVLS3FHYzl0YThNWEE5N2NrLzVmc3M5?=
+ =?utf-8?B?ZG9hV1ZHU3p0QWJyV01XSjBGYW1zRWtVQ2VNYWJCZ3FuNWdZV0tQRnhDbHFW?=
+ =?utf-8?B?MzVYU29ScHl1NEFJdU8rQ3F0ZFZNZzBmZzdGYnR6cHJMODY3TUlRTHIxMDkw?=
+ =?utf-8?B?YjlMUnJRbWZNV3NvSzRacm9NUzByTFlkWHhTSVNzdU8xdjg1enlpUDZWT3du?=
+ =?utf-8?B?TklBb09xcGVlbzJyaWNzWmN6Uy9ManJLWk4zTURPb0ZBQjUwMm1GcCtEaEZT?=
+ =?utf-8?B?M3JvSXpYd3RiMDkyampWRkhCcTJYNFU2dnQzTkROdWYxWGJoQ0lqWlk5WG41?=
+ =?utf-8?B?TFpLYUIvb1hqa1I5VzNxNlo4dFFERTd4SWg5eTRmeGozL2hmK20xYWN0dE5i?=
+ =?utf-8?B?MFViNUJLcjBnaHJ5NGNpR2NsODRLYXBDSEs0VkZJSVVjRTFrdGh2bGYzOVVF?=
+ =?utf-8?B?alJpS0tMYkF6K0xsMVhqUVFYRE4zbEJUTVdXaEloRFo3WDIrRDZSOEp1RGxr?=
+ =?utf-8?B?MWdOcjR0ZzlnNmRvbXNQYUYvL0YyZ2pjeTJBbkFHRmV1SHlWb1oxcHQyYlVJ?=
+ =?utf-8?B?eStDNE9oc3l4WnNhQ2sySXB2ZjlUUTVYUER1UXdOcmUwQWNIR0FTNElnTEtx?=
+ =?utf-8?B?N0J1cVZzemcwaFN0WHkra3krOWpzV2lLN0M1QS9EdUJ1eURhZUJGRXp6V1F1?=
+ =?utf-8?B?bUxrbHJTbkduVWU0YkRoVzBJWDRGV3JVaHRVeHQyTkludHNicnRqRnBJTjhU?=
+ =?utf-8?B?MHpCbkVBdEVXVlNENU0zKzdVMTM2QTNSeE9pamQrZXVRRVVWT0FkeUJUOEVH?=
+ =?utf-8?B?UGpkbU9IeGlna2tGbEE3TlFJUDZ4Q1I2eTV1eUhMcjBtZkYyVVRwV1BBU2NC?=
+ =?utf-8?B?V2Rmdm14NnJJUzl2V0luTFZUbFY2Z1FHay9HbGdZc01JRlVhSWdubVpmbity?=
+ =?utf-8?B?YmVieHhiMTFSbmgvV1R3TlFPTW56Wko2VGkzcGFWUDRldGg2eHRmem9kU0RB?=
+ =?utf-8?B?L09JM2I4UzdXREZlYkdTSkx2WlJUeVBzTC95UWk1Z1R1UnlkQnpzVUJVSHJD?=
+ =?utf-8?B?UTd5eFFkOElVRDlRdk1TN1k1cDA4azBYQVU4WXpzZWJuQWNVKzJqSmJyNTNL?=
+ =?utf-8?B?M2JGeWp2YW5xRmFySTdacCtMK01wWXcyMVdjQWRldkhhKy9YdHlicGZaRHd3?=
+ =?utf-8?B?alE1cFFRWU9iaS80ZkRFK1o5eWFUZzNTR2pjOFZXYk9DL2x2aC9JcHMyeWkx?=
+ =?utf-8?B?Y1gxR0hha29JR3BFNWlFZEkrRU9yeGhGRktIR1MzVWRmc0NreU9GNDFhaWJk?=
+ =?utf-8?B?VzZjUkZSMzAyRnlRSGRLS3d2YlZlL0x2VnE0MUE5SVZ0RlZWcGdGaEI3NG9n?=
+ =?utf-8?B?NmNCNVY2Q0RabmVPMTFLalRUK3ZueEVUdVhHRlFSTVN6T20zRVJzSmVXOUl4?=
+ =?utf-8?B?OWd3ZDJlclRjWk9iUWdxd04wWjNGT21qbThMelNPZWtpeC9sU3NXQy9sUjhp?=
+ =?utf-8?B?aWM3R2tIMU04WkhaYzZaRW0zZVRiUVgvdXo5U3RhSjJNVUh4WldYdHB6Z0tq?=
+ =?utf-8?B?alNYL0g3VUxIT3RuSnEzSmhhTWdSVVZ5dnZkWGQ0NHZZVGgrcWNxMnBLblNq?=
+ =?utf-8?B?dGNYU0gydkUvS0JYT2g0MUliVDlabldLNTEzQWRwRFgyZGlSTkQxRnI5azJy?=
+ =?utf-8?B?aGs5c3hQUUZZTGtUOXFMMFIzS3owR08waE1KTkhCWjVjclEySy9OaW5HTm1u?=
+ =?utf-8?B?ZDgyUlR6YlcrNXhkMFVITk9TQnRBdHpvRVVmWUtpeW92RGdsVEFySFRTVXBj?=
+ =?utf-8?B?YmRuZnE1V3d2dkNhQWNjcDg0TlQ4cVpHZ3pZdUpLL0s3djI4MktoUzc4dXlY?=
+ =?utf-8?B?UHI0L1A3MXZKQ1U4K1REenNVZkh4b0V3UWFmWnI3VHJHRG1WZ1NnZ1B3eFFz?=
+ =?utf-8?Q?eCVV41Rz44akInXr8EO4vOluGRyXe6j3?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WnJkenJwV25iaXgzS1NERkswUWg1WXBMRmM5aEhXeCtqdml1OFdaWjBBVi9U?=
+ =?utf-8?B?OVM4OFdwQXdvMzAvN05ZdUZZeUJ3N3J0VFM3UUZJaDErdXMyRGI2Z1FlcHZ5?=
+ =?utf-8?B?WHRlSVJUUTIzNHNmc0xYLytHcTRVTUlHdjl6Und1ZS9Hc01hM1pUMXR1S1lR?=
+ =?utf-8?B?dVRVQTBqMFZnc1JLOEhJM3N6YWlwY3dDbWJUM1loZFVNM3hRdkN1MHhBdjUz?=
+ =?utf-8?B?OVVEWlY5NkIzWXdVVjVMcUhJS1NrWU9MR0VjQWdvaTFrWWFXSkhtVjJKZGh6?=
+ =?utf-8?B?cHZmbm02YUJYYnJHTEs4K2xFbGZhMkpwc2M1N2ppRTRvSXp1N0VodzQzQUFn?=
+ =?utf-8?B?S1oxWXpKVFc1dFVoSjdvNWNYTHBnMGlyUXdOeVFNSzg2VEpuMnE3MzIzYnRC?=
+ =?utf-8?B?WFBIT1B3SkIrVmkzSEU1ZVdtN0NrVlV6S0ltdGpxa00yeVovdGhPc2MvY25p?=
+ =?utf-8?B?b0U4QldQR2ZRbEdwdWsxL21zMXlwYXY1Z0pzVzVFRnp3N2NLZ1ZEVlN2elQ2?=
+ =?utf-8?B?Y2wvOHRubmlGTTcvRkJ1YzljQWxKdEsvVGhhWDdXdEpTb0ZWQnFTQzBmTGc0?=
+ =?utf-8?B?MEpnQmRYS2RYWjBhNSt4WXBBU1h6dFF0OEYxRG80cHVLby9ob05uK3FTekdT?=
+ =?utf-8?B?TGlnOEhZNlZmalZWcno5Rjg0QWFQZzEzMHBST3Zrem4rcGdMYmJWalFXOGlS?=
+ =?utf-8?B?c0lPUWNGNStiUDVzQk5TemJLUy8zb2dnTWliYkZoSVZsVjJXek5rR01oSUUw?=
+ =?utf-8?B?dDRjMExuT2Rqb0NQWm9nb0hPVU4veFI3dE5Jc0NIWW8yRWF1UFJJL2lsK01t?=
+ =?utf-8?B?YmhzVnFOR2ZoMmw1ZjRkdUNBQ0RaV3BVZDZaQ1A5bDI3YWFwc2hrdjY2ZmU3?=
+ =?utf-8?B?NHdxSHpSR0RUc0htNVlTT2RNSTlPbHdCU3pPdDI2RWp1SG4zcGJiTkh6ajdV?=
+ =?utf-8?B?N1JuSGo0TWtuRitNTzBEaHlHa2p0T0EzS1doMjNuQ3R4UjVQalIrOUpLcHVU?=
+ =?utf-8?B?OHhabS9qaHFkbmZUUXIyOEpsc0VlcnR2eGhCWHdHOTdEeElRUXU3QkVJRWxQ?=
+ =?utf-8?B?OVdXbFdqVWd5UWlxK0FISUE0YTB0dE5JR1N6TGhZbXVCdTJyS3FOa25ocEFx?=
+ =?utf-8?B?bkhUSkNBcExySzN4cXVxc1FzSEd2a2UzYTdMZzRkZytyNHFhOEhNbXppTG04?=
+ =?utf-8?B?Q2xhYkNCYkpsa0FGRWRIcnJyaEdzZmN2Mm40elhCcDVQMG1hcll1aFcxUUMz?=
+ =?utf-8?B?ZUtncmF2YnZ5TmhkVC9LQjFiWUxPRHEvNjlUOFFKZzBRRmhFbnB3aWdsNFJZ?=
+ =?utf-8?B?dkxPMjVzdUdvVmxxcHhmdUpGWjZuSzVHVzY4dkhDNzd2RVJaQmJvaFBiWnk5?=
+ =?utf-8?B?cGw0UEVyRHBRVE9OeGZTMFlzajlia2VpcGtTVGlIUmxqbHkyZFBXQ3h6Nzdq?=
+ =?utf-8?B?Ymx1QS93YTVmd2hDZUhBVXpxakFNdFNmQzUxVTh5Q243MVEydTN3SnRqeHNs?=
+ =?utf-8?B?LzFQejNRYlQ4WXJZdXBNQVVoY0pHMjNYMWRJbHVqVDNYbC9jWlk5K2V1dm5V?=
+ =?utf-8?B?RG5jS2R6L1c3NnJ1UWZnSDA2a0xQbElzRzhWb1prOXZrcmY4Q1gzMmlEYkI3?=
+ =?utf-8?B?UkhxQ09HdVk2cGkySTRIR0tTK3RoT1BYY1FRT05oUE43bnB3SWNxeEMrYzYy?=
+ =?utf-8?B?MnlmWWVwM0dGQmRyV0J1VW55MHJxSWNvQW9Kc0tPa1VVOTErbzlFeUl2YW5t?=
+ =?utf-8?B?SE1yQ2VLVE85YVNZd0p4M3RSWkNUVy9RR3g2bTBWR0NDWWFNeFFFeXR3TmZX?=
+ =?utf-8?B?cGZ3MTA2MTNZMUYzdFYrVHlBRTh3cks4Z0dzOXhFWTU5dm1maHdPNEF5RGJ2?=
+ =?utf-8?B?Q0ZBZzBXT2I2a3BhaVQrQlVaNkJBYlNoZjNRSUxPNUZDemtzUy9WaEJxMGY1?=
+ =?utf-8?B?R3JWZTFIampVUE5tTEd2dm1DZ0R5UFhCNENDRUE1QWg2UEhVcDV2eUhsVGFD?=
+ =?utf-8?B?RDNKREF1TmtmUHVMWUFzdHJjRTMwYXNsUC9YZnZGUEJnYWVTSmNZQUM3VmEr?=
+ =?utf-8?B?cUszUE5mRDhhYVhaZU50UVBCaEYvRWQ5L0tVSFducWhsaDE0VjNMUm03Q0lX?=
+ =?utf-8?B?UElEY205am1MY3NkQnZ5VHlaeENZNWJDRWJoOUp4MjNFellhcXZBM0c5ZHZV?=
+ =?utf-8?B?eXc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89782d4b-61cd-4207-5477-08de0cb7e2da
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2025 13:28:25.9957 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ckUwzIE1iEk6b5bxB/zV2OJfZ3J+YacZtH7/EZ7LhUV0MaoPpBtt9P/IEMfGnBDTS0y8FK2/Vu1Cgui+pmd3+HoKgV42WgRDTXwu+tFtwWg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR04MB11801
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,51 +174,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The idiom used in save_boot_params is common for armv7.
-In armv8 is much easier to do the same thing with adr/adrp.
+Hi Rasmus,
 
-So let's simplify the code a bit.
+On 10/16/25 2:52 PM, Rasmus Villemoes wrote:
+> This is a natural buddy to the existing "part number", allowing one to
+> get the partition name for a given partition number.
+> 
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- arch/arm/cpu/armv8/start.S | 19 +++++++------------
- 1 file changed, 7 insertions(+), 12 deletions(-)
+Can you update the documentation in doc/usage/cmd/part.rst as well?
 
-diff --git a/arch/arm/cpu/armv8/start.S b/arch/arm/cpu/armv8/start.S
-index 829a620faeb6..40c342e97e9b 100644
---- a/arch/arm/cpu/armv8/start.S
-+++ b/arch/arm/cpu/armv8/start.S
-@@ -387,23 +387,18 @@ ENDPROC(c_runtime_cpu_setup)
- WEAK(save_boot_params)
- #if (IS_ENABLED(CONFIG_BLOBLIST))
- 	/* Calculate the PC-relative address of saved_args */
--	adr	x9, saved_args_offset
--	ldr	w10, saved_args_offset
--	add	x9, x9, w10, sxtw
--
--	stp	x0, x1, [x9]
--	stp	x2, x3, [x9, #16]
-+	adrp	x9, saved_args
-+	add	x9, x9, :lo12:saved_args
-+	stp 	x0, x1, [x9]
-+	stp 	x2, x3, [x9, #16]
- #endif
- 	b	save_boot_params_ret	/* back to my caller */
- ENDPROC(save_boot_params)
+> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+> ---
+>   cmd/part.c | 16 +++++++++++++++-
+>   1 file changed, 15 insertions(+), 1 deletion(-)
+> 
+> diff --git a/cmd/part.c b/cmd/part.c
+> index db7bc5819c0..975a0a08a99 100644
+> --- a/cmd/part.c
+> +++ b/cmd/part.c
+> @@ -25,7 +25,8 @@
+>   enum cmd_part_info {
+>   	CMD_PART_INFO_START = 0,
+>   	CMD_PART_INFO_SIZE,
+> -	CMD_PART_INFO_NUMBER
+> +	CMD_PART_INFO_NUMBER,
+> +	CMD_PART_INFO_NAME,
+>   };
+>   
+>   static int do_part_uuid(int argc, char *const argv[])
+> @@ -154,6 +155,9 @@ static int do_part_info(int argc, char *const argv[], enum cmd_part_info param)
+>   	case CMD_PART_INFO_NUMBER:
+>   		snprintf(buf, sizeof(buf), "0x%x", part);
+>   		break;
+> +	case CMD_PART_INFO_NAME:
+> +		snprintf(buf, sizeof(buf), "%s", info.name);
 
- #if (IS_ENABLED(CONFIG_BLOBLIST))
--saved_args_offset:
--	.long	saved_args - .	/* offset from current code to save_args */
--
--	.section .data
--	.align 2
--	.global saved_args
-+.section .data
-+.align 2
-+.global saved_args
- saved_args:
- 	.rept 4
- 	.dword 0
---
-2.43.0
+Is it possible info.name is never set by the fs/blk driver? Should we 
+initialize this field?
 
+Cheers,
+Quentin
