@@ -4,102 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D63DCCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 14:43:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83893CCD199
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 15:15:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D61AB83710;
-	Thu, 16 Oct 2025 16:43:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C888C836D1;
+	Thu, 16 Oct 2025 17:15:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S46tuWC4";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B1A4083734; Thu, 16 Oct 2025 16:43:29 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C30DA836EE; Thu, 16 Oct 2025 17:15:45 +0200 (CEST)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7736B836D1
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 16:43:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D09B836C1
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 17:15:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-63b9da57cecso1522917a12.0
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 07:43:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760625807; x=1761230607; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=t5/kMQrQeCfxDRmLecfdbzDBrvyLlByOZRfjYr/Ada0=;
- b=S46tuWC4zawF939yijVQ5XPYDuiq5pyitc5OcwLqnZLlg0qNNX149Avurd5YKCvoEB
- +ppujEweqQjI9C7IFrgR3tSkIXBejHPALikqU/TJD99nti/EBqIwV9Scmlg9o7tVRm6W
- KQPKAFNzEje1GnRgVHOwCzohCqSGUoZmljEpIn/eXV/ZBAMwd23xTxd9d924sRIdf9J5
- AlA3nPILj5brUVE3v0YFOa7HZ+q06+eefRBl+Yl0y4ukeIExq3ZhvjXunpTKw0mb3ec+
- u5OqecJM6ufuIQ9Y1gnbKoLcn3i6p11Q8lA7D5rkm5420JEcyFUGl7368CPJAD8Qd4q9
- pJAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760625807; x=1761230607;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t5/kMQrQeCfxDRmLecfdbzDBrvyLlByOZRfjYr/Ada0=;
- b=BqybkcdLFM6ptdSZBBR7Etr5l9XmMuydVDkrp5f7V+n2OaQHa4okePniw7ZBabC8Rb
- LI1ROajqayM8Widm2LRL3DglD0FOjlovSIJjtXZbuTNPgZW9YwU4bie6zgEim3OmZv6b
- LYGPqXjlEMruEWtAAxPSuuCHAnC9FdMMygkZj891gs89ILwioc7CCVzjPb99xTVjNtgp
- 69/f09atKmt1Vm9gLfvIS8gxLg5KSRmvxrHV/Qq+TQVEXgikPBSCFUO4EeHHG9DWajgW
- LI0R7NTQmDFfshWcuGDG0Fxk160IxsW7el6T7QqvYFvmw37ySqHqENecwAH8fKCouoIE
- OMmA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVUAVyJNtz23mOyafUW2GNXIC3/J+sxNE4H+PlEreR+7++0btpyhgHzrqyzcREkvPzidnOfC40=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNfByMqtHbDUcYmfGq2gRb31SnkPWKhjDP1jNUy5zfo/uKn6vQ
- hFqU3TeBDTXyuwJqTv0MubIRUCLzOvAisO9xYtRC2yPgwcDTAsJWGe+mZb3zMv21vbY=
-X-Gm-Gg: ASbGncvspTSQqZxiAld4iHShXb5AmNQdFS0ZEjpblWHfSlus3mpKz5heVPuBmpCW5gu
- 7c8xk0SpWxzDdQqfyGIbf9UNVY/b2VtwZ3tBNS/7TcOdH/Wnh4S3p9INrkmdkiX5FUQGhuB3S7C
- AGIdAxo46Au9E3vVYcDH/0OhZ5SXiGZ6ebjmXIBuUyj+gx1Epy387UwDTMM75C0xPIRWRZ8pQUN
- Y748QtQKDb8NigSWOP7TN4RU05w6jAgVxMWZUJrRGm0+UnA81DBqRZCzWGRREu9AALQUMNa6rIN
- EKSAXDyWFVli+/q1nn9XzM+QvuCg/wRc0kUiF/vIpo6CfmrIgEmAG67AgymDo7H0Cynl5UNVa6y
- +HzjDHxnqQuLy6bMUocvPznVsqK5z6roXXA6C5ru5Tr7E3r48/46mcRpi/g0PdB8jxq9WB9xK2x
- SnjetLdKGqY26fN2GAlOFPohUJj2UdXPtNGUMuU+q/COjv
-X-Google-Smtp-Source: AGHT+IF4XEmYh/szVpaVU3ilU5WRTJm2tkDKMx9Hk3WdqE5axk2PdASzbuuBH/4hb0uELDFK/LaaLg==
-X-Received: by 2002:a17:907:3e8c:b0:b55:d205:f40e with SMTP id
- a640c23a62f3a-b647443cf19mr21643666b.33.1760625806752; 
- Thu, 16 Oct 2025 07:43:26 -0700 (PDT)
-Received: from [192.168.1.36] (p5b29e551.dip0.t-ipconnect.de. [91.41.229.81])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b5cb9e813acsm538182466b.27.2025.10.16.07.43.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 16 Oct 2025 07:43:26 -0700 (PDT)
-Message-ID: <59765e37-863a-422e-bce2-fb9cb0dc4ebd@linaro.org>
-Date: Thu, 16 Oct 2025 16:43:25 +0200
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1v9Phf-0000N2-6x; Thu, 16 Oct 2025 17:15:43 +0200
+Message-ID: <1b8fbd3c-bce0-47e6-9b7d-72ecd2b67946@pengutronix.de>
+Date: Thu, 16 Oct 2025 17:15:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/5] pinctrl: qcom: add sdm670 pinctrl driver
-Content-Language: en-US
-To: David Wronek <david.wronek@mainlining.org>,
- Alexey Minnekhanov <alexeymin@postmarketos.org>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julius Lehmann <lehmanju@devpi.de>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Rui Miguel Silva <rui.silva@linaro.org>, Sam Day <me@samcday.com>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@kernel.org>,
- Tom Rini <trini@konsulko.com>,
- Varadarajan Narayanan <quic_varada@quicinc.com>
-Cc: linux@mainlining.org, ~postmarketos/upstreaming@lists.sr.ht,
- u-boot@lists.denx.de, u-boot-qcom@groups.io,
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
- Sumit Garg <sumit.garg@oss.qualcomm.com>
-References: <20251003-sdm670-v2-0-52c0fa481286@mainlining.org>
- <20251003-sdm670-v2-3-52c0fa481286@mainlining.org>
-From: Casey Connolly <casey.connolly@linaro.org>
-In-Reply-To: <20251003-sdm670-v2-3-52c0fa481286@mainlining.org>
+Subject: Re: [PATCH] armv8: implement workaround for broken CNTFRQ_EL0 value
+To: Kaustabh Chakraborty <kauschluss@disroot.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20251014-armv8-broken-cntfrq-v1-1-b63f9c69ffcb@disroot.org>
+ <e05ec920-c5cc-49b2-9cb5-8444bac84bd9@pengutronix.de>
+ <fcc3e6280e222229d2bea42c1402da99@disroot.org>
+Content-Language: en-US, de-DE, de-BE
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <fcc3e6280e222229d2bea42c1402da99@disroot.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,311 +64,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Kaustabh,
 
-
-On 03/10/2025 12:01, David Wronek wrote:
-> Add a pinctrl driver for the TLMM block found in the SDM670 SoC.
+On 10/16/25 4:59 PM, Kaustabh Chakraborty wrote:
+> On 2025-10-15 07:48, Ahmad Fatoum wrote:
+>>> Thus, the only solution is to add a config option which, when enabled,
+>>> returns a hard coded value (CONFIG_COUNTER_FREQUENCY) instead of
+>>> querying
+>>> CNTFRQ_EL0.
+>>
+>> Why not read it from the clock-frequency property in the device tree?
+>>
+>> This is what barebox is now doing, incidentally also for Samsung
+>> support, see:
+>> https://lore.kernel.org/barebox/20250729203659.1858575-3-
+>> ivo.ivanov.ivanov1@gmail.com/
 > 
-> Signed-off-by: David Wronek <david.wronek@mainlining.org>
-> ---
->  drivers/pinctrl/qcom/Kconfig          |   7 +
->  drivers/pinctrl/qcom/Makefile         |   1 +
->  drivers/pinctrl/qcom/pinctrl-sdm670.c | 247 ++++++++++++++++++++++++++++++++++
->  3 files changed, 255 insertions(+)
+> In barebox, the timer is a device driver, like in linux. In U-Boot
+> however, it is
+> instead part of the ARM architecture specific code. And it is being
+> accessed by
+> a single function, not dependent on others.
+
+Ah, I wasn't aware of this.
+
+> However, in U-Boot i found gd->arch.timer_rate_hz, which can be used,
+> like so:
 > 
-> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-> index 21f81b66099..45f900e9383 100644
-> --- a/drivers/pinctrl/qcom/Kconfig
-> +++ b/drivers/pinctrl/qcom/Kconfig
-> @@ -68,6 +68,13 @@ config PINCTRL_QCOM_SC7280
->  	help
->  	  Say Y here to enable support for pinctrl on the Snapdragon SC7280 SoC,
->  
-> +config PINCTRL_QCOM_SDM670
-> +	bool "Qualcomm SDM670 Pinctrl"
-> +	select PINCTRL_QCOM
-> +	help
-> +	  Say Y here to enable support for pinctrl on the Snapdragon SDM670 SoC,
-> +	  as well as the associated GPIO driver.
-> +
->  config PINCTRL_QCOM_SDM660
->  	bool "Qualcomm SDM630/660 Pinctrl"
->  	select PINCTRL_QCOM
-> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-> index 6cb53838e71..f43868363d6 100644
-> --- a/drivers/pinctrl/qcom/Makefile
-> +++ b/drivers/pinctrl/qcom/Makefile
-> @@ -13,6 +13,7 @@ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
->  obj-$(CONFIG_PINCTRL_QCOM_SA8775P) += pinctrl-sa8775p.o
->  obj-$(CONFIG_PINCTRL_QCOM_SC7280) += pinctrl-sc7280.o
->  obj-$(CONFIG_PINCTRL_QCOM_SDM660) += pinctrl-sdm660.o
-> +obj-$(CONFIG_PINCTRL_QCOM_SDM670) += pinctrl-sdm670.o
->  obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
->  obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
->  obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
-> diff --git a/drivers/pinctrl/qcom/pinctrl-sdm670.c b/drivers/pinctrl/qcom/pinctrl-sdm670.c
-> new file mode 100644
-> index 00000000000..830fe7d826f
-> --- /dev/null
-> +++ b/drivers/pinctrl/qcom/pinctrl-sdm670.c
-> @@ -0,0 +1,247 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Qualcomm SDM670 pinctrl
-> + *
-> + * (C) Copyright 2025 David Wronek <david.wronek@mainlining.org>
-> + */
-> +
-> +#include <dm.h>
-> +#include "pinctrl-qcom.h"
-> +
-> +#define NORTH	0x00500000
-> +#define SOUTH	0x00900000
-> +#define WEST	0x00100000
-> +
-> +#define MAX_PIN_NAME_LEN 32
-> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-> +
-> +static const struct pinctrl_function sdm670_pinctrl_functions[] = {
-> +	{ "gpio", 0 },
-> +	{ "blsp_uart2", 3 }, /* gpio 4 and 5, used for debug uart */
-> +};
-> +
-> +static const unsigned int sdm670_pin_offsets[] = {
-> +	[0] = SOUTH,
-> +	[1] = SOUTH,
-> +	[2] = SOUTH,
-> +	[3] = SOUTH,
-> +	[4] = NORTH,
-> +	[5] = NORTH,
-> +	[6] = NORTH,
-> +	[7] = NORTH,
-> +	[8] = WEST,
-> +	[9] = WEST,
-> +	[10] = NORTH,
-> +	[11] = NORTH,
-> +	[12] = SOUTH,
-> +	[13] = WEST,
-> +	[14] = WEST,
-> +	[15] = WEST,
-> +	[16] = WEST,
-> +	[17] = WEST,
-> +	[18] = WEST,
-> +	[19] = WEST,
-> +	[20] = WEST,
-> +	[21] = WEST,
-> +	[22] = WEST,
-> +	[23] = WEST,
-> +	[24] = WEST,
-> +	[25] = WEST,
-> +	[26] = WEST,
-> +	[27] = WEST,
-> +	[28] = WEST,
-> +	[29] = WEST,
-> +	[30] = WEST,
-> +	[31] = WEST,
-> +	[32] = WEST,
-> +	[33] = WEST,
-> +	[34] = WEST,
-> +	[35] = NORTH,
-> +	[36] = NORTH,
-> +	[37] = NORTH,
-> +	[38] = NORTH,
-> +	[39] = NORTH,
-> +	[40] = NORTH,
-> +	[41] = SOUTH,
-> +	[42] = SOUTH,
-> +	[43] = SOUTH,
-> +	[44] = SOUTH,
-> +	[45] = SOUTH,
-> +	[46] = SOUTH,
-> +	[47] = SOUTH,
-> +	[48] = SOUTH,
-> +	[49] = NORTH,
-> +	[50] = NORTH,
-> +	[51] = NORTH,
-> +	[52] = NORTH,
-> +	[53] = NORTH,
-> +	[54] = NORTH,
-> +	[55] = NORTH,
-> +	[56] = NORTH,
-> +	[57] = NORTH,
-> +	[65] = NORTH,
-> +	[66] = NORTH,
-> +	[67] = NORTH,
-> +	[68] = NORTH,
-> +	[75] = NORTH,
-> +	[76] = NORTH,
-> +	[77] = NORTH,
-> +	[78] = NORTH,
-> +	[79] = NORTH,
-> +	[80] = NORTH,
-> +	[81] = NORTH,
-> +	[82] = NORTH,
-> +	[83] = NORTH,
-> +	[84] = NORTH,
-> +	[85] = SOUTH,
-> +	[86] = SOUTH,
-> +	[87] = SOUTH,
-> +	[88] = SOUTH,
-> +	[89] = SOUTH,
-> +	[90] = SOUTH,
-> +	[91] = SOUTH,
-> +	[92] = SOUTH,
-> +	[93] = SOUTH,
-> +	[94] = SOUTH,
-> +	[95] = SOUTH,
-> +	[96] = SOUTH,
-> +	[97] = WEST,
-> +	[98] = WEST,
-> +	[99] = NORTH,
-> +	[100] = WEST,
-> +	[101] = WEST,
-> +	[102] = WEST,
-> +	[103] = WEST,
-> +	[105] = NORTH,
-> +	[106] = NORTH,
-> +	[107] = NORTH,
-> +	[108] = NORTH,
-> +	[109] = NORTH,
-> +	[110] = NORTH,
-> +	[111] = NORTH,
-> +	[112] = NORTH,
-> +	[113] = NORTH,
-> +	[114] = WEST,
-> +	[115] = WEST,
-> +	[116] = SOUTH,
-> +	[117] = NORTH,
-> +	[118] = NORTH,
-> +	[119] = NORTH,
-> +	[120] = NORTH,
-> +	[121] = NORTH,
-> +	[122] = NORTH,
-> +	[123] = NORTH,
-> +	[124] = NORTH,
-> +	[125] = NORTH,
-> +	[126] = NORTH,
-> +	[127] = WEST,
-> +	[128] = WEST,
-> +	[129] = WEST,
-> +	[130] = WEST,
-> +	[131] = WEST,
-> +	[132] = WEST,
-> +	[133] = NORTH,
-> +	[134] = NORTH,
-> +	[135] = WEST,
-> +	[136] = WEST,
-> +	[137] = WEST,
-> +	[138] = WEST,
-> +	[139] = WEST,
-> +	[140] = WEST,
-> +	[141] = WEST,
-> +	[142] = WEST,
-> +	[143] = WEST,
-> +	[144] = SOUTH,
-> +	[145] = SOUTH,
-> +	[146] = WEST,
-> +	[147] = WEST,
-> +	[148] = WEST,
-> +	[149] = WEST,
-> +};
-> +
-> +#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-> +{							\
-> +	.name = pg_name,				\
-> +	.ctl_reg = ctl,					\
-> +	.io_reg = 0,					\
-> +	.pull_bit = pull,				\
-> +	.drv_bit = drv,					\
-> +	.oe_bit = -1,					\
-> +	.in_bit = -1,					\
-> +	.out_bit = -1,					\
-> +}
-> +
-> +#define UFS_RESET(pg_name, offset)			\
-> +{							\
-> +	.name = pg_name,				\
-> +	.ctl_reg = offset,				\
-> +	.io_reg = offset + 0x4,				\
-> +	.pull_bit = 3,					\
-> +	.drv_bit = 0,					\
-> +	.oe_bit = -1,					\
-> +	.in_bit = -1,					\
-> +	.out_bit = 0,					\
-> +}
-> +
-> +static const struct msm_special_pin_data sdm670_special_pins_data[] = {
-> +	UFS_RESET("ufs_reset", 0x99d000),
-> +	SDC_QDSD_PINGROUP("sdc1_rclk", NORTH + 0x99000, 15, 0),
-> +	SDC_QDSD_PINGROUP("sdc1_clk",  NORTH + 0x99000, 13, 6),
-> +	SDC_QDSD_PINGROUP("sdc1_cmd",  NORTH + 0x99000, 11, 3),
-> +	SDC_QDSD_PINGROUP("sdc1_data", NORTH + 0x99000, 9,  0),
-> +	SDC_QDSD_PINGROUP("sdc2_clk",  NORTH + 0x9a000, 14, 6),
-> +	SDC_QDSD_PINGROUP("sdc2_cmd",  NORTH + 0x9a000, 11, 3),
-> +	SDC_QDSD_PINGROUP("sdc2_data", NORTH + 0x9a000, 9,  0),
-> +};
-> +
-> +static const char *sdm670_get_function_name(struct udevice *dev, unsigned int selector)
-> +{
-> +	return sdm670_pinctrl_functions[selector].name;
-> +}
-> +
-> +static const char *sdm670_get_pin_name(struct udevice *dev, unsigned int selector)
-> +{
-> +	if (selector >= 150 && selector <= 157)
-> +		snprintf(pin_name, MAX_PIN_NAME_LEN,
-> +			 sdm670_special_pins_data[selector - 150].name);
-> +	else
-> +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-> +
-> +	return pin_name;
-> +}
-> +
-> +static int sdm670_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-> +{
-> +	if (selector >= 0 && selector < ARRAY_SIZE(sdm670_pinctrl_functions))
-> +		return sdm670_pinctrl_functions[selector].val;
-> +	return -EINVAL;
-> +}
-> +
-> +struct msm_pinctrl_data sdm670_data = {
-> +	.pin_data = {
-> +		.pin_offsets = sdm670_pin_offsets,
-> +		.pin_count = ARRAY_SIZE(sdm670_pin_offsets) + ARRAY_SIZE(sdm670_special_pins_data),
-> +		.special_pins_start = 150,
-> +		.special_pins_data = sdm670_special_pins_data,
-> +	},
-> +	.functions_count = ARRAY_SIZE(sdm670_pinctrl_functions),
-> +	.get_function_name = sdm670_get_function_name,
-> +	.get_function_mux = sdm670_get_function_mux,
-> +	.get_pin_name = sdm670_get_pin_name,
-> +};
-> +
-> +static const struct udevice_id msm_pinctrl_ids[] = {
-> +	{
-> +		.compatible = "qcom,sdm670-tlmm",
-> +		.data = (ulong)&sdm670_data
-> +	},
-> +	{ /* Sentinel */ }
-> +};
-> +
-> +U_BOOT_DRIVER(pinctrl_ssdm670) = {
+>     if (gd->arch.timer_rate_hz)
+>         return gd->arch.timer_rate_hz;
+> 
+> This property needs to be set in board file – in timer_init(). So I will do
+> that instead.
+
+:)
+
+Cheers,
+Ahmad
 
 
-Small typo I'll fix while applying.
-
-Thanks!
-
-Reviewed-by: Casey Connolly <casey.connolly@linaro.org>
-
-> +	.name = "pinctrl_sdm670",
-> +	.id = UCLASS_NOP,
-> +	.of_match = msm_pinctrl_ids,
-> +	.ops = &msm_pinctrl_ops,
-> +	.bind = msm_pinctrl_bind,
-> +};
+> 
+>>
+>> Cheers,
+>> Ahmad
+>>
+>>>
+>>> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+>>> ---
+>>>  arch/arm/cpu/armv8/Kconfig         | 9 +++++++++
+>>>  arch/arm/cpu/armv8/generic_timer.c | 4 ++++
+>>>  2 files changed, 13 insertions(+)
+>>>
+>>> diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
+>>> index
+>>> 199335cd6040d30a355a7fd5448a449fa7f550fb..d54d874b7caea200e1c05f522d8affe6d239a102 100644
+>>> --- a/arch/arm/cpu/armv8/Kconfig
+>>> +++ b/arch/arm/cpu/armv8/Kconfig
+>>> @@ -4,6 +4,15 @@ config CMO_BY_VA_ONLY
+>>>      bool "Force cache maintenance to be exclusively by VA"
+>>>      depends on !SYS_DISABLE_DCACHE_OPS
+>>>
+>>> +config ARMV8_CNTFRQ_BROKEN
+>>> +    bool "Fix broken ARMv8 generic timer"
+>>> +    depends on COUNTER_FREQUENCY > 0
+>>> +    depends on SYS_ARCH_TIMER
+>>> +    help
+>>> +      Say Y here if there is no trustable firmware present which sets
+>>> +      CNTFRQ_EL0 frequency before U-Boot. U-Boot will use the
+>>> +      CONFIG_COUNTER_FREQUENCY value as the reported frequency.
+>>> +
+>>>  config ARMV8_SPL_EXCEPTION_VECTORS
+>>>      bool "Install crash dump exception vectors"
+>>>      depends on SPL
+>>> diff --git a/arch/arm/cpu/armv8/generic_timer.c b/arch/arm/cpu/armv8/
+>>> generic_timer.c
+>>> index
+>>> 1de7ec596fc7cbbc3e78a241f163bc0a4fcad6b6..409570cf6fda79527e296b958368b552900524b1 100644
+>>> --- a/arch/arm/cpu/armv8/generic_timer.c
+>>> +++ b/arch/arm/cpu/armv8/generic_timer.c
+>>> @@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
+>>>  unsigned long notrace get_tbclk(void)
+>>>  {
+>>>      unsigned long cntfrq;
+>>> +
+>>> +    if (IS_ENABLED(CONFIG_ARMV8_CNTFRQ_BROKEN))
+>>> +        return CONFIG_COUNTER_FREQUENCY;
+>>> +
+>>>      asm volatile("mrs %0, cntfrq_el0" : "=r" (cntfrq));
+>>>      return cntfrq;
+>>>  }
+>>>
+>>> ---
+>>> base-commit: a5b3be1a37e19646b9d36c91f11b23f568be4f21
+>>> change-id: 20251014-armv8-broken-cntfrq-f350f68fbf6e
+>>>
+>>> Best regards,
+>>
+>>
+>> -- 
+>> Pengutronix e.K.                           |
+>>                              |
+>> Steuerwalder Str. 21                       | http://
+>> www.pengutronix.de/  |
+>> 31137 Hildesheim, Germany                  | Phone:
+>> +49-5121-206917-0    |
+>> Amtsgericht Hildesheim, HRA 2686           | Fax:  
+>> +49-5121-206917-5555 |
 > 
 
 -- 
-// Casey (she/her)
+Pengutronix e.K.                  |                             |
+Steuerwalder Str. 21              | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany         | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686  | Fax:   +49-5121-206917-5555 |
 
