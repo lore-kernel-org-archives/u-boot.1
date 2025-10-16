@@ -4,43 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6283CCCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 20:44:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9847DCCD199
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 21:04:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C52F836C8;
-	Thu, 16 Oct 2025 22:44:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id EB644836EE;
+	Thu, 16 Oct 2025 23:04:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 459A7836D1; Thu, 16 Oct 2025 22:44:38 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0746F836C1
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 22:44:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [98.97.26.134])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 0FE6FB220119;
- Thu, 16 Oct 2025 22:44:33 +0200 (CEST)
-Message-ID: <43872d3c-475d-484d-9709-4ad810bcaaaa@freeshell.de>
-Date: Thu, 16 Oct 2025 13:44:31 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G/dmSYas";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B7AE983700; Thu, 16 Oct 2025 23:04:19 +0200 (CEST)
+Received: from mail-oa1-x36.google.com (mail-oa1-x36.google.com
+ [IPv6:2001:4860:4864:20::36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 50580836D1
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 23:04:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x36.google.com with SMTP id
+ 586e51a60fabf-36e4d00ebfdso452865fac.1
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 14:04:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760648656; x=1761253456; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=dmyTYNyc7WVicGKy/ClDWWrqsUC/ho6ohI6w5LfRC5Y=;
+ b=G/dmSYasPWQ+Q2tWNraXKy82ueSUtR1U23CdYdDdtido91XDIG+8u4myBMAMwQYBz8
+ N8f6hAH7VyCPRtrD9mAdet41tDotU3Zo5Gj+130tEWO6JUfR+Zx9JpSXGeexo+PwGZJ+
+ sTqULqwOTgoMeKIf92gWUnT93rn8aDnCfQhtg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760648656; x=1761253456;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dmyTYNyc7WVicGKy/ClDWWrqsUC/ho6ohI6w5LfRC5Y=;
+ b=Y38bDm3jQoRD3pYBJYr8jDQp5AagVfAgix1whlNM3iz33tjgm3nmrPtovxzyLTjhvl
+ EYlrkcFUtEqnH4Yw3/q186+cTDm28UVvsSGKa0itCo21o8qYTr5tXYfI3DxK4hC3PKdS
+ 2TFUdHVq4lKiJ+oItiW0Ix0CctN2Nd1AFor/sQc7CHg+XCMEpQ7ieT3fDnrNcZmVK575
+ W0IqoU1Vcjecr5ZEx9+ZuJTECc7irkPiDWgg2yPP0OOeT5Oe97C7t0b+Rgit7T5CHXaY
+ CUEX8BJKgyRMSMZ7No80BB+SY5VIDUwdLFtCNkt+uWb7lnZMB05lUVJt+n9lBQrt1zaD
+ DbVA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXf+3cWyEme8iPa1J82zzajmO4QcYDqF5Wm0OWS5/vvle307dWO0XlHxiDwLzjmgTxod09Cv7I=@lists.denx.de
+X-Gm-Message-State: AOJu0YxPkc+VKDb5ZJIlv+D9hKRP4719gCHTYyUgikLKiA0ZtDj0cBgJ
+ JXj36s2iS01GLrUniXCxnTi+3gFyx3B/QB0Gjdznu5i8uHVmoo8qymJ271nbJ/fsi5M=
+X-Gm-Gg: ASbGnctxVs5q6NXjyTHPb5MiFpN0B5HYDO4H40HVn6P1lUk2ZI0HbNbXfnJXuJytWQz
+ v3vkrg69nGS7LUyPFBBsVjF7lVXEBVEqxVCFUSo7Of8LT8suaej1S067KV9cN6ZzUReZCK08VMf
+ J3wWUXIwRfLmQsJfFPGfBzUxPlXoO4oO9bABq/NXaNEEUGyF0h67DUAsHPlXVl2GPMQTNvsSUlG
+ RTqF4y1TRxjKAE5ITujY4S5NxE4ipg3y6eitihgWa9341CbRV4fqbAfoXCTu2W0HqX+pOKzkegf
+ NbbCz6badyuZpNa50ZULwMEm6iB27NrYW8hMwkEp4AOpYWft1OHMivVgUlg2L/2FeJcXtLHyTNM
+ YNX59L2W/qCfL8A017F/ksRR/Qv5GrUpADQwoDAPluJ0ELg2efXUlhx1e5JKhNBpXzYhLAebzDA
+ 3fnesIBs8F/Zy/Lb5dQwcK+VTikNfgNylIuDAlazM=
+X-Google-Smtp-Source: AGHT+IFwJfPXYIJx29T0URd2u28ETZE0dgMucRRLtAeiOsjcTtQ8r2ZJoDp6J6H/j6MrDG/lluqwuw==
+X-Received: by 2002:a05:6871:7506:b0:365:3877:5ec4 with SMTP id
+ 586e51a60fabf-3c98d10defcmr582014fac.37.1760648655970; 
+ Thu, 16 Oct 2025 14:04:15 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3c8c8682138sm6817800fac.0.2025.10.16.14.04.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Oct 2025 14:04:14 -0700 (PDT)
+Date: Thu, 16 Oct 2025 15:04:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, u-boot@lists.denx.de
+Subject: Re: [resend PATCH v4] disk: dos: Add all options for EFI System
+ Partitions
+Message-ID: <20251016210412.GA250556@bill-the-cat>
+References: <20251008150832.627727-1-pbrobinson@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] riscv: consider CONFIG_RISCV_ISA_ZAAMO in SPL too
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
-Cc: Simon Glass <sjg@chromium.org>, Yao Zi <ziyao@disroot.org>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>,
- u-boot@lists.denx.de
-References: <20251016165851.45311-1-heinrich.schuchardt@canonical.com>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <20251016165851.45311-1-heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="0R6N4CM8K+1oSw0n"
+Content-Disposition: inline
+In-Reply-To: <20251008150832.627727-1-pbrobinson@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,76 +100,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich, thank you for your attention to this.
 
-On 10/16/25 09:58, Heinrich Schuchardt wrote:
-> Commit a681cfecb434 ("riscv: Add a Zalrsc-only alternative for
-> synchronization in start.S") changed the hart synchronization in start.S.
-> It uses CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO) to determine which method to
-> use. If the macro evaluates to true the old behavior is maintained.
-> 
-> The macro evaluates to false for SPL builds which was unintended. Use
-> IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO) instead.
-> 
-> This fixes a boot failure on StarFive JH7110 based boards.
-> 
-> Fixes: a681cfecb434 ("riscv: Add a Zalrsc-only alternative for synchronization in start.S")
-> Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/riscv/cpu/start.S | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
-> index 6324ff585d4..87b3ff0f93f 100644
-> --- a/arch/riscv/cpu/start.S
-> +++ b/arch/riscv/cpu/start.S
-> @@ -151,7 +151,7 @@ call_harts_early_init:
->  	 */
->  	la	t0, hart_lottery
->  	li	t1, 1
-> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
-> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
->  	amoswap.w s2, t1, 0(t0)
->  	bnez	s2, wait_for_gd_init
->  #else
-> @@ -184,7 +184,7 @@ call_harts_early_init:
->  #if !CONFIG_IS_ENABLED(XIP)
->  #ifdef CONFIG_AVAILABLE_HARTS
->  	la	t0, available_harts_lock
-> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
-> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
->  	amoswap.w.rl zero, zero, 0(t0)
->  #else
->  	fence	rw, w
-> @@ -203,7 +203,7 @@ wait_for_gd_init:
->  	la	t0, available_harts_lock
->  	li	t1, 1
->  1:
-> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
-> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
->  	amoswap.w.aq t1, t1, 0(t0)
->  #else
->  	lr.w.aq	t1, 0(t0)
-> @@ -219,7 +219,7 @@ wait_for_gd_init:
->  	or	t2, t2, t1
->  	SREG	t2, GD_AVAILABLE_HARTS(gp)
->  
-> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
-> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
->  	amoswap.w.rl zero, zero, 0(t0)
->  #else
->  	fence	rw, w
+--0R6N4CM8K+1oSw0n
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I confirm this restores Pine64 Star64 (JH-7110) SPL boot in origin/next
+On Wed, Oct 08, 2025 at 04:08:27PM +0100, Peter Robinson wrote:
 
-Are we reverting the bad commit or papering over it with a fix?
+> The EFI spec states that the ESP can be any of FAT12/16/32 but for
+> compatibility doesn't necssarily require the partition to be the
+> EFI partition table ID of 0xef. A number of arm devices will not
+> find their firmware on a FAT partition with an ID of 0xef so also
+> allow the original FAT12/16/32 partition IDs as they are also
+> permissable for an ESP.
+>=20
+> Signed-off-by: Peter Robinson <pbrobinson@gmail.com>
+> Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Ref. "Revert "riscv: Add a Zalrsc-only alternative for synchronization
-in start.S":
+So the CI failure is in EFI self test:
+https://source.denx.de/u-boot/u-boot/-/jobs/1267541#L268
+and I'm not sure where to dig in to that part.
 
-https://lore.kernel.org/u-boot/aOylBeAxyoKuPJYa@pie/
+--=20
+Tom
 
-In any event, for this patch,
+--0R6N4CM8K+1oSw0n
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Tested-by: E Shattow <e@freeshell.de>
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPFdyQAKCRAr4qD1Cr/k
+CrWqAQD7gUd9G4kN6Rnfz52Vgczjtzy7EBcA21K1nIKhtI1fBQEAunq6pI8UFz+L
+72VXoP9V/EhsS23Xwfwj0sQmSRC9AAY=
+=aE7Q
+-----END PGP SIGNATURE-----
+
+--0R6N4CM8K+1oSw0n--
