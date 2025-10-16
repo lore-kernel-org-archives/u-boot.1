@@ -4,89 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9D85CCD183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 18:28:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6283CCCD199
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 20:44:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A5D48367F;
-	Thu, 16 Oct 2025 20:28:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C52F836C8;
+	Thu, 16 Oct 2025 22:44:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GPjIfDgE";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74120836A3; Thu, 16 Oct 2025 20:28:37 +0200 (CEST)
-Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
- [IPv6:2607:f8b0:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 459A7836D1; Thu, 16 Oct 2025 22:44:38 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D19F83631
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 20:28:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0746F836C1
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 22:44:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22e.google.com with SMTP id
- 5614622812f47-4439ecf6004so349360b6e.1
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 11:28:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760639314; x=1761244114; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tr9IXf6tqufQp/kuvGLJKb1VDYXxcyre7G4GfKv22Yc=;
- b=GPjIfDgEpzGndqazCgVl7J1qfPAk+YmMrZ/6CPGtm/ey56VTPQBYO0+b2+wPoNmbwL
- gDYhPmUWDw5y0A8p88ONTFadcqBxnfi5s/1Z9v6oS2V844Obg9t8R3yLzPgB/yl13aES
- hycgzU9SUBkiyxkgiLK6s8gzNZkVJvi2ZtfI4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760639314; x=1761244114;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Tr9IXf6tqufQp/kuvGLJKb1VDYXxcyre7G4GfKv22Yc=;
- b=FEyMG8vqqjYO7C0fsuWV8erxthfun+iGmVP0dPoJ1eCmJvRYN31CLuFlqiEIX2Dhci
- cfpzL1V2pcaFtWossKpb+lV0YPfXxQVk4fA4Bs2klVerHZ/wsT2GxqVxw+oqb8f85mVO
- r8cii16Vdq6UqIRZp54X/N5rmyztfG6WCr9gvg0+S7MAqfjJUbRq4WG1DjhYK1F1NcFQ
- eDBphSsxPXWUsIN986Dl2U2Qd7hyGM9KF32ptT4OjQ4ZsK5MnQt0nJMBY9TaLUjgGN8D
- 2PKmCiJcXvgXnuvwpj1yzZQYvnO6Vbha3DDOyk3OExKwvtwvL7AvMhJcXUN5h5vEH1Wh
- 8Olw==
-X-Gm-Message-State: AOJu0YzBNixS2/6Mc7sfQ87czaBV3kyIPv8tqv5PTfyKPaH2UqNNbxhQ
- oM4DXo+xd5X1qS2lR0ku5Mi8chJk1Vl1lvwyh4dUZgFMRjLiXAxwLGsFFVbazAKh1pA=
-X-Gm-Gg: ASbGnctQ76np9J0aG+Krat0HBkZDwaWW1udGH+8gmdtACSPWq1sawz+Cncjm4FeFKH/
- WlkGcJFHlDYa9Iao/ygbi3Tf+Cz0tS5rrQc6Wf+A3KfymobCwJktYEAe2w4YWtRnePuQ2eV6lFX
- pzPDFJier8C81omD2iRY7gQlhKgvtrCJDlb6gtHBE2VfcVQ9HUL3rKoeSaC8CRpCBYtgKLLXwAO
- 2QRGvboyLLeQQZEOCUgDB/43ylnLPvwKoYSJR7arzE04YRZ4acDi09wEHT+ZfH201sb0B+wm2Qc
- wcAjOaZwu1TquqZf8c+7ASShf/viX0gSE6F/6+Eb3lBY3XUItsVu6wL3DOVW59wbxXxjFbW9JMv
- PNWChzY+0I6yShq71vplUxdnuTnu9jVoB7LAgQjikhS3NOfXfjMV3iYbTDnsZnJECG04TxPa4HM
- /itEjDH9t6kWVJsQ9ck3l4VIJogIf2aQ62YE2e0ZAk9ZKQOv7d
-X-Google-Smtp-Source: AGHT+IFDpyqkBoJ8P1Qx8imMwBiwrqXLRM8XXvTWaBQ7P9BrP0CBJnIkMlSNJ32sSdWloAZiQHqrOg==
-X-Received: by 2002:a05:6808:1907:b0:441:8f74:f00 with SMTP id
- 5614622812f47-443a1acb829mr659679b6e.29.1760639313988; 
- Thu, 16 Oct 2025 11:28:33 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44202cf0a4esm698931b6e.24.2025.10.16.11.28.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 11:28:32 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
-Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-In-Reply-To: <20251003191918.767698-1-raymond.mao@linaro.org>
-References: <20251003191918.767698-1-raymond.mao@linaro.org>
-Subject: Re: [PATCH u-boot-test-hooks 1/4] travis-ci: Group the QEMU args
-Message-Id: <176063931205.221550.14928650820544533018.b4-ty@konsulko.com>
-Date: Thu, 16 Oct 2025 12:28:32 -0600
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.26.134])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 0FE6FB220119;
+ Thu, 16 Oct 2025 22:44:33 +0200 (CEST)
+Message-ID: <43872d3c-475d-484d-9709-4ad810bcaaaa@freeshell.de>
+Date: Thu, 16 Oct 2025 13:44:31 -0700
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] riscv: consider CONFIG_RISCV_ISA_ZAAMO in SPL too
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>
+Cc: Simon Glass <sjg@chromium.org>, Yao Zi <ziyao@disroot.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ u-boot@lists.denx.de
+References: <20251016165851.45311-1-heinrich.schuchardt@canonical.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20251016165851.45311-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,24 +57,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 03 Oct 2025 12:19:10 -0700, Raymond Mao wrote:
+Hi Heinrich, thank you for your attention to this.
 
-> Make grouping of QEMU args to break the long line and modernize it
-> with '-m' and '-semihosting-config'.
+On 10/16/25 09:58, Heinrich Schuchardt wrote:
+> Commit a681cfecb434 ("riscv: Add a Zalrsc-only alternative for
+> synchronization in start.S") changed the hart synchronization in start.S.
+> It uses CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO) to determine which method to
+> use. If the macro evaluates to true the old behavior is maintained.
 > 
+> The macro evaluates to false for SPL builds which was unintended. Use
+> IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO) instead.
 > 
+> This fixes a boot failure on StarFive JH7110 based boards.
+> 
+> Fixes: a681cfecb434 ("riscv: Add a Zalrsc-only alternative for synchronization in start.S")
+> Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  arch/riscv/cpu/start.S | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
+> index 6324ff585d4..87b3ff0f93f 100644
+> --- a/arch/riscv/cpu/start.S
+> +++ b/arch/riscv/cpu/start.S
+> @@ -151,7 +151,7 @@ call_harts_early_init:
+>  	 */
+>  	la	t0, hart_lottery
+>  	li	t1, 1
+> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
+>  	amoswap.w s2, t1, 0(t0)
+>  	bnez	s2, wait_for_gd_init
+>  #else
+> @@ -184,7 +184,7 @@ call_harts_early_init:
+>  #if !CONFIG_IS_ENABLED(XIP)
+>  #ifdef CONFIG_AVAILABLE_HARTS
+>  	la	t0, available_harts_lock
+> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
+>  	amoswap.w.rl zero, zero, 0(t0)
+>  #else
+>  	fence	rw, w
+> @@ -203,7 +203,7 @@ wait_for_gd_init:
+>  	la	t0, available_harts_lock
+>  	li	t1, 1
+>  1:
+> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
+>  	amoswap.w.aq t1, t1, 0(t0)
+>  #else
+>  	lr.w.aq	t1, 0(t0)
+> @@ -219,7 +219,7 @@ wait_for_gd_init:
+>  	or	t2, t2, t1
+>  	SREG	t2, GD_AVAILABLE_HARTS(gp)
+>  
+> -#if CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO)
+> +#if IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO)
+>  	amoswap.w.rl zero, zero, 0(t0)
+>  #else
+>  	fence	rw, w
 
-Applied to u-boot/u-boot-test-hooks.git/master, thanks!
+I confirm this restores Pine64 Star64 (JH-7110) SPL boot in origin/next
 
-[1/4] travis-ci: Group the QEMU args
-      commit: 0d55075bc992ae3a83545de8f3b4e0b2c1067a12
-[2/4] bin: Run the conf without board_ident as default
-      commit: 48a0f7fa96199284de11932f8be142ee87524455
-[3/4] bin: Add support for testing firmware handoff on qemu_arm64
-      commit: 0b615349974c28fe644f5b170ffd0ec1f248c767
-[4/4] travis-ci: Introduce env for Firmware Handoff testing
-      commit: a1020f3be5cdde2285faf8e90c31bc4df121bde4
--- 
-Tom
+Are we reverting the bad commit or papering over it with a fix?
 
+Ref. "Revert "riscv: Add a Zalrsc-only alternative for synchronization
+in start.S":
 
+https://lore.kernel.org/u-boot/aOylBeAxyoKuPJYa@pie/
+
+In any event, for this patch,
+
+Tested-by: E Shattow <e@freeshell.de>
