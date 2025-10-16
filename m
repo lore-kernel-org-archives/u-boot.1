@@ -4,45 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E5A1CCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 14:30:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9CC0CCD199
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 14:30:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58C8383890;
-	Thu, 16 Oct 2025 16:29:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9CF83836F0;
+	Thu, 16 Oct 2025 16:29:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="IvY719cb";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="k7CzEuUZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4BDD836F0; Thu, 16 Oct 2025 16:29:16 +0200 (CEST)
+ id 8D58E836F0; Thu, 16 Oct 2025 16:29:20 +0200 (CEST)
 Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD61683885
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 16:29:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8EA6838A0
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 16:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-03.galae.net (Postfix) with ESMTPS id 6D6664E41109;
- Thu, 16 Oct 2025 14:29:14 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 571344E4110B;
+ Thu, 16 Oct 2025 14:29:18 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 438A56062C;
- Thu, 16 Oct 2025 14:29:14 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 275406062C;
+ Thu, 16 Oct 2025 14:29:18 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 02F49102F231F; 
- Thu, 16 Oct 2025 16:29:09 +0200 (CEST)
+ with ESMTPSA id A4A32102F231D; 
+ Thu, 16 Oct 2025 16:29:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760624952; h=from:subject:date:message-id:to:cc:mime-version:
+ t=1760624956; h=from:subject:date:message-id:to:cc:mime-version:
  content-transfer-encoding:in-reply-to:references;
- bh=i4PCbrK6CIqNB8T1S/DuF5O6U220GrCIb3q0G9KXwXA=;
- b=IvY719cbEh/nlTtyR2KqbJhIpF9Dp/kn1vX3MiXAbi+hIlfxyp+k+3OQT9Hp63aNlmHYrw
- ZB+l4lx1Ve5tnabsJtPj8hjWJhCJdU0Skmdgmh6gyF8dbDvvCIt89sJ+6+pY6VLPNzFSg9
- Te2y6fG4YezkCBYDbavZwmCRsgIB31/2No7B6f+WERoB8g7MyYng1QS9jNZEaMN+/X7p2p
- byb/yO/9SGNOxlFkOO3gO3wz2lWh8zYhPEHx7yy+ENqnPX+Juk0phs4nwB8+f7lfGU/vd4
- KkD74B1kis/2DGX1QeNjowFJ3KlX/pVQr9eRyqpjcZC0u3fRAvPmzV3i2x0OQA==
+ bh=RvKWjaJ7Y+EwCPf3Cb3eatM6EzhtXTkpJ9mvEgE34DQ=;
+ b=k7CzEuUZ+hgs7/3h/PpZZOHtLBAOKZmY4+/nb7X5YWlk+8nFwcr8tsAmPAvkXAnZ9Q65p0
+ 968OKbzFIXvapYYydC9MLXR8DLdrxgFsEEiU4W1WXd67HrinayRy1wrwe/E2lYOLFm6LgO
+ FJsMqWIUj2I9r65p8fzIVfyUcpDMHh5824dr50Oyqmov2Xx0JjL05yBhhJO3D0B4ywP9ZG
+ R3UQmX862szjIj+NfueHgivkMy/0MOUMaLA6tzDjXu4NA7Oy1vJkjs3m8fF5D1kRvuLFyB
+ OklgIOm7DMkIeMxZ/wMMiiwrQQ0Hq2DAAapHCXMeQftfoPgPGfwoP6b4Go+XFQ==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
@@ -61,10 +61,10 @@ Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
  Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH 11/24] mtd: rawnand: sunxi: cosmetic: add has_ecc_block_512
- capability
-Date: Thu, 16 Oct 2025 16:27:34 +0200
-Message-ID: <20251016142752.2627710-12-richard.genoud@bootlin.com>
+Subject: [PATCH 12/24] mtd: rawnand: sunxi: cosmetic: move NFC_ECC_MODE offset
+ in SoC caps
+Date: Thu, 16 Oct 2025 16:27:35 +0200
+Message-ID: <20251016142752.2627710-13-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20251016142752.2627710-1-richard.genoud@bootlin.com>
 References: <20251016142752.2627710-1-richard.genoud@bootlin.com>
@@ -87,84 +87,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce has_ecc_block_512 capability
-
-The H616 controller can't handle 512 bytes ECC block size.
-Let it be a capability.
+NFC_ECC_MODE register offset moved in H616, so let's make it a SoC cap
 
 No functional change.
 
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- drivers/mtd/nand/raw/sunxi_nand.c | 14 +++++++++++---
- drivers/mtd/nand/raw/sunxi_nand.h |  2 ++
- 2 files changed, 13 insertions(+), 3 deletions(-)
+ drivers/mtd/nand/raw/sunxi_nand.c | 6 ++++--
+ drivers/mtd/nand/raw/sunxi_nand.h | 9 ++++++---
+ 2 files changed, 10 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-index 869b3ddd971c..fddb1cada023 100644
+index fddb1cada023..fd74aa290c92 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand.c
 +++ b/drivers/mtd/nand/raw/sunxi_nand.c
-@@ -660,11 +660,12 @@ static void sunxi_nfc_hw_ecc_enable(struct mtd_info *mtd)
+@@ -660,10 +660,11 @@ static void sunxi_nfc_hw_ecc_enable(struct mtd_info *mtd)
  	u32 ecc_ctl;
  
  	ecc_ctl = readl(nfc->regs + NFC_REG_ECC_CTL);
--	ecc_ctl &= ~(NFC_ECC_MODE_MSK | NFC_ECC_PIPELINE |
--		     NFC_ECC_BLOCK_SIZE_MSK);
-+	ecc_ctl &= ~(NFC_ECC_MODE_MSK | NFC_ECC_PIPELINE);
-+	if (nfc->caps->has_ecc_block_512)
-+		ecc_ctl &= ~NFC_ECC_BLOCK_SIZE_MSK;
- 	ecc_ctl |= NFC_ECC_EN | NFC_ECC_MODE(data->mode) | NFC_ECC_EXCEPTION;
+-	ecc_ctl &= ~(NFC_ECC_MODE_MSK | NFC_ECC_PIPELINE);
++	ecc_ctl &= ~(NFC_ECC_MODE_MSK(nfc) | NFC_ECC_PIPELINE);
+ 	if (nfc->caps->has_ecc_block_512)
+ 		ecc_ctl &= ~NFC_ECC_BLOCK_SIZE_MSK;
+-	ecc_ctl |= NFC_ECC_EN | NFC_ECC_MODE(data->mode) | NFC_ECC_EXCEPTION;
++	ecc_ctl |= NFC_ECC_EN | NFC_ECC_MODE(nfc, data->mode)
++		| NFC_ECC_EXCEPTION;
  
--	if (nand->ecc.size == 512)
-+	if (nand->ecc.size == 512 && nfc->caps->has_ecc_block_512)
+ 	if (nand->ecc.size == 512 && nfc->caps->has_ecc_block_512)
  		ecc_ctl |= NFC_ECC_BLOCK_512;
- 
- 	writel(ecc_ctl, nfc->regs + NFC_REG_ECC_CTL);
-@@ -1454,6 +1455,8 @@ static void sunxi_nand_ecc_cleanup(struct nand_ecc_ctrl *ecc)
- static int sunxi_nand_ecc_init(struct mtd_info *mtd, struct nand_ecc_ctrl *ecc)
- {
- 	struct nand_chip *nand = mtd_to_nand(mtd);
-+	struct sunxi_nand_chip *sunxi_nand = to_sunxi_nand(nand);
-+	struct sunxi_nfc *nfc = to_sunxi_nfc(sunxi_nand->nand.controller);
- 	int ret;
- 
- 	if (!ecc->size) {
-@@ -1464,6 +1467,10 @@ static int sunxi_nand_ecc_init(struct mtd_info *mtd, struct nand_ecc_ctrl *ecc)
- 	if (!ecc->size || !ecc->strength)
- 		return -EINVAL;
- 
-+	/* If 512B ECC is not supported, switch to 1024 */
-+	if (ecc->size == 512 && !nfc->caps->has_ecc_block_512)
-+		ecc->size = 1024;
-+
- 	switch (ecc->mode) {
- 	case NAND_ECC_SOFT_BCH:
- 		break;
-@@ -1715,6 +1722,7 @@ static int sunxi_nand_probe(struct udevice *dev)
- }
- 
- static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
-+	.has_ecc_block_512 = true,
- 	.nstrengths = 9,
- 	.reg_ecc_err_cnt = NFC_REG_A10_ECC_ERR_CNT,
+@@ -1728,6 +1729,7 @@ static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
  	.reg_user_data = NFC_REG_A10_USER_DATA,
+ 	.reg_pat_found = NFC_REG_ECC_ST,
+ 	.pat_found_mask = GENMASK(31, 16),
++	.ecc_mode_mask = GENMASK(15, 12),
+ };
+ 
+ static const struct udevice_id sunxi_nand_ids[] = {
 diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
-index 35079d37bb1f..be294d7cea0a 100644
+index be294d7cea0a..069beaa5289d 100644
 --- a/drivers/mtd/nand/raw/sunxi_nand.h
 +++ b/drivers/mtd/nand/raw/sunxi_nand.h
-@@ -169,6 +169,7 @@
-  * NAND Controller capabilities structure: stores NAND controller capabilities
-  * for distinction between compatible strings.
-  *
-+ * @has_ecc_block_512:	If the ECC can handle 512B or only 1024B chuncks
-  * @nstrengths:		Number of element of ECC strengths array
-  * @reg_ecc_err_cnt:	ECC error counter register
+@@ -25,8 +25,9 @@
+ 
+ #include <linux/bitops.h>
+ 
+-/* non compile-time field get */
++/* non compile-time field get/prep */
+ #define field_get(_mask, _reg) (((_reg) & (_mask)) >> (ffs(_mask) - 1))
++#define field_prep(_mask, _val) (((_val) << (ffs(_mask) - 1)) & (_mask))
+ 
+ #define NFC_REG_CTL		0x0000
+ #define NFC_REG_ST		0x0004
+@@ -142,8 +143,8 @@
+ #define NFC_ECC_BLOCK_512	BIT(5)
+ #define NFC_RANDOM_EN		BIT(9)
+ #define NFC_RANDOM_DIRECTION	BIT(10)
+-#define NFC_ECC_MODE_MSK	(0xf << 12)
+-#define NFC_ECC_MODE(x)		((x) << 12)
++#define NFC_ECC_MODE_MSK(nfc)	((nfc)->caps->ecc_mode_mask)
++#define NFC_ECC_MODE(nfc, x)	field_prep(NFC_ECC_MODE_MSK(nfc), (x))
+ #define NFC_RANDOM_SEED_MSK	(0x7fff << 16)
+ #define NFC_RANDOM_SEED(x)	((x) << 16)
+ 
+@@ -175,6 +176,7 @@
   * @reg_user_data:	User data register
-@@ -176,6 +177,7 @@
+  * @reg_pat_found:	Data Pattern Status Register
   * @pat_found_mask:	ECC_PAT_FOUND mask in NFC_REG_PAT_FOUND register
++ * @ecc_mode_mask:	ECC_MODE mask in NFC_ECC_CTL register
   */
  struct sunxi_nfc_caps {
-+	bool has_ecc_block_512;
- 	unsigned int nstrengths;
- 	unsigned int reg_ecc_err_cnt;
+ 	bool has_ecc_block_512;
+@@ -183,6 +185,7 @@ struct sunxi_nfc_caps {
  	unsigned int reg_user_data;
+ 	unsigned int reg_pat_found;
+ 	unsigned int pat_found_mask;
++	unsigned int ecc_mode_mask;
+ };
+ 
+ #endif
