@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 995E0CCD183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 22:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7962CCD183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 22:07:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D381283775;
-	Fri, 17 Oct 2025 00:07:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 657AB83631;
+	Fri, 17 Oct 2025 00:07:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NvupoiPs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kImEV4QZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1151083775; Fri, 17 Oct 2025 00:07:39 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 5BA2683826; Fri, 17 Oct 2025 00:07:40 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00AB383631
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 00:07:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C43D83734
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 00:07:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-7b4f7a855baso825590a34.3
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 15:07:36 -0700 (PDT)
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c0e357ab51so1000913a34.2
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 15:07:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760652455; x=1761257255; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760652457; x=1761257257; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CqLo/RSZVEFMCWIMauzQ4G3tF3voChi99YK7LODv/tQ=;
- b=NvupoiPs4J8Ictu94VWdiQsIm8to+ZLK0vQBIwGie+35HMCzMlxSE5CQCrZTxNbkyf
- 3t0a4cHnFI9CYLAzuF4odTz42G/xVrITtFsbNIow4+P5khUzxYW2tTb4WzeLlmzbkzPr
- R1P3Z8zWtKTZIbbl4w93qf+Uqiyb37FMVAKYo=
+ bh=x+tzIc8wOI0GottD5t6zdk1AGuNEF266Pbci9iZ4CH8=;
+ b=kImEV4QZRwr4swGB+uNmFltOAFWshejCTp8/4EZGSqWQPDmjgUMRHkUC0lAqBryoT1
+ tECx4N805av2z1UjcWr9izwe0w4tnOUYQd7ame5sJmqHvP7VXHkpZzQFuqOmbOcL/yxQ
+ wrUhe54AXFnXt69CCFKzd0a16jhMThAQrEqbQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760652455; x=1761257255;
+ d=1e100.net; s=20230601; t=1760652457; x=1761257257;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CqLo/RSZVEFMCWIMauzQ4G3tF3voChi99YK7LODv/tQ=;
- b=tZHkkBnnwE5yV75Febakl2fxOUpW6HhqzLg+xKlPpocCaUsQwtrUDBhM/zHj8CZOzI
- 1gAsd8dReNjVnXfuU3FztjIYFElpozE9R2ZMAEDKR5AqAMWadbXsiou9775ZvuNh+BR/
- 6fHPjzYszfxvHi0MH/6di1dL9Q+DYlseQ1qv1XlwRbSYz656quESFXqEW8e6B/ktizgR
- UVU/r8sle8thOtKvz7PGVtJWGua8j3Tb3q6bE0yO+W+hCecwKbxQpYPdAm/plmG/mXxT
- DA3XrKYGPqzB/xN001JJ/jDPb2XvhL3AhSiz5h86vlsXZXXhNIvps4S2C7xIm6OP1jbY
- nwiQ==
-X-Gm-Message-State: AOJu0YzCcXHsVJocJfvHJQodB9T6l8GmTZHQs346isU5nXOqFHnlG2E3
- GhL6Wrk8lHyvIZZC9YrPCkU5ulSChZVCTzEQhvNMEm7q48Z6an+tilmAKZ3eua9tey0=
-X-Gm-Gg: ASbGncs9yufE1AxZ08CbiEq8e9QFmSAm4Y9wxuVNkp9LNIHHdMlzVmX9KjJNKA9fiFd
- UFQ7AzRg0PWcZCvcHBr/hg6u8OH5BpIauZztwEFTQPislvbwPrwCk4yG/NWKzOLTd3SAPaS8PK7
- VdjArQWzZk/CH2R1hOce37LuBgb3rjNDDxoFLQY2Ec3ENGTF74QEoHJ+fR0H+oo203nQZWYk8ww
- SYZcwrGcFG6Lt2EZUXjUmGTldxWAHO9H+Atdob2gyJ+Qg/P2RHPQQG/S2/iIxAvSZXIcqhi/5jd
- 1kHDPtGeE6rejC3qOGKrNCvekmFNY1kfvBy90KeqUaGW/uFRxPSzBITYTy8eGebQAB2TOC6MqTH
- OLM/qaBi810bUT9DLHkPduI9rgKXJig6zFf3NIJMZJUJJ8yKInno974vWOsHUwaceimtNP5+hwC
- VFLuxL8VEk4W3ECU+teALh8DVkPFZRHl6qMDWsNQ==
-X-Google-Smtp-Source: AGHT+IGKIABXuyQi3GSohlrh7bvMPHuWI14T1/qKgRqZvX0uUnCvnLyyLjeXWDVl2a0Gi1eJIF/MDw==
-X-Received: by 2002:a05:6830:3c8b:b0:7b9:4dd5:1968 with SMTP id
- 46e09a7af769-7c27c92c9a8mr768138a34.1.1760652455602; 
- Thu, 16 Oct 2025 15:07:35 -0700 (PDT)
+ bh=x+tzIc8wOI0GottD5t6zdk1AGuNEF266Pbci9iZ4CH8=;
+ b=ZvbuX493CC7RuqYG21TUDA/2F+xh/kIpzFbr8KN+2GLFJEbjX88n/dF4t5sLu9Yn3B
+ QDDmFqJi5fn4t9coUqB61V8Il2KwVHluQmzemNso83yzdZumdGxSqfaljU/UwgzS3KCN
+ Gdp5NHlVu7AJpZwXuFGrPkdqhYW20YFceSwVV6EHMAib5E/Wn/ICWGhsOwusyd8K4cRm
+ Pk9RgkzsCGujPPW3R43x1eeimV0r1+tY90G8vpXtvX8VvRJwdBrco17HUHOqIEtAKkBs
+ uxB6FjEVtYKmZuOhYUSdMjUX31LqaSkM/vVAjuqtYO6/W+NWbt2gOyZaq4QaraA7duA2
+ nDRA==
+X-Gm-Message-State: AOJu0YxIqfegeVzNyOAh/MO178fNN9GGvws2gAwNgy/pdvcCJg9IhSyx
+ JQWrS7ScrCvwtMFFBaGckrJ1OoiH2wgFcBhKaSZYMb2/OlNk1UAGVpWJusEBbipaXlo=
+X-Gm-Gg: ASbGncs2N0H97XwSUErzbChK3CT0qupYqxPlhc4zuntCk+taGAIRyGNyM2QqO+XuoYw
+ Sm9gz9sbajDcNGQe6VcbeAjthhvG0cepBZiwQN4aRtx/Eng/yiZEerLnFYMsWaqQFxl9wT+npjX
+ td/BMF7aoYtUWyAw6mUCRB7H7TDCA0PXzUez+C/7L1ksPuDX4AtCjs0BnsGfyUYY8XlZndzQlvL
+ ib6O7jQ4SdKRzLZcO6BHPb9YOATMY9xgVUwL/O1dzUVH3OjOIjPth96RCYbCUqaIzL0ymNkwIWc
+ YGXm2KuZJuZ3deObNqgLHq3aYEb/eSHkLguU4iUnAWiaIWJW3xDRYNjoPVjYooljjmmpJSPPUw6
+ pefIdQY3pKN2PpCib5yA7eHKQUMVZhKFiKHxhHdwQZ4YGg0699iUH9YRLezstz3tMN0lfL0OOLh
+ nBEDqLExAbx+rzon+72vW0FK20hBMXc/xxPfAdNQ==
+X-Google-Smtp-Source: AGHT+IFDq/lZiO4gtMmXhWexXgFUOMWmDbrHjTf7jtcW+z66dBZLTFud6nvxkOhRTzebIvHYlKAfuQ==
+X-Received: by 2002:a05:6830:4987:b0:745:2585:9c57 with SMTP id
+ 46e09a7af769-7c27c9c4260mr685825a34.7.1760652456956; 
+ Thu, 16 Oct 2025 15:07:36 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c0f9051d75sm6742427a34.7.2025.10.16.15.07.34
+ 46e09a7af769-7c0f9051d75sm6742427a34.7.2025.10.16.15.07.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 15:07:34 -0700 (PDT)
+ Thu, 16 Oct 2025 15:07:36 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com, n-francis@ti.com, 
- b-liu@ti.com, nm@ti.com, bb@ti.com
-In-Reply-To: <20251009123435.960225-1-anshuld@ti.com>
-References: <20251009123435.960225-1-anshuld@ti.com>
-Subject: Re: [PATCH v1] env: Kconfig: disable external env in secure os
- boot
-Message-Id: <176065245424.262817.8921064566527287297.b4-ty@konsulko.com>
-Date: Thu, 16 Oct 2025 16:07:34 -0600
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot@lists.denx.de, Neha Malcom Francis <n-francis@ti.com>, 
+ Dhruva Gole <d-gole@ti.com>, Moteen Shah <m-shah@ti.com>, 
+ Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Udit Kumar <u-kumar1@ti.com>
+In-Reply-To: <20251008-ti_sci-v3-0-5866bf84adc6@linaro.org>
+References: <20251008-ti_sci-v3-0-5866bf84adc6@linaro.org>
+Subject: Re: [PATCH v3 0/3] ti_sci: Address some issues found by Smatch
+Message-Id: <176065245573.262817.7084447760749917984.b4-ty@konsulko.com>
+Date: Thu, 16 Oct 2025 16:07:35 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,18 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 09 Oct 2025 18:04:34 +0530, Anshul Dalal wrote:
+On Wed, 08 Oct 2025 10:23:34 +0100, Andrew Goodbody wrote:
 
-> Falcon mode uses falcon_image_file from the env during mmc fs boot, but
-> external env can be compromised. Therefore disable access to external
-> env by setting SPL_ENV_IS_NOWHERE when SPL_OS_BOOT_SECURE is set.
+> Prevent a memory leak from a non-freed malloc.
+> Return an error code on an error path.
+> Assign a value to a pointer before it is dereferenced.
 > 
 > 
 
 Applied to u-boot/master, thanks!
 
-[1/1] env: Kconfig: disable external env in secure os boot
-      commit: 1e470ddd0743bbd1f229421e11e9ad2093f7fd20
+[1/3] ti_sci: Prevent memory leak
+      commit: 4b8bc5af80f1637cd71a1b6a0dffa7588a03f27c
+[2/3] ti_sci: Provide error code on error exit
+      commit: 4602fa92202388665ddfbb622f001d62b1473a08
+[3/3] ti_sci: Pointer is never assigned to valid value
+      commit: 5b9125746dfde0a29911ccd542801da6b8f94239
 -- 
 Tom
 
