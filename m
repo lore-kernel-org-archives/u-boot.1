@@ -4,160 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DBA8CCD195
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 13:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45ADDCCD195
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 14:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7FC4836C8;
-	Thu, 16 Oct 2025 15:28:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 7CD9583655;
+	Thu, 16 Oct 2025 16:28:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="F5rGS444";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="dFKZtd3K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FF37836D1; Thu, 16 Oct 2025 15:28:30 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id D11418367F; Thu, 16 Oct 2025 16:28:28 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1999F836A3
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 15:28:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id 033B280077
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 16:28:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DlupAHEaqJ0KhgqPoYMJ+oKj+8XbdUeLlMyBuFuBGOWTCfBFrElBzHeezuTmxcLLQNRca8J77eyrPYDrnGOyEoVH658XU2QVXZo5yenVia7qa9PyIEOb0BmUa1RHJXm3isseyPio8TU4tECu8tYcOnpSd59UAI/u4/jVl+0sUL10q57Q5mVELXoa1asqBWRFk3N/mFIlI39C6HEE9K13wSeeLYAXlJnqjwCKKXpVObg82GwjZEzwvDYv6xYvQSqd1Bl+vRinmGJ3sngKoaLv1p8F85qAZptFujJ4F5g7IPPllN3hGAtJ0Py67vMZ9AsMj2Ws2oaB8Uy49b4Ncg8sCg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=f1HLthdrrX6cEp4llODzSxy5TbrTpbXkefNs/7uzDMk=;
- b=Enc1PIbHjKjyNB2iEUKo3wMJoJx0A222dDiYvF1M0K1xDzaavHLvXz0D6T5+w4eC6HacBH4qEgfgLfsxny0fKtmnAhSISwD5Uh05O/nNEYQ3qZDS/kezf3pVwZSlMtDx2QPcpYDyzoLH4M1s30PWK5cgGj4mdNMcezIzt+DLnndwGANJPI9xcMsyI2CRZSlKAx/qQXAy6mfsZ3ix+fhOAJLjuIqQX6+kbv8OgtY2lIxor/NZT6p2znDlPbVBu+2F1/WNzoyKmmbQDA7eIjLeNo7sDK8Kkesuum/n2c3flxfih85Lzr4L+LC+h/ISxztWNA1Q/s/ky62HSNH8OuuzXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=f1HLthdrrX6cEp4llODzSxy5TbrTpbXkefNs/7uzDMk=;
- b=F5rGS444rv8H7cKSmf6x6wKw2MGfG1CkOUUhHYjowujDu/if8o1L2sWDaUXVqFUqMimRmDcHxz4dL9kW0K4ZqTxNPq4k3wmfjcwbrpo+9o8ecc3QxXge/8ZHQYXqkpFPeun/qln26ZnOxnlxvdqHPWz/8sVWpcSP9aofabKwVJU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PA6PR04MB11801.eurprd04.prod.outlook.com (2603:10a6:102:51e::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.10; Thu, 16 Oct
- 2025 13:28:26 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9228.010; Thu, 16 Oct 2025
- 13:28:26 +0000
-Message-ID: <6e85c247-9624-472c-bbdb-b35be4fa03a4@cherry.de>
-Date: Thu, 16 Oct 2025 15:28:25 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd/part.c: implement "part name" subcommand
-To: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>
-References: <20251016125247.1594643-1-ravi@prevas.dk>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251016125247.1594643-1-ravi@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0022.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:14::9) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 94AB1C041C9;
+ Thu, 16 Oct 2025 14:28:05 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id B73B06062C;
+ Thu, 16 Oct 2025 14:28:24 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 82D16102F218E; 
+ Thu, 16 Oct 2025 16:28:06 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1760624903; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding; bh=46paUZ4+KPcmy6xI1Gq5jA0VX6fKiDJ4r9kQst0jC1Y=;
+ b=dFKZtd3KHRVfyMu8g8vzBUSPEtUXHc960bVN2K87Ws1fCTohXh/CYI0/neXTRoORZu9HAH
+ zgJK30RJohIWqPASvQIKE+ClmNHdZ4+XI8ILtGrYYTvlOBIqaxUlu4qA4qszu05JaoOPKI
+ e5tEYYVcx7tKnW+NrZobVNpEQ2oJwLzlhJ/4z/byxE6eQ5X9rtYIy+tzXfuXakwugpBAzD
+ Rp1WdR0Kq3UbELICd71TW7ww6qukHGNc7gnDtRXxwAiL6GEPoX1sw0tip+r75UQ+mPSBBW
+ olgHAxCvq7uE0Q8pAD2KDF/Qcxud+t0RGKu6c530ospf+blBdfic5sigZAH/WA==
+From: Richard Genoud <richard.genoud@bootlin.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dinesh Maniyam <dinesh.maniyam@intel.com>,
+ Anand Gore <anand.gore@broadcom.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ david regan <dregan@broadcom.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
+ Richard Genoud <richard.genoud@bootlin.com>
+Subject: [PATCH 00/24] Introduce Allwinner H6/H616 NAND controller support
+Date: Thu, 16 Oct 2025 16:27:23 +0200
+Message-ID: <20251016142752.2627710-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA6PR04MB11801:EE_
-X-MS-Office365-Filtering-Correlation-Id: 89782d4b-61cd-4207-5477-08de0cb7e2da
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?VEE1LzJEbm1VTlY3RXhhN2RXK004eEVLS3FHYzl0YThNWEE5N2NrLzVmc3M5?=
- =?utf-8?B?ZG9hV1ZHU3p0QWJyV01XSjBGYW1zRWtVQ2VNYWJCZ3FuNWdZV0tQRnhDbHFW?=
- =?utf-8?B?MzVYU29ScHl1NEFJdU8rQ3F0ZFZNZzBmZzdGYnR6cHJMODY3TUlRTHIxMDkw?=
- =?utf-8?B?YjlMUnJRbWZNV3NvSzRacm9NUzByTFlkWHhTSVNzdU8xdjg1enlpUDZWT3du?=
- =?utf-8?B?TklBb09xcGVlbzJyaWNzWmN6Uy9ManJLWk4zTURPb0ZBQjUwMm1GcCtEaEZT?=
- =?utf-8?B?M3JvSXpYd3RiMDkyampWRkhCcTJYNFU2dnQzTkROdWYxWGJoQ0lqWlk5WG41?=
- =?utf-8?B?TFpLYUIvb1hqa1I5VzNxNlo4dFFERTd4SWg5eTRmeGozL2hmK20xYWN0dE5i?=
- =?utf-8?B?MFViNUJLcjBnaHJ5NGNpR2NsODRLYXBDSEs0VkZJSVVjRTFrdGh2bGYzOVVF?=
- =?utf-8?B?alJpS0tMYkF6K0xsMVhqUVFYRE4zbEJUTVdXaEloRFo3WDIrRDZSOEp1RGxr?=
- =?utf-8?B?MWdOcjR0ZzlnNmRvbXNQYUYvL0YyZ2pjeTJBbkFHRmV1SHlWb1oxcHQyYlVJ?=
- =?utf-8?B?eStDNE9oc3l4WnNhQ2sySXB2ZjlUUTVYUER1UXdOcmUwQWNIR0FTNElnTEtx?=
- =?utf-8?B?N0J1cVZzemcwaFN0WHkra3krOWpzV2lLN0M1QS9EdUJ1eURhZUJGRXp6V1F1?=
- =?utf-8?B?bUxrbHJTbkduVWU0YkRoVzBJWDRGV3JVaHRVeHQyTkludHNicnRqRnBJTjhU?=
- =?utf-8?B?MHpCbkVBdEVXVlNENU0zKzdVMTM2QTNSeE9pamQrZXVRRVVWT0FkeUJUOEVH?=
- =?utf-8?B?UGpkbU9IeGlna2tGbEE3TlFJUDZ4Q1I2eTV1eUhMcjBtZkYyVVRwV1BBU2NC?=
- =?utf-8?B?V2Rmdm14NnJJUzl2V0luTFZUbFY2Z1FHay9HbGdZc01JRlVhSWdubVpmbity?=
- =?utf-8?B?YmVieHhiMTFSbmgvV1R3TlFPTW56Wko2VGkzcGFWUDRldGg2eHRmem9kU0RB?=
- =?utf-8?B?L09JM2I4UzdXREZlYkdTSkx2WlJUeVBzTC95UWk1Z1R1UnlkQnpzVUJVSHJD?=
- =?utf-8?B?UTd5eFFkOElVRDlRdk1TN1k1cDA4azBYQVU4WXpzZWJuQWNVKzJqSmJyNTNL?=
- =?utf-8?B?M2JGeWp2YW5xRmFySTdacCtMK01wWXcyMVdjQWRldkhhKy9YdHlicGZaRHd3?=
- =?utf-8?B?alE1cFFRWU9iaS80ZkRFK1o5eWFUZzNTR2pjOFZXYk9DL2x2aC9JcHMyeWkx?=
- =?utf-8?B?Y1gxR0hha29JR3BFNWlFZEkrRU9yeGhGRktIR1MzVWRmc0NreU9GNDFhaWJk?=
- =?utf-8?B?VzZjUkZSMzAyRnlRSGRLS3d2YlZlL0x2VnE0MUE5SVZ0RlZWcGdGaEI3NG9n?=
- =?utf-8?B?NmNCNVY2Q0RabmVPMTFLalRUK3ZueEVUdVhHRlFSTVN6T20zRVJzSmVXOUl4?=
- =?utf-8?B?OWd3ZDJlclRjWk9iUWdxd04wWjNGT21qbThMelNPZWtpeC9sU3NXQy9sUjhp?=
- =?utf-8?B?aWM3R2tIMU04WkhaYzZaRW0zZVRiUVgvdXo5U3RhSjJNVUh4WldYdHB6Z0tq?=
- =?utf-8?B?alNYL0g3VUxIT3RuSnEzSmhhTWdSVVZ5dnZkWGQ0NHZZVGgrcWNxMnBLblNq?=
- =?utf-8?B?dGNYU0gydkUvS0JYT2g0MUliVDlabldLNTEzQWRwRFgyZGlSTkQxRnI5azJy?=
- =?utf-8?B?aGs5c3hQUUZZTGtUOXFMMFIzS3owR08waE1KTkhCWjVjclEySy9OaW5HTm1u?=
- =?utf-8?B?ZDgyUlR6YlcrNXhkMFVITk9TQnRBdHpvRVVmWUtpeW92RGdsVEFySFRTVXBj?=
- =?utf-8?B?YmRuZnE1V3d2dkNhQWNjcDg0TlQ4cVpHZ3pZdUpLL0s3djI4MktoUzc4dXlY?=
- =?utf-8?B?UHI0L1A3MXZKQ1U4K1REenNVZkh4b0V3UWFmWnI3VHJHRG1WZ1NnZ1B3eFFz?=
- =?utf-8?Q?eCVV41Rz44akInXr8EO4vOluGRyXe6j3?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WnJkenJwV25iaXgzS1NERkswUWg1WXBMRmM5aEhXeCtqdml1OFdaWjBBVi9U?=
- =?utf-8?B?OVM4OFdwQXdvMzAvN05ZdUZZeUJ3N3J0VFM3UUZJaDErdXMyRGI2Z1FlcHZ5?=
- =?utf-8?B?WHRlSVJUUTIzNHNmc0xYLytHcTRVTUlHdjl6Und1ZS9Hc01hM1pUMXR1S1lR?=
- =?utf-8?B?dVRVQTBqMFZnc1JLOEhJM3N6YWlwY3dDbWJUM1loZFVNM3hRdkN1MHhBdjUz?=
- =?utf-8?B?OVVEWlY5NkIzWXdVVjVMcUhJS1NrWU9MR0VjQWdvaTFrWWFXSkhtVjJKZGh6?=
- =?utf-8?B?cHZmbm02YUJYYnJHTEs4K2xFbGZhMkpwc2M1N2ppRTRvSXp1N0VodzQzQUFn?=
- =?utf-8?B?S1oxWXpKVFc1dFVoSjdvNWNYTHBnMGlyUXdOeVFNSzg2VEpuMnE3MzIzYnRC?=
- =?utf-8?B?WFBIT1B3SkIrVmkzSEU1ZVdtN0NrVlV6S0ltdGpxa00yeVovdGhPc2MvY25p?=
- =?utf-8?B?b0U4QldQR2ZRbEdwdWsxL21zMXlwYXY1Z0pzVzVFRnp3N2NLZ1ZEVlN2elQ2?=
- =?utf-8?B?Y2wvOHRubmlGTTcvRkJ1YzljQWxKdEsvVGhhWDdXdEpTb0ZWQnFTQzBmTGc0?=
- =?utf-8?B?MEpnQmRYS2RYWjBhNSt4WXBBU1h6dFF0OEYxRG80cHVLby9ob05uK3FTekdT?=
- =?utf-8?B?TGlnOEhZNlZmalZWcno5Rjg0QWFQZzEzMHBST3Zrem4rcGdMYmJWalFXOGlS?=
- =?utf-8?B?c0lPUWNGNStiUDVzQk5TemJLUy8zb2dnTWliYkZoSVZsVjJXek5rR01oSUUw?=
- =?utf-8?B?dDRjMExuT2Rqb0NQWm9nb0hPVU4veFI3dE5Jc0NIWW8yRWF1UFJJL2lsK01t?=
- =?utf-8?B?YmhzVnFOR2ZoMmw1ZjRkdUNBQ0RaV3BVZDZaQ1A5bDI3YWFwc2hrdjY2ZmU3?=
- =?utf-8?B?NHdxSHpSR0RUc0htNVlTT2RNSTlPbHdCU3pPdDI2RWp1SG4zcGJiTkh6ajdV?=
- =?utf-8?B?N1JuSGo0TWtuRitNTzBEaHlHa2p0T0EzS1doMjNuQ3R4UjVQalIrOUpLcHVU?=
- =?utf-8?B?OHhabS9qaHFkbmZUUXIyOEpsc0VlcnR2eGhCWHdHOTdEeElRUXU3QkVJRWxQ?=
- =?utf-8?B?OVdXbFdqVWd5UWlxK0FISUE0YTB0dE5JR1N6TGhZbXVCdTJyS3FOa25ocEFx?=
- =?utf-8?B?bkhUSkNBcExySzN4cXVxc1FzSEd2a2UzYTdMZzRkZytyNHFhOEhNbXppTG04?=
- =?utf-8?B?Q2xhYkNCYkpsa0FGRWRIcnJyaEdzZmN2Mm40elhCcDVQMG1hcll1aFcxUUMz?=
- =?utf-8?B?ZUtncmF2YnZ5TmhkVC9LQjFiWUxPRHEvNjlUOFFKZzBRRmhFbnB3aWdsNFJZ?=
- =?utf-8?B?dkxPMjVzdUdvVmxxcHhmdUpGWjZuSzVHVzY4dkhDNzd2RVJaQmJvaFBiWnk5?=
- =?utf-8?B?cGw0UEVyRHBRVE9OeGZTMFlzajlia2VpcGtTVGlIUmxqbHkyZFBXQ3h6Nzdq?=
- =?utf-8?B?Ymx1QS93YTVmd2hDZUhBVXpxakFNdFNmQzUxVTh5Q243MVEydTN3SnRqeHNs?=
- =?utf-8?B?LzFQejNRYlQ4WXJZdXBNQVVoY0pHMjNYMWRJbHVqVDNYbC9jWlk5K2V1dm5V?=
- =?utf-8?B?RG5jS2R6L1c3NnJ1UWZnSDA2a0xQbElzRzhWb1prOXZrcmY4Q1gzMmlEYkI3?=
- =?utf-8?B?UkhxQ09HdVk2cGkySTRIR0tTK3RoT1BYY1FRT05oUE43bnB3SWNxeEMrYzYy?=
- =?utf-8?B?MnlmWWVwM0dGQmRyV0J1VW55MHJxSWNvQW9Kc0tPa1VVOTErbzlFeUl2YW5t?=
- =?utf-8?B?SE1yQ2VLVE85YVNZd0p4M3RSWkNUVy9RR3g2bTBWR0NDWWFNeFFFeXR3TmZX?=
- =?utf-8?B?cGZ3MTA2MTNZMUYzdFYrVHlBRTh3cks4Z0dzOXhFWTU5dm1maHdPNEF5RGJ2?=
- =?utf-8?B?Q0ZBZzBXT2I2a3BhaVQrQlVaNkJBYlNoZjNRSUxPNUZDemtzUy9WaEJxMGY1?=
- =?utf-8?B?R3JWZTFIampVUE5tTEd2dm1DZ0R5UFhCNENDRUE1QWg2UEhVcDV2eUhsVGFD?=
- =?utf-8?B?RDNKREF1TmtmUHVMWUFzdHJjRTMwYXNsUC9YZnZGUEJnYWVTSmNZQUM3VmEr?=
- =?utf-8?B?cUszUE5mRDhhYVhaZU50UVBCaEYvRWQ5L0tVSFducWhsaDE0VjNMUm03Q0lX?=
- =?utf-8?B?UElEY205am1MY3NkQnZ5VHlaeENZNWJDRWJoOUp4MjNFellhcXZBM0c5ZHZV?=
- =?utf-8?B?eXc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 89782d4b-61cd-4207-5477-08de0cb7e2da
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2025 13:28:25.9957 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ckUwzIE1iEk6b5bxB/zV2OJfZ3J+YacZtH7/EZ7LhUV0MaoPpBtt9P/IEMfGnBDTS0y8FK2/Vu1Cgui+pmd3+HoKgV42WgRDTXwu+tFtwWg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA6PR04MB11801
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,43 +84,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi everyone,
 
-On 10/16/25 2:52 PM, Rasmus Villemoes wrote:
-> This is a natural buddy to the existing "part number", allowing one to
-> get the partition name for a given partition number.
-> 
+This patch series introduce H6/H616 NAND controller support (but not yet
+the DMA/MDMA part).
 
-Can you update the documentation in doc/usage/cmd/part.rst as well?
+All the work was done on a H616 board with a Kioxia TC58NVG1S3HTA00 NAND
+chip.
+ECC is supported, as well as scrambling.
 
-> Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
-> ---
->   cmd/part.c | 16 +++++++++++++++-
->   1 file changed, 15 insertions(+), 1 deletion(-)
-> 
-> diff --git a/cmd/part.c b/cmd/part.c
-> index db7bc5819c0..975a0a08a99 100644
-> --- a/cmd/part.c
-> +++ b/cmd/part.c
-> @@ -25,7 +25,8 @@
->   enum cmd_part_info {
->   	CMD_PART_INFO_START = 0,
->   	CMD_PART_INFO_SIZE,
-> -	CMD_PART_INFO_NUMBER
-> +	CMD_PART_INFO_NUMBER,
-> +	CMD_PART_INFO_NAME,
->   };
->   
->   static int do_part_uuid(int argc, char *const argv[])
-> @@ -154,6 +155,9 @@ static int do_part_info(int argc, char *const argv[], enum cmd_part_info param)
->   	case CMD_PART_INFO_NUMBER:
->   		snprintf(buf, sizeof(buf), "0x%x", part);
->   		break;
-> +	case CMD_PART_INFO_NAME:
-> +		snprintf(buf, sizeof(buf), "%s", info.name);
+Support for booting from NAND is not part of this series, but it's almost
+ready. (It needs quite some modifications in sunxi-spl-image-builder.c
+and sunxi_toc0.c)
 
-Is it possible info.name is never set by the fs/blk driver? Should we 
-initialize this field?
+H6 SoC has not been tested, but it shares all registers with H616, plus
+some registers dedicated to Embedded Crypto Engine that H616 lacks.
 
-Cheers,
-Quentin
+This IP has quite some register fields modified from the A10/A23, but in
+the end, it works more or less the same.
+Main differences with A10/A23 are:
+- The need for 2 more clocks (for ECC and MBUS)
+- The use of a new USER_DATA_LEN register
+- More ECC strengths (44, 52, 68, 72, 76 and 80 bits / 1KB)
+- MDMA based on chained buffers
+- some registers layouts have changed (mainly due do the stronger ECC)
+
+Patches 1 and 2 are small fixes
+
+Patches 3-6 harmonize the registers definitions between U-Boot and SPL,
+and ultimately merge those definitions in an include file, without
+functional change.
+
+Patches 7-19 are paving the way to the introduction of H6/H616 NAND
+controller by adding per SoC capabilities for both drivers. They are
+small for an easier review, without functional change.
+
+Patches 20-21 are adding missing NAND related clocks definitions for
+H6/H616
+
+Patch 22 adds the support for H6/H616 NAND controller in U-Boot.
+
+Patch 23 adds the support for H6/H616 NAND controller in SPL.
+
+Patch 24 fixes warnings in sunxi_nand_spl.c
+
+A similar series for this NAND controller support in Linux has been sent
+and being reviewed.
+
+Richard Genoud (24):
+  mtd: rawnand: sunxi: cosmetic: remove needless comment
+  mtd: rawnand: sunxi_spl: fix pointer from integer without a cast
+  mtd: rawnand: sunxi_spl: cosmetic: harmonize register defines with non
+    spl file
+  mtd: rawnand: sunxi_spl: cosmetic: use definitions from
+    linux/mtd/rawnand.h
+  mtd: rawnand: sunxi_spl: cosmetic: replace AHB_DIV_1 by
+    CCM_NAND_CTRL_M/N
+  mtd: rawnand: sunxi: cosmetic: merge register definitions for
+    sunxi_nand{,_spl}.c
+  mtd: rawnand: sunxi: cosmetic: add per SoC capabilities
+  mtd: rawnand: sunxi: cosmetic: move ECC_ERR_CNT register offset in SoC
+    caps
+  mtd: rawnand: sunxi: cosmetic: move USER_DATA register offset in SoC
+    caps
+  mtd: rawnand: sunxi: cosmetic: move ECC_PAT_FOUND register in SoC caps
+  mtd: rawnand: sunxi: cosmetic: add has_ecc_block_512 capability
+  mtd: rawnand: sunxi: cosmetic: move NFC_ECC_MODE offset in SoC caps
+  mtd: rawnand: sunxi: cosmetic: introduce reg_pat_id in sunxi_nfc_caps
+  mtd: rawnand: sunxi_spl: cosmetic: add per SoC capabilities
+  mtd: rawnand: sunxi: cosmetic: move NFC_RANDOM_EN register offset in
+    SoC caps
+  mtd: rawnand: sunxi: cosmetic: introduce reg_spare_area in
+    sunxi_nfc_caps
+  mtd: rawnand: sunxi_spl: use NFC_ECC_ERR_MSK and NFC_ECC_PAT_FOUND
+  mtd: rawnand: sunxi_spl: increase max_oobsize for 2KiB pages
+  mtd: rawnand: sunxi_spl: cosmetic: use NFC_ECC_MODE and
+    NFC_RANDOM_SEED macros
+  sunxi: clock: H6: add NAND controller clock registers
+  clk: sunxi: Add MBUS Master Clock Gating Register
+  mtd: rawnand: sunxi: add support for H6/H616 nand controller
+  mtd: rawnand: sunxi_spl: add support for H6/H616 nand controller
+  mtd: rawnand: sunxi_spl: Fix cast to pointer from integer warnings
+
+ .../include/asm/arch-sunxi/clock_sun50i_h6.h  |  24 ++
+ board/sunxi/board.c                           |  17 +-
+ drivers/clk/sunxi/clk_h6.c                    |   2 +
+ drivers/clk/sunxi/clk_h616.c                  |   2 +
+ drivers/mtd/nand/raw/Kconfig                  |   3 +-
+ drivers/mtd/nand/raw/sunxi_nand.c             | 301 ++++++++---------
+ drivers/mtd/nand/raw/sunxi_nand.h             | 229 +++++++++++++
+ drivers/mtd/nand/raw/sunxi_nand_spl.c         | 305 +++++++++++-------
+ 8 files changed, 616 insertions(+), 267 deletions(-)
+ create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
+
+
+base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
