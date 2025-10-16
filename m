@@ -4,88 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD335CCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 15:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BADCCCD183
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 15:37:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B57983734;
-	Thu, 16 Oct 2025 17:33:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 92DC8836C8;
+	Thu, 16 Oct 2025 17:37:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dSRXbMXq";
+	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="XvPRUJH0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B5C183771; Thu, 16 Oct 2025 17:33:32 +0200 (CEST)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
+ id B8CF88313B; Thu, 16 Oct 2025 17:37:12 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C0DE836D1
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 17:33:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FA2F836D1
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 17:37:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=suse.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-3c9859913d0so246605fac.0
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 08:33:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=mbrugger@suse.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-46b303f7469so7293235e9.1
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 08:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760628809; x=1761233609; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4xJ2qtBGYYV+nlJTcKr+YnzYBDudgLoCjXlQgVM0Aw8=;
- b=dSRXbMXqQhR3zeUyV2ElMsD3/XxibSAZ00gV5SHFdx6dtOdl49WWOhlKXv3ITYhY9R
- vJw/cR/pN+DaCmqoJ86Pr2KaOF7rBuqNd8nGRVkTDogXsnEygJA4mAo2/7cysoCc6t72
- fGc49XClg0MggVdIZvCOC227Q9IQ7wE7QwiKw=
+ d=suse.com; s=google; t=1760629025; x=1761233825; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=h2ESOzT2YzbwsqujF7U3Tapt+ErlQp1NvuHUd0KzmXI=;
+ b=XvPRUJH0A11WdNObOB1YeapHqyAf46m82fQSIZQagu/85qvESSYYs4KWMUXO+UGUT1
+ H0FkqwVp/6ZLfCbQuYJB43VGYTboqfFG30H4oKhaep5/pyP3kmyG8PJzDgcFd9FO420Z
+ BOqfEQzbgYNOQzhCnRWlruEU67W5/I2N7ItD8XJ7roMkh8yuGMNbPJjxTEhHiZwiTpA7
+ zJdsqPA4CiLfoH4WsrVEn9KaGF8s0B7/Au2oXIIJri7rtzglBkeR5M7a+mvUGCoYKEDB
+ xwijsdf8iPfui/VjA4Tyn+vIs+oap3QV0V+lCLZaQoHjr3RQwzdYLznGxxnq2T4YKaXY
+ oskg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760628809; x=1761233609;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4xJ2qtBGYYV+nlJTcKr+YnzYBDudgLoCjXlQgVM0Aw8=;
- b=dbx6QxwlLr9pGuKRHuRg9RNJrd1Olood38uBZQLkydYL2m779kdtASziKaqR2+BfU8
- akx/ZSSlK7ydlPo7mChnxM79PHrAy1JWYUpPt3w/ZHIsd1kR7B3iI3oodl6sBb3zszv+
- ZdklhK3Ypltnf29x+lhGtSxLrLezyfwxF6M3/qHkN/MWNPeXUPLmth4xORr1ws8HVb1l
- v4LrSiFw9oTkq3hd8a3yE9haepokJ/4vV9l5+6Wm1Z4c0a6CTHfnyp+Ibcq1sKdpYe28
- c7au1neEzjQ0ubbXL4I1uqccfeNhrbFvwlAkJx/lp1kCIv7TxER/VXLsYGRtJCPTPvXj
- cDiQ==
-X-Gm-Message-State: AOJu0YwBZ4ncj7higt35nZF0EOe+VeBICtQys3zNsuLjZxVgfTiJeO7n
- B0fhLXo7rcPsrAOLzys9N1FjQgsf2G1lwZvivVPZ1q9rtwxd+9FncqKqPDwesPYu6Ck=
-X-Gm-Gg: ASbGncvAsaIsLkS6OGw8xwvYyV03pV7F7IP/jJBgpYruKJetvOkXnH0RuYUwzZk3ROK
- 8s+AXNE4GrpuWGX5kLtbvl/WWr5x0haGvFYLD2Baa1qTrtHS0z7GwVm/HwWfcDwTNxUAg5ZOn8P
- 1x0emkcpcTWCzqJU1Wevh3eQ5nQQMT+29KBZqfxpMkpSat8aFRS5OWKSTZGMnA/3zLwPFfiOmeP
- Iukeu5rww3gQtOI1NKw94kRbUkuZltYNJwW5xx/lEkLppZs3bo/HC/E+pywnF//JLJMfabAMNEi
- qEp6xnw6SWX8QTjNoxC4zFJYmJjsJtF5/PDjo8IxbRseKJKW/2gHAAA8kw9jaNUnIpYHzc1BnuP
- KXaOU+9No9U2lkLRheojcD7DjMb4reFqOGVWi9DoNBc1A8yxVZy3llsbz1PD1ECH513OPoIWlrN
- 5PfL7IdJbV6S+TqZsMZ0Kr6TXKcI6KcQ4E36ulZ34=
-X-Google-Smtp-Source: AGHT+IFF+GkPW7VyezOxTydRNNdnsnpfl3Dziua5RBM4Fkpb/oZXuyo+Gw+PMd7Y2GwHyRWY703Gvw==
-X-Received: by 2002:a05:6870:469e:b0:340:a15c:111b with SMTP id
- 586e51a60fabf-3c98cf8444amr79132fac.14.1760628808751; 
- Thu, 16 Oct 2025 08:33:28 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c8cc646221sm6255367fac.6.2025.10.16.08.33.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 08:33:27 -0700 (PDT)
-Date: Thu, 16 Oct 2025 09:33:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Andrew Goodbody <andrew.goodbody@linaro.org>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v4 01/11] boot: Try all bootmeths on the final partition
-Message-ID: <20251016153325.GC6688@bill-the-cat>
-References: <20251015154423.908468-1-sjg@chromium.org>
- <20251015154423.908468-2-sjg@chromium.org>
- <20251015190446.GS6113@bill-the-cat>
- <ca4c2345-3eb3-4e5f-b9a5-da29ae6b91b2@gmx.de>
+ d=1e100.net; s=20230601; t=1760629025; x=1761233825;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=h2ESOzT2YzbwsqujF7U3Tapt+ErlQp1NvuHUd0KzmXI=;
+ b=oyuGrMCg2HU6SjD8C+CJs3pyWx+eRJlCyvz430nvxLk2k/aiZG/Xt1RwEzucvsg+oM
+ AvA0U6WCfaZRuGr1s9NW3YFpJ3rkCNPHIKE/w+myoDZWI/gwLcddRZAxYo1Enr26SUnm
+ Rh/DRcWcZcwex04l437pvIhbVQkGeWne0322Y6ou26FZGKVKzrbdz0O12EG8kiFonRkp
+ Pfdn7HVvfIIcAZWO0md+AKUFXVgBvVBTySx+1GC6VmarAJhBN0Awae1gXwh2lPrqjnT/
+ 7rKocNesongSk4TxAvzmgUJKHr35tShQb84qhGUqo0CBYIHdc6vUsn7mL2+US5Yho0V2
+ puYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV+7iqiirX9mxwIUdA/ow5k1fX4FfGRTLaQbxsgHq48aZTQnK00KosFi4euNinw+ASFOKuc62g=@lists.denx.de
+X-Gm-Message-State: AOJu0YxA7WtSOnLW7NX+J8dmpaEJ/+yn2MzCXV1YXgVKfnTAePlVUAxo
+ 3x8W2F+3ysV6bJgUvVAcIlfMMsLSt6LXJ3k0QVigpf+n1ljSN1BTxbpnOr/QpsszBbaV7rlc24M
+ esF7T
+X-Gm-Gg: ASbGnctZ/Sic64EpAiQxc2edu49fx8EEXojn7c4qRyy2j+X9rCuFtzxMClZ1JzxzJoM
+ Trs54GLHRzXUpjwvrZugsU6sZ7rHZE5FYOW4HYteSugiOVQX6lwzJ1gG+afDLY0FRm+N5UEa4jC
+ x1oN6G4gGA1L0E1vpVgMdMW6GeSKF1EM6yTeGKnWgBfmaMMk7lYUQh8TAnJx/ztRXo7/Xc+xaZ1
+ wWYzMQiIYfQe58g5eCZ23p16TZoshZKrwwhhVQ9g/FYKaEudRO0yxQ3k+P71UE451qK93u+Q+Lp
+ 4f13FbCQEwxg6UTWGU0FLvS4wD3yDH/1ZsAtMzMuQdMJL7Fr3Pgw7sQiNZhr26VGndtRURw2gJM
+ a3NAxaGDAff+cZoQtb+FdA50e3f7VVj+5XRY5UhG3lkL9lCdjOw4R/w/sy8vlKp9vQ43Z4vj9QY
+ 8gsA9WFuXzeCdkQ5IU1U1naTJmMfA=
+X-Google-Smtp-Source: AGHT+IGMRmEMffhajUA9vtyQ/08P59mZ82JoQs1wB4iW/d4AaTiXFDxJSE2dO6+4FuyKUDs3eXf9Ug==
+X-Received: by 2002:a05:600c:1d9b:b0:46e:6c40:7377 with SMTP id
+ 5b1f17b1804b1-4711792007bmr2973185e9.35.1760629025349; 
+ Thu, 16 Oct 2025 08:37:05 -0700 (PDT)
+Received: from [192.168.1.137] ([91.116.220.47])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4710f28a920sm22018075e9.7.2025.10.16.08.37.04
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Oct 2025 08:37:05 -0700 (PDT)
+Message-ID: <78a0c4e1-0988-441d-8b55-d3080176fe93@suse.com>
+Date: Thu, 16 Oct 2025 17:36:59 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="L2tnVoq8HLp3j61l"
-Content-Disposition: inline
-In-Reply-To: <ca4c2345-3eb3-4e5f-b9a5-da29ae6b91b2@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] macb: wrap asm/arch/clk.h with ifndef CLK
+To: Torsten Duwe <duwe@lst.de>, Simon Glass <sjg@chromium.org>
+Cc: Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
+ Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+References: <20251010161442.410C4227AAE@verein.lst.de>
+ <20251010161721.7B915227AAE@verein.lst.de>
+Content-Language: en-GB
+From: Matthias Brugger <mbrugger@suse.com>
+In-Reply-To: <20251010161721.7B915227AAE@verein.lst.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,54 +107,35 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---L2tnVoq8HLp3j61l
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 16, 2025 at 02:55:27PM +0200, Heinrich Schuchardt wrote:
-> On 10/15/25 21:04, Tom Rini wrote:
-> > On Wed, Oct 15, 2025 at 04:44:04PM +0100, Simon Glass wrote:
-> >=20
-> > > At present, normally when one bootmeth fails on a partition, we move =
-on
-> > > and try the next bootmeth. However, this was not the case for the fin=
-al
-> > > partition due to a bug. Rework the logic so that all partitions are
-> > > treated the same.
-> > >=20
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >=20
-> > > Changes in v4:
-> > > - Reword the commit message as Tom suggested
-> > >=20
-> > >   boot/bootflow.c | 34 ++++++++++++++++------------------
-> > >   1 file changed, 16 insertions(+), 18 deletions(-)
-> >=20
-> > I'm glad you reworded this, but it's frustrating you didn't also post
-> > this stand alone (and presumably sooner) as was requested as it's a
-> > stand alone fix.
-> >=20
->=20
-> I guess you could still apply it standalone to origin/master.
+On 10/10/25 18:17, Torsten Duwe wrote:
+> macb.c includes asm/arch/clk.h solely to declare get_macb_pclk_rate().
+> That function is platform specific and only required if CONFIG_CLK
+> is not set. In case the machine does not provide it, compilation fails
+> even when the MACB pclk is detected via the CLK framework.
+> 
+> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+> Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+> Signed-off-by: Torsten Duwe <duwe@suse.de>
 
-I'll take the whole series at some point soon'ish. But this would
-already have been applied if it was standalone as suggested a while ago
-now.
+Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 
---=20
-Tom
+> ---
+>   drivers/net/macb.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/net/macb.c b/drivers/net/macb.c
+> index cbf5f605518..a54a268036d 100644
+> --- a/drivers/net/macb.c
+> +++ b/drivers/net/macb.c
+> @@ -38,7 +38,9 @@
+>   #include <linux/mii.h>
+>   #include <asm/io.h>
+>   #include <linux/dma-mapping.h>
+> +#ifndef CONFIG_CLK
+>   #include <asm/arch/clk.h>
+> +#endif
+>   #include <linux/errno.h>
+>   
+>   #include "macb.h"
 
---L2tnVoq8HLp3j61l
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPEQRQAKCRAr4qD1Cr/k
-CmqoAP4/ROlip7dfAekesRpv+zbq4g3+wUNwMfJQ5spIvPzAlgEAxbXh3Lz/9b36
-tLVVUrq9EoxOHhXD0faGaELPTKyPog4=
-=eSHZ
------END PGP SIGNATURE-----
-
---L2tnVoq8HLp3j61l--
