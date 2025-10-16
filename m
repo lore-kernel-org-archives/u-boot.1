@@ -4,50 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE788CCD183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 15:30:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02DB1CCD199
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 15:32:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A4C7837E2;
-	Thu, 16 Oct 2025 17:30:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
+	by phobos.denx.de (Postfix) with ESMTP id 7FC2D837E2;
+	Thu, 16 Oct 2025 17:32:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="c84W+KDQ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TUbT76kQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A014837E4; Thu, 16 Oct 2025 17:30:56 +0200 (CEST)
-Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id 816FF83807; Thu, 16 Oct 2025 17:32:41 +0200 (CEST)
+Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
+ [IPv6:2607:f8b0:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D028F83734
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 17:30:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34CD883734
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 17:32:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=netcube.li
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukas.schmid@netcube.li
-dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:In-Reply-To:References;
- bh=PIVRulVtEzPjC/Ds3SEYGBBeE1CgixAC6xS7Famj5/4=;
- b=c84W+KDQ7yMOAlJPZ+DJwkcGCAM8p8wl5Z23RSvmkgH0bSbSdJlWhc2Ay8H0sF9lgkCVtmo2Xbc80P81EVz+CjlUIQWIjKUGDmVGrCPUUxO8bSyAwb0Bb3llsC63kJWFtcdbhPN26fmGsr2sjMbsJufSLEVHReJ0bIRjgcrcXtU=
-Received: from lukas-hpz440workstation.localnet (cm70-231.liwest.at
- [212.241.70.231]) by mail.netcube.li with ESMTPSA
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256)
- ; Thu, 16 Oct 2025 17:30:42 +0200
-From: Lukas Schmid <lukas.schmid@netcube.li>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Tom Rini <trini@konsulko.com>, linux-sunxi@lists.linux.dev,
- John Watts <contact@jookia.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2] sunxi: extend R528/T113-s3/D1(s) DRAM initialisation
-Date: Thu, 16 Oct 2025 17:30:41 +0200
-Message-ID: <5396890.31r3eYUQgx@lukas-hpz440workstation>
-In-Reply-To: <20250917224826.7837663c@minigeek.lan>
-References: <20250915192036.323741-1-lukas.schmid@netcube.li>
- <20250917224826.7837663c@minigeek.lan>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x333.google.com with SMTP id
+ 46e09a7af769-7bc626c5467so558865a34.2
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 08:32:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760628758; x=1761233558; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=EoytwwgtR3+Nv5BSjBNqehQ8dIqnQSIYS+RbDOWmmgY=;
+ b=TUbT76kQ1Xm0nMR4A6XA8L943CBUwK37CXadtM60vciU/l1BQQueZkEMU0JRVbEPyF
+ +KdY2Do4GSs1UtfcMl9oFSCgJbgeoS0M3Ft+Vr++7vzw9nMTPsfzq7Q9DUO2Bvnda4dW
+ Z+sGebJlz8AGeDpQ0csDKcZKR1eeBtuXlLiSM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760628758; x=1761233558;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EoytwwgtR3+Nv5BSjBNqehQ8dIqnQSIYS+RbDOWmmgY=;
+ b=TnTVV1AyY3WVS0sZHtatdbz5ovqkvNGLYlal+EBbcaMPk01gmh2ji/jP/zeVmSzL3F
+ r6iX7iJHt7w0tIIVqXjiDjjNIcYyzQ0hvxc9BFmLtjtUEiCjYvdGXwc8deKv9njtgYlw
+ 2jmcXfsV1yvF6JxHNoygsjlyYI7697Sb0vDhcDgddkZ+M4U/ZVtUMeia5mCfUS7ZEI8j
+ xQC84pe6KNBEcM/Y1eSyiFCRaRiT7T6sqp1SaVJGn7JQCvG8pNNkIRRTSNZlG/EQmHUI
+ 8IkcEpCuLj015oXW4xR079MB4D+X93ELqLqJO8XMu1nMQ13MeV64D/FYl2Ub+WRQX0qn
+ nA3g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXDIcOQBQj/ffczShwCrcd4t8cudZ+IzNuto9tW/Sh1sUa3ZDnJ5os5lW39SUIpWq11KyzucrA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7opovHL930D6zIxyzWz49Z+HF/QVPNly0K3UdnltvSsIWtzK1
+ h4/Z2F888SBCzF2pWra/yj34CrDiFvBYXPcdcPaDOMlMVfWhajcpQ2+miofPpCAHXvN+Z9J9f9D
+ 21kT62EY=
+X-Gm-Gg: ASbGncsdNlM552aPKKkynJ0uQTnyhyixl6A3hW4doOifMlRAP+Ae8Z+wOMkFA5tZEyj
+ K8P5wihnaHxs344gzq5k0dC+/WcOj1VATk1mRKBV2Uj0vpgg1wRjuKnJDcJN3y351Fg+UWyxt6R
+ NOmAzxwNolf7+wiSce3j6eEk86r/gkJshdJO8hq+yI2VmMSIhD64a17cgUhKsiBepZr5qtsoa8A
+ HvnzJwzEJo4OgQDrtU4cXFk8Zshsp34QmYhiIrJ15PzFfzl5nO3qpwp2uGZdv2DkQSH9yIy/LiR
+ K4WqHBfqyefWpTGKSOyfKQHvj+E72bxVXwgLtqxq4IcP48cQhaFhQ+wXbbZyL4yawShCGcl9zrb
+ rCQvGEgCudwPCGJMoQWV+6oZcDIz4C2uF3XVjrGsY6mAbPCvw5RiMjA3D4LBGbrXLBstUW1NUSm
+ kdcECQ4KSJO8CAtNbfjvhWlmuVJy70sZ6I94SFDwE=
+X-Google-Smtp-Source: AGHT+IEzHuDcg97o7ocTlmNLRFUgMHma7GechnuvO1eDdqVU2ueQheJ/VaqOFOiD5YJx0vfoEvVt6g==
+X-Received: by 2002:a05:6830:348b:b0:7a5:ddd5:72d0 with SMTP id
+ 46e09a7af769-7c27cba86c2mr123823a34.17.1760628757839; 
+ Thu, 16 Oct 2025 08:32:37 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c2795363b2sm321767a34.33.2025.10.16.08.32.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Oct 2025 08:32:36 -0700 (PDT)
+Date: Thu, 16 Oct 2025 09:32:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Benjamin Hahn <B.Hahn@phytec.de>, Adriano Cordova <adrianox@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>,
+ U-Boot mailing list <u-boot@lists.denx.de>
+Subject: Re: [PATCH] net: make dhcp_run() common for NET and NET_LWIP
+Message-ID: <20251016153234.GB6688@bill-the-cat>
+References: <20251009123034.2441110-1-jerome.forissier@linaro.org>
+ <55a322a8-2e3c-4936-998b-786e9e14565f@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="nextPart5034631.LvFx2qVVIh";
- micalg="pgp-sha512"; protocol="application/pgp-signature"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Cxq8c/K6z7UNX+Ch"
+Content-Disposition: inline
+In-Reply-To: <55a322a8-2e3c-4936-998b-786e9e14565f@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,202 +107,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---nextPart5034631.LvFx2qVVIh
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
-From: Lukas Schmid <lukas.schmid@netcube.li>
-To: Andre Przywara <andre.przywara@arm.com>
-Date: Thu, 16 Oct 2025 17:30:41 +0200
-Message-ID: <5396890.31r3eYUQgx@lukas-hpz440workstation>
-In-Reply-To: <20250917224826.7837663c@minigeek.lan>
-MIME-Version: 1.0
 
-On Mittwoch, 17. September 2025 23:48:26 Mitteleurop=C3=A4ische Sommerzeit =
-Andre=20
-Przywara wrote:
-> On Mon, 15 Sep 2025 21:20:35 +0200
-> Lukas Schmid <lukas.schmid@netcube.li> wrote:
->=20
-> Hi Lukas, John,
->=20
-> so looking at the code again, table 0 is special in that it's all 0's,
-> which apparently means no remapping, according to some comments.
-> We already bail out earlier of this function for configurations that do
-> not require remapping, so can you test whether this works here as well?
-> Just do the chip ID test early, after the DRAM type check, and before
-> the fuse is read. And if it's 0x7200, then just return;
->=20
-> I think that would look better than the odd fuse special case.
->=20
-> Thanks,
-> Andre
->=20
-> > Extend the DRAM initialisation code to add support for the T113-S4 aka
-> > T113M4020DC0 by checking the SoC's CHIPID.
+--Cxq8c/K6z7UNX+Ch
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Oct 16, 2025 at 02:53:50PM +0200, Heinrich Schuchardt wrote:
+> On 10/9/25 14:30, Jerome Forissier wrote:
+> > THere are currently two implementations of dhcp_run(): one in cmd/net.c
+> > for NET and one in net/lwip/dhcp.c for NET_LWIP. There is no
+> > justification for that. Therefore, move the NET version into
+> > net/net-common.c to be used by both stacks, and drop the NET_LWIP
+> > version which by the way does not look totally correct.
 > >=20
-> > The list of Chip-IDs came from
-> > https://github.com/ua1arn/hftrx/blob/25d8cb9e4cfe1d7d0e4a2f641025c88a9e=
-c5e
-> > 758/inc/clocks.h#L250
-> >=20
-> > And the chipid register address was something I heard through apritzel
-> > altough it seems that, according to Jookia, the Tina Device Tree seems
-> > to agree:
-> >=20
-> > sid@3006000 {
-> >=20
-> > 	compatible =3D "allwinner,sun20iw1p1-sid", "allwinner,sunxi-sid";
-> > 	reg =3D <0x0 0x03006000 0 0x1000>;
-> > 	#address-cells =3D <1>;
-> > 	#size-cells =3D <1>;
-> > =09
-> > 	chipid {
-> > =09
-> > 		reg =3D <0x0 0>;
-> > 		offset =3D <0x200>;
-> > 		size =3D <0x10>;
-> > =09
-> > 	};
-> > 	...
-> >=20
-> > };
-> >=20
-> > Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
-> > Tested-by: John Watts <contact@jookia.org>
-> > Reviewed-by: John Watts <contact@jookia.org>
-> > Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> > Suggested-by: Tom Rini <trini@konsulko.com>
 > > ---
 > >=20
-> > Changes in v2:
-> >   - Use uint32_t instead of u32 for sid_read_soc_chipid return type
-> >   - Add descriptive comment about source of Chip-ID list and register
-> > =20
-> >  drivers/ram/sunxi/dram_sun20i_d1.c | 13 ++++++++++++-
-> >  drivers/ram/sunxi/dram_sun20i_d1.h |  7 +++++++
-> >  2 files changed, 19 insertions(+), 1 deletion(-)
+> >   cmd/net.c            | 36 ++----------------------------------
+> >   include/net-common.h | 10 ++++++++++
+> >   include/net-lwip.h   |  1 -
+> >   net/lwip/dhcp.c      | 22 ----------------------
+> >   net/net-common.c     | 35 +++++++++++++++++++++++++++++++++++
+> >   5 files changed, 47 insertions(+), 57 deletions(-)
 > >=20
-> > diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c
-> > b/drivers/ram/sunxi/dram_sun20i_d1.c index a1794032f3b..381eeb87e2e
-> > 100644
-> > --- a/drivers/ram/sunxi/dram_sun20i_d1.c
-> > +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
-> > @@ -54,6 +54,11 @@ static void sid_read_ldoB_cal(const dram_para_t *par=
-a)
-> >=20
-> >  	clrsetbits_le32(0x3000150, 0xff00, reg << 8);
-> > =20
-> >  }
-> >=20
-> > +static uint32_t sid_read_soc_chipid(void)
-> > +{
-> > +	return readl(SUNXI_SID_BASE + 0x00) & 0xffff;
-> > +}
-> > +
-> >=20
-> >  static void dram_voltage_set(const dram_para_t *para)
-> >  {
-> > =20
-> >  	int vol;
-> >=20
-> > @@ -663,6 +668,7 @@ static void mctl_phy_ac_remapping(const dram_para_t
-> > *para,>=20
-> >  	fuse =3D (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
-> >  	debug("DDR efuse: 0x%x\n", fuse);
-> >=20
-> > +	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
-> >=20
-> >  	if (para->dram_type =3D=3D SUNXI_DRAM_TYPE_DDR2) {
-> >  =09
-> >  		if (fuse =3D=3D 15)
-> >=20
-> > @@ -675,7 +681,12 @@ static void mctl_phy_ac_remapping(const dram_para_t
-> > *para,>=20
-> >  			switch (fuse) {
-> >  			case 8: cfg =3D ac_remapping_tables[2]; break;
-> >  			case 9: cfg =3D ac_remapping_tables[3]; break;
-> >=20
-> > -			case 10: cfg =3D ac_remapping_tables[5];=20
-break;
-> > +			case 10:
-> > +				if (sid_read_soc_chipid() =3D=3D=20
-SUNXI_CHIPID_T113M4020DC0)
-> > +					cfg =3D=20
-ac_remapping_tables[0];
-> > +				else
-> > +					cfg =3D=20
-ac_remapping_tables[5];
-> > +				break;
-> >=20
-> >  			case 11: cfg =3D ac_remapping_tables[4];=20
-break;
-> >  			default:
-> >  			case 12: cfg =3D ac_remapping_tables[1];=20
-break;
-> >=20
-> > diff --git a/drivers/ram/sunxi/dram_sun20i_d1.h
-> > b/drivers/ram/sunxi/dram_sun20i_d1.h index 91383f6cf10..7bd8f67a77a
-> > 100644
-> > --- a/drivers/ram/sunxi/dram_sun20i_d1.h
-> > +++ b/drivers/ram/sunxi/dram_sun20i_d1.h
-> > @@ -19,6 +19,13 @@ enum sunxi_dram_type {
-> >=20
-> >  	SUNXI_DRAM_TYPE_LPDDR3 =3D 7,
-> > =20
-> >  };
-> >=20
-> > +enum sunxi_soc_chipid {
-> > +	SUNXI_CHIPID_F133A =3D 0x5C00,
-> > +	SUNXI_CHIPID_D1S =3D 0x5E00,
-> > +	SUNXI_CHIPID_T113S3 =3D 0x6000,
-> > +	SUNXI_CHIPID_T113M4020DC0 =3D 0x7200,
-> > +};
-> > +
-> >=20
-> >  /*
-> > =20
-> >   * This structure contains a mixture of fixed configuration settings,
-> >   * variables that are used at runtime to communicate settings between
+> > diff --git a/cmd/net.c b/cmd/net.c
+> > index 886735ea14f6..24099764493e 100644
+> > --- a/cmd/net.c
+> > +++ b/cmd/net.c
+> > @@ -134,8 +134,8 @@ U_BOOT_CMD(dhcp6,	3,	1,	do_dhcp6,
+> >   #endif
+> >   #if defined(CONFIG_CMD_DHCP)
+> > -static int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
+> > -		   char *const argv[])
+> > +int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +	    char *const argv[])
+>=20
+> Thank you for all this clean up work.
+>=20
+> Should we move the dhcp command to a new file cmd/dhcp.c to get rid of all
+> the related '#if' statements?
 
-Hi Andre,
+Might be a reasonable cleanup, yes. But at some point, the legacy
+network stack will be for SPL only, ideally.
 
-I finally got some time to look into this patch again.
+--=20
+Tom
 
-Dropping out of the DRAM type check earlier sounds like a good move here. I=
-=20
-can definitely do that and also test it on my board.=20
-
-About the other changes. Is the patch itself in a good state right now (exc=
-ept=20
-the commit message) or would you (or anyone else here for that matter) like=
- to=20
-see something changed?
-
-I'll change/update the commit message to have a smaller footprint regarding=
-=20
-the SID chip ID, and also remove the reference to the "random" git repo.
-
-Best regards,
-Lukas
-
---nextPart5034631.LvFx2qVVIh
+--Cxq8c/K6z7UNX+Ch
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEPv6dcBmn59ssZMkSJnN+drMVRtgFAmjxD6EACgkQJnN+drMV
-Rth8VQf/T6m1BoJu0cJC9cMpiuqvt1R+GnQvOHrYthaISQ9XQlaaBFNjRKcEGM7P
-ZqSOLkMW1csEIR4NZ55cbKWN0sU32M7wwhfzmBlLT6T/XU2mF5mkNRxB9ql8m1Xp
-ksZ15Q/1EuHG9EUi/kw41uH8HDaMyRW4Ew+ICd5FSHwRgoqLVapEGDRIUXeZfwKX
-JJGKa9/GNISfG6XALJBt34Rf6POh5NtAPIZvLHpmsk8H8NCeNVKAjLxbymrxkXNn
-Afo33yk0NS3Llj2a2WttTfSrhPtX0zA0ojVdMSEUhdGSrq1yg5/daLgeYM2hYQun
-pZBqiGzGij/pqv8uv5pZFwBNZ9XP6Q==
-=gFfn
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPEQEgAKCRAr4qD1Cr/k
+Cj07AQCOcewuxEc9EJAfmIwZucSBoepOILL+GTnTMsfe7pP0yAEAtP2iFGb7+bn8
+JqFscf8XQ4BWwFKHY+fxY+BxoY3IFQI=
+=Df3A
 -----END PGP SIGNATURE-----
 
---nextPart5034631.LvFx2qVVIh--
-
-
-
-
+--Cxq8c/K6z7UNX+Ch--
