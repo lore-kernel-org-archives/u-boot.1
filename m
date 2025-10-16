@@ -4,51 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F0FDCCD183
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 12:08:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B899CCD194
+	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 12:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98D8D83631;
-	Thu, 16 Oct 2025 14:08:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id ECC3583655;
+	Thu, 16 Oct 2025 14:33:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QZKY0wBl";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D18A836AC; Thu, 16 Oct 2025 14:08:21 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id 1615C836AC; Thu, 16 Oct 2025 14:33:33 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0C92835FD
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 14:08:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id C459E83631
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 14:33:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS34.andestech.com [10.0.1.134])
- by Atcsqr.andestech.com with ESMTPS id 59GC7sgf051593
- (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=OK);
- Thu, 16 Oct 2025 20:07:54 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS34.andestech.com (10.0.1.134)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 16 Oct
- 2025 20:07:54 +0800
-Date: Thu, 16 Oct 2025 20:07:51 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <ycliang@andestech.com>, <rick@andestech.com>,
- <e@freeshell.de>, <ziyao@disroot.org>
-Subject: [GIT,PULL] u-boot-riscv/master
-Message-ID: <aPDgCxYfqFzxgsWb@swlinux02>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stefan.roese@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cnS6c3D5cz9sqs;
+ Thu, 16 Oct 2025 14:33:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1760618008;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=K6PU8E7JH8dJJX5wltC67QLK39tTs21GG5n5pynYd+I=;
+ b=QZKY0wBlaVQT5LFG/+wsMJYzgL5rzX9FmCkA/coNIOJYIfrXu4Hp0aSi6BHv5JU0DD7L+T
+ csEPetm0Xuh6RLVULSPDc90XciDxMnRxdw5qGSh7qlELEhc/fB+fvkP3P9V2KmHGu9ezWY
+ B3OQNzhdraXLkUXioaduoXJnIZilX51ZmNbWwH126rqGz+xNQ9GUTMkGoxFAGa2LnpVDfY
+ JSzh3EuCP5mUlgFqceS92vg2PkC5dmurGMwqZmi29HL51lJ2visYFxn2/UBv4u3c4vjIym
+ vSXFuFbaMGXNMJAxJqGs6a9YHvcZKZGy0Dl1wTVrgrqQr9qejKQSFPM8i8BgKA==
+Message-ID: <77bf20f4-7323-4080-be97-c780904ccc21@mailbox.org>
+Date: Thu, 16 Oct 2025 14:33:27 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-ClientProxiedBy: ATCPCS33.andestech.com (10.0.1.100) To
- ATCPCS34.andestech.com (10.0.1.134)
-X-DKIM-Results: atcpcs34.andestech.com; dkim=none;
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 59GC7sgf051593
+Subject: Re: [PATCH] watchdog: Tighten some watchdog driver dependencies
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250806145637.1664675-1-trini@konsulko.com>
+Content-Language: en-US
+From: Stefan Roese <stefan.roese@mailbox.org>
+In-Reply-To: <20250806145637.1664675-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 9e683cc04941612a74e
+X-MBO-RS-META: qf8e8y64hydjnq84wktnu1qbek6pdur8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,34 +73,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 8/6/25 16:56, Tom Rini wrote:
+> A few watchdog drivers cannot build without access to some platform
+> specific header files. Express those requirements in Kconfig as well.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Stefan Roese <stefan.roese@mailbox.org>
 
-The following changes since commit 2ba64e303b2706e5c42a6bf982326d632342ca66:
+Applied to u-boot-watchdog/master
 
-  Merge patch series "fix an7581 panic caused by attempt to support multiple RAM size" (2025-10-15 15:08:27 -0600)
+Thanks,
+Stefan
 
-are available in the Git repository at:
+> ---
+>   drivers/watchdog/Kconfig | 18 ++++++++++--------
+>   1 file changed, 10 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/watchdog/Kconfig b/drivers/watchdog/Kconfig
+> index e9ea874d0e3d..463f9249c611 100644
+> --- a/drivers/watchdog/Kconfig
+> +++ b/drivers/watchdog/Kconfig
+> @@ -43,6 +43,7 @@ config HW_WATCHDOG
+>   
+>   config IMX_WATCHDOG
+>   	bool "Enable Watchdog Timer support for IMX and LSCH2 of NXP"
+> +	depends on MACH_IMX
+>   	select HW_WATCHDOG if !WDT
+>   	help
+>   	  Select this to enable the IMX and LSCH2 of Layerscape watchdog
+> @@ -64,6 +65,7 @@ config OMAP_WATCHDOG
+>   
+>   config ULP_WATCHDOG
+>   	bool "i.MX7ULP watchdog"
+> +	depends on MACH_IMX
+>   	help
+>   	  Say Y here to enable i.MX7ULP watchdog driver.
+>   
+> @@ -116,8 +118,8 @@ config WDT_ARMADA_37XX
+>   
+>   config WDT_ASPEED
+>   	bool "Aspeed ast2400/ast2500 watchdog timer support"
+> -	depends on WDT
+> -	default y if ARCH_ASPEED
+> +	depends on WDT && ARCH_ASPEED
+> +	default y
+>   	help
+>   	  Select this to enable watchdog timer for Aspeed ast2500/ast2400 devices.
+>   	  The watchdog timer is stopped when initialized. It performs reset, either
+> @@ -127,8 +129,8 @@ config WDT_ASPEED
+>   
+>   config WDT_AST2600
+>   	bool "Aspeed AST2600 watchdog timer support"
+> -	depends on WDT
+> -	default y if ASPEED_AST2600
+> +	depends on WDT && ASPEED_AST2600
+> +	default y
+>   	help
+>   	  Select this to enable watchdog timer for Aspeed ast2500/ast2400 devices.
+>   	  The watchdog timer is stopped when initialized. It performs reset, either
+> @@ -136,7 +138,7 @@ config WDT_AST2600
+>   
+>   config WDT_AT91
+>   	bool "AT91 watchdog timer support"
+> -	depends on WDT
+> +	depends on WDT && ARCH_AT91
+>   	help
+>   	  Select this to enable Microchip watchdog timer, which can be found on
+>   	  some AT91 devices.
+> @@ -173,7 +175,7 @@ config WDT_CDNS
+>   
+>   config WDT_CORTINA
+>   	bool "Cortina Access CAxxxx watchdog timer support"
+> -	depends on WDT
+> +	depends on WDT && TARGET_PRESIDIO_ASIC
+>   	help
+>   	  Cortina Access CAxxxx watchdog timer support.
+>   	  This driver support all CPU ISAs supported by Cortina
+> @@ -219,7 +221,7 @@ config WDT_MAX6370
+>   
+>   config WDT_MCF
+>   	bool "ColdFire family watchdog timer support"
+> -	depends on WDT
+> +	depends on WDT && M68K
+>   	help
+>   	  Select this to enable ColdFire watchdog timer,
+>   	  which supports mcf52x2 mcf532x mcf523x families.
+> @@ -303,7 +305,7 @@ config WDT_OMAP3
+>   
+>   config WDT_ORION
+>   	bool "Orion watchdog timer support"
+> -	depends on WDT
+> +	depends on WDT && ARCH_MVEBU
+>   	select CLK
+>   	help
+>   	  Select this to enable Orion watchdog timer, which can be found on some
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
-
-for you to fetch changes up to 0ab7710a06401f8cac1d49bac5e66d25f3e6e4e1:
-
-  clk: sophgo: Fix a warning about void returns value (2025-10-16 16:44:49 +0800)
-
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/27926
-----------------------------------------------------------------
-- Revert "riscv: Add a Zalrsc-only alternative for synchronization in start.S" to fix regression
-- clk: sophgo: Fix a warning about void returns value
-----------------------------------------------------------------
-Tom Rini (1):
-      clk: sophgo: Fix a warning about void returns value
-
-Yao Zi (1):
-      Revert "riscv: Add a Zalrsc-only alternative for synchronization in start.S"
-
- arch/riscv/cpu/start.S          | 26 +-------------------------
- drivers/clk/sophgo/clk-common.h |  2 +-
- 2 files changed, 2 insertions(+), 26 deletions(-)
-
-Best regards,
-Leo
