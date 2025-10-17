@@ -4,72 +4,168 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CA55CCD195
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 12:47:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE029CCD195
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 12:47:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2199683710;
-	Fri, 17 Oct 2025 14:47:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6AB0183829;
+	Fri, 17 Oct 2025 14:47:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sLK3RUxy";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="LXJkD3vb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CA00837E4; Fri, 17 Oct 2025 14:47:21 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EC3583655
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 14:47:18 +0200 (CEST)
+ id 559B883835; Fri, 17 Oct 2025 14:47:42 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C187B83655
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 14:47:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59HClBXM270462;
- Fri, 17 Oct 2025 07:47:11 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760705231;
- bh=2J7t25cuMoiJkFyYjzFtK4u/gewrsTmgDxGlU/fpLy4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=sLK3RUxyaseT1R9Bg6zk/BFiSQ1Z6XUAikSMKX/CGAIm2Q8TMzPNIT+eqjWNkbhuT
- AhMn9aVfxn00559Bbm4xZ5L4eFtCpQqdeePz9L0kv2f8v0vmtXeHZRoDz1mSk0TDJI
- C0XhYJo5EmZR7yVUC7mZtK+FiN85dajO3ZwcQgfQ=
-Received: from DFLE203.ent.ti.com (dfle203.ent.ti.com [10.64.6.61])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59HClBQV2001396
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 17 Oct 2025 07:47:11 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE203.ent.ti.com
- (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 17 Oct
- 2025 07:47:10 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 17 Oct 2025 07:47:10 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59HCl9HC1314224;
- Fri, 17 Oct 2025 07:47:10 -0500
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=2385461c55=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59HC7ruB016470;
+ Fri, 17 Oct 2025 14:47:36 +0200
+Received: from db3pr0202cu003.outbound.protection.outlook.com
+ (mail-northeuropeazon11010047.outbound.protection.outlook.com [52.101.84.47])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 49u0ap68tg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 17 Oct 2025 14:47:36 +0200 (MEST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wUm0Mph1x7HD6pi/MiwtDDFajHSvgp2AQENOxuDzUt/EO0Rfmby5cRnIdhmtHyRuNz4nQGWpaWu2peioFIoz1ljPC0hdiAkTEDJpq+JcgHidD079JYcGkNHhZvkj4ekXAwy5YEBHqTf6TUO5kSJpdw5LCFeI0UiH8QZZXKlLUTb2TTnziJE+jp8GptiYRsEcWKSroBuDrbLqiV6c00j7aRdUL3XkfiQE8GuSkfSzFyLtslKgXGXaU4zUqjrQAeACuLzIvhfQSowYbfRfk5h6lpccEIJIDESCQboc0Om0/aJgVhEM6h5odzKxHIBTBYkwiRLM8OU2ASAa6NKeOWkmsQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VBSM4hQZkl6jjiuYE4EbWuJePb0v9sgXEMM/2Rgsli0=;
+ b=JSXXiGqTIVpde/Z8wLeWtCzZTB2FPW4LTGo99tqhpXA/tgwqU9zLKbN35KtxsoUm5B4LkPTwLGaSIioj9MAOIgpznmu0ufYxagIMZPQ/rbUICMIl59ynhM1MIRxClGUfKru+kAgFTISiCoup9O13tS0EkS3EurZNd9Q/OJS7joysrWc2fI6IOjB3SRQYb+byYg/1ErS3e7dQmdhyqiytNkf8ONn2hflhN5Licaaq/o8NnWWG0zTfVfx7dg3ahgRRwbpgsc2G/95QSGnq5hz+V1g2/UOB/BHcDPpPamg6FBhYXOaAR38tSght9M0Jc2a94iJACt5MvbcHDos2HUTDmg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+ 164.130.1.40) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
+ dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VBSM4hQZkl6jjiuYE4EbWuJePb0v9sgXEMM/2Rgsli0=;
+ b=LXJkD3vbyzNPTES93/OPCKiKPQsF3CYG+bs0im88gdYGFw8x7AU63R6aJ1p+lFv9DBWcTvXvj7nff0kcfBMCKYt9U17/dMgCRk/lJWxkKbioesVZnnqRat+aA0pIS/gUpbpU7aqTIhAk5pHpc3hmuJ/djDX7a79oclmr0aRi8jvsxAMWM6t3wm1hoqHJbi4XUCCzA5xWbLk0TIhTBxioamws7EaObtIVdP+WN71zQWP9HSe+tV9rB3/drf++zOy983kT4EWBOI+Vj0MY8ltNsDJHAVuuFuOUMKj7v0AEWjlDMnte9QC/SaC1/suweEepl3VXSmBGU2UMuAMOdlhQdA==
+Received: from AS4PR10CA0023.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5d8::15)
+ by AS2PR10MB6926.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:57a::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.12; Fri, 17 Oct
+ 2025 12:47:34 +0000
+Received: from AM2PEPF0001C70D.eurprd05.prod.outlook.com
+ (2603:10a6:20b:5d8:cafe::d) by AS4PR10CA0023.outlook.office365.com
+ (2603:10a6:20b:5d8::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9228.13 via Frontend Transport; Fri,
+ 17 Oct 2025 12:47:34 +0000
+X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.40)
+ smtp.mailfrom=foss.st.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=none header.from=foss.st.com;
+Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
+ designate 164.130.1.40 as permitted sender) receiver=protection.outlook.com;
+ client-ip=164.130.1.40; helo=smtpO365.st.com;
+Received: from smtpO365.st.com (164.130.1.40) by
+ AM2PEPF0001C70D.mail.protection.outlook.com (10.167.16.201) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9253.7 via Frontend Transport; Fri, 17 Oct 2025 12:47:33 +0000
+Received: from EQNDAG1NODE4.st.com (10.75.129.133) by smtpO365.st.com
+ (10.250.44.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Fri, 17 Oct
+ 2025 14:47:39 +0200
+Received: from localhost (10.252.15.38) by EQNDAG1NODE4.st.com (10.75.129.133)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Fri, 17 Oct
+ 2025 14:47:29 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/2] ARM: dts: Remove u-boot,
+ boot-led from stm32mp257f-ev1-u-boot
+Date: Fri, 17 Oct 2025 14:47:20 +0200
+Message-ID: <20251017124727.165192-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 17 Oct 2025 18:17:09 +0530
-Message-ID: <DDKLWVUX1CPJ.3EMPE1DELU070@ti.com>
-From: Anshul Dalal <anshuld@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Anshul Dalal
- <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, <d-gole@ti.com>, <b-padhi@ti.com>,
- <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
- <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
- <devarsht@ti.com>, <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v10 05/11] arm: armv8: mmu: add mem_map_from_dram_banks
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251010134424.3835757-1-anshuld@ti.com>
- <20251010134424.3835757-6-anshuld@ti.com>
- <CAC_iWj+pyDhYnaJE+eX8LP+Czu13+oH+H1XfMbH4wWgVqY6k2w@mail.gmail.com>
-In-Reply-To: <CAC_iWj+pyDhYnaJE+eX8LP+Czu13+oH+H1XfMbH4wWgVqY6k2w@mail.gmail.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.15.38]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To EQNDAG1NODE4.st.com
+ (10.75.129.133)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM2PEPF0001C70D:EE_|AS2PR10MB6926:EE_
+X-MS-Office365-Filtering-Correlation-Id: b1667d6d-998f-4ccc-0f38-08de0d7b57b0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|82310400026|376014|1800799024|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/9PAgbAEkr9UG96HSA+Li1kEyaXx/A7F0csuaCZnd2+pS70ymrDvPe3342pz?=
+ =?us-ascii?Q?cmw0xR1TIZPZtm4xjIPG2N2XxwHhDvJKN/VwgimUgwX1YY0Ko7qsSBZRdpge?=
+ =?us-ascii?Q?VXJ7XYG+jqFWSbQFIE5hG2co/wyjrQCbu4Iyhd/U92c5B0pbmVffaxXWoM+6?=
+ =?us-ascii?Q?nYH2/w3BTsHGQiWkx09glvqwhgt1z6JDNL7OW03069evdgsVugAWe8JX43S8?=
+ =?us-ascii?Q?LFvfRbTqxoidjrwQgMoXXsGrt8hBn6iF9zEldC9rlApjYlFbWOOqRFyz1t5f?=
+ =?us-ascii?Q?h0b4lCo2BEUZ7BtHLQscw2rf8HExAYmwTFkLXorVgKSVa5SMB46ybjR5FREa?=
+ =?us-ascii?Q?zXjT5AiZY7QYlM3Xo2kqdCDFfArZ41XqfR5jDy6TFVyFNzxX0X+1qSMOmkij?=
+ =?us-ascii?Q?BMFoewWPjl6XP4WdOtHv75QiPNPdPAnadejDJoURRmTcEB3UExi/HEvJmZZ8?=
+ =?us-ascii?Q?MAkEE+Zc1NKaJFOJj7RFXZK2p5xay97Kwrwpu5PCIyOXe/75CuEmafCbBWFl?=
+ =?us-ascii?Q?fojB1NRTI3pW68Yl8gALI8BGSnF5m/szis048qefZHXNWC5rq1Uz/pzgpZl/?=
+ =?us-ascii?Q?zsWphbgZ+h8wN6hylX8tWRchbr2e5Eg+CaJPvwMxwusUiTqaizjo1BWZPDom?=
+ =?us-ascii?Q?v2NvYoWmmvS0wI3OMvkEv6SkMPHR1DJbMfdCpVJqGLOkHE8W+SNG33bhJiQ/?=
+ =?us-ascii?Q?T2kdn/cXHMhP0PRlRMVNQyV9H8SQx3fhMkOTuMP+LOE7FEy3TWJaU/4b+Nbm?=
+ =?us-ascii?Q?SSFisb7+xphppQhOtmYC/LRJSOJcQYRCP3l9y7+FQb1yCAS6q6vsFCL0BLrU?=
+ =?us-ascii?Q?F/IgJ1GUP8WK2DzQ4fbXLIbc+kUClHfj5mMUiOAtX00C2WzpkHVKlIsaSBhf?=
+ =?us-ascii?Q?vfl/5vuU1bPC0FNzi9aoxhQNNTWkrPeqpMGZrwnCIVW4iF8cZMzXFcNgCzlA?=
+ =?us-ascii?Q?DKnGISFDLXorju9sM04fOGmq309VqMoBzF9G336a+SAl1kJiK7ALsPn53+Js?=
+ =?us-ascii?Q?XYYUhvlz1aIlipmiLLaFu1qWvk+apSTu+7/onpDwsvfCyiXvwOmT/VN+gp8P?=
+ =?us-ascii?Q?ImMaTDXrabssyqTEonYhgwIW5iv2C55m/16nmYdSjZ/+mwe5+Tp9X9M2WpjZ?=
+ =?us-ascii?Q?N67m/SW3q+uGhzsPUqaH0bXsSPb0jPqBNaaeYJOWdtKYddi9c0zkHE7hE1Aa?=
+ =?us-ascii?Q?UEptT2wi8N9r5azasePreH2K+Tt0VYqqzMT24lnEWAJc2F9gr7UnG3XhWIrJ?=
+ =?us-ascii?Q?NQD+14GkkWY9S9t5hz7t2p2b3NOeVQrCxVocR33EmFInLyKvmcdaVJtxT5Tg?=
+ =?us-ascii?Q?9pYNFce+eB2Okngtb4hqUlGo5CChpyDogyLsrCb96oKmNwkEEjg4Aavx92HY?=
+ =?us-ascii?Q?GqrN5w5c68GEPp/VAfa2MJ6U77N9bJyXDal8pKIsSeK9CEoHNywo7GZK9bGc?=
+ =?us-ascii?Q?+XE9aUEVMGMCIuDN14YCt+sEgJNkblGggWf1g0lqpNI7D/9MddsW0Js1on2f?=
+ =?us-ascii?Q?FjO+hUSGjyHtxIrzQdXuqUuK/ALZ1rhoageUWq0pKG7JZgOjWDUjF9aIHQ6A?=
+ =?us-ascii?Q?m8IAoKkn0XKt+m+xLzA=3D?=
+X-Forefront-Antispam-Report: CIP:164.130.1.40; CTRY:IT; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: foss.st.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2025 12:47:33.5330 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b1667d6d-998f-4ccc-0f38-08de0d7b57b0
+X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.40];
+ Helo=[smtpO365.st.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM2PEPF0001C70D.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6926
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDE2MDA5MCBTYWx0ZWRfXxhmrAEPCnO+W
+ UM7+ddkuVDE0qNTA1TW6MR21Z3a6CG5GOR6pthktVUCvzWq81CbrKTjqSh0Amv9hQLClLdt41TV
+ hczpnWHbjNEy71aAhkjjqpPaRwKQ9FWTaQGFGFwXYIG4Fwut8vIQ2mYCAYftCCP3ixLxXRuIjhH
+ jgR0eEay9gG9mjnk83i9CEOS19amPDjmQSqgNZWOejOJQlgwtJPqzOYBC3D9slRGJzDfaQXGBjz
+ tP94nP2CQL6b3pu62E8eco4s28Pm4xV2F0ZCpble/Ae+zH3OD57wOMFusyHp18yA16X/zlsJsMf
+ XciradKc0S1NNYKjYhgpTqEe5FxgtMVlUybE038MzuDZ+O7v3aInkG121Z5+398AIAaVFAunqkH
+ FffdqXnbL4rLjk3YOkwyveAxmOmw8w==
+X-Proofpoint-ORIG-GUID: bOdRW4qggKtK3gVVLc1arf3NPqsrplYy
+X-Proofpoint-GUID: bOdRW4qggKtK3gVVLc1arf3NPqsrplYy
+X-Authority-Analysis: v=2.4 cv=eoPSD4pX c=1 sm=1 tr=0 ts=68f23ae8 cx=c_pps
+ a=RmHue97ipze0icY0clRZTA==:117 a=HHWmdgNZ66UcX3Fjl3KRHg==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=gt-GhcMM7esA:10 a=x6icFKpwvdMA:10
+ a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=NEAV23lmAAAA:8 a=8b9GpE9nAAAA:8 a=f2hD7jiOUhbjUgPHKRkA:9
+ a=T3LWEMljR5ZiDmsYVIUa:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
+ definitions=2025-10-17_04,2025-10-13_01,2025-03-28_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ priorityscore=1501 lowpriorityscore=0 clxscore=1015 adultscore=0
+ impostorscore=0 spamscore=0 suspectscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510160090
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,90 +182,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Ilias,
+Since commit 69542d06920b ("led: update LED boot/activity to new
+property implementation"), "u-boot,led-boot" property is no more
+supported, remove it.
 
-On Fri Oct 17, 2025 at 5:39 PM IST, Ilias Apalodimas wrote:
-> Hi Anshul,
->
-> On Fri, 10 Oct 2025 at 16:44, Anshul Dalal <anshuld@ti.com> wrote:
->>
->> For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
->> the MMU as part of mmu_setup.
->>
->> But since the exact configuration of memory banks might not be known at
->> build time, many platforms such as imx9, versal2 etc. utilize
->> gd->bd->bi_dram to configure the static map at runtime.
->>
->> Therefore this patch adds a new API mem_map_from_dram_banks that
->> modifies the static map in a similar way. Allowing the caller to map all
->> dram banks by just passing the index to last entry in their mem_map and
->> it's length.
->>
->> Reviewed-by: Dhruva Gole <d-gole@ti.com>
->> Signed-off-by: Anshul Dalal <anshuld@ti.com>
->> Tested-by: Wadim Egorov <w.egorov@phytec.de>
->> ---
->>  arch/arm/cpu/armv8/cache_v8.c    | 28 ++++++++++++++++++++++++++++
->>  arch/arm/include/asm/armv8/mmu.h | 11 +++++++++++
->>  2 files changed, 39 insertions(+)
->>
->> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8=
-.c
->> index 74c78cb2fb0..9b3c37dae82 100644
->> --- a/arch/arm/cpu/armv8/cache_v8.c
->> +++ b/arch/arm/cpu/armv8/cache_v8.c
->> @@ -58,6 +58,34 @@ static int get_effective_el(void)
->>         return el;
->>  }
->>
->> +int mem_map_from_dram_banks(unsigned int index, unsigned int len, u64 a=
-ttrs)
->> +{
->> +       unsigned int i;
->> +       int ret =3D fdtdec_setup_memory_banksize();
->> +
->> +       if (ret) {
->> +               log_err("%s: Failed to setup dram banks\n", __func__);
->> +               return ret;
->> +       }
->> +
->> +       if (index + CONFIG_NR_DRAM_BANKS >=3D len) {
->> +               log_err("%s: Provided mem_map array has insufficient siz=
-e for DRAM entries\n",
->> +                       __func__);
->> +               return -ENOMEM;
->> +       }
->> +
->> +       for (i =3D 0; i < CONFIG_NR_DRAM_BANKS; i++) {
->> +               mem_map[index].virt =3D gd->bd->bi_dram[i].start;
->> +               mem_map[index].phys =3D gd->bd->bi_dram[i].start;
->> +               mem_map[index].size =3D gd->bd->bi_dram[i].size;
->> +               mem_map[index].attrs =3D attrs;
->> +               index++;
->> +       }
->> +
->> +       memset(&mem_map[index], 0, sizeof(mem_map[index]));
->> +
->> +       return 0;
->> +}
->
-> Is there a reason we add all the memory maps now and remove them later
-> with mmu_unmap_reserved_mem(). IOW we could add the DT parsing in this
-> function and not map the 'no-map' addresses to begin with.
-> Unless someone changes the DTB on the fly ?
->
+It will be replace by /options/u-boot to configure LED device as
+described here [1]. /options/u-boot will be added directly in kernel
+device tree.
 
-There are two reasons for doing it this way:
+[1] https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/options/u-boot.yaml
 
-1. Modifying mem_map directly makes creating multiple carveouts quite
-complex with the logic for handling all the edge cases, for example see
-v4[1] of this series. It's much simpler to use the MMU APIs instead
-after calling mmu_setup with everything mapped in mem_map.
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-2. We can't blindly unmap all 'no-map' regions since some regions that
-would be 'no-map' in the kernel's context are required at U-Boot, like
-the memory pools for remote cores that rely on U-Boot to load their
-firmware.
+ arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi | 1 -
+ 1 file changed, 1 deletion(-)
 
-Regards,
-Anshul
+diff --git a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+index 7bbb3e00351..b70cd8b52ce 100644
+--- a/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp257f-ev1-u-boot.dtsi
+@@ -7,7 +7,6 @@
+ 
+ / {
+ 	config {
+-		u-boot,boot-led = "led-blue";
+ 		u-boot,mmc-env-partition = "u-boot-env";
+ 	};
+ };
+-- 
+2.43.0
+
+base-commit: f6b80515465bf054eca80f90b383b2e13f979055
+branch: upstream_remove_obsolete_LED_property_from_stm32mp2_boards
