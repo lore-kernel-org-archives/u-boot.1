@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA7ACCD195
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 19:33:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5230CCD195
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 19:33:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 699A583835;
-	Fri, 17 Oct 2025 21:33:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AD89B83873;
+	Fri, 17 Oct 2025 21:33:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="W1eWqWbU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mgE0Jp6+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A9848386D; Fri, 17 Oct 2025 21:33:29 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 95B7083835; Fri, 17 Oct 2025 21:33:29 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FFAE83835
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 21:33:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EBF2B83829
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 21:33:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59HJXNOm2345158;
- Fri, 17 Oct 2025 14:33:23 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59HJXL31349600;
+ Fri, 17 Oct 2025 14:33:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760729603;
- bh=+BITsmJHBtrVX3VatpAe9xy1FPZ8bPGUXMl5qZJH/P0=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=W1eWqWbU/1WK8brY2qlP5EjdJK23FtDgIMdm2t02yYMcZ6FSon2PuMZ9VlYmvT784
- WAlC5+ciEhRdW+uxrEQ74D3bdsgBSTgj2Ll0BzzGTb99f31YEWnX8XgQZJ558dSW+X
- yuOZ/0XJuv+CZsBIISwYpd7PBenOYtWIcmQhwdn0=
-Received: from DFLE211.ent.ti.com (dfle211.ent.ti.com [10.64.6.69])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59HJXNfB2627216
+ s=ti-com-17Q1; t=1760729601;
+ bh=BbZxgYaZXSunJAFSiz+hI0oBFVfB5R/85vVnxDoswa0=;
+ h=From:To:CC:Subject:Date;
+ b=mgE0Jp6++s8ocSfBjv3+hIMkn7Uhfd1MI/8C4XeKanlBtbwD81VOP7WDZ93B89ue0
+ g/UgsyttCgP3nvFc7MyK3PRAuQ4NKF9xZqJFGOTlMonzWgUIXgz5T+3pIg+Ci3HCYt
+ 7zSnrg5r3P32jRhVVSbD2ewnViOHrgbmnhtAhSE8=
+Received: from DLEE211.ent.ti.com (dlee211.ent.ti.com [157.170.170.113])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59HJXLmf2644551
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 17 Oct 2025 14:33:23 -0500
-Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE211.ent.ti.com
- (10.64.6.69) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 17 Oct 2025 14:33:21 -0500
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE211.ent.ti.com
+ (157.170.170.113) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 17 Oct
- 2025 14:33:22 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE205.ent.ti.com
- (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 14:33:21 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 17 Oct 2025 14:33:22 -0500
+ Transport; Fri, 17 Oct 2025 14:33:21 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59HJXL1C1795011;
- Fri, 17 Oct 2025 14:33:22 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59HJXJdm1801561;
+ Fri, 17 Oct 2025 14:33:20 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
@@ -56,12 +56,10 @@ CC: Anshul Dalal <anshuld@ti.com>, <vigneshr@ti.com>, <trini@konsulko.com>,
  <nm@ti.com>, <bb@ti.com>, <kever.yang@rock-chips.com>,
  <hl@rock-chips.com>, <tim@feathertop.org>,
  <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH v4 1/7] spl: Kconfig: add SPL_OS_BOOT_SECURE config symbol
-Date: Sat, 18 Oct 2025 01:03:06 +0530
-Message-ID: <20251017193318.4124997-2-anshuld@ti.com>
+Subject: [PATCH v4 0/7] Add support for secure falcon mode: disable fallback
+Date: Sat, 18 Oct 2025 01:03:05 +0530
+Message-ID: <20251017193318.4124997-1-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251017193318.4124997-1-anshuld@ti.com>
-References: <20251017193318.4124997-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -82,35 +80,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds the new SPL_OS_BOOT_SECURE symbol that enables secure
-boot flow in falcon mode. This symbol can be used to disable certain
-inherently insecure options during falcon boot.
+Hi all,
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Continuing from the last series[1], this patch series addresses the requirement of
+allowing no fallbacks in secure falcon mode.
+
+To do this in a clean way, all the falcon mode logic for each boot media was
+refactored to a corresponding *_load_image_os function whereas the regular
+boot is implemented in *_load_image, this allows us to easily return early in
+case the *_load_image_os function fails with secure mode enabled.
+
+The series also introduces the new SPL_OS_BOOT_SECURE config symbol which
+enables secure falcon boot flow.
+
+The generic flow after the patch series looks as follows:
+
+	static int spl_<bootmedia>_load_image(...) {
+		if (CONFIG_IS_ENABLED(OS_BOOT)) {
+
+			ret = spl_<bootmedia>_load_image_os(...);
+
+			puts("Failcon mode failed\n");
+			if (CONFIG_IS_ENABLED(OS_BOOT_SECURE)) {
+				puts("no fallback allowed!\n");
+				return ret;
+			}
+
+			puts("Falling back to U-Boot\n");
+		}
+
+		/* Regular boot flow */
+	}
+
+Regards,
+Anshul
+
+[1]: https://lore.kernel.org/u-boot/20250923124639.667718-1-anshuld@ti.com/
 ---
- common/spl/Kconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Changes in v4:
+ - Change CONFIG_IS_ENABLED to IS_ENABLED
+ - Fix unused function warnings
+v3: https://lore.kernel.org/u-boot/20251006101057.4172248-1-anshuld@ti.com/
 
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index 4ece5d168f9..ba94d6fe05a 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -1207,6 +1207,14 @@ config SPL_OS_BOOT
- 	  Enable booting directly to an OS from SPL.
- 	  for more info read doc/README.falcon
- 
-+config SPL_OS_BOOT_SECURE
-+	bool "Allow Falcon Mode on secure devices"
-+	depends on SPL_OS_BOOT
-+	help
-+	  This allows for secure devices with signature verification capabilities
-+	  to use falcon mode by disabling certain inherently non-securable options
-+	  in the SPL boot flow.
-+
- config SPL_PAYLOAD_ARGS_ADDR
- 	hex "Address in memory to load 'args' file for Falcon Mode to"
- 	depends on SPL_OS_BOOT || SPL_LOAD_FIT_OPENSBI_OS_BOOT
+Changes in v3:
+ - Remove the patch enabling SPL_OS_BOOT for TI_SECURE_DEVICE
+v2: https://lore.kernel.org/u-boot/20250923130901.705124-1-anshuld@ti.com/
+
+Changes in v2:
+ - Remove extra printf to address SPL size concerns
+v1: https://lore.kernel.org/u-boot/20250916105857.163951-1-anshuld@ti.com/
+---
+Anshul Dalal (7):
+  spl: Kconfig: add SPL_OS_BOOT_SECURE config symbol
+  spl: mmc: split spl_mmc_do_fs_boot into regular/os_boot
+  spl: ubi: refactor spl_ubi_load_image for falcon mode
+  spl: spi: refactor spl_spi_load_image for falcon mode
+  spl: nor: refactor spl_nor_load_image for falcon mode
+  spl: nand: refactor spl_nand_load_image for falcon mode
+  spl: falcon: disable fallback to U-Boot on failure
+
+ common/spl/Kconfig    |   8 ++++
+ common/spl/spl_mmc.c  |  84 +++++++++++++++++++++------------
+ common/spl/spl_nand.c |  95 +++++++++++++++++++++-----------------
+ common/spl/spl_nor.c  | 105 ++++++++++++++++++++++++------------------
+ common/spl/spl_spi.c  |  33 ++++++++++---
+ common/spl/spl_ubi.c  |  46 +++++++++++++-----
+ 6 files changed, 235 insertions(+), 136 deletions(-)
+
 -- 
 2.51.0
 
