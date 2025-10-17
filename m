@@ -4,95 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3860DCCD195
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 21:49:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49B57CCD195
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 21:57:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 838038382E;
-	Fri, 17 Oct 2025 23:49:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id CDC8A8382E;
+	Fri, 17 Oct 2025 23:57:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="ST/YS2dj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bwgb6hs5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E4A283885; Fri, 17 Oct 2025 19:13:52 +0200 (CEST)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 88EE283835; Fri, 17 Oct 2025 23:57:52 +0200 (CEST)
+Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
+ [IPv6:2001:4860:4864:20::2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE56083849
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 19:13:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=redhat.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5CDD283804
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 23:57:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ekovsky@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1760721228;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=c1Gn8T779ZJkrMKF5GXyVeIf55xA0YsVYhUnsLnDV3o=;
- b=ST/YS2djnxMHSXthQKoZKfhDmSEIm1s5CBOpiodYUeNjJRRK7vcbrcabO0xQjzSOHvRUFn
- WXpwTSKHJ97/m7A+uoZ8TqFoHS75wvsJGoxdB1Qp252JmsGsCbisHpA+/UT79tpNaFqmBq
- iA8CBWzYHiWzxj7WeJ3w4Mxb8whzybU=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-362-7V1owxB-Pt-0FS-zryjk3A-1; Fri, 17 Oct 2025 13:13:47 -0400
-X-MC-Unique: 7V1owxB-Pt-0FS-zryjk3A-1
-X-Mimecast-MFC-AGG-ID: 7V1owxB-Pt-0FS-zryjk3A_1760721227
-Received: by mail-qv1-f69.google.com with SMTP id
- 6a1803df08f44-87c1ed305b4so52573346d6.2
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 10:13:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x2d.google.com with SMTP id
+ 586e51a60fabf-3c9a5fd1b72so387236fac.0
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 14:57:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760738269; x=1761343069; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QtUOogGN+0n9/TMSScUiVCoSAbrAH84UtRVG2wy+/Ro=;
+ b=bwgb6hs5kbWO3EG5nILIQhxb+yHxYPKvS8xcrMBtkkhKC2ZgYFXfZ2IzF6vkfjWp7w
+ XJPjB1mQFWpZqADR6lAIntzfEpJqd4OolgDApUTkSLjEISpTvVioN5SXvt8Wa/OiJdvD
+ P86uoB/8LAZAa6RLukKEYqsETQx6UeyS+KqK8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760721227; x=1761326027;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=c1Gn8T779ZJkrMKF5GXyVeIf55xA0YsVYhUnsLnDV3o=;
- b=HwhbWPLbL/fWChyXcwGmIg8ZN4HrQ9sToCYkqmYaWWdZMqmqbIVOHGckSwQWBzFB39
- XlBAo6rpTVQ5ks1raZQb42SOggODc2r9faMmksg9MiPgNxkrNwZ0uHF20N8QLTjvsYeo
- 61pgUaJZLV+eiQ+4rYrYeRHlmkw/Hoy0jwkbv+1aMtU/KO0oVvWjsQ+iXwEbEqZHCuCV
- 4gfxlYFm7Kf9ShIzo2JL6eFAE8qQrc6D09TXodg6ELy6RGHZAGXLygz0CEBURui8uzmY
- Z2gxKpjp0faUptCIcf/lWUrFtDINwnQ7gSNoDAww0oIGAyCwiOsrqTZx/mc4YywUopDg
- 8Trg==
-X-Gm-Message-State: AOJu0Yz5gHZSCB4hkiQexd/q8FyTnDQ2d/wou0cpxZGYYhBMfECRwu1i
- B8lGa4Jb3GI6ZAvJ/dlGHDa+QFn9q7NHMtK3F0FWG0SvfObSfqK1zKw98QwwuX9P3Pjz+0T6JX0
- MPt2T4yZ5cLOLvqG1MpgoyCHGzI+gJIsy8YJG9zMbQHNtt508Ay7PI1s=
-X-Gm-Gg: ASbGncv/aJe2/PLRYEkmpE2DZSgt2cbrpLYZRro6dxw9CcGVEFYPTXYivgKFIWcFMOC
- yzSAc7vFgbwRE+jaxrKWpUURSbfqyjNY/c2UmEJYnQmHyUKRMXl7PX5WUTVCdo8rdRFVGT808fq
- J0pxPnYo4eag+A6CB/Kh71VpnEYSot96SFk9Vpgq7nXpBm/nn4svB2s4NNuMVpcO9tg771rHV1c
- kBsgBEAopvwFfYP1o6AX8IoFk0fSW+MQt1564OjnMSYdzmhjCyrqQHXQU2ShTexAyeLO6AtDhkq
- c9uaYbRdgsU0dQbfLhB/lkfWFqkpNrdV8TuARQZ8kWF6/5vb9pBCsd0Plr5oYgjEm3v6mA==
-X-Received: by 2002:a05:6214:2aaa:b0:77d:bc4e:e0e5 with SMTP id
- 6a1803df08f44-87c2070eb33mr76514926d6.14.1760721226615; 
- Fri, 17 Oct 2025 10:13:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF23lcqY8l9bgWQoRqrYiScd1UqozLuMd40uvrfCH5NnJbxqhU0sTClVt7vZ2SHje5KvC0QOQ==
-X-Received: by 2002:a05:6214:2aaa:b0:77d:bc4e:e0e5 with SMTP id
- 6a1803df08f44-87c2070eb33mr76514186d6.14.1760721226076; 
- Fri, 17 Oct 2025 10:13:46 -0700 (PDT)
-Received: from localhost ([38.246.12.206]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-87d02d8ce5bsm2059076d6.57.2025.10.17.10.13.45
+ d=1e100.net; s=20230601; t=1760738269; x=1761343069;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QtUOogGN+0n9/TMSScUiVCoSAbrAH84UtRVG2wy+/Ro=;
+ b=cPZvFE8CZDaixslM7sxj/Q6i5Cgkb4vt5qGk7nYIssRIxyeIJ8WhDXje8GWfi/fEE8
+ YJnubw1GYanH9ArcetUmA5zcO+1OEOwpcwluH1xNWxXDL4UEp29J/UozJoo3WUfpCofu
+ UtionthtkZxDBqEWIZtk/yh34/cDOkt2msVrRhv56/yE6S1Oo7JvVzpmDiQo+U2t+XMG
+ ERQd78Eu5S1f64SClAwkiAOTCnavs0fsj2V822pZ45UniOUs8g3MmovJ5kArrfpPOREh
+ nZFRCIYUiHPjSNN2hNzPpy+Prq9COeoJlCyq6S+FivopRWicWgvTpPLWdfC/GC4UCvdQ
+ iWhA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXjH7BhcXTVUyI72InBW5sfSqNoMk5xXcLoI5eu5nfhZl9ZhxqPsMoSTSkgmh0M9kpawdOtl8Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4UiVzPkynYVnEqFYtBYhi8MaF0NMivKNvtfDi+6OBVqT2VI4S
+ bHWugKlMB3BYTfnLGVEmd5wewqkCVBPzQECeoV/WIsx4p/1suu3R3NC8pgSqKZzFvyg=
+X-Gm-Gg: ASbGnctN6BMN+Z9g+FdoPlLGE6Nb/NTmZvBE8jArbwBMoZCClbL2IA65nKD8KIdQVn7
+ /mTPmKPocE17Clk3Ql98EXg4xQIT4s6ymMhnIBaGcIYVFv4/H0805D2BW/QlKeNG4Lr9Myxp7kz
+ lDCMoAAaOMVbfo6rkhbLXOG0M1XzKC5eMPRpQFOKL91JiA5W50wrfBsPlIcjB5QykHlYFh3L/88
+ ASHcA5Ka47Wb4u73sIjUHZNDUCZOepxd8wNTcGTscqKHOGw5MKiHjnZRAtlYlnSg+Bf/bAsfylm
+ HRn3FyD5IqzSCoUDfi4cIjtsfgKYw71Qo7X/hZaBRfM6FQJzhkA3uQhUaFRRFVjaLAsUi/AIUWR
+ ke1zmzu/R2FSpNZhVrbuBrR6eDpH60izPaUufigD9hq1Uw5351CN8u9yz4qJF0DpMxpbkZZo89A
+ GK0qY/8+n8eq9Hx9X1Wo6ZQNWzjuaxuyrlJGr78FYr3KLv47S5pw==
+X-Google-Smtp-Source: AGHT+IHplOVuEi24GZdv5DakE4p4wzDfzB6FrTBOd6w1f78Xjfl7HnPQlElfzaNntBI7CYgKh2p9pg==
+X-Received: by 2002:a05:6870:248b:b0:387:3c81:ee9 with SMTP id
+ 586e51a60fabf-3c98d1460aamr2386439fac.51.1760738268977; 
+ Fri, 17 Oct 2025 14:57:48 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-3c9af31d53bsm226370fac.12.2025.10.17.14.57.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Oct 2025 10:13:45 -0700 (PDT)
-From: Eddie Kovsky <ekovsky@redhat.com>
-To: Tom Rini <trini@konsulko.com>, Loic Poulain <loic.poulain@linaro.org>,
- Tobias Olausson <tobias@eub.se>,
+ Fri, 17 Oct 2025 14:57:48 -0700 (PDT)
+Date: Fri, 17 Oct 2025 15:57:45 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Eddie Kovsky <ekovsky@redhat.com>
+Cc: Loic Poulain <loic.poulain@linaro.org>, Tobias Olausson <tobias@eub.se>,
  Paul HENRYS <paul.henrys_ext@softathome.com>,
  Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
- Enric Balletbo i Serra <eballetb@redhat.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] Add support for OpenSSL Provider API
-Date: Fri, 17 Oct 2025 11:13:27 -0600
-Message-ID: <20251017171329.255689-1-ekovsky@redhat.com>
-X-Mailer: git-send-email 2.51.0
+ Enric Balletbo i Serra <eballetb@redhat.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] Add support for OpenSSL Provider API
+Message-ID: <20251017215745.GJ6688@bill-the-cat>
+References: <20251017171329.255689-1-ekovsky@redhat.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-MFC-PROC-ID: Zp6RFC7PZIuNigeRpHrNcmEXaPpY1pyMh4Q6_I3fJfE_1760721227
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-content-type: text/plain; charset="US-ASCII"; x-default=true
-X-Mailman-Approved-At: Fri, 17 Oct 2025 23:49:48 +0200
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gEWrkq38sKS+WNEC"
+Content-Disposition: inline
+In-Reply-To: <20251017171329.255689-1-ekovsky@redhat.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,304 +101,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Engine API has been deprecated since the release of OpenSSL 3.0. End users
-have been advised to migrate to the new Provider interface. Several
-distributions have already removed support for engines, which is preventing
-U-Boot from being compiled in those environments.
 
-The Kconfig option OPENSSL_NO_DEPRECATED introduces support for the Provider API
-while continuing to use the existing Engine API on distros shipping older
-releases of OpenSSL.
+--gEWrkq38sKS+WNEC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This is based on similar work contributed by Jan Stancek
-updating Linux to use the Provider interface.
+On Fri, Oct 17, 2025 at 11:13:27AM -0600, Eddie Kovsky wrote:
 
-    commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
-    Author: Jan Stancek <jstancek@redhat.com>
-    Date:   Fri Sep 20 19:52:48 2024 +0300
+> The Engine API has been deprecated since the release of OpenSSL 3.0. End =
+users
+> have been advised to migrate to the new Provider interface. Several
+> distributions have already removed support for engines, which is preventi=
+ng
+> U-Boot from being compiled in those environments.
+>=20
+> The Kconfig option OPENSSL_NO_DEPRECATED introduces support for the Provi=
+der API
+> while continuing to use the existing Engine API on distros shipping older
+> releases of OpenSSL.
+>=20
+> This is based on similar work contributed by Jan Stancek
+> updating Linux to use the Provider interface.
+>=20
+>     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+>     Author: Jan Stancek <jstancek@redhat.com>
+>     Date:   Fri Sep 20 19:52:48 2024 +0300
+>=20
+>         sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >=
+=3D 3
+>=20
+> The changes have been tested with the FIT signature verification vboot te=
+sts on
+> Fedora 42 and Debian 13. All 30 tests pass with both the legacy Engine li=
+brary
+> installed and with the Provider API.
+>=20
+> Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+> ---
+>  lib/aes/aes-encrypt.c |  2 +
+>  lib/rsa/Kconfig       |  8 ++++
+>  lib/rsa/rsa-sign.c    | 93 ++++++++++++++++++++++++++++++++++++++++++-
+>  3 files changed, 101 insertions(+), 2 deletions(-)
 
-        sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
+Thanks for doing this, I'm glad to see the work, and my comments are
+really style things to fix up and v2 once there's been time for real
+content comments if any.
 
-The changes have been tested with the FIT signature verification vboot tests on
-Fedora 42 and Debian 13. All 30 tests pass with both the legacy Engine library
-installed and with the Provider API.
+[snip]
+> diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
+> index 9033384e60a3..622f06f8dba0 100644
+> --- a/lib/rsa/Kconfig
+> +++ b/lib/rsa/Kconfig
+> @@ -20,6 +20,14 @@ config SPL_RSA
+>  	bool "Use RSA Library within SPL"
+>  	depends on SPL
+> =20
+> +config OPENSSL_NO_DEPRECATED
+> +	bool "Build U-Boot without support for OpenSSL Engine"
+> +	default n
 
-Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
----
- lib/aes/aes-encrypt.c |  2 +
- lib/rsa/Kconfig       |  8 ++++
- lib/rsa/rsa-sign.c    | 93 ++++++++++++++++++++++++++++++++++++++++++-
- 3 files changed, 101 insertions(+), 2 deletions(-)
+This is the default, you can drop this.
 
-diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
-index 90e1407b4f09..9595772cf58b 100644
---- a/lib/aes/aes-encrypt.c
-+++ b/lib/aes/aes-encrypt.c
-@@ -16,7 +16,9 @@
- #include <openssl/err.h>
- #include <openssl/ssl.h>
- #include <openssl/evp.h>
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- #include <openssl/engine.h>
-+#endif
- #include <uboot_aes.h>
- 
- #if OPENSSL_VERSION_NUMBER >= 0x10000000L
-diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
-index 9033384e60a3..622f06f8dba0 100644
---- a/lib/rsa/Kconfig
-+++ b/lib/rsa/Kconfig
-@@ -20,6 +20,14 @@ config SPL_RSA
- 	bool "Use RSA Library within SPL"
- 	depends on SPL
- 
-+config OPENSSL_NO_DEPRECATED
-+	bool "Build U-Boot without support for OpenSSL Engine"
-+	default n
-+	help
-+	  Add support for the OpenSSL Provider API, which is the officially
-+	  supported mechanism in OpenSSL 3.x and later releases for accessing
-+	  hardware and software cryptography.
-+
- config SPL_RSA_VERIFY
- 	bool
- 	depends on SPL_RSA
-diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
-index 92b9d7876e52..9ebbcdfd52f3 100644
---- a/lib/rsa/rsa-sign.c
-+++ b/lib/rsa/rsa-sign.c
-@@ -19,15 +19,51 @@
- #include <openssl/err.h>
- #include <openssl/ssl.h>
- #include <openssl/evp.h>
-+#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
-+#include <err.h>
-+#include <openssl/provider.h>
-+#include <openssl/store.h>
-+#else
- #include <openssl/engine.h>
-+#endif // CONFIG_OPENSSL_NO_DEPRECATED
-+
-+#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
-+#define ERR(cond, fmt, ...)				\
-+	do {						\
-+		bool __cond = (cond);			\
-+		drain_openssl_errors(__LINE__, 0);	\
-+		if (__cond) {				\
-+			errx(1, fmt, ## __VA_ARGS__);	\
-+		}					\
-+	} while (0)
-+
-+static void drain_openssl_errors(int l, int silent)
-+{
-+	const char *file;
-+	char buf[120];
-+	int e, line;
-+
-+	if (ERR_peek_error() == 0)
-+		return;
-+	if (!silent)
-+		fprintf(stderr, "At main.c:%d:\n", l);
-+
-+	while ((e = ERR_peek_error_line(&file, &line))) {
-+		ERR_error_string(e, buf);
-+		if (!silent)
-+			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
-+		ERR_get_error();
-+	}
-+}
-+#endif // CONFIG_OPENSSL_NO_DEPRECATED
- 
- static int rsa_err(const char *msg)
- {
--	unsigned long sslErr = ERR_get_error();
-+	unsigned long ssl_err = ERR_get_error();
- 
- 	fprintf(stderr, "%s", msg);
- 	fprintf(stderr, ": %s\n",
--		ERR_error_string(sslErr, 0));
-+		ERR_error_string(ssl_err, 0));
- 
- 	return -1;
- }
-@@ -98,6 +134,7 @@ err_cert:
-  * @evpp	Returns EVP_PKEY object, or NULL on failure
-  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
-  */
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- static int rsa_engine_get_pub_key(const char *keydir, const char *name,
- 				  ENGINE *engine, EVP_PKEY **evpp)
- {
-@@ -157,6 +194,7 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
- 
- 	return 0;
- }
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 
- /**
-  * rsa_get_pub_key() - read a public key
-@@ -170,8 +208,10 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
- static int rsa_get_pub_key(const char *keydir, const char *name,
- 			   ENGINE *engine, EVP_PKEY **evpp)
- {
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- 	if (engine)
- 		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 	return rsa_pem_get_pub_key(keydir, name, evpp);
- }
- 
-@@ -207,6 +247,37 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
- 		return -ENOENT;
- 	}
- 
-+#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
-+	EVP_PKEY *private_key = NULL;
-+	OSSL_STORE_CTX *store;
-+
-+	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
-+		ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
-+	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
-+		ERR(1, "OSSL_PROVIDER_try_load(default)");
-+
-+	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
-+	ERR(!store, "OSSL_STORE_open");
-+
-+	while (!OSSL_STORE_eof(store)) {
-+		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
-+
-+		if (!info) {
-+			drain_openssl_errors(__LINE__, 0);
-+			continue;
-+		}
-+		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
-+			private_key = OSSL_STORE_INFO_get1_PKEY(info);
-+			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
-+		}
-+		OSSL_STORE_INFO_free(info);
-+		if (private_key)
-+			break;
-+	}
-+	OSSL_STORE_close(store);
-+
-+	*evpp = private_key;
-+#else
- 	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
- 		rsa_err("Failure reading private key");
- 		fclose(f);
-@@ -214,6 +285,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
- 	}
- 	fclose(f);
- 
-+#endif // CONFIG_OPENSSL_NO_DEPRECATED
- 	return 0;
- }
- 
-@@ -226,6 +298,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
-  * @evpp	Returns EVP_PKEY object, or NULL on failure
-  * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
-  */
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- static int rsa_engine_get_priv_key(const char *keydir, const char *name,
- 				   const char *keyfile,
- 				   ENGINE *engine, EVP_PKEY **evpp)
-@@ -293,6 +366,7 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
- 
- 	return 0;
- }
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 
- /**
-  * rsa_get_priv_key() - read a private key
-@@ -306,9 +380,11 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
- static int rsa_get_priv_key(const char *keydir, const char *name,
- 			    const char *keyfile, ENGINE *engine, EVP_PKEY **evpp)
- {
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- 	if (engine)
- 		return rsa_engine_get_priv_key(keydir, name, keyfile, engine,
- 					       evpp);
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 	return rsa_pem_get_priv_key(keydir, name, keyfile, evpp);
- }
- 
-@@ -325,6 +401,7 @@ static int rsa_init(void)
- 	return 0;
- }
- 
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- static int rsa_engine_init(const char *engine_id, ENGINE **pe)
- {
- 	const char *key_pass;
-@@ -380,6 +457,7 @@ static void rsa_engine_remove(ENGINE *e)
- 		ENGINE_free(e);
- 	}
- }
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 
- static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
- 			     struct checksum_algo *checksum_algo,
-@@ -480,11 +558,13 @@ int rsa_sign(struct image_sign_info *info,
- 	if (ret)
- 		return ret;
- 
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- 	if (info->engine_id) {
- 		ret = rsa_engine_init(info->engine_id, &e);
- 		if (ret)
- 			return ret;
- 	}
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 
- 	ret = rsa_get_priv_key(info->keydir, info->keyname, info->keyfile,
- 			       e, &pkey);
-@@ -496,16 +576,21 @@ int rsa_sign(struct image_sign_info *info,
- 		goto err_sign;
- 
- 	EVP_PKEY_free(pkey);
-+
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- 	if (info->engine_id)
- 		rsa_engine_remove(e);
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 
- 	return ret;
- 
- err_sign:
- 	EVP_PKEY_free(pkey);
- err_priv:
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- 	if (info->engine_id)
- 		rsa_engine_remove(e);
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 	return ret;
- }
- 
-@@ -645,11 +730,13 @@ int rsa_add_verify_data(struct image_sign_info *info, void *keydest)
- 	ENGINE *e = NULL;
- 
- 	debug("%s: Getting verification data\n", __func__);
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- 	if (info->engine_id) {
- 		ret = rsa_engine_init(info->engine_id, &e);
- 		if (ret)
- 			return ret;
- 	}
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 	ret = rsa_get_pub_key(info->keydir, info->keyname, e, &pkey);
- 	if (ret)
- 		goto err_get_pub_key;
-@@ -726,8 +813,10 @@ done:
- err_get_params:
- 	EVP_PKEY_free(pkey);
- err_get_pub_key:
-+#ifndef CONFIG_OPENSSL_NO_DEPRECATED
- 	if (info->engine_id)
- 		rsa_engine_remove(e);
-+#endif // !CONFIG_OPENSSL_NO_DEPRECATED
- 
- 	if (ret)
- 		return ret;
--- 
-2.51.0
+[snip]
+> diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
+> index 92b9d7876e52..9ebbcdfd52f3 100644
+> --- a/lib/rsa/rsa-sign.c
+> +++ b/lib/rsa/rsa-sign.c
+> @@ -19,15 +19,51 @@
+>  #include <openssl/err.h>
+>  #include <openssl/ssl.h>
+>  #include <openssl/evp.h>
+> +#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
+> +#include <err.h>
+> +#include <openssl/provider.h>
+> +#include <openssl/store.h>
+> +#else
+>  #include <openssl/engine.h>
+> +#endif // CONFIG_OPENSSL_NO_DEPRECATED
 
+Two things (here and elsewhere). One, since we're generally using
+'#ifndef CONFIG_OPENSSL_NO_DEPRECATED' just using '#ifdef
+CONFIG_OPENSSL_NO_DEPRECATED' is fine, using a macro here is not aiding
+readability. Two, if the if/else/endif is within the patch context we
+really don't need a comment on the endif part.
+
+--=20
+Tom
+
+--gEWrkq38sKS+WNEC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPK71gAKCRAr4qD1Cr/k
+Cm5FAQCGLwu//mJjn2+NO7banCmQ/w2xzlEaRUlrnV+ogbCCGwEAn8pgc0lrfh1Z
+3ffV092rtgglmEkseyB5zsd2HqSGPwc=
+=kxu0
+-----END PGP SIGNATURE-----
+
+--gEWrkq38sKS+WNEC--
