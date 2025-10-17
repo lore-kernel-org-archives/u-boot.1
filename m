@@ -4,69 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7D28CCD1A5
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:17:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCC54CCD195
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:19:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E99E4838AB;
-	Fri, 17 Oct 2025 15:16:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1571083869;
+	Fri, 17 Oct 2025 15:19:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E8ZHXq7o";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="1xwAyp0t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97AED837E4; Fri, 17 Oct 2025 15:16:15 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D95ED838CE
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:16:12 +0200 (CEST)
+ id CCCA783893; Fri, 17 Oct 2025 15:19:24 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E8B983804
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:19:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59HDFtBG2368706;
- Fri, 17 Oct 2025 08:15:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760706955;
- bh=/nI2avJ1/J2gfPhns/vxfnIRBL1EBe+4qRn478aWoAg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=E8ZHXq7oJ2CDC9D5WTrMf+Xz2l8Nms1iLnbBzmpddPwoKaff3Hxe1rl1OdXd1n35G
- zn+IbyNSNC9l/bi9puo8Z3Jf25H8kXDFXXSbMBNacDmaAEdZcooSxgPggXqDLXMPJ/
- xkaBtpIMILwoZGARMp4DqE3gGV2VxpiQ7i6Ens/8=
-Received: from DLEE208.ent.ti.com (dlee208.ent.ti.com [157.170.170.97])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59HDFtFc2419237
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 17 Oct 2025 08:15:55 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 17 Oct
- 2025 08:15:55 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 17 Oct 2025 08:15:55 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59HDFsB31343086;
- Fri, 17 Oct 2025 08:15:55 -0500
-From: Anshul Dalal <anshuld@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
- <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
- <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
- <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
- <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
- <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v11 07/11] arm: armv8: mmu: add mmu_unmap_reserved_mem
-Date: Fri, 17 Oct 2025 18:45:29 +0530
-Message-ID: <20251017131540.3636067-8-anshuld@ti.com>
-X-Mailer: git-send-email 2.51.0
-In-Reply-To: <20251017131540.3636067-1-anshuld@ti.com>
-References: <20251017131540.3636067-1-anshuld@ti.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4711825a02bso7809835e9.2
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 06:19:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1760707162; x=1761311962;
+ darn=lists.denx.de; 
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YDPAkJzKorzhbUpcgx26glYcltCHd+VB2sVfGsT+Tm4=;
+ b=1xwAyp0tfPFdhW7YipyapupJ7ZtIZt51A5fGcfrHy4efu72brrxZGvxzlZ3dorxiPh
+ bwrlbW3gDZSyhh7HgChJg3wVVy/i8yboDlM7KADVEEpekVSql9rs8YSCSAPC7RtUoEje
+ N2JfB7qyPvTCSUCxv3g4mu4hUt0FhfAjamKmywzzH8SwcIKjdayGoaqKJR8tH5T9a1OA
+ HdCwHXBw7trhn2MXkc9GGBGvkB2Ehb521RrZOSGir7TKaO6zPTayHijBhwd40IYuQTKj
+ BX09AqnlNuSYC/jNlqnpAI6PYBdPId+GdLa7ol3yxS3fNS1qHiv2Q//B1Bd8KTdlYK79
+ HJNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760707162; x=1761311962;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YDPAkJzKorzhbUpcgx26glYcltCHd+VB2sVfGsT+Tm4=;
+ b=rRKrZyM1VIhcH5Pg8yXJgzm0ALaePJaYBVewY5UEBQw7KGnDVCHiW1e2uzFQcEtzE3
+ a35zZuXk5X8qNuPar2eq68PXFV02DYn5GFz1OdcOgpSUhjUJADjAXvCmidhqvZ9q8abC
+ H+rXZbAIZ7jnjwuD+M7bojHXh6KAt8/mTtwvZh4inDn1jHPeBUHiBULPXqML+Kl3Mm9Z
+ 4RB6CXQylXH6ZZgf0N3TbBgP4EaV1walCFRg6Hg9wCeTgLwHyKVcstWc1aUD4B23zZzd
+ IZ0Us6lrVTZkRssKE3PTmJCJiPszVrW99ouokjNRqnGJyEBrwrSbG0KZf7d5/AYjCmmj
+ jpSw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUDvquRLvLArNxZ/5UJlIFoPtzdBxpdEmGOsiN/EmlnUdlJOpF1tLxzK4U7qBdGh4zOSOJBthw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwcwJ++nTjqeLmK97+xzt+GdhWZv9RwZ+C4zbJhLG0JV4l9dksy
+ WDyChDnKwi8Ob9w1YRefsepugNLZIQbvKa8VVp5k5pcRcw3oZgDiNICrEOwcJgOxiO8=
+X-Gm-Gg: ASbGnct7AxPfKdU3KFxkQsnm5HAgumuMIWDOoNupQqx/nhiGmYWgpfD2EiUQ4iXP+PM
+ v47WDX0vW+6ZzJ/vy0X7wV4PTMYCouEmQatXedpN5FhOcvjVZ0S/wnE+9T++WMwu0JA95xD/6YJ
+ kq6MsXs8ikquFA0S0ul1kyDAIgjwGXPl+1GWC+ZtHveQktGmEJQ6TFnNWeYhEkYZss2PGFiCU31
+ yGhhO0RvYguyVLeyvY9nP/t5U0tPwFU+fGklK3iyZn3+IdXqexX31PSTEKbbOP0XX1IGWbrv28/
+ HZCKESEAYDBLmEFcY11o6DmQdKhILxYQcFvFOLYr9osCGXrNzWqNFLs1P/SiLPAkwhFVJrwUQav
+ arJlO77shBDvO/lMjC5ErnqlRD7+YumCxMHvqSILlfBIT0OOlv55oT2EO31ia4fbdaijnexFchD
+ ehEbxsqz6+Smfp/sBlLGaGN6v2
+X-Google-Smtp-Source: AGHT+IFQ5T1UJTff2K3ai8FPQvwifFgLhD8aySE5s2f5rQTiW12oFlLQ056/NDH1eQ69YA7h27mjEA==
+X-Received: by 2002:a05:600c:820b:b0:471:1717:40a with SMTP id
+ 5b1f17b1804b1-471178a8245mr27071605e9.18.1760707161830; 
+ Fri, 17 Oct 2025 06:19:21 -0700 (PDT)
+Received: from [127.0.1.1] ([2a01:e0a:e50:3860:4f9d:9005:7d78:d1f4])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4710f2ab58bsm44395465e9.10.2025.10.17.06.19.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Oct 2025 06:19:21 -0700 (PDT)
+From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Subject: [PATCH v2 0/5] android: add bootconfig support
+Date: Fri, 17 Oct 2025 15:19:16 +0200
+Message-Id: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFRC8mgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
+ vPSU3UzU4B8JSMDIxNDQyML3aT8/JLk/Ly0zHRdI3OzVCMT86RUS0sjJaCGgqLUtMwKsGHRsbW
+ 1AKzHLA5cAAAA
+X-Change-ID: 20241128-bootconfig-276e247be992
+To: Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Cc: Julien Masson <jmasson@baylibre.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>, 
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
+ Maxime Fournier <mfournier@baylibre.com>
+X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,86 +111,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
-the MMU's page tables, done by mmu_setup.
+This patchset add support of android bootconfig partition[1] in u-boot.
+With Android boot image v4, all androidboot.* arguments must be
+passed via bootconfig instead of using the kernel commandline.
 
-Though this works well for simpler platforms, it makes creating runtime
-carveouts by modifying the static array at runtime exceedingly complex
-like in mach-snapdragon/board.c.
+[1] https://source.android.com/docs/core/architecture/bootloader/implementing-bootconfig
 
-Creation of such carveouts are much better handled by APIs such as
-mmu_change_region_attr once the page tables are configured. Usually such
-carveouts are configured via the device-tree's reserved-memory node
-which provides the address and size for the carveout.
-
-Therefore this patch adds mmu_unmap_reserved_mem which acts as a wrapper
-over mmu_change_region_attr, helping unmap a reserved-memory region.
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
-Tested-by: Wadim Egorov <w.egorov@phytec.de>
+Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 ---
- arch/arm/cpu/armv8/cache_v8.c    | 26 ++++++++++++++++++++++++++
- arch/arm/include/asm/armv8/mmu.h |  9 +++++++++
- 2 files changed, 35 insertions(+)
+Changes in v2:
+- Add test
+- Add new command to be able to load and read bootconfig before booting
+- Somes fixes to works with sandbox test
+- Link to v1: https://lore.kernel.org/all/20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com/
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 9b3c37dae82..672ec16d483 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -86,6 +86,32 @@ int mem_map_from_dram_banks(unsigned int index, unsigned int len, u64 attrs)
- 
- 	return 0;
- }
-+
-+int mmu_unmap_reserved_mem(const char *name, bool check_nomap)
-+{
-+	void *fdt = (void *)gd->fdt_blob;
-+	char node_path[128];
-+	fdt_addr_t addr;
-+	fdt_size_t size;
-+	int ret;
-+
-+	snprintf(node_path, sizeof(node_path), "/reserved-memory/%s", name);
-+	ret = fdt_path_offset(fdt, node_path);
-+	if (ret < 0)
-+		return ret;
-+
-+	if (check_nomap && !fdtdec_get_bool(fdt, ret, "no-map"))
-+		return -EINVAL;
-+
-+	addr = fdtdec_get_addr_size(fdt, ret, "reg", &size);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -1;
-+
-+	mmu_change_region_attr_nobreak(addr, size, PTE_TYPE_FAULT);
-+
-+	return 0;
-+}
-+
- u64 get_tcr(u64 *pips, u64 *pva_bits)
- {
- 	int el = get_effective_el();
-diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-index 6e7a3366844..8aa5f9721c4 100644
---- a/arch/arm/include/asm/armv8/mmu.h
-+++ b/arch/arm/include/asm/armv8/mmu.h
-@@ -207,6 +207,15 @@ void setup_pgtables(void);
-  */
- int mem_map_from_dram_banks(unsigned int index, unsigned int len, u64 attrs);
- 
-+/**
-+ * mmu_unmap_reserved_mem() - Unmaps a reserved-memory node as PTE_TYPE_FAULT
-+ * once MMU is configured by mmu_setup.
-+ *
-+ * @name: The name of the node under "/reserved-memory/" path
-+ * @check_nomap: Check if the node is marked "no-map" before unmapping it
-+ */
-+int mmu_unmap_reserved_mem(const char *name, bool check_nomap);
-+
- u64 get_tcr(u64 *pips, u64 *pva_bits);
- 
- /**
+---
+Guillaume La Roque (TI.com) (4):
+      boot: android: Add sandbox memory mapping support
+      boot: android: Add bootconfig support
+      cmd: abootimg: Add 'get ramdisk' command
+      test: abootimg: Add test for bootconfig handling
+
+Mattijs Korpershoek (TI.com) (1):
+      boot: android: import addBootConfigParameters() from AOSP
+
+ boot/image-android.c                        | 180 ++++++++++++++++++++++++----
+ cmd/abootimg.c                              |  35 +++++-
+ test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++--
+ 3 files changed, 292 insertions(+), 31 deletions(-)
+---
+base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
+change-id: 20241128-bootconfig-276e247be992
+
+Best regards,
 -- 
-2.51.0
+Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 
