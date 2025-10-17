@@ -4,55 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47EFDCCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 23:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F4CCCD184
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 23:28:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D232483885;
-	Sat, 18 Oct 2025 01:11:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id AD66383804;
+	Sat, 18 Oct 2025 01:28:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DG4LbVQb";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="h4Z/rvP8";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB4A6838A0; Sat, 18 Oct 2025 01:11:53 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A95B383804
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 01:11:51 +0200 (CEST)
+ id D1A048382E; Sat, 18 Oct 2025 01:28:18 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9465D83771
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 01:28:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1B9B71063;
- Fri, 17 Oct 2025 16:11:43 -0700 (PDT)
-Received: from [192.168.178.132] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E26C13F66E;
- Fri, 17 Oct 2025 16:11:46 -0700 (PDT)
-Message-ID: <7faa8c8a-cc41-4108-bee9-ef7e24af94ce@arm.com>
-Date: Sat, 18 Oct 2025 00:11:36 +0100
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cpLbh2hRtz9tQq;
+ Sat, 18 Oct 2025 01:28:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1760743696;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=8wKOL9lMGd3bpxUFFfT1u8ixsZ86lXvCNbFtuUiAbuM=;
+ b=DG4LbVQbTc/k0/5dZn07G8GiqiXFv89J898F67WpMRjxDWUSEx+9Rk5L1V6rajx0Utfx+P
+ zZDu4b/rDzGfE31SBP8a2ZdZsD6fOci4awIqx1e3q+9HfJQialV71itb4V757MaMC7pjtS
+ xMIEkJt7YtH0gys+w0+cKIRxVm9lMX5upkdeOl2Wl0+x8IDPi12mPlnGh5J1t/fUfne1DV
+ lxSojPu/gE/AV2GBHP2ijWghCwWMYXp6sr9b9l5ICNLMpIE+Yr3wSFt2FpiZ7hSBjtrZCY
+ AChh9kGttC63l5S0YguOzZWGIM/DXjlVDwJWoNgpjgIJQN9+22sNN142lLKBSQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1760743694;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=8wKOL9lMGd3bpxUFFfT1u8ixsZ86lXvCNbFtuUiAbuM=;
+ b=h4Z/rvP8HJ6mmgUot2Qy2RlcrEGWhnzEXuTZQsaycyYrR8piIvVg9liav9YR4klEB3onGY
+ f1TXFjn1Us0Q+1+uoLSXU/T2OVOXQ73leSErgL303XwSZYR0IP+eFJD64sTt2cMiWxToXx
+ IpIyWLfSd7mjMUBjoEq7dUOnpySVf2MSN/cPJ2S3HKG0JDUQe6CzlkjReFkUzjwMZoucxt
+ pWPgY1b9Q2rs7/G1+T+zDsjh6ECR1olMoDYghKaV1cfMcoWGjQl3SiyKV4WyFu/Ig2e66H
+ mKi00ayH0UClns5cofm8gTtZm2/Q+h3RafCdXdGE9l7FrJGM2Aiuue2zod4obw==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Sat, 18 Oct 2025 01:25:52 +0200
+Message-ID: <20251017232759.151857-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/24] mtd: rawnand: sunxi: cosmetic: add
- has_ecc_block_512 capability
-To: Richard Genoud <richard.genoud@bootlin.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
- Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Andrey Skvortsov <andrej.skvortzov@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Anand Gore <anand.gore@broadcom.com>,
- Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20251016142752.2627710-1-richard.genoud@bootlin.com>
- <20251016142752.2627710-12-richard.genoud@bootlin.com>
-Content-Language: en-US
-From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <20251016142752.2627710-12-richard.genoud@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: ac80796af2aaac11c22
+X-MBO-RS-META: twhryx3d9841a8a5ix6rg8pktjfjsa1u
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,104 +82,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+SH HSCIF FIFO fixes, R-Car V4H/V4M DT corrections, R-Car V4H Sparrow Hawk PCIe
+shutdown support before booting Linux.
 
-On 16/10/2025 15:27, Richard Genoud wrote:
-> Introduce has_ecc_block_512 capability
-> 
-> The H616 controller can't handle 512 bytes ECC block size.
-> Let it be a capability.
-> 
-> No functional change.
-> 
-> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
-> ---
->   drivers/mtd/nand/raw/sunxi_nand.c | 14 +++++++++++---
->   drivers/mtd/nand/raw/sunxi_nand.h |  2 ++
->   2 files changed, 13 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-> index 869b3ddd971c..fddb1cada023 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand.c
-> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
-> @@ -660,11 +660,12 @@ static void sunxi_nfc_hw_ecc_enable(struct mtd_info *mtd)
->   	u32 ecc_ctl;
->   
->   	ecc_ctl = readl(nfc->regs + NFC_REG_ECC_CTL);
-> -	ecc_ctl &= ~(NFC_ECC_MODE_MSK | NFC_ECC_PIPELINE |
-> -		     NFC_ECC_BLOCK_SIZE_MSK);
-> +	ecc_ctl &= ~(NFC_ECC_MODE_MSK | NFC_ECC_PIPELINE);
-> +	if (nfc->caps->has_ecc_block_512)
-> +		ecc_ctl &= ~NFC_ECC_BLOCK_SIZE_MSK;
+The following changes since commit bf1d8c1fec863b7da2f0d1ed4bd5526275d70dc2:
 
-So if I get this correctly, then NFC_ECC_BLOCK_SIZE_MSK and 
-NFC_ECC_BLOCK_512 are referring to the same single bit register field, 
-in bit 5? Can we lose the MSK definition then, and clear the field 
-unconditionally? Or is it that on the H6/H616 we must never touch bit 5, 
-because it refers to something else (NDFC_RANDOM_EN?)?
-In any case I think we don't need identical MSK and BLOCK_512 
-definitions, do we?
+  test/py: Update to a newer pytest release (2025-10-16 18:03:27 -0600)
 
-By the way: Do you have any MMIO frame register description for the old 
-NAND device? I checked some of the older manuals, but the ones I looked 
-at were only showing timing diagrams, but no register map.
+are available in the Git repository at:
 
-Cheers,
-Andre
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
 
->   	ecc_ctl |= NFC_ECC_EN | NFC_ECC_MODE(data->mode) | NFC_ECC_EXCEPTION;
->   
-> -	if (nand->ecc.size == 512)
-> +	if (nand->ecc.size == 512 && nfc->caps->has_ecc_block_512)
->   		ecc_ctl |= NFC_ECC_BLOCK_512;
->   
->   	writel(ecc_ctl, nfc->regs + NFC_REG_ECC_CTL);
-> @@ -1454,6 +1455,8 @@ static void sunxi_nand_ecc_cleanup(struct nand_ecc_ctrl *ecc)
->   static int sunxi_nand_ecc_init(struct mtd_info *mtd, struct nand_ecc_ctrl *ecc)
->   {
->   	struct nand_chip *nand = mtd_to_nand(mtd);
-> +	struct sunxi_nand_chip *sunxi_nand = to_sunxi_nand(nand);
-> +	struct sunxi_nfc *nfc = to_sunxi_nfc(sunxi_nand->nand.controller);
->   	int ret;
->   
->   	if (!ecc->size) {
-> @@ -1464,6 +1467,10 @@ static int sunxi_nand_ecc_init(struct mtd_info *mtd, struct nand_ecc_ctrl *ecc)
->   	if (!ecc->size || !ecc->strength)
->   		return -EINVAL;
->   
-> +	/* If 512B ECC is not supported, switch to 1024 */
-> +	if (ecc->size == 512 && !nfc->caps->has_ecc_block_512)
-> +		ecc->size = 1024;
-> +
->   	switch (ecc->mode) {
->   	case NAND_ECC_SOFT_BCH:
->   		break;
-> @@ -1715,6 +1722,7 @@ static int sunxi_nand_probe(struct udevice *dev)
->   }
->   
->   static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
-> +	.has_ecc_block_512 = true,
->   	.nstrengths = 9,
->   	.reg_ecc_err_cnt = NFC_REG_A10_ECC_ERR_CNT,
->   	.reg_user_data = NFC_REG_A10_USER_DATA,
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
-> index 35079d37bb1f..be294d7cea0a 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand.h
-> +++ b/drivers/mtd/nand/raw/sunxi_nand.h
-> @@ -169,6 +169,7 @@
->    * NAND Controller capabilities structure: stores NAND controller capabilities
->    * for distinction between compatible strings.
->    *
-> + * @has_ecc_block_512:	If the ECC can handle 512B or only 1024B chuncks
->    * @nstrengths:		Number of element of ECC strengths array
->    * @reg_ecc_err_cnt:	ECC error counter register
->    * @reg_user_data:	User data register
-> @@ -176,6 +177,7 @@
->    * @pat_found_mask:	ECC_PAT_FOUND mask in NFC_REG_PAT_FOUND register
->    */
->   struct sunxi_nfc_caps {
-> +	bool has_ecc_block_512;
->   	unsigned int nstrengths;
->   	unsigned int reg_ecc_err_cnt;
->   	unsigned int reg_user_data;
+for you to fetch changes up to b9efaf6729d06df94ded46710725746a41eaf0fc:
 
+  ARM: dts: renesas: Disable RPC driver on R8A779H0 V4M Gray Hawk board (2025-10-18 00:19:03 +0200)
+
+----------------------------------------------------------------
+Marek Vasut (5):
+      pci: pcie-rcar-gen4: Shut down controller on link down and remove
+      arm64: renesas: r8a779g3: Reset PCIe before next stage on Retronix R-Car V4H Sparrow Hawk
+      serial: sh: Handle HSCIF RX FIFO overflow
+      ARM: dts: renesas: Disable R8A779G0 V4H White Hawk RPC SPI DT node again
+      ARM: dts: renesas: Reinstate R8A779H0 V4M U-Boot DTs
+
+Nguyen Tran (1):
+      ARM: dts: renesas: Disable RPC driver on R8A779H0 V4M Gray Hawk board
+
+ arch/arm/dts/r8a779g0-white-hawk-u-boot.dtsi       |  2 ++
+ arch/arm/dts/r8a779h0-gray-hawk-single-u-boot.dtsi | 41 ++++++++++++++++++++++
+ arch/arm/dts/r8a779h0-u-boot.dtsi                  | 11 ++++++
+ board/renesas/sparrowhawk/sparrowhawk.c            | 27 ++++++++++++++
+ drivers/pci/pci-rcar-gen4.c                        | 26 ++++++++++++++
+ drivers/serial/serial_sh.c                         | 11 +++++-
+ 6 files changed, 117 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/r8a779h0-gray-hawk-single-u-boot.dtsi
+ create mode 100644 arch/arm/dts/r8a779h0-u-boot.dtsi
