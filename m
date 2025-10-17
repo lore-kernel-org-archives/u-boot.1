@@ -4,171 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3A93CCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 14:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106B5CCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 15:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 346FB83852;
-	Fri, 17 Oct 2025 16:38:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 5253E83829;
+	Fri, 17 Oct 2025 17:01:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="PmHuAGid";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="oP8pKA+f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 005A5838AA; Fri, 17 Oct 2025 16:38:21 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 206DF8382E; Fri, 17 Oct 2025 17:01:20 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E7A183700
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 16:38:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 228DB83734
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 17:01:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=2385461c55=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 59HDc1BT012156;
- Fri, 17 Oct 2025 16:38:16 +0200
-Received: from db3pr0202cu003.outbound.protection.outlook.com
- (mail-northeuropeazon11010064.outbound.protection.outlook.com [52.101.84.64])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 49qfe6qcga-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 17 Oct 2025 16:38:15 +0200 (MEST)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aYfFKBT5v8Xo1wHS2UcOwZdQkS6quzTNn5mLWqXBFlljqloRuSdWy/dIFXP2X23LYSuHNmBKW1aIe0jedXFMkvB9m9s9T9VEdQts/BbnmnAl/JeH3rtQEmQeNXuUI9tmr4XuR8t06aHu0XiLQajkjhCzPfVkwtd9P2/ue7Wg8bBPx54WIGkdGisXFNMgYGb0viMEuW0Xx8fk6BsYMr6QPZchklzqs8om17VaD5K2/QafT9YjKErBS2lQXm+wnwAxyVavlKesYqBDo4G74oTxtu0BsDXzu6EXIhKJHnS303Tty7ElUPE2wFHwnrNbwz5k8lRa/xmHGcn7bBfn6qcm8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+ogdynMMjxJE8ru9SoJa1eQVGaLm9kozMpUCvVVJw70=;
- b=sYQuO8JGTsMM7yvjudXl5JeT5jBnfVSDpaxTQj4XO9gbmTlJW6twrhxp3MwvzMZFaMCPFnEXB74ejFNrzWF6Rhq1Of1touclHutNI25ppU1aRIwmkLVgRuQWV0ePNFTMbl7jR2eAs0vukz9u7Epx6oHnlvIRjpG1J73tFAOJ0V6p8DdmSU/Kt0U9p0/hcTixQHT7iuRuvRWzr7z4Bxu+xSvAqyXFFzykoxWCAc+6gZd4R+mpL0IPygaHYu59me/RUk8qu1IwT7bfkhKV4HBtpTCboRWCbeSLit3Il3KL4nU1neWfI3++BIAkVY7TkPyhhQ/4OrFeKmQCEj9VIf1aZg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
- 164.130.1.41) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=foss.st.com;
- dmarc=fail (p=none sp=none pct=100) action=none header.from=foss.st.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+ogdynMMjxJE8ru9SoJa1eQVGaLm9kozMpUCvVVJw70=;
- b=PmHuAGidnyMIwvDY/fuLBk4bVHL+Ch6Fz3K+gTmaOBMw210KX04SKcSVfaixAhIuY3JXSZeAZULlOU+ymmsPhp5xuTeyL6WyAjNVepWdhS8P1HTbDfCbv+R4vTuCIHFvmwUjM9f8QGhmDO+FfekNqW16QYBDubd39sWnMQtOFwCof3t6dSqccB1p4Lvy5VpV/wl5SC17iueOVVjxCrUkGlaysVhJG2bYW+Eku+ODvGg+ey4G943Ot9drPoDIvaR/gFZIuGbiSoUQk9H/TTnhGRCLU+OgzSrcPpC3JNO2wy8C8vMquvRuD10zjvdL9lToERyFbC8mzXTVVbIkc3X4nA==
-Received: from DUZPR01CA0050.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:469::20) by PAVPR10MB6839.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:102:323::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.12; Fri, 17 Oct
- 2025 14:38:13 +0000
-Received: from DB3PEPF0000885A.eurprd02.prod.outlook.com
- (2603:10a6:10:469:cafe::56) by DUZPR01CA0050.outlook.office365.com
- (2603:10a6:10:469::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.9228.13 via Frontend Transport; Fri,
- 17 Oct 2025 14:38:48 +0000
-X-MS-Exchange-Authentication-Results: spf=fail (sender IP is 164.130.1.41)
- smtp.mailfrom=foss.st.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=none header.from=foss.st.com;
-Received-SPF: Fail (protection.outlook.com: domain of foss.st.com does not
- designate 164.130.1.41 as permitted sender) receiver=protection.outlook.com;
- client-ip=164.130.1.41; helo=smtpO365.st.com;
-Received: from smtpO365.st.com (164.130.1.41) by
- DB3PEPF0000885A.mail.protection.outlook.com (10.167.242.5) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.9253.7 via Frontend Transport; Fri, 17 Oct 2025 14:38:12 +0000
-Received: from EQNDAG1NODE4.st.com (10.75.129.133) by smtpO365.st.com
- (10.250.44.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Fri, 17 Oct
- 2025 16:41:18 +0200
-Received: from localhost (10.252.15.38) by EQNDAG1NODE4.st.com (10.75.129.133)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.57; Fri, 17 Oct
- 2025 16:38:04 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Cheick Traore
- <cheick.traore@foss.st.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/5] configs: stm32mp2: Enable LED_BOOT for stm32mp23_defconfig
-Date: Fri, 17 Oct 2025 16:37:49 +0200
-Message-ID: <20251017143757.202571-6-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20251017143757.202571-1-patrice.chotard@foss.st.com>
-References: <20251017143757.202571-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1760713265; x=1761318065; i=xypron.glpk@gmx.de;
+ bh=bNu3dtsdfIhNh5iblPHky8CWnCSZ1Ph3kSyPvFB/GlE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=oP8pKA+fnSdVs15YY0Q79Qjo3EVAHqM2qCiObYiMabKi4Xgwt9jMgc1NXwYD4B6F
+ L4vkYxpmi1uyW5UKf/QhcawlSO8AKNxESa91bHTqLB/ghwUIk+mm2OULvPrWeihD1
+ M+4/BmW/GDKB2L2RGaw8KEEeF+rqERepM6hsHqsLsHEcME/WZ0bcPXi5yodcOEwTf
+ SHXdiraFJOxm2b9BNw3kDsLqiBoMnQy8Hw9vRS7nkxx6vcb1Qm2oI0mmG/0Tdoot5
+ IDNFIhOg0yin0e72ujoF0Z4CszGLm8kboDV6HCT5aO7MFGpDPSFDSMUst6f95t1Kg
+ WD9XC3CyN+/Gqi1kBw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M7JzQ-1v8eQH1SiC-009mEj; Fri, 17
+ Oct 2025 17:01:05 +0200
+Message-ID: <48b2ce1b-8d89-4298-a86d-54b092cfaba9@gmx.de>
+Date: Fri, 17 Oct 2025 17:01:02 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.252.15.38]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To EQNDAG1NODE4.st.com
- (10.75.129.133)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB3PEPF0000885A:EE_|PAVPR10MB6839:EE_
-X-MS-Office365-Filtering-Correlation-Id: c9972277-3163-4a02-e063-08de0d8accff
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|376014|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/8LldwVbG4fvXxLh5kfP/yRlveKI8t1Y/c2JXbpNv6VCdLrdiMwoBB1tSIYk?=
- =?us-ascii?Q?BZ+PurlpGzVVyaq3v4dMb3S6Dwhu97QFzmlseUQVKyUjvuyjvSc5NQGhUBOL?=
- =?us-ascii?Q?8eTL2J+2SzRQFVmLECx9StdfXiqR28A7IW9ZyjA5Xe5Lg/PaOJrMCoQMfcGN?=
- =?us-ascii?Q?zC/AoPm9M87BhOVTSNlRMDe3gyajNN8oKxTmZPU1ZKJA82OKP9rcOaLDSQzw?=
- =?us-ascii?Q?8HrQ2oEKOT6a2FVMmPSjel/cti80jiBKWgqeOAQR1IDMDCHgNz2FSo1xcKwP?=
- =?us-ascii?Q?RcQC7KFVG6Hms4UL0rCVZb5c/fBB6r1Bo/93IBgZBcV4NOpYgGQx17l96YX3?=
- =?us-ascii?Q?Zdh3cLaMpsuypHwRK0A/HxCHqbOfo/WEOtMDBTZEoAau+vBvb4JL1S3qkF3g?=
- =?us-ascii?Q?fQx++jsp+cJ4QVN69JbfTq3A46MMofmA+cXwF1u2qsubEbqT7i6RMsoDNbkC?=
- =?us-ascii?Q?0A6O5vqquxHHxtWaQjrEsx/iDrJxXH261LdSbsRcyQZwGctfdjuXGDp6vsne?=
- =?us-ascii?Q?gcDET1+6gNxhlvStcPq3Twkwz+Qy+i2DE1rUmyJ4dQJAGpmXEq+UuHnFJ7g3?=
- =?us-ascii?Q?S8lChKlbf/uKF0Y7zmj3GXlJMhQaexBP9axJrE2+ROfu4D3EHfsxKLwjWyp3?=
- =?us-ascii?Q?HNQJLZAdY5iNAQyz3FyJgxJuzfhw/z6ZNxZV5LURyPedhkxHSuggosjgadIl?=
- =?us-ascii?Q?T/nTHfTObcp4LbBdZPCcIcM3fJFkRl3DxUxsNn31HlTRMXzbNiaKKZzMOwhs?=
- =?us-ascii?Q?K/cn+ATgmkeQ/3SGMR4XXZa1KOiSUaSsZo4O62t3Qgn5NOAjYQ4rzz70jSKF?=
- =?us-ascii?Q?GBFEPnyNcNP21+ONpH4S1h51UpMbnfp0AWVtUN0XjCHXOT6KBXTeRIgm1N9y?=
- =?us-ascii?Q?/uyb+S8gektu7oY2WVkI4IYB2NhmU1aS8wfbqdTlYAk/NyMD/LRHxIeNaPQz?=
- =?us-ascii?Q?z+0Y8uVVn5ODnZWXOBnxJYCeKi1nGAyTBt4sEXOZDS6fzF4Ti4sQeZ/iobA+?=
- =?us-ascii?Q?9dsyGWE05haIq6+oXLjGYzvmXMQ+rjJejq/7ErswhlgE3upiil7w3UA6wE9Q?=
- =?us-ascii?Q?EK2A6uKJR+lZw8YkqeQz9nNUKd4af6y+cdhLM6H55paHSm9ZeUV1JFBUHpwz?=
- =?us-ascii?Q?5P7bkyeP2gsyv7JJGOjGpVG3j0vgt/dTup0zetDdEVEriNmmwLJOYDHQpP2f?=
- =?us-ascii?Q?15dVftPpRg8mv8MQzooFYH4OJ6OqgQoXBRSgQeEM++B/yDOZ6Vdil63n+c7g?=
- =?us-ascii?Q?1zUr+YYPmltdpwU2cAsFX4TomZFMoKZXM+e3jCD6WH63kvSwD64yLhc3FNgW?=
- =?us-ascii?Q?C/SipLkQR/GmqK6pKIzXgNGWJfJcyk5Lh69FHd2sc6R6GlVSlfhJW6hCWOSn?=
- =?us-ascii?Q?maDrD99yNGqDjQfkyCu4GR0k6Hz6YVv0RGCpgd7z2vmc9tqMmrMFvfV3Pwoy?=
- =?us-ascii?Q?xwkFQ/ridmqzBb4GT3vlTG1Qi7vkVL4fOIh5shNJma17c4RI69ghUgGe8P6Q?=
- =?us-ascii?Q?DgTj2k7Iv7R3FjOn7xOz4raTcV/qv+HPUFOjDJ/PVWmq2DhmFgtMJNmrWQVg?=
- =?us-ascii?Q?bHgUXU5sSvDIsAZjomA=3D?=
-X-Forefront-Antispam-Report: CIP:164.130.1.41; CTRY:IT; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:smtpO365.st.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(376014)(82310400026); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: foss.st.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2025 14:38:12.8133 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c9972277-3163-4a02-e063-08de0d8accff
-X-MS-Exchange-CrossTenant-Id: 75e027c9-20d5-47d5-b82f-77d7cd041e8f
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=75e027c9-20d5-47d5-b82f-77d7cd041e8f; Ip=[164.130.1.41];
- Helo=[smtpO365.st.com]
-X-MS-Exchange-CrossTenant-AuthSource: DB3PEPF0000885A.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB6839
-X-Proofpoint-GUID: KOMKpMGxYxKzcR3bSc176x-LtjrPbcNB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjUxMDExMDAxOCBTYWx0ZWRfXwgm3jJrnlIE2
- R5oHJCTjLSn/gA9tnA9nWrWJHgXIMyNNxvwwN7ZxmozBPmB2oXOSIgYs/TYwyS5JH4Omo+y6ivB
- NzLwtticBuhhO3z13u20scIIqkRwqFSApgVkQ7PZq16SL2/Muc2a6renz8hlAluUkoK/zEb15cb
- K33X6w8p0tfT/Wbrw3T9JmnHIMto4Szu06cIyrVkJLJ44A5EusL9kAls3R1AQZq/fUZ3iHVkPhm
- HZ+4S1JRDVQ7CmlqZ+31rXzxgYb4vwaarvptu7XWhLoMlyvrgUC7nJl0txe3w0uFTVBrmLuq0bx
- urvWMbO4TTKV/ofp8utXtR45T5G0FnmqbZrVUhqIVqmdGZORcUVGFhEaewr9UGZe05mTOFkfRYT
- x1W/dYRj+BNzpLR/INEVWAGqlaisoA==
-X-Authority-Analysis: v=2.4 cv=NfvrFmD4 c=1 sm=1 tr=0 ts=68f254d8 cx=c_pps
- a=9v4tHtsx3FkFFVH89g/dOA==:117 a=k+92ZC+kR50ztVuylSZIGA==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=gt-GhcMM7esA:10 a=x6icFKpwvdMA:10
- a=s63m1ICgrNkA:10 a=KrXZwBdWH7kA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=8b9GpE9nAAAA:8 a=SxxZRTMbgU000sIlMgoA:9 a=T3LWEMljR5ZiDmsYVIUa:22
-X-Proofpoint-ORIG-GUID: KOMKpMGxYxKzcR3bSc176x-LtjrPbcNB
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1121,Hydra:6.1.9,FMLib:17.12.80.40
- definitions=2025-10-17_05,2025-10-13_01,2025-03-28_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 impostorscore=0
- lowpriorityscore=0 priorityscore=1501 spamscore=0
- phishscore=0 adultscore=0
- clxscore=1015 bulkscore=0 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.19.0-2510020000 definitions=main-2510110018
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/7] doc: make pdfdocs: Address issues with the make
+ pdfdocs target
+To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+References: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
+Content-Language: en-US
+Cc: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Dhruva Gole <d-gole@ti.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Anshul Dalal <anshuld@ti.com>, Chintan Vankar <c-vankar@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Garrett Giordano <ggiordano@phytec.com>,
+ Vitor Soares <vitor.soares@toradex.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>, E Shattow <e@freeshell.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ open list <u-boot@lists.denx.de>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:hRS0Ugen+9hL3DbbTKICO4qkGolQRVJPhryN5Ya46cTrV+3Kr2z
+ DW/jlTyv8MRW/eou5UBGRwyh7jXAZjmeJKhE/H9R2+mni3SMYGdnsQCfi56HzKERcgM2EW/
+ vKF50qvBb0dCS5S0IYNHgW97ur03FgKC+qsB501YnxmKFgJ0JPM12r2Ii39NV3tJRD8VOWS
+ maXFH/IFo3ci90F56IaEA==
+UI-OutboundReport: notjunk:1;M01:P0:W/GTIQSL+YQ=;kx92Rxhxq6enlsqbrzyS9rXxlMm
+ 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
+ ushgaaSr6YXtj9Joak0bXOuK90=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,27 +165,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable LED_BOOT to use led_boot_on/off() API in board file.
+On 10/6/25 00:10, Adriano Carvalho wrote:
+> This patch series address several issues that were affecting the make
+> pdfdocs target.
+>=20
+> In the end, the make pdfdocs could be considered fixed. It is at least
+> with docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025.
+>=20
+> The thing is fixed only after the 6th commit. Each commit solves one
+> issue, in the order as they appeared. I hope it makes sense.
+>=20
+> Changes from v1:
+> - Use already in place kfigure sphinx extension instead of
+>    sphinxcontrib.inkscapeconverter.
+> - I have kept the dependency on inkscape because: (1) ImageMagick's
+>    convert fails to the job, and (2) it's what's done in the Linux kerne=
+l
+>    on which kfigure is based.
+>=20
+> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+>=20
+> Adriano Carvalho (7):
+>    doc: make pdfdocs: Specify texlive-xetex as a prerequisite
+>    doc: make pdfdocs: Update the description with the needed steps
+>    doc: make pdfdocs: Add pip install -r test/py/requirements.txt to the
+>      list of needed steps
+>    doc: make pdfdocs: Ensure SVG files are converted to PDF before the
+>      compilation of *.tex files
+>    doc: make pdfdocs: Update kfigure sphinx extension to support inkscap=
+e
+>      as well
+>    doc: make pdfdocs: Increase the maximum list depth
+>    doc: make pdfdocs: Remove redundant "-j" option
 
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Please, add a patch that runs make pdfdocs on the CI.
+Otherwise I would expect that it will stop building again.
 
----
+Best regards
 
- configs/stm32mp23_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Heinrich
 
-diff --git a/configs/stm32mp23_defconfig b/configs/stm32mp23_defconfig
-index 840855c23e5..49f47becba6 100644
---- a/configs/stm32mp23_defconfig
-+++ b/configs/stm32mp23_defconfig
-@@ -55,6 +55,7 @@ CONFIG_GPIO_HOG=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_STM32F7=y
- CONFIG_LED=y
-+CONFIG_LED_BOOT=y
- CONFIG_LED_GPIO=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_STM32_SDMMC2=y
--- 
-2.43.0
+>=20
+>   doc/Makefile                              |   1 -
+>   doc/board/beagle/am62x_beagleplay.rst     |   8 +-
+>   doc/board/beagle/am67a_beagley_ai.rst     |   6 +-
+>   doc/board/beagle/j721e_beagleboneai64.rst |  10 +-
+>   doc/board/samsung/e850-96.rst             |   2 +-
+>   doc/board/ti/am62ax_sk.rst                |   6 +-
+>   doc/board/ti/am62px_sk.rst                |   8 +-
+>   doc/board/ti/am62x_sk.rst                 |   8 +-
+>   doc/board/ti/am64x_evm.rst                |   8 +-
+>   doc/board/ti/am65x_evm.rst                |  12 +-
+>   doc/board/ti/j7200_evm.rst                |  10 +-
+>   doc/board/ti/j721e_evm.rst                |  10 +-
+>   doc/board/ti/j721s2_evm.rst               |   6 +-
+>   doc/board/ti/j722s_evm.rst                |   6 +-
+>   doc/board/ti/j784s4_evm.rst               |   8 +-
+>   doc/board/ti/k3.rst                       |   8 +-
+>   doc/build/documentation.rst               |  28 ++-
+>   doc/conf.py                               |   4 +
+>   doc/develop/memory.rst                    |   4 +-
+>   doc/develop/trace.rst                     |  10 +-
+>   doc/sphinx/kfigure.py                     | 212 ++++++++++++++++------
+>   tools/docker/Dockerfile                   |   2 +
+>   tools/patman/patman.rst                   |   2 +-
+>   23 files changed, 252 insertions(+), 127 deletions(-)
+>=20
 
