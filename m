@@ -4,86 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92F4FCCD199
-	for <u-boot@archiver.kernel.org>; Thu, 16 Oct 2025 22:07:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B87C7CCD183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 01:24:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65BEF83835;
-	Fri, 17 Oct 2025 00:07:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C7ACC83734;
+	Fri, 17 Oct 2025 03:23:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dctZA7Rn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JfvdFBxx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 644D783734; Fri, 17 Oct 2025 00:07:42 +0200 (CEST)
-Received: from mail-ot1-x333.google.com (mail-ot1-x333.google.com
- [IPv6:2607:f8b0:4864:20::333])
+ id B3D7D83734; Fri, 17 Oct 2025 03:23:58 +0200 (CEST)
+Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
+ [IPv6:2607:f8b0:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA25D83631
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 00:07:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99E498367F
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 03:23:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x333.google.com with SMTP id
- 46e09a7af769-7b3e2a51678so992382a34.1
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 15:07:39 -0700 (PDT)
+Received: by mail-oi1-x232.google.com with SMTP id
+ 5614622812f47-441bc60f35bso437632b6e.2
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 18:23:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760652458; x=1761257258; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760664235; x=1761269035; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uAisiFyQ7avi/YuntjA4L3rOCsu6bquxX94Cg3i7ZV4=;
- b=dctZA7RnksYhMhk4vkzbqqG52imkNa+kznP+NZ/6Qdv9m4UafJg3Qi6AtLBVTdIvZA
- DV1AGeuBBup3tas2Sy7gkH8tu8KQ80wg5E5ekg4s4SER983t0OjWJ/eY14rDZbt20jEc
- xxYxctSFNOlPfSjxt4u3o+WMPQsQo16bHZcuQ=
+ bh=PrACAVD1d8hynrdzXkPh02ccN/GY0yIbAwvsm58kxSc=;
+ b=JfvdFBxxtcLPBndziArst1o1lX/dTOZmdhhGmq/V40Ny0z8rc50KvD+Apsh1lIpWgQ
+ Vwl/X5zLBKmAy0Pc16cKaLR5YX32vdkrU1X0Rj+v1n67VpRPZaJ9jG5R5LomcaKoT7lW
+ shMa1h9+0M7vHlIDQFEFFtSojJI8I63HAMbaE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760652458; x=1761257258;
+ d=1e100.net; s=20230601; t=1760664235; x=1761269035;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uAisiFyQ7avi/YuntjA4L3rOCsu6bquxX94Cg3i7ZV4=;
- b=EX4j+pakGbqej7jZ6+1+dS2o8p3FOS4SgJqtxQ7iNYICcHFur3Z+6DBackcxUSDtwO
- +cjJGmmbZqokicqH7c3bro+eyHraoTEk70iRlwdqpzBo9aNPevFUX+7UirKUGBcX6Iyp
- Am9perncSR8hDKk5WKyYGL0Q+X89vb/fzZYmkvI8gjdP+DsPeU8W8tH1oaPEAaln7Nio
- 2SBzN330TgIOf0nFsP46STub4Du87+joIN4jLctXPcVKYu9p9iJPhUsrG/yddl6fhEWK
- 4K7AVcvVkWZSjb8S+xreUGAum/4qZAFnjWUoyLRtoA9+1E9uDVsYkvQlbN/glpzW3OIN
- 87Pw==
-X-Gm-Message-State: AOJu0Yz/d542iwqP8ix4gW57m4B1K6tTeOLL1Dri2Bie/NMafIq19tor
- VXNd4QwbNLrbcBV+P6anmX9AabvEywZ7n6WRmGWQj6m031265/IxJDgQnjor31tDzY4=
-X-Gm-Gg: ASbGncvRis39FjfegdOJQ7RmXiPH1SBUTjN+ga/0k9Jr6xBxR4b+pjPUXzoaMPQ15nB
- IiW8FXceROoEmfvH0dbmxK8XYDajOaGBdUgd7jOJ72oGY/389SgvjdInc3OPN+S/4k3pnsfI5EW
- Xodxcczn4V8M3aLdkhPq3FrM0M1w3dedFd+bNyjCP11kP8nhuxQIxkxrzc8XIHWtH3sK1EmdRYl
- ovlOSbJfdDhx9ka1mmGZsB8La/xmfysakm7sDKc34qtl6wOdPGeRCC6pmGLJJ1CCdjDBnFMJLJR
- zioKsGBrS159+/wtRgBU6rzwQ0c+vmJSgZi11Zbv0aAExrZexooWR9UmfBPb+f9GwM/2gzITMyb
- 6ac9xk5oDgpllOs3XI4lh/n7AcPpb9WbP7AGYCnDKQnB8q3KxMHJmsNXkLEM/LKIb/iXkm+tzq6
- cNOBqs4/bFMZuchinujK+xFsYugGIEMUNFZDwfTQ==
-X-Google-Smtp-Source: AGHT+IFVfJeGiSbm6J4EqG6FrfnCHPPO23bdJsyH9iBwMRyy8IF/j7HaPOkFq6X8O0BMFsylcZEeoA==
-X-Received: by 2002:a05:6830:3914:b0:745:9769:ea51 with SMTP id
- 46e09a7af769-7c27b69a32bmr1062792a34.9.1760652458465; 
- Thu, 16 Oct 2025 15:07:38 -0700 (PDT)
+ bh=PrACAVD1d8hynrdzXkPh02ccN/GY0yIbAwvsm58kxSc=;
+ b=eAXku/eU76mlVaHvrcyIi/oOmJa1sKyS/mARd9Yl0T6M3p/w7wOUpB2sQA4M6zdfGn
+ n2yJF+rM6d6ukq49+h0R5QSr3WLHsZ1Z09ABjEeOLUujzzyyb8lj/h+7uKLq8goAfe92
+ WExgt+Jkj2GL5Ppidk/DhRsszHCac/kt9PVCcAzeSmCGUR0ZH6o2ib76BOOVD1rYd8YQ
+ 02IFxbtBIDOQTQvLpSHI1CNWU4Ao1mYGhcCm/laX7t+l4OkEIJ9mzG6xBZ/EhV5L2gBh
+ zY1qrmgFN4gdB4oOe2Tjp87kAYg3zXFJ2Dr6vnUFr0dD2eTK4go5gipk1sSoIpFM97lL
+ Gwow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUPtOvRotlTF3jMj9eOGLwwgfn3XLc+72UO/JXOWTywDRmT+oo7DHQDU19lmr9fQa3HCT3mk98=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+21ozs+O3NBO1rotCcwtMxeeR5+HdtlF1LzKrwvn/Z0Z5nxsS
+ giYV1C4uI4zwpCyKUzVKnV6dpzxW+lp8rx5y+nPBKFJt2cJcyrul2JT6ZLaCOGmPNW47CjZ8teK
+ NdJlYHG8=
+X-Gm-Gg: ASbGnctO0h5VTpGeli8Rbq2lNoX1/AI5T+KNGyGc9L6nG3zqfU4zBITYE7pdsPhqMkr
+ 3/PAVeOMWfqNd6vQFN/kqWnD6NTp2jFPKPYTo74Tj6HrMqAuFB7crfCJD6tWAB6tuj9mxpHJ6hr
+ t95QeWvumEnqzKLEv6B5HrLEgDIahaGkF8eK7xkeRXkUXn/2ru6kmSUt4EUSNGACcLmGTdg0BTZ
+ 8MpFG9WiA0NeBUDSoQ5u2yRvM8bowFVOBU/BKNHkGE79Noe23bJApZLYk+X1d2VNCajF8x9B0Px
+ BY9kpJXa5kh753nR5Xj20SZ5o0KhSxBjIgJyDEECFiRcD8zjaBlcfTaFiFyl+VGBMZ1vm3OkXh9
+ cZtxrdUi4v//3tdBVobZbVwYxsncbZqvZxfU6NBOzMoXRQkdAtlndCFuxtWcCDP2EqRHuKviZbV
+ bNvwblZUadRkt13fLEJOqHyojIg/wNwVGzqsJekQ==
+X-Google-Smtp-Source: AGHT+IGyEeqrnuYZ4kDlswpsCfh+ZIMuFq6m1nDZ3cpfJdMhwpZFLFE+BeTgWkh50MXoXkYrA5UwmA==
+X-Received: by 2002:a05:6808:1b0d:b0:43f:278b:91d6 with SMTP id
+ 5614622812f47-443a30d0fb5mr804090b6e.36.1760664235245; 
+ Thu, 16 Oct 2025 18:23:55 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c0f9051d75sm6742427a34.7.2025.10.16.15.07.37
+ 006d021491bc7-65018130f87sm5157512eaf.3.2025.10.16.18.23.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 15:07:37 -0700 (PDT)
+ Thu, 16 Oct 2025 18:23:54 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
-Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, 
- Simon Glass <sjg@chromium.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sam Protsenko <semen.protsenko@linaro.org>
-In-Reply-To: <20251015141856.4168612-1-raymond.mao@linaro.org>
-References: <20251015141856.4168612-1-raymond.mao@linaro.org>
-Subject: Re: (subset) [PATCH v4 0/6] Enable Firmware Handoff CI test on
- qemu_arm64
-Message-Id: <176065245711.262817.6993355244514323460.b4-ty@konsulko.com>
-Date: Thu, 16 Oct 2025 16:07:37 -0600
+To: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Debbie Horsfall <debbie.horsfall@arm.com>, 
+ Andre Przywara <andre.przywara@arm.com>, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>, 
+ Dmitrii Merkurev <dimorinny@google.com>, 
+ Cody Schuffelen <schuffelen@google.com>, u-boot@lists.denx.de
+In-Reply-To: <20251009164435.49535-1-heinrich.schuchardt@canonical.com>
+References: <20251009164435.49535-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] virito: blk: fix logic to determine block sizes
+Message-Id: <176066423321.298873.7337553685266044210.b4-ty@konsulko.com>
+Date: Thu, 16 Oct 2025 19:23:53 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -104,22 +103,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 15 Oct 2025 07:18:44 -0700, Raymond Mao wrote:
+On Thu, 09 Oct 2025 18:44:35 +0200, Heinrich Schuchardt wrote:
 
-> This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
-> 1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
-> 2. build bl1 and fip with both Firmware Handoff and Measured Boot
->    enabled;
-> 3. pytest to validate the Firmware Handoff feature via bloblist by
->    checking the existence of expected FDT nodes and TPM events generated
->    and handed over from TF-A/OP-TEE.
+> With commit c85b8071e7d3 ("virtio: blk: support block sizes exceeding 512
+> bytes") logic was added to detect the VIRTIO_BLK_F_BLK_SIZE capability and
+> to copy the block size reported by QEMU to the block device descriptor.
+> 
+> The logical block size can be set when invoking QEMU:
+> 
+>     -drive if=none,file=4096.img,format=raw,id=vda \
+>     -device virtio-blk-device,drive=vda,physical_block_size=4096,logical_block_size=4096
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[5/6] ci: rename conf.qemu_arm64_na to conf.qemu_arm64
-      commit: f6c01ec1510b95a623eb6d60647275a974582415
+[1/1] virito: blk: fix logic to determine block sizes
+      commit: 7e65d29b6618603a51053d5fa9f4ef585e5b8959
 -- 
 Tom
 
