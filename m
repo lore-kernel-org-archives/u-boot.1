@@ -4,67 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA4E5CCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 03:59:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 547ABCCD184
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 05:24:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C8B583775;
-	Fri, 17 Oct 2025 05:59:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 722B783710;
+	Fri, 17 Oct 2025 07:24:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="l8MkcQ9v";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eKc5+3cG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CD26837E2; Fri, 17 Oct 2025 05:59:06 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC07A836C1
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 05:59:03 +0200 (CEST)
+ id 57F6983775; Fri, 17 Oct 2025 06:04:27 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D901836C1
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 06:04:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59H3x0Rl174314;
- Thu, 16 Oct 2025 22:59:00 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760673540;
- bh=ksviL59Ada78ERwC6Jh83g+wUENdNYj0B8BGS8iZi9g=;
- h=Date:CC:Subject:From:To:References:In-Reply-To;
- b=l8MkcQ9vQlffy7mFtMe+V4nlh+IpUzJ31QziPeZehxZU0YigCPuLMTeM2wKJVoKcT
- HXzgsTnoQ0f5WngnCEpx/Vo20axZj94pjnkqWqT50JUXCQ760U2bceatup08GfJVrh
- 2TU0a+DtPj4w4XmE6emNEhT+Urre4qOSbn9dfaYI=
-Received: from DFLE209.ent.ti.com (dfle209.ent.ti.com [10.64.6.67])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59H3x0sB2103730
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 16 Oct 2025 22:59:00 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE209.ent.ti.com
- (10.64.6.67) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 16 Oct
- 2025 22:59:00 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 16 Oct 2025 22:59:00 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59H3wx0T646887;
- Thu, 16 Oct 2025 22:59:00 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-28e7cd6dbc0so17897995ad.0
+ for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 21:04:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760673863; x=1761278663; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I3IDJ+vLRLRjQM/X27foHFqyNmEo5T95YhlhbnJkmvE=;
+ b=eKc5+3cG8PdnAbaeq96jkJN5a3mu7xu1bgMUgYqgt8Pl/lao859wmBtXfPEXHgpuKb
+ egF6VjPlaulTwG2Hk8m6zd0cSw4FodfZ+za0VT8XTL5oFqce/RT1oTO0gqBeezCRaeqf
+ JKvGWnLQuhbjCertS5Kw5axBCFWu1U15XZeaQcPVSyZpSDPIKthWhI9BrLOq2NvvJqLm
+ lyLJ4eggGmblzOggpEkN27/LPyT7l8w5dRcSFlD0I5RFv6sw5O8iPnyiW3AaD2eWopXS
+ 5VgFxsdDSiQz6PVs5IymQeSki83UhLk0sSxaJ/6W0j7/eP5jp6tohhC30h0nt9PNv1g0
+ Wb8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760673863; x=1761278663;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=I3IDJ+vLRLRjQM/X27foHFqyNmEo5T95YhlhbnJkmvE=;
+ b=rnRRTWKXFNYPohWphFYGxbf6qTS/uH9XKz7jcegfoVWm3yarOquKPjFVvWdiHEoMwJ
+ tehf8eYKtcP3gMFUbWEdBpzuueNuW08ul5frUD/FZpZp5slQa7MatQhsgYUTHMMzXBFv
+ 7PDyq+z7WMSejF8TWszt4XXOLIzIUHbEAgEibxuhDjqc9kc+anoG5xYGxnfkFYeXOa9K
+ B4oZGECLoSYCczgirVrH8CAnh+Ev0U3sQ1WalY+3c7AMeyQCSVs8bAlKQgS/Sq+4XAnD
+ GzNcgdw95ECGm7JJkzGNfnasMViJPj4njyah0ge8izm/j4x17px+5uMmEp8MdIlgI6U2
+ ydow==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXzkOiXnNitqsSPd2BaU67cahNSBwIfYAPnb08jWJe5RDuPYJ4wrKrSOIfa89YsLpiDxfijhhE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yykcq59xydu+xvYWOOQx8fqLDOfNqxaKdOhXL+z4z/3wpNd4hqT
+ i9f0do0SY8HL4i31+VsQQf1QxF1PFDueJUKo7zdMLnswhqhnHD5odwd3RMsKyHT2/qUQKjEtjd2
+ EcltbkWLlpkXmGrvA3M9IDb5/SfTfBw==
+X-Gm-Gg: ASbGncuqldjFXQHvS016W/3YO+VyJIm8/Pm9lAI4l8pOQKskpNtixGYOzlumBBi/yBs
+ FckWtNoRxqpxhOjlko2JyAWy6G7LDUzv187I/u+ARvGAegfr3TNp0jORwWyBHzaAoAuMQA3M72H
+ 6Kh3iYL5ffnkF38WMY/7oKggtzIJW9gFnBHKo4eNnDvUufocytIPQtm8EVwix8ECJV4BhU70wVN
+ 2ghEEE87G8YoWGR2gI60UtTeGFjs7WOddpJyEmkIayX9804nlC4LehbMTcdxs6eXraQCRdxOZdb
+ RqD7GwbTsTMqAMTKF86+i10Gbi+Y8wZxfDBafA==
+X-Google-Smtp-Source: AGHT+IHmzB317oQkQHpHZys/FCDRniELEzvLa5cBeIzNljKywnu98WHQOROmEkt1+b0K86qlXFzZhCreAxtHUKqwOEE=
+X-Received: by 2002:a17:902:f541:b0:28d:1939:f9c8 with SMTP id
+ d9443c01a7336-290cb0803d5mr30672475ad.26.1760673863365; Thu, 16 Oct 2025
+ 21:04:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+ <20251015-clk_ops-v1-21-5f80f827407e@linaro.org>
+In-Reply-To: <20251015-clk_ops-v1-21-5f80f827407e@linaro.org>
+From: Greg Malysa <malysagreg@gmail.com>
+Date: Fri, 17 Oct 2025 00:02:55 -0400
+X-Gm-Features: AS18NWDw-WCq3s6Td5-JQy4J-j4STU-cSY6siJRlDbWGdZZhreSlSr0RoZPk1VQ
+Message-ID: <CABdDSeVJnZfp86yDXw6sh4cioKTsYj3NcGy_sgVMdja0K_pApg@mail.gmail.com>
+Subject: Re: [PATCH 21/24] clk: adi: Remove negative error returns from
+ clk_get_rate
+To: Andrew Goodbody <andrew.goodbody@linaro.org>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
+ Paul Barker <paul@pbarker.dev>, uboot-snps-arc@synopsys.com, 
+ Dai Okamura <okamura.dai@socionext.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
+ Joel Stanley <joel@jms.id.au>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ adsp-linux@analog.com, 
+ uboot-stm32@st-md-mailman.stormreply.com, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Stefan Roese <stefan.roese@mailbox.org>, 
+ Yao Zi <ziyao@disroot.org>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ Finley Xiao <finley.xiao@rock-chips.com>, Joseph Chen <chenjh@rock-chips.com>, 
+ Elaine Zhang <zhangqing@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Peng Fan <peng.fan@nxp.com>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Michal Simek <michal.simek@amd.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Ye Li <ye.li@nxp.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Alice Guo <alice.guo@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>, 
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Minda Chen <minda.chen@starfivetech.com>, 
+ Hal Feng <hal.feng@starfivetech.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Tien Fong Chee <tien.fong.chee@altera.com>, 
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>, 
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>, 
+ Tingting Meng <tingting.meng@altera.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, 
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Heiko Schocher <hs@nabladev.com>, Jonathan Currier <dullfire@yahoo.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, 
+ Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Sam Shih <sam.shih@mediatek.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Thierry Reding <treding@nvidia.com>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Ian Roberts <ian.roberts@timesys.com>, 
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>, 
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, 
+ Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
+ Marek Vasut <marek.vasut@mailbox.org>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
-Date: Fri, 17 Oct 2025 09:28:58 +0530
-Message-ID: <DDKAOHK5MOPF.26P0O31MCY1DV@ti.com>
-CC: <vigneshr@ti.com>, <afd@ti.com>, <m-chawdhry@ti.com>, <n-francis@ti.com>, 
- <b-liu@ti.com>, <nm@ti.com>, <bb@ti.com>
-Subject: Re: [PATCH v1] env: Kconfig: disable external env in secure os boot
-From: Anshul Dalal <anshuld@ti.com>
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Anshul Dalal
- <anshuld@ti.com>
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20251009123435.960225-1-anshuld@ti.com>
- <176065245424.262817.8921064566527287297.b4-ty@konsulko.com>
-In-Reply-To: <176065245424.262817.8921064566527287297.b4-ty@konsulko.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 17 Oct 2025 07:24:02 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,36 +150,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri Oct 17, 2025 at 3:37 AM IST, Tom Rini wrote:
-> On Thu, 09 Oct 2025 18:04:34 +0530, Anshul Dalal wrote:
+On Wed, Oct 15, 2025 at 10:33=E2=80=AFAM Andrew Goodbody
+<andrew.goodbody@linaro.org> wrote:
 >
->> Falcon mode uses falcon_image_file from the env during mmc fs boot, but
->> external env can be compromised. Therefore disable access to external
->> env by setting SPL_ENV_IS_NOWHERE when SPL_OS_BOOT_SECURE is set.
->>=20
->>=20
+> clk_get_rate() returns a ulong so do not attempt to pass negative error
+> codes through it.
 >
-> Applied to u-boot/master, thanks!
+> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+> ---
+>  drivers/clk/adi/clk-shared.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> [1/1] env: Kconfig: disable external env in secure os boot
->       commit: 1e470ddd0743bbd1f229421e11e9ad2093f7fd20
+> diff --git a/drivers/clk/adi/clk-shared.c b/drivers/clk/adi/clk-shared.c
+> index dcadcafa9d236882af8c7b397eeeeb44461a23cb..600e22940e8cb60b1e510a74e=
+e8068ccf0c7848a 100644
+> --- a/drivers/clk/adi/clk-shared.c
+> +++ b/drivers/clk/adi/clk-shared.c
+> @@ -16,7 +16,7 @@ static ulong adi_get_rate(struct clk *clk)
+>
+>         ret =3D clk_get_by_id(clk->id, &c);
+>         if (ret)
+> -               return ret;
+> +               return 0;
+>
+>         return clk_get_rate(c);
+>  }
+>
+> --
+> 2.47.3
+>
 
-Hi Tom,
+Reviewed-by: Greg Malysa <malysagreg@gmail.com>
 
-Unfortunately the patch this depends on[1] has not been merged yet.
-Essentially as master stands now, we are disabling env based on
-SPL_OS_BOOT_SECURE even though that config isn't defined anywhere.
+Tested on my sc573 and sc598 boards, looks good.
 
-I'm working on addressing your comments[2] on my last series disabling
-fallback in falcon mode and will duly post a revision, in the meantime
-could we just merge the [1/7] of that series and I'll remove it form the
-rest of the series in the revision?
-
-[1]:
-  [PATCH -next v3 1/7] spl: Kconfig: add SPL_OS_BOOT_SECURE config symbol:
-   - https://lore.kernel.org/u-boot/20251006101057.4172248-2-anshuld@ti.com=
-/
-[2]: https://lore.kernel.org/u-boot/20251015195943.GA710760@bill-the-cat/
-
-Regards,
-Anshul
+Thanks,
+Greg
