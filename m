@@ -4,151 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 106B5CCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 15:01:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22800CCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 15:22:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5253E83829;
-	Fri, 17 Oct 2025 17:01:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9AC7C83826;
+	Fri, 17 Oct 2025 17:22:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="oP8pKA+f";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="MNbMttrg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 206DF8382E; Fri, 17 Oct 2025 17:01:20 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 07EA08382E; Fri, 17 Oct 2025 17:21:00 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 228DB83734
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 17:01:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FE5A8051F
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 17:20:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1760713265; x=1761318065; i=xypron.glpk@gmx.de;
- bh=bNu3dtsdfIhNh5iblPHky8CWnCSZ1Ph3kSyPvFB/GlE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
- References:Cc:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=oP8pKA+fnSdVs15YY0Q79Qjo3EVAHqM2qCiObYiMabKi4Xgwt9jMgc1NXwYD4B6F
- L4vkYxpmi1uyW5UKf/QhcawlSO8AKNxESa91bHTqLB/ghwUIk+mm2OULvPrWeihD1
- M+4/BmW/GDKB2L2RGaw8KEEeF+rqERepM6hsHqsLsHEcME/WZ0bcPXi5yodcOEwTf
- SHXdiraFJOxm2b9BNw3kDsLqiBoMnQy8Hw9vRS7nkxx6vcb1Qm2oI0mmG/0Tdoot5
- IDNFIhOg0yin0e72ujoF0Z4CszGLm8kboDV6HCT5aO7MFGpDPSFDSMUst6f95t1Kg
- WD9XC3CyN+/Gqi1kBw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M7JzQ-1v8eQH1SiC-009mEj; Fri, 17
- Oct 2025 17:01:05 +0200
-Message-ID: <48b2ce1b-8d89-4298-a86d-54b092cfaba9@gmx.de>
-Date: Fri, 17 Oct 2025 17:01:02 +0200
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id DEBCF26374;
+ Fri, 17 Oct 2025 17:20:56 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id CeLoYtAmG9zf; Fri, 17 Oct 2025 17:20:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1760714456; bh=3EDw6bp9uKiBWBQQHBpLF5i0TSJ1+iWqS/nCwVEjXgE=;
+ h=From:Date:Subject:To:Cc;
+ b=MNbMttrgZ3pzVuah2lPyOGMcDJDme8PvjBkAReSuSGjregd5OQ71KGPo7NwhGeypF
+ E5GAnlG2xUdDb7c8Wn+WapQU9KvccNJgYvDwQ5aHYUa4rNkRgtPsOO7wwQhO7WjQ7k
+ XZRqRI2l4YUrluz0su+9IYY29cVi/56sKN0JZOeFFxm6tAPs5y8mP5octZmGj3Qa7Y
+ jH4+owWU2GUwOsddX4NFHJryOT9q6+w/HhgJze5rHn0MexxPHMPIjxUPb6cCpLhqwm
+ cW6UPXRo1SU+aMTvdyjdB/MCTe4FCrX2OhgRTQqTQl+He0NTLgoiF7Gi5mfdpREhHF
+ Rb2ieZYrSse5g==
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+Date: Fri, 17 Oct 2025 20:49:47 +0530
+Subject: [PATCH v2] armv8: implement workaround for broken CNTFRQ_EL0 value
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/7] doc: make pdfdocs: Address issues with the make
- pdfdocs target
-To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
-References: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
-Content-Language: en-US
-Cc: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Bryan Brattlof <bb@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Peter Robinson <pbrobinson@gmail.com>, Dhruva Gole <d-gole@ti.com>,
- Minkyu Kang <mk7.kang@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Anshul Dalal <anshuld@ti.com>, Chintan Vankar <c-vankar@ti.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Garrett Giordano <ggiordano@phytec.com>,
- Vitor Soares <vitor.soares@toradex.com>,
- Parth Pancholi <parth.pancholi@toradex.com>, E Shattow <e@freeshell.de>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- open list <u-boot@lists.denx.de>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:hRS0Ugen+9hL3DbbTKICO4qkGolQRVJPhryN5Ya46cTrV+3Kr2z
- DW/jlTyv8MRW/eou5UBGRwyh7jXAZjmeJKhE/H9R2+mni3SMYGdnsQCfi56HzKERcgM2EW/
- vKF50qvBb0dCS5S0IYNHgW97ur03FgKC+qsB501YnxmKFgJ0JPM12r2Ii39NV3tJRD8VOWS
- maXFH/IFo3ci90F56IaEA==
-UI-OutboundReport: notjunk:1;M01:P0:W/GTIQSL+YQ=;kx92Rxhxq6enlsqbrzyS9rXxlMm
- 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
- ushgaaSr6YXtj9Joak0bXOuK90=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20251017-armv8-broken-cntfrq-v2-1-1e043cbb657e@disroot.org>
+X-B4-Tracking: v=1; b=H4sIAJJe8mgC/32NQQ6CMBBFr0Jm7RgK0oAr72FY0DIDjbHFKWk0h
+ LtbOYDL95L//gaRxFGEa7GBUHLRBZ+hOhVg58FPhG7MDFVZNapUFxzkmVo0Eh7k0fqV5YVcNyX
+ rlg1rgrxchNi9j+q9zzy7uAb5HCdJ/ez/XlKo0OiaO6s7Zmtuo4sSwnoOMkG/7/sXtCYDQbgAA
+ AA=
+X-Change-ID: 20251014-armv8-broken-cntfrq-f350f68fbf6e
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, 
+ Kaustabh Chakraborty <kauschluss@disroot.org>
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1760714452; l=1640;
+ i=kauschluss@disroot.org; s=20250202; h=from:subject:message-id;
+ bh=3EDw6bp9uKiBWBQQHBpLF5i0TSJ1+iWqS/nCwVEjXgE=;
+ b=yI1rHBRj/i6E4AQxHYSatWH31bT6a/TsPe4a7LVitv1Gx9Dc/n6XC5NTCazwjVj9l0prBKeIR
+ U4jYNfNGAbiDJc59eU0Yl9E1bOm8Y8oj/kiUAY8tivEN26INUEiwwo4
+X-Developer-Key: i=kauschluss@disroot.org; a=ed25519;
+ pk=h2xeR+V2I1+GrfDPAhZa3M+NWA0Cnbdkkq1bH3ct1hE=
+X-Mailman-Approved-At: Fri, 17 Oct 2025 17:22:22 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,70 +79,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/6/25 00:10, Adriano Carvalho wrote:
-> This patch series address several issues that were affecting the make
-> pdfdocs target.
->=20
-> In the end, the make pdfdocs could be considered fixed. It is at least
-> with docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025.
->=20
-> The thing is fixed only after the 6th commit. Each commit solves one
-> issue, in the order as they appeared. I hope it makes sense.
->=20
-> Changes from v1:
-> - Use already in place kfigure sphinx extension instead of
->    sphinxcontrib.inkscapeconverter.
-> - I have kept the dependency on inkscape because: (1) ImageMagick's
->    convert fails to the job, and (2) it's what's done in the Linux kerne=
-l
->    on which kfigure is based.
->=20
-> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
->=20
-> Adriano Carvalho (7):
->    doc: make pdfdocs: Specify texlive-xetex as a prerequisite
->    doc: make pdfdocs: Update the description with the needed steps
->    doc: make pdfdocs: Add pip install -r test/py/requirements.txt to the
->      list of needed steps
->    doc: make pdfdocs: Ensure SVG files are converted to PDF before the
->      compilation of *.tex files
->    doc: make pdfdocs: Update kfigure sphinx extension to support inkscap=
-e
->      as well
->    doc: make pdfdocs: Increase the maximum list depth
->    doc: make pdfdocs: Remove redundant "-j" option
+In devices where the U-Boot is used as a secondary bootloader, we rely
+on the device's primary bootloader to implement CNTFRQ_EL0. However,
+this reliance may lead to a non-functional timer in broken firmware.
 
-Please, add a patch that runs make pdfdocs on the CI.
-Otherwise I would expect that it will stop building again.
+For instance, some versions of Samsung's S-Boot don't implement it. It's
+also not possible to set it in the U-Boot, because it's booted in a lower
+exception level. CNTFRQ_EL0 is reported to be 0.
 
-Best regards
+Use gd->arch.timer_rate_hz to override the queried value if set. This
+setting needs to be done in the board file, preferrably in timer_init().
 
-Heinrich
+Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+---
+Changes in v2:
+- Switched to using gd->arch.timer_rate_hz instead of a new config
+  option (Ahmad Fatoum)
+- Link to v1: https://lore.kernel.org/r/20251014-armv8-broken-cntfrq-v1-1-b63f9c69ffcb@disroot.org
+---
+ arch/arm/cpu/armv8/generic_timer.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
->=20
->   doc/Makefile                              |   1 -
->   doc/board/beagle/am62x_beagleplay.rst     |   8 +-
->   doc/board/beagle/am67a_beagley_ai.rst     |   6 +-
->   doc/board/beagle/j721e_beagleboneai64.rst |  10 +-
->   doc/board/samsung/e850-96.rst             |   2 +-
->   doc/board/ti/am62ax_sk.rst                |   6 +-
->   doc/board/ti/am62px_sk.rst                |   8 +-
->   doc/board/ti/am62x_sk.rst                 |   8 +-
->   doc/board/ti/am64x_evm.rst                |   8 +-
->   doc/board/ti/am65x_evm.rst                |  12 +-
->   doc/board/ti/j7200_evm.rst                |  10 +-
->   doc/board/ti/j721e_evm.rst                |  10 +-
->   doc/board/ti/j721s2_evm.rst               |   6 +-
->   doc/board/ti/j722s_evm.rst                |   6 +-
->   doc/board/ti/j784s4_evm.rst               |   8 +-
->   doc/board/ti/k3.rst                       |   8 +-
->   doc/build/documentation.rst               |  28 ++-
->   doc/conf.py                               |   4 +
->   doc/develop/memory.rst                    |   4 +-
->   doc/develop/trace.rst                     |  10 +-
->   doc/sphinx/kfigure.py                     | 212 ++++++++++++++++------
->   tools/docker/Dockerfile                   |   2 +
->   tools/patman/patman.rst                   |   2 +-
->   23 files changed, 252 insertions(+), 127 deletions(-)
->=20
+diff --git a/arch/arm/cpu/armv8/generic_timer.c b/arch/arm/cpu/armv8/generic_timer.c
+index 1de7ec596fc7cbbc3e78a241f163bc0a4fcad6b6..1bc72ed26ca31af8e8e72008ed7885cbde23b076 100644
+--- a/arch/arm/cpu/armv8/generic_timer.c
++++ b/arch/arm/cpu/armv8/generic_timer.c
+@@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
+ unsigned long notrace get_tbclk(void)
+ {
+ 	unsigned long cntfrq;
++
++	if (gd->arch.timer_rate_hz)
++		return gd->arch.timer_rate_hz;
++
+ 	asm volatile("mrs %0, cntfrq_el0" : "=r" (cntfrq));
+ 	return cntfrq;
+ }
+
+---
+base-commit: 582a04763aa80738c1c8ac60c47d1a5159a42833
+change-id: 20251014-armv8-broken-cntfrq-f350f68fbf6e
+
+Best regards,
+-- 
+Kaustabh Chakraborty <kauschluss@disroot.org>
 
