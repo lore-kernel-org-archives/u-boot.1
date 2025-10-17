@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D79CECCD195
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 15:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24EC1CCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 15:23:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1088B83885;
-	Fri, 17 Oct 2025 17:22:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A37C183826;
+	Fri, 17 Oct 2025 17:23:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="kJuinOuf";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="L9gAS7DT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8245838BF; Fri, 17 Oct 2025 17:22:25 +0200 (CEST)
+ id 9EBDE838C5; Fri, 17 Oct 2025 17:22:36 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 098838384E
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 17:22:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 05F288051F
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 17:22:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kauschluss@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id CAD6826292;
- Fri, 17 Oct 2025 17:22:23 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id AEACC262D9;
+ Fri, 17 Oct 2025 17:22:33 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id pJJ4sMRdoGrI; Fri, 17 Oct 2025 17:22:21 +0200 (CEST)
+ id ds_pd4KzDXTQ; Fri, 17 Oct 2025 17:22:30 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1760714541; bh=Tj4LPtxoH96gSNmkuQCJZYNDsh9VS6l7CMMmU8KsHqw=;
+ t=1760714550; bh=xNkoIEjNxhGgMYsRUXMItcndicLhltI/3VTr8PwOpCc=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=kJuinOufFZwJN2T79y6oAYWKtsBxbHv5sraZL8OtMjjXSr3LhXIiTYc5vCntd4+HS
- n3agjUO+oGvCoG21z4u770QxxVdmpMA2ZxwSFta47pfsWYZR3foLYn/Nzqnwh1ePl3
- BRSvcMhwCQyXj39CvdTH4PhLAHvWCnG0llFNs8Yn9fLcnIj/WiXK4XU9Si06A53/Qy
- Ngw6mWMVJfq6dHYHhmTNvE86WPRU4ndw2uSR5wqrR0lIKVP2SYdV8Ygc11TQOkY612
- erYuhMjBjgD6rdkAWV03yVzDO0xfJdqqn4ECFaxxhJEIA8kugg8CVdeAdFMTCZ5TKG
- Y/A0kdYYRTfKQ==
+ b=L9gAS7DTXEmhVEj6BrXpsbNKZWsWRKgJmE4GcGV8TfWQ/o4rJAqf0qp+6NO5X5i0f
+ v7D9PFkt/0wV+H4z8i82TsqmXB/LhoD7wb7j4hAhZHqhSYKy5bpytQKbzcFjGM9GSq
+ o+BoVKCKv/qWB0mw5TXMXnHBGGPmgmRVaqeZm2hLixB7EUNUwC3JwU3GqBhxjp8qxa
+ mSXjMvsY7sPeicwZuMBfSRkGMuQStPMYyNRz4+TPHWp+wR/kXEY5EsDB4hQLY0chml
+ 2sXyWp6MKOZbqf2vWGBqswA1tQmr5BUcj8SlF++gDzcQeU3U8htwvcSzcsxPdLS71K
+ nspu6QweJ0uDQ==
 From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Fri, 17 Oct 2025 20:51:32 +0530
-Subject: [PATCH 4/6] clk: exynos: add function for Samsung CMU ops->request
+Date: Fri, 17 Oct 2025 20:51:33 +0530
+Subject: [PATCH 5/6] clk: exynos: add support for Exynos7870 CMU
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251017-clk-exynos7870-v1-4-83f90d425699@disroot.org>
+Message-Id: <20251017-clk-exynos7870-v1-5-83f90d425699@disroot.org>
 References: <20251017-clk-exynos7870-v1-0-83f90d425699@disroot.org>
 In-Reply-To: <20251017-clk-exynos7870-v1-0-83f90d425699@disroot.org>
 To: u-boot@lists.denx.de
@@ -59,14 +59,14 @@ Cc: Sam Protsenko <semen.protsenko@linaro.org>,
  Michael Trimarchi <michael@amarulasolutions.com>, 
  Marek Vasut <marex@denx.de>, Jonas Karlman <jonas@kwiboo.se>, 
  Ye Li <ye.li@nxp.com>, Kaustabh Chakraborty <kauschluss@disroot.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1760714499; l=2038;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1760714499; l=42365;
  i=kauschluss@disroot.org; s=20250202; h=from:subject:message-id;
- bh=Tj4LPtxoH96gSNmkuQCJZYNDsh9VS6l7CMMmU8KsHqw=;
- b=6ByFQJ/h3FpRmT7eqDHVptp7ZTmyYXs41LbrnvImL9xDJaRDcyFCQNfGXOy/Toux68+YL3lkv
- CDmGDOSrBhIAwkwkC3DBndDevhKW6ZK8/nAXBFBHM/YDYJ8RWZRGP7/
+ bh=xNkoIEjNxhGgMYsRUXMItcndicLhltI/3VTr8PwOpCc=;
+ b=zYOsWQiCyD3uEYJ6a6zCGR+rwRc1Fj983M6dc7zLpkbyCQ6FD45RzgIlQR2/PuXU5Ip1TUfss
+ RwQU3CpkHrcAtuagR69cikMjTJZj7VnvC0P8s9n04+PxWObQcAZOuIf
 X-Developer-Key: i=kauschluss@disroot.org; a=ed25519;
  pk=h2xeR+V2I1+GrfDPAhZa3M+NWA0Cnbdkkq1bH3ct1hE=
-X-Mailman-Approved-At: Fri, 17 Oct 2025 17:22:33 +0200
+X-Mailman-Approved-At: Fri, 17 Oct 2025 17:23:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,71 +83,980 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The request function performs a simple check if the clock with the
-provided ID is present or not. This is done with a simple call to
-clk_get_by_id(). A non-zero return value indicates that the requested
-clock is not available.
-
-In some cases, clk->dev points to the clock bank device instead of
-the clock device. This pointer is therefore overwritten in order to
-reference to the correct device instance.
+Introduce a simple clock driver for Exynos7870's CMU blocks, more
+specifically, CMU_MIF, CMU_FSYS, and CMU_PERI banks. This should be
+enough to serve U-Boot's minimal requirements.
 
 Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 ---
- drivers/clk/exynos/clk.c | 13 +++++++++++++
- drivers/clk/exynos/clk.h |  4 ++++
- 2 files changed, 17 insertions(+)
+ drivers/clk/exynos/Kconfig          |   7 +
+ drivers/clk/exynos/Makefile         |   1 +
+ drivers/clk/exynos/clk-exynos7870.c | 929 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 937 insertions(+)
 
-diff --git a/drivers/clk/exynos/clk.c b/drivers/clk/exynos/clk.c
-index a3832981f9005334cf8e07b0feee89d7da7577e9..a2c9f4851daf3dbb0c04f8a1b1414b0db543664e 100644
---- a/drivers/clk/exynos/clk.c
-+++ b/drivers/clk/exynos/clk.c
-@@ -10,6 +10,19 @@
- #include <dm.h>
- #include "clk.h"
+diff --git a/drivers/clk/exynos/Kconfig b/drivers/clk/exynos/Kconfig
+index 85ce9d6e2418063ca98846a71e00b1ca8693482c..dcecbd51b5bd105dad26cc6025e045c535ed7fb4 100644
+--- a/drivers/clk/exynos/Kconfig
++++ b/drivers/clk/exynos/Kconfig
+@@ -15,6 +15,13 @@ config CLK_EXYNOS7420
+ 	  This enables common clock driver support for platforms based
+ 	  on Samsung Exynos7420 SoC.
  
-+int samsung_clk_request(struct clk *clk)
++config CLK_EXYNOS7870
++	bool "Clock driver for Samsung's Exynos7870 SoC"
++	select CLK_CCF
++	help
++	  This enables common clock driver support for platforms based
++	  on Samsung Exynos7870 SoC.
++
+ config CLK_EXYNOS850
+ 	bool "Clock driver for Samsung's Exynos850 SoC"
+ 	select CLK_CCF
+diff --git a/drivers/clk/exynos/Makefile b/drivers/clk/exynos/Makefile
+index 77385864fef01e68b87b2d7cefc856f2cbd6f396..f5d27d87bd2feff352a61554604979d7db9b4f37 100644
+--- a/drivers/clk/exynos/Makefile
++++ b/drivers/clk/exynos/Makefile
+@@ -9,4 +9,5 @@
+ 
+ obj-$(CONFIG_$(PHASE_)CLK_CCF)	+= clk.o clk-pll.o
+ obj-$(CONFIG_CLK_EXYNOS7420)		+= clk-exynos7420.o
++obj-$(CONFIG_CLK_EXYNOS7870)		+= clk-exynos7870.o
+ obj-$(CONFIG_CLK_EXYNOS850)		+= clk-exynos850.o
+diff --git a/drivers/clk/exynos/clk-exynos7870.c b/drivers/clk/exynos/clk-exynos7870.c
+new file mode 100644
+index 0000000000000000000000000000000000000000..d01b1c7535054f0b0123f4e4e8e6457d75095d01
+--- /dev/null
++++ b/drivers/clk/exynos/clk-exynos7870.c
+@@ -0,0 +1,929 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Samsung Exynos7870 clock driver.
++ * Copyright (C) 2015 Samsung Electronics Co., Ltd.
++ * Author: Kaustabh Chakraborty <kauschluss@disroot.org>
++ */
++
++#include "linux/clk-provider.h"
++#include <dm.h>
++#include <asm/io.h>
++#include <dt-bindings/clock/samsung,exynos7870-cmu.h>
++#include "clk.h"
++
++enum exynos7870_cmu_id {
++	CMU_MIF,
++	CMU_FSYS,
++	CMU_PERI,
++};
++
++/*
++ * Register offsets for CMU_MIF (0x10460000)
++ */
++#define PLL_LOCKTIME_MIF_MEM_PLL					0x0000
++#define PLL_LOCKTIME_MIF_MEDIA_PLL					0x0020
++#define PLL_LOCKTIME_MIF_BUS_PLL					0x0040
++#define PLL_CON0_MIF_MEM_PLL						0x0100
++#define PLL_CON0_MIF_MEDIA_PLL						0x0120
++#define PLL_CON0_MIF_BUS_PLL						0x0140
++#define CLK_CON_GAT_MIF_MUX_MEM_PLL					0x0200
++#define CLK_CON_GAT_MIF_MUX_MEM_PLL_CON					0x0200
++#define CLK_CON_GAT_MIF_MUX_MEDIA_PLL					0x0204
++#define CLK_CON_GAT_MIF_MUX_MEDIA_PLL_CON				0x0204
++#define CLK_CON_GAT_MIF_MUX_BUS_PLL					0x0208
++#define CLK_CON_GAT_MIF_MUX_BUS_PLL_CON					0x0208
++#define CLK_CON_GAT_MIF_MUX_BUSD					0x0220
++#define CLK_CON_MUX_MIF_BUSD						0x0220
++#define CLK_CON_GAT_MIF_MUX_CMU_ISP_VRA					0x0264
++#define CLK_CON_MUX_MIF_CMU_ISP_VRA					0x0264
++#define CLK_CON_GAT_MIF_MUX_CMU_ISP_CAM					0x0268
++#define CLK_CON_MUX_MIF_CMU_ISP_CAM					0x0268
++#define CLK_CON_GAT_MIF_MUX_CMU_ISP_ISP					0x026c
++#define CLK_CON_MUX_MIF_CMU_ISP_ISP					0x026c
++#define CLK_CON_GAT_MIF_MUX_CMU_DISPAUD_BUS				0x0270
++#define CLK_CON_MUX_MIF_CMU_DISPAUD_BUS					0x0270
++#define CLK_CON_GAT_MIF_MUX_CMU_DISPAUD_DECON_VCLK			0x0274
++#define CLK_CON_MUX_MIF_CMU_DISPAUD_DECON_VCLK				0x0274
++#define CLK_CON_GAT_MIF_MUX_CMU_DISPAUD_DECON_ECLK			0x0278
++#define CLK_CON_MUX_MIF_CMU_DISPAUD_DECON_ECLK				0x0278
++#define CLK_CON_GAT_MIF_MUX_CMU_MFCMSCL_MSCL				0x027c
++#define CLK_CON_MUX_MIF_CMU_MFCMSCL_MSCL				0x027c
++#define CLK_CON_GAT_MIF_MUX_CMU_MFCMSCL_MFC				0x0280
++#define CLK_CON_MUX_MIF_CMU_MFCMSCL_MFC					0x0280
++#define CLK_CON_GAT_MIF_MUX_CMU_FSYS_BUS				0x0284
++#define CLK_CON_MUX_MIF_CMU_FSYS_BUS					0x0284
++#define CLK_CON_GAT_MIF_MUX_CMU_FSYS_MMC0				0x0288
++#define CLK_CON_MUX_MIF_CMU_FSYS_MMC0					0x0288
++#define CLK_CON_GAT_MIF_MUX_CMU_FSYS_MMC1				0x028c
++#define CLK_CON_MUX_MIF_CMU_FSYS_MMC1					0x028c
++#define CLK_CON_GAT_MIF_MUX_CMU_FSYS_MMC2				0x0290
++#define CLK_CON_MUX_MIF_CMU_FSYS_MMC2					0x0290
++#define CLK_CON_GAT_MIF_MUX_CMU_FSYS_USB20DRD_REFCLK			0x029c
++#define CLK_CON_MUX_MIF_CMU_FSYS_USB20DRD_REFCLK			0x029c
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_BUS				0x02a0
++#define CLK_CON_MUX_MIF_CMU_PERI_BUS					0x02a0
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_UART1				0x02a4
++#define CLK_CON_MUX_MIF_CMU_PERI_UART1					0x02a4
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_UART2				0x02a8
++#define CLK_CON_MUX_MIF_CMU_PERI_UART2					0x02a8
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_UART0				0x02ac
++#define CLK_CON_MUX_MIF_CMU_PERI_UART0					0x02ac
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI2				0x02b0
++#define CLK_CON_MUX_MIF_CMU_PERI_SPI2					0x02b0
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI1				0x02b4
++#define CLK_CON_MUX_MIF_CMU_PERI_SPI1					0x02b4
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI0				0x02b8
++#define CLK_CON_MUX_MIF_CMU_PERI_SPI0					0x02b8
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI3				0x02bc
++#define CLK_CON_MUX_MIF_CMU_PERI_SPI3					0x02bc
++#define CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI4				0x02c0
++#define CLK_CON_MUX_MIF_CMU_PERI_SPI4					0x02c0
++#define CLK_CON_GAT_MIF_MUX_CMU_ISP_SENSOR0				0x02c4
++#define CLK_CON_MUX_MIF_CMU_ISP_SENSOR0					0x02c4
++#define CLK_CON_GAT_MIF_MUX_CMU_ISP_SENSOR1				0x02c8
++#define CLK_CON_MUX_MIF_CMU_ISP_SENSOR1					0x02c8
++#define CLK_CON_GAT_MIF_MUX_CMU_ISP_SENSOR2				0x02cc
++#define CLK_CON_MUX_MIF_CMU_ISP_SENSOR2					0x02cc
++#define CLK_CON_DIV_MIF_BUSD						0x0420
++#define CLK_CON_DIV_MIF_APB						0x0424
++#define CLK_CON_DIV_MIF_HSI2C						0x0430
++#define CLK_CON_DIV_MIF_CMU_G3D_SWITCH					0x0460
++#define CLK_CON_DIV_MIF_CMU_ISP_VRA					0x0464
++#define CLK_CON_DIV_MIF_CMU_ISP_CAM					0x0468
++#define CLK_CON_DIV_MIF_CMU_ISP_ISP					0x046c
++#define CLK_CON_DIV_MIF_CMU_DISPAUD_BUS					0x0470
++#define CLK_CON_DIV_MIF_CMU_DISPAUD_DECON_VCLK				0x0474
++#define CLK_CON_DIV_MIF_CMU_DISPAUD_DECON_ECLK				0x0478
++#define CLK_CON_DIV_MIF_CMU_MFCMSCL_MSCL				0x047c
++#define CLK_CON_DIV_MIF_CMU_MFCMSCL_MFC					0x0480
++#define CLK_CON_DIV_MIF_CMU_FSYS_BUS					0x0484
++#define CLK_CON_DIV_MIF_CMU_FSYS_MMC0					0x0488
++#define CLK_CON_DIV_MIF_CMU_FSYS_MMC1					0x048c
++#define CLK_CON_DIV_MIF_CMU_FSYS_MMC2					0x0490
++#define CLK_CON_DIV_MIF_CMU_FSYS_USB20DRD_REFCLK			0x049c
++#define CLK_CON_DIV_MIF_CMU_PERI_BUS					0x04a0
++#define CLK_CON_DIV_MIF_CMU_PERI_UART1					0x04a4
++#define CLK_CON_DIV_MIF_CMU_PERI_UART2					0x04a8
++#define CLK_CON_DIV_MIF_CMU_PERI_UART0					0x04ac
++#define CLK_CON_DIV_MIF_CMU_PERI_SPI2					0x04b0
++#define CLK_CON_DIV_MIF_CMU_PERI_SPI1					0x04b4
++#define CLK_CON_DIV_MIF_CMU_PERI_SPI0					0x04b8
++#define CLK_CON_DIV_MIF_CMU_PERI_SPI3					0x04bc
++#define CLK_CON_DIV_MIF_CMU_PERI_SPI4					0x04c0
++#define CLK_CON_DIV_MIF_CMU_ISP_SENSOR0					0x04c4
++#define CLK_CON_DIV_MIF_CMU_ISP_SENSOR1					0x04c8
++#define CLK_CON_DIV_MIF_CMU_ISP_SENSOR2					0x04cc
++#define CLK_CON_GAT_MIF_WRAP_ADC_IF_OSC_SYS				0x080c
++#define CLK_CON_GAT_MIF_HSI2C_AP_PCLKS					0x0828
++#define CLK_CON_GAT_MIF_HSI2C_CP_PCLKS					0x0828
++#define CLK_CON_GAT_MIF_WRAP_ADC_IF_PCLK_S0				0x0828
++#define CLK_CON_GAT_MIF_WRAP_ADC_IF_PCLK_S1				0x0828
++#define CLK_CON_GAT_MIF_CP_PCLK_HSI2C					0x0840
++#define CLK_CON_GAT_MIF_CP_PCLK_HSI2C_BAT_0				0x0840
++#define CLK_CON_GAT_MIF_CP_PCLK_HSI2C_BAT_1				0x0840
++#define CLK_CON_GAT_MIF_HSI2C_AP_PCLKM					0x0840
++#define CLK_CON_GAT_MIF_HSI2C_CP_PCLKM					0x0840
++#define CLK_CON_GAT_MIF_HSI2C_IPCLK					0x0840
++#define CLK_CON_GAT_MIF_HSI2C_ITCLK					0x0840
++#define CLK_CON_GAT_MIF_CMU_G3D_SWITCH					0x0860
++#define CLK_CON_GAT_MIF_CMU_ISP_VRA					0x0864
++#define CLK_CON_GAT_MIF_CMU_ISP_CAM					0x0868
++#define CLK_CON_GAT_MIF_CMU_ISP_ISP					0x086c
++#define CLK_CON_GAT_MIF_CMU_DISPAUD_BUS					0x0870
++#define CLK_CON_GAT_MIF_CMU_DISPAUD_DECON_VCLK				0x0874
++#define CLK_CON_GAT_MIF_CMU_DISPAUD_DECON_ECLK				0x0878
++#define CLK_CON_GAT_MIF_CMU_MFCMSCL_MSCL				0x087c
++#define CLK_CON_GAT_MIF_CMU_MFCMSCL_MFC					0x0880
++#define CLK_CON_GAT_MIF_CMU_FSYS_BUS					0x0884
++#define CLK_CON_GAT_MIF_CMU_FSYS_MMC0					0x0888
++#define CLK_CON_GAT_MIF_CMU_FSYS_MMC1					0x088c
++#define CLK_CON_GAT_MIF_CMU_FSYS_MMC2					0x0890
++#define CLK_CON_GAT_MIF_CMU_FSYS_USB20DRD_REFCLK			0x089c
++#define CLK_CON_GAT_MIF_CMU_PERI_BUS					0x08a0
++#define CLK_CON_GAT_MIF_CMU_PERI_UART1					0x08a4
++#define CLK_CON_GAT_MIF_CMU_PERI_UART2					0x08a8
++#define CLK_CON_GAT_MIF_CMU_PERI_UART0					0x08ac
++#define CLK_CON_GAT_MIF_CMU_PERI_SPI2					0x08b0
++#define CLK_CON_GAT_MIF_CMU_PERI_SPI1					0x08b4
++#define CLK_CON_GAT_MIF_CMU_PERI_SPI0					0x08b8
++#define CLK_CON_GAT_MIF_CMU_PERI_SPI3					0x08bc
++#define CLK_CON_GAT_MIF_CMU_PERI_SPI4					0x08c0
++#define CLK_CON_GAT_MIF_CMU_ISP_SENSOR0					0x08c4
++#define CLK_CON_GAT_MIF_CMU_ISP_SENSOR1					0x08c8
++#define CLK_CON_GAT_MIF_CMU_ISP_SENSOR2					0x08cc
++
++static const struct samsung_pll_clock mif_pll_clks[] = {
++	PLL(pll_1417x, CLK_FOUT_MIF_BUS_PLL, "fout_mif_bus_pll", "oscclk",
++	    PLL_CON0_MIF_BUS_PLL),
++	PLL(pll_1417x, CLK_FOUT_MIF_MEDIA_PLL, "fout_mif_media_pll", "oscclk",
++	    PLL_CON0_MIF_MEDIA_PLL),
++	PLL(pll_1417x, CLK_FOUT_MIF_MEM_PLL, "fout_mif_mem_pll", "oscclk",
++	    PLL_CON0_MIF_MEM_PLL),
++};
++
++static const struct samsung_gate_clock mif_pll_gate_clks[] = {
++	GATE(CLK_GOUT_MIF_MUX_BUS_PLL_CON,
++	     "gout_mif_mux_bus_pll_con", "fout_mif_bus_pll",
++	     CLK_CON_GAT_MIF_MUX_BUS_PLL_CON, 12,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_MEDIA_PLL_CON,
++	     "gout_mif_mux_media_pll_con", "fout_mif_media_pll",
++	     CLK_CON_GAT_MIF_MUX_MEDIA_PLL_CON, 12,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_MEM_PLL_CON,
++	     "gout_mif_mux_mem_pll_con", "fout_mif_mem_pll",
++	     CLK_CON_GAT_MIF_MUX_MEM_PLL_CON, 12,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_BUS_PLL,
++	     "gout_mif_mux_bus_pll", "gout_mif_mux_bus_pll_con",
++	     CLK_CON_GAT_MIF_MUX_BUS_PLL, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_MEM_PLL,
++	     "gout_mif_mux_mem_pll", "gout_mif_mux_mem_pll_con",
++	     CLK_CON_GAT_MIF_MUX_MEM_PLL, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_MEDIA_PLL,
++	     "gout_mif_mux_media_pll", "gout_mif_mux_media_pll_con",
++	     CLK_CON_GAT_MIF_MUX_MEDIA_PLL, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++};
++
++static const struct samsung_fixed_factor_clock mif_fixed_factor_clks[] = {
++	FFACTOR(0, "ffac_mif_mux_bus_pll_div2", "gout_mif_mux_bus_pll_con",
++		1, 2, 0),
++	FFACTOR(0, "ffac_mif_mux_media_pll_div2", "gout_mif_mux_media_pll_con",
++		1, 2, 0),
++	FFACTOR(0, "ffac_mif_mux_mem_pll_div2", "gout_mif_mux_mem_pll_con",
++		1, 2, 0),
++};
++
++/* List of parent clocks for muxes in CMU_MIF */
++PNAME(mout_mif_busd_p)				= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2",
++						    "ffac_mif_mux_mem_pll_div2" };
++PNAME(mout_mif_cmu_fsys_bus_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_fsys_mmc0_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_fsys_mmc1_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_fsys_mmc2_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_fsys_usb20drd_refclk_p)	= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_peri_bus_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_peri_spi0_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "oscclk" };
++PNAME(mout_mif_cmu_peri_spi1_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "oscclk" };
++PNAME(mout_mif_cmu_peri_spi2_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "oscclk" };
++PNAME(mout_mif_cmu_peri_spi3_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "oscclk" };
++PNAME(mout_mif_cmu_peri_spi4_p)			= { "ffac_mif_mux_bus_pll_div2",
++						    "oscclk" };
++PNAME(mout_mif_cmu_peri_uart2_p)		= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_peri_uart0_p)		= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++PNAME(mout_mif_cmu_peri_uart1_p)		= { "ffac_mif_mux_bus_pll_div2",
++						    "ffac_mif_mux_media_pll_div2" };
++
++static const struct samsung_mux_clock mif_mux_clks[] = {
++	MUX(CLK_MOUT_MIF_BUSD,
++	    "mout_mif_busd", mout_mif_busd_p,
++	    CLK_CON_MUX_MIF_BUSD, 12, 2),
++	MUX(CLK_MOUT_MIF_CMU_FSYS_BUS,
++	    "mout_mif_cmu_fsys_bus", mout_mif_cmu_fsys_bus_p,
++	    CLK_CON_MUX_MIF_CMU_FSYS_BUS, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_FSYS_MMC0,
++	    "mout_mif_cmu_fsys_mmc0", mout_mif_cmu_fsys_mmc0_p,
++	    CLK_CON_MUX_MIF_CMU_FSYS_MMC0, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_FSYS_MMC1,
++	    "mout_mif_cmu_fsys_mmc1", mout_mif_cmu_fsys_mmc1_p,
++	    CLK_CON_MUX_MIF_CMU_FSYS_MMC1, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_FSYS_MMC2,
++	    "mout_mif_cmu_fsys_mmc2", mout_mif_cmu_fsys_mmc2_p,
++	    CLK_CON_MUX_MIF_CMU_FSYS_MMC2, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_FSYS_USB20DRD_REFCLK,
++	    "mout_mif_cmu_fsys_usb20drd_refclk", mout_mif_cmu_fsys_usb20drd_refclk_p,
++	    CLK_CON_MUX_MIF_CMU_FSYS_USB20DRD_REFCLK, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_BUS,
++	    "mout_mif_cmu_peri_bus", mout_mif_cmu_peri_bus_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_BUS, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_SPI0,
++	    "mout_mif_cmu_peri_spi0", mout_mif_cmu_peri_spi0_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_SPI0, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_SPI1,
++	    "mout_mif_cmu_peri_spi1", mout_mif_cmu_peri_spi1_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_SPI1, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_SPI2,
++	    "mout_mif_cmu_peri_spi2", mout_mif_cmu_peri_spi2_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_SPI2, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_SPI3,
++	    "mout_mif_cmu_peri_spi3", mout_mif_cmu_peri_spi3_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_SPI3, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_SPI4,
++	    "mout_mif_cmu_peri_spi4", mout_mif_cmu_peri_spi4_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_SPI4, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_UART0,
++	    "mout_mif_cmu_peri_uart0", mout_mif_cmu_peri_uart0_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_UART0, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_UART1,
++	    "mout_mif_cmu_peri_uart1", mout_mif_cmu_peri_uart1_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_UART1, 12, 1),
++	MUX(CLK_MOUT_MIF_CMU_PERI_UART2,
++	    "mout_mif_cmu_peri_uart2", mout_mif_cmu_peri_uart2_p,
++	    CLK_CON_MUX_MIF_CMU_PERI_UART2, 12, 1),
++};
++
++static const struct samsung_gate_clock mif_mux_gate_clks[] = {
++	GATE(CLK_GOUT_MIF_MUX_BUSD,
++	     "gout_mif_mux_busd", "mout_mif_busd",
++	     CLK_CON_GAT_MIF_MUX_BUSD, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_FSYS_BUS,
++	     "gout_mif_mux_cmu_fsys_bus", "mout_mif_cmu_fsys_bus",
++	     CLK_CON_GAT_MIF_MUX_CMU_FSYS_BUS, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_FSYS_MMC0,
++	     "gout_mif_mux_cmu_fsys_mmc0", "mout_mif_cmu_fsys_mmc0",
++	     CLK_CON_GAT_MIF_MUX_CMU_FSYS_MMC0, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_FSYS_MMC1,
++	     "gout_mif_mux_cmu_fsys_mmc1", "mout_mif_cmu_fsys_mmc1",
++	     CLK_CON_GAT_MIF_MUX_CMU_FSYS_MMC1, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_FSYS_MMC2,
++	     "gout_mif_mux_cmu_fsys_mmc2", "mout_mif_cmu_fsys_mmc2",
++	     CLK_CON_GAT_MIF_MUX_CMU_FSYS_MMC2, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_FSYS_USB20DRD_REFCLK,
++	     "gout_mif_mux_cmu_fsys_usb20drd_refclk", "mout_mif_cmu_fsys_usb20drd_refclk",
++	     CLK_CON_GAT_MIF_MUX_CMU_FSYS_USB20DRD_REFCLK, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_BUS,
++	     "gout_mif_mux_cmu_peri_bus", "mout_mif_cmu_peri_bus",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_BUS, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_SPI0,
++	     "gout_mif_mux_cmu_peri_spi0", "mout_mif_cmu_peri_spi0",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI0, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_SPI1,
++	     "gout_mif_mux_cmu_peri_spi1", "mout_mif_cmu_peri_spi1",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI1, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_SPI2,
++	     "gout_mif_mux_cmu_peri_spi2", "mout_mif_cmu_peri_spi2",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI2, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_SPI3,
++	     "gout_mif_mux_cmu_peri_spi3", "mout_mif_cmu_peri_spi3",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI3, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_SPI4,
++	     "gout_mif_mux_cmu_peri_spi4", "mout_mif_cmu_peri_spi4",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_SPI4, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_UART0,
++	     "gout_mif_mux_cmu_peri_uart0", "mout_mif_cmu_peri_uart0",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_UART0, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_UART1,
++	     "gout_mif_mux_cmu_peri_uart1", "mout_mif_cmu_peri_uart1",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_UART1, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_MUX_CMU_PERI_UART2,
++	     "gout_mif_mux_cmu_peri_uart2", "mout_mif_cmu_peri_uart2",
++	     CLK_CON_GAT_MIF_MUX_CMU_PERI_UART2, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++};
++
++static const struct samsung_div_clock mif_div_clks[] = {
++	DIV(CLK_DOUT_MIF_HSI2C,
++	    "dout_mif_hsi2c", "ffac_mif_mux_media_pll_div2",
++	    CLK_CON_DIV_MIF_HSI2C, 0, 4),
++	DIV(CLK_DOUT_MIF_BUSD,
++	    "dout_mif_busd", "gout_mif_mux_busd",
++	    CLK_CON_DIV_MIF_BUSD, 0, 4),
++	DIV(CLK_DOUT_MIF_CMU_FSYS_BUS,
++	    "dout_mif_cmu_fsys_bus", "gout_mif_mux_cmu_fsys_bus",
++	    CLK_CON_DIV_MIF_CMU_FSYS_BUS, 0, 4),
++	DIV(CLK_DOUT_MIF_CMU_FSYS_MMC0,
++	    "dout_mif_cmu_fsys_mmc0", "gout_mif_mux_cmu_fsys_mmc0",
++	    CLK_CON_DIV_MIF_CMU_FSYS_MMC0, 0, 10),
++	DIV(CLK_DOUT_MIF_CMU_FSYS_MMC1,
++	    "dout_mif_cmu_fsys_mmc1", "gout_mif_mux_cmu_fsys_mmc1",
++	    CLK_CON_DIV_MIF_CMU_FSYS_MMC1, 0, 10),
++	DIV(CLK_DOUT_MIF_CMU_FSYS_MMC2,
++	    "dout_mif_cmu_fsys_mmc2", "gout_mif_mux_cmu_fsys_mmc2",
++	    CLK_CON_DIV_MIF_CMU_FSYS_MMC2, 0, 10),
++	DIV(CLK_DOUT_MIF_CMU_FSYS_USB20DRD_REFCLK,
++	    "dout_mif_cmu_fsys_usb20drd_refclk", "gout_mif_mux_cmu_fsys_usb20drd_refclk",
++	    CLK_CON_DIV_MIF_CMU_FSYS_USB20DRD_REFCLK, 0, 4),
++	DIV(CLK_DOUT_MIF_CMU_PERI_BUS,
++	    "dout_mif_cmu_peri_bus", "gout_mif_mux_cmu_peri_bus",
++	    CLK_CON_DIV_MIF_CMU_PERI_BUS, 0, 4),
++	DIV(CLK_DOUT_MIF_CMU_PERI_SPI0,
++	    "dout_mif_cmu_peri_spi0", "gout_mif_mux_cmu_peri_spi0",
++	    CLK_CON_DIV_MIF_CMU_PERI_SPI0, 0, 6),
++	DIV(CLK_DOUT_MIF_CMU_PERI_SPI1,
++	    "dout_mif_cmu_peri_spi1", "gout_mif_mux_cmu_peri_spi1",
++	    CLK_CON_DIV_MIF_CMU_PERI_SPI1, 0, 6),
++	DIV(CLK_DOUT_MIF_CMU_PERI_SPI2,
++	    "dout_mif_cmu_peri_spi2", "gout_mif_mux_cmu_peri_spi2",
++	    CLK_CON_DIV_MIF_CMU_PERI_SPI2, 0, 6),
++	DIV(CLK_DOUT_MIF_CMU_PERI_SPI3,
++	    "dout_mif_cmu_peri_spi3", "gout_mif_mux_cmu_peri_spi3",
++	    CLK_CON_DIV_MIF_CMU_PERI_SPI3, 0, 6),
++	DIV(CLK_DOUT_MIF_CMU_PERI_SPI4,
++	    "dout_mif_cmu_peri_spi4", "gout_mif_mux_cmu_peri_spi4",
++	    CLK_CON_DIV_MIF_CMU_PERI_SPI4, 0, 6),
++	DIV(CLK_DOUT_MIF_CMU_PERI_UART0,
++	    "dout_mif_cmu_peri_uart0", "gout_mif_mux_cmu_peri_uart0",
++	    CLK_CON_DIV_MIF_CMU_PERI_UART0, 0, 4),
++	DIV(CLK_DOUT_MIF_CMU_PERI_UART1,
++	    "dout_mif_cmu_peri_uart1", "gout_mif_mux_cmu_peri_uart1",
++	    CLK_CON_DIV_MIF_CMU_PERI_UART1, 0, 4),
++	DIV(CLK_DOUT_MIF_CMU_PERI_UART2,
++	    "dout_mif_cmu_peri_uart2", "gout_mif_mux_cmu_peri_uart2",
++	    CLK_CON_DIV_MIF_CMU_PERI_UART2, 0, 4),
++	DIV(CLK_DOUT_MIF_APB,
++	    "dout_mif_apb", "dout_mif_busd",
++	    CLK_CON_DIV_MIF_APB, 0, 2),
++};
++
++static const struct samsung_gate_clock mif_gate_clks[] = {
++	GATE(CLK_GOUT_MIF_WRAP_ADC_IF_OSC_SYS,
++	     "gout_mif_wrap_adc_if_osc_sys", "oscclk",
++	     CLK_CON_GAT_MIF_WRAP_ADC_IF_OSC_SYS, 3,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_HSI2C_AP_PCLKS,
++	     "gout_mif_hsi2c_ap_pclks", "dout_mif_apb",
++	     CLK_CON_GAT_MIF_HSI2C_AP_PCLKS, 14,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_HSI2C_CP_PCLKS,
++	     "gout_mif_hsi2c_cp_pclks", "dout_mif_apb",
++	     CLK_CON_GAT_MIF_HSI2C_CP_PCLKS, 15,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_WRAP_ADC_IF_PCLK_S0,
++	     "gout_mif_wrap_adc_if_pclk_s0", "dout_mif_apb",
++	     CLK_CON_GAT_MIF_WRAP_ADC_IF_PCLK_S0, 20,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_WRAP_ADC_IF_PCLK_S1,
++	     "gout_mif_wrap_adc_if_pclk_s1", "dout_mif_apb",
++	     CLK_CON_GAT_MIF_WRAP_ADC_IF_PCLK_S1, 21,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_FSYS_BUS,
++	     "gout_mif_cmu_fsys_bus", "dout_mif_cmu_fsys_bus",
++	     CLK_CON_GAT_MIF_CMU_FSYS_BUS, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_FSYS_MMC0,
++	     "gout_mif_cmu_fsys_mmc0", "dout_mif_cmu_fsys_mmc0",
++	     CLK_CON_GAT_MIF_CMU_FSYS_MMC0, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_FSYS_MMC1,
++	     "gout_mif_cmu_fsys_mmc1", "dout_mif_cmu_fsys_mmc1",
++	     CLK_CON_GAT_MIF_CMU_FSYS_MMC1, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_FSYS_MMC2,
++	     "gout_mif_cmu_fsys_mmc2", "dout_mif_cmu_fsys_mmc2",
++	     CLK_CON_GAT_MIF_CMU_FSYS_MMC2, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_FSYS_USB20DRD_REFCLK,
++	     "gout_mif_cmu_fsys_usb20drd_refclk", "dout_mif_cmu_fsys_usb20drd_refclk",
++	     CLK_CON_GAT_MIF_CMU_FSYS_USB20DRD_REFCLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_BUS,
++	     "gout_mif_cmu_peri_bus", "dout_mif_cmu_peri_bus",
++	     CLK_CON_GAT_MIF_CMU_PERI_BUS, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_SPI0,
++	     "gout_mif_cmu_peri_spi0", "dout_mif_cmu_peri_spi0",
++	     CLK_CON_GAT_MIF_CMU_PERI_SPI0, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_SPI1,
++	     "gout_mif_cmu_peri_spi1", "dout_mif_cmu_peri_spi1",
++	     CLK_CON_GAT_MIF_CMU_PERI_SPI1, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_SPI2,
++	     "gout_mif_cmu_peri_spi2", "dout_mif_cmu_peri_spi2",
++	     CLK_CON_GAT_MIF_CMU_PERI_SPI2, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_SPI3,
++	     "gout_mif_cmu_peri_spi3", "dout_mif_cmu_peri_spi3",
++	     CLK_CON_GAT_MIF_CMU_PERI_SPI3, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_SPI4,
++	     "gout_mif_cmu_peri_spi4", "dout_mif_cmu_peri_spi4",
++	     CLK_CON_GAT_MIF_CMU_PERI_SPI4, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_UART0,
++	     "gout_mif_cmu_peri_uart0", "dout_mif_cmu_peri_uart0",
++	     CLK_CON_GAT_MIF_CMU_PERI_UART0, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_UART1,
++	     "gout_mif_cmu_peri_uart1", "dout_mif_cmu_peri_uart1",
++	     CLK_CON_GAT_MIF_CMU_PERI_UART1, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CMU_PERI_UART2,
++	     "gout_mif_cmu_peri_uart2", "dout_mif_cmu_peri_uart2",
++	     CLK_CON_GAT_MIF_CMU_PERI_UART2, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CP_PCLK_HSI2C,
++	     "gout_mif_cp_pclk_hsi2c", "dout_mif_hsi2c",
++	     CLK_CON_GAT_MIF_CP_PCLK_HSI2C, 6,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CP_PCLK_HSI2C_BAT_0,
++	     "gout_mif_cp_pclk_hsi2c_bat_0", "dout_mif_hsi2c",
++	     CLK_CON_GAT_MIF_CP_PCLK_HSI2C_BAT_0, 4,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_CP_PCLK_HSI2C_BAT_1,
++	     "gout_mif_cp_pclk_hsi2c_bat_1", "dout_mif_hsi2c",
++	     CLK_CON_GAT_MIF_CP_PCLK_HSI2C_BAT_1, 5,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_HSI2C_AP_PCLKM,
++	     "gout_mif_hsi2c_ap_pclkm", "dout_mif_hsi2c",
++	     CLK_CON_GAT_MIF_HSI2C_AP_PCLKM, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_HSI2C_CP_PCLKM,
++	     "gout_mif_hsi2c_cp_pclkm", "dout_mif_hsi2c",
++	     CLK_CON_GAT_MIF_HSI2C_CP_PCLKM, 1,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_HSI2C_IPCLK,
++	     "gout_mif_hsi2c_ipclk", "dout_mif_hsi2c",
++	     CLK_CON_GAT_MIF_HSI2C_IPCLK, 2,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_MIF_HSI2C_ITCLK,
++	     "gout_mif_hsi2c_itclk", "dout_mif_hsi2c",
++	     CLK_CON_GAT_MIF_HSI2C_ITCLK, 3,
++	     CLK_SET_RATE_PARENT, 0),
++};
++
++static const struct samsung_clk_group mif_cmu_clks[] = {
++	{ S_CLK_PLL, mif_pll_clks, ARRAY_SIZE(mif_pll_clks) },
++	{ S_CLK_GATE, mif_pll_gate_clks, ARRAY_SIZE(mif_pll_gate_clks) },
++	{ S_CLK_FFACTOR, mif_fixed_factor_clks, ARRAY_SIZE(mif_fixed_factor_clks) },
++	{ S_CLK_MUX, mif_mux_clks, ARRAY_SIZE(mif_mux_clks) },
++	{ S_CLK_GATE, mif_mux_gate_clks, ARRAY_SIZE(mif_mux_gate_clks) },
++	{ S_CLK_DIV, mif_div_clks, ARRAY_SIZE(mif_div_clks) },
++	{ S_CLK_GATE, mif_gate_clks, ARRAY_SIZE(mif_gate_clks) },
++};
++
++static int exynos7870_cmu_mif_probe(struct udevice *dev)
 +{
-+	struct clk *c;
-+	int ret;
-+
-+	ret = clk_get_by_id(clk->id, &c);
-+	if (ret)
-+		return ret;
-+
-+	clk->dev = c->dev;
-+	return 0;
++	return samsung_register_cmu(dev, CMU_MIF, mif_cmu_clks,
++				    exynos7870_cmu_mif);
 +}
 +
- static void
- samsung_clk_register_fixed_rate(struct udevice *dev, void __iomem *base,
- 				unsigned int cmu_id,
-diff --git a/drivers/clk/exynos/clk.h b/drivers/clk/exynos/clk.h
-index e53dcc6a821a4d11ce0ca3f2086aa9e425ff88c7..c25b7cb59d4f2792d395c7a67e40fd0be8fc46da 100644
---- a/drivers/clk/exynos/clk.h
-+++ b/drivers/clk/exynos/clk.h
-@@ -9,10 +9,13 @@
- #ifndef __EXYNOS_CLK_H
- #define __EXYNOS_CLK_H
- 
-+#include <clk.h>
- #include <errno.h>
- #include <linux/clk-provider.h>
- #include "clk-pll.h"
- 
-+int samsung_clk_request(struct clk *clk);
++static const struct udevice_id exynos7870_cmu_mif_ids[] = {
++	{ .compatible = "samsung,exynos7870-cmu-mif" },
++	{ }
++};
 +
- #define _SAMSUNG_CLK_OPS(_name, _cmu)					\
- static int _name##_of_xlate(struct clk *clk,				\
- 			    struct ofnode_phandle_args *args)		\
-@@ -37,6 +40,7 @@ static const struct clk_ops _name##_clk_ops = {				\
- 	.enable = ccf_clk_enable,					\
- 	.disable = ccf_clk_disable,					\
- 	.of_xlate = _name##_of_xlate,					\
-+	.request = samsung_clk_request,					\
- }
- 
- /**
++SAMSUNG_CLK_OPS(exynos7870_cmu_mif, CMU_MIF);
++
++U_BOOT_DRIVER(exynos7870_cmu_mif) = {
++	.name		= "exynos7870-cmu-mif",
++	.id		= UCLASS_CLK,
++	.of_match	= exynos7870_cmu_mif_ids,
++	.ops		= &exynos7870_cmu_mif_clk_ops,
++	.probe		= exynos7870_cmu_mif_probe,
++	.flags		= DM_FLAG_PRE_RELOC,
++};
++
++/*
++ * Register offsets for CMU_FSYS (0x13730000)
++ */
++#define PLL_LOCKTIME_FSYS_USB_PLL					0x0000
++#define PLL_CON0_FSYS_USB_PLL						0x0100
++#define CLK_CON_GAT_FSYS_MUX_USB_PLL					0x0200
++#define CLK_CON_GAT_FSYS_MUX_USB_PLL_CON				0x0200
++#define CLK_CON_GAT_FSYS_MUX_USB20DRD_PHYCLOCK_USER			0x0230
++#define CLK_CON_GAT_FSYS_MUX_USB20DRD_PHYCLOCK_USER_CON			0x0230
++#define CLK_CON_GAT_FSYS_BUSP3_HCLK					0x0804
++#define CLK_CON_GAT_FSYS_MMC0_ACLK					0x0804
++#define CLK_CON_GAT_FSYS_MMC1_ACLK					0x0804
++#define CLK_CON_GAT_FSYS_MMC2_ACLK					0x0804
++#define CLK_CON_GAT_FSYS_PDMA0_ACLK_PDMA0				0x0804
++#define CLK_CON_GAT_FSYS_PPMU_ACLK					0x0804
++#define CLK_CON_GAT_FSYS_PPMU_PCLK					0x0804
++#define CLK_CON_GAT_FSYS_SROMC_HCLK					0x0804
++#define CLK_CON_GAT_FSYS_UPSIZER_BUS1_ACLK				0x0804
++#define CLK_CON_GAT_FSYS_USB20DRD_ACLK_HSDRD				0x0804
++#define CLK_CON_GAT_FSYS_USB20DRD_HCLK_USB20_CTRL			0x0804
++#define CLK_CON_GAT_FSYS_USB20DRD_HSDRD_REF_CLK				0x0828
++
++static const struct samsung_fixed_rate_clock fsys_fixed_rate_clks[] = {
++	FRATE(0, "frat_fsys_usb20drd_phyclock", 60000000),
++};
++
++static const struct samsung_pll_clock fsys_pll_clks[] = {
++	PLL(pll_1417x, CLK_FOUT_FSYS_USB_PLL, "fout_fsys_usb_pll", "oscclk",
++	    PLL_CON0_FSYS_USB_PLL),
++};
++
++static const struct samsung_gate_clock fsys_gate_clks[] = {
++	GATE(CLK_GOUT_FSYS_BUSP3_HCLK,
++	     "gout_fsys_busp3_hclk", "bus",
++	     CLK_CON_GAT_FSYS_BUSP3_HCLK, 2,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_UPSIZER_BUS1_ACLK,
++	     "gout_fsys_upsizer_bus1_aclk", "bus",
++	     CLK_CON_GAT_FSYS_UPSIZER_BUS1_ACLK, 12,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_PPMU_ACLK,
++	     "gout_fsys_ppmu_aclk", "bus",
++	     CLK_CON_GAT_FSYS_PPMU_ACLK, 17,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_PPMU_PCLK,
++	     "gout_fsys_ppmu_pclk", "bus",
++	     CLK_CON_GAT_FSYS_PPMU_PCLK, 18,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_USB20DRD_HSDRD_REF_CLK,
++	     "gout_fsys_usb20drd_hsdrd_ref_clk", "usb20drd",
++	     CLK_CON_GAT_FSYS_USB20DRD_HSDRD_REF_CLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_MUX_USB20DRD_PHYCLOCK_USER_CON,
++	     "gout_fsys_mux_usb20drd_phyclock_user_con", "frat_fsys_usb20drd_phyclock",
++	     CLK_CON_GAT_FSYS_MUX_USB20DRD_PHYCLOCK_USER_CON, 12,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_MUX_USB_PLL_CON,
++	     "gout_fsys_mux_usb_pll_con", "fout_fsys_usb_pll",
++	     CLK_CON_GAT_FSYS_MUX_USB_PLL_CON, 12,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_MMC0_ACLK,
++	     "gout_fsys_mmc0_aclk", "gout_fsys_busp3_hclk",
++	     CLK_CON_GAT_FSYS_MMC0_ACLK, 8,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_MMC1_ACLK,
++	     "gout_fsys_mmc1_aclk", "gout_fsys_busp3_hclk",
++	     CLK_CON_GAT_FSYS_MMC1_ACLK, 9,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_MMC2_ACLK,
++	     "gout_fsys_mmc2_aclk", "gout_fsys_busp3_hclk",
++	     CLK_CON_GAT_FSYS_MMC2_ACLK, 10,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_USB20DRD_ACLK_HSDRD,
++	     "gout_fsys_usb20drd_aclk_hsdrd", "gout_fsys_busp3_hclk",
++	     CLK_CON_GAT_FSYS_USB20DRD_ACLK_HSDRD, 20,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_SROMC_HCLK,
++	     "gout_fsys_sromc_hclk", "gout_fsys_busp3_hclk",
++	     CLK_CON_GAT_FSYS_SROMC_HCLK, 6,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_USB20DRD_HCLK_USB20_CTRL,
++	     "gout_fsys_usb20drd_hclk_usb20_ctrl", "gout_fsys_busp3_hclk",
++	     CLK_CON_GAT_FSYS_USB20DRD_HCLK_USB20_CTRL, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_MUX_USB_PLL,
++	     "gout_fsys_mux_usb_pll", "gout_fsys_mux_usb_pll_con",
++	     CLK_CON_GAT_FSYS_MUX_USB_PLL, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_MUX_USB20DRD_PHYCLOCK_USER,
++	     "gout_fsys_mux_usb20drd_phyclock_user", "gout_fsys_mux_usb20drd_phyclock_user_con",
++	     CLK_CON_GAT_FSYS_MUX_USB20DRD_PHYCLOCK_USER, 21,
++	     CLK_IS_CRITICAL | CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_FSYS_PDMA0_ACLK_PDMA0,
++	     "gout_fsys_pdma0_aclk_pdma0", "gout_fsys_upsizer_bus1_aclk",
++	     CLK_CON_GAT_FSYS_PDMA0_ACLK_PDMA0, 7,
++	     CLK_SET_RATE_PARENT, 0),
++};
++
++static const struct samsung_clk_group fsys_cmu_clks[] = {
++	{ S_CLK_FRATE, fsys_fixed_rate_clks, ARRAY_SIZE(fsys_fixed_rate_clks) },
++	{ S_CLK_PLL, fsys_pll_clks, ARRAY_SIZE(fsys_pll_clks) },
++	{ S_CLK_GATE, fsys_gate_clks, ARRAY_SIZE(fsys_gate_clks) },
++};
++
++static int exynos7870_cmu_fsys_probe(struct udevice *dev)
++{
++	return samsung_register_cmu(dev, CMU_FSYS, fsys_cmu_clks,
++				    exynos7870_cmu_fsys);
++}
++
++static const struct udevice_id exynos7870_cmu_fsys_ids[] = {
++	{ .compatible = "samsung,exynos7870-cmu-fsys" },
++	{ }
++};
++
++SAMSUNG_CLK_OPS(exynos7870_cmu_fsys, CMU_FSYS);
++
++U_BOOT_DRIVER(exynos7870_cmu_fsys) = {
++	.name		= "exynos7870-cmu-fsys",
++	.id		= UCLASS_CLK,
++	.of_match	= exynos7870_cmu_fsys_ids,
++	.ops		= &exynos7870_cmu_fsys_clk_ops,
++	.probe		= exynos7870_cmu_fsys_probe,
++	.flags		= DM_FLAG_PRE_RELOC,
++};
++
++/*
++ * Register offsets for CMU_PERI (0x101f0000)
++ */
++#define CLK_CON_GAT_PERI_PWM_MOTOR_OSCCLK				0x0800
++#define CLK_CON_GAT_PERI_TMU_CLK					0x0800
++#define CLK_CON_GAT_PERI_TMU_CPUCL0_CLK					0x0800
++#define CLK_CON_GAT_PERI_TMU_CPUCL1_CLK					0x0800
++#define CLK_CON_GAT_PERI_BUSP1_PERIC0_HCLK				0x0810
++#define CLK_CON_GAT_PERI_GPIO2_PCLK					0x0810
++#define CLK_CON_GAT_PERI_GPIO5_PCLK					0x0810
++#define CLK_CON_GAT_PERI_GPIO6_PCLK					0x0810
++#define CLK_CON_GAT_PERI_GPIO7_PCLK					0x0810
++#define CLK_CON_GAT_PERI_HSI2C1_IPCLK					0x0810
++#define CLK_CON_GAT_PERI_HSI2C2_IPCLK					0x0810
++#define CLK_CON_GAT_PERI_HSI2C3_IPCLK					0x0810
++#define CLK_CON_GAT_PERI_HSI2C4_IPCLK					0x0810
++#define CLK_CON_GAT_PERI_HSI2C5_IPCLK					0x0810
++#define CLK_CON_GAT_PERI_HSI2C6_IPCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C0_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C1_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C2_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C3_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C4_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C5_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C6_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C7_PCLK					0x0810
++#define CLK_CON_GAT_PERI_I2C8_PCLK					0x0810
++#define CLK_CON_GAT_PERI_MCT_PCLK					0x0810
++#define CLK_CON_GAT_PERI_PWM_MOTOR_PCLK_S0				0x0810
++#define CLK_CON_GAT_PERI_SFRIF_TMU_CPUCL0_PCLK				0x0814
++#define CLK_CON_GAT_PERI_SFRIF_TMU_CPUCL1_PCLK				0x0814
++#define CLK_CON_GAT_PERI_SFRIF_TMU_PCLK					0x0814
++#define CLK_CON_GAT_PERI_SPI0_PCLK					0x0814
++#define CLK_CON_GAT_PERI_SPI1_PCLK					0x0814
++#define CLK_CON_GAT_PERI_SPI2_PCLK					0x0814
++#define CLK_CON_GAT_PERI_SPI3_PCLK					0x0814
++#define CLK_CON_GAT_PERI_SPI4_PCLK					0x0814
++#define CLK_CON_GAT_PERI_UART0_PCLK					0x0814
++#define CLK_CON_GAT_PERI_UART1_PCLK					0x0814
++#define CLK_CON_GAT_PERI_UART2_PCLK					0x0814
++#define CLK_CON_GAT_PERI_WDT_CPUCL0_PCLK				0x0814
++#define CLK_CON_GAT_PERI_WDT_CPUCL1_PCLK				0x0814
++#define CLK_CON_GAT_PERI_UART1_EXT_UCLK					0x0830
++#define CLK_CON_GAT_PERI_UART2_EXT_UCLK					0x0834
++#define CLK_CON_GAT_PERI_UART0_EXT_UCLK					0x0838
++#define CLK_CON_GAT_PERI_SPI2_SPI_EXT_CLK				0x083c
++#define CLK_CON_GAT_PERI_SPI1_SPI_EXT_CLK				0x0840
++#define CLK_CON_GAT_PERI_SPI0_SPI_EXT_CLK				0x0844
++#define CLK_CON_GAT_PERI_SPI3_SPI_EXT_CLK				0x0848
++#define CLK_CON_GAT_PERI_SPI4_SPI_EXT_CLK				0x084c
++
++static const struct samsung_gate_clock peri_gate_clks[] = {
++	GATE(CLK_GOUT_PERI_PWM_MOTOR_OSCCLK,
++	     "gout_peri_pwm_motor_oscclk", "oscclk",
++	     CLK_CON_GAT_PERI_PWM_MOTOR_OSCCLK, 2,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_TMU_CLK,
++	     "gout_peri_tmu_clk", "oscclk",
++	     CLK_CON_GAT_PERI_TMU_CLK, 6,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_TMU_CPUCL0_CLK,
++	     "gout_peri_tmu_cpucl0_clk", "oscclk",
++	     CLK_CON_GAT_PERI_TMU_CPUCL0_CLK, 4,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_TMU_CPUCL1_CLK,
++	     "gout_peri_tmu_cpucl1_clk", "oscclk",
++	     CLK_CON_GAT_PERI_TMU_CPUCL1_CLK, 5,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_BUSP1_PERIC0_HCLK,
++	     "gout_peri_busp1_peric0_hclk", "bus",
++	     CLK_CON_GAT_PERI_BUSP1_PERIC0_HCLK, 3,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_GPIO2_PCLK,
++	     "gout_peri_gpio2_pclk", "bus",
++	     CLK_CON_GAT_PERI_GPIO2_PCLK, 7,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_GPIO5_PCLK,
++	     "gout_peri_gpio5_pclk", "bus",
++	     CLK_CON_GAT_PERI_GPIO5_PCLK, 8,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_GPIO6_PCLK,
++	     "gout_peri_gpio6_pclk", "bus",
++	     CLK_CON_GAT_PERI_GPIO6_PCLK, 9,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_GPIO7_PCLK,
++	     "gout_peri_gpio7_pclk", "bus",
++	     CLK_CON_GAT_PERI_GPIO7_PCLK, 10,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_HSI2C5_IPCLK,
++	     "gout_peri_hsi2c5_ipclk", "bus",
++	     CLK_CON_GAT_PERI_HSI2C5_IPCLK, 15,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_HSI2C6_IPCLK,
++	     "gout_peri_hsi2c6_ipclk", "bus",
++	     CLK_CON_GAT_PERI_HSI2C6_IPCLK, 16,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_MCT_PCLK,
++	     "gout_peri_mct_pclk", "bus",
++	     CLK_CON_GAT_PERI_MCT_PCLK, 26,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_PWM_MOTOR_PCLK_S0,
++	     "gout_peri_pwm_motor_pclk_s0", "bus",
++	     CLK_CON_GAT_PERI_PWM_MOTOR_PCLK_S0, 29,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SFRIF_TMU_CPUCL0_PCLK,
++	     "gout_peri_sfrif_tmu_cpucl0_pclk", "bus",
++	     CLK_CON_GAT_PERI_SFRIF_TMU_CPUCL0_PCLK, 1,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SFRIF_TMU_CPUCL1_PCLK,
++	     "gout_peri_sfrif_tmu_cpucl1_pclk", "bus",
++	     CLK_CON_GAT_PERI_SFRIF_TMU_CPUCL1_PCLK, 2,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SFRIF_TMU_PCLK,
++	     "gout_peri_sfrif_tmu_pclk", "bus",
++	     CLK_CON_GAT_PERI_SFRIF_TMU_PCLK, 3,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI0_PCLK,
++	     "gout_peri_spi0_pclk", "bus",
++	     CLK_CON_GAT_PERI_SPI0_PCLK, 6,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI1_PCLK,
++	     "gout_peri_spi1_pclk", "bus",
++	     CLK_CON_GAT_PERI_SPI1_PCLK, 5,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI2_PCLK,
++	     "gout_peri_spi2_pclk", "bus",
++	     CLK_CON_GAT_PERI_SPI2_PCLK, 4,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI3_PCLK,
++	     "gout_peri_spi3_pclk", "bus",
++	     CLK_CON_GAT_PERI_SPI3_PCLK, 7,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI4_PCLK,
++	     "gout_peri_spi4_pclk", "bus",
++	     CLK_CON_GAT_PERI_SPI4_PCLK, 8,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_WDT_CPUCL0_PCLK,
++	     "gout_peri_wdt_cpucl0_pclk", "bus",
++	     CLK_CON_GAT_PERI_WDT_CPUCL0_PCLK, 13,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_WDT_CPUCL1_PCLK,
++	     "gout_peri_wdt_cpucl1_pclk", "bus",
++	     CLK_CON_GAT_PERI_WDT_CPUCL1_PCLK, 14,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI0_SPI_EXT_CLK,
++	     "gout_peri_spi0_spi_ext_clk", "spi0",
++	     CLK_CON_GAT_PERI_SPI0_SPI_EXT_CLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI1_SPI_EXT_CLK,
++	     "gout_peri_spi1_spi_ext_clk", "spi1",
++	     CLK_CON_GAT_PERI_SPI1_SPI_EXT_CLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI2_SPI_EXT_CLK,
++	     "gout_peri_spi2_spi_ext_clk", "spi2",
++	     CLK_CON_GAT_PERI_SPI2_SPI_EXT_CLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI3_SPI_EXT_CLK,
++	     "gout_peri_spi3_spi_ext_clk", "spi3",
++	     CLK_CON_GAT_PERI_SPI3_SPI_EXT_CLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_SPI4_SPI_EXT_CLK,
++	     "gout_peri_spi4_spi_ext_clk", "spi4",
++	     CLK_CON_GAT_PERI_SPI4_SPI_EXT_CLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_UART0_EXT_UCLK,
++	     "gout_peri_uart0_ext_uclk", "uart0",
++	     CLK_CON_GAT_PERI_UART0_EXT_UCLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_UART1_EXT_UCLK,
++	     "gout_peri_uart1_ext_uclk", "uart1",
++	     CLK_CON_GAT_PERI_UART1_EXT_UCLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_UART2_EXT_UCLK,
++	     "gout_peri_uart2_ext_uclk", "uart2",
++	     CLK_CON_GAT_PERI_UART2_EXT_UCLK, 0,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_HSI2C1_IPCLK,
++	     "gout_peri_hsi2c1_ipclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_HSI2C1_IPCLK, 11,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_HSI2C2_IPCLK,
++	     "gout_peri_hsi2c2_ipclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_HSI2C2_IPCLK, 12,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_HSI2C3_IPCLK,
++	     "gout_peri_hsi2c3_ipclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_HSI2C3_IPCLK, 13,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_HSI2C4_IPCLK,
++	     "gout_peri_hsi2c4_ipclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_HSI2C4_IPCLK, 14,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C0_PCLK,
++	     "gout_peri_i2c0_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C0_PCLK, 21,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C1_PCLK,
++	     "gout_peri_i2c1_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C1_PCLK, 23,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C2_PCLK,
++	     "gout_peri_i2c2_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C2_PCLK, 22,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C3_PCLK,
++	     "gout_peri_i2c3_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C3_PCLK, 20,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C4_PCLK,
++	     "gout_peri_i2c4_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C4_PCLK, 17,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C5_PCLK,
++	     "gout_peri_i2c5_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C5_PCLK, 18,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C6_PCLK,
++	     "gout_peri_i2c6_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C6_PCLK, 19,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C7_PCLK,
++	     "gout_peri_i2c7_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C7_PCLK, 24,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_I2C8_PCLK,
++	     "gout_peri_i2c8_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_I2C8_PCLK, 25,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_UART0_PCLK,
++	     "gout_peri_uart0_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_UART0_PCLK, 10,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_UART1_PCLK,
++	     "gout_peri_uart1_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_UART1_PCLK, 11,
++	     CLK_SET_RATE_PARENT, 0),
++	GATE(CLK_GOUT_PERI_UART2_PCLK,
++	     "gout_peri_uart2_pclk", "gout_peri_busp1_peric0_hclk",
++	     CLK_CON_GAT_PERI_UART2_PCLK, 12,
++	     CLK_SET_RATE_PARENT, 0),
++};
++
++static const struct samsung_clk_group peri_cmu_clks[] = {
++	{ S_CLK_GATE, peri_gate_clks, ARRAY_SIZE(peri_gate_clks) },
++};
++
++static int exynos7870_cmu_peri_probe(struct udevice *dev)
++{
++	return samsung_register_cmu(dev, CMU_PERI, peri_cmu_clks,
++				    exynos7870_cmu_peri);
++}
++
++static const struct udevice_id exynos7870_cmu_peri_ids[] = {
++	{ .compatible = "samsung,exynos7870-cmu-peri" },
++	{ }
++};
++
++SAMSUNG_CLK_OPS(exynos7870_cmu_peri, CMU_PERI);
++
++U_BOOT_DRIVER(exynos7870_cmu_peri) = {
++	.name		= "exynos7870-cmu-peri",
++	.id		= UCLASS_CLK,
++	.of_match	= exynos7870_cmu_peri_ids,
++	.ops		= &exynos7870_cmu_peri_clk_ops,
++	.probe		= exynos7870_cmu_peri_probe,
++	.flags		= DM_FLAG_PRE_RELOC,
++};
 
 -- 
 2.51.0
