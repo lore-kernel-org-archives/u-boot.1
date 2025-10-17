@@ -4,82 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B87CCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 01:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B0F5CCD183
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 01:33:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DAFC836D1;
-	Fri, 17 Oct 2025 03:24:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8DF72836D1;
+	Fri, 17 Oct 2025 03:33:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aB3Tn7ji";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="O1FW3XBb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA2A683710; Fri, 17 Oct 2025 03:24:01 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E828C83700; Fri, 17 Oct 2025 03:33:55 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B348F8367F
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 03:23:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80BD48367F
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 03:33:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-646f75551e7so633811eaf.0
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 18:23:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760664238; x=1761269038; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=yue9gRwxJge4DvN6MaHW7OHp9C3Mm7iTAqObgz7s3Zw=;
- b=aB3Tn7jis2VKa2uZW55MbV7ivJI4dEri24or5KB3o53aIiZMHw9cKAWlC1SWS3Uood
- jb5x2GAFl1/T3j1Js2x3RX9xG7qazNdw8e8mSwPg4K8lw/0M06UkDtaN06m4yMwqYMB7
- U70orbiuF5Kl+jCCkGDgZ3z5LlfQ3xh8Z1y2U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760664238; x=1761269038;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=yue9gRwxJge4DvN6MaHW7OHp9C3Mm7iTAqObgz7s3Zw=;
- b=YwgjV5iFVo1SRKqTdeK6ihjyNijLWxI66wj2UJytHs5JDAhHyqNa5oFrLooII2daRb
- kWli51jOkXLXtO5iuezDh0lCTwl02bUU64LmwSiWYqBv1phljNJfCLJ0qePTobnN94x9
- ++PhmECwVEfcwN/98flbOKF22ZWOBY+aswZvIrF3vjeN77tXDhVbHYpXTy++t6C2VQcg
- lO9CqsaZmS1+zNhXGPvzB+Mm0AGBDrizoYVO55YZU7BK3ZlHfx7qB9iwg9e8GYs0F2gB
- /x9s0GN6zJbGwHvkuGTYZp7AX4R8iUR2tvrfzY1GNRyB230Z7TFOXIVdeVLH49cH0xAk
- FAwQ==
-X-Gm-Message-State: AOJu0YwyviwAITxBWjfGi7EV/qEpBZS8PMsgxE/Gj9S7x76kdaJiRjRX
- NfZqncmjYtULgqCBHOv/2vq3u/vnFFjoG0iUFZOIPYzo6yaFPdV/xrlCIInBi2xVaF+OfNcnyDo
- F+H7jh5I=
-X-Gm-Gg: ASbGncvOMdwVtkl1ZNQZYXlf+49oPnpmLL/1yG7wKYKOcUFti37sc/yO9XxpEDFWV0S
- PzwPT7HeiC/rGG7heEJt/fXUMqhGapSbmKi9wNIiDjv2AiaVoDLbgxF8K6gapzKKiiNQYVvroRd
- 2qhxsXO/tCna5jyYRfHR51wGu/HdZvg2LCHkj8u0bgQuaNZZMffl6KtjP5OnSDI5AgVhMHUac5m
- 9xIZiwaH5dDR+vgYz6f4SHeS8eELeTaYovH8MVdoNdH58U64Gupq1EYjlNBspEbBBoOC7bEuqXE
- UCQBjezJ2km8XnJY9LC5n+XmXuEGzjfKMJhFyP3X59Ax94T6ABJQQpY/NZD1lWFxDw6opkVK7sI
- bgmbYVBI9Ifcokqwb0o7g7o7WpbYGw+pYeI5fUNq8J2xT1JVBF7fS9eLKYuOsx2it7I24NOyhyy
- kMk3SUbLiPkOK6BBaP9hKQf9BTkqTn7sdt+IyaewIMp33ImUEM
-X-Google-Smtp-Source: AGHT+IH3gYwgEGrD7mJYm9OEo1VMlxUnpS252bVamhkUhviuDcb2mKGedvKz6QdNSnGRrygcOiEv7A==
-X-Received: by 2002:a05:6808:2112:b0:43f:1b7d:b631 with SMTP id
- 5614622812f47-443a30af9femr998347b6e.35.1760664238453; 
- Thu, 16 Oct 2025 18:23:58 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-65018130f87sm5157512eaf.3.2025.10.16.18.23.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 18:23:57 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251010220900.1197565-1-trini@konsulko.com>
-References: <20251010134330.1094378-1-trini@konsulko.com>
- <20251010220900.1197565-1-trini@konsulko.com>
-Subject: Re: [PATCH v2] test/py: Update to a newer pytest release
-Message-Id: <176066423677.298873.3037138015940767723.b4-ty@konsulko.com>
-Date: Thu, 16 Oct 2025 19:23:56 -0600
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 40D8026250;
+ Fri, 17 Oct 2025 03:33:53 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id jsLMZlZzlD6A; Fri, 17 Oct 2025 03:33:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1760664831; bh=1pdoaI2xvoBZ5Z6eNm8vHFkw7wgkadwUPadmfHDWBck=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=O1FW3XBb6puJiPrD50KmkLbYu9PQmwfXL6dJeshNJpnAdAu+FYZ+mCSDaK7fdZ/8t
+ nVKIDwVUWmZd3NuGxTk33yfj+/62ijyFvaLnLXP+UBkEGOmjIHVTNJhzNke9RpYAJe
+ 46yTKyk3Teajg2kiV90YBG+i3lAa4BkAx+WSeLvBddm7Xr6VpeC12kts1+6U/DqmxE
+ +FSlP4nQN23EwcNGCXiWE//MkZZgVtgSIawW+mIv8s+Oq9YvHcpj0EyC9Vf17acL0n
+ ZwAA6AWX89VFBa1lH8xz+4y4Fa/OhTHcNH7KRCKnK1fl3H99s6/RmgbzK6a/n4mJnu
+ fSGfLprLU7wNw==
+Date: Fri, 17 Oct 2025 01:33:11 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>
+Subject: Re: [PATCH 1/1] riscv: consider CONFIG_RISCV_ISA_ZAAMO in SPL too
+Message-ID: <aPGc12v2H5sCZNMi@pie>
+References: <20251016165851.45311-1-heinrich.schuchardt@canonical.com>
+ <9fdc0e15-c37b-4f1b-8148-bf3de590be0c@canonical.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9fdc0e15-c37b-4f1b-8148-bf3de590be0c@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,19 +71,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 10 Oct 2025 16:09:00 -0600, Tom Rini wrote:
+On Thu, Oct 16, 2025 at 07:04:48PM +0200, Heinrich Schuchardt wrote:
+> On 10/16/25 18:58, Heinrich Schuchardt wrote:
+> > Commit a681cfecb434 ("riscv: Add a Zalrsc-only alternative for
+> > synchronization in start.S") changed the hart synchronization in start.S.
+> > It uses CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO) to determine which method to
+> > use. If the macro evaluates to true the old behavior is maintained.
+> > 
+> > The macro evaluates to false for SPL builds which was unintended. Use
+> > IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO) instead.
+> > 
+> > This fixes a boot failure on StarFive JH7110 based boards.
+> > 
+> > Fixes: a681cfecb434 ("riscv: Add a Zalrsc-only alternative for synchronization in start.S")
+> > Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
 
-> Our pytest package was pinned to a release from 2021. The minimum
-> compatible with labgrid v25.0.x is pytest 7.0.0. Update to the current
-> relase which is currently 8.4.2
+Hi Heinrich,
+
+Thanks for sending the patch!
+
 > 
+> Hello Yao,
 > 
+> It would be worthwhile to understand why your new method does not work on
+> the StarFive VisionFive 2. I only addressed the Kconfig issue. But I suspect
+> there is something broken in the alternative pass.
 
-Applied to u-boot/master, thanks!
+A possible reason is that, on JH7110 not all the cores support LR/SC
+instructions: the S7 small core always raises access exception for it
+since the implementation of LR/SC requires data cache to present, while
+S7 doesn't have one.
 
-[1/1] test/py: Update to a newer pytest release
-      commit: bf1d8c1fec863b7da2f0d1ed4bd5526275d70dc2
--- 
-Tom
+This is documented in SiFive U74-MC Core Complex Manual,
 
+> Load-reserved (LR) and store-conditional (SC) instructions are special
+> atomic instructions that are only supported in data cacheable regions.
+> As the S7 core does not have a data cache, the LR and SC instructions
+> will always generate a precise access exception.[1]
 
+As S7 also takes part in the initial HART lottery, usage of LR/SC
+instructions might just crash its boot process with exception.
+
+However I could only confirm the idea days later when I have access to
+a JH7110 board. Since earlier Tom has merged the patch[2] that reverts
+the problematic commit, do you think it's better to wait for me to
+confirm the cause and write v3 of the patch, instead of fixing it up
+now? I'll carry your Co-developed-by tag in v3 if you're okay with this.
+
+> Best regards
+> 
+> Heinrich
+
+Best regards,
+Yao Zi
+
+[1]: https://starfivetech.com/uploads/u74mc_core_complex_manual_21G1.pdf
+(Chapter 3.6, Atomic Memory Operations)
+[2]: https://lore.kernel.org/u-boot/176063629917.212270.1145034876136991424.b4-ty@konsulko.com/
