@@ -4,131 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE9B7CCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:51:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 709F7CCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:57:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3549783829;
-	Fri, 17 Oct 2025 15:51:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C7CB83734;
+	Fri, 17 Oct 2025 15:57:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="mR8G/tec";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RjR0xY3r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F0CB8382E; Fri, 17 Oct 2025 15:51:46 +0200 (CEST)
-Received: from OS0P286CU011.outbound.protection.outlook.com
- (mail-japanwestazolkn190100000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d406::])
+ id 3A4C1837E4; Fri, 17 Oct 2025 15:57:21 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E50A083734
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:51:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2734A8004F
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:57:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yangshiji66@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XEwFduypKXSNqzGLZPqpUyVVQumGC7hjzuWrYMWsv9+22HiMFp5mPHxEE5cBlS78LF25Zng15X77jX97oheQYtO8Lrja045XWMOwaT3nXpm/qxU67UbKlQSz643DSQ+nG/xFlQpu0N8C8UY4Aqe3fuuTYiu0YWXdocsHUJKposjQgkwefa+l8WgkeqmBORVjFbqlVN8kEJ54IqQYKfZrFw82Tz6lWF+JuPNO3ZY8LfxXKe94ef54VcOKRJY3oaADIIIQ3/xaCw8EGwrH0LK2Bw7Ot3VI2CLGgxsobAx8K6uwN2GnBpc03pLSFnywoIJeIkof4kzcz0cjYOByTT20Aw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7CJ7PUsS73zjDmkq53pYfPxgrZ/j5h9xNQRdNoICJ4k=;
- b=t3mvz74GcL7nT5B+7CNvTnwghoBKgBd8yuBTyE1KCxTNyVwJVQmf7jRZEJ/Jkm61UgIWxqHYkm5GWpiNQ58zKM14Yz+hEpXpHD+xEEZRU7d6zSwtIsSgTaW9htbTnx/DOk6Xcybsby+gjeAhLg3BCMuFAZ3Xycta5SWAUIJ1U1xVijnKM4wGkmrOxWhiaqfTLrqi7Fpdaedq1WJo+ZbSfNeyl0JgszLpx9wwJhl5azN8RaAJuLCMZMnyHeBVQOtyaQBqMrAPpG3/3pKuueFu0A2J9UaKWz+z8ltB4Izg91EgkR7zLvwSS8xaT2Qa60X8j1MLjpdHkSiUkC3QMbr3Kw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7CJ7PUsS73zjDmkq53pYfPxgrZ/j5h9xNQRdNoICJ4k=;
- b=mR8G/tec5p7/PlRTQHRP6OKQRaqF682crSSaIXmSsd4sqP2ZxjBT4K258EZ9EFrRRezUA7Rh3PkwT1ePdFenqBWh2ueTwZgCMk55zsWy69PVkwBD49my6n3N2+cGeyXozm7RCJmf8xQxKGmhJWS3GHwdCJJqTbKve6aUvpHNAXRnH7rYlAivCaJ0miW2RjTI8wodYXmcYUlW8LPiW9uaWMtYRLvSIIXN0lZhwTLPeVuPbdIOxdZpX4dgFJA2IwBeW9uS6e44DXxqDpKDF2WPPvimErw3ax+0DtarvgmgmB2zqoX+L9ExHYVsgkHdZSR9fGG0X+fWzzpiVcN16x3oAg==
-Received: from TY3PR01MB9998.jpnprd01.prod.outlook.com (2603:1096:400:1dd::7)
- by TY6PR01MB17463.jpnprd01.prod.outlook.com (2603:1096:405:35d::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.10; Fri, 17 Oct
- 2025 13:51:40 +0000
-Received: from TY3PR01MB9998.jpnprd01.prod.outlook.com
- ([fe80::69e0:e6db:5571:3ef8]) by TY3PR01MB9998.jpnprd01.prod.outlook.com
- ([fe80::69e0:e6db:5571:3ef8%6]) with mapi id 15.20.9253.005; Fri, 17 Oct 2025
- 13:51:40 +0000
-From: Shiji Yang <yangshiji66@outlook.com>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Simon Glass <sjg@chromium.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Shiji Yang <yangshiji66@outlook.com>
-Subject: [PATCH] mtd: add missing prototype for mtd_read_oob_bf()
-Date: Fri, 17 Oct 2025 21:51:03 +0800
-Message-ID: <TY3PR01MB99984611F9932D25552A33B6BCF6A@TY3PR01MB9998.jpnprd01.prod.outlook.com>
-X-Mailer: git-send-email 2.50.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2P153CA0015.APCP153.PROD.OUTLOOK.COM
- (2603:1096:4:140::21) To TY3PR01MB9998.jpnprd01.prod.outlook.com
- (2603:1096:400:1dd::7)
-X-Microsoft-Original-Message-ID: <20251017135103.4890-1-yangshiji66@outlook.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1760709432; x=1761314232; i=xypron.glpk@gmx.de;
+ bh=fpewJCbaSzK+jJ8H7qhIlsrdCjX3uG8IwxKLk/RfbAQ=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=RjR0xY3rzO+7YrcCzFNNmX6ejH4Vxc9SiAjdgkJbrEePqR9g72a/iT2TH570oT52
+ fWNggtPZ3VGLjNUjiiH+Dc0XWylSOiq3v3IpkbRF5A5Oil+MEGk7izzvUJkuqlStm
+ Obm7TRJh44johvyshDJBG15JfOx8SGJOwkLayQFhfJXJx6PDuijme5HVBGbgE41QG
+ uUXH/5GA22Axuv9nZ9XAbwhmrENdKJrBBkPw6GV8O02oCdU2QLR3pax8LH+axcTQE
+ MAx1Tj9EZVblCeqgJ9rQwT1zU2vC3kQh8X8+Iw+jsdTyCDECfplfufCVQMIjWa2+H
+ HJicVpCw91pgnJrTZw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.116] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MEm27-1uyWOp1Bjn-00HA29; Fri, 17
+ Oct 2025 15:57:12 +0200
+Message-ID: <263454e4-2602-4f61-9454-dae294729fa1@gmx.de>
+Date: Fri, 17 Oct 2025 15:57:10 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY3PR01MB9998:EE_|TY6PR01MB17463:EE_
-X-MS-Office365-Filtering-Correlation-Id: f287053d-2b0b-4eec-9184-08de0d844bdb
-X-MS-Exchange-SLBlob-MailProps: 9IecXKUgicBJ8NNsyPoVvrHIv5xlNgd3e7ycHKOlVQGHyYuVKG/Xi9Ln+vxSUtNtbZLinw3OIjzSN4gaIg5G0G+KxoFjGnoWZyyB7rwN3CFTzQFGF9evKp6XTUQ3x06LJ8wgh4A2JskYNxv26ADbBskXTZw/rndf7zHClNnBzs7mV2kLY64EeE3fM4TvC/j7yxd3gaHQUn4hkkopwnVuH7vjqpjYmerlyn+Prf6xK9ND8Qt/ZdhDYOJcouzmtqmYkZQQSkf7H7Rd5915RSHTWiP/2v3v5Ac2Ln3PI7qxeBj79y9a63jIyY0ZbDgPJsW23tIYNdoyUSTB1ewrbNvn20aK7c8SltnY1r9e9QT6JOvSlt03Wp41RfLlile95y3mLm8Wsa03tatrO2R5x0g0nTQD2ohKJ1fXM/kkgxmo1I3zoouGAvLfWsrNLE4EWMxKITwRLq4eFoEqroB4gVY5tBCLiGjbMEdZ6/MJRQK/2Qq9Z0BA2+2tfeqenQAzoe5GaO0hbJUS4DmS629ksQgmk9Kjya75TvTDLfBN5aOVOo9+jIlKlMuK2LmbSSNWklTQ/Y//y13KajRYp1xNftcMLIgrH+NsG/Ok/i7i7qxuYQzAJMQ+VXlVyYkeZslXY/POHYLxjM05/9f4tXL/ZPwV59g7wnrqR5tydL+GnVxvHlp1BgzQdYSu0GTni9zRy2MN9FIBGFAoUYEJ5SQVD+t2PGNMHFZhklH03i0xvkUeQe/Z/kRuCTnlKg==
-X-Microsoft-Antispam: BCL:0;
- ARA:14566002|461199028|23021999003|5062599005|8060799015|19110799012|5072599009|21061999006|15080799012|53005399003|40105399003|3412199025|440099028|1710799026;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jfiEvcPWYlnd3gJU1wsjYLcqmC5KQA+WKJQMrylFyUbxR2oRpOISFWsnXnXE?=
- =?us-ascii?Q?HD0BjdyH9N+zL7ql1h1cB/yxIh7gbOyRJrQgduh46NKVW2u1NqwfRwonSSs1?=
- =?us-ascii?Q?OOQ9TGFRzcbHjCpyvOD0h4lDak0BfzBxsahnvLZk7QeGhBpNibe2AG9YAvTF?=
- =?us-ascii?Q?pAzGcGschbE8PjXVEc/3IS+BB3Y2yCzy5l/mgrzLF1S1VxJuUx/vPoOfRH71?=
- =?us-ascii?Q?ZYSufixjde2St6jUdo5ET7N3Dh3pNZ0Em1R2ojT2PWCnazSIz0iDjHe+KtQR?=
- =?us-ascii?Q?U1wIjuMk+HdJr5PO1mxRsR0EfytZ1FmpvuW2YEUP1dDdHDRki6VjDmUM+UOm?=
- =?us-ascii?Q?LVkkTvFmKRf43uzcmbW3nvAR1mTfFrObH4LwPZuz9vx8TGP45MjkLT5x1igT?=
- =?us-ascii?Q?xmwuVkADSMLQSRYI39CKXY1xxfv8AXehmF6t2SELWuSHZBjNgQ9WQ+XZXUaq?=
- =?us-ascii?Q?DHLPg8xZ9zr/eYnjWdEqgDcHNR3OUhdGvGLaIxYM3QPZvakjT0nNs2KxrJ0F?=
- =?us-ascii?Q?klfc8M6xLUtI/EdvGM8MprKDk6ds4g9hxUhNz5YhMPBHxSVZWcFCo+C2pt09?=
- =?us-ascii?Q?06Bl9/qq1QPfAT4P9sAhvFYF/SOtHc3EtIHkXkKtZ32HwVE2Qq43eIxhgVMb?=
- =?us-ascii?Q?8mDcVBH9xuAv7E37d5a4mFydazdmE4i0GlzEjuw/x2PzfVOfOID66QLwxHfU?=
- =?us-ascii?Q?cTkBJQWJz72IGYxoj4DnzuBo0jcByC4UKGU3ZoInZtnMp5r01UsmjsV+VFiP?=
- =?us-ascii?Q?McABQL5vU8iopaMbX5RLg1OO6NmHuz43cGErbZ4xzrArp4epiXa5Fxlq6Qaq?=
- =?us-ascii?Q?e7vtOGrX02ltHXUNycBvXqNuhounm4hOpGHPaYzNDcirlSbpefVBZ/SDV/Kz?=
- =?us-ascii?Q?28DCfH0vIVorXBRuOEulFeuiTGL/BYJ0ZzHv5r9uBeG7TopSis6asP486jE8?=
- =?us-ascii?Q?boFKKl2TB2dG/UOjC0ZihQdhz+jSafPt7lB4v/I91IJa6BnNcECISILzUqkG?=
- =?us-ascii?Q?CudJgS/CwdWu2wf/EteuzD4xcEGWBNwoeJ8bl6T0NrNI49vb4sDGAEDgvWdV?=
- =?us-ascii?Q?JxtaTa+dxQ9wUC9oNGOThCHUK4IgT4brcf0YTygD6Lf2MHM0kKZxbZ+Ckj4E?=
- =?us-ascii?Q?aB3kUmQ5Jo7Q1gy5qY0EhqSapeHO4jpct/n7qeG/JQ0nkXf1sIxhQiTrIrwR?=
- =?us-ascii?Q?wiZFNdzYLVP8/pQKZeUC+VKU+nXVyn+EVu3b7d32Sq6pm4yYf5G5aYfRr8t2?=
- =?us-ascii?Q?DPtdpvSmo5aKmMiH0aa3r8qUea0IkiLujKLIWLH/+g=3D=3D?=
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KExYGVwGjj97YgX11w7WfXQnppXZm/N9uAHJP8PIYN7IzQQMnoZwk0nWAxhC?=
- =?us-ascii?Q?BH5hc76MuCwXSneaodb0DV0htFe0unWFNTSatSVQkYtt13i1loGyYrAaXFgf?=
- =?us-ascii?Q?s1scj3kPN9ATTt/K6zNqwHEytQJ7ex4Cp0U9UuT1OMjfb5JQZOQ5eTpEGG0H?=
- =?us-ascii?Q?/+HzWuqTJcWxbV2eZtg234SZmQg0kgCczS3WOTiEipCPLGGzYqit7p9IE8CB?=
- =?us-ascii?Q?7wU0vfWiJsjGgjaN8r8QNRjuvMyhxFByHqQn8tFrA32UDYrnF/4S2yP/t8YH?=
- =?us-ascii?Q?Vdj0GLTJG5H6lmDVC7k6p7TqUEFJ//7fNkDgdY8lnme3+Rohk9N0KfygZQDz?=
- =?us-ascii?Q?hG0Mvtakv4t8e0uKgjtPPqePAZc5GvQ/o8kNSNfFtoTd48LivYFyHiNkmHn0?=
- =?us-ascii?Q?ZZT/JBpvIUWSc20k2nkmT/iKnBOciOGCjJAgUckllKUzN5fWTW+6UlZhX3zF?=
- =?us-ascii?Q?+TGoL30dx651Udd5ojp7kkLO8t7ghQoR6ImHG48jDPCATUEweOW6znjZYnmO?=
- =?us-ascii?Q?m1YT7C+alMVjdkTIdnCflBmZc9Gbt+f8/7Db5ILZXnAsLQcdOC2JRaYiTQW5?=
- =?us-ascii?Q?e6Oy6zNoel4QGOg0CGItijY1Lz7N5QoLTO5ijVWo2WoDsYhvBWCEcpILkOmX?=
- =?us-ascii?Q?gipreZmRcgSBhOMHm4O8bN0Hwdn/VNilQo8LWI+x6v+w7k+aE+pMQrGB7Ee2?=
- =?us-ascii?Q?djikJdz29vmFsspelpKwj9YxSGLeLTbkh+xamoo0DAz/vRqt8o3roG3rtwcC?=
- =?us-ascii?Q?6hQHoPty9IJxWDXmSANUeUIC0esM6DFFcH2lOl8SrvMwZ/hYzXY4LLY6Zn3M?=
- =?us-ascii?Q?Aj2oDGXOnRP1MgIVT2fEeSLuNjy5+PuUHycbWdx33Upmw8VFEe+QhxHabsI2?=
- =?us-ascii?Q?TTlSMQgB7n/tt43Sj4qlSHoS/RhSmIc9ZzCSNN7nEPxiG5ySpZl8nx+AsT8C?=
- =?us-ascii?Q?kmgi+Fguu/KrF0FIKmj3kLF1gzcv6jk5wA1QCgzY6LdrLcWDhsou8E8WSrnG?=
- =?us-ascii?Q?zb/vBxJdv95iTJfq8nfpUulbKBU2QE/aCrHrkLCvMkd4809Z3kPAP82aQJed?=
- =?us-ascii?Q?7xia9bcaE8rbPsMHUO97YaF/5sJDtbS4Z2fTd4qvmKEOF0fKhyT/v61a9Ym1?=
- =?us-ascii?Q?sjZ+m/OQ5p4NUHG/+XJBJFOAfKhjmTPtHHIqyqIjWpPvrPtuOZf+iKrZZltX?=
- =?us-ascii?Q?t8K4bar7I7KIvqRTyHIZ/yh15fjmC2/lEBzagERnySBb+9S+Gbhsxz2MjMjF?=
- =?us-ascii?Q?ttO+0peDgmi199h8kOrr?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f287053d-2b0b-4eec-9184-08de0d844bdb
-X-MS-Exchange-CrossTenant-AuthSource: TY3PR01MB9998.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2025 13:51:39.6602 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY6PR01MB17463
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/7] doc: make pdfdocs: Specify texlive-xetex as a
+ prerequisite
+To: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+References: <20251005221057.255029-1-adrianocarvalho.pt@gmail.com>
+ <20251005221057.255029-2-adrianocarvalho.pt@gmail.com>
+Content-Language: en-US
+Cc: Tom Rini <trini@konsulko.com>, Nishanth Menon <nm@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Apurva Nandan <a-nandan@ti.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Udit Kumar <u-kumar1@ti.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Dhruva Gole <d-gole@ti.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Anshul Dalal <anshuld@ti.com>, Chintan Vankar <c-vankar@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Garrett Giordano <ggiordano@phytec.com>,
+ Parth Pancholi <parth.pancholi@toradex.com>, E Shattow <e@freeshell.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ open list <u-boot@lists.denx.de>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251005221057.255029-2-adrianocarvalho.pt@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OC0gVlHkKf0vVy6jybokETeyA6p2lo+E2y4sLQnHfJy8tOtFhMU
+ SF72OygU9IHsBYIyYwzIJymFDTocgkgE90n2LQb5ARHLFf6SmhrsJ3kx5kASpoBQ7aAOUsu
+ bMSlv7h/my0doWGC4qZVlDKjLJmbEEyQwUWyyqmVxQK+8cSldnMnNfacARceie8e+Fl+8Jh
+ bYDwuliWt9NIwGNVlqugw==
+UI-OutboundReport: notjunk:1;M01:P0:wrMHZ7T9Z8Y=;weV/HbCGjz+/5Ggyr4HdvgZoWfH
+ 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
+ fnFJw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,32 +164,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch fixes the following build error:
+On 10/6/25 00:10, Adriano Carvalho wrote:
+> Dockerfile updated as well.
+>=20
+> If I don't apt install texlive-xetex, this is what I get with
+> docker.io/trini/u-boot-gitlab-ci-runner:jammy-20250714-25Jul2025:
+>=20
+> uboot@35c89b9ab70e:~/u-boot$ make pdfdocs
+>    HOSTCC  scripts/basic/fixdep
+> doc/Makefile:89: The 'xelatex' command was not found. Make sure you have=
+ it installed and in PATH to produce PDF output.
+>    SKIP    Sphinx pdfdocs target.
+>=20
+> NOTE: This won't completely fix the pdfdocs target. See next commit(s).
+>=20
+> Signed-off-by: Adriano Carvalho <adrianocarvalho.pt@gmail.com>
+> Reviewed-by: Tom Rini <trini@konsulko.com>
+> ---
+>   doc/build/documentation.rst | 2 ++
+>   tools/docker/Dockerfile     | 1 +
+>   2 files changed, 3 insertions(+)
+>=20
+> diff --git a/doc/build/documentation.rst b/doc/build/documentation.rst
+> index b55a4666643..81548390d78 100644
+> --- a/doc/build/documentation.rst
+> +++ b/doc/build/documentation.rst
+> @@ -16,6 +16,8 @@ the following dependencies are needed to build the doc=
+umentation:
+>  =20
+>   * texinfo (if building the `Infodoc documentation`_)
+>  =20
+> +* texlive-xetex (if building the `PDF documentation`_ through the *pdfd=
+ocs* target)
+> +
+>   When submitting patches for documentation always build with KDOC_WERRO=
+R=3D1 to
+>   treat warnings as errors.
+>  =20
+> diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> index 5b4c75f8400..8e166eda4bc 100644
+> --- a/tools/docker/Dockerfile
+> +++ b/tools/docker/Dockerfile
+> @@ -136,6 +136,7 @@ RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt,s=
+haring=3Dlocked \
+>   	sudo \
+>   	swig \
+>   	texinfo \
+> +	texlive-xetex \
 
-cmd/nand.c: In function 'nand_watch_bf':
-cmd/nand.c:248:23: error: implicit declaration of function 'mtd_read_oob_bf'; did you mean 'mtd_read_oob'? [-Wimplicit-function-declaration]
-  248 |                 ret = mtd_read_oob_bf(mtd, addr, &ops);
-      |                       ^~~~~~~~~~~~~~~
-      |                       mtd_read_oob
+When I try to run `make pdfdocs` I see an error message
 
-Fixes: 1fac57720719 ("nand: Add a watch command")
-Signed-off-by: Shiji Yang <yangshiji66@outlook.com>
----
- include/linux/mtd/mtd.h | 1 +
- 1 file changed, 1 insertion(+)
+     ! LaTeX Error: File `xeCJK.sty' not found.
 
-diff --git a/include/linux/mtd/mtd.h b/include/linux/mtd/mtd.h
-index 3ffcd40807d..1f97bc4fe11 100644
---- a/include/linux/mtd/mtd.h
-+++ b/include/linux/mtd/mtd.h
-@@ -438,6 +438,7 @@ static inline int mtd_bind(struct udevice *dev, struct mtd_info **mtd)
- #endif
- 
- int mtd_read_oob(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops);
-+int mtd_read_oob_bf(struct mtd_info *mtd, loff_t from, struct mtd_oob_ops *ops);
- int mtd_write_oob(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops *ops);
- 
- int mtd_get_fact_prot_info(struct mtd_info *mtd, size_t len, size_t *retlen,
--- 
-2.50.0
+Why wouldn't you install package texlive-lang-cjk?
+
+Best regards
+
+Heinrich
+
+>   	util-linux \
+>   	uuid-dev \
+>   	vboot-kernel-utils \
 
