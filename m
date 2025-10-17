@@ -4,81 +4,172 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0002ECCD195
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 12:35:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9199CCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 12:40:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98F35837E4;
-	Fri, 17 Oct 2025 14:35:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 30A2F83710;
+	Fri, 17 Oct 2025 14:40:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kIzY1HBR";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4998C83734; Fri, 17 Oct 2025 14:35:00 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3CD9C83631; Fri, 17 Oct 2025 08:16:34 +0200 (CEST)
+Received: from CHN02-BJS-obe.outbound.protection.partner.outlook.cn
+ (mail-bjschn02on20712.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4440:2::712])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A3F683655
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 14:34:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C451E83655
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 08:16:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-7815092cd0bso19628907b3.2
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 05:34:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760704497; x=1761309297; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3DJqa60LO6ItNUteps8woglBgc6PlZiLH0b/i2PMCaM=;
- b=kIzY1HBRuoOW4KHK9dWqVs2oK2eW83R+OcSDNbWUlPWM0WPtNAIoeRQ9N4uHFveCPf
- AFqoeg0gQb3V83vYIGDeeOGt0xoIx706FJy2omXIWKg502H8N/egXgnhTYd5fjJ2by7B
- wJ29oG1Fgxp2E1wQddDSFIhVko/WPQeQGGg9Iw5LUNE5VKvKcb/isiLsmMl7xSl4eSTi
- 5Er+tDWbkix+/9BsTfKBaIdrnYUrkfkX3YG8ggUP9/Wg3UZggDVBF96BKOca7cplIYN3
- Pu0/9gCRf4YFTECptf/yOWapVq0FIlTejFi0zKsaeHSSgfxpm1PrH+oDxQn/wCJAvBTt
- Pm6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760704497; x=1761309297;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3DJqa60LO6ItNUteps8woglBgc6PlZiLH0b/i2PMCaM=;
- b=nHGV37eeWi41GJUce4ma1NK7HBAmzP2CWSOxU16LHkxYSskWG43Gcb011s+CGCQ7Ea
- eogk1E1WRmSzl74qs1ZpSJhqjgtAzJHgeGw09BlnoJ2Q4TT4CzUar2etZayFGwyciA8z
- vpvgFXm83lAhzXj3KuHN0q/FaqtmHbIlNAbr4m5EZuDNOHeGblrvZU8hYEnUgBntsZJi
- a/lmEcnP8RVBy6/aUqBaYgfFDNJQy5BiaV52nDGJ0Yvl4HdrkRyL+mNzDZvIKqHMLLEH
- Mo2u9fDfmP5bNrRPmBJoE/ZPQKKfpgh3znpDmznTQKQUAx81TVZJyejDDwr7ShBL3KQT
- F2tQ==
-X-Gm-Message-State: AOJu0Yw8nb7duCMQ/G9EwpRpcbPfBlmvYJM5HWA2GSkE45mfSwe5zbiy
- +HyNn3FRSg9vvpR8K/v3xyxmPDjUjzD31IP5ctKWHYGDazXIALYCotKXlyDJn0AmPbutYCQbm4+
- jlX/BR/24DUX5FwymWXjKiiKIebvsKwU2BNrQdv6V4w==
-X-Gm-Gg: ASbGncvRUva7Ke086fehiMFpggyasWd53srjVO2EkKvML0BPp1s1w95YaDqlLH53M4U
- pEb4BEUYHIWR8R0P/UqRAntBBmj94p0VJKPX8IVad8zLbwOKwO/+F2/8BnA2vXPc0Eq4wHnqp2e
- q/fMd39KukYjTI8S1JEIbbqejEiX6+Z+0BfdnOmjjZnJErugWRizf/7FdWLlnk7Ux9r3qDaITzo
- sd2byEJRTMFRU6Hq2d0KK0By2ZmT3+0E9TrmCobuMD1EqOJildpVSXxCX8QmUR5GoCHDaJQ6faP
- spmWLYZqh0LjCHhSgps7VAu1kqnhQihf6PXCELCmaFaZnZ15xgA=
-X-Google-Smtp-Source: AGHT+IGEmLw/yriHwEHsvhH/Gv6PefxmReF2V/MPavBTN3q2UyDkWWcFP64TiU4g/Gb4a4cC+fWUnJIWNQfky2WkEys=
-X-Received: by 2002:a05:690c:600f:b0:721:6b2e:a08a with SMTP id
- 00721157ae682-7836d2d6737mr58068187b3.37.1760704496753; Fri, 17 Oct 2025
- 05:34:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=hal.feng@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Z65OOz7gqtc2p3RL9cFwujH1Pu08bEL4HgPFIF54N5sNMw9CO8JxEde5wVlpaBRrCZpVQH/6I5HHjRyfhltJwlqPz/4J4WOKWdJHDgfmr39QTxt5o6EOXCIlM9xqd6I3l7UWhbhB9yPD2DmCWuLzwdelYznCF00OF76Wi+z2CRMQj4kdN1pQDNvRkIL5wVQ3CaUoKwOqVO0WuZDuPNeE+FRKxV67V3vW/oNow175aDx+F9QGXHlUA9SkPqo56lZTiRPiikJs3q3mrxmVmek/Sl80mx22679EFhIbDHLWwKNd4P9+qTZnIDaghLD5jm9yLx3RMYiqqJ09Gfis5gjNwA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iRbwJHgqJbGObCubRJClpZaAICrSiP1lLULx0nM1ljE=;
+ b=mOvT994bLO0qMZsygftlrtSayHGa/CsIrfCq4L4GvpeXe1n4tfOftlpYhr8IvxrltMtLZekKE1GpU+J6UBx28KFLbpAMiNL/Nfm0mr7fVD+z03P4m0s+ejvO02IHodzuE1MUA9psrfPw/RmSKRAL5szHnNZoajJMt8ojbqk1uaI+0/iIFBq06v0BGRV0uHQtr4+ipIdgn1oOTYq+e8hkkh/0pjWld//Ubz6ncX0DDhsYzJsgzdGQ+oOM23BTezRRRSZngwIyLTHh9s4hj87kRm4yhbUyvHI3e/mbCujSAGGfRpJ5f6WMxSCJ8LxqYZ+jLxBB0x2ou6INl9r+ryX0LA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14) by ZQ2PR01MB1292.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:12::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9182.23; Fri, 17 Oct
+ 2025 06:16:25 +0000
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7%4]) with mapi id 15.20.9182.020; Fri, 17 Oct 2025
+ 06:16:25 +0000
+From: Hal Feng <hal.feng@starfivetech.com>
+To: Andrew Goodbody <andrew.goodbody@linaro.org>, "u-boot-amlogic@groups.io"
+ <u-boot-amlogic@groups.io>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Paul Barker <paul@pbarker.dev>, "uboot-snps-arc@synopsys.com"
+ <uboot-snps-arc@synopsys.com>, Dai Okamura <okamura.dai@socionext.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ "adsp-linux@analog.com" <adsp-linux@analog.com>,
+ "uboot-stm32@st-md-mailman.stormreply.com"
+ <uboot-stm32@st-md-mailman.stormreply.com>
+CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>, Stefan
+ Roese <stefan.roese@mailbox.org>, Yao Zi <ziyao@disroot.org>, Leo Yu-Chi
+ Liang <ycliang@andestech.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Simon Glass
+ <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Finley Xiao <finley.xiao@rock-chips.com>, Joseph Chen
+ <chenjh@rock-chips.com>, Elaine Zhang <zhangqing@rock-chips.com>, Heiko
+ Stuebner <heiko@sntech.de>, Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Peng Fan <peng.fan@nxp.com>, Liviu Dudau <liviu.dudau@foss.arm.com>, Michal
+ Simek <michal.simek@amd.com>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Ye Li <ye.li@nxp.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Marek Vasut <marex@denx.de>, Alice Guo
+ <alice.guo@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>, Padmarao
+ Begari <padmarao.begari@amd.com>, Minda Chen <minda.chen@starfivetech.com>,
+ Sumit Garg <sumit.garg@kernel.org>, Tien Fong Chee
+ <tien.fong.chee@altera.com>, Alif Zakuan Yuslaimi
+ <alif.zakuan.yuslaimi@altera.com>, Naresh Kumar Ravulapalli
+ <nareshkumar.ravulapalli@altera.com>, Muhammad Hazim Izzat Zamri
+ <muhammad.hazim.izzat.zamri@altera.com>, Tingting Meng
+ <tingting.meng@altera.com>, Kunihiko Hayashi
+ <hayashi.kunihiko@socionext.com>, Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Minkyu Kang
+ <mk7.kang@samsung.com>, Heiko Schocher <hs@nabladev.com>, Jonathan Currier
+ <dullfire@yahoo.com>, Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao
+ <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>, Sam Shih
+ <sam.shih@mediatek.com>, Manivannan Sadhasivam
+ <manivannan.sadhasivam@linaro.org>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Greg Malysa <malysagreg@gmail.com>, Ian
+ Roberts <ian.roberts@timesys.com>, Vasileios Bimpikas
+ <vasileios.bimpikas@analog.com>, Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>, Gabriel Fernandez
+ <gabriel.fernandez@foss.st.com>, Marek Vasut <marek.vasut@mailbox.org>, Dario
+ Binacchi <dario.binacchi@amarulasolutions.com>
+Subject: RE: [PATCH 10/24] clk: starfive: Remove negative error returns from
+ clk_get_rate
+Thread-Topic: [PATCH 10/24] clk: starfive: Remove negative error returns from
+ clk_get_rate
+Thread-Index: AQHcPeCTl3OZn3TuNkywZg/cMbxr9LTF3l3Q
+Date: Fri, 17 Oct 2025 06:16:25 +0000
+Message-ID: <ZQ2PR01MB1307D6856E5DEB84C846F4DAE6F62@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+ <20251015-clk_ops-v1-10-5f80f827407e@linaro.org>
+In-Reply-To: <20251015-clk_ops-v1-10-5f80f827407e@linaro.org>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1292:EE_
+x-ms-office365-filtering-correlation-id: 87baa8eb-f7aa-470f-c8ac-08de0d44b398
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|366016|41320700013|1800799024|7416014|38070700021|921020; 
+x-microsoft-antispam-message-info: OkGCrB2u36G52ugbtSKBEQlFYYv33x3lJ3sPSiNnpzXRc28Pft37w4qzHTHZdddNjU3XCGiv0XH8XHDI6sxV3LxlBewJaNnfkibizxGUWHlHvWS5hjCLFdHV7IdonrXWxpQ49zH2xfVHbl0AihZ2A0JxaIxfnFohZtZ4YwdmmofIoFlV9oCtLsOCgE3nFBsn1S5rKAVgftuqiAdn2P1ctwWcGTaWwkoi9MSIyLG9G/YcDuwrs1S92hPaWlsmDVZ4xeE3MM7Qk0xQQ9F5qiZZI0pG/NV06bDJbR3u80KMXKM2euk5IsExU6Xg8S84E4iV8s8MtN+7Jt3YaTJ+PuVTTvIIP1UbRmMfzU7m4qQHYWIkV8BSvQk9aDlu23JiZL2CpLy9DfvYW4gN+ZbHUyD+foshIoRX5q2t0/oukNJyvFBKQ3RDNljoIrxbl/EL0kipV4nn7V7ulrYEnOt7uTuh6DRgtKpI6Qnfei9pytFMiTlWXzAqjZc2CwQ/2ux63qOiHryQmElQ6cMMVPWxr9+SQmJFPMryvqIAkYIpjait1TdlutedNgnS6qWgzuPbXG3a4B8ewgFWCeB8s3I8++B3jJSYyVVtYA9QZP7PjezRjR4=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230040)(366016)(41320700013)(1800799024)(7416014)(38070700021)(921020);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?cHFQSmlWdlZwN3lZNTh5eFI2SzB1WktsQnJsQ1ZJT0k1YlE5dDc1aWxKMVZ4?=
+ =?utf-8?B?L01qeXI2WTZVZTI5Q0liRWx4QWNBVUl6VnR4V0JKKytuNUxXaWIzTi9XeUhW?=
+ =?utf-8?B?elkydlNiQU9zUFY4eGQwL0c0MkdKVzJlSjVVclEyaU5TNXc4WFliTzJtVkFZ?=
+ =?utf-8?B?b0FIRVpPejBGeE1tVXJ0bHVPUUFLdUtXZ2VxTEFvQWN3emUxellGMGtzcnZ0?=
+ =?utf-8?B?cTc3c0dybWRhUEVLNmRCTnRldjdDeXJZQmhtQmRST3NaalVubHphcmNLZkZq?=
+ =?utf-8?B?cXo4Z3lBTFZKUjZqcUlyNHQvS1UyellUK3huUzgra0U0eGx5ZlF3ZnJFbHF3?=
+ =?utf-8?B?NVpBK2FBbFlDSjkvQzhKZXJZby9Kd21hZU9STHB6M0NhaHFnak80cFdMWW9E?=
+ =?utf-8?B?UUU5QytoYTdNRFJWTUdHc1ZmSzlHeWVxQ3JxZGNoNjdJZ1VUQVByVTFmNlov?=
+ =?utf-8?B?d0pkcHRaOHJMU1pPRmx6ZnI4L09KZ3NQemQyQk0vR0Z4bXJIN2h0WTByL1RY?=
+ =?utf-8?B?eVBCUlovUnpRdXNodU8rUGlMdFl1dkU5YlRhcEswYVpOYUVFTDVMV1M4WHYv?=
+ =?utf-8?B?QTZVSzByc3RtOTZLamJTbU93UzY3S1pUN0VBSnZUblhaV3FlNFBIcUJOcXY4?=
+ =?utf-8?B?dTg3QXNWODBpTXRzZzVuaG94L0xwZHNtL0poSEJjVUZzQnYyWUtOZkkybnlp?=
+ =?utf-8?B?S25NVDJIajVCcG1McmsvWitnNEZvdElVTHpqdDlkUWozT1R3Z2RhRXdlb0Y4?=
+ =?utf-8?B?d005dWJvNTBKaVJyNEliVTlFcCt5ZTZSb0xkZktaMzErcnZqRSs2K2VZWkl2?=
+ =?utf-8?B?L08wZHFPR2FnUVAyd1phWTJieGFldjdmY0FJRkt2Nkt6NE8rTVcxMnh0dy81?=
+ =?utf-8?B?dC9yVExCSUN3V0dqTHlSbkFocHloc0lycHgrV0lvQ1ViUis5NWdLWHVQZWx0?=
+ =?utf-8?B?Z0xTVUF0alhjcEJ6MmQ0cy9Tcm8rK1JUUUlTdkVIczYvS2VRQUU1SThnNDk1?=
+ =?utf-8?B?VCtqVStKM21JM01WKy9kYllZUWs4dWpFdUFrQ0c0aTJFK0dHb1FTaW9UUFkr?=
+ =?utf-8?B?QWVmRHlOMTJqVXA0elBiWXRGR2lyaHZzb0tab3hqTlJVQ2I1RTZOeE8zRUYv?=
+ =?utf-8?B?N01EbXBMeHNNeU1jZWlRT3ZrTXRPQitQVCtxRnpVeVVPVnUrRjNlVTlkMXZU?=
+ =?utf-8?B?UTZ1b0lpbjFKUi9mWlNsdndNM2p6SkpXVUlIRElIcE5HclhsbU85YmR1Z3hQ?=
+ =?utf-8?B?RytNZzdRWEZJcmVNYlAvY3NCMFZxUTJjajdqWko4RVB3bkQ2VnRUREdhc2sy?=
+ =?utf-8?B?WDRDNmpacmtGenBWWWk5QnZoRlNXOTYwdVVBSm9TOEg2Ry9rSUU1SHp5dUZa?=
+ =?utf-8?B?cWNQMFFZMjFOdXBOTkpqWTJJb3hxVnNpVVZnZ2JpS3ZhbGgrQVpLOWJWMFpR?=
+ =?utf-8?B?bk5Pc21lNktheTZvbi9NYTJ4dWhnLzZEdmN2eUVnMFZuZzVUYktOSEVyR2FM?=
+ =?utf-8?B?Y1lubG5BQVYzUXJVbmV4V1ZYLy91Q05KK28zTzJpKy9PeFhHYVNMNzg3L0pN?=
+ =?utf-8?B?T1c1ZVd1OWxzT0s3dnFkK2dUdHROSVZTQUNJOGJ1WmFVVmVpKzZzT0tpNlRJ?=
+ =?utf-8?B?eTZ4Zk5tZ0x5SW1OajIrbWFHU3Z5cWZZeUhRK2dCV2tISjBiSnBpVVlIVjNy?=
+ =?utf-8?B?ZEtVc1FkMDl3V3Fya1hsSXJBVk5vQzEvQlhUT1NqNXZUSlpiUWgzY3AvWHpF?=
+ =?utf-8?B?TlhoVWR6RFpBcTgrTlEwc3V1bFMzcFpteVVaSmZOL21KMEZ5bGp2cUdCb2lx?=
+ =?utf-8?B?bmMyWDluMnJDT0hYUkpzbVZJYXg0TWZqSmlrREF4b2FNd3ZaWHJaeEl6Z0hx?=
+ =?utf-8?B?aDNOSng0VkUxSmJQdDJHWm53K3ZVYzNDSkY2UkpScEpMblovR1pHLzZNUEFN?=
+ =?utf-8?B?dm9zQmkrNjhnRE5YZkp0bEpxUktUcStmczNyaFNEWGZRMVRlRDdLbDUzZURv?=
+ =?utf-8?B?d0FVUXhtT01hY1pOejF0cjFKekVSeUlKazMyL3pQMFcrNjEvbFFTMTZobllF?=
+ =?utf-8?B?Nk81azhOWUNIcFJmMmYrWWRyaUtYUVFmaFFGTm5MMWw2ZFdaUGYzbElHenlx?=
+ =?utf-8?Q?7hIKfK1LsVlTnaIZCtJLHfPd3?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20251010134424.3835757-1-anshuld@ti.com>
- <20251010134424.3835757-8-anshuld@ti.com>
-In-Reply-To: <20251010134424.3835757-8-anshuld@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 17 Oct 2025 15:34:20 +0300
-X-Gm-Features: AS18NWCmNS0MKfifm40qS0-3u9sK1OUwF54AwNuRoh9n4sqI_bKYWm3dAalElO8
-Message-ID: <CAC_iWjJSdG6Z-6HtKt3VaJPT8A4HZO3UxbfmuFJ4RCY7jvJPvg@mail.gmail.com>
-Subject: Re: [PATCH v10 07/11] arm: armv8: mmu: add mmu_unmap_reserved_mem
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, d-gole@ti.com, b-padhi@ti.com, vigneshr@ti.com, 
- trini@konsulko.com, nm@ti.com, robertcnelson@gmail.com, w.egorov@phytec.de, 
- francesco.dolcini@toradex.com, ggiordano@phytec.com, m-chawdhry@ti.com, 
- afd@ti.com, bb@ti.com, u-kumar1@ti.com, devarsht@ti.com, xypron.glpk@gmx.de
-Content-Type: text/plain; charset="UTF-8"
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: 87baa8eb-f7aa-470f-c8ac-08de0d44b398
+X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Oct 2025 06:16:25.5171 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: uXAQQgC3sfzFDo4QPF3hMKlbvwoGCtXpwU/DGVseUbxFjADQZNxZkAWx6A07sKN8u5fcLOjhMon1tPUE7F7dXv9BOCbrv5Cf10L+dmrcKUY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1292
+X-Mailman-Approved-At: Fri, 17 Oct 2025 14:40:46 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,95 +186,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Anshul,
-
-On Fri, 10 Oct 2025 at 16:44, Anshul Dalal <anshuld@ti.com> wrote:
->
-> For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
-> the MMU's page tables, done by mmu_setup.
->
-> Though this works well for simpler platforms, it makes creating runtime
-> carveouts by modifying the static array at runtime exceedingly complex
-> like in mach-snapdragon/board.c.
->
-> Creation of such carveouts are much better handled by APIs such as
-> mmu_change_region_attr once the page tables are configured. Usually such
-> carveouts are configured via the device-tree's reserved-memory node
-> which provides the address and size for the carveout.
->
-> Therefore this patch adds mmu_unmap_reserved_mem which acts as a wrapper
-> over mmu_change_region_attr, helping unmap a reserved-memory region.
->
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> Tested-by: Wadim Egorov <w.egorov@phytec.de>
-> ---
->  arch/arm/cpu/armv8/cache_v8.c    | 26 ++++++++++++++++++++++++++
->  arch/arm/include/asm/armv8/mmu.h |  8 ++++++++
->  2 files changed, 34 insertions(+)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 9b3c37dae82..f2e006a98ab 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -86,6 +86,32 @@ int mem_map_from_dram_banks(unsigned int index, unsigned int len, u64 attrs)
->
->         return 0;
->  }
-> +
-> +int mmu_unmap_reserved_mem(const char *name)
-> +{
-> +       void *fdt = (void *)gd->fdt_blob;
-> +       char node_path[128];
-> +       fdt_addr_t addr;
-> +       fdt_size_t size;
-> +       int ret;
-> +
-> +       snprintf(node_path, sizeof(node_path), "/reserved-memory/%s", name);
-> +       ret = fdt_path_offset(fdt, node_path);
-> +       if (ret < 0)
-> +               return ret;
-> +
-> +       if (!fdtdec_get_bool(fdt, ret, "no-map"))
-> +               return -EINVAL;
-> +
-
-Apologies I wasn't clear on my last mail. Can we do this check
-conditional please? IOW add a "check_nomap" in the function args
-
-> +       addr = fdtdec_get_addr_size(fdt, ret, "reg", &size);
-> +       if (addr == FDT_ADDR_T_NONE)
-> +               return -1;
-> +
-> +       mmu_change_region_attr_nobreak(addr, size, PTE_TYPE_FAULT);
-> +
-> +       return 0;
-> +}
-> +
->  u64 get_tcr(u64 *pips, u64 *pva_bits)
->  {
->         int el = get_effective_el();
-> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-> index 6e7a3366844..ca402c7d74c 100644
-> --- a/arch/arm/include/asm/armv8/mmu.h
-> +++ b/arch/arm/include/asm/armv8/mmu.h
-> @@ -207,6 +207,14 @@ void setup_pgtables(void);
->   */
->  int mem_map_from_dram_banks(unsigned int index, unsigned int len, u64 attrs);
->
-> +/**
-> + * mmu_unmap_reserved_mem() - Unmaps a reserved-memory node as PTE_TYPE_FAULT
-> + * once MMU is configured by mmu_setup.
-> + *
-> + * @name: The name of the node under "/reserved-memory/" path
-> + */
-> +int mmu_unmap_reserved_mem(const char *name);
-> +
->  u64 get_tcr(u64 *pips, u64 *pva_bits);
->
->  /**
-> --
-> 2.51.0
->
-
-Other than that
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+PiBPbiAxNS4xMC4yNSAyMjozMiwgQW5kcmV3IEdvb2Rib2R5IHdyb3RlOg0KPiBjbGtfZ2V0X3Jh
+dGUoKSByZXR1cm5zIGEgdWxvbmcgc28gZG8gbm90IGF0dGVtcHQgdG8gcGFzcyBuZWdhdGl2ZSBl
+cnJvciBjb2Rlcw0KPiB0aHJvdWdoIGl0Lg0KPiANCj4gU2lnbmVkLW9mZi1ieTogQW5kcmV3IEdv
+b2Rib2R5IDxhbmRyZXcuZ29vZGJvZHlAbGluYXJvLm9yZz4NCg0KUmV2aWV3ZWQtYnk6IEhhbCBG
+ZW5nIDxoYWwuZmVuZ0BzdGFyZml2ZXRlY2guY29tPg0KDQpCZXN0IHJlZ2FyZHMsDQpIYWwgRmVu
+Zw0KDQo+IC0tLQ0KPiAgZHJpdmVycy9jbGsvc3RhcmZpdmUvY2xrLWpoNzExMC1wbGwuYyB8IDIg
+Ky0NCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPiAN
+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvY2xrL3N0YXJmaXZlL2Nsay1qaDcxMTAtcGxsLmMgYi9k
+cml2ZXJzL2Nsay9zdGFyZml2ZS9jbGstDQo+IGpoNzExMC1wbGwuYw0KPiBpbmRleA0KPiBmOGFm
+MTcyMjdjNTAyYTM5Y2M4ZjRiNzdmNTJhM2Q4OGZlZDIxMGE5Li4xMmRkMTRjMDJjNjgzYmI4NjA3
+NDMNCj4gYmNiOTk0YjU0OWU3YThmNzRiYiAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9jbGsvc3Rh
+cmZpdmUvY2xrLWpoNzExMC1wbGwuYw0KPiArKysgYi9kcml2ZXJzL2Nsay9zdGFyZml2ZS9jbGst
+amg3MTEwLXBsbC5jDQo+IEBAIC0yOTIsNyArMjkyLDcgQEAgc3RhdGljIHVsb25nIGpoNzExMF9w
+bGx4X3JlY2FsY19yYXRlKHN0cnVjdCBjbGsgKmNsaykNCj4gIAllbHNlIGlmIChkYWNwZCA9PSAw
+ICYmIGRzbXBkID09IDApDQo+ICAJCWRvX2RpdihmcmFjLCAxIDw8IDI0KTsNCj4gIAllbHNlDQo+
+IC0JCXJldHVybiAtRUlOVkFMOw0KPiArCQlyZXR1cm4gMDsNCj4gDQo+ICAJcmVmY2xrICo9IChm
+YmRpdiArIGZyYWMpOw0KPiAgCWRvX2RpdihyZWZjbGssIHByZWRpdiAqIHBvc3RkaXYxKTsNCj4g
+DQo+IC0tDQo+IDIuNDcuMw0KDQo=
