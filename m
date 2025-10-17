@@ -4,97 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64DB5CCD184
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 06:24:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA2FCCD184
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 07:12:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 996C483655;
-	Fri, 17 Oct 2025 08:24:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 2DBAB83655;
+	Fri, 17 Oct 2025 09:12:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LtukY2Ax";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tHyTWlE9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C391D83710; Fri, 17 Oct 2025 08:24:31 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4A55083710; Fri, 17 Oct 2025 09:12:25 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C80F83631
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 08:24:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D48EE83631
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 09:12:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-46e6a689bd0so14114925e9.1
- for <u-boot@lists.denx.de>; Thu, 16 Oct 2025 23:24:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1760682269; x=1761287069;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1AoV3bM07UBmzOmnEACJWzgYFTffhL6+/gksJ1vGAbo=;
- b=LtukY2Axran/XAGfxSOkQZ2oRWGsfrisGkmblMzEgP62sUmwEoT3A5Rf5P5MvPdRQF
- 4uSWQWDV/ZX9HMx1uBJGugpOPFN3gtNdmnsZPNJ+JxycZkEli6MdVdCb6VF+drg/FZ2K
- 62yCVNUhpHTgE3z7REwO2T5DAVFakdkK5LtYrL71SpuDvhtOW+IPabUDdkzkjpTz0XyM
- BrY79mXTyBOGF/LDVQLP34rZtfHvV/4MfGKNZ/YFkhSn9NbRr2ghkrTAooeFPO892ZtN
- 4GFILr/zIyZi68MkCbNDo3fl21mv1z4xj3HYL36WGDE8/VucBJouvR406/VVSxlsrbH2
- 9MRw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3AFEC3F72D
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 07:12:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1760685142;
+ bh=Vc7PHHXr0+qy7WEa2gG3uSfvUnZhTBG/Js6NtsCW/nI=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=tHyTWlE9TQwYqQLS24kZ1VUvaoRrGwldExQYsEHAFdrHwcbp3GnESE5cWEhL7swiy
+ 2abt6mt66xfggmNpp0zeOiJqa2xBAgT1uFjAZt4YftVJMmD96ljlSDT0MMCOOhes26
+ SOFZ4KeU5+k4Dg0ejo9rBoSctyAzpP1TA8RilONCdFRplCZooU9Sb4cbcnKFemk+SC
+ BCtJujFvKmcH9CF0qCBfe8JG71cu3iAVTWQoePlxUZZzAzm0aJ4DJkFtyzMTcnNcXd
+ IeZV3zQYnzqyoaxCEA2+vGRmgCOOfPcztKEW7QfYIPE6/cMZKB7qhLJVz5FKYKFbqW
+ XuhwAROyySVmRdijtD6ADzkyUFCeEuHQVxUU8PdCOZ3y4uWZA9aHbchCFs0hagKqwa
+ ur3vFQBwPzN6KtfKxTq4kUi4My7cAbffL79Q1jaSab5viNE/udh5DY/IPZYG5CPPr5
+ KNYSnJ1Kfqi67zlg20r5I8SXLsxrT8TL+x9MN9Xl0Cs7qoMC7eGeLfc3jwCZwW6BJL
+ NoioXincOEb2D42d7inBgxNUAhe0Zit0K5D7Zj+89dck3IJethmQgEcve0f4wikNC2
+ hUzNPrKUX9ESgaDNl3pwPhiv5yMjB34201pHhNhpQ9wmK6Zn1v1HE1VjOvJglpOilp
+ Si1qg9+8v2u1MoE5EOi0pXdE=
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-470fd92ad57so29334115e9.3
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 00:12:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760682269; x=1761287069;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1AoV3bM07UBmzOmnEACJWzgYFTffhL6+/gksJ1vGAbo=;
- b=ZTWR+0tH3oCtSpiH0piGhTBic3MOlEd11wAs4zZ7a91Z+Dmgxo/Q3C+WAzNfkgJXHg
- XoleOSuft/uBeHHyN8ChkAzuLId+FBzD5RwOoSN5qWUqLDWnQh9TRrYUEz0W3BkJTQCU
- 0+Bud8QfmzousvyYBde0X7SjyYiYBIh8iROsqO2GC6nRV7+D1zE6S75woPr23zbJWlpW
- pcat4h1cJ3wfGiyUMJmxJP51XwxAq3I1sPsDyqYrRZI7NuhYA+pJBBzjrR/HVG7uhLfB
- rJsQSQADfN2iCuVFQOwM3rejSmLaryXrQ7wCZ52brw8aeX0fgbGttw2w1TXOCCwSFKVP
- oW0g==
-X-Gm-Message-State: AOJu0YwWvx03SuGDvVv+aM3t4pvF3atuEv+lNcmgtoP4us5irLj8cTRV
- 23wgOF7R8qNGMTF3uW1oW8jz9xJWcmiO8+ZZUHBCAnspgkbLx5FL/mYkNQqUZMxOxdY=
-X-Gm-Gg: ASbGncspQh4ppcu2aLc6JFKRgn0ld7hjVouTysOPvU8YnbM2cuZcErujJoO8rpExIXV
- tnRLWCdhlqR16h0PD9Y8OL815gu/rDbQ85Oh3lMAKLL/sOgBln92L7uA8SkhW+6Z71LDrF+Qpwz
- /1E3yKzGDGXWnoehRjLzA6BQgd3U/rM4asROcZ0dxphOiKts76g+Xgl89GU5JMAiWuWh9sehlb3
- plJuO2sSxBVs4wbO3f5PXz0RBSS5XdwmM9yVVhcFd1yMd9YzF3DqfSTVClc7OZuRA+z2FGpv1IF
- Dv6O896gs0oEULUCB5lHalsZVihUQsvxEf2QmW0qJsHwdbElRWxyX085S/KCGVar4outuTtfmzU
- gUKnI5CTUtMuruszHeKZ//06dEqWCBhePX2U3S585nKjfHd3wUcam7TJXQiTTcmzhMvO/o1GV93
- 3TuOKHJJs2awIABA==
-X-Google-Smtp-Source: AGHT+IHwz4eYpd5Me4YfmCJ0tQp9+OkA9vuLMY68+ndG1HzpXxmHfCWaP315Nn/HnLggOb3GbnBAIQ==
-X-Received: by 2002:a05:600c:1d9b:b0:465:a51d:d4 with SMTP id
- 5b1f17b1804b1-471178784c2mr20217695e9.6.1760682268974; 
- Thu, 16 Oct 2025 23:24:28 -0700 (PDT)
-Received: from [127.0.1.1] ([2a01:e0a:e50:3860:4f9d:9005:7d78:d1f4])
+ d=1e100.net; s=20230601; t=1760685142; x=1761289942;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vc7PHHXr0+qy7WEa2gG3uSfvUnZhTBG/Js6NtsCW/nI=;
+ b=LdVHxKP4xk0ygaFKxAhL3iLMvatxV/MPjqtXAs/eBDIryo7BzmkVpsEs7vn7axV77b
+ FPPiMRqAw9STbczO2O98+TQxPoiZpVpSnREx0LEMNyiCd+4U9UixuANEn09LbG2hEP2t
+ F3Cjn8ZXZWZqZ+6YBpvynAc2Bb1RA/xSuJyVSIs8RfPxFzDFPLg9UzwPQZiOmdjxTWQK
+ TfNLtxFts2UX9X2JZVcMs+HxJxiQvAQegbHCYYMcsXnSvlo3rxyeeiX65kJ8jny3V+1M
+ +vfQHXN8oBH6Ag9ZmczuJIwhOzi3je/dSUa8PWbvpt4GUEf7VCwD4g/AuHOvyy+cht8A
+ 3DwQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXwjjyA+1RRSDgy+mTfnJm0VdePtVmUVz9b0/2Wzpuc9EEn5t8v8ZJdqu2Sf+rEb06DfARlAZI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyAil7Y/rA2tsv488ZsnBH91lCKhZ8Y7hwKTAkj0xN3ChvPz0mg
+ d7XaEheQj4aOJQMF/4amhXYN9X2uFt1VDNwA6+fo526GnfBLO94Z/CARFAH/zkoluSWqi140M9C
+ 7Qrs77NT1T9RepeEPWB74Ctxe1ytHiGARG+Mam+haLejd36a9AgeXrMU90xcNfyDKUh5xByI=
+X-Gm-Gg: ASbGncvomVgxhtHi4mJwenURNxcn6pR8RU/zdFYxp62naJKL5EOLIacchqbDKkdtdp2
+ osnzZKVSGc1pS96ikUl92RTs3PVcHmXmqKu1WMPoKujxmNSqTc//rFRlt/s5zoMoxLTxOLUL3Pc
+ rhqho15UuBXcbqea+5ZpCC8tBYfI0VxVfHizgthXapP38ADdceXk2G7ppvXwgTIJmDy04et2DI7
+ zfVNkc2jtdhoanDHYMB9Kk+iF1WHG5R4xkQZAVr5KD3S9MnqbBrKcYBYoXscIYT+L4fA0MubNBe
+ MB9Wf1TcH3cBocLV+ZDrFFo2iDO0hrtwB1chQUQdgsrs+d6jKStkvfJAusk1/geKX9s/WZ2EGf9
+ qccHCSnKsu9MwPPwfE19sjwm4QeP5sxTAoL74CxW6gawPM/Ooh+zSHLQ/YYwqBP2ISkdb+RLL
+X-Received: by 2002:a05:600c:3104:b0:46e:1fb9:5497 with SMTP id
+ 5b1f17b1804b1-471178a5c6emr17857795e9.18.1760685141671; 
+ Fri, 17 Oct 2025 00:12:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFbRBKSkT4pwimecBdVszRARMynDrjCINAy1+cbW2OqxXiiPNYSvDQVtffb3kD34qAKESRRXA==
+X-Received: by 2002:a05:600c:3104:b0:46e:1fb9:5497 with SMTP id
+ 5b1f17b1804b1-471178a5c6emr17857565e9.18.1760685141162; 
+ Fri, 17 Oct 2025 00:12:21 -0700 (PDT)
+Received: from [192.168.123.154]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47114423862sm66061705e9.1.2025.10.16.23.24.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Oct 2025 23:24:28 -0700 (PDT)
-From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Date: Fri, 17 Oct 2025 08:24:23 +0200
-Subject: [PATCH] board: am62x: Add support for reading eeprom data
+ 5b1f17b1804b1-471144238easm67463405e9.4.2025.10.17.00.12.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 17 Oct 2025 00:12:20 -0700 (PDT)
+Message-ID: <1d44df95-a7fc-4217-9f22-788c70fe38bc@canonical.com>
+Date: Fri, 17 Oct 2025 09:12:19 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] riscv: consider CONFIG_RISCV_ISA_ZAAMO in SPL too
+To: Yao Zi <ziyao@disroot.org>, Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>, E Shattow <e@freeshell.de>
+References: <20251016165851.45311-1-heinrich.schuchardt@canonical.com>
+ <9fdc0e15-c37b-4f1b-8148-bf3de590be0c@canonical.com> <aPGc12v2H5sCZNMi@pie>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <aPGc12v2H5sCZNMi@pie>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251017-am62xeeprom-v1-1-31f83124189f@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIABbh8WgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDA0Mz3cRcM6OK1NSCovxcXRPDRENLI4Mki6QUIyWgjoKi1LTMCrBp0bG
- 1tQBRyugCXQAAAA==
-X-Change-ID: 20251016-am62xeeprom-41a1920b8bd2
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>, 
- Garrett Giordano <ggiordano@phytec.com>, Wadim Egorov <w.egorov@phytec.de>, 
- Neha Malcom Francis <n-francis@ti.com>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Santhosh Kumar K <s-k6@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Devarsh Thakkar <devarsht@ti.com>, Anshul Dalal <anshuld@ti.com>, 
- Prasanth Babu Mantena <p-mantena@ti.com>, Judith Mendez <jm@ti.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,175 +122,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I2C EEPROM data contains the board name and its revision.
-Add support for:
-- Reading EEPROM data and store a copy at end of SRAM
-- Updating env variable with relevant board info
-- Printing board info during boot.
+On 10/17/25 03:33, Yao Zi wrote:
+> On Thu, Oct 16, 2025 at 07:04:48PM +0200, Heinrich Schuchardt wrote:
+>> On 10/16/25 18:58, Heinrich Schuchardt wrote:
+>>> Commit a681cfecb434 ("riscv: Add a Zalrsc-only alternative for
+>>> synchronization in start.S") changed the hart synchronization in start.S.
+>>> It uses CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO) to determine which method to
+>>> use. If the macro evaluates to true the old behavior is maintained.
+>>>
+>>> The macro evaluates to false for SPL builds which was unintended. Use
+>>> IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO) instead.
+>>>
+>>> This fixes a boot failure on StarFive JH7110 based boards.
+>>>
+>>> Fixes: a681cfecb434 ("riscv: Add a Zalrsc-only alternative for synchronization in start.S")
+>>> Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
----
- arch/arm/mach-k3/am62x/Kconfig |  3 ++
- board/ti/am62x/evm.c           | 95 +++++++++++++++++++++++++++++++++++++++++-
- configs/am62x_evm_r5_defconfig |  1 +
- 3 files changed, 98 insertions(+), 1 deletion(-)
+e6646b35f410 ("Revert "riscv: Add a Zalrsc-only alternative for 
+synchronization in start.S"") has been merged this night. Hence the 
+current patch is superseded.
 
-diff --git a/arch/arm/mach-k3/am62x/Kconfig b/arch/arm/mach-k3/am62x/Kconfig
-index 81199ada3a1..f7ad52db7d8 100644
---- a/arch/arm/mach-k3/am62x/Kconfig
-+++ b/arch/arm/mach-k3/am62x/Kconfig
-@@ -14,6 +14,8 @@ config TARGET_AM625_A53_EVM
- 	select ARM64
- 	select BINMAN
- 	select OF_SYSTEM_SETUP
-+	imply TI_COMMON_CMD_OPTIONS
-+	imply TI_I2C_BOARD_DETECT
- 
- config TARGET_AM625_R5_EVM
- 	bool "TI K3 based AM625 EVM running on R5"
-@@ -25,6 +27,7 @@ config TARGET_AM625_R5_EVM
- 	select K3_DDRSS
- 	select BINMAN
- 	imply SYS_K3_SPL_ATF
-+	imply TI_I2C_BOARD_DETECT
- 
- config TARGET_PHYCORE_AM62X_A53
- 	bool "PHYTEC phyCORE-AM62x running on A53"
-diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-index d7b07a0d34d..fbd45608efa 100644
---- a/board/ti/am62x/evm.c
-+++ b/board/ti/am62x/evm.c
-@@ -22,8 +22,18 @@
- #include <dm/uclass.h>
- #include <asm/arch/k3-ddr.h>
- 
-+#include "../common/board_detect.h"
- #include "../common/fdt_ops.h"
- 
-+#include "../common/k3-ddr.h"
-+
-+#define board_is_am62x_skevm()  (board_ti_k3_is("AM62-SKEVM") || \
-+				 board_ti_k3_is("AM62B-SKEVM"))
-+#define board_is_am62b_p1_skevm() board_ti_k3_is("AM62B-SKEVM-P1")
-+#define board_is_am62x_lp_skevm()  board_ti_k3_is("AM62-LP-SKEVM")
-+#define board_is_am62x_sip_skevm()  board_ti_k3_is("AM62SIP-SKEVM")
-+#define board_is_am62x_play()	board_ti_k3_is("BEAGLEPLAY-A0-")
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
- #if CONFIG_IS_ENABLED(SPLASH_SCREEN)
-@@ -74,9 +84,92 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#ifdef CONFIG_BOARD_LATE_INIT
-+#if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
-+int do_board_detect(void)
-+{
-+	int ret;
-+
-+	ret = ti_i2c_eeprom_am6_get_base(CONFIG_EEPROM_BUS_ADDRESS,
-+					 CONFIG_EEPROM_CHIP_ADDRESS);
-+	if (ret) {
-+		printf("EEPROM not available at 0x%02x, trying to read at 0x%02x\n",
-+		       CONFIG_EEPROM_CHIP_ADDRESS, CONFIG_EEPROM_CHIP_ADDRESS + 1);
-+		ret = ti_i2c_eeprom_am6_get_base(CONFIG_EEPROM_BUS_ADDRESS,
-+						 CONFIG_EEPROM_CHIP_ADDRESS + 1);
-+		if (ret)
-+			pr_err("Reading on-board EEPROM at 0x%02x failed %d\n",
-+			       CONFIG_EEPROM_CHIP_ADDRESS + 1, ret);
-+	}
-+
-+	return ret;
-+}
-+
-+int checkboard(void)
-+{
-+	struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
-+
-+	if (!do_board_detect())
-+		printf("Board: %s rev %s\n", ep->name, ep->version);
-+
-+	return 0;
-+}
-+
-+#if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
-+static void setup_board_eeprom_env(void)
-+{
-+	char *name = "am62x_skevm";
-+
-+	if (do_board_detect())
-+		goto invalid_eeprom;
-+
-+	if (board_is_am62x_skevm())
-+		name = "am62x_skevm";
-+	else if (board_is_am62b_p1_skevm())
-+		name = "am62b_p1_skevm";
-+	else if (board_is_am62x_lp_skevm())
-+		name = "am62x_lp_skevm";
-+	else if (board_is_am62x_sip_skevm())
-+		name = "am62x_sip_skevm";
-+	else if (board_is_am62x_play())
-+		name = "am62x_beagleplay";
-+	else
-+		printf("Unidentified board claims %s in eeprom header\n",
-+		       board_ti_get_name());
-+
-+invalid_eeprom:
-+	set_board_info_env_am6(name);
-+}
-+
-+static void setup_serial(void)
-+{
-+	struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
-+	unsigned long board_serial;
-+	char *endp;
-+	char serial_string[17] = { 0 };
-+
-+	if (env_get("serial#"))
-+		return;
-+
-+	board_serial = simple_strtoul(ep->serial, &endp, 16);
-+	if (*endp != '\0') {
-+		pr_err("Error: Can't set serial# to %s\n", ep->serial);
-+		return;
-+	}
-+
-+	snprintf(serial_string, sizeof(serial_string), "%016lx", board_serial);
-+	env_set("serial#", serial_string);
-+}
-+#endif
-+#endif
-+
-+#if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
- int board_late_init(void)
- {
-+	if (IS_ENABLED(CONFIG_TI_I2C_BOARD_DETECT)) {
-+		setup_board_eeprom_env();
-+		setup_serial();
-+	}
-+
- 	ti_set_fdt_env(NULL, NULL);
- 	return 0;
- }
-diff --git a/configs/am62x_evm_r5_defconfig b/configs/am62x_evm_r5_defconfig
-index 18ffc991b25..d42bdf1f074 100644
---- a/configs/am62x_evm_r5_defconfig
-+++ b/configs/am62x_evm_r5_defconfig
-@@ -85,6 +85,7 @@ CONFIG_SPL_CLK_K3_PLL=y
- CONFIG_SPL_CLK_K3=y
- CONFIG_TI_SCI_PROTOCOL=y
- CONFIG_DA8XX_GPIO=y
-+CONFIG_DM_I2C=y
- CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_SPL_MISC=y
+ibex-ast2700_defconfig for which the original patch was developed does 
+not build w/ or w/o the revert ("undefined reference to `__ashldi3'") on 
+Ubuntu 25.10 using GCC 15.2.
 
----
-base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
-change-id: 20251016-am62xeeprom-41a1920b8bd2
+>>> ---
+> 
+> Hi Heinrich,
+> 
+> Thanks for sending the patch!
+> 
+>>
+>> Hello Yao,
+>>
+>> It would be worthwhile to understand why your new method does not work on
+>> the StarFive VisionFive 2. I only addressed the Kconfig issue. But I suspect
+>> there is something broken in the alternative pass.
+> 
+> A possible reason is that, on JH7110 not all the cores support LR/SC
+> instructions: the S7 small core always raises access exception for it
+> since the implementation of LR/SC requires data cache to present, while
+> S7 doesn't have one.
 
-Best regards,
--- 
-Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+@Hal, @Minda
+does the S7 core enter U-Boot SPL at all?
+
+Best regards
+
+Heinrich
+
+> 
+> This is documented in SiFive U74-MC Core Complex Manual,
+> 
+>> Load-reserved (LR) and store-conditional (SC) instructions are special
+>> atomic instructions that are only supported in data cacheable regions.
+>> As the S7 core does not have a data cache, the LR and SC instructions
+>> will always generate a precise access exception.[1]
+> 
+> As S7 also takes part in the initial HART lottery, usage of LR/SC
+> instructions might just crash its boot process with exception.
+> 
+> However I could only confirm the idea days later when I have access to
+> a JH7110 board. Since earlier Tom has merged the patch[2] that reverts
+> the problematic commit, do you think it's better to wait for me to
+> confirm the cause and write v3 of the patch, instead of fixing it up
+> now? I'll carry your Co-developed-by tag in v3 if you're okay with this.
+> 
+>> Best regards
+>>
+>> Heinrich
+> 
+> Best regards,
+> Yao Zi
+> 
+> [1]: https://starfivetech.com/uploads/u74mc_core_complex_manual_21G1.pdf
+> (Chapter 3.6, Atomic Memory Operations)
+> [2]: https://lore.kernel.org/u-boot/176063629917.212270.1145034876136991424.b4-ty@konsulko.com/
 
