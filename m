@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81EF1CCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 15:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F0FCCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 15:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50A53839CC;
+	by phobos.denx.de (Postfix) with ESMTP id 90DB6839D9;
 	Fri, 17 Oct 2025 17:44:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="T8TxzVw+";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="DwSWxgX6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B72D8383F; Fri, 17 Oct 2025 17:29:34 +0200 (CEST)
+ id 5D0678383F; Fri, 17 Oct 2025 17:30:03 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3FD783826
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 17:29:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9D6D83826
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 17:30:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kauschluss@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 7674D26361;
- Fri, 17 Oct 2025 17:29:32 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id BE4932629C;
+ Fri, 17 Oct 2025 17:30:00 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id ifU47d1lFjdx; Fri, 17 Oct 2025 17:29:31 +0200 (CEST)
+ id 7FY8BwOXTkoS; Fri, 17 Oct 2025 17:30:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1760714971; bh=EzVzDjbElglAqzJ1YzfwS+g/C+rPOLNb5gVd4CFIXbI=;
+ t=1760715000; bh=gvRvLSQY2K8/TDjUx6ppUdUexDiRLR8TISv49uVy0+k=;
  h=From:Date:Subject:To:Cc;
- b=T8TxzVw+xaUY2B13LBfzLZtG0kKlnro28jS0Ksgkuijs85/6ES/wfC00ROV8CQcNo
- 3JcRg+D9nerlv9doJnebdbtku0VuvMMiQ6a1nZ1wRJ2SQKnN8fjUjVNjjmo5KeBz2M
- BYEgY4lRsGnoEOXGr5SZ6fNL0/dF+91U0rgWOzkm4ferZzXnLpkenHo10jVbGgpcrN
- hdOKL7jjf0zjZM5weVq+Fc1TZCME5SVy//7+zDnpE0jwrl64LgMTDbqRZ9pem+d18z
- 1TL2jTUzgO1E2RmxOvaFIXjCChjLHj0p9HqCfMTVlXcTbl/8SuuALLd9/DeHQVccGV
- N8li3IKjK0YFg==
+ b=DwSWxgX6PmWTo8CzF6Q7wUOpij6iDKxcelLm+CEflIeEoEqu5VJp5QDfhO3QQPDDr
+ nvr4/BlgAAWLbOczN4zBPXZ0qGJiF90WAA8KqOD9K1aQ94mgXfH56p74JDkFR/tetw
+ YcjoCb2/lEx5msbnioQ0Xrr7WmWnwgriTqczNYSgHzrCF1iC7OulVdgop31SL8/0zr
+ qxduimrOzYjQkXAjK9QShC/Q/Svm5/FpiZ90O5sB0BlexHWwKX0nSC1IJf4FqZht+Y
+ yvMQueu6TfoWtv7biSGP2f2+UnGiK0vUN84xtOsovM5NaiE30AJP0T/LCTsYQtRWqR
+ YrUPAaPOC0FOA==
 From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Fri, 17 Oct 2025 20:59:22 +0530
-Subject: [PATCH] serial: s5p: add compatible for exynos8895
+Date: Fri, 17 Oct 2025 20:59:48 +0530
+Subject: [PATCH] soc: exynos-pmu: add support for Exynos7 PMU
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251017-serial-s5p-exynos8895-v1-1-b412dd112cfd@disroot.org>
-X-B4-Tracking: v=1; b=H4sIANFg8mgC/x2MQQqAIBAAvxJ7bkEzIftKdLDaaiEsXAgj+nvWc
- WBmbhCKTAJtcUOkk4X3kEGXBYyrDwshT5mhUpXVStf4+X5DsQdSusIuTeMsGqPMNJPxzg2Q2yP
- SzOn/dv3zvMSbnkdnAAAA
-X-Change-ID: 20251014-serial-s5p-exynos8895-3303dfe3a99b
+Message-Id: <20251017-soc-pmu-exynos7-v1-1-553d18eaab0d@disroot.org>
+X-B4-Tracking: v=1; b=H4sIAOtg8mgC/x3MQQ5AMBBA0avIrE3SFqm4ilhQg1lopRNCpHfXW
+ L7F/y8IRSaBrngh0sXCwWfosgC3jX4l5DkbjDKNVrpGCQ6P/US6Hx/E4qLa1ppKT+PkIFdHpIX
+ v/9gPKX0M0UEuYQAAAA==
+X-Change-ID: 20251014-soc-pmu-exynos7-f0887231babc
 To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, 
+Cc: Sam Protsenko <semen.protsenko@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, 
  Kaustabh Chakraborty <kauschluss@disroot.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1760714968; l=1179;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1760714995; l=1060;
  i=kauschluss@disroot.org; s=20250202; h=from:subject:message-id;
- bh=EzVzDjbElglAqzJ1YzfwS+g/C+rPOLNb5gVd4CFIXbI=;
- b=qrOMMf6vaPKf2SfNtQfs2CHc1ippZO62uR1iA0Pla+ivQa3YrfPNar2+iax/uwq7avfHTXinu
- m1/a+j8AYYrAoruWbRUpVTNjcARHOu6ApVX+1JKVK+8sn0RGtnbi5ai
+ bh=gvRvLSQY2K8/TDjUx6ppUdUexDiRLR8TISv49uVy0+k=;
+ b=sO9yPJkHdCeyDp40CdfMwPxVppQG0tt28xaQc6l/kcGF38m8OKxeAsPEOL3RWZjBPxzZjfDVw
+ YdABl5zTb/fCXcFPXAkjVTjNY3Aw4uXHn4XlXHJ7YGRmUgmXEJ2gnTM
 X-Developer-Key: i=kauschluss@disroot.org; a=ed25519;
  pk=h2xeR+V2I1+GrfDPAhZa3M+NWA0Cnbdkkq1bH3ct1hE=
 X-Mailman-Approved-At: Fri, 17 Oct 2025 17:43:57 +0200
@@ -78,32 +79,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the compatible for Exynos8895 UART as described in upstream
-devicetree bindings. This enables support for Exynos8895 and other
-similar UART devices, such as Exynos7870. Other than that, the driver
-works as-is.
+Add the compatible string of Exynos7's PMU as defined in upstream
+dt-schema. This also supports derivative PMUs as defined in schema.
+There's no additional setup required here, so pmu_init is skipped.
 
 Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 ---
- drivers/serial/serial_s5p.c | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/soc/samsung/exynos-pmu.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/drivers/serial/serial_s5p.c b/drivers/serial/serial_s5p.c
-index 734780a124ad47ed97811784edfdb45a75d37bf7..d46a88610ab88a227aa07b10c62576a13168bfbc 100644
---- a/drivers/serial/serial_s5p.c
-+++ b/drivers/serial/serial_s5p.c
-@@ -258,6 +258,7 @@ static const struct dm_serial_ops s5p_serial_ops = {
- static const struct udevice_id s5p_serial_ids[] = {
- 	{ .compatible = "samsung,exynos4210-uart",	.data = PORT_S5P },
- 	{ .compatible = "samsung,exynos850-uart",	.data = PORT_S5P },
-+	{ .compatible = "samsung,exynos8895-uart",	.data = PORT_S5P },
- 	{ .compatible = "apple,s5l-uart",		.data = PORT_S5L },
- 	{ }
- };
+diff --git a/drivers/soc/samsung/exynos-pmu.c b/drivers/soc/samsung/exynos-pmu.c
+index 233ad4a908f5469e1ef210ddba6d7ec573fd4e15..0f533bcdae52adeafba4790e50bcf97ed34fc606 100644
+--- a/drivers/soc/samsung/exynos-pmu.c
++++ b/drivers/soc/samsung/exynos-pmu.c
+@@ -85,6 +85,9 @@ static int exynos_pmu_probe(struct udevice *dev)
+ }
+ 
+ static const struct udevice_id exynos_pmu_ids[] = {
++	{
++		.compatible = "samsung,exynos7-pmu",
++	},
+ 	{
+ 		.compatible = "samsung,exynos850-pmu",
+ 		.data = (ulong)&exynos850_pmu_data
 
 ---
 base-commit: 582a04763aa80738c1c8ac60c47d1a5159a42833
-change-id: 20251014-serial-s5p-exynos8895-3303dfe3a99b
+change-id: 20251014-soc-pmu-exynos7-f0887231babc
 
 Best regards,
 -- 
