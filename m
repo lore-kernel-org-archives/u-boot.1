@@ -4,83 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D86A8CCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEC4BCCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 589AC83734;
-	Fri, 17 Oct 2025 15:00:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 31FAC83826;
+	Fri, 17 Oct 2025 15:15:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tFEg2mLe";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uvTgSRSU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A32FE837E4; Fri, 17 Oct 2025 15:00:56 +0200 (CEST)
-Received: from mail-yx1-xb135.google.com (mail-yx1-xb135.google.com
- [IPv6:2607:f8b0:4864:20::b135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B749383710
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:00:53 +0200 (CEST)
+ id 29C0F83804; Fri, 17 Oct 2025 15:15:53 +0200 (CEST)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E27083655
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:15:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yx1-xb135.google.com with SMTP id
- 956f58d0204a3-635401a8f5aso1803569d50.1
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 06:00:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760706052; x=1761310852; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rpVxWi7LUbvJROZYJpCPsGS8YiDCIVbHNj0WqJNoeTQ=;
- b=tFEg2mLenVdTW4KtPtXnSPr/Z6q+rqkZIUytZ9dLxlHPvk+VONtcvGHZ4GS5IWt1YI
- ki0uz33iq6OJry9LzbArluQvAh3H/UUeDtwAJMRhaMKd/+e/NmLb9IYrYFlW3IGrbXRU
- oFjhyRymw5trz80SY8CZh7vkaa3fHidox0ERYsQAqSIQfHpWvQzEoXsTmK30TJIurWEQ
- bsGtfPRkQDmcyg31ILJYCEHwdhpHRnwFt3W8S8lIwqiZGbD/59xaLdKFwg7pabp4MjM9
- kjr8i7+Pb1t6D+7Jyc6/hjiMiEWj+BuVmXNaPljF2DLYWNYkwrjvfFxwqf20hifMvUBM
- B7Lg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760706052; x=1761310852;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rpVxWi7LUbvJROZYJpCPsGS8YiDCIVbHNj0WqJNoeTQ=;
- b=DhsHlbIskRp1F8hWBO/IR2lHP3ejaezV3NPvQgt9dGb4AZD47nZcX5mgQ1jD/sRUKM
- aBZZzChBc62jqg6IKsGo59QoeUlECKZ6js29jZi65O0wqUMjcuR0B4ujnFG6gZnxO1n2
- rQu5BgaON3qQRed4KNjM21dZe4MbCh3YEsRNv2gBbFbjSCod5EWoxovfww4wsRd2ihwr
- eMtQUgpyzXFL+4OsIwXGq7skMFQ8UrndXHjQ0CMpV7jd1AQsxqeNhpK2O83MaLR50wka
- t+SBRQ+3JgTXYqW3Kb+veKiM934RyXyHxRwP94oRvAW6Y8L31DHJaskllZTiTwxBe21r
- +Gcw==
-X-Gm-Message-State: AOJu0YzKQQAoQDrB+pbxGdZgGRb4e+aCVSZMdiKXU/vt55uQWSwnfoyM
- yQcs2yNOMTuGw4xQAILKL5Jj0Mj3z+Dk3EhAb7xZgJb8+OOnBiyBoWcIeS1WK+6y0ppx37FbXFR
- cNAQryp1RBNhKf+YHYq6vXhRBcS6vV+bURvL7L6s8WQ==
-X-Gm-Gg: ASbGncsEVCvihh7UViFx52m7arPw1dWrT89hRs0BpoxxIAvn6B1XcVKO340KJJFXeUn
- jHed9UaMAiZ4ld3hM116DDLGuZg6yTVugoWfFLeSEJt7wImpW4jiRi7WibTnEHACgOKwxvAZpfq
- B0t0HUjliM6aLoLOhdW0ya2GfNWAfOF8LjmgtFD+93vzNEjjGbedPohv55r7FPckWNAomtGO03Z
- ttQDV9izVEImg1PhFrgl6xSmpgR18vya5aDkGG3uFPRc0wPN8DNWOzOysjieVfMXn0IiceSQRdd
- FWMnOfyWlLhEZnWYUFmJrxMbBPi96P+9Sg+RhB4L
-X-Google-Smtp-Source: AGHT+IF/HecFxNXXiHL8qDzPB4SBeXgVvAm5vfo0L/zfHZ45Ynb26pHrrPdTGtaw2mrr2FZP0k4yl60z4hD2VsTw3AE=
-X-Received: by 2002:a05:690e:118e:b0:63e:bce:b4ea with SMTP id
- 956f58d0204a3-63e1623f618mr2638924d50.36.1760706052189; Fri, 17 Oct 2025
- 06:00:52 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59HDFgmt2274930;
+ Fri, 17 Oct 2025 08:15:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1760706942;
+ bh=t5yD7WRpqqmMgE2rytbc7MzCfb4NTtKnyuWcBefyFq8=;
+ h=From:To:CC:Subject:Date;
+ b=uvTgSRSURWFXr7pirm/N2s2IGzGS6qN6vJ4leGCbmwKBE6e9ZjNmwKCXFyb1gsFgm
+ FnJuY8cS8y4q9yIiKdPWUYWIQ7Rw4hEIqO5n1IefyHlS8kUiNxhDTjAcHLTwdMDmgY
+ QqK9ulY5tjL6fypOL0XWdzwOUjVDGKto4jXPwEH0=
+Received: from DLEE203.ent.ti.com (dlee203.ent.ti.com [157.170.170.78])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59HDFgpk2419169
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 17 Oct 2025 08:15:42 -0500
+Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 17 Oct
+ 2025 08:15:42 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
+ (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Fri, 17 Oct 2025 08:15:42 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59HDFfFZ1347446;
+ Fri, 17 Oct 2025 08:15:41 -0500
+From: Anshul Dalal <anshuld@ti.com>
+To: <u-boot@lists.denx.de>
+CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
+ <vigneshr@ti.com>, <trini@konsulko.com>, <nm@ti.com>,
+ <robertcnelson@gmail.com>, <w.egorov@phytec.de>,
+ <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
+ <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
+Subject: [PATCH v11 00/11] Add support for dynamic MMU configuration
+Date: Fri, 17 Oct 2025 18:45:22 +0530
+Message-ID: <20251017131540.3636067-1-anshuld@ti.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-References: <20251010134424.3835757-1-anshuld@ti.com>
- <20251010134424.3835757-6-anshuld@ti.com>
- <CAC_iWj+pyDhYnaJE+eX8LP+Czu13+oH+H1XfMbH4wWgVqY6k2w@mail.gmail.com>
- <DDKLWVUX1CPJ.3EMPE1DELU070@ti.com>
-In-Reply-To: <DDKLWVUX1CPJ.3EMPE1DELU070@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 17 Oct 2025 16:00:15 +0300
-X-Gm-Features: AS18NWAfX1NHuLTide-siH_LmO2CLH1JMJpo--Ols1TlhzKDaLa2ZHyWj2_J_fg
-Message-ID: <CAC_iWjJjNVQLfKfbkAmmcm6y0VDSaGibR59kF+pbZGbWb+kBuw@mail.gmail.com>
-Subject: Re: [PATCH v10 05/11] arm: armv8: mmu: add mem_map_from_dram_banks
-To: Anshul Dalal <anshuld@ti.com>
-Cc: u-boot@lists.denx.de, d-gole@ti.com, b-padhi@ti.com, vigneshr@ti.com, 
- trini@konsulko.com, nm@ti.com, robertcnelson@gmail.com, w.egorov@phytec.de, 
- francesco.dolcini@toradex.com, ggiordano@phytec.com, m-chawdhry@ti.com, 
- afd@ti.com, bb@ti.com, u-kumar1@ti.com, devarsht@ti.com, xypron.glpk@gmx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,97 +81,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 17 Oct 2025 at 15:47, Anshul Dalal <anshuld@ti.com> wrote:
->
-> Hello Ilias,
->
-> On Fri Oct 17, 2025 at 5:39 PM IST, Ilias Apalodimas wrote:
-> > Hi Anshul,
-> >
-> > On Fri, 10 Oct 2025 at 16:44, Anshul Dalal <anshuld@ti.com> wrote:
-> >>
-> >> For armv8, U-Boot uses a static map defined as 'mem_map' for configuring
-> >> the MMU as part of mmu_setup.
-> >>
-> >> But since the exact configuration of memory banks might not be known at
-> >> build time, many platforms such as imx9, versal2 etc. utilize
-> >> gd->bd->bi_dram to configure the static map at runtime.
-> >>
-> >> Therefore this patch adds a new API mem_map_from_dram_banks that
-> >> modifies the static map in a similar way. Allowing the caller to map all
-> >> dram banks by just passing the index to last entry in their mem_map and
-> >> it's length.
-> >>
-> >> Reviewed-by: Dhruva Gole <d-gole@ti.com>
-> >> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> >> Tested-by: Wadim Egorov <w.egorov@phytec.de>
-> >> ---
-> >>  arch/arm/cpu/armv8/cache_v8.c    | 28 ++++++++++++++++++++++++++++
-> >>  arch/arm/include/asm/armv8/mmu.h | 11 +++++++++++
-> >>  2 files changed, 39 insertions(+)
-> >>
-> >> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> >> index 74c78cb2fb0..9b3c37dae82 100644
-> >> --- a/arch/arm/cpu/armv8/cache_v8.c
-> >> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> >> @@ -58,6 +58,34 @@ static int get_effective_el(void)
-> >>         return el;
-> >>  }
-> >>
-> >> +int mem_map_from_dram_banks(unsigned int index, unsigned int len, u64 attrs)
-> >> +{
-> >> +       unsigned int i;
-> >> +       int ret = fdtdec_setup_memory_banksize();
-> >> +
-> >> +       if (ret) {
-> >> +               log_err("%s: Failed to setup dram banks\n", __func__);
-> >> +               return ret;
-> >> +       }
-> >> +
-> >> +       if (index + CONFIG_NR_DRAM_BANKS >= len) {
-> >> +               log_err("%s: Provided mem_map array has insufficient size for DRAM entries\n",
-> >> +                       __func__);
-> >> +               return -ENOMEM;
-> >> +       }
-> >> +
-> >> +       for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-> >> +               mem_map[index].virt = gd->bd->bi_dram[i].start;
-> >> +               mem_map[index].phys = gd->bd->bi_dram[i].start;
-> >> +               mem_map[index].size = gd->bd->bi_dram[i].size;
-> >> +               mem_map[index].attrs = attrs;
-> >> +               index++;
-> >> +       }
-> >> +
-> >> +       memset(&mem_map[index], 0, sizeof(mem_map[index]));
-> >> +
-> >> +       return 0;
-> >> +}
-> >
-> > Is there a reason we add all the memory maps now and remove them later
-> > with mmu_unmap_reserved_mem(). IOW we could add the DT parsing in this
-> > function and not map the 'no-map' addresses to begin with.
-> > Unless someone changes the DTB on the fly ?
-> >
->
-> There are two reasons for doing it this way:
->
-> 1. Modifying mem_map directly makes creating multiple carveouts quite
-> complex with the logic for handling all the edge cases, for example see
-> v4[1] of this series. It's much simpler to use the MMU APIs instead
-> after calling mmu_setup with everything mapped in mem_map.
->
-> 2. We can't blindly unmap all 'no-map' regions since some regions that
-> would be 'no-map' in the kernel's context are required at U-Boot, like
-> the memory pools for remote cores that rely on U-Boot to load their
-> firmware.
+Hi all,
 
-Fair enough. Since you'll send a V11 adding this on the description
-helps. Also mention that this should all happen before enabling the
-caches, so mapping memory that is marked as no-map; shouldn't cause
-any crashes
+In U-Boot, TI only provides a single memory map for all k3 platforms, this
+does not scale for devices where atf and optee lie outside the range 0x80000000
+- 0x80080000 and 0x9e780000 - 0xa0000000 respectively.
 
-Thanks
-/Ilias
->
-> Regards,
-> Anshul
+There are also issues for devices with < 2GiB of memory (eg am62SiP with 512MiB
+of RAM) as the maximum size for the first DRAM bank is hardcoded to 2GiB in the
+current memory map. Furthermore the second DRAM bank is mapped even for devices
+that only have a single bank.
+
+Therefore this patch set adds the required functionality to create the MMU table
+at runtime based on the device-tree.
+
+The patch set has been build tested on all effected platforms but boot-tested
+only on TI's K3 EVMs, the beagleplay and phytec's phycore-am6* platforms.
+
+The following effected boards have not been boot tested:
+ - verdin-am62
+ - iot2050
+
+Best Wishes,
+Anshul
+---
+Changes in v11:
+ - Rename spl_perform_fixups for am62dx
+ - Add 'check_nomap' to mmu_unmap_reserved_mem
+v10: https://lore.kernel.org/u-boot/20251010134424.3835757-1-anshuld@ti.com/
+
+Changes in v10:
+ - Rename mem_map_fix_dram_banks to mem_map_from_dram_banks
+ - Use log_err instead of printf
+ - Add check for "no-map" in the reserved-memory node before unmapping it
+v9: https://lore.kernel.org/u-boot/20251010055340.2574743-1-anshuld@ti.com/
+
+Changes in v9:
+ - Pick R-by tags
+ - Change error messages from debug to printf
+v8: https://lore.kernel.org/u-boot/20251006082852.4008937-1-anshuld@ti.com/
+
+Changes in v8:
+ - Reserve extra space for page table entries for performing fixups
+v7: https://lore.kernel.org/u-boot/20250912121618.1074054-1-anshuld@ti.com/
+
+Changes in v7:
+ - Pick up R-by and Tested-by tags
+ - Use nobreak API for unmapping MMU region
+ - Better error messages and minor refactor
+v6: https://lore.kernel.org/u-boot/20250905081902.489345-1-anshuld@ti.com/
+
+Changes in v6:
+ - Make use of generic MMU APIs
+ - Extend core U-Boot functionality by adding mmu_unmap_reserved_mem and
+   mem_map_fix_dram_banks
+ - Keep same memory maps for SPL and U-Boot proper
+ - Add fdt fixups from SPL stage for reserved memory nodes
+v5: https://lore.kernel.org/u-boot/20250703133533.104758-1-anshuld@ti.com/
+
+Changes in v5:
+ - Don't create carveouts for every reserved-memory node
+ - Only create carveouts for ATF/OP-TEE
+ - Expand the call to k3_mem_map_init to vendor boards as well
+ - Map area for framebuffer for CONFIG_VIDEO=y platforms
+v4: https://lore.kernel.org/u-boot/20250618124210.1936140-1-anshuld@ti.com/
+
+Changes for v4:
+ - Add call to k3_mem_map_init for beagleplay
+ - Mark reserved regions as non-cacheable
+ - More debug logs
+v3: https://lore.kernel.org/u-boot/20250617135844.2873701-1-anshuld@ti.com/
+
+Changes for v3:
+ - Remove unused memory regions in SPL's map
+ - Add runtime addition of MMU entry for the framebuffer in SPL
+ - Refactor k3_mem_map_init to use standard u-boot APIs
+ - Unmap reserved-memory regions instead of keeping them uncached
+v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.com/
+
+Changes in v2:
+- Removed dependency to:
+  https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
+v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.com/
+---
+Anshul Dalal (11):
+  mach-k3: use minimal memory map for all K3
+  mach-k3: use custom enable_cache
+  arm: armv8: mmu: export mmu_setup
+  arm: armv8: invalidate dcache entries on dcache_enable
+  arm: armv8: mmu: add mem_map_from_dram_banks
+  mach-k3: map all banks using mem_map_from_dram_banks
+  arm: armv8: mmu: add mmu_unmap_reserved_mem
+  spl: split spl_board_fixups to arch/board specific
+  mach-k3: add reserved memory fixups for next boot stage
+  mach-k3: add carveouts for TFA and optee
+  arm: mach-k3: reserve space for page table entries
+
+ arch/arm/cpu/armv7m/cpu.c                  |  2 +-
+ arch/arm/cpu/armv8/cache_v8.c              | 61 ++++++++++++++++++++--
+ arch/arm/include/asm/armv8/mmu.h           | 25 +++++++++
+ arch/arm/mach-k3/arm64/arm64-mmu.c         | 40 ++++++--------
+ arch/arm/mach-k3/common.c                  | 55 +++++++++++++++++++
+ arch/arm/mach-k3/include/mach/k3-ddr.h     |  6 +++
+ arch/arm/mach-rockchip/spl-boot-order.c    |  2 +-
+ arch/arm/mach-socfpga/spl_soc64.c          |  2 +-
+ board/beagle/beagley-ai/beagley-ai.c       |  2 +-
+ board/dhelectronics/dh_stm32mp1/board.c    |  2 +-
+ board/phytec/phycore_am62x/phycore-am62x.c |  2 +-
+ board/phytec/phycore_am64x/phycore-am64x.c |  2 +-
+ board/renesas/sparrowhawk/sparrowhawk.c    |  2 +-
+ board/starfive/visionfive2/spl.c           |  2 +-
+ board/ti/am62ax/evm.c                      |  2 +-
+ board/ti/am62dx/evm.c                      |  2 +-
+ board/ti/am62px/evm.c                      |  2 +-
+ board/ti/am62x/evm.c                       |  2 +-
+ board/ti/am64x/evm.c                       |  2 +-
+ board/ti/j721e/evm.c                       |  2 +-
+ board/ti/j721s2/evm.c                      |  2 +-
+ board/ti/j722s/evm.c                       |  2 +-
+ board/ti/j784s4/evm.c                      |  2 +-
+ common/spl/spl.c                           | 12 +++--
+ include/spl.h                              | 12 +++--
+ 25 files changed, 196 insertions(+), 51 deletions(-)
+
+-- 
+2.51.0
+
