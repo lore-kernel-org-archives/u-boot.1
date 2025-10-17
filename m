@@ -4,55 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47277CCD195
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 20:19:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99403CCD195
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 20:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A50B83835;
-	Fri, 17 Oct 2025 22:19:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id 03C4A8382E;
+	Fri, 17 Oct 2025 22:40:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="iqNKNwj/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hGjI1Qr4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B662183837; Fri, 17 Oct 2025 22:19:45 +0200 (CEST)
-Received: from out-172.mta0.migadu.com (out-172.mta0.migadu.com
- [91.218.175.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1065883835; Fri, 17 Oct 2025 22:40:48 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E56618382E
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 22:19:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ by phobos.denx.de (Postfix) with ESMTPS id 7D4D6836D1
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 22:40:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Fri, 17 Oct 2025 22:19:36 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1760732382;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=1JTlGl9zPASXX+K2g0k/4ho7enabwKaKsIq6zUgoMSI=;
- b=iqNKNwj/tFzAhyugc8nYncCHXsz43UF98vUl1KAJbU+hGnj82WI1YeAErSr9I2QV/PEpWV
- J1bGeBpWB1vxfwmRqg+ZHaWGm3H1ZwHyXvIy9aTC7J6XtlO/K1dDzNxx/BMAi4isrE/wo6
- jn++Y0JD4PcqEZ7/ffXeDTtUbUWTaBs=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Henrik Grimler <henrik@grimler.se>
-To: Kaustabh Chakraborty <kauschluss@disroot.org>
-Cc: u-boot@lists.denx.de, Minkyu Kang <mk7.kang@samsung.com>,
- Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>
-Subject: Re: [PATCH] board: samsung: add support for Samsung Exynos mobile
- device boards
-Message-ID: <20251017201936.GA13076@l14.localdomain>
-References: <20251017-board-exynos-mobile-v1-1-55f47dd52fc7@disroot.org>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-43f554ed252so1251381b6e.0
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 13:40:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760733644; x=1761338444; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ofyQHRapJFUtcSlum6XqIGjbY3MsPLMUSv+hCRMxzfs=;
+ b=hGjI1Qr4RmhA1HQGulzOM/EZejG/IN9LSBGBgOdujtuuDg80ZQqy86fpxdcpW3Iawe
+ uxZ/xVR8IULLtZPrTZq24BKE/jgUFTtj29yOHSnU6/eB/cSJbe2pW4I/ryXJW9hb+AjZ
+ rqtxWqUmhSkG8RLdqBi9+IwfpbgiLCRPX0ehc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760733644; x=1761338444;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ofyQHRapJFUtcSlum6XqIGjbY3MsPLMUSv+hCRMxzfs=;
+ b=StPN1ncztYFaeg4+hiu3svtivuYgtnJPjpreXl7zAf7cEKVmMQlW3+SNSzur2I40iC
+ +5Xi1gW7wQUt+hDbjwKAJo27ccr08AjPAC9H16ZQOs8pMAYZby02wJZP9Ojv6lT4nb9r
+ dsIXgmOBHBgj5kCnjsfkT5ba7puc0Bdw2jp9mBhHa/dUR4ZQKSMdHEj4i0jDcm8I7YS7
+ Vg6nQJszblMVZfjcK1JGyhIlOOyGHAac8kkQQOR83NO5zh6kNcSFYgpHWBPcs16KihMS
+ CrhY/CIYWUeDO4Gv7vi1OsQ6b7dO1DRS/3scEUXbzQrl51ubUPc8lbXJo570OSw/z/fQ
+ C+ew==
+X-Gm-Message-State: AOJu0YwXZomKXrjURoaREwg7HDQREiuHxoLjmYzrMHp5vhGaeC1Hr4/T
+ D2G+N1FEIKOzSa6IqDMITmptAVBFw+AtPPhSk2gACNL2N3yZaJR2bhbcJZ8qz3kKTt4=
+X-Gm-Gg: ASbGncvmj9MP99HNPqIJeUrCngtIZ6IPau7n2TcXVI0kNojlYJUM2lSFyYfXIqpDiya
+ rNMwnL0yUPwUUHtWAGLzZFrcTRqy7+1tUP3a4qm6u6isefnjFnwE6FIJrPGn+Op5PFOy5Ilj9Uq
+ rttNe2oohqw/eI2CdtPQvdiyVbhlYPGccJPyNwzdggbbVoSWy4BSJsNkjpouPPpevCCBL2KLpA1
+ u1i8QkM87dDT0VrrnvvllDiG1pQPF8wJ4e3hb8vJG/TeK72f4277QOHk3lgDLtLt9uOA1CIrPrA
+ gvI7wN4+H4J44fGMb+kejOROoWGxDCVnkgeeNNojhtmM1v0XovbQVCjDgmGxxun7pT7vtVIdyWg
+ wwEdEHJFALfIn4lHELPohkUCRdiVP+2Fygm2mRmv+ql+0RVanDc7E8Z2oNDvpQ7o73E+Howyoku
+ D72yF3umcwK6WYH27rZhOTq2UicQkCBJUP8nNaLWyyDW88bHkUIA==
+X-Google-Smtp-Source: AGHT+IG8NOILYqTtNh59A8X95jWMtt6ojOAXEr90qxXQTEwaVCWtRwUCWRQHE9TmTfSnYxpDlKNi4g==
+X-Received: by 2002:a05:6808:181c:b0:43b:8b5e:d127 with SMTP id
+ 5614622812f47-443a2dfa07fmr2706945b6e.13.1760733644098; 
+ Fri, 17 Oct 2025 13:40:44 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-443debfe8f0sm132435b6e.15.2025.10.17.13.40.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 17 Oct 2025 13:40:42 -0700 (PDT)
+Date: Fri, 17 Oct 2025 14:40:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Kaustabh Chakraborty <kauschluss@disroot.org>,
+ Duje =?utf-8?Q?Mihanovi=C4=87?= <duje@dujemihanovic.xyz>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v2] armv8: implement workaround for broken CNTFRQ_EL0 value
+Message-ID: <20251017204040.GI6688@bill-the-cat>
+References: <20251017-armv8-broken-cntfrq-v2-1-1e043cbb657e@disroot.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qDx3EHW/MWlJWAa2"
 Content-Disposition: inline
-In-Reply-To: <20251017-board-exynos-mobile-v1-1-55f47dd52fc7@disroot.org>
-X-Migadu-Flow: FLOW_OUT
+In-Reply-To: <20251017-armv8-broken-cntfrq-v2-1-1e043cbb657e@disroot.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,232 +97,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kaustabh,
 
-Nice work on all of the linked patches!
+--qDx3EHW/MWlJWAa2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 17, 2025 at 10:07:35PM +0530, Kaustabh Chakraborty wrote:
-> Add support for a generic platform which intends to support multiple
-> boards powerid by Samsung Exynos SoCs. This patch also includes initial
-> support for three boards:
-> * Samsung Galaxy A2 Core
-> * Samsung Galaxy J6
-> * Samsung Galaxy J7 Prime
+On Fri, Oct 17, 2025 at 08:49:47PM +0530, Kaustabh Chakraborty wrote:
 
-I think it would be easier to review this if you split the patch in two
-parts: first adding docs and common parts, and then the specific parts
-for exynos7870 and these devices.
-
+> In devices where the U-Boot is used as a secondary bootloader, we rely
+> on the device's primary bootloader to implement CNTFRQ_EL0. However,
+> this reliance may lead to a non-functional timer in broken firmware.
+>=20
+> For instance, some versions of Samsung's S-Boot don't implement it. It's
+> also not possible to set it in the U-Boot, because it's booted in a lower
+> exception level. CNTFRQ_EL0 is reported to be 0.
+>=20
+> Use gd->arch.timer_rate_hz to override the queried value if set. This
+> setting needs to be done in the board file, preferrably in timer_init().
+>=20
 > Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 > ---
-> This patch has the following dependencies:
-> (NOTE: `x` indicates applied)
-> 
-> armv8-broken-cntfrq		- https://patch.msgid.link/20251017-armv8-broken-cntfrq-v2-1-1e043cbb657e@disroot.org
-> clk-exynos7870			- https://patch.msgid.link/20251017-clk-exynos7870-v1-0-83f90d425699@disroot.org
-> gpio-s5p-bank-fix		- https://patch.msgid.link/20251017-gpio-s5p-bank-fix-v1-1-41050462cea5@disroot.org
-> i2c-hs-exynos7			- https://patch.msgid.link/20251017-i2c-hs-exynos7-v1-1-ca080895d4b6@disroot.org
-> mmc-dw-exynos7870		- https://patch.msgid.link/20251017-mmc-dw-exynos7870-v1-0-a2c5139d9afe@disroot.org
-> phy-usb-exynos7870		- https://patch.msgid.link/20251017-phy-usb-exynos7870-v1-0-5885b00f0c87@disroot.org
-> pinctrl-exynos7870		- https://patch.msgid.link/20251017-pinctrl-exynos7870-v1-0-beaa92f95a0c@disroot.org
-> power-pmic-regulator-s2mpu05	- https://patch.msgid.link/20251017-power-pmic-regulator-s2mpu05-v1-0-91cadc0f4156@disroot.org
-> serial-s5p-exynos8895		- https://patch.msgid.link/20251017-serial-s5p-exynos8895-v1-1-b412dd112cfd@disroot.org
-> soc-pmu-exynos7			- https://patch.msgid.link/20251017-soc-pmu-exynos7-v1-1-553d18eaab0d@disroot.org
-> usb-dwc3-exynos7870		- https://patch.msgid.link/20251017-usb-dwc3-exynos7870-v1-0-fe46e2ed1908@disroot.org
+> Changes in v2:
+> - Switched to using gd->arch.timer_rate_hz instead of a new config
+>   option (Ahmad Fatoum)
+> - Link to v1: https://lore.kernel.org/r/20251014-armv8-broken-cntfrq-v1-1=
+-b63f9c69ffcb@disroot.org
 > ---
->  arch/arm/mach-exynos/Kconfig                       |  11 +-
->  board/samsung/exynos-mobile/Kconfig                |  18 +
->  board/samsung/exynos-mobile/MAINTAINERS            |   6 +
->  board/samsung/exynos-mobile/Makefile               |   5 +
->  .../samsung/exynos-mobile/debug-exynos7870.config  |   7 +
->  board/samsung/exynos-mobile/exynos-mobile.c        | 372 +++++++++++++++++++++
->  board/samsung/exynos-mobile/exynos-mobile.env      |  18 +
->  configs/exynos-mobile_defconfig                    |  71 ++++
->  doc/board/samsung/exynos-mobile.rst                | 112 +++++++
->  doc/board/samsung/index.rst                        |   1 +
->  include/configs/exynos-mobile.h                    |  14 +
->  11 files changed, 634 insertions(+), 1 deletion(-)
+>  arch/arm/cpu/armv8/generic_timer.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/arch/arm/cpu/armv8/generic_timer.c b/arch/arm/cpu/armv8/gene=
+ric_timer.c
+> index 1de7ec596fc7cbbc3e78a241f163bc0a4fcad6b6..1bc72ed26ca31af8e8e72008e=
+d7885cbde23b076 100644
+> --- a/arch/arm/cpu/armv8/generic_timer.c
+> +++ b/arch/arm/cpu/armv8/generic_timer.c
+> @@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
+>  unsigned long notrace get_tbclk(void)
+>  {
+>  	unsigned long cntfrq;
+> +
+> +	if (gd->arch.timer_rate_hz)
+> +		return gd->arch.timer_rate_hz;
+> +
+>  	asm volatile("mrs %0, cntfrq_el0" : "=3Dr" (cntfrq));
+>  	return cntfrq;
+>  }
 
-[ skipping to docs for now ]
+This would impact coreprimevelte (as it's the only ARM64 platform to set
+gd->arch.timer_rate_hz) but as it's also a Samsung platform it's likely
+in the same broken situation your platforms are.
 
-> diff --git a/doc/board/samsung/exynos-mobile.rst b/doc/board/samsung/exynos-mobile.rst
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..6390c66ffc38a41f01cb51c7406397cfc5a3d223
-> --- /dev/null
-> +++ b/doc/board/samsung/exynos-mobile.rst
-> @@ -0,0 +1,112 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +.. sectionauthor:: Kaustabh Chakraborty <kauschluss@disroot.org>
-> +
-> +Samsung Exynos Generic Boards (for mobile devices)
-> +==================================================
-> +
-> +Overview
-> +--------
-> +This document describes how to build and run U-Boot for Samsung Exynos generic
-> +boards. Boards are expected to boot with a primary bootloader, such as S-BOOT or
-> +S-LK, which hands off control to U-Boot, disguised as an Android boot image.
+--=20
+Tom
 
-In my opinion exynos-mobile is a bit too generic. From the docs here
-it seems plan is to support devices that support android boot images
-with dt in Samsung's qcdt format. The oldest Exynos mobile device do
-not even support boot images though, and dt images has only been
-around since something like 2015. If I am not mistaken the newest
-devices also does not use dt images.
+--qDx3EHW/MWlJWAa2
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> +U-Boot is packed with multiple FDTs since it targets multiple boards. The
-> +appropriate FDT is selected during boot. Additionally, a DTB is also required
-> +for embedding in the Android boot image. The previous bootloader can apply
-> +useful overlays on it. Both DTBs are consulted for figuring out the memory
-> +layout.
+-----BEGIN PGP SIGNATURE-----
 
-> +Installation
-> +------------
-> +Building
-> +^^^^^^^^
-> +To buiid U-Boot, run the following commands
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPKpxAAKCRAr4qD1Cr/k
+CrZqAP9eymrkOEbKcDLXCfGjavdu3y378HzOul+Cy/dKJK10jAEA7BleS/a1T1DO
+LkKMoT+K5tFi7jf2TL0kRZAgnVaqvQQ=
+=D9Q/
+-----END PGP SIGNATURE-----
 
-Typo, buiid -> build
-
-> +.. prompt:: bash $
-> +
-> +	make CROSS_COMPILE=aarch64-linux-gnu- O=.output exynos-mobile_defconfig
-> +	make CROSS_COMPILE=aarch64-linux-gnu- O=.output -j$(nproc)
-
-I think CROSS_COMPILE=aarch64-linux-gnu- can be dropped from the example, or are only
-aarch64 devices supported?
-
-> +If succcessful, the U-Boot binary will be present in ``.output/u-boot.bin``.
-
-Typo, succcessful -> successful.
-
-> +
-> +Preparation
-> +^^^^^^^^^^^
-> +The U-Boot binary is not flashable as-is, it needs to be encapsulated in an
-> +Android boot image. Since it supports multiple boards, and devices have
-> +different requirements (thanks to the lack of standards), this step varies
-
-I think `(thanks to the lack of standards)` is a bit opinionated, and
-does not really add anything here, could you please remove it?
-
-> +depending on your target.
-> +
-> +Exynos 7870 Boards
-> +""""""""""""""""""
-> +Create the following devicetree (named ``stub.dts``)
-> +
-> +.. code-block:: devicetree
-> +
-> +	/dts-v1/;
-> +
-> +	/ {
-> +		compatible = "samsung,exynos7870";
-> +		#address-cells = <2>;
-> +		#size-cells = <1>;
-> +
-> +		model_info-chip = <7870>;
-> +		model_info-hw_rev = <0>;
-> +		model_info-hw_rev_end = <255>;
-> +
-> +		chosen {
-> +		};
-> +
-> +		memory@80000000 {
-> +			device_type = "memory";
-> +			reg = <0x0 0x80000000 0x0>;
-> +		};
-> +
-> +		memory@100000000 {
-> +			device_type = "memory";
-> +			reg = <0x1 0x00000000 0x0>;
-> +		};
-> +	};
-> +
-> +The chosen node and memory ranges are populated by S-BOOT.
-> +
-> +Compile it to a devicetree blob, then use ``dtbTool-exynos`` in order to pack it
-> +in the QCDT format [1]_, using the following commands:
-> +
-> +.. prompt:: bash $
-> +
-> +	dtc -I dts -O dtb -o stub.dtb stub.dts
-> +	dtbTool-exynos -o stub.dt.img stub.dtb
-> +
-> +Finally, use mkbootimg by osm0sis [2]_ to generate the boot image:
-> +
-> +.. prompt:: bash $
-> +
-> +	mkbootimg -o u-boot.img \
-> +		--kernel	.output/u-boot.bin \
-> +		--dt		stub.dt.img
-> +
-> +Offsets are not provided to ``mkbootimg`` as S-BOOT ignores them.
-> +
-> +Flashing
-> +^^^^^^^^
-> +If flashing for the first time, it must be done via Samsung's Download (Odin)
-> +mode. Heimdall can be used for flashing, like so:
-
-Maybe it would be useful to link to Heimdall in references as well.
-
-Best regards,
-Henrik Grimler
-
-> +.. prompt:: bash $
-> +
-> +	heimdall flash --BOOT u-boot.img
-> +
-> +However, if U-Boot is already installed, you may also use its fastboot interface
-> +for flashing. Boot into the boot menu by holding the volume down key. Enable
-> +fastboot mode from there, connect the device to your host, then run:
-> +
-> +.. prompt:: bash $
-> +
-> +	fastboot flash boot u-boot.img
-> +
-> +To flash an OS image in internal storage, fastboot is a reliable option.
-> +
-> +References
-> +----------
-> +.. [1] https://wiki.postmarketos.org/wiki/QCDT
-> +.. [2] https://github.com/osm0sis/mkbootimg
-> diff --git a/doc/board/samsung/index.rst b/doc/board/samsung/index.rst
-> index 1b92c9518a57df102c2b64ff934b460548ce3d53..1fbe88130c049e1a33d22ae9230fb60ddccea131 100644
-> --- a/doc/board/samsung/index.rst
-> +++ b/doc/board/samsung/index.rst
-> @@ -8,4 +8,5 @@ Samsung
->  
->     axy17lte
->     e850-96
-> +   exynos-mobile
->     n1
-> diff --git a/include/configs/exynos-mobile.h b/include/configs/exynos-mobile.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..862db5779ef4c9ff7f53bef78d7cee5107b7226e
-> --- /dev/null
-> +++ b/include/configs/exynos-mobile.h
-> @@ -0,0 +1,14 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Samsung Exynos Generic Board Configuration (for mobile devices)
-> + *
-> + * Copyright (C) 2025 Kaustabh Chakraborty <kauschluss@disroot.org>
-> + */
-> +
-> +#ifndef __CONFIG_EXYNOS_MOBILE_H
-> +#define __CONFIG_EXYNOS_MOBILE_H
-> +
-> +#define CPU_RELEASE_ADDR	secondary_boot_addr
-> +#define CFG_SYS_BAUDRATE_TABLE	{9600, 115200}
-> +
-> +#endif /* __CONFIG_EXYNOS_MOBILE_H */
-> 
-> ---
-> base-commit: 582a04763aa80738c1c8ac60c47d1a5159a42833
-> change-id: 20251017-board-exynos-mobile-7c7d43832693
-> 
-> Best regards,
-> -- 
-> Kaustabh Chakraborty <kauschluss@disroot.org>
-> 
+--qDx3EHW/MWlJWAa2--
