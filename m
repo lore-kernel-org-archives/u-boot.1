@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEC4BCCD199
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:15:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4BBCCD199
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 13:16:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31FAC83826;
-	Fri, 17 Oct 2025 15:15:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7954983837;
+	Fri, 17 Oct 2025 15:15:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uvTgSRSU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UQUVBO9N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29C0F83804; Fri, 17 Oct 2025 15:15:53 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 7E96D83710; Fri, 17 Oct 2025 15:15:53 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E27083655
- for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:15:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EB2583734
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 15:15:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59HDFgmt2274930;
- Fri, 17 Oct 2025 08:15:42 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59HDFinO275312;
+ Fri, 17 Oct 2025 08:15:44 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1760706942;
- bh=t5yD7WRpqqmMgE2rytbc7MzCfb4NTtKnyuWcBefyFq8=;
- h=From:To:CC:Subject:Date;
- b=uvTgSRSURWFXr7pirm/N2s2IGzGS6qN6vJ4leGCbmwKBE6e9ZjNmwKCXFyb1gsFgm
- FnJuY8cS8y4q9yIiKdPWUYWIQ7Rw4hEIqO5n1IefyHlS8kUiNxhDTjAcHLTwdMDmgY
- QqK9ulY5tjL6fypOL0XWdzwOUjVDGKto4jXPwEH0=
-Received: from DLEE203.ent.ti.com (dlee203.ent.ti.com [157.170.170.78])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59HDFgpk2419169
+ s=ti-com-17Q1; t=1760706944;
+ bh=wbbuxHplBS08EPZUGXzcNtjZchZH2D3DKkU0e96Q+DU=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=UQUVBO9NpRA6lm6rhyWYHXofJJV6smt2LmB8LQ/Z8H7kxi0l7fr+nKd2wInsyD5XK
+ gSMyOwNsYGVi/cwPok/q26EUtDkMe3AJxgjSOqS9UFrK0V9kpX6AYd6s8x3RR/GZcu
+ GVKVbSaje8KEUsILJXGczW3wNstyLaMs/XL62frQ=
+Received: from DLEE214.ent.ti.com (dlee214.ent.ti.com [157.170.170.117])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59HDFiS32021834
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 17 Oct 2025 08:15:42 -0500
-Received: from DLEE202.ent.ti.com (157.170.170.77) by DLEE203.ent.ti.com
- (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 17 Oct 2025 08:15:44 -0500
+Received: from DLEE209.ent.ti.com (157.170.170.98) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 17 Oct
- 2025 08:15:42 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE202.ent.ti.com
- (157.170.170.77) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 08:15:44 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE209.ent.ti.com
+ (157.170.170.98) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 17 Oct 2025 08:15:42 -0500
+ Transport; Fri, 17 Oct 2025 08:15:44 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59HDFfFZ1347446;
- Fri, 17 Oct 2025 08:15:41 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59HDFhPY1347467;
+ Fri, 17 Oct 2025 08:15:43 -0500
 From: Anshul Dalal <anshuld@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
@@ -57,10 +57,12 @@ CC: Anshul Dalal <anshuld@ti.com>, <d-gole@ti.com>, <b-padhi@ti.com>,
  <francesco.dolcini@toradex.com>, <ggiordano@phytec.com>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <bb@ti.com>, <u-kumar1@ti.com>,
  <devarsht@ti.com>, <ilias.apalodimas@linaro.org>, <xypron.glpk@gmx.de>
-Subject: [PATCH v11 00/11] Add support for dynamic MMU configuration
-Date: Fri, 17 Oct 2025 18:45:22 +0530
-Message-ID: <20251017131540.3636067-1-anshuld@ti.com>
+Subject: [PATCH v11 01/11] mach-k3: use minimal memory map for all K3
+Date: Fri, 17 Oct 2025 18:45:23 +0530
+Message-ID: <20251017131540.3636067-2-anshuld@ti.com>
 X-Mailer: git-send-email 2.51.0
+In-Reply-To: <20251017131540.3636067-1-anshuld@ti.com>
+References: <20251017131540.3636067-1-anshuld@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,129 +83,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+The K3 family of SoCs encompasses a wide variety of devices with varying
+DDR configurations and memory carveout requirements, the current static
+memory map provides basic support for TI EVMs but does not scale well
+for newer platforms (such as AM62SiP with 512MiB of RAM).
 
-In U-Boot, TI only provides a single memory map for all k3 platforms, this
-does not scale for devices where atf and optee lie outside the range 0x80000000
-- 0x80080000 and 0x9e780000 - 0xa0000000 respectively.
+Therefore this patch replaces the existing memory map with a minimal
+one, that could be more easily modified at runtime.
 
-There are also issues for devices with < 2GiB of memory (eg am62SiP with 512MiB
-of RAM) as the maximum size for the first DRAM bank is hardcoded to 2GiB in the
-current memory map. Furthermore the second DRAM bank is mapped even for devices
-that only have a single bank.
-
-Therefore this patch set adds the required functionality to create the MMU table
-at runtime based on the device-tree.
-
-The patch set has been build tested on all effected platforms but boot-tested
-only on TI's K3 EVMs, the beagleplay and phytec's phycore-am6* platforms.
-
-The following effected boards have not been boot tested:
- - verdin-am62
- - iot2050
-
-Best Wishes,
-Anshul
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+Tested-by: Wadim Egorov <w.egorov@phytec.de>
 ---
-Changes in v11:
- - Rename spl_perform_fixups for am62dx
- - Add 'check_nomap' to mmu_unmap_reserved_mem
-v10: https://lore.kernel.org/u-boot/20251010134424.3835757-1-anshuld@ti.com/
+ arch/arm/mach-k3/arm64/arm64-mmu.c | 32 ++++++++++--------------------
+ 1 file changed, 10 insertions(+), 22 deletions(-)
 
-Changes in v10:
- - Rename mem_map_fix_dram_banks to mem_map_from_dram_banks
- - Use log_err instead of printf
- - Add check for "no-map" in the reserved-memory node before unmapping it
-v9: https://lore.kernel.org/u-boot/20251010055340.2574743-1-anshuld@ti.com/
-
-Changes in v9:
- - Pick R-by tags
- - Change error messages from debug to printf
-v8: https://lore.kernel.org/u-boot/20251006082852.4008937-1-anshuld@ti.com/
-
-Changes in v8:
- - Reserve extra space for page table entries for performing fixups
-v7: https://lore.kernel.org/u-boot/20250912121618.1074054-1-anshuld@ti.com/
-
-Changes in v7:
- - Pick up R-by and Tested-by tags
- - Use nobreak API for unmapping MMU region
- - Better error messages and minor refactor
-v6: https://lore.kernel.org/u-boot/20250905081902.489345-1-anshuld@ti.com/
-
-Changes in v6:
- - Make use of generic MMU APIs
- - Extend core U-Boot functionality by adding mmu_unmap_reserved_mem and
-   mem_map_fix_dram_banks
- - Keep same memory maps for SPL and U-Boot proper
- - Add fdt fixups from SPL stage for reserved memory nodes
-v5: https://lore.kernel.org/u-boot/20250703133533.104758-1-anshuld@ti.com/
-
-Changes in v5:
- - Don't create carveouts for every reserved-memory node
- - Only create carveouts for ATF/OP-TEE
- - Expand the call to k3_mem_map_init to vendor boards as well
- - Map area for framebuffer for CONFIG_VIDEO=y platforms
-v4: https://lore.kernel.org/u-boot/20250618124210.1936140-1-anshuld@ti.com/
-
-Changes for v4:
- - Add call to k3_mem_map_init for beagleplay
- - Mark reserved regions as non-cacheable
- - More debug logs
-v3: https://lore.kernel.org/u-boot/20250617135844.2873701-1-anshuld@ti.com/
-
-Changes for v3:
- - Remove unused memory regions in SPL's map
- - Add runtime addition of MMU entry for the framebuffer in SPL
- - Refactor k3_mem_map_init to use standard u-boot APIs
- - Unmap reserved-memory regions instead of keeping them uncached
-v2: https://lore.kernel.org/u-boot/20250610160833.1705534-1-anshuld@ti.com/
-
-Changes in v2:
-- Removed dependency to:
-  https://lore.kernel.org/u-boot/20250522150941.563959-1-anshuld@ti.com/
-v1: https://lore.kernel.org/u-boot/20250602120054.1466951-1-anshuld@ti.com/
----
-Anshul Dalal (11):
-  mach-k3: use minimal memory map for all K3
-  mach-k3: use custom enable_cache
-  arm: armv8: mmu: export mmu_setup
-  arm: armv8: invalidate dcache entries on dcache_enable
-  arm: armv8: mmu: add mem_map_from_dram_banks
-  mach-k3: map all banks using mem_map_from_dram_banks
-  arm: armv8: mmu: add mmu_unmap_reserved_mem
-  spl: split spl_board_fixups to arch/board specific
-  mach-k3: add reserved memory fixups for next boot stage
-  mach-k3: add carveouts for TFA and optee
-  arm: mach-k3: reserve space for page table entries
-
- arch/arm/cpu/armv7m/cpu.c                  |  2 +-
- arch/arm/cpu/armv8/cache_v8.c              | 61 ++++++++++++++++++++--
- arch/arm/include/asm/armv8/mmu.h           | 25 +++++++++
- arch/arm/mach-k3/arm64/arm64-mmu.c         | 40 ++++++--------
- arch/arm/mach-k3/common.c                  | 55 +++++++++++++++++++
- arch/arm/mach-k3/include/mach/k3-ddr.h     |  6 +++
- arch/arm/mach-rockchip/spl-boot-order.c    |  2 +-
- arch/arm/mach-socfpga/spl_soc64.c          |  2 +-
- board/beagle/beagley-ai/beagley-ai.c       |  2 +-
- board/dhelectronics/dh_stm32mp1/board.c    |  2 +-
- board/phytec/phycore_am62x/phycore-am62x.c |  2 +-
- board/phytec/phycore_am64x/phycore-am64x.c |  2 +-
- board/renesas/sparrowhawk/sparrowhawk.c    |  2 +-
- board/starfive/visionfive2/spl.c           |  2 +-
- board/ti/am62ax/evm.c                      |  2 +-
- board/ti/am62dx/evm.c                      |  2 +-
- board/ti/am62px/evm.c                      |  2 +-
- board/ti/am62x/evm.c                       |  2 +-
- board/ti/am64x/evm.c                       |  2 +-
- board/ti/j721e/evm.c                       |  2 +-
- board/ti/j721s2/evm.c                      |  2 +-
- board/ti/j722s/evm.c                       |  2 +-
- board/ti/j784s4/evm.c                      |  2 +-
- common/spl/spl.c                           | 12 +++--
- include/spl.h                              | 12 +++--
- 25 files changed, 196 insertions(+), 51 deletions(-)
-
+diff --git a/arch/arm/mach-k3/arm64/arm64-mmu.c b/arch/arm/mach-k3/arm64/arm64-mmu.c
+index 0e07b1b7ce0..79650a7e346 100644
+--- a/arch/arm/mach-k3/arm64/arm64-mmu.c
++++ b/arch/arm/mach-k3/arm64/arm64-mmu.c
+@@ -11,42 +11,30 @@
+ 
+ #include <asm/system.h>
+ #include <asm/armv8/mmu.h>
++#include <linux/sizes.h>
+ 
+ struct mm_region k3_mem_map[] = {
+-	{
++	{ /* SoC Peripherals */
+ 		.virt = 0x0UL,
+ 		.phys = 0x0UL,
+ 		.size = 0x80000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, {
+-		.virt = 0x80000000UL,
+-		.phys = 0x80000000UL,
+-		.size = 0x1e780000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
+-		.virt = 0xa0000000UL,
+-		.phys = 0xa0000000UL,
+-		.size = 0x60000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
+-		.virt = 0x880000000UL,
+-		.phys = 0x880000000UL,
+-		.size = 0x80000000UL,
+-		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
+-			 PTE_BLOCK_INNER_SHARE
+-	}, {
++	}, { /* Flash Peripherals */
+ 		.virt = 0x500000000UL,
+ 		.phys = 0x500000000UL,
+ 		.size = 0x380000000UL,
+ 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
+ 			 PTE_BLOCK_NON_SHARE |
+ 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
+-	}, {
+-		/* List terminator */
++	}, { /* First DRAM Bank of size 2G */
++		.virt = CFG_SYS_SDRAM_BASE,
++		.phys = CFG_SYS_SDRAM_BASE,
++		.size = SZ_2G,
++		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
++			 PTE_BLOCK_INNER_SHARE
++	}, { /* List terminator */
+ 		0,
+ 	}
+ };
 -- 
 2.51.0
 
