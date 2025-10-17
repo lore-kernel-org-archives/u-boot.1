@@ -4,34 +4,34 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5F29CCD184
-	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 23:09:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0D76CCD184
+	for <u-boot@archiver.kernel.org>; Fri, 17 Oct 2025 23:10:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00B9C83804;
-	Sat, 18 Oct 2025 01:09:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E23783869;
+	Sat, 18 Oct 2025 01:10:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5247A8382E; Sat, 18 Oct 2025 01:09:55 +0200 (CEST)
+ id 42F698386B; Sat, 18 Oct 2025 01:10:25 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 72F67836D1
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 01:09:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 1E992836D1
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 01:10:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C75BE1063;
- Fri, 17 Oct 2025 16:09:43 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9A0631063;
+ Fri, 17 Oct 2025 16:10:14 -0700 (PDT)
 Received: from [192.168.178.132] (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6890E3F66E;
- Fri, 17 Oct 2025 16:09:47 -0700 (PDT)
-Message-ID: <d87002a2-deac-4cf1-b3d7-c1f86d019733@arm.com>
-Date: Sat, 18 Oct 2025 00:09:33 +0100
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6E2173F66E;
+ Fri, 17 Oct 2025 16:10:18 -0700 (PDT)
+Message-ID: <f98bb4eb-a4b5-49b0-a51d-53b94217731e@arm.com>
+Date: Sat, 18 Oct 2025 00:10:07 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/24] mtd: rawnand: sunxi: cosmetic: merge register
- definitions for sunxi_nand{,_spl}.c
+Subject: Re: [PATCH 07/24] mtd: rawnand: sunxi: cosmetic: add per SoC
+ capabilities
 To: Richard Genoud <richard.genoud@bootlin.com>,
  Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
  Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
@@ -41,18 +41,19 @@ To: Richard Genoud <richard.genoud@bootlin.com>,
 Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
  Andrey Skvortsov <andrej.skvortzov@gmail.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dinesh Maniyam <dinesh.maniyam@intel.com>,
  Anand Gore <anand.gore@broadcom.com>,
  Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
 References: <20251016142752.2627710-1-richard.genoud@bootlin.com>
- <20251016142752.2627710-7-richard.genoud@bootlin.com>
+ <20251016142752.2627710-8-richard.genoud@bootlin.com>
 Content-Language: en-US
 From: Andre Przywara <andre.przywara@arm.com>
-In-Reply-To: <20251016142752.2627710-7-richard.genoud@bootlin.com>
+In-Reply-To: <20251016142752.2627710-8-richard.genoud@bootlin.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,379 +70,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard,
+Hi,
 
 On 16/10/2025 15:27, Richard Genoud wrote:
-> Merge common register definitions from sunxi_nand{,_spl}.c
+> Introduce per SoC capabilities in sunxi_nand.c
 > 
-> The Allwinner NAND controller registers where in both files, so let's
-> just merge all that in a header, it will be easier for maintenance.
+> This prepares for the H616 support that has quite a lot differences in
+> registers offset and capabilities.
+> 
+> Start with the ECC strength table.
+> 
+> No functional change.
+
+Looks good, just one nit below:
+
 > 
 > Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
+> ---
+>   drivers/mtd/nand/raw/sunxi_nand.c | 18 ++++++++++++++++--
+>   drivers/mtd/nand/raw/sunxi_nand.h | 10 ++++++++++
+>   2 files changed, 26 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
+> index 000ebd0439f1..3f30077b3d15 100644
+> --- a/drivers/mtd/nand/raw/sunxi_nand.c
+> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
+> @@ -149,6 +149,7 @@ static inline struct sunxi_nand_chip *to_sunxi_nand(struct nand_chip *nand)
+>    * @clk_rate:		NAND controller current clock rate
+>    * @chips:		a list containing all the NAND chips attached to
+>    *			this NAND controller
+ > + * @caps: NAND Controller capabilities
 
-Very nice, verified that this is correct merge:
+Please indent the description to line up with the other ones.
+
+With that fixed:
 Reviewed-by: Andre Przywara <andre.przywara@arm.com>
 
 Cheers,
 Andre
 
-> ---
->   drivers/mtd/nand/raw/sunxi_nand.c     | 123 +-------------------
->   drivers/mtd/nand/raw/sunxi_nand.h     | 156 ++++++++++++++++++++++++++
->   drivers/mtd/nand/raw/sunxi_nand_spl.c |  45 +-------
->   3 files changed, 158 insertions(+), 166 deletions(-)
->   create mode 100644 drivers/mtd/nand/raw/sunxi_nand.h
-> 
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-> index c6b9b2a4ebac..000ebd0439f1 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand.c
-> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
-> @@ -46,128 +46,7 @@
->   #include <asm/gpio.h>
->   #include <asm/arch/clock.h>
+>    */
+>   struct sunxi_nfc {
+>   	struct nand_hw_control controller;
+> @@ -159,6 +160,7 @@ struct sunxi_nfc {
+>   	unsigned long assigned_cs;
+>   	unsigned long clk_rate;
+>   	struct list_head chips;
+> +	const struct sunxi_nfc_caps *caps;
+>   };
 >   
-> -#define NFC_REG_CTL		0x0000
-> -#define NFC_REG_ST		0x0004
-> -#define NFC_REG_INT		0x0008
-> -#define NFC_REG_TIMING_CTL	0x000C
-> -#define NFC_REG_TIMING_CFG	0x0010
-> -#define NFC_REG_ADDR_LOW	0x0014
-> -#define NFC_REG_ADDR_HIGH	0x0018
-> -#define NFC_REG_SECTOR_NUM	0x001C
-> -#define NFC_REG_CNT		0x0020
-> -#define NFC_REG_CMD		0x0024
-> -#define NFC_REG_RCMD_SET	0x0028
-> -#define NFC_REG_WCMD_SET	0x002C
-> -#define NFC_REG_IO_DATA		0x0030
-> -#define NFC_REG_ECC_CTL		0x0034
-> -#define NFC_REG_ECC_ST		0x0038
-> -#define NFC_REG_DEBUG		0x003C
-> -#define NFC_REG_ECC_ERR_CNT(x)	((0x0040 + (x)) & ~0x3)
-> -#define NFC_REG_USER_DATA(x)	(0x0050 + ((x) * 4))
-> -#define NFC_REG_SPARE_AREA	0x00A0
-> -#define NFC_REG_PAT_ID		0x00A4
-> -#define NFC_RAM0_BASE		0x0400
-> -#define NFC_RAM1_BASE		0x0800
-> -
-> -/* define bit use in NFC_CTL */
-> -#define NFC_EN			BIT(0)
-> -#define NFC_RESET		BIT(1)
-> -#define NFC_BUS_WIDTH_MSK	BIT(2)
-> -#define NFC_BUS_WIDTH_8		(0 << 2)
-> -#define NFC_BUS_WIDTH_16	(1 << 2)
-> -#define NFC_RB_SEL_MSK		BIT(3)
-> -#define NFC_RB_SEL(x)		((x) << 3)
-> -#define NFC_CE_SEL_MSK		(0x7 << 24)
-> -#define NFC_CE_SEL(x)		((x) << 24)
-> -#define NFC_CE_CTL		BIT(6)
-> -#define NFC_PAGE_SHIFT_MSK	(0xf << 8)
-> -#define NFC_PAGE_SHIFT(x)	(((x) < 10 ? 0 : (x) - 10) << 8)
-> -#define NFC_SAM			BIT(12)
-> -#define NFC_RAM_METHOD		BIT(14)
-> -#define NFC_DEBUG_CTL		BIT(31)
-> -
-> -/* define bit use in NFC_ST */
-> -#define NFC_RB_B2R		BIT(0)
-> -#define NFC_CMD_INT_FLAG	BIT(1)
-> -#define NFC_DMA_INT_FLAG	BIT(2)
-> -#define NFC_CMD_FIFO_STATUS	BIT(3)
-> -#define NFC_STA			BIT(4)
-> -#define NFC_NATCH_INT_FLAG	BIT(5)
-> -#define NFC_RB_STATE(x)		BIT(x + 8)
-> -
-> -/* define bit use in NFC_INT */
-> -#define NFC_B2R_INT_ENABLE	BIT(0)
-> -#define NFC_CMD_INT_ENABLE	BIT(1)
-> -#define NFC_DMA_INT_ENABLE	BIT(2)
-> -#define NFC_INT_MASK		(NFC_B2R_INT_ENABLE | \
-> -				 NFC_CMD_INT_ENABLE | \
-> -				 NFC_DMA_INT_ENABLE)
-> -
-> -/* define bit use in NFC_TIMING_CTL */
-> -#define NFC_TIMING_CTL_EDO	BIT(8)
-> -
-> -/* define NFC_TIMING_CFG register layout */
-> -#define NFC_TIMING_CFG(tWB, tADL, tWHR, tRHW, tCAD)		\
-> -	(((tWB) & 0x3) | (((tADL) & 0x3) << 2) |		\
-> -	(((tWHR) & 0x3) << 4) | (((tRHW) & 0x3) << 6) |		\
-> -	(((tCAD) & 0x7) << 8))
-> -
-> -/* define bit use in NFC_CMD */
-> -#define NFC_CMD_LOW_BYTE_MSK	0xff
-> -#define NFC_CMD_HIGH_BYTE_MSK	(0xff << 8)
-> -#define NFC_CMD(x)		(x)
-> -#define NFC_ADR_NUM_MSK		(0x7 << 16)
-> -#define NFC_ADR_NUM(x)		(((x) - 1) << 16)
-> -#define NFC_SEND_ADR		BIT(19)
-> -#define NFC_ACCESS_DIR		BIT(20)
-> -#define NFC_DATA_TRANS		BIT(21)
-> -#define NFC_SEND_CMD1		BIT(22)
-> -#define NFC_WAIT_FLAG		BIT(23)
-> -#define NFC_SEND_CMD2		BIT(24)
-> -#define NFC_SEQ			BIT(25)
-> -#define NFC_DATA_SWAP_METHOD	BIT(26)
-> -#define NFC_ROW_AUTO_INC	BIT(27)
-> -#define NFC_SEND_CMD3		BIT(28)
-> -#define NFC_SEND_CMD4		BIT(29)
-> -#define NFC_CMD_TYPE_MSK	(0x3 << 30)
-> -#define NFC_NORMAL_OP		(0 << 30)
-> -#define NFC_ECC_OP		(1 << 30)
-> -#define NFC_PAGE_OP		(2 << 30)
-> -
-> -/* define bit use in NFC_RCMD_SET */
-> -#define NFC_READ_CMD_MSK	0xff
-> -#define NFC_RND_READ_CMD0_MSK	(0xff << 8)
-> -#define NFC_RND_READ_CMD1_MSK	(0xff << 16)
-> -
-> -/* define bit use in NFC_WCMD_SET */
-> -#define NFC_PROGRAM_CMD_MSK	0xff
-> -#define NFC_RND_WRITE_CMD_MSK	(0xff << 8)
-> -#define NFC_READ_CMD0_MSK	(0xff << 16)
-> -#define NFC_READ_CMD1_MSK	(0xff << 24)
-> -
-> -/* define bit use in NFC_ECC_CTL */
-> -#define NFC_ECC_EN		BIT(0)
-> -#define NFC_ECC_PIPELINE	BIT(3)
-> -#define NFC_ECC_EXCEPTION	BIT(4)
-> -#define NFC_ECC_BLOCK_SIZE_MSK	BIT(5)
-> -#define NFC_ECC_BLOCK_512	(1 << 5)
-> -#define NFC_RANDOM_EN		BIT(9)
-> -#define NFC_RANDOM_DIRECTION	BIT(10)
-> -#define NFC_ECC_MODE_MSK	(0xf << 12)
-> -#define NFC_ECC_MODE(x)		((x) << 12)
-> -#define NFC_RANDOM_SEED_MSK	(0x7fff << 16)
-> -#define NFC_RANDOM_SEED(x)	((x) << 16)
-> -
-> -/* define bit use in NFC_ECC_ST */
-> -#define NFC_ECC_ERR(x)		BIT(x)
-> -#define NFC_ECC_PAT_FOUND(x)	BIT(x + 16)
-> -#define NFC_ECC_ERR_CNT(b, x)	(((x) >> ((b) * 8)) & 0xff)
-> -
-> -#define NFC_DEFAULT_TIMEOUT_MS	1000
-> -
-> -#define NFC_SRAM_SIZE		1024
-> -
-> -#define NFC_MAX_CS		7
-> +#include "sunxi_nand.h"
+>   static inline struct sunxi_nfc *to_sunxi_nfc(struct nand_hw_control *ctrl)
+> @@ -1270,6 +1272,9 @@ static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
+>   					      struct nand_ecc_ctrl *ecc)
+>   {
+>   	static const u8 strengths[] = { 16, 24, 28, 32, 40, 48, 56, 60, 64 };
+> +	struct nand_chip *nand = mtd_to_nand(mtd);
+> +	struct sunxi_nand_chip *sunxi_nand = to_sunxi_nand(nand);
+> +	struct sunxi_nfc *nfc = to_sunxi_nfc(sunxi_nand->nand.controller);
+>   	struct sunxi_nand_hw_ecc *data;
+>   	struct nand_ecclayout *layout;
+>   	int nsectors;
+> @@ -1292,7 +1297,7 @@ static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
+>   	}
 >   
->   /*
->    * Ready/Busy detection type: describes the Ready/Busy detection modes
+>   	/* Add ECC info retrieval from DT */
+> -	for (i = 0; i < ARRAY_SIZE(strengths); i++) {
+> +	for (i = 0; i < nfc->caps->nstrengths; i++) {
+>   		if (ecc->strength <= strengths[i]) {
+>   			/*
+>   			 * Update ecc->strength value with the actual strength
+> @@ -1303,7 +1308,7 @@ static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
+>   		}
+>   	}
+>   
+> -	if (i >= ARRAY_SIZE(strengths)) {
+> +	if (i >= nfc->caps->nstrengths) {
+>   		dev_err(mtd->dev, "unsupported strength\n");
+>   		ret = -ENOTSUPP;
+>   		goto err;
+> @@ -1681,6 +1686,10 @@ static int sunxi_nand_probe(struct udevice *dev)
+>   	if (!nfc->regs)
+>   		return -EINVAL;
+>   
+> +	nfc->caps = (const struct sunxi_nfc_caps *)dev_get_driver_data(dev);
+> +	if (!nfc->caps)
+> +		return -EINVAL;
+> +
+>   	ret = reset_get_bulk(dev, &rst_bulk);
+>   	if (!ret)
+>   		reset_deassert_bulk(&rst_bulk);
+> @@ -1702,9 +1711,14 @@ static int sunxi_nand_probe(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> +static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
+> +	.nstrengths = 9,
+> +};
+> +
+>   static const struct udevice_id sunxi_nand_ids[] = {
+>   	{
+>   		.compatible = "allwinner,sun4i-a10-nand",
+> +		.data = (unsigned long)&sunxi_nfc_a10_caps,
+>   	},
+>   	{ }
+>   };
 > diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
-> new file mode 100644
-> index 000000000000..59803ccc9f22
-> --- /dev/null
+> index 59803ccc9f22..80fbc8df0090 100644
+> --- a/drivers/mtd/nand/raw/sunxi_nand.h
 > +++ b/drivers/mtd/nand/raw/sunxi_nand.h
-> @@ -0,0 +1,156 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
+> @@ -153,4 +153,14 @@
+>   
+>   #define NFC_MAX_CS		7
+>   
 > +/*
-> + * Copyright (C) 2025 Bootlin, Richard GENOUD
+> + * NAND Controller capabilities structure: stores NAND controller capabilities
+> + * for distinction between compatible strings.
 > + *
-> + * merged defines from sunxi_nand{,_spl}.c
-> + * Containing the following copyrights:
-> + * Copyright (C) 2013 Boris BREZILLON <b.brezillon.dev@gmail.com>
-> + * Copyright (C) 2015 Roy Spliet <r.spliet@ultimaker.com>
-> + * Copyright (c) 2014-2015, Antmicro Ltd <www.antmicro.com>
-> + * Copyright (c) 2015, AW-SOM Technologies <www.aw-som.com>
-> + * Derived from:
-> + *	https://github.com/yuq/sunxi-nfc-mtd
-> + *	Copyright (C) 2013 Qiang Yu <yuq825@gmail.com>
-> + *
-> + *	https://github.com/hno/Allwinner-Info
-> + *	Copyright (C) 2013 Henrik Nordström <Henrik Nordström>
-> + *
-> + *	Copyright (C) 2013 Dmitriy B. <rzk333@gmail.com>
-> + *	Copyright (C) 2013 Sergey Lapin <slapin@ossfans.org>
-> + *
+> + * @nstrengths:		Number of element of ECC strengths array
 > + */
+> +struct sunxi_nfc_caps {
+> +	unsigned int nstrengths;
+> +};
 > +
-> +#ifndef SUNXI_NAND_H
-> +#define SUNXI_NAND_H
-> +
-> +#include <linux/bitops.h>
-> +
-> +#define NFC_REG_CTL		0x0000
-> +#define NFC_REG_ST		0x0004
-> +#define NFC_REG_INT		0x0008
-> +#define NFC_REG_TIMING_CTL	0x000C
-> +#define NFC_REG_TIMING_CFG	0x0010
-> +#define NFC_REG_ADDR_LOW	0x0014
-> +#define NFC_REG_ADDR_HIGH	0x0018
-> +#define NFC_REG_SECTOR_NUM	0x001C
-> +#define NFC_REG_CNT		0x0020
-> +#define NFC_REG_CMD		0x0024
-> +#define NFC_REG_RCMD_SET	0x0028
-> +#define NFC_REG_WCMD_SET	0x002C
-> +#define NFC_REG_IO_DATA		0x0030
-> +#define NFC_REG_ECC_CTL		0x0034
-> +#define NFC_REG_ECC_ST		0x0038
-> +#define NFC_REG_DEBUG		0x003C
-> +#define NFC_REG_ECC_ERR_CNT(x)	((0x0040 + (x)) & ~0x3)
-> +#define NFC_REG_USER_DATA(x)	(0x0050 + ((x) * 4))
-> +#define NFC_REG_SPARE_AREA	0x00A0
-> +#define NFC_REG_PAT_ID		0x00A4
-> +#define NFC_RAM0_BASE		0x0400
-> +#define NFC_RAM1_BASE		0x0800
-> +
-> +/* define bit use in NFC_CTL */
-> +#define NFC_EN			BIT(0)
-> +#define NFC_RESET		BIT(1)
-> +#define NFC_BUS_WIDTH_MSK	BIT(2)
-> +#define NFC_BUS_WIDTH_8		(0 << 2)
-> +#define NFC_BUS_WIDTH_16	(1 << 2)
-> +#define NFC_RB_SEL_MSK		BIT(3)
-> +#define NFC_RB_SEL(x)		((x) << 3)
-> +#define NFC_CE_SEL_MSK		(0x7 << 24)
-> +#define NFC_CE_SEL(x)		((x) << 24)
-> +#define NFC_CE_CTL		BIT(6)
-> +#define NFC_PAGE_SHIFT_MSK	(0xf << 8)
-> +#define NFC_PAGE_SHIFT(x)	(((x) < 10 ? 0 : (x) - 10) << 8)
-> +#define NFC_PAGE_SIZE(a)	((fls(a) - 11) << 8)
-> +#define NFC_SAM			BIT(12)
-> +#define NFC_RAM_METHOD		BIT(14)
-> +#define NFC_DEBUG_CTL		BIT(31)
-> +
-> +/* define bit use in NFC_ST */
-> +#define NFC_RB_B2R		BIT(0)
-> +#define NFC_CMD_INT_FLAG	BIT(1)
-> +#define NFC_DMA_INT_FLAG	BIT(2)
-> +#define NFC_CMD_FIFO_STATUS	BIT(3)
-> +#define NFC_STA			BIT(4)
-> +#define NFC_NATCH_INT_FLAG	BIT(5)
-> +#define NFC_RB_STATE(x)		BIT((x) + 8)
-> +
-> +/* define bit use in NFC_INT */
-> +#define NFC_B2R_INT_ENABLE	BIT(0)
-> +#define NFC_CMD_INT_ENABLE	BIT(1)
-> +#define NFC_DMA_INT_ENABLE	BIT(2)
-> +#define NFC_INT_MASK		(NFC_B2R_INT_ENABLE | \
-> +				 NFC_CMD_INT_ENABLE | \
-> +				 NFC_DMA_INT_ENABLE)
-> +
-> +/* define bit use in NFC_TIMING_CTL */
-> +#define NFC_TIMING_CTL_EDO	BIT(8)
-> +
-> +/* define NFC_TIMING_CFG register layout */
-> +#define NFC_TIMING_CFG(tWB, tADL, tWHR, tRHW, tCAD)		\
-> +	(((tWB) & 0x3) | (((tADL) & 0x3) << 2) |		\
-> +	(((tWHR) & 0x3) << 4) | (((tRHW) & 0x3) << 6) |		\
-> +	(((tCAD) & 0x7) << 8))
-> +
-> +/* define bit use in NFC_CMD */
-> +#define NFC_CMD_LOW_BYTE_MSK	0xff
-> +#define NFC_CMD_HIGH_BYTE_MSK	(0xff << 8)
-> +#define NFC_CMD(x)		(x)
-> +#define NFC_ADR_NUM_OFFSET	16
-> +#define NFC_ADR_NUM_MSK		(0x7 << NFC_ADR_NUM_OFFSET)
-> +#define NFC_ADR_NUM(x)		(((x) - 1) << NFC_ADR_NUM_OFFSET)
-> +#define NFC_SEND_ADR		BIT(19)
-> +#define NFC_ACCESS_DIR		BIT(20)
-> +#define NFC_DATA_TRANS		BIT(21)
-> +#define NFC_SEND_CMD1		BIT(22)
-> +#define NFC_WAIT_FLAG		BIT(23)
-> +#define NFC_SEND_CMD2		BIT(24)
-> +#define NFC_SEQ			BIT(25)
-> +#define NFC_DATA_SWAP_METHOD	BIT(26)
-> +#define NFC_ROW_AUTO_INC	BIT(27)
-> +#define NFC_SEND_CMD3		BIT(28)
-> +#define NFC_SEND_CMD4		BIT(29)
-> +#define NFC_CMD_TYPE_MSK	(0x3 << 30)
-> +#define NFC_NORMAL_OP		(0 << 30)
-> +#define NFC_ECC_OP		(1 << 30)
-> +#define NFC_PAGE_OP		(2 << 30)
-> +
-> +/* define bit use in NFC_RCMD_SET */
-> +#define NFC_READ_CMD_OFFSET	0
-> +#define NFC_READ_CMD_MSK	(0xff << NFC_READ_CMD_OFFSET)
-> +#define NFC_RND_READ_CMD0_OFFSET 8
-> +#define NFC_RND_READ_CMD0_MSK	(0xff << NFC_RND_READ_CMD0_OFFSET)
-> +#define NFC_RND_READ_CMD1_OFFSET 16
-> +#define NFC_RND_READ_CMD1_MSK	(0xff << NFC_RND_READ_CMD1_OFFSET)
-> +
-> +/* define bit use in NFC_WCMD_SET */
-> +#define NFC_PROGRAM_CMD_MSK	0xff
-> +#define NFC_RND_WRITE_CMD_MSK	(0xff << 8)
-> +#define NFC_READ_CMD0_MSK	(0xff << 16)
-> +#define NFC_READ_CMD1_MSK	(0xff << 24)
-> +
-> +/* define bit use in NFC_ECC_CTL */
-> +#define NFC_ECC_EN		BIT(0)
-> +#define NFC_ECC_PIPELINE	BIT(3)
-> +#define NFC_ECC_EXCEPTION	BIT(4)
-> +#define NFC_ECC_BLOCK_SIZE_MSK	BIT(5)
-> +#define NFC_ECC_BLOCK_512	BIT(5)
-> +#define NFC_RANDOM_EN		BIT(9)
-> +#define NFC_RANDOM_DIRECTION	BIT(10)
-> +#define NFC_ECC_MODE_MSK	(0xf << 12)
-> +#define NFC_ECC_MODE(x)		((x) << 12)
-> +#define NFC_RANDOM_SEED_MSK	(0x7fff << 16)
-> +#define NFC_RANDOM_SEED(x)	((x) << 16)
-> +
-> +/* define bit use in NFC_ECC_ST */
-> +#define NFC_ECC_ERR(x)		BIT(x)
-> +#define NFC_ECC_PAT_FOUND(x)	BIT((x) + 16)
-> +#define NFC_ECC_ERR_CNT(b, x)	(((x) >> ((b) * 8)) & 0xff)
-> +
-> +#define NFC_DEFAULT_TIMEOUT_MS	1000
-> +
-> +#define NFC_SRAM_SIZE		1024
-> +
-> +#define NFC_MAX_CS		7
-> +
-> +#endif
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand_spl.c b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-> index 9f80a8010d7b..f75ea473765e 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand_spl.c
-> +++ b/drivers/mtd/nand/raw/sunxi_nand_spl.c
-> @@ -13,50 +13,7 @@
->   #include <linux/delay.h>
->   #include <linux/mtd/rawnand.h>
->   
-> -/* registers */
-> -#define NFC_REG_CTL                0x00000000
-> -#define NFC_REG_ST                 0x00000004
-> -#define NFC_REG_ADDR_LOW           0x00000014
-> -#define NFC_REG_ADDR_HIGH          0x00000018
-> -#define NFC_REG_CNT                0x00000020
-> -#define NFC_REG_CMD                0x00000024
-> -#define NFC_REG_RCMD_SET           0x00000028
-> -#define NFC_REG_ECC_CTL            0x00000034
-> -#define NFC_REG_ECC_ST             0x00000038
-> -#define NFC_REG_SPARE_AREA         0x000000A0
-> -#define NFC_RAM0_BASE              0x00000400
-> -#define NFC_RAM1_BASE              0x00000800
-> -
-> -#define NFC_EN                     (1 << 0)
-> -#define NFC_RESET                  (1 << 1)
-> -#define NFC_PAGE_SHIFT_MSK         (0xf << 8)
-> -#define NFC_PAGE_SIZE(a)           ((fls(a) - 11) << 8)
-> -
-> -#define NFC_ECC_EN                 (1 << 0)
-> -#define NFC_ECC_EXCEPTION          (1 << 4)
-> -#define NFC_ECC_BLOCK_512          (1 << 5)
-> -#define NFC_RANDOM_EN              (1 << 9)
-> -#define NFC_RANDOM_DIRECTION       (1 << 10)
-> -
-> -#define NFC_ADR_NUM_OFFSET         16
-> -#define NFC_SEND_ADR               (1 << 19)
-> -#define NFC_ACCESS_DIR             (1 << 20)
-> -#define NFC_DATA_TRANS             (1 << 21)
-> -#define NFC_SEND_CMD1              (1 << 22)
-> -#define NFC_WAIT_FLAG              (1 << 23)
-> -#define NFC_SEND_CMD2              (1 << 24)
-> -#define NFC_SEQ                    (1 << 25)
-> -#define NFC_DATA_SWAP_METHOD       (1 << 26)
-> -#define NFC_ROW_AUTO_INC           (1 << 27)
-> -#define NFC_SEND_CMD3              (1 << 28)
-> -#define NFC_SEND_CMD4              (1 << 29)
-> -#define NFC_NORMAL_OP              (0 << 30)
-> -#define NFC_ECC_OP                 (1 << 30)
-> -#define NFC_PAGE_OP                (2 << 30)
-> -
-> -#define NFC_CMD_INT_FLAG           (1 << 1)
-> -#define NFC_DMA_INT_FLAG           (1 << 2)
-> -#define NFC_CMD_FIFO_STATUS        (1 << 3)
-> +#include "sunxi_nand.h"
->   
->   #define NFC_READ_CMD_OFFSET         0
->   #define NFC_RND_READ_CMD0_OFFSET    8
+>   #endif
 
