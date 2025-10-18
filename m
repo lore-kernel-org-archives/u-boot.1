@@ -4,61 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DEDACCD193
-	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 11:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD6FCCCD195
+	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 13:53:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D615583771;
-	Sat, 18 Oct 2025 13:22:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 0D2AF83741;
+	Sat, 18 Oct 2025 15:53:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="twUSrH24";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IAJk9j5O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 234D2837B6; Sat, 18 Oct 2025 13:22:51 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 96DC183796; Sat, 18 Oct 2025 08:08:09 +0200 (CEST)
+Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
+ [IPv6:2607:f8b0:4864:20::e2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E366983631
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 13:22:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE439836D1
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 08:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: cfa94b1e-ac14-11f0-809d-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id cfa94b1e-ac14-11f0-809d-005056992ed3;
- Sat, 18 Oct 2025 13:23:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=T6QWyZKIdUWOblIu/LNqfsPWV4dDgYnsJaVmNo/g+3g=;
- b=twUSrH246io/a3JVHgwZ6Jo3aDFZhnApRT2K6dUoeBLdXkFLSpxVAdDFRLWHJ1fwBZ8xuaa+REUq2
- eb8kbuH+D4cxrjYMvAS2sN3CnMPWIbyiHBTDv3hULCOV6kpy3oh5akhfA0FOUn1wIaSuoarWzPRHxo
- z8DEsRyivhqW9tcxsksTn4YMIxBOoQ8jiug9PaJjVP45ptfneGMfFNJpCtuXMFFaKtehM25g2N33BO
- q2/UOXEbCDPL6l2hPVM8hCJclZ3M+aHiIrvvPZbj3YxsxMTnZzL3mQubKUQ3D/W5awBPtCAhRv4nX1
- r24ksts1/dJioyVdWWjp4N4WWN+V4BA==
-X-KPN-MID: 33|po6FpLDWMzz/MS0tK/+aPaL7nT09iTn5PxbuElNIPHxLz/wqVpp+sAdUiwZntsc
- /q4Ejl2gEHMCX6NpH7vtkLV8ZaN2nAAQqjl5y005+rRc=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|p9uf9rOHni45GAt3wIEkOFnyhMFKkH63yGABoH72Vyv0vMX46rdOGQVW+4/R1F9
- MwgWu0wzl6tqVzp8UfKZSTw==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id c6160733-ac14-11f0-8d3e-00505699b758;
- Sat, 18 Oct 2025 13:22:47 +0200 (CEST)
-Date: Sat, 18 Oct 2025 13:22:47 +0200
-Message-Id: <87347gpi7s.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Eddie Kovsky <ekovsky@redhat.com>
-Cc: trini@konsulko.com, loic.poulain@linaro.org, tobias@eub.se,
- paul.henrys_ext@softathome.com, sjg@chromium.org,
- jstancek@redhat.com, eballetb@redhat.com, u-boot@lists.denx.de
-In-Reply-To: <20251017171329.255689-1-ekovsky@redhat.com> (message from Eddie
- Kovsky on Fri, 17 Oct 2025 11:13:27 -0600)
-Subject: Re: [PATCH] Add support for OpenSSL Provider API
-References: <20251017171329.255689-1-ekovsky@redhat.com>
+ spf=pass smtp.mailfrom=gchan9527@gmail.com
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-580a1f1f187so1084896137.1
+ for <u-boot@lists.denx.de>; Fri, 17 Oct 2025 23:08:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760767685; x=1761372485; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6IoaR7k1DflcDj7llbT2QDQpy9t0JwXCtgzBgHGcng0=;
+ b=IAJk9j5O0z8HduOw3HdnXgrLS+5MRgO/wO+7ihKiywb4nMw2P/O078e+vDWEYL0ZBJ
+ GJnhKITjBvzzosVIygPwOu6h49EhkH1mAsaoYzHBXg8m85hqEHG6Ro37y5axLwtN5zDK
+ rWAJ1PcxxqSqH9tNeeClCk0GgMa+ZM+v5jIDC9EaO8WzNYmTgWO/y9WQyd5pJPZHt70g
+ NDC5MdeCTt1r4mjIUW1xQ7w8CZVhYtHD7RIOmMe4Ytyz/hI+yGfq4LWjtHS4qc0ZPoqv
+ TBDQ5Jr8/3VMWP7k8aNz/VJEkTKNoX89mUEbw6vLKr/V9kTOh3bXT/aCO5lsu/wDLNvJ
+ wLNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760767685; x=1761372485;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6IoaR7k1DflcDj7llbT2QDQpy9t0JwXCtgzBgHGcng0=;
+ b=lrxnnT2TK0H3IG/bXs2fi3mssAwBcfrHrI82Cb6Rr8WMNZgAZHRC3PYeK0CZG+MfkW
+ ufCGB290KkhP6orhExup462VA4ccnaS6pVIYjF5oThyitlIy1lXmDaHOSJza+E18wE+u
+ CdTMycBB3pEq1GAshbcg5gaY0u3RWPAgc4D/jneBRzTssnq59dBCvOrKwMBBZLcRT5Lc
+ lz0AX3nLP1c3XP8I27YNGJMuK38D0iKipGlLSVNducwrcOl6K6mvXER6wU3O9Odqwp7Q
+ +lp5gTCxeXMJkPOKj3OEj7F4cVulNmUEmMJFKqG6v5oXGILdRbVs/bXC27OEeE1go+h/
+ YpLA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVIHG6KPZSPFeHYWQC6gpsDmyMWkM+4esLYzM1VofAqBKwPc8MO1LXQTsygl4nSZMru/IEszvk=@lists.denx.de
+X-Gm-Message-State: AOJu0YyD8JF5LuJbkGrZW9Z/NMRZzWKdyxlLjR1Puc61gGiG4+8+otXK
+ HW/Mq7urSpDpbYasq1/nnmcHIiqJd1FbNCihI/bKwpWowxMizeJguvYwNR7fS/J2Nsfzlm8Fg2y
+ 7gCC9hWQLUXZLgB9dDOvHQsQUrNYGtM8=
+X-Gm-Gg: ASbGncsJupwQf7dIKwypSKjzQVmyW3JAONFLsTHAywNAwoJStIY3kir05Oe9ZFqxJTC
+ xWeCjGZ0yRz6Za9eXkV/VcHpzZeoQ4qoBmrdZxMBxYUbrh1xh42TJRGR6iaDuJ0DdoS51hpNJyY
+ nbxTbYnxRyyMxOqoNalOKY70H+RRG4tmBJFhzAuQIixz+u7wyBZG3aJfIz4u41AWPA9i0x11dL8
+ z38804LbI2R445Sn6/MccTXiEHt1waW1pDwcotNFcVT5IauXik57+3SNNd2E8A4KQ0fi3PX
+X-Google-Smtp-Source: AGHT+IEwp9dvTDf1w9tda5H78Rim3rOAVNtqbgdcTMG0VlEaecAkJgykaC8AX0b/t9OadlgquoZEzRWUiuV8M8FZhdY=
+X-Received: by 2002:a05:6102:c53:b0:538:9b66:7655 with SMTP id
+ ada2fe7eead31-5d7dd59b5b5mr2185488137.18.1760767685440; Fri, 17 Oct 2025
+ 23:08:05 -0700 (PDT)
+MIME-Version: 1.0
+References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
+In-Reply-To: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
+From: george chan <gchan9527@gmail.com>
+Date: Sat, 18 Oct 2025 14:07:51 +0800
+X-Gm-Features: AS18NWArOtnRMTtINnh4K3jHZx40uoPiTbZL0Z0Z-wYlBwboOmbl9LAV8iVv7Gw
+Message-ID: <CADgMGSsxkrqZ3Dirq9KPoP0aaHew0A9DZEuoTotvqcHsfkEw6w@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] android: add bootconfig support
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, 
+ Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aaron Kling <webgeek1234@gmail.com>, 
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
+ Maxime Fournier <mfournier@baylibre.com>
+X-Mailman-Approved-At: Sat, 18 Oct 2025 15:53:45 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,311 +103,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Eddie Kovsky <ekovsky@redhat.com>
-> Date: Fri, 17 Oct 2025 11:13:27 -0600
-> 
-> The Engine API has been deprecated since the release of OpenSSL
-> 3.0. End users have been advised to migrate to the new Provider
-> interface. Several distributions have already removed support for
-> engines, which is preventing U-Boot from being compiled in those
-> environments.
-> 
-> The Kconfig option OPENSSL_NO_DEPRECATED introduces support for the
-> Provider API while continuing to use the existing Engine API on
-> distros shipping older releases of OpenSSL.
-> 
-> This is based on similar work contributed by Jan Stancek
-> updating Linux to use the Provider interface.
-> 
->     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
->     Author: Jan Stancek <jstancek@redhat.com>
->     Date:   Fri Sep 20 19:52:48 2024 +0300
-> 
->         sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
-> 
-> The changes have been tested with the FIT signature verification
-> vboot tests on Fedora 42 and Debian 13. All 30 tests pass with both
-> the legacy Engine library installed and with the Provider API.
+Dear Guillaume,
 
-Did you test this with LibreSSL?
+Thx for your patch.
 
-> Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+=E5=9C=A8 2025=E5=B9=B410=E6=9C=8817=E6=97=A5=E9=80=B1=E4=BA=94 21:19=EF=BC=
+=8CGuillaume La Roque (TI.com) <glaroque@baylibre.com>
+=E5=AF=AB=E9=81=93=EF=BC=9A
+
+> This patchset add support of android bootconfig partition[1] in u-boot.
+> With Android boot image v4, all androidboot.* arguments must be
+> passed via bootconfig instead of using the kernel commandline.
+>
+
+it looks like the above add logic handled bootargs well.
+
+is this logic support the use case of appending existing bootargs from env
+and handle the one mentioned in
+[1] for simulation of vendor bootloader behavior to append some
+androidboot.* bootcmd to formulate a new bootargs? Or is this series
+complementary to [1] so as aimed to "move" androidboot.* only to
+bootconfig? If this [1] user case is covered then I am very happy to stop
+[1] if this series can have same result.
+
+Btw, I am wondering if this series assumed Androidboot v4 only, so kernel
+ver must >=3D 5.4 and enabled with bootconfig. Since then bootconfig can be
+unlimited to it's length. So all predefined androidboot.* from bootloader,
+can now move out, and no need of default bootargs in env file any more.
+
+And how about those Androidboot v2 case?
+
+[1] https://lists.denx.de/pipermail/u-boot/2025-October/599708.html
+
+Regards
+George
+
+>
+> [1]
+> https://source.android.com/docs/core/architecture/bootloader/implementing=
+-bootconfig
+>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 > ---
->  lib/aes/aes-encrypt.c |  2 +
->  lib/rsa/Kconfig       |  8 ++++
->  lib/rsa/rsa-sign.c    | 93 ++++++++++++++++++++++++++++++++++++++++++-
->  3 files changed, 101 insertions(+), 2 deletions(-)
-> 
-> diff --git a/lib/aes/aes-encrypt.c b/lib/aes/aes-encrypt.c
-> index 90e1407b4f09..9595772cf58b 100644
-> --- a/lib/aes/aes-encrypt.c
-> +++ b/lib/aes/aes-encrypt.c
-> @@ -16,7 +16,9 @@
->  #include <openssl/err.h>
->  #include <openssl/ssl.h>
->  #include <openssl/evp.h>
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  #include <openssl/engine.h>
-> +#endif
->  #include <uboot_aes.h>
->  
->  #if OPENSSL_VERSION_NUMBER >= 0x10000000L
-> diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
-> index 9033384e60a3..622f06f8dba0 100644
-> --- a/lib/rsa/Kconfig
-> +++ b/lib/rsa/Kconfig
-> @@ -20,6 +20,14 @@ config SPL_RSA
->  	bool "Use RSA Library within SPL"
->  	depends on SPL
->  
-> +config OPENSSL_NO_DEPRECATED
-> +	bool "Build U-Boot without support for OpenSSL Engine"
-> +	default n
-> +	help
-> +	  Add support for the OpenSSL Provider API, which is the officially
-> +	  supported mechanism in OpenSSL 3.x and later releases for accessing
-> +	  hardware and software cryptography.
-> +
->  config SPL_RSA_VERIFY
->  	bool
->  	depends on SPL_RSA
-> diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
-> index 92b9d7876e52..9ebbcdfd52f3 100644
-> --- a/lib/rsa/rsa-sign.c
-> +++ b/lib/rsa/rsa-sign.c
-> @@ -19,15 +19,51 @@
->  #include <openssl/err.h>
->  #include <openssl/ssl.h>
->  #include <openssl/evp.h>
-> +#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
-> +#include <err.h>
-> +#include <openssl/provider.h>
-> +#include <openssl/store.h>
-> +#else
->  #include <openssl/engine.h>
-> +#endif // CONFIG_OPENSSL_NO_DEPRECATED
-> +
-> +#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
-> +#define ERR(cond, fmt, ...)				\
-> +	do {						\
-> +		bool __cond = (cond);			\
-> +		drain_openssl_errors(__LINE__, 0);	\
-> +		if (__cond) {				\
-> +			errx(1, fmt, ## __VA_ARGS__);	\
-> +		}					\
-> +	} while (0)
-> +
-> +static void drain_openssl_errors(int l, int silent)
-> +{
-> +	const char *file;
-> +	char buf[120];
-> +	int e, line;
-> +
-> +	if (ERR_peek_error() == 0)
-> +		return;
-> +	if (!silent)
-> +		fprintf(stderr, "At main.c:%d:\n", l);
-> +
-> +	while ((e = ERR_peek_error_line(&file, &line))) {
-> +		ERR_error_string(e, buf);
-> +		if (!silent)
-> +			fprintf(stderr, "- SSL %s: %s:%d\n", buf, file, line);
-> +		ERR_get_error();
-> +	}
-> +}
-> +#endif // CONFIG_OPENSSL_NO_DEPRECATED
->  
->  static int rsa_err(const char *msg)
->  {
-> -	unsigned long sslErr = ERR_get_error();
-> +	unsigned long ssl_err = ERR_get_error();
->  
->  	fprintf(stderr, "%s", msg);
->  	fprintf(stderr, ": %s\n",
-> -		ERR_error_string(sslErr, 0));
-> +		ERR_error_string(ssl_err, 0));
->  
->  	return -1;
->  }
-> @@ -98,6 +134,7 @@ err_cert:
->   * @evpp	Returns EVP_PKEY object, or NULL on failure
->   * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
->   */
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  static int rsa_engine_get_pub_key(const char *keydir, const char *name,
->  				  ENGINE *engine, EVP_PKEY **evpp)
->  {
-> @@ -157,6 +194,7 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
->  
->  	return 0;
->  }
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  
->  /**
->   * rsa_get_pub_key() - read a public key
-> @@ -170,8 +208,10 @@ static int rsa_engine_get_pub_key(const char *keydir, const char *name,
->  static int rsa_get_pub_key(const char *keydir, const char *name,
->  			   ENGINE *engine, EVP_PKEY **evpp)
->  {
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  	if (engine)
->  		return rsa_engine_get_pub_key(keydir, name, engine, evpp);
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  	return rsa_pem_get_pub_key(keydir, name, evpp);
->  }
->  
-> @@ -207,6 +247,37 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
->  		return -ENOENT;
->  	}
->  
-> +#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
-> +	EVP_PKEY *private_key = NULL;
-> +	OSSL_STORE_CTX *store;
-> +
-> +	if (!OSSL_PROVIDER_try_load(NULL, "pkcs11", true))
-> +		ERR(1, "OSSL_PROVIDER_try_load(pkcs11)");
-> +	if (!OSSL_PROVIDER_try_load(NULL, "default", true))
-> +		ERR(1, "OSSL_PROVIDER_try_load(default)");
-> +
-> +	store = OSSL_STORE_open(path, NULL, NULL, NULL, NULL);
-> +	ERR(!store, "OSSL_STORE_open");
-> +
-> +	while (!OSSL_STORE_eof(store)) {
-> +		OSSL_STORE_INFO *info = OSSL_STORE_load(store);
-> +
-> +		if (!info) {
-> +			drain_openssl_errors(__LINE__, 0);
-> +			continue;
-> +		}
-> +		if (OSSL_STORE_INFO_get_type(info) == OSSL_STORE_INFO_PKEY) {
-> +			private_key = OSSL_STORE_INFO_get1_PKEY(info);
-> +			ERR(!private_key, "OSSL_STORE_INFO_get1_PKEY");
-> +		}
-> +		OSSL_STORE_INFO_free(info);
-> +		if (private_key)
-> +			break;
-> +	}
-> +	OSSL_STORE_close(store);
-> +
-> +	*evpp = private_key;
-> +#else
->  	if (!PEM_read_PrivateKey(f, evpp, NULL, path)) {
->  		rsa_err("Failure reading private key");
->  		fclose(f);
-> @@ -214,6 +285,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
->  	}
->  	fclose(f);
->  
-> +#endif // CONFIG_OPENSSL_NO_DEPRECATED
->  	return 0;
->  }
->  
-> @@ -226,6 +298,7 @@ static int rsa_pem_get_priv_key(const char *keydir, const char *name,
->   * @evpp	Returns EVP_PKEY object, or NULL on failure
->   * Return: 0 if ok, -ve on error (in which case *evpp will be set to NULL)
->   */
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  static int rsa_engine_get_priv_key(const char *keydir, const char *name,
->  				   const char *keyfile,
->  				   ENGINE *engine, EVP_PKEY **evpp)
-> @@ -293,6 +366,7 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
->  
->  	return 0;
->  }
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  
->  /**
->   * rsa_get_priv_key() - read a private key
-> @@ -306,9 +380,11 @@ static int rsa_engine_get_priv_key(const char *keydir, const char *name,
->  static int rsa_get_priv_key(const char *keydir, const char *name,
->  			    const char *keyfile, ENGINE *engine, EVP_PKEY **evpp)
->  {
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  	if (engine)
->  		return rsa_engine_get_priv_key(keydir, name, keyfile, engine,
->  					       evpp);
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  	return rsa_pem_get_priv_key(keydir, name, keyfile, evpp);
->  }
->  
-> @@ -325,6 +401,7 @@ static int rsa_init(void)
->  	return 0;
->  }
->  
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  static int rsa_engine_init(const char *engine_id, ENGINE **pe)
->  {
->  	const char *key_pass;
-> @@ -380,6 +457,7 @@ static void rsa_engine_remove(ENGINE *e)
->  		ENGINE_free(e);
->  	}
->  }
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  
->  static int rsa_sign_with_key(EVP_PKEY *pkey, struct padding_algo *padding_algo,
->  			     struct checksum_algo *checksum_algo,
-> @@ -480,11 +558,13 @@ int rsa_sign(struct image_sign_info *info,
->  	if (ret)
->  		return ret;
->  
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  	if (info->engine_id) {
->  		ret = rsa_engine_init(info->engine_id, &e);
->  		if (ret)
->  			return ret;
->  	}
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  
->  	ret = rsa_get_priv_key(info->keydir, info->keyname, info->keyfile,
->  			       e, &pkey);
-> @@ -496,16 +576,21 @@ int rsa_sign(struct image_sign_info *info,
->  		goto err_sign;
->  
->  	EVP_PKEY_free(pkey);
-> +
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  	if (info->engine_id)
->  		rsa_engine_remove(e);
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  
->  	return ret;
->  
->  err_sign:
->  	EVP_PKEY_free(pkey);
->  err_priv:
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  	if (info->engine_id)
->  		rsa_engine_remove(e);
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  	return ret;
->  }
->  
-> @@ -645,11 +730,13 @@ int rsa_add_verify_data(struct image_sign_info *info, void *keydest)
->  	ENGINE *e = NULL;
->  
->  	debug("%s: Getting verification data\n", __func__);
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  	if (info->engine_id) {
->  		ret = rsa_engine_init(info->engine_id, &e);
->  		if (ret)
->  			return ret;
->  	}
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  	ret = rsa_get_pub_key(info->keydir, info->keyname, e, &pkey);
->  	if (ret)
->  		goto err_get_pub_key;
-> @@ -726,8 +813,10 @@ done:
->  err_get_params:
->  	EVP_PKEY_free(pkey);
->  err_get_pub_key:
-> +#ifndef CONFIG_OPENSSL_NO_DEPRECATED
->  	if (info->engine_id)
->  		rsa_engine_remove(e);
-> +#endif // !CONFIG_OPENSSL_NO_DEPRECATED
->  
->  	if (ret)
->  		return ret;
-> -- 
-> 2.51.0
-> 
-> 
+> Changes in v2:
+> - Add test
+> - Add new command to be able to load and read bootconfig before booting
+> - Somes fixes to works with sandbox test
+> - Link to v1:
+> https://lore.kernel.org/all/20241128-bootconfig-v1-0-0e63a5dae82c@baylibr=
+e.com/
+>
+> ---
+> Guillaume La Roque (TI.com) (4):
+>       boot: android: Add sandbox memory mapping support
+>       boot: android: Add bootconfig support
+>       cmd: abootimg: Add 'get ramdisk' command
+>       test: abootimg: Add test for bootconfig handling
+>
+> Mattijs Korpershoek (TI.com) (1):
+>       boot: android: import addBootConfigParameters() from AOSP
+>
+>  boot/image-android.c                        | 180
+> ++++++++++++++++++++++++----
+>  cmd/abootimg.c                              |  35 +++++-
+>  test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++--
+>  3 files changed, 292 insertions(+), 31 deletions(-)
+> ---
+> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
+> change-id: 20241128-bootconfig-276e247be992
+>
+> Best regards,
+> --
+> Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+>
+>
