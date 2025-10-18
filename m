@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC2EACCD195
-	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 20:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6403CCD195
+	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 20:22:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17CB283631;
-	Sat, 18 Oct 2025 22:11:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E55D583631;
+	Sat, 18 Oct 2025 22:22:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AYtEnMgq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QcCb6yF7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA8F9836B4; Sat, 18 Oct 2025 22:11:06 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id C2536836B4; Sat, 18 Oct 2025 22:22:18 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAD9883438
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 22:11:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2E2683438
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 22:22:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-579d7104c37so3903074e87.3
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 13:11:04 -0700 (PDT)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-58b025fce96so2737767e87.1
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 13:22:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760818264; x=1761423064; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1760818936; x=1761423736; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DShVlhAlSL8goFK4b4vqmgBbJzrbAT7+mmIgfmzD2wg=;
- b=AYtEnMgq1UBlCIGWD4TTd7DWfBQApN7F7O3ID9PcnhXPM07juKn859cuqBbVx6tb8X
- vbkDgbS3E4rJDAL7sSMvU6+zyso5gXkwJRqfRAzgdIgRc3PJSA7EmOe7ug35StsjlrOj
- 9KWKTCzRnShm4WvFdRDAlqxJo7HeM1wVTQnIGvhQuoG9oPpQCAFeuSmtjN9aFgTX3OCU
- dA9bT3TgYPR6sooX/qeyjd25M+ZpUhixbDhx4To2lZC9zKdqwbrzf1a7B7GSdBrx/JAV
- X8IIZ8cJj/HkBvrELj301Ro93NdF4X20u/38Ob/GllY5VjY3zrv2NK5ubh2XWDcD7rpc
- vDyg==
+ bh=2z0L2krZvFhyfdEzj5LVFyUinK2wJqIGFqwCWQR4CZQ=;
+ b=QcCb6yF7Ru4dDw7G0iNU5uVjDTBeLQYHelj0QV64QQ4wZ3IblHIjZomR0hLyjCgN2Y
+ B9AxQxyAEcjKuwrQeWYb9wJemG7XPHq4Y9M+iy8TxkQBZOl54FppJVcrWsN2WZmGgry/
+ KrsDopHYRgWhdR9OqylJgcLAH+uxbe0zjEYBF2OV7VsKDdbiVvvHRCdx9jWvILfTTAIJ
+ Q7gyx9zP+p7b4u7YoT/m+Yup/UYZqpvlIhXicOAXCIYg0WhdzMrl10gJEtQoVEj8ZY2B
+ I/ywIqh3Cc46dzxvvu0qMISJASSKaK+0M5j/t9EdISLIOS2lTdgm18PnYGF7brHJTeNX
+ 1vxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760818264; x=1761423064;
+ d=1e100.net; s=20230601; t=1760818936; x=1761423736;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DShVlhAlSL8goFK4b4vqmgBbJzrbAT7+mmIgfmzD2wg=;
- b=gp2BkwoOrJOxYgLwftrRgdCXxlcEABJzc5k8QIFLuES8CslSauzXrFJZ0SPg7Q08IF
- LeyAorbVEosEkvS3RFBjJQlEVyEfJ2bFQYI9tAp+hIjsO5wjIBNv8CqeFxtxrRZR+n2J
- U8LdIog24mXPI01OdwU/hV4gTjST8JAQ+wQGvSO48gBKs08wFDS/iRDx0M8GnCmVgv+f
- r23BV67w2uUmew3ektcFcJR0oOjupvE+GyFz0LJUzT+VbGArw8+tyddBkJxRogrBw931
- wl0j9DqnKZ12+SWnx2cd3R49+o0TBhK2O1TZc3OyqJVwmOWD5eoDc3/q+cn+ckU8i2gn
- YMPQ==
-X-Gm-Message-State: AOJu0Yya4M+56/zcT0Nc7419d3kBovs/V9lnGwGZTwwu/n/AtIEaOQ0O
- rGumlbtWq1o78o4x02DcYV7g2NKC7SKk3gkt+IgC8/u3NR12vuZxisq0vcLb/ioTGDrL4UEih5P
- rxeWASoQ9RmdKAuiXLBWE9zV4a0a92aR9Ekn6
-X-Gm-Gg: ASbGnct90vO3dLex8/A9Bg4Oea1+9Prb60q09NtI2JzQZ7KnrBv1lwx8KRh/G+QZraS
- flRYdw7wRY2a9Dz5UvPXK1CnqqY0Ck8I75Y4kNKAe4HfFijsKhtoTpCrHxkrRIPnSgPpXZyh92m
- vvT1cIVZBHZa7fomFAvINN0y8NtdOStmDBsR1xHNpim8dAo0+dq95QwzHB0ls3i0vE7+7HUUADO
- udrmlIA0lurwTM37BHIU0F+Ga9Ymx4FjcvD0/0cGZ36P6VI8L36sslSNFMKsIr5CckxximE+vMN
- 8jQ8/3K5m25Bg+c=
-X-Google-Smtp-Source: AGHT+IHMa3MNNBTMYi9Ze8DLyppLOh5gYUznm1GtEpvnJunx5KkpdBPLNZI7STHDrOfEqzjcs27gTaEXgI+506fzR1I=
-X-Received: by 2002:a05:6512:15a2:b0:591:c2b9:5be1 with SMTP id
- 2adb3069b0e04-591d8557d6cmr2384864e87.33.1760818263846; Sat, 18 Oct 2025
- 13:11:03 -0700 (PDT)
+ bh=2z0L2krZvFhyfdEzj5LVFyUinK2wJqIGFqwCWQR4CZQ=;
+ b=IRtiAuhhThqxiJivxDS1ZExaMbWvfPZlfvaFk2M9mV5Twtixw1pulfAjP5yaYM2/iL
+ 1ah0fd57Wpq35EZKRD06D2Ga2fWG5Y0I9bMus6rE+Cu3xk1bQBJPgpLZqmr4Ai3lHmWR
+ W0mipDPhRuEfc1hgC6Ch6Xu80zckjaDVtgbgdqnGRR9Z4Xsdi46Db83+8ukIafst8av/
+ ZHwZO9O5O9Su4nWzGuHTnQnhodjeDF1iT4HXfuzaS+S6vN0SGa98dcnXXVnRA3GCdQFd
+ WD0QSTXjJj0vdqpHDEOigbaomeCUUvrtXZeAPYEbx3bmdtBU0J7VC5XQ1k0gX6o6EikQ
+ vXcA==
+X-Gm-Message-State: AOJu0YzCzfz1NFzTS4ANdfPCTb1hus8xgWDIR4cIFDUF5YRI8FYYgkDB
+ h82S4yOxLEsbTLYquzdAtARMTiuYUHjwSok+n0JYF32xGqI6TKa0Bzh/tY3DIBmkDORudRWTn/M
+ /Rso8t3bxhv9/piGJQTiOfNWacHumtSg=
+X-Gm-Gg: ASbGnctfw8WPvIgOiuFcrGKZExlBawi7pr1RAn144B/8eVWr+MBErAadQh9YqXmmpZm
+ aGtFjYZnRdi1kJSrDZr52phOpW3TBtR5J9lV+1KgyuZj8FVPoqlFCBNScsYIJ3OarS7AfdiE2zX
+ ZOTXSBETjY3uicQoqlbI6CZfCx9Ue+amlB+xDTnrlsyZmtW3OtNKAVYjgncLejpBz/elHLm1+qR
+ fDplhsYNcN3opaBmE6c7a2roAD9WXU3votUn+WYdMeGMbumBNcDunjy9649oDqKG2XLM2jQQzlf
+ yBPuM8sLobgvPoDoXw0vh5IZVw==
+X-Google-Smtp-Source: AGHT+IEzmbBZ2MlRINx+W2LnB0KDhrb6kFLrftQg9zG/smlrHgFUMcylr7dGVwIbMlObvdyllp+CGwKzXayMED6RksM=
+X-Received: by 2002:a05:6512:2251:b0:57b:fb1d:616e with SMTP id
+ 2adb3069b0e04-591d85661b0mr2750133e87.39.1760818935677; Sat, 18 Oct 2025
+ 13:22:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251015-imx-rproc-v2-0-26c6b3d16c35@nxp.com>
-In-Reply-To: <20251015-imx-rproc-v2-0-26c6b3d16c35@nxp.com>
+References: <20251014111756.446456-1-alice.guo@oss.nxp.com>
+ <20251014111756.446456-2-alice.guo@oss.nxp.com>
+In-Reply-To: <20251014111756.446456-2-alice.guo@oss.nxp.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 18 Oct 2025 17:10:52 -0300
-X-Gm-Features: AS18NWCWlApI9WOQTnONPGtILLB5E9Ej6tYRUKXE2ESlGKzCYlvuNWY9kV1gk0o
-Message-ID: <CAOMZO5B8cT0NPSAtu7pxODiy_=8PD_aYWW1U7+fs_xLJP8cKbQ@mail.gmail.com>
-Subject: Re: [PATCH v2 00/10] remoteproc: Add support for i.MX8M[M/N/P/Q] and
- i.MX93
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: u-boot@lists.denx.de, uboot-stm32@st-md-mailman.stormreply.com, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
- Tom Rini <trini@konsulko.com>, 
- Ye Li <ye.li@nxp.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, Udit Kumar <u-kumar1@ti.com>, 
- Beleswar Padhi <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Andrew Davis <afd@ti.com>, 
- Judith Mendez <jm@ti.com>, Ryan Eatmon <reatmon@ti.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, Peng Fan <peng.fan@nxp.com>
+Date: Sat, 18 Oct 2025 17:22:04 -0300
+X-Gm-Features: AS18NWAUi8qljlRy9wUqkGr_d1oyuXzkaydJJuS8fk656mkPBnnQc0ZmDOKBNiE
+Message-ID: <CAOMZO5B0VWBwcpxRCF+iCN9jJw+0uWN_pJjyNha_B1Yz6e9h2A@mail.gmail.com>
+Subject: Re: [PATCH v1 1/4] spi: nxp_xspi: Add new driver for NXP XSPI
+ controller
+To: alice.guo@oss.nxp.com
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com, trini@konsulko.com, 
+ sbabic@nabladev.com, jagan@amarulasolutions.com, ye.li@nxp.com, 
+ alice.guo@nxp.com, peng.fan@nxp.com, ping.bai@nxp.com, sjg@chromium.org, 
+ mkorpershoek@kernel.org, marek.vasut@mailbox.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -103,43 +98,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Hi Alice,
 
-On Tue, Oct 14, 2025 at 11:18=E2=80=AFPM Peng Fan (OSS) <peng.fan@oss.nxp.c=
-om> wrote:
->
-> This patch series introduces remoteproc support for NXP i.MX8M and i.MX93
-> platforms. Most of the i.MX-specific logic is ported from the Linux kerne=
-l to
-> ensure compatibility and maintainability.
->
-> The existing bootaux command in U-Boot only supports loading raw binary i=
-mages.
-> However, this approach fails when the remote processor firmware contains
-> sections that must be loaded into both TCM and DDR. To address this limit=
-ation,
-> need to use remoteproc framework ELF loader, enabling proper loading of
-> segmented firmware images.
->
-> Patch Summary:
->
-> Patches 1=E2=80=932: Import memcpy_io and memset_io from the Linux kernel=
- and enable
->              them in the remoteproc subsystem.
-> Patches 3=E2=80=9311: Add platform-specific remoteproc support for i.MX8M=
- and i.MX93.
-> Patch 6: Temporarily adds Cortex-M nodes to x-u-boot.dtsi since they are =
-not
->          yet available in the upstream Linux device tree. These nodes can=
- be
->          removed once they are merged upstream.
->
-> NXP internal R-b tags are kept, because the patches are directly
-> cherry-picked from NXP LTS tree.
->
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+On Tue, Oct 14, 2025 at 8:19=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
 
-Please add documentation that explains how remoteproc can be used on
-NXP i.MX8M and i.MX93 platforms.
+> +static const struct udevice_id nxp_xspi_ids[] =3D {
+> +       { .compatible =3D "nxp,imx943-xspi", .data =3D (ulong)&imx943_dat=
+a, },
 
-Thanks
+I don't see this compatible string used in Linux.
+
+Will this driver be sent for Linux inclusion?
+
+Please provide us with more details about that.
