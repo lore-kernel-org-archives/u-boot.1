@@ -4,58 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EF6ACCD195
-	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 13:54:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 457B5CCD193
+	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 14:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CA5F83893;
-	Sat, 18 Oct 2025 15:53:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id B790883771;
+	Sat, 18 Oct 2025 16:07:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="mU0BGn0V";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RC3LZZbb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3066D83796; Sat, 18 Oct 2025 10:47:43 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1A4A4837B6; Sat, 18 Oct 2025 16:07:30 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAA41836D1
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 10:47:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A89883631
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 16:07:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kauschluss@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id A312C22DCC;
- Sat, 18 Oct 2025 10:47:40 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id O7McwrjfPzrp; Sat, 18 Oct 2025 10:47:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1760777259; bh=p1Tl/3SnDBRgLhdvuQxMErJt+Dq5t5HuvE5fNrn0TPQ=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References;
- b=mU0BGn0Vl77tEos+FLh+ZYs6OaAFlONFQrXLWMNpBYFz3bIxSLq/KVFmiQavJLVg4
- y2us04ptslfwUrbnf4s013UTNL8g/KiX5C/kY9dObzU7TXyZ65/Mx6HVarpMX+6FsU
- w6e3hH4JLtJDKffCBzmfXG6+lI8/cpjDp1LK3l5rUhLGJSlwW4jSYzMGrH21kG69gU
- 5ByUxeMccRFwFbMqu6p8MUPK1ZzPeiog4iIyeHfhywTo/NW+deO+5zcgHNgPil9Z9+
- yXXmesxyRBPM3ew8leMGvDgydJ6qWFZeewJ9u01JoybUxlWGMVg6pqnyK1N2F4+6TU
- obUxfC9/pWWuQ==
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-441e193c001so1353926b6e.2
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 07:07:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760796447; x=1761401247; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3S76BXPXEcqXUBK4d+xUovYMaaIg1Frx7cJy6Mbk3k8=;
+ b=RC3LZZbbtILkgHtqMXEEyM240zRADuAIfnDSsGbx3r2T8eVdEC3gMQWNYndU1xDUuA
+ gFkO5wzNzHVuX+U6vrHl/2HcoEyJ7Kx7PAkRzAPLmDrUEHpndaxpvCDDgrgN4X04NOi7
+ fJw0/Mb4TZw/BJeKcMBwVsNR2ruZLHdCUNWt4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760796447; x=1761401247;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3S76BXPXEcqXUBK4d+xUovYMaaIg1Frx7cJy6Mbk3k8=;
+ b=AAd6oaTqo1KJzO9cY3XdoqtDvjPdc9m7yknpa0XK12r7B5mCaRfcSYHXQR4wZT/Cqb
+ zTgzBMG3y7iwBdxgo0hi7NAB8m6kIM9WwN6/SUxS9xwamn4RYW7tJmV+V4RAiwpGu4fP
+ Ww516ixuBnqjlD7zDabWmfqTUoADOkgjFgwLNpRhbcS9Vh6bEFs0bHAMqsLO1w698VXR
+ IfN/BODI5t506GaX2hzxVGHiUhtp7yNMO9fJ5zfL95U65qOK6aogLr5GoH22Um3o1I4/
+ mnWD+d+gF1SIvzYMza+8NT40033INrHg8qmQiP6anZKv3DxetVEbLJJjGZpGgZxxUiSx
+ qvgg==
+X-Gm-Message-State: AOJu0YwF+7hPOC1NEqM4YwdxXfWWB9MzquXt0VqvyEr9JNUm5UI0AaNq
+ gEDc34YsK36eww64TY5yBIycRhSX97oW3ouByITSIYKrpsKOjU0a4wvA8PDeTh9jIPs=
+X-Gm-Gg: ASbGncvbjkdwCFcB/SLuQY9SJS5or8mb/TdvkrLGr3yeuaBo/T4p/3kTxQSzussbUT0
+ SEPHYqlyUjlU+C5USST9lwXGZt06lI3pozNqL1fO//CBzuAyQVTCTdECHwGuJKIhnmV44QkeaSH
+ IjCAVHIXaou6lVUMLv61DJ47kbW58LVIy8OsEP3fgbN8IsKbuq4kMZD1MjzUpPFayrw1z/XZ0Fx
+ ljJmYmJ+mdFLS6g76Vf9Z/e3SodJHQaoSSOMU5xpDCz91e3UDkOYx+URVAIkzfCZ60LVNDlUVRx
+ 4TPZsdzJFuG49Tdn018D06atZecW9FFX8nmKfGDFJvyLnPpbJRpqCBS53dGdRYY7cVxg5xsmDoy
+ oK6KUx46C50o3bbZS2kf+nyzBKlSruRqPFfuXouK2L9e9CCjROA6R/uVwHWHjTcFAebgsiR0R9d
+ xvo8J70983ZmOlDt4ByOsa6cHPpbm887DcHgqtMaS+T0XYZCW7
+X-Google-Smtp-Source: AGHT+IFxfvLDi0NUQg7Z7FkE0LQStzCjwdjRrsNdRBOlUGxC0vXgTLQBWAmPEjFU7u4axXYMADHeCw==
+X-Received: by 2002:a05:6808:181e:b0:438:430b:3dce with SMTP id
+ 5614622812f47-443a2dfa130mr3174007b6e.10.1760796446815; 
+ Sat, 18 Oct 2025 07:07:26 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-651d3f2fa57sm618972eaf.14.2025.10.18.07.07.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 18 Oct 2025 07:07:25 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Heiko Schocher <hs@nabladev.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <20251009130844.11703-1-patrice.chotard@foss.st.com>
+References: <20251009130844.11703-1-patrice.chotard@foss.st.com>
+Subject: Re: [PATCH v1 0/2] led: fixes
+Message-Id: <176079644510.1878470.6565620492889693742.b4-ty@konsulko.com>
+Date: Sat, 18 Oct 2025 08:07:25 -0600
 MIME-Version: 1.0
-Date: Sat, 18 Oct 2025 08:47:39 +0000
-From: Kaustabh Chakraborty <kauschluss@disroot.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: =?UTF-8?Q?Duje_Mihanovi=C4=87?= <duje@dujemihanovic.xyz>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2] armv8: implement workaround for broken CNTFRQ_EL0 value
-In-Reply-To: <20251017204040.GI6688@bill-the-cat>
-References: <20251017-armv8-broken-cntfrq-v2-1-1e043cbb657e@disroot.org>
- <20251017204040.GI6688@bill-the-cat>
-Message-ID: <6f255efa155cb13b67510a39b4f321f0@disroot.org>
-X-Sender: kauschluss@disroot.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sat, 18 Oct 2025 15:53:45 +0200
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,69 +99,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2025-10-17 20:40, Tom Rini wrote:
-> On Fri, Oct 17, 2025 at 08:49:47PM +0530, Kaustabh Chakraborty wrote:
-> 
->> In devices where the U-Boot is used as a secondary bootloader, we rely
->> on the device's primary bootloader to implement CNTFRQ_EL0. However,
->> this reliance may lead to a non-functional timer in broken firmware.
->> 
->> For instance, some versions of Samsung's S-Boot don't implement it. 
->> It's
->> also not possible to set it in the U-Boot, because it's booted in a 
->> lower
->> exception level. CNTFRQ_EL0 is reported to be 0.
->> 
->> Use gd->arch.timer_rate_hz to override the queried value if set. This
->> setting needs to be done in the board file, preferrably in 
->> timer_init().
->> 
->> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
->> ---
->> Changes in v2:
->> - Switched to using gd->arch.timer_rate_hz instead of a new config
->>   option (Ahmad Fatoum)
->> - Link to v1: 
->> https://lore.kernel.org/r/20251014-armv8-broken-cntfrq-v1-1-b63f9c69ffcb@disroot.org
->> ---
->>  arch/arm/cpu/armv8/generic_timer.c | 4 ++++
->>  1 file changed, 4 insertions(+)
->> 
->> diff --git a/arch/arm/cpu/armv8/generic_timer.c 
->> b/arch/arm/cpu/armv8/generic_timer.c
->> index 
->> 1de7ec596fc7cbbc3e78a241f163bc0a4fcad6b6..1bc72ed26ca31af8e8e72008ed7885cbde23b076 
->> 100644
->> --- a/arch/arm/cpu/armv8/generic_timer.c
->> +++ b/arch/arm/cpu/armv8/generic_timer.c
->> @@ -19,6 +19,10 @@ DECLARE_GLOBAL_DATA_PTR;
->>  unsigned long notrace get_tbclk(void)
->>  {
->>  	unsigned long cntfrq;
->> +
->> +	if (gd->arch.timer_rate_hz)
->> +		return gd->arch.timer_rate_hz;
->> +
->>  	asm volatile("mrs %0, cntfrq_el0" : "=r" (cntfrq));
->>  	return cntfrq;
->>  }
-> 
-> This would impact coreprimevelte (as it's the only ARM64 platform to 
-> set
-> gd->arch.timer_rate_hz) but as it's also a Samsung platform it's likely
-> in the same broken situation your platforms are.
+On Thu, 09 Oct 2025 15:08:32 +0200, Patrice Chotard wrote:
 
-I guess coreprimevelte is a a bit too old to have that issue. Either 
-way,
-it would be fine as the frequency is set to 26MHz [1], which is the 
-timer
-frequency of that device [2].
-
-[1] 
-https://elixir.bootlin.com/u-boot/v2025.10/source/arch/arm/mach-mmp/board.c#L31
-[2] 
-https://github.com/LegoLivesMatter/android_kernel_samsung_coreprimevelte/blob/android-5.1/arch/arm64/boot/dts/pxa1908.dtsi#L91
-
+>   - Update led_get_by_label()
+>   - Fix led Kconfig
 > 
-> --
-> Tom
+> Patrice Chotard (2):
+>   led: Update led_get_by_label()
+>   led: Add LED dependency for LED_ACTIVITY and LED_BOOT
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+[1/2] led: Update led_get_by_label()
+      commit: d9915318b5d8dd9c31209541c1d99ab0edb339ac
+[2/2] led: Add LED dependency for LED_ACTIVITY and LED_BOOT
+      commit: 827ccb84ff433001b59168d81a59489e339ec2c0
+-- 
+Tom
+
+
