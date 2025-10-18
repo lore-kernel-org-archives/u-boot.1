@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B4F7CCD195
-	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 13:53:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32AE8CCD193
+	for <u-boot@archiver.kernel.org>; Sat, 18 Oct 2025 13:54:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8558C83804;
-	Sat, 18 Oct 2025 15:53:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C718A83869;
+	Sat, 18 Oct 2025 15:53:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BQeuM6Vq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dE/etVNm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B11083796; Sat, 18 Oct 2025 10:34:58 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id B7BF083796; Sat, 18 Oct 2025 10:35:04 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A3A6836D1
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 10:34:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3958D836D1
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 10:35:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-63bad3cd668so5118291a12.3
- for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 01:34:55 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-63c3429bb88so2060528a12.2
+ for <u-boot@lists.denx.de>; Sat, 18 Oct 2025 01:35:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760776495; x=1761381295; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760776501; x=1761381301; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3TN8v39CEynpSs/RWE9EK++GbCKZy07kiS6n5uZksZs=;
- b=BQeuM6VqDfX6dlB+IZ5STdKS4LfWV2ltLvL+ncg7C4mrSVoHZBLty/QijbV2EBWx3g
- IQeDy+0Qd7RgykWB2MIPaBNjWHzQKFOioXEapKULUGouPgtsk9KhRWTKrGSUOx1vJ6TZ
- nObdwFiKNkLL2SQEKkoVftxmn7Pb/nA+F46Vw=
+ bh=GyQWOulrh/Eer1xNnW7Kyg8KGv0rCXH9pL1ZkY7eaSU=;
+ b=dE/etVNmRLHVCCCes719rEjW74AMgHoDjcuxrjiJA9wP2ztPiFL2gTA/9fyEYsC9wD
+ kk2pcRstXFK9tZZQC/hCIUtCpGDmDeqYa2qA47iZZbyEIBxiVycz17RZnt90oKUdrPIW
+ ZUtRr3MLrjviBobFf+5mw5/+EWf325jZFsV/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760776495; x=1761381295;
+ d=1e100.net; s=20230601; t=1760776501; x=1761381301;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3TN8v39CEynpSs/RWE9EK++GbCKZy07kiS6n5uZksZs=;
- b=LlKbbYvBWiUDMZd5ODXygeL4Af8MolNLaL0ld/uhe1t8uqKFa68/TK8+Peh30+AY7V
- oi5K5nUcaOyp79ePkQ3UlrGBtKgPUjabt8ZJ+EYO5hT/eoG6SnchZcq9Bt5mmAtIcQF3
- Sq3jAzrqJCymBMUZA5PqwOr6UBPxEncVFxvWjNmLxdsJZOc4JKtJFCz2aFNLbtX2wAFi
- YntetNVv6/4xn0BO/i0lnI/cY2XmukAlOgQWAFG72Q0oX7bcAfaqZalIjeulsPfT1ht1
- FUNNtoAg/zrUkCkY9fjJgQPKMOT2gPMu8YAwWVs9BHZLDlOZWsoFVyx68bB1n0D1Bv2z
- MzCA==
+ bh=GyQWOulrh/Eer1xNnW7Kyg8KGv0rCXH9pL1ZkY7eaSU=;
+ b=gMTzYV5r16lZlHYsWuIIOI9CuttU1FENRjvpvVxp8ujYrySqwSGozokkxtxaeQ/cqE
+ Qcs0lxaW64Y33G8m3RCG+9wLOAl+rZZbsNa+rs+5IGz4wolalV6j6iNArI2PTBms8BXF
+ mmANWSgfYup+4wW12rTJsXIcoRvqkzEBDgnJVu8iC7517icS9tfa+jGhEEX7BsnzDHzg
+ SWcu8+9AH0j1lXEWRoW/F1m4dJl0nruQwxcti3wEZ3obBtqqy1eNy7qNysE0KXrMfgwT
+ BTv55F+IUL/2gydfGzFFaCL4i4QlO7/4KEEHvCnsop/teEYy5uIyGCamNrR6vvfr4zaU
+ /EMw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWsLu0+vsvN4WPLl6dfAewnMotlkRHyMumLqqIyLujL3uQtbwiQu09ymQxZrrgiXaCjG355NTY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxwobv+rEFhRtZ0AKkTWDvA3SZt5Q6b4dd9fAGOTIkt+Bic9a2K
- b9aWWetRI8S7o5nNI4dq8+ES0IdkB9w7wlmOH0zLVAYIXNpeGQxJad2W/G651sgH92CKD+3BDHW
- L70ryCiaxf7bTbD6XmtAVi7QxMIG4Wwkl13EnQeiA
-X-Gm-Gg: ASbGncuVKrk5eT+SmTK2OX8a5iLIq26+WG7XOxGPyop5ePtWTWdw8fO1g6tGxcb0CEi
- 2VVnItpo5JXuWu2aHC76CgyI8/XtMwqd6FjCm8/IslUrdasiT0IwoYkVd1a/JbIb5vHAiz3ur3f
- /rvrKSCD4o8p6XlQJR86hXh6J9fjW430UNCpWKhv97ndGq9V5vKCz2czA1MD1ueBvtG/KfwL3B9
- qd3EG9Uwo8g5Qbdbvnc/oij4QZvVP9y46YihWlG0wuvd1Hcd5Hx1CgJqxFOpdG8h+Izfhg=
-X-Google-Smtp-Source: AGHT+IEf23NULiuEGhtcXMtzNBMWc1d84uqfm3ZdB4X16YC7xYdHfBCBwbKFKif0s2eGpp3LILi6dEHZ238jYHmtZro=
-X-Received: by 2002:a05:6402:2551:b0:63c:295a:d516 with SMTP id
- 4fb4d7f45d1cf-63c295ad6f1mr5158309a12.27.1760776494770; Sat, 18 Oct 2025
- 01:34:54 -0700 (PDT)
+ AJvYcCXt/xCym7AhcqD7gzZCmb6PhmZOqerzdsXieZ8XbKkb1ZO0v5t0f1YKajRGlgAir1WMKoalt6s=@lists.denx.de
+X-Gm-Message-State: AOJu0YyECWWnzcCG3wN0Jb8YUjx3vR26FfKyRqYpWcqgQMJWHjmFq3wJ
+ cymncMZFcBYiZP/OzklpzPxJ+gu0vcNTBbcZ2PIsQPFGhyh5KYPH8zbG76gdJqPmoDLvcwgpsB5
+ aiRhYf/ma0A9aLpqxd1faL74icskBWSCOPOMCBhRV
+X-Gm-Gg: ASbGncs6Bs+TMwnnpXcV92LMLzVN6WhTor1L9ysriWlHUT9zjV1fGOccuDgqCPUWKqC
+ EEFm2+3p0fqVfx7GfA5xCPd7QQOH8NXcNrVlbC2wFnE6GVJ60Wlei0DXLLS1SvXWSk7tNSBa7pT
+ HjsIxMRNbUDt9JwL0YnfDMajj6ES5wgYzM164Ir2sDjX/M3Lygcjj79N/ZpVaIVsW79XnloIbFk
+ oKJ0QvtKb4rn4tkOOV6HjCiszlmS9EH0OxWwpPIbb7WA7VlygLr7PQXXuY/ThaG9/LLsgs=
+X-Google-Smtp-Source: AGHT+IGWGGbVkCD3XOXmUZtpd0mvxQ85Bf+KNTpUMy0MxPwXGTLHNb9i04xYr36/ycvqCIxLVPMPa77V3aHPjtVYa5s=
+X-Received: by 2002:a05:6402:286:b0:637:c0c3:fbc1 with SMTP id
+ 4fb4d7f45d1cf-63c1f6d3244mr4188243a12.30.1760776501460; Sat, 18 Oct 2025
+ 01:35:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
-In-Reply-To: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+ <20251015-clk_ops-v1-1-5f80f827407e@linaro.org>
+In-Reply-To: <20251015-clk_ops-v1-1-5f80f827407e@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 18 Oct 2025 09:34:42 +0100
-X-Gm-Features: AS18NWCEjgecNko4UjK5__lepbWi8gcDzElH8_F1VwD5CWAa6U0WFzGQfP0xzNQ
-Message-ID: <CAFLszTjnB5zji6JkCpKTHMRZYvcR9hS5rebxZ2_rHj77BWN2VQ@mail.gmail.com>
-Subject: Re: [PATCH 00/24] clk: Remove passing of negative errors through
- unsigned return
+Date: Sat, 18 Oct 2025 09:34:48 +0100
+X-Gm-Features: AS18NWBnLaAN6fZ9FkElI-GXJyJ7IwNjlDP4wjDRZycZoPdxyTeUW7J3w9JNY2U
+Message-ID: <CAFLszTiPBOmz88HXUAM6Qdrth9xm5sgeyRxVO=GV_1GVAFucSA@mail.gmail.com>
+Subject: Re: [PATCH 01/24] clk: meson: Remove negative error returns from
+ clk_get_rate
 To: Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
  Paul Barker <paul@pbarker.dev>, uboot-snps-arc@synopsys.com, 
@@ -147,143 +148,19 @@ Hi Andrew,
 On Wed, 15 Oct 2025 at 15:32, Andrew Goodbody
 <andrew.goodbody@linaro.org> wrote:
 >
-> This series removes the passing of negative errors through the .get_rate
-> function in the clk_ops struct. This function returns an unsigned long.
-> The only value guaranteed to not be a valid clock rate is 0. This will
-> also bring the drivers more in sync with Linux to allow for easier code
-> porting and other maintenance in the future.
-> Another series will address the calling of clk_get_rate and associated
-> error handling.
-
-Some indication of the problem you ran into would be useful here.
-
+> clk_get_rate() returns a ulong so do not attempt to pass negative error
+> codes through it.
 >
 > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 > ---
-> Andrew Goodbody (24):
->       clk: meson: Remove negative error returns from clk_get_rate
->       clk: sifive: Remove negative error returns from clk_get_rate
->       clk: armada-37xx: Remove negative error returns from clk_get_rate
->       clk: thead: th1520-ap: Remove negative error returns from clk_get_rate
->       clk: ccf: Remove negative error returns from clk_get_rate
->       clk: at91: Remove negative error returns from clk_get_rate
->       clk: renesas: Remove negative error returns from clk_get_rate
->       clk: rockchip: Remove negative error returns from clk_get_rate
->       clk: Remove negative error returns from clk_get_rate
->       clk: starfive: Remove negative error returns from clk_get_rate
->       clk: altera: Remove negative error returns from clk_get_rate
->       clk: uniphier: Remove negative error returns from clk_get_rate
->       clk: aspeed: Remove negative error returns from clk_get_rate
->       clk: nuvoton: Remove negative error returns from clk_get_rate
->       clk: exynos: Remove negative error returns from clk_get_rate
->       clk: imx: Remove negative error returns from clk_get_rate
->       clk: ti: Remove negative error returns from clk_get_rate
->       clk: mediatek: Remove negative error returns from clk_get_rate
->       clk: owl: Remove negative error returns from clk_get_rate
->       clk: tegra: Remove negative error returns from clk_get_rate
->       clk: adi: Remove negative error returns from clk_get_rate
->       clk: sophgo: Remove negative error returns from clk_get_rate
->       clk: stm32: Remove negative error returns from clk_get_rate
->       clk: x86: Remove negative error returns from clk_get_rate
->
->  drivers/clk/adi/clk-shared.c             |  2 +-
->  drivers/clk/altera/clk-agilex.c          |  2 +-
->  drivers/clk/altera/clk-agilex5.c         |  2 +-
->  drivers/clk/altera/clk-n5x.c             |  2 +-
->  drivers/clk/aspeed/clk_ast2500.c         |  2 +-
->  drivers/clk/aspeed/clk_ast2600.c         |  2 +-
->  drivers/clk/at91/compat.c                |  6 ++--
->  drivers/clk/clk-hsdk-cgu.c               |  2 +-
->  drivers/clk/clk-uclass.c                 |  4 +--
->  drivers/clk/clk.c                        |  2 +-
->  drivers/clk/clk_fixed_factor.c           |  4 +--
->  drivers/clk/clk_k210.c                   |  6 ++--
->  drivers/clk/clk_sandbox.c                |  4 +--
->  drivers/clk/clk_scmi.c                   |  4 +--
->  drivers/clk/clk_vexpress_osc.c           |  2 +-
->  drivers/clk/clk_zynq.c                   |  4 +--
->  drivers/clk/clk_zynqmp.c                 | 40 ++++++++++-----------
->  drivers/clk/exynos/clk-exynos7420.c      |  2 +-
->  drivers/clk/imx/clk-imx8qm.c             |  6 ++--
->  drivers/clk/imx/clk-imx8qxp.c            |  6 ++--
->  drivers/clk/imx/clk-imxrt1170.c          |  2 +-
->  drivers/clk/imx/clk-pllv3.c              |  2 +-
->  drivers/clk/intel/clk_intel.c            |  2 +-
->  drivers/clk/mediatek/clk-mtk.c           |  2 +-
->  drivers/clk/meson/a1.c                   | 10 +++---
->  drivers/clk/meson/axg.c                  | 10 +++---
->  drivers/clk/meson/g12a.c                 | 36 +++++++++----------
->  drivers/clk/meson/gxbb.c                 | 20 +++++------
->  drivers/clk/mvebu/armada-37xx-periph.c   |  2 +-
->  drivers/clk/mvebu/armada-37xx-tbg.c      |  2 +-
->  drivers/clk/nuvoton/clk_npcm.c           | 10 +++---
->  drivers/clk/owl/clk_owl.c                |  2 +-
->  drivers/clk/renesas/clk-rcar-gen2.c      |  8 ++---
->  drivers/clk/renesas/rzg2l-cpg.c          |  8 ++---
->  drivers/clk/rockchip/clk_px30.c          | 24 ++++++-------
->  drivers/clk/rockchip/clk_rk3036.c        |  2 +-
->  drivers/clk/rockchip/clk_rk3066.c        |  8 ++---
->  drivers/clk/rockchip/clk_rk3128.c        |  6 ++--
->  drivers/clk/rockchip/clk_rk3188.c        |  6 ++--
->  drivers/clk/rockchip/clk_rk322x.c        |  4 +--
->  drivers/clk/rockchip/clk_rk3288.c        |  6 ++--
->  drivers/clk/rockchip/clk_rk3308.c        | 26 +++++++-------
->  drivers/clk/rockchip/clk_rk3328.c        |  6 ++--
->  drivers/clk/rockchip/clk_rk3368.c        |  8 ++---
->  drivers/clk/rockchip/clk_rk3399.c        | 12 +++----
->  drivers/clk/rockchip/clk_rk3528.c        | 20 +++++------
->  drivers/clk/rockchip/clk_rk3568.c        | 62 ++++++++++++++++----------------
->  drivers/clk/rockchip/clk_rk3576.c        | 36 +++++++++----------
->  drivers/clk/rockchip/clk_rk3588.c        | 32 ++++++++---------
->  drivers/clk/rockchip/clk_rv1108.c        |  4 +--
->  drivers/clk/rockchip/clk_rv1126.c        | 52 +++++++++++++--------------
->  drivers/clk/sifive/sifive-prci.c         |  8 ++---
->  drivers/clk/sophgo/clk-cv1800b.c         |  2 +-
->  drivers/clk/starfive/clk-jh7110-pll.c    |  2 +-
->  drivers/clk/stm32/clk-stm32-core.c       |  4 +--
->  drivers/clk/stm32/clk-stm32f.c           |  6 ++--
->  drivers/clk/stm32/clk-stm32h7.c          |  4 +--
->  drivers/clk/tegra/tegra-car-clk.c        |  2 +-
->  drivers/clk/tegra/tegra186-clk.c         |  2 +-
->  drivers/clk/thead/clk-th1520-ap.c        |  2 +-
->  drivers/clk/ti/clk-am3-dpll-x2.c         |  4 +--
->  drivers/clk/ti/clk-divider.c             |  4 +--
->  drivers/clk/ti/clk-mux.c                 |  2 +-
->  drivers/clk/ti/clk-sci.c                 |  2 +-
->  drivers/clk/uniphier/clk-uniphier-core.c |  2 +-
->  65 files changed, 290 insertions(+), 290 deletions(-)
-> ---
-> base-commit: ecdc3872a767fb045be3296d4317ae978a14b022
-> change-id: 20251010-clk_ops-3b7cc9ccd070
->
-> Best regards,
-> --
-> Andrew Goodbody <andrew.goodbody@linaro.org>
+>  drivers/clk/meson/a1.c   | 10 +++++-----
+>  drivers/clk/meson/axg.c  | 10 +++++-----
+>  drivers/clk/meson/g12a.c | 36 ++++++++++++++++++------------------
+>  drivers/clk/meson/gxbb.c | 20 ++++++++++----------
+>  4 files changed, 38 insertions(+), 38 deletions(-)
 >
 
-If you don't return an error, we cannot tell if the operation
-succeeded, or not. U-Boot needs to be deterministic and we need to be
-able to debug errors and detect them at runtime.
-
-We use ulong for the return value as a bit of a compromise, since it
-is inefficient to use 64-bit on a 32-bit machine. Ideally it would be
-long, but some clock rates are 3GHz and it would be confusing to cast
-to ulong before using the value.
-
-An alternative we discussed was to return an integer error with the
-clock rate returned in a parameter, but that seemed less efficient.
-
-With 64-bit machines, there really isn't a problem. Just checking for
-a negative value is good enough, since the clock rate isn't going to
-be 9 exahertz(?). Values between -CONFIG_ERR_PTR_OFFSET and 0 are
-errors and are defined to be so.
-
-If you want clk_get_rate() to work like Linux (suppress / ignore
-errors?), that's fine, but please create a clk_get_rate_err() (or
-similar) which actually returns the correct error, and keep the error
-return on the uclass interface. It is not uncommon to have the uclass
-do some processing on values passed to/from driver. This allows people
-who care to obtain the error.
+Don't change the driver interface...just update the uclass.
 
 Regards,
 Simon
