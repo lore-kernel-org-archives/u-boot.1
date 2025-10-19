@@ -4,136 +4,172 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6E58CCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 04:32:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E16DCCD193
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 04:32:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FF2E83804;
-	Mon, 20 Oct 2025 06:31:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1F42F83849;
+	Mon, 20 Oct 2025 06:31:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=legrand.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ID5XhZmP";
+	dkim=pass (1024-bit key; unprotected) header.d=Legrand.com header.i=@Legrand.com header.b="Rj6MTCAO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F8EC838E3; Sun, 19 Oct 2025 20:29:09 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 932E8831D5; Mon, 20 Oct 2025 00:36:33 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AED43838CE
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 20:29:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DF84807C0
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 00:36:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=legrand.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b4f323cf89bso769324166b.2
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 11:29:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760898546; x=1761503346; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=slG1a2FV7BYhmLZLPqMhyiEapBPBgsoexHX4DXzGNoM=;
- b=ID5XhZmPspVYOQiy25c9eZlEljI6/dRNfI9kywhmUf7AslRoj1z/799unXX6lBOLi1
- rGpJ6z1/QsfJgU3DYk3jvU+DNKiZ8cvLLfFrhWjwPBMoP5eOTQDNv5OOqHYAsnTI8BWl
- b/5UEgOXVDODT0UvKA5Lqo09accdn6b2Rl12k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760898546; x=1761503346;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=slG1a2FV7BYhmLZLPqMhyiEapBPBgsoexHX4DXzGNoM=;
- b=enxZ0a7u++SawJA4OIGysjs3rak2K90NEy0/RrWXtVnfHh1As2sCyq8yvBcniIFxZ9
- Arf0qjyYtCgMIHubs3UseyReywTr3v8LQndfjiSUIyutgVPRR8tY4adt1Mr5433zLJ+w
- NbeMttTP6Mx3sGhRW4w5egD1sWv34sMu1NQouWVUJwHd3N0rK5rfmJJN+wuhaN8Z9Iny
- XOcG7MTxWP3v2zr+sS4xzLyMc3IGPDex3fwczSA40dvT1SzbWWqAKNLV8UfmHwCtlw5U
- BEBrHb1VzbPCjxAvu1GtSLE4gN6k1S5rWCHnUk86XNBR9sXyxouSTSIDXmIxLZTzfRbI
- XlSA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXlrqTQXPAhQHgoKt5bsbtM06T4fu8D4D2Gj32yYnhy8QRvwA+fSLj9QHg7ICifOTNUmrxA9NA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzpIZaGKiVDGlok7bErGDSINcOJ/8aZqmMCMlY/0ZPBed5OcgjZ
- ADec7ZokXVPzy8ZHwyBB/RBg8rueT9qeaqk0NN0kzNEfoqh7FHKFRLZlpZna+6/EQzpy4DDw5Ds
- HmVIPaY+7nu3KrBlRtwIOuBHKop/I2Z1UPjDuSVil
-X-Gm-Gg: ASbGncvtRLkBrbZeYiFML6mGjGrhh0CAIthJwCdZcUDf/NiXq48cnSgYvTeB4HMSyLu
- n9+VzkfbsJV4SSdCudiM08wzBv8Znu+i/1Bwbq1Tl5pxtWg6LAVjMTrakOALltG5TCovMvds0I0
- Kt+j9ceXYwgPjnb6JAj4SGo97nP0WcR27P9Iz0JvwJKChTKcNOAOUPb5JLp5HJ5OTjGwJj/mPOS
- Zy7KtRmDmRe3TJOyb1q0M/MH6I5TLiQhj7eOUieeJ6gfgZ1Fr+1oWNL+g==
-X-Google-Smtp-Source: AGHT+IFwL+//y3KSYPT+eT5k0kOcjAQZT1Hk1Mwgsus+5H5K7X814GhlRwTuAkf+HvS1/+Np8q0MREP/Lany+i72QC0=
-X-Received: by 2002:a05:6402:3552:b0:63c:683c:f9d2 with SMTP id
- 4fb4d7f45d1cf-63c683d021cmr2881961a12.12.1760898545906; Sun, 19 Oct 2025
- 11:29:05 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
- <CAFLszTjnB5zji6JkCpKTHMRZYvcR9hS5rebxZ2_rHj77BWN2VQ@mail.gmail.com>
- <20251018140414.GN6688@bill-the-cat>
- <CAFLszTjE5Gi8-UEjzAciasnWrBwanqDdDW2xX57ykrsYqAGFyQ@mail.gmail.com>
- <CAPVz0n2seuNyeJzhYgintpj0OR9qzutYER8LxxLDkssPtQbevg@mail.gmail.com>
- <20251019162104.GP6688@bill-the-cat>
-In-Reply-To: <20251019162104.GP6688@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Oct 2025 19:28:52 +0100
-X-Gm-Features: AS18NWCMtdV3U__YT7N6Ejrf3zn6ZLGYSzEP5MCZ-f2c5ypFlhCc1wFDqjOK60U
-Message-ID: <CAFLszTi1Zx1i+5U-cGZ78t5vsDsuJX8acDNb6EemgT-L32CpBg@mail.gmail.com>
-Subject: Re: [PATCH 00/24] clk: Remove passing of negative errors through
- unsigned return
-To: Tom Rini <trini@konsulko.com>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- u-boot-amlogic@groups.io, u-boot@lists.denx.de, 
- Paul Barker <paul@pbarker.dev>, uboot-snps-arc@synopsys.com, 
- Dai Okamura <okamura.dai@socionext.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, 
- Joel Stanley <joel@jms.id.au>, 
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- adsp-linux@analog.com, 
- uboot-stm32@st-md-mailman.stormreply.com, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Stefan Roese <stefan.roese@mailbox.org>, Yao Zi <ziyao@disroot.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Lukasz Czechowski <lukasz.czechowski@thaumatec.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Finley Xiao <finley.xiao@rock-chips.com>, Joseph Chen <chenjh@rock-chips.com>, 
- Elaine Zhang <zhangqing@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Peng Fan <peng.fan@nxp.com>, 
- Liviu Dudau <liviu.dudau@foss.arm.com>, Michal Simek <michal.simek@amd.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Ye Li <ye.li@nxp.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Marek Vasut <marex@denx.de>, 
- Alice Guo <alice.guo@nxp.com>, Valentin Caron <valentin.caron@foss.st.com>, 
- Padmarao Begari <padmarao.begari@amd.com>,
- Minda Chen <minda.chen@starfivetech.com>, 
- Hal Feng <hal.feng@starfivetech.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Tien Fong Chee <tien.fong.chee@altera.com>, 
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>, 
- Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>, 
- Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>, 
- Tingting Meng <tingting.meng@altera.com>, 
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Ryan Chen <ryan_chen@aspeedtech.com>, 
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Minkyu Kang <mk7.kang@samsung.com>,
- Heiko Schocher <hs@nabladev.com>, Jonathan Currier <dullfire@yahoo.com>,
- Ryder Lee <ryder.lee@mediatek.com>, 
- Weijie Gao <weijie.gao@mediatek.com>, Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Sam Shih <sam.shih@mediatek.com>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Thierry Reding <treding@nvidia.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <malysagreg@gmail.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>, 
- Arturs Artamonovs <arturs.artamonovs@analog.com>, 
- Gabriel Fernandez <gabriel.fernandez@foss.st.com>,
- Marek Vasut <marek.vasut@mailbox.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
+ spf=pass smtp.mailfrom=ronald.wahl@legrand.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=J2l9pSlb/0kfeu18ucgGjtwF/0r00BomHz5cD8zYblQOPihHlk5EZp5ZWk0JQHnqqlABB8ZHHccy/HUPEt+F1PYYgToKRPkxv4fzqEx3TdrgbKpCjO9DG+bVgb7X+Jap6ILY0vEGjriEqTDDO7ZeP9mMQXU4ZpSnwuWfEgd13K3aSTkh1CX30l5zWlR+28nLCv8mrvgXfd/3dspMLPYDCSFyAuO+Ou51FPrkwB+UgFZW6xLeN+6slZhRtUnj9LKIPRN/lMZI1dwXQMK9g8roUw5TnYQonENl6q+xA7XK4azJw7FYwwtaD0Z/bE9dSkgoOTznaAVjkgQviWWkoPgQTA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0SBKZJCol6893sHQZvAdlFEPw/3Mxnlqx/L9NnpEhBA=;
+ b=mEGwsmEKo9ipb8EXDm6t1ciBhXUidJrmMMuEUuRyz3BLvj1vF+uswbIhJCU+PZZAHoNa7kDEm+DGD5DvMYgRAYsm/5jEmYMpRrtCs63O8YJcOJiYsn5R3P/xpcd85Apng2X0uKSM1YuovQT4UHFGMw3pQN2cOeLwwFGzvLVwQx8d/kPkXihAGYOkAr/NVJnNaObqE16dxjyi9LG1qCEcklt3l9ZK4jfqNjuG0pwRZ3umCPLEbBhWxi1GBJt1lA7Tstvh8m3oqw8hNol/Qc08a5XMc0DLR3hY2dokVvvMUU/p0cxtY17l6GwHDy/oYXnNQRUrpZ62pf+AqMmObNpvnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=legrand.com; dmarc=pass action=none header.from=legrand.com;
+ dkim=pass header.d=legrand.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Legrand.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0SBKZJCol6893sHQZvAdlFEPw/3Mxnlqx/L9NnpEhBA=;
+ b=Rj6MTCAOpdhik60n49I1p18v2BVzVyUKvChlvC0TyCGN4B09ZOlrzK4Xc2auOXrl/70GchEXi07MADKIYaXX3XJBo+knFRMsRpZ8Bg80oqD279wX8Jw+aAR7BwOLzN61HDWb35rtAewozx9f9uuzqCnu1TFGOxQ58E52YwABUdc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=legrand.com;
+Received: from DUZPR06MB9057.eurprd06.prod.outlook.com (2603:10a6:10:4b2::18)
+ by DB9PR06MB7257.eurprd06.prod.outlook.com (2603:10a6:10:21e::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Sun, 19 Oct
+ 2025 22:36:29 +0000
+Received: from DUZPR06MB9057.eurprd06.prod.outlook.com
+ ([fe80::7883:195d:c189:373b]) by DUZPR06MB9057.eurprd06.prod.outlook.com
+ ([fe80::7883:195d:c189:373b%6]) with mapi id 15.20.9228.014; Sun, 19 Oct 2025
+ 22:36:28 +0000
+Message-ID: <b21e8dc3-7ec7-4fcd-a0ef-1d214fc8a1e9@legrand.com>
+Date: Mon, 20 Oct 2025 00:36:26 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] spi: cadence-qspi: Remove cdns,is-dma property handling
+To: E Shattow <e@freeshell.de>, Michal Simek <michal.simek@amd.com>,
+ u-boot@lists.denx.de, git@amd.com
+Cc: Boon Khai Ng <boon.khai.ng@altera.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Naman Trivedi <naman.trivedimanojbhai@amd.com>,
+ Naresh Kumar Ravulapalli <nareshkumar.ravulapalli@altera.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Prasad Kummari <prasad.kummari@amd.com>,
+ Prasanth Babu Mantena <p-mantena@ti.com>,
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+References: <6205c6585589b423692b6ed063506b4c51c04c77.1760006086.git.michal.simek@amd.com>
+ <3949b231-b62f-4fac-a078-bd066940420f@freeshell.de>
+Content-Language: en-US
+From: Ronald Wahl <ronald.wahl@legrand.com>
+In-Reply-To: <3949b231-b62f-4fac-a078-bd066940420f@freeshell.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-ClientProxiedBy: FR4P281CA0407.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:d0::16) To DUZPR06MB9057.eurprd06.prod.outlook.com
+ (2603:10a6:10:4b2::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DUZPR06MB9057:EE_|DB9PR06MB7257:EE_
+X-MS-Office365-Filtering-Correlation-Id: 310e460b-5491-4134-67af-08de0f5ff1c7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7416014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?WFlKSTZuckpZYmpLc0NxOHZwdzBKaXZ0Y08wbEpVZkd5YXFzanVieVZiaTc5?=
+ =?utf-8?B?Z0tTV3I3T0FNeUVQcGNtUytCeGxMSkVqZU5YNCtIb3U4a2MvR1hwZXNtWFJp?=
+ =?utf-8?B?cXliVUswV1U3NTRiV05xbDRaYklPa1VkRHNLekNWSSsrR1JlUlE1RWVwc3BV?=
+ =?utf-8?B?ajRpaDVZeXoyQ3dHL1d2ZHFLTlZVMVJGdzd3VXh2OEhXK0lTUHp0bVQ4eDhQ?=
+ =?utf-8?B?Q0pVb2ZyWmd2QmVvUENaRGdaSVQ5NUkrWkErVEpXVXNsRWRBdytYcHoxcy83?=
+ =?utf-8?B?THhmRnZYRS91QTRaeWlVQktMdmxHYVlVdjkyZzNCeWdTaVZwTkdpRlJDK1Yv?=
+ =?utf-8?B?NUN5N29aNkIzZVBiVXM1VVFBakl6Slg1OXNoMmErRy8zT29NWEZrSHNES2hp?=
+ =?utf-8?B?Y2htVXNQck92NURHaDZCTThIUDk5bk5aVkNwRTlFR05mWHVJamdFQ3Evb2xD?=
+ =?utf-8?B?UUxoZGpKbTJhUEp1dlZaaklJVzlOQzFRRWhGRlVvYUVkUyt3VGZ1elRIR294?=
+ =?utf-8?B?S3pHYTlWTDMrTE9TQXExVDAydVpzQldJRWNYa21jelRRZE1wQXg3N0t6dS9N?=
+ =?utf-8?B?dUNpY1pkaUhDT0lSa2ErMGZrRCt1LzFtcWJSWFluRUQ1V0hTSFF1R3hsTXcx?=
+ =?utf-8?B?UVNZbi9BUEFhTFlMakhUSUdVYXRjaXZ3OGllM1hXUGJtSVhIbTc1QzlOeCtK?=
+ =?utf-8?B?cjViK3ZKVEhLRklscHI1NVNyQkl1OEhtcXV2bzNBeEZwMjhHSTBRU0dpRHpL?=
+ =?utf-8?B?NHk4cXZoaVFhVEhPa20yQXlYcFVsams5eTBvL1B5TmlHcWl5b2FkajBkZ2NL?=
+ =?utf-8?B?QTB2UUN3djZlcXRreWlTZ3lqLzJKaldmbGpSclBJRnJyRFAzRHJRNmNMOFpv?=
+ =?utf-8?B?UWxXTHEwOHRrTkdEc1FhTFBpcU9FcGUwZTliOE1wNndxTVhmbmFXWkQ3ZUlK?=
+ =?utf-8?B?ZWp3RVRpY0FtOTNsRzg4TSszSmxkSVVjVkdLc3Nyem1JUlgvMSs3VnlOYmR6?=
+ =?utf-8?B?WlR0N3Jac3d6aHJTbkR4cHlBYmhGVGZPUHdpOGVaQmVnV3N1ZjdEOEZrMDIy?=
+ =?utf-8?B?Mks3MkNGZHY4UVJLckdyQ2djZlc1S1g1aE94YjlJbXpYTVhiSG9XSFkxK2c3?=
+ =?utf-8?B?SnFQS0ppWHpnTHdMUGpTc3d2eG1XTWJqaFNOY3hvVGhMU3Y3N0dsYVpIbVR2?=
+ =?utf-8?B?cndmcUFmQUg4SmJJbXo3Q0poQlNlL0owaE9sYzhySzhPRFgrdG4walQvSkNt?=
+ =?utf-8?B?dEJLVXcxb0l2YWhPMUVOQnQzL2g1STM1K05jZFJONk1NZVMyN2t2aE51R3Jx?=
+ =?utf-8?B?ZFJrUG1zNnk2Z1NITGhQdmYwb0tnS3g5RE1TWU5BRTBrbjl6WFpzZVorT3pv?=
+ =?utf-8?B?RW9UdGxjalRNaUgzL2I4aC9zaDM0cUt3bmdZMTd2eFZVYjYva1hoUHZiVDRP?=
+ =?utf-8?B?Vk9yVkNmMDlCcmtmMHhGZnQ1Y0NBWEdPOGxhZmxpSXltWGFUcGpFZ0dKejBS?=
+ =?utf-8?B?UEQvQzJ3RVFabVpzdXY3SXFiVzBmUzk5VURMZ0JNWmRJNnZUdEJpTXI3ZWdk?=
+ =?utf-8?B?a0tmSjV3NkJIYUdRS0dkRVdTS1lwWlAzaGZGdUREa1YyMHc1OXFRSEtuZTdz?=
+ =?utf-8?B?ZDhTTjVReURWeDdqOXpqdS9NZFVCZy82ZkVYSmdhYmNmNXlta2JRbzdmaHV1?=
+ =?utf-8?B?YnRJWEduSkJ0cVVDVjQ4WGR5aTZZYmZ3dXNSTm1aOTczTnVuanpCNG1lL1Nj?=
+ =?utf-8?B?ellkT3pidzdSS2lPQ01TdEFlbEFoZTRENjRjU3BGQmRud2RoRjM3Zks3Tzgw?=
+ =?utf-8?B?NWNubG9WL2pUQ0lKc1BFV3B6TEowMnBDL1g4TytvWk94NmNOMjFZclZ1TjZo?=
+ =?utf-8?B?ZVZBdGJlbzBrOU4rbFZyTHFGa3ZNb1hTaFlabzREczJtLzI4bWIvR2JxQWFJ?=
+ =?utf-8?Q?NFGHepTyjga5sU2inrLHPqOrVdOC5SRh?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DUZPR06MB9057.eurprd06.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7416014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?enJnOFZSTUovNlRKQnp5UW1zNk5jcFF3WEpGakxJR28ybi9wODBmbjc5cVRB?=
+ =?utf-8?B?Qlg0azBPNDNBWm9nVk45R2ZxMHU2VkhlNCtpYnhESXVpMHdhb1MrM1NVVmFk?=
+ =?utf-8?B?R21oT2ZkS2tZazBqUXRmWVkrLzJtUUowQ05JL24yOGRkRnJtN0RxK0hZbWpE?=
+ =?utf-8?B?RjRvc3R4YWJVOVhwRkwyd01FQ3RzQU9TSVhKY1IxUStBQlFQcUEvL0llVjg0?=
+ =?utf-8?B?QW1qYSttb2oxemtFa1U0UzNLQUk3T1U4TFFiMDJ0RlYrRjdmcnZmL0JlQWJ5?=
+ =?utf-8?B?OFFQRS85WWRzWU0zdll0VmQxUkhObHF1R0QyeVJaRmF6cDE4VFl3aTV3aU95?=
+ =?utf-8?B?cG9WN3U5L0RHOXJMck5WcXhoRS9DWktuOVNQbXVka3BRMVFBdkhreElmV1Jm?=
+ =?utf-8?B?YUc0MDZEc1c3NEEybG5ZVzZlb1pST0VrVEVnL0JjMklhWXNPTTBEbE8xSTRP?=
+ =?utf-8?B?ekJJelNMNlhnSDRBSWlLZWg1YXQxZDJYU0h0S0c0V0sxLzR3TjBsVUFzVVFn?=
+ =?utf-8?B?UkxhaG11K215a3J3TkF1QnFEQ2FJZDBkRC9yZzdmeXVDaWZYY0VoUlNScEoz?=
+ =?utf-8?B?VFY1YWNxS1orTHdDcWRrWEZJU0dnWXllQk4wMXVtdHpYeEc1VURKb0g1ckNi?=
+ =?utf-8?B?cWRRdTRqWlZ0N0RTa2gwY2MvUUJHbHdZRFlhWDRvVGNQRUxGWmdCUU5vdnNr?=
+ =?utf-8?B?MDFVNTR6ajAzd3Q1aE1mSVY4Ny9pdXpEaDEvUmlDdk9VdGhLbHZpUEVCNm9o?=
+ =?utf-8?B?WUtCck0vL1Q5WWxqcHVLTVdKMmJCRjN1a3QyL0cwUnlRNFViMXVQUXFZMlNU?=
+ =?utf-8?B?OVpJU1hzdUsrYVpkR3N2TWlQK0VCeC9ZY0dqTkppcG9PZnJUbW50VHF6OUtE?=
+ =?utf-8?B?bDJXaVVRK3E2UDJ0T1RaOGJSc1UrUGhwUHRIRlB0WG9nMW9kT0hFanN0OWpR?=
+ =?utf-8?B?TU5pS05mR1FsM24wWTh3RkxEWDNobkVZM3NFa2ZhV2RCVWlrM0pDRjZoakMr?=
+ =?utf-8?B?VU40T0F6VTZQdEo3Q0VPMkZsZS9IQm9NK0E0ZCtWbnh0aHFDS2J1eU13amF3?=
+ =?utf-8?B?UE9Dbm1TQm1uMDZEZkpHVTBMQnlMWmJFVE1FSnc3Y1YyalFFeng3c1JGNWNS?=
+ =?utf-8?B?MWhaTlpjN3ZNSWNMb2FNSXZRNUcrTFRrWVNRbWd6Z01RQ1V3ckFPM0RPV3Nh?=
+ =?utf-8?B?YTFkS0pyYjJtRWx2SllYeURydklzTnMxeTMrZTlscUJscFNVc1l1ZHZyYVY0?=
+ =?utf-8?B?YlBlL3N5ZEFoUU5PMEZJdHAxdzRIYlJ2cEpCb1M3RUNveHBDeUxQT0xFQ1p6?=
+ =?utf-8?B?V2lwTHM4SkxHQ2NzNUpWZmhMREdLOXZ0UllLUDZrL2Nqc3NqVDJORC9oUmdo?=
+ =?utf-8?B?SE0yeWlEeVMyb2phdFlpVEhQbTIrS3ltVmpkbFdIZWVhaDJYY1Jtb2JpU2s2?=
+ =?utf-8?B?Rm5ZT3F6KzJUaVdwa1NOVTZFc0pHSDRGMEpzQzF6TVZIWnZ2cW1RMUMwcUwv?=
+ =?utf-8?B?bmVHR2kxQ2Fpb1l1c2NiWkhCSFVVTTYwSlFjTGk2OHZFZXZyd3lUQkViY1Q4?=
+ =?utf-8?B?OWx0U1pzbzltdWtMR2h0c0UySEdwUWpZSGk0c1hwM21aR3dPTFpmeEd1VUFr?=
+ =?utf-8?B?cmFPNU0vcGw3U1I0bzM0NjNKdDVVc2VDb1Qrc0dDcGJwYzhjQmdQZDgzNldL?=
+ =?utf-8?B?SXp6alBkaEk3MlFDS0wxVy9pWkFNVDc0SmM0Q2VmMm1MYmdhTzJ1ZFBqOTBT?=
+ =?utf-8?B?N3VEWDR6Vk5MQnB0ZDVmRkFxZlNlUWtlbjJzd2MzSEtrckJWTFp1YjE0Yzhk?=
+ =?utf-8?B?djNBYndHTXZxMTlTMHlQajlwNlMxSlpkMDZ0ZnYxWURTa3pGWUVwTXJwNjA5?=
+ =?utf-8?B?U0IxeDZSSVFsSS81aVV3N0s4MVpYR3lsR2Fmb2svNnFlOFlTOFdFQ2haall2?=
+ =?utf-8?B?dW9Nanlrc0RJQ1ZCYUd4anQvU1B0RkVSQXdhS1VBemN5TndQbjc1eDM2SHJX?=
+ =?utf-8?B?ZFNIVEpMRVg3TUl6L0p3MXVJdll6SUFEc2t1NGpjT2hRYnB6dkVRL1JPaGNp?=
+ =?utf-8?B?V2xvSkl6NmwyVThxK1cybStzeWlpdHlKK3NxVUk0V3V5bjhIcHkyY01UclRW?=
+ =?utf-8?B?a2xLRVcxejVXMm8zeTNhQVkweHFBcVNCNDhGNjRRRUVTSFNaN0N0aEY3VFZs?=
+ =?utf-8?B?bmc9PQ==?=
+X-OriginatorOrg: Legrand.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 310e460b-5491-4134-67af-08de0f5ff1c7
+X-MS-Exchange-CrossTenant-AuthSource: DUZPR06MB9057.eurprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2025 22:36:28.7389 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 199686b5-bef4-4960-8786-7a6b1888fee3
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Wt+Nl99PG97kWie2iHlDbtHBdsZZ1Me2R0XLYXDj1nvJ9/PV0vkjNjmfl7t0tfm3lxXIy7YdJR8VgoROq2X/Zw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR06MB7257
 X-Mailman-Approved-At: Mon, 20 Oct 2025 06:31:54 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -151,255 +187,316 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Sun, 19 Oct 2025 at 17:21, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Oct 19, 2025 at 04:45:24PM +0300, Svyatoslav Ryhel wrote:
-> > =D0=BD=D0=B4, 19 =D0=B6=D0=BE=D0=B2=D1=82. 2025=E2=80=AF=D1=80. =D0=BE =
-16:05 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > Hi Tom, Andrew,
-> > >
-> > > On Sat, 18 Oct 2025 at 15:04, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Oct 18, 2025 at 09:34:42AM +0100, Simon Glass wrote:
-> > > > > Hi Andrew,
-> > > > >
-> > > > > On Wed, 15 Oct 2025 at 15:32, Andrew Goodbody
-> > > > > <andrew.goodbody@linaro.org> wrote:
-> > > > > >
-> > > > > > This series removes the passing of negative errors through the =
-.get_rate
-> > > > > > function in the clk_ops struct. This function returns an unsign=
-ed long.
-> > > > > > The only value guaranteed to not be a valid clock rate is 0. Th=
-is will
-> > > > > > also bring the drivers more in sync with Linux to allow for eas=
-ier code
-> > > > > > porting and other maintenance in the future.
-> > > > > > Another series will address the calling of clk_get_rate and ass=
-ociated
-> > > > > > error handling.
-> > > > >
-> > > > > Some indication of the problem you ran into would be useful here.
-> > > >
-> > > > The problem statement is in the paragraph you're quoting. The numer=
-ical
-> > > > value of -ENOENT is a valid clock rate.
-> > >
-> > > No, I mean a problem with a board, or something like that. We are
-> > > talking here about not being able to return a valid clock rate betwee=
-n
-> > > 4294967040 and 4294967295, which is only even a theoretical problem o=
-n
-> > > 32-bit machines. So I think it is reasonable to include a motivation.
-> > >
-> > >
-> > > >
-> > > > > > Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-> > > > > > ---
-> > > > > > Andrew Goodbody (24):
-> > > > > >       clk: meson: Remove negative error returns from clk_get_ra=
-te
-> > > > > >       clk: sifive: Remove negative error returns from clk_get_r=
-ate
-> > > > > >       clk: armada-37xx: Remove negative error returns from clk_=
-get_rate
-> > > > > >       clk: thead: th1520-ap: Remove negative error returns from=
- clk_get_rate
-> > > > > >       clk: ccf: Remove negative error returns from clk_get_rate
-> > > > > >       clk: at91: Remove negative error returns from clk_get_rat=
-e
-> > > > > >       clk: renesas: Remove negative error returns from clk_get_=
-rate
-> > > > > >       clk: rockchip: Remove negative error returns from clk_get=
-_rate
-> > > > > >       clk: Remove negative error returns from clk_get_rate
-> > > > > >       clk: starfive: Remove negative error returns from clk_get=
-_rate
-> > > > > >       clk: altera: Remove negative error returns from clk_get_r=
-ate
-> > > > > >       clk: uniphier: Remove negative error returns from clk_get=
-_rate
-> > > > > >       clk: aspeed: Remove negative error returns from clk_get_r=
-ate
-> > > > > >       clk: nuvoton: Remove negative error returns from clk_get_=
-rate
-> > > > > >       clk: exynos: Remove negative error returns from clk_get_r=
-ate
-> > > > > >       clk: imx: Remove negative error returns from clk_get_rate
-> > > > > >       clk: ti: Remove negative error returns from clk_get_rate
-> > > > > >       clk: mediatek: Remove negative error returns from clk_get=
-_rate
-> > > > > >       clk: owl: Remove negative error returns from clk_get_rate
-> > > > > >       clk: tegra: Remove negative error returns from clk_get_ra=
-te
-> > > > > >       clk: adi: Remove negative error returns from clk_get_rate
-> > > > > >       clk: sophgo: Remove negative error returns from clk_get_r=
-ate
-> > > > > >       clk: stm32: Remove negative error returns from clk_get_ra=
-te
-> > > > > >       clk: x86: Remove negative error returns from clk_get_rate
-> > > > > >
-> > > > > >  drivers/clk/adi/clk-shared.c             |  2 +-
-> > > > > >  drivers/clk/altera/clk-agilex.c          |  2 +-
-> > > > > >  drivers/clk/altera/clk-agilex5.c         |  2 +-
-> > > > > >  drivers/clk/altera/clk-n5x.c             |  2 +-
-> > > > > >  drivers/clk/aspeed/clk_ast2500.c         |  2 +-
-> > > > > >  drivers/clk/aspeed/clk_ast2600.c         |  2 +-
-> > > > > >  drivers/clk/at91/compat.c                |  6 ++--
-> > > > > >  drivers/clk/clk-hsdk-cgu.c               |  2 +-
-> > > > > >  drivers/clk/clk-uclass.c                 |  4 +--
-> > > > > >  drivers/clk/clk.c                        |  2 +-
-> > > > > >  drivers/clk/clk_fixed_factor.c           |  4 +--
-> > > > > >  drivers/clk/clk_k210.c                   |  6 ++--
-> > > > > >  drivers/clk/clk_sandbox.c                |  4 +--
-> > > > > >  drivers/clk/clk_scmi.c                   |  4 +--
-> > > > > >  drivers/clk/clk_vexpress_osc.c           |  2 +-
-> > > > > >  drivers/clk/clk_zynq.c                   |  4 +--
-> > > > > >  drivers/clk/clk_zynqmp.c                 | 40 ++++++++++------=
------
-> > > > > >  drivers/clk/exynos/clk-exynos7420.c      |  2 +-
-> > > > > >  drivers/clk/imx/clk-imx8qm.c             |  6 ++--
-> > > > > >  drivers/clk/imx/clk-imx8qxp.c            |  6 ++--
-> > > > > >  drivers/clk/imx/clk-imxrt1170.c          |  2 +-
-> > > > > >  drivers/clk/imx/clk-pllv3.c              |  2 +-
-> > > > > >  drivers/clk/intel/clk_intel.c            |  2 +-
-> > > > > >  drivers/clk/mediatek/clk-mtk.c           |  2 +-
-> > > > > >  drivers/clk/meson/a1.c                   | 10 +++---
-> > > > > >  drivers/clk/meson/axg.c                  | 10 +++---
-> > > > > >  drivers/clk/meson/g12a.c                 | 36 +++++++++-------=
----
-> > > > > >  drivers/clk/meson/gxbb.c                 | 20 +++++------
-> > > > > >  drivers/clk/mvebu/armada-37xx-periph.c   |  2 +-
-> > > > > >  drivers/clk/mvebu/armada-37xx-tbg.c      |  2 +-
-> > > > > >  drivers/clk/nuvoton/clk_npcm.c           | 10 +++---
-> > > > > >  drivers/clk/owl/clk_owl.c                |  2 +-
-> > > > > >  drivers/clk/renesas/clk-rcar-gen2.c      |  8 ++---
-> > > > > >  drivers/clk/renesas/rzg2l-cpg.c          |  8 ++---
-> > > > > >  drivers/clk/rockchip/clk_px30.c          | 24 ++++++-------
-> > > > > >  drivers/clk/rockchip/clk_rk3036.c        |  2 +-
-> > > > > >  drivers/clk/rockchip/clk_rk3066.c        |  8 ++---
-> > > > > >  drivers/clk/rockchip/clk_rk3128.c        |  6 ++--
-> > > > > >  drivers/clk/rockchip/clk_rk3188.c        |  6 ++--
-> > > > > >  drivers/clk/rockchip/clk_rk322x.c        |  4 +--
-> > > > > >  drivers/clk/rockchip/clk_rk3288.c        |  6 ++--
-> > > > > >  drivers/clk/rockchip/clk_rk3308.c        | 26 +++++++-------
-> > > > > >  drivers/clk/rockchip/clk_rk3328.c        |  6 ++--
-> > > > > >  drivers/clk/rockchip/clk_rk3368.c        |  8 ++---
-> > > > > >  drivers/clk/rockchip/clk_rk3399.c        | 12 +++----
-> > > > > >  drivers/clk/rockchip/clk_rk3528.c        | 20 +++++------
-> > > > > >  drivers/clk/rockchip/clk_rk3568.c        | 62 ++++++++++++++++=
-----------------
-> > > > > >  drivers/clk/rockchip/clk_rk3576.c        | 36 +++++++++-------=
----
-> > > > > >  drivers/clk/rockchip/clk_rk3588.c        | 32 ++++++++--------=
--
-> > > > > >  drivers/clk/rockchip/clk_rv1108.c        |  4 +--
-> > > > > >  drivers/clk/rockchip/clk_rv1126.c        | 52 +++++++++++++---=
------------
-> > > > > >  drivers/clk/sifive/sifive-prci.c         |  8 ++---
-> > > > > >  drivers/clk/sophgo/clk-cv1800b.c         |  2 +-
-> > > > > >  drivers/clk/starfive/clk-jh7110-pll.c    |  2 +-
-> > > > > >  drivers/clk/stm32/clk-stm32-core.c       |  4 +--
-> > > > > >  drivers/clk/stm32/clk-stm32f.c           |  6 ++--
-> > > > > >  drivers/clk/stm32/clk-stm32h7.c          |  4 +--
-> > > > > >  drivers/clk/tegra/tegra-car-clk.c        |  2 +-
-> > > > > >  drivers/clk/tegra/tegra186-clk.c         |  2 +-
-> > > > > >  drivers/clk/thead/clk-th1520-ap.c        |  2 +-
-> > > > > >  drivers/clk/ti/clk-am3-dpll-x2.c         |  4 +--
-> > > > > >  drivers/clk/ti/clk-divider.c             |  4 +--
-> > > > > >  drivers/clk/ti/clk-mux.c                 |  2 +-
-> > > > > >  drivers/clk/ti/clk-sci.c                 |  2 +-
-> > > > > >  drivers/clk/uniphier/clk-uniphier-core.c |  2 +-
-> > > > > >  65 files changed, 290 insertions(+), 290 deletions(-)
-> > > > > > ---
-> > > > > > base-commit: ecdc3872a767fb045be3296d4317ae978a14b022
-> > > > > > change-id: 20251010-clk_ops-3b7cc9ccd070
-> > > > > >
-> > > > > > Best regards,
-> > > > > > --
-> > > > > > Andrew Goodbody <andrew.goodbody@linaro.org>
-> > > > > >
-> > > > >
-> > > > > If you don't return an error, we cannot tell if the operation
-> > > > > succeeded, or not. U-Boot needs to be deterministic and we need t=
-o be
-> > > > > able to debug errors and detect them at runtime.
-> > > > >
-> > > > > We use ulong for the return value as a bit of a compromise, since=
+On 20.10.25 00:03, E Shattow wrote:
+> On 10/9/25 03:34, Michal Simek wrote:
+>> Remove cdns,is-dma DT property handling. Property is not the part of DT
+>> binding and it is also hardcoded to value 1 in all DTs that's why remove=
  it
-> > > > > is inefficient to use 64-bit on a 32-bit machine. Ideally it woul=
-d be
-> > > > > long, but some clock rates are 3GHz and it would be confusing to =
-cast
-> > > > > to ulong before using the value.
-> > > > >
-> > > > > An alternative we discussed was to return an integer error with t=
-he
-> > > > > clock rate returned in a parameter, but that seemed less efficien=
-t.
-> > > > >
-> > > > > With 64-bit machines, there really isn't a problem. Just checking=
- for
-> > > > > a negative value is good enough, since the clock rate isn't going=
- to
-> > > > > be 9 exahertz(?). Values between -CONFIG_ERR_PTR_OFFSET and 0 are
-> > > > > errors and are defined to be so.
-> > > > >
-> > > > > If you want clk_get_rate() to work like Linux (suppress / ignore
-> > > > > errors?), that's fine, but please create a clk_get_rate_err() (or
-> > > > > similar) which actually returns the correct error, and keep the e=
-rror
-> > > > > return on the uclass interface. It is not uncommon to have the uc=
-lass
-> > > > > do some processing on values passed to/from driver. This allows p=
-eople
-> > > > > who care to obtain the error.
-> > > >
-> > > > This is moving things in the right direction of having the error
-> > > > reporting and handling done where it can be done correctly. If ther=
-e's
-> > > > further parts of the Linux kernel-like API we need, we can take tho=
-se
-> > > > next.
-> > >
-> > > Here is part of the patch:
-> > >
-> > > --- a/drivers/clk/meson/a1.c
-> > > +++ b/drivers/clk/meson/a1.c
-> > > @@ -359,7 +359,7 @@ static ulong meson_div_get_rate(struct clk *clk,
-> > > unsigned long id)
-> > >
-> > >         info =3D meson_clk_get_info(clk, id, MESON_CLK_DIV);
-> > >         if (IS_ERR(info))
-> > > -               return PTR_ERR(info);
-> > > +               return 0;
-> > >
-> > > I don't see anything in that fragment other than just ignoring errors=
+>> because none is also testing value 0.
+>> If there is any use case when this configuration should be supported thi=
+s
+>> patch can be reverted.
+>>
+>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+>> ---
+>>
+>> Changes in v2:
+>> - Remove other functions which are reported as unused by gitlab CI.
+>>
+>> v1: https://lore.kernel.org/r/c6a5b4bfe565668eb3299d5c5a5548a2163b129a.1=
+758786568.git.michal.simek@amd.com>>> ---
+>>   arch/arm/dts/versal-mini-ospi.dtsi     |   1 -
+>>   arch/arm/dts/versal-net-mini-ospi.dtsi |   1 -
+>>   drivers/spi/cadence_qspi.c             |   8 +-
+>>   drivers/spi/cadence_qspi.h             |   5 --
+>>   drivers/spi/cadence_qspi_apb.c         | 119 -------------------------
+>>   5 files changed, 1 insertion(+), 133 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/versal-mini-ospi.dtsi b/arch/arm/dts/versal-mi=
+ni-ospi.dtsi
+>> index eec2a08e7c70..6991f6a51db0 100644
+>> --- a/arch/arm/dts/versal-mini-ospi.dtsi
+>> +++ b/arch/arm/dts/versal-mini-ospi.dtsi
+>> @@ -38,7 +38,6 @@
+>>                num-cs =3D <1>;
+>>                cdns,fifo-depth =3D <256>;
+>>                cdns,fifo-width =3D <4>;
+>> -             cdns,is-dma =3D <1>;
+>>                cdns,trigger-address =3D <0xc0000000>;
+>>                #address-cells =3D <1>;
+>>                #size-cells =3D <0>;
+>> diff --git a/arch/arm/dts/versal-net-mini-ospi.dtsi b/arch/arm/dts/versa=
+l-net-mini-ospi.dtsi
+>> index 1c94b352dc97..d2d5ec8e5cbf 100644
+>> --- a/arch/arm/dts/versal-net-mini-ospi.dtsi
+>> +++ b/arch/arm/dts/versal-net-mini-ospi.dtsi
+>> @@ -52,7 +52,6 @@
+>>                num-cs =3D <1>;
+>>                cdns,fifo-depth =3D <256>;
+>>                cdns,fifo-width =3D <4>;
+>> -             cdns,is-dma =3D <1>;
+>>                cdns,is-stig-pgm =3D <1>;
+>>                cdns,trigger-address =3D <0xc0000000>;
+>>                #address-cells =3D <1>;
+>> diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
+>> index 599596f9f087..849bd930edf0 100644
+>> --- a/drivers/spi/cadence_qspi.c
+>> +++ b/drivers/spi/cadence_qspi.c
+>> @@ -210,7 +210,6 @@ static int cadence_spi_probe(struct udevice *bus)
+>>
+>>        priv->regbase           =3D plat->regbase;
+>>        priv->ahbbase           =3D plat->ahbbase;
+>> -     priv->is_dma            =3D plat->is_dma;
+>>        priv->is_decoded_cs     =3D plat->is_decoded_cs;
+>>        priv->fifo_depth        =3D plat->fifo_depth;
+>>        priv->fifo_width        =3D plat->fifo_width;
+>> @@ -348,10 +347,7 @@ static int cadence_spi_mem_exec_op(struct spi_slave=
+ *spi,
+>>        case CQSPI_READ:
+>>                err =3D cadence_qspi_apb_read_setup(priv, op);
+>>                if (!err) {
+>> -                     if (priv->is_dma)
+>> -                             err =3D cadence_qspi_apb_dma_read(priv, op=
+);
+>> -                     else
+>> -                             err =3D cadence_qspi_apb_read_execute(priv=
+, op);
+>> +                     err =3D cadence_qspi_apb_dma_read(priv, op);
+>>                }
+>>                break;
+>>        case CQSPI_WRITE:
+>> @@ -412,8 +408,6 @@ static int cadence_spi_of_to_plat(struct udevice *bu=
+s)
+>>        if (plat->ahbsize >=3D SZ_8M)
+>>                priv->use_dac_mode =3D true;
+>>
+>> -     plat->is_dma =3D dev_read_bool(bus, "cdns,is-dma");
+>> -
+>>        /* All other parameters are embedded in the child node */
+>>        subnode =3D cadence_qspi_get_subnode(bus);
+>>        if (!ofnode_valid(subnode)) {
+>> diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
+>> index 879e7f8dbfb8..10c4ad14cc05 100644
+>> --- a/drivers/spi/cadence_qspi.h
+>> +++ b/drivers/spi/cadence_qspi.h
+>> @@ -223,8 +223,6 @@ struct cadence_spi_plat {
+>>        u32             tchsh_ns;
+>>        u32             tslch_ns;
+>>        u32             quirks;
+>> -
+>> -     bool            is_dma;
+>>   };
+>>
+>>   struct cadence_spi_priv {
+>> @@ -261,7 +259,6 @@ struct cadence_spi_priv {
+>>        bool            ddr_init;
+>>        bool            is_decoded_cs;
+>>        bool            use_dac_mode;
+>> -     bool            is_dma;
+>>
+>>        /* Transaction protocol parameters. */
+>>        u8              inst_width;
+>> @@ -292,8 +289,6 @@ int cadence_qspi_apb_command_write(struct cadence_sp=
+i_priv *priv,
+>>
+>>   int cadence_qspi_apb_read_setup(struct cadence_spi_priv *priv,
+>>                                const struct spi_mem_op *op);
+>> -int cadence_qspi_apb_read_execute(struct cadence_spi_priv *priv,
+>> -                               const struct spi_mem_op *op);
+>>   int cadence_qspi_apb_write_setup(struct cadence_spi_priv *priv,
+>>                                 const struct spi_mem_op *op);
+>>   int cadence_qspi_apb_write_execute(struct cadence_spi_priv *priv,
+>> diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_a=
+pb.c
+>> index 4696c09f754b..58be017720bc 100644
+>> --- a/drivers/spi/cadence_qspi_apb.c
+>> +++ b/drivers/spi/cadence_qspi_apb.c
+>> @@ -667,125 +667,6 @@ int cadence_qspi_apb_read_setup(struct cadence_spi=
+_priv *priv,
+>>        return 0;
+>>   }
+>>
+>> -static u32 cadence_qspi_get_rd_sram_level(struct cadence_spi_priv *priv=
+)
+>> -{
+>> -     u32 reg =3D readl(priv->regbase + CQSPI_REG_SDRAMLEVEL);
+>> -     reg >>=3D CQSPI_REG_SDRAMLEVEL_RD_LSB;
+>> -     return reg & CQSPI_REG_SDRAMLEVEL_RD_MASK;
+>> -}
+>> -
+>> -static int cadence_qspi_wait_for_data(struct cadence_spi_priv *priv)
+>> -{
+>> -     unsigned int timeout =3D 10000;
+>> -     u32 reg;
+>> -
+>> -     while (timeout--) {
+>> -             reg =3D cadence_qspi_get_rd_sram_level(priv);
+>> -             if (reg)
+>> -                     return reg;
+>> -             udelay(1);
+>> -     }
+>> -
+>> -     return -ETIMEDOUT;
+>> -}
+>> -
+>> -static int
+>> -cadence_qspi_apb_indirect_read_execute(struct cadence_spi_priv *priv,
+>> -                                    unsigned int n_rx, u8 *rxbuf)
+>> -{
+>> -     unsigned int remaining =3D n_rx;
+>> -     unsigned int bytes_to_read =3D 0;
+>> -     int ret;
+>> -
+>> -     writel(n_rx, priv->regbase + CQSPI_REG_INDIRECTRDBYTES);
+>> -
+>> -     /* Start the indirect read transfer */
+>> -     writel(CQSPI_REG_INDIRECTRD_START,
+>> -            priv->regbase + CQSPI_REG_INDIRECTRD);
+>> -
+>> -     while (remaining > 0) {
+>> -             ret =3D cadence_qspi_wait_for_data(priv);
+>> -             if (ret < 0) {
+>> -                     printf("Indirect write timed out (%i)\n", ret);
+>> -                     goto failrd;
+>> -             }
+>> -
+>> -             bytes_to_read =3D ret;
+>> -
+>> -             while (bytes_to_read !=3D 0) {
+>> -                     bytes_to_read *=3D priv->fifo_width;
+>> -                     bytes_to_read =3D bytes_to_read > remaining ?
+>> -                                     remaining : bytes_to_read;
+>> -                     /*
+>> -                      * Handle non-4-byte aligned access to avoid
+>> -                      * data abort.
+>> -                      */
+>> -                     if (((uintptr_t)rxbuf % 4) || (bytes_to_read % 4))
+>> -                             readsb(priv->ahbbase, rxbuf, bytes_to_read=
+);
+>> -                     else
+>> -                             readsl(priv->ahbbase, rxbuf,
+>> -                                    bytes_to_read >> 2);
+>> -                     rxbuf +=3D bytes_to_read;
+>> -                     remaining -=3D bytes_to_read;
+>> -                     bytes_to_read =3D cadence_qspi_get_rd_sram_level(p=
+riv);
+>> -             }
+>> -     }
+>> -
+>> -     /* Check indirect done status */
+>> -     ret =3D wait_for_bit_le32(priv->regbase + CQSPI_REG_INDIRECTRD,
+>> -                             CQSPI_REG_INDIRECTRD_DONE, 1, 10, 0);
+>> -     if (ret) {
+>> -             printf("Indirect read completion error (%i)\n", ret);
+>> -             goto failrd;
+>> -     }
+>> -
+>> -     /* Clear indirect completion status */
+>> -     writel(CQSPI_REG_INDIRECTRD_DONE,
+>> -            priv->regbase + CQSPI_REG_INDIRECTRD);
+>> -
+>> -     /* Check indirect done status */
+>> -     ret =3D wait_for_bit_le32(priv->regbase + CQSPI_REG_INDIRECTRD,
+>> -                             CQSPI_REG_INDIRECTRD_DONE, 0, 10, 0);
+>> -     if (ret) {
+>> -             printf("Indirect read clear completion error (%i)\n", ret)=
+;
+>> -             goto failrd;
+>> -     }
+>> -
+>> -     /* Wait til QSPI is idle */
+>> -     if (!cadence_qspi_wait_idle(priv->regbase))
+>> -             return -EIO;
+>> -
+>> -     return 0;
+>> -
+>> -failrd:
+>> -     /* Cancel the indirect read */
+>> -     writel(CQSPI_REG_INDIRECTRD_CANCEL,
+>> -            priv->regbase + CQSPI_REG_INDIRECTRD);
+>> -     return ret;
+>> -}
+>> -
+>> -int cadence_qspi_apb_read_execute(struct cadence_spi_priv *priv,
+>> -                               const struct spi_mem_op *op)
+>> -{
+>> -     u64 from =3D op->addr.val;
+>> -     void *buf =3D op->data.buf.in;
+>> -     size_t len =3D op->data.nbytes;
+>> -
+>> -     cadence_qspi_apb_enable_linear_mode(true);
+>> -
+>> -     if (priv->use_dac_mode && (from + len < priv->ahbsize)) {
+>> -             if (len < 256 ||
+>> -                 dma_memcpy(buf, priv->ahbbase + from, len) < 0) {
+>> -                     memcpy_fromio(buf, priv->ahbbase + from, len);
+>> -             }
+>> -             if (!cadence_qspi_wait_idle(priv->regbase))
+>> -                     return -EIO;
+>> -             return 0;
+>> -     }
+>> -
+>> -     return cadence_qspi_apb_indirect_read_execute(priv, len, buf);
+>> -}
+>> -
+>>   /* Opcode + Address (3/4 bytes) */
+>>   int cadence_qspi_apb_write_setup(struct cadence_spi_priv *priv,
+>>                                 const struct spi_mem_op *op)
+>
+> Your patch results in corrupted SPI NOR flash writing from U-Boot on
+> starfive_visionfive2_defconfig target board Pine64 Star64:
+>
+> a040578d8270ed8788d7663808ea63ce5ffd7840 is the first bad commit
+> commit a040578d8270ed8788d7663808ea63ce5ffd7840
+> Author: Michal Simek <michal.simek@amd.com>
+> Date:   Thu Oct 9 12:34:48 2025 +0200
+>
+>      spi: cadence-qspi: Remove cdns,is-dma property handling
+>
+> Steps to reproduce with Star64:
+>
+> 1). Set JH-7110 SoC RGPIO configured for UART BootROM loader mode
+> 2). Power on and Transfer U-Boot SPL by XMODEM as prompted by BootROM
+> 3). Transfer U-Boot main by YMODEM from U-Boot SPL prompt
+> 4). Having `(cd $HOME/build/u-boot && python3 -m http.server 6789)` or
+> similar for serving U-Boot SPL and U-Boot Main to save some time with
+> UART transfer:
+> 4a). wget $loadaddr http://host:6789/spl/u-boot-spl.bin.normal.out && sf
+> update $loadaddr 0 $filesize
+> 4b). wget $loadaddr http://host:6789/u-boot.itb && sf update $loadaddr
+> 100000 $filesize
+>
+> Repeat steps 4a and 4b, note that each time all bytes are written and no
+> bytes are skipped. Written data is wrong and device unsuccessfully boots
+> in SPI NOR flash BootROM loader configuration showing wrong information
+> to output.
+>
+> Please follow up with your analysis of why these changes have this effect=
 .
-> > >
-> >
-> > I agree with Simon. This patchset may cause a lot of problems for all
-> > boards it changes in case clk ops fail, since it silences all error
-> > returns. Any clock error will be untrackable unless you know where and
-> > what to look specifically.
->
-> I think it's worth going back to the original thread:
-> https://lore.kernel.org/u-boot/f5c94319-8ef8-459d-88b2-836702779cfb@linar=
-o.org/
 
-Specifically Heinrich's response which seems to make sense to me -
-i.e. IS_ERR_VALUE(). A series that introduced that everywhere would
-get my vote :-)
+I guess this is because the committer didn't take into account that when
+a DT did not mention the property then it is 0 (false).
 
->
-> As part of the problem is that what we have today does not work. This is
-> why I'm think it's OK to first return 0, always, as the invalid clock
-> rate and then re-introduce error checking that can work.
+I assume TI K3 hardware is affected as well. So I think the patch must
+be reverted.
 
-OK, but actually what doesn't work today? Which board is broken? Is
-the problem that no one checks the errors?
+- ron
 
-- Simon
+________________________________
+
+Ce message, ainsi que tous les fichiers joints =C3=A0 ce message, peuvent c=
+ontenir des informations sensibles et/ ou confidentielles ne devant pas =C3=
+=AAtre divulgu=C3=A9es. Si vous n'=C3=AAtes pas le destinataire de ce messa=
+ge (ou que vous recevez ce message par erreur), nous vous remercions de le =
+notifier imm=C3=A9diatement =C3=A0 son exp=C3=A9diteur, et de d=C3=A9truire=
+ ce message. Toute copie, divulgation, modification, utilisation ou diffusi=
+on, non autoris=C3=A9e, directe ou indirecte, de tout ou partie de ce messa=
+ge, est strictement interdite.
+
+
+This e-mail, and any document attached hereby, may contain confidential and=
+/or privileged information. If you are not the intended recipient (or have =
+received this e-mail in error) please notify the sender immediately and des=
+troy this e-mail. Any unauthorized, direct or indirect, copying, disclosure=
+, distribution or other use of the material or parts thereof is strictly fo=
+rbidden.
