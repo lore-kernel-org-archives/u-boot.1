@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA054CCD183
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 15:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15FACCD184
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 15:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FE8683438;
-	Sun, 19 Oct 2025 17:10:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E642838BB;
+	Sun, 19 Oct 2025 17:10:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PKnfz0eU";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="d3DEtcw7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69E19838AA; Sun, 19 Oct 2025 17:10:01 +0200 (CEST)
+ id 3108C83211; Sun, 19 Oct 2025 17:10:06 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13B5783211
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 17:09:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1FFB838B7
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 17:10:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1760886597; bh=6ispuN1fql/uZzc6qAUhIqYWxIIhTbb/VZp8LOqF/pU=;
- b=PKnfz0eULMWQUSnQr8C1joUfEMLtomP1uiAVGOy+M0XxJnqxBN7yH0kz/t38Nk4kF4YyEOeGQ
- F0GkpYOIv7YBv2sRR7T3zZPG8WIwk5W9tE7HDtbdRDnicsq5K+30P2UzHM9CFheq5HVV2ZVLgFG
- MlZ05emJ+zBduyKJXXLnB9y0McvAYV8CGI/4PPv/2wh5NBEO7YaBXS53dryGSmQxKvTPHY6cWV5
- l+i18ih1UezRNrWmzqxXg3yIsERBioacu/fsb+tI7HU6LZURrkjeyCnBdv1rDCxuXG18QMZCZwe
- 4omG0vQVxDPfZwUyHPq9ez0dcAgzuPn3nqipP7q1WaGg==
-X-Forward-Email-ID: 68f4ff435ea0c6742724292f
+ t=1760886602; bh=SQq8N1X8DfwuqX06VSeVl8nmB2ST/5S0Pv95jQ2sL7w=;
+ b=d3DEtcw7QMy24hCQ4vIcQ3I+mW13BfdUTROaAxOam0ysJi81yF+1dOVJ6JaIohyRwxYpd5N3f
+ ZFwh3Q4/+hV6vYOB7FOPOKR4hU0V32YKTPySEv85CtTqZ7XSDyAA0hIWPlER5dvfU7ZFL2bGwT0
+ Qj1wzgosQyHXtOn+opx8aF6vwVTAmozuATK7uAqz6eAiyc62x//SIGTNwf7Vxy6L+rwyqHccYxa
+ xGkMDSQImhm2PixKXgLnHk80aPA7229I2nAMmpv/6eZnU/8NBH9T4KRzKBhzhGjcZpBrpZcR6w8
+ QQvDuvPchW273WQY6pgFuV/SrJ54hHwUg6QDuTKoiBBw==
+X-Forward-Email-ID: 68f4ff465ea0c6742724294a
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
 X-Forward-Email-Version: 1.3.0
@@ -47,10 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 1/2] phy: rockchip: naneng-combphy: Enable U3 port for USB3OTG
- on RK3568
-Date: Sun, 19 Oct 2025 15:09:40 +0000
-Message-ID: <20251019150945.823167-2-jonas@kwiboo.se>
+Subject: [PATCH 2/2] rockchip: rk3568: Disable USB3OTG U3 ports early
+Date: Sun, 19 Oct 2025 15:09:41 +0000
+Message-ID: <20251019150945.823167-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251019150945.823167-1-jonas@kwiboo.se>
 References: <20251019150945.823167-1-jonas@kwiboo.se>
@@ -72,36 +71,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The USB OTG U3 port may have been disabled early, add support to the
-COMBPHY driver to re-enable the U3 port.
+The RK3568 SoC comes with USB OTG support using a DWC3 controller with
+a USB2 PHY and a USB3 PHY (COMBPHY).
 
-This matches changes made in the Linux commit 7bb14b61b7d0 ("phy:
-rockchip: naneng-combphy: Enable U3 OTG port for RK3568").
+Some board designs may not use the COMBPHY for USB3 purpose. For these
+board to use USB OTG the input clock source must change to use UTMI clk
+instead of PIPE clk.
+
+Change to always disable the USB3OTG U3 ports early and leave it to the
+COMBPHY driver to re-enable the U3 port when a usb3-phy is described in
+the board device tree.
+
+Please note that this may break use of USB 3.0 on RK3568 on Linux kernel
+prior to version 6.6.112, 6.12.53, 6.17.3 and 6.18-rc1.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/phy/rockchip/phy-rockchip-naneng-combphy.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+It may be too soon to apply this patch, we should possible give more
+time for OS to adopt to these changes.
 
-diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-index d602f965d6aa..82353ae7678c 100644
---- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-+++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
-@@ -399,6 +399,14 @@ static int rk3568_combphy_cfg(struct rockchip_combphy_priv *priv)
- 		param_write(priv->phy_grf, &cfg->pipe_txcomp_sel, false);
- 		param_write(priv->phy_grf, &cfg->pipe_txelec_sel, false);
- 		param_write(priv->phy_grf, &cfg->usb_mode_set, true);
-+		switch (priv->id) {
-+		case 0:
-+			param_write(priv->pipe_grf, &cfg->u3otg0_port_en, true);
-+			break;
-+		case 1:
-+			param_write(priv->pipe_grf, &cfg->u3otg1_port_en, true);
-+			break;
-+		}
- 		break;
- 	case PHY_TYPE_SATA:
- 		writel(0x41, priv->mmio + 0x38);
+The first patch in this series should however be safe to apply.
+---
+ arch/arm/mach-rockchip/rk3568/rk3568.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/arm/mach-rockchip/rk3568/rk3568.c b/arch/arm/mach-rockchip/rk3568/rk3568.c
+index c2b96902d2dd..560af336be4f 100644
+--- a/arch/arm/mach-rockchip/rk3568/rk3568.c
++++ b/arch/arm/mach-rockchip/rk3568/rk3568.c
+@@ -14,6 +14,9 @@
+ #include <dt-bindings/clock/rk3568-cru.h>
+ 
+ #define PMUGRF_BASE			0xfdc20000
++#define PIPE_GRF_BASE			0xfdc50000
++#define USB3OTG0_CON1			0x104
++#define USB3OTG1_CON1			0x144
+ #define GRF_BASE			0xfdc60000
+ #define GRF_GPIO1B_DS_2			0x218
+ #define GRF_GPIO1B_DS_3			0x21c
+@@ -139,6 +142,10 @@ int arch_cpu_init(void)
+ 	/* Enable VO power domain for display */
+ 	writel((PMU_PD_VO_DWN_ENA << 16),
+ 	       PMU_BASE_ADDR + PMU_PWR_GATE_SFTCON);
++
++	/* Disable USB3OTG U3 ports, later enabled in COMBPHY driver */
++	writel(0xffff0181, PIPE_GRF_BASE + USB3OTG0_CON1);
++	writel(0xffff0181, PIPE_GRF_BASE + USB3OTG1_CON1);
+ #endif
+ 	return 0;
+ }
 -- 
 2.51.0
 
