@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90EB6CCD183
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 12:33:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A30CCD184
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 13:06:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D841583804;
-	Sun, 19 Oct 2025 14:33:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id ECBDC82BA7;
+	Sun, 19 Oct 2025 15:06:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lJa2apDa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fHR1GrZa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0ACF8382E; Sun, 19 Oct 2025 14:33:46 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id 612EF82E34; Sun, 19 Oct 2025 15:06:06 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A54C083631
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 14:33:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21D938206E
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 15:06:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-64e84414cfbso1623958eaf.1
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 05:33:44 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-637e9f9f9fbso6495256a12.0
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 06:06:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760877223; x=1761482023; darn=lists.denx.de;
- h=content-transfer-encoding:to:subject:message-id:date:from
+ d=chromium.org; s=google; t=1760879163; x=1761483963; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b85YFLZbaUUnnrnVkBDdC41wVo3rCH2/WzvRPTfrbvM=;
- b=lJa2apDay2KhRFRVtTYIn2T9jBRtKsMwgyDpQjXplih4kgxbMoDzc26Mt6r/eO/R1F
- bB80eDKCDPpb3deUJKJxyd13rKpAPgtXyvG+Ld6Kz0T33Yh+7dXfFLBvK2HJ4hAqpAP+
- hMu39Qu8qaooeSx8ET4h5RwePTUc7MMZXD1Y96NKkgZGXmJhgJyDkxD19IGSk5ZUz8V6
- PNgpJMbxrqsaO38+73ehl9sVN0ZcaLEafbXXSYGR9t2E0IylJeJfzrzXFBVZkNBHnGdd
- TYr9aWLNa5I0iQJbjtyqLjAgONQygKrlNNq148p+Oj3QiITP8plG3trity8c31w/9t5J
- Ul8A==
+ bh=OPoImI8fU6GZWcQKVNWjgTuK5uB6PzKrrWAVZihqDPI=;
+ b=fHR1GrZaUD4FcBWDym1Sznw5jEQNq7pjaoIL+qPaJsh1ghM4BrFMLPEYjhmDMVdxxT
+ 4D/A7D7IMbZF+knbAMSABuQzc2Ci24+EmGYUajAQ94U103p3Lnb+quAz6yhNgmrDkI9A
+ 47mx7OAaKZkbTa4qaKZOp/mtIT/TI/phWZ52E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760877223; x=1761482023;
- h=content-transfer-encoding:to:subject:message-id:date:from
+ d=1e100.net; s=20230601; t=1760879163; x=1761483963;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b85YFLZbaUUnnrnVkBDdC41wVo3rCH2/WzvRPTfrbvM=;
- b=Er5Ca0djZU3b/Z2/cgrzm9FJJxQnPSRrV3IkRssF+Rbk6DRXDmzZUT5Bd4Tozt+X/1
- tb5YauUVcMPU9iE8inxGW/IhZuYtKVwsfATyR/TuWt6xN/42WNG7aGo7yXTmwHOxViJo
- NysNl1DuND+9JrU2COrekmxcDJ8W2k468JPH5FULMK4V+6NAmqH2SmcNO92fLKU4SRAQ
- rQaR1H3LcdM0ppl2rj+SPAzYKEQiKW8MIMufbn5peZDpjFkGDHUpXXazD+wt7724hWkc
- pFirRaXpHB5efLuJora6zu4nOfpQC1DVJvrjcu/bJm450MguGvCAkifAa7AZxdyhVG8W
- EtIQ==
+ bh=OPoImI8fU6GZWcQKVNWjgTuK5uB6PzKrrWAVZihqDPI=;
+ b=ig8cMC0Do69snEgWi7QWb6YORhtrGvCPwQdruDvh9yuu7T2QubRSbzEb2+7z6CrY7g
+ CVuY/IIy+m3/0iFxwI4b4bGux0qMHxcweXBY/OmZ840xCuSV6qSrEIWwcO4dw6jjvhgQ
+ t3Mop3LXSJABlniY04l59q09UcMxKnhpBvlTBVFCKZ2hOu4VcAom0MfvoiYiQZzJt+nF
+ K3waIy6G3Vsj4A5tKDhBRCfDiv4lEOvC7VFKGWr1eIg+gDlTDV3aKWS3X4q7CrFOVP8i
+ KZJJ1U+xfy7/aCk9SHSKC/EN9f1mRMTnfXQ+F/ne60l0RrC60YxmcH2att8SFtu6Up/T
+ 6OSQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXgnt39urUPjhQo9hqpXM/Ks/560qDApNcugtm0v8QVvb7sBKfkVGpf8AqNOF57t7TXiJMM59M=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywyu5aBEy5vmGozTPkAy7+e82kLgVEwjS1aZ7DaQud9rYSkrcVC
- 2oPJ5QY/6W8UYoyUsYKgsytUNv4kwv1xhnAJaRdbZbAY0qEEOTPOUzt6PHRwIUUBsOiBFRUfOyS
- tZ2iOBNpFERBp2jjuXm+ljHYElu0M3dM=
-X-Gm-Gg: ASbGncsIV2R/AJ0xeIdp8hFp1FlYQM4L8/dEnvaAKNxVRzMVBs80xVgCqSkff3RdpUS
- 2+9HGjPzR3SE087HQfJycLIaXHlJysYf/Y2Plwg6aTrIvM/PI5SHLKuWG5DDm8ugbiSEMq4BJyq
- P497kAp01w9YnANENTXmQDohF6v8ftfajSa29M9rFdWghOp9XTBaqASr4NPWBs42abF8w0DFCLD
- nr0iuNCt5EAEB30XRe8PQkIbBvFjQPgaUL51tb1eTPLZrTQ8GqxUQ4Y2bAvXcachxANe4w=
-X-Google-Smtp-Source: AGHT+IFDCv/jXClzZvakDhyUPzCXUO3tf/Q9DNbcEtXFP5VaoT9MpRTSkt4XSUHGsRylGDqB21fn2b/WVi8r9BUZegQ=
-X-Received: by 2002:a05:6820:1520:b0:63d:bc20:a61a with SMTP id
- 006d021491bc7-651c7e554acmr3621152eaf.7.1760877223337; Sun, 19 Oct 2025
- 05:33:43 -0700 (PDT)
+ AJvYcCW6DJAztwowBgIhgMQueDEj/WY4+wWamXViD2WqH2fJZ8+uRrxPY8HbMYlJaZ2WrFuRPKR9lbc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxNp9UvDVGcX17tJyfFrc2I0GaMMStLLhENBULxNe+qCfRAnORh
+ F1dediX0gUthI+5Wioe3ShU7PXOYEu2QIY0YySmRpePJSDkDLV621GkPmdzF731jsxACDt+ohrd
+ 4uTF7kLJ4aU2e6HwZmSq0FJUKaLBNV3D3wXf8OZTs
+X-Gm-Gg: ASbGncu6VMhC2m8QqdnFfXLM/3cZAeUBs8CFNGZfG5hkqD3UhCtqd/QNNLRKM4JIz0h
+ m1qRgp6RyDNJKkLImhswGsybi5qffmAe6uW2MhBwEmliUQUH3NjcECOCA2xsGHLfAw95uy2Wql1
+ cC7lKu0q2cfn9yvYVrXN/9RtssGUyP44kBwvMce7loWH2BhdIhtocVIAtzVled36VCYwcd3yNOq
+ uAMGQ2uBFPAv5SES4EtvM9Q+4GcVc3rfmuzjY5AIbTfhEyp3iJ2rs2Z6f1Mm6S+LIxHEKTrurpY
+ MT53
+X-Google-Smtp-Source: AGHT+IELcRV+oWoF0crWaq+SpeyL3D2Z3TxedQ5M9WEM9uQPXvDqNz7bac87P+eQX6Y9VlJAxsGH/i/gCg8wYB0zXEA=
+X-Received: by 2002:a05:6402:280a:b0:63b:f4b4:a005 with SMTP id
+ 4fb4d7f45d1cf-63c1f6419c0mr10600879a12.10.1760879163538; Sun, 19 Oct 2025
+ 06:06:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20251019092341.1158-1-briansune@gmail.com>
-In-Reply-To: <20251019092341.1158-1-briansune@gmail.com>
-From: Sune Brian <briansune@gmail.com>
-Date: Sun, 19 Oct 2025 20:33:35 +0800
-X-Gm-Features: AS18NWAjN-sdsxMinV5vBDV5qmmHeS5qWGY2tJAIflaWkUnhuzVazrTwbff6nbM
-Message-ID: <CAN7C2SA-KF_eFGwo3fCd0iUTwAJRi7pVXPsMbqFyr=3-s6ZC0g@mail.gmail.com>
-Subject: Re: [PATCH] Altera SoCFpga Boot Stall Fix
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
+In-Reply-To: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 19 Oct 2025 14:05:51 +0100
+X-Gm-Features: AS18NWDxXgub_wnOM4TkDBFjIfJspkwbcXsJMz4NjkVoFaly3eSvHBwE8trPLIc
+Message-ID: <CAFLszThGVL1powrtDa+niBuxU-b_3YDs6TQ96igx-cj-PGvf=g@mail.gmail.com>
+Subject: Re: [PATCH v3 00/20] Convert extension support to UCLASS and adds its
+ support to boot flows
+To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
+ Mario Six <mario.six@gdsys.cc>, Stefano Babic <sbabic@nabladev.com>, 
+ Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,42 +99,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Brian Sune <briansune@gmail.com> =E6=96=BC 2025=E5=B9=B410=E6=9C=8819=E6=97=
-=A5 =E9=80=B1=E6=97=A5 =E4=B8=8B=E5=8D=885:23=E5=AF=AB=E9=81=93=EF=BC=9A
+Hi Kory,
 
-> -       if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX))
-> +       if (!IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)) {
-> +               ret =3D socfpga_get_base_addr("altr,sys-mgr",
-> +                                           &socfpga_sysmgr_base);
-> +               if (ret)
-> +                       hang();
-> +       }
-> +
-> +       if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) ||
-> +           IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M))
->                 ret =3D socfpga_get_base_addr("intel,agilex-clkmgr",
->                                             &socfpga_clkmgr_base);
->         else if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X))
+On Mon, 13 Oct 2025 at 14:32, Kory Maincent (TI.com)
+<kory.maincent@bootlin.com> wrote:
+>
+> This series converts the extension board framework to use UCLASS as
+> requested by Simon Glass, then adds extension support to pxe_utils
+> and bootmeth_efi (not tested) to enable extension boards devicetree load
+> in the standard boot process.
+>
+> I can't test the imx8 extension scan enabled by the
+> imx8mm-cl-iot-gate_defconfig as I don't have this board.
+> I also can't test the efi bootmeth change as I don't have such board.
+
+You can test this with sandbox, using one of the bootmeth tests,
+perhaps. Let me know if you need help with this.
+
+>
+> Changes in v3:
+> - Reorder the patches inside the series as several config were broken
+>   in the middle of the series.
+> - Use U_BOOT_DRVINFO macro instead of manually bind the drivers.
+> - Use uclass_first_device_err instead of extension_get_dev function.
+> - Made few fixes in documentation and Kconfig dependency.
+> - Made few changes of error value returned.
+> - Add a patch to document the extension structure.
+> - Add a patch to fix CAPE_EEPROM_BUS_NUM Kconfig dependency
+>
+> Changes in v2:
+> - Fixes few build errors.
+> - Add patches to move the extension support and board scan out of XPL
+>   images build.
+>
+> Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
+> ---
+> Kory Maincent (TI.com) (20):
+>       MAINTAINERS: Add maintainer for extension board support
+>       board: ti: Exclude cape detection from XPL builds
+>       board: ti: Fix CAPE_EEPROM_BUS_NUM Kconfig dependency
+>       board: sunxi: Exclude DIP detection from XPL builds
+>       board: compulab: Exclude compulab extension board detection from XP=
+L builds
+>       include: extension_board: Document the extension structure
+>       boot: Move extension board support from cmd/ to boot/
+>       boot: Add UCLASS support for extension boards
+>       board: ti: Refactor cape detection code for readability
+>       board: ti: Convert cape detection to use UCLASS framework
+>       board: sunxi: Refactor CHIP board extension code
+>       board: sunxi: Convert extension support to UCLASS framework
+>       board: sandbox: Improve extension board scan implementation
+>       board: sandbox: Convert extension support to UCLASS framework
+>       board: compulab: Convert imx8mm-cl-iot-gate to UCLASS extension fra=
+mework
+>       boot: Remove legacy extension board support
+>       boot: extension: Move overlay apply custom logic to command level
+>       boot: pxe_utils: Add extension board devicetree overlay support
+>       boot: bootmeth_efi: Refactor distro_efi_try_bootflow_files return l=
+ogic
+>       boot: bootmeth_efi: Add extension board devicetree overlay support
+>
+>  MAINTAINERS                                        |   9 +
+>  .../imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c        |  70 ++++----
+>  board/sandbox/sandbox.c                            |  26 ++-
+>  board/sunxi/Makefile                               |   2 +-
+>  board/sunxi/chip.c                                 |  36 ++--
+>  board/ti/common/Kconfig                            |   2 +-
+>  board/ti/common/Makefile                           |   2 +-
+>  board/ti/common/cape_detect.c                      |  56 ++++---
+>  boot/Kconfig                                       |   4 +
+>  boot/Makefile                                      |   1 +
+>  boot/bootmeth_efi.c                                |  79 +++++++--
+>  boot/extension-uclass.c                            |  93 +++++++++++
+>  boot/pxe_utils.c                                   |  92 +++++++++++
+>  cmd/Kconfig                                        |   3 -
+>  cmd/extension_board.c                              | 183 ++++++++++-----=
+------
+>  doc/usage/cmd/extension.rst                        |  29 ++--
+>  include/dm/uclass-id.h                             |   1 +
+>  include/extension_board.h                          |  85 ++++++++--
+>  18 files changed, 541 insertions(+), 232 deletions(-)
+> ---
+> base-commit: 8e7f8c1248e8adfb525a2a4ea56ebf7e54ff5d7a
+> change-id: 20250916-feature_sysboot_extension_board-958dd0072565
+>
+> Best regards,
 > --
-> 2.25.1
+> K=C3=B6ry Maincent, Bootlin
+> Embedded Linux and kernel engineering
+> https://bootlin.com
 >
 
-Explain a bit more, and correct me if wrong.
-Under investigation on different revision.
-
-"Commit 3563817"
-The base address of system manager can be retrieved using
-DT framework through the System Manager driver.
-Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
-Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
-
-However this is completely wrong on simply removing the inline from first p=
-lace!
-ret =3D socfpga_get_base_addr("altr,sys-mgr", &socfpga_sysmgr_base);
-if (ret)
-hang();
-
-In consequence, simply support Agliex series and w/o consider
-old series of socfpga breaks the boot and stall the HPS.
-I highly suspect either NOR or SDMMC should also stall no
-matter how. B.C. the sys-mgr never setup.
+Regards,
+Simon
