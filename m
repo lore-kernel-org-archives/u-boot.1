@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E60BCCD183
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 15:48:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29BBECCD183
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 15:48:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA0DD800B6;
-	Sun, 19 Oct 2025 17:48:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 29CFA838C8;
+	Sun, 19 Oct 2025 17:48:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tE0F2AO4";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="fjz+UEli";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27601838C5; Sun, 19 Oct 2025 17:48:03 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 726D6800B6; Sun, 19 Oct 2025 17:48:05 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6295D83211
+ by phobos.denx.de (Postfix) with ESMTPS id 1AE83838AE
  for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 17:48:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1760888879; bh=TLQ4zBFJMtMSleTGLZRhhA6dnBUiSXJfl1NoARqi45U=;
- b=tE0F2AO4SGlj3fxov9ic6sbnW/uoMZRAsCWn8HaZ7BqBtRO7zmm6z+6eXO+9ntkjVkt2kCFkW
- 1SVQu3MxdKeJ6Gp7lDFdG+Vw8Yfs8T9v/Au2C1ZehTE6/MTcWq6K3ARUvxO5PALNPAC6QtFywpY
- 2zFSgM3OpKJl1ctNskv7KQ0WbfGS1DI7kxXLvj8pXSZp2G3b1f4uiJSnjjb7F+Nijo/7OSptYP6
- mnuR2P5XzODZrYwMsuCGoXm6AG+CMVpYqyvuiQXftZlDNTPqCRc8ajEjr7tjSNAG780I37nGN4L
- fO78VDOt9XPbWIxqk5D4v3Bl390s6l8z75qMmP/BJBmQ==
-X-Forward-Email-ID: 68f5082d5ea0c6742724318a
+ t=1760888879; bh=LtcYNN8gTsSfFP86NFFuy0lkz5J8v5V8QfIH/NLOcy4=;
+ b=fjz+UElirytkVwtzXpqbMecNVqfFv61okdCjV5MgJZXDVEZsaO7pnydg5+W5PnrEpjt4YGKV2
+ Yr+Zf5k/EWPcMSGoQvVOVaE0VQCujKn/RfP6kvuMlpXrFUVJT2qCNW19ZMJa5aezeglbRcaguoW
+ qM32daRb4cbdvr2VjyLKOs6RjDwhA05ztdNbei6sD+JjqPJSvtCIzm0YGqpUWCZyWvmU6PaYWl+
+ 6dqocv92ZYcdqTYINkuH41l9fsCyYETRXHbRg++/1X4F5AWPvNIUYEdQCfJbJ/c3v6p4amhhy5X
+ b58anjyEf0SoAqjdyTt2YqHoVXMVdTQ/tav4IkPKRcRg==
+X-Forward-Email-ID: 68f508295ea0c67427243167
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 1.3.0
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -44,12 +44,13 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v4 2/5] rockchip: spl: Add a read_brom_bootsource_id() helper
-Date: Sun, 19 Oct 2025 15:47:16 +0000
-Message-ID: <20251019154728.846096-3-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>, Jon Lin <jon.lin@rock-chips.com>
+Subject: [PATCH v4 1/5] spi: rockchip_sfc: Support sclk_x2 version
+Date: Sun, 19 Oct 2025 15:47:15 +0000
+Message-ID: <20251019154728.846096-2-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251019154728.846096-1-jonas@kwiboo.se>
 References: <20251019154728.846096-1-jonas@kwiboo.se>
@@ -71,64 +72,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootsource ids reported by BootROM of RK3528 and RK3576 for e.g.
-SPI NOR and USB differs slightly compared to prior SoCs:
+From: Jon Lin <jon.lin@rock-chips.com>
 
-- Booting from sfc0 (ROCK 4D) report the normal bootsource id 0x3.
-- Booting from sfc1 M1 (NanoPi M5) report a new bootsource id 0x23.
-- Booting from sfc1 M0 has not been tested (no board using this config).
-- Booting from USB report a new bootsource id 0x81 on RK3528 and RK3576.
+SFC after version 8 supports dtr mode, so the IO is the binary output of
+the controller clock.
 
-Add a helper function to read the bootsource id. This helper function
-will be used to translate the new values to the common BROM_BOOTSOURCE
-enum values on RK3528 and RK3576.
-
+Signed-off-by: Jon Lin <jon.lin@rock-chips.com>
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v4: No change
-v3: Mention RK3528 in commit message
+v3: No change
 v2: No change
 ---
- arch/arm/include/asm/arch-rockchip/bootrom.h | 2 ++
- arch/arm/mach-rockchip/spl.c                 | 7 ++++++-
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ drivers/spi/rockchip_sfc.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/include/asm/arch-rockchip/bootrom.h b/arch/arm/include/asm/arch-rockchip/bootrom.h
-index e736772fda75..b15938c021d6 100644
---- a/arch/arm/include/asm/arch-rockchip/bootrom.h
-+++ b/arch/arm/include/asm/arch-rockchip/bootrom.h
-@@ -64,4 +64,6 @@ extern const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1];
-  */
- #define BROM_BOOTSOURCE_ID_ADDR   (CFG_IRAM_BASE + 0x10)
+diff --git a/drivers/spi/rockchip_sfc.c b/drivers/spi/rockchip_sfc.c
+index 73738ab26d33..60e74117057a 100644
+--- a/drivers/spi/rockchip_sfc.c
++++ b/drivers/spi/rockchip_sfc.c
+@@ -108,6 +108,7 @@
+ #define  SFC_VER_3			0x3
+ #define  SFC_VER_4			0x4
+ #define  SFC_VER_5			0x5
++#define  SFC_VER_8			0x8
  
-+u32 read_brom_bootsource_id(void);
-+
- #endif
-diff --git a/arch/arm/mach-rockchip/spl.c b/arch/arm/mach-rockchip/spl.c
-index f4d29bbdd17e..1ce3a3b05547 100644
---- a/arch/arm/mach-rockchip/spl.c
-+++ b/arch/arm/mach-rockchip/spl.c
-@@ -31,6 +31,11 @@ int board_return_to_bootrom(struct spl_image_info *spl_image,
- __weak const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- };
+ /* Delay line controller resiter */
+ #define SFC_DLL_CTRL0			0x3C
+@@ -589,6 +590,16 @@ static int rockchip_sfc_adjust_op_size(struct spi_slave *mem, struct spi_mem_op
+ 	return 0;
+ }
  
-+__weak u32 read_brom_bootsource_id(void)
++#if CONFIG_IS_ENABLED(CLK)
++static int rockchip_sfc_clk_set_rate(struct rockchip_sfc *sfc, uint speed)
 +{
-+	return readl(BROM_BOOTSOURCE_ID_ADDR);
++	if (sfc->version >= SFC_VER_8)
++		return clk_set_rate(&sfc->clk, speed * 2);
++	else
++		return clk_set_rate(&sfc->clk, speed);
 +}
++#endif
 +
- const char *board_spl_was_booted_from(void)
+ static int rockchip_sfc_set_speed(struct udevice *bus, uint speed)
  {
- 	static u32 brom_bootsource_id_cache = BROM_BOOTSOURCE_UNKNOWN;
-@@ -40,7 +45,7 @@ const char *board_spl_was_booted_from(void)
- 	if (brom_bootsource_id_cache != BROM_BOOTSOURCE_UNKNOWN)
- 		bootdevice_brom_id = brom_bootsource_id_cache;
- 	else
--		bootdevice_brom_id = readl(BROM_BOOTSOURCE_ID_ADDR);
-+		bootdevice_brom_id = read_brom_bootsource_id();
+ 	struct rockchip_sfc *sfc = dev_get_plat(bus);
+@@ -600,7 +611,7 @@ static int rockchip_sfc_set_speed(struct udevice *bus, uint speed)
+ 		return 0;
  
- 	if (bootdevice_brom_id < ARRAY_SIZE(boot_devices))
- 		bootdevice_ofpath = boot_devices[bootdevice_brom_id];
+ #if CONFIG_IS_ENABLED(CLK)
+-	int ret = clk_set_rate(&sfc->clk, speed);
++	int ret = rockchip_sfc_clk_set_rate(sfc, speed);
+ 
+ 	if (ret < 0) {
+ 		dev_err(sfc->dev, "set_freq=%dHz fail, check if it's the cru support level\n",
 -- 
 2.51.0
 
