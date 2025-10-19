@@ -4,82 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10BF1CCD183
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 09:24:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E897CCD195
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 09:29:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 676B783849;
-	Sun, 19 Oct 2025 11:24:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6FA3C83881;
+	Sun, 19 Oct 2025 11:29:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c4jVQWcA";
+	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="PZW0SWs6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBE48836D1; Sun, 19 Oct 2025 11:23:59 +0200 (CEST)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2C7A983885; Sun, 19 Oct 2025 11:29:31 +0200 (CEST)
+Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53D4B8386B
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 11:23:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 17DE883837
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 11:29:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=grimler.se
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-781010ff051so2549077b3a.0
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 02:23:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760865836; x=1761470636; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=H4FUeAMUzNZrglwNJ8tMUgowrhVHRjZhe24VNI5GSPc=;
- b=c4jVQWcARHTWg7ib22vbsj6br1cohqyJsPWIB7j/jOyxBmm9668Wf/dY/RDrWjPnxF
- eDF8UsbhrxQ/lbtdWuYVIxsGNpDHWztJ+plNG6qxU8kbD5kjA6mbYXCnJ4wYqdYvI9pT
- axDQH3VzmbGlRaVG9Xz0TAtxqoEDJTRvIt9IPvCKA2l5k97Ekj5awhPdo5icTeyJ7On1
- AwlZ/aCmr0Xq/UXnFoOlrYFxMFIUZqJdO+rEXiw3eFiP/YeC5TKP/YDE6hgDnTqmw3u9
- GQuTlo4+XDb3Jrm/XuATlI6A//dWmtao18SGyV+wfyovafaB3ii+GTh8wYCVOPiyZurS
- 8aLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760865836; x=1761470636;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=H4FUeAMUzNZrglwNJ8tMUgowrhVHRjZhe24VNI5GSPc=;
- b=jGVkocsPDSGPJ4U17D8rtSIkWjZxd3MOtQf98wMyLKpDqKZV4tHOsOnZZTnIbbSPP9
- vEENVvOVhx2ZwmEu2fB6/sLKF5485wpPS42ChN1HUZFvM/osA+CpdmQFkKo8WkqR1l5E
- p7Yt2/WXcBrFseFQVZsW0LouO7NcCB06KzKdi6tWHl8BY6F7MVK0238it0HzLtI2nWaY
- VXES365I9zqpgOyvxf5av9zASkRThOYCISfD7tQrciwhRv+vLJLklzo5Rr5dShLbLeWD
- zyw/6HsrUf0HZKzHMMeWrVI3P6UTWSfwxjSBGL2zlcrAGaoKet34Pa0IEdImUJn84kQ3
- BjPQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXBfQAcRf1wkEKXJvYFhWoxXaEfmwP2Y5oQ5gYVr3NKQzXnCiIVOB2AgRW0ACd9Uua9nXmFAOY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHaEChIvUgSZreAyObL87OPBoFMxBwbFhkCWRgJFmlhF367ebo
- hOy1LSrhX3cwTgmNISZ/8lmZZUPwEuU2HQzLyw1l3yc4z4hjDj6Xm8Y63KoiezaEeeg=
-X-Gm-Gg: ASbGnct1aBuT3ysViraI3DEIeGniMLPR0h/B4OOMRe7ZiIDTc1AY8GvOXj6lkHj9FoN
- uvU9xHad46p+anGvQd1exM9OmUauSg5mVlWswPsGyqIH6gMskQ64q7hNByCOW6Ies0ovg+l341Y
- MdAj3ntW2G3KDNcqbO+n1lZbm7sWqk5vYjTtUYMeDowpp8CJuOMvt5jDHtdhPhdwWwe5MGbPkNB
- XXF/LXZQYxvDpELK7SL9PLb6hxoDMfi5CMsNH+m7bVPvPJR4yh7tVvmqsFs3+hxC1yPiNPDQtZW
- oV95iAvUaIbyCnqMvz8KC/RzrH2Q6YQf68xLSTiQS7CfNkAonXhgRelutKM1nMfcXP2zeNbPrB1
- ghn3Ohx2u8SlaCthfLpq6yI0MjPWNo8r3MicxOyAo9zJkm2NqNjlch3jEdYRfVvY2vJsi8U1AgX
- gOQgm0l0qBcwJIeoUuaxZ9XG9I8ypPz7ALGRfq
-X-Google-Smtp-Source: AGHT+IGP9qblt7ZOX1YwVDf5rSxS3GZvCX/dTzf6uTkgL+2J7gvqEEs+wBqv1NDPecF0EtF4vA/LrA==
-X-Received: by 2002:a05:6a00:14c8:b0:782:2b62:8188 with SMTP id
- d2e1a72fcca58-7a220b1077emr12265450b3a.15.1760865835726; 
- Sun, 19 Oct 2025 02:23:55 -0700 (PDT)
-Received: from localhost.localdomain ([185.213.82.51])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7a23010da0bsm4955968b3a.55.2025.10.19.02.23.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 19 Oct 2025 02:23:55 -0700 (PDT)
-From: Brian Sune <briansune@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] Altera SoCFpga Boot Stall Fix
-Date: Sun, 19 Oct 2025 17:23:41 +0800
-Message-ID: <20251019092341.1158-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.47.1.windows.1
+ spf=pass smtp.mailfrom=henrik@grimler.se
+Date: Sun, 19 Oct 2025 11:29:24 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
+ t=1760866167;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=/Ts8qQkc1brt0E3SlPhxDfLWtMnQ47YyvTxGe36ebbc=;
+ b=PZW0SWs6ntvqkF6NlBwW5R5o95Rw3GvABLMNalW++o3DuS0weK3pcoKejTDPm5tCEV4dsD
+ tkJq5+4CpJOFhJYAxn4xUL/Nc9B0Vs0VT057EcBxlGzOucidDcA0OZZHGvGMfTgatn/xbS
+ vbr/vdxlZw2jV7h1xqg7oa9+lvy/1tw=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Henrik Grimler <henrik@grimler.se>
+To: Lukas Timmermann <uboot@timmermann.space>
+Cc: u-boot@lists.denx.de
+Subject: Re: [RFC PATCH 2/2] pinctrl: exynos: add exynos5250 driver
+Message-ID: <20251019092924.GA88948@l14.localdomain>
+References: <20251013231542.821799-1-uboot@timmermann.space>
+ <20251013231542.821799-3-uboot@timmermann.space>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20251013231542.821799-3-uboot@timmermann.space>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,71 +66,187 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: tg5 <briansune@gmail.com>
+Hi Lukas,
 
-Since U-Boot 2025.07 pure SD Card
-boot no longer works. Now Altera released 2025.07
-shows the different on the u-boot files.
-After testing, the major root case is
-get_managers_addr. And this patch fix the
-SD boot stall via pulling from offical.
+On Tue, Oct 14, 2025 at 01:14:02AM +0200, Lukas Timmermann wrote:
+> Adds the needed files for using the new pinctrl driver with exynos5250
+> SoCs.
+> 
+> Signed-off-by: Lukas Timmermann <uboot@timmermann.space>
+> ---
+> 
+>  MAINTAINERS                                 |   5 +
+>  drivers/pinctrl/exynos/Kconfig              |   8 ++
+>  drivers/pinctrl/exynos/Makefile             |   1 +
+>  drivers/pinctrl/exynos/pinctrl-exynos5250.c | 100 ++++++++++++++++++++
+>  4 files changed, 114 insertions(+)
+>  create mode 100644 drivers/pinctrl/exynos/pinctrl-exynos5250.c
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index cae855da60e..57c101d54b6 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -606,6 +606,11 @@ F:	drivers/clk/exynos/clk-exynos850.c
+>  F:	drivers/phy/phy-exynos-usbdrd.c
+>  F:	drivers/pinctrl/exynos/pinctrl-exynos850.c
+>  
+> +ARM SAMSUNG EXYNOS5250 SOC
+> +M:	Lukas Timmermann <uboot@timmermann.space>
+> +S:	Maintained
+> +F:	drivers/pinctrl/exynos/pinctrl-exynos5250.c
+> +
+>  ARM SAMSUNG SOC DRIVERS
+>  M:	Sam Protsenko <semen.protsenko@linaro.org>
+>  S:	Maintained
+> diff --git a/drivers/pinctrl/exynos/Kconfig b/drivers/pinctrl/exynos/Kconfig
+> index 1b7fb62bc4b..18503ce112e 100644
+> --- a/drivers/pinctrl/exynos/Kconfig
+> +++ b/drivers/pinctrl/exynos/Kconfig
+> @@ -1,6 +1,14 @@
+>  config PINCTRL_EXYNOS
+>  	bool
+>  
+> +config PINCTRL_EXYNOS5250
+> +	bool "Samsung Exynos5250 pinctrl driver"
+> +	depends on ARCH_EXYNOS && PINCTRL_FULL
+> +	select PINCTRL_EXYNOS
+> +	help
+> +	  Support pin multiplexing and pin configuration control on
+> +	  Samsung's Exynos5250 SoC.
+> +
+>  config PINCTRL_EXYNOS7420
+>  	bool "Samsung Exynos7420 pinctrl driver"
+>  	depends on ARCH_EXYNOS && PINCTRL_FULL
+> diff --git a/drivers/pinctrl/exynos/Makefile b/drivers/pinctrl/exynos/Makefile
+> index 3abe1226eb7..7ef8d90cb59 100644
+> --- a/drivers/pinctrl/exynos/Makefile
+> +++ b/drivers/pinctrl/exynos/Makefile
+> @@ -4,6 +4,7 @@
+>  # Thomas Abraham <thomas.ab@samsung.com>
+>  
+>  obj-$(CONFIG_PINCTRL_EXYNOS)		+= pinctrl-exynos.o
+> +obj-$(CONFIG_PINCTRL_EXYNOS5250)	+= pinctrl-exynos5250.o
+>  obj-$(CONFIG_PINCTRL_EXYNOS7420)	+= pinctrl-exynos7420.o
+>  obj-$(CONFIG_PINCTRL_EXYNOS78x0)	+= pinctrl-exynos78x0.o
+>  obj-$(CONFIG_PINCTRL_EXYNOS850)		+= pinctrl-exynos850.o
+> diff --git a/drivers/pinctrl/exynos/pinctrl-exynos5250.c b/drivers/pinctrl/exynos/pinctrl-exynos5250.c
+> new file mode 100644
+> index 00000000000..dfd86e7c0c0
+> --- /dev/null
+> +++ b/drivers/pinctrl/exynos/pinctrl-exynos5250.c
+> @@ -0,0 +1,100 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) 2023 Linaro Ltd.
+> + * Author: Sam Protsenko <semen.protsenko@linaro.org>
+> + * Co-author: Lukas Timmermann <linux@timmermann.space>
 
-Signed-off-by: tg5 <briansune@gmail.com>
----
- arch/arm/mach-socfpga/misc.c | 25 ++++++++++++++++++++++---
- 1 file changed, 22 insertions(+), 3 deletions(-)
+I think "Co-author:" is generally not used, please consider settings
+yourself as just "Author:"
 
-diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
-index 97e01140513..11ab8f17489 100644
---- a/arch/arm/mach-socfpga/misc.c
-+++ b/arch/arm/mach-socfpga/misc.c
-@@ -177,7 +177,10 @@ int arch_cpu_init(void)
- 	 * timeout value is still active which might too short for Linux
- 	 * booting.
- 	 */
-+#if !(IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_SIMICS) || \
-+	IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_EMU))
- 	hw_watchdog_init();
-+#endif
- #else
- 	/*
- 	 * If the HW watchdog is NOT enabled, make sure it is not running,
-@@ -222,8 +225,16 @@ static int do_bridge(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- U_BOOT_CMD(bridge, 3, 1, do_bridge,
- 	   "SoCFPGA HPS FPGA bridge control",
--	   "enable [mask] - Enable HPS-to-FPGA, FPGA-to-HPS, LWHPS-to-FPGA bridges\n"
--	   "bridge disable [mask] - Enable HPS-to-FPGA, FPGA-to-HPS, LWHPS-to-FPGA bridges\n"
-+	   "enable [mask] - Enable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
-+	   "bridge disable [mask] - Disable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
-+	   "Bit 3, Bit 4 and Bit 5 bridges only available in Stratix 10\n"
-+	   "For example:\n"
-+	   "1) To enable and disable all bridges (command without mask):\n"
-+	   "	a) bridge enable\n"
-+	   "	b) bridge disable\n"
-+	   "2) To enable and disable HPS-to-FPGA and LWHPS-to-FPGA bridges (command with mask):\n"
-+	   "	a) bridge enable 0x3\n"
-+	   "	b) bridge disable 0x3\n"
- 	   ""
- );
- 
-@@ -260,7 +271,15 @@ void socfpga_get_managers_addr(void)
- 	if (ret)
- 		hang();
- 
--	if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX))
-+	if (!IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)) {
-+		ret = socfpga_get_base_addr("altr,sys-mgr",
-+					    &socfpga_sysmgr_base);
-+		if (ret)
-+			hang();
-+	}
-+
-+	if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) ||
-+	    IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M))
- 		ret = socfpga_get_base_addr("intel,agilex-clkmgr",
- 					    &socfpga_clkmgr_base);
- 	else if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X))
--- 
-2.25.1
+> + *
+> + * Exynos5250 pinctrl driver.
+> + */
+> +
+> +#include <dm.h>
+> +#include <dm/pinctrl.h>
+> +#include "pinctrl-exynos.h"
+> +
+> +static const struct pinctrl_ops exynos5250_pinctrl_ops = {
+> +	.set_state = exynos_pinctrl_set_state
+> +};
+> +
+> +static const struct samsung_pin_bank_data exynos5250_pin_banks0[] = {
+> +	EXYNOS_PIN_BANK(8, 0x000, "gpa0"),
+> +	EXYNOS_PIN_BANK(6, 0x020, "gpa1"),
+> +	EXYNOS_PIN_BANK(8, 0x040, "gpa2"),
+> +	EXYNOS_PIN_BANK(5, 0x060, "gpb0"),
+> +	EXYNOS_PIN_BANK(5, 0x080, "gpb1"),
+> +	EXYNOS_PIN_BANK(4, 0x0A0, "gpb2"),
+> +	EXYNOS_PIN_BANK(4, 0x0C0, "gpb3"),
+> +	EXYNOS_PIN_BANK(7, 0x0E0, "gpc0"),
+> +	EXYNOS_PIN_BANK(4, 0x100, "gpc1"),
+> +	EXYNOS_PIN_BANK(7, 0x120, "gpc2"),
+> +	EXYNOS_PIN_BANK(7, 0x140, "gpc3"),
+> +	EXYNOS_PIN_BANK(4, 0x160, "gpd0"),
+> +	EXYNOS_PIN_BANK(8, 0x180, "gpd1"),
+> +	EXYNOS_PIN_BANK(7, 0x2E0, "gpc4"),
+> +	EXYNOS_PIN_BANK(6, 0x1A0, "gpy0"),
+> +	EXYNOS_PIN_BANK(4, 0x1C0, "gpy1"),
+> +	EXYNOS_PIN_BANK(6, 0x1E0, "gpy2"),
+> +	EXYNOS_PIN_BANK(8, 0x200, "gpy3"),
+> +	EXYNOS_PIN_BANK(8, 0x220, "gpy4"),
+> +	EXYNOS_PIN_BANK(8, 0x240, "gpy5"),
+> +	EXYNOS_PIN_BANK(8, 0x260, "gpy6"),
+> +	EXYNOS_PIN_BANK(8, 0xC00, "gpx0"),
+> +	EXYNOS_PIN_BANK(8, 0xC20, "gpx1"),
+> +	EXYNOS_PIN_BANK(8, 0xC40, "gpx2"),
+> +	EXYNOS_PIN_BANK(8, 0xC60, "gpx3"),
+> +};
+> +
+> +static const struct samsung_pin_bank_data exynos5250_pin_banks1[] = {
+> +	EXYNOS_PIN_BANK(8, 0x000, "gpe0"),
+> +	EXYNOS_PIN_BANK(2, 0x020, "gpe1"),
+> +	EXYNOS_PIN_BANK(4, 0x040, "gpf0"),
+> +	EXYNOS_PIN_BANK(4, 0x060, "gpf1"),
+> +	EXYNOS_PIN_BANK(8, 0x080, "gpg0"),
+> +	EXYNOS_PIN_BANK(8, 0x0A0, "gpg1"),
+> +	EXYNOS_PIN_BANK(2, 0x0C0, "gpg2"),
+> +	EXYNOS_PIN_BANK(4, 0x0E0, "gph0"),
+> +	EXYNOS_PIN_BANK(8, 0x100, "gph1"),
+> +};
+> +
+> +static const struct samsung_pin_bank_data exynos5250_pin_banks2[] = {
+> +	EXYNOS_PIN_BANK(8, 0x000, "gpv0"),
+> +	EXYNOS_PIN_BANK(8, 0x020, "gpv1"),
+> +	EXYNOS_PIN_BANK(8, 0x060, "gpv2"),
+> +	EXYNOS_PIN_BANK(8, 0x080, "gpv3"),
+> +	EXYNOS_PIN_BANK(2, 0x0C0, "gpv4"),
 
+Lower-case letters in the constants please, in all the bank structs.
+
+Otherwise looks good to me, thanks!
+
+Best regards,
+Henrik Grimler
+
+> +};
+> +
+> +static const struct samsung_pin_bank_data exynos5250_pin_banks3[] = {
+> +	EXYNOS_PIN_BANK(7, 0x000, "gpz"),
+> +};
+> +
+> +static const struct samsung_pin_ctrl exynos5250_pin_ctrl[] = {
+> +	{
+> +		.pin_banks	= exynos5250_pin_banks0,
+> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks0),
+> +	}, {
+> +		.pin_banks	= exynos5250_pin_banks1,
+> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks1),
+> +	}, {
+> +		.pin_banks	= exynos5250_pin_banks2,
+> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks2),
+> +	}, {
+> +		.pin_banks	= exynos5250_pin_banks3,
+> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks3),
+> +	},
+> +	{/* list terminator */}
+> +};
+> +
+> +static const struct udevice_id exynos5250_pinctrl_ids[] = {
+> +	{ .compatible = "samsung,exynos5250-pinctrl",
+> +		.data = (ulong)exynos5250_pin_ctrl },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(pinctrl_exynos5250) = {
+> +	.name		= "pinctrl_exynos5250",
+> +	.id			= UCLASS_PINCTRL,
+> +	.of_match	= exynos5250_pinctrl_ids,
+> +	.priv_auto	= sizeof(struct exynos_pinctrl_priv),
+> +	.ops		= &exynos5250_pinctrl_ops,
+> +	.probe		= exynos_pinctrl_probe,
+> +};
+> -- 
+> 2.51.0
+> 
