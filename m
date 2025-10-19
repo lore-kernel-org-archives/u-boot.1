@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26ED1CCD184
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 13:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CACE9CCD184
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 13:06:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4277E83631;
-	Sun, 19 Oct 2025 15:06:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B3B28206E;
+	Sun, 19 Oct 2025 15:06:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ARhp+qaQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="boEX08RK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8316D8382E; Sun, 19 Oct 2025 15:06:13 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 675708206E; Sun, 19 Oct 2025 15:06:18 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DA988206E
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 15:06:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 865AF800B6
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 15:06:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-b3ee18913c0so645151466b.3
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 06:06:11 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-63c21467e5bso4897179a12.0
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 06:06:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1760879171; x=1761483971; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1760879176; x=1761483976; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=EMWTlIbIuiAlLs/oEDTX2+V0L6ppHRpFmNFoRCxdu48=;
- b=ARhp+qaQe3WkGlnD79qn6n9C5pDGnJwlDABMx+nN6b3VvFENSuXtJwVvQlRJACrTGx
- Qc56zUZdbs/lxKGNRja0Ci8hxjnSX+LMrbwstcn5SY3NAULyqMRKfZPvAHmYWweNJPmd
- YnFC8thioGu7KuL554wc8gTGEV5BNWM4oLtnc=
+ bh=conHHhfFs6GQX1KI0TNE5TF43B8SYOQJJD1Zumrontg=;
+ b=boEX08RKwWu6zMazjYMtploY/VEAuSpW+ay3MSiidP1Cd84T5D7ZCL4DiV+7BAvrfJ
+ UfPpnzraqnPdtbHu0RzlGKfZ9amlPTl06Vz1srR4ON28eKzOpKcXcW/cuCDCb+jIZP0w
+ 2om/XRQLad3nS+cp3PH5B9r7CiFtnOFAexYLY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760879171; x=1761483971;
+ d=1e100.net; s=20230601; t=1760879176; x=1761483976;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=EMWTlIbIuiAlLs/oEDTX2+V0L6ppHRpFmNFoRCxdu48=;
- b=KmIQxFtJVNf0YBf8yKs6dCyI8J4NC7JCBrN85vaFo2I69AD8fQUuIpF/oxHsPUhgLc
- Ny5q+nW96UN5ji8s6hGBdBJthpglBMYlimpVgvzCT9c6kMsVKRlilC83RMZmJsL4VOcb
- oSctq4ca4sn/+kkOLB3CXu30V0n3bhrbC0VYEB9h3ENYp7Hk3B96ZkbcmiO69ZbCBJIg
- 29R+vbZ8E3O67qmXoH/2Jg/V9/QtakybNa2tj0DXnvfJgy31279UKk2LQbW9qyA9mWWq
- cqDRFBFGLL4sglhDjruMKveiVS8p+v9mZvzCPHX66B55wl6D8Q/eaLppPTzR5pwCG2ez
- tmgQ==
+ bh=conHHhfFs6GQX1KI0TNE5TF43B8SYOQJJD1Zumrontg=;
+ b=bWTfIM+ndLDSMtYK47CXRgXeoGlzkzxIS28BcG5PxoU+kjgRudKPIknZHf32WjVV7U
+ zfXDPWaUG6iThmOSHLRqKg3umQEdvvDj5zbykxbUyc7/oRbtqSXqopgrHauivlJB+jWO
+ idp9TEoayc8BYYS4va333uXg/9c3zEEafkB7SDO9BaTPh7V6wSBifeB2eWW8dPJWp1/h
+ swS57vg7eUjJINO1fdpN9OoGWdvoMxLHcHQ/UpMnCl7gIvp+2JFA4FOqVjTkDMHMXLkq
+ 7g1eQWmVATKnCic0+/zg9FIWlUcObCMBZiB18tbEUY9tVg5dVDuSYvE36EU6p0INzXFm
+ 6wDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUeJe+TLUyNRojJ6YKjvwRKVWPtlVa6cSpzLZj3DiQgiw6MBkUjHLsK9zPcMi19xpeQNM3/t4c=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw5mxyYO5QQohppBZ7NPbK7FO0rm5bTPZFuDEoWu8ViwljCcu0e
- /Rv0kPdWNeWTto3plvfAY85v1SHSyWntQraZN7REEWl4MWymThUhhxxKAcaCyNbRTujLA2OsNYB
- xQOweq1+va6NhRABwoTPdLxF1HN6HZoOtOJd+BCfn
-X-Gm-Gg: ASbGncv4puSXGGVKjHW2gI0vVoXCFanlls9jC2EVzPrD5pLcHre4R8+BmB/gS9HiY5k
- 2SHe6ZvaaMfX5Wj7wRAdvlXyzP28r2He/gbGZ53ZJZX1bmif0f3VsjWGbuAJ+REZiP+u6fABRj/
- +Ux+P6Ma7Fj0ep0/MndL9sg+VzOJKpHq84G8PWdGkhsvIzzyxVBIutElR8jAxgh61aNThnb8owU
- s5e83E1rPlsfy/Vf2TufifxLnP0JjrAjaX0GyeI9wFT27ZqJn96Cmz+xPg=
-X-Google-Smtp-Source: AGHT+IH8LArPJ9kLzkqF4rGiJbDPPkjA4XwbzYXOy5HDSAzX7kyJijxq6cKYWQ7NjolIdtymKcToR8A82I0CMySd13M=
-X-Received: by 2002:a17:906:26c5:b0:b64:8474:2992 with SMTP id
- a640c23a62f3a-b64847429b8mr949139966b.56.1760879171020; Sun, 19 Oct 2025
- 06:06:11 -0700 (PDT)
+ AJvYcCUDwUfct6NjAmZAdAv8/5XygkFjKjSMVrQ7K9R9QFJZbD4/kzJ7hSbQdMOVP+js19EVTbxjw6w=@lists.denx.de
+X-Gm-Message-State: AOJu0YzIh8dtfnu2lGBKNOW3anDKj6hCU8ukYa5OlhyOduiKwlDIY/2v
+ /oVhcu0DzLGLIfBMdby+qOH5jTtrkQkAzNrvD51bq4/Vd/mOiPMJYgxF3LpozOkLzKufde08Yz0
+ aP/GzG/QDZzbyaQ0Hd//W0O1923OkSqu1liKf1Jwn
+X-Gm-Gg: ASbGncu5q1LYtsLqg3MI/yjW1xqttv6WKVyEcmk8pB0BQiEWrcPYK7XHM4CX390zi5y
+ VbPx0wGk1uhGFZmpbPkS8yGteb9c5/SXAY3b4epe+Es602XoY59DxtBhQRwK5+hOioMJME4Nfvs
+ w/hBR9yvmZu0HJLpyqEVrKFWNXSAQsSJHMq+pBigJpzjSXX6g17kg6E1EHQCW0iqXjzG4ER8P/0
+ 3JLhAKTYd0Cu+sMdO3IlqvTLU6XgI00gZv7RS5cFfBMW6BIspp9QWIIEMM=
+X-Google-Smtp-Source: AGHT+IEP0DKVipFLsFaWmn13TklILXejIUxGOgiQ8eqgVTOusMxALM4uACE4N2hqOOx+c5J8k+2sybDIQO49SIfkZdg=
+X-Received: by 2002:a50:ec97:0:b0:639:dd3f:f265 with SMTP id
+ 4fb4d7f45d1cf-63c1f6cee8fmr6661480a12.25.1760879176014; Sun, 19 Oct 2025
+ 06:06:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
- <20251013-feature_sysboot_extension_board-v3-8-04067b7422a5@bootlin.com>
-In-Reply-To: <20251013-feature_sysboot_extension_board-v3-8-04067b7422a5@bootlin.com>
+ <20251013-feature_sysboot_extension_board-v3-14-04067b7422a5@bootlin.com>
+In-Reply-To: <20251013-feature_sysboot_extension_board-v3-14-04067b7422a5@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 19 Oct 2025 14:05:57 +0100
-X-Gm-Features: AS18NWCUg6z4gEQAd9zNxB2VywGQSiZWt4UoRqHO7XsQJFcv7shAcXBMBzuPcIg
-Message-ID: <CAFLszThXWkby4kUwRiaoauh44d3hT1AAhMP9w2ECK_o0Vd5YSw@mail.gmail.com>
-Subject: Re: [PATCH v3 08/20] boot: Add UCLASS support for extension boards
+Date: Sun, 19 Oct 2025 14:06:01 +0100
+X-Gm-Features: AS18NWBJOjVaNcRTxWswMLqW_sgktJ5VyrIUCJD5Zjp3HS8--iLjxuD18a-OSjk
+Message-ID: <CAFLszTizYDnuMbzGnXCXTGARpuweHXgNbBqpZVT0vtEPBxwYFA@mail.gmail.com>
+Subject: Re: [PATCH v3 14/20] board: sandbox: Convert extension support to
+ UCLASS framework
 To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
 Cc: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>, Hans de Goede <hdegoede@redhat.com>, 
@@ -95,36 +96,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 13 Oct 2025 at 14:32, Kory Maincent (TI.com)
+On Mon, 13 Oct 2025 at 14:33, Kory Maincent (TI.com)
 <kory.maincent@bootlin.com> wrote:
 >
-> Introduce UCLASS-based extension board support to enable more
-> standardized and automatic loading of extension board device tree
-> overlays in preparation for integration with bootstd and pxe_utils.
->
-> Several #if CONFIG_IS_ENABLED are used in cmd/extension_board.c to ease the
-> development but don't worry they are removed later in the series.
+> Migrate sandbox extension board detection from legacy implementation to
+> the new UCLASS-based extension board framework.
 >
 > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 > ---
 >
 > Change in v3:
-> - Add OF_LIBFDT_OVERLAY config dependency.
-> - Update several return errors value following Simon review.
-> - Use uclass_first_device_err instead of extension_get_dev function.
-> - Remove the manual bind of extension driver. Use U_BOOT_DRVINFO instead.
-> - Update documentation.
-> - Add a helper to get extension ops.
+> - Use U_BOOT_DRVINFO.
 > ---
->  MAINTAINERS                 |   1 +
->  boot/Kconfig                |   4 ++
->  boot/Makefile               |   1 +
->  boot/extension-uclass.c     | 151 ++++++++++++++++++++++++++++++++++++++++++++
->  cmd/Kconfig                 |   2 +-
->  cmd/extension_board.c       |  50 ++++++++++++++-
->  doc/usage/cmd/extension.rst |  29 +++++----
->  include/dm/uclass-id.h      |   1 +
->  include/extension_board.h   |  70 ++++++++++++++++++++
->  9 files changed, 293 insertions(+), 16 deletions(-)
+>  arch/Kconfig            |  2 +-
+>  board/sandbox/sandbox.c | 28 ++++++++++++++++------------
+>  2 files changed, 17 insertions(+), 13 deletions(-)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
