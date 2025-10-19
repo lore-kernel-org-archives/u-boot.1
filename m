@@ -4,53 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5868CCD195
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 09:23:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10BF1CCD183
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 09:24:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27423836D2;
-	Sun, 19 Oct 2025 11:23:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id 676B783849;
+	Sun, 19 Oct 2025 11:24:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="c1SIrnN1";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c4jVQWcA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A8F283835; Sun, 19 Oct 2025 11:23:44 +0200 (CEST)
-Received: from out-176.mta1.migadu.com (out-176.mta1.migadu.com
- [IPv6:2001:41d0:203:375::b0])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BBE48836D1; Sun, 19 Oct 2025 11:23:59 +0200 (CEST)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3408836D1
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 11:23:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ by phobos.denx.de (Postfix) with ESMTPS id 53D4B8386B
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 11:23:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Sun, 19 Oct 2025 11:23:35 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1760865821;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=RiFX5Hc/Vmif7GNlcwbGKytNc2DWwMhDkPYR4PXMCO0=;
- b=c1SIrnN1pwD/zQpMrQTdrbU05U3h+pe5eIyQXWOKY+xWavdy/uzvyFeAc/IGMQckYGfhpZ
- L1jBHDnWhAxoi8GyZ2PEUfCR+p3Ks/+4b6Kr9GFX6sEhOWRli9Lo/IwdeFVHtma6/H7UGW
- J0uvw3Z6/pjNi3n+pscCSpA1rJBsIFk=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Henrik Grimler <henrik@grimler.se>
-To: Lukas Timmermann <uboot@timmermann.space>
-Cc: u-boot@lists.denx.de
-Subject: Re: [RFC PATCH 1/2] gpio: s5p_gpio: Add config option for s5p_gpio
- driver
-Message-ID: <20251019092335.GA88117@l14.localdomain>
-References: <20251013231542.821799-1-uboot@timmermann.space>
- <20251013231542.821799-2-uboot@timmermann.space>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=briansune@gmail.com
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-781010ff051so2549077b3a.0
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 02:23:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760865836; x=1761470636; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=H4FUeAMUzNZrglwNJ8tMUgowrhVHRjZhe24VNI5GSPc=;
+ b=c4jVQWcARHTWg7ib22vbsj6br1cohqyJsPWIB7j/jOyxBmm9668Wf/dY/RDrWjPnxF
+ eDF8UsbhrxQ/lbtdWuYVIxsGNpDHWztJ+plNG6qxU8kbD5kjA6mbYXCnJ4wYqdYvI9pT
+ axDQH3VzmbGlRaVG9Xz0TAtxqoEDJTRvIt9IPvCKA2l5k97Ekj5awhPdo5icTeyJ7On1
+ AwlZ/aCmr0Xq/UXnFoOlrYFxMFIUZqJdO+rEXiw3eFiP/YeC5TKP/YDE6hgDnTqmw3u9
+ GQuTlo4+XDb3Jrm/XuATlI6A//dWmtao18SGyV+wfyovafaB3ii+GTh8wYCVOPiyZurS
+ 8aLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760865836; x=1761470636;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=H4FUeAMUzNZrglwNJ8tMUgowrhVHRjZhe24VNI5GSPc=;
+ b=jGVkocsPDSGPJ4U17D8rtSIkWjZxd3MOtQf98wMyLKpDqKZV4tHOsOnZZTnIbbSPP9
+ vEENVvOVhx2ZwmEu2fB6/sLKF5485wpPS42ChN1HUZFvM/osA+CpdmQFkKo8WkqR1l5E
+ p7Yt2/WXcBrFseFQVZsW0LouO7NcCB06KzKdi6tWHl8BY6F7MVK0238it0HzLtI2nWaY
+ VXES365I9zqpgOyvxf5av9zASkRThOYCISfD7tQrciwhRv+vLJLklzo5Rr5dShLbLeWD
+ zyw/6HsrUf0HZKzHMMeWrVI3P6UTWSfwxjSBGL2zlcrAGaoKet34Pa0IEdImUJn84kQ3
+ BjPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXBfQAcRf1wkEKXJvYFhWoxXaEfmwP2Y5oQ5gYVr3NKQzXnCiIVOB2AgRW0ACd9Uua9nXmFAOY=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHaEChIvUgSZreAyObL87OPBoFMxBwbFhkCWRgJFmlhF367ebo
+ hOy1LSrhX3cwTgmNISZ/8lmZZUPwEuU2HQzLyw1l3yc4z4hjDj6Xm8Y63KoiezaEeeg=
+X-Gm-Gg: ASbGnct1aBuT3ysViraI3DEIeGniMLPR0h/B4OOMRe7ZiIDTc1AY8GvOXj6lkHj9FoN
+ uvU9xHad46p+anGvQd1exM9OmUauSg5mVlWswPsGyqIH6gMskQ64q7hNByCOW6Ies0ovg+l341Y
+ MdAj3ntW2G3KDNcqbO+n1lZbm7sWqk5vYjTtUYMeDowpp8CJuOMvt5jDHtdhPhdwWwe5MGbPkNB
+ XXF/LXZQYxvDpELK7SL9PLb6hxoDMfi5CMsNH+m7bVPvPJR4yh7tVvmqsFs3+hxC1yPiNPDQtZW
+ oV95iAvUaIbyCnqMvz8KC/RzrH2Q6YQf68xLSTiQS7CfNkAonXhgRelutKM1nMfcXP2zeNbPrB1
+ ghn3Ohx2u8SlaCthfLpq6yI0MjPWNo8r3MicxOyAo9zJkm2NqNjlch3jEdYRfVvY2vJsi8U1AgX
+ gOQgm0l0qBcwJIeoUuaxZ9XG9I8ypPz7ALGRfq
+X-Google-Smtp-Source: AGHT+IGP9qblt7ZOX1YwVDf5rSxS3GZvCX/dTzf6uTkgL+2J7gvqEEs+wBqv1NDPecF0EtF4vA/LrA==
+X-Received: by 2002:a05:6a00:14c8:b0:782:2b62:8188 with SMTP id
+ d2e1a72fcca58-7a220b1077emr12265450b3a.15.1760865835726; 
+ Sun, 19 Oct 2025 02:23:55 -0700 (PDT)
+Received: from localhost.localdomain ([185.213.82.51])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7a23010da0bsm4955968b3a.55.2025.10.19.02.23.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 19 Oct 2025 02:23:55 -0700 (PDT)
+From: Brian Sune <briansune@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH] Altera SoCFpga Boot Stall Fix
+Date: Sun, 19 Oct 2025 17:23:41 +0800
+Message-ID: <20251019092341.1158-1-briansune@gmail.com>
+X-Mailer: git-send-email 2.47.1.windows.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251013231542.821799-2-uboot@timmermann.space>
-X-Migadu-Flow: FLOW_OUT
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,90 +96,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukas,
+From: tg5 <briansune@gmail.com>
 
-On Tue, Oct 14, 2025 at 01:14:01AM +0200, Lukas Timmermann wrote:
-> This config option is required to make use of a newer pinctrl driver on
-> exynos 5 platforms. It is enabled per default to ensure older devices
-> can still use this driver.
-> 
-> Signed-off-by: Lukas Timmermann <uboot@timmermann.space>
-> ---
-> 
->  arch/arm/mach-exynos/pinmux.c | 18 ++++++++++++++++++
->  drivers/gpio/Kconfig          |  7 +++++++
->  drivers/gpio/Makefile         |  2 +-
->  3 files changed, 26 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-exynos/pinmux.c b/arch/arm/mach-exynos/pinmux.c
-> index 48c325190d5..77c831b8684 100644
-> --- a/arch/arm/mach-exynos/pinmux.c
-> +++ b/arch/arm/mach-exynos/pinmux.c
-> @@ -934,3 +934,21 @@ int pinmux_decode_periph_id(const void *blob, int node)
->  	return PERIPH_ID_NONE;
->  }
->  #endif
-> +
-> +#if !CONFIG_IS_ENABLED(S5P_GPIO)
-> +
-> +/* Add stub functions if s5p_gpio driver isn't enabled */
-> +
-> +void gpio_set_pull(int pin, int pull)
-> +{
-> +}
-> +
-> +void gpio_set_drv(int pin, int drv)
-> +{
-> +}
-> +
-> +void gpio_cfg_pin(int pin, int cfg)
-> +{
-> +}
-> +
-> +#endif
-> diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-> index 58e464106a3..2c09fb7a65d 100644
-> --- a/drivers/gpio/Kconfig
-> +++ b/drivers/gpio/Kconfig
-> @@ -724,5 +724,12 @@ config MPFS_GPIO
->  	depends on DM_GPIO
->  	help
->  		Enable to support the GPIO driver on Polarfire SoC
-> +config S5P_GPIO
-> +	default y
-> +	bool "Samsung S5P GPIO driver"
-> +	depends on DM_GPIO && S5P
-> +	help
-> +	  Support GPIO controllers on Samsung Exynos 5 family of SoCs.
+Since U-Boot 2025.07 pure SD Card
+boot no longer works. Now Altera released 2025.07
+shows the different on the u-boot files.
+After testing, the major root case is
+get_managers_addr. And this patch fix the
+SD boot stall via pulling from offical.
 
-S5P has more members than just Exynos 5, in fact it seems like most
-Exynos processors also have an S5Pxxxx name. Please make the
-description more general, as the driver is used by not only Exynos 5.
+Signed-off-by: tg5 <briansune@gmail.com>
+---
+ arch/arm/mach-socfpga/misc.c | 25 ++++++++++++++++++++++---
+ 1 file changed, 22 insertions(+), 3 deletions(-)
 
-> +	  This driver doesn't support upstream Linux device tree bindings.
+diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
+index 97e01140513..11ab8f17489 100644
+--- a/arch/arm/mach-socfpga/misc.c
++++ b/arch/arm/mach-socfpga/misc.c
+@@ -177,7 +177,10 @@ int arch_cpu_init(void)
+ 	 * timeout value is still active which might too short for Linux
+ 	 * booting.
+ 	 */
++#if !(IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_SIMICS) || \
++	IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_EMU))
+ 	hw_watchdog_init();
++#endif
+ #else
+ 	/*
+ 	 * If the HW watchdog is NOT enabled, make sure it is not running,
+@@ -222,8 +225,16 @@ static int do_bridge(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ U_BOOT_CMD(bridge, 3, 1, do_bridge,
+ 	   "SoCFPGA HPS FPGA bridge control",
+-	   "enable [mask] - Enable HPS-to-FPGA, FPGA-to-HPS, LWHPS-to-FPGA bridges\n"
+-	   "bridge disable [mask] - Enable HPS-to-FPGA, FPGA-to-HPS, LWHPS-to-FPGA bridges\n"
++	   "enable [mask] - Enable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
++	   "bridge disable [mask] - Disable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
++	   "Bit 3, Bit 4 and Bit 5 bridges only available in Stratix 10\n"
++	   "For example:\n"
++	   "1) To enable and disable all bridges (command without mask):\n"
++	   "	a) bridge enable\n"
++	   "	b) bridge disable\n"
++	   "2) To enable and disable HPS-to-FPGA and LWHPS-to-FPGA bridges (command with mask):\n"
++	   "	a) bridge enable 0x3\n"
++	   "	b) bridge disable 0x3\n"
+ 	   ""
+ );
+ 
+@@ -260,7 +271,15 @@ void socfpga_get_managers_addr(void)
+ 	if (ret)
+ 		hang();
+ 
+-	if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX))
++	if (!IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)) {
++		ret = socfpga_get_base_addr("altr,sys-mgr",
++					    &socfpga_sysmgr_base);
++		if (ret)
++			hang();
++	}
++
++	if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) ||
++	    IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M))
+ 		ret = socfpga_get_base_addr("intel,agilex-clkmgr",
+ 					    &socfpga_clkmgr_base);
+ 	else if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X))
+-- 
+2.25.1
 
-Nitpick: AFAIK, as a non native speaker, "doesn't" is conversational /
-informal, and the long form 'does not' should be preferred in written
-English.
-
-Best regards,
-Henrik Grimler
-
->  
->  endif
-> diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-> index 83e10c79b91..5555ed27b14 100644
-> --- a/drivers/gpio/Makefile
-> +++ b/drivers/gpio/Makefile
-> @@ -35,7 +35,7 @@ obj-$(CONFIG_PCA953X)		+= pca953x.o
->  obj-$(CONFIG_ROCKCHIP_GPIO)	+= rk_gpio.o
->  obj-$(CONFIG_RCAR_GPIO)		+= gpio-rcar.o
->  obj-$(CONFIG_RZA1_GPIO)		+= gpio-rza1.o
-> -obj-$(CONFIG_S5P)		+= s5p_gpio.o
-> +obj-$(CONFIG_S5P_GPIO)		+= s5p_gpio.o
->  obj-$(CONFIG_SANDBOX_GPIO)	+= sandbox.o sandbox_test.o
->  obj-$(CONFIG_TEGRA_GPIO)	+= tegra_gpio.o
->  obj-$(CONFIG_TEGRA186_GPIO)	+= tegra186_gpio.o
-> -- 
-> 2.51.0
-> 
