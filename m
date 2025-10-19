@@ -4,52 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E897CCD195
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 09:29:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F3BDCCD183
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 10:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FA3C83881;
-	Sun, 19 Oct 2025 11:29:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=grimler.se
+	by phobos.denx.de (Postfix) with ESMTP id 6D87383835;
+	Sun, 19 Oct 2025 12:52:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=grimler.se header.i=@grimler.se header.b="PZW0SWs6";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Rwc74dTm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C7A983885; Sun, 19 Oct 2025 11:29:31 +0200 (CEST)
-Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::b2])
+ id D802A83837; Sun, 19 Oct 2025 12:52:31 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17DE883837
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 11:29:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=grimler.se
+ by phobos.denx.de (Postfix) with ESMTPS id 02E9B8309A
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 12:52:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=henrik@grimler.se
-Date: Sun, 19 Oct 2025 11:29:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=grimler.se; s=key1;
- t=1760866167;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/Ts8qQkc1brt0E3SlPhxDfLWtMnQ47YyvTxGe36ebbc=;
- b=PZW0SWs6ntvqkF6NlBwW5R5o95Rw3GvABLMNalW++o3DuS0weK3pcoKejTDPm5tCEV4dsD
- tkJq5+4CpJOFhJYAxn4xUL/Nc9B0Vs0VT057EcBxlGzOucidDcA0OZZHGvGMfTgatn/xbS
- vbr/vdxlZw2jV7h1xqg7oa9+lvy/1tw=
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Henrik Grimler <henrik@grimler.se>
-To: Lukas Timmermann <uboot@timmermann.space>
-Cc: u-boot@lists.denx.de
-Subject: Re: [RFC PATCH 2/2] pinctrl: exynos: add exynos5250 driver
-Message-ID: <20251019092924.GA88948@l14.localdomain>
-References: <20251013231542.821799-1-uboot@timmermann.space>
- <20251013231542.821799-3-uboot@timmermann.space>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=7ec7=44=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1760871147;
+ bh=NUxQ2dhfzgMM1JSjskwJ/zKQQQm3fBOi6iAW2KL7lio=;
+ b=Rwc74dTmM/tc5u7e5TVA8We4uWRXMpCtFc/B1mZJs6Zeh850uw1uykM9vACFngYZBm2C5Lw24
+ wYxPQACF1L9RSN+FJyuLPwSFQYh8J9Pt60yjuC6pXvaxf5vGslP0VRIyUwSLYecDzyw/DeLGp5m
+ +ZpjnmHoLE7jIS/E5xgCniDqbl+TFAUnbUR5pVQtkcrwlluh5S13XdNl1sEIegV+WymJ/aYC7D9
+ vVeoPg/R/Ht666MrdJB4Jy6NlNZbv5t775hoXXFMI8I+Tn3wRsvzIe7Ce6gSqB5m8zr9TVT/o/w
+ 4eIm7zkvN4Z6xh4ZcjsFO0mkv28ch5sGMYLl8fPy1MdA==
+X-Forward-Email-ID: 68f4c2e6981316ada651bdb9
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 1.3.0
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <55af1d20-4dd0-4b77-8cab-035921c405a0@kwiboo.se>
+Date: Sun, 19 Oct 2025 12:52:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20251013231542.821799-3-uboot@timmermann.space>
-X-Migadu-Flow: FLOW_OUT
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] board: rockchip: Add FriendlyElec NanoPi Zero2
+To: Yao Zi <ziyao@disroot.org>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
+ Heiko Stuebner <heiko@sntech.de>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+References: <20251019052607.61702-1-ziyao@disroot.org>
+ <20251019052607.61702-3-ziyao@disroot.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20251019052607.61702-3-ziyao@disroot.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,187 +77,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukas,
+Hi Yao Zi,
 
-On Tue, Oct 14, 2025 at 01:14:02AM +0200, Lukas Timmermann wrote:
-> Adds the needed files for using the new pinctrl driver with exynos5250
-> SoCs.
+On 10/19/2025 7:26 AM, Yao Zi wrote:
+> FriendlElec NanoPi Zero2 is a super-tiny development board based on
+> RK3528A SoC. Add board-level configuration and U-Boot-specific
+> devicetree piece for it.
 > 
-> Signed-off-by: Lukas Timmermann <uboot@timmermann.space>
+> Signed-off-by: Yao Zi <ziyao@disroot.org>
 > ---
+>  arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi | 11 +++++
+>  arch/arm/mach-rockchip/rk3528/MAINTAINERS    |  6 +++
+>  configs/nanopi-zero2_defconfig               | 46 ++++++++++++++++++++
+>  doc/board/rockchip/rockchip.rst              |  1 +
+>  4 files changed, 64 insertions(+)
+>  create mode 100644 arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
+>  create mode 100644 configs/nanopi-zero2_defconfig
 > 
->  MAINTAINERS                                 |   5 +
->  drivers/pinctrl/exynos/Kconfig              |   8 ++
->  drivers/pinctrl/exynos/Makefile             |   1 +
->  drivers/pinctrl/exynos/pinctrl-exynos5250.c | 100 ++++++++++++++++++++
->  4 files changed, 114 insertions(+)
->  create mode 100644 drivers/pinctrl/exynos/pinctrl-exynos5250.c
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index cae855da60e..57c101d54b6 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -606,6 +606,11 @@ F:	drivers/clk/exynos/clk-exynos850.c
->  F:	drivers/phy/phy-exynos-usbdrd.c
->  F:	drivers/pinctrl/exynos/pinctrl-exynos850.c
->  
-> +ARM SAMSUNG EXYNOS5250 SOC
-> +M:	Lukas Timmermann <uboot@timmermann.space>
-> +S:	Maintained
-> +F:	drivers/pinctrl/exynos/pinctrl-exynos5250.c
-> +
->  ARM SAMSUNG SOC DRIVERS
->  M:	Sam Protsenko <semen.protsenko@linaro.org>
->  S:	Maintained
-> diff --git a/drivers/pinctrl/exynos/Kconfig b/drivers/pinctrl/exynos/Kconfig
-> index 1b7fb62bc4b..18503ce112e 100644
-> --- a/drivers/pinctrl/exynos/Kconfig
-> +++ b/drivers/pinctrl/exynos/Kconfig
-> @@ -1,6 +1,14 @@
->  config PINCTRL_EXYNOS
->  	bool
->  
-> +config PINCTRL_EXYNOS5250
-> +	bool "Samsung Exynos5250 pinctrl driver"
-> +	depends on ARCH_EXYNOS && PINCTRL_FULL
-> +	select PINCTRL_EXYNOS
-> +	help
-> +	  Support pin multiplexing and pin configuration control on
-> +	  Samsung's Exynos5250 SoC.
-> +
->  config PINCTRL_EXYNOS7420
->  	bool "Samsung Exynos7420 pinctrl driver"
->  	depends on ARCH_EXYNOS && PINCTRL_FULL
-> diff --git a/drivers/pinctrl/exynos/Makefile b/drivers/pinctrl/exynos/Makefile
-> index 3abe1226eb7..7ef8d90cb59 100644
-> --- a/drivers/pinctrl/exynos/Makefile
-> +++ b/drivers/pinctrl/exynos/Makefile
-> @@ -4,6 +4,7 @@
->  # Thomas Abraham <thomas.ab@samsung.com>
->  
->  obj-$(CONFIG_PINCTRL_EXYNOS)		+= pinctrl-exynos.o
-> +obj-$(CONFIG_PINCTRL_EXYNOS5250)	+= pinctrl-exynos5250.o
->  obj-$(CONFIG_PINCTRL_EXYNOS7420)	+= pinctrl-exynos7420.o
->  obj-$(CONFIG_PINCTRL_EXYNOS78x0)	+= pinctrl-exynos78x0.o
->  obj-$(CONFIG_PINCTRL_EXYNOS850)		+= pinctrl-exynos850.o
-> diff --git a/drivers/pinctrl/exynos/pinctrl-exynos5250.c b/drivers/pinctrl/exynos/pinctrl-exynos5250.c
+> diff --git a/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi b/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
 > new file mode 100644
-> index 00000000000..dfd86e7c0c0
+> index 00000000000..3f65d2e1ff1
 > --- /dev/null
-> +++ b/drivers/pinctrl/exynos/pinctrl-exynos5250.c
-> @@ -0,0 +1,100 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) 2023 Linaro Ltd.
-> + * Author: Sam Protsenko <semen.protsenko@linaro.org>
-> + * Co-author: Lukas Timmermann <linux@timmermann.space>
+> +++ b/arch/arm/dts/rk3528-nanopi-zero2-u-boot.dtsi
+> @@ -0,0 +1,11 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +#include "rk3528-u-boot.dtsi"
+> +
+> +&vdd_arm {
+> +	regulator-init-microvolt = <953000>;
+> +};
+> +
+> +&vdd_logic {
+> +	regulator-init-microvolt = <901000>;
+> +};
+> diff --git a/arch/arm/mach-rockchip/rk3528/MAINTAINERS b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
+> index f343f71cf7f..853480a58ce 100644
+> --- a/arch/arm/mach-rockchip/rk3528/MAINTAINERS
+> +++ b/arch/arm/mach-rockchip/rk3528/MAINTAINERS
+> @@ -9,3 +9,9 @@ M:	Jonas Karlman <jonas@kwiboo.se>
+>  S:	Maintained
+>  F:	arch/arm/dts/rk3528-radxa-e20c*
+>  F:	configs/radxa-e20c-rk3528_defconfig
+> +
+> +NANOPI-ZERO2
+> +M:	Yao Zi <ziyao@disroot.org>
 
-I think "Co-author:" is generally not used, please consider settings
-yourself as just "Author:"
+Feel free to also add me as a maintainer (or reviewer):
 
-> + *
-> + * Exynos5250 pinctrl driver.
-> + */
-> +
-> +#include <dm.h>
-> +#include <dm/pinctrl.h>
-> +#include "pinctrl-exynos.h"
-> +
-> +static const struct pinctrl_ops exynos5250_pinctrl_ops = {
-> +	.set_state = exynos_pinctrl_set_state
-> +};
-> +
-> +static const struct samsung_pin_bank_data exynos5250_pin_banks0[] = {
-> +	EXYNOS_PIN_BANK(8, 0x000, "gpa0"),
-> +	EXYNOS_PIN_BANK(6, 0x020, "gpa1"),
-> +	EXYNOS_PIN_BANK(8, 0x040, "gpa2"),
-> +	EXYNOS_PIN_BANK(5, 0x060, "gpb0"),
-> +	EXYNOS_PIN_BANK(5, 0x080, "gpb1"),
-> +	EXYNOS_PIN_BANK(4, 0x0A0, "gpb2"),
-> +	EXYNOS_PIN_BANK(4, 0x0C0, "gpb3"),
-> +	EXYNOS_PIN_BANK(7, 0x0E0, "gpc0"),
-> +	EXYNOS_PIN_BANK(4, 0x100, "gpc1"),
-> +	EXYNOS_PIN_BANK(7, 0x120, "gpc2"),
-> +	EXYNOS_PIN_BANK(7, 0x140, "gpc3"),
-> +	EXYNOS_PIN_BANK(4, 0x160, "gpd0"),
-> +	EXYNOS_PIN_BANK(8, 0x180, "gpd1"),
-> +	EXYNOS_PIN_BANK(7, 0x2E0, "gpc4"),
-> +	EXYNOS_PIN_BANK(6, 0x1A0, "gpy0"),
-> +	EXYNOS_PIN_BANK(4, 0x1C0, "gpy1"),
-> +	EXYNOS_PIN_BANK(6, 0x1E0, "gpy2"),
-> +	EXYNOS_PIN_BANK(8, 0x200, "gpy3"),
-> +	EXYNOS_PIN_BANK(8, 0x220, "gpy4"),
-> +	EXYNOS_PIN_BANK(8, 0x240, "gpy5"),
-> +	EXYNOS_PIN_BANK(8, 0x260, "gpy6"),
-> +	EXYNOS_PIN_BANK(8, 0xC00, "gpx0"),
-> +	EXYNOS_PIN_BANK(8, 0xC20, "gpx1"),
-> +	EXYNOS_PIN_BANK(8, 0xC40, "gpx2"),
-> +	EXYNOS_PIN_BANK(8, 0xC60, "gpx3"),
-> +};
-> +
-> +static const struct samsung_pin_bank_data exynos5250_pin_banks1[] = {
-> +	EXYNOS_PIN_BANK(8, 0x000, "gpe0"),
-> +	EXYNOS_PIN_BANK(2, 0x020, "gpe1"),
-> +	EXYNOS_PIN_BANK(4, 0x040, "gpf0"),
-> +	EXYNOS_PIN_BANK(4, 0x060, "gpf1"),
-> +	EXYNOS_PIN_BANK(8, 0x080, "gpg0"),
-> +	EXYNOS_PIN_BANK(8, 0x0A0, "gpg1"),
-> +	EXYNOS_PIN_BANK(2, 0x0C0, "gpg2"),
-> +	EXYNOS_PIN_BANK(4, 0x0E0, "gph0"),
-> +	EXYNOS_PIN_BANK(8, 0x100, "gph1"),
-> +};
-> +
-> +static const struct samsung_pin_bank_data exynos5250_pin_banks2[] = {
-> +	EXYNOS_PIN_BANK(8, 0x000, "gpv0"),
-> +	EXYNOS_PIN_BANK(8, 0x020, "gpv1"),
-> +	EXYNOS_PIN_BANK(8, 0x060, "gpv2"),
-> +	EXYNOS_PIN_BANK(8, 0x080, "gpv3"),
-> +	EXYNOS_PIN_BANK(2, 0x0C0, "gpv4"),
+M:	Jonas Karlman <jonas@kwiboo.se>
 
-Lower-case letters in the constants please, in all the bank structs.
+> +S:	Maintained
+> +F:	arch/arm/dts/rk3528-nanopi-zero2*
+> +F:	configs/nanopi-zero2_defconfig
 
-Otherwise looks good to me, thanks!
+The defconfig should be named nanopi-zero2-rk3528_defconfig to match the
+Rockchip board defconfig naming scheme.
 
-Best regards,
-Henrik Grimler
+> diff --git a/configs/nanopi-zero2_defconfig b/configs/nanopi-zero2_defconfig
+> new file mode 100644
+> index 00000000000..af14589568c
+> --- /dev/null
+> +++ b/configs/nanopi-zero2_defconfig
 
-> +};
-> +
-> +static const struct samsung_pin_bank_data exynos5250_pin_banks3[] = {
-> +	EXYNOS_PIN_BANK(7, 0x000, "gpz"),
-> +};
-> +
-> +static const struct samsung_pin_ctrl exynos5250_pin_ctrl[] = {
-> +	{
-> +		.pin_banks	= exynos5250_pin_banks0,
-> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks0),
-> +	}, {
-> +		.pin_banks	= exynos5250_pin_banks1,
-> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks1),
-> +	}, {
-> +		.pin_banks	= exynos5250_pin_banks2,
-> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks2),
-> +	}, {
-> +		.pin_banks	= exynos5250_pin_banks3,
-> +		.nr_banks	= ARRAY_SIZE(exynos5250_pin_banks3),
-> +	},
-> +	{/* list terminator */}
-> +};
-> +
-> +static const struct udevice_id exynos5250_pinctrl_ids[] = {
-> +	{ .compatible = "samsung,exynos5250-pinctrl",
-> +		.data = (ulong)exynos5250_pin_ctrl },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(pinctrl_exynos5250) = {
-> +	.name		= "pinctrl_exynos5250",
-> +	.id			= UCLASS_PINCTRL,
-> +	.of_match	= exynos5250_pinctrl_ids,
-> +	.priv_auto	= sizeof(struct exynos_pinctrl_priv),
-> +	.ops		= &exynos5250_pinctrl_ops,
-> +	.probe		= exynos_pinctrl_probe,
-> +};
-> -- 
-> 2.51.0
-> 
+As mentioned above, please name this nanopi-zero2-rk3528_defconfig.
+
+> @@ -0,0 +1,46 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3528-nanopi-zero2"
+> +CONFIG_ROCKCHIP_RK3528=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_DEBUG_UART_BASE=0xFF9F0000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_DEBUG_UART=y
+> +# CONFIG_BOOTMETH_VBE is not set
+
+There should be no need to drop this, I only drop it in generic Rockchip
+defconfig because it that defconfig is supposed to be as minimal and
+generic as possible.
+
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3528-nanopi-zero2.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+
+Please add following to seed random generator for linux.
+
+CONFIG_BOARD_RNG_SEED=y
+
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_CMD_MEMINFO=y
+> +CONFIG_CMD_MEMINFO_MAP=y
+
+Please add following to add the adc command:
+
+CONFIG_CMD_ADC=y
+
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_MISC=y
+> +CONFIG_CMD_MMC=y
+
+Please add following USB commands to future proof:
+
+CONFIG_CMD_USB=y
+CONFIG_CMD_ROCKUSB=y
+CONFIG_CMD_USB_MASS_STORAGE=y
+
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_RNG=y
+
+Please add following to enable regulator debug:
+
+CONFIG_CMD_REGULATOR=y
+
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_BUTTON=y
+> +CONFIG_BUTTON_ADC=y
+
+Please add following to simplify addition of USB related Kconfig options:
+
+# CONFIG_USB_FUNCTION_FASTBOOT is not set
+
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_PHY_REALTEK=y
+
+Please add following:
+
+CONFIG_DM_MDIO=y
+
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+
+Please add following to prepare for USB3/PCIe:
+
+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+
+Please add following to actually enable support for initializing the two
+pwm-regulators on this board.
+
+CONFIG_REGULATOR_PWM=y
+
+> +CONFIG_DM_REGULATOR_GPIO=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+
+Please add following to prepare for future USB support:
+
+CONFIG_USB=y
+CONFIG_USB_XHCI_HCD=y
+CONFIG_USB_EHCI_HCD=y
+CONFIG_USB_EHCI_GENERIC=y
+CONFIG_USB_DWC3=y
+CONFIG_USB_DWC3_GENERIC=y
+CONFIG_USB_GADGET=y
+CONFIG_USB_GADGET_DOWNLOAD=y
+CONFIG_USB_FUNCTION_ROCKUSB=y
+
+> +CONFIG_ERRNO_STR=y
+> diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+> index de3aa79cb5c..b2b7de4e43a 100644
+> --- a/doc/board/rockchip/rockchip.rst
+> +++ b/doc/board/rockchip/rockchip.rst
+> @@ -100,6 +100,7 @@ List of mainline supported Rockchip boards:
+>       - Theobroma Systems RK3399-Q7 SoM - Puma (puma_rk3399)
+>  
+>  * rk3528
+> +     - FriendlyElec NanoPi Zero2 (nanopi-zero2)
+
+Please update to include the rk3528 suffix after the defconfig name.
+
+>       - Generic RK3528 (generic-rk3528)
+>       - Radxa E20C (radxa-e20c-rk3528)
+>  
+
+With above adjustments this closely matches the defconfig I have been
+carrying in my rk3528 branch at [1] a few months.
+
+So with above fixed this is:
+
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+
+[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3528
+
+I plan to send out a series with the ROCK-2 and Sige1 board additions shortly.
+
+Regards,
+Jonas
