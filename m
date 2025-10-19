@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9BDACCD183
-	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 15:48:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26BA9CCD184
+	for <u-boot@archiver.kernel.org>; Sun, 19 Oct 2025 15:48:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCD3C838D7;
-	Sun, 19 Oct 2025 17:48:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B71D838AE;
+	Sun, 19 Oct 2025 17:48:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="z0JPOTG3";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OakS3vpK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBD07838D7; Sun, 19 Oct 2025 17:48:12 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 1E2DB838E7; Sun, 19 Oct 2025 17:48:15 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91A3E83211
- for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 17:48:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AF204838AE
+ for <u-boot@lists.denx.de>; Sun, 19 Oct 2025 17:48:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1760888889; bh=ApQNbHxB//0ISKMNFTeD63G9499yW8CVb0wcboWsvj0=;
- b=z0JPOTG3zjJW+i2fvy8ZmvQF7GNWW05wFklZB226JKIdrBKnHa8sa0el8xit8bO2HJENHdCZc
- 7FCUcVRuOOthCOXz6Hu81BI9Obb+CQhEhA5MpH0XWey8hLEcriPiuy9kTcVdQ0R+bGterjtMoUV
- MIlEybOC2/684TkLGUIimfGmkU/M63VgNAPm77EWbEYGNUAEc6UEqr0m8nZJTNesX2QJI9oXH/i
- 23WoFOJcpuYWuFe9yhc9KkmdOmdpUBGa584s8DQJn9J43hA3N9Dv5ebZwgFb2S2hUbNdAElo8Bx
- Jl8dxgpW4wqz8Jjr2L2d5vbHyao+nethZUk7+Xh6C2Bg==
-X-Forward-Email-ID: 68f508345ea0c674272431e0
+ t=1760888891; bh=0b1MuR/AXGdfM2DiIVmLR4e0+cjRwm7XbcsTBp1BWKU=;
+ b=OakS3vpKZpLLW5VtZ8dAJBXqU5SUKxmYQkUh9Ndz7j8+2XjROWQy96wrKRhYD9JpAxIfK+u4M
+ PO7glrZvGSlTeIYS+BX5bBgCOJzB3/CEEs/uAX2SdfmM7+W2hkLq0N1t3TP4+OOQbgxU8po5G6F
+ M4Hx0mhTVClcn4vwWDihvV76UdPxWQImF17eeaKWm6gR6gcVJJoU+LhPexXJruqV1GiNPXHwoz9
+ eAgoeIVQQyRyKdCbjt7zPoOg7rOQZEF4QhzzK32yKKrWXq0j7NowgN6u+TYk5rPSKcB1PJhdW4v
+ 3BtUcAokVMBdLlE7ExhbiReiRicgqwayxZqOx29ziSyw==
+X-Forward-Email-ID: 68f508385ea0c674272431ff
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 149.28.215.223
 X-Forward-Email-Version: 1.3.0
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -44,12 +44,13 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v4 4/5] rockchip: rk3576: Add SPI Flash boot support
-Date: Sun, 19 Oct 2025 15:47:18 +0000
-Message-ID: <20251019154728.846096-5-jonas@kwiboo.se>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+	u-boot@lists.denx.de
+Subject: [PATCH v4 5/5] board: rockchip: Add Radxa ROCK 4D
+Date: Sun, 19 Oct 2025 15:47:19 +0000
+Message-ID: <20251019154728.846096-6-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20251019154728.846096-1-jonas@kwiboo.se>
 References: <20251019154728.846096-1-jonas@kwiboo.se>
@@ -71,156 +72,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bootsource ids reported by BootROM of RK3576 for SPI NOR and USB
-differs slightly compared to prior SoCs:
+The Radxa ROCK 4D is a compact single-board computer (SBC) featuring
+numerous top-tier functions, features, and expansion options.
 
-- Booting from sfc0 (ROCK 4D) report the normal bootsource id 0x3.
-- Booting from sfc1 M1 (NanoPi M5) report a new bootsource id 0x23.
-- Booting from sfc1 M0 has not been tested (no board using this config).
-- Booting from USB report a new bootsource id 0x81.
+Equipped with the Rockchip RK3576 or RK3576J SoC, the ROCK 4D boasts an
+octa-core CPU (4x Cortex-A72 + 4x Cortex-A53), Mali-G52 GPU, and a
+powerful 6 TOPS NPU, making it ideal for AI and multimedia tasks.
 
-Add a RK3576 specific read_brom_bootsource_id() function to help decode
-the new bootsource id values and the required boot_devices mapping of
-sfc0 and sfc1 to help support booting from SPI flash on RK3576.
+Features tested on a Radxa ROCK 4D v1.112:
+- SPI Flash boot
+- Ethernet
+- PCIe/NVMe
+- USB host
+
+ROCK 4D boards with SPI Flash is configured to boot from FSPI0->UFS->USB,
+or directly from USB when the MASKROM button is pressed, booting
+directly from SD-card is not possible on these boards.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v4: No change
-
-Changes in v3:
-- Add fspi1m1 pinctrl bootph- props to SoC u-boot.dtsi
-- Drop the incomplete support for FSPI1_M0
-- Add a short code comment about the re-mapping of bootsource id
-
-v2: No change
+v3: Drop the reset-gpios prop rename
+v2: Add comment about the reset-gpios prop rename
 ---
- arch/arm/dts/rk3576-u-boot.dtsi        | 46 ++++++++++++++++++++++++++
- arch/arm/mach-rockchip/rk3576/rk3576.c | 25 ++++++++++++++
- 2 files changed, 71 insertions(+)
+ arch/arm/dts/rk3576-rock-4d-u-boot.dtsi   | 10 ++++
+ arch/arm/mach-rockchip/rk3576/MAINTAINERS |  6 ++
+ configs/rock-4d-rk3576_defconfig          | 68 +++++++++++++++++++++++
+ doc/board/rockchip/rockchip.rst           |  1 +
+ 4 files changed, 85 insertions(+)
+ create mode 100644 arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
+ create mode 100644 configs/rock-4d-rk3576_defconfig
 
-diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
-index fb5a107f47d9..dc3771b556a3 100644
---- a/arch/arm/dts/rk3576-u-boot.dtsi
-+++ b/arch/arm/dts/rk3576-u-boot.dtsi
-@@ -6,6 +6,11 @@
- #include "rockchip-u-boot.dtsi"
- 
- / {
-+	aliases {
-+		spi5 = &sfc0;
-+		spi6 = &sfc1;
-+	};
+diff --git a/arch/arm/dts/rk3576-rock-4d-u-boot.dtsi b/arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
+new file mode 100644
+index 000000000000..db46553b66a4
+--- /dev/null
++++ b/arch/arm/dts/rk3576-rock-4d-u-boot.dtsi
+@@ -0,0 +1,10 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
- 	chosen {
- 		u-boot,spl-boot-order = "same-as-spl", &sdmmc, &sdhci;
- 	};
-@@ -16,6 +21,17 @@
- 	};
- };
- 
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-+			offset = <0x8000>;
-+		};
-+	};
-+};
-+#endif
++#include "rk3576-u-boot.dtsi"
 +
- &cru {
- 	bootph-all;
- };
-@@ -45,6 +61,26 @@
- 	bootph-some-ram;
- };
- 
-+&fspi0_csn0 {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&fspi0_pins {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&fspi1m1_csn0 {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&fspi1m1_pins {
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
- &ioc_grf {
- 	bootph-all;
- };
-@@ -116,6 +152,16 @@
- 	bootph-some-ram;
- };
- 
 +&sfc0 {
-+	bootph-some-ram;
-+	u-boot,spl-sfc-no-dma;
++	flash@0 {
++		bootph-pre-ram;
++		bootph-some-ram;
++	};
 +};
-+
-+&sfc1 {
-+	bootph-some-ram;
-+	u-boot,spl-sfc-no-dma;
-+};
-+
- &sys_grf {
- 	bootph-all;
- };
-diff --git a/arch/arm/mach-rockchip/rk3576/rk3576.c b/arch/arm/mach-rockchip/rk3576/rk3576.c
-index a6c2fbdc4840..a1e8a7572fa4 100644
---- a/arch/arm/mach-rockchip/rk3576/rk3576.c
-+++ b/arch/arm/mach-rockchip/rk3576/rk3576.c
-@@ -36,8 +36,15 @@
- #define USB_GRF_BASE		0x2601E000
- #define USB3OTG0_CON1		0x0030
+diff --git a/arch/arm/mach-rockchip/rk3576/MAINTAINERS b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+index 94ef74d429f9..54c75f451f0f 100644
+--- a/arch/arm/mach-rockchip/rk3576/MAINTAINERS
++++ b/arch/arm/mach-rockchip/rk3576/MAINTAINERS
+@@ -4,6 +4,12 @@ S:	Maintained
+ F:	arch/arm/dts/rk3576-generic*
+ F:	configs/generic-rk3576_defconfig
  
-+enum {
-+	BROM_BOOTSOURCE_FSPI0 = 3,
-+	BROM_BOOTSOURCE_FSPI1_M1 = 6,
-+};
++ROCK-4D-RK3576
++M:	Jonas Karlman <jonas@kwiboo.se>
++S:	Maintained
++F:	arch/arm/dts/rk3576-rock-4d*
++F:	configs/rock-4d-rk3576_defconfig
 +
- const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
- 	[BROM_BOOTSOURCE_EMMC] = "/soc/mmc@2a330000",
-+	[BROM_BOOTSOURCE_FSPI0] = "/soc/spi@2a340000/flash@0",
-+	[BROM_BOOTSOURCE_FSPI1_M1] = "/soc/spi@2a300000/flash@0",
- 	[BROM_BOOTSOURCE_SD] = "/soc/mmc@2a310000",
- };
+ SIGE5-RK3576
+ M:	Jonas Karlman <jonas@kwiboo.se>
+ S:	Maintained
+diff --git a/configs/rock-4d-rk3576_defconfig b/configs/rock-4d-rk3576_defconfig
+new file mode 100644
+index 000000000000..140a3e0ccd84
+--- /dev/null
++++ b/configs/rock-4d-rk3576_defconfig
+@@ -0,0 +1,68 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_COUNTER_FREQUENCY=24000000
++CONFIG_ARCH_ROCKCHIP=y
++CONFIG_SF_DEFAULT_SPEED=50000000
++CONFIG_SF_DEFAULT_MODE=0x2000
++CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3576-rock-4d"
++CONFIG_ROCKCHIP_RK3576=y
++CONFIG_ROCKCHIP_SPI_IMAGE=y
++CONFIG_SYS_LOAD_ADDR=0x40c00800
++CONFIG_SF_DEFAULT_BUS=5
++CONFIG_DEBUG_UART_BASE=0x2AD40000
++CONFIG_DEBUG_UART_CLOCK=24000000
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_PCI=y
++CONFIG_DEBUG_UART=y
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3576-rock-4d.dtb"
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_MAX_SIZE=0x40000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
++CONFIG_CMD_ADC=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MISC=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
++CONFIG_CMD_USB=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_RNG=y
++CONFIG_CMD_REGULATOR=y
++# CONFIG_SPL_DOS_PARTITION is not set
++CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
++CONFIG_ROCKCHIP_GPIO=y
++CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_LED=y
++CONFIG_LED_GPIO=y
++CONFIG_SUPPORT_EMMC_RPMB=y
++CONFIG_MMC_DW=y
++CONFIG_MMC_DW_ROCKCHIP=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
++CONFIG_PHY_ROCKCHIP_USBDP=y
++CONFIG_DM_PMIC=y
++CONFIG_PMIC_RK8XX=y
++CONFIG_REGULATOR_RK8XX=y
++CONFIG_BAUDRATE=1500000
++CONFIG_DEBUG_UART_SHIFT=2
++CONFIG_SYS_NS16550_MEM32=y
++CONFIG_ROCKCHIP_SFC=y
++CONFIG_SYSRESET_PSCI=y
++CONFIG_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_ERRNO_STR=y
+diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rockchip.rst
+index de3aa79cb5c9..0ec56c8d068a 100644
+--- a/doc/board/rockchip/rockchip.rst
++++ b/doc/board/rockchip/rockchip.rst
+@@ -137,6 +137,7 @@ List of mainline supported Rockchip boards:
+      - ArmSoM Sige5 (sige5-rk3576)
+      - Firefly ROC-RK3576-PC (roc-pc-rk3576)
+      - Generic RK3576 (generic-rk3576)
++     - Radxa ROCK 4D (rock-4d-rk3576)
  
-@@ -85,6 +92,24 @@ void board_debug_uart_init(void)
- {
- }
- 
-+u32 read_brom_bootsource_id(void)
-+{
-+	u32 bootsource_id = readl(BROM_BOOTSOURCE_ID_ADDR);
-+
-+	/* Re-map the raw value read from reg to a redefined or existing
-+	 * BROM_BOOTSOURCE enum value to avoid having to create a larger
-+	 * boot_devices table.
-+	 */
-+	if (bootsource_id == 0x23)
-+		return BROM_BOOTSOURCE_FSPI1_M1;
-+	else if (bootsource_id == 0x81)
-+		return BROM_BOOTSOURCE_USB;
-+	else if (bootsource_id > BROM_LAST_BOOTSOURCE)
-+		log_debug("Unknown bootsource %x\n", bootsource_id);
-+
-+	return bootsource_id;
-+}
-+
- #define HP_TIMER_BASE			CONFIG_ROCKCHIP_STIMER_BASE
- #define HP_CTRL_REG			0x04
- #define TIMER_EN			BIT(0)
+ * rk3588
+      - ArmSoM Sige7 (sige7-rk3588)
 -- 
 2.51.0
 
