@@ -4,38 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9703FCCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 14:26:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B26C6CCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 14:26:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EA5582C84;
-	Mon, 20 Oct 2025 16:26:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 5332383642;
+	Mon, 20 Oct 2025 16:26:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RLtyAxYD";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2F3283438; Mon, 20 Oct 2025 16:26:44 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9C24C80422
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 16:26:42 +0200 (CEST)
+ id 99E70836B4; Mon, 20 Oct 2025 16:26:57 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8243980422
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 16:26:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0A3D81063;
- Mon, 20 Oct 2025 07:26:34 -0700 (PDT)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.33.8.67])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2A8403F63F;
- Mon, 20 Oct 2025 07:26:41 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: u-boot@lists.denx.de
-Cc: linux-sunxi@lists.linux.dev, Jernej Skrabec <jernej.skrabec@gmail.com>,
- Mikhail Kalashnikov <iuncuim@gmail.com>
-Subject: [PATCH] sunxi: a523: Re-use H6/H616 DRAM size detection method
-Date: Mon, 20 Oct 2025 15:26:22 +0100
-Message-Id: <20251020142622.1849108-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7827025e548so1807329a34.2
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 07:26:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760970414; x=1761575214; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BIV9bzESwqIuQKQIybL/m9MYgn82r5bGRngy63cGu58=;
+ b=RLtyAxYDuQcmd3rdCgPKz1IZ0lHvsHzxtFPoMMJCJVVg7KLSeXQE05A17qpc/7rhbg
+ eQAZI40uTlvaCcYmnz7QM3NT6+3eObVwIDaqwf1O+wWEdkIDZ0o61qpYJXoRRtSkI6j/
+ Nsgs5VZFo66W3Jg22rZJJviIees2MAd8nXSZ8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760970414; x=1761575214;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BIV9bzESwqIuQKQIybL/m9MYgn82r5bGRngy63cGu58=;
+ b=gR3UBMFyyl2MjWAyONbG3GnXNEwxQ1oc1vS2d+08mWDXGfrKmnIXfEAmpzXnUuittK
+ monjpwNJ3lMkMrlaUszq2Cj0n6ABbq0dWIuWG5boBKy8igcKZDFmZsyn7WMABzE7Xvx5
+ PmK1ZI+6ceNkLzPCLaWmUkdDCuV67JGYZXejdrlyL8LAwcXqtW/HqVMg8oxViHNulkN2
+ lNjM7UhLI6ysZk4bWHG3ld2Gax3CC//M/t2lVZGgm3PLVxTSUD1mlVr+7+++2Nwh9Kpy
+ JS+oFaaxQz/J0YSYuce9C610yOMrIsEZ2rGS1XrOiaSS98Jjyb94qrs8SFs1k2S99XeF
+ frJA==
+X-Gm-Message-State: AOJu0Ywmx7JeOyvRwQwmXTblRadUSjq4c0BQwhXmISVmMEh3p2fBOARv
+ h102UHGb4NEDeB56AuFl2bJoQYoKWBce3B5M2/Sl38LJChHvN676YhwKTqmkbhdEzQp+ha6dr+K
+ OU+lBAAU=
+X-Gm-Gg: ASbGncsdtAdEJtoyBH3rCf+vugfbAkU0TmQserog4aV+bKvbzveLwbPfpp44KVyadCw
+ q/olaTx94j3x4vquGQcX2O8kVsDZxuKTF1rvdRFZMxj7S2RVAkGoiiwypYnSMqrdtFYhI6IQ2DE
+ W1UlXV42RIWACpqJHdWBQEHshAHjtbJNH8GvxNlLbPTWVw5WoBkwU+rtLsu7Ga5cWOSJlv4OmeA
+ ec/XoajwaTLk/ITlYMrNle+1bsO5WKI9jlt4SxphRLDjPH7daoNhHc9gkY+i/HKHAKZ4Gr88c1Z
+ +0DfiPAOueps7KInmu7Obew/B5h1m8FaGXqMhgkd/edZR+mAoG58vvIdqRbrAhNV5J/i/SMRLf+
+ gfy4SXtP2ufLjAQEmwlMhbpMn68knhDv1wFWoXOEgqDXQLkYDV4xI3XOQ+E6Kvnn52R9ZZZyYmD
+ VXowDs96PRMcO35CVK0H2MTHtsP1YZVozSGsJ7eSc2aLjPjAHMNg==
+X-Google-Smtp-Source: AGHT+IEiL7RLOimGm2xf8Sy1JV0epl6HmrQTt/KQHbgShyYLcxrWuCsFatZZBf33yJcTqwCFz/cPyg==
+X-Received: by 2002:a05:6808:1b0d:b0:438:27c0:f1dc with SMTP id
+ 5614622812f47-443a30d1262mr4964061b6e.44.1760970414220; 
+ Mon, 20 Oct 2025 07:26:54 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-651d38ff5d3sm1972818eaf.0.2025.10.20.07.26.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Oct 2025 07:26:53 -0700 (PDT)
+Date: Mon, 20 Oct 2025 08:26:51 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@nabladev.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Subject: Re: [PATCH] doc: board: nxp: Add remoteproc guide
+Message-ID: <20251020142651.GV6688@bill-the-cat>
+References: <20251020-rproc-doc-v1-1-61fbaec7c40c@nxp.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UkRk3FCHRldzIM25"
+Content-Disposition: inline
+In-Reply-To: <20251020-rproc-doc-v1-1-61fbaec7c40c@nxp.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -52,137 +99,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The H6 and H616 DRAM initialisation code recently gained a joint and
-improved size detection routine, which helped to avoid the occasional
-DRAM size misdetection.
 
-Use the same code for the A523 DRAM initialisation as well, which
-suffers from the same misdetection at times.
+--UkRk3FCHRldzIM25
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- arch/arm/mach-sunxi/Makefile           |  2 +-
- arch/arm/mach-sunxi/dram_sun55i_a523.c | 82 +-------------------------
- 2 files changed, 4 insertions(+), 80 deletions(-)
+On Mon, Oct 20, 2025 at 11:26:58AM +0800, Peng Fan wrote:
 
-diff --git a/arch/arm/mach-sunxi/Makefile b/arch/arm/mach-sunxi/Makefile
-index 579530f27e3..9c79b55abf3 100644
---- a/arch/arm/mach-sunxi/Makefile
-+++ b/arch/arm/mach-sunxi/Makefile
-@@ -47,6 +47,6 @@ obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_sun50i_h616.o dram_dw_helpers.o
- obj-$(CONFIG_DRAM_SUN50I_H616)	+= dram_timings/
- obj-$(CONFIG_DRAM_SUN50I_A133)	+= dram_sun50i_a133.o
- obj-$(CONFIG_DRAM_SUN50I_A133)	+= dram_timings/
--obj-$(CONFIG_MACH_SUN55I_A523)	+= dram_sun55i_a523.o
-+obj-$(CONFIG_MACH_SUN55I_A523)	+= dram_sun55i_a523.o dram_dw_helpers.o
- obj-$(CONFIG_DRAM_SUN55I_A523)	+= dram_timings/
- endif
-diff --git a/arch/arm/mach-sunxi/dram_sun55i_a523.c b/arch/arm/mach-sunxi/dram_sun55i_a523.c
-index 30bbeb40d0b..1ffb62863e2 100644
---- a/arch/arm/mach-sunxi/dram_sun55i_a523.c
-+++ b/arch/arm/mach-sunxi/dram_sun55i_a523.c
-@@ -12,6 +12,7 @@
- #include <asm/io.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/dram.h>
-+#include <asm/arch/dram_dw_helpers.h>
- #include <asm/arch/cpu.h>
- #include <asm/arch/prcm.h>
- #include <linux/bitops.h>
-@@ -1387,91 +1388,14 @@ static bool mctl_ctrl_init(const struct dram_para *para,
- 	return true;
- }
- 
--static bool mctl_core_init(const struct dram_para *para,
--			   const struct dram_config *config)
-+bool mctl_core_init(const struct dram_para *para,
-+		    const struct dram_config *config)
- {
- 	mctl_sys_init(config->clk);
- 
- 	return mctl_ctrl_init(para, config);
- }
- 
--static void mctl_auto_detect_rank_width(const struct dram_para *para,
--					struct dram_config *config)
--{
--	/* this is minimum size that it's supported */
--	config->cols = 8;
--	config->rows = 13;
--
--	/*
--	 * Strategy here is to test most demanding combination first and least
--	 * demanding last, otherwise HW might not be fully utilized. For
--	 * example, half bus width and rank = 1 combination would also work
--	 * on HW with full bus width and rank = 2, but only 1/4 RAM would be
--	 * visible.
--	 */
--
--	debug("testing 32-bit width, rank = 2\n");
--	config->bus_full_width = 1;
--	config->ranks = 2;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 32-bit width, rank = 1\n");
--	config->bus_full_width = 1;
--	config->ranks = 1;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 16-bit width, rank = 2\n");
--	config->bus_full_width = 0;
--	config->ranks = 2;
--	if (mctl_core_init(para, config))
--		return;
--
--	debug("testing 16-bit width, rank = 1\n");
--	config->bus_full_width = 0;
--	config->ranks = 1;
--	if (mctl_core_init(para, config))
--		return;
--
--	panic("This DRAM setup is currently not supported.\n");
--}
--
--static void mctl_auto_detect_dram_size(const struct dram_para *para,
--				       struct dram_config *config)
--{
--	/* detect row address bits */
--	config->cols = 8;
--	config->rows = 16;
--	mctl_core_init(para, config);
--
--	for (config->rows = 13; config->rows < 16; config->rows++) {
--		/* 8 banks, 8 bit per byte and 16/32 bit width */
--		if (mctl_mem_matches((1 << (config->rows + config->cols +
--					    4 + config->bus_full_width))))
--			break;
--	}
--
--	/* detect column address bits */
--	config->cols = 11;
--	mctl_core_init(para, config);
--
--	for (config->cols = 8; config->cols < 11; config->cols++) {
--		/* 8 bits per byte and 16/32 bit width */
--		if (mctl_mem_matches(1 << (config->cols + 1 +
--					   config->bus_full_width)))
--			break;
--	}
--}
--
--static unsigned long long mctl_calc_size(const struct dram_config *config)
--{
--	u8 width = config->bus_full_width ? 4 : 2;
--
--	/* 8 banks */
--	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
--}
--
- static const struct dram_para para = {
- #ifdef CONFIG_SUNXI_DRAM_A523_DDR3
- 	.type = SUNXI_DRAM_TYPE_DDR3,
--- 
-2.25.1
+> Add guide on how to use the Remote Processors on i.MX8M and i.MX93.
+>=20
+> Update MAINTAINERS to include doc/board/nxp.
+>=20
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
+> ---
+>  MAINTAINERS             |  1 +
+>  doc/board/nxp/index.rst |  1 +
+>  doc/board/nxp/rproc.rst | 69 +++++++++++++++++++++++++++++++++++++++++++=
+++++++
+>  3 files changed, 71 insertions(+)
 
+The NXP examples are good, can you also please add
+doc/usage/cmd/rproc.rst in general, and then reference back to it in the
+NXP example?
+
+--=20
+Tom
+
+--UkRk3FCHRldzIM25
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPZGqwAKCRAr4qD1Cr/k
+CosmAQDb0TKKufjzGTXQkDm80/JYqwm4vGxq/P3h2z0hP6H/ZgD/eCVAcS9Zy8t3
+aykRbYfDiuWHHx4sl85ZslospXPeWQk=
+=OqTT
+-----END PGP SIGNATURE-----
+
+--UkRk3FCHRldzIM25--
