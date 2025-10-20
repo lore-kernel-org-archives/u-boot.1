@@ -4,99 +4,160 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4C0CCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 13:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54422CCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 14:01:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A815E836B4;
-	Mon, 20 Oct 2025 15:58:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id C996783631;
+	Mon, 20 Oct 2025 16:01:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OYA/EwnU";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="hbsi+Lc5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCB0483741; Mon, 20 Oct 2025 15:58:49 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E6E7D836D2; Mon, 20 Oct 2025 16:01:24 +0200 (CEST)
+Received: from AM0PR83CU005.outbound.protection.outlook.com
+ (mail-westeuropeazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C20A83631
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 15:58:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 00A648334F
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 16:01:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-426f1574a14so3259810f8f.3
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 06:58:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1760968727; x=1761573527;
- darn=lists.denx.de; 
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l8S6gJ3TPrx06m48vGZBal2efQ5FxAGAs6xq3FYlnmw=;
- b=OYA/EwnU5t6gYo3XuZANPK0alZzashjWjjkV7FZ4MV1sukb3N/VUsuncjtequLmk+2
- Pujl5s50x8xd6o6ow6UojwNAZlOYyUhCGHrLAPSeQRPmBQU9LiqIqkhpaRHlu/JFYbsc
- T0E4ERVgpE5YRlcPMK5M+KDeqS3ftegrCjP21y/X3JnyiA4flQ9ewJlYUZ7O420bJzGl
- hqEXhrr1p+Ak/QPeN3KBqLSJdixzFaap88ac0aVltSO1vdpV8OYivFecIHbspzcgBjgJ
- DRiCn9mrJcXQ9bygKCMszQXVJii+OEw17WhPkz5QHyqzHcyfuQC4QfD7XoXmoigLHqrD
- 4ozg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760968727; x=1761573527;
- h=in-reply-to:from:content-language:references:cc:to:subject
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=l8S6gJ3TPrx06m48vGZBal2efQ5FxAGAs6xq3FYlnmw=;
- b=FqdGXsngSM/A3abniIGkRhHBQLdbFKswS454hJ0zq8841apTwdyKyJ57AS1hFeb0Cp
- cxLfihOODNmdQo9N7dBIY8CQriIsmlpBGeY7Us/spHQB/SU/Wo6KZGWev2s+g9lV5xFd
- wO2mCYuTm+pSNUUAyQ7DtpiOPHAn/d/1+sQVI1bi0bgWn4Fz/KldpsBw04/0KOdwxv48
- /bcH9003KGeiCKuGXj/p7HY1e8pulStp0Z6kVVk+CC1ZfvDCMKT10Eg4XCQzUlRcouLv
- dewLr7DYABGRz/F2BwzpOOGaSNhILwgXVnZS5owlIUPx4FnZOtoaABc4fcfbg0UGWLLU
- OB9Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZomScOrBWfeFH5pVsdvu3jXxMY9iMbRmPK8L6xTjxV2tUTp2DmoFeHLD1E78FdgajqVGL97E=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4Ac28yV6V0LHR2qUewIrr0ciUFl3RXQC8oWgxvtsy7EGsWKJp
- qEhJSW/rgPWrIFd7uCC6dzlw6kczp8QUBRCPzNhI+mkq9TsixX4IzRyrCGHHXImdm7E=
-X-Gm-Gg: ASbGncuHi9zVEMXY8CXvmxPkv8vJQq9U49yJDTkAKMHY0CCOf1HWSWBk/pYCXf4wGve
- YxARxjEAN3gIsuMcRAuz8dQjgOX6TZoT6a6McPwYw2sPvzjBrZJZGkk3ftIsWSiQIyGm+UN5zaN
- yBkhOXiB3NZ71eaQQQFY5zx6Zvrk27FUfqRnTsPlWiJFx7uRR7AkxVhYcBGjQiHb16Kl5Kg34k7
- 6XpE57Tf3N8QFdN8Jwu3E+WbCNFsi2gKczENbRIP/6CvNmKMKlt+YYM3/YJz4A71KCvaa5uiDGH
- tRE6vcviknMI33fWnJBt80fWHK54Yl47llHqniNcy+Xeb1k/i5MfhCtdu1rShAGiYvY2RY9ob74
- xpHHfvypMfydSIILZZ37B/ebKUom0VjStPr/4QQXOYSY594byq5PmlQbivMPdLJRHBnoF+zPwoQ
- QQyGcSZlywGKd36CUWSINTu1w2DphFNPQakI+RCgtDXg==
-X-Google-Smtp-Source: AGHT+IHvMduRMOSxWdpVzuA1OVLQhRDDVPQbkRME/a4eVvhPy+tSlb0eplGy9oHg+2ims3VQEr9rSQ==
-X-Received: by 2002:a05:6000:2305:b0:427:928:7888 with SMTP id
- ffacd0b85a97d-42709287b06mr6706016f8f.55.1760968726309; 
- Mon, 20 Oct 2025 06:58:46 -0700 (PDT)
-Received: from [10.1.5.55] (88-127-129-70.subs.proxad.net. [88.127.129.70])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427ea5a0f7dsm15237206f8f.4.2025.10.20.06.58.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Oct 2025 06:58:45 -0700 (PDT)
-Message-ID: <1b0bb579-5024-47b2-8fe9-58c2edfa081f@baylibre.com>
-Date: Mon, 20 Oct 2025 15:58:45 +0200
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=O8NvCP0bxt++s9CTcye6bjcx7Dt5Ox3Geopy7a3ky82wqdbax6narHSMTPWELiTUAoxGf+j+x3dmEZnx6KAYLVdOk/I7aWo23uI2si6GyZ2DZjpz4uRbP7YlwjMNL1zaBe/azWPVjBHGcdUEBG5nbp15YOpEHMn7N4PVbR1iEf3D80n5tf1Hz7pa16CvqhuQMR3BOwybfyVGDS76DMTQgGIy+HBg/m280S4aZ7u9IwLpH8S0IZbZp/i9GlOn6lZlZpZ3rPFFWh3ip5yWH8w9a551dwmQELVQ5LofPdyFys87ntTNxMniTP+ftIPHq52w2y69MN3iO6gLpFZ/WAsA5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/RA4o4bgsPuW2n7ic8FIwt25Z/BrEtJS1Vvh9VcRC2I=;
+ b=Uvm6A0I5hGiOLa0i0oTGgpLHo3mi00NvKqYyo/G0ekfJSIJM77F7k59aQwvq/rvUFXaO9KKbsKwHXFw27QagD1d4jtfjAgdSoGumarepBApqHIG0B4/0oe23L6y+3merWkN/Ey17cvq3a7H5LSQ9Hscq63PoyrVQoabXupZzqYu6N7b/Fe0u9E9MAUxY5to+cRgo+CNABXrLEhl3PTt93bjQTFag7XHvBEwZeFRLyFxP9fdQVw3DY4I4u3B5AJVgmFcRztAm0AKIy2NEs6Sv/fNmVGLzm9nh8mn1CEBVVC1TJ28BrKnNuL0blsTLS21bWUoZyFTQ7yt4aRLWU49opQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/RA4o4bgsPuW2n7ic8FIwt25Z/BrEtJS1Vvh9VcRC2I=;
+ b=hbsi+Lc5Cj/+chQHDFY+FE3Y2aQ7Pn9FpdThY3ad5loGCCykBdXPwVThBjU9rYLKrsfo1xd3uZQs3nrIdQxLn1sv/2TmcL4n5YUyRbtZUuvLoecL1ig4Al9JRB6DQM9uKORL7y7cvxqZdMm0ibfPo57wYaZy73dldpT7RAwVWrQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AMDPR04MB11701.eurprd04.prod.outlook.com (2603:10a6:20b:71a::8)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.11; Mon, 20 Oct
+ 2025 14:01:21 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9228.015; Mon, 20 Oct 2025
+ 14:01:21 +0000
+Message-ID: <3a75448b-c3ff-4504-acbf-e5c3b959189f@cherry.de>
+Date: Mon, 20 Oct 2025 16:01:20 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/5] android: add bootconfig support
-To: george chan <gchan9527@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Nicolas Belin <nbelin@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Aaron Kling <webgeek1234@gmail.com>, Sam Day <me@samcday.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Maxime Fournier <mfournier@baylibre.com>
-References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
- <CADgMGSsxkrqZ3Dirq9KPoP0aaHew0A9DZEuoTotvqcHsfkEw6w@mail.gmail.com>
-Content-Language: fr
-From: Guillaume La Roque <glaroque@baylibre.com>
-In-Reply-To: <CADgMGSsxkrqZ3Dirq9KPoP0aaHew0A9DZEuoTotvqcHsfkEw6w@mail.gmail.com>
+Subject: Re: [PATCH] doc: environment: fix links to Linux kernel documentation
+To: Mattia Narducci <mattianarducci1@gmail.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>
+References: <1937375.tdWV9SEqCh@localhost>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <1937375.tdWV9SEqCh@localhost>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0057.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:49::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AMDPR04MB11701:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1465d847-7ed2-4945-556f-08de0fe125d1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?MXl1ZTQ4MzQ4RTdoQVliZmZvaVhRY0tRU1M3c1A4VGVCRkRSZEsxQTl6RGtU?=
+ =?utf-8?B?TGcwSnVVemJzMUxkclBpMkFGTmp0VHdFZHd5TWphUGVZS05nZjZVdytpZisv?=
+ =?utf-8?B?Qm1SUkE3OStBOTZTRGZwUFZSMDVxaVRxRUhaWUYxWkJoYUZlRnc2Tm12ZjNI?=
+ =?utf-8?B?aWFYWkpMNlNwcHI5YmtRQXV6MFMwbEgzRG11RFFLTTY4eVI0dXQvaks2Q0tP?=
+ =?utf-8?B?KzhkdmdFNHYxckgyOUhMbGlWRE5kUG1xZW40bVllOTB0RHhwRUEra0JXZVRj?=
+ =?utf-8?B?emxZcTFXNDNyYWJFekZRYkRtV21qc2xLZzlDNlUxenIzQVM4d3BLWGlMeGZ6?=
+ =?utf-8?B?TzR1azBNeFRibUhsWWI5eVcxaVYxM1gvQ0hHMDJwejhpc1piQTVqRFdYbTJE?=
+ =?utf-8?B?dFNqOXNaakZRSHl4UzFMN2d3WU9sUHZpdkhxSFlkTk95RUdUMDNVN0NXN3RM?=
+ =?utf-8?B?YUp1OU5iU2JHaGY3YWloU3RaVm1ObHNVSEt0anRnZUUyYldpcGFHTGU0bFQz?=
+ =?utf-8?B?Qzc2dTR2aUhIMGZaL01wK3I5NThrUzQ4bUk4N2c1cVFsdSt3bi8yZ3FQQXlK?=
+ =?utf-8?B?Z1p5ak5hZm8wcE4rbEVSaGJ6ZHN5bXhkdXArM2RGbXl1OG1pd0JRSEFrOTNZ?=
+ =?utf-8?B?U1dBbVM0U0orblVXTkxjcGFEZ1dBN0wwamR6dURWcDV1QWQ2VzVUdDFJenRu?=
+ =?utf-8?B?ZFd0SGowOGEvem9ERUxGcncrcEdkUFpudmRWdjNiY2g0L1NSdnFqQ0VaTXR2?=
+ =?utf-8?B?L3l6VXZTZk9Ld0t6MUpYeXF3WGlMNFRMWlZmcnNVK3dkTDFMRG1hUmtGV2Fm?=
+ =?utf-8?B?bk5tOS9tVW5ZbnB6UUlMWWoyUkM5ZzRCSHVhSGttSHI4dWtocnh2WTZLYU9E?=
+ =?utf-8?B?TTBDS1E4WStyU1JtTXhXazBpb0tDZGFtTGtxaDBIT2ZySS9oQlpXdUpSWStM?=
+ =?utf-8?B?eE9RMWtCWWJUOGJZTllLU3JHOXNJUzIrTjF6WldXbGttLzMyMW1CZmNOc3N6?=
+ =?utf-8?B?QWlldk44eFNtdTJ4WERtL2dpMzVEbjEwSTI5ajY0ampYVU9OUi9lNmhzODBw?=
+ =?utf-8?B?bW92M3dOMjFxa1BMUTJ1QlFFeUpGM2lMbUpEV2xWNnRNT084UGhRNGpkbkJV?=
+ =?utf-8?B?aHY5R3ZrQTVKSlpET3UrcFk2TmY1eGl3dVk2TVVKZlhWNU5jUHRYd0pvNDBC?=
+ =?utf-8?B?dmdKYzBiaVdTYktoUFQ4N292aXNjWUFkRGh5V3dLaGNHU1dudnRVRHlrYlJ0?=
+ =?utf-8?B?VnBkeFNXQ2l0S21pVVFZTlo5VWdLaWR2Qks5ZlloYmw3OE9TYm1nalJwdHlJ?=
+ =?utf-8?B?L3BES0paYkN3ZW1JcjBWSHZOTmt2Z29tSFQ0K203ZFUzV0VwckhyaEI2SEha?=
+ =?utf-8?B?U3UvNkVCYmtFT2lKT0dnWVdGOEJQdDhoWlZjbUUrRU1mQW1mTlpVdms4c24w?=
+ =?utf-8?B?MDJwd3lrYVAzOGdmZC9zY0JqNWNUQlU5cmgyaXhpaGNjK0V5OUcxdjhNc0Np?=
+ =?utf-8?B?djZ3RlJEc1BsbWJqR0ljQ0pkYTdxQVZNQWhGc2ZsMzZnbStYWVZ2Zkh2V2J6?=
+ =?utf-8?B?YWdVOFQwUUtpSjJDWFBNWFVhVXM5bTgzRzRuY20wck5idG4vVjZydjNVNE9I?=
+ =?utf-8?B?bjRxNlFhRGFvWWNtWmk4QlcxZzl4MUVqWHlybXMwajVnT0tSZEJ0NDBZYXRz?=
+ =?utf-8?B?eVdFU3VkNDUySlp3ODJwc0hvY1RuYXpTSWhPdk5uRGdQRUhRRGZ1bWJZdFR1?=
+ =?utf-8?B?Q0lrT3B5YlpzWFd0ZEdXd3czUDRDU2RRTDdQTnFDT0FVMU4xV1lETW9YUkRq?=
+ =?utf-8?B?bWJSZGxGYXg2d3dXMWpqaU5uMUJpOW5jYllRRXdoU0hwQW1WWlc4WVQxV3cv?=
+ =?utf-8?B?dkVDQkZWNjlmNVBNc296MFBtSDY0bzYveUhiWWdhZDR4TFJPWWlaUW1Gd1l4?=
+ =?utf-8?Q?6g9zBXXWZzM0uZ87NNZW09udwGFW4R7y?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WWpJWmthMGI0azdkOTBNTWdJL2dWbHlXa3lBTWRuNEg0d1l2L3pFTm5Oa1VZ?=
+ =?utf-8?B?MitySnBhUTZZZHVlc2ZPQjNZSW96WFV5SmVhRGh4R3UxaWd2c1ErOU5vY2Ju?=
+ =?utf-8?B?R2NOVVdBdlVNQ2Q5R1phNVJmL3cyTks3UHh2WDRiU0NwRFZjb2FkWmx0TEJW?=
+ =?utf-8?B?OVpRNEZNSWErMkRoZzZoUzBhbzU3MFRGY3NOb2JHaTZ5NEJWV3ZHU2UyTUpo?=
+ =?utf-8?B?THlMRzdiUTRJTG5CMGN3LzZaS1EzRlBPZUNqK1grb1FhYU5icEd1QnFlK3VR?=
+ =?utf-8?B?REw3TzRWYy85M3o3dWZMOVBnTjBnUk1KeDRENlBYcmE5R1p1ZHVHZ0Z1VGRa?=
+ =?utf-8?B?SnU5cjdxLzg0UHYxeEZydE9JOHJ6YjF3MU9ZSDdjV3gxSVlpT3pzSUh0eDcv?=
+ =?utf-8?B?R0taNURnRnlaVUFQejllakhTTFVQSFRKeExUSnQ2cW5zZTNNQjFBeE9PM1U1?=
+ =?utf-8?B?YVk1ZzRKbjV0blkxckJrem5HdGNnb3o2NjFkdEFENzBZSUFFZDdUL0NOWVJK?=
+ =?utf-8?B?S1NSc3h5MDVQUTN5QlVWdkNhZjBueXFxVW1Xb2NZU1FkQXorVWR6MUoxSnJq?=
+ =?utf-8?B?ejBORHlPYndTTmIwOTltdVZqUzB5eGdYdEtDekppN0dOalQ5Ung1U1VPNFZL?=
+ =?utf-8?B?R29aYUJBRDlNQUQ1a2MzeTgrL085bEtYZ1VxQk5aVzNlMlZ5bEdLR0hnbTVu?=
+ =?utf-8?B?SmtJN1pRanplcW9SbStpRG0rS0krS1lsSHRJUURTcGx5R1JWYnJMSW9LWUZ5?=
+ =?utf-8?B?SmVFcWRCS2VZMHUyZFdYYXJFK2ZGdkwwemFBeVR0bk8wVzh6cWRzYkw1MWxr?=
+ =?utf-8?B?V0VjWXVZbHNoZXZTdm5oOGxCMER3Rm5uSnBUcXEyTWNhU1oyZWVLdGxFRlIx?=
+ =?utf-8?B?TndndXd0S2UyWmpPNmZvN3NkRXAyM3lNMFlHNU81dEgyaitvMEdxSU9OR2Fk?=
+ =?utf-8?B?QUJ3eVJLdDBZNlIzWDltZGQyclFTMVhaZzhKRXU1NWl1NjgzYWdxZ2Q2dk5q?=
+ =?utf-8?B?dHBETll6UklId09SOTllOXdqSkMyYUg3UnBYdzF3Yi9ZVmsvdU1kblB6YnYx?=
+ =?utf-8?B?ZnlJSGF2dnNxamZySk9YalBicFdyOUdGcmpJK3NhUzB4NEZBa3c1ZU5lVjBt?=
+ =?utf-8?B?ZWhaYWI5dFA3ZFhRaHlEazdYL2tZVnRWa2hza0JGL3E3S3BnRHU4dzFXSS95?=
+ =?utf-8?B?YVBVYXVVUGZkOGgvajV2VEM5TitmWWFyYmFtVkt5L0dVTDF2eVozS1NGd0Uz?=
+ =?utf-8?B?WnlDamVhcHAra0lwcTZXc0YyQ3VhWDFBTHIweUU1ZGliMkVKSWl0a0JnQUhx?=
+ =?utf-8?B?NFNnUTIzY3hjemVJeWc3ZGRRZHYyT1ZCczkxQVVlS1ArOG1aMUdpMTMzMFBD?=
+ =?utf-8?B?VElXZVFlVnBTOUN6R3ExMXBzb3VnQUtrLzY1dWhJKytIOS9MSlJoMDQ1NW1a?=
+ =?utf-8?B?MDAwNmNLMHFYRm1YUURsQ2pMWjRiSHFhaWRCeGhDVFJvdnluVmZxKzhEOUJ3?=
+ =?utf-8?B?TXZmSEhxOU1xTHBiRDBpUW9hMWVxd1dITWNCMkg4RE5yZDRNVkpWOVVtZFFC?=
+ =?utf-8?B?RjVXeDRiaERPNjlvN1dweG9ERTJtVlFjZCt6cFMxalE5TUxFNzVTT0d4cE9E?=
+ =?utf-8?B?ZmlJTVRNVHI3NGtuR3VSaWRjOW5oSjl4U1NKbmdRVkZMOEVVenJncFNZTGE3?=
+ =?utf-8?B?SG84T0ZPV2J2Zmdac1JBMUxBaU5aTDRaRFBFU3Rva3JBR2JnSE5Wbittc0hq?=
+ =?utf-8?B?UVlpZmpWN3cyQnRVdGhRSjkyeXlGMTR5THF1Ulg0ZE1qWm5wWWtacUc5eUVn?=
+ =?utf-8?B?MFFUQUt3VFBiVXpIRVJCUWkxQXBuOG55aXRYdEV4bVRkZ1pxdUwyeG5iYzFF?=
+ =?utf-8?B?WUxxU2txSEw5L21sME51SW9jSWZZR2tpLzlWaElyd0xOQ2ZNUFozOHhDOFJJ?=
+ =?utf-8?B?OU1IZHk0eTJ2b3ZMOVBiUklSSjI5OHB3MDRqNjRFZjUxcnB5bzd4L3ljd1cy?=
+ =?utf-8?B?ZGV5VWhwWStGVThHK0RXYWVHRjlLeUU5cjFvWnRLbUVjVlVnUSt0WmJTOCtI?=
+ =?utf-8?B?QnJQYUJJS0lhRVlXa2dURnROcEd6dGp5eUdldEVPKzVwcmxzSzd3RytGV1V3?=
+ =?utf-8?B?ODlLL3h1M1VYY2QrMloxSkJLM0xYeXEwOUI5ZWxhVFh1MDBlczVnUFl0WDVP?=
+ =?utf-8?B?cmc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1465d847-7ed2-4945-556f-08de0fe125d1
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2025 14:01:21.1526 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qH5eY0Lyjg6RqR4GCNnmQiakIPUr6WFPuZ1nWCH4Pn69OPX2Ne2A18+FTQ5FXBE5QBG2g3TkJFQgYeFBx3i6aOpFv7J4MVF65EIGtqm9TP8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMDPR04MB11701
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,103 +174,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi George,
+Hi Mattia,
 
+On 10/10/25 9:31 PM, Mattia Narducci wrote:
+> Architecture-specific documentation in the Linux kernel was moved to
+> the arch/ subdirectory.
+> 
 
-Le 18/10/2025 à 08:07, george chan a écrit :
-> Dear Guillaume,
->
-> Thx for your patch.
->
-> 在 2025年10月17日週五 21:19，Guillaume La Roque (TI.com) 
-> <glaroque@baylibre.com> 寫道：
->
->     This patchset add support of android bootconfig partition[1] in
->     u-boot.
->     With Android boot image v4, all androidboot.* arguments must be
->     passed via bootconfig instead of using the kernel commandline.
->
->
-> it looks like the above add logic handled bootargs well.
->
-> is this logic support the use case of appending existing bootargs from 
-> env and handle the one mentioned in
-> [1] for simulation of vendor bootloader behavior to append some 
-> androidboot.* bootcmd to formulate a new bootargs? Or is this series 
-> complementary to [1] so as aimed to "move" androidboot.* only to 
-> bootconfig? If this [1] user case is covered then I am very happy to 
-> stop [1] if this series can have same result.
->
-> Btw, I am wondering if this series assumed Androidboot v4 only, so 
-> kernel ver must >= 5.4 and enabled with bootconfig. Since then 
-> bootconfig can be unlimited to it's length. So all predefined 
-> androidboot.* from bootloader, can now move out, and no need of 
-> default bootargs in env file any more.
->
-> And how about those Androidboot v2 case?
->
-> [1] https://lists.denx.de/pipermail/u-boot/2025-October/599708.html
+I confirm, the change was made in 
+04fc8904d5d18a132f5ad67b79ee980b6602c8c6 merge commit, part of the v6.5 
+kernel release. And the new links work fine while the old ones don't, so:
 
-in TI project we have this patch 
-https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2024.04-next&id=9d802d798ac143e06ffe545606aa657a6c32cc63 
-, we forgot to upstream it but i'll plan to do it if it's not a problem 
-for you. let me know if it's ok for you and i send it this week. Normaly 
-this patch resolve your issue, it's not mandatory for bootconfig support 
-but needed to not lost all other bootargs no link to android in bootargs 
-when you use bootmeth_android.
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-
-Except if i do some error in code, boot config code was only do when you 
-have android image version 4, code take all androidboot.* param in 
-bootarg, remove it in booatarg and put it in bootconfig partition before 
-booting android.
-
-some arg was adding in bootargs in bootargs automatically(serial, avb 
-arg, slot etc etc) so instead of check where it's done version of 
-android boot image we have  we prefer to do it just before booting.
-
-for fastboot boot i never test it with TI board.
-
-Guillaume
-
->
-> Regards
-> George
->
->
->     [1]
->     https://source.android.com/docs/core/architecture/bootloader/implementing-bootconfig
->
->     Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
->     ---
->     Changes in v2:
->     - Add test
->     - Add new command to be able to load and read bootconfig before
->     booting
->     - Somes fixes to works with sandbox test
->     - Link to v1:
->     https://lore.kernel.org/all/20241128-bootconfig-v1-0-0e63a5dae82c@baylibre.com/
->
->     ---
->     Guillaume La Roque (TI.com) (4):
->           boot: android: Add sandbox memory mapping support
->           boot: android: Add bootconfig support
->           cmd: abootimg: Add 'get ramdisk' command
->           test: abootimg: Add test for bootconfig handling
->
->     Mattijs Korpershoek (TI.com) (1):
->           boot: android: import addBootConfigParameters() from AOSP
->
->      boot/image-android.c                        | 180
->     ++++++++++++++++++++++++----
->      cmd/abootimg.c                              |  35 +++++-
->      test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++--
->      3 files changed, 292 insertions(+), 31 deletions(-)
->     ---
->     base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
->     change-id: 20241128-bootconfig-276e247be992
->
->     Best regards,
->     -- 
->     Guillaume La Roque (TI.com) <glaroque@baylibre.com>
->
+Thanks!
+Quentin
