@@ -4,137 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9958ECCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 09:13:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F74CCD193
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 09:13:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2452982C84;
-	Mon, 20 Oct 2025 11:13:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 81A0483211;
+	Mon, 20 Oct 2025 11:13:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="nI7sfDFz";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="lPKoPAXe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F19A83043; Mon, 20 Oct 2025 11:13:23 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 49D818334F; Mon, 20 Oct 2025 11:13:41 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E95B7807B1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 11:13:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94827807B1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 11:13:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1760951591; x=1761556391; i=xypron.glpk@gmx.de;
- bh=NZbhk+yictOW3UyF/MQddaA/qG4dplLh7L5lIcESL04=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=nI7sfDFzlkLvXXXUxmn4WqIUdRzeP+xIeCBL0XBGLDxxj4FQd5DPRK7r7jYPFjQ6
- GcezsIeEbiF3BQK2d4IccUOXjWD95RSErVUQ4epF4ayPm7giu4+asI1C97Ghp/Ift
- wn2izg7ZjoxO4waAt1anMGNB2k76x5mHZxGDuGo6sR7QN2PlE4WxWL/HB+PICWRNg
- 6ifsTblRAUj2GSsiX8tFm7L1XxWrKzHyhtSdcQfMsGCubSZOadHAKU5NqqIx0tOKL
- 9uY6Er3QEuq4hvoULjZdN22Avz7OfmzdZtLXYxeOL/sxPM0hb+LhqvzJXlk3ib6HS
- 05T1hq60q+MXw0dVKg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.154] ([5.147.80.91]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MTAFh-1uldNp49MN-00YEfC; Mon, 20
- Oct 2025 11:13:11 +0200
-Message-ID: <9b25f391-944c-4ca0-b990-ed5caf0a3e8d@gmx.de>
-Date: Mon, 20 Oct 2025 11:13:09 +0200
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 512FF261AF;
+ Mon, 20 Oct 2025 11:13:38 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id InUzu_sz2B_s; Mon, 20 Oct 2025 11:13:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1760951615; bh=tbEpl9NrDTvyaECVWiFVtddKPcQ2nh3aB23zoHbur+4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=lPKoPAXejr+0A30+7/0lwpLVkCKw6DPuCRvzrCUsu2gGTTvgAeKeuoUeafkS1sEmh
+ Q24FHh+ccmXPBcRvT9ALngnMOlHP3e4k5bA5Dn6iEmDw2DRho8Op02hcrYaVnVdtQf
+ 5E4A9HspltV88I93rkpuvd+k38ihOMEN++QeH659P/RErsGWCfS9i6S4aS0JJl3AUz
+ R6KY33MdtUvilo3lgLY0CpHViXO+kL9qdvJsceJPUeGMWgTKcn+/jOsN/KFL7Ej1kQ
+ HhgYBrQZCXZDQoLKORfUJxVoSMsDj0Pb2oEWVks82wzxo1MRd0Mugq2W6Hv/nkQ6+a
+ HeIc4qWu5Meyg==
+Date: Mon, 20 Oct 2025 09:13:19 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>
+Subject: Re: [PATCH 1/1] riscv: consider CONFIG_RISCV_ISA_ZAAMO in SPL too
+Message-ID: <aPX80KCYCvnDRIgM@pie>
+References: <20251016165851.45311-1-heinrich.schuchardt@canonical.com>
+ <9fdc0e15-c37b-4f1b-8148-bf3de590be0c@canonical.com>
+ <aPGc12v2H5sCZNMi@pie>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peter Robinson <pbrobinson@gmail.com>,
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Mattia Narducci <mattianarducci1@gmail.com>, Lukas Zirpel <lukas@zirpel.de>,
- Brian Sune <briansune@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2026-01-rc1
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:1w06FCQNK7cur5t37jLc1A3GdOZSpGTLnQWc3n8nP9g4T/6zXGM
- EmiOErexuOIv4roZNUjvkt2XK+QW3nq17tJriJGDCHmKVShV6JfmC4DxAOgqzfWEs96LVfi
- nVZRbua6kjnY1jMJdgc7pfWOsZMtz/32sEk5w1BWCHOdu9yyKf/W1xpO33wn7Ybhqk6tKDp
- rXTnnueWVZ9I/f2V65KcQ==
-UI-OutboundReport: notjunk:1;M01:P0:ifg/mZHHW2M=;uASmSzAb8eK8x5ja+wtaTyGeJmw
- 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
- PM6saONMf3bs0WFRCbWHtw2ATpOkIkefJ18=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <aPGc12v2H5sCZNMi@pie>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,88 +72,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On Fri, Oct 17, 2025 at 01:33:11AM +0000, Yao Zi wrote:
+> On Thu, Oct 16, 2025 at 07:04:48PM +0200, Heinrich Schuchardt wrote:
+> > On 10/16/25 18:58, Heinrich Schuchardt wrote:
+> > > Commit a681cfecb434 ("riscv: Add a Zalrsc-only alternative for
+> > > synchronization in start.S") changed the hart synchronization in start.S.
+> > > It uses CONFIG_IS_ENABLED(RISCV_ISA_ZAAMO) to determine which method to
+> > > use. If the macro evaluates to true the old behavior is maintained.
+> > > 
+> > > The macro evaluates to false for SPL builds which was unintended. Use
+> > > IS_ENABLED(CONFIG_RISCV_ISA_ZAAMO) instead.
+> > > 
+> > > This fixes a boot failure on StarFive JH7110 based boards.
+> > > 
+> > > Fixes: a681cfecb434 ("riscv: Add a Zalrsc-only alternative for synchronization in start.S")
+> > > Reported-by: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> 
+> Hi Heinrich,
+> 
+> Thanks for sending the patch!
+> 
+> > 
+> > Hello Yao,
+> > 
+> > It would be worthwhile to understand why your new method does not work on
+> > the StarFive VisionFive 2. I only addressed the Kconfig issue. But I suspect
+> > there is something broken in the alternative pass.
+> 
+> A possible reason is that, on JH7110 not all the cores support LR/SC
+> instructions: the S7 small core always raises access exception for it
+> since the implementation of LR/SC requires data cache to present, while
+> S7 doesn't have one.
+> 
+> This is documented in SiFive U74-MC Core Complex Manual,
+> 
+> > Load-reserved (LR) and store-conditional (SC) instructions are special
+> > atomic instructions that are only supported in data cacheable regions.
+> > As the S7 core does not have a data cache, the LR and SC instructions
+> > will always generate a precise access exception.[1]
+> 
+> As S7 also takes part in the initial HART lottery, usage of LR/SC
+> instructions might just crash its boot process with exception.
+> 
+> However I could only confirm the idea days later when I have access to
+> a JH7110 board. Since earlier Tom has merged the patch[2] that reverts
+> the problematic commit, do you think it's better to wait for me to
+> confirm the cause and write v3 of the patch, instead of fixing it up
+> now? I'll carry your Co-developed-by tag in v3 if you're okay with this.
 
-The following changes since commit bf1d8c1fec863b7da2f0d1ed4bd5526275d70dc=
-2:
+Hi Heinrich,
 
-   test/py: Update to a newer pytest release (2025-10-16 18:03:27 -0600)
+I finally got a JH7110 board on hand and could find out what happens
+here. As stated in the U74-MC Core Complex Manual,
 
-are available in the Git repository at:
+> > Load-reserved (LR) and store-conditional (SC) instructions are special
+> > atomic instructions that are only supported in data cacheable regions.
+> > As the S7 core does not have a data cache, the LR and SC instructions
+> > will always generate a precise access exception.[1]
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git=20
-tags/efi-2026-01-rc1
+This is correct, and with my patch the S7 core does trigger an
+exception when doing LR/SC stuff, but this alone isn't enough to break
+the whole SPL booting process up without even a banner shown up.
 
-for you to fetch changes up to dbac24b7137b7d1576aead857850121af92f0a51:
+With some hand-written assembly added, I found that not only the S7
+core, but also the four U74 cores are trapped in exceptions as well.
+This is because U-Boot SPL, including the available_harts_lock variable,
+is loaded in 0x8000000, as pointed out by CONFIG_SPL_TEXT_BASE and
+spl/u-boot-spl.sym. According to StarFive JH7110's manual[3], the region
+is mapped to the L2 Loosely-Integrated Memory.
 
-   doc: ti: j722s_evm: drop outdated boot note (2025-10-18 12:01:16 +0200)
+And the U74-MC Core Complex Manual again points out,
 
-Gitlab CI showed not issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/27944
+> When cache ways are disabled, they are addressable in the L2
+> Loosely-Integrated Memory (L2 LIM) address space as described in the
+> U74-MC Core Complex memory map in Section 5.2. The L2 LIM is an
+> uncacheable port into unused L2 SRAM and provides deterministic
+> access time.
 
-=2D---------------------------------------------------------------
-Pull request efi-2026-01-rc1
+The L2 LIM region is uncachable, too. Since U74 and S7 could only
+perform LR/SC instructions in cachable regions, the new LR/SC
+implementation will always trigger an Load Access Fault exception, thus
+doesn't work for JH7110.
 
-Documentation:
+Another simple patch[4] could confirm this, which just adds a simple
+load-reserved operation on available_harts_lock in
+arch/riscv/cpu/start.S, but still hangs the boot process on JH7110.
 
-  * samsung: Extend E850-96 documentation to be comprehensive
-  * environment: fix links to Linux kernel documentation
-  * sandbox: fix typos
-  * document dmareset command
-  * ti: j722s_evm: drop outdated boot note
+I've reviewed v2 of my patch again, and think besides the usage of
+CONFIG_IS_ENALBED() which you just pointed out, there should be no logic
+error. I'll probably send v3 of the patch carrying your fix along with
+a new patch to explicitly disable RISCV_ISA_ZALRSC on JH7110 platforms,
 
-UEFI:
+Thanks again for sending the fix.
 
-  * Prevent leak of memory from tmp_files
-  * Correctly check if the HTTP protocol is found
-  * Use ESRT_FW_TYPE_SYSTEMFIRMWARE instead of ESRT_FW_TYPE_UNKNOWN
-  * dbginfodump: use guid definition
+Best regards,
+Yao Zi
 
-Others:
+> > Best regards
+> > 
+> > Heinrich
+> 
+> Best regards,
+> Yao Zi
+> 
+> [1]: https://starfivetech.com/uploads/u74mc_core_complex_manual_21G1.pdf
+> (Chapter 3.6, Atomic Memory Operations)
+> [2]: https://lore.kernel.org/u-boot/176063629917.212270.1145034876136991424.b4-ty@konsulko.com/
 
-  * lib/uuid: add support for efi debug image info table guid
-
-=2D---------------------------------------------------------------
-Andrew Goodbody (1):
-       efi_loader: Prevent leak of memory from tmp_files
-
-Brian Sune (1):
-       cmd/dma: documentation
-
-Heinrich Schuchardt (1):
-       efi_loader: correctly check if the HTTP protocol is found
-
-Ilias Apalodimas (1):
-       efi_loader: Use ESRT_FW_TYPE_SYSTEMFIRMWARE instead of=20
-ESRT_FW_TYPE_UNKNOWN
-
-Lukas Zirpel (1):
-       doc: sandbox: fix typos
-
-Mattia Narducci (1):
-       doc: environment: fix links to Linux kernel documentation
-
-Peter Robinson (1):
-       doc: ti: j722s_evm: drop outdated boot note
-
-Sam Protsenko (1):
-       doc: samsung: Extend E850-96 documentation to be comprehensive
-
-Vincent Stehl=C3=A9 (2):
-       efi_loader: dbginfodump: use guid definition
-       lib: uuid: add efi debug image info table guid
-
-  doc/arch/sandbox/sandbox.rst  |    4 +-
-  doc/board/samsung/e850-96.rst | 1023=20
-++++++++++++++++++++++++++++++++++++++---
-  doc/board/ti/j722s_evm.rst    |    5 -
-  doc/usage/cmd/dmareset.rst    |   55 +++
-  doc/usage/environment.rst     |    4 +-
-  doc/usage/index.rst           |    1 +
-  lib/efi_loader/dbginfodump.c  |    4 +-
-  lib/efi_loader/efi_capsule.c  |    4 +-
-  lib/efi_loader/efi_esrt.c     |    2 +-
-  lib/efi_loader/efi_http.c     |   16 +-
-  lib/uuid.c                    |    4 +
-  11 files changed, 1042 insertions(+), 80 deletions(-)
-  create mode 100644 doc/usage/cmd/dmareset.rst
+[3]: https://doc-en.rvspace.org/JH7110/TRM/JH7110_TRM/u74_memory_map.html
+[4]: https://gist.github.com/ziyao233/75fc0e40956a19e4383ab360dd06c784
