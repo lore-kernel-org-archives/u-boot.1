@@ -4,96 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4128CCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:30:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6280ACCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:46:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 320EC82C84;
-	Mon, 20 Oct 2025 17:30:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C358E82E34;
+	Mon, 20 Oct 2025 17:46:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yu3Z067H";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k7tW/dIF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 993A783642; Mon, 20 Oct 2025 17:30:05 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 95F1B831D5; Mon, 20 Oct 2025 17:46:16 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32F93807B1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:30:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4677F82C84
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:46:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4711b95226dso32504795e9.0
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 08:30:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7c278c25aefso4692297a34.1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 08:46:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760974202; x=1761579002; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=lj0gnR7EeSYcxeYprYYb5/8hWRbM6OoyNZ/0ZkKfvlw=;
- b=Yu3Z067HhTdPQBUUGLuuOEf8cnFR7fmSL9aqT6BWC3qbHUdj6wUfK1bCQXLMCKru/J
- W6VjfH41QGatcGLruCQ3QNjtriCvjiUmOE1ZiktkfGsYXGUJl5scLr4fb5oezUvpduRH
- sK3EGvAuca9ssWvVV68qzH9Dyc3GKih26CWMf1ArCWpy39mfs3SmUUtV9xu8WlPday5v
- Fnd5hIyINpanfZDBsJJQ+MNt0OjC5EdVY0+7nuirgIlZKVwWFADEGTisa+DFALmtJCv1
- aV2QSbfCyEbLrKlIhqNULrti1r9vtEAzZ1PHfhQMiqGWMNnCY3MhLhrI8vIPCWXQE2if
- tyyw==
+ d=konsulko.com; s=google; t=1760975172; x=1761579972; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xlS7qxqdZH53gvpbwJ0slMAoSDLR381mqeKJiKmWAw8=;
+ b=k7tW/dIFcSEKDvLa4f1ZJbPUWFf/3AD1uZbrMpeDzlrW0ncpDBKCoDZnt8UP5DVONQ
+ lEKw/AhsZUk9vR58OsecNUXxUHp5gmjLikcE2DdhBtcHcAyF4DIcPxPBanpNNIaL7M9H
+ e/jOC64SylmKctdLhfwgNl8GHATTxI0A0SrjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760974202; x=1761579002;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=lj0gnR7EeSYcxeYprYYb5/8hWRbM6OoyNZ/0ZkKfvlw=;
- b=doNg9+GJ/lUnKf0hHyN//114oPFdgVd49xhLSIx1c3b7DGJn9JwmVKVxw3q2Yy3u93
- 05EzxgiWYB0XiwFRYJ3WZPMZhBTl7uS+v0psTDzCzgvt9pnhkNQBboyoYHb6/TUkmFuN
- RuuWVDNVnqasID6Go2LqPrELvih+NSHt572/oM1NzjjBhuU/GaW+0F6Wr8VRDIjpL3Yi
- kg/IM6wwu3RazwKwtXhTfLNLurfp+Kjk5nMhnCxBlCE2sxV/7CzJI/SazVaMDsvTclcD
- micgZpBt0rLJPz6nJndubF/udt/15dOJrtb8oAOUT5AxKHengBQzHhiSvAAgxsZLbSXL
- MkcQ==
+ d=1e100.net; s=20230601; t=1760975172; x=1761579972;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xlS7qxqdZH53gvpbwJ0slMAoSDLR381mqeKJiKmWAw8=;
+ b=bggD/DylD3KshGWtdVD/mDfNlDL7H39iSQCwI4vqLTalow3fGlDJKSvKzSRVAmd+wU
+ BtUFFMSw9sITAMyTFzXEOq2TUNvWPQnZ7G/TPEbmfl+d8zJHX2ZC3eIGHe7yBJJwgvu9
+ 6ifRkv9vvyWH0dJ/kF3jGx55cE9Am2Io3kxM2q7O5C9i0WPf5aOYW/jPnCkXSpGa4Y9d
+ Rf4PCq085FbGLALH0hpXAo1pEkGYfg3zwbOv7kHHywU5gYFirFcwmu+AqzPoRgj8VD7N
+ htCfYxzb9f5fwUDUsBDOaBff63/VbK2ugsKmXrnaNlXaU1QnqB6wal70L58XQXc4dDX8
+ oeRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXsHGN+By6rLlCFpU9KAzkWsTDCZtZrGTQYg0bqD4GlYT6IutiMQr4NsPmY/pGPL7nYmCdzexI=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrCA3pV10ycwjby7vIQdVitT3yiLRKBHXtlxahrv3BPsQ9Svop
- 24x8OzuCXAP17Pspg1iykbA+2agcsWhvZiiaLxpk16wZF5EpkygMJuiNMpvagz2GC2s=
-X-Gm-Gg: ASbGncupM9YIos9EnyNvgp9QOOL0vJ9nmWQhqtqwSp62FvGMPoul3bqM0mC6RzbYB2d
- mJEjCXuWhiurE+wAdDafxVndDq+V8W8eUB+GjMP0Ad+iM5Guzncv7quyJikS6xmRCoZ9EbxWvyW
- CwnXSGgv3yoUgJPvQePpyy9lGG0eDtV3TvhmzXC0G1caW9yFhO8+UfMMQYQpJFEWB5eAhY+giXM
- +a0NWIJlCGZJHEA/0OJahLd0ETwdR0euM+biZOqg3SVrR3M40Y7tF7cUlE6BZOhUNjJUXLTYFlR
- 5/zzUguwXT+f2k8UxKTQWY04BwWCxclbt1BkD2h4DhYbVt+PJLw9rF/iUuHwOtFfBrFdNLvAJHs
- df1XlhymDfQCwens9LwoX0YN5Ow1RR8VLW5tRkQzNt8nqU13rvOc2+vwPA6F6XdQFwNVemVal+9
- Nx7WYtaH9U1FCDwWK8Owm0VQXXKP43w3Nj+KdXvOz/k75E0klivVgYl7TvTjycN1cK0A==
-X-Google-Smtp-Source: AGHT+IFFUnN3WgdffMd8HEvGXhiZ6TWlM4ZNQEvjaoNlH2PvOUuP8400b6B1khzW4QVyolIx3VYGeg==
-X-Received: by 2002:a05:600c:6290:b0:46e:2cfe:971c with SMTP id
- 5b1f17b1804b1-471177c0f91mr99349155e9.0.1760974202540; 
- Mon, 20 Oct 2025 08:30:02 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0?
- ([2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-47154d382d8sm153429155e9.12.2025.10.20.08.30.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Oct 2025 08:30:01 -0700 (PDT)
-Message-ID: <9d3cc3ff-a064-4dc0-a73b-0edf1bb8a582@linaro.org>
-Date: Mon, 20 Oct 2025 16:30:00 +0100
+ AJvYcCVCI6bdv3TC2o75xkiH2GCn10amAAf1qupwZwceAFMesqJwmKncRu3+HDKj+IXH5zhUCZiL8e8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzS9hfZKE8qal8egwxOENlBqbb9cz4lIFmo4gVeoKDymSC1cZOV
+ k5YLrefVK/hvdQUtx2ThStHx7TA8WRFuBTOk8UzU6dGG7F8EmwlPJS1M8IgGuk4+HSE=
+X-Gm-Gg: ASbGnctEdTKy9WHtRJ8Sy+xc9PXOffPZxX9yllKqGQibO7s+ZMkDmC7lwcc4TZrTyzY
+ NT6u6EAgZaFOdYJZNrBKyLj3patnn0e+S4S3UnP5pHJiP3jkdkdp5HJet1bhSe+SspFsZxHxIwv
+ UQK6hMPtaTvwXa7UegN9AceseznL2cgW9rFNRhP6932XwpLm0C/eBPeXFtuTn6IrhSMZfIcK/9Y
+ VL76FxhSjylazVOMll4yQMAjQd3QO/WDdRr8nnyAb4NL5xFdnBBISwRIMwI8EGaQQviRGvM6t6G
+ 6xtUjKeFFYI4ov86DVatb4aUtxfYWeGI8XOGqBUByI0IyZ5ZDxMlwaaHnRIoDP3CkTt0b4+zlpZ
+ v/fEeFVgDUG2LiQvvimvkGfX60+nuXe0vaRi1MrvntzEgEWrqPyJhzTnfo/3LamJKQwAwFNbYSj
+ BL+qSTG/YntiSnANcKe/EQAdB/Cn1S6qzl2X/T4+0=
+X-Google-Smtp-Source: AGHT+IE9n7QXHnj1rJfkwJb7ugqxygI1b8uKYJeZ0L1nopwVzfufvC1f+cUdOoMGlAiNu69cwyYnaA==
+X-Received: by 2002:a05:6830:3c8b:b0:7aa:abca:b464 with SMTP id
+ 46e09a7af769-7c27c9c3e40mr5666071a34.2.1760975171906; 
+ Mon, 20 Oct 2025 08:46:11 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-651d7cc4b60sm1834044eaf.3.2025.10.20.08.46.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Oct 2025 08:46:11 -0700 (PDT)
+Date: Mon, 20 Oct 2025 09:46:08 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>, u-boot@lists.denx.de,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: Re: [PATCH v4 1/6] docker: add OP-TEE and TF-A build for testing
+ Firmware Handoff
+Message-ID: <20251020154608.GX6688@bill-the-cat>
+References: <20251015141856.4168612-1-raymond.mao@linaro.org>
+ <20251015141856.4168612-2-raymond.mao@linaro.org>
+ <ea1e0cd6-48d1-4999-987a-38febfd0e70f@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/24] clk: rockchip: Remove negative error returns from
- clk_get_rate
-To: Tom Rini <trini@konsulko.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
- <20251015-clk_ops-v1-8-5f80f827407e@linaro.org>
- <aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.se>
- <4f84711c-8d08-419f-bef6-ff97858751f8@linaro.org>
- <20251020142307.GU6688@bill-the-cat>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <20251020142307.GU6688@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hn7egNLkN36WqDf1"
+Content-Disposition: inline
+In-Reply-To: <ea1e0cd6-48d1-4999-987a-38febfd0e70f@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,63 +108,93 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--hn7egNLkN36WqDf1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 20/10/2025 15:23, Tom Rini wrote:
-> On Mon, Oct 20, 2025 at 01:03:15PM +0100, Andrew Goodbody wrote:
->> On 19/10/2025 21:28, Jonas Karlman wrote:
->>> Hi Andrew,
->>>
->>> On 10/15/2025 4:32 PM, Andrew Goodbody wrote:
->>>> clk_get_rate() returns a ulong so do not attempt to pass negative error
->>>> codes through it.
->>>
->>> On Rockchip the clk drivers only implement support for a subset of all
->>> clocks supported by the hardware, mostly to save space for TPL/SPL and
->>> not having to implement logic for clocks not really needed by U-Boot.
->>>
->>> Because support for all clocks is not implemented the existing working
->>> error handling actually help us catch clock issues on the Rockchip
->>> platform. E.g. when a clk is referenced by assigned-clock-rates in DT we
->>> get an error and can fix the issue, or decide if we can safely ignore
->>> setting the clk rate.
->>>
->>> I do not understand why you need to change the way the clk ops work,
->>> just check with IS_ERR_VALUE() inside the clk-uclass or similar if you
->>> really must remove working error handling from the callers.
->>
->> OK, so here we have a question and it is one that I wish had come up in the
->> original discussion. IS_ERR_VALUE() and other related macros are from
->> include/linux/err.h and are introduced with this comment
->>
->> /*
->>   * Kernel pointers have redundant information, so we can use a
->>   * scheme where we can return either an error code or a dentry
->>   * pointer with the same return value.
->>   *
->>   * This should be a per-architecture thing, to allow different
->>   * error and pointer decisions.
->>   */
->>
->> So they are clearly intended to be unambiguous and used to add information
->> about errors into kernel pointers. It also suggests that there may be other
->> implementations of these macros for other architectures.
->>
->> Much of the error checking of the return value from clk_get_rate() is done
->> with IS_ERR_VALUE() despite the return value not being a kernel pointer and
->> with this default implementation it does happen to work just as long as your
->> clock rate does not collide with an error. OK collisions are very unlikely
->> but it does still feel like an abuse of the macro to me.
->>
->> Is there any official guidance on this use of IS_ERR_VALUE()?
-> 
-> We don't have any, really. So my question is, given the use case Jonas
-> outlined (thanks!), what do you see as a good way to handle this?
+On Mon, Oct 20, 2025 at 05:19:45PM +0200, Jerome Forissier wrote:
+> Hi Raymond,
+>=20
+> On 10/15/25 16:18, Raymond Mao wrote:
+> > Fetch OP-TEE (4.7.0), TF-A (v2.13.0), MbedTLS (v3.6) and build
+> > bl1 and fip with both Firmware Handoff and Measured Boot enabled.
+> >=20
+> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> > ---
+> > Changes in V2:
+> > - Move OP-TEE dependencies into the common group.
+> > - Fetch MbedTLS/TF-A and build bl1/fip in dockerfile instead of
+> >   post-buildman script.
+> > - Remove Trust Boot related build options.
+> > Changes in V3:
+> > - Clean-up of OP-TEE deps.
+> > Changes in V4:
+> > - Minimize OP-TEE build options.
+> >=20
+> >  tools/docker/Dockerfile | 38 ++++++++++++++++++++++++++++++++++++--
+> >  1 file changed, 36 insertions(+), 2 deletions(-)
+> >=20
+> > diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+> > index 5b4c75f8400..73c1589e260 100644
+> > --- a/tools/docker/Dockerfile
+> > +++ b/tools/docker/Dockerfile
+> > @@ -122,8 +122,10 @@ RUN --mount=3Dtype=3Dcache,target=3D/var/cache/apt=
+,sharing=3Dlocked \
+> >  	python-is-python3 \
+> >  	python2.7 \
+> >  	python3 \
+> > +	python3-cryptography \
+> >  	python3-dev \
+> >  	python3-pip \
+> > +	python3-pyelftools \
+> >  	python3-sphinx \
+> >  	python3-tomli \
+> >  	python3-venv \
+> > @@ -227,10 +229,24 @@ RUN git clone https://gitlab.com/qemu-project/qem=
+u.git /tmp/qemu && \
+> >  	make -j$(nproc) all install && \
+> >  	rm -rf /tmp/qemu
+> > =20
+> > -# Build fiptool
+> > +# Build OP-TEE for qemu_arm64
+> > +RUN git clone https://github.com/OP-TEE/optee_os.git /tmp/optee_os && \
+> > +	cd /tmp/optee_os/ && \
+>=20
+> I would recommend:
+>=20
+> git clone -b 4.7.0 --depth=3D1 https://github.com/OP-TEE/optee_os.git /tm=
+p/optee_os
+>=20
+> ...which will directly obtain the proper tag (-b 4.7.0), and minimize the=
+ amount
+> of cloned data (--depth=3D1 i.e., no full history, just the last commit).
+>=20
+> With or without this change:
+>=20
+> Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-I would hesitate to call it good as it still seems wrong to me to pass a 
-negative error as an unsigned return value, but given the push back I 
-guess the pragmatic thing to do here is accept the use of IS_ERR_VALUE() 
-and that clk_get_rate() will be limited to < (ULONG_MAX - 4095). We can 
-drop the current series and I will take another look over the code to 
-see where there still may be needed some fixes.
+Oh neat. Yes, please re-order things to be:
+RUN git clone --depth=3D1 https://github.com/OP-TEE/optee_os.git /tmp/optee=
+_os \
+   -b 4.7.0 && \
+   ...
+So that future updates can be just a one line change. An unrelated
+follow-up to optimize the rest of our git clones to be like this would
+be much appreciated.
 
-Andrew
+--=20
+Tom
+
+--hn7egNLkN36WqDf1
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPZZPQAKCRAr4qD1Cr/k
+Cr+vAP4n/FwNOjM04I6S6baO2Lhs5tfRFJ/0q7eQzd3tAI82UwD/eAyfpAvxHF73
+fwrk+5SRlcNuyMD888IRPMyfQXSGkwA=
+=MYqe
+-----END PGP SIGNATURE-----
+
+--hn7egNLkN36WqDf1--
