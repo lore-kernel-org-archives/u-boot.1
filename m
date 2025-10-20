@@ -4,64 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B18FECCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:03:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4721CCD193
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:19:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25F4A807B1;
-	Mon, 20 Oct 2025 17:03:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EC6E882C84;
+	Mon, 20 Oct 2025 17:19:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BNzE2wXF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L+0uk1AC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AE5880422; Mon, 20 Oct 2025 17:03:46 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1FEF1831D5; Mon, 20 Oct 2025 17:19:01 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 041C880422
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:03:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 21955807B1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:18:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5603=46=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1760972623;
- bh=8lpqLST6IHmyaOAgHqRyVo/fc2vIJH3kC/hgt0rTmyU=;
- b=BNzE2wXFA1yIdHWOIorAm6PNLJwHEUG8q0/pUuvCJk7YLq26RVpHfMHa8XI8kPaUSuD1RSl/i
- ReotQZX5FLth9KBOwUOd4o+g1i+aBNyyDQfW8XBXatLC2xnL2Ec2N0FnJeshjJ0BNv1mWV7fWn/
- 08iUPwZQCAPmwVRjd73R+pltqxhLlbbAR7RQP1QXxBs58TCLginUNevHYsLYEh6wXbcQiM5p9AH
- 5tR8M1IaCmp26NBJPzO2E4GI6J+0dl5ZyKaDkyeK7BZlsjFamuUzKjGfGFZb7e/hgs2GswK0Gqj
- VoRZUrTj8+7bkEXqwM4dwZFf0v4Hl7v9+lqVP4zpqGLQ==
-X-Forward-Email-ID: 68f64f4823e747b398bd260c
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.3.0
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <ba095360-147b-4c22-b2fa-8a3c17000381@kwiboo.se>
-Date: Mon, 20 Oct 2025 17:03:31 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-47100eae3e5so879245e9.1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 08:18:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760973538; x=1761578338; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gE/zXH7oj8luuojug2mx0yUjKnI3txoF+d9+NmJbjas=;
+ b=L+0uk1ACv4ihkErCtFNmUOrzbtSWQ94U2wUBIpl9YA90bKmSCbyi4wjXmrrVgFU8Ug
+ mefJw+E6scoQHjvkiWhDxsNcS3GF0+XgpUMHiOsWjCFzJv2JiB3TJsoKEyOhNZetT7xW
+ OX2DgreIdWXs4Mm+GdcMZM2ssUnCX8SzCmEKG7JayZYspfPZtXd7mxgnaW4aLk7oszZb
+ 8+I26SPwUOf6HzBk9pI2ucNYf+VqiyWNeK8/PuGra9jjhaMh4j7uPJnN98iKRdbYC9eN
+ gS0T8Orm4tviB8dOH+Nq4ZT5QfYCxlZz0gkeDTX+aCHGldDP+1+FUekXlFipG8iM8Dgr
+ Q5eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760973538; x=1761578338;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gE/zXH7oj8luuojug2mx0yUjKnI3txoF+d9+NmJbjas=;
+ b=tkHs/ajxfEMFkIVEftlhJ02w/W6hmFJvGF53GJX4xhmlDXN0PwwZAIBu+d2EMk53kB
+ dwTZPy366Li4fTOZE3jSupUATkexNymwM3+sBNaJilOicbv9EAaUSW/hbDEbdio2ii01
+ TugCKbjQBOx0QsRewEotv2JuCI/nxoxfpA6kxUN8JwZno0MCaZ4qibAPBVpaGVyEnha6
+ 1sCIffDCiYsP3uoUphtN+ycMXRjMPqNwtXK8xaT6siUwu6W+J2LGdIwf82L5o7uhZkRD
+ ljTGaZO2LIZw/pdiG7NcjK8qCh14+TDI9uuvIlqKzmxHo8FKdwRpHP+3mWkxrCw/XfW0
+ ot6w==
+X-Gm-Message-State: AOJu0YxKiJbsnjgpGG76z3Iw6Ytkae5Bs9Gb67zEG16WVZ5dfHVaF3rc
+ zOKHiE8Sjm43g+yvvScWOq0yUiURsij++sCUcvUd6PgadLOv5/8XEcCG5YcmNA==
+X-Gm-Gg: ASbGncvUAylYn3A6Of2RetWrbjIqBomMvTFwfcYcH2cqnrB7U0hR2QsZZ+hHuLQT6i/
+ rPRhv8/E997/yzSfreutVA0wIntuapa9M65JiXQzaYDgedRbdCkydoLMISlQk4tgLPCjxDi1/9U
+ Ka0P6GIO3z5/poJloNKv/C054c0DhWLlBJgPbEr5JF/0MI2IrSG01oxEJNUCCS5BBHb418kBwUR
+ 45aZ1Ts8UyCFhmY+QB05KvSESOXo5eSPmWCXwytA3ZUHcaW0mj340TavRdnOnlBoyPIargXZZHc
+ /BlNFeILGkoGYTwTnvDJPCLvmu9I+2BouceF1GoLL89xcjWbqmlvtpze5GAklwE+C3BOGeD6dNA
+ wFqmKuTvBt5x9X9nC5lizgKmt7nUwhA3oxaVCb0meBGL1VfrWISZDIuGqD7nb/l+ekOsyHeH98Q
+ Ui+0eCQunn219D34TttJEkQJ0wmoI8WAH8yZDnReMPc4fnFezz2kTMQznWeTqCIwkXPhil
+X-Google-Smtp-Source: AGHT+IH5qaGiohHu1jrL8Sfsr2c1k7P4tZGm1c6prBnxmOD+RBX2uP8H/wW7wKCjofz+j3EUhUgieA==
+X-Received: by 2002:a05:600c:64cf:b0:471:12ed:f698 with SMTP id
+ 5b1f17b1804b1-4711786c793mr106360845e9.8.1760973538344; 
+ Mon, 20 Oct 2025 08:18:58 -0700 (PDT)
+Received: from jernej-laptop.localnet (178-79-73-218.dynamic.telemach.net.
+ [178.79.73.218]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4715520d753sm150384595e9.13.2025.10.20.08.18.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Oct 2025 08:18:58 -0700 (PDT)
+From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+To: u-boot@lists.denx.de, Chen-Yu Tsai <wens@kernel.org>
+Cc: Chen-Yu Tsai <wens@kernel.org>, Andre Przywara <andre.przywara@arm.com>,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH] .mailmap: update email address for Chen-Yu Tsai
+Date: Mon, 20 Oct 2025 17:18:57 +0200
+Message-ID: <5047219.31r3eYUQgx@jernej-laptop>
+In-Reply-To: <20251020145527.2702250-1-wens@kernel.org>
+References: <20251020145527.2702250-1-wens@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/24] clk: rockchip: Remove negative error returns from
- clk_get_rate
-To: Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
- <20251015-clk_ops-v1-8-5f80f827407e@linaro.org>
- <aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.se>
- <4f84711c-8d08-419f-bef6-ff97858751f8@linaro.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <4f84711c-8d08-419f-bef6-ff97858751f8@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,95 +99,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Dne ponedeljek, 20. oktober 2025 ob 16:55:27 Srednjeevropski poletni =C4=8D=
+as je Chen-Yu Tsai napisal(a):
+> The email forwarder I'm using has run into severe problems with Gmail
+> lately. Switch over to my kernel.org address.
+>=20
+> Signed-off-by: Chen-Yu Tsai <wens@kernel.org>
 
-On 10/20/2025 2:03 PM, Andrew Goodbody wrote:
-> On 19/10/2025 21:28, Jonas Karlman wrote:
->> Hi Andrew,
->>
->> On 10/15/2025 4:32 PM, Andrew Goodbody wrote:
->>> clk_get_rate() returns a ulong so do not attempt to pass negative error
->>> codes through it.
->>
->> On Rockchip the clk drivers only implement support for a subset of all
->> clocks supported by the hardware, mostly to save space for TPL/SPL and
->> not having to implement logic for clocks not really needed by U-Boot.
->>
->> Because support for all clocks is not implemented the existing working
->> error handling actually help us catch clock issues on the Rockchip
->> platform. E.g. when a clk is referenced by assigned-clock-rates in DT we
->> get an error and can fix the issue, or decide if we can safely ignore
->> setting the clk rate.
->>
->> I do not understand why you need to change the way the clk ops work,
->> just check with IS_ERR_VALUE() inside the clk-uclass or similar if you
->> really must remove working error handling from the callers.
-> 
-> OK, so here we have a question and it is one that I wish had come up in 
-> the original discussion. IS_ERR_VALUE() and other related macros are 
-> from include/linux/err.h and are introduced with this comment
+Acked-by: Jernej Skrabec <jernej.skrabec@gmail.com>
 
-I have no idea what the original discussion this relates to.
+Best regards,
+Jernej
 
-In U-Boot most/all? uclass functions is documented to return >= 0 on
-success and -ve on error, I do not really see a reason why clk funcs
-should be changed away from this documented behavior.
+> ---
+>  .mailmap | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/.mailmap b/.mailmap
+> index f1b93d168e90..e08dfd3a5263 100644
+> --- a/.mailmap
+> +++ b/.mailmap
+> @@ -36,6 +36,7 @@ Bin Meng <bmeng.cn@gmail.com> <bin.meng@windriver.com>
+>  Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@bootlin.com>
+>  Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@free-electrons.=
+com>
+>  Casey Connolly <casey.connolly@linaro.org> <caleb.connolly@linaro.org>
+> +Chen-Yu Tsai <wens@kernel.org> <wens@csie.org>
+>  Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
+>  Christopher Obbard <christopher.obbard@linaro.org> <chris.obbard@collabo=
+ra.com>
+>  Dirk Behme <dirk.behme@googlemail.com>
+>=20
 
-> 
-> /*
->   * Kernel pointers have redundant information, so we can use a
->   * scheme where we can return either an error code or a dentry
->   * pointer with the same return value.
->   *
->   * This should be a per-architecture thing, to allow different
->   * error and pointer decisions.
->   */
-> 
-> So they are clearly intended to be unambiguous and used to add 
-> information about errors into kernel pointers. It also suggests that 
-> there may be other implementations of these macros for other architectures.
-> 
-> Much of the error checking of the return value from clk_get_rate() is 
-> done with IS_ERR_VALUE() despite the return value not being a kernel 
-> pointer and with this default implementation it does happen to work just 
-> as long as your clock rate does not collide with an error. OK collisions 
-> are very unlikely but it does still feel like an abuse of the macro to me.
 
-The U-Boot documentation for clk_get_rate() clearly state that we should
-use -ve error code for errors. And the safest way to test for error
-codes will be to use something like IS_ERR_VALUE(), so why should we not use it as
-it does the job very well?
 
-Also for Rockchip the clock rates do not really collide with error codes
-as the typical max clock rate go up to 2-3 GHz, and in U-Boot we
-typically only reference clocks with less than 1 GHz rates.
 
-/**
- * clk_get_rate() - Get current clock rate.
- * @clk:	A clock struct that was previously successfully requested by
- *		clk_request/get_by_*().
- *
- * Return: clock rate in Hz on success, 0 for invalid clock, or -ve error code
- *	   for other errors.
- */
-
-To me this patch/series just look to break this documented and working
-error handling without any justified benefit or replacement.
-
-Regards,
-Jonas
-
-> 
-> Is there any official guidance on this use of IS_ERR_VALUE()?
-> 
-> Andrew
-> 
->> The current working clk error handling has really helped me time and
->> time again on Rockchip platform during soc and board bring-up.
->>
->> This is a NAK for me without first having a proper replacement for all
->> existing working error handling that is just being left ignored after
->> this patch/series.
->>
->> Regards,
->> Jonas
