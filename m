@@ -4,75 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46287CCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 14:05:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DDBACCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 14:11:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C36182C84;
-	Mon, 20 Oct 2025 16:05:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id B246080107;
+	Mon, 20 Oct 2025 16:11:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="R8ZnvhUq";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tzWaNPv2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 125AD83768; Mon, 20 Oct 2025 16:05:39 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 094F68051F; Mon, 20 Oct 2025 16:11:33 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE0F8807C0
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 16:05:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 903F9800B6
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 16:11:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.genoud@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id DA5E3C0AFD6;
- Mon, 20 Oct 2025 14:05:15 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 4AA47606D5;
- Mon, 20 Oct 2025 14:05:35 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E16F1102F23CF; 
- Mon, 20 Oct 2025 16:05:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760969134; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=wNsxHGY9P4xQGrV4rj91pSncyvSqsrVDkMI2M8dYCFI=;
- b=R8ZnvhUqk/63k68USLXo4M6M4AT+q8ZnRnuCwXbSjy2QGTX0Aei3Rynry3HAaZCFxk7AgG
- xxYxEmKeKEUSuVOLm+r3DiGm1AXN6zcZ3L0QB3xk7k6sg8r/sde72N3Nh0llZZd1aZ6J0a
- MIZJniuDU0IlIwVHyXYX3nQP2jgNNdnX3nj/5Si2Rk4p+giySZXaNXyJ1+YgbVvwAwnHMU
- hMtfweh2SjkuOfjNhQxu/H9B9oZYs98VoP9pyrvpB4RkF25xWm+sZEDOL6dmu/Uxf/BgtM
- 2OeooWFCKSYBgYEE381C+F/SE604P2mx3B8mNuKKLExKhMEruBIXk+C6tBdL4g==
-Message-ID: <51e2dffc-ceab-4f3e-ae41-37c20492c5cf@bootlin.com>
-Date: Mon, 20 Oct 2025 16:05:21 +0200
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b48d8deaef9so867216166b.2
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 07:11:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760969489; x=1761574289; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=M0gxV9gUyklhTnYC9vA21OgQgmsWgFoO5Ti2k0YwqPA=;
+ b=tzWaNPv2Wd94qgxfBDSBSnh24tqXSvQPesDoRyT1a4EpRrZxQCjRRgwGYpIPCqgmi+
+ MeaW4+ZC62H5yNn2jitdxewMRqb5bOMfFDpRCcbxa+2+B14zNzVGkZXW7phv5lhyG/Xw
+ r13wr2B+Nj72j/PP1GbulML0H09tmjG3vYejeELhcV0cTsYkwhcG7/j93JyepgphcZnl
+ Zz9O2KbOwQCGYq0Z90pjySFmzYxQViIjwRDceiVzQsqwYKGgSnzVZkSCHS8PinQAOAqM
+ ART/xMU22pWwJfjzlaG7BjGBjnQpr902/0ysFlyNg67gA4tt56tX9iiMN7BlfYX+ckYe
+ pUPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760969489; x=1761574289;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=M0gxV9gUyklhTnYC9vA21OgQgmsWgFoO5Ti2k0YwqPA=;
+ b=uvLPtFnPs9oCHLnVGoLGdZ9TfncVYLRAthhV68SV0vlDJRI6ZmoW0Uj0lK7enFHBqm
+ zjkdEXSPRYZKHRAa/gIVUMAcRES3da9pXUhv1o8qY/TyA7JH0oUA+oFPB+9PIg/Mk/+U
+ xgfmk16EsKfKpuHvv2uvPrwK9OiTWuymcr4ysN2daWROc3KAhruU7Vimuq5tAp5Dq37n
+ ZDFUQ4UTNIr+/Cp0FUxVi32YGBqedRyo33MglRLXUkg/i5nX9Ix9WRNgHKrUnpzya0Nd
+ Vq2kn5cW1IXQHemvn0XZOUF358qTjghqd9h2DKavKz24egqrb6u4ceAC1dJtYbUjMEDm
+ Z8/w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWa8ec0d7xipLn/JPPUYsAKmzMscUhLxaQ8uMDYwCqNhhamNDkfHtBchh3EDDQBwD4S0llypl8=@lists.denx.de
+X-Gm-Message-State: AOJu0YwHNo5wLF8ugBSN8vyISNkQSAcH3slUMGpP3c6eqAef3UGUphkf
+ IHfldaj+Aybmy5gkEg98R/Cq6kDj8hjVFreKERnAmooivPzR/gZDRZzPAlrgE21ysmc=
+X-Gm-Gg: ASbGncsrx43v5LZKQnarTiAnea0QBEi7P7Ntoz6kXP/H0DMXlLwive+W5bsFKDnUWPG
+ 0KIgJD9RNUuCmT+4DBYUd44jXyA9rVUipcfPiMDdZ2t6ypY9fjfTN2+GfmeIpUA9RjTJNe8sXTI
+ vu3pVnkRo/IXB3ignWQstoI20M+CbjtfHoGDCad0UbImtfkzlIByoPtdA13boXXb0rAehYJ35w6
+ E9B2jt9sKTBTDorsFslNZNZdNxtbifRGi27+KSy1Db3U+Q8xC5KYSYR2NeIV8AFVGaaEna3yybp
+ 4PE8qtXPpT/UyK3VkBVAXvGHvuYySGyzCH2gWQY3sp85MpQZEohST6Hl6DhNZbW+hdgJUTYyzHA
+ CU7JUUf8X2t4efgxR2SizeGy7dm7WnUbIsiLLmzCRa1zd6jwKXh83LNKqIFQMGdmCu5exZh8Fqn
+ 7UYQz4rLSWignRxBZv+ZmhMcdSDHRNGxv3L0AoRPpJfNgZwoLBx1dePrU8GZQ7tQ==
+X-Google-Smtp-Source: AGHT+IFsDquIelM6+4UpjYI4ikPRUw5Lu6gvs3CwqxdTDTsIekymxp20kbXFSfVaL19sr7ASeR/4/Q==
+X-Received: by 2002:a17:906:7303:b0:b4e:f7cc:72f1 with SMTP id
+ a640c23a62f3a-b6471f3c28emr1490435466b.22.1760969488872; 
+ Mon, 20 Oct 2025 07:11:28 -0700 (PDT)
+Received: from [192.168.1.36] (p5b29e551.dip0.t-ipconnect.de. [91.41.229.81])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b65e8391547sm806793166b.22.2025.10.20.07.11.26
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Oct 2025 07:11:27 -0700 (PDT)
+Message-ID: <db30c6d4-8cca-4f2e-a26d-bac73cf82d1b@linaro.org>
+Date: Mon, 20 Oct 2025 16:11:26 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 22/24] mtd: rawnand: sunxi: add support for H6/H616 nand
- controller
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
- Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
- Andrey Skvortsov <andrej.skvortzov@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dinesh Maniyam <dinesh.maniyam@intel.com>,
- Anand Gore <anand.gore@broadcom.com>,
- Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-References: <20251016142752.2627710-1-richard.genoud@bootlin.com>
- <20251016142752.2627710-23-richard.genoud@bootlin.com>
-From: Richard GENOUD <richard.genoud@bootlin.com>
-Content-Language: en-US, fr
-Organization: Bootlin
-In-Reply-To: <20251016142752.2627710-23-richard.genoud@bootlin.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH v4 2/4] power-domain: Add QCOM RPMH Power Domain Driver
+ Support
+Content-Language: en-US
+To: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-qcom@groups.io,
+ Aswin Murugan <aswin.murugan@oss.qualcomm.com>, trini@konsulko.com,
+ sumit.garg@kernel.org, jh80.chung@samsung.com, rui.silva@linaro.org,
+ ilias.apalodimas@linaro.org, christopher.obbard@linaro.org, me@samcday.com,
+ quic_varada@quicinc.com, marek.vasut+renesas@mailbox.org,
+ sughosh.ganu@linaro.org, miquel.raynal@bootlin.com,
+ balaji.selvanathan@oss.qualcomm.com, sjg@chromium.org, u-boot@lists.denx.de
+References: <20250711143851.1490617-1-aswin.murugan@oss.qualcomm.com>
+ <20250711143851.1490617-3-aswin.murugan@oss.qualcomm.com>
+ <186A538DC06C545F.26372@groups.io>
+ <627f4122-6f60-4b3c-adac-370f6e736a97@linaro.org>
+From: Casey Connolly <casey.connolly@linaro.org>
+In-Reply-To: <627f4122-6f60-4b3c-adac-370f6e736a97@linaro.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,339 +111,402 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-Le 16/10/2025 à 16:27, Richard Genoud a écrit :
-> Introduce H6/H616 NAND controller support for U-Boot
-> 
-> The H616 NAND controller has the same base as A10/A23, with some
-> differences:
-> - MDMA is based on chained buffers
-> - its ECC supports up to 80bit per 1024bytes
-> - some registers layouts are a bit different, mainly due do the stronger
->    ECC.
-> - it uses USER_DATA_LEN registers along USER_DATA registers.
-> - it needs a specific clock for ECC and MBUS.
-> 
-> Introduce the basic support, with ECC and scrambling, but without
-> DMA/MDMA.
-> 
-> Tested on Whatsminer H616 board (with and without scrambling, ECC)
-> 
-> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
-> ---
->   drivers/mtd/nand/raw/Kconfig      |   3 +-
->   drivers/mtd/nand/raw/sunxi_nand.c | 112 ++++++++++++++++++++++++++++--
->   drivers/mtd/nand/raw/sunxi_nand.h |  32 ++++++++-
->   3 files changed, 139 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-> index 754b99bf3eb6..e4c4d9bcbf63 100644
-> --- a/drivers/mtd/nand/raw/Kconfig
-> +++ b/drivers/mtd/nand/raw/Kconfig
-> @@ -467,7 +467,8 @@ config NAND_SANDBOX
->   config NAND_SUNXI
->   	bool "Support for NAND on Allwinner SoCs"
->   	default ARCH_SUNXI
-> -	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I
-> +	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I \
-> +		|| MACH_SUN50I_H616
-Hum, it seems I forgot to add MACH_SUN50I_H6 here.
-
->   	select SYS_NAND_SELF_INIT
->   	select SYS_NAND_U_BOOT_LOCATIONS
->   	select SPL_NAND_SUPPORT
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
-> index 58c895095ce9..c9133cdc8844 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand.c
-> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
-> @@ -170,8 +170,14 @@ static inline struct sunxi_nfc *to_sunxi_nfc(struct nand_hw_control *ctrl)
->   
->   static void sunxi_nfc_set_clk_rate(unsigned long hz)
->   {
-> +#if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
-> +	void * const ccm = (void *)SUNXI_CCM_BASE;
-> +	void * const nand0_clk_cfg = ccm + CCU_NAND0_CLK_CFG;
-> +#else
->   	struct sunxi_ccm_reg *const ccm =
->   	(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
-> +	u32 *nand0_clk_cfg = &ccm->nand0_clk_cfg;
-> +#endif
->   	int div_m, div_n;
->   
->   	div_m = (clock_get_pll6() + hz - 1) / hz;
-> @@ -186,8 +192,16 @@ static void sunxi_nfc_set_clk_rate(unsigned long hz)
->   	/* config mod clock */
->   	writel(CCM_NAND_CTRL_ENABLE | CCM_NAND_CTRL_PLL6 |
->   	       CCM_NAND_CTRL_N(div_n) | CCM_NAND_CTRL_M(div_m),
-> -	       &ccm->nand0_clk_cfg);
-> +	       nand0_clk_cfg);
->   
-> +#if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
-> +	setbits_le32(ccm + CCU_H6_NAND_GATE_RESET,
-> +		     (1 << GATE_SHIFT) | (1 << RESET_SHIFT));
-> +	setbits_le32(ccm + CCU_H6_MBUS_GATE, (1 << MBUS_GATE_OFFSET_NAND));
-> +	writel(CCM_NAND_CTRL_ENABLE | CCM_NAND_CTRL_PLL6 |
-> +	       CCM_NAND_CTRL_N(div_n) | CCM_NAND_CTRL_M(div_m),
-> +	       ccm + CCU_NAND1_CLK_CFG);
-> +#else
->   	/* gate on nand clock */
->   	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_NAND0));
->   #ifdef CONFIG_MACH_SUN9I
-> @@ -195,6 +209,7 @@ static void sunxi_nfc_set_clk_rate(unsigned long hz)
->   #else
->   	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
->   #endif
-> +#endif
->   }
->   
->   static int sunxi_nfc_wait_int(struct sunxi_nfc *nfc, u32 flags,
-> @@ -689,6 +704,53 @@ static inline void sunxi_nfc_user_data_to_buf(u32 user_data, u8 *buf)
->   	buf[3] = user_data >> 24;
->   }
->   
-> +/*
-> + * On H6/H616 the user_data length has to be set in specific registers
-> + * before writing.
-> + */
-> +static void sunxi_nfc_reset_user_data_len(struct sunxi_nfc *nfc)
-> +{
-> +	int loop_step = NFC_REG_USER_DATA_LEN_CAPACITY;
-> +
-> +	/* not all SoCs have this register */
-> +	if (!nfc->caps->reg_user_data_len)
-> +		return;
-> +
-> +	for (int i = 0; i < nfc->caps->max_ecc_steps; i += loop_step)
-> +		writel(0, nfc->regs + NFC_REG_USER_DATA_LEN(nfc, i));
-> +}
-> +
-> +static void sunxi_nfc_set_user_data_len(struct sunxi_nfc *nfc,
-> +					int len, int step)
-> +{
-> +	bool found = false;
-> +	u32 val;
-> +	int i;
-> +
-> +	/* not all SoCs have this register */
-> +	if (!nfc->caps->reg_user_data_len)
-> +		return;
-> +
-> +	for (i = 0; i < nfc->caps->nuser_data_tab; i++) {
-> +		if (len == nfc->caps->user_data_len_tab[i]) {
-> +			found = true;
-> +			break;
-> +		}
-> +	}
-> +
-> +	if (!found) {
-> +		dev_warn(nfc->dev,
-> +			 "Unsupported length for user data reg: %d\n", len);
-> +		return;
-> +	}
-> +
-> +	val = readl(nfc->regs + NFC_REG_USER_DATA_LEN(nfc, step));
-> +
-> +	val &= ~NFC_USER_DATA_LEN_MSK(step);
-> +	val |= field_prep(NFC_USER_DATA_LEN_MSK(step), i);
-> +	writel(val, nfc->regs + NFC_REG_USER_DATA_LEN(nfc, step));
-> +}
-> +
->   static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_info *mtd,
->   				       u8 *data, int data_off,
->   				       u8 *oob, int oob_off,
-> @@ -716,6 +778,9 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_info *mtd,
->   	if (ret)
->   		return ret;
->   
-> +	sunxi_nfc_reset_user_data_len(nfc);
-> +	sunxi_nfc_set_user_data_len(nfc, 4, 0);
-> +
->   	sunxi_nfc_randomizer_enable(mtd);
->   	writel(NFC_DATA_TRANS | NFC_DATA_SWAP_METHOD | NFC_ECC_OP,
->   	       nfc->regs + NFC_REG_CMD);
-> @@ -856,6 +921,9 @@ static int sunxi_nfc_hw_ecc_write_chunk(struct mtd_info *mtd,
->   	if (ret)
->   		return ret;
->   
-> +	sunxi_nfc_reset_user_data_len(nfc);
-> +	sunxi_nfc_set_user_data_len(nfc, 4, 0);
-> +
->   	sunxi_nfc_randomizer_enable(mtd);
->   	writel(NFC_DATA_TRANS | NFC_DATA_SWAP_METHOD |
->   	       NFC_ACCESS_DIR | NFC_ECC_OP,
-> @@ -1276,7 +1344,6 @@ static int sunxi_nand_chip_init_timings(struct sunxi_nfc *nfc,
->   static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
->   					      struct nand_ecc_ctrl *ecc)
->   {
-> -	static const u8 strengths[] = { 16, 24, 28, 32, 40, 48, 56, 60, 64 };
->   	struct nand_chip *nand = mtd_to_nand(mtd);
->   	struct sunxi_nand_chip *sunxi_nand = to_sunxi_nand(nand);
->   	struct sunxi_nfc *nfc = to_sunxi_nfc(sunxi_nand->nand.controller);
-> @@ -1303,12 +1370,12 @@ static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
->   
->   	/* Add ECC info retrieval from DT */
->   	for (i = 0; i < nfc->caps->nstrengths; i++) {
-> -		if (ecc->strength <= strengths[i]) {
-> +		if (ecc->strength <= nfc->caps->ecc_strengths[i]) {
->   			/*
->   			 * Update ecc->strength value with the actual strength
->   			 * that will be used by the ECC engine.
->   			 */
-> -			ecc->strength = strengths[i];
-> +			ecc->strength = nfc->caps->ecc_strengths[i];
->   			break;
->   		}
->   	}
-> @@ -1722,9 +1789,22 @@ static int sunxi_nand_probe(struct udevice *dev)
->   	return 0;
->   }
->   
-> +static const u8 sunxi_ecc_strengths_a10[] = {
-> +	16, 24, 28, 32, 40, 48, 56, 60, 64
-> +};
-> +
-> +static const u8 sunxi_ecc_strengths_h6[] = {
-> +	16, 24, 28, 32, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80
-> +};
-> +
-> +static const u8 sunxi_user_data_len_h6[] = {
-> +	0, 4, 8, 12, 16, 20, 24, 28, 32
-> +};
-> +
->   static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
->   	.has_ecc_block_512 = true,
-> -	.nstrengths = 9,
-> +	.nstrengths = ARRAY_SIZE(sunxi_ecc_strengths_a10),
-> +	.ecc_strengths = sunxi_ecc_strengths_a10,
->   	.reg_ecc_err_cnt = NFC_REG_A10_ECC_ERR_CNT,
->   	.reg_user_data = NFC_REG_A10_USER_DATA,
->   	.reg_pat_found = NFC_REG_ECC_ST,
-> @@ -1733,6 +1813,24 @@ static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
->   	.pat_found_mask = GENMASK(31, 16),
->   	.ecc_mode_mask = GENMASK(15, 12),
->   	.random_en_mask = BIT(9),
-> +	.max_ecc_steps = 16,
-> +};
-> +
-> +static const struct sunxi_nfc_caps sunxi_nfc_h616_caps = {
-> +	.nstrengths = ARRAY_SIZE(sunxi_ecc_strengths_h6),
-> +	.ecc_strengths = sunxi_ecc_strengths_h6,
-> +	.reg_ecc_err_cnt = NFC_REG_H6_ECC_ERR_CNT,
-> +	.reg_user_data = NFC_REG_H6_USER_DATA,
-> +	.reg_user_data_len = NFC_REG_H6_USER_DATA_LEN,
-> +	.reg_pat_found = NFC_REG_H6_PAT_FOUND,
-> +	.reg_spare_area = NFC_REG_H6_SPARE_AREA,
-> +	.reg_pat_id = NFC_REG_H6_PAT_ID,
-> +	.pat_found_mask = GENMASK(31, 0),
-> +	.ecc_mode_mask = GENMASK(15, 8),
-> +	.random_en_mask = BIT(5),
-> +	.user_data_len_tab = sunxi_user_data_len_h6,
-> +	.nuser_data_tab = ARRAY_SIZE(sunxi_user_data_len_h6),
-> +	.max_ecc_steps = 32,
->   };
->   
->   static const struct udevice_id sunxi_nand_ids[] = {
-> @@ -1740,6 +1838,10 @@ static const struct udevice_id sunxi_nand_ids[] = {
->   		.compatible = "allwinner,sun4i-a10-nand",
->   		.data = (unsigned long)&sunxi_nfc_a10_caps,
->   	},
-> +	{
-> +		.compatible = "allwinner,sun50i-h616-nand-controller",
-> +		.data = (unsigned long)&sunxi_nfc_h616_caps,
-> +	},
->   	{ }
->   };
->   
-> diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
-> index 52200468d343..966b743e2613 100644
-> --- a/drivers/mtd/nand/raw/sunxi_nand.h
-> +++ b/drivers/mtd/nand/raw/sunxi_nand.h
-> @@ -44,15 +44,26 @@
->   #define NFC_REG_IO_DATA		0x0030
->   #define NFC_REG_ECC_CTL		0x0034
->   #define NFC_REG_ECC_ST		0x0038
-> -#define NFC_REG_DEBUG		0x003C
-> +#define NFC_REG_H6_PAT_FOUND	0x003C
->   #define NFC_REG_A10_ECC_ERR_CNT	0x0040
-> +#define NFC_REG_H6_ECC_ERR_CNT	0x0050
->   #define NFC_REG_ECC_ERR_CNT(nfc, x)	(((nfc)->caps->reg_ecc_err_cnt + (x)) & ~0x3)
->   #define NFC_REG_A10_USER_DATA	0x0050
-> +#define NFC_REG_H6_USER_DATA	0x0080
-> +#define NFC_REG_H6_USER_DATA_LEN 0x0070
->   #define NFC_REG_USER_DATA(nfc, x)	((nfc)->caps->reg_user_data + ((x) * 4))
-> +
-> +/* A USER_DATA_LEN register can hold the length of 8 USER_DATA registers */
-> +#define NFC_REG_USER_DATA_LEN_CAPACITY 8
-> +#define NFC_REG_USER_DATA_LEN(nfc, step) \
-> +	((nfc)->caps->reg_user_data_len + \
-> +	 ((step) / NFC_REG_USER_DATA_LEN_CAPACITY) * 4)
->   #define NFC_REG_SPARE_AREA(nfc) ((nfc)->caps->reg_spare_area)
->   #define NFC_REG_A10_SPARE_AREA	0x00A0
-> -#define NFC_REG_PAT_ID(nfc) ((nfc)->caps->reg_pat_id)
-> +#define NFC_REG_H6_SPARE_AREA	0x0114
-> +#define NFC_REG_PAT_ID(nfc)	((nfc)->caps->reg_pat_id)
->   #define NFC_REG_A10_PAT_ID	0x00A4
-> +#define NFC_REG_H6_PAT_ID	0x0118
->   #define NFC_RAM0_BASE		0x0400
->   #define NFC_RAM1_BASE		0x0800
->   
-> @@ -162,6 +173,9 @@
->   
->   #define NFC_ECC_ERR_CNT(b, x)	(((x) >> ((b) * 8)) & 0xff)
->   
-> +#define NFC_USER_DATA_LEN_MSK(step) \
-> +	(0xf << (((step) % NFC_REG_USER_DATA_LEN_CAPACITY) * 4))
-> +
->   #define NFC_DEFAULT_TIMEOUT_MS	1000
->   
->   #define NFC_SRAM_SIZE		1024
-> @@ -174,8 +188,10 @@
->    *
->    * @has_ecc_block_512:	If the ECC can handle 512B or only 1024B chuncks
->    * @nstrengths:		Number of element of ECC strengths array
-> + * @ecc_strengths:	available ECC strengths array
->    * @reg_ecc_err_cnt:	ECC error counter register
->    * @reg_user_data:	User data register
-> + * @reg_user_data_len:	User data length register
->    * @reg_spare_area:	Spare Area Register
->    * @reg_pat_id:		Pattern ID Register
->    * @reg_pat_found:	Data Pattern Status Register
-> @@ -183,12 +199,21 @@
->    * @pat_found_mask:	ECC_PAT_FOUND mask in NFC_REG_PAT_FOUND register
->    * @ecc_mode_mask:	ECC_MODE mask in NFC_ECC_CTL register
->    * @random_en_mask:	RANDOM_EN mask in NFC_ECC_CTL register
-> + * @user_data_len_tab:  Table of lenghts supported by USER_DATA_LEN register
-> + *			The table index is the value to set in NFC_USER_DATA_LEN
-> + *			registers, and the corresponding value is the number of
-> + *			bytes to write
-> + * @nuser_data_tab:	Size of @user_data_len_tab
-> + * @max_ecc_steps:	Maximum supported steps for ECC, this is also the
-> + *			number of user data registers
->    */
->   struct sunxi_nfc_caps {
->   	bool has_ecc_block_512;
->   	unsigned int nstrengths;
-> +	const u8 *ecc_strengths;
->   	unsigned int reg_ecc_err_cnt;
->   	unsigned int reg_user_data;
-> +	unsigned int reg_user_data_len;
->   	unsigned int reg_spare_area;
->   	unsigned int reg_pat_id;
->   	unsigned int reg_pat_found;
-> @@ -196,6 +221,9 @@ struct sunxi_nfc_caps {
->   	unsigned int ecc_err_mask;
->   	unsigned int ecc_mode_mask;
->   	unsigned int random_en_mask;
-> +	const u8 *user_data_len_tab;
-> +	unsigned int nuser_data_tab;
-> +	unsigned int max_ecc_steps;
->   };
->   
->   #endif
 
 
+On 01/10/2025 11:24, neil.armstrong@linaro.org wrote:
+> On 10/1/25 11:21, Neil Armstrong via groups.io wrote:
+>> On 7/11/25 16:38, Aswin Murugan wrote:
+>>> Added support for Qualcomm RPMH power domain driver, responsible
+>>> for managing power domains on Qualcomm SoCs. This is a port of
+>>> the Linux RPMHPD driver [1] and sa8775p related changes. The
+>>> power domain driver currently has support to power on and off
+>>> MMCX power domain of sa8775p; support for other soc entries power
+>>> domains are stubbed, in future, the required soc support can be
+>>> added.
+>>>
+>>> [1]:
+>>> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/
+>>> linux.git/tree/drivers/pmdomain/qcom/rpmhpd.c?
+>>> id=3d25d46a255a83f94d7d4d4216f38aafc8e116b
+>>>
+>>> Signed-off-by: Balaji Selvanathan <balaji.selvanathan@oss.qualcomm.com>
+>>> Signed-off-by: Aswin Murugan <aswin.murugan@oss.qualcomm.com>
+>>> ---
+>>> v4:
+>>> - Added all SoC entries from the Linux driver and stubbed it
+>>> - Removed "qcom_rpmhpd" driver
+>>> - Removed unused members in struct rpmhpd
+>>>
+>>> v3:
+>>> - No changes to this patch in v3
+>>>
+>>> v2:
+>>> - Added ARCH_SNAPDRAGON dependency to QCOM_POWER_DOMAIN Kconfig
+>>> - In qcom-rpmhpd driver, the un-supported power domains are handled
+>>> with warning
+>>> ---
+>>>   drivers/power/domain/Kconfig       |   8 +
+>>>   drivers/power/domain/Makefile      |   1 +
+>>>   drivers/power/domain/qcom-rpmhpd.c | 278 +++++++++++++++++++++++++++++
+>>>   3 files changed, 287 insertions(+)
+>>>   create mode 100644 drivers/power/domain/qcom-rpmhpd.c
+>>>
+>>> diff --git a/drivers/power/domain/Kconfig b/drivers/power/domain/Kconfig
+>>> index 5f5218bd8b5..1456df96cd1 100644
+>>> --- a/drivers/power/domain/Kconfig
+>>> +++ b/drivers/power/domain/Kconfig
+>>> @@ -82,6 +82,14 @@ config MESON_SECURE_POWER_DOMAIN
+>>>         Enable support for manipulating Amlogic Meson Secure power
+>>> domains.
+>>>         Support for Amlogic A1 series.
+>>> +config QCOM_POWER_DOMAIN
+>>> +    bool "Enable the QCOM RPMH Power domain driver"
+>>> +    depends on POWER_DOMAIN && ARCH_SNAPDRAGON
+>>> +    help
+>>> +      Generic RPMH power domain implementation for QCOM devices.
+>>> +      The RPMH power domain driver is responsible for managing power
+>>> +      domains on Qualcomm SoCs.
+>>> +
+>>>   config SANDBOX_POWER_DOMAIN
+>>>       bool "Enable the sandbox power domain test driver"
+>>>       depends on POWER_DOMAIN && SANDBOX
+>>> diff --git a/drivers/power/domain/Makefile b/drivers/power/domain/
+>>> Makefile
+>>> index 4d20c97d26c..950f83972dc 100644
+>>> --- a/drivers/power/domain/Makefile
+>>> +++ b/drivers/power/domain/Makefile
+>>> @@ -21,3 +21,4 @@ obj-$(CONFIG_TEGRA186_POWER_DOMAIN) += tegra186-
+>>> power-domain.o
+>>>   obj-$(CONFIG_TI_SCI_POWER_DOMAIN) += ti-sci-power-domain.o
+>>>   obj-$(CONFIG_TI_POWER_DOMAIN) += ti-power-domain.o
+>>>   obj-$(CONFIG_ZYNQMP_POWER_DOMAIN) += zynqmp-power-domain.o
+>>> +obj-$(CONFIG_QCOM_POWER_DOMAIN) += qcom-rpmhpd.o
+>>> diff --git a/drivers/power/domain/qcom-rpmhpd.c b/drivers/power/
+>>> domain/qcom-rpmhpd.c
+>>> new file mode 100644
+>>> index 00000000000..906af2aa0ba
+>>> --- /dev/null
+>>> +++ b/drivers/power/domain/qcom-rpmhpd.c
+>>> @@ -0,0 +1,278 @@
+>>> +// SPDX-License-Identifier: GPL-2.0
+>>> +// Copyright (c) 2018, The Linux Foundation. All rights reserved.
+>>> +// Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights
+>>> reserved.
+>>> +
+>>> +#include <dm.h>
+>>> +#include <dm/lists.h>
+>>> +#include <power-domain.h>
+>>> +#include <asm/io.h>
+>>> +#include <linux/errno.h>
+>>> +
+>>> +#include <power-domain-uclass.h>
+>>> +#include <soc/qcom/cmd-db.h>
+>>> +#include <soc/qcom/rpmh.h>
+>>> +#include <dt-bindings/power/qcom-rpmpd.h>
+>>> +#include <dm/device_compat.h>
+>>> +
+>>> +#define RPMH_ARC_MAX_LEVELS    16
+>>> +
+>>> +/**
+>>> + * struct rpmhpd - top level RPMh power domain resource data structure
+>>> + * @dev:                rpmh power domain controller device
+>>> + * @pd:                 generic_pm_domain corresponding to the power
+>>> domain
+>>> + * @parent:             generic_pm_domain corresponding to the
+>>> parent's power domain
+>>> + * @enable_corner:      lowest non-zero corner
+>>> + * @level:              An array of level (vlvl) to corner (hlvl)
+>>> mappings
+>>> + *                      derived from cmd-db
+>>> + * @level_count:        Number of levels supported by the power
+>>> domain. max
+>>> + *                      being 16 (0 - 15)
+>>> + * @enabled:            true if the power domain is enabled
+>>> + * @res_name:           Resource name used for cmd-db lookup
+>>> + * @addr:               Resource address as looped up using resource
+>>> name from
+>>> + * @skip_retention_level: Indicate that retention level should not
+>>> be used for the power domain
+>>> + */
+>>> +struct rpmhpd {
+>>> +    struct udevice    *dev;
+>>> +    struct power_domain pd;
+>>> +    struct power_domain *parent;
+>>> +    unsigned int    enable_corner;
+>>> +    u32        level[RPMH_ARC_MAX_LEVELS];
+>>> +    size_t        level_count;
+>>> +    bool        enabled;
+>>> +    const char    *res_name;
+>>> +    u32        addr;
+>>> +    bool        skip_retention_level;
+>>> +};
+>>> +
+>>> +struct rpmhpd_desc {
+>>> +    struct rpmhpd **rpmhpds;
+>>> +    size_t num_pds;
+>>> +};
+>>> +
+>>> +/* RPMH powerdomains */
+>>> +static struct rpmhpd mmcx_ao;
+>>> +static struct rpmhpd mmcx = {
+>>> +    .res_name = "mmcx.lvl",
+>>> +};
+>>> +
+>>> +static struct rpmhpd mmcx_ao = {
+>>> +    .res_name = "mmcx.lvl",
+>>> +};
+>>> +
+>>> +/* SA8775P RPMH power domains */
+>>> +static struct rpmhpd *sa8775p_rpmhpds[] = {
+>>> +    [SA8775P_MMCX] = &mmcx,
+>>> +    [SA8775P_MMCX_AO] = &mmcx_ao,
+>>> +};
+>>> +
+>>> +static const struct rpmhpd_desc sa8775p_desc = {
+>>> +    .rpmhpds = sa8775p_rpmhpds,
+>>> +    .num_pds = ARRAY_SIZE(sa8775p_rpmhpds),
+>>> +};
+>>> +
+>>> +/* stub RPMH power domains mapped for unsupported platforms */
+>>> +static struct rpmhpd *stub_rpmhpds[] = {};
+>>> +
+>>> +static const struct rpmhpd_desc stub_desc = {
+>>> +    .rpmhpds = stub_rpmhpds,
+>>> +    .num_pds = ARRAY_SIZE(stub_rpmhpds),
+>>> +};
+>>> +
+>>> +static const struct udevice_id rpmhpd_match_table[] = {
+>>> +    { .compatible = "qcom,sa8775p-rpmhpd", .data =
+>>> (ulong)&sa8775p_desc },
+>>> +    { .compatible = "qcom,qcs615-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,qcs8300-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,qdu1000-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sa8155p-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sa8540p-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sar2130p-rpmhpd", .data = &stub_desc},
+>>> +    { .compatible = "qcom,sc7180-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sc7280-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sc8180x-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sc8280xp-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sdm670-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sdm845-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sdx55-rpmhpd", .data = &stub_desc},
+>>> +    { .compatible = "qcom,sdx65-rpmhpd", .data = &stub_desc},
+>>> +    { .compatible = "qcom,sdx75-rpmhpd", .data = &stub_desc},
+>>> +    { .compatible = "qcom,sm4450-rpmhpd", .data = &stub_desc},
+>>> +    { .compatible = "qcom,sm6350-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm7150-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm8150-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm8250-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm8350-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm8450-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm8550-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm8650-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,sm8750-rpmhpd", .data = &stub_desc },
+>>> +    { .compatible = "qcom,x1e80100-rpmhpd", .data = &stub_desc },
+>>> +    { }
+>>> +};
+>>> +
+>>> +static int rpmhpd_send_corner(struct rpmhpd *pd, int state,
+>>> +                  unsigned int corner, bool sync)
+>>> +{
+>>> +    struct tcs_cmd cmd = {
+>>> +        .addr = pd->addr,
+>>> +        .data = corner,
+>>> +    };
+>>> +
+>>> +    return rpmh_write(pd->dev->parent, state, &cmd, 1);
+>>
+>>
+>> This is wrong, it shoudl be rpmh_write(pd, state, &cmd, 1),
+> 
+> Sorry rpmh_write(pd->dev, state, &cmd, 1)
+
+I'm confused how/if this worked before... Aswin any chance you can
+respin and confirm?
+
+Kind regards,>
+>> since rpmh_write gets the parent in get_rpmh_ctrlr().
+>>
+>> Neil
+>>
+>>> +}
+>>> +
+>>> +static int rpmhpd_power_on(struct power_domain *pd)
+>>> +{
+>>> +    int ret;
+>>> +    unsigned int corner;
+>>> +    struct rpmhpd **rpmhpds;
+>>> +    const struct rpmhpd_desc *desc;
+>>> +    struct rpmhpd *curr_rpmhpd;
+>>> +
+>>> +    desc = (const struct rpmhpd_desc *)dev_get_driver_data(pd->dev);
+>>> +    if (!desc)
+>>> +        return -EINVAL;
+>>> +
+>>> +    rpmhpds = desc->rpmhpds;
+>>> +    curr_rpmhpd = rpmhpds[pd->id];
+>>> +
+>>> +    /* Do nothing for undefined power domains */
+>>> +    if (!curr_rpmhpd) {
+>>> +        log_warning("Power domain id (%d) not supported\n",
+>>> +                pd->id);
+>>> +        return 0;
+>>> +    }
+>>> +
+>>> +    corner = curr_rpmhpd->enable_corner;
+>>> +
+>>> +    ret = rpmhpd_send_corner(curr_rpmhpd, RPMH_ACTIVE_ONLY_STATE,
+>>> corner,
+>>> +                 false);
+>>> +    if (!ret)
+>>> +        curr_rpmhpd->enabled = true;
+>>> +
+>>> +    return ret;
+>>> +}
+>>> +
+>>> +static int rpmhpd_power_off(struct power_domain *pd)
+>>> +{
+>>> +    int ret;
+>>> +    unsigned int corner;
+>>> +    struct rpmhpd **rpmhpds;
+>>> +    const struct rpmhpd_desc *desc;
+>>> +    struct rpmhpd *curr_rpmhpd;
+>>> +
+>>> +    desc = (const struct rpmhpd_desc *)dev_get_driver_data(pd->dev);
+>>> +    if (!desc)
+>>> +        return -EINVAL;
+>>> +
+>>> +    rpmhpds = desc->rpmhpds;
+>>> +    curr_rpmhpd = rpmhpds[pd->id];
+>>> +
+>>> +    /* Do nothing for undefined power domains */
+>>> +    if (!curr_rpmhpd) {
+>>> +        log_warning("Power domain id (%d) not supported\n",
+>>> +                pd->id, 0);
+>>> +        return 0;
+>>> +    }
+>>> +
+>>> +    corner = 0;
+>>> +
+>>> +    ret = rpmhpd_send_corner(curr_rpmhpd, RPMH_ACTIVE_ONLY_STATE,
+>>> corner,
+>>> +                 false);
+>>> +    if (!ret)
+>>> +        curr_rpmhpd->enabled = false;
+>>> +
+>>> +    return ret;
+>>> +}
+>>> +
+>>> +static int rpmhpd_update_level_mapping(struct rpmhpd *rpmhpd)
+>>> +{
+>>> +    int i;
+>>> +    const u16 *buf;
+>>> +
+>>> +    buf = cmd_db_read_aux_data(rpmhpd->res_name, &rpmhpd->level_count);
+>>> +    if (IS_ERR(buf))
+>>> +        return PTR_ERR(buf);
+>>> +
+>>> +    /* 2 bytes used for each command DB aux data entry */
+>>> +    rpmhpd->level_count >>= 1;
+>>> +
+>>> +    if (rpmhpd->level_count > RPMH_ARC_MAX_LEVELS)
+>>> +        return -EINVAL;
+>>> +
+>>> +    for (i = 0; i < rpmhpd->level_count; i++) {
+>>> +        if (rpmhpd->skip_retention_level && buf[i] ==
+>>> RPMH_REGULATOR_LEVEL_RETENTION)
+>>> +            continue;
+>>> +
+>>> +        rpmhpd->level[i] = buf[i];
+>>> +
+>>> +        /* Remember the first corner with non-zero level */
+>>> +        if (!rpmhpd->level[rpmhpd->enable_corner] && rpmhpd->level[i])
+>>> +            rpmhpd->enable_corner = i;
+>>> +
+>>> +        /*
+>>> +         * The AUX data may be zero padded. These 0 valued entries at
+>>> +         * the end of the map must be ignored.
+>>> +         */
+>>> +        if (i > 0 && rpmhpd->level[i] == 0) {
+>>> +            rpmhpd->level_count = i;
+>>> +            break;
+>>> +        }
+>>> +        debug("%s: ARC hlvl=%2d --> vlvl=%4u\n", rpmhpd->res_name, i,
+>>> +              rpmhpd->level[i]);
+>>> +    }
+>>> +
+>>> +    return 0;
+>>> +}
+>>> +
+>>> +static int rpmhpd_probe(struct udevice *dev)
+>>> +{
+>>> +    int i, ret;
+>>> +    struct rpmhpd **rpmhpds;
+>>> +    struct rpmhpd *priv;
+>>> +    const struct rpmhpd_desc *desc;
+>>> +
+>>> +    desc = (const struct rpmhpd_desc *)dev_get_driver_data(dev);
+>>> +    if (!desc)
+>>> +        return -EINVAL;
+>>> +
+>>> +    rpmhpds = desc->rpmhpds;
+>>> +
+>>> +    for (i = 0; i < desc->num_pds; i++) {
+>>> +        if (!rpmhpds[i])
+>>> +            continue;
+>>> +
+>>> +        priv = rpmhpds[i];
+>>> +        priv->dev = dev;
+>>> +        priv->addr = cmd_db_read_addr(priv->res_name);
+>>> +        if (!priv->addr) {
+>>> +            dev_err(dev, "Could not find RPMh address for resource
+>>> %s\n",
+>>> +                priv->res_name);
+>>> +            return -ENODEV;
+>>> +        }
+>>> +
+>>> +        ret = cmd_db_read_slave_id(priv->res_name);
+>>> +        if (ret != CMD_DB_HW_ARC) {
+>>> +            dev_err(dev, "RPMh slave ID mismatch\n");
+>>> +            return -EINVAL;
+>>> +        }
+>>> +
+>>> +        ret = rpmhpd_update_level_mapping(priv);
+>>> +        if (ret)
+>>> +            return ret;
+>>> +    }
+>>> +
+>>> +    return ret;
+>>> +}
+>>> +
+>>> +static const struct power_domain_ops qcom_rpmhpd_power_ops = {
+>>> +    .on = rpmhpd_power_on,
+>>> +    .off = rpmhpd_power_off,
+>>> +};
+>>> +
+>>> +U_BOOT_DRIVER(qcom_rpmhpd_drv) = {
+>>> +    .name = "qcom_rpmhpd_drv",
+>>> +    .id = UCLASS_POWER_DOMAIN,
+>>> +    .of_match = rpmhpd_match_table,
+>>> +    .probe = rpmhpd_probe,
+>>> +    .ops = &qcom_rpmhpd_power_ops,
+>>> +};
+>>
+>>
+>>
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>> Groups.io Links: You receive all messages sent to this group.
+>> View/Reply Online (#2311): https://groups.io/g/u-boot-qcom/message/2311
+>> Mute This Topic: https://groups.io/mt/114163755/900740
+>> Group Owner: u-boot-qcom+owner@groups.io
+>> Unsubscribe: https://groups.io/g/u-boot-qcom/
+>> leave/13197875/900740/1403832380/xyzzy [neil.armstrong@linaro.org]
+>> -=-=-=-=-=-=-=-=-=-=-=-
+>>
+>>
+> 
 
 -- 
-Richard Genoud, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+// Casey (she/her)
+
