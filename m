@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D164CCD19F
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 21:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8D3CCD1A2
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 21:38:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83CA6831D6;
-	Mon, 20 Oct 2025 23:38:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C2A8B82E34;
+	Mon, 20 Oct 2025 23:38:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bJf1Vaeh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SlHjG8mh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00583836B4; Mon, 20 Oct 2025 23:38:43 +0200 (CEST)
-Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
- [IPv6:2001:4860:4864:20::35])
+ id D308383642; Mon, 20 Oct 2025 23:38:45 +0200 (CEST)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8395807C0
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 23:38:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B491282E34
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 23:38:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x35.google.com with SMTP id
- 586e51a60fabf-3c8fb195c23so2895826fac.1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 14:38:41 -0700 (PDT)
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-651ca0146deso1841321eaf.2
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 14:38:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760996320; x=1761601120; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1760996322; x=1761601122; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=72cNmFx3ETd/vfCGDzqFyB0YXd9fU13DGoI63c+tvas=;
- b=bJf1Vaehca7BO2eN5GVRimspeC/WLoEiLZvbgCjgld7jzSxeap4bhHPS6OxuuKFg82
- 5bYeDRZGGwEud1avsevhK0+mxkExh8dpN1pkNz9AcK6GWJtDEkJv/PVNgEYCZ34u9kF1
- zXsXHuD67owXXH+KjGh+b20VWxYIyJSOdRWC8=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4VNQUGu9rvGN586hdiSY9IksX3fZLyEEKM7iSG/u3Qw=;
+ b=SlHjG8mhhBaa95sFPQm5JDw2wT1seeIQW1D2OkTajLdN9g6lr+kfm1mgfvsBDr/8Za
+ IJC9hW1j47/IBhj3ytwKWiSAMuwZevW7yHK/Gokg9GYA7p/Dj5U8bQqhprfUMzkGVwu9
+ J6G35gEV2jd6IH5qeMX7TvxjF9uglzRMD049I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760996320; x=1761601120;
+ d=1e100.net; s=20230601; t=1760996322; x=1761601122;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=72cNmFx3ETd/vfCGDzqFyB0YXd9fU13DGoI63c+tvas=;
- b=su+Yq3yJ8s6RV0YUR3WoFAGPe8Q7PrIUmcHavMsanah5oO9bFeh1SMEABX57P4bYLq
- O7lZx8aLLzgpGnXyO2ko+3DOWOvmX3q4dklMLgBeSKoLy491SJjs3QZ6xfRyBL1+xTOZ
- j8F04Giqytm5zLzcmspASDpLqqIhTI6ljr+woBnGOdzKz0LmCpQDcN8PnPKIJluKAmup
- TK7DqDZB9H1W+acgoC0Uj39w2IoLE9e3donwkNTsQ5uckr/4lZC6sbqtXs1Zz83CJIQI
- vf4Pi0VV9aD0Bx6U5k/xG/am0e0oTah3caxO86QBmcyCO8/Jy/OICAOHvboGIOB3i7T9
- 2qvw==
-X-Gm-Message-State: AOJu0YxPWnqG9g/ftWczTAf1SwTv9qpmoQ0x0I9o+OcB+wALqTIB/dBd
- TdFg6xxsZ5/4n9Q9qwBtucjn3S74Sukss9uS/dKg2jIX7tNpIbvX+AqTvlBudB0X58TgvxzuYU0
- 6iWk+CFibag==
-X-Gm-Gg: ASbGncve/Mc1W5bS+00wA7lChsrPW0VULAwhR6+lMNyZEMDSjJjBZ984P1VxCZgXXrD
- kL97xy4izCiSSrab73NNRaDoF6AtUBgt1f/tgWPVSVPjW5YlgsGrEI+iPUvw0ECi/An7ER+08dx
- O0+NHI10ySYdW0M65iXHhUc3wTABg+Fic6zYw4pBXhyNvrH1g6rxhOwsgQSGFsau/9W9SK6S0N/
- w9tGwNBTSv4nGt+32TaFD7zSXEhkVzBK5xNKlB+SIQx6BsOTf7PjSRXdbpQhL+ykb3Pe+jVdEJC
- /TgrTa5scGHXKrWDEYP6O4Xvac62EhlqC1rNDPFnRDwP1BvCJZp1skXEYppVcB+Io0WfLJogjBn
- 2KScyP7sqQn9MB6I4qCbA0KxPFj3nyPHMbVUTOv4LkMjj9Q1C2sjs893Mkw4vK7NKA30YVDybwz
- jS8VWapG4C2bj9dJMKWqBJyKITc/dBucOCVPIK6Q==
-X-Google-Smtp-Source: AGHT+IGjUb+7W2E25EEpaVHa5qBZtWGrbpwaL4n9atHL9nQ79cTlLMSr1XxQ1umwrCYjfDylz56jSg==
-X-Received: by 2002:a05:6870:3b19:b0:32a:ded6:2b68 with SMTP id
- 586e51a60fabf-3c98d11ed1fmr6043014fac.33.1760996320599; 
- Mon, 20 Oct 2025 14:38:40 -0700 (PDT)
+ bh=4VNQUGu9rvGN586hdiSY9IksX3fZLyEEKM7iSG/u3Qw=;
+ b=CH0CgIsEmB14hJxgOZ0qZ58WsJCpJJ+g8QhKJhQY6Q8fUT8DuHouNzyeABsv//qAxO
+ bgD3QXmPlzPe2SWyGaEKBRB+m/ibH4/5XTWDyZR0dUiYBuSj/+OuRY5oeE2z9tWUUZIK
+ elpkQlK/ZrgRL/rJvUQeTJIqpw35ejBAA9V3oYXTE+AF8J+SKg0176eLaLSdEZYNjabF
+ ICsqXo3kWB84ix81aAQE0Wd6akF1jVIDmyEs74PyRvYX8yjdAZ4eG9j3yVqNNS7xTeap
+ W/Op02gnBS4pRLQaO+wApw7fMIWiDCdL7TcQbLyOIMtdAc/+I6gmYsE6moeWA4z0Euvg
+ UNJQ==
+X-Gm-Message-State: AOJu0YwjrnbUimABLRt/xp/XnqK8B/JLvTTyJ+b97MN27YhYEhNz+0Zi
+ ToJU07oKm2rsOa38IAKiGMHwHVXtSG9fXZkDE+Lu2Bp/R0p1BIWIf7/EE9HYQ+9NbH0=
+X-Gm-Gg: ASbGncto9074d3T30Bpo3lHNNtWzFRbt48QGdVgiLoEzBTM2NzENiaqCpQ8ipdmppaw
+ MitSs+81VLIgQrWtEGEvU83DZ+fQgBYS2QDFc/GZu8n05z3d56j4dxIm0p4Doo48DnMo7d5YSdq
+ Xjhqqns/BI5kX+Sbigzl5n57FGmmikFQm0QU0FkaffjMbxlbdbbj0dXieZD/nMD2dAAi07T//vx
+ MwOGrGP0HXAa2HzJML/p7p6N3ZCADvke2EY/WYepAGCgSnAcH72ilN7egCy4acpdMrYQqf7tXx1
+ zHNZnyGonMC3Qi1vaF+b5jWcUYjIUWtLMRXNecNpBVYBS1KPNXwSg8C51pegRdn9RJboA0tKOiu
+ em/8l7sY0a74WsEEYds852ntwu54lvD+2UcICXKOqhTlSfCXs+koHEJx/9hw6DHyYqHUI2pvd2e
+ O5pXsArgdJ8s7Va9O2BBJHVzCCZaNHgiS7YyoAiw==
+X-Google-Smtp-Source: AGHT+IEOseQeBJVtVdUa2HqWtfkryeP8QLZR/Wgggn6GlHEyQyI/hPtbCOPBIg7574qI7pCf35AuSw==
+X-Received: by 2002:a05:6808:4fe7:b0:43f:7f5:4981 with SMTP id
+ 5614622812f47-443a2ee205bmr6900291b6e.5.1760996322430; 
+ Mon, 20 Oct 2025 14:38:42 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c28892cdb5sm2992268a34.27.2025.10.20.14.38.39
+ 46e09a7af769-7c28892cdb5sm2992268a34.27.2025.10.20.14.38.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Oct 2025 14:38:39 -0700 (PDT)
+ Mon, 20 Oct 2025 14:38:41 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20251020195903.3903589-1-trini@konsulko.com>
+To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
+Cc: vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com, n-francis@ti.com, 
+ b-liu@ti.com, nm@ti.com, bb@ti.com, kever.yang@rock-chips.com, 
+ hl@rock-chips.com, tim@feathertop.org, marek.vasut+renesas@mailbox.org
+In-Reply-To: <20251009115846.897186-1-anshuld@ti.com>
 References: <20251009115846.897186-1-anshuld@ti.com>
- <20251020195903.3903589-1-trini@konsulko.com>
-Subject: Re: [PATCH] spl: Restore args file being default in falcon mode
-Message-Id: <176099631938.3958778.3662397851207331918.b4-ty@konsulko.com>
-Date: Mon, 20 Oct 2025 15:38:39 -0600
+Subject: Re: [PATCH v2 0/3] Add support for secure falcon mode: disable
+ args file
+Message-Id: <176099632076.3958778.13316268414959754314.b4-ty@konsulko.com>
+Date: Mon, 20 Oct 2025 15:38:40 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,19 +99,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 Oct 2025 13:59:03 -0600, Tom Rini wrote:
+On Thu, 09 Oct 2025 17:28:42 +0530, Anshul Dalal wrote:
 
-> When falcon mode is enabled and SPL_OS_BOOT_SECURE is not enabled,
-> restore the previous default behavior of having an args file be
-> expected. Platforms which are using a FIT image here and do not need
-> this can update at their convenience to disable this option now.
+> Continuing from the last series[1], this patch series addresses the requirement
+> to disable the args file in falcon mode.
 > 
+> The args file is used in falcon mode for loading the device-tree for the kernel.
+> However in secure falcon mode, the expected payload is a FIT containing a signed
+> device-tree and kernel image. Thus removing the need to load the extra args
+> file in the first place. Also, loading the extra file without any authentication
+> mechanism exposes an attack vector and should therefore be disabled to keep the
+> boot secure.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] spl: Restore args file being default in falcon mode
-      commit: 0f865ab5d68484b4dc1724809de1be06edc85df1
+[1/3] spl: make args file optional in falcon mode
+      commit: b1a3ed068869d7289747dddd6dc13ecb9f9840a6
+[2/3] spl: prevent loading args file in secure falcon mode
+      commit: 82e04e768fc21c1ac43df5d5a68ec8aaf008c0a8
+[3/3] spl: set fdt address as spl_image arg in falcon mode
+      commit: f851171e14ac1b1910c549879a9b82060cc4cdba
 -- 
 Tom
 
