@@ -4,43 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D22CCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 20:51:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D164CCD19F
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 21:38:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB20F82C84;
-	Mon, 20 Oct 2025 22:51:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 83CA6831D6;
+	Mon, 20 Oct 2025 23:38:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bJf1Vaeh";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19AAE82E34; Mon, 20 Oct 2025 22:51:16 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DB5A0807C0
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 22:51:13 +0200 (CEST)
+ id 00583836B4; Mon, 20 Oct 2025 23:38:43 +0200 (CEST)
+Received: from mail-oa1-x35.google.com (mail-oa1-x35.google.com
+ [IPv6:2001:4860:4864:20::35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D8395807C0
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 23:38:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 077DC1007;
- Mon, 20 Oct 2025 13:51:05 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1DC973F63F;
- Mon, 20 Oct 2025 13:51:12 -0700 (PDT)
-Date: Mon, 20 Oct 2025 21:50:39 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: James Hilliard <james.hilliard1@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 1/1] Makefile: pass KEYDIR when set to sunxi-spl.bin
- mkimage
-Message-ID: <20251020215039.348651da@minigeek.lan>
-In-Reply-To: <20250411011025.1434660-1-james.hilliard1@gmail.com>
-References: <20250411011025.1434660-1-james.hilliard1@gmail.com>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oa1-x35.google.com with SMTP id
+ 586e51a60fabf-3c8fb195c23so2895826fac.1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 14:38:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1760996320; x=1761601120; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=72cNmFx3ETd/vfCGDzqFyB0YXd9fU13DGoI63c+tvas=;
+ b=bJf1Vaehca7BO2eN5GVRimspeC/WLoEiLZvbgCjgld7jzSxeap4bhHPS6OxuuKFg82
+ 5bYeDRZGGwEud1avsevhK0+mxkExh8dpN1pkNz9AcK6GWJtDEkJv/PVNgEYCZ34u9kF1
+ zXsXHuD67owXXH+KjGh+b20VWxYIyJSOdRWC8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760996320; x=1761601120;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=72cNmFx3ETd/vfCGDzqFyB0YXd9fU13DGoI63c+tvas=;
+ b=su+Yq3yJ8s6RV0YUR3WoFAGPe8Q7PrIUmcHavMsanah5oO9bFeh1SMEABX57P4bYLq
+ O7lZx8aLLzgpGnXyO2ko+3DOWOvmX3q4dklMLgBeSKoLy491SJjs3QZ6xfRyBL1+xTOZ
+ j8F04Giqytm5zLzcmspASDpLqqIhTI6ljr+woBnGOdzKz0LmCpQDcN8PnPKIJluKAmup
+ TK7DqDZB9H1W+acgoC0Uj39w2IoLE9e3donwkNTsQ5uckr/4lZC6sbqtXs1Zz83CJIQI
+ vf4Pi0VV9aD0Bx6U5k/xG/am0e0oTah3caxO86QBmcyCO8/Jy/OICAOHvboGIOB3i7T9
+ 2qvw==
+X-Gm-Message-State: AOJu0YxPWnqG9g/ftWczTAf1SwTv9qpmoQ0x0I9o+OcB+wALqTIB/dBd
+ TdFg6xxsZ5/4n9Q9qwBtucjn3S74Sukss9uS/dKg2jIX7tNpIbvX+AqTvlBudB0X58TgvxzuYU0
+ 6iWk+CFibag==
+X-Gm-Gg: ASbGncve/Mc1W5bS+00wA7lChsrPW0VULAwhR6+lMNyZEMDSjJjBZ984P1VxCZgXXrD
+ kL97xy4izCiSSrab73NNRaDoF6AtUBgt1f/tgWPVSVPjW5YlgsGrEI+iPUvw0ECi/An7ER+08dx
+ O0+NHI10ySYdW0M65iXHhUc3wTABg+Fic6zYw4pBXhyNvrH1g6rxhOwsgQSGFsau/9W9SK6S0N/
+ w9tGwNBTSv4nGt+32TaFD7zSXEhkVzBK5xNKlB+SIQx6BsOTf7PjSRXdbpQhL+ykb3Pe+jVdEJC
+ /TgrTa5scGHXKrWDEYP6O4Xvac62EhlqC1rNDPFnRDwP1BvCJZp1skXEYppVcB+Io0WfLJogjBn
+ 2KScyP7sqQn9MB6I4qCbA0KxPFj3nyPHMbVUTOv4LkMjj9Q1C2sjs893Mkw4vK7NKA30YVDybwz
+ jS8VWapG4C2bj9dJMKWqBJyKITc/dBucOCVPIK6Q==
+X-Google-Smtp-Source: AGHT+IGjUb+7W2E25EEpaVHa5qBZtWGrbpwaL4n9atHL9nQ79cTlLMSr1XxQ1umwrCYjfDylz56jSg==
+X-Received: by 2002:a05:6870:3b19:b0:32a:ded6:2b68 with SMTP id
+ 586e51a60fabf-3c98d11ed1fmr6043014fac.33.1760996320599; 
+ Mon, 20 Oct 2025 14:38:40 -0700 (PDT)
+Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c28892cdb5sm2992268a34.27.2025.10.20.14.38.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Oct 2025 14:38:39 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20251020195903.3903589-1-trini@konsulko.com>
+References: <20251009115846.897186-1-anshuld@ti.com>
+ <20251020195903.3903589-1-trini@konsulko.com>
+Subject: Re: [PATCH] spl: Restore args file being default in falcon mode
+Message-Id: <176099631938.3958778.3662397851207331918.b4-ty@konsulko.com>
+Date: Mon, 20 Oct 2025 15:38:39 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,45 +96,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 10 Apr 2025 19:10:25 -0600
-James Hilliard <james.hilliard1@gmail.com> wrote:
+On Mon, 20 Oct 2025 13:59:03 -0600, Tom Rini wrote:
 
-Hi,
-
-> Currently we pass this for u-boot-spl.kwb targets, however when
-> building sunxi-spl.bin in the TOC0 format we may also need to
-> specify a KEYDIR, as such we should also pass this when set
-> to mkimage for the sunxi-spl.bin target.
-
-thanks, looks good to me, tried on a Remix Mini build. Maybe that even
-helps with the secure boot CI build problem we have, as the CI cannot
-find any keys.
-
-> Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-
-Queued for the PR.
-
-Cheers,
-Andre
-
-> ---
->  scripts/Makefile.xpl | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+> When falcon mode is enabled and SPL_OS_BOOT_SECURE is not enabled,
+> restore the previous default behavior of having an args file be
+> expected. Platforms which are using a FIT image here and do not need
+> this can update at their convenience to disable this option now.
 > 
-> diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-> index abc49fbe6c9..d1c1cea876a 100644
-> --- a/scripts/Makefile.xpl
-> +++ b/scripts/Makefile.xpl
-> @@ -445,7 +445,8 @@ MKIMAGEFLAGS_sunxi-spl.bin = \
->  	-A $(ARCH) \
->  	-T $(CONFIG_SPL_IMAGE_TYPE) \
->  	-a $(CONFIG_SPL_TEXT_BASE) \
-> -	-n $(CONFIG_DEFAULT_DEVICE_TREE)
-> +	-n $(CONFIG_DEFAULT_DEVICE_TREE) \
-> +	$(if $(KEYDIR),-k $(KEYDIR))
->  
->  OBJCOPYFLAGS_u-boot-spl-dtb.hex := -I binary -O ihex --change-address=$(CONFIG_SPL_TEXT_BASE)
->  
+> 
+
+Applied to u-boot/master, thanks!
+
+[1/1] spl: Restore args file being default in falcon mode
+      commit: 0f865ab5d68484b4dc1724809de1be06edc85df1
+-- 
+Tom
+
 
