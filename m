@@ -4,65 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ABDFCCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 18:03:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8228ECCD1A7
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 18:51:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98BFA82E34;
-	Mon, 20 Oct 2025 20:03:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 8A1E282E34;
+	Mon, 20 Oct 2025 20:51:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="BkfpT6XI";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="EJXowC8A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1285831D5; Mon, 20 Oct 2025 20:03:53 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id 73F3D831D5; Mon, 20 Oct 2025 20:51:49 +0200 (CEST)
+Received: from out-170.mta1.migadu.com (out-170.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::aa])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DABA82C84
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 20:03:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8A8B82C84
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 20:51:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5603=46=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1760983430;
- bh=HUpn2SujKRmifsfqrAJsEQuQTPIoAqC7eMTIb8re6a0=;
- b=BkfpT6XIwB22Hzm48pxq32TGlHBBzjMnocB4MxT5jTa8HM+82k0jqZvA9xdzAD4GWONLhPbu1
- 0bfT4AP3fTa2BzzuZuKUG6vHZHqSHLR/7f8ggZI2HH93wPqMNx/a5aZipeWUyuLPi9CtJvzfz/G
- x95Arvmfwd+K6rG1YzKVmv8haxvpRYj4344rG/HXeKQSOTMdeyfxLuUd4HqymdBR85QF8xSGMct
- uVADCOx24cPGgpwlaQAQm9Bf9ALZ9Y4L6MTy1j78FfBkkOe/ZJ8LtWVGFVYKPd9Uh1hDW2MhlwX
- L4ldJXNdmp7/ZxJqh4U4lQwRCdtbaJZgYUJK3xadUGtA==
-X-Forward-Email-ID: 68f6798044a3ee206d949112
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 1.3.0
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <5522697b-fb56-4735-a1e5-7b8654438cd7@kwiboo.se>
-Date: Mon, 20 Oct 2025 20:03:39 +0200
+ spf=pass smtp.mailfrom=contact@jookia.org
+Date: Tue, 21 Oct 2025 05:51:10 +1100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1760986304;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=PPagEHqm/qqwCIVsdCif1UZjGuCnCtcusNr/3qOn4B0=;
+ b=EJXowC8AiBo0essG7Eu19Jm3kUKWmGztW8WZr6Rg969TXfBKl8iOfCWpvoDVWiOcisP28T
+ IZw8nuRyTTqaTc9nPANjGYgBbMrGNn2kfWZIueLrgnmKd2jVjgLUAWOXEKjd+UQnBX2KQz
+ J+Nf1N4HG7NscZ+mY30zXqYBKl592EKnr58lV2+sGo09qIjMFr7rSmJAAnokLSNL2FbFCn
+ v8G7C0fDN2mUAhfl1i4dxE4LSJp4aJ9vLBFjIV6F4wBlTZyfgZbPKdzzVTs22bJUOCEmu7
+ kWQsyxfl2OmjeQW0rwpQ55BGzxirc/3/XbGcwDFHsePOdzzWdfXerFuT4Nhg3A==
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: John Watts <contact@jookia.org>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Lukas Schmid <lukas.schmid@netcube.li>, Tom Rini <trini@konsulko.com>,
+ linux-sunxi@lists.linux.dev,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] sunxi: extend R528/T113-s3/D1(s) DRAM initialisation
+Message-ID: <aPaEnhPUtrqzYzOe@titan>
+References: <20250915192036.323741-1-lukas.schmid@netcube.li>
+ <20250917224826.7837663c@minigeek.lan>
+ <5396890.31r3eYUQgx@lukas-hpz440workstation>
+ <20251020005924.73e41909@minigeek.lan>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: rockchip: Add FriendlyElec NanoPi Zero2
-To: Quentin Schulz <quentin.schulz@cherry.de>, Yao Zi <ziyao@disroot.org>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@kernel.org>,
- Heiko Stuebner <heiko@sntech.de>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-References: <20251019052607.61702-1-ziyao@disroot.org>
- <20251019052607.61702-3-ziyao@disroot.org>
- <55af1d20-4dd0-4b77-8cab-035921c405a0@kwiboo.se>
- <1eb9da8c-4eaa-4aa6-b13b-4790e4d0bc04@cherry.de>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <1eb9da8c-4eaa-4aa6-b13b-4790e4d0bc04@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20251020005924.73e41909@minigeek.lan>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,48 +74,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi,
 
-On 10/20/2025 7:02 PM, Quentin Schulz wrote:
-> Hi Jonas,
+I can confirm this code works:
+
+	fuse = (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
+	debug("DDR efuse: 0x%x\n", fuse);
+	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
+
+	if (sid_read_soc_chipid() == SUNXI_CHIPID_T113M4020DC0)
+		return;
+
+	if (para->dram_type == SUNXI_DRAM_TYPE_DDR2) {
+		if (fuse == 15)
+			return;
+		cfg = ac_remapping_tables[6];
+	} else {
+		if (config->dram_tpr13 & 0xc0000) {
+			cfg = ac_remapping_tables[7];
+		} else {
+			switch (fuse) {
+			case 8: cfg = ac_remapping_tables[2]; break;
+			case 9: cfg = ac_remapping_tables[3]; break;
+			case 10: cfg = ac_remapping_tables[5]; break;
+			case 11: cfg = ac_remapping_tables[4]; break;
+			default:
+			case 12: cfg = ac_remapping_tables[1]; break;
+			case 13:
+			case 14: cfg = ac_remapping_tables[0]; break;
+			}
+
+John.
+
+On Mon, Oct 20, 2025 at 12:59:52AM +0100, Andre Przywara wrote:
+> On Thu, 16 Oct 2025 17:30:41 +0200
+> Lukas Schmid <lukas.schmid@netcube.li> wrote:
 > 
-> On 10/19/25 12:52 PM, Jonas Karlman wrote:
->> Hi Yao Zi,
->>
->> On 10/19/2025 7:26 AM, Yao Zi wrote:
-> [...]
->>> +CONFIG_DM_REGULATOR_GPIO=y
->>> +CONFIG_PWM_ROCKCHIP=y
->>> +CONFIG_BAUDRATE=1500000
->>> +CONFIG_DEBUG_UART_SHIFT=2
->>> +CONFIG_SYS_NS16550_MEM32=y
->>
->> Please add following to prepare for future USB support:
->>
+> Hi Lukas,
 > 
-> I don't like this. Whatever is enabled in the defconfig, I'm expecting 
-> it to work when I'm testing, so I would rather suggest to postpone this 
-> to when it actually works?
-
-The required driver support for USB 2.0 landed in v2025.07 and USB 3.0
-in v2025.10. It is now only the DT nodes (on Linux ML) that is missing
-to make USB work for this and other RK3528 boards.
-
+> > I finally got some time to look into this patch again.
+> > 
+> > Dropping out of the DRAM type check earlier sounds like a good move here. I 
+> > can definitely do that and also test it on my board. 
 > 
-> In the end, I don't own the device nor do I plan to, so whatever floats 
-> your boat :)
-
-USB has been working as it should for this and the other rk3528 boards
-with my rk3528 branch [1] for the past 5-7 months, so I would very much
-prefer to enable these Kconfig options now and just have wait for a
-future DT pick or sync to make USB finally work in upstream.
-
-[1] https://source.denx.de/u-boot/contributors/kwiboo/u-boot/-/commits/rk3528
-
-Regards,
-Jonas
-
+> Yes, please do, and send a v3 if that works for you.
+>  
+> > About the other changes. Is the patch itself in a good state right now (except 
+> > the commit message) or would you (or anyone else here for that matter) like to 
+> > see something changed?
+> > 
+> > I'll change/update the commit message to have a smaller footprint regarding 
+> > the SID chip ID, and also remove the reference to the "random" git repo.
 > 
-> Cheers,
-> Quentin
-
+> What's more important than the sources is some background and some
+> description about what the patch does, like this:
+> 
+> ==================
+> The T113-s4 SoC is using the same die as the T113-s3, but comes with
+> 256MiB of co-packaged DRAM. Besides the doubled size, the DRAM chip
+> seems to be connected slightly differently, which requires to use a
+> different pin remapping.
+> 
+> Extend the DRAM initialisation code to add support for the T113-S4 aka
+> T113M4020DC0 by checking the SoC's CHIPID, which is stored in the first
+> word of the SID efuses.
+> ==================
+> 
+> So no lengthy dumps or links. You might want to put the link to the
+> github repo as a comment before the enum in dram_sun20i_d1.h.
+> 
+> Thanks,
+> Andre
+> 
+> > 
+> > Best regards,
+> > Lukas
+> 
+> > On Mittwoch, 17. September 2025 23:48:26 Mitteleuropäische Sommerzeit Andre 
+> > Przywara wrote:
+> > > On Mon, 15 Sep 2025 21:20:35 +0200
+> > > Lukas Schmid <lukas.schmid@netcube.li> wrote:
+> > > 
+> > > Hi Lukas, John,
+> > > 
+> > > so looking at the code again, table 0 is special in that it's all 0's,
+> > > which apparently means no remapping, according to some comments.
+> > > We already bail out earlier of this function for configurations that do
+> > > not require remapping, so can you test whether this works here as well?
+> > > Just do the chip ID test early, after the DRAM type check, and before
+> > > the fuse is read. And if it's 0x7200, then just return;
+> > > 
+> > > I think that would look better than the odd fuse special case.
+> > > 
+> > > Thanks,
+> > > Andre
+> > >   
+> > > > Extend the DRAM initialisation code to add support for the T113-S4 aka
+> > > > T113M4020DC0 by checking the SoC's CHIPID.
+> > > > 
+> > > > The list of Chip-IDs came from
+> > > > https://github.com/ua1arn/hftrx/blob/25d8cb9e4cfe1d7d0e4a2f641025c88a9ec5e
+> > > > 758/inc/clocks.h#L250
+> > > > 
+> > > > And the chipid register address was something I heard through apritzel
+> > > > altough it seems that, according to Jookia, the Tina Device Tree seems
+> > > > to agree:
+> > > > 
+> > > > sid@3006000 {
+> > > > 
+> > > > 	compatible = "allwinner,sun20iw1p1-sid", "allwinner,sunxi-sid";
+> > > > 	reg = <0x0 0x03006000 0 0x1000>;
+> > > > 	#address-cells = <1>;
+> > > > 	#size-cells = <1>;
+> > > > 	
+> > > > 	chipid {
+> > > > 	
+> > > > 		reg = <0x0 0>;
+> > > > 		offset = <0x200>;
+> > > > 		size = <0x10>;
+> > > > 	
+> > > > 	};
+> > > > 	...
+> > > > 
+> > > > };
+> > > > 
+> > > > Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+> > > > Tested-by: John Watts <contact@jookia.org>
+> > > > Reviewed-by: John Watts <contact@jookia.org>
+> > > > Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+> > > > ---
+> > > > 
+> > > > Changes in v2:
+> > > >   - Use uint32_t instead of u32 for sid_read_soc_chipid return type
+> > > >   - Add descriptive comment about source of Chip-ID list and register
+> > > >  
+> > > >  drivers/ram/sunxi/dram_sun20i_d1.c | 13 ++++++++++++-
+> > > >  drivers/ram/sunxi/dram_sun20i_d1.h |  7 +++++++
+> > > >  2 files changed, 19 insertions(+), 1 deletion(-)
+> > > > 
+> > > > diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c
+> > > > b/drivers/ram/sunxi/dram_sun20i_d1.c index a1794032f3b..381eeb87e2e
+> > > > 100644
+> > > > --- a/drivers/ram/sunxi/dram_sun20i_d1.c
+> > > > +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
+> > > > @@ -54,6 +54,11 @@ static void sid_read_ldoB_cal(const dram_para_t *para)
+> > > > 
+> > > >  	clrsetbits_le32(0x3000150, 0xff00, reg << 8);
+> > > >  
+> > > >  }
+> > > > 
+> > > > +static uint32_t sid_read_soc_chipid(void)
+> > > > +{
+> > > > +	return readl(SUNXI_SID_BASE + 0x00) & 0xffff;
+> > > > +}
+> > > > +
+> > > > 
+> > > >  static void dram_voltage_set(const dram_para_t *para)
+> > > >  {
+> > > >  
+> > > >  	int vol;
+> > > > 
+> > > > @@ -663,6 +668,7 @@ static void mctl_phy_ac_remapping(const dram_para_t  
+> > > > *para,>   
+> > > >  	fuse = (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
+> > > >  	debug("DDR efuse: 0x%x\n", fuse);
+> > > > 
+> > > > +	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
+> > > > 
+> > > >  	if (para->dram_type == SUNXI_DRAM_TYPE_DDR2) {
+> > > >  	
+> > > >  		if (fuse == 15)
+> > > > 
+> > > > @@ -675,7 +681,12 @@ static void mctl_phy_ac_remapping(const dram_para_t  
+> > > > *para,>   
+> > > >  			switch (fuse) {
+> > > >  			case 8: cfg = ac_remapping_tables[2]; break;
+> > > >  			case 9: cfg = ac_remapping_tables[3]; break;
+> > > > 
+> > > > -			case 10: cfg = ac_remapping_tables[5];   
+> > break;
+> > > > +			case 10:
+> > > > +				if (sid_read_soc_chipid() ==   
+> > SUNXI_CHIPID_T113M4020DC0)
+> > > > +					cfg =   
+> > ac_remapping_tables[0];
+> > > > +				else
+> > > > +					cfg =   
+> > ac_remapping_tables[5];
+> > > > +				break;
+> > > > 
+> > > >  			case 11: cfg = ac_remapping_tables[4];   
+> > break;
+> > > >  			default:
+> > > >  			case 12: cfg = ac_remapping_tables[1];   
+> > break;
+> > > > 
+> > > > diff --git a/drivers/ram/sunxi/dram_sun20i_d1.h
+> > > > b/drivers/ram/sunxi/dram_sun20i_d1.h index 91383f6cf10..7bd8f67a77a
+> > > > 100644
+> > > > --- a/drivers/ram/sunxi/dram_sun20i_d1.h
+> > > > +++ b/drivers/ram/sunxi/dram_sun20i_d1.h
+> > > > @@ -19,6 +19,13 @@ enum sunxi_dram_type {
+> > > > 
+> > > >  	SUNXI_DRAM_TYPE_LPDDR3 = 7,
+> > > >  
+> > > >  };
+> > > > 
+> > > > +enum sunxi_soc_chipid {
+> > > > +	SUNXI_CHIPID_F133A = 0x5C00,
+> > > > +	SUNXI_CHIPID_D1S = 0x5E00,
+> > > > +	SUNXI_CHIPID_T113S3 = 0x6000,
+> > > > +	SUNXI_CHIPID_T113M4020DC0 = 0x7200,
+> > > > +};
+> > > > +
+> > > > 
+> > > >  /*
+> > > >  
+> > > >   * This structure contains a mixture of fixed configuration settings,
+> > > >   * variables that are used at runtime to communicate settings between  
+> > 
+> 
