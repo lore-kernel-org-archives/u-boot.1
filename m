@@ -4,82 +4,163 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 512DBCCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 08:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1692CCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 08:45:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1FB782C84;
-	Mon, 20 Oct 2025 10:23:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DD99482C84;
+	Mon, 20 Oct 2025 10:45:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eTWDOrLX";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="dSqQD+oY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BAB6807C0; Mon, 20 Oct 2025 10:23:23 +0200 (CEST)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A1A3682E34; Mon, 20 Oct 2025 10:45:05 +0200 (CEST)
+Received: from MRWPR03CU001.outbound.protection.outlook.com
+ (mail-francesouthazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c207::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D15D282C84
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 10:23:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F2F6802C1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 10:45:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-33badfbbc48so5231704a91.2
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 01:23:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760948599; x=1761553399; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=t7EOaucezWRu7mlWTsHGAZihEplkSAz26bXX96QKz0w=;
- b=eTWDOrLX8Dkv8uLLUeY2v3iSiWlkEDuShX0D2P2KWyEGopzjmaLK8Cg2Qc9ELg7OJy
- THgRuLt2Bd8gaNb8EssyDF17NjcAa5HLFO8Xqm5yu6PnddkQMCDDcPRrYzU3iJFQD1xB
- GrDhJFMwW8xdC/r1vvayDhpQIr1b0lbn2GsGUrBM+52hHwj3Q3WUyDSVvQuqe+YEPxhL
- 9s/eZ+aHXL0Mw273S4OnIT2npXr03lNgM2hdeFRgwZ2wNsEu6h9ajKHfxk1PP8gcuDno
- DQ3+y4M4+SIMcquNpBAeQReV0Pzls5rkLjQze1qAcmbhkhiJCOCjHs2Srg8UBV7FzyiJ
- E0AA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760948599; x=1761553399;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=t7EOaucezWRu7mlWTsHGAZihEplkSAz26bXX96QKz0w=;
- b=F6s3y99IE82Weij0VOWTUUkpYpFaj4uA5MA4cdCaCTCeN2e//KTOSV6xT0CHerD3FY
- mWstlbEOC1E+ib7LfKSUlOXOL3o2cIIXrsb7CmaMCp1ztH1CFwra0M1tk8w2v3BIwTWX
- KZEZMVaKNN/Py5Yi8/UQxHuvPSV78MiZbkc3wQF8ahVkRRdkzPOxGRuBUo5MrbUahbkC
- lUzxPzzRCANbB3VIO7mRwTZfa+59fGXqdqLRNdVN6X9or8hXUydMvvNYZ2B2z/OJlx7I
- fliPxJ/9oM+4cijfaCMz0XB7+3vUg0mZ/X/hzkgl4yE/EytpkyTTtlQbWfA7pNvMHdVR
- KHtA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWhtyEPnxTrtGGYdydZzBmbraS8kTGNMGjUb8TfoxehOqlqmgSOHOqS/qz7Krz+LZNTmYX+Fl0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrJsTPQ0A05f4ruPyvBcmRm6tcVH1Ap+YdBS0FikOxLdf+D0pV
- R+mrw+jzJr3z4qvelBmEi0P1v2uotbe+q9Yxfub7k0tq3/oFFW8zsEPImnms8t3v
-X-Gm-Gg: ASbGncuxTa8x2ByYbk5WwJb6eYZ5MOgTbrl5GCxnDhulEENQhgGzBUVsUKmiwy48Mkr
- v8SomIlsQ6L2/G4XTJz5siKc576nAN3c1lFtORAg2fISJEZ2XMk29buLY9h/mzN5sVZOTKbboEv
- D1yfMk/c0a3JZuNkRSDJm6F+lYiaABkxTV/n5U3+Lv0e0485+6tk2gnXVXi0Zfq8QopREghUXKP
- 9TqpEUZtIiTJeelsrSG4w8TblMn4o1x+4ZLdV49MaUw9KBIVjAx2TQ5jBzhbo1U0cAIA4rTlr50
- CryIz6A/laSu62FyGD9OmKZtvMrOeNvuZbfdCcRCUavsyVAZ50X9EYGdT2DwyZCO6HUHAdGWsKL
- tPSsiGpjvQSjbmSLftDcOxXVHAf3iXHYoqUdD0BIgh1Y9vPGnrZ9d67kBUvUpTp8ix/gmLsOIuZ
- QA08VaOU7l6VArycKlBYkQEEyZjE9X15pXlrJd
-X-Google-Smtp-Source: AGHT+IHclxZ2POYU5l5unrt+Z9+RnPi0yxnCkfsh0kDbnAGvOMwDoqWDrCJp6TYijnxwsn1mKL+3gA==
-X-Received: by 2002:a17:90a:ec8b:b0:339:d03e:2a11 with SMTP id
- 98e67ed59e1d1-33bcf88b534mr15938603a91.14.1760948599258; 
- Mon, 20 Oct 2025 01:23:19 -0700 (PDT)
-Received: from localhost.localdomain ([185.213.82.51])
- by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-33d5de0df14sm7453034a91.10.2025.10.20.01.23.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Oct 2025 01:23:19 -0700 (PDT)
-From: Brian Sune <briansune@gmail.com>
-To: Tom Rini <trini@konsulko.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] FPGA2SDRAM setup fix
-Date: Mon, 20 Oct 2025 16:23:04 +0800
-Message-ID: <20251020082304.1778-1-briansune@gmail.com>
-X-Mailer: git-send-email 2.47.1.windows.1
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FGF+TFyBy0bLfAjh2hMqre4/VPldICzVqBRZtpSmA7ENp65z8R/04K4qsMtC19oTtdT4YSjM18ZULZtxfsjMP5EhekkFDCM66J3f4pJHdTz+1kW6Ga/EH1jLCO4jr2OY0aH2i4ZxLASN1Wktiuf6o1nbCT1ovZAJQKPhpxGvcD+wLohxAVjGzYAEwP5QDQxJ1lFC3+XYMwbkLA4VGylz+Hk7AXhdQT3rZ/vfHTKeCSxHI6UInUhtuPHi3gU8Onyj4Ni8xY3UHreO5w0RIaqT3fA7kh/l9EZ/MU0nogYcUCvl/fJTaCSBzBQUCprtNVzgpX5+TpTBwf+6aqbJHfX4Aw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Zb+w3ZGDd1pcsgZ/5336s3eTF/4LYxZj6b3ojSc+DU8=;
+ b=jMHfQ/O57w/cjSow8t3oCjctRYyUUofBLqaHOaCMuLs63P5SaUIV4Rz3S+6zj0DxzYzEw3VFmfiqFAn6JT41jWL5Xw9cnUUyf2PcQOm0a1iHcQqFwyKnJX796NeqlLXnXI6m2OdA1R/nvoO9iKQItTz74JsL9HohFLrv2na1WI3dTVyM3Vi08m+jCHULX7ctGcZ3DQm5rri3idIL+xZ+tMOxBwzjtHgzebDwR6O30w2WoOzVhXNAkWJWG0hvCRnlkStAcDrR5QLLoMJSJINrfd6TRoFcjFquuDL/39W0szYkY9WNbUW5n00cu8soPpBhz+oaLvaWQNaedQFOtYNRSg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Zb+w3ZGDd1pcsgZ/5336s3eTF/4LYxZj6b3ojSc+DU8=;
+ b=dSqQD+oYzUX7XmJg3KtJ5QJZLXjwl8HC4VaQtpav+WlrFkH5b8ht94BhvMYhHhF0XEpTggLggPlYXXU6KJgs9vDjiQE44WhY/mGSTzvN1EXQpNx7VodS2oPpHy6+6hN2OcGCsFruqPFSY7O9bgXfkva5N/hwbFoJ5nX/l7PIcuw=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by DU4PR04MB11385.eurprd04.prod.outlook.com (2603:10a6:10:5d8::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.15; Mon, 20 Oct
+ 2025 08:45:01 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9228.015; Mon, 20 Oct 2025
+ 08:45:01 +0000
+Message-ID: <c21de88c-034e-4746-bef0-e393ad930510@cherry.de>
+Date: Mon, 20 Oct 2025 10:44:59 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] rockchip: rk3528-radxa-e20c: Drop eMMC HS200 prop from
+ board u-boot.dtsi
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20251019111357.723242-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20251019111357.723242-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: FR0P281CA0078.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1e::17) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|DU4PR04MB11385:EE_
+X-MS-Office365-Filtering-Correlation-Id: 124ede6b-1bdf-464b-2247-08de0fb4f4d5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Nks1aTkwMVUyL0YxOUlnLzJFb25IODhHNXdvMU9sRjE1dk5VSkw1bUlUNXU4?=
+ =?utf-8?B?Qlp5K0FiclM2V295L1gxUG5Ebi9xbXFMWE8xSmJicDZQSjQvWnFRWFcrYVMy?=
+ =?utf-8?B?d042NmhJcnZ1SzN4YXViL2EvWVJqWlZZb0plcUI0Y2xyWVNXMldOUzlSVTFn?=
+ =?utf-8?B?RzI2VVpUTEUvYkJOKzhkTTI4YWt3ZGM3Uk44dEx3L3hCcGlLcGxKTFRsMTRU?=
+ =?utf-8?B?d1pDNi9XMjJuMHkwOEozamRqWmxnUEg2b3VnSEJCYkEyaFI4UTk5Z1ByS2Nt?=
+ =?utf-8?B?TkJvakRWSmdZMDZlSWN4QUR1K1M0d09TVzhFcFlhZjc4MUNQWnk4SnoyMWQ2?=
+ =?utf-8?B?RmJUanE5S3dka0RqZk1zdFRXWEpYUkw3L0FBMi91b3FYV3JhNUpRaW1XckFo?=
+ =?utf-8?B?ZjBuVzZOZUJIcTlaRGpldFNvOVdlNjY5TnFUMjhaVkE4WnpldEJJR3orMVVN?=
+ =?utf-8?B?NHdJbXhBMk1OQkg2N2RPaHdBbWNpSmptTjRsZ2dUL2o4cGhVOWsrNUZjTzdK?=
+ =?utf-8?B?dzVNYzNrYUpEYnpqeEJkQURJbFVBdFJ2TzFqS2YxRC94OEZPSnVJZXRnaWZj?=
+ =?utf-8?B?L0lwMkNlVlkxZVBNaTUvWkhMMDdINkxhcEJ5anY0Zm9VTGVEYzFhdXJ1ZnpR?=
+ =?utf-8?B?QXl1bU1lcU04b0lDNnFSQWNEeDcwaHRPckkxRkN5SVBHdW16d1FmOTB2K2ZX?=
+ =?utf-8?B?U2U1aEZwZmF4akliaERhdTgvN3pqNGhxRWtKaW5OV3pPaElGSklxSk5KSG54?=
+ =?utf-8?B?eDVJVUxHTWc5dVRWT0duUVM2eExFOTZEallVTUltRDE0S2ZHY1JaaUhEOSti?=
+ =?utf-8?B?cjdzbGZOUDFkR3NqNGpIZXZVbUN0dk5ZQW9HYkdVOFZUbUh1Q1NNTXJvT290?=
+ =?utf-8?B?Qkhsb0lSTUU3RXdod252REJDUWprM25ZSjZRZ05Fempld1oxUUwwL3dKU1E2?=
+ =?utf-8?B?VDMxZEE4bkdFSVg4dWx0Zm1ZUVpYMUhJZG8wRUJYZTVzYzB6c1doY3R4SlU2?=
+ =?utf-8?B?SFlkR1dRVjNqRlV6aVdzMHZRZFdqakxwenE0emZHSjM0U1didUxEbmVtTUNM?=
+ =?utf-8?B?d0kwd0phbFNidkFoVkJKN1paK3l0eEpva0pLRUQyL01OMUhpcTdHNFE3YlNJ?=
+ =?utf-8?B?VHBlelcwNjhLLzJQbEM1N2xET0toZEx6UGs0T1paTndZL2JLMC9aMXd6eEQy?=
+ =?utf-8?B?SVM3S1piK08rL0RCZlc0cjdTL2lpaHNac3pScGxMejRaSmhjam9yWnJMSEZ6?=
+ =?utf-8?B?cVZPbTlTaThVcTladDgydDU2S1pPTlN4SUt2Wko5ZVpsZ0FXN01aN09ZTFRT?=
+ =?utf-8?B?N052dDBTMGRRUXFZSFpaWFgzQ3FqalZMM1Yzb0F1c2JlWFZSVjU1VEZlNGs2?=
+ =?utf-8?B?YitydjQyMThPSCs1dXVKVzhUNE1lb3lGajhnalpiSVlRTTN4SVpna1c1Q21R?=
+ =?utf-8?B?UkcvbDhIZFJVd2YvaUZYNmxuMHhjN0h0V0VZNlRTYXl3bHdiU05EYzgzYzIv?=
+ =?utf-8?B?dWdzTUk5UThKQi9xK3hDQUpjdHJ5UDlzNXhpbzhkcU1oNlNOb1c5eDBSTWth?=
+ =?utf-8?B?ZTAvbGk3U091bmlEbFU4RGVsUnlPUG45MVBQM1ZwZnBrLzhmcGw2ZXhCdkRT?=
+ =?utf-8?B?d1FjMW5jN3ZaUHQ5US9XTEdteXBpQkNydzM4MnpORmNuMmFjcE90aVZ5MTFh?=
+ =?utf-8?B?UUZ3WDhVQnFxY04zMm5nV3IzckRqRnR2Ums2bVc5WGJKcW9Jc01FcitnWTRO?=
+ =?utf-8?B?a3ZDNldiQm8zWkltc2FuZWtUc2s2ZGhBUCs0MHR0M293Qk9jalIxR1hpWlFE?=
+ =?utf-8?B?NXp2VGlHeWw0K1VpWDVkVkthcVJPZ0pXeXNTY2FaM00zbytjQXhhajh1a2Q0?=
+ =?utf-8?B?MjJFVU1Gbzg2dldKYThvMFc3VWhwZFRyTEZEbk54OStTajJHU04rc2h6eHB2?=
+ =?utf-8?Q?ic2BaqntEk/w0ucdFwAed2iarNyd/3Bt?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cGtEbmsyWjZTR3V3RE5la1FlOVNnWWtIUlJDZU04SENsSGhBeUs5eGhNM1ZF?=
+ =?utf-8?B?TnFFbXozY1VsMVFwUXkxd1JpODhFUW91ZU1wR2xvTER1blNRSnhyTXZnTjkr?=
+ =?utf-8?B?bFpFQ25URG0yL3dzUHNwZ1l0L3RVOXI3enZxSlRFS3hhMm44V3JZbU9lM0JY?=
+ =?utf-8?B?VVZvaE5KVDFubnlZaVZBTkhXQk0xU3lxNXcxVC9OUUN2MVhlNUxoZkNlTlVK?=
+ =?utf-8?B?TUNzWmN5cDBEbDkzL1RIWGVrUjRUYVhZRmFZQkF1K0JuSU1JZ3o1d0ovSHJ3?=
+ =?utf-8?B?eVYvZ1VRWloySU9aTFNMNmpLMHM5ZFUrSFlMTHVMN2ZkUlVXSzNMZDFxcXV5?=
+ =?utf-8?B?NzRKSUI4MGVlZTEwWGRaeGVKYkd4cFFuSzlOSHdUNnhnc0ZjL1dnd1lSYkha?=
+ =?utf-8?B?S0Z1aUVER2gxL1VodGM0NWIvUUFxaUhJQzdQNnptdE9maEJUWVVKVFNTeFZ4?=
+ =?utf-8?B?bFBSamJaT2lPUVgxOU5ENmswbk5VUFdnNEpFcFR1aXhseDJUeEd4ZHBydUZu?=
+ =?utf-8?B?a0V3aHVaMno5cTlOeTd4VWNmMldpUjRVS0EzdE5CVmRXalhub0NTb1RnYXlF?=
+ =?utf-8?B?NFc4TWx2b1NwZUdiTS95RWFyZmkyQkdlbUkrcWFvQVRSbWtaRkVvTHRCZysy?=
+ =?utf-8?B?MzVSeFp2dEY2d2ZEUUxZTXNIeFpvWlRPdFZIZ3RkNm5yR0M4QytMSXI5Smw2?=
+ =?utf-8?B?cVJEU1YvRkRnMDlWOHZOd1lKYlJXTXh4YTRPbzkwN0FpK1N2b1ZQdHJOdDZB?=
+ =?utf-8?B?Q1U2Ry9xaHpCQTJFWUlVOEpOb2t5UXdmTEJUR2NjYnVoMXdXa0VabndOQnI2?=
+ =?utf-8?B?MUlVOFhBVmRnbnRBZzdhWmo4aGNmSi9sa0NuOGxnWm9wWXJNUWwxVDZueTJi?=
+ =?utf-8?B?c0kzYjE5NWRqeUg0eXRwYjFNcEtCRitEaVpzYXVjRVhFZ2VOMWV3N0pJd1p0?=
+ =?utf-8?B?RnFkUTIva3ZpbDZZR2lMbW85VWY3aG5lYitwUXYrT2xlSnhuR0tWVnV3Wk9T?=
+ =?utf-8?B?VnVPeUJ2OXFOL1BPZUlsRUUxa1h4WkFnTHZmMHdSQ3R6Rko1RGw5amxWWkRt?=
+ =?utf-8?B?WVBnL0RPUmhkdGM5WTBvbjlZNE5zd3VzUGNtY201SDk0c01uUkljQnBndWxl?=
+ =?utf-8?B?QWdoYjVScFdOVlRkbUxiNmwydU42SzI0ZEl6V3d5V0h4VmgzRmF2QXduRkFy?=
+ =?utf-8?B?akUxdHlXYUZlemR3VkU0cGFZM0JyY1FPN1lTaGFXemllb2xNWXlDSXBTeHNL?=
+ =?utf-8?B?L2pDOUE4OTlzb2xEc0szTFl0bFFvbm4zSi9BWTBMbVBFNE5WRmFFd0p3OGtk?=
+ =?utf-8?B?QnM0c2tDUjRNRVJ6Q3JWUHowYkJzM0pWUDZIS3gvdSs3eHVjWndTWkNIQ2pZ?=
+ =?utf-8?B?QzJaYVBzOVJZNnE0SXNEbm0wTTVFM01tNUZrUHVQRW81UUJ5LzhUZ1diOVZq?=
+ =?utf-8?B?YmwrMnpWVWw4WWwrdEFTRk95SzVEYVhNZVA0dkk4R2V4ZmwzTEJXdWZDZy9h?=
+ =?utf-8?B?S3Fmd1NIYXcvRVE5RFNrL3J1WlBWeUlwNTBqTVN5M09qdW40c3pGc0xLK3pO?=
+ =?utf-8?B?TUNuaEV1YlErbWUzSUxpbnM1MGhOcTlmeWNJNy9vWk5EWnl2eUt4dHh5bjZK?=
+ =?utf-8?B?TnRTd0MySU1IdFc0TTZnNEtUUmEyQkFwSnJyQ05qV2R6ejRYRytzb2dqZnJa?=
+ =?utf-8?B?Ty8wWDk5QzlJa2p2SVJib2Z5RERoRDBpaThLRkdjcytubnpkZkRSUU84Zyt5?=
+ =?utf-8?B?TUI0eEljZ3cyNkcweWoxSVZ0RkJHeGJVY3FRN2tpTVZIVjFqNzJpeldOWGxL?=
+ =?utf-8?B?enF1WVo0aEMzdzVWNXBMZVdLZDh4eWpzdzJMSVZRM3V5WVpPRkZOSDFhdElj?=
+ =?utf-8?B?TmNUVWVNbTVPRzFOa2JFWmRON2pDdnQ5ckZkTjBoMEkyNXYxNkJaQWJCOUVU?=
+ =?utf-8?B?TkJLbjdoRmtxYml0dm4ySzFVQitTU1JCSG1haHhwRUI4NzdIUndHRWhQM3d3?=
+ =?utf-8?B?UVcrd29pSitIN0N4dzVMUWFqUU1UYzRXRkdqaEFpRGdTck1pdDZxeVNzQWFl?=
+ =?utf-8?B?c2dBa3N2UVpPbFppUklsc3kybmFyaVpybkY0OW0wb211OE91M3k0ZU4vQVRP?=
+ =?utf-8?B?c2JuQVlIRWNSWEk3ODRjVjhzYlhyUFlpYXhObkpBaDJaRm15M2JrZFR6QU02?=
+ =?utf-8?B?L3c9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 124ede6b-1bdf-464b-2247-08de0fb4f4d5
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2025 08:45:01.1668 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QqjfyVsK2TrjZ5FtBHvQlN6pAO7OOcUJK04eEkYmxzf8tb8U9LNxDU2wenN/zAYnIeGBgx/PU0qMVs5faIul7o1wmf+2uYbX+B1px+leijg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11385
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,79 +177,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: intel <intel@intel.com>
+Hi Jonas,
 
-After testing, w/o proper setup
-the FPGA2SDRAM bridge will not work and stall.
-Pulling from official fix and w/o this initialization,
-both 2025.07 and 2025.10 also suffer stall on U-Boot
-and distro. Any FPGA to HPS-SDRAM action will immediate
-stall the CPU. As such, this patch fix the issue.
+On 10/19/25 1:13 PM, Jonas Karlman wrote:
+> The commit f8cb3fde935e ("arm: dts: rockchip: Fix eMMC write on RK3528")
+> added a missing mmc-hs200-1_8v prop to boart u-boot.dtsi.
+> 
+> Remove this boart u-boot.dtsi mmc-hs200-1_8v prop now that the board dt
+> from dts/upstream after the v6.17-dts sync includes this prop.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-Signed-off-by: intel <intel@intel.com>
----
- arch/arm/mach-socfpga/misc_gen5.c | 34 ++++++++++++++++++++++++++++++-
- 1 file changed, 33 insertions(+), 1 deletion(-)
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-diff --git a/arch/arm/mach-socfpga/misc_gen5.c b/arch/arm/mach-socfpga/misc_gen5.c
-index b136691c685..5259ef54d73 100644
---- a/arch/arm/mach-socfpga/misc_gen5.c
-+++ b/arch/arm/mach-socfpga/misc_gen5.c
-@@ -217,6 +217,34 @@ int arch_early_init_r(void)
- static struct socfpga_sdr_ctrl *sdr_ctrl =
- 	(struct socfpga_sdr_ctrl *)SDR_CTRLGRP_ADDRESS;
- 
-+void socfpga_sdram_apply_static_cfg(void)
-+{
-+	const u32 applymask = 0x8;
-+	u32 val = readl(&sdr_ctrl->static_cfg) | applymask;
-+
-+	/*
-+	 * SDRAM staticcfg register specific:
-+	 * When applying the register setting, the CPU must not access
-+	 * SDRAM. Luckily for us, we can use i-cache here to help us
-+	 * circumvent the SDRAM access issue. The idea is to make sure
-+	 * that the code is in one full i-cache line by branching past
-+	 * it and back. Once it is in the i-cache, we execute the core
-+	 * of the code and apply the register settings.
-+	 *
-+	 * The code below uses 7 instructions, while the Cortex-A9 has
-+	 * 32-byte cachelines, thus the limit is 8 instructions total.
-+	 */
-+	asm volatile(".align	5			\n"
-+		     "		b 2f			\n"
-+		     "1: 	str %0,	[%1]		\n"
-+		     "		dsb			\n"
-+		     "		isb			\n"
-+		     "		b 3f			\n"
-+		     "2:	b 1b			\n"
-+		     "3:	nop			\n"
-+		    : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
-+}
-+
- void do_bridge_reset(int enable, unsigned int mask)
- {
- 	int i;
-@@ -234,7 +262,10 @@ void do_bridge_reset(int enable, unsigned int mask)
- 		writel(iswgrp_handoff[2],
- 		       socfpga_get_sysmgr_addr() +
- 		       SYSMGR_GEN5_FPGAINFGRP_MODULE);
--		writel(iswgrp_handoff[3], &sdr_ctrl->fpgaport_rst);
-+		if (iswgrp_handoff[3]) {
-+			writel(iswgrp_handoff[3], &sdr_ctrl->fpgaport_rst);
-+			socfpga_sdram_apply_static_cfg();
-+		}
- 		writel(iswgrp_handoff[0],
- 		       socfpga_get_rstmgr_addr() + RSTMGR_GEN5_BRGMODRST);
- 		writel(iswgrp_handoff[1], &nic301_regs->remap);
-@@ -246,6 +277,7 @@ void do_bridge_reset(int enable, unsigned int mask)
- 		writel(0, socfpga_get_sysmgr_addr() +
- 		       SYSMGR_GEN5_FPGAINFGRP_MODULE);
- 		writel(0, &sdr_ctrl->fpgaport_rst);
-+		socfpga_sdram_apply_static_cfg();
- 		writel(0x7, socfpga_get_rstmgr_addr() + RSTMGR_GEN5_BRGMODRST);
- 		writel(1, &nic301_regs->remap);
- 	}
--- 
-2.25.1
-
+Thanks!
+Quentin
