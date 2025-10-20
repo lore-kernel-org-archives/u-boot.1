@@ -4,85 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF8D3CCD1A2
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 21:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49913CCD19F
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 22:17:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2A8B82E34;
-	Mon, 20 Oct 2025 23:38:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D98B82C84;
+	Tue, 21 Oct 2025 00:17:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SlHjG8mh";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D308383642; Mon, 20 Oct 2025 23:38:45 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B491282E34
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 23:38:43 +0200 (CEST)
+ id 95F82831D6; Tue, 21 Oct 2025 00:17:16 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 6959782B20
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 00:17:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-651ca0146deso1841321eaf.2
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 14:38:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1760996322; x=1761601122; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4VNQUGu9rvGN586hdiSY9IksX3fZLyEEKM7iSG/u3Qw=;
- b=SlHjG8mhhBaa95sFPQm5JDw2wT1seeIQW1D2OkTajLdN9g6lr+kfm1mgfvsBDr/8Za
- IJC9hW1j47/IBhj3ytwKWiSAMuwZevW7yHK/Gokg9GYA7p/Dj5U8bQqhprfUMzkGVwu9
- J6G35gEV2jd6IH5qeMX7TvxjF9uglzRMD049I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760996322; x=1761601122;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4VNQUGu9rvGN586hdiSY9IksX3fZLyEEKM7iSG/u3Qw=;
- b=CH0CgIsEmB14hJxgOZ0qZ58WsJCpJJ+g8QhKJhQY6Q8fUT8DuHouNzyeABsv//qAxO
- bgD3QXmPlzPe2SWyGaEKBRB+m/ibH4/5XTWDyZR0dUiYBuSj/+OuRY5oeE2z9tWUUZIK
- elpkQlK/ZrgRL/rJvUQeTJIqpw35ejBAA9V3oYXTE+AF8J+SKg0176eLaLSdEZYNjabF
- ICsqXo3kWB84ix81aAQE0Wd6akF1jVIDmyEs74PyRvYX8yjdAZ4eG9j3yVqNNS7xTeap
- W/Op02gnBS4pRLQaO+wApw7fMIWiDCdL7TcQbLyOIMtdAc/+I6gmYsE6moeWA4z0Euvg
- UNJQ==
-X-Gm-Message-State: AOJu0YwjrnbUimABLRt/xp/XnqK8B/JLvTTyJ+b97MN27YhYEhNz+0Zi
- ToJU07oKm2rsOa38IAKiGMHwHVXtSG9fXZkDE+Lu2Bp/R0p1BIWIf7/EE9HYQ+9NbH0=
-X-Gm-Gg: ASbGncto9074d3T30Bpo3lHNNtWzFRbt48QGdVgiLoEzBTM2NzENiaqCpQ8ipdmppaw
- MitSs+81VLIgQrWtEGEvU83DZ+fQgBYS2QDFc/GZu8n05z3d56j4dxIm0p4Doo48DnMo7d5YSdq
- Xjhqqns/BI5kX+Sbigzl5n57FGmmikFQm0QU0FkaffjMbxlbdbbj0dXieZD/nMD2dAAi07T//vx
- MwOGrGP0HXAa2HzJML/p7p6N3ZCADvke2EY/WYepAGCgSnAcH72ilN7egCy4acpdMrYQqf7tXx1
- zHNZnyGonMC3Qi1vaF+b5jWcUYjIUWtLMRXNecNpBVYBS1KPNXwSg8C51pegRdn9RJboA0tKOiu
- em/8l7sY0a74WsEEYds852ntwu54lvD+2UcICXKOqhTlSfCXs+koHEJx/9hw6DHyYqHUI2pvd2e
- O5pXsArgdJ8s7Va9O2BBJHVzCCZaNHgiS7YyoAiw==
-X-Google-Smtp-Source: AGHT+IEOseQeBJVtVdUa2HqWtfkryeP8QLZR/Wgggn6GlHEyQyI/hPtbCOPBIg7574qI7pCf35AuSw==
-X-Received: by 2002:a05:6808:4fe7:b0:43f:7f5:4981 with SMTP id
- 5614622812f47-443a2ee205bmr6900291b6e.5.1760996322430; 
- Mon, 20 Oct 2025 14:38:42 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c28892cdb5sm2992268a34.27.2025.10.20.14.38.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Oct 2025 14:38:41 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: vigneshr@ti.com, afd@ti.com, m-chawdhry@ti.com, n-francis@ti.com, 
- b-liu@ti.com, nm@ti.com, bb@ti.com, kever.yang@rock-chips.com, 
- hl@rock-chips.com, tim@feathertop.org, marek.vasut+renesas@mailbox.org
-In-Reply-To: <20251009115846.897186-1-anshuld@ti.com>
-References: <20251009115846.897186-1-anshuld@ti.com>
-Subject: Re: [PATCH v2 0/3] Add support for secure falcon mode: disable
- args file
-Message-Id: <176099632076.3958778.13316268414959754314.b4-ty@konsulko.com>
-Date: Mon, 20 Oct 2025 15:38:40 -0600
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E1A421063;
+ Mon, 20 Oct 2025 15:17:05 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CCA173F63F;
+ Mon, 20 Oct 2025 15:17:12 -0700 (PDT)
+Date: Mon, 20 Oct 2025 23:16:39 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Lukas Schmid <lukas.schmid@netcube.li>
+Cc: Hans de Goede <hdegoede@redhat.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/2] configs: add support for NetCube Systems Kumquat
+Message-ID: <20251020231639.1de9eba8@minigeek.lan>
+In-Reply-To: <20250610053856.1873969-3-lukas.schmid@netcube.li>
+References: <20250610053856.1873969-1-lukas.schmid@netcube.li>
+ <20250610053856.1873969-3-lukas.schmid@netcube.li>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,29 +58,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 09 Oct 2025 17:28:42 +0530, Anshul Dalal wrote:
+On Tue, 10 Jun 2025 07:38:55 +0200
+Lukas Schmid <lukas.schmid@netcube.li> wrote:
 
-> Continuing from the last series[1], this patch series addresses the requirement
-> to disable the args file in falcon mode.
+Hi Lukas,
+
+> NetCube Systems Kumquat is a board based on the Allwinner V3s SoC,
+> including:
 > 
-> The args file is used in falcon mode for loading the device-tree for the kernel.
-> However in secure falcon mode, the expected payload is a FIT containing a signed
-> device-tree and kernel image. Thus removing the need to load the extra args
-> file in the first place. Also, loading the extra file without any authentication
-> mechanism exposes an attack vector and should therefore be disabled to keep the
-> boot secure.
+> - 64MB DDR2 included in SoC
+> - 10/100 Mbps Ethernet
+> - USB-C DRD
+> - Audio Codec
+> - Isolated CAN-FD
+> - ESP32 over SDIO
+> - 8MB SPI-NOR Flash for bootloader
+> - I2C EEPROM for MAC addresses
+> - SDIO Connector for eMMC or SD-Card
+> - 8x 12/24V IOs, 4x normally open relays
+> - DS3232 RTC with Battery Backup
+> - QWIIC connectors for external I2C devices
 > 
-> [...]
+> Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
+> ---
+>  configs/netcube_kumquat_defconfig | 45 +++++++++++++++++++++++++++++++
+>  1 file changed, 45 insertions(+)
+>  create mode 100644 configs/netcube_kumquat_defconfig
+> 
+> diff --git a/configs/netcube_kumquat_defconfig b/configs/netcube_kumquat_defconfig
+> new file mode 100644
+> index 00000000..cfe331cb
+> --- /dev/null
+> +++ b/configs/netcube_kumquat_defconfig
+> @@ -0,0 +1,45 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_SUNXI=y
+> +CONFIG_SF_DEFAULT_SPEED=40000000
+> +CONFIG_DEFAULT_DEVICE_TREE="allwinner/sun8i-v3s-netcube-kumquat"
+> +CONFIG_SPL=y
+> +CONFIG_MACH_SUN8I_V3S=y
+> +CONFIG_DRAM_CLK=360
 
-Applied to u-boot/master, thanks!
+This line is redundant, since it's the default. I would be removed by a
+savedefconfig sync anyway.
 
-[1/3] spl: make args file optional in falcon mode
-      commit: b1a3ed068869d7289747dddd6dc13ecb9f9840a6
-[2/3] spl: prevent loading args file in secure falcon mode
-      commit: 82e04e768fc21c1ac43df5d5a68ec8aaf008c0a8
-[3/3] spl: set fdt address as spl_image arg in falcon mode
-      commit: f851171e14ac1b1910c549879a9b82060cc4cdba
--- 
-Tom
+> +CONFIG_SPL_SPI_SUNXI=y
+> +# CONFIG_HAS_ARMV7_SECURE_BASE is not set
+> +# CONFIG_TIMESTAMP is not set
+> +CONFIG_BOOTDELAY=1
+> +CONFIG_PREBOOT=""
+> +# CONFIG_SYS_DEVICE_NULLDEV is not set
+> +CONFIG_SPL_MTD=y
+> +CONFIG_SYS_PROMPT="Kumquat> "  
+> +CONFIG_CMD_EEPROM=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MTD=y
+> +CONFIG_MTDIDS_DEFAULT="nor0=firmware"
+> +CONFIG_MTDPARTS_DEFAULT="mtdparts=firmware:960k(u-boot)ro,64k(u-boot-env),-(user)"
+> +CONFIG_CMD_DIAG=y
+> +CONFIG_OF_UPSTREAM=y
 
+This one is now redundant as well, as all V3 devices are now using the
+DT rebasing repo DTs.
+
+Since the rest looks fine, I just removed those lines and queued it for
+the next PR.
+
+For the records:
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Thanks,
+Andre
+
+> +# CONFIG_ENV_IS_IN_FAT is not set
+> +CONFIG_ENV_SPI_MAX_HZ=1000000
+> +CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
+> +CONFIG_USE_HOSTNAME=y
+> +CONFIG_HOSTNAME="kumquat"
+> +CONFIG_VERSION_VARIABLE=y
+> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
+> +CONFIG_SYS_I2C_MVTWSI=y
+> +CONFIG_MISC=y
+> +CONFIG_NVMEM=y
+> +CONFIG_I2C_EEPROM=y
+> +CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+> +CONFIG_MTD=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_MTD=y
+> +CONFIG_SUN8I_EMAC=y
+> +CONFIG_PHY_SUN4I_USB=y
+> +CONFIG_DM_RTC=y
+> +CONFIG_RTC_DS3232=y
+> +CONFIG_SPI=y
+> +CONFIG_USB_MUSB_HOST=y
+> +CONFIG_USB_MUSB_GADGET=y
+> +# CONFIG_USB_ETHER is not set
 
