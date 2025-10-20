@@ -4,66 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B11CCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 17:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01F45CCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 17:17:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2732883804;
+	by phobos.denx.de (Postfix) with ESMTP id 6F01E83849;
 	Mon, 20 Oct 2025 19:17:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cMJ0e24j";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="odTWcrH6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57D3982C84; Mon, 20 Oct 2025 18:24:33 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
+ id 29F8D82E34; Mon, 20 Oct 2025 18:24:35 +0200 (CEST)
+Received: from sea.source.kernel.org (sea.source.kernel.org [172.234.252.31])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61D5D82C84
+ by phobos.denx.de (Postfix) with ESMTPS id 8B6D683631
  for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 18:24:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+gchan9527.gmail.com@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 3FDA162077;
- Mon, 20 Oct 2025 16:24:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id D5CBBC116C6;
+ by sea.source.kernel.org (Postfix) with ESMTP id E0C9144795;
+ Mon, 20 Oct 2025 16:24:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id BB5F9C4CEFE;
  Mon, 20 Oct 2025 16:24:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1760977469;
- bh=61qpp38ef7H0U17cFP6t18atMndKMQV53i2Fsy2H0ts=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=cMJ0e24jIT3AT6tFk+Ycn8KeejUq1K9w9UTZimbm03wLVK7BK93WNgsD6AvifgX5m
- QA6b6FXOTy/qMlY5ewhaqvTnO1nqtDwDp+8THimruVCVnDqht96qt+sBX0q2xyzDDH
- 0IECorOqEgiEHcnKKHrbnUwmE4sJ1MHwdDImTrmu268DEPgWSzbeMydzUADy43bUba
- IFPawJVtG6oVhfMpqyeCtji0X29lNCNlCHwD6fNjkZ8MJFaY6L5L2e+JfwA0dCrp9v
- zXuOurJ+0abUNWQFGW9DzCVPAj5v20UXz5NQ5RTAOaUmyXTDS/QHwxskgkk7Nh8sSC
- qWOJ6by+ZJRHg==
+ bh=rRdl5D5O+xYI2mdluE1GksWK6UhkW/zDEvGtV5sZRtM=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=odTWcrH6RwfC4YiZ5+Zli3q/WE+ENT3hzlYWi3ct/P5FkHHRAdbeGlT+6NAN+cXgW
+ m9kWvu+tiHLXhcDpeW4umuhn02YxwQTiGzScf3+Y49Bo/mgVzsvO/vKmS7U17TcWKS
+ xZXeDL/OH8jfqSbAHvHortI/UYOyzrUSf/i1cKFgZajl1BT1WGe4yUEiaCKBNeXNUH
+ UpD2V7XCHIbexDsQVJZbW/d82UL3Q4ca/FApennA6mebtnC5XGhc5IuoULa5LdpuTq
+ H+jKvAF1TUf6ZPEnbqnuhgSouuJxG77IHAKHd+ju+pAr7vxSZNKFAFqGioHMtm9cUl
+ x8d1Ky6P5GFxg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id C8397CCD1A7;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id ABCD9CCD19F;
  Mon, 20 Oct 2025 16:24:29 +0000 (UTC)
 From: George Chan via B4 Relay <devnull+gchan9527.gmail.com@kernel.org>
-Date: Tue, 21 Oct 2025 00:23:59 +0800
-Subject: [PATCH 2/2] usb: gadget: Introduce usb gadget vendor/product
- default id for ARCH_QCOM
+Subject: [PATCH 0/2] Minor fixes for QCOM sc7180 soc
+Date: Tue, 21 Oct 2025 00:23:57 +0800
+Message-Id: <20251021-sc7180-minor-v1-0-9fe33c73365e@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251021-sc7180-minor-v1-2-9fe33c73365e@gmail.com>
-References: <20251021-sc7180-minor-v1-0-9fe33c73365e@gmail.com>
-In-Reply-To: <20251021-sc7180-minor-v1-0-9fe33c73365e@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAB1i9mgC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDAyMD3eJkc0MLA93czLz8Il0zixRLkxRjA2MzgyQloJaCotS0zAqwcdG
+ xtbUAXPf2sF4AAAA=
 To: u-boot@lists.denx.de
 Cc: George Chan <gchan9527@gmail.com>, 
+ Vitalii Skorkin <nikroks@mainlining.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1760977468; l=1201;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1760977468; l=563;
  i=gchan9527@gmail.com; s=20241015; h=from:subject:message-id;
- bh=ldgJNz2wHJliI43avdl9F3gBvhVbCT7sU2a1+PlLkQc=;
- b=yzwIYFFhQ1s/v9g4wNlMCn99XpUcUK5n3AxzYTZVS/XFBa4kw2ryZF57xIvV34V+KnzRiwQKD
- fxbVWxXiulgBX2efE9WwRLVwlxyC3OQnpLVfpxZQbz3ssR+GyYIRELc
+ bh=rRdl5D5O+xYI2mdluE1GksWK6UhkW/zDEvGtV5sZRtM=;
+ b=1q2xIX2oLSymu9aIW2grcn34H+h/ufE3gf4st2oLlkEzBBFmJLi7otqh9sG/DGtH9KHE2YUOK
+ dVeDEpgtcLRBNSMfPyzfIXW/khw+3l58DsHR/zo+3K+vqvizMDnvBK7
 X-Developer-Key: i=gchan9527@gmail.com; a=ed25519;
  pk=dscYWhT+BiQOBMpPE19NFQAjBBmcpipc6zdf2MTze/U=
 X-Endpoint-Received: by B4 Relay for gchan9527@gmail.com/20241015 with
@@ -87,41 +89,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: George Chan <gchan9527@gmail.com>
+Exclusively 2 minor patches for sc7180 splited from another series.
 
-Currently vendor/product id are both 0, and that might not as we want.
-Set to some arbitary known value that we can make it work more smoothly.
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Acked-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: George Chan <gchan9527@gmail.com>
 ---
- drivers/usb/gadget/Kconfig | 2 ++
- 1 file changed, 2 insertions(+)
+George Chan (2):
+      iommu: qcom-smmu: Introduce sc7180 compatible string
+      usb: gadget: Introduce usb gadget vendor/product default id for ARCH_QCOM
 
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index e845e46e0b7..008f8c99a58 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -60,6 +60,7 @@ config USB_GADGET_VENDOR_NUM
- 	default 0x0955 if ARCH_TEGRA
- 	default 0x1f3a if ARCH_SUNXI
- 	default 0x2207 if ARCH_ROCKCHIP
-+	default 0x18d1 if ARCH_QCOM
- 	default 0x0
- 	help
- 	  Vendor ID of the USB device emulated, reported to the host device.
-@@ -87,6 +88,7 @@ config USB_GADGET_PRODUCT_NUM
- 	default 0x350b if ROCKCHIP_RK3588
- 	default 0x350c if ROCKCHIP_RK3528
- 	default 0x350e if ROCKCHIP_RK3576
-+	default 0x4ee0 if ARCH_QCOM
- 	default 0x0
- 	help
- 	  Product ID of the USB device emulated, reported to the host device.
+ drivers/iommu/qcom-hyp-smmu.c | 1 +
+ drivers/usb/gadget/Kconfig    | 2 ++
+ 2 files changed, 3 insertions(+)
+---
+base-commit: 4e4a9de31de2a5f395ee25c59e4026422fbcb27e
+change-id: 20251020-sc7180-minor-68d94d30360b
 
+Best regards,
 -- 
-2.43.0
+George Chan <gchan9527@gmail.com>
 
 
