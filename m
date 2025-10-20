@@ -4,95 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CE7CCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 12:03:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6018CCD193
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 12:11:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFB35831D6;
-	Mon, 20 Oct 2025 14:03:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4CF4A807C0;
+	Mon, 20 Oct 2025 14:11:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tvea2osr";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="RaSrRUgn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B672F807B1; Mon, 20 Oct 2025 14:03:20 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B19CB83211; Mon, 20 Oct 2025 14:11:19 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAB67807B1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 14:03:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F471807B1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 14:11:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-471075c0a18so45263395e9.1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 05:03:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1760961798; x=1761566598; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=+spDjSUAnYkDmb7cEeUnsKrZSjlPJr9n15buWWyQsCw=;
- b=tvea2osr/1GbqeudbSCMspVFqtRXX1dsDatU9PQ38TKglvh7aFkRiNV3rnbAH501jx
- 2lu+QJx/MVA9btOq6Yf0kR76O1nDLRGyhfK+lzi6R93xVJEgKQZ2B5tVxYyROYYhwJM1
- n5OQkpCDSKEgQd0ceqsNTGH+hiMhJhIqZ5RR8jJr2qmCcl6mXpkv6LEuHXA91WSYJPQG
- WiHNpiVb2813cUNFpXzMcrZNocAwCoPJLo9qemdcKimxkR8AQIml82sf3R61cz7y1TPM
- 6xD71zbXSrGou6EBS0zHd7ewjovymOOjn5IbEqKbhhQhhX/Kt1VVYPkVl85dROw0NcKv
- IXcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760961798; x=1761566598;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+spDjSUAnYkDmb7cEeUnsKrZSjlPJr9n15buWWyQsCw=;
- b=w6kagoFn8pNm5Q6+6uBRyZt81iIrmOeH13lMp5qyj2QSbiRY5nqC6slf+M3/vUmF3Q
- wqWzZnbwOZbHyntRf+EQe0tIknZOchG+/pu3fS2ilOhHQZbbLgiAZSmFYy/QoVYa8nKL
- sf3TzBvwOCcivGQ8w/LzkAaI6R5xAQ0sSKEheauas78Y/E6n6Y0ma6Vs7V7uegCexn1M
- ycR3QSrWwLMRS6g/uz/OnuJuk7EHOX7AtqL4AE/GQh9FITVCkoENq1EIk4/ZZ3QhxJnN
- ScS0TPBKknrjOL+4cRmMW+9FfzyMFsvEqt1WrbG2CQSvEiRpvUjm1Kek8Fzm8268ARj3
- dZsg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWmxjX5J5sakwKVCNBMUhjXje3uPGsMKrt1e7Z5qBTrttGkX3UwvPZ0qbO1oSUuSgxS6L12Zl8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcbDwhTFxr8V5AZRnl6DBKgw02uhzFrNaxo0/NR6kMDhT0PpHB
- QQxrHl06oGHvL3Z+dqLVIK55O8ViXVDEon3Lgh2H5577R7p4yRmv9povvb9RNumnSHA=
-X-Gm-Gg: ASbGncs9jitLpsINv0eJPneZDqmO0RKWRN03IMs090iS2TyNQU4LXGFl43N+qDFg8xx
- 3XqoOY3aIV9cI0N7Fair9jYu8/9SZMzmaFQAi4kxEKamLlFe4FWmofWuVNK+GZ5RibfrU0+UcIz
- yJ6GjIHAUieqapEpLEpNmscqlhU9eQBIBy36gSc2kB3Kb8LTUQDe70n0vOIkcWP6lHkufu5Hk77
- cgbvduM00C+eJoZYckZkGe/ozoWgNIMxHJdXKhNuP3IY/T234G0SslFu+SFQx9YYOr20uqdIh14
- mI8X6+fb8+FJ5wxiS0zuJPD2nO9qI0AtCm3pVgpF1ctBJcMzRrOTsBgCid+9KxI3oQHnah+pA5F
- H/rWnBmi9Tn9/3EHdMfwIJX+8I61wrdaeGI12anKw64+vtQpKUTKvdkfMu2xTY2HCM2Vq7VsHfR
- t3ctjp4ChoZ7UBCp+gAVhotoLSOqHXVarKmr3xlJpQGIbgVDuWLHoT1w2AHknRNJnCm4rJW1Ada
- KlK
-X-Google-Smtp-Source: AGHT+IFE6z3DN2PrjEfu6uFx4uyD0I39Lb0CupMXJcYp72ncoMPbRB6JrNeEwBAukwUyGd/ctoF/Iw==
-X-Received: by 2002:a05:6000:310e:b0:425:73c9:7159 with SMTP id
- ffacd0b85a97d-42704d96566mr9134665f8f.33.1760961798034; 
- Mon, 20 Oct 2025 05:03:18 -0700 (PDT)
-Received: from ?IPV6:2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0?
- ([2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427f00b985esm15558900f8f.34.2025.10.20.05.03.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 20 Oct 2025 05:03:17 -0700 (PDT)
-Message-ID: <4f84711c-8d08-419f-bef6-ff97858751f8@linaro.org>
-Date: Mon, 20 Oct 2025 13:03:15 +0100
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=DGoVPmzb9bbO2oQ9Qbhc0a2PnOgzAXI1MjPVGR2UWBryHQst2klV1jA1/pGMaF/hIOZPCdF9p7Rb2SUDIrd6ueg3NPpDj7tc2XTMxN+Tjwpx+lie6Lefn6/c1pq6QZ8BpReTwGp4BwfjabWxb65o1up2y23DKgalVa2HQpkHscvxgd5wzQbRi4AnJuulHegD6stzTF1JaMaWWgllpXOoH0JU1E+zxVMlBYrYQ22QHeKRyltXLEpOMwU45igB/Hr2LxOtmVoZtCdHMh3dnlhDb+oBZc2qTfqzUvt0+3jc5OQxrNs2/sfB08UYxtoWKMIzljG+ismhyaPWR/FktsxLvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MulWQ1Cq5an8YyRjawNekrfAH1v1scjQzXR1yNBT8kk=;
+ b=Yw2P3ys3xUW5Yi3GpIYhwyY3dIUtMKmG6B2uLBMVFyst5w29MhuKx2R0ZfiB4AGWZUriiyuJc9klfzKoCLxuX+4IzpLsQadzq2zcHnNi8xdE//SIOLDjqxPfZgkJ0z7Ymr723cQWqF3MgkhIPknlyLaQ9oejVq/fbYxgVu0l/1LmThHyMRcDq9pRn9aZkeo6am96xcnqhKfAun3QYMLK4eLfPParsWTpBzyeaBbcKuDXOwAJBi+rTjFcBJkqrDzeQuSep+vXeE/hvn2MvbQiA2LMzViTBNJ3IlU1KNJ7JoQbG8ug53qg9gBUxomU0DCqQFX5VMAM/deQl4tAItyReA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MulWQ1Cq5an8YyRjawNekrfAH1v1scjQzXR1yNBT8kk=;
+ b=RaSrRUgnFKeR76hNfs8Jjopijfk0Wxl62w3meCabXKQ5q94RxSns0g7CZBitFmq9rRFydCL+vjn7XhOog+bUFuSdo0VF7UtC4Mc4GVgmtXSw6QTgIL94ZXGnmtibFJncRCnFZ+kTMYein/btYBcDhZ24UwpEk14dbNhLgARSgoQ=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by DU0PR10MB5924.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3b4::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Mon, 20 Oct
+ 2025 12:11:07 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.9228.015; Mon, 20 Oct 2025
+ 12:11:07 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH v2 0/2] 'part name' subcommand and some robustification
+Date: Mon, 20 Oct 2025 14:10:58 +0200
+Message-ID: <20251020121100.1742812-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.51.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0037.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::27) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/24] clk: rockchip: Remove negative error returns from
- clk_get_rate
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
-References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
- <20251015-clk_ops-v1-8-5f80f827407e@linaro.org>
- <aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.se>
-Content-Language: en-GB
-From: Andrew Goodbody <andrew.goodbody@linaro.org>
-In-Reply-To: <aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|DU0PR10MB5924:EE_
+X-MS-Office365-Filtering-Correlation-Id: 63ef0ec5-0bc3-4622-9750-08de0fd1bf69
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|52116014|1800799024|366016|376014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Vqvaw0Lx1JpjdEIQfRk/qyEX8zU7I5avNkksTFfva/IAaUJiKs3NXHpjgdWj?=
+ =?us-ascii?Q?bnq9eS+zMF6/U+yHFN9ZKBpwqjqMgr89ydPf8HvJBjtX3lZhjVnlwmtuq3dT?=
+ =?us-ascii?Q?XQZfpRI5tClpHINYz3S6pJok9YnA5pFNKnbYmArU0pjw485pSIxmErFq4p0L?=
+ =?us-ascii?Q?CqISE+HMZIP+tjwd20QIZbmcEkd0mP6sAAoKdqnG9noa+jU/ZCo/sq8Xy5Mh?=
+ =?us-ascii?Q?f765XAcU+MW3jYR1IRByv/9otf1bZJYulYy3FVEStLdxO5h8lElonRcHdLOW?=
+ =?us-ascii?Q?FikQuBBl68JVRByus1rwNdVi0iVZE+mnZZe3Ei09zbJDRIGLnOeZkuJA2yiC?=
+ =?us-ascii?Q?sWwypIKJ08N2Z66xhh7rstKUK40yLgXufbe1DTqDGsGMuTs9EilldZmcFqkL?=
+ =?us-ascii?Q?Ud1VuAJawdPTsLvNdZCDk28Adv71svUuqpEz6h3qGLuF9M+nsqs3mxCE7vzJ?=
+ =?us-ascii?Q?H9iIkXI40dyxdd/RwQBtALoOwgjFupYmCmPrSdlcb3vcrw7Gt6xSDKUbqp6R?=
+ =?us-ascii?Q?PGyvXmtYuqv/QPzEMSlG+68nzXM1uqw1U/ljQk6wTa58vFKQyrNY4wRJqwWf?=
+ =?us-ascii?Q?1j3IY8OjFdqnx+NXqPGLfV0Zf+8vQZfc54xmkqqKDTOLh0NiP3YSbGvdlW2E?=
+ =?us-ascii?Q?OxBkVOum3uxcrwy0DE5yeU6/KutrcVPz3LUvZ4YggD4cZdpsIdPLyPhxPimv?=
+ =?us-ascii?Q?nuZ4KiY0bjQHJj8iCH89rs1fwlr27ox8PdTMMSRA7hwCi6I0NR7gOS8K6AlP?=
+ =?us-ascii?Q?Qjct06ddL5SAAcXmpWhzXLjyA8n6Wnnc6vt0OxJBsVrcUz5SJkhF9iPsV7t/?=
+ =?us-ascii?Q?R0Kfqx2nrkRBiajk9X5pH/yBWGfadQvUBeICzYS3Opqmypo7vy9hk0jSHN2z?=
+ =?us-ascii?Q?DCBWSRwn2yCU6I/opmStxTQMJBkr1fo3TKsXawboht5PYVf8muzxcFESae1U?=
+ =?us-ascii?Q?PQicYnfwq+exqAxGfKOJrlKwEg4pkXtcoQOlLEFapjvFipUY5kOj9yXzpSLq?=
+ =?us-ascii?Q?67FCATQE5w20PF9LYLbjHK+fL+SxDrVfWFwJQneljwqcEZqH3xE71uCyGTt9?=
+ =?us-ascii?Q?7Z4Y4pdFYcMFXCu7gRej4e4Q+qBBv+6mr8Ht3vp/62enFjn/5sxh7+6oApv3?=
+ =?us-ascii?Q?/ZNQCIx5Eozv6uff6TYE6/tWCv2Rz0QOHajB9K8oE0D16iiBWjgDTc8UJVXY?=
+ =?us-ascii?Q?lJ6+DrUruTkNTMF9BA9NKeASLClKKmmi7gQyiI459hcXr9su7i5FV+2i2Pmk?=
+ =?us-ascii?Q?J+kK3UUdQ5IulYTKCU7QI7kg8/Z0etz35lqH45xAWNc3Ijr/M0hSJ6Zs3X/X?=
+ =?us-ascii?Q?hL4Hn1F7+Q6HOiCYI8zRlOpgXN9RmHGQVtUPhjjv/xbx2TmbkY55OHTkqi9H?=
+ =?us-ascii?Q?iBqUxauZTQNX1qHkq6ciqEn0CoZKBMRaZSDg/ZAICAlCRq26QmcVogIdfkUh?=
+ =?us-ascii?Q?h3trwFY9pbpcbDJXYsdifEDDt5hoTJ3r/qLH9WK+JxcEjyalXpbIwkWfNJ2T?=
+ =?us-ascii?Q?wfV4nEaC3LFUmw+gkI6PjKh4sG9334gPEzQW?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(52116014)(1800799024)(366016)(376014)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?DbamL6tTuOutwCKGiTNgpe7ul624phphdE5Pb1D6+LDrK5jxynWNmDdmUtNn?=
+ =?us-ascii?Q?T7aRV5g8tra9fEErzfiftzYppno3jLx056tXajiB6uQiLuhS1eo8hNWrtt1l?=
+ =?us-ascii?Q?cH5oxi+VL0DzqzNEAhRsN2+D4J3aIdls8oPL2g75pE1zJ/5/ch6zqPIrWo6y?=
+ =?us-ascii?Q?xcjkb+Iu0arsUgEX5HFjFzAhQgT29rSMW0H8qBVQGzDDOcreTwYgq2sflhcD?=
+ =?us-ascii?Q?NXDW00BqaAy76lpPgjckmwOD2lF9Yx/nDSprzm7ZJGGFvjDTgJerX5mHZxd0?=
+ =?us-ascii?Q?ERTJnhsDV/A8p/FPn2SA2+LJa4V3X+4MG+KZi6brC74TET1lzbp3qmpToqV0?=
+ =?us-ascii?Q?JGzFHPbRHWgrRBaUbF8SwkPmXh/TFOyrM8EvI/4jdnQAm22Fsmyxu4pDAd44?=
+ =?us-ascii?Q?IKqaqgqpYyQNDhxrD6j0Cv6kcTOp3SD9upBWVgkLj8PfSqW+FBDAEkwq8vGZ?=
+ =?us-ascii?Q?CLOMAuSjdXvTHByOV+SBgCZSn6QbDrlwmdFSN+/Acya+pTcrbEwpaXgr4/dy?=
+ =?us-ascii?Q?Z4Y+c23pEw4MtR+8ilURYGUTYscOPLXmp8crTW3Floi5I0l6bYeBxRSU4/yK?=
+ =?us-ascii?Q?b/qd0dT68NU32TtQGOoahfPqRaZ0kqtwJrCwW1l+i4DtOqm8GznRNv1o0OE2?=
+ =?us-ascii?Q?G1Kz7oawSdbYObYrguy4FuGp+hKpwe2Kb81ovkFRxGLk+pTNIalTlCtd6Lol?=
+ =?us-ascii?Q?FnOLPwzjlZaZNxANcb2wIJzUZQt6t0KCgA7RQBmfFz5Q6Jx1WjwWwKlttVIl?=
+ =?us-ascii?Q?4vLZaYjxAuTsjb3Is134EMRd0fQgjxzeoKicigyiY23nAgF4zPACLhlVMpDH?=
+ =?us-ascii?Q?JASzsk3sbCDu0kbxr8RR8gOUBN30bArxkBEfTWV9qggKWu/cLKbOKLOR2Xmv?=
+ =?us-ascii?Q?blBD8ftMFOg0DxDVCkCPBpbAgO1Qx6QK4m49yPvvIRaY5Rgq0cSVUwBbB7Gj?=
+ =?us-ascii?Q?n5IUbI9FRY81EWcE5RyGSbPIKDfIniaHNg5e6+aTf62c3r4o1fwZM2uBp7qh?=
+ =?us-ascii?Q?K0pxfcinFW+OdNssl5AqxgFBjG89sg9BlvroI26iBWmy0beTF0IRLw0cjrMv?=
+ =?us-ascii?Q?Hz8WDdTxLg44yZf+0OjyZ17zTuRTLuaHBcyvZX3Srglx+JmXrD/TJMj3VOD5?=
+ =?us-ascii?Q?gduG27RsmWlPDy8a02VMtGhTuIzDtyYSdCjH3pjhRCEcxdPg+qH1V8Yb1AXU?=
+ =?us-ascii?Q?lPTkfqtgpsPjlsDiopmwShljOE+8/xzBv2PIbHmb7J5IPQl0kx5o+nKAQEmu?=
+ =?us-ascii?Q?XckHuOM4WD2hK6wcYNibG7I6AB1e8GcmrAzyChkK6Ut3if4RfzEG01a4J50c?=
+ =?us-ascii?Q?hjO0dNtdkRbxPHft+HxZPllyzi9VuQRGKPRFX5j/P3gNjpq7HXcbjYr1I4wO?=
+ =?us-ascii?Q?qeCzkWgfrtAgr6VWSsxooghUqqZ4f5oofaW1kYjMQ45JAMUOftanpksM+p70?=
+ =?us-ascii?Q?K0beaCDq8b6sbmYZOHFMvyh+PxBNEakv6ijDXKkJ0Rh+jlUnjVf0llq+epSf?=
+ =?us-ascii?Q?UC5lvkD6hKC1FpsWnzO2nJqQz6iQfTFfMzp/vqxeXeA5l2PpKK1q8hGP0LRe?=
+ =?us-ascii?Q?eff720A7TefeaXW7rhvMmBVfBd65GvtcTZGwymMqa044SO8gNp06qw2LIxCN?=
+ =?us-ascii?Q?Jg=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 63ef0ec5-0bc3-4622-9750-08de0fd1bf69
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2025 12:11:06.9021 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: TQp6lIClzXzApivWX4PqBGJ/bjPEGAEjya4YeTv/2PL+vOTQuWTMNG4iiRVWvGD44t/E3YFxu7rRKuI2cBdD5CmCDMYFlTwUgL9ebukEZ9o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB5924
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,83 +158,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 19/10/2025 21:28, Jonas Karlman wrote:
-> Hi Andrew,
-> 
-> On 10/15/2025 4:32 PM, Andrew Goodbody wrote:
->> clk_get_rate() returns a ulong so do not attempt to pass negative error
->> codes through it.
-> 
-> On Rockchip the clk drivers only implement support for a subset of all
-> clocks supported by the hardware, mostly to save space for TPL/SPL and
-> not having to implement logic for clocks not really needed by U-Boot.
-> 
-> Because support for all clocks is not implemented the existing working
-> error handling actually help us catch clock issues on the Rockchip
-> platform. E.g. when a clk is referenced by assigned-clock-rates in DT we
-> get an error and can fix the issue, or decide if we can safely ignore
-> setting the clk rate.
-> 
-> I do not understand why you need to change the way the clk ops work,
-> just check with IS_ERR_VALUE() inside the clk-uclass or similar if you
-> really must remove working error handling from the callers.
+Implement a "part name" subcommand, mirroring the existing "part
+number" subcommand.
 
-OK, so here we have a question and it is one that I wish had come up in 
-the original discussion. IS_ERR_VALUE() and other related macros are 
-from include/linux/err.h and are introduced with this comment
+In the discussion for v1 of that, it came up that there's a bit of
+inconsistency in how much and what one can assume to be initialized in
+'struct disk_partition' after a successful call of one of the
+get_info* family of functions. The new patch 1/2 tries to consolidate
+that by making sure all ->get_info invocations go through a common
+helper that at least always initializes the string members.
 
-/*
-  * Kernel pointers have redundant information, so we can use a
-  * scheme where we can return either an error code or a dentry
-  * pointer with the same return value.
-  *
-  * This should be a per-architecture thing, to allow different
-  * error and pointer decisions.
-  */
+Rasmus Villemoes (2):
+  disk/part.c: ensure strings in struct disk_partition are valid after
+    successful get_info
+  cmd/part.c: implement "part name" subcommand
 
-So they are clearly intended to be unambiguous and used to add 
-information about errors into kernel pointers. It also suggests that 
-there may be other implementations of these macros for other architectures.
+ cmd/gpt.c              |  4 +--
+ cmd/part.c             | 16 ++++++++++-
+ disk/part.c            | 62 ++++++++++++++++++++++++------------------
+ doc/usage/cmd/part.rst | 13 +++++++++
+ include/part.h         | 16 +++++++++++
+ 5 files changed, 81 insertions(+), 30 deletions(-)
 
-Much of the error checking of the return value from clk_get_rate() is 
-done with IS_ERR_VALUE() despite the return value not being a kernel 
-pointer and with this default implementation it does happen to work just 
-as long as your clock rate does not collide with an error. OK collisions 
-are very unlikely but it does still feel like an abuse of the macro to me.
-
-Is there any official guidance on this use of IS_ERR_VALUE()?
-
-Andrew
-
-> The current working clk error handling has really helped me time and
-> time again on Rockchip platform during soc and board bring-up.
-> 
-> This is a NAK for me without first having a proper replacement for all
-> existing working error handling that is just being left ignored after
-> this patch/series.
-> 
-> Regards,
-> Jonas
-> 
->>
->> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
->> ---
->>   drivers/clk/rockchip/clk_px30.c   | 24 +++++++--------
->>   drivers/clk/rockchip/clk_rk3036.c |  2 +-
->>   drivers/clk/rockchip/clk_rk3066.c |  8 ++---
->>   drivers/clk/rockchip/clk_rk3128.c |  6 ++--
->>   drivers/clk/rockchip/clk_rk3188.c |  6 ++--
->>   drivers/clk/rockchip/clk_rk322x.c |  4 +--
->>   drivers/clk/rockchip/clk_rk3288.c |  6 ++--
->>   drivers/clk/rockchip/clk_rk3308.c | 26 ++++++++--------
->>   drivers/clk/rockchip/clk_rk3328.c |  6 ++--
->>   drivers/clk/rockchip/clk_rk3368.c |  8 ++---
->>   drivers/clk/rockchip/clk_rk3399.c | 12 ++++----
->>   drivers/clk/rockchip/clk_rk3528.c | 20 ++++++-------
->>   drivers/clk/rockchip/clk_rk3568.c | 62 +++++++++++++++++++--------------------
->>   drivers/clk/rockchip/clk_rk3576.c | 36 +++++++++++------------
->>   drivers/clk/rockchip/clk_rk3588.c | 32 ++++++++++----------
->>   drivers/clk/rockchip/clk_rv1108.c |  4 +--
->>   drivers/clk/rockchip/clk_rv1126.c | 52 ++++++++++++++++----------------
->>   17 files changed, 157 insertions(+), 157 deletions(-)
+-- 
+2.51.0
 
