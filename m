@@ -4,54 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06CC5CCD19F
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 17:18:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B474DCCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 17:18:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C05B783642;
-	Mon, 20 Oct 2025 19:17:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linenoise.info
+	by phobos.denx.de (Postfix) with ESMTP id 1A31D838B7;
+	Mon, 20 Oct 2025 19:17:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linenoise.info header.i=@linenoise.info header.b="dKVKLaH+";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UCqsW95e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DEF8F831D5; Mon, 20 Oct 2025 18:51:47 +0200 (CEST)
-Received: from ibeerc.linenoise.info (ibeerc.linenoise.info [130.61.186.89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 793F982E34; Mon, 20 Oct 2025 17:45:55 +0200 (CEST)
+Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
+ [IPv6:2607:f8b0:4864:20::e2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33B0782C84
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 18:51:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linenoise.info
+ by phobos.denx.de (Postfix) with ESMTPS id C828782C84
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:45:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alvaro@linenoise.info
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linenoise.info;
- s=ibeerc; t=1760979102;
- bh=TnWMM3GOoess2gDA9kLcN1ShDyKa3Xq8znEF2iuIfIw=;
- h=Date:From:To:Subject:References:From;
- b=dKVKLaH+jEbUb74ORX46n8m/1Xut/SoVt7/R7nFr1GNzraP/qu5Mq5lT+pM0yxtbi
- UNoKl/Br7v+/HEL37WbEgkCCuN+I34SvUnbdH6gfT6KHj09w7Nl6yUmuHNoqApY1YH
- wG+Oyxv0dkvzungRNgA4wYgbto0XETzjEqUhphZp3fXtV6YxSeyOO1MHNxn5QtttED
- Alb4d9oeeJoZ9ITUHhIbkIKTjQJzIl9ykbOFL7L2mqnUhlA+nqRufQnNa/dmUXjJsW
- wdtDzq0yM4gVFzqiYNgjLJwavFYEknqD2LY5hpFv9nClqr4Ns9zptSkHK17O5U7ldv
- A2JvLnxTP/fXg==
-Received: from ehlo.thunderbird.net (209.pool80-103-136.dynamic.orange.es
- [80.103.136.209])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by ibeerc.linenoise.info (Postfix) with ESMTPSA id 0EFE7218C5
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 18:51:42 +0200 (CEST)
-Date: Mon, 20 Oct 2025 18:51:42 +0200
-From: =?ISO-8859-1?Q?=C1lvaro_G=2E_M=2E?= <alvaro@linenoise.info>
-To: u-boot@lists.denx.de
-Subject: Zynqmp: SPL loads from jtag but it gets stuck when run from SD
-References: <2c13c953dbd7f71c8f5cd8737e43e8356bf1a165.camel@hazent.com>
-Message-ID: <720649EA-D97D-43A8-A291-AB9DD3D0EED9@linenoise.info>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=gchan9527@gmail.com
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-580a1f1f187so1872627137.1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 08:45:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1760975151; x=1761579951; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lkGeAlR6LQ9sZigG8/Y16uZ/lquA2uSgbYkNVW/DAGw=;
+ b=UCqsW95e4DmUcpELecmvE4jvLjTqTG/7EKJTnrjtuQP8v2XNeBlqek80iOKRYjtUH8
+ E9slvEmM4BYMT8en2OK0kMnh6HSl+rHFHXEyjml0WHo+iUp7T/2GpZhqxN21vGFJH8/Z
+ Jmc6z2kGlWEdAKFkh2FDju0AcgNkH3Xuu/sQAAamEVToo2wMBbphLrD/714RekV5Cop/
+ Qi+z9rdmv0uRqgQK/i6oZ9P8ooqCSDJaO1i1EJYTMkn4QNH7i4J50MBXjzu5UVSQiNfL
+ 8RSNcbKTlnuUAD/4jnnzKhAgbfo1iWOj8xTGqM8hKfMLDSF6ryMt0Q+M6hh/EsZ7L376
+ Amqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760975151; x=1761579951;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lkGeAlR6LQ9sZigG8/Y16uZ/lquA2uSgbYkNVW/DAGw=;
+ b=OH0soUiIk/OB+Ryz2eOHQ6npufhPYbVTAEDy/u8WK98NMAQHJYzIu7MWzUzF9hoYo2
+ n/hozc23or5E77duBwYTiju0ryKWxPP95s6FYXzG2dZp+3uIZrrbwal6Ju2P275gn8OQ
+ uLBtCgNcsZzfe45Z0RSYCF6qm4UB9KOSZyl3h8hNHeYHNK5FcjC/yl7CmVmHA1G7XnSh
+ cflLP8nAuJ81e7yl/IPNGZSlnmL0yFqoAnchejYqTZzYG1CEisOEL2cIlTD16REuwMdj
+ NBjSNFjtBmglVHBrvqQEo3+vSBrC0AlIZ4diqb+bnd9g0tLKaH/JBPdJy9kTzjRck5F7
+ OQPQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmbcf6/zp8GhuK/Ze4roe3NvOCPbNptoM26FHv68V49AJ2os/CZthQ13CrMpp2YDy9PPiS1/c=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjH39ay9beT0albjdaq7uzeD5hoKiOFdEEHF6HFs5X/p5htsNu
+ /FZ/2YSTDC05is5hhK8yw9JNaTYC+DU6ZOGKrD8P9oYT2cbGLSPn0nL9VEQ1vHCakAZxlx3VHir
+ gEWuQnF4R01vqvhSHislWcBLQB2PhdvQ=
+X-Gm-Gg: ASbGncsissbd4fzsN1ggMKKC5WNtnPl1Uh8uZTPV5SBFvj1ZW+xDGXUgENea1bfgJpz
+ gV8/GSPjkreXDwZwh+IogoCo3SJqvirT35Ku0bq0fMsxe4q+nTZwvggj4YB9XXvzj8qZdRaS/y8
+ SOodAwJZuZRnJbsvVVyDq6mVAnf3U9pejXBOOM06IjjFgDP2GEBRMweOodokrE/qGRTlPYimIeb
+ gWMd0p9kz1QHTAWn9MgSrN8LOn/HM9JgobdliYaBKqsrMRs61k9ykH//cTmuWslGFMpgunGiLJH
+X-Google-Smtp-Source: AGHT+IGojuvaZ3d2w06PnavPkmx47rneCaatLV6YeWvyA4YLE1XCBaSkgLs4x9qJjXZni7owEp+wm9KHI5dNybPTWdg=
+X-Received: by 2002:a05:6102:3710:b0:5d5:f6ae:38d5 with SMTP id
+ ada2fe7eead31-5d7dd6f55f7mr3907186137.42.1760975151494; Mon, 20 Oct 2025
+ 08:45:51 -0700 (PDT)
 MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 20 Oct 2025 19:17:28 +0200
-Content-Type: text/plain;
- charset=utf-8
+References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
+ <CADgMGSsxkrqZ3Dirq9KPoP0aaHew0A9DZEuoTotvqcHsfkEw6w@mail.gmail.com>
+ <1b0bb579-5024-47b2-8fe9-58c2edfa081f@baylibre.com>
+In-Reply-To: <1b0bb579-5024-47b2-8fe9-58c2edfa081f@baylibre.com>
+From: george chan <gchan9527@gmail.com>
+Date: Mon, 20 Oct 2025 23:45:40 +0800
+X-Gm-Features: AS18NWCt_7YUHG4PS6NziAUAwkyCyu8AbVdunnrplN75IcV-In_mRJyOJE9Ti4Q
+Message-ID: <CADgMGSu-6tmZNwGSt=o7D0So20=ym=YwWVrRaCUrW15BMXgWfw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] android: add bootconfig support
+To: Guillaume La Roque <glaroque@baylibre.com>
+Cc: Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, 
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>, 
+ Nicolas Belin <nbelin@baylibre.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aaron Kling <webgeek1234@gmail.com>, 
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
+ Maxime Fournier <mfournier@baylibre.com>
+X-Mailman-Approved-At: Mon, 20 Oct 2025 19:17:32 +0200
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -70,174 +105,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
-I'm trying to get u-boot SPL to load by itself, without using the Xilinx F=
-SBL
-workflow on a COTS board that fits an xczu7eg-ffvf1517=2E I export the XSA=
- file
-from Vivado and Petalinux is able to boot it with no issue=2E I use the sa=
-me XSA
-file to generate psu_init_gpl=2Ec (minimized using zynqmp_psu_init_minimiz=
-e=2Esh)
-and pm_cfg_obj=2Ec from Vitis and right now I'm using one of the prebuilt =
-PMUFW
-images from Luca Ceresoli at
-https://github=2Ecom/lucaceresoli/zynqmp-pmufw-binaries/
-
-Since my full project is a buildroot based one, I'm using buildroot to com=
-pile
-u-boot, which eases most of the cross compiling issues and also
-generates pm_cfg_obj=2Ebin object for me, alongisde ARM trusted firmware b=
-l31,
-and such other things=2E
-
-A few years ago I did exactly the same with another board, a full custom o=
-ne,
-that used a xczu4cg, so to ease the transition from one board to the other=
- and=C2=A0
-before upgrading u-boot, I'm trying to load the same old u-boot version,
-2022=2E04=2E Since the workflow is the same I was expecting this to work
-without any issues=2E Sadly, I'm having a few of them=2E
-
-So, what's happening is that when placing u-spl/boot=2Ebin and u-boot=2Eit=
-b files
-on the SD card, I get no output at all on the serial console, but I can se=
-e via
-xsdb that the SPL is being executed but got stuck at hang():
-
-xsdb% stop
-Info: Cortex-A53 #0 (target 9) Stopped at 0xfffc6a2c (External Debug Reque=
-st)
-hang() at include/bootstage=2Eh: 389
-389: 	return 0;
+Dear Guillaume,
 
 
-I can set PC back to the start address and then it will proceed past this =
-stage:
+=E5=9C=A8 2025=E5=B9=B410=E6=9C=8820=E6=97=A5=E9=80=B1=E4=B8=80 21:58=EF=BC=
+=8CGuillaume La Roque <glaroque@baylibre.com> =E5=AF=AB=E9=81=93=EF=BC=9A
 
-xsdb% rwr pc 0xfffc0000
-xsdb% con
+> Hi George,
+>
+>
+> Le 18/10/2025 =C3=A0 08:07, george chan a =C3=A9crit :
+>
+> Dear Guillaume,
+>
+> Thx for your patch.
+>
+> =E5=9C=A8 2025=E5=B9=B410=E6=9C=8817=E6=97=A5=E9=80=B1=E4=BA=94 21:19=EF=
+=BC=8CGuillaume La Roque (TI.com) <glaroque@baylibre.com>
+> =E5=AF=AB=E9=81=93=EF=BC=9A
+>
+>> This patchset add support of android bootconfig partition[1] in u-boot.
+>> With Android boot image v4, all androidboot.* arguments must be
+>> passed via bootconfig instead of using the kernel commandline.
+>>
+>
+> it looks like the above add logic handled bootargs well.
+>
+> is this logic support the use case of appending existing bootargs from en=
+v
+> and handle the one mentioned in
+> [1] for simulation of vendor bootloader behavior to append some
+> androidboot.* bootcmd to formulate a new bootargs? Or is this series
+> complementary to [1] so as aimed to "move" androidboot.* only to
+> bootconfig? If this [1] user case is covered then I am very happy to stop
+> [1] if this series can have same result.
+>
+> Btw, I am wondering if this series assumed Androidboot v4 only, so kernel
+> ver must >=3D 5.4 and enabled with bootconfig. Since then bootconfig can =
+be
+> unlimited to it's length. So all predefined androidboot.* from bootloader=
+,
+> can now move out, and no need of default bootargs in env file any more.
+>
+> And how about those Androidboot v2 case?
+>
+> [1] https://lists.denx.de/pipermail/u-boot/2025-October/599708.html
+>
+> in TI project we have this patch
+> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=3Dti-u-boot-2024.04=
+-next&id=3D9d802d798ac143e06ffe545606aa657a6c32cc63
+> , we forgot to upstream it but i'll plan to do it if it's not a problem f=
+or
+> you. let me know if it's ok for you and i send it this week. Normaly this
+> patch resolve your issue, it's not mandatory for bootconfig support but
+> needed to not lost all other bootargs no link to android in bootargs when
+> you use bootmeth_android.
+>
+thanks to confirm. even through i dont have any idea of your internal repo,
+I believe you will handle this issue well. I feel some resistance on
+working with my proposed patch for months so, and better let go now and
+stop it here.
 
-At the terminal:
-<debug_uart>
-### ERROR ### Please RESET the board ###
+>
+> Except if i do some error in code, boot config code was only do when you
+> have android image version 4, code take all androidboot.* param in bootar=
+g,
+> remove it in booatarg and put it in bootconfig partition before booting
+> android.
+>
 
+Sure. and i interested to know what appened when bootflow select and later
+with printenv, and how the bootargs looks like. if you are going to do
+submit next round, would you mind showing this result as well=EF=BC=9F
 
-I understand that this is not orthodox at all, moving the PC like that, bu=
-t
-this just proves that SPL ELF file is there on the CPU, so I get why some
-unspecified error may be occurring=2E However, if I just upload spl ELF fi=
-le
-through xsdb, then it somehow goes on further=2E This is with the SD card
-removed from the board:
+> some arg was adding in bootargs in bootargs automatically(serial, avb arg=
+,
+> slot etc etc) so instead of check where it's done version of android boot
+> image we have  we prefer to do it just before booting.
+>
+> for fastboot boot i never test it with TI board.
+>
+Ok then lets wait for some other dev to fix it then.
 
+Thanks again for follow this up.
 
-xsdb% rst -processor -clear-registers
-Info: Cortex-A53 #0 (target 9) Stopped at 0xffff0000 (Reset Catch)
-xsdb% dow spl/u-boot-spl=20
-Downloading Program --
-/home/sslayer/Proyectos/ART/DAR/DAR=2Egit/SAR/output/build/uboot-2022=2E04=
-/spl/u-
-boot-spl
-	section, =2Etext: 0xfffc0000 - 0xfffd0847
-	section, =2Erodata: 0xfffd0850 - 0xfffd4008
-	section, =2Edtb=2Einit=2Erodata: 0xfffd4010 - 0xfffd4eff
-	section, =2Edata: 0xfffd4f00 - 0xfffd585f
-	section, =2Eu_boot_list: 0xfffd5860 - 0xfffd6357
-	section, =2Eimage_copy_end: 0xfffd6358 - 0xfffd6357
-	section, =2Eend: 0xfffd6358 - 0xfffd6357
-	section, =2Ebss_start: 0x00000000 - 0xffffffffffffffff
-	section, =2Ebss: 0x00000000 - 0x00000167
-	section, =2Ebss_end: 0x00000168 - 0x00000167
-100%    0MB   0=2E2MB/s  00:00   =20
-Setting PC to Program Start Address 0xfffc0000
-Successfully downloaded
-/home/sslayer/Proyectos/ART/DAR/DAR=2Egit/SAR/output/build/uboot-2022=2E04=
-/spl/u-
-boot-spl
-xsdb% con
+Regards,
+George
 
-
-And this is serial output:
-
-<debug_uart>
-
-U-Boot SPL 2022=2E04 (Oct 20 2025 - 14:33:53 +0200)
-PMUFW is not found - Please load it!
-
-### ERROR ### Please RESET the board ###
-
-
-If I let it boot from SD card and the proceed to upload SPL via xsdb,
-then it is able to find PMUFW, which I assume has been placed in memory
-during the SD card boot process:
-
-xsdb% rst -processor -clear-registers
-Info: Cortex-A53 #0 (target 9) Stopped at 0xffff0000 (External Debug Reque=
-st)
-xsdb% dow spl/u-boot-spl=20
-Downloading Program --
-/home/sslayer/Proyectos/ART/DAR/DAR=2Egit/SAR/output/build/uboot-2022=2E04=
-/spl/u-
-boot-spl
-	section, =2Etext: 0xfffc0000 - 0xfffd0847
-	section, =2Erodata: 0xfffd0850 - 0xfffd4008
-	section, =2Edtb=2Einit=2Erodata: 0xfffd4010 - 0xfffd4eff
-	section, =2Edata: 0xfffd4f00 - 0xfffd585f
-	section, =2Eu_boot_list: 0xfffd5860 - 0xfffd6357
-	section, =2Eimage_copy_end: 0xfffd6358 - 0xfffd6357
-	section, =2Eend: 0xfffd6358 - 0xfffd6357
-	section, =2Ebss_start: 0x00000000 - 0xffffffffffffffff
-	section, =2Ebss: 0x00000000 - 0x00000167
-	section, =2Ebss_end: 0x00000168 - 0x00000167
-100%    0MB   0=2E2MB/s  00:00   =20
-Setting PC to Program Start Address 0xfffc0000
-Successfully downloaded
-/home/sslayer/Proyectos/ART/DAR/DAR=2Egit/SAR/output/build/uboot-2022=2E04=
-/spl/u-
-boot-spl
-xsdb% con
-
-
-And UART output is:
-
-U-Boot SPL 2022=2E04 (Oct 20 2025 - 14:33:53 +0200)
-PMUFW:	v1=2E1
-Loading new PMUFW cfg obj (1984 bytes)
-PMUFW no permission to change config object
-Silicon version:	3
-EL Level:	EL3
-Secure Boot:	not authenticated, not encrypted
-Multiboot:	0
-Trying to boot from MMC2
-spl: could not initialize mmc=2E error: -19
-Trying to boot from MMC1
-spl: could not initialize mmc=2E error: -19
-SPL: Unsupported Boot Device!
-SPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
-
-So, it seems that the SoC is properly reading boot=2Ebin from SD card,
-is placing PMUFW somewhere in memory and it runs, but doesn't get to
-show <debug_uart> message=2E Booting from JTAG succeeds in showing some
-UART messages, and if PMUFW was loaded by the SoC from boot=2Ebin file,
-SPL is even able to find and load it=2E
-
-I'm quite lost at the moment, specially because this very same procedure
-is the one I used a couple of years ago and that I've replicated today=2E
-The same workflow generates a boot=2Ebin and u-boot=2Eitb file that my old
-board boots=2E
-
-The only difference should be the different psu_init_gpl=2Ec and pm_cfg_ob=
-j=2Ec
-files, but they are obtained the same way using Xilinx' tools=2E
-
-I'll be trying directly with master or latest official release of u-boot,
-but I'm not sure if that'll help, as it seems I'm doing something wrong,
-given that the same procedure on the other board works fine=2E=2E=2E I dun=
-no=2E
-
-Any help would be greatly appreciated=2E
-
-Thanks
+>
+> Guillaume
+>
+>
+> Regards
+> George
+>
+>>
+>> [1]
+>> https://source.android.com/docs/core/architecture/bootloader/implementin=
+g-bootconfig
+>>
+>> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+>> ---
+>> Changes in v2:
+>> - Add test
+>> - Add new command to be able to load and read bootconfig before booting
+>> - Somes fixes to works with sandbox test
+>> - Link to v1:
+>> https://lore.kernel.org/all/20241128-bootconfig-v1-0-0e63a5dae82c@baylib=
+re.com/
+>>
+>> ---
+>> Guillaume La Roque (TI.com) (4):
+>>       boot: android: Add sandbox memory mapping support
+>>       boot: android: Add bootconfig support
+>>       cmd: abootimg: Add 'get ramdisk' command
+>>       test: abootimg: Add test for bootconfig handling
+>>
+>> Mattijs Korpershoek (TI.com) (1):
+>>       boot: android: import addBootConfigParameters() from AOSP
+>>
+>>  boot/image-android.c                        | 180
+>> ++++++++++++++++++++++++----
+>>  cmd/abootimg.c                              |  35 +++++-
+>>  test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++--
+>>  3 files changed, 292 insertions(+), 31 deletions(-)
+>> ---
+>> base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
+>> change-id: 20241128-bootconfig-276e247be992
+>>
+>> Best regards,
+>> --
+>> Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+>>
+>>
+>
