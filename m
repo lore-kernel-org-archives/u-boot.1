@@ -4,72 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4924FCCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4128CCD193
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:30:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE1DD82C84;
-	Mon, 20 Oct 2025 17:23:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 320EC82C84;
+	Mon, 20 Oct 2025 17:30:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="pfVY34qd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yu3Z067H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C9A82E34; Mon, 20 Oct 2025 17:23:56 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 993A783642; Mon, 20 Oct 2025 17:30:05 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9FDC807B1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:23:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32F93807B1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:30:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kory.maincent@bootlin.com
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 8BA0DC0AFDC;
- Mon, 20 Oct 2025 15:23:33 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 1F129606D5;
- Mon, 20 Oct 2025 15:23:53 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 94BF2102F23C5; 
- Mon, 20 Oct 2025 17:23:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1760973832; h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=AeIKYDcYaeASmVmhpGQZOUy75z/ooc7ZRLOPbDKW3BU=;
- b=pfVY34qdJ5KHQL/vAVKAd2B/cyjGCwvJ4uSO+P+9QMknbibilbnhWQ1mp1M66iFSGNa74y
- YM0sGlQSQB8lzyli9vavsu4Au29Zoc3OKm8Dtu90hqupaSQJ97NM154lOkgGl/AMGazNBU
- S9NVtuFF9UNE9WeKjUI/v193B06mjbMEQ2BSiMTQNBZochgjyx9LVVJ1Nx3jVyC2LnpCTm
- UqRb98osyxFXTzMzQ5JrlACiyxW7XIebAblss5Ey0a4FJ+YNgX7xMWpTCtJ6yCy/4GLPKH
- LKdk20F2VeT1QOBFWKWS8z0KUGODnzrnpNiZ3QljR8Bp0k2BR0ouF01c6yuXGw==
-Date: Mon, 20 Oct 2025 17:23:45 +0200
-From: Kory Maincent <kory.maincent@bootlin.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Hans de Goede
- <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, Stefano Babic
- <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
- Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
- Mattijs Korpershoek <mkorpershoek@kernel.org>
-Subject: Re: [PATCH v3 00/20] Convert extension support to UCLASS and adds
- its support to boot flows
-Message-ID: <20251020171613.76ffddac@kmaincent-XPS-13-7390>
-In-Reply-To: <20251020143729.GW6688@bill-the-cat>
-References: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
- <CAFLszThGVL1powrtDa+niBuxU-b_3YDs6TQ96igx-cj-PGvf=g@mail.gmail.com>
- <20251019162234.GQ6688@bill-the-cat>
- <20251020115009.532a1a99@kmaincent-XPS-13-7390>
- <20251020141548.GS6688@bill-the-cat>
- <20251020143729.GW6688@bill-the-cat>
-Organization: bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4711b95226dso32504795e9.0
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 08:30:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760974202; x=1761579002; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lj0gnR7EeSYcxeYprYYb5/8hWRbM6OoyNZ/0ZkKfvlw=;
+ b=Yu3Z067HhTdPQBUUGLuuOEf8cnFR7fmSL9aqT6BWC3qbHUdj6wUfK1bCQXLMCKru/J
+ W6VjfH41QGatcGLruCQ3QNjtriCvjiUmOE1ZiktkfGsYXGUJl5scLr4fb5oezUvpduRH
+ sK3EGvAuca9ssWvVV68qzH9Dyc3GKih26CWMf1ArCWpy39mfs3SmUUtV9xu8WlPday5v
+ Fnd5hIyINpanfZDBsJJQ+MNt0OjC5EdVY0+7nuirgIlZKVwWFADEGTisa+DFALmtJCv1
+ aV2QSbfCyEbLrKlIhqNULrti1r9vtEAzZ1PHfhQMiqGWMNnCY3MhLhrI8vIPCWXQE2if
+ tyyw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760974202; x=1761579002;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=lj0gnR7EeSYcxeYprYYb5/8hWRbM6OoyNZ/0ZkKfvlw=;
+ b=doNg9+GJ/lUnKf0hHyN//114oPFdgVd49xhLSIx1c3b7DGJn9JwmVKVxw3q2Yy3u93
+ 05EzxgiWYB0XiwFRYJ3WZPMZhBTl7uS+v0psTDzCzgvt9pnhkNQBboyoYHb6/TUkmFuN
+ RuuWVDNVnqasID6Go2LqPrELvih+NSHt572/oM1NzjjBhuU/GaW+0F6Wr8VRDIjpL3Yi
+ kg/IM6wwu3RazwKwtXhTfLNLurfp+Kjk5nMhnCxBlCE2sxV/7CzJI/SazVaMDsvTclcD
+ micgZpBt0rLJPz6nJndubF/udt/15dOJrtb8oAOUT5AxKHengBQzHhiSvAAgxsZLbSXL
+ MkcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXsHGN+By6rLlCFpU9KAzkWsTDCZtZrGTQYg0bqD4GlYT6IutiMQr4NsPmY/pGPL7nYmCdzexI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzrCA3pV10ycwjby7vIQdVitT3yiLRKBHXtlxahrv3BPsQ9Svop
+ 24x8OzuCXAP17Pspg1iykbA+2agcsWhvZiiaLxpk16wZF5EpkygMJuiNMpvagz2GC2s=
+X-Gm-Gg: ASbGncupM9YIos9EnyNvgp9QOOL0vJ9nmWQhqtqwSp62FvGMPoul3bqM0mC6RzbYB2d
+ mJEjCXuWhiurE+wAdDafxVndDq+V8W8eUB+GjMP0Ad+iM5Guzncv7quyJikS6xmRCoZ9EbxWvyW
+ CwnXSGgv3yoUgJPvQePpyy9lGG0eDtV3TvhmzXC0G1caW9yFhO8+UfMMQYQpJFEWB5eAhY+giXM
+ +a0NWIJlCGZJHEA/0OJahLd0ETwdR0euM+biZOqg3SVrR3M40Y7tF7cUlE6BZOhUNjJUXLTYFlR
+ 5/zzUguwXT+f2k8UxKTQWY04BwWCxclbt1BkD2h4DhYbVt+PJLw9rF/iUuHwOtFfBrFdNLvAJHs
+ df1XlhymDfQCwens9LwoX0YN5Ow1RR8VLW5tRkQzNt8nqU13rvOc2+vwPA6F6XdQFwNVemVal+9
+ Nx7WYtaH9U1FCDwWK8Owm0VQXXKP43w3Nj+KdXvOz/k75E0klivVgYl7TvTjycN1cK0A==
+X-Google-Smtp-Source: AGHT+IFFUnN3WgdffMd8HEvGXhiZ6TWlM4ZNQEvjaoNlH2PvOUuP8400b6B1khzW4QVyolIx3VYGeg==
+X-Received: by 2002:a05:600c:6290:b0:46e:2cfe:971c with SMTP id
+ 5b1f17b1804b1-471177c0f91mr99349155e9.0.1760974202540; 
+ Mon, 20 Oct 2025 08:30:02 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0?
+ ([2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-47154d382d8sm153429155e9.12.2025.10.20.08.30.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Oct 2025 08:30:01 -0700 (PDT)
+Message-ID: <9d3cc3ff-a064-4dc0-a73b-0edf1bb8a582@linaro.org>
+Date: Mon, 20 Oct 2025 16:30:00 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/24] clk: rockchip: Remove negative error returns from
+ clk_get_rate
+To: Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+ <20251015-clk_ops-v1-8-5f80f827407e@linaro.org>
+ <aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.se>
+ <4f84711c-8d08-419f-bef6-ff97858751f8@linaro.org>
+ <20251020142307.GU6688@bill-the-cat>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20251020142307.GU6688@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,77 +110,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 20 Oct 2025 08:37:29 -0600
-Tom Rini <trini@konsulko.com> wrote:
 
-> On Mon, Oct 20, 2025 at 08:15:48AM -0600, Tom Rini wrote:
-> > On Mon, Oct 20, 2025 at 11:50:09AM +0200, Kory Maincent wrote: =20
-> > > On Sun, 19 Oct 2025 10:48:37 -0600
-> > > Tom Rini <trini@konsulko.com> wrote:
-> > >  =20
-> > > > On Sun, Oct 19, 2025 at 02:05:51PM +0100, Simon Glass wrote: =20
-> > > > > Hi Kory,
-> > > > >=20
-> > > > > On Mon, 13 Oct 2025 at 14:32, Kory Maincent (TI.com)
-> > > > > <kory.maincent@bootlin.com> wrote:   =20
-> > > > > >
-> > > > > > This series converts the extension board framework to use UCLAS=
-S as
-> > > > > > requested by Simon Glass, then adds extension support to pxe_ut=
-ils
-> > > > > > and bootmeth_efi (not tested) to enable extension boards device=
-tree
-> > > > > > load in the standard boot process.
-> > > > > >
-> > > > > > I can't test the imx8 extension scan enabled by the
-> > > > > > imx8mm-cl-iot-gate_defconfig as I don't have this board.
-> > > > > > I also can't test the efi bootmeth change as I don't have such
-> > > > > > board.   =20
-> > > > >=20
-> > > > > You can test this with sandbox, using one of the bootmeth tests,
-> > > > > perhaps. Let me know if you need help with this.   =20
-> > > >=20
-> > > > But the question is, does the real hardware platform work before/af=
-ter
-> > > > this, not does the sandbox test still work before/after this. =20
-> > >=20
-> > > It seems the bootlflow scan is not working on the sandbox on next bra=
-nch.
-> > > Is this issue known? =20
-> >=20
-> > Is it fine on master? The next branch will be out of date until it
-> > re-opens with -rc2 being released (2 weeks from today). =20
->=20
-> ... out of sync local calendar, 3 weeks from today, not 2.
 
-bootstd test suit is not working on master with the sandbox_defconfig:
-https://termbin.com/un0p
+On 20/10/2025 15:23, Tom Rini wrote:
+> On Mon, Oct 20, 2025 at 01:03:15PM +0100, Andrew Goodbody wrote:
+>> On 19/10/2025 21:28, Jonas Karlman wrote:
+>>> Hi Andrew,
+>>>
+>>> On 10/15/2025 4:32 PM, Andrew Goodbody wrote:
+>>>> clk_get_rate() returns a ulong so do not attempt to pass negative error
+>>>> codes through it.
+>>>
+>>> On Rockchip the clk drivers only implement support for a subset of all
+>>> clocks supported by the hardware, mostly to save space for TPL/SPL and
+>>> not having to implement logic for clocks not really needed by U-Boot.
+>>>
+>>> Because support for all clocks is not implemented the existing working
+>>> error handling actually help us catch clock issues on the Rockchip
+>>> platform. E.g. when a clk is referenced by assigned-clock-rates in DT we
+>>> get an error and can fix the issue, or decide if we can safely ignore
+>>> setting the clk rate.
+>>>
+>>> I do not understand why you need to change the way the clk ops work,
+>>> just check with IS_ERR_VALUE() inside the clk-uclass or similar if you
+>>> really must remove working error handling from the callers.
+>>
+>> OK, so here we have a question and it is one that I wish had come up in the
+>> original discussion. IS_ERR_VALUE() and other related macros are from
+>> include/linux/err.h and are introduced with this comment
+>>
+>> /*
+>>   * Kernel pointers have redundant information, so we can use a
+>>   * scheme where we can return either an error code or a dentry
+>>   * pointer with the same return value.
+>>   *
+>>   * This should be a per-architecture thing, to allow different
+>>   * error and pointer decisions.
+>>   */
+>>
+>> So they are clearly intended to be unambiguous and used to add information
+>> about errors into kernel pointers. It also suggests that there may be other
+>> implementations of these macros for other architectures.
+>>
+>> Much of the error checking of the return value from clk_get_rate() is done
+>> with IS_ERR_VALUE() despite the return value not being a kernel pointer and
+>> with this default implementation it does happen to work just as long as your
+>> clock rate does not collide with an error. OK collisions are very unlikely
+>> but it does still feel like an abuse of the macro to me.
+>>
+>> Is there any official guidance on this use of IS_ERR_VALUE()?
+> 
+> We don't have any, really. So my question is, given the use case Jonas
+> outlined (thanks!), what do you see as a good way to handle this?
 
-Noticeable things are;
-test/boot/bootdev.c:160, bootdev_test_any(): 0 =3D=3D bootdev_find_by_any(s=
-eq, &dev, &mflags): Expected 0x0 (0), got 0xffffffed (-19)
-Test: bootdev_test_any: bootdev.c (flat tree)
-test/boot/bootdev.c:160, bootdev_test_any(): 0 =3D=3D bootdev_find_by_any(s=
-eq, &dev, &mflags): Expected 0x0 (0), got 0xffffffed (-19)
-Test 'bootdev_test_any' failed 2 times
+I would hesitate to call it good as it still seems wrong to me to pass a 
+negative error as an unsigned return value, but given the push back I 
+guess the pragmatic thing to do here is accept the use of IS_ERR_VALUE() 
+and that clk_get_rate() will be limited to < (ULONG_MAX - 4095). We can 
+drop the current series and I will take another look over the code to 
+see where there still may be needed some fixes.
 
-And a nice segfault:
-Test: bootflow_set_arg: bootflow.c
-Test: bootflow_system: bootflow.c
-[3]    569337 segmentation fault (core dumped)  ./u-boot
-
-Maybe things are missing to run sandbox_defconfig on my computer?
-With the sandbox64_defconfig there is not core dump anymore but there is st=
-ill
-the failed line:
-Test 'bootdev_test_bootable' failed 2 times
-
-And the uboot is reboot infinitely during the bootflow test:
-./u-boot -T -c "ut bootstd"
-https://termbin.com/alu5
-
-Regards,
---=20
-K=C3=B6ry Maincent, Bootlin
-Embedded Linux and kernel engineering
-https://bootlin.com
+Andrew
