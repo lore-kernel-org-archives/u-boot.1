@@ -4,84 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B62CCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:20:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4924FCCD193
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 15:23:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42B7782C84;
-	Mon, 20 Oct 2025 17:20:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CE1DD82C84;
+	Mon, 20 Oct 2025 17:23:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y1v6ACn3";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="pfVY34qd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24646831D6; Mon, 20 Oct 2025 17:20:46 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 46C9A82E34; Mon, 20 Oct 2025 17:23:56 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43568807B1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:20:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9FDC807B1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 17:23:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-3ee12807d97so4104794f8f.0
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 08:20:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760973644; x=1761578444; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GteNF7tzIOEqgoF/L+YflncxNMHTrZdD5d8VsX6JS4E=;
- b=Y1v6ACn3UTBfGRsw6b53eISJRtNo9jWEsAj0qMkhVBxC85ZroeNZ6G917p05c9h6T3
- z1PGU6YuHcvWHLqvV5WQG3mN6rbbW19wXpClNBNsEABZQa4SUEIQBjTgsS+T2ffDZ8+/
- rMgEVU/8huFe4vS9ugRoDMXga3U9Gj0Ltgtm8LnJeP2S2FNAvCXVGNbClymhhlGIdGw7
- wOmKdfBAKU50xKs+1+Dg+5vVl+8EBsZDkVI9K0RSpl5MVYCsqS6cDiiN1xo9djsCyIsB
- N6KDP4V+rkzOIqM5KPZVNsSZxJ3dxaU5bDiBRPjOm28TPjqzCWDwXNAcZ2AFUoNCPv3y
- yVWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760973644; x=1761578444;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GteNF7tzIOEqgoF/L+YflncxNMHTrZdD5d8VsX6JS4E=;
- b=ww0Dwg4fXoYruFz3pc3doZvaMmfWZ4bAgMuoizxBLPr/Osnivtoev4ZRJVjXf6liBS
- CF92tAY2rE99DzkX5txmlFKVEC+bFF9jqXrpANqpZ7QZMIsLdzBS/Pf72f4eCg5QtEIv
- QmURsqJceYERUaYM4bhUnlp+cPYtZ6KolNS1eZv4d/2tRaYVHBGujD3iAyyqw0Ci++WW
- uPwLrIDKdE19JCrMjau06vUgC0H0zSWYOuUdWFKpxXVqWBoyww6bbxLPfEOs8VqQRKfs
- sMfjycYPYE1feJw3b5KP1kDMyWC2a+EjJxq9ZgrQK90mQkpQTSGLNMQyLG7bXoG8m3Q9
- Q5cw==
-X-Gm-Message-State: AOJu0YyVLxLgVObX4jEGflhrNr9MzFuphpuRskEvSFScCHRpNnUJUKMU
- 8ebxdQfcSgq2ieAD/2bNpR9Q5cAhr1fQ5SRPstpM4gEGEwvEXXtw62rKubYj0g==
-X-Gm-Gg: ASbGncucf9Aaw8hKctvhijWFFe8XiXTsIoT2eDzDZnGj0M72RACUIh5mUkirrwqj9Ui
- kKn14Do37KTbB4EB88MHifEC9tSdn6lThhBfmPrZJ6E5FvFjWqPHUTXmH+HkitnDuj24L5NoAGt
- P51qSKPSAgmKfskmodYTPNw+yTsaMczKWltMpPP4O3TGL9kkqWKlSLOynn0SEJ2m0w3BIPjkihn
- oAc3mUfa9/Mt45o8smXVNXpsXh1p8ILKuXuRz3R8YOPOPuCWmOEQkwmA2mCwwGwkTPZWaJWkLjH
- ZwSjxNUKUIBf+ieUZt3c4YcqSM45ga6wj5t0OjlJl9nfzO2+JLV2V27QETY8ERT4nGQmjqdyH4K
- iXjMGZ4dCFseEJJR6ppbW1adLKquSq2GCEs06gjsvgoS19+PpaiRilZtetUJLz5H4MqZwvHeSvO
- fXvRHR7T8T8/3BKov1upHPZnLZ118rwPNdxUgqQwwMI0Z2DNnyEK6egkMYQAvgjA5/PacZ
-X-Google-Smtp-Source: AGHT+IEFMj+0Aqv0uMo17I5lr1LLsfg0Pahecr509ibKNpJV31Ik//CmchiG9+H4Ll+VZU8YWaO9Ww==
-X-Received: by 2002:a05:6000:40db:b0:427:8fe:435f with SMTP id
- ffacd0b85a97d-42708fe453cmr7286977f8f.57.1760973643606; 
- Mon, 20 Oct 2025 08:20:43 -0700 (PDT)
-Received: from jernej-laptop.localnet (178-79-73-218.dynamic.telemach.net.
- [178.79.73.218]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427f009a9a9sm16321753f8f.29.2025.10.20.08.20.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Oct 2025 08:20:43 -0700 (PDT)
-From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>
-Cc: linux-sunxi@lists.linux.dev, Mikhail Kalashnikov <iuncuim@gmail.com>
-Subject: Re: [PATCH] sunxi: a523: Re-use H6/H616 DRAM size detection method
-Date: Mon, 20 Oct 2025 17:20:42 +0200
-Message-ID: <2384364.ElGaqSPkdT@jernej-laptop>
-In-Reply-To: <20251020142622.1849108-1-andre.przywara@arm.com>
-References: <20251020142622.1849108-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 8BA0DC0AFDC;
+ Mon, 20 Oct 2025 15:23:33 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 1F129606D5;
+ Mon, 20 Oct 2025 15:23:53 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 94BF2102F23C5; 
+ Mon, 20 Oct 2025 17:23:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1760973832; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=AeIKYDcYaeASmVmhpGQZOUy75z/ooc7ZRLOPbDKW3BU=;
+ b=pfVY34qdJ5KHQL/vAVKAd2B/cyjGCwvJ4uSO+P+9QMknbibilbnhWQ1mp1M66iFSGNa74y
+ YM0sGlQSQB8lzyli9vavsu4Au29Zoc3OKm8Dtu90hqupaSQJ97NM154lOkgGl/AMGazNBU
+ S9NVtuFF9UNE9WeKjUI/v193B06mjbMEQ2BSiMTQNBZochgjyx9LVVJ1Nx3jVyC2LnpCTm
+ UqRb98osyxFXTzMzQ5JrlACiyxW7XIebAblss5Ey0a4FJ+YNgX7xMWpTCtJ6yCy/4GLPKH
+ LKdk20F2VeT1QOBFWKWS8z0KUGODnzrnpNiZ3QljR8Bp0k2BR0ouF01c6yuXGw==
+Date: Mon, 20 Oct 2025 17:23:45 +0200
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Hans de Goede
+ <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>, Stefano Babic
+ <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
+ Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>
+Subject: Re: [PATCH v3 00/20] Convert extension support to UCLASS and adds
+ its support to boot flows
+Message-ID: <20251020171613.76ffddac@kmaincent-XPS-13-7390>
+In-Reply-To: <20251020143729.GW6688@bill-the-cat>
+References: <20251013-feature_sysboot_extension_board-v3-0-04067b7422a5@bootlin.com>
+ <CAFLszThGVL1powrtDa+niBuxU-b_3YDs6TQ96igx-cj-PGvf=g@mail.gmail.com>
+ <20251019162234.GQ6688@bill-the-cat>
+ <20251020115009.532a1a99@kmaincent-XPS-13-7390>
+ <20251020141548.GS6688@bill-the-cat>
+ <20251020143729.GW6688@bill-the-cat>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,23 +86,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne ponedeljek, 20. oktober 2025 ob 16:26:22 Srednjeevropski poletni =C4=8D=
-as je Andre Przywara napisal(a):
-> The H6 and H616 DRAM initialisation code recently gained a joint and
-> improved size detection routine, which helped to avoid the occasional
-> DRAM size misdetection.
+On Mon, 20 Oct 2025 08:37:29 -0600
+Tom Rini <trini@konsulko.com> wrote:
+
+> On Mon, Oct 20, 2025 at 08:15:48AM -0600, Tom Rini wrote:
+> > On Mon, Oct 20, 2025 at 11:50:09AM +0200, Kory Maincent wrote: =20
+> > > On Sun, 19 Oct 2025 10:48:37 -0600
+> > > Tom Rini <trini@konsulko.com> wrote:
+> > >  =20
+> > > > On Sun, Oct 19, 2025 at 02:05:51PM +0100, Simon Glass wrote: =20
+> > > > > Hi Kory,
+> > > > >=20
+> > > > > On Mon, 13 Oct 2025 at 14:32, Kory Maincent (TI.com)
+> > > > > <kory.maincent@bootlin.com> wrote:   =20
+> > > > > >
+> > > > > > This series converts the extension board framework to use UCLAS=
+S as
+> > > > > > requested by Simon Glass, then adds extension support to pxe_ut=
+ils
+> > > > > > and bootmeth_efi (not tested) to enable extension boards device=
+tree
+> > > > > > load in the standard boot process.
+> > > > > >
+> > > > > > I can't test the imx8 extension scan enabled by the
+> > > > > > imx8mm-cl-iot-gate_defconfig as I don't have this board.
+> > > > > > I also can't test the efi bootmeth change as I don't have such
+> > > > > > board.   =20
+> > > > >=20
+> > > > > You can test this with sandbox, using one of the bootmeth tests,
+> > > > > perhaps. Let me know if you need help with this.   =20
+> > > >=20
+> > > > But the question is, does the real hardware platform work before/af=
+ter
+> > > > this, not does the sandbox test still work before/after this. =20
+> > >=20
+> > > It seems the bootlflow scan is not working on the sandbox on next bra=
+nch.
+> > > Is this issue known? =20
+> >=20
+> > Is it fine on master? The next branch will be out of date until it
+> > re-opens with -rc2 being released (2 weeks from today). =20
 >=20
-> Use the same code for the A523 DRAM initialisation as well, which
-> suffers from the same misdetection at times.
->=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ... out of sync local calendar, 3 weeks from today, not 2.
 
-I was a bit perplexed why code size detection doesn't work right with
-current master branch. This explains everything.
+bootstd test suit is not working on master with the sandbox_defconfig:
+https://termbin.com/un0p
 
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+Noticeable things are;
+test/boot/bootdev.c:160, bootdev_test_any(): 0 =3D=3D bootdev_find_by_any(s=
+eq, &dev, &mflags): Expected 0x0 (0), got 0xffffffed (-19)
+Test: bootdev_test_any: bootdev.c (flat tree)
+test/boot/bootdev.c:160, bootdev_test_any(): 0 =3D=3D bootdev_find_by_any(s=
+eq, &dev, &mflags): Expected 0x0 (0), got 0xffffffed (-19)
+Test 'bootdev_test_any' failed 2 times
 
-Best regards,
-Jernej
+And a nice segfault:
+Test: bootflow_set_arg: bootflow.c
+Test: bootflow_system: bootflow.c
+[3]    569337 segmentation fault (core dumped)  ./u-boot
 
+Maybe things are missing to run sandbox_defconfig on my computer?
+With the sandbox64_defconfig there is not core dump anymore but there is st=
+ill
+the failed line:
+Test 'bootdev_test_bootable' failed 2 times
 
+And the uboot is reboot infinitely during the bootflow test:
+./u-boot -T -c "ut bootstd"
+https://termbin.com/alu5
+
+Regards,
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
