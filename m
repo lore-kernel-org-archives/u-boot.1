@@ -4,160 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54422CCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 14:01:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46287CCD193
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 14:05:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C996783631;
-	Mon, 20 Oct 2025 16:01:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 8C36182C84;
+	Mon, 20 Oct 2025 16:05:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="hbsi+Lc5";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="R8ZnvhUq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6E7D836D2; Mon, 20 Oct 2025 16:01:24 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
+ id 125AD83768; Mon, 20 Oct 2025 16:05:39 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00A648334F
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 16:01:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id EE0F8807C0
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 16:05:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=O8NvCP0bxt++s9CTcye6bjcx7Dt5Ox3Geopy7a3ky82wqdbax6narHSMTPWELiTUAoxGf+j+x3dmEZnx6KAYLVdOk/I7aWo23uI2si6GyZ2DZjpz4uRbP7YlwjMNL1zaBe/azWPVjBHGcdUEBG5nbp15YOpEHMn7N4PVbR1iEf3D80n5tf1Hz7pa16CvqhuQMR3BOwybfyVGDS76DMTQgGIy+HBg/m280S4aZ7u9IwLpH8S0IZbZp/i9GlOn6lZlZpZ3rPFFWh3ip5yWH8w9a551dwmQELVQ5LofPdyFys87ntTNxMniTP+ftIPHq52w2y69MN3iO6gLpFZ/WAsA5Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/RA4o4bgsPuW2n7ic8FIwt25Z/BrEtJS1Vvh9VcRC2I=;
- b=Uvm6A0I5hGiOLa0i0oTGgpLHo3mi00NvKqYyo/G0ekfJSIJM77F7k59aQwvq/rvUFXaO9KKbsKwHXFw27QagD1d4jtfjAgdSoGumarepBApqHIG0B4/0oe23L6y+3merWkN/Ey17cvq3a7H5LSQ9Hscq63PoyrVQoabXupZzqYu6N7b/Fe0u9E9MAUxY5to+cRgo+CNABXrLEhl3PTt93bjQTFag7XHvBEwZeFRLyFxP9fdQVw3DY4I4u3B5AJVgmFcRztAm0AKIy2NEs6Sv/fNmVGLzm9nh8mn1CEBVVC1TJ28BrKnNuL0blsTLS21bWUoZyFTQ7yt4aRLWU49opQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/RA4o4bgsPuW2n7ic8FIwt25Z/BrEtJS1Vvh9VcRC2I=;
- b=hbsi+Lc5Cj/+chQHDFY+FE3Y2aQ7Pn9FpdThY3ad5loGCCykBdXPwVThBjU9rYLKrsfo1xd3uZQs3nrIdQxLn1sv/2TmcL4n5YUyRbtZUuvLoecL1ig4Al9JRB6DQM9uKORL7y7cvxqZdMm0ibfPo57wYaZy73dldpT7RAwVWrQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AMDPR04MB11701.eurprd04.prod.outlook.com (2603:10a6:20b:71a::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.11; Mon, 20 Oct
- 2025 14:01:21 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9228.015; Mon, 20 Oct 2025
- 14:01:21 +0000
-Message-ID: <3a75448b-c3ff-4504-acbf-e5c3b959189f@cherry.de>
-Date: Mon, 20 Oct 2025 16:01:20 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: environment: fix links to Linux kernel documentation
-To: Mattia Narducci <mattianarducci1@gmail.com>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-References: <1937375.tdWV9SEqCh@localhost>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <1937375.tdWV9SEqCh@localhost>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0057.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:49::14) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id DA5E3C0AFD6;
+ Mon, 20 Oct 2025 14:05:15 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 4AA47606D5;
+ Mon, 20 Oct 2025 14:05:35 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id E16F1102F23CF; 
+ Mon, 20 Oct 2025 16:05:22 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1760969134; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=wNsxHGY9P4xQGrV4rj91pSncyvSqsrVDkMI2M8dYCFI=;
+ b=R8ZnvhUqk/63k68USLXo4M6M4AT+q8ZnRnuCwXbSjy2QGTX0Aei3Rynry3HAaZCFxk7AgG
+ xxYxEmKeKEUSuVOLm+r3DiGm1AXN6zcZ3L0QB3xk7k6sg8r/sde72N3Nh0llZZd1aZ6J0a
+ MIZJniuDU0IlIwVHyXYX3nQP2jgNNdnX3nj/5Si2Rk4p+giySZXaNXyJ1+YgbVvwAwnHMU
+ hMtfweh2SjkuOfjNhQxu/H9B9oZYs98VoP9pyrvpB4RkF25xWm+sZEDOL6dmu/Uxf/BgtM
+ 2OeooWFCKSYBgYEE381C+F/SE604P2mx3B8mNuKKLExKhMEruBIXk+C6tBdL4g==
+Message-ID: <51e2dffc-ceab-4f3e-ae41-37c20492c5cf@bootlin.com>
+Date: Mon, 20 Oct 2025 16:05:21 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AMDPR04MB11701:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1465d847-7ed2-4945-556f-08de0fe125d1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?MXl1ZTQ4MzQ4RTdoQVliZmZvaVhRY0tRU1M3c1A4VGVCRkRSZEsxQTl6RGtU?=
- =?utf-8?B?TGcwSnVVemJzMUxkclBpMkFGTmp0VHdFZHd5TWphUGVZS05nZjZVdytpZisv?=
- =?utf-8?B?Qm1SUkE3OStBOTZTRGZwUFZSMDVxaVRxRUhaWUYxWkJoYUZlRnc2Tm12ZjNI?=
- =?utf-8?B?aWFYWkpMNlNwcHI5YmtRQXV6MFMwbEgzRG11RFFLTTY4eVI0dXQvaks2Q0tP?=
- =?utf-8?B?KzhkdmdFNHYxckgyOUhMbGlWRE5kUG1xZW40bVllOTB0RHhwRUEra0JXZVRj?=
- =?utf-8?B?emxZcTFXNDNyYWJFekZRYkRtV21qc2xLZzlDNlUxenIzQVM4d3BLWGlMeGZ6?=
- =?utf-8?B?TzR1azBNeFRibUhsWWI5eVcxaVYxM1gvQ0hHMDJwejhpc1piQTVqRFdYbTJE?=
- =?utf-8?B?dFNqOXNaakZRSHl4UzFMN2d3WU9sUHZpdkhxSFlkTk95RUdUMDNVN0NXN3RM?=
- =?utf-8?B?YUp1OU5iU2JHaGY3YWloU3RaVm1ObHNVSEt0anRnZUUyYldpcGFHTGU0bFQz?=
- =?utf-8?B?Qzc2dTR2aUhIMGZaL01wK3I5NThrUzQ4bUk4N2c1cVFsdSt3bi8yZ3FQQXlK?=
- =?utf-8?B?Z1p5ak5hZm8wcE4rbEVSaGJ6ZHN5bXhkdXArM2RGbXl1OG1pd0JRSEFrOTNZ?=
- =?utf-8?B?U1dBbVM0U0orblVXTkxjcGFEZ1dBN0wwamR6dURWcDV1QWQ2VzVUdDFJenRu?=
- =?utf-8?B?ZFd0SGowOGEvem9ERUxGcncrcEdkUFpudmRWdjNiY2g0L1NSdnFqQ0VaTXR2?=
- =?utf-8?B?L3l6VXZTZk9Ld0t6MUpYeXF3WGlMNFRMWlZmcnNVK3dkTDFMRG1hUmtGV2Fm?=
- =?utf-8?B?bk5tOS9tVW5ZbnB6UUlMWWoyUkM5ZzRCSHVhSGttSHI4dWtocnh2WTZLYU9E?=
- =?utf-8?B?TTBDS1E4WStyU1JtTXhXazBpb0tDZGFtTGtxaDBIT2ZySS9oQlpXdUpSWStM?=
- =?utf-8?B?eE9RMWtCWWJUOGJZTllLU3JHOXNJUzIrTjF6WldXbGttLzMyMW1CZmNOc3N6?=
- =?utf-8?B?QWlldk44eFNtdTJ4WERtL2dpMzVEbjEwSTI5ajY0ampYVU9OUi9lNmhzODBw?=
- =?utf-8?B?bW92M3dOMjFxa1BMUTJ1QlFFeUpGM2lMbUpEV2xWNnRNT084UGhRNGpkbkJV?=
- =?utf-8?B?aHY5R3ZrQTVKSlpET3UrcFk2TmY1eGl3dVk2TVVKZlhWNU5jUHRYd0pvNDBC?=
- =?utf-8?B?dmdKYzBiaVdTYktoUFQ4N292aXNjWUFkRGh5V3dLaGNHU1dudnRVRHlrYlJ0?=
- =?utf-8?B?VnBkeFNXQ2l0S21pVVFZTlo5VWdLaWR2Qks5ZlloYmw3OE9TYm1nalJwdHlJ?=
- =?utf-8?B?L3BES0paYkN3ZW1JcjBWSHZOTmt2Z29tSFQ0K203ZFUzV0VwckhyaEI2SEha?=
- =?utf-8?B?U3UvNkVCYmtFT2lKT0dnWVdGOEJQdDhoWlZjbUUrRU1mQW1mTlpVdms4c24w?=
- =?utf-8?B?MDJwd3lrYVAzOGdmZC9zY0JqNWNUQlU5cmgyaXhpaGNjK0V5OUcxdjhNc0Np?=
- =?utf-8?B?djZ3RlJEc1BsbWJqR0ljQ0pkYTdxQVZNQWhGc2ZsMzZnbStYWVZ2Zkh2V2J6?=
- =?utf-8?B?YWdVOFQwUUtpSjJDWFBNWFVhVXM5bTgzRzRuY20wck5idG4vVjZydjNVNE9I?=
- =?utf-8?B?bjRxNlFhRGFvWWNtWmk4QlcxZzl4MUVqWHlybXMwajVnT0tSZEJ0NDBZYXRz?=
- =?utf-8?B?eVdFU3VkNDUySlp3ODJwc0hvY1RuYXpTSWhPdk5uRGdQRUhRRGZ1bWJZdFR1?=
- =?utf-8?B?Q0lrT3B5YlpzWFd0ZEdXd3czUDRDU2RRTDdQTnFDT0FVMU4xV1lETW9YUkRq?=
- =?utf-8?B?bWJSZGxGYXg2d3dXMWpqaU5uMUJpOW5jYllRRXdoU0hwQW1WWlc4WVQxV3cv?=
- =?utf-8?B?dkVDQkZWNjlmNVBNc296MFBtSDY0bzYveUhiWWdhZDR4TFJPWWlaUW1Gd1l4?=
- =?utf-8?Q?6g9zBXXWZzM0uZ87NNZW09udwGFW4R7y?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WWpJWmthMGI0azdkOTBNTWdJL2dWbHlXa3lBTWRuNEg0d1l2L3pFTm5Oa1VZ?=
- =?utf-8?B?MitySnBhUTZZZHVlc2ZPQjNZSW96WFV5SmVhRGh4R3UxaWd2c1ErOU5vY2Ju?=
- =?utf-8?B?R2NOVVdBdlVNQ2Q5R1phNVJmL3cyTks3UHh2WDRiU0NwRFZjb2FkWmx0TEJW?=
- =?utf-8?B?OVpRNEZNSWErMkRoZzZoUzBhbzU3MFRGY3NOb2JHaTZ5NEJWV3ZHU2UyTUpo?=
- =?utf-8?B?THlMRzdiUTRJTG5CMGN3LzZaS1EzRlBPZUNqK1grb1FhYU5icEd1QnFlK3VR?=
- =?utf-8?B?REw3TzRWYy85M3o3dWZMOVBnTjBnUk1KeDRENlBYcmE5R1p1ZHVHZ0Z1VGRa?=
- =?utf-8?B?SnU5cjdxLzg0UHYxeEZydE9JOHJ6YjF3MU9ZSDdjV3gxSVlpT3pzSUh0eDcv?=
- =?utf-8?B?R0taNURnRnlaVUFQejllakhTTFVQSFRKeExUSnQ2cW5zZTNNQjFBeE9PM1U1?=
- =?utf-8?B?YVk1ZzRKbjV0blkxckJrem5HdGNnb3o2NjFkdEFENzBZSUFFZDdUL0NOWVJK?=
- =?utf-8?B?S1NSc3h5MDVQUTN5QlVWdkNhZjBueXFxVW1Xb2NZU1FkQXorVWR6MUoxSnJq?=
- =?utf-8?B?ejBORHlPYndTTmIwOTltdVZqUzB5eGdYdEtDekppN0dOalQ5Ung1U1VPNFZL?=
- =?utf-8?B?R29aYUJBRDlNQUQ1a2MzeTgrL085bEtYZ1VxQk5aVzNlMlZ5bEdLR0hnbTVu?=
- =?utf-8?B?SmtJN1pRanplcW9SbStpRG0rS0krS1lsSHRJUURTcGx5R1JWYnJMSW9LWUZ5?=
- =?utf-8?B?SmVFcWRCS2VZMHUyZFdYYXJFK2ZGdkwwemFBeVR0bk8wVzh6cWRzYkw1MWxr?=
- =?utf-8?B?V0VjWXVZbHNoZXZTdm5oOGxCMER3Rm5uSnBUcXEyTWNhU1oyZWVLdGxFRlIx?=
- =?utf-8?B?TndndXd0S2UyWmpPNmZvN3NkRXAyM3lNMFlHNU81dEgyaitvMEdxSU9OR2Fk?=
- =?utf-8?B?QUJ3eVJLdDBZNlIzWDltZGQyclFTMVhaZzhKRXU1NWl1NjgzYWdxZ2Q2dk5q?=
- =?utf-8?B?dHBETll6UklId09SOTllOXdqSkMyYUg3UnBYdzF3Yi9ZVmsvdU1kblB6YnYx?=
- =?utf-8?B?ZnlJSGF2dnNxamZySk9YalBicFdyOUdGcmpJK3NhUzB4NEZBa3c1ZU5lVjBt?=
- =?utf-8?B?ZWhaYWI5dFA3ZFhRaHlEazdYL2tZVnRWa2hza0JGL3E3S3BnRHU4dzFXSS95?=
- =?utf-8?B?YVBVYXVVUGZkOGgvajV2VEM5TitmWWFyYmFtVkt5L0dVTDF2eVozS1NGd0Uz?=
- =?utf-8?B?WnlDamVhcHAra0lwcTZXc0YyQ3VhWDFBTHIweUU1ZGliMkVKSWl0a0JnQUhx?=
- =?utf-8?B?NFNnUTIzY3hjemVJeWc3ZGRRZHYyT1ZCczkxQVVlS1ArOG1aMUdpMTMzMFBD?=
- =?utf-8?B?VElXZVFlVnBTOUN6R3ExMXBzb3VnQUtrLzY1dWhJKytIOS9MSlJoMDQ1NW1a?=
- =?utf-8?B?MDAwNmNLMHFYRm1YUURsQ2pMWjRiSHFhaWRCeGhDVFJvdnluVmZxKzhEOUJ3?=
- =?utf-8?B?TXZmSEhxOU1xTHBiRDBpUW9hMWVxd1dITWNCMkg4RE5yZDRNVkpWOVVtZFFC?=
- =?utf-8?B?RjVXeDRiaERPNjlvN1dweG9ERTJtVlFjZCt6cFMxalE5TUxFNzVTT0d4cE9E?=
- =?utf-8?B?ZmlJTVRNVHI3NGtuR3VSaWRjOW5oSjl4U1NKbmdRVkZMOEVVenJncFNZTGE3?=
- =?utf-8?B?SG84T0ZPV2J2Zmdac1JBMUxBaU5aTDRaRFBFU3Rva3JBR2JnSE5Wbittc0hq?=
- =?utf-8?B?UVlpZmpWN3cyQnRVdGhRSjkyeXlGMTR5THF1Ulg0ZE1qWm5wWWtacUc5eUVn?=
- =?utf-8?B?MFFUQUt3VFBiVXpIRVJCUWkxQXBuOG55aXRYdEV4bVRkZ1pxdUwyeG5iYzFF?=
- =?utf-8?B?WUxxU2txSEw5L21sME51SW9jSWZZR2tpLzlWaElyd0xOQ2ZNUFozOHhDOFJJ?=
- =?utf-8?B?OU1IZHk0eTJ2b3ZMOVBiUklSSjI5OHB3MDRqNjRFZjUxcnB5bzd4L3ljd1cy?=
- =?utf-8?B?ZGV5VWhwWStGVThHK0RXYWVHRjlLeUU5cjFvWnRLbUVjVlVnUSt0WmJTOCtI?=
- =?utf-8?B?QnJQYUJJS0lhRVlXa2dURnROcEd6dGp5eUdldEVPKzVwcmxzSzd3RytGV1V3?=
- =?utf-8?B?ODlLL3h1M1VYY2QrMloxSkJLM0xYeXEwOUI5ZWxhVFh1MDBlczVnUFl0WDVP?=
- =?utf-8?B?cmc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1465d847-7ed2-4945-556f-08de0fe125d1
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2025 14:01:21.1526 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qH5eY0Lyjg6RqR4GCNnmQiakIPUr6WFPuZ1nWCH4Pn69OPX2Ne2A18+FTQ5FXBE5QBG2g3TkJFQgYeFBx3i6aOpFv7J4MVF65EIGtqm9TP8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMDPR04MB11701
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 22/24] mtd: rawnand: sunxi: add support for H6/H616 nand
+ controller
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Hans de Goede <hdegoede@redhat.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>, Chen-Yu Tsai <wens@csie.org>,
+ Andrey Skvortsov <andrej.skvortzov@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dinesh Maniyam <dinesh.maniyam@intel.com>,
+ Anand Gore <anand.gore@broadcom.com>,
+ Linus Walleij <linus.walleij@linaro.org>, david regan <dregan@broadcom.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+References: <20251016142752.2627710-1-richard.genoud@bootlin.com>
+ <20251016142752.2627710-23-richard.genoud@bootlin.com>
+From: Richard GENOUD <richard.genoud@bootlin.com>
+Content-Language: en-US, fr
+Organization: Bootlin
+In-Reply-To: <20251016142752.2627710-23-richard.genoud@bootlin.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -174,18 +89,339 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mattia,
-
-On 10/10/25 9:31 PM, Mattia Narducci wrote:
-> Architecture-specific documentation in the Linux kernel was moved to
-> the arch/ subdirectory.
+Hi,
+Le 16/10/2025 à 16:27, Richard Genoud a écrit :
+> Introduce H6/H616 NAND controller support for U-Boot
 > 
+> The H616 NAND controller has the same base as A10/A23, with some
+> differences:
+> - MDMA is based on chained buffers
+> - its ECC supports up to 80bit per 1024bytes
+> - some registers layouts are a bit different, mainly due do the stronger
+>    ECC.
+> - it uses USER_DATA_LEN registers along USER_DATA registers.
+> - it needs a specific clock for ECC and MBUS.
+> 
+> Introduce the basic support, with ECC and scrambling, but without
+> DMA/MDMA.
+> 
+> Tested on Whatsminer H616 board (with and without scrambling, ECC)
+> 
+> Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
+> ---
+>   drivers/mtd/nand/raw/Kconfig      |   3 +-
+>   drivers/mtd/nand/raw/sunxi_nand.c | 112 ++++++++++++++++++++++++++++--
+>   drivers/mtd/nand/raw/sunxi_nand.h |  32 ++++++++-
+>   3 files changed, 139 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+> index 754b99bf3eb6..e4c4d9bcbf63 100644
+> --- a/drivers/mtd/nand/raw/Kconfig
+> +++ b/drivers/mtd/nand/raw/Kconfig
+> @@ -467,7 +467,8 @@ config NAND_SANDBOX
+>   config NAND_SUNXI
+>   	bool "Support for NAND on Allwinner SoCs"
+>   	default ARCH_SUNXI
+> -	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I
+> +	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I \
+> +		|| MACH_SUN50I_H616
+Hum, it seems I forgot to add MACH_SUN50I_H6 here.
 
-I confirm, the change was made in 
-04fc8904d5d18a132f5ad67b79ee980b6602c8c6 merge commit, part of the v6.5 
-kernel release. And the new links work fine while the old ones don't, so:
+>   	select SYS_NAND_SELF_INIT
+>   	select SYS_NAND_U_BOOT_LOCATIONS
+>   	select SPL_NAND_SUPPORT
+> diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
+> index 58c895095ce9..c9133cdc8844 100644
+> --- a/drivers/mtd/nand/raw/sunxi_nand.c
+> +++ b/drivers/mtd/nand/raw/sunxi_nand.c
+> @@ -170,8 +170,14 @@ static inline struct sunxi_nfc *to_sunxi_nfc(struct nand_hw_control *ctrl)
+>   
+>   static void sunxi_nfc_set_clk_rate(unsigned long hz)
+>   {
+> +#if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
+> +	void * const ccm = (void *)SUNXI_CCM_BASE;
+> +	void * const nand0_clk_cfg = ccm + CCU_NAND0_CLK_CFG;
+> +#else
+>   	struct sunxi_ccm_reg *const ccm =
+>   	(struct sunxi_ccm_reg *)SUNXI_CCM_BASE;
+> +	u32 *nand0_clk_cfg = &ccm->nand0_clk_cfg;
+> +#endif
+>   	int div_m, div_n;
+>   
+>   	div_m = (clock_get_pll6() + hz - 1) / hz;
+> @@ -186,8 +192,16 @@ static void sunxi_nfc_set_clk_rate(unsigned long hz)
+>   	/* config mod clock */
+>   	writel(CCM_NAND_CTRL_ENABLE | CCM_NAND_CTRL_PLL6 |
+>   	       CCM_NAND_CTRL_N(div_n) | CCM_NAND_CTRL_M(div_m),
+> -	       &ccm->nand0_clk_cfg);
+> +	       nand0_clk_cfg);
+>   
+> +#if defined(CONFIG_MACH_SUN50I_H616) || defined(CONFIG_MACH_SUN50I_H6)
+> +	setbits_le32(ccm + CCU_H6_NAND_GATE_RESET,
+> +		     (1 << GATE_SHIFT) | (1 << RESET_SHIFT));
+> +	setbits_le32(ccm + CCU_H6_MBUS_GATE, (1 << MBUS_GATE_OFFSET_NAND));
+> +	writel(CCM_NAND_CTRL_ENABLE | CCM_NAND_CTRL_PLL6 |
+> +	       CCM_NAND_CTRL_N(div_n) | CCM_NAND_CTRL_M(div_m),
+> +	       ccm + CCU_NAND1_CLK_CFG);
+> +#else
+>   	/* gate on nand clock */
+>   	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_NAND0));
+>   #ifdef CONFIG_MACH_SUN9I
+> @@ -195,6 +209,7 @@ static void sunxi_nfc_set_clk_rate(unsigned long hz)
+>   #else
+>   	setbits_le32(&ccm->ahb_gate0, (1 << AHB_GATE_OFFSET_DMA));
+>   #endif
+> +#endif
+>   }
+>   
+>   static int sunxi_nfc_wait_int(struct sunxi_nfc *nfc, u32 flags,
+> @@ -689,6 +704,53 @@ static inline void sunxi_nfc_user_data_to_buf(u32 user_data, u8 *buf)
+>   	buf[3] = user_data >> 24;
+>   }
+>   
+> +/*
+> + * On H6/H616 the user_data length has to be set in specific registers
+> + * before writing.
+> + */
+> +static void sunxi_nfc_reset_user_data_len(struct sunxi_nfc *nfc)
+> +{
+> +	int loop_step = NFC_REG_USER_DATA_LEN_CAPACITY;
+> +
+> +	/* not all SoCs have this register */
+> +	if (!nfc->caps->reg_user_data_len)
+> +		return;
+> +
+> +	for (int i = 0; i < nfc->caps->max_ecc_steps; i += loop_step)
+> +		writel(0, nfc->regs + NFC_REG_USER_DATA_LEN(nfc, i));
+> +}
+> +
+> +static void sunxi_nfc_set_user_data_len(struct sunxi_nfc *nfc,
+> +					int len, int step)
+> +{
+> +	bool found = false;
+> +	u32 val;
+> +	int i;
+> +
+> +	/* not all SoCs have this register */
+> +	if (!nfc->caps->reg_user_data_len)
+> +		return;
+> +
+> +	for (i = 0; i < nfc->caps->nuser_data_tab; i++) {
+> +		if (len == nfc->caps->user_data_len_tab[i]) {
+> +			found = true;
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (!found) {
+> +		dev_warn(nfc->dev,
+> +			 "Unsupported length for user data reg: %d\n", len);
+> +		return;
+> +	}
+> +
+> +	val = readl(nfc->regs + NFC_REG_USER_DATA_LEN(nfc, step));
+> +
+> +	val &= ~NFC_USER_DATA_LEN_MSK(step);
+> +	val |= field_prep(NFC_USER_DATA_LEN_MSK(step), i);
+> +	writel(val, nfc->regs + NFC_REG_USER_DATA_LEN(nfc, step));
+> +}
+> +
+>   static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_info *mtd,
+>   				       u8 *data, int data_off,
+>   				       u8 *oob, int oob_off,
+> @@ -716,6 +778,9 @@ static int sunxi_nfc_hw_ecc_read_chunk(struct mtd_info *mtd,
+>   	if (ret)
+>   		return ret;
+>   
+> +	sunxi_nfc_reset_user_data_len(nfc);
+> +	sunxi_nfc_set_user_data_len(nfc, 4, 0);
+> +
+>   	sunxi_nfc_randomizer_enable(mtd);
+>   	writel(NFC_DATA_TRANS | NFC_DATA_SWAP_METHOD | NFC_ECC_OP,
+>   	       nfc->regs + NFC_REG_CMD);
+> @@ -856,6 +921,9 @@ static int sunxi_nfc_hw_ecc_write_chunk(struct mtd_info *mtd,
+>   	if (ret)
+>   		return ret;
+>   
+> +	sunxi_nfc_reset_user_data_len(nfc);
+> +	sunxi_nfc_set_user_data_len(nfc, 4, 0);
+> +
+>   	sunxi_nfc_randomizer_enable(mtd);
+>   	writel(NFC_DATA_TRANS | NFC_DATA_SWAP_METHOD |
+>   	       NFC_ACCESS_DIR | NFC_ECC_OP,
+> @@ -1276,7 +1344,6 @@ static int sunxi_nand_chip_init_timings(struct sunxi_nfc *nfc,
+>   static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
+>   					      struct nand_ecc_ctrl *ecc)
+>   {
+> -	static const u8 strengths[] = { 16, 24, 28, 32, 40, 48, 56, 60, 64 };
+>   	struct nand_chip *nand = mtd_to_nand(mtd);
+>   	struct sunxi_nand_chip *sunxi_nand = to_sunxi_nand(nand);
+>   	struct sunxi_nfc *nfc = to_sunxi_nfc(sunxi_nand->nand.controller);
+> @@ -1303,12 +1370,12 @@ static int sunxi_nand_hw_common_ecc_ctrl_init(struct mtd_info *mtd,
+>   
+>   	/* Add ECC info retrieval from DT */
+>   	for (i = 0; i < nfc->caps->nstrengths; i++) {
+> -		if (ecc->strength <= strengths[i]) {
+> +		if (ecc->strength <= nfc->caps->ecc_strengths[i]) {
+>   			/*
+>   			 * Update ecc->strength value with the actual strength
+>   			 * that will be used by the ECC engine.
+>   			 */
+> -			ecc->strength = strengths[i];
+> +			ecc->strength = nfc->caps->ecc_strengths[i];
+>   			break;
+>   		}
+>   	}
+> @@ -1722,9 +1789,22 @@ static int sunxi_nand_probe(struct udevice *dev)
+>   	return 0;
+>   }
+>   
+> +static const u8 sunxi_ecc_strengths_a10[] = {
+> +	16, 24, 28, 32, 40, 48, 56, 60, 64
+> +};
+> +
+> +static const u8 sunxi_ecc_strengths_h6[] = {
+> +	16, 24, 28, 32, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80
+> +};
+> +
+> +static const u8 sunxi_user_data_len_h6[] = {
+> +	0, 4, 8, 12, 16, 20, 24, 28, 32
+> +};
+> +
+>   static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
+>   	.has_ecc_block_512 = true,
+> -	.nstrengths = 9,
+> +	.nstrengths = ARRAY_SIZE(sunxi_ecc_strengths_a10),
+> +	.ecc_strengths = sunxi_ecc_strengths_a10,
+>   	.reg_ecc_err_cnt = NFC_REG_A10_ECC_ERR_CNT,
+>   	.reg_user_data = NFC_REG_A10_USER_DATA,
+>   	.reg_pat_found = NFC_REG_ECC_ST,
+> @@ -1733,6 +1813,24 @@ static const struct sunxi_nfc_caps sunxi_nfc_a10_caps = {
+>   	.pat_found_mask = GENMASK(31, 16),
+>   	.ecc_mode_mask = GENMASK(15, 12),
+>   	.random_en_mask = BIT(9),
+> +	.max_ecc_steps = 16,
+> +};
+> +
+> +static const struct sunxi_nfc_caps sunxi_nfc_h616_caps = {
+> +	.nstrengths = ARRAY_SIZE(sunxi_ecc_strengths_h6),
+> +	.ecc_strengths = sunxi_ecc_strengths_h6,
+> +	.reg_ecc_err_cnt = NFC_REG_H6_ECC_ERR_CNT,
+> +	.reg_user_data = NFC_REG_H6_USER_DATA,
+> +	.reg_user_data_len = NFC_REG_H6_USER_DATA_LEN,
+> +	.reg_pat_found = NFC_REG_H6_PAT_FOUND,
+> +	.reg_spare_area = NFC_REG_H6_SPARE_AREA,
+> +	.reg_pat_id = NFC_REG_H6_PAT_ID,
+> +	.pat_found_mask = GENMASK(31, 0),
+> +	.ecc_mode_mask = GENMASK(15, 8),
+> +	.random_en_mask = BIT(5),
+> +	.user_data_len_tab = sunxi_user_data_len_h6,
+> +	.nuser_data_tab = ARRAY_SIZE(sunxi_user_data_len_h6),
+> +	.max_ecc_steps = 32,
+>   };
+>   
+>   static const struct udevice_id sunxi_nand_ids[] = {
+> @@ -1740,6 +1838,10 @@ static const struct udevice_id sunxi_nand_ids[] = {
+>   		.compatible = "allwinner,sun4i-a10-nand",
+>   		.data = (unsigned long)&sunxi_nfc_a10_caps,
+>   	},
+> +	{
+> +		.compatible = "allwinner,sun50i-h616-nand-controller",
+> +		.data = (unsigned long)&sunxi_nfc_h616_caps,
+> +	},
+>   	{ }
+>   };
+>   
+> diff --git a/drivers/mtd/nand/raw/sunxi_nand.h b/drivers/mtd/nand/raw/sunxi_nand.h
+> index 52200468d343..966b743e2613 100644
+> --- a/drivers/mtd/nand/raw/sunxi_nand.h
+> +++ b/drivers/mtd/nand/raw/sunxi_nand.h
+> @@ -44,15 +44,26 @@
+>   #define NFC_REG_IO_DATA		0x0030
+>   #define NFC_REG_ECC_CTL		0x0034
+>   #define NFC_REG_ECC_ST		0x0038
+> -#define NFC_REG_DEBUG		0x003C
+> +#define NFC_REG_H6_PAT_FOUND	0x003C
+>   #define NFC_REG_A10_ECC_ERR_CNT	0x0040
+> +#define NFC_REG_H6_ECC_ERR_CNT	0x0050
+>   #define NFC_REG_ECC_ERR_CNT(nfc, x)	(((nfc)->caps->reg_ecc_err_cnt + (x)) & ~0x3)
+>   #define NFC_REG_A10_USER_DATA	0x0050
+> +#define NFC_REG_H6_USER_DATA	0x0080
+> +#define NFC_REG_H6_USER_DATA_LEN 0x0070
+>   #define NFC_REG_USER_DATA(nfc, x)	((nfc)->caps->reg_user_data + ((x) * 4))
+> +
+> +/* A USER_DATA_LEN register can hold the length of 8 USER_DATA registers */
+> +#define NFC_REG_USER_DATA_LEN_CAPACITY 8
+> +#define NFC_REG_USER_DATA_LEN(nfc, step) \
+> +	((nfc)->caps->reg_user_data_len + \
+> +	 ((step) / NFC_REG_USER_DATA_LEN_CAPACITY) * 4)
+>   #define NFC_REG_SPARE_AREA(nfc) ((nfc)->caps->reg_spare_area)
+>   #define NFC_REG_A10_SPARE_AREA	0x00A0
+> -#define NFC_REG_PAT_ID(nfc) ((nfc)->caps->reg_pat_id)
+> +#define NFC_REG_H6_SPARE_AREA	0x0114
+> +#define NFC_REG_PAT_ID(nfc)	((nfc)->caps->reg_pat_id)
+>   #define NFC_REG_A10_PAT_ID	0x00A4
+> +#define NFC_REG_H6_PAT_ID	0x0118
+>   #define NFC_RAM0_BASE		0x0400
+>   #define NFC_RAM1_BASE		0x0800
+>   
+> @@ -162,6 +173,9 @@
+>   
+>   #define NFC_ECC_ERR_CNT(b, x)	(((x) >> ((b) * 8)) & 0xff)
+>   
+> +#define NFC_USER_DATA_LEN_MSK(step) \
+> +	(0xf << (((step) % NFC_REG_USER_DATA_LEN_CAPACITY) * 4))
+> +
+>   #define NFC_DEFAULT_TIMEOUT_MS	1000
+>   
+>   #define NFC_SRAM_SIZE		1024
+> @@ -174,8 +188,10 @@
+>    *
+>    * @has_ecc_block_512:	If the ECC can handle 512B or only 1024B chuncks
+>    * @nstrengths:		Number of element of ECC strengths array
+> + * @ecc_strengths:	available ECC strengths array
+>    * @reg_ecc_err_cnt:	ECC error counter register
+>    * @reg_user_data:	User data register
+> + * @reg_user_data_len:	User data length register
+>    * @reg_spare_area:	Spare Area Register
+>    * @reg_pat_id:		Pattern ID Register
+>    * @reg_pat_found:	Data Pattern Status Register
+> @@ -183,12 +199,21 @@
+>    * @pat_found_mask:	ECC_PAT_FOUND mask in NFC_REG_PAT_FOUND register
+>    * @ecc_mode_mask:	ECC_MODE mask in NFC_ECC_CTL register
+>    * @random_en_mask:	RANDOM_EN mask in NFC_ECC_CTL register
+> + * @user_data_len_tab:  Table of lenghts supported by USER_DATA_LEN register
+> + *			The table index is the value to set in NFC_USER_DATA_LEN
+> + *			registers, and the corresponding value is the number of
+> + *			bytes to write
+> + * @nuser_data_tab:	Size of @user_data_len_tab
+> + * @max_ecc_steps:	Maximum supported steps for ECC, this is also the
+> + *			number of user data registers
+>    */
+>   struct sunxi_nfc_caps {
+>   	bool has_ecc_block_512;
+>   	unsigned int nstrengths;
+> +	const u8 *ecc_strengths;
+>   	unsigned int reg_ecc_err_cnt;
+>   	unsigned int reg_user_data;
+> +	unsigned int reg_user_data_len;
+>   	unsigned int reg_spare_area;
+>   	unsigned int reg_pat_id;
+>   	unsigned int reg_pat_found;
+> @@ -196,6 +221,9 @@ struct sunxi_nfc_caps {
+>   	unsigned int ecc_err_mask;
+>   	unsigned int ecc_mode_mask;
+>   	unsigned int random_en_mask;
+> +	const u8 *user_data_len_tab;
+> +	unsigned int nuser_data_tab;
+> +	unsigned int max_ecc_steps;
+>   };
+>   
+>   #endif
 
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 
-Thanks!
-Quentin
+
+-- 
+Richard Genoud, Bootlin
+Embedded Linux and Kernel engineering
+https://bootlin.com
