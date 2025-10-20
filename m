@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D5D0CCD193
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 13:35:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0BDCCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 13:36:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F372182C84;
-	Mon, 20 Oct 2025 15:35:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 674CD82C84;
+	Mon, 20 Oct 2025 15:36:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U3/uYAiN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TcJ++IuO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBC998334F; Mon, 20 Oct 2025 15:35:12 +0200 (CEST)
-Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
- [IPv6:2607:f8b0:4864:20::1031])
+ id 4E7178334F; Mon, 20 Oct 2025 15:36:12 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 967B3807C0
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 15:35:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19981807C0
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 15:36:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=briansune@gmail.com
-Received: by mail-pj1-x1031.google.com with SMTP id
- 98e67ed59e1d1-33255011eafso4065832a91.1
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 06:35:10 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-28e7cd6dbc0so54879865ad.0
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 06:36:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1760967309; x=1761572109; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1760967368; x=1761572168; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=b9zXCNksV66vpOGM7J5qGPHEjMShVYwftlU2+brrrIY=;
- b=U3/uYAiNN8FvKBB2SDOWzkLXkIREnNaFxVlM44UF7VHA0ciGyk/KxHK+RCd2fpGxdd
- 8ikdEAhArkr3cpACexOvZ5hWycVo+r39WRU2kf2ck8vTOq13NLhHCOn9tD/2sRFSR+gB
- LeZmMbRHmFFSgHFLULNFQ3+DESaUPl0hou5B8B/EWyyDHeWmt63JDjnns1+Zk9PM0qZ6
- cgwswF8pKNHmQ5POuNMngpGWNSWRUmQXzhoDb8UcjZkks5HigEkllFdvWmuXfk7orelk
- x8/+R4jw2DPU88cHbLpelpoMMdxq/QXfCH2WTdrsI34S09MI6D5xtjp20Jr4BSJqPdCB
- I19g==
+ bh=lcquew1MTekz0f+JyHC96hnkZ0V4MNGvm5RNzku5FN8=;
+ b=TcJ++IuOptSPV2oUrto/UPgjZrtnS8Xc9HwvtMlTGR+gLR23ACpVdCkccfhy92J/TE
+ ufqtWN+G/heeKcglEoWPKcB7upNNshnYQLWGD0c5g1dYRCzaU/ikGqCqccQA5XtCuTgA
+ nRFjoSy6TXy+M5JPsPiwF/V938JDV3ffYv/UA7s8wPgYs8olgxsBKNYcBxU/GCK/0eTR
+ mSYhA6o8rh6lG0wa61+HU0GxXDyyWJpSrH6jLt1OzF/T7VG3pfv+Hf1cSEZom8xiv+tC
+ SMyJ3r3HYICo5xrtxBoEupWvLJic0linKNTvSKi+kiZ+aPVSKIoUwrk9Xl0L2JPqCO2Q
+ 4g6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1760967309; x=1761572109;
+ d=1e100.net; s=20230601; t=1760967368; x=1761572168;
  h=content-transfer-encoding:mime-version:message-id:date:subject:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=b9zXCNksV66vpOGM7J5qGPHEjMShVYwftlU2+brrrIY=;
- b=E5zyDUuhwuyVhOuOgocau1ZWzM187sjzkyrOfSL/UaU3p1jsa1Rba3sP231kM/4m8u
- xhyWjtdIT+W1vQP+CrjcyEzFpmoKLy23sf8/FuUArkBXSRpLqxOkHQ+gcYRs1lfHIfAP
- O69U+Wqxu3R9wSupJCjv3W0J4EHmndOhjGlOrO3okEXe4RwUwVjGdIArzDPvIHSHyN1c
- Adkmg7tKLeq4RJpE9jdoS3RvakEXmh/ef3LDXJH+p+BbbbzXwjWDa7gPtharon0zRrL3
- IxPT1T0xKpHECBLL06vQqC9BzYI6Ig63iHlvREtN1TGZjJSFj6SyXfUW3nMhCSGiV7iA
- LA7w==
+ bh=lcquew1MTekz0f+JyHC96hnkZ0V4MNGvm5RNzku5FN8=;
+ b=N/ot0GHu5GgWbdeLYngvhhGPxrolPVBoM3LJKmGOCN8fRH1koGub42Ap8mbIdZ+Cpn
+ o6tUaYbWhB6/5NoFCKqKXhVMm83rLq/MehgA51cNuVED1lFJIh2Y55SKlZI4kGMwxmWh
+ jqW9x4qYf6pjQ8y9G89XJfjYsnt4i2gH85J68nF3LFcTPfPq9d7nDuzs8HBeV1q9HHYG
+ trj+CbaXVcde+Pvn30ZQUcw+f0VxKIW++0tWGTrf/rQuoQZ2UivMEHI9R6V+LIvZcGM0
+ U8broTBnCnC7swYLduKz/iF2IUtD2ZdmhOKosgcW50KTSLz/HKbfSR5Mg26qUUSRHMfb
+ KBcw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+dxKycxCX0CH4YrBEyJNJYeUsJHWQUV46tA3KpzOQeT2j0jZcqOR8QY0bKe8yUk3fO8OXZWw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4NQg4Yv/MB0+mqcbmhjp54Fx4axpM9Po6nQvOezKBKjUt+Oaw
- 9SA1J8EJHEkho0Kp8nJN5vY73lVoW8vwHbsW/8ce7SgoHFBj/wxcW2bn
-X-Gm-Gg: ASbGncsgy8XMG7ou2sy+gcYbkAWL5lc2aPh0YlvrtaW+96c5NfR/gvbnBo3l0acbaJt
- V8G/HWzvUpt0wLj8oMOlJbvDb06Yz7g1jWZWOBRVCdU+c1qqiNjeg6OZca7NjgCppP+YBbg5qUW
- yQzSG6+ZvKKiwj2aKns0F7JQY8H4VgW85S7bteFzkqsK0zOlSQSL5Fo7mN1v1cXEM1EyhZAkEJe
- zfG4bH9/3CzTBGMl1HIyKPPwLVZBVB6XeBqCCSocUrx0Vq3WqFkBGG0nTxV6dGb9Es5ZrmrDKQi
- GDW19heIkWqedVnN+VpPWC8Fmd0/UPDicVFD9+PudQ1kFjvzNXa8+IpSMKv6M3rGXQo+h6nSsJr
- grEDjQb2stdGek3jzSlVayyMRxLUK051CMM/KtvmbbiZXbGazv6spiSjSHmwnDG6cJlA0J92EGJ
- Cj06a5vANiMoOKlHXHbVjbGnJm3Q==
-X-Google-Smtp-Source: AGHT+IGDjmfTnFT75bOmoj8s6VpPvbCsxKWDSMc8qdThyFwRptupzaqMmm4TH60QYORU4meFZLDVxA==
-X-Received: by 2002:a17:90b:2604:b0:330:797a:f504 with SMTP id
- 98e67ed59e1d1-33bcf85fb3cmr14738460a91.3.1760967309006; 
- Mon, 20 Oct 2025 06:35:09 -0700 (PDT)
+ AJvYcCV059lxmq+qmNiDNt+zeyn5xMn7VFDVsY5F24zrZ8eJX5JD+hFekevKu9cRHwA2QjN2fOwhH4U=@lists.denx.de
+X-Gm-Message-State: AOJu0YyJKAbRUO39qfVCPL+wKS/pHrM4FqqQg8VGxgn+sGO/Y5+cXPf8
+ e38V1Raxi+mTFV35tnUWBt4Pmuh0f0NBMCfGjsJ44YROkzJzrzZjDSuCzYNSwkRd
+X-Gm-Gg: ASbGncvUHR6xBmFCIj9DUgwIxueIDMtVoKWb8NPwjoxDyR475/1VSAGc9wOcQv6TYxT
+ o8KmgEp4KORhZXhC0PiH1vyIeoq3oc8xXMvp0xwjO3bP4Zl7sIl1fu8vCOhgKlLmjRTJnpqSD8y
+ ka4X0psw1zNkoTYj/O5rEWQ8GzYilxcH4iJGoIhW3MRlinyxh2jgUbGP/KybM1bR0mWpc8AD+cG
+ xigyGttTIWNNaU01m1uzDgxhYkhq77OWPZczPNsC5B/i3tbi00G3grvUUO3V3PZUG9ibmEVvW94
+ 6f9KYiW2i/y9AYlQ0ItBH7WqysNgD42MA1K2jMw48q5jyZ6t3ivhH1CETosLCDeiNEcL8BabgxS
+ B5ju4yPsAVwg3TS+rUxhviWv3KOL5uA4EeEoEZ2kECQFh3YWWzxDH81SbFPLsD46LbeLPt6lj3l
+ Xer3XC2a+9JxiM2w6XMY9EhPKXf1OMIKIKvR80
+X-Google-Smtp-Source: AGHT+IEc8NJbTVBmGhgZJZpCOT3DT7ijRbi52ya0RVhS0nu7c3JRDAzDNdqMLr/hZ9CmdIIXlK/Maw==
+X-Received: by 2002:a17:903:350d:b0:28b:4ca5:d522 with SMTP id
+ d9443c01a7336-290cb94765fmr188413185ad.39.1760967368261; 
+ Mon, 20 Oct 2025 06:36:08 -0700 (PDT)
 Received: from localhost.localdomain ([185.213.82.51])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-b6a779d704dsm7522898a12.24.2025.10.20.06.35.07
+ 41be03b00d2f7-b6a76b671fcsm7579416a12.35.2025.10.20.06.36.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 20 Oct 2025 06:35:08 -0700 (PDT)
+ Mon, 20 Oct 2025 06:36:08 -0700 (PDT)
 From: Brian Sune <briansune@gmail.com>
 To: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
-Subject: [PATCH v4] Altera SoCFpga Boot Stall Fix
-Date: Mon, 20 Oct 2025 21:34:55 +0800
-Message-ID: <20251020133455.1870-1-briansune@gmail.com>
+Subject: [PATCH] FPGA2SDRAM setup fix
+Date: Mon, 20 Oct 2025 21:35:54 +0800
+Message-ID: <20251020133554.1901-1-briansune@gmail.com>
 X-Mailer: git-send-email 2.47.1.windows.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -96,70 +96,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since U-Boot 2025.07 pure SD Card
-boot no longer works. Now Altera released 2025.07
-shows the different on the u-boot files.
-After testing, the major root case is
-get_managers_addr. And this patch fix the
-SD boot stall via pulling from offical.
+After testing, w/o proper setup
+the FPGA2SDRAM bridge will not work and stall.
+Pulling from official fix and w/o this initialization,
+both 2025.07 and 2025.10 also suffer stall on U-Boot
+and distro. Any FPGA to HPS-SDRAM action will immediate
+stall the CPU. As such, this patch fix the issue.
 
 Signed-off-by: Brian Sune <briansune@gmail.com>
 ---
- arch/arm/mach-socfpga/misc.c | 26 ++++++++++++++++++++++++--
- 1 file changed, 24 insertions(+), 2 deletions(-)
+ arch/arm/mach-socfpga/misc_gen5.c | 34 ++++++++++++++++++++++++++++++-
+ 1 file changed, 33 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-socfpga/misc.c b/arch/arm/mach-socfpga/misc.c
-index 76747c2196a..c54f5e32454 100644
---- a/arch/arm/mach-socfpga/misc.c
-+++ b/arch/arm/mach-socfpga/misc.c
-@@ -178,7 +178,10 @@ int arch_cpu_init(void)
- 	 * timeout value is still active which might too short for Linux
- 	 * booting.
- 	 */
-+#if !(IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_SIMICS) || \
-+	IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5_EMU))
- 	hw_watchdog_init();
-+#endif
- #else
- 	/*
- 	 * If the HW watchdog is NOT enabled, make sure it is not running,
-@@ -223,8 +226,16 @@ static int do_bridge(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/arch/arm/mach-socfpga/misc_gen5.c b/arch/arm/mach-socfpga/misc_gen5.c
+index b136691c685..5259ef54d73 100644
+--- a/arch/arm/mach-socfpga/misc_gen5.c
++++ b/arch/arm/mach-socfpga/misc_gen5.c
+@@ -217,6 +217,34 @@ int arch_early_init_r(void)
+ static struct socfpga_sdr_ctrl *sdr_ctrl =
+ 	(struct socfpga_sdr_ctrl *)SDR_CTRLGRP_ADDRESS;
  
- U_BOOT_CMD(bridge, 3, 1, do_bridge,
- 	   "SoCFPGA HPS FPGA bridge control",
--	   "enable [mask] - Enable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2) bridges\n"
--	   "bridge disable [mask] - Disable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2) bridges\n"
-+	   "enable [mask] - Enable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
-+	   "bridge disable [mask] - Disable HPS-to-FPGA (Bit 0), LWHPS-to-FPGA (Bit 1), FPGA-to-HPS (Bit 2), F2SDRAM0 (Bit 3), F2SDRAM1 (Bit 4), F2SDRAM2 (Bit 5) bridges\n"
-+	   "Bit 3, Bit 4 and Bit 5 bridges only available in Stratix 10\n"
-+	   "For example:\n"
-+	   "1) To enable and disable all bridges (command without mask):\n"
-+	   "	a) bridge enable\n"
-+	   "	b) bridge disable\n"
-+	   "2) To enable and disable HPS-to-FPGA and LWHPS-to-FPGA bridges (command with mask):\n"
-+	   "	a) bridge enable 0x3\n"
-+	   "	b) bridge disable 0x3\n"
- 	   ""
- );
- 
-@@ -261,6 +272,17 @@ void socfpga_get_managers_addr(void)
- 	if (ret)
- 		hang();
- 
-+	if (!IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)) {
-+		ret = socfpga_get_base_addr("altr,sys-mgr",
-+					    &socfpga_sysmgr_base);
-+		if (ret)
-+			hang();
-+	}
++void socfpga_sdram_apply_static_cfg(void)
++{
++	const u32 applymask = 0x8;
++	u32 val = readl(&sdr_ctrl->static_cfg) | applymask;
 +
-+	if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX) ||
-+	    IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX7M))
-+		ret = socfpga_get_base_addr("intel,agilex-clkmgr",
-+					    &socfpga_clkmgr_base);
- 	else if (IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X))
- 		ret = socfpga_get_base_addr("intel,n5x-clkmgr",
- 					    &socfpga_clkmgr_base);
++	/*
++	 * SDRAM staticcfg register specific:
++	 * When applying the register setting, the CPU must not access
++	 * SDRAM. Luckily for us, we can use i-cache here to help us
++	 * circumvent the SDRAM access issue. The idea is to make sure
++	 * that the code is in one full i-cache line by branching past
++	 * it and back. Once it is in the i-cache, we execute the core
++	 * of the code and apply the register settings.
++	 *
++	 * The code below uses 7 instructions, while the Cortex-A9 has
++	 * 32-byte cachelines, thus the limit is 8 instructions total.
++	 */
++	asm volatile(".align	5			\n"
++		     "		b 2f			\n"
++		     "1: 	str %0,	[%1]		\n"
++		     "		dsb			\n"
++		     "		isb			\n"
++		     "		b 3f			\n"
++		     "2:	b 1b			\n"
++		     "3:	nop			\n"
++		    : : "r"(val), "r"(&sdr_ctrl->static_cfg) : "memory", "cc");
++}
++
+ void do_bridge_reset(int enable, unsigned int mask)
+ {
+ 	int i;
+@@ -234,7 +262,10 @@ void do_bridge_reset(int enable, unsigned int mask)
+ 		writel(iswgrp_handoff[2],
+ 		       socfpga_get_sysmgr_addr() +
+ 		       SYSMGR_GEN5_FPGAINFGRP_MODULE);
+-		writel(iswgrp_handoff[3], &sdr_ctrl->fpgaport_rst);
++		if (iswgrp_handoff[3]) {
++			writel(iswgrp_handoff[3], &sdr_ctrl->fpgaport_rst);
++			socfpga_sdram_apply_static_cfg();
++		}
+ 		writel(iswgrp_handoff[0],
+ 		       socfpga_get_rstmgr_addr() + RSTMGR_GEN5_BRGMODRST);
+ 		writel(iswgrp_handoff[1], &nic301_regs->remap);
+@@ -246,6 +277,7 @@ void do_bridge_reset(int enable, unsigned int mask)
+ 		writel(0, socfpga_get_sysmgr_addr() +
+ 		       SYSMGR_GEN5_FPGAINFGRP_MODULE);
+ 		writel(0, &sdr_ctrl->fpgaport_rst);
++		socfpga_sdram_apply_static_cfg();
+ 		writel(0x7, socfpga_get_rstmgr_addr() + RSTMGR_GEN5_BRGMODRST);
+ 		writel(1, &nic301_regs->remap);
+ 	}
 -- 
 2.25.1
 
