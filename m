@@ -4,55 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40736CCD199
-	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 11:06:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CE7CCD199
+	for <u-boot@archiver.kernel.org>; Mon, 20 Oct 2025 12:03:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A618282C84;
-	Mon, 20 Oct 2025 13:06:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id EFB35831D6;
+	Mon, 20 Oct 2025 14:03:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="TY989OnB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tvea2osr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE64E831D5; Mon, 20 Oct 2025 13:06:45 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B672F807B1; Mon, 20 Oct 2025 14:03:20 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7419A807C0
- for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 13:06:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAB67807B1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 14:03:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 3466825FFD;
- Mon, 20 Oct 2025 13:06:43 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id x_8nl7xF5xsy; Mon, 20 Oct 2025 13:06:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1760958402; bh=71d3Vbzn+f9i+m/G5L7t7IpOOn+wdCRkU6K46y5L+Wo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=TY989OnBgMRYT7FNKeg7PxVag/TONAJpmG/ZAE0k2wSheLdmmfdSZtWasGQdpKek7
- T5bLuW4PcBjzwcOGo1KI8njz/XqLD/npY2PPF0TjsVP2s8dHruI/2NGYMMJ5EklvGG
- jkGtWtz+zgpzJeREaeOqKIlibFDz3M2kY4fTIXmX+xb/PYQdwa48kFmzGyL7iL1dar
- ng7bBp5JN5zbQje4CgLA04EijBu8vMpnFdeJmWwEprM3m4G/sJwNkSSOe5Tfi+cyV3
- xGBUvCcHCbB3pGjUbkLixpLspMt+xSHkFAdNz43/nYsZRAPQaXG0pyqdMEY+Vrs1UP
- na8dnEKpostYw==
-Date: Mon, 20 Oct 2025 11:06:35 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: u-boot@lists.denx.de
-Cc: Leo <ycliang@andestech.com>, Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, E Shattow <e@freeshell.de>,
- Vivian Wang <wangruikang@iscas.ac.cn>
-Subject: Re: Booting from SD-card on StarFive VisionFive 2 is broken in master
-Message-ID: <aPYXu9HsnCO49riQ@pie>
-References: <aPYUlyni65Ux8xpq@pie>
+ spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-471075c0a18so45263395e9.1
+ for <u-boot@lists.denx.de>; Mon, 20 Oct 2025 05:03:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1760961798; x=1761566598; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+spDjSUAnYkDmb7cEeUnsKrZSjlPJr9n15buWWyQsCw=;
+ b=tvea2osr/1GbqeudbSCMspVFqtRXX1dsDatU9PQ38TKglvh7aFkRiNV3rnbAH501jx
+ 2lu+QJx/MVA9btOq6Yf0kR76O1nDLRGyhfK+lzi6R93xVJEgKQZ2B5tVxYyROYYhwJM1
+ n5OQkpCDSKEgQd0ceqsNTGH+hiMhJhIqZ5RR8jJr2qmCcl6mXpkv6LEuHXA91WSYJPQG
+ WiHNpiVb2813cUNFpXzMcrZNocAwCoPJLo9qemdcKimxkR8AQIml82sf3R61cz7y1TPM
+ 6xD71zbXSrGou6EBS0zHd7ewjovymOOjn5IbEqKbhhQhhX/Kt1VVYPkVl85dROw0NcKv
+ IXcw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1760961798; x=1761566598;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+spDjSUAnYkDmb7cEeUnsKrZSjlPJr9n15buWWyQsCw=;
+ b=w6kagoFn8pNm5Q6+6uBRyZt81iIrmOeH13lMp5qyj2QSbiRY5nqC6slf+M3/vUmF3Q
+ wqWzZnbwOZbHyntRf+EQe0tIknZOchG+/pu3fS2ilOhHQZbbLgiAZSmFYy/QoVYa8nKL
+ sf3TzBvwOCcivGQ8w/LzkAaI6R5xAQ0sSKEheauas78Y/E6n6Y0ma6Vs7V7uegCexn1M
+ ycR3QSrWwLMRS6g/uz/OnuJuk7EHOX7AtqL4AE/GQh9FITVCkoENq1EIk4/ZZ3QhxJnN
+ ScS0TPBKknrjOL+4cRmMW+9FfzyMFsvEqt1WrbG2CQSvEiRpvUjm1Kek8Fzm8268ARj3
+ dZsg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWmxjX5J5sakwKVCNBMUhjXje3uPGsMKrt1e7Z5qBTrttGkX3UwvPZ0qbO1oSUuSgxS6L12Zl8=@lists.denx.de
+X-Gm-Message-State: AOJu0YzcbDwhTFxr8V5AZRnl6DBKgw02uhzFrNaxo0/NR6kMDhT0PpHB
+ QQxrHl06oGHvL3Z+dqLVIK55O8ViXVDEon3Lgh2H5577R7p4yRmv9povvb9RNumnSHA=
+X-Gm-Gg: ASbGncs9jitLpsINv0eJPneZDqmO0RKWRN03IMs090iS2TyNQU4LXGFl43N+qDFg8xx
+ 3XqoOY3aIV9cI0N7Fair9jYu8/9SZMzmaFQAi4kxEKamLlFe4FWmofWuVNK+GZ5RibfrU0+UcIz
+ yJ6GjIHAUieqapEpLEpNmscqlhU9eQBIBy36gSc2kB3Kb8LTUQDe70n0vOIkcWP6lHkufu5Hk77
+ cgbvduM00C+eJoZYckZkGe/ozoWgNIMxHJdXKhNuP3IY/T234G0SslFu+SFQx9YYOr20uqdIh14
+ mI8X6+fb8+FJ5wxiS0zuJPD2nO9qI0AtCm3pVgpF1ctBJcMzRrOTsBgCid+9KxI3oQHnah+pA5F
+ H/rWnBmi9Tn9/3EHdMfwIJX+8I61wrdaeGI12anKw64+vtQpKUTKvdkfMu2xTY2HCM2Vq7VsHfR
+ t3ctjp4ChoZ7UBCp+gAVhotoLSOqHXVarKmr3xlJpQGIbgVDuWLHoT1w2AHknRNJnCm4rJW1Ada
+ KlK
+X-Google-Smtp-Source: AGHT+IFE6z3DN2PrjEfu6uFx4uyD0I39Lb0CupMXJcYp72ncoMPbRB6JrNeEwBAukwUyGd/ctoF/Iw==
+X-Received: by 2002:a05:6000:310e:b0:425:73c9:7159 with SMTP id
+ ffacd0b85a97d-42704d96566mr9134665f8f.33.1760961798034; 
+ Mon, 20 Oct 2025 05:03:18 -0700 (PDT)
+Received: from ?IPV6:2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0?
+ ([2a0a:ef40:fed:4601:d996:1608:d8ca:d6e0])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-427f00b985esm15558900f8f.34.2025.10.20.05.03.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 20 Oct 2025 05:03:17 -0700 (PDT)
+Message-ID: <4f84711c-8d08-419f-bef6-ff97858751f8@linaro.org>
+Date: Mon, 20 Oct 2025 13:03:15 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <aPYUlyni65Ux8xpq@pie>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/24] clk: rockchip: Remove negative error returns from
+ clk_get_rate
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+References: <20251015-clk_ops-v1-0-5f80f827407e@linaro.org>
+ <20251015-clk_ops-v1-8-5f80f827407e@linaro.org>
+ <aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.se>
+Content-Language: en-GB
+From: Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <aa7d67c4-5abe-4a71-89b1-866fb677d232@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,28 +109,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 20, 2025 at 10:53:11AM +0000, Yao Zi wrote:
-> Hi there,
+On 19/10/2025 21:28, Jonas Karlman wrote:
+> Hi Andrew,
 > 
-> While testing the behavior of my previous patch on JH7110 platforms,
-> it's found that StarFive VisionFive 2 fails to boot from SD-card with
-> current U-Boot master "a58089ad2e4 (fs: semihosting: Use correct
-> variable for error check, 2025-10-02)" with messages like
+> On 10/15/2025 4:32 PM, Andrew Goodbody wrote:
+>> clk_get_rate() returns a ulong so do not attempt to pass negative error
+>> codes through it.
 > 
-> 	U-Boot SPL 2025.10-00669-ga58089ad2e41 (Oct 20 2025 - 10:29:30 +0000)
-> 	DDR version: dc2e84f0.
-> 	Trying to boot from MMC2
-> 	spl: partition error
-> 	Error: -38
-> 	SPL: failed to boot from all boot devices
-> 	### ERROR ### Please RESET the board ###
+> On Rockchip the clk drivers only implement support for a subset of all
+> clocks supported by the hardware, mostly to save space for TPL/SPL and
+> not having to implement logic for clocks not really needed by U-Boot.
+> 
+> Because support for all clocks is not implemented the existing working
+> error handling actually help us catch clock issues on the Rockchip
+> platform. E.g. when a clk is referenced by assigned-clock-rates in DT we
+> get an error and can fix the issue, or decide if we can safely ignore
+> setting the clk rate.
+> 
+> I do not understand why you need to change the way the clk ops work,
+> just check with IS_ERR_VALUE() inside the clk-uclass or similar if you
+> really must remove working error handling from the callers.
 
-Forgot to mention it, this problem was also independently found by
-Vivian Wang in later September, so here's also
+OK, so here we have a question and it is one that I wish had come up in 
+the original discussion. IS_ERR_VALUE() and other related macros are 
+from include/linux/err.h and are introduced with this comment
 
-Reported-by: Vivian Wang <wangruikang@iscas.ac.cn>
+/*
+  * Kernel pointers have redundant information, so we can use a
+  * scheme where we can return either an error code or a dentry
+  * pointer with the same return value.
+  *
+  * This should be a per-architecture thing, to allow different
+  * error and pointer decisions.
+  */
 
-Adding her CC as well.
+So they are clearly intended to be unambiguous and used to add 
+information about errors into kernel pointers. It also suggests that 
+there may be other implementations of these macros for other architectures.
 
-Best regards,
-Yao Zi
+Much of the error checking of the return value from clk_get_rate() is 
+done with IS_ERR_VALUE() despite the return value not being a kernel 
+pointer and with this default implementation it does happen to work just 
+as long as your clock rate does not collide with an error. OK collisions 
+are very unlikely but it does still feel like an abuse of the macro to me.
+
+Is there any official guidance on this use of IS_ERR_VALUE()?
+
+Andrew
+
+> The current working clk error handling has really helped me time and
+> time again on Rockchip platform during soc and board bring-up.
+> 
+> This is a NAK for me without first having a proper replacement for all
+> existing working error handling that is just being left ignored after
+> this patch/series.
+> 
+> Regards,
+> Jonas
+> 
+>>
+>> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
+>> ---
+>>   drivers/clk/rockchip/clk_px30.c   | 24 +++++++--------
+>>   drivers/clk/rockchip/clk_rk3036.c |  2 +-
+>>   drivers/clk/rockchip/clk_rk3066.c |  8 ++---
+>>   drivers/clk/rockchip/clk_rk3128.c |  6 ++--
+>>   drivers/clk/rockchip/clk_rk3188.c |  6 ++--
+>>   drivers/clk/rockchip/clk_rk322x.c |  4 +--
+>>   drivers/clk/rockchip/clk_rk3288.c |  6 ++--
+>>   drivers/clk/rockchip/clk_rk3308.c | 26 ++++++++--------
+>>   drivers/clk/rockchip/clk_rk3328.c |  6 ++--
+>>   drivers/clk/rockchip/clk_rk3368.c |  8 ++---
+>>   drivers/clk/rockchip/clk_rk3399.c | 12 ++++----
+>>   drivers/clk/rockchip/clk_rk3528.c | 20 ++++++-------
+>>   drivers/clk/rockchip/clk_rk3568.c | 62 +++++++++++++++++++--------------------
+>>   drivers/clk/rockchip/clk_rk3576.c | 36 +++++++++++------------
+>>   drivers/clk/rockchip/clk_rk3588.c | 32 ++++++++++----------
+>>   drivers/clk/rockchip/clk_rv1108.c |  4 +--
+>>   drivers/clk/rockchip/clk_rv1126.c | 52 ++++++++++++++++----------------
+>>   17 files changed, 157 insertions(+), 157 deletions(-)
+
