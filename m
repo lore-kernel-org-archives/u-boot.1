@@ -4,84 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7707CCD1A5
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 20:36:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE93BCCD1A5
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 20:37:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3416E8323A;
-	Tue, 21 Oct 2025 22:36:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74CDB835C6;
+	Tue, 21 Oct 2025 22:37:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bFpbjigq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aJdUdpbe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 131D7832BC; Tue, 21 Oct 2025 22:36:57 +0200 (CEST)
-Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
- [IPv6:2607:f8b0:4864:20::c2b])
+ id AFEBD807C0; Tue, 21 Oct 2025 22:37:06 +0200 (CEST)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC998807C0
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 22:36:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 91C6C807C0
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 22:37:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2b.google.com with SMTP id
- 006d021491bc7-64990f4dba2so106323eaf.1
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 13:36:54 -0700 (PDT)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-7c28f5cf0fbso1284607a34.0
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 13:37:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761079013; x=1761683813; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=a4E8F0ImPgaYFUtoZzpfDyK1e1CU/ESG/Dqsg15Drh0=;
- b=bFpbjigqnNrwEmf2yIdcArSR5aR4Qe1XPwIHYvuDIGnwINqR0vQUe6JhPuVNOMhH+U
- 5QqM4mM76jZxEP2D0T5mwnEado4wYTzQSVxqXnmlEr7CtEjBwoPuVCKmD+VHIpkqTD8X
- wke+Q9uMXCAmkxDsXDHLAh7feMblFJxyRLOd0=
+ d=konsulko.com; s=google; t=1761079023; x=1761683823; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=w1p92grS+fKR6x9S4DwD66q1H+CSrALpFTX/4XcVWF4=;
+ b=aJdUdpbeA5XcEt+KiHCHt4URAazQby6YoSz5bX+S9412MiJjwJWTcKJkGK5+LmpWA6
+ uWkv2hoI/9vbyu0uCRfsx8P5s2BGvt9PsW08xOLo4aLx520ag5+9n+7EL/MofS9/mp+z
+ O8eP3byIBq3pVD88DQLwK6Y1GwglyQjl0pNiQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761079013; x=1761683813;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=a4E8F0ImPgaYFUtoZzpfDyK1e1CU/ESG/Dqsg15Drh0=;
- b=i+XRJrQwu7Bm0XJg5ArUFbmRSBLjBghSrR9Ie5MCBKYLwA7YoTCuHzr7ChTovQW32A
- AsGsxQMzV4/Rd7C7VHbeW2xrW7HOkNPNiZ6EM0hpeSfB6qNtO3Akzt0hUOdcpTN6LyDe
- 1IZ/cob9yQkh8V0x4setV6U58CST0tKmOcesVYa19XMB9K1x/TIGNrPYy4LnMV3V52hF
- C5vxWXGtDhD1gAJvOJoHGveGwHMIF2FHdBbU6q5kgEnvVoSU+ENTYEK00EuHN/X6snem
- xOs+V1gqWovgdDmCxgB17stXrhbPV8XmXCcaXig7IQRkUXhoNcPNdcy2EzkIqLiwWfgm
- rMZQ==
-X-Gm-Message-State: AOJu0YyEL6JHZru/FPXlSEH9mqQNU7jnJl1ZyfsdOJy35SsO6uIuzSo9
- qxfdz0nO9L8sbtt1fzThB9r8AunztXcX7Pq1DakftOdti3Bq/t2vcrL3bnClOGkJOzHBFtHilm8
- rtjNKsuE16Q==
-X-Gm-Gg: ASbGncusDSUT0YrWCGGTRvhM/3SraJJA7JZMV4VjySgwB8bGHkYrQXRTsqRHuiq/kDZ
- uhMmGUhzlbIIjzCXODgafrCy10I+COZkY3dLpvHKm1THcbBisvXQTBy8g+4+aOHZ4BrkOIR/Gc6
- NEAIE/Af+sTrzua02Tq2TuQWY2R03M78JHUgbeWrqO9aL4X+gyAI3RFlbBwWCMvuVajy27AJ7iP
- IBJoqin0C+HPkQ5AMj9lzijUA10cnURTT0y92mcsR9C1x2w/JfCn+r2AtyBGwnJnEbp+E0HNJqs
- GzcaeWPrDvb8p8fECr0nw0FwoLFq6chRklgyK4d/vjkCjZxclDpPzN8o9INdmAeSS8hQwrxYtNt
- 2BLzyB+yDjyDb0HxwSAn7V9KLXWX9r86rp14X3l18/5EmZ8s3w2rA+Teq+rLvrwZQAywYbSHfak
- 5yxXquWg4+NMfpeW/keavl++Dx/oRcIikKApoCrDzNVMInfFZl1Q==
-X-Google-Smtp-Source: AGHT+IH8Pj0/YYoAHAJ06TX4A3BymkgasbYyF60gQe3CpSH9pwltFQylns8P0vDxEjPuWe9QzLGnAQ==
-X-Received: by 2002:a05:6808:2219:b0:444:c761:c091 with SMTP id
- 5614622812f47-4495cfe5d00mr640405b6e.10.1761079013623; 
- Tue, 21 Oct 2025 13:36:53 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1761079023; x=1761683823;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=w1p92grS+fKR6x9S4DwD66q1H+CSrALpFTX/4XcVWF4=;
+ b=RByuVWwVuQdWmDcodJ06gSeJ0ffracGlLzQBAEc0k130XNjdUyC2u0MHc8RBtXbGg8
+ n5Po/mttyBjv1RUKgIpjbTHmEBCte7JCNP/ekMEkyuBt4Ip5/FM0I7nFaG82dWXOVf8P
+ A8xdwtsaFqbPqegqDsEfNVJrLmS/Yg7OyDwlI4PlwjmevWnG0l38eKj18ycTmmOxib6m
+ iSAcr7VZ7Kx9ACJ1FtzCYxAOR7TBlO2TighiUSsq8c8LEgo8OGs8IDuWs2rGLUru5MnQ
+ HCBnAMuPDEPI7SKPeNKErmDQjqil4SeXK5d259XAEI4PYLBmcUaja8xf0ak48jPXj8xV
+ hbpQ==
+X-Gm-Message-State: AOJu0YzUtSaKuO8I0mS3Ao1hDSSg5QiPMwVeon4qk4Sr0IohucOoHtJY
+ hrmwU+PkBOQlfXcj+bRiOI0VlidLl/Mykn1IJvCF7bM/ewQPSmNt9sZWbrfrFVYTgVNH2mpLXNq
+ Yz5w784cQlg==
+X-Gm-Gg: ASbGnctFjeGsu3TXGdz4r0vmtlncr2BMdTa1A014YgFm4d4iX8I3HUH07izJkrntvdj
+ tbo+trrEcoDpXdpA43O/V/SfvFit8hn0iO85Mf6Gm3/4qXWLAKWIsSQ9+y4PyD+otWRzunv1uej
+ YlbIJDDXH1Tvn9XaA4uN8q7HF7ESvZjZ0Yzpam+gIRboaW5AMTGnE57LER/Mc6QDX6wovqYbjhh
+ 2pIeQ9t2vmIxgfoEZRbR+Yj05fxjT+hT0yf7t4FJorTnghuXb0C5ls7BAK6KNd3kXqb1Fsc2Kdo
+ DxyRxxsRsdPvhy5btSwdSgEPNjd77p8dCJ4RYlIjtbNGsLi9CjE4sk+oUmRXwvegC6k7STxmIK5
+ s03j8nCvTSi/L+5Lb18+KPXtMKy0NXxlesNCnN3c1nItLpp2FCm4ToHy5Lg3WFNQr513/CVnLT/
+ UM70HcF6Jv/b2K9uUSkZfi1r2WpHdRAWYRKztr9cqiOnGyNeqfZxq5
+X-Google-Smtp-Source: AGHT+IF+0IHLUEyjnlt8opiux4zUvtt9jsbeLXWftpoiKAhRLHMKrutpig/ar3ZDEkwRNM1PtrgKxA==
+X-Received: by 2002:a05:6808:880c:b0:443:ea34:4018 with SMTP id
+ 5614622812f47-443ea4388b0mr5072571b6e.12.1761079023335; 
+ Tue, 21 Oct 2025 13:37:03 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-651f07086adsm1149647eaf.13.2025.10.21.13.36.52
+ 46e09a7af769-7c28879e8e2sm4039711a34.3.2025.10.21.13.37.02
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 13:36:52 -0700 (PDT)
-Date: Tue, 21 Oct 2025 14:36:50 -0600
+ Tue, 21 Oct 2025 13:37:02 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: jasper@fancydomain.eu
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com,
- Michael Glembotzki <Michael.Glembotzki@iris-sensing.com>
-Subject: Re: [PATCH] env: Invert gd->env_valid for env_mmc_save
-Message-ID: <20251021203650.GG6688@bill-the-cat>
-References: <20240510113834.826783-1-jasper@fancydomain.eu>
+To: u-boot@lists.denx.de
+Subject: [PATCH] env: fat, ubi: Fix gd->env_valid for the first write
+Date: Tue, 21 Oct 2025 14:37:01 -0600
+Message-ID: <20251021203701.1274692-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="c6Ax0ulaYdUCGKFo"
-Content-Disposition: inline
-In-Reply-To: <20240510113834.826783-1-jasper@fancydomain.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,53 +92,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+As resolved and explained in detail in commit e589d5822cac ("env: spi:
+Fix gd->env_valid for the first write") and archived discussion there is
+a corner case where we don't do the right thing with redundant
+environments. This same exact check was present in the mmc code and
+resolved with commit 813a0df27a8a ("env: Invert gd->env_valid for
+env_mmc_save") and in the discussion of that patch, I noted that both
+fat and ubi (and at the time, sf) were doing the same thing. Take the
+time now to correct fat and ubi environment.
 
---c6Ax0ulaYdUCGKFo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ env/fat.c | 2 +-
+ env/ubi.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-On Fri, May 10, 2024 at 01:38:34PM +0200, jasper@fancydomain.eu wrote:
+diff --git a/env/fat.c b/env/fat.c
+index 58c279ff7690..7e1648223838 100644
+--- a/env/fat.c
++++ b/env/fat.c
+@@ -104,7 +104,7 @@ static int env_fat_save(void)
+ 	}
+ 
+ #ifdef CONFIG_ENV_REDUNDANT
+-	gd->env_valid = (gd->env_valid == ENV_REDUND) ? ENV_VALID : ENV_REDUND;
++	gd->env_valid = gd->env_valid == ENV_VALID ? ENV_REDUND : ENV_VALID;
+ #endif
+ 
+ 	return 0;
+diff --git a/env/ubi.c b/env/ubi.c
+index f424b1a16e85..59bd96feb488 100644
+--- a/env/ubi.c
++++ b/env/ubi.c
+@@ -72,7 +72,7 @@ static int env_ubi_save(void)
+ 
+ 	puts("done\n");
+ 
+-	gd->env_valid = gd->env_valid == ENV_REDUND ? ENV_VALID : ENV_REDUND;
++	gd->env_valid = gd->env_valid == ENV_VALID ? ENV_REDUND : ENV_VALID;
+ 
+ 	return 0;
+ }
+-- 
+2.43.0
 
-> From: Jasper Orschulko <jasper@fancydomain.eu>
->=20
-> The A/B update strategy of the env's has a gap in the first 2 calls of sa=
-veenv.
-> The env's are stored twice on the first memory area if:
-> gd->env_valid =3D=3D ENV_INVALID.
->=20
-> u-boot=3D> saveenv
-> Saving Environment to MMC... Writing to MMC(1)... OK
-> u-boot=3D> saveenv
-> Saving Environment to MMC... Writing to MMC(1)... OK  <-- !!!
-> u-boot=3D> saveenv
-> Saving Environment to MMC... Writing to redundant MMC(1)... OK
-> u-boot=3D> saveenv
-> Saving Environment to MMC... Writing to MMC(1)... OK
->=20
-> Signed-off-by: Michael Glembotzki <Michael.Glembotzki@iris-sensing.com>
-> Signed-off-by: Jasper Orschulko <jasper@fancydomain.eu>
-
-Sorry for the extreme delay here. I was hoping for more feedback from
-others and then it slipped my mind. And then we had a long thread
-addressing this same problem for env/sf.c. So I've applied this now
-(with a slight reword to note the env/sf.c fix) and posted a patch to
-address env/fat.c and env/ubi.c.
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---c6Ax0ulaYdUCGKFo
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPfu2gAKCRAr4qD1Cr/k
-CiLmAPsEGLJ12lRSzsESadWM3xqp7oRhQieN0ymm7YdNh+PPkQD/ac/VEEOyIhZB
-q+14gEMSby7YeiyoXNw21Orm7Netows=
-=ygID
------END PGP SIGNATURE-----
-
---c6Ax0ulaYdUCGKFo--
