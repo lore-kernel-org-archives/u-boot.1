@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B58ECCD1A7
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 16:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54D8ECCD184
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 16:08:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8695E8323A;
-	Tue, 21 Oct 2025 18:08:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C7B95835B0;
+	Tue, 21 Oct 2025 18:08:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lggadvbb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gaQOjf/u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 337218334F; Tue, 21 Oct 2025 18:08:31 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 2793182B20; Tue, 21 Oct 2025 18:08:32 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28BEE80107
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 18:08:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34A8B82B20
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 18:08:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andrew.goodbody@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-3ecdf2b1751so3453849f8f.0
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 09:08:29 -0700 (PDT)
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-3ece1102998so4926197f8f.2
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 09:08:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761062908; x=1761667708; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=te/kVnAuwxpP5zRso/bFbvQ6eKCIslE4ks4TkRzpAks=;
- b=lggadvbbfGdn6UQmBl6wB5F2J/19RWc2jpe3KkjCw0NrKGMpfEr+aTu1x1uEBrdbL9
- z0A+S9LYu/GJM96zgISnD7qG7UG/O3zsuQnhnhuZU7+bet7iZZxh8ViJsuVY0cXstolb
- k1/uk52sOYWQZlTi1PYWhNwuW9glpH4L5JtFZ2vHbo+ffLXhx7PMX6XDCAdhsIw58N65
- lAVAQ3KHE5orJVK76/8NFREbN9EnysTvIbdUDWztwhL8qW5aMNMVCXLco22SRoiSf8No
- 4gEzNEL/xDyjhpdf3CGz1jRDmppiwtr/QbIgLot7rhK5an8hibo46/Qs9AKsYzjmQDNK
- 1cPQ==
+ d=linaro.org; s=google; t=1761062910; x=1761667710; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=hhO1CBL1fETXY44AkbZSlcIZaV9InnXlfZYhCJZciHc=;
+ b=gaQOjf/uUj/eP2dLXGVgkJl3JTtQgn8D5T8fLYOsovKjrGLsKcl+XxG/h+mMmHTyQd
+ nbU7IarBEQuFb1y6h2bw/slVNdXLujhdgIY1/F3nSgAN4ssWw1RB070qlnsTqnIr5B0C
+ BuAJcQHgMXwk3nXcR1EGW342aqYfcoJLh1XCYqll2P66lNcw3uMzNsaXLTM9hyNOGiNj
+ j9BKmm2tKmYc8//f1Z2wZkhR2Wyk1yEC6CiiXzTJ94bfYVu5XTPJWqZHkzO5LucksJdh
+ nyDdqkAM+3twJ4pqCVg/Y2YwPxTDUAK4VpIr6iUfiLbEFIcIYkBCTGOq+E6rfWNoQPuz
+ XtIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761062908; x=1761667708;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=te/kVnAuwxpP5zRso/bFbvQ6eKCIslE4ks4TkRzpAks=;
- b=QB4ohX9T5YqZaUxJImrQMP5WWmpM0H9Ybdtzq8JokuHvH9ousdpBcix1/UEEbwRK43
- SddDDKbuGPC089TqEOzK6Q3Qpn8/4GqNjU25E2rrfJc8B/LoSUIQDRvNtJSVgY7Me95P
- irCPa2xpmvB9yT1CazQjMoZvzbf8p0EeKGWJpYRHGObSWmoTxTb7LTklDPKwG581scbh
- UNW28y+OKpJo/0TKULG47zi3nh3zzztVBmKXWIt4VZZltamNYgIKATW7iE90otA4oG/P
- jwZYE7PEgb5v47+W+LehtaugKJwfio8MhnaPMyYclaETBvagPYMyj0tcEy4XUYlOLUZO
- /6AQ==
-X-Gm-Message-State: AOJu0YwjDZZ0Y+A3laQyrPUykPAKCPcOo6ckmQyjM/SZZW4RX7ARAac0
- yR5MReeiagPkY2Z+ot/BRWI/D2Gpx1vlYRDm+wmxt8x+DhX74nx3QUs+BiGgOtJyq+0=
-X-Gm-Gg: ASbGncvroXpRah5gbgrnNArkT4+UDVCa6UbvUjeGqSrFM9ylsQWx4JeN6aB1uVyjwer
- XqFnS55/cvfSkKaAkI9t+YeJ1hxyt06JGw7GIe8BMR1yK6Fh/XiAdcQj2h/IDK/bj/qHu2U1syS
- fZak3cRAkm9I6c5NkRRJF9wiM+ahJVdijx2vHafG74oMLXKTadrFZTIEuEM4W0mz6Od8T9jz830
- z/FZJtANIc88gVYXGjTLYJWLrZUDszFF1BRvAFCSnTQUfdm3YAIeNMDgsmzirszZFV/cUkcXOxd
- qV9BKEs6Ih8cjWho9aAv0/b3C8MdrveY3wfXhn1RWCdJ2SBxuPHFZPPuiOXrDtP0V6hR68EZCqY
- mSDRLq8w0KPGY8BKTXcZGqF4YcMzLjR13UMdaOQf7f/CHGVRy6uHtc8RTrUvmHYRNFAZqZohnbS
- v8eeHsGNk9OwDIvujy//PL7XhxwBywgsILAog+Sn/6lQweEi45
-X-Google-Smtp-Source: AGHT+IF1xbVyxdiXGJKgEZYUnPESNqX0jcV8AZAN3jx8wLUQ0uz/wOuHWa3mH4x9o7J9VhxQ9f0ONw==
-X-Received: by 2002:a05:6000:22c5:b0:425:7e45:a4df with SMTP id
- ffacd0b85a97d-42704d145dfmr12765765f8f.11.1761062908477; 
- Tue, 21 Oct 2025 09:08:28 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1761062910; x=1761667710;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hhO1CBL1fETXY44AkbZSlcIZaV9InnXlfZYhCJZciHc=;
+ b=KmtXgEN7GL8D6JlTPXMNEsz9GN9lOzcv8up6WcMdjZvugxEsVVIvL8OL3sWc3ySFHk
+ 8nHoHmBmSccpYfO0UlEfYRArSxIgwOLc+ZnIJ/c0+tNb0z8dMcklpcUvGxaDV3nEeHBN
+ u8spcuOGYz+TIYQdeby4BwJ7xaGGOHfp42rbuTuM6B+8wLyT51Sriwv2urGocbKJPX3J
+ +IfTwq7CionOrLdYwEXKMsRJHZ5qNQnL3N6SEyVg9YD81oIRaNVDv4XAIADHf+aRJGr2
+ xWMUjDjfQN4RRz6oJDF/9q8HvWb3r5QsTQ/v09d7/0ejFQ5DUXHHHkkjIS05ZJ0laQ3l
+ ldwA==
+X-Gm-Message-State: AOJu0YwlmtaZhuMWeRJ7Kgayzm45rHpMSz/yWIqJGF32z+fEh4LpsSlm
+ T91TPaqttOnhsr6YUCrHdR8fHxZbZcux1zxmaQBl5r70kGKQCooMLE4oKPUt6RgEfWg=
+X-Gm-Gg: ASbGnctHhCC9KB7F/5oplfA1yqrPV/BbgUsGF0HHEPEovI0yeAb0CiijWMHs9laRw8Y
+ h9q0e2hvrhkfZ+FqC2XrXheV+xOx5V6faO3UtW9KUHIVNMyTwNLqoVLZ0UB52/sfMNPom2aqdEI
+ WgD/GPtO0E9lm72cYjq+gg+RLCjCDHwYx8s2PJlN41Rq7y5bAW42DX1SQ5hUoalKIMowBpHn2Se
+ NIg8y95vpUCGDBbVf5RH33HigzvoM/OAOxZMSN9HsxaGgBbZ+YG8qyCzp46mjVL/Y9MaQPtMSDQ
+ I8ubKIUtvZx3R/hO1hHQpeGh1y95WqThmj4rUoRcDA12H9b3dbNr+VJdbLEQnhqOaPaFuQWPJM7
+ wky29oHcyIy2fSGIRbM0oAbfaXwlcY1Fw7RMz6yyvuS8CvSq3I6eR8GqX/kA/a7py58uAMpMUoB
+ mjW1CWSqCKCHa8pYHU/ZkC90SJOqU=
+X-Google-Smtp-Source: AGHT+IGtCD0fvt6cA/KhdAjvoZ0qq8bhudTw4oSMwbhvkcJ4OPm4lU+D1F0K/rl/SsO6TM9Nnys5iA==
+X-Received: by 2002:a05:6000:1884:b0:427:167:c2ce with SMTP id
+ ffacd0b85a97d-42704dc9f6cmr12811912f8f.42.1761062909590; 
+ Tue, 21 Oct 2025 09:08:29 -0700 (PDT)
 Received: from artemis2.elfringham.co.uk
  ([2a0a:ef40:fed:4601:ff54:533:2c9b:1f57])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427ea5b3ae9sm20830245f8f.13.2025.10.21.09.08.27
+ ffacd0b85a97d-427ea5b3ae9sm20830245f8f.13.2025.10.21.09.08.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 09:08:27 -0700 (PDT)
+ Tue, 21 Oct 2025 09:08:28 -0700 (PDT)
 From: Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: [PATCH 0/6] clk: Fix some error detection
-Date: Tue, 21 Oct 2025 17:08:24 +0100
-Message-Id: <20251021-clk_funcs-v1-0-acf51a40eea7@linaro.org>
+Date: Tue, 21 Oct 2025 17:08:25 +0100
+Subject: [PATCH 1/6] mmc: hi6220_dw_mmc: Fix error detection for clk_get_rate
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAPiv92gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAyMD3eSc7Pi00rzkYt1kY1NjM0sDM+NkwzQloPqCotS0zAqwWdGxtbU
- AjxxF7FsAAAA=
-X-Change-ID: 20251020-clk_funcs-c35369063c1f
+Message-Id: <20251021-clk_funcs-v1-1-acf51a40eea7@linaro.org>
+References: <20251021-clk_funcs-v1-0-acf51a40eea7@linaro.org>
+In-Reply-To: <20251021-clk_funcs-v1-0-acf51a40eea7@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, 
  Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>, 
@@ -107,38 +105,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The function clk_get_rate() returns a ulong with 0 meaning an invalid
-clock rate and also negative error codes being returned for other
-errors. But being an unsigned return value this cannot simply be tested
-for with a < 0 test. Instead use the IS_ERR_VALUE() macro to check for
-negative errors appearing as very large positive values. Fix those
-places that test for <= 0. Also fix some places checking the return of
-clk_register() that incorrectly used ERR_PTR().
+clk_get_rate() returns a ulong and that return value is assigned to a
+member of a struct that is an unsigned int. So testing this value to <=
+0 will only detect a return of 0. Also the code in the if block assumes
+ret holds the return value when it does not. So update the test to one
+that will work as intended and update the if block to actually refer to
+the return value.
 
 Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
 ---
-Andrew Goodbody (6):
-      mmc: hi6220_dw_mmc: Fix error detection for clk_get_rate
-      mmc: fsl_esdhc_imx: Cannot test unsigned to be < 0
-      clk: microchip: mpfs: Fix error detection
-      i2c: npcm: Fix error detection
-      i2c: imx_lpi2c: Fix error detection
-      timer: imx-gpt: Fix error detection
+ drivers/mmc/hi6220_dw_mmc.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
- drivers/clk/microchip/mpfs_clk_cfg.c    | 2 +-
- drivers/clk/microchip/mpfs_clk_msspll.c | 2 +-
- drivers/clk/microchip/mpfs_clk_periph.c | 2 +-
- drivers/i2c/imx_lpi2c.c                 | 2 +-
- drivers/i2c/npcm_i2c.c                  | 2 +-
- drivers/mmc/fsl_esdhc_imx.c             | 2 +-
- drivers/mmc/hi6220_dw_mmc.c             | 6 +++---
- drivers/timer/imx-gpt-timer.c           | 2 +-
- 8 files changed, 10 insertions(+), 10 deletions(-)
----
-base-commit: a58089ad2e41e88f81360f0e99bfd0715aceb556
-change-id: 20251020-clk_funcs-c35369063c1f
+diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+index 0302f5c296b90c6fd89f7d32b91758291499f6af..27609e90b1f4741dcb1a95afff8be5ce2d5e5a8a 100644
+--- a/drivers/mmc/hi6220_dw_mmc.c
++++ b/drivers/mmc/hi6220_dw_mmc.c
+@@ -114,9 +114,9 @@ static int hi6220_dwmmc_probe(struct udevice *dev)
+ 		}
+ 
+ 		host->bus_hz = clk_get_rate(priv->clks[HI6220_DWMMC_CLK_CIU]);
+-		if (host->bus_hz <= 0) {
+-			dev_err(dev, "Failed to get ciu clock rate(ret = %d).\n", ret);
+-			return log_msg_ret("clk", ret);
++		if (!host->bus_hz || IS_ERR_VALUE(host->bus_hz)) {
++			dev_err(dev, "Failed to get ciu clock rate(ret = %d).\n", host->bus_hz);
++			return log_msg_ret("clk", host->bus_hz);
+ 		}
+ 	}
+ 	dev_dbg(dev, "bus clock rate: %d.\n", host->bus_hz);
 
-Best regards,
 -- 
-Andrew Goodbody <andrew.goodbody@linaro.org>
+2.47.3
 
