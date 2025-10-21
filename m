@@ -4,40 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E049BCCD1A5
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 23:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BE00CCD1AB
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 23:54:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 711C5835B0;
-	Wed, 22 Oct 2025 01:11:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 490A8800B6;
+	Wed, 22 Oct 2025 01:54:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 121A283631; Wed, 22 Oct 2025 01:11:54 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 308D6835A2
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 01:11:52 +0200 (CEST)
+ id 4EC1A82B20; Wed, 22 Oct 2025 01:54:16 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id E855F80077
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 01:54:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from hay.lan (unknown [IPv6:2605:59c0:2078:cf00:6ecf:39ff:fe00:8375])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 5321EB2201DF;
- Wed, 22 Oct 2025 01:11:50 +0200 (CEST)
-From: E Shattow <e@freeshell.de>
-To: Tom Rini <trini@konsulko.com>, Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot@lists.denx.de,
-	E Shattow <e@freeshell.de>
-Subject: [PATCH v2 3/3] board: starfive: Add initial Milk-V Mars CM and Mars
- CM Lite user documentation
-Date: Tue, 21 Oct 2025 16:10:00 -0700
-Message-ID: <20251021231021.196336-4-e@freeshell.de>
-X-Mailer: git-send-email 2.50.0
-In-Reply-To: <20251021231021.196336-1-e@freeshell.de>
-References: <20251021231021.196336-1-e@freeshell.de>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6505E1063;
+ Tue, 21 Oct 2025 16:54:05 -0700 (PDT)
+Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
+ [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 79CDE3F66E;
+ Tue, 21 Oct 2025 16:54:12 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: u-boot@lists.denx.de
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Rudi Horn <dyn-git@rudi-horn.de>, linux-sunxi@lists.linux.dev
+Subject: [PATCH] sunxi: dram: detect non-power-of-2 sized DRAM chips
+Date: Wed, 22 Oct 2025 00:53:34 +0100
+Message-ID: <20251021235334.7557-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.46.4
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -56,90 +53,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initial board docs for Milk-V Mars CM (eMMC) and Milk-V Mars CM Lite
-(SD Card) to the visionfive2 board target.
+Some boards feature an "odd" DRAM size, where the total RAM is 1.5GB or
+3GB. Our existing DRAM size detection routines can only detect power-of-2
+sized configuration, and on those boards the DRAM size is overestimated,
+so this typically breaks the boot quite early.
 
-Signed-off-by: E Shattow <e@freeshell.de>
+There doesn't seem to be an easy explicit way to detect those odd-sized
+chips, but we can test whether the later part of the memory behaves like
+memory, by verifying that a written pattern can be read back.
+Experiments show that there is no aliasing effect here, as all locations
+in the unimplemented range always return some fixed pattern, and cannot
+be changed.
+
+Also so far all those boards use a factor of 3 of some lower power-of-2
+number, or 3/4th of some higher number. The size detection routine
+discovers the higher number, so we can check for some memory cells beyond
+75% of the detected size to be legit.
+
+Add a routine the inverts all bits at a given location in memory, and
+reads that back to prove that the new value was stored.
+Then test the memory cell at exactly 3/4th of the detected size, and cap
+the size of the memory to 75% when this test fails.
+
+This enables boards which ship with such odd memory sizes.
+
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
 ---
- doc/board/starfive/index.rst             |  2 ++
- doc/board/starfive/milkv_marscm_emmc.rst | 24 ++++++++++++++++++++++++
- doc/board/starfive/milkv_marscm_lite.rst | 24 ++++++++++++++++++++++++
- 3 files changed, 50 insertions(+)
- create mode 100644 doc/board/starfive/milkv_marscm_emmc.rst
- create mode 100644 doc/board/starfive/milkv_marscm_lite.rst
+Hi,
 
-diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
-index 66abc6f9d98..f85d7376b44 100644
---- a/doc/board/starfive/index.rst
-+++ b/doc/board/starfive/index.rst
-@@ -8,5 +8,7 @@ StarFive
+I don't really have a board with such an odd size to test that, though the
+function worked on a 12GB A733 board. But that's not supporting the SPL
+or any kind of DRAM init yet, so was tested out of context.
+I would be grateful if anyone with a 1.5GB or 3GB board could test this.
+
+Thanks,
+Andre
+
+ arch/arm/include/asm/arch-sunxi/dram.h |  1 +
+ arch/arm/mach-sunxi/dram_dw_helpers.c  | 16 +++++++++++++++-
+ arch/arm/mach-sunxi/dram_helpers.c     | 12 ++++++++++++
+ 3 files changed, 28 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/include/asm/arch-sunxi/dram.h b/arch/arm/include/asm/arch-sunxi/dram.h
+index 0eccb1e6c28..59e2e980bfa 100644
+--- a/arch/arm/include/asm/arch-sunxi/dram.h
++++ b/arch/arm/include/asm/arch-sunxi/dram.h
+@@ -45,5 +45,6 @@ unsigned long sunxi_dram_init(void);
+ void mctl_await_completion(u32 *reg, u32 mask, u32 val);
+ bool mctl_mem_matches(u32 offset);
+ bool mctl_mem_matches_base(u32 offset, ulong base);
++bool mctl_check_memory(phys_addr_t addr);
  
-    deepcomputing_fml13v01
-    milk-v_mars
-+   milkv_marscm_emmc
-+   milkv_marscm_lite
-    pine64_star64
-    visionfive2
-diff --git a/doc/board/starfive/milkv_marscm_emmc.rst b/doc/board/starfive/milkv_marscm_emmc.rst
-new file mode 100644
-index 00000000000..6956d3701bd
---- /dev/null
-+++ b/doc/board/starfive/milkv_marscm_emmc.rst
-@@ -0,0 +1,24 @@
-+.. SPDX-License-Identifier: GPL-2.0+
+ #endif /* _SUNXI_DRAM_H */
+diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunxi/dram_dw_helpers.c
+index 24767354935..14f6b24c30f 100644
+--- a/arch/arm/mach-sunxi/dram_dw_helpers.c
++++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+@@ -143,8 +143,22 @@ void mctl_auto_detect_dram_size(const struct dram_para *para,
+ 
+ unsigned long mctl_calc_size(const struct dram_config *config)
+ {
++	unsigned long size;
+ 	u8 width = config->bus_full_width ? 4 : 2;
+ 
+ 	/* 8 banks */
+-	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
++	size = (1ULL << (config->cols + config->rows + 3)) * width *
++		config->ranks;
 +
-+Milk-V Mars CM (eMMC)
-+=====================
++	/*
++	 * There are boards with non-power-of-2 sized DRAM chips, like 1.5GB
++	 * or 3GB. They are detected as the larger power-of-2 (2GB and 4GB),
++	 * so test the last quarter for being able to store values.
++	 */
++	if (!mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3)) {
++		size = (size / 4) * 3;
++		debug("capping memory at %ld MB\n", size >> 20);
++	}
 +
-+U-Boot for the Mars CM uses the same U-Boot binaries as the VisionFive 2 board.
-+Devicetree selection is made in U-Boot SPL at runtime, dependent on the content
-+of EEPROM.
++	return size;
+ }
+diff --git a/arch/arm/mach-sunxi/dram_helpers.c b/arch/arm/mach-sunxi/dram_helpers.c
+index 83dbe4ca98f..376b7d14f86 100644
+--- a/arch/arm/mach-sunxi/dram_helpers.c
++++ b/arch/arm/mach-sunxi/dram_helpers.c
+@@ -62,3 +62,15 @@ bool mctl_mem_matches(u32 offset)
+ 	return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
+ }
+ #endif
 +
-+Device-tree selection
-+---------------------
++bool mctl_check_memory(phys_addr_t addr)
++{
++	uint32_t orig, val;
 +
-+U-Boot will set variable $fdtfile to starfive/jh7110-milkv-marscm-emmc.dtb
-+dependent on the content of EEPROM.
++	orig = readl(addr);
++	writel(~orig, addr);
++	val = readl(addr);
++	writel(orig, addr);
 +
-+To overrule this selection the variable can be set manually and saved in the
-+environment
-+
-+::
-+
-+    env set fdtfile my_device-tree.dtb
-+    env save
-+
-+.. include:: jh7110_common.rst
-diff --git a/doc/board/starfive/milkv_marscm_lite.rst b/doc/board/starfive/milkv_marscm_lite.rst
-new file mode 100644
-index 00000000000..bea96dac399
---- /dev/null
-+++ b/doc/board/starfive/milkv_marscm_lite.rst
-@@ -0,0 +1,24 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+
-+Mars CM Lite (SD Card)
-+======================
-+
-+U-Boot for the Mars CM Lite uses the same U-Boot binaries as the VisionFive 2
-+board. Devicetree selection is made in U-Boot SPL at runtime, dependent on the
-+content of EEPROM.
-+
-+Device-tree selection
-+---------------------
-+
-+U-Boot will set variable $fdtfile to starfive/jh7110-milkv-marscm-lite.dtb
-+dependent on the content of EEPROM.
-+
-+To overrule this selection the variable can be set manually and saved in the
-+environment
-+
-+::
-+
-+    env set fdtfile my_device-tree.dtb
-+    env save
-+
-+.. include:: jh7110_common.rst
++	return ~orig == val;
++}
 -- 
-2.50.0
+2.46.4
 
