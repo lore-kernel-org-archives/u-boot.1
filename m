@@ -4,103 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB8ECCD1AA
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 13:49:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DF74CCD1A7
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 14:02:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E8BD80107;
-	Tue, 21 Oct 2025 15:49:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C8EF807C0;
+	Tue, 21 Oct 2025 16:02:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sDgt5gyr";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA85A802C1; Tue, 21 Oct 2025 15:49:15 +0200 (CEST)
-Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
- [IPv6:2001:4860:4864:20::34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30ADC800D7
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 15:49:13 +0200 (CEST)
+ id 61222829E7; Tue, 21 Oct 2025 16:02:53 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A580C800D7
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 16:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x34.google.com with SMTP id
- 586e51a60fabf-3c9859913d0so2677594fac.0
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 06:49:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761054552; x=1761659352; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=K0g21JA2SQ8X/HIC+pyPmDldAtFndEYevCcr/o8x5NE=;
- b=sDgt5gyroAgpB0k/tuvERSd4kvXKq2Q5xjfNCPy2gcK6t+tcLcS3mbeW/4sqXPYfZc
- TMzzvaxIipOVM1ekEvo4XzWZEKBm8ANS4TA6buWiJ98/YqO7iAwbFJJLfukRaCHu2eMX
- eQSVvdnn8oghffOMiyXcMqA/GaQQGrw3Jng2A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761054552; x=1761659352;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=K0g21JA2SQ8X/HIC+pyPmDldAtFndEYevCcr/o8x5NE=;
- b=PF152Mg2gpvvf2kCw0a+AWQE5CMYMBdIy4ucG6Fk6qpQWfpBnAkt5r4rzn9Xm9xzDr
- XrME9G/LdkzWFXjrcfQOruix9d0H5MRYMfmeZBoPopGAvGCK4uieYAgrh75W+qHhnvv3
- Oc0lM6+TzsOBepSND8R3SjPi5FM7F4SNhhvl7iEFFxKfTEUwzMHtGPB9hdwFtHQvI3x5
- ogzaAQrbOcSYaoorsFan5R7fdmskl1wnHDb0EuuWxjlyXsPe5O6mHEGMkfuC6jKkCCO2
- 2Atfo+1M0RZBjEzPNQt5oEXoEF1LCrX+3/7iUe4YOKGdLvnpMwTN7mT7LzzSankkiPzS
- weLw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVO7HN1Mc02lbsQxlPmAjCVNb8DS+QbxcSHjC6WPOUAj4F6rMgyzdBcx7ttxtw4exNJhUvbotk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwQ1iyIrdZBzN7RHXtYyBkuST4IN7QX9ioShUjEraz4j+/dpAGW
- uXeCmw6aqFfG8+D1N63OjjtoCQzHqPdTJTKxqfP2k/uSMLWDBCXFz7QbB9niEn5MAoU=
-X-Gm-Gg: ASbGncuULKXwbg7x0bs6D22NsvJi8DfudzyPigd0k7JLFafXdmlegGth55MMYwfnzYj
- dYWjrZXHT4b+wDhGq4TPm3RQUJvRv2ywZ/CQgQEhNyKuD+FLVf4GzAQ8kx9bKgqt0SAV18IdA0K
- 1rP4g6AjffrIzHCn7PBNZ/TCVQl/wBbebUnL2BRrnr5jSrM/KUh1qGPPuiRn2VSb8hxLH2woGbR
- XadWcJ2pSft9tY3alEtOlvEvUyVaoORGnqwr90m/KmncO/ZsSMdmIwnCo2XL87xk4RdyJSfMWM2
- jx9aFCVLtb2dvAxj0RSxD4ATk5/PpUS4IUttg/WUMEHa9Zd5cLKAf2snk3SlL5jvuvk2VGDs+n8
- aE5owcq+rdJv1KcXwdxyNPTTUTZVAVRaZhG8oVDsxfoc/6580A9gw57oZnxxwnfMd9KgyoQNAB/
- 4rbFpyQbGwwBWD9/XDhE/QLp341M83Bj9iX/Z7wFS1Wz6s4scYLg==
-X-Google-Smtp-Source: AGHT+IG1ZBNvg/EvoOe94oKqh2/yF92eAq+r2Wo04u6+0veo4kAl3MnK4sDEenI5YSaRn8nq8UxiRw==
-X-Received: by 2002:a05:6870:959a:b0:3c1:68a1:6b10 with SMTP id
- 586e51a60fabf-3c98cf25491mr6890357fac.6.1761054551721; 
- Tue, 21 Oct 2025 06:49:11 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c9af31d53bsm3137975fac.12.2025.10.21.06.49.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 06:49:10 -0700 (PDT)
-Date: Tue, 21 Oct 2025 07:49:07 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 00/20] Convert extension support to UCLASS and adds
- its support to boot flows
-Message-ID: <20251021134907.GB6688@bill-the-cat>
-References: <20251020141548.GS6688@bill-the-cat>
- <20251020143729.GW6688@bill-the-cat>
- <20251020171613.76ffddac@kmaincent-XPS-13-7390>
- <20251020160527.GY6688@bill-the-cat>
- <20251020190854.4b318829@kmaincent-XPS-13-7390>
- <20251020171707.GA6688@bill-the-cat> <87h5vsbt2t.fsf@kernel.org>
- <20251021110225.2d94a13b@kmaincent-XPS-13-7390>
- <CAFLszTjw+LTvspVNrnxmc+kii+vMPU1qzV=1y3BSwWGXEvoagw@mail.gmail.com>
- <20251021144430.139b754b@kmaincent-XPS-13-7390>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 280BA150C;
+ Tue, 21 Oct 2025 07:02:42 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E2A413F66E;
+ Tue, 21 Oct 2025 07:02:48 -0700 (PDT)
+Date: Tue, 21 Oct 2025 15:02:46 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Paul Kocialkowski <paulk@sys-base.io>
+Cc: linux-sunxi <linux-sunxi@lists.linux.dev>, <u-boot@lists.denx.de>, Tom
+ Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>, Chen-Yu
+ Tsai <wens@csie.org>, Icenowy Zheng <icenowy@aosc.xyz>, Paul Kocialkowski
+ <contact@paulk.fr>
+Subject: Re: [PATCH v2 02/11] sunxi: Split V3 and V3s support with a common
+ option
+Message-ID: <20251021150246.5d2e2e50@donnerap.manchester.arm.com>
+In-Reply-To: <aJOP3wAAw0ZqibpX@collins>
+References: <20250805174827.3696191-1-paulk@sys-base.io>
+ <20250805174827.3696191-3-paulk@sys-base.io>
+ <20250806012146.26121400@minigeek.lan> <aJOP3wAAw0ZqibpX@collins>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EKLHVpO/lVi4bKQk"
-Content-Disposition: inline
-In-Reply-To: <20251021144430.139b754b@kmaincent-XPS-13-7390>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,241 +62,476 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 6 Aug 2025 19:24:47 +0200
+Paul Kocialkowski <paulk@sys-base.io> wrote:
 
---EKLHVpO/lVi4bKQk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Tue, Oct 21, 2025 at 02:44:30PM +0200, Kory Maincent wrote:
-> On Tue, 21 Oct 2025 10:52:05 +0100
-> Simon Glass <sjg@chromium.org> wrote:
+sorry for the late reply, had to think a bit about this.
+
+> Le Wed 06 Aug 25, 01:21, Andre Przywara a =C3=A9crit :
+> > On Tue,  5 Aug 2025 19:48:18 +0200
+> > Paul Kocialkowski <paulk@sys-base.io> wrote:
+> >=20
+> > Hi Paul,
+> >  =20
+> > > From: Paul Kocialkowski <contact@paulk.fr>
+> > >=20
+> > > There are a few notable differences that are relevant to U-Boot, incl=
+uding:
+> > > - different DRAM configuration due to the co-packaged DRAM chip in V3=
+s;
+> > > - use of an external PMIC (typically an AXP209) on V3;
+> > > - extra pins available on V3, e.g. for UART1. =20
+> >=20
+> > Mmmh, to be honest I am not really convinced this is useful. The patch
+> > below looks roughly like a big s/MACH_SUN8I_V3S/MACH_SUN8I_V3_V3S/,
+> > which I am not sure is really worth it. We had not super accurate names
+> > before, after all those are just marketing names that Allwinner once
+> > came up with. So we use MACH_SUN55I_A523, even though it's mostly
+> > A527 or T527 chips, really, for instance. =20
 >=20
-> > Hi Kory,
+> Yes I think this case is a bit different because there is actually a diff=
+erence
+> not just in the packaging and pins available but also because a dram die =
+is
+> co-packaged with the sun8i chip.
+
+I still think it's an edge case of the normal DRAM-is-on-the-board scheme.
+We can just treat is to be the same DRAM on all boards, which from a pure
+DRAM init point of view is often the case anyway, even for non-co-packaged
+DRAM. As Icenowy mentioned, we treat it like this for the F1C100s and
+T113-s[34] (now).
+So what is the actual DRAM difference? I am probably missing it, but I
+can't seem to find any separate handling about this in this series?
+
+> > For the three actually differing items you mention above: I think we
+> > can treat the DRAM and external PMIC like board options, and could
+> > describe the extra pins either unconditionally or drop them at all (see
+> > my comment there).
 > >=20
-> > On Tue, Oct 21, 2025, 10:02 Kory Maincent <kory.maincent@bootlin.com> w=
-rote:
-> >=20
-> > > On Tue, 21 Oct 2025 09:40:58 +0200
-> > > Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
-> > > =20
-> > > > On Mon, Oct 20, 2025 at 11:17, Tom Rini <trini@konsulko.com> wrote:
-> > > > =20
-> > > > > On Mon, Oct 20, 2025 at 07:08:54PM +0200, Kory Maincent wrote: =
-=20
-> > > > >> On Mon, 20 Oct 2025 10:05:27 -0600
-> > > > >> Tom Rini <trini@konsulko.com> wrote:
-> > > > >> =20
-> > > > >> > On Mon, Oct 20, 2025 at 05:23:45PM +0200, Kory Maincent wrote:=
- =20
-> > > > >> > > On Mon, 20 Oct 2025 08:37:29 -0600
-> > > > >> > > Tom Rini <trini@konsulko.com> wrote:
-> > > > >> > > =20
-> > > > >> > > > On Mon, Oct 20, 2025 at 08:15:48AM -0600, Tom Rini wrote: =
-=20
-> > > > >> > > > > On Mon, Oct 20, 2025 at 11:50:09AM +0200, Kory Maincent =
-wrote:
-> > > > >> > > > > =20
-> > > > >> > > > > > On Sun, 19 Oct 2025 10:48:37 -0600
-> > > > >> > > > > > Tom Rini <trini@konsulko.com> wrote:
-> > > > >> > > > > > =20
-> > > > >> > > > > > > On Sun, Oct 19, 2025 at 02:05:51PM +0100, Simon Glas=
-s =20
-> > > wrote: =20
-> > > > >> > > > > > > =20
-> > > > >> > > > > > > > Hi Kory,
-> > > > >> > > > > > > >
-> > > > >> > > > > > > > On Mon, 13 Oct 2025 at 14:32, Kory Maincent (TI.co=
-m)
-> > > > >> > > > > > > > <kory.maincent@bootlin.com> wrote: =20
-> > > > >> > > > > > > > >
-> > > > >> > > > > > > > > This series converts the extension board framewo=
-rk to =20
-> > > use =20
-> > > > >> > > > > > > > > UCLASS as requested by Simon Glass, then adds =
-=20
-> > > extension =20
-> > > > >> > > > > > > > > support to pxe_utils and bootmeth_efi (not teste=
-d) to
-> > > > >> > > > > > > > > enable extension boards devicetree load in the =
-=20
-> > > standard =20
-> > > > >> > > > > > > > > boot process.
-> > > > >> > > > > > > > >
-> > > > >> > > > > > > > > I can't test the imx8 extension scan enabled by =
-the
-> > > > >> > > > > > > > > imx8mm-cl-iot-gate_defconfig as I don't have thi=
-s =20
-> > > board. =20
-> > > > >> > > > > > > > > I also can't test the efi bootmeth change as I d=
-on't =20
-> > > have =20
-> > > > >> > > > > > > > > such board. =20
-> > > > >> > > > > > > >
-> > > > >> > > > > > > > You can test this with sandbox, using one of the =
-=20
-> > > bootmeth =20
-> > > > >> > > > > > > > tests, perhaps. Let me know if you need help with =
-this.
-> > > > >> > > > > > > > =20
-> > > > >> > > > > > >
-> > > > >> > > > > > > But the question is, does the real hardware platform=
- work
-> > > > >> > > > > > > before/after this, not does the sandbox test still w=
-ork
-> > > > >> > > > > > > before/after this. =20
-> > > > >> > > > > >
-> > > > >> > > > > > It seems the bootlflow scan is not working on the sand=
-box =20
-> > > on next =20
-> > > > >> > > > > > branch. Is this issue known? =20
-> > > > >> > > > >
-> > > > >> > > > > Is it fine on master? The next branch will be out of dat=
-e =20
-> > > until it =20
-> > > > >> > > > > re-opens with -rc2 being released (2 weeks from today). =
-=20
-> > > > >> > > >
-> > > > >> > > > ... out of sync local calendar, 3 weeks from today, not 2.=
- =20
-> > > > >> > >
-> > > > >> > > bootstd test suit is not working on master with the =20
-> > > sandbox_defconfig: =20
-> > > > >> > > https://termbin.com/un0p
-> > > > >> > >
-> > > > >> > > Noticeable things are;
-> > > > >> > > test/boot/bootdev.c:160, bootdev_test_any(): 0 =3D=3D
-> > > > >> > > bootdev_find_by_any(seq, &dev, &mflags): Expected 0x0 (0), g=
-ot
-> > > > >> > > 0xffffffed (-19) Test: bootdev_test_any: bootdev.c (flat tre=
-e)
-> > > > >> > > test/boot/bootdev.c:160, bootdev_test_any(): 0 =3D=3D
-> > > > >> > > bootdev_find_by_any(seq, &dev, &mflags): Expected 0x0 (0), g=
-ot
-> > > > >> > > 0xffffffed (-19) Test 'bootdev_test_any' failed 2 times
-> > > > >> > >
-> > > > >> > > And a nice segfault:
-> > > > >> > > Test: bootflow_set_arg: bootflow.c
-> > > > >> > > Test: bootflow_system: bootflow.c
-> > > > >> > > [3]    569337 segmentation fault (core dumped)  ./u-boot
-> > > > >> > >
-> > > > >> > > Maybe things are missing to run sandbox_defconfig on my comp=
-uter?
-> > > > >> > > With the sandbox64_defconfig there is not core dump anymore =
-but =20
-> > > there =20
-> > > > >> > > is still the failed line:
-> > > > >> > > Test 'bootdev_test_bootable' failed 2 times
-> > > > >> > >
-> > > > >> > > And the uboot is reboot infinitely during the bootflow test:
-> > > > >> > > ./u-boot -T -c "ut bootstd"
-> > > > >> > > https://termbin.com/alu5 =20
-> > > > >> >
-> > > > >> > I see the same thing you do when running them outside of pytes=
-t, but
-> > > > >> > they're also fine within pytest.
-> > > > >> > https://docs.u-boot.org/en/latest/develop/pytest/usage.html sh=
-ould =20
-> > > help =20
-> > > > >> > get you started, and you can just run all of the ut tests unde=
-r =20
-> > > that. =20
-> > > > >>
-> > > > >> Weird I got errors also within pytest.
-> > > > >> See the html test log attached generated by the following comman=
-d:
-> > > > >> ./test/py/test.py --bd sandbox -k bootstd =20
-> > > > >
-> > > > > Same. There's some implicit dependencies around I believe. Doing =
-"-k =20
-> > > ut" =20
-> > > > > should work, as I tried that (via my wrapper around all this) as =
-well =20
-> > > as =20
-> > > > > just running all the tests (which is longer). =20
-> > > >
-> > > > That's my understanding as well
-> > > >
-> > > > In Kory's log we see:
-> > > >
-> > > >         MMC:   Can't map file 'mmc1.img': Invalid argument
-> > > >            sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
-> > > >         Can't map file 'mmc1.img': Invalid argument
-> > > >            sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
-> > > >                    mmc_probe() mmc1 - probe failed: -1
-> > > >         mmc2: 2 (SD)Can't map file 'mmc1.img': Invalid argument
-> > > >            sandbox_mmc_probe() mmc1: Unable to map file 'mmc1.img'
-> > > >         , mmc0: 0 (SD)
-> > > >
-> > > > These mmc1.img are needed for the bootstd tests to run properly.
-> > > >
-> > > > These mmc*.img are generated in test_ut.py (see setup_cros_image() =
-for
-> > > > example)
-> > > >
-> > > > So, In order to only run the bootstd tests, I think we need to to r=
-un:
-> > > >
-> > > >     $ ./test/py/test.py --bd sandbox --build -k test_ut
-> > > >     $ ./test/py/test.py --bd sandbox --build -k bootstd
-> > > >
-> > > > Then we can just call:
-> > > >
-> > > >     $ ./test/py/test.py --bd sandbox --build -k bootstd =20
-> > >
-> > > Ok after installing missing dependencies and running test_ut tests I =
+> > What do you think? Is that distinction on the Kconfig level really
+> > necessary? =20
+>=20
+> I think it is preferable because the DRAM die co-packaged with the chip is
+> definitely not a board-specific choice, so I would rather see the DRAM-re=
+lated
+> details handled by the common Kconfig rather than duplicated over each V3s
+> board.
+>
+> For the PMIC it mostly remains a board-specific option and is not enabled=
+ by
+> default anyway, it's just the defaults that are updated. Apparently there=
+ are
+> designs with V3s that use an AXP209 PMIC so the defaults could actually go
+> to the common option.
+>=20
+> Another approach here could be to keep a single MACH_SUN8I_V3 option and =
 have
-> > > less
-> > > errors but there are still bootflow errors. See the test-log attached.
-> > > I suppose all the tests should pass, right?
+> an extra one to select the co-packaged DRAM that only V3s boards would se=
+lect
+> in their config. If it's the rename that bothers you we could keep the
+> MACH_SUN8I_V3S name but I think it would be significantly more confusing.
+
+Yes, I would prefer that: reduce the churn by keeping the current option,
+even if the naming is not fully correct. We often go with the name of the
+first available chip, and then I like to keep that even in light of new
+names showing up: H616->H313/H618/H700, or A523->A527/T527, and
+especially R528->T113, which is basically this very same case.=20
+
+And then have a special option to select the DRAM configs common to the V3s
+or V3, maybe. But again, what would that be, exactly? Is this outside of
+this series?
+
+Cheers,
+Andre
+
+>=20
+> What do you think?
+>=20
+> Paul
+>=20
+> > Cheers,
+> > Andre
+> >  =20
+> > > Move the exiting V3s config to a common option and introduce specific=
+ options
+> > > for V3s and V3 to set specific aspects and reflect this all round the=
+ tree.
+> > >=20
+> > > Also update the pinecube config to reflect the updated defaults.
+> > >=20
+> > > Signed-off-by: Paul Kocialkowski <contact@paulk.fr>
+> > > ---
+> > >  arch/arm/dts/Makefile                       |  2 +-
+> > >  arch/arm/include/asm/arch-sunxi/cpu.h       |  2 +-
+> > >  arch/arm/include/asm/arch-sunxi/cpu_sun4i.h |  2 +-
+> > >  arch/arm/mach-sunxi/Kconfig                 | 41 +++++++++++++------=
+--
+> > >  arch/arm/mach-sunxi/board.c                 |  2 +-
+> > >  arch/arm/mach-sunxi/cpu_info.c              |  2 +
+> > >  arch/arm/mach-sunxi/dram_sunxi_dw.c         | 18 ++++-----
+> > >  arch/arm/mach-sunxi/spl_spi_sunxi.c         |  2 +-
+> > >  board/sunxi/board.c                         |  2 +-
+> > >  configs/pinecube_defconfig                  |  3 +-
+> > >  drivers/clk/sunxi/Kconfig                   |  2 +-
+> > >  drivers/phy/allwinner/Kconfig               |  2 +-
+> > >  drivers/pinctrl/sunxi/Kconfig               |  2 +-
+> > >  drivers/power/Kconfig                       |  2 +-
+> > >  14 files changed, 47 insertions(+), 37 deletions(-)
+> > >=20
+> > > diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> > > index 0dc7e190eb93..3d93679058c8 100644
+> > > --- a/arch/arm/dts/Makefile
+> > > +++ b/arch/arm/dts/Makefile
+> > > @@ -646,7 +646,7 @@ dtb-$(CONFIG_MACH_SUN8I_R40) +=3D \
+> > >  	sun8i-r40-oka40i-c.dtb \
+> > >  	sun8i-t3-cqa3t-bv3.dtb \
+> > >  	sun8i-v40-bananapi-m2-berry.dtb
+> > > -dtb-$(CONFIG_MACH_SUN8I_V3S) +=3D \
+> > > +dtb-$(CONFIG_MACH_SUN8I_V3_V3S) +=3D \
+> > >  	sun8i-s3-elimo-initium.dtb \
+> > >  	sun8i-s3-pinecube.dtb \
+> > >  	sun8i-v3-sl631-imx179.dtb \
+> > > diff --git a/arch/arm/include/asm/arch-sunxi/cpu.h b/arch/arm/include=
+/asm/arch-sunxi/cpu.h
+> > > index 768c6572d6b7..bd9dd97b890b 100644
+> > > --- a/arch/arm/include/asm/arch-sunxi/cpu.h
+> > > +++ b/arch/arm/include/asm/arch-sunxi/cpu.h
+> > > @@ -18,7 +18,7 @@
 > > > =20
-> >=20
-> > How are you running the tests? This is described in the docs. Search for
-> > 'tests'.
-> >=20
-> > https://docs.u-boot.org/en/latest/develop/tests_sandbox.html#running-sa=
-ndbox-tests-directly
+> > >  #define SOCID_A64	0x1689
+> > >  #define SOCID_H3	0x1680
+> > > -#define SOCID_V3S	0x1681
+> > > +#define SOCID_V3_V3S	0x1681
+> > >  #define SOCID_H5	0x1718
+> > >  #define SOCID_R40	0x1701
+> > > =20
+> > > diff --git a/arch/arm/include/asm/arch-sunxi/cpu_sun4i.h b/arch/arm/i=
+nclude/asm/arch-sunxi/cpu_sun4i.h
+> > > index f023a4cfd934..3212b818286c 100644
+> > > --- a/arch/arm/include/asm/arch-sunxi/cpu_sun4i.h
+> > > +++ b/arch/arm/include/asm/arch-sunxi/cpu_sun4i.h
+> > > @@ -13,7 +13,7 @@
+> > > =20
+> > >  #if defined(CONFIG_SUNXI_GEN_SUN6I) && \
+> > >      !defined(CONFIG_MACH_SUN8I_R40) && \
+> > > -    !defined(CONFIG_MACH_SUN8I_V3S)
+> > > +    !defined(CONFIG_MACH_SUN8I_V3_V3S)
+> > >  #define SUNXI_SRAM_A2_BASE		0x00040000
+> > >  #ifdef CONFIG_MACH_SUN8I_H3
+> > >  #define SUNXI_SRAM_A2_SIZE		(48 * 1024)	/* 16+32 kiB */
+> > > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> > > index 5a696095586e..f0faa9f80a23 100644
+> > > --- a/arch/arm/mach-sunxi/Kconfig
+> > > +++ b/arch/arm/mach-sunxi/Kconfig
+> > > @@ -476,17 +476,13 @@ config MACH_SUN8I_R528
+> > >  	select SUPPORT_SPL
+> > >  	select DRAM_SUN20I_D1
+> > > =20
+> > > +config MACH_SUN8I_V3
+> > > +	bool "sun8i (Allwinner V3/S3/S3L)"
+> > > +	select MACH_SUN8I_V3_V3S
+> > > +
+> > >  config MACH_SUN8I_V3S
+> > > -	bool "sun8i (Allwinner V3/V3s/S3/S3L)"
+> > > -	select CPU_V7A
+> > > -	select CPU_V7_HAS_NONSEC
+> > > -	select CPU_V7_HAS_VIRT
+> > > -	select ARCH_SUPPORT_PSCI
+> > > -	select SUNXI_GEN_SUN6I
+> > > -	select SUNXI_DRAM_DW
+> > > -	select SUNXI_DRAM_DW_16BIT
+> > > -	select SUPPORT_SPL
+> > > -	select ARMV7_BOOT_SEC_DEFAULT if OLD_SUNXI_KERNEL_COMPAT
+> > > +	bool "sun8i (Allwinner V3s)"
+> > > +	select MACH_SUN8I_V3_V3S
+> > > =20
+> > >  config MACH_SUN9I
+> > >  	bool "sun9i (Allwinner A80)"
+> > > @@ -562,7 +558,20 @@ config MACH_SUN8I
+> > >  	default y if MACH_SUN8I_A83T
+> > >  	default y if MACH_SUNXI_H3_H5
+> > >  	default y if MACH_SUN8I_R40
+> > > -	default y if MACH_SUN8I_V3S
+> > > +	default y if MACH_SUN8I_V3_V3S
+> > > +
+> > > +config MACH_SUN8I_V3_V3S
+> > > +	bool "sun8i (Allwinner V3/V3s/S3/S3L)"
+> > > +	depends on MACH_SUN8I_V3 || MACH_SUN8I_V3S
+> > > +	select CPU_V7A
+> > > +	select CPU_V7_HAS_NONSEC
+> > > +	select CPU_V7_HAS_VIRT
+> > > +	select ARCH_SUPPORT_PSCI
+> > > +	select SUNXI_GEN_SUN6I
+> > > +	select SUNXI_DRAM_DW
+> > > +	select SUNXI_DRAM_DW_16BIT
+> > > +	select SUPPORT_SPL
+> > > +	select ARMV7_BOOT_SEC_DEFAULT if OLD_SUNXI_KERNEL_COMPAT
+> > > =20
+> > >  config RESERVE_ALLWINNER_BOOT0_HEADER
+> > >  	bool "reserve space for Allwinner boot0 header"
+> > > @@ -719,7 +728,7 @@ config DRAM_CLK
+> > >  	default 792 if MACH_SUN9I
+> > >  	default 648 if MACH_SUN8I_R40
+> > >  	default 360 if MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || \
+> > > -		       MACH_SUN8I_V3S
+> > > +		       MACH_SUN8I_V3_V3S
+> > >  	default 312 if MACH_SUN6I || MACH_SUN8I
+> > >  	default 672 if MACH_SUN50I
+> > >  	default 744 if MACH_SUN50I_H6
+> > > @@ -747,7 +756,7 @@ config DRAM_ZQ
+> > >  	default 123 if MACH_SUN4I || MACH_SUN5I || MACH_SUN6I || \
+> > >  		       MACH_SUN8I_A23 || MACH_SUN8I_A33 || MACH_SUN8I_A83T
+> > >  	default 127 if MACH_SUN7I
+> > > -	default 14779 if MACH_SUN8I_V3S
+> > > +	default 14779 if MACH_SUN8I_V3_V3S
+> > >  	default 3881979 if MACH_SUNXI_H3_H5 || MACH_SUN8I_R40 || MACH_SUN50=
+I_H6
+> > >  	default 4145117 if MACH_SUN9I
+> > >  	default 3881915 if MACH_SUN50I
+> > > @@ -877,7 +886,7 @@ config SYS_SOC
+> > >  config SUNXI_MINIMUM_DRAM_MB
+> > >  	int "minimum DRAM size"
+> > >  	default 32 if MACH_SUNIV
+> > > -	default 64 if MACH_SUN8I_V3S
+> > > +	default 64 if MACH_SUN8I_V3_V3S
+> > >  	default 256
+> > >  	---help---
+> > >  	Minimum DRAM size expected on the board. Traditionally we assumed
+> > > @@ -963,7 +972,7 @@ config VIDEO_SUNXI
+> > >  	depends on !MACH_SUN8I_A83T
+> > >  	depends on !MACH_SUNXI_H3_H5
+> > >  	depends on !MACH_SUN8I_R40
+> > > -	depends on !MACH_SUN8I_V3S
+> > > +	depends on !MACH_SUN8I_V3_V3S
+> > >  	depends on !MACH_SUN9I
+> > >  	depends on !MACH_SUN50I
+> > >  	depends on !SUN50I_GEN_H6
+> > > @@ -1186,7 +1195,7 @@ config SPL_STACK_R_ADDR
+> > > =20
+> > >  config SPL_SPI_SUNXI
+> > >  	bool "Support for SPI Flash on Allwinner SoCs in SPL"
+> > > -	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_=
+H5 || MACH_SUN50I || MACH_SUN8I_R40 || MACH_SUN8I_V3S || SUN50I_GEN_H6 || M=
+ACH_SUNIV || SUNXI_GEN_NCAT2
+> > > +	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_=
+H5 || MACH_SUN50I || MACH_SUN8I_R40 || MACH_SUN8I_V3_V3S || SUN50I_GEN_H6 |=
+| MACH_SUNIV || SUNXI_GEN_NCAT2
+> > >  	help
+> > >  	  Enable support for SPI Flash. This option allows SPL to read from
+> > >  	  sunxi SPI Flash. It uses the same method as the boot ROM, so does
+> > > diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+> > > index fb4837c2082d..a1a02b0fae50 100644
+> > > --- a/arch/arm/mach-sunxi/board.c
+> > > +++ b/arch/arm/mach-sunxi/board.c
+> > > @@ -149,7 +149,7 @@ static int gpio_init(void)
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPB(9), SUN8I_A83T_GPB_UART0);
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPB(10), SUN8I_A83T_GPB_UART0);
+> > >  	sunxi_gpio_set_pull(SUNXI_GPB(10), SUNXI_GPIO_PULL_UP);
+> > > -#elif CONFIG_CONS_INDEX =3D=3D 1 && defined(CONFIG_MACH_SUN8I_V3S)
+> > > +#elif CONFIG_CONS_INDEX =3D=3D 1 && defined(CONFIG_MACH_SUN8I_V3_V3S)
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPB(8), SUN8I_V3S_GPB_UART0);
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPB(9), SUN8I_V3S_GPB_UART0);
+> > >  	sunxi_gpio_set_pull(SUNXI_GPB(9), SUNXI_GPIO_PULL_UP);
+> > > diff --git a/arch/arm/mach-sunxi/cpu_info.c b/arch/arm/mach-sunxi/cpu=
+_info.c
+> > > index c3a51d9956ec..5b03dcdc354d 100644
+> > > --- a/arch/arm/mach-sunxi/cpu_info.c
+> > > +++ b/arch/arm/mach-sunxi/cpu_info.c
+> > > @@ -90,6 +90,8 @@ int print_cpuinfo(void)
+> > >  	printf("CPU:   Allwinner H3 (SUN8I %04x)\n", sunxi_get_sram_id());
+> > >  #elif defined CONFIG_MACH_SUN8I_R40
+> > >  	printf("CPU:   Allwinner R40 (SUN8I %04x)\n", sunxi_get_sram_id());
+> > > +#elif defined CONFIG_MACH_SUN8I_V3
+> > > +	printf("CPU:   Allwinner V3/S3/S3L (SUN8I %04x)\n", sunxi_get_sram_=
+id());
+> > >  #elif defined CONFIG_MACH_SUN8I_V3S
+> > >  	printf("CPU:   Allwinner V3s (SUN8I %04x)\n", sunxi_get_sram_id());
+> > >  #elif defined CONFIG_MACH_SUN8I_R528
+> > > diff --git a/arch/arm/mach-sunxi/dram_sunxi_dw.c b/arch/arm/mach-sunx=
+i/dram_sunxi_dw.c
+> > > index 4ed295909ceb..56d03027b933 100644
+> > > --- a/arch/arm/mach-sunxi/dram_sunxi_dw.c
+> > > +++ b/arch/arm/mach-sunxi/dram_sunxi_dw.c
+> > > @@ -254,7 +254,7 @@ static void mctl_set_master_priority(uint16_t soc=
+id)
+> > >  	case SOCID_H3:
+> > >  		mctl_set_master_priority_h3();
+> > >  		return;
+> > > -	case SOCID_V3S:
+> > > +	case SOCID_V3_V3S:
+> > >  		mctl_set_master_priority_v3s();
+> > >  		return;
+> > >  	case SOCID_A64:
+> > > @@ -445,7 +445,7 @@ static void mctl_sys_init(uint16_t socid, struct =
+dram_para *para)
+> > >  				CCM_DRAMCLK_CFG_DIV(1) |
+> > >  				CCM_DRAMCLK_CFG_SRC_PLL11 |
+> > >  				CCM_DRAMCLK_CFG_UPD);
+> > > -	} else if (socid =3D=3D SOCID_H3 || socid =3D=3D SOCID_H5 || socid =
+=3D=3D SOCID_V3S) {
+> > > +	} else if (socid =3D=3D SOCID_H3 || socid =3D=3D SOCID_H5 || socid =
+=3D=3D SOCID_V3_V3S) {
+> > >  		clock_set_pll5(CONFIG_DRAM_CLK * 2 * 1000000, false);
+> > >  		clrsetbits_le32(&ccm->dram_clk_cfg,
+> > >  				CCM_DRAMCLK_CFG_DIV_MASK |
+> > > @@ -528,7 +528,7 @@ static int mctl_channel_init(uint16_t socid, stru=
+ct dram_para *para)
+> > >  		/* dphy & aphy phase select 270 degree */
+> > >  		clrsetbits_le32(&mctl_ctl->pgcr[2], (0x3 << 10) | (0x3 << 8),
+> > >  				(0x1 << 10) | (0x2 << 8));
+> > > -	} else if (socid =3D=3D SOCID_V3S) {
+> > > +	} else if (socid =3D=3D SOCID_V3_V3S) {
+> > >  		/* dx ddr_clk & hdr_clk dynamic mode */
+> > >  		clrbits_le32(&mctl_ctl->pgcr[0], (0x3 << 14) | (0x3 << 12));
+> > > =20
+> > > @@ -567,7 +567,7 @@ static int mctl_channel_init(uint16_t socid, stru=
+ct dram_para *para)
+> > >  	mctl_set_bit_delays(para);
+> > >  	udelay(50);
+> > > =20
+> > > -	if (socid =3D=3D SOCID_V3S) {
+> > > +	if (socid =3D=3D SOCID_V3_V3S) {
+> > >  		mctl_v3s_zq_calibration_quirk(para);
+> > > =20
+> > >  		mctl_phy_init(PIR_PLLINIT | PIR_DCAL | PIR_PHYRST |
+> > > @@ -636,7 +636,7 @@ static int mctl_channel_init(uint16_t socid, stru=
+ct dram_para *para)
+> > >  	udelay(10);
+> > > =20
+> > >  	/* set PGCR3, CKE polarity */
+> > > -	if (socid =3D=3D SOCID_H3 || socid =3D=3D SOCID_V3S)
+> > > +	if (socid =3D=3D SOCID_H3 || socid =3D=3D SOCID_V3_V3S)
+> > >  		writel(0x00aa0060, &mctl_ctl->pgcr[3]);
+> > >  	else if (socid =3D=3D SOCID_A64 || socid =3D=3D SOCID_H5 || socid =
+=3D=3D SOCID_R40)
+> > >  		writel(0xc0aa0060, &mctl_ctl->pgcr[3]);
+> > > @@ -758,7 +758,7 @@ static void mctl_auto_detect_dram_size(uint16_t s=
+ocid, struct dram_para *para)
+> > >  	   0,  0,  0,  0,  0,  0,  0,  0,			\
+> > >  	   0,  0,  0,  0,  0,  0,  0      }
+> > > =20
+> > > -#define SUN8I_V3S_DX_READ_DELAYS					\
+> > > +#define SUN8I_V3S_DX_READ_DELAYS				\
+> > >  	{{  8,  8,  8,  8,  8,  8,  8,  8,  8,  0,  0 },	\
+> > >  	 {  7,  7,  7,  7,  7,  7,  7,  7,  7,  0,  0 },	\
+> > >  	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+> > > @@ -851,7 +851,7 @@ unsigned long sunxi_dram_init(void)
+> > >  		.dx_read_delays  =3D SUN8I_H3_DX_READ_DELAYS,
+> > >  		.dx_write_delays =3D SUN8I_H3_DX_WRITE_DELAYS,
+> > >  		.ac_delays	 =3D SUN8I_H3_AC_DELAYS,
+> > > -#elif defined(CONFIG_MACH_SUN8I_V3S)
+> > > +#elif defined(CONFIG_MACH_SUN8I_V3_V3S)
+> > >  		.dx_read_delays  =3D SUN8I_V3S_DX_READ_DELAYS,
+> > >  		.dx_write_delays =3D SUN8I_V3S_DX_WRITE_DELAYS,
+> > >  		.ac_delays	 =3D SUN8I_V3S_AC_DELAYS,
+> > > @@ -878,8 +878,8 @@ unsigned long sunxi_dram_init(void)
+> > >  	uint16_t socid =3D SOCID_H3;
+> > >  #elif defined(CONFIG_MACH_SUN8I_R40)
+> > >  	uint16_t socid =3D SOCID_R40;
+> > > -#elif defined(CONFIG_MACH_SUN8I_V3S)
+> > > -	uint16_t socid =3D SOCID_V3S;
+> > > +#elif defined(CONFIG_MACH_SUN8I_V3_V3S)
+> > > +	uint16_t socid =3D SOCID_V3_V3S;
+> > >  #elif defined(CONFIG_MACH_SUN50I)
+> > >  	uint16_t socid =3D SOCID_A64;
+> > >  #elif defined(CONFIG_MACH_SUN50I_H5)
+> > > diff --git a/arch/arm/mach-sunxi/spl_spi_sunxi.c b/arch/arm/mach-sunx=
+i/spl_spi_sunxi.c
+> > > index 5f72e809952b..f6650652b42a 100644
+> > > --- a/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> > > +++ b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> > > @@ -141,7 +141,7 @@ static bool is_sun6i_gen_spi(void)
+> > >  	return IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ||
+> > >  	       IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> > >  	       IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2) ||
+> > > -	       IS_ENABLED(CONFIG_MACH_SUN8I_V3S);
+> > > +	       IS_ENABLED(CONFIG_MACH_SUN8I_V3_V3S);
+> > >  }
+> > > =20
+> > >  static uintptr_t spi0_base_address(void)
+> > > diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+> > > index 2929bc17f084..6520636ffab5 100644
+> > > --- a/board/sunxi/board.c
+> > > +++ b/board/sunxi/board.c
+> > > @@ -68,7 +68,7 @@ void i2c_init_board(void)
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPH(14), SUN6I_GPH_TWI0);
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPH(15), SUN6I_GPH_TWI0);
+> > >  	clock_twi_onoff(0, 1);
+> > > -#elif defined(CONFIG_MACH_SUN8I_V3S)
+> > > +#elif defined(CONFIG_MACH_SUN8I_V3_V3S)
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPB(6), SUN8I_V3S_GPB_TWI0);
+> > >  	sunxi_gpio_set_cfgpin(SUNXI_GPB(7), SUN8I_V3S_GPB_TWI0);
+> > >  	clock_twi_onoff(0, 1);
+> > > diff --git a/configs/pinecube_defconfig b/configs/pinecube_defconfig
+> > > index 7567a6aa7394..088dd6f8630a 100644
+> > > --- a/configs/pinecube_defconfig
+> > > +++ b/configs/pinecube_defconfig
+> > > @@ -2,8 +2,7 @@ CONFIG_ARM=3Dy
+> > >  CONFIG_ARCH_SUNXI=3Dy
+> > >  CONFIG_DEFAULT_DEVICE_TREE=3D"sun8i-s3-pinecube"
+> > >  CONFIG_SPL=3Dy
+> > > -CONFIG_MACH_SUN8I_V3S=3Dy
+> > > -CONFIG_SUNXI_DRAM_DDR3_1333=3Dy
+> > > +CONFIG_MACH_SUN8I_V3=3Dy
+> > >  CONFIG_DRAM_CLK=3D504
+> > >  CONFIG_DRAM_ODT_EN=3Dy
+> > >  CONFIG_I2C0_ENABLE=3Dy
+> > > diff --git a/drivers/clk/sunxi/Kconfig b/drivers/clk/sunxi/Kconfig
+> > > index 1c1cc82719cd..207d3bed7922 100644
+> > > --- a/drivers/clk/sunxi/Kconfig
+> > > +++ b/drivers/clk/sunxi/Kconfig
+> > > @@ -68,7 +68,7 @@ config CLK_SUN8I_R40
+> > > =20
+> > >  config CLK_SUN8I_V3S
+> > >  	bool "Clock driver for Allwinner V3S"
+> > > -	default MACH_SUN8I_V3S
+> > > +	default MACH_SUN8I_V3_V3S
+> > >  	help
+> > >  	  This enables common clock driver support for platforms based
+> > >  	  on Allwinner V3S SoC.
+> > > diff --git a/drivers/phy/allwinner/Kconfig b/drivers/phy/allwinner/Kc=
+onfig
+> > > index bb0bd8d5f812..335eff0a8bac 100644
+> > > --- a/drivers/phy/allwinner/Kconfig
+> > > +++ b/drivers/phy/allwinner/Kconfig
+> > > @@ -5,7 +5,7 @@ config PHY_SUN4I_USB
+> > >  	bool "Allwinner Sun4I USB PHY driver"
+> > >  	depends on ARCH_SUNXI
+> > >  	depends on !MACH_SUN9I
+> > > -	default n if MACH_SUN8I_V3S
+> > > +	default n if MACH_SUN8I_V3_V3S
+> > >  	default y
+> > >  	select DM_REGULATOR
+> > >  	select PHY
+> > > diff --git a/drivers/pinctrl/sunxi/Kconfig b/drivers/pinctrl/sunxi/Kc=
+onfig
+> > > index 543149922998..59039917158e 100644
+> > > --- a/drivers/pinctrl/sunxi/Kconfig
+> > > +++ b/drivers/pinctrl/sunxi/Kconfig
+> > > @@ -76,7 +76,7 @@ config PINCTRL_SUN8I_H3_R
+> > > =20
+> > >  config PINCTRL_SUN8I_V3S
+> > >  	bool "Support for the Allwinner V3s PIO"
+> > > -	default MACH_SUN8I_V3S
+> > > +	default MACH_SUN8I_V3_V3S
+> > >  	select PINCTRL_SUNXI
+> > > =20
+> > >  config PINCTRL_SUN9I_A80
+> > > diff --git a/drivers/power/Kconfig b/drivers/power/Kconfig
+> > > index eed65058e667..cdb3d712389c 100644
+> > > --- a/drivers/power/Kconfig
+> > > +++ b/drivers/power/Kconfig
+> > > @@ -75,7 +75,7 @@ config AXP152_POWER
+> > > =20
+> > >  config AXP209_POWER
+> > >  	bool "axp209 pmic support"
+> > > -	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I_V3S
+> > > +	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUN8I_V3
+> > >  	select AXP_PMIC_BUS
+> > >  	select CMD_POWEROFF
+> > >  	---help--- =20
+> >  =20
 >=20
-> As discussed in the email thread running test directly does not work and
-> segfault for the bootflow command.
-> We have to run it under the test.py command to makes it work.
->=20
-> The log I sent was for the following command:
-> $ ./test/py/test.py --bd sandbox --build -k test_ut
->=20
-> The two errors on bootflow on master are:
-> Test: bootflow_cmd_menu: bootflow.c
-> test/boot/bootflow.c:673, bootflow_cmd_menu(): 0 =3D=3D run_command("boot=
-flow menu", 0): Expected 0x0 (0), got 0x1 (1)
->=20
-> test/boot/bootflow.c:718, bootflow_scan_menu(): console:=20
-> Expected 'Selected: Armbian',
->      got '<no-more-output>'
->=20
-> Tom do you face the same errors? If that's the case we should fix these.
 
-No, I can do:
-$ git clean -dfx
-$ ./test/py/test.py --bd sandbox --build -k test_ut
-And the result is:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D 872 passed, 1 skipped, 608 de=
-selected, 13398 warnings in 55.73s =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D
-
-And this is on top of tree master right now.
-
---=20
-Tom
-
---EKLHVpO/lVi4bKQk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPePUAAKCRAr4qD1Cr/k
-CufoAQCgEdhbX72OsMJsJaT5cTqFbWfNGzzj5xvvZaHewP7mPgD+IM+pzon2vT/6
-l75kKs8He94wJk88sDn15OiPu4HRkwE=
-=B/x2
------END PGP SIGNATURE-----
-
---EKLHVpO/lVi4bKQk--
