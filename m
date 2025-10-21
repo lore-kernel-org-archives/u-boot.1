@@ -4,91 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA222CCD184
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 15:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE33CCD1A7
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 15:34:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4054880107;
-	Tue, 21 Oct 2025 17:18:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5335180107;
+	Tue, 21 Oct 2025 17:34:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XWQ1N8Kd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OsxULi8h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15587807C0; Tue, 21 Oct 2025 17:18:53 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 16260807C0; Tue, 21 Oct 2025 17:34:53 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AF5A800D7
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 17:18:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 97E56800D7
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 17:34:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-b4736e043f9so967746566b.0
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 08:18:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-890521c116fso703148985a.3
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 08:34:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761059930; x=1761664730; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=HqbF8HKrXkDwhjGTWJVS+pn+NqZmH/S/AZfhrPEb9Ww=;
- b=XWQ1N8KdVTT75q6kmPoZfldmc8aq/OFtjTlBRQvDCdHwdosAPisR9XxXtpneaNINfB
- wzlvr+h3bvpYj4g6J7ZhM4wHFdpbnkQ3ghVNi9h5yWxtAmCffgDCCq/6Q2rot/DjzfEm
- 5ZZkPtzPb1NgCM9h3gRFaxyxqIGfXpjO0N0jBTUuBrainGASQF/RhDKMqkguUgQf27mD
- Itm9vGrrC4whQVWPjc7dj3hkfKrd7+36MuWInpAoAhrta6ADaqTJgVVZepYbEjjA0MTd
- uMpA9gdFC9h2MRNm6o2U9l/ysrfIHBbQW4WuhPEnKQ1f4bAFGg4DPmIEZYqjdiqJgG0K
- 22eA==
+ d=linaro.org; s=google; t=1761060889; x=1761665689; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HKTd4RsLw5hQak8/LdjkrGMmCq2Dc8Qt5tWqIIcoTR8=;
+ b=OsxULi8hTamDrVlqyIbsJeR1qh8Xi/hxVdBsrOsW79EVveTedzoZAk87hxLNzR3zme
+ FF3VdCUY4YbzfUoyeXWG0MpppJmsFx19RwiRB1iS9zBO9Xo85e2jCCJA/QD68bbVm2Eu
+ 4yigbWFPrMtWrBx3pD5xKULwK8Bcxqn4AEBUwOYaw6jbQdJHl98nz3AaOWELhnoWfBNh
+ 4z1RdqhmRRu6lekoGwRb1l533O95d7RQYK16ZlBmO4ZkgtULNRtzwvOaQ6OLRi0Gb7Bs
+ Hek+xyCCeKZTwO8zIEKEIG4twfyj2Vk8CRQfWM9qWtr2F+OFrfAXOwZ3evzUlXFheAwW
+ 2PqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761059930; x=1761664730;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=HqbF8HKrXkDwhjGTWJVS+pn+NqZmH/S/AZfhrPEb9Ww=;
- b=qxq1Ig3mHwX+Hx8m06LsZkxxFwi1/rWfgYZ5H1AbFuwJJ66cxfFUM51IzMv5qm/aXw
- lYVMwtEK+1Sh4nOtbyy8y2CTPrdG1OY18sQ18Wsfy2N27fKkH9mzJZFxupxGZrukHYtD
- 0mkpKx6lUONk36HUwo8ufeqPx/c8VOmJJ4Y+11C54ovAZFdh8Z4HSx0xHg//GNv2cbI4
- 8fiQQ/R0gzbGbIWTF1ZcjtZGur5hC5Bbq2GTf2Oca++0NIsHlJ0CR55+28lyqGf+JqZq
- I7+kl3WhvULAHgu0pL5vXxVe5Ap5RUQez9OLGsYYyyrMD7UMzodshWYU042Nkx1qq9+m
- vEAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVWGCFmmQynm2eIgG6mFxAg9sqtHdjNBCmZ0T22HNrsZu0GvY5r9lUGd1/+0GaOONDKSMJjk0E=@lists.denx.de
-X-Gm-Message-State: AOJu0YxcmRNWl2krUs6VFeAQXR1B9FWPdowR98fyG429fVY7cB7j8Wtc
- ZhJso3hawMjTE0L2pIaSPBO9YQrUJvBULuN+mxi9CwslVgquLziaeUUKQUg9j8COdko=
-X-Gm-Gg: ASbGnctx887t/lFv4Gx7//wNY7vDUriQRPB6zwZkfEH7+9zrP4e7Fud0QU1Uu0YTP99
- KipD2r54uAaw2QMuBV+9VpG+ahrWFOMCL9fQpdEehuc9tQDJhALm6CHfSmaqb3WrW/z6YfOf0mu
- OlnqYECNdrKMKTIRTs9UP/JhadSoc+f332yZftoBTWW9Hqw3Mwc8IrqTfAb40OIw1AzdqI+QJbC
- 27k6XV4ebR/+SyRNuP6HCEjqVAvMOC+nNtUbsUO3yPUg/RrlAR3Rn0IUuwcu7RHKA4MVhoAvTVU
- inhPOZwzfJ+jyowQDz6FlcH8mevpnj4BT9/m4AbCAmX8g7D9E2dzpc68h+gntK6gwqCvxzp6BDr
- gfp/yFE+JSUjKuRZsp7Uw9qaxn+MAP0c8SUoNKwjOeMsHxjzpML5agCJqhNticNlROTl+rgbAAO
- p1nA7JYnD5/4QABwbuSg==
-X-Google-Smtp-Source: AGHT+IEW0lFuboeZ9OPhfbj6OrzJr50NWD046wzuCKKcULu29HkeGlPIBFsyBbXv0yidCx3I3L7GBg==
-X-Received: by 2002:a17:907:3ea6:b0:b49:a362:323b with SMTP id
- a640c23a62f3a-b646f15a130mr2123939566b.0.1761059930601; 
- Tue, 21 Oct 2025 08:18:50 -0700 (PDT)
-Received: from [192.168.0.39] ([82.76.24.202])
+ d=1e100.net; s=20230601; t=1761060889; x=1761665689;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HKTd4RsLw5hQak8/LdjkrGMmCq2Dc8Qt5tWqIIcoTR8=;
+ b=FDQr2QY8AGqjU9dskpa05XBcZ0zH+xAM64Zp8yfn7QDw6V8SrsoB3uxFaTeIKDyqdi
+ kodXX//rD6hteW4N6phLuiTAb+JuSCi6w0fQsU0Wm+IUzAOMPFgMK1+W8oUIXpzdr/10
+ egBKQt2ewVXFBhxS5TzR9RVIEwaQ2GaDT+9LgM9onk3TVckDIyYp5MIOyNUPMd0LA9/B
+ +Ta/p+AS18gvRuzEfuGEVL0pDamxBNioZQxf76LmWXzA4LIaWk8kXyz207Dm1JCyW7e5
+ qw7BWDuVsrY/5RyNI7Ky60Z6FA+A8gjlNgl7XMfuT+IklyC1Hsb2EBeE871eO8zDoyoc
+ IUdA==
+X-Gm-Message-State: AOJu0Yz08mTvPjUZkUQ8d2Z9oxx2RROXx1NbX6T9drviaV9x15etC6vF
+ wco43giAGTZkTraDG4hsu4oGhOBdj6UqpA2Hvbj1LwLbWUYrmYKgE71zyiIRKY8WLHQp72vT6eB
+ vFL9i
+X-Gm-Gg: ASbGncvO1OhsOmzO5z0Jnk8ahGelF9Bj5enYaXsRrRFbAgLKml6vvyGMOuekwyMQPmy
+ QCDoY2h+CtJLKyBjS2tLwBKB+9ZuoycfcxEkRH6bxp4v/8jUCwduepHpO7o/Y3iLYccSUJ75cul
+ di3gwPMsBHYeADXrk5PulivEhm2oi538NsbFfHZOYr/dhDOPtm+bA2QNIfZWD92gPjywthPRJPt
+ zV7tlLBTeFVrgHwM6S0jzUViHnv0Or/A6HSx8lrj3Ley2LiY6U7RQpA/4/rQl64kJA2LrG03bp9
+ wUVVFfMzdJpb1xrjL5I1sRNf+WVEMz6yG31HCuDXSjN6/epAfNKDMDb8Xl6CAk0Ed6vXrwrZsyP
+ CMvh9qMi3NpHqO4Fz4Crhe+aLU0b6xt2myB0jPt8JkaAyMVbnqOMVpm5PyQNL25jv1dpRiA5OZM
+ cVaeLzIuJY/+oLNnJ22STfSlM3KbY=
+X-Google-Smtp-Source: AGHT+IHLbyp9hj9D493FQG0/jfc8YDF01TXVneXJ1HBa00E5ZKJJbCGv63/CjD/YRaGpHd4d1FJ48Q==
+X-Received: by 2002:a05:620a:408a:b0:892:a186:6b43 with SMTP id
+ af79cd13be357-892a1866d96mr1113467885a.80.1761060888967; 
+ Tue, 21 Oct 2025 08:34:48 -0700 (PDT)
+Received: from localhost.localdomain ([209.227.150.67])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-b65e89713ffsm1099947166b.36.2025.10.21.08.18.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 21 Oct 2025 08:18:50 -0700 (PDT)
-Message-ID: <e7c19dda-8530-44db-9dbb-8119eeca2e93@linaro.org>
-Date: Tue, 21 Oct 2025 18:18:49 +0300
+ af79cd13be357-891cf58e7bfsm777910085a.50.2025.10.21.08.34.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Oct 2025 08:34:48 -0700 (PDT)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [PATCH v5 0/5] Enable Firmware Handoff CI test on qemu_arm64
+Date: Tue, 21 Oct 2025 08:34:32 -0700
+Message-Id: <20251021153443.219326-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] clk: at91: Add ACR in all PLL setting.
-To: Manikandan Muralidharan <manikandan.m@microchip.com>,
- Lukasz Majewski <lukma@denx.de>, seanga2@gmail.com,
- varshini.rajendran@microchip.com, Ryan.Wanner@microchip.com,
- balamanikandan.gunasundar@microchip.com, romain.sioen@microchip.com,
- u-boot@lists.denx.de
-References: <20250923095818.441917-1-manikandan.m@microchip.com>
-Content-Language: en-US
-From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <20250923095818.441917-1-manikandan.m@microchip.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,14 +103,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
+1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
+2. build bl1 and fip with both Firmware Handoff and Measured Boot
+   enabled;
+3. pytest to validate the Firmware Handoff feature via bloblist by
+   checking the existence of expected FDT nodes and TPM events generated
+   and handed over from TF-A/OP-TEE.
 
+Pre-requisite u-boot-test-hooks patches [2] are required.
+A test pipeline is triggered at [3] with hacking docker image [4] and
+test hooks [5].
 
-On 9/23/25 12:58, Manikandan Muralidharan wrote:
-> Add ACR in all PLL setting. Add correct ACR value for each PLL used in
-> different SoCs.
-> 
-> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
-> ---
+[1] https://github.com/FirmwareHandoff/firmware_handoff
+[2] https://lore.kernel.org/u-boot/20251003191918.767698-1-raymond.mao@linaro.org/T/#t
+[3] https://github.com/u-boot/u-boot/pull/818
+[4] https://hub.docker.com/repository/docker/raymondmao20200915/uboot-ci/tags/latest/sha256-bff18c1f2488d350e9e6e51c9987e24c36b3bfe110079aa0682964c815dd285a
+[5] https://github.com/raymo200915/u-boot-test-hooks/tree/eventlog_handoff_v2
 
-Applied both to u-boot-at91/master , thanks !
+Raymond Mao (5):
+  docker: add OP-TEE and TF-A build for testing Firmware Handoff
+  pytest: add test script to validate Firmware Handoff
+  configs: select CMD_BLOBLIST for Firmware Handoff testing
+  ci: check existence of bl1 and fip in the test script
+  ci: add test entries for qemu_arm64_tfa_fw_handoff
+
+ .azure-pipelines.yml                   |  18 ++++-
+ .gitlab-ci.yml                         |  21 ++++-
+ configs/qemu_arm64_defconfig           |   1 +
+ doc/develop/pytest/test_fw_handoff.rst |   8 ++
+ test/py/tests/test_fw_handoff.py       | 108 +++++++++++++++++++++++++
+ tools/docker/Dockerfile                |  38 ++++++++-
+ 6 files changed, 187 insertions(+), 7 deletions(-)
+ create mode 100644 doc/develop/pytest/test_fw_handoff.rst
+ create mode 100644 test/py/tests/test_fw_handoff.py
+
+-- 
+2.25.1
+
