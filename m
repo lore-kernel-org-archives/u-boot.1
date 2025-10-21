@@ -4,100 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27BB4CCD1AB
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 19:35:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67129CCD1A5
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 19:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A5B3802C1;
-	Tue, 21 Oct 2025 21:35:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AC681833F6;
+	Tue, 21 Oct 2025 21:35:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k7NNZP4N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YBG9zF4S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B3F1807C0; Tue, 21 Oct 2025 20:42:10 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id A6F4B807C0; Tue, 21 Oct 2025 21:00:14 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEB1A80107
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 20:42:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 711FC80107
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 21:00:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-586883eb9fbso7347843e87.1
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 11:42:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-443ac11a7b7so1286816b6e.0
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 12:00:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761072127; x=1761676927; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vE6+oM9byJqUf7XVSpGokmVudhS4zTua1VpX3gX+Vgc=;
- b=k7NNZP4N3vRgzRKRbl/7uLI4hjP0rAd4XPwWvwZEP8GdXFINJ0gD/qFmSollYfeCXp
- 0Z39Ijwk21ttGXTKssyKAq6AcLfg8+f90xsLHP11D0+3y0ROSKp56OoFT0MFhWi/ezu7
- aVUUHM5tuXuO6VqCG4eteyHwYRpcQoCjxlFWxXXlddJ6Bjf74+x2U7aLO5D9bOJ2V8J6
- K8q6fcfAwtFJJHWe5h6Da0nIMMARkewswHbnAwU2ezD3x1nhVMxlXAw4jtHa7NvG9UN+
- RtrKC98T2C6EjlT3gvBnsZ5f+QQglDUkgWpVoPAg+Y6gN3bdgHTO58HGXROxbMbxnmMd
- HF+A==
+ d=konsulko.com; s=google; t=1761073210; x=1761678010; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=03Adbu0dhcB7/GPhgKBW2KSSrlUVby6BI5jvDCMM1Yc=;
+ b=YBG9zF4STRoXG9H0P7+txDxh4fq39PVxC8NcAcFMzTPJzKjIIsiLw4prvkYUnuWE7b
+ 2UUGPL05ZOchbP3Q55g2mpRXj0nZfLXGVL+1zqNdNhE3TOVEA7wtqRSkAdijjI9n9Ba9
+ YiolyEl8Nr8gujRCjsxkvRAOctSGGRImxefSU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761072127; x=1761676927;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vE6+oM9byJqUf7XVSpGokmVudhS4zTua1VpX3gX+Vgc=;
- b=Hy6IEs4q7+kq9pVa/1kfc9dWUIUwNKxtzG0g4ompVY4egoASLTa31HEdf2wtZSg3bS
- fz9sNfLpvGIqoK2J+rmj/Nrh6z77F6/fDGrB6DDbEq4FFTbnNUZmUPp/h1oBNyfQUqxw
- 04gt/UxRXJbApz5sgmIKTBe6ykiqezqh5Ikf0c+do6UmpESGWNSQtirKkk5NNBnzYxUl
- Bld7Wak2OjVn16Wbfk6fStc5rs1Pq4QbYKLYgDedUQGL01g9JEjA4N9vfMQ10CSns9Sa
- DlmqSoo9Db9O5UOYVYpa8z+9IWHhlYJkzsh8cvhXuIa7lSY9Syte8Hu5Ix83eex8P94v
- P+Tw==
-X-Gm-Message-State: AOJu0Yz591uSOq7LYAUY2Kt7Z9cCcg/JFv2WhHQoKqryl5IoVbuypFSv
- T1jc8AzQtx025FKNdTaZB9tHK2jeOTBTamCYh0iemhLGRpPpHlrdUbpjxFexH4wBABcr0eE0AXw
- vcmEHZOywBVFbsK4NyUoMbjZa77/ZIpI=
-X-Gm-Gg: ASbGncv/bHenftbe92aKJVsZ2005UOepTdp0X4AfnhS2HI7UzpEGhIJkscE58Yk516A
- NBSR12kTqc/rTEjVikn3cShRgCCqUwvfK4Zd6iMozK8V190YzOWPpXnnyCuBBWrLayBCc4yd64e
- kzHB5eSGDzmIznYX8GQFXjErCIaAYlt0xnwtiRfXEiEqWrskWZQwPoYnwqgjm0fx/ALTVjQy8Rx
- cUtgW+li8QLOp8wqPtgnq61xwhqvZMJ/vO+KrNiTn/NfWicHJ6HFpFDYebJ8aBckm0dc/Fs/rhZ
- u/NbCkvdfV0R3dt5DFoIeVcyuA==
-X-Google-Smtp-Source: AGHT+IGcNnP3DDWOKvRrPnpAdv15DH6urOjFVr0bF9cI4O7sBo7EB/imeOlU2Ay39ITsmAbwdQXVHo5/yww5Bq7Q7Kc=
-X-Received: by 2002:a05:6512:2251:b0:57d:ffa4:56ff with SMTP id
- 2adb3069b0e04-591d84f0abamr5270301e87.22.1761072126789; Tue, 21 Oct 2025
- 11:42:06 -0700 (PDT)
-MIME-Version: 1.0
-References: <20251013-imx943usb-v1-0-293e79d4bc12@nxp.com>
-In-Reply-To: <20251013-imx943usb-v1-0-293e79d4bc12@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 21 Oct 2025 15:41:54 -0300
-X-Gm-Features: AS18NWDfxY6VadhqNCh6XaZWuoTXL4bdWfNi61BqJmSsm3qG2z8PbUMQSNVeEXc
-Message-ID: <CAOMZO5CQvaVqhrOUJ9rTXRoR50pOSVWGXWBzj8Uc3vPM9xRA0Q@mail.gmail.com>
-Subject: Re: [PATCH v3 00/10] Enable USB and ENETC on i.MX943 EVK
-To: alice.guo@oss.nxp.com
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ d=1e100.net; s=20230601; t=1761073210; x=1761678010;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=03Adbu0dhcB7/GPhgKBW2KSSrlUVby6BI5jvDCMM1Yc=;
+ b=CftDk9F4aimkT5ey7dTenuyvBV2fN6onYrY2wh1ew3NQnAmJifjzFDfbsxcbxVo0A6
+ NopzQWGB5TTpLLL0uPN65aX18ytPEUWvKFwcQw/YzA2cKKDlO3ifE1nckDjCf9uQMvr+
+ K12Hdm3/fXQtO+WWFs+mkbVCmALSIIkQ9edNUcsYbotoOb6eAhaIPBOiszvG2DY0ac2N
+ FLzkbuuYouOWye0k88G9DtJ+dC3KUOEphNs2xg5hi+npKRRd6PrJt0sgplNCUHJ7MfRw
+ +W7fB5oeSoo80CEsBEpvvLkbjac/bsDLN7k0Okv9a28QvlPDM0X5GU0NArl11SnMJTKM
+ RtTA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXx+KBi7FQTzG8QnKwipZvg1CI9oyd6GEBZtngSYp1uNhPmC46UOXlo/Fh1sYiHm2uY5yWMjAk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx9raoKX4GZmNVmEb+eqQxqYV7FkdEJogqo5QDhb64Z3SyzTpeG
+ 89XViQobF9DKMs7+sb+/17yvSpoJhIqDJmdQaZEbi3sTLz7YFa+Shrzs5A/yrZWRj1k=
+X-Gm-Gg: ASbGncvy4WEm9izDM5BY1bxXHuBFUD/QJALlsXccOGmhJreZbsw0tqBUUGfIMiGcRSO
+ ZTcQXaFp1YSvPdI+vljIwGXoCUWxboj75z733McmMrFfeNxsWLL1cSQyEvMJnK7mYawS3bw44RM
+ WB1esxuwqRdUGBICcx4zrmjZTHrV+hN8ObDIKuzu96UACA4u8vhhq0YITw5w3ZwJUwaLZ0DsUsM
+ sXNGKAuzbawOZLRQQpIrrnYw6YMejGAPznQUrlDFLrgaQl7ioUGuuGz3XUN5NcWsXzF0Twl5BtQ
+ Um41Z354WHqiMFKlZ2yr2Y7kcS2bsabTvHISlYwfxj8tC3iAK5dV7tJ9WAu7sNvhtdVxMuFB0Z4
+ MOzHZRr27/5XjZGCEpw7a2OfEeJoH6xcLByeD4CPn6Ozklw3FK1701ZW9ZNiY4YXtJcVxf0RZqh
+ QjrTyYcEVqAUbCK9W+x29iNIDcCOYtBJNxLpZx9bDQfJAEsfNTpw==
+X-Google-Smtp-Source: AGHT+IEAy9pmpvZe1Iczo3OJQdZsYak9tnh8mp1IBJ+GoSuSf10/a+ofSWKy/DrTKkBlNy4GvI4lQQ==
+X-Received: by 2002:a05:6808:318e:b0:443:a155:d833 with SMTP id
+ 5614622812f47-443a30b1352mr8189170b6e.42.1761073210065; 
+ Tue, 21 Oct 2025 12:00:10 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-443df31dd12sm2936548b6e.21.2025.10.21.12.00.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 21 Oct 2025 12:00:09 -0700 (PDT)
+Date: Tue, 21 Oct 2025 13:00:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: alice.guo@oss.nxp.com, u-boot@lists.denx.de,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Marek Vasut <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Alice Guo <alice.guo@nxp.com>,
- Stefano Babic <sbabic@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>, 
- Jacky Bai <ping.bai@nxp.com>, Jindong Yue <jindong.yue@nxp.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Frank Li <Frank.Li@nxp.com>, 
- Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Minkyu Kang <mk7.kang@samsung.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Alice Guo <alice.guo@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>, Jindong Yue <jindong.yue@nxp.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Frank Li <Frank.Li@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
  Sam Protsenko <semen.protsenko@linaro.org>,
- Minda Chen <minda.chen@starfivetech.com>, 
- Tim Harvey <tharvey@gateworks.com>, Paul Barker <paul.barker.ct@bp.renesas.com>,
- Roger Quadros <rogerq@kernel.org>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Minda Chen <minda.chen@starfivetech.com>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Roger Quadros <rogerq@kernel.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Hanyuan Zhao <hanyuan-z@qq.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Hanyuan Zhao <hanyuan-z@qq.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Weijie Gao <weijie.gao@mediatek.com>,
  Andrew Goodbody <andrew.goodbody@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 21 Oct 2025 21:35:28 +0200
+Subject: Re: [PATCH v3 00/10] Enable USB and ENETC on i.MX943 EVK
+Message-ID: <20251021190004.GF6688@bill-the-cat>
+References: <20251013-imx943usb-v1-0-293e79d4bc12@nxp.com>
+ <CAOMZO5CQvaVqhrOUJ9rTXRoR50pOSVWGXWBzj8Uc3vPM9xRA0Q@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="O5WPh67qiXuilrNQ"
+Content-Disposition: inline
+In-Reply-To: <CAOMZO5CQvaVqhrOUJ9rTXRoR50pOSVWGXWBzj8Uc3vPM9xRA0Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Tue, 21 Oct 2025 21:35:37 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,28 +123,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
 
-On Mon, Oct 13, 2025 at 3:59=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
->
-> Changes for v1:
->  - Adding USB2 and USB3 device tree nodes with required PHY and
->    regulator support.
->  - Enabling ENETC1 and ENETC2.
->  - Updating Kconfig and DTSI files to support these interfaces.
->
-> Changes for v2:
->  - Resend patch series with updated To list.
->
-> Changes for v3:
->  - Remove logically dead code in imx94_link_config().
+--O5WPh67qiXuilrNQ
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This series does not pass CI:
+On Tue, Oct 21, 2025 at 03:41:54PM -0300, Fabio Estevam wrote:
+> Hi Alice,
+>=20
+> On Mon, Oct 13, 2025 at 3:59=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
+> >
+> > Changes for v1:
+> >  - Adding USB2 and USB3 device tree nodes with required PHY and
+> >    regulator support.
+> >  - Enabling ENETC1 and ENETC2.
+> >  - Updating Kconfig and DTSI files to support these interfaces.
+> >
+> > Changes for v2:
+> >  - Resend patch series with updated To list.
+> >
+> > Changes for v3:
+> >  - Remove logically dead code in imx94_link_config().
+>=20
+> This series does not pass CI:
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1270141
+>=20
+> As I've mentioned multiple times, please run the series through CI on
+> your side first.
+>=20
+> This is becoming a pattern with the NXP folks' submissions, and this
+> needs to improve.
 
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1270141
+I agree and I want to link to
+https://docs.u-boot.org/en/latest/develop/ci_testing.html#azure-pipelines
+here as well because it will be better if everyone has their own Azure
+pipeline and doesn't get bottlenecked. We can also work out setting up
+contributor repositories in our gitlab if that would help, and run CI
+there.
 
-As I've mentioned multiple times, please run the series through CI on
-your side first.
+--=20
+Tom
 
-This is becoming a pattern with the NXP folks' submissions, and this
-needs to improve.
+--O5WPh67qiXuilrNQ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPfYNAAKCRAr4qD1Cr/k
+ChywAP9I7tJl9jxEr1eMJ8ZzQl0pEGroFhf4Z33/D1WSsYhbRQEA7taU+vuVJwGe
+NQlDWX7ujujetTX0L4M7viBYa46UXAA=
+=kCWO
+-----END PGP SIGNATURE-----
+
+--O5WPh67qiXuilrNQ--
