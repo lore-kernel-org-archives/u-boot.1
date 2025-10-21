@@ -4,48 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB5B1CCD1A5
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 19:05:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27BB4CCD1AB
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 19:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28A09802C1;
-	Tue, 21 Oct 2025 21:05:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id 5A5B3802C1;
+	Tue, 21 Oct 2025 21:35:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 44F0D807C0; Tue, 21 Oct 2025 21:05:05 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E96DB80107
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 21:05:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [216.234.200.240])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id DD1FEB2200FA;
- Tue, 21 Oct 2025 21:05:00 +0200 (CEST)
-Message-ID: <9047fc22-295e-4e06-a67f-2fd2f7573458@freeshell.de>
-Date: Tue, 21 Oct 2025 12:04:58 -0700
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k7NNZP4N";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3B3F1807C0; Tue, 21 Oct 2025 20:42:10 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DEB1A80107
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 20:42:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-586883eb9fbso7347843e87.1
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 11:42:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761072127; x=1761676927; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vE6+oM9byJqUf7XVSpGokmVudhS4zTua1VpX3gX+Vgc=;
+ b=k7NNZP4N3vRgzRKRbl/7uLI4hjP0rAd4XPwWvwZEP8GdXFINJ0gD/qFmSollYfeCXp
+ 0Z39Ijwk21ttGXTKssyKAq6AcLfg8+f90xsLHP11D0+3y0ROSKp56OoFT0MFhWi/ezu7
+ aVUUHM5tuXuO6VqCG4eteyHwYRpcQoCjxlFWxXXlddJ6Bjf74+x2U7aLO5D9bOJ2V8J6
+ K8q6fcfAwtFJJHWe5h6Da0nIMMARkewswHbnAwU2ezD3x1nhVMxlXAw4jtHa7NvG9UN+
+ RtrKC98T2C6EjlT3gvBnsZ5f+QQglDUkgWpVoPAg+Y6gN3bdgHTO58HGXROxbMbxnmMd
+ HF+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761072127; x=1761676927;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vE6+oM9byJqUf7XVSpGokmVudhS4zTua1VpX3gX+Vgc=;
+ b=Hy6IEs4q7+kq9pVa/1kfc9dWUIUwNKxtzG0g4ompVY4egoASLTa31HEdf2wtZSg3bS
+ fz9sNfLpvGIqoK2J+rmj/Nrh6z77F6/fDGrB6DDbEq4FFTbnNUZmUPp/h1oBNyfQUqxw
+ 04gt/UxRXJbApz5sgmIKTBe6ykiqezqh5Ikf0c+do6UmpESGWNSQtirKkk5NNBnzYxUl
+ Bld7Wak2OjVn16Wbfk6fStc5rs1Pq4QbYKLYgDedUQGL01g9JEjA4N9vfMQ10CSns9Sa
+ DlmqSoo9Db9O5UOYVYpa8z+9IWHhlYJkzsh8cvhXuIa7lSY9Syte8Hu5Ix83eex8P94v
+ P+Tw==
+X-Gm-Message-State: AOJu0Yz591uSOq7LYAUY2Kt7Z9cCcg/JFv2WhHQoKqryl5IoVbuypFSv
+ T1jc8AzQtx025FKNdTaZB9tHK2jeOTBTamCYh0iemhLGRpPpHlrdUbpjxFexH4wBABcr0eE0AXw
+ vcmEHZOywBVFbsK4NyUoMbjZa77/ZIpI=
+X-Gm-Gg: ASbGncv/bHenftbe92aKJVsZ2005UOepTdp0X4AfnhS2HI7UzpEGhIJkscE58Yk516A
+ NBSR12kTqc/rTEjVikn3cShRgCCqUwvfK4Zd6iMozK8V190YzOWPpXnnyCuBBWrLayBCc4yd64e
+ kzHB5eSGDzmIznYX8GQFXjErCIaAYlt0xnwtiRfXEiEqWrskWZQwPoYnwqgjm0fx/ALTVjQy8Rx
+ cUtgW+li8QLOp8wqPtgnq61xwhqvZMJ/vO+KrNiTn/NfWicHJ6HFpFDYebJ8aBckm0dc/Fs/rhZ
+ u/NbCkvdfV0R3dt5DFoIeVcyuA==
+X-Google-Smtp-Source: AGHT+IGcNnP3DDWOKvRrPnpAdv15DH6urOjFVr0bF9cI4O7sBo7EB/imeOlU2Ay39ITsmAbwdQXVHo5/yww5Bq7Q7Kc=
+X-Received: by 2002:a05:6512:2251:b0:57d:ffa4:56ff with SMTP id
+ 2adb3069b0e04-591d84f0abamr5270301e87.22.1761072126789; Tue, 21 Oct 2025
+ 11:42:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 03/10] eeprom: starfive: Simplify get_ddr_size_from_eeprom()
-To: Hal Feng <hal.feng@starfivetech.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Leo
- <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>
-References: <20250829060931.79940-1-hal.feng@starfivetech.com>
- <20250829060931.79940-4-hal.feng@starfivetech.com>
- <3f7547d9-5abb-42d9-9bf8-02329ced4364@canonical.com>
- <b1a0ad61-f844-408a-81e9-078fd3b52462@freeshell.de>
- <ZQ2PR01MB1307068E11800715ED166144E6F22@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <ZQ2PR01MB1307068E11800715ED166144E6F22@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20251013-imx943usb-v1-0-293e79d4bc12@nxp.com>
+In-Reply-To: <20251013-imx943usb-v1-0-293e79d4bc12@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 21 Oct 2025 15:41:54 -0300
+X-Gm-Features: AS18NWDfxY6VadhqNCh6XaZWuoTXL4bdWfNi61BqJmSsm3qG2z8PbUMQSNVeEXc
+Message-ID: <CAOMZO5CQvaVqhrOUJ9rTXRoR50pOSVWGXWBzj8Uc3vPM9xRA0Q@mail.gmail.com>
+Subject: Re: [PATCH v3 00/10] Enable USB and ENETC on i.MX943 EVK
+To: alice.guo@oss.nxp.com
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Marek Vasut <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Alice Guo <alice.guo@nxp.com>,
+ Stefano Babic <sbabic@nabladev.com>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>, 
+ Jacky Bai <ping.bai@nxp.com>, Jindong Yue <jindong.yue@nxp.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Frank Li <Frank.Li@nxp.com>, 
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Minkyu Kang <mk7.kang@samsung.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Minda Chen <minda.chen@starfivetech.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Roger Quadros <rogerq@kernel.org>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Hanyuan Zhao <hanyuan-z@qq.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 21 Oct 2025 21:35:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,185 +114,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alice,
 
-On 10/21/25 02:20, Hal Feng wrote:
->> On 03.09.25 05:28, E Shattow wrote:
->> On 8/29/25 00:33, Heinrich Schuchardt wrote:
->>> On 29.08.25 08:09, Hal Feng wrote:
->>>> Directly return the DDR size instead of the field of 'DxxxExxx'.
->>>> Move the function description to the header file.
->>>>
->>>> Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM
->>>> configuration")
->>>> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
->>>> ---
->>>>   arch/riscv/cpu/jh7110/spl.c                     |  2 +-
->>>>   arch/riscv/include/asm/arch-jh7110/eeprom.h     |  8 +++++++-
->>>>   .../visionfive2/visionfive2-i2c-eeprom.c        | 17
->>>> +++--------------
->>>>   3 files changed, 11 insertions(+), 16 deletions(-)
->>>>
->>>> diff --git a/arch/riscv/cpu/jh7110/spl.c
->>>> b/arch/riscv/cpu/jh7110/spl.c index 87aaf865246..3aece7d995b 100644
->>>> --- a/arch/riscv/cpu/jh7110/spl.c
->>>> +++ b/arch/riscv/cpu/jh7110/spl.c
->>>> @@ -41,7 +41,7 @@ int spl_dram_init(void)
->>>>       /* Read the definition of the DDR size from eeprom, and if not,
->>>>        * use the definition in DT
->>>>        */
->>>> -    size = (get_ddr_size_from_eeprom() >> 16) & 0xFF;
->>>> +    size = get_ddr_size_from_eeprom();
->>>>       if (check_ddr_size(size))
->>>>           gd->ram_size = size << 30;
->>>>   diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h b/arch/
->>>> riscv/include/asm/arch-jh7110/eeprom.h
->>>> index 45ad2a5f7bc..6d0a0ba0c4a 100644
->>>> --- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
->>>> +++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
->>>> @@ -10,7 +10,13 @@
->>>>   #include <linux/types.h>
->>>>     u8 get_pcb_revision_from_eeprom(void);
->>>> -u32 get_ddr_size_from_eeprom(void);
->>>> +
->>>> +/**
->>>> + * get_ddr_size_from_eeprom() - read DDR size from EEPROM
->>>> + *
->>>> + * @return: size in GiB or 0xFF on error.
->>
->> No. This is not consistent with get_mmc_size_from_eeprom() return value
->> which uses 0 as short-circuit return value if read_eeprom() fails.
->>
->> It is not important to make the distinction here if eeprom read failed or the
->> data was not a valid size (i.e. zero from successful eeprom read).
-> 
-> OK. Will return 0 if read_eeprom() fails.
-> 
+On Mon, Oct 13, 2025 at 3:59=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
+>
+> Changes for v1:
+>  - Adding USB2 and USB3 device tree nodes with required PHY and
+>    regulator support.
+>  - Enabling ENETC1 and ENETC2.
+>  - Updating Kconfig and DTSI files to support these interfaces.
+>
+> Changes for v2:
+>  - Resend patch series with updated To list.
+>
+> Changes for v3:
+>  - Remove logically dead code in imx94_link_config().
 
-Also note that Heinrich mentions this could become signed int for
-returning a proper error code. I do not have any more opinion about
-"zero" or "negative error code", either is okay. This can become signed
-int in future if we will care to make a distinction between the types of
-errors.
+This series does not pass CI:
 
->>
->>>> + */
->>>> +u8 get_ddr_size_from_eeprom(void);
->>>>     /**
->>>>    * get_mmc_size_from_eeprom() - read eMMC size from EEPROM diff
->>>> --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/
->>>> board/starfive/visionfive2/visionfive2-i2c-eeprom.c
->>>> index 17a44020bcf..3866d07f9d4 100644
->>>> --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
->>>> +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
->>>> @@ -550,23 +550,12 @@ u8 get_pcb_revision_from_eeprom(void)
->>>>       return pbuf.eeprom.atom1.data.pstr[6];
->>>>   }
->>>>   -/**
->>>> - * get_ddr_size_from_eeprom - get the DDR size
->>>> - * pstr:  VF7110A1-2228-D008E000-00000001
->>>> - * VF7110A1/VF7110B1 : VisionFive JH7110A /VisionFive JH7110B
->>>> - * D008: 8GB LPDDR4
->>>> - * E000: No emmc device, ECxx: include emmc device, xx: Capacity
->>>> size[GB]
->>>> - * return: the field of 'D008E000'
->>>> - */
->>>> -
->>>> -u32 get_ddr_size_from_eeprom(void)
->>>> +u8 get_ddr_size_from_eeprom(void)
->>>>   {
->>>> -    u32 pv = 0xFFFFFFFF;
->>>> -
->>>>       if (read_eeprom())
->>>> -        return pv;
->>>> +        return 0xFF;
->>
->> No, inverted logic, see above return of 0xFF as an error condition is suspect.
-> 
-> Ditto.
-> 
->>
->>>
->>> Let's assume somebody cleared the EEPROM and the SPI flash.
->>>
->>> Would it make sense to assume the minimum encodable RAM size (1 GiB)
->>> in this case, just to let the board boot to the console to allow
->>> writing the EEPROM with valid data again?
->>>
->>> The current patch to simplify the code looks correct.
->>>
->>> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>
->>>>   -    return hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL);
->>>> +    return (hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL) >> 16) &
->>>> 0xFF;
->>>>   }
->>>>     u32 get_mmc_size_from_eeprom(void)
->>>
->>
->> Yes, later fallback to 2G size configuration makes sense. Compatible products
->> with less than 2G do not exist and probably never will; there may be some
->> developer boards with 1G but none I have ever heard of directly in
->> conversations since 2023. The other common situation with zero or
->> uninitialized EEPROM would be a failed read of eeprom i.e. RTC module at
->> same i2c address or missing devicetree nodes at SPL phase.
->>
->> 1. DDR size detection heuristic should happen first without need of eeprom, if
->> possible.
->>
->> 2. Else warn DDR detection failed and read size from eeprom config
->>
->> 3. Else warn eeprom memory config invalid and set size set to default 2G.
-> 
-> Actually, if the u-boot fails to read DDR size from EEPROM, it will use the size (4GB)
-> defined in the memory node of device tree. 
-> 
-> With some debugging, I found that the reason why the SPL fails to boot when the
-> EEPROM crashing is that the u-boot FDT selection depends on the product ID read
-> from EEPROM.  There is no default FDT for VF2 u-boot to use now.
-> 
-> One solution is that
-> ------------------------------------------------------------------------------------------------
-> diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
-> index b518560bb94..b1bacaf7996 100644
-> --- a/arch/riscv/dts/binman.dtsi
-> +++ b/arch/riscv/dts/binman.dtsi
-> @@ -92,10 +92,7 @@
->                         };
->  
->                         configurations {
-> -
-> -#ifndef CONFIG_MULTI_DTB_FIT
->                                 default = "conf-1";
-> -#endif
->  
->  #if !defined(CONFIG_OF_BOARD) || defined(CONFIG_MULTI_DTB_FIT)
->                                 @conf-SEQ {
-> ------------------------------------------------------------------------------------------------
-> which means using the first FDT (jh7110-deepcomputing-fml13v01) in OF_LIST as the
-> default FDT.
-> 
-> Best regards,
-> Hal
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1270141
 
-No, it is missing cpufreq driver and there is wrong behavior of the
-memory driver, so this problem would repeat again when JH7110S is added.
+As I've mentioned multiple times, please run the series through CI on
+your side first.
 
-Do you have a suggestion of OPP table values that are safe for both
-JH7110 and JH7110S ? Can you implement cpufreq in U-Boot as mentioned
-previously (on LKML discussion)?
-
-Also, "2133" is not a frequency in Hz and anyway the memory driver in
-U-Boot needs to be improved to use Common Clock Framework to get the
-correct frequency.
-
-Look for the two "FIXME" comments in
-arch/riscv/dts/starfive-visionfive2-u-boot.dtsi from U-Boot
-origin/master for location of what I am asking about.
-
-When these issue are fixed then it will be easy to have a basic "jh711x"
-dts configuration as the default until DTS selection is completed. This
-will allow use of EEPROM update command from U-Boot.
-
-Thank you, Hal.
-
--E
+This is becoming a pattern with the NXP folks' submissions, and this
+needs to improve.
