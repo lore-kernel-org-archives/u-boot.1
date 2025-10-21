@@ -4,86 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED41CCD1A7
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 18:17:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55301CCD1A7
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 18:17:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94A58802C1;
-	Tue, 21 Oct 2025 20:17:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8C008323A;
+	Tue, 21 Oct 2025 20:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="loNJ3Tct";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MHIxi4+G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAD5E807C0; Tue, 21 Oct 2025 20:17:19 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 19ADB8323A; Tue, 21 Oct 2025 20:17:28 +0200 (CEST)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4967380107
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 20:17:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95A0480107
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 20:17:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-87de60d0e3eso22751986d6.3
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 11:17:16 -0700 (PDT)
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-791fd6bffbaso94315706d6.3
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 11:17:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761070635; x=1761675435; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=z5kVEHBkHIHYlDByejC1sJHPm6rvS0/1XjbMBx41jaU=;
- b=loNJ3TctIV5hR4UvS+93gtbcPCgpnkU88vQ4Z2O2pH8rXcF+7F5b7BTAJ4iKlgQmxO
- fLp2e04o89kpmL8TzUMy17PVioT8NJ1/NIokzwADHgmQZ/cQ8ykjOmBMvqS7Yt5exkrb
- zYLwQSSe1hIoq5yYF9QUehdg9qcj2NWlwMV071NVt7SVIlSEcJMS3q/AWzfSGG5V308k
- tv3RReG8fAI7nQgAjtamb9u+eqykb6zEO20gvPfumhNfD023mvYNVcFZYuEtwOZsNVmQ
- 1BXkjUbdIhuY5n/kF1Q8XAJtvHK5CPr2wUmNkzynFVyJpNzNVuJsNQECUdd5lDijvzK0
- loAA==
+ d=linaro.org; s=google; t=1761070644; x=1761675444; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=G6tsADtO4pcBLw8LeIdE+xD7hbT3Ym+6+yZAJ8rFdYQ=;
+ b=MHIxi4+GbvvhP11lg94U3Cky/aB//mk8B7tBQ540MiHTgq7ECvcGQj9EyUqwB5g736
+ TgXKdbdAYNPaJs/BVJaVxqOJZCyPIW/SH9lMU2KyzHIK3QugCVyPq31RKWuMqGdcb8WU
+ vfQM7y9loe+GPxpXAmS+gXiKviQN9yzlEuTfTKmDNlc2FT5yhUV3TG//LYFbqazZxIp0
+ VJ72vHl8GBBVvuyZGEDbZcVFVbPUgidNkLNIbJWmiE2CAHCpI+4N0fC8Mv3K6keiriyK
+ JGsBNrE7JpDHIeRDraVmLMBPa/0izw6JlIxelPj3BloeTJEenIXoi4zhHQz1Ov5C1I4A
+ THig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761070635; x=1761675435;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z5kVEHBkHIHYlDByejC1sJHPm6rvS0/1XjbMBx41jaU=;
- b=kc2+2IzBErh+Lqs6NyisSvpMR8WCtUkbwwtIEq6113AReOIzhjxLQ/4bXgzOfK1ASS
- KmYrokc8ZfivtDvOrT05x1r9quAIkQ1FbdIInmbFwRh9BI1jdDoCb53/e+RpjL3NZvgc
- gFHX28gc0rDltSxnsBpCw15Sf90cKUP+HHnVUFN7vzQlN6agIrmwYHbTPceI5stEgZ1t
- O1W8xONaqv3AzL6qCVGQTXt25Zi6uj6znJVHdtan2a5327HLoqO5qCVVN387t2KlpTyl
- hpdEaMorSe/V8I1aBU0XXztjx+2p2sTfsRFPgN5xugBYHUC4u5ERgLBkBMPOcgcjiuDb
- 0WeA==
-X-Gm-Message-State: AOJu0YwwfHrl03FwO4v5DNvqQ9Mi7pXpjLCHduZOWjoTQe/k8ETWvZ8F
- j4bTdbx9RC0HgnCFaa60XSaMgVfu+5V6a/fOOYo/0dUHbvBzTl1x4ditCIQxg6pNMmsogoVJXJw
- eF1eg
-X-Gm-Gg: ASbGncs1uhGGOoizubI+Tvr9xCiDUQ23VLZwBFGTrua9Svcc+9rMNGulL/aqrdvGAZ7
- wyOnhlNUxqLjx+zDfYf0XPPq3RgdONwz9fxwfNQh7vBnPjWmXENbGTL3tfbNlZoZ0Nm63g7hR7C
- MRsOPewejPdk31R0fTrYdFeqfCQEvyEDQBDIpGX+0YIzJ28yU6E7c2EEKnLmF3PhsQ4wbm6RNkg
- 1Ye+wqbQgpTGev2Jmthfwbpu/uFZhI4nSZjLh/Cnp0oSCe7/FnA2Akq5P/9N9jYCOlTPKYHKUH5
- MU71mBQ079QTCvbS+YgGPOpj1Jl1Cgqoo0gnXcCB9qOM5fZQOZASkNZAc42tVN5IzQHQb/CL54w
- c4xd/r+Smm28htlg5INrreEFeBhQxzUxeYtNMSv1aUNrA2A3u4ylCaH6mlzew8yV0ZnOh6ol40G
- COJst8gbVCPsFNrBHB6sMRwtYP00K+6kaRnNiwEw==
-X-Google-Smtp-Source: AGHT+IGWVYM/cDsE22l/YswislJ/fYnv8aDFaiJQb5iFO/wfcf/DNwoTfHnPnDmetvkSFlJCQyJcjg==
-X-Received: by 2002:a0c:e010:0:b0:87c:21db:cbbd with SMTP id
- 6a1803df08f44-87c21dbcdeemr161898056d6.29.1761070635374; 
- Tue, 21 Oct 2025 11:17:15 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1761070644; x=1761675444;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=G6tsADtO4pcBLw8LeIdE+xD7hbT3Ym+6+yZAJ8rFdYQ=;
+ b=lQ525VDS1SmQuYFP9SlmxfgGm42nkgauattiEMn6NVPTpmR2SDP7gh/qEb25Vl6Zt7
+ QIaZS10p/yoOYtphgZcd7Q9TiVHrdR3UVqnAGiZIOeV28lJtQ/4CId1MKBmiVlFGdb1S
+ J07VKgvT8uVfTfAs0NpKrgVt3IFc93g7GQp9wceOAiHNxA11WwdqIGRb/ZKtE3oIQsPR
+ UjmGWKbYEKMElBMJe1yGUV02V3YSgHOsj7yesfNv7KTuDL6Wgj7mRXc62+6qpS0t+aEo
+ Kd/39K2+Oi4pl5w4/vbfsLYerFo/d3FxQUgFLO00xJRsixKF58btzRqLUxwUb2rpVU5X
+ +BAQ==
+X-Gm-Message-State: AOJu0Yzbd0FmMsZLnJTJX+NiA03N+H4DNGgzjGfxunlNNO45YYii8TW4
+ fm1s6oyX/AS04o37T4qDby3AN1LefifUZvojRzwvwfr+6xWt06Omc8BDYrtJH7PYgcyQVEhm3DL
+ bbDdw
+X-Gm-Gg: ASbGncvs8G9w+zpm7GOoP89NfGRxWhZ8FzFXasJucjkki3qEksfM+BDSbhUJdpz2aDU
+ I133vpI96FN7yBW/sSq2gsf3WGnnS/7sM8gFH1JtwXhOwBXYdQymWF0EOSob0mXAvWPTJ5RILbB
+ aAkbmJC5j4eYSIcZw44wr320CKEXdxiFFZSrCF1TGsQjD3CVPnK2T1y9Xt8PwvNSX6rAYW3KBjy
+ 0lJ0HXx97Vf9f/4s/T3EHHkykMrP6Iff5l8hFfjAR28yex9AHIqk281o3maK7a8zLwYue59T6PV
+ RjCu6jr7bsIkxpQaclO/mnUOayShknD+NZcBVGmiYxF/lVs2xVFvMU5G8vj+++1LUiQMUzEB2ji
+ AmZg5gxbxhOqtTl/iIRn1j5OT9dhLyIYbdInoVvEWjWXKkeNkNpGfBF5CY7BQ6yWXNdefFEJ/3b
+ eg+oW6QtpNhc/YugL4oD3aYnVtgn7OTE/+KRdNog==
+X-Google-Smtp-Source: AGHT+IGcIPYE3VNRL00cVm5Kl7/FfgXdw6+k+AbcmF7AV9Dk5nRxw1Tze6oNKNElklIDkWMEe5gBww==
+X-Received: by 2002:a05:6214:3010:b0:78f:4d53:7cd5 with SMTP id
+ 6a1803df08f44-87c2055e412mr241786426d6.5.1761070643924; 
+ Tue, 21 Oct 2025 11:17:23 -0700 (PDT)
 Received: from localhost.localdomain ([209.227.150.67])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-87d02884878sm72831526d6.31.2025.10.21.11.17.13
+ 6a1803df08f44-87d02884878sm72831526d6.31.2025.10.21.11.17.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 11:17:14 -0700 (PDT)
+ Tue, 21 Oct 2025 11:17:23 -0700 (PDT)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
- Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>,
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>,
+ Simon Glass <sjg@chromium.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [RESEND PATCH v5 0/5] Enable Firmware Handoff CI test on qemu_arm64
-Date: Tue, 21 Oct 2025 11:16:53 -0700
-Message-Id: <20251021181703.598342-1-raymond.mao@linaro.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sam Protsenko <semen.protsenko@linaro.org>
+Subject: [RESEND PATCH v5 1/5] docker: add OP-TEE and TF-A build for testing
+ Firmware Handoff
+Date: Tue, 21 Oct 2025 11:16:54 -0700
+Message-Id: <20251021181703.598342-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20251021181703.598342-1-raymond.mao@linaro.org>
+References: <20251021181703.598342-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,41 +108,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series enable Firmware Handoff [1] CI tests on qemu_arm64 by:
-1. fetch MbedTLS (v3.6), OP-TEE (v4.7.0) and TF-A (v2.13.0);
-2. build bl1 and fip with both Firmware Handoff and Measured Boot
-   enabled;
-3. pytest to validate the Firmware Handoff feature via bloblist by
-   checking the existence of expected FDT nodes and TPM events generated
-   and handed over from TF-A/OP-TEE.
+Fetch OP-TEE (4.7.0), TF-A (v2.13.0), MbedTLS (v3.6) and build
+bl1 and fip with both Firmware Handoff and Measured Boot enabled.
 
-Pre-requisite u-boot-test-hooks patches [2] are required.
-A test pipeline is triggered at [3] with hacking docker image [4] and
-test hooks [5].
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+Changes in V2:
+- Move OP-TEE dependencies into the common group.
+- Fetch MbedTLS/TF-A and build bl1/fip in dockerfile instead of
+  post-buildman script.
+- Remove Trust Boot related build options.
+Changes in V3:
+- Clean-up of OP-TEE deps.
+Changes in V4:
+- Minimize OP-TEE build options.
+Changes in V5:
+- Add '--depth=1' and '--branch' when cloning OP-TEE, MbedTLS and TF-A.
 
-[1] https://github.com/FirmwareHandoff/firmware_handoff
-[2] https://lore.kernel.org/u-boot/20251003191918.767698-1-raymond.mao@linaro.org/T/#t
-[3] https://github.com/u-boot/u-boot/pull/818
-[4] https://hub.docker.com/repository/docker/raymondmao20200915/uboot-ci/tags/latest/sha256-bff18c1f2488d350e9e6e51c9987e24c36b3bfe110079aa0682964c815dd285a
-[5] https://github.com/raymo200915/u-boot-test-hooks/tree/eventlog_handoff_v2
+ tools/docker/Dockerfile | 40 +++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 37 insertions(+), 3 deletions(-)
 
-Raymond Mao (5):
-  docker: add OP-TEE and TF-A build for testing Firmware Handoff
-  pytest: add test script to validate Firmware Handoff
-  configs: select CMD_BLOBLIST for Firmware Handoff testing
-  ci: check existence of bl1 and fip in the test script
-  ci: add test entries for qemu_arm64_tfa_fw_handoff
-
- .azure-pipelines.yml                   |  18 ++++-
- .gitlab-ci.yml                         |  21 ++++-
- configs/qemu_arm64_defconfig           |   1 +
- doc/develop/pytest/test_fw_handoff.rst |   8 ++
- test/py/tests/test_fw_handoff.py       | 108 +++++++++++++++++++++++++
- tools/docker/Dockerfile                |  40 ++++++++-
- 6 files changed, 189 insertions(+), 7 deletions(-)
- create mode 100644 doc/develop/pytest/test_fw_handoff.rst
- create mode 100644 test/py/tests/test_fw_handoff.py
-
+diff --git a/tools/docker/Dockerfile b/tools/docker/Dockerfile
+index 5b4c75f8400..a952df86372 100644
+--- a/tools/docker/Dockerfile
++++ b/tools/docker/Dockerfile
+@@ -122,8 +122,10 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+ 	python-is-python3 \
+ 	python2.7 \
+ 	python3 \
++	python3-cryptography \
+ 	python3-dev \
+ 	python3-pip \
++	python3-pyelftools \
+ 	python3-sphinx \
+ 	python3-tomli \
+ 	python3-venv \
+@@ -227,10 +229,24 @@ RUN git clone https://gitlab.com/qemu-project/qemu.git /tmp/qemu && \
+ 	make -j$(nproc) all install && \
+ 	rm -rf /tmp/qemu
+ 
+-# Build fiptool
+-RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a && \
++# Build OP-TEE for qemu_arm64
++RUN git clone --depth=1 https://github.com/OP-TEE/optee_os.git /tmp/optee_os \
++	-b 4.7.0 && \
++	cd /tmp/optee_os/ && \
++	make CROSS_COMPILE32=/opt/gcc-${TCVER}-nolibc/arm-linux-gnueabi/bin/arm-linux-gnueabi- \
++		CROSS_COMPILE64=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
++		CFG_TRANSFER_LIST=y CFG_MAP_EXT_DT_SECURE=y \
++		PLATFORM=vexpress-qemu_armv8a CFG_RPMB_FS=y \
++		CFG_RPMB_WRITE_KEY=y CFG_RPMB_TESTKEY=y \
++		CFG_CORE_HEAP_SIZE=524288 \
++		CFG_REE_FS=n CFG_CORE_ARM64_PA_BITS=48  \
++		CFG_TEE_CORE_LOG_LEVEL=2
++
++# Build fiptool, bl1 and fip for fvp and qemu_arm64
++RUN git clone --depth=1 -b mbedtls-3.6 https://github.com/ARMmbed/mbedtls.git /tmp/mbedtls
++RUN git clone --depth=1 https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/tf-a \
++	-b v2.13.0 && \
+ 	cd /tmp/tf-a/ && \
+-	git checkout v2.12.0 && \
+ 	make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
+ 		PLAT=fvp BL33=/dev/null -j$(nproc) all fip && \
+ 	mkdir -p /usr/local/bin /opt/tf-a/vexpress_fvp && \
+@@ -243,6 +259,24 @@ RUN git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git /tmp/t
+ 	mkdir -p /opt/tf-a/vexpress_fvp_bloblist && \
+ 	cp build/fvp/release/fip.bin build/fvp/release/bl1.bin \
+ 		/opt/tf-a/vexpress_fvp_bloblist/ && \
++	make CROSS_COMPILE=/opt/gcc-${TCVER}-nolibc/aarch64-linux/bin/aarch64-linux- \
++		PLAT=qemu \
++		BL33=/dev/null \
++		BL32=/tmp/optee_os/out/arm-plat-vexpress/core/tee-header_v2.bin \
++		BL32_EXTRA1=/tmp/optee_os/out/arm-plat-vexpress/core/tee-pager_v2.bin \
++		BL32_EXTRA2=/tmp/optee_os/out/arm-plat-vexpress/core/tee-pageable_v2.bin \
++		BL32_RAM_LOCATION=tdram SPD=opteed \
++		TRANSFER_LIST=1 E=0 \
++		MEASURED_BOOT=1 \
++		EVENT_LOG_LEVEL=10 \
++		MBOOT_EL_HASH_ALG=sha256 \
++		MBEDTLS_DIR=/tmp/mbedtls \
++		-j$(nproc) all fip && \
++	mkdir -p /opt/tf-a/qemu_arm64_fw_handoff_tfa_optee && \
++	cp build/qemu/release/fip.bin build/qemu/release/bl1.bin \
++		/opt/tf-a/qemu_arm64_fw_handoff_tfa_optee/ && \
++	rm -rf /tmp/optee_os && \
++	rm -rf /tmp/mbedtls && \
+ 	rm -rf /tmp/tf-a
+ 
+ # Download the Arm Architecture FVP platform. This file is double compressed.
 -- 
 2.25.1
 
