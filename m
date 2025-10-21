@@ -4,109 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67129CCD1A5
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 19:35:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF651CCD1AA
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 20:28:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC681833F6;
-	Tue, 21 Oct 2025 21:35:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F3A8D8334F;
+	Tue, 21 Oct 2025 22:28:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YBG9zF4S";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XRNPtgLs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6F4B807C0; Tue, 21 Oct 2025 21:00:14 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id CB05D832BC; Tue, 21 Oct 2025 22:28:29 +0200 (CEST)
+Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
+ [IPv6:2607:f8b0:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 711FC80107
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 21:00:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFA72802C1
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 22:28:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-443ac11a7b7so1286816b6e.0
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 12:00:11 -0700 (PDT)
+Received: by mail-ot1-x335.google.com with SMTP id
+ 46e09a7af769-7c2917b92bcso280697a34.1
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 13:28:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761073210; x=1761678010; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=03Adbu0dhcB7/GPhgKBW2KSSrlUVby6BI5jvDCMM1Yc=;
- b=YBG9zF4STRoXG9H0P7+txDxh4fq39PVxC8NcAcFMzTPJzKjIIsiLw4prvkYUnuWE7b
- 2UUGPL05ZOchbP3Q55g2mpRXj0nZfLXGVL+1zqNdNhE3TOVEA7wtqRSkAdijjI9n9Ba9
- YiolyEl8Nr8gujRCjsxkvRAOctSGGRImxefSU=
+ d=konsulko.com; s=google; t=1761078506; x=1761683306; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R265QFCfNPrbDDNK29JOj3mn972Ru5hRzt8lrPyzT0A=;
+ b=XRNPtgLs86uDGNOtvcuQF2Q/ABWuqL3/F6fnDQuQ382bFpO/vwm2d8u67t9WLhAOhU
+ NnWNOl4Qbdj8ickXEMM+eThnmmBn/7OOeUKIRmennKTJ7kZUg1pua7ssvVdhsm6L5h4e
+ 8I/ZkEbviWUHIFN2LNxxKdp00POlnIKpFwhdI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761073210; x=1761678010;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=03Adbu0dhcB7/GPhgKBW2KSSrlUVby6BI5jvDCMM1Yc=;
- b=CftDk9F4aimkT5ey7dTenuyvBV2fN6onYrY2wh1ew3NQnAmJifjzFDfbsxcbxVo0A6
- NopzQWGB5TTpLLL0uPN65aX18ytPEUWvKFwcQw/YzA2cKKDlO3ifE1nckDjCf9uQMvr+
- K12Hdm3/fXQtO+WWFs+mkbVCmALSIIkQ9edNUcsYbotoOb6eAhaIPBOiszvG2DY0ac2N
- FLzkbuuYouOWye0k88G9DtJ+dC3KUOEphNs2xg5hi+npKRRd6PrJt0sgplNCUHJ7MfRw
- +W7fB5oeSoo80CEsBEpvvLkbjac/bsDLN7k0Okv9a28QvlPDM0X5GU0NArl11SnMJTKM
- RtTA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXx+KBi7FQTzG8QnKwipZvg1CI9oyd6GEBZtngSYp1uNhPmC46UOXlo/Fh1sYiHm2uY5yWMjAk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx9raoKX4GZmNVmEb+eqQxqYV7FkdEJogqo5QDhb64Z3SyzTpeG
- 89XViQobF9DKMs7+sb+/17yvSpoJhIqDJmdQaZEbi3sTLz7YFa+Shrzs5A/yrZWRj1k=
-X-Gm-Gg: ASbGncvy4WEm9izDM5BY1bxXHuBFUD/QJALlsXccOGmhJreZbsw0tqBUUGfIMiGcRSO
- ZTcQXaFp1YSvPdI+vljIwGXoCUWxboj75z733McmMrFfeNxsWLL1cSQyEvMJnK7mYawS3bw44RM
- WB1esxuwqRdUGBICcx4zrmjZTHrV+hN8ObDIKuzu96UACA4u8vhhq0YITw5w3ZwJUwaLZ0DsUsM
- sXNGKAuzbawOZLRQQpIrrnYw6YMejGAPznQUrlDFLrgaQl7ioUGuuGz3XUN5NcWsXzF0Twl5BtQ
- Um41Z354WHqiMFKlZ2yr2Y7kcS2bsabTvHISlYwfxj8tC3iAK5dV7tJ9WAu7sNvhtdVxMuFB0Z4
- MOzHZRr27/5XjZGCEpw7a2OfEeJoH6xcLByeD4CPn6Ozklw3FK1701ZW9ZNiY4YXtJcVxf0RZqh
- QjrTyYcEVqAUbCK9W+x29iNIDcCOYtBJNxLpZx9bDQfJAEsfNTpw==
-X-Google-Smtp-Source: AGHT+IEAy9pmpvZe1Iczo3OJQdZsYak9tnh8mp1IBJ+GoSuSf10/a+ofSWKy/DrTKkBlNy4GvI4lQQ==
-X-Received: by 2002:a05:6808:318e:b0:443:a155:d833 with SMTP id
- 5614622812f47-443a30b1352mr8189170b6e.42.1761073210065; 
- Tue, 21 Oct 2025 12:00:10 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ d=1e100.net; s=20230601; t=1761078506; x=1761683306;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R265QFCfNPrbDDNK29JOj3mn972Ru5hRzt8lrPyzT0A=;
+ b=TIwBTmEcG4esNnRjHVULSe/S+vVk1rZ3F+mX5k86us1UJpox4vlTTDyMy0t8X6zCE8
+ eN4RSFTut5qNbfvNTjOvDyhl1CFe1w/Y41B91tCqoOgoLGq5j+KZsbCT1vv6ECYOk9w/
+ CTIBR3AB2QnuKFInafoqCmVJOdNajXEpPMgK4tr69Ny5QcfJxMnL5TMj57udhctvb5Ad
+ GHzSRnLmJA3wgHqSoQFuDNAxFWXce9JgOTZZ2BLEMHPBiq6A6q6XQjgnx9wQgHxZi0M9
+ 3nP0C9L3tFYlo6R3KIpSJIbJsptQ9qVdSHsxH2bMk+FAZln4hMOj6RDc04ZlQkbR3dp/
+ h0bw==
+X-Gm-Message-State: AOJu0YxV5jHuCTrBtar7pgxdm0j0Xuw8K1YJYr6yhM4pdl8U160aF5iH
+ 0hAaU2EcAxCDOnYkWdqOPRTgh1+Y9b9tSms5DSFjSj3xPOv28J8IEOdj7exdw8vCrn9g9SYZmE3
+ 6zaWmMI7qZg==
+X-Gm-Gg: ASbGncs090WqnZCA855u4TURMN8Or1ynY1RQhh9F/+Ex+6MSNVcOfiKaMuP8+TZhDj+
+ OYfw0NA23YODOe35nPEGlvcmD/RiZdagpqFc0M3izgsxM6tSAnyxYcABSKFqmNlJMsFwlKO8noR
+ 6+y5csq1KWTzJ6FwXdciwFeeMrwZqfqFVJruApGJLoA7jvDduQTpA/6otjHUEsC29+H1DaHKHqB
+ 0B+z3rrgiSMknQcmYwA5XfIXp/muDWon0Tz2gVymwgL4szveBd8UOfUrl2gUx16BX4oX1TAYs2d
+ aCZPirO8hVNuYuix8Y8FomfFH2WpsmKNptp/rZkNYBzMqSLy3uLUisnSrLeA2VCAioaWLnowDID
+ 0o73CtghSU5rPbUEY/MYsVG7Vk9M9EiavGXK1LxbGn47jMtKVmk1z2oiTgU+YiJ8L2Uqt6B4JlV
+ mwz4ZPoDyuq+pGwsxJrhHLSFWBkNLGgj3Y2/XV+xWG36hs0yI9xMM9pFZq+hXimDY=
+X-Google-Smtp-Source: AGHT+IHtm0ZexAK8RpWz+SqBNMpaFIKmSIl4lrhluWBvI2WPspdGCBcZeXuyKvfxmFyJjFpjxdBOQg==
+X-Received: by 2002:a05:6830:67d9:b0:73e:a9f2:86f8 with SMTP id
+ 46e09a7af769-7c3e089dbfcmr595972a34.5.1761078506340; 
+ Tue, 21 Oct 2025 13:28:26 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-443df31dd12sm2936548b6e.21.2025.10.21.12.00.07
+ 46e09a7af769-7c2888ef0besm3930194a34.20.2025.10.21.13.28.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 21 Oct 2025 12:00:09 -0700 (PDT)
-Date: Tue, 21 Oct 2025 13:00:04 -0600
+ Tue, 21 Oct 2025 13:28:25 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: alice.guo@oss.nxp.com, u-boot@lists.denx.de,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Marek Vasut <marek.vasut@mailbox.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Alice Guo <alice.guo@nxp.com>, Stefano Babic <sbabic@nabladev.com>,
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Jacky Bai <ping.bai@nxp.com>, Jindong Yue <jindong.yue@nxp.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Frank Li <Frank.Li@nxp.com>, Simon Glass <sjg@chromium.org>,
- Lukasz Majewski <lukma@denx.de>, Minkyu Kang <mk7.kang@samsung.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Minda Chen <minda.chen@starfivetech.com>,
- Tim Harvey <tharvey@gateworks.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Roger Quadros <rogerq@kernel.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Hanyuan Zhao <hanyuan-z@qq.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Weijie Gao <weijie.gao@mediatek.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>
-Subject: Re: [PATCH v3 00/10] Enable USB and ENETC on i.MX943 EVK
-Message-ID: <20251021190004.GF6688@bill-the-cat>
-References: <20251013-imx943usb-v1-0-293e79d4bc12@nxp.com>
- <CAOMZO5CQvaVqhrOUJ9rTXRoR50pOSVWGXWBzj8Uc3vPM9xRA0Q@mail.gmail.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 0/3] doc: Add a general note about $?
+Date: Tue, 21 Oct 2025 14:25:31 -0600
+Message-ID: <20251021202820.1272414-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="O5WPh67qiXuilrNQ"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5CQvaVqhrOUJ9rTXRoR50pOSVWGXWBzj8Uc3vPM9xRA0Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Tue, 21 Oct 2025 21:35:37 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,58 +93,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hey all,
 
---O5WPh67qiXuilrNQ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is a small series to first add a general explanation for how $? is
+set by commands to the cmdline documentation and second remove the
+redundant information. The first patch adds this while removing the
+identical (and sometimes slightly wrong or incomplete) information from
+commands which had it. The last two patches remove the information from
+cases that were not quite as clear, to make review easier. The commands
+which either do something different or provided additional information
+about what counts as success or failure have been retained.
 
-On Tue, Oct 21, 2025 at 03:41:54PM -0300, Fabio Estevam wrote:
-> Hi Alice,
->=20
-> On Mon, Oct 13, 2025 at 3:59=E2=80=AFAM <alice.guo@oss.nxp.com> wrote:
-> >
-> > Changes for v1:
-> >  - Adding USB2 and USB3 device tree nodes with required PHY and
-> >    regulator support.
-> >  - Enabling ENETC1 and ENETC2.
-> >  - Updating Kconfig and DTSI files to support these interfaces.
-> >
-> > Changes for v2:
-> >  - Resend patch series with updated To list.
-> >
-> > Changes for v3:
-> >  - Remove logically dead code in imx94_link_config().
->=20
-> This series does not pass CI:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1270141
->=20
-> As I've mentioned multiple times, please run the series through CI on
-> your side first.
->=20
-> This is becoming a pattern with the NXP folks' submissions, and this
-> needs to improve.
-
-I agree and I want to link to
-https://docs.u-boot.org/en/latest/develop/ci_testing.html#azure-pipelines
-here as well because it will be better if everyone has their own Azure
-pipeline and doesn't get bottlenecked. We can also work out setting up
-contributor repositories in our gitlab if that would help, and run CI
-there.
-
---=20
+-- 
 Tom
 
---O5WPh67qiXuilrNQ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPfYNAAKCRAr4qD1Cr/k
-ChywAP9I7tJl9jxEr1eMJ8ZzQl0pEGroFhf4Z33/D1WSsYhbRQEA7taU+vuVJwGe
-NQlDWX7ujujetTX0L4M7viBYa46UXAA=
-=kCWO
------END PGP SIGNATURE-----
-
---O5WPh67qiXuilrNQ--
