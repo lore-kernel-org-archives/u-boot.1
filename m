@@ -4,66 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D3F5CCD1A7
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 14:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BDFFCCD184
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 14:24:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33D9882B20;
-	Tue, 21 Oct 2025 16:24:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 9381B80107;
+	Tue, 21 Oct 2025 16:24:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="N+Bp8UPz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HYjb7zB+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FFA8800D7; Tue, 21 Oct 2025 16:21:59 +0200 (CEST)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 35E0980107; Tue, 21 Oct 2025 16:24:27 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F7A0802C1
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 16:21:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43229800D7
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 16:24:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kauschluss@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id CFDD925D5A;
- Tue, 21 Oct 2025 16:21:56 +0200 (CEST)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id hKtneWANpH3w; Tue, 21 Oct 2025 16:21:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1761056516; bh=4UhFHSbBxnFZtiHDioPxCW43CPnycSHHzGFPcO3sMGs=;
- h=From:Date:Subject:To:Cc;
- b=N+Bp8UPzh1IRBdF+ctfQgSJoDRUCtBKcOPZQpgh+OpDE5RDduyZdWtLXpnjhF1+uD
- 6n8krpUjfrwg0TNbGnqOcYRoZqP/Rf2bOCa+DL1A3akJtzcx96F8HGQMuCvr58KVKj
- cYz1xMJXGBxF0vjWaeY8g+IWJa7UyvEXJSamnEB5qRihTHHg6B+9Iz5bWnoN7yMsBa
- /b0Itg5zUGVcx7VU8uo0818EnUlMONKtKheFScUf3byf3q4nLzCs6VmgG7zcunRgIk
- PUT/O5/VSJTKqSeaI/RQWy069kULF4+BXWPjQfJyVjdTlnR/qD6t01YklLvo9dVTll
- qkLRKzLFCMfdA==
-From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Tue, 21 Oct 2025 19:51:35 +0530
-Subject: [PATCH v2] gpio: s5p: increment bank base address only if bank is
- initialized
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-58b025fce96so4796321e87.1
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 07:24:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761056664; x=1761661464; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o1PeQ2liYoTP/qXDS6B/xd6WmHOhdU+oESiZxg4rAFs=;
+ b=HYjb7zB+iBREf5nwwIahjZV18ZcUlxvgxjWBtZYb5PJCOyeLmkl80FoKbB4xTmaSMw
+ AMn66WicpC2mFUtrqeM7tbCbswFfzY7AuO0wsjyQ4nTIikIbl5thPSA7YO/jysePIQoY
+ GX6xIopGz/np3uFaNMwU0baQPgfsKal5rXY+75HFsy4KTMkJWaBksHkcxVKjGVfMfd8A
+ eeTFS2cTVEk7blgZhuetoEvYeb4ma3nRGs4jYLWvz6MxSxLFZ8dIGIDdj2yrYD+Ce1zL
+ 1JErFrFUti5P8d7EPzEMr3CLnqTjXK0DV6OVQqgiSP0aFeU7z3KrULCOvUyodu0/aRHn
+ OwbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761056664; x=1761661464;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=o1PeQ2liYoTP/qXDS6B/xd6WmHOhdU+oESiZxg4rAFs=;
+ b=kj3SHP1vmqwFAIqZuqLmHYl2uQJWxjCl6oUInsT0Ez/yg4TkzdTrf644SPO9pen8vw
+ 4x6YkahYJrna5B344OmKMyvj1NsLzZzAmbOcehIDOAtXrQMdB9tJKveVkO9SA5yBGaQZ
+ HHlYplMXh+Oi9ICbhPwXOhms5Ohw7VSWa84veY9OJZkNO8uuCPWHMSH4ECJ2AIZWUGaE
+ zodoYwDtqLzqW02ilAS0soQk88zdh9C2ZcW910bfJ8JUfcmeIqd2zUBmcvprXM56W8xn
+ hW2iwn37/8f2WOUc6n6CP2BrFDl91PN1cBURwGzLx8Pt8Tc6trGD4z7RrXVC1XXfuyHj
+ fdQA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVYX3hfazhohiE7MpIAJ89wajYLZjmuyhhgCkQrGefauSB8rXNV4I8tV2L5dVnPM8nW/pvSROw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGcSwZFV8xHWpjhvBjtOk4j+TYIPQUy6ONdNWtPYz7koyJh3LU
+ qVjlN3k5zhQ5sy7WpP9dTWk3nArCcpvmm4cnb2fyDVw8ftsvYfQoyg5Ztvs9Uv4k7dCacXTodlx
+ 6cSFwKo08nyFq87EMsJ6IDaUSXDmpheA=
+X-Gm-Gg: ASbGncs23jFCas/wF56YDEs+LEPL/LSnXtugYCgBtndFcZ4cMVPO8Kq3Is1ySPdLPcE
+ +ZJA9aUldmAkg3vW5x7mJz5o+MKn0assTus24sz9mo9mS9H35B9k2rC3t61ESEHa0VQDyBrr7CM
+ QqMi0L4JxP6pTEIW+eSuA5qIG6EJZ1/g8NLJEvI50duZsHa59BaHHXnPwTESvNFKWQ3BeenN+Li
+ 6h/58zZhf4pqW2FAtwGxrSKYnZCIQeBpkowyybiQxijE6bjktpFhndZQfWRq7Fu8AOyKJR9J3iQ
+ ozP3uNU2rCr97Hc=
+X-Google-Smtp-Source: AGHT+IHv2wBi3PQ7689qU1N5LQIy/7z/zlsDtbh0QZ1D7tD4JiMFb1yZDG5csek6RllvsTpXNUK6FOw/xCys7StRTP4=
+X-Received: by 2002:a05:6512:3b13:b0:57e:4703:3b0a with SMTP id
+ 2adb3069b0e04-591d8552c2cmr6124797e87.31.1761056664198; Tue, 21 Oct 2025
+ 07:24:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251021-gpio-s5p-bank-fix-v2-1-eae4b37e7e73@disroot.org>
-X-B4-Tracking: v=1; b=H4sIAO6W92gC/22NywqDMBBFf0Vm3SmZYPpa+R/FRTRpHAqOJBJaJ
- P/eVOiuy3PgnrtB8pF9gluzQfSZE8tcQR8aGCc7B4/sKoNW2pCiFsPCgsksONj5iQ9+ITmlLuO
- gLdkr1N0SfdV7895XnjitEt/7Raav/dXOf2qZkLAlZVR70qO3pnOcosh6lBigL6V8AH2cP6e0A
- AAA
-X-Change-ID: 20251014-gpio-s5p-bank-fix-1d008cb2a1a9
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Henrik Grimler <henrik@grimler.se>, 
- Kaustabh Chakraborty <kauschluss@disroot.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761056512; l=2035;
- i=kauschluss@disroot.org; s=20250202; h=from:subject:message-id;
- bh=4UhFHSbBxnFZtiHDioPxCW43CPnycSHHzGFPcO3sMGs=;
- b=AVAowUX2fvd8+i7LCnEI5oXyirKPHBtz7y3f2WSP9bO/qJpkjvqgOpfnJP/ofelMyu3qYFujq
- 1dq7fg/c75iCNjubbS+1V6QP0j6y2B2iEzsrVvNtlZFtJ1XbVa9S1gu
-X-Developer-Key: i=kauschluss@disroot.org; a=ed25519;
- pk=h2xeR+V2I1+GrfDPAhZa3M+NWA0Cnbdkkq1bH3ct1hE=
-X-Mailman-Approved-At: Tue, 21 Oct 2025 16:24:00 +0200
+References: <20251014111756.446456-1-alice.guo@oss.nxp.com>
+ <20251014111756.446456-2-alice.guo@oss.nxp.com>
+ <88093ae4-a18f-434b-b0a3-a362133871cc@mailbox.org>
+ <PAXPR04MB9644DA5017638F3B0716710FE2F5A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+In-Reply-To: <PAXPR04MB9644DA5017638F3B0716710FE2F5A@PAXPR04MB9644.eurprd04.prod.outlook.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 21 Oct 2025 11:24:12 -0300
+X-Gm-Features: AS18NWBO8t60_ajh8PyeJz4fthIWotqn9wRgafFdElAPvTsT-13oEW5NaTET-bw
+Message-ID: <CAOMZO5AEjeEDaXt4NphbViWoc8v9kLHes_gcnFTT6SbMj5VXpg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/4] spi: nxp_xspi: Add new driver for NXP XSPI
+ controller
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: Marek Vasut <marek.vasut@mailbox.org>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ dl-uboot-imx <uboot-imx@nxp.com>, "trini@konsulko.com" <trini@konsulko.com>, 
+ "sbabic@nabladev.com" <sbabic@nabladev.com>, 
+ "jagan@amarulasolutions.com" <jagan@amarulasolutions.com>,
+ Ye Li <ye.li@nxp.com>, 
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Jacky Bai <ping.bai@nxp.com>, "sjg@chromium.org" <sjg@chromium.org>,
+ "mkorpershoek@kernel.org" <mkorpershoek@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,61 +107,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is a condition guard which ensures that the GPIO node, indeed
-describes a GPIO controller.
+Hi Alice,
 
-	if (!fdtdec_get_bool(blob, node, "gpio-controller"))
-		continue;
+On Mon, Oct 20, 2025 at 4:10=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
 
-Since the bank base is being incremented in the loop, it is done so
-irrespective of whether the node is a GPIO controller or not. This leads
-to the incorrect resolution of bank base addresses.
+> As far as I know, the i.MX943 operates in little-endian mode, and the BE =
+mode is not used. Do you think it is necessary to remove the big-endian rel=
+ated code?
 
-Move it out of the loop, and instead increment the bank base address
-only if the driver successfully binds a GPIO controller.
+Yes, please keep it simple.
 
-Reviewed-by: Henrik Grimler <henrik@grimler.se>
-Fixes: b8809e60cdb5 ("dm: exynos: gpio: Convert to driver model")
-Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
----
-Changes in v2:
-- collect Reviewed-by: tags
-- add Fixes: tag (Henrik Grimler)
-- Link to v1: https://lore.kernel.org/r/20251017-gpio-s5p-bank-fix-v1-1-41050462cea5@disroot.org
----
- drivers/gpio/s5p_gpio.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+Please resend this series with a link to the upstream submission.
 
-diff --git a/drivers/gpio/s5p_gpio.c b/drivers/gpio/s5p_gpio.c
-index 53dbbe97b5a02d09fbf0124268faaffa31b1315f..c072f146514c63cdc98e907983a904f05cd118e7 100644
---- a/drivers/gpio/s5p_gpio.c
-+++ b/drivers/gpio/s5p_gpio.c
-@@ -319,7 +319,7 @@ static int gpio_exynos_bind(struct udevice *parent)
- 	base = dev_read_addr_ptr(parent);
- 	for (node = fdt_first_subnode(blob, dev_of_offset(parent)), bank = base;
- 	     node > 0;
--	     node = fdt_next_subnode(blob, node), bank++) {
-+	     node = fdt_next_subnode(blob, node)) {
- 		struct exynos_gpio_plat *plat;
- 		struct udevice *dev;
- 		fdt_addr_t reg;
-@@ -341,9 +341,8 @@ static int gpio_exynos_bind(struct udevice *parent)
- 		if (reg != FDT_ADDR_T_NONE)
- 			bank = (struct s5p_gpio_bank *)((ulong)base + reg);
- 
--		plat->bank = bank;
--
- 		debug("dev at %p: %s\n", bank, plat->bank_name);
-+		plat->bank = bank++;
- 	}
- 
- 	return 0;
+Let's get it reviewed by the mtd-linux folks first.
 
----
-base-commit: 582a04763aa80738c1c8ac60c47d1a5159a42833
-change-id: 20251014-gpio-s5p-bank-fix-1d008cb2a1a9
-
-Best regards,
--- 
-Kaustabh Chakraborty <kauschluss@disroot.org>
-
+Thanks
