@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F31ACCD1A5
-	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 08:00:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5511CCD184
+	for <u-boot@archiver.kernel.org>; Tue, 21 Oct 2025 08:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 298C5831D6;
-	Tue, 21 Oct 2025 10:00:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 68890831D6;
+	Tue, 21 Oct 2025 10:01:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="hlgbQQUQ";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="QjNcFYY5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 854B58334F; Tue, 21 Oct 2025 10:00:00 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id D49FB8357F; Tue, 21 Oct 2025 10:01:29 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 384D3802C1
- for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 09:59:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 805D2802C1
+ for <u-boot@lists.denx.de>; Tue, 21 Oct 2025 10:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.genoud@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id C85B81A1580;
- Tue, 21 Oct 2025 07:59:57 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 23C744E4122E;
+ Tue, 21 Oct 2025 08:01:27 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 9CD73606DC;
- Tue, 21 Oct 2025 07:59:57 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id EE79260680;
+ Tue, 21 Oct 2025 08:01:26 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3EA72102F23F0; 
- Tue, 21 Oct 2025 09:59:37 +0200 (CEST)
+ with ESMTPSA id B3CE6102F23E1; 
+ Tue, 21 Oct 2025 10:01:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761033596; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding; bh=cSY+c3XG7PfH2fmkA1TVDpwbPHkg3Y3wWAnhmgLPWfI=;
- b=hlgbQQUQfnbXTu7Hiv9MLo6bC50lwMKVSwWZw13xappLXYwP3b7+sO0+KCoKZJR5njSL2o
- sPAvPa9OuvO3HvCQWyEnt6jczeTWKgw8t2MGC6KSxqhC4GdbsfSe234Gy2MhXzX7drkvbi
- tODHvwq6I4axzCVry2yCLj2AGoIfdl1rk6UTLNBF/ZZrgBJAoqQxftsmphHwm/oIHC6GuY
- FUw3B3Horu90gOFS6Y7Fa5n3ovRohiI5A09s9BeHXuRisVuGxuqR5SdoiFgxQFDyNh5x9w
- sFwoIhi8aGf5btqFI4JkkqBlGgtrjJwwrSn2CIIzfv7QIeFZMGUM9tLb3Odpfw==
+ t=1761033685; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=Wt5XWL5Q3V5Ht/KJrs6ITZzYTD1i2UezsILbB7fCTyg=;
+ b=QjNcFYY5NSlg6s/Q6U5pcvxxZBFZuANI0Xxp7Hb5gR6uJNfUFy9mzpcvqNQ6m23K55JOcm
+ 6BWU7VE8B4khZ7s33lZIVdl4e7AStgXOoeCGfIj89HmrlTM7ZUP2yFmWSCcSYiILLWzX3U
+ 7V25zWWfXl7LmTSkfOr8GSDrHPN2edhonk7B/uPL3ygfHhftuCJF9n8wfI890zUypLqqsF
+ iQvHdCCnLugXDd5dx6N0l38cVJz2sev1SFVIn5MSpCoSrerbaUGiMf2C5VJe0sTbtrai2Y
+ LU/v4swTN5uFuuRa8gutR8PVbpEj94OFyu8pXzPTnE0AklQWZzxq28soAvkz/g==
 From: Richard Genoud <richard.genoud@bootlin.com>
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
@@ -56,11 +56,11 @@ Cc: Dinesh Maniyam <dinesh.maniyam@intel.com>,
  Philip Molloy <philip.molloy@analog.com>,
  Miquel Raynal <miquel.raynal@bootlin.com>,
  Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
- James Hilliard <james.hilliard1@gmail.com>,
- Richard Genoud <richard.genoud@bootlin.com>
-Subject: [PATCH v2] Makefile: pass KEYDIR when set to sunxi-spl.bin mkimage
-Date: Tue, 21 Oct 2025 09:59:34 +0200
-Message-ID: <20251021075934.549466-1-richard.genoud@bootlin.com>
+ Richard Genoud <richard.genoud@bootlin.com>,
+ James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH v2] tools: sunxi-spl-image-builder: support H6/H616 NAND boot
+Date: Tue, 21 Oct 2025 10:01:20 +0200
+Message-ID: <20251021080120.550081-1-richard.genoud@bootlin.com>
 X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -81,43 +81,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: James Hilliard <james.hilliard1@gmail.com>
+The H6/H616 boot ROM doesn't expect a SPL scrambled the same way as
+older SoCs.
+It doesn't use a specific seeds table, it expects a maximized ECC
+(BCH-80), a specific BBM (FF000301) and doesn't work if empty pages are
+skipped (it needs its specific BBM, even in the padding).
 
-Provide private keys to build sunxi-spl.bin
+So, add a -h6 parameter to support H6/616 with:
+- more ECC strengths
+- specific BBM
+- default_scrambler_seeds[] with all values
+- no empty pages skip
 
-Currently we pass this for u-boot-spl.kwb targets, however when
-building sunxi-spl.bin in the TOC0 format, we may also need to
-specify a KEYDIR.
-As such we should also pass this when set to mkimage for the
-sunxi-spl.bin target.
+In Kconfig, select BCH-80 by default for SUNXI_SPL_ECC_STRENGTH to make
+BROM happy.
 
-Tested on Whatsminer H616 board.
+And in scripts/Makefile.xpl, use --h6 parameter when building for a
+SUN50I_GEN_H6 SoC.
 
+Tested on Whatsminer H616 board, booting from NAND.
+
+Co-developed-by: James Hilliard <james.hilliard1@gmail.com>
 Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
 Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
 ---
- scripts/Makefile.xpl | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/mtd/nand/raw/Kconfig    |  1 +
+ scripts/Makefile.xpl            |  1 +
+ tools/sunxi-spl-image-builder.c | 89 ++++++++++++++++++++++++++-------
+ 3 files changed, 72 insertions(+), 19 deletions(-)
 
 Changes from v1:
-- remove superfluous From: (sorry for the noise)
+- move up "default 80 if SUN50I_GEN_H6" (sorry for the noise)
 
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index 754b99bf3eb6..eb939ee85f88 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -483,6 +483,7 @@ if NAND_SUNXI
+ 
+ config NAND_SUNXI_SPL_ECC_STRENGTH
+ 	int "Allwinner NAND SPL ECC Strength"
++	default 80 if SUN50I_GEN_H6
+ 	default 64
+ 
+ config NAND_SUNXI_SPL_ECC_SIZE
 diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
-index 3e940bf562d5..52f014ad3324 100644
+index 52f014ad3324..aa4ee5cc1ce7 100644
 --- a/scripts/Makefile.xpl
 +++ b/scripts/Makefile.xpl
-@@ -442,7 +442,8 @@ MKIMAGEFLAGS_sunxi-spl.bin = \
- 	-A $(ARCH) \
- 	-T $(CONFIG_SPL_IMAGE_TYPE) \
- 	-a $(CONFIG_SPL_TEXT_BASE) \
--	-n $(CONFIG_DEFAULT_DEVICE_TREE)
-+	-n $(CONFIG_DEFAULT_DEVICE_TREE) \
-+	$(if $(KEYDIR),-k $(KEYDIR))
+@@ -455,6 +455,7 @@ $(obj)/sunxi-spl.bin: $(obj)/$(SPL_BIN).bin FORCE
  
- OBJCOPYFLAGS_u-boot-spl-dtb.hex := -I binary -O ihex --change-address=$(CONFIG_SPL_TEXT_BASE)
+ quiet_cmd_sunxi_spl_image_builder = SUNXI_SPL_IMAGE_BUILDER $@
+ cmd_sunxi_spl_image_builder = $(objtree)/tools/sunxi-spl-image-builder \
++				$(if $(CONFIG_SUN50I_GEN_H6),--h6) \
+ 				-c $(CONFIG_NAND_SUNXI_SPL_ECC_STRENGTH)/$(CONFIG_NAND_SUNXI_SPL_ECC_SIZE) \
+ 				-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+ 				-o $(CONFIG_SYS_NAND_OOBSIZE) \
+diff --git a/tools/sunxi-spl-image-builder.c b/tools/sunxi-spl-image-builder.c
+index a367f1177403..f9ba1c474be9 100644
+--- a/tools/sunxi-spl-image-builder.c
++++ b/tools/sunxi-spl-image-builder.c
+@@ -27,6 +27,7 @@ struct image_info {
+ 	int eraseblock_size;
+ 	int scramble;
+ 	int boot0;
++	int h6;
+ 	off_t offset;
+ 	const char *source;
+ 	const char *dest;
+@@ -84,18 +85,29 @@ static void scramble(const struct image_info *info,
+ 	uint16_t state;
+ 	int i;
  
+-	/* Boot0 is always scrambled no matter the command line option. */
+-	if (info->boot0) {
++	/*
++	 * Bail out earlier if the user didn't ask for scrambling.
++	 * But Boot0 is always scrambled no matter the command line option.
++	 */
++	if (!info->boot0 && !info->scramble)
++		return;
++
++	/*
++	 * On H6, the BROM scrambler seed is no different than the default one
++	 */
++	if (info->boot0 && !info->h6) {
+ 		state = brom_scrambler_seeds[0];
+ 	} else {
+-		unsigned seedmod = info->eraseblock_size / info->page_size;
++		unsigned int seedmod;
+ 
+-		/* Bail out earlier if the user didn't ask for scrambling. */
+-		if (!info->scramble)
+-			return;
+-
+-		if (seedmod > ARRAY_SIZE(default_scrambler_seeds))
++		if (info->h6) {
++			/* H6 boot0 uses all 128 seeds */
+ 			seedmod = ARRAY_SIZE(default_scrambler_seeds);
++		} else {
++			seedmod = info->eraseblock_size / info->page_size;
++			if (seedmod > ARRAY_SIZE(default_scrambler_seeds))
++				seedmod = ARRAY_SIZE(default_scrambler_seeds);
++		}
+ 
+ 		state = default_scrambler_seeds[page % seedmod];
+ 	}
+@@ -137,14 +149,19 @@ static int write_page(const struct image_info *info, uint8_t *buffer,
+ 
+ 	fwrite(buffer, info->page_size + info->oob_size, 1, dst);
+ 
+-	for (i = 0; i < info->usable_page_size; i++) {
+-		if (buffer[i] !=  0xff)
+-			break;
+-	}
++	/*
++	 * H6 BROM doesn't support empty pages
++	 */
++	if (!info->h6) {
++		for (i = 0; i < info->usable_page_size; i++) {
++			if (buffer[i] !=  0xff)
++				break;
++		}
+ 
+-	/* We leave empty pages at 0xff. */
+-	if (i == info->usable_page_size)
+-		return 0;
++		/* We leave empty pages at 0xff. */
++		if (i == info->usable_page_size)
++			return 0;
++	}
+ 
+ 	/* Restore the source pointer to read it again. */
+ 	fseek(src, -cnt, SEEK_CUR);
+@@ -212,6 +229,14 @@ static int write_page(const struct image_info *info, uint8_t *buffer,
+ 		}
+ 
+ 		memset(ecc, 0, eccbytes);
++
++		if (info->h6) {
++			/* BBM taken from vendor code: FF 00 03 01 */
++			buffer[info->ecc_step_size + 1] = 0;
++			buffer[info->ecc_step_size + 2] = 3; // NAND_VERSION_0
++			buffer[info->ecc_step_size + 3] = 1; // NAND_VERSION_1
++		}
++
+ 		swap_bits(buffer, info->ecc_step_size + 4);
+ 		encode_bch(bch, buffer, info->ecc_step_size + 4, ecc);
+ 		swap_bits(buffer, info->ecc_step_size + 4);
+@@ -303,6 +328,7 @@ static void display_help(int status)
+ 		"-e <size>        --eraseblock=<size>  Erase block size\n"
+ 		"-b               --boot0              Build a boot0 image.\n"
+ 		"-s               --scramble           Scramble data\n"
++		"-6               --h6                 Build an image compatible with H6/H616 SoC\n"
+ 		"-a <offset>      --address=<offset>   Where the image will be programmed.\n"
+ 		"\n"
+ 		"Notes:\n"
+@@ -313,6 +339,9 @@ static void display_help(int status)
+ 		"  Valid ECC strengths: 16, 24, 28, 32, 40, 48, 56, 60 and 64\n"
+ 		"  Valid ECC step size: 512 and 1024\n"
+ 		"\n"
++		"On H6/H616, the only ECC step size supported is 1024, but more ECC\n"
++		"strengths are supported: 44, 52, 68, 72, 76, 80\n"
++		"\n"
+ 		"If you are building a boot0 image, you'll have specify extra options.\n"
+ 		"These options should be chosen based on the layouts described here:\n"
+ 		"  http://linux-sunxi.org/NAND#More_information_on_BROM_NAND\n"
+@@ -342,7 +371,12 @@ static void display_help(int status)
+ 
+ static int check_image_info(struct image_info *info)
+ {
+-	static int valid_ecc_strengths[] = { 16, 24, 28, 32, 40, 48, 56, 60, 64 };
++	static int ecc_strengths_a10[] = { 16, 24, 28, 32, 40, 48, 56, 60, 64 };
++	static int ecc_strengths_h6[] = {
++		16, 24, 28, 32, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80
++	};
++	int *valid_ecc_strengths;
++	size_t nstrengths;
+ 	int eccbytes, eccsteps;
+ 	unsigned i;
+ 
+@@ -367,12 +401,25 @@ static int check_image_info(struct image_info *info)
+ 		return -EINVAL;
+ 	}
+ 
+-	for (i = 0; i < ARRAY_SIZE(valid_ecc_strengths); i++) {
++	if (info->h6) {
++		if (info->ecc_step_size != 1024) {
++			fprintf(stderr,
++				"H6 SoCs supports only 1024 bytes ECC step\n");
++			return -EINVAL;
++		}
++		valid_ecc_strengths = ecc_strengths_h6;
++		nstrengths = ARRAY_SIZE(ecc_strengths_h6);
++	} else {
++		valid_ecc_strengths = ecc_strengths_a10;
++		nstrengths = ARRAY_SIZE(ecc_strengths_a10);
++	}
++
++	for (i = 0; i < nstrengths; i++) {
+ 		if (valid_ecc_strengths[i] == info->ecc_strength)
+ 			break;
+ 	}
+ 
+-	if (i == ARRAY_SIZE(valid_ecc_strengths)) {
++	if (i == nstrengths) {
+ 		fprintf(stderr, "Invalid ECC strength argument: %d\n",
+ 			info->ecc_strength);
+ 		return -EINVAL;
+@@ -416,10 +463,11 @@ int main(int argc, char **argv)
+ 			{"boot0", no_argument, 0, 'b'},
+ 			{"scramble", no_argument, 0, 's'},
+ 			{"address", required_argument, 0, 'a'},
++			{"h6", no_argument, 0, '6'},
+ 			{0, 0, 0, 0},
+ 		};
+ 
+-		int c = getopt_long(argc, argv, "c:p:o:u:e:ba:sh",
++		int c = getopt_long(argc, argv, "c:p:o:u:e:ba:sh6",
+ 				long_options, &option_index);
+ 		if (c == EOF)
+ 			break;
+@@ -454,6 +502,9 @@ int main(int argc, char **argv)
+ 		case 'a':
+ 			info.offset = strtoull(optarg, NULL, 0);
+ 			break;
++		case '6':
++			info.h6 = 1;
++			break;
+ 		case '?':
+ 			display_help(-1);
+ 			break;
 
 base-commit: 2ba64e303b2706e5c42a6bf982326d632342ca66
+prerequisite-patch-id: 364de1b9fd9b3226884355a639c58e6d12f6f03b
 -- 
 2.47.3
 
