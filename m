@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AE80CCD1AB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 10:26:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07703CCD195
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 10:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A130583303;
-	Wed, 22 Oct 2025 12:26:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD97A835FE;
+	Wed, 22 Oct 2025 12:26:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qEkP5j7c";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Tgdr9QhN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8613B8323A; Wed, 22 Oct 2025 12:26:17 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 271DB832BC; Wed, 22 Oct 2025 12:26:18 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 528308323A
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 12:26:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9727D83303
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 12:26:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59MAQBfM1381905;
- Wed, 22 Oct 2025 05:26:11 -0500
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59MAQDDr1392516;
+ Wed, 22 Oct 2025 05:26:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761128771;
- bh=BCeVe5VL9k+iutvZf40+bvWF0xRa02QuCUWj3j6RKwg=;
- h=From:Subject:Date:To:CC;
- b=qEkP5j7cfKQGakUCwSspjq5za7zeSdybejEVtLKWHP2C8l9ze1fKJGNZoNfyfIzQE
- ZBmzEj2D3qmpWBu4uoK2knjVJhanHlTXMItdsnMMQy74UzdRQuCuDwnnzugzLfgZgc
- yAaIMwZ5CgC+f+rimZGA2LIWzoQdy3IVCvyf3Cig=
-Received: from DFLE204.ent.ti.com (dfle204.ent.ti.com [10.64.6.62])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59MAQBpE2281585
+ s=ti-com-17Q1; t=1761128773;
+ bh=WnEWg2+FhhVUUESqQknku2ttF4vRI6lv8DBAiWNjZ84=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=Tgdr9QhNKSC0FU5d92aJju2YjHlwlu9vqlQ26VF4ZyuGuUiHE9CxcU0htF7wiGhh0
+ yQC+58D0rH88O3EqDlWTaHPfDgfTKFxmcVytV2VJZ0A5iNfO7ZqixHrGeEbxMTvohW
+ 081wK3ien8/0jBjNUOGKjl1/a89Bm24vR1RY50sM=
+Received: from DFLE203.ent.ti.com (dfle203.ent.ti.com [10.64.6.61])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59MAQDpd1948651
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 Oct 2025 05:26:11 -0500
-Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 22 Oct 2025 05:26:13 -0500
+Received: from DFLE205.ent.ti.com (10.64.6.63) by DFLE203.ent.ti.com
+ (10.64.6.61) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Oct
- 2025 05:26:11 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 05:26:13 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE205.ent.ti.com
+ (10.64.6.63) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 22 Oct 2025 05:26:11 -0500
+ Transport; Wed, 22 Oct 2025 05:26:13 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59MAQAu11048426;
- Wed, 22 Oct 2025 05:26:11 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59MAQCj91063187;
+ Wed, 22 Oct 2025 05:26:12 -0500
 From: Anshul Dalal <anshuld@ti.com>
-Subject: [PATCH 0/8] Add support for TI AM6254atl SiP
-Date: Wed, 22 Oct 2025 15:55:36 +0530
-Message-ID: <20251022-62sip_support-v1-0-eed08d15e76d@ti.com>
+Date: Wed, 22 Oct 2025 15:55:37 +0530
+Subject: [PATCH 1/8] arm64: dts: ti: k3-am6*-boards: Add label to
+ reserved-memory node
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIACGx+GgC/yXMW2rDMBCF4a0YPVdBI1kj24TSfZRQxtG4EcSXa
- OxSCNl7lPjxP3C+uxLOiUV11V1l/kuS5qkEfFTqfKHpl3WKpZU11oOxVqOVtPzItixzXnXvTOQ
- avWtDVOWzZB7S/9v7Pu2d+bYVdt1HNbIIvdmuOu4qBHDga3Nw6NBg0KBpkst2jV9rOpzn8fNF9
- ySsS4xp7aoGHJk42EANDb4JfbSekOoA7YCNQexdMKYFdXo8nn8D6ZbkAAAA
-X-Change-ID: 20251022-62sip_support-b30de465397d
+Message-ID: <20251022-62sip_support-v1-1-eed08d15e76d@ti.com>
+References: <20251022-62sip_support-v1-0-eed08d15e76d@ti.com>
+In-Reply-To: <20251022-62sip_support-v1-0-eed08d15e76d@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Tom Rini <trini@konsulko.com>, Beleswar Padhi <b-padhi@ti.com>, Nishanth
  Menon <nm@ti.com>, Andrew Davis <afd@ti.com>,
  Bryan Brattlof <bb@ti.com>, Vignesh R <vigneshr@ti.com>,
  Anshul Dalal <anshuld@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761128770; l=4147;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761128770; l=7930;
  i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=/ijH1/r/xdFdhgmDXTr8mFa8hC/Ov89tkaU+q+v6UB4=;
- b=87E5CAaqSxmV2cprDyOxNv6i71+kQn3Mk6WW0kYOpLJ9Seat7xN+2hBFisS1kjZYsZO4sUpl+
- QOAvHppK164D7sov1YqlQOLMY/Uff4vW9/pypthB7kDpbt0UU70o1By
+ bh=WbMJ4qMgRk7kaR9Ye/2Ck+wyifzRoWaNdsPG9/sBVIo=;
+ b=NSy8KB1LLXTFl/Gtt7nubJVC6VtFwmb1Pq2SRykSI4TAu5vBi0MemsfSmwv+U+A15dA3JLFUq
+ 3mI+E8Btfy6AGLNhZEXX0SibIx1zFFaT2a5+fMuZAxWosXRCNWs2ftk
 X-Developer-Key: i=anshuld@ti.com; a=ed25519;
  pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -91,89 +89,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+From: Beleswar Padhi <b-padhi@ti.com>
 
-This patch series adds support for AM6254atl SiP (or AM62x SiP for
-short) to U-Boot.
+Add the label name 'reserved_memory' to the reserved-memory node in all
+K3 AM6* board level dts files. This is done so that the node can be
+referenced and extended to add more carveout entries as needed in future
+refactoring patches.
 
-The OPN (Orderable Part Number) 'AM6254atl' expands as follows[1]:
+Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+Acked-by: Andrew Davis <afd@ti.com>
+Link: https://patch.msgid.link/20250908142826.1828676-13-b-padhi@ti.com
+Signed-off-by: Nishanth Menon <nm@ti.com>
 
-AM6254atl
-     ||||
-     |||+-- Feature Lookup (L indicates 512MiB of integrated LPDDR4)
-     ||+--- Device Speed Grade (T indicates 1.25GHz/1.4GHz on the A53 cores)
-     |+---- Silicon PG Revision (A indicates SR 1.0)
-     +----- Core configuration (4 indicates A53's in Quad core config)
+[ upstream commit: 4f1aee4723a796a92f17b23699dc861b582ddfd2 ]
 
-AM62x SiP provides the existing AM62x SoC with 512MiB of DDR
-integrated in a single packages. The first 4 patches in the series
-are cherry-picked from the devicetree-rebasing repository at
-'v6.18-rc2-dts'.
-
-Depends on:
- [PATCH v11 00/11] Add support for dynamic MMU configuration
- https://lore.kernel.org/u-boot/20251017131540.3636067-1-anshuld@ti.com/
-
-base-commit: 813a0df27a8af587bd25a6a4719f68066b370091
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
+(cherry picked from commit 58c447fe500d78f5adc373b4945d8317e11df072)
 ---
-Anshul Dalal (7):
-      arm64: dts: ti: k3-am62*: remove SoC dtsi from common dtsi
-      arm64: dts: ti: Introduce base support for AM6254atl SiP
-      arm64: dts: ti: Add support for AM6254atl SiP SK
-      arm: dts: add support for am6254atl at R5 SPL
-      configs: add defconfigs for am6254atl
-      board: am62x: add env file for am6254atl
-      doc: add documentation for am6254atl SiP
+ dts/upstream/src/arm64/ti/k3-am62-verdin.dtsi         | 2 +-
+ dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi   | 2 +-
+ dts/upstream/src/arm64/ti/k3-am62a7-sk.dts            | 2 +-
+ dts/upstream/src/arm64/ti/k3-am62d2-evm.dts           | 2 +-
+ dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi        | 2 +-
+ dts/upstream/src/arm64/ti/k3-am62p5-sk.dts            | 2 +-
+ dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi     | 2 +-
+ dts/upstream/src/arm64/ti/k3-am642-evm.dts            | 2 +-
+ dts/upstream/src/arm64/ti/k3-am642-sk.dts             | 2 +-
+ dts/upstream/src/arm64/ti/k3-am642-sr-som.dtsi        | 2 +-
+ dts/upstream/src/arm64/ti/k3-am642-tqma64xxl.dtsi     | 2 +-
+ dts/upstream/src/arm64/ti/k3-am65-iot2050-common.dtsi | 2 +-
+ dts/upstream/src/arm64/ti/k3-am654-base-board.dts     | 2 +-
+ 13 files changed, 13 insertions(+), 13 deletions(-)
 
-Beleswar Padhi (1):
-      arm64: dts: ti: k3-am6*-boards: Add label to reserved-memory node
+diff --git a/dts/upstream/src/arm64/ti/k3-am62-verdin.dtsi b/dts/upstream/src/arm64/ti/k3-am62-verdin.dtsi
+index bc2289d74774575648ca74403b7164e03e6d146f..4e9a8921c95dfc2f3481299a032e542d19839a81 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62-verdin.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62-verdin.dtsi
+@@ -189,7 +189,7 @@
+ 		regulator-name = "USB_1_EN";
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi b/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
+index 5dc5d2cb20ccdd85d82a5067959f5ea83efcd96e..ebdbd782e9f103c839f0e24236c526301dcffaae 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62a-phycore-som.dtsi
+@@ -45,7 +45,7 @@
+ 		bootph-all;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+index bceead5e288e6d78c671baf0afabd1a9aa23fbee..3f4c6fe2999b1fe48dcd0f8b7ca8ec5e353d32f8 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62a7-sk.dts
+@@ -39,7 +39,7 @@
+ 		bootph-all;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts b/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts
+index daea18b0bc61c67fc1a1c8f4f47b4fd40b0235e1..dbee37f38b7b359f9e3722c07429baa2833addfd 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62d2-evm.dts
+@@ -39,7 +39,7 @@
+ 		bootph-all;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi b/dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi
+index a2fdc6741da2cd8846ab8d7dd4bd44a15dc372e8..6a04b370d149ffa26747bdb6e657f1b890004fad 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi
+@@ -147,7 +147,7 @@
+ 		regulator-name = "+V_SODIMM";
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts b/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts
+index 899da7896563b43021de14eda1b0058a5c6d36da..1234ebba811060f4a494c1d4b6f5e1eedfecd826 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am62p5-sk.dts
+@@ -44,7 +44,7 @@
+ 		bootph-pre-ram;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+index 13e1d36123d51f2ca8ec40ce61e4a53b5e7ba832..43ee16f171fdfdb07e7a4bd1719bd8b62d81654b 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+@@ -36,7 +36,7 @@
+ 		reg = <0x00000000 0x80000000 0x00000000 0x80000000>;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am642-evm.dts b/dts/upstream/src/arm64/ti/k3-am642-evm.dts
+index e01866372293babcbe6687f32a094e9daaa815ec..b9f472ed1d8e390e84e000aa0492c7086d78d8d0 100644
+--- a/dts/upstream/src/arm64/ti/k3-am642-evm.dts
++++ b/dts/upstream/src/arm64/ti/k3-am642-evm.dts
+@@ -42,7 +42,7 @@
+ 		reg = <0x00000000 0x80000000 0x00000000 0x80000000>;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am642-sk.dts b/dts/upstream/src/arm64/ti/k3-am642-sk.dts
+index 1deaa0be0085c4e64136d3e8f68fdcd62ca7e068..37a5ab0b6b688e3eff8e004a90b379a3befe47cd 100644
+--- a/dts/upstream/src/arm64/ti/k3-am642-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am642-sk.dts
+@@ -40,7 +40,7 @@
+ 		reg = <0x00000000 0x80000000 0x00000000 0x80000000>;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am642-sr-som.dtsi b/dts/upstream/src/arm64/ti/k3-am642-sr-som.dtsi
+index a5cec9a075109aeec335e3f4d22a9fd60a3cd813..ad41479eba73d1c5c6e6ccadbaaf2f5237adf239 100644
+--- a/dts/upstream/src/arm64/ti/k3-am642-sr-som.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am642-sr-som.dtsi
+@@ -105,7 +105,7 @@
+ 		device_type = "memory";
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am642-tqma64xxl.dtsi b/dts/upstream/src/arm64/ti/k3-am642-tqma64xxl.dtsi
+index 828d815d6bdfc24d96c9e36f16643ed8bb59abfb..df05a124804c368b4aae7f59cb1e01a207444bed 100644
+--- a/dts/upstream/src/arm64/ti/k3-am642-tqma64xxl.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am642-tqma64xxl.dtsi
+@@ -20,7 +20,7 @@
+ 
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am65-iot2050-common.dtsi b/dts/upstream/src/arm64/ti/k3-am65-iot2050-common.dtsi
+index e5136ed947651736c5302f914939a4e57102b971..b86ee00d48f76110cf501bb3f2afee3e030d2b64 100644
+--- a/dts/upstream/src/arm64/ti/k3-am65-iot2050-common.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am65-iot2050-common.dtsi
+@@ -36,7 +36,7 @@
+ 		stdout-path = "serial3:115200n8";
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
+diff --git a/dts/upstream/src/arm64/ti/k3-am654-base-board.dts b/dts/upstream/src/arm64/ti/k3-am654-base-board.dts
+index e589690c7c8213d5e4989942735fa53825e610f5..d48171212ac93b6bd3f19609f4fe629b839440ab 100644
+--- a/dts/upstream/src/arm64/ti/k3-am654-base-board.dts
++++ b/dts/upstream/src/arm64/ti/k3-am654-base-board.dts
+@@ -39,7 +39,7 @@
+ 		      <0x00000008 0x80000000 0x00000000 0x80000000>;
+ 	};
+ 
+-	reserved-memory {
++	reserved_memory: reserved-memory {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+ 		ranges;
 
- arch/arm/dts/k3-am6254atl-r5-sk.dts                |  102 +
- arch/arm/dts/k3-am6254atl-sip-ddr-lp4-50-800.dtsi  | 2191 ++++++++++++++++++++
- arch/arm/dts/k3-am6254atl-sk-u-boot.dtsi           |   21 +
- board/ti/am62x/MAINTAINERS                         |    2 +
- board/ti/am62x/am6254atl.env                       |   37 +
- configs/am6254atl_evm_a53_defconfig                |   16 +
- configs/am6254atl_evm_r5_defconfig                 |   10 +
- doc/board/ti/am6254atl_sk.rst                      |  313 +++
- doc/board/ti/k3.rst                                |    1 +
- dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts        |    8 +
- dts/upstream/src/arm64/ti/k3-am62-verdin.dtsi      |    2 +-
- dts/upstream/src/arm64/ti/k3-am625-sk-common.dtsi  |  296 +++
- dts/upstream/src/arm64/ti/k3-am625-sk.dts          |  301 +--
- dts/upstream/src/arm64/ti/k3-am6254atl-sk.dts      |   15 +
- dts/upstream/src/arm64/ti/k3-am6254atl.dtsi        |   23 +
- .../src/arm64/ti/k3-am62a-phycore-som.dtsi         |    2 +-
- dts/upstream/src/arm64/ti/k3-am62a7-sk.dts         |    2 +-
- dts/upstream/src/arm64/ti/k3-am62d2-evm.dts        |    2 +-
- dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi     |    2 +-
- dts/upstream/src/arm64/ti/k3-am62p5-sk.dts         |    2 +-
- dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi  |   10 +-
- dts/upstream/src/arm64/ti/k3-am642-evm.dts         |    2 +-
- dts/upstream/src/arm64/ti/k3-am642-sk.dts          |    2 +-
- dts/upstream/src/arm64/ti/k3-am642-sr-som.dtsi     |    2 +-
- dts/upstream/src/arm64/ti/k3-am642-tqma64xxl.dtsi  |    2 +-
- .../src/arm64/ti/k3-am65-iot2050-common.dtsi       |    2 +-
- dts/upstream/src/arm64/ti/k3-am654-base-board.dts  |    2 +-
- 27 files changed, 3052 insertions(+), 318 deletions(-)
----
-base-commit: 813a0df27a8af587bd25a6a4719f68066b370091
-change-id: 20251022-62sip_support-b30de465397d
-prerequisite-message-id: <20251017131540.3636067-1-anshuld@ti.com>
-prerequisite-patch-id: 1018cc18afaeb7993897c79d04dfa8812c7d461a
-prerequisite-patch-id: 47c896471b88586ec5eeaa036d6d317c200fa2ff
-prerequisite-patch-id: ef20d522581fc85473d4f2dc3db2e69f24db2335
-prerequisite-patch-id: be1a02a345cf90ce9b0adbda7e4c2c6b894cea57
-prerequisite-patch-id: 20e5259c6f65feb27061042d51cfbb042690d307
-prerequisite-patch-id: c1ae18611c1eebd56a8ccdb187da036be3806328
-prerequisite-patch-id: 70e3b998d505a35ce74c53bde99d9b8a55d9ca64
-prerequisite-patch-id: f16a9d170e5e4cdad99749aad8b6eb448661e01e
-prerequisite-patch-id: 85aab27a129ee0cc9fdf0ccd5252e8631743528b
-prerequisite-patch-id: d6ba686cce569f824c84f431bff3bf7cfc68ffbc
-prerequisite-patch-id: 17e205969bfccfef6a4c2e45467c09a868d165a2
-
-Best regards,
 -- 
-Anshul Dalal <anshuld@ti.com>
+2.51.0
 
