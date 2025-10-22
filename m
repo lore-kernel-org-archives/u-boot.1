@@ -4,161 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21AA5CCD195
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 09:33:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AE80CCD1AB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 10:26:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0805832BC;
-	Wed, 22 Oct 2025 11:33:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id A130583303;
+	Wed, 22 Oct 2025 12:26:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="NQjCbRuD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qEkP5j7c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D6CD8334F; Wed, 22 Oct 2025 11:33:37 +0200 (CEST)
-Received: from AM0PR83CU005.outbound.protection.outlook.com
- (mail-westeuropeazlp170100001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c201::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A84D28323A
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 11:33:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ id 8613B8323A; Wed, 22 Oct 2025 12:26:17 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 528308323A
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 12:26:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DsXFGpyBurVblTH+x+FpM/baizLU7gq4d81g/p8yA/JixynNUS850nQtrIWUwONOtzNXOD0dEc3xkPhr1bmpMF67W/Bce39+eYRQtqG+up9JIv27RS2vhCUHLgVEbxL2I6ooKkzKpiITmbzmwjdVnQagBJ2r62HurDEvDz1BMrRiNstrZPVPXTlIxPhygkdsABXB53aiyQlZpU4JSPsL/VVxqu3KcvQF0Cm0bis7EZa3IqRusq8aez8QD3+UbpZN2IHF6dw+zPFNOqy1xm1DM2UNobGrulGLDxUHLiuzJu3QnfGjUk5822hTwpxKGRGcM95VEeuI40dmoiXUYpWTyw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3N4uvPCayeDjNIviTlWivNpjQnMnrata4OogGuVQZjA=;
- b=MLS8YRA2NUlPJ0BxivQG71T9njPGlg96gWkIoUluK3iPk1aHz1ldxHRUAjW0C55QmfIPQAD8F+NMMPeaMjOusMfGHLXsT2F4oDIYA7a7RWp21HTSRlhXG/PdnHWhbijfvxVjn21wlC2M+94tbndZ/A5egJ/3sk8fPoYkOZPKxyAlEXE2zQ9wcFipN+UUyK5QwH/Hzg2UsCpemERBwI/GT3pd3RVlPX5Y9z80zq/k1KZ7luaN/ltMObHWPsFj5DPgUpK4p8S9rKTKHZNNKlJM2k5b5vjVblpZK18JZPUROK+FFE0g5Y3jVOcr4Q2j7k6YsjtglNvjyWxh4nPyegv54Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3N4uvPCayeDjNIviTlWivNpjQnMnrata4OogGuVQZjA=;
- b=NQjCbRuD2TpVprTHZuFu4mGw++AFeZX7Xf7i0WGuTRQzNd5KoluX24ThwTYoyTPWxZY0mwYrRDYr3BEqWcU6jM/z4NvvHmabZ3kUu25VFc52XNsLDemXrDKp2FVmE3cg9hKNb7KaG5NgAe3MGXOFV4OD/nOZwBDcUCOV6ADYMiw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AM8PR04MB7762.eurprd04.prod.outlook.com (2603:10a6:20b:241::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.12; Wed, 22 Oct
- 2025 09:33:31 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::5ee:7297:93b4:a8d1%6]) with mapi id 15.20.9253.011; Wed, 22 Oct 2025
- 09:33:31 +0000
-Message-ID: <40cc7900-f225-4d4c-b3e4-286b1ac4b954@cherry.de>
-Date: Wed, 22 Oct 2025 11:33:30 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] doc: seama: Reword return value section
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20251021202820.1272414-1-trini@konsulko.com>
- <20251021202820.1272414-4-trini@konsulko.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20251021202820.1272414-4-trini@konsulko.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0156.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:98::13) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59MAQBfM1381905;
+ Wed, 22 Oct 2025 05:26:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1761128771;
+ bh=BCeVe5VL9k+iutvZf40+bvWF0xRa02QuCUWj3j6RKwg=;
+ h=From:Subject:Date:To:CC;
+ b=qEkP5j7cfKQGakUCwSspjq5za7zeSdybejEVtLKWHP2C8l9ze1fKJGNZoNfyfIzQE
+ ZBmzEj2D3qmpWBu4uoK2knjVJhanHlTXMItdsnMMQy74UzdRQuCuDwnnzugzLfgZgc
+ yAaIMwZ5CgC+f+rimZGA2LIWzoQdy3IVCvyf3Cig=
+Received: from DFLE204.ent.ti.com (dfle204.ent.ti.com [10.64.6.62])
+ by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59MAQBpE2281585
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 22 Oct 2025 05:26:11 -0500
+Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE204.ent.ti.com
+ (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Oct
+ 2025 05:26:11 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 22 Oct 2025 05:26:11 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59MAQAu11048426;
+ Wed, 22 Oct 2025 05:26:11 -0500
+From: Anshul Dalal <anshuld@ti.com>
+Subject: [PATCH 0/8] Add support for TI AM6254atl SiP
+Date: Wed, 22 Oct 2025 15:55:36 +0530
+Message-ID: <20251022-62sip_support-v1-0-eed08d15e76d@ti.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM8PR04MB7762:EE_
-X-MS-Office365-Filtering-Correlation-Id: e3df7e44-b902-43c3-b1b1-08de114e1087
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016|7053199007;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?TklYRmQyby9QdHZ3SzZRTWR6N1hwb3JqY1FCMlUxeGRsZkVIWXRWLzA5eis0?=
- =?utf-8?B?eXVFWG1wYjVSMEN4ZWFMd2dxSjlmYTcxb0RtV0VTbjdFaVFHdmd1bzhrRFJH?=
- =?utf-8?B?dld0RUJpaHNsUGQvV1I3QmtWZ01QMFBJVnY1NDI0NmlVYXlCQk5UakNEUDJN?=
- =?utf-8?B?Q3lMZTYrc0t1NHM3WUJvRU13akZ2NklkL3ppWENaNVZpc1dSODVRUUJ2bWl4?=
- =?utf-8?B?cXdJV21oRUdJY3l1d29JWlc4S0ZKYllLOXVZeTNlaExjNnZQK1pjUGx4bFgz?=
- =?utf-8?B?Z3BiamhNSU9kWklKZG03WnBSWVJVUDM5ME5zWExwWXErYkZBcURTN0VCL2N2?=
- =?utf-8?B?VVFLVmZUWUkyb2Y2ZGVDc25CQXZaQmlIUEdTTE5XcXlOUURvNWQ0VW9OSUxU?=
- =?utf-8?B?dzBmb3ZNN0JQYTkyN0x2eFo1RGk4clNuSmFrSCt0aUIrbkpFY1hsL1BFaXlM?=
- =?utf-8?B?ek92aHExK0g5RkY0QjB5L2I2QkdkWWZRcXlXRVQ2TzVuUXpCWjNnb3hSaEhO?=
- =?utf-8?B?ZytXV2hhc1JsbENOU2IyWEFNSXp6ZkdYY09MYmVrZW9rbm5Td2NBN3l6cEtq?=
- =?utf-8?B?ZWxzZnZHR0pocThkSUlXSlhxTlNDSWIzK3duN1l1SmI0OWVGNTRia2dlbjBB?=
- =?utf-8?B?M3BiWWJLVGtydkFZa1paeXJoMGxDeUsxOWhFa1ZGQmZDbkVuV1lQUU1MMHpz?=
- =?utf-8?B?YUdIUGRVOW5IU3lVSXl3bUtmOG5aN3ZLZFVMTlhSQlNWa0c0UXU2N3JqUWNJ?=
- =?utf-8?B?VS9uL3ByUGsvMUNUelBsY3c4b09xRTlzY0dvVnJjOUtYeDNybWpJWUxtTEN3?=
- =?utf-8?B?ZnVDUE12WGFaT3JENjB4YUhFNU5LekF2d09IT0d3M2pEbytQdFk1NldDdXhQ?=
- =?utf-8?B?SDcrdW85YlRub0xrQ0FFZTc3aEp4U2s5Nkl4SUhnTWkzaUpFSllYNDlsZXN0?=
- =?utf-8?B?R0ZQa2hpNE1vWTRDcStCS3kwZE1wdDl0QkFvTi9FeHAvay9YWFN1RzM2ckFp?=
- =?utf-8?B?VmVZSkIvd2p0UU9PMVFTZ0xPc04zaFlqUktmbjVHK3VYTVdLRVYzUGhkckht?=
- =?utf-8?B?M2NEL2JrVWRFZnczWENjT0h3ZWozcjNpbUFrVnhTM0trcFpXY05EUHdVOEtH?=
- =?utf-8?B?RkFjTUI5YnNFSUpnN21SRkNjeWJlblZ1Ny95T2JQYmgrcEVKY3ArNzZwOTA3?=
- =?utf-8?B?TFZ2KytSOWFrejlob2p1eXFvN0JlSERKSFMxYkN2VlJuWlV6TkFUTkQ5S2Fz?=
- =?utf-8?B?VmV0TGRkWVNkUTA5aGJuUlVLMHgzSVgvMklBNzFoTUZvS1JZTml5Tnl2SEpE?=
- =?utf-8?B?WDFPajVoNld3eTJuek1QSVVNZ1VFVFcvT0lRbXIzcjZKc0hNYjZXYnNyWWdt?=
- =?utf-8?B?SHo0NDFSeEtadTVKeWcvZnkwQUw4RDZRQmRXVzc0NGxVTENNZS9Zb1ZZSHFy?=
- =?utf-8?B?WEptdStZWGxSL3Q1V2srYkZmNFhhc2JFL1phTS9LQmFMSDFEdGJtdmgvSEd5?=
- =?utf-8?B?NUM5TDI4YUVTRU1HT1B0QzdhSWcxaFFnVGd5dEl0M0NpOHJSSVlUSUYwVENF?=
- =?utf-8?B?UndObGJXY3U1S0w3TTRETDZwM2JCRzEzZWFOOWhEdTZwTUJQMlJYMVZWYmVm?=
- =?utf-8?B?aXdHSHpCRVpnT2s1MHUzYWtpRVhrL2Fvc2NEUHVFS0l4SlplcHdkNDdoTGlw?=
- =?utf-8?B?OUQ0TVl6STdXb1hHN2tjODVxOHVRTXBxTklyZjlhdWNOSTU5NkRBc3JkMTZm?=
- =?utf-8?B?dThYVmp0R200aDBrRWpWR3h0ZitNZVhjSWlVSmQ0QUhIdXZnWUF3UEJEUEtI?=
- =?utf-8?B?U0FiL1JGcmk1MUxjelJlM3lCNVJXSnNMa1ZCZFBwUktBU01CNnlJSUxBQlg4?=
- =?utf-8?B?NzVoc1Q4d0RqYTlreXBVNCt1TnBGNzVZWGNuYzNWWmVTRWtEbTJERTRqSVhu?=
- =?utf-8?Q?W9dvL5sO+ZihQ7Ed/PjcwjwO9mLnEJW6?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RTlWblVxeFlUbTd1Rk1nWnp4cndUck05VnI2VFFjZG5QV3FxL09zTE5vK2Ry?=
- =?utf-8?B?RDBpNmp4QmFtazErb0dybUFwam5oYVlhM3M0R3VkNXdCWFZkVWxObW9YMVBz?=
- =?utf-8?B?NVJYQ3J0cG9HUmFnS0xFZmRIM2cvSHdJT09FTWd0d1FLRUdVaVdMVkp0YjdP?=
- =?utf-8?B?b1U1TFNxSTZMbkFxdC9zaHN0TUxWNURkbENMR2NGQURJUHZQaHNyT0F5cm9l?=
- =?utf-8?B?bUtVMFBsaWw5cCtaVkExNEpicVJhUFpNeXVhdzZ3YUhySW5laSt0Z29Vb1Rz?=
- =?utf-8?B?cDdMZzdkZW0wUHF3K3lMMHRHVFZBRURZUnYweDA0ZGdkNm1ZMUpERHgwR01s?=
- =?utf-8?B?TlluY1FSRm9ScHdMTThMUWJRZmhMaXhWNCtRL0ZLQzFhd1JmSkNlWm5WRlN1?=
- =?utf-8?B?WGEzejh2SSsveVEwb1FHd01KanpHT3hpZVRuY2pyNFJRcEp0MUhXN1NOU29x?=
- =?utf-8?B?amtYbmpxaWJVUXdzbkhqclErMm1zVGlPZ2puTWRESFlPTHVqY28vNWhtMkpP?=
- =?utf-8?B?TTJNSHdrcDdOT3dlTWlIelZNRkZaNzMyZ1lSTTNScWVzMGNweElDZWJUNEtF?=
- =?utf-8?B?SmJuQ3Y4Tko2d2pkODJ1ZVdYcXRlMmd0K1puWUJlS0E4dE5PWGk5SFNzQ0Fv?=
- =?utf-8?B?eVhEWkFQVVU3UnduMXVrVmJLb0tzcEt3M2dNREo3RFhkUGh1WStYRGtiekg2?=
- =?utf-8?B?akY1aU9OTHp2aS83d3JOV0NlTkJ2V3pGcFA3RlF4L1VyOVM0Q0owQTFqT3V1?=
- =?utf-8?B?dmxLbGNoOHo0OE9oL29nNzJnVk1ieUVsTjJWenRMVTNkUUpvc0VCYTB0alJv?=
- =?utf-8?B?RzcvVHZFSUZ5d1p6ZTBhb05NazR3V2ZCOU85RTlyY0o2Qko5SDcvL0RVTExJ?=
- =?utf-8?B?VGhoUXFGUjhxcmI4MGtCbUVZRVBqZ3ZVN0hBWEpJV002KzlYalRIQTFYNDFO?=
- =?utf-8?B?ZFA2b1RDdnN3aHNhY2ZVQm1YMEE3T1paZFkwNG5leHRvR0VxQURRVDlpajJJ?=
- =?utf-8?B?V0QvdEU1S1YvZFg5U0pqQ0MydVR1b0pMV0pOT25UaTB6ejExcG9GYlFGQTY0?=
- =?utf-8?B?NUxnTkxRdnU1VWk2SGdpenk2WWU5dHZxdUY4OHBjUGhXd1gyUHE0dXpxWXk3?=
- =?utf-8?B?c0RsUkVKK3lQSkxUYkxXRmk1SWtmazVpK09zR3gyWW5ibno3Nzlianh6QkVE?=
- =?utf-8?B?NWRnV2xDLzZQYnZMMy9hclV6UjIxUmxWUHJpMHlJYWlZQkhkdkNGNDMyV2NG?=
- =?utf-8?B?RmpZQlAwOUU4aklPREt3WHJ6aGQ1YXNkaE1DUkp2UDh4Yjl5TE91WjZIM2sr?=
- =?utf-8?B?VzQrTm9oNmthVVloSys3STJsNUdjZXZRNkV3M24wUUd0am1jTVc0aExYY0dt?=
- =?utf-8?B?cnFDZmtzb2puUXdxWUprYklKSmNNUmJtSmV4amtqSmQ3VndUWVNkeTU1YmxW?=
- =?utf-8?B?NFU2aFdjaDl3NnRHMjI3QklGazBsbG12eVhmanRnQlVyZ0JxT0JienBqNzhx?=
- =?utf-8?B?UDNXWmROMlZtNkpNRXdSYzBNc3l3RlNKMVhQYmd1VDF5L3pQTGFuNTUwUDU0?=
- =?utf-8?B?QnlHSEdUSjFiaytUeWRYY3V5TkFMakhPN01reW0ydGZ6NWd6aW96N01EM1A5?=
- =?utf-8?B?bTBTcDYvT242ZWJxNUh0TFYrSFJHVW1QMXFlOVIzUEJoUmd5L21yczFCY0Nm?=
- =?utf-8?B?amFKU2VoNWxpbE9mTUF4c01kaDBFVGx0SDJtbkhQOVVrNnozMXNQOWc5VEhS?=
- =?utf-8?B?Y1BTU2F0eFNHanliU3ZCYytXNVp3Z1ExUVQwQWdWaWU4MGRGWDRNMlliNHVv?=
- =?utf-8?B?VnBIS2tYaEJBNlRmWldiOURNY1diRCtTVStrZzBKRUJqa0JDenhad0p0STk1?=
- =?utf-8?B?cUdwaU9DOFJUR3NCUmlYRDl0NUJjVUJrNG1sd2RtTGE4MVkvQzJuMm1ETnAy?=
- =?utf-8?B?WnRRY0RXTzZyYTgrT1hRd0QxZUF6MWRnM0FtU3NhaUZwMmVvSW9FOHJGSkNQ?=
- =?utf-8?B?NVhXaXZRRU93eEtJWkd2VUFjcGV6SDJMSEZzL1B2MW9Ha2Y5aE9ZYy9NeXBC?=
- =?utf-8?B?VG1iRVVZK1FvbXB1dkRya2xrbzBnN0gwMzBjZUxDeDVpR1AxcklWMkxQMjFZ?=
- =?utf-8?B?L0tGYjFtamtVRG5uTGllNURKWEV3S1p0a0dscXZlb0YvcUZFdUZLb1p0MFRF?=
- =?utf-8?B?Z2c9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: e3df7e44-b902-43c3-b1b1-08de114e1087
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2025 09:33:31.7371 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bqFvFWGyg37dxnPTs5YSAZJbjYGxiwEwYDBnmqa00UthY+6ELcz9GltW8g2gNwlWlZpNNSSQV4ajuEGCuI+DQnrKzD1UxCILIaupjCGIyCw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7762
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACGx+GgC/yXMW2rDMBCF4a0YPVdBI1kj24TSfZRQxtG4EcSXa
+ OxSCNl7lPjxP3C+uxLOiUV11V1l/kuS5qkEfFTqfKHpl3WKpZU11oOxVqOVtPzItixzXnXvTOQ
+ avWtDVOWzZB7S/9v7Pu2d+bYVdt1HNbIIvdmuOu4qBHDga3Nw6NBg0KBpkst2jV9rOpzn8fNF9
+ ySsS4xp7aoGHJk42EANDb4JfbSekOoA7YCNQexdMKYFdXo8nn8D6ZbkAAAA
+X-Change-ID: 20251022-62sip_support-b30de465397d
+To: <u-boot@lists.denx.de>
+CC: Tom Rini <trini@konsulko.com>, Beleswar Padhi <b-padhi@ti.com>, Nishanth
+ Menon <nm@ti.com>, Andrew Davis <afd@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Vignesh R <vigneshr@ti.com>,
+ Anshul Dalal <anshuld@ti.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761128770; l=4147;
+ i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
+ bh=/ijH1/r/xdFdhgmDXTr8mFa8hC/Ov89tkaU+q+v6UB4=;
+ b=87E5CAaqSxmV2cprDyOxNv6i71+kQn3Mk6WW0kYOpLJ9Seat7xN+2hBFisS1kjZYsZO4sUpl+
+ QOAvHppK164D7sov1YqlQOLMY/Uff4vW9/pypthB7kDpbt0UU70o1By
+X-Developer-Key: i=anshuld@ti.com; a=ed25519;
+ pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,43 +91,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi all,
 
-On 10/21/25 10:25 PM, Tom Rini wrote:
-> With the addition of general text about how the return value is handled,
-> reference that while retaining the additional information about setting
-> $seama_image_size
-> 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->   doc/usage/cmd/seama.rst | 7 ++-----
->   1 file changed, 2 insertions(+), 5 deletions(-)
-> 
-> diff --git a/doc/usage/cmd/seama.rst b/doc/usage/cmd/seama.rst
-> index 17fd559f4856..a6b00f32902e 100644
-> --- a/doc/usage/cmd/seama.rst
-> +++ b/doc/usage/cmd/seama.rst
-> @@ -56,8 +56,5 @@ The command is available if CONFIG_CMD_SEAMA=y.
->   Return value
->   ------------
->   
-> -The return value $? is set 0 (true) if the loading is succefull, and
-> -is set to 1 (false) in case of error.
-> -
-> -The environment variable $seama_image_size is set to the size of the
-> -loaded SEAMA image.
-> +Along with the general rules for setting $?, the environment variable
-> +$seama_image_size is set to the size of the loaded SEAMA image.
+This patch series adds support for AM6254atl SiP (or AM62x SiP for
+short) to U-Boot.
 
-Maybe add "as reported by the SEAMA image header" as that seems to be 
-what is reported in this variable reading cmd/seama.c?
+The OPN (Orderable Part Number) 'AM6254atl' expands as follows[1]:
 
-Also wondering if this shouldn't be in a separate section like "Side 
-effects" since it isn't really the return value. I'm thinking 
-doc/usage/cmd/fatload.rst (and a few others) could benefit from 
-something like that to explain filesize env variable is set automatically.
+AM6254atl
+     ||||
+     |||+-- Feature Lookup (L indicates 512MiB of integrated LPDDR4)
+     ||+--- Device Speed Grade (T indicates 1.25GHz/1.4GHz on the A53 cores)
+     |+---- Silicon PG Revision (A indicates SR 1.0)
+     +----- Core configuration (4 indicates A53's in Quad core config)
 
-Cheers,
-Quentin
+AM62x SiP provides the existing AM62x SoC with 512MiB of DDR
+integrated in a single packages. The first 4 patches in the series
+are cherry-picked from the devicetree-rebasing repository at
+'v6.18-rc2-dts'.
+
+Depends on:
+ [PATCH v11 00/11] Add support for dynamic MMU configuration
+ https://lore.kernel.org/u-boot/20251017131540.3636067-1-anshuld@ti.com/
+
+base-commit: 813a0df27a8af587bd25a6a4719f68066b370091
+Signed-off-by: Anshul Dalal <anshuld@ti.com>
+---
+Anshul Dalal (7):
+      arm64: dts: ti: k3-am62*: remove SoC dtsi from common dtsi
+      arm64: dts: ti: Introduce base support for AM6254atl SiP
+      arm64: dts: ti: Add support for AM6254atl SiP SK
+      arm: dts: add support for am6254atl at R5 SPL
+      configs: add defconfigs for am6254atl
+      board: am62x: add env file for am6254atl
+      doc: add documentation for am6254atl SiP
+
+Beleswar Padhi (1):
+      arm64: dts: ti: k3-am6*-boards: Add label to reserved-memory node
+
+ arch/arm/dts/k3-am6254atl-r5-sk.dts                |  102 +
+ arch/arm/dts/k3-am6254atl-sip-ddr-lp4-50-800.dtsi  | 2191 ++++++++++++++++++++
+ arch/arm/dts/k3-am6254atl-sk-u-boot.dtsi           |   21 +
+ board/ti/am62x/MAINTAINERS                         |    2 +
+ board/ti/am62x/am6254atl.env                       |   37 +
+ configs/am6254atl_evm_a53_defconfig                |   16 +
+ configs/am6254atl_evm_r5_defconfig                 |   10 +
+ doc/board/ti/am6254atl_sk.rst                      |  313 +++
+ doc/board/ti/k3.rst                                |    1 +
+ dts/upstream/src/arm64/ti/k3-am62-lp-sk.dts        |    8 +
+ dts/upstream/src/arm64/ti/k3-am62-verdin.dtsi      |    2 +-
+ dts/upstream/src/arm64/ti/k3-am625-sk-common.dtsi  |  296 +++
+ dts/upstream/src/arm64/ti/k3-am625-sk.dts          |  301 +--
+ dts/upstream/src/arm64/ti/k3-am6254atl-sk.dts      |   15 +
+ dts/upstream/src/arm64/ti/k3-am6254atl.dtsi        |   23 +
+ .../src/arm64/ti/k3-am62a-phycore-som.dtsi         |    2 +-
+ dts/upstream/src/arm64/ti/k3-am62a7-sk.dts         |    2 +-
+ dts/upstream/src/arm64/ti/k3-am62d2-evm.dts        |    2 +-
+ dts/upstream/src/arm64/ti/k3-am62p-verdin.dtsi     |    2 +-
+ dts/upstream/src/arm64/ti/k3-am62p5-sk.dts         |    2 +-
+ dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi  |   10 +-
+ dts/upstream/src/arm64/ti/k3-am642-evm.dts         |    2 +-
+ dts/upstream/src/arm64/ti/k3-am642-sk.dts          |    2 +-
+ dts/upstream/src/arm64/ti/k3-am642-sr-som.dtsi     |    2 +-
+ dts/upstream/src/arm64/ti/k3-am642-tqma64xxl.dtsi  |    2 +-
+ .../src/arm64/ti/k3-am65-iot2050-common.dtsi       |    2 +-
+ dts/upstream/src/arm64/ti/k3-am654-base-board.dts  |    2 +-
+ 27 files changed, 3052 insertions(+), 318 deletions(-)
+---
+base-commit: 813a0df27a8af587bd25a6a4719f68066b370091
+change-id: 20251022-62sip_support-b30de465397d
+prerequisite-message-id: <20251017131540.3636067-1-anshuld@ti.com>
+prerequisite-patch-id: 1018cc18afaeb7993897c79d04dfa8812c7d461a
+prerequisite-patch-id: 47c896471b88586ec5eeaa036d6d317c200fa2ff
+prerequisite-patch-id: ef20d522581fc85473d4f2dc3db2e69f24db2335
+prerequisite-patch-id: be1a02a345cf90ce9b0adbda7e4c2c6b894cea57
+prerequisite-patch-id: 20e5259c6f65feb27061042d51cfbb042690d307
+prerequisite-patch-id: c1ae18611c1eebd56a8ccdb187da036be3806328
+prerequisite-patch-id: 70e3b998d505a35ce74c53bde99d9b8a55d9ca64
+prerequisite-patch-id: f16a9d170e5e4cdad99749aad8b6eb448661e01e
+prerequisite-patch-id: 85aab27a129ee0cc9fdf0ccd5252e8631743528b
+prerequisite-patch-id: d6ba686cce569f824c84f431bff3bf7cfc68ffbc
+prerequisite-patch-id: 17e205969bfccfef6a4c2e45467c09a868d165a2
+
+Best regards,
+-- 
+Anshul Dalal <anshuld@ti.com>
+
