@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF911CCD1AB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:20:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D73DCCD1BB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:20:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 580A5835FE;
-	Wed, 22 Oct 2025 17:20:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E18C835FD;
+	Wed, 22 Oct 2025 17:20:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="OT/ErUaR";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="wbUoPPIN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C961C835B0; Wed, 22 Oct 2025 17:20:32 +0200 (CEST)
-Received: from smtpout-02.galae.net (smtpout-02.galae.net [185.246.84.56])
+ id C152E82B20; Wed, 22 Oct 2025 17:20:35 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 847FB82B20
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:20:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E341280422
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:20:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-02.galae.net (Postfix) with ESMTPS id 3EFF61A15C3;
- Wed, 22 Oct 2025 15:20:30 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 8381C4E4127B;
+ Wed, 22 Oct 2025 15:20:33 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 15C21606DC;
- Wed, 22 Oct 2025 15:20:30 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 59F9C606DC;
+ Wed, 22 Oct 2025 15:20:33 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 69C3B102F2435; 
- Wed, 22 Oct 2025 17:20:27 +0200 (CEST)
+ with ESMTPSA id 68E52102F2447; 
+ Wed, 22 Oct 2025 17:20:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761146429; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1761146431; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=6YaBRH1HaDBXGrpsy7FAfCDgoLLu6N65RKzF3NGVWvg=;
- b=OT/ErUaRKYVPzSZAzu38M9/tlxOa2uCzoYyb9SdgR0M6mW+AP4Lfo81whH2x7XcyuuKrfr
- ME2JZ34BN2eZm1iA6SYZIIiu6NdiAGYBchhRNoDOGnxXRZ3A3EN3HUXTt9PzDx3peUZm49
- v/mbz0nWLQ0rMFjgqQHRnTVXamjoBFZ1sFsNYvxIYAVMRtMnUd1uPF3TP1wzwaFpNrk0AF
- k+L6ZqKXg0ytO/8lDJj74PntB8BvY1vSX3s2GkHESv408CHMWFhfN9SlXbGRObw9x+zD1s
- Yy6+kLCxbRH0VW0DaU52wiULfEMAPWHMFnYuCYEsJputMRXF/tR1bfMe/OMR9w==
+ bh=IgSOfQmYPj7B0+sV3jPLR63TQH6mGgB7YqtnRgoy9PE=;
+ b=wbUoPPINjOJScuqtt8rw3QTCmOMlLci4vAdVXJn53wjunPb2YebYwK2LPvush4Xb5sSA72
+ nWtEaKMP9+KNIwK7T9i0avUb9ly2jcow387++anUDIpMDhVPCEHsz3QtwbyQeBOd4xgpIu
+ o6bCDwklLYcBFH+RchSVknNxjwCNVvKedh7xNUyTIhA46Bz3HTS0QH9WaN33q8OVmaFl0g
+ FyxAXpFKa9WlDbrHaOPWXKk4+nfdNB37IBr9HXJbH4EFWuOnGm5/Y0ARM3zdeV0BU7loBO
+ 1kwbwv2yHocpkzRXTXZUEYUTXBLgB8u2qmbX70KmEr1O2Qg7VxyyXdv+YniL3A==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Wed, 22 Oct 2025 17:20:13 +0200
-Subject: [PATCH v4 02/20] board: ti: Exclude cape detection from XPL builds
+Date: Wed, 22 Oct 2025 17:20:14 +0200
+Subject: [PATCH v4 03/20] board: ti: Fix CAPE_EEPROM_BUS_NUM Kconfig dependency
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251022-feature_sysboot_extension_board-v4-2-d24b5ef7b468@bootlin.com>
+Message-Id: <20251022-feature_sysboot_extension_board-v4-3-d24b5ef7b468@bootlin.com>
 References: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
 In-Reply-To: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,31 +80,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disable cape detection functionality in XPL (eXtended Program Loader)
-images to reduce size and complexity in the early boot stage.
+The CAPE_EEPROM_BUS_NUM configuration option was incorrectly depending
+on CMD_EXTENSION, which represents the extension board command. However,
+the cape scan functionality can be built and used independently of the
+command interface through the SUPPORT_EXTENSION_SCAN option.
+
+Change the dependency from CMD_EXTENSION to SUPPORT_EXTENSION_SCAN to
+properly reflect that the I2C bus configuration is needed for the cape
+scan function itself, not specifically for the command.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
 
-Changes in v2:
-- Use PHASE macro instead of XPL check.
-- Check SUPPORT_EXTENSION_SCAN instead of CONFIG_CMD_EXTENSION
+Change in v3:
+- New patch
 ---
- board/ti/common/Makefile | 2 +-
+ board/ti/common/Kconfig | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-index caf6b9fa8c1..f58935b4103 100644
---- a/board/ti/common/Makefile
-+++ b/board/ti/common/Makefile
-@@ -2,6 +2,6 @@
- # Copyright (C) 2015-2016 Texas Instruments Incorporated - https://www.ti.com/
+diff --git a/board/ti/common/Kconfig b/board/ti/common/Kconfig
+index f481812247c..9512c5c23f1 100644
+--- a/board/ti/common/Kconfig
++++ b/board/ti/common/Kconfig
+@@ -20,7 +20,7 @@ config CAPE_EEPROM_BUS_NUM
+ 	int "Cape EEPROM's I2C bus address"
+ 	range 0 8
+ 	default 2
+-	depends on CMD_EXTENSION
++	depends on SUPPORT_EXTENSION_SCAN
  
- obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
--obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
-+obj-${CONFIG_$(PHASE_)SUPPORT_EXTENSION_SCAN} += cape_detect.o
- obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
- obj-${CONFIG_ARCH_K3} += k3-ddr.o
+ config TI_COMMON_CMD_OPTIONS
+ 	bool "Enable cmd options on TI platforms"
 
 -- 
 2.43.0
