@@ -4,85 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A875ACCD1BB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D167ECCD1AB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 16:03:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB91D80422;
-	Wed, 22 Oct 2025 17:48:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 06A3880422;
+	Wed, 22 Oct 2025 18:03:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mVHTXvCR";
+	dkim=pass (4096-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Rlx9Mij2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4733B81E13; Wed, 22 Oct 2025 17:48:32 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 274FF8323A; Wed, 22 Oct 2025 18:03:01 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B5698003E
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:48:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8FCF8003E
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 18:02:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-3ee12807d97so6506188f8f.0
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 08:48:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761148110; x=1761752910; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UUhnfyAoo5ilFrAqmyIWfhfovaY9inNRMwx+n1ZoeVs=;
- b=mVHTXvCROmKUSeQS3PeMcvosYnwJstWmfAp8/iuy5HCAEhBLepsGebXdD5rx5ZXIAm
- gGbF4BGDesMgm/XXU3XgOH6VUAi9ek1beZsXaMdvy7psedPBQej7xDmZTtFlLWoGVELB
- lJe6Zli6oksltB0f5+pi8SpmFSeoOTPMNVUr5oZN3pmvLxAJH3tgZcjQdB9EGV0L33pw
- VNTiYXCq2NlmznqJWHOjQ1IZkQFcA6po8Oj/cYK5Lqz2MBXgo3p/iR/vbJbUw6SLkW26
- 55QCy0FxrFJ1FWi7YFa/Y4Hu4Bq4XIwLk8zpk1yg9w5IJU9iPp+oBfM1Ceo4y0ekhtnN
- x7tw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 6D2F33F853
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 16:02:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20251003; t=1761148976;
+ bh=BWODj2WO4F2ZEL4oayyExnwSHUjSQjAWKumYuxyz4Nc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Rlx9Mij2mxLUOc7C4hZ4os2UtqIqj70CDdPCsfIFsZ39eAxarbINKrFbEW2wApKm3
+ 31qo7uExh1u13m8pB4l/b3sWMUQwaRGuq3GR6tcwSEvkEkcIBOlUHro9FLWPIRSTwf
+ HF/JWpi6zd8VBYrhcV2qsTvNka0Q116oyMI62e3g+0+M0MsLV4yAIYI66QgC5XcmDj
+ wdSqLUKXXCO3UsDtpHLgTckgWdWJjJOtzpjX98i8yOWr5aeSXvAdM0rtGrehnfSg5D
+ vIfjKVycKZ/ggDvjVcBpxgiTFEnpI6w5cIRetoACvI98OTL9MEFAxszCM33sIhXTM5
+ vKGJsGmPo/l6kzVZghcuh7MsWSAkl/4nfJsdq8kx1QtMWPSGrhn6Ez1LsY0suYRRfO
+ oIAwcjxjLxB2q71z7Y5m1s+N/HRYcYZOiz87dpKMy8Me73CFaMQwP81vq/z+n0Y86e
+ nTAz4LC+LvXrNmZH9zxvGpS7bUo1Q5nVG/m+tdB6gu0SenXqo1lfBNXLY4RFcmeLWB
+ S1+KsbBBjsMvco78BX+qZ/HPPLFHIk2FicngjnU2xo616t7/qlzHE/RQfM0GEcLoiF
+ sG3GRW9r1eoVyDA87h0jIUW+pYQBpSetM7uNwcPPaLH7NzENJsnpxqkpah8DSyliFq
+ t7L9ouKXZWl6dFpg5hiq4AI8=
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-428566218c6so556369f8f.0
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 09:02:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761148110; x=1761752910;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UUhnfyAoo5ilFrAqmyIWfhfovaY9inNRMwx+n1ZoeVs=;
- b=DZzhnFyDAREYPSGShTp6/eSzS8kOhEiDj9yVI8VzUC8MVH8CXcsM1szhFpX396zXBS
- djduua7abmiNmscw6FOqI8c/p0GpUyKpa6pIMzeVqh4zoKbiu0UIEn8brXw0JjNiudCq
- VtEyJxH65m/aT3mNlhmaw/jR1tyQe83L1xwC16h9jy4Ygo96JQ09COtOfZzIf/aafPud
- 8NgvNWsdCA+O8gnxIZYQGxJ9VeyUVFfwJEvz5+3g/tsDwh3ggyfF6qeoAxWSWFm9yFBd
- bsR7xokYy1oo/7CwKlMrc69EbrzLTq/2H9uCC61xHao2MpPaKMUp6G4Xwv2WbZUjj0Vm
- Obmg==
-X-Gm-Message-State: AOJu0Yy7tiPs6RXg8sHggr4i1+7lzrrmUdoScwoA2lwGrQLCFdpMEX7K
- ELRqp43FvZQduFQkH5Tsd7Wlr9/MBMoDVXBrF33MR7tjcgVv0TiOPXSPl6kdzw==
-X-Gm-Gg: ASbGncv3XQW9jyg5rR7xL+IyHDk+HdyO5L4UMtjQiz/qi5H/tDI2xFe8+KC8VaWUgQD
- iwW4bZKz96mMA6GUjqdpZUPqij/2IF003TCzZSFyNdqo8Zxtj+2RKx7v6EPT3bzmG/8YhYjPrOA
- yOUI6LRx15tGdT1KNObeE/QPzaWBzirvIEToEDwHDx2b8lFi5RpSCxuhibIuNB8izC6TOu7/5Or
- JHLkkeH9kM+2I8AxVZQS3w2IMtv87wrApGZ6SvWnDiL6vaFlwSRfOYhEyX+q38KRd8B+YpSFpZC
- N28ILXuw52HHBDsqSVqoneN0QNNUikw5UIbe1x5TfEEU4gvDaYnaRCpteNRyAusg6NJq49eFV2h
- ETLuwb8qboqSgPYlmt6gDk9yYOPyQs83nSLR6tDsJfAtrETC6JzdklJfH6GTiloOBX6GWqe2+0X
- rrLGBAVdhRLQGUPg6A0XWFlrNGXM3u3VHkQDZyrVuHozFgYYPtgE+TLHMLccLU4Fd8lFvUeFlof
- 5JZeg==
-X-Google-Smtp-Source: AGHT+IGceNZC+hsDU5iNf4hy7oHNmkb8i7YV/yTP5Anzziu3s6OU669Yv3tn9CnVwmUwCH6ADfRs+g==
-X-Received: by 2002:a05:6000:22c6:b0:427:23a:c339 with SMTP id
- ffacd0b85a97d-42704d6c507mr15006637f8f.14.1761148109425; 
- Wed, 22 Oct 2025 08:48:29 -0700 (PDT)
-Received: from jernej-laptop.localnet (178-79-73-218.dynamic.telemach.net.
- [178.79.73.218]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-427f009a993sm25826848f8f.24.2025.10.22.08.48.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Oct 2025 08:48:29 -0700 (PDT)
-From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>
-Cc: Rudi Horn <dyn-git@rudi-horn.de>, linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH] sunxi: dram: detect non-power-of-2 sized DRAM chips
-Date: Wed, 22 Oct 2025 17:48:27 +0200
-Message-ID: <12763423.O9o76ZdvQC@jernej-laptop>
-In-Reply-To: <20251021235334.7557-1-andre.przywara@arm.com>
-References: <20251021235334.7557-1-andre.przywara@arm.com>
+ d=1e100.net; s=20230601; t=1761148975; x=1761753775;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BWODj2WO4F2ZEL4oayyExnwSHUjSQjAWKumYuxyz4Nc=;
+ b=F4M4eQlcUYtWGmT4k837cJ9B0dMzvvHyzFbDFHkZSlc0ffqdbfshiJ+092AzMu3Su5
+ 4VtzYTQsKKIPabD5IjkydN2ruLcjYqF2+ZSn5CijyGyTzTsZ9izo071MzZEpZwuGGlVX
+ Ml4p1NTeRmS6xO8tm2WWNV/HAnHgZlQB+36faMIE93fFprFqGfN1i/CFML5/mLXdMhEW
+ NMdB+ao0pJ3zOLOpxBw1QsAgrdwzamR/lHri3lnJU41QuVshuTMppWfRvS6dX8+8bDii
+ wL3zD4AMz20LnuuOA1AlkpwjLzpaNOoxrZqU8gRz8KLWSxuLb6Tme930EO2N2qVc/YEp
+ 5rNQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWyj93xArvV7NirUNeUq0mRJttJue3sT1jvj25TkmUwVGOvkXyF96/oIldQu3yp63Ig/wCYoAY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwMzZ3n4qoslfHS9oESiTHC78Sup/JLrARjGv2qle4FqUjpoVcU
+ FjMJ6CUTb8Qu5XZJtmJKF85Y8A6WogT1jEmjiXqzD9rHy8wieyQhLbXnReRY9i4AQeeA6s/mV80
+ GVNH11bH1ZPTQ/uThR6+Iisae/EyCF4rojAOgM6q2w42oMmxcwL+QIyQm8DL3PDfYWLG0mu8=
+X-Gm-Gg: ASbGncv/NNREgZuUb7VOgraCTMgcq5+dCYKIUFst3wfDDZp5tgQ1Z5l9taGwkumVHje
+ ojryoQo0KulqABnkncC85nWs9EppsxPw0pcERgBOWdOqDwfKTz1TO9qqvPcC3jBL2myffFUFuo/
+ 42zARm/5xlrtbbQ70CnarNyYlmdL69NXbt6zEKMtq5rralf1I6H5iK+2QijBT5GZ90w35+D8EaU
+ pBP1aLAfVRSHum+Rg+W0CBfjCbn6bLJoazyi6rrvailmC4hh7kFdLi5G7RBneImexQw4k6frL71
+ N52bKjFpPyiVFLivLhw/Y2e/xg+iFCrjDfBjBnc+ajRLVw6ChuDr/N0ov5d862r16kddg+yjK9w
+ HpDjdtZbVHC+FxpuZS3+Q2S7ZElc9YcW5cZwMIq4ysoDDcVywkiv32qAZmLkT+KQ=
+X-Received: by 2002:a5d:5f46:0:b0:3ec:db87:e5f4 with SMTP id
+ ffacd0b85a97d-42704d83588mr12678278f8f.7.1761148975237; 
+ Wed, 22 Oct 2025 09:02:55 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGe/Crei5oWP6+HoqM6XOaE07xhnIoY05Z67C66LSDF3YIWKGETtIJKifUARJO0zyAMm4nlYg==
+X-Received: by 2002:a5d:5f46:0:b0:3ec:db87:e5f4 with SMTP id
+ ffacd0b85a97d-42704d83588mr12678245f8f.7.1761148974818; 
+ Wed, 22 Oct 2025 09:02:54 -0700 (PDT)
+Received: from ?IPV6:2a00:2381:43b9:32:b9f2:94bb:a8e4:6606?
+ ([2a00:2381:43b9:32:b9f2:94bb:a8e4:6606])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-427ea5b3affsm25539219f8f.12.2025.10.22.09.02.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 22 Oct 2025 09:02:54 -0700 (PDT)
+Message-ID: <96e01de7-25ca-42e6-acd8-43ee0065d05a@canonical.com>
+Date: Wed, 22 Oct 2025 17:02:53 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] makefile: Fix recursive makes
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ trini@konsulko.com
+References: <20251022122317.3943103-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20251022122317.3943103-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,125 +119,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sreda, 22. oktober 2025 ob 01:53:34 Srednjeevropski poletni =C4=8Das je=
- Andre Przywara napisal(a):
-> Some boards feature an "odd" DRAM size, where the total RAM is 1.5GB or
-> 3GB. Our existing DRAM size detection routines can only detect power-of-2
-> sized configuration, and on those boards the DRAM size is overestimated,
-> so this typically breaks the boot quite early.
->=20
-> There doesn't seem to be an easy explicit way to detect those odd-sized
-> chips, but we can test whether the later part of the memory behaves like
-> memory, by verifying that a written pattern can be read back.
-> Experiments show that there is no aliasing effect here, as all locations
-> in the unimplemented range always return some fixed pattern, and cannot
-> be changed.
->=20
-> Also so far all those boards use a factor of 3 of some lower power-of-2
-> number, or 3/4th of some higher number. The size detection routine
-> discovers the higher number, so we can check for some memory cells beyond
-> 75% of the detected size to be legit.
->=20
-> Add a routine the inverts all bits at a given location in memory, and
-> reads that back to prove that the new value was stored.
-> Then test the memory cell at exactly 3/4th of the detected size, and cap
-> the size of the memory to 75% when this test fails.
->=20
-> This enables boards which ship with such odd memory sizes.
->=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+On 10/22/25 13:23, Ilias Apalodimas wrote:
+> Since the Kbuild bump to 5.1 and specifically
+> commit af1a9935708a ("kbuild: make -r/-R effective in top Makefile for old Make versions")
+> the recursion rules have changed.
+> 
+> 'make O=/output/dir/' as well as './test/py/test.py --bd sandbox --build'
+> is working fine but anything that recursively called the makefile was
+> failing e.g 'make tests', 'make qcheck' etc, which calls a bash script
+> that ends up calling the makefile again.
+> 
+> The reason is that the internal 'sub_make_done' variable of the makefile was set
+> after the first pass and the output dir was never evaluated properly.
+> Reset the variable value if we are executing any of these tests.
+> 
+> Fixes: commit af1a9935708a ("kbuild: make -r/-R effective in top Makefile for old Make versions")
+> Reported-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+Thank you Ilias for resolving this.
+
+Test-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
 > ---
-> Hi,
->=20
-> I don't really have a board with such an odd size to test that, though the
-> function worked on a 12GB A733 board. But that's not supporting the SPL
-> or any kind of DRAM init yet, so was tested out of context.
-> I would be grateful if anyone with a 1.5GB or 3GB board could test this.
->=20
-> Thanks,
-> Andre
->=20
->  arch/arm/include/asm/arch-sunxi/dram.h |  1 +
->  arch/arm/mach-sunxi/dram_dw_helpers.c  | 16 +++++++++++++++-
->  arch/arm/mach-sunxi/dram_helpers.c     | 12 ++++++++++++
->  3 files changed, 28 insertions(+), 1 deletion(-)
->=20
-> diff --git a/arch/arm/include/asm/arch-sunxi/dram.h b/arch/arm/include/as=
-m/arch-sunxi/dram.h
-> index 0eccb1e6c28..59e2e980bfa 100644
-> --- a/arch/arm/include/asm/arch-sunxi/dram.h
-> +++ b/arch/arm/include/asm/arch-sunxi/dram.h
-> @@ -45,5 +45,6 @@ unsigned long sunxi_dram_init(void);
->  void mctl_await_completion(u32 *reg, u32 mask, u32 val);
->  bool mctl_mem_matches(u32 offset);
->  bool mctl_mem_matches_base(u32 offset, ulong base);
-> +bool mctl_check_memory(phys_addr_t addr);
-> =20
->  #endif /* _SUNXI_DRAM_H */
-> diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunxi/=
-dram_dw_helpers.c
-> index 24767354935..14f6b24c30f 100644
-> --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
-> +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
-> @@ -143,8 +143,22 @@ void mctl_auto_detect_dram_size(const struct dram_pa=
-ra *para,
-> =20
->  unsigned long mctl_calc_size(const struct dram_config *config)
->  {
-> +	unsigned long size;
->  	u8 width =3D config->bus_full_width ? 4 : 2;
-> =20
->  	/* 8 banks */
-> -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ra=
-nks;
-> +	size =3D (1ULL << (config->cols + config->rows + 3)) * width *
-> +		config->ranks;
+>   Makefile | 4 ++++
+>   1 file changed, 4 insertions(+)
+> 
+> diff --git a/Makefile b/Makefile
+> index 2402f9313d8b..8cddee3c5a96 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -2666,6 +2666,10 @@ help:
+>   	@echo  'Execute "make" or "make all" to build all targets marked with [*] '
+>   	@echo  'For further info see the ./README file'
+>   
+> +ifneq ($(filter tests pcheck qcheck tcheck,$(MAKECMDGOALS)),)
+> +export sub_make_done := 0
+> +endif
 > +
-> +	/*
-> +	 * There are boards with non-power-of-2 sized DRAM chips, like 1.5GB
-> +	 * or 3GB. They are detected as the larger power-of-2 (2GB and 4GB),
-> +	 * so test the last quarter for being able to store values.
-> +	 */
-> +	if (!mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3)) {
-> +		size =3D (size / 4) * 3;
-> +		debug("capping memory at %ld MB\n", size >> 20);
-
-As I already commented in first version of this change, wouldn't it be good=
- to
-add additional check here, just to be sure there is no misconfiguration? In=
- such
-case it would be better to panic than continue with unstable system.
-
-Best regards,
-Jernej
-
-> +	}
-> +
-> +	return size;
->  }
-> diff --git a/arch/arm/mach-sunxi/dram_helpers.c b/arch/arm/mach-sunxi/dra=
-m_helpers.c
-> index 83dbe4ca98f..376b7d14f86 100644
-> --- a/arch/arm/mach-sunxi/dram_helpers.c
-> +++ b/arch/arm/mach-sunxi/dram_helpers.c
-> @@ -62,3 +62,15 @@ bool mctl_mem_matches(u32 offset)
->  	return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
->  }
->  #endif
-> +
-> +bool mctl_check_memory(phys_addr_t addr)
-> +{
-> +	uint32_t orig, val;
-> +
-> +	orig =3D readl(addr);
-> +	writel(~orig, addr);
-> +	val =3D readl(addr);
-> +	writel(orig, addr);
-> +
-> +	return ~orig =3D=3D val;
-> +}
->=20
-
-
-
+>   tests check:
+>   	$(srctree)/test/run
+>   
 
