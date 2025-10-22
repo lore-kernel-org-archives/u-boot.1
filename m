@@ -4,49 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E71CECCD1AB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 11:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E24CCD1BB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 12:16:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C96D82B20;
-	Wed, 22 Oct 2025 13:26:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id AD9FB8323A;
+	Wed, 22 Oct 2025 14:16:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 67AF7832BC; Wed, 22 Oct 2025 13:26:36 +0200 (CEST)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 269B280422
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 13:26:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [216.234.200.240])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 0B57BB2208B2;
- Wed, 22 Oct 2025 13:26:31 +0200 (CEST)
-Message-ID: <0c3cca71-8af3-46a0-9c7d-957127ea7378@freeshell.de>
-Date: Wed, 22 Oct 2025 04:26:30 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="d0KEatM+";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6F224832BC; Wed, 22 Oct 2025 14:16:37 +0200 (CEST)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CDF982B20
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 14:16:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59MCGXFq1400108;
+ Wed, 22 Oct 2025 07:16:33 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1761135393;
+ bh=Cwffi+BnS/dc3xVkgAfoMXUWTGxszudPJrL7VLIjCgQ=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=d0KEatM+j4hlvYt4JKMSq/+PE82XowU0ByOP44Yj3Tsg+LKVT80ldAXa1ZSNAIFo/
+ 9ecJcx/jzcjkIUvD/0NwUtGjngRztJWmiNIgAtQX8Oq9vWPabCJLhs8ffA/mi2MFvY
+ GfebZHE4Xb7xnqA4MUL6XTPpXibhthfTvruGoh+Q=
+Received: from DLEE212.ent.ti.com (dlee212.ent.ti.com [157.170.170.114])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59MCGXx62001422
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 22 Oct 2025 07:16:33 -0500
+Received: from DLEE208.ent.ti.com (157.170.170.97) by DLEE212.ent.ti.com
+ (157.170.170.114) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Oct
+ 2025 07:16:32 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE208.ent.ti.com
+ (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Wed, 22 Oct 2025 07:16:32 -0500
+Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59MCGWZN1165462;
+ Wed, 22 Oct 2025 07:16:32 -0500
+Date: Wed, 22 Oct 2025 07:16:32 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Anshul Dalal <anshuld@ti.com>
+CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Beleswar Padhi
+ <b-padhi@ti.com>, Nishanth Menon <nm@ti.com>,
+ Andrew Davis <afd@ti.com>, Vignesh R <vigneshr@ti.com>
+Subject: Re: [PATCH 6/8] configs: add defconfigs for am6254atl
+Message-ID: <20251022121632.vsjulhgztd7m4s4l@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20251022-62sip_support-v1-0-eed08d15e76d@ti.com>
+ <20251022-62sip_support-v1-6-eed08d15e76d@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 01/10] riscv: dts: starfive: jh7110-common: Move out some
- nodes to the board dts
-To: Hal Feng <hal.feng@starfivetech.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Leo
- <ycliang@andestech.com>, Tom Rini <trini@konsulko.com>,
- Rick Chen <rick@andestech.com>, Sumit Garg <sumit.garg@kernel.org>,
- Emil Renner Berthing <emil.renner.berthing@canonical.com>
-References: <20250829060931.79940-1-hal.feng@starfivetech.com>
- <20250829060931.79940-2-hal.feng@starfivetech.com>
- <f8ed3792-70ca-498f-9ce7-65040860db07@canonical.com>
- <01a5ff2b-bc20-4670-93ce-2b66df408b96@freeshell.de>
- <ZQ2PR01MB13075C0C6A214EC48174F248E6F32@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <ZQ2PR01MB13075C0C6A214EC48174F248E6F32@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20251022-62sip_support-v1-6-eed08d15e76d@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,77 +81,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 10/22/25 02:59, Hal Feng wrote:
->> On 03.09.25 00:18, E Shattow wrote:
->>
->> Hello Hal, and Heinrich,
->>
->> On 8/29/25 00:19, Heinrich Schuchardt wrote:
->>> On 29.08.25 08:09, Hal Feng wrote:
->>>> Some node in this file are not used by the upcoming VisionFive 2 Lite
->>>> board. Move them to the board dts to prepare for adding the new
->>>> VisionFive 2 Lite device tree.
->>>>
->>>> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
->>>
->>> LGTM
->>>
->>> Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>
->>
->> NAK
+On October 22, 2025 thus sayeth Anshul Dalal:
+> OP-TEE for current K3 devices resides from 0x9e800000 to 0xa0000000
+> which needs to be moved to 0x80080000 to free up space at end of DDR in
+> systems with 512MiB of memory. This is required to allow U-Boot to
+> relocate to end of DDR before booting to the kernel.
 > 
-> Please ignore patch 1 and patch 2.
+> Therefore defconfigs for AM6254atl include the respective existing AM62x
+> configs with updated dt for r5 and modified memory map for a53 SPL to
+> account for the new OP-TEE address.
 > 
->>
->> Better to drop jh7110-common-u-boot.dtsi from U-Boot [1]. Also we can drop
->> jh7110-u-boot.dtsi file but that does require some additional work:
->>
->> - upstream dt-binding memory-controllers/starfive,jh7110-dmc.yaml [2]
->> - upstream devicetree changes adding memory controller [3]
->> - upstream bootph-pre-ram hints [4]
->> - implement cpufreq driver
+> Also make Bryan Brattlof and Tom Rini the maintainers for AM6254atl SIP.
 > 
-> Why do we need the cpufreq driver in u-boot? You want the u-boot to run at the
-> highest frequency?
-> I think it is more stable to keep the u-boot running at 1GHz with lower power
-> consumption.
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>  board/ti/am62x/MAINTAINERS          |  2 ++
+>  configs/am6254atl_evm_a53_defconfig | 15 +++++++++++++++
+>  configs/am6254atl_evm_r5_defconfig  |  9 +++++++++
+>  3 files changed, 26 insertions(+)
 > 
+> diff --git a/board/ti/am62x/MAINTAINERS b/board/ti/am62x/MAINTAINERS
+> index d7dfefffe751b5f3a1292ef8cc9e2926f09c77ae..ca269fae880357eb9f62232a3a32bbafa8b3d29d 100644
+> --- a/board/ti/am62x/MAINTAINERS
+> +++ b/board/ti/am62x/MAINTAINERS
+> @@ -10,3 +10,5 @@ F:	configs/am62x_evm_r5_ethboot_defconfig
+>  F:	configs/am62x_evm_a53_ethboot_defconfig
+>  F:	configs/am62x_lpsk_r5_defconfig
+>  F:	configs/am62x_lpsk_a53_defconfig
+> +F:	configs/am6254atl_evm_r5_defconfig
+> +F:	configs/am6254atl_evm_a53_defconfig
+> diff --git a/configs/am6254atl_evm_a53_defconfig b/configs/am6254atl_evm_a53_defconfig
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..fdf6be7068e7b2fe4e48f1f322703f6838729497
+> --- /dev/null
+> +++ b/configs/am6254atl_evm_a53_defconfig
+> @@ -0,0 +1,15 @@
+> +#include <configs/am62x_evm_a53_defconfig>
+> +
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_K3=y
+> +CONFIG_SOC_K3_AM625=y
+> +CONFIG_TARGET_AM625_A53_EVM=y
+> +CONFIG_TEXT_BASE=0x82f80000
+> +CONFIG_BLOBLIST_ADDR=0x82c80000
 
-The OPP tables are now from upstream Linux so it needs to be done. What
-for higher frequency and voltage or lower frequency and voltage, that
-should be determined by upstream dts not our override.
+I think this may have been leftover from some experimentation.
+Do we still need the bloblist stuff?
 
->> - refactor drivers/ram/starfive/starfive_ddr.c to use common clock framework
->> and delete 'clock-frequency = <2133>' in dts
-> 
-> 2133 is the DDR data rate to set. We can not get this frequency using common
-> clock framework.
-> 
-> Best regards,
-> Hal
-> 
-
-"2133" is a wrong value to have in devicetree for this property, and
-this was rejected by Linux Kernel upstream:
-
-https://lore.kernel.org/lkml/2e53fc11-49eb-420c-ab8e-57e9493c42ba@kernel.org/
-
-Krzysztof says there "Drop clock-frequency. I doubt 2133 Hz is even
-correct... This is a legacy property, use common clock framework."
-
->>
->> I am not interested in writing U-Boot drivers. Hal, can you make the needed
->> improvements in U-Boot for cpufreq and memory controller drivers?
->>
->> 1: https://lore.kernel.org/u-boot/20250815050315.62956-1-e@freeshell.de/
->> 2: https://lore.kernel.org/lkml/20250823100159.203925-2-e@freeshell.de/
->> 3: https://lore.kernel.org/lkml/20250823100159.203925-3-e@freeshell.de/
->> 4: https://lore.kernel.org/lkml/20250823100159.203925-4-e@freeshell.de/
-> 
-
-Thanks,
-
--E
+~Bryan
