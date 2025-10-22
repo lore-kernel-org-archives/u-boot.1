@@ -4,140 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B67DCCCD1BC
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 07:34:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F5E1CCD1BC
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 07:57:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27BCC8323A;
-	Thu, 23 Oct 2025 09:34:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 61B088323A;
+	Thu, 23 Oct 2025 09:57:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="kT8Cwj5F";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="HBgmUhNC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 550F28323A; Thu, 23 Oct 2025 09:34:29 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ id 0960F8323A; Thu, 23 Oct 2025 00:44:11 +0200 (CEST)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0922F82E34
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 09:34:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F2D980422
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 00:44:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=redhat.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1761204857; x=1761809657; i=xypron.glpk@gmx.de;
- bh=7kOHD6LRLe/5xosg/yyDAWZbI54x3HdndgI3402s9M8=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=kT8Cwj5FP6Pa068oDBJu6lA/eQiwohpMPvXGaDZnd+ongKjYIhI+d2tscGU14Kw0
- zwGNTRRqcXGpBSymvASPLjx2Iol9E5ZdrQi6vm/8l1+wBB+TOducfSNWNv27UPthB
- wH/61/1phCozVk7JjaUIdosoH1tDj01Q9gRC98auHr9+fcjzmTOQTPEVPQ7MSB2cB
- leQS47QvycLMtz3zLVdglyddKr0utaKhrxk1+3W0UQDH/jRFDGjq7/Oq/CyaUrCCx
- vX8gKXyb0fzrH544a37TnuJzfhNQF0raGBV/Aez+Bt7MR8zZyHnBWq5Ca3XyKsduT
- vTBOg812/1hne41HXQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [10.104.3.212] ([109.144.144.191]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MzhnH-1uG8qG0DyL-00rPgv; Thu, 23
- Oct 2025 09:34:17 +0200
-Message-ID: <f16df8c1-f58f-48f1-8e9a-8fe6e4fceb84@gmx.de>
-Date: Thu, 23 Oct 2025 08:34:03 +0100
+ spf=pass smtp.mailfrom=ekovsky@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1761173047;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=gs7sFmS7jrMh8zON+FwAqurWicQJ7/Kf3q6Y5Be7Q6w=;
+ b=HBgmUhNCYfy4Qx/kvNrF4bgZCxeAPaL1dDIbr4KZze+/++lBfdgGhv+uBtntfesQ06Wtd6
+ anVCpMTjfhqa/UoXMCBh9POlgwA/62bjEnNa5P1PAd21b8dMBi3BW6HZZbewE1GjP3XUal
+ 0iTIheulK7Ji5LYxn3DBHFGcCnj4GOI=
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com
+ [209.85.222.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-156-e-PETUv8OgGys0DLgxj8Vw-1; Wed, 22 Oct 2025 18:44:06 -0400
+X-MC-Unique: e-PETUv8OgGys0DLgxj8Vw-1
+X-Mimecast-MFC-AGG-ID: e-PETUv8OgGys0DLgxj8Vw_1761173046
+Received: by mail-qk1-f199.google.com with SMTP id
+ af79cd13be357-88f8f54a828so39848685a.1
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 15:44:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761173045; x=1761777845;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gs7sFmS7jrMh8zON+FwAqurWicQJ7/Kf3q6Y5Be7Q6w=;
+ b=UK3dyMgRzguLnpsdtSlL8L9WAoz/SQDJdfE1vZpumVFthqnZh0XbUIEhDAkhil/rcY
+ eDfl8W0rwCIqKIVUZJk8vDceklmOn0nTeSk6AWwBJMEVrUsIU2bRyCOx89+3tydRkzB5
+ QS7nkmNyeLX1h49e41u0K+Fg4wFe8OWkkOIlQvxeiscs55XNyB/qE5U5nsBr+VbnJLXB
+ l0nghuw4ElJDuuIN2JiYfP/iUqX9ZPs5JUaUwUGhrzuXoQ41mm7GEev0GhPFYYheDNWn
+ Nd0dJqpj9r7ZqcWthVLo6JFjwRrq6BUOYd/2B74eSxsG3mloc78ndI616uPKJqH/VUpY
+ 8jsA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVpRV/PW8ryMKJdorVfmdpaHEMcgezrFHcrtChMxfmopTU21rf+/NQ4qxs5eFDxtdPGAoXVZXY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw5zmw0u+Gt8Ndy117sh06E0BxbRhtkxW4vu9WzVddwcqWJkj9x
+ 0RwDtRoEflqPM6AAHGJVvBD+RWYwm5atEOwMmkN0kpioirQv/+7OPi8mjRqCcedVzlQE4Ig5hP/
+ TgzoK0Tv3dOyWtxGa8s/YxRq5wRhBb9ahZsuFEzC638aGBURqfuL2Lcg=
+X-Gm-Gg: ASbGncv3VbJ7stscKxd00OYs9TbjLtK4OYKYK7k+cew2Qn0XGpuOSr/WPc/iC+TueD7
+ yJ1otYHasPAH3CNvSXJR+DlOZzVHbf7G6nd/+tysU45Yf6vS/vj5fVPCzcDSpXnwOUxuXfblAMW
+ 4IqPOPYoYmF7jrvNLTMo05fglGOyvJgnv3n3aWXcd/uWeFD5bu3SCxAqG/5GiVIqfk3JCBDxEvi
+ jWEBF473bxyLT85i8g9nx6JKbheb2YDX87z15WUPXwjmv/ZXPjJHmtc6XQ/kPQYs9V/8sBuqDBF
+ ML748fcePgyQlmLhl+4ornlkuWMrmerozc4Ml9Vt1J1zRZaQng4N1aXhHed7A58vdN2oCg==
+X-Received: by 2002:a05:620a:7003:b0:883:9634:5176 with SMTP id
+ af79cd13be357-8906e2ca648mr2656160285a.2.1761173045557; 
+ Wed, 22 Oct 2025 15:44:05 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGmLnquooICcl/xR8uGmzEAbe5COPwMXZ9xBXCvMHGKewaceUvaoGwPScE6ZqHimhWqx1gP6w==
+X-Received: by 2002:a05:620a:7003:b0:883:9634:5176 with SMTP id
+ af79cd13be357-8906e2ca648mr2656158385a.2.1761173045118; 
+ Wed, 22 Oct 2025 15:44:05 -0700 (PDT)
+Received: from localhost ([38.246.12.206]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-89c12352ec2sm29098185a.52.2025.10.22.15.44.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Oct 2025 15:44:04 -0700 (PDT)
+Date: Wed, 22 Oct 2025 16:44:03 -0600
+From: Eddie Kovsky <ekovsky@redhat.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Loic Poulain <loic.poulain@linaro.org>, Tobias Olausson <tobias@eub.se>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Simon Glass <sjg@chromium.org>, Jan Stancek <jstancek@redhat.com>,
+ Enric Balletbo i Serra <eballetb@redhat.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] Add support for OpenSSL Provider API
+Message-ID: <aPleM45ai8EJhmZO@daedalus>
+References: <20251017171329.255689-1-ekovsky@redhat.com>
+ <20251017215745.GJ6688@bill-the-cat>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] doc: pytest: Complete dependencies list with missing
- packages
-To: Kory Maincent <kory.maincent@bootlin.com>
-Cc: u-boot@lists.denx.de, Bajjuri Praneeth <praneeth@ti.com>,
- thomas.petazzoni@bootlin.com, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>, Jerome Forissier <jerome.forissier@linaro.org>
-References: <20251022132055.816662-1-kory.maincent@bootlin.com>
- <87bjlzarlt.fsf@kernel.org> <20251022180451.1e91cee4@kmaincent-XPS-13-7390>
- <875xc6axmw.fsf@kernel.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <875xc6axmw.fsf@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:WIC15NhU09aXNWSGMijyyw99rqLokF6Fd2yx8POBoMMpZbW6ZRt
- PdNpaEhjauLVwYmTDLb7wKcn48kz9GtklWBt+Pf0KZKahf0IXAL+pU5tsxos0yTL6b9PKP0
- OLJLDgg9+jaWd62k6dkd+0Uxy1l8yQeREJ3QVMP1P2bdKfxEFwsd7fziQ1/1CLHb2870Qey
- pFqedimdRCWUPMIWswcPA==
-UI-OutboundReport: notjunk:1;M01:P0:C/uFXyJ9LsI=;og2jYZuZK1rJ1lMuLfQgAX+Q0J7
- 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
+In-Reply-To: <20251017215745.GJ6688@bill-the-cat>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: Kf8QPQHXcKZ-63nsEgDIapUquS4zsj3Vg3A0hrRjOBM_1761173046
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+X-Mailman-Approved-At: Thu, 23 Oct 2025 09:57:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -154,71 +112,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/25 08:24, Mattijs Korpershoek wrote:
-> On Wed, Oct 22, 2025 at 18:04, Kory Maincent <kory.maincent@bootlin.com>=
- wrote:
->=20
->> On Wed, 22 Oct 2025 17:22:38 +0200
->> Mattijs Korpershoek <mkorpershoek@kernel.org> wrote:
->>
->>> Hi Kory,
->>>
->>> Thank you for the patch.
->>>
->>> On Wed, Oct 22, 2025 at 15:20, Kory Maincent <kory.maincent@bootlin.co=
-m>
->>> wrote:
->>>
->>>> From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
->>>>
->>>> Add missing dependencies to the pytest usage documentation and correc=
-t
->>>> the device tree compiler package name from 'dtc' to 'device-tree-comp=
-iler'.
->>>>
->>>> This ensures users have the complete list of dependencies needed to r=
-un
->>>> the pytest test suite without errors.
->>>>
->>>> Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
->>>> ---
->>>>   doc/develop/pytest/usage.rst | 7 ++++++-
->>>>   1 file changed, 6 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.=
-rst
->>>> index 779b2dbe24b..454877837ca 100644
->>>> --- a/doc/develop/pytest/usage.rst
->>>> +++ b/doc/develop/pytest/usage.rst
->>>> @@ -39,7 +39,7 @@ will be required. The following is an incomplete li=
-st:
->>>
->>> If the list is now complete (as per your commit message), should we
->>> update this sentence as well to remove "incomplete" ?
->>
->> Indeed I think we can. Do you want a v2 with this update?
->=20
-> I think Heinrich will be the one picking this up so I'll let him chime
-> in.
->=20
-> If you do make a v2, please add:
->=20
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+On 10/17/25, Tom Rini wrote:
+> On Fri, Oct 17, 2025 at 11:13:27AM -0600, Eddie Kovsky wrote:
+> 
+> > The Engine API has been deprecated since the release of OpenSSL 3.0. End users
+> > have been advised to migrate to the new Provider interface. Several
+> > distributions have already removed support for engines, which is preventing
+> > U-Boot from being compiled in those environments.
+> > 
+> > The Kconfig option OPENSSL_NO_DEPRECATED introduces support for the Provider API
+> > while continuing to use the existing Engine API on distros shipping older
+> > releases of OpenSSL.
+> > 
+> > This is based on similar work contributed by Jan Stancek
+> > updating Linux to use the Provider interface.
+> > 
+> >     commit 558bdc45dfb2669e1741384a0c80be9c82fa052c
+> >     Author: Jan Stancek <jstancek@redhat.com>
+> >     Date:   Fri Sep 20 19:52:48 2024 +0300
+> > 
+> >         sign-file,extract-cert: use pkcs11 provider for OPENSSL MAJOR >= 3
+> > 
+> > The changes have been tested with the FIT signature verification vboot tests on
+> > Fedora 42 and Debian 13. All 30 tests pass with both the legacy Engine library
+> > installed and with the Provider API.
+> > 
+> > Signed-off-by: Eddie Kovsky <ekovsky@redhat.com>
+> > ---
+> >  lib/aes/aes-encrypt.c |  2 +
+> >  lib/rsa/Kconfig       |  8 ++++
+> >  lib/rsa/rsa-sign.c    | 93 ++++++++++++++++++++++++++++++++++++++++++-
+> >  3 files changed, 101 insertions(+), 2 deletions(-)
+> 
+> Thanks for doing this, I'm glad to see the work, and my comments are
+> really style things to fix up and v2 once there's been time for real
+> content comments if any.
+> 
+> [snip]
+> > diff --git a/lib/rsa/Kconfig b/lib/rsa/Kconfig
+> > index 9033384e60a3..622f06f8dba0 100644
+> > --- a/lib/rsa/Kconfig
+> > +++ b/lib/rsa/Kconfig
+> > @@ -20,6 +20,14 @@ config SPL_RSA
+> >  	bool "Use RSA Library within SPL"
+> >  	depends on SPL
+> >  
+> > +config OPENSSL_NO_DEPRECATED
+> > +	bool "Build U-Boot without support for OpenSSL Engine"
+> > +	default n
+> 
+> This is the default, you can drop this.
+> 
+> [snip]
+> > diff --git a/lib/rsa/rsa-sign.c b/lib/rsa/rsa-sign.c
+> > index 92b9d7876e52..9ebbcdfd52f3 100644
+> > --- a/lib/rsa/rsa-sign.c
+> > +++ b/lib/rsa/rsa-sign.c
+> > @@ -19,15 +19,51 @@
+> >  #include <openssl/err.h>
+> >  #include <openssl/ssl.h>
+> >  #include <openssl/evp.h>
+> > +#if (IS_ENABLED(CONFIG_OPENSSL_NO_DEPRECATED))
+> > +#include <err.h>
+> > +#include <openssl/provider.h>
+> > +#include <openssl/store.h>
+> > +#else
+> >  #include <openssl/engine.h>
+> > +#endif // CONFIG_OPENSSL_NO_DEPRECATED
+> 
+> Two things (here and elsewhere). One, since we're generally using
+> '#ifndef CONFIG_OPENSSL_NO_DEPRECATED' just using '#ifdef
+> CONFIG_OPENSSL_NO_DEPRECATED' is fine, using a macro here is not aiding
+> readability. Two, if the if/else/endif is within the patch context we
+> really don't need a comment on the endif part.
+> 
+> -- 
+> Tom
 
-Hello Kory,
+Hi Tom
 
-Thank you for reworking this page. Yes, if the sentence is now=20
-superfluous, please, send a v2 of the patch and CC me.
+I was trying to stick to the coding guidelines as closely as possible.
+But I'm happy to replace the macro usage with standard #ifdef. I will
+remove the extra comments and the default Kconfig as well when I send a
+v2.
 
-Best regards
+Thanks
 
-Heinrich
-
->=20
->>
->> Regards,
->> --=20
->> K=C3=B6ry Maincent, Bootlin
->> Embedded Linux and kernel engineering
->> https://bootlin.com
+Eddie
 
