@@ -4,86 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E885CCD1BF
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 20:14:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 940D6CCD1AB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 20:34:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D79181E13;
-	Wed, 22 Oct 2025 22:14:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 07FDA81E13;
+	Wed, 22 Oct 2025 22:34:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZlyNbrkt";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0124832BC; Wed, 22 Oct 2025 22:14:34 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79EAD80422
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 22:14:32 +0200 (CEST)
+ id 33F36832BC; Wed, 22 Oct 2025 22:34:20 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id C34AF80422
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 22:34:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-35c80c1dc3fso20513fac.3
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 13:14:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761164071; x=1761768871; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bIWMcLABNBjrEdRD6C3N9FNd8VNz5nLUGEaATX7WFhE=;
- b=ZlyNbrktN5H8cu+JNum1/wtBDT3gT97cJXR37ActiArF+r84gFtQRJ2gaOJrCVsPXt
- aJxTfibXf8xvGDXZjdOGxzYX+awIxLePpDzMiKopBpBsb3m/M4Nu4zrFtysgDdjBkFTu
- N/5Ckcai0y6d8JZLZdj4u2lA+X4Zi9oQarWxQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761164071; x=1761768871;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bIWMcLABNBjrEdRD6C3N9FNd8VNz5nLUGEaATX7WFhE=;
- b=FQhhWFHul2tI3zK1/FIsRqfF2+bKPtaVRm6fbe/O9rvVdVxqeqAoHoMTVPrvtJdL40
- L+pOuixBse8mhMCDtlEIBli9ulfoN0iWxgUGBcYZ0S+a5ED5NW9ZAEnHLZZkxDVlKo7C
- AfSjkKxO/hLJpPfu4T8e0yzvAXgjN5xRqOJk8mM7QLRt5ILU4f8jPMsU6zTwZFYF+4ku
- /M1GVe/BA6OE7FE9hP3hJkzXuc57R+Y8WIokCmRVmaDdfIqrYJGm0ZdEij4sXeLOXjuQ
- NheI54x9mchRcgZPYum3jevqMQm39RJIFWuLTiD30TaXkQwnVQckYOHMRe5IIiIvoqE3
- c1Nw==
-X-Gm-Message-State: AOJu0YzqmpCrCiVcA6/Xs92WJIOj7q42ojr8rD85KxoHj4SVEmGoEhNi
- E5JzGzo0vMlKh7oVVa2IeLovVCWvuU/+3Y6aG8o/tcaP7sbW6ja7CDZ62kyOuXWQypw=
-X-Gm-Gg: ASbGnct5Orf3xKdItT1PSdiKiZ8lvnKdi3Klz62CEG383rO6ZlawtpPWo9UZjxgRnwa
- L0a8IuIiFBWwlpMFiQU1Jw3YJt0H5LSdNqF/k1rMIo5N4Di4eJ4KV6jxPxr0Y+D/lpcLrn7f3RK
- jc+MPmjk3wtcFkhnUZYpXQhiHeYBrVSz2mFnrmheGg/MzA2Jaw4tTAiYKq3GHz4lnWHKcXjKFy0
- tVtPJaWQmfNWdvLM3EEtDj2fTR/duI+rJaA8AMv3AGQjvjAZEBNKNE0ndwW3WPJplmsMBrZJLmb
- va67kcxVWJyKbJWkLGrlFEDTwZopH9ZsOYsD5Ejh+TEv6o8Yr5VAIUMvVpWrSk2b3zpg5k19R/o
- oIeX31/du43Dv301DncATF/Aoe9vOEi9+rBbFgtwBkPNEcZz81FOXQmadad/OZlFfGrOcb+tN72
- VQQ87qnkAI02CCKVB6vBoxBEuZLDhcLhqRORDyimMNktoBdHQJs0bijKZf31s=
-X-Google-Smtp-Source: AGHT+IFe/JgmjhXG+K3Hj2h1x8icc+T/QlPeurIENguwLMUHjjfs3SElBNWLpVt0dkDF8x0L45skNg==
-X-Received: by 2002:a05:6870:d88c:b0:307:b1b1:aeb9 with SMTP id
- 586e51a60fabf-3c98d11d690mr9971952fac.35.1761164071133; 
- Wed, 22 Oct 2025 13:14:31 -0700 (PDT)
-Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3cdc4e61d0csm58451fac.18.2025.10.22.13.14.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Oct 2025 13:14:29 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>
-Cc: d-gole@ti.com, b-padhi@ti.com, vigneshr@ti.com, nm@ti.com, 
- robertcnelson@gmail.com, w.egorov@phytec.de, francesco.dolcini@toradex.com, 
- ggiordano@phytec.com, m-chawdhry@ti.com, afd@ti.com, bb@ti.com, 
- u-kumar1@ti.com, devarsht@ti.com, ilias.apalodimas@linaro.org, 
- xypron.glpk@gmx.de
-In-Reply-To: <20251017131540.3636067-1-anshuld@ti.com>
-References: <20251017131540.3636067-1-anshuld@ti.com>
-Subject: Re: [PATCH v11 00/11] Add support for dynamic MMU configuration
-Message-Id: <176116406890.1665784.10807369863168978503.b4-ty@konsulko.com>
-Date: Wed, 22 Oct 2025 14:14:28 -0600
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3C8891655;
+ Wed, 22 Oct 2025 13:34:09 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4F93C3F66E;
+ Wed, 22 Oct 2025 13:34:16 -0700 (PDT)
+Date: Wed, 22 Oct 2025 21:33:39 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+Cc: u-boot@lists.denx.de, Rudi Horn <dyn-git@rudi-horn.de>,
+ linux-sunxi@lists.linux.dev
+Subject: Re: [PATCH] sunxi: dram: detect non-power-of-2 sized DRAM chips
+Message-ID: <20251022213339.2b9cb140@minigeek.lan>
+In-Reply-To: <12763423.O9o76ZdvQC@jernej-laptop>
+References: <20251021235334.7557-1-andre.przywara@arm.com>
+ <12763423.O9o76ZdvQC@jernej-laptop>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,44 +57,150 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 17 Oct 2025 18:45:22 +0530, Anshul Dalal wrote:
+On Wed, 22 Oct 2025 17:48:27 +0200
+Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
 
-> In U-Boot, TI only provides a single memory map for all k3 platforms, this
-> does not scale for devices where atf and optee lie outside the range 0x80000000
-> - 0x80080000 and 0x9e780000 - 0xa0000000 respectively.
-> 
-> There are also issues for devices with < 2GiB of memory (eg am62SiP with 512MiB
-> of RAM) as the maximum size for the first DRAM bank is hardcoded to 2GiB in the
-> current memory map. Furthermore the second DRAM bank is mapped even for devices
-> that only have a single bank.
-> 
-> [...]
+Hi Jernej,
 
-Applied to u-boot/master, thanks!
+> Dne sreda, 22. oktober 2025 ob 01:53:34 Srednjeevropski poletni =C4=8Das =
+je Andre Przywara napisal(a):
+> > Some boards feature an "odd" DRAM size, where the total RAM is 1.5GB or
+> > 3GB. Our existing DRAM size detection routines can only detect power-of=
+-2
+> > sized configuration, and on those boards the DRAM size is overestimated,
+> > so this typically breaks the boot quite early.
+> >=20
+> > There doesn't seem to be an easy explicit way to detect those odd-sized
+> > chips, but we can test whether the later part of the memory behaves like
+> > memory, by verifying that a written pattern can be read back.
+> > Experiments show that there is no aliasing effect here, as all locations
+> > in the unimplemented range always return some fixed pattern, and cannot
+> > be changed.
+> >=20
+> > Also so far all those boards use a factor of 3 of some lower power-of-2
+> > number, or 3/4th of some higher number. The size detection routine
+> > discovers the higher number, so we can check for some memory cells beyo=
+nd
+> > 75% of the detected size to be legit.
+> >=20
+> > Add a routine the inverts all bits at a given location in memory, and
+> > reads that back to prove that the new value was stored.
+> > Then test the memory cell at exactly 3/4th of the detected size, and cap
+> > the size of the memory to 75% when this test fails.
+> >=20
+> > This enables boards which ship with such odd memory sizes.
+> >=20
+> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> > ---
+> > Hi,
+> >=20
+> > I don't really have a board with such an odd size to test that, though =
+the
+> > function worked on a 12GB A733 board. But that's not supporting the SPL
+> > or any kind of DRAM init yet, so was tested out of context.
+> > I would be grateful if anyone with a 1.5GB or 3GB board could test this.
+> >=20
+> > Thanks,
+> > Andre
+> >=20
+> >  arch/arm/include/asm/arch-sunxi/dram.h |  1 +
+> >  arch/arm/mach-sunxi/dram_dw_helpers.c  | 16 +++++++++++++++-
+> >  arch/arm/mach-sunxi/dram_helpers.c     | 12 ++++++++++++
+> >  3 files changed, 28 insertions(+), 1 deletion(-)
+> >=20
+> > diff --git a/arch/arm/include/asm/arch-sunxi/dram.h b/arch/arm/include/=
+asm/arch-sunxi/dram.h
+> > index 0eccb1e6c28..59e2e980bfa 100644
+> > --- a/arch/arm/include/asm/arch-sunxi/dram.h
+> > +++ b/arch/arm/include/asm/arch-sunxi/dram.h
+> > @@ -45,5 +45,6 @@ unsigned long sunxi_dram_init(void);
+> >  void mctl_await_completion(u32 *reg, u32 mask, u32 val);
+> >  bool mctl_mem_matches(u32 offset);
+> >  bool mctl_mem_matches_base(u32 offset, ulong base);
+> > +bool mctl_check_memory(phys_addr_t addr);
+> > =20
+> >  #endif /* _SUNXI_DRAM_H */
+> > diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunx=
+i/dram_dw_helpers.c
+> > index 24767354935..14f6b24c30f 100644
+> > --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
+> > +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
+> > @@ -143,8 +143,22 @@ void mctl_auto_detect_dram_size(const struct dram_=
+para *para,
+> > =20
+> >  unsigned long mctl_calc_size(const struct dram_config *config)
+> >  {
+> > +	unsigned long size;
+> >  	u8 width =3D config->bus_full_width ? 4 : 2;
+> > =20
+> >  	/* 8 banks */
+> > -	return (1ULL << (config->cols + config->rows + 3)) * width * config->=
+ranks;
+> > +	size =3D (1ULL << (config->cols + config->rows + 3)) * width *
+> > +		config->ranks;
+> > +
+> > +	/*
+> > +	 * There are boards with non-power-of-2 sized DRAM chips, like 1.5GB
+> > +	 * or 3GB. They are detected as the larger power-of-2 (2GB and 4GB),
+> > +	 * so test the last quarter for being able to store values.
+> > +	 */
+> > +	if (!mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3)) {
+> > +		size =3D (size / 4) * 3;
+> > +		debug("capping memory at %ld MB\n", size >> 20); =20
+>=20
+> As I already commented in first version of this change, wouldn't it be go=
+od to
+> add additional check here, just to be sure there is no misconfiguration? =
+In such
+> case it would be better to panic than continue with unstable system.
 
-[01/11] mach-k3: use minimal memory map for all K3
-        commit: 4673c8dcb48d6b14070a4819ee4a6277a0f2daa6
-[02/11] mach-k3: use custom enable_cache
-        commit: e55e57d240e0bdef604efca5b386978b1c70d513
-[03/11] arm: armv8: mmu: export mmu_setup
-        commit: 567a683e8ced54c3ffa53f62a4ed7e535268c6f2
-[04/11] arm: armv8: invalidate dcache entries on dcache_enable
-        commit: 9ebdbbc43e5fb5841d85ec7ebcb1dbf07f4c87b0
-[05/11] arm: armv8: mmu: add mem_map_from_dram_banks
-        commit: fe2647f2a0d4e4df5d47fdf068aeb2a1edd3d533
-[06/11] mach-k3: map all banks using mem_map_from_dram_banks
-        commit: f1c694b8fddece279cdd103ae4009bf25345d8e4
-[07/11] arm: armv8: mmu: add mmu_unmap_reserved_mem
-        commit: 856480eef0a25dde339cce6d1889efdc836c6be8
-[08/11] spl: split spl_board_fixups to arch/board specific
-        commit: 16ffcff0283d2f10821bad7cbcf89003a86c0063
-[09/11] mach-k3: add reserved memory fixups for next boot stage
-        commit: 859f68ed2ee7a0c1f88efaeb769202df01ef7a97
-[10/11] mach-k3: add carveouts for TFA and optee
-        commit: 4f5285f0e640c3e9b40420ba3b11358446646b11
-[11/11] arm: mach-k3: reserve space for page table entries
-        commit: 342fd918b1bf2f00f52216297d5fe22272e8c7ca
--- 
-Tom
+Mmmh, but what check would that be? I mean this is mctl_calc_size(),
+which is only called once, just at the end, before we return from
+sunxi_dram_init(). And it just calculates the size, there is no probing
+anymore, this has been done earlier, elsewhere.
+At this point we assume everything is fine and properly setup, so I
+don't understand what additional check we should do here. If we cannot
+read back what we have written, we are in deeper trouble anyway, but we
+would have missed that before anyway here, and it would have crashed
+sooner or later, so I don't see a problem.
 
+Cheers,
+Andre
+
+
+>=20
+> Best regards,
+> Jernej
+>=20
+> > +	}
+> > +
+> > +	return size;
+> >  }
+> > diff --git a/arch/arm/mach-sunxi/dram_helpers.c b/arch/arm/mach-sunxi/d=
+ram_helpers.c
+> > index 83dbe4ca98f..376b7d14f86 100644
+> > --- a/arch/arm/mach-sunxi/dram_helpers.c
+> > +++ b/arch/arm/mach-sunxi/dram_helpers.c
+> > @@ -62,3 +62,15 @@ bool mctl_mem_matches(u32 offset)
+> >  	return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
+> >  }
+> >  #endif
+> > +
+> > +bool mctl_check_memory(phys_addr_t addr)
+> > +{
+> > +	uint32_t orig, val;
+> > +
+> > +	orig =3D readl(addr);
+> > +	writel(~orig, addr);
+> > +	val =3D readl(addr);
+> > +	writel(orig, addr);
+> > +
+> > +	return ~orig =3D=3D val;
+> > +}
+> >  =20
+>=20
+>=20
+>=20
+>=20
+>=20
 
