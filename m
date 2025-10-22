@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CADCCCD195
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 07:23:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A3CCCD195
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 07:23:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FA89838AB;
+	by phobos.denx.de (Postfix) with ESMTP id D485E838BF;
 	Wed, 22 Oct 2025 09:21:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="ZLHtcrfb";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="EASR6L14";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14629832BC; Wed, 22 Oct 2025 09:02:05 +0200 (CEST)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id 64CA28334F; Wed, 22 Oct 2025 09:02:57 +0200 (CEST)
+Received: from GVXPR05CU001.outbound.protection.outlook.com
+ (mail-swedencentralazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c202::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E4FF82E34
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 09:02:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F87D82E34
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 09:02:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mJhtye3vpTUuZ/O8lkpG1uGuWQ348iJkk8NFCdSonkfFjVOUT5N64P9VvmeJlY6uE/qjoegwyPBD/7fNwV5GrXgQDue5q9iVr0uF/FEVRHv4EI0NM8JuY9sykqd3DH0uXQnJLcZivPukK3GzAdEdDRCQnuGQxi2T5y4AygbZEY/wuCuw5NVBZFoq68t69LpyV5xgI3spy+sShuYG/mrS2kdVJlMPS4P3URIg3N048TbOlFWs7e9etvJ3cDFllOKDuFs55yKFWhOLk+T63NYVslARKEvefx2DbRKde1GPpQmkP77NXzynlPDiwrglwMSAYk/rb3yHDKvvNKJQ6ePGzg==
+ b=yxlPAKqwcnHZvz9q4Tk6exPU+Zlr+WESexA65Jk4MiNA1hFM8OTRkvsOenapEl0c/sst7miqCu0Tow97M0zI9YCxQy5Gpu6DLN2dSUPTyeTWArI0kfAihlcj7AHaSvmxGA8M+fBb+AXBaK6pcl34xi2Bltsnxy7BnGyCT7dv9fqxyH4vZC4OBYmDNIWyR0BNauleIDUofE4T0dgiiFGLd907+Vbea+3Lvzs//ai0IZyFElCG+wOI4Q1mNlbTHhVlowxE+/FREZ3AnRgFcdf8jQMKzUvLTvdU0B8tYMkl6uX7Bt6Fs+YsZAriBgyF8EyH6pBvg+yJpg6sNuXCymARMA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QiZpCzkovZykM1/zgjqw7f8FojDRBhWieqs2w3Ng048=;
- b=PJGP/1O3hbCLTZImJcTFdvipS5ZfJSbDWGKcgYrpCU40iIFHdpTnPXyBp42Zz2f9723bhmW1EA/4XJTrH3QP/NrTwP24S9qQVnKy0OZy4uKusJQk3FFHDzXhcdRGXiyqzP7qw8Eiow3AEuwyptq+aUAAeoFuFCu/XUmxTfGLgyRmctTTn3zdMw5oQrsqLfk8OCfYtKAnFX7mpBTuszUovxeuYRBYW2FAdDRw2FqAbLA05ye1bfFc7eLaU3BLs6u3DCgaaKS6WG5FSc84kdCaXytY66FFk/3TxuVgG40ZO6uH17pDDZzi1blLfMAuuGr8iCzcxhoc2HgRSWwzAljxNw==
+ bh=Zg/kmo0YhQpOTEBBIPY5cOn3zTOclCSuslKpyENejRg=;
+ b=drJOaHefj1jk9UA4oaWfM3trHHWxMKqch0+I2PLIJbi+Bse4IAduTJ10JWk38M1dEtmBAkByDjglRTmwyuR7IadQvNULUVyiUVGqgVKkvTfusanFTHTVCUZb1IP+0Yhy94LUW91s676nq275WYToGZaz3DgqXlnVJ6BlbYOOl7i6g5oPlPz/N8gKBUBVDyXUiWfliQ0BtspyezPVX6r15NzbLdtBfySFEuwZ1iBvLiAcmHPASLPBkOF5+566QLNfY4RF77TUnOhYhdmk+QKHoEEIK+ETheo7ryIDSq0ajhfiTIkskU+MKyOv5Mr48TkxxMVMmgZrrTVaLJxgHaT+VQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QiZpCzkovZykM1/zgjqw7f8FojDRBhWieqs2w3Ng048=;
- b=ZLHtcrfbqG21+f1wL7Nx691Y5ZzVCTHU8AC7G8bpLjhHIzpQjHHCG3DJhh72oM72IsynbwZcFg0aDtd/kWYdccX8L4u4dt1PVPg89g/dFhnlEA+4yxrlpREgzQArQrVyHlRNc1isqy3gX9pXWFC6Qx/PgTKRH5laasDqS36qdqKzz67jDVy1qdumhJzOmjv+MMntIiXn0VzvV/37/nUTfbaD5GqBoy5InonOtq5IW3mqWNdQimuhEQpT3wm+KrtNlhBUbwbMcmG/UuxGad52L7FM8vt68mSlg7105XSh8zDdJI/UAZJd8SGq//VoDWoFxh3rhXIkyByYAijMuRlX8w==
+ bh=Zg/kmo0YhQpOTEBBIPY5cOn3zTOclCSuslKpyENejRg=;
+ b=EASR6L14UAvkDvS0iUR9rQP/VT7My7NBaMSD5/+18aYO2IUJ1ML9uMdNnIq8QKb4OvVa8zvlzvoU8louVQ1RfvCcT5Wv/rROtTBskmObL36AbyOX867LQS+GLGNUbNrUjIE7zC6jQ1K2DhJEmqwjN3v5qR0auWLMf5AuB72nB1SSgFHjuV10U+RfLxLSKinhT+zj7vh3tqf/RdUZX1U3Sttj8RC0eR5vf3FuTI5Hg7HeLgW0rh41aN0P3zhZ2YR2G6z9DDO+e1KqJ4ln+g3VyYA98jcOg2ZubR1/SvxCqm3bh4jZMVc3aeiSuvNrThYydhq2Qg8IFt7gzTdaIRuTOw==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AM9PR04MB8572.eurprd04.prod.outlook.com (2603:10a6:20b:437::18)
+ by AM7PR04MB6935.eurprd04.prod.outlook.com (2603:10a6:20b:10e::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.12; Wed, 22 Oct
- 2025 07:02:00 +0000
+ 2025 07:02:52 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9253.011; Wed, 22 Oct 2025
- 07:01:59 +0000
-Date: Wed, 22 Oct 2025 16:14:10 +0800
+ 07:02:52 +0000
+Date: Wed, 22 Oct 2025 16:15:04 +0800
 From: Peng Fan <peng.fan@oss.nxp.com>
 To: Kaustabh Chakraborty <kauschluss@disroot.org>
 Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
@@ -67,95 +67,95 @@ Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
  Ronald Wahl <ronald.wahl@legrand.com>, Anand Moon <linux.amoon@gmail.com>,
  Sam Protsenko <semen.protsenko@linaro.org>,
  Henrik Grimler <henrik@grimler.se>
-Subject: Re: [PATCH 4/9] mmc: dw_mmc: add voltage switch command flag
-Message-ID: <20251022081410.GC30163@nxa18884-linux.ap.freescale.net>
+Subject: Re: [PATCH 5/9] mmc: dw_mmc: return error for invalid voltage setting
+Message-ID: <20251022081504.GD30163@nxa18884-linux.ap.freescale.net>
 References: <20251017-mmc-dw-exynos7870-v1-0-a2c5139d9afe@disroot.org>
- <20251017-mmc-dw-exynos7870-v1-4-a2c5139d9afe@disroot.org>
+ <20251017-mmc-dw-exynos7870-v1-5-a2c5139d9afe@disroot.org>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251017-mmc-dw-exynos7870-v1-4-a2c5139d9afe@disroot.org>
+In-Reply-To: <20251017-mmc-dw-exynos7870-v1-5-a2c5139d9afe@disroot.org>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: SI2PR02CA0007.apcprd02.prod.outlook.com
- (2603:1096:4:194::23) To PAXPR04MB8459.eurprd04.prod.outlook.com
+X-ClientProxiedBy: SI2PR01CA0053.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::7) To PAXPR04MB8459.eurprd04.prod.outlook.com
  (2603:10a6:102:1da::15)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM9PR04MB8572:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1b48e3ac-3332-4e55-1672-08de1138e4cc
+X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM7PR04MB6935:EE_
+X-MS-Office365-Filtering-Correlation-Id: 98743c07-5173-4aae-ff25-08de1139049b
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|19092799006|1800799024|366016|376014|7416014|7053199007|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Qj0uFYWS2d5nvcmbIUVfWsidFtnbTBNKKbD1iieZsZK9gbBDbKrl3Zhgq7rc?=
- =?us-ascii?Q?u7muNbdxIp9Rtv3F1ns8M6Tg/1gn38aafgMiwKPXrnlP4+Q+JtK8vRwagB3u?=
- =?us-ascii?Q?YffUPPSGmTMu8Il6GFHx2lv+QX+DNdKTbCxVl1jzXqyDYUO5DPpPzMlSnPmh?=
- =?us-ascii?Q?OTKNrYTO0Idf3zFoLezedCDa5MYmVmhApeUJ1Lk+z0+JOK4LUfY+o/ywq+Tk?=
- =?us-ascii?Q?LRncpKSwQWgwe3ti+L0xNoBt1Exe4lXWEeI0E0dV7XHWAvzfeEFbwuqUFKxg?=
- =?us-ascii?Q?YauFeyyqWL6xZav0SM17RvtY1+JkpHe6s2MfJgWlPD4lps/gphNzq+FZ/ZS6?=
- =?us-ascii?Q?LgWKkU+wiQW88B/eMXMwg3qUKYseCt60qH8LirtHITmtQs35KzrK8HWZF31Y?=
- =?us-ascii?Q?cdMDgUcin+GQdF55AexpN/QFY/d7A8sdx9vr/KbVIjwpo4GglE4p0DxUCwI7?=
- =?us-ascii?Q?q46AKxytfYO5WSsHR2ppMQh7rSZFPZs1sQSu5jVJxJYR44uRYrkJpoGjzI88?=
- =?us-ascii?Q?/hzg+wlKGlBLkXOEd1M3IRH+WUIxRWP4TFD6eRNS4bCatoeLcPhUdGJIib9s?=
- =?us-ascii?Q?lUIDLN7xft0A6xnU4BWDqPG6qffC1+4wy3izB4duSeHX3yWCSNOpdE1N8vJN?=
- =?us-ascii?Q?FnUtNE6psgzcXsIcnkUzLYw4zrtNaMkwmjiai2fB2vNNAQ7qtGJ2fxg0XKd6?=
- =?us-ascii?Q?kxk9qD/F3CbEOd5ka3CjwZ3jMLkI0AgilgHxVhG692tmHddiGiBaT30QfBKm?=
- =?us-ascii?Q?MzHo+w4XrQ/Dm2mG947NrBCJaThByjpqb7zlpHVSDpvmOsriQl8N53t/IBCX?=
- =?us-ascii?Q?opRJGIf79iaxFj2RCgtq/WKEfpewNk++HvSW8/wO8pH4izIa3Vxt09Vpegke?=
- =?us-ascii?Q?LA4ZX08It4jLsjNjgwsdaCR5YaLVoomZuw11OJua4kS//6B/2pk0iA32ZXZN?=
- =?us-ascii?Q?fgMmC8zCvgTYgsPENEm3ysWmIlGMiBljPk0yPZBq5+Sz3D87TbVTFgZxRErf?=
- =?us-ascii?Q?P9IZxdozuAd5xTWXCenNUgB+tqKpPBvDmp2W921GYQb29fS5i+tmZ1V1Z3P6?=
- =?us-ascii?Q?xCSQwtzRtKATUARxBwF61QZwfFrKqBUmjBsbNy0gR2kVIPYrqpjzsDDDiTfE?=
- =?us-ascii?Q?3l6TLHVXaxSqTTD1J2aXmaUGbMDdXuSy4KLUAZ2G0/ECaC0wrCEBqYkBL3o5?=
- =?us-ascii?Q?YTRxQzliXugC7UtQgGiN/LHEFlm6gTwdiFVuI0yw1r1MgbZY16oh0v35F4AI?=
- =?us-ascii?Q?E6gtbhKn1eufxiLBSbGIK1G6XGL0PjPYxRkWdNBB4BG0Pp2vA6oZj/ngIlj9?=
- =?us-ascii?Q?K5UWGbJbJZeX7tOk16Oi18T3ticALbMF6JIvBPI0hsBSXXohRcB/tawSb19A?=
- =?us-ascii?Q?NjJ1sSSbtkZNsmsgKTEtLORV3LbjWYb3BctmsC0wIhR6puwCLOU66kVecB+p?=
- =?us-ascii?Q?2gvI74gsfuYOAJbj+VrCSZORJonr+OSZ/brhTltb1LUm5YnKF4x2iHSqroVw?=
- =?us-ascii?Q?1kMFo1N6HCb3XX2ZCmWLtTzebzGHCAF2n/fC?=
+ ARA:13230040|19092799006|366016|7416014|52116014|376014|1800799024|38350700014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?prL+V6HzEaqL4FskrOjRBgzOHOdCP3/iwOrwGmMg+MZIWv9jJzFWGbTm5wUV?=
+ =?us-ascii?Q?yQDoPrUHysgIz8dJo2BQxM8YjSwzRl4Q49IGV57Al1xHH8/9wuw9/jxzZlXf?=
+ =?us-ascii?Q?LHrawfJBUXeev7PX82Ra2m8h2SjQkzqz9f8I8G73/pk+lE1h1u3y97U0ww5n?=
+ =?us-ascii?Q?l6Pvsxz5j4DMlCRy0hrZaKnse62TyEXAONlu9wI71qb5CIL18p1rRxNuMnwT?=
+ =?us-ascii?Q?ghd+p8MHN9eMPRIwGXrCxdV0Qms/OZ/sRaZ15o1fudcWiKecA6/tWeMCZ5BQ?=
+ =?us-ascii?Q?MAA8k0vhu8k1BEuH13xc2DOKUsSuqgaooKurO4+FHUlWL0i2tHB0i1Gpbwkc?=
+ =?us-ascii?Q?RFtanGXOYxErGhulVGgd6JZo5aylzIXt1PeEwz50SEska86qGWfe4Xg/CkQB?=
+ =?us-ascii?Q?K1386srCUNEjJYuIuXXaBn5QIJy8oHKf7a6XOou0e4hl2EbYZEgRych8VsJ2?=
+ =?us-ascii?Q?8jwnvYYddDUrmu9TYiLM/vrNkJSe4UbHhmHVFpWMhfe91IT6l16Cz7f0dWCe?=
+ =?us-ascii?Q?Ej+kUMBCefOdFGc4SZCrA/NHMo5nQSRiTLuvc2Y96vSNjFKfuomA/s8SXnEK?=
+ =?us-ascii?Q?xFhS7NKsksmXbXJxDjfRUhVw28vSYnLHNekR32C07XJmES5lBqlHg1hyk6iR?=
+ =?us-ascii?Q?+AMOkmWmbhN08bgSQG3OudJvlHxQpoKqjZl+uczOlDViCzCmLI2kgbIi+FGn?=
+ =?us-ascii?Q?9BGCm7HSnmbfLXSOLejK0lmhJpF3pSO4Phr0shJnUbHhzDsbtS9MVF0DDRpD?=
+ =?us-ascii?Q?jaqzETVJV/+i7Eq309Tu2IOkLZ6ZNPMD9oxFhBvN9U2IfMwUkCB/2kdsW+ln?=
+ =?us-ascii?Q?ykbdthWcjkSpSK5ZTyG/dtwn3H2MZUB2m9Cf8vlrgjJj2tYHagSds8AWAvHE?=
+ =?us-ascii?Q?Xn8MvjPEvO6i23sZAuG3Ax3POGiGx/org1UftQGtbl9Q7QT7iu9E2qgHKtvs?=
+ =?us-ascii?Q?twAfHmt62hGMokC49OWPC2+6LbMR4b6cqZTkFHoHW7GKSCuUXSo0JQ4//m3R?=
+ =?us-ascii?Q?MydWhCmyHSt+dtUySXiuzs5jGhHhwL3saGP9mIEC/W90n4ljxDDtVyewGW6g?=
+ =?us-ascii?Q?9R7ukheSoMNUNcVIzy9GKXyhwBXTIEbhuhre1TUbkfqCOA3eDsEd68B+sUtp?=
+ =?us-ascii?Q?68xmHL8ww9kDQoQjOtfGxBW4ru3uQVbRSzX98QFPifmhhJYaK9bI090FDPmU?=
+ =?us-ascii?Q?Js6yAKV4udu6eEtYPTRHUjLZsKTaxRv8/6Z3ZZkvaq0Px0hubp/7kriF3o8a?=
+ =?us-ascii?Q?SGdjH3qPpOryQQDJqxsl+EaU+4a4WNMuGz60cEMgXwOhBi3+r1sAGTj+RwMc?=
+ =?us-ascii?Q?VnImbD9XdNoEMHcSUCSFjtsoB2M6taUf9DAg8P8sOfv5ID0BQ74GTEsb8bBf?=
+ =?us-ascii?Q?MFHZGrre7NO0JCbFJpoX9yZ5SBq5v6NK8wZuuwjz4ET6lpTzQnm4c/R/egmu?=
+ =?us-ascii?Q?lUpO3XFy4q/19ArhdWIE588Mj1Pb0fnQNkg6NUPeUmEQMfHtA5h6Bnk9nqlS?=
+ =?us-ascii?Q?U+vLQSYHJdSfykRu6zsmyymghgECnMv1NZpj?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(19092799006)(1800799024)(366016)(376014)(7416014)(7053199007)(38350700014);
+ SFS:(13230040)(19092799006)(366016)(7416014)(52116014)(376014)(1800799024)(38350700014)(7053199007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?yiHfPRNqwWENTWh2GEzZ17q/2r/AjmGQDr/EehHe/oj2MuoIR+JEKgDhju2T?=
- =?us-ascii?Q?5RBZClCxIFhBp4qA+Z4dmnyIn49trWk1AnFtlAiB+v+JcvyWYiicmH+8eyde?=
- =?us-ascii?Q?/msxqJkvICJSMuY5fQK28RV74Is7MNFTZvXBiaKyZN4Ow5VIMjhf1OSviiU4?=
- =?us-ascii?Q?jwThq3ibxIeROAUjr8o97CY+gmraPRjpIUkfsjbrGJalrOF651vgyKEPC5LJ?=
- =?us-ascii?Q?Ookuffz9Zo7pF+NcauE2i31l47rvzaBirSWiYakFXpkh3s+etyT3hKKRxceL?=
- =?us-ascii?Q?rcfssYqByWHUteE0vOq64aXKJ0QLgajtTpd0QsK/iOya2ihjARG8TtpPnsWF?=
- =?us-ascii?Q?G3WGlgL0NVmgI5no42YqHf5saHKPwwpqho1TkELwL/EFwVXisqqLgH4u+lGO?=
- =?us-ascii?Q?DY1MCN9lEQuhhVX0lovNwX1MzJbSZjjpPVs0dgKVpX/Ws5AsnQ72g+HRfdz4?=
- =?us-ascii?Q?hnLvt7ymZjDjOWtcv/7cWVNnfDFCdgo1DTWjfeNfXrPpIWkSiT95ykt6Zm9n?=
- =?us-ascii?Q?zg08dLNkxBi9VHGG/oiB6KR4qq6SZHWD/g4Bm+awQZE4R1dihkgbWMOnWjLG?=
- =?us-ascii?Q?Cz/P9zAy5mpkt02lKpXSuT9Q9QlrGg7E277T/FQp11q0PRu4s9UEACmbjnH/?=
- =?us-ascii?Q?RzxmDhxLiXG68OqJ86t0VnyKobAiZsHLAflk7a4cUC5+SKDodLk9ZGFNI5Uj?=
- =?us-ascii?Q?9UCbDRopgw3CuoAXSvKuBd2Rxcag1WvN54X/8q7FVrzf8PgiyJGyKl7CMPFn?=
- =?us-ascii?Q?rpnUp6Cp4+zvfIHDW/4ixAmwQpewI0l1FIcldwWG7BhjnAklgDy0nVaAFFkN?=
- =?us-ascii?Q?jrNhHNd09cf5ZzkXtt36yGN8b1+mwIxYc8OVFuQ+MfDabqTjbiHfD+vzdEmn?=
- =?us-ascii?Q?ec99qwCBMYRrsUPDpxLebokjEjh6m03NbMb9fGL0lsKB2MebWXgyJwhtvOvO?=
- =?us-ascii?Q?raDChjRgEM7NFducuFc4+tyosngIXEXE985uGO0iGIheH1jtrkJyI3KhZLdM?=
- =?us-ascii?Q?lCzP6TyyiJAEP9IlljFFSGagKWN021CH1I2n2B/AfFlebWiLNaOgbTxCP7GA?=
- =?us-ascii?Q?hpzu6LPIp34OmGCdxZu3A/nkS33SjaKz/7QBKPZJ4miO8OkJFs6gELYIiha2?=
- =?us-ascii?Q?zQ8EMsXjX+3VD3tFbK78rJH/tTjW/J6xYPtE0Zs8zuBKbXQL5R8M+1e1/bM7?=
- =?us-ascii?Q?2+9MQotqvyp7zTIq4fPqWquGj7Y8VwRGJplYV7ihJGq/gkbt11YK4GTvAH2p?=
- =?us-ascii?Q?d+FPR0nyK7eRAdEQxDWyDmIbrJnLFRvpGpx8xKdDqmNTLCfSvrBjg0J6tw2H?=
- =?us-ascii?Q?NBF+HR2b399XldTZrUKngrk7lhuPg/afT5uM+OP9c8ey1eRSj/3mIrFMZfma?=
- =?us-ascii?Q?oDjNBBw7b2oa1F8xa68RENgd0HMtKW2/60LuoU2HqT1zo2JaupdXgm8ZDKhP?=
- =?us-ascii?Q?p2rT8nazgnSxOybyMIq5axyaPMHqHI4TtD9SH/t6TdAxL+oVEXal9FNvnJwy?=
- =?us-ascii?Q?iVGtHvTW5atqfKOYYScXqzNHYJf2/QwiY0bIsILMA8HdAY3Z59eascdzxOWv?=
- =?us-ascii?Q?BKEUNstJC3FxG6fd5KcXcWp5o9tsvvM/875CBU3E?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kuztsD0OnDIPUUD01Wj+qN2H3ZYu+n28iWJfdjmHUCdm3xvBm6v2BZRA4PMp?=
+ =?us-ascii?Q?EM6L33MtNdBLq+SatQlccKBCXRDDrdbQeOxSSCdMhqPIMhq5DISRqDfrS4Sv?=
+ =?us-ascii?Q?qzFPbfCdKyRlvbYq35l8YFfbuxb6EVgyCnoZ1i4n+1xgCEOqBPMSOaW/aFs2?=
+ =?us-ascii?Q?qBe2/8IK/m8k+Y1iOPdi4OlTlfkKFoErn9yu7nSK8zS2KGD2++5hIRdk2hXB?=
+ =?us-ascii?Q?LqtPIoLIV8pWWdoQ8Rz/wuA2b8P6zS4bTxt+vOD/ZYaaJo9S74vqHhWdNowa?=
+ =?us-ascii?Q?ErkwN987MZRjj2jt1Ae3JkSo3dnIEmYQ02JVLuZ6TPqJAEsEz1qR99sTv2xQ?=
+ =?us-ascii?Q?JUpR+1EUQXuOSZO+Ne+ZX1+SXJsTIqhhzWHMPr/MQkGhMCNVSm6w7X2XfOXW?=
+ =?us-ascii?Q?Qa2PUJ1lwog2FBnGuN/LBLK5Hf/KR2Almu48vQ6GAEd2zXaHesQxygpnmr1M?=
+ =?us-ascii?Q?FOs4aWNESP30VCaLGMuKZ+vfKdAhbrUppCmGpEhwMpWpUzKJAAw5j6SXF6ik?=
+ =?us-ascii?Q?eO+RD5ee42Wer9J8xVHlg7IroRk2Xd2NLrGEcH0kb/zfjNunNXQiS9bPLwrJ?=
+ =?us-ascii?Q?ejYhFj6+FQyrn3yZNxpymcitTwVLwQPFMUlM5eLf1FDcA96NSYEack82GLy/?=
+ =?us-ascii?Q?rZXkCIvufRQYGFgyuhrwpOLqcZradiEj0zqqJCPNINxT4TTImqpCLakEjANv?=
+ =?us-ascii?Q?7Yimx6GF99W9YSHBBvxCXA2GKehRanwCLyIPAU+PJmp+TT92tgPTpn8zMAsV?=
+ =?us-ascii?Q?3nM7bjrofK4FQA96Wcw+STQtUY7X+BHXJwdZPizNNBG06DcPFFrmHvCs4so5?=
+ =?us-ascii?Q?JC2hVjVkXgMsyYQYF6E7YSbKrYA/+2v4Ki99KOmTSzjZECXP4cNsbsuxDVCj?=
+ =?us-ascii?Q?MrxaVqjh8imD8ZLiwW6VGAgfCnCLZbngnBq1MkaLTfdhRMaCN2VKk9Pt4NUu?=
+ =?us-ascii?Q?YEhjuszumGXSqjK042EpBdheOrIOrYan+DV5Wem5pPNXkzwEMEk7n2Sn9VF8?=
+ =?us-ascii?Q?+UwY2pOHRu9EI0/CL0R+lKFKXK0P4jPU6bsnNvjlc63J/k4i9w34BwywnXfH?=
+ =?us-ascii?Q?lezGaiCH+eqQ0DVEXR/ijn0NU9nnqMjt8EwUquQ7WjR5ArgexAsi/SwSGptE?=
+ =?us-ascii?Q?jAqcw0IkdBRLVDU2LUYX4jDJRqDgNvsSC3A0hlDoYeemGu1Kox6w3Xecq6IX?=
+ =?us-ascii?Q?LMW/83TCQvctwc39TP4bAeVOAL33Re9q6G2ieU5P9CGFg8F+r/S74RkMk/vL?=
+ =?us-ascii?Q?O6r2xh5SUceam0J5dhCk0f5rwTp1rspqyz4byjWfxKPhbu0Uec4Zfyf5V6jL?=
+ =?us-ascii?Q?H8fPtWqm060HmUV8GwRM4Ur2nPLF53RPF5LglPeaiGapa+eTY949VODay6zK?=
+ =?us-ascii?Q?pr59eZeYyafi2rRpEHdXKkEtgU2yANB3bRGI8TWjL17zvLr/Ge/FZs1pKtnX?=
+ =?us-ascii?Q?YAkKZHxB8R99SHQ3aMg/aVbwP12rTGkszr/l+frZbov0MxBDeO+MWKiwL5WD?=
+ =?us-ascii?Q?QlJ5mOk91bVrcZs9ils5A0UvHo6I6KzV3EglsbxFJqGlFtq2LRDCHhjgyMPj?=
+ =?us-ascii?Q?i3BgfhdNJcSfF0VQ3ee0NT4DmIY4mTX2PA1rmMZ1?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1b48e3ac-3332-4e55-1672-08de1138e4cc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98743c07-5173-4aae-ff25-08de1139049b
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2025 07:01:59.8437 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2025 07:02:52.3170 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 9hAh08ts8pRjsex4j4njd0tnS6Nc1oU8BwqUK4bD33cJd+uyGAoQLQGnujhC6HiUUPY6Wm1tbYxSuOeIfeLaPQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8572
+X-MS-Exchange-CrossTenant-UserPrincipalName: L2K3ie0faK9GO7scujqVave3TkX9KHx5t9bZXVb0kTK9EiCGAPLenv6JamMYCGc7StN6C0l7y0SCwJG0RLeHGw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB6935
 X-Mailman-Approved-At: Wed, 22 Oct 2025 09:21:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -173,123 +173,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kaustabh,
-
-On Fri, Oct 17, 2025 at 08:54:09PM +0530, Kaustabh Chakraborty wrote:
->During a voltage switch command (CMD11, opcode: SD_CMD_SWITCH_UHS18V),
->certain hosts tend to stop responding to subsequent commands. This is
->addressed by introducing an additional command flag,
->DWMCI_CMD_VOLT_SWITCH.
-
-is there any errata or spec have this information public?
-
+On Fri, Oct 17, 2025 at 08:54:10PM +0530, Kaustabh Chakraborty wrote:
+>In certain cases, the VQMMC regulator may not support certain voltages.
+>For instance, a VQMMC regulator which supports only up to 2.7V will not
+>accept 3.3V as an argument. This is unaccounted for, and thus the driver
+>incorrectly assumes that the voltage is set successfully.
 >
->The associated interrupt bit is defined as DWMCI_INTMSK_VOLTSW. This is
->set high when a voltage switch is issued, this needs to be waited for
->and set to low. Implement the same in the timeout loop. Do note that
->since DWMCI_INTMSK_VOLTSW shares the same bit as DWMCI_INTMSK_HTO (bit
->10), the interrupt bit needs to be polled for only if the volt switch
->command is issued.
->
->DWMCI_CMD_VOLT_SWITCH also needs to be set for subsequent clken commands
->after the volt switch. To ensure this, add a boolean member in the host
->private struct (herein named volt_switching), which informs if the last
->command issued was for volt switching or not.
+>Fetch the return value in a variable and return if it's non-zero.
+>(-ENOSYS is exempted as it implies that the voltage adjustment
+>functionality as a whole isn't supported).
 >
 >Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
->---
-> drivers/mmc/dw_mmc.c | 15 +++++++++++++--
-> include/dwmmc.h      |  4 ++++
-> 2 files changed, 17 insertions(+), 2 deletions(-)
->
->diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
->index 1aa992c352c3f11ccdd1c02745fa988646952261..94b6641c44c39e67aac453c027d519c0e1580de6 100644
->--- a/drivers/mmc/dw_mmc.c
->+++ b/drivers/mmc/dw_mmc.c
->@@ -419,6 +419,10 @@ static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
-> 	if (cmd->resp_type & MMC_RSP_CRC)
-> 		flags |= DWMCI_CMD_CHECK_CRC;
-> 
->+	host->volt_switching = (cmd->cmdidx == SD_CMD_SWITCH_UHS18V);
->+	if (host->volt_switching)
->+		flags |= DWMCI_CMD_VOLT_SWITCH;
->+
-> 	flags |= cmd->cmdidx | DWMCI_CMD_START | DWMCI_CMD_USE_HOLD_REG;
-> 
-> 	debug("Sending CMD%d\n", cmd->cmdidx);
->@@ -427,6 +431,10 @@ static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
-> 
-> 	for (i = 0; i < retry; i++) {
-> 		mask = dwmci_readl(host, DWMCI_RINTSTS);
->+		if (host->volt_switching && (mask & DWMCI_INTMSK_VOLTSW)) {
->+			dwmci_writel(host, DWMCI_RINTSTS, DWMCI_INTMSK_VOLTSW);
->+			break;
->+		}
-> 		if (mask & DWMCI_INTMSK_CDONE) {
-> 			if (!data)
-> 				dwmci_writel(host, DWMCI_RINTSTS, mask);
->@@ -508,12 +516,15 @@ static int dwmci_control_clken(struct dwmci_host *host, bool on)
-> 	const u32 val = on ? DWMCI_CLKEN_ENABLE | DWMCI_CLKEN_LOW_PWR : 0;
-> 	const u32 cmd_only_clk = DWMCI_CMD_PRV_DAT_WAIT | DWMCI_CMD_UPD_CLK;
-> 	int i, timeout = 10000;
->-	u32 mask;
->+	u32 flags, mask;
-> 
-> 	dwmci_writel(host, DWMCI_CLKENA, val);
-> 
-> 	/* Inform CIU */
->-	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_START | cmd_only_clk);
->+	flags = DWMCI_CMD_START | cmd_only_clk;
->+	if (host->volt_switching)
->+		flags |= DWMCI_CMD_VOLT_SWITCH;
->+	dwmci_writel(host, DWMCI_CMD, flags);
-> 
-> 	for (i = 0; i < timeout; i++) {
-> 		mask = dwmci_readl(host, DWMCI_RINTSTS);
->diff --git a/include/dwmmc.h b/include/dwmmc.h
->index 639a2d28e7860f2ceb09955ee11550e406fd1bd2..47e3220985e900050d9db9d80e0d45efe6c2e545 100644
->--- a/include/dwmmc.h
->+++ b/include/dwmmc.h
->@@ -72,6 +72,7 @@
-> #define DWMCI_INTMSK_RTO	BIT(8)
-> #define DWMCI_INTMSK_DRTO	BIT(9)
-> #define DWMCI_INTMSK_HTO	BIT(10)
->+#define DWMCI_INTMSK_VOLTSW	BIT(10) /* overlap! */
-> #define DWMCI_INTMSK_FRUN	BIT(11)
-> #define DWMCI_INTMSK_HLE	BIT(12)
-> #define DWMCI_INTMSK_SBE	BIT(13)
->@@ -104,6 +105,7 @@
-> #define DWMCI_CMD_ABORT_STOP	BIT(14)
-> #define DWMCI_CMD_PRV_DAT_WAIT	BIT(13)
-> #define DWMCI_CMD_UPD_CLK	BIT(21)
->+#define DWMCI_CMD_VOLT_SWITCH	BIT(28)
-> #define DWMCI_CMD_USE_HOLD_REG	BIT(29)
-> #define DWMCI_CMD_START		BIT(31)
-> 
->@@ -190,6 +192,7 @@ struct dwmci_idmac_regs {
->  * @cfg:	Internal MMC configuration, for !CONFIG_BLK cases
->  * @fifo_mode:	Use FIFO mode (not DMA) to read and write data
->  * @dma_64bit_address: Whether DMA supports 64-bit address mode or not
->+ * @volt_switching: Whether SD voltage switching is in process or not
 
-Since volt_switching y means in process, I not see it is cleared when it is
-not needed. Is this expected?
-
-Thanks,
-Peng
-
->  * @regs:	Registers that can vary for different DW MMC block versions
->  */
-> struct dwmci_host {
->@@ -229,6 +232,7 @@ struct dwmci_host {
-> 
-> 	bool fifo_mode;
-> 	bool dma_64bit_address;
->+	bool volt_switching;
-> 	const struct dwmci_idmac_regs *regs;
-> };
-> 
->
->-- 
->2.51.0
->
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
