@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC361CCD1BB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:22:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 942A9CCD1AB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:23:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 562D383893;
-	Wed, 22 Oct 2025 17:21:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A6E4C838BF;
+	Wed, 22 Oct 2025 17:21:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="aIodSAX7";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="tKBzmzbx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEECE838C8; Wed, 22 Oct 2025 17:20:58 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 9BF2F838D7; Wed, 22 Oct 2025 17:21:00 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA0C783893
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:20:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BE81838BB
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id C2014C0AFFB;
- Wed, 22 Oct 2025 15:20:36 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 4EA8A4E4127D;
+ Wed, 22 Oct 2025 15:20:58 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 8CD6C606DC;
- Wed, 22 Oct 2025 15:20:56 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 283CB606DC;
+ Wed, 22 Oct 2025 15:20:58 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 06D38102F23AD; 
- Wed, 22 Oct 2025 17:20:53 +0200 (CEST)
+ with ESMTPSA id CF40F102F2435; 
+ Wed, 22 Oct 2025 17:20:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761146455; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1761146457; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=nyqi/+7u/qXpCrVKqJwFNJZ4yRJuuTxibBtNZE6gutA=;
- b=aIodSAX7OcCrQF6YF0Z1+bTF1QPi2/u+R0b9tc1Sn5S52T2+MD/cfukvRXzDbV10QYXcTL
- 2RpjPlzpkGIlOoJBQEMTRgxUPoOCyd2SBXgMBQW8g2j5xdNApK4mpCHW6DLncEm1IVeiEL
- VwzpCcj7jbLeHLJokoi/dALIsi96uGCGlcihDxRkLVviA/fTAUDk3Liaa9d8d9a9eCgtx7
- h6mC1XdoLzWyKb3CT7T4c0q+zQu4Onr7WWtApwMbVjhR8dYzPnFfgE8luQjInfDcjWmlTK
- tOYVzjSfzcpXQAbvpD1Vpvw6ahyH7x/kLCBDIKXl6wHHwVC7zqwnTHuxqdfyyw==
+ bh=qjm1W21DMccriZMOqUwb/KayRALQj5Hipu9KNl9rgNA=;
+ b=tKBzmzbxiLTGkrVpjyfAhi80/fv597xxnR1mESKIALePo+kZV5UCCvaPJVMyOU/aU0o4QG
+ qiQnUa85p0xSROM9xVZhAwGjSx1fEPHwoH435ZsSA0jdwUUPF34VvlnWsM9DNHLHbqYBNu
+ 8Or3j+cXLOpUTZ6GthkzPKInwcu9nvn1l7N2CJrwhCAuh1IgeCGNqa2rZvm9M9lrYFYWUM
+ d+YasA6N0u1wj0bHVbTSfiy4Tv10zAJXrlRhYks0ejiyydOp71kzBf166r4NVmy0gLuy1d
+ N5hDeQsZI1gvO3ONlubdSxIlPjtR2v6JLNl9yzkc3JGFq0PaAgvw93EaSLR2XA==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Wed, 22 Oct 2025 17:20:25 +0200
-Subject: [PATCH v4 14/20] board: sandbox: Convert extension support to
- UCLASS framework
+Date: Wed, 22 Oct 2025 17:20:26 +0200
+Subject: [PATCH v4 15/20] board: compulab: Convert imx8mm-cl-iot-gate to
+ UCLASS extension framework
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251022-feature_sysboot_extension_board-v4-14-d24b5ef7b468@bootlin.com>
+Message-Id: <20251022-feature_sysboot_extension_board-v4-15-d24b5ef7b468@bootlin.com>
 References: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
 In-Reply-To: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -81,80 +81,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Migrate sandbox extension board detection from legacy implementation to
-the new UCLASS-based extension board framework.
+Migrate CompuLab imx8mm-cl-iot-gate board extension detection from legacy
+implementation to the new UCLASS-based extension board framework.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
 
 Change in v3:
 - Use U_BOOT_DRVINFO.
----
- arch/Kconfig            |  2 +-
- board/sandbox/sandbox.c | 28 ++++++++++++++++------------
- 2 files changed, 17 insertions(+), 13 deletions(-)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 7e05e0c2263..5bb65a29f8d 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -215,7 +215,7 @@ config SANDBOX
- 	select SYSRESET_CMD_POWEROFF if CMD_POWEROFF
- 	select SYS_CACHE_SHIFT_4
- 	select IRQ
--	select SUPPORT_EXTENSION_SCAN if CMDLINE
-+	select SUPPORT_DM_EXTENSION_SCAN if CMDLINE
- 	select SUPPORT_ACPI
- 	imply BITREVERSE
- 	select BLOBLIST
-diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
-index c5d7b9651a9..77e5a0478ca 100644
---- a/board/sandbox/sandbox.c
-+++ b/board/sandbox/sandbox.c
-@@ -111,27 +111,31 @@ int ft_board_setup(void *fdt, struct bd_info *bd)
+Change in v2:
+- Fix build errors.
+---
+ arch/arm/mach-imx/imx8m/Kconfig                    |  4 +-
+ .../imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c        | 67 +++++++++++-----------
+ 2 files changed, 35 insertions(+), 36 deletions(-)
+
+diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
+index e7bc154b805..5324eff3084 100644
+--- a/arch/arm/mach-imx/imx8m/Kconfig
++++ b/arch/arm/mach-imx/imx8m/Kconfig
+@@ -359,14 +359,14 @@ config TARGET_IMX8MM_CL_IOT_GATE
+ 	select IMX8MM
+ 	select SUPPORT_SPL
+ 	select IMX8M_LPDDR4
+-	select SUPPORT_EXTENSION_SCAN
++	select SUPPORT_DM_EXTENSION_SCAN
+ 
+ config TARGET_IMX8MM_CL_IOT_GATE_OPTEE
+ 	bool "CompuLab iot-gate-imx8 with optee support"
+ 	select IMX8MM
+ 	select SUPPORT_SPL
+ 	select IMX8M_LPDDR4
+-	select SUPPORT_EXTENSION_SCAN
++	select SUPPORT_DM_EXTENSION_SCAN
+ 
+ config TARGET_IMX8MP_RSB3720A1_4G
+ 	bool "Support i.MX8MP RSB3720A1 4G"
+diff --git a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
+index be4f293bd4a..260d8757129 100644
+--- a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
++++ b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
+@@ -436,9 +436,10 @@ static int iot_gate_imx8_update_ext_ied(void)
+ 	return 0;
  }
  
- #ifdef CONFIG_CMD_EXTENSION
 -int extension_board_scan(struct list_head *extension_list)
-+static int sandbox_extension_board_scan(struct udevice *dev,
-+					struct alist *extension_list)
++static int iot_gate_imx8_extension_board_scan(struct udevice *dev,
++					      struct alist *extension_list)
  {
+-	struct extension *extension = NULL;
++	struct extension extension = {0};
  	int i;
+ 	int ret = 0;
  
- 	for (i = 0; i < 2; i++) {
--		struct extension *extension;
--
+@@ -448,25 +449,21 @@ int extension_board_scan(struct list_head *extension_list)
+ 	case IOT_GATE_EXT_EMPTY:
+ 		break;
+ 	case IOT_GATE_EXT_CAN:
 -		extension = calloc(1, sizeof(struct extension));
--		if (!extension)
-+		struct extension extension = {0};
-+
-+		snprintf(extension.overlay, sizeof(extension.overlay), "overlay%d.dtbo", i);
-+		snprintf(extension.name, sizeof(extension.name), "extension board %d", i);
-+		snprintf(extension.owner, sizeof(extension.owner), "sandbox");
-+		snprintf(extension.version, sizeof(extension.version), "1.1");
-+		snprintf(extension.other, sizeof(extension.other), "Fictional extension board");
-+		if (!alist_add(extension_list, extension))
- 			return -ENOMEM;
--
--		snprintf(extension->overlay, sizeof(extension->overlay), "overlay%d.dtbo", i);
--		snprintf(extension->name, sizeof(extension->name), "extension board %d", i);
--		snprintf(extension->owner, sizeof(extension->owner), "sandbox");
--		snprintf(extension->version, sizeof(extension->version), "1.1");
--		snprintf(extension->other, sizeof(extension->other), "Fictional extension board");
--		list_add_tail(&extension->list, extension_list);
+-		snprintf(extension->name, sizeof(extension->name),
++		snprintf(extension.name, sizeof(extension.name),
+ 			 "IOT_GATE_EXT_CAN");
+ 		break;
+ 	case IOT_GATE_EXT_IED:
+-		extension = calloc(1, sizeof(struct extension));
+-		snprintf(extension->name, sizeof(extension->name),
++		snprintf(extension.name, sizeof(extension.name),
+ 			 "IOT_GATE_EXT_IED");
+-		snprintf(extension->overlay, sizeof(extension->overlay),
++		snprintf(extension.overlay, sizeof(extension.overlay),
+ 			 "imx8mm-cl-iot-gate-ied.dtbo");
+ 		break;
+ 	case IOT_GATE_EXT_POE:
+-		extension = calloc(1, sizeof(struct extension));
+-		snprintf(extension->name, sizeof(extension->name),
++		snprintf(extension.name, sizeof(extension.name),
+ 			 "IOT_GATE_EXT_POE");
+ 		break;
+ 	case IOT_GATE_EXT_POEV2:
+-		extension = calloc(1, sizeof(struct extension));
+-		snprintf(extension->name, sizeof(extension->name),
++		snprintf(extension.name, sizeof(extension.name),
+ 			 "IOT_GATE_EXT_POEV2");
+ 		break;
+ 	default:
+@@ -474,10 +471,11 @@ int extension_board_scan(struct list_head *extension_list)
+ 		break;
  	}
  
- 	return i;
+-	if (extension) {
+-		snprintf(extension->owner, sizeof(extension->owner),
++	if (extension.name[0]) {
++		snprintf(extension.owner, sizeof(extension.owner),
+ 			 "Compulab");
+-		list_add_tail(&extension->list, extension_list);
++		if (!alist_add(extension_list, extension))
++			return -ENOMEM;
+ 		ret = 1;
+ 	} else
+ 		return ret;
+@@ -486,44 +484,38 @@ int extension_board_scan(struct list_head *extension_list)
+ 
+ 	iot_gate_imx8_update_ext_ied();
+ 	for (i=0; i<ARRAY_SIZE(iot_gate_imx8_ext_ied_id); i++) {
+-		extension = NULL;
++		memset(&extension, 0, sizeof(extension));
+ 		switch (iot_gate_imx8_ext_ied_id[i]) {
+ 		case IOT_GATE_IMX8_CARD_ID_EMPTY:
+ 			break;
+ 		case IOT_GATE_IMX8_CARD_ID_RS_485:
+-			extension = calloc(1, sizeof(struct extension));
+-			snprintf(extension->name, sizeof(extension->name),
++			snprintf(extension.name, sizeof(extension.name),
+ 				 "IOT_GATE_IMX8_CARD_ID_RS_485");
+ 			break;
+ 		case IOT_GATE_IMX8_CARD_ID_RS_232:
+-			extension = calloc(1, sizeof(struct extension));
+-			snprintf(extension->name, sizeof(extension->name),
++			snprintf(extension.name, sizeof(extension.name),
+ 				 "IOT_GATE_IMX8_CARD_ID_RS_232");
+ 			break;
+ 		case IOT_GATE_IMX8_CARD_ID_CAN:
+-			extension = calloc(1, sizeof(struct extension));
+-			snprintf(extension->name, sizeof(extension->name),
++			snprintf(extension.name, sizeof(extension.name),
+ 				 "IOT_GATE_IMX8_CARD_ID_CAN");
+-			snprintf(extension->overlay, sizeof(extension->overlay),
++			snprintf(extension.overlay, sizeof(extension.overlay),
+ 				 "imx8mm-cl-iot-gate-ied-can%d.dtbo", i);
+ 			break;
+ 		case IOT_GATE_IMX8_CARD_ID_TPM:
+-			extension = calloc(1, sizeof(struct extension));
+-			snprintf(extension->name, sizeof(extension->name),
++			snprintf(extension.name, sizeof(extension.name),
+ 				 "IOT_GATE_IMX8_CARD_ID_TPM");
+-			snprintf(extension->overlay, sizeof(extension->overlay),
++			snprintf(extension.overlay, sizeof(extension.overlay),
+ 				 "imx8mm-cl-iot-gate-ied-tpm%d.dtbo", i);
+ 			break;
+ 		case IOT_GATE_IMX8_CARD_ID_CL420:
+-			extension = calloc(1, sizeof(struct extension));
+-			snprintf(extension->name, sizeof(extension->name),
++			snprintf(extension.name, sizeof(extension.name),
+ 				 "IOT_GATE_IMX8_CARD_ID_CL420");
+-			snprintf(extension->overlay, sizeof(extension->overlay),
++			snprintf(extension.overlay, sizeof(extension.overlay),
+ 				 "imx8mm-cl-iot-gate-ied-can%d.dtbo", i);
+ 			break;
+ 		case IOT_GATE_IMX8_CARD_ID_DI4O4:
+-			extension = calloc(1, sizeof(struct extension));
+-			snprintf(extension->name, sizeof(extension->name),
++			snprintf(extension.name, sizeof(extension.name),
+ 				 "IOT_GATE_IMX8_CARD_ID_DI4O4");
+ 			break;
+ 		default:
+@@ -531,18 +523,25 @@ int extension_board_scan(struct list_head *extension_list)
+ 			       __func__, i, iot_gate_imx8_ext_ied_id[i]);
+ 			break;
+ 		}
+-		if (extension) {
+-			snprintf(extension->owner, sizeof(extension->owner),
++		if (extension.name[0]) {
++			snprintf(extension.owner, sizeof(extension.owner),
+ 				 "Compulab");
+-			snprintf(extension->other, sizeof(extension->other),
++			snprintf(extension.other, sizeof(extension.other),
+ 				 "On slot %d", i);
+-			list_add_tail(&extension->list, extension_list);
++			if (!alist_add(extension_list, extension))
++				return -ENOMEM;
+ 			ret = ret + 1;
+ 		}
+ 	}
+ 
+         return ret;
  }
 +
-+U_BOOT_EXTENSION(sandbox_extension, sandbox_extension_board_scan);
++U_BOOT_EXTENSION(iot_gate_imx8_extension, iot_gate_imx8_extension_board_scan);
 +
-+U_BOOT_DRVINFO(sandbox_extension) = {
-+	.name = "sandbox_extension",
++U_BOOT_DRVINFO(iot_gate_imx8_extension) = {
++	.name = "iot_gate_imx8_extension",
 +};
  #endif
  
- #ifdef CONFIG_BOARD_LATE_INIT
+ static int setup_mac_address(void)
 
 -- 
 2.43.0
