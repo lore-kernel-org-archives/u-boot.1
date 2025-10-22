@@ -4,58 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E38F2CCD1BB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:24:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB845CCD1BB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:24:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 273BC8357F;
-	Wed, 22 Oct 2025 17:22:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 877D28323A;
+	Wed, 22 Oct 2025 17:24:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FQPGoVR2";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="YfjJO7/E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FF2580422; Wed, 22 Oct 2025 17:22:47 +0200 (CEST)
-Received: from tor.source.kernel.org (tor.source.kernel.org
- [IPv6:2600:3c04:e001:324:0:1991:8:25])
+ id 9186D80422; Wed, 22 Oct 2025 17:24:19 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E498835FD
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:22:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 6830783303
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:24:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by tor.source.kernel.org (Postfix) with ESMTP id 6300E6050C;
- Wed, 22 Oct 2025 15:22:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7175C113D0;
- Wed, 22 Oct 2025 15:22:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1761146564;
- bh=aNRDkWVnpDFtDo5lo77LLe4svF2A07Ns9I1Fkvbt6WY=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=FQPGoVR2BGJ01xUR0RCA71ZYVOsMbABpdMWvW1E8dte5xGbKmP916F51axk2N+mjU
- S/KbmwXb/H2qNzp9Z3PJKKGpFBVnw0xWuNTn1OQtR8AFfhnT8g2lzZ+nJHOJFiyH5X
- /OtiUPDOiES+5eEsXPt/++rfRBUez1jmuez5Z06MURHebFyxqhA0DnXgRwdOg6TB2S
- GCVeYOwFrIgCQQqAh5GmX4XkRC7CGThKdoxPaaJ74evVbbldf1ONs3Bx/zaJIzya9+
- y5FSBWdSlaRmh8RWc2aJZCyD1NOkJKNrhh4AgvkvyG+T0bgTibFSGfBAzwXK6fNJ1h
- WNEDuo0mutVaw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Kory Maincent <kory.maincent@bootlin.com>, u-boot@lists.denx.de
-Cc: Bajjuri Praneeth <praneeth@ti.com>, "Kory Maincent (TI.com)"
- <kory.maincent@bootlin.com>, thomas.petazzoni@bootlin.com, Tom Rini
- <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Re: [PATCH] doc: pytest: Complete dependencies list with missing
- packages
-In-Reply-To: <20251022132055.816662-1-kory.maincent@bootlin.com>
-References: <20251022132055.816662-1-kory.maincent@bootlin.com>
-Date: Wed, 22 Oct 2025 17:22:38 +0200
-Message-ID: <87bjlzarlt.fsf@kernel.org>
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 171814E4127B;
+ Wed, 22 Oct 2025 15:24:17 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id E3D02606DC;
+ Wed, 22 Oct 2025 15:24:16 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 880C0102F23AD; 
+ Wed, 22 Oct 2025 17:24:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1761146655; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=BZSfESkm7fH3MYrQefsPietKo7JwUIGqGaTGuxCG/OA=;
+ b=YfjJO7/EGB4tU7EF5A3eBz8Ya/3eNUCrEFOtUb/MLORG8gFrxbnp/LWN9f9ky1CI4wrHZs
+ QWErlFz9dLX2AhWo0dekj3uo/iUVJlOpGOsB2aFg7H/54w1niAcflIWvhH9gc/0arE//xy
+ bZ83wUBY3K9PmTQiyu2IGEjwEJMaYOEXJVQlBi16mprrJpztv6Z/y32xVos1VnWOD+b50t
+ /1USGlv8pW/UlD2h6FQ9BoiZfTR8LOlYSY0EhGjqRbDfz0L2md4Ce+GBn3XFu2uWURCCbM
+ UjPjbCyyGxMbRqXq/69ZJjoJ3MJUqKKQ2ecvA9Z7wVM/GU4TKr7y1NcO9ay46w==
+Date: Wed, 22 Oct 2025 17:24:11 +0200
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Jagan
+ Teki <jagan@amarulasolutions.com>, Andre Przywara <andre.przywara@arm.com>,
+ Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>,
+ Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, "Ying-Chun Liu (PaulLiu)"
+ <paul.liu@linaro.org>
+Cc: Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v4 08/20] boot: Add UCLASS support for extension boards
+Message-ID: <20251022172411.04b156d2@kmaincent-XPS-13-7390>
+In-Reply-To: <20251022-feature_sysboot_extension_board-v4-8-d24b5ef7b468@bootlin.com>
+References: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
+ <20251022-feature_sysboot_extension_board-v4-8-d24b5ef7b468@bootlin.com>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,53 +80,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kory,
+On Wed, 22 Oct 2025 17:20:19 +0200
+"Kory Maincent (TI.com)" <kory.maincent@bootlin.com> wrote:
 
-Thank you for the patch.
-
-On Wed, Oct 22, 2025 at 15:20, Kory Maincent <kory.maincent@bootlin.com> wrote:
-
-> From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
->
-> Add missing dependencies to the pytest usage documentation and correct
-> the device tree compiler package name from 'dtc' to 'device-tree-compiler'.
->
-> This ensures users have the complete list of dependencies needed to run
-> the pytest test suite without errors.
->
+> Introduce UCLASS-based extension board support to enable more
+> standardized and automatic loading of extension board device tree
+> overlays in preparation for integration with bootstd and pxe_utils.
+>=20
+> Several #if CONFIG_IS_ENABLED are used in cmd/extension_board.c to ease t=
+he
+> development but don't worry they are removed later in the series.
+>=20
 > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
-> ---
->  doc/develop/pytest/usage.rst | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
->
-> diff --git a/doc/develop/pytest/usage.rst b/doc/develop/pytest/usage.rst
-> index 779b2dbe24b..454877837ca 100644
-> --- a/doc/develop/pytest/usage.rst
-> +++ b/doc/develop/pytest/usage.rst
-> @@ -39,7 +39,7 @@ will be required. The following is an incomplete list:
 
-If the list is now complete (as per your commit message), should we
-update this sentence as well to remove "incomplete" ?
-
->  
->  * gdisk
->  * dfu-util
-> -* dtc
-> +* device-tree-compiler
->  * openssl
->  * e2fsprogs
->  * util-linux
-> @@ -50,6 +50,11 @@ will be required. The following is an incomplete list:
->  * mtools
->  * sbsigntool
->  * udisks2
-> +* swig
-> +* cgpt
-> +* libgnutls28-dev
-> +* vboot-kernel-utils
-> +* fdisk
->  
->  Please use the appropriate commands for your distribution to match these tools
->  up with the package that provides them.
-> -- 
-> 2.43.0
+Forgot to add:
+Reviewed-by: Simon Glass <sjg@chromium.org>
+--=20
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
