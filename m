@@ -4,43 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 940D6CCD1AB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 20:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B47CCD1AB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 21:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07FDA81E13;
-	Wed, 22 Oct 2025 22:34:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id C244781E13;
+	Wed, 22 Oct 2025 23:51:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="f+4WEJ7V";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33F36832BC; Wed, 22 Oct 2025 22:34:20 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id C34AF80422
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 22:34:17 +0200 (CEST)
+ id C34A2832BC; Wed, 22 Oct 2025 22:26:04 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DFF1480422
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 22:26:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3C8891655;
- Wed, 22 Oct 2025 13:34:09 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4F93C3F66E;
- Wed, 22 Oct 2025 13:34:16 -0700 (PDT)
-Date: Wed, 22 Oct 2025 21:33:39 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-Cc: u-boot@lists.denx.de, Rudi Horn <dyn-git@rudi-horn.de>,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH] sunxi: dram: detect non-power-of-2 sized DRAM chips
-Message-ID: <20251022213339.2b9cb140@minigeek.lan>
-In-Reply-To: <12763423.O9o76ZdvQC@jernej-laptop>
-References: <20251021235334.7557-1-andre.przywara@arm.com>
- <12763423.O9o76ZdvQC@jernej-laptop>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 68AC9259FD;
+ Wed, 22 Oct 2025 22:26:01 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id dSyruhW72V1d; Wed, 22 Oct 2025 22:26:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1761164760; bh=jexp5A5Y69agWmrusdlpd2k82DmbPOQbO1KyMV0+s8w=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References;
+ b=f+4WEJ7VXXvm7CIsGLkk9UBiOOwIZBSWyuEx0CouFmMrj4x2mxjc14ECH0PKtZLRu
+ hPTkgumu0OIv673tGm838DDlxg8DmFxx676iQynLi44VpFX4Y2tUBrHDdtdtOAYoEN
+ rfCoF8pw76WNu11axANaPwT1bEiibqM3jSALEl6uyR5T81VosMiK/9fl24ir7EW+oY
+ ng6c7EU4Aa6PyUkOtUZoJ1X6OkB2986xQQnD/Dlp87BzChWjXRsbYFP0X0zRkM9lkO
+ EIILoJ4Kz5iTZUw0Ah0kVmDjcb4BP7TmDOW6EZXn/W0aMFNr4c8Nn0f54FoVOZRwwG
+ +rT38kXf0N0QA==
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Date: Wed, 22 Oct 2025 20:25:54 +0000
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+To: Peng Fan <peng.fan@oss.nxp.com>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, Simon Glass
+ <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Bhimeswararao Matsa
+ <bhimeswararao.matsa@gmail.com>, Andrew Goodbody
+ <andrew.goodbody@linaro.org>, Jean-Jacques Hiblot <jjhiblot@ti.com>, Ronald
+ Wahl <ronald.wahl@legrand.com>, Anand Moon <linux.amoon@gmail.com>, Sam
+ Protsenko <semen.protsenko@linaro.org>, Henrik Grimler <henrik@grimler.se>
+Subject: Re: [PATCH 4/9] mmc: dw_mmc: add voltage switch command flag
+In-Reply-To: <20251022081410.GC30163@nxa18884-linux.ap.freescale.net>
+References: <20251017-mmc-dw-exynos7870-v1-0-a2c5139d9afe@disroot.org>
+ <20251017-mmc-dw-exynos7870-v1-4-a2c5139d9afe@disroot.org>
+ <20251022081410.GC30163@nxa18884-linux.ap.freescale.net>
+Message-ID: <3e1fac47c324d389a14342fa430aad44@disroot.org>
+X-Sender: kauschluss@disroot.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 22 Oct 2025 23:51:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,150 +79,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 22 Oct 2025 17:48:27 +0200
-Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
+On 2025-10-22 08:14, Peng Fan wrote:
+> Hi Kaustabh,
+> 
+> On Fri, Oct 17, 2025 at 08:54:09PM +0530, Kaustabh Chakraborty wrote:
+>> During a voltage switch command (CMD11, opcode: SD_CMD_SWITCH_UHS18V),
+>> certain hosts tend to stop responding to subsequent commands. This is
+>> addressed by introducing an additional command flag,
+>> DWMCI_CMD_VOLT_SWITCH.
+> 
+> is there any errata or spec have this information public?
 
-Hi Jernej,
+I'm not aware of any. However, this behavior is found in the Linux 
+kernel
+driver. See commit 0173055842cd1 ("mmc: dw_mmc: Support voltage 
+changes").
+The state tracking in the kernel is however much more complex.
 
-> Dne sreda, 22. oktober 2025 ob 01:53:34 Srednjeevropski poletni =C4=8Das =
-je Andre Przywara napisal(a):
-> > Some boards feature an "odd" DRAM size, where the total RAM is 1.5GB or
-> > 3GB. Our existing DRAM size detection routines can only detect power-of=
--2
-> > sized configuration, and on those boards the DRAM size is overestimated,
-> > so this typically breaks the boot quite early.
-> >=20
-> > There doesn't seem to be an easy explicit way to detect those odd-sized
-> > chips, but we can test whether the later part of the memory behaves like
-> > memory, by verifying that a written pattern can be read back.
-> > Experiments show that there is no aliasing effect here, as all locations
-> > in the unimplemented range always return some fixed pattern, and cannot
-> > be changed.
-> >=20
-> > Also so far all those boards use a factor of 3 of some lower power-of-2
-> > number, or 3/4th of some higher number. The size detection routine
-> > discovers the higher number, so we can check for some memory cells beyo=
-nd
-> > 75% of the detected size to be legit.
-> >=20
-> > Add a routine the inverts all bits at a given location in memory, and
-> > reads that back to prove that the new value was stored.
-> > Then test the memory cell at exactly 3/4th of the detected size, and cap
-> > the size of the memory to 75% when this test fails.
-> >=20
-> > This enables boards which ship with such odd memory sizes.
-> >=20
-> > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > ---
-> > Hi,
-> >=20
-> > I don't really have a board with such an odd size to test that, though =
-the
-> > function worked on a 12GB A733 board. But that's not supporting the SPL
-> > or any kind of DRAM init yet, so was tested out of context.
-> > I would be grateful if anyone with a 1.5GB or 3GB board could test this.
-> >=20
-> > Thanks,
-> > Andre
-> >=20
-> >  arch/arm/include/asm/arch-sunxi/dram.h |  1 +
-> >  arch/arm/mach-sunxi/dram_dw_helpers.c  | 16 +++++++++++++++-
-> >  arch/arm/mach-sunxi/dram_helpers.c     | 12 ++++++++++++
-> >  3 files changed, 28 insertions(+), 1 deletion(-)
-> >=20
-> > diff --git a/arch/arm/include/asm/arch-sunxi/dram.h b/arch/arm/include/=
-asm/arch-sunxi/dram.h
-> > index 0eccb1e6c28..59e2e980bfa 100644
-> > --- a/arch/arm/include/asm/arch-sunxi/dram.h
-> > +++ b/arch/arm/include/asm/arch-sunxi/dram.h
-> > @@ -45,5 +45,6 @@ unsigned long sunxi_dram_init(void);
-> >  void mctl_await_completion(u32 *reg, u32 mask, u32 val);
-> >  bool mctl_mem_matches(u32 offset);
-> >  bool mctl_mem_matches_base(u32 offset, ulong base);
-> > +bool mctl_check_memory(phys_addr_t addr);
-> > =20
-> >  #endif /* _SUNXI_DRAM_H */
-> > diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-sunx=
-i/dram_dw_helpers.c
-> > index 24767354935..14f6b24c30f 100644
-> > --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
-> > +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
-> > @@ -143,8 +143,22 @@ void mctl_auto_detect_dram_size(const struct dram_=
-para *para,
-> > =20
-> >  unsigned long mctl_calc_size(const struct dram_config *config)
-> >  {
-> > +	unsigned long size;
-> >  	u8 width =3D config->bus_full_width ? 4 : 2;
-> > =20
-> >  	/* 8 banks */
-> > -	return (1ULL << (config->cols + config->rows + 3)) * width * config->=
-ranks;
-> > +	size =3D (1ULL << (config->cols + config->rows + 3)) * width *
-> > +		config->ranks;
-> > +
-> > +	/*
-> > +	 * There are boards with non-power-of-2 sized DRAM chips, like 1.5GB
-> > +	 * or 3GB. They are detected as the larger power-of-2 (2GB and 4GB),
-> > +	 * so test the last quarter for being able to store values.
-> > +	 */
-> > +	if (!mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3)) {
-> > +		size =3D (size / 4) * 3;
-> > +		debug("capping memory at %ld MB\n", size >> 20); =20
->=20
-> As I already commented in first version of this change, wouldn't it be go=
-od to
-> add additional check here, just to be sure there is no misconfiguration? =
-In such
-> case it would be better to panic than continue with unstable system.
+> 
+>> 
+>> The associated interrupt bit is defined as DWMCI_INTMSK_VOLTSW. This 
+>> is
+>> set high when a voltage switch is issued, this needs to be waited for
+>> and set to low. Implement the same in the timeout loop. Do note that
+>> since DWMCI_INTMSK_VOLTSW shares the same bit as DWMCI_INTMSK_HTO (bit
+>> 10), the interrupt bit needs to be polled for only if the volt switch
+>> command is issued.
+>> 
+>> DWMCI_CMD_VOLT_SWITCH also needs to be set for subsequent clken 
+>> commands
+>> after the volt switch. To ensure this, add a boolean member in the 
+>> host
+>> private struct (herein named volt_switching), which informs if the 
+>> last
+>> command issued was for volt switching or not.
+>> 
+>> Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
+>> ---
+>> drivers/mmc/dw_mmc.c | 15 +++++++++++++--
+>> include/dwmmc.h      |  4 ++++
+>> 2 files changed, 17 insertions(+), 2 deletions(-)
+>> 
+>> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+>> index 
+>> 1aa992c352c3f11ccdd1c02745fa988646952261..94b6641c44c39e67aac453c027d519c0e1580de6 
+>> 100644
+>> --- a/drivers/mmc/dw_mmc.c
+>> +++ b/drivers/mmc/dw_mmc.c
+>> @@ -419,6 +419,10 @@ static int dwmci_send_cmd_common(struct 
+>> dwmci_host *host, struct mmc_cmd *cmd,
+>> 	if (cmd->resp_type & MMC_RSP_CRC)
+>> 		flags |= DWMCI_CMD_CHECK_CRC;
+>> 
+>> +	host->volt_switching = (cmd->cmdidx == SD_CMD_SWITCH_UHS18V);
 
-Mmmh, but what check would that be? I mean this is mctl_calc_size(),
-which is only called once, just at the end, before we return from
-sunxi_dram_init(). And it just calculates the size, there is no probing
-anymore, this has been done earlier, elsewhere.
-At this point we assume everything is fine and properly setup, so I
-don't understand what additional check we should do here. If we cannot
-read back what we have written, we are in deeper trouble anyway, but we
-would have missed that before anyway here, and it would have crashed
-sooner or later, so I don't see a problem.
+[1]
 
-Cheers,
-Andre
+>> +	if (host->volt_switching)
+>> +		flags |= DWMCI_CMD_VOLT_SWITCH;
+>> +
+>> 	flags |= cmd->cmdidx | DWMCI_CMD_START | DWMCI_CMD_USE_HOLD_REG;
+>> 
+>> 	debug("Sending CMD%d\n", cmd->cmdidx);
+>> @@ -427,6 +431,10 @@ static int dwmci_send_cmd_common(struct 
+>> dwmci_host *host, struct mmc_cmd *cmd,
+>> 
+>> 	for (i = 0; i < retry; i++) {
+>> 		mask = dwmci_readl(host, DWMCI_RINTSTS);
+>> +		if (host->volt_switching && (mask & DWMCI_INTMSK_VOLTSW)) {
+>> +			dwmci_writel(host, DWMCI_RINTSTS, DWMCI_INTMSK_VOLTSW);
+>> +			break;
+>> +		}
+>> 		if (mask & DWMCI_INTMSK_CDONE) {
+>> 			if (!data)
+>> 				dwmci_writel(host, DWMCI_RINTSTS, mask);
+>> @@ -508,12 +516,15 @@ static int dwmci_control_clken(struct dwmci_host 
+>> *host, bool on)
+>> 	const u32 val = on ? DWMCI_CLKEN_ENABLE | DWMCI_CLKEN_LOW_PWR : 0;
+>> 	const u32 cmd_only_clk = DWMCI_CMD_PRV_DAT_WAIT | DWMCI_CMD_UPD_CLK;
+>> 	int i, timeout = 10000;
+>> -	u32 mask;
+>> +	u32 flags, mask;
+>> 
+>> 	dwmci_writel(host, DWMCI_CLKENA, val);
+>> 
+>> 	/* Inform CIU */
+>> -	dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_START | cmd_only_clk);
+>> +	flags = DWMCI_CMD_START | cmd_only_clk;
+>> +	if (host->volt_switching)
+>> +		flags |= DWMCI_CMD_VOLT_SWITCH;
+>> +	dwmci_writel(host, DWMCI_CMD, flags);
+>> 
+>> 	for (i = 0; i < timeout; i++) {
+>> 		mask = dwmci_readl(host, DWMCI_RINTSTS);
+>> diff --git a/include/dwmmc.h b/include/dwmmc.h
+>> index 
+>> 639a2d28e7860f2ceb09955ee11550e406fd1bd2..47e3220985e900050d9db9d80e0d45efe6c2e545 
+>> 100644
+>> --- a/include/dwmmc.h
+>> +++ b/include/dwmmc.h
+>> @@ -72,6 +72,7 @@
+>> #define DWMCI_INTMSK_RTO	BIT(8)
+>> #define DWMCI_INTMSK_DRTO	BIT(9)
+>> #define DWMCI_INTMSK_HTO	BIT(10)
+>> +#define DWMCI_INTMSK_VOLTSW	BIT(10) /* overlap! */
+>> #define DWMCI_INTMSK_FRUN	BIT(11)
+>> #define DWMCI_INTMSK_HLE	BIT(12)
+>> #define DWMCI_INTMSK_SBE	BIT(13)
+>> @@ -104,6 +105,7 @@
+>> #define DWMCI_CMD_ABORT_STOP	BIT(14)
+>> #define DWMCI_CMD_PRV_DAT_WAIT	BIT(13)
+>> #define DWMCI_CMD_UPD_CLK	BIT(21)
+>> +#define DWMCI_CMD_VOLT_SWITCH	BIT(28)
+>> #define DWMCI_CMD_USE_HOLD_REG	BIT(29)
+>> #define DWMCI_CMD_START		BIT(31)
+>> 
+>> @@ -190,6 +192,7 @@ struct dwmci_idmac_regs {
+>>  * @cfg:	Internal MMC configuration, for !CONFIG_BLK cases
+>>  * @fifo_mode:	Use FIFO mode (not DMA) to read and write data
+>>  * @dma_64bit_address: Whether DMA supports 64-bit address mode or not
+>> + * @volt_switching: Whether SD voltage switching is in process or not
+> 
+> Since volt_switching y means in process, I not see it is cleared when 
+> it is
+> not needed. Is this expected?
 
+See [1] marked above. Its enabled when SD_CMD_SWITCH_UHS18V is the 
+opcode,
+disabled otherwise.
 
->=20
-> Best regards,
-> Jernej
->=20
-> > +	}
-> > +
-> > +	return size;
-> >  }
-> > diff --git a/arch/arm/mach-sunxi/dram_helpers.c b/arch/arm/mach-sunxi/d=
-ram_helpers.c
-> > index 83dbe4ca98f..376b7d14f86 100644
-> > --- a/arch/arm/mach-sunxi/dram_helpers.c
-> > +++ b/arch/arm/mach-sunxi/dram_helpers.c
-> > @@ -62,3 +62,15 @@ bool mctl_mem_matches(u32 offset)
-> >  	return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
-> >  }
-> >  #endif
-> > +
-> > +bool mctl_check_memory(phys_addr_t addr)
-> > +{
-> > +	uint32_t orig, val;
-> > +
-> > +	orig =3D readl(addr);
-> > +	writel(~orig, addr);
-> > +	val =3D readl(addr);
-> > +	writel(orig, addr);
-> > +
-> > +	return ~orig =3D=3D val;
-> > +}
-> >  =20
->=20
->=20
->=20
->=20
->=20
-
+> 
+> Thanks,
+> Peng
+> 
+>>  * @regs:	Registers that can vary for different DW MMC block versions
+>>  */
+>> struct dwmci_host {
+>> @@ -229,6 +232,7 @@ struct dwmci_host {
+>> 
+>> 	bool fifo_mode;
+>> 	bool dma_64bit_address;
+>> +	bool volt_switching;
+>> 	const struct dwmci_idmac_regs *regs;
+>> };
+>> 
+>> 
+>> --
+>> 2.51.0
+>> 
