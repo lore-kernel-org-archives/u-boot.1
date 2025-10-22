@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94FBCCD1AB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:21:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02977CCD1BB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 15:21:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE43583642;
-	Wed, 22 Oct 2025 17:20:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A3B28363D;
+	Wed, 22 Oct 2025 17:20:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ilqMqyAn";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="GcfIObcz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A39A8363D; Wed, 22 Oct 2025 17:20:38 +0200 (CEST)
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ id 32915836AC; Wed, 22 Oct 2025 17:20:40 +0200 (CEST)
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4327680422
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:20:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56B8C82B20
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 17:20:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kory.maincent@bootlin.com
 Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
- by smtpout-04.galae.net (Postfix) with ESMTPS id 3B903C0AFF6;
- Wed, 22 Oct 2025 15:20:16 +0000 (UTC)
+ by smtpout-03.galae.net (Postfix) with ESMTPS id 055B44E4127B;
+ Wed, 22 Oct 2025 15:20:38 +0000 (UTC)
 Received: from mail.galae.net (mail.galae.net [212.83.136.155])
- by smtpout-01.galae.net (Postfix) with ESMTPS id 04FC6606DC;
- Wed, 22 Oct 2025 15:20:36 +0000 (UTC)
+ by smtpout-01.galae.net (Postfix) with ESMTPS id D217E606DC;
+ Wed, 22 Oct 2025 15:20:37 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3DC55102F2449; 
- Wed, 22 Oct 2025 17:20:31 +0200 (CEST)
+ with ESMTPSA id E721B102F244B; 
+ Wed, 22 Oct 2025 17:20:34 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
- t=1761146434; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ t=1761146436; h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:in-reply-to:references;
- bh=u8lvoISWRYZi75RNgeNf+uwFBm4XXO7i6GLmcjMM8YY=;
- b=ilqMqyAn25GKUlyFjUNrNnbZgAIFwow6QsEsDvvtZs1772OnTGef+ZNncQiP4ozGbJwuYA
- jgEXRndybj/dsz82XFX3coRot7yqkv4C0N8cq2dDKreQSxrVAtf+ErogGdHg0y0W3Few0c
- 6Sif6yG7M36ZoFXhkpuZNhvNsTvUL8TeXnM8YwyKnGyT3qhxuqu1d6EqoQWWe55f4BnmrV
- +qXh3LVHLgkpOy/lgdW9nG+oWznLFC6jCkqVhymcuAaYzGwsZ+ZByzgflLo1hib/aTia5i
- 42yU2hTCefdkK2kEbEQouJQICVNONLXNKd860kE+1gzKMgNDA1lNlKWArG3JKQ==
+ bh=xzoraGGJgEqQuNHekZnl4hEycWCNX9PtwdbLouuW+to=;
+ b=GcfIObczmLwo/2J4DPAdPFh9rYGFi33wmfc3sYeTTHLuwhuTLa60wc7IAn6n8yJFBs6OvO
+ ql5klOq+Y/wr6qOG53jhmmSIOFHG0HcVD6udfKHJqLub/C1l5EI2T0wOCOAPPPj/uEQ9Db
+ vEbFUcvLoVf7b2zRqG7Kkm3pg0escrTtJN+DQyaYe60rWFJL8vc3L0aseddd6n58T0Wh2X
+ 7DcHNtjdMnNQV/ulp0LYN5VQFhabuelGTeQ4xUfEUfIcu4zXn505c5rqZ5sDGaXPYjByIV
+ dDCKgRDyhgSKMIj8jVinzbh7HlebWJh3zbSXMdQW1hmqrNSSQfGm8fmdo/crLg==
 From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Date: Wed, 22 Oct 2025 17:20:15 +0200
-Subject: [PATCH v4 04/20] board: sunxi: Exclude DIP detection from XPL builds
+Date: Wed, 22 Oct 2025 17:20:16 +0200
+Subject: [PATCH v4 05/20] board: compulab: Exclude compulab extension board
+ detection from XPL builds
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251022-feature_sysboot_extension_board-v4-4-d24b5ef7b468@bootlin.com>
+Message-Id: <20251022-feature_sysboot_extension_board-v4-5-d24b5ef7b468@bootlin.com>
 References: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
 In-Reply-To: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,8 +81,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disable DIP detection functionality in XPL (eXtended Program Loader)
-images to reduce size and complexity in the early boot stage.
+Disable compulab extension board detection functionality in XPL (eXtended
+Program Loader) images to reduce size and complexity in the early boot
+stage.
 
 Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 ---
@@ -89,19 +91,30 @@ Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
 Change in v2:
 - New patch.
 ---
- board/sunxi/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/board/sunxi/Makefile b/board/sunxi/Makefile
-index d96b7897b6c..ee82493117a 100644
---- a/board/sunxi/Makefile
-+++ b/board/sunxi/Makefile
-@@ -11,4 +11,4 @@ obj-$(CONFIG_SUN7I_GMAC)	+= gmac.o
- obj-$(CONFIG_MACH_SUN4I)	+= dram_sun4i_auto.o
- obj-$(CONFIG_MACH_SUN5I)	+= dram_sun5i_auto.o
- obj-$(CONFIG_MACH_SUN7I)	+= dram_sun5i_auto.o
--obj-$(CONFIG_CHIP_DIP_SCAN)	+= chip.o
-+obj-$(CONFIG_$(PHASE_)CHIP_DIP_SCAN)	+= chip.o
+diff --git a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
+index bda7aac5be4..be4f293bd4a 100644
+--- a/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
++++ b/board/compulab/imx8mm-cl-iot-gate/imx8mm-cl-iot-gate.c
+@@ -249,6 +249,8 @@ int board_mmc_get_env_dev(int devno)
+ #define IOT_GATE_IMX8_EXT_I2C_ADDR_GPIO 0x22 /* I2C address of the GPIO
+ 						extender */
+ 
++#if !IS_ENABLED(CONFIG_XPL_BUILD)
++
+ static int iot_gate_imx8_ext_id = IOT_GATE_EXT_EMPTY; /* Extension board ID */
+ static int iot_gate_imx8_ext_ied_id [3] = {
+ 	IOT_GATE_IMX8_CARD_ID_EMPTY,
+@@ -541,6 +543,7 @@ int extension_board_scan(struct list_head *extension_list)
+ 
+         return ret;
+ }
++#endif
+ 
+ static int setup_mac_address(void)
+ {
 
 -- 
 2.43.0
