@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DDEACCD1AB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 13:47:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 909DACCD1BB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 13:49:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FFB0833F6;
-	Wed, 22 Oct 2025 15:47:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0851D8334F;
+	Wed, 22 Oct 2025 15:49:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DIzIxaxP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WrWYl4u9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CADAD8357F; Wed, 22 Oct 2025 15:47:10 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id AC6E0833F6; Wed, 22 Oct 2025 15:49:35 +0200 (CEST)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10C688323A
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 15:47:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88F008323A
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 15:49:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-63c4c346bd9so8919524a12.0
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 06:47:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c28bf230feso917803a34.0
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 06:49:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761140827; x=1761745627; darn=lists.denx.de;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Gt56Q90SppOnSrDC3yFGRUeykrqzu9bCyERXpuhriKQ=;
- b=DIzIxaxPE19tWt8v3Ej7VB/a26tFKBjPZb7yX8iDVxnPnZB5qMejrjWLt8HQaZ9Pz9
- shPYIwCrW4pV5kjP+9zaFFBh6/pGxHMVu12c9n8KPtSlTw2w8HJhU65QGRNvjXALbVAg
- NXpTkcdb4aWXO3+qu1TlUWkUPkZo9rL1xCfV+y2PbbMafMg9fDHF9wSVsbvZmSaAHBof
- HWU+iHlKLatdk9uFeeCkqgqRk/nsaIKTkxPfGVns05ZFhSpqtAI1eOMGEfYI1jEgSqfc
- II/Oq9bUYrtzei4SczfFQ7gTLsx8SfdJHkGNYDMTBav4JQu7UaUbGDtBNuZ9vlfiXPi/
- gUuA==
+ d=konsulko.com; s=google; t=1761140972; x=1761745772; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=LhJMyclE1bcM2jB0HiAw83elh7+1YrFt/22U6jeyZyE=;
+ b=WrWYl4u9J7fFclRGJF92jUxFHt9fz+BQQxXuYqUlMOK2Wv1jx3MF5/aQ94knob5YAx
+ rOqjup/8YzepJNu/TvZfjElllG+6aISKrfzrZTGrf0rgS8loidkCCYAIkvkodO1jLZtP
+ XqzEDrA+GgXdHGbGey2j2lW+FWNtk08nGvB/g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761140827; x=1761745627;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=Gt56Q90SppOnSrDC3yFGRUeykrqzu9bCyERXpuhriKQ=;
- b=cUcw/jg5vDdha4zbKLj4jamsESFJLFo7eUDHSnT2D45eF/pIbsB1VckixhfFqREesB
- z5dOkchw933t8bR5sZjTEPA7xQCpYjDDiPGFCKa5e62ZuQHZLuBoj8akGvIVRVtng17Q
- STbbZtKCGEkMpfWOT3z2Y3oYrpqEmUns7cqEd4peFbZ+YXS0equM7Y/8Pgrqsbo0pQmt
- YfRTvCcnslh6b4odRKTsWSze4cIaOg+pXIE+0or6kRb/Yy39ZKfvbz8I1iVAu2m11EhV
- MJpBLaRtAKrNqC0UGWD5acw8gL+sk9I/7IRMdrioTI25dZY9BPdJZKk7sqCDrS2hxZsr
- O1aw==
-X-Gm-Message-State: AOJu0Yy2aS5uViQqNzAOUwuOBoDMdvI/K1HKWv8boe4qgucz2x+9vFhd
- S7bEZ+YJgnJqQym0cdm05qgQpRZwEJ7e2JNATea72NzBli+R3xo9m9YEmp+TyCl90SMuyf/j7YV
- iE+pTn+E=
-X-Gm-Gg: ASbGncu8j4b8zqcx628wThpKUAXYz2S95nUB+FsiA1yhbZXuiMJULT/xF8PX8/YKfEr
- XsfdAAIHg4TNGgLytgjNZ9Q52pO7BTC8caU0ZQxXEaj9W0QKetXUA06qnq8XsCQ4a9OUvIWnwqG
- La7sOSi6vz2PJbAU+nF95MC0iyJOEFfdxHa9LUpTXl3vRAdOSRxrPhO9sx3CZ92TvxbvSJkrvYF
- ow/19O4G8ZGy6gdwbvmBsMr5st0jCAz/UI6eoU+rEiZj5lIyDY3ovfqTkkrvKjj2yplaILxtca2
- ectIANsqsPcdmlUS2f2kGxVWVLYxJsN2OFpg+9lrPTAf1KHTeYsPb5RHF4nRxfhKUhuMe5ACDzs
- d8EyosQh8i6taQ2/aSSaAO8KI5jsjI+DbHK93p3c7mFmGJqh5pQ8zVqhb2HngZXG7XHPkh3wW8M
- qyaqX4/TnWyUaPU83CRw/ksNe87iLPluZuNm0Gh5LLEkQcUjMcU4oQJW+uCdPA
-X-Google-Smtp-Source: AGHT+IGvTwa3Zl8/t8Co9/7FqiuiOC4zZO0KK09lUCv1Ac2KV/OFcsXe3Nil8lISUXczkyaGDdZ7Zg==
-X-Received: by 2002:a05:6402:2113:b0:63b:f91e:60a2 with SMTP id
- 4fb4d7f45d1cf-63c1f6c1fc8mr20091057a12.25.1761140827438; 
- Wed, 22 Oct 2025 06:47:07 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:ed50:db7:290:9079?
- ([2a01:e0a:3cb:7bb0:ed50:db7:290:9079])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63c48a93998sm11739189a12.4.2025.10.22.06.47.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Oct 2025 06:47:07 -0700 (PDT)
-Message-ID: <308fa89f-6e2c-4804-b806-71fd8bfbedda@linaro.org>
-Date: Wed, 22 Oct 2025 15:47:06 +0200
+ d=1e100.net; s=20230601; t=1761140972; x=1761745772;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LhJMyclE1bcM2jB0HiAw83elh7+1YrFt/22U6jeyZyE=;
+ b=cLrizbfmz/kItEZNpjOZ6BYbS8DJcSsAYUyMVnjdU4o3TJRe3vaARf6ADLoMOa6RDX
+ pvf1nhJ3C0FjrSp4yhCPAElYWSk2DnM00r/0Tm9/aiczaww9WgQZAYNAbEbmgp8yTt2N
+ YBVuvVI23JzdupB2gBE2/XgYgVUC6q/qzLIaVLRe4DCVoRkp4ex8LniesvYN6/LhM0Br
+ gT1UEkYNRd/C6Cucjm5GVrJmBai/u4yVCj5OXqwbwGQOdYn4+IKN3nACyAuv8RCefwXr
+ GjUfkMtlUUjDvcVTgtRWrxyqJm9BXnFDlOi3CLgLVuJrLgR6QCf/Rw5XuRo4EiCB/lg5
+ v6Xg==
+X-Gm-Message-State: AOJu0YxQkvq+z2Buo0g23HBt2a2f2mISfwRk6LknA7TzHBt5pW+71SzU
+ rmN7pDMVjjJYSOXpTLxnIVe8JtN1U14eBEDCBktFCVsfjKSQcPnEb7h6v74aSw+OhD8=
+X-Gm-Gg: ASbGnctaN+mnTcgbsD0PV5dyAM10iODrrbpdiJfNI3mEgNDCVXABFKNdqRzqpfCd2g/
+ qOdbSk7cScunnvmpFjZlgfoz4fhBLQu8AodExDdsLVB9BtGnm9NfT9bD6PtXFgRrKyXmUnpGJfa
+ xunTa4lxxSCMX+nkCqn3bBFcvYXgi1hKgCmojFhgl+o8kY9JrA/aIiWUvPGVp0AKbDsmrNXne5a
+ HVwGDuPQ80VAme72mw8CUAtasQb+4lb8kirEk8HXwTnZGFYaJ0FbGd7b+MpT1DGqrW9oDv2kXmx
+ hPmNn7ku7/rXQ7QSDjRx22xxJN4pPmx5PDjpxO6qrB2deU0YORCNNAu7HaVWvSxjNrEUNJ5qCvz
+ B+rlEJTNjtzqPnd3z0ck5WkvKSeW24J47IDPF77kWBBTI9/7bfUPvpml2YH5AHkuVGI7iQs1MG4
+ DS6OIVMSOhgn/hmc1QjtCfmHYCeb2pET37PlaD6TM=
+X-Google-Smtp-Source: AGHT+IETI4Dlw/k6QVv4HcooFg6XiulsyurOVP75HvqLh3z2LO0L0DPV0QWp9BLO/LiW/eUeUs/NUQ==
+X-Received: by 2002:a05:6808:3196:b0:43d:2e4a:e5c0 with SMTP id
+ 5614622812f47-44bbc476d43mr576317b6e.1.1761140972156; 
+ Wed, 22 Oct 2025 06:49:32 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c28890f2a6sm4613216a34.24.2025.10.22.06.49.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Oct 2025 06:49:31 -0700 (PDT)
+Date: Wed, 22 Oct 2025 07:49:29 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH 2/3] doc: askenv: Reword and remove return value
+Message-ID: <20251022134929.GH6688@bill-the-cat>
+References: <20251021202820.1272414-1-trini@konsulko.com>
+ <20251021202820.1272414-3-trini@konsulko.com>
+ <0fb1e175-6e50-4f2a-a1e2-98ffe3108998@cherry.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Please pull net-20251022
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JAbqGweWPJ0S21l7"
+Content-Disposition: inline
+In-Reply-To: <0fb1e175-6e50-4f2a-a1e2-98ffe3108998@cherry.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,116 +98,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-The following changes since commit 813a0df27a8af587bd25a6a4719f68066b370091:
+--JAbqGweWPJ0S21l7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-  env: Invert gd->env_valid for env_mmc_save (2025-10-21 13:18:46 -0600)
+On Wed, Oct 22, 2025 at 11:28:15AM +0200, Quentin Schulz wrote:
+> Hi Tom,
+>=20
+> On 10/21/25 10:25 PM, Tom Rini wrote:
+> > With the addition of general text about how the return value is handled,
+> > remove the examples from the askenv documentation as they are all normal
+> > expected results.
+> >=20
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> > ---
+> >   doc/usage/cmd/askenv.rst | 27 +++------------------------
+> >   1 file changed, 3 insertions(+), 24 deletions(-)
+> >=20
+> > diff --git a/doc/usage/cmd/askenv.rst b/doc/usage/cmd/askenv.rst
+> > index e2b3c5379aea..a8867ce4d266 100644
+> > --- a/doc/usage/cmd/askenv.rst
+> > +++ b/doc/usage/cmd/askenv.rst
+> [...]
+> > -Return Value of askenv command, when used without any other arguments:
+> > -
+> > -::
+> > -
+> > -    =3D> askenv;echo $?
+> > -    askenv - get environment variables from stdin
+> > -
+> > -    Usage:
+> > -    askenv name [message] [size]
+> > -        - display 'message' and get environment variable 'name' from s=
+tdin (max 'size' chars)
+> > -    1
+>=20
+> Shouldn't that be -1 here to match the expected return value when the syn=
+tax
+> is incorrect?
+>=20
+> If it is 1, then it's a difference to the expected return value and thus
+> should be documented below?
 
-are available in the Git repository at:
+This was included seemingly to include the built-in help message
+in-text. If desired, we should figure out how to do that automatically
+and for all commands.
 
-  https://source.denx.de/u-boot/custodians/u-boot-net.git/ tags/net-20251022
+This is separate from what I see this morning right now of any invalid
+usage returning "1" and not "-1".
 
-for you to fetch changes up to ed6ec8d1ca0658d811df1cc78d06fec4f7f69fc9:
+This is from sandbox build yesterday on top of tree:
+=3D> loadm y y y y y y
+loadm - load binary blob from source address to destination address
 
-  net: designware: fix bitbang init error (2025-10-22 14:28:33 +0200)
+Usage:
+loadm [src_addr] [dst_addr] [size]
+     - load a binary blob from one memory location to other from src_addr t=
+o dst_addr by size bytes
+=3D> echo $?
+1
 
-----------------------------------------------------------------
-Pull request net-20251022
+--=20
+Tom
 
-net:
-- airoha: improvements
-- Tighten a few more driver dependencies
-- designware: fix bitbang init error
-- phy: Make driver overloading get_phy_id depend on !COMPILE_TEST
-- phy: add paged PHY register accessors
-- make dhcp_run() common for NET and NET_LWIP
-- dwc_eth_ops: Correct check for FDT_64BIT
-- mediatek: mt7988: various fixup + MDIO detach
-- phy: aquantia: switch to use phy_get_ofnode(), fix bindings typo
+--JAbqGweWPJ0S21l7
+Content-Type: application/pgp-signature; name="signature.asc"
 
-net-legacy:
-- bootp: Prevent buffer overflow to avoid leaking the RAM content
-- tftp: make TFTP ports unconditionally configurable
+-----BEGIN PGP SIGNATURE-----
 
-misc:
-- uthreads: Make use of CONFIG_IS_ENABLED consistently
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPjg5QAKCRAr4qD1Cr/k
+CtYvAP9+iWehAajj8KS6MwGvf21Mwcja9r2aOub5IBCNsPBmPwD+NrHZ+SvDTAP+
+/v9pO8OpJLmodQbYOipCMy8R4QWneAc=
+=sVH9
+-----END PGP SIGNATURE-----
 
-----------------------------------------------------------------
-Alvin Šipraga (1):
-      tftp: make TFTP ports unconditionally configurable
-
-Beiyan Yun (2):
-      net: phy: aquantia: switch to use phy_get_ofnode()
-      doc: bindings: fix aquantia-phy.txt typo
-
-Christian Marangi (4):
-      net: mediatek: mt7531/7988: fix broken PHY turn ON/OFF
-      net: mediatek: mt7988: restore PHY page on PHY setting exit
-      net: mediatek: mt7988: free allocated MDIO bus on cleanup
-      net: mediatek: move MT7531 MMIO MDIO to dedicated driver
-
-Jerome Forissier (1):
-      net: make dhcp_run() common for NET and NET_LWIP
-
-Jim Liu (1):
-      net: designware: fix bitbang init error
-
-Lucien.Jheng (1):
-      net: phy: add paged PHY register accessors
-
-Mikhail Kshevetskiy (2):
-      net: airoha: simplify rx/free packet logic a bit
-      net: airoha: increase the number of rx network buffers
-
-Paul HENRYS (1):
-      net: bootp: Prevent buffer overflow to avoid leaking the RAM content
-
-Tom Rini (6):
-      uthreads: Make use of CONFIG_IS_ENABLED consistently
-      arm: socfpga: Tighten a few more driver dependencies
-      net: Add SYS_FAULT_MII_ADDR to Kconfig
-      net: Remove BOOTP_VENDOREX support
-      net: Tighten more driver dependencies
-      net: phy: Make driver overloading get_phy_id depend on !COMPILE_TEST
-
- README                                        |   3 -
- cmd/Kconfig                                   |   4 -
- cmd/net.c                                     |  36 +-----
- configs/an7581_evb_defconfig                  |   1 +
- configs/gurnard_defconfig                     |   1 -
- doc/device-tree-bindings/net/aquantia-phy.txt |   2 +-
- doc/usage/cmd/tftpput.rst                     |   8 +-
- drivers/net/Kconfig                           |  10 +-
- drivers/net/Makefile                          |   1 +
- drivers/net/airoha_eth.c                      |  40 +++---
- drivers/net/designware.c                      |  12 +-
- drivers/net/mdio-mt7531-mmio.c                | 168 ++++++++++++++++++++++++++
- drivers/net/mdio-mt7531-mmio.h                |   9 ++
- drivers/net/mtk_eth/Kconfig                   |   2 +
- drivers/net/mtk_eth/mt7531.c                  |  20 ++-
- drivers/net/mtk_eth/mt7988.c                  |  92 +++++++++++---
- drivers/net/phy/Kconfig                       |   2 +
- drivers/net/phy/aquantia.c                    |   2 +-
- drivers/net/phy/phy.c                         | 113 +++++++++++++++++
- drivers/power/domain/Kconfig                  |   2 +-
- include/net-common.h                          |  10 ++
- include/net-lwip.h                            |   1 -
- include/phy.h                                 |   8 ++
- include/uthread.h                             |   4 +-
- lib/Makefile                                  |   2 +-
- net/Kconfig                                   |  20 +--
- net/bootp.c                                   |  24 ++--
- net/bootp.h                                   |   4 -
- net/lwip/dhcp.c                               |  22 ----
- net/net-common.c                              |  35 ++++++
- net/tftp.c                                    |   3 +-
- 31 files changed, 497 insertions(+), 164 deletions(-)
- create mode 100644 drivers/net/mdio-mt7531-mmio.c
- create mode 100644 drivers/net/mdio-mt7531-mmio.h
- 
- CI link: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/27997
- 
- Thanks,
- -- 
- Jerome
+--JAbqGweWPJ0S21l7--
