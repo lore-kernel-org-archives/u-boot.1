@@ -4,148 +4,148 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C14B7CCD1BE
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 07:22:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65007CCD1BE
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 07:22:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48435835B3;
+	by phobos.denx.de (Postfix) with ESMTP id 897B983623;
 	Wed, 22 Oct 2025 09:21:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="qI+pumnu";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="p4vizB9l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 277D18323A; Wed, 22 Oct 2025 04:04:06 +0200 (CEST)
-Received: from DU2PR03CU002.outbound.protection.outlook.com
- (mail-northeuropeazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::3])
+ id 02AEF8323A; Wed, 22 Oct 2025 04:04:44 +0200 (CEST)
+Received: from OSPPR02CU001.outbound.protection.outlook.com
+ (mail-norwayeastazlp170130007.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20f::7])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3917082B20
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 04:04:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B34082B20
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 04:04:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a3IG2ZpnT3vhqKk2SndqKoTuSZd/yEeEtXbf9XcHPAcdUeu/CkH9sGgInYT4sC7M0TBoeUcKPRbsQ7KoQtlkrILjvfoppJSeVaiH5HWHVacEQ9IR6c9J9NMWlNWA2t7IS53YxM4nZngGswf9LxcixRISDtc7fQtvDwqiDv1H7zR4V1n0yIk0Nnr58d9DFJWt6dl/jiEtape7UkCfbkTy0m7o9sGwWLH/lCqo3ZtvPB4VURMzeqXuL6dn3aO7Tiy4Ptyw9ePO+tWlyaZbbg6ajG8wxCb6Gz+2qf4xFnhYlbN9+3ytQuRvaQDLIJLuLNOe4FdbvEKEIV0E6sddYkrscg==
+ b=tO5G7XTydOBa23z6hSLepb9rJG1x8jfiXO/8xPDmvDTWqD8JZzpbJIn521FMNUiwuFNGIOBnBjH9eth7UC/Ag5BDVoGkRD7Nq2wY+wGdiDamBsygrvzF/qbpNcy9gJTPCrefGpQFEBpehyLgFCVZQlQSJQ4fr025RiYvKE3WY4YGRSBCVrp3QJMIDLEiZqv652mzw1EMWLJ8lJ73mm1UQUCUtH4q1gzrWgO9pHX3o8OmPto5rQfjQGHngdshKu52j4cUJGwRoZQvtMwrQre/49pr11rJpAY9U6lFphJ1L6u/aobR1XBZ2InaoR1crL9FStKopNBDhPYl+m05PceFRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OInUyqYnuqKEkcX/LLzAmPk5/4Yww2Ckbj1qDDUMv3g=;
- b=hyllSfMIxNNAXiPDiUwAAHiTbHK8RRMfVuFJeKuyVv+i2KCE4b31CVMA3pXZrjSo1kr832teloCchWHdawHZZyPnF99vAw1r3/4isqZWnPWcyXh2WX9SX9xc4yq6laIZ3zrmTB9E69wJdGGBEm4HF1NynmfT/Ri0i2wz1lOU6T9ptk1YDLGhDuAZM3rRvtGMMqVPdBgMIDKxJcQTfnmIdZXb+P4/TjGjuJjyrQId1ERIcmSFHbHeYGOJnieLPbwwk0HUoBcJ1CbY3JKt9eq4+m9/pQHGKwD95/4gjAQ/ck6wwIZ+Hb/52qIk34eEqmJYYrRkFZzuXAvD+pJtBs0xdw==
+ bh=4oqGmzb+C79X92AUUPddOasizZgE0L+OnQVhFZNZceY=;
+ b=WtlTkA7auxeY7xCDnChl/7JMV9p60Ywc9OwqQXW+O3JX/nHm5Wyk/9kkAJER/SVDbfw2ZhkW6FqFVt5y24K7alVrTtUfWMh8vQWYkyzVpEmhjorCXlVw+Wb0rBQuZ8RI0Gfj8aWh6sPw1gdKzMHSFRXiGcNcynI2u3LmOwf9lC7Lk5Y1yyP+WcqHKcjqihD7oLaEfdFXIP1HcTvULpN5fU42KJl9+uCDjP/LYm6GM44coPX/xUxr7lkB2GjV66k33aQEMTUONwp9Evl0/bvvwzyUn6kpRbMfFmgE3FJ2QBiIhUO7fWMY9LYbXWBKEGOoNEyAa6dsdoSf0Ipg9I+Vcw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OInUyqYnuqKEkcX/LLzAmPk5/4Yww2Ckbj1qDDUMv3g=;
- b=qI+pumnuEda4qiwwqKYXAiGbzrn/ttCPobNZJ8vlafZJBcF5SSb3C7+ygfZlMmpbxlfo5z82cTArHc97Ctu5fQH8ObvQYN/tum0tWSgT0ticFhFMki5yR8UOG495M455LbOsu7DXquwyHlgYH5XT8QbauAlbKlgdeGfkbOgwMObIQYQIPOpv+vlAx2YBkb4Hm/mJsYWLX1EQmha5Q6R/KPIFc+////Tv2aiyrAKXqrq4saWuoJYBPYoZ7DPuelSpqRWMqXFL4yVIF+UxFnNYgXzKm9gqwP6Rk01Wb/JeMX77TzsS0+7rmNQUe4f9wx/8ufmz4or9IrsdUjA6faC7yw==
+ bh=4oqGmzb+C79X92AUUPddOasizZgE0L+OnQVhFZNZceY=;
+ b=p4vizB9ldZuvJsd9ev68sgyqu3zlWBC3cy0pz6edLXc4R5EHACSVbhYFYY67n/UtQMaHEPFXM7wrmkN30PtdizclRsFAQZDFrCmdjqrp4FGqo7V7v7I/Y2I/0cn00ubpqZZ15rwxtO5NK6KOIR/3qWsQ+VrvL6anyqIMKV4aq7C67hsXSpImVRg6pI+E49MXCNchKV6U60Yap+ZJbp6344ne45d636L5ye5+fI/j1bBcB/IJoczpBo8XWwG6r1DBeGaMesgX24Ihd2O3FYe21Mg2y3UwT7SCAcHMUVv6FURTo+8l+EdmyQ4AuUHKKKTUnW1wMbrzaL8uy3Nemstnew==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from DB9PR04MB8461.eurprd04.prod.outlook.com (2603:10a6:10:2cf::20)
  by DU4PR04MB11435.eurprd04.prod.outlook.com (2603:10a6:10:5ee::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.10; Wed, 22 Oct
- 2025 02:04:02 +0000
+ 2025 02:04:37 +0000
 Received: from DB9PR04MB8461.eurprd04.prod.outlook.com
  ([fe80::b1b9:faa9:901b:c197]) by DB9PR04MB8461.eurprd04.prod.outlook.com
  ([fe80::b1b9:faa9:901b:c197%4]) with mapi id 15.20.9253.011; Wed, 22 Oct 2025
- 02:04:02 +0000
-Date: Wed, 22 Oct 2025 11:16:13 +0800
+ 02:04:36 +0000
+Date: Wed, 22 Oct 2025 11:16:49 +0800
 From: Peng Fan <peng.fan@oss.nxp.com>
 To: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, peng.fan@nxp.com,
- jh80.chung@samsung.com, marex@denx.de, tien.fong.chee@altera.com
-Subject: Re: [PATCH] mmc: sd: Handle UHS-I voltage signaling without power
- cycle
-Message-ID: <20251022031613.GB15054@nxa18884-linux.ap.freescale.net>
-References: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, marex@denx.de,
+ tien.fong.chee@altera.com
+Subject: Re: [PATCH] sdhci: Reorder interrupt flags in SDHCI_INT_DATA_MASK
+ definition
+Message-ID: <20251022031649.GC15054@nxa18884-linux.ap.freescale.net>
+References: <20251021205410.2878-1-tanmay.kathpalia@altera.com>
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20251021204526.22701-1-tanmay.kathpalia@altera.com>
+In-Reply-To: <20251021205410.2878-1-tanmay.kathpalia@altera.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: SG2PR03CA0119.apcprd03.prod.outlook.com
- (2603:1096:4:91::23) To DB9PR04MB8461.eurprd04.prod.outlook.com
+X-ClientProxiedBy: SG2PR02CA0075.apcprd02.prod.outlook.com
+ (2603:1096:4:90::15) To DB9PR04MB8461.eurprd04.prod.outlook.com
  (2603:10a6:10:2cf::20)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR04MB8461:EE_|DU4PR04MB11435:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5245e056-7c5e-44c3-b030-08de110f4581
+X-MS-Office365-Filtering-Correlation-Id: f80a95ab-81d7-4662-556f-08de110f59c6
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|1800799024|19092799006|366016|52116014|38350700014|7053199007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?9iwKg1NkqU3s+L16+uiHtUeczLZVATjEl6XrmA9daDigbx+yoBbF7pSpwML0?=
- =?us-ascii?Q?SpFKIgfzC4DB8Aemh0wB+r2cAdMa1GdsKkC93ts/V0xLl+iSPUwWelZke7Ls?=
- =?us-ascii?Q?C3+sEJ3uo4Xj6HmVlivdShMwzG9kPvzeLl7HbGuX7fdHgJZ21mYfJwU+OhxX?=
- =?us-ascii?Q?G4+F6Q6CjGjGRd+cBoaCKisPkxY4HwTpxP6BGGTe03/gOrAwtS0FBMc+xVf8?=
- =?us-ascii?Q?LtRDWew5cm8ZMVIfnz58FHznN1blp9mFNdxf2ABVCExpsXimkOhOL3gIv3ux?=
- =?us-ascii?Q?Sol4ytqhL2T9ZWW6u8oOftVC2gfY8EpZCB+QZeJLifoqoLaxX/3+hTyB4hEM?=
- =?us-ascii?Q?IPMNwY2uvcmsOIH8BXj5oe/fSCzmfqoi6ZfVgyrdS/HxLon+JGrp0zeHm0fF?=
- =?us-ascii?Q?CH8mlQurjSnqwBvEfSOSWMIbCh9rIKBs4Ts8m0Et7OCZr7gmTMdKZProwV3M?=
- =?us-ascii?Q?Ah4a+j2RQwnsq9sRmslWx4sCmjutoVNTiSrrvtSUhXUwWcgwN0DKyJK7odxA?=
- =?us-ascii?Q?ZnTbJcFUIKqAHRFZtWJXOGaTtGHIwhP/MJbSpX+uVJHJv9+5mSF7v/VgzsZr?=
- =?us-ascii?Q?kEaqr2vOZonCBsL94XQwwgU82YVjDuirmNRgM9UvacerMlJduf8Zre+UPoi5?=
- =?us-ascii?Q?7SkhzNezJFKe4oLMRfSM6OXvRPaAd0pVvrWQxfxD8cBb2gAfGbKqgRUlXvuK?=
- =?us-ascii?Q?0nltk0RwHC280n9kyjeh+IByN+oG1v+ZWOI+K9oBrE5fo9K5qUgxrafJZ++i?=
- =?us-ascii?Q?nKe+d46tE3fK6yB6iDpEktqJNKVG98Vxc7Ha9a/ybUa5CceQagf29hGng3ZT?=
- =?us-ascii?Q?QnwvkoJzl97d64jcTxwzRl3W63LlhOPrzBqAyFLTkic4nYJrD52KemT6qp22?=
- =?us-ascii?Q?BN533GKYbiRk62lfcrMlxgawzGUDI1AYCRtuTWjltXrgdqwm4fpTsIsiXHsh?=
- =?us-ascii?Q?jh34xlRDLsZDfV07gizAx+1u6MEBPTufIAgjo2RYel7geZGrS2X38Ikq4P5k?=
- =?us-ascii?Q?XjKxC/cL8bITttD4VnQP+8OfGUxwYlgTqY2U6X0cT//JOjvfigJbDfzZ6vX1?=
- =?us-ascii?Q?uumIGQhxHijYyiX0BV4mkctXBeWAwDgMpqS4Dhmx0gYByWBhkQLns6DANoQ5?=
- =?us-ascii?Q?uWh7BDwtwWjb0CmO48dmF54WQcFhos8kPSiNySRQmhKF4ryPGglNM4MSeOsn?=
- =?us-ascii?Q?hFqrkBeEdrD6CZasnPVps/cFzRZMaQnE//15esKEKuK7tsvO5uqtbS0/HGM9?=
- =?us-ascii?Q?fqtX+HS1jtjHSA+Cs011jCEchwX9fXM0HzSyypgqf+iIg9Gv1sVpdN9ue/ji?=
- =?us-ascii?Q?gjXmlenlp/Ml4DEfuaXUoDyb/bD/Buk/7g3rMKTykirt7A2blBVrnE+Hd1Dk?=
- =?us-ascii?Q?MwCx0jQYmLJE/59RXPC4TKriIlzhStZMKAVHkbvNM/5Y+vbikRouPYXazLvW?=
- =?us-ascii?Q?GrCkC6fA+JpIdgnOZfjz3e1VqkhX/uv9QrEvMlq+0N2KkOSHAlMANXdrRvzd?=
- =?us-ascii?Q?Bd0m+yJpmzXiApw5XtIYK2kUeYRDXxid4rm7?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pfwsBLt7E2UtyP2alS5IqTrP85Y8ZMSh/7TqEcvK0HlhKYsiJr5Pkx+JD54C?=
+ =?us-ascii?Q?eq7j83lwf9TFVd7sLoKex4fwCYoxkzmg7VRXczCddLLEE+vqI1UcvabHZQY0?=
+ =?us-ascii?Q?YfItrOMWp21qU1Zu4U/Vy77SSeo1tnbPMJjq4LBjYGc2b5Zv7LmcjAwFGoyb?=
+ =?us-ascii?Q?ub+U4ZN+Fg2wvXlnTrDvPRGGtgynZFFkO8SrpSfOIKPJplGrUwj2MXokbOVL?=
+ =?us-ascii?Q?SYFSyKzF9LPfr8XhKqw7gkgwq1d+gi+4ZcJnKFXwOohWcUPQkK0SRajM4/+e?=
+ =?us-ascii?Q?AS46hAy9YdZeg1CxiLkj0xkfnOMDuepLkbN4CXNlD8AEFgEdBzI2MKOYKjqE?=
+ =?us-ascii?Q?9eYeTD4l75yh9IlhnvbNimu7KCwg2o9yDAB0tP1OVrU2YwnRC6frTXBrnQ6e?=
+ =?us-ascii?Q?pBW9pMloeZ7JHCJmR0cS998x+bMTrLe0JivLeGm7TDXR9w11BAP5IP9mTzQN?=
+ =?us-ascii?Q?AqgxeCKwBCUuJhyDbJcc6YtgEhT2hOdaLCA9I7F0obtm5m1BfRTIrEHmWeW3?=
+ =?us-ascii?Q?2Oi4O5BI+xFGhcQTgQWMjRinP4vQNh2TeddRKhl9uwNUOwLohYWCxvW32b+v?=
+ =?us-ascii?Q?bFV2bpyjSClb45XkeWh4JxpTXcZjeN+/eqTKE4mcCtQh45RrAtgvbE8bq4DV?=
+ =?us-ascii?Q?81z+2X36nni1GDFbO6QGhfXW2LOcZC0dP/YRvxTDVxDD7YxYGU6qChnN6oi4?=
+ =?us-ascii?Q?yDidkwed+S4Sw0jS1wDmOLolnIch6ux2SY+Orni9EKdw412G61H7XUgD42ss?=
+ =?us-ascii?Q?0QBOkIJxgpKTTfGRDLdffAaX0xSLzrGCT6hupa9cecaww3GcQaWuXPPgSbGR?=
+ =?us-ascii?Q?CoyxFHEEw7UgLuS18Sw3ZkO/ax925SxNz5rauWeP00OLpG+gb7Q5DDACYn2T?=
+ =?us-ascii?Q?EdI1j2nl2UsLvv+FRuFLVgILUDGTvuqWmmbrEdxmgdqVEsGUzThvXu0FuJXH?=
+ =?us-ascii?Q?gnma+P77tZNnZsj84n8UUCr5t73C7aFtWeoXA52ExIJaU4ufMQQ8IsD9imK4?=
+ =?us-ascii?Q?TnKNUxGIe6SgLqaTzqT82AA8yte1K/vv9iZb0M6QziEQOpIoi0KwW1wmoIBU?=
+ =?us-ascii?Q?QXoh1ejsEVVnqDbGh4Zq8KJzo4gbbadBpbymNRkIbGjinyBuI9/2zfVpPEzU?=
+ =?us-ascii?Q?3svlgCVv4zViUtVPwE+0h0xchp/PsfnSrpw/Auo7OejbCo8an3FhK54Zf3va?=
+ =?us-ascii?Q?9r29NgXArkmDs5jbVQitMcvos6QlgOJcaOo03TWRXCuKSs62WrHSUVzsjM5n?=
+ =?us-ascii?Q?CzsBMmg0UiWnydV1F9J2K1A445SLibOf5CGNqZZcIDTxO0cUzXJZyqnR4xVr?=
+ =?us-ascii?Q?5aGO8PhVXGVZvSv4orGjGAs8tdZkPrUolNJUHoPNaEEYZM9E0lbKJUHUZELn?=
+ =?us-ascii?Q?KXTPjnBOshoDsyIac4JPWF0nUVXWhKNFeJVKS8/Xy5npCQnrxo9j2LyZhEZX?=
+ =?us-ascii?Q?htelAZK6owaQgfPvB8TYJScP7xTXMyKZwncrU6Awc7OGrdFZNIpXU4iK0857?=
+ =?us-ascii?Q?38Zfv492iCSVIgd5rrImauOaiNnfPsF3tjkT?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR04MB8461.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(1800799024)(19092799006)(366016)(52116014)(38350700014)(7053199007);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?t9XbxKidVBQpxlW3LFAuGDDWn1CgRsvU7KRq88KtFbtu605eW6PVwAsO+HYk?=
- =?us-ascii?Q?1lqLvZWwQb7d4nqOEQWFaY8pPv9vVEVv2FPAsUiD82N4L96kSR5cYMCYLXlK?=
- =?us-ascii?Q?SqDGgB+CyeNB/KuUgc15YfWeYK5OkCn9yQAEfO/BDzAl4Plrq2SuJhQHW1QB?=
- =?us-ascii?Q?2D+WSkrFl35xFP9TKNbxCmRafCeShhTHuNQmJrkgVWOtOBuSu5xLZ7eQqX0+?=
- =?us-ascii?Q?v2r9RJzgRIEcHYA6rJMWYkDnVbWoEjKGXrNJX+v3LWyxbX07506G9WjvsWfY?=
- =?us-ascii?Q?NXkjxi3adWoojxz0HB1wD6GNbkQYYn9Nrnvt5pi4RU5aR5mNwcylLbCUEV1t?=
- =?us-ascii?Q?pdMQFjn8Df8486Qtvz8BAUdL+rbAg8OpBvG9HHlloLuRYnY2DbFmH7fyDRbF?=
- =?us-ascii?Q?K4bP1uvWrKCzUgH0SAgSH5oqTSiRy4eACLYEjNdDm5gBkJaUOoEwOVrWcFEx?=
- =?us-ascii?Q?N108HfjfHohkjtT0J3CnnK++ak2G8vl3uuSMfTkek1aU1pv7bnRLLHvQrieD?=
- =?us-ascii?Q?ony+FKWNkooJem1M5WEOXPOpAm7XXyo7ToFPKWmsKkM7xZ4O1ZJ/KgdGGoKG?=
- =?us-ascii?Q?FOivit3TfmiClqc1yPjnl3qVtPi133qTCfRo+Clzke+eUgSdGZiGedOprzyK?=
- =?us-ascii?Q?YJCr01f/KSf1GM/5Q7tjuATH8NPOXkIBHqHw/5jvvqNj1BfxOjDM8DU+8hep?=
- =?us-ascii?Q?XeMWoL2M3XSfZuMnLzQywfVFl1T14yIO5H/tRiM90cmPJzwpiAWwiTLByhhn?=
- =?us-ascii?Q?id4H0ernv9j1lHGzeDS4QaJsDTE6x3nzCzXznt/ZAkAZ8XY6yTVcwEv/wbVa?=
- =?us-ascii?Q?CuuB8Fj6pzxEJaN0aSFfWYeudKOZAauJ8/r9FknLj+HIuSmhv54ZbNQvkKzi?=
- =?us-ascii?Q?y37ePmf1lK1JUAshJ/Of9AZgdaVVAN0KHPdd92CvJWvZi8PJB9LRAhA96Ycm?=
- =?us-ascii?Q?Dz8JBZIdsxll7N6TswrMCqtzu2hbxmB1gLGl05baugRXmDvwvMjCRP6MBppW?=
- =?us-ascii?Q?LyLIeJfWnXNDuX6RlVJWjTYaZJlX7nZf7KBo4ekN6MIC2KXJGquUUxGxzmmc?=
- =?us-ascii?Q?6+1tYpfRjjZRNJk5W+8PrtJ/agFvnhVa1Yy4CjWtNjFTwix27GLNxuHHmCuh?=
- =?us-ascii?Q?DhOrvkm/Mt7gOlCOA93zkdRik4ZOBMqndhI9GKst4BFdoaU0FhYK8kPTFfmE?=
- =?us-ascii?Q?zAmBaLkh9pZsG6ylpq5BG6TITrD2zbGPleaUGl/YhvSMtRV/2KtqSL0SOX8j?=
- =?us-ascii?Q?Vwox+eOnPhoOAYdcwngL28dts0TEmyV2Hqn31krkQ83X8kik4XgSMtbsuNpb?=
- =?us-ascii?Q?L/PRzPH1O7L9AdWBCFobqbc+ThEfOxi+3v2PXrpAuiHqTZpDsDyC8+49+I9q?=
- =?us-ascii?Q?q9mM70XpwMZGdOAj/D3Na5U1fyi9uy8RU/aqQ2n8pbQw97lN+zNEqAaRyXyb?=
- =?us-ascii?Q?0cERIqKTQUWvk9hvzB6QFVS/1XsVIAsjngraBWuPS+4Uvy7nPpUVd6cGeWxm?=
- =?us-ascii?Q?5/b9oD/4QevCaMdcmf8JgqXZPRh+QUWrBxgikon9ulcIdT0hoIR8jWY3Iyz4?=
- =?us-ascii?Q?MfkZ6tc7nVgovtZiU6FusjGmsXOCm3ez0OFPnByE?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Z7zRbQ/H3mQFXah30a7ITR5X4tVgbjOBmbDREV2shqk7BSfRRlOqSjBocPDi?=
+ =?us-ascii?Q?/oMUJ/AxR8nwz9L5+Sa6kXUqKwsIiiPPr6aOkRn7iFs71bAZOdDU/CkydYA6?=
+ =?us-ascii?Q?q98EOT4pU5IC0pSGirfksjk7i3ycVWb6iHToc6KFnb5tSk1t9lQ8xOKyXwFV?=
+ =?us-ascii?Q?MqJuKTLtGuZsWeqIV1v6KpHzO6qu6GypDRspECSeX/76thf+a73lndWC226h?=
+ =?us-ascii?Q?LXGQrx+vhqqVOo0FccyskEbADaydFtc4BVNJr6gJZdHnrcjmUq5lD657GmhU?=
+ =?us-ascii?Q?pwUnk1VXr1tIcnaUv0go3DyoqVbYEKjaIOBFPBInsRIZQ8YCWDRI5rmYgW7y?=
+ =?us-ascii?Q?tQtpGbPOEvfe7PUNB5K97MMbHWzHP0ZCfjOQY/8Qwaprlb+UhVTtfYomFZE9?=
+ =?us-ascii?Q?Z5BmHrsxGJdYZzfzIhxtWWz1QPOjyobzlCQjpDqGSTO3tO9+hOabkwqD317W?=
+ =?us-ascii?Q?fpuVbPFwbRVmMq0vopFw6K7cWIS2grHgXFSXktaPkt64u8oSMO7LG7EmEKrW?=
+ =?us-ascii?Q?640T29ecgRZhGgz7n7oMh3FC3QsDkuu8aPMPfdRN6nN3YsbTDcXWdaI/80ES?=
+ =?us-ascii?Q?AB99Jf50StY3R9h6Ccq6wYg81Mtg9b6fcQjEbczakLsie36/BCRRgu/VIYE8?=
+ =?us-ascii?Q?6C68HVQ+vJMOAVA9J7g1LJmXdqqJssdkrNYax31h5hHZ/8fiQW2BkNF6Xk0y?=
+ =?us-ascii?Q?hXu+zcszkxMZcsj1fVoBdfD1zwK6pSydTJFWD1jVRIx7YEMamlO+egelQYVB?=
+ =?us-ascii?Q?TecugdoChwrsbT4U55HEyMFWSRHyZxb/274ux/6KTNBxUAX2cPc1FtaEDQbN?=
+ =?us-ascii?Q?++Zv578C3YFnESXFWnzx8q088JXQ9ekTLUIoVPOcO22DWi0F9Hf13NL+8FNN?=
+ =?us-ascii?Q?THpKDnFoj4h1YXuRPYV9QiO0K8xKWtPTuzEa3GHpwwyxAXxBNcNRhA5xA2B9?=
+ =?us-ascii?Q?EuVeGHJ9Jq6I3p8TFWaFk+1Gilo8LtdgxUct8848nC0rALjCvPfAybt90/Hv?=
+ =?us-ascii?Q?MizQfmSOGbaStsIkYL4b+uIlPWKC7KfncmgGr84zT1Zf6RJqPzieBJbuDtM2?=
+ =?us-ascii?Q?/RQHt2ktpA9yWnCCKSkGppdw8OIaLqhbQTHs365J2UX0X6zjRyeo+nhuRrmv?=
+ =?us-ascii?Q?JnJYKnCRUuS/9G1ITnpfN+mMu+Iydg9idIBV+fwjFGt+Sa4UzGYXv9+rHp6O?=
+ =?us-ascii?Q?qru31+Ij+v66tDttIQFYkesicwISfsJhtYQ/LlUDrI1IApNC82oX9moVzvM5?=
+ =?us-ascii?Q?qg/4ez7DGL3K1FIsTm4xMCm0TqcoCjhZYzJMKlpXI83TtSqIEcRcQg+OSdWm?=
+ =?us-ascii?Q?2BLGgx/Anjb+89vyQmVl4YaNIMTiLEIvcJOZl0v53Sw41Y7FqhT8gPtemTdM?=
+ =?us-ascii?Q?5nRZnPnyZcBbZ6T61Fr/NMtjoCei+9ymdNJ+F+F1BQTZxWfQnM+UQ3AgHIHC?=
+ =?us-ascii?Q?zXS+rXvaCdkXhaUeajwhc1ZnsmXWTGEQYgEC8mBsedciJSV5hTWEtGT7o58U?=
+ =?us-ascii?Q?B/qwPKOrQWQnQaBKTCBHzkR1785avHVT0dU7Hk88y43oO1Wj/kSe9UGLw1RS?=
+ =?us-ascii?Q?4cSkrYtJw4Xljm8pkBFEee14n+xFzWcLKYyBiwZS?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5245e056-7c5e-44c3-b030-08de110f4581
+X-MS-Exchange-CrossTenant-Network-Message-Id: f80a95ab-81d7-4662-556f-08de110f59c6
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR04MB8461.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2025 02:04:02.3352 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2025 02:04:36.7034 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xoW+8oMbdzC/QtISgd5AzISqAoHqJl1ySOvLKiyWSsDvwdYzKv+cHYFgaOYmsMKZQVtpMJ5SKmHWMNg4OymulQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: KmA5soOWJICRjqAywIFAzcMO+YJs/eojnd3Bs1gOSbr0uUqMfbEFRFyV5HBmyLFDOBz4JSOTM2UorRehfRds1Q==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR04MB11435
 X-Mailman-Approved-At: Wed, 22 Oct 2025 09:21:43 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -164,28 +164,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tanmay,
-
-On Tue, Oct 21, 2025 at 01:45:26PM -0700, Tanmay Kathpalia wrote:
->Some boards have SD card connectors where the power rail cannot be switched
->off by the driver. However there are various circumstances when a card
->might be re-initialized, such as after system resume, warm re-boot, or
->error handling. However, a UHS card will continue to use 1.8V signaling
->unless it is power cycled.
+On Tue, Oct 21, 2025 at 01:54:10PM -0700, Tanmay Kathpalia wrote:
+>Reorder the SDHCI_INT_SPACE_AVAIL and SDHCI_INT_DATA_AVAIL flags in the
+>SDHCI_INT_DATA_MASK definition to match the bit order as defined in the
+>SDHCI specification and maintain consistency with the register layout.
 >
->If the card has not been power cycled, it may still be using 1.8V
->signaling. According to the SD spec., the Bus Speed Mode (function group 1)
->bits 2 to 4 are zero if the card is initialized at 3.3V signal level. Thus
->they can be used to determine if the card has already switched to 1.8V
->signaling. Detect that situation and try to initialize a UHS-I (1.8V)
->transfer mode.
-
-Actually a power cycle or reset is required to make sure SD card to work
-correctly. Some SD cards may work in your case, some SD cards might not work,
-without a power cycle or reset.
-
-Thanks,
-Peng
-
+>The functional behavior remains unchanged as this only affects the
+>order of OR operations in the mask definition.
 >
 >Signed-off-by: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
+
+Reviewed-by: Peng Fan <peng.fan@nxp.com>
