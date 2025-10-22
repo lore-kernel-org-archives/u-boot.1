@@ -4,67 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF8F5CCD1AB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 12:21:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A052ACCD1AB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 12:23:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70E468323A;
-	Wed, 22 Oct 2025 14:21:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id ECA1E8323A;
+	Wed, 22 Oct 2025 14:23:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VLEG/Ksd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZRkR+Lpa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAFA683303; Wed, 22 Oct 2025 14:21:29 +0200 (CEST)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02E7F82B20
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 14:21:26 +0200 (CEST)
+ id 8EA8B832BC; Wed, 22 Oct 2025 14:23:37 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 17B0782B20
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 14:23:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59MCLPOx1412243;
- Wed, 22 Oct 2025 07:21:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761135685;
- bh=jBZf85gyCahKoJZ06opHQDZfcqekoe9FI8Ymy30WYfk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=VLEG/KsdboJn0nGEoaDP4OYHDzMBxZJ0VSsZR9esUbzkupmdtjGs1r3JMwcFa92vr
- 3ot/GhDAEp45SuwIstX9oNT10cRwm6MhhbsXk5Gsi1aXzffyDdJmP+WGJLvAu9EO2i
- ryYvkcOhALV9TTa6jZ9Z9X+jfYlxY/sp3AcoDh+Q=
-Received: from DLEE208.ent.ti.com (dlee208.ent.ti.com [157.170.170.97])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59MCLPvZ1584459
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 22 Oct 2025 07:21:25 -0500
-Received: from DLEE204.ent.ti.com (157.170.170.84) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Wed, 22 Oct
- 2025 07:21:24 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE204.ent.ti.com
- (157.170.170.84) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Wed, 22 Oct 2025 07:21:24 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59MCLO7K1185521;
- Wed, 22 Oct 2025 07:21:24 -0500
-Date: Wed, 22 Oct 2025 07:21:24 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Anshul Dalal <anshuld@ti.com>
-CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Beleswar Padhi
- <b-padhi@ti.com>, Nishanth Menon <nm@ti.com>,
- Andrew Davis <afd@ti.com>, Vignesh R <vigneshr@ti.com>
-Subject: Re: [PATCH 8/8] doc: add documentation for am6254atl SiP
-Message-ID: <20251022122124.544koxjimyf73gul@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20251022-62sip_support-v1-0-eed08d15e76d@ti.com>
- <20251022-62sip_support-v1-8-eed08d15e76d@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-b4539dddd99so1230821466b.1
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 05:23:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761135814; x=1761740614; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=uBXtJZKm4Qx6U/IGgmGVqb/7nbijCHd8cr28I/iWUNI=;
+ b=ZRkR+Lpa1FGjYkQO0jRsY+goJ8Am5iSLzOYHOa5d+ygwXnY3ZMlR7Cu3Snz4swQbux
+ nejgydH5Er8R5xpdzctNHqReILriGvv4Q9CGu6bv28fpbCX3qM8NV4DmW3v3Xaec2MCM
+ mpjYyf7BD+77by1wd6sp53Uu9e4IzVksBEMZs5OFIxxrzyM4LnwU92lVNsE4UnfA/MvR
+ klBZOoEQkhKf7ZBaZjtdtU4Drcb04AQwiLUgJ35Potb+Agsz7U8KSANMNz4EtepLEZpS
+ XIXp9RbGGXtL0UL3sL3HGKK7hT5a53OWJPMPCbP0e/zQwtJPd74+Ie3O8+4WRh4t3e7Q
+ yCFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761135814; x=1761740614;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=uBXtJZKm4Qx6U/IGgmGVqb/7nbijCHd8cr28I/iWUNI=;
+ b=MJMzjq4XjOiucYr+ErKWEmbNR4u1adjDNNut8K9DJeiE3d2YPn+VMI3oHTpO61/iXW
+ SsYwvklVXmL0gN+eEFGDxDwuKpc1lVVaXKBYs9wzXC/hsPkEc4E6YO37T5EcqbLNLtK1
+ q67HaBtj2I6l8cWJyTxXYZ7V3DlC8hbpVGYKJ5ocgZv90XKjORKKfU5uRnwv7eLtg+BC
+ AWST/Gpu+opGiuxMhcpVbbjsHNjRLDeCKVtEXzRHEs/rl0yvFJ0UQIMhGsmCgKqhwIOL
+ zc+KhRlNpYeliU2cumIM9v+rib22IOXHoL9v4Ta/oVudMXv8co98fJdzifEe+pCiMXEI
+ L6Ew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW+oMalijxMwPJP2NR7CEQF0pjKmc6KpNGi6GrfleWUnAL3Jjlbl3ze5gcP5UAKmQEVIPQ2dTw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSBzrn2F7uC9nX2I78A1kGlL8oZ4PB+v9K4DR/lQyyDV4YzftU
+ ANB91pf0UD9XMja/H6igTD+czg0D0TYUhDBKwHarufrd1TY8Bs3PqewoSJ5rxNu4TeE=
+X-Gm-Gg: ASbGncsN5AEXAtAEz8tClWjBmWz5sYrPeuLP7hQcisK/ri0tJdnbbMC3paBJpUwdjIL
+ snHFXobhgJce6M42YwINqO/emuZ7/al/kIWI2NH2PspYRrauR1TA46zo5AplofGIAawwi7Dgttc
+ CQQ8XhElDUUltCxlSYlZXkZqC6Kl9eR1xxwZlEG8G3aQwYG5jo8pdLNqHCdES5kYPAHCDxkotKk
+ NW1whzgVC20r9ZongfHckPHaQTP7umuLD2zYdWlvdwN9NkGxMvCcjPfn9BJMLX28Gu7CfoNodBs
+ YsHCjz+0Qw4UOq42Jxr0GkGQAbVwYUnHqUS6hBGoZPeJ9aDaSsR6pfrDf12MLsuByLcXjgg330o
+ nnZB4oXDmYWc1x+wc08q1eSHoTIpSrlwtgdd3iqm3cC3MeHDiZzSiyXJPaRRRFGxBzUsMSW09GR
+ MvqLfD7gJ4A8hDRnIgm8eKcs7OtSDI2cFlwH8AUrRGjiEIvzvAhZrK4VY4XGg=
+X-Google-Smtp-Source: AGHT+IGeYjmQptvspw2C6SH1KWKmQ9w1xr1WdB+LnpPhn9+MbNNr8UBUBoV99s8r7IWNASAdZZa5GQ==
+X-Received: by 2002:a17:907:2686:b0:b41:873d:e218 with SMTP id
+ a640c23a62f3a-b64730451abmr2355193166b.14.1761135814485; 
+ Wed, 22 Oct 2025 05:23:34 -0700 (PDT)
+Received: from hades.. ([95.164.180.12]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-b65ebb499dasm1353776066b.73.2025.10.22.05.23.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Oct 2025 05:23:33 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: trini@konsulko.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Subject: [PATCH] makefile: Fix recursive makes
+Date: Wed, 22 Oct 2025 15:23:15 +0300
+Message-ID: <20251022122317.3943103-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20251022-62sip_support-v1-8-eed08d15e76d@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,145 +99,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On October 22, 2025 thus sayeth Anshul Dalal:
-> Adds documentation for the newly added am6254atl EVM board along with
-> build instructions.
-> 
-> The content is largely similar to instructions for AM62x with updated
-> TFA and OPTEE build args to account for the changes to A53 and OPTEE's
-> load address.
-> 
-> Signed-off-by: Anshul Dalal <anshuld@ti.com>
-> ---
->  doc/board/ti/am6254atl_sk.rst | 313 ++++++++++++++++++++++++++++++++++++++++++
->  doc/board/ti/k3.rst           |   1 +
->  2 files changed, 314 insertions(+)
-> 
-> diff --git a/doc/board/ti/am6254atl_sk.rst b/doc/board/ti/am6254atl_sk.rst
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..480c0b07cfa85ebae495593b40c6a34692b15cda
-> --- /dev/null
-> +++ b/doc/board/ti/am6254atl_sk.rst
-> @@ -0,0 +1,313 @@
-> +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-> +.. sectionauthor:: Anshul Dalal <anshuld@ti.com>
-> +
-> +AM6254ATL SIP Platforms
-> +=======================
-> +
-> +Introduction:
-> +-------------
-> +
-> +The AM6254atl SIP (System In Package) provides existing :doc:`am62x_sk` with
-> +512MiB of DDR integrated in a single packages.
-> +
-> +More details can be found in the Technical Reference Manual:
-> +https://www.ti.com/lit/pdf/spruiv7
-> +
-> +Platform information:
-> +
-> +* https://www.ti.com/tool/SK-AM62-SIP
-> +
-> +Boot Flow:
-> +----------
-> +Below is the pictorial representation of boot flow:
-> +
-> +.. image:: img/boot_diagram_am62.svg
-> +  :alt: Boot flow diagram
-> +
-> +- Here TIFS acts as master and provides all the critical services. R5/A53
-> +  requests TIFS to get these services done as shown in the above diagram.
-> +
-> +Sources:
-> +--------
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_boot_sources
-> +    :end-before: .. k3_rst_include_end_boot_sources
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_boot_firmwares
-> +    :end-before: .. k3_rst_include_end_tifsstub
-> +
-> +Build procedure:
-> +----------------
-> +0. Setup the environment variables:
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_common_env_vars_desc
-> +    :end-before: .. k3_rst_include_end_common_env_vars_desc
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_board_env_vars_desc
-> +    :end-before: .. k3_rst_include_end_board_env_vars_desc
-> +
-> +Set the variables corresponding to this platform:
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_common_env_vars_defn
-> +    :end-before: .. k3_rst_include_end_common_env_vars_defn
-> +.. prompt:: bash $
-> +
-> +  export UBOOT_CFG_CORTEXR=am6254atl_evm_r5_defconfig
-> +  export UBOOT_CFG_CORTEXA=am6254atl_evm_a53_defconfig
-> +  export TFA_BOARD=lite
-> +  export TFA_EXTRA_ARGS="PRELOADED_BL33_BASE=0x81880000 BL32_BASE=0x80080000"
-> +  export OPTEE_PLATFORM=k3-am62x
-> +  export OPTEE_EXTRA_ARGS="CFG_TZDRAM_START=0x80080000"
-> +
-> +1. Trusted Firmware-A:
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_tfa
-> +    :end-before: .. k3_rst_include_end_build_steps_tfa
-> +
-> +
-> +2. OP-TEE:
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_optee
-> +    :end-before: .. k3_rst_include_end_build_steps_optee
-> +
-> +3. U-Boot:
-> +
-> +* 3.1 R5:
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-> +
-> +* 3.1.1 Alternative build of R5 for DFU boot:
-> +
-> +As the SPL size can get too big when building with support for booting both
-> +from local storage *and* DFU an extra config fragment should be used to enable
-> +DFU support (and disable storage support)
-> +
-> +.. prompt:: bash $
-> +
-> +  export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} am62x_r5_usbdfu.config"
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-> +
-> +* 3.2 A53:
-> +
-> +.. include::  ../ti/k3.rst
-> +    :start-after: .. k3_rst_include_start_build_steps_uboot
-> +    :end-before: .. k3_rst_include_end_build_steps_uboot
-> +
-> +Target Images
-> +-------------
-> +
-> +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img.  Each SoC
-> +variant (GP, HS-FS, HS-SE) requires a different source for these files.
-> +
-> + - GP
-> +
-> +        * tiboot3-am62x-gp-evm.bin from step 3.1
-> +        * tispl.bin_unsigned, u-boot.img_unsigned from step 3.2
+Since the Kbuild bump to 5.1 and specifically
+commit af1a9935708a ("kbuild: make -r/-R effective in top Makefile for old Make versions")
+the recursion rules have changed.
 
-I doubt we will sell GP silicon in the SiP layout. It's probably best we 
-remove this to avoid any confusion.
+'make O=/output/dir/' as well as './test/py/test.py --bd sandbox --build'
+is working fine but anything that recursively called the makefile was
+failing e.g 'make tests', 'make qcheck' etc, which calls a bash script
+that ends up calling the makefile again.
 
-~Bryan
+The reason is that the internal 'sub_make_done' variable of the makefile was set
+after the first pass and the output dir was never evaluated properly.
+Reset the variable value if we are executing any of these tests.
+
+Fixes: commit af1a9935708a ("kbuild: make -r/-R effective in top Makefile for old Make versions")
+Reported-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ Makefile | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index 2402f9313d8b..8cddee3c5a96 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2666,6 +2666,10 @@ help:
+ 	@echo  'Execute "make" or "make all" to build all targets marked with [*] '
+ 	@echo  'For further info see the ./README file'
+ 
++ifneq ($(filter tests pcheck qcheck tcheck,$(MAKECMDGOALS)),)
++export sub_make_done := 0
++endif
++
+ tests check:
+ 	$(srctree)/test/run
+ 
+-- 
+2.43.0
+
