@@ -4,92 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 192C9CCD1BB
-	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 16:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9344CCD1BB
+	for <u-boot@archiver.kernel.org>; Wed, 22 Oct 2025 16:48:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 794E5835B0;
-	Wed, 22 Oct 2025 18:20:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 09C6E80422;
+	Wed, 22 Oct 2025 18:48:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="L+UTuEBK";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="FCVeHw/D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 231A28357F; Wed, 22 Oct 2025 18:20:13 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 18E1881E13; Wed, 22 Oct 2025 18:48:22 +0200 (CEST)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEB4E80422
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 18:20:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 366018004F
+ for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 18:48:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-394587df7c4so3198169fac.2
- for <u-boot@lists.denx.de>; Wed, 22 Oct 2025 09:20:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761150009; x=1761754809; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9ibj+5N5aDGLiE4Xi92NT9nJYeGXQYW4Sashfy9CBsk=;
- b=L+UTuEBKhVHoss5gufGwA4wZnUTbM2vwNGWwzsJ1NtrkOPmpPYTAVIla/QCP2Xypgn
- D2qnWNK6tA99WI0N/Zdp6kPZB6EbnV/tq8vvtf1iw6uo2/auEUxuYUT+C/YASbbQO3r4
- AUh+clLBqqqwena04pA1ghHvV6dwylLzvQRsA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761150009; x=1761754809;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9ibj+5N5aDGLiE4Xi92NT9nJYeGXQYW4Sashfy9CBsk=;
- b=bMHJ0edQkrHSOeI01Y63tywZuMskT+DxvDFZzScU5GOca6S8InDcS+sArj8L8k/DOt
- kM/6IuWmDEeYHh96VAnNk/6+14Hu54pLkn59IJ/4l30bDDyEe18Sjy70tr/gYiD7ZsB2
- bnfzohKowklV5qrP9lOKprwh7JAcSTcf7mP1Bv/M5oLC3+wLSdiBJ4ralMwXkjXbygnq
- mmkskiJeG/PvYH8BpNfj/gQ4CWR+7kUbX/0EwnL6/GDV/b5yuQDlmxiT3LSJXiI+u6yA
- uuDfXtCTTisrNZT1JAOoi25aIgGxG3qPqLfvS9l4mlXIUYeCEYZFZOyLOUfB3ZkHkjeA
- nNkQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX5mZXKGXhacymOZGhlYUQtpiAsqwtaojrpSGjcWSNUGYZ/nGniIx5+qmjFkgOHaFnlLIg3EDs=@lists.denx.de
-X-Gm-Message-State: AOJu0YyYoHoP976o+XH4OLWm4yWjwdpOCRjQGsP5CM7jGLrFE+YebGB3
- vyeqnyQnFQ6tzbytIAvOFc/83+uAeNMh3xYS1EkowpteAXg9LVfvx1KWWk4kmfcZXLI=
-X-Gm-Gg: ASbGncsSyjg2R9zxPzKTJzzKD+axmMqXe8phJKTIRzHBAYe4Ec3A8MqarCK9t7peHoG
- QDrL2FOgc0Fpadx/JxuULEQeAEMUq+3KKdkx8+9gC8fkVl9LCfkUZtAHYQCfn33KOWvOeQ+wQp5
- IeLfZ0qs2TpDDEWK58S7HFD1/PlSScdbH8vnSLwl7804VKxkVVlPtAtpr7OBB0H3fPVa3UOedoB
- jK/c0oG/czKBjF8YoWepxeMd2LpR9oAnephpfAYh8Wcciko862GxEGKwp9JJG0T4TSXzKc7Xjdc
- lXB/d0CoCUy4+t164lEwUXs6EAzcxHB4hdO81uZft3PIgSns/WombvKcZoYhL5tHor4f9fnmzSU
- wP0zQzrJER+3Igmeu5YS8BhI5HrQvyqc+4/y30XCnnmCgszbHlvcdsjrWaVcG3FZqehAL371xgH
- baf65s5BwsetrmPxmAyz7MEvy2aR1WHcW24X5G56Re1mG8htsHDg==
-X-Google-Smtp-Source: AGHT+IGicrU4MuzFuyJl9zXga5+7UTXunmAyDvIfUJVjxfrzHdYpcOfAAxftnO6uQLbkkoFUm7uxtQ==
-X-Received: by 2002:a05:6871:6684:b0:396:3593:d1b2 with SMTP id
- 586e51a60fabf-3c98cf88a98mr9163302fac.15.1761150009419; 
- Wed, 22 Oct 2025 09:20:09 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-3c9af31c1f3sm4072593fac.15.2025.10.22.09.20.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Oct 2025 09:20:08 -0700 (PDT)
-Date: Wed, 22 Oct 2025 10:20:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
-Cc: Simon Glass <sjg@chromium.org>, Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Hans de Goede <hdegoede@redhat.com>, Mario Six <mario.six@gdsys.cc>,
- Stefano Babic <sbabic@nabladev.com>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Roger Quadros <rogerq@kernel.org>, Bajjuri Praneeth <praneeth@ti.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v4 02/20] board: ti: Exclude cape detection from XPL builds
-Message-ID: <20251022162006.GM6688@bill-the-cat>
-References: <20251022-feature_sysboot_extension_board-v4-0-d24b5ef7b468@bootlin.com>
- <20251022-feature_sysboot_extension_board-v4-2-d24b5ef7b468@bootlin.com>
+ spf=pass smtp.mailfrom=kory.maincent@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 113D6C09FA8;
+ Wed, 22 Oct 2025 16:47:59 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id AD55E606DC;
+ Wed, 22 Oct 2025 16:48:18 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id ACE4D102F243D; 
+ Wed, 22 Oct 2025 18:48:12 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1761151698; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=/upqz1hPWSfn8Ib0BTRe05nC38vKVutwdpJEoAyTFE0=;
+ b=FCVeHw/DArcof5svrcfOW/y+udZZsl1covQmQ/QerD5Iy/5kvXeVgBRMLCL1dhlIrO5Rud
+ iD39tc5vOQt90eDgA7UgpnmhMprWnqn8SauVvEVfJENQ7dt6/A4E+27f4dMj+J9+Co2ysF
+ Ip0wqMYYQxoYUHWZICoJZjPyoDE6Ps97REq4vn2Kew/gSsXBvQApPGtdbvc36F4L4BkYgr
+ vibuFbxCq0R7r3XfcEQ9USs/Sk0tyuZDEFv8vcNTjj68cWKJjuRaClb3IY8mGsum+jqKjn
+ HTHQxBC6ZwKsIwzt3m42MZL0kqTcKJfSt87krzgOg/tkc3ium8g3z0SC2IGNog==
+Date: Wed, 22 Oct 2025 18:48:10 +0200
+From: Kory Maincent <kory.maincent@bootlin.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Bajjuri Praneeth <praneeth@ti.com>,
+ thomas.petazzoni@bootlin.com, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH] test: py: Add pyelftools dependency for test_event_dump
+Message-ID: <20251022184810.2b30ba57@kmaincent-XPS-13-7390>
+In-Reply-To: <20251022161958.GL6688@bill-the-cat>
+References: <20251022161301.893395-1-kory.maincent@bootlin.com>
+ <20251022161958.GL6688@bill-the-cat>
+Organization: bootlin
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yUolFmYp5P9YGTux"
-Content-Disposition: inline
-In-Reply-To: <20251022-feature_sysboot_extension_board-v4-2-d24b5ef7b468@bootlin.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,63 +75,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 22 Oct 2025 10:19:58 -0600
+Tom Rini <trini@konsulko.com> wrote:
 
---yUolFmYp5P9YGTux
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Oct 22, 2025 at 05:20:13PM +0200, Kory Maincent (TI.com) wrote:
-
-> Disable cape detection functionality in XPL (eXtended Program Loader)
-> images to reduce size and complexity in the early boot stage.
-
-If you have to v5, just say "xPL" as it's shorthand for SPL/TPL/VPL. If
-you don't, I'll try and fix it up when applying (and some for other
-parts of the series).
-
-> Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
-> ---
+> On Wed, Oct 22, 2025 at 06:13:00PM +0200, Kory Maincent wrote:
 >=20
-> Changes in v2:
-> - Use PHASE macro instead of XPL check.
-> - Check SUPPORT_EXTENSION_SCAN instead of CONFIG_CMD_EXTENSION
-> ---
->  board/ti/common/Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> > From: "Kory Maincent (TI.com)" <kory.maincent@bootlin.com>
+> >=20
+> > The test_event_dump test requires pyelftools to run.
+> > Add this missing dependency to requirements.txt to ensure the test can =
+run
+> > successfully.
+> >=20
+> > Signed-off-by: Kory Maincent (TI.com) <kory.maincent@bootlin.com>
+> > ---
+> >  test/py/requirements.txt | 1 +
+> >  1 file changed, 1 insertion(+)
+> >=20
+> > diff --git a/test/py/requirements.txt b/test/py/requirements.txt
+> > index 804a427b351..6d7909cb919 100644
+> > --- a/test/py/requirements.txt
+> > +++ b/test/py/requirements.txt
+> > @@ -3,3 +3,4 @@ pycryptodomex=3D=3D3.21.0
+> >  pytest=3D=3D6.2.5
+> >  pytest-xdist=3D=3D2.5.0
+> >  FATtools=3D=3D1.0.42
+> > +pyelftools=3D=3D0.32 =20
 >=20
-> diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-> index caf6b9fa8c1..f58935b4103 100644
-> --- a/board/ti/common/Makefile
-> +++ b/board/ti/common/Makefile
-> @@ -2,6 +2,6 @@
->  # Copyright (C) 2015-2016 Texas Instruments Incorporated - https://www.t=
-i.com/
-> =20
->  obj-${CONFIG_TI_I2C_BOARD_DETECT} +=3D board_detect.o
-> -obj-${CONFIG_CMD_EXTENSION} +=3D cape_detect.o
-> +obj-${CONFIG_$(PHASE_)SUPPORT_EXTENSION_SCAN} +=3D cape_detect.o
->  obj-${CONFIG_OF_LIBFDT} +=3D fdt_ops.o
->  obj-${CONFIG_ARCH_K3} +=3D k3-ddr.o
+> So with commit 859621b47f9e ("python: Recreate test/py and
+> tools/buildman requirements.txt files") I re-created this
+> file and pyelftools was removed. I think what's wrong is that it's not
+> documented that you need tools/binman/requirements.txt installed because
+> test_event_dump uses scripts/event_dump.py and that imports elf from
+> binman and that in turn needs pyelftools.
+=20
+Ok, so it is rather a documentation change needed here.
 
-This is correct because if falcon mode requires cape support too,
-SPL_SUPPORT_EXTENSION_SCAN can be introduced and this will work as
-expected.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
+Regards,
 --=20
-Tom
-
---yUolFmYp5P9YGTux
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPkENQAKCRAr4qD1Cr/k
-Ci9XAP0SkenZeWfETZ2FoVfK3Obj5/xMaOnE5etZERiNQqTGBwD+NRxJLISt8xGR
-4WwhhZX6zghWl7QmdiSk/3Xxbv6vqwk=
-=Op1g
------END PGP SIGNATURE-----
-
---yUolFmYp5P9YGTux--
+K=C3=B6ry Maincent, Bootlin
+Embedded Linux and kernel engineering
+https://bootlin.com
