@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC73DCCD1BE
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 14:27:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9794FCCD1BC
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 14:27:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A34328362A;
-	Thu, 23 Oct 2025 16:26:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E515083677;
+	Thu, 23 Oct 2025 16:26:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fpjhUcCY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZjA/nEyG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E72D83677; Thu, 23 Oct 2025 16:26:53 +0200 (CEST)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id ACAE383677; Thu, 23 Oct 2025 16:26:54 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E66383621
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 16:26:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B092783653
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 16:26:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-4711810948aso6898795e9.2
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 07:26:51 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-475c696ab72so7174235e9.1
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 07:26:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761229610; x=1761834410; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761229612; x=1761834412; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=nji57YXywsAKDsbWp5j9+YWJsKatRExxMLRiouiud48=;
- b=fpjhUcCYvgEql5cX0DHj4OhvyOWHDOBOLo1ENWhtVFK/QYRC+pKBNhbWTn59xy6HRT
- CA8QtfDSVYpdbz5tcZU5zZ5wnvnzp2edYPs/624Lq/a6FAfyrWbkZIf/hBHqb8vs8eFR
- yUnfkXCoTHS/KbnFttz7vB0UDHbpAeP27x7I0fcBjsEDRNWYG3b09DGE35T96cWleDyx
- /3+UpuJM0p2PTNqCQIHszoxzid9lHooraSgKGJuGWGqsQWsUESdJt+lkj25HUszHYxcp
- 8K0DinegVo18Vorpbmk+n8m9XgzocDtPs7K3Sc6sg3ns+P1SZM1PdEw8CQPgY/0POWn4
- EWxA==
+ :reply-to; bh=W4KzH8c10ZW2UPNU9E02xkdjocmBbAt7JNtBKodIfpE=;
+ b=ZjA/nEyGBoh6PJKCZQCErHXKZ/s9sCVSv8n7iP3sEkuzTmXPW3xJd3tX9ODOyetIIR
+ NHAP6bjmAmLtiumhPQNxaSvkOz+ysnP2I+5W/zOe2T6GlgISEC5E2DdF9+IXWc+9sRtP
+ fQ2uFlsy7Wtj6BecYMqGqApJD52lGQkTBmWU0NAgWovCrb0FJSr03Z32uMluuhJdg2MW
+ FqY9lpVFmIRO8iHkddp9KgJSbTZZYbfcnQ5Iz6Cs7/pXBjtPFNi8vePSQf3XE3c++K1p
+ Qo3BgXo7oNXbXfKJuqo8Rgmutlhydr+wN/btob1bQLNHW9HRYpISPERICG0or5VcpHcr
+ EfHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761229610; x=1761834410;
+ d=1e100.net; s=20230601; t=1761229612; x=1761834412;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nji57YXywsAKDsbWp5j9+YWJsKatRExxMLRiouiud48=;
- b=rwFjJl+4/Lt/clEUaDPv5gjKm4MfJRVn8wd0DPnHPjb65DEtbctOZ6AzgZTTDi5/SA
- K83y84N+rCB/Gjy5nXg8Xxv4ljISeyi3EKaEABjuivcPLPnEZcIPUq2Vl1Xg4HORagrm
- fcqXdSR0mJmv8Ti8hN/U86FPmR3rkBo5mZpRYrwCT6BZTgZk3szmHxIfO1RSKavZ1s+j
- C1sAK8VI41Tiurl8YZwlYc9yFS22ndgcAk5f8hACjSw7maOmg8R/9VekDWobaOAkIsAj
- mD8dPeanCI1p8YdndcAAdQ8fkItPH542wGQJw14wwlMcKnbolCCVBGz2x4YQ/QnoZVq9
- bEvA==
-X-Gm-Message-State: AOJu0Yyu0IEcRPQDlK5SNgBrWo7UzM963W+L1K26bxkzVdeqAHaOcJoj
- G2In7sqVkqsK9dMndZg4mhPHqoYVRt4AKWJPofffap9UwxtQg2nVOnoGMALzFeW/lYM=
-X-Gm-Gg: ASbGncu017ggoVEBsie7fGseRam42ae7JuzMknbfdujevag6qygtngQg7SrHWbSatxu
- NGi5on8EtuKFhWvwB6YVAfOZ4bUavtxMaVfhdm7WidGdFpC5fjZyCTk/sIERqRssrGPaN0HhE60
- qxVyYGiOTQYlHowq6ATjPNrHWs0WJjaypPZfyw2rImqWKMLjtnVv5zn8C4iDbHKUxJcqQSob572
- gLKOIji/ZfbfnSLu27S1u1T/uJRr9IjBKE3+K4fP9Y/cv4aLgxGy8heL7UktzKvrvyJ4Hc1hmEm
- Qkl+x1eWrZZAl6tiQTaS50556tlkb4XIEdCAvsvNJGI5s+XGLIq5qBLID9tH9+nry0aqccVPhc4
- xRLvUF+Cx1U/7Fk6kZyervOxGJ6vVuzgLSWG1h7RHDxXcwi1ZdRZS03IKINRBb0fJGkRzwl9UcY
- ocktZ8uNadQcXFBdSjF155xKKsxQ9Py7RrTzaG3Nw4VIjM
-X-Google-Smtp-Source: AGHT+IFCS/F3arEqzMByt31edomOJZ5/MUOy6NXyb/bxjWFElZrms+mReX0oocED8dCoCAhN/y/bgg==
-X-Received: by 2002:a05:600c:3492:b0:46e:33b2:c8da with SMTP id
- 5b1f17b1804b1-4711791cadfmr215812855e9.32.1761229610576; 
- Thu, 23 Oct 2025 07:26:50 -0700 (PDT)
+ bh=W4KzH8c10ZW2UPNU9E02xkdjocmBbAt7JNtBKodIfpE=;
+ b=GGYK/RjvQY7lukDJLFLKjXKI5PnQCTX3h29CzCPmatki4FKet4R43C79KvlJrfWHwo
+ jCMd0lZguceOw6IbWmmUI5tou8aB+joqz8/8XLMLTosLgGtfTe49uExElTDSl2YfVaW4
+ J2DH39nz19QUs/1MAGBjTtxnkZUqTZOezpZ9fp7Ywd8h5g12DPZWosdx9cWRG3Zc+ZjO
+ 00W1nsWEbDMl5NL/ukQN87V/ZIVvrYNfWiT+e3NV+JgSf6nBM05DUXyuxX5RGvQLM5tp
+ xP2OllTVeFra73SvlMTZGi12gEKOA2lZVlF74gqplj8SpQqKYyPLwlvhFa4D2FkW+RPN
+ /wkg==
+X-Gm-Message-State: AOJu0YygYEs+RSIFzynZ9LR8JT/yzyHXFWAJ5KxLDJ9Fg32lg8enY0NH
+ pHdUPxLm2NK3btX/iYXZZcjP2ErfCENTCXM2UfMSmvTd9V4efGtedZUGVKNXEY+livSDC9wDUg4
+ cMf63
+X-Gm-Gg: ASbGncsJ9mRgUW+hbafQDA6SwCSSjGt+IPKmkwc/4g5I0G1uU9p4yDklmnFKaNPNEsN
+ VoWOyFEhLnNomJ/aFe+jLDVBwZ6+kuDo4jZIBdPaQmd55qvM03Iwwcm8+qAIH32F0S9WIFXfny1
+ ZDcVRX6u8ls7U/aRlPozr3g6umwJ2e0PHWz23jdhMQmdMVRL3n7VXym+aoXVPalkWZ56NMPOVto
+ BNN6RK++yvXuK2z+7LHi4mIQpaHIR9cLPU/Touba2Y0TUDqfiGuWcACURMBMSfSizEKMnp96eSw
+ AozrQJJKadbqWSg0K/A8y77ompqK7KPlqFVxK+Myd9JFRJRfU21Rc3v1ZjdeXPhPuQpcRYM0NZS
+ QGrElSMD24QtXiP1fgrJ99z8lNPYnPFxPBaBPK0GAwizwIIGJJqhyMvdPCktmfpU9SmrzjKmPNe
+ kiUisF3/Dlc9ZdF1pBI2lmEW/x3FKzonlez0KrWEshrOJe
+X-Google-Smtp-Source: AGHT+IEvmDbUDX5o2Kz9xbPtF2yneBRbY0nNJHqhfBvxFzkaDK4P5qZk+4zLz/L1Tl65C2wGmANaqQ==
+X-Received: by 2002:a05:600c:34cd:b0:46e:7247:cbc0 with SMTP id
+ 5b1f17b1804b1-471178aabb6mr183075685e9.18.1761229612088; 
+ Thu, 23 Oct 2025 07:26:52 -0700 (PDT)
 Received: from lion.localdomain (p4fc3da2c.dip0.t-ipconnect.de.
  [79.195.218.44]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475cae9f292sm38585445e9.5.2025.10.23.07.26.49
+ 5b1f17b1804b1-475cae9f292sm38585445e9.5.2025.10.23.07.26.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Oct 2025 07:26:49 -0700 (PDT)
+ Thu, 23 Oct 2025 07:26:51 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 23 Oct 2025 16:26:46 +0200
-Subject: [PATCH 1/2] efi_loader: efi_console: support editable input fields
+Date: Thu, 23 Oct 2025 16:26:47 +0200
+Subject: [PATCH 2/2] efi_loader: efi_console: jump to prev/next word with
+ ctrl+arrow
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251023-eficonfig-ux-improvements-v1-1-f5fc93b126ed@linaro.org>
+Message-Id: <20251023-eficonfig-ux-improvements-v1-2-f5fc93b126ed@linaro.org>
 References: <20251023-eficonfig-ux-improvements-v1-0-f5fc93b126ed@linaro.org>
 In-Reply-To: <20251023-eficonfig-ux-improvements-v1-0-f5fc93b126ed@linaro.org>
 To: u-boot@lists.denx.de
@@ -88,13 +90,13 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15-dev-52d38
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3951;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2632;
  i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=9vYDkaU7MpfkEd/U66UZh55gXMAkGf0yYHfa7+o/4sE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoxf1uo6NdvUNL6fr71Szyj2lmdhyCu+vhdSsq+DbNdJa
- ycZ5D/sKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABM5as/wP+ZRScv16Lv6ZzSC
- WuoFjqy0PLCS51rirZ9HUqbuy3UumsDwP6Hvpy9Hx997DxT2JGRy3n77SqJCVOzGnpLlbOe8I3P
- kqgA=
+ bh=9/AuZkA12HZSRh/p01aE6GZgMZZrhORNZN6vVu2BjIE=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoxf1urzPvJXab1ofFxflxoS1LLFfpm3YsXrt9eWhIX7T
+ uyPKufoKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABPZep7hn0r+25qEAJlopvyA
+ 8+Wr3Be3TRAJDNyrurv00K4lbWkKsxj+1zqmbnx8xFRL09dQPbC14rTjdytl/mnNNyrLbrac6X7
+ LDwA=
 X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,128 +115,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When editing eficonfig "optional data" (typically cmdline arguments)
-it's useful to be able to edit the string rather than having to re-type
-the entire thing. Implement support for editing buffers to make this a
-whole lot nicer. Specifically, add support for moving the cursor with
-the arrow keys and End key as well as deleting backwards with the delete
-key.
+Extend the previous improvements to efi_console_get_u16_string() by also
+implementing support for jumping to the previous/next word by holding
+ctrl when pressing left/right arrow.
+
+This unfortunately can't be handled with only the basic text input
+protocol, so for now hackily look at the internal state of the efi
+console to read the modifier keys.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- cmd/eficonfig.c              |  2 ++
- lib/efi_loader/efi_console.c | 52 ++++++++++++++++++++++++++++++++++++--------
- 2 files changed, 45 insertions(+), 9 deletions(-)
+ lib/efi_loader/efi_console.c | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
 
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index 8ac0fb98e02e..d8d946c87ac8 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -973,8 +973,10 @@ static efi_status_t handle_user_input(u16 *buf, int buf_size,
- 	tmp = calloc(1, buf_size * sizeof(u16));
- 	if (!tmp)
- 		return EFI_OUT_OF_RESOURCES;
- 
-+	/* Populate tmp so user can edit existing string */
-+	u16_strcpy(tmp, buf);
- 	ret = efi_console_get_u16_string(cin, tmp, buf_size, NULL, 4, cursor_col);
- 	if (ret == EFI_SUCCESS)
- 		u16_strcpy(buf, tmp);
- 
 diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
-index 953f6831466e..7bfd18233feb 100644
+index 7bfd18233feb..87de38a26569 100644
 --- a/lib/efi_loader/efi_console.c
 +++ b/lib/efi_loader/efi_console.c
-@@ -1383,36 +1383,61 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
- 					efi_console_filter_func filter_func,
- 					int row, int col)
- {
- 	efi_status_t ret;
--	efi_uintn_t len = 0;
-+	efi_uintn_t len;
-+	efi_uintn_t cursor;
-+	efi_uintn_t i;
+@@ -1387,8 +1387,9 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
+ 	efi_uintn_t len;
+ 	efi_uintn_t cursor;
+ 	efi_uintn_t i;
  	struct efi_input_key key;
++	struct efi_key_state key_state;
  
  	printf(ANSI_CURSOR_POSITION
  	       ANSI_CLEAR_LINE_TO_END
  	       ANSI_CURSOR_SHOW, row, col);
- 
- 	efi_cin_empty_buffer();
- 
-+	len = u16_strlen(buf);
-+	cursor = len;
- 	for (;;) {
-+		printf(ANSI_CURSOR_POSITION "%ls"
-+		       ANSI_CLEAR_LINE_TO_END ANSI_CURSOR_POSITION,
-+		       row, col, buf, row, col + (int)cursor);
+@@ -1401,10 +1402,18 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
+ 		printf(ANSI_CURSOR_POSITION "%ls"
+ 		       ANSI_CLEAR_LINE_TO_END ANSI_CURSOR_POSITION,
+ 		       row, col, buf, row, col + (int)cursor);
  		do {
++			/*
++			 * FIXME: we would ideally just use the proper extension protocol but we
++			 * can't easily get a handle to it... Since this is only called
++			 * internally we can be cheeky and access the internal state.
++			 */
  			ret = EFI_CALL(cin->read_key_stroke(cin, &key));
- 			mdelay(10);
+-			mdelay(10);
++			if (ret == EFI_SUCCESS)
++				key_state = next_key.key_state;
++			else
++				mdelay(10);
  		} while (ret == EFI_NOT_READY);
  
  		if (key.unicode_char == u'\b') {
--			if (len > 0)
--				buf[--len] = u'\0';
--
--			printf(ANSI_CURSOR_POSITION
--			       "%ls"
--			       ANSI_CLEAR_LINE_TO_END, row, col, buf);
-+			if (cursor > 0) {
-+				if (cursor == len) {
-+					buf[--cursor] = u'\0';
-+				} else {
-+					for (i = cursor - 1; i < len; i++)
-+						buf[i] = buf[i + 1];
-+					cursor--;
-+				}
-+				len--;
-+			}
-+			continue;
-+		} else if (key.scan_code == 8) { /* delete */
-+			for (i = cursor; i <= len; i++)
-+				buf[i] = buf[i + 1];
-+			len--;
- 			continue;
- 		} else if (key.unicode_char == u'\r') {
- 			buf[len] = u'\0';
- 			return EFI_SUCCESS;
+ 			if (cursor > 0) {
+@@ -1429,11 +1438,17 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
  		} else if (key.unicode_char == 0x3 || key.scan_code == 23) {
  			return EFI_ABORTED;
-+		} else if (key.scan_code == 3) { /* Right arrow */
-+			cursor += (cursor < len) ? 1 : 0;
-+			continue;
-+		} else if (key.scan_code == 4) { /* Left arrow */
-+			cursor -= (cursor > 0) ? 1 : 0;
-+			continue;
-+		} else if (key.scan_code == 6) { /* End */
-+			cursor = len;
-+			continue;
- 		} else if (key.unicode_char < 0x20) {
- 			/* ignore control codes other than Ctrl+C, '\r' and '\b' */
+ 		} else if (key.scan_code == 3) { /* Right arrow */
+ 			cursor += (cursor < len) ? 1 : 0;
++			while (key_state.key_shift_state & EFI_LEFT_CONTROL_PRESSED &&
++			       cursor < len && buf[cursor] != u' ' && buf[cursor] != u'.')
++				cursor++;
  			continue;
- 		} else if (key.scan_code != 0) {
-@@ -1427,9 +1452,18 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
- 
- 		if (len >= (count - 1))
+ 		} else if (key.scan_code == 4) { /* Left arrow */
+ 			cursor -= (cursor > 0) ? 1 : 0;
++			while (key_state.key_shift_state & EFI_LEFT_CONTROL_PRESSED &&
++			       cursor > 0 && buf[cursor - 1] != u' ' && buf[cursor - 1] != u'.')
++				cursor--;
  			continue;
- 
--		buf[len] = key.unicode_char;
-+		/*
-+		 * Insert the character into the middle of the buffer, shift the
-+		 * characters after the cursor along. The check above ensures we
-+		 * will never overflow the buffer.
-+		 * If the cursor is at the end of the string then this will
-+		 * do nothing.
-+		 */
-+		for (i = len + 1; i > cursor; i--)
-+			buf[i] = buf[i - 1];
-+		buf[cursor] = key.unicode_char;
-+		cursor++;
- 		len++;
--		printf(ANSI_CURSOR_POSITION "%ls", row, col, buf);
- 	}
- }
+ 		} else if (key.scan_code == 6) { /* End */
+ 			cursor = len;
+ 			continue;
 
 -- 
 2.51.0
