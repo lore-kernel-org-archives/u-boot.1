@@ -4,95 +4,144 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16604CCD1BC
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 08:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F4BCCD1BC
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 08:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 834978323A;
-	Thu, 23 Oct 2025 10:27:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3C4F58323A;
+	Thu, 23 Oct 2025 10:48:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OoDhYSdi";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="ROepkh74";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4093D83303; Thu, 23 Oct 2025 10:22:00 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A4F78832BC; Thu, 23 Oct 2025 10:48:23 +0200 (CEST)
+Received: from DU2PR03CU002.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED3B58006D
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:21:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E6408006D
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:48:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-63c12ff0c5eso1203538a12.0
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 01:21:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761207717; x=1761812517; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=iBIcpOoI8sLHCJNIBctAZisTgPa/jhhcqD5qVhi0A6k=;
- b=OoDhYSdi4gg9XwaVYB5l1bcPrR6GxGl7dBDmdCO8P7pMYRPHLNOPYqsOzTksrBl3Sy
- 4b6mwDpRRWHEDQ7Nva+6eTKcjZEjVs180ZBIooha7c5dZ8rsZCRwxMCQUMhOT5j9mx/Q
- urVV8PQSmb8PKFLItrvn6XatoAgZ4xh2+1Mk8hO0Wj67A5EaJVhxxlp/DKLVColhMdG/
- DXsOb7mUXvGjcfbzdtAfHdsLZ6htbBqexYWic4E4/OWXH8NmlQvon9j17XA/Cj+kOC0M
- 6wZ8IxieFyvYzNkUYNijSL92K2/lGU6Pz/LG0CAarB9kOT+xliKrZ3lEenNhy7VYAoBp
- 4D+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761207717; x=1761812517;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=iBIcpOoI8sLHCJNIBctAZisTgPa/jhhcqD5qVhi0A6k=;
- b=cbcVFNF/HxiKKJ3XzfbZwvK9eRVcvA5JMyjH6liwQmPraoOFD9rFtslj+ai2VYFeQu
- GM7w+D+lAdWNSZZHWbC9/YW+S5s+INjslbpyIBDskhBWykg2X0PzlUrVJKXL/j2/eZs/
- yoWNX5lliOu9mZqaHCfCvhRkqVwQxVEKuS+cB2ekWZ/5YK7QofFLZwjAlXMIlJMlYBzr
- dacCTSP8iJwqzK93rPUUFwjwgjijC0hQpFDpYrqp+WFMem35XCbPcDHnz/aewdoUuDvJ
- xoFvbnxXiTkgVoQgke/hwjwLt44a6JToN0gztTzTwf/g75X7XjWNBN0JHd1SUfMqeja4
- 3gyQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVj8bSp4SOfZZbxCq/niV21GEL7LaYyCB5Ln1XgktcxMSI7O1+ShXVtiXvbwwMkfc7INVf+apA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx24aXJXAw8HgzgtytriBoKlyjI02K1r99iZITYAzHmRnPNur7y
- OR28lI2wKqByZ4FEf2t3Vr4PS1JTrbhyRFTuWNtW8QE2cOWdK2uVKFrR7uIHrJqboEw=
-X-Gm-Gg: ASbGncsX3BU1oblbXKunhzZQe6oN2lgCnKafW3OUgL/NXm/TL2qjhXs3wjkpGCjVHOY
- ATUa7hhBSpJs5L1hBggcj6v3yfRy8ZDqSf9lGIdrSGRz8UTcuzxh3j7SMx1GPsNP12dzL2B8OwW
- afeO4XvM780vGGNuA1ljctkWYaGTGm+mV0Ze4vW838fDVy/h69e1F+thUHniqlp2x1+V8xi3NLK
- DRR+5MDuoD7GnspL10Ez4PbQ/TrvltOi5QEy2gVXZdeESub3v3wisZHn4ha6c138itGtxpaY9kx
- u+gIrsychPNCS4v6TsUis34dcyNCZRsNCqL5IXHCXEJn7KQXyJhIndWcEFRD2Tw8eedCOqMjtJp
- qOvliY9MVztTJ1osD6TSZNM+HJ3sl9WaDtwoTxD+lwbFjmt/6A50EM+0EC5S2tAlOLQ0Guiog6P
- farTMvvNxT
-X-Google-Smtp-Source: AGHT+IEnlwYO3F1FhXTKDcuJarKTFbjw0U4tRtR+8Ri/Dw+7VTliktWA5xECNcLr2Txb3fEj3fVGYA==
-X-Received: by 2002:a05:6402:d0e:b0:61a:7385:29e3 with SMTP id
- 4fb4d7f45d1cf-63e173ce7f3mr6120975a12.18.1761207717284; 
- Thu, 23 Oct 2025 01:21:57 -0700 (PDT)
-Received: from [10.11.12.107] ([79.115.63.145])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63e3f3349b3sm1087615a12.37.2025.10.23.01.21.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 23 Oct 2025 01:21:56 -0700 (PDT)
-Message-ID: <44de860f-f910-461d-bb95-afb8ca6ee194@linaro.org>
-Date: Thu, 23 Oct 2025 09:21:55 +0100
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lKtyrhFcxFNhmGwGFXaxhebmnOpGEseBe5V0+HKi21WTqrHTAUswdMvDx9tmRM0V77xNnku+tns7d9uy15hUaHQqPLdCnZue759VBqF7eUSYCRXyhHDFDWVofoOSlebVtM/g3V/fD/K1M13BrjAomXe1XrLjaN5faf2XC0g8IgzWW2TeK68UXyk73TFqVE5gZdCVUWnLRT05cyuwnXMbhHH0EkQfhf1IyPpn1NJA4q5jGUp+4wxjKi6hzlv9ab/3bDw7pgUEIGg0q0oUwPHaGP46tDqvNJQFAsdOKiPBJlbtT5LdZoA3ahkEcRVD+aDPrBDQOYwjENv5+/ykvpl//Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nKb6/TJ5MsMKG6Qrgfql6U8DXw36QqrT9yWcC6VXYHg=;
+ b=mSKUJUhB3Irr/WYUpst48ciTg/LujIYUWIOn2qD6QJ0mqgAMSsQyLIYvikk9H8NRwpc2OwcR2i+sO9+EQ2+9YUAalkAddPzq1wbW337oR2ozM4t57XvCDRfynNpAgMWSc1aNOY/plzTuucOd572NBYpv5JF00Nm2agkWYta+QSkLD3UIk1O1DLQDLssbJcq8IE4SH7Sfg0aj/NxkVHtHo8xfVU3F+Hbh5KAZs410iUIgsWq0bB25aX27a2ft7yS5/fRvSLR0wR4Yu79uDklVO+qg9DKBo+ePuWaMEN8aeLGDuNwgtg5ie3Zh0X9obuZxWYR4I1yKrFvQY1PD+sN/ow==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nKb6/TJ5MsMKG6Qrgfql6U8DXw36QqrT9yWcC6VXYHg=;
+ b=ROepkh74tYdhGe/4+kz+Wn+J7qwpcAtKkax569sPsW0/Tb2aaZZ6gkKY9PFtuyIj0jafFAcxbcCDlE8EkpwaFZddzjvfpWpFas8VXxbwNMQ4qssarsJmw0bBpTidZPcHriizjd7Io7mg/PFNSj52Avkn5QFptctYr7GJk5peEUU=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:681::18)
+ by PAWPR10MB7271.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:2e0::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.16; Thu, 23 Oct
+ 2025 08:48:18 +0000
+Received: from AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5]) by AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::c2c9:6363:c7c2:fad5%6]) with mapi id 15.20.9253.011; Thu, 23 Oct 2025
+ 08:48:18 +0000
+From: Rasmus Villemoes <ravi@prevas.dk>
+To: u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ Rasmus Villemoes <ravi@prevas.dk>
+Subject: [PATCH] liebherr: btt: shrink spl_board_init
+Date: Thu, 23 Oct 2025 10:47:59 +0200
+Message-ID: <20251023084759.2113493-1-ravi@prevas.dk>
+X-Mailer: git-send-email 2.51.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: MM0P280CA0048.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::30) To AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:20b:681::18)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mtd: spi-nor: Set address mode in SEMPER flash when SFDP
- is skipped
-To: Takahiro Kuwano <tkuw584924@gmail.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, jagan@amarulasolutions.com, vigneshr@ti.com,
- venkatesh.abbarapu@amd.com, Shinsuke.Okada@infineon.com,
- Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>
-References: <20251020072528.10279-1-Takahiro.Kuwano@infineon.com>
- <7f46828a-94b5-4e63-a18c-ec139484275e@linaro.org>
- <020c68a0-b5ad-4fec-91bb-a75effa15143@gmail.com>
-Content-Language: en-US
-From: Tudor Ambarus <tudor.ambarus@linaro.org>
-In-Reply-To: <020c68a0-b5ad-4fec-91bb-a75effa15143@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Thu, 23 Oct 2025 10:27:17 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS5PR10MB8243:EE_|PAWPR10MB7271:EE_
+X-MS-Office365-Filtering-Correlation-Id: a89049cb-0db0-456d-994f-08de1210e9a9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|52116014|376014|366016|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?C96iDy0avdzp7VlhcoPQb/HQUqMMy/Mj5oDCIuDhbag8VrngKNrXXzM4sEjX?=
+ =?us-ascii?Q?lAIco5dtcWzatdprlz9Qd0VQDnRzjiVeMnvL2PuMEcEcSu5ELWW+T9VlJMkg?=
+ =?us-ascii?Q?L1xjB9BtHkeTsQXpHr8i9yKO4PWmtCN+X1neq3L7wWiWJv8uK85MIULV/ytZ?=
+ =?us-ascii?Q?joNaR5r6F+5wNN0O28otTeQp8pevvkPDlEfsUfCLchBn+nsb7cAo4w4K1GiY?=
+ =?us-ascii?Q?hAJJtp4GYDTqHcK9XpsoSSmAoW5imUauIekNzDDTN1swxCU8Tg6IklUIzh9B?=
+ =?us-ascii?Q?fuIDmyXAqr7Vp+5UTwMMA+wdB7HTeKNQC/G4ByyuMl0Mt/S8SCKlCCbBqasB?=
+ =?us-ascii?Q?KpyRvCDuFTh97VJAAg8lPnrwkaefuO+yImkejhTVYgP8nwpa66v1ptTl2q78?=
+ =?us-ascii?Q?2VT0lfEQzgZ2IunA02voMa41mPXOAiIws92o50Xvq7FMDd/0peKo0opqL0q3?=
+ =?us-ascii?Q?llYWe2qbUR+o1Iv6PdGlA3DqdTPQuViNYLrEDPoyxvSjIYS1X/oedfuC8fDc?=
+ =?us-ascii?Q?X9sYnvoS/ne7V9XgARoLPjC6GPF1QjSAYD3UoWQuiJs7aAjexFNYQhXGSlqE?=
+ =?us-ascii?Q?K9U2nDpxGhiCcvyM2akZ++ZTNxXrCZyXKWn7WRYKmDoZ9P5lceWLxiHuQ9GO?=
+ =?us-ascii?Q?o6atrrLTJdce4u48hCvspwZ3M0x0W4s7mrn0njj5+e4hqmZynsyvFcqbuQix?=
+ =?us-ascii?Q?n5hgsKiap5nvPHkfDu7dhsTyNDOFHAY4mG4SfKgsVpnXIZV1863jx5TjnBHq?=
+ =?us-ascii?Q?VD2ErmBb5kxCqjfCnquagoZEm0G7WJNz49/sFEw65rintSzGvU5YJmSkRJZp?=
+ =?us-ascii?Q?NeQVeWE3zPzwMteZ7EhtKSQvCUzF+i6eDRjHYHu1BtG14QZSPZhxIDyzUcXN?=
+ =?us-ascii?Q?4BAnFN3rKs+7clwYkQyoOFWUkQMgcgfWgNrt/Bg/Tzr3C0Rs7VH0r3OqqI3m?=
+ =?us-ascii?Q?m3emvcajk5I6w+eJJA3vNQRHVxwpOvSJah5KPVFcfEjehPwvoWi7Zmf0ga66?=
+ =?us-ascii?Q?O2nq+5+1HwBD8r/MR54SofRygXICiNMcjd8g+KHba1+nwYCyxUvC2HDop5gO?=
+ =?us-ascii?Q?E4+LbnttvHDQjGBinXeaM7nsyBhmNoQ0ZTmj/myyRML/Ul0e3vy57pi6OPAC?=
+ =?us-ascii?Q?MXf0KIPKuECppXPVcS9D4AArXFONSd/6qKaM9NsYlRk8NXhoGruPgHXb1BTE?=
+ =?us-ascii?Q?2wprUhFHVPUdG+sUhH7X6UVLK1bIHfvvHX2iYBTp4BgpjG3Rt3oq1vM62Yzc?=
+ =?us-ascii?Q?gdrpBjaBzH2U5BnrJaVjm2zhWrr8Jp4Fqsdd0uCcnGS3bij3cGP9CIpJcN4W?=
+ =?us-ascii?Q?emm9TP+VYv3g9Xy0V50sYe6xx5f0hgREIOANA3rIfHj/LaYWh2/fYzU/sp8f?=
+ =?us-ascii?Q?CH0VxibnbbSDeRez9EFLRVoPERrn5d0NRbZRWis5wMsRzppADUyrnN5hsz5h?=
+ =?us-ascii?Q?lbdPflVOel1QUB/VpE+Lt/G+zKkLOO1d4Y3I1vtiMwPY/ubYEzgr2OIKJjfi?=
+ =?us-ascii?Q?Omlt5YPRgre/TMmXp0wpZzYUT0FMIOPhy6T/?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(52116014)(376014)(366016)(38350700014); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Ps7EmND6LM6u+BtE411TigCs0uS7tIIEDOlnFsIZebwRckDS12Euyp/hH8+f?=
+ =?us-ascii?Q?LYPO0GjtrN2ytMsqBpd5HokN5KeQ329dqkGVfL6pDfRgh2losxaMT7uBBe4p?=
+ =?us-ascii?Q?hYb27SnH7EVwVldAkLoMaVX03jnUpNOv041YWRz5Vo9dqaD+crZlLYOUM6J5?=
+ =?us-ascii?Q?OlCe0v6f8KFobYtwuWEGN3zeL8VQvLALe5p9itW9FGKxOCCXY2o2tOCaG6B2?=
+ =?us-ascii?Q?OWCnj47z3Hg/vdt1zx1wEiH2uBcdm++i5UNS9VhSAUK6pmwsQu0Sfia+NbPX?=
+ =?us-ascii?Q?sZmSWyZJTQZuaYJG/lYLzGg5SIXeiD1N0BEmQ68kFGqRdkOgQpILB+x3EduV?=
+ =?us-ascii?Q?jU/gS+mIdTf4yEeu48N33Yn5tIEAEPGccYKfggJmM/ExpXtKg4MRcIee30M7?=
+ =?us-ascii?Q?5GaVZ2rWWiSW8mQEdMJpu3lt9TS4g8k5aWVaQm03xi9stveJ3AQBVecipAjh?=
+ =?us-ascii?Q?kCCfo4XpvmmfNtqwME1LmdB/J1GeLsEr5YazY1ULljDv3TdarM6jAMzUANaw?=
+ =?us-ascii?Q?MqcCneL4WLy1IRc1x253R0tCjyZNFPcSwAlJbn1GN+0Q+M1hXc7HMVt2mcz/?=
+ =?us-ascii?Q?OyC6niCNIV5YiyvFrjUxwMSgyTLPbJsMO1u2oXx8ahlfacC945In93OXhiMK?=
+ =?us-ascii?Q?+vY1r9VjFPONlgOHH8jHkH7FnwtJI2bI20tRCVSPy73Tva3SkBTT+HMwkUxQ?=
+ =?us-ascii?Q?xuSSM6zygMw0FIoBRhqGh0qVpJDoiqXW25r1yUlDHlcqLbjIWhXHFOFaO81w?=
+ =?us-ascii?Q?ZYF2WClxs/yNZFxYRVUP/41h/tMhZ/YuTlb9rcOh/oWbpw7W9Uf4IEYRgl7w?=
+ =?us-ascii?Q?td+2pLuTqedOUevqv68V94a4cv+iBwqve7MzR0AnDULbxCqX9FcLsIJKRFMQ?=
+ =?us-ascii?Q?NJEbQ33S2GWOJEMW+fLD9uF71WOdJzWTKPrRAiO4ha5Nok6jjgoE6/b11o5M?=
+ =?us-ascii?Q?EmMYrKL88yhGZT5QzaiWRw9Qb8aHtTFGUS/JH8Z4mbUhzDGGGhJE3TMA0eIU?=
+ =?us-ascii?Q?EIJ38Vb7/vlhK3k73y6qe9+bq3q8PSSXjknSCoRvUS9wQZEq6Nh6WFbImaAt?=
+ =?us-ascii?Q?HQuWw8ryHU8a6CfjZs7DREJW7WQXpv7BfliU/ptKgWEW5njtN5DSh7h8z9Nw?=
+ =?us-ascii?Q?lzbyTARbugoeiriVT/OMoP+E7O6B2Qkkk8ttfv3L2n+BtG4ORANUETM4Pdg7?=
+ =?us-ascii?Q?Fr8Rw5zObooy9bJH+Mp+SAOYg1sEMpQMPL4JCLCDwh0epJBRTQAm2/lW1neK?=
+ =?us-ascii?Q?yx4h183kvulyZKmdxF2iM4Obxzb+iaAbupL+xLxdqFdLcu/1SFvvcRmR3NX0?=
+ =?us-ascii?Q?d3WSXAD2PDizdeKUuZxd0de806WGTaMtemb5wTJ1muBiovhOpSVL0nA8OlQT?=
+ =?us-ascii?Q?rKA8l/zxZO5mL1NVW4MmB9gA0iRxEGyhwdseNETO1dgmAoH3NLzopnaX4yu/?=
+ =?us-ascii?Q?Ejl/pqRUKEs2q5iV8FcHJ+QH8RBV2cprytDvxt+TBFVE1lM2tYforZsvNnft?=
+ =?us-ascii?Q?+nA6evxpcwB0z9Vhus6SusplqyUGUUvl/T+hgIfeiXdyyyF1u2H2TU+yTPCt?=
+ =?us-ascii?Q?biITghQuzZSO1THjcE3++rQOzGHxv7DB0oRCdX97RIHLroiTYjSknviacz8v?=
+ =?us-ascii?Q?nQ=3D=3D?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: a89049cb-0db0-456d-994f-08de1210e9a9
+X-MS-Exchange-CrossTenant-AuthSource: AS5PR10MB8243.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2025 08:48:18.4280 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 77EJIz13dx1OQp9v9ZCriPuva5dgIZyFp3/Bc4WOVZuBtLlYxn7rW5cmPzF4Hvm+MsPk4FvPyFw3421KVe9/1yWR0eGmRdBznJwBDXsJ+Lw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR10MB7271
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,79 +158,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This board is very tight on space in SPL; in fact with my compiler it
+ends up just exactly on the wrong side:
 
+spl/u-boot-spl.bin exceeds file size limit:
+  limit:  0xa000 bytes
+  actual: 0xa014 bytes
+  excess: 0x14 bytes
 
-On 10/21/25 8:41 AM, Takahiro Kuwano wrote:
-> Hi Tudor,
+The repeated "lookup and request" pattern in spl_board_init() suggests
+a low-hanging fruit for reducing the code size. This reduces the
+object size of spl/board/liebherr/btt/btt.o by 300 bytes.
 
-Hi!
+I've left the lack of error handling as-is; there isn't really
+anything to do if it fails, so I suppose the printfs are the best that
+can be done.
 
-> 
-> On 10/21/2025 3:36 AM, Tudor Ambarus wrote:
->> Hi, Takahiro,
->>
->> On 10/20/25 8:25 AM, tkuw584924@gmail.com wrote:
->>> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->>>
->>> nor->addr_mode_nbytes is set during SFDP parse. Infineon SEMPER flash
->>> family relies on that parameter to read and write registers. To support
->>> use cases of skipping SFDP, set address mode in device specific setup()
->>> function.
->>>
->>> Tested-by: Hiroyuki Saito <Hiroyuki.Saito2@infineon.com>
->>> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->>> ---
->>>  drivers/mtd/spi/spi-nor-core.c | 10 ++++++++++
->>>  1 file changed, 10 insertions(+)
->>>
->>> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
->>> index 6f352c5c0e2..e382a518a34 100644
->>> --- a/drivers/mtd/spi/spi-nor-core.c
->>> +++ b/drivers/mtd/spi/spi-nor-core.c
->>> @@ -3794,6 +3794,16 @@ static int s25_s28_setup(struct spi_nor *nor, const struct flash_info *info,
->>>  #ifdef CONFIG_SPI_FLASH_BAR
->>>  	return -ENOTSUPP; /* Bank Address Register is not supported */
->>>  #endif
->>> +
->>> +	/* Setup address mode here, in case SFDP is skipped. */
->>
->> Under which conditions is the SFDP skipped?
->>
-> In u-boot, SFDP is config option and some defconfig do not use it.
+Signed-off-by: Rasmus Villemoes <ravi@prevas.dk>
+---
+Compile-tested only. Stumbled on this while investigating why another patch failed CI.
 
-I'd argue this is a good idea. Maybe for the tiny duplicate version
-of the driver could be, but for the main driver, it's not.
+ board/liebherr/btt/btt.c | 60 +++++++++++++---------------------------
+ 1 file changed, 19 insertions(+), 41 deletions(-)
 
-I'd also argue the tiny driver idea was ideal to start with. Instead
-we should have tried to modularize SPI NOR, by vendors, static init
-and SFDP.
+diff --git a/board/liebherr/btt/btt.c b/board/liebherr/btt/btt.c
+index e05e333ac7e..c4b6c37e495 100644
+--- a/board/liebherr/btt/btt.c
++++ b/board/liebherr/btt/btt.c
+@@ -110,10 +110,23 @@ static int spi_load_boot_info(void)
+ #define BTT_MONITORING_DEVICE_TIMEOUT 100
+ static int rescue_val;
+ 
++static void lookup_and_request(struct gpio_desc *desc, const char *name, const char *label)
++{
++	int ret;
++
++	ret = dm_gpio_lookup_name(name, desc);
++	if (ret)
++		printf("Cannot get %s\n", name);
++
++	ret = dm_gpio_request(desc, label);
++	if (ret)
++		printf("Cannot request %s\n", name);
++}
++
+ void spl_board_init(void)
+ {
+ 	struct gpio_desc phy_rst, boot, rescue, wifi_en, bt_en;
+-	int ret, i;
++	int i;
+ 
+ 	/*
+ 	 * On the new HW version of BTTC/3 (with LAN8720ai PHY) the !RST pin
+@@ -125,14 +138,7 @@ void spl_board_init(void)
+ 	 * to set the RESET pin to HIGH after 100us, so there was no need to
+ 	 * set it explicitly.
+ 	 */
+-	ret = dm_gpio_lookup_name("GPIO4_12", &phy_rst);
+-	if (ret)
+-		printf("Cannot get GPIO4_12\n");
+-
+-	ret = dm_gpio_request(&phy_rst, "phy-rst");
+-	if (ret)
+-		printf("Cannot request GPIO4_12\n");
+-
++	lookup_and_request(&phy_rst, "GPIO4_12", "phy-rst");
+ 	dm_gpio_set_dir_flags(&phy_rst, GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+ 
+ 	/*
+@@ -140,14 +146,7 @@ void spl_board_init(void)
+ 	 * it is directly connected to Jody module without any externa pull up
+ 	 * down register.
+ 	 */
+-	ret = dm_gpio_lookup_name("GPIO0_27", &wifi_en);
+-	if (ret)
+-		printf("Cannot get GPIO0_27\n");
+-
+-	ret = dm_gpio_request(&wifi_en, "wifi-en");
+-	if (ret)
+-		printf("Cannot request GPIO0_27\n");
+-
++	lookup_and_request(&wifi_en, "GPIO0_27", "wifi-en");
+ 	dm_gpio_set_dir_flags(&wifi_en, GPIOD_IS_OUT | GPIOD_ACTIVE_LOW |
+ 			      GPIOD_IS_OUT_ACTIVE);
+ 
+@@ -157,36 +156,15 @@ void spl_board_init(void)
+ 	 * time this pin is set to HIGH). However, the manual recommends setting
+ 	 * it high from LOW state.
+ 	 */
+-	ret = dm_gpio_lookup_name("GPIO3_27", &bt_en);
+-	if (ret)
+-		printf("Cannot get GPIO3_27\n");
+-
+-	ret = dm_gpio_request(&bt_en, "bt-en");
+-	if (ret)
+-		printf("Cannot request GPIO3_27\n");
+-
++	lookup_and_request(&bt_en, "GPIO3_27", "bt-en");
+ 	dm_gpio_set_dir_flags(&bt_en, GPIOD_IS_OUT | GPIOD_ACTIVE_LOW |
+ 			      GPIOD_IS_OUT_ACTIVE);
+ 
+ 	/* 'boot' and 'rescue' pins */
+-	ret = dm_gpio_lookup_name("GPIO4_9", &boot);
+-	if (ret)
+-		printf("Cannot get GPIO4_9\n");
+-
+-	ret = dm_gpio_request(&boot, "boot");
+-	if (ret)
+-		printf("Cannot request GPIO4_9\n");
+-
++	lookup_and_request(&boot, "GPIO4_9", "boot");
+ 	dm_gpio_set_dir_flags(&boot, GPIOD_IS_IN);
+ 
+-	ret = dm_gpio_lookup_name("GPIO4_11", &rescue);
+-	if (ret)
+-		printf("Cannot get GPIO4_11\n");
+-
+-	ret = dm_gpio_request(&rescue, "rescue");
+-	if (ret)
+-		printf("Cannot request GPIO4_11\n");
+-
++	lookup_and_request(&rescue, "GPIO4_11", "rescue");
+ 	dm_gpio_set_dir_flags(&rescue, GPIOD_IS_IN);
+ 
+ 	/* Wait for ready signal from system "monitoring" device */
+-- 
+2.51.0
 
-> 
->>> +	if (!nor->addr_mode_nbytes) {
->>> +		ret = set_4byte(nor, nor->info, 1);
->>
->> why do you need this call? Isn't enough the one done in spi_nor_init()?
->>
-> The addr_mode_nbytes is refereed in spansion_read_any_reg() during
-> setup().
-
-Right. So you set it twice. Can we set it just once?
-
-I guess you can feel my disapproval about where the code is leading to if
-we continue like this: unmaintainable code.
-
-Cheers,
-ta
-
-> 
->> Cheers,
->> ta> +		if (ret)
->>> +			return ret;
->>> +
->>> +		nor->addr_mode_nbytes = 4;
->>> +	}
->>> +
->>>  	/*
->>>  	 * S25FS256T has multiple sector architecture options, with selection of
->>>  	 * count and location of 128KB and 64KB sectors. This driver supports
-> 
