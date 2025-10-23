@@ -4,101 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9794FCCD1BC
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 14:27:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C41CCD193
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 17:08:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E515083677;
-	Thu, 23 Oct 2025 16:26:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E5CBE8006D;
+	Thu, 23 Oct 2025 19:08:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZjA/nEyG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wwnh8YSP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACAE383677; Thu, 23 Oct 2025 16:26:54 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id DB77E82E34; Thu, 23 Oct 2025 19:08:05 +0200 (CEST)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B092783653
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 16:26:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D40F68003E
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 19:08:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-475c696ab72so7174235e9.1
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 07:26:52 -0700 (PDT)
+ spf=pass smtp.mailfrom=ansuelsmth@gmail.com
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-3f0ae439b56so551402f8f.3
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:08:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761229612; x=1761834412; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=W4KzH8c10ZW2UPNU9E02xkdjocmBbAt7JNtBKodIfpE=;
- b=ZjA/nEyGBoh6PJKCZQCErHXKZ/s9sCVSv8n7iP3sEkuzTmXPW3xJd3tX9ODOyetIIR
- NHAP6bjmAmLtiumhPQNxaSvkOz+ysnP2I+5W/zOe2T6GlgISEC5E2DdF9+IXWc+9sRtP
- fQ2uFlsy7Wtj6BecYMqGqApJD52lGQkTBmWU0NAgWovCrb0FJSr03Z32uMluuhJdg2MW
- FqY9lpVFmIRO8iHkddp9KgJSbTZZYbfcnQ5Iz6Cs7/pXBjtPFNi8vePSQf3XE3c++K1p
- Qo3BgXo7oNXbXfKJuqo8Rgmutlhydr+wN/btob1bQLNHW9HRYpISPERICG0or5VcpHcr
- EfHQ==
+ d=gmail.com; s=20230601; t=1761239283; x=1761844083; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cf2hW+hBunxO90XA6giJyVRy7WEm8JHwfCcRBNE/4n4=;
+ b=Wwnh8YSPeUoWro4E5vC5a3h4MMmhzU4wFdsowAy6BPuKQxibw7X8WKNRDj8ohCDVrF
+ XTMYJZu73VWeJzJRqiKnRNBaSU2ApHRbKyXNivDjyHm9h/MOzyhoKNd2Qnq2ESL+yB2B
+ 9iYsMB5aOezXZtAtzGqINTRHeXbqpPiuQCt9WYsSwBXLq+33Bv14CQVytWZ7Ye05mWIn
+ /UAG4JMth7SvmxcWQVkbm9eivS9k/bDUb49/WMpMTgWTdZDqpHLatpqnur7pdkeFioDP
+ LTm03Qstcn6ZpnHj1R+//KEFfPUWWpwypEbk8ebCiAXt1cGxLExyUqgU55/xCHFn/zKZ
+ E/+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761229612; x=1761834412;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=W4KzH8c10ZW2UPNU9E02xkdjocmBbAt7JNtBKodIfpE=;
- b=GGYK/RjvQY7lukDJLFLKjXKI5PnQCTX3h29CzCPmatki4FKet4R43C79KvlJrfWHwo
- jCMd0lZguceOw6IbWmmUI5tou8aB+joqz8/8XLMLTosLgGtfTe49uExElTDSl2YfVaW4
- J2DH39nz19QUs/1MAGBjTtxnkZUqTZOezpZ9fp7Ywd8h5g12DPZWosdx9cWRG3Zc+ZjO
- 00W1nsWEbDMl5NL/ukQN87V/ZIVvrYNfWiT+e3NV+JgSf6nBM05DUXyuxX5RGvQLM5tp
- xP2OllTVeFra73SvlMTZGi12gEKOA2lZVlF74gqplj8SpQqKYyPLwlvhFa4D2FkW+RPN
- /wkg==
-X-Gm-Message-State: AOJu0YygYEs+RSIFzynZ9LR8JT/yzyHXFWAJ5KxLDJ9Fg32lg8enY0NH
- pHdUPxLm2NK3btX/iYXZZcjP2ErfCENTCXM2UfMSmvTd9V4efGtedZUGVKNXEY+livSDC9wDUg4
- cMf63
-X-Gm-Gg: ASbGncsJ9mRgUW+hbafQDA6SwCSSjGt+IPKmkwc/4g5I0G1uU9p4yDklmnFKaNPNEsN
- VoWOyFEhLnNomJ/aFe+jLDVBwZ6+kuDo4jZIBdPaQmd55qvM03Iwwcm8+qAIH32F0S9WIFXfny1
- ZDcVRX6u8ls7U/aRlPozr3g6umwJ2e0PHWz23jdhMQmdMVRL3n7VXym+aoXVPalkWZ56NMPOVto
- BNN6RK++yvXuK2z+7LHi4mIQpaHIR9cLPU/Touba2Y0TUDqfiGuWcACURMBMSfSizEKMnp96eSw
- AozrQJJKadbqWSg0K/A8y77ompqK7KPlqFVxK+Myd9JFRJRfU21Rc3v1ZjdeXPhPuQpcRYM0NZS
- QGrElSMD24QtXiP1fgrJ99z8lNPYnPFxPBaBPK0GAwizwIIGJJqhyMvdPCktmfpU9SmrzjKmPNe
- kiUisF3/Dlc9ZdF1pBI2lmEW/x3FKzonlez0KrWEshrOJe
-X-Google-Smtp-Source: AGHT+IEvmDbUDX5o2Kz9xbPtF2yneBRbY0nNJHqhfBvxFzkaDK4P5qZk+4zLz/L1Tl65C2wGmANaqQ==
-X-Received: by 2002:a05:600c:34cd:b0:46e:7247:cbc0 with SMTP id
- 5b1f17b1804b1-471178aabb6mr183075685e9.18.1761229612088; 
- Thu, 23 Oct 2025 07:26:52 -0700 (PDT)
-Received: from lion.localdomain (p4fc3da2c.dip0.t-ipconnect.de.
- [79.195.218.44]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475cae9f292sm38585445e9.5.2025.10.23.07.26.50
+ d=1e100.net; s=20230601; t=1761239283; x=1761844083;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cf2hW+hBunxO90XA6giJyVRy7WEm8JHwfCcRBNE/4n4=;
+ b=npTDYhgVT89awcqeHO8zFfzTwDvoKb0IzPGLf6FHeIpDNR0jghMB2W5Dmt1y/yjZa1
+ H7QxHNqnTxT2qaqgvMeGmOWRjNttVn7GHatlEBGsIiDRuBtn74nyhAh8hnSKnNarE7gG
+ gZQDDo6L9DloAPum8uX2LXwsbRR2XKAa7sQPz/IB8EKenHetHJxFa2zmhw24uGZVqJqK
+ CiuefRZhaLlh597F+iOxizq7YOl3o/7WhyvyFzVm+q9hQuwTVVmBOoHW8egdugnJUwiU
+ YU365HK9rWq+dn90z0vpuSEhiMwhwExO6n4hAmyk1XCet6OrtVdewE2RtWow/ktVRGW6
+ KycA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaCU3QYBKeacc7D/PxWzVgvaH7X5lh2o44iKyGnh4vRC4137YegHRXuq+NtzaVF+iXoyUP4zI=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy/25Vre3aSknn4YjUXR5wplkxadj8RDGioLmE84oXE7EanoEHB
+ FbpIQ2KlGAOIUKFbRUo28qztw1/FpF3dUloxCGMQeuh31PAQVVVvOhBd
+X-Gm-Gg: ASbGncvgzPqg20JLDty8uAjcYuhgQ3J108NyMrbsQTgCHR2dX5+d+nZqYKX1k8WIWZQ
+ Cf5n13pGf0zA25+6CcNuXYBsKNuCjPmfRNA7lpHnUokue9KXl2mSatJ6DYP28ZNyNXudO/orLU0
+ qX/W5Dy5wRIXd65U/TqjK1rNwuvu+zIUMBlDOALEp5zeZwaR4oBhT3eNXwbnmclYPRWF/UMRC3c
+ EO1uh+8AqnizY0XzsJicm0/ezNyPjGh6LvqhCOEIjKgZRst64x7JuWljDSYiiV+D5kIivrcIFOV
+ zzrYUXeGrxzk6TA9Lc2bC0nJl3iz/+JjD64su+j/YigrqHhXbtkvEQRFlZcYvXBgkS4LlkUa8Ma
+ RUqggvLEVCICAvRAzKVH0b+lyRNGLqoXnaamh65nlvFp+o3tE5ekDnv6qpl5Nuu6VaBXCbT6LgR
+ XKYo+EhoNglEM0o/eKJ9YPEesj7T9fRmMXE4OKt9HB
+X-Google-Smtp-Source: AGHT+IFAnkJ8HkWeYKjvwNNjTA7GP5xQ+xJdxoPhHyG/meviNKNvO1R0DO2hmnTXCMvtZ0eYucTNSA==
+X-Received: by 2002:a5d:5d0a:0:b0:3e7:6104:35a8 with SMTP id
+ ffacd0b85a97d-42704d98e81mr17268657f8f.35.1761239283058; 
+ Thu, 23 Oct 2025 10:08:03 -0700 (PDT)
+Received: from Ansuel-XPS24 (93-34-90-37.ip49.fastwebnet.it. [93.34.90.37])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-429897f52aasm4824465f8f.12.2025.10.23.10.08.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Oct 2025 07:26:51 -0700 (PDT)
-From: Casey Connolly <casey.connolly@linaro.org>
-Date: Thu, 23 Oct 2025 16:26:47 +0200
-Subject: [PATCH 2/2] efi_loader: efi_console: jump to prev/next word with
- ctrl+arrow
+ Thu, 23 Oct 2025 10:08:02 -0700 (PDT)
+From: Christian Marangi <ansuelsmth@gmail.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>
+Subject: [PATCH v3] net: airoha: bind MDIO controller on Ethernet load
+Date: Thu, 23 Oct 2025 19:07:45 +0200
+Message-ID: <20251023170753.21628-1-ansuelsmth@gmail.com>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251023-eficonfig-ux-improvements-v1-2-f5fc93b126ed@linaro.org>
-References: <20251023-eficonfig-ux-improvements-v1-0-f5fc93b126ed@linaro.org>
-In-Reply-To: <20251023-eficonfig-ux-improvements-v1-0-f5fc93b126ed@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Weijie Gao <weijie.gao@mediatek.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15-dev-52d38
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2632;
- i=casey.connolly@linaro.org; h=from:subject:message-id;
- bh=9/AuZkA12HZSRh/p01aE6GZgMZZrhORNZN6vVu2BjIE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoxf1urzPvJXab1ofFxflxoS1LLFfpm3YsXrt9eWhIX7T
- uyPKufoKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABPZep7hn0r+25qEAJlopvyA
- 8+Wr3Be3TRAJDNyrurv00K4lbWkKsxj+1zqmbnx8xFRL09dQPbC14rTjdytl/mnNNyrLbrac6X7
- LDwA=
-X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,72 +99,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Extend the previous improvements to efi_console_get_u16_string() by also
-implementing support for jumping to the previous/next word by holding
-ctrl when pressing left/right arrow.
+Bind MDIO controller on Ethernet Controller load. The Airoha AN7581 SoC
+have an integrated Switch based on MT7531 (or more saying MT7988).
 
-This unfortunately can't be handled with only the basic text input
-protocol, so for now hackily look at the internal state of the efi
-console to read the modifier keys.
+Attach it to the mdio node in the switch node to support scanning for
+MDIO devices on the BUS with DM API.
 
-Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 ---
- lib/efi_loader/efi_console.c | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+ drivers/net/Kconfig      |  1 +
+ drivers/net/airoha_eth.c | 32 ++++++++++++++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
 
-diff --git a/lib/efi_loader/efi_console.c b/lib/efi_loader/efi_console.c
-index 7bfd18233feb..87de38a26569 100644
---- a/lib/efi_loader/efi_console.c
-+++ b/lib/efi_loader/efi_console.c
-@@ -1387,8 +1387,9 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
- 	efi_uintn_t len;
- 	efi_uintn_t cursor;
- 	efi_uintn_t i;
- 	struct efi_input_key key;
-+	struct efi_key_state key_state;
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index cee4a3fc9bd..ce7c7e6297e 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -126,6 +126,7 @@ config AIROHA_ETH
+ 	depends on ARCH_AIROHA
+ 	select PHYLIB
+ 	select DM_RESET
++	select MDIO_MT7531
+ 	help
+ 	  This Driver support Airoha Ethernet QDMA Driver
+ 	  Say Y to enable support for the Airoha Ethernet QDMA.
+diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
+index 6588eb3a806..d62c56e2563 100644
+--- a/drivers/net/airoha_eth.c
++++ b/drivers/net/airoha_eth.c
+@@ -10,6 +10,7 @@
  
- 	printf(ANSI_CURSOR_POSITION
- 	       ANSI_CLEAR_LINE_TO_END
- 	       ANSI_CURSOR_SHOW, row, col);
-@@ -1401,10 +1402,18 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
- 		printf(ANSI_CURSOR_POSITION "%ls"
- 		       ANSI_CLEAR_LINE_TO_END ANSI_CURSOR_POSITION,
- 		       row, col, buf, row, col + (int)cursor);
- 		do {
-+			/*
-+			 * FIXME: we would ideally just use the proper extension protocol but we
-+			 * can't easily get a handle to it... Since this is only called
-+			 * internally we can be cheeky and access the internal state.
-+			 */
- 			ret = EFI_CALL(cin->read_key_stroke(cin, &key));
--			mdelay(10);
-+			if (ret == EFI_SUCCESS)
-+				key_state = next_key.key_state;
-+			else
-+				mdelay(10);
- 		} while (ret == EFI_NOT_READY);
+ #include <dm.h>
+ #include <dm/devres.h>
++#include <dm/lists.h>
+ #include <mapmem.h>
+ #include <net.h>
+ #include <regmap.h>
+@@ -971,6 +972,36 @@ static int arht_eth_write_hwaddr(struct udevice *dev)
+ 	return 0;
+ }
  
- 		if (key.unicode_char == u'\b') {
- 			if (cursor > 0) {
-@@ -1429,11 +1438,17 @@ efi_status_t efi_console_get_u16_string(struct efi_simple_text_input_protocol *c
- 		} else if (key.unicode_char == 0x3 || key.scan_code == 23) {
- 			return EFI_ABORTED;
- 		} else if (key.scan_code == 3) { /* Right arrow */
- 			cursor += (cursor < len) ? 1 : 0;
-+			while (key_state.key_shift_state & EFI_LEFT_CONTROL_PRESSED &&
-+			       cursor < len && buf[cursor] != u' ' && buf[cursor] != u'.')
-+				cursor++;
- 			continue;
- 		} else if (key.scan_code == 4) { /* Left arrow */
- 			cursor -= (cursor > 0) ? 1 : 0;
-+			while (key_state.key_shift_state & EFI_LEFT_CONTROL_PRESSED &&
-+			       cursor > 0 && buf[cursor - 1] != u' ' && buf[cursor - 1] != u'.')
-+				cursor--;
- 			continue;
- 		} else if (key.scan_code == 6) { /* End */
- 			cursor = len;
- 			continue;
-
++static int airoha_eth_bind(struct udevice *dev)
++{
++	ofnode switch_node, mdio_node;
++	struct udevice *mdio_dev;
++	int ret = 0;
++
++	if (!CONFIG_IS_ENABLED(MDIO_MT7531))
++		return 0;
++
++	switch_node = ofnode_by_compatible(ofnode_null(),
++					   "airoha,en7581-switch");
++	if (!ofnode_valid(switch_node)) {
++		debug("Warning: missing switch node\n");
++		return 0;
++	}
++
++	mdio_node = ofnode_find_subnode(switch_node, "mdio");
++	if (!ofnode_valid(mdio_node)) {
++		debug("Warning: missing mdio node\n");
++		return 0;
++	}
++
++	ret = device_bind_driver_to_node(dev, "mt7531-mdio", "mdio",
++					 mdio_node, &mdio_dev);
++	if (ret)
++		debug("Warning: failed to bind mdio controller\n");
++
++	return 0;
++}
++
+ static const struct udevice_id airoha_eth_ids[] = {
+ 	{ .compatible = "airoha,en7581-eth" },
+ 	{ }
+@@ -990,6 +1021,7 @@ U_BOOT_DRIVER(airoha_eth) = {
+ 	.id = UCLASS_ETH,
+ 	.of_match = airoha_eth_ids,
+ 	.probe = airoha_eth_probe,
++	.bind = airoha_eth_bind,
+ 	.ops = &airoha_eth_ops,
+ 	.priv_auto = sizeof(struct airoha_eth),
+ 	.plat_auto = sizeof(struct eth_pdata),
 -- 
 2.51.0
 
