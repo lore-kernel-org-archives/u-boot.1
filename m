@@ -4,148 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB41CCD1BE
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 12:46:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3AE3CCD1BE
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 13:35:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31087835B3;
-	Thu, 23 Oct 2025 14:45:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 3E9B68006D;
+	Thu, 23 Oct 2025 15:35:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="JZTQUAZv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dwlvLn5/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3F7E835B0; Thu, 23 Oct 2025 14:08:51 +0200 (CEST)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9126780422; Thu, 23 Oct 2025 15:35:07 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 622A38323A
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 14:08:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DFFE8003E
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 15:35:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xDQm+ZOSlx4jU4+3/Lw0MGjfFrYimifeQcl08HZR3VL7i1Ro9doHA+jhCUmoyj6Es5QQAAKRMMOjv/r3kycDAWho0/+2w2qesVQvnoreN+9KVuVfdCAyeI3chXVWxuU3dZCFNq7RuLZs1W9zdSuMUKYR/UuZc9nf0ojakICeDOljbnPCSglnf6qW2a2bjG/Cy7vugg+6kx5/RKkq/Po22295tQH0nWdQQ1T13bqFd5STQBIh30Xw/UUKgEgmgASUtvl27ILIk0SYMBTG9F7JBeJurZowwrjB1Z6a/GqGCy9Jg+r7DV9KGDTA8ypuf1K2+b5imrzHJxkDAGVFa0nFmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rG32xclejwA3cLAb9KC47HdLcrIdK67xR9SOIX6yoEY=;
- b=mpBX3HJHnSzhtcVdWaI/WdZnaelbZbzH/6CX+YzQAX8/X4B7Hm7Ue4bLpIm20I8L+P3xiHy/uAzIGlKsbTcS3iA6+JFfIwDCnmzL6GydJxAp+Skz8+jrth4bCLbLaMpyQbK1dhC40W5onOQv+ku//jG5lxlAMApgBx5mV76WE45vtWjomgzs57VKrS6eGzuvKI6s/pqZNPyp5tgOuzg35Rul9g1ogBFrHzHFCwxZaH26fSDdpgKSDh6Klw3DvzTBv+TFJm14iK5l4vUM84ESNU3x9BDKLYGnkAiAZYim1F41A13YlCqT6x1Qjx7kzC8nN3IDbaa2cPjzXQaWcNJyZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rG32xclejwA3cLAb9KC47HdLcrIdK67xR9SOIX6yoEY=;
- b=JZTQUAZveSmX54lxnpsLVyhS+AxIwcZy6p6bZi4keUsySNTwCRoObmUbi4XFxSYGgiBxu9CGIj6V2go2r2Et1N0XuZGiuEEzAzFJhdt+NFK3moHJ3bm5RCm6NHet74veCJo5o2d7cEv6xVRq4JOd6JM0uO+bQJU2yP69AsDuYhroj+F50St1Lb/6PXjylO2bvIit2c6KujdW3z8NvFYdWiNjtYUKA/f9RfYKc5x6MY1DOwRXRy7fGlZxbpPSLWNWUc96luhvWRJG1M2MYvZPaH9YL+4lRO8kUj3h9tI+Wqnf5ARiWPw8HREPsq5er39z3+lSmyKJO2YBHMFbxMX3Ug==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AM9PR04MB8485.eurprd04.prod.outlook.com (2603:10a6:20b:418::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Thu, 23 Oct
- 2025 12:08:47 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9253.011; Thu, 23 Oct 2025
- 12:08:45 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: jh80.chung@samsung.com,
-	kauschluss@disroot.org
-Cc: u-boot@lists.denx.de,
-	Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH] mmc: exynos_dw_mmc: guard execute_tuning
-Date: Thu, 23 Oct 2025 21:20:53 +0800
-Message-Id: <20251023132053.25862-1-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.35.3
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SGAP274CA0022.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:b6::34)
- To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-427091cd4fdso531032f8f.1
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 06:35:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761226501; x=1761831301; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=StDWmdqyglAEym66hZx4U8xsvx0skEWhJwmg5Tqa1HE=;
+ b=dwlvLn5/vtD60OI3Sy9eHc0uw7NSsfHZ4rU1tKR+GjYltX7wA5Vg1RZD8LmiDnnYq6
+ wowqfII3QSx5LykL2dRY6oi46wgmeEAy+SPJ0wnzon213Kp34ZEAtAq6C5MOP0UiAtSr
+ 4Ji8W34cc4tW8ZYOb4+JXYzbe4ADec7J70YnjDkzJ5EfIvc8uzgjweqiziviBUERi/dN
+ VdvVUH5ul/hnm9xXW23DSFBSMdy6xGpFP0pp6b22zjeD0g63bR1leEbTPr0wtXFZhE0/
+ aHVeBvMUFqFyuu/ITf0fS2i4cTC1tF97EVpJre+UDTN2jxu0V4ROZfoCpD32/Gf5NBNh
+ sUTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761226501; x=1761831301;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=StDWmdqyglAEym66hZx4U8xsvx0skEWhJwmg5Tqa1HE=;
+ b=b3/mY9UguScO9+1jAIfOFck17kKxjkL5Zo8FmTTOuP5pRCfPLkdrKN8RqG7ug1c5Md
+ 9mgsrhLHus9TGFF3GLuYBZV2DQmG5OeTRjtuxFnfnwCwpHV5zAfkUOQjIPeb9J5DmbvN
+ bBQfz7RAzrKQOTQzFfslLB8n5SyzaM5Mai4Gn2wYjSWT+u0fxjYEAMY78f5M9/H7yVcE
+ TR4zjJ2KB3SmF96v4PHkcoJNQhrB7lc6c3JE/admrA8phBe9Lt0/HA+oIHXVqdH5mt+j
+ myZndc3K2PHopvrvMpF+493bwpCsoPGR47gSlRWyfgLYTOmLgj6Y6E3jx2juEweVZR5O
+ rS8w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWy+3Ism0+anED2J6W3VrbYRJ6ga0eu6j+SoDMLmJ7wLsZxd6iHpz0ozubqwE885gSvpanB5hA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwxyGsGcDrvVmQH37YX5JlxQ/CERWcAM/g4U38dHZ6FuBJTWq7g
+ x5Gi/aeNTFqFKa/5h+4QISdjrwRG8stW6lZudqf5GxoxJ14Ecl2dP5Lt+2UeLJjHINwXorfoHN9
+ 99pIC
+X-Gm-Gg: ASbGncsMTa4p9aukVjh3qR58GpPCdbLT8bQ5WoUd9ICsrjCzbu6fLplB/KQQEdKTBic
+ y4DN5XNYQoiTD7kKkmickjUs7I+zRmq+7Cp7/kIrFnmrMIrvRL8AEb02vCCxmD2u5ruhdBgK2X5
+ 6HCrupowyT1rPHJzvTsyXVggeeXqiEzTRaA4yr4VfAbi+UiUeWi77mBje+VTSocElrMehr+9fTj
+ M4ZejfPT/wn6V/0xfRyOyEeKUcZhlKJxlWMgN+dWL6u7HqcUUH8gdQNBT+/+okKxgoNZcyF6F3B
+ qcXUzVYtzpfwZvxUBdjrHTMBVdo7SdpPJbwCwDAOxk6/0UR/526b/pmPWGkPCnXjYaYbM/E2JeI
+ lCXk2VIMUdjYvX3VN9/IpQUfki0bthD3XQZiO5CbkULQ53LeYv6zrylTZGMbuNraTjd/7CZNGpD
+ cwU+Hsh0HKEp4UcvJUR+js+9TQ1elrUQiVdtoAMQv1c/Nc157j4wKSt1casB9zG50=
+X-Google-Smtp-Source: AGHT+IFU6lso2xTOf2/6xbES4Lk39iA9WdYbPHAPAP+5i0peGuL9GHAXTqheXW55xlS0Vm9h2Dbkqg==
+X-Received: by 2002:a05:6000:4202:b0:426:d5a0:bdd2 with SMTP id
+ ffacd0b85a97d-42704c5f7bbmr14107720f8f.0.1761226501496; 
+ Thu, 23 Oct 2025 06:35:01 -0700 (PDT)
+Received: from lion.tail248178.ts.net (p4fc3da2c.dip0.t-ipconnect.de.
+ [79.195.218.44]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4298bd78c69sm2247191f8f.4.2025.10.23.06.34.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Oct 2025 06:35:00 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+To: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, Casey Connolly <kcxt@postmarketos.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH] binman: fix mkmbn integration and tests
+Date: Thu, 23 Oct 2025 15:34:41 +0200
+Message-ID: <20251023133453.3683388-1-casey.connolly@linaro.org>
+X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM9PR04MB8485:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4ddf30fd-29b1-4765-3c0b-08de122cea57
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|366016|19092799006|376014|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?rKFmDeFP2Q7mhR+uscx15XNV4RJmrOsRaCAsXljPNVEcU9CDD11DltjyDyy4?=
- =?us-ascii?Q?tr2laq2U6+8UVCebl29gIW+dasBwHmUiUlQ97q7Cyphf7MaN9Hr2oYmbf3pJ?=
- =?us-ascii?Q?Naww7bdR5WbvZEGfc8xuUGaGVZJsnBmRtJCKCalgVALKYf5An9sO4PqgmbLJ?=
- =?us-ascii?Q?7Zl155pEON+kZ83uqSSYmUrcaA6Kn6aMRNJHNyokxMdm3iHeXSx02sPScVIs?=
- =?us-ascii?Q?/qNXlcnhOBngzZ5q1+SfCc5TI8XqttZEGJKHAyPJLr8KRAeVoLhgW3DGU7Gj?=
- =?us-ascii?Q?rKRwIC+FRXH1XlRwj0PpbKm0qhgsY2yZUR90w3dk3szQwNuAeOSRaf4rqzGD?=
- =?us-ascii?Q?IqoAYpH3QCawjMkgvFE92baBfifseKUNM224eNd+6gRr3Lj5pY9UdZXkQO4X?=
- =?us-ascii?Q?KlQyLchWRbfZQ4Aoi26ii7QJCVg/gop9gDQxaucHsBbggfKCqaOkYiZbRMTe?=
- =?us-ascii?Q?k3YoU8eZLvQEH3uJ+dnhdQX4ncC86BHaQrse92y432qos7b+pqvX+CWoY719?=
- =?us-ascii?Q?3k9b3p9/CGDc1k/I2osPSkraLgf9b6k34OnQn4Ba3VDhEXAMpsQZVk7CWDoy?=
- =?us-ascii?Q?OT/Xg/OXEWSOjGHKjb8CtjJ+pu3drNfN+T91+Il23jLO+V4HMQJSKpNA1fb/?=
- =?us-ascii?Q?xKGxR8NaPj1ddzHgw4WpWAe5GaL/BPZNYme4CSu28Qm76VXTJYiN/VIU9A0l?=
- =?us-ascii?Q?B2l4ARcQ1Pu/rjP3mBZlD1dVCg8wtvZUsxN3x92f+fdZlwJUr0oazJ86LtM5?=
- =?us-ascii?Q?CGQVReueT07+CVhhy3VnbbU3P/RrkJ+MtDhUCwR/5cYgjSzzGfC2jta/Rnpd?=
- =?us-ascii?Q?R/aEJnoUha4xPoDdxFGopPRECmB1V2aCp0p27h9w6cXjFze4Lv216SJ4EIgy?=
- =?us-ascii?Q?1Wt/+hEyG8UdwdJI2ssLdKNwn3B597g4ucwsaTj3fYh4n4JfZfzN8wot142F?=
- =?us-ascii?Q?oNvpC61qUEtRq6IjcHrr7E3kZ0jLSTeVsjiOi0SK+qJzqNIvepsuQJHZ/k+W?=
- =?us-ascii?Q?FUQenLFmqtJHNLXWNaRhN0n8Nitm0hJAfYAHi+r0aTBxIJee9Hks5BXiZGF5?=
- =?us-ascii?Q?ru5O0p6mePrZlgEQCrgBh0PhqUBcaXZlaELB1xlREJqiwgmWJkxFxWwb0Ymu?=
- =?us-ascii?Q?YwWUOkZPshWHBIFmTgYyZjtjDqBnuWBEgoYLpVktVSh9HNPjvK9DvNNxM7f/?=
- =?us-ascii?Q?iMaMSolhu45IuJGwWVZZ3jvTKFQKTHM7VbArOksjjWZ5DIGgJ2frX9nU9omQ?=
- =?us-ascii?Q?7kzM2Mqv9/1I7A+D7j74k1fS11sa28HUrccBYyf3NL5yy+8bEyOHrY0W5awH?=
- =?us-ascii?Q?tBPNwOZ97wneH+pHKZ8N8QW7aVcRmr2jUn/g6NmxXwuFO0FyNqQqSfMsJw7p?=
- =?us-ascii?Q?jD33gxCBi9VBQwEC6h9f1v8ETWYf/hCxL0RnlkyCVVF7j6gCvwvBbP8fyfa1?=
- =?us-ascii?Q?j50WWKHHbpZjyajxp++FmAJrHHKgZMZzs+uEz4od1hfCWEiM9WoVmxyZBih+?=
- =?us-ascii?Q?plPjL226ATJglyUI2vF6FI2H2jmXWA3fgVQ0?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(19092799006)(376014)(52116014)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?lg0Z9hlkH4i4FWJ6mpu7xXzWQO3tgqxTwnaGGWLG6ISm0xYGoAPyE9GwGrVU?=
- =?us-ascii?Q?svHj6pXimtiygrtaDx124TeQM42/QTRnCRSfAfWxULeFUyzZ7Xdr/f37fOgd?=
- =?us-ascii?Q?Hgsr5NsxRJXWE8C5/33k0WDtucOoYP75As+EXN/3uqY96NbaHfZWC3K9C8hz?=
- =?us-ascii?Q?f8WrTgbexFYOiBQimY2K4isRNSJI1UeDjFMSSohepuXZxDQIuUK24BiCkiT9?=
- =?us-ascii?Q?JEqhEp3rSWMLMT7prnPKqSn/th8dzlGbXs28V2J2XpxqokgD2zOzkOizvNno?=
- =?us-ascii?Q?rR9K82ESUVNSAC3OI3pZa88OYSKpXoNNOoplGC5H0c3AuFw6HE7hlAnzcaKJ?=
- =?us-ascii?Q?vUIS6iAce7STPEE5AF90EqQ4mE2Bh4Y/oNH6zz+LT7qIurqLPxmzg+sZOgZc?=
- =?us-ascii?Q?iXNAX+4aTwFlEnH0HNdCpSJj5SEZmN1nFbneKWOC2DLazTea7X3WQPyvOrCH?=
- =?us-ascii?Q?Nluf2kPuPK60LqWWfqmovP+NGG2mvkfBAcuQapyfwnuaqJKoBg75mgdnDHcc?=
- =?us-ascii?Q?inU3Vwrol4c6A9mtrmWMR1CcUHNMv7e0jwmb8HM44WfF4DLgwt1BtcV7wyP7?=
- =?us-ascii?Q?WnniINPqxypv1Oho5DvwThqii5hWu8XBeLO+J9D5ik30IsY+uH3IYbvyIkzU?=
- =?us-ascii?Q?Ep4FRwzVzLj4JJeLa0K1bSiVUFOZ/9bB039Ox9KnyXL0qgzB/Be/lNqdrDiI?=
- =?us-ascii?Q?GaMRy73VPc6coqc2dzw5q6SbUPQLG1fqgGgDYVp280C0cE63aMVk/XrcxZ5j?=
- =?us-ascii?Q?Wu8zQ1T4KSWhq8pH2Bydc3nvJD8hCoofpW7/fBZcHqfaHXezILnipoOybIBo?=
- =?us-ascii?Q?v4QGm811OW44qUN3hg133mQ56zabOGdl5nFFAugLI/6PaDjUS0YEnW/7QMZq?=
- =?us-ascii?Q?kwJlFQRGa7KGJWANGEKhH8ZQb/O3qs9WrkYH48GoeQll+lwsdaQoDi3a8Wsa?=
- =?us-ascii?Q?r1NJzUMRtFFUC9UnknqGgWv6sRcNOelab/FeUEWVBLc0sE+/y/6DA3AWBBKK?=
- =?us-ascii?Q?8hIAcycG6JkmBfOT2MxrF3DF+F0TLVpmwWyzLvW9oZmIJ+z4h6Iw27APmTCj?=
- =?us-ascii?Q?tDcQCBoLyLMENOl+hIrG1lVPVXCrbVUlN5+ZpQ9sJHTHH8btH8wHH4n0gauw?=
- =?us-ascii?Q?M+Y78MUcXXEfKT4MB9Ev6tFERKEk+51/kr1///CqX66Bpz1n31YO15BwzxCT?=
- =?us-ascii?Q?MF7WQafL0zFHhAvPpnizEny7BY+PGmye8zY5eMsK2S11CtvLHwnrrBeHx6FF?=
- =?us-ascii?Q?MLPxSWs2erLxwfg5YpNHMhSJjowZoL8SrTXuCSVjUtsObVS+J7Hy0pJDObTa?=
- =?us-ascii?Q?P/Dd7GhB08nCkhnQ+NWn/+rqNHESlNAC0S+UDiUreUvyrVL4GCWJBsUBUyvM?=
- =?us-ascii?Q?WbIC/2SbBrEjWwZUu93SeVLub1ZuhRm7VxkbL5EScDZ04WTHs50xJfTho/8k?=
- =?us-ascii?Q?0imfpg5XP6b+sUv2uYPb+73xNpTRYt+HyjnBnGW7BEXefszOsZLQaWUy4g35?=
- =?us-ascii?Q?YLz16ms3lZ8jeFU5DMtY45x8IxtKcBthnjVf5cN4haXAVpQsrwBtrkRQRmli?=
- =?us-ascii?Q?0jUgJPq1TTvr16Xozj3XEghm9MSmdAJsShTHdS+N?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4ddf30fd-29b1-4765-3c0b-08de122cea57
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2025 12:08:45.8047 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: wPyYaY4t80IklShFR4hKEMnzQwNaEPd7N0ioNgW0K/KEMobSzlBI3xo34rF7io1f+uRJwWH/MjjtmVWG1BN0+w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8485
-X-Mailman-Approved-At: Thu, 23 Oct 2025 14:45:50 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,35 +102,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+From: Caleb Connolly <casey.connolly@linaro.org>
 
-Guard execute_tuning with MMC_SUPPORTS_TUNING, otherwise there will be
-build failure:
-drivers/mmc/exynos_dw_mmc.c:484:10: error: 'struct dm_mmc_ops' has no member
-named 'execute_tuning'
-         .execute_tuning = exynos_dwmmc_execute_tuning,
-          ^~~~~~~~~~~~~~
+Add the missing cryptography requirement to binman so that mkmbn
+will work correctly, fix a pylint error, and adjust mkmbn to properly
+integrate into binman rather than writing the output file directly.
 
-Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
+For now skip testing u_boot_mbn since it has some weird requirements due
+to how mkmbn works and can't be easily integrated into binman.
+
+Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
 ---
- drivers/mmc/exynos_dw_mmc.c | 2 ++
- 1 file changed, 2 insertions(+)
+ tools/binman/btool/mkmbn.py      | 9 ++-------
+ tools/binman/etype/u_boot_mbn.py | 5 +++--
+ tools/binman/main.py             | 4 +++-
+ tools/binman/requirements.txt    | 1 +
+ tools/qcom/mkmbn/elf.py          | 6 +++---
+ 5 files changed, 12 insertions(+), 13 deletions(-)
 
-diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index b6660fb2cd5..0b7af2e784d 100644
---- a/drivers/mmc/exynos_dw_mmc.c
-+++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -481,7 +481,9 @@ static const struct udevice_id exynos_dwmmc_ids[] = {
- struct dm_mmc_ops exynos_dwmmc_ops = {
- 	.send_cmd	= dwmci_send_cmd,
- 	.set_ios	= dwmci_set_ios,
-+#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
- 	.execute_tuning	= exynos_dwmmc_execute_tuning,
-+#endif
- };
+diff --git a/tools/binman/btool/mkmbn.py b/tools/binman/btool/mkmbn.py
+index 232e2b442a16..c1439977833e 100644
+--- a/tools/binman/btool/mkmbn.py
++++ b/tools/binman/btool/mkmbn.py
+@@ -12,18 +12,13 @@ class Bintoolmkmbn(bintool.Bintool):
+     def __init__(self, name):
+         super().__init__(name, 'Generate MBN (signed ELF) image for U-Boot')
  
- U_BOOT_DRIVER(exynos_dwmmc_drv) = {
+     # pylint: disable=R0913
+-    def run(self, infile: str) -> CommandResult:
++    def run(self, infile: str, outfile:  str) -> CommandResult:
+         """Run mkmbn.py
+         """
+-        args = [infile]
++        args = ['-o', outfile, infile]
+         return self.run_cmd_result(*args, raise_on_error=False)
+ 
+ 
+-    def get_path(self):
+-        path = super().get_path()
+-        return path
+-
+-
+     def fetch(self, _method):
+         return True
+diff --git a/tools/binman/etype/u_boot_mbn.py b/tools/binman/etype/u_boot_mbn.py
+index e470b31fa318..6268397fd122 100644
+--- a/tools/binman/etype/u_boot_mbn.py
++++ b/tools/binman/etype/u_boot_mbn.py
+@@ -31,10 +31,11 @@ class Entry_u_boot_mbn(Entry_blob):
+     def __init__(self, section, etype, node):
+         super().__init__(section, etype, node)
+ 
+     def ObtainContents(self):
+-        self._pathname = tools.get_input_filename('u-boot.bin')
+-        res = self.mkmbn.run(self._pathname)
++        pathname = tools.get_input_filename('u-boot.bin')
++        self._pathname = tools.get_output_filename('u-boot.mbn')
++        res = self.mkmbn.run(pathname, self._pathname)
+         if res is None:
+             self.Raise('mkmbn not found or failed!')
+         # Exit code 61 (ENODATA) indicates that an MBN file can't be built
+         # for this board. This is non-fatal since it may not be required.
+diff --git a/tools/binman/main.py b/tools/binman/main.py
+index fa5ad79ca0e8..bfd6e990d2e4 100755
+--- a/tools/binman/main.py
++++ b/tools/binman/main.py
+@@ -102,9 +102,11 @@ def RunTestCoverage(toolpath, build_dir, args):
+              'tools/u_boot_pylib/*'],
+             build_dir, all_set, extra_args or None, args=args,
+             allow_failures=['tools/binman/btool/cst.py',
+                             'tools/binman/etype/nxp_imx8mcst.py',
+-                            'tools/binman/etype/nxp_imx8mimage.py'])
++                            'tools/binman/etype/nxp_imx8mimage.py',
++                            'tools/binman/etype/u_boot_mbn.py',
++                            'tools/binman/btool/mkmbn.py'])
+ 
+ def RunBinman(args):
+     """Main entry point to binman once arguments are parsed
+ 
+diff --git a/tools/binman/requirements.txt b/tools/binman/requirements.txt
+index 7db72e888e3e..51b8ecd73478 100644
+--- a/tools/binman/requirements.txt
++++ b/tools/binman/requirements.txt
+@@ -3,4 +3,5 @@ importlib_resources==6.5.2
+ jsonschema==4.23.0
+ pycryptodomex==3.21.0
+ pyelftools==0.31
+ yamllint==1.35.1
++cryptography==46.0.3 # for mkmbn
+diff --git a/tools/qcom/mkmbn/elf.py b/tools/qcom/mkmbn/elf.py
+index 86f12d1f4e5d..7737adc6a4e2 100644
+--- a/tools/qcom/mkmbn/elf.py
++++ b/tools/qcom/mkmbn/elf.py
+@@ -171,11 +171,11 @@ def _align(i: int, alignment: int) -> int:
+ class Elf:
+ 	ehdr: Ehdr
+ 	phdrs: List[Phdr]
+ 
+-	def __init__(self):
+-		self.ehdr = Ehdr()
+-		self.phdrs: List[Phdr] = []
++	def __init__(self, ehdr: Ehdr | None = None, phdrs: List[Phdr] | None = None):
++		self.ehdr = ehdr or Ehdr()
++		self.phdrs: List[Phdr] = phdrs or []
+ 
+ 	def total_header_size(self):
+ 		return self.ehdr.e_phoff + len(self.phdrs) * self.ehdr.e_phentsize
+ 
 -- 
-2.35.3
+2.51.0
 
