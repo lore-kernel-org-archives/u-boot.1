@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C51CCD193
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 17:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9DBDCCD193
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 17:54:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 437748006D;
-	Thu, 23 Oct 2025 19:41:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2221B8006D;
+	Thu, 23 Oct 2025 19:54:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fofX2uMn";
+	dkim=pass (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="VzGOaAqG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28B2580422; Thu, 23 Oct 2025 19:41:08 +0200 (CEST)
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
+ id C4F7980422; Thu, 23 Oct 2025 19:54:14 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CBF28003E
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 19:41:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7F408003E
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 19:54:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32a.google.com with SMTP id
- 46e09a7af769-7c2878bdf27so713432a34.2
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:41:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=yegorslists@googlemail.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-637e9f9f9fbso2060797a12.0
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:54:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761241262; x=1761846062; darn=lists.denx.de;
+ d=googlemail.com; s=20230601; t=1761242052; x=1761846852; darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Pb9FVIwLVOyyS5eNnmsGOQS5ugjzlgbz5gZi8U3qo18=;
- b=fofX2uMnkNJrFhHcLaMQCd/udXkbdylb6Xk73Ct/v5Or3ZOY0fbMxI9hRW2H0cWz4H
- Jle0aLLU2Gs1WCJ2he4qS5MGxd4O5l4OYdu7RNl2O562NNirjAqBxlzIsUUoNyjLvY/M
- //uo2eNyiUWTIHP/NEki+FDBaTJXL+z3SXi9c=
+ bh=O4EC+V8Z3qPI7IUU+gUSwcdr+PD8jQcjbTPRoyg/qZI=;
+ b=VzGOaAqGAQH7Q4zUfFp1dvmYebjS3PbtOGzUWFZyLT1hmOOLrhjGHYqliz7pJ3j7qV
+ PQX3QZKY2EZAujlNevrZZ3Awunsu3PmCztbi1uG6kk7c9RZBgMyeQ937vqmzVNWRWoFc
+ j/zxhK7LhJWQU9/0nBx8KO9+Ew/bkZZ6T0aJ9eyYhFKwMChJ7QO+Yx+lIVhZXqrZx7R4
+ vpdFeMdS1tVBP7CQ+XdeILXh161+417l90OCohnHxlMeQwiTLKYr/mF7beM6R1hJL5PD
+ ZnNiPgTj8OaKibaGA9zwNVv8hssB2q31n2brcgZyV8+XYCmHjDpo73y51DqUJkkPeRjw
+ lZVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761241262; x=1761846062;
+ d=1e100.net; s=20230601; t=1761242052; x=1761846852;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Pb9FVIwLVOyyS5eNnmsGOQS5ugjzlgbz5gZi8U3qo18=;
- b=gIzaCIUXIDjTI+BAIx8Zcy1HmOe6dlSMQQ902zqqJowqJP+NVZCNoRh5l3YafczA7V
- T2pW3qHCv/f2l6naK2sqSky10SGSAZLpPJ04o9U0IJve59+HxyZIWmm5df73AvISHhE0
- R52v5Subf4SpncuB96CrD5Jl7hDjnybp/RC9PUt/jzMETlPk/F26yAGT2b9A+yLTEM6Y
- XXBP6rUEKYyJPlmdSxP6/wHDiOGqa1/HwSAcuZNP+zVa+3GiQYFsfPCOTHJJkIN+Bgbx
- /8QHDz9rNbAbQWNvjKsTeIXAiBB9JtzCnogq7/lLFunH7VlmOQcZwT3IWUp0c3EpMrsn
- GUFA==
-X-Gm-Message-State: AOJu0YyVGwZCnbRj8v/JpnLzDM/UA0MCVCGSUWCktAc6S0GCsXGjfvgz
- n3kkIP15rb+dFfVEI601tojmBkiimsqIcJ9G4f/U54wG6fC47pSQN3L9A0wZ9uwe9Te689nhyYl
- lT18iXDPYUrXu
-X-Gm-Gg: ASbGncsTD6x4a90qV9dFcRIBYU5BeNRz6LVkaGIn/CaX1f54EuxzTEZVU122x4Lp48u
- SSTXy8PP+thzr+7e1+hU9R2O7kqUOAzW4PrU7AezJqTl0emDMps8o42KDZDq/eBPsZVEtUaBzyO
- vZP/QKLdGUTHhiB6vuHWW2H7mIHxVbKgrRm9fbwdmdepOEyn81SxGlVznPBwdtiasIemqs7MSyu
- Ri4Nt2nzyCTAN9/d8RmfSSKnUEeuqKziqtEG31kZc+LbIC07DtdllrznXa/gH255P0jCR3lstw7
- 5Qra4KMTds/VUi7GiPngIDWeAiLYYDNZnmlIS5d9/3pb3OspHcJxFNdkAFWDYJl1Bo3X+b+FYO4
- AJIFP+AXOQgZX77QmrMY1XFcttHb9CeDi702A7TbLke4PhoGHbOEtsv9ZedwfB+oBHte99P1ipt
- DnfhIjOxOGmZ905eQ1DgDF+vqL+V5qPHCntaKliDpY0g==
-X-Google-Smtp-Source: AGHT+IG5NhI1GflESq7i5AgPSc+9YUNSekhpNaRcE3ljAoipgeBHeyjRRA0IRoyEvg9jOkhbeNSqIw==
-X-Received: by 2002:a05:6830:611b:b0:758:71cd:897f with SMTP id
- 46e09a7af769-7c27c92ca7dmr11940690a34.7.1761241262575; 
- Thu, 23 Oct 2025 10:41:02 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c51118aa6dsm774359a34.12.2025.10.23.10.41.00
+ bh=O4EC+V8Z3qPI7IUU+gUSwcdr+PD8jQcjbTPRoyg/qZI=;
+ b=LFYQ+ZeZkuLLCAQsLjWda5/2Tj1NQ6XpuG/i56OvUQrCEiI3ZqRjk8tVvO0PLLsx2t
+ kwMD50WMDOlgJf6yhTsg+5pcavRBHgXqYxKJRPhK5+qA8BpKqZ8sw9fkBr7I1Ou+yS2a
+ t5wmGUknEi3NPIZTjrva3A+UI3a844gffIHCXhThy8NMMLr067P6lObD3FqPaU5BT+Sk
+ 3Ur3gYOYLLn2+kbWs5x7peN7uqCxTHXnyZfuk99OtZY0pA9h3ad4XzmiMV7ej+R+qy0j
+ jPlG95Ya/J41MjRALmKbhnTKtfk415GutOLNfyLVeowtSxh/mBwjS8dQBimfxVdKJp9L
+ AS4A==
+X-Gm-Message-State: AOJu0Yx5VAcCRa7v6m3lDggkHMb448k5MTvoU1nlt98rNwGwLmXarnF/
+ 8s9K6Jq2XwMaj/m9x0ueEgcq13ThqXapxeP+lneN6o4mBJPDAmIoYRM/ZM2uDw==
+X-Gm-Gg: ASbGncuKzO7vUUrVpFRceZpUSb+1FQas5SIh9EI0YM216k/9xP21FXJIT+aKlCdLu1M
+ ubrZR4embUDd4D9I3x4WBrMSVGT6Of7bM9sCV7XLey2Yq2kl8nDahe3gkAorDVs/kvWjgARrn9q
+ sudY3QY04v+0X5sGgePs9tXHH0upFEjTWTz4ou8pZUcoaLhfBqVtvuyTvnpi7cSQ7PBOB09e+nF
+ FO1zEA1BlD65STHgVp30Pj+zkr1OcEInt07Xjjhq8yOBRLALOx7CDYE1LX4FsOvFjEuJkSwFC+N
+ VEwPhP/2svJ4+oTw29CrMqFPy3YtlP5JBSdtV94au9dCKtevLOZlXjsXUTlUdgyQmo/GMj7OxZS
+ qclz/6UZ898ARAWSPe7cvbAkija0xXPTkaM1QWjmGy6GBfbFJyvZfx/qp6g7MnOZgc+jB0dXvZ7
+ bEn2nKd5xGcQNQ7mHZEaPr+7fGrr7suOCGJN5czdYhI6nM5gDJh/WyG2InOsXyMqGY+ds=
+X-Google-Smtp-Source: AGHT+IGG8hbdBIzlU0YB0HRyb7+NAr4T/0uRDWg7jd56wXYFIh0tp/+akEF+hyMvXSyITrSsj2Egdg==
+X-Received: by 2002:a05:6402:1e94:b0:634:544b:a755 with SMTP id
+ 4fb4d7f45d1cf-63e3e4783dbmr3602585a12.19.1761242051483; 
+ Thu, 23 Oct 2025 10:54:11 -0700 (PDT)
+Received: from development2.visionsystems.local (mail.visionsystems.de.
+ [213.209.99.202]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-63e3ebb3738sm2179146a12.3.2025.10.23.10.54.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Oct 2025 10:41:01 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ Thu, 23 Oct 2025 10:54:10 -0700 (PDT)
+From: yegorslists@googlemail.com
 To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Kory Maincent <kory.maincent@bootlin.com>
-Subject: [PATCH] python: Add a top-level requirements.txt file
-Date: Thu, 23 Oct 2025 11:40:59 -0600
-Message-ID: <20251023174059.1962529-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Cc: trini@konsulko.com,
+	Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH] bus: ti-sysc: select CLK driver
+Date: Thu, 23 Oct 2025 19:54:08 +0200
+Message-Id: <20251023175408.272070-1-yegorslists@googlemail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,42 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A frequently reported problem is that someone misses a required python
-package when doing a specific task within U-Boot. This is in turn
-because each of our requirements.txt files only lists their direct
-dependencies. It is not always clear that another tool has its own
-requirements and thus something else fails. Solve this by having a top
-level requirements.txt file for the project which in turn installs all
-of our other project requirements.txt files.
+From: Yegor Yefremov <yegorslists@googlemail.com>
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+ti-sysc.c includes clk.h and requires its functionality to
+manage clocks.
+
+Signed-off-by: Yegor Yefremov <yegorslists@googlemail.com>
 ---
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Kory Maincent <kory.maincent@bootlin.com>
+ drivers/bus/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-As Kory is the most recent person to hit this, cc'ing them. I think this
-is the right path forward and if agreed, I'll update documentation in a
-follow-up.
----
- requirements.txt | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 requirements.txt
-
-diff --git a/requirements.txt b/requirements.txt
-new file mode 100644
-index 000000000000..0fd08b9da17b
---- /dev/null
-+++ b/requirements.txt
-@@ -0,0 +1,8 @@
-+# For ease of use, this is all requirements files for all portions
-+# of U-Boot
-+-r doc/sphinx/requirements.txt
-+-r tools/u_boot_pylib/requirements.txt
-+-r tools/buildman/requirements.txt
-+-r tools/binman/requirements.txt
-+-r tools/patman/requirements.txt
-+-r test/py/requirements.txt
+diff --git a/drivers/bus/Kconfig b/drivers/bus/Kconfig
+index e60aa722b97..a786fe430e4 100644
+--- a/drivers/bus/Kconfig
++++ b/drivers/bus/Kconfig
+@@ -14,6 +14,7 @@ config TI_PWMSS
+ config TI_SYSC
+ 	bool "TI sysc interconnect target module driver"
+ 	depends on DM && ARCH_OMAP2PLUS
++	select CLK
+ 	help
+ 	  Generic driver for Texas Instruments interconnect target module
+ 	  found on many TI SoCs.
 -- 
-2.43.0
+2.34.1
 
