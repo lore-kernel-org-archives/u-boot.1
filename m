@@ -4,161 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB0E4CCD193
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 09:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA99CCD1BF
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 09:47:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ADAA82E34;
-	Thu, 23 Oct 2025 11:36:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 306BC835FE;
+	Thu, 23 Oct 2025 11:47:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=pschenker.ch
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="p4ziDOi/";
+	dkim=pass (1024-bit key; unprotected) header.d=pschenker.ch header.i=@pschenker.ch header.b="n2OJ6k32";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EFFB832BC; Thu, 23 Oct 2025 11:36:44 +0200 (CEST)
-Received: from DM1PR04CU001.outbound.protection.outlook.com
- (mail-centralusazlp170100005.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c111::5])
+ id 1AD3B835FD; Thu, 23 Oct 2025 11:47:34 +0200 (CEST)
+Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::bc0b])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C980807C0
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 11:36:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9F1F807C0
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 11:47:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tanmay.kathpalia@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=VBqcm8sBQz9+h1smH7qiizPC5Qtv9BRVzcI3h2g5hVdS6d341eJUUUcwC35tckEkULbQqnHSOQYX8HUNnfvzkFQ3k8mZi8aW0kFeeZaoaafN4ESiMKzhAVxx5peWS6t9TqIn/740aRwg7yzvYoNVyqOU45h58LjnrdRL/e5ESeOp3GTK1D5yFdwFvBCWsJLBZnrvWeTcPM47WDHtnFIFGCpzmRxyDE2r1FayKkKYptGLcTiS75BPqbEJabJdFNrBOyCwBdxN0Hw+oJWik5Yp9pOonniIhefq1TuIE4Uf+pCTj/zh76zW6AuqKIe5I8je1/QD13Khr27S7Oksu18NJQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ueE9KLZWO+gaZ8oTrc/zBrCnzbTC0UqmZlL8dKAyHks=;
- b=cQMXJEhmnadRqSt2qWcz1AvAgo4MuBOQuqYqti+NA07fN/zbk4R+u6g0gPTGm6whYJB0GfO9wah7aiWTAFZQn4d2gygHHtk9GmXYTsjlnMALYJEathsh8c1k5+wmjxtGwNA1XWaaC0rYnmE3BCTKIaf98SNceFfkh7NLWliXSmTXrDBxZIr9nF++othspEtkm9htLbDqmNqY9vV8LnxJGCW8W2ZZHsn7vfIpeIJ/cwifyZ75O9Zf5e5zi4/Rg5KGvs0x5om21XgAN3Nl22JwQzpz5PwbNXOq1O6tZxN9OUCEjyCW1Am0IQT/czHOjy1osZJcfKI4yQpsg4JahPu00Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ueE9KLZWO+gaZ8oTrc/zBrCnzbTC0UqmZlL8dKAyHks=;
- b=p4ziDOi/125UbI1rE61RXWgPannzCC7vrnwiQdoFV52+lg1Fo6dj31RaYsswo6dkLhXwJbnO/etKINBG2E/ieQim2NLsw8TjsSvH78DNcnHhM3uu+4MOKtCU5zWtVNTwkt1ghHU4ebmkQJqZP8M7Vrh1dAB4fjBRSYXOuBtL4ptKTHPkvVfgcNZ3ldwdqWtucnCX81ea3kM8z0OX0TBYZ0ugjYmPPPlkAapvYHITFZB5zHTXDCBWu7PQdmsuxwT4kYZ8BfMJbFpntWswpDa9ye1yde8+d1LPDaxN6Dh1L2y4oujiLzvws3AVx8IY3RRfA8hp9+/wmcGaXqJRxyFJsw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com (2603:10b6:5:39c::19)
- by SJ0PR03MB7050.namprd03.prod.outlook.com (2603:10b6:a03:4d6::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.12; Thu, 23 Oct
- 2025 09:36:39 +0000
-Received: from DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::6735:e440:e9a1:e844]) by DM4PR03MB6208.namprd03.prod.outlook.com
- ([fe80::6735:e440:e9a1:e844%3]) with mapi id 15.20.9253.011; Thu, 23 Oct 2025
- 09:36:39 +0000
-Message-ID: <f467e4ae-5113-4cb6-bbf0-a1c8a0ba4d77@altera.com>
-Date: Thu, 23 Oct 2025 15:06:31 +0530
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: kauschluss@disroot.org, peng.fan@oss.nxp.com
-From: Tanmay Kathpalia <tanmay.kathpalia@altera.com>
-Subject: Re: [PATCH 7/9] mmc: exynos_dw_mmc: add support for MMC HS200 and
- HS400 modes
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MA5P287CA0181.INDP287.PROD.OUTLOOK.COM
- (2603:1096:a01:1b6::8) To DM4PR03MB6208.namprd03.prod.outlook.com
- (2603:10b6:5:39c::19)
+ dmarc=pass (p=none dis=none) header.from=pschenker.ch
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dev@pschenker.ch
+Received: from smtp-4-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:7:10::a6b])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4csh5v3pdVzCD1;
+ Thu, 23 Oct 2025 11:47:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pschenker.ch;
+ s=20220412; t=1761212851;
+ bh=CRlBC98qIBuZMIDDfj1njZetNOGVPfXIQy3FsAPqZg0=;
+ h=From:To:Cc:Subject:Date:From;
+ b=n2OJ6k322w2JslBOGH8CaMzP77WVYTRm4OJUEdGsKOpEXhzVebcOFeObhiqGs/Mn/
+ N+XGYYBzXEEyKfpDqTb0e4yu7JVjM15yAcro6L55X7ayCgtVy/fA8MpCZ4eh8lFTW+
+ VdvZgAbjl5EJP9hlG2ikL9VyKN3+pYHcTu06BOJ4=
+Received: from unknown by smtp-4-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4csh5t4L7VzHRX; Thu, 23 Oct 2025 11:47:30 +0200 (CEST)
+From: Philippe Schenker <dev@pschenker.ch>
+To: u-boot@lists.denx.de
+Cc: stefan@embear.ch, Philippe Schenker <philippe.schenker@impulsing.ch>,
+ Andrew Davis <afd@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Beleswar Padhi <b-padhi@ti.com>, Daniel Schultz <d.schultz@phytec.de>,
+ Hari Nagalla <hnagalla@ti.com>, Judith Mendez <jm@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 0/6] remoteproc: k3-r5: Build fixes and security
+ improvements
+Date: Thu, 23 Oct 2025 11:46:18 +0200
+Message-ID: <20251023094631.16742-1-dev@pschenker.ch>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR03MB6208:EE_|SJ0PR03MB7050:EE_
-X-MS-Office365-Filtering-Correlation-Id: 18306595-317a-45b7-0d37-08de1217aa37
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RWd6L3p5ZTNHb3g1eDRsK2xCU090b1YyLzJPVXphcTFSZlZOR3QvQmFvUlAw?=
- =?utf-8?B?S09pSWpXakRNMk9SODRyU0NqQ3Axd01SYk5YMjlaN1Q3UmU0NURvMWZzZllx?=
- =?utf-8?B?ZmJ6MHZZSUp1eU9QU0Q5YmJKTEtnbE9JcnJIR1JXc2plY1BJR0lJRU5JOFNY?=
- =?utf-8?B?MnJaeUhKSFZQUjdmdWg3aWxucnVmYURTc241bU1CQnhtampRZC9IeEJteWNn?=
- =?utf-8?B?REpuR043dGhsanI3ZENwUEdwOFB1RTVKODEvQkdNUU1HV1pnUm8zdzU2SU1D?=
- =?utf-8?B?dkVNdFVnZVRmNzN5QmVRNTRHbUcvd1J5YXUyVStKQTVteWJqT0RyTTdHUUNH?=
- =?utf-8?B?bGxaOGF1cCthN3EzeW9rOG80ZlhEMUhhZFZpeGdZS1dvcGZVT0xtMVdWNzNt?=
- =?utf-8?B?a3o4VXBub1lNSmpSRE1WWUpCMVAzSm43N1RYVUN2cy90eGI1M0tCUjlXdUg0?=
- =?utf-8?B?VUZybG42dGZYdEZKOFh4U3JjM2Y3bXlBckVZK2Q3TDdaWVBSOC83K1ZnM0Ra?=
- =?utf-8?B?dStBeFluN2RCeGhHZmpjS3JnREpsUFM4djdkaVA0QUZoSEk2bzBZeWk1a3Jq?=
- =?utf-8?B?RnBCVVM0Y29mRzZ2YURpT0tZajRBMDVNbFplWEY0MW5NaEg1TlU2QlB3SHZB?=
- =?utf-8?B?RHl5dnpJalRFeG9GT1JQSXorYnptNHBZVDRWUlNwUWxvbVhSTkorZVY3MjIw?=
- =?utf-8?B?MG9tR2dHTktVeC8xeDloQW52dlVYU2JUR1ZXLzZVcGRmaFVOa1FaR0c1S3hT?=
- =?utf-8?B?a05uTzFNQkYyZFg4L1ZGL3cyZGRSNk1QK25xOU1OZWc2QTFtMWsxUjRjbEZ3?=
- =?utf-8?B?ZE9WSWx4NVhvU3NYSG9uSFl5QmdiUTYrb2VYOEpsNEhCbldmNEJURzNFcWdD?=
- =?utf-8?B?bXoxaFVqNmJEaDFHREhyZzlKZDVsVXFibUR2MWRQWG15ck1GL3FVM2Z4eE9C?=
- =?utf-8?B?OWphTlNkMkVGclUzTHJGS1Zlby9Gc05GMkVhNVlrUkoyRUQ3S0M2UzV5MXc2?=
- =?utf-8?B?ZWsycm9zV1BFUHY4WHpxYk9kd3RwSU9xMWU3QklXbVNUdXU4T2pNTVRPdlFY?=
- =?utf-8?B?dGFMaCt1aDNhR3hLOXNuaklwL3crdDhVaFEyRjRnNHFFOEFWRSsreHRlVG92?=
- =?utf-8?B?NUNkZ2NLMlp1blU2dnBxYzhTTlpFMURHRjA1bCt0TklXVE82VW96dExNeDBM?=
- =?utf-8?B?alNWZXNDbkVvWHBTODJLdThDZ29DVmowS3pod1dBZzFJRUVoRmE0UnNWb0ZJ?=
- =?utf-8?B?bDdodUk2NVQ0MlNTMDB4U3pJN3pWRllFcXpNa2MzVmJhTFNXNnVPenI3ZlVv?=
- =?utf-8?B?emtIVmFkSXM4L211QS9HZ21odENXQXBZRkpGVldQRE1HOGhpYjdFTnA1UDJP?=
- =?utf-8?B?TWpyNThxY2x2OFpEQlo0ZDdORWVrNVp1SmhGQjR2YmprMlRza3JDWWk3SUQ1?=
- =?utf-8?B?eHNITFhUTjNHeFgrYlAxdXk5OTIxcTBCVFVsSno0VGk5eHYwazRJTXBmODZv?=
- =?utf-8?B?ZzJlb3RmMTNGSTVPVElNeVJhR0EwNlRLYVZRRDArSlFTcEE2TUN2Qm5pNXBS?=
- =?utf-8?B?SS9Vc0J3bnV2cGNxd29EMGZ4NlQvSnBkYTB4Yk83eEhkZHljVSs4N1cxOFdp?=
- =?utf-8?B?TmFmMjdJdlNtM1pmQkc1TTZRY3J5ZW9KcE9LTDBCUkkvbTVwMTFNdFZZdWQz?=
- =?utf-8?B?azI0S2thU3BoKzVvWmtZVk1LUWx3OTU0MmtHMnVKSVI1dklvdU02SU1DOFVu?=
- =?utf-8?B?c1RrYTRXNTdRWThOb281c0gxSHU4OG5QNlFCbjlFbmh3dVQzVUNxbDg5Wm41?=
- =?utf-8?B?NE5aRG85QjNuMXFYbmZoT20yUWk3MFVHU1VXZjFxTVBJN1cvcE12dUg2Szk5?=
- =?utf-8?B?U3JJaXdKaitTQWx1YkVRdkorK3RCRURQcTNZVWx4cDNvS2toU0VJdDA5dkxr?=
- =?utf-8?Q?6k6ENu89W4xUoqLKOR5OrcGWLDOXutno?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM4PR03MB6208.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SGppOXkwRWRqT3FIby8xZEI5NythV3hlcUIzcjEyRlVSNHpISnVqQXRkYlZ0?=
- =?utf-8?B?Qjh4aHpUeHorL0k4ckJha0xTdnZFditrWW1Tc0dYVWtldlBGQXNicWc5MXhC?=
- =?utf-8?B?Q2JDVTA5eTlQSUNlZ2JDNDRyTEV4SUl0SUxuUnFpZ0FFRjB4OXJ5L1d4dGRZ?=
- =?utf-8?B?bjU5aGxRcnFjTXhPWDhmL1RaaGh1anF0Q0NZbzJhNUVwbVBGQjR4ZFF2MnBj?=
- =?utf-8?B?OFhncldtSHZsZ081VFRMcnNFU2V4TW1JUkRLaExmTnh6SWRWczNFdVVSUW5x?=
- =?utf-8?B?Nk5nZTBhWEg1c3ozOXhLUHplWXVnZ1lFdHdGVkgvMUNyT2FNQk90WTE0ZWR0?=
- =?utf-8?B?SVR0KzZlaktnUVdSeXg4RlA3dTZobTgxWXpISVliYjdJQ1k1elEydUMzeHh5?=
- =?utf-8?B?eE5YVnN6aUFtUndZbnMzVWpFcHg0L3lvdDZ2SU0weG5TK0ZXWU5ISmVwbXgy?=
- =?utf-8?B?VjhNa08xNytoU3BLUHF4THpYRTY2bEZIcENQb0duUlNyR05VVWdqSnpFd0Y0?=
- =?utf-8?B?SWNTWlA5UXd1L2ZuT2FOQ3pyaHk4dlgzcEEvT2VmcmMyNmt4OHJuNUVxanNZ?=
- =?utf-8?B?akNtOEtueWxDY0g0bERZRTNYUmpaK3NsR2FhYk1pc1RFaFJCZ3VGM2VhYWs2?=
- =?utf-8?B?OFZ2aTFXQkJ0NE41dThLak4yNjdGWjAzamNkNDlocmVOWWR6OUNJSnJjUFlz?=
- =?utf-8?B?S1d6UTRZNWFBeHJXaENhYm1YSkJQSFpOcnVEVyszelFlOTN0SmtHeDVzS0V1?=
- =?utf-8?B?T0JCQnIxbDI2eGZDVFp4YXd1cjMxV2hMYkJsckh0ZWFlOWU0R2R5bGt6ZXhp?=
- =?utf-8?B?N3A2TzU1VWE0Y1ptMkJHTWdob1pWNXZzMngrOGMzd1hQTDUwcnlmaHBGVVZG?=
- =?utf-8?B?WVBKOC9QQjgvdE1nK2FmSFN0Nm1WU2QwTVZSMVNOT1p1MGtFYTZ6cTM5bk14?=
- =?utf-8?B?WVRrejI3M0FraEdNSmlDcit6eVZzSko0dkRiWmpPWWVZS0tuc0pUUDVHbWN6?=
- =?utf-8?B?UEd4QVZ5WWVTSG5TTEIyeUlZdVladisxN2JFbDI1Uk5UcS90WThvbDRPakVh?=
- =?utf-8?B?TVhPNEpIZUU5N01CbHdKVjFzZUpSUGNmaVhUTXZUL2UrMGYrcEt1Rjg5REY1?=
- =?utf-8?B?NkxpSkJycU9BOHlpVFVlMzFCYk1PeXhUdGtUY05mOWxFMUN4SWltdFdwN04r?=
- =?utf-8?B?ZTFUMlVKbHdldW53d1FtTVF0NFd3SjA0cHVzQWNWUGY1ckRrU3FjMEhMQlda?=
- =?utf-8?B?eWhsd3l3c2l5c3NXN3RQVEd0eHkvL2Iyek9kZ2dRWFFTbXN6TWdsNHQ0UzhE?=
- =?utf-8?B?dlZMTk5OSkVxY0xnWXdrYTJkRlFUcFRjN1BzRTBxQnZORHdvdFhjR3FoMnZ0?=
- =?utf-8?B?a1dydk94M2pZZHY3SGlpcEg3SFlZUndFVFRSTHhsbEtpQXBBZ1FOQnZUdTd3?=
- =?utf-8?B?ZU9GUk5DRC83SG5ERmFKdFNnd2JWRHpNZFBDTmw3WDBBNmVDR0FUS0pCL1ox?=
- =?utf-8?B?VVVEMzZLdFlIZVREVk9DYjJ2WFJDL2I1OC9xbGZadWNuSEFyek1tNlJDYmhC?=
- =?utf-8?B?VFVkS2Y0ZWE2MUVDOHl2Q1U1NkoyYzZ4bDkvdzVkc3lJK1laSC91cUllZUx5?=
- =?utf-8?B?ZnF4TEM3c3M2VGx6TFBka3BUbk9yVzR4SThDQmFEMmcxQzgrSWtWUVUycEtv?=
- =?utf-8?B?NWw0ckhmSXZZckZqa0JDSDFGTTN3dHhCbUFrOXkyQXk1NzliTmdHbGVxT3pn?=
- =?utf-8?B?MFpBb0R6VzQwakF2OXhUMGhOYThoeE41RHBBOE1pRDhISERKRHpUK2w1RFRE?=
- =?utf-8?B?Q1JPdDZ0OXdIaU1qV0V3WWlxWUYyTllKQWJKM2xlbUJyRXZaUUNpYkdoT0c1?=
- =?utf-8?B?cTMyTGpYOU9qSy93cjNWeU4vam90V09ydlRacnU3R1JQeEp0R2t4MkxhMnFR?=
- =?utf-8?B?UnJjVTN0bkZRWFV4bFVoS05VZnpSVWRwK1hPWGNuV1c4ZmtPVjgxZXZWVGNG?=
- =?utf-8?B?ek9HL09JNHJCQ2FSODROYkRtZEJIbFZydFpTTk9XLzZsUUF2a3hKK0Y0RkhL?=
- =?utf-8?B?ckpPalJnMXFwVnVTTHpWZEdJZjY5dXhkMkFLRTI0Z0hKWUNQY2FXYXp3dVZQ?=
- =?utf-8?B?Vi9aOHdMaXR3eitDZlZ4U0JmSG0rTitEZjBDQzh5OGZhSlVudlpyanZvb3p4?=
- =?utf-8?B?d3c9PQ==?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18306595-317a-45b7-0d37-08de1217aa37
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR03MB6208.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2025 09:36:39.2096 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: iGQseaRfdbChpK0y+zsjXZq+Vf6ihCDXLNE6cQT+Q8GS20w/BFS5ebFbvegQmjmtUQQyC7x4mw2YbFLJaFj3yjsvpycbjRCCMtGA9RINfxk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB7050
+Content-Transfer-Encoding: 8bit
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -170,24 +64,48 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: 20251017-mmc-dw-exynos7870-v1-7-a2c5139d9afe@disroot.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In-Reply-To: <20251017-mmc-dw-exynos7870-v1-7-a2c5139d9afe@disroot.org>
-References: <20251017-mmc-dw-exynos7870-v1-7-a2c5139d9afe@disroot.org>
+From: Philippe Schenker <philippe.schenker@impulsing.ch>
 
 
-Hi Kaustabh,
+This series fixes compilation errors when building for R5 cores and
+addresses a security issue where authenticated images were not being
+used correctly.
 
-The tuning functionality should be made conditional under:
+Patch 1: Cosmetic removal of duplicate code
 
-     #if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
+Patches 2-3: Fix build errors caused by type mismatches between
+function signatures and the types used in R5 builds.
 
-This ensures the code compiles cleanly on configurations where tuning
-support is not enabled.
+Patches 4-5: fix a bug where ti_secure_image_post_process() relocates
+images during authentication, but callers were still using the original
+unverified addresses.
 
-Best Regards,
-Tanmay Kathpalia
+Patch 6: Implements is_running operation to allow querying R5F core status.
+
+Note: If preferred, I can split this series.
+
+
+Philippe Schenker (6):
+  arm: dts: k3-am642-evm: Remove duplicate node
+  remoteproc: k3-r5: cast size to size_t
+  soc: ti: pruss: Fix size ptr type in probe
+  mach-k3: security: Propagate verified image addr
+  remoteproc: k3-r5: Use verified image address
+  remoteproc: k3-r5: Implement is_running operation
+
+ arch/arm/dts/k3-am642-evm-u-boot.dtsi |  4 ----
+ arch/arm/mach-k3/security.c           |  2 ++
+ drivers/remoteproc/ti_k3_r5f_rproc.c  | 23 ++++++++++++++++++++---
+ drivers/soc/ti/pruss.c                |  2 +-
+ 4 files changed, 23 insertions(+), 8 deletions(-)
+
+-- 
+2.51.1
+
+base-commit: 813a0df27a8af587bd25a6a4719f68066b370091
+branch: am64x-various-fixes__master
