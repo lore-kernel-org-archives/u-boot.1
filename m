@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1C41CCD193
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 17:08:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23C51CCD193
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 17:41:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5CBE8006D;
-	Thu, 23 Oct 2025 19:08:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 437748006D;
+	Thu, 23 Oct 2025 19:41:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wwnh8YSP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fofX2uMn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB77E82E34; Thu, 23 Oct 2025 19:08:05 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id 28B2580422; Thu, 23 Oct 2025 19:41:08 +0200 (CEST)
+Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
+ [IPv6:2607:f8b0:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D40F68003E
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 19:08:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CBF28003E
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 19:41:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ansuelsmth@gmail.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3f0ae439b56so551402f8f.3
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:08:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32a.google.com with SMTP id
+ 46e09a7af769-7c2878bdf27so713432a34.2
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:41:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761239283; x=1761844083; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761241262; x=1761846062; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=cf2hW+hBunxO90XA6giJyVRy7WEm8JHwfCcRBNE/4n4=;
- b=Wwnh8YSPeUoWro4E5vC5a3h4MMmhzU4wFdsowAy6BPuKQxibw7X8WKNRDj8ohCDVrF
- XTMYJZu73VWeJzJRqiKnRNBaSU2ApHRbKyXNivDjyHm9h/MOzyhoKNd2Qnq2ESL+yB2B
- 9iYsMB5aOezXZtAtzGqINTRHeXbqpPiuQCt9WYsSwBXLq+33Bv14CQVytWZ7Ye05mWIn
- /UAG4JMth7SvmxcWQVkbm9eivS9k/bDUb49/WMpMTgWTdZDqpHLatpqnur7pdkeFioDP
- LTm03Qstcn6ZpnHj1R+//KEFfPUWWpwypEbk8ebCiAXt1cGxLExyUqgU55/xCHFn/zKZ
- E/+Q==
+ bh=Pb9FVIwLVOyyS5eNnmsGOQS5ugjzlgbz5gZi8U3qo18=;
+ b=fofX2uMnkNJrFhHcLaMQCd/udXkbdylb6Xk73Ct/v5Or3ZOY0fbMxI9hRW2H0cWz4H
+ Jle0aLLU2Gs1WCJ2he4qS5MGxd4O5l4OYdu7RNl2O562NNirjAqBxlzIsUUoNyjLvY/M
+ //uo2eNyiUWTIHP/NEki+FDBaTJXL+z3SXi9c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761239283; x=1761844083;
+ d=1e100.net; s=20230601; t=1761241262; x=1761846062;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cf2hW+hBunxO90XA6giJyVRy7WEm8JHwfCcRBNE/4n4=;
- b=npTDYhgVT89awcqeHO8zFfzTwDvoKb0IzPGLf6FHeIpDNR0jghMB2W5Dmt1y/yjZa1
- H7QxHNqnTxT2qaqgvMeGmOWRjNttVn7GHatlEBGsIiDRuBtn74nyhAh8hnSKnNarE7gG
- gZQDDo6L9DloAPum8uX2LXwsbRR2XKAa7sQPz/IB8EKenHetHJxFa2zmhw24uGZVqJqK
- CiuefRZhaLlh597F+iOxizq7YOl3o/7WhyvyFzVm+q9hQuwTVVmBOoHW8egdugnJUwiU
- YU365HK9rWq+dn90z0vpuSEhiMwhwExO6n4hAmyk1XCet6OrtVdewE2RtWow/ktVRGW6
- KycA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUaCU3QYBKeacc7D/PxWzVgvaH7X5lh2o44iKyGnh4vRC4137YegHRXuq+NtzaVF+iXoyUP4zI=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy/25Vre3aSknn4YjUXR5wplkxadj8RDGioLmE84oXE7EanoEHB
- FbpIQ2KlGAOIUKFbRUo28qztw1/FpF3dUloxCGMQeuh31PAQVVVvOhBd
-X-Gm-Gg: ASbGncvgzPqg20JLDty8uAjcYuhgQ3J108NyMrbsQTgCHR2dX5+d+nZqYKX1k8WIWZQ
- Cf5n13pGf0zA25+6CcNuXYBsKNuCjPmfRNA7lpHnUokue9KXl2mSatJ6DYP28ZNyNXudO/orLU0
- qX/W5Dy5wRIXd65U/TqjK1rNwuvu+zIUMBlDOALEp5zeZwaR4oBhT3eNXwbnmclYPRWF/UMRC3c
- EO1uh+8AqnizY0XzsJicm0/ezNyPjGh6LvqhCOEIjKgZRst64x7JuWljDSYiiV+D5kIivrcIFOV
- zzrYUXeGrxzk6TA9Lc2bC0nJl3iz/+JjD64su+j/YigrqHhXbtkvEQRFlZcYvXBgkS4LlkUa8Ma
- RUqggvLEVCICAvRAzKVH0b+lyRNGLqoXnaamh65nlvFp+o3tE5ekDnv6qpl5Nuu6VaBXCbT6LgR
- XKYo+EhoNglEM0o/eKJ9YPEesj7T9fRmMXE4OKt9HB
-X-Google-Smtp-Source: AGHT+IFAnkJ8HkWeYKjvwNNjTA7GP5xQ+xJdxoPhHyG/meviNKNvO1R0DO2hmnTXCMvtZ0eYucTNSA==
-X-Received: by 2002:a5d:5d0a:0:b0:3e7:6104:35a8 with SMTP id
- ffacd0b85a97d-42704d98e81mr17268657f8f.35.1761239283058; 
- Thu, 23 Oct 2025 10:08:03 -0700 (PDT)
-Received: from Ansuel-XPS24 (93-34-90-37.ip49.fastwebnet.it. [93.34.90.37])
- by smtp.googlemail.com with ESMTPSA id
- ffacd0b85a97d-429897f52aasm4824465f8f.12.2025.10.23.10.08.01
+ bh=Pb9FVIwLVOyyS5eNnmsGOQS5ugjzlgbz5gZi8U3qo18=;
+ b=gIzaCIUXIDjTI+BAIx8Zcy1HmOe6dlSMQQ902zqqJowqJP+NVZCNoRh5l3YafczA7V
+ T2pW3qHCv/f2l6naK2sqSky10SGSAZLpPJ04o9U0IJve59+HxyZIWmm5df73AvISHhE0
+ R52v5Subf4SpncuB96CrD5Jl7hDjnybp/RC9PUt/jzMETlPk/F26yAGT2b9A+yLTEM6Y
+ XXBP6rUEKYyJPlmdSxP6/wHDiOGqa1/HwSAcuZNP+zVa+3GiQYFsfPCOTHJJkIN+Bgbx
+ /8QHDz9rNbAbQWNvjKsTeIXAiBB9JtzCnogq7/lLFunH7VlmOQcZwT3IWUp0c3EpMrsn
+ GUFA==
+X-Gm-Message-State: AOJu0YyVGwZCnbRj8v/JpnLzDM/UA0MCVCGSUWCktAc6S0GCsXGjfvgz
+ n3kkIP15rb+dFfVEI601tojmBkiimsqIcJ9G4f/U54wG6fC47pSQN3L9A0wZ9uwe9Te689nhyYl
+ lT18iXDPYUrXu
+X-Gm-Gg: ASbGncsTD6x4a90qV9dFcRIBYU5BeNRz6LVkaGIn/CaX1f54EuxzTEZVU122x4Lp48u
+ SSTXy8PP+thzr+7e1+hU9R2O7kqUOAzW4PrU7AezJqTl0emDMps8o42KDZDq/eBPsZVEtUaBzyO
+ vZP/QKLdGUTHhiB6vuHWW2H7mIHxVbKgrRm9fbwdmdepOEyn81SxGlVznPBwdtiasIemqs7MSyu
+ Ri4Nt2nzyCTAN9/d8RmfSSKnUEeuqKziqtEG31kZc+LbIC07DtdllrznXa/gH255P0jCR3lstw7
+ 5Qra4KMTds/VUi7GiPngIDWeAiLYYDNZnmlIS5d9/3pb3OspHcJxFNdkAFWDYJl1Bo3X+b+FYO4
+ AJIFP+AXOQgZX77QmrMY1XFcttHb9CeDi702A7TbLke4PhoGHbOEtsv9ZedwfB+oBHte99P1ipt
+ DnfhIjOxOGmZ905eQ1DgDF+vqL+V5qPHCntaKliDpY0g==
+X-Google-Smtp-Source: AGHT+IG5NhI1GflESq7i5AgPSc+9YUNSekhpNaRcE3ljAoipgeBHeyjRRA0IRoyEvg9jOkhbeNSqIw==
+X-Received: by 2002:a05:6830:611b:b0:758:71cd:897f with SMTP id
+ 46e09a7af769-7c27c92ca7dmr11940690a34.7.1761241262575; 
+ Thu, 23 Oct 2025 10:41:02 -0700 (PDT)
+Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c51118aa6dsm774359a34.12.2025.10.23.10.41.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Oct 2025 10:08:02 -0700 (PDT)
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>
-Subject: [PATCH v3] net: airoha: bind MDIO controller on Ethernet load
-Date: Thu, 23 Oct 2025 19:07:45 +0200
-Message-ID: <20251023170753.21628-1-ansuelsmth@gmail.com>
-X-Mailer: git-send-email 2.51.0
+ Thu, 23 Oct 2025 10:41:01 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Kory Maincent <kory.maincent@bootlin.com>
+Subject: [PATCH] python: Add a top-level requirements.txt file
+Date: Thu, 23 Oct 2025 11:40:59 -0600
+Message-ID: <20251023174059.1962529-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,87 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind MDIO controller on Ethernet Controller load. The Airoha AN7581 SoC
-have an integrated Switch based on MT7531 (or more saying MT7988).
+A frequently reported problem is that someone misses a required python
+package when doing a specific task within U-Boot. This is in turn
+because each of our requirements.txt files only lists their direct
+dependencies. It is not always clear that another tool has its own
+requirements and thus something else fails. Solve this by having a top
+level requirements.txt file for the project which in turn installs all
+of our other project requirements.txt files.
 
-Attach it to the mdio node in the switch node to support scanning for
-MDIO devices on the BUS with DM API.
-
-Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/net/Kconfig      |  1 +
- drivers/net/airoha_eth.c | 32 ++++++++++++++++++++++++++++++++
- 2 files changed, 33 insertions(+)
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Kory Maincent <kory.maincent@bootlin.com>
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index cee4a3fc9bd..ce7c7e6297e 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -126,6 +126,7 @@ config AIROHA_ETH
- 	depends on ARCH_AIROHA
- 	select PHYLIB
- 	select DM_RESET
-+	select MDIO_MT7531
- 	help
- 	  This Driver support Airoha Ethernet QDMA Driver
- 	  Say Y to enable support for the Airoha Ethernet QDMA.
-diff --git a/drivers/net/airoha_eth.c b/drivers/net/airoha_eth.c
-index 6588eb3a806..d62c56e2563 100644
---- a/drivers/net/airoha_eth.c
-+++ b/drivers/net/airoha_eth.c
-@@ -10,6 +10,7 @@
- 
- #include <dm.h>
- #include <dm/devres.h>
-+#include <dm/lists.h>
- #include <mapmem.h>
- #include <net.h>
- #include <regmap.h>
-@@ -971,6 +972,36 @@ static int arht_eth_write_hwaddr(struct udevice *dev)
- 	return 0;
- }
- 
-+static int airoha_eth_bind(struct udevice *dev)
-+{
-+	ofnode switch_node, mdio_node;
-+	struct udevice *mdio_dev;
-+	int ret = 0;
-+
-+	if (!CONFIG_IS_ENABLED(MDIO_MT7531))
-+		return 0;
-+
-+	switch_node = ofnode_by_compatible(ofnode_null(),
-+					   "airoha,en7581-switch");
-+	if (!ofnode_valid(switch_node)) {
-+		debug("Warning: missing switch node\n");
-+		return 0;
-+	}
-+
-+	mdio_node = ofnode_find_subnode(switch_node, "mdio");
-+	if (!ofnode_valid(mdio_node)) {
-+		debug("Warning: missing mdio node\n");
-+		return 0;
-+	}
-+
-+	ret = device_bind_driver_to_node(dev, "mt7531-mdio", "mdio",
-+					 mdio_node, &mdio_dev);
-+	if (ret)
-+		debug("Warning: failed to bind mdio controller\n");
-+
-+	return 0;
-+}
-+
- static const struct udevice_id airoha_eth_ids[] = {
- 	{ .compatible = "airoha,en7581-eth" },
- 	{ }
-@@ -990,6 +1021,7 @@ U_BOOT_DRIVER(airoha_eth) = {
- 	.id = UCLASS_ETH,
- 	.of_match = airoha_eth_ids,
- 	.probe = airoha_eth_probe,
-+	.bind = airoha_eth_bind,
- 	.ops = &airoha_eth_ops,
- 	.priv_auto = sizeof(struct airoha_eth),
- 	.plat_auto = sizeof(struct eth_pdata),
+As Kory is the most recent person to hit this, cc'ing them. I think this
+is the right path forward and if agreed, I'll update documentation in a
+follow-up.
+---
+ requirements.txt | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 requirements.txt
+
+diff --git a/requirements.txt b/requirements.txt
+new file mode 100644
+index 000000000000..0fd08b9da17b
+--- /dev/null
++++ b/requirements.txt
+@@ -0,0 +1,8 @@
++# For ease of use, this is all requirements files for all portions
++# of U-Boot
++-r doc/sphinx/requirements.txt
++-r tools/u_boot_pylib/requirements.txt
++-r tools/buildman/requirements.txt
++-r tools/binman/requirements.txt
++-r tools/patman/requirements.txt
++-r test/py/requirements.txt
 -- 
-2.51.0
+2.43.0
 
