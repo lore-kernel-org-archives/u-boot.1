@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3AE3CCD1BE
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 13:35:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C966CCD1BE
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 13:39:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E9B68006D;
-	Thu, 23 Oct 2025 15:35:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E253C8006D;
+	Thu, 23 Oct 2025 15:38:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dwlvLn5/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jLm2qj1f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9126780422; Thu, 23 Oct 2025 15:35:07 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id B9AEE82E34; Thu, 23 Oct 2025 15:38:57 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DFFE8003E
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 15:35:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77A468003E
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 15:38:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=casey.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-427091cd4fdso531032f8f.1
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 06:35:02 -0700 (PDT)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-42557c5cedcso576359f8f.0
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 06:38:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761226501; x=1761831301; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761226735; x=1761831535; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=StDWmdqyglAEym66hZx4U8xsvx0skEWhJwmg5Tqa1HE=;
- b=dwlvLn5/vtD60OI3Sy9eHc0uw7NSsfHZ4rU1tKR+GjYltX7wA5Vg1RZD8LmiDnnYq6
- wowqfII3QSx5LykL2dRY6oi46wgmeEAy+SPJ0wnzon213Kp34ZEAtAq6C5MOP0UiAtSr
- 4Ji8W34cc4tW8ZYOb4+JXYzbe4ADec7J70YnjDkzJ5EfIvc8uzgjweqiziviBUERi/dN
- VdvVUH5ul/hnm9xXW23DSFBSMdy6xGpFP0pp6b22zjeD0g63bR1leEbTPr0wtXFZhE0/
- aHVeBvMUFqFyuu/ITf0fS2i4cTC1tF97EVpJre+UDTN2jxu0V4ROZfoCpD32/Gf5NBNh
- sUTA==
+ bh=yT55aSkyinJN84SXXJ6GmKDK2mxhYd71YSs3KtQx1kA=;
+ b=jLm2qj1fLRmcQZF5s8lR4HybuwYgOh+8k+Iwh9mQxpO1/O1aa1nE+9MDIYntwFpFGK
+ rVHyOQaiN047SCpGnaOudcWSjDaRaR66pzP7gcha6EWg2ChLxxcmIXy9zufCHxgP6Hoy
+ K3wSFenbbR4GRsTmncwiqSGeg2HsUd/HFHajv5d7jYJG60Gx0JFH0NAEShbPkAEDAFL0
+ 4uEqywYVNVIqSawB5rit42ra868ROwnEWNacJwwLHai06V5lH553RQc4zniSRD8abbxh
+ 1CB94mNPo89cFeCO3qoiwvWhe6ZekN+9Qp439mK1wBy+tegURR5bOgDgqjVZ57FY+Z3X
+ siDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761226501; x=1761831301;
+ d=1e100.net; s=20230601; t=1761226735; x=1761831535;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=StDWmdqyglAEym66hZx4U8xsvx0skEWhJwmg5Tqa1HE=;
- b=b3/mY9UguScO9+1jAIfOFck17kKxjkL5Zo8FmTTOuP5pRCfPLkdrKN8RqG7ug1c5Md
- 9mgsrhLHus9TGFF3GLuYBZV2DQmG5OeTRjtuxFnfnwCwpHV5zAfkUOQjIPeb9J5DmbvN
- bBQfz7RAzrKQOTQzFfslLB8n5SyzaM5Mai4Gn2wYjSWT+u0fxjYEAMY78f5M9/H7yVcE
- TR4zjJ2KB3SmF96v4PHkcoJNQhrB7lc6c3JE/admrA8phBe9Lt0/HA+oIHXVqdH5mt+j
- myZndc3K2PHopvrvMpF+493bwpCsoPGR47gSlRWyfgLYTOmLgj6Y6E3jx2juEweVZR5O
- rS8w==
+ bh=yT55aSkyinJN84SXXJ6GmKDK2mxhYd71YSs3KtQx1kA=;
+ b=FZ0PH9T9fwfh8tYWBagP3l1TeOv6FMV/OgM/C15YrYc/KKv0p01phbtdgmNqhNWuB1
+ YSmJ4IIteAA4o/K6LHCTxB4rj0G5cal6xGCeaV11zt0nePNrZYAPrM+fJJTUXcWSkXZc
+ EDRiUlvTjWhRfxixo+sikszd9GtFAtWgfWB7G/UIA+8aV9iUXC7g91RVeP1KhZfBuOnh
+ ha+7M6qqSVvW7JgDCVjOvlkpdh14g3iGgwdHRGolK+06OiTlWaEJ/d7b+fhcJaREE6sf
+ krHs1d9XzEkly8u6qy9Dr8xByuQVO6K5tLg+NOdPGExkHmyeBur2YfT9yPQrLJpQPMPK
+ 0A1w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWy+3Ism0+anED2J6W3VrbYRJ6ga0eu6j+SoDMLmJ7wLsZxd6iHpz0ozubqwE885gSvpanB5hA=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxyGsGcDrvVmQH37YX5JlxQ/CERWcAM/g4U38dHZ6FuBJTWq7g
- x5Gi/aeNTFqFKa/5h+4QISdjrwRG8stW6lZudqf5GxoxJ14Ecl2dP5Lt+2UeLJjHINwXorfoHN9
- 99pIC
-X-Gm-Gg: ASbGncsMTa4p9aukVjh3qR58GpPCdbLT8bQ5WoUd9ICsrjCzbu6fLplB/KQQEdKTBic
- y4DN5XNYQoiTD7kKkmickjUs7I+zRmq+7Cp7/kIrFnmrMIrvRL8AEb02vCCxmD2u5ruhdBgK2X5
- 6HCrupowyT1rPHJzvTsyXVggeeXqiEzTRaA4yr4VfAbi+UiUeWi77mBje+VTSocElrMehr+9fTj
- M4ZejfPT/wn6V/0xfRyOyEeKUcZhlKJxlWMgN+dWL6u7HqcUUH8gdQNBT+/+okKxgoNZcyF6F3B
- qcXUzVYtzpfwZvxUBdjrHTMBVdo7SdpPJbwCwDAOxk6/0UR/526b/pmPWGkPCnXjYaYbM/E2JeI
- lCXk2VIMUdjYvX3VN9/IpQUfki0bthD3XQZiO5CbkULQ53LeYv6zrylTZGMbuNraTjd/7CZNGpD
- cwU+Hsh0HKEp4UcvJUR+js+9TQ1elrUQiVdtoAMQv1c/Nc157j4wKSt1casB9zG50=
-X-Google-Smtp-Source: AGHT+IFU6lso2xTOf2/6xbES4Lk39iA9WdYbPHAPAP+5i0peGuL9GHAXTqheXW55xlS0Vm9h2Dbkqg==
-X-Received: by 2002:a05:6000:4202:b0:426:d5a0:bdd2 with SMTP id
- ffacd0b85a97d-42704c5f7bbmr14107720f8f.0.1761226501496; 
- Thu, 23 Oct 2025 06:35:01 -0700 (PDT)
+ AJvYcCVcZFklwABHH2AgIhN+xWYKlZBK3L+lcQTnhXRnBP3/3Ikx7fUYbgEC4jgzYJFgUNZuOmMC+6M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyz9NJdgv29IwHyDD5jVptrvUKSijDxJDx77QcoXLwBO+QB2cmy
+ GgiGCY4icH+ysdPJT63JV8u/KdfOmXIyxA0UQc4UM414Xl+R9n7EWoqZuJw3u2h1MO8=
+X-Gm-Gg: ASbGncvgUPURDzuqxnY1dFACwdBG2Rv9+JpUlqpjvXsGSden19681OyuwNRQfhs2V28
+ 72rfvwFvqO4lErkmvWqYfZCzfZCyTlRyuQOgxrOJ10diT4Vv4+0t/yt/7MUGzfZ0YHSgfm/foSO
+ wLap8mZjZJPf/tUZBguDsDV/VA8Im4Fgd84ipAesQMMyjFPhqovMmzdrU018aQuxZKLeMqe7/HW
+ C4bDd6tqHv2RmyRbCAOSABfjbWrDBmTwl7aP4zMycsYfqOrU0OnL9Tl3RDU+rZ8FvUGwI9roxdE
+ 4OlzB/zjUSfyQveLzQ7+cZuvMsaCQpfXQuQWtxvWWubbPu7NGWWGiyv2s1FENcAmbqVi8a7TRlk
+ 3AAM5BAp6jWoQPDfIECbWKfjGlh7yc9iB+Rgw84LZEaHeAMKJZvLCSGn3/QwVvUNLZq3W0fF3Jd
+ p8yMTgsHjYZBHLwvplNAX4WQOQ5ipnuzNJGCSaL684Gam6w8y6Gw3h126Q96HFd6s=
+X-Google-Smtp-Source: AGHT+IFA1VWPVjBJEEiFaRMXo7QJSuAe2/c5zkrTNVOy8Ilw2fUBqg/hOnW4gM7ck1o96rSX98XtAw==
+X-Received: by 2002:a05:6000:1ac5:b0:425:8c14:1de0 with SMTP id
+ ffacd0b85a97d-42704db4899mr17487556f8f.61.1761226734801; 
+ Thu, 23 Oct 2025 06:38:54 -0700 (PDT)
 Received: from lion.tail248178.ts.net (p4fc3da2c.dip0.t-ipconnect.de.
  [79.195.218.44]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4298bd78c69sm2247191f8f.4.2025.10.23.06.34.59
+ ffacd0b85a97d-429898add8bsm3906118f8f.23.2025.10.23.06.38.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Oct 2025 06:35:00 -0700 (PDT)
+ Thu, 23 Oct 2025 06:38:53 -0700 (PDT)
 From: Casey Connolly <casey.connolly@linaro.org>
 To: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
  Casey Connolly <casey.connolly@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
  Sumit Garg <sumit.garg@kernel.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, Casey Connolly <kcxt@postmarketos.org>,
- u-boot@lists.denx.de
-Subject: [PATCH] binman: fix mkmbn integration and tests
-Date: Thu, 23 Oct 2025 15:34:41 +0200
-Message-ID: <20251023133453.3683388-1-casey.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io,
+	u-boot@lists.denx.de
+Subject: [PATCH RESEND] binman: fix mkmbn integration and tests
+Date: Thu, 23 Oct 2025 15:38:26 +0200
+Message-ID: <20251023133850.3686431-1-casey.connolly@linaro.org>
 X-Mailer: git-send-email 2.51.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -102,8 +101,6 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Caleb Connolly <casey.connolly@linaro.org>
-
 Add the missing cryptography requirement to binman so that mkmbn
 will work correctly, fix a pylint error, and adjust mkmbn to properly
 integrate into binman rather than writing the output file directly.
@@ -112,6 +109,8 @@ For now skip testing u_boot_mbn since it has some weird requirements due
 to how mkmbn works and can't be easily integrated into binman.
 
 Signed-off-by: Casey Connolly <casey.connolly@linaro.org>
+---
+Resent to fix my name
 ---
  tools/binman/btool/mkmbn.py      | 9 ++-------
  tools/binman/etype/u_boot_mbn.py | 5 +++--
