@@ -4,67 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 749CDCCD1BC
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 14:24:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F1F8CCD1BE
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 14:26:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D97BD8006D;
-	Thu, 23 Oct 2025 16:24:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 59A11835FD;
+	Thu, 23 Oct 2025 16:26:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="StntsyKi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cH7XvTJz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29C5A8334F; Thu, 23 Oct 2025 16:24:39 +0200 (CEST)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F23E68003E
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 16:24:36 +0200 (CEST)
+ id 96E278363D; Thu, 23 Oct 2025 16:26:51 +0200 (CEST)
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A21C98006D
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 16:26:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59NEOVhk1683956;
- Thu, 23 Oct 2025 09:24:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761229471;
- bh=3jQ/Yz9RL1yNG/Oe99mmeBc+u97dVl0kFScL58Ncn8Y=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=StntsyKiW89iYj684+mX1J/lvH4RsS9r32nZ9nobj3D6ZZngp8loz4AANnC0SlbYN
- 9b8otL2yg9IWfb4qtSaJ4xcwZ4dIv/nsbxGOmhL2Ha7WPT9L8CpJoWR39XikwUnWP0
- CGltR/CsbQacrJ8lcd4HPPUfHsbzswC+zkgonxxs=
-Received: from DLEE207.ent.ti.com (dlee207.ent.ti.com [157.170.170.95])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59NEOUv32872933
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 23 Oct 2025 09:24:31 -0500
-Received: from DLEE213.ent.ti.com (157.170.170.116) by DLEE207.ent.ti.com
- (157.170.170.95) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 23 Oct
- 2025 09:24:30 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE213.ent.ti.com
- (157.170.170.116) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 23 Oct 2025 09:24:30 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59NEOUS22982276;
- Thu, 23 Oct 2025 09:24:30 -0500
-Message-ID: <f499c3ea-72ce-4698-91d2-b10aa8c438bf@ti.com>
-Date: Thu, 23 Oct 2025 09:24:30 -0500
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=casey.connolly@linaro.org
+Received: by mail-wm1-x332.google.com with SMTP id
+ 5b1f17b1804b1-475ca9237c2so5176755e9.3
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 07:26:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761229609; x=1761834409; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/bZn1/iYrdYeTNoCp6HxujwB+SeoQG5ZfXoqB3exzRg=;
+ b=cH7XvTJz3JGXyzD0QQ/rPY96HlTeVR6viiJKUIBVStkA6fLSSmBpjK2y5unosGWwXn
+ 8ERlWBkjKa4+ronOpGpB0gBTTZNxCMnkGQ8nUhHXmE4fMA44f3vmBiA7n/5MHAZjCC6A
+ wCakymGeNcw0zMxuCFEnSUawlXZpL6+64v2b2ukZA3AxHhTbbcRaAXDHiUsdoKmsD+tP
+ 0eLh3xKqAfdmeVyhkPYzHdpTHz0OQz7Pf3W31E9YHLE53lq7+xttPYgN1f6YVfuTR80d
+ XrXXwCj8Yzpab8CCmhtWqmeUUPp5CxP4ju3Opb1x509CLBgi1YvkYRvpDHcVwNWEqJix
+ JoqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761229609; x=1761834409;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/bZn1/iYrdYeTNoCp6HxujwB+SeoQG5ZfXoqB3exzRg=;
+ b=P+/dGhIQafKljz0gWhlGqan+Oa1c3p2KQXsWdRuf2W7Y/2VtQ6g/Hh7BMAfANev6RH
+ /87XxRyefk0MJqJ/Cx5dsI8PS2NHQ0vWfT/6/yQ8ldut2Ak6tGTx1pcE1DrZt5JJWvur
+ e0ijJAQOE6jF2F2zqIvRGqZFvByEUew2C3/ptopQst8S+81DR8V06+tkgucqKpfEC5sO
+ 15ylVpb3ITtrTKS5rqVQxfFbEUiNFLA7qs6R2EJEXttXc6kYoJb6GNIICvEtYTRL30Ht
+ +6UUapbbwwg2GqzxwDjZ/NeSFI2xAn0Gsfex5kvejKdY1BAQL+Fr2T64MxZVW4H3Mtbo
+ 2E4Q==
+X-Gm-Message-State: AOJu0Yx4yxnckbg900wnv2esETckHujl4QRfR+SdWZ1IVIDZEITk96Mn
+ 1juI2+t6qF6dYMDa57PjkfbAUjayw88QUQkaCUiN+C4RutDZ08VVS0gmZ477p9oxQKc=
+X-Gm-Gg: ASbGncsiwntYczgZ9Ez/MEaqtDU7fU1ElQA1o0ODWqhQQ86JJm5d6VncoI3ceThZk54
+ 885ZEWBWmE9PAhI0kLp0ZZGJOt8YSTinrZG/SSXVj/NsVgpnFdPfU1sVknez0NFHceQBgnli9oB
+ xz/EyRA+0ydvBQCDMqZSJrCUi+0e1jRT85I4a5zpeBjM43DWLpPPA+OuZ+3Nfn+xx/0Vi6zoMXt
+ 0Rvgu0jGuxk3Z0OCr3oapeh1D5AqCF0C6KLWayltHA7yXjGepdrt2U8UjqteRsGxBcJymeFUnOH
+ U0/8EIAJnzLnxdtHb6GiX0QSB4IUWPC/dUY7aMeQs08OndlRSYikxl70YfA02iT4S/HfXOWdUMh
+ DeZHn0HXY1NcLTY2cRntkj2z0V4xWUMwGGSwOHOM161oYhaibRJfWm6+e4gnW9AHHkJaCHDlz08
+ Rv5oUIy0B5G7tnlDAQpqt+XoSKheXmtKnM6QItgyFFQSuT
+X-Google-Smtp-Source: AGHT+IGIpJjkxznCMCDNRH+T3ky/vLLzodjDihrQgBsIQt2ehBwsqu2U/F4K94AkWGnU/VEQevdBpA==
+X-Received: by 2002:a05:600c:3541:b0:46d:a04:50c6 with SMTP id
+ 5b1f17b1804b1-4711791934dmr186778595e9.30.1761229609036; 
+ Thu, 23 Oct 2025 07:26:49 -0700 (PDT)
+Received: from lion.localdomain (p4fc3da2c.dip0.t-ipconnect.de.
+ [79.195.218.44]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-475cae9f292sm38585445e9.5.2025.10.23.07.26.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Oct 2025 07:26:48 -0700 (PDT)
+From: Casey Connolly <casey.connolly@linaro.org>
+Subject: [PATCH 0/2] eficonfig: improve handling boot entry optional data
+Date: Thu, 23 Oct 2025 16:26:45 +0200
+Message-Id: <20251023-eficonfig-ux-improvements-v1-0-f5fc93b126ed@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 4/6] mach-k3: security: Propagate verified image addr
-To: Philippe Schenker <dev@pschenker.ch>, <u-boot@lists.denx.de>
-CC: <stefan@embear.ch>, Philippe Schenker <philippe.schenker@impulsing.ch>,
- Tom Rini <trini@konsulko.com>
-References: <20251023094631.16742-1-dev@pschenker.ch>
- <20251023094631.16742-5-dev@pschenker.ch>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20251023094631.16742-5-dev@pschenker.ch>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-B4-Tracking: v=1; b=H4sIACY7+mgC/x2MywqAIBAAf0X23IIaFfQr0cFsrT34QCuC6N+Tj
+ gMz80ChzFRgFA9kurhwDBVUI8DuJmyEvFYGLXWnpG6RHNsYHG943sg+5XiRp3AUHLrFWOfkYFU
+ PtU+5uvf/nub3/QCmLLitawAAAA==
+X-Change-ID: 20251023-eficonfig-ux-improvements-75bacff07c16
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Weijie Gao <weijie.gao@mediatek.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15-dev-52d38
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1076;
+ i=casey.connolly@linaro.org; h=from:subject:message-id;
+ bh=wweWagSfNccijySb1zMIG1eoklY9nQVqs9QQg8djtks=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhoxf1up3z3RpezGcylPq6kq4vnD9zPY/E+6YRaq/Scs63
+ d1RkJnZUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACZS9JPhn6bFe3EppbXz2h1X
+ 7WnrWKduER3Uli3yZVfI8US5lTMuzmP4Z5pYYOgnPbd2wwa2hxvO606eVt/35N/36rQ/JQqbahe
+ p3AQA
+X-Developer-Key: i=casey.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,43 +115,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/23/25 4:46 AM, Philippe Schenker wrote:
-> From: Philippe Schenker <philippe.schenker@impulsing.ch>
-> 
-> The ti_secure_image_check() function may relocate the image during
-> authentication, updating image_addr to point to the verified location.
-> The caller was not updated with this new address, causing it to
-> reference the original unverified location.
-> 
-> Update p_image with the verified image address after authentication
-> to ensure subsequent operations use the correct location.
-> 
-> Signed-off-by: Philippe Schenker <philippe.schenker@impulsing.ch>
-> ---
+When booting Linux with EFISTUB or via a UKI the kernel cmdline
+arguments are passed in via the boot entry "optional data" field.
+Currently this field has a limited size and on editing the enter
+contents are replaced which can get quite frustrating even when there
+are only a handful of cmdline arguments.
 
-Seems reasonable,
+Let's improve this by expanding the maximum size and teaching the text
+entry field to be editable if the buffer already contains data, as well
+as adding cursor navigation with the arrow keys and End key.
 
-Acked-by: Andrew Davis <afd@ti.com>
+Additionally, implement support for ctrl+left/right to jump left/right
+by word as well for quick navigation of long argument lists.
 
-BTW, did you actually run into an issue with having a binary moved
-by the authentication, or was this found some other way? Normally
-binaries don't move (but they can, so this is still valid).
+---
+Casey Connolly (2):
+      efi_loader: efi_console: support editable input fields
+      efi_loader: efi_console: jump to prev/next word with ctrl+arrow
 
-> 
->   arch/arm/mach-k3/security.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/arch/arm/mach-k3/security.c b/arch/arm/mach-k3/security.c
-> index 3468a370a455..9255505a7944 100644
-> --- a/arch/arm/mach-k3/security.c
-> +++ b/arch/arm/mach-k3/security.c
-> @@ -119,6 +119,8 @@ void ti_secure_image_post_process(void **p_image, size_t *p_size)
->   	 */
->   	*p_size = image_size;
->   
-> +	*p_image = (void *)image_addr;
-> +
->   	/*
->   	 * Output notification of successful authentication to re-assure the
->   	 * user that the secure code is being processed as expected. However
+ cmd/eficonfig.c              |  2 ++
+ lib/efi_loader/efi_console.c | 69 +++++++++++++++++++++++++++++++++++++-------
+ 2 files changed, 61 insertions(+), 10 deletions(-)
+---
+base-commit: abfb7f3a64c32c88da007e775cd8f27d4a427231
+
+// Caleb (they/them)
 
