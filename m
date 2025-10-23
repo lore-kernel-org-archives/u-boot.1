@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A9FACCD1BF
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 21:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 659B4CCD193
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 22:41:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A5C08006D;
-	Thu, 23 Oct 2025 23:56:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9593D8006D;
+	Fri, 24 Oct 2025 00:41:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hITwIL99";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="W+0uZww6";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="E8VrmNtA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F0F8835FD; Thu, 23 Oct 2025 23:55:59 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C1A20807C0; Fri, 24 Oct 2025 00:41:53 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 428218003E
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 23:55:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6037F8003E
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 00:41:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-7817c2d909cso15582427b3.1
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 14:55:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761256556; x=1761861356; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MK8oAQb0IS2LPj9f33fffkgTcW3EfeGo4OXWSO7jlOM=;
- b=hITwIL993EcQIiql+kM5gpg8c2LJq2POmAM7RmkquRUvjcmRT/hIGXJqfWus2F0vYQ
- Jr2akgkH6loQevhg+AuyVmoCrg1UvisrXMtIZOheyA8Hhkot+bPu4YU2vnkh3RPzG57h
- 0+IZ7lwMoPxegXWM+hu+b2t98xwRK4d0jxBb+8XUPPBWGxGTfIi+GX8/grIw5qFCodDv
- gZ9XTSlSKvu2UCpO4E0fHK9MwQltufCuG/Z6F9aJP5pvDfaj26XyVcRsT1EgvoDRC2xh
- JCI7t0umtU7d0cyvwfXvlk9c/VbbORLbWYOFYUCZcaUsKYnDgzmpgH3NCTX3iKBbwc78
- 68Rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761256556; x=1761861356;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=MK8oAQb0IS2LPj9f33fffkgTcW3EfeGo4OXWSO7jlOM=;
- b=lLuTt3WQ9jS5jzRd0Zx4gc9k8D5QRmmM/2FJTZOo6vG/aK2vsy/6/372OgwTxwUvyf
- KuY5d+SIRLWKfe3GXerwUKKyr/qVOcmt/bpWze9auyGKTX3hPANy1DD33wBM4zX/NUvn
- zLj11rdBZ9Nlufx/16wzGLJ1lx6wNox9oDeYgcWeEK81zIKUCkiDaXZHNQjwAchT8UAM
- Uswg29bcDuZbA2BfYK1x8aq/ckYJYyk7Q5Ymd28b3x0xkGjye+fM9IbvDDWxZe4hsGKa
- PHP9Q1zQK9zfYd6g7wGxEwfPjR/O0nayy4ql4FhrCOiqy0EupWYYIJp4DreF2NTZ4PXr
- +Drg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU8eDC+EoovxkCj5+1Mutc5X/REaxW2s/OYeCVDpnx3cDVeNa7r/On2L/Jyh+u4JhaliE3LpdY=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMqjqlhSY6E87R6jvJuGbMyCa9MBqx2XVflySyESFWI5y67Ioy
- 9k9h6ALgnoSe+1QasffveAU/NxXagES7v4XW4jjst2rY8pGcXpKs0DMdDrCz0tx1svUuqYFRfVh
- AIzkjlDQcKlU//S3qx78m/Y8fHhfKAMb/ELxEEE5Z2g==
-X-Gm-Gg: ASbGnctPOG0HtkOhBeWednBn3S2LKIxsQGrGTy3ts5E0ZvocucdiUNPA6cuGFVV4w6S
- Ft3gpFmCvsgKU4zmHE5wqkn23NDK6dnL+Vr0fKhknvVaAhGm9Oc17V0sgSLoENgquwoG28+ot8H
- vRA//H6cRrw91A4l+rRNU3i8FugGI99gYukE++h9cAus53Xr0ioQb9qAkxVO6kjqhw9wkwSj/0Z
- FhzYF1gihUEM67GYMiITXAjjyIc6Kj8ctFb2e05NrtOxDdnMZI1j9HO0N3JJdRDDVVRt9aBvPjf
- fQ0mhEqIjR7PNxglF9btNUkrZny3zg==
-X-Google-Smtp-Source: AGHT+IHrLyxFTg2QqarGxmA/S63es3zSeGurTstVRYEbyioNbdzTzrlXduqhwRE7f9pVgPRklZ3UtIg9MOvIE3pzs5U=
-X-Received: by 2002:a05:690c:610e:b0:785:aedf:4ac6 with SMTP id
- 00721157ae682-785aedf6aa2mr179710067b3.6.1761256556062; Thu, 23 Oct 2025
- 14:55:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ct1HM0lDzz9skc;
+ Fri, 24 Oct 2025 00:41:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761259311;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lJc07d/4O7oAiOAhSvT1BGHR/M5MMe/sYzABQuJYxgg=;
+ b=W+0uZww6Izyh3yfG2HGxqu4jNwDlyxxyo9G/SmKFaDUywt+k+roaGggVZgMKBZfRuiJ33t
+ 3i76Hwo5HXutH1Jo4q1xfpXI0s6TmDryNa3FnfB9qc2C7Nmp56iMnDDCvS/fsRfi+NZUR3
+ HjuzYOBA5bYwcZ3EFjyEmANvMgfjIkz59Nj/GvIFi1djWEN3zj2LnxwkCmjgkVn6XgNCdm
+ cOCTQPSaU+eBFIW1c1xGc3kqNf8snSOPb+gNizAdT2cxC4seUbBIvkxFml/DShUeemMBGH
+ ptstIg+qbirYnuFIIKUOD3Q4/0ucAu9CfbBchFDWmAWXmk7sGoY77GPZvlG4Gw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=E8VrmNtA;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::1 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761259309;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=lJc07d/4O7oAiOAhSvT1BGHR/M5MMe/sYzABQuJYxgg=;
+ b=E8VrmNtAmND81LwBXoOf1HXwehUM7TAFRr6xxvMMIIFiViMHM9QIr3H/5hWqJYX8LiWFnD
+ WIDlU+IwOoCwhvh19ZXoWqvqata0BVllH+qaYR2U6BnwIMflhtVIEs2idO/X5p651f8Nbs
+ nOHEhKFZ15UiqlZI7mWlVTytTiWxrBsyMu9aJO9aNOqSgdOWW4LhhdkGCjTSVmhTXYawsm
+ 3F/V/H8gPYJ848A5HzXcL0sSJ6HYszYitOHt9F5ibFYKfBmHHGEJ7qQ6FypGdkQADFjMV9
+ gmTvsL6VaF+Us5cdUxQWyzR+BNXQu9WlSXy7Q80ZGeOHc9NYtz3fVGf1gAkQLQ==
+To: u-boot@lists.denx.de
+Cc: Thanh Quan <thanh.quan.xn@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Dominic Rath <rath@ibv-augsburg.net>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: phy: dp83869: Update STRAP_OPMODE bitmask
+Date: Fri, 24 Oct 2025 00:41:27 +0200
+Message-ID: <20251023224136.193007-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20251006232538.5109-1-semen.protsenko@linaro.org>
-In-Reply-To: <20251006232538.5109-1-semen.protsenko@linaro.org>
-From: Sam Protsenko <semen.protsenko@linaro.org>
-Date: Thu, 23 Oct 2025 16:55:45 -0500
-X-Gm-Features: AS18NWBo_bN_40FtZh9Wfw2iVmZxLfH2JN33MArJhACQxb8E1RbZ8pLA1aaxRGo
-Message-ID: <CAPLW+4nSaDC02AfatZdMtsrp_7amF=wxB0XofioB+400heXKoQ@mail.gmail.com>
-Subject: Re: [PATCH v3] doc: samsung: Extend E850-96 documentation to be
- comprehensive
-To: Minkyu Kang <mk7.kang@samsung.com>, Minkyu Kang <promsoft@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 4edd16012a4dd2f86e9
+X-MBO-RS-META: fpxshye4h1xetbwmpg697h58z54wf83i
+X-Rspamd-Queue-Id: 4ct1HM0lDzz9skc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,26 +93,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Minkyu,
+From: Thanh Quan <thanh.quan.xn@renesas.com>
 
-If you don't have any comments on this patch, can you please take it?
+According to the TI DP83869HM datasheet Revision D (June 2025), section
+7.6.1.41 STRAP_STS Register, the STRAP_OPMODE bitmask is bit [11:9].
+Fix this.
 
-On Mon, Oct 6, 2025 at 6:25=E2=80=AFPM Sam Protsenko <semen.protsenko@linar=
-o.org> wrote:
->
-> Add more bootloading details for E850-96 board. New sections cover next
-> topics:
->
->   - Hardware configuration of the boot device
->   - Flashing and updating the software (multiple methods)
->   - Booting with Standard Boot (multiple methods)
->   - EFI System Partition structure for E850-96
->   - Loadable firmware (LDFW) note
->   - Ethernet and USB Host Support
->
-> That documents all recently enabled U-Boot features for E850-96, which
-> can hopefully make U-Boot more useful for the users and developers of
-> this platform.
->
-> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> ---
+Fixes: f3e22eea815d ("net: phy: add TI DP83869HM ethernet driver")
+Signed-off-by: Thanh Quan <thanh.quan.xn@renesas.com>
+Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org> # Use FIELD_GET()
+---
+Cc: Dominic Rath <rath@ibv-augsburg.net>
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Thanh Quan <thanh.quan.xn@renesas.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ drivers/net/phy/dp83869.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/phy/dp83869.c b/drivers/net/phy/dp83869.c
+index b6fb5adae1f..c60fbf26a03 100644
+--- a/drivers/net/phy/dp83869.c
++++ b/drivers/net/phy/dp83869.c
+@@ -5,6 +5,7 @@
+  */
+ 
+ #include <phy.h>
++#include <linux/bitfield.h>
+ #include <linux/compat.h>
+ #include <malloc.h>
+ 
+@@ -64,7 +65,7 @@
+ #define DP83869_RGMII_RX_CLK_DELAY_EN		BIT(0)
+ 
+ /* STRAP_STS1 bits */
+-#define DP83869_STRAP_OP_MODE_MASK		GENMASK(2, 0)
++#define DP83869_STRAP_OP_MODE_MASK		GENMASK(11, 9)
+ #define DP83869_STRAP_STS1_RESERVED		BIT(11)
+ #define DP83869_STRAP_MIRROR_ENABLED		BIT(12)
+ 
+@@ -168,7 +169,7 @@ static int dp83869_set_strapped_mode(struct phy_device *phydev)
+ 	if (val < 0)
+ 		return val;
+ 
+-	dp83869->mode = val & DP83869_STRAP_OP_MODE_MASK;
++	dp83869->mode = FIELD_GET(DP83869_STRAP_OP_MODE_MASK, val);
+ 
+ 	return 0;
+ }
+-- 
+2.51.0
+
