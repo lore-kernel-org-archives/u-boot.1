@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77F43CCD1BE
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 11:46:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C14C6CCD1BE
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 11:46:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0664C8334F;
-	Thu, 23 Oct 2025 13:46:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E65083677;
+	Thu, 23 Oct 2025 13:46:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jFXBC2tc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hcYkemIA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFD7B82E34; Thu, 23 Oct 2025 13:46:27 +0200 (CEST)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id 2DAE383655; Thu, 23 Oct 2025 13:46:29 +0200 (CEST)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B67338334F
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 13:46:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3537E83623
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 13:46:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59NBkLkX518122;
- Thu, 23 Oct 2025 06:46:21 -0500
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59NBkOHl1668640;
+ Thu, 23 Oct 2025 06:46:24 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761219981;
- bh=osA0X7dl6RbBavQoGg3deqUjPbfYIYRsEJXInZmsJio=;
+ s=ti-com-17Q1; t=1761219985;
+ bh=h0T63Qlh14neMcomPGvVWxe2UUZs2i6PhfRzYw1Dpqo=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=jFXBC2tcQGXqKcxxaw8Lpefzy/lZtcKm0wKUxM4ByxipGjy8yMVMIC7+xIy0YrpNC
- euBFoaVfQ3BvU208cty7Z/hg2Ot/TEOMgQc9/amXhIZE51mmNemzVOOTceg+wAgTsB
- 1HcOhqYPFW5O1KckESxjFgFsSJlJ7uD0OrZwEkEE=
-Received: from DFLE214.ent.ti.com (dfle214.ent.ti.com [10.64.6.72])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59NBkK6J2680141
+ b=hcYkemIA6kfg2t51RCqF8KY68GlEEOpggh03o2KXt6Nh3aDj9jbCzr1h1v948apyY
+ xkSXdS+SAs6lcect1U/di1nRCplF/rgAUHtTKG1xz/l36YRchP8N2wzk+CGXknmTBQ
+ N3TzBOefUcVG6MnR7rGPpG/X7SNLhxKP8rmPcFcQ=
+Received: from DLEE201.ent.ti.com (dlee201.ent.ti.com [157.170.170.76])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59NBkOZG2369107
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 23 Oct 2025 06:46:21 -0500
-Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 23 Oct 2025 06:46:24 -0500
+Received: from DLEE203.ent.ti.com (157.170.170.78) by DLEE201.ent.ti.com
+ (157.170.170.76) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 23 Oct
- 2025 06:46:20 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 06:46:24 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Thu, 23 Oct 2025 06:46:20 -0500
+ Transport; Thu, 23 Oct 2025 06:46:24 -0500
 Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com
  [172.24.231.157])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59NBk5hr2786743;
- Thu, 23 Oct 2025 06:46:17 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59NBk5hs2786743;
+ Thu, 23 Oct 2025 06:46:21 -0500
 From: Hrushikesh Salunke <h-salunke@ti.com>
 To: <a-nandan@ti.com>, <trini@konsulko.com>, <rfried.dev@gmail.com>,
  <marek.vasut+renesas@mailbox.org>, <n-francis@ti.com>,
  <u-kumar1@ti.com>, <s-vadapalli@ti.com>, <semen.protsenko@linaro.org>,
  <jm@ti.com>, <bb@ti.com>
 CC: <u-boot@lists.denx.de>, <h-salunke@ti.com>, <danishanwar@ti.com>
-Subject: [PATCH 3/4] pci_endpoint: pci_cdns_ti_ep: Enable PCIe Endpoint mode
- in J784S4 SoC
-Date: Thu, 23 Oct 2025 17:16:03 +0530
-Message-ID: <20251023114604.3655625-4-h-salunke@ti.com>
+Subject: [PATCH 4/4] configs: j784s4_evm_a72_defconfig: Enable configs for PCI
+ Endpoint mode
+Date: Thu, 23 Oct 2025 17:16:04 +0530
+Message-ID: <20251023114604.3655625-5-h-salunke@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20251023114604.3655625-1-h-salunke@ti.com>
 References: <20251023114604.3655625-1-h-salunke@ti.com>
@@ -84,70 +84,27 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 TI's J784S4 SoC has two instances of PCIe Controller namely PCIe0 and
-PCIe1 which are Cadence PCIe Controllers. Add support to configure PCIe
-instances in Endpoint mode of operation.
-
-While at it disable all endpoint functions except function 0 during
-probe to prevent the Root Complex from enumerating unconfigured
-functions. This ensures only  properly configured endpoint functions
-are visible to the host and avoids enumeration issues with
-multi-function devices.
+PCIe1 which are Cadence PCIe Controllers. Enable corresponding configs
+to support PCIe Endpoint mode of operation on these instances.
 
 Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
 ---
- drivers/pci_endpoint/pcie_cdns_ti_ep.c | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ configs/j784s4_evm_a72_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/pci_endpoint/pcie_cdns_ti_ep.c b/drivers/pci_endpoint/pcie_cdns_ti_ep.c
-index dd3dc939a7e..021bd73a383 100644
---- a/drivers/pci_endpoint/pcie_cdns_ti_ep.c
-+++ b/drivers/pci_endpoint/pcie_cdns_ti_ep.c
-@@ -275,9 +275,11 @@ static int pcie_cdns_ti_ep_probe(struct udevice *dev)
- 	struct pcie_cdns_ti_ep *pcie = dev_get_priv(dev);
- 	struct pcie_cdns_ti_ep_data *data;
- 	struct power_domain pci_pwrdmn;
-+	struct cdns_pcie pcie_dev;
- 	struct clk *clk;
- 	int ret;
- 
-+	pcie_dev.reg_base = pcie->reg_base;
- 	pcie->dev = dev;
- 	data = (struct pcie_cdns_ti_ep_data *)dev_get_driver_data(dev);
- 	if (!data)
-@@ -328,6 +330,13 @@ static int pcie_cdns_ti_ep_probe(struct udevice *dev)
- 		return ret;
- 	}
- 
-+	/*
-+	 * Disable all the functions except function 0 (anyway BIT(0) is
-+	 * hardwired to 1). This is required to avoid RC from enumerating
-+	 * those functions which are not even configured.
-+	 */
-+	cdns_pcie_writel(&pcie_dev, CDNS_PCIE_LM_EP_FUNC_CFG, BIT(0));
-+
- 	return 0;
- }
- 
-@@ -389,11 +398,19 @@ static const struct pcie_cdns_ti_ep_data am64_pcie_ep_data = {
- 	.max_lanes = 1,
- };
- 
-+static const struct pcie_cdns_ti_ep_data j784s4_pcie_ep_data = {
-+	.max_lanes = 4,
-+};
-+
- static const struct udevice_id pcie_cdns_ti_ep_ids[] = {
- 	{
- 		.compatible = "ti,am64-pcie-ep",
- 		.data = (ulong)&am64_pcie_ep_data,
- 	},
-+	{
-+		.compatible = "ti,j784s4-pcie-ep",
-+		.data = (ulong)&j784s4_pcie_ep_data,
-+	},
- 	{},
- };
- 
+diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
+index 67aa18a16da..fc7acbae694 100644
+--- a/configs/j784s4_evm_a72_defconfig
++++ b/configs/j784s4_evm_a72_defconfig
+@@ -125,6 +125,8 @@ CONFIG_MUX_MMIO=y
+ CONFIG_PHY_TI_DP83867=y
+ CONFIG_PHY_FIXED=y
+ CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_PCI_ENDPOINT=y
++CONFIG_PCIE_CDNS_TI_EP=y
+ CONFIG_PHY=y
+ CONFIG_SPL_PHY=y
+ CONFIG_PHY_CADENCE_TORRENT=y
 -- 
 2.34.1
 
