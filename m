@@ -4,168 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E032CCD1BC
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 07:58:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73C43CCD193
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 08:09:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 79ECA83804;
-	Thu, 23 Oct 2025 09:57:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id D361183303;
+	Thu, 23 Oct 2025 10:09:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="HOX+QV/T";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="HKA23JPl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C621382E34; Thu, 23 Oct 2025 09:34:24 +0200 (CEST)
-Received: from PA4PR04CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E94BC8323A
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 09:34:22 +0200 (CEST)
+ id AB2EF8334F; Thu, 23 Oct 2025 10:09:51 +0200 (CEST)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C6106832BC
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 10:09:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ir1XRKbTJS8Eza4NzUgTVLVwqmQcvDUKGK/e9MDni5g4fmt2u8pV3xUysnCApN/5HkAh44MOcjjP5dYMiXrdH7DE52Zxisl2jwdrj9aIVIUEQtt/1yIJZ4sr8ShPAY6ljjUfE5LQeK2i7mMACf3uBXeT1CAxvtmLjwBa7qC0r3JzJTNDbykMb+9rwlzbK5fNZdheoYJjqBzxWoLhsFGXGhavOjnwvSAhel5qNb9wXV0d0Uf8qQdNHiegCGIHnTbEio+6EJ4MWqHWGgx48F8owIkitYc2xkjcfLQ6lhE0G9sL7TyMuIdpxTuQVTVRg6184+WYcfU6vyYIhw7v9Lgifg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HKBZQpndR0i2Ts7TEi67CrjaAg/5s0H3JJUhD85KbkU=;
- b=JC/GKGLCw5SHXtSVrsgVulkGah8N488PO8lMi7QInc5hOLsm1s3+umnXGBVrTjctaK3Cgu8FC3e8AlwMyswCD6ggDMNkqsglLWM1iC7jFDa6hjX/03ZIS0HtyU4dDzFKNswcfTX0HoRq9l8yoBTYgg8pyLWH6hCB9GPPDGMSPnuo6ZJNNJ4fQD7w6TKQsl9z4sao9iFdk9JulafoBpRT600iLSbh9Kjk6XkqnZAxZTKWhjZxtKVZetvp0UMPvNtkJa/mOh1oEXglp48cdjM/NUF74jeOtPPpFBAxa+LA00tbzO6MIMWJGgRIlxLHtBstjgpMlqMDALp9vCAc4ADfXQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HKBZQpndR0i2Ts7TEi67CrjaAg/5s0H3JJUhD85KbkU=;
- b=HOX+QV/TPGh6xQin+rRgpYAFy7mNZN/4GxoJ9riDcyXqD5BZHTBNgRkeBkEnBAshBf74fF/hMmlWeWZXn4G3rDjxWnOlgmWAm2KBZQcZB+bxiPffxhCoM0Dl6ITsH3JCTTpm+L2diLv03n4y/wa0uCBgWlTlGwRILF9LCs15n1ytEcQUqhz1ep+/u8BhuNuqePyVJmeW3IDBAjidb4QjWNHy3mlKH3ziv0gKwHVpWQZCp6YPyOd7QTr8N9ah64dt5drv2Qh/cJ9LOTpLIBL3Z8saUIGflgrwNUj9BUAEqe+GPs+8L6tjpFoJOqTqEoOUznk1DJkJsgqvtlaghkfGiw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DBBPR04MB7737.eurprd04.prod.outlook.com (2603:10a6:10:1e5::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Thu, 23 Oct
- 2025 07:34:20 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9253.011; Thu, 23 Oct 2025
- 07:34:19 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: u-boot@lists.denx.de,
-	Lukas Timmermann <uboot@timmermann.space>
-Cc: Peng Fan <peng.fan@nxp.com>,
-	Jaehoon Chung <jh80.chung@samsung.com>
-Subject: Re: [PATCH] mmc: exynos_dw_mmc: Add compatible string for Exynos5250
-Date: Thu, 23 Oct 2025 16:46:08 +0800
-Message-Id: <176120893099.2124.3979143770222484151.b4-ty@nxp.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20251014114057.67215-1-uboot@timmermann.space>
-References: <20251014114057.67215-1-uboot@timmermann.space>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SG2PR02CA0044.apcprd02.prod.outlook.com
- (2603:1096:3:18::32) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
+Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59N89SIs482654;
+ Thu, 23 Oct 2025 03:09:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1761206968;
+ bh=6ib4ViVrRNdthKcTc6Y6kE0vb/x4O6O4yC2r3p0xgQE=;
+ h=From:To:CC:Subject:Date;
+ b=HKA23JPlK2c/tmVIETBYnn8E/9D834ng9Wl6mxl5MkiYHnSKm87gxInFYysVMG9rQ
+ ikOg5lZMsbAuM39z4hgBLD2Ha9Ft+5YjvVJYd7GjwuKl3ZhE+GwBCW5aq51VNJu6Ld
+ vJ+upwhEHDofO2jXGpTLAOhzpce52q8kFdKwty4A=
+Received: from DFLE212.ent.ti.com (dfle212.ent.ti.com [10.64.6.70])
+ by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59N89SIg2245777
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 23 Oct 2025 03:09:28 -0500
+Received: from DFLE210.ent.ti.com (10.64.6.68) by DFLE212.ent.ti.com
+ (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Thu, 23 Oct
+ 2025 03:09:28 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE210.ent.ti.com
+ (10.64.6.68) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Thu, 23 Oct 2025 03:09:28 -0500
+Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com
+ [172.24.231.157])
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59N89Ndg2539518;
+ Thu, 23 Oct 2025 03:09:23 -0500
+From: Hrushikesh Salunke <h-salunke@ti.com>
+To: <trini@konsulko.com>, <lukma@denx.de>, <mkorpershoek@kernel.org>,
+ <peng.fan@nxp.com>, <marek.vasut+renesas@mailbox.org>,
+ <anshuld@ti.com>, <andre.przywara@arm.com>, <xypron.glpk@gmx.de>,
+ <ye.li@nxp.com>, <sjg@chromium.org>,
+ <dario.binacchi@amarulasolutions.com>, <a-dutta@ti.com>,
+ <dinesh.maniyam@altera.com>
+CC: <u-boot@lists.denx.de>, <h-salunke@ti.com>, <s-vadapalli@ti.com>,
+ <danishanwar@ti.com>
+Subject: [PATCH v4] spl: Add support for Device Firmware Upgrade (DFU) over
+ PCIe
+Date: Thu, 23 Oct 2025 13:39:22 +0530
+Message-ID: <20251023080922.3527052-1-h-salunke@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DBBPR04MB7737:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5c2a87f0-18a8-4c1d-ab1a-08de120693fa
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|19092799006|52116014|376014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?SFRNdjB6MmR3SXlvb2pmbW5TWmFMeHhaZUZjZTJaNnFnRFpzcVROY1MxQ0U4?=
- =?utf-8?B?YWQrQnF5Zk5HandtTndZNFZNV01NVytIVkV6Z3NZQVBUV1Z0UnZycUg0TWVj?=
- =?utf-8?B?cU1rMkVlaTZFY3UxNjhwR1hNTGRnQk50TkVSMCtCVHh5OVFIdkFiK0F6b0lV?=
- =?utf-8?B?NkJmZU1Xd0x0cnpSZ09vRGxrVnBqSmt2a05wUUhJaWJ1RzBONVJzSktEaEF5?=
- =?utf-8?B?VHYvVFp3K1dxQjVWbEhxcHpuellocUEzTEhKQmVJdzg1cWduWk5Wc2hIcGZa?=
- =?utf-8?B?VjFDSURXMklxVWwxdmMxemNRK09laHkxV3RmRWlHb3dIRmdYMVhzUEZpWHFG?=
- =?utf-8?B?RjdOWEhmY0poeFhuVWZNTVdqSUY1K2FxZ2NlL0pYWlJvVlpzNUJmaFduYUNW?=
- =?utf-8?B?NDVmTi9nU1ovemFIcHQwcGJuUkVZNHhqT0MydU5QSGhjVGo1cUx2UlRwUG1C?=
- =?utf-8?B?RHExdjMyMUtHdDkwUGZlNkkwYmFGRWloc0N3T3ZDdVZRdXE2SXVkN1JEWGh0?=
- =?utf-8?B?M1RjNFJBRTA1ZWhrSjJYQ3d5U1Q2MWZoYSswVTNwQndMNlRnb3FSTVlMOWhk?=
- =?utf-8?B?aUdoSnlVV3JnMDVFd0FmT2pTdFpKNHlwdHFvWHU4UHBFZVBMM0JqRStQM2hs?=
- =?utf-8?B?bVQ3dTkxK2NGM1BjNXEzZzRWZjl0aVJYZkhQWU8vVEsrVThiRkU4NGR0SGJK?=
- =?utf-8?B?MFRsYVRYKzdyQTVNZzcvVHlVZVBwdW9GVjRmalo5NFA0cWZibUcyTUY0NkFt?=
- =?utf-8?B?RDNpV0JZTzdPUWswekV1dFVWc2F3UDlHaFdsbXJ3TXhUejh4bmtxTUFCWHdw?=
- =?utf-8?B?WW1KUzBoeUhXd2ZpUWZwOVc0TW9xdjE3UEwydkFEaGY0UDFuZVplOVl6ZUY2?=
- =?utf-8?B?em1uTkVJVWtlY1g4TXUvOFBqNHBxTUx1dm9GRzFtcUpUcExHK2M2eE5TSyt4?=
- =?utf-8?B?L1pIbkF4VGVVME5QMU5kZVNnMzZwM0lIaGxXbmR4L29adHNnemhObXhTYmN3?=
- =?utf-8?B?bDNCa2dJWGpCWmZlVkl5cWFjb0l1eFBEN0tCME9mZ210dXV4L3Z5WEFiSXJL?=
- =?utf-8?B?U3VkZFNxTi9UdnkvakllR01vb0VmVm1wTnAwdWpUTXZQampZQkhjcFlyNEY4?=
- =?utf-8?B?RFAyRzBCOFRQdFdTZWYyL05lQ0MwR1FISTVEU1JJWlZkVjhnQzVFZ3F6Tits?=
- =?utf-8?B?K0ZxU25WNVhNQ3NBY09ZVitHY1NTUUZnek9vdGk5ckdleGMyNzhOVE5INDBn?=
- =?utf-8?B?Wk16K1BMVTF6eUtXTWN5Z2xQZHFiSGFnV0U5NTBYdGFqMVZocGN5TlhPTjA3?=
- =?utf-8?B?VERONGIzNnJBazBETytFMDJoVUVuZVB3STUzcFI4cm81dGpMQXhua0d1RHl3?=
- =?utf-8?B?OU9TcjVJZVhNT0w3cStwOENMYVBLV1J6Q0F0V2JJUzJkV3VwWUI1Z21WVXU0?=
- =?utf-8?B?UzlwMjFIRjl3Q1FSbEdSZWNnK3BvakdjUXR3dW4rVzhIMCt5dnRaRkpLYzVB?=
- =?utf-8?B?d2d6VlRPR2xYbTRvREZUSEVnT1VTaFNSd1YyOEl0RTRrSExLZlpkZHBCamEx?=
- =?utf-8?B?TGJVZnREYVFvd3BJZ2FVaUd1b2MzU0VpK0lqUmFPYURWNG1XeHpwSG9KNW9J?=
- =?utf-8?B?TEFsZ0lST3d0WjhIZTdoTzh0RTZoZ0FYSjdYTC9YdEJVVCtPRm1abmx4TzM2?=
- =?utf-8?B?djN0d2grbG9rMXFONXdUUU16QlRWcWpmS09sLytBNHgvNUQzdTNUbHZEc0th?=
- =?utf-8?B?WCs4a3NLclc1UHFraUUwbDRLY3dCRjh1Y3RPWEFvQkxvVUlGRGU0R2pFNThI?=
- =?utf-8?B?U3UzQTV4RlpqTm9raXg5Vnpma2locldNcUphMC9jK2EyVmZtdXhMbU5YTkVB?=
- =?utf-8?B?Q29lZ1dZTGV6RFhaOUNuZ2lwRllQNXFpTGpHSG53bE01MlpNOVlZRzcrZ3hh?=
- =?utf-8?B?T1h5VzNaQWEwMnBoazlOdkQzc05XV3hoZXBEUVZHTzd2TUt1M052QlpoOW4w?=
- =?utf-8?B?THI3WVRpVTVqWVArQ0o2SEFMRlVMeHNidjlQN0VMQW9nNWJWL3JOanNuVlBP?=
- =?utf-8?Q?F/Vqyx?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(19092799006)(52116014)(376014)(1800799024)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TjF6ejk3QTRxMmx6WmQrc0dvVk11c0ZYK01XZUFqOFhjRTlQczByMzBpTHVs?=
- =?utf-8?B?dGp1anVVZ2tuTUlGY3gzZjBuN3VTcnE2UEh2bWQ0MHplVkd4YXBqVXdZUTJ2?=
- =?utf-8?B?bXhBaitpRGFYYVZxUUE5SWtUd1R4U1lsSTU3ZjdETjhTRnN2aVZYNmVtdmU1?=
- =?utf-8?B?UTJ4T1c5YXdoTXlZTmlZTTFMS1QzY2pGanJKVlovTkNmZTNSbWpWSStRaXFY?=
- =?utf-8?B?SlByV0hrci9FeXpkNk13aVFVS2NXL05mQWQxMEJPdmFQcm5WMEpHaHM0RkFw?=
- =?utf-8?B?dXlZb1ZxUHdjMUM0N3J6NnNWcVBhL1IrSkxVUkEySnlYVDR4RzhjWlhFUVpZ?=
- =?utf-8?B?dmpPL3owcE1UYmIxZnhtK2ZHU09xd3hYWmh3K2hwN2hiU1pVUFQzTFZJWFlp?=
- =?utf-8?B?OWd4RjRpSk5IYUl5UE9XTnNMSk45aHpGVHpQdkRMdldVZTJDeEh6WWsrN3JD?=
- =?utf-8?B?QU1saG9OWXdyaTBsOXo0cURsVmVycTJXVzhQd1ViMThTc2FWSjkwVlVTL3A1?=
- =?utf-8?B?VU1xa2F5UEo3UlhDaWRHNWNTNXpIOTJkK1VuOE9Bb0xpVVRSVTRoeWRZT3Jr?=
- =?utf-8?B?Q1o3a25qSmxpRHIvMlhQbDNucWgrZFc2YXRGeWhETWwvOGRQWlhvL3RiaHBw?=
- =?utf-8?B?OUExQ092bEtBZ1U4OThEY1RlQURFVTM2WlB4QVZ1K3NpUTU0dHJRWlJIandz?=
- =?utf-8?B?WnI2akFRTnVRTGlVWlBOZWEyWUJQN0tyZlY5U2dyNk9BUngvbVdPTEZuS1A1?=
- =?utf-8?B?RWx3dDBBNi8yN1VVSkhjS3NPYWVVb3ZkYWY2enZRMW1yVXUrRkk3N0c1amdM?=
- =?utf-8?B?anNiQVljbkFHSDdiQU5lTjZZVVhaOWFTOEprb0NWQjd3RjdBUG9JZWhjUS8v?=
- =?utf-8?B?bUx3V25VNytaWW0xa3dMTXY0djhkclNJdGI3bkhNUytZMzNJN3dWd3k2aWZD?=
- =?utf-8?B?QU9hYlR5RXFGWmRTc0lxZjlMcm5pSHhVNkVnVitRUDRSamtHc1hINTlXaEZk?=
- =?utf-8?B?cTVKWmhZYVpXVzF4OXdieEZjWG45RXluKzdxSDg3NUo4dno3M3M0VStLclEr?=
- =?utf-8?B?blErZi9pcTBNVVc4WGtYQTRFSHROSmdOZEVKUHNIT0RvckJtTVI5WnNOTkNx?=
- =?utf-8?B?cVZxL3Q3M2ttdFlkS2xFSzFUZGZwRHk0ZUZmbmVSZHBOSW9XSG5WaHlQZEh2?=
- =?utf-8?B?SVpPOVZWVHJHSE53TytKWCtDcWpaWmFzQ0xLdVpERU5WcXVadlpOSVdSZmtk?=
- =?utf-8?B?ODJOei9zYTV4YXYrV0lZNXg0M0tyU25HMkdNWldob3lUbnhwWlRzRWpuNXQy?=
- =?utf-8?B?RzJhTXo1aWwxbEJYdzhtWjQ0QVB4dkhuZW54TUVKYzRBZ0lRRUszS0pmUm5R?=
- =?utf-8?B?QUJJOU5YR3pNT2IrWTA2aUk1d25oZ2s0NW9BR1YrUEt0VDY5cWRKbVhFUDVa?=
- =?utf-8?B?Z0ZJcDFPWUZwOSs3T0FzaG1CanhoRm0rQ3lvY1lRWjV1a05sQy9NcEdTVFZo?=
- =?utf-8?B?NktYd3pqQ25jVHp4aTBxVStld0d3N0drMGwvV0x3WlErRTJHLzRTYTMyVEdJ?=
- =?utf-8?B?N3E4V1FjVkNISGtXVGtMRTNzdHVkcHNNQm11bExORmV6bUJkT0pKYTVtUU80?=
- =?utf-8?B?TnA3TE5WYXJOQWJrM0RFR3Jtbm00NnRSSnpNYUVrSUZEcHFsTXZDOWNYN2Fa?=
- =?utf-8?B?bFlnTy8yeDNsS28wVjE5b2d4SlJaS2JDNDNJTDV5RXZwMVRzOGhTU1c1UlZC?=
- =?utf-8?B?UFVIN29QY2dOVkEvcDhDVm5keVJ2akRPNWd5MVRUWGtWVFFiVEN5TVpZSldU?=
- =?utf-8?B?UnUrdzlVbHVLUmZrY3gzQmZLVitRT3B0elJ1MS9DZnplM2YyWHZrYUNlZzUy?=
- =?utf-8?B?UVVyaFNZSVhrRlg0bjdYVWNHY3YwMjFkSld0cTRxZ2FjUWg0UWErYkxmWEhw?=
- =?utf-8?B?VDNZVUpUdHpuL2FnZ2dEYkJqTG95NGxwTXJTbVhRamlxTjcyVmE4MFRuVWRa?=
- =?utf-8?B?bDA0UlRBbmdZYkRKUVZkY2Q0NnU1ck10ZXZIYkthYWU4b25YZE9wWTMwVzFo?=
- =?utf-8?B?d3FUQnVtTjVzaHlXTTRBVzJwMWRnOEN1dDcyL0o0SHJrQzdKNjk2MkF1eDhw?=
- =?utf-8?Q?4XfEN9LvJK9FXmoG30yQObyBw?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5c2a87f0-18a8-4c1d-ab1a-08de120693fa
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2025 07:34:19.8802 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3lA1JTvkmOo+RRkouRIhE0A3I76oyOZkhPT0Yz2kV2qCEXz0cDoSk7zqwr61OhqqlXu/lJJEqVeOZCbnDDsD7A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7737
-X-Mailman-Approved-At: Thu, 23 Oct 2025 09:57:06 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,22 +84,318 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Introduces support for Device Firmware Upgrade (DFU) over PCIe in
+U-Boot. Traditionally, the DFU protocol is used over USB, where a
+device enters DFU mode and allows a host to upload firmware or binary
+images directly via the USB interface. This is a widely adopted and
+convenient method for updating firmware.
 
+In the context of Texas Instruments (TI) SoCs, PCIe can be used as a
+boot interface in a manner that differs from the conventional
+"PCIe Boot" process, which typically refers to booting an OS or
+firmware image from an NVMe SSD or other PCIe-attached storage devices.
+Instead, TI SoCs can be configured as a PCIe Endpoint, allowing a
+connected PCIe Root Complex (host) to transfer images directly into the
+device’s memory over the PCIe bus for boot purposes. This mechanism is
+analogous to DFU over USB, but leverages the high-speed PCIe link and
+does not depend on traditional storage devices.
 
-On Tue, 14 Oct 2025 13:40:32 +0200, Lukas Timmermann wrote:
-> This driver got successfully tested with an upstream device tree
-> and an Exynos5250. The board in question is samsung-manta
-> (Google Nexus 10) which we are getting ready for upstream.
-> For the u-boot port was just this additional compatible string needed.
-> 
-> 
+By extending the DFU framework in U-Boot to support PCIe, it will be
+possible to flash images over PCIe. While this implementation is
+motivated by TI SoC use cases, the framework is generic and can be
+adopted by everyone for platforms that support PCIe Endpoint mode.
+Platforms with hardware support for PCIe-based memory loading can use
+this to implement PCIe as a boot mode, as well as to enable flashing
+and recovery scenarios similar to DFU over USB.
 
-Applied to mmc/next, thanks!
+In summary, enable support for:
+- DFU-style flashing of firmware/images over PCIe, analogous to existing
+USB DFU workflows
+- PCIe as a boot mode where a host can load images directly into device
+memory using DFU over PCIe
 
-[1/1] mmc: exynos_dw_mmc: Add compatible string for Exynos5250
-      commit: c3ac0630662493959305285210c011e8385f10ff
+Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
+---
+This patch is based on commit
+4e4a9de31de  Merge branch 'next' of git://source.denx.de/u-boot-usb into next
 
-Best regards,
+Changes since v3
+- Addressed feedback from Mattijs Korpershoek
+- Renamed all Kconfig symbols to include SPL_ prefix to avoid potential
+  naming clashes with future U-Boot proper DFU over PCIe implementation:
+  * PCI_DFU_SPL_LOAD_FIT_ADDRESS -> SPL_PCI_DFU_LOAD_FIT_ADDRESS
+  * PCI_DFU_BAR_SIZE -> SPL_PCI_DFU_BAR_SIZE
+  * PCI_DFU_MAGIC_WORD -> SPL_PCI_DFU_MAGIC_WORD
+  * PCI_DFU_VENDOR_ID -> SPL_PCI_DFU_VENDOR_ID
+  * PCI_DFU_DEVICE_ID -> SPL_PCI_DFU_DEVICE_ID
+  * PCI_DFU_BOOT_PHASE -> SPL_PCI_DFU_BOOT_PHASE
+- Changed strncpy to strlcpy for safer string copying
+- Fixed boot phase string length check to enforce 63 character max as
+  documented in Kconfig
+- Improved error message clarity for boot phase string length validation
+- Removed verbose debug print statements from normal operation
+
+v3 : https://patchwork.ozlabs.org/project/uboot/patch/20250619071841.1265364-1-h-salunke@ti.com/
+
+ common/spl/Kconfig   | 62 ++++++++++++++++++++++++++++++
+ common/spl/spl_dfu.c | 91 ++++++++++++++++++++++++++++++++++++++++++++
+ common/spl/spl_ram.c | 18 +++++++++
+ drivers/Makefile     |  1 +
+ 4 files changed, 172 insertions(+)
+
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index f34b96efc02..86464c17799 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1278,6 +1278,14 @@ config SPL_PCI
+ 	  necessary driver support. This enables the drivers in drivers/pci
+ 	  as part of an SPL build.
+ 
++config SPL_PCI_ENDPOINT
++	bool "Support for PCI endpoint drivers"
++	help
++	   Enable this configuration option to support configurable PCI
++	   endpoints at SPL. This should be enabled if the platform has
++	   a PCI controllers that can operate in endpoint mode (as a device
++	   connected to PCI host or bridge).
++
+ config SPL_PCH
+ 	bool "Support PCH drivers"
+ 	help
+@@ -1338,6 +1346,60 @@ config SPL_RAM_DEVICE
+ 	  be already in memory when SPL takes over, e.g. loaded by the boot
+ 	  ROM.
+ 
++config SPL_PCI_DFU
++	bool "PCIe boot support"
++	depends on SPL_PCI_ENDPOINT
++	help
++	  This config enables support to download bootloaders over PCIe
++	  when device is acting as an PCI endpoint.
++
++if SPL_PCI_DFU
++
++config SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS
++	hex "Address to load FIT image when booting via DFU over PCIe"
++	help
++	  Specify the load address of the fit image that will be loaded
++	  by SPL via DFU over PCIe.
++
++config SPL_PCI_DFU_BAR_SIZE
++	hex "BAR size to advertise for PCIe DFU"
++	default 0x800000
++	help
++	  This config sets the size of BAR to be advertised to the Root
++	  Complex. The size should be large enough to fit the FIT image
++	  being downloaded via DFU over PCIe.
++
++config SPL_PCI_DFU_MAGIC_WORD
++	hex "Completion magic word for PCIe DFU boot"
++	default 0xdeadbeef
++	help
++	  Specify the magic word which will be written to a specific
++	  address to signal the completion of transfer of FIT image
++	  when using DFU over PCIe to download the image. Size of magic
++	  word should be 32-bit.
++
++config SPL_PCI_DFU_VENDOR_ID
++	hex "PCI Vendor ID for PCI endpoint"
++	help
++	  PCI Vendor ID for endpoint device for DFU over PCIe. This should
++	  be set to your assigned 16-bit PCI Vendor ID.
++
++config SPL_PCI_DFU_DEVICE_ID
++	hex "PCI Vendor ID for PCI endpoint"
++	help
++	  A 16-bit PCI Vendor ID for endpoint device for DFU over PCIe.
++
++config SPL_PCI_DFU_BOOT_PHASE
++	string "Current boot phase for PCI DFU boot"
++	help
++	  Specify the current boot phase when booting via DFU over PCIe.
++	  This value can be read by the root complex to determine the
++	  current boot phase. Value of this config is written to memory
++	  location (BAR_start + PCI_DFU_BAR_SIZE - 70). Max size of this
++	  config is 63 bytes.
++
++endif
++
+ config SPL_REMOTEPROC
+ 	bool "Support REMOTEPROCS"
+ 	default y if (CPU_V7R && ARCH_K3)
+diff --git a/common/spl/spl_dfu.c b/common/spl/spl_dfu.c
+index e9f381c392c..b09f82790c9 100644
+--- a/common/spl/spl_dfu.c
++++ b/common/spl/spl_dfu.c
+@@ -15,6 +15,17 @@
+ #include <usb.h>
+ #include <dfu.h>
+ #include <linux/printk.h>
++#include <pci_ep.h>
++#include <dm/uclass.h>
++#include <cpu_func.h>
++#include <linux/io.h>
++
++/*
++ * Macros define size of magic word and boot phase string
++ * in bytes.
++ */
++#define MAGIC_WORD_SIZE 4
++#define BOOT_PHASE_STRING_SIZE 63
+ 
+ static int run_dfu(int usb_index, char *interface, char *devstring)
+ {
+@@ -32,11 +43,91 @@ exit:
+ 	return ret;
+ }
+ 
++#ifdef CONFIG_SPL_PCI_DFU
++static int dfu_over_pcie(void)
++{
++	u32 offset, magic_word;
++	volatile void *addr;
++	struct udevice *dev;
++	struct pci_bar bar;
++	struct pci_ep_header hdr;
++	uint fn = 0;
++	int ret;
++	char *bootphase;
++
++	uclass_get_device_by_seq(UCLASS_PCI_EP, 0, &dev);
++	if (!dev) {
++		pr_err("Failed to get pci ep device\n");
++		return -ENODEV;
++	}
++
++	hdr.deviceid = CONFIG_SPL_PCI_DFU_DEVICE_ID;
++	hdr.vendorid = CONFIG_SPL_PCI_DFU_VENDOR_ID;
++	hdr.baseclass_code = PCI_BASE_CLASS_MEMORY;
++	hdr.subclass_code = PCI_CLASS_MEMORY_RAM;
++
++	ret = pci_ep_write_header(dev, fn, &hdr);
++	if (ret) {
++		pr_err("Failed to write header: %d\n", ret);
++		return ret;
++	}
++
++	bar.barno = BAR_0;
++	bar.phys_addr = (dma_addr_t)CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
++	bar.flags = PCI_BASE_ADDRESS_SPACE_MEMORY |
++			  PCI_BASE_ADDRESS_MEM_TYPE_32 |
++			  PCI_BASE_ADDRESS_MEM_PREFETCH;
++
++	bar.size = CONFIG_SPL_PCI_DFU_BAR_SIZE;
++
++	ret = pci_ep_set_bar(dev, fn, &bar);
++	if (ret) {
++		pr_err("Failed to set bar: %d\n", ret);
++		return ret;
++	}
++
++	ret = pci_ep_start(dev);
++	if (ret) {
++		pr_err("Failed to start ep: %d\n", ret);
++		return ret;
++	}
++
++	addr = (void *)CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
++	offset = CONFIG_SPL_PCI_DFU_BAR_SIZE - MAGIC_WORD_SIZE;
++
++	if (sizeof(CONFIG_SPL_PCI_DFU_BOOT_PHASE) > BOOT_PHASE_STRING_SIZE) {
++		pr_err("Not copying boot phase. String too long\n");
++	} else {
++		bootphase = (char *)(addr + CONFIG_SPL_PCI_DFU_BAR_SIZE -
++				  (BOOT_PHASE_STRING_SIZE + MAGIC_WORD_SIZE + 1));
++		strlcpy(bootphase, CONFIG_SPL_PCI_DFU_BOOT_PHASE,
++			sizeof(CONFIG_SPL_PCI_DFU_BOOT_PHASE) + 1);
++	}
++
++	addr = addr + offset;
++	magic_word = CONFIG_SPL_PCI_DFU_MAGIC_WORD;
++	(*(int *)addr) = 0;
++	flush_dcache_all();
++	for (;;) {
++		if (*(int *)addr == magic_word)
++			break;
++		invalidate_dcache_all();
++	}
++
++	return 0;
++}
++#endif
++
+ int spl_dfu_cmd(int usbctrl, char *dfu_alt_info, char *interface, char *devstr)
+ {
+ 	char *str_env;
+ 	int ret;
+ 
++#ifdef CONFIG_SPL_PCI_DFU
++	if (spl_boot_device() == BOOT_DEVICE_PCIE)
++		return dfu_over_pcie();
++#endif
++
+ 	/* set default environment */
+ 	env_set_default(NULL, 0);
+ 	str_env = env_get(dfu_alt_info);
+diff --git a/common/spl/spl_ram.c b/common/spl/spl_ram.c
+index 71b7a8374bb..0c501cf02f2 100644
+--- a/common/spl/spl_ram.c
++++ b/common/spl/spl_ram.c
+@@ -27,6 +27,11 @@ static ulong spl_ram_load_read(struct spl_load_info *load, ulong sector,
+ 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
+ 		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
+ 				      CONFIG_SPL_LOAD_FIT_ADDRESS);
++
++#ifdef	CONFIG_SPL_PCI_DFU
++		if (spl_boot_device() == BOOT_DEVICE_PCIE)
++			addr = CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
++#endif
+ 	}
+ 	addr += sector;
+ 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD))
+@@ -47,6 +52,11 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
+ 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT)) {
+ 		addr = IF_ENABLED_INT(CONFIG_SPL_LOAD_FIT,
+ 				      CONFIG_SPL_LOAD_FIT_ADDRESS);
++
++#ifdef CONFIG_SPL_PCI_DFU
++		if (spl_boot_device() == BOOT_DEVICE_PCIE)
++			addr = CONFIG_SPL_PCI_DFU_SPL_LOAD_FIT_ADDRESS;
++#endif
+ 	}
+ 
+ 	if (CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)) {
+@@ -64,6 +74,11 @@ static int spl_ram_load_image(struct spl_image_info *spl_image,
+ 		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
+ #endif
+ 
++#if CONFIG_IS_ENABLED(PCI_DFU)
++	if (bootdev->boot_device == BOOT_DEVICE_PCIE)
++		spl_dfu_cmd(0, "dfu_alt_info_ram", "ram", "0");
++#endif
++
+ 	if (IS_ENABLED(CONFIG_SPL_LOAD_FIT) &&
+ 	    image_get_magic(header) == FDT_MAGIC) {
+ 		struct spl_load_info load;
+@@ -102,3 +117,6 @@ SPL_LOAD_IMAGE_METHOD("RAM", 0, BOOT_DEVICE_RAM, spl_ram_load_image);
+ #if CONFIG_IS_ENABLED(DFU)
+ SPL_LOAD_IMAGE_METHOD("DFU", 0, BOOT_DEVICE_DFU, spl_ram_load_image);
+ #endif
++#if CONFIG_IS_ENABLED(PCI_DFU)
++SPL_LOAD_IMAGE_METHOD("PCIE", 0, BOOT_DEVICE_PCIE, spl_ram_load_image);
++#endif
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 7560008a842..77fc66eb8ba 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -26,6 +26,7 @@ obj-$(CONFIG_MULTIPLEXER) += mux/
+ obj-$(CONFIG_$(PHASE_)ETH) += net/
+ obj-$(CONFIG_$(PHASE_)PCH) += pch/
+ obj-$(CONFIG_$(PHASE_)PCI) += pci/
++obj-$(CONFIG_$(PHASE_)PCI_ENDPOINT) += pci_endpoint/
+ obj-$(CONFIG_$(PHASE_)PHY) += phy/
+ obj-$(CONFIG_$(PHASE_)PINCTRL) += pinctrl/
+ obj-$(CONFIG_$(PHASE_)POWER) += power/
 -- 
-Peng Fan <peng.fan@nxp.com>
+2.34.1
+
