@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD3C8CCD1BF
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 21:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 686A2CCD193
+	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 21:29:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E97918006D;
-	Thu, 23 Oct 2025 23:04:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D7A348006D;
+	Thu, 23 Oct 2025 23:29:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FXkK1vpf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QV4u9/Wp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23EAF807C0; Thu, 23 Oct 2025 23:04:57 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 483F08003E; Thu, 23 Oct 2025 23:29:06 +0200 (CEST)
+Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
+ [IPv6:2607:f8b0:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 100A58003E
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 23:04:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2082C8006D
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 23:29:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-46e6a689bd0so13451905e9.1
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 14:04:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32b.google.com with SMTP id
+ 46e09a7af769-7c2766675adso819681a34.1
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 14:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761253494; x=1761858294; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FEw9u6+7wd8kxtSfp2gSzlQkmdIcBQ0M/sxgzy4+a3o=;
- b=FXkK1vpfs+NrKSaDclt77AMAqTzxe1UqNwYhntTrr+x6pUOgX1VajVSzo8YHOC0y6S
- nhowPBPWzY9vOaYe+G+oy2gBX7uChtvl748BgbgYigjk05hQu3rNsheLhCRkE4/372F6
- M0/mkZTMOchr+lU+jyIbI5i7uxoB240BkRDAkUQM4KouamwEQkhnObE6dI79DTbSeFE8
- bx5cShmoA9enAp2oUX2s/K+KyoyXZUtYexBx0bdd+TguoGgZ0nrMWJgzvn5/qo7LXiA7
- wXH8FYo1EPjFU+uWi3NBiDnaQzZF6RGKOKD5twkJkWuNbB5rVvLeQTmToFQ43cAcSS6C
- 8aMQ==
+ d=konsulko.com; s=google; t=1761254943; x=1761859743; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=eZTtW7s2C54IJwr/+yKWt9hcy7AreQVu8mbOQJHJGfM=;
+ b=QV4u9/WpaeL02VABpdlORR6nb4fp0/oXtCOoOdOmfQgoRUmN11yhU2obEX7Nuj/duk
+ FaE+jB5BNm4Z06zvZgAvx4Lkl/Yh7m279sU25qAudYKMSPW6IbW2omTuqXW+IAcXiHqf
+ 9xacjknMVwK2ORHE2F7n2/10bkd1roD1fmIVw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761253494; x=1761858294;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FEw9u6+7wd8kxtSfp2gSzlQkmdIcBQ0M/sxgzy4+a3o=;
- b=ORWKj9OcTknOW6kq5HMPMWnROQvTnmoCL1ojOjgiOSsCsXMqU4rQyBnmnPPQOowTNe
- wX9NX9Sv0mltu7VtQ83btm79nfyhcp+18iy3FHK+OmokPOp1dpTUzsfn6K7EzLNq908+
- OIGACqRBnvDUb5lQASMWyuZ+RpCJj2vGzSCKYAf80SO0fNPAxSIwZjsjb46s0Q1pPf24
- 6zmZJLoWGH/VxwyiKd5oZQnFAn9VO+GU4zJI96cArXGqg8FiwaxrqbS8jB3WvXDbYrMF
- 1HUmge3jskvbb2Hv6mga6k2eIX1HhBKpsCeZE1xrQXO+Kz2+zwtN3Gng0w1NCer0VJLT
- k3fg==
-X-Gm-Message-State: AOJu0YyX6wnhk7GvhdFfDRit6x83zGNQI5eVApClNV/EJ5W4KYpBaU/V
- QUsI/uwTnwGktB+WRcpad+MC0gFJniJ9/w07EpPz+7X+GHgD6Kdh7NlG
-X-Gm-Gg: ASbGncugztmlJ5dxqmTl0cfAD43ndTBKVA21sZbyOZamYVBzxdV72qzUnZlqAuwm7LD
- 6WDNMYwcYB1GdSxdx/AEzR7cbeIWK+IZBBS6aybvAD4yAXoTFVO0BcESfLLavg6q/Rp3hUu8lG/
- rW0lRHseQz3Bvk8npW+edddsEaR801ylL9tStDHGIrVN9IwHcUHQ8LazSPxGU5JiohF/CG/CSTJ
- HwyeOTq/v6nye/1p6oa+hxSVM9z5UXnhxgne3NVFmYH7Lr1Y5JY/xBbxlRX/WJERQK4AB3r61+Q
- 1gqSWLGoaRvzn6UXSBDQ5cQ6W+R0kKmvhaWIA8A7yc6yIwJqoi+GMwvMeecrbCFbUkoo0AvJ+K6
- NPm2B/3b2gnJm9XQMcav5MK2YMFAyjDRnLYn9pQ5jyHFpbfPVAczsfr29OpQPBwAg3zGiSFu03O
- nynfI5y5nLIcSwnZRjUm9818Rh9EQptR7mdUiSDuaJ3iFJVXixs/YSNkQN2Q==
-X-Google-Smtp-Source: AGHT+IEqnzJFSiJxfI8VSEACqCfsTrWdSx38TCVnb497YLE0Hl/ZVjjHoElr0xaOc0kG8ZVF+r62vA==
-X-Received: by 2002:a05:600c:1d9b:b0:465:a51d:d4 with SMTP id
- 5b1f17b1804b1-471178784c2mr208988935e9.6.1761253494156; 
- Thu, 23 Oct 2025 14:04:54 -0700 (PDT)
-Received: from jernej-laptop.localnet (178-79-73-218.dynamic.telemach.net.
- [178.79.73.218]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-474949dd479sm73213055e9.0.2025.10.23.14.04.53
+ d=1e100.net; s=20230601; t=1761254943; x=1761859743;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eZTtW7s2C54IJwr/+yKWt9hcy7AreQVu8mbOQJHJGfM=;
+ b=ovzZcV7fnPl+sVbVOuJvHxUxoTUBFQxJOSUfW5Rn3RXThYOA5fUoW1I9IUdiGx1u7I
+ 2D4ft4MoxxllmSUSvn+nHx0LyhwVWuWPHtaCohSrHP15sZNfhwMEAzphnY5pIU87DBii
+ OOTao9bKgnsiKzUXFgZqVRwlyPwJRX0xYtucqZGYBhMK0yjVDNtmOuZN3MoE8ArfZCn0
+ ABhmjZcsgDO5W0aV2QQBiSeDt7EAbIKDpMAyR91V1XbOVqrOFGE/sR2taQ5Y9gdycHS9
+ z0ZTibm030dT8lfecuKQKCgTy6Nk19XLNfczNaBxSlJ2pic84WBu+CM1sib0+sDcSSSa
+ Aprg==
+X-Gm-Message-State: AOJu0YyIAkrvhzhuy7ByYEGU5W5yosA6vrSmnOvVEapoN/xg42c2lMLx
+ tfB4rKhzI9rlTTFWAX6avkix2ynjQU4qCocbQAVaxd7Ba1/nf+HiAtUkQn6eZvVh09M=
+X-Gm-Gg: ASbGncs7Yhcw7RwPAyGxAmNh/EP7E4ICq3+JhnlBAP6aOoINqd1gc9gFXfvAdO/ORZd
+ jj2FbQXKovS0/s9l8R5G6ZjX4bA8BXfCLRS/pVj5481Ii5QWigTza7Rxn+SVUaEjT3cQQclstwa
+ lVOgdUWksJMv5deGaC4FxPr1yupeK5I3H5BIy3H2qfEQbavfLJaq82YsKiBoXir2huQuETK+S68
+ ApwbmnMw58G1sXlxvfkhflUszop7Y66JQ1cnQhyWT4jgwu35ftVwPBMs9yaMeNtIfrEDY69lHLb
+ NW9NW475RgJN5oKTcKcSPJ8mzKJL3ukn7boaZB4fSTeqdS7QbRYRxuMordEnI/eC3HpjZgkORkd
+ MO7v4aCDC6baB2nU8hsgZMzApv5aeGocDYB4ZHYJtCDpU3BhgQCvd24Ku9B2A+us6rNSmVa4P07
+ bP+G0NT2dRUgquL+UeOYorzkg6C4GE+nbN68gWPLuJfGkP5O6yKg==
+X-Google-Smtp-Source: AGHT+IFczXnDtH0o3JBz7QVt+/ZxXPlifoXAfr8VrN9+TOhtd2ohRtvPnmG5UjQaz0/pydKpPS18cA==
+X-Received: by 2002:a05:6808:1889:b0:43c:afd4:646d with SMTP id
+ 5614622812f47-443a2ed23f8mr10357648b6e.14.1761254942742; 
+ Thu, 23 Oct 2025 14:29:02 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44bd44f8ee9sm745105b6e.24.2025.10.23.14.29.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Oct 2025 14:04:53 -0700 (PDT)
-From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Rudi Horn <dyn-git@rudi-horn.de>,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH] sunxi: dram: detect non-power-of-2 sized DRAM chips
-Date: Thu, 23 Oct 2025 23:04:52 +0200
-Message-ID: <13869618.uLZWGnKmhe@jernej-laptop>
-In-Reply-To: <20251022213339.2b9cb140@minigeek.lan>
-References: <20251021235334.7557-1-andre.przywara@arm.com>
- <12763423.O9o76ZdvQC@jernej-laptop> <20251022213339.2b9cb140@minigeek.lan>
+ Thu, 23 Oct 2025 14:29:01 -0700 (PDT)
+Date: Thu, 23 Oct 2025 15:28:59 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Kory Maincent <kory.maincent@bootlin.com>
+Subject: Re: [PATCH] python: Add a top-level requirements.txt file
+Message-ID: <20251023212859.GN6688@bill-the-cat>
+References: <20251023174059.1962529-1-trini@konsulko.com>
+ <5226195D-CE22-424F-AB0F-6238DD3F685E@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TKMyq1+T1b6FvY/S"
+Content-Disposition: inline
+In-Reply-To: <5226195D-CE22-424F-AB0F-6238DD3F685E@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,174 +98,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sreda, 22. oktober 2025 ob 22:33:39 Srednjeevropski poletni =C4=8Das je=
- Andre Przywara napisal(a):
-> On Wed, 22 Oct 2025 17:48:27 +0200
-> Jernej =C5=A0krabec <jernej.skrabec@gmail.com> wrote:
->=20
-> Hi Jernej,
->=20
-> > Dne sreda, 22. oktober 2025 ob 01:53:34 Srednjeevropski poletni =C4=8Da=
-s je Andre Przywara napisal(a):
-> > > Some boards feature an "odd" DRAM size, where the total RAM is 1.5GB =
-or
-> > > 3GB. Our existing DRAM size detection routines can only detect power-=
-of-2
-> > > sized configuration, and on those boards the DRAM size is overestimat=
-ed,
-> > > so this typically breaks the boot quite early.
-> > >=20
-> > > There doesn't seem to be an easy explicit way to detect those odd-siz=
-ed
-> > > chips, but we can test whether the later part of the memory behaves l=
-ike
-> > > memory, by verifying that a written pattern can be read back.
-> > > Experiments show that there is no aliasing effect here, as all locati=
-ons
-> > > in the unimplemented range always return some fixed pattern, and cann=
-ot
-> > > be changed.
-> > >=20
-> > > Also so far all those boards use a factor of 3 of some lower power-of=
-=2D2
-> > > number, or 3/4th of some higher number. The size detection routine
-> > > discovers the higher number, so we can check for some memory cells be=
-yond
-> > > 75% of the detected size to be legit.
-> > >=20
-> > > Add a routine the inverts all bits at a given location in memory, and
-> > > reads that back to prove that the new value was stored.
-> > > Then test the memory cell at exactly 3/4th of the detected size, and =
-cap
-> > > the size of the memory to 75% when this test fails.
-> > >=20
-> > > This enables boards which ship with such odd memory sizes.
-> > >=20
-> > > Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> > > ---
-> > > Hi,
-> > >=20
-> > > I don't really have a board with such an odd size to test that, thoug=
-h the
-> > > function worked on a 12GB A733 board. But that's not supporting the S=
-PL
-> > > or any kind of DRAM init yet, so was tested out of context.
-> > > I would be grateful if anyone with a 1.5GB or 3GB board could test th=
-is.
-> > >=20
-> > > Thanks,
-> > > Andre
-> > >=20
-> > >  arch/arm/include/asm/arch-sunxi/dram.h |  1 +
-> > >  arch/arm/mach-sunxi/dram_dw_helpers.c  | 16 +++++++++++++++-
-> > >  arch/arm/mach-sunxi/dram_helpers.c     | 12 ++++++++++++
-> > >  3 files changed, 28 insertions(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/arch/arm/include/asm/arch-sunxi/dram.h b/arch/arm/includ=
-e/asm/arch-sunxi/dram.h
-> > > index 0eccb1e6c28..59e2e980bfa 100644
-> > > --- a/arch/arm/include/asm/arch-sunxi/dram.h
-> > > +++ b/arch/arm/include/asm/arch-sunxi/dram.h
-> > > @@ -45,5 +45,6 @@ unsigned long sunxi_dram_init(void);
-> > >  void mctl_await_completion(u32 *reg, u32 mask, u32 val);
-> > >  bool mctl_mem_matches(u32 offset);
-> > >  bool mctl_mem_matches_base(u32 offset, ulong base);
-> > > +bool mctl_check_memory(phys_addr_t addr);
-> > > =20
-> > >  #endif /* _SUNXI_DRAM_H */
-> > > diff --git a/arch/arm/mach-sunxi/dram_dw_helpers.c b/arch/arm/mach-su=
-nxi/dram_dw_helpers.c
-> > > index 24767354935..14f6b24c30f 100644
-> > > --- a/arch/arm/mach-sunxi/dram_dw_helpers.c
-> > > +++ b/arch/arm/mach-sunxi/dram_dw_helpers.c
-> > > @@ -143,8 +143,22 @@ void mctl_auto_detect_dram_size(const struct dra=
-m_para *para,
-> > > =20
-> > >  unsigned long mctl_calc_size(const struct dram_config *config)
-> > >  {
-> > > +	unsigned long size;
-> > >  	u8 width =3D config->bus_full_width ? 4 : 2;
-> > > =20
-> > >  	/* 8 banks */
-> > > -	return (1ULL << (config->cols + config->rows + 3)) * width * config=
-=2D>ranks;
-> > > +	size =3D (1ULL << (config->cols + config->rows + 3)) * width *
-> > > +		config->ranks;
-> > > +
-> > > +	/*
-> > > +	 * There are boards with non-power-of-2 sized DRAM chips, like 1.5GB
-> > > +	 * or 3GB. They are detected as the larger power-of-2 (2GB and 4GB),
-> > > +	 * so test the last quarter for being able to store values.
-> > > +	 */
-> > > +	if (!mctl_check_memory(CFG_SYS_SDRAM_BASE + size / 4 * 3)) {
-> > > +		size =3D (size / 4) * 3;
-> > > +		debug("capping memory at %ld MB\n", size >> 20); =20
-> >=20
-> > As I already commented in first version of this change, wouldn't it be =
-good to
-> > add additional check here, just to be sure there is no misconfiguration=
-? In such
-> > case it would be better to panic than continue with unstable system.
->=20
-> Mmmh, but what check would that be? I mean this is mctl_calc_size(),
-> which is only called once, just at the end, before we return from
-> sunxi_dram_init(). And it just calculates the size, there is no probing
-> anymore, this has been done earlier, elsewhere.
-> At this point we assume everything is fine and properly setup, so I
-> don't understand what additional check we should do here. If we cannot
-> read back what we have written, we are in deeper trouble anyway, but we
-> would have missed that before anyway here, and it would have crashed
-> sooner or later, so I don't see a problem.
 
-My suggestion is to additionally check memory location size / 4 * 3 - 4,
-which should be valid in case everything is configured properly.
+--TKMyq1+T1b6FvY/S
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards,
-Jernej
-
+On Thu, Oct 23, 2025 at 07:50:36PM +0100, Heinrich Schuchardt wrote:
+> Am 23. Oktober 2025 18:40:59 GMT+01:00 schrieb Tom Rini <trini@konsulko.c=
+om>:
+> >A frequently reported problem is that someone misses a required python
+> >package when doing a specific task within U-Boot. This is in turn
+> >because each of our requirements.txt files only lists their direct
+> >dependencies. It is not always clear that another tool has its own
+> >requirements and thus something else fails. Solve this by having a top
+> >level requirements.txt file for the project which in turn installs all
+> >of our other project requirements.txt files.
+> >
+> >Signed-off-by: Tom Rini <trini@konsulko.com>
+> >---
+> >Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >Cc: Simon Glass <sjg@chromium.org>
+> >Cc: Kory Maincent <kory.maincent@bootlin.com>
+> >
+> >As Kory is the most recent person to hit this, cc'ing them. I think this
+> >is the right path forward and if agreed, I'll update documentation in a
+> >follow-up.
+> >---
+> > requirements.txt | 8 ++++++++
+> > 1 file changed, 8 insertions(+)
+> > create mode 100644 requirements.txt
+> >
+> >diff --git a/requirements.txt b/requirements.txt
+> >new file mode 100644
+> >index 000000000000..0fd08b9da17b
+> >--- /dev/null
+> >+++ b/requirements.txt
+> >@@ -0,0 +1,8 @@
+> >+# For ease of use, this is all requirements files for all portions
+> >+# of U-Boot
+> >+-r doc/sphinx/requirements.txt
+> >+-r tools/u_boot_pylib/requirements.txt
+> >+-r tools/buildman/requirements.txt
+> >+-r tools/binman/requirements.txt
+> >+-r tools/patman/requirements.txt
+> >+-r test/py/requirements.txt
 >=20
-> Cheers,
-> Andre
->=20
->=20
-> >=20
-> > Best regards,
-> > Jernej
-> >=20
-> > > +	}
-> > > +
-> > > +	return size;
-> > >  }
-> > > diff --git a/arch/arm/mach-sunxi/dram_helpers.c b/arch/arm/mach-sunxi=
-/dram_helpers.c
-> > > index 83dbe4ca98f..376b7d14f86 100644
-> > > --- a/arch/arm/mach-sunxi/dram_helpers.c
-> > > +++ b/arch/arm/mach-sunxi/dram_helpers.c
-> > > @@ -62,3 +62,15 @@ bool mctl_mem_matches(u32 offset)
-> > >  	return mctl_mem_matches_base(offset, CFG_SYS_SDRAM_BASE);
-> > >  }
-> > >  #endif
-> > > +
-> > > +bool mctl_check_memory(phys_addr_t addr)
-> > > +{
-> > > +	uint32_t orig, val;
-> > > +
-> > > +	orig =3D readl(addr);
-> > > +	writel(~orig, addr);
-> > > +	val =3D readl(addr);
-> > > +	writel(orig, addr);
-> > > +
-> > > +	return ~orig =3D=3D val;
-> > > +}
-> > >  =20
-> >=20
-> >=20
-> >=20
-> >=20
-> >=20
->=20
->=20
+> These individual files may require different versions of the same package.
 
+They may not, that would break creating our containers for CI.
 
+> Either the individual files should be feature complete for each CI
+> step, or we should move to a single requirements file.
 
+This would be even further against python best practices than we already
+have been.
 
+--=20
+Tom
+
+--TKMyq1+T1b6FvY/S
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPqeGAAKCRAr4qD1Cr/k
+CmKKAP0TIDDl4nFguphlpxxDyvXL739GrO6/QndYP8xzrV5PRAD/XVW3DxTBc8Kn
+F1lfHWqnKBbUnRXGHNirD/NJIgTgHAU=
+=tEcD
+-----END PGP SIGNATURE-----
+
+--TKMyq1+T1b6FvY/S--
