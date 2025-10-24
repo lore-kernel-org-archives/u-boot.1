@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC23CCF9E0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 14:23:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF61ECCD1BF
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 14:47:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C148E83655;
-	Fri, 24 Oct 2025 16:23:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E5AA983631;
+	Fri, 24 Oct 2025 16:47:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="NwWWDDbG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gHyHCa1F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5249D83677; Fri, 24 Oct 2025 16:23:30 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 7FDB483655; Fri, 24 Oct 2025 16:47:56 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5383483631
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 16:23:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 649CF82A9E
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 16:47:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3f0ae439bc3so1399019f8f.1
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 07:23:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-7c52ce8cbe7so69293a34.0
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 07:47:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761315808; x=1761920608;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CdQ/u5fAeQAUEcapSgh5vQA4fjrIXRM7xTQDKT1AX3I=;
- b=NwWWDDbGtr9SXkMYBtPVaTQqKfeLGsO5JOvQ/RllaF61dtut8RCy5FyE+7p9816Paf
- tZN/WyrbOB50AeRPu9mICAgHQjrU5mCnB4+qzigQd4CNbNAiQ8Jj3k3a2A86PTZKBOBj
- 46J+TkSvLiYBxbKwvwdqNa3w2JF04UIKjMfRQbcxf6ESjgkQp8QocOvr+A4VUDt9IRta
- mDEpIVUBk3TGGKH/EPffzjJ2LQjFFbSQjmoPCq8O2gSdka1UbdrYQVUZ5goG/kWYwJLd
- qocJVUVQoGWtdvdc5n5RquiLR+xHpj2rnIkEVClpLLmLubUYp3arfW1VeRnsRPsfJxYS
- LQxA==
+ d=konsulko.com; s=google; t=1761317273; x=1761922073; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=HfLkiZg6NjwJm4V8R5s4GVn5Zeovp1vq5xzECfTiIDY=;
+ b=gHyHCa1FlqWr+QZ9Le7hTIHzhf4eoHnAIsJm59HbzfNJ1zddHa8Y8CKmZoqk5BzNvs
+ 9whdPZ3Y8SbsH92y7QZDNYTzBzDxxhIIQjqHRujUwe/5ychQLfgQwoYlOVeedeeLGl9a
+ 2o9hjbA+OrxWReJ3oXJyCQP8mEw475QE8HxQs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761315808; x=1761920608;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CdQ/u5fAeQAUEcapSgh5vQA4fjrIXRM7xTQDKT1AX3I=;
- b=ooSuhrwV+IMPkW9+Rkw45RIAnvtJhL2Wa2Qw4Xci15pqr7D2CAlEWwSDRy7qXguWoN
- 4cArIB188be2UC71rERg07PexLrf1UcyRa6SYp5BAoC3LaLQj8EUyHPJL2kZrGjmcpfp
- MKPeZbiejXlOzNbpHQ7o4UMm1K64hf/cz64WDU62Mg/bhSc8oq7F5KJx7VBgOO0gnDs9
- U72mgOJn6W5yzCyFWTuh9AkDsAasVin7jA1uHWVV85ZrY8K2rAnc5HW1GzGVlwRAXN0X
- tODsq99qj+or0C4CnXh9CwQ4eTmcPVj+Q81qmxEfcOxxdNEAkbHgV9SdXVEGWNDw732h
- SvHg==
-X-Gm-Message-State: AOJu0Yyeikv9PNUIjFHLhiCgYKFzfJujHIYRGjG6HbiVVGEOdMb0an4S
- mv49Ie93OSo1ABnbWEQmBdHPSWPfK/MqDC15urg/K7yUNu3c/tPaJky/4sNIIjoqlzc=
-X-Gm-Gg: ASbGncveqIzQ4k5Oz2xkFSW+JEZZqdK0jpZSJ203wMBUP2MgN8KSzIJeD0W6PF0Ctz2
- G9pT+tfHEtoq59rcIxLGkVWClDDyS/cP2suAw3MdwjuYEAt+dufVjzOYDYJk69pSN2vn0KpYtlI
- Uhjz6kr/+wwlmnVsb/q8CX1QBPq2gewfjjh9okafaC4HC6DkQ0IkmD5B9uoKhyyKP2j7/Y6fnWj
- GfNMK1WZoPVOS3k5h/MfRc7xTOahZnfajPivI0H6gneO6Ml0g65pTTS5IHkYcHhmLAHP2obNdKX
- Qx6RG5jMGTN2UiRcF4IrqzWhbcxkdPMt6TA0TZ0dMDQekjse44BSjwDfALi5rakfoE77vs4Q0W6
- DIkpfdrlNhBLiJds43sXnIikDdVNopzpMNg1MLBTtExegXf+bI7mAKph8rdIK4AXOrCdi5MBvKT
- p+OlY=
-X-Google-Smtp-Source: AGHT+IHKg+T9/30inSyGFjbznnIWKKWdkl8vPkFhh2zibLzNm+y4wNfAZa1G5sGs6cxLpMFbffZqig==
-X-Received: by 2002:a05:6000:3110:b0:3e4:64b0:a776 with SMTP id
- ffacd0b85a97d-42990747c84mr2099933f8f.52.1761315807611; 
- Fri, 24 Oct 2025 07:23:27 -0700 (PDT)
-Received: from [127.0.1.1] ([2a01:e0a:e50:3860:a5c0:bdf6:3b95:6cfd])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429898add8bsm9433243f8f.23.2025.10.24.07.23.27
+ d=1e100.net; s=20230601; t=1761317273; x=1761922073;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HfLkiZg6NjwJm4V8R5s4GVn5Zeovp1vq5xzECfTiIDY=;
+ b=Jnf/c5R1PcZx86q4Si1q/+JdHIawHjMDJbUhvVYYj+D4odFQ/YKNng9cBhjc/Uh6ey
+ QzXPaYAbQypVQy7bCrU9fwt0F9DY2Frobq6yj5+rHX84SiOCzNmJNflOX+rKPp+LKOn9
+ 1hL2ULbVVidIa7MFCulfFUIeNSjkSh8QIXXbcFhb6X+u1ek3PESC1jC0agteIE5nTk/P
+ 0Sz8p1OBCHyJzPhwUYe2X8KucUCYapzodE4cNBVTwkUykOjoEzq6OUF65sULvfgeGbQF
+ rRXxKqP/Rwyy3hS4W3n7igNNnPA7CXbTPmh25yR9wUB60MqyAcIRnYSjGO8JHuqxUoRo
+ hbcQ==
+X-Gm-Message-State: AOJu0YzmEolroY/RLdbC6qew/6f6fsEiOidCJo1zTCxWqyT71cqg7O7X
+ rkPpZdUzb9bA5qcjjogIPSZZFDtU0ohpvNL/Ccr/s6hp62bql0v6246ucqJLEw8kFjg=
+X-Gm-Gg: ASbGncth4i3PcydZnUapaS4/ncsAnh7NyZrQYPWQHmX6V/Zm6ie5CwZia+SDKvucBaR
+ U8Pvr/gRcl/1YXsJQ6q65B2Ni74lzmpXeJj4VdIOPDDkFelmTPm0npCX2HCMBJlELVd2I7uqJj7
+ 8FlVJ70jIZ82QP02i85WuAm4Y+r3Cb/u75e4szfFPa5/Qz5oKV7hopztV+mgjSd99H2nIlVkhDM
+ PnwpzEQB5JOopFcvvKUP2BEU/o3DgI/QMmIeJkppp/RlNvnyjnyC/rGH/LtV3/cOVDvjYbo66yw
+ e0OjjaA9jDWiToEM1DBLovD01Pw2sPZCoBGgUHUZHKLHQxwDo04HhFkj8Bq8Y1K9lI9EtnveBcm
+ 368ZFiRgxJm8hDBr3Qd/STRYMjcCwfPJuimhWqTFZ0j2pMRb3mz7EuSfedBpZJLG0k8z/w4fkbt
+ 8RKBvxQp7zXcDxelEl/yTPtgtR/7iHJq+TibTGh5g=
+X-Google-Smtp-Source: AGHT+IGT4igNTAy/7zhkNyOTsqNM9iLmZF6AxBq3Bs88o7Av0cCb1RjNYXttpxRC+elhXXvew42PAA==
+X-Received: by 2002:a05:6830:d06:b0:78d:a443:8c93 with SMTP id
+ 46e09a7af769-7c27ca2b3fdmr14670931a34.6.1761317273072; 
+ Fri, 24 Oct 2025 07:47:53 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c511189fd5sm1597830a34.9.2025.10.24.07.47.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Oct 2025 07:23:27 -0700 (PDT)
-From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Date: Fri, 24 Oct 2025 16:23:22 +0200
-Subject: [PATCH] bootstd: android: add the bootargs env to the commandline
+ Fri, 24 Oct 2025 07:47:50 -0700 (PDT)
+Date: Fri, 24 Oct 2025 08:47:48 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Vignesh R <vigneshr@ti.com>
+Subject: Re: [PATCH v8 1/2] spl: remove usage of CMD_BOOTx from image parsing
+Message-ID: <20251024144748.GO6688@bill-the-cat>
+References: <20251024-fix_cmd_bootx-v8-0-230f70c5e5f8@ti.com>
+ <20251024-fix_cmd_bootx-v8-1-230f70c5e5f8@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251024-botargsappend-v1-1-0b78f05f9132@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIANmL+2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDI1NDAyMT3aT8ksSi9OLEgoLUvBRdY4tEE2Nzw+Qks5RkJaCegqLUtMwKsHn
- RsbW1AMj5HMRfAAAA
-X-Change-ID: 20251024-botargsappend-38a4371cb6dc
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, 
- Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Julien Masson <jmasson@baylibre.com>, 
- "Nicolas Belin (TI.com)" <nbelin@baylibre.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- george chan <gchan9527@gmail.com>, 
- "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-X-Mailer: b4 0.14.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="d6R/XHXCc9v+aZBg"
+Content-Disposition: inline
+In-Reply-To: <20251024-fix_cmd_bootx-v8-1-230f70c5e5f8@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,79 +98,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: "Nicolas Belin (TI.com)" <nbelin@baylibre.com>
 
-When previously using script based bootflows, the U-Boot
-environment variable bootargs was used to customize the kernel
-commandline at boot time.
-In order to get the same behaviour, concatenate the bootflow
-commandline with the contents the bootargs environment variable.
+--d6R/XHXCc9v+aZBg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Nicolas Belin (TI.com) <nbelin@baylibre.com>
-Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
----
- boot/bootmeth_android.c | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+On Fri, Oct 24, 2025 at 12:56:08PM +0530, Anshul Dalal wrote:
 
-diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
-index 8c2bde10e17..1374551dbeb 100644
---- a/boot/bootmeth_android.c
-+++ b/boot/bootmeth_android.c
-@@ -512,6 +512,37 @@ static int run_avb_verification(struct bootflow *bflow)
- }
- #endif /* AVB_VERIFY */
- 
-+static int append_bootargs_to_cmdline(struct bootflow *bflow)
-+{
-+	char *bootargs;
-+	int len = 0;
-+
-+	/*
-+	 * Check any additionnal bootargs coming from U-Boot env. If any,
-+	 * merge them with the current cmdline
-+	 */
-+	bootargs = env_get("bootargs");
-+	if (bootargs) {
-+		len += strlen(bootargs) + 1; /* Extra space character needed */
-+		len += strlen(bflow->cmdline);
-+
-+		char *newcmdline = malloc(len + 1); /* +1 for the '\0' */
-+
-+		if (!newcmdline)
-+			return log_msg_ret("newcmdline malloc", -ENOMEM);
-+
-+		strcpy(newcmdline, bootargs);
-+		strcat(newcmdline, " ");
-+		strcat(newcmdline, bflow->cmdline);
-+
-+		/* Free the previous cmdline and replace it */
-+		free(bflow->cmdline);
-+		bflow->cmdline = newcmdline;
-+	}
-+
-+	return 0;
-+}
-+
- static int boot_android_normal(struct bootflow *bflow)
- {
- 	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
-@@ -546,6 +577,10 @@ static int boot_android_normal(struct bootflow *bflow)
- 	if (priv->slot)
- 		free(priv->slot);
- 
-+	ret = append_bootargs_to_cmdline(bflow);
-+	if (ret < 0)
-+		return log_msg_ret("bootargs append", ret);
-+
- 	ret = bootm_boot_start(loadaddr, bflow->cmdline);
- 
- 	return log_msg_ret("boot", ret);
+> Using CMD_* configs from spl doesn't make logical sense. Therefore this
+> patch replaces the checks for CMD_BOOTx with newly added library symbols
+> BOOTI, BOOTM and BOOTZ which are enabled by their respective CMD_* or
+> SPL_* counterparts.
 
----
-base-commit: b10c055d4e1b5153a331a61ef82a5b01b5bb4c45
-change-id: 20251024-botargsappend-38a4371cb6dc
+You didn't update the commit message here to reflect the new symbol
+names.
 
-Best regards,
--- 
-Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+> index ade42d0ca4370b7df3aec59615f12e28a96874cd..9f3c30156d22330515e408ec0=
+30a3ced3b81ab38 100644
+> --- a/arch/arm/lib/Makefile
+> +++ b/arch/arm/lib/Makefile
+> @@ -7,6 +7,13 @@ lib-$(CONFIG_USE_PRIVATE_LIBGCC) +=3D ashldi3.o ashrdi3.=
+o lshrdi3.o \
+>  				    lib1funcs.o uldivmod.o div0.o \
+>  				    div64.o muldi3.o
+> =20
+> +obj-$(CONFIG_$(PHASE_)LIB_BOOTI) +=3D image.o
+> +obj-$(CONFIG_$(PHASE_)LIB_BOOTZ) +=3D zimage.o
+> +
+> +ifndef CONFIG_XPL_BUILD
+> +obj-$(CONFIG_LIB_BOOTM) +=3D bootm.o
+> +endif
 
+Since we have $(PHASE_) now for LIB_BOOTM this too should be like the
+other two.
+
+--=20
+Tom
+
+--d6R/XHXCc9v+aZBg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPuRkQAKCRAr4qD1Cr/k
+CuqpAP4/WFtFFcOFYPYs2IjtIj1Y/2QBOJr7/yScy6Rh8WlFYAD/RfRT0yZVZNc3
+Pi6YdgrKfeG82lP9VJsgVTxWncuKJg8=
+=D2Bx
+-----END PGP SIGNATURE-----
+
+--d6R/XHXCc9v+aZBg--
