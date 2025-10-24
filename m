@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BAFACCD1BF
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 17:26:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 448FACCD1BF
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 17:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF8CE836A3;
-	Fri, 24 Oct 2025 19:26:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B2CD1836A3;
+	Fri, 24 Oct 2025 19:37:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y8M72CKy";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="fFcuAh3b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E30C983826; Fri, 24 Oct 2025 19:26:47 +0200 (CEST)
-Received: from mail-oo1-xc31.google.com (mail-oo1-xc31.google.com
- [IPv6:2607:f8b0:4864:20::c31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5CE4A836A3; Fri, 24 Oct 2025 18:32:51 +0200 (CEST)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF32A83677
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 19:26:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 688DC82E34
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 18:32:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc31.google.com with SMTP id
- 006d021491bc7-65366485678so1084624eaf.2
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 10:26:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761326804; x=1761931604; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=F/BzcDj7Ru8EcmFwSK7LVeiGfYvT1pvrGBGRgVr99So=;
- b=Y8M72CKyH3yDs97ocJn2D+3Kfv/GTK8ucVAc5q9tri18NZKW1aBmzMztUgqP6OLhh0
- +JRp64lSz9nQPQ5Jgnqq0qEKqADFKiK0a9+MFJFzgogQXyHko2kyfWw3zueCE72oMBom
- lkBbk3GuXu1uIc1AhWshYvFPl+WOdJanwte/o=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761326804; x=1761931604;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=F/BzcDj7Ru8EcmFwSK7LVeiGfYvT1pvrGBGRgVr99So=;
- b=Lq9Ons7FAW3BREGXOry01T+AmZQYKh8yh2B2Y4BmL6afkSTQmutYZo215/LJQXcPkb
- 7pwBycrvEQTJYCgMGvL1WhwgAgucxTNHYLWBA1KAYw5c4+8z4Q0aah9K9dei1CIHZrfI
- w4pcRvM2hMvx33uEmJNqDvjxwSZ9tgfvbBKJAovNcSatj7Bq6XZu4LTvX3Wqu2/jOrO9
- /Sl6DppHsSWokw24ZYUuQhoY30F+rnK/NMVRlBlyYeWXrVN2syGhkW1rIw8QZDEEMeNj
- 5eRzJeCIF80oJG4HeEkP06H7HRQzHzpZq2tPaNOSX6Ffpi/KhRiE13Ko5+2QJfWR1ssS
- hsoA==
-X-Gm-Message-State: AOJu0YwXHK6utJEyrGQgcoIVAkkuSafUeEq2PvIViBGoT9+FbAobh99Z
- MqULBcWvEGqi2DcO8bI+Cl9nLXKvsDmOW+sfnV7TJeGvtMseGM6Xdvh+m/ezNhOA7c+trLx9BsH
- ZyRjR7I7yEA==
-X-Gm-Gg: ASbGnctcOGvWkZiovyRU9Dj61NyPhu20LAUKr8ukPsh3lM1L6grREr678YSlbzA2flS
- Tp9JX6aplf8CZwiMeuZpN6YTVNTES2m/zV1AsUju0JC6mVTWuwInKuXwEspay+9zSHDIWduNSA2
- dWdS6c0yqCa2XaDKRUegHGK/sWQZQMkp54LFOpg1soFnvOaHQ06XZX2OelhK/Y4KBwjpHutMbtC
- EEhTEgsd/VnH8bHt2qMoh/rwSvRHlE5baq7jom/1QUL2mCd70RwNwlHRVYfrRb8FRAFWRG6UMIp
- RaRqk7BR1rrrzo5G//FDsr21Z1VVM1oG8flJH0Eau+NLTERkrjtorJyixeyRPP224JepRc/XBQb
- 7uPUtTCzq0DMjfWQhvqpIA902Gp2GjV0xrSTS9UXrNnfTxLeVGafFQrGejt7kHASY9KUXZI3YUT
- pM9UZskG5mEVrDd3XRAc26ijXsNTgP+0y9yM5UtyTKpWK/2EuBAKfQ
-X-Google-Smtp-Source: AGHT+IGrm518c4uBmGR7XS70qAz7YpWla7zor4JA9Adm6rA50LuZX5dv+dYhuvIHMC2rAGHiO2imkA==
-X-Received: by 2002:a05:6808:1b90:b0:441:8f74:fd6 with SMTP id
- 5614622812f47-443a30c7194mr14971902b6e.67.1761326804463; 
- Fri, 24 Oct 2025 10:26:44 -0700 (PDT)
-Received: from bill-the-cat.. (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44bd42ee0e0sm1298683b6e.5.2025.10.24.10.26.43
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Oct 2025 10:26:43 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] test/py: multiplexed_log.py: Clean up and correct RunAndLog()
-Date: Fri, 24 Oct 2025 11:26:42 -0600
-Message-ID: <20251024172642.2419507-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=kauschluss@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 081CC25D53;
+ Fri, 24 Oct 2025 18:32:49 +0200 (CEST)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id t_BKkOxbFgW9; Fri, 24 Oct 2025 18:32:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1761323568; bh=oe7wMnbbrURWY/dtnCcxOhtJ/ZYkI0Ir8/SdHEyQUqc=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References;
+ b=fFcuAh3bcNDJyDd0za6RmFAJiFVI1oj4N091s+eqSb+fZBbSVUkh0oeVGibGxWb2V
+ jftOHbTiXNgbWsdcoOyhVpAZGZcqUCtBSKNiymAZGf9fO1oeSu7BJeHwWzrcTYOrT/
+ PWbq/qeqw/f85vgSJMGdmx1UCs8cX3A1UM2tWHCQAQi3Px4oi+Ac0MU+4kc/rLZCCV
+ mhui98CB4HkStYVP43caz+QED8vu0oolT9q+D/sfqtouslJ3ZgOpDBg/r1Bw7GdfcA
+ 1PqkrlcvYFXA1NIkA0za8C9e3lMLdgHQsvkJywYSoT4hd3xljFNmLBgqr6bJ64FIMZ
+ kqazuMf61Jpxg==
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Date: Fri, 24 Oct 2025 16:32:47 +0000
+From: Kaustabh Chakraborty <kauschluss@disroot.org>
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: jh80.chung@samsung.com, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
+Subject: Re: [PATCH V2] mmc: exynos_dw_mmc: guard execute_tuning
+In-Reply-To: <20251024104033.21653-1-peng.fan@oss.nxp.com>
+References: <20251024104033.21653-1-peng.fan@oss.nxp.com>
+Message-ID: <200583cb535bc28d1933c4eaab699d83@disroot.org>
+X-Sender: kauschluss@disroot.org
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Fri, 24 Oct 2025 19:37:56 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,37 +69,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The general python documentation for the subprocess class recommends
-that run() be used in all cases that it can handle. What we do in
-RunAndLog is simple enough that run() is easy to switch to. In fact,
-looking at this exposed a problem we have today, which is that we had
-combined stdout and stderr but then looked at both stdout and stderr as
-if they were separate. Stop combining them.
+On 2025-10-24 10:40, Peng Fan (OSS) wrote:
+> From: Peng Fan <peng.fan@nxp.com>
+> 
+> Guard execute_tuning with MMC_SUPPORTS_TUNING, otherwise there will be
+> build failure:
+> drivers/mmc/exynos_dw_mmc.c:484:10: error: 'struct dm_mmc_ops' has no member
+> named 'execute_tuning'
+>          .execute_tuning = exynos_dwmmc_execute_tuning,
+>           ^~~~~~~~~~~~~~
+> 
+> Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- test/py/multiplexed_log.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/test/py/multiplexed_log.py b/test/py/multiplexed_log.py
-index 63237594bb40..68dc183e4638 100644
---- a/test/py/multiplexed_log.py
-+++ b/test/py/multiplexed_log.py
-@@ -138,10 +138,10 @@ class RunAndLog(object):
-         self.logfile.write(self, msg)
- 
-         try:
--            p = subprocess.Popen(cmd, cwd=cwd,
--                stdin=subprocess.PIPE if stdin else None,
--                stdout=subprocess.PIPE, stderr=subprocess.STDOUT, env=env)
--            (stdout, stderr) = p.communicate(input=stdin)
-+            p = subprocess.run(cmd, cwd=cwd, capture_output=True, input=stdin,
-+                               env=env)
-+            stdout = p.stdout
-+            stderr = p.stderr
-             if stdout is not None:
-                 stdout = stdout.decode('utf-8')
-             if stderr is not None:
--- 
-2.43.0
-
+Acked-by: Kaustabh Chakraborty <kauschluss@disroot.org>
