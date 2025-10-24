@@ -4,148 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4239ACCF9E0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 14:54:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A302CCF9E0
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 15:09:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB09A838EE;
-	Fri, 24 Oct 2025 16:53:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BB3B83678;
+	Fri, 24 Oct 2025 17:09:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="BR1xhFv1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DYUr3TcA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F273683621; Fri, 24 Oct 2025 11:28:29 +0200 (CEST)
-Received: from GVXPR05CU001.outbound.protection.outlook.com
- (mail-swedencentralazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c202::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 870CD836AC; Fri, 24 Oct 2025 17:09:12 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 948998334F
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 11:28:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B16083677
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 17:09:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LrawU/mHDiTdBHfkaQnJTfeCADoMhear6xI4EC3WHTboq/pVuqGGKJteSxJye4o+dzG6em6AYy0nt2ybnxPj2MjrBOHc+KkZAvNleISwLA2qO5HzZp0WrA07I1RIVqiCVUAybgg2DWBrvfJC7HT1f8wSPipBz7TwXF/TBR7t5ofMuIey/IOYkDHG8pdB72hySsqCYtbLiIEhaOvYWJG2RZeoTJ8YS2jXNid0ZxEybaGIQv8MIIknvNoAnYiPjkNbN/+oQD+Gqd4PxCd/F1GSMaPNTb5sn7cNSGowPmKdiP25Lw5/C9DaQ0nHSmCsKr1F0T2y8wSNGoklGiGx34f4Hw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RdrhA3p6Dpgev0p4DTvrTbyiUvufz8YJgUojSBRTcK4=;
- b=ZqWvJuuR6oirco1q7d7Fiqoqul66g8heVu6EoEVtvWr/b9KsuKRmAJsCAqL0q0edrw1nIiMmtIafsBmYMyx8zyFY76kmFx+G8pXrtCumVX8mpG6BCEIpeIwNf38DgtoeZkb4zEfEqGfYjBd2Q5MerJR/V8RUX8h4ebsY+kcKd/a4BvMdlL5gMP+q417OuqfDwKV6cVbkisP8s6X31ga8N+9v++MTh7gej5tNyxjEaPvXI28i0ds/CvcXfQB34wSBd2Vlt+PsFhXBK4FaWg/gjHaw6FpPh6xLNZxfF1Wnzu2i1HHa8mopl518pn4UcWeJaUyrshya1vBMIwSS6p2uKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RdrhA3p6Dpgev0p4DTvrTbyiUvufz8YJgUojSBRTcK4=;
- b=BR1xhFv15/IhxvQtvMfObc29UV4/yP2u9jJhtg/UpA+awWIi5hqge+Cze20k4S2q7Nb9T6lZYHQylDs70jUetYIE5UJeDqNLgRZHmep6QVjoQKx2vt+KVe1WJ9EI/HulXq52gsoFtuDFAUYZxMHyrwC6inXmA+/SnqSC+JL2oPNdR8S+nWoba+IW4PUYugLbJmvLo81z6cqwNPLDvlFn7m+KoXG0ZA930d+/PBk9axcb0QNAzdez/keebQGOYl58fxwhtk7SVbcytC7tq/2DAMOWX6PGyQjJqPkJiAWEKw3unHoskLS7UsehaXqEXUtdNHBi7lJMDomKVrYDjXiglQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by DBBPR04MB7660.eurprd04.prod.outlook.com (2603:10a6:10:20f::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.13; Fri, 24 Oct
- 2025 09:28:25 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9253.011; Fri, 24 Oct 2025
- 09:28:25 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: jh80.chung@samsung.com,
-	kauschluss@disroot.org
-Cc: u-boot@lists.denx.de,
-	Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH V2] mmc: exynos_dw_mmc: guard execute_tuning
-Date: Fri, 24 Oct 2025 18:40:33 +0800
-Message-Id: <20251024104033.21653-1-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.35.3
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR02CA0009.apcprd02.prod.outlook.com
- (2603:1096:4:194::11) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-475c696ab72so17462885e9.1
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 08:09:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761318549; x=1761923349;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fOvq4/Q1dnpCEk8QfK9VODfmKEocC6rYFGh3WyJnDlE=;
+ b=DYUr3TcA6PQuPhALjfyWzeanCzUQPaN86DG704l0J2aOX8oTkHSn0/G5+Iq332CGFt
+ 8pvbP/XictrRkC85YBXPsW+nFGMPkdlWsWLKLABXZ2HZs23RBMx9TxUzYIceJkjG8jHH
+ QiREa+YAgTaBBY8622wn8TlPaklCAbgbhnOyl/xq/5T0BbovUedz3Fg0+BcfYgc/xTK/
+ nin6Pgq7mk9e1V1p742P61/dDmhf0HGIsiedC4bjzFZo+iSIR5jlvFb2mbAVl1wUi9vY
+ w69X5XFQ8k9XSwYmuqOFVUqFZxm/Ivrn6tH1igU0oDqyDYi20j9c4Sda1jyaea3Y375T
+ FOjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761318549; x=1761923349;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fOvq4/Q1dnpCEk8QfK9VODfmKEocC6rYFGh3WyJnDlE=;
+ b=oePkuG47+yWW0I3grE4l3kjlnnP+2eKw7jq3SroeSDoF4ItWkyITfR++2X8moJhM6T
+ qKkMxGf5JBJ+H/8FRl79FoxQaIiEUobOzyLEWQQ5x/Y25ReTMppDPF0Lgr7CtUTu2Y1T
+ m9GG++NsIqnqgwa+iSRuEFMbihu3RWhzPmw+mpWT0qMrMY2sSVihO+IoA/gdAMm1KYBf
+ ICMafk9Ig+eRTdDThQ69ISIcAN0h74Kf+PvL/tR0zOJKEqlllPfbTWcCkboh5rZXHzJE
+ teZTMbGQfhVP1EHwC4lAaARq0zK5rmP2nc/Z5YvEXKE7W3Cuh9Yiwm9+QYmeDJCLJ8M7
+ bhqA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVKGfUhYVlrURvviR+mGGYPb1EXKdXAkl1BERuFfoVRf7j11ezfaA7KqQzJzIpBJQOhV9SMqH4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHLVOusmuW39rM6RtUv+sccKVnRpouf/MEkXmCSjcrIPQM6qpk
+ 1Z1tqFmyqcIO20Djb+JSxzybbqCkhFqSPJqB2uaOyzTS8I4evy1yvPOAuwEX1Fzxj1o=
+X-Gm-Gg: ASbGncuZsCD71LfNcNkM1ogPY8AC6T6BFFIGvhMZx9ogEFJJ1OaAD8bnEIIvWR2WScC
+ KJ3rejjFyUDTFpuHsZgFElkSMomi9EPRe2LYU7kJ+PqGoTGVLLdIzNGR8rTgeVPy7RrG0zq1+iD
+ E+K64IalS5B01mppc5+8akqm6sQG7fCGtI2Ih1GQq+jLZ+5Eh91QTiaDm1XVbVEnbykpZnHxyVF
+ fJ9d4QbwGArPiulOfs2yQQz4ySCRXdji3lqIiSnUPXpnKoMwHMbRv/+BLimku028M7Woh7cbYiV
+ KyDjckSWqZ9sDOf25H9RKL8KK4phHGLQ/Ft0seN+Qr8+keowpVJ14Pn3RepL+LmPpYg6WJVRB4d
+ dfCIl+zo9+QXKkYOYCiTjYsmLx71ueRxL7qBbm7TnvcPEc0dBHMF9Dcskl1xFeWcr1r0tjyN+62
+ ByopxpjeS/QiFH7IAKXGfKiWa8EYD2qWO9e1wUskKz2bEcfGqbjWmF03ELnw==
+X-Google-Smtp-Source: AGHT+IGLTFKnb/l3KPwsVVQBarIH+2Zy1AkhMY3piegckp5cH8SRnE2djWna9Z0kKW53901qTU3N1w==
+X-Received: by 2002:a05:600c:5493:b0:471:a24:497c with SMTP id
+ 5b1f17b1804b1-475d2edf196mr24346435e9.33.1761318549044; 
+ Fri, 24 Oct 2025 08:09:09 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:e50:3860:a5c0:bdf6:3b95:6cfd?
+ ([2a01:e0a:e50:3860:a5c0:bdf6:3b95:6cfd])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-475c428f709sm155898675e9.8.2025.10.24.08.09.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 24 Oct 2025 08:09:08 -0700 (PDT)
+Message-ID: <bac88430-cadc-4306-92e1-d83ff5937f25@baylibre.com>
+Date: Fri, 24 Oct 2025 17:09:07 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|DBBPR04MB7660:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f0e2277-98a7-41b3-70d7-08de12dfae8b
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|19092799006|366016|376014|52116014|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?kjGcJtuC1QkWwv++d8oor7a/UGCBlw3dkA5uJuRkB0Xvt30IqMLHm4KJL1d2?=
- =?us-ascii?Q?eRjSHA8Lhyd2Z6x32e3h9i+46bhBLThJeaW8H/pi0Zo1n/xjycncz6BvF76x?=
- =?us-ascii?Q?K7Lfzs2QQbyyOQpnviiS93n5k/dqjSXa9ZEoXmDvijcekRg7c5VodItPSNq1?=
- =?us-ascii?Q?Rd2zrjd770fBkrqeudSpKV4h0CHXFhJ/095bY+5fGeiBIpHDUQzu0PyCRNhs?=
- =?us-ascii?Q?WSNKAsqwrF/Lapwkm9ZuzHGbSyGalwp1NUWbE+Ky+0rG8uSdWk2lXRZCj3KB?=
- =?us-ascii?Q?p1KEX3uUzM/XeBm+SasQsvFqe1YOfmDJ4CLEbHC5Sow3anBL2NipTZ3Wfwet?=
- =?us-ascii?Q?wIv9ZabFSgKigt4+IBSSFf1sU/5/Nld6XhsX/7QrHDFnQXMRbdZbtNL+TMDB?=
- =?us-ascii?Q?RB3JGFYdmdero91n0F6QrKOkppf5lEhK+Ci5n/jasAfvThw13PZqgSgcxa0c?=
- =?us-ascii?Q?odYvynm+iHgKxWjToiKh1gKUvhFRPG2906s0NccNnn5ovSpWx9nmv7Lk75Fo?=
- =?us-ascii?Q?eMLMZm2ELJGJ9Ij2UKfYJU/3UFJPsMnmAF1sbrtCjRVVSllT4Lh1G1zASpqz?=
- =?us-ascii?Q?UrkGa9V+BcaFFEUNHWROPtXef4tE74iAB5RQ5KO6YEzdGUZP0rbAChMml5Fp?=
- =?us-ascii?Q?ah9q7EPk7XriTOPF44wwlpy6hnO+RFLtTV2/kSUSZtBPNurH9Hbqc2Jzmt4j?=
- =?us-ascii?Q?bhfjAs8LHZHfHuaGuhz4AIAvTB2WKtAGBIdJRb7Rg1p6CU7r2nCrQi3uPtC4?=
- =?us-ascii?Q?k4NvuAtcEjfVuTZbna5A6SBKIzu+1NeycmQbicCyMF+/nwSdWeRjIn3VHqoE?=
- =?us-ascii?Q?otL3XdcfIxQtCZO4jarxx5A0I3ey19616omP9gZdRpWmuuxe1ygXo7UrkNoJ?=
- =?us-ascii?Q?Bo6EPCsFTvTLHc1paJ8NwK3T/ym56lEj18bB8dpCxk1zL074oPME3ogFqCeL?=
- =?us-ascii?Q?l1/CZcMi6UYXiWZ5F6/kpoMiK2roDWRhOrit1ufMzzUImokVu+GWkMgVEcwY?=
- =?us-ascii?Q?uUSTMptQ15MUuYz1BQg+gsGebTcCBswtrnUGPndcFuihR74ktoecKVyG+B3I?=
- =?us-ascii?Q?JoofZH9/eAlzn7U0hvla2o4MGRPyoJr71aQhY0WU1J5ogKTlrDAfSqnl2ceo?=
- =?us-ascii?Q?WGwUCldIySF4LUDGGlk73UE6sUol5G3KxdmXEn4pHSIlQE7wcpVXw/8uwJ1U?=
- =?us-ascii?Q?cBHWt952crVDuCuwZjxiK3x4ltil9rB89t56WnXYOnsqyne8Wt4h2sX2g8xh?=
- =?us-ascii?Q?Qsk1/H/3M5lSfTp/8rZVdqh1GNTYgCO9QIq8Oq1mQSXRtfLQxgu6h6PCkPl7?=
- =?us-ascii?Q?0M9oQMzzUoxxAsAcVshycBnUbhrQ3befbLdT3HoEZpDi+ssDmoXrtwjcbvd/?=
- =?us-ascii?Q?fR/LmvXoffAE9bi+sVbjsrOR/8PrTU/gVKOOQyTX5batlKHXKTIIj2cFEsj8?=
- =?us-ascii?Q?xH43m6MioZaS7mWX2m6/7msEKhwklve0jzazKlRYTC4irJjouCLDIThqB/Ii?=
- =?us-ascii?Q?bSz4p/2v+3DS6y3nS0fy8ilyNvcAOPr8XC85?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(19092799006)(366016)(376014)(52116014)(1800799024)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bkBrJ5FeleUbyHVXAllSmAyCDeGjfeizVn3a1IRQ52+zBXbOZT6BCDHLjJkg?=
- =?us-ascii?Q?XJmyXE3XzpONd0y2RhaBmqdauXEAb7pVizWsDHwj1lBwfjQ1QniWdAzplBpC?=
- =?us-ascii?Q?ymZG4dYAuqw1zxUnhFgl3sPV1jeGaXBCYS0Y0ZYg8W+0PEIJ/iOEo3aI21z+?=
- =?us-ascii?Q?43yWpqTedGJreMz6fi18M6lyw5FUFxRVNMX0yik/UhplE36SFvewFCOlHanF?=
- =?us-ascii?Q?vqrZmlZ6NBiV11NEkrxMd0fXsIEG0Jw5F3LqVotZiI/fK9jkapUsPIf0oCb7?=
- =?us-ascii?Q?a5/BxD2eFSFk/SEKkMPfrb0GS79WGc8Q6QIEdmFuQNGdRlUnJx1+3ZPOtAJv?=
- =?us-ascii?Q?lTClrcUN9Xsuz5aVZIAjkQojLr2Xo47RlZlIuDonlcvMtRx5aj0WfQzSePyQ?=
- =?us-ascii?Q?QG5uZb8SHwER0tQwGhqI+PRmAW/q2yxSwQcqNx/Edt2OepJzx8e40RSoewYA?=
- =?us-ascii?Q?PcOe+i2RVRdtb/I+d9lyag5N2xbwGPgN2+0+n+kPZBX+5LBfkIX8b5cGAeaL?=
- =?us-ascii?Q?RqSV3uluOSomvyEr5p9/vXdDL3OeTxliyu/9GWy8WlBEteTcHfwyi+HyULUu?=
- =?us-ascii?Q?oEk1tTuNvSqle1WAnSnlVu+vd1f1MXnP9U2XpXCHbWyKbBKeYfOyR+j/Ir1i?=
- =?us-ascii?Q?aksxeeaEkM9O5rszXUYK5aqReB8pDyt2uO2QnnU3WJOtbMCM9+lTW6ilVEJA?=
- =?us-ascii?Q?2jFSqCsDiFoY33/Ju11QNzS7hv0BFb7ywFGFcOQcm5Wt6gdzLhODO/FLndt7?=
- =?us-ascii?Q?E9Pypck3aSS3dJieK9tOvTL1ukd9oF5FofWdJKIIVp6SEwIJrr5OmL+cTmJ3?=
- =?us-ascii?Q?xbURWVlyaICirWRRCnfuEDSbxhnfzOvdm7IR0ApRE2WbtSADh+a9L0fBbPKP?=
- =?us-ascii?Q?oKKziiI4Et/LTgclii0/hdLfFwluUm6AekEkank6BD5IFr1CYtnzhjjh5w3E?=
- =?us-ascii?Q?w/cOhVn/k1Oo8YbEEMB0vr1Rqif+aTpRGVNxnfYeOaxThyVlPhs1T9biTCQF?=
- =?us-ascii?Q?r7sy6vUwiKQdm6f0q7/wpfbq9CCVvTBQ5vtdO8BuETwXIA9ZV33rSnx648YF?=
- =?us-ascii?Q?8LK/8wgn9iA4XZVvY2iZS2BfHO2UjUrE+cp7qFPa60flFSAovdjpAHSh9BZs?=
- =?us-ascii?Q?Aq5ZwGX9RPyKtURxCx+OCSVO8/e5xIbxu+4g9E/RSlY7Pt6ljlPQdyleykPa?=
- =?us-ascii?Q?BperMfghhVS/I7aH41as56MS/fY5R0meRrG+Nb0VSik69WDfo+XOHVgQpox8?=
- =?us-ascii?Q?uv9qad6sizDl77dunzJ2WiGkiPMBigmXSvg9wP5AXXBAWGFCmcSj32B2w/3V?=
- =?us-ascii?Q?hM8xAB3S92QYi6FopCODX/7+vrxAv1qDSmkhjMyutXfE/1LERiZ4GE+eSu9m?=
- =?us-ascii?Q?i/q9Y/VSN95OllGlcrn8UDdXwklsgOSWcakzdDwktIvOZTfLCrx3DUxKJQBK?=
- =?us-ascii?Q?BUWtGBPbKwZhwDtU7bLJHzKbuSPOIW37ql/ZY3ZYuwyNFB017H8MzZPaN6tP?=
- =?us-ascii?Q?StOY+CFB1GvxbBN45PH1b5u55LGzbaevKNl5XRkhzB5fXx7LhaOTZcn6vWpY?=
- =?us-ascii?Q?YHzf04Tkjt3nv6cjc8aLUmn6smK/jasOucSniinV?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f0e2277-98a7-41b3-70d7-08de12dfae8b
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2025 09:28:25.2906 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: myBGGFk2OsmOV+B6BqyXQ1xjbqf1ANBTFHz57CTZE39zZ2XLYRBjsxcaYGjWj2pG269LJYymodP5mv3Bbfg3+A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR04MB7660
-X-Mailman-Approved-At: Fri, 24 Oct 2025 16:52:55 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 5/5] test: abootimg: Add test for bootconfig handling
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
+ Nicolas Belin <nbelin@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
+ Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Maxime Fournier <mfournier@baylibre.com>
+References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
+ <20251017-bootconfig-v2-5-8c7c2f2e5474@baylibre.com>
+ <CAFLszTjXxMaQsC2fzDVjnCqPB286A0wkVcXwnoXt7BJDxESNJg@mail.gmail.com>
+ <20251019160136.GO6688@bill-the-cat>
+ <CAFLszTg7KbiEF8JJBokJt2mbRcWuYFgXmuc8TgxbGiWPo_z4DA@mail.gmail.com>
+Content-Language: fr
+From: Guillaume La Roque <glaroque@baylibre.com>
+In-Reply-To: <CAFLszTg7KbiEF8JJBokJt2mbRcWuYFgXmuc8TgxbGiWPo_z4DA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -162,55 +115,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Le 20/10/2025 à 07:18, Simon Glass a écrit :
+> Hi,
+>
+> On Sun, 19 Oct 2025 at 17:01, Tom Rini <trini@konsulko.com> wrote:
+>> On Sun, Oct 19, 2025 at 02:06:05PM +0100, Simon Glass wrote:
+>>> Hi Guillaume,
+>>>
+>>> On Fri, 17 Oct 2025 at 14:19, Guillaume La Roque (TI.com)
+>>> <glaroque@baylibre.com> wrote:
+>>>> Add test to verify that androidboot.* parameters are correctly extracted
+>>>> from bootargs and appended to the bootconfig section when using
+>>>> 'abootimg get ramdisk' with boot image v4 and vendor_boot image.
+>>>>
+>>>> The test verifies:
+>>>> - androidboot.* parameters are removed from bootargs
+>>>> - They are appended to the bootconfig section in the ramdisk
+>>>> - Non-androidboot parameters remain in bootargs
+>>>> - The bootconfig trailer is properly updated
+>>>>
+>>>> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
+>>>> ---
+>>>>   test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++++++++++++---
+>>>>   1 file changed, 99 insertions(+), 9 deletions(-)
+>>>>
+>>>> diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
+>>>> index 2aadb692b30..bd5fb992a7d 100644
+>>>> --- a/test/py/tests/test_android/test_abootimg.py
+>>>> +++ b/test/py/tests/test_android/test_abootimg.py
+>>>> @@ -69,15 +69,33 @@ e5bddc8a7b792d8e8788c896ce9b88d32ebe6c971e7ddd3543cae734cd01
+>>>>   c0ffc84c0000b0766d1a87d4e5afeadd3dab7a6f10000000f84163d5d7cd
+>>>>   d43a000000000000000060c53e7544995700400000"""
+>>>>
+>>>> -# vendor boot image v4 hex dump
+>>>> -vboot_img_hex = """1f8b0808baaecd63020376626f6f742e696d6700edd8310b824018c6f1b3
+>>>> -222a08f41b3436b4280dcdd19c11d16ee9109d18d59042d047ec8b04cd0d
+>>>> -d19d5a4345534bf6ffc173ef29272f38e93b1d0ec67dd79d548462aa1cd2
+>>>> -d5d20b0000f8438678f90c18d584b8a4bbb3a557991ecb2a0000f80d6b2f
+>>>> -f4179b656be5c532f2fc066f040000000080e23936af2755f62a3d918df1
+>>>> -db2a7ab67f9ffdeb7df7cda3465ecb79c4ce7e5c577562bb9364b74449a5
+>>>> -1e467e20c53c0a57de763193c1779b3b4fcd9d4ee27c6a0e00000000c0ff
+>>>> -309ffea7010000000040f1dc004129855400400000"""
+>>>> +# vendor boot image v4 hex dump (contains initial bootconfig: androidboot.hardware=test)
+>>>> +vboot_img_hex = """1f8b08000000000002ffeddb316a02411806d009a49040606d3d84374823a9a348b095
+>>>> +915951b2c9caee8690ce237a91406a0b497603e215dcbc577cf3334cf5350303b3787a
+>>>> +9c4fa6d3e7dbf02b6b63dfc6b01b0180ffe726644d5e37975bb34108c76efa1eb65974
+>>>> +c7fed691c600e02a64e7ab3e8494afe37bd128050000007ae6707ffad202000000f45b
+>>>> +155fd3b67e59eee26751c674a711000000e89ff896aa729b5665d98c37b14a1fb1ca1f
+>>>> +da4f7f5e02000000a0377e0040ab5ba000500000"""
+>>>> +
+>>>> +# bootable boot image v4 hex dump (contains actual bootable kernel)
+>>>> +boot_bootable_img_hex = """1f8b08081663ee6802ff626f6f745f626f6f7461626c655f76342e696d67
+>>>> +00edd1c14ac3401485e159b80a083ec24dba4f117c81d8140c6dad24ee25
+>>>> +4da6e9d07452321305dfca37d4d4ec5cb954fe6f37ccb967606ef298e6db
+>>>> +2c0d3f94526feae25adda81fae140000000000f8ab66e17c67ecdc1d025d
+>>>> +1d3a89125bf79da9e5beebbc64a7b2d1f27a27cfda7959e9deea369a8263
+>>>> +a0eaecde34e2c75b375495766e3fb46114cca430a7a12dbd96e3654a7663
+>>>> +dfb9f4feeb383514beecbdb1cd1489e3380a5cabf5596ea7c4f78b62acf1
+>>>> +a66ccdbbaea380950100000000f06b79b249b362f5f2b44e16cb87ed3a5d
+>>>> +e67c0a0000000000ffcc27ba944c7e00300000"""
+>>>> +
+>>>> +# bootable vendor boot image v4 hex dump (contains actual bootable ramdisk)
+>>>> +vendor_boot_bootable_img_hex = """1f8b08081663ee6802ff76656e646f725f626f6f745f626f6f7461626c65
+>>>> +5f76342e696d6700edd8b10a02310cc6f10c0e7220f8080737b8b93ab9a8
+>>>> +282e571171959e0d787058a84557f5c96ddd7d80c3ff0f92217c5396408e
+>>>> +f56abf30e63090649c9b3c53bd050000fcab57d45b3c35de47db749a06bb
+>>>> +e1eff08c7d0100d00bf6ea826f5dbef0d38b0dee618396f3f27bf69ddedb
+>>>> +b316558a4d462255fe132c4dbdde6e0a160700000000408f7c0027597569
+>>>> +00200000"""
+>>>>
+>>>>   # Expected response for "abootimg dtb_dump" command
+>>>>   dtb_dump_resp="""## DTB area contents (concat format):
+>>>> @@ -179,6 +197,24 @@ def abootimgv4_disk_image_boot(ubman):
+>>>>           gtdi3 = AbootimgTestDiskImage(ubman, 'bootv4.img', boot_img_hex)
+>>>>       return gtdi3
+>>>>
+>>>> +gtdi4 = None
+>>>> +@pytest.fixture(scope='function')
+>>>> +def abootimgv4_bootable_disk_image_boot(ubman):
+>>>> +    """pytest fixture to provide bootable boot image v4."""
+>>>> +    global gtdi4
+>>>> +    if not gtdi4:
+>>>> +        gtdi4 = AbootimgTestDiskImage(ubman, 'boot_bootable_v4.img', boot_bootable_img_hex)
+>>>> +    return gtdi4
+>>>> +
+>>>> +gtdi5 = None
+>>>> +@pytest.fixture(scope='function')
+>>>> +def abootimgv4_bootable_disk_image_vboot(ubman):
+>>>> +    """pytest fixture to provide bootable vendor boot image v4."""
+>>>> +    global gtdi5
+>>>> +    if not gtdi5:
+>>>> +        gtdi5 = AbootimgTestDiskImage(ubman, 'vendor_boot_bootable_v4.img', vendor_boot_bootable_img_hex)
+>>>> +    return gtdi5
+>>>> +
+>>>>   @pytest.mark.boardspec('sandbox')
+>>>>   @pytest.mark.buildconfigspec('android_boot_image')
+>>>>   @pytest.mark.buildconfigspec('cmd_abootimg')
+>>>> @@ -266,3 +302,57 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
+>>>>       ubman.run_command('fdt get value v / model')
+>>>>       response = ubman.run_command('env print v')
+>>>>       assert response == 'v=x2'
+>>>> +
+>>>> +@pytest.mark.boardspec('sandbox')
+>>>> +@pytest.mark.buildconfigspec('android_boot_image')
+>>>> +@pytest.mark.buildconfigspec('cmd_abootimg')
+>>>> +@pytest.mark.requiredtool('xxd')
+>>>> +@pytest.mark.requiredtool('gunzip')
+>>>> +def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
+>>>> +                              abootimgv4_disk_image_boot,
+>>>> +                              ubman):
+>>>> +    """Test bootconfig handling with boot image v4.
+>>>> +
+>>>> +    Verifies that androidboot.* parameters from bootargs are appended to the
+>>>> +    bootconfig section in vendor_boot image in memory, and that non-androidboot
+>>>> +    parameters remain in bootargs.
+>>>> +    """
+>>>> +
+>>>> +    # Setup addresses
+>>>> +    ram_base = utils.find_ram_base(ubman)
+>>>> +    ramdisk_addr_r = ram_base + 0x4000000
+>>>> +    ubman.run_command('setenv ramdisk_addr_r 0x%x' % ramdisk_addr_r)
+>>>> +    ubman.run_command('setenv loadaddr 0x%x' % loadaddr)
+>>>> +    ubman.run_command('setenv vloadaddr 0x%x' % vloadaddr)
+>>>> +
+>>>> +    # Set bootargs with androidboot.* parameters
+>>>> +    ubman.run_command('setenv bootargs "androidboot.serialno=ABC123 androidboot.mode=recovery console=ttyS0"')
+>>>> +
+>>>> +    # Load images
+>>>> +    ubman.run_command('host load hostfs - 0x%x %s' % (vloadaddr,
+>>>> +        abootimgv4_disk_image_vboot.path))
+>>>> +    ubman.run_command('host load hostfs - 0x%x %s' % (loadaddr,
+>>>> +        abootimgv4_disk_image_boot.path))
+>>>> +    ubman.run_command('abootimg addr 0x%x 0x%x' % (loadaddr, vloadaddr))
+>>>> +
+>>>> +    # Extract ramdisk (triggers bootconfig append)
+>>>> +    ubman.run_command('abootimg get ramdisk ramdisk_addr ramdisk_size')
+>>>> +
+>>>> +    # Get ramdisk address
+>>>> +    response = ubman.run_command('env print ramdisk_addr')
+>>>> +    ramdisk_start = int(response.split('=')[1], 16)
+>>>> +
+>>>> +    # Verify androidboot.* parameters were removed from bootargs
+>>>> +    response = ubman.run_command('env print bootargs')
+>>>> +    assert 'androidboot.' not in response
+>>>> +    assert 'console=ttyS0' in response
+>>>> +
+>>>> +    # Get ramdisk size and verify BOOTCONFIG magic at the end
+>>>> +    response = ubman.run_command('env print ramdisk_size')
+>>>> +    ramdisk_size = int(response.split('=')[1], 16)
+>>>> +
+>>>> +    # Dump the end of the ramdisk where BOOTCONFIG trailer should be
+>>>> +    response = ubman.run_command('md.b 0x%x 96' % (ramdisk_start))
+>>>> +
+>>>> +    # Verify BOOTCONFIG magic is present
+>>>> +    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
+>>>>
+>>> It looks like this test could be written in C?
+>> But this is just extending existing tests, and so this is fine. Looking
+>> at
+>> https://source.denx.de/u-boot/u-boot/-/pipelines/27943/test_report?job_name=sandbox%20test.py%3A%20%5Bamd64%5D
+>> we can see these tests are currently under 400ms each, FYI.
+> Yes, OK. The python tests are ~100x slower though, so we really should
+> use C where possible. Part of this is being hidden by the overhead of
+> individually running the C tests from Python. I suppose we could
+> improve that by running the tests in batches, but I haven't looked at
+> it.
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Guard execute_tuning with MMC_SUPPORTS_TUNING, otherwise there will be
-build failure:
-drivers/mmc/exynos_dw_mmc.c:484:10: error: 'struct dm_mmc_ops' has no member
-named 'execute_tuning'
-         .execute_tuning = exynos_dwmmc_execute_tuning,
-          ^~~~~~~~~~~~~~
+Hi simon,
 
-Cc: Kaustabh Chakraborty <kauschluss@disroot.org>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
+I will plan to migrate all tests link to android in C after this series.
 
-V2:
- guard exynos_dwmmc_get_best_clksmpl and exynos_dwmmc_execute_tuning
 
- drivers/mmc/exynos_dw_mmc.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Guillaume
+>
+> Regards,
+> Simon
 
-diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index b6660fb2cd5..b230e9dbbf8 100644
---- a/drivers/mmc/exynos_dw_mmc.c
-+++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -299,6 +299,7 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- 	return 0;
- }
- 
-+#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
- static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
- {
- 	u8 i;
-@@ -364,6 +365,7 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
- 
- 	return 0;
- }
-+#endif
- 
- static int exynos_dwmmc_probe(struct udevice *dev)
- {
-@@ -481,7 +483,9 @@ static const struct udevice_id exynos_dwmmc_ids[] = {
- struct dm_mmc_ops exynos_dwmmc_ops = {
- 	.send_cmd	= dwmci_send_cmd,
- 	.set_ios	= dwmci_set_ios,
-+#if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
- 	.execute_tuning	= exynos_dwmmc_execute_tuning,
-+#endif
- };
- 
- U_BOOT_DRIVER(exynos_dwmmc_drv) = {
--- 
-2.35.3
 
