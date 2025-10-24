@@ -4,96 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F14CCF9E0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 14:17:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC23CCF9E0
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 14:23:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9531837E4;
-	Fri, 24 Oct 2025 16:17:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C148E83655;
+	Fri, 24 Oct 2025 16:23:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="K1/HjH+E";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="NwWWDDbG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 469F783655; Fri, 24 Oct 2025 16:17:20 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 5249D83677; Fri, 24 Oct 2025 16:23:30 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F732836C8
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 16:17:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5383483631
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 16:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-46e6ba26c50so17255875e9.2
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 07:17:18 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3f0ae439bc3so1399019f8f.1
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 07:23:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761315438; x=1761920238;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761315808; x=1761920608;
  darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=1MH6ndKebsrGexL2kaYr+AZ3buvnQI8u3IwdFWHGHfg=;
- b=K1/HjH+EpgcAUmYjpI+nAxITyos9dJxa+SmdzCXSravfMLzwDlLQWzE2RYbiIDThRB
- RyJz+lUpM/edwXfCr9hPTrLELVI5DjV88qrXJoGIXQfBZr+E/Fz+Edd+5BGgTGKIIxo7
- qL2zwtwYRfKKNvoCbKX7D23p86N3/YS5CASQ7eIRTy6vntrraF+8cyxZtCZmbBcGEz0N
- 36W8pit0PbVzh0hsyqiAKhlmaFShcjh6d320o8pm9+8p3weR/WzxN4RWW3uhMDGgc+ob
- 9Jza+JrwNj/gEOrMq8M8Fae8zou6QaSkIRjKCuJjq99neMf9NP0xddEtC//ybKj9HJTi
- ycjA==
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CdQ/u5fAeQAUEcapSgh5vQA4fjrIXRM7xTQDKT1AX3I=;
+ b=NwWWDDbGtr9SXkMYBtPVaTQqKfeLGsO5JOvQ/RllaF61dtut8RCy5FyE+7p9816Paf
+ tZN/WyrbOB50AeRPu9mICAgHQjrU5mCnB4+qzigQd4CNbNAiQ8Jj3k3a2A86PTZKBOBj
+ 46J+TkSvLiYBxbKwvwdqNa3w2JF04UIKjMfRQbcxf6ESjgkQp8QocOvr+A4VUDt9IRta
+ mDEpIVUBk3TGGKH/EPffzjJ2LQjFFbSQjmoPCq8O2gSdka1UbdrYQVUZ5goG/kWYwJLd
+ qocJVUVQoGWtdvdc5n5RquiLR+xHpj2rnIkEVClpLLmLubUYp3arfW1VeRnsRPsfJxYS
+ LQxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761315438; x=1761920238;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1MH6ndKebsrGexL2kaYr+AZ3buvnQI8u3IwdFWHGHfg=;
- b=fauxKGZEBf9JRJkBdbgOJ+uxQ2I1DWo5uE1v7txMUa1Iz4OnKcMuu9VzcPffm6kaiA
- wC59KPJpEql1ZZafyLdAjwr+F/f8RHPeWYNCerH7B5ciZMiPQP7MgF3BD2WjYjlnLagY
- vEh/mI+9k9RlpdbE9+8VDOC9d9Bf6iyFOqn3H5lczFr5PaNMXK3i//4h0OT3H808sjq4
- blVkDrmC7O5QNqUBEK/Fb/6nZwy823uNelRw8sm4wmiH6jVmuWjFab/+vqkrv12/N2cI
- XJkGO0RQ+Uc6cjy2+mwCsrM581t8U+bNDO65gY4vaE+Gy3dDQl1g/KGDJenGqk40y0OL
- w9Lw==
-X-Gm-Message-State: AOJu0YzCQ8LzWwPBxm2EY04JA9grNq/WZvJXFRYTrrMre8kmJEkhK0u5
- YrFp3MY2gUTb3TiF5OtUykwe3ip5es3JqtApqJDSGKHibhO/1CPJvI6hmtNQX/ktfHg=
-X-Gm-Gg: ASbGnctj8LROPA5wy4ORHeLjdY+d+zcJZn5b9b1GpULa5VQELSTrtnVDMdBErIr5GvW
- fsWyXiFXsTnw8b8vTpwKo9AIqFkRbC6huzu2MP0CxwYFe27DYF9d1pFlIlHrazShZ3xeFlAl3jM
- a36nE1OpbuTASvbEAhtWMN4LY6/y0Fo8BvNES0JYOVrvJGiQ/PIzlE56BW5nmjQzOTtp020zj3w
- fUEbXU0W8jFxHZWP+bMqnLkydOVJd/JCcuwQr6zQDFa+JKjVVATm6RIpPfS2C/0iB31MJBrByEU
- eFRf0Rl3QoKIZlnykiIC3LmFVd1J0228rL5kGONWQyP/XOi/u3rzz9G1EJysJ+zvRcEQKJSQl/s
- xmbDYnuyAhMcTglWCRV/raXYQlSDydwYBnxrM0SKCTqAuP7MLB6Oy0UxhxHWlGoQzzT5qbrg5m1
- k4Vos=
-X-Google-Smtp-Source: AGHT+IEbwUR9ioohp9OB7AY7UnnGLJEnVtEsuAGsHKnSeug/PfvbZARLZRxgXtaaYDXD/vMHsHr4BQ==
-X-Received: by 2002:a05:600c:458b:b0:471:16e5:6d7a with SMTP id
- 5b1f17b1804b1-475d2e7df18mr19051035e9.13.1761315437785; 
- Fri, 24 Oct 2025 07:17:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1761315808; x=1761920608;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CdQ/u5fAeQAUEcapSgh5vQA4fjrIXRM7xTQDKT1AX3I=;
+ b=ooSuhrwV+IMPkW9+Rkw45RIAnvtJhL2Wa2Qw4Xci15pqr7D2CAlEWwSDRy7qXguWoN
+ 4cArIB188be2UC71rERg07PexLrf1UcyRa6SYp5BAoC3LaLQj8EUyHPJL2kZrGjmcpfp
+ MKPeZbiejXlOzNbpHQ7o4UMm1K64hf/cz64WDU62Mg/bhSc8oq7F5KJx7VBgOO0gnDs9
+ U72mgOJn6W5yzCyFWTuh9AkDsAasVin7jA1uHWVV85ZrY8K2rAnc5HW1GzGVlwRAXN0X
+ tODsq99qj+or0C4CnXh9CwQ4eTmcPVj+Q81qmxEfcOxxdNEAkbHgV9SdXVEGWNDw732h
+ SvHg==
+X-Gm-Message-State: AOJu0Yyeikv9PNUIjFHLhiCgYKFzfJujHIYRGjG6HbiVVGEOdMb0an4S
+ mv49Ie93OSo1ABnbWEQmBdHPSWPfK/MqDC15urg/K7yUNu3c/tPaJky/4sNIIjoqlzc=
+X-Gm-Gg: ASbGncveqIzQ4k5Oz2xkFSW+JEZZqdK0jpZSJ203wMBUP2MgN8KSzIJeD0W6PF0Ctz2
+ G9pT+tfHEtoq59rcIxLGkVWClDDyS/cP2suAw3MdwjuYEAt+dufVjzOYDYJk69pSN2vn0KpYtlI
+ Uhjz6kr/+wwlmnVsb/q8CX1QBPq2gewfjjh9okafaC4HC6DkQ0IkmD5B9uoKhyyKP2j7/Y6fnWj
+ GfNMK1WZoPVOS3k5h/MfRc7xTOahZnfajPivI0H6gneO6Ml0g65pTTS5IHkYcHhmLAHP2obNdKX
+ Qx6RG5jMGTN2UiRcF4IrqzWhbcxkdPMt6TA0TZ0dMDQekjse44BSjwDfALi5rakfoE77vs4Q0W6
+ DIkpfdrlNhBLiJds43sXnIikDdVNopzpMNg1MLBTtExegXf+bI7mAKph8rdIK4AXOrCdi5MBvKT
+ p+OlY=
+X-Google-Smtp-Source: AGHT+IHKg+T9/30inSyGFjbznnIWKKWdkl8vPkFhh2zibLzNm+y4wNfAZa1G5sGs6cxLpMFbffZqig==
+X-Received: by 2002:a05:6000:3110:b0:3e4:64b0:a776 with SMTP id
+ ffacd0b85a97d-42990747c84mr2099933f8f.52.1761315807611; 
+ Fri, 24 Oct 2025 07:23:27 -0700 (PDT)
 Received: from [127.0.1.1] ([2a01:e0a:e50:3860:a5c0:bdf6:3b95:6cfd])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-429898ccc60sm9656065f8f.34.2025.10.24.07.17.16
+ ffacd0b85a97d-429898add8bsm9433243f8f.23.2025.10.24.07.23.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Oct 2025 07:17:17 -0700 (PDT)
+ Fri, 24 Oct 2025 07:23:27 -0700 (PDT)
 From: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
-Date: Fri, 24 Oct 2025 16:17:15 +0200
-Subject: [PATCH v2 4/4] board: am65x: Use generic AM6x board detection function
+Date: Fri, 24 Oct 2025 16:23:22 +0200
+Subject: [PATCH] bootstd: android: add the bootargs env to the commandline
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251024-am62xeeprom-v2-4-0e372347e7d4@baylibre.com>
-References: <20251024-am62xeeprom-v2-0-0e372347e7d4@baylibre.com>
-In-Reply-To: <20251024-am62xeeprom-v2-0-0e372347e7d4@baylibre.com>
-To: u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, 
- Bryan Brattlof <bb@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, Garrett Giordano <ggiordano@phytec.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Neha Malcom Francis <n-francis@ti.com>, 
+Message-Id: <20251024-botargsappend-v1-1-0b78f05f9132@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIANmL+2gC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1NDAyMT3aT8ksSi9OLEgoLUvBRdY4tEE2Nzw+Qks5RkJaCegqLUtMwKsHn
+ RsbW1AMj5HMRfAAAA
+X-Change-ID: 20251024-botargsappend-38a4371cb6dc
+To: u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, 
  Mattijs Korpershoek <mkorpershoek@kernel.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Santhosh Kumar K <s-k6@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Devarsh Thakkar <devarsht@ti.com>, Prasanth Babu Mantena <p-mantena@ti.com>, 
- Judith Mendez <jm@ti.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Dhruva Gole <d-gole@ti.com>, Andrew Davis <afd@ti.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Aashvij Shenai <a-shenai@ti.com>, Peng Fan <peng.fan@nxp.com>, 
+ Tom Rini <trini@konsulko.com>, Julien Masson <jmasson@baylibre.com>, 
+ "Nicolas Belin (TI.com)" <nbelin@baylibre.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ george chan <gchan9527@gmail.com>, 
  "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
 X-Mailer: b4 0.14.3
 X-BeenThere: u-boot@lists.denx.de
@@ -112,58 +107,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the board-specific implementation of do_board_detect()
-with a call to the generic do_board_detect_am6() function to
-avoid code duplication across AM6x family boards.
+From: "Nicolas Belin (TI.com)" <nbelin@baylibre.com>
 
-The generic function provides the same functionality with
-additional fallback logic to try alternate EEPROM addresses.
+When previously using script based bootflows, the U-Boot
+environment variable bootargs was used to customize the kernel
+commandline at boot time.
+In order to get the same behaviour, concatenate the bootflow
+commandline with the contents the bootargs environment variable.
 
+Signed-off-by: Nicolas Belin (TI.com) <nbelin@baylibre.com>
 Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 ---
- board/ti/am65x/evm.c | 17 ++---------------
- 1 file changed, 2 insertions(+), 15 deletions(-)
+ boot/bootmeth_android.c | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
 
-diff --git a/board/ti/am65x/evm.c b/board/ti/am65x/evm.c
-index 5c45a33eac9..68606746d5f 100644
---- a/board/ti/am65x/evm.c
-+++ b/board/ti/am65x/evm.c
-@@ -72,24 +72,11 @@ int board_fit_config_name_match(const char *name)
- #endif
+diff --git a/boot/bootmeth_android.c b/boot/bootmeth_android.c
+index 8c2bde10e17..1374551dbeb 100644
+--- a/boot/bootmeth_android.c
++++ b/boot/bootmeth_android.c
+@@ -512,6 +512,37 @@ static int run_avb_verification(struct bootflow *bflow)
+ }
+ #endif /* AVB_VERIFY */
  
- #ifdef CONFIG_TI_I2C_BOARD_DETECT
--int do_board_detect(void)
--{
--	int ret;
--
--	ret = ti_i2c_eeprom_am6_get_base(CONFIG_EEPROM_BUS_ADDRESS,
--					 CONFIG_EEPROM_CHIP_ADDRESS);
--	if (ret)
--		pr_err("Reading on-board EEPROM at 0x%02x failed %d\n",
--		       CONFIG_EEPROM_CHIP_ADDRESS, ret);
--
--	return ret;
--}
--
- int checkboard(void)
++static int append_bootargs_to_cmdline(struct bootflow *bflow)
++{
++	char *bootargs;
++	int len = 0;
++
++	/*
++	 * Check any additionnal bootargs coming from U-Boot env. If any,
++	 * merge them with the current cmdline
++	 */
++	bootargs = env_get("bootargs");
++	if (bootargs) {
++		len += strlen(bootargs) + 1; /* Extra space character needed */
++		len += strlen(bflow->cmdline);
++
++		char *newcmdline = malloc(len + 1); /* +1 for the '\0' */
++
++		if (!newcmdline)
++			return log_msg_ret("newcmdline malloc", -ENOMEM);
++
++		strcpy(newcmdline, bootargs);
++		strcat(newcmdline, " ");
++		strcat(newcmdline, bflow->cmdline);
++
++		/* Free the previous cmdline and replace it */
++		free(bflow->cmdline);
++		bflow->cmdline = newcmdline;
++	}
++
++	return 0;
++}
++
+ static int boot_android_normal(struct bootflow *bflow)
  {
- 	struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
+ 	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
+@@ -546,6 +577,10 @@ static int boot_android_normal(struct bootflow *bflow)
+ 	if (priv->slot)
+ 		free(priv->slot);
  
--	if (do_board_detect())
-+	if (do_board_detect_am6())
- 		/* EEPROM not populated */
- 		printf("Board: %s rev %s\n", "AM6-COMPROCEVM", "E3");
- 	else
-@@ -102,7 +89,7 @@ static void setup_board_eeprom_env(void)
- {
- 	char *name = "am65x";
++	ret = append_bootargs_to_cmdline(bflow);
++	if (ret < 0)
++		return log_msg_ret("bootargs append", ret);
++
+ 	ret = bootm_boot_start(loadaddr, bflow->cmdline);
  
--	if (do_board_detect())
-+	if (do_board_detect_am6())
- 		goto invalid_eeprom;
- 
- 	if (board_is_am65x_base_board())
+ 	return log_msg_ret("boot", ret);
 
+---
+base-commit: b10c055d4e1b5153a331a61ef82a5b01b5bb4c45
+change-id: 20251024-botargsappend-38a4371cb6dc
+
+Best regards,
 -- 
-2.34.1
+Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 
