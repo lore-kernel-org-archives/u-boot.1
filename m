@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA5EACCD1AB
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 10:58:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6D9CCD1AB
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 11:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D1BD8334F;
-	Fri, 24 Oct 2025 12:58:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE2D9835B3;
+	Fri, 24 Oct 2025 13:17:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D07F835B3; Fri, 24 Oct 2025 12:58:13 +0200 (CEST)
+ id E289683623; Fri, 24 Oct 2025 13:17:44 +0200 (CEST)
 Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31C9E82E34
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 12:58:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8929582E34
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 13:17:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 Received: from [192.168.2.54] (unknown [98.97.26.255])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 0704DB2200E4;
- Fri, 24 Oct 2025 12:58:08 +0200 (CEST)
-Message-ID: <ff0313ed-5d43-4603-aed4-6e41b2abed37@freeshell.de>
-Date: Fri, 24 Oct 2025 03:58:06 -0700
+ by freeshell.de (Postfix) with ESMTPSA id 7DC18B2200E3;
+ Fri, 24 Oct 2025 13:17:40 +0200 (CEST)
+Message-ID: <c6dbddb1-614f-46e2-9302-bc860e839382@freeshell.de>
+Date: Fri, 24 Oct 2025 04:17:38 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/9] riscv: dts: starfive: Add VisionFive 2 Lite board
- device tree
+Subject: Re: [PATCH v1 1/9] riscv: dts: starfive: jh7110-common: Move out some
+ nodes to the board dts
 To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Sumit Garg <sumit.garg@kernel.org>,
@@ -38,10 +38,10 @@ To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: u-boot@lists.denx.de
 References: <20251024085932.83596-1-hal.feng@starfivetech.com>
- <20251024085932.83596-3-hal.feng@starfivetech.com>
+ <20251024085932.83596-2-hal.feng@starfivetech.com>
 Content-Language: en-US
 From: E Shattow <e@freeshell.de>
-In-Reply-To: <20251024085932.83596-3-hal.feng@starfivetech.com>
+In-Reply-To: <20251024085932.83596-2-hal.feng@starfivetech.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -60,7 +60,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Hal, this is very good, I have some suggestion to improve more.
+Hi Hal, this is more complex change, I will have to think more about
+what suggestion to make so this can avoid changes in dts subtree.
+Anyways we know it is to be ignored in review as you said, and all the
+information is very clear in meaning, thank you!
 
 On 10/24/25 01:59, Hal Feng wrote:
 > /****************************************************************/
@@ -70,97 +73,146 @@ On 10/24/25 01:59, Hal Feng wrote:
 > [1] https://lore.kernel.org/all/20250821100930.71404-1-hal.feng@starfivetech.com/
 > /****************************************************************/
 > 
-> VisionFive 2 Lite is a mini SBC based on the StarFive JH7110S SoC.
-> 
-> Board features:
-> - JH7110S SoC
-> - 2/4/8 GiB LPDDR4 DRAM
-> - AXP15060 PMIC
-> - 40 pin GPIO header
-> - 1x USB 3.0 host port
-> - 3x USB 2.0 host port
-> - 1x M.2 M-Key (size: 2242)
-> - 1x MicroSD slot (optional non-removable eMMC)
-> - 1x QSPI Flash
-> - 1x I2C EEPROM
-> - 1x 1Gbps Ethernet port
-> - SDIO-based Wi-Fi & UART-based Bluetooth
-> - 1x HDMI port
-> - 1x 2-lane DSI
-> - 1x 2-lane CSI
+> Some node in this file are not used by the upcoming VisionFive 2 Lite
+> board. Move them to the board dts to prepare for adding the new
+> VisionFive 2 Lite device tree.
 > 
 > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 > ---
->  .../jh7110s-starfive-visionfive-2-lite.dts    | 159 ++++++++++++++++++
->  1 file changed, 159 insertions(+)
->  create mode 100644 dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
+>  .../src/riscv/starfive/jh7110-common.dtsi     | 22 ---------
+>  .../jh7110-deepcomputing-fml13v01.dts         | 49 +++++++++++++++++++
+>  .../src/riscv/starfive/jh7110-milkv-mars.dts  | 49 +++++++++++++++++++
+>  .../riscv/starfive/jh7110-pine64-star64.dts   | 49 +++++++++++++++++++
+>  .../jh7110-starfive-visionfive-2.dtsi         | 46 +++++++++++++++++
+>  dts/upstream/src/riscv/starfive/jh7110.dtsi   | 16 ------
+>  6 files changed, 193 insertions(+), 38 deletions(-)
 > 
-> diff --git a/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-> new file mode 100644
-> index 00000000000..30842b0cd1f
-> --- /dev/null
-> +++ b/dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-> @@ -0,0 +1,159 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +/*
-> + * Copyright (C) 2025 StarFive Technology Co., Ltd.
-> + * Copyright (C) 2025 Hal Feng <hal.feng@starfivetech.com>
-> + */
-> +
-> +/dts-v1/;
-> +#include "jh7110-common.dtsi"
-> +
-> +/ {
-> +	model = "StarFive VisionFive 2 Lite";
-> +	compatible = "starfive,visionfive-2-lite", "starfive,jh7110s";
-> +};
+> diff --git a/dts/upstream/src/riscv/starfive/jh7110-common.dtsi b/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
+> index 2eaf01775ef..8332622420c 100644
+> --- a/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
+> +++ b/dts/upstream/src/riscv/starfive/jh7110-common.dtsi
+> @@ -281,15 +281,9 @@
 ...
 
-FYI as a follow-up to my earlier comments about modifying the dts
-subtree I have now a working recommendation:
+I did send a series to cherry-pick into U-Boot from v6.18-rc1 which
+should help with some of these overrides, particularly the no-sdio
+no-mmc properties.
 
-1). Return to using "RFC" subject prefix for the series while any
-modification exists to dts subtree. The comment said about this is do
-not post any "DO NOT MERGE" type patches that touch dts subtree, however...
+https://lore.kernel.org/u-boot/20251015102253.48276-1-e@freeshell.de/
 
-2). Additions to CONFIG_OF_LIST will cause a build error if there is not
-any corresponding file in the dts subtree. Use a workaround:
+Also there's a commit in riscv-dt-for-next for the mmc0 pins changes:
 
-git mv
-dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi
-touch dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-git add
-dts/upstream/src/riscv/starfive/jh7110s-starfive-visionfive-2-lite.dts
-arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi
+https://git.kernel.org/pub/scm/linux/kernel/git/conor/linux.git/commit/?h=riscv-dt-for-next&id=fa939a287224de705c825c093f3d9d34ae977b0b
 
-Alternatively for your local development environment:
+>  	assigned-clock-rates = <50000000>;
+>  	bus-width = <8>;
+>  	bootph-pre-ram;
+> -	cap-mmc-highspeed;
+> -	mmc-ddr-1_8v;
+> -	mmc-hs200-1_8v;
+> -	cap-mmc-hw-reset;
+>  	post-power-on-delay-ms = <200>;
+>  	pinctrl-names = "default";
+>  	pinctrl-0 = <&mmc0_pins>;
+> -	vmmc-supply = <&vcc_3v3>;
+> -	vqmmc-supply = <&emmc_vdd>;
+>  	status = "okay";
+>  };
+>  
+> @@ -299,12 +293,7 @@
+>  	assigned-clock-rates = <50000000>;
+>  	bus-width = <4>;
+>  	bootph-pre-ram;
+> -	no-sdio;
+> -	no-mmc;
+> -	cd-gpios = <&sysgpio 41 GPIO_ACTIVE_LOW>;
+> -	disable-wp;
+>  	cap-sd-highspeed;
+> -	post-power-on-delay-ms = <200>;
+>  	pinctrl-names = "default";
+>  	pinctrl-0 = <&mmc1_pins>;
+>  	status = "okay";
+> @@ -448,17 +437,6 @@
+>  	};
+>  
+>  	mmc0_pins: mmc0-0 {
+> -		 rst-pins {
+> -			pinmux = <GPIOMUX(62, GPOUT_SYS_SDIO0_RST,
+> -					      GPOEN_ENABLE,
+> -					      GPI_NONE)>;
+> -			bias-pull-up;
+> -			drive-strength = <12>;
+> -			input-disable;
+> -			input-schmitt-disable;
+> -			slew-rate = <0>;
+> -		};
+> -
+>  		mmc-pins {
+>  			pinmux = <PINMUX(PAD_SD0_CLK, 0)>,
+>  				 <PINMUX(PAD_SD0_CMD, 0)>,
+> diff --git a/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts b/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
+> index f2857d021d6..5a2a41a7e8c 100644
+> --- a/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
+> +++ b/dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dts
+> @@ -11,6 +11,55 @@
+>  	compatible = "deepcomputing,fml13v01", "starfive,jh7110";
+...> diff --git a/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+b/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+> index fdaf6b4557d..96f6b2f072d 100644
+> --- a/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+> +++ b/dts/upstream/src/riscv/starfive/jh7110-milkv-mars.dts
+> @@ -11,6 +11,25 @@
+>  	compatible = "milkv,mars", "starfive,jh7110";
+...> diff --git
+a/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+b/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+> index 31e825be206..c9677aef9ff 100644
+> --- a/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+> +++ b/dts/upstream/src/riscv/starfive/jh7110-pine64-star64.dts
+...> diff --git
+a/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+b/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+> index 5f14afb2c24..d1e4206f125 100644
+> --- a/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+> +++ b/dts/upstream/src/riscv/starfive/jh7110-starfive-visionfive-2.dtsi
+> @@ -13,6 +13,25 @@
+...> diff --git a/dts/upstream/src/riscv/starfive/jh7110.dtsi
+b/dts/upstream/src/riscv/starfive/jh7110.dtsi
+> index 0ba74ef0467..d2463399b95 100644
+> --- a/dts/upstream/src/riscv/starfive/jh7110.dtsi
+> +++ b/dts/upstream/src/riscv/starfive/jh7110.dtsi
+> @@ -200,22 +200,6 @@
+>  	cpu_opp: opp-table-0 {
+>  			compatible = "operating-points-v2";
+>  			opp-shared;
+> -			opp-375000000 {
+> -					opp-hz = /bits/ 64 <375000000>;
+> -					opp-microvolt = <800000>;
+> -			};
+> -			opp-500000000 {
+> -					opp-hz = /bits/ 64 <500000000>;
+> -					opp-microvolt = <800000>;
+> -			};
+> -			opp-750000000 {
+> -					opp-hz = /bits/ 64 <750000000>;
+> -					opp-microvolt = <800000>;
+> -			};
+> -			opp-1500000000 {
+> -					opp-hz = /bits/ 64 <1500000000>;
+> -					opp-microvolt = <1040000>;
+> -			};
+>  	};
+>  
+>  	thermal-zones {
 
-echo '#include
-"/path/to/linux.git/arch/riscv/boot/dts/starfive/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi"'
-> arch/riscv/dts/jh7110s-starfive-visionfive-2-lite-u-boot.dtsi
+I've suggested (for you? and Emil?) the idea that we split out the OPP
+tables from the common dtsi to a separate dtsi for JH7110 and JH7110S:
 
-This "-u-boot.dtsi" suffix file will get picked up by the build system
-automatically when there is a corresponding file (empty file is okay) in
-dts subtree. The empty file in dts subtree is a simple git file
-operation with no actual content. It is not perfect as an answer but it
-is better for the review now, and for anyone else reading this that may
-want to do the same.
+https://lore.kernel.org/lkml/7e31b240-2ffa-4946-af85-aaa45fe35199@freeshell.de/
 
-You can see this in the working example of RFC v1 series for Milk-V Mars
-CM re-introduction:
+Also to cut out the mmc0 mmc1 properties into a separate common dtsi.
 
-https://lore.kernel.org/u-boot/20250925053233.1874027-1-e@freeshell.de/
-
-and the follow-up as v2 series as this lands in devicetree-rebasing:
-
-https://lore.kernel.org/u-boot/20251021231021.196336-1-e@freeshell.de/
-
-I hope that is a good example to follow for v3, v4 of your series
-
-3). If you follow RFC -> PATCH -> RFC the version does increment (RFC
-v1, PATCH v2, RFC v3, ...)
-
-Thanks,
+FYI for anyone following along with this subject for discussion upstream
+in Linux mailing list.
 
 -E
