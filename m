@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F00BCCD1A5
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 11:24:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47EE4CCD1AB
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 11:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B37A5835B3;
-	Fri, 24 Oct 2025 13:24:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9778B835B3;
+	Fri, 24 Oct 2025 13:30:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A54C8362A; Fri, 24 Oct 2025 13:24:11 +0200 (CEST)
+ id 65521835FE; Fri, 24 Oct 2025 13:30:21 +0200 (CEST)
 Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5965982E34
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 13:24:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B58482E34
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 13:30:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
 Received: from [192.168.2.54] (unknown [98.97.26.255])
  (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 6283FB220116;
- Fri, 24 Oct 2025 13:24:07 +0200 (CEST)
-Message-ID: <8d762357-5ae8-4cd4-b9fd-37a7ab3eb678@freeshell.de>
-Date: Fri, 24 Oct 2025 04:24:05 -0700
+ by freeshell.de (Postfix) with ESMTPSA id 6B091B22088A;
+ Fri, 24 Oct 2025 13:30:17 +0200 (CEST)
+Message-ID: <5baade67-579e-494e-8161-0f17ceeecf0b@freeshell.de>
+Date: Fri, 24 Oct 2025 04:30:15 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/9] eeprom: starfive: Simplify
- get_ddr_size_from_eeprom()
+Subject: Re: [PATCH v1 4/9] eeprom: starfive: Correct
+ get_pcb_revision_from_eeprom()
 To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
  Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
  Sumit Garg <sumit.garg@kernel.org>,
@@ -38,10 +38,10 @@ To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: u-boot@lists.denx.de
 References: <20251024085932.83596-1-hal.feng@starfivetech.com>
- <20251024085932.83596-4-hal.feng@starfivetech.com>
+ <20251024085932.83596-5-hal.feng@starfivetech.com>
 Content-Language: en-US
 From: E Shattow <e@freeshell.de>
-In-Reply-To: <20251024085932.83596-4-hal.feng@starfivetech.com>
+In-Reply-To: <20251024085932.83596-5-hal.feng@starfivetech.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -61,9 +61,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-
 On 10/24/25 01:59, Hal Feng wrote:
-> Directly return the DDR size instead of the field of 'DxxxExxx'.
+> pcb_revision is stored in the pcb_revision field of ATOM4. Correct it.
 > Move the function description to the header file.
 > Return 0 instead of 0xFF if read_eeprom() fails.
 > 
@@ -71,74 +70,52 @@ On 10/24/25 01:59, Hal Feng wrote:
 > Fixes: aea1bd95b61e ("eeprom: starfive: Enable ID EEPROM configuration")
 > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
 > ---
->  arch/riscv/cpu/jh7110/spl.c                     |  2 +-
->  arch/riscv/include/asm/arch-jh7110/eeprom.h     |  8 +++++++-
->  .../visionfive2/visionfive2-i2c-eeprom.c        | 17 +++--------------
->  3 files changed, 11 insertions(+), 16 deletions(-)
+>  arch/riscv/include/asm/arch-jh7110/eeprom.h         |  5 +++++
+>  board/starfive/visionfive2/visionfive2-i2c-eeprom.c | 11 ++---------
+>  2 files changed, 7 insertions(+), 9 deletions(-)
 > 
-> diff --git a/arch/riscv/cpu/jh7110/spl.c b/arch/riscv/cpu/jh7110/spl.c
-> index 87aaf865246..3aece7d995b 100644
-> --- a/arch/riscv/cpu/jh7110/spl.c
-> +++ b/arch/riscv/cpu/jh7110/spl.c
-> @@ -41,7 +41,7 @@ int spl_dram_init(void)
->  	/* Read the definition of the DDR size from eeprom, and if not,
->  	 * use the definition in DT
->  	 */
-> -	size = (get_ddr_size_from_eeprom() >> 16) & 0xFF;
-> +	size = get_ddr_size_from_eeprom();
->  	if (check_ddr_size(size))
->  		gd->ram_size = size << 30;
->  
 > diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h b/arch/riscv/include/asm/arch-jh7110/eeprom.h
-> index 45ad2a5f7bc..1ae9f2b840a 100644
+> index 1ae9f2b840a..8b689a75013 100644
 > --- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
 > +++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
-> @@ -10,7 +10,13 @@
+> @@ -9,6 +9,11 @@
+>  
 >  #include <linux/types.h>
 >  
->  u8 get_pcb_revision_from_eeprom(void);
-> -u32 get_ddr_size_from_eeprom(void);
-> +
 > +/**
-> + * get_ddr_size_from_eeprom() - read DDR size from EEPROM
+> + * get_pcb_revision_from_eeprom() - get the PCB revision
 > + *
-> + * @return: size in GiB or 0 on error.
+> + * @return: the PCB revision or 0 on error.
 > + */
-> +u8 get_ddr_size_from_eeprom(void);
+>  u8 get_pcb_revision_from_eeprom(void);
 >  
 >  /**
->   * get_mmc_size_from_eeprom() - read eMMC size from EEPROM
 > diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-> index 17a44020bcf..ca5039ee433 100644
+> index ca5039ee433..986dcc94992 100644
 > --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
 > +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-> @@ -550,23 +550,12 @@ u8 get_pcb_revision_from_eeprom(void)
->  	return pbuf.eeprom.atom1.data.pstr[6];
+> @@ -535,19 +535,12 @@ int mac_read_from_eeprom(void)
+>  	return 0;
 >  }
 >  
 > -/**
-> - * get_ddr_size_from_eeprom - get the DDR size
-> - * pstr:  VF7110A1-2228-D008E000-00000001
-> - * VF7110A1/VF7110B1 : VisionFive JH7110A /VisionFive JH7110B
-> - * D008: 8GB LPDDR4
-> - * E000: No emmc device, ECxx: include emmc device, xx: Capacity size[GB]
-> - * return: the field of 'D008E000'
+> - * get_pcb_revision_from_eeprom - get the PCB revision
+> - *
+> - * 1.2A return 'A'/'a', 1.3B return 'B'/'b',other values are illegal
 > - */
-> -
-> -u32 get_ddr_size_from_eeprom(void)
-> +u8 get_ddr_size_from_eeprom(void)
+>  u8 get_pcb_revision_from_eeprom(void)
 >  {
-> -	u32 pv = 0xFFFFFFFF;
+> -	u8 pv = 0xFF;
 > -
 >  	if (read_eeprom())
 > -		return pv;
 > +		return 0;
 >  
-> -	return hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL);
-> +	return (hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL) >> 16) & 0xFF;
+> -	return pbuf.eeprom.atom1.data.pstr[6];
+> +	return pbuf.eeprom.atom4.data.pcb_revision;
 >  }
 >  
->  u32 get_mmc_size_from_eeprom(void)
+>  u8 get_ddr_size_from_eeprom(void)
 
 LGTM
 
