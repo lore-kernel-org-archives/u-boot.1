@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FE3DCCF9E0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 19:55:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86829CCD1BF
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 19:55:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F3DD838C8;
+	by phobos.denx.de (Postfix) with ESMTP id DD778838D2;
 	Fri, 24 Oct 2025 21:55:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xx+YugPm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WDEsB+O7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57A36838B7; Fri, 24 Oct 2025 21:55:13 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 7406D838CC; Fri, 24 Oct 2025 21:55:14 +0200 (CEST)
+Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
+ [IPv6:2607:f8b0:4864:20::c2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3382A83869
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 21:55:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C70E83677
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 21:55:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-442003b80d0so958643b6e.1
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 12:55:11 -0700 (PDT)
+Received: by mail-oo1-xc2e.google.com with SMTP id
+ 006d021491bc7-64e5f669511so1278584eaf.2
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 12:55:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761335710; x=1761940510; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761335711; x=1761940511; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+blx1eJGk83esU613SiIRVENAp3WnL/wgvxwxpxMITM=;
- b=Xx+YugPmFRWgaYfCnEv/l5hrCfwH0SKWypRFqz1rh1yMxkYyokUY+XbUHlbBK+LBxm
- xDZltzXT8PixE0JxfBnK7ps6WYNWWPYnebE6Eiz6TPum0d63W5KGaMrAi3dE+q/m7ysl
- f7LaCBoIXbHU2G7WkHNngw8fxOIOAjaHuNhjw=
+ bh=sHwhZ6g3EbxCfOsU+6ay0jxDz06kRTuvkGBcQVNJz8o=;
+ b=WDEsB+O7VKcPUrARE/V4uLmac92/LZUfmKIzXYPqOg34VQbXCzOMzH9EkSlPuHQ6T3
+ 1slTyCDY21LCmgyLptF3gspACzNSaY24LIqFYDd6YHXDYRNg2EWmd2Skvk/AAWjQPyRN
+ cpKhFaSoMhVMaV77hy4222IzUeADLWts8bhIw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761335710; x=1761940510;
+ d=1e100.net; s=20230601; t=1761335711; x=1761940511;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+blx1eJGk83esU613SiIRVENAp3WnL/wgvxwxpxMITM=;
- b=RojlWEdTlgU8EU8N0VyiF22gvOJu60Y87KGhkjPrBHT9HAh2+NLhWt7VrQ/RJKz8yT
- yPwnK69VM6nYOed4ySYhL8jJSCKdrMpMhFo+1p35SHhJvvKNWV94wn7nukPyt+aapfyx
- f1ES/KbDm78ep/+rNFdpXhcmWx+FC82QOoeHbzr72YBoIuX5+z474YnCkAuwvO1OuyAk
- Iw+yQ6oJznTgDHC7rIfy8JFU4ET31Q9vF5DsYrs7pngi0SmCZ959MK2iV385OjLK3Nt8
- F+z9A67DZmtsweLH8Cvek2GZb3/yko8CzjYVBRU/bKfsAWXiZR6Qhq8nXpZhdt6KJbUQ
- S+LQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXrUiXBlCryCFYj5xa7bVHn37qqNZ2uW6cN2JW8Ojp0X3VdtmedLNb3wx4JKcX38CH8mFD6NnM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdmnszrXh75xs3ZD/fFDmCV09wCzGkBQ5v/dBjJugq5w4+nT+4
- Q9fiIh14lEViMI15l5x0ebbGtNq0oJs35ud9mRyiyg+GkGsQkper5KpsjIUtL3ktrlDuKkkNkLF
- 5IXc8RV8fzw==
-X-Gm-Gg: ASbGncso+Fuxn+0RoN3tDhSnZ4kYeV+4kwhYxm5VGOSv49vr7DGh1SJkdxx5sqpXUpz
- i5aQK4HHbL+p/s9DkJElqkJCUyrGAXvO5ZUC1vsAdgimXijtjxuuvYgepwFHKo/bEB/YkbmXn/g
- jsyN1YomErsjC6J5/5g8m+WB0ehrvzW5UrpkSFaYt0vRJsX1B8+EDMT1ZDoS95UdKYuppTY3iU7
- KuGP5Bt52Uyw9gov7I96m8tz7dkbCdyRSS1wL0YG6Mwpje5RiAuaN0KRl1c0B6g6ItSj37fy9Hd
- g7HmgTbw4NMgZejorqI7CD1jHd5r+tyCw+7iwOlaPT0bwaABIS7UMDPOoc5fzJed/LACj9/A+uw
- ObLXhAHnLS0UpmxixRbusAp/51xgBd0AE2LfoEO52dUx8csWgJb6HWUKLNmYZE62r39MQuEsOnc
- 14/SzCjR881E4itrioNfvE1PbVia7SAXgBhnVXPrVNfUmHeGv3
-X-Google-Smtp-Source: AGHT+IH8u2KyrTzrgq3b1167jl+FOjjPpGT/2oANe2MsJPGvIiwhqb616LtVge32UgnJphrp1WAY/Q==
-X-Received: by 2002:a05:6808:4f6a:b0:443:a4aa:4a8b with SMTP id
- 5614622812f47-44d916d304dmr1890411b6e.14.1761335709974; 
- Fri, 24 Oct 2025 12:55:09 -0700 (PDT)
+ bh=sHwhZ6g3EbxCfOsU+6ay0jxDz06kRTuvkGBcQVNJz8o=;
+ b=DRqzKZWF7y2MnHUBzKlHVHmabj1QJ+dRRtm3Cci9lbXZTXBULZciZ+/xJUmpF+o0Do
+ VJ4ez+XdRzFaVeKSGiMasNsqyLlhc30zeW+7xE3JhmSn9FVVcFRTU62IKrMAUzSMT/FP
+ M0sGX5jrpDxYtAbmUSc7KAggNrx0sXfm+N6xzfHQaWMLhE3a69Ow9Xe4xpOxnNB/wos3
+ 6IKs2laIPgCh879as3gYE3WXXmYLt7FU1r6ShlDpCvXze7i7HTCDvq/6lb3psdLRhRxM
+ UokVhcCWS5dsQJZGT/ZnOy4t0OogZlHNy59+mxER+vqwnRtk0MCu9gqLZ6gPz2yfGP30
+ FO8Q==
+X-Gm-Message-State: AOJu0YwvDepiywmU1Y9BR7njQWl+PgZuVKvJWvISQN97kYjXn9EUYBbH
+ PXBYe8WWjtaZeKzwQFg97z8DQ+C9cfvyS9VK7yMx4UZpXVG179BreOi/6W/0gv12f7s=
+X-Gm-Gg: ASbGncvaXIsvtNTY/VseWOHZ+HkNarqgzXsx0rxJ1VKLuhaECg8K+chJ4lcvWvPV6yG
+ fJcyKUjzUzH13fbSzxbbvB7Ghf+isFJNYVkLIH5x4PM9jJN+9J9sj37wdhTY6lcEyKAwzigZQBB
+ JBg5tXkKy+E92/WAdrOLzsSeccBlETRJgxSugCPE4iM2akT+nvaj5TNYAby4Mx9vUrpRyotsYDR
+ Re1O/58wrkr4d2uF6Jqkf+VRvUQX3A2OqAPT1kMXOn+HTEYJiwZGaN+92atDqGmuDx/HzNRw9iC
+ bxxj8A0TFdUaG1OjVmTRfEZuzxnt9NxKaSFb8UzyMY2IczbCltnMKwC7LbzOlXQWPUWDmuUBsUJ
+ F1rsYXClRf9gkT/D0J/n0hi/CEeORKaWnZ7ns9fRaQGsAuQcN3epvgP3PNHx3A0nazaFpHfasqd
+ lGrSEQxqQbWk3xbTq3kbdihwYo8l179Rn5pHTUpiEvGr3R2uhn
+X-Google-Smtp-Source: AGHT+IEeeMcSRV2WqzvrN4uU0wpFkd/oX+umiAL+6re77DCSkSHjlkR9gqk0vljOplpMSQl5ysjHdQ==
+X-Received: by 2002:a05:6820:2019:b0:64e:ad23:bfa2 with SMTP id
+ 006d021491bc7-654e1dbdfd3mr1585149eaf.3.1761335711120; 
+ Fri, 24 Oct 2025 12:55:11 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-654ef2eff7fsm10013eaf.17.2025.10.24.12.55.08
+ 006d021491bc7-654ef2eff7fsm10013eaf.17.2025.10.24.12.55.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Oct 2025 12:55:09 -0700 (PDT)
+ Fri, 24 Oct 2025 12:55:10 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: raymond.mao@linaro.org, Xu Zhang <423756212@qq.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-In-Reply-To: <20251016132745.237295-1-ilias.apalodimas@linaro.org>
-References: <20251016132745.237295-1-ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH] arm: armv8: Make save_boot_params simpler
-Message-Id: <176133570890.2586772.13037020286363315832.b4-ty@konsulko.com>
-Date: Fri, 24 Oct 2025 13:55:08 -0600
+To: andrew.goodbody@linaro.org, Hrushikesh Salunke <h-salunke@ti.com>
+Cc: u-boot@lists.denx.de, s-vadapalli@ti.com, danishanwar@ti.com
+In-Reply-To: <20251017052519.2632922-1-h-salunke@ti.com>
+References: <20251017052519.2632922-1-h-salunke@ti.com>
+Subject: Re: [PATCH] phy: ti: phy-j721e-wiz: Allow reinitialization when
+ SERDES is pre-configured
+Message-Id: <176133571008.2586772.8968664889545193557.b4-ty@konsulko.com>
+Date: Fri, 24 Oct 2025 13:55:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,19 +97,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 16 Oct 2025 16:27:43 +0300, Ilias Apalodimas wrote:
+On Fri, 17 Oct 2025 10:55:19 +0530, Hrushikesh Salunke wrote:
 
-> The idiom used in save_boot_params is common for armv7.
-> In armv8 is much easier to do the same thing with adr/adrp.
+> Move the SERDES configuration check after clock and reset initialization
+> and change it from a hard failure to a skip of WIZ initialization. This
+> allows the driver to probe successfully when the SERDES has been
+> pre-configured by a previous boot stage (e.g., ROM or SPL).
 > 
-> So let's simplify the code a bit.
+> This approach aligns with how the Linux kernel handles pre-configured
+> SERDES, where the driver gracefully skips reinitialization rather than
+> failing to probe.
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] arm: armv8: Make save_boot_params simpler
-      commit: 104a0de7844eee51d183d92f5bd22fa6202bb699
+[1/1] phy: ti: phy-j721e-wiz: Allow reinitialization when SERDES is pre-configured
+      commit: 8506cf58ffa2029f168cc64089763084b408051d
 -- 
 Tom
 
