@@ -4,101 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A302CCF9E0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 15:09:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECC08CCF9E0
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 15:12:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BB3B83678;
-	Fri, 24 Oct 2025 17:09:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 71F9983710;
+	Fri, 24 Oct 2025 17:12:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="DYUr3TcA";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 870CD836AC; Fri, 24 Oct 2025 17:09:12 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D59CE836B2; Fri, 24 Oct 2025 17:12:28 +0200 (CEST)
+Received: from inet11.abb.com (inet11.abb.com [138.225.1.77])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B16083677
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 17:09:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=glaroque@baylibre.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-475c696ab72so17462885e9.1
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 08:09:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1761318549; x=1761923349;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=fOvq4/Q1dnpCEk8QfK9VODfmKEocC6rYFGh3WyJnDlE=;
- b=DYUr3TcA6PQuPhALjfyWzeanCzUQPaN86DG704l0J2aOX8oTkHSn0/G5+Iq332CGFt
- 8pvbP/XictrRkC85YBXPsW+nFGMPkdlWsWLKLABXZ2HZs23RBMx9TxUzYIceJkjG8jHH
- QiREa+YAgTaBBY8622wn8TlPaklCAbgbhnOyl/xq/5T0BbovUedz3Fg0+BcfYgc/xTK/
- nin6Pgq7mk9e1V1p742P61/dDmhf0HGIsiedC4bjzFZo+iSIR5jlvFb2mbAVl1wUi9vY
- w69X5XFQ8k9XSwYmuqOFVUqFZxm/Ivrn6tH1igU0oDqyDYi20j9c4Sda1jyaea3Y375T
- FOjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761318549; x=1761923349;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fOvq4/Q1dnpCEk8QfK9VODfmKEocC6rYFGh3WyJnDlE=;
- b=oePkuG47+yWW0I3grE4l3kjlnnP+2eKw7jq3SroeSDoF4ItWkyITfR++2X8moJhM6T
- qKkMxGf5JBJ+H/8FRl79FoxQaIiEUobOzyLEWQQ5x/Y25ReTMppDPF0Lgr7CtUTu2Y1T
- m9GG++NsIqnqgwa+iSRuEFMbihu3RWhzPmw+mpWT0qMrMY2sSVihO+IoA/gdAMm1KYBf
- ICMafk9Ig+eRTdDThQ69ISIcAN0h74Kf+PvL/tR0zOJKEqlllPfbTWcCkboh5rZXHzJE
- teZTMbGQfhVP1EHwC4lAaARq0zK5rmP2nc/Z5YvEXKE7W3Cuh9Yiwm9+QYmeDJCLJ8M7
- bhqA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVKGfUhYVlrURvviR+mGGYPb1EXKdXAkl1BERuFfoVRf7j11ezfaA7KqQzJzIpBJQOhV9SMqH4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxHLVOusmuW39rM6RtUv+sccKVnRpouf/MEkXmCSjcrIPQM6qpk
- 1Z1tqFmyqcIO20Djb+JSxzybbqCkhFqSPJqB2uaOyzTS8I4evy1yvPOAuwEX1Fzxj1o=
-X-Gm-Gg: ASbGncuZsCD71LfNcNkM1ogPY8AC6T6BFFIGvhMZx9ogEFJJ1OaAD8bnEIIvWR2WScC
- KJ3rejjFyUDTFpuHsZgFElkSMomi9EPRe2LYU7kJ+PqGoTGVLLdIzNGR8rTgeVPy7RrG0zq1+iD
- E+K64IalS5B01mppc5+8akqm6sQG7fCGtI2Ih1GQq+jLZ+5Eh91QTiaDm1XVbVEnbykpZnHxyVF
- fJ9d4QbwGArPiulOfs2yQQz4ySCRXdji3lqIiSnUPXpnKoMwHMbRv/+BLimku028M7Woh7cbYiV
- KyDjckSWqZ9sDOf25H9RKL8KK4phHGLQ/Ft0seN+Qr8+keowpVJ14Pn3RepL+LmPpYg6WJVRB4d
- dfCIl+zo9+QXKkYOYCiTjYsmLx71ueRxL7qBbm7TnvcPEc0dBHMF9Dcskl1xFeWcr1r0tjyN+62
- ByopxpjeS/QiFH7IAKXGfKiWa8EYD2qWO9e1wUskKz2bEcfGqbjWmF03ELnw==
-X-Google-Smtp-Source: AGHT+IGLTFKnb/l3KPwsVVQBarIH+2Zy1AkhMY3piegckp5cH8SRnE2djWna9Z0kKW53901qTU3N1w==
-X-Received: by 2002:a05:600c:5493:b0:471:a24:497c with SMTP id
- 5b1f17b1804b1-475d2edf196mr24346435e9.33.1761318549044; 
- Fri, 24 Oct 2025 08:09:09 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:e50:3860:a5c0:bdf6:3b95:6cfd?
- ([2a01:e0a:e50:3860:a5c0:bdf6:3b95:6cfd])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-475c428f709sm155898675e9.8.2025.10.24.08.09.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 24 Oct 2025 08:09:08 -0700 (PDT)
-Message-ID: <bac88430-cadc-4306-92e1-d83ff5937f25@baylibre.com>
-Date: Fri, 24 Oct 2025 17:09:07 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id E03BF83677
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 17:12:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
+ header.from=br-automation.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=wolfgang.wallner@br-automation.com
+Received: from brsmtp01.br-automation.co.at (unknown [10.43.60.20])
+ by xe-s-netms02z.xe.abb.com (Postfix) with ESMTPS id A31306EFA;
+ Fri, 24 Oct 2025 17:12:25 +0200 (CEST)
+Received: from extmail.br-automation.com ([192.168.112.26])
+ by brsmtp01.br-automation.co.at (HCL Domino Release 14.5)
+ with ESMTP id 2025102417122290-28972 ;
+ Fri, 24 Oct 2025 17:12:22 +0200 
+Received: from ATEGGE4852.br-automation.co.at ([10.43.64.79])
+ by extmail.br-automation.com (HCL Domino Release 14.0FP3 HF8)
+ with ESMTP id 2025102417122519-18293 ;
+ Fri, 24 Oct 2025 17:12:25 +0200 
+From: "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>
+To: u-boot@lists.denx.de
+Cc: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
+ "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>,
+ "Alex Shumsky" <alexthreed@gmail.com>,
+ "Alper Nebi Yasak" <alpernebiyasak@gmail.com>,
+ "Bin Meng" <bmeng.cn@gmail.com>, "Bryan Brattlof" <bb@ti.com>,
+ "E Shattow" <e@freeshell.de>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Ilias Apalodimas" <ilias.apalodimas@linaro.org>,
+ "Jerome Forissier" <jerome.forissier@linaro.org>,
+ "Julien Masson" <jmasson@baylibre.com>,
+ "Lothar Rubusch" <l.rubusch@gmail.com>,
+ "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
+ "Mark Jonas" <mark.jonas@de.bosch.com>,
+ "Martin Schwan" <m.schwan@phytec.de>,
+ "Masahiro Yamada" <yamada.masahiro@socionext.com>,
+ "Mattia Narducci" <mattianarducci1@gmail.com>,
+ "Mattijs Korpershoek" <mkorpershoek@kernel.org>,
+ "Mayuresh Chitale" <mchitale@ventanamicro.com>,
+ "Michal Simek" <michal.simek@amd.com>,
+ "Patrick Rudolph" <patrick.rudolph@9elements.com>,
+ "Paul HENRYS" <paul.henrys_ext@softathome.com>,
+ "Quentin Schulz" <quentin.schulz@cherry.de>,
+ "Ricardo Simoes" <ricardo.simoes@pt.bosch.com>,
+ "Siddharth Vadapalli" <s-vadapalli@ti.com>,
+ "Simon Glass" <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>,
+ "Yannic Moog" <y.moog@phytec.de>,
+ "Yegor Yefremov" <yegorslists@googlemail.com>,
+ "mason1920" <mason1920@use.startmail.com>
+Subject: [PATCH 0/9] Fix various typos, wording or whitespace errors
+Date: Fri, 24 Oct 2025 17:11:56 +0200
+Message-ID: <20251024151219.100970-1-wolfgang.wallner@br-automation.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/5] test: abootimg: Add test for bootconfig handling
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: Mattijs Korpershoek <mkorpershoek@kernel.org>,
- Julien Masson <jmasson@baylibre.com>, u-boot@lists.denx.de,
- Nicolas Belin <nbelin@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Aaron Kling <webgeek1234@gmail.com>, George Chan <gchan9527@gmail.com>,
- Sam Day <me@samcday.com>, Jerome Forissier <jerome.forissier@linaro.org>,
- Maxime Fournier <mfournier@baylibre.com>
-References: <20251017-bootconfig-v2-0-8c7c2f2e5474@baylibre.com>
- <20251017-bootconfig-v2-5-8c7c2f2e5474@baylibre.com>
- <CAFLszTjXxMaQsC2fzDVjnCqPB286A0wkVcXwnoXt7BJDxESNJg@mail.gmail.com>
- <20251019160136.GO6688@bill-the-cat>
- <CAFLszTg7KbiEF8JJBokJt2mbRcWuYFgXmuc8TgxbGiWPo_z4DA@mail.gmail.com>
-Content-Language: fr
-From: Guillaume La Roque <glaroque@baylibre.com>
-In-Reply-To: <CAFLszTg7KbiEF8JJBokJt2mbRcWuYFgXmuc8TgxbGiWPo_z4DA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
+ 14.0FP3 HF8|December 13, 2024) at 10/24/2025 05:12:25 PM,
+ Serialize by Router on BRSMTPINTERN2/InternSMTP(Release 14.0FP3 HF8|December
+ 13, 2024) at 10/24/2025 05:12:25 PM,
+ Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.5|June 06,
+ 2025) at 10/24/2025 05:12:22 PM,
+ Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.5|June 06,
+ 2025) at 10/24/2025 05:12:24 PM,
+ Serialize complete at 10/24/2025 05:12:24 PM
+X-TNEFEvaluated: 1
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,182 +94,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 20/10/2025 à 07:18, Simon Glass a écrit :
-> Hi,
->
-> On Sun, 19 Oct 2025 at 17:01, Tom Rini <trini@konsulko.com> wrote:
->> On Sun, Oct 19, 2025 at 02:06:05PM +0100, Simon Glass wrote:
->>> Hi Guillaume,
->>>
->>> On Fri, 17 Oct 2025 at 14:19, Guillaume La Roque (TI.com)
->>> <glaroque@baylibre.com> wrote:
->>>> Add test to verify that androidboot.* parameters are correctly extracted
->>>> from bootargs and appended to the bootconfig section when using
->>>> 'abootimg get ramdisk' with boot image v4 and vendor_boot image.
->>>>
->>>> The test verifies:
->>>> - androidboot.* parameters are removed from bootargs
->>>> - They are appended to the bootconfig section in the ramdisk
->>>> - Non-androidboot parameters remain in bootargs
->>>> - The bootconfig trailer is properly updated
->>>>
->>>> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
->>>> ---
->>>>   test/py/tests/test_android/test_abootimg.py | 108 +++++++++++++++++++++++++---
->>>>   1 file changed, 99 insertions(+), 9 deletions(-)
->>>>
->>>> diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
->>>> index 2aadb692b30..bd5fb992a7d 100644
->>>> --- a/test/py/tests/test_android/test_abootimg.py
->>>> +++ b/test/py/tests/test_android/test_abootimg.py
->>>> @@ -69,15 +69,33 @@ e5bddc8a7b792d8e8788c896ce9b88d32ebe6c971e7ddd3543cae734cd01
->>>>   c0ffc84c0000b0766d1a87d4e5afeadd3dab7a6f10000000f84163d5d7cd
->>>>   d43a000000000000000060c53e7544995700400000"""
->>>>
->>>> -# vendor boot image v4 hex dump
->>>> -vboot_img_hex = """1f8b0808baaecd63020376626f6f742e696d6700edd8310b824018c6f1b3
->>>> -222a08f41b3436b4280dcdd19c11d16ee9109d18d59042d047ec8b04cd0d
->>>> -d19d5a4345534bf6ffc173ef29272f38e93b1d0ec67dd79d548462aa1cd2
->>>> -d5d20b0000f8438678f90c18d584b8a4bbb3a557991ecb2a0000f80d6b2f
->>>> -f4179b656be5c532f2fc066f040000000080e23936af2755f62a3d918df1
->>>> -db2a7ab67f9ffdeb7df7cda3465ecb79c4ce7e5c577562bb9364b74449a5
->>>> -1e467e20c53c0a57de763193c1779b3b4fcd9d4ee27c6a0e00000000c0ff
->>>> -309ffea7010000000040f1dc004129855400400000"""
->>>> +# vendor boot image v4 hex dump (contains initial bootconfig: androidboot.hardware=test)
->>>> +vboot_img_hex = """1f8b08000000000002ffeddb316a02411806d009a49040606d3d84374823a9a348b095
->>>> +915951b2c9caee8690ce237a91406a0b497603e215dcbc577cf3334cf5350303b3787a
->>>> +9c4fa6d3e7dbf02b6b63dfc6b01b0180ffe726644d5e37975bb34108c76efa1eb65974
->>>> +c7fed691c600e02a64e7ab3e8494afe37bd128050000007ae6707ffad202000000f45b
->>>> +155fd3b67e59eee26751c674a711000000e89ff896aa729b5665d98c37b14a1fb1ca1f
->>>> +da4f7f5e02000000a0377e0040ab5ba000500000"""
->>>> +
->>>> +# bootable boot image v4 hex dump (contains actual bootable kernel)
->>>> +boot_bootable_img_hex = """1f8b08081663ee6802ff626f6f745f626f6f7461626c655f76342e696d67
->>>> +00edd1c14ac3401485e159b80a083ec24dba4f117c81d8140c6dad24ee25
->>>> +4da6e9d07452321305dfca37d4d4ec5cb954fe6f37ccb967606ef298e6db
->>>> +2c0d3f94526feae25adda81fae140000000000f8ab66e17c67ecdc1d025d
->>>> +1d3a89125bf79da9e5beebbc64a7b2d1f27a27cfda7959e9deea369a8263
->>>> +a0eaecde34e2c75b375495766e3fb46114cca430a7a12dbd96e3654a7663
->>>> +dfb9f4feeb383514beecbdb1cd1489e3380a5cabf5596ea7c4f78b62acf1
->>>> +a66ccdbbaea380950100000000f06b79b249b362f5f2b44e16cb87ed3a5d
->>>> +e67c0a0000000000ffcc27ba944c7e00300000"""
->>>> +
->>>> +# bootable vendor boot image v4 hex dump (contains actual bootable ramdisk)
->>>> +vendor_boot_bootable_img_hex = """1f8b08081663ee6802ff76656e646f725f626f6f745f626f6f7461626c65
->>>> +5f76342e696d6700edd8b10a02310cc6f10c0e7220f8080737b8b93ab9a8
->>>> +282e571171959e0d787058a84557f5c96ddd7d80c3ff0f92217c5396408e
->>>> +f56abf30e63090649c9b3c53bd050000fcab57d45b3c35de47db749a06bb
->>>> +e1eff08c7d0100d00bf6ea826f5dbef0d38b0dee618396f3f27bf69ddedb
->>>> +b316558a4d462255fe132c4dbdde6e0a160700000000408f7c0027597569
->>>> +00200000"""
->>>>
->>>>   # Expected response for "abootimg dtb_dump" command
->>>>   dtb_dump_resp="""## DTB area contents (concat format):
->>>> @@ -179,6 +197,24 @@ def abootimgv4_disk_image_boot(ubman):
->>>>           gtdi3 = AbootimgTestDiskImage(ubman, 'bootv4.img', boot_img_hex)
->>>>       return gtdi3
->>>>
->>>> +gtdi4 = None
->>>> +@pytest.fixture(scope='function')
->>>> +def abootimgv4_bootable_disk_image_boot(ubman):
->>>> +    """pytest fixture to provide bootable boot image v4."""
->>>> +    global gtdi4
->>>> +    if not gtdi4:
->>>> +        gtdi4 = AbootimgTestDiskImage(ubman, 'boot_bootable_v4.img', boot_bootable_img_hex)
->>>> +    return gtdi4
->>>> +
->>>> +gtdi5 = None
->>>> +@pytest.fixture(scope='function')
->>>> +def abootimgv4_bootable_disk_image_vboot(ubman):
->>>> +    """pytest fixture to provide bootable vendor boot image v4."""
->>>> +    global gtdi5
->>>> +    if not gtdi5:
->>>> +        gtdi5 = AbootimgTestDiskImage(ubman, 'vendor_boot_bootable_v4.img', vendor_boot_bootable_img_hex)
->>>> +    return gtdi5
->>>> +
->>>>   @pytest.mark.boardspec('sandbox')
->>>>   @pytest.mark.buildconfigspec('android_boot_image')
->>>>   @pytest.mark.buildconfigspec('cmd_abootimg')
->>>> @@ -266,3 +302,57 @@ def test_abootimgv4(abootimgv4_disk_image_vboot, abootimgv4_disk_image_boot, ubm
->>>>       ubman.run_command('fdt get value v / model')
->>>>       response = ubman.run_command('env print v')
->>>>       assert response == 'v=x2'
->>>> +
->>>> +@pytest.mark.boardspec('sandbox')
->>>> +@pytest.mark.buildconfigspec('android_boot_image')
->>>> +@pytest.mark.buildconfigspec('cmd_abootimg')
->>>> +@pytest.mark.requiredtool('xxd')
->>>> +@pytest.mark.requiredtool('gunzip')
->>>> +def test_abootimg_bootconfig(abootimgv4_disk_image_vboot,
->>>> +                              abootimgv4_disk_image_boot,
->>>> +                              ubman):
->>>> +    """Test bootconfig handling with boot image v4.
->>>> +
->>>> +    Verifies that androidboot.* parameters from bootargs are appended to the
->>>> +    bootconfig section in vendor_boot image in memory, and that non-androidboot
->>>> +    parameters remain in bootargs.
->>>> +    """
->>>> +
->>>> +    # Setup addresses
->>>> +    ram_base = utils.find_ram_base(ubman)
->>>> +    ramdisk_addr_r = ram_base + 0x4000000
->>>> +    ubman.run_command('setenv ramdisk_addr_r 0x%x' % ramdisk_addr_r)
->>>> +    ubman.run_command('setenv loadaddr 0x%x' % loadaddr)
->>>> +    ubman.run_command('setenv vloadaddr 0x%x' % vloadaddr)
->>>> +
->>>> +    # Set bootargs with androidboot.* parameters
->>>> +    ubman.run_command('setenv bootargs "androidboot.serialno=ABC123 androidboot.mode=recovery console=ttyS0"')
->>>> +
->>>> +    # Load images
->>>> +    ubman.run_command('host load hostfs - 0x%x %s' % (vloadaddr,
->>>> +        abootimgv4_disk_image_vboot.path))
->>>> +    ubman.run_command('host load hostfs - 0x%x %s' % (loadaddr,
->>>> +        abootimgv4_disk_image_boot.path))
->>>> +    ubman.run_command('abootimg addr 0x%x 0x%x' % (loadaddr, vloadaddr))
->>>> +
->>>> +    # Extract ramdisk (triggers bootconfig append)
->>>> +    ubman.run_command('abootimg get ramdisk ramdisk_addr ramdisk_size')
->>>> +
->>>> +    # Get ramdisk address
->>>> +    response = ubman.run_command('env print ramdisk_addr')
->>>> +    ramdisk_start = int(response.split('=')[1], 16)
->>>> +
->>>> +    # Verify androidboot.* parameters were removed from bootargs
->>>> +    response = ubman.run_command('env print bootargs')
->>>> +    assert 'androidboot.' not in response
->>>> +    assert 'console=ttyS0' in response
->>>> +
->>>> +    # Get ramdisk size and verify BOOTCONFIG magic at the end
->>>> +    response = ubman.run_command('env print ramdisk_size')
->>>> +    ramdisk_size = int(response.split('=')[1], 16)
->>>> +
->>>> +    # Dump the end of the ramdisk where BOOTCONFIG trailer should be
->>>> +    response = ubman.run_command('md.b 0x%x 96' % (ramdisk_start))
->>>> +
->>>> +    # Verify BOOTCONFIG magic is present
->>>> +    assert 'BOOTCONFIG' in response or 'BOOTCON' in response
->>>>
->>> It looks like this test could be written in C?
->> But this is just extending existing tests, and so this is fine. Looking
->> at
->> https://source.denx.de/u-boot/u-boot/-/pipelines/27943/test_report?job_name=sandbox%20test.py%3A%20%5Bamd64%5D
->> we can see these tests are currently under 400ms each, FYI.
-> Yes, OK. The python tests are ~100x slower though, so we really should
-> use C where possible. Part of this is being hidden by the overhead of
-> individually running the C tests from Python. I suppose we could
-> improve that by running the tests in batches, but I haven't looked at
-> it.
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Hi simon,
-
-I will plan to migrate all tests link to android in C after this series.
+While reading through the U-Boot source code and documentation, i stumbled
+over some typos and similar errors like wrong formating. These are the comm=
+its
+where I collected the fixes.
 
 
-Guillaume
->
-> Regards,
-> Simon
 
+Wolfgang Wallner (9):
+  doc: develop: Fix typos in binman/binman.rst
+  doc: develop: Change formatting to make binman doc more readable
+  doc: Fix typos
+  boot: kconfig: Fix typos
+  image: Fix typos in image.h
+  bootm: Fix typo in bootm.h
+  boot: Fix typo
+  doc: Fix whitespace in devicetree example in overlay-fdt-boot.rst
+  doc: develop: virtio: Fix qemu example (true/false -> on/off)
 
+ boot/Kconfig                           |   4 +-
+ boot/image-fit.c                       |   2 +-
+ doc/develop/devicetree/control.rst     |   2 +-
+ doc/develop/driver-model/fdt-fixup.rst |   2 +-
+ doc/develop/driver-model/virtio.rst    |   4 +-
+ doc/develop/testing.rst                |   4 +-
+ doc/develop/trace.rst                  |   2 +-
+ doc/mkimage.1                          |   4 +-
+ doc/usage/environment.rst              |   2 +-
+ doc/usage/fit/beaglebone=5Fvboot.rst     |   2 +-
+ doc/usage/fit/overlay-fdt-boot.rst     | 156 ++++++++++++-------------
+ include/bootm.h                        |   2 +-
+ include/image.h                        |   8 +-
+ tools/binman/binman.rst                |  73 ++++++------
+ 14 files changed, 136 insertions(+), 131 deletions(-)
+
+--=20
+2.51.1
+
+base-commit: b10c055d4e1b5153a331a61ef82a5b01b5bb4c45
+branch: us/fix=5Ftypos
