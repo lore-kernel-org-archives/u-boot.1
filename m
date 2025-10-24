@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98033CCD1A5
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 08:34:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 501A8CCD1AB
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 08:34:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6221837E4;
-	Fri, 24 Oct 2025 10:33:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB86F83885;
+	Fri, 24 Oct 2025 10:33:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eDl+oFTf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jvbnzJNm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9498483631; Fri, 24 Oct 2025 10:33:40 +0200 (CEST)
+ id 52D2D8331F; Fri, 24 Oct 2025 10:33:42 +0200 (CEST)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63150837B6
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 10:33:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDD94837E4
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 10:33:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59O8Xa8H721673;
- Fri, 24 Oct 2025 03:33:36 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59O8XcQ0721681;
+ Fri, 24 Oct 2025 03:33:38 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761294816;
- bh=IGEwQPTlYIqAMtRvawlWNrn7zsxCph/iQGJAgVdxQec=;
+ s=ti-com-17Q1; t=1761294818;
+ bh=ZgSA8PBXPt2x06tEWVZiD55IHPVMqpnF3L/JZhKsACU=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=eDl+oFTfanOO1+aO91o5ji2q4ry/FC+zhMnOVvfRCtdvZXPuvMkWqfnJf0WvhYLZY
- jnuMuP4UpqvGKPa0wzE7fkbe6PWS4WbiUsANz9lSkFV4i2ISSWFe8i+eelm6pH4T79
- xAxR+e0THv+0RPvq/CzulMtFMxjUc3v3mgqcz/SE=
-Received: from DFLE213.ent.ti.com (dfle213.ent.ti.com [10.64.6.71])
- by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59O8XaqB3449995
+ b=jvbnzJNm5VFs7bJC9dtXcvZXgqQNrSPCtDNBrkJMPNf9Xld2dvJ5TTJxVSHwtTpjY
+ l54VR8AMrZhvu+CN2bdqSdAbCZPz45aLH50S/BGSpIdBx+q4+JeSBzZtY4l+fVp7el
+ E8xzqluf+3+PSEVkp70D20GB3QCOtXOdra4ez4hw=
+Received: from DFLE215.ent.ti.com (dfle215.ent.ti.com [10.64.6.73])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59O8XcTm3335348
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 24 Oct 2025 03:33:36 -0500
-Received: from DFLE214.ent.ti.com (10.64.6.72) by DFLE213.ent.ti.com
- (10.64.6.71) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 24 Oct 2025 03:33:38 -0500
+Received: from DFLE215.ent.ti.com (10.64.6.73) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Fri, 24 Oct
- 2025 03:33:36 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE214.ent.ti.com
- (10.64.6.72) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 03:33:37 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE215.ent.ti.com
+ (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Fri, 24 Oct 2025 03:33:36 -0500
+ Transport; Fri, 24 Oct 2025 03:33:37 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59O8XYXI059376;
- Fri, 24 Oct 2025 03:33:35 -0500
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59O8Xasn066298;
+ Fri, 24 Oct 2025 03:33:37 -0500
 From: Anshul Dalal <anshuld@ti.com>
-Date: Fri, 24 Oct 2025 14:03:01 +0530
-Subject: [PATCH v2 7/8] board: am62x: add env file for AM6254atl
+Date: Fri, 24 Oct 2025 14:03:02 +0530
+Subject: [PATCH v2 8/8] doc: add documentation for AM6254atl SiP
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20251024-62sip_support-v2-7-23d4948af70c@ti.com>
+Message-ID: <20251024-62sip_support-v2-8-23d4948af70c@ti.com>
 References: <20251024-62sip_support-v2-0-23d4948af70c@ti.com>
 In-Reply-To: <20251024-62sip_support-v2-0-23d4948af70c@ti.com>
 To: <u-boot@lists.denx.de>
@@ -64,11 +64,11 @@ CC: Tom Rini <trini@konsulko.com>, Beleswar Padhi <b-padhi@ti.com>, Nishanth
  Bryan Brattlof <bb@ti.com>, Vignesh R <vigneshr@ti.com>,
  Anshul Dalal <anshuld@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761294801; l=2591;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761294801; l=8979;
  i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=UaKVzQ+WZIvI2eI4ai5Zs+hM0B75tvT728+PxO7Kfxw=;
- b=FCul5ovyJeFhfgnIeVd44AdkZ2yaf+rqy0Sg7kMrVXZZJN6VyYKiagKTex4/TMVbmq3GrL/SX
- pZh5mrbToa7Bui5m9J8U4ZDCUBo/383lHdbSLXKGjl5bSHWwxOtaIMK
+ bh=Zrvs5M3+KR43LkwLrUhpgLF3W8TiU5elSELGfyLkLqU=;
+ b=Iwuzj7oqF4wkKX7hrv/xb/5Wha0OzIPh8S6aw7M37/G2H+wIUJfmtDRSTKkm8Py3EvZyFI3Jt
+ S7FzBGwZ6DUCVjnIgWflRjsDP9aANcTCppHHuJ/nxiPxykGUk7+RAyX
 X-Developer-Key: i=anshuld@ti.com; a=ed25519;
  pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -88,83 +88,345 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the env file for AM6254atl with the following changes from
-am62x.env:
+Adds documentation for the newly added AM6254atl EVM board along with
+build instructions.
 
- 1. splashimage address updated from 0x80200000 to 0x81a00000
- 2. DFU addresses updated to match updated TEXT_BASE for SPL and U-Boot
+The content is largely similar to instructions for AM62x with updated
+TFA and OP-TEE build args to account for the changes to A53 and OP-TEE's
+load address.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
- board/ti/am62x/am6254atl.env        | 37 +++++++++++++++++++++++++++++++++++++
- configs/am6254atl_evm_a53_defconfig |  1 +
- configs/am6254atl_evm_r5_defconfig  |  1 +
- 3 files changed, 39 insertions(+)
+ doc/board/ti/am6254atl_sk.rst | 308 ++++++++++++++++++++++++++++++++++++++++++
+ doc/board/ti/k3.rst           |   1 +
+ 2 files changed, 309 insertions(+)
 
-diff --git a/board/ti/am62x/am6254atl.env b/board/ti/am62x/am6254atl.env
+diff --git a/doc/board/ti/am6254atl_sk.rst b/doc/board/ti/am6254atl_sk.rst
 new file mode 100644
-index 0000000000000000000000000000000000000000..ea5a33d8cc312ca6034062ede4493cfb037469be
+index 0000000000000000000000000000000000000000..92ad2332f963143bb1f32f65638122bff9c99215
 --- /dev/null
-+++ b/board/ti/am62x/am6254atl.env
-@@ -0,0 +1,37 @@
-+#include <env/ti/ti_common.env>
-+#include <env/ti/mmc.env>
-+#include <env/ti/k3_dfu.env>
++++ b/doc/board/ti/am6254atl_sk.rst
+@@ -0,0 +1,308 @@
++.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
++.. sectionauthor:: Anshul Dalal <anshuld@ti.com>
++
++AM6254ATL SIP Platforms
++=======================
++
++Introduction:
++-------------
++
++The AM6254atl SIP (System In Package) provides existing :doc:`am62x_sk` with
++512MiB of DDR integrated in a single packages.
++
++More details can be found in the Technical Reference Manual:
++https://www.ti.com/lit/pdf/spruiv7
++
++Platform information:
++
++* https://www.ti.com/tool/SK-AM62-SIP
++
++Boot Flow:
++----------
++Below is the pictorial representation of boot flow:
++
++.. image:: img/boot_diagram_am62.svg
++  :alt: Boot flow diagram
++
++- Here TIFS acts as master and provides all the critical services. R5/A53
++  requests TIFS to get these services done as shown in the above diagram.
++
++Sources:
++--------
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_sources
++    :end-before: .. k3_rst_include_end_boot_sources
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_firmwares
++    :end-before: .. k3_rst_include_end_tifsstub
++
++Build procedure:
++----------------
++0. Setup the environment variables:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_common_env_vars_desc
++    :end-before: .. k3_rst_include_end_common_env_vars_desc
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_board_env_vars_desc
++    :end-before: .. k3_rst_include_end_board_env_vars_desc
++
++Set the variables corresponding to this platform:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_common_env_vars_defn
++    :end-before: .. k3_rst_include_end_common_env_vars_defn
++.. prompt:: bash $
++
++  export UBOOT_CFG_CORTEXR=am6254atl_evm_r5_defconfig
++  export UBOOT_CFG_CORTEXA=am6254atl_evm_a53_defconfig
++  export TFA_BOARD=lite
++  export TFA_EXTRA_ARGS="PRELOADED_BL33_BASE=0x81880000 BL32_BASE=0x80080000"
++  export OPTEE_PLATFORM=k3-am62x
++  export OPTEE_EXTRA_ARGS="CFG_TZDRAM_START=0x80080000"
++
++1. Trusted Firmware-A:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_tfa
++    :end-before: .. k3_rst_include_end_build_steps_tfa
 +
 +
-+#if CONFIG_CMD_REMOTEPROC
-+#include <env/ti/k3_rproc.env>
-+#endif
++2. OP-TEE:
 +
-+rproc_fw_binaries= 0 /lib/firmware/am62-mcu-m4f0_0-fw
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_optee
++    :end-before: .. k3_rst_include_end_build_steps_optee
 +
-+name_kern=Image
-+console=ttyS2,115200n8
-+args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-+	${mtdparts}
-+run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
++3. U-Boot:
 +
-+boot_targets=mmc1 mmc0 usb pxe dhcp
-+boot=mmc
-+mmcdev=1
-+bootpart=1:2
-+bootdir=/boot
-+rd_spec=-
++* 3.1 R5:
 +
-+splashfile=ti_logo_414x97_32bpp.bmp.gz
-+splashimage=0x82180000
-+splashpos=m,m
-+splashsource=sf
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_spl_r5
++    :end-before: .. k3_rst_include_end_build_steps_spl_r5
 +
-+dfu_alt_info_ram=
-+	tispl.bin ram 0x82000000 0x200000;
-+	u-boot.img ram 0x82f80000 0x400000
++* 3.1.1 Alternative build of R5 for DFU boot:
 +
-+#if CONFIG_BOOTMETH_ANDROID
-+#include <env/ti/android.env>
-+adtb_idx=0
-+#endif
-diff --git a/configs/am6254atl_evm_a53_defconfig b/configs/am6254atl_evm_a53_defconfig
-index e6602af7acf557ba9155fbc4aa83779463c7aabf..b95158a595f7a0a13946bb8d224769f1ccf1883d 100644
---- a/configs/am6254atl_evm_a53_defconfig
-+++ b/configs/am6254atl_evm_a53_defconfig
-@@ -12,3 +12,4 @@ CONFIG_SPL_BSS_START_ADDR=0x82c00000
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x82f80000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82b00000
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am6254atl-sk"
-+CONFIG_ENV_SOURCE_FILE="am6254atl"
-diff --git a/configs/am6254atl_evm_r5_defconfig b/configs/am6254atl_evm_r5_defconfig
-index 852c3cfd144166dd2d4db4098c8e204358ac1536..5c94666859421231a88b0d4f80e80685ce6c31cf 100644
---- a/configs/am6254atl_evm_r5_defconfig
-+++ b/configs/am6254atl_evm_r5_defconfig
-@@ -4,6 +4,7 @@ CONFIG_ARM=y
- CONFIG_ARCH_K3=y
- CONFIG_SOC_K3_AM625=y
- CONFIG_TARGET_AM625_R5_EVM=y
-+CONFIG_ENV_SOURCE_FILE="am6254atl"
- CONFIG_K3_OPTEE_LOAD_ADDR=0x80080000
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x82000000
- CONFIG_DEFAULT_DEVICE_TREE="k3-am6254atl-r5-sk"
++As the SPL size can get too big when building with support for booting both
++from local storage *and* DFU an extra config fragment should be used to enable
++DFU support (and disable storage support)
++
++.. prompt:: bash $
++
++  export UBOOT_CFG_CORTEXR="${UBOOT_CFG_CORTEXR} am62x_r5_usbdfu.config"
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_spl_r5
++    :end-before: .. k3_rst_include_end_build_steps_spl_r5
++
++* 3.2 A53:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_uboot
++    :end-before: .. k3_rst_include_end_build_steps_uboot
++
++Target Images
++-------------
++
++In order to boot we need tiboot3.bin, tispl.bin and u-boot.img.  Each SoC
++variant (HS-FS or HS-SE) requires a different source for these files.
++
++ - HS-FS
++
++        * tiboot3-am62x-hs-fs-evm.bin from step 3.1
++        * tispl.bin, u-boot.img from step 3.2
++
++ - HS-SE
++
++        * tiboot3-am62x-hs-evm.bin from step 3.1
++        * tispl.bin, u-boot.img from step 3.2
++
++Image formats:
++--------------
++
++- tiboot3.bin
++
++.. image:: img/multi_cert_tiboot3.bin.svg
++  :alt: tiboot3.bin image format
++
++- tispl.bin
++
++.. image:: img/tifsstub_dm_tispl.bin.svg
++  :alt: tispl.bin image format
++
++OSPI:
++-----
++ROM supports booting from OSPI from offset 0x0.
++
++Flashing images to OSPI:
++
++Below commands can be used to download tiboot3.bin, tispl.bin, and u-boot.img,
++over tftp and then flash those to OSPI at their respective addresses.
++
++.. prompt:: bash =>
++
++  sf probe
++  tftp ${loadaddr} tiboot3.bin
++  sf update $loadaddr 0x0 $filesize
++  tftp ${loadaddr} tispl.bin
++  sf update $loadaddr 0x80000 $filesize
++  tftp ${loadaddr} u-boot.img
++  sf update $loadaddr 0x280000 $filesize
++
++Flash layout for OSPI:
++
++.. image:: img/ospi_sysfw2.svg
++  :alt: OSPI flash partition layout
++
++A53 SPL DDR Memory Layout
++-------------------------
++
++This provides an overview memory usage in A53 SPL stage.
++
++.. list-table::
++   :widths: 16 16 16
++   :header-rows: 1
++
++   * - Region
++     - Start Address
++     - End Address
++
++   * - ATF
++     - 0x80000000
++     - 0x80080000
++
++   * - OPTEE
++     - 0x80080000
++     - 0x81880000
++
++   * - TEXT BASE
++     - 0x81880000
++     - 0x818d8000
++
++   * - EMPTY
++     - 0x818d8000
++     - 0x81a00000
++
++   * - BMP IMAGE
++     - 0x81a00000
++     - 0x82377660
++
++   * - STACK
++     - 0x82377660
++     - 0x82377e60
++
++   * - GD
++     - 0x82377e60
++     - 0x80b78000
++
++   * - MALLOC
++     - 0x82378000
++     - 0x82380000
++
++   * - EMPTY
++     - 0x82380000
++     - 0x82480000
++
++   * - BSS
++     - 0x82480000
++     - 0x82500000
++
++   * - BLOBS
++     - 0x82500000
++     - 0x82500400
++
++   * - EMPTY
++     - 0x82500400
++     - 0x82800000
++
++Switch Setting for Boot Mode
++----------------------------
++
++Boot Mode pins provide means to select the boot mode and options before the
++device is powered up. After every POR, they are the main source to populate
++the Boot Parameter Tables.
++
++The following table shows some common boot modes used on AM62 platform. More
++details can be found in the Technical Reference Manual:
++https://www.ti.com/lit/pdf/spruiv7 under the `Boot Mode Pins` section.
++
++.. list-table:: Boot Modes
++   :widths: 16 16 16
++   :header-rows: 1
++
++   * - Switch Label
++     - SW2: 12345678
++     - SW3: 12345678
++
++   * - SD
++     - 01000000
++     - 11000010
++
++   * - OSPI
++     - 00000000
++     - 11001110
++
++   * - EMMC
++     - 00000000
++     - 11010010
++
++   * - UART
++     - 00000000
++     - 11011100
++
++   * - USB DFU
++     - 00000000
++     - 11001010
++
++   * - Ethernet
++     - 00110000
++     - 11000100
++
++For SW2 and SW1, the switch state in the "ON" position = 1.
++
++DFU based boot
++--------------
++
++To boot the board over DFU, set the switches to DFU mode and connect to the
++USB type C DRD port on the board. After power-on the build artifacts needs to be
++uploaded one by one with a tool like dfu-util.
++
++The initial ROM will have a DFU alt named `bootloader` for the initial R5 spl
++upload. The next stages as exposed by U-Boot have target alts matching the name
++of the artifacts, for these a USB reset has to be done after each upload.
++
++When using dfu-util the following commands can be used to boot to a U-Boot shell:
++
++.. prompt:: bash $
++
++  dfu-util -a bootloader -D tiboot3.bin
++  dfu-util -R -a tispl -D tispl.bin
++  dfu-util -R -a u-boot.img -D u-boot.img
++
++Debugging U-Boot
++----------------
++
++See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
++detailed setup information.
++
++.. warning::
++
++  **OpenOCD support since**: v0.12.0
++
++  If the default package version of OpenOCD in your development
++  environment's distribution needs to be updated, it might be necessary to
++  build OpenOCD from the source.
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
++    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
++
++To start OpenOCD and connect to the board
++
++.. prompt:: bash $
++
++  openocd -f board/ti_am625evm.cfg
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index 01fb9411688708afc8ad5b74a9cd3ec2e4e998d5..fafef239e0117528e1ff9dad44904abf0dfec8a3 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -33,6 +33,7 @@ K3 Based SoCs
+    am62ax_sk
+    am62x_sk
+    am62px_sk
++   am6254atl_sk
+    am64x_evm
+    am65x_evm
+    j7200_evm
 
 -- 
 2.51.0
