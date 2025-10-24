@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 659B4CCD193
-	for <u-boot@archiver.kernel.org>; Thu, 23 Oct 2025 22:41:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94945CCD1A5
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 04:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9593D8006D;
-	Fri, 24 Oct 2025 00:41:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C90F1832BC;
+	Fri, 24 Oct 2025 06:15:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="W+0uZww6";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="E8VrmNtA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eMUz7SjE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1A20807C0; Fri, 24 Oct 2025 00:41:53 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A45A38331F; Fri, 24 Oct 2025 06:15:33 +0200 (CEST)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6037F8003E
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 00:41:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29AEB82E34
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 06:15:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4ct1HM0lDzz9skc;
- Fri, 24 Oct 2025 00:41:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761259311;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=lJc07d/4O7oAiOAhSvT1BGHR/M5MMe/sYzABQuJYxgg=;
- b=W+0uZww6Izyh3yfG2HGxqu4jNwDlyxxyo9G/SmKFaDUywt+k+roaGggVZgMKBZfRuiJ33t
- 3i76Hwo5HXutH1Jo4q1xfpXI0s6TmDryNa3FnfB9qc2C7Nmp56iMnDDCvS/fsRfi+NZUR3
- HjuzYOBA5bYwcZ3EFjyEmANvMgfjIkz59Nj/GvIFi1djWEN3zj2LnxwkCmjgkVn6XgNCdm
- cOCTQPSaU+eBFIW1c1xGc3kqNf8snSOPb+gNizAdT2cxC4seUbBIvkxFml/DShUeemMBGH
- ptstIg+qbirYnuFIIKUOD3Q4/0ucAu9CfbBchFDWmAWXmk7sGoY77GPZvlG4Gw==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=E8VrmNtA;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761259309;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=lJc07d/4O7oAiOAhSvT1BGHR/M5MMe/sYzABQuJYxgg=;
- b=E8VrmNtAmND81LwBXoOf1HXwehUM7TAFRr6xxvMMIIFiViMHM9QIr3H/5hWqJYX8LiWFnD
- WIDlU+IwOoCwhvh19ZXoWqvqata0BVllH+qaYR2U6BnwIMflhtVIEs2idO/X5p651f8Nbs
- nOHEhKFZ15UiqlZI7mWlVTytTiWxrBsyMu9aJO9aNOqSgdOWW4LhhdkGCjTSVmhTXYawsm
- 3F/V/H8gPYJ848A5HzXcL0sSJ6HYszYitOHt9F5ibFYKfBmHHGEJ7qQ6FypGdkQADFjMV9
- gmTvsL6VaF+Us5cdUxQWyzR+BNXQu9WlSXy7Q80ZGeOHc9NYtz3fVGf1gAkQLQ==
-To: u-boot@lists.denx.de
-Cc: Thanh Quan <thanh.quan.xn@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dominic Rath <rath@ibv-augsburg.net>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] net: phy: dp83869: Update STRAP_OPMODE bitmask
-Date: Fri, 24 Oct 2025 00:41:27 +0200
-Message-ID: <20251023224136.193007-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=shawn.guo@linaro.org
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-290d4d421f6so14793695ad.2
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 21:15:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761279329; x=1761884129; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mQq3YBgsr2p7B6Y3zsuuBGooZWPeLELRt3xWi7DnngA=;
+ b=eMUz7SjEov0zGhAZfAgBWzAyu+Q3dczuT5ZPQVY7DEsRM2AwCeSSy78ZUv44f7K5m7
+ RX9MBCFOdFRi2NRsOB4FgqRwsORgzrgW+HKixuyEQ4LWpQraY0caC0QL8m8/ybk0lQTl
+ MO9WnC3kSfZry5XJK2kqi8hpLsdpDqWzeSwoPBQuzs+NUGEdUnfURvLvt98TEiiORe7y
+ DMIffmtQBpTfYRHb79yzPEYEfHEsxlXwY+o/Jye48W7jYZExYobCX0L0VYt6Ci8nTw/X
+ i90s8bZG9snxrSYesIZQfN4gI44kwajBRGwsOhnsQqZlecg4nwEDSNr2P9RY0eoLg3nz
+ NgWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761279329; x=1761884129;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=mQq3YBgsr2p7B6Y3zsuuBGooZWPeLELRt3xWi7DnngA=;
+ b=iBWyRUCWVs8p/0f0i8CZpHA3T9l8H9tEizmPQTObcHWM8ozSNu7jjqXN2yhMY55fAI
+ l/v7+JPMNC6sNFLBFxEvjLWUSkHGvUxlDGXtzlA/96w2BlxNcn7V8W9aV7ucNFsAO+pk
+ DQ/L/RhUWkEsQGZVTNRRhc7rTfSGxlnVEiZ2kBVASHIrjp5kO6XyGGR/HCvC4Au/5B/y
+ 9w/+OAv2lmKd/YMxzbeL1Adn77vQrZn3VgthB+BgiFGKO2YcKJdb7EgwXgWSJYnDzVfX
+ jKQBN4M1+z/C6vnlwUb9+EADA2nO9v6/k3gq68zrAPTgu2IrElTugnMwTvl03uCQmC9E
+ xAdA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXjZRNW1426SmHyIvM/R5pHJOp/fLZzjv6gMlGVi7uE0+mMiWal8cMoID94LBjV5woPSfuN3Tc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxevxJ3yULGTkMcODUvNGkqfEWbtBzkFjNGqeshljNJQuFK9N5y
+ eXLtFCThjtyJ4LXaoMkxglO4rC+Ln8YrZOyttEGnKKMX0w1G/Ucvt07TksWG6TAqoAo=
+X-Gm-Gg: ASbGncttqfIc44h+YP9iwOFIz3HCFeJgVpntn1vLU0O/obWKqUSNEsc2b5F2Apof8Fr
+ OjEk5sW00CkvWtfcWB6aTZIktYswc8TwStG/PTOavYnZMJVykl+1pDPN4dDTInmp+6dKsC56hl+
+ o/t0mJIOkLmWde3i5v/SztXzqgkCUq3toYSNooM/1hIHD1RP75SHmPQASpEwNrcGycWa8Jpft5J
+ LkC9McWIZyjkePnFiFglscv5uvosVtxH5Js2ehHmJLRJEtq01WugLQwSOApHNi6apIEFocSeJWx
+ M23JsbNgEo9m/Ab1AorkxRQ8QrN4Ot9Qn5ynbQVMPWVzIAnEX99Vzg9WwOOKO5yZk0YUGJIIw9K
+ bQeoDS5xk8xGQ04N/3d7gb/mN1GDNMTZVcWbabdvBJQ8wc/gvwavXke0BzPAX/vI+pq5z+Rve2Y
+ ih9ql7bzbuMBn0Oc9ZWJiu7Q7T
+X-Google-Smtp-Source: AGHT+IE9wA3NEAaH5n1iYVXqpiEC0/bNpm+q9Iwqig/MWfRWENcz+//DlxiXXkwmUfY29PqzVIHp7A==
+X-Received: by 2002:a17:902:d587:b0:269:a4ed:13c3 with SMTP id
+ d9443c01a7336-290c9c8c7d8mr343466275ad.5.1761279329512; 
+ Thu, 23 Oct 2025 21:15:29 -0700 (PDT)
+Received: from dragon (45.78.53.11.16clouds.com. [45.78.53.11])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2946dfc0efasm41022345ad.76.2025.10.23.21.15.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 23 Oct 2025 21:15:28 -0700 (PDT)
+Date: Fri, 24 Oct 2025 12:15:24 +0800
+From: Shawn Guo <shawn.guo@linaro.org>
+To: Marc Zyngier <maz@kernel.org>,
+ =?iso-8859-1?Q?Pierre-Cl=E9ment?= Tosi <ptosi@google.com>,
+ Ying-Chun Liu <paul.liu@linaro.org>
+Cc: Alexander Graf <agraf@csgraf.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Regression caused by "arm64: Reduce PT size estimation complexity"
+Message-ID: <aPr9XCyh62ULrY7U@dragon>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 4edd16012a4dd2f86e9
-X-MBO-RS-META: fpxshye4h1xetbwmpg697h58z54wf83i
-X-Rspamd-Queue-Id: 4ct1HM0lDzz9skc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,59 +99,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Thanh Quan <thanh.quan.xn@renesas.com>
+Hi folks,
 
-According to the TI DP83869HM datasheet Revision D (June 2025), section
-7.6.1.41 STRAP_STS Register, the STRAP_OPMODE bitmask is bit [11:9].
-Fix this.
+While commit 94d30f476fe1 ("arm64: Reduce PT size estimation complexity")
+speeds up the PT size calculation, it seems the result size becomes
+unnecessarily bigger than before.  For example, on my device, the
+original count_required_pts() returns 6 for get_page_table_size(),
+while count_ranges() returns 14 now.  That said, the PT size returned by
+get_page_table_size() eventually becomes 64 KiB bigger than before.
+This is too much for my device which sets up PT on SRAM, and causing
+a regression here.
 
-Fixes: f3e22eea815d ("net: phy: add TI DP83869HM ethernet driver")
-Signed-off-by: Thanh Quan <thanh.quan.xn@renesas.com>
-Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org> # Use FIELD_GET()
----
-Cc: Dominic Rath <rath@ibv-augsburg.net>
-Cc: Hai Pham <hai.pham.ud@renesas.com>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Ramon Fried <rfried.dev@gmail.com>
-Cc: Thanh Quan <thanh.quan.xn@renesas.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
----
- drivers/net/phy/dp83869.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Could you guys take a look and see whether we can get PT size
+calculation speedy *and* compact? :)
 
-diff --git a/drivers/net/phy/dp83869.c b/drivers/net/phy/dp83869.c
-index b6fb5adae1f..c60fbf26a03 100644
---- a/drivers/net/phy/dp83869.c
-+++ b/drivers/net/phy/dp83869.c
-@@ -5,6 +5,7 @@
-  */
- 
- #include <phy.h>
-+#include <linux/bitfield.h>
- #include <linux/compat.h>
- #include <malloc.h>
- 
-@@ -64,7 +65,7 @@
- #define DP83869_RGMII_RX_CLK_DELAY_EN		BIT(0)
- 
- /* STRAP_STS1 bits */
--#define DP83869_STRAP_OP_MODE_MASK		GENMASK(2, 0)
-+#define DP83869_STRAP_OP_MODE_MASK		GENMASK(11, 9)
- #define DP83869_STRAP_STS1_RESERVED		BIT(11)
- #define DP83869_STRAP_MIRROR_ENABLED		BIT(12)
- 
-@@ -168,7 +169,7 @@ static int dp83869_set_strapped_mode(struct phy_device *phydev)
- 	if (val < 0)
- 		return val;
- 
--	dp83869->mode = val & DP83869_STRAP_OP_MODE_MASK;
-+	dp83869->mode = FIELD_GET(DP83869_STRAP_OP_MODE_MASK, val);
- 
- 	return 0;
- }
--- 
-2.51.0
-
+Thanks,
+Shawn
