@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0825CCF9E0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 17:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E254CCD1BF
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 17:38:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34265838A5;
+	by phobos.denx.de (Postfix) with ESMTP id 6C8CA838BB;
 	Fri, 24 Oct 2025 19:37:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="je7e803K";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="DqcGoIKC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1573F83835; Fri, 24 Oct 2025 19:29:17 +0200 (CEST)
+ id 43D7A83835; Fri, 24 Oct 2025 19:29:25 +0200 (CEST)
 Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C905283677
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 19:29:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43B7D83677
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 19:29:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kauschluss@disroot.org
 Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id 8E57525C66;
- Fri, 24 Oct 2025 19:29:14 +0200 (CEST)
+ by disroot.org (Postfix) with ESMTP id 148EB20D77;
+ Fri, 24 Oct 2025 19:29:23 +0200 (CEST)
 Received: from layka.disroot.org ([127.0.0.1])
  by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id UGWdnPGHrgD4; Fri, 24 Oct 2025 19:29:13 +0200 (CEST)
+ id lGghEv1aMTaM; Fri, 24 Oct 2025 19:29:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1761326953; bh=VSGWn5paNRd34xI7IPyloiyp13qdxbfvpZh+38FEnwY=;
+ t=1761326962; bh=IhDY6EqX8Gswcq3pyetr+oMSevMAhhdZy74rpu9NcYM=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc;
- b=je7e803KhD5/GPTQDEX392vF2hUiPAulTewt1nJENuklgQolYmOBdk4K8E/ddq6Oy
- AZZik1BVynx+x7MtKhueLhHs08l92aYe4WHbLRtJymK6TAUEW7+psKir+K9fMia15a
- mduGwaYAXzhyqOROoI4RwuYQG4E+I0pX1E0awMdUzyqyWsMpzVJAsIDwspor/cX/dR
- kpKc7X2I50RbU1/wtwGBKwgVGkcqTbho1sDJXi31VZf51bcOob+AVeGqySPANmuE1x
- OwBEcQQ/Kbf3QiqJiUM7VNEAZz0K7scBa/q3l6BVGIC+a4vw7FTkkDU33q+K+Dv2xx
- s48TcEEwBSbQQ==
+ b=DqcGoIKCcHE3cNWw4QPhbS52PhqxOaWWpnmp6XUA8FRqikN6T0oWrTUZ9v1FIwOec
+ kTenP+DoxvUbn+Cubd8HGo4d6fOY8GbaDHpWJ8qhyDIvnp7853H4fmRYSfYTJqPCpM
+ ZdpZBdpaFeJeHPLK+i4lviKBI4SbHGTJDmXt0yCymIB1FvDGeRLELZSrbUrSrMJaaW
+ dp/jBaDiFp6j1ZzWtjZKuVGkTZa+DiJWG/hogZUsrbHNRefGSaEomZd0muDgFHAMjB
+ EXiOnrO0zGQpwei5xgstV3Q5U+O/oFFZgP93dNSgSkQEzd61wWmZ6l5T4yPVO6Vp3A
+ OXMvGiNKdyXOw==
 From: Kaustabh Chakraborty <kauschluss@disroot.org>
-Date: Fri, 24 Oct 2025 22:58:27 +0530
-Subject: [PATCH v2 1/3] board: samsung: add support for Samsung Exynos
- mobile device boards
+Date: Fri, 24 Oct 2025 22:58:28 +0530
+Subject: [PATCH v2 2/3] board: samsung: exynos-mobile: add exynos7870
+ support and three devices
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20251024-board-exynos-mobile-v2-1-e6fce69e60c3@disroot.org>
+Message-Id: <20251024-board-exynos-mobile-v2-2-e6fce69e60c3@disroot.org>
 References: <20251024-board-exynos-mobile-v2-0-e6fce69e60c3@disroot.org>
 In-Reply-To: <20251024-board-exynos-mobile-v2-0-e6fce69e60c3@disroot.org>
 To: u-boot@lists.denx.de
@@ -56,11 +56,11 @@ Cc: Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, 
  Svyatoslav Ryhel <clamor95@gmail.com>, Ion Agorria <ion@agorria.com>, 
  Kaustabh Chakraborty <kauschluss@disroot.org>
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761326916; l=17186;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761326916; l=6976;
  i=kauschluss@disroot.org; s=20250202; h=from:subject:message-id;
- bh=VSGWn5paNRd34xI7IPyloiyp13qdxbfvpZh+38FEnwY=;
- b=ibaKQhpAId8gQ/N5tevWS7uUXLG9Hcn+/2Roirw/VWV3kEIHAl51J+fSw5ghE4Q/DRbfP80Vv
- SgsyWia1dc6CRsLXDZJwQToTvMcTe7eNo7mcB/0gp4YDynac4NMm5Tj
+ bh=IhDY6EqX8Gswcq3pyetr+oMSevMAhhdZy74rpu9NcYM=;
+ b=LrihamVMPxAQkG8t6FxbLtwfcnEjDhIzGF8S9v3J6oAXbBBKjsm4go2CdKaqgJwBGUXYVKfN3
+ Qw0AZ6J/d/oB3sUBWsW42/hYHzABxsa8kqDM/bP3fEYLV/qrPMjhkkg
 X-Developer-Key: i=kauschluss@disroot.org; a=ed25519;
  pk=h2xeR+V2I1+GrfDPAhZa3M+NWA0Cnbdkkq1bH3ct1hE=
 X-Mailman-Approved-At: Fri, 24 Oct 2025 19:37:56 +0200
@@ -80,580 +80,214 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for a generic platform which intends to support multiple
-boards powered by ARMv8 Samsung Exynos SoCs. Some important features
-include:
- * Fastboot: This is present to provide an open alternative to Samsung's
-   proprietary Odin protocol. The board file configures certain features
-   for fastboot, such as a dynamically allocated fastboot buffer, and
-   standardized (lowercase) partition aliases.
- * EFI: Kernel image can be loaded from an EFI partition. This
-   adopts a standard booting process, which multiple OS distributions
-   can rely on.
+Add basic support for the Exynos7870 SoC, this includes device tree
+match logic using multiple boards, where devices use a stub dtb in
+Samsung's QCDT format. S-BOOT, the previous stage bootloader, places its
+cmdline arguments there, which has identifying information.
+
+This is added with support for three devices:
+ * Samsung Galaxy A2 Core (codename: a2corelte)
+ * Samsung Galaxy J6 (codename: j6lte)
+ * Samsung Galaxy J7 Prime (codename: on7xelte)
+
+Add their device trees in the defconfig, and also enable the clock and
+pin controller drivers.
 
 Signed-off-by: Kaustabh Chakraborty <kauschluss@disroot.org>
 ---
- arch/arm/mach-exynos/Kconfig                  |  11 +-
- board/samsung/exynos-mobile/Kconfig           |  18 ++
- board/samsung/exynos-mobile/MAINTAINERS       |   6 +
- board/samsung/exynos-mobile/Makefile          |   5 +
- board/samsung/exynos-mobile/exynos-mobile.c   | 287 ++++++++++++++++++++++++++
- board/samsung/exynos-mobile/exynos-mobile.env |  18 ++
- configs/exynos-mobile_defconfig               |  68 ++++++
- doc/board/samsung/exynos-mobile.rst           |  40 ++++
- doc/board/samsung/index.rst                   |   1 +
- include/configs/exynos-mobile.h               |  14 ++
- 10 files changed, 467 insertions(+), 1 deletion(-)
+ .../samsung/exynos-mobile/debug-exynos7870.config  |   7 ++
+ board/samsung/exynos-mobile/exynos-mobile.c        | 116 +++++++++++++++++++++
+ configs/exynos-mobile_defconfig                    |   4 +
+ 3 files changed, 127 insertions(+)
 
-diff --git a/arch/arm/mach-exynos/Kconfig b/arch/arm/mach-exynos/Kconfig
-index 2cd67d023867de29bf85fe6d68b3485dbb67853c..b084b7284aa08eafbc740e47fbc8385f8eb2d7db 100644
---- a/arch/arm/mach-exynos/Kconfig
-+++ b/arch/arm/mach-exynos/Kconfig
-@@ -2,7 +2,7 @@ if ARCH_EXYNOS
- 
- config BOARD_COMMON
- 	def_bool y
--	depends on !TARGET_SMDKV310 && !TARGET_ARNDALE && !TARGET_E850_96
-+	depends on !TARGET_SMDKV310 && !TARGET_ARNDALE && !TARGET_EXYNOS_MOBILE && !TARGET_E850_96
- 
- config SPI_BOOTING
- 	bool
-@@ -252,6 +252,14 @@ config TARGET_E850_96
- endchoice
- endif
- 
-+config TARGET_EXYNOS_MOBILE
-+	bool "Samsung Exynos Generic Boards (for mobile devices)"
-+	select ARM64
-+	select BOARD_EARLY_INIT_F
-+	select CLK_EXYNOS
-+	select LINUX_KERNEL_IMAGE_HEADER
-+	select OF_CONTROL
-+
- config SYS_SOC
- 	default "exynos"
- 
-@@ -277,5 +285,6 @@ source "board/samsung/smdk5420/Kconfig"
- source "board/samsung/espresso7420/Kconfig"
- source "board/samsung/axy17lte/Kconfig"
- source "board/samsung/e850-96/Kconfig"
-+source "board/samsung/exynos-mobile/Kconfig"
- 
- endif
-diff --git a/board/samsung/exynos-mobile/Kconfig b/board/samsung/exynos-mobile/Kconfig
+diff --git a/board/samsung/exynos-mobile/debug-exynos7870.config b/board/samsung/exynos-mobile/debug-exynos7870.config
 new file mode 100644
-index 0000000000000000000000000000000000000000..ed7d16b8c6b718e1a0c2bcb24113b62135ec397c
+index 0000000000000000000000000000000000000000..1aa506a675d30b025651dd4575aee36de82b8d07
 --- /dev/null
-+++ b/board/samsung/exynos-mobile/Kconfig
-@@ -0,0 +1,18 @@
-+if TARGET_EXYNOS_MOBILE
-+
-+config ENV_SOURCE_FILE
-+	default "exynos-mobile"
-+
-+config LNX_KRNL_IMG_TEXT_OFFSET_BASE
-+	default TEXT_BASE
-+
-+config SYS_BOARD
-+	default "exynos-mobile"
-+
-+config SYS_CONFIG_NAME
-+	default "exynos-mobile"
-+
-+config SYS_VENDOR
-+	default "samsung"
-+
-+endif # TARGET_EXYNOS_MOBILE
-diff --git a/board/samsung/exynos-mobile/MAINTAINERS b/board/samsung/exynos-mobile/MAINTAINERS
-new file mode 100644
-index 0000000000000000000000000000000000000000..11fea212fb15bb5714ad1de46aace231f0600b69
---- /dev/null
-+++ b/board/samsung/exynos-mobile/MAINTAINERS
-@@ -0,0 +1,6 @@
-+Exynos Generic Boards (for mobile devices)
-+M:	Kaustabh Chakraborty <kauschluss@disroot.org>
-+S:	Maintained
-+F:	board/samsung/exynos-mobile/
-+F:	configs/exynos-mobile_defconfig
-+F:	include/configs/exynos-mobile.h
-diff --git a/board/samsung/exynos-mobile/Makefile b/board/samsung/exynos-mobile/Makefile
-new file mode 100644
-index 0000000000000000000000000000000000000000..e049ed217c18c7e2c173249608a8abc433299687
---- /dev/null
-+++ b/board/samsung/exynos-mobile/Makefile
-@@ -0,0 +1,5 @@
-+# SPDX-License-Identifier: GPL-2.0
-+#
-+# Copyright (C) 2025 Kaustabh Chakraborty <kauschluss@disroot.org>
-+
-+obj-y := exynos-mobile.o
++++ b/board/samsung/exynos-mobile/debug-exynos7870.config
+@@ -0,0 +1,7 @@
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_BASE=0x13820000
++CONFIG_DEBUG_UART_CLOCK=133250000
++CONFIG_DEBUG_UART_S5P=y
++CONFIG_LOG=y
++CONFIG_LOG_CONSOLE=y
++CONFIG_LOG_MAX_LEVEL=8
 diff --git a/board/samsung/exynos-mobile/exynos-mobile.c b/board/samsung/exynos-mobile/exynos-mobile.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..c16281dbc36fb07cf5e9f64604632bb98393cd86
---- /dev/null
+index c16281dbc36fb07cf5e9f64604632bb98393cd86..8ef38816abf73ae5f897ea06cca43e528a570b21 100644
+--- a/board/samsung/exynos-mobile/exynos-mobile.c
 +++ b/board/samsung/exynos-mobile/exynos-mobile.c
-@@ -0,0 +1,287 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Samsung Exynos Generic Board Source (for mobile devices)
-+ *
-+ * Copyright (c) 2025 Kaustabh Chakraborty <kauschluss@disroot.org>
-+ */
-+
-+#include <asm/armv8/mmu.h>
-+#include <blk.h>
-+#include <bootflow.h>
-+#include <ctype.h>
-+#include <dm/ofnode.h>
-+#include <env.h>
-+#include <errno.h>
-+#include <init.h>
-+#include <linux/sizes.h>
-+#include <lmb.h>
-+#include <part.h>
-+#include <stdbool.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define lmb_alloc(size, addr) \
-+	lmb_alloc_mem(LMB_MEM_ALLOC_ANY, SZ_2M, addr, size, LMB_NONE)
-+
-+struct exynos_board_info {
-+	const char *name;
-+	const char *chip;
-+	const u64 *const dram_bank_bases;
-+
-+	char serial[64];
-+
-+	int (*const match)(struct exynos_board_info *);
-+	const char *match_model;
-+	const u8 match_max_rev;
+@@ -13,6 +13,7 @@
+ #include <env.h>
+ #include <errno.h>
+ #include <init.h>
++#include <limits.h>
+ #include <linux/sizes.h>
+ #include <lmb.h>
+ #include <part.h>
+@@ -53,6 +54,96 @@ static struct mm_region exynos_mem_map[CONFIG_NR_DRAM_BANKS + 2] = {
+ 
+ struct mm_region *mem_map = exynos_mem_map;
+ 
++static const u64 exynos7870_common_dram_bank_bases[CONFIG_NR_DRAM_BANKS] = {
++	0x40000000, 0x80000000, 0x100000000,
 +};
 +
-+/*
-+ * The memory mapping includes all DRAM banks, along with the
-+ * peripheral block, and a sentinel at the end. This is filled in
-+ * dynamically.
-+ */
-+static struct mm_region exynos_mem_map[CONFIG_NR_DRAM_BANKS + 2] = {
-+	{
-+		/* Peripheral MMIO block */
-+		.virt = 0x10000000UL,
-+		.phys = 0x10000000UL,
-+		.size = 0x10000000UL,
-+		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-+			 PTE_BLOCK_NON_SHARE | PTE_BLOCK_PXN | PTE_BLOCK_UXN,
-+	},
-+};
-+
-+struct mm_region *mem_map = exynos_mem_map;
-+
-+/*
-+ * This array is used for matching the models and revisions with the
-+ * devicetree used by U-Boot. This allows a single U-Boot to work on
-+ * multiple devices.
-+ *
-+ * Entries are kept in lexicographical order of board SoCs, followed by
-+ * board names.
-+ */
-+static struct exynos_board_info exynos_board_info_match[] = {
-+};
-+
-+static void exynos_parse_dram_banks(const struct exynos_board_info *board_info,
-+				    const void *fdt_base)
++static const char *exynos_prev_bl_get_bootargs(void)
 +{
-+	u64 mem_addr, mem_size = 0;
-+	u32 na, ns, i, j;
-+	int offset;
++	void *prev_bl_fdt_base = (void *)get_prev_bl_fdt_addr();
++	int chosen_node_offset, ret;
++	const struct fdt_property *bootargs_prop;
 +
-+	if (fdt_check_header(fdt_base) < 0)
-+		return;
-+
-+	/* #address-cells and #size-cells as defined in the fdt root. */
-+	na = fdt_address_cells(fdt_base, 0);
-+	ns = fdt_size_cells(fdt_base, 0);
-+
-+	fdt_for_each_subnode(offset, fdt_base, 0) {
-+		if (strncmp(fdt_get_name(fdt_base, offset, NULL), "memory", 6))
-+			continue;
-+
-+		for (i = 0; ; i++) {
-+			mem_addr = fdtdec_get_addr_size_fixed(fdt_base, offset,
-+							      "reg", i, na, ns,
-+							      &mem_size, false);
-+			if (mem_addr == FDT_ADDR_T_NONE)
-+				break;
-+
-+			if (!mem_size)
-+				continue;
-+
-+			for (j = 0; j < CONFIG_NR_DRAM_BANKS; j++) {
-+				if (board_info->dram_bank_bases[j] != mem_addr)
-+					continue;
-+
-+				mem_map[j + 1].phys = mem_addr;
-+				mem_map[j + 1].virt = mem_addr;
-+				mem_map[j + 1].size = mem_size;
-+				mem_map[j + 1].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+						       PTE_BLOCK_INNER_SHARE;
-+				break;
-+			}
-+		}
++	ret = fdt_check_header(prev_bl_fdt_base);
++	if (ret < 0) {
++		log_err("%s: FDT is invalid (FDT_ERR %d)\n", __func__, ret);
++		return NULL;
 +	}
++
++	ret = fdt_path_offset(prev_bl_fdt_base, "/chosen");
++	chosen_node_offset = ret;
++	if (ret < 0) {
++		log_err("%s: /chosen node not found (FDT_ERR %d)\n", __func__,
++			ret);
++		return NULL;
++	}
++
++	bootargs_prop = fdt_get_property(prev_bl_fdt_base, chosen_node_offset,
++					 "bootargs", &ret);
++	if (!bootargs_prop) {
++		log_err("%s: /chosen/bootargs property not found (FDT_ERR %d)\n",
++			__func__, ret);
++		return NULL;
++	}
++
++	return bootargs_prop->data;
 +}
 +
-+static int exynos_fastboot_setup(void)
++static int exynos7870_fdt_match(struct exynos_board_info *board_info)
 +{
-+	struct blk_desc *blk_dev;
-+	struct disk_partition info = {0};
-+	char buf[128];
-+	phys_addr_t addr;
-+	int offset, i, j;
++	const char *prev_bl_bootargs;
++	int val, ret;
 +
-+	/* Allocate and define buffer address for fastboot interface. */
-+	if (lmb_alloc(CONFIG_FASTBOOT_BUF_SIZE, &addr)) {
-+		log_err("%s: failed to allocate fastboot buffer\n", __func__);
-+		return -ENOMEM;
-+	}
-+	env_set_hex("fastboot_addr_r", addr);
-+
-+	blk_dev = blk_get_dev("mmc", CONFIG_FASTBOOT_FLASH_MMC_DEV);
-+	if (!blk_dev) {
-+		log_err("%s: required mmc device not available\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	strcpy(buf, "fastboot_partition_alias_");
-+	offset = strlen(buf);
-+
-+	for (i = 1; i < CONFIG_EFI_PARTITION_ENTRIES_NUMBERS; i++) {
-+		if (part_get_info(blk_dev, i, &info))
-+			continue;
-+
-+		/*
-+		 * The partition name must be lowercase (stored in buf[]),
-+		 * as is expected in all fastboot partitions ...
-+		 */
-+		strlcpy(buf + offset, info.name, sizeof(buf) - offset);
-+		for (j = offset; buf[j]; j++)
-+			buf[j] = tolower(buf[j]);
-+		if (!strcmp(buf + offset, info.name))
-+			continue;
-+		/*
-+		 * ... However, if that isn't the case, a fastboot
-+		 * partition alias must be defined to establish it.
-+		 */
-+		env_set(buf, info.name);
-+	}
-+
-+	return 0;
-+}
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	struct exynos_board_info *board_info;
-+	char buf[128];
-+	unsigned int i;
-+	int ret;
-+
-+	/*
-+	 * Iterate over exynos_board_info_match[] to select the
-+	 * appropriate board info struct. If not found, exit.
-+	 */
-+	for (i = 0; i < ARRAY_SIZE(exynos_board_info_match); i++) {
-+		board_info = exynos_board_info_match + i;
-+		snprintf(buf, sizeof(buf), "%s-%s", board_info->chip,
-+			 board_info->name);
-+
-+		if (!strcmp(name, buf))
-+			break;
-+	}
-+	if (i == ARRAY_SIZE(exynos_board_info_match))
++	prev_bl_bootargs = exynos_prev_bl_get_bootargs();
++	if (!prev_bl_bootargs)
 +		return -1;
 +
 +	/*
-+	 * Execute match logic for the target board. This is separated
-+	 * as the process may be different for multiple boards.
++	 * Read the cmdline property which stores the
++	 * bootloader/firmware version. An example value of the option
++	 * can be: "J600GDXU3ARH5". This can be used to verify the model
++	 * of the device.
 +	 */
-+	ret = board_info->match(board_info);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Store the correct board info struct in gd->board_type to
-+	 * allow other functions to access it.
-+	 */
-+	gd->board_type = (ulong)board_info;
-+	log_debug("%s: device detected: %s\n", __func__, name);
-+
-+	return 0;
-+}
-+
-+int timer_init(void)
-+{
-+	ofnode timer_node;
-+
-+	/*
-+	 * In a lot of Exynos devices, the previous bootloader does not
-+	 * set CNTFRQ_EL0 properly. However, the timer node in
-+	 * devicetree has the correct frequency, use that instead.
-+	 */
-+	timer_node = ofnode_by_compatible(ofnode_null(), "arm,armv8-timer");
-+	gd->arch.timer_rate_hz = ofnode_read_u32_default(timer_node,
-+							 "clock-frequency", 0);
-+
-+	return 0;
-+}
-+
-+int board_early_init_f(void)
-+{
-+	const struct exynos_board_info *board_info;
-+
-+	if (!gd->board_type)
-+		return -ENODATA;
-+	board_info = (const struct exynos_board_info *)gd->board_type;
-+
-+	exynos_parse_dram_banks(board_info, gd->fdt_blob);
-+	/*
-+	 * Some devices have multiple variants based on the amount of
-+	 * memory and internal storage. The lowest bank base has been
-+	 * observed to have the same memory range in all board variants.
-+	 * For variants with more memory, the previous bootloader should
-+	 * overlay the devicetree with the required extra memory ranges.
-+	 */
-+	exynos_parse_dram_banks(board_info, (const void *)get_prev_bl_fdt_addr());
-+
-+	return 0;
-+}
-+
-+int dram_init(void)
-+{
-+	unsigned int i;
-+
-+	/* Select the largest RAM bank for U-Boot. */
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		if (gd->ram_size < mem_map[i + 1].size) {
-+			gd->ram_base = mem_map[i + 1].phys;
-+			gd->ram_size = mem_map[i + 1].size;
-+		}
++	ret = cmdline_get_arg(prev_bl_bootargs, "androidboot.bootloader", &val);
++	if (ret < 0) {
++		log_err("%s: unable to find property for bootloader version (%d)\n",
++			__func__, ret);
++		return -1;
 +	}
 +
-+	return 0;
-+}
++	if (strncmp(prev_bl_bootargs + val, board_info->match_model,
++		    strlen(board_info->match_model)))
++		return -1;
 +
-+int dram_init_banksize(void)
-+{
-+	unsigned int i;
-+
-+	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
-+		gd->bd->bi_dram[i].start = mem_map[i + 1].phys;
-+		gd->bd->bi_dram[i].size = mem_map[i + 1].size;
++	/*
++	 * Read the cmdline property which stores the hardware revision.
++	 * This is required to allow selecting one of multiple dtbs
++	 * available of a single device, varying in hardware changes in
++	 * different revisions.
++	 */
++	ret = cmdline_get_arg(prev_bl_bootargs, "androidboot.revision", &val);
++	if (ret < 0)
++		ret = cmdline_get_arg(prev_bl_bootargs, "androidboot.hw_rev", &val);
++	if (ret < 0) {
++		log_err("%s: unable to find property for bootloader revision (%d)\n",
++			__func__, ret);
++		return -1;
 +	}
 +
++	if (strtoul(prev_bl_bootargs + val, NULL, 10) > board_info->match_max_rev)
++		return -1;
++
++	/*
++	 * Read the cmdline property which stores the serial number.
++	 * Store this in the board info struct.
++	 */
++	ret = cmdline_get_arg(prev_bl_bootargs, "androidboot.serialno", &val);
++	if (ret > 0)
++		strlcpy(board_info->serial, prev_bl_bootargs + val, ret);
++
 +	return 0;
 +}
 +
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+int misc_init_r(void)
-+{
-+	const struct exynos_board_info *board_info;
-+	char buf[128];
-+
-+	if (!gd->board_type)
-+		return -ENODATA;
-+	board_info = (const struct exynos_board_info *)gd->board_type;
-+
-+	env_set("platform", board_info->chip);
-+	env_set("board", board_info->name);
-+
-+	if (strlen(board_info->serial))
-+		env_set("serial#", board_info->serial);
-+
-+	/* EFI booting requires the path to correct dtb, specify it here. */
-+	snprintf(buf, sizeof(buf), "exynos/%s-%s.dtb", board_info->chip,
-+		 board_info->name);
-+	env_set("fdtfile", buf);
-+
-+	return exynos_fastboot_setup();
-+}
-diff --git a/board/samsung/exynos-mobile/exynos-mobile.env b/board/samsung/exynos-mobile/exynos-mobile.env
-new file mode 100644
-index 0000000000000000000000000000000000000000..aa2e89afbacadcc86d0f1f5539f06bdb28bdc3b3
---- /dev/null
-+++ b/board/samsung/exynos-mobile/exynos-mobile.env
-@@ -0,0 +1,18 @@
-+stdin=serial,button-kbd
-+stdout=serial,vidconsole
-+stderr=serial,vidconsole
-+
-+bootdelay=0
-+bootcmd=bootefi bootmgr; pause; bootmenu
-+
-+fastbootcmd=echo "Fastboot Mode";
-+	fastboot -l $fastboot_addr_r usb 0
-+
-+bootmenu_0=Continue Boot=boot
-+bootmenu_1=Enter Fastboot Mode=run fastbootcmd
-+bootmenu_2=UEFI Maintenance Menu=eficonfig
-+bootmenu_3=Reboot=reset
-+bootmenu_4=Power Off=poweroff
-+
-+button_cmd_0_name=Volume Down Key
-+button_cmd_0=bootmenu
-diff --git a/configs/exynos-mobile_defconfig b/configs/exynos-mobile_defconfig
-new file mode 100644
-index 0000000000000000000000000000000000000000..2dbf90010bac8182ea202a484252a5b527eb6ad9
---- /dev/null
-+++ b/configs/exynos-mobile_defconfig
-@@ -0,0 +1,68 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_COUNTER_FREQUENCY=26000000
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_ARCH_EXYNOS=y
-+CONFIG_SYS_MALLOC_LEN=0x2000000
-+CONFIG_SYS_MALLOC_F_LEN=0x16000
-+CONFIG_TARGET_EXYNOS_MOBILE=y
-+CONFIG_NR_DRAM_BANKS=3
-+CONFIG_SYS_BOOTM_LEN=0x2000000
-+CONFIG_SYS_LOAD_ADDR=0x80000000
-+CONFIG_ARMV8_CNTFRQ_BROKEN=y
-+# CONFIG_PSCI_RESET is not set
-+CONFIG_BUTTON_CMD=y
-+CONFIG_SAVE_PREV_BL_FDT_ADDR=y
-+CONFIG_SAVE_PREV_BL_INITRAMFS_START_ADDR=y
-+CONFIG_SYS_PBSIZE=1024
-+CONFIG_BOARD_TYPES=y
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_MISC_INIT_R=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_BOOTMENU=y
-+CONFIG_CMD_POWEROFF=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_EFI_PARTITION=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_MULTI_DTB_FIT=y
-+CONFIG_BUTTON=y
-+CONFIG_BUTTON_REMAP_PHONE_KEYS=y
-+CONFIG_CLK=y
-+CONFIG_CLK_CCF=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0xdead0000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=0
-+CONFIG_SYS_I2C_S3C24X0=y
-+CONFIG_BUTTON_KEYBOARD=y
-+CONFIG_MISC=y
-+CONFIG_MMC_BROKEN_CD=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_DW=y
-+CONFIG_PHY=y
-+CONFIG_PHY_EXYNOS_USBDRD=y
-+CONFIG_PINCTRL=y
-+CONFIG_DM_PMIC=y
-+CONFIG_PMIC_S2MPS11=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_S2MPS11=y
-+CONFIG_SOC_SAMSUNG=y
-+CONFIG_EXYNOS_PMU=y
-+CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_CMD_POWEROFF=y
-+CONFIG_SYSRESET_SYSCON=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Samsung"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x04e8
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x6602
-+CONFIG_VIDEO=y
-+CONFIG_VIDEO_SIMPLE=y
-+CONFIG_FS_EXT4=y
-+CONFIG_FS_FAT=y
-diff --git a/doc/board/samsung/exynos-mobile.rst b/doc/board/samsung/exynos-mobile.rst
-new file mode 100644
-index 0000000000000000000000000000000000000000..d5c1c83a4e84ac0fc9401b02de0ec786c9397892
---- /dev/null
-+++ b/doc/board/samsung/exynos-mobile.rst
-@@ -0,0 +1,40 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Kaustabh Chakraborty <kauschluss@disroot.org>
-+
-+Samsung Exynos Generic ARMv8 Boards (for mobile devices)
-+=======================================================
-+
-+Overview
-+--------
-+This document describes how to build and run U-Boot for Samsung Exynos generic
-+boards. Boards are expected to boot with a primary bootloader, such as S-BOOT or
-+S-LK, which hands off control to U-Boot. Presently, only ARMv8 devices are
-+supported.
-+
-+The U-Boot image is built with all device tree blobs packed in a single FIT
-+image. During boot, it uses simple heuristics to detect the target board, and
-+subsequently the appropriate FDT is selected.
-+
-+Installation
-+------------
-+Building
-+^^^^^^^^
-+If a cross-compiler is required, install it and set it up like so:
-+
-+.. prompt:: bash $
-+
-+	export CROSS_COMPILE=aarch64-linux-gnu-
-+
-+Then, run the following commands to build U-Boot:
-+
-+.. prompt:: bash $
-+
-+	make O=.output exynos-mobile_defconfig
-+	make O=.output -j$(nproc)
-+
-+If successful, the U-Boot binary will be present in ``.output/u-boot.bin``.
-+
-+Preparation and Flashing
-+^^^^^^^^^^^^^^^^^^^^^^^^
-+Since U-Boot supports multiple boards, and devices have different requirements,
-+this step will vary depending on your target.
-diff --git a/doc/board/samsung/index.rst b/doc/board/samsung/index.rst
-index 1b92c9518a57df102c2b64ff934b460548ce3d53..1fbe88130c049e1a33d22ae9230fb60ddccea131 100644
---- a/doc/board/samsung/index.rst
-+++ b/doc/board/samsung/index.rst
-@@ -8,4 +8,5 @@ Samsung
+ /*
+  * This array is used for matching the models and revisions with the
+  * devicetree used by U-Boot. This allows a single U-Boot to work on
+@@ -62,6 +153,31 @@ struct mm_region *mem_map = exynos_mem_map;
+  * board names.
+  */
+ static struct exynos_board_info exynos_board_info_match[] = {
++	{
++		/* Samsung Galaxy A2 Core */
++		.name = "a2corelte",
++		.chip = "exynos7870",
++		.dram_bank_bases = exynos7870_common_dram_bank_bases,
++		.match = exynos7870_fdt_match,
++		.match_model = "A260",
++		.match_max_rev = U8_MAX,
++	}, {
++		/* Samsung Galaxy J6 */
++		.name = "j6lte",
++		.chip = "exynos7870",
++		.dram_bank_bases = exynos7870_common_dram_bank_bases,
++		.match = exynos7870_fdt_match,
++		.match_model = "J600",
++		.match_max_rev = U8_MAX,
++	}, {
++		/* Samsung Galaxy J7 Prime */
++		.name = "on7xelte",
++		.chip = "exynos7870",
++		.dram_bank_bases = exynos7870_common_dram_bank_bases,
++		.match = exynos7870_fdt_match,
++		.match_model = "G610",
++		.match_max_rev = U8_MAX,
++	},
+ };
  
-    axy17lte
-    e850-96
-+   exynos-mobile
-    n1
-diff --git a/include/configs/exynos-mobile.h b/include/configs/exynos-mobile.h
-new file mode 100644
-index 0000000000000000000000000000000000000000..862db5779ef4c9ff7f53bef78d7cee5107b7226e
---- /dev/null
-+++ b/include/configs/exynos-mobile.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+/*
-+ * Samsung Exynos Generic Board Configuration (for mobile devices)
-+ *
-+ * Copyright (C) 2025 Kaustabh Chakraborty <kauschluss@disroot.org>
-+ */
-+
-+#ifndef __CONFIG_EXYNOS_MOBILE_H
-+#define __CONFIG_EXYNOS_MOBILE_H
-+
-+#define CPU_RELEASE_ADDR	secondary_boot_addr
-+#define CFG_SYS_BAUDRATE_TABLE	{9600, 115200}
-+
-+#endif /* __CONFIG_EXYNOS_MOBILE_H */
+ static void exynos_parse_dram_banks(const struct exynos_board_info *board_info,
+diff --git a/configs/exynos-mobile_defconfig b/configs/exynos-mobile_defconfig
+index 2dbf90010bac8182ea202a484252a5b527eb6ad9..81a2c4d337314da6d92e4681606e1a5dcbfad745 100644
+--- a/configs/exynos-mobile_defconfig
++++ b/configs/exynos-mobile_defconfig
+@@ -7,6 +7,7 @@ CONFIG_SYS_MALLOC_LEN=0x2000000
+ CONFIG_SYS_MALLOC_F_LEN=0x16000
+ CONFIG_TARGET_EXYNOS_MOBILE=y
+ CONFIG_NR_DRAM_BANKS=3
++CONFIG_DEFAULT_DEVICE_TREE="exynos/exynos7870-a2corelte"
+ CONFIG_SYS_BOOTM_LEN=0x2000000
+ CONFIG_SYS_LOAD_ADDR=0x80000000
+ CONFIG_ARMV8_CNTFRQ_BROKEN=y
+@@ -24,11 +25,13 @@ CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_EFI_PARTITION=y
+ CONFIG_OF_UPSTREAM=y
++CONFIG_OF_LIST="exynos/exynos7870-a2corelte exynos/exynos7870-j6lte exynos/exynos7870-on7xelte"
+ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_BUTTON=y
+ CONFIG_BUTTON_REMAP_PHONE_KEYS=y
+ CONFIG_CLK=y
+ CONFIG_CLK_CCF=y
++CONFIG_CLK_EXYNOS7870=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0xdead0000
+ CONFIG_FASTBOOT_FLASH=y
+@@ -44,6 +47,7 @@ CONFIG_MMC_DW=y
+ CONFIG_PHY=y
+ CONFIG_PHY_EXYNOS_USBDRD=y
+ CONFIG_PINCTRL=y
++CONFIG_PINCTRL_EXYNOS78x0=y
+ CONFIG_DM_PMIC=y
+ CONFIG_PMIC_S2MPS11=y
+ CONFIG_DM_REGULATOR=y
 
 -- 
 2.51.0
