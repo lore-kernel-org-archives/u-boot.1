@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A3C2CCF9E0
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 19:55:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0F54CCF9E0
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 19:55:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A7B3838E3;
-	Fri, 24 Oct 2025 21:55:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E0F4838AE;
+	Fri, 24 Oct 2025 21:55:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jZ68FSTa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f+akmBOv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A250A838CC; Fri, 24 Oct 2025 21:55:15 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id C1D36838D2; Fri, 24 Oct 2025 21:55:16 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B155838C7
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 21:55:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA36583678
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 21:55:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-4439fc3abfeso1164086b6e.3
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 12:55:13 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-7c284d4867eso773541a34.3
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 12:55:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761335712; x=1761940512; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761335713; x=1761940513; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kTH0beTQ7EgiTSRMUG5Sfgvd+5p2HX29FKJTeUtFr9c=;
- b=jZ68FSTawwy+ekFMZhQEe/WiBjYK3IA1ekZ4THmIEqGTpkOCAZEE6JP8WLoQUoKttD
- PR/puTtX46r4G3KfIU8fSL+nO6YZESc0hwIakXXQHxz4rclCQOPgD8q5u1+WRlnDH9Jd
- WfR9ub1hSBL7X/Aq9S1OuQmKxYS2wCZeyOUQI=
+ bh=CS059x6JwYd0Fate9jds1ZLvweIE2pEOBAhvAAGm0Z0=;
+ b=f+akmBOvajjzmelat0xiiV4QcDr8L359BD7F/FC5TE4WIODboQwbyqwVkbMBPgTT08
+ +//Z3lWBXk1HmroZHxazpGm6J8cy675Asv9LCzwiUd2WBTfNTV4tT6W52c4nq4FBDKfv
+ rYOpl8LpQAKimUNfqQW0OBdXBBJZA7n8HFo64=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761335712; x=1761940512;
+ d=1e100.net; s=20230601; t=1761335713; x=1761940513;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kTH0beTQ7EgiTSRMUG5Sfgvd+5p2HX29FKJTeUtFr9c=;
- b=XH2ZyQKRfDSJgZz8fITiW9TXLeP+TdBGycDycBbICAbocowE0yn0HkBzRsjTHwAwR9
- SEg2sl6INt3js7N/+VlRR4gNo0ydKfL2ciOiF5tu0HMaviNEsqS9dBf8UsDJ1HFoa4Lb
- SILQZwVv1MdWgRCsySpcTamZTakSIzHX1c+deRsnK3Zw8JPlEwzEm6epiAWJ8s23OYwx
- dlXfSaTIfA29hyY6wNG1M411Kk5bpW1Ir6PltQa+84hx4E87vrsvSFH08qR3JCloHTAp
- DB9qEcoYTrwYb/RnWlukRZYdCeqHzBvebzKVvmdS0BU2t3jApMMmuEHvyq+7PpiCy+rW
- 4nuA==
-X-Gm-Message-State: AOJu0YxYYbNlOKhn6JDznxpI72YBYkzYCblGlQzhyx7p8cfVE9vynBeF
- pLzABb+J5lZpAl5SWFwBCvoElZsYsq5XNBn22eaEoTWKim3HZ1uV5S0F/xoT8UKB/RSXZGrOx6V
- ajg03J/QNFQ==
-X-Gm-Gg: ASbGncuxxL6ZAUZUO9mNuHWjYPRZzrjVNek7IWGpfgqtgrKw13ASpb3Y4XjdahDR8hS
- 1FJ0w81yqcvJCVYaNepTv7VpyR9hpXULujPUCHdG2iyi68hvq9a4+uUO+YAAhpnt2jZyHVkP06y
- jm57osFI1blYX8u1YVtuCyK3SD3xJCCEYogm/qULlFbZh49S6yrZLrkTq+xvl+GabRwakgZj6lJ
- EaiTPiC3/x8F4LFknslhsxt8LAylmBUZ4m9RsoE+Ls0cI3GRBg4n3T8OPr6gB5zMjxmfU3eOXK+
- AQh06VxjcQwMs2iKtxgBFeu0D7oufHOoY6VFUuwtEo3lUXhbP1q+LhhMd7VW1T+vexX5te6YObc
- +e7pTvYeUw5AbqNledVJdCle4FvDaFfO459DMKDabmPz18VNdMf7HY1v0CoCUmi2HQOuN63ieKd
- pyY7tfGMXVJ0+q4opoJnwl/SIZgbe6zxMP6WskygOD3jExsExD
-X-Google-Smtp-Source: AGHT+IHdRPUkjSNepc7xXNUV9ZZeUevnpZ8OixUytBp1eKSiYJK7FbHmTHnyWP9ZrZps0e8WyZH89w==
-X-Received: by 2002:a05:6808:1a0d:b0:43d:20f2:2e26 with SMTP id
- 5614622812f47-443a2ed7e2bmr13555019b6e.10.1761335712324; 
- Fri, 24 Oct 2025 12:55:12 -0700 (PDT)
+ bh=CS059x6JwYd0Fate9jds1ZLvweIE2pEOBAhvAAGm0Z0=;
+ b=wUcNhgj279HMP2Z7V8nlo/i/6+vIgKIpfiwj7k3uekjNy+piVpo4hJZ3aZTwNTM7G6
+ Es9bZsz5jK2Bln9bUSndc5PHNyxnJp4kf9957+N/BqpCilwQLlVITeV29E2SLJpowqAu
+ rOAW+/TGTyYfWi+nO/ws2ZYAquCgFwmitDwvKGfA3lK68WANrZ3ucEaKIUg3Nu+xgts4
+ YxwLh0PgfvYc/qvXscA9j7pL6I1PWTQPFhd8X3VQ4hLc3vIpTqy1pFl59+G1nDHptsWw
+ dn7rhhoAWpMBbblC2gE9aCscGd51RDqltGlMyGZSRWDA6H8psGqgUGbaEtY9ImUA6RMZ
+ SqzQ==
+X-Gm-Message-State: AOJu0YyrSakdYEAU2J2UZdr264fhGLPEYUhM8klYjbt6jhrmL638NkgW
+ 7xZKOhLMtNmp5HYkLC5BZBkZTdQ3JgJHnf87nJiPSHkwpkpZM1iEzccGiFcTHPkp6Vd4qzFO6+0
+ Etq0gzTikJQ==
+X-Gm-Gg: ASbGncuTd38k/t2fThdHd4KAbnSpEahWJST9Nk+6oYtZH65casBPFt2YRlkQaYq0k9E
+ +6URgWfv4yhKriYBSnKNOx2U++0DiMjmED/5Z/FzbBepooRL8rf4LxJk5CYbtZZ4WmLh2WfOjrw
+ tQUhOxw+EV53fSZxF+74gUq1YGzmeWdnuFcRLHW91hsedkkzhbZ6EUsELDrqaLrCi0QGPtE0Xpc
+ kWBFmNPsgh+pWWunO3ba1XH25nJAqTnIfJO6yB7i5BsK+CZK5s1DZPo0u+Qle60vyN4P9l4KYkf
+ lc6PB02eBs6SdEGD1aro4b75PBCu9N6rLStUXNJYNp0uRZsRbFsFDv1KK01LJ1lXc6m56pvjYDy
+ B9+2id081zowJuIBscjYRnT/TqYEId+ZEnopI1+ukSYu7TX9p24PPunzuzugHIG0FeeODbcVhc6
+ WM/qqEhpvL4kXI72nJXCI1iof7NoAiE2FrbCWVBreFrAxC6RTP
+X-Google-Smtp-Source: AGHT+IHTCXmRG+QNOgrcyLGqisUvUuebtDXMy4+56HXZTzfsjhNKu8RbnS5p2VcNMu3YZjsVSF1Gcg==
+X-Received: by 2002:a05:6808:1b14:b0:439:af0a:dc8d with SMTP id
+ 5614622812f47-443a30b1361mr13748265b6e.38.1761335713428; 
+ Fri, 24 Oct 2025 12:55:13 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-654ef2eff7fsm10013eaf.17.2025.10.24.12.55.11
+ 006d021491bc7-654ef2eff7fsm10013eaf.17.2025.10.24.12.55.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 24 Oct 2025 12:55:11 -0700 (PDT)
+ Fri, 24 Oct 2025 12:55:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>, Benjamin Hahn <B.Hahn@phytec.de>
-Cc: u-boot@lists.denx.de, Jerome Forissier <jerome.forissier@linaro.org>, 
- Martin Schwan <m.schwan@phytec.de>, upstream@lists.phytec.de
-In-Reply-To: <20251021-ip_dyn_bootstd-v4-1-1452ad40ab0c@phytec.de>
-References: <20251021-ip_dyn_bootstd-v4-1-1452ad40ab0c@phytec.de>
-Subject: Re: [PATCH v4] bootstd: make it possible to use tftp for netboot
- with standardboot
-Message-Id: <176133571125.2586772.1311639324029526521.b4-ty@konsulko.com>
-Date: Fri, 24 Oct 2025 13:55:11 -0600
+To: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>, 
+ Stefano Babic <sbabic@nabladev.com>, Alice Guo <alice.guo@nxp.com>, 
+ Ye Li <ye.li@nxp.com>, Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Valentin Caron <valentin.caron@foss.st.com>, 
+ "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+In-Reply-To: <20251017-scmi-lmm-v1-0-9fd41e7a5ac0@nxp.com>
+References: <20251017-scmi-lmm-v1-0-9fd41e7a5ac0@nxp.com>
+Subject: Re: [PATCH 0/5] firmware: scmi: Support SCMI LMM/CPU protocol for
+ i.MX95
+Message-Id: <176133571244.2586772.8038819873349316420.b4-ty@konsulko.com>
+Date: Fri, 24 Oct 2025 13:55:12 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,22 +102,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 21 Oct 2025 16:34:17 +0200, Benjamin Hahn wrote:
+On Fri, 17 Oct 2025 17:32:29 +0800, Peng Fan (OSS) wrote:
 
-> Add the option to load the bootscript with the tftp command (static IP)
-> instead of the dhcp command (dynamic IP). For this a new function
-> tftpb_run similar to dhcp_run, is needed. The selection of which command
-> to use can be done with the ip_dyn environment variable, which can be
-> set to yes or no. The ip_dyn variable was chosen as it is already in use
-> on the imx platforms.
-> Also edit the bootstd doc.
+> i.MX95 System Manager(SM) implements Logical Machine Management(LMM) and
+> CPU protocol to manage Logical Machine(LM) and CPUs(eg, M7).
+> 
+> To manage M7 in a separate LM or in same LM as U-Boot/Linux itself. LMM APIs
+> and CPU APIs are needed.
+> 
+> When M7 is in LM 'lm-m7', and this LM is managable by 'uboot-lm',
+> U-Boot could use LMM_BOOT, LMM_SHUTDOWN and etc to manage 'lm-m7'.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] bootstd: make it possible to use tftp for netboot with standardboot
-      commit: fae6c54d238279bf79c66ca65330425dff2c952f
+[1/5] firmware: scmi: Conditionally compile protocol support
+      commit: 251dd6bf0e89a587710fa7bfa320088617f8854e
+[2/5] firmware: scmi: Cleanup the SCMI MISC ID
+      commit: d1f1c98d8468f5f76c2c8c3acb31f83d736d34ce
+[3/5] firmware: scmi: Support probe vendor ID 0x80 and 0x82
+      commit: 7830ccc77a13dd2a9880a942734bb5687416c4d8
+[4/5] firmware: scmi: Add i.MX95 SCMI LMM protocol driver
+      commit: 3f20ea3675c466ab16761c9b280e6c382bae02c3
+[5/5] firmware: scmi: Add i.MX95 SCMI CPU Protocol
+      commit: ac9b02dd1028d14b6326970c93dfc3c50daa16f1
 -- 
 Tom
 
