@@ -4,59 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E16B6CCF9EB
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 12:53:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 222B1CCF9E3
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 13:09:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 512EE83621;
-	Fri, 24 Oct 2025 14:52:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F60283677;
+	Fri, 24 Oct 2025 15:09:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56C0683623; Fri, 24 Oct 2025 14:52:58 +0200 (CEST)
-Received: from inet12.abb.com (inet12.abb.com [138.225.1.73])
+ id 0C17F83678; Fri, 24 Oct 2025 15:09:47 +0200 (CEST)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 641E78331F
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 14:52:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=br-automation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=wolfgang.wallner@br-automation.com
-Received: from brsmtp01.br-automation.co.at (unknown [10.43.60.20])
- by xe-s-netms03z.xe.abb.com (Postfix) with ESMTPS id D05276317A4;
- Fri, 24 Oct 2025 14:52:55 +0200 (CEST)
-Received: from extmail.br-automation.com ([192.168.112.26])
- by brsmtp01.br-automation.co.at (HCL Domino Release 14.5)
- with ESMTP id 2025102414525323-28570 ;
- Fri, 24 Oct 2025 14:52:53 +0200 
-Received: from ATEGGE4852.br-automation.co.at ([10.43.64.79])
- by extmail.br-automation.com (HCL Domino Release 14.0FP3 HF8)
- with ESMTP id 2025102414525544-18223 ;
- Fri, 24 Oct 2025 14:52:55 +0200 
-From: "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>
-To: u-boot@lists.denx.de
-Cc: "Heiko Schocher" <hs@nabladev.com>,
- "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
- "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>,
- "Jaehoon Chung" <jh80.chung@samsung.com>,
- "Svyatoslav Ryhel" <clamor95@gmail.com>, "Tom Rini" <trini@konsulko.com>,
- "Zixun LI" <admin@hifiphile.com>
-Subject: [PATCH] gpio: Return -ENODEV if gpio_hog_lookup_name() is empty
-Date: Fri, 24 Oct 2025 14:52:45 +0200
-Message-ID: <20251024125251.39886-1-wolfgang.wallner@br-automation.com>
-X-Mailer: git-send-email 2.51.1
+ by phobos.denx.de (Postfix) with ESMTPS id 1FD2183623
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 15:09:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.26.255])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 0C173B22070B;
+ Fri, 24 Oct 2025 15:09:42 +0200 (CEST)
+Message-ID: <17e37755-6a5b-4950-af34-281e4930969b@freeshell.de>
+Date: Fri, 24 Oct 2025 06:09:40 -0700
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
- 14.0FP3 HF8|December 13, 2024) at 10/24/2025 02:52:55 PM,
- Serialize by Router on BRSMTPINTERN2/InternSMTP(Release 14.0FP3 HF8|December
- 13, 2024) at 10/24/2025 02:52:55 PM,
- Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.5|June 06,
- 2025) at 10/24/2025 02:52:53 PM,
- Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.5|June 06,
- 2025) at 10/24/2025 02:52:53 PM,
- Serialize complete at 10/24/2025 02:52:53 PM
-X-TNEFEvaluated: 1
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 6/9] pcie: starfive: Add a optional power gpio support
+To: Hal Feng <hal.feng@starfivetech.com>, Leo <ycliang@andestech.com>,
+ Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+References: <20251024085932.83596-1-hal.feng@starfivetech.com>
+ <20251024085932.83596-7-hal.feng@starfivetech.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20251024085932.83596-7-hal.feng@starfivetech.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,38 +59,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CONFIG=5FGPIO=5FHOG is not set, then gpio=5Fhog=5Flookup=5Fname() is emp=
-ty,
-and thus does not initialize any of its parameters. It does still
-return 0 though, and so any calling function might assume that the
-parameters have been initialized successfully.
 
-Change the return value to -ENODEV in this case, as the function
-would in the case when CONFIG=5FGPIO=5FHOG is set but the gpio hog
-could not be found.
 
-Signed-off-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+On 10/24/25 01:59, Hal Feng wrote:
+> Get and enable a optional power gpio. This feature is ported
+> from the jh7110 pcie driver in Linux. VisionFive 2 Lite needs
+> this gpio to enable the PCI bus device (M.2 M-Key) power.
+> 
 
----
+That's alright. Good.
 
- drivers/gpio/gpio-uclass.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> ---
+>  drivers/pci/pcie_starfive_jh7110.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+> 
+> diff --git a/drivers/pci/pcie_starfive_jh7110.c b/drivers/pci/pcie_starfive_jh7110.c
+> index 0908ae16b67..04088b48ddc 100644
+> --- a/drivers/pci/pcie_starfive_jh7110.c
+> +++ b/drivers/pci/pcie_starfive_jh7110.c
+> @@ -45,6 +45,7 @@ struct starfive_pcie {
+>  	struct pcie_plda plda;
+>  	struct clk_bulk	clks;
+>  	struct reset_ctl_bulk	rsts;
+> +	struct gpio_desc	power_gpio;
+>  	struct gpio_desc	reset_gpio;
+>  	struct regmap *regmap;
+>  	unsigned int stg_pcie_base;
+> @@ -184,6 +185,10 @@ static int starfive_pcie_parse_dt(struct udevice *dev)
+>  		dev_err(dev, "reset-gpio is not valid\n");
+>  		return -EINVAL;
+>  	}
+> +
+> +	gpio_request_by_name(dev, "enable-gpios", 0, &priv->power_gpio,
+> +			     GPIOD_IS_OUT);
+> +
 
-diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-index 3d9f8b32b8d..7559b8dc7e2 100644
---- a/drivers/gpio/gpio-uclass.c
-+++ b/drivers/gpio/gpio-uclass.c
-@@ -378,7 +378,7 @@ U=5FBOOT=5FDRIVER(gpio=5Fhog) =3D {
- #else
- int gpio=5Fhog=5Flookup=5Fname(const char *name, struct gpio=5Fdesc **desc)
- {
--	return 0;
-+	return -ENODEV;
- }
- #endif
-=20
---=20
-2.51.1
+Are we missing some error handling here? I don't know, everything else
+above in the function is verbose with the dev_err() reporting.
 
-base-commit: b10c055d4e1b5153a331a61ef82a5b01b5bb4c45
-branch: us/gpio=5Fhog
+>  	return 0;
+>  }
+>  
+> @@ -205,6 +210,9 @@ static int starfive_pcie_init_port(struct udevice *dev)
+>  		goto err_deassert_clk;
+>  	}
+>  
+> +	if (dm_gpio_is_valid(&priv->power_gpio))
+> +		dm_gpio_set_value(&priv->power_gpio, 1);
+> +
+>  	dm_gpio_set_value(&priv->reset_gpio, 1);
+>  	/* Disable physical functions except #0 */
+>  	for (i = 1; i < PLDA_FUNC_NUM; i++) {
+
+With that,
+
+Reviewed-by: E Shattow <e@freeshell.de>
