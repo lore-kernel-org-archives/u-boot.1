@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94945CCD1A5
-	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 04:15:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D82E1CCD1A5
+	for <u-boot@archiver.kernel.org>; Fri, 24 Oct 2025 05:26:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C90F1832BC;
-	Fri, 24 Oct 2025 06:15:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B7C5F82E34;
+	Fri, 24 Oct 2025 07:26:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="eMUz7SjE";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LOPxZ+l9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A45A38331F; Fri, 24 Oct 2025 06:15:33 +0200 (CEST)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 586F582E34; Fri, 24 Oct 2025 05:18:06 +0200 (CEST)
+Received: from mail-pl1-x641.google.com (mail-pl1-x641.google.com
+ [IPv6:2607:f8b0:4864:20::641])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29AEB82E34
- for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 06:15:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCEE58006D
+ for <u-boot@lists.denx.de>; Fri, 24 Oct 2025 05:18:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=shawn.guo@linaro.org
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-290d4d421f6so14793695ad.2
- for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 21:15:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=heyitsmemikeyy@gmail.com
+Received: by mail-pl1-x641.google.com with SMTP id
+ d9443c01a7336-292fd52d527so17180395ad.2
+ for <u-boot@lists.denx.de>; Thu, 23 Oct 2025 20:18:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761279329; x=1761884129; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mQq3YBgsr2p7B6Y3zsuuBGooZWPeLELRt3xWi7DnngA=;
- b=eMUz7SjEov0zGhAZfAgBWzAyu+Q3dczuT5ZPQVY7DEsRM2AwCeSSy78ZUv44f7K5m7
- RX9MBCFOdFRi2NRsOB4FgqRwsORgzrgW+HKixuyEQ4LWpQraY0caC0QL8m8/ybk0lQTl
- MO9WnC3kSfZry5XJK2kqi8hpLsdpDqWzeSwoPBQuzs+NUGEdUnfURvLvt98TEiiORe7y
- DMIffmtQBpTfYRHb79yzPEYEfHEsxlXwY+o/Jye48W7jYZExYobCX0L0VYt6Ci8nTw/X
- i90s8bZG9snxrSYesIZQfN4gI44kwajBRGwsOhnsQqZlecg4nwEDSNr2P9RY0eoLg3nz
- NgWA==
+ d=gmail.com; s=20230601; t=1761275881; x=1761880681; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=1xI3LfnAf9xIl1iqd/dh6OONkiPm12w92HdFIsQzjrs=;
+ b=LOPxZ+l99GstGi7P406+//xmorxyODABEBfiVc1MLyLbUL5ba/5elo66QqnwdcuUXW
+ OcOtRytf7GjBeDRLelz/VuuqiOx4Esd0SkImlsXo9F9bsrkxn7+NViSnupZf38LnvNwF
+ AYU5zaQa/b2WbRwr6RLX5B41iZXe1s15LccN9kWAq3KfGmCPfICLJdx4ZMUjN78JicTF
+ NhkJBVS9b3JlgT6iOo3jPxNQF/j66jr3lsGesEHPRt++3+allltjO4vvix6VAsfotAB/
+ Utb3AEbQO/ItPv5WOpPhVUCv0fuUdoOUkMGfS/en8KG8zAPtSvw7Vam5LMvkjdJ/uuPM
+ xuZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761279329; x=1761884129;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mQq3YBgsr2p7B6Y3zsuuBGooZWPeLELRt3xWi7DnngA=;
- b=iBWyRUCWVs8p/0f0i8CZpHA3T9l8H9tEizmPQTObcHWM8ozSNu7jjqXN2yhMY55fAI
- l/v7+JPMNC6sNFLBFxEvjLWUSkHGvUxlDGXtzlA/96w2BlxNcn7V8W9aV7ucNFsAO+pk
- DQ/L/RhUWkEsQGZVTNRRhc7rTfSGxlnVEiZ2kBVASHIrjp5kO6XyGGR/HCvC4Au/5B/y
- 9w/+OAv2lmKd/YMxzbeL1Adn77vQrZn3VgthB+BgiFGKO2YcKJdb7EgwXgWSJYnDzVfX
- jKQBN4M1+z/C6vnlwUb9+EADA2nO9v6/k3gq68zrAPTgu2IrElTugnMwTvl03uCQmC9E
- xAdA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXjZRNW1426SmHyIvM/R5pHJOp/fLZzjv6gMlGVi7uE0+mMiWal8cMoID94LBjV5woPSfuN3Tc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxevxJ3yULGTkMcODUvNGkqfEWbtBzkFjNGqeshljNJQuFK9N5y
- eXLtFCThjtyJ4LXaoMkxglO4rC+Ln8YrZOyttEGnKKMX0w1G/Ucvt07TksWG6TAqoAo=
-X-Gm-Gg: ASbGncttqfIc44h+YP9iwOFIz3HCFeJgVpntn1vLU0O/obWKqUSNEsc2b5F2Apof8Fr
- OjEk5sW00CkvWtfcWB6aTZIktYswc8TwStG/PTOavYnZMJVykl+1pDPN4dDTInmp+6dKsC56hl+
- o/t0mJIOkLmWde3i5v/SztXzqgkCUq3toYSNooM/1hIHD1RP75SHmPQASpEwNrcGycWa8Jpft5J
- LkC9McWIZyjkePnFiFglscv5uvosVtxH5Js2ehHmJLRJEtq01WugLQwSOApHNi6apIEFocSeJWx
- M23JsbNgEo9m/Ab1AorkxRQ8QrN4Ot9Qn5ynbQVMPWVzIAnEX99Vzg9WwOOKO5yZk0YUGJIIw9K
- bQeoDS5xk8xGQ04N/3d7gb/mN1GDNMTZVcWbabdvBJQ8wc/gvwavXke0BzPAX/vI+pq5z+Rve2Y
- ih9ql7bzbuMBn0Oc9ZWJiu7Q7T
-X-Google-Smtp-Source: AGHT+IE9wA3NEAaH5n1iYVXqpiEC0/bNpm+q9Iwqig/MWfRWENcz+//DlxiXXkwmUfY29PqzVIHp7A==
-X-Received: by 2002:a17:902:d587:b0:269:a4ed:13c3 with SMTP id
- d9443c01a7336-290c9c8c7d8mr343466275ad.5.1761279329512; 
- Thu, 23 Oct 2025 21:15:29 -0700 (PDT)
-Received: from dragon (45.78.53.11.16clouds.com. [45.78.53.11])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2946dfc0efasm41022345ad.76.2025.10.23.21.15.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 23 Oct 2025 21:15:28 -0700 (PDT)
-Date: Fri, 24 Oct 2025 12:15:24 +0800
-From: Shawn Guo <shawn.guo@linaro.org>
-To: Marc Zyngier <maz@kernel.org>,
- =?iso-8859-1?Q?Pierre-Cl=E9ment?= Tosi <ptosi@google.com>,
- Ying-Chun Liu <paul.liu@linaro.org>
-Cc: Alexander Graf <agraf@csgraf.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: Regression caused by "arm64: Reduce PT size estimation complexity"
-Message-ID: <aPr9XCyh62ULrY7U@dragon>
+ d=1e100.net; s=20230601; t=1761275881; x=1761880681;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1xI3LfnAf9xIl1iqd/dh6OONkiPm12w92HdFIsQzjrs=;
+ b=c4oRqKCyT0BqQrwRFMEPdUpdXEnW3qkHByfdJpgcE/9e5pNdyu8H8jCtvmff5kZkn8
+ RuVBUql0py3XVfpo1zlWSZtUKCrLepZjYGNx7atB6zDt7HHBK0yt2lXs9sbzTwJs+pMD
+ so+0k/D/9EKJgqB1S/PJFsPBNa595kyS7KoicaYfyyGNd7+O93wGrDbjbQdBDvoC5ElN
+ 33/Pz62OlqTfsdFJf16lPu7iUrq2RJxOSQgwUjz7TCHfhW2jNOhiZfOyMYtBviRnY2C1
+ 0NPDuzwyvFHn2pzFlOAESxgZKaYXobOG5Y508Lnl4/PuJPUCEUPcFApEo0Iii4aL1hhq
+ befw==
+X-Gm-Message-State: AOJu0YwtQGNEpf/2kJw7wy6VNyh+Pz45eWrTaMe01NeLr7qpOOIVayY9
+ elXrBiiLig2FIvjpwOr2uNgcVdz6wzEYmRppS4ujM5jhNvLb0RTYdsFiR04sGfnz2kVzFHIp3ZL
+ 96sw5eYVnxBglL6/CaT+4CD41YaEUC4JIRKVFgbQ=
+X-Gm-Gg: ASbGncvaEh/k8+5+LJzu8aacbIT2IgSdL0Su9f9Yp1CLGGDuYHhrrcbq/y07fsfTQEn
+ c6VE9c80tDudRyCc95+O0ToAl2IYrifKpwsa9CGX0+ncVNcW/xjD9oqgka4Xq8R3NLhHtFWe2hF
+ WRipqq0hHFowYwHb1JKl+VH+ZJaFE7k4Z/jwWJrzzdZuu2rI2HVK2vsuScajgeroYvqSyGytIwL
+ 0Bi5170lFcXz4oBuEb2BHJ9u327tYHzUjt1OVBHrb+2PomGqZHsOeSa4pesXRheTD6y+upIXpBt
+ njDgBGJLYo2qdxjtJ9A=
+X-Google-Smtp-Source: AGHT+IEYe6RByoutOVgqLuXMO1nBBIwyIsvzCdzZFOqTBYIX0CHJLNHNJZ5Vdu3mF/AzIo453euQ8idWUMtdyxjt4X4=
+X-Received: by 2002:a17:902:da8f:b0:290:af0e:1183 with SMTP id
+ d9443c01a7336-2948ba3ef7emr8176015ad.51.1761275880791; Thu, 23 Oct 2025
+ 20:18:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+References: <CABRivRvcniwNtwfaFBRHy41mdk7gCCBFVKqgpq-TX_kxuABrHA@mail.gmail.com>
+ <CALeDE9NKxtkDovvv9rPgeQFGUEY5WYKf2jBy-DqW=3tsCJ748w@mail.gmail.com>
+ <CABRivRtrTKcq04vJ2TwHVdh=uKAemBGuRiHj89fyUe=dH0QbkA@mail.gmail.com>
+In-Reply-To: <CABRivRtrTKcq04vJ2TwHVdh=uKAemBGuRiHj89fyUe=dH0QbkA@mail.gmail.com>
+From: Mikeyy M <heyitsmemikeyy@gmail.com>
+Date: Fri, 24 Oct 2025 14:17:49 +1100
+X-Gm-Features: AWmQ_blBykZC2C3piEcclxe6redBvQ1gmHMqkFwwlCLO8A6ZR-BkO4g7zMrPcYU
+Message-ID: <CABRivRtu9=L2SyB9PnoEwbyJfs6tckHcd0GOToStvV2VpLY3pw@mail.gmail.com>
+Subject: Re: U-Boot Not Working on Raspberry Pi 5
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de
+X-Mailman-Approved-At: Fri, 24 Oct 2025 07:26:55 +0200
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,19 +96,271 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi folks,
+Okay I fixed the issue. It seems like the version of the device tree that
+Raspberry Pi provides here:
+https://github.com/raspberrypi/firmware/blob/master/boot/bcm2712-rpi-5-b.dt=
+b
+differs to the version that gets installed when you install the Raspberry
+Pi OS. When I installed the OS and copied that device tree in, it seemed to
+work perfectly fine. The sizes of the device tree file even differ, so
+there's definitely something going on there...
 
-While commit 94d30f476fe1 ("arm64: Reduce PT size estimation complexity")
-speeds up the PT size calculation, it seems the result size becomes
-unnecessarily bigger than before.  For example, on my device, the
-original count_required_pts() returns 6 for get_page_table_size(),
-while count_ranges() returns 14 now.  That said, the PT size returned by
-get_page_table_size() eventually becomes 64 KiB bigger than before.
-This is too much for my device which sets up PT on SRAM, and causing
-a regression here.
+On Thu, Oct 23, 2025 at 9:12=E2=80=AFPM Mikeyy M <heyitsmemikeyy@gmail.com>=
+ wrote:
 
-Could you guys take a look and see whether we can get PT size
-calculation speedy *and* compact? :)
-
-Thanks,
-Shawn
+> Hi Peter,
+>
+> Thanks for your help. The SD card has a single large FAT32 partition. No
+> separate ext4 root filesystem partition has been created yet. Here are th=
+e
+> commands I ran on my SD card and their output:
+>
+> michael@laptop:~$ sudo fdisk -l /dev/mmcblk0
+>> Disk /dev/mmcblk0: 59.48 GiB, 63864569856 bytes, 124735488 sectors
+>> Units: sectors of 1 * 512 =3D 512 bytes
+>> Sector size (logical/physical): 512 bytes / 512 bytes
+>> I/O size (minimum/optimal): 512 bytes / 512 bytes
+>> Disklabel type: dos
+>> Disk identifier: 0x00000000
+>> Device         Boot Start       End   Sectors  Size Id Type
+>> /dev/mmcblk0p1 *     2048 124735487 124733440 59.5G  b W95 FAT32
+>
+>
+> michael@laptop:~$ sudo fsck -N /dev/mmcblk0p1
+>> fsck from util-linux 2.39.3
+>> [/usr/sbin/fsck.vfat (1) -- /dev/mmcblk0p1] fsck.vfat /dev/mmcblk0p1
+>
+>
+> michael@laptop:~$ sudo file -s /dev/mmcblk0p1
+>> /dev/mmcblk0p1: DOS/MBR boot sector, code offset 0x58+2, OEM-ID
+>> "mkfs.fat", sectors/cluster 64, reserved sectors 64, Media descriptor 0x=
+f8,
+>> sectors/track 16, heads 4, hidden sectors 2048, sectors 124733440 (volum=
+es
+>> > 32 MB), FAT (32 bit), sectors/FAT 15232, reserved 0x1, serial number
+>> 0x3e21a96, unlabeled
+>
+>
+> michael@laptop:~$ sudo ls -l /mnt/sdcard/
+>> total 864
+>> -rw-r--r-- 1 michael michael  78728 Oct 21 23:29 bcm2712-rpi-5-b.dtb
+>> -rw-r--r-- 1 michael michael     67 Oct 23 18:05 config.txt
+>> -rw-r--r-- 1 michael michael 701248 Oct 23 18:05 u-boot.bin
+>
+>
+>
+> I also updated my config.txt to only include the two lines you mentioned,
+> and am getting the same output as before (which is probably expected just
+> from that change).
+>
+> On Thu, Oct 23, 2025 at 8:02=E2=80=AFPM Peter Robinson <pbrobinson@gmail.=
+com>
+> wrote:
+>
+>> Hi Mikeyy,
+>>
+>> > I'm trying to set up U-Boot as a bootloader on my Raspberry Pi 5 for
+>> custom
+>> > kernel development. For some reason though, I don't ever get to the
+>> U-Boot
+>> > environment at the end where I can type and input commands. It seeming=
+ly
+>> > gets stuck after BL31 (which I believe is the Arm Trusted Firmware). A=
+ny
+>> > help would be greatly appreciated.
+>> >
+>> > Setup:
+>> >
+>> >    - U-Boot version: v2025.10
+>> >    - Built with: make CROSS_COMPILE=3Daarch64-linux-gnu-
+>> rpi_arm64_defconfig
+>> >    - Connection: Using the dedicated 3-pin debug UART header with
+>> >    USB-to-serial adapter
+>> >    - SD card has: u-boot.bin, bcm2712-rpi-5-b.dtb, and config.txt
+>>
+>> What sort of partition/filesystem do you have?
+>>
+>> > This is my specific adapter:
+>> >
+>> https://www.amazon.com.au/Debugger-Raspberry-Connector-Debugging-Transmi=
+ssion/dp/B0CZP8DZK8
+>> > which I plug into my laptop, and run the command: *sudo minicom -D
+>> > /dev/ttyACM0 -b 115200*. I am specifically using the dedicated 3-pin
+>> UART
+>> > header which is new on the Rpi5.
+>> >
+>> > My config.txt is
+>> >
+>> > > arm_64bit=3D1
+>> > > kernel=3Du-boot.bin
+>>
+>> The above should be enough, the device should pass the right DT from
+>> the earlier firmware. What is
+>>
+>> > > device_tree=3Dbcm2712-rpi-5-b.dtb
+>> > > os_check=3D0
+>> > > # Enable UART0
+>> > > enable_uart=3D1
+>> > > core_freq_min=3D500
+>> >
+>> >
+>> >
+>> > Here is my output after connecting to minicom:
+>> >
+>> > Welcome to minicom 2.9
+>> > > OPTIONS: I18n
+>> > > Port /dev/ttyACM0, 00:28:12
+>> > > Press CTRL-A Z for help on special keys
+>> > >   1.02 RPi: BOOTSYS release VERSION:5855b10b DATE: 2025/06/13 TIME:
+>> > > 10:39:26
+>> > >   1.02 BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1749807=
+566
+>> > > serial 0d57824f boardrev c049
+>> > >   1.03 AON_RESET: 00000003 PM_RSTS 00001000
+>> > >   1.04 POWER_OFF_ON_HALT: 0 WAIT_FOR_POWER_BUTTON 0 power-on-reset 1
+>> > >   1.05 RP1_BOOT chip ID: 0x20001927
+>> > >   1.05 PCIEx1: PWR 0 DET_WAKE 0
+>> > >   1.05 part 00000000 reset_info 00000000
+>> > >   1.06 PMIC reset-event 00000000 rtc 00000001 alarm 00000000 enabled=
+ 0
+>> > >   1.06 uSD voltage 3.3V
+>> > >   1.07 SDRAM_CONFIG: 15
+>> > >   1.07 Initialising SDRAM rank 2 total-size: 32 Gbit 4267 (0x15 0x15=
+)
+>> > >   1.08 DDR 4267 1 0 32 152 BL:1
+>> > >   2.94 OTP boardrev c04171 bootrom a a
+>> > >   2.94 Customer key hash
+>> > > 0000000000000000000000000000000000000000000000000000000000000000
+>> > >   2.95 VC-JTAG unlocked
+>> > >   2.97 RP1_BOOT chip ID: 0x20001927
+>> > >   3.61 RP1_BOOT chip ID: 0x20001927
+>> > >   3.61 RP1_BOOT: fw size 46888
+>> > >   4.25 PCI2 init
+>> > >   4.25 PCI2 reset
+>> > >   4.30 PCIe scan 00001de4:00000001
+>> > >   4.30 RP1_CHIP_INFO 20001927
+>> > >   4.30 RPi: BOOTLOADER release VERSION:5855b10b DATE: 2025/06/13 TIM=
+E:
+>> > > 10:39:26
+>> > >   4.31 BOOTMODE: 0x06 partition 0 build-ts BUILD_TIMESTAMP=3D1749807=
+566
+>> > > serial 0d57824f boardrev c045
+>> > >   4.32 PCIEx1: PWR 0 DET_WAKE 0
+>> > >   4.24 M.2 PCIe HAT not detected.
+>> > >   4.34 usb_pd_init status 3
+>> > >   4.34 USB_PD CONFIG 0 41
+>> > >   4.42 XHCI-STOP
+>> > >   4.42 xHC0 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
+>> > >   4.43 USBSTS 1
+>> > >   4.43 xHC0 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
+>> > >   4.43 xHC0 ports 3 slots 64 intrs 4
+>> > >   4.45 XHCI-STOP
+>> > >   4.45 xHC1 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
+>> > >   4.45 USBSTS 1
+>> > >   4.45 xHC1 ver: 272 HCS: 03000440 140000f1 07ff000a HCC: 0240fe6d
+>> > >   4.46 xHC1 ports 3 slots 64 intrs 4
+>> > >   4.47 USB-PD: src-cap PDO object1 0x0a01912c
+>> > >   4.47 Current 3000 mA
+>> > >   4.47 Voltage 5000 mV
+>> > >   4.47 USB-PD: src-cap PDO object2 0x0002d12c
+>> > >   4.48 Current 3000 mA
+>> > >   4.48 Voltage 9000 mV
+>> > >   4.48 USB-PD: src-cap PDO object3 0x0004b12c
+>> > >   4.48 Current 3000 mA
+>> > >   4.49 Voltage 15000 mV
+>> > >   4.49 USB-PD: src-cap PDO object4 0x00064145
+>> > >   4.49 Current 3250 mA
+>> > >   4.49 Voltage 20000 mV
+>> > >   4.50 USB-PD: src-cap PDO object5 0xc0dc323c
+>> > >   4.50 USB-PD: src-cap PDO object6 0xc1a4323c
+>> > >   4.10 Boot mode: SD (01) order f4
+>> > >   9.17 SD HOST: 200000000 CTL0: 0x00800000 BUS: 400000 Hz actual:
+>> 390625
+>> > > HZ div: 512 (256) status:6
+>> > >   9.18 SD HOST: 200000000 CTL0: 0x00800f00 BUS: 400000 Hz actual:
+>> 390625
+>> > > HZ div: 512 (256) status:6
+>> > >   9.40 OCR c0ff8000 [340]
+>> > > CID: 00035344534e363447856a498e400198
+>> > > CSD: 400e0032db790001dbd37f800a404000
+>> > >   9.41 SD: bus-width: 4 spec: 2 SCR: 0x02458487 0x00000000
+>> > >   9.42 SD HOST: 200000000 CTL0: 0x00800f04 BUS: 50000000 Hz actual:
+>> > > 50000000 HZ div: 4 (2) status:2
+>> > >   9.43 MBR: 0x00000800,124733440 type: 0x0b
+>> > >   9.43 MBR: 0x00000000,       0 type: 0x00
+>> > >   9.43 MBR: 0x00000000,       0 type: 0x00
+>> > >   9.44 MBR: 0x00000000,       0 type: 0x00
+>> > >   9.46 Trying partition: 0
+>> > >   9.92 type: 32 lba: 2048 'mkfs.fat' ' NO NAME    ' clusters 1948483
+>> (64)
+>> > >   9.49 rsc 64 fat-sectors 15232 root dir cluster 2 sectors 0 entries=
+ 0
+>> > >   9.50 FAT32 clusters 1948483
+>> > >   9.50 [sdcard] autoboot.txt not found
+>> > >   9.50 Select partition rsts 0 C(boot_partition) 0 EEPROM config 0
+>> result 1
+>> > >   9.15 Trying partition: 1
+>> > >   9.17 type: 32 lba: 2048 'mkfs.fat' ' NO NAME    ' clusters 1948483
+>> (64)
+>> > >   9.52 rsc 64 fat-sectors 15232 root dir cluster 2 sectors 0 entries=
+ 0
+>> > >   9.53 FAT32 clusters 1948483
+>> > >   9.40 Read config.txt bytes      122 hnd 0x76
+>> > >   9.54 [sdcard] pieeprom.upd not found
+>> > >   9.45 usb_max_current_enable default 0 max-current 3000
+>> > >   9.55 Selecting USB low current limit
+>> > >   9.55 MESS:00:00:09.557951:0: *** Restart logging
+>> > >   9.62 Read /config.txt bytes      122 hnd 0x76
+>> > >   9.66 Read /config.txt bytes      122 hnd 0x76
+>> > >   9.57 MESS:00:00:09.571810:0: Initial voltage 800000 temp 30136
+>> > >   9.77 MESS:00:00:09.772217:0: avs_2712: AVS pred 9012 901200 temp
+>> 30136
+>> > >   9.77 MESS:00:00:09.775819:0: vpred 901 mV +0
+>> > >   9.78 MESS:00:00:09.784492:0: FB framebuffer_swap 1
+>> > >   9.78 MESS:00:00:09.786357:0: Select resolution HDMI0/2 hotplug 0
+>> > > max_mode 2
+>> > >   9.79 MESS:00:00:09.793247:0: Select resolution HDMI1/2 hotplug 0
+>> > > max_mode 2
+>> > >   9.80 Loading 'bcm2712-rpi-5-b.dtb' to 0x00000000 offset 0x100
+>> > >   9.15 Read bcm2712-rpi-5-b.dtb bytes    78728 hnd 0x3c
+>> > >   9.37  /overlays/overlay_map.dtb
+>> > >   9.38  /overlays/bcm2712d0.dtbo
+>> > >   9.86 PCIEx1: PWR 0 DET_WAKE 0
+>> > >   9.80 Read /config.txt bytes      122 hnd 0x76
+>> > >   9.94 [sdcard] /cmdline.txt not found
+>> > >   9.44  /cmdline.txt
+>> > >   9.94 MESS:00:00:09.946696:0: Failed to open command line file
+>> > > 'cmdline.txt'
+>> > >  10.13 MESS:00:00:10.131602:0: RPM 0, max RPM 0
+>> > >  10.16 BMD "armstub8-2712.bin" not found
+>> > >  10.63 fs_open: 'armstub8-2712.bin'
+>> > >  10.16 Loading 'u-boot.bin' to 0x00000000 offset 0x200000
+>> > >  10.04 Read u-boot.bin bytes   700232 hnd 0x5b
+>>
+>> It seems to find it on disk and load it OK.
+>>
+>> > >  10.20 MESS:00:00:10.206013:0: Kernel relocated to 0x80000
+>> > >  10.21 MESS:00:00:10.210874:0: Device tree loaded to 0x2efec600 (siz=
+e
+>> > > 0x13957)
+>> > >  10.21 PCI1 reset
+>> > >  10.22 PCI2 reset
+>> > >  10.23 set_reboot_order 0
+>> > >  10.23 set_reboot_arg1 0
+>> > >  10.24 USB-OTG disconnect
+>> > >  10.28 MESS:00:00:10.283221:0: BSC_A no ACK
+>> > >  10.28 MESS:00:00:10.284454:0: BSC_A no ACK
+>> > >  10.28 MESS:00:00:10.288380:0: BSC_A no ACK
+>> > >  10.31 MESS:00:00:10.312311:0: BSC_B no ACK
+>> > >  10.31 MESS:00:00:10.313538:0: BSC_B no ACK
+>> > >  10.31 MESS:00:00:10.317473:0: BSC_B no ACK
+>> > >  10.34 MESS:00:00:10.341242:0: Starting OS 10341 ms
+>> > >  10.34 MESS:00:00:10.346852:0: 00000040: -> 00000480
+>> > >  10.34 MESS:00:00:10.348705:0: 00000030: -> 00100080
+>> > >  10.35 MESS:00:00:10.353418:0: 00000034: -> 00100080
+>> > >  10.35 MESS:00:00:10.358131:0: 00000038: -> 00100080
+>> > >  10.36 MESS:00:00:10.362844:0: 0000003c: -> 00100080
+>> > > NOTICE:  BL31: v2.6(release):v2.6-240-gfc45bc492
+>> > > NOTICE:  BL31: Built : 12:55:13, Dec  4 2024
+>>
+>
