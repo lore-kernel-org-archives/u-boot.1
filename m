@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B148CCD1BF
-	for <u-boot@archiver.kernel.org>; Sat, 25 Oct 2025 09:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19266CCF9E3
+	for <u-boot@archiver.kernel.org>; Sat, 25 Oct 2025 13:52:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6C93838E7;
-	Sat, 25 Oct 2025 11:08:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 338D4836A3;
+	Sat, 25 Oct 2025 15:52:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OQFjoB8y";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cabY3HCF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 266FE838C8; Sat, 25 Oct 2025 11:08:52 +0200 (CEST)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F1AB83893
- for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 11:08:49 +0200 (CEST)
+ id AD33F838BB; Sat, 25 Oct 2025 15:52:34 +0200 (CEST)
+Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
+ [IPv6:2607:f8b0:4864:20::22f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F48183677
+ for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 15:52:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59P98lVu917045;
- Sat, 25 Oct 2025 04:08:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761383327;
- bh=cNQlGNEevZUcB/KZbLooCbgPiQUNwr7wkar8SCA48qQ=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=OQFjoB8yU9gsmGvwj+q8uZkGotPlkyPgfHG/R1OenoHM1Atg7Ice92BVMED3wwaOL
- DOv7/J/PE2YgBf4XPlyZREs09vBl8E2wZnYk3ABWKgnmZTM4FkAP7gH8wJ6wTk0Ywx
- TdHu6W4AKkyBQBDxkdci/dZGseXF9/Ttac8N9vPI=
-Received: from DFLE200.ent.ti.com (dfle200.ent.ti.com [10.64.6.58])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59P98l1H4052407
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sat, 25 Oct 2025 04:08:47 -0500
-Received: from DFLE204.ent.ti.com (10.64.6.62) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Sat, 25 Oct
- 2025 04:08:47 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE204.ent.ti.com
- (10.64.6.62) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Sat, 25 Oct 2025 04:08:47 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59P98kjI1687162;
- Sat, 25 Oct 2025 04:08:47 -0500
-From: Anshul Dalal <anshuld@ti.com>
-Date: Sat, 25 Oct 2025 14:38:38 +0530
-Subject: [PATCH v9 2/2] configs: disable SPL_BOOTZ to preserve spl size
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251025-fix_cmd_bootx-v9-2-dccf0aa0587f@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22f.google.com with SMTP id
+ 5614622812f47-44da31ecc16so138463b6e.3
+ for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 06:52:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1761400351; x=1762005151; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vscXvKmB4a7icsm4ma44R4pB8VhNFJ8FPBauvuiOfSs=;
+ b=cabY3HCFT2xbIAy/TK6V+Qx7cQzF0IONB9DLy8AcweiQAZh3eiQXM+wpinbdao9yHn
+ qIwTl1D6Zd/AhFt/XS6tRX4ZBe8Y3TP77zSxMlmmQJfpKyMErp39hWQ3XK0fIXHquBzu
+ Zmg/DGSOPjJyRZgLP3BoUsb3vQV7BkU8UL/Rg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761400351; x=1762005151;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vscXvKmB4a7icsm4ma44R4pB8VhNFJ8FPBauvuiOfSs=;
+ b=urmlHFXZoV7cyw24E3npq7Gehhps2ROd5c9OfjNf1jpIyBkY/kftGbOZaox9mdmGE3
+ Ubd1E5dINhNVN/6biUR2hMwccN0dG69jBmUQGmG0QW7GYmFc0XnbvtsQl3Lbk6jkMu9D
+ 29YV/FMrCwsM9T4NvZEcqXgmXuO1o0HpGOWFblelI2/9341iPrA1eduxxCSnLStfjKYi
+ ugSj0bY1zjiNe3q54sP/uZYKg09dI0BOeZbflT0ST0hHhcBpfzIvUlW9QadOcMCOs6/L
+ jc5zZtBjRhRFiekhf/gCprN+dr9g0ROBgEAbYxUdGjKTxF8HKuIeCRyXUwIW3LUwPtKF
+ v4vA==
+X-Gm-Message-State: AOJu0YwbmGUOt5FtJ4Q7vj2jM5pLDgu0ARRKXddJtxVArDbYBGhMg+Ko
+ Yj2lNw7BecKk+LHeY70lULJibaxZ/BDS3AiZrSFBAp4RnuPpRzMMfGKgMH64OqIOduA=
+X-Gm-Gg: ASbGnct0jkO3+rP2xfmaEO+7ffz2LOHHzdi9WCN60VgxuLNPSvIRzUsxVO+BS9hV3fR
+ zY0EEqqgOKblbKNLUlLOilwmeXpoaFcjhF9Bc9h2FGWj793CI6e8PffrHZxiR4wl2hk0vlwGSoN
+ uJKnNdtZPhtUlhBkLWB5fmD+lYFs4dJ75HTSXy7smPihxcCdX5JUI7mcoTVIaaScPN5EXGytI/D
+ xcdItgg3cv4GHSrlDasim0DBCvK0AkDlwx8IR1EHKDG+I9ebOMdVFLhHzNPFdN0YwMhXK6BJLLt
+ dz93hKGU5z3VFO39+IC7yNFRLTrAhNcfdg2iuyTPZfLo2mZBH3mBg12XpYsbaO4HMuMk8g8l0YZ
+ r93quA/O87rOcacKKtT6KUrSjlJVgAhHxARFPBQv58mm/SO/52V1AfSo6vwTEc4u33K9F1iUuhD
+ Y7vH9Ps1dV6ZCQ60XJ8sfETsgvRrqJkICBoQ2LZT0=
+X-Google-Smtp-Source: AGHT+IEn387Sg0Pqvazt7+XxIBTjgu5C6uSsaDWiFpADrfufYHr6pI4NqnsAmTm2e2uR5WBmoqlGhw==
+X-Received: by 2002:a05:6808:2f13:b0:43f:5716:aac9 with SMTP id
+ 5614622812f47-443a2fb210fmr11827485b6e.37.1761400351142; 
+ Sat, 25 Oct 2025 06:52:31 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-44da3eb60d5sm468810b6e.21.2025.10.25.06.52.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 25 Oct 2025 06:52:30 -0700 (PDT)
+Date: Sat, 25 Oct 2025 07:52:27 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Vignesh R <vigneshr@ti.com>
+Subject: Re: [PATCH v9 1/2] spl: remove usage of CMD_BOOTx from image parsing
+Message-ID: <20251025135227.GU6688@bill-the-cat>
 References: <20251025-fix_cmd_bootx-v9-0-dccf0aa0587f@ti.com>
-In-Reply-To: <20251025-fix_cmd_bootx-v9-0-dccf0aa0587f@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Vignesh R
- <vigneshr@ti.com>, Anshul Dalal <anshuld@ti.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761383322; l=2279;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=rSSNOO3KFbX+0Bt33Nev9vWpM8Aq1WoXM18P723haPA=;
- b=IoF7Me477RIIZin9EedMb1z5uKe7FiAN49GZu6ezcJT6fXrubngWh5mk1PnEiMRn7VIOa5+L0
- 0E8Szj4nRksAlAsMsR7uUJTQpu5m6SiOxCCUdtQA40ZKUwc9zR9fBYw
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+ <20251025-fix_cmd_bootx-v9-1-dccf0aa0587f@ti.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="CAu5So+9qzQIfbyv"
+Content-Disposition: inline
+In-Reply-To: <20251025-fix_cmd_bootx-v9-1-dccf0aa0587f@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,59 +98,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the existing behaviour, CMD_BOOTZ is not enabled by default which
-means zimage.o is not compiled in the SPL in falcon mode unless
-explicitly enabled. This changes now as SPL_BOOTZ is default y for
-falcon users which leads to larger SPL size with zimage.o being present.
 
-This patch modifies the defconfigs that used falcon mode but don't
-require zimage support.
+--CAu5So+9qzQIfbyv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- configs/imx28_xea_defconfig          | 1 +
- configs/imx6qdl_icore_mipi_defconfig | 1 +
- configs/imx6qdl_icore_mmc_defconfig  | 1 +
- configs/imx6qdl_icore_rqs_defconfig  | 1 +
- 4 files changed, 4 insertions(+)
+On Sat, Oct 25, 2025 at 02:38:37PM +0530, Anshul Dalal wrote:
+> Using CMD_* configs from spl doesn't make logical sense. Therefore
+> this patch replaces the checks for CMD_BOOTx with newly added library
+> symbols LIB_BOOT[IMZ] and SPL_LIB_BOOT[IMZ] which are enabled by their
+> respective CMD_* or SPL_* counterparts.
+>=20
+> SPL_BOOTZ is enabled by default for 32-bit ARM systems and SPL_BOOTI is
+> enabled by default for 64-bit ARM and RISCV.
+>=20
+> The respective C files (image.c/zimage.c) are compiled based on library
+> symbols BOOTx instead which are in turn selected by both CMD_BOOTx and
+> SPL_BOOTx as required.
+>=20
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> ---
+>  arch/arm/lib/Makefile   | 13 +++++++------
+>  arch/riscv/lib/Makefile |  4 ++--
+>  boot/Kconfig            | 18 ++++++++++++++++++
+>  cmd/Kconfig             |  5 +++++
+>  common/spl/Kconfig      | 16 ++++++++++++++++
+>  common/spl/spl.c        |  5 +++--
+>  6 files changed, 51 insertions(+), 10 deletions(-)
+>=20
+> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+> index ade42d0ca4370b7df3aec59615f12e28a96874cd..3ea94709dfcdc2c9fd057ad5e=
+129e041c59d6716 100644
+> --- a/arch/arm/lib/Makefile
+> +++ b/arch/arm/lib/Makefile
+> @@ -7,6 +7,13 @@ lib-$(CONFIG_USE_PRIVATE_LIBGCC) +=3D ashldi3.o ashrdi3.=
+o lshrdi3.o \
+>  				    lib1funcs.o uldivmod.o div0.o \
+>  				    div64.o muldi3.o
+> =20
+> +obj-$(CONFIG_$(PHASE_)LIB_BOOTI) +=3D image.o
+> +obj-$(CONFIG_$(PHASE_)LIB_BOOTZ) +=3D zimage.o
+> +
+> +ifndef CONFIG_XPL_BUILD
+> +obj-$(CONFIG_$(PHASE_)LIB_BOOTM) +=3D bootm.o
+> +endif
 
-diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index 8715893bbcc0ad565ffc923ab5cc980e0f5bf0b3..0bb2e4472500b7ee1d31d29b35e78b82e912f4d2 100644
---- a/configs/imx28_xea_defconfig
-+++ b/configs/imx28_xea_defconfig
-@@ -132,3 +132,4 @@ CONFIG_DM_SPI=y
- CONFIG_MXS_SPI=y
- CONFIG_SPL_CRC8=y
- # CONFIG_SPL_OF_LIBFDT is not set
-+# CONFIG_SPL_BOOTZ is not set
-diff --git a/configs/imx6qdl_icore_mipi_defconfig b/configs/imx6qdl_icore_mipi_defconfig
-index c322fd3eff14058c2d3d3cb8cb64103554114e1c..cc05ecf587f56bfe82ac7706b630653fcbd13458 100644
---- a/configs/imx6qdl_icore_mipi_defconfig
-+++ b/configs/imx6qdl_icore_mipi_defconfig
-@@ -74,3 +74,4 @@ CONFIG_PINCTRL_IMX6=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
- CONFIG_IMX_THERMAL=y
-+# CONFIG_SPL_BOOTZ is not set
-diff --git a/configs/imx6qdl_icore_mmc_defconfig b/configs/imx6qdl_icore_mmc_defconfig
-index 0b82fbecbee373371e87bff5baac2d0de75bed09..169903266cd5c7420ae9bab4045e1fe0b56fac6c 100644
---- a/configs/imx6qdl_icore_mmc_defconfig
-+++ b/configs/imx6qdl_icore_mmc_defconfig
-@@ -102,3 +102,4 @@ CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
- CONFIG_IMX_WATCHDOG=y
-+# CONFIG_SPL_BOOTZ is not set
-diff --git a/configs/imx6qdl_icore_rqs_defconfig b/configs/imx6qdl_icore_rqs_defconfig
-index 8520f90c867aee27894baeac6994576589fe2c5f..34d834ec8e1556612c7e692a540eababaa84230f 100644
---- a/configs/imx6qdl_icore_rqs_defconfig
-+++ b/configs/imx6qdl_icore_rqs_defconfig
-@@ -71,3 +71,4 @@ CONFIG_PINCTRL=y
- CONFIG_PINCTRL_IMX6=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
-+# CONFIG_SPL_BOOTZ is not set
+I wasn't clear enough, sorry. When you use $(PHASE_) you don't need
+CONFIG_XPL_BUILD. And if we select SPL_LIB_BOOTM we want bootm.o in SPL,
+yes?
 
--- 
-2.51.0
+--=20
+Tom
 
+--CAu5So+9qzQIfbyv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaPzWGAAKCRAr4qD1Cr/k
+CsVdAQCxo4qg3Ku4jTXzwXancL7DHYZ9zDQR81Cvr7HggVcm5QD9FbxkZEZvH/GG
+WU8WYv5mLB2S0aC6ODlkCwu8RIJlDwM=
+=SNEM
+-----END PGP SIGNATURE-----
+
+--CAu5So+9qzQIfbyv--
