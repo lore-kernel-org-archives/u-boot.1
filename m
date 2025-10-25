@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F0DCCD1BF
-	for <u-boot@archiver.kernel.org>; Sat, 25 Oct 2025 22:35:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 981C0CCD1BF
+	for <u-boot@archiver.kernel.org>; Sat, 25 Oct 2025 23:50:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8328282C7F;
-	Sun, 26 Oct 2025 00:35:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9211182A9E;
+	Sun, 26 Oct 2025 01:50:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZH88Hb9S";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="stweSOCA";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="uaCJmbxJ";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="UZtfzVWq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 947FE82E34; Sun, 26 Oct 2025 00:35:13 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 21F8982C7F; Sun, 26 Oct 2025 01:50:40 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9215C807C0
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 00:35:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53322807C0
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 01:50:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cvF2l17SGz9t4g;
- Sun, 26 Oct 2025 00:35:11 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cvGjn0hBhz9spF;
+ Sun, 26 Oct 2025 01:50:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761431711;
+ s=mail20150812; t=1761436237;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=uSlSRRJEhx+yVoZ23/CSd3XNloFcMAMjd+6TVGBlDhg=;
- b=ZH88Hb9SQBsh9qEm0Qx+ezXtGFtAie8BxHBWEs+7BTgBGv8Sd3+cDQpK588OJV0EvZmDVy
- s4DbIGx3NbsVuMLx49Q12y8EgwV/4u/2fTbIHvU9c0ejkDcLylp0S/OPvTg3s5IsNqMzbO
- sz1bNe3qbjgsKPxqWMcuYRzOktX5nlowoSXmJ9MuWqH37E83vosuXpcxenPVPt0jVm1arm
- MbEiTO1fMmRwfZd3Nn8mKJNShuKTPzSpMWHXux6CoyIaGoD0r9OxHfELv/42+0r26+WbSH
- 8caKbXrbRSj2udYB9hweLN8Xh8GEf5Yk8pRPjDXkqI2E3Kppg+0ZP8uh94fwBA==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=stweSOCA;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::102 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ bh=KSyGNyLzGYJCMVzdaHrAml/+C7N4z2TaFlMY6Pf1XJ0=;
+ b=uaCJmbxJENGUbMA11kjD4b7iUYEr+a9YXg51FeeaGu1wuJWQl6tXY6z4cnIndECa6+0inf
+ R/6WpXceK5nCTebGxnDjW/xRX1uKprVOcMgsHzjNHtVcUJu+0Jcu7vTS2jPR+4menvQKZV
+ EwUDN9odfi5c/mpnYjdwQ2868eGhcCGeK5ePNMTq8i9s8RnJ3Enhho/P9wHKkilTqHs8wn
+ rh/Z+Z8YEOmWPKLO/mSGUD1pvQWYKthavezL+czM7mOM9h9WE7eiri9sYBMW3q5reDQnKn
+ OBt69/G2RNKDjHnkoP40dv6gvF+hCTbZxLveW0c9M+vTWvwMRlXTESGK34Z6ow==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761431709;
+ s=mail20150812; t=1761436235;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=uSlSRRJEhx+yVoZ23/CSd3XNloFcMAMjd+6TVGBlDhg=;
- b=stweSOCAqUJDOqSV7Yp9R+Kyb4miQBQ/U1fTSiYK9n4MU+rRrnhAgvKOZNxbEeP86gEiD1
- As2FShgkSUykzF2WK252B3XzQ0DoCNeRG3AF3lq9JjRhiYArubmX+hncuWROfnVHq2Rd6g
- 7TlKZFzhpVRc+r4VfONR4OmKs2dj2FKoNxnStXrJnhHswe+xyMrxrMUaV7SzwsDJZUREW+
- JEmKNVJPW0Epoc+8zfzko72B6DAUxbB+iuSVErYsu7Ts6FaJt4bOn74CwqrhMn868uEmnG
- pzxP3uJsBFzTW/7KIWATDfFuawTE58RKr6cEuiMo6oWL53VZYRdsgWw44gfZYQ==
+ bh=KSyGNyLzGYJCMVzdaHrAml/+C7N4z2TaFlMY6Pf1XJ0=;
+ b=UZtfzVWq8uxtO8ykzPUZs5Fe01oRRzUkO8Db0JdI2od7i+fYYjbs6M5p/3X1lOgpxuLlKt
+ LSm3IR3h3hsieMcqtFM9dVvPa4kVFJ8j7v3Ioyxqbr35HkU2yNaigB3v6Af/7f3Okasu8x
+ ZIO2D4hRUbzHBXeauJySlkxu4D82LE9g8fcuUx2RpT3hZFNkWK5JTaAopfJTG7VBW7pPPE
+ WS6K1wISsZrrLAEHzCUx9ijM7mr9gwbQ+5p95x6Mjh3qbBvc0J4aj1wh2NNATbGrP3Ljbu
+ w6n8DmWfV1AIwToim26dEVnnmqP/BuIFU2x3eHBwoF3dxTacwt+BtIM64VTkBQ==
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Alice Guo <alice.guo@nxp.com>, Cristian Marussi <cristian.marussi@arm.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
  Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
  Ye Li <ye.li@nxp.com>
-Subject: [PATCH] firmware: scmi: Fix up code comments
-Date: Sun, 26 Oct 2025 00:34:32 +0200
-Message-ID: <20251025223456.253958-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH] firmware: scmi: Add clock v3.2 CONFIG_SET support
+Date: Sun, 26 Oct 2025 01:50:15 +0200
+Message-ID: <20251025235022.300844-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 8xdtyopb5okkmsib8i17rp11rpmqkw7b
-X-MBO-RS-ID: fe0ba63a28744c39759
-X-Rspamd-Queue-Id: 4cvF2l17SGz9t4g
+X-MBO-RS-META: mqtqw494jdb7xbpoejn44chcszut9dew
+X-MBO-RS-ID: 531e205a62441b6ebc3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,108 +87,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix multiple instances of copy-paste errors. Fill in missing
-headers for CLOCK_GET_PERMISSIONS message and response.
+From: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
 
+SCMI v3.2 introduces a new clock CONFIG_SET message format that can
+optionally carry also OEM specific configuration values beside the usual
+clock enable/disable requests. Add support to use such new format when
+talking to a v3.2 compliant SCMI platform.
+
+Support existing enable/disable operations across different clock protocol
+versions: this patch still does not add protocol operations to support the
+new OEM specific optional configuration capabilities.
+
+No functional change for the SCMI drivers users of the related enable and
+disable clock operations.
+
+Signed-off-by: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+[Marek: Remodel after Linux e49e314a2cf7 ("firmware: arm_scmi: Add clock v3.2 CONFIG_SET support")
+        Support both old < 2.1 and new >= 2.1 protocol versions.
+	Update commit message based on Linux one]
 ---
 Cc: Alice Guo <alice.guo@nxp.com>
+Cc: Cristian Marussi <cristian.marussi@arm.com>
 Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Sean Anderson <seanga2@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Valentin Caron <valentin.caron@foss.st.com>
+Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
 Cc: Ye Li <ye.li@nxp.com>
 Cc: u-boot@lists.denx.de
 ---
- include/scmi_protocols.h | 10 ++++++----
- 1 file changed, 6 insertions(+), 4 deletions(-)
+ drivers/clk/clk_scmi.c   | 22 +++++++++++++++++-----
+ include/scmi_protocols.h | 17 +++++++++++++++--
+ 2 files changed, 32 insertions(+), 7 deletions(-)
 
+diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
+index a7d89f32cd7..f9e17c38cad 100644
+--- a/drivers/clk/clk_scmi.c
++++ b/drivers/clk/clk_scmi.c
+@@ -134,17 +134,29 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
+ 
+ static int scmi_clk_gate(struct clk *clk, int enable)
+ {
+-	struct scmi_clk_state_in in = {
++	struct scmi_clock_priv *priv = dev_get_priv(clk->dev->parent);
++	struct scmi_clk_state_in_v1 in_v1 = {
++		.clock_id = clk_get_id(clk),
++		.attributes = enable,
++	};
++	/* Valid only from SCMI clock v2.1 */
++	struct scmi_clk_state_in_v2 in_v2 = {
+ 		.clock_id = clk_get_id(clk),
+ 		.attributes = enable,
+ 	};
+ 	struct scmi_clk_state_out out;
+-	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
+-					  SCMI_CLOCK_CONFIG_SET,
+-					  in, out);
++	struct scmi_msg msg_v1 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
++					     SCMI_CLOCK_CONFIG_SET,
++					     in_v1, out);
++	struct scmi_msg msg_v2 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
++					     SCMI_CLOCK_CONFIG_SET,
++					     in_v2, out);
++
+ 	int ret;
+ 
+-	ret = devm_scmi_process_msg(clk->dev, &msg);
++	ret = devm_scmi_process_msg(clk->dev,
++				    (priv->version < CLOCK_PROTOCOL_VERSION_2_1) ?
++				    &msg_v1 : &msg_v2);
+ 	if (ret)
+ 		return ret;
+ 
 diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index ce767117570..c889f62424b 100644
+index 81979e81b6b..d89612541ef 100644
 --- a/include/scmi_protocols.h
 +++ b/include/scmi_protocols.h
-@@ -751,13 +751,13 @@ enum scmi_clock_message_id {
- #define SCMI_CLK_RATE_ROUND_UP		BIT(2)
- #define SCMI_CLK_RATE_ROUND_CLOSEST	BIT(3)
- 
- #define SCMI_CLOCK_NAME_LENGTH_MAX 16
- 
- /**
-- * struct scmi_clk_get_nb_out - Response for SCMI_PROTOCOL_ATTRIBUTES command
-+ * struct scmi_clk_protocol_attr_out - Response for SCMI_PROTOCOL_ATTRIBUTES command
-  * @status:	SCMI command status
-  * @attributes:	Attributes of the clock protocol, mainly number of clocks exposed
+@@ -733,6 +733,7 @@ int scmi_pwd_name_get(struct udevice *dev, u32 domain_id, u8 **name);
+ /*
+  * SCMI Clock Protocol
   */
- struct scmi_clk_protocol_attr_out {
- 	s32 status;
- 	u32 attributes;
-@@ -817,13 +817,13 @@ struct scmi_clk_state_in {
-  */
- struct scmi_clk_state_out {
- 	s32 status;
++#define CLOCK_PROTOCOL_VERSION_2_1	0x20001
+ #define CLOCK_PROTOCOL_VERSION_3_0	0x30000
+ 
+ enum scmi_clock_message_id {
+@@ -800,15 +801,27 @@ struct scmi_clk_attribute_out_v2 {
  };
  
  /**
-- * struct scmi_clk_state_in - Message payload for CLOCK_RATE_GET command
-+ * struct scmi_clk_rate_get_in - Message payload for CLOCK_RATE_GET command
+- * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
++ * struct scmi_clk_state_in_v1 - Message payload for CLOCK_CONFIG_SET command for protocol < 2.1
   * @clock_id:	SCMI clock ID
   * @attributes:	Attributes of the targets clock state
   */
- struct scmi_clk_rate_get_in {
+-struct scmi_clk_state_in {
++struct scmi_clk_state_in_v1 {
  	u32 clock_id;
- };
-@@ -838,13 +838,13 @@ struct scmi_clk_rate_get_out {
- 	s32 status;
- 	u32 rate_lsb;
- 	u32 rate_msb;
+ 	u32 attributes;
  };
  
++/**
++ * struct scmi_clk_state_in_v2 - Message payload for CLOCK_CONFIG_SET command for protocol >= 2.1
++ * @clock_id:	SCMI clock ID
++ * @attributes:	Attributes of the targets clock state
++ * @extended_config_val: Extended and OEM specific configuration
++ */
++struct scmi_clk_state_in_v2 {
++	u32 clock_id;
++	u32 attributes;
++	u32 extended_config_val;
++};
++
  /**
-- * struct scmi_clk_state_in - Message payload for CLOCK_RATE_SET command
-+ * struct scmi_clk_rate_set_in - Message payload for CLOCK_RATE_SET command
-  * @flags:	Flags for the clock rate set request
-  * @clock_id:	SCMI clock ID
-  * @rate_lsb:	32bit LSB of the clock rate in Hertz
-  * @rate_msb:	32bit MSB of the clock rate in Hertz
-  */
- struct scmi_clk_rate_set_in {
-@@ -860,13 +860,13 @@ struct scmi_clk_rate_set_in {
-  */
- struct scmi_clk_rate_set_out {
- 	s32 status;
- };
- 
- /**
-- * struct scmi_clk_parent_state_in - Message payload for CLOCK_PARENT_SET command
-+ * struct scmi_clk_parent_set_in - Message payload for CLOCK_PARENT_SET command
-  * @clock_id:		SCMI clock ID
-  * @parent_clk:		SCMI clock ID
-  */
- struct scmi_clk_parent_set_in {
- 	u32 clock_id;
- 	u32 parent_clk;
-@@ -878,19 +878,21 @@ struct scmi_clk_parent_set_in {
-  */
- struct scmi_clk_parent_set_out {
- 	s32 status;
- };
- 
- /**
-+ * struct scmi_clk_get_permissions_in - Message payload for CLOCK_GET_PERMISSIONS command
-  * @clock_id:	Identifier for the clock device.
-  */
- struct scmi_clk_get_permissions_in {
- 	u32 clock_id;
- };
- 
- /**
-+ * struct scmi_clk_get_permissions_out - Response payload for CLOCK_GET_PERMISSIONS command
-  * @status:	Negative 32-bit integers are used to return error status codes.
-  * @permissions:	Bit[31] Clock state control, Bit[30] Clock parent control,
-  * Bit[29] Clock rate control, Bits[28:0] Reserved, must be zero.
-  */
- struct scmi_clk_get_permissions_out {
- 	s32 status;
+  * struct scmi_clk_state_out - Response payload for CLOCK_CONFIG_SET command
+  * @status:	SCMI command status
 -- 
 2.51.0
 
