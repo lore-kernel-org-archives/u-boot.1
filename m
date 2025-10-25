@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F49CCD1BF
-	for <u-boot@archiver.kernel.org>; Sat, 25 Oct 2025 21:36:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99F0DCCD1BF
+	for <u-boot@archiver.kernel.org>; Sat, 25 Oct 2025 22:35:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0EFF83045;
-	Sat, 25 Oct 2025 23:35:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8328282C7F;
+	Sun, 26 Oct 2025 00:35:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="lLMIsVuG";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="gbIumSmG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ZH88Hb9S";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="stweSOCA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4742983771; Sat, 25 Oct 2025 23:35:58 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 947FE82E34; Sun, 26 Oct 2025 00:35:13 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 722DE836AC
- for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 23:35:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9215C807C0
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 00:35:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4cvCkL22Grz9sWc;
- Sat, 25 Oct 2025 23:35:54 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cvF2l17SGz9t4g;
+ Sun, 26 Oct 2025 00:35:11 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761428154;
+ s=mail20150812; t=1761431711;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=4wPg1CKN4418e2GLwJwD3NO5/4QFEN9ZrQQCPIj1Yqg=;
- b=lLMIsVuGmPDxjd4OV8Zpf8+rfnhNZRzAd0n8ssUWQatyaYvKq6AOICGUp7yE4dpvbgW7mA
- DFeunj3gjdoqkpTMR8cxCn+Ex7dE+CrmD/Zv6/HQR4Ty4g3XpLfWMjbWlUpCQ/suObANjv
- RXr3TTCIvV8V9wuAlMu+2De379xIoxg9lNvOLPK7jI3fQkZWcDo0CVQ5ijCTB57VBFHcPp
- NPtCDBBe1WGvqEQH1gtURj+yqllYlMYM0HqyeavtwkumQkUMDZDrRdRAW4rrUqXFUeRIJV
- h+i9ipE5rWsZV5guJxwPAH+43fjFSxcJtDQBqY/iZXp8PHyz1fpRWX6Mm31JqQ==
+ bh=uSlSRRJEhx+yVoZ23/CSd3XNloFcMAMjd+6TVGBlDhg=;
+ b=ZH88Hb9SQBsh9qEm0Qx+ezXtGFtAie8BxHBWEs+7BTgBGv8Sd3+cDQpK588OJV0EvZmDVy
+ s4DbIGx3NbsVuMLx49Q12y8EgwV/4u/2fTbIHvU9c0ejkDcLylp0S/OPvTg3s5IsNqMzbO
+ sz1bNe3qbjgsKPxqWMcuYRzOktX5nlowoSXmJ9MuWqH37E83vosuXpcxenPVPt0jVm1arm
+ MbEiTO1fMmRwfZd3Nn8mKJNShuKTPzSpMWHXux6CoyIaGoD0r9OxHfELv/42+0r26+WbSH
+ 8caKbXrbRSj2udYB9hweLN8Xh8GEf5Yk8pRPjDXkqI2E3Kppg+0ZP8uh94fwBA==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=gbIumSmG;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=stweSOCA;
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::202 as permitted sender)
+ designates 2001:67c:2050:b231:465::102 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761428152;
+ s=mail20150812; t=1761431709;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=4wPg1CKN4418e2GLwJwD3NO5/4QFEN9ZrQQCPIj1Yqg=;
- b=gbIumSmGnF3utcnYWD/u4aeuwjd1Y+o/IB6G71TuLY1kWjQPWMChu3kt4RbJQRqVv1UdrX
- Ny16UJFNZmllo90BI+K61Fhqh9dsb+AFdcoxRGTT9kOn6Y55qjuKxhkAbuht0nSVjbQZfC
- b+hTp18jeCyPmBbTUkzQHfsaosuMESXAXH03fj0wrJ2Jy/MoeGkMQ4G/kLpVuuDnZdnOlt
- gumeB2/6i3BiJG+vIIP2eIQmahLjDQZ54FZDBtv1EfuQmXLAKu4DRNYnVRRtxu1EtSy4Te
- tYyNVDv8qN+XusE8s7EMrAy8Lt1Wd0Q+PqcX3YsVZJxNg/yC2cJEqxd9i2wFvw==
+ bh=uSlSRRJEhx+yVoZ23/CSd3XNloFcMAMjd+6TVGBlDhg=;
+ b=stweSOCAqUJDOqSV7Yp9R+Kyb4miQBQ/U1fTSiYK9n4MU+rRrnhAgvKOZNxbEeP86gEiD1
+ As2FShgkSUykzF2WK252B3XzQ0DoCNeRG3AF3lq9JjRhiYArubmX+hncuWROfnVHq2Rd6g
+ 7TlKZFzhpVRc+r4VfONR4OmKs2dj2FKoNxnStXrJnhHswe+xyMrxrMUaV7SzwsDJZUREW+
+ JEmKNVJPW0Epoc+8zfzko72B6DAUxbB+iuSVErYsu7Ts6FaJt4bOn74CwqrhMn868uEmnG
+ pzxP3uJsBFzTW/7KIWATDfFuawTE58RKr6cEuiMo6oWL53VZYRdsgWw44gfZYQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Alice Guo <alice.guo@nxp.com>,
- Etienne Carriere <etienne.carriere@linaro.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>,
- Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
- Viorel Suman <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour() misuse
-Date: Sat, 25 Oct 2025 23:35:09 +0200
-Message-ID: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH] firmware: scmi: Fix up code comments
+Date: Sun, 26 Oct 2025 00:34:32 +0200
+Message-ID: <20251025223456.253958-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: heomty6u87diquojp7sp3tdwj1abma61
-X-MBO-RS-ID: 56bcf681a0a55506dfe
-X-Rspamd-Queue-Id: 4cvCkL22Grz9sWc
+X-MBO-RS-META: 8xdtyopb5okkmsib8i17rp11rpmqkw7b
+X-MBO-RS-ID: fe0ba63a28744c39759
+X-Rspamd-Queue-Id: 4cvF2l17SGz9t4g
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,59 +91,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-MMU region cache behavior configuration for SCMI/SMT mailboxes is
-platform specific. Even on ARM systems, the mailbox memory may not
-even be located in any cacheable MMU region and may instead reside
-in some SRAM. Remove this non-generic cache behavior configuration
-code from generic code path.
+Fix multiple instances of copy-paste errors. Fill in missing
+headers for CLOCK_GET_PERMISSIONS message and response.
 
-It is unlikely that any platform is affected by this change if it
-did configure its MMU regions correctly on start up. Platforms
-which might be affected are i.MX94/95 and STM32MP.
-
-Fixes: 240720e9052f ("firmware: scmi: mailbox/smt agent device")
-Fixes: 2a3f161c8b16 ("scmi: correctly configure MMU for SCMI buffer")
-Fixes: b2ae10970d40 ("firmware: scmi: use PAGE_SIZE alignment for ARM64")
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Alice Guo <alice.guo@nxp.com>
-Cc: Etienne Carriere <etienne.carriere@linaro.org>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Peng Fan <peng.fan@nxp.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Cc: Viorel Suman <viorel.suman@nxp.com>
+Cc: Valentin Caron <valentin.caron@foss.st.com>
 Cc: Ye Li <ye.li@nxp.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/firmware/scmi/smt.c | 14 --------------
- 1 file changed, 14 deletions(-)
+ include/scmi_protocols.h | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/firmware/scmi/smt.c b/drivers/firmware/scmi/smt.c
-index 237871559f0..cd1c0801f72 100644
---- a/drivers/firmware/scmi/smt.c
-+++ b/drivers/firmware/scmi/smt.c
-@@ -61,20 +61,6 @@ int scmi_dt_get_smt_buffer(struct udevice *dev, struct scmi_smt *smt)
- 	if (device_is_compatible(dev, "arm,scmi") && ofnode_has_property(dev_ofnode(dev), "mboxes"))
- 		scmi_smt_enable_intr(smt, true);
+diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
+index ce767117570..c889f62424b 100644
+--- a/include/scmi_protocols.h
++++ b/include/scmi_protocols.h
+@@ -751,13 +751,13 @@ enum scmi_clock_message_id {
+ #define SCMI_CLK_RATE_ROUND_UP		BIT(2)
+ #define SCMI_CLK_RATE_ROUND_CLOSEST	BIT(3)
  
--#ifdef CONFIG_ARM
--	if (dcache_status()) {
--		u32 align_size;
--
--		if (IS_ENABLED(CONFIG_ARM64))
--			align_size = PAGE_SIZE;
--		else
--			align_size = MMU_SECTION_SIZE;
--
--		mmu_set_region_dcache_behaviour(ALIGN_DOWN((uintptr_t)smt->buf, align_size),
--						ALIGN(smt->size, align_size), DCACHE_OFF);
--	}
--#endif
--
- 	return 0;
- }
+ #define SCMI_CLOCK_NAME_LENGTH_MAX 16
  
+ /**
+- * struct scmi_clk_get_nb_out - Response for SCMI_PROTOCOL_ATTRIBUTES command
++ * struct scmi_clk_protocol_attr_out - Response for SCMI_PROTOCOL_ATTRIBUTES command
+  * @status:	SCMI command status
+  * @attributes:	Attributes of the clock protocol, mainly number of clocks exposed
+  */
+ struct scmi_clk_protocol_attr_out {
+ 	s32 status;
+ 	u32 attributes;
+@@ -817,13 +817,13 @@ struct scmi_clk_state_in {
+  */
+ struct scmi_clk_state_out {
+ 	s32 status;
+ };
+ 
+ /**
+- * struct scmi_clk_state_in - Message payload for CLOCK_RATE_GET command
++ * struct scmi_clk_rate_get_in - Message payload for CLOCK_RATE_GET command
+  * @clock_id:	SCMI clock ID
+  * @attributes:	Attributes of the targets clock state
+  */
+ struct scmi_clk_rate_get_in {
+ 	u32 clock_id;
+ };
+@@ -838,13 +838,13 @@ struct scmi_clk_rate_get_out {
+ 	s32 status;
+ 	u32 rate_lsb;
+ 	u32 rate_msb;
+ };
+ 
+ /**
+- * struct scmi_clk_state_in - Message payload for CLOCK_RATE_SET command
++ * struct scmi_clk_rate_set_in - Message payload for CLOCK_RATE_SET command
+  * @flags:	Flags for the clock rate set request
+  * @clock_id:	SCMI clock ID
+  * @rate_lsb:	32bit LSB of the clock rate in Hertz
+  * @rate_msb:	32bit MSB of the clock rate in Hertz
+  */
+ struct scmi_clk_rate_set_in {
+@@ -860,13 +860,13 @@ struct scmi_clk_rate_set_in {
+  */
+ struct scmi_clk_rate_set_out {
+ 	s32 status;
+ };
+ 
+ /**
+- * struct scmi_clk_parent_state_in - Message payload for CLOCK_PARENT_SET command
++ * struct scmi_clk_parent_set_in - Message payload for CLOCK_PARENT_SET command
+  * @clock_id:		SCMI clock ID
+  * @parent_clk:		SCMI clock ID
+  */
+ struct scmi_clk_parent_set_in {
+ 	u32 clock_id;
+ 	u32 parent_clk;
+@@ -878,19 +878,21 @@ struct scmi_clk_parent_set_in {
+  */
+ struct scmi_clk_parent_set_out {
+ 	s32 status;
+ };
+ 
+ /**
++ * struct scmi_clk_get_permissions_in - Message payload for CLOCK_GET_PERMISSIONS command
+  * @clock_id:	Identifier for the clock device.
+  */
+ struct scmi_clk_get_permissions_in {
+ 	u32 clock_id;
+ };
+ 
+ /**
++ * struct scmi_clk_get_permissions_out - Response payload for CLOCK_GET_PERMISSIONS command
+  * @status:	Negative 32-bit integers are used to return error status codes.
+  * @permissions:	Bit[31] Clock state control, Bit[30] Clock parent control,
+  * Bit[29] Clock rate control, Bits[28:0] Reserved, must be zero.
+  */
+ struct scmi_clk_get_permissions_out {
+ 	s32 status;
 -- 
 2.51.0
 
