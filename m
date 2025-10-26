@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83309CCF9E5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:44:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB718CCF9E5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:44:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2228183849;
-	Sun, 26 Oct 2025 16:44:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 63089838CC;
+	Sun, 26 Oct 2025 16:44:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="WF1MMiAy";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BwWMLrvW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D335838BB; Sun, 26 Oct 2025 16:44:27 +0100 (CET)
-Received: from mail-m49216.qiye.163.com (mail-m49216.qiye.163.com
- [45.254.49.216])
+ id 0865A838D2; Sun, 26 Oct 2025 16:44:36 +0100 (CET)
+Received: from mail-m49224.qiye.163.com (mail-m49224.qiye.163.com
+ [45.254.49.224])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98D1D832AD
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:44:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 012D4832AD
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:44:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [124.72.36.208])
- by smtp.qiye.163.com (Hmail) with ESMTP id 273748fce;
- Sun, 26 Oct 2025 23:44:21 +0800 (GMT+08:00)
-Message-ID: <2de44fc6-e487-49fc-9082-a870428dece4@rock-chips.com>
-Date: Sun, 26 Oct 2025 23:44:20 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 273748fd8;
+ Sun, 26 Oct 2025 23:44:30 +0800 (GMT+08:00)
+Message-ID: <51f155a5-32db-48c0-bd68-2bf810196f71@rock-chips.com>
+Date: Sun, 26 Oct 2025 23:44:30 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 03/18] rockchip: odroid-go2: Remove incorrect
- re-defined spi0 alias
+Subject: Re: [PATCH v2 04/18] rockchip: odroid-go2: Remove u-boot.dtsi props
+ already defined
 To: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner
  <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250831165001.2749711-1-jonas@kwiboo.se>
- <20250831165001.2749711-4-jonas@kwiboo.se>
+ <20250831165001.2749711-5-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250831165001.2749711-4-jonas@kwiboo.se>
+In-Reply-To: <20250831165001.2749711-5-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a2131286003afkunm16b3f9c24d2e4d
+X-HM-Tid: 0a9a21314ed003afkunmd11f64224d2f13
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZGE9IVktIGhodQh5CShpDH1YVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaHhlPVkJPHh8dGEtCHh1MTlYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUtDWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=WF1MMiAyEtgu03KBEJRJVWRZ7v8ktAE8+GPTS/Z7x84yzp+NAqRjoMqdGmQ0IftbBvN2gT9PYgA5k1t9PbpGF5IFNYEfIuXGb3U9KcQJb82cQE9f5g6hANEz2oQo+KVZWHKBkbIUUQ23L4PTlC4vxL/4VCqzM0ZiBJ4bdT0OYYg=;
+ b=BwWMLrvWnM9BkzuBV/KeBLWC2u/L4yyBMHtkVw6epbAhQc1Irfy2ry4BNeJ3Ar3/qJYEcdKr7kAluaU8zuucLMUikRvk92pv5wBMzx+Owbc+0qemFHkc4brzj8W7ybvmKb9J7l0F64XvgDVwZ0mL1E0MAGe9NBBUamJ8y1q7iRE=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=NEmWzhL0UJ028mu26I0mGoT+ILKpopxB5KxHsxDfnq0=;
+ bh=dyPoSVi+tHsIoIPBTt+K1of9c2x7UWecYYQX6AWBD4s=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,14 +75,10 @@ X-Virus-Status: Clean
 
 
 On 2025/9/1 00:49, Jonas Karlman wrote:
-> The alias spi0 is incorrectly being re-defined in board u-boot.dtsi to
-> the SPI flash controller instead of the actual spi0 controller.
+> DTs from dts/upstream already contain aliases for i2c, mmc and serial.
 >
-> SPI flash support is currently not working on odroid-go2 due to missing
-> Kconfig options and other required device tree changes.
->
-> Remove the re-defined alias for spi0 to allow use of the real spi0,
-> proper SPI flash support is introduced in a later patch.
+> Remove the aliases and status=okay that are already defined in upstream
+> board or SoC DT.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -90,23 +86,46 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
-> v2: New patch, split from next patch
+> v2: Split out unrelated spi0 alias change into separate patch
 > ---
->   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 1 -
->   1 file changed, 1 deletion(-)
+>   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 10 ----------
+>   1 file changed, 10 deletions(-)
 >
 > diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> index f37daa893c79..38778d1aa6cf 100644
+> index 38778d1aa6cf..df21747fad78 100644
 > --- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
 > +++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> @@ -16,7 +16,6 @@
->   		mmc0 = &sdmmc;
->   		serial1 = &uart1;
->   		serial2 = &uart2;
-> -		spi0 = &sfc;
+> @@ -10,14 +10,6 @@
+>   		u-boot,spl-boot-order = &sdmmc;
 >   	};
 >   
+> -	aliases {
+> -		i2c0 = &i2c0;
+> -		i2c1 = &i2c1;
+> -		mmc0 = &sdmmc;
+> -		serial1 = &uart1;
+> -		serial2 = &uart2;
+> -	};
+> -
 >   	dmc {
+>   		bootph-all;
+>   		compatible = "rockchip,px30-dmc", "syscon";
+> @@ -27,7 +19,6 @@
+>   	rng: rng@ff0b0000 {
+>   		compatible = "rockchip,cryptov2-rng";
+>   		reg = <0x0 0xff0b0000 0x0 0x4000>;
+> -		status = "okay";
+>   	};
+>   };
+>   
+> @@ -84,7 +75,6 @@
+>   
+>   &saradc {
+>   	bootph-all;
+> -	status = "okay";
+>   };
+>   
+>   &sdmmc {
 
 -- 
 Thanks & Best regards,
