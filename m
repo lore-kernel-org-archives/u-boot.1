@@ -4,85 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C755CCF9E5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 01:07:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78990CCF9E5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 01:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 42F9D82C7F;
+	by phobos.denx.de (Postfix) with ESMTP id 85174837E4;
 	Sun, 26 Oct 2025 02:07:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kaXgi4v9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PMUF0xx6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49FCB83826; Sun, 26 Oct 2025 02:07:06 +0100 (CET)
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
+ id 5B3F283623; Sun, 26 Oct 2025 02:07:06 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC0EB83623
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 02:07:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB248836B4
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 02:07:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-44588e94decso1749062b6e.0
- for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 18:07:02 -0700 (PDT)
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-44db1c1056cso118919b6e.0
+ for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 18:07:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761440821; x=1762045621; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761440822; x=1762045622; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9iGQJL7gv2BvCrANXlEdK1eCe+aDtdcOELULvMaF/fk=;
- b=kaXgi4v94SpdcAAWAfyPM964uVOKZ8r7+My1ybXm0TaSb23gO97YZmCfs4TmTkrPCH
- kkVFFEZazK630fXaY4Z6EOALuD8tcV2zldhn2u4IK5x8ft4YyynlbMmZv2/QiEBQULpD
- XYE8JLvVw8dpH79xLlU5vyQZ10j+re9BSinxZNVUKde0GyQ4Hf0si08+meQwW36furFb
- 2E3Fg0/7gG9r3Z4bkt27donh2sSIxQO+ieb6l9CU8WGFAoizE2xQZ2Vih4S2pC8Vkt/p
- PVqvohGtFYCXd8Or7JwIu8ic3rlLfkoGjg4Oo8bJA9Pi/zweWSXA/554XkfN/ci6Gnsh
- AnOw==
+ bh=ztW3EY69qYXS24WCkvLNDH4CYmAZ497Emxh6i5o/224=;
+ b=PMUF0xx6TOjITXqdN75MGYgdJEpJ37Ir/1h7k+XU8kJIN5rZMdLcecKqhyt40MXwZ5
+ p+XvXbjQOWZtPsww09+MBjBOlDYJ40dry7+Zk67h4re7Gk3bFj3gnBFVRoCaqqVUV++s
+ PpkhNMreBtJpeb2/sY/3CT0K1X974ac/MnGcJrrTkEDh8Dc6/aEC/FcAZ4nosh7oCdIz
+ vjRN1Zs2knxlq/g1wg5SodsKb2yOfk6N8MTPbRbVkJPn0oCTR2cJYU1L6WDWWVvqf66y
+ hqmcYpdqg3G+ezZ4EqwMIT37nXKI+cAbsPvAmwQuIHBT4lkT0Ae4AmYYrm7nNZbh0GXN
+ Iocg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761440821; x=1762045621;
+ d=1e100.net; s=20230601; t=1761440822; x=1762045622;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9iGQJL7gv2BvCrANXlEdK1eCe+aDtdcOELULvMaF/fk=;
- b=cOZlKCZk2Q58EE2RTPCSrf6cbHqzC3vOCWDcTlWvfrr58I6cCtdLSjj54bb5zHMhGQ
- Iqos//mKbntVNg9YbbgwiZ/yOhEaWAE8NakPfQqhWojZctyFBG/XIRMJ1XGNIbN2Qo3k
- imZuJ+nBLaYZMABefp864nQoL7w4BdhsywQayMgNYBKEZ68miTNZy0VePSZGnP2kw1ve
- sjLVpjy3DDeNS1OwC+RgEYGym3fcDO0z6o35gk1k6wLc01f2zagU8OMcl2ewRUNo/irn
- fPzkOwGZ0DLNwMtPDqEJKOLGMmBzkMHlcTEz8/KFY2ylFVM0E/pTjZyrE4tyqg1OGBQ6
- kDug==
+ bh=ztW3EY69qYXS24WCkvLNDH4CYmAZ497Emxh6i5o/224=;
+ b=K6WdB5kxEckkEVWNUtV0a5ncGPqDSBL7hDHUFZRzbIMQLFReD29r9QSQuJumUnHCov
+ KLGTtC8v3UTbgyfNsCxbU7fQ5lH9Gq3xrZ1fpQGpFpTBKmMdXLdQ5zYvHLI78zE22R+7
+ f0XyJjtV8HtHjbGLWSVrbvDX+p3RzLk5vdbRDnngtw0goPMgZfYqsbsXMSYt4M/8Pkm8
+ mboyKxPuGK7R9hyUSy2OOqyGrtTnFTEzI0WslH/eUlK2ZeZHQojZSrbfCimYyFXccQ15
+ QxBFtIkXJJ2KDBgv2jHACGQpqEYpFoZdRQs3Ns3rOvIveiCIpcpzrQfXMhIk0gwzrd8P
+ xOhg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX8c7hpdZwXPcRZ6+ba4Vv9rumvupUvQOrInmAxCRn8Q79Fzsyy3umPpXBtTQxeCv6GN0Iavuc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxyhYHyorUQi14loUH3ZvZ2oYNx1ckexLM39Xbk1bANN7OvR7U/
- xb5jqeAhynGBcBOtfei/ein9uVfVwYjEgdqIvJM99TfQ+++FuKclnTQQ8QhdNxUKI7o=
-X-Gm-Gg: ASbGncsj8JlDHTzfZzbgiLc5wr8nyeYnBV60N7gki1sRU/dLWs7Tltk/Ia9/Ry+TMJX
- XguHRzc5dGs5az+3DLfGqXsvyMylrAmm2sn0rd0IVBygEcfxomBMJASyTZxl0sOGUX1blxGAc1a
- 2ZOtPUcablz/0SywYGS4KHVM8Cr+o45/8iJLDBR7vvxQv7TTIEkGk6sddyoHr2cPfNmyoEeGD/8
- Pb7tuYes5QZyhaqdpuZMJ3kMQk5YAXja/M/WfbTPg6CCDMgUgfXDrmjNppP+nK/j7UrTBFLLCmJ
- PcZMijDyuP5gOw5Wcf7Aip1hIxGqFGosH3Hl+08w+JA0ZnZxzEGPQKZrGPmNWJxGyl+vfiiB7hy
- ulYeWFzSuu1YRcWzW1DgctD34eMkxTi7uR4xCXCPlGv5tTmPZ5xhWsP1A4M7JDDrYHIh//ab2Ap
- klM4gPjOcvhA==
-X-Google-Smtp-Source: AGHT+IGiTcw+DpAMN3hUhhbOS3GpZ/IJtXYkRBdCfQW/lqmcYFkJk7hcr4/yitdFBpDklzjbW7696g==
-X-Received: by 2002:a05:6808:c389:b0:44d:b1e4:2259 with SMTP id
- 5614622812f47-44db1e42a4amr308090b6e.14.1761440821455; 
- Sat, 25 Oct 2025 18:07:01 -0700 (PDT)
+ AJvYcCXiPOmvvZjkj3vENX5CLpau8WdjnsjG9hVATJmBtRvS17IJ4scTKdtGD24UEjC6rnSoq1yPVCk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxChQArte/XNkbIvW7LJ2BKs/AdCrs2K1jdf+9HcYy59R6nP4xQ
+ Kty/3VANXrVNefmyj6rFQw2iMwYFP81iwxhLTfT6a2VLEuZyxluElwg7XLKGMMWkZPQ=
+X-Gm-Gg: ASbGncvioTpC/MqIeHXACSic95E+iRGpeDBG5LSdyV7wrCiNxpiCAWEPOY0TC1wIhIg
+ V0KyqfKmODOiYkXx3UKabSIGD9g+pdxv+/OEbIO9k+MELrCwaf3zyItFpY/YkRoxG23AAj8KHuv
+ fLGqIsSSrTXhtr8eMd3sbMCXHSfbYR1LEGXUhSTk6+G3TMvg5X3pPz6CGRSJnHvPhfXD8asn+dq
+ eVXVjuYnoM9HpWAg4lfsoIlbk/ZO/B9sD8g7wjVZ2wKOOLwWQBpS+qOtVNGKDK+yOKYnnxmRzZt
+ dAcjGWsdJBcUiG3TeQwx3lL8O3nMttVEcNWD1n9eusr1fWFSHiSfdRrdF5izjsfy+1mtlh9etEa
+ 3+UY3ecjV6B1Qk1d9lnD1a+ogJkJ4rBu3aqck7+dpOM7iw41XG+0oVhN/jZOaf3kT25IEYGxFH0
+ PS636MyV4ku7hQkO26L8AmjEi/CRR96Pw=
+X-Google-Smtp-Source: AGHT+IEiunuctx1cJ5BBrQ1pJZR+N/N07U5enyu84aH8KjOUf6HsM2Y61gZADnkpKMs80tuDNVDRyQ==
+X-Received: by 2002:a05:6808:152c:b0:43b:8b5e:d127 with SMTP id
+ 5614622812f47-44d93d96507mr3558544b6e.13.1761440822405; 
+ Sat, 25 Oct 2025 18:07:02 -0700 (PDT)
 Received: from localhost ([2605:a601:81da:7100:264b:feff:fe59:d7f7])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44da3e59a15sm852685b6e.8.2025.10.25.18.07.00
+ 5614622812f47-44da3e8cf1csm846695b6e.16.2025.10.25.18.07.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Oct 2025 18:07:01 -0700 (PDT)
+ Sat, 25 Oct 2025 18:07:02 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Minkyu Kang <mk7.kang@samsung.com>, Peng Fan <peng.fan@nxp.com>,
  Tom Rini <trini@konsulko.com>, Jaehoon Chung <jh80.chung@samsung.com>
 Cc: Kaustabh Chakraborty <kauschluss@disroot.org>,
  Simon Glass <sjg@chromium.org>, Anand Moon <linux.amoon@gmail.com>,
  Lukas Timmermann <uboot@timmermann.space>, u-boot@lists.denx.de
-Subject: [PATCH 2/6] mmc: dw_mmc: Do not export dwmci_send_cmd() and
- dwmci_set_ios()
-Date: Sat, 25 Oct 2025 20:06:54 -0500
-Message-Id: <20251026010658.19271-3-semen.protsenko@linaro.org>
+Subject: [PATCH 3/6] mmc: exynos_dw_mmc: Improve coding style
+Date: Sat, 25 Oct 2025 20:06:55 -0500
+Message-Id: <20251026010658.19271-4-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251026010658.19271-1-semen.protsenko@linaro.org>
 References: <20251026010658.19271-1-semen.protsenko@linaro.org>
@@ -104,69 +103,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do not over-expose the private dw_mmc API. The glue layer drivers at
-this point shouldn't be aware and shouldn't use the generic
-dwmci_send_cmd() and dwmci_set_ios() functions. Making those functions
-public causes a "leaky abstraction" issue. It clutters the public
-interface of generic dw_mmc driver and possibly leads to improper usage
-of those functions, so it's a bad design.
-
-If struct dm_dwmci_ops has to be extended, do so by copying it first
-(like it's done for example in snps_dw_mmc driver). That also makes sure
-the future changes to struct dm_dwmci_ops in dw_mmc driver will be
-automatically reflected in all extended copies, and avoid code
-duplication.
-
-This effectively reverts commit ef3b16bb8e73 ("mmc: dw_mmc: export
-dwmci_send_cmd() and dwmci_set_ios()").
+Exynos DW MMC glue layer driver have seen a lot of changes recently.
+Stabilize the coding style.
 
 No functional change.
 
-Fixes: ef3b16bb8e73 ("mmc: dw_mmc: export dwmci_send_cmd() and dwmci_set_ios()")
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/mmc/dw_mmc.c | 6 +++---
- include/dwmmc.h      | 3 ---
- 2 files changed, 3 insertions(+), 6 deletions(-)
+ drivers/mmc/exynos_dw_mmc.c | 34 ++++++++++++++++++++--------------
+ 1 file changed, 20 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-index f3c0cc5cd8e5..d9c05b223d5f 100644
---- a/drivers/mmc/dw_mmc.c
-+++ b/drivers/mmc/dw_mmc.c
-@@ -490,8 +490,8 @@ static int dwmci_send_cmd_common(struct dwmci_host *host, struct mmc_cmd *cmd,
- }
+diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
+index 190c6349380d..51867a552495 100644
+--- a/drivers/mmc/exynos_dw_mmc.c
++++ b/drivers/mmc/exynos_dw_mmc.c
+@@ -26,11 +26,16 @@
+ #define EXYNOS4412_FIXED_CIU_CLK_DIV	4
+ 
+ /* CLKSEL register defines */
+-#define CLKSEL_CCLK_SAMPLE(x)	(((x) & 7) << 0)
+-#define CLKSEL_UP_SAMPLE(x, y)	(((x) & ~CLKSEL_CCLK_SAMPLE(7)) |\
++#define CLKSEL_CCLK_SAMPLE(x)		(((x) & 7) << 0)
++#define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
+ 					 CLKSEL_CCLK_SAMPLE(y))
+ 
+-/* Quirks */
++/**
++ * DOC: Quirk flags for different Exynos DW MMC blocks
++ *
++ * %DWMCI_QUIRK_DISABLE_SMU: DW MMC block has Security Management Unit (SMU)
++ * which has to be configured in non-encryption mode during driver's init.
++ */
+ #define DWMCI_QUIRK_DISABLE_SMU		BIT(0)
  
  #ifdef CONFIG_DM_MMC
--int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
--		   struct mmc_data *data)
-+static int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
-+			  struct mmc_data *data)
- {
- 	struct mmc *mmc = mmc_get_mmc_dev(dev);
- #else
-@@ -597,7 +597,7 @@ static int dwmci_setup_bus(struct dwmci_host *host, u32 freq)
- }
+@@ -183,9 +188,11 @@ static unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
+ 	int err;
  
- #ifdef CONFIG_DM_MMC
--int dwmci_set_ios(struct udevice *dev)
-+static int dwmci_set_ios(struct udevice *dev)
+ 	/* Should be double rate for DDR or HS mode */
+-	if ((host->mmc->selected_mode == MMC_DDR_52 && host->mmc->bus_width == 8) ||
+-	    host->mmc->selected_mode == MMC_HS_400)
++	if ((host->mmc->selected_mode == MMC_DDR_52 &&
++	     host->mmc->bus_width == 8) ||
++	    host->mmc->selected_mode == MMC_HS_400) {
+ 		freq *= 2;
++	}
+ 
+ 	clk_div = exynos_dwmmc_get_ciu_div(host);
+ 	err = exynos_dwmmc_set_sclk(host, freq * clk_div);
+@@ -302,7 +309,7 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
+ #if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
+ static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
  {
- 	struct mmc *mmc = mmc_get_mmc_dev(dev);
- #else
-diff --git a/include/dwmmc.h b/include/dwmmc.h
-index 47e3220985e9..7e1a66465181 100644
---- a/include/dwmmc.h
-+++ b/include/dwmmc.h
-@@ -338,9 +338,6 @@ int add_dwmci(struct dwmci_host *host, u32 max_clk, u32 min_clk);
- #ifdef CONFIG_DM_MMC
- /* Export the operations to drivers */
- int dwmci_probe(struct udevice *dev);
--int dwmci_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
--		   struct mmc_data *data);
--int dwmci_set_ios(struct udevice *dev);
- extern const struct dm_mmc_ops dm_dwmci_ops;
+-	u8 i;
++	int i;
+ 
+ 	for (i = 0; i < 8; i++) {
+ 		candidates = (candidates >> 1) | (candidates << 7); /* ror */
+@@ -317,8 +324,8 @@ static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
+ 	}
+ 
+ 	/*
+-	 * If no valid clock sample values are found, use the first
+-	 * canditate bit for clock sample value.
++	 * If no valid clock sample values are found, use the first candidate
++	 * bit for clock sample value.
+ 	 */
+ 	for (i = 0; i < 8; i++) {
+ 		candidates = (candidates >> 1) | (candidates << 7); /* ror */
+@@ -344,7 +351,7 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+ 	do {
+ 		dwmci_writel(host, DWMCI_TMOUT, ~0);
+ 
+-		/* move to the next clksmpl */
++		/* Move to the next clksmpl */
+ 		smpl = (clksel + 1) & 0x7;
+ 		clksel = CLKSEL_UP_SAMPLE(clksel, smpl);
+ 		dwmci_writel(host, priv->chip->clksel, clksel);
+@@ -360,12 +367,11 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
+ 		return ret;
+ 	}
+ 
+-	dwmci_writel(host, priv->chip->clksel,
+-		     CLKSEL_UP_SAMPLE(clksel, ret));
++	dwmci_writel(host, priv->chip->clksel, CLKSEL_UP_SAMPLE(clksel, ret));
+ 
+ 	return 0;
+ }
+-#endif
++#endif /* CONFIG_MMC_SUPPORTS_TUNING */
+ 
+ struct dm_mmc_ops exynos_dwmmc_ops;
+ 
+@@ -396,7 +402,7 @@ static int exynos_dwmmc_probe(struct udevice *dev)
+ 	flag = host->buswidth == 8 ? PINMUX_FLAG_8BIT_MODE : PINMUX_FLAG_NONE;
+ 	err = exynos_pinmux_config(host->dev_id, flag);
+ 	if (err) {
+-		printf("DWMMC%d not configure\n", host->dev_index);
++		printf("DWMMC%d not configured\n", host->dev_index);
+ 		return err;
+ 	}
  #endif
- 
+@@ -499,4 +505,4 @@ U_BOOT_DRIVER(exynos_dwmmc_drv) = {
+ 	.priv_auto	= sizeof(struct dwmci_exynos_priv_data),
+ 	.plat_auto	= sizeof(struct exynos_mmc_plat),
+ };
+-#endif
++#endif /* CONFIG_DM_MMC */
 -- 
 2.39.5
 
