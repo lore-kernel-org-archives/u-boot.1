@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 467ACCCD1A5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 14:27:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF1D5CCD1A5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 14:27:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3A4583623;
-	Sun, 26 Oct 2025 15:27:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07B14832AD;
+	Sun, 26 Oct 2025 15:27:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OXMI2GX5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gw+KbtoW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ABCB836D1; Sun, 26 Oct 2025 15:27:19 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 3373C82E34; Sun, 26 Oct 2025 15:27:22 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AEF382E34
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 15:27:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 55575836F0
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 15:27:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-b6d4e44c54aso665254766b.2
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 07:27:17 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-b6d78062424so613710266b.1
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 07:27:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1761488837; x=1762093637; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1761488840; x=1762093640; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=g4R0v++ClCWfulUsKiMDcX3bR/iNd05TYb4SnN9OoNU=;
- b=OXMI2GX541Jgg5p538miPrIjXAkISwAcDHkQ3+9jQwfhll4+Y7dHik1hWaCDyOc4ou
- T813Vd7Kgm6xU+K4VtJG1AC3ZmG5NutcfjcWpNOKXimbFJcAqIHHftkVplJybDrfJ6Fa
- W8PM1d6un4ePDVW6yad09l8KbXKtRRHQcajC8=
+ bh=xhf/xWxE5dzKuGE0TqXaiuXVHCAftWwHU3uMNJKq8Ic=;
+ b=Gw+KbtoWkABSUgS4JubgxgFXyKe68Iaum0LAHVghxU9PdEBDYEpCk6UAPAXEcCu+WG
+ ZhI9612lhSvIgb3WVleYYuAxOPrTO7/y5Y3f4rxK7Wx0nh/DlRLw1D43ZQYmsCbRnHW+
+ plE7oXdOcGTt8REtE3zTXZA/IhC2TBtxKSJdo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761488837; x=1762093637;
+ d=1e100.net; s=20230601; t=1761488840; x=1762093640;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=g4R0v++ClCWfulUsKiMDcX3bR/iNd05TYb4SnN9OoNU=;
- b=EGXGGMBuh5wkLB2MxEryCH7GM0sA64kshm6zJSwqsTIW7MA4l7nUoiXtx37YJkxtj1
- yxTMSXUg7EH+r7KcaEfpUhaydAg4kXdvqNobPQNKQeD56Xpr5kHYVf/UJGbSL9knsEgY
- 83VRPGnX+a0c0ynxd633yHVO2x4C6yS3f6ou6O9sz2GV2W6KhfW1E2OcxiJwpX52VFmS
- PaHDjFKAlYDKyA1figtiEtDmAioUkmS5ErGCHxUdbXpC4dAzeUcoTLTEUpPC0KUXV30K
- 5mt3uZdgFyaRST2UtOtqcV3ST2K72GmVxh3o2kZmtp2s+kgBTV3nHd5U/Vn8TtDs7Yg0
- bEhg==
-X-Gm-Message-State: AOJu0YylZbj4p3WLXfWq72MWUTvVaiIBubgB64BLyBiuN8qyHMyBfnb3
- tx5GZA06WAeo5gHbXoGj7v7nVuFciBtpm2vfMKZCJy6Fs615zYqHwh2IB5Wer2CEtVE/BGpU63X
- yNriLfDgmE0arprigt8fVDJfe0CoQgjc5AcKALlaP
-X-Gm-Gg: ASbGncvUgMmx0tZLG4WQfVgsGEou1KbQDjhVGJdClctUSOScXylKfiTdANBUGk1rESP
- axDgCMejYNjwabcYpy50xIb7NG4M4TiYee9+i/Y0WA3e2ouIihBtfnawouy8LP9Wc+Z51mIwLMK
- 0xKC3tPyAe9ZcUBI97YxF162lnbUEdgzIyx8dQzSUz1UnL7+3VdKmCBPdxmEfj2AGDQbjn9978r
- YAOAa8DMMj1l7mxpcnlT4XjrQVieTM/48P0ddCNgbJh/FwyPMSinWGZXzucOvxVb4/0k1E=
-X-Google-Smtp-Source: AGHT+IEeLpsFZ996Qj40T6KAs6oues+U+TtZBwb5hVJRooHVKQIn62wEbpljzvMypXFheZYgdJoLir3gnffwLwRqZig=
-X-Received: by 2002:a17:907:da2:b0:b6d:7573:ccf2 with SMTP id
- a640c23a62f3a-b6d7573ceffmr730927366b.62.1761488836966; Sun, 26 Oct 2025
- 07:27:16 -0700 (PDT)
+ bh=xhf/xWxE5dzKuGE0TqXaiuXVHCAftWwHU3uMNJKq8Ic=;
+ b=b5Mu+3jrsKkcE2oYEe7F4IN9jl+qgBSBfK73S4H6ZSTh2ArXg4ZdnWSyFyfXGlgrZ5
+ DJHgznJmOVKpSojwIAmC2jX+chY77KYRLcIg0iFw/xBeh04W39lDLPEkQH8sOr7nJtUz
+ pPUg/ltEEpJ0PEZ7Gof8yji3TNGDA9qlIqWGn6TgR2UktuZ7+CyJGVYxBdmSQdH90E52
+ 5rIeq/k5BSht8TdGpcexRSM/vXzZSp6LqQlwIbFj9n1q70obUPZBjMA4Q1WFWFap2Se+
+ DOnuf03vCiVSjKUpFShFixm6PPIeR/j9wMUMmFbbS88c1FmRAvm1utRN8cG13B6iA6GQ
+ S3Rw==
+X-Gm-Message-State: AOJu0YyGCaLtkp7QwwpAKitOCyeu1YUENIUlg50CVQ274kE7XNPO9QPa
+ qyNl5nbi26Ro7hUbhOWOHPF5Wg/I2qAOHYs0JR0XUplewqno9MmrCSqGvjCtwQSvK28u+45Cj4G
+ oANay3wMzYVvrgOhmjDAlFuOWO8u2u8/q39J/J6yeodaQDHoJFyUMOQ==
+X-Gm-Gg: ASbGncuXGNcE7Y+sHPsV95rkh0AlM4YfZvlii/pxXrUGKkLESEW6SsvRx6XEwJlhzuJ
+ UycpsvyYQBWgOo1LBFAuifkb4/kJqaoe32E4CA1e2FWKsgsJEP8OeZ8xmgmuu8Boe4MntbQbULn
+ GaejSX8Kr+nA8rN+3O28aWWg0ifaPaV3Ece9oyxARPOdfdGGd5KJBbSb58jPArHZS/TG9EfSE6f
+ rwiqDrTIHAARr4RJHzVdDku91NKHIXzB9LDFXK6sRn7fel656benqZNG2yR9RTU0KXiSEU=
+X-Google-Smtp-Source: AGHT+IF29V8nUJb2sAEd19ri9IhHJxrUni0Cf+NhwaBIooyyKgi2HSLnQFw/pz58GvkNoXDHtH6fVshaWVPxO95BEOw=
+X-Received: by 2002:a17:906:c113:b0:afe:764d:6b22 with SMTP id
+ a640c23a62f3a-b6472d5bc0cmr3621062466b.9.1761488839724; Sun, 26 Oct 2025
+ 07:27:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251024151219.100970-1-wolfgang.wallner@br-automation.com>
- <20251024151219.100970-3-wolfgang.wallner@br-automation.com>
-In-Reply-To: <20251024151219.100970-3-wolfgang.wallner@br-automation.com>
+ <20251024151219.100970-5-wolfgang.wallner@br-automation.com>
+In-Reply-To: <20251024151219.100970-5-wolfgang.wallner@br-automation.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 26 Oct 2025 14:26:59 +0000
-X-Gm-Features: AWmQ_blkc9dAGBzS3cv__yxmAPPrXO6AiaCfZ1D7kaU64gV-QBr4SeplcktEKew
-Message-ID: <CAFLszTjTpqPVXOhbjL7wur=nLw6t6NzY8YLs+rRB+NUEEHqWqw@mail.gmail.com>
-Subject: Re: [PATCH 2/9] doc: develop: Change formatting to make binman doc
- more readable
+Date: Sun, 26 Oct 2025 14:27:01 +0000
+X-Gm-Features: AWmQ_blRw-AVXG8-GrZWO1TsFjcjonp8iX8MP7__39VHhPz_pIrNIfF5Ox0GzeM
+Message-ID: <CAFLszTh5ERw=ouRFwQ_DyDV8wgLDL7q5afynqwxu7M3OdKuEYw@mail.gmail.com>
+Subject: Re: [PATCH 4/9] boot: kconfig: Fix typos
 To: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Cc: u-boot@lists.denx.de, 
  Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bryan Brattlof <bb@ti.com>, 
- Lothar Rubusch <l.rubusch@gmail.com>, Tom Rini <trini@konsulko.com>,
- Yannic Moog <y.moog@phytec.de>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martin Schwan <m.schwan@phytec.de>, 
+ Masahiro Yamada <yamada.masahiro@socionext.com>, 
+ Mattijs Korpershoek <mkorpershoek@kernel.org>,
+ Michal Simek <michal.simek@amd.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,14 +96,12 @@ X-Virus-Status: Clean
 On Fri, 24 Oct 2025 at 16:12, Wolfgang Wallner
 <wolfgang.wallner@br-automation.com> wrote:
 >
-> Change the formatting of binman.rst so that the compiled HTML output
-> becomes more readable. Changes include enumerations and the escaping of
-> arguments starting with a double dash (e.g. --debug).
+> Fix typos in boot/Kconfig.
 >
 > Signed-off-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 > ---
 >
->  tools/binman/binman.rst | 39 ++++++++++++++++++++++-----------------
->  1 file changed, 22 insertions(+), 17 deletions(-)
+>  boot/Kconfig | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
