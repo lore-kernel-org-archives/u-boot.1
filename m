@@ -4,86 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16024CCD193
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 06:06:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01848CCF9E5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 09:56:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D90983045;
-	Sun, 26 Oct 2025 07:06:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 1EE8C83045;
+	Sun, 26 Oct 2025 10:56:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P8cmLTYl";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="k7MmP9Es";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CE1F82C7F; Sun, 26 Oct 2025 07:06:07 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9ADF683623; Sun, 26 Oct 2025 10:56:50 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DB2F836B2
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 07:06:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D300C82E34
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 10:56:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-b4f323cf89bso838495566b.2
- for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 23:06:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761458765; x=1762063565; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EjHxDnFq6hWj06vQPtexXZ2zxvyOAy7rfygMeOh2J9Y=;
- b=P8cmLTYlRl8HdlDdEJ8K40K9yY42OkkVYypNEz5LveH32Cngq09oDaeBF8Oy+H98CX
- Wf4E6d+HQHMGeReswjFGrbpPeWBXliKUIgLsAQNzGolQOU9FZ767aAMtoHx3UYs4LnOL
- K9sQfmtd5wH/MH4PXfFjkLCsViDIuWkYvvgnrDdw3CT+9RemlULurkBE+udiNK1wjGN2
- 2HW12JU97keVhFsNIYFDkp9Wj4dRo4zVTBibaM2JBhUvyjWf/UqRZAKGVBJt1Yu7BS6p
- ixfEUvdPNGvpHI2kmbTV4Hy/bjkTfbMaD8PwSidlKhXZhXBT1JivKF+lqRSfU+8+bp8Y
- Z0gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761458765; x=1762063565;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EjHxDnFq6hWj06vQPtexXZ2zxvyOAy7rfygMeOh2J9Y=;
- b=MQ4GUz87u12s3ha7iUYJh2by1S3J8MxPJfsjZGlFW2Av2e1TulpCoCTHrmr1i9JgZt
- jxGSv/3ZidGvqMqtDUE9UrAkQdljle6HAD78oa6jA6/f70QyRxtCAari4ge/kxlRgqdc
- pwOAosolKVdhPXvPq5h/CPIcOXHedEGdvHgXSyzoxAfrKNGuMWIrENBAbfhzDLZgRrAc
- 1GHmlj6X/BvX4ihmxCyz2MjrgHvaUy0FemsU/Q89pCsEhhXU+lKcweoBv0BUN51pPkIx
- rtBKF2tglNsVCja8yIcoEG+d4jU9/+StLqw92I0tKAnMVbobck8f50bxhsSGCyobg5Fq
- xK+w==
-X-Gm-Message-State: AOJu0Yz7t+5orVaMUI3FArKuLTsatnqshvrRododDFcmiEfmMG9aoEm9
- QlAU5aRIuoOLL7u5R0/TN/wA1Ose6oTyqShuUs4zgjFrSuFNMgwaWohZlcBRCQ==
-X-Gm-Gg: ASbGncunqeBmq3u6pzAb2+k5n99RSXfEQUhNDOfMLvTCKL4J6va8DqtUzqByHnQ2utn
- KyBYYsPrfz6UFFytrBEc7nKBW0rSxySIYhcnmoQc4p0iASLQ5Pg0rwNEOdmCvRyTgQyZiOUcLQt
- OENzBMYZ5aFeEGLa5OrbOmVuXF0yNGERmsEIWntmltOoVMY06BTi8sZyb5wii5N+FQvJ1U9rKnP
- 2kRmMIvCWNRwZJgbr78/RFg+pflJAOz8Tv0BnDMQdGfqR1DKv6Rm/9DMObzzRYB0JO3KhSP4vYr
- 8Pc/fSoUI8ffQDRbLyXfqAcyCct4EjK/QLSy0NDD6COOrxZDKk6bFOTHvvhcG54K2P/ZhvauRMA
- 6DzY6VHJgKGfr5CV1A7Tb6GfdUlK3Z5BiZIgn3ZGH00vxCS+M5TK4XNctAcVC9ncdwtup9JTw5J
- +WZJjgtzBpDDoBrIo5/7tjFGymdjmjou/K
-X-Google-Smtp-Source: AGHT+IEahd1gKXwaxuSI6Ez7+8D1h3ePdjJtLLs2kMEhingxxl9Gc2tP5pgtxBmeiAugD3qcnIjxgg==
-X-Received: by 2002:a17:907:c11:b0:b32:8943:7884 with SMTP id
- a640c23a62f3a-b647500ee9amr3536092666b.45.1761458764756; 
- Sat, 25 Oct 2025 23:06:04 -0700 (PDT)
-Received: from jernej-laptop.localnet ([188.159.248.16])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-63e7ef6c13fsm3233783a12.7.2025.10.25.23.06.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Oct 2025 23:06:04 -0700 (PDT)
-From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Andre Przywara <andre.przywara@arm.com>
-Cc: linux-sunxi@lists.linux.dev, Chen-Yu Tsai <wens@kernel.org>
-Subject: Re: [PATCH 2/4] sunxi: switch Allwinner A80 boards to OF_UPSTREAM
-Date: Sun, 26 Oct 2025 07:06:03 +0100
-Message-ID: <6203838.lOV4Wx5bFT@jernej-laptop>
-In-Reply-To: <20251026012357.16773-3-andre.przywara@arm.com>
-References: <20251026012357.16773-1-andre.przywara@arm.com>
- <20251026012357.16773-3-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1761472601; x=1762077401; i=xypron.glpk@gmx.de;
+ bh=gif0qyZhSH7nB2piqpKI5By4v8iF8vYEjZCsG2Zu5t0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=k7MmP9EsrsQvd+byydW1VvsE6mJ9N85wO0CrqSGPi2OowNPjsMB9qLl2ELw4HClX
+ aanl9tIM/UBNNxGSmABp19G+GO6HXuyuW4Hswhd5WDApfnBNqjXusmcKEi8AIgqH3
+ HHEOARLQkkj+whIkWl9Sa4dEB4zfOK7QtH+pJt99QDOkf2piF0MnBSudtj6cXm93v
+ /ZQ0C9iSD0dxZPGmda+Mbzvtc2wRza2/IKfJJaeB4KLa7Kaj45uZXjqOGyRCYO3bJ
+ WXtfcbQalkzDXX1t7nNI0RTtfH+tWzLovTXtLW8rwneKZS2aImueSxY/uanHWRrc6
+ XTOqU4IYSXju55bD+g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [10.0.41.24] ([82.163.239.194]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MfHEJ-1uXIH418xv-00j70C; Sun, 26
+ Oct 2025 10:56:41 +0100
+Message-ID: <5587839a-6d4c-4c0e-ab2b-fe8249463198@gmx.de>
+Date: Sun, 26 Oct 2025 09:56:40 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: board: starfive: update jh7110 common description
+To: E Shattow <e@freeshell.de>
+Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
+References: <20251024083351.237033-1-e@freeshell.de>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20251024083351.237033-1-e@freeshell.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-Provags-ID: V03:K1:FUe4x63ampXIzXyJ2w2Z2ZLLyRt1KKWGkvl3XS3BsXC/S7XKEG1
+ gC8S+pgo2BN9/hFbenUD/e1OWtF3JP7whZAn71SkUCZLV74V+ZMGIWirjGULjoiuyorE7Fe
+ S/f1R1o4mj7kfQC6Fmx/1BW/SI3yEEHeoc76x+y72wvhmyk2MYWw51e+SX4Dn0PFnZ3X6fu
+ RdDTzQo6PCv0G6H5cNIdw==
+UI-OutboundReport: notjunk:1;M01:P0:EC/inHrdmiQ=;OsDX45pg+obZnyJP8KjCYg/JO+u
+ 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
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,30 +150,1632 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne nedelja, 26. oktober 2025 ob 02:23:54 Srednjeevropski standardni =C4=8D=
-as je Andre Przywara napisal(a):
-> In contrast to some other Allwinner SoCs, there is no difference between
-> the DTs for the Allwinner A80 SoCs (sun9i) between the U-Boot and the
-> Linux kernel repository.
+On 10/24/25 09:33, E Shattow wrote:
+> Updates to the JH7110 common descripton:
+> - add detailed overview of JH-7110 SoC and boot process
+> - drop descriptions of deprecated StarFive loader modes
+> - refresh build directions grouped with SPL debug advice
+> - reduce usage instructions into common methods shared by supported boar=
+ds
 >=20
-> Remove the old copies of the A80 related .dts and .dtsi files, and switch
-> most of sun9i boards over to use OF_UPSTREAM.
+> Redundant/deprecated sections of each board doc are dropped accordingly:
+> - deepcomputing fml13v01
+> - milk-v mars
+> - pine64 star64 (also add inclusion of JH7110 common description)
+> - visionfive2
 >=20
-> There is the Sunchip CX-A99 (family of) board(s) for which we don't have
-> a DT in the kernel tree. Keep the .dts file in the legacy U-Boot DT
-> directory, and let the board's defconfig opt out of OF_UPSTREAM.
+> Signed-off-by: E Shattow <e@freeshell.de>
+> ---
+> Preface to reviewers: SD Card / eMMC modes are officially deprecated in
+> the published StarFive JH-7110 Technical Reference Manual. The request
+> for supporting documentation was not answered in the upstream review
+
+The boot ROM was not changed. Ubuntu preinstalled images boot fine with=20
+U-Boot on SD-card. Booting from eMMC works fine too with a bit of=20
+patching of the first partition.
+
+It is unfortunate that StarFive is not inclined to document how booting=20
+from eMMC or SD-card works but this does not mean that it is irrelevant=20
+to U-Boot users and developers.
+
+Please, keep the existing information.
+
+> process and accordingly was rejected from the upstream process. This doe=
+s
+> not function anymore in U-Boot SPL to be loaded by BootROM with the
+> [RGPIO1:RGPIO0]=3D1 and [RGPIO1:RGPIO0]=3D2 configurations. Use of SD Ca=
+rd /
+> eMMC within U-Boot Main is not affected and functions normally. Aside, t=
+he
+> effort is begun to reverse-engineer the BootROM and gain an understandin=
+g
+> about what we would be supporting; for example the specific circumstance
+> of the XMODEM too-man-NAK bug in StarFive loader code, or introducing a
+> patch upstream to accommodate users that continue using deprecated modes=
+.
+> Meanwhile the documentation needs to be updated to reflect what is true
+> and verifiable now.
 >=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> The support enabled in starfive_visionfive2_defconfig for many methods o=
+f
+> data transfer is well-documented elsewhere and does not vary enough to b=
+e
+> repeated in the JH-7110 common description or that of the supported boar=
+d
+> documents. This will be deserving of a brief mention in a future update
+> so that users may easily ref link to the enabled methods in sections whe=
+re
+> they are documented. It is not clear if this will belong in the common
+> description or per-board so it is omitted here.
+>=20
+> There's some plainly wrong information remaining for the supported board=
+s
+> also deserving of correction in a future update.
+>=20
+> -E
+> ---
+>   doc/board/starfive/deepcomputing_fml13v01.rst |  32 -
+>   doc/board/starfive/jh7110_common.rst          | 597 +++++++++++++++---
+>   doc/board/starfive/milk-v_mars.rst            |  73 ---
+>   doc/board/starfive/pine64_star64.rst          |  77 +--
+>   doc/board/starfive/visionfive2.rst            | 449 -------------
+>   5 files changed, 511 insertions(+), 717 deletions(-)
+>=20
+> diff --git a/doc/board/starfive/deepcomputing_fml13v01.rst b/doc/board/s=
+tarfive/deepcomputing_fml13v01.rst
+> index 5d9612483b4..9777f4c6303 100644
+> --- a/doc/board/starfive/deepcomputing_fml13v01.rst
+> +++ b/doc/board/starfive/deepcomputing_fml13v01.rst
+> @@ -9,38 +9,6 @@ The DeepComputing Framework motherboard (FLM13V01) can =
+be combined with a
+>   U-Boot for the board uses the same binaries as the VisionFive 2 board.
+>   Currently only serial console output is supported by mainline U-Boot.
+>  =20
+> -Building
+> ---------
+> -
+> -Setup the cross compilation environment variable:
+> -
+> -.. code-block:: bash
+> -
+> -   export CROSS_COMPILE=3Driscv64-linux-gnu-
+> -
+> -The M-mode software OpenSBI provides the supervisor binary interface (S=
+BI) and
+> -is responsible for the switch to S-Mode. It is a prerequisite for build=
+ing
+> -U-Boot. Support for the JH7110 was introduced in OpenSBI 1.2. It is rec=
+ommended
+> -to use a current release.
+> -
+> -.. code-block:: bash
+> -
+> -    git clone https://github.com/riscv/opensbi.git
+> -    cd opensbi
+> -    make PLATFORM=3Dgeneric FW_TEXT_START=3D0x40000000 FW_OPTIONS=3D0
+> -    export OPENSBI=3D"$(pwd)/build/platform/generic/firmware/fw_dynamic=
+.bin"
+> -
+> -Now build U-Boot SPL and main U-Boot.
+> -
+> -.. code-block:: bash
+> -
+> -    cd <U-Boot-dir>
+> -    make starfive_visionfive2_defconfig
+> -    make
+> -
+> -This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out)=
+ as well
+> -as the FIT image (u-boot.itb) with OpenSBI, U-Boot, and device-trees.
+> -
+>   Device-tree selection
+>   ---------------------
+>  =20
+> diff --git a/doc/board/starfive/jh7110_common.rst b/doc/board/starfive/j=
+h7110_common.rst
+> index 4a8058ee5da..458e2f7f957 100644
+> --- a/doc/board/starfive/jh7110_common.rst
+> +++ b/doc/board/starfive/jh7110_common.rst
+> @@ -1,103 +1,524 @@
+>   .. SPDX-License-Identifier: GPL-2.0-or-later
+> +.. |arrowin| unicode:: U+2190
+> +.. |arrowout| unicode:: U+2192
+> +.. |degreecelsius| unicode:: U+2103
+> +.. _U74-MC Core Complex: https://www.starfivetech.com/uploads/u74mc_cor=
+e_complex_manual_21G1.pdf
+> +.. _JH-7110 Technical Reference Manual: https://doc-en.rvspace.org/JH71=
+10/TRM/
+>  =20
+> -Boot source selection
+> ----------------------
+> +StarFive JH-7110 RISC-V SoC
+> +---------------------------
+>  =20
+> -The board provides DIP switches to select the device for loading the bo=
+ot
+> -firmware.
+> +* JH-7110 working frequency 1.5GHz
+> +  operating temperature -40|degreecelsius| to +125|degreecelsius|
+> +* JH-7110I working frequency 1.5GHz
+> +  junction temperature -40|degreecelsius| to +85|degreecelsius| (max
+> +  125|degreecelsius|)
+> +* JH-7110S working frequency 1.25GHz
+>  =20
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D =3D=3D=3D
+> -Boot source SW1 SW2
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D =3D=3D=3D
+> -UART        OFF OFF
+> -SD-card     ON  OFF
+> -eMMC        OFF ON
+> -SPI flash   ON  ON
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D =3D=3D=3D
+> +JH-7110 is a 4+1 core RISC-V System on Chip:
+>  =20
+> -Flashing a new U-Boot version
+> ------------------------------
+> +* `U74-MC Core Complex`_
+>  =20
+> -U-Boot SPL is provided as file spl/u-boot-spl.bin.normal.out. Main U-Bo=
+ot is
+> -in file u-boot.itb.
+> +  * S7 monitor core RV64IMAC
+>  =20
+> -Assuming your new U-Boot version is on partition 1 of an SD-card you co=
+uld
+> -install it to the SPI flash with:
+> +    * Physical Memory Protection
+> +    * 16KB L1 Instruction cache
+> +    * 8KB Data Tightly-Integrated Memory
+>  =20
+> -.. code-block:: console
+> +  * U74 application core RV64GC (x4)
+> +
+> +    * Sv39 Memory Management Unit
+> +    * Floating Point Unit
+> +    * 32KB L1 Instruction cache
+> +    * 32KB L1 Data cache
+> +    * Physical Memory Protection
+> +
+> +  * Core-Local INTerruptor
+> +  * Platform-Level Interrupt Controller
+> +  * Debug
+> +  * Bus Matrix
+> +
+> +    * 2MB L2 cache
+> +
+> +      * Memory Port |arrowout| 128-bit AXI4
+> +
+> +    * System Port |arrowout| 64-bit AXI4
+> +    * Peripheral Port |arrowout| 64-bit AXI4
+> +    * Front Port |arrowin| 64-bit AXI4
+> +
+> +* Block
+> +
+> +  * RV32IMAFCB E24 co-processor
+> +
+> +    * 16KB Instruction cache
+> +    * 32KB Tightly-Integrated Memory "A"
+> +    * 32KB Tightly-Integrated Memory "B"
+> +
+> +  * Mailbox
+> +  * SGDMA
+> +
+> +* Network-on-Chip/AXI bus
+> +* Memory
+> +
+> +  * SRAM 256KB/BootROM 32KB
+> +  * LPDDR4/DDR4/LPDDR3/DDR3 32-bit 2800 Mbps (2133 Mbps supported worki=
+ng speed)
+> +  * QSPI Flash Controller
+> +
+> +* Interfaces
+> +
+> +  * PCIe2.0 1-lane x2
+> +  * Ethernet MAC 10/100/1000 Mbps x2
+> +  * USB 2.0 Host/Device
+> +  * SDIO3.0 x2
+> +  * CAN2.0B x2
+> +
+> +* Audio
+> +
+> +  * Cadence Tensilica HiFi-4 Audio DSP defined by U74MC or E24
+> +
+> +    * 4x 32x32-bit MACs
+> +    * some 72-bit accumulators
+> +    * limited support for 8x 32x16-bit MACs
+> +    * fourth VLIW slot
+> +    * two 64-bit loads per cycle
+> +    * optional floating point unit for four single-precision MACs per c=
+ycle
+> +
+> +  * I2S/PCM-TDM
+> +  * I2S/PCM
+> +  * PDM x4
+> +  * SPDIF
+> +
+> +* Graphics
+> +
+> +  * Epicsemi ISP
+> +  * IMG BXE-4-32 Integrated GPU with 3D Acceleration
+> +  * 12-bit DVP
+> +  * MIPI-CSI
+> +
+> +* Cryptographic function
+> +
+> +  * TRNG
+> +  * OTP
+> +  * Security HW Engine AES/DES/3DES/HASH/PKA
+> +
+> +* Block
+> +
+> +  * PAD_SHARE used for reset
+> +  * Power Management Unit Clock Reset Generator
+> +  * PLL x3
+> +  * JTAG
+> +  * RTC
+> +  * Temperature Sensor
+> +
+> +Supported SoC drivers:
+> +
+> +* ns16550 UART
+> +* StarFive JH-7110 clock
+> +* StarFive JH-7110 reset
+> +* Cadence QSPI controller
+> +* DesignWare MMC for eMMC/SD support
+> +* PLDA PCIe controller
+> +* Cadence USB2.0/3.0 controller
+> +
+> +Supported common peripherals:
+> +
+> +* AXP15060 Power Management Unit
+> +* LPDDR4 2GB / 4GB / 8GB DRAM memory
+> +* AT24C04F 4K bits (512 x 8) EEPROM
+> +* QSPI NOR Flash 16M or SoC ROM UART loader for boot (selectable by GPI=
+O)
+> +
+> +Extra supported peripherals present on some boards:
+> +
+> +* Motorcomm YT8531C Gigabit Ethernet PHY
+> +* On-board VL805 PCIE-USB controller driver
+> +* Status LED RGPIO3
+> +
+> +Build U-Boot
+> +------------
+> +
+> +1.  Add a RISC-V toolchain to your PATH.
+> +2.  Set cross compilation environment variable if needed:
+> +
+> +    .. code-block:: none
+> +
+> +       export CROSS_COMPILE=3D<riscv64 toolchain prefix>
+> +
+> +3.  U-Boot for JH-7110 requires OpenSBI v1.5+ (v1.8+ for JH-7110S) gene=
+ric
+> +    platform object fw_dynamic.bin to be included in the Flattened Imag=
+e Tree
+> +    blob. OpenSBI may first be built as below:
+> +
+> +    .. code-block:: console
+> +
+> +       # clone and/or update OpenSBI sources
+> +       git clone https://github.com/riscv/opensbi.git opensbi.git
+> +       git -C opensbi.git checkout v1.7
+> +       # always clean build directory when building OpenSBI due to inco=
+mplete
+> +       # dependency tracking
+> +       make -C opensbi.git -O opensbi clean
+> +       make -C opensbi.git -O opensbi PLATFORM=3Dgeneric
+> +
+> +4.  Now build the First Stage BootLoader (U-Boot Secondary Program Load=
+er) and
+> +    Second Boot Loader (OpenSBI + U-Boot Main):
+> +
+> +    .. code-block:: console
+> +
+> +       git clone https://source.denx.de/u-boot/u-boot.git u-boot.git
+> +       make -C u-boot.git -O u-boot starfive_visionfive2_defconfig
+> +       export OPENSBI=3Dopensbi/build/platform/generic/firmware/fw_dyna=
+mic.bin
+> +       make -C u-boot.git -O u-boot
+> +
+> +    This will generate the U-Boot SPL image object post-processed with =
+StarFive
+> +    SPL headers (u-boot/spl/u-boot-spl.bin.normal.out) as well as the F=
+IT image
+> +    (u-boot/u-boot.itb) of OpenSBI and U-Boot Main.
+> +
+> +    Note: Debug UART is not available from U-Boot SPL when U-Boot Main =
+uses the
+> +    SBI interface for this. Add the following configuration changes abo=
+ve to
+> +    enable early debug UART in U-Boot SPL::
+> +
+> +        u-boot.git/scripts/config --file u-boot/.config \
+> +         --set-val DEBUG_UART_BASE 0x10000000 \
+> +         --set-val DEBUG_UART_CLOCK 24000000 \
+> +         --enable DEBUG_UART_NS16550 \
+> +         --disable DEBUG_SBI_CONSOLE \
+> +         --set-val SPL_DEBUG_UART_BASE 0x10000000 \
+> +         --set-val DEBUG_UART_SHIFT 2
+> +
+> +        make -C u-boot.git -O u-boot olddefconfig
+> +
+> +Boot description
+> +----------------
+> +
+> +JH-7110 reset vectors (one 36-bit address per each of four U7 cores) ar=
+e located
+> +split into four pairs of SYS SYSCON registers. The default value for al=
+l four
+> +reset vectors is 2a000000.
+> +
+> +Execute-in-place BootROM code located at 2a000000 is not published by S=
+tarFive
+> +however may be generally described as deciding based on [RGPIO2:RGPIO0]=
+ state
+> +where to transfer SPL data from, verify headers and CRC, and then jump =
+to code
+> +execution in L2 LIM.
+> +
+> +Zero Stage Program Loader
+> +^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+> +RGPIO2 Boot Vector ZSPL function
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+> +0      0x2A00_0000 On-chip 32KB BootROM
+> +1      0x2100_0000 QSPI XIP Flash (256mb)
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D
+> +
+> +JH-7110 ZSPL functionally consists of the selection of reset vector reg=
+ister
+> +defaults at chip-design time in concert with BootROM code at 2a000000. =
+`JH-7110
+> +Technical Reference Manual`_ says "if XIP flash is disabled in OTP
+> +configuration, system cannot boot from XIP flash". Presumably there is =
+some OTP
+> +configuration involved but there is no documentation available with whi=
+ch to
+> +expand on that topic.
+> +
+> +Zero Stage BootLoader
+> +^^^^^^^^^^^^^^^^^^^^^
+> +
+> +JH-7110 ZSBL is typically StarFive loader code in BootROM selected by R=
+GPIO2
+> +pull-down.
+> +
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> +RGPIO1 RGPIO0 StarFive loader function @ 0x2A00_0000
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> +0      0      1-bit QSPI Flash offset 0x0
+> +0      1      SDIO3.0 *(deprecated)*
+> +1      0      eMMC5.0 *(deprecated)*
 
-Same comment as previous patch.
+I think we should replace "deprecated" by "not recommended by StarFive".
 
-I'm not sure keeping Sunchip CX-A99 makes much sense. This means that
-there were never enough interest in it to at least upstream DT file to
-Linux.
+> +1      1      UART Serial XMODEM loader
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D
+> +
+> +StarFive loader code is assumed to copy content to SRAM @ 0x0800_0000 a=
+nd test
+> +for StarFive SPL header followed by a jump to SRAM.
 
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+"is assumed" means what here? Is it "We don't know?" or "It is the=20
+BootROM's duty"? Please, provide an unambiguous description.
 
-Best regards,
-Jernej
+> +
+> +First Stage BootLoader
+> +^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +JH-7110 FSBL is typically U-Boot SPL or any vendor flash programming to=
+ol.
+> +
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> +RGPIO1 RGPIO0 U-Boot SPL function
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> +0      0      BOOT_DEVICE_SPI @ offset 0x100000 (CONFIG_ENV_OFFSET + CO=
+NFIG_ENV_SIZE)
+> +0      1      BOOT_DEVICE_MMC2 @ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTI=
+TION
+> +1      0      BOOT_DEVICE_MMC1 @ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTI=
+TION
+> +1      1      BOOT_DEVICE_UART @ YMODEM
+> +=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +U-Boot SPL initializes DRAM and configures PLLs needed by CPU and perip=
+herals.
+> +U-Boot SPL function is selected by configuration of [RGPIO1:RGPIO0] the=
+n copies
+> +data to the start of DRAM and executes.
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +Address     Description
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +0x040000000 start of DRAM
+> +0x240000000 uncached alias of DRAM
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Note: The largest DRAM size with JH7110 is 8GB because the uncached ali=
+as of
+> +DRAM begins at +8GB following the start of DRAM.
+> +
+> +Second Stage BootLoader (OpenSBI fw_dynamic.bin + U-Boot Main)
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +U-Boot Main is supported in S-mode and depends on prior stage M-mode SB=
+I runtime
+> +services provided by OpenSBI FW_DYNAMIC firmware.
+> +
+> +Loading U-Boot
+> +--------------
+> +
+> +Vendored versions of U-Boot (as pre-installed on supported boards) are =
+generally
+> +capable in U-Boot console of UART data transfer and updating QSPI Flash=
+.
+> +Additionally there may be a vendor Board Support Package using the depr=
+ecated
+> +SDIO3.0 / eMMC5.0 boot modes. It is not documented here how to update U=
+-Boot in
+> +vendor BSP data images, nor use of the deprecated boot modes. The recom=
+mended
+> +upgrade path is to update QSPI Flash in U-Boot console or from GNU/Linu=
+x OS.
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+> +Flash offset Length                       Data source
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+> +0x000000     0x0f0000 (CONFIG_ENV_OFFSET) u-boot/spl/u-boot-spl.bin.nor=
+mal.out
+> +0x0f0000     0x010000 (CONFIG_ENV_SIZE)   runtime generated defaults if=
+ bad CRC
+> +0x100000     0xf00000                     u-boot/u-boot.itb
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D
+> +
+> +Recovery U-Boot console
+> +^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +With UART serial USB adapter and tio serial terminal::
+> +
+> +    tio /dev/ttyUSB0 -o 1
+> +        tio 3.9
+> +        Press ctrl-t q to quit
+> +        Connected to /dev/ttyUSB0
+> +
+> +    # Power on the board with [RGPIO1:RGPI0]=3D3
+> +        (C)StarFive
+> +        CC
+> +        (C)StarFive
+> +        CCC
+> +
+> +    (Control-t-x)
+> +        Please enter which X modem protocol to use:
+> +         (0) XMODEM-1K send
+> +         (1) XMODEM-CRC send
+> +         (2) XMODEM-CRC receive
+> +
+> +    0
+> +        Send file with XMODEM-1K
+> +        Enter file name:
+> +
+> +    u-boot/spl/u-boot-spl.bin.normal.out
+> +        Sending file 'u-boot/spl/u-boot-spl.bin.normal.out'
+> +        Press any key to abort transfer
+> +        ...|
+> +        Done
+> +
+> +        U-Boot SPL 2025.10 (Oct 23 2025 - 17:01:49 -0700)
+> +        DDR version: dc2e84f0.
+> +        Trying to boot from UART
+> +        CCC
+> +
+> +    (Control-t-y)
+> +        Send file with YMODEM
+> +        Enter file name:
+> +
+> +    u-boot/u-boot.itb
+> +        Sending file 'u-boot/u-boot.itb'
+> +        Press any key to abort transfer
+> +        ...|
+> +        Done
+> +        Loaded 3122637 bytes
+> +
+> +        OpenSBI v1.7
+> +           ____                    _____ ____ _____
+> +          / __ \                  / ____|  _ \_   _|
+> +         | |  | |_ __   ___ _ __ | (___ | |_) || |
+> +         | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+> +         | |__| | |_) |  __/ | | |____) | |_) || |_
+> +          \____/| .__/ \___|_| |_|_____/|____/_____|
+> +                | |
+> +                |_|
+> +
+> +        Platform Name               : Pine64 Star64
+> +        Platform Features           : medeleg
+> +        Platform HART Count         : 4
+> +        Platform IPI Device         : aclint-mswi
+> +        Platform Timer Device       : aclint-mtimer @ 4000000Hz
+> +        Platform Console Device     : uart8250
+> +        Platform HSM Device         : ---
+> +        Platform PMU Device         : ---
+> +        Platform Reboot Device      : pm-reset
+> +        Platform Shutdown Device    : pm-reset
+> +        Platform Suspend Device     : ---
+> +        Platform CPPC Device        : ---
+> +        Firmware Base               : 0x40000000
+> +        Firmware Size               : 353 KB
+> +        Firmware RW Offset          : 0x40000
+> +        Firmware RW Size            : 97 KB
+> +        Firmware Heap Offset        : 0x4c000
+> +        Firmware Heap Size          : 49 KB (total), 3 KB (reserved), 1=
+2 KB (used), 33 KB (free)
+> +        Firmware Scratch Size       : 4096 B (total), 400 B (used), 369=
+6 B (free)
+> +        Runtime SBI Version         : 3.0
+> +        Standard SBI Extensions     : time,rfnc,ipi,base,hsm,srst,pmu,d=
+bcn,fwft,legacy,dbtr,sse
+> +        Experimental SBI Extensions : none
+> +
+> +        Domain0 Name                : root
+> +        Domain0 Boot HART           : 4
+> +        Domain0 HARTs               : 1*,2*,3*,4*
+> +        Domain0 Region00            : 0x0000000010000000-0x000000001000=
+0fff M: (I,R,W) S/U: (R,W)
+> +        Domain0 Region01            : 0x0000000002000000-0x000000000200=
+ffff M: (I,R,W) S/U: ()
+> +        Domain0 Region02            : 0x0000000040040000-0x000000004005=
+ffff M: (R,W) S/U: ()
+> +        Domain0 Region03            : 0x0000000040000000-0x000000004003=
+ffff M: (R,X) S/U: ()
+> +        Domain0 Region04            : 0x000000000c000000-0x000000000fff=
+ffff M: (I,R,W) S/U: (R,W)
+> +        Domain0 Region05            : 0x0000000000000000-0xffffffffffff=
+ffff M: () S/U: (R,W,X)
+> +        Domain0 Next Address        : 0x0000000040200000
+> +        Domain0 Next Arg1           : 0x0000000042200000
+> +        Domain0 Next Mode           : S-mode
+> +        Domain0 SysReset            : yes
+> +        Domain0 SysSuspend          : yes
+> +
+> +        Boot HART ID                : 4
+> +        Boot HART Domain            : root
+> +        Boot HART Priv Version      : v1.11
+> +        Boot HART Base ISA          : rv64imafdcbx
+> +        Boot HART ISA Extensions    : zihpm,sdtrig
+> +        Boot HART PMP Count         : 8
+> +        Boot HART PMP Granularity   : 12 bits
+> +        Boot HART PMP Address Bits  : 34
+> +        Boot HART MHPM Info         : 2 (0x00000018)
+> +        Boot HART Debug Triggers    : 8 triggers
+> +        Boot HART MIDELEG           : 0x0000000000000222
+> +        Boot HART MEDELEG           : 0x000000000000b109
+> +
+> +
+> +        U-Boot 2025.10 (Oct 23 2025 - 17:01:49 -0700)
+> +
+> +        CPU:   sifive,u74-mc
+> +        Model: Pine64 Star64
+> +        DRAM:  4 GiB
+> +        Core:  160 devices, 29 uclasses, devicetree: board
+> +        WDT:   Not starting watchdog@13070000
+> +        MMC:   mmc@16010000: 0, mmc@16020000: 1
+> +        Loading Environment from SPIFlash...
+> +        SF: Detected gd25lq128 with page size 256 Bytes, erase size 4 K=
+iB, total 16 MiB
+> +        *** Warning - bad CRC, using default environment
+> +
+> +        StarFive EEPROM format v2
+> +
+> +        --------EEPROM INFO--------
+> +        Vendor : PINE64
+> +        Product full SN: STAR64V1-2310-D004E000-0000xxxx
+> +        data version: 0x2
+> +        PCB revision: 0xc1
+> +        BOM revision: A
+> +        Ethernet MAC0 address: 6c:cf:39:00:xx:xx
+> +        Ethernet MAC1 address: 6c:cf:39:00:xx:xx
+> +        --------EEPROM INFO--------
+> +
+> +        starfive_7110_pcie pcie@9c0000000: Starfive PCIe bus probed.
+> +        In:    serial@10000000
+> +        Out:   serial@10000000
+> +        Err:   serial@10000000
+> +        Net:   eth0: ethernet@16030000, eth1: ethernet@16040000
+> +        starting USB...
+> +        Register 2000820 NbrPorts 2
+> +        Starting the controller
+> +        USB XHCI 1.00
+> +        Bus usb@0: 4 USB Device(s) found
+> +               scanning usb for storage devices... 0 Storage Device(s) =
+found
+> +        Working FDT set to ff717fe0
+> +        Hit any key to stop autoboot: 2 1 0
+> +
+> +    (enter)
+> +        StarFive #
+> +
+> +Update QSPI Flash using U-Boot console
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +With UART serial USB adapter and tio serial terminal::
+> +
+> +    tio /dev/ttyUSB0 -o 1
+> +        tio 3.9
+> +        Press ctrl-t q to quit
+> +        Connected to /dev/ttyUSB0
+> +
+> +    (enter)
+> +        StarFive #
+>  =20
+>       sf probe
+> -    load mmc 1:1 $kernel_addr_r u-boot-spl.bin.normal.out
+> -    sf update $kernel_addr_r 0 $filesize
+> -    load mmc 1:1 $kernel_addr_r u-boot.itb
+> -    sf update $kernel_addr_r 0x100000 $filesize
+> +        StarFive # sf probe
+> +        SF: Detected gd25lq128 with page size 256 Bytes, erase size 4 K=
+iB, total 16 MiB
+>  =20
+> -For loading the files from a TFTP server refer to the dhcp and tftpboot
+> -commands.
+> +    loady && sf update $loadaddr 0 $filesize
+> +        StarFive # loady && sf update $loadaddr 0 $filesize
+> +        ## Ready for binary (ymodem) download to 0x82000000 at 115200 b=
+ps...
+> +        CCC
+>  =20
+> -After updating U-Boot you may want to erase a saved environment and reb=
+oot.
+> +    (Control-t-y)
+> +        Send file with YMODEM
+> +        Enter file name:
+>  =20
+> -.. code-block:: console
+> +    u-boot/spl/u-boot-spl.bin.normal.out
+> +        Sending file 'u-boot/spl/u-boot-spl.bin.normal.out'
+> +        Press any key to abort transfer
+> +        ...|
+> +        Done
+> +        ## Total Size      =3D 0x00024eb7 =3D 151223 Bytes
+> +        ## Start Addr      =3D 0x82000000
+> +        device 0 offset 0x0, size 0x24eb7
+> +        151223 bytes written, 0 bytes skipped in 0.634s, speed 243096 B=
+/s
+> +        StarFive #
+>  =20
+>       env erase
+> -    reset
+> -
+> -Booting from SD-Card
+> ---------------------
+> -
+> -The device boot ROM loads U-Boot SPL (u-boot-spl.bin.normal.out) from t=
+he
+> -partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are =
+free
+> -to choose any partition number.
+> -
+> -With the default configuration U-Boot SPL loads the U-Boot FIT image
+> -(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITI=
+ON=3D0x2).
+> -When formatting it is recommended to use GUID
+> -BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> -
+> -Booting from eMMC
+> ------------------
+> -
+> -The device boot ROM tries to load U-Boot SPL (u-boot-spl.bin.normal.out=
+) from
+> -sector 0 of the eMMC's main hardware partition. But this conflicts with=
+ GPT
+> -partitioning. Fortunately eMMC can alternatively load U-Boot SPL from a=
+ backup
+> -position.
+> -
+> -For U-Boot SPL (u-boot-spl.bin.normal.out) starting at sector 2048 (pos=
+ition
+> -0x100000) write the following bytes to the eMMC device after GPT partit=
+ioning:
+> -
+> -=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> -Address Bytes
+> -=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
+> -0x0000  40 02 00 00  00 00 10 00
+> -0x0290  40 02 00 00  00 00 10 00
+> -=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D
 
+Please, don't drop this information about booting from eMMC.
+
+Best regards
+
+Heinrich
+
+> -
+> -With the default configuration U-Boot SPL loads the U-Boot FIT image
+> -(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITI=
+ON=3D0x2).
+> -When formatting it is recommended to use GUID
+> -BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> -
+> -Booting from UART
+> ------------------
+> -
+> -The boot ROM supports the X-modem protocol to upload
+> -spl/u-boot-spl.bin.normal.out. U-Boot SPL support loading the FIT image
+> -u-boot.itb via the Y-modem protocol.
+> -
+> -Due to restrictions of the boot ROM not all X-modem implementations are
+> -compatible. The package tio (https://github.com/tio/tio) has been found=
+ to be
+> -usable.
+> -
+> -Debug UART
+> -----------
+> -
+> -By default the SBI interface is used for the debug UART. But this only =
+works
+> -in main U-Boot. To enable the debug UART in SPL, too, use the following
+> -settings::
+> -
+> -    CONFIG_DEBUG_UART=3Dy
+> -    CONFIG_DEBUG_UART_NS16550=3Dy
+> -    CONFIG_DEBUG_UART_BASE=3D0x10000000
+> -    CONFIG_SPL_DEBUG_UART_BASE=3D0x10000000
+> -    CONFIG_DEBUG_UART_CLOCK=3D24000000
+> -    CONFIG_DEBUG_UART_SHIFT=3D2
+> +        StarFive # env erase
+> +        Erasing Environment on SPIFlash... OK
+> +        StarFive #
+> +
+> +    loady && sf update $loadaddr 100000 $filesize
+> +        StarFive # loady $loadaddr && sf update $loadaddr 100000 $files=
+ize
+> +        ## Ready for binary (ymodem) download to 0x82000000 at 115200 b=
+ps...
+> +        CCC
+> +
+> +    (Control-t-y)
+> +        Send file with YMODEM
+> +        Enter file name:
+> +
+> +    u-boot/u-boot.itb
+> +        Sending file 'u-boot/u-boot.itb'
+> +        Press any key to abort transfer
+> +        ...|
+> +        Done
+> +        ## Total Size      =3D 0x002fa5cd =3D 3122637 Bytes
+> +        ## Start Addr      =3D 0x82000000
+> +        device 0 offset 0x100000, size 0x2fa5cd
+> +        3122637 bytes written, 0 bytes skipped in 18.137s, speed 176272=
+ B/s
+> +        StarFive #
+> +
+> +Update QSPI Flash from GNU/Linux OS
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +With mtd-utils::
+> +
+> +    cat /proc/mtd
+> +        dev:    size   erasesize  name
+> +        mtd0: 000f0000 00001000 "spl"
+> +        mtd1: 00010000 00001000 "uboot-env"
+> +        mtd2: 00f00000 00001000 "uboot"
+> +
+> +    flashcp --verbose u-boot/spl/u-boot-spl.bin.normal.out /dev/mtd0
+> +        Erasing blocks: 37/37 (100%)
+> +        Writing data: 147k/147k (100%)
+> +        Verifying data: 147k/147k (100%)
+> +
+> +    flashcp --verbose --erase-all /dev/zero /dev/mtd1
+> +        Erasing blocks: 16/16 (100%)
+> +        Writing data: 0k/0k (100%)
+> +        Verifying data: 0k/0k (100%)
+> +
+> +    flashcp --verbose u-boot/u-boot.itb /dev/mtd2
+> +        Erasing blocks: 763/763 (100%)
+> +        Writing data: 3049k/3049k (100%)
+> +        Verifying data: 3049k/3049k (100%)
+> diff --git a/doc/board/starfive/milk-v_mars.rst b/doc/board/starfive/mil=
+k-v_mars.rst
+> index ce4539a46f1..0dbc500b734 100644
+> --- a/doc/board/starfive/milk-v_mars.rst
+> +++ b/doc/board/starfive/milk-v_mars.rst
+> @@ -7,38 +7,6 @@ U-Boot for the Milk-V Mars uses the same U-Boot binarie=
+s as the VisionFive 2
+>   board. In U-Boot SPL the actual board is detected and the device-tree =
+patched
+>   accordingly.
+>  =20
+> -Building
+> ---------
+> -
+> -1. Add the RISC-V toolchain to your PATH.
+> -2. Setup ARCH & cross compilation environment variable:
+> -
+> -.. code-block:: none
+> -
+> -   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
+> -
+> -The M-mode software OpenSBI provides the supervisor binary interface (S=
+BI) and
+> -is responsible for the switch to S-Mode. It is a prerequisite to build =
+U-Boot.
+> -Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended=
+ to use
+> -a current release.
+> -
+> -.. code-block:: console
+> -
+> -	git clone https://github.com/riscv/opensbi.git
+> -	cd opensbi
+> -	make PLATFORM=3Dgeneric FW_TEXT_START=3D0x40000000 FW_OPTIONS=3D0
+> -
+> -Now build the U-Boot SPL and U-Boot proper.
+> -
+> -.. code-block:: console
+> -
+> -	cd <U-Boot-dir>
+> -	make starfive_visionfive2_defconfig
+> -	make OPENSBI=3D$(opensbi_dir)/build/platform/generic/firmware/fw_dynam=
+ic.bin
+> -
+> -This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out)=
+ as well
+> -as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+> -
+>   Device-tree selection
+>   ---------------------
+>  =20
+> @@ -57,45 +25,4 @@ environment
+>   or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to s=
+et to
+>   provide a default value.
+>  =20
+> -Preparing the SD-Card
+> ----------------------
+> -
+> -The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from t=
+he
+> -partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are =
+free
+> -to choose any partition number.
+> -
+> -With the default configuration U-Boot SPL loads the U-Boot FIT image
+> -(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITI=
+ON=3D0x2).
+> -When formatting it is recommended to use GUID
+> -BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> -
+> -The FIT image (u-boot.itb) is a combination of OpenSBI's fw_dynamic.bin=
+,
+> -u-boot-nodtb.bin and the device tree blob.
+> -
+> -Format the SD card (make sure the disk has GPT, otherwise use gdisk to =
+switch)
+> -
+> -.. code-block:: bash
+> -
+> -	sudo sgdisk --clear \
+> -	  --set-alignment=3D2 \
+> -	  --new=3D1:4096:8191 --change-name=3D1:spl --typecode=3D1:2E54B353-12=
+71-4842-806F-E436D6AF6985\
+> -	  --new=3D2:8192:16383 --change-name=3D2:uboot --typecode=3D2:BC13C2FF=
+-59E6-4262-A352-B275FD6F7172  \
+> -	  --new=3D3:16384:1654784 --change-name=3D3:system --typecode=3D3:EBD0=
+A0A2-B9E5-4433-87C0-68B6B72699C7 \
+> -	  /dev/sdb
+> -
+> -Copy U-Boot to the SD card
+> -
+> -.. code-block:: bash
+> -
+> -	sudo dd if=3Du-boot-spl.bin.normal.out of=3D/dev/sdb1
+> -	sudo dd if=3Du-boot.itb of=3D/dev/sdb2
+> -
+> -	sudo mount /dev/sdb3 /mnt/
+> -	sudo cp u-boot-spl.bin.normal.out /mnt/
+> -	sudo cp u-boot.itb /mnt/
+> -	sudo cp Image.gz /mnt/
+> -	sudo cp initramfs.cpio.gz /mnt/
+> -	sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
+> -	sudo umount /mnt
+> -
+>   .. include:: jh7110_common.rst
+> diff --git a/doc/board/starfive/pine64_star64.rst b/doc/board/starfive/p=
+ine64_star64.rst
+> index d1752c452da..78a330be455 100644
+> --- a/doc/board/starfive/pine64_star64.rst
+> +++ b/doc/board/starfive/pine64_star64.rst
+> @@ -7,38 +7,6 @@ U-Boot for the Star64 uses the same U-Boot binaries as =
+the VisionFive 2 board.
+>   In U-Boot SPL the actual board is detected and the device-tree patched
+>   accordingly.
+>  =20
+> -Building
+> ---------
+> -
+> -1. Add the RISC-V toolchain to your PATH.
+> -2. Setup ARCH & cross compilation environment variable:
+> -
+> -.. code-block:: none
+> -
+> -   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
+> -
+> -The M-mode software OpenSBI provides the supervisor binary interface (S=
+BI) and
+> -is responsible for the switch to S-Mode. It is a prerequisite to build =
+U-Boot.
+> -Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended=
+ to use
+> -a current release.
+> -
+> -.. code-block:: console
+> -
+> -	git clone https://github.com/riscv/opensbi.git
+> -	cd opensbi
+> -	make PLATFORM=3Dgeneric FW_TEXT_START=3D0x40000000
+> -
+> -Now build the U-Boot SPL and U-Boot proper.
+> -
+> -.. code-block:: console
+> -
+> -	cd <U-Boot-dir>
+> -	make starfive_visionfive2_defconfig
+> -	make OPENSBI=3D$(opensbi_dir)/build/platform/generic/firmware/fw_dynam=
+ic.bin
+> -
+> -This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out)=
+ as well
+> -as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+> -
+>   Device-tree selection
+>   ---------------------
+>  =20
+> @@ -55,49 +23,6 @@ environment
+>   or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to s=
+et to
+>   provide a default value.
+>  =20
+> -Preparing the SD-Card
+> ----------------------
+> -
+> -The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from t=
+he
+> -partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are =
+free
+> -to choose any partition number.
+> -
+> -With the default configuration U-Boot SPL loads the U-Boot FIT image
+> -(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITI=
+ON=3D0x2).
+> -When formatting it is recommended to use GUID
+> -BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> -
+> -The FIT image (u-boot.itb) is a combination of OpenSBI's fw_dynamic.bin=
+,
+> -u-boot-nodtb.bin and the device tree blob.
+> -
+> -Format the SD card (make sure the disk has GPT, otherwise use gdisk to =
+switch)
+> -
+> -.. code-block:: bash
+> -
+> -	sudo sgdisk --clear \
+> -	  --set-alignment=3D2 \
+> -	  --new=3D1:4096:8191 --change-name=3D1:spl --typecode=3D1:2E54B353-12=
+71-4842-806F-E436D6AF6985\
+> -	  --new=3D2:8192:16383 --change-name=3D2:uboot --typecode=3D2:BC13C2FF=
+-59E6-4262-A352-B275FD6F7172  \
+> -	  --new=3D3:16384:1654784 --change-name=3D3:system --typecode=3D3:EBD0=
+A0A2-B9E5-4433-87C0-68B6B72699C7 \
+> -	  /dev/sdb
+> -
+> -Copy U-Boot to the SD card
+> -
+> -.. code-block:: bash
+> -
+> -	sudo dd if=3Du-boot-spl.bin.normal.out of=3D/dev/sdb1
+> -	sudo dd if=3Du-boot.itb of=3D/dev/sdb2
+> -
+> -	sudo mount /dev/sdb3 /mnt/
+> -	sudo cp u-boot-spl.bin.normal.out /mnt/
+> -	sudo cp u-boot.itb /mnt/
+> -	sudo cp Image.gz /mnt/
+> -	sudo cp initramfs.cpio.gz /mnt/
+> -	sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
+> -	sudo umount /mnt
+> -
+> -.. include:: jh7110_common.rst
+> -
+>   Serial Number and MAC address issues
+>   ------------------------------------
+>  =20
+> @@ -183,3 +108,5 @@ The MAC addresses may be "set" as follows by writing=
+ as a custom config to SPI
+>   	env set eth1addr 6c:cf:39:ce:64:5a
+>   	env save
+>   	reset
+> +
+> +.. include:: jh7110_common.rst
+> diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/vis=
+ionfive2.rst
+> index 11121a1751a..c92ea16f91b 100644
+> --- a/doc/board/starfive/visionfive2.rst
+> +++ b/doc/board/starfive/visionfive2.rst
+> @@ -3,74 +3,9 @@
+>   StarFive VisionFive2
+>   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>  =20
+> -JH7110 RISC-V SoC
+> ------------------
+> -
+> -The JH7110 is 4+1 64-bit RISC-V SoC from StarFive.
+> -
+>   The StarFive VisionFive2 development platform is based on JH7110 and c=
+apable
+>   of running Linux.
+>  =20
+> -Mainline support
+> -----------------
+> -
+> -The support for following drivers are already enabled:
+> -
+> -1. ns16550 UART Driver.
+> -2. StarFive JH7110 clock Driver.
+> -3. StarFive JH7110 reset Driver.
+> -4. Cadence QSPI controller Driver.
+> -5. MMC SPI Driver for MMC/SD support.
+> -6. PLDA PCIE controller driver.
+> -7. On-board VL805 PCIE-USB controller driver.
+> -
+> -Booting from MMC using U-Boot SPL
+> ----------------------------------
+> -
+> -The current U-Boot port is supported in S-mode only and loaded from DRA=
+M.
+> -
+> -A prior stage M-mode firmware/bootloader (e.g OpenSBI) is required to
+> -boot the u-boot.itb in S-mode and provide M-mode runtime services.
+> -
+> -Currently, the u-boot.itb is used as a dynamic of the OpenSBI FW_DYNAMI=
+C
+> -firmware with the latest.
+> -
+> -Building
+> ---------
+> -
+> -1. Add the RISC-V toolchain to your PATH.
+> -2. Setup ARCH & cross compilation environment variable:
+> -
+> -.. code-block:: none
+> -
+> -   export CROSS_COMPILE=3D<riscv64 toolchain prefix>
+> -
+> -Before building U-Boot SPL, OpenSBI must be built first. OpenSBI can be
+> -cloned and built for JH7110 as below:
+> -
+> -.. code-block:: console
+> -
+> -	git clone https://github.com/riscv/opensbi.git
+> -	cd opensbi
+> -	make PLATFORM=3Dgeneric FW_TEXT_START=3D0x40000000 FW_OPTIONS=3D0
+> -
+> -The VisionFive 2 support for OpenSBI was introduced after the v1.2 rele=
+ase.
+> -
+> -More detailed description of steps required to build FW_DYNAMIC firmwar=
+e
+> -is beyond the scope of this document. Please refer OpenSBI documenation=
+.
+> -(Note: OpenSBI git repo is at https://github.com/riscv/opensbi.git)
+> -
+> -Now build the U-Boot SPL and U-Boot proper
+> -
+> -.. code-block:: console
+> -
+> -	cd <U-Boot-dir>
+> -	make starfive_visionfive2_defconfig
+> -	make OPENSBI=3D$(opensbi_dir)/opensbi/build/platform/generic/firmware/=
+fw_dynamic.bin
+> -
+> -This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out)=
+ as well
+> -as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+> -
+>   Device-tree selection
+>   ---------------------
+>  =20
+> @@ -89,388 +24,4 @@ environment
+>   or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to p=
+rovide
+>   a default value.
+>  =20
+> -Flashing
+> ---------
+> -
+> -The device firmware loads U-Boot SPL (u-boot-spl.bin.normal.out) from t=
+he
+> -partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are =
+free
+> -to choose any partition number.
+> -
+> -With the default configuration U-Boot SPL loads the U-Boot FIT image
+> -(u-boot.itb) from partition 2 (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITI=
+ON=3D0x2).
+> -When formatting it is recommended to use GUID
+> -BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+> -
+> -The FIT image (u-boot.itb) is a combination of OpenSBI's fw_dynamic.bin=
+,
+> -u-boot-nodtb.bin and the device tree blob
+> -(jh7110-starfive-visionfive-2-v1.3b.dtb or
+> -jh7110-starfive-visionfive-2-v1.2a.dtb).
+> -
+> -Format the SD card (make sure the disk has GPT, otherwise use gdisk to =
+switch)
+> -
+> -.. code-block:: bash
+> -
+> -	sudo sgdisk --clear \
+> -	  --set-alignment=3D2 \
+> -	  --new=3D1:4096:8191 --change-name=3D1:spl --typecode=3D1:2E54B353-12=
+71-4842-806F-E436D6AF6985\
+> -	  --new=3D2:8192:16383 --change-name=3D2:uboot --typecode=3D2:BC13C2FF=
+-59E6-4262-A352-B275FD6F7172  \
+> -	  --new=3D3:16384:1654784 --change-name=3D3:system --typecode=3D3:EBD0=
+A0A2-B9E5-4433-87C0-68B6B72699C7 \
+> -	  /dev/sdb
+> -	sudo mkfs.vfat -F32 /dev/sdb3
+> -
+> -Program the SD card
+> -
+> -.. code-block:: bash
+> -
+> -	sudo dd if=3Du-boot-spl.bin.normal.out of=3D/dev/sdb1
+> -	sudo dd if=3Du-boot.itb of=3D/dev/sdb2
+> -
+> -	sudo mount /dev/sdb3 /mnt/
+> -	sudo cp u-boot-spl.bin.normal.out /mnt/
+> -	sudo cp u-boot.itb /mnt/
+> -	sudo cp Image.gz /mnt/
+> -	sudo cp initramfs.cpio.gz /mnt/
+> -	sudo cp jh7110-starfive-visionfive-2.dtb /mnt/
+> -	sudo umount /mnt
+> -
+>   .. include:: jh7110_common.rst
+> -
+> -Sample boot log from StarFive VisionFive2 board
+> ------------------------------------------------
+> -
+> -.. code-block:: none
+> -
+> -
+> -	U-Boot SPL 2023.04-rc2-00055-gfc43b9c51a-dirty (Mar 02 2023 - 10:51:39=
+ +0800)
+> -	DDR version: dc2e84f0.
+> -	Trying to boot from MMC2
+> -
+> -	OpenSBI v1.2-80-g4b28afc
+> -	  ____                    _____ ____ _____
+> -	 / __ \                  / ____|  _ \_   _|
+> -	| |  | |_ __   ___ _ __ | (___ | |_) || |
+> -	| |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+> -	| |__| | |_) |  __/ | | |____) | |_) || |_
+> -	 \____/| .__/ \___|_| |_|_____/|____/_____|
+> -	       | |
+> -	       |_|
+> -
+> -	Platform Name             : StarFive VisionFive 2 v1.3B
+> -	Platform Features         : medeleg
+> -	Platform HART Count       : 5
+> -	Platform IPI Device       : aclint-mswi
+> -	Platform Timer Device     : aclint-mtimer @ 4000000Hz
+> -	Platform Console Device   : uart8250
+> -	Platform HSM Device       : ---
+> -	Platform PMU Device       : ---
+> -	Platform Reboot Device    : ---
+> -	Platform Shutdown Device  : ---
+> -	Platform Suspend Device   : ---
+> -	Firmware Base             : 0x40000000
+> -	Firmware Size             : 264 KB
+> -	Firmware RW Offset        : 0x20000
+> -	Runtime SBI Version       : 1.0
+> -
+> -	Domain0 Name              : root
+> -	Domain0 Boot HART         : 2
+> -	Domain0 HARTs             : 0*,1*,2*,3*,4*
+> -	Domain0 Region00          : 0x0000000002000000-0x000000000200ffff M: (=
+I,R,W) S/U: ()
+> -	Domain0 Region01          : 0x0000000040000000-0x000000004001ffff M: (=
+R,X) S/U: ()
+> -	Domain0 Region02          : 0x0000000040000000-0x000000004007ffff M: (=
+R,W) S/U: ()
+> -	Domain0 Region03          : 0x0000000000000000-0xffffffffffffffff M: (=
+R,W,X) S/U: (R,W,X)
+> -	Domain0 Next Address      : 0x0000000040200000
+> -	Domain0 Next Arg1         : 0x0000000040287970
+> -	Domain0 Next Mode         : S-mode
+> -	Domain0 SysReset          : yes
+> -	Domain0 SysSuspend        : yes
+> -
+> -	Boot HART ID              : 2
+> -	Boot HART Domain          : root
+> -	Boot HART Priv Version    : v1.11
+> -	Boot HART Base ISA        : rv64imafdcbx
+> -	Boot HART ISA Extensions  : none
+> -	Boot HART PMP Count       : 8
+> -	Boot HART PMP Granularity : 4096
+> -	Boot HART PMP Address Bits: 34
+> -	Boot HART MHPM Count      : 2
+> -	Boot HART MIDELEG         : 0x0000000000000222
+> -	Boot HART MEDELEG         : 0x000000000000b109
+> -
+> -
+> -	U-Boot 2023.04-rc2-00055-gfc43b9c51a-dirty (Mar 02 2023 - 10:51:39 +08=
+00)
+> -
+> -	CPU:   rv64imac_zba_zbb
+> -	Model: StarFive VisionFive 2 v1.3B
+> -	DRAM:  8 GiB
+> -	Core:  107 devices, 18 uclasses, devicetree: separate
+> -	MMC:   mmc@16010000: 0, mmc@16020000: 1
+> -	Loading Environment from nowhere... OK
+> -	In:    serial@10000000
+> -	Out:   serial@10000000
+> -	Err:   serial@10000000
+> -	Net:   No ethernet found.
+> -	Working FDT set to ff74a340
+> -	Hit any key to stop autoboot:  0
+> -	StarFive #
+> -	StarFive # version
+> -	U-Boot 2023.04-rc2-00055-gfc43b9c51a-dirty (Mar 02 2023 - 10:51:39 +08=
+00)
+> -
+> -	riscv64-buildroot-linux-gnu-gcc.br_real (Buildroot VF2_515_v1.0.0_rc4)=
+ 10.3.0
+> -	GNU ld (GNU Binutils) 2.36.1
+> -	StarFive #
+> -	StarFive # mmc dev 1
+> -	switch to partitions #0, OK
+> -	mmc1 is current device
+> -	StarFive # mmc info
+> -	Device: mmc@16020000
+> -	Manufacturer ID: 9f
+> -	OEM: 5449
+> -	Name: SD64G
+> -	Bus Speed: 50000000
+> -	Mode: SD High Speed (50MHz)
+> -	Rd Block Len: 512
+> -	SD version 3.0
+> -	High Capacity: Yes
+> -	Capacity: 58.3 GiB
+> -	Bus Width: 4-bit
+> -	Erase Group Size: 512 Bytes
+> -	StarFive #
+> -	StarFive # mmc part
+> -
+> -	Partition Map for MMC device 1  --   Partition Type: EFI
+> -
+> -	Part    Start LBA       End LBA         Name
+> -			Attributes
+> -			Type GUID
+> -			Partition GUID
+> -	1     0x00001000      0x00001fff      "spl"
+> -			attrs:  0x0000000000000000
+> -			type:   2e54b353-1271-4842-806f-e436d6af6985
+> -					(2e54b353-1271-4842-806f-e436d6af6985)
+> -			guid:   d5ee2056-3020-475b-9a33-25b4257c9f12
+> -	2     0x00002000      0x00003fff      "uboot"
+> -			attrs:  0x0000000000000000
+> -			type:   bc13c2ff-59e6-4262-a352-b275fd6f7172
+> -					(bc13c2ff-59e6-4262-a352-b275fd6f7172)
+> -			guid:   379ab7fe-fd0c-4149-b758-960c1cbfc0cc
+> -	3     0x00004000      0x00194000      "system"
+> -			attrs:  0x0000000000000000
+> -			type:   ebd0a0a2-b9e5-4433-87c0-68b6b72699c7
+> -					(data)
+> -			guid:   539a6df9-4655-4953-8541-733ca36eb1db
+> -	StarFive #
+> -	StarFive # fatls mmc 1:3
+> -	6429424   Image.gz
+> -	717705   u-boot.itb
+> -	125437   u-boot-spl.bin.normal.out
+> -	152848495   initramfs.cpio.gz
+> -		11285   jh7110-starfive-visionfive-2-v1.3b.dtb
+> -
+> -	5 file(s), 0 dir(s)
+> -
+> -	StarFive # fatload mmc 1:3 ${kernel_addr_r} Image.gz
+> -	6429424 bytes read in 394 ms (15.6 MiB/s)
+> -	StarFive # fatload mmc 1:3 ${fdt_addr_r} jh7110-starfive-visionfive-2.=
+dtb
+> -	11285 bytes read in 5 ms (2.2 MiB/s)
+> -	StarFive # fatload mmc 1:3 ${ramdisk_addr_r} initramfs.cpio.gz
+> -	152848495 bytes read in 9271 ms (15.7 MiB/s)
+> -	StarFive # booti ${kernel_addr_r} ${ramdisk_addr_r}:${filesize} ${fdt_=
+addr_r}
+> -	Uncompressing Kernel Image
+> -	## Flattened Device Tree blob at 46000000
+> -	Booting using the fdt blob at 0x46000000
+> -	Working FDT set to 46000000
+> -	Loading Ramdisk to f5579000, end fe73d86f ... OK
+> -	Loading Device Tree to 00000000f5573000, end 00000000f5578c14 ... OK
+> -	Working FDT set to f5573000
+> -
+> -	Starting kernel ...
+> -
+> -
+> -	] Linux version 6.2.0-starfive-00026-g11934a315b67 (wyh@wyh-VirtualBox=
+) (riscv64-linux-gnu-gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, GNU ld (GNU =
+Binutils for Ubuntu) 2.30) #1 SMP Thu Mar  2 14:51:36 CST 2023
+> -	[    0.000000] OF: fdt: Ignoring memory range 0x40000000 - 0x40200000
+> -	[    0.000000] Machine model: StarFive VisionFive 2 v1.3B
+> -	[    0.000000] efi: UEFI not found.
+> -	[    0.000000] Zone ranges:
+> -	[    0.000000]   DMA32    [mem 0x0000000040200000-0x00000000ffffffff]
+> -	[    0.000000]   Normal   [mem 0x0000000100000000-0x000000013fffffff]
+> -	[    0.000000] Movable zone start for each node
+> -	[    0.000000] Early memory node ranges
+> -	[    0.000000]   node   0: [mem 0x0000000040200000-0x000000013fffffff]
+> -	[    0.000000] Initmem setup node 0 [mem 0x0000000040200000-0x00000001=
+3fffffff]
+> -	[    0.000000] On node 0, zone DMA32: 512 pages in unavailable ranges
+> -	[    0.000000] SBI specification v1.0 detected
+> -	[    0.000000] SBI implementation ID=3D0x1 Version=3D0x10002
+> -	[    0.000000] SBI TIME extension detected
+> -	[    0.000000] SBI IPI extension detected
+> -	[    0.000000] SBI RFENCE extension detected
+> -	[    0.000000] SBI HSM extension detected
+> -	[    0.000000] CPU with hartid=3D0 is not available
+> -	[    0.000000] CPU with hartid=3D0 is not available
+> -	[    0.000000] CPU with hartid=3D0 is not available
+> -	[    0.000000] riscv: base ISA extensions acdfim
+> -	[    0.000000] riscv: ELF capabilities acdfim
+> -	[    0.000000] percpu: Embedded 18 pages/cpu s35960 r8192 d29576 u7372=
+8
+> -	[    0.000000] pcpu-alloc: s35960 r8192 d29576 u73728 alloc=3D18*4096
+> -	[    0.000000] pcpu-alloc: [0] 0 [0] 1 [0] 2 [0] 3
+> -	[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: =
+1031688
+> -	[    0.000000] Kernel command line: console=3DttyS0,115200 debug rootw=
+ait earlycon=3Dsbi
+> -	[    0.000000] Dentry cache hash table entries: 524288 (order: 10, 419=
+4304 bytes, linear)
+> -	[    0.000000] Inode-cache hash table entries: 262144 (order: 9, 20971=
+52 bytes, linear)
+> -	[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+> -	[    0.000000] software IO TLB: area num 4.
+> -	[    0.000000] software IO TLB: mapped [mem 0x00000000f1573000-0x00000=
+000f5573000] (64MB)
+> -	[    0.000000] Virtual kernel memory layout:
+> -	[    0.000000]       fixmap : 0xffffffc6fee00000 - 0xffffffc6ff000000 =
+  (2048 kB)
+> -	[    0.000000]       pci io : 0xffffffc6ff000000 - 0xffffffc700000000 =
+  (  16 MB)
+> -	[    0.000000]      vmemmap : 0xffffffc700000000 - 0xffffffc800000000 =
+  (4096 MB)
+> -	[    0.000000]      vmalloc : 0xffffffc800000000 - 0xffffffd800000000 =
+  (  64 GB)
+> -	[    0.000000]      modules : 0xffffffff0136a000 - 0xffffffff80000000 =
+  (2028 MB)
+> -	[    0.000000]       lowmem : 0xffffffd800000000 - 0xffffffd8ffe00000 =
+  (4094 MB)
+> -	[    0.000000]       kernel : 0xffffffff80000000 - 0xffffffffffffffff =
+  (2047 MB)
+> -	[    0.000000] Memory: 3867604K/4192256K available (8012K kernel code,=
+ 4919K rwdata, 4096K rodata, 2190K init, 476K bss, 324652K reserved, 0K cm=
+a-reserved)
+> -	[    0.000000] SLUB: HWalign=3D64, Order=3D0-3, MinObjects=3D0, CPUs=
+=3D4, Nodes=3D1
+> -	[    0.000000] rcu: Hierarchical RCU implementation.
+> -	[    0.000000] rcu:     RCU restricting CPUs from NR_CPUS=3D64 to nr_c=
+pu_ids=3D4.
+> -	[    0.000000] rcu:     RCU debug extended QS entry/exit.
+> -	[    0.000000]  Tracing variant of Tasks RCU enabled.
+> -	[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay=
+ is 25 jiffies.
+> -	[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=3D16, nr_cp=
+u_ids=3D4
+> -	[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+> -	[    0.000000] CPU with hartid=3D0 is not available
+> -	[    0.000000] riscv-intc: unable to find hart id for /cpus/cpu@0/inte=
+rrupt-controller
+> -	[    0.000000] riscv-intc: 64 local interrupts mapped
+> -	[    0.000000] plic: interrupt-controller@c000000: mapped 136 interrup=
+ts with 4 handlers for 9 contexts.
+> -	[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on cont=
+ention.
+> -	[    0.000000] riscv-timer: riscv_timer_init_dt: Registering clocksour=
+ce cpuid [0] hartid [4]
+> -	[    0.000000] clocksource: riscv_clocksource: mask: 0xfffffffffffffff=
+f max_cycles: 0x1d854df40, max_idle_ns: 881590404240 ns
+> -	[    0.000003] sched_clock: 64 bits at 4MHz, resolution 250ns, wraps e=
+very 2199023255500ns
+> -	[    0.000437] Console: colour dummy device 80x25
+> -	[    0.000568] Calibrating delay loop (skipped), value calculated usin=
+g timer frequency.. 8.00 BogoMIPS (lpj=3D16000)
+> -	[    0.000602] pid_max: default: 32768 minimum: 301
+> -	[    0.000752] LSM: initializing lsm=3Dcapability,integrity
+> -	[    0.001071] Mount-cache hash table entries: 8192 (order: 4, 65536 b=
+ytes, linear)
+> -	[    0.001189] Mountpoint-cache hash table entries: 8192 (order: 4, 65=
+536 bytes, linear)
+> -	[    0.004201] CPU node for /cpus/cpu@0 exist but the possible cpu ran=
+ge is :0-3
+> -	[    0.007426] cblist_init_generic: Setting adjustable number of callb=
+ack queues.
+> -	[    0.007457] cblist_init_generic: Setting shift to 2 and lim to 1.
+> -	[    0.007875] riscv: ELF compat mode unsupported
+> -	[    0.007902] ASID allocator disabled (0 bits)
+> -	[    0.008405] rcu: Hierarchical SRCU implementation.
+> -	[    0.008426] rcu:     Max phase no-delay instances is 1000.
+> -	[    0.009247] EFI services will not be available.
+> -	[    0.010738] smp: Bringing up secondary CPUs ...
+> -	[    0.018358] smp: Brought up 1 node, 4 CPUs
+> -	[    0.021776] devtmpfs: initialized
+> -	[    0.027337] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xff=
+ffffff, max_idle_ns: 7645041785100000 ns
+> -	[    0.027389] futex hash table entries: 1024 (order: 4, 65536 bytes, =
+linear)
+> -	[    0.027888] pinctrl core: initialized pinctrl subsystem
+> -	[    0.029881] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+> -	[    0.030401] audit: initializing netlink subsys (disabled)
+> -	[    0.031041] audit: type=3D2000 audit(0.028:1): state=3Dinitialized =
+audit_enabled=3D0 res=3D1
+> -	[    0.031943] cpuidle: using governor menu
+> -	[    0.043011] HugeTLB: registered 2.00 MiB page size, pre-allocated 0=
+ pages
+> -	[    0.043033] HugeTLB: 0 KiB vmemmap can be freed for a 2.00 MiB page
+> -	[    0.044943] iommu: Default domain type: Translated
+> -	[    0.044965] iommu: DMA domain TLB invalidation policy: strict mode
+> -	[    0.046089] SCSI subsystem initialized
+> -	[    0.046733] libata version 3.00 loaded.
+> -	[    0.047231] usbcore: registered new interface driver usbfs
+> -	[    0.047315] usbcore: registered new interface driver hub
+> -	[    0.047420] usbcore: registered new device driver usb
+> -	[    0.049770] vgaarb: loaded
+> -	[    0.050277] clocksource: Switched to clocksource riscv_clocksource
+> -	[    0.084690] NET: Registered PF_INET protocol family
+> -	[    0.085561] IP idents hash table entries: 65536 (order: 7, 524288 b=
+ytes, linear)
+> -	[    0.093010] tcp_listen_portaddr_hash hash table entries: 2048 (orde=
+r: 4, 65536 bytes, linear)
+> -	[    0.093152] Table-perturb hash table entries: 65536 (order: 6, 2621=
+44 bytes, linear)
+> -	[    0.093224] TCP established hash table entries: 32768 (order: 6, 26=
+2144 bytes, linear)
+> -	[    0.093821] TCP bind hash table entries: 32768 (order: 9, 2097152 b=
+ytes, linear)
+> -	[    0.117880] TCP: Hash tables configured (established 32768 bind 327=
+68)
+> -	[    0.118500] UDP hash table entries: 2048 (order: 5, 196608 bytes, l=
+inear)
+> -	[    0.118881] UDP-Lite hash table entries: 2048 (order: 5, 196608 byt=
+es, linear)
+> -	[    0.119675] NET: Registered PF_UNIX/PF_LOCAL protocol family
+> -	[    0.121749] RPC: Registered named UNIX socket transport module.
+> -	[    0.121776] RPC: Registered udp transport module.
+> -	[    0.121784] RPC: Registered tcp transport module.
+> -	[    0.121791] RPC: Registered tcp NFSv4.1 backchannel transport modul=
+e.
+> -	[    0.121816] PCI: CLS 0 bytes, default 64
+> -	[    0.124101] Unpacking initramfs...
+> -	[    0.125468] workingset: timestamp_bits=3D46 max_order=3D20 bucket_o=
+rder=3D0
+> -	[    0.128372] NFS: Registering the id_resolver key type
+> -	[    0.128498] Key type id_resolver registered
+> -	[    0.128525] Key type id_legacy registered
+> -	[    0.128625] nfs4filelayout_init: NFSv4 File Layout Driver Registeri=
+ng...
+> -	[    0.128649] nfs4flexfilelayout_init: NFSv4 Flexfile Layout Driver R=
+egistering...
+> -	[    0.129358] 9p: Installing v9fs 9p2000 file system support
+> -	[    0.130179] NET: Registered PF_ALG protocol family
+> -	[    0.130499] Block layer SCSI generic (bsg) driver version 0.4 loade=
+d (major 247)
+> -	[    0.130544] io scheduler mq-deadline registered
+> -	[    0.130556] io scheduler kyber registered
+> -	[    0.416754] Serial: 8250/16550 driver, 4 ports, IRQ sharing disable=
+d
+> -	[    0.420857] SuperH (H)SCI(F) driver initialized
+> -	[    0.443735] loop: module loaded
+> -	[    0.448605] e1000e: Intel(R) PRO/1000 Network Driver
+> -	[    0.448627] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+> -	[    0.450716] usbcore: registered new interface driver uas
+> -	[    0.450832] usbcore: registered new interface driver usb-storage
+> -	[    0.451638] mousedev: PS/2 mouse device common for all mice
+> -	[    0.453465] sdhci: Secure Digital Host Controller Interface driver
+> -	[    0.453487] sdhci: Copyright(c) Pierre Ossman
+> -	[    0.453584] sdhci-pltfm: SDHCI platform and OF driver helper
+> -	[    0.454140] usbcore: registered new interface driver usbhid
+> -	[    0.454174] usbhid: USB HID core driver
+> -	[    0.454833] riscv-pmu-sbi: SBI PMU extension is available
+> -	[    0.454920] riscv-pmu-sbi: 16 firmware and 4 hardware counters
+> -	[    0.454942] riscv-pmu-sbi: Perf sampling/filtering is not supported=
+ as sscof extension is not available
+> -	[    0.457071] NET: Registered PF_INET6 protocol family
+> -	[    0.460627] Segment Routing with IPv6
+> -	[    0.460821] In-situ OAM (IOAM) with IPv6
+> -	[    0.461005] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+> -	[    0.462712] NET: Registered PF_PACKET protocol family
+> -	[    0.462933] 9pnet: Installing 9P2000 support
+> -	[    0.463141] Key type dns_resolver registered
+> -	[    0.463168] start plist test
+> -	[    0.469261] end plist test
+> -	[    0.506774] debug_vm_pgtable: [debug_vm_pgtable         ]: Validati=
+ng architecture page table helpers
+> -	[    0.553683] gpio gpiochip0: Static allocation of GPIO base is depre=
+cated, use dynamic allocation.
+> -	[    0.554741] starfive-jh7110-sys-pinctrl 13040000.pinctrl: StarFive =
+GPIO chip registered 64 GPIOs
+> -	[    0.555900] gpio gpiochip1: Static allocation of GPIO base is depre=
+cated, use dynamic allocation.
+> -	[    0.556772] starfive-jh7110-aon-pinctrl 17020000.pinctrl: StarFive =
+GPIO chip registered 4 GPIOs
+> -	[    0.559454] printk: console [ttyS0] disabled
+> -	[    0.579948] 10000000.serial: ttyS0 at MMIO 0x10000000 (irq =3D 3, b=
+ase_baud =3D 1500000) is a 16550A
+> -	[    0.580082] printk: console [ttyS0] enabled
+> -	[   13.642680] Freeing initrd memory: 149264K
+> -	[   13.651051] Freeing unused kernel image (initmem) memory: 2188K
+> -	[   13.666431] Run /init as init process
+> -	[   13.670116]   with arguments:
+> -	[   13.673168]     /init
+> -	[   13.675488]   with environment:
+> -	[   13.678668]     HOME=3D/
+> -	[   13.681038]     TERM=3Dlinux
+> -	Starting syslogd: OK
+> -	Starting klogd: OK
+> -	Running sysctl: OK
+> -	Populating /dev using udev: [   14.145944] udevd[93]: starting version=
+ 3.2.10
+> -	[   15.214287] random: crng init done
+> -	[   15.240816] udevd[94]: starting eudev-3.2.10
+> -	done
+> -	Saving random seed: OK
+> -	Starting system message bus: dbus[122]: Unknown username "pulse" in me=
+ssage bus configuration file
+> -	done
+> -	Starting rpcbind: OK
+> -	Starting iptables: OK
+> -	Starting bluetoothd: OK
+> -	Starting network: Waiting for interface eth0 to appear............... =
+timeout!
+> -	run-parts: /etc/network/if-pre-up.d/wait_iface: exit status 1
+> -	FAIL
+> -	Starting dropbear sshd: OK
+> -	Starting NFS statd: OK
+> -	Starting NFS services: OK
+> -	Starting NFS daemon: rpc.nfsd: Unable to access /proc/fs/nfsd errno 2 =
+(No such file or directory).
+> -	Please try, as root, 'mount -t nfsd nfsd /proc/fs/nfsd' and then resta=
+rt rpc.nfsd to correct the problem
+> -	FAIL
+> -	Starting NFS mountd: OK
+> -	Starting DHCP server: FAIL
+> -
+> -	Welcome to Buildroot
+> -	buildroot login:
 
