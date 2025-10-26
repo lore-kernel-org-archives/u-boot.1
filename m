@@ -4,96 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9882BCCF9E5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 17:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B70CCF9E9
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 19:07:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EE21832AD;
-	Sun, 26 Oct 2025 18:55:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 44EDB832AD;
+	Sun, 26 Oct 2025 20:07:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jaJvyAwN";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D86F83623; Sun, 26 Oct 2025 18:55:34 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F1F3983623; Sun, 26 Oct 2025 20:07:34 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DEEF82E34
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 18:55:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9150F82E34
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 20:07:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-44dabf29d02so674487b6e.2
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 10:55:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761501330; x=1762106130; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+GciuwmRV1/Up6+/J0bFvFnV8LpIr7jaRZL6ghvZNXY=;
- b=jaJvyAwN8OrSXPH0rLNAjBHMQbPFei9w6O7Feco8rjcfOJ24k+rjbZhBdBVNkTHSD7
- fHg9gPldPBG2XubB+7l4pd+sO3sB72HpyDbp9zfkl7nrXPbhFNeR1naJBNMSA71OeWuW
- kJ7+oirCoa7PrmVcgO6nwKhUo6y/oDKqnsW0M=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761501330; x=1762106130;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+GciuwmRV1/Up6+/J0bFvFnV8LpIr7jaRZL6ghvZNXY=;
- b=BnXyOdSxHAnrRGWpqSd76rrwM8FeHqXSZdnWD+KZBuvrzRQRcKwdSBr4udCJY/NC4y
- UX88/kYnhovcaWEB18gS4olyqeINJM2fkULOS8Tyb8MG4GEEfbKZyEDhixyO8ZdM6afk
- pwcKpSCi5J5jwz5Y+E1/9ieqCjtCzVrZ7qz7WWuwbv3XgCAtFrbl4BFo3udvf78KoP8W
- cMdDNeazM58mchTi2DjDVkNBow+biFrisX2HXxEMbaB/+l8fGhJaDLECjFbUJpCXJ+i+
- R0hootQ9XrkPDj6s2LiGZkyEDtkj4LPfYsVUWa7hfw4gr8lh96MdWTKzS9Nyc0zk5AGI
- /qjQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXJP4I8gdkNDoQ/2sUimJxQwEYUCBLvuOGei8NEoYUi5hFlGz252uXwK4uSmLUt5RRKsQKsAOk=@lists.denx.de
-X-Gm-Message-State: AOJu0YyL14ihUHNmiE4Vr4258Nfut+04z8QCMx10MKBneA32cxNuX478
- iIsslD92hZKho9+hAN4R3v8ZSgEBPW55blybgJ3VtGVL+N9Y6tbx2di7KNozolYIHWc=
-X-Gm-Gg: ASbGncsNBH3UsN3YXPUHfQhMSuiBxcoFyOkiWT0NXWAmLc8TlSqpqMPrNWm0kIPHNTW
- g21gq3ehkm/lHIGfJXK8eHj3wNjEu2rCefWKQksuT+nKxU5p/2IuMow6le9chJGHlLACpI6lNZf
- nTg1s1ZJ/ecUXdkPp6DwP+9o5arq84sVGMjsZTHFEJiTfiP+gavV9u7d0euEs/tbvmmZ5vl6+i6
- xiAfu9Gi9oRAvXl0bcN+ejoqaIYHbsv2qGAV0HBVLHsOU7ZjZABxNZ0YDM8X7cbMP05tomT6RAQ
- TSBNB7cm1h5jznCt7N1GphTYHQgLGwEWpE12IlXRNWo9jmy9uvQ2PwReSbOuutaCfj/QW2KUKpY
- 9c2SOS1bbmspJFhNoHm0ca0HON7bq9pdOofWH3CpS9G6h9w+fdoQ3NrP69TE7BCAO0dZ6xX38RV
- EMtPjO5GDbEnto9RYZbHiWpS6kx6E8GmB7LeWZvGgkEv1Aa14PEA==
-X-Google-Smtp-Source: AGHT+IGZgJfqmc0oOv4m/gHrNbegz4seTFmxhtj1Q4RCq1SerdKmSMs8yYU/oFjNhTZiTrlT9rL3CA==
-X-Received: by 2002:a05:6808:3442:b0:44d:ad7e:3846 with SMTP id
- 5614622812f47-44dad7e47d0mr1621261b6e.8.1761501330098; 
- Sun, 26 Oct 2025 10:55:30 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44da3e2018dsm1258069b6e.1.2025.10.26.10.55.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Oct 2025 10:55:29 -0700 (PDT)
-Date: Sun, 26 Oct 2025 11:55:26 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Paul Kocialkowski <paulk@sys-base.io>
-Cc: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jacky Chou <jacky_chou@aspeedtech.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Eugeniu Rosca <erosca@de.adit-jv.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- gss_mtk_uboot_upstream@mediatek.com
-Subject: Re: [PATCH 1/1] net: phy: Do not do CL22 phy reset before ethernet
- phy driver probe
-Message-ID: <20251026175526.GX6688@bill-the-cat>
-References: <20241014070611.32040-1-SkyLake.Huang@mediatek.com>
- <3d811dec-d233-4e6d-bcc7-ac07c915e68a@mailbox.org>
- <aJJGvQpoYUWWjwrB@collins> <20251026154314.GW6688@bill-the-cat>
- <e88eceb2-7292-4888-8fbc-8022cabceb41@mailbox.org>
- <aP5bJyRg-yq7PCqE@shepard>
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.54] (unknown [98.97.26.255])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 15F3CB221226;
+ Sun, 26 Oct 2025 20:07:30 +0100 (CET)
+Message-ID: <25d1e81a-450c-4e44-a57b-6eb7f30879ea@freeshell.de>
+Date: Sun, 26 Oct 2025 12:07:28 -0700
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ug8+wCr7zCcO5eYP"
-Content-Disposition: inline
-In-Reply-To: <aP5bJyRg-yq7PCqE@shepard>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: board: starfive: update jh7110 common description
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Tom Rini <trini@konsulko.com>
+References: <20251024083351.237033-1-e@freeshell.de>
+ <5587839a-6d4c-4c0e-ab2b-fe8249463198@gmx.de>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <5587839a-6d4c-4c0e-ab2b-fe8249463198@gmx.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,102 +56,207 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich, thanks for the review.
 
---ug8+wCr7zCcO5eYP
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/26/25 02:56, Heinrich Schuchardt wrote:
+> On 10/24/25 09:33, E Shattow wrote:
+>> Updates to the JH7110 common descripton:
+>> - add detailed overview of JH-7110 SoC and boot process
+>> - drop descriptions of deprecated StarFive loader modes
+>> - refresh build directions grouped with SPL debug advice
+>> - reduce usage instructions into common methods shared by supported
+>> boards
+>>
+>> Redundant/deprecated sections of each board doc are dropped accordingly:
+>> - deepcomputing fml13v01
+>> - milk-v mars
+>> - pine64 star64 (also add inclusion of JH7110 common description)
+>> - visionfive2
+>>
+>> Signed-off-by: E Shattow <e@freeshell.de>
+>> ---
+>> Preface to reviewers: SD Card / eMMC modes are officially deprecated in
+>> the published StarFive JH-7110 Technical Reference Manual. The request
+>> for supporting documentation was not answered in the upstream review
+> 
+> The boot ROM was not changed. Ubuntu preinstalled images boot fine with
+> U-Boot on SD-card. Booting from eMMC works fine too with a bit of
+> patching of the first partition.
+> 
+> It is unfortunate that StarFive is not inclined to document how booting
+> from eMMC or SD-card works but this does not mean that it is irrelevant
+> to U-Boot users and developers.
+> 
+> Please, keep the existing information.
+> 
 
-On Sun, Oct 26, 2025 at 06:32:23PM +0100, Paul Kocialkowski wrote:
-> Hi,
->=20
-> On Sun 26 Oct 25, 16:56, Marek Vasut wrote:
-> > On 10/26/25 4:43 PM, Tom Rini wrote:
-> > > On Tue, Aug 05, 2025 at 08:00:29PM +0200, Paul Kocialkowski wrote:
-> > > > Hi,
-> > > >=20
-> > > > Le Mon 14 Oct 24, 10:43, Marek Vasut a =E9crit :
-> > > > > On 10/14/24 9:06 AM, Sky Huang wrote:
-> > > > > > From: "SkyLake.Huang" <skylake.huang@mediatek.com>
-> > > > > >=20
-> > > > > > Remove unnecessary CL22 phy reset before ethernet phy driver
-> > > > > > probe. Lots of ethernet phys requires driver to load firmware.
-> > > > > > Before that, CL22 phy reset may lead to malfunction.
-> > > > > >=20
-> > > > > > Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
-> > > > > > ---
-> > > > > >    drivers/net/phy/phy.c | 2 --
-> > > > > >    1 file changed, 2 deletions(-)
-> > > > > >=20
-> > > > > > diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-> > > > > > index 716a1d46111..e6fed8c41d7 100644
-> > > > > > --- a/drivers/net/phy/phy.c
-> > > > > > +++ b/drivers/net/phy/phy.c
-> > > > > > @@ -839,8 +839,6 @@ struct phy_device *phy_find_by_mask(struct =
-mii_dev *bus, uint phy_mask)
-> > > > > >    static void phy_connect_dev(struct phy_device *phydev, struc=
-t udevice *dev,
-> > > > > >    			    phy_interface_t interface)
-> > > > > >    {
-> > > > > > -	/* Soft Reset the PHY */
-> > > > > > -	phy_reset(phydev);
-> > > > > >    	if (phydev->dev && phydev->dev !=3D dev) {
-> > > > > >    		printf("%s:%d is connected to %s.  Reconnecting to %s\n",
-> > > > > >    		       phydev->bus->name, phydev->addr,
-> > > > >=20
-> > > > > This needs clarification and likely has to be handled differently=
-=2E Removing
-> > > > > the reset would leave the PHY in potentially undefined state.
-> > > > >=20
-> > > > > Which PHY is affected by this ?
-> > > >=20
-> > > > Good hunch. I just bisected down to this commit as I had some issue=
-s with my
-> > > > Allwinner V3 board using the internal CL22 PHY. The symptom is that=
- the LEDS's
-> > > > polarity was inverted. Network still seems to work (although not te=
-sted beyond
-> > > > ping).
-> > > >=20
-> > > > This change can have very significant consequences in general, whic=
-h were not
-> > > > explored at all in the commit. This may break many boards that do r=
-ely on that
-> > > > PHY reset, in various scenarios and for various reasons.
-> > > >=20
-> > > > I think it should be reverted as soon as possible to restore previo=
-us behavior.
-> > >=20
-> > > I'm wondering if anyone has further comments here? If I do go and rev=
-ert
-> > > this what is then going to break on the MediaTek side for example?
-> > Let's revert it, and if MTK stuff breaks, let's fix it properly then.
->=20
-> Agreed, keeping it only saves one setup but sacrifices many others. This =
-is
-> definitely not right.
->=20
-> An immediate solution to support Mediatek would be to add a config
-> option (enabled by default) for the PHY reset. Or maybe this could be des=
-cribed
-> in the board file somehow (this is a policy decision so I don't think any
-> approach based on device-tree would be relevant here).
+There is opportunity to do the work ourselves if we choose to[1] do or
+otherwise I'm not convinced this information can stay. I will expand on
+this, below.
 
-OK, can you please post the revert and cc the MediaTek people,
-explaining what you ran in to? Thanks!
+>> process and accordingly was rejected from the upstream process. This does
+>> not function anymore in U-Boot SPL to be loaded by BootROM with the
+>> [RGPIO1:RGPIO0]=1 and [RGPIO1:RGPIO0]=2 configurations. Use of SD Card /
+>> eMMC within U-Boot Main is not affected and functions normally. Aside,
+>> the
+>> effort is begun to reverse-engineer the BootROM and gain an understanding
+>> about what we would be supporting; for example the specific circumstance
+>> of the XMODEM too-man-NAK bug in StarFive loader code, or introducing a
+>> patch upstream to accommodate users that continue using deprecated modes.
+>> Meanwhile the documentation needs to be updated to reflect what is true
+>> and verifiable now.
+>>
+>> The support enabled in starfive_visionfive2_defconfig for many methods of
+>> data transfer is well-documented elsewhere and does not vary enough to be
+>> repeated in the JH-7110 common description or that of the supported board
+>> documents. This will be deserving of a brief mention in a future update
+>> so that users may easily ref link to the enabled methods in sections
+>> where
+>> they are documented. It is not clear if this will belong in the common
+>> description or per-board so it is omitted here.
+>>
+>> There's some plainly wrong information remaining for the supported boards
+>> also deserving of correction in a future update.
+>>
+>> -E
+>> ---
+>>   doc/board/starfive/deepcomputing_fml13v01.rst |  32 -
+>>   doc/board/starfive/jh7110_common.rst          | 597 +++++++++++++++---
+>>   doc/board/starfive/milk-v_mars.rst            |  73 ---
+>>   doc/board/starfive/pine64_star64.rst          |  77 +--
+>>   doc/board/starfive/visionfive2.rst            | 449 -------------
+>>   5 files changed, 511 insertions(+), 717 deletions(-)
+>>
+>> diff --git a/doc/board/starfive/deepcomputing_fml13v01.rst b/doc/
+>> board/starfive/deepcomputing_fml13v01.rst
+>> index 5d9612483b4..9777f4c6303 100644
+>> --- a/doc/board/starfive/deepcomputing_fml13v01.rst
+>> +++ b/doc/board/starfive/deepcomputing_fml13v01.rst
+>> @@ -9,38 +9,6 @@ The DeepComputing Framework motherboard (FLM13V01)
+>> can be combined with a
+>>   U-Boot for the board uses the same binaries as the VisionFive 2 board.
+>>   Currently only serial console output is supported by mainline U-Boot.
+>>   -Building
+>> ---------
+>> -
+>> -Setup the cross compilation environment variable:
+...snip...
+>> +Zero Stage BootLoader
+>> +^^^^^^^^^^^^^^^^^^^^^
+>> +
+>> +JH-7110 ZSBL is typically StarFive loader code in BootROM selected by
+>> RGPIO2
+>> +pull-down.
+>> +
+>> +====== ====== ======================================
+>> +RGPIO1 RGPIO0 StarFive loader function @ 0x2A00_0000
+>> +====== ====== ======================================
+>> +0      0      1-bit QSPI Flash offset 0x0
+>> +0      1      SDIO3.0 *(deprecated)*
+>> +1      0      eMMC5.0 *(deprecated)*
+> 
+> I think we should replace "deprecated" by "not recommended by StarFive".
 
---=20
-Tom
+The deprecated loader functions are not reliable and new designs
+substitute transistor logic that omits these modes. I did consider some
+alternative word choices and "deprecated" gets the point across quickly.>
+>> +1      1      UART Serial XMODEM loader
+>> +====== ====== ======================================
+>> +
+>> +StarFive loader code is assumed to copy content to SRAM @ 0x0800_0000
+>> and test
+>> +for StarFive SPL header followed by a jump to SRAM.
+> 
+> "is assumed" means what here? Is it "We don't know?" or "It is the
+> BootROM's duty"? Please, provide an unambiguous description.
+> 
+I agree, I don't like this word choice "is assumed", with the meaning of
+"We don't know?"
 
---ug8+wCr7zCcO5eYP
-Content-Type: application/pgp-signature; name="signature.asc"
+Do you know what BootROM code does ? I think it looks like it does at
+least what is described here, but there is some OTP and checksum action
+that I don't understand myself.
 
------BEGIN PGP SIGNATURE-----
+What do you suggest to say here?
 
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaP5ghgAKCRAr4qD1Cr/k
-Csw/AQD4PMo9+i87oMHXRrxNFq2b416WVd+ggXpAdTdK248jsQD/UbviqRLE53lk
-xAkA7dCeyR27cwA+ZVUU9KuKLEy6YQI=
-=0WE8
------END PGP SIGNATURE-----
+>> +
+>> +First Stage BootLoader
+>> +^^^^^^^^^^^^^^^^^^^^^^
+>> +
+...snip...
+>> -
+>> -Booting from SD-Card
+>> ---------------------
+>> -
+>> -The device boot ROM loads U-Boot SPL (u-boot-spl.bin.normal.out) from
+>> the
+>> -partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You
+>> are free
+>> -to choose any partition number.
+>> -
+>> -With the default configuration U-Boot SPL loads the U-Boot FIT image
+>> -(u-boot.itb) from partition 2
+>> (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x2).
+>> -When formatting it is recommended to use GUID
+>> -BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
+>> -
+>> -Booting from eMMC
+>> ------------------
+>> -
+>> -The device boot ROM tries to load U-Boot SPL (u-boot-
+>> spl.bin.normal.out) from
+>> -sector 0 of the eMMC's main hardware partition. But this conflicts
+>> with GPT
+>> -partitioning. Fortunately eMMC can alternatively load U-Boot SPL from
+>> a backup
+>> -position.
+>> -
+>> -For U-Boot SPL (u-boot-spl.bin.normal.out) starting at sector 2048
+>> (position
+>> -0x100000) write the following bytes to the eMMC device after GPT
+>> partitioning:
+>> -
+>> -======= ========================
+>> -Address Bytes
+>> -======= ========================
+>> -0x0000  40 02 00 00  00 00 10 00
+>> -0x0290  40 02 00 00  00 00 10 00
+>> -======= ========================
+> 
+> Please, don't drop this information about booting from eMMC.
+> 
+> Best regards
+> 
+> Heinrich
+> 
 
---ug8+wCr7zCcO5eYP--
+If you have a code listing for BootROM instead which details these
+address and byte references then I will be excited to learn more and
+expand on our description with citations.
+
+I do not, however, wish to continue with this booting from eMMC
+information as it is. No matter how much time we both have sunk trying
+to compare vendor BSP OS images, etc.:
+
+- it is not a feature that is supported today in U-Boot SPL
+
+- suggestion violates GUID Partition Table published standard
+
+- what I do understand now about JH-7110 BootROM[1] is I have no
+confidence in this information anymore about StarFive loader booting
+U-Boot SPL from SD Card / eMMC
+
+At our discretion we may contribute to this public document[1] and there
+will be no hesitation from me to introduce - on the basis of verifiable
+fact - upstream support and summary here for **what the immutable
+StarFive loader in JH-7110 SoC is doing**. Going the other way around
+looking at vendor BSP OS images is not acceptable to me after having
+sunk multiple days into that effort and discussing with you briefly in
+the past, there are too many unknowns and unexplained errors and the
+result violates actually published standards.
+
+1: https://codeberg.org/hrv/jhre
+
+... snip
+
+-E
