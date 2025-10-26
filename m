@@ -4,94 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD9FCCF9E5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58C7DCCD1A5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:43:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89EAD83849;
-	Sun, 26 Oct 2025 16:43:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CAFE0838BF;
+	Sun, 26 Oct 2025 16:43:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lm93PwE8";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="A14ZSu+0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EC0E82E34; Sun, 26 Oct 2025 16:43:21 +0100 (CET)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5218E838BB; Sun, 26 Oct 2025 16:43:35 +0100 (CET)
+Received: from mail-m49195.qiye.163.com (mail-m49195.qiye.163.com
+ [45.254.49.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F4AC83849
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:43:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E1D3838BF
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:43:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-44d9bd21422so1289291b6e.2
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 08:43:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761493398; x=1762098198; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=T4Bxt71Pn7Kx9lP8j4ikfH0RB7U84g4BVRC5dLpBTD8=;
- b=lm93PwE88dUJYlA205uA5nht2KZ7zV1DRGuwI/823qtKgoyvRyyIj0Y32RcSetQyuC
- p3AWLzSyjEjxcjmT8pJnT51HbQAg0UMV3yPHDEbp7F43wOOK+8JIAjemudLrY9vJnu6r
- kDz35FE7YWWyToGqh4u/DqPUi4B1zSuaLOZeo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761493398; x=1762098198;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=T4Bxt71Pn7Kx9lP8j4ikfH0RB7U84g4BVRC5dLpBTD8=;
- b=BN1g1op52PBwacFe0hqyDLN9LFH6zFJ4M3esWHVLk8EMatGhJrkq3Fodw5eAhPGAIM
- zC/ZjndBZo9jgeUgUF7ohK3MKqp1AVqKcPLHRCD3D2eu/J47WeukD9wq4cBEDOpnqEMw
- eMTaZbMZdAxL6SReSFPG/QFmAJRXFPfYi3dLpVTaaZRVYxBtPoC8HOhGhlVNqfULofiS
- 0mVHXFLioITEHQj9CkFZZIextYVP3rK1CcmtcdzOsN+DVoColTWQPwmju9KBf73oQ/1a
- gahufMdQCrDV5hm1SHMSl4DD62kwjkKXL7nuQQoaG58PXpD0cRMUs+A7uLuyBwuXmYHj
- nndA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVb5HOtpJYNZCdmNRAb5sSSjdJLelnX9Cftfb4th5pOYogMbBkK9E9E91fmzafNpHKniDQrcTw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxGtlINwXOLwg45U8peJhlggPMI+ouWPa0Wn56Bm5H2gqhmWKYj
- PBJ7jwBQOXHFT2/imMunhziaS31WvNgqBfJyPz0sU8WSH2hSidCKg5OP1OM4l/c07h1xMKbz7vV
- rrmOu64Avow==
-X-Gm-Gg: ASbGncsrMI9Z2bzYKrFrMrrmkkFTW8kEQCxVr4R5/nJZEuwEC4kzrBpndS6Y6BcD0hg
- liMyUVEfKE/lcHe+eHqxMKBZKdbXqKME0Hk9swMsei+d9ZMemELxisiL8cCIdscmy1AK8GyRBCt
- PM3Ox98T6BiU4fhDHYcoyBMoCyyHA4BDc0qqUuZ7M83RUPjHxbv6aUPdbTKWo6DnBmHxiNN/ffq
- dKG6Mb3McdjrT407N3OLMFZ/xoOXlWc6iUbmiqUNonsKAllQ6GryUzwWhn9gOLDO/qlwcT1j3CN
- Tv2m8pmhDDDYk+ee2zAfuTIMHyIfLFmPtaIvhxA2kanuIN/RdZcCxC2o0drQlYhS4sffP+b1lxL
- k4ejpiPFd57gymdcLuEYYEZ+9uc4ra+Y5prWs+Np0EEsoJ2V/3Y5i8Vqi4awQKY9r/cFMp5MknU
- ISDe4f2FoxjJBNc+RraAUTInb71LCjyMONNZhlt59/ux/WuM97IQ==
-X-Google-Smtp-Source: AGHT+IHajztz1tRh4wZs46Lbi6t6c0Q9Kv8S79N8D6pVuN8vsYMjIf0xWS9RnZldTSykg7ggJ9+Onw==
-X-Received: by 2002:a05:6808:3a0b:b0:44d:ab15:6af2 with SMTP id
- 5614622812f47-44dab1577f5mr1927220b6e.21.1761493397806; 
- Sun, 26 Oct 2025 08:43:17 -0700 (PDT)
-Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
- [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44da3e21d77sm1196034b6e.3.2025.10.26.08.43.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Oct 2025 08:43:16 -0700 (PDT)
-Date: Sun, 26 Oct 2025 09:43:14 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Paul Kocialkowski <paulk@sys-base.io>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jacky Chou <jacky_chou@aspeedtech.com>,
- Sky Huang <SkyLake.Huang@mediatek.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Eugeniu Rosca <erosca@de.adit-jv.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- gss_mtk_uboot_upstream@mediatek.com
-Subject: Re: [PATCH 1/1] net: phy: Do not do CL22 phy reset before ethernet
- phy driver probe
-Message-ID: <20251026154314.GW6688@bill-the-cat>
-References: <20241014070611.32040-1-SkyLake.Huang@mediatek.com>
- <3d811dec-d233-4e6d-bcc7-ac07c915e68a@mailbox.org>
- <aJJGvQpoYUWWjwrB@collins>
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from [192.168.1.64] (unknown [124.72.36.208])
+ by smtp.qiye.163.com (Hmail) with ESMTP id 273748f9b;
+ Sun, 26 Oct 2025 23:43:28 +0800 (GMT+08:00)
+Message-ID: <75bc82e3-9886-462e-aa11-5471be30676b@rock-chips.com>
+Date: Sun, 26 Oct 2025 23:43:28 +0800
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GCC9oxLarXfDfDhX"
-Content-Disposition: inline
-In-Reply-To: <aJJGvQpoYUWWjwrB@collins>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] arm64: dts: rockchip: Add Radxa ROCK 2A/2F
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Sumit Garg <sumit.garg@kernel.org>
+Cc: Yao Zi <ziyao@disroot.org>, Chukun Pan <amadeus@jmu.edu.cn>,
+ u-boot@lists.denx.de, Nicolas Frattaroli <nicolas.frattaroli@collabora.com>,
+ Heiko Stuebner <heiko@sntech.de>
+References: <20251019205849.954736-1-jonas@kwiboo.se>
+ <20251019205849.954736-2-jonas@kwiboo.se>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20251019205849.954736-2-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9a21305bf203afkunmd8898c324d2b6b
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTR4fVkMfTUlPSxodTUwZSFYVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUtDWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
+ VKQktLWQY+
+DKIM-Signature: a=rsa-sha256;
+ b=A14ZSu+0SFVza5ZxgzloXQ6a+8l5mW7jjXWBR5ruOuv1pEYtEknNJ6PKpGGjSiWcCydDtop35HXvZgWH/suDBUNZBQndJXdCGr0Cj3hFeZT6Y5sVP8iUD4lqRnmUxOusqUYjpUGLiIGgx5v7UpdQ0ztEEeIixw/xwindByZ7YlM=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
+ bh=fAgHSdH1uzNeSDJRjrIsh9bm+PvRfEEhr790lWmMepo=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,81 +75,446 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GCC9oxLarXfDfDhX
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025/10/20 04:58, Jonas Karlman wrote:
+> The ROCK 2A and ROCK 2F is a high-performance single board computer
+> developed by Radxa, based on the Rockchip RK3528A SoC.
+>
+> Add initial device tree for the Radxa ROCK 2A and ROCK 2F boards.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Tested-by: Yao Zi <ziyao@disroot.org>
+> Reviewed-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> Tested-by: Nicolas Frattaroli <nicolas.frattaroli@collabora.com>
+> Link: https://lore.kernel.org/r/20250717103720.2853031-3-jonas@kwiboo.se
+> Signed-off-by: Heiko Stuebner <heiko@sntech.de>
+>
+> [ upstream commit: 5b71b3d9aa61626d6a93ed2f761a748aa2ecfa95 ]
+>
+> (cherry picked from commit d272bc0c747a5af49cf98140ebd25a702f84ab52)
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-On Tue, Aug 05, 2025 at 08:00:29PM +0200, Paul Kocialkowski wrote:
-> Hi,
->=20
-> Le Mon 14 Oct 24, 10:43, Marek Vasut a =E9crit :
-> > On 10/14/24 9:06 AM, Sky Huang wrote:
-> > > From: "SkyLake.Huang" <skylake.huang@mediatek.com>
-> > >=20
-> > > Remove unnecessary CL22 phy reset before ethernet phy driver
-> > > probe. Lots of ethernet phys requires driver to load firmware.
-> > > Before that, CL22 phy reset may lead to malfunction.
-> > >=20
-> > > Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
-> > > ---
-> > >   drivers/net/phy/phy.c | 2 --
-> > >   1 file changed, 2 deletions(-)
-> > >=20
-> > > diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
-> > > index 716a1d46111..e6fed8c41d7 100644
-> > > --- a/drivers/net/phy/phy.c
-> > > +++ b/drivers/net/phy/phy.c
-> > > @@ -839,8 +839,6 @@ struct phy_device *phy_find_by_mask(struct mii_de=
-v *bus, uint phy_mask)
-> > >   static void phy_connect_dev(struct phy_device *phydev, struct udevi=
-ce *dev,
-> > >   			    phy_interface_t interface)
-> > >   {
-> > > -	/* Soft Reset the PHY */
-> > > -	phy_reset(phydev);
-> > >   	if (phydev->dev && phydev->dev !=3D dev) {
-> > >   		printf("%s:%d is connected to %s.  Reconnecting to %s\n",
-> > >   		       phydev->bus->name, phydev->addr,
-> >=20
-> > This needs clarification and likely has to be handled differently. Remo=
-ving
-> > the reset would leave the PHY in potentially undefined state.
-> >=20
-> > Which PHY is affected by this ?
->=20
-> Good hunch. I just bisected down to this commit as I had some issues with=
- my
-> Allwinner V3 board using the internal CL22 PHY. The symptom is that the L=
-EDS's
-> polarity was inverted. Network still seems to work (although not tested b=
-eyond
-> ping).
->=20
-> This change can have very significant consequences in general, which were=
- not
-> explored at all in the commit. This may break many boards that do rely on=
- that
-> PHY reset, in various scenarios and for various reasons.
->=20
-> I think it should be reverted as soon as possible to restore previous beh=
-avior.
+Thanks,
+- Kever
+> ---
+>   .../src/arm64/rockchip/rk3528-rock-2.dtsi     | 293 ++++++++++++++++++
+>   .../src/arm64/rockchip/rk3528-rock-2a.dts     |  82 +++++
+>   .../src/arm64/rockchip/rk3528-rock-2f.dts     |  10 +
+>   3 files changed, 385 insertions(+)
+>   create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-rock-2.dtsi
+>   create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-rock-2a.dts
+>   create mode 100644 dts/upstream/src/arm64/rockchip/rk3528-rock-2f.dts
+>
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3528-rock-2.dtsi b/dts/upstream/src/arm64/rockchip/rk3528-rock-2.dtsi
+> new file mode 100644
+> index 000000000000..aedc7ee9ee46
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3528-rock-2.dtsi
+> @@ -0,0 +1,293 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/input/input.h>
+> +#include <dt-bindings/leds/common.h>
+> +#include <dt-bindings/pwm/pwm.h>
+> +#include "rk3528.dtsi"
+> +
+> +/ {
+> +	aliases {
+> +		i2c1 = &i2c1;
+> +		mmc0 = &sdhci;
+> +		mmc1 = &sdmmc;
+> +		serial0 = &uart0;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:1500000n8";
+> +	};
+> +
+> +	adc-keys {
+> +		compatible = "adc-keys";
+> +		io-channels = <&saradc 0>;
+> +		io-channel-names = "buttons";
+> +		keyup-threshold-microvolt = <1800000>;
+> +		poll-interval = <100>;
+> +
+> +		button-maskrom {
+> +			label = "MASKROM";
+> +			linux,code = <KEY_SETUP>;
+> +			press-threshold-microvolt = <0>;
+> +		};
+> +	};
+> +
+> +	leds: leds {
+> +		compatible = "gpio-leds";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&state_led_b>;
+> +
+> +		led-0 {
+> +			color = <LED_COLOR_ID_BLUE>;
+> +			default-state = "on";
+> +			function = LED_FUNCTION_HEARTBEAT;
+> +			gpios = <&gpio1 RK_PA3 GPIO_ACTIVE_HIGH>;
+> +			linux,default-trigger = "heartbeat";
+> +		};
+> +	};
+> +
+> +	vdd_0v9: regulator-0v9-vdd {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vdd_0v9";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <900000>;
+> +		regulator-max-microvolt = <900000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc_ddr: regulator-1v1-vcc-ddr {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_ddr";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <1100000>;
+> +		regulator-max-microvolt = <1100000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc_1v8: regulator-1v8-vcc {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_1v8";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <1800000>;
+> +		vin-supply = <&vcc_3v3>;
+> +	};
+> +
+> +	vcc_3v3: regulator-3v3-vcc {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc_3v3";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc_wifi: regulator-3v3-vcc-wifi {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpios = <&gpio4 RK_PA4 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_wifi_pwr>;
+> +		regulator-name = "vcc_wifi";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		vin-supply = <&vcc_3v3>;
+> +	};
+> +
+> +	vcc5v0_sys: regulator-5v0-vcc-sys {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc5v0_sys";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +	};
+> +
+> +	vcc5v0_usb20: regulator-5v0-vcc-usb20 {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpios = <&gpio0 RK_PA1 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_host_en>;
+> +		regulator-name = "vcc5v0_usb20";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vccio_sd: regulator-vccio-sd {
+> +		compatible = "regulator-gpio";
+> +		gpios = <&gpio1 RK_PC1 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&sdmmc_vol_ctrl_h>;
+> +		regulator-name = "vccio_sd";
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		states = <1800000 0x0>, <3300000 0x1>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vdd_arm: regulator-vdd-arm {
+> +		compatible = "pwm-regulator";
+> +		pwms = <&pwm1 0 5000 PWM_POLARITY_INVERTED>;
+> +		pwm-supply = <&vcc5v0_sys>;
+> +		regulator-name = "vdd_arm";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <746000>;
+> +		regulator-max-microvolt = <1201000>;
+> +		regulator-settling-time-up-us = <250>;
+> +	};
+> +
+> +	vdd_logic: regulator-vdd-logic {
+> +		compatible = "pwm-regulator";
+> +		pwms = <&pwm2 0 5000 PWM_POLARITY_INVERTED>;
+> +		pwm-supply = <&vcc5v0_sys>;
+> +		regulator-name = "vdd_logic";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <705000>;
+> +		regulator-max-microvolt = <1006000>;
+> +		regulator-settling-time-up-us = <250>;
+> +	};
+> +
+> +	rfkill {
+> +		compatible = "rfkill-gpio";
+> +		label = "rfkill-wlan";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&wifi_reg_on_h>;
+> +		radio-type = "wlan";
+> +		shutdown-gpios = <&gpio1 RK_PA6 GPIO_ACTIVE_HIGH>;
+> +	};
+> +};
+> +
+> +&cpu0 {
+> +	cpu-supply = <&vdd_arm>;
+> +};
+> +
+> +&cpu1 {
+> +	cpu-supply = <&vdd_arm>;
+> +};
+> +
+> +&cpu2 {
+> +	cpu-supply = <&vdd_arm>;
+> +};
+> +
+> +&cpu3 {
+> +	cpu-supply = <&vdd_arm>;
+> +};
+> +
+> +&gpu {
+> +	mali-supply = <&vdd_logic>;
+> +	status = "okay";
+> +};
+> +
+> +&i2c1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&i2c1m0_xfer>;
+> +	status = "okay";
+> +
+> +	eeprom@50 {
+> +		compatible = "belling,bl24c16a", "atmel,24c16";
+> +		reg = <0x50>;
+> +		pagesize = <16>;
+> +		read-only;
+> +		vcc-supply = <&vcc_3v3>;
+> +	};
+> +};
+> +
+> +&pinctrl {
+> +	bluetooth {
+> +		bt_wake_host_h: bt-wake-host-h {
+> +			rockchip,pins = <1 RK_PC2 RK_FUNC_GPIO &pcfg_pull_down>;
+> +		};
+> +
+> +		host_wake_bt_h: host-wake-bt-h {
+> +			rockchip,pins = <1 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	leds {
+> +		state_led_b: state-led-b {
+> +			rockchip,pins = <1 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	sdmmc {
+> +		sdmmc_vol_ctrl_h: sdmmc-vol-ctrl-h {
+> +			rockchip,pins = <1 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	usb {
+> +		usb_host_en: usb-host-en {
+> +			rockchip,pins = <0 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	wifi {
+> +		usb_wifi_pwr: usb-wifi-pwr {
+> +			rockchip,pins = <4 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		wifi_reg_on_h: wifi-reg-on-h {
+> +			rockchip,pins = <1 RK_PA6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		wifi_wake_host_h: wifi-wake-host-h {
+> +			rockchip,pins = <1 RK_PA7 RK_FUNC_GPIO &pcfg_pull_down>;
+> +		};
+> +	};
+> +};
+> +
+> +&pwm1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pwm1m0_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&pwm2 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pwm2m0_pins>;
+> +	status = "okay";
+> +};
+> +
+> +&saradc {
+> +	vref-supply = <&vcc_1v8>;
+> +	status = "okay";
+> +};
+> +
+> +&sdhci {
+> +	bus-width = <8>;
+> +	cap-mmc-highspeed;
+> +	mmc-hs200-1_8v;
+> +	no-sd;
+> +	no-sdio;
+> +	non-removable;
+> +	vmmc-supply = <&vcc_3v3>;
+> +	vqmmc-supply = <&vcc_1v8>;
+> +	status = "okay";
+> +};
+> +
+> +&sdmmc {
+> +	bus-width = <4>;
+> +	cap-mmc-highspeed;
+> +	cap-sd-highspeed;
+> +	disable-wp;
+> +	max-frequency = <100000000>;
+> +	sd-uhs-sdr104;
+> +	vmmc-supply = <&vcc_3v3>;
+> +	vqmmc-supply = <&vccio_sd>;
+> +	status = "okay";
+> +};
+> +
+> +&uart0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&uart0m0_xfer>;
+> +	status = "okay";
+> +};
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3528-rock-2a.dts b/dts/upstream/src/arm64/rockchip/rk3528-rock-2a.dts
+> new file mode 100644
+> index 000000000000..c03ae1dd3456
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3528-rock-2a.dts
+> @@ -0,0 +1,82 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +/dts-v1/;
+> +
+> +#include "rk3528-rock-2.dtsi"
+> +
+> +/ {
+> +	model = "Radxa ROCK 2A";
+> +	compatible = "radxa,rock-2a", "rockchip,rk3528";
+> +
+> +	aliases {
+> +		ethernet0 = &gmac1;
+> +	};
+> +
+> +	vcc5v0_usb30_otg: regulator-5v0-vcc-usb30-otg {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpios = <&gpio1 RK_PC3 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&usb_otg_en>;
+> +		regulator-name = "vcc5v0_usb30_otg";
+> +		regulator-min-microvolt = <5000000>;
+> +		regulator-max-microvolt = <5000000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +};
+> +
+> +&gmac1 {
+> +	clock_in_out = "output";
+> +	phy-handle = <&rgmii_phy>;
+> +	phy-mode = "rgmii-id";
+> +	phy-supply = <&vcc_3v3>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&rgmii_miim>, <&rgmii_tx_bus2>, <&rgmii_rx_bus2>,
+> +		    <&rgmii_rgmii_clk>, <&rgmii_rgmii_bus>;
+> +	status = "okay";
+> +};
+> +
+> +&leds {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&state_led_b>, <&sys_led_g>;
+> +
+> +	led-1 {
+> +		color = <LED_COLOR_ID_GREEN>;
+> +		default-state = "on";
+> +		function = LED_FUNCTION_STATUS;
+> +		gpios = <&gpio3 RK_PC1 GPIO_ACTIVE_LOW>;
+> +		linux,default-trigger = "default-on";
+> +	};
+> +};
+> +
+> +&mdio1 {
+> +	rgmii_phy: ethernet-phy@1 {
+> +		compatible = "ethernet-phy-ieee802.3-c22";
+> +		reg = <0x1>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&gmac1_rstn_l>;
+> +		reset-assert-us = <20000>;
+> +		reset-deassert-us = <100000>;
+> +		reset-gpios = <&gpio4 RK_PC2 GPIO_ACTIVE_LOW>;
+> +	};
+> +};
+> +
+> +&pinctrl {
+> +	ethernet {
+> +		gmac1_rstn_l: gmac1-rstn-l {
+> +			rockchip,pins = <4 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	leds {
+> +		sys_led_g: sys-led-g {
+> +			rockchip,pins = <3 RK_PC1 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	usb {
+> +		usb_otg_en: usb-otg-en {
+> +			rockchip,pins = <1 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +};
+> diff --git a/dts/upstream/src/arm64/rockchip/rk3528-rock-2f.dts b/dts/upstream/src/arm64/rockchip/rk3528-rock-2f.dts
+> new file mode 100644
+> index 000000000000..3e2b9b685cb2
+> --- /dev/null
+> +++ b/dts/upstream/src/arm64/rockchip/rk3528-rock-2f.dts
+> @@ -0,0 +1,10 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +
+> +/dts-v1/;
+> +
+> +#include "rk3528-rock-2.dtsi"
+> +
+> +/ {
+> +	model = "Radxa ROCK 2F";
+> +	compatible = "radxa,rock-2f", "rockchip,rk3528";
+> +};
 
-I'm wondering if anyone has further comments here? If I do go and revert
-this what is then going to break on the MediaTek side for example?
+-- 
+Thanks & Best regards,
+   Kever Yang
+**************************************************************************************************
+杨凯  市场部             Kever Yang      Marketing Department
+瑞芯微电子股份有限公司                Rockchip Electronics Co.，Ltd。
+地址：福建省福州市铜盘路软件大道89号软件园A区18号楼 (350003)
+Addr : No.18 Building，A District，No.89，Fuzhou Software Boulevard，Fuzhou，Fujian，PRC
 
---=20
-Tom
-
---GCC9oxLarXfDfDhX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaP5BkgAKCRAr4qD1Cr/k
-CmbPAQCvrJMGRHzmc+xxRkgK8tVdRpBeuntydRGOIQHJSfHtZwEA77pu8XYDS/Wf
-3jGmpplFHHNJ6ziWmrkQJeffgLksEgU=
-=MvFd
------END PGP SIGNATURE-----
-
---GCC9oxLarXfDfDhX--
