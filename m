@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4277CCD1A5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:45:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21058CCD1A5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:45:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AF2983849;
-	Sun, 26 Oct 2025 16:45:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AC0B5838D2;
+	Sun, 26 Oct 2025 16:45:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gBpLOx09";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GQOvkFiJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6503838BF; Sun, 26 Oct 2025 16:45:41 +0100 (CET)
-Received: from mail-m49238.qiye.163.com (mail-m49238.qiye.163.com
- [45.254.49.238])
+ id B0C74838F3; Sun, 26 Oct 2025 16:45:49 +0100 (CET)
+Received: from mail-m49245.qiye.163.com (mail-m49245.qiye.163.com
+ [45.254.49.245])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D76A0832AD
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:45:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E1F4832AD
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:45:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [124.72.36.208])
- by smtp.qiye.163.com (Hmail) with ESMTP id 273749015;
- Sun, 26 Oct 2025 23:45:34 +0800 (GMT+08:00)
-Message-ID: <3a187b33-6439-4488-a064-2f7f9ed7fee3@rock-chips.com>
-Date: Sun, 26 Oct 2025 23:45:34 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 273749026;
+ Sun, 26 Oct 2025 23:45:43 +0800 (GMT+08:00)
+Message-ID: <18fdc3a3-b6ac-4ef7-9b47-8c375d1ecb97@rock-chips.com>
+Date: Sun, 26 Oct 2025 23:45:43 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 12/18] rockchip: odroid-go2: Select board FDT from FIT
@@ -46,14 +46,14 @@ From: Kever Yang <kever.yang@rock-chips.com>
 In-Reply-To: <20250831165001.2749711-13-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a2132473203afkunm1c66f50a4d32e5
+X-HM-Tid: 0a9a21326b5103afkunmd67d8e6f4d3393
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaSR8eVh4aTkpOQhgZTB0ZQlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCT00fVh4ZQ0hLGkseTkxCSVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUtDWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=gBpLOx09bIByfQoIk50vthymxZylfXtCstsgokYRC47pLQxlIMtAbELzLjfwv1OaUPAQv2x2KFh1pOPbJ0gXav59WPggw1IrMNVIkzSoz1sqvsecwuYtiwZsUyTwmEYTI3bdmr0ppTSkAdQFgCHFIPlOxZwb4XVDIBVnsM05yPM=;
+ b=GQOvkFiJqlCFx1S+aOLKMrIgzPcHfql8p0oOZiGi+QhCp8rtZWcfdA/c7UlCXSmVggOOYcj6Xm1/372sS3z1QOLa/E18OS9CUAuJ+NNMEYjjiSFWAo/asFac4Q14a9Xwkpxffh+k+tD4qhvhNOs+R/seGU3x94bfHbQFKCNo1C0=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
  bh=ilesTHpEz7kiiKAHHKfZji8r/zkdOg26qdxwr2h3+Lw=;
  h=date:mime-version:subject:message-id:from;
