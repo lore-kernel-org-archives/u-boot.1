@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56DAECCD1A5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 14:27:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 467ACCCD1A5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 14:27:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CF7A836B2;
-	Sun, 26 Oct 2025 15:27:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C3A4583623;
+	Sun, 26 Oct 2025 15:27:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iPWkNeiS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OXMI2GX5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9602483623; Sun, 26 Oct 2025 15:27:15 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 5ABCB836D1; Sun, 26 Oct 2025 15:27:19 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A500A82E34
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 15:27:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7AEF382E34
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 15:27:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-63c1a0d6315so7270474a12.1
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 07:27:13 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-b6d4e44c54aso665254766b.2
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 07:27:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1761488833; x=1762093633; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1761488837; x=1762093637; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ytmJ8y9JwnmWAyzknKkMYjTBc9gRHz/BU/sApuKwi7c=;
- b=iPWkNeiSjDO+cYige+jf6y5i3d13J1vtONFcn0muegDKrt0sJBA08T0mA2N2PLY3Bz
- 30A5EcAUH9rWZ6zKVx/QV7TPRgAuTPbxzjBGDTNy3YAmvh6tXySPXsiu3cKz2uWN7s/J
- XlWQR18CpL0tCN+apLIMe8bi/ZJuL2ArRGXj8=
+ bh=g4R0v++ClCWfulUsKiMDcX3bR/iNd05TYb4SnN9OoNU=;
+ b=OXMI2GX541Jgg5p538miPrIjXAkISwAcDHkQ3+9jQwfhll4+Y7dHik1hWaCDyOc4ou
+ T813Vd7Kgm6xU+K4VtJG1AC3ZmG5NutcfjcWpNOKXimbFJcAqIHHftkVplJybDrfJ6Fa
+ W8PM1d6un4ePDVW6yad09l8KbXKtRRHQcajC8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761488833; x=1762093633;
+ d=1e100.net; s=20230601; t=1761488837; x=1762093637;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ytmJ8y9JwnmWAyzknKkMYjTBc9gRHz/BU/sApuKwi7c=;
- b=YpSqt9NrmW6uBvMti0A7Xe+ytbzaWiHnSSpsdtgxTpwZhs0o8Iec0sQH3VX6a6Fd5+
- 1qBaSM0yqQPBABYTDavIyDiWCUB/3drPyLXgN13xB+nVobEpNzclPn082CwHAPK6kCNI
- lE9/z3ABOPrsAh5u8aPZ8oNYaaLi/QegLqO2CbzOxG+p4VNb/F2LitN2DR5ZLAtQyVuy
- oHRKryt8Hpr4D7eSQrLk6af5zUkwU9X0GSiYaFSdWEU7D7XJJmlzHrkgTmpYI3Vju1EF
- uCUM5DXDMBoIfnBk/0UJX7aDPCkzJw5Zh4BwCAajBUe/0NIcVcFucVB0t5zNhSgQIiJs
- MhYg==
-X-Gm-Message-State: AOJu0YyMMkQRtKdlBupjKkIJqAuc2xW4xicsSLj4qgqLsLEWmfJQ+bRT
- vS05IO/P6tUfg3nVh6/BX+7GGPDJC9dX+x/xFKsMnZiAtRJOH5wR18iSwPU42fpBvHgK6Fx6G+q
- 2CW9qi8bB1wwxlA3qppEL0OBXznsEBbAVUTPz4uUl
-X-Gm-Gg: ASbGncu+4vE/mCVpH9YF/3Cev/BySECDtHwhrRhORG6qObdO+e4nLzKobIT13n1LeZe
- FCSvXBsfmRd5TZqvVRnpF+WeH48mGzgDw31v3OAvjo59Jud0OeM29vCDL69PWAwyXVDnqdK3xE6
- 8aFcVJdBVoxGPGIn/0XqvO94pJPgoUkLMO/Z8NdUoe2djQpgr1qwXfuOgi9eD4k3H/ccbw2Csl1
- tdLpL4e1nYyZ/BS4rwv156Umcm1RhcKpGNKtcWcjICOCvu/+i00bcOBGsK9
-X-Google-Smtp-Source: AGHT+IH4axvxcaB1gaz1S2+WabIAk1Iw4qjd+PhPR2CujACxi0Epen79ymoEL3WkJCVKq/aZ/9fcnEB0+9oO6FqOn9E=
-X-Received: by 2002:a05:6402:13ca:b0:62f:8274:d6bd with SMTP id
- 4fb4d7f45d1cf-63c1f626dd4mr34918285a12.8.1761488833146; Sun, 26 Oct 2025
- 07:27:13 -0700 (PDT)
+ bh=g4R0v++ClCWfulUsKiMDcX3bR/iNd05TYb4SnN9OoNU=;
+ b=EGXGGMBuh5wkLB2MxEryCH7GM0sA64kshm6zJSwqsTIW7MA4l7nUoiXtx37YJkxtj1
+ yxTMSXUg7EH+r7KcaEfpUhaydAg4kXdvqNobPQNKQeD56Xpr5kHYVf/UJGbSL9knsEgY
+ 83VRPGnX+a0c0ynxd633yHVO2x4C6yS3f6ou6O9sz2GV2W6KhfW1E2OcxiJwpX52VFmS
+ PaHDjFKAlYDKyA1figtiEtDmAioUkmS5ErGCHxUdbXpC4dAzeUcoTLTEUpPC0KUXV30K
+ 5mt3uZdgFyaRST2UtOtqcV3ST2K72GmVxh3o2kZmtp2s+kgBTV3nHd5U/Vn8TtDs7Yg0
+ bEhg==
+X-Gm-Message-State: AOJu0YylZbj4p3WLXfWq72MWUTvVaiIBubgB64BLyBiuN8qyHMyBfnb3
+ tx5GZA06WAeo5gHbXoGj7v7nVuFciBtpm2vfMKZCJy6Fs615zYqHwh2IB5Wer2CEtVE/BGpU63X
+ yNriLfDgmE0arprigt8fVDJfe0CoQgjc5AcKALlaP
+X-Gm-Gg: ASbGncvUgMmx0tZLG4WQfVgsGEou1KbQDjhVGJdClctUSOScXylKfiTdANBUGk1rESP
+ axDgCMejYNjwabcYpy50xIb7NG4M4TiYee9+i/Y0WA3e2ouIihBtfnawouy8LP9Wc+Z51mIwLMK
+ 0xKC3tPyAe9ZcUBI97YxF162lnbUEdgzIyx8dQzSUz1UnL7+3VdKmCBPdxmEfj2AGDQbjn9978r
+ YAOAa8DMMj1l7mxpcnlT4XjrQVieTM/48P0ddCNgbJh/FwyPMSinWGZXzucOvxVb4/0k1E=
+X-Google-Smtp-Source: AGHT+IEeLpsFZ996Qj40T6KAs6oues+U+TtZBwb5hVJRooHVKQIn62wEbpljzvMypXFheZYgdJoLir3gnffwLwRqZig=
+X-Received: by 2002:a17:907:da2:b0:b6d:7573:ccf2 with SMTP id
+ a640c23a62f3a-b6d7573ceffmr730927366b.62.1761488836966; Sun, 26 Oct 2025
+ 07:27:16 -0700 (PDT)
 MIME-Version: 1.0
 References: <20251024151219.100970-1-wolfgang.wallner@br-automation.com>
- <20251024151219.100970-2-wolfgang.wallner@br-automation.com>
-In-Reply-To: <20251024151219.100970-2-wolfgang.wallner@br-automation.com>
+ <20251024151219.100970-3-wolfgang.wallner@br-automation.com>
+In-Reply-To: <20251024151219.100970-3-wolfgang.wallner@br-automation.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 26 Oct 2025 14:26:58 +0000
-X-Gm-Features: AWmQ_bmsawfFZBIbj_2ENuERE4aBlMUYBivp64Uo7-r55Afa2Ygsr0NiiQYNA5w
-Message-ID: <CAFLszTgU_1m0jyjOqTrD1GWv1mURv4t2WOLPu3d0crA_rFBMbg@mail.gmail.com>
-Subject: Re: [PATCH 1/9] doc: develop: Fix typos in binman/binman.rst
+Date: Sun, 26 Oct 2025 14:26:59 +0000
+X-Gm-Features: AWmQ_blkc9dAGBzS3cv__yxmAPPrXO6AiaCfZ1D7kaU64gV-QBr4SeplcktEKew
+Message-ID: <CAFLszTjTpqPVXOhbjL7wur=nLw6t6NzY8YLs+rRB+NUEEHqWqw@mail.gmail.com>
+Subject: Re: [PATCH 2/9] doc: develop: Change formatting to make binman doc
+ more readable
 To: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
 Cc: u-boot@lists.denx.de, 
  Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>, 
@@ -94,13 +95,14 @@ X-Virus-Status: Clean
 On Fri, 24 Oct 2025 at 16:12, Wolfgang Wallner
 <wolfgang.wallner@br-automation.com> wrote:
 >
-> Fix some typos in binman.rst.
+> Change the formatting of binman.rst so that the compiled HTML output
+> becomes more readable. Changes include enumerations and the escaping of
+> arguments starting with a double dash (e.g. --debug).
 >
 > Signed-off-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
->
 > ---
 >
->  tools/binman/binman.rst | 34 +++++++++++++++++-----------------
->  1 file changed, 17 insertions(+), 17 deletions(-)
+>  tools/binman/binman.rst | 39 ++++++++++++++++++++++-----------------
+>  1 file changed, 22 insertions(+), 17 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
