@@ -4,58 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E847ACCD1A5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:46:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDE0FCCF9E5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:46:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BC0183906;
-	Sun, 26 Oct 2025 16:46:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4F774838D2;
+	Sun, 26 Oct 2025 16:46:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="RsbEflLq";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="OI9z7pMD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B91A83906; Sun, 26 Oct 2025 16:46:18 +0100 (CET)
-Received: from mail-m3289.qiye.163.com (mail-m3289.qiye.163.com
- [220.197.32.89])
+ id 407DA838D7; Sun, 26 Oct 2025 16:46:25 +0100 (CET)
+Received: from mail-m3273.qiye.163.com (mail-m3273.qiye.163.com
+ [220.197.32.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BC4A832AD
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:46:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4B8A832AD
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:46:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [124.72.36.208])
- by smtp.qiye.163.com (Hmail) with ESMTP id 273749041;
- Sun, 26 Oct 2025 23:46:12 +0800 (GMT+08:00)
-Message-ID: <fd3449b9-867f-484b-95a5-d2dd30d26553@rock-chips.com>
-Date: Sun, 26 Oct 2025 23:46:12 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 273749046;
+ Sun, 26 Oct 2025 23:46:19 +0800 (GMT+08:00)
+Message-ID: <41c22d50-d162-413c-b790-356ec50dacde@rock-chips.com>
+Date: Sun, 26 Oct 2025 23:46:19 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 15/18] rockchip: odroid-go2: Turn on the blue LED at
- boot
+Subject: Re: [PATCH v2 16/18] rockchip: odroid-go2: Enable more commands
 To: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner
  <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250831165001.2749711-1-jonas@kwiboo.se>
- <20250831165001.2749711-16-jonas@kwiboo.se>
+ <20250831165001.2749711-17-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250831165001.2749711-16-jonas@kwiboo.se>
+In-Reply-To: <20250831165001.2749711-17-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a2132dc1f03afkunm01ab1fb64d350c
+X-HM-Tid: 0a9a2132f7c303afkunmad89d6ab4d358c
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCHhlJVk5JQx1JSx5ISUMZGlYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkaTEgZVkIfTh9NT0hITx0YGVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUtDWVdZFhoPEhUdFFlBWU9LSFVKS0lIQkhCVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=RsbEflLqVL+hDJfsvvbso9hju6CXXLHJhqUGqfmnTDdZ1ceELsNF5MoGWyD77IDA5fhTmDG1/LvhRBAb2yRmT3KWtOiv2o7vl+EfFy2o+aDagYXaThr+kSvHs7rkpVtCcc70F5/Fh/Wd8C2mMkEK2Lpy1FgOeE4Cj7l6/2uXijk=;
+ b=OI9z7pMDZgpr1bSTpuxexRD3Z8ikSIEQl+4nncXv4tm2B1l9rNScZTpIKJ8sGsvV8RI0raALEPj1Nz4BdPDrojtPP1ZnqrsxM2ljGB2gD8O7PvyYu4ecWCs/sVyEEWmBzcIabRryOa80PZePIeDLHJLkgj9znBVSG+UbaH6RFd8=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=k0WvGA+KdbgV4gJFiZekWvetcsWi4y9eqm2z9RLJeno=;
+ bh=2ViMk3nR0fS0hLqEFfB2nQs+tXIZJ8W+UxwMZ4QD6nY=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,8 +74,8 @@ X-Virus-Status: Clean
 
 
 On 2025/9/1 00:49, Jonas Karlman wrote:
-> Use default-state prop to ensure that the blue heartbeat LED turns on
-> at boot to inticate that U-Boot proper has been reached.
+> Enable the default commands and some more useful commands that can be
+> useful to determin the state of the board from U-Boot CLI.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -86,25 +85,45 @@ Thanks,
 > ---
 > v2: No change
 > ---
->   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 5 +++++
->   1 file changed, 5 insertions(+)
+>   configs/odroid-go2_defconfig | 19 +++++++++----------
+>   1 file changed, 9 insertions(+), 10 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> index 393710246e1c..170e0f7d8475 100644
-> --- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> @@ -5,6 +5,11 @@
->   
->   #include "rk3326-u-boot.dtsi"
->   
-> +&blue_led {
-> +	default-state = "on";
-> +	u-boot,default-brightness = <127>;
-> +};
-> +
->   &i2c0_xfer {
->   	bootph-pre-ram;
->   };
+> diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
+> index 70d74c65a2f3..512ffefc70f6 100644
+> --- a/configs/odroid-go2_defconfig
+> +++ b/configs/odroid-go2_defconfig
+> @@ -42,22 +42,21 @@ CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
+>   CONFIG_SPL_ATF=y
+>   # CONFIG_TPL_FRAMEWORK is not set
+>   # CONFIG_TPL_BANNER_PRINT is not set
+> -# CONFIG_CMD_BOOTD is not set
+> -# CONFIG_CMD_ELF is not set
+> -# CONFIG_CMD_IMI is not set
+> -# CONFIG_CMD_XIMG is not set
+> -# CONFIG_CMD_LZMADEC is not set
+> -# CONFIG_CMD_UNZIP is not set
+> +CONFIG_CMD_MEMINFO=y
+> +CONFIG_CMD_MEMINFO_MAP=y
+> +CONFIG_CMD_ADC=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_PWM=y
+>   CONFIG_CMD_GPT=y
+> -# CONFIG_CMD_LOADB is not set
+> -# CONFIG_CMD_LOADS is not set
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MISC=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_POWEROFF=y
+>   CONFIG_CMD_USB=y
+>   CONFIG_CMD_ROCKUSB=y
+>   CONFIG_CMD_USB_MASS_STORAGE=y
+> -# CONFIG_CMD_ITEST is not set
+> -# CONFIG_CMD_SLEEP is not set
+> +CONFIG_CMD_RNG=y
+> +CONFIG_CMD_REGULATOR=y
+>   # CONFIG_SPL_DOS_PARTITION is not set
+>   # CONFIG_ISO_PARTITION is not set
+>   CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
 
 -- 
 Thanks & Best regards,
