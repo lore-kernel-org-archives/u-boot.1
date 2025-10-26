@@ -4,43 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72038CCF9E5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 16:09:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F89CCF9E9
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 17:32:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0140C836B4;
-	Sun, 26 Oct 2025 17:09:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 13904832AD;
+	Sun, 26 Oct 2025 18:32:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5281836D1; Sun, 26 Oct 2025 17:09:09 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E381083623
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 17:09:06 +0100 (CET)
+ id 1642383623; Sun, 26 Oct 2025 18:32:37 +0100 (CET)
+Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B54C82E34
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 18:32:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=sys-base.io
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6D55A1A9A;
- Sun, 26 Oct 2025 09:08:58 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5FD3E3F63F;
- Sun, 26 Oct 2025 09:09:05 -0700 (PDT)
-Date: Sun, 26 Oct 2025 16:08:20 +0000
-From: Andre Przywara <andre.przywara@arm.com>
-To: Lukas Schmid <lukas.schmid@netcube.li>
-Cc: Tom Rini <trini@konsulko.com>, linux-sunxi@lists.linux.dev, John Watts
- <contact@jookia.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v3] sunxi: extend R528/T113-s3/D1(s) DRAM initialisation
-Message-ID: <20251026160820.1947e762@minigeek.lan>
-In-Reply-To: <20251026114118.3922714-1-lukas.schmid@netcube.li>
-References: <20251026114118.3922714-1-lukas.schmid@netcube.li>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=paulk@sys-base.io
+Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
+ by leonov.paulk.fr (Postfix) with ESMTPS id 8C21C1F8004F
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 17:32:29 +0000 (UTC)
+Received: by laika.paulk.fr (Postfix, from userid 65534)
+ id 75C57B0740B; Sun, 26 Oct 2025 17:32:27 +0000 (UTC)
+Received: from shepard (unknown [192.168.1.1])
+ by laika.paulk.fr (Postfix) with ESMTPSA id 62645B07403;
+ Sun, 26 Oct 2025 17:32:25 +0000 (UTC)
+Date: Sun, 26 Oct 2025 18:32:23 +0100
+From: Paul Kocialkowski <paulk@sys-base.io>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: Tom Rini <trini@konsulko.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jacky Chou <jacky_chou@aspeedtech.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Eugeniu Rosca <erosca@de.adit-jv.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ gss_mtk_uboot_upstream@mediatek.com
+Subject: Re: [PATCH 1/1] net: phy: Do not do CL22 phy reset before ethernet
+ phy driver probe
+Message-ID: <aP5bJyRg-yq7PCqE@shepard>
+References: <20241014070611.32040-1-SkyLake.Huang@mediatek.com>
+ <3d811dec-d233-4e6d-bcc7-ac07c915e68a@mailbox.org>
+ <aJJGvQpoYUWWjwrB@collins> <20251026154314.GW6688@bill-the-cat>
+ <e88eceb2-7292-4888-8fbc-8022cabceb41@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="HkxZnacxHsvTjEQk"
+Content-Disposition: inline
+In-Reply-To: <e88eceb2-7292-4888-8fbc-8022cabceb41@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,103 +69,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 26 Oct 2025 12:41:17 +0100
-Lukas Schmid <lukas.schmid@netcube.li> wrote:
+
+--HkxZnacxHsvTjEQk
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
 Hi,
 
-> The T113-s4 SoC is using the same die as the T113-s3, but comes with
-> 256MiB of co-packaged DRAM. Besides the doubled size, the DRAM chip
-> seems to be connected slightly differently, which requires to use a
-> different pin remapping.
-> 
-> Extend the DRAM initialisation code to add support for the T113-S4 aka
-> T113M4020DC0 by checking the SoC's CHIPID, which is stored in the first
-> word of the SID efuses.
-> 
-> Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
-> Tested-by: John Watts <contact@jookia.org>
-> Reviewed-by: John Watts <contact@jookia.org>
-> Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+On Sun 26 Oct 25, 16:56, Marek Vasut wrote:
+> On 10/26/25 4:43 PM, Tom Rini wrote:
+> > On Tue, Aug 05, 2025 at 08:00:29PM +0200, Paul Kocialkowski wrote:
+> > > Hi,
+> > >=20
+> > > Le Mon 14 Oct 24, 10:43, Marek Vasut a =C3=A9crit :
+> > > > On 10/14/24 9:06 AM, Sky Huang wrote:
+> > > > > From: "SkyLake.Huang" <skylake.huang@mediatek.com>
+> > > > >=20
+> > > > > Remove unnecessary CL22 phy reset before ethernet phy driver
+> > > > > probe. Lots of ethernet phys requires driver to load firmware.
+> > > > > Before that, CL22 phy reset may lead to malfunction.
+> > > > >=20
+> > > > > Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
+> > > > > ---
+> > > > >    drivers/net/phy/phy.c | 2 --
+> > > > >    1 file changed, 2 deletions(-)
+> > > > >=20
+> > > > > diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+> > > > > index 716a1d46111..e6fed8c41d7 100644
+> > > > > --- a/drivers/net/phy/phy.c
+> > > > > +++ b/drivers/net/phy/phy.c
+> > > > > @@ -839,8 +839,6 @@ struct phy_device *phy_find_by_mask(struct mi=
+i_dev *bus, uint phy_mask)
+> > > > >    static void phy_connect_dev(struct phy_device *phydev, struct =
+udevice *dev,
+> > > > >    			    phy_interface_t interface)
+> > > > >    {
+> > > > > -	/* Soft Reset the PHY */
+> > > > > -	phy_reset(phydev);
+> > > > >    	if (phydev->dev && phydev->dev !=3D dev) {
+> > > > >    		printf("%s:%d is connected to %s.  Reconnecting to %s\n",
+> > > > >    		       phydev->bus->name, phydev->addr,
+> > > >=20
+> > > > This needs clarification and likely has to be handled differently. =
+Removing
+> > > > the reset would leave the PHY in potentially undefined state.
+> > > >=20
+> > > > Which PHY is affected by this ?
+> > >=20
+> > > Good hunch. I just bisected down to this commit as I had some issues =
+with my
+> > > Allwinner V3 board using the internal CL22 PHY. The symptom is that t=
+he LEDS's
+> > > polarity was inverted. Network still seems to work (although not test=
+ed beyond
+> > > ping).
+> > >=20
+> > > This change can have very significant consequences in general, which =
+were not
+> > > explored at all in the commit. This may break many boards that do rel=
+y on that
+> > > PHY reset, in various scenarios and for various reasons.
+> > >=20
+> > > I think it should be reverted as soon as possible to restore previous=
+ behavior.
+> >=20
+> > I'm wondering if anyone has further comments here? If I do go and revert
+> > this what is then going to break on the MediaTek side for example?
+> Let's revert it, and if MTK stuff breaks, let's fix it properly then.
 
-Careful with those tags: those were given for quite a different version
-of the patch, I wouldn't carry them over, since there were quite some
-changes since then.
+Agreed, keeping it only saves one setup but sacrifices many others. This is
+definitely not right.
 
-> ---
-> Changes in v3:
->   - Move the Chip-ID list link to a comment in the header file
->   - Use andre's suggested commit message
->   - Drop out of remapping early for T113M4020DC0 instead of doing it in the
->     switch-case
-> 
-> Changes in v2:
->   - Use uint32_t instead of u32 for sid_read_soc_chipid return type
->   - Add descriptive comment about source of Chip-ID list and register
-> 
->  drivers/ram/sunxi/dram_sun20i_d1.c | 10 ++++++++++
->  drivers/ram/sunxi/dram_sun20i_d1.h | 11 +++++++++++
->  2 files changed, 21 insertions(+)
-> 
-> diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
-> index a1794032f3b..d851deac7a5 100644
-> --- a/drivers/ram/sunxi/dram_sun20i_d1.c
-> +++ b/drivers/ram/sunxi/dram_sun20i_d1.c
-> @@ -54,6 +54,11 @@ static void sid_read_ldoB_cal(const dram_para_t *para)
->  	clrsetbits_le32(0x3000150, 0xff00, reg << 8);
->  }
->  
-> +static uint32_t sid_read_soc_chipid(void)
-> +{
-> +	return readl(SUNXI_SID_BASE + 0x00) & 0xffff;
-> +}
-> +
->  static void dram_voltage_set(const dram_para_t *para)
->  {
->  	int vol;
-> @@ -663,6 +668,11 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
->  
->  	fuse = (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
->  	debug("DDR efuse: 0x%x\n", fuse);
-> +	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
-> +
-> +	if (sid_read_soc_chipid() == SUNXI_CHIPID_T113M4020DC0) {
+An immediate solution to support Mediatek would be to add a config
+option (enabled by default) for the PHY reset. Or maybe this could be descr=
+ibed
+in the board file somehow (this is a policy decision so I don't think any
+approach based on device-tree would be relevant here).
 
-You don't need braces for a single statement in the "if" branch (but I
-can fix this up).
+All the best,
 
-Other than that this looks quite good to me now. If someone with a
-board (John?) could confirm that this works, I am happy to take it.
+Paul
 
-Thanks,
-Andre
+--=20
+Paul Kocialkowski,
 
+Independent contractor - sys-base - https://www.sys-base.io/
+Free software developer - https://www.paulk.fr/
 
-> +		return;
-> +	}
->  
->  	if (para->dram_type == SUNXI_DRAM_TYPE_DDR2) {
->  		if (fuse == 15)
-> diff --git a/drivers/ram/sunxi/dram_sun20i_d1.h b/drivers/ram/sunxi/dram_sun20i_d1.h
-> index 91383f6cf10..83ae7eb36cd 100644
-> --- a/drivers/ram/sunxi/dram_sun20i_d1.h
-> +++ b/drivers/ram/sunxi/dram_sun20i_d1.h
-> @@ -19,6 +19,17 @@ enum sunxi_dram_type {
->  	SUNXI_DRAM_TYPE_LPDDR3 = 7,
->  };
->  
-> +/*
-> + * Chip-IDs taken from
-> + * https://github.com/ua1arn/hftrx/blob/25d8cb9e4cfe1d7d0e4a2f641025c88a9ec5e758/inc/clocks.h#L250
-> + */
-> +enum sunxi_soc_chipid {
-> +	SUNXI_CHIPID_F133A = 0x5C00,
-> +	SUNXI_CHIPID_D1S = 0x5E00,
-> +	SUNXI_CHIPID_T113S3 = 0x6000,
-> +	SUNXI_CHIPID_T113M4020DC0 = 0x7200,
-> +};
-> +
->  /*
->   * This structure contains a mixture of fixed configuration settings,
->   * variables that are used at runtime to communicate settings between
+Expert in multimedia, graphics and embedded hardware support with Linux.
 
+--HkxZnacxHsvTjEQk
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmj+WycACgkQhP3B6o/u
+lQwFyhAAgvYJIZQsgnjNU+uiSPloieYr4OWuXB6z0EtEUKR9yYu6nv6iwUPcgbfi
+60CGkieQhg6ZwWDswlxsAL6dAH5qO2eQJ1P6Jq0MCw7smtbjy0p6aqqS5+3XOeTh
+gQXdDXurEj1W52SZ9Bqlac1c2L58ay0lsYUPlwNQkHM+KoOqFKKx4ZY+6t3jCHI/
+ejM/8+f5BUIaCVePV/BIIFvpdHGzOAtQ2pacsuiaglGAFOngL3IbtHuc5i638wtd
+uoGaMseFuUNBFTOXBNiOc26s0SkAn5vrT8GX5N5+KaR1e8a/4KiNVGYAmLObXGZZ
+B+nufFEfutg509TIlhzn/sGXM4ldwYe7Alku9GIjF4SdI6YiQhNO06dnaQiSrp3W
+4JRGAFuwZKKZibAm5OIpdCEXNCVr2axlyfTOeRlde8496T4Kk75411S3g+3HTwN+
+xBaBDS9FOwTU95w5x3dva5CVIV6tb7dLYgejyuOnyLN9E6PFK2FE0YZNlS1vUnbI
+q1/jra+z3JSQCRWe4du1ZSTSWiOj05h2iOztl4AMQLqw0UDqjBA+DDnJIYQv6nnh
+19bwWJZJ0X6qDrhKUtUXXr+s0Isvy/3BULmdcczwBS600JAMCga2GMmT75gDYNDq
+4rGezKGzrcuhcVeVMEZwLssKKS/DwSBwUJ7lu07vwemPQj1rnLg=
+=DFlL
+-----END PGP SIGNATURE-----
+
+--HkxZnacxHsvTjEQk--
