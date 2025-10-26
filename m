@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78990CCF9E5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 01:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F981CCD1BF
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 01:07:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85174837E4;
-	Sun, 26 Oct 2025 02:07:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 775A083835;
+	Sun, 26 Oct 2025 02:07:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PMUF0xx6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XEXch3e0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B3F283623; Sun, 26 Oct 2025 02:07:06 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 0B2AD836B4; Sun, 26 Oct 2025 02:07:07 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB248836B4
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 02:07:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBD9E807C0
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 02:07:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-44db1c1056cso118919b6e.0
- for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 18:07:03 -0700 (PDT)
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c3e45dae8dso1157804a34.1
+ for <u-boot@lists.denx.de>; Sat, 25 Oct 2025 18:07:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761440822; x=1762045622; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761440823; x=1762045623; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ztW3EY69qYXS24WCkvLNDH4CYmAZ497Emxh6i5o/224=;
- b=PMUF0xx6TOjITXqdN75MGYgdJEpJ37Ir/1h7k+XU8kJIN5rZMdLcecKqhyt40MXwZ5
- p+XvXbjQOWZtPsww09+MBjBOlDYJ40dry7+Zk67h4re7Gk3bFj3gnBFVRoCaqqVUV++s
- PpkhNMreBtJpeb2/sY/3CT0K1X974ac/MnGcJrrTkEDh8Dc6/aEC/FcAZ4nosh7oCdIz
- vjRN1Zs2knxlq/g1wg5SodsKb2yOfk6N8MTPbRbVkJPn0oCTR2cJYU1L6WDWWVvqf66y
- hqmcYpdqg3G+ezZ4EqwMIT37nXKI+cAbsPvAmwQuIHBT4lkT0Ae4AmYYrm7nNZbh0GXN
- Iocg==
+ bh=24MVeQHAO5zZu6lYzKtJCVkSlH2PtId1UYIKtEwXu2A=;
+ b=XEXch3e0SQUVRQZ2V3B0yur8q36ihll8nR3M47xC/q2T9MNkCyhogb/ni49WOZuvdF
+ Z0tRJx0/btgKvFkYKRGISmbTHoOzzX7frolQUqI082cNtlr5G3whVznHAmpuAoK81FUg
+ 9Q0wdtUaBT5rfeWjKI1fnvXtHPsiR465oybd4mIsRkBdrqaPdha4DkIWNQdDtlhWxBTe
+ ySo71NR4ltsLCRh1pHsdPOUM6u4yhVPWF4zEHB27qsWEU/rgJ++w/STkcclh8h97Ci/y
+ xIFFRw74WxUm2NpJddYP9koU9LhfRYvv5grXt5HMbDyo+ewkY0YHaYw0LNK/j1337biQ
+ 5KSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761440822; x=1762045622;
+ d=1e100.net; s=20230601; t=1761440823; x=1762045623;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ztW3EY69qYXS24WCkvLNDH4CYmAZ497Emxh6i5o/224=;
- b=K6WdB5kxEckkEVWNUtV0a5ncGPqDSBL7hDHUFZRzbIMQLFReD29r9QSQuJumUnHCov
- KLGTtC8v3UTbgyfNsCxbU7fQ5lH9Gq3xrZ1fpQGpFpTBKmMdXLdQ5zYvHLI78zE22R+7
- f0XyJjtV8HtHjbGLWSVrbvDX+p3RzLk5vdbRDnngtw0goPMgZfYqsbsXMSYt4M/8Pkm8
- mboyKxPuGK7R9hyUSy2OOqyGrtTnFTEzI0WslH/eUlK2ZeZHQojZSrbfCimYyFXccQ15
- QxBFtIkXJJ2KDBgv2jHACGQpqEYpFoZdRQs3Ns3rOvIveiCIpcpzrQfXMhIk0gwzrd8P
- xOhg==
+ bh=24MVeQHAO5zZu6lYzKtJCVkSlH2PtId1UYIKtEwXu2A=;
+ b=lVjQ8i4GYaC1RgJulzvqjky7Bo3CWqxPU3X4NxSueZBS+lUx+NU653Y3sn7M/CO23Y
+ oTo6BNV6POxZCbWzolM/1YDbyvXP03agNY+bdBRkgyqJGkoPSFx/zF8kAAKRbNFXFPrV
+ +xBsNfOVe4fyAzhlyNLfiWZ7VOOFakMVi//MePZnlF4hflP7H+rn9skay41seHHJvK5O
+ 3IxQmB7zLdqGkLjSapSdyeGKHIwzuHbm5spQUNxm7+EtITEWVdRr4jGy9dvU/KKACRfo
+ eRqBNHrY7j/PPHktIfgyADiMuqUmzz8aB6m1rH2t4afvCojvEk5fKJqHxQjIhgao1LAd
+ u4qg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXiPOmvvZjkj3vENX5CLpau8WdjnsjG9hVATJmBtRvS17IJ4scTKdtGD24UEjC6rnSoq1yPVCk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxChQArte/XNkbIvW7LJ2BKs/AdCrs2K1jdf+9HcYy59R6nP4xQ
- Kty/3VANXrVNefmyj6rFQw2iMwYFP81iwxhLTfT6a2VLEuZyxluElwg7XLKGMMWkZPQ=
-X-Gm-Gg: ASbGncvioTpC/MqIeHXACSic95E+iRGpeDBG5LSdyV7wrCiNxpiCAWEPOY0TC1wIhIg
- V0KyqfKmODOiYkXx3UKabSIGD9g+pdxv+/OEbIO9k+MELrCwaf3zyItFpY/YkRoxG23AAj8KHuv
- fLGqIsSSrTXhtr8eMd3sbMCXHSfbYR1LEGXUhSTk6+G3TMvg5X3pPz6CGRSJnHvPhfXD8asn+dq
- eVXVjuYnoM9HpWAg4lfsoIlbk/ZO/B9sD8g7wjVZ2wKOOLwWQBpS+qOtVNGKDK+yOKYnnxmRzZt
- dAcjGWsdJBcUiG3TeQwx3lL8O3nMttVEcNWD1n9eusr1fWFSHiSfdRrdF5izjsfy+1mtlh9etEa
- 3+UY3ecjV6B1Qk1d9lnD1a+ogJkJ4rBu3aqck7+dpOM7iw41XG+0oVhN/jZOaf3kT25IEYGxFH0
- PS636MyV4ku7hQkO26L8AmjEi/CRR96Pw=
-X-Google-Smtp-Source: AGHT+IEiunuctx1cJ5BBrQ1pJZR+N/N07U5enyu84aH8KjOUf6HsM2Y61gZADnkpKMs80tuDNVDRyQ==
-X-Received: by 2002:a05:6808:152c:b0:43b:8b5e:d127 with SMTP id
- 5614622812f47-44d93d96507mr3558544b6e.13.1761440822405; 
- Sat, 25 Oct 2025 18:07:02 -0700 (PDT)
+ AJvYcCW1MQ+ysM6RnO3UZrXBOxeLWn6jtA6ksg750psH7jkYZwnONO5o9EtirWnmphiNCdQRH7sKPWQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx2ftTRsaduYo4Y0Wnu/klW5nkV/yWW37V3jFgQzFvyurrS3ZPE
+ //VjWe5tRxL3pjI2Sb7Yjlv9cpjqxtA5yqpsTe0TA7MVm5XYaiBa5dh4n2lAoMKLuNQ=
+X-Gm-Gg: ASbGncscORJwTLAhT4vt6Nl3Pz2VzMSEe2VjVI/oY9F+GUPE7/RGudCRW1ba+pqptpu
+ ckoV2X63cIjtZhSZLvqWMXuaJ8OZ8zAFOzQOoqOrJTjlt8bWkgBo/KIbcDKYimqLJnCf9u3dfWy
+ 3nf54l0Jaba5Qc+/LE8jWajRxAK2UA2+i/WPstkGJbgmKpPnn5hfUqKa+09+AMv38AymHUyD+lB
+ tWXPFJJW5PWfgT1tklVAXWgFPNrf1CDPCMFRBpHBZRQ8UbR05O53bNNoyCoCohaetLJ+rlwQAgB
+ JPTjXVC1N46R492qTkqfqs9un/8odTITR/9oKEv0pQS2cnhd6q59XOiiw15jdkq/Cu3DVrKzUgH
+ /A0IBMt8bPirlHEcC5cEUGXwdq6gyiWbbjpzyKhSHIjtV1WuwIOloXT4dSw4Lhub8L8qNLJsv+w
+ p5i1ETrD8JzrigPrnDAf6j
+X-Google-Smtp-Source: AGHT+IH6M5+qpro7vW2OkikDiEvY9ur4BB/aTNpOmAmNcCruqH8LsohtpTQYIcXrJerWDQ7X1n2WnQ==
+X-Received: by 2002:a05:6808:2229:b0:442:5fa:28ff with SMTP id
+ 5614622812f47-443a2efcd3cmr13916097b6e.15.1761440823427; 
+ Sat, 25 Oct 2025 18:07:03 -0700 (PDT)
 Received: from localhost ([2605:a601:81da:7100:264b:feff:fe59:d7f7])
  by smtp.gmail.com with ESMTPSA id
- 5614622812f47-44da3e8cf1csm846695b6e.16.2025.10.25.18.07.01
+ 5614622812f47-44da3e48249sm845101b6e.5.2025.10.25.18.07.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Sat, 25 Oct 2025 18:07:02 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
@@ -79,9 +79,9 @@ To: Minkyu Kang <mk7.kang@samsung.com>, Peng Fan <peng.fan@nxp.com>,
 Cc: Kaustabh Chakraborty <kauschluss@disroot.org>,
  Simon Glass <sjg@chromium.org>, Anand Moon <linux.amoon@gmail.com>,
  Lukas Timmermann <uboot@timmermann.space>, u-boot@lists.denx.de
-Subject: [PATCH 3/6] mmc: exynos_dw_mmc: Improve coding style
-Date: Sat, 25 Oct 2025 20:06:55 -0500
-Message-Id: <20251026010658.19271-4-semen.protsenko@linaro.org>
+Subject: [PATCH 4/6] mmc: exynos_dw_mmc: Add quirk for disabling FMP
+Date: Sat, 25 Oct 2025 20:06:56 -0500
+Message-Id: <20251026010658.19271-5-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251026010658.19271-1-semen.protsenko@linaro.org>
 References: <20251026010658.19271-1-semen.protsenko@linaro.org>
@@ -103,113 +103,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Exynos DW MMC glue layer driver have seen a lot of changes recently.
-Stabilize the coding style.
+Add DWMCI_QUIRK_DISABLE_FMP which disables Flash Memory Protector (FMP)
+during driver's init. It's usually done by early bootloaders, but in
+some cases (like USB boot) the FMP may be left unconfigured. The issue
+was observed on Exynos850 SoC (the E850-96 board). Enabling this quirk
+makes eMMC functional even in such cases.
 
-No functional change.
+No functional change, as this feature is only added here but not enabled
+for any chips yet.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- drivers/mmc/exynos_dw_mmc.c | 34 ++++++++++++++++++++--------------
- 1 file changed, 20 insertions(+), 14 deletions(-)
+ arch/arm/mach-exynos/include/mach/dwmmc.h |  6 ++++++
+ drivers/mmc/exynos_dw_mmc.c               | 20 ++++++++++++++++++++
+ 2 files changed, 26 insertions(+)
 
+diff --git a/arch/arm/mach-exynos/include/mach/dwmmc.h b/arch/arm/mach-exynos/include/mach/dwmmc.h
+index 75d84988b7d6..4432deedef7d 100644
+--- a/arch/arm/mach-exynos/include/mach/dwmmc.h
++++ b/arch/arm/mach-exynos/include/mach/dwmmc.h
+@@ -17,10 +17,16 @@
+ 
+ /* Protector Register */
+ #define DWMCI_EMMCP_BASE		0x1000
++#define EMMCP_MPSECURITY		(DWMCI_EMMCP_BASE + 0x0010)
+ #define EMMCP_MPSBEGIN0			(DWMCI_EMMCP_BASE + 0x0200)
+ #define EMMCP_SEND0			(DWMCI_EMMCP_BASE + 0x0204)
+ #define EMMCP_CTRL0			(DWMCI_EMMCP_BASE + 0x020c)
+ 
++/* EMMCP_MPSECURITY bits */
++#define MPSECURITY_FMP_ON		BIT(29)
++#define MPSECURITY_MMC_SFR_PROT_ON	BIT(28)
++
++/* EMMCP_CTRL0 bits */
+ #define MPSCTRL_SECURE_READ_BIT		BIT(7)
+ #define MPSCTRL_SECURE_WRITE_BIT	BIT(6)
+ #define MPSCTRL_NON_SECURE_READ_BIT	BIT(5)
 diff --git a/drivers/mmc/exynos_dw_mmc.c b/drivers/mmc/exynos_dw_mmc.c
-index 190c6349380d..51867a552495 100644
+index 51867a552495..be17bc4692c1 100644
 --- a/drivers/mmc/exynos_dw_mmc.c
 +++ b/drivers/mmc/exynos_dw_mmc.c
-@@ -26,11 +26,16 @@
- #define EXYNOS4412_FIXED_CIU_CLK_DIV	4
- 
- /* CLKSEL register defines */
--#define CLKSEL_CCLK_SAMPLE(x)	(((x) & 7) << 0)
--#define CLKSEL_UP_SAMPLE(x, y)	(((x) & ~CLKSEL_CCLK_SAMPLE(7)) |\
-+#define CLKSEL_CCLK_SAMPLE(x)		(((x) & 7) << 0)
-+#define CLKSEL_UP_SAMPLE(x, y)		(((x) & ~CLKSEL_CCLK_SAMPLE(7)) | \
- 					 CLKSEL_CCLK_SAMPLE(y))
- 
--/* Quirks */
-+/**
-+ * DOC: Quirk flags for different Exynos DW MMC blocks
+@@ -35,8 +35,16 @@
+  *
+  * %DWMCI_QUIRK_DISABLE_SMU: DW MMC block has Security Management Unit (SMU)
+  * which has to be configured in non-encryption mode during driver's init.
 + *
-+ * %DWMCI_QUIRK_DISABLE_SMU: DW MMC block has Security Management Unit (SMU)
-+ * which has to be configured in non-encryption mode during driver's init.
-+ */
++ * %DWMCI_QUIRK_DISABLE_FMP: DW MMC block has Flash Memory Protector (FMP) which
++ * has to be disabled during driver's init. This flag disables FMP encryption
++ * and lets external non-secure main CPUs access the SFR (peripheral memory
++ * region, i.e. registers) in MMC core. Although it's usually done by early
++ * bootloaders (before U-Boot), in some cases like during USB boot the FMP might
++ * be left unconfigured.
+  */
  #define DWMCI_QUIRK_DISABLE_SMU		BIT(0)
++#define DWMCI_QUIRK_DISABLE_FMP		BIT(1)
  
  #ifdef CONFIG_DM_MMC
-@@ -183,9 +188,11 @@ static unsigned int exynos_dwmci_get_clk(struct dwmci_host *host, uint freq)
- 	int err;
+ #include <dm.h>
+@@ -225,6 +233,18 @@ static void exynos_dwmci_board_init(struct dwmci_host *host)
+ 			     MPSCTRL_NON_SECURE_WRITE_BIT | MPSCTRL_VALID);
+ 	}
  
- 	/* Should be double rate for DDR or HS mode */
--	if ((host->mmc->selected_mode == MMC_DDR_52 && host->mmc->bus_width == 8) ||
--	    host->mmc->selected_mode == MMC_HS_400)
-+	if ((host->mmc->selected_mode == MMC_DDR_52 &&
-+	     host->mmc->bus_width == 8) ||
-+	    host->mmc->selected_mode == MMC_HS_400) {
- 		freq *= 2;
++	if (priv->chip->quirks & DWMCI_QUIRK_DISABLE_FMP) {
++		u32 reg;
++
++		reg = dwmci_readl(host, EMMCP_MPSECURITY);
++		if (reg & MPSECURITY_FMP_ON ||
++		    reg & MPSECURITY_MMC_SFR_PROT_ON) {
++			reg &= ~MPSECURITY_FMP_ON;
++			reg &= ~MPSECURITY_MMC_SFR_PROT_ON;
++			dwmci_writel(host, EMMCP_MPSECURITY, reg);
++		}
 +	}
- 
- 	clk_div = exynos_dwmmc_get_ciu_div(host);
- 	err = exynos_dwmmc_set_sclk(host, freq * clk_div);
-@@ -302,7 +309,7 @@ static int exynos_dwmmc_of_to_plat(struct udevice *dev)
- #if CONFIG_IS_ENABLED(MMC_SUPPORTS_TUNING)
- static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
- {
--	u8 i;
-+	int i;
- 
- 	for (i = 0; i < 8; i++) {
- 		candidates = (candidates >> 1) | (candidates << 7); /* ror */
-@@ -317,8 +324,8 @@ static int exynos_dwmmc_get_best_clksmpl(u8 candidates)
- 	}
- 
- 	/*
--	 * If no valid clock sample values are found, use the first
--	 * canditate bit for clock sample value.
-+	 * If no valid clock sample values are found, use the first candidate
-+	 * bit for clock sample value.
- 	 */
- 	for (i = 0; i < 8; i++) {
- 		candidates = (candidates >> 1) | (candidates << 7); /* ror */
-@@ -344,7 +351,7 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
- 	do {
- 		dwmci_writel(host, DWMCI_TMOUT, ~0);
- 
--		/* move to the next clksmpl */
-+		/* Move to the next clksmpl */
- 		smpl = (clksel + 1) & 0x7;
- 		clksel = CLKSEL_UP_SAMPLE(clksel, smpl);
- 		dwmci_writel(host, priv->chip->clksel, clksel);
-@@ -360,12 +367,11 @@ static int exynos_dwmmc_execute_tuning(struct udevice *dev, u32 opcode)
- 		return ret;
- 	}
- 
--	dwmci_writel(host, priv->chip->clksel,
--		     CLKSEL_UP_SAMPLE(clksel, ret));
-+	dwmci_writel(host, priv->chip->clksel, CLKSEL_UP_SAMPLE(clksel, ret));
- 
- 	return 0;
++
+ 	if (priv->sdr_timing)
+ 		exynos_dwmci_clksel(host);
  }
--#endif
-+#endif /* CONFIG_MMC_SUPPORTS_TUNING */
- 
- struct dm_mmc_ops exynos_dwmmc_ops;
- 
-@@ -396,7 +402,7 @@ static int exynos_dwmmc_probe(struct udevice *dev)
- 	flag = host->buswidth == 8 ? PINMUX_FLAG_8BIT_MODE : PINMUX_FLAG_NONE;
- 	err = exynos_pinmux_config(host->dev_id, flag);
- 	if (err) {
--		printf("DWMMC%d not configure\n", host->dev_index);
-+		printf("DWMMC%d not configured\n", host->dev_index);
- 		return err;
- 	}
- #endif
-@@ -499,4 +505,4 @@ U_BOOT_DRIVER(exynos_dwmmc_drv) = {
- 	.priv_auto	= sizeof(struct dwmci_exynos_priv_data),
- 	.plat_auto	= sizeof(struct exynos_mmc_plat),
- };
--#endif
-+#endif /* CONFIG_DM_MMC */
 -- 
 2.39.5
 
