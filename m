@@ -4,59 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D56DCCF9E5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:46:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 316EBCCD1A5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:56:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBDBA838EE;
-	Sun, 26 Oct 2025 16:46:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FE9B836D1;
+	Sun, 26 Oct 2025 16:56:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="IQ87L9lH";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eqRgJoSz";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="M8Ur1zwi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 602C88391E; Sun, 26 Oct 2025 16:46:43 +0100 (CET)
-Received: from mail-m1973183.qiye.163.com (mail-m1973183.qiye.163.com
- [220.197.31.83])
+ id 8CFB783771; Sun, 26 Oct 2025 16:56:50 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02752832AD
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:46:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5B21383623
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:56:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from [192.168.1.64] (unknown [124.72.36.208])
- by smtp.qiye.163.com (Hmail) with ESMTP id 273749054;
- Sun, 26 Oct 2025 23:46:36 +0800 (GMT+08:00)
-Message-ID: <ff0f38a5-1020-4eda-b11b-72086ac8a2af@rock-chips.com>
-Date: Sun, 26 Oct 2025 23:46:36 +0800
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cvh8c105Fz9slL;
+ Sun, 26 Oct 2025 16:56:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761494208;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9kAqIdw8OLn6d7A2w15s1FM3dcIVYJ0QMh7krtV5uKQ=;
+ b=eqRgJoSzRFoEejf95/zRYNyv2S2z1ERczfG03A/K9atWfoeI/pYDeqchPrdo8sCUr/5meC
+ z/A0eeqZ+lPrRCdhjZqOYCin7v3TMUBlZ6wp2butgXMStelT/II/JFLtxrLfejPBBaUu98
+ trh1GZyvVFr4a0mqY/TouqYTIFSXah7kgR3DC9jeKRET1roD0ArxZ0IQKGiqXnP41IcLVD
+ GtzcRN0pvMHQLHfmWNrhHlFu4GMSJ5CVi8Q0jp9YHS2wyGiBFjP42zC70ITwGzi3HTykUP
+ xAqMg6v2rBsdQVpCoUlVCE68ZTmwm9LHExsgMzyaDzaqIgDgi+rlLrEY8uAacQ==
+Message-ID: <e88eceb2-7292-4888-8fbc-8022cabceb41@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1761494206;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=9kAqIdw8OLn6d7A2w15s1FM3dcIVYJ0QMh7krtV5uKQ=;
+ b=M8Ur1zwiNl4+PznaJ4qnAxgPc3GAyKQbiFIE0nY5Op7vsMqTpZ2MrfT0xidBS6taO2qcft
+ pwatI8d3P/1UuWiuh3Wtyki68C8vvx0DKw/fvRP5y1ZHH+tlKR9xbCvv0YM9q5fXieKx59
+ 9eXfdQlZwVqMX5N8p5w5USgcLr4oQveMMM2DtN+q8idSuna8+JRHHr9FLprKgLfIjToeCp
+ Ylnt0Kq3CaI+tL3ytnbDvzNSA363RlRp0yXlBRHRx/EAdYzI8/nlxra8g/L5pCZgpA4HaB
+ 86aSCLd4WISyBF3POHe0ABaT8B3xSVJIQe/R8YXpcrjN0yJa8/AbpOMYARbC0A==
+Date: Sun, 26 Oct 2025 16:56:41 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 18/18] arm: dts: rockchip: Include OTP in U-Boot
- pre-reloc phase for RK3326
-To: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20250831165001.2749711-1-jonas@kwiboo.se>
- <20250831165001.2749711-19-jonas@kwiboo.se>
+Subject: Re: [PATCH 1/1] net: phy: Do not do CL22 phy reset before ethernet
+ phy driver probe
+To: Tom Rini <trini@konsulko.com>, Paul Kocialkowski <paulk@sys-base.io>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jacky Chou <jacky_chou@aspeedtech.com>,
+ Sky Huang <SkyLake.Huang@mediatek.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Eugeniu Rosca <erosca@de.adit-jv.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ gss_mtk_uboot_upstream@mediatek.com
+References: <20241014070611.32040-1-SkyLake.Huang@mediatek.com>
+ <3d811dec-d233-4e6d-bcc7-ac07c915e68a@mailbox.org> <aJJGvQpoYUWWjwrB@collins>
+ <20251026154314.GW6688@bill-the-cat>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250831165001.2749711-19-jonas@kwiboo.se>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20251026154314.GW6688@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a213338b603afkunm81a76dde4d36aa
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZGElJVksaHk8dSktMQkhPH1YVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUtDWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
- VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
- b=IQ87L9lHqcHdemQZehBNeNr6CrmVTpaEikEN66ohhmnBtWEt8gJM3gJMDdaUexp1FiGgRnw6kEpkJ5A1T+BftJvi6EW19gM94ulXMKpO5mqgmLFRYKtCeTcT6dZhFcp63e8uJ4JjKRlX53WNsxX2jRqPdMRIYYNgP0/QDuUcyBM=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=ZJxRFXPUAc8ITxZTwjkkrRIWi5dm8sACvhDAI0GVZfU=;
- h=date:mime-version:subject:message-id:from;
+X-MBO-RS-META: 9uc3ri18iixwmmc7a4to8an9cxknpddb
+X-MBO-RS-ID: fd70d4385bc97755197
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,51 +96,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-On 2025/9/1 00:49, Jonas Karlman wrote:
-> Update rk3326-u-boot.dtsi to include OTP in U-Boot pre-reloc phase for
-> checkboard() to be able to read information about the running SoC model
-> and variant from OTP and print it during boot:
->
->    U-Boot 2025.07 (Jul 13 2025 - 10:07:16 +0000)
->
->    Model: ODROID-GO Super
->    SoC:   RK3326
->    DRAM:  1 GiB (total 1022 MiB)
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-
-Thanks,
-- Kever
-> ---
-> v2: No change
-> ---
->   arch/arm/dts/rk3326-u-boot.dtsi | 4 ++++
->   1 file changed, 4 insertions(+)
->
-> diff --git a/arch/arm/dts/rk3326-u-boot.dtsi b/arch/arm/dts/rk3326-u-boot.dtsi
-> index be1dd4f91c1b..6503a9382b9c 100644
-> --- a/arch/arm/dts/rk3326-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3326-u-boot.dtsi
-> @@ -61,6 +61,10 @@
->   	bootph-all;
->   };
->   
-> +&otp {
-> +	bootph-some-ram;
-> +};
-> +
->   &pcfg_pull_none {
->   	bootph-all;
->   };
-
--- 
-Thanks & Best regards,
-   Kever Yang
-**************************************************************************************************
-杨凯  市场部             Kever Yang      Marketing Department
-瑞芯微电子股份有限公司                Rockchip Electronics Co.，Ltd。
-地址：福建省福州市铜盘路软件大道89号软件园A区18号楼 (350003)
-Addr : No.18 Building，A District，No.89，Fuzhou Software Boulevard，Fuzhou，Fujian，PRC
-
+On 10/26/25 4:43 PM, Tom Rini wrote:
+> On Tue, Aug 05, 2025 at 08:00:29PM +0200, Paul Kocialkowski wrote:
+>> Hi,
+>>
+>> Le Mon 14 Oct 24, 10:43, Marek Vasut a écrit :
+>>> On 10/14/24 9:06 AM, Sky Huang wrote:
+>>>> From: "SkyLake.Huang" <skylake.huang@mediatek.com>
+>>>>
+>>>> Remove unnecessary CL22 phy reset before ethernet phy driver
+>>>> probe. Lots of ethernet phys requires driver to load firmware.
+>>>> Before that, CL22 phy reset may lead to malfunction.
+>>>>
+>>>> Signed-off-by: SkyLake.Huang <skylake.huang@mediatek.com>
+>>>> ---
+>>>>    drivers/net/phy/phy.c | 2 --
+>>>>    1 file changed, 2 deletions(-)
+>>>>
+>>>> diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+>>>> index 716a1d46111..e6fed8c41d7 100644
+>>>> --- a/drivers/net/phy/phy.c
+>>>> +++ b/drivers/net/phy/phy.c
+>>>> @@ -839,8 +839,6 @@ struct phy_device *phy_find_by_mask(struct mii_dev *bus, uint phy_mask)
+>>>>    static void phy_connect_dev(struct phy_device *phydev, struct udevice *dev,
+>>>>    			    phy_interface_t interface)
+>>>>    {
+>>>> -	/* Soft Reset the PHY */
+>>>> -	phy_reset(phydev);
+>>>>    	if (phydev->dev && phydev->dev != dev) {
+>>>>    		printf("%s:%d is connected to %s.  Reconnecting to %s\n",
+>>>>    		       phydev->bus->name, phydev->addr,
+>>>
+>>> This needs clarification and likely has to be handled differently. Removing
+>>> the reset would leave the PHY in potentially undefined state.
+>>>
+>>> Which PHY is affected by this ?
+>>
+>> Good hunch. I just bisected down to this commit as I had some issues with my
+>> Allwinner V3 board using the internal CL22 PHY. The symptom is that the LEDS's
+>> polarity was inverted. Network still seems to work (although not tested beyond
+>> ping).
+>>
+>> This change can have very significant consequences in general, which were not
+>> explored at all in the commit. This may break many boards that do rely on that
+>> PHY reset, in various scenarios and for various reasons.
+>>
+>> I think it should be reverted as soon as possible to restore previous behavior.
+> 
+> I'm wondering if anyone has further comments here? If I do go and revert
+> this what is then going to break on the MediaTek side for example?
+Let's revert it, and if MTK stuff breaks, let's fix it properly then.
