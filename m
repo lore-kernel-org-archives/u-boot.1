@@ -4,46 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34F51CCD193
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 11:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E7E2CCF9E5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 11:55:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 704FC832AD;
-	Sun, 26 Oct 2025 12:42:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=netcube.li
+	by phobos.denx.de (Postfix) with ESMTP id EFB87832AD;
+	Sun, 26 Oct 2025 12:55:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=netcube.li header.i=@netcube.li header.b="AAl0DVSY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fKcxAtWD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6749A83623; Sun, 26 Oct 2025 12:42:11 +0100 (CET)
-Received: from mail.netcube.li (mail.netcube.li [173.249.15.149])
- (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ id E91F783623; Sun, 26 Oct 2025 12:55:34 +0100 (CET)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27F2582E34
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 12:42:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06A6582E34
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 12:55:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=netcube.li
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukas.schmid@netcube.li
-dkim-signature: v=1; a=rsa-sha256; d=netcube.li; s=s1;
- c=relaxed/relaxed; q=dns/txt;
- h=From:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Transfer-Encoding; 
- bh=KR5sO/y19iwQ/gvT2+P02NvTLW181CjH/ppfZrnUA10=;
- b=AAl0DVSYqY6DSZPyjDG6YKVRzy/O5Gg+an2OQqrbera27iWK8jeEJOJUvZGdzX/HfAZ7g/NDLoUGTYAUiD/cnImhSYGc75jx2pA5ARZhC4k812een8O4gWks2WNHnYZMt2PEYFX3pZFYBUVZ3WQu1dWdRRSUTv4jnep5bwhF2EE=
-Received: from lukas-hpz440workstation.lan.sk100508.local (cm70-231.liwest.at
- [212.241.70.231]) by mail.netcube.li with ESMTPA
- ; Sun, 26 Oct 2025 12:41:55 +0100
-From: Lukas Schmid <lukas.schmid@netcube.li>
-To: Tom Rini <trini@konsulko.com>
-Cc: linux-sunxi@lists.linux.dev, Lukas Schmid <lukas.schmid@netcube.li>,
- John Watts <contact@jookia.org>, Jernej Skrabec <jernej.skrabec@gmail.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v3] sunxi: extend R528/T113-s3/D1(s) DRAM initialisation
-Date: Sun, 26 Oct 2025 12:41:17 +0100
-Message-ID: <20251026114118.3922714-1-lukas.schmid@netcube.li>
-X-Mailer: git-send-email 2.47.3
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-36527ac0750so33440091fa.3
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 04:55:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761479732; x=1762084532; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GzvUQKIqiVYafx+FZ9AVH+4zzxQwMW+ckoN+CnFGp+I=;
+ b=fKcxAtWDsdpmU6SdeqvlI9u9eEGal+sbjJJYdTNUhat6Jx4s0UuzNtI+YKfBKHikQY
+ b2mpXMa+XC3fVJ2BqXy5+ea1R3+DM3fGCPfPy753n6qEqAA4vyFHmE2jFCY4369v/sss
+ 8DAQidYcXwzSu0X4BVrRV/I9zklC2Z7DWjyaLVm7KGkbYS+RcJCq39POPQh44LcFvkhM
+ CPnRDC7IjP3ln1chqpbVvDsDfqliYpvIFHthyFN6Lb+t4VZwGwqkcyFQA5bi/A6ylzQQ
+ eUdb7geyBNuNqT/oTOt794QbmHaqvO3TFxatkIDb8ILzTr7uL8J9wwTKgLfhm0ap7l/j
+ +65A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761479732; x=1762084532;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GzvUQKIqiVYafx+FZ9AVH+4zzxQwMW+ckoN+CnFGp+I=;
+ b=ByXkCLuHEW4CVbpS2nuiAMg/qV1CdqtmyV5Hq3TlR+MQ7cuM5o8nL8MbWtsTEK2BXA
+ MaOaChn37dVM1+xs/LipIMZHpxwusQO61llYo71HeYeGZYX6/j1RJyhwVJWAglGm89zw
+ /Fac2kJiOsPuL7sayKv2KvxPfyth5WBXADuNkg9+4pj6iMNA/fLERxquMJwJn7ZX+DBB
+ L+vnXZ5D2/S9t7DBa2ZMnjhy27pu3XQqLc3uGwH4MchW1L/ilVC1G0pek6Yixf5RXHg+
+ Jw3aDKOxdqYhaWUXHfHEKJVsGymZp+hEMKFMqjgFI7S6J+c9uzBleCHeM8XuUeCUYK0v
+ Yj8Q==
+X-Gm-Message-State: AOJu0YxWhVzVAa4ZWOd4kkxfUu9MKK858c46IQug/vy/7IJ9XzFmF71m
+ RCwB7za+GSS1MSoevrNbthaqxv2i9HSOpyfzzz/RE3gxxDb2t2xHmrKTasBjfLy/a9QgFd9ZzfB
+ AvmVgRSsW+tC3AsTv0/PNZD88nhgK5o4=
+X-Gm-Gg: ASbGncuVqMbQswqToVdRY5I5CDaISAbx6XCXWKy75N4e/J141KO4Gl7ZHvdWzQlhgdj
+ AbLqTKaVLKMRp7fc46Ujk5A7K25G4urKrV341LBk8UeKVvjv6P+Dc/RzKuTAM7sTFbIa6yuLFFy
+ 5XX8kVw6xT+Qba6Bk6bg+17pbb77ikPEsR8K1nuCQFup28+p29nl1/7lV9D/FrAIWOfPwQ8fSeL
+ G8x8NAg/wacuvrZaTdEp3ZixrWst2RQrYEypHPC7hP2i7Oje1ObrUjMwuxxsCPWEPYo9yU8Dcc+
+ HFlUrHDvfMsveVr9iENFJd1nLac=
+X-Google-Smtp-Source: AGHT+IHBRG3quEphzFXYsbMiK1II2ZbDPqbltiWH74wo7fLYCnl+Vt/na6/bxV3AcLOm8vzKJS1L2RTRukBKvAYLqYo=
+X-Received: by 2002:a05:651c:b25:b0:36d:501:76d7 with SMTP id
+ 38308e7fff4ca-377978c14acmr102727471fa.14.1761479731995; Sun, 26 Oct 2025
+ 04:55:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <bfe7ac62-0d01-45b5-9226-e1d425565d50@schwermer.no>
+In-Reply-To: <bfe7ac62-0d01-45b5-9226-e1d425565d50@schwermer.no>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 26 Oct 2025 08:55:20 -0300
+X-Gm-Features: AWmQ_bmbXRJxIbjNzGHJRE7FNWK2xeyM-9JCwUH_PqhTFpnSpz_2OZ18GwwzNGI
+Message-ID: <CAOMZO5C_8xacCJn9+KWC44nSuMWNCUu0c=YHsQvTH-+1yKawSQ@mail.gmail.com>
+Subject: Re: mx6ull: init_bandgap regression
+To: Sven <u-boot@schwermer.no>
+Cc: U-Boot-Denx <u-boot@lists.denx.de>, dario.binacchi@amarulasolutions.com, 
+ peng.fan@nxp.com, ping.bai@nxp.com, sbabic@nabladev.com, uboot-imx@nxp.com,
+ Tom Rini <trini@konsulko.com>, martyn.welch@collabora.com, parthitce@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,85 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The T113-s4 SoC is using the same die as the T113-s3, but comes with
-256MiB of co-packaged DRAM. Besides the doubled size, the DRAM chip
-seems to be connected slightly differently, which requires to use a
-different pin remapping.
+Hi Sven,
 
-Extend the DRAM initialisation code to add support for the T113-S4 aka
-T113M4020DC0 by checking the SoC's CHIPID, which is stored in the first
-word of the SID efuses.
+On Fri, Oct 24, 2025 at 6:23=E2=80=AFAM Sven <u-boot@schwermer.no> wrote:
+>
+> Hi,
+>
+> We make an i.MX6ULL-based board that is built around the Phytec PCL063
+> SoM. We have noticed a regression between v2022.01 (good) and v2022.04
+> (bad). We have also found the following tags to be bad: v2022.07,
+> v2023.01, v2024.01. We have bisected this and found the culprit to be
+> c1af358c ("imx: mx6ull: fix REFTOP_VBGADJ setting"). This code still
+> appears to be unchanged on upstream master.
+>
+> These are the symptoms: Very few of the thousands of devices that we
+> manufacture (< 1%) fail to decompress a large XZ archive once in Linux
+> userspace. We have not found any form of memory testing or other load
+> that reproduces this issue. Reverting the offending patch fixes this
+> behavior on the affected devices.
 
-Signed-off-by: Lukas Schmid <lukas.schmid@netcube.li>
-Tested-by: John Watts <contact@jookia.org>
-Reviewed-by: John Watts <contact@jookia.org>
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
----
-Changes in v3:
-  - Move the Chip-ID list link to a comment in the header file
-  - Use andre's suggested commit message
-  - Drop out of remapping early for T113M4020DC0 instead of doing it in the
-    switch-case
+Please send a patch with the revert.
 
-Changes in v2:
-  - Use uint32_t instead of u32 for sid_read_soc_chipid return type
-  - Add descriptive comment about source of Chip-ID list and register
+> Perhaps the NXP folks could chime in on the intended behavior. And the
+> mismatch between commit message and comments mentioned in the offending
+> patch.
 
- drivers/ram/sunxi/dram_sun20i_d1.c | 10 ++++++++++
- drivers/ram/sunxi/dram_sun20i_d1.h | 11 +++++++++++
- 2 files changed, 21 insertions(+)
+Peng, can you look at it, please?
 
-diff --git a/drivers/ram/sunxi/dram_sun20i_d1.c b/drivers/ram/sunxi/dram_sun20i_d1.c
-index a1794032f3b..d851deac7a5 100644
---- a/drivers/ram/sunxi/dram_sun20i_d1.c
-+++ b/drivers/ram/sunxi/dram_sun20i_d1.c
-@@ -54,6 +54,11 @@ static void sid_read_ldoB_cal(const dram_para_t *para)
- 	clrsetbits_le32(0x3000150, 0xff00, reg << 8);
- }
- 
-+static uint32_t sid_read_soc_chipid(void)
-+{
-+	return readl(SUNXI_SID_BASE + 0x00) & 0xffff;
-+}
-+
- static void dram_voltage_set(const dram_para_t *para)
- {
- 	int vol;
-@@ -663,6 +668,11 @@ static void mctl_phy_ac_remapping(const dram_para_t *para,
- 
- 	fuse = (readl(SUNXI_SID_BASE + 0x28) & 0xf00) >> 8;
- 	debug("DDR efuse: 0x%x\n", fuse);
-+	debug("SoC Chip ID: 0x%08x\n", sid_read_soc_chipid());
-+
-+	if (sid_read_soc_chipid() == SUNXI_CHIPID_T113M4020DC0) {
-+		return;
-+	}
- 
- 	if (para->dram_type == SUNXI_DRAM_TYPE_DDR2) {
- 		if (fuse == 15)
-diff --git a/drivers/ram/sunxi/dram_sun20i_d1.h b/drivers/ram/sunxi/dram_sun20i_d1.h
-index 91383f6cf10..83ae7eb36cd 100644
---- a/drivers/ram/sunxi/dram_sun20i_d1.h
-+++ b/drivers/ram/sunxi/dram_sun20i_d1.h
-@@ -19,6 +19,17 @@ enum sunxi_dram_type {
- 	SUNXI_DRAM_TYPE_LPDDR3 = 7,
- };
- 
-+/*
-+ * Chip-IDs taken from
-+ * https://github.com/ua1arn/hftrx/blob/25d8cb9e4cfe1d7d0e4a2f641025c88a9ec5e758/inc/clocks.h#L250
-+ */
-+enum sunxi_soc_chipid {
-+	SUNXI_CHIPID_F133A = 0x5C00,
-+	SUNXI_CHIPID_D1S = 0x5E00,
-+	SUNXI_CHIPID_T113S3 = 0x6000,
-+	SUNXI_CHIPID_T113M4020DC0 = 0x7200,
-+};
-+
- /*
-  * This structure contains a mixture of fixed configuration settings,
-  * variables that are used at runtime to communicate settings between
--- 
-2.47.3
-
-
+Thanks
