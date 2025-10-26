@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 560A1CCD1A5
-	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81FC0CCD1A5
+	for <u-boot@archiver.kernel.org>; Sun, 26 Oct 2025 15:45:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFB67838BF;
-	Sun, 26 Oct 2025 16:45:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 19D30838D2;
+	Sun, 26 Oct 2025 16:45:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="V9lPzH7h";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="C2Xi2UQ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 585A8832AD; Sun, 26 Oct 2025 16:45:07 +0100 (CET)
-Received: from mail-m49229.qiye.163.com (mail-m49229.qiye.163.com
- [45.254.49.229])
+ id 2FE28838E5; Sun, 26 Oct 2025 16:45:20 +0100 (CET)
+Received: from mail-m49233.qiye.163.com (mail-m49233.qiye.163.com
+ [45.254.49.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF9E0838CC
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:45:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91C76832AD
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 16:45:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [124.72.36.208])
- by smtp.qiye.163.com (Hmail) with ESMTP id 273748ff7;
- Sun, 26 Oct 2025 23:45:01 +0800 (GMT+08:00)
-Message-ID: <32400e2d-a24e-41da-8827-21a7077cede8@rock-chips.com>
-Date: Sun, 26 Oct 2025 23:45:01 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id 273749002;
+ Sun, 26 Oct 2025 23:45:14 +0800 (GMT+08:00)
+Message-ID: <cfde6659-c60e-4071-bf84-e578957b4650@rock-chips.com>
+Date: Sun, 26 Oct 2025 23:45:14 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/18] rockchip: odroid-go2: Use power off at power
- plug-in event
+Subject: Re: [PATCH v2 11/18] rockchip: odroid-go2: Add support for SPI flash
+ boot
 To: Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner
  <heiko.stuebner@cherry.de>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250831165001.2749711-1-jonas@kwiboo.se>
- <20250831165001.2749711-11-jonas@kwiboo.se>
+ <20250831165001.2749711-12-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250831165001.2749711-11-jonas@kwiboo.se>
+In-Reply-To: <20250831165001.2749711-12-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9a2131c5e803afkunm237d9f534d30c5
+X-HM-Tid: 0a9a2131f84003afkunmfec7ecc14d3171
 X-HM-MType: 1
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlDTEJNVk5OSxgYSx9OTE5DSFYVFAkWGhdVEwETFh
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHxlOVk8YH0lJTEIaSk8ZTVYVFAkWGhdVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlKSU9VTElVSE1VSUtDWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
 DKIM-Signature: a=rsa-sha256;
- b=V9lPzH7hu0Iee3q4G2SNHSeTdSbTKGTXZ7Rv1P7xrnO5fBRndd0HQVuzx2/uKACYsadFEKKl4dzEZyzzjhrXSTi2oHTfpCtdtYgv5d0X9NzME7gnnoG1YfbqEjhhyA80MXjtcfWk7llJ6Y5ENBdOddkWRbLRyffreahR8TDDML0=;
+ b=C2Xi2UQ28TuquZYADKc4G1EmtZzdvlxKQw6lQdWp3/5Kp2MDs9X1b/Q+YNLnfzdZMXawl3Yr4PLDSPKAX6ZKFv6EZDqtPkgRZ6vODTjdDRgMwCrccphyq/p9XY0czm/zDxjaq7Rp/v7N4hN2DbGhuR8s1bBVzQGcjvati5KIk6I=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=TZdaPlJIKyXoy61/hl8YNU3rfSQW3q0W5g4SbxfuJvY=;
+ bh=f5AAFYnMdBg1PRwJR9wirrGxEp1BZLYeHS3sFgxZhAM=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,14 +75,11 @@ X-Virus-Status: Clean
 
 
 On 2025/9/1 00:49, Jonas Karlman wrote:
-> Include the RK817 PMIC in SPL and enable Kconfig options to power off
-> the handheld gaming device when it was powered on due to a power cable
-> plug-in event:
+> The ODROID GO2 devices come with onboard SPI flash, add support for
+> using the SPI flash.
 >
->    DDR3, 333MHz
->    BW=32 Col=10 Bk=8 CS0 Row=15 CS=1 Die BW=16 Size=1024MB
->    out
->    Power Off due to plug-in event
+> The BootROM seem to expect the IDBlock at 64 KiB offset compared to the
+> typical 32 KiB offset from start of SPI flash used by other SoCs.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -92,69 +89,108 @@ Thanks,
 > ---
 > v2: No change
 > ---
->   arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 18 ++++++++++++++++++
->   configs/odroid-go2_defconfig               |  3 +++
->   2 files changed, 21 insertions(+)
+>   arch/arm/dts/rk3326-u-boot.dtsi | 18 +++++++++++++++++-
+>   configs/odroid-go2_defconfig    | 11 +++++++++++
+>   2 files changed, 28 insertions(+), 1 deletion(-)
 >
-> diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> index 6f40654d5e84..6c6efa964d80 100644
-> --- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-> @@ -5,8 +5,26 @@
+> diff --git a/arch/arm/dts/rk3326-u-boot.dtsi b/arch/arm/dts/rk3326-u-boot.dtsi
+> index 196604a9987c..be1dd4f91c1b 100644
+> --- a/arch/arm/dts/rk3326-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3326-u-boot.dtsi
+> @@ -6,8 +6,12 @@
+>   #include "rockchip-u-boot.dtsi"
 >   
->   #include "rk3326-u-boot.dtsi"
+>   / {
+> +	aliases {
+> +		spi2 = &sfc;
+> +	};
+> +
+>   	chosen {
+> -		u-boot,spl-boot-order = &sdmmc;
+> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc;
+>   	};
 >   
-> +&i2c0_xfer {
-> +	bootph-pre-ram;
+>   	dmc {
+> @@ -22,6 +26,17 @@
+>   	};
+>   };
+>   
+> +#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+> +&binman {
+> +	simple-bin-spi {
+> +		mkimage {
+> +			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
+> +			offset = <0x10000>;
+> +		};
+> +	};
 > +};
+> +#endif
 > +
-> +&i2s1_2ch_mclk {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&pcfg_pull_none_smt {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&pmic_int {
-> +	bootph-pre-ram;
-> +};
-> +
->   &rk817 {
->   	regulators {
-> +		bootph-pre-ram;
-> +
->   		vcc_cam: LDO_REG9 {
->   			regulator-name = "vcc_cam";
->   			regulator-min-microvolt = <3000000>;
+>   &cru {
+>   	bootph-all;
+>   };
+> @@ -102,6 +117,7 @@
+>   
+>   &sfc {
+>   	bootph-some-ram;
+> +	u-boot,spl-sfc-no-dma;
+>   };
+>   
+>   &sfc_bus2 {
 > diff --git a/configs/odroid-go2_defconfig b/configs/odroid-go2_defconfig
-> index b0947fe2c8b2..a6d02baa520f 100644
+> index a6d02baa520f..09ba6b7fcfaa 100644
 > --- a/configs/odroid-go2_defconfig
 > +++ b/configs/odroid-go2_defconfig
-> @@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=0x4000
+> @@ -3,17 +3,23 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_SF_DEFAULT_SPEED=108000000
+> +CONFIG_SF_DEFAULT_MODE=0x1000
+>   CONFIG_ENV_SIZE=0x4000
+>   CONFIG_ENV_OFFSET=0x4000
 >   CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3326-odroid-go2"
 >   CONFIG_DM_RESET=y
 >   CONFIG_ROCKCHIP_PX30=y
-> +CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
+>   CONFIG_ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
 >   CONFIG_TARGET_ODROID_GO2=y
 >   CONFIG_DEBUG_UART_CHANNEL=1
 >   CONFIG_SYS_LOAD_ADDR=0x800800
-> @@ -42,6 +43,7 @@ CONFIG_CMD_GPT=y
->   # CONFIG_CMD_LOADB is not set
->   # CONFIG_CMD_LOADS is not set
->   CONFIG_CMD_MMC=y
-> +CONFIG_CMD_POWEROFF=y
->   CONFIG_CMD_USB=y
->   CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_ITEST is not set
-> @@ -73,6 +75,7 @@ CONFIG_SPL_PINCTRL=y
+> +CONFIG_SF_DEFAULT_BUS=2
+>   CONFIG_DEBUG_UART_BASE=0xFF160000
+>   CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+>   CONFIG_DEBUG_UART=y
+>   # CONFIG_ANDROID_BOOT_IMAGE is not set
+>   CONFIG_FIT=y
+> @@ -30,6 +36,8 @@ CONFIG_SPL_BOOTROM_SUPPORT=y
+>   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>   CONFIG_SPL_I2C=y
+>   CONFIG_SPL_POWER=y
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
+>   CONFIG_SPL_ATF=y
+>   # CONFIG_TPL_FRAMEWORK is not set
+>   # CONFIG_TPL_BANNER_PRINT is not set
+> @@ -70,6 +78,8 @@ CONFIG_MISC=y
+>   CONFIG_ROCKCHIP_OTP=y
+>   CONFIG_MMC_DW=y
+>   CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_XTX=y
+>   CONFIG_PINCTRL=y
+>   CONFIG_SPL_PINCTRL=y
 >   CONFIG_DM_PMIC=y
->   CONFIG_PMIC_RK8XX=y
->   CONFIG_SPL_PMIC_RK8XX=y
-> +CONFIG_SPL_DM_REGULATOR=y
->   CONFIG_DM_REGULATOR_FIXED=y
->   CONFIG_REGULATOR_RK8XX=y
->   CONFIG_PWM_ROCKCHIP=y
+> @@ -87,6 +97,7 @@ CONFIG_ROCKCHIP_SDRAM_COMMON=y
+>   CONFIG_DEBUG_UART_SHIFT=2
+>   CONFIG_SYS_NS16550_MEM32=y
+>   CONFIG_SOUND=y
+> +CONFIG_ROCKCHIP_SFC=y
+>   CONFIG_SYSRESET=y
+>   CONFIG_DM_THERMAL=y
+>   CONFIG_USB=y
 
 -- 
 Thanks & Best regards,
