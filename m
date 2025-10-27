@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21293CCF9E0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 16:39:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 748DECCF9EB
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 16:40:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2FAE838D5;
-	Mon, 27 Oct 2025 17:39:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C351838AE;
+	Mon, 27 Oct 2025 17:40:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ovw63GGz";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="c4Yqb8xb";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hO2ETln4";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="fxx9V1nQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DC84838E7; Mon, 27 Oct 2025 17:39:13 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 9AC678391C; Mon, 27 Oct 2025 17:39:58 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7150E838AB
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 17:39:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92876838AB
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 17:39:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4cwK331WrSz9tSq;
- Mon, 27 Oct 2025 17:39:11 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cwK3w2n5bz9sqC;
+ Mon, 27 Oct 2025 17:39:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761583151;
+ s=mail20150812; t=1761583196;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=i8Ne6cdEsyOT0yTH/0JJ6slq4W71CdSLNlQKhxvovYo=;
- b=Ovw63GGz9VANCHKyX6zBysLSQO8TyQudtEtc4/fs6A4At4aVYOozaXv5dnviubfsTO0IB/
- jF1H9dYC5ROuoGSYvdI6hroFIabkBl36FON9hCUcJh2ChFpB9N0N6x0aRcpM9mz5MMQtqH
- FL7+vQtcrTfPuTvx697lJfbUH7OptJf6MG1KO3QKPqVdjzP/OxSAy2Nlr9Q5/tw3hLPexs
- /xFbP2l8SOKdaUwR+nKbLEquP3r4D8+d24hlyb5TFsk/9iC1l9pqIpemF5PjOpgNQQDBYc
- AasfahSTFT0nlc6ECr025h3bHF5wTA1yzDZ2Fe111Ps9E/D+Y1nmrwmgypchmg==
-Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=c4Yqb8xb;
- spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
- smtp.mailfrom=marek.vasut+renesas@mailbox.org
+ bh=W+I0dTyIRHiMOzastKP52WqXUhYEO50gJNviDlsSfok=;
+ b=hO2ETln471TujrUz+ZE4QmiSjddHHrjL+FtBbLhQIeH24acJdmjIQa+dlN5ndVMmAaibTU
+ H+8r+QWWHrmVT6ewiCAOBFDks3vfpNao8BXrh4Ep+X0s1TDMmNzZh2AAoU3OFL0WT5CwQH
+ WOhI8u28aspgSoJc/gU8yFS9F95MwCbP1YgPbZ/nG/h95lL2GXQJjnY8iznD3raU7GEjpw
+ fhp1+/jL2ki5uqmq71Df4UxjgGhvlhJcGOiMppZ4DHVA6eQoE/68egRiywytrcu3HNWlu8
+ 6VZ6Psx+3BmBy1OWZmy6bY2tf8JSgcjfxn7l2xVqBJAr6dcr9+YHAsPMW0ut4w==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761583149;
+ s=mail20150812; t=1761583194;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=i8Ne6cdEsyOT0yTH/0JJ6slq4W71CdSLNlQKhxvovYo=;
- b=c4Yqb8xbBHlwwc83g4sDHsBgNXQujXPB1PaHa3ihmsM3wjaGZ2IgE8A4jFjL5r+gCjNcbj
- 7w/29sQ5aBp4+bsYiho7dPHFZvF0oRX76Mn/N17OcPy4sarfj0FK1MGVop2jvh2nR518Hj
- os8UUE9OG7zwlKJbJvwjfi3BmnT1xZbXr2l59xed41IM7svZia6fp7UrBNTfy4ZEvbLbn2
- thH1F+buyG7G2jCdX+YRURkHcj5cUG+KJQxmrtXkg2dWLVAcnxZ6IVHgpEIY9+DitQ3ONW
- i1kFRSIpEuDMc88rZZB/fvkIZyZ6Newu24Ru1wEg3/xoy1wZGf/8sPT/XpLUGg==
+ bh=W+I0dTyIRHiMOzastKP52WqXUhYEO50gJNviDlsSfok=;
+ b=fxx9V1nQ4cWY+mcmSUtH4wBTXl0PxXq8c4W9BqvR52QmgwO8/Lu8eueAYW+ahiOGmRu5m4
+ mpPxsbRgTgKv8IBLKqIWWmbX5dJUPLEet3RWrkk2ABDtcTVA1tox+uSiblWBU3VTlWDxih
+ X5EKv3AXxX2AAC/nY+n92ivY9LKbZ8yr9w3yASXnU72ggskp5Nxu52EAvReeqz68k4kuG/
+ JWjLzO80LWU2Jt+MG5PPYc7JPXY9w+R/2Q4aSGhTeTgmygrXPFn7NJwyT/bwpWgYbFAOqe
+ D8mOkMhutR+KyvaKjguKZqbwEZIT3EIV0Ow/JlluLyd5cYGK3r4IQVNbOu3JPQ==
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+Cc: Tuyen Dang <tuyen.dang.xa@renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Alice Guo <alice.guo@nxp.com>, Jamie Gibbons <jamie.gibbons@microchip.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Tuyen Dang <tuyen.dang.xa@renesas.com>,
- Viorel Suman <viorel.suman@nxp.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH] mailbox: Allow operation without .recv callback
-Date: Mon, 27 Oct 2025 17:38:38 +0100
-Message-ID: <20251027163904.11814-1-marek.vasut+renesas@mailbox.org>
+ Tom Rini <trini@konsulko.com>, Viorel Suman <viorel.suman@nxp.com>,
+ Ye Li <ye.li@nxp.com>
+Subject: [PATCH] mailbox: renesas: Add Renesas MFIS Multifunctional Interface
+ mailbox driver
+Date: Mon, 27 Oct 2025 17:39:17 +0100
+Message-ID: <20251027163949.11846-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 18qpr6ebb9k3egys1rg68ormrjb8nqh8
-X-MBO-RS-ID: 2879d18395b5ec05f42
-X-Rspamd-Queue-Id: 4cwK331WrSz9tSq
+X-MBO-RS-META: j3d8w5zk9ny79if5w57iemuq7p1p1fxg
+X-MBO-RS-ID: 063abbe46cde06f3f12
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,14 +87,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some shared memory mailboxes may have empty receive operation,
-because the data are polled by upper layers directly from the
-shared memory region, and there is no completion interrupt or
-bit of any sort. Allow empty .recv callback, and if the .recv
-callback is empty, exit from mbox_recv() right away, because
-any polling for completion here would be meaningless.
+From: Tuyen Dang <tuyen.dang.xa@renesas.com>
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Add support for the Renesas MFIS mailbox, which provides an interface
+between the different CPU Cores, such as AP System Core domain and the
+Realtime Core domain, SCP Core domain and AP System Core domain or
+Realtime Core domain and AP System Core domain or Realtime Core domain.
+
+Signed-off-by: Tuyen Dang <tuyen.dang.xa@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org> # Update the driver
+[Marek: Rename the driver to renesas-mfis, simplify the driver.
+        Always use only one TX channel and no RX channel, drop all
+	unnecessary code. Perform 1ms delay in send callback which
+	is perfectly fine to do in U-Boot which does RX polling]
 ---
 Cc: Alice Guo <alice.guo@nxp.com>
 Cc: Jamie Gibbons <jamie.gibbons@microchip.com>
@@ -110,29 +111,108 @@ Cc: Viorel Suman <viorel.suman@nxp.com>
 Cc: Ye Li <ye.li@nxp.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/mailbox/mailbox-uclass.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/mailbox/Kconfig        | 10 ++++++
+ drivers/mailbox/Makefile       |  1 +
+ drivers/mailbox/renesas-mfis.c | 59 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 70 insertions(+)
+ create mode 100644 drivers/mailbox/renesas-mfis.c
 
-diff --git a/drivers/mailbox/mailbox-uclass.c b/drivers/mailbox/mailbox-uclass.c
-index 4bf4987ce0a..fef437a4281 100644
---- a/drivers/mailbox/mailbox-uclass.c
-+++ b/drivers/mailbox/mailbox-uclass.c
-@@ -132,6 +132,15 @@ int mbox_recv(struct mbox_chan *chan, void *data, ulong timeout_us)
- 	debug("%s(chan=%p, data=%p, timeout_us=%ld)\n", __func__, chan, data,
- 	      timeout_us);
+diff --git a/drivers/mailbox/Kconfig b/drivers/mailbox/Kconfig
+index f9531c1627c..cfd2a3be3fd 100644
+--- a/drivers/mailbox/Kconfig
++++ b/drivers/mailbox/Kconfig
+@@ -66,6 +66,16 @@ config K3_SEC_PROXY
+ 	  Select this driver if your platform has support for this hardware
+ 	  block.
  
-+	/*
-+	 * Some shared memory mailboxes may have empty receive operation,
-+	 * because the data are polled by upper layers directly from the
-+	 * shared memory region, and there is no completion interrupt or
-+	 * bit of any sort.
-+	 */
-+	if (!ops->recv)
-+		return 0;
++config RCAR_MFIS_MBOX
++	bool "Renesas MFIS Multifunctional Interface mailbox driver"
++	depends on DM_MAILBOX && ARCH_RENESAS
++	help
++	  This enables support for the Renesas MFIS mailbox module, which
++	  provides an interface between the different CPU Cores, such as AP
++	  System Core domain and the Realtime Core domain, SCP Core domain
++	  and AP System Core domain or Realtime Core domain and AP System
++	  Core domain or Realtime Core domain.
 +
- 	start_time = timer_get_us();
- 	/*
- 	 * Account for partial us ticks, but if timeout_us is 0, ensure we
+ config ZYNQMP_IPI
+ 	bool "Xilinx ZynqMP IPI controller support"
+ 	depends on DM_MAILBOX && (ARCH_ZYNQMP || ARCH_VERSAL || ARCH_VERSAL_NET || ARCH_VERSAL2)
+diff --git a/drivers/mailbox/Makefile b/drivers/mailbox/Makefile
+index b54fbdfff15..b3a36691497 100644
+--- a/drivers/mailbox/Makefile
++++ b/drivers/mailbox/Makefile
+@@ -12,4 +12,5 @@ obj-$(CONFIG_SANDBOX_MBOX) += sandbox-mbox-test.o
+ obj-$(CONFIG_STM32_IPCC) += stm32-ipcc.o
+ obj-$(CONFIG_TEGRA_HSP) += tegra-hsp.o
+ obj-$(CONFIG_K3_SEC_PROXY) += k3-sec-proxy.o
++obj-$(CONFIG_RCAR_MFIS_MBOX) += renesas-mfis.o
+ obj-$(CONFIG_ZYNQMP_IPI) += zynqmp-ipi.o
+diff --git a/drivers/mailbox/renesas-mfis.c b/drivers/mailbox/renesas-mfis.c
+new file mode 100644
+index 00000000000..1e9e8285974
+--- /dev/null
++++ b/drivers/mailbox/renesas-mfis.c
+@@ -0,0 +1,59 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) 2020-2025, Renesas Electronics Corporation.
++ */
++
++#include <asm/io.h>
++#include <dm.h>
++#include <linux/delay.h>
++#include <mailbox-uclass.h>
++
++#define COM		0x0
++#define IIR		BIT(0)
++
++struct mfis_priv {
++	void __iomem	*tx_base;
++};
++
++static int mfis_send(struct mbox_chan *chan, const void *data)
++{
++	struct mfis_priv *mfis = dev_get_priv(chan->dev);
++
++	writel(IIR, mfis->tx_base + COM);
++
++	/* Give the remote side some time. */
++	mdelay(1);
++
++	writel(0, mfis->tx_base + COM);
++
++	return 0;
++}
++
++struct mbox_ops mfis_mbox_ops = {
++	.send		= mfis_send,
++};
++
++static int mfis_mbox_probe(struct udevice *dev)
++{
++	struct mfis_priv *mbox = dev_get_priv(dev);
++
++	mbox->tx_base = dev_read_addr_index_ptr(dev, 0);
++	if (!mbox->tx_base)
++		return -ENODEV;
++
++	return 0;
++}
++
++static const struct udevice_id mfis_mbox_of_match[] = {
++	{ .compatible = "renesas,mfis-mbox", },
++	{},
++};
++
++U_BOOT_DRIVER(renesas_mfis) = {
++	.name		= "renesas-mfis",
++	.id		= UCLASS_MAILBOX,
++	.of_match	= mfis_mbox_of_match,
++	.probe		= mfis_mbox_probe,
++	.priv_auto	= sizeof(struct mfis_priv),
++	.ops		= &mfis_mbox_ops,
++};
 -- 
 2.51.0
 
