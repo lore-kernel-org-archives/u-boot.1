@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64DE1CCF9E0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 18:08:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABE37CCF9E0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 18:29:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DA3583890;
-	Mon, 27 Oct 2025 19:08:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EC838838DD;
+	Mon, 27 Oct 2025 19:29:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xiRYSZOx";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lD/zQZX9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 554EE838BF; Mon, 27 Oct 2025 19:08:46 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57DE28384E
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 19:08:43 +0100 (CET)
+ id B6B9B8352B; Mon, 27 Oct 2025 17:01:36 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6F882A9E
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 17:01:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelvem-sh02.itg.ti.com ([10.180.78.226])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59RI8bHS2481540;
- Mon, 27 Oct 2025 13:08:37 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761588517;
- bh=8Z0w0NvVgrped+xFXBauc57wRdDtng9givE5vKPYyrM=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=xiRYSZOxjPE4SDbcY5BeDFBGYhYrhu0x03LKr1/ByygCuzyBO1/cYSegns58RpPdB
- fVbpiZ5q/SMVmWsxicu6HxnN9Xq4jWwT1xld4xGu3n+LyQlz0WHQSR1cRo0kVivouA
- xP39jLJMSkv+B8BX+DTkSRZXniysksCmuRBRMde8=
-Received: from DFLE212.ent.ti.com (dfle212.ent.ti.com [10.64.6.70])
- by lelvem-sh02.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59RI8b781823060
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Oct 2025 13:08:37 -0500
-Received: from DFLE202.ent.ti.com (10.64.6.60) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Oct
- 2025 13:08:37 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE202.ent.ti.com
- (10.64.6.60) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 27 Oct 2025 13:08:37 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59RI8aYn1080614;
- Mon, 27 Oct 2025 13:08:36 -0500
-Message-ID: <8127d3c6-3b1e-4e8c-9ae5-efd7740cc54c@ti.com>
-Date: Mon, 27 Oct 2025 13:08:36 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hannes.grabmann@gmail.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-b4f323cf89bso1155067966b.2
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 09:01:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1761580894; x=1762185694; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=5e9g/Fp3WakSXKjnwcoX497qZX3EkTLxi8V/ovZBKeY=;
+ b=lD/zQZX9JpaOiL5rnSpUT26YA8JCWOmObg4lL0eE0wCsniRglJf0YvS64lINhCKb9v
+ nxTa9gw51BCryIyclcJryP+L2BtxRumII0Y3OBOTIGiL7k2rJb2HI7ipjSWD7riCVTEF
+ QzcDd4guGBgfVtdZuDxZhBkrIoisV9WJRQyIMerlhsxHNBrH9d7D3ioWgPNcUwkIx7QI
+ MRnQdLjLQaJCW4x40X+hMAMfEIjhBUc/NkYQa4OX5aVQLbYiXLW5NKY5zkZePmfR4VzO
+ G20yeRhNunJM/2RiNC7f354dZ+u1aig2zpxyxL0jQaSCdAXmBAE1sR8jYEf0iBuHAmLZ
+ 6Yfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761580894; x=1762185694;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=5e9g/Fp3WakSXKjnwcoX497qZX3EkTLxi8V/ovZBKeY=;
+ b=VgF3Zy69x1uKLkrJXv53RlhojoLrtf4ScVnhHwy/NjhQoe7RnKsDYdShC93vwbGIv/
+ rPWsQdB56LFywp62PZJcj30qaLEqs95XFl5EqP71OoCmfsTvr2ak2YopA0EHOmUIVQqQ
+ FY8lKZ/cNZjp3KiaZFT7dG+xXPu17pHp+fyFjxALm/OgKezDqd2gRF9i7OMn3E5QGcd7
+ dIX7r8aSmBYWr2Bqyokm2OsfYnZPvihAvoDTG7RSqaz2TOuJ0TY6QeRqRvJSFlg/rrfb
+ jkGxtfY6z39qb6rnOLZGcyBZ2L2HSeB8E+u1yIQzf0ToWncENBnMtAPK7rDV8IwXuRB9
+ x7Zw==
+X-Gm-Message-State: AOJu0YylFQ7JXI5r9I6TrfAseX5w8cdM+9c+/tZ9I6attdkK7FhEJadU
+ 7XaAeGyIhCIh5KDvaOU+AloxbNPdOTjxb5AfZHemxw4XxRMcm0uXjrWaOu/yWFkNLyJY8PI32Aq
+ CIu67yug3TDGHKEkWrp6WwmwoSJlhDiWFaaLx
+X-Gm-Gg: ASbGnctN7CSzQgU6QwOUaSLOPvDye65ecfT4MiUietAbm7zGsiFM4+DHmB7yRxJ0MIN
+ 20ZUALsSzUfdZQiW9rN/yY9p0VSA8KG5hKoqk/iQrquXtimrhsYpKsice0+cazYp9YN4U0dyksL
+ 7rhDAWPkbbskpJe3uu23VPdaysJDLMPu1Uq0oS0K5g4cBsXTL+LC7Qo6EIGS3jZDpJAeAKxTyLz
+ +7PJdvJ05aco078wVx1QpJP4fJ29K+kfMtFohuDWDmMkPTJ8w28xnlFhmUOTMQdYq7kZUlN
+X-Google-Smtp-Source: AGHT+IEFyCIQ5W5hdoO3OCUIMrr6bxejw9rRQZf2CGEZ13oTfF/QbKjMOAqcxUuZJVl8eOYfP37tyIew7JS21IuGlnk=
+X-Received: by 2002:a17:906:c101:b0:b3f:9b9c:d499 with SMTP id
+ a640c23a62f3a-b6dba59b314mr36268866b.51.1761580893564; Mon, 27 Oct 2025
+ 09:01:33 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/4] board: am62x: Add support for reading eeprom data
-To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>,
- <u-boot@lists.denx.de>, Anshul Dalal <anshuld@ti.com>, Bryan Brattlof
- <bb@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Garrett Giordano <ggiordano@phytec.com>,
- Wadim Egorov <w.egorov@phytec.de>, Neha Malcom Francis <n-francis@ti.com>,
- Mattijs Korpershoek <mkorpershoek@kernel.org>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, "Jonathan
- Humphreys" <j-humphreys@ti.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>,
- Prasanth Babu Mantena <p-mantena@ti.com>, Judith Mendez <jm@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Dhruva Gole <d-gole@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, "Neil
- Armstrong" <neil.armstrong@linaro.org>,
- Aashvij Shenai <a-shenai@ti.com>, "Peng Fan" <peng.fan@nxp.com>
-References: <20251024-am62xeeprom-v2-0-0e372347e7d4@baylibre.com>
- <20251024-am62xeeprom-v2-2-0e372347e7d4@baylibre.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20251024-am62xeeprom-v2-2-0e372347e7d4@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Hannes <hannes.grabmann@gmail.com>
+Date: Mon, 27 Oct 2025 17:01:22 +0100
+X-Gm-Features: AWmQ_bl0KLLflBC2942H5tY9emTdjkyu4swhu9tciHPCoQSHWl8TXR0xnNJ6ymA
+Message-ID: <CALFKKaYMzd-t0=CbFHqhZbYekVyHDuer-yEyao5b9VkPZ_S4rA@mail.gmail.com>
+Subject: DE10 Nano - Booting from FPGA
+To: u-boot@lists.denx.de
+X-Mailman-Approved-At: Mon, 27 Oct 2025 19:29:35 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,138 +88,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/24/25 9:17 AM, Guillaume La Roque (TI.com) wrote:
-> I2C EEPROM data contains the board name and its revision.
-> Add support for:
-> - Reading EEPROM data and store a copy at end of SRAM
-> - Updating env variable with relevant board info
-> - Printing board info during boot
-> 
-> Use the generic do_board_detect_am6() and setup_serial_am6()
-> functions to avoid code duplication across AM6x family boards.
-> 
-> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
-> ---
->   arch/arm/mach-k3/am62x/Kconfig |  3 +++
->   board/ti/am62x/evm.c           | 54 +++++++++++++++++++++++++++++++++++++++++-
->   configs/am62x_evm_r5_defconfig |  1 +
->   3 files changed, 57 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-k3/am62x/Kconfig b/arch/arm/mach-k3/am62x/Kconfig
-> index 81199ada3a1..f7ad52db7d8 100644
-> --- a/arch/arm/mach-k3/am62x/Kconfig
-> +++ b/arch/arm/mach-k3/am62x/Kconfig
-> @@ -14,6 +14,8 @@ config TARGET_AM625_A53_EVM
->   	select ARM64
->   	select BINMAN
->   	select OF_SYSTEM_SETUP
-> +	imply TI_COMMON_CMD_OPTIONS
-> +	imply TI_I2C_BOARD_DETECT
->   
->   config TARGET_AM625_R5_EVM
->   	bool "TI K3 based AM625 EVM running on R5"
-> @@ -25,6 +27,7 @@ config TARGET_AM625_R5_EVM
->   	select K3_DDRSS
->   	select BINMAN
->   	imply SYS_K3_SPL_ATF
-> +	imply TI_I2C_BOARD_DETECT
->   
->   config TARGET_PHYCORE_AM62X_A53
->   	bool "PHYTEC phyCORE-AM62x running on A53"
-> diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-> index c2c7a0216b9..591324ecc15 100644
-> --- a/board/ti/am62x/evm.c
-> +++ b/board/ti/am62x/evm.c
-> @@ -22,8 +22,16 @@
->   #include <dm/uclass.h>
->   #include <asm/arch/k3-ddr.h>
->   
-> +#include "../common/board_detect.h"
->   #include "../common/fdt_ops.h"
->   
-> +#define board_is_am62x_skevm()  (board_ti_k3_is("AM62-SKEVM") || \
-> +				 board_ti_k3_is("AM62B-SKEVM"))
-> +#define board_is_am62b_p1_skevm() board_ti_k3_is("AM62B-SKEVM-P1")
-> +#define board_is_am62x_lp_skevm()  board_ti_k3_is("AM62-LP-SKEVM")
-> +#define board_is_am62x_sip_skevm()  board_ti_k3_is("AM62SIP-SKEVM")
-> +#define board_is_am62x_play()	board_ti_k3_is("BEAGLEPLAY-A0-")
+Hello,
 
-BeaglePlay is not a TI AM62x EVM variant, its support is handled
-separately over in board/beagle/beagleplay/, might be good to drop
-this line to avoid any confusion around how the board is supported.
 
-Andrew
 
-> +
->   DECLARE_GLOBAL_DATA_PTR;
->   
->   #if CONFIG_IS_ENABLED(SPLASH_SCREEN)
-> @@ -74,9 +82,53 @@ struct efi_capsule_update_info update_info = {
->   	.images = fw_images,
->   };
->   
-> -#ifdef CONFIG_BOARD_LATE_INIT
-> +#if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
-> +int checkboard(void)
-> +{
-> +	struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
-> +
-> +	if (!do_board_detect_am6())
-> +		printf("Board: %s rev %s\n", ep->name, ep->version);
-> +
-> +	return 0;
-> +}
-> +
-> +#if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
-> +static void setup_board_eeprom_env(void)
-> +{
-> +	char *name = "am62x_skevm";
-> +
-> +	if (do_board_detect_am6())
-> +		goto invalid_eeprom;
-> +
-> +	if (board_is_am62x_skevm())
-> +		name = "am62x_skevm";
-> +	else if (board_is_am62b_p1_skevm())
-> +		name = "am62b_p1_skevm";
-> +	else if (board_is_am62x_lp_skevm())
-> +		name = "am62x_lp_skevm";
-> +	else if (board_is_am62x_sip_skevm())
-> +		name = "am62x_sip_skevm";
-> +	else if (board_is_am62x_play())
-> +		name = "am62x_beagleplay";
-> +	else
-> +		printf("Unidentified board claims %s in eeprom header\n",
-> +		       board_ti_get_name());
-> +
-> +invalid_eeprom:
-> +	set_board_info_env_am6(name);
-> +}
-> +#endif
-> +#endif
-> +
-> +#if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
->   int board_late_init(void)
->   {
-> +	if (IS_ENABLED(CONFIG_TI_I2C_BOARD_DETECT)) {
-> +		setup_board_eeprom_env();
-> +		setup_serial_am6();
-> +	}
-> +
->   	ti_set_fdt_env(NULL, NULL);
->   	return 0;
->   }
-> diff --git a/configs/am62x_evm_r5_defconfig b/configs/am62x_evm_r5_defconfig
-> index 18ffc991b25..d42bdf1f074 100644
-> --- a/configs/am62x_evm_r5_defconfig
-> +++ b/configs/am62x_evm_r5_defconfig
-> @@ -85,6 +85,7 @@ CONFIG_SPL_CLK_K3_PLL=y
->   CONFIG_SPL_CLK_K3=y
->   CONFIG_TI_SCI_PROTOCOL=y
->   CONFIG_DA8XX_GPIO=y
-> +CONFIG_DM_I2C=y
->   CONFIG_DM_MAILBOX=y
->   CONFIG_K3_SEC_PROXY=y
->   CONFIG_SPL_MISC=y
-> 
+I am currently working on a small project for the DE10 Nano Board and setup
+Pinmux for the Ethernet PHY signals. As I need the preloader to configure
+the Pinmux in the HPS, I have tried to set this up based on the current
+u-boot-socfpga branch. For this purpose i followed different guides on
+rocketboards.org and the "AN 709: HPS SoC Boot Guide" on how to build a
+bootloader and configure HPS from FPGA using EPCS64 flash memory. I could
+configure SPL_TEXT_BASE=0xC0000000 and "Support booting from SPI Flash" in
+menuconfig, build and create .hex file from u-boot-spl to initalize the
+on-chip RAM. Problem is that the preloader does not seem to be executed.
+Upon further investigation i noticed that the spl data address is not at
+0XFFFF0000 as suggested by several older guides:
 
+arm-none-eabi-readelf -S spl/u-boot-spl
+There are 19 section headers, starting at offset 0x1482f4:
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk
+Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0
+0  0
+  [ 1] .text             PROGBITS        c0000000 001000 00b5d4 00  AX  0
+0 64
+  [ 2] .rodata           PROGBITS        c000b5d4 00c5d4 00232b 00   A  0
+0  4
+  [ 3] .data             PROGBITS        c000d900 00e900 000098 00  WA  0
+0  4
+  [ 4] __u_boot_list     PROGBITS        c000d998 00e998 000840 00  WA  0
+0  4
+  [ 5] .bss              PROGBITS        c000e1d8 00f1d8 000010 00   W  0
+0  4
+  [ 6] .ARM.attributes   ARM_ATTRIBUTES  00000000 00f1e8 000029 00      0
+0  1
+  [ 7] .comment          PROGBITS        00000000 00f211 000026 01  MS  0
+0  1
+  [ 8] .debug_line       PROGBITS        00000000 00f237 0292fa 00      0
+0  1
+  [ 9] .debug_info       PROGBITS        00000000 038531 08eab7 00      0
+0  1
+  [10] .debug_abbrev     PROGBITS        00000000 0c6fe8 0134ca 00      0
+0  1
+  [11] .debug_aranges    PROGBITS        00000000 0da4b8 002948 00      0
+0  8
+  [12] .debug_str        PROGBITS        00000000 0dce00 010da7 01  MS  0
+0  1
+  [13] .debug_loc        PROGBITS        00000000 0edba7 042307 00      0
+0  1
+  [14] .debug_ranges     PROGBITS        00000000 12feb0 006ca0 00      0
+0  8
+  [15] .debug_frame      PROGBITS        00000000 136b50 007324 00      0
+0  4
+  [16] .symtab           SYMTAB          00000000 13de74 006a70 10     17
+1244  4
+  [17] .strtab           STRTAB          00000000 1448e4 00394d 00      0
+0  1
+  [18] .shstrtab         STRTAB          00000000 148231 0000c1 00      0
+0  1
+
+
+I also couldn't find that value in the menuconfig, nor could I find any
+up-to-date guidelines for booting HPS preloader from FPGA. Can you tell me
+if this approach is still viable and how to implement it correctly?
+
+Best regards,
+
+Hannes Grabmann
