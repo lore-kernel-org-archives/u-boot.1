@@ -4,50 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35FE4CCF9E0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 15:52:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1DDACCF9EB
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 16:11:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46F7483837;
-	Mon, 27 Oct 2025 16:51:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
+	by phobos.denx.de (Postfix) with ESMTP id 26AE982A9E;
+	Mon, 27 Oct 2025 17:11:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="PTaR1uRA";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34177836D1; Mon, 27 Oct 2025 16:51:38 +0100 (CET)
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190e])
+ id 3437C82E34; Mon, 27 Oct 2025 17:11:05 +0100 (CET)
+Received: from tor.source.kernel.org (tor.source.kernel.org [172.105.4.254])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6B09836B4
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 16:51:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1929800B1
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 17:11:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=0leil.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=foss+uboot@0leil.net
-Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
- [10.4.36.107])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cwJ063N44z12xW;
- Mon, 27 Oct 2025 16:51:34 +0100 (CET)
-Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4cwJ055fW6zKv3; Mon, 27 Oct 2025 16:51:33 +0100 (CET)
-From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 27 Oct 2025 16:51:23 +0100
-Subject: [PATCH 2/3] rockchip: make rksd the default format for SPI images
+ spf=pass smtp.mailfrom=mkorpershoek@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by tor.source.kernel.org (Postfix) with ESMTP id 9EBF8603C3;
+ Mon, 27 Oct 2025 16:11:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A61C6C4CEFD;
+ Mon, 27 Oct 2025 16:11:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1761581461;
+ bh=AoAv7+rqmASApiz0/5MUPLsVTt4XLi9fuDO78pNDzQk=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=PTaR1uRACE1JB0m0h3YBNOe2wzyLO954g4z3U6l3goex5lWHcMyMMVYaGWHivZd+X
+ jBbuhRzFQzPg/2T9dui6p5rwb5k7O7P7H3rhohhElBcK7rgZEtwJW475Y/5GanOnZa
+ TDaILp4MAYWBRRyTFz6eHq6bPE9ZH0bHasGZRcqVcF/PExm1HxYwnIWl2CsYweMAnF
+ vDE3DKxoGKf+TvZ+z7/8esInUTtCG1OXCWmBa7JOxPs3po1Z/QpUbEgDrV/skq5qfQ
+ Ni14VmJqez9JcSkP2foDy8PPM2tZvFnqTtcn9M6mCxxyxmOc4Z+tZ8Vi0qV6auDK2n
+ SdCUZOoLrkH9A==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>,
+ u-boot@lists.denx.de, Anshul Dalal <anshuld@ti.com>, Bryan Brattlof
+ <bb@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, Garrett Giordano <ggiordano@phytec.com>,
+ Wadim Egorov <w.egorov@phytec.de>, Neha Malcom Francis <n-francis@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@kernel.org>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Santhosh Kumar K <s-k6@ti.com>, Jonathan
+ Humphreys <j-humphreys@ti.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Devarsh Thakkar <devarsht@ti.com>, Prasanth
+ Babu Mantena <p-mantena@ti.com>, Judith Mendez <jm@ti.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Dhruva Gole <d-gole@ti.com>, Andrew
+ Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Aashvij Shenai <a-shenai@ti.com>, Peng Fan
+ <peng.fan@nxp.com>, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com>
+Subject: Re: [PATCH v2 1/4] board: ti: common: Add generic AM6x board
+ detection functions
+In-Reply-To: <20251024-am62xeeprom-v2-1-0e372347e7d4@baylibre.com>
+References: <20251024-am62xeeprom-v2-0-0e372347e7d4@baylibre.com>
+ <20251024-am62xeeprom-v2-1-0e372347e7d4@baylibre.com>
+Date: Mon, 27 Oct 2025 17:10:58 +0100
+Message-ID: <87y0owjpf1.fsf@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20251027-rockchip-more-template-v1-2-430672840303@cherry.de>
-References: <20251027-rockchip-more-template-v1-0-430672840303@cherry.de>
-In-Reply-To: <20251027-rockchip-more-template-v1-0-430672840303@cherry.de>
-To: u-boot@lists.denx.de
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Johan Jonker <jbx6244@gmail.com>, Sumit Garg <sumit.garg@kernel.org>, 
- Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>
-X-Mailer: b4 0.14.3
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,434 +80,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Quentin Schulz <quentin.schulz@cherry.de>
+Hi Guillaume,
 
-I believe (hope) that the new SoCs should now have this fixed and not
-require the "hack" implemented in rkspi format which almost doubles the
-size of TPL+SPL (idbloader.img).
+Thank you for the patch.
 
-It's known to be fixed on RK3566/RK3568 and RK3588(S) (according to the
-DTS setting the mkimage format for the SPI's idbloader.img to rksd
-explicitly).
+On Fri, Oct 24, 2025 at 16:17, "Guillaume La Roque (TI.com)" <glaroque@baylibre.com> wrote:
 
-Since I do not have any board with a bootable SPI flash except on RK3399
-where this work-around is required, I simply invert the logic by having
-rkspi explicitly set for all SoCs that didn't and remove rksd from SoCs
-that did. It doesn't mean that the SoC actually requires rkspi format,
-just that it's been the case until now (maybe because nobody tested).
+> Add two new generic functions for AM6x family boards to simplify
+> board-specific implementations:
+>
+> - do_board_detect_am6(): Generic board detection function that reads
+>   the on-board EEPROM. It first attempts to read at the configured
+>   address, and if that fails, tries the alternate address
+>   (CONFIG_EEPROM_CHIP_ADDRESS + 1). This provides a common
+>   implementation that can be used across different AM6x boards.
+>
+> - setup_serial_am6(): Sets up the serial number environment variable
+>   from the EEPROM data. The serial number is converted from
+>   hexadecimal string format to a 16-character hexadecimal
+>   representation and stored in the "serial#" environment variable.
+>
+> Both functions are protected by CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
+> and are designed to be used by AM62x, AM64x, AM65x, and other AM6x
+> family boards.
+>
+> Signed-off-by: Guillaume La Roque (TI.com) <glaroque@baylibre.com>
 
-Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
----
- arch/arm/dts/px30-u-boot.dtsi              | 12 ++++++++++++
- arch/arm/dts/rk3036-u-boot.dtsi            | 13 +++++++++++++
- arch/arm/dts/rk3066a-u-boot.dtsi           | 12 ++++++++++++
- arch/arm/dts/rk3128-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk3188-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk322x-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk3288-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk3308-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi | 12 ++++++++++++
- arch/arm/dts/rk3328-u-boot.dtsi            |  1 -
- arch/arm/dts/rk3368-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk3399-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk3528-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk356x-u-boot.dtsi            |  1 -
- arch/arm/dts/rk3576-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rk3588s-u-boot.dtsi           |  1 -
- arch/arm/dts/rockchip-u-boot.dtsi          |  1 -
- arch/arm/dts/rv1108-u-boot.dtsi            | 12 ++++++++++++
- arch/arm/dts/rv1126-u-boot.dtsi            | 12 ++++++++++++
- 19 files changed, 181 insertions(+), 4 deletions(-)
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
 
-diff --git a/arch/arm/dts/px30-u-boot.dtsi b/arch/arm/dts/px30-u-boot.dtsi
-index 2f726b0aaba..7385de7d6ae 100644
---- a/arch/arm/dts/px30-u-boot.dtsi
-+++ b/arch/arm/dts/px30-u-boot.dtsi
-@@ -27,6 +27,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &otp {
- 	bootph-some-ram;
- };
-diff --git a/arch/arm/dts/rk3036-u-boot.dtsi b/arch/arm/dts/rk3036-u-boot.dtsi
-index 41ac054b81e..988287e2f12 100644
---- a/arch/arm/dts/rk3036-u-boot.dtsi
-+++ b/arch/arm/dts/rk3036-u-boot.dtsi
-@@ -4,3 +4,16 @@
-  */
- 
- #include "rockchip-u-boot.dtsi"
-+
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
-diff --git a/arch/arm/dts/rk3066a-u-boot.dtsi b/arch/arm/dts/rk3066a-u-boot.dtsi
-index d99db7853b5..4272bf4a8e2 100644
---- a/arch/arm/dts/rk3066a-u-boot.dtsi
-+++ b/arch/arm/dts/rk3066a-u-boot.dtsi
-@@ -3,6 +3,18 @@
- #include "rockchip-u-boot.dtsi"
- #include "rk3xxx-u-boot.dtsi"
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &gpio6 {
- 	status = "disabled";
- };
-diff --git a/arch/arm/dts/rk3128-u-boot.dtsi b/arch/arm/dts/rk3128-u-boot.dtsi
-index 6d1965e6b52..500791a22e7 100644
---- a/arch/arm/dts/rk3128-u-boot.dtsi
-+++ b/arch/arm/dts/rk3128-u-boot.dtsi
-@@ -10,6 +10,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &cru {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3188-u-boot.dtsi b/arch/arm/dts/rk3188-u-boot.dtsi
-index 8f2849dda24..a164c94e96e 100644
---- a/arch/arm/dts/rk3188-u-boot.dtsi
-+++ b/arch/arm/dts/rk3188-u-boot.dtsi
-@@ -6,6 +6,18 @@
- #include "rockchip-u-boot.dtsi"
- #include "rk3xxx-u-boot.dtsi"
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &gpio0 {
- 	compatible = "rockchip,gpio-bank";
- };
-diff --git a/arch/arm/dts/rk322x-u-boot.dtsi b/arch/arm/dts/rk322x-u-boot.dtsi
-index aea917544b1..f783a735ca1 100644
---- a/arch/arm/dts/rk322x-u-boot.dtsi
-+++ b/arch/arm/dts/rk322x-u-boot.dtsi
-@@ -39,6 +39,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &cru {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
-index bb0078588fe..97d300a880a 100644
---- a/arch/arm/dts/rk3288-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-u-boot.dtsi
-@@ -46,6 +46,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &bus_intmem {
- 	ddr_sram: ddr-sram@1000 {
- 		compatible = "rockchip,rk3288-ddr-sram";
-diff --git a/arch/arm/dts/rk3308-u-boot.dtsi b/arch/arm/dts/rk3308-u-boot.dtsi
-index b7964e2756f..956523552bb 100644
---- a/arch/arm/dts/rk3308-u-boot.dtsi
-+++ b/arch/arm/dts/rk3308-u-boot.dtsi
-@@ -27,6 +27,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &cru {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-index a0ab8b69f2e..b3062c97366 100644
---- a/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-+++ b/arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi
-@@ -32,6 +32,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- /* U-Boot clk driver for px30 cannot set GPU_CLK */
- &cru {
- 	bootph-all;
-diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-index b0e50a973a8..8889f62dc9c 100644
---- a/arch/arm/dts/rk3328-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-u-boot.dtsi
-@@ -154,7 +154,6 @@
- &binman {
- 	simple-bin-spi {
- 		mkimage {
--			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
- 			offset = <0x8000>;
- 		};
- 	};
-diff --git a/arch/arm/dts/rk3368-u-boot.dtsi b/arch/arm/dts/rk3368-u-boot.dtsi
-index 811d59ac346..cda9580f5d5 100644
---- a/arch/arm/dts/rk3368-u-boot.dtsi
-+++ b/arch/arm/dts/rk3368-u-boot.dtsi
-@@ -26,3 +26,15 @@
- 		reg = <0x0 0xff740000 0x0 0x1000>;
- 	};
- };
-+
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-index 587eef9504e..7538ef7e467 100644
---- a/arch/arm/dts/rk3399-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-u-boot.dtsi
-@@ -29,6 +29,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &cru {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3528-u-boot.dtsi b/arch/arm/dts/rk3528-u-boot.dtsi
-index a18d33b3d36..f21d76b0e6e 100644
---- a/arch/arm/dts/rk3528-u-boot.dtsi
-+++ b/arch/arm/dts/rk3528-u-boot.dtsi
-@@ -30,6 +30,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &cru {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
-index 87186973953..b72760ea02a 100644
---- a/arch/arm/dts/rk356x-u-boot.dtsi
-+++ b/arch/arm/dts/rk356x-u-boot.dtsi
-@@ -37,7 +37,6 @@
- &binman {
- 	simple-bin-spi {
- 		mkimage {
--			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
- 			offset = <0x8000>;
- 		};
- 	};
-diff --git a/arch/arm/dts/rk3576-u-boot.dtsi b/arch/arm/dts/rk3576-u-boot.dtsi
-index fb5a107f47d..cdbba130068 100644
---- a/arch/arm/dts/rk3576-u-boot.dtsi
-+++ b/arch/arm/dts/rk3576-u-boot.dtsi
-@@ -16,6 +16,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &cru {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
-index 5eeb138f351..892ca13d703 100644
---- a/arch/arm/dts/rk3588s-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-@@ -24,7 +24,6 @@
- &binman {
- 	simple-bin-spi {
- 		mkimage {
--			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
- 			offset = <0x8000>;
- 		};
- 	};
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 736f3598539..5b031453393 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -209,7 +209,6 @@
- 
- 		mkimage {
- 			filename = "idbloader-spi.img";
--			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
- 		};
- 
- #ifdef HAS_FIT
-diff --git a/arch/arm/dts/rv1108-u-boot.dtsi b/arch/arm/dts/rv1108-u-boot.dtsi
-index ccf2d8bd83e..fcf44d19ab1 100644
---- a/arch/arm/dts/rv1108-u-boot.dtsi
-+++ b/arch/arm/dts/rv1108-u-boot.dtsi
-@@ -5,6 +5,18 @@
- 
- #include "rockchip-u-boot.dtsi"
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &grf {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rv1126-u-boot.dtsi b/arch/arm/dts/rv1126-u-boot.dtsi
-index 44859801357..0bca11bca91 100644
---- a/arch/arm/dts/rv1126-u-boot.dtsi
-+++ b/arch/arm/dts/rv1126-u-boot.dtsi
-@@ -29,6 +29,18 @@
- 	};
- };
- 
-+#ifdef CONFIG_SPL
-+#ifdef CONFIG_ROCKCHIP_SPI_IMAGE
-+&binman {
-+	simple-bin-spi {
-+		mkimage {
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rkspi";
-+		};
-+	};
-+};
-+#endif
-+#endif
-+
- &gpio0 {
- 	bootph-pre-ram;
- };
-
--- 
-2.51.0
-
+> ---
+>  board/ti/common/board_detect.c | 43 ++++++++++++++++++++++++++++++++++++++++++
+>  board/ti/common/board_detect.h | 22 +++++++++++++++++++++
+>  2 files changed, 65 insertions(+)
+>
+> diff --git a/board/ti/common/board_detect.c b/board/ti/common/board_detect.c
+> index a43cc075b92..d49e26fa453 100644
+> --- a/board/ti/common/board_detect.c
+> +++ b/board/ti/common/board_detect.c
+> @@ -824,3 +824,46 @@ bool __maybe_unused board_ti_was_eeprom_read(void)
+>  	else
+>  		return false;
+>  }
+> +
+> +#if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
+> +int do_board_detect_am6(void)
+> +{
+> +	int ret;
+> +
+> +	ret = ti_i2c_eeprom_am6_get_base(CONFIG_EEPROM_BUS_ADDRESS,
+> +					 CONFIG_EEPROM_CHIP_ADDRESS);
+> +	if (ret) {
+> +		printf("EEPROM not available at 0x%02x, trying to read at 0x%02x\n",
+> +		       CONFIG_EEPROM_CHIP_ADDRESS,
+> +		       CONFIG_EEPROM_CHIP_ADDRESS + 1);
+> +		ret = ti_i2c_eeprom_am6_get_base(CONFIG_EEPROM_BUS_ADDRESS,
+> +						 CONFIG_EEPROM_CHIP_ADDRESS +
+> +							 1);
+> +		if (ret)
+> +			pr_err("Reading on-board EEPROM at 0x%02x failed %d\n",
+> +			       CONFIG_EEPROM_CHIP_ADDRESS + 1, ret);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +void setup_serial_am6(void)
+> +{
+> +	struct ti_am6_eeprom *ep = TI_AM6_EEPROM_DATA;
+> +	unsigned long board_serial;
+> +	char *endp;
+> +	char serial_string[17] = { 0 };
+> +
+> +	if (env_get("serial#"))
+> +		return;
+> +
+> +	board_serial = simple_strtoul(ep->serial, &endp, 16);
+> +	if (*endp != '\0') {
+> +		pr_err("Error: Can't set serial# to %s\n", ep->serial);
+> +		return;
+> +	}
+> +
+> +	snprintf(serial_string, sizeof(serial_string), "%016lx", board_serial);
+> +	env_set("serial#", serial_string);
+> +}
+> +#endif
+> diff --git a/board/ti/common/board_detect.h b/board/ti/common/board_detect.h
+> index b057f3b2269..26ada2a449c 100644
+> --- a/board/ti/common/board_detect.h
+> +++ b/board/ti/common/board_detect.h
+> @@ -313,6 +313,28 @@ int __maybe_unused ti_i2c_eeprom_am6_get(int bus_addr, int dev_addr,
+>   */
+>  int __maybe_unused ti_i2c_eeprom_am6_get_base(int bus_addr, int dev_addr);
+>  
+> +/**
+> + * do_board_detect_am6() - Detect AM6x board and read EEPROM data
+> + *
+> + * This is a generic board detection function for AM6x family boards.
+> + * It attempts to read the on-board EEPROM at the configured address,
+> + * and if that fails, tries the alternate address (CONFIG_EEPROM_CHIP_ADDRESS + 1).
+> + *
+> + * Return: 0 on success or corresponding error on failure.
+> + */
+> +int do_board_detect_am6(void);
+> +
+> +/**
+> + * setup_serial_am6() - Setup serial number environment variable for AM6x boards
+> + *
+> + * This function reads the serial number from the AM6x EEPROM data and
+> + * sets the "serial#" environment variable. The serial number is converted
+> + * from hexadecimal string format to a 16-character hexadecimal representation.
+> + *
+> + * EEPROM should be already read before calling this function.
+> + */
+> +void setup_serial_am6(void);
+> +
+>  #ifdef CONFIG_TI_I2C_BOARD_DETECT
+>  /**
+>   * board_ti_is() - Board detection logic for TI EVMs
+>
+> -- 
+> 2.34.1
