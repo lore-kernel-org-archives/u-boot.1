@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A544CCF9E5
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 20:56:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA3C6CCF9EB
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 21:20:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB8418384E;
-	Mon, 27 Oct 2025 21:56:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hefring.com
+	by phobos.denx.de (Postfix) with ESMTP id 38A8483906;
+	Mon, 27 Oct 2025 22:20:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hefring-com.20230601.gappssmtp.com header.i=@hefring-com.20230601.gappssmtp.com header.b="emj0mMMn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FGF0oCS6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC819838F8; Mon, 27 Oct 2025 21:56:41 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 7FE668391B; Mon, 27 Oct 2025 22:20:25 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69A5C83710
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 21:56:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DCC7838F8
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 22:20:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hefring.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=ben.wolsieffer@hefring.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-4ed02d102e2so8775821cf.1
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 13:56:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-74526ca79beso3643664a34.0
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 14:20:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=hefring-com.20230601.gappssmtp.com; s=20230601; t=1761598598; x=1762203398;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=aQ+o+avD12AAfVz9lFkdBlwed1wlh/Lma89oofaWIOw=;
- b=emj0mMMnozuH5ccBlaGRi2a1FYoOw5Ky1ikK5dkOuAdlMIis90BCQukV2XODn0x69b
- umbT2Vbh6AwA2ZgA+sa4+b3RF9qeMvQGlOsx4JU+gIGJAOV5CL8X6GDYnIcA1EakCpKc
- pngg88BFnQvUktkW/qtbkxXox9f9Bci4C3EVZ//SiS9GTfPMuipKPRN2uHXd2DH8dfKP
- 8kH+NacntG19UDns3qDkZ7a1FT0/ImH9pe129Lo05ZQUvwDxCznfehMqo4ItLgUOuus+
- kcW2BuCEVUidAIt/4y2HWBLbJroqbid+1/6DHTBop3Ls36SpJJjJhCxq5Eh401+aZLoL
- H/0Q==
+ d=konsulko.com; s=google; t=1761600022; x=1762204822; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+pwp55T4C0h8zRnHw9neM4nB5MUaRs6nznG49uPSgMk=;
+ b=FGF0oCS6x3BOaJjQKiX6C40A6q2kTi+OM0I9K+eIFr5t8mW89oKGdxZ2iKa/Yc/h6J
+ XWj0LDzwSGuBH84Mt2LJEuSfdMVK4hmw72ALWA8RTZltx5mbuqdow8kiI7AAqjUtlnRr
+ QmbfzLsyej8+L5Bh/q/opuDqo0LR2PdyFBf8k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761598598; x=1762203398;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=aQ+o+avD12AAfVz9lFkdBlwed1wlh/Lma89oofaWIOw=;
- b=DdBb1dzI6brBtWCGCCMbf5tTGpIcH8P8931tEK3vP5+4KLBcfzutw5Ar6CvBbUC7jd
- Q6PNDuBjL1m99kYoE7Xjke97N3SO+28+3UE+xNwqE42k/mEi6Z95yZgaJGf82WRAL+52
- iQMDPcZT4Z/Yitl7+Si71FcbpKWIR8wweCHpu+43nVlSR0ebxB8E+sXRpZuOPXir98WX
- WVjb8IOtbH0CIsOB6Umjs3GezAklv4NoShbVt68PTKmNYvY0MYWhfDhVA3G8GS+CpVuQ
- nA0h6S/paKjs8OWC6lIp/UviU+QQbz+AYfvrdT1a99/u49oBEn0Zt+gcWk+27ljPf8xu
- OlHA==
-X-Gm-Message-State: AOJu0YyUXsxpXfHkuhOHvC26mIDTNn+Fm+3RccHOKM8USTGhcKDo8oZb
- /rFp19jj2fsGC4YBd+kIdWpx076npZaAbghnBZLyjBDES8Wb5gfk9LBKEy+12SZRhB234KAUW13
- 1PV07
-X-Gm-Gg: ASbGncs0aql9GGbIWzukmUjkm6P4GGatD/qGBqZcnO1mlxE+tewoaxCx4o6+hfGDrJ1
- dchp8+0CWlzwoF7AKvDJ4whCzGzMMeKyWasItrJvHVBwrWZU86h8hkoHCAUfWLKZNDsJAMPhlIf
- t5xBvPPPy2hXecXdMZwMW0Eh2HfiqedL9MvEJ3wBQQLfYKxCv7EEwTlLaY8LnWoIupENJR9QFNt
- TOVpCvLjYIoU4jVdw9U6VY5c/yaSRdtbvR9Pi9yOGkZGnoqpvJJ1K6sR7ARVQoxE/ZUJYY4oxSF
- qnpTrPqh3Z9RS14SywnEd0fgt9EoRuA2gN2E2TOtdWxzCFnpduQz3VMn4IyMjmZW+h7ryBS74mQ
- Bw3PP+FBnKXSN51c6X2mScQ1C1OLuPNDCsy5uqmqhtlY2AbGTegS57WA17VqKMvtTQyy0KzAdi4
- WeiLkHyu64li5J8JNBuiGXpD1f
-X-Google-Smtp-Source: AGHT+IHS/RMc69BVCD6bp1M0nbSQyJWh566RJIDZ/yu03HpcF67Q24QNvpak3hQpCQWJnn7fglIOKA==
-X-Received: by 2002:ac8:6f0e:0:b0:4ed:1cf:1335 with SMTP id
- d75a77b69052e-4ed07510f57mr19613951cf.36.1761598597778; 
- Mon, 27 Oct 2025 13:56:37 -0700 (PDT)
-Received: from dell-xps-15-9500.lan ([2601:18c:8002:3d40:7967:4a6b:db27:675b])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-89f254a41cdsm670154085a.29.2025.10.27.13.56.35
+ d=1e100.net; s=20230601; t=1761600022; x=1762204822;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+pwp55T4C0h8zRnHw9neM4nB5MUaRs6nznG49uPSgMk=;
+ b=OmnYDmWjzQKM8jhAr3GI6yAFe7ajAC8CQSIM2/yGKvwZawLh6QgQL4VieO5WE9PEvg
+ uoPEKAFm6OU7odQh+QUOagRh7LI3Fgt1u0N1PFKetcnn6WDmOmIRLo4tXJ3WMOCtI3iH
+ +9RlBIOz4dgLAqLkaWDlUZ/Tv0LQZ0Z/fbRq2KTAudB2G4uneaQEKHG8DqP5kBUnYErD
+ 2qftE6ny3ozByuzvz/R1xShTH61z2eV3wGOi4ZP3iqZ7AIJUxcBEWJTHGw4atW8v/nCY
+ ZPlctwxTe7PxnH6T6ewWsR2CB5JXW9thXaH2JDgrlDcfxjOOoJsimz1bkzIOF3WG+dLF
+ /aYw==
+X-Gm-Message-State: AOJu0YzJhw0J4TJibfS2ptdYicztEseLDV1RYh3Te5vrZqj4HfhdCSAL
+ 1IPg02J2kw5E5x1lTfr5DcS0v981MpnWv38+0dvlZpg974b4ng+3Gatl2qEHFKsyA28=
+X-Gm-Gg: ASbGnctN3bX38m/ruDqMQ5l+uqIDMl5n3yjY1Lgk//2Ti8vabri6zyJs737MymESvXp
+ DpfOdz0DThVN04WMIOT/TqwXdPZ2wgXYUiegwMTDrYng71plD9AE/tlFdBPTgeje2Hhtzqpoydk
+ G9Zqnwd4/i/CQd9C0FPrih/iqc889GPusWXdIgwpyIE6dOE4O1HRRDYO9i5cSe2kzvY5Wj6HrFI
+ BQT7n0roNBYT5rpWwdbjjzO/M6d33vvKKW34/lxIeTOHZhNO60qS1TYs15ix7u95PG2xmhpVoBa
+ RbTEXws5OQxRdtG6dhwHbTY4Oq4E+MZp2/3A1OhVihh4g6lwwa/1QPlYqqF8oICdsOBnBgwLvKh
+ rFCY9XDAh3hxvqGajX/8kefZMFMxVSiTVxIM6APlLhZNNuny5I2bp12/BR+8ggk8+r6p9H317g9
+ wsu5hALAkOWWQpxR0Ea7YDNwsb6FcNxtC2OJAHgLo=
+X-Google-Smtp-Source: AGHT+IGhTFMCx2PzDFc6DYiFSPrYJ81+ATkhRY2OKWIB+zdMOiqpphusp3zR00aB2K1U5JKZSZmpAg==
+X-Received: by 2002:a05:6830:34a0:b0:746:d4cf:b480 with SMTP id
+ 46e09a7af769-7c677eb14eemr670295a34.6.1761600021993; 
+ Mon, 27 Oct 2025 14:20:21 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c53022052fsm2589032a34.30.2025.10.27.14.20.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 27 Oct 2025 13:56:36 -0700 (PDT)
-From: Ben Wolsieffer <ben.wolsieffer@hefring.com>
-To: u-boot@lists.denx.de
-Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Ben Wolsieffer <ben.wolsieffer@hefring.com>
-Subject: [PATCH] efi: video: fix mode info in payload mode
-Date: Mon, 27 Oct 2025 16:56:27 -0400
-Message-ID: <20251027205627.3742502-1-ben.wolsieffer@hefring.com>
-X-Mailer: git-send-email 2.51.1
+ Mon, 27 Oct 2025 14:20:21 -0700 (PDT)
+Date: Mon, 27 Oct 2025 15:20:19 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Vignesh R <vigneshr@ti.com>
+Subject: Re: [PATCH v10 1/2] spl: remove usage of CMD_BOOTx from image parsing
+Message-ID: <20251027210852.GZ6688@bill-the-cat>
+References: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
+ <20251027-fix_cmd_bootx-v10-1-10487e907710@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="h0EvRRwbq5SofZmk"
+Content-Disposition: inline
+In-Reply-To: <20251027-fix_cmd_bootx-v10-1-10487e907710@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,44 +98,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, the EFI framebuffer is non-functional in payload mode. It
-always reports: "No video mode configured in EFI!"
 
-This is caused by a copy-paste error that replaced
-"struct efi_entry_gopmode" with "struct efi_gop_mode".
+--h0EvRRwbq5SofZmk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Fix the type and add a cast to avoid a warning because the "info" field
-is declared as an anonymous struct rather than
-"struct efi_gop_mode_info" (see the comment in efi.h).
+On Mon, Oct 27, 2025 at 07:47:02PM +0530, Anshul Dalal wrote:
 
-Fixes: 88753816cf54 ("efi: video: Move payload code into a function")
-Signed-off-by: Ben Wolsieffer <ben.wolsieffer@hefring.com>
----
- drivers/video/efi.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> Using CMD_* configs from spl doesn't make logical sense. Therefore
+> this patch replaces the checks for CMD_BOOTx with newly added library
+> symbols LIB_BOOT[IMZ] and SPL_LIB_BOOT[IMZ] which are enabled by their
+> respective CMD_* or SPL_* counterparts.
+>=20
+> On platforms with non-secure falcon mode, SPL_BOOTZ is enabled by
+> default for 32-bit ARM systems and SPL_BOOTI is enabled by default for
+> 64-bit ARM and RISCV.
+>=20
+> The respective C files (image.c/zimage.c) are compiled based on library
+> symbols $(PHASE_)LIB_BOOTx instead which are in turn selected by both
+> CMD_BOOTx and SPL_BOOTx as required.
+>=20
+> Signed-off-by: Anshul Dalal <anshuld@ti.com>
 
-diff --git a/drivers/video/efi.c b/drivers/video/efi.c
-index 78d123fad4be..60df4334f1ed 100644
---- a/drivers/video/efi.c
-+++ b/drivers/video/efi.c
-@@ -104,7 +104,7 @@ static int get_mode_info(struct vesa_mode_info *vesa, u64 *fbp,
- static int get_mode_from_entry(struct vesa_mode_info *vesa, u64 *fbp,
- 			       struct efi_gop_mode_info **infop)
- {
--	struct efi_gop_mode *mode;
-+	struct efi_entry_gopmode *mode;
- 	int size;
- 	int ret;
- 
-@@ -117,7 +117,7 @@ static int get_mode_from_entry(struct vesa_mode_info *vesa, u64 *fbp,
- 	*fbp = mode->fb_base;
- 	vesa->x_resolution = mode->info->width;
- 	vesa->y_resolution = mode->info->height;
--	*infop = mode->info;
-+	*infop = (struct efi_gop_mode_info *)mode->info;
- 
- 	return 0;
- }
--- 
-2.51.1
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
+--=20
+Tom
+
+--h0EvRRwbq5SofZmk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaP/iEgAKCRAr4qD1Cr/k
+Cla5AP9Ge7GsjsGvM7ePJLKbRFzrHZjIgeuw0qEimXiWBP9L9AD9EA5+DMGcIGdP
+FTgUW9DFWa6AGLll+QifAUyxQe4uagk=
+=1MOr
+-----END PGP SIGNATURE-----
+
+--h0EvRRwbq5SofZmk--
