@@ -4,74 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABE37CCF9E0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 18:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613F5CCF9E0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 18:50:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC838838DD;
-	Mon, 27 Oct 2025 19:29:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A7E53838BF;
+	Mon, 27 Oct 2025 19:50:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lD/zQZX9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E9Ymjpuq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6B9B8352B; Mon, 27 Oct 2025 17:01:36 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id B434B838F8; Mon, 27 Oct 2025 19:50:39 +0100 (CET)
+Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
+ [IPv6:2607:f8b0:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F6F882A9E
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 17:01:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 915F180422
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 19:50:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hannes.grabmann@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-b4f323cf89bso1155067966b.2
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 09:01:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22b.google.com with SMTP id
+ 5614622812f47-443ac11a7b7so1151374b6e.0
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 11:50:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761580894; x=1762185694; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=5e9g/Fp3WakSXKjnwcoX497qZX3EkTLxi8V/ovZBKeY=;
- b=lD/zQZX9JpaOiL5rnSpUT26YA8JCWOmObg4lL0eE0wCsniRglJf0YvS64lINhCKb9v
- nxTa9gw51BCryIyclcJryP+L2BtxRumII0Y3OBOTIGiL7k2rJb2HI7ipjSWD7riCVTEF
- QzcDd4guGBgfVtdZuDxZhBkrIoisV9WJRQyIMerlhsxHNBrH9d7D3ioWgPNcUwkIx7QI
- MRnQdLjLQaJCW4x40X+hMAMfEIjhBUc/NkYQa4OX5aVQLbYiXLW5NKY5zkZePmfR4VzO
- G20yeRhNunJM/2RiNC7f354dZ+u1aig2zpxyxL0jQaSCdAXmBAE1sR8jYEf0iBuHAmLZ
- 6Yfg==
+ d=konsulko.com; s=google; t=1761591036; x=1762195836; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TKbWsf/uRnBkppZ8prk/K0akfZT15D/kVvzvTlVFVsQ=;
+ b=E9YmjpuqJK+Oxp11CeQIuWO4+b33uhmW25TtRW4gaG9c1tVkx4svDHivoVnpq2aThh
+ xB+Qq2ZM5TjHGBSnGT/gQBjb7gasa6CgSz9qThY7s/jI+QUjbtJ/BsA9BqmRY4150FWM
+ lG0muJNH3oIUmfA+I2/HdclNQ2/mdDmiX0dtk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761580894; x=1762185694;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=5e9g/Fp3WakSXKjnwcoX497qZX3EkTLxi8V/ovZBKeY=;
- b=VgF3Zy69x1uKLkrJXv53RlhojoLrtf4ScVnhHwy/NjhQoe7RnKsDYdShC93vwbGIv/
- rPWsQdB56LFywp62PZJcj30qaLEqs95XFl5EqP71OoCmfsTvr2ak2YopA0EHOmUIVQqQ
- FY8lKZ/cNZjp3KiaZFT7dG+xXPu17pHp+fyFjxALm/OgKezDqd2gRF9i7OMn3E5QGcd7
- dIX7r8aSmBYWr2Bqyokm2OsfYnZPvihAvoDTG7RSqaz2TOuJ0TY6QeRqRvJSFlg/rrfb
- jkGxtfY6z39qb6rnOLZGcyBZ2L2HSeB8E+u1yIQzf0ToWncENBnMtAPK7rDV8IwXuRB9
- x7Zw==
-X-Gm-Message-State: AOJu0YylFQ7JXI5r9I6TrfAseX5w8cdM+9c+/tZ9I6attdkK7FhEJadU
- 7XaAeGyIhCIh5KDvaOU+AloxbNPdOTjxb5AfZHemxw4XxRMcm0uXjrWaOu/yWFkNLyJY8PI32Aq
- CIu67yug3TDGHKEkWrp6WwmwoSJlhDiWFaaLx
-X-Gm-Gg: ASbGnctN7CSzQgU6QwOUaSLOPvDye65ecfT4MiUietAbm7zGsiFM4+DHmB7yRxJ0MIN
- 20ZUALsSzUfdZQiW9rN/yY9p0VSA8KG5hKoqk/iQrquXtimrhsYpKsice0+cazYp9YN4U0dyksL
- 7rhDAWPkbbskpJe3uu23VPdaysJDLMPu1Uq0oS0K5g4cBsXTL+LC7Qo6EIGS3jZDpJAeAKxTyLz
- +7PJdvJ05aco078wVx1QpJP4fJ29K+kfMtFohuDWDmMkPTJ8w28xnlFhmUOTMQdYq7kZUlN
-X-Google-Smtp-Source: AGHT+IEFyCIQ5W5hdoO3OCUIMrr6bxejw9rRQZf2CGEZ13oTfF/QbKjMOAqcxUuZJVl8eOYfP37tyIew7JS21IuGlnk=
-X-Received: by 2002:a17:906:c101:b0:b3f:9b9c:d499 with SMTP id
- a640c23a62f3a-b6dba59b314mr36268866b.51.1761580893564; Mon, 27 Oct 2025
- 09:01:33 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1761591036; x=1762195836;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TKbWsf/uRnBkppZ8prk/K0akfZT15D/kVvzvTlVFVsQ=;
+ b=xUQ3ZdLBeRCFnFs2qxU1s8oCsvtoY3Id3pOWl1F2KOZHzFRp6K/+9kNFX/NQI5ObJl
+ CoiZxc615jtBn52KY7o8gvT/zbT0kAJciHCZfqDD7UVa0VkJX8q3Nui8z+Q4ceTvCGCs
+ CU7HcA0P+0+zkFSLiBIFckl7SzK/PqHKMzj7DtF2WW74c6EXfBMYfAu73WgxPhkOBeJo
+ 8MSSr9p7MmmIEUG9V8uQxFvS1bj3mm2LtsdLYWHO1Cj0ZHyN4x5Lh2DGu5NWGlxENTK0
+ u5m9ssub7qD9yCxtJHmKIeakStvG5fkl/5GFFQevK1yQ4p1HV7Ml0PlwPV4NfY1C0cUL
+ 50Kw==
+X-Gm-Message-State: AOJu0YyQj2wbd1XJF0F4DPHbB6DIOlqzjYMShrg7ysrWHpS3pRa+6SA8
+ zUHJ0knAm5eNPeSLXv+p8X2dexLrpuemkncJlL47F/wmyQrvOi56ElTPREICnp6LWrbsWbkRFJh
+ K8YM0EA67YA==
+X-Gm-Gg: ASbGncuIQy5XFGgi/IV67GvAyAOpXu47pFHAWdhv1CVLTzxuopvIwfgW6RLIzw6Pv2H
+ ftshIlbtKI2jpGHLrHyjFgx3ZFfo/NjdMIRaVnvOXSAAUG7yAgxqVfqspxGG19nkzzhPxwfZus1
+ LtCh7QncNMqDXWR8St/CUquiz8cOq+zY2G3u9nzkajOiJuKxZo/vXXOeREM0KwOsiDtWMN3Felr
+ hAU/qsqAH2+VgJV4iYQGuPA5HDbgd0eG5lRx/u1R9eSkjoTg9C5wul0gNYSwL24xlBvfySWk9wB
+ /3ASYsxXleaFtr5xcy8SW8C7nnmn23zVj8mUSg+04FnCrNcp++C0MHm8WdfJn9XQCDPMUvdrb3e
+ WBKJawhfHRrycR7iaDyP08ueuvk4uYLEd5qppaa3mMzEDY2oUU4KBK34iCeYQA/AlsBVVwf3x6g
+ takv40vLR2W2XQVksr+Rmn2N6KY4qdmRFYiY+ABi0=
+X-Google-Smtp-Source: AGHT+IEV6HA7wT6rmtPnHOz/dNpLFcQL4bPquHiHbkcJaT0diHxj6eZHd+aj7CGzV8VVj2Pq7zxS7g==
+X-Received: by 2002:a05:6808:870e:b0:443:a224:8f98 with SMTP id
+ 5614622812f47-44f6bb746edmr337696b6e.61.1761591036279; 
+ Mon, 27 Oct 2025 11:50:36 -0700 (PDT)
+Received: from bill-the-cat (fixed-187-190-202-235.totalplay.net.
+ [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-654ef285e6bsm2029126eaf.6.2025.10.27.11.50.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Oct 2025 11:50:35 -0700 (PDT)
+Date: Mon, 27 Oct 2025 12:50:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Casey Connolly <casey.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@kernel.org>,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Mario Six <mario.six@gdsys.cc>, u-boot-qcom@groups.io
+Subject: Re: [PATCH v3 0/7] Implement the Generic System Interconnect
+ Subsystem for U-Boot
+Message-ID: <20251027185032.GA531948@bill-the-cat>
+References: <20251010-topic-interconnect-next-v3-0-b384713283a8@linaro.org>
+ <ef48b1b9-9aca-41cb-bd8f-1e972fe60561@linaro.org>
 MIME-Version: 1.0
-From: Hannes <hannes.grabmann@gmail.com>
-Date: Mon, 27 Oct 2025 17:01:22 +0100
-X-Gm-Features: AWmQ_bl0KLLflBC2942H5tY9emTdjkyu4swhu9tciHPCoQSHWl8TXR0xnNJ6ymA
-Message-ID: <CALFKKaYMzd-t0=CbFHqhZbYekVyHDuer-yEyao5b9VkPZ_S4rA@mail.gmail.com>
-Subject: DE10 Nano - Booting from FPGA
-To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Mon, 27 Oct 2025 19:29:35 +0100
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="GJxC/B9ZXv8AgTKR"
+Content-Disposition: inline
+In-Reply-To: <ef48b1b9-9aca-41cb-bd8f-1e972fe60561@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,72 +104,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
 
+--GJxC/B9ZXv8AgTKR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Oct 27, 2025 at 01:51:36PM +0100, Neil Armstrong wrote:
+> Hi,
+>=20
+> On 10/10/25 16:35, Neil Armstrong wrote:
+> > Let's introduce the Generic System Interconnect subsystem based on
+> > the counterpart Linux framework which is used to vote for bandwidth
+> > across multiple SoC busses.
+> >=20
+> > Documentation for the Linux Generic System Interconnect Subsystem can
+> > be found at [1].
+> >=20
+> > Each bus endpoints are materialised as "nodes" which are linked togethe=
+r,
+> > and the DT will specify a pair of nodes to enable and set a bandwidth
+> > on the route between those endpoints.
+> >=20
+> > The hardware resources that provide those nodes and provides the way
+> > to vote for the bandwidth are called "providers".
+> >=20
+> > The Interconnect uclass code is heavily based on the Linux one, with
+> > some small differences:
+> > - nodes are allocated as udevices instead of Linux idr_alloc()
+> > - tag management is minimal, only normal xlate is supported
+> > - getting nodes states at probe is not implemented
+> > - providers are probed on demand while the nodes links are traversed
+> > - nodes are populated on bind
+> > - id management is simplified, static IDs and dynamics IDs can be used
+> > - identical consume API as Linux, only implementation differs
+> >=20
+> > DM Testsuite is provided, testing all the API and nodes lifetime.
+>=20
+> Is there any comments on this patchset ? or at least the DM emums and
+> the general code organization ?
 
-I am currently working on a small project for the DE10 Nano Board and setup
-Pinmux for the Ethernet PHY signals. As I need the preloader to configure
-the Pinmux in the HPS, I have tried to set this up based on the current
-u-boot-socfpga branch. For this purpose i followed different guides on
-rocketboards.org and the "AN 709: HPS SoC Boot Guide" on how to build a
-bootloader and configure HPS from FPGA using EPCS64 flash memory. I could
-configure SPL_TEXT_BASE=0xC0000000 and "Support booting from SPI Flash" in
-menuconfig, build and create .hex file from u-boot-spl to initalize the
-on-chip RAM. Problem is that the preloader does not seem to be executed.
-Upon further investigation i noticed that the spl data address is not at
-0XFFFF0000 as suggested by several older guides:
+Seems fine to me.
 
-arm-none-eabi-readelf -S spl/u-boot-spl
-There are 19 section headers, starting at offset 0x1482f4:
+--=20
+Tom
 
-Section Headers:
-  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk
-Inf Al
-  [ 0]                   NULL            00000000 000000 000000 00      0
-0  0
-  [ 1] .text             PROGBITS        c0000000 001000 00b5d4 00  AX  0
-0 64
-  [ 2] .rodata           PROGBITS        c000b5d4 00c5d4 00232b 00   A  0
-0  4
-  [ 3] .data             PROGBITS        c000d900 00e900 000098 00  WA  0
-0  4
-  [ 4] __u_boot_list     PROGBITS        c000d998 00e998 000840 00  WA  0
-0  4
-  [ 5] .bss              PROGBITS        c000e1d8 00f1d8 000010 00   W  0
-0  4
-  [ 6] .ARM.attributes   ARM_ATTRIBUTES  00000000 00f1e8 000029 00      0
-0  1
-  [ 7] .comment          PROGBITS        00000000 00f211 000026 01  MS  0
-0  1
-  [ 8] .debug_line       PROGBITS        00000000 00f237 0292fa 00      0
-0  1
-  [ 9] .debug_info       PROGBITS        00000000 038531 08eab7 00      0
-0  1
-  [10] .debug_abbrev     PROGBITS        00000000 0c6fe8 0134ca 00      0
-0  1
-  [11] .debug_aranges    PROGBITS        00000000 0da4b8 002948 00      0
-0  8
-  [12] .debug_str        PROGBITS        00000000 0dce00 010da7 01  MS  0
-0  1
-  [13] .debug_loc        PROGBITS        00000000 0edba7 042307 00      0
-0  1
-  [14] .debug_ranges     PROGBITS        00000000 12feb0 006ca0 00      0
-0  8
-  [15] .debug_frame      PROGBITS        00000000 136b50 007324 00      0
-0  4
-  [16] .symtab           SYMTAB          00000000 13de74 006a70 10     17
-1244  4
-  [17] .strtab           STRTAB          00000000 1448e4 00394d 00      0
-0  1
-  [18] .shstrtab         STRTAB          00000000 148231 0000c1 00      0
-0  1
+--GJxC/B9ZXv8AgTKR
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-I also couldn't find that value in the menuconfig, nor could I find any
-up-to-date guidelines for booting HPS preloader from FPGA. Can you tell me
-if this approach is still viable and how to implement it correctly?
+iHUEABYKAB0WIQTzzqh0PWDgGS+bTHor4qD1Cr/kCgUCaP++8QAKCRAr4qD1Cr/k
+ChlnAQDRjqPLE/9Czv7UlLllMEna/4BdmFX1PguzaA8ADwXLnwD+K4M/mlO0dJHp
+u15u2Ow9ASPwoB+xyIJ1wtVVuSalCwE=
+=WIUR
+-----END PGP SIGNATURE-----
 
-Best regards,
-
-Hannes Grabmann
+--GJxC/B9ZXv8AgTKR--
