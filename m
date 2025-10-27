@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AF54CCF9EA
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 13:59:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 513CACCF9EA
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 14:05:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F9C382E34;
-	Mon, 27 Oct 2025 14:59:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8A2F88352B;
+	Mon, 27 Oct 2025 15:05:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Op8tEmxV";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="JKIcDI72";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ifkFZnS0";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="X8d0n/uI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D139832AD; Mon, 27 Oct 2025 14:59:28 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 4469D836B4; Mon, 27 Oct 2025 15:04:59 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2D9B82C7F
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 14:59:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0351C82E34
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 15:04:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cwFVj53FZz9tkP;
- Mon, 27 Oct 2025 14:59:25 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cwFd45FVGz9sn0;
+ Mon, 27 Oct 2025 15:04:56 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761573565;
+ s=mail20150812; t=1761573896;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=MKgnycbcyN70NE5fhinU8eGf63IpMpAKVcXNYUw9pjg=;
- b=Op8tEmxVlHXsjwHHKQf++esnccQrjU+zNiikNNGkKvinRhUOP13g4TerQ8VSFBhofYuCbg
- /yvIA/yhsIMX30SfNX7VSzpUkyyjtF89pxgMBsPpIf5gvHRb3HyVgqhybCzpA3J+Hz7KUA
- qIcrqV13P8EAHgVtWXw/s42JIM9qWfzymK/o4J6JE3dztxVR697d6ivKhVKZXq09KjKbQU
- QPVTn844Yp3k1AKUeVEDWMQ8IUP+dOSQ+DZSDJbJHVWYB+jptLqsGn0eXV16+D1GWMRDRU
- +sD4/jTExW91srIv6Z4ktQyk5WF4A8RRl1+NyLo4evns9xYo4X6vhceFvHuU6A==
+ bh=iISJsJMacbIS/XcHKTCdppfGdy4YZsXLSRB05vs8lzM=;
+ b=ifkFZnS0YIIUh3sSPS2Do25sTh8wTh/KB8KpvnsSs+/Q2ogWkOi/Vt3+Ndbk+MOQUvWZtF
+ HhYIdnBEwA43gcGa0YRR9nuy7cANp5+IVLpP0IJostNR9OSeYRW6dpjmP2/2aPZmYLlPuo
+ QulbixgdbUWeyroxGaJknJsUrOHqI5NSTQnkXZoLm5JDCb3k5kfZgrPmvElgBR7HnKNos8
+ VW2f7z1uPMEZvQgIxl9oXXFTL3CYUZTjOePtuDx7UCh4wiilhASP04pDLNrJPkWboGKlb7
+ BPaFtYVoM1ZSE1FwFC7txkxXZuq0b29Ti/fIXo6yCjOidCLmE0qoQWmMwnb2EA==
 Authentication-Results: outgoing_mbo_mout;
- dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=JKIcDI72;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b="X8d0n/uI";
  spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
- designates 2001:67c:2050:b231:465::1 as permitted sender)
+ designates 2001:67c:2050:b231:465::202 as permitted sender)
  smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761573563;
+ s=mail20150812; t=1761573894;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=MKgnycbcyN70NE5fhinU8eGf63IpMpAKVcXNYUw9pjg=;
- b=JKIcDI72qF4NYSM0BagXt4fK3W3rhJSelN2tlg01xrhiwEvYZKpVzfEruyBjZIxM8APOVq
- ceoLTe8rhPdMw0vfN4ZcZXCMUeX1uf7ir2dRqGLXlq8yoAoueQoHtSLhsjk1TRvf7z2R3R
- xfBvXga/A0L50K9UJvwmuP9x7HQXJz+r8Oanm3KLvQ0GKkptuySkL/UmRM8MlnWDtXE3mW
- Ktd5JzoRO1O8jIDmBF+rHc9fQAW8LeGgp6+sFFk1wOk8VDFujKUNvxIH3x+YdA/8UFk0tA
- 32cGfYOAEusUB1DWmuR04UbKSQ8qmZNBNsCesABgXWBB/oCt7icjDvqYa91NLQ==
+ bh=iISJsJMacbIS/XcHKTCdppfGdy4YZsXLSRB05vs8lzM=;
+ b=X8d0n/uIBbXOJPVoJRUBajvvMe0TyJMJ1SoMoPZTRNT/KXGdzkaHGDL2yxcZ8qWhccjgcT
+ g3FSXKDfLUNIWuXQr8jFjFyDhAOgdI30ufNcFnzFHXhA5RWXU58BT1wkjdwhbkCYcWgjs7
+ +FqUkdu4+5FyU6lJ30z8yT4qJJC33BrDKn8Mdh7tssopj4zQUf7CDDQ+8AtlT/f9DjpTde
+ akPzUm/9E0G2YvSjo3dUSEfgfJYYKaRNd6HQVy0iebMyyM8Id29t3AVC7V73yBCPRXnrAC
+ U4W7ONQMDIarts9g1nGV8s33SICtEFPxxMb/LTHb0LxYXoyx0kH3OOsvD5ENww==
 To: u-boot@lists.denx.de
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>,
+Cc: Thanh Quan <thanh.quan.xn@renesas.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Alice Guo <alice.guo@nxp.com>, Cristian Marussi <cristian.marussi@arm.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Valentin Caron <valentin.caron@foss.st.com>,
- Ye Li <ye.li@nxp.com>
-Subject: [PATCH v2] firmware: scmi: Add clock v3.2 CONFIG_SET support
-Date: Mon, 27 Oct 2025 14:58:29 +0100
-Message-ID: <20251027135856.8909-1-marek.vasut+renesas@mailbox.org>
+ Dominic Rath <rath@ibv-augsburg.net>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] net: phy: dp83869: fix STRAP_OPMODE bitmask
+Date: Mon, 27 Oct 2025 15:03:58 +0100
+Message-ID: <20251027140439.9044-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 0d8fb190328e24021cd
-X-MBO-RS-META: kzajaxueh7zxc493udoxpk9jhmuf54p3
-X-Rspamd-Queue-Id: 4cwFVj53FZz9tkP
+X-MBO-RS-ID: ced68900c646548713d
+X-MBO-RS-META: snohr53t1iicj6rees597qj3u8diyxid
+X-Rspamd-Queue-Id: 4cwFd45FVGz9sn0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,162 +92,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
+From: Thanh Quan <thanh.quan.xn@renesas.com>
 
-SCMI v3.2 introduces a new clock CONFIG_SET message format that can
-optionally carry also OEM specific configuration values beside the usual
-clock enable/disable requests. Add support to use such new format when
-talking to a v3.2 compliant SCMI platform.
+According to the TI DP83869HM datasheet Revision D (June 2025), section
+7.6.1.41 STRAP_STS Register, the STRAP_OPMODE bitmask is bit [11:9].
+Fix this.
 
-Support existing enable/disable operations across different clock protocol
-versions: this patch still does not add protocol operations to support the
-new OEM specific optional configuration capabilities.
+In case the PHY is auto-detected via PHY ID registers, or not described
+in DT, or, in case the PHY is described in DT but the optional DT property
+"ti,op-mode" is not present, then the driver reads out the PHY functional
+mode (RGMII, SGMII, ...) from hardware straps.
 
-No functional change for the SCMI drivers users of the related enable and
-disable clock operations.
+Currently, all upstream users of this PHY specify both DT compatible string
+"ethernet-phy-id2000.a0f1" and ti,op-mode = <DP83869_RGMII_COPPER_ETHERNET>
+property, therefore it seems no upstream users are affected by this bug.
 
-Signed-off-by: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-[Marek: Remodel after Linux e49e314a2cf7 ("firmware: arm_scmi: Add clock v3.2 CONFIG_SET support")
-        Support both old < 2.1 and new >= 2.1 protocol versions.
-	Update commit message based on Linux one]
+The driver currently interprets bits [2:0] of STRAP_STS register as PHY
+functional mode. Those bits are controlled by ANEG_DIS, ANEGSEL_0 straps
+and an always-zero reserved bit. Systems that use RGMII-to-Copper functional
+mode are unlikely to disable auto-negotiation via ANEG_DIS strap, or change
+auto-negotiation behavior via ANEGSEL_0 strap. Therefore, even with this bug
+in place, the STRAP_STS register content is likely going to be interpreted
+by the driver as RGMII-to-Copper mode.
+
+However, for a system with PHY functional mode strapping set to other mode
+than RGMII-to-Copper, the driver is likely to misinterpret the strapping
+as RGMII-to-Copper and misconfigure the PHY.
+
+For example, on a system with SGMII-to-Copper strapping, the STRAP_STS
+register reads as 0x0c20, but the PHY ends up being configured for
+incompatible RGMII-to-Copper mode.
+
+Fixes: f3e22eea815d ("net: phy: add TI DP83869HM ethernet driver")
+Signed-off-by: Thanh Quan <thanh.quan.xn@renesas.com>
+Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org> # Use FIELD_GET()
 ---
-Cc: Alice Guo <alice.guo@nxp.com>
-Cc: Cristian Marussi <cristian.marussi@arm.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Dominic Rath <rath@ibv-augsburg.net>
+Cc: Hai Pham <hai.pham.ud@renesas.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Thanh Quan <thanh.quan.xn@renesas.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Valentin Caron <valentin.caron@foss.st.com>
-Cc: Vinh Nguyen <vinh.nguyen.xz@renesas.com>
-Cc: Ye Li <ye.li@nxp.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: Fix up iMX95 and sandbox after rework
+V2: Update commit message to match Linux
 ---
- arch/arm/mach-imx/imx9/scmi/clock_scmi.c   |  2 +-
- drivers/clk/clk_scmi.c                     | 22 +++++++++++++++++-----
- drivers/firmware/scmi/sandbox-scmi_agent.c |  4 ++--
- include/scmi_protocols.h                   | 17 +++++++++++++++--
- 4 files changed, 35 insertions(+), 10 deletions(-)
+ drivers/net/phy/dp83869.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-index fa15b5f8df9..fc1d5d77799 100644
---- a/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-+++ b/arch/arm/mach-imx/imx9/scmi/clock_scmi.c
-@@ -10,7 +10,7 @@
- 
- int imx_clk_scmi_enable(u32 clock_id, bool enable)
- {
--	struct scmi_clk_state_in in = {
-+	struct scmi_clk_state_in_v1 in = {
- 		.clock_id = clock_id,
- 		.attributes = (enable) ? 1 : 0,
- 	};
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index a7d89f32cd7..f9e17c38cad 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -134,17 +134,29 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name,
- 
- static int scmi_clk_gate(struct clk *clk, int enable)
- {
--	struct scmi_clk_state_in in = {
-+	struct scmi_clock_priv *priv = dev_get_priv(clk->dev->parent);
-+	struct scmi_clk_state_in_v1 in_v1 = {
-+		.clock_id = clk_get_id(clk),
-+		.attributes = enable,
-+	};
-+	/* Valid only from SCMI clock v2.1 */
-+	struct scmi_clk_state_in_v2 in_v2 = {
- 		.clock_id = clk_get_id(clk),
- 		.attributes = enable,
- 	};
- 	struct scmi_clk_state_out out;
--	struct scmi_msg msg = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
--					  SCMI_CLOCK_CONFIG_SET,
--					  in, out);
-+	struct scmi_msg msg_v1 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-+					     SCMI_CLOCK_CONFIG_SET,
-+					     in_v1, out);
-+	struct scmi_msg msg_v2 = SCMI_MSG_IN(SCMI_PROTOCOL_ID_CLOCK,
-+					     SCMI_CLOCK_CONFIG_SET,
-+					     in_v2, out);
-+
- 	int ret;
- 
--	ret = devm_scmi_process_msg(clk->dev, &msg);
-+	ret = devm_scmi_process_msg(clk->dev,
-+				    (priv->version < CLOCK_PROTOCOL_VERSION_2_1) ?
-+				    &msg_v1 : &msg_v2);
- 	if (ret)
- 		return ret;
- 
-diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-index 74a87832dcb..5b242a039c2 100644
---- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-@@ -828,7 +828,7 @@ static int sandbox_scmi_clock_rate_get(struct udevice *dev,
- 
- static int sandbox_scmi_clock_gate(struct udevice *dev, struct scmi_msg *msg)
- {
--	struct scmi_clk_state_in *in = NULL;
-+	struct scmi_clk_state_in_v1 *in = NULL;
- 	struct scmi_clk_state_out *out = NULL;
- 	struct sandbox_scmi_clk *clk_state = NULL;
- 
-@@ -836,7 +836,7 @@ static int sandbox_scmi_clock_gate(struct udevice *dev, struct scmi_msg *msg)
- 	    !msg->out_msg || msg->out_msg_sz < sizeof(*out))
- 		return -EINVAL;
- 
--	in = (struct scmi_clk_state_in *)msg->in_msg;
-+	in = (struct scmi_clk_state_in_v1 *)msg->in_msg;
- 	out = (struct scmi_clk_state_out *)msg->out_msg;
- 
- 	clk_state = get_scmi_clk_state(in->clock_id);
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index 81979e81b6b..d89612541ef 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -733,6 +733,7 @@ int scmi_pwd_name_get(struct udevice *dev, u32 domain_id, u8 **name);
- /*
-  * SCMI Clock Protocol
+diff --git a/drivers/net/phy/dp83869.c b/drivers/net/phy/dp83869.c
+index b6fb5adae1f..c60fbf26a03 100644
+--- a/drivers/net/phy/dp83869.c
++++ b/drivers/net/phy/dp83869.c
+@@ -5,6 +5,7 @@
   */
-+#define CLOCK_PROTOCOL_VERSION_2_1	0x20001
- #define CLOCK_PROTOCOL_VERSION_3_0	0x30000
  
- enum scmi_clock_message_id {
-@@ -800,15 +801,27 @@ struct scmi_clk_attribute_out_v2 {
- };
+ #include <phy.h>
++#include <linux/bitfield.h>
+ #include <linux/compat.h>
+ #include <malloc.h>
  
- /**
-- * struct scmi_clk_state_in - Message payload for CLOCK_CONFIG_SET command
-+ * struct scmi_clk_state_in_v1 - Message payload for CLOCK_CONFIG_SET command for protocol < 2.1
-  * @clock_id:	SCMI clock ID
-  * @attributes:	Attributes of the targets clock state
-  */
--struct scmi_clk_state_in {
-+struct scmi_clk_state_in_v1 {
- 	u32 clock_id;
- 	u32 attributes;
- };
+@@ -64,7 +65,7 @@
+ #define DP83869_RGMII_RX_CLK_DELAY_EN		BIT(0)
  
-+/**
-+ * struct scmi_clk_state_in_v2 - Message payload for CLOCK_CONFIG_SET command for protocol >= 2.1
-+ * @clock_id:	SCMI clock ID
-+ * @attributes:	Attributes of the targets clock state
-+ * @extended_config_val: Extended and OEM specific configuration
-+ */
-+struct scmi_clk_state_in_v2 {
-+	u32 clock_id;
-+	u32 attributes;
-+	u32 extended_config_val;
-+};
-+
- /**
-  * struct scmi_clk_state_out - Response payload for CLOCK_CONFIG_SET command
-  * @status:	SCMI command status
+ /* STRAP_STS1 bits */
+-#define DP83869_STRAP_OP_MODE_MASK		GENMASK(2, 0)
++#define DP83869_STRAP_OP_MODE_MASK		GENMASK(11, 9)
+ #define DP83869_STRAP_STS1_RESERVED		BIT(11)
+ #define DP83869_STRAP_MIRROR_ENABLED		BIT(12)
+ 
+@@ -168,7 +169,7 @@ static int dp83869_set_strapped_mode(struct phy_device *phydev)
+ 	if (val < 0)
+ 		return val;
+ 
+-	dp83869->mode = val & DP83869_STRAP_OP_MODE_MASK;
++	dp83869->mode = FIELD_GET(DP83869_STRAP_OP_MODE_MASK, val);
+ 
+ 	return 0;
+ }
 -- 
 2.51.0
 
