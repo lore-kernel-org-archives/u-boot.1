@@ -4,56 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD8B4CCF9E0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 05:23:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB315CCF9E0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 05:51:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CEB082A9E;
-	Mon, 27 Oct 2025 06:23:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
+	by phobos.denx.de (Postfix) with ESMTP id 59073836C8;
+	Mon, 27 Oct 2025 06:51:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="gGZn4gQe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CMeOU/vO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF2EC82C7F; Mon, 27 Oct 2025 06:23:20 +0100 (CET)
-Received: from mx.nabladev.com (mx.nabladev.com
- [IPv6:2a00:f820:417:0:178:251:229:89])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F0955836C8; Mon, 27 Oct 2025 06:51:09 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6C4680422
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 06:23:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=nabladev.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D6A8510525F; Mon, 27 Oct 2025 06:23:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1761542597;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:content-language:in-reply-to:references;
- bh=tOkbQydeTVTiGzr1IJ2lTy3jTZU2lLswgfYYt8EfiCI=;
- b=gGZn4gQeIccndsIygjstRXOTXDhX6gFbf1dVnidI0zI3KfhbieoEULEMM4LG8e4hxXic/o
- mF4xfoYcn+OyXy1JGEZa+43eN2xU/W+6WobK/EW1KlL2RfIH3DtYL1QtJewZy1NKAM+6pA
- MHMZsXnFyYq9DEphTABEHIguKnp21o0pdOouxBN6cI5XYIMyl8q4zDD7OWKiojOAuu7LcP
- a2ng+rxtGsbdBwd5cjGMna/XOm9u4WzhkQWBWPC4hbjSYkmsDSnN+x5W4PHBSZlhpIzv9Q
- jWmtyYMN5+CT/3N3dvXx/9yOLr89zkbUlA/InXXPOPnmMSA/uSur6QqHYsw29Q==
-Message-ID: <a68e90ba-5d0e-14f8-38b2-3715689c05a8@nabladev.com>
-Date: Mon, 27 Oct 2025 06:23:36 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id D711282A9E
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 06:51:07 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-7c53c863172so296377a34.1
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 22:51:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1761544266; x=1762149066; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jsXAgUGvL9T+VNLF2cQPkdjHdzXKkb0CFaNe3rUv73Y=;
+ b=CMeOU/vOBdJ3ienJmwYCZ2W6UIYhKocjMyc0rjDar/pwAQ0WRp2tgSHHJ+7RJPgsUc
+ YELLjllI6EeWbSArcS6Ew5pNtfSxXBLa+EbNcXiYoMC1nZM4idOHEtMHL7NTnZOrh7Cu
+ fgiRoaMzhMNvhcZK3/Tk7DGCe2Bprz2wI51lCE2PxxAdmTrQpMVgos18YXmvgQhvYQUr
+ GQ3HXAeOW29aCTD54ZtOFqUg7Mf6g3ddIQGTFBEuWAiRzZav9yKf3P8c5GgAtluZe6yM
+ aUOS3elHbWTacG4O8LbijUjGtkpHNcziPP0POprxdeWNEb06MaVOYfkQl+KenG6stN6c
+ W39A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1761544266; x=1762149066;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jsXAgUGvL9T+VNLF2cQPkdjHdzXKkb0CFaNe3rUv73Y=;
+ b=fmBWiluAK+XxLiWeliH2hJ1ks/cbjopSJtyPy38f15FpbJ+/WApXtb2q9pD3uCd1lX
+ 20//Mr59+I9Jelqt95mNLIaaMXw9+orZqn1SBZ28NELJu1LDTWAACMlzJ6L5Mf+fUXe3
+ 59TLEdlhNqtK/on83Lr7x70KztOjEbRUWGl8yeZy4kMga8FEv0FcrqwlJ85fvV28CTSi
+ n6ECPlTOhaW2C3tB6ezFDFGgLOMjaDSnm0PXktWu53ySvEfwZ0SClxI1OLXdhM0Uoq6d
+ Vu7JZb9nopPJOcVdTnnzTR0mo2mcEWzhoiHDDf0qsQP0mTglm/6WJg/3xIjZ0eiLUNhB
+ RcBw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXHEBdRvFvPAHk0RAqzyN3htzfQOgh5zXcUr8dFnXpDXf5I+TK140xe1M9LsHtme6j3wdYX1Hg=@lists.denx.de
+X-Gm-Message-State: AOJu0YweLMrKyeB7nVu3RiSACN6zcE5qYSf69STGTbbMrT0mbMODP/TG
+ W/7OFaJ8gC4PQxAClDFSf+hiKunhNiXtlFJL6OQIs0PikAEhr1UG9Ez0BijYq+iBV8w=
+X-Gm-Gg: ASbGncsXAUpuBloPAJQUHe6YRkgM5EfQbL6HrxLhnq3Qa/jWY6IsIM/+c+zpw8z/OXM
+ jfrcqxa/dgXc4qgo4FjxYH7dLUW00iMeTc3ZQG8riU7BllNOoxtZkgTt2U1ecwuMwXP95C4rRSw
+ 61YeueJIWb34FydSbc3YkvbfQUSLU1gtdU5HTAbMU2sFUY2wWI3aygJc7OU/Vud2EPai1FXKe4y
+ Sz7GHdMLxAEzPtXJACoVkQe8psZVMkLbUYDNl+eylz9m/ZE9XulqdUMw9aw9S4mHWvPdiVU0e7T
+ IwFPIcPTUTlfAZAfWlrCwpYwWRDaZEuHO2bhGWjZTRUto/2iWS3GZofMt2N+lGIL8ZVkAQ6Jp3W
+ tAS9ak9m7GOCvThT62B6GtnPo2pbdQ7X2e6gaFpOdH/D6gvIsotY6IrLv2B3UUI6vICA7ddYxkm
+ xpPb6FTz/tKQ==
+X-Google-Smtp-Source: AGHT+IHjm7Yv0OKOZLFBR/gwAFXvLCfo/qJkIBAVOS8igvqumXS99cphaGfbaLpxBulXRWn3xFp0oA==
+X-Received: by 2002:a05:6830:7207:b0:7c5:3045:6c6f with SMTP id
+ 46e09a7af769-7c5304575d4mr4078441a34.20.1761544266577; 
+ Sun, 26 Oct 2025 22:51:06 -0700 (PDT)
+Received: from localhost ([2605:a601:81da:7100:264b:feff:fe59:d7f7])
+ by smtp.gmail.com with ESMTPSA id
+ 46e09a7af769-7c530136068sm1966330a34.13.2025.10.26.22.51.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 26 Oct 2025 22:51:06 -0700 (PDT)
+From: Sam Protsenko <semen.protsenko@linaro.org>
+To: Tom Rini <trini@konsulko.com>,
+	Minkyu Kang <mk7.kang@samsung.com>
+Cc: Peng Fan <peng.fan@nxp.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH 1/5] board: samsung: e850-96: Keep public functions together
+Date: Mon, 27 Oct 2025 00:51:01 -0500
+Message-Id: <20251027055105.720-2-semen.protsenko@linaro.org>
+X-Mailer: git-send-email 2.39.5
+In-Reply-To: <20251027055105.720-1-semen.protsenko@linaro.org>
+References: <20251027055105.720-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v3] i2c: add support for the MT7621 I2C controller
-Content-Language: en-US
-From: Heiko Schocher <hs@nabladev.com>
-To: Justin Swartz <justin.swartz@risingedge.co.za>, u-boot@lists.denx.de
-Cc: Anshul Dalal <anshuld@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
- Tom Rini <trini@konsulko.com>
-References: <20251008114831.30124-1-justin.swartz@risingedge.co.za>
- <d7311234-d316-e142-b11a-76417372d872@nabladev.com>
-In-Reply-To: <d7311234-d316-e142-b11a-76417372d872@nabladev.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,174 +102,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Justin,
+Move DRAM init functions close to other public functions, to make things
+visually distinct and improve the readability.
 
-I am sorry, checkpatch drops some warnings, can you please fix them?
+No functional change.
 
-Thanks!
+Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+---
+ board/samsung/e850-96/e850-96.c | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-bye,
-Heiko
-
-[1] checkpatch warnings
-WARNING: added, moved or deleted file(s), does MAINTAINERS need updating?
-#233:
-new file mode 100644
-
-ERROR: Do not add common.h to files
-#260: FILE: drivers/i2c/mt7621_i2c.c:23:
-+#include <common.h>
-
-CHECK: Prefer using the BIT macro
-#281: FILE: drivers/i2c/mt7621_i2c.c:44:
-+#define SM0CTL1_START                 (1 << 4)
-
-ERROR: open brace '{' following struct go on the same line
-#294: FILE: drivers/i2c/mt7621_i2c.c:57:
-+struct mt7621_i2c_priv
+diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
+index 3df241edde2a..34e01914032c 100644
+--- a/board/samsung/e850-96/e850-96.c
++++ b/board/samsung/e850-96/e850-96.c
+@@ -77,16 +77,6 @@ static struct acpm acpm = {
+ 	.ipc_ch		= EXYNOS850_IPC_AP_I3C,
+ };
+ 
+-int dram_init(void)
+-{
+-	return fdtdec_setup_mem_size_base();
+-}
+-
+-int dram_init_banksize(void)
+-{
+-	return fdtdec_setup_memory_banksize();
+-}
+-
+ /* Read the unique SoC ID from OTP registers */
+ static u64 get_chip_id(void)
+ {
+@@ -166,6 +156,16 @@ void load_firmware(void)
+ 		printf("ERROR: LDFW loading failed (%d)\n", err);
+ }
+ 
++int dram_init(void)
 +{
-
-ERROR: trailing whitespace
-#323: FILE: drivers/i2c/mt7621_i2c.c:86:
-+^I$
-
-ERROR: trailing whitespace
-#327: FILE: drivers/i2c/mt7621_i2c.c:90:
-+^I$
-
-WARNING: Use of volatile is usually wrong: see Documentation/process/volatile-considered-harmful.rst
-#409: FILE: drivers/i2c/mt7621_i2c.c:172:
-+       u32 status = *(volatile u32 *)(priv->base + REG_SM0CTL1);
-
-ERROR: trailing whitespace
-#415: FILE: drivers/i2c/mt7621_i2c.c:178:
-+^I$
-
-ERROR: trailing whitespace
-#464: FILE: drivers/i2c/mt7621_i2c.c:227:
-+^I^I$
-
-ERROR: trailing whitespace
-#468: FILE: drivers/i2c/mt7621_i2c.c:231:
-+^I^I$
-
-ERROR: trailing whitespace
-#481: FILE: drivers/i2c/mt7621_i2c.c:244:
-+^I$
-
-ERROR: trailing whitespace
-#484: FILE: drivers/i2c/mt7621_i2c.c:247:
-+^I^I$
-
-ERROR: trailing whitespace
-#488: FILE: drivers/i2c/mt7621_i2c.c:251:
-+^I^I$
-
-ERROR: trailing whitespace
-#492: FILE: drivers/i2c/mt7621_i2c.c:255:
-+^I^I$
-
-ERROR: trailing whitespace
-#496: FILE: drivers/i2c/mt7621_i2c.c:259:
-+^I^I$
-
-ERROR: trailing whitespace
-#500: FILE: drivers/i2c/mt7621_i2c.c:263:
-+^I^I$
-
-ERROR: trailing whitespace
-#511: FILE: drivers/i2c/mt7621_i2c.c:274:
-+^I$
-
-ERROR: trailing whitespace
-#519: FILE: drivers/i2c/mt7621_i2c.c:282:
-+^I$
-
-ERROR: trailing whitespace
-#521: FILE: drivers/i2c/mt7621_i2c.c:284:
-+^I$
-
-ERROR: trailing whitespace
-#546: FILE: drivers/i2c/mt7621_i2c.c:309:
-+^I$
-
-total: 17 errors, 2 warnings, 1 checks, 395 lines checked
-
-On 27.10.25 05:49, Heiko Schocher wrote:
-> Hello Justin,
-> 
-> On 08.10.25 13:48, Justin Swartz wrote:
->> This commit introduces a port of the Linux kernel's driver for the
->> Mediatek's MT7621 I2C controller.
->>
->> The port was undertaken as the existing driver intended for Mediatek
->> I2C controllers (mtk_i2c.c) is not compatible with the MT7621.
->>
->> To use the driver:
->>
->>    1.  Ensure that the mode of the i2c pin group is
->>        configured for "i2c" rather than "gpio".
->>
->>    2.  Delete the existing (bitbanged) i2c node from
->>        arch/mips/dts/mt7621.dtsi, or specify:
->>
->>          /delete-node/ &i2c;
->>
->>    3.  Declare:
->>
->>          i2c: i2c@1e000900 {
->>                  compatible = "mediatek,mt7621-i2c";
->>                  reg = <0x1e000900 0x100>;
->>
->>                  clocks = <&clk50m>;
->>                  clock-names = "sys_clock";
->>
->>                  resets = <&rstctrl RST_I2C>;
->>                  reset-names = "i2c_reset";
->>
->>                  pinctrl-names = "default";
->>                  pinctrl-0 = <&i2c_pins>;
->>
->>                  #address-cells = <1>;
->>                  #size-cells = <0>;
->>                  status = "okay";
->>          };
->>
->> Signed-off-by: Justin Swartz <justin.swartz@risingedge.co.za>
->> ---
->>
->> Notes:
->>      [PATCH v3]
->>      - Add an empty line between variable declaration and code to
->>        functions that did not have this separation.
->>      - Condense multi-line closing brace / else / opening brace
->>        sequences into single lines consisting of "} else {" instead.
->>      - Relocate mt7621_i2c_check_ack()'s I2C_M_IGNORE_NAK flag check
->>        to just after the last variable declaration.
->>      [PATCH v2]
->>      - Add "REG_" prefix to I2C (Serial Master 0) register definitions.
->>      - Remove unused "PINT" (Peripheral Interrupt) register definitions.
->>      - Adjust function definition style.
->>      - Refactor mt7621_i2c_check_ack() to accept the number of bytes
->>        expected to have been acknowledged, instead of accepting a
->>        literal value (which represents the acknowledgement status of
->>        (up to) 8 bytes, encoded as 8 independent bit values) expected
->>        in the SM0_ACK field (bits 23:16) of the SM0CTL1 register.
->>
->>   drivers/i2c/Kconfig      |   7 +
->>   drivers/i2c/Makefile     |   1 +
->>   drivers/i2c/mt7621_i2c.c | 375 +++++++++++++++++++++++++++++++++++++++
->>   3 files changed, 383 insertions(+)
->>   create mode 100644 drivers/i2c/mt7621_i2c.c
-> 
-> Reviewed-by: Heiko Schocher <hs@nabladev.com>
-> 
-> bye,
-> Heiko
-
++	return fdtdec_setup_mem_size_base();
++}
++
++int dram_init_banksize(void)
++{
++	return fdtdec_setup_memory_banksize();
++}
++
+ int board_late_init(void)
+ {
+ 	setup_serial();
 -- 
-Nabla Software Engineering
-HRB 40522 Augsburg
-Phone: +49 821 45592596
-E-Mail: office@nabladev.com
-Geschäftsführer : Stefano Babic
+2.39.5
+
