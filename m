@@ -4,54 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C875CCF9E5
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 04:47:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B5AECCF9E0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 04:49:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BBD882A9E;
-	Mon, 27 Oct 2025 05:47:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AD3DA82A9E;
+	Mon, 27 Oct 2025 05:49:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="Y03cGb3I";
+	dkim=pass (2048-bit key; unprotected) header.d=nabladev.com header.i=@nabladev.com header.b="V9y2AkWB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83A8B82C7F; Mon, 27 Oct 2025 05:47:45 +0100 (CET)
+ id 37A5E832AD; Mon, 27 Oct 2025 05:49:06 +0100 (CET)
 Received: from mx.nabladev.com (mx.nabladev.com
  [IPv6:2a00:f820:417:0:178:251:229:89])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A163980422
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 05:47:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5043A80422
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 05:49:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=nabladev.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@nabladev.com
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id B8CB6103244; Mon, 27 Oct 2025 05:47:39 +0100 (CET)
+ with ESMTPSA id 624D31036F3; Mon, 27 Oct 2025 05:49:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nabladev.com;
- s=dkim; t=1761540462;
+ s=dkim; t=1761540543;
  h=from:subject:date:message-id:to:cc:mime-version:content-type:
  content-transfer-encoding:content-language:in-reply-to:references;
- bh=XyLG5pXckc3Wr0LN+F8vv/0fR8fpQ5rp7HnhxLpb//0=;
- b=Y03cGb3IP8BHMuP5mAR3yB3+ZpSniPl9u2CMvFIW2v4XiUGbl6FpyyzzQvqr1gOiu2NR7a
- UjoY6eSO16lN18ynfu/RWEs63sJbExbe0lI/lh+na7tNUCu035Cuv98ZD5hlGYdrkzbB+s
- LP4yYvW+GGI9EHcIlxEZxJ5TwxmMadwJmFRwStV5i4ZknjWOW+0FmSxCBo4K8yGayuhsjh
- iVI4CfXRY178GBbUt17fLaEEC+1ZaacAVETiuQlP4ZCrSdSgTqEHHQMeIcUqgjR8TGuPv0
- IxpT3yH1XrYUiGWOVshwf2igkidqHVXIYyX3gPVmjPjDvdkBdmseitMVmvgWLg==
-Message-ID: <160dd771-127a-c91a-7392-5eae01917ec3@nabladev.com>
-Date: Mon, 27 Oct 2025 05:47:41 +0100
+ bh=/DkqYDjn9bMY+xpReHbQBWAHaRdhgFXeEpcDkmqg8qI=;
+ b=V9y2AkWBow7trYPweTAztFyWPr1qpScVe3VTGGZsporzg+/uzY8EYXhAX+P24tusuubNeO
+ WnPXudEQV+EWl0X9crmg3QDu55y/9sS76EmElGqCcIfoHDNSpiAZQIckP3Hi/4XmMyuDK9
+ MSqXtC/PUnQ8DPidZ4WjLJH1ZOJL5tInk2V4ft80+d+6a0b9CZl1FIxqAmHHvL4YPES5xe
+ VmxOECKPahnsa/aZ2djpNTb3HchZNrPJeeFBD+PbNBoLSngfUhNXNrUy5YP76mBchKb4Ab
+ yncexOEHL9GoyDojIR/vJ8Xe8jVcsVcEDWzSrwFU/oDsp7fqg63d1R2v1FJZDQ==
+Message-ID: <d7311234-d316-e142-b11a-76417372d872@nabladev.com>
+Date: Mon, 27 Oct 2025 05:49:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH] gpio: Return -ENODEV if gpio_hog_lookup_name() is empty
+Subject: Re: [PATCH v3] i2c: add support for the MT7621 I2C controller
 Content-Language: en-US
-To: Wolfgang Wallner <wolfgang.wallner@br-automation.com>, u-boot@lists.denx.de
-Cc: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- Zixun LI <admin@hifiphile.com>
-References: <20251024125251.39886-1-wolfgang.wallner@br-automation.com>
+To: Justin Swartz <justin.swartz@risingedge.co.za>, u-boot@lists.denx.de
+Cc: Anshul Dalal <anshuld@ti.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20251008114831.30124-1-justin.swartz@risingedge.co.za>
 From: Heiko Schocher <hs@nabladev.com>
-In-Reply-To: <20251024125251.39886-1-wolfgang.wallner@br-automation.com>
+In-Reply-To: <20251008114831.30124-1-justin.swartz@risingedge.co.za>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-Last-TLS-Session-Version: TLSv1.3
@@ -71,24 +69,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Wolfgang,
+Hello Justin,
 
-On 24.10.25 14:52, Wolfgang Wallner wrote:
-> If CONFIG_GPIO_HOG is not set, then gpio_hog_lookup_name() is empty,
-> and thus does not initialize any of its parameters. It does still
-> return 0 though, and so any calling function might assume that the
-> parameters have been initialized successfully.
+On 08.10.25 13:48, Justin Swartz wrote:
+> This commit introduces a port of the Linux kernel's driver for the
+> Mediatek's MT7621 I2C controller.
 > 
-> Change the return value to -ENODEV in this case, as the function
-> would in the case when CONFIG_GPIO_HOG is set but the gpio hog
-> could not be found.
+> The port was undertaken as the existing driver intended for Mediatek
+> I2C controllers (mtk_i2c.c) is not compatible with the MT7621.
 > 
-> Signed-off-by: Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+> To use the driver:
 > 
+>    1.  Ensure that the mode of the i2c pin group is
+>        configured for "i2c" rather than "gpio".
+> 
+>    2.  Delete the existing (bitbanged) i2c node from
+>        arch/mips/dts/mt7621.dtsi, or specify:
+> 
+>          /delete-node/ &i2c;
+> 
+>    3.  Declare:
+> 
+>          i2c: i2c@1e000900 {
+>                  compatible = "mediatek,mt7621-i2c";
+>                  reg = <0x1e000900 0x100>;
+> 
+>                  clocks = <&clk50m>;
+>                  clock-names = "sys_clock";
+> 
+>                  resets = <&rstctrl RST_I2C>;
+>                  reset-names = "i2c_reset";
+> 
+>                  pinctrl-names = "default";
+>                  pinctrl-0 = <&i2c_pins>;
+> 
+>                  #address-cells = <1>;
+>                  #size-cells = <0>;
+>                  status = "okay";
+>          };
+> 
+> Signed-off-by: Justin Swartz <justin.swartz@risingedge.co.za>
 > ---
 > 
->   drivers/gpio/gpio-uclass.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> Notes:
+>      [PATCH v3]
+>      
+>      - Add an empty line between variable declaration and code to
+>        functions that did not have this separation.
+>      
+>      - Condense multi-line closing brace / else / opening brace
+>        sequences into single lines consisting of "} else {" instead.
+>      
+>      - Relocate mt7621_i2c_check_ack()'s I2C_M_IGNORE_NAK flag check
+>        to just after the last variable declaration.
+>      
+>      [PATCH v2]
+>      
+>      - Add "REG_" prefix to I2C (Serial Master 0) register definitions.
+>      - Remove unused "PINT" (Peripheral Interrupt) register definitions.
+>      - Adjust function definition style.
+>      
+>      - Refactor mt7621_i2c_check_ack() to accept the number of bytes
+>        expected to have been acknowledged, instead of accepting a
+>        literal value (which represents the acknowledgement status of
+>        (up to) 8 bytes, encoded as 8 independent bit values) expected
+>        in the SM0_ACK field (bits 23:16) of the SM0CTL1 register.
+> 
+>   drivers/i2c/Kconfig      |   7 +
+>   drivers/i2c/Makefile     |   1 +
+>   drivers/i2c/mt7621_i2c.c | 375 +++++++++++++++++++++++++++++++++++++++
+>   3 files changed, 383 insertions(+)
+>   create mode 100644 drivers/i2c/mt7621_i2c.c
 
 Reviewed-by: Heiko Schocher <hs@nabladev.com>
 
