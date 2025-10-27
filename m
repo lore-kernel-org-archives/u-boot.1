@@ -4,86 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79534CCF9E5
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 11:55:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCFF3CCF9EE
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 11:56:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F328E82E34;
-	Mon, 27 Oct 2025 12:55:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 61E2F82E34;
+	Mon, 27 Oct 2025 12:56:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TMizeB3i";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VgrNIApu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24566832AD; Mon, 27 Oct 2025 12:55:11 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 2B4B6836B4; Mon, 27 Oct 2025 12:56:50 +0100 (CET)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D88E682A9E
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 12:55:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9C5882A9E
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 12:56:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-378d50162e0so52847841fa.2
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 04:55:08 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-7a26dab3a97so2736152b3a.0
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 04:56:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1761566108; x=1762170908; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v1tqMVMQPk0Q60mOkpOJYdJi5ZZ+sEEKr23py4qW5YE=;
- b=TMizeB3i34vdn3H/y9fjP1sPPPSZKSe35jDejcUHw2GGnLdIySGFi+2KFQBoCgklb2
- 54JNXqhFqRU71rXrndFCcxY5zrpDncof9oQr2R5J2zAEARahLnN1fHnWn5hstOLqitF3
- EYEdRzkTIQwmaIjowld7q3gPBfs1xqdgjbTF0qMiaG9XxpRqJOVpW2mAFCmgNHtn2HfO
- 7/n9Wy4wFWZqUSKJk4WyRpNjQ4F+r/Udhxd6qr+X7YwUyLXKKAgrFg5JyRkJbmE4SG68
- DmmHcd9TBB5QeDouEAWVgDjkZXp0XvumXsoi4Prc5TIBY+YkrpMKuHSx0ukLpKKm+79X
- ij/Q==
+ d=gmail.com; s=20230601; t=1761566206; x=1762171006; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=t6OR1g6k0Xa3d6omZs/zxiMXTok2xA0K6EJw+91btaU=;
+ b=VgrNIApuWS8l0B8lBC+fXy6j+pEi3RxyGcSu9f5NLAUe8SuRVr7bXv8Xeg3am0A4Ha
+ sH7MvDKM1XYe+h3XKn2ICqBS9a/N+GxTtxiCpkX18joc37iI8vbce1BIG1mzwwNwhRsJ
+ +MqZgfOj6YD+2u5KzZoz4GukQsFj7PoDBtU3RoiFzRIpssiD0bD19cvMH+iwQ2CD/Ptm
+ YRvd9F50zDzivhoahOX1mDCkHKcNesV74EGiqMrYmgXlNwh54C4yXX7GycNpFdNZ/E/0
+ mnM7Skr2sHhLBkdckS3vOIlvxnT586GFeGbeEqFsKQQ/MhOBUNt4+iAiF3KgzDcKCEV/
+ PyOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761566108; x=1762170908;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=v1tqMVMQPk0Q60mOkpOJYdJi5ZZ+sEEKr23py4qW5YE=;
- b=G/YmwGM+XHriJriHzxzQAz42KS9LTGtmYKv1q1cIVZZp6ibCe6UftOQjk/oyujY5sp
- 052PXbFO7IS7UBTKLURFwzl3od6oDhW6XIsGG/jVcGazSDMWBxJPfgL9V3Ijv5GQRZN5
- WUpfMezDMebiUHtnSiZVieHUDACA2+iC5ruPlvEX4eIL57TRvMAqcAcxh2F3AKe3Z2MT
- APywUF2/MG5kRr58m3yRgCoTl66LaQwjLUvs7PBrmmo8uIO1Me+KYlhGD6gyeSVl/WQ+
- HPO9HF5VMfx5Ad3CFrvWUtHMjPPaTEPppiTFAHT4QxwupxA5HEla/ymQnLeoF34W4+tk
- Y/5g==
+ d=1e100.net; s=20230601; t=1761566206; x=1762171006;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t6OR1g6k0Xa3d6omZs/zxiMXTok2xA0K6EJw+91btaU=;
+ b=UfHr35ufyzcGulGtzr0xqWl877pK1+MLVeTQKQUF6xY50sv4iPO+hHWe+UUFjN+Tfn
+ HvzzFjbzXxDeMW1Nx+pXh6QaNpTMh/fQpLWuib/nejtG0t6Y62zazROXkPMXEh+FIpP6
+ FRklLSXw444UMtjB0+9zuy3z21Kc2IO4d0e+QEgNhyoolEgCKpWZCGayUwwSA1SQHFri
+ c+UBkUGSGsjh9X1ixTyltNG3iQvcHheR4UQDsF4pyXbePSQWGdr73X5wZb/V0muUKn2R
+ zy7Z5w/dKB9Lmg/Ttc3q2I5cQuLuBdGNyJ6zu0sRq91GZ2Nfbn0rLRr+rot1nj6XWcns
+ wdyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV3hE/VKZWlDo7m7Wv5ZhRqP+1CFTo6WhExjLvG0W26lCh+6iK3JmeeCX4+hiOsEofowt3oERE=@lists.denx.de
-X-Gm-Message-State: AOJu0YyNTCRTfJl7WjBs9NZ27o4IyXcydGc736wwHp3FlLYCu0rHFlCl
- zZiAQQR/ZYMyupCnsmrWbd3DTn8xVYQ0NBiJx465KoPiD9inpJpHYZBrWStpQrSyTGa4h0Z5opp
- ++mdE8LUdj5nvMRUqpuBkJu2nLNlNK+k=
-X-Gm-Gg: ASbGncvtH5X/pi6NBd8lGUApkScwkh09QkYaxZOroStUC6pTsIHVGqTHLlaGMwVe7vc
- STouKRm+4Lu+mlGNEZCP1mx7B7wmwubq7/4kzjvnRW59DFc5P2mDhcJm5uWM40bxqqSuVPNe9ZX
- 35bj4OT6cAr+F5c+ZBoAGF2iaMe6I5BqrdnnWDXBBGlZKg51EXow7eaexmtvxwuims3gA816+6v
- uqlFA2Yu1U1U8lZ4qCwLKeRawxytyUYps82JjgKYuPcDLqJ0vxJxvE0122iYlzOAnOV2qO5yyU6
- 2smsGktQcnDSYM+G
-X-Google-Smtp-Source: AGHT+IGLzOnwZBuY4QJjHc1gxOHhRWY8CCYB49wN63JBNwz3CCk7EdnK8A/uWnzl2zBtfAMChq7hOkj8iFEyhmQTQqs=
-X-Received: by 2002:a05:651c:1511:b0:378:d773:aa49 with SMTP id
- 38308e7fff4ca-378d773abb1mr43065651fa.21.1761566107891; Mon, 27 Oct 2025
- 04:55:07 -0700 (PDT)
-MIME-Version: 1.0
-References: <bfe7ac62-0d01-45b5-9226-e1d425565d50@schwermer.no>
- <CAOMZO5C_8xacCJn9+KWC44nSuMWNCUu0c=YHsQvTH-+1yKawSQ@mail.gmail.com>
- <5ebba7e2-ae01-4ff4-a17f-66ddead1acd5@oss.nxp.com>
-In-Reply-To: <5ebba7e2-ae01-4ff4-a17f-66ddead1acd5@oss.nxp.com>
+ AJvYcCX+CYR3du9xoQyPS5/+s/+6urxjulgyVen1GlHF7zj5bET+GWVg9z05lgzYIloNhdA5khBf7Mw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxEdISXyi+1c90jkk5a2OzRd22ezfKgqEKjawIcmKxtrY9OD2+S
+ 8IMhgPjysbzi0AXCrjC8BugSzFkTX1nH6eBDo3aquP8Vls8qtiMl87HxyiRNaYDL
+X-Gm-Gg: ASbGnctF7INhMur3shfI2/Zezn0uIDpZwyH14dRi6uAfijgAufYmj6WuJX8bEUfl6br
+ f/qZ1LfjoX4xYuQ1PoDxeikSLFu7Fx7DSUpvLx+2eaCe1hgt6PUBCiDedoJOfFL6m5+3ecGbODb
+ H7nmDiLe93NldtT2TIlzm/+djE5Pf9+eu4XVLMXITZgWF7L/ZlpDtNOQN58d74H0Z4sbaODaInD
+ DJZWVhH0Rw7hLyyaLJbc9SQIen2S/ZZzAgKbaGXg1by77sVcq47bcsjfv/WWX4sd4zowIqzfZOy
+ qHuWBVl9va8B/OSATsS3Mhum8TaDoE79eOkjs6mILV66z+NAPGhS7gbeyYMpwLRhieRQyJlZ5tm
+ 9z6a9l20bNFodhmGhK6teUTNuxHgQAY5MvMNMErBik7QL/k6n5/xrpwbU+WPc/DFfNNqR5CtWJn
+ aGuMctw8yqoflboJIYSnBQKUqzel4W5WavWJo=
+X-Google-Smtp-Source: AGHT+IGP6KJLipOuOep0Ifi0kCqQ28xaMDX/Ut6Edrfo/HINOp2Wu59V3ybj8fg7uvE007S0V85MjQ==
+X-Received: by 2002:a05:6a00:22d4:b0:7a2:1bfe:ac75 with SMTP id
+ d2e1a72fcca58-7a220b1995cmr42971742b3a.16.1761566206251; 
+ Mon, 27 Oct 2025 04:56:46 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:eb22:2268:4f98:1acb])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7a414069164sm8035286b3a.45.2025.10.27.04.56.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Oct 2025 04:56:45 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 27 Oct 2025 08:54:56 -0300
-X-Gm-Features: AWmQ_bnPllgYt18biWw3pk7MrQSpSKtiD9VWpdHwna_UK_CioOKV4nVxWvlUn7k
-Message-ID: <CAOMZO5DjEsPEZmJCO0Xrv6oZm5AFu+VM_DC862sqPQqT9RUc5g@mail.gmail.com>
-Subject: Re: mx6ull: init_bandgap regression
-To: Ye Li <ye.li@oss.nxp.com>
-Cc: Sven <u-boot@schwermer.no>, U-Boot-Denx <u-boot@lists.denx.de>, 
- dario.binacchi@amarulasolutions.com, peng.fan@nxp.com, ping.bai@nxp.com, 
- sbabic@nabladev.com, uboot-imx@nxp.com, Tom Rini <trini@konsulko.com>, 
- martyn.welch@collabora.com, parthitce@gmail.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: uboot-imx@nxp.com
+Cc: trini@konsulko.com, dario.binacchi@amarulasolutions.com,
+ michael@amarulasolutions.com, u-boot@lists.denx.de, u-boot@schwermer.no,
+ Ye Li <ye.li@nxp.com>, Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] imx: Revert "imx: mx6ull: fix REFTOP_VBGADJ setting" and fix
+ comments
+Date: Mon, 27 Oct 2025 08:56:38 -0300
+Message-Id: <20251027115638.1186252-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,18 +100,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ye Li,
+From: Ye Li <ye.li@nxp.com>
 
-On Sun, Oct 26, 2025 at 11:27=E2=80=AFPM Ye Li <ye.li@oss.nxp.com> wrote:
+The change in commit c1af358cf51a ("imx: mx6ull: fix REFTOP_VBGADJ
+setting") is not correct. According to latest i.MX6ULL fuse table,
+the REFTOP_TRIM[2:0] fuse is defined as below. So the previous codes
+are correct, only need to fix the comments.
 
-> I once sent a fix to revert that patch, but it was rejected.
-> https://patchwork.ozlabs.org/project/uboot/patch/1646721735-125430-1-git-=
-send-email-ye.li@nxp.com/
+Set the REFTOP_VBGADJ field in PMU_MISC0 register based on the
+REFTOP_TRIM fuse:
+'000" - set REFTOP_VBGADJ[2:0] to 3'b000
+'001" - set REFTOP_VBGADJ[2:0] to 3'b001
+'010" - set REFTOP_VBGADJ[2:0] to 3'b010
+'011" - set REFTOP_VBGADJ[2:0] to 3'b011
+'100" - set REFTOP_VBGADJ[2:0] to 3'b100
+'101" - set REFTOP_VBGADJ[2:0] to 3'b101
+'110" - set REFTOP_VBGADJ[2:0] to 3'b110
+'111" - set REFTOP_VBGADJ[2:0] to 3'b111
 
-Thanks for letting me know.
+Sven Schwermer reported:
 
-I have resent your original patch and added Sven's regression report.
+"These are the symptoms: Very few of the thousands of devices that we
+manufacture (< 1%) fail to decompress a large XZ archive once in Linux
+userspace. We have not found any form of memory testing or other load
+that reproduces this issue. Reverting the offending patch fixes this
+behavior on the affected devices."
 
-Thanks,
+Revert the offending commit to fix the regression.
 
-Fabio Estevam
+Reported-by: Sven Schwermer <u-boot@schwermer.no>
+Signed-off-by: Ye Li <ye.li@nxp.com>
+[fabio: Fixed checkpatch warning and added Sven's report]
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ arch/arm/mach-imx/mx6/soc.c | 20 +++++++++-----------
+ 1 file changed, 9 insertions(+), 11 deletions(-)
+
+diff --git a/arch/arm/mach-imx/mx6/soc.c b/arch/arm/mach-imx/mx6/soc.c
+index 50521490b354..02df86156d41 100644
+--- a/arch/arm/mach-imx/mx6/soc.c
++++ b/arch/arm/mach-imx/mx6/soc.c
+@@ -360,23 +360,21 @@ static void init_bandgap(void)
+ 	/*
+ 	 * On i.MX6ULL,we need to set VBGADJ bits according to the
+ 	 * REFTOP_TRIM[3:0] in fuse table
+-	 *	000 - set REFTOP_VBGADJ[2:0] to 3b'110,
+-	 *	110 - set REFTOP_VBGADJ[2:0] to 3b'000,
+-	 *	001 - set REFTOP_VBGADJ[2:0] to 3b'001,
+-	 *	010 - set REFTOP_VBGADJ[2:0] to 3b'010,
+-	 *	011 - set REFTOP_VBGADJ[2:0] to 3b'011,
+-	 *	100 - set REFTOP_VBGADJ[2:0] to 3b'100,
+-	 *	101 - set REFTOP_VBGADJ[2:0] to 3b'101,
+-	 *	111 - set REFTOP_VBGADJ[2:0] to 3b'111,
++	 *	000 - set REFTOP_VBGADJ[2:0] to 3'b000
++	 *	001 - set REFTOP_VBGADJ[2:0] to 3'b001
++	 *	010 - set REFTOP_VBGADJ[2:0] to 3'b010
++	 *	011 - set REFTOP_VBGADJ[2:0] to 3'b011
++	 *	100 - set REFTOP_VBGADJ[2:0] to 3'b100
++	 *	101 - set REFTOP_VBGADJ[2:0] to 3'b101
++	 *	110 - set REFTOP_VBGADJ[2:0] to 3'b110
++	 *	111 - set REFTOP_VBGADJ[2:0] to 3'b111
+ 	 */
+ 	if (is_mx6ull()) {
+-		static const u32 map[] = {6, 1, 2, 3, 4, 5, 0, 7};
+-
+ 		val = readl(&fuse->mem0);
+ 		val >>= OCOTP_MEM0_REFTOP_TRIM_SHIFT;
+ 		val &= 0x7;
+ 
+-		writel(map[val] << BM_ANADIG_ANA_MISC0_REFTOP_VBGADJ_SHIFT,
++		writel(val << BM_ANADIG_ANA_MISC0_REFTOP_VBGADJ_SHIFT,
+ 		       &anatop->ana_misc0_set);
+ 	}
+ }
+-- 
+2.34.1
+
