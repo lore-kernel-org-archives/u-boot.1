@@ -4,41 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30ADACCF9EB
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 06:56:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3FC48CCF9EB
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 08:08:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 419C582A9E;
-	Mon, 27 Oct 2025 07:56:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id A6A0B80422;
+	Mon, 27 Oct 2025 09:08:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7113582C7F; Mon, 27 Oct 2025 07:56:09 +0100 (CET)
-Received: from freeshell.de (freeshell.de [116.202.128.144])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3981F80422
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 07:56:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.54] (unknown [98.97.26.255])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id 0771AB22014B;
- Mon, 27 Oct 2025 07:56:05 +0100 (CET)
-Message-ID: <faf31d40-656c-4eee-b564-80586860cd75@freeshell.de>
-Date: Sun, 26 Oct 2025 23:56:03 -0700
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U9SgH+hY";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 76AB182A9E; Mon, 27 Oct 2025 09:08:39 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 2298B80107
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 09:08:36 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
+Received: from fllvem-sh03.itg.ti.com ([10.64.41.86])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59R88WHK2367642;
+ Mon, 27 Oct 2025 03:08:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1761552512;
+ bh=3U48fkymKUKH2vtE9X/2DRYb/tXzgPVZ5nh2xzcj3fY=;
+ h=Date:CC:Subject:From:To:References:In-Reply-To;
+ b=U9SgH+hYeqUKJpuRfNycCsDoB9b5eCc8QJOp/KrHNG6yBUJrA+gTuyBW1XhprckE6
+ z0p8Bka6SlTrT5Pm92te3QJsc0uiGSnneeODcCBOXw8tHklU9kgGQtUC4akXnhgosm
+ Mjx+GEj6xX/EiAIVJQT043nHfS2oV+AgTkvuJvvY=
+Received: from DLEE203.ent.ti.com (dlee203.ent.ti.com [157.170.170.78])
+ by fllvem-sh03.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59R88W2J1251051
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 27 Oct 2025 03:08:32 -0500
+Received: from DLEE214.ent.ti.com (157.170.170.117) by DLEE203.ent.ti.com
+ (157.170.170.78) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Oct
+ 2025 03:08:32 -0500
+Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DLEE214.ent.ti.com
+ (157.170.170.117) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
+ Transport; Mon, 27 Oct 2025 03:08:32 -0500
+Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
+ by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59R88VaV333273;
+ Mon, 27 Oct 2025 03:08:31 -0500
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v1] tools: update-subtree.sh improve user experience
-To: Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20251015083842.46057-1-e@freeshell.de>
- <14b0f59c-adec-4ccd-9854-09bbf335bdc8@cherry.de>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <14b0f59c-adec-4ccd-9854-09bbf335bdc8@cherry.de>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="UTF-8"
+Date: Mon, 27 Oct 2025 13:38:30 +0530
+Message-ID: <DDSY8ZND5P7O.3GJV0YE4G8WL3@ti.com>
+CC: <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, Vignesh R
+ <vigneshr@ti.com>
+Subject: Re: [PATCH v9 1/2] spl: remove usage of CMD_BOOTx from image parsing
+From: Anshul Dalal <anshuld@ti.com>
+To: Tom Rini <trini@konsulko.com>, Anshul Dalal <anshuld@ti.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20251025-fix_cmd_bootx-v9-0-dccf0aa0587f@ti.com>
+ <20251025-fix_cmd_bootx-v9-1-dccf0aa0587f@ti.com>
+ <20251025135227.GU6688@bill-the-cat>
+In-Reply-To: <20251025135227.GU6688@bill-the-cat>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -55,98 +81,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin, thanks for the review.
+On Sat Oct 25, 2025 at 7:22 PM IST, Tom Rini wrote:
+> On Sat, Oct 25, 2025 at 02:38:37PM +0530, Anshul Dalal wrote:
+>> Using CMD_* configs from spl doesn't make logical sense. Therefore
+>> this patch replaces the checks for CMD_BOOTx with newly added library
+>> symbols LIB_BOOT[IMZ] and SPL_LIB_BOOT[IMZ] which are enabled by their
+>> respective CMD_* or SPL_* counterparts.
+>>=20
+>> SPL_BOOTZ is enabled by default for 32-bit ARM systems and SPL_BOOTI is
+>> enabled by default for 64-bit ARM and RISCV.
+>>=20
+>> The respective C files (image.c/zimage.c) are compiled based on library
+>> symbols BOOTx instead which are in turn selected by both CMD_BOOTx and
+>> SPL_BOOTx as required.
+>>=20
+>> Signed-off-by: Anshul Dalal <anshuld@ti.com>
+>> ---
+>>  arch/arm/lib/Makefile   | 13 +++++++------
+>>  arch/riscv/lib/Makefile |  4 ++--
+>>  boot/Kconfig            | 18 ++++++++++++++++++
+>>  cmd/Kconfig             |  5 +++++
+>>  common/spl/Kconfig      | 16 ++++++++++++++++
+>>  common/spl/spl.c        |  5 +++--
+>>  6 files changed, 51 insertions(+), 10 deletions(-)
+>>=20
+>> diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+>> index ade42d0ca4370b7df3aec59615f12e28a96874cd..3ea94709dfcdc2c9fd057ad5=
+e129e041c59d6716 100644
+>> --- a/arch/arm/lib/Makefile
+>> +++ b/arch/arm/lib/Makefile
+>> @@ -7,6 +7,13 @@ lib-$(CONFIG_USE_PRIVATE_LIBGCC) +=3D ashldi3.o ashrdi3=
+.o lshrdi3.o \
+>>  				    lib1funcs.o uldivmod.o div0.o \
+>>  				    div64.o muldi3.o
+>> =20
+>> +obj-$(CONFIG_$(PHASE_)LIB_BOOTI) +=3D image.o
+>> +obj-$(CONFIG_$(PHASE_)LIB_BOOTZ) +=3D zimage.o
+>> +
+>> +ifndef CONFIG_XPL_BUILD
+>> +obj-$(CONFIG_$(PHASE_)LIB_BOOTM) +=3D bootm.o
+>> +endif
+>
+> I wasn't clear enough, sorry. When you use $(PHASE_) you don't need
+> CONFIG_XPL_BUILD. And if we select SPL_LIB_BOOTM we want bootm.o in SPL,
+> yes?
 
-On 10/20/25 09:01, Quentin Schulz wrote:
-> Hi E,
-> 
-> On 10/15/25 10:38 AM, E Shattow wrote:
->> Makeover of the script:
->> - Usage now explains at each step what is expected from the user.
->> - Default branch name is no longer hard-coded and is queried when
->> omitted.
->> - Additional operations 'update' and 'log' close the logic gap between
->>    expecting the user to provide a commit id and where from this
->> commit id
->>    should be obtained.
->> - Use 'set -x' context to show git invocation where appropriate
->> - Sort options for usage output
->> - 'pick' operation detects merge commit id and displays suggested commits
->>
->> Additionally the LwIP remote is now using the Savannah mirror system:
->>
->> https://lists.gnu.org/archive/html/savannah-users/2025-05/msg00002.html
->>
-> 
-> Please try to split changes into multiple commits. There's a lot of
-> unnecessary noise and it makes difficult to review your patch otherwise.
+Yeah, you're right. I missed the CONFIG_XPL_BUILD too, will re-run the
+CI and post a v10.
 
-Yes this is incomprehensible as a diff. It should be reviewed as a
-replacement for the existing script (I do not know if that is possible
-with git format-patch, ?) I'll try to spoon feed it in a series of more
-easily reviewable patches to get where I want to.
-
-> 
-> Here I can identify:
-> 
-> - Cleaning up the comments at the top
-> - Removing set -e (why?)
-
-set -e fails the script immediately which prevents giving the user some
-facts about an error
-
-> - Moving print_usage somewhere else
-> - Changing the output of print_usage
-> - Reordering cases in the switch..case for the subtree-name
-> - Changing URL of GNU mirror (which very much looks like a typo as it
-> doesn't seem to be what the link pasted above says the new URLs should
-> look like, albeit working somehow)
-
-I got this information from the person working on it for FSF. I will
-review to see if it is better documented somewhere, but this is their
-suggestion both the load balance URL to use and the public announcement
-reference.
-
-> - Adding new features (each its own commit please)
-> 
-> You also do not explain what your pain points were when using this
-> script. This would be useful information now for reviewing and for later
-> if/when this gets merged so we know what kind of confusion happened in
-> the past so that potential future reworks don't reintroduce the same
-> problems.
-
-I was never able to get this to work by the description in build
-documentation. I have a choice to do a lengthy explanation in
-documentation to improve that or just make the command more
-user-friendly - I will try making it better before giving up and
-increasing the word count of the documentation.
-
-> 
-> If I remember correctly, the biggest issue was that a pull dts was
-> attempted instead of multiple cherry-picks? I believe nobody except Tom
-> (for DTS) and whoever are the maintainers of lwip/mbedtls for the
-> respective projects should be running the pull option. The diff is too
-
-Yes, this is not clear from documentation presently. The tool should not
-punish the user for misuse or ignorance about commit ids before getting
-to the moment where they can begin to learn about such things.
-
-> big for DTS to be meaningful so for now Tom is essentially pushing to
-> the branch and then notifying people on the ML that this was done and
-> that the new base is available in master, c.f. https://lore.kernel.org/
-> u-boot/20251008220903.GM298503@bill-the-cat/. Maybe we should also be
-> conveying this better (including https://docs.u-boot.org/en/latest/
-> develop/devicetree/control.html#resyncing-with-devicetree-rebasing).
-> 
-> Cheers,
-> Quentin
-
-Yes I also plan to reduce the documentation to what is helpful only to
-start using the tool and with changes to the tool it will be easier for
-project maintainer and anyone else to use. More information does not
-make the tool any better or easier to use and for what it does now could
-be better to just explain the git commands. I will first attempt to
-improve the tool to be more helpful when the user does not already know
-what git commands or commit ids are involved.
-
--E
