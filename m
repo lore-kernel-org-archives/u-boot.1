@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 142B1CCF9EB
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 20:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A544CCF9E5
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 20:56:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AF07836B4;
-	Mon, 27 Oct 2025 21:04:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AB8418384E;
+	Mon, 27 Oct 2025 21:56:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hefring.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="izz1Yc1w";
+	dkim=pass (2048-bit key; unprotected) header.d=hefring-com.20230601.gappssmtp.com header.i=@hefring-com.20230601.gappssmtp.com header.b="emj0mMMn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B26083906; Mon, 27 Oct 2025 21:04:27 +0100 (CET)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id CC819838F8; Mon, 27 Oct 2025 21:56:41 +0100 (CET)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 238F18004F
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 21:04:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 69A5C83710
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 21:56:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-b3f5e0e2bf7so1138879566b.3
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 13:04:24 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=hefring.com
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=ben.wolsieffer@hefring.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4ed02d102e2so8775821cf.1
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 13:56:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1761595464; x=1762200264; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=afwvj1Tp0CNbxAuCTKfkl99xFWEpibXryTbYQnE1BcI=;
- b=izz1Yc1wG+R4Ki3Te+64IigVv1sEpDM3gzLgiOePnVKHRSNbdj4GXh3ygAjr/gv9Qw
- 3gsjVq8xOq6vn/+m9y1HgxFRNIWBbHuzZbCuuD2hu/yEe/b0+o+4PCWGdQExi8rBKoLa
- lv5OiQRAQIDivR8U29RjhadANZopAqubsCVLg=
+ d=hefring-com.20230601.gappssmtp.com; s=20230601; t=1761598598; x=1762203398;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aQ+o+avD12AAfVz9lFkdBlwed1wlh/Lma89oofaWIOw=;
+ b=emj0mMMnozuH5ccBlaGRi2a1FYoOw5Ky1ikK5dkOuAdlMIis90BCQukV2XODn0x69b
+ umbT2Vbh6AwA2ZgA+sa4+b3RF9qeMvQGlOsx4JU+gIGJAOV5CL8X6GDYnIcA1EakCpKc
+ pngg88BFnQvUktkW/qtbkxXox9f9Bci4C3EVZ//SiS9GTfPMuipKPRN2uHXd2DH8dfKP
+ 8kH+NacntG19UDns3qDkZ7a1FT0/ImH9pe129Lo05ZQUvwDxCznfehMqo4ItLgUOuus+
+ kcW2BuCEVUidAIt/4y2HWBLbJroqbid+1/6DHTBop3Ls36SpJJjJhCxq5Eh401+aZLoL
+ H/0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761595464; x=1762200264;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1761598598; x=1762203398;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=afwvj1Tp0CNbxAuCTKfkl99xFWEpibXryTbYQnE1BcI=;
- b=Fm5H70wiG8Q/s2mfgsXcn/x/idTyBB86pAoMKdETomWQQ3ujBuQ1U6VOwW4Hufcac2
- bf38FudLwz3vdWXUX2rrILUEoRtnfhA6PLlAUuFCUFoUnD4y6nJp1TifWQqvpJjXazre
- 19XkK9nfq2s5IflMd/QzdcvXNE/rTIW1TEnnCBbvJXp4Cy5k9+ulIRvMHfODmS+WmuPy
- 2cWnT+GG4CGwUXtD+tcAiabdaFjUCloyrSJ/kHSN8c7Z144b+Z4Mmn9vgjppdpkFRmTL
- ULDCep9LQeRXB25TPqPpRHV7s4El11dqDqyI/VGiv0tof2CxoUf02n6giKqYR56rOnwI
- f1GA==
-X-Gm-Message-State: AOJu0Yzec+miETwaNRL0GWy9ilvouDyXTfNOLJT55dQXYh0PPdif1iil
- J0vI2/tpsLHMRDja7lR/XGlbY0uVYaJugRijanaoehm5Vd+6vqEYsSRVEO+YbHLliP95nFYUxr2
- Ad1WLMUE780DuRVN6O/73qiHNfRX8g8JEU+Hyf6J/
-X-Gm-Gg: ASbGnctfUF6DXMCLpwOSvcJBV2ggE/55d4zv384gXigBxKTVseGqJPzzCK0lrf6c5cE
- gBGafp4bGI0gBTa2xxq/4QiPp3kng05SJXvaa0d8Wgcnj93IDARux5TB6g/0DVRy3SV/iVQ2MeQ
- kxi/FEMcE+CWqVpjg1l6NMK53LnvDDVVwNvI3HqgHJTC+V3GR/hp1f0jt3LHI9bmVeAdd7pjtEp
- BIoMcZjhBhENO/iQ6+VqhpVU1gG3FyaSXTb5OQOPOJGXfJnjikJdXmfZbFnSV5BQ28EKqc=
-X-Google-Smtp-Source: AGHT+IHKr5b+qAmJzFbtecM0K826152NlIs2L1BWAIrNhvLNj6tSIfrOWwz4NO0TihVYcko1pnYkfOnUtAOwXuexR4E=
-X-Received: by 2002:a17:907:9413:b0:b6d:7f84:628 with SMTP id
- a640c23a62f3a-b6dba597e92mr123529566b.43.1761595463887; Mon, 27 Oct 2025
- 13:04:23 -0700 (PDT)
+ bh=aQ+o+avD12AAfVz9lFkdBlwed1wlh/Lma89oofaWIOw=;
+ b=DdBb1dzI6brBtWCGCCMbf5tTGpIcH8P8931tEK3vP5+4KLBcfzutw5Ar6CvBbUC7jd
+ Q6PNDuBjL1m99kYoE7Xjke97N3SO+28+3UE+xNwqE42k/mEi6Z95yZgaJGf82WRAL+52
+ iQMDPcZT4Z/Yitl7+Si71FcbpKWIR8wweCHpu+43nVlSR0ebxB8E+sXRpZuOPXir98WX
+ WVjb8IOtbH0CIsOB6Umjs3GezAklv4NoShbVt68PTKmNYvY0MYWhfDhVA3G8GS+CpVuQ
+ nA0h6S/paKjs8OWC6lIp/UviU+QQbz+AYfvrdT1a99/u49oBEn0Zt+gcWk+27ljPf8xu
+ OlHA==
+X-Gm-Message-State: AOJu0YyUXsxpXfHkuhOHvC26mIDTNn+Fm+3RccHOKM8USTGhcKDo8oZb
+ /rFp19jj2fsGC4YBd+kIdWpx076npZaAbghnBZLyjBDES8Wb5gfk9LBKEy+12SZRhB234KAUW13
+ 1PV07
+X-Gm-Gg: ASbGncs0aql9GGbIWzukmUjkm6P4GGatD/qGBqZcnO1mlxE+tewoaxCx4o6+hfGDrJ1
+ dchp8+0CWlzwoF7AKvDJ4whCzGzMMeKyWasItrJvHVBwrWZU86h8hkoHCAUfWLKZNDsJAMPhlIf
+ t5xBvPPPy2hXecXdMZwMW0Eh2HfiqedL9MvEJ3wBQQLfYKxCv7EEwTlLaY8LnWoIupENJR9QFNt
+ TOVpCvLjYIoU4jVdw9U6VY5c/yaSRdtbvR9Pi9yOGkZGnoqpvJJ1K6sR7ARVQoxE/ZUJYY4oxSF
+ qnpTrPqh3Z9RS14SywnEd0fgt9EoRuA2gN2E2TOtdWxzCFnpduQz3VMn4IyMjmZW+h7ryBS74mQ
+ Bw3PP+FBnKXSN51c6X2mScQ1C1OLuPNDCsy5uqmqhtlY2AbGTegS57WA17VqKMvtTQyy0KzAdi4
+ WeiLkHyu64li5J8JNBuiGXpD1f
+X-Google-Smtp-Source: AGHT+IHS/RMc69BVCD6bp1M0nbSQyJWh566RJIDZ/yu03HpcF67Q24QNvpak3hQpCQWJnn7fglIOKA==
+X-Received: by 2002:ac8:6f0e:0:b0:4ed:1cf:1335 with SMTP id
+ d75a77b69052e-4ed07510f57mr19613951cf.36.1761598597778; 
+ Mon, 27 Oct 2025 13:56:37 -0700 (PDT)
+Received: from dell-xps-15-9500.lan ([2601:18c:8002:3d40:7967:4a6b:db27:675b])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-89f254a41cdsm670154085a.29.2025.10.27.13.56.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Oct 2025 13:56:36 -0700 (PDT)
+From: Ben Wolsieffer <ben.wolsieffer@hefring.com>
+To: u-boot@lists.denx.de
+Cc: Anatolij Gustschin <ag.dev.uboot@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Ben Wolsieffer <ben.wolsieffer@hefring.com>
+Subject: [PATCH] efi: video: fix mode info in payload mode
+Date: Mon, 27 Oct 2025 16:56:27 -0400
+Message-ID: <20251027205627.3742502-1-ben.wolsieffer@hefring.com>
+X-Mailer: git-send-email 2.51.1
 MIME-Version: 1.0
-References: <20251027-rockchip-more-template-v1-0-430672840303@cherry.de>
-In-Reply-To: <20251027-rockchip-more-template-v1-0-430672840303@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 27 Oct 2025 20:04:12 +0000
-X-Gm-Features: AWmQ_bldftDPSJk0izdpScgXumtGOgk4kERHBxufUE0bFGni3oAw_I0VrRg4uK0
-Message-ID: <CAFLszTiBfrrQbFNbOASodKA63D2bGG4O4HU4_B2mcjWvkHZTSg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] rockchip: more templating for binman and switch SPI
- image to rksd by default
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Johan Jonker <jbx6244@gmail.com>,
- Sumit Garg <sumit.garg@kernel.org>, 
- Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@cherry.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,70 +98,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Currently, the EFI framebuffer is non-functional in payload mode. It
+always reports: "No video mode configured in EFI!"
 
-On Mon, 27 Oct 2025 at 16:51, Quentin Schulz <foss+uboot@0leil.net> wrote:
->
-> The images to flash on SPI and MMC boot media are very similar and
-> binman templating engine allows to override properties after inserting
-> the template, so let's do that to template the whole boot image instead
-> of simply the FIT.
->
-> While at it, swap the default format for the SPI image from rkspi to
-> rksd. This patch should no change any behavior, just that the new SoCs
-> are expected to use rksd if unspecified instead of rkspi which is
-> assumed required only on some SoCs (like RK3399) due to some BootROM
-> bug/quirk.
->
-> Finally, a small cleanup of rk3288-tinker-s including twice the same
-> file.
->
-> Note that I'm planning on adding support for image signature to
-> rockchip-u-boot.dtsi in the next few days/weeks, which is the reason why
-> I'm doing this now as I've had to duplicate the work for the inclusion
-> of the pubkey in the SPL for the SPI and MMC images for no real reason.
->
-> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> ---
-> Quentin Schulz (3):
->       rockchip: binman: template all of simple-bin
->       rockchip: make rksd the default format for SPI images
->       rockchip: rk3288-tinker-s: remove duplicate include
+This is caused by a copy-paste error that replaced
+"struct efi_entry_gopmode" with "struct efi_gop_mode".
 
-Good to see this improvement!
+Fix the type and add a cast to avoid a warning because the "info" field
+is declared as an anonymous struct rather than
+"struct efi_gop_mode_info" (see the comment in efi.h).
 
-Do you think the VBE series might get another look at some point?
+Fixes: 88753816cf54 ("efi: video: Move payload code into a function")
+Signed-off-by: Ben Wolsieffer <ben.wolsieffer@hefring.com>
+---
+ drivers/video/efi.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
->
->  arch/arm/dts/px30-u-boot.dtsi              |  12 ++
->  arch/arm/dts/rk3036-u-boot.dtsi            |  13 ++
->  arch/arm/dts/rk3066a-u-boot.dtsi           |  12 ++
->  arch/arm/dts/rk3128-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk3188-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk322x-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk3288-tinker-s-u-boot.dtsi   |   1 -
->  arch/arm/dts/rk3288-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk3308-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi |  12 ++
->  arch/arm/dts/rk3328-u-boot.dtsi            |   1 -
->  arch/arm/dts/rk3368-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk3399-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk3528-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk356x-u-boot.dtsi            |   1 -
->  arch/arm/dts/rk3576-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rk3588s-u-boot.dtsi           |   1 -
->  arch/arm/dts/rockchip-u-boot.dtsi          | 283 ++++++++++++++---------------
->  arch/arm/dts/rv1108-u-boot.dtsi            |  12 ++
->  arch/arm/dts/rv1126-u-boot.dtsi            |  12 ++
->  20 files changed, 320 insertions(+), 148 deletions(-)
-> ---
-> base-commit: 9094482ca7576877b2bfaa57c8e73cfeb536f8b9
-> change-id: 20251027-rockchip-more-template-86af536f7e86
->
-> Best regards,
-> --
-> Quentin Schulz <quentin.schulz@cherry.de>
->
+diff --git a/drivers/video/efi.c b/drivers/video/efi.c
+index 78d123fad4be..60df4334f1ed 100644
+--- a/drivers/video/efi.c
++++ b/drivers/video/efi.c
+@@ -104,7 +104,7 @@ static int get_mode_info(struct vesa_mode_info *vesa, u64 *fbp,
+ static int get_mode_from_entry(struct vesa_mode_info *vesa, u64 *fbp,
+ 			       struct efi_gop_mode_info **infop)
+ {
+-	struct efi_gop_mode *mode;
++	struct efi_entry_gopmode *mode;
+ 	int size;
+ 	int ret;
+ 
+@@ -117,7 +117,7 @@ static int get_mode_from_entry(struct vesa_mode_info *vesa, u64 *fbp,
+ 	*fbp = mode->fb_base;
+ 	vesa->x_resolution = mode->info->width;
+ 	vesa->y_resolution = mode->info->height;
+-	*infop = mode->info;
++	*infop = (struct efi_gop_mode_info *)mode->info;
+ 
+ 	return 0;
+ }
+-- 
+2.51.1
 
-Regards,
-Simon
