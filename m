@@ -4,75 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4177CCF9EB
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 17:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12C38CCF9EB
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 17:22:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17BB183923;
-	Mon, 27 Oct 2025 18:22:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C3B28391E;
+	Mon, 27 Oct 2025 18:22:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="th2rQy6A";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sS/o6qrg";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Ip4JNL+S";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="GQ+E+6oF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6251A839AD; Mon, 27 Oct 2025 18:22:32 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id DEFA9839E4; Mon, 27 Oct 2025 18:22:34 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED50E8384E
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 18:22:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C42B8384E
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 18:22:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cwL114jnBz9tkP;
- Mon, 27 Oct 2025 18:22:29 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4cwL142Mzyz9spD;
+ Mon, 27 Oct 2025 18:22:32 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761585749;
+ s=mail20150812; t=1761585752;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Dm3/ABUXOJaZnqm18yS3lpCW76djpXs90oz9j0Bqcz4=;
- b=th2rQy6A6lUcRLBXFeSQwx8l+Ad1j77cXW7lfzdCvhNUpXha/7dCzmxUDIaRqMR38cmKQa
- K/tuNI4zVF0Tpxe579tI6QideMnnMrrlz8laMbewnwU8O0zU2yo7NJVTKPITgyUmT3kR6r
- qJ/bsgSoMepaIN1f59rUTgJGmdtqJOX0I5aA1mRV5XyxEe3TuV6Ybs2zJhEbIR+yJj+U9Y
- fNbaOiCjh+sd3uETX3o3LJcwLElULL+QS15oKUKQeN0jm02R4FHVPjm4x30saxCaacAnNv
- KmMlGNSPn4ijf2b9mXjpOm2NaWX/9LIElSkb43dfwY3fEi1ymeEvyIi2uZvvZw==
+ bh=u5a74Ybssx6k+twOw4eBjoQNC1xvDD0jK11iyGuI9WE=;
+ b=Ip4JNL+S4HHYOz9mZXAa/GBKwF00SVxP8fc+sqs1/gdsGYxCA7qieBMyM/N5lD4s7iO+RS
+ uSqRmAxUMlmdhL8RQLdypzd1ZzXRceCDFuszY8p2RgkAg/0awes7Qg5Pnz0/Wxy7iTQCxX
+ VkN5MFaeF0s/XktK2sneXgbBYfKTP/hShb1yXzVW/jvlt76/o4Kc0o/YZdROagWFaaA45G
+ yLbUFvvorUvSgy+Pop+Sk24x3BMOrA3zHqO3gc5tulYLawCsxR3P3GXu2bqobju+RmRvo5
+ 0KcUt8joiNTWjqUutxeOYK8OiVc138hGbSez4T5y8cZnnpqactxdaVTUr2a6rw==
+Authentication-Results: outgoing_mbo_mout;
+ dkim=pass header.d=mailbox.org header.s=mail20150812 header.b=GQ+E+6oF;
+ spf=pass (outgoing_mbo_mout: domain of marek.vasut+renesas@mailbox.org
+ designates 2001:67c:2050:b231:465::2 as permitted sender)
+ smtp.mailfrom=marek.vasut+renesas@mailbox.org
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761585747;
+ s=mail20150812; t=1761585750;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Dm3/ABUXOJaZnqm18yS3lpCW76djpXs90oz9j0Bqcz4=;
- b=sS/o6qrgCIOin5T+6595EKPMYZBK6KfVa2snFPewAKfgyq2srefeGdTABCPY3SfUkGqX15
- nyReCCiUAqJxO58ojdImwXpWaHNyrQxa3oe4A0gTvfXCNymuVmW7ObTuK48kpvhtjUTolk
- oSZAw5iT5pENkgGowSwzUHEVze32otq8GnAKdNtxCFeD6jszL3a9+Getu7kr5+S/yVwR85
- GG7J+bHIRU1Aq8hJ1vS76tb3yKebYyIkCOcDxBFUDnDTh7IFpTXmHPOsa8hwyTJA+XG44O
- s6NqVGWZ31s12uELeN86iRwsf19nVvABLl8eJfGlXjDAm1iQl9GPpS2cL/I1tQ==
+ bh=u5a74Ybssx6k+twOw4eBjoQNC1xvDD0jK11iyGuI9WE=;
+ b=GQ+E+6oFueLDn7Q6hnZ7N8rlmNjf8j8IG2hMBERXRRWkbwmWFzSMdyt+x4h6R4ASZmUUDR
+ sq38pPKpXdRc5fzMaPnbo2M8N7xzQllkzyETL1yVFCw+7yG7LhWvDGBi5QPJziWtJ8BNOh
+ jdOnCoVMu9k4jZlgFdtcKyVS6Ohm5v6YmZiAytILiMFPiUfpKZSAXAuQaaRf0JXRBgfYKm
+ pR6CtXtMG7oTzNH7Pt2KnbxNAJ6NbViEuQoPKGyz+koC4tvsc/5uQSIoW+UL2HHBFrwIJ1
+ +KO1ax+DOI+aY1MDLsiverGmhjM0Ukw8btaYA0W0b95hC86qeIOVgLpPMTM7HQ==
 To: u-boot@lists.denx.de
-Cc: Hai Pham <hai.pham.ud@renesas.com>, Khanh Le <khanh.le.xr@renesas.com>,
+Cc: Hai Pham <hai.pham.ud@renesas.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Khanh Le <khanh.le.xr@renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] arm64: dts: renesas: Add Renesas R-Car X5H R8A78000 SoC
- DTs
-Date: Mon, 27 Oct 2025 18:21:15 +0100
-Message-ID: <20251027172219.30437-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/3] arm64: dts: renesas: Add Renesas R-Car X5H R8A78000
+ Ironhide board code
+Date: Mon, 27 Oct 2025 18:21:16 +0100
+Message-ID: <20251027172219.30437-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20251027172219.30437-1-marek.vasut+renesas@mailbox.org>
 References: <20251027172219.30437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: ba2b516bdac2f5e7caf
-X-MBO-RS-META: m4cz319of5xrdftd3jby71wuqyejpf3n
+X-MBO-RS-META: zzzptane4yoyrub1xkqpj9cbf5pxfudm
+X-MBO-RS-ID: 15f53ae2fd0e7d92353
+X-Rspamd-Queue-Id: 4cwL142Mzyz9spD
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,27 +99,35 @@ X-Virus-Status: Clean
 
 From: Hai Pham <hai.pham.ud@renesas.com>
 
-Add initial device trees for Renesas R-Car X5H R8A78000 SoC.
-Include very basic clock, reset, power domain headers which
-are used to control supported peripherals via SCMI / SCP. The
-headers are currently kept limited to avoid possible ABI break.
-A lot of clock are still stubbed via fixed-clock, this is going
-to be gradually removed over time, as more of the platform is
-upstreamed.
+Add initial support for Renesas R-Car X5H R8A78000 Ironhide board.
+This consists mainly of DTs, Makefile and Kconfig entries and board
+specific configuration files.
+
+The DTs will be gradually switched over to Linux DTs via OF_UPSTREAM
+once Linux DTs become available upstream, as upstreaming progresses.
 
 Signed-off-by: Hai Pham <hai.pham.ud@renesas.com>
-Signed-off-by: Khanh Le <khanh.le.xr@renesas.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-[ Marek: - Fill bootph, tags directly into arch/arm/dts/r8a78000-u-boot.dtsi
-           as a replacement for removed r8a779x-rcar64-u-boot.dtsi
-	 - Squash multiple r8a78000.dtsi commits until downstream
-	   v2025.01/rcar-7.0.0.rc6 arm64: dts: renesas: r8a78000: enable module reset
-	 - Introduce clk_stub_* to stub clock which are still missing,
-	   but required by GPIO, I2C and other drivers
-	 - Combined with reduced versions of ID headers from commits
-	   dt-bindings: power: Add R8A78000 power domain definitions
-	   dt-bindings: clock: Add R8A78000 clock definitions
-	   dt-bindings: clock: Add R8A78000 reset definitions]
+[Marek: - Squash from multiple follow up patches
+            e61f76780bd arm64: renesas: gen5-common: Allow WDT reset
+            67392382d42 arm64: dts: ironhide: Add serial console pin control
+            920b40e3d6a arm64: dts: renesas: ironhide: Add I2C0, I2C1 and EEPROM
+            2e2f6908ced configs: ironhide: Enable Ethernet 1G support for R-Car X5H
+            711fc1a52d0 arm64: dts: renesas: ironhide: Enable Multi-Protocol PHY
+            a70d4bd5f28 arm64: dts: renesas: ironhide: Enable Ethernet PCS
+            debfd04ebae arm64: dts: renesas: ironhide: Add Ethernet support
+            a1dcc766248 arm64: dts: renesas: ironhide: Disable ethernet0 alias
+            274afce0a6b configs: ironhide: Enable Baremetal clk and module controllers
+            3590706e984 configs: ironhide: Downgrade SD/MMC from UHS/HS200
+            9d9fcb3b174 arm64: dts: renesas: ironhide: Add eMMC support
+            15a7fbb4b2f configs: ironhide: Store environment in MMC
+            d54eae75ce7 arm64: dts: renesas: ironhide: Describe the UFS
+            01f386c7322 configs: ironhide: Enable UFS support for R-Car X5H
+            ab290042e4c configs: ironhide: Switch to SCMI for clock & power control
+            84ff13909ef configs: ironhide: Update Linux boot address of CONFIG_BOOTCOMMAND
+            6b92ce7cb48 configs: ironhide: Update CONFIG_SYS_LOAD_ADDR to 0x9E600000
+            46ce3591a73 configs: ironhide: add module reset
+        - Fix up ENV_MMC_EMMC_HW_PARTITION rename
 ---
 Cc: Hai Pham <hai.pham.ud@renesas.com>
 Cc: Khanh Le <khanh.le.xr@renesas.com>
@@ -121,778 +137,588 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- arch/arm/dts/r8a78000-u-boot.dtsi             | 139 +++++
- arch/arm/dts/r8a78000.dtsi                    | 489 ++++++++++++++++++
- .../dt-bindings/clock/r8a78000-scmi-clock.h   |  44 ++
- .../dt-bindings/clock/r8a78000-scmi-reset.h   |  31 ++
- .../dt-bindings/power/r8a78000-scmi-power.h   |  27 +
- 5 files changed, 730 insertions(+)
- create mode 100644 arch/arm/dts/r8a78000-u-boot.dtsi
- create mode 100644 arch/arm/dts/r8a78000.dtsi
- create mode 100644 include/dt-bindings/clock/r8a78000-scmi-clock.h
- create mode 100644 include/dt-bindings/clock/r8a78000-scmi-reset.h
- create mode 100644 include/dt-bindings/power/r8a78000-scmi-power.h
+ arch/arm/dts/Makefile                      |   7 +
+ arch/arm/dts/r8a78000-ironhide-u-boot.dtsi |   8 +
+ arch/arm/dts/r8a78000-ironhide.dts         | 258 +++++++++++++++++++++
+ arch/arm/mach-renesas/Kconfig.rcar5        |  14 ++
+ board/renesas/common/Makefile              |   4 +
+ board/renesas/common/gen5-common.c         |  75 ++++++
+ board/renesas/ironhide/Kconfig             |  15 ++
+ configs/r8a78000_ironhide_defconfig        |  43 ++++
+ configs/renesas_rcar5.config               |  23 ++
+ include/configs/ironhide.h                 |  11 +
+ include/configs/rcar-gen5-common.h         |  24 ++
+ 11 files changed, 482 insertions(+)
+ create mode 100644 arch/arm/dts/r8a78000-ironhide-u-boot.dtsi
+ create mode 100644 arch/arm/dts/r8a78000-ironhide.dts
+ create mode 100644 board/renesas/common/gen5-common.c
+ create mode 100644 board/renesas/ironhide/Kconfig
+ create mode 100644 configs/r8a78000_ironhide_defconfig
+ create mode 100644 configs/renesas_rcar5.config
+ create mode 100644 include/configs/ironhide.h
+ create mode 100644 include/configs/rcar-gen5-common.h
 
-diff --git a/arch/arm/dts/r8a78000-u-boot.dtsi b/arch/arm/dts/r8a78000-u-boot.dtsi
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index b329e04be9a..c4175cc88e3 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -922,6 +922,13 @@ dtb-$(CONFIG_RZA1) += \
+ 	r7s72100-genmai.dtb \
+ 	r7s72100-gr-peach.dtb
+ 
++dtb-$(CONFIG_RCAR_GEN5) += \
++	r8a78000-ironhide.dtb
++
++ifdef CONFIG_RCAR_GEN5
++DTC_FLAGS += -R 4 -p 0x1000
++endif
++
+ dtb-$(CONFIG_TARGET_AT91SAM9261EK) += at91sam9261ek.dtb
+ 
+ dtb-$(CONFIG_TARGET_PM9261) += at91sam9261ek.dtb
+diff --git a/arch/arm/dts/r8a78000-ironhide-u-boot.dtsi b/arch/arm/dts/r8a78000-ironhide-u-boot.dtsi
 new file mode 100644
-index 00000000000..1bc73252430
+index 00000000000..9c72f3e55f4
 --- /dev/null
-+++ b/arch/arm/dts/r8a78000-u-boot.dtsi
-@@ -0,0 +1,139 @@
++++ b/arch/arm/dts/r8a78000-ironhide-u-boot.dtsi
+@@ -0,0 +1,8 @@
 +// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +/*
-+ * Device Tree Source extras for U-Boot on R-Car R8A78000 SoC
++ * Device Tree Source extras for U-Boot for the Ironhide board
 + *
 + * Copyright (C) 2025 Renesas Electronics Corp.
 + */
 +
++#include "r8a78000-u-boot.dtsi"
+diff --git a/arch/arm/dts/r8a78000-ironhide.dts b/arch/arm/dts/r8a78000-ironhide.dts
+new file mode 100644
+index 00000000000..a8777999a4b
+--- /dev/null
++++ b/arch/arm/dts/r8a78000-ironhide.dts
+@@ -0,0 +1,258 @@
++// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++/*
++ * Device Tree Source for the Ironhide board
++ *
++ * Copyright (C) 2025 Renesas Electronics Corp.
++ */
++
++/dts-v1/;
++#include "r8a78000.dtsi"
++#include <dt-bindings/net/ti-dp83869.h>
++
 +/ {
-+	soc {
-+		bootph-all;
++	model = "Renesas Ironhide board based on r8a78000";
++	compatible = "renesas,ironhide", "renesas,r8a78000";
++
++	aliases {
++		i2c0 = &i2c0;
++		i2c1 = &i2c1;
++		i2c2 = &i2c2;
++		i2c3 = &i2c3;
++		i2c4 = &i2c4;
++		i2c5 = &i2c5;
++		i2c6 = &i2c6;
++		i2c7 = &i2c7;
++		i2c8 = &i2c8;
++		mmc0 = &mmc0;
++		serial0 = &hscif0;
 +	};
 +
-+	/* Placeholder clock until the clock provider is in place */
-+	clk_stub_gpio: clk-stub-gpio {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <1000000>;
++	chosen {
++		bootargs = "ignore_loglevel rw root=/dev/nfs ip=on";
++		stdout-path = "serial0:1843200n8";
 +	};
 +
-+	clk_stub_i2c0: clk-stub-i2c0 {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <150000000>;
++	memory@40000000 {
++		device_type = "memory";
++		reg = <0x0 0x40000000 0x0 0x80000000>;
 +	};
 +
-+	clk_stub_i2c1: clk-stub-i2c1 {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <133333333>;
++	memory@1080000000 {
++		device_type = "memory";
++		reg = <0x10 0x80000000 0x0 0x80000000>;
 +	};
 +
-+	clk_stub_mmc: clk-stub-mmc {
-+		compatible = "renesas,compound-clock";
-+		#clock-cells = <0>;
-+		clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_SDHI0>,
-+			 <&scmi_clk 1691>;
-+		clock-names = "mdlc", "per";
++	memory@1200000000 {
++		device_type = "memory";
++		reg = <0x12 0x00000000 0x1 0x00000000>;
 +	};
-+};
 +
-+&cpg {
-+	bootph-all;
++	memory@1400000000 {
++		device_type = "memory";
++		reg = <0x14 0x00000000 0x1 0x00000000>;
++	};
++
++	memory@1600000000 {
++		device_type = "memory";
++		reg = <0x16 0x00000000 0x1 0x00000000>;
++	};
++
++	memory@1800000000 {
++		device_type = "memory";
++		reg = <0x18 0x00000000 0x1 0x00000000>;
++	};
++
++	memory@1a00000000 {
++		device_type = "memory";
++		reg = <0x1a 0x00000000 0x1 0x00000000>;
++	};
++
++	memory@1c00000000 {
++		device_type = "memory";
++		reg = <0x1c 0x00000000 0x1 0x00000000>;
++	};
++
++	memory@1e00000000 {
++		device_type = "memory";
++		reg = <0x1e 0x00000000 0x1 0x00000000>;
++	};
++
++	reg_1p8v: regulator-1p8v {
++		compatible = "regulator-fixed";
++		regulator-name = "fixed-1.8V";
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
++
++	reg_3p3v: regulator-3p3v {
++		compatible = "regulator-fixed";
++		regulator-name = "fixed-3.3V";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		regulator-boot-on;
++		regulator-always-on;
++	};
 +};
 +
 +&extal_clk {
-+	bootph-all;
++	clock-frequency = <16666666>;
 +};
 +
 +&extalr_clk {
-+	bootph-all;
++	clock-frequency = <32768>;
 +};
 +
-+&gpio0 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio1 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio2 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio3 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio4 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio5 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio6 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio7 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio8 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio9 {
-+	clocks = <&clk_stub_gpio>;
-+};
-+
-+&gpio10 {
-+	clocks = <&clk_stub_gpio>;
++&hscif0 {
++	pinctrl-0 = <&hscif0_pins>;
++	pinctrl-names = "default";
++	uart-has-rtscts;
++	status = "okay";
 +};
 +
 +&i2c0 {
-+	clocks = <&clk_stub_i2c0>;
++	pinctrl-0 = <&i2c0_pins>;
++	pinctrl-names = "default";
++	clock-frequency = <400000>;
++	status = "okay";
++
++	eeprom@50 {
++		compatible = "rohm,br24g01", "atmel,24c01";
++		reg = <0x50>;
++		pagesize = <8>;
++	};
 +};
 +
 +&i2c1 {
-+	clocks = <&clk_stub_i2c1>;
++	pinctrl-0 = <&i2c1_pins>;
++	pinctrl-names = "default";
++	clock-frequency = <400000>;
++	status = "okay";
 +};
 +
-+&i2c2 {
-+	clocks = <&clk_stub_i2c1>;
-+};
-+
-+&i2c3 {
-+	clocks = <&clk_stub_i2c1>;
-+};
-+
-+&i2c4 {
-+	clocks = <&clk_stub_i2c1>;
-+};
-+
-+&i2c5 {
-+	clocks = <&clk_stub_i2c1>;
-+};
-+
-+&i2c6 {
-+	clocks = <&clk_stub_i2c1>;
-+};
-+
-+&i2c7 {
-+	clocks = <&clk_stub_i2c1>;
-+};
-+
-+&i2c8 {
-+	clocks = <&clk_stub_i2c1>;
++&eth_pcs {
++	phys = <&mp_phy 2 1>;
++	status = "okay";
 +};
 +
 +&mmc0 {
-+	clocks = <&clk_stub_mmc>;
++	pinctrl-0 = <&mmc0_pins>;
++	pinctrl-1 = <&mmc0_pins>;
++	pinctrl-names = "default", "state_uhs";
++
++	bus-width = <8>;
++	full-pwr-cycle-in-suspend;
++	mmc-hs200-1_8v;
++	mmc-hs400-1_8v;
++	no-sd;
++	no-sdio;
++	non-removable;
++
++	vmmc-supply = <&reg_3p3v>;
++	vqmmc-supply = <&reg_1p8v>;
++
++	status = "okay";
 +};
 +
-+&prr {
-+	bootph-all;
++&ufs0 {
++	status = "okay";
 +};
-diff --git a/arch/arm/dts/r8a78000.dtsi b/arch/arm/dts/r8a78000.dtsi
-new file mode 100644
-index 00000000000..009b1524c26
---- /dev/null
-+++ b/arch/arm/dts/r8a78000.dtsi
-@@ -0,0 +1,489 @@
-+// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+/*
-+ * Device Tree Source for the R-Car X5H (R8A78000) SoC
-+ *
-+ * Copyright (C) 2025 Renesas Electronics Corp.
-+ */
 +
-+#include <dt-bindings/clock/r8a78000-scmi-clock.h>
-+#include <dt-bindings/clock/r8a78000-scmi-reset.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/power/r8a78000-scmi-power.h>
++&ufs1 {
++	status = "okay";
++};
 +
-+/ {
-+	compatible = "renesas,r8a78000";
-+	#address-cells = <2>;
-+	#size-cells = <2>;
++&mp_phy {
++	status = "okay";
++};
 +
-+	cpus {
++&pfc {
++	pinctrl-0 = <&scif_clk_pins>;
++	pinctrl-names = "default";
++
++	eth25g2_pins: eth25g2 {
++		groups = "eth25g2_mdio", "eth25g2_link", "eth25g2_phyint";
++		function = "eth25g2";
++		drive-strength = <24>;
++	};
++
++	ethes0_pins: ethes0 {
++		groups = "ethes0_match", "ethes0_capture", "ethes0_pps";
++		function = "ethes0";
++		drive-strength = <24>;
++	};
++
++	hscif0_pins: hscif0 {
++		groups = "hscif0_data", "hscif0_ctrl";
++		function = "hscif0";
++	};
++
++	i2c0_pins: i2c0 {
++		groups = "i2c0";
++		function = "i2c0";
++	};
++
++	i2c1_pins: i2c1 {
++		groups = "i2c1";
++		function = "i2c1";
++	};
++
++	mmc0_pins: mmc0 {
++		groups = "mmc0_data8", "mmc0_ctrl", "mmc0_ds";
++		function = "mmc0";
++		drive-strength = <24>;
++	};
++
++	rsw3_pins: rsw3 {
++		groups = "rsw3_match", "rsw3_capture", "rsw3_pps";
++		function = "rsw3";
++		drive-strength = <24>;
++	};
++
++	scif_clk_pins: scif-clk {
++		groups = "scif_clk";
++		function = "scif_clk";
++	};
++};
++
++&rswitch3 {
++	pinctrl-0 = <&rsw3_pins>, <&eth25g2_pins>, <&ethes0_pins>;
++	pinctrl-names = "default";
++	status = "okay";
++
++	ethernet-ports {
 +		#address-cells = <1>;
 +		#size-cells = <0>;
 +
-+		a720_0: cpu@0 {
-+			compatible = "arm,cortex-a720";
-+			reg = <0>;
-+			device_type = "cpu";
-+			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_AC00>;
-+			next-level-cache = <&L3_CA720_0>;
-+			enable-method = "psci";
-+		};
++		/*
++		 * NOTE: Only port@4 is configured for R-Car X5H board.
++		 * Other ports (0-3, 5-12) are currently unused or not
++		 * connected.
++		 */
++		port@4 {
++			reg = <4>;
++			renesas,connect_to_xpcs;
++			phy-handle = <&dp83869_phy>;
++			phy-mode = "sgmii";
++			phys = <&eth_pcs 5>;
 +
-+		L3_CA720_0: cache-controller-0 {
-+			compatible = "cache";
-+			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_ACL0>;
-+			cache-unified;
-+			cache-level = <3>;
-+		};
-+	};
++			mdio {
++				#address-cells = <1>;
++				#size-cells = <0>;
 +
-+	extal_clk: extal {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		/* This value must be overridden by the board */
-+		clock-frequency = <0>;
-+	};
-+
-+	extalr_clk: extalr {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		/* This value must be overridden by the board */
-+		clock-frequency = <0>;
-+	};
-+
-+	firmware {
-+		scmi {
-+			compatible = "arm,scmi";
-+			mbox-names = "tx","rx";
-+			mboxes = <&mailbox 0 &mailbox 1>;
-+			shmem = <&cpu_scp_lpri0 &cpu_scp_hpri0>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			scmi_devpd: protocol@11 {
-+				reg = <0x11>;
-+				#power-domain-cells = <1>;
++				dp83869_phy: ethernet-phy@2 {
++					reg = <2>;
++					ti,sgmii-interface;
++					ti,max-output-impedance;
++					ti,refclk-output-enable;
++					ti,clk-output-sel = <DP83869_CLK_O_SEL_REF_CLK>;
++				};
 +			};
-+
-+			scmi_clk: protocol@14 {
-+				reg = <0x14>;
-+				#clock-cells = <1>;
-+			};
-+
-+			scmi_reset: protocol@16 {
-+				reg = <0x16>;
-+				#reset-cells = <1>;
-+			};
-+		};
-+	};
-+
-+	pmu_a720 {
-+		compatible = "arm,cortex-a720-pmu";
-+	};
-+
-+	psci {
-+		compatible = "arm,psci-1.0", "arm,psci-0.2";
-+		method = "smc";
-+	};
-+
-+	timer {
-+		compatible = "arm,armv8-timer";
-+	};
-+
-+	/* In the early phase, there is no clock control support,
-+	 * so assume that the clocks are enabled by default.
-+	 * Therefore, dummy clocks are used.
-+	 */
-+	dummy_clk_sgasyncd4: dummy_clk_sgasyncd4 {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <266666666>;
-+	};
-+
-+	/* External SCIF clock - to be overridden by boards that provide it */
-+	scif_clk: scif {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <0>;
-+	};
-+
-+	mmc_ref_clk: mmc_ref_clk {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <52000000>;
-+		clock-output-names = "mmc";
-+	};
-+
-+	soc: soc {
-+		compatible = "simple-bus";
-+		interrupt-parent = <&gic>;
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		mailbox: mfis_mbox@18842000 {
-+			compatible = "renesas,mfis-mbox";
-+			#mbox-cells = <1>;
-+			reg = <0x0 0x18842004 0x0 0x4>,
-+			      <0x0 0x18842000 0x0 0x4>;
-+			status = "okay";
-+		};
-+
-+		prr: chipid@189e0044 {
-+			compatible = "renesas,prr";
-+			reg = <0 0x189e0044 0 4>;
-+		};
-+
-+		gic: interrupt-controller@38000000 {
-+			compatible = "arm,gic-v3";
-+			#interrupt-cells = <3>;
-+			#address-cells = <0>;
-+			interrupt-controller;
-+			reg = <0x0 0x38000000 0 0x20000>,
-+			      <0x0 0x38080000 0 0xC80000>;
-+		};
-+
-+		pfc: pinctrl@c0400000 {
-+			compatible = "renesas,pfc-r8a78000";
-+			reg = <0 0xc1080000 0 0x104>, <0 0xc1080800 0 0x104>,
-+			<0 0xc1081000 0 0x104>, <0 0xc0800000 0 0x104>,
-+			<0 0xc0800800 0 0x104>, <0 0xc0400000 0 0x104>,
-+			<0 0xc0400800 0 0x104>, <0 0xc0401000 0 0x104>,
-+			<0 0xc0401800 0 0x104>, <0 0xc9b00000 0 0x104>,
-+			<0 0xc9b00800 0 0x104>;
-+		};
-+
-+		mmc0: mmc@c0880000 {
-+			compatible = "renesas,rcar-gen5-sdhi";
-+			reg = <0 0xc0880000 0 0x2000>;
-+			clock-names = "core";
-+			max-frequency = <200000000>;
-+			status = "disabled";
-+		};
-+
-+		ufs0: ufs@c0a80000 {
-+			compatible = "renesas,r8a78000-ufs";
-+			reg = <0 0xc0a80000 0 0x1100>, <0 0xc0a00000 0 0x40000>;
-+			reg-names = "hcr", "phy";
-+			interrupts = <GIC_SPI 4284 IRQ_TYPE_LEVEL_HIGH>;
-+			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_UFS0>;
-+			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_UFS0>;
-+			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_UFS0>;
-+			freq-table-hz = <38400000 38400000>;
-+			status = "disabled";
-+		};
-+
-+		ufs1: ufs@c0a90000 {
-+			compatible = "renesas,r8a78000-ufs";
-+			reg = <0 0xc0a90000 0 0x1100>, <0 0xc0a40000 0 0x40000>;
-+			reg-names = "hcr", "phy";
-+			interrupts = <GIC_SPI 4285 IRQ_TYPE_LEVEL_HIGH>;
-+			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_UFS1>;
-+			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_UFS1>;
-+			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_UFS1>;
-+			freq-table-hz = <38400000 38400000>;
-+			status = "disabled";
-+		};
-+
-+		sram: sram@c1000000 {
-+			compatible = "arm,rcar-sram-ns", "mmio-sram";
-+			reg = <0x0 0xc1000000 0x0 0x80000>;
-+
-+			#address-cells = <1>;
-+			#size-cells = <1>;
-+			ranges = <0 0x0 0xc1000000 0x80000>;
-+
-+			cpu_scp_lpri0: scp-shmem@60000 {
-+				compatible = "arm,rcar-scp-shmem", "arm,scmi-shmem";
-+				reg = <0x61200 0x0100>;
-+			};
-+
-+			cpu_scp_hpri0: scp-shmem@60300 {
-+				compatible = "arm,rcar-scp-shmem", "arm,scmi-shmem";
-+				reg = <0x61300 0x100>;
-+			};
-+		};
-+
-+		cpg: clock-controller@c64f0000 {
-+			compatible = "renesas,r8a78000-cpg-mssr";
-+			reg = <0 0xc64f0000 0 0x4000>;
-+			clocks = <&extal_clk>, <&extalr_clk>;
-+			clock-names = "extal", "extalr";
-+			#clock-cells = <2>;
-+			#power-domain-cells = <0>;
-+			#reset-cells = <1>;
-+		};
-+
-+		hscif0: serial@c0710000 {
-+			compatible = "renesas,rcar-gen5-hscif", "renesas,hscif";
-+			reg = <0 0xc0710000 0 0x60>;
-+			clocks = <&dummy_clk_sgasyncd4>, <&dummy_clk_sgasyncd4>, <&scif_clk>;
-+			clock-names = "fck", "brg_int", "scif_clk";
-+			status = "disabled";
-+		};
-+
-+		i2c0: i2c@c11d0000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc11d0000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c1: i2c@c06c0000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06c0000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c2: i2c@c06c8000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06c8000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c3: i2c@c06d0000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06d0000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c4: i2c@c06d8000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06d8000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c5: i2c@c06e0000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06e0000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c6: i2c@c06e8000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06e8000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c7: i2c@c06f0000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06f0000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		i2c8: i2c@c06f8000 {
-+			compatible = "renesas,i2c-r8a78000",
-+				     "renesas,rcar-gen5-i2c";
-+			reg = <0 0xc06f8000 0 0x40>;
-+			i2c-scl-internal-delay-ns = <110>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			status = "disabled";
-+		};
-+
-+		gpio0: gpio@c1080110 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc1080110 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 0 28>;
-+		};
-+
-+		gpio1: gpio@c1080910 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc1080910 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 32 22>;
-+		};
-+
-+		gpio2: gpio@c1081110 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc1081110 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 64 29>;
-+		};
-+
-+		gpio3: gpio@c0800110 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc0800110 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 96 17>;
-+		};
-+
-+		gpio4: gpio@c0800910 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc0800910 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 128 16>;
-+		};
-+
-+		gpio5: gpio@c0400110 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc0400110 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 160 23>;
-+		};
-+
-+		gpio6: gpio@c0400910 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc0400910 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 192 31>;
-+		};
-+
-+		gpio7: gpio@c0401110 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc0401110 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 224 31>;
-+		};
-+
-+		gpio8: gpio@c0401910 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc0401910 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 256 32>;
-+			gpio-reserved-ranges = <16 10>;
-+		};
-+
-+		gpio9: gpio@c9b00110 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc9b00110 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 288 17>;
-+		};
-+
-+		gpio10: gpio@c9b00910 {
-+			compatible = "renesas,gpio-r8a78000",
-+				     "renesas,rcar-gen5-gpio";
-+			reg = <0 0xc9b00910 0 0xc0>;
-+			#gpio-cells = <2>;
-+			gpio-controller;
-+			gpio-ranges = <&pfc 0 320 14>;
-+		};
-+
-+		mp_phy: mp_phy@c9a00000 {
-+			compatible = "renesas,r8a78000-multi-protocol-phy";
-+			reg = <0 0xc9a00000 0 0x100000>;
-+			#phy-cells = <2>;
-+			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY01>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY11>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY21>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY31>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_MPPHY02>;
-+			clock-names = "mpphy01", "mpphy11", "mpphy21",
-+				      "mpphy31", "mpphy02";
-+			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_MPP0>,
-+					<&scmi_devpd X5H_POWER_DOMAIN_ID_MPP1>,
-+					<&scmi_devpd X5H_POWER_DOMAIN_ID_MPP2>,
-+					<&scmi_devpd X5H_POWER_DOMAIN_ID_MPP3>;
-+			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY01>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY11>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY21>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY31>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_MPPHY02>;
-+			status = "disabled";
-+		};
-+
-+		rswitch3: ethernet@c9bc0000 {
-+			compatible = "renesas,r8a78000-ether-switch3",
-+					"renesas,etherswitch";
-+			reg = <0 0xc9bc0000 0 0x40000>, <0 0xc9b80000 0 0x240000>;
-+			reg-names = "base", "secure_base";
-+			power-domains = <&scmi_devpd X5H_POWER_DOMAIN_ID_RSW>;
-+			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSN>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3AES>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES0>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES1>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES2>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES3>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES4>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES5>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES6>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3TSNTES7>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_RSW3MFWD>;
-+			clock-names = "rsw3", "rsw3tsn", "rsw3aes",
-+				      "rsw3tsntes0", "rsw3tsntes1", "rsw3tsntes2",
-+				      "rsw3tsntes3", "rsw3tsntes4", "rsw3tsntes5",
-+				      "rsw3tsntes6", "rsw3tsntes7", "rsw3mfwd";
-+			status = "disabled";
-+		};
-+
-+		eth_pcs: phy@c9c50000 {
-+			compatible = "renesas,r8a78000-ether-pcs";
-+			reg = <0 0xc9c50000 0 0x4000>;
-+			#phy-cells = <1>;
-+			clocks = <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS0>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS1>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS2>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS3>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS4>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS5>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS6>,
-+				 <&scmi_clk SCP_CLOCK_ID_MDLC_XPCS7>;
-+			clock-names = "xpcs0", "xpcs1", "xpcs2", "xpcs3",
-+				      "xpcs4", "xpcs5", "xpcs6", "xpcs7";
-+			resets = <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS0>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS1>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS2>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS3>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS4>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS5>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS6>,
-+				 <&scmi_reset SCP_RESET_DOMAIN_ID_XPCS7>;
-+			reset-names = "xpcs0", "xpcs1", "xpcs2", "xpcs3",
-+				      "xpcs4", "xpcs5", "xpcs6", "xpcs7";
-+			status = "disabled";
 +		};
 +	};
 +};
-diff --git a/include/dt-bindings/clock/r8a78000-scmi-clock.h b/include/dt-bindings/clock/r8a78000-scmi-clock.h
++
++&scif_clk {
++	clock-frequency = <26000000>;
++};
+diff --git a/arch/arm/mach-renesas/Kconfig.rcar5 b/arch/arm/mach-renesas/Kconfig.rcar5
+index 34c0ae8772b..528fc5aecc9 100644
+--- a/arch/arm/mach-renesas/Kconfig.rcar5
++++ b/arch/arm/mach-renesas/Kconfig.rcar5
+@@ -9,4 +9,18 @@ config R8A78000
+ 
+ endmenu
+ 
++choice
++	prompt "Renesas ARM64 SoCs board select"
++	optional
++
++config TARGET_IRONHIDE
++	bool "Ironhide board"
++	imply R8A78000
++	help
++	  Support for Renesas R-Car Gen5 Ironhide platform
++
++endchoice
++
++source "board/renesas/ironhide/Kconfig"
++
+ endif
+diff --git a/board/renesas/common/Makefile b/board/renesas/common/Makefile
+index 1849c995aee..889de8ea9ac 100644
+--- a/board/renesas/common/Makefile
++++ b/board/renesas/common/Makefile
+@@ -43,6 +43,10 @@ else
+ obj-y	+= gen4-common.o
+ endif
+ endif
++
++ifdef CONFIG_RCAR_GEN5
++obj-y	+= gen5-common.o
++endif
+ endif
+ 
+ endif
+diff --git a/board/renesas/common/gen5-common.c b/board/renesas/common/gen5-common.c
 new file mode 100644
-index 00000000000..0de7733337a
+index 00000000000..a05a3e8abef
 --- /dev/null
-+++ b/include/dt-bindings/clock/r8a78000-scmi-clock.h
-@@ -0,0 +1,44 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++++ b/board/renesas/common/gen5-common.c
+@@ -0,0 +1,75 @@
++// SPDX-License-Identifier: GPL-2.0-only
 +/*
 + * Copyright (C) 2025 Renesas Electronics Corp.
 + */
 +
-+#ifndef __DT_BINDINGS_R8A78000_SCMI_CLOCK_H__
-+#define __DT_BINDINGS_R8A78000_SCMI_CLOCK_H__
++#include <asm/arch/renesas.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/global_data.h>
++#include <asm/io.h>
++#include <asm/mach-types.h>
++#include <asm/processor.h>
++#include <asm/system.h>
++#include <linux/errno.h>
 +
-+/*
-+ * These definition indices match the Clock ID defined by SCP FW.
-+ */
++DECLARE_GLOBAL_DATA_PTR;
 +
-+#define SCP_CLOCK_ID_MDLC_UFS0		202
-+#define SCP_CLOCK_ID_MDLC_UFS1		203
-+#define SCP_CLOCK_ID_MDLC_SDHI0		204
++static void init_generic_timer(void)
++{
++	const u32 freq = CONFIG_SYS_CLK_FREQ;
 +
-+#define SCP_CLOCK_ID_MDLC_XPCS0		316
-+#define SCP_CLOCK_ID_MDLC_XPCS1		317
-+#define SCP_CLOCK_ID_MDLC_XPCS2		318
-+#define SCP_CLOCK_ID_MDLC_XPCS3		319
-+#define SCP_CLOCK_ID_MDLC_XPCS4		320
-+#define SCP_CLOCK_ID_MDLC_XPCS5		321
-+#define SCP_CLOCK_ID_MDLC_XPCS6		322
-+#define SCP_CLOCK_ID_MDLC_XPCS7		323
-+#define SCP_CLOCK_ID_MDLC_RSW3		324
-+#define SCP_CLOCK_ID_MDLC_RSW3TSN	325
-+#define SCP_CLOCK_ID_MDLC_RSW3AES	326
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES0	327
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES1	328
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES2	329
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES3	330
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES4	331
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES5	332
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES6	333
-+#define SCP_CLOCK_ID_MDLC_RSW3TSNTES7	334
-+#define SCP_CLOCK_ID_MDLC_RSW3MFWD	335
++	/* Update memory mapped and register based freqency */
++	asm volatile ("msr cntfrq_el0, %0" :: "r" (freq));
++	writel(freq, CNTFID0);
 +
-+#define SCP_CLOCK_ID_MDLC_MPPHY01	344
-+#define SCP_CLOCK_ID_MDLC_MPPHY11	345
-+#define SCP_CLOCK_ID_MDLC_MPPHY21	346
-+#define SCP_CLOCK_ID_MDLC_MPPHY31	347
-+#define SCP_CLOCK_ID_MDLC_MPPHY02	348
++	/* Enable counter */
++	setbits_le32(CNTCR_BASE, CNTCR_EN);
++}
 +
-+#endif /* __DT_BINDINGS_R8A78000_SCMI_CLOCK_H__ */
-diff --git a/include/dt-bindings/clock/r8a78000-scmi-reset.h b/include/dt-bindings/clock/r8a78000-scmi-reset.h
++static void init_gic_v3(void)
++{
++	/* GIC v3 power on */
++	writel(BIT(1), GICR_LPI_PWRR);
++
++	/* Wait till the WAKER_CA_BIT changes to 0 */
++	clrbits_le32(GICR_LPI_WAKER, BIT(1));
++	while (readl(GICR_LPI_WAKER) & BIT(2))
++		;
++
++	writel(0xffffffff, GICR_SGI_BASE + GICR_IGROUPR0);
++}
++
++void s_init(void)
++{
++	if (current_el() == 3)
++		init_generic_timer();
++}
++
++int board_early_init_f(void)
++{
++	return 0;
++}
++
++int board_init(void)
++{
++	/* Allow WDT reset */
++	writel(RST_KCPROT_DIS, RST_RESKCPROT0);
++	clrbits_le32(RST_WDTRSTCR, RST_WWDT_RSTMSK | RST_RWDT_RSTMSK);
++
++	if (current_el() != 3)
++		return 0;
++	init_gic_v3();
++
++	return 0;
++}
++
++void __weak reset_cpu(void)
++{
++	writel(RST_KCPROT_DIS, RST_RESKCPROT0);
++	writel(0x1, RST_SWSRES1A);
++}
++
++int ft_board_setup(void *blob, struct bd_info *bd)
++{
++	return 0;
++}
+diff --git a/board/renesas/ironhide/Kconfig b/board/renesas/ironhide/Kconfig
 new file mode 100644
-index 00000000000..4fb36c03cc2
+index 00000000000..34b596714f3
 --- /dev/null
-+++ b/include/dt-bindings/clock/r8a78000-scmi-reset.h
-@@ -0,0 +1,31 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++++ b/board/renesas/ironhide/Kconfig
+@@ -0,0 +1,15 @@
++if TARGET_IRONHIDE
++
++config SYS_SOC
++	default "renesas"
++
++config SYS_BOARD
++	default "ironhide"
++
++config SYS_VENDOR
++	default "renesas"
++
++config SYS_CONFIG_NAME
++	default "ironhide"
++
++endif
+diff --git a/configs/r8a78000_ironhide_defconfig b/configs/r8a78000_ironhide_defconfig
+new file mode 100644
+index 00000000000..180704e75af
+--- /dev/null
++++ b/configs/r8a78000_ironhide_defconfig
+@@ -0,0 +1,43 @@
++#include <configs/renesas_rcar5.config>
++
++CONFIG_ARM=y
++CONFIG_ARCH_RENESAS=y
++CONFIG_RCAR_GEN5=y
++CONFIG_TARGET_IRONHIDE=y
++
++# CONFIG_OF_UPSTREAM is not set
++CONFIG_ARMV8_PSCI=y
++CONFIG_ARM_SMCCC=y
++CONFIG_BAUDRATE=1843200
++CONFIG_BOOTCOMMAND="setexpr dloadaddr ${loadaddr} + 0x200000 && setexpr dloadaddr ${dloadaddr} \\\\& 0xffc00000 && setexpr kloadaddr ${dloadaddr} + 0x200000 && tftp ${dloadaddr} r8a78000-ironhide.dtb && tftp ${kloadaddr} Image && booti ${kloadaddr} - ${dloadaddr}"
++CONFIG_DEFAULT_DEVICE_TREE="r8a78000-ironhide"
++CONFIG_CLK_CCF=y
++CONFIG_CLK_COMPOSITE_CCF=y
++CONFIG_CLK_SCMI=y
++CONFIG_CMD_CLK=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_SCMI=y
++CONFIG_CMD_UFS=y
++CONFIG_DM_MAILBOX=y
++CONFIG_DM_RESET=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_MMC_DEVICE_INDEX=0
++CONFIG_ENV_MMC_EMMC_HW_PARTITION=2
++CONFIG_ENV_OFFSET=0xFFFE0000
++CONFIG_ENV_SIZE=0x20000
++CONFIG_FIRMWARE=y
++CONFIG_NR_DRAM_BANKS=16
++CONFIG_POWER_DOMAIN=y
++CONFIG_RCAR_MFIS_MBOX=y
++CONFIG_RESET_SCMI=y
++CONFIG_SCMI_AGENT_MAILBOX=y
++CONFIG_SCMI_FIRMWARE=y
++CONFIG_SCMI_POWER_DOMAIN=y
++CONFIG_SCSI=y
++CONFIG_SYS_ALT_MEMTEST=y
++CONFIG_SYS_BARGSIZE=2048
++CONFIG_SYS_BOOT_GET_CMDLINE=y
++CONFIG_SYS_CBSIZE=2048
++CONFIG_SYS_CLK_FREQ=1066666667
++CONFIG_UFS=y
++CONFIG_UFS_RENESAS_GEN5=y
+diff --git a/configs/renesas_rcar5.config b/configs/renesas_rcar5.config
+new file mode 100644
+index 00000000000..fbf158dfdb3
+--- /dev/null
++++ b/configs/renesas_rcar5.config
+@@ -0,0 +1,23 @@
++#include <configs/renesas_rcar64.config>
++
++CONFIG_ARCH_CPU_INIT=y
++CONFIG_SYS_LOAD_ADDR=0x9E600000
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_USE_BOOTARGS=y
++CONFIG_USE_BOOTCOMMAND=y
++
++CONFIG_BOOTARGS="root=/dev/nfs rw nfsroot=192.168.0.1:/export/rfs ip=192.168.0.20"
++CONFIG_CMD_MMC=y
++CONFIG_DM_ETH_PHY=y
++# CONFIG_MMC_HS200_SUPPORT is not set
++# CONFIG_MMC_IO_VOLTAGE is not set
++# CONFIG_MMC_UHS_SUPPORT is not set
++CONFIG_PHY_R8A78000_ETHERNET_PCS=y
++CONFIG_PHY_R8A78000_MP_PHY=y
++CONFIG_PHY_TI_DP83869=y
++# CONFIG_PSCI_RESET is not set
++CONFIG_RENESAS_ETHER_SWITCH=y
++CONFIG_RENESAS_SDHI=y
++CONFIG_SPI_FLASH_SPANSION=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_SYS_I2C_RCAR_I2C=y
+diff --git a/include/configs/ironhide.h b/include/configs/ironhide.h
+new file mode 100644
+index 00000000000..703c1714052
+--- /dev/null
++++ b/include/configs/ironhide.h
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
 + * Copyright (C) 2025 Renesas Electronics Corp.
 + */
 +
-+#ifndef __DT_BINDINGS_R8A78000_SCMI_RESET_H__
-+#define __DT_BINDINGS_R8A78000_SCMI_RESET_H__
++#ifndef __IRONHIDE_H
++#define __IRONHIDE_H
 +
-+/*
-+ * These definition indices match the Reset ID defined by SCP FW.
-+ */
++#include "rcar-gen5-common.h"
 +
-+#define SCP_RESET_DOMAIN_ID_UFS0	202
-+#define SCP_RESET_DOMAIN_ID_UFS1	203
-+
-+#define SCP_RESET_DOMAIN_ID_XPCS0	316
-+#define SCP_RESET_DOMAIN_ID_XPCS1	317
-+#define SCP_RESET_DOMAIN_ID_XPCS2	318
-+#define SCP_RESET_DOMAIN_ID_XPCS3	319
-+#define SCP_RESET_DOMAIN_ID_XPCS4	320
-+#define SCP_RESET_DOMAIN_ID_XPCS5	321
-+#define SCP_RESET_DOMAIN_ID_XPCS6	322
-+#define SCP_RESET_DOMAIN_ID_XPCS7	323
-+
-+#define SCP_RESET_DOMAIN_ID_MPPHY01	344
-+#define SCP_RESET_DOMAIN_ID_MPPHY11	345
-+#define SCP_RESET_DOMAIN_ID_MPPHY21	346
-+#define SCP_RESET_DOMAIN_ID_MPPHY31	347
-+#define SCP_RESET_DOMAIN_ID_MPPHY02	348
-+
-+#endif /* __DT_BINDINGS_R8A78000_SCMI_RESET_H__ */
-diff --git a/include/dt-bindings/power/r8a78000-scmi-power.h b/include/dt-bindings/power/r8a78000-scmi-power.h
++#endif /* __IRONHIDE_H */
+diff --git a/include/configs/rcar-gen5-common.h b/include/configs/rcar-gen5-common.h
 new file mode 100644
-index 00000000000..776c687f4af
+index 00000000000..dc28d07c7f9
 --- /dev/null
-+++ b/include/dt-bindings/power/r8a78000-scmi-power.h
-@@ -0,0 +1,27 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++++ b/include/configs/rcar-gen5-common.h
+@@ -0,0 +1,24 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ * Copyright (C) 2025 Renesas Electronics Corp.
++ * Copyright (C) 2025 Renesas Electronics Corporation
 + */
 +
-+#ifndef __DT_BINDINGS_R8A78000_SCMI_POWER_H__
-+#define __DT_BINDINGS_R8A78000_SCMI_POWER_H__
++#ifndef __RCAR_GEN5_COMMON_H
++#define __RCAR_GEN5_COMMON_H
 +
-+/*
-+ * These power domain indices match the Power Domain ID defined by SCP FW.
-+ */
++#include <asm/arch/renesas.h>
 +
-+#define X5H_POWER_DOMAIN_ID_UFS0	12
-+#define X5H_POWER_DOMAIN_ID_UFS1	13
++/* Console */
++#define CFG_SYS_BAUDRATE_TABLE		{ 38400, 115200, 921600, 1843200, 3250000 }
 +
-+#define X5H_POWER_DOMAIN_ID_RSW		15
++/* Memory */
++#define DRAM_RSV_SIZE			0x08000000
++#define CFG_SYS_SDRAM_BASE		(0x40000000 + DRAM_RSV_SIZE)
++#define CFG_SYS_SDRAM_SIZE		(0x80000000u - DRAM_RSV_SIZE)
++#define CFG_MAX_MEM_MAPPED		(0x80000000u - DRAM_RSV_SIZE)
 +
-+#define X5H_POWER_DOMAIN_ID_MPP0	17
-+#define X5H_POWER_DOMAIN_ID_MPP1	18
-+#define X5H_POWER_DOMAIN_ID_MPP2	19
-+#define X5H_POWER_DOMAIN_ID_MPP3	20
++/* Environment setting */
++#define CFG_EXTRA_ENV_SETTINGS		\
++	"bootm_size=0x10000000\0"
 +
-+#define X5H_POWER_DOMAIN_ID_AC00	76
-+
-+#define X5H_POWER_DOMAIN_ID_ACL0	92
-+
-+#endif /* __DT_BINDINGS_R8A78000_SCMI_POWER_H__ */
++#endif	/* __RCAR_GEN5_COMMON_H */
 -- 
 2.51.0
 
