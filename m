@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF83CCF9E0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 06:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AB94CCF9E0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 06:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D840F83804;
-	Mon, 27 Oct 2025 07:15:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3DF2C83837;
+	Mon, 27 Oct 2025 07:15:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UIQNlc68";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WlPrTvZr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC7F3836B2; Mon, 27 Oct 2025 07:14:59 +0100 (CET)
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
+ id C4DB8836B2; Mon, 27 Oct 2025 07:14:59 +0100 (CET)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8600E836B4
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 07:14:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 88FFA80422
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 07:14:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x32d.google.com with SMTP id
- 46e09a7af769-7c531445494so1341339a34.2
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 23:14:56 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-7c0e8367d4eso1428167a34.1
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 23:14:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761545695; x=1762150495; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1761545696; x=1762150496; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yJsq8btvUwsUZu0btwa80g9IQvr66/vLl02V9yFMdMI=;
- b=UIQNlc68MqpsBCNWxYVevaFIl+UPtbm91+kA8B0jYYC98Trj8WL5ISRnExMrj3XwfM
- kYqB2hmGI0YpSbhK/ELlXwH8VBBhpH5BMhYt+KW/obqrtp/EpRM2dLySzOn77XBC6Igb
- LUfvFs/sK8b8n08bHgBU6G8rhhVjciLt28EO5x+p0KajSdIvKk1Sb8ohSwj8fh+4SOVT
- MKxasOExKbTk9dwZ6vT1GxcbZb/7oeTtZlXGvazKyIKfsRA1vX1TcKtUYx+5Jc0eflpp
- FmA+OEq9ldOq/DE2HXfU/9ItqyywZdTJqSsReDenOReI+poOTWvMYA8QSZMDQoxFF5ZW
- brgA==
+ bh=z+qWqD/MuGNmLURMENnGWSQHxuhIbHeoSLTu4iCcsJ4=;
+ b=WlPrTvZr4hMAEEZLmGyx3b3NzaDoKshP/T0A8+M0UIkiatWvhUGGtaWkYDsUwRlkCZ
+ UtclgW/MOdsJcYkUzsggh6nuVuNh4zAcExaOJC9EKrYr596e7xydd2+yyO0re7NXxB0O
+ VnNNsOWtE6dM5fZ1eay806UVg2UTMCMmsvWxRDLUQT0+wGEx1X+J5beT+XDzoL8/UazN
+ e72eGTcId+zxXWe6BPYIdxxtrjrriKX8+at9dh/my6t9ofiTUqCbWHtZQO7YBgqox+xE
+ dsp4JzAIFOPYZqXkJ111kjktIUrdTt3H/eL+kJoD/zinQkDHmwyPINnBMWjTCMPxoUp3
+ F/PQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761545695; x=1762150495;
+ d=1e100.net; s=20230601; t=1761545696; x=1762150496;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yJsq8btvUwsUZu0btwa80g9IQvr66/vLl02V9yFMdMI=;
- b=RBGB4+52UZzNHD2o12OVqWi8Tlmj3Mucmryf3NqcAZhRugjzfi6bNlJeF/V0RUopU9
- ek5M5L0+TSmbnDxTzf/7mM1XzSibBSxKPPnxNJxdWGeUxD4ptpZknGJemUx8m4ZkY7+A
- 0SRLHV18plefjG9renRBQ0V5jmCtjChBpRG3xL01Og4AfLyQN5mIfrkmJZ2/uBEfaw4n
- uGntCG/gCf11IA2N0kks3rZXZPxYmUSphOVdWxISLtPvlr6Ca7zboJrpBQUlyu+hq7GB
- CTNtqbkbGaU51+BjlfYLnXCBdf1tFDkfxJXP/Jif58nRWkMzaLFDrbqY+sZLagni4s2E
- N6xw==
+ bh=z+qWqD/MuGNmLURMENnGWSQHxuhIbHeoSLTu4iCcsJ4=;
+ b=TVbw/Hbb9cFZQhPE61Z72l1DAf40O9TROOy1uCs/XkAwap2jbV8DbImCXfE2LGGmM6
+ dIzKxaEgm1qB7EHVBbfiCJHZ5ckl1ra5YFbYPTwMgLRl/aRyfyBn6d2QSsDNsHTfpWCN
+ +H82OcWCZ07eif/3/gZdHRsrwzwfwl2nu0zcg7Hyv580NqGXGu3ew1mtFsjJkfxosCwe
+ pkXEUOyrwKJBCoZKdo+hZDA1A5WgSDH2kJOA+ULTmD19uApmZeWqLF1hwJruAjCb0Equ
+ 4l7yxj6JlJCt9HzNzYqK8lgvASXZ6fLbO6DJsjvRuj2SctdooZsTpCovU6Y0pKOJTrdT
+ jKkg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWcTwFL7Y7UVXJ3XzYuFiauZ7d5Ld8h1sbCuy6L00k0OrIKYwuYYUEn+nAeDB7A99tr/IYfRpo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxP7pGckDmeVwk2Kx8eD1hkX0rDZ9EcNp2vW5TClprkt+DIPZBv
- qS+r7Ih4WeRFtXBMsJFjseOzL4b9foXFfity+oIUe5RT9gxwV/0jMiU7wg/2tJ9twIA=
-X-Gm-Gg: ASbGncuh1xW1E6yn0w+iHnrPhBYDOYxYUf9BwEeME+LnJKfKaVcKCd1hmVHvofPDNpB
- 6iGJcuCmYGf8tmw8dDYAS6TEig4j4GeMMc/OxSX81Mzn/cocwTljEbgnkLacBAu8z/nN7VPN4rA
- OGI3wWMxdrL6FbFQdAr6zgikX1h9RZny3YkG2d/diOxMWOoS0jNecx5boWKcZgK0SLmHkbxAK6j
- Rv1ufmuTsjpE6YlQdyCzhA5tfTowZfrzIWFkDbMP2mWQ7No/gZT7s8diYM568LY68JV+YjrLYLt
- S5+cVCK1LNbiIrY3RqrzR35hoz/9XK6v7jZOpJkvkusWnOQyT3zl9ADjR3wYAyX5/oYi6F4SeqT
- gq2wVm/N7pmXmjd1W8/o35y7uMn8ZPl5BI4mH95D8vMmhJCicgG783+wDmlY4dVYmjT7KY1UXGI
- ySpOhFxcqDgg==
-X-Google-Smtp-Source: AGHT+IHxJMFfJfTWxNAIxXpIqFy72A2OGcl+E2nuJEzz/PSK9Waoqi3o7yCjTh0sDqtbk5RDQ+odvA==
-X-Received: by 2002:a05:6830:7110:b0:78e:3093:80cb with SMTP id
- 46e09a7af769-7c27cc0bcfdmr18241748a34.27.1761545695229; 
- Sun, 26 Oct 2025 23:14:55 -0700 (PDT)
+ AJvYcCVwO6WbHDc9pCCdEXW9Ih4IwN18zxfRczJ49W7c1oqYEfDEJY23R5X+tXvhayZvFl3luJ0uPno=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw/ZNy+ZzKoKJawBkR1l03unbTzdJuGIx6tOAxeMnLkwaDrMhsB
+ o7qvwDvTynBavQVXd3tp4R4FLxgKNn5RASMgfmoj3C8rSu5jn0jp500EpoiQbEeTw5DHrtnocVU
+ b+Bu/
+X-Gm-Gg: ASbGncuCQWCWI/goUJNr612W7I9ltoNai4ij7tk/N5WTOSzbCIEOtD/WROUtls/9oLd
+ dw7hnb9OKGCaha9Nv2UOw+PCk1paAxaL4XEjAJ/qZBYxRUz4rv130PKDNgwroI/JFaw5hT1sPXi
+ 9e6VfeiTuZx3sr/T7myK+2TWWzNKGl4b3tVoJdfPpj3swrqFdwO/JMIfMhcm5ZHfJvwPg+IHsY/
+ MR5/H+I0MIS1UdQ2PbzO2yLzllrRAl8+GgIkTWMJGSbMCea2iqHCAl/gwKKz6yzgwd7ORWgHumY
+ Wkzaq0DueCLvIfRq/AckPxvbvBF5/YyasaeTTbgBsyOPeqDNvEynoNBQ5Vh3tvV+vXjOk6WHoNd
+ vPQeRcDKnqzvaa6STknqPVpnguabvQGdo53Sce2JtY2BbGMPIWg09hju1XofWIGzd4rUyEFcg4X
+ DeKTzIsnf1qw9MlxPjKy+xtzFsxTwAQTw=
+X-Google-Smtp-Source: AGHT+IG+TuNCQHVbMpoNk6ex5ue4SEk7glJM6rfTsBh4WRPJG6St5655epQJFfPEzwrbzUumG6Dl9A==
+X-Received: by 2002:a05:6830:4111:b0:758:85e2:99ce with SMTP id
+ 46e09a7af769-7c52413cdb7mr6157096a34.23.1761545696213; 
+ Sun, 26 Oct 2025 23:14:56 -0700 (PDT)
 Received: from localhost ([2605:a601:81da:7100:264b:feff:fe59:d7f7])
  by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c5301e3404sm1996246a34.20.2025.10.26.23.14.54
+ 46e09a7af769-7c53014c660sm1985187a34.15.2025.10.26.23.14.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Oct 2025 23:14:54 -0700 (PDT)
+ Sun, 26 Oct 2025 23:14:55 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
 To: Tom Rini <trini@konsulko.com>,
 	Minkyu Kang <mk7.kang@samsung.com>
 Cc: Peng Fan <peng.fan@nxp.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 2/5] board: samsung: e850-96: Add routines for checking
- boot dev
-Date: Mon, 27 Oct 2025 01:14:49 -0500
-Message-Id: <20251027061452.21165-3-semen.protsenko@linaro.org>
+Subject: [PATCH v2 3/5] board: samsung: e850-96: Split LDFW loading and init
+Date: Mon, 27 Oct 2025 01:14:50 -0500
+Message-Id: <20251027061452.21165-4-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20251027061452.21165-1-semen.protsenko@linaro.org>
 References: <20251027061452.21165-1-semen.protsenko@linaro.org>
@@ -103,182 +103,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement functionality to check the current boot device (a device where
-the SoC ROM code is loading the bootloaders from). The boot device order
-can be changed using the SW1 DIP switch on the E850-96 board (which
-controls XOM SoC lines), as stated in [1].
+The LDFW firmware loading is done in two steps:
 
-The boot device information is requested from EL3 software using the
-corresponding SMC call, which in turn reads it from iRAM memory, which
-was written by the ROM code. New routines decode that data and allow the
-user to check the current boot device, boot order, etc. That API can be
-used further to implement different code flows depending on the current
-boot device, e.g.:
+  1. Read the firmware binary from some block device
+  2. Provide it to EL3 monitor software via an SMC call, so it can copy
+     it to a Secure World memory and start using it
 
-  - on eMMC boot: obtain the firmware binaries from eMMC
-  - on USB boot: download the firmware over USB instead
+Let's split the load_ldfw() function by two functions correspondingly,
+to reflect that process better:
 
-No functional change; this patch only adds new functionality but it's
-not used yet.
+  - load_ldfw_from_blk()
+  - init_ldfw()
 
-[1] doc/board/samsung/e850-96.rst
+It can be useful in case when the LDFW binary should be obtained from
+some different media, e.g. downloaded over USB during USB boot.
+
+No functional change.
 
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
 Changes in v2:
   - (none)
 
- board/samsung/e850-96/Makefile  |  2 +-
- board/samsung/e850-96/bootdev.c | 99 +++++++++++++++++++++++++++++++++
- board/samsung/e850-96/bootdev.h | 23 ++++++++
- 3 files changed, 123 insertions(+), 1 deletion(-)
- create mode 100644 board/samsung/e850-96/bootdev.c
- create mode 100644 board/samsung/e850-96/bootdev.h
+ board/samsung/e850-96/e850-96.c |  9 ++++++--
+ board/samsung/e850-96/fw.c      | 37 ++++++++++++++++++++++-----------
+ board/samsung/e850-96/fw.h      |  3 ++-
+ 3 files changed, 34 insertions(+), 15 deletions(-)
 
-diff --git a/board/samsung/e850-96/Makefile b/board/samsung/e850-96/Makefile
-index 76b8d47994e8..e9c62d3181fd 100644
---- a/board/samsung/e850-96/Makefile
-+++ b/board/samsung/e850-96/Makefile
-@@ -3,4 +3,4 @@
- # Copyright (C) 2024, Linaro Limited
- # Sam Protsenko <semen.protsenko@linaro.org>
+diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
+index 34e01914032c..3cf98a01b703 100644
+--- a/board/samsung/e850-96/e850-96.c
++++ b/board/samsung/e850-96/e850-96.c
+@@ -151,9 +151,14 @@ void load_firmware(void)
+ 	}
  
--obj-y := e850-96.o fw.o acpm.o pmic.o
-+obj-y := e850-96.o fw.o acpm.o pmic.o bootdev.o
-diff --git a/board/samsung/e850-96/bootdev.c b/board/samsung/e850-96/bootdev.c
-new file mode 100644
-index 000000000000..7d5ae7128f49
---- /dev/null
-+++ b/board/samsung/e850-96/bootdev.c
-@@ -0,0 +1,99 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2025 Linaro Ltd.
-+ * Author: Sam Protsenko <semen.protsenko@linaro.org>
+ 	printf("Loading LDFW firmware (from %s %ld)...\n", ifname, dev);
+-	err = load_ldfw(ifname, dev, part, LDFW_NWD_ADDR);
+-	if (err)
++	err = load_ldfw_from_blk(ifname, dev, part, LDFW_NWD_ADDR);
++	if (err) {
+ 		printf("ERROR: LDFW loading failed (%d)\n", err);
++		return;
++	}
++	err = init_ldfw(LDFW_NWD_ADDR);
++	if (err)
++		printf("ERROR: LDFW init failed (%d)\n", err);
+ }
+ 
+ int dram_init(void)
+diff --git a/board/samsung/e850-96/fw.c b/board/samsung/e850-96/fw.c
+index 64235c01a254..2d52433e38ad 100644
+--- a/board/samsung/e850-96/fw.c
++++ b/board/samsung/e850-96/fw.c
+@@ -94,7 +94,7 @@ static int read_fw_from_raw(const char *ifname, int dev, const char *part_name,
+ }
+ 
+ /**
+- * load_ldfw - Load the loadable firmware (LDFW)
++ * load_ldfw_from_blk - Load the loadable firmware (LDFW) from block device
+  * @ifname: Interface name of the block device to load the firmware from
+  * @dev: Device number
+  * @part: Partition number
+@@ -102,24 +102,37 @@ static int read_fw_from_raw(const char *ifname, int dev, const char *part_name,
+  *
+  * Return: 0 on success or a negative value on error.
+  */
+-int load_ldfw(const char *ifname, int dev, int part, phys_addr_t addr)
++int load_ldfw_from_blk(const char *ifname, int dev, int part, phys_addr_t addr)
+ {
+-	struct ldfw_header *hdr;
+-	struct arm_smccc_res res;
+ 	void *buf = (void *)addr;
+-	u64 size = 0;
+-	int err, i;
++	int err;
+ 
+ 	/* First try to read LDFW from EFI partition, then from the raw one */
+ 	err = read_fw_from_fat(ifname, dev, part, LDFW_FAT_PATH, buf);
+-	if (err) {
+-		err = read_fw_from_raw(ifname, dev, LDFW_RAW_PART, buf);
+-		if (err)
+-			return err;
+-	}
++	if (err)
++		return read_fw_from_raw(ifname, dev, LDFW_RAW_PART, buf);
++
++	return 0;
++}
++
++/**
++ * init_ldfw - Provide the LDFW (loaded to RAM) to EL3 monitor to make use of it
++ * @addr: Memory address where LDFW resides
 + *
-+ * Routines for checking current boot device.
++ * EL3 monitor will copy the LDFW from the provided Normal World memory @addr to
++ * Secure World location, and start using it.
++ *
++ * Return: 0 on success or a negative value on error.
 + */
-+
-+#include <linux/arm-smccc.h>
-+#include <vsprintf.h>
-+#include "bootdev.h"
-+
-+/* Flag from BL2 bootloader in RAM */
-+#define BL2_TAG_ADDR			0x80000000	/* DRAM base */
-+#define BL2_TAG				0xabcdef
-+
-+/* Boot device info location in iRAM (only accessible from EL3) */
-+#define IRAM_BASE			0x02020000
-+#define BOOTDEVICE_INFO_ADDR		(IRAM_BASE + 0x64)
-+
-+/* SMC call for getting boot device information from EL3 monitor */
-+#define SMC_CMD_CHECK_SECOND_BOOT	-233
-+
-+/* Boot device constants for the encoded boot device info value */
-+#define BD_NO_DEVICE			0x0
-+#define BD_UFS				0x1
-+#define BD_EMMC				0x2
-+#define BD_ERROR			0x3
-+#define BD_USB				0x4
-+#define BD_SDMMC			0x5
-+#define BD_UFS_CARD			0x6
-+#define BD_SPI				0x7
-+
-+/* If BL2 bootloader wasn't executed, it means U-Boot is running via JTAG */
-+static bool bootdev_is_jtag_session(void)
++int init_ldfw(phys_addr_t addr)
 +{
-+	u32 bl2_tag_val = *(u32 *)BL2_TAG_ADDR;
-+
-+	return bl2_tag_val != BL2_TAG;
-+}
-+
-+/* Obtain boot device information encoded in 32-bit value */
-+static u32 bootdev_get_info(void)
-+{
-+	u32 info;
-+
-+	/*
-+	 * On regular boot U-Boot is executed by BL2 bootloader, and is running
-+	 * in EL1 mode, so the boot device information has to be obtained via
-+	 * SMC call from EL3 software (EL3 monitor), which can read that info
-+	 * from the protected iRAM memory. If U-Boot is running via TRACE32 JTAG
-+	 * (in EL3 mode), read the boot device info directly from iRAM, as EL3
-+	 * software might not be available.
-+	 */
-+	if (bootdev_is_jtag_session()) {
-+		info = *(u32 *)BOOTDEVICE_INFO_ADDR;
-+	} else {
-+		struct arm_smccc_res res;
-+
-+		arm_smccc_smc(SMC_CMD_CHECK_SECOND_BOOT, 0, 0, 0, 0, 0, 0, 0,
-+			      &res);
-+		info = (u32)res.a2;
-+	}
-+
-+	return info;
-+}
-+
-+enum bootdev bootdev_get_current(void)
-+{
-+	u32 info, magic, order, dev;
-+
-+	info = bootdev_get_info();
-+	magic = info >> 24;
-+	order = info & 0xf;
-+	dev = (info >> (4 * order)) & 0xf;
-+
-+	if (magic != 0xcb)
-+		panic("Abnormal boot");
-+
-+	switch (dev) {
-+	case BD_UFS:
-+		return BOOTDEV_UFS;
-+	case BD_EMMC:
-+		return BOOTDEV_EMMC;
-+	case BD_USB:
-+		return BOOTDEV_USB;
-+	case BD_SDMMC:
-+		return BOOTDEV_SD;
-+	default:
-+		return BOOTDEV_ERROR;
-+	}
-+
-+	return BOOTDEV_ERROR;
-+}
-+
-+bool bootdev_is_usb(void)
-+{
-+	return bootdev_get_current() == BOOTDEV_USB;
-+}
-diff --git a/board/samsung/e850-96/bootdev.h b/board/samsung/e850-96/bootdev.h
-new file mode 100644
-index 000000000000..5f454bf00901
---- /dev/null
-+++ b/board/samsung/e850-96/bootdev.h
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2025 Linaro Ltd.
-+ * Sam Protsenko <semen.protsenko@linaro.org>
-+ */
-+
-+#ifndef __E850_96_BOOTDEV_H
-+#define __E850_96_BOOTDEV_H
-+
-+#include <stdbool.h>
-+
-+enum bootdev {
-+	BOOTDEV_ERROR,
-+	BOOTDEV_SD,
-+	BOOTDEV_EMMC,
-+	BOOTDEV_USB,
-+	BOOTDEV_UFS,
-+};
-+
-+enum bootdev bootdev_get_current(void);
-+bool bootdev_is_usb(void);
-+
-+#endif /* __E850_96_BOOTDEV_H */
++	struct ldfw_header *hdr;
++	struct arm_smccc_res res;
++	u64 size = 0;
++	int err, i;
+ 
+ 	/* Validate LDFW by magic number in its header */
+-	hdr = buf;
++	hdr = (struct ldfw_header *)addr;
+ 	if (hdr->magic != LDFW_MAGIC) {
+ 		debug("%s: Wrong LDFW magic; is LDFW flashed?\n", __func__);
+ 		return -EINVAL;
+diff --git a/board/samsung/e850-96/fw.h b/board/samsung/e850-96/fw.h
+index 73d9615d4a9c..b061abc4df69 100644
+--- a/board/samsung/e850-96/fw.h
++++ b/board/samsung/e850-96/fw.h
+@@ -9,6 +9,7 @@
+ 
+ #include <asm/types.h>
+ 
+-int load_ldfw(const char *ifname, int dev, int part, phys_addr_t addr);
++int load_ldfw_from_blk(const char *ifname, int dev, int part, phys_addr_t addr);
++int init_ldfw(phys_addr_t addr);
+ 
+ #endif /* __E850_96_FW_H */
 -- 
 2.39.5
 
