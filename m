@@ -4,89 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E9BBCCF9E0
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 05:51:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC9EBCCF9E0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 06:03:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D27D783700;
-	Mon, 27 Oct 2025 06:51:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4381A82A9E;
+	Mon, 27 Oct 2025 07:03:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CbeJ5ivi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IbUYj4ji";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9F6B83849; Mon, 27 Oct 2025 06:51:13 +0100 (CET)
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
- [IPv6:2607:f8b0:4864:20::334])
+ id EF3C982C7F; Mon, 27 Oct 2025 07:03:39 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDC3A836F0
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 06:51:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D6FE80422
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 07:03:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x334.google.com with SMTP id
- 46e09a7af769-7c2846c961fso2442158a34.2
- for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 22:51:11 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-78488cdc20aso54106707b3.1
+ for <u-boot@lists.denx.de>; Sun, 26 Oct 2025 23:03:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1761544270; x=1762149070; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1761545016; x=1762149816; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jPeJi4JjQVWnfvsxCCBCAM+oRKvDd767KgxxKfeN/j0=;
- b=CbeJ5ivi11dX8XEHIh9kTF53laJrfsi9i0BRsAlfP+WCWXfOnx+BCT5IxpvEuDgt4r
- iNo9QYBJEXowDpDPEphl/E8B4aTW7NpfgCo1MbnswJnMBuB6fM7Ci1yLFXbHI3HA8zUP
- CvpXGKaemsOCN8yz4h+pfFPfqeHOalmmYyTFgOTfkPjiwU42nZDgHl3VnFQ41oQSF+Cz
- h0Kvh0PJw8IU+3ZdHr6jT65lYetDgUpLvcsI34T0oFhec+/vMi8XWFBeWkxiNmt8/Jgm
- A39ctMmBK8FgNpOfr7EmCrUJEzQXp4arvc9XgaRLIYOfSj47EemO5LmKXo7d0rn32oV0
- 3MGg==
+ bh=3h1jKY5jG6GySfl+DiGwAXtMQ5CIpfbYO1B6aMB+/e0=;
+ b=IbUYj4ji3OhvwYXOUNdXYPpSfvDSLAkRLH4ezsF+SZ9xF/g9KfZ6tGBpC8/2w66OYX
+ gBmOQdO0NtyVmr/Qe3QM2328MVg4WCrfV2o8IRJj5jQMWvOWxE54AXHL1sxCLCmjGKkm
+ cNfhME/Zq3lwIHMgg3qp2Uyvf/ULLbjKtEae0bSfIKBsZDtJXVtuAdEM5i40iR3rQVBZ
+ GtA1MdKYmwRawuT/GUfLGhk5wFze2+A3qBk+M5DfvQlVHklxslxXqDQLvBYbXK5cNUvZ
+ YgnqYPFua3EV/AeKzydWyflKUiNZFLEJBpi+hrD4A1WJmdUmneTyyim/sEjvuP5MwUOn
+ alTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761544270; x=1762149070;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1761545016; x=1762149816;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jPeJi4JjQVWnfvsxCCBCAM+oRKvDd767KgxxKfeN/j0=;
- b=IaCTYrLLqY7SwjPYjgdrxIP79nH+Cs4Wl90WH6JqRPSWa8YUoRpdrupcH1QxIIs7Ij
- rr6be+jO4H6gAhqgbtMRGWCgsIw82bpXMiRfsJEviSI54vJgmqFqHODQQjkdxcyB0X6b
- kgx2Ixh5YW7J9Gv3V+BBqsppjnJL2Yix+7sM1XdIJJNX8xNqOeRzQ4rcs20WOu8bsP8U
- gQOHd4i+DKYbSARpbXxo2Vy38bmSkxAY5Jgg0Jtj5NFjoolMZWpDd65Gz+xtrvcARlZb
- eyjV2KwLGrtpLUPbYDtGHJCuh83ajoHqqKO0wbBWNB2PuPW6xXjXwIcZLCLVEDIiAS0w
- G4pQ==
+ bh=3h1jKY5jG6GySfl+DiGwAXtMQ5CIpfbYO1B6aMB+/e0=;
+ b=ETHh4SaDNpLahhXdJo+0o1lHsMzBv+ujZXk267nFQyW308swyd8Y9TNSc34O0X2dcz
+ uJDqfK9SenWiOuHDaoac8YHjXqSQriqNGyR1JGClp2h5yWFoPd+IuHFppWEGmlugmVwJ
+ B8Ln+N8Y5WG0NnGlrp4QgIOiYFsr+rYx2uIEjAeQE3CdYZXruJfmH3bnCjnvCfkQy7rN
+ sevRZ0iS01kboMf+FdGJXS5yU0rYBvrTWes0qGLo4Sy1REpTL7f5qrkv/JrAuiVWuCEP
+ iBwgcHCv3GAeMwY7J+NeMvoY2HOkEYiNCoH2HyzkZt7dFfHbRrM4kVmix3/M39o0dqJE
+ Oi2Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWGkdW2SIlurNRNyKM7lopDGmCMnnIVzHj++rz3hnCGFXHgG9fJh1HBD27WonstwTI3VRzHpy4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxEjUOrwT88T95VkxUcd0iA1eS28bZPtAh6g49VDSYhEVe82s28
- IFA5vElAkEXRxXM20nbcM0YZIhKwYAh4gvdzDoWXdYH27imAbQHzK2gJe/XRXzJVkVc=
-X-Gm-Gg: ASbGncvQpnOxx+zcYdwEbXsNhf6gGPrXFv+gVE6UnJpIl5FxZMJq/BAWOJt9cDOG+CS
- fYx/5f4j+RwKB5/CmzhVIQNBCBqrC7qnKdwNUCj7/997pZCdJL2v1s/5dmjkvS6BYc8dMyvCJPL
- +p8DR3gtQ56fYWucwG5qpXA9Xw+PgQiHLNZGfMQoY9T3/DxuNxKIvSeYyitze7PufaW5MGTRE2V
- KDrrUbpR4ch2bzJvItJIpG729wDOTySKjPJ54E5kxl+jfiiT3mRtFH/hfEF9x+A2KU5aisQ3cbV
- onZt4mw6YGguglbdDWRBcv7WzikP9wkM/XWxzqAPqBwDVa2ji9/6jCR0Da1xbSY/VK93o6J6RlS
- qjOaVh8bvkBEWreybYDFfwcKcM9Sg9RCyq5jE7zfvtHgYKlSvYdvSXI5dZ5bsRl1Nq0VrakpAia
- J3GD3IOxl2Rm3vkkeMmJ2qZldTNGkhzaE=
-X-Google-Smtp-Source: AGHT+IF9jQT8kW48VvIopHgLaWBs3PviTaaQK9OrsSesdwiqkWwXx7LjzZFgasnIMNuamen5rvQ1xg==
-X-Received: by 2002:a05:6830:3105:b0:795:99bb:f719 with SMTP id
- 46e09a7af769-7c51b03d914mr8403910a34.23.1761544270460; 
- Sun, 26 Oct 2025 22:51:10 -0700 (PDT)
-Received: from localhost ([2605:a601:81da:7100:264b:feff:fe59:d7f7])
- by smtp.gmail.com with ESMTPSA id
- 46e09a7af769-7c53013645dsm1958401a34.14.2025.10.26.22.51.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 26 Oct 2025 22:51:09 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
-To: Tom Rini <trini@konsulko.com>,
-	Minkyu Kang <mk7.kang@samsung.com>
-Cc: Peng Fan <peng.fan@nxp.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH 5/5] board: samsung: e850-96: Load firmwares over USB on USB
- boot
-Date: Mon, 27 Oct 2025 00:51:05 -0500
-Message-Id: <20251027055105.720-6-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.5
-In-Reply-To: <20251027055105.720-1-semen.protsenko@linaro.org>
-References: <20251027055105.720-1-semen.protsenko@linaro.org>
+ AJvYcCVZD6AK1v9DoYnMJ+O44xssXAmqG6eMWGVIokkMiUg+kmqM3bsGPLabkJWTdDaM+gzbu2DIG74=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXsDwjIXKL2ohIcI1+UIKz1CvFRl7TevndZuXSsF7IQ5Gtz+z9
+ uDdzZLeA4erQyIyMCDpKm5aRWHhlOJ8ui7DnIccPGiLX9qngK6Uun6Fmc45VBKLwDz69VhDTbUQ
+ 98Xk7W5Tl67IsxdZijFUdQrIUd1ONQiVRzBvMmlI8XA==
+X-Gm-Gg: ASbGncuCLDUX2OK4wMQTOE8ZZLoqtnfdYSNx3zJRQTEG6oRkvmYu6KYcBd6SjKNcV73
+ xXlaeFQZdNEiRN2GbDFsMLoDIoSu5UjQf4nB01VO1tWZALppp7ZKBI1e4di1NUGZaOoDj8RVj06
+ Yi98eNLiB8yK71HzK2popvGw2MgvLYiCGGePZvYx3ElMLd/0vClrfc+LqVk1zmbZk65zqoFzgME
+ wGiCOe32dw2fGB2orq468nYajwDaGNvMVmThT9Jqp4wpdc1dKqQYLQvDhkdG8RgvwZBGEfpmm32
+ CNd4pmAiemY8naugwZi+lMCPEqPiw36SVeSYfu1+
+X-Google-Smtp-Source: AGHT+IHhrzZqDE4lwKbZKS0FhPCuJ65EKYbP33+ox0di8V29STHWsqnqxot3qHWyfbOCxR30TZfqliAft2y2lE3xLOs=
+X-Received: by 2002:a05:690c:4c08:b0:783:7143:d812 with SMTP id
+ 00721157ae682-7837143e14dmr286838907b3.1.1761545016278; Sun, 26 Oct 2025
+ 23:03:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20251027055105.720-1-semen.protsenko@linaro.org>
+In-Reply-To: <20251027055105.720-1-semen.protsenko@linaro.org>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Mon, 27 Oct 2025 01:03:25 -0500
+X-Gm-Features: AWmQ_bmXuvNQF4wlLqCD2k00yJS25bDMoR5w1c_JufqtRD3MtP4_Hc762u2AyCg
+Message-ID: <CAPLW+4mRPNoW=mqZyG1cSJXYuwmS=FwCajoAtNjQp5sppmE7wA@mail.gmail.com>
+Subject: Re: [PATCH 0/5] board: samsung: e850-96: Support USB boot
+To: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>
+Cc: Peng Fan <peng.fan@nxp.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,90 +95,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-During USB boot it's expected that the bootloader (U-Boot) should
-download LDFW and TZSW firmware binaries over USB, using corresponding
-SMC call. Once it's done, the Boot ROM code can release the USB block,
-so that it can be used in U-Boot (e.g. for flashing images to eMMC using
-DFU or fastboot). Otherwise USB wouldn't be accessible in U-Boot, and
-any attempt to access USB PHY or DWC3 registers will lead to abort.
+On Mon, Oct 27, 2025 at 12:51=E2=80=AFAM Sam Protsenko
+<semen.protsenko@linaro.org> wrote:
+>
+> When U-Boot is executed during USB boot [1,2] on E850-96 board, two
+> issues happen:
+>
+>   1. eMMC fails to initialize
+>   2. Attempt to use USB PHY driver leads to abort
+>
+> It was identified that issue #1 happens due to enalbed Flash Memory
+> Protector bits in MMC block registers during USB boot, and it's handled
+> in patch series [3].
+>
+> Issue #2 on the other hand happens because ROM code expects the
+> bootloader (U-Boot) to download remaining binaries (LDFW and TZSW) over
+> USB using SMC calls. Before that, the access to USB blocks (USB PHY and
+> DWC3) is disabled, probably because corresponding TrustZone domains are
+> configured for access from Secure World only.
+>
+> This patch series implements downloading LDFW and TZSW firmware over USB
+> during USB boot, which makes it possible to use U-Boot for flashing
+> images to eMMC using fastboot and DFU protocols. That in turn simplifies
+> the U-Boot development, as one can use `dltool' [1] to run U-Boot binary
+> during USB boot, and update U-Boot on eMMC this way (e.g. using DFU).
+> It's not possible when using LittleKernel bootloader, as it expects
+> non-standard Samsung GPT partition, but in case of U-Boot we use the
+> regular one.
+>
+> Once this patch series and patch series [3] are applied it'll be
+> possible to use U-Boot during USB boot. The two series are independent
+> of each other, and can be applied in any particular order.
+>
+> [1] https://gitlab.com/LinaroLtd/e850-96/tools/dltool
+> [2] https://docs.u-boot.org/en/latest/board/samsung/e850-96.html
+> [3] https://lore.kernel.org/u-boot/20251026010658.19271-1-semen.protsenko=
+@linaro.org/
+>
+> Sam Protsenko (5):
+>   board: samsung: e850-96: Keep public functions together
+>   board: samsung: e850-96: Add routines for checking boot dev
+>   board: samsung: e850-96: Split LDFW loading and init
+>   board: samsung: e850-96: Add routine for loading images over USB
+>   board: samsung: e850-96: Load firmwares over USB on USB boot
+>
+>  board/samsung/e850-96/Makefile  |  2 +-
+>  board/samsung/e850-96/bootdev.c | 99 +++++++++++++++++++++++++++++++++
+>  board/samsung/e850-96/bootdev.h | 23 ++++++++
+>  board/samsung/e850-96/e850-96.c | 65 +++++++++++++++++-----
+>  board/samsung/e850-96/fw.c      | 75 ++++++++++++++++++-------
+>  board/samsung/e850-96/fw.h      | 10 +++-
+>  6 files changed, 239 insertions(+), 35 deletions(-)
+>  create mode 100644 board/samsung/e850-96/bootdev.c
+>  create mode 100644 board/samsung/e850-96/bootdev.h
+>
+>
+> base-commit: fd976ff3a233ae7c6a9f5bec790b02bbbf57bb24
+> --
 
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- board/samsung/e850-96/e850-96.c | 36 +++++++++++++++++++++++++++++++--
- 1 file changed, 34 insertions(+), 2 deletions(-)
+Oops, a minor mistake was found in this series. I'll send v2 shortly.
 
-diff --git a/board/samsung/e850-96/e850-96.c b/board/samsung/e850-96/e850-96.c
-index 3cf98a01b703..3aa4992a36d5 100644
---- a/board/samsung/e850-96/e850-96.c
-+++ b/board/samsung/e850-96/e850-96.c
-@@ -11,6 +11,7 @@
- #include <net.h>
- #include <usb.h>
- #include <asm/io.h>
-+#include "bootdev.h"
- #include "fw.h"
- #include "pmic.h"
- 
-@@ -31,6 +32,10 @@
- #define EMMC_DEV_NUM			0
- #define EMMC_ESP_PART			1
- 
-+/* Firmware size */
-+#define LDFW_MAX_SIZE			SZ_4M
-+#define SP_MAX_SIZE			SZ_1M
-+
- struct efi_fw_image fw_images[] = {
- 	{
- 		.image_type_id = E850_96_FWBL1_IMAGE_GUID,
-@@ -127,11 +132,34 @@ static void setup_ethaddr(void)
- 		eth_env_set_enetaddr("ethaddr", mac_addr);
- }
- 
-+static void load_firmware_usb(void)
-+{
-+	int err;
-+
-+	printf("Loading LDFW firmware (over USB)...\n");
-+	err = load_image_usb(USB_DN_IMAGE_LDFW, LDFW_NWD_ADDR, LDFW_MAX_SIZE);
-+	if (err) {
-+		printf("ERROR: LDFW loading failed (%d)\n", err);
-+		return;
-+	}
-+
-+	err = init_ldfw(LDFW_NWD_ADDR);
-+	if (err) {
-+		printf("ERROR: LDFW init failed (%d)\n", err);
-+		/* Do not return, still need to download SP */
-+	}
-+
-+	printf("Loading SP firmware (over USB)...\n");
-+	err = load_image_usb(USB_DN_IMAGE_SP, LDFW_NWD_ADDR, SP_MAX_SIZE);
-+	if (err)
-+		printf("ERROR: SP loading failed (%d)\n", err);
-+}
-+
- /*
-  * Call this in board_late_init() to avoid probing block devices before
-  * efi_init_early().
-  */
--void load_firmware(void)
-+static void load_firmware_blk(void)
- {
- 	const char *ifname;
- 	ulong dev, part;
-@@ -175,7 +203,11 @@ int board_late_init(void)
- {
- 	setup_serial();
- 	setup_ethaddr();
--	load_firmware();
-+
-+	if (bootdev_is_usb())
-+		load_firmware_usb();
-+	else
-+		load_firmware_blk();
- 
- 	return 0;
- }
--- 
-2.39.5
-
+> 2.39.5
+>
