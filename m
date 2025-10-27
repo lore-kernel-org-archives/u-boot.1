@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4103BCCF9EA
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 14:17:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 657EDCCF9EA
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 14:17:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 318AF83710;
-	Mon, 27 Oct 2025 15:17:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6B222836F0;
+	Mon, 27 Oct 2025 15:17:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="reEfIQC7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VBM9NfBv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB51F82E34; Mon, 27 Oct 2025 15:17:22 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id 9474D83849; Mon, 27 Oct 2025 15:17:24 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43FED8352B
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 15:17:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D280836EE
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 15:17:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from fllvem-sh04.itg.ti.com ([10.64.41.54])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59REHDMN2425071;
- Mon, 27 Oct 2025 09:17:13 -0500
+Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59REHG9g2443992;
+ Mon, 27 Oct 2025 09:17:16 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761574633;
- bh=HZTn04S0LhBCrORhOYoKwlgqjrEDRjm3S7t6sgT+PEw=;
- h=From:Subject:Date:To:CC;
- b=reEfIQC7H4GV/uyYY9wOPAEl08te8OPVrtkEdx6gA/wku0oa1TEtEzBCSdmRA+d4r
- GEl+JM4wBU2hMK4eX7mMCZatVF/NwoXDJdpTuZvyUnLM3CoKePaRhyCrM0t/r+gWUT
- IZA/y/h3G1KE0xX3oVjWLqsS8KwAJIkgNFv672tQ=
-Received: from DFLE215.ent.ti.com (dfle215.ent.ti.com [10.64.6.73])
- by fllvem-sh04.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59REHDjv1035774
+ s=ti-com-17Q1; t=1761574636;
+ bh=cNQlGNEevZUcB/KZbLooCbgPiQUNwr7wkar8SCA48qQ=;
+ h=From:Date:Subject:References:In-Reply-To:To:CC;
+ b=VBM9NfBvmZWlNgq95Be5Yj3kTnXqNIGpOP5jYIdVHTC9d7565hUUIPXf0GgNyPfow
+ QTxHGG5SUkK1EWuQ0Ahab4xIIbvXnwHFNiG/skTQwRW2DYZHia6k91V8TN0JtNwxpb
+ oP0ef2Q1ZpGyWzhoP3IEL/nDFza7Z2SqjIxpaTmc=
+Received: from DFLE200.ent.ti.com (dfle200.ent.ti.com [10.64.6.58])
+ by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59REHGjQ1283323
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Oct 2025 09:17:13 -0500
-Received: from DFLE212.ent.ti.com (10.64.6.70) by DFLE215.ent.ti.com
- (10.64.6.73) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 27 Oct 2025 09:17:16 -0500
+Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE200.ent.ti.com
+ (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Oct
- 2025 09:17:12 -0500
-Received: from lelvem-mr06.itg.ti.com (10.180.75.8) by DFLE212.ent.ti.com
- (10.64.6.70) with Microsoft SMTP Server (version=TLS1_2,
+ 2025 09:17:16 -0500
+Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
+ (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 27 Oct 2025 09:17:12 -0500
+ Transport; Mon, 27 Oct 2025 09:17:16 -0500
 Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr06.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59REHBcK791161;
- Mon, 27 Oct 2025 09:17:12 -0500
+ by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59REHFxT775204;
+ Mon, 27 Oct 2025 09:17:16 -0500
 From: Anshul Dalal <anshuld@ti.com>
-Subject: [PATCH v10 0/2] Remove usage of CMD_BOOTx from SPL code
-Date: Mon, 27 Oct 2025 19:47:01 +0530
-Message-ID: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
+Date: Mon, 27 Oct 2025 19:47:03 +0530
+Subject: [PATCH v10 2/2] configs: disable SPL_BOOTZ to preserve spl size
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAN1+/2gC/12Py27DIBBFfyViXaLhZSCr/kdVRRgPNVJtUiBWq
- sj/XuKmUZXlPM7RvVdSMEcs5LC7koxLLDHNbWDwsiN+dPMH0ji0BeHAFQMuaIiXo5+GY59SvVC
- Ljg2dDWBQkMacMraHTfj23uaQ00TrmNE9LCDBMMmk6PaacWE0ZdTNZTx/Dq817n2a7qKMX+cWq
- P7aSO8K0nadYj3sLFgpDfdOK90ZrXveB+eU9ga18AF7JbpgektuIcZYasrfW8nFbLJ7HflUZzE
- UKBcQNHiFKpi/RDfNYv+j6hm1DR28D+AcKKPDA13X9QckWsS1aAEAAA==
-X-Change-ID: 20251023-fix_cmd_bootx-9ea1d69f08e3
+Message-ID: <20251027-fix_cmd_bootx-v10-2-10487e907710@ti.com>
+References: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
+In-Reply-To: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
 To: <u-boot@lists.denx.de>
 CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Vignesh R
  <vigneshr@ti.com>, Anshul Dalal <anshuld@ti.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761574631; l=3502;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1761574631; l=2279;
  i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=tU+QEYl0Kh0sDNqcfikhZxRQbxbs3NChPVPThonRPNQ=;
- b=2GYeajvePnEvplb/nKJnwe62IbORq8ZT8Or++1+oDA//faguCRgfoMxpNgJXNDZIEq2MeQSxX
- LpSX6EVO2JUDtwr8HsznFCx297WBORSNZn+jylhnSR+47dWwUU48A9e
+ bh=rSSNOO3KFbX+0Bt33Nev9vWpM8Aq1WoXM18P723haPA=;
+ b=02kBC3LQZp7oquvkYPt0oCzTfuVBCS2SV3ukFaZEhf+okBdyvvt0gEmJXTj7cyaPOGBP4J8PA
+ YOU0wcwd6mjDJf7rqigcU9YKJSDo69Bga8OMMpHCDaEU8e3XFYlriqv
 X-Developer-Key: i=anshuld@ti.com; a=ed25519;
  pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -90,99 +86,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+In the existing behaviour, CMD_BOOTZ is not enabled by default which
+means zimage.o is not compiled in the SPL in falcon mode unless
+explicitly enabled. This changes now as SPL_BOOTZ is default y for
+falcon users which leads to larger SPL size with zimage.o being present.
 
-We currently make use of CMD_BOOTI and CMD_BOOTZ in the SPL boot flow in
-falcon mode, this isn't correct since all CMD_* configs are only meant
-for U-Boot proper and not the SPL.
-
-Therefore this patch set adds new LIB_BOOT[IMZ] configs that allow for
-more granular selection of their respective compilation targets.
-
-Additionally, this also allows us to more easily disable support for
-raw images from secure falcon mode (SPL_OS_BOOT_SECURE) by doing the
-following:
-
-  config LIB_SPL_BOOTI
-    ...
-    depends on SPL_OS_BOOT && !SPL_OS_BOOT_SECURE
-    ...
-
-Regards,
-Anshul
+This patch modifies the defconfigs that used falcon mode but don't
+require zimage support.
 
 Signed-off-by: Anshul Dalal <anshuld@ti.com>
 ---
-Changes in v10:
-- Remove unused CONFIG_XPL_BUILD check around $(PHASE_)LIB_BOOTM
-- Link to v9: https://lore.kernel.org/r/20251025-fix_cmd_bootx-v9-0-dccf0aa0587f@ti.com
+ configs/imx28_xea_defconfig          | 1 +
+ configs/imx6qdl_icore_mipi_defconfig | 1 +
+ configs/imx6qdl_icore_mmc_defconfig  | 1 +
+ configs/imx6qdl_icore_rqs_defconfig  | 1 +
+ 4 files changed, 4 insertions(+)
 
-Changes in v9:
-- Update commit message in the patch [1/2] to reflect updated symbol names
-- Use CONFIG_LIB_$(PHASE_)_BOOTM in arm/lib/Makefile
-- Link to v8: https://lore.kernel.org/r/20251024-fix_cmd_bootx-v8-0-230f70c5e5f8@ti.com
+diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
+index 8715893bbcc0ad565ffc923ab5cc980e0f5bf0b3..0bb2e4472500b7ee1d31d29b35e78b82e912f4d2 100644
+--- a/configs/imx28_xea_defconfig
++++ b/configs/imx28_xea_defconfig
+@@ -132,3 +132,4 @@ CONFIG_DM_SPI=y
+ CONFIG_MXS_SPI=y
+ CONFIG_SPL_CRC8=y
+ # CONFIG_SPL_OF_LIBFDT is not set
++# CONFIG_SPL_BOOTZ is not set
+diff --git a/configs/imx6qdl_icore_mipi_defconfig b/configs/imx6qdl_icore_mipi_defconfig
+index c322fd3eff14058c2d3d3cb8cb64103554114e1c..cc05ecf587f56bfe82ac7706b630653fcbd13458 100644
+--- a/configs/imx6qdl_icore_mipi_defconfig
++++ b/configs/imx6qdl_icore_mipi_defconfig
+@@ -74,3 +74,4 @@ CONFIG_PINCTRL_IMX6=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
+ CONFIG_IMX_THERMAL=y
++# CONFIG_SPL_BOOTZ is not set
+diff --git a/configs/imx6qdl_icore_mmc_defconfig b/configs/imx6qdl_icore_mmc_defconfig
+index 0b82fbecbee373371e87bff5baac2d0de75bed09..169903266cd5c7420ae9bab4045e1fe0b56fac6c 100644
+--- a/configs/imx6qdl_icore_mmc_defconfig
++++ b/configs/imx6qdl_icore_mmc_defconfig
+@@ -102,3 +102,4 @@ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
+ CONFIG_IMX_WATCHDOG=y
++# CONFIG_SPL_BOOTZ is not set
+diff --git a/configs/imx6qdl_icore_rqs_defconfig b/configs/imx6qdl_icore_rqs_defconfig
+index 8520f90c867aee27894baeac6994576589fe2c5f..34d834ec8e1556612c7e692a540eababaa84230f 100644
+--- a/configs/imx6qdl_icore_rqs_defconfig
++++ b/configs/imx6qdl_icore_rqs_defconfig
+@@ -71,3 +71,4 @@ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_IMX6=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
++# CONFIG_SPL_BOOTZ is not set
 
-Changes in v8:
-- Use CONFIG_$(PHASE_)LIB_BOOT[IMZ] instead
-- Drop the patch migrating falcon configs
-- Drop the patch for colibri_vf
-- Link to v7: https://lore.kernel.org/u-boot/20250408141436.712387-1-anshuld@ti.com/
-
-Changes in v7:
-- Change SPL configs from SPL_HAS_* to SPL_*
-- Change library symbol names from LIB_BOOTx to just BOOTx
-- Add BOOTM for compiling boot.c
-- Link to v6: https://lore.kernel.org/u-boot/20250403215522.1284502-1-anshuld@ti.com/
-
-Changes in v6:
-- Add LIB_BOOTx library symbols
-- Update existing configs ensuring no change in size or build failure
-- Link to v5: https://lore.kernel.org/all/20250314035505.4029331-1-anshuld@ti.com/
-
-Changes in v5:
-- Remove imply clause for CMD_BOOTZ instead add default y for SPL_HAS_BOOTZ
-- Update commit message to reflect the changes
-- Remove 'More info' link
-- Link to v4: https://lore.kernel.org/u-boot/20250313032842.1189977-1-anshuld@ti.com/
-
-Changes in v4:
-- Don't set SPL_HAS_BOOTI for sandbox by default
-- Updated prompts for SPL_HAS_BOOT[IZ]
-- Removed check for SPL_HAS_FRAMEWORK from Makefile
-- Link to v3: https://lore.kernel.org/u-boot/20250312124757.789013-1-anshuld@ti.com/
-
-Changes in v3:
-- Add imply clause for CMD_BOOTZ to enable SPL_HAS_BOOTZ
-- Fix broken check for bootz_setup
-- Link to v2: https://lore.kernel.org/u-boot/20250312094241.629707-1-anshuld@ti.com/
-
-Changes in v2:
-- Add SPL_HAS_BOOT[IZ] configs
-- Link to v1: https://lore.kernel.org/u-boot/20250311093709.3372104-1-anshuld@ti.com/
-
-GitHub CI: https://github.com/u-boot/u-boot/pull/757
-
----
-Anshul Dalal (2):
-      spl: remove usage of CMD_BOOTx from image parsing
-      configs: disable SPL_BOOTZ to preserve spl size
-
- arch/arm/lib/Makefile                | 10 ++++------
- arch/riscv/lib/Makefile              |  4 ++--
- boot/Kconfig                         | 18 ++++++++++++++++++
- cmd/Kconfig                          |  5 +++++
- common/spl/Kconfig                   | 16 ++++++++++++++++
- common/spl/spl.c                     |  5 +++--
- configs/imx28_xea_defconfig          |  1 +
- configs/imx6qdl_icore_mipi_defconfig |  1 +
- configs/imx6qdl_icore_mmc_defconfig  |  1 +
- configs/imx6qdl_icore_rqs_defconfig  |  1 +
- 10 files changed, 52 insertions(+), 10 deletions(-)
----
-base-commit: 9094482ca7576877b2bfaa57c8e73cfeb536f8b9
-change-id: 20251023-fix_cmd_bootx-9ea1d69f08e3
-
-Best regards,
 -- 
-Anshul Dalal <anshuld@ti.com>
+2.51.0
 
