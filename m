@@ -4,72 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 657EDCCF9EA
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 14:17:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5047CCF9EA
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 14:45:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B222836F0;
-	Mon, 27 Oct 2025 15:17:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 28D9E832AD;
+	Mon, 27 Oct 2025 15:45:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VBM9NfBv";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9474D83849; Mon, 27 Oct 2025 15:17:24 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D280836EE
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 15:17:21 +0100 (CET)
+ id C9DC78352B; Mon, 27 Oct 2025 15:45:20 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 193EB82E34
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 15:45:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=anshuld@ti.com
-Received: from lelvem-sh01.itg.ti.com ([10.180.77.71])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTP id 59REHG9g2443992;
- Mon, 27 Oct 2025 09:17:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1761574636;
- bh=cNQlGNEevZUcB/KZbLooCbgPiQUNwr7wkar8SCA48qQ=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=VBM9NfBvmZWlNgq95Be5Yj3kTnXqNIGpOP5jYIdVHTC9d7565hUUIPXf0GgNyPfow
- QTxHGG5SUkK1EWuQ0Ahab4xIIbvXnwHFNiG/skTQwRW2DYZHia6k91V8TN0JtNwxpb
- oP0ef2Q1ZpGyWzhoP3IEL/nDFza7Z2SqjIxpaTmc=
-Received: from DFLE200.ent.ti.com (dfle200.ent.ti.com [10.64.6.58])
- by lelvem-sh01.itg.ti.com (8.18.1/8.18.1) with ESMTPS id 59REHGjQ1283323
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 27 Oct 2025 09:17:16 -0500
-Received: from DFLE207.ent.ti.com (10.64.6.65) by DFLE200.ent.ti.com
- (10.64.6.58) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20; Mon, 27 Oct
- 2025 09:17:16 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DFLE207.ent.ti.com
- (10.64.6.65) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.20 via Frontend
- Transport; Mon, 27 Oct 2025 09:17:16 -0500
-Received: from localhost (dhcp-172-24-233-105.dhcp.ti.com [172.24.233.105])
- by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 59REHFxT775204;
- Mon, 27 Oct 2025 09:17:16 -0500
-From: Anshul Dalal <anshuld@ti.com>
-Date: Mon, 27 Oct 2025 19:47:03 +0530
-Subject: [PATCH v10 2/2] configs: disable SPL_BOOTZ to preserve spl size
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6C29D169E;
+ Mon, 27 Oct 2025 07:45:09 -0700 (PDT)
+Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.33.8.67])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 28D4F3F63F;
+ Mon, 27 Oct 2025 07:45:16 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ Chen-Yu Tsai <wens@kernel.org>, James Hilliard <james.hilliard1@gmail.com>,
+ Lukas Schmid <lukas.schmid@netcube.li>,
+ Paul Kocialkowski <contact@paulk.fr>
+Subject: [GIT PULL] u-boot-sunxi/master for v2026.01
+Date: Mon, 27 Oct 2025 14:45:12 +0000
+Message-Id: <20251027144512.3199406-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20251027-fix_cmd_bootx-v10-2-10487e907710@ti.com>
-References: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
-In-Reply-To: <20251027-fix_cmd_bootx-v10-0-10487e907710@ti.com>
-To: <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Vignesh R
- <vigneshr@ti.com>, Anshul Dalal <anshuld@ti.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1761574631; l=2279;
- i=anshuld@ti.com; s=20251022; h=from:subject:message-id;
- bh=rSSNOO3KFbX+0Bt33Nev9vWpM8Aq1WoXM18P723haPA=;
- b=02kBC3LQZp7oquvkYPt0oCzTfuVBCS2SV3ukFaZEhf+okBdyvvt0gEmJXTj7cyaPOGBP4J8PA
- YOU0wcwd6mjDJf7rqigcU9YKJSDo69Bga8OMMpHCDaEU8e3XFYlriqv
-X-Developer-Key: i=anshuld@ti.com; a=ed25519;
- pk=Kv8FlQElcrR6efyEHmjtE83y8e0HKvqPyvVY+PJ4UFw=
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,59 +54,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In the existing behaviour, CMD_BOOTZ is not enabled by default which
-means zimage.o is not compiled in the SPL in falcon mode unless
-explicitly enabled. This changes now as SPL_BOOTZ is default y for
-falcon users which leads to larger SPL size with zimage.o being present.
+Hi Tom,
 
-This patch modifies the defconfigs that used falcon mode but don't
-require zimage support.
+please pull these sunxi changes for v2026.01. No big features this time,
+mostly a collection of patches that have been lying around for a bit.
+There are some DT updates, for those SoCs that do not use OF_UPSTREAM yet,
+hopefully that's the last time we need to do this exercise. And that's
+offset by switching over two more SoCs to OF_UPSTREAM.
+Two new boards get a defconfig, and some improvements for the sun8i-emac
+Ethernet driver. Finally a patch that fixes occassional DRAM size
+misdetection for new A523 boards.
 
-Signed-off-by: Anshul Dalal <anshuld@ti.com>
----
- configs/imx28_xea_defconfig          | 1 +
- configs/imx6qdl_icore_mipi_defconfig | 1 +
- configs/imx6qdl_icore_mmc_defconfig  | 1 +
- configs/imx6qdl_icore_rqs_defconfig  | 1 +
- 4 files changed, 4 insertions(+)
+There are a few outstanding patches that just wait for getting some
+details confirmed, which I might send then later.
 
-diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index 8715893bbcc0ad565ffc923ab5cc980e0f5bf0b3..0bb2e4472500b7ee1d31d29b35e78b82e912f4d2 100644
---- a/configs/imx28_xea_defconfig
-+++ b/configs/imx28_xea_defconfig
-@@ -132,3 +132,4 @@ CONFIG_DM_SPI=y
- CONFIG_MXS_SPI=y
- CONFIG_SPL_CRC8=y
- # CONFIG_SPL_OF_LIBFDT is not set
-+# CONFIG_SPL_BOOTZ is not set
-diff --git a/configs/imx6qdl_icore_mipi_defconfig b/configs/imx6qdl_icore_mipi_defconfig
-index c322fd3eff14058c2d3d3cb8cb64103554114e1c..cc05ecf587f56bfe82ac7706b630653fcbd13458 100644
---- a/configs/imx6qdl_icore_mipi_defconfig
-+++ b/configs/imx6qdl_icore_mipi_defconfig
-@@ -74,3 +74,4 @@ CONFIG_PINCTRL_IMX6=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
- CONFIG_IMX_THERMAL=y
-+# CONFIG_SPL_BOOTZ is not set
-diff --git a/configs/imx6qdl_icore_mmc_defconfig b/configs/imx6qdl_icore_mmc_defconfig
-index 0b82fbecbee373371e87bff5baac2d0de75bed09..169903266cd5c7420ae9bab4045e1fe0b56fac6c 100644
---- a/configs/imx6qdl_icore_mmc_defconfig
-+++ b/configs/imx6qdl_icore_mmc_defconfig
-@@ -102,3 +102,4 @@ CONFIG_SPLASH_SCREEN=y
- CONFIG_SPLASH_SCREEN_ALIGN=y
- CONFIG_BMP_16BPP=y
- CONFIG_IMX_WATCHDOG=y
-+# CONFIG_SPL_BOOTZ is not set
-diff --git a/configs/imx6qdl_icore_rqs_defconfig b/configs/imx6qdl_icore_rqs_defconfig
-index 8520f90c867aee27894baeac6994576589fe2c5f..34d834ec8e1556612c7e692a540eababaa84230f 100644
---- a/configs/imx6qdl_icore_rqs_defconfig
-+++ b/configs/imx6qdl_icore_rqs_defconfig
-@@ -71,3 +71,4 @@ CONFIG_PINCTRL=y
- CONFIG_PINCTRL_IMX6=y
- CONFIG_DM_SERIAL=y
- CONFIG_MXC_UART=y
-+# CONFIG_SPL_BOOTZ is not set
+CI passed, and I tested this briefly on affected boards.
 
--- 
-2.51.0
+Thanks,
+Andre
 
+================================
+The following changes since commit 9094482ca7576877b2bfaa57c8e73cfeb536f8b9:
+
+  Merge tag 'efi-2026-01-rc1-2' of https://source.denx.de/u-boot/custodians/u-boot-efi (2025-10-26 09:03:36 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git HEAD
+
+for you to fetch changes up to fa4dfe870c16a90ed14be92f5f3a3822a7ecfe9a:
+
+  sunxi: dts: arm: update devicetree files from Linux kernel tree (2025-10-27 11:12:57 +0000)
+
+----------------------------------------------------------------
+Andre Przywara (5):
+      sunxi: a523: Re-use H6/H616 DRAM size detection method
+      sunxi: switch the Allwinner T113 SoC to OF_UPSTREAM
+      sunxi: switch Allwinner A80 boards to OF_UPSTREAM
+      sunxi: dts: arm64: update devicetree files from Linux kernel tree
+      sunxi: dts: arm: update devicetree files from Linux kernel tree
+
+Chen-Yu Tsai (1):
+      sunxi: a523: Add OrangePi 4A defconfig
+
+James Hilliard (1):
+      Makefile: pass KEYDIR when set to sunxi-spl.bin mkimage
+
+Lukas Schmid (1):
+      sunxi: add support for NetCube Systems Kumquat
+
+Paul Kocialkowski (2):
+      net: sun8i-emac: Remove internal PHY config default value
+      net: sun8i-emac: Add support for active-low leds with internal PHY
+
+ arch/arm/dts/Makefile                              |    4 -
+ arch/arm/dts/sun50i-a64-pine64-lts.dts             |    2 +-
+ arch/arm/dts/sun50i-a64-pine64-plus.dts            |    2 +-
+ arch/arm/dts/sun50i-a64-pine64.dts                 |   14 +-
+ arch/arm/dts/sun50i-a64-pinebook.dts               |    4 +-
+ arch/arm/dts/sun50i-a64-pinephone.dtsi             |   21 +
+ arch/arm/dts/sun50i-a64-pinetab-early-adopter.dts  |    2 +-
+ arch/arm/dts/sun50i-a64-pinetab.dts                |    2 +-
+ arch/arm/dts/sun50i-a64-sopine-baseboard.dts       |   21 +-
+ arch/arm/dts/sun50i-a64-teres-i.dts                |    2 +
+ arch/arm/dts/sun50i-a64.dtsi                       |   55 +-
+ arch/arm/dts/sun50i-h5-nanopi-neo-plus2.dts        |   38 +
+ arch/arm/dts/sun50i-h5-nanopi-neo2.dts             |    1 +
+ arch/arm/dts/sun50i-h5-nanopi-r1s-h5.dts           |    1 +
+ arch/arm/dts/sun50i-h5-orangepi-pc2.dts            |    1 +
+ arch/arm/dts/sun50i-h5-orangepi-prime.dts          |    1 +
+ arch/arm/dts/sun50i-h5-orangepi-zero-plus.dts      |    1 +
+ arch/arm/dts/sun50i-h5-orangepi-zero-plus2.dts     |    1 +
+ arch/arm/dts/sun50i-h5.dtsi                        |    6 +-
+ arch/arm/dts/sun50i-h6-beelink-gs1.dts             |   39 +-
+ arch/arm/dts/sun50i-h6-orangepi-3.dts              |   17 +-
+ arch/arm/dts/sun50i-h6-orangepi-lite2.dts          |    2 +-
+ arch/arm/dts/sun50i-h6-orangepi.dtsi               |   23 +-
+ arch/arm/dts/sun50i-h6-pine-h64-model-b.dts        |    2 +-
+ arch/arm/dts/sun50i-h6-pine-h64.dts                |    3 +-
+ arch/arm/dts/sun50i-h6-tanix.dtsi                  |    1 +
+ arch/arm/dts/sun50i-h6.dtsi                        |   41 +-
+ arch/arm/dts/sun7i-a20-bananapi.dts                |   27 +
+ arch/arm/dts/sun8i-a23-a33.dtsi                    |   20 +
+ arch/arm/dts/sun8i-a33-vstar-core1.dtsi            |   96 ++
+ arch/arm/dts/sun8i-a33-vstar.dts                   |  205 ++++
+ arch/arm/dts/sun8i-a83t.dtsi                       |    4 +-
+ arch/arm/dts/sun8i-h2-plus-orangepi-zero.dts       |   14 +
+ arch/arm/dts/sun8i-h3-nanopi-neo-air.dts           |    2 +-
+ arch/arm/dts/sun8i-h3-orangepi-zero-plus2.dts      |   14 +
+ arch/arm/dts/sun8i-h3.dtsi                         |    2 +-
+ .../dts/sun8i-orangepi-zero-interface-board.dtso   |   46 +
+ arch/arm/dts/sun8i-q8-common.dtsi                  |    2 +-
+ arch/arm/dts/sun8i-r40.dtsi                        |    4 +-
+ arch/arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts     |   35 -
+ arch/arm/dts/sun8i-t113s.dtsi                      |   59 -
+ arch/arm/dts/sun9i-a80-cubieboard4.dts             |  508 --------
+ arch/arm/dts/sun9i-a80-optimus.dts                 |  510 --------
+ arch/arm/dts/sun9i-a80.dtsi                        | 1253 --------------------
+ arch/arm/mach-sunxi/Kconfig                        |    2 +
+ arch/arm/mach-sunxi/Makefile                       |    2 +-
+ arch/arm/mach-sunxi/dram_sun55i_a523.c             |   82 +-
+ arch/riscv/dts/sunxi-d1-t113.dtsi                  |   15 -
+ arch/riscv/dts/sunxi-d1s-t113.dtsi                 |  927 ---------------
+ board/sunxi/MAINTAINERS                            |   10 +
+ configs/Cubieboard4_defconfig                      |    2 +-
+ configs/Merrii_A80_Optimus_defconfig               |    2 +-
+ configs/Sunchip_CX-A99_defconfig                   |    1 +
+ configs/mangopi_mq_r_defconfig                     |    2 +-
+ configs/netcube_kumquat_defconfig                  |   43 +
+ configs/orangepi_4a_defconfig                      |   32 +
+ drivers/net/sun8i_emac.c                           |   40 +-
+ scripts/Makefile.xpl                               |    3 +-
+ 58 files changed, 784 insertions(+), 3487 deletions(-)
+ create mode 100644 arch/arm/dts/sun8i-a33-vstar-core1.dtsi
+ create mode 100644 arch/arm/dts/sun8i-a33-vstar.dts
+ create mode 100644 arch/arm/dts/sun8i-orangepi-zero-interface-board.dtso
+ delete mode 100644 arch/arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts
+ delete mode 100644 arch/arm/dts/sun8i-t113s.dtsi
+ delete mode 100644 arch/arm/dts/sun9i-a80-cubieboard4.dts
+ delete mode 100644 arch/arm/dts/sun9i-a80-optimus.dts
+ delete mode 100644 arch/arm/dts/sun9i-a80.dtsi
+ delete mode 100644 arch/riscv/dts/sunxi-d1-t113.dtsi
+ delete mode 100644 arch/riscv/dts/sunxi-d1s-t113.dtsi
+ create mode 100644 configs/netcube_kumquat_defconfig
+ create mode 100644 configs/orangepi_4a_defconfig
