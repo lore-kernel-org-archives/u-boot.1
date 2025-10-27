@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4DC6CCF9EB
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 16:38:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3F28CCF9E0
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 16:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B237838BB;
+	by phobos.denx.de (Postfix) with ESMTP id 533A6838D7;
 	Mon, 27 Oct 2025 17:37:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HzoQnd03";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hLFvHF0x";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jUKblfSf";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="qd56iyUS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10A8C838BB; Mon, 27 Oct 2025 17:37:55 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 34626838BB; Mon, 27 Oct 2025 17:37:55 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F379838BB
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 17:37:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D1BB82E34
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 17:37:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,46 +30,46 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4cwK1W6gtFz9tVJ;
- Mon, 27 Oct 2025 17:37:51 +0100 (CET)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4cwK1Y0FB9z9tNb;
+ Mon, 27 Oct 2025 17:37:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761583072;
+ s=mail20150812; t=1761583073;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JG+ffPQduVFTAnXU39HDvsvZBHBNID6nQ03n6h52aG0=;
- b=HzoQnd03GSQ3vvrRwPsX9s1nfI2BoqL8of3XCnhAyaX9Dy9u+/uBNWTjeBgsO51nOFh/RO
- IcpwO+Wuahx35BEY2CYp3uh+xOWUDy80Mn4VMGPCi59qikTfM4KEEw/KASZsSNODVm0BO5
- wS02+ZwHy1Yc8kPeYiJoXdRGgwz0RXKPcEdVw1BfZkIQNdZ4TtLSxi/hdYPy3rawTKfEMT
- 5qkthS/qgTvgF1E8BXE8JlBWUTi+4GrKipL24tDV3XoRd3LBPOzuYIseTvvSNZtapHHuSQ
- aQGKcmSQEHz4HaCLCAHwqgdQnDi6RoKdoLIwhfAlNsioat49rF0ewUlOA0DL9A==
+ bh=FvVIJhSLlXU4TtMvy66R0wMKtBZKnrZl737sMRwIjVQ=;
+ b=jUKblfSfF/splxNdMBhOR6cGWNrWbGfkq82cNTy4K/vh9r6mYTIF6XZbHFIyCB5WBu8J4i
+ KY9DnFULNY+U9B61eaU+qeR2dy5JwIx96Llat7MeV/45VHkyQcy6+5fxh0VVE2/sdXSB8E
+ dRjaZO7Mbms4lBPGla+LLCssF+dNFwQoXwgdhTnJ0pVAMQslHE9HfeUIIuUg67cl0awc5e
+ nre1xcMVVkwi9VHEmBLij9ne4prAGNJ/BakQsCqUc7Hzx5iCR561k9Tt/dUAJoy8qYq40G
+ SYmrz1p8tg3E78sTWyumC8Mav2HufmctfN+x4I/COupicpkJv3BKlmn/6yTRUA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1761583070;
+ s=mail20150812; t=1761583071;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JG+ffPQduVFTAnXU39HDvsvZBHBNID6nQ03n6h52aG0=;
- b=hLFvHF0x8gaMgXICTqW6YAvet/9C2m8dNWFDvLkQwmgTQ6SwOnomRnyQT1Uegm545mCkkk
- 6QLtHZ3bm8iuqLDFjMbwuVfhdJjd3bmXb3KjPJ/SX6caLepak3JV5TmY2TO/uBpJpxlYWk
- FDCGAJUprTB82KsR3NXx5i7SLkwPR+ZKEauE1InsxtlnAIdYfquXNTYA5AwIS29EMZlHIB
- XulWs2OKM4UsByjdK1UuVRQY2WTQm5ybfa/io35Q8KU7KY1MumaifA2hd4CQWe1hTIc4Kw
- cSr/M7vClMa+yjiugijMRmLpJN/Zgh0LXjNAbTEw7tD0aNSLDaSCx492WyRq6w==
+ bh=FvVIJhSLlXU4TtMvy66R0wMKtBZKnrZl737sMRwIjVQ=;
+ b=qd56iyUSb93U70IKGrQs6HpELK/3FrjYSnYKALlHuiafKyU5GKxzCW4oM7rZchu0uUMNl2
+ j1VG+HtFBJTqffKCYD6Tzyjcy6Pn38hWDXhC1czTk5LXFeocqnOwufo7pdC30BGaEnrdmh
+ zi1Umt5QQja8IN3VBaU2+p47mGUvsBDSiDwwgzpfAGE5Ws9xy39GGGWoFSFfovF3tMQvfA
+ LVDY1y1PDmKLhJqREdM96Dy/+DpklBcQdjMGSUl8ul7e26iwxrWxTzkaFMfxJgV6PBf97a
+ 6Rw16JsCUHyCH+UzS7RILZBU7tZ7iBBLL8N8XXrTajwbPALQP43sF5gh0yQUmQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Hai Pham <hai.pham.ud@renesas.com>, Huy Bui <huy.bui.wm@renesas.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/5] gpio: renesas: Drop unused register macros
-Date: Mon, 27 Oct 2025 17:35:35 +0100
-Message-ID: <20251027163738.11734-2-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 3/5] gpio: renesas: Wrap quirks in struct rcar_gpio_data
+Date: Mon, 27 Oct 2025 17:35:36 +0100
+Message-ID: <20251027163738.11734-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20251027163738.11734-1-marek.vasut+renesas@mailbox.org>
 References: <20251027163738.11734-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: 8cr934cjtc7zwu9qqcz4rqcdjbgarde3
-X-MBO-RS-ID: 7909b6ce537313ed1ef
+X-MBO-RS-ID: df715455aed20263c64
+X-MBO-RS-META: skw493zi91edzugzuebydajdrgidg433
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,9 +86,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove register macros for registers which are not used by this driver.
-This makes it easier to get an overview of which registers are really
-used by the driver. No functional change.
+Wrap the RCAR_GPIO_HAS_INEN quirk in more flexible struct rcar_gpio_data {}
+in preparation for addition of Renesas R-Car Gen5 GPIO controller support.
+The Renesas R-Car Gen5 GPIO controller requires more than a single quirk
+to properly describe it, therefore increase the flexibility and introduce
+full match data structure, and use it throughout the driver. No functional
+change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -99,28 +101,90 @@ Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/gpio/gpio-rcar.c | 7 -------
- 1 file changed, 7 deletions(-)
+ drivers/gpio/gpio-rcar.c | 40 ++++++++++++++++++++++++++--------------
+ 1 file changed, 26 insertions(+), 14 deletions(-)
 
 diff --git a/drivers/gpio/gpio-rcar.c b/drivers/gpio/gpio-rcar.c
-index 109383e83d5..8853187e64e 100644
+index 8853187e64e..fada6f4c624 100644
 --- a/drivers/gpio/gpio-rcar.c
 +++ b/drivers/gpio/gpio-rcar.c
-@@ -19,14 +19,7 @@
- #define GPIO_INOUTSEL	0x04	/* General Input/Output Switching Register */
- #define GPIO_OUTDT	0x08	/* General Output Register */
- #define GPIO_INDT	0x0c	/* General Input Register */
--#define GPIO_INTDT	0x10	/* Interrupt Display Register */
--#define GPIO_INTCLR	0x14	/* Interrupt Clear Register */
--#define GPIO_INTMSK	0x18	/* Interrupt Mask Register */
--#define GPIO_MSKCLR	0x1c	/* Interrupt Mask Clear Register */
- #define GPIO_POSNEG	0x20	/* Positive/Negative Logic Select Register */
--#define GPIO_EDGLEVEL	0x24	/* Edge/level Select Register */
--#define GPIO_FILONOFF	0x28	/* Chattering Prevention On/Off Register */
--#define GPIO_BOTHEDGE	0x4c	/* One Edge/Both Edge Select Register */
- #define GPIO_INEN	0x50	/* General Input Enable Register */
+@@ -28,9 +28,13 @@
  
- #define RCAR_MAX_GPIO_PER_BANK		32
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++struct rcar_gpio_data {
++	u32				quirks;
++};
++
+ struct rcar_gpio_priv {
+-	void __iomem		*regs;
+-	u32			quirks;
++	void __iomem			*regs;
++	const struct rcar_gpio_data	*data;
+ };
+ 
+ static int rcar_gpio_get_value(struct udevice *dev, unsigned offset)
+@@ -65,6 +69,7 @@ static void rcar_gpio_set_direction(struct udevice *dev, unsigned offset,
+ 				    bool output)
+ {
+ 	struct rcar_gpio_priv *priv = dev_get_priv(dev);
++	const struct rcar_gpio_data *data = priv->data;
+ 	void __iomem *regs = priv->regs;
+ 
+ 	/*
+@@ -77,7 +82,7 @@ static void rcar_gpio_set_direction(struct udevice *dev, unsigned offset,
+ 	clrbits_le32(regs + GPIO_POSNEG, BIT(offset));
+ 
+ 	/* Select "Input Enable/Disable" in INEN */
+-	if (priv->quirks & RCAR_GPIO_HAS_INEN) {
++	if (data->quirks & RCAR_GPIO_HAS_INEN) {
+ 		if (output)
+ 			clrbits_le32(regs + GPIO_INEN, BIT(offset));
+ 		else
+@@ -141,7 +146,7 @@ static int rcar_gpio_probe(struct udevice *dev)
+ 	int ret;
+ 
+ 	priv->regs = dev_read_addr_ptr(dev);
+-	priv->quirks = dev_get_driver_data(dev);
++	priv->data = (const struct rcar_gpio_data *)dev_get_driver_data(dev);
+ 	uc_priv->bank_name = dev->name;
+ 
+ 	ret = fdtdec_parse_phandle_with_args(gd->fdt_blob, node, "gpio-ranges",
+@@ -163,17 +168,24 @@ static int rcar_gpio_probe(struct udevice *dev)
+ 	return 0;
+ }
+ 
++static const struct rcar_gpio_data rcar_gpio_gen2_data = {
++};
++
++static const struct rcar_gpio_data rcar_gpio_gen3_data = {
++	.quirks = RCAR_GPIO_HAS_INEN,
++};
++
+ static const struct udevice_id rcar_gpio_ids[] = {
+-	{ .compatible = "renesas,gpio-r8a7795" },
+-	{ .compatible = "renesas,gpio-r8a7796" },
+-	{ .compatible = "renesas,gpio-r8a77965" },
+-	{ .compatible = "renesas,gpio-r8a77970" },
+-	{ .compatible = "renesas,gpio-r8a77990" },
+-	{ .compatible = "renesas,gpio-r8a77995" },
+-	{ .compatible = "renesas,gpio-r8a779a0", .data = RCAR_GPIO_HAS_INEN },
+-	{ .compatible = "renesas,rcar-gen2-gpio" },
+-	{ .compatible = "renesas,rcar-gen3-gpio" },
+-	{ .compatible = "renesas,rcar-gen4-gpio", .data = RCAR_GPIO_HAS_INEN },
++	{ .compatible = "renesas,gpio-r8a7795", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,gpio-r8a7796", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,gpio-r8a77965", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,gpio-r8a77970", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,gpio-r8a77990", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,gpio-r8a77995", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,gpio-r8a779a0", .data = (ulong)&rcar_gpio_gen3_data },
++	{ .compatible = "renesas,rcar-gen2-gpio", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,rcar-gen3-gpio", .data = (ulong)&rcar_gpio_gen2_data },
++	{ .compatible = "renesas,rcar-gen4-gpio", .data = (ulong)&rcar_gpio_gen3_data },
+ 	{ /* sentinel */ }
+ };
+ 
 -- 
 2.51.0
 
