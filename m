@@ -4,145 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F2ECCF9EA
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 13:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73DF5CCF9EC
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 13:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5505683700;
-	Mon, 27 Oct 2025 14:02:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id 91CC583881;
+	Mon, 27 Oct 2025 14:02:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="ghPvPX8L";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44CF6832AD; Mon, 27 Oct 2025 07:37:25 +0100 (CET)
-Received: from BL0PR03CU003.outbound.protection.outlook.com
- (mail-eastusazlp170120007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c101::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5CB1F80422; Mon, 27 Oct 2025 09:15:05 +0100 (CET)
+Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+ (mail-sh0chn02on20704.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4420:2::704])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 532B180422
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 07:37:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 633DD800B6
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 09:15:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=boon.khai.ng@altera.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=H5OTA+qmBEAz9OxU17TfujHTkHW9JidcbQ6efaFH+8mK+UNZZ2Fk292ltR0N/97ALqp1ylOtWW2BUoSSbr61tdxSyPxEq+mLzkSwiOb/m/RBa7UxnHRuQcCWMEica6pMYwYIBJ2goIUckBoESVzRhai6YsoNN6An6SpWxtVkhoXN0be7Bu338B0YQOD2eBuw8rOb1nrFMLz1U2pxp+mJcryIe098YzUrcbDKJ/6n6Ho8dALLmb/iks31D2z7tck3vTzd5W0M7FdYTmZrqp8u3bQHLJy0OgrsLstV9Ck2hFTZtCUbLBcW9T3aN5NQYqx28xC+fbfLmWTsSfn4XJu+Tw==
+ spf=pass smtp.mailfrom=hal.feng@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RJf7uLZ+qzdT4b/cHS18Fcb7GrX31gxZQbxA2AMpgiazB25ZVuKSBTgOlqdCn6ZcdYPCuLZVp8KmiVTlf0/6+61B1x1xmxEVNpTzYbOEE9/laWZkQ77oVeTO7pkCghlj+6jerokbZ8RA57PYyNWa5sUNwOONVQXDCva6NTnZ63iMdl/z6JOJCTYQq9k0MPFpjtPYHVhf3ZLxg61VdVgEUB/HtF8hIKpDGghPA/qAjVCaynpp692ZMTa482Qtsa2HtgrVsUlPsIxckxGFak2hOJ03un0eVl45LsXjqWZoowC6m00MAusybd6NwgnnFubhoJ0gzFJ+64x3jMS8duk0VA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
+ s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ci3rUptguqtBR53AW0Xn2CwBogK0idp7kFSU4pDsmAw=;
- b=icFtnNWS9O6Vs9sW71MR10p9IMn1rWRIJOUD0IAJcNScJtwvBiBqLcn62ZivW+MBes++Wnd7uHT7I9DRKyZLsr7uWwVeuAHEK1eEvB4m87plv0IpYDsqR57hUhYSphGeCG7eRspY50szWE1JDjoo3Pk8B6r6c4KM+Qz9Ym5wbKPrwxUo3P/Z8HBRCZKT1cobM4aXEBqxNLF0ofyFK04rtpug7yWNVuKpIwUxedBMvHK/qVV/h4yRzz+VgWEMdvjLp8+10LCTwDmeyYiTncyHlp2u9aagqgBdx4Wpbrl7Xw3asW3WQoRNWO2yieTdRB46uJnglGE7VP50a4dtmPcLGw==
+ bh=WmOQwiiNmEVQL/rSkS/4jvf8YYBL6aXgiAogDJmyeDU=;
+ b=XSlq8SwpbHfyjEzR/AqDj+kg81Eg+YcJ85ZFOQyap8YX2v/Hn4d5Yc2BWImkh20zoQRZ6IMrn40bbAxM9P3wrkzhB3tPjC2+oZT6x8kl8VCaZs4RFuYVX8HDC2wHc4B3ar0F4BDNItHU49KFnXWD9yvBKi/4VXs3vmrtJiy0cQS/vkQ3Sy+cpzlPsPCvdg4+dPRQSI87uLr9wpstdEeu9XDNgr21QxoZxJ6KXqPTYn6z/9OA0tgzCAxgKCZOI/IlcNs73/qT7hwlPt0hV5Vh+6XDNkJ1i23SA+vgvzTaJHQFMkoKZi5UoWw8WQXU3VTHt/JacSi0ZO82mQ6oHhhrMw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ci3rUptguqtBR53AW0Xn2CwBogK0idp7kFSU4pDsmAw=;
- b=ghPvPX8Lv3dApI250O+Q4uRVactPZortY1gZk/cIpDAOeyot5u3wYTtM6f1oEuC2auUSqEz0dMXtq9DOaDP8WzR8zx9CN28jDG9SGRkUWjZKLQoZYebWT6TpOzNt/KXLXVYFmJQbTCXvJsep20hLWwQ5Zxwy9a0ikq8NioX6g7etpWwxCtovAfFayf08CX7fQ0AJtxbwaYVteNinrVPoIfYlfmFjlErRURmKAjOyWtfhgnyI6DdfGUGTt+iaQ/MJP1FGRqm1PlQGXenBM/c/Dwo5JCxAosvMcNn2dik95sIILYL1t+liI0Ib+pUaxgiTmjGf4k3OxrCSix0FVG+Dqg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com (2603:10b6:806:2f6::11)
- by SA5PR03MB8427.namprd03.prod.outlook.com (2603:10b6:806:477::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.18; Mon, 27 Oct
- 2025 06:37:20 +0000
-Received: from SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::3145:43b1:92d7:f7a4]) by SA3PR03MB7187.namprd03.prod.outlook.com
- ([fe80::3145:43b1:92d7:f7a4%7]) with mapi id 15.20.9253.017; Mon, 27 Oct 2025
- 06:37:19 +0000
-From: Boon Khai Ng <boon.khai.ng@altera.com>
-To: Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
- u-boot@lists.denx.de, Tien Fong Chee <tien.fong.chee@altera.com>
-Cc: Boon Khai Ng <boon.khai.ng@altera.com>
-Subject: [PATCH v2 1/1] spi: cadence: Add driver for xSPI
-Date: Mon, 27 Oct 2025 14:36:54 +0800
-Message-ID: <20251027063654.27188-2-boon.khai.ng@altera.com>
-X-Mailer: git-send-email 2.43.7
-In-Reply-To: <20251027063654.27188-1-boon.khai.ng@altera.com>
-References: <20251027063654.27188-1-boon.khai.ng@altera.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: BY3PR04CA0003.namprd04.prod.outlook.com
- (2603:10b6:a03:217::8) To SA3PR03MB7187.namprd03.prod.outlook.com
- (2603:10b6:806:2f6::11)
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14) by ZQ2PR01MB1145.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:6::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9228.19; Mon, 27 Oct
+ 2025 08:14:55 +0000
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7%6]) with mapi id 15.20.9228.016; Mon, 27 Oct 2025
+ 08:14:55 +0000
+From: Hal Feng <hal.feng@starfivetech.com>
+To: E Shattow <e@freeshell.de>, Leo <ycliang@andestech.com>, Tom Rini
+ <trini@konsulko.com>, Rick Chen <rick@andestech.com>, Sumit Garg
+ <sumit.garg@kernel.org>, Emil Renner Berthing
+ <emil.renner.berthing@canonical.com>, Heinrich Schuchardt
+ <heinrich.schuchardt@canonical.com>
+CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: RE: [PATCH v1 2/9] riscv: dts: starfive: Add VisionFive 2 Lite board
+ device tree
+Thread-Topic: [PATCH v1 2/9] riscv: dts: starfive: Add VisionFive 2 Lite board
+ device tree
+Thread-Index: AQHcRMSITAF/Ez7TCUSKxA/KpCGn6bTRIJ0AgARk6SA=
+Date: Mon, 27 Oct 2025 08:14:55 +0000
+Message-ID: <ZQ2PR01MB13075E9B291AF6D313AF347DE6FC2@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+References: <20251024085932.83596-1-hal.feng@starfivetech.com>
+ <20251024085932.83596-3-hal.feng@starfivetech.com>
+ <ff0313ed-5d43-4603-aed4-6e41b2abed37@freeshell.de>
+In-Reply-To: <ff0313ed-5d43-4603-aed4-6e41b2abed37@freeshell.de>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1145:EE_
+x-ms-office365-filtering-correlation-id: 98b2eea9-334d-4ed7-174b-08de1530e97d
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|41320700013|38070700021; 
+x-microsoft-antispam-message-info: dr+xP6EkGScUSt0rmAW6THTZozdOd2t+oHH8Y+ET127L3I+v7CaTnycOqvmN/DZyKRNad5MiN7lD7yEWARL3vtLSYi9cv+jAf0uzlDkF4YrxNLr2s2+299zg9IpaaFUPohZhktDqSvfEwq/OMBC/zODisNVkIQPEJ8GzQ8hzIzX3SKMYPy588UnAXRc4INDdFRYtesz8J1JW+D+Et1WuPNj/mlOKOvyjedCFK81w2vTZp4aVQRC05LhfqQxZkXphiM+RH5gK/+FBqqqnmAu5GBjM6dC+RYn8aKqXK/eMdMq+txMt6crV4ZvlpczkxkFP21xzv8+Isxp3PMDpDyRUQ33mmrypVhSRAyo81d5CmTEGdCf0l9hIKTzpObE5BaWqEZLQRuTFRurpXl5wVBd+5OqN0PDNRwAhFPefxhKWttAZoKsmYGTE2KgJfZaM/A8tuzdrLnQkQ1EZuEFAiJilgofi3PZVskr864G/tZM+UTdFwBUw/bZtQOk2N8X/C4Ld/M3rwB6+H3ueyQaW+Uw3h2tGje1UFZJN8MBKWn//AbgfxEByD02JkriVl10LNXBsdE7pnAWvG3/Gjya2yn5nIfFPsip1I3ele1HqfV3EOXI=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE; SFS:(13230040)(1800799024)(366016)(41320700013)(38070700021);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?LzZadFU5KzI0SXdhUEo5MUI4OHh1TDM1VWp3anlKSXJma2YwRldGQXdZS2Nl?=
+ =?utf-8?B?NDZvd2FnOWVpNWVOVVBnZk95N3ZyUlhVT2hOY0NXT1pjSWJqYURLUjRSamRR?=
+ =?utf-8?B?R2cyNWt0eEpQUlMwc2xxOHlrUUJlSkh3YWFTRmRqN0NyOTdlUWFxOXRTVEtW?=
+ =?utf-8?B?UFdqeWRIaG9uV1huWitibXI2TTNRZWFtYXpIRXB6ZWQxOXpWeXQ4MmpVMGZh?=
+ =?utf-8?B?RVhFd3ZmaW5FNEpHeU9CekZtVlNsVGNFTWtNVGI4eWRSLzFtS1BSbFV6c2ZU?=
+ =?utf-8?B?Y1oyTER3eFh0c0hGei9mczcxTUI5OGtUSWRESGNKek5KVHhqQnk5MS9sRzN2?=
+ =?utf-8?B?eVkwSHVRd2pTUWN0YzNJbkxMc2VZNC83Uk8yYVdxTml1elc2M3NvaU5WdlVN?=
+ =?utf-8?B?WjBYY0hBUmlmYUUxdXpPYTEraVdTcGs0MUg3ZTEyQklYc2RVaDFTUkhhQVNh?=
+ =?utf-8?B?L3VqdGoxRWFjSC9ZOFdFUWFnVDByYy9keURYZm42amZnVDlDS1hKMTVMaVNv?=
+ =?utf-8?B?Y05pWC9VcGM3V1FvU3poSDhNcDl5alN3b2xkRktCZlpYcDRNMGpNTGYzaUt1?=
+ =?utf-8?B?dXdLT0hlRUdacE1FYTFCazhTeStuc20rZ0Q3ZlcxcGtaMEJLQVMzZDRPdzB4?=
+ =?utf-8?B?NW50dWJtSlJyTTFvdjNrVkt1Q1JnTW9ZekdCZlJUWFJvTElZaGhHeG9lbWRq?=
+ =?utf-8?B?SjdodFRlQngvTUNDRmpYdEYrQ1dqK0RQMTVJSWtZdjZYeWJXQ0llMnJlT3Fw?=
+ =?utf-8?B?OU1jYnVib2hOQW5tMHk2Z2VwL01BbWdwRVNUd3pManpHU3hITzBNTHByRkVO?=
+ =?utf-8?B?cWhFdFVZb0tRTkZJWGFxOWo1MTRuV1RuRldNSGc0a3JJYzJrazVDMi9qRC8z?=
+ =?utf-8?B?blZNUUQzSSt2blJ0RzE4bGh0b2JRVkYvd3F4cU9GRWhRZFhRMGxNYThYNXFO?=
+ =?utf-8?B?TGpnUkk2NlRUNXdSNWYvNmdnYVM1L05pTGJSS1BYbWNzNUUxK211LzlOY2dG?=
+ =?utf-8?B?QTEvZVdIckNLTGVIWUJjd2VPcXRhZ1ZiNTgvK1NlVjR0MzNsM3lLamNWcUF5?=
+ =?utf-8?B?UG5WM0RJOHF0NWI2Rm9mcVhvTVBVaEt0RlVyTVFnQUxjQjArR2IydWkyQUdu?=
+ =?utf-8?B?eGlTSXhYZWZHZi9GRnYvblRjZ2VOYkpPNGpyOUNDWVhzYW13K0w4ZUJrVHRX?=
+ =?utf-8?B?UThhU0lMVStrQzhMOE1xR05zNHUxWUdlMzJCd1h1cU55Nldhc3o2bmFlbEhO?=
+ =?utf-8?B?RGlWd1ZkK2dWU1pkeEJYS1N2OVJMWDlBejMzMTEyWGRSTjNleDlZZCtDQUVI?=
+ =?utf-8?B?V2hsZmNacmI5aW8vY1NZL2s2MnBLbGhwMHZoR29HeEhyUGtlRHJGS2xNVGRo?=
+ =?utf-8?B?T0daM0xQWkt3djFib1pHbmh3MGZzd2E1a0thQW1ZTW5jRDF6c1JSY0hDMzh6?=
+ =?utf-8?B?cTlRL21KMDdUdGhuUkZMTW96UjFUR1c2Q0VCd0RocEFxM1JzZGlwWTJNWkxQ?=
+ =?utf-8?B?d3BBcUVMd09YbzRqVXh6TDJNVDJJeDdiRGNROU5LWGM0dktIS011Smx0cWtN?=
+ =?utf-8?B?VWo1T3hOUXVJRmFlc0s5NmZxR0VaWm9qMnBqUVpZL2dWM1hOb29sSXR3NEh4?=
+ =?utf-8?B?cG1mSHlXMDBqRFdzeTJoVkRlUUhuajZ4VnVDOWJ4dnF3MHJVRVlTSGwrcFpJ?=
+ =?utf-8?B?cUdtczBZWUVDZXYrSHJwQ3dQank5THlUcVVRaVNKMm0zK3pDS0NPTkpDclFk?=
+ =?utf-8?B?blpsQWRGSHp2c3NGZGIwTkNLblZ6VDQvOEVjek9HVEpjcUpkTVFJVCtOdXZB?=
+ =?utf-8?B?cHN1MVZjNXNtZFFkVmhZSlQ3alpYL1BEZTVseDl4M29kWDNubHBUL08zZEpx?=
+ =?utf-8?B?QlhyWjVCdzR6QzN1NGM5OVFFU1VqVExVYnVxUlFLMnhHendkWXBDb3ZaNFNC?=
+ =?utf-8?B?VFNLcThlU1BxdWZxVzBsejh6clQ3Sm8rTzlIMTErQ09wVFZybFRFSEdoSzZv?=
+ =?utf-8?B?Rldwb2ZDbTlnNmpsM0Y1UFNKNVBMUjhsRUFHRWFGOXVza2JJNG91Z1BYOVVy?=
+ =?utf-8?B?R2N3cXo2Z3B3LzVkTDVMdTRTaFRBbnVXSjhvUkNkNU9mTlg2c2FSTkNCckc5?=
+ =?utf-8?Q?dRGZAb7jGjHOzJ1xf7q7gDHlz?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA3PR03MB7187:EE_|SA5PR03MB8427:EE_
-X-MS-Office365-Filtering-Correlation-Id: 229270f6-2964-42d6-6d42-08de1523470b
-X-MS-Exchange-AtpMessageProperties: SA
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0; ARA:13230040|376014|366016|1800799024|13003099007;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fQbccDBiiWVCefKkwp/wfNJgxNeM5me6I04j6n4tcUFAXwhBem/gvM9//LT0?=
- =?us-ascii?Q?4hZvp5aCKEO054uIn8dRqF9R05JTYczkmHYU2UaLxOAIyHZF5+bjmDz8OOo/?=
- =?us-ascii?Q?jTbs3/lD+sKd0u1VeoKk3EKz8E0FZd8BV3P+6ajBIEpvqIn9tvgnlTNlNeu/?=
- =?us-ascii?Q?jo93DGNkeBXo/EV7PnNIsOQWD6MGftRhnNq36CbPx716d0o/lgRTh7ctQpjL?=
- =?us-ascii?Q?6AViYbXM2g5RR2kOHyoBsSdfnj9XjEp4eJZbVkV4digp5SDq4IGrNseIFA6+?=
- =?us-ascii?Q?2ctOLWdG9J3KeaLQBVflMKghB7n4aWhQ+0s7CpzEzMz/XzxPfwYLphTCEQ1I?=
- =?us-ascii?Q?BZvNYmSwxPJLKki7Y5zope4nSK7MkA1dK5ksJZrARgS/PSXlmEEG81o413JX?=
- =?us-ascii?Q?f41760lbQ01Y666khRHxx4OhY76kvrDRLdYif5Vf2fKsUtNiC6v0gRyK1/q0?=
- =?us-ascii?Q?y3xJqnKeNI2+YKpzFSnZU1sbwOAdJ3pjQ+dwLriMUqurRWXxp7LNVSlfZvtV?=
- =?us-ascii?Q?RH+2WESnsATokkOTR+Mi0VqVyW4mAw9VcKv07SheZWn6Vi7P9zwmNjSTU5xO?=
- =?us-ascii?Q?masRBxiv7/tgHECdKKxkYcoykYfKlpYvwpOwstBVp+RQfGr2uoKl04loQ4Yk?=
- =?us-ascii?Q?xdGBs3JNMefIiZoO1KemtKHtCOaF5RUIAZ9j4N7IjFR+0Z37Dd7NlMyfl2LC?=
- =?us-ascii?Q?G++7dSk1ZUh1rNQH4Ly7pMW85O0H96SDIMwjqKRbLQbPi7MK4eiB1KJszBvo?=
- =?us-ascii?Q?QWp75zC/oo2TjC9lcNsfdk/ntfJ5rh+BFT3tzXp5PB5SyhQ2WZBnA9sOYEIa?=
- =?us-ascii?Q?Odr6UaFjLmUlrPteU5pCBuQ+lKpEUbZYTP8O9jGUv5HiLMvfFkbECYlB247s?=
- =?us-ascii?Q?p55NsEj/n9ze5/nWXUVE44bvCrUVGfP/hMgoiUbuWTlx7eZakO4CPJp6369g?=
- =?us-ascii?Q?2Z6ozPOrd6hBqUXWlbU76NNTbcWFXlNZ38yYZ2IXappsct3B1JWl2KEZAaU+?=
- =?us-ascii?Q?mj4f8q0U+wllpsnfbQu0De0MmkEU/H3w6oFr6b1fbRtgtt04LoSHEZyos01M?=
- =?us-ascii?Q?kne1zty3T74CeN0lyioXwzNRi5cQoiLoVVGCCi4aMMDMk16/H4HHfqhwmCrI?=
- =?us-ascii?Q?U3MkKP7of+it8KnQY+I+Krl3g0okxNouBiEpg4f5M1GpPpnMLWF8iwkBcLA6?=
- =?us-ascii?Q?Ad7/vPKNaqQWH067klSgZ7q5QXOHO9AJQBN6mmT/DqgHNDI02OHkorMHpnih?=
- =?us-ascii?Q?rJtk8gIvQJVdQBs0n9UbzeiD6QKtnhBRfopeJ/s9DdAnAIjhlj9vBeoorjlj?=
- =?us-ascii?Q?gpjVoEyqeSgZKOx/krCiEsCLXnRdoxD3zqLDjbCB/XJmTqJITh+ZCXFImAbB?=
- =?us-ascii?Q?H6piN/ZtK/ne1xWXUC/jhIh92g0f9taeFLR+F9haULqeTvnFxUNA/CgFMGyv?=
- =?us-ascii?Q?e6pz5WOgUo2TVDduJzTF1X4xjtnMoSKn?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SA3PR03MB7187.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(13003099007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?GroWnZeBdK7K0P1Cl654frF67LkNU0YIP02NCtCPA4GuRYrHWh3iSqWFyup+?=
- =?us-ascii?Q?e8tAO/TkqY8griFKNVjK9abVxv8CPYp8Z7Jhxd774caA9neN0AGa3Xjk7Nm1?=
- =?us-ascii?Q?WgEz5p4K6wCLIkR8WW947nWwksEvAK9EHJZfcHZgJP0yxAkJERmtz/08kuGn?=
- =?us-ascii?Q?Ia2yGpNCd2silPvAeXFJoKtCugW0CQKv60bPgLD4Sxq7ECx0KAQdffICKRmN?=
- =?us-ascii?Q?qAlOBgkxbMjnzxw4zav3HX+5klY7awbfMYyDaIQox+SjkJpIhfIYt1PqKvx+?=
- =?us-ascii?Q?+gUeiiUJK10F2XtuNcfXb99TuSOJY4u+pWpeU6kh4Bd1M2o9nL5eiFqzN7Pp?=
- =?us-ascii?Q?s8m3UMuBwHyqhh4N/+pmxIhQrVUzGj7qPb6rqD9QaI9/DfmSaH374g2fsLi0?=
- =?us-ascii?Q?+MIh5JAHSey68B71fvukPTOn/Nbxx6YJXSZDSPLRHvR78U/x+mu1keCxHB/j?=
- =?us-ascii?Q?XACwV1ymPLSYizYdF2GTe3Fl/zIff3zJ+DWEqe4Q/DxKfIhzxuKSpnVkaS5/?=
- =?us-ascii?Q?SNUMOksLRgqVLHRpyuDyTX+8mZUMKkxDyW2P61qgBb+a1RS2PVIDWeqSvff/?=
- =?us-ascii?Q?wtdlQRuc4v+1H347dsaoIVTQ6/eMqeWgu6/Pm2Y1NQKNfmBfBHUjiJ1xhb0Y?=
- =?us-ascii?Q?BX9yE2LHb92PsDkL+zIwGB0t8nPieX4ImofoDPtDngfKkS8XnThOVXhVcVw/?=
- =?us-ascii?Q?iQTu7ObTYGCt6AekoX1wP6lgO0H0d6ukuT4JFBD8/lN5B17yHYub2aV7PM9m?=
- =?us-ascii?Q?ywdrEi3eAW9IqQKMXRVYUaji5jSQ3QZTnbozL/OpMTTcueV6usUn3FX9DWMw?=
- =?us-ascii?Q?qGm68d2Qlj1l8DoHjt5kdFCP73E3lwRN6iS3Cl+s8ob3/X+99SsuRIiAy4do?=
- =?us-ascii?Q?HGryWRUlp1hueuP48uTXXhIxTW7XN8kgL5Mccc+18+dBYSkmxp/aBzampQhH?=
- =?us-ascii?Q?ooFD4AtTylk8YamPisnJqGYEo5s2X1QgyKsZ9/HnZAowafSjvT2YNDplPFEg?=
- =?us-ascii?Q?JGC4pn8csSJMYDKHfSlexrVdqn1Sik2kYTCJzcxKjnaBFVrWdXDwp5avJvyc?=
- =?us-ascii?Q?siD5/Fw3olw+uYwGP2a6XijGaOXm3MjmnI8IxZe4Kw9RxViiAhFxyxPHLRQI?=
- =?us-ascii?Q?yi8muKUXbXPjgE1zMqSz5w2jM+baY2tqeLJUibkXp4zX2DlGXzPHoArfjg9H?=
- =?us-ascii?Q?uMTcC1xZVONk/DPlfxRmdLi95MzPeJZ5LsUzI78xZmwX7hunVLok9JeLwRAy?=
- =?us-ascii?Q?mGZZJ5EIQdiqz5UBGIjQGzoQHezv1kLXGElHJJn9wL/Omx4Hm23HLxV/2i5M?=
- =?us-ascii?Q?SslLLzFqTxBigmicGO3XrL07Uscz6XjFUsMxy3A77Cw4eYP8RHKBYwjbrgxi?=
- =?us-ascii?Q?y+psG3QJBrxYYpBbUJzOXGH3yQRi8B/wVddSvAZbiYG2jdQPj3mTqX9sA01p?=
- =?us-ascii?Q?ak8ICxmbW0Ub8uv96ZjoOOLIMQpeLz+ZRbxKgn2TemUzylJGDePAGcL5O9qY?=
- =?us-ascii?Q?/6EFkTZxVnE/7niwStVEbl62jX0sIaHVzbu3z3Vxa7KDZG4ghhYozate7wgX?=
- =?us-ascii?Q?gXADjuxa8QQfbrauqvAo7c60L0kU1HrfVCo3RPy+tGfv70QjEP0VNVR0PtkL?=
- =?us-ascii?Q?sw=3D=3D?=
-X-OriginatorOrg: altera.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 229270f6-2964-42d6-6d42-08de1523470b
-X-MS-Exchange-CrossTenant-AuthSource: SA3PR03MB7187.namprd03.prod.outlook.com
+X-OriginatorOrg: starfivetech.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2025 06:37:19.8936 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: fbd72e03-d4a5-4110-adce-614d51f2077a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: BcZJSokLEOIM7JYqojUNt/Aig+ymStkUo9gNd1gJjLKMEg3BAq4m5aJEaMg9OaidGBhdATBdmmvfeJstUNG47A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PR03MB8427
+X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: 98b2eea9-334d-4ed7-174b-08de1530e97d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Oct 2025 08:14:55.3007 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: sZ1raLRq08YGDFnAoG0YItvt5Bw7JD56U9idTkfoicz7r1go+n/s/RypJ7nPzjWQvVHOIn7m9uRROe2SzamAz4lq3D/wyI8isWVvwYqpA8c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1145
 X-Mailman-Approved-At: Mon, 27 Oct 2025 14:02:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -160,768 +145,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch ports the Cadence xSPI controller driver from
-the Linux kernel. The controller supports three operating modes:
-
-1. ACMD (Auto Command) mode
-   - Includes PIO and CDMA submodes.
-   - CDMA mode uses linked descriptors for high-performance,
-     low-overhead operation.
-   - PIO mode is suitable for simple, single-command transactions.
-
-2. STIG (Software Triggered Instruction Generator) mode
-   - Issues low-level 128-bit instructions to memory.
-   - Uses the Slave DMA interface for data transfers.
-
-3. Direct mode
-   - Enables direct data access through the slave interface
-     without commands.
-
-Currently, only the STIG work mode is enabled. Additional modes will be
-supported in future updates.
-
-At the same time, also enabling the kconfig option for xSPI driver.
-
-This driver has been ported and functionally verified on the Intel Simics
-platform. It is intended for evaluation and experimental use at this stage.
-
-Link: https://lore.kernel.org/all/1632038734-23999-1-git-send-email-pthombar@cadence.com/
-
-Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
----
- drivers/spi/Kconfig        |  15 ++
- drivers/spi/Makefile       |   1 +
- drivers/spi/cadence_xspi.c | 449 +++++++++++++++++++++++++++++++++++++
- drivers/spi/cadence_xspi.h | 226 +++++++++++++++++++
- 4 files changed, 691 insertions(+)
- create mode 100644 drivers/spi/cadence_xspi.c
- create mode 100644 drivers/spi/cadence_xspi.h
-
-diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index 69b184b0d9e..d99c3618f16 100644
---- a/drivers/spi/Kconfig
-+++ b/drivers/spi/Kconfig
-@@ -162,6 +162,21 @@ config CADENCE_OSPI_VERSAL
- 	  This option is used to enable Versal OSPI DMA operations which
- 	  are used for ospi flash read using cadence qspi controller.
- 
-+config CADENCE_XSPI
-+	bool "Cadence XSPI driver (Experimental feature)"
-+	help
-+	  Important: this feature is experimental so far and tested only
-+	  on simulated environment.
-+
-+	  Enable the Cadence eXpanded Serial Periheral Interface (xSPI) flash
-+	  driver. This driver can be used to access the SPI NOR flash on
-+	  platforms embedding this Cadence IP core up to 8 bit wide bus.
-+	  xSPI flash controller IP offers three work mode, Auto Command (ACMD)
-+	  work mode, Software Triggered Instruction Generator (STIG) work mode
-+	  and Direct work mode. This flash controller able to coomunicate
-+	  with Flash Memory Devices supporting JESD216 and JESD251 stadards
-+	  by using the Auto Command work mode.
-+
- config CF_SPI
-         bool "ColdFire SPI driver"
-         help
-diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
-index 14bdb97f189..44e26927238 100644
---- a/drivers/spi/Makefile
-+++ b/drivers/spi/Makefile
-@@ -8,6 +8,7 @@ ifdef CONFIG_$(SPL_TPL_)DM_SPI
- obj-y += spi-uclass.o
- obj-$(CONFIG_CADENCE_QSPI) += cadence_qspi.o cadence_qspi_apb.o
- obj-$(CONFIG_CADENCE_OSPI_VERSAL) += cadence_ospi_versal.o
-+obj-$(CONFIG_CADENCE_XSPI) += cadence_xspi.o
- obj-$(CONFIG_SANDBOX) += spi-emul-uclass.o
- obj-$(CONFIG_SOFT_SPI) += soft_spi.o
- obj-$(CONFIG_SPI_ASPEED_SMC) += spi-aspeed-smc.o
-diff --git a/drivers/spi/cadence_xspi.c b/drivers/spi/cadence_xspi.c
-new file mode 100644
-index 00000000000..717f226b709
---- /dev/null
-+++ b/drivers/spi/cadence_xspi.c
-@@ -0,0 +1,449 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2025
-+ * Altera Corporation <www.altera.com>
-+ */
-+
-+#include <clk.h>
-+#include <dm.h>
-+#include <fdtdec.h>
-+#include <log.h>
-+#include <malloc.h>
-+#include <reset.h>
-+#include <spi.h>
-+#include <spi-mem.h>
-+#include <dm/device_compat.h>
-+#include <linux/bitops.h>
-+#include <linux/err.h>
-+#include <linux/errno.h>
-+#include <linux/io.h>
-+#include <linux/iopoll.h>
-+#include <linux/ioport.h>
-+#include <linux/sizes.h>
-+#include <linux/time.h>
-+#include "cadence_xspi.h"
-+
-+static int cdns_xspi_wait_for_controller_idle(struct cdns_xspi_plat *cdns_xspi)
-+{
-+	u32 ctrl_stat;
-+
-+	return readl_relaxed_poll_timeout(cdns_xspi->iobase +
-+					  CDNS_XSPI_CTRL_STATUS_REG,
-+					  ctrl_stat,
-+					  !(ctrl_stat &
-+					   CDNS_XSPI_CTRL_BUSY),
-+					   1000);
-+}
-+
-+static int cdns_xspi_wait_for_sdma_complete(struct cdns_xspi_plat *cdns_xspi)
-+{
-+	u32 irq_status;
-+	int ret = 0;
-+
-+	ret =  readl_relaxed_poll_timeout(cdns_xspi->iobase +
-+					  CDNS_XSPI_INTR_STATUS_REG,
-+					  irq_status,
-+					  (irq_status &
-+					   CDNS_XSPI_SDMA_TRIGGER),
-+					   1000);
-+
-+	if (!ret) {
-+		/*
-+		 * SDMA return an interrupt,  need to clear
-+		 * the interrupt after read, wrtting 1 to clear the bit.
-+		 */
-+		setbits_le32(cdns_xspi->iobase + CDNS_XSPI_INTR_STATUS_REG,
-+			     CDNS_XSPI_SDMA_TRIGGER);
-+	}
-+
-+	/* Check if SDMA ERROR happened */
-+	if (irq_status & CDNS_XSPI_SDMA_ERROR) {
-+		/*
-+		 * Need to clear the SDMA_ERROR interrupt
-+		 * after read, wrtting 1 to clear the bit.
-+		 */
-+		dev_err(cdns_xspi->dev,
-+			"Slave DMA transaction error\n");
-+
-+		cdns_xspi->sdma_error = true;
-+		setbits_le32(cdns_xspi->iobase + CDNS_XSPI_INTR_STATUS_REG,
-+			     CDNS_XSPI_SDMA_ERROR);
-+
-+		ret = -EIO;
-+	}
-+
-+	return ret;
-+}
-+
-+static int cdns_xspi_wait_for_cmd_complete(struct cdns_xspi_plat *cdns_xspi)
-+{
-+	u32 irq_status;
-+	int ret = 0;
-+
-+	ret =  readl_relaxed_poll_timeout(cdns_xspi->iobase +
-+					  CDNS_XSPI_INTR_STATUS_REG,
-+					  irq_status,
-+					  (irq_status &
-+					   CDNS_XSPI_STIG_DONE),
-+					   100000);
-+
-+	irq_status = readl(cdns_xspi->iobase + CDNS_XSPI_INTR_STATUS_REG);
-+
-+	if (!ret) {
-+		/*
-+		 * Need to clear the interrupt after read,
-+		 * wrtting 1 to the clear the bit.
-+		 */
-+		writel(irq_status & CDNS_XSPI_STIG_DONE,
-+		       cdns_xspi->iobase + CDNS_XSPI_INTR_STATUS_REG);
-+	}
-+
-+	return ret;
-+}
-+
-+static void cdns_xspi_trigger_command(struct cdns_xspi_plat *cdns_xspi,
-+				      u32 cmd_regs[6])
-+{
-+	writel(cmd_regs[5], cdns_xspi->iobase + CDNS_XSPI_CMD_REG_5);
-+	writel(cmd_regs[4], cdns_xspi->iobase + CDNS_XSPI_CMD_REG_4);
-+	writel(cmd_regs[3], cdns_xspi->iobase + CDNS_XSPI_CMD_REG_3);
-+	writel(cmd_regs[2], cdns_xspi->iobase + CDNS_XSPI_CMD_REG_2);
-+	writel(cmd_regs[1], cdns_xspi->iobase + CDNS_XSPI_CMD_REG_1);
-+	writel(cmd_regs[0], cdns_xspi->iobase + CDNS_XSPI_CMD_REG_0);
-+}
-+
-+static int cdns_xspi_check_command_status(struct cdns_xspi_plat *cdns_xspi)
-+{
-+	int ret = 0;
-+	u32 cmd_status = readl(cdns_xspi->iobase + CDNS_XSPI_CMD_STATUS_REG);
-+
-+	/* Check if the command has completed */
-+	if (cmd_status & CDNS_XSPI_CMD_STATUS_COMPLETED) {
-+		/*Check for failure status and report each type of error */
-+		if ((cmd_status & CDNS_XSPI_CMD_STATUS_FAILED) != 0) {
-+			if (cmd_status & CDNS_XSPI_CMD_STATUS_DQS_ERROR)
-+				dev_err(cdns_xspi->dev,
-+					"Incorrect DQS pulses detected\n");
-+
-+			if (cmd_status & CDNS_XSPI_CMD_STATUS_CRC_ERROR)
-+				dev_err(cdns_xspi->dev,
-+					"CRC error received\n");
-+
-+			if (cmd_status & CDNS_XSPI_CMD_STATUS_BUS_ERROR)
-+				dev_err(cdns_xspi->dev,
-+					"Error resp on system DMA interface\n");
-+
-+			if (cmd_status & CDNS_XSPI_CMD_STATUS_INV_SEQ_ERROR)
-+				dev_err(cdns_xspi->dev,
-+					"Invalid command sequence detected\n");
-+
-+			ret = -EPROTO;
-+		}
-+	} else {
-+		/* Command did not complete at all -- fatal error */
-+		dev_err(cdns_xspi->dev, "Fatal err - command not completed\n");
-+		ret = -EPROTO;
-+	}
-+
-+	return ret;
-+}
-+
-+static void cdns_xspi_set_interrupts(struct cdns_xspi_plat *cdns_xspi,
-+				     bool enabled)
-+{
-+	u32 intr_enable;
-+
-+	intr_enable = readl(cdns_xspi->iobase + CDNS_XSPI_INTR_ENABLE_REG);
-+	if (enabled)
-+		intr_enable |= CDNS_XSPI_INTR_MASK;
-+	else
-+		intr_enable &= ~CDNS_XSPI_INTR_MASK;
-+	writel(intr_enable, cdns_xspi->iobase + CDNS_XSPI_INTR_ENABLE_REG);
-+}
-+
-+static int cdns_xspi_controller_init(struct cdns_xspi_plat *cdns_xspi)
-+{
-+	u32 ctrl_ver;
-+	u32 ctrl_features;
-+	u16 hw_magic_num;
-+
-+	ctrl_ver = readl(cdns_xspi->iobase + CDNS_XSPI_CTRL_VERSION_REG);
-+	hw_magic_num = FIELD_GET(CDNS_XSPI_MAGIC_NUM, ctrl_ver);
-+	if (hw_magic_num != CDNS_XSPI_MAGIC_NUM_VALUE) {
-+		dev_err(cdns_xspi->dev,
-+			"Incorrect XSPI magic number: %x, expected: %x\n",
-+			hw_magic_num, CDNS_XSPI_MAGIC_NUM_VALUE);
-+		return -ENXIO;
-+	}
-+
-+	ctrl_features = readl(cdns_xspi->iobase + CDNS_XSPI_CTRL_FEATURES_REG);
-+	cdns_xspi->hw_num_banks = FIELD_GET(CDNS_XSPI_NUM_BANKS, ctrl_features);
-+	cdns_xspi->set_interrupts_handler(cdns_xspi, false);
-+
-+	return 0;
-+}
-+
-+static void cdns_xspi_sdma_handle(struct cdns_xspi_plat *cdns_xspi)
-+{
-+	u32 sdma_size, sdma_trd_info;
-+	u8 sdma_dir;
-+	u8 *in_buf;
-+	u8 *out_buf;
-+
-+	sdma_size = readl(cdns_xspi->iobase + CDNS_XSPI_SDMA_SIZE_REG);
-+	sdma_trd_info = readl(cdns_xspi->iobase + CDNS_XSPI_SDMA_TRD_INFO_REG);
-+	sdma_dir = FIELD_GET(CDNS_XSPI_SDMA_DIR, sdma_trd_info);
-+
-+	in_buf = (u8 *)cdns_xspi->in_buffer;
-+	out_buf = (u8 *)cdns_xspi->out_buffer;
-+
-+	switch (sdma_dir) {
-+	case CDNS_XSPI_SDMA_DIR_READ:
-+		if (in_buf)
-+			memcpy_fromio(in_buf, cdns_xspi->sdmabase, sdma_size);
-+	break;
-+
-+	case CDNS_XSPI_SDMA_DIR_WRITE:
-+		if (in_buf)
-+			memcpy_toio(cdns_xspi->sdmabase, out_buf, sdma_size);
-+	break;
-+
-+	default:
-+		/* Handle unexpected direction */
-+		dev_warn(cdns_xspi->dev,
-+			 "Unknown SDMA direction: %u\n", sdma_dir);
-+	break;
-+	}
-+}
-+
-+static int cdns_xspi_send_stig_command(struct cdns_xspi_plat *cdns_xspi,
-+				       const struct spi_mem_op *op,
-+				       bool data_phase)
-+{
-+	u32 cmd_regs[6] = {0};
-+	int ret = 0;
-+	int dummybytes = op->dummy.nbytes;
-+
-+	ret = cdns_xspi_wait_for_controller_idle(cdns_xspi);
-+	if (ret < 0)
-+		return ret;
-+
-+	writel(FIELD_PREP(CDNS_XSPI_CTRL_WORK_MODE, CDNS_XSPI_WORK_MODE_STIG),
-+	       cdns_xspi->iobase + CDNS_XSPI_CTRL_CONFIG_REG);
-+
-+	cdns_xspi->set_interrupts_handler(cdns_xspi, true);
-+	cdns_xspi->sdma_error = false;
-+
-+	cmd_regs[1] = CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_1(op, data_phase);
-+	cmd_regs[2] = CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_2(op);
-+	if (dummybytes != 0) {
-+		cmd_regs[3] = CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_3(op, 1);
-+		dummybytes--;
-+	} else {
-+		cmd_regs[3] = CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_3(op, 0);
-+	}
-+	cmd_regs[4] = CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_4(op,
-+						       cdns_xspi->cur_cs);
-+
-+	cdns_xspi_trigger_command(cdns_xspi, cmd_regs);
-+
-+	if (data_phase) {
-+		cmd_regs[0] = CDNS_XSPI_STIG_DONE_FLAG;
-+		cmd_regs[1] = CDNS_XSPI_CMD_FLD_DSEQ_CMD_1;
-+		cmd_regs[2] = CDNS_XSPI_CMD_FLD_DSEQ_CMD_2(op);
-+		cmd_regs[3] = CDNS_XSPI_CMD_FLD_DSEQ_CMD_3(op, dummybytes);
-+		cmd_regs[4] = CDNS_XSPI_CMD_FLD_DSEQ_CMD_4(op,
-+							   cdns_xspi->cur_cs);
-+
-+		cdns_xspi->in_buffer = op->data.buf.in;
-+		cdns_xspi->out_buffer = op->data.buf.out;
-+
-+		cdns_xspi_trigger_command(cdns_xspi, cmd_regs);
-+
-+		cdns_xspi_wait_for_sdma_complete(cdns_xspi);
-+
-+		if (cdns_xspi->sdma_error) {
-+			cdns_xspi->set_interrupts_handler(cdns_xspi, false);
-+			return -EIO;
-+		}
-+		cdns_xspi_sdma_handle(cdns_xspi);
-+	}
-+
-+	cdns_xspi_wait_for_cmd_complete(cdns_xspi);
-+	ret = cdns_xspi_check_command_status(cdns_xspi);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int cdns_xspi_mem_op(struct udevice *bus,
-+			    const struct spi_mem_op *op,
-+			    unsigned int cs)
-+{
-+	struct cdns_xspi_plat *plat = dev_get_plat(bus);
-+	enum spi_mem_data_dir dir = op->data.dir;
-+
-+	if (plat->cur_cs != cs)
-+		plat->cur_cs = cs;
-+
-+	return cdns_xspi_send_stig_command(plat, op,
-+					   (dir != SPI_MEM_NO_DATA));
-+}
-+
-+static int cdns_xspi_mem_op_execute(struct spi_slave *spi,
-+				    const struct spi_mem_op *op)
-+{
-+	struct udevice *bus = spi->dev->parent;
-+	unsigned int cs = 0;
-+	int ret = 0;
-+
-+	cs = spi_chip_select(spi->dev);
-+
-+	if (cs < 0) {
-+		/*
-+		 * spi_chip_select will return error number when not
-+		 * able to get chip select.
-+		 */
-+		pr_err("%s: Unable to get chip select, ret=%d",
-+		       spi->dev->name, cs);
-+		return cs;
-+	}
-+
-+	ret = cdns_xspi_mem_op(bus, op, cs);
-+
-+	return ret;
-+}
-+
-+static int cdns_xspi_adjust_mem_op_size(struct spi_slave *spi,
-+					struct spi_mem_op *op)
-+{
-+	struct udevice *bus = spi->dev->parent;
-+	struct cdns_xspi_plat *plat = dev_get_plat(bus);
-+
-+	op->data.nbytes = clamp_val(op->data.nbytes, 0, plat->sdmasize);
-+
-+	return 0;
-+}
-+
-+static const struct spi_controller_mem_ops cadence_xspi_mem_ops = {
-+	.exec_op = cdns_xspi_mem_op_execute,
-+	.adjust_op_size = cdns_xspi_adjust_mem_op_size,
-+};
-+
-+static void cdns_xspi_print_phy_config(struct cdns_xspi_plat *cdns_xspi)
-+{
-+	struct device *dev = cdns_xspi->dev;
-+
-+	dev_info(dev, "PHY configuration\n");
-+	dev_info(dev, "   * xspi_dll_phy_ctrl: %08x\n",
-+		 readl(cdns_xspi->iobase + CDNS_XSPI_DLL_PHY_CTRL));
-+	dev_info(dev, "   * phy_dq_timing: %08x\n",
-+		 readl(cdns_xspi->auxbase + CDNS_XSPI_CCP_PHY_DQ_TIMING));
-+	dev_info(dev, "   * phy_dqs_timing: %08x\n",
-+		 readl(cdns_xspi->auxbase + CDNS_XSPI_CCP_PHY_DQS_TIMING));
-+	dev_info(dev, "   * phy_gate_loopback_ctrl: %08x\n",
-+		 readl(cdns_xspi->auxbase + CDNS_XSPI_CCP_PHY_GATE_LPBCK_CTRL));
-+	dev_info(dev, "   * phy_dll_slave_ctrl: %08x\n",
-+		 readl(cdns_xspi->auxbase + CDNS_XSPI_CCP_PHY_DLL_SLAVE_CTRL));
-+}
-+
-+static int cdns_xspi_probe(struct udevice *bus)
-+{
-+	struct cdns_xspi_plat *cdns_xspi = dev_get_plat(bus);
-+	struct resource res;
-+	int ret = 0;
-+
-+	cdns_xspi->sdma_handler = &cdns_xspi_sdma_handle;
-+	cdns_xspi->set_interrupts_handler = &cdns_xspi_set_interrupts;
-+	cdns_xspi->cur_cs = 0;
-+
-+	ret = dev_read_resource_byname(bus, "io", &res);
-+	if (ret)
-+		return ret;
-+
-+	cdns_xspi->iobase = devm_ioremap(bus, res.start, resource_size(&res));
-+
-+	if (IS_ERR(cdns_xspi->iobase)) {
-+		dev_err(bus, "Failed to remap controller base address\n");
-+		return PTR_ERR(cdns_xspi->iobase);
-+	}
-+
-+	ret = dev_read_resource_byname(bus, "sdma", &res);
-+	if (ret)
-+		return ret;
-+
-+	cdns_xspi->sdmabase = devm_ioremap(bus, res.start, resource_size(&res));
-+
-+	if (IS_ERR(cdns_xspi->sdmabase)) {
-+		dev_err(bus, "Failed to remap SDMA address\n");
-+		return PTR_ERR(cdns_xspi->sdmabase);
-+	}
-+	cdns_xspi->sdmasize = resource_size(&res);
-+
-+	ret = dev_read_resource_byname(bus, "aux", &res);
-+	if (ret)
-+		return ret;
-+
-+	cdns_xspi->auxbase = devm_ioremap(bus, res.start, resource_size(&res));
-+
-+	if (IS_ERR(cdns_xspi->auxbase)) {
-+		dev_err(bus, "Failed to remap AUX address\n");
-+		return PTR_ERR(cdns_xspi->auxbase);
-+	}
-+
-+	cdns_xspi_print_phy_config(cdns_xspi);
-+
-+	ret = cdns_xspi_controller_init(cdns_xspi);
-+
-+	if (ret) {
-+		dev_err(bus, "Failed to initialize controller\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+static int cdns_xspi_remove(struct udevice *dev)
-+{
-+	struct cdns_xspi_plat *plat = dev_get_plat(dev);
-+	int ret = 0;
-+
-+	if (plat->resets)
-+		ret = reset_release_bulk(plat->resets);
-+
-+	return ret;
-+}
-+
-+static int cadence_spi_set_speed(struct udevice *bus, uint hz)
-+{
-+	return 0;
-+}
-+
-+static int cadence_spi_set_mode(struct udevice *bus, uint mode)
-+{
-+	return 0;
-+}
-+
-+static const struct dm_spi_ops cdns_xspi_ops = {
-+	.set_speed	= cadence_spi_set_speed,
-+	.set_mode	= cadence_spi_set_mode,
-+	.mem_ops	= &cadence_xspi_mem_ops,
-+};
-+
-+static const struct udevice_id cdns_xspi_of_match[] = {
-+	{
-+		.compatible = "cdns,xspi-nor",
-+	},
-+	{/* end of table */}
-+};
-+
-+U_BOOT_DRIVER(cadence_xspi) = {
-+	.name = CDNS_XSPI_NAME,
-+	.id = UCLASS_SPI,
-+	.of_match = cdns_xspi_of_match,
-+	.ops = &cdns_xspi_ops,
-+	.probe = cdns_xspi_probe,
-+	.remove = cdns_xspi_remove,
-+	.flags = DM_FLAG_OS_PREPARE,
-+};
-diff --git a/drivers/spi/cadence_xspi.h b/drivers/spi/cadence_xspi.h
-new file mode 100644
-index 00000000000..e408d27303f
---- /dev/null
-+++ b/drivers/spi/cadence_xspi.h
-@@ -0,0 +1,226 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2025
-+ * Altera Corporation <www.altera.com>
-+ */
-+
-+#ifndef __CADENCE_XSPI_H__
-+#define __CADENCE_XSPI_H__
-+
-+#include <spi-mem.h>
-+#include <reset.h>
-+#include <linux/mtd/spi-nor.h>
-+#include <linux/bitfield.h>
-+#include <linux/log2.h>
-+
-+#define CDNS_XSPI_MAGIC_NUM_VALUE	0x6522
-+#define CDNS_XSPI_MAX_BANKS		8
-+#define CDNS_XSPI_NAME			"cadence_xspi"
-+
-+/*
-+ * Note: below are additional auxiliary registers to
-+ * configure XSPI controller pin-strap settings
-+ */
-+
-+/* PHY DQ timing register */
-+#define CDNS_XSPI_CCP_PHY_DQ_TIMING		0x0000
-+
-+/* PHY DQS timing register */
-+#define CDNS_XSPI_CCP_PHY_DQS_TIMING		0x0004
-+
-+/* PHY gate loopback control register */
-+#define CDNS_XSPI_CCP_PHY_GATE_LPBCK_CTRL	0x0008
-+
-+/* PHY DLL slave control register */
-+#define CDNS_XSPI_CCP_PHY_DLL_SLAVE_CTRL	0x0010
-+
-+/* DLL PHY control register */
-+#define CDNS_XSPI_DLL_PHY_CTRL			0x1034
-+
-+/* Command registers */
-+#define CDNS_XSPI_CMD_REG_0			0x0000
-+#define CDNS_XSPI_CMD_REG_1			0x0004
-+#define CDNS_XSPI_CMD_REG_2			0x0008
-+#define CDNS_XSPI_CMD_REG_3			0x000C
-+#define CDNS_XSPI_CMD_REG_4			0x0010
-+#define CDNS_XSPI_CMD_REG_5			0x0014
-+
-+/* Command status registers */
-+#define CDNS_XSPI_CMD_STATUS_REG		0x0044
-+
-+/* Controller status register */
-+#define CDNS_XSPI_CTRL_STATUS_REG		0x0100
-+#define CDNS_XSPI_INIT_COMPLETED		BIT(16)
-+#define CDNS_XSPI_INIT_LEGACY			BIT(9)
-+#define CDNS_XSPI_INIT_FAIL			BIT(8)
-+#define CDNS_XSPI_CTRL_BUSY			BIT(7)
-+
-+/* Controller interrupt status register */
-+#define CDNS_XSPI_INTR_STATUS_REG		0x0110
-+#define CDNS_XSPI_STIG_DONE			BIT(23)
-+#define CDNS_XSPI_SDMA_ERROR			BIT(22)
-+#define CDNS_XSPI_SDMA_TRIGGER			BIT(21)
-+#define CDNS_XSPI_CMD_IGNRD_EN			BIT(20)
-+#define CDNS_XSPI_DDMA_TERR_EN			BIT(18)
-+#define CDNS_XSPI_CDMA_TREE_EN			BIT(17)
-+#define CDNS_XSPI_CTRL_IDLE_EN			BIT(16)
-+
-+#define CDNS_XSPI_TRD_COMP_INTR_STATUS		0x0120
-+#define CDNS_XSPI_TRD_ERR_INTR_STATUS		0x0130
-+#define CDNS_XSPI_TRD_ERR_INTR_EN		0x0134
-+
-+/* Controller interrupt enable register */
-+#define CDNS_XSPI_INTR_ENABLE_REG		0x0114
-+#define CDNS_XSPI_INTR_EN			BIT(31)
-+#define CDNS_XSPI_STIG_DONE_EN			BIT(23)
-+#define CDNS_XSPI_SDMA_ERROR_EN			BIT(22)
-+#define CDNS_XSPI_SDMA_TRIGGER_EN		BIT(21)
-+
-+#define CDNS_XSPI_INTR_MASK (CDNS_XSPI_INTR_EN | \
-+	CDNS_XSPI_STIG_DONE_EN  | \
-+	CDNS_XSPI_SDMA_ERROR_EN | \
-+	CDNS_XSPI_SDMA_TRIGGER_EN)
-+
-+/* Controller config register */
-+#define CDNS_XSPI_CTRL_CONFIG_REG		0x0230
-+#define CDNS_XSPI_CTRL_WORK_MODE		GENMASK(6, 5)
-+
-+#define CDNS_XSPI_WORK_MODE_DIRECT		0
-+#define CDNS_XSPI_WORK_MODE_STIG		1
-+#define CDNS_XSPI_WORK_MODE_ACMD		3
-+
-+/* SDMA trigger transaction registers */
-+#define CDNS_XSPI_SDMA_SIZE_REG			0x0240
-+#define CDNS_XSPI_SDMA_TRD_INFO_REG		0x0244
-+#define CDNS_XSPI_SDMA_DIR			BIT(8)
-+
-+/* Controller features register */
-+#define CDNS_XSPI_CTRL_FEATURES_REG		0x0F04
-+#define CDNS_XSPI_NUM_BANKS			GENMASK(25, 24)
-+#define CDNS_XSPI_DMA_DATA_WIDTH		BIT(21)
-+#define CDNS_XSPI_NUM_THREADS			GENMASK(3, 0)
-+
-+/* Controller version register */
-+#define CDNS_XSPI_CTRL_VERSION_REG		0x0F00
-+#define CDNS_XSPI_MAGIC_NUM			GENMASK(31, 16)
-+#define CDNS_XSPI_CTRL_REV			GENMASK(7, 0)
-+
-+/* STIG Profile 1.0 instruction fields (split into registers) */
-+#define CDNS_XSPI_CMD_INSTR_TYPE		GENMASK(6, 0)
-+#define CDNS_XSPI_CMD_P1_R1_ADDR0		GENMASK(31, 24)
-+#define CDNS_XSPI_CMD_P1_R2_ADDR1		GENMASK(7, 0)
-+#define CDNS_XSPI_CMD_P1_R2_ADDR2		GENMASK(15, 8)
-+#define CDNS_XSPI_CMD_P1_R2_ADDR3		GENMASK(23, 16)
-+#define CDNS_XSPI_CMD_P1_R2_ADDR4		GENMASK(31, 24)
-+#define CDNS_XSPI_CMD_P1_R3_ADDR5		GENMASK(7, 0)
-+#define CDNS_XSPI_CMD_P1_R3_CMD			GENMASK(23, 16)
-+#define CDNS_XSPI_CMD_P1_R3_NUM_ADDR_BYTES	GENMASK(30, 28)
-+#define CDNS_XSPI_CMD_P1_R4_ADDR_IOS		GENMASK(1, 0)
-+#define CDNS_XSPI_CMD_P1_R4_CMD_IOS		GENMASK(9, 8)
-+#define CDNS_XSPI_CMD_P1_R4_BANK		GENMASK(14, 12)
-+
-+/* STIG data sequence instruction fields (split into registers) */
-+#define CDNS_XSPI_CMD_DSEQ_R2_DCNT_L		GENMASK(31, 16)
-+#define CDNS_XSPI_CMD_DSEQ_R3_DCNT_H		GENMASK(15, 0)
-+#define CDNS_XSPI_CMD_DSEQ_R3_NUM_OF_DUMMY	GENMASK(25, 20)
-+#define CDNS_XSPI_CMD_DSEQ_R4_BANK		GENMASK(14, 12)
-+#define CDNS_XSPI_CMD_DSEQ_R4_DATA_IOS		GENMASK(9, 8)
-+#define CDNS_XSPI_CMD_DSEQ_R4_DIR		BIT(4)
-+
-+/* STIG command status fields */
-+#define CDNS_XSPI_CMD_STATUS_COMPLETED		BIT(15)
-+#define CDNS_XSPI_CMD_STATUS_FAILED		BIT(14)
-+#define CDNS_XSPI_CMD_STATUS_DQS_ERROR		BIT(3)
-+#define CDNS_XSPI_CMD_STATUS_CRC_ERROR		BIT(2)
-+#define CDNS_XSPI_CMD_STATUS_BUS_ERROR		BIT(1)
-+#define CDNS_XSPI_CMD_STATUS_INV_SEQ_ERROR	BIT(0)
-+
-+#define CDNS_XSPI_STIG_DONE_FLAG		BIT(0)
-+#define CDNS_XSPI_TRD_STATUS			0x0104
-+
-+#define MODE_NO_OF_BYTES			GENMASK(25, 24)
-+#define MODEBYTES_COUNT			1
-+
-+/* Helper macros for filling command registers */
-+#define CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_1(op, data_phase) ( \
-+	FIELD_PREP(CDNS_XSPI_CMD_INSTR_TYPE, (data_phase) ? \
-+		CDNS_XSPI_STIG_INSTR_TYPE_1 : CDNS_XSPI_STIG_INSTR_TYPE_0) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R1_ADDR0, (op)->addr.val & 0xff))
-+
-+#define CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_2(op) ( \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R2_ADDR1, ((op)->addr.val >> 8)  & 0xFF) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R2_ADDR2, ((op)->addr.val >> 16) & 0xFF) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R2_ADDR3, ((op)->addr.val >> 24) & 0xFF) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R2_ADDR4, ((op)->addr.val >> 32) & 0xFF))
-+
-+#define CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_3(op, modebytes) ( \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R3_ADDR5, ((op)->addr.val >> 40) & 0xFF) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R3_CMD, (op)->cmd.opcode) | \
-+	FIELD_PREP(MODE_NO_OF_BYTES, modebytes) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R3_NUM_ADDR_BYTES, (op)->addr.nbytes))
-+
-+#define CDNS_XSPI_CMD_FLD_P1_INSTR_CMD_4(op, chipsel) ( \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R4_ADDR_IOS, ilog2((op)->addr.buswidth)) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R4_CMD_IOS, ilog2((op)->cmd.buswidth)) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_P1_R4_BANK, chipsel))
-+
-+#define CDNS_XSPI_CMD_FLD_DSEQ_CMD_1 \
-+	FIELD_PREP(CDNS_XSPI_CMD_INSTR_TYPE, CDNS_XSPI_STIG_INSTR_TYPE_DATA_SEQ)
-+
-+#define CDNS_XSPI_CMD_FLD_DSEQ_CMD_2(op) \
-+	FIELD_PREP(CDNS_XSPI_CMD_DSEQ_R2_DCNT_L, (op)->data.nbytes & 0xFFFF)
-+
-+#define CDNS_XSPI_CMD_FLD_DSEQ_CMD_3(op, dummybytes) ( \
-+	FIELD_PREP(CDNS_XSPI_CMD_DSEQ_R3_DCNT_H, \
-+		((op)->data.nbytes >> 16) & 0xffff) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_DSEQ_R3_NUM_OF_DUMMY, \
-+		  (op)->dummy.buswidth != 0 ? \
-+		  (((dummybytes) * 8) / (op)->dummy.buswidth) : \
-+		  0))
-+
-+#define CDNS_XSPI_CMD_FLD_DSEQ_CMD_4(op, chipsel) ( \
-+	FIELD_PREP(CDNS_XSPI_CMD_DSEQ_R4_BANK, chipsel) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_DSEQ_R4_DATA_IOS, \
-+		ilog2((op)->data.buswidth)) | \
-+	FIELD_PREP(CDNS_XSPI_CMD_DSEQ_R4_DIR, \
-+		((op)->data.dir == SPI_MEM_DATA_IN) ? \
-+		CDNS_XSPI_STIG_CMD_DIR_READ : CDNS_XSPI_STIG_CMD_DIR_WRITE))
-+
-+enum cdns_xspi_stig_instr_type {
-+	CDNS_XSPI_STIG_INSTR_TYPE_0,
-+	CDNS_XSPI_STIG_INSTR_TYPE_1,
-+	CDNS_XSPI_STIG_INSTR_TYPE_DATA_SEQ = 127,
-+};
-+
-+enum cdns_xspi_sdma_dir {
-+	CDNS_XSPI_SDMA_DIR_READ,
-+	CDNS_XSPI_SDMA_DIR_WRITE,
-+};
-+
-+enum cdns_xspi_stig_cmd_dir {
-+	CDNS_XSPI_STIG_CMD_DIR_READ,
-+	CDNS_XSPI_STIG_CMD_DIR_WRITE,
-+};
-+
-+struct cdns_xspi_plat {
-+	struct device *dev;
-+	struct reset_ctl_bulk *resets;
-+
-+	void __iomem *iobase;
-+	void __iomem *auxbase;
-+	void __iomem *sdmabase;
-+
-+	int cur_cs;
-+	unsigned int sdmasize;
-+	bool sdma_error;
-+
-+	void *in_buffer;
-+	const void *out_buffer;
-+
-+	u8 hw_num_banks;
-+
-+	void (*sdma_handler)(struct cdns_xspi_plat *cdns_xspi);
-+	void (*set_interrupts_handler)(struct cdns_xspi_plat *cdns_xspi, bool enabled);
-+};
-+
-+#endif /* __CADENCE_XSPI_H__ */
--- 
-2.43.7
-
+PiBPbiAyNC4xMC4yNSAxODo1OCwgRSBTaGF0dG93IHdyb3RlOg0KPiBIaSBIYWwsIHRoaXMgaXMg
+dmVyeSBnb29kLCBJIGhhdmUgc29tZSBzdWdnZXN0aW9uIHRvIGltcHJvdmUgbW9yZS4NCj4gDQo+
+IE9uIDEwLzI0LzI1IDAxOjU5LCBIYWwgRmVuZyB3cm90ZToNCj4gPg0KPiAvKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKi8NCj4g
+PiBUaGlzIHBhdGNoIHBpY2tlZCBmcm9tIFsxXSBpcyBqdXN0IGZvciB0ZXN0IGFuZCBjYW4gYmUg
+aWdub3JlZC4NCj4gPiBkdHMvdXBzdHJlYW0gc2hvdWxkIGJlIHN5bmNlZCByZWd1bGFybHkgd2l0
+aCBkZXZpY2V0cmVlLXJlYmFzaW5nLg0KPiA+DQo+ID4gWzFdDQo+ID4gaHR0cHM6Ly9sb3JlLmtl
+cm5lbC5vcmcvYWxsLzIwMjUwODIxMTAwOTMwLjcxNDA0LTEtaGFsLmZlbmdAc3RhcmZpdmV0ZQ0K
+PiA+IGNoLmNvbS8NCj4gPg0KPiAvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioqKioqKioqKi8NCj4gPg0KPiA+IFZpc2lvbkZpdmUgMiBMaXRl
+IGlzIGEgbWluaSBTQkMgYmFzZWQgb24gdGhlIFN0YXJGaXZlIEpINzExMFMgU29DLg0KPiA+DQo+
+ID4gQm9hcmQgZmVhdHVyZXM6DQo+ID4gLSBKSDcxMTBTIFNvQw0KPiA+IC0gMi80LzggR2lCIExQ
+RERSNCBEUkFNDQo+ID4gLSBBWFAxNTA2MCBQTUlDDQo+ID4gLSA0MCBwaW4gR1BJTyBoZWFkZXIN
+Cj4gPiAtIDF4IFVTQiAzLjAgaG9zdCBwb3J0DQo+ID4gLSAzeCBVU0IgMi4wIGhvc3QgcG9ydA0K
+PiA+IC0gMXggTS4yIE0tS2V5IChzaXplOiAyMjQyKQ0KPiA+IC0gMXggTWljcm9TRCBzbG90IChv
+cHRpb25hbCBub24tcmVtb3ZhYmxlIGVNTUMpDQo+ID4gLSAxeCBRU1BJIEZsYXNoDQo+ID4gLSAx
+eCBJMkMgRUVQUk9NDQo+ID4gLSAxeCAxR2JwcyBFdGhlcm5ldCBwb3J0DQo+ID4gLSBTRElPLWJh
+c2VkIFdpLUZpICYgVUFSVC1iYXNlZCBCbHVldG9vdGgNCj4gPiAtIDF4IEhETUkgcG9ydA0KPiA+
+IC0gMXggMi1sYW5lIERTSQ0KPiA+IC0gMXggMi1sYW5lIENTSQ0KPiA+DQo+ID4gU2lnbmVkLW9m
+Zi1ieTogSGFsIEZlbmcgPGhhbC5mZW5nQHN0YXJmaXZldGVjaC5jb20+DQo+ID4gLS0tDQo+ID4g
+IC4uLi9qaDcxMTBzLXN0YXJmaXZlLXZpc2lvbmZpdmUtMi1saXRlLmR0cyAgICB8IDE1OSArKysr
+KysrKysrKysrKysrKysNCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDE1OSBpbnNlcnRpb25zKCspDQo+
+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+IGR0cy91cHN0cmVhbS9zcmMvcmlzY3Yvc3RhcmZp
+dmUvamg3MTEwcy1zdGFyZml2ZS12aXNpb25maXZlLTItbGl0ZS5kdHMNCj4gPg0KPiA+IGRpZmYg
+LS1naXQNCj4gPiBhL2R0cy91cHN0cmVhbS9zcmMvcmlzY3Yvc3RhcmZpdmUvamg3MTEwcy1zdGFy
+Zml2ZS12aXNpb25maXZlLTItbGl0ZS5kDQo+ID4gdHMNCj4gPiBiL2R0cy91cHN0cmVhbS9zcmMv
+cmlzY3Yvc3RhcmZpdmUvamg3MTEwcy1zdGFyZml2ZS12aXNpb25maXZlLTItbGl0ZS5kDQo+ID4g
+dHMNCj4gPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiA+IGluZGV4IDAwMDAwMDAwMDAwLi4zMDg0
+MmIwY2QxZg0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9kdHMvdXBzdHJlYW0vc3JjL3Jp
+c2N2L3N0YXJmaXZlL2poNzExMHMtc3RhcmZpdmUtdmlzaW9uZml2ZS0yLWxpDQo+ID4gKysrIHRl
+LmR0cw0KPiA+IEBAIC0wLDAgKzEsMTU5IEBADQo+ID4gKy8vIFNQRFgtTGljZW5zZS1JZGVudGlm
+aWVyOiBHUEwtMi4wIE9SIE1JVA0KPiA+ICsvKg0KPiA+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjUg
+U3RhckZpdmUgVGVjaG5vbG9neSBDby4sIEx0ZC4NCj4gPiArICogQ29weXJpZ2h0IChDKSAyMDI1
+IEhhbCBGZW5nIDxoYWwuZmVuZ0BzdGFyZml2ZXRlY2guY29tPiAgKi8NCj4gPiArDQo+ID4gKy9k
+dHMtdjEvOw0KPiA+ICsjaW5jbHVkZSAiamg3MTEwLWNvbW1vbi5kdHNpIg0KPiA+ICsNCj4gPiAr
+LyB7DQo+ID4gKwltb2RlbCA9ICJTdGFyRml2ZSBWaXNpb25GaXZlIDIgTGl0ZSI7DQo+ID4gKwlj
+b21wYXRpYmxlID0gInN0YXJmaXZlLHZpc2lvbmZpdmUtMi1saXRlIiwgInN0YXJmaXZlLGpoNzEx
+MHMiOyB9Ow0KPiAuLi4NCj4gDQo+IEZZSSBhcyBhIGZvbGxvdy11cCB0byBteSBlYXJsaWVyIGNv
+bW1lbnRzIGFib3V0IG1vZGlmeWluZyB0aGUgZHRzIHN1YnRyZWUgSQ0KPiBoYXZlIG5vdyBhIHdv
+cmtpbmcgcmVjb21tZW5kYXRpb246DQo+IA0KPiAxKS4gUmV0dXJuIHRvIHVzaW5nICJSRkMiIHN1
+YmplY3QgcHJlZml4IGZvciB0aGUgc2VyaWVzIHdoaWxlIGFueSBtb2RpZmljYXRpb24NCj4gZXhp
+c3RzIHRvIGR0cyBzdWJ0cmVlLiBUaGUgY29tbWVudCBzYWlkIGFib3V0IHRoaXMgaXMgZG8gbm90
+IHBvc3QgYW55ICJETw0KPiBOT1QgTUVSR0UiIHR5cGUgcGF0Y2hlcyB0aGF0IHRvdWNoIGR0cyBz
+dWJ0cmVlLCBob3dldmVyLi4uDQo+IA0KPiAyKS4gQWRkaXRpb25zIHRvIENPTkZJR19PRl9MSVNU
+IHdpbGwgY2F1c2UgYSBidWlsZCBlcnJvciBpZiB0aGVyZSBpcyBub3QgYW55DQo+IGNvcnJlc3Bv
+bmRpbmcgZmlsZSBpbiB0aGUgZHRzIHN1YnRyZWUuIFVzZSBhIHdvcmthcm91bmQ6DQo+IA0KPiBn
+aXQgbXYNCj4gZHRzL3Vwc3RyZWFtL3NyYy9yaXNjdi9zdGFyZml2ZS9qaDcxMTBzLXN0YXJmaXZl
+LXZpc2lvbmZpdmUtMi1saXRlLmR0cw0KPiBhcmNoL3Jpc2N2L2R0cy9qaDcxMTBzLXN0YXJmaXZl
+LXZpc2lvbmZpdmUtMi1saXRlLXUtYm9vdC5kdHNpDQo+IHRvdWNoIGR0cy91cHN0cmVhbS9zcmMv
+cmlzY3Yvc3RhcmZpdmUvamg3MTEwcy1zdGFyZml2ZS12aXNpb25maXZlLTItbGl0ZS5kdHMNCj4g
+Z2l0IGFkZA0KPiBkdHMvdXBzdHJlYW0vc3JjL3Jpc2N2L3N0YXJmaXZlL2poNzExMHMtc3RhcmZp
+dmUtdmlzaW9uZml2ZS0yLWxpdGUuZHRzDQo+IGFyY2gvcmlzY3YvZHRzL2poNzExMHMtc3RhcmZp
+dmUtdmlzaW9uZml2ZS0yLWxpdGUtdS1ib290LmR0c2kNCg0KVGhhbmsgeW91IGZvciBwcm92aWRp
+bmcgYW5vdGhlciB3YXkgdG8gZGVhbCB3aXRoIHRoaXMgc2l0dWF0aW9uLg0KDQpXaXRoIHlvdXIg
+bWV0aG9kLCANCjEuIFRoZSBzaXR1YXRpb24gd2lsbCBiZSBtb3JlIGNvbXBsaWNhdGVkIGluIHRo
+aXMgcGF0Y2gsIGJlY2F1c2UgSSB0cnkgdG8gbW9kaWZ5IHRoZQ0KY29tbW9uIGR0c2kgKGpoNzEx
+MC1jb21tb24uZHRzaSkuDQoyLiBUaGUgbWFpbnRhaW5lcnMgaGF2ZSB0byByZXZlcnQgdGhlIHRl
+bXBvcmFyeSBkZXZpY2UgdHJlZXMgd2UgYWRkZWQgaW4gYXJjaC9yaXNjdi9kdHMvDQphZnRlciB0
+aGUgc2FtZSBkZXZpY2UgdHJlZXMgYXBwZWFyIGluIGR0cy91cHN0cmVhbS9zcmMvcmlzY3Yvc3Rh
+cmZpdmUvLiBJdCB3aWxsIGJyaW5nIG1vcmUNCndvcmsgdG8gdGhlIE9GX1VQU1RSRUFNIG1haW50
+YWluZXJzLg0KDQpJIHRoaW5rIGl0IG1heSBiZSBlYXNpZXIgZm9yIG1haW50YWluZXJzIHRvIG1l
+cmdlIHRoZSB1LWJvb3QgcGF0Y2hlcyBhZnRlciB0aGUNCkxpbnV4IGRldmljZSB0cmVlcyBoYXMg
+YWxyZWFkeSBhcHBlYXJlZCBpbiBkdHMvdXBzdHJlYW0vLg0KDQo+IA0KPiBBbHRlcm5hdGl2ZWx5
+IGZvciB5b3VyIGxvY2FsIGRldmVsb3BtZW50IGVudmlyb25tZW50Og0KPiANCj4gZWNobyAnI2lu
+Y2x1ZGUNCj4gIi9wYXRoL3RvL2xpbnV4LmdpdC9hcmNoL3Jpc2N2L2Jvb3QvZHRzL3N0YXJmaXZl
+L2poNzExMHMtc3RhcmZpdmUtdmlzaW9uZml2ZS0yLQ0KPiBsaXRlLXUtYm9vdC5kdHNpIicNCg0K
+TWF5YmUgeW91IG1lYW4gIi9wYXRoL3RvL2xpbnV4LmdpdC9hcmNoL3Jpc2N2L2Jvb3QvZHRzL3N0
+YXJmaXZlL2poNzExMHMtc3RhcmZpdmUtdmlzaW9uZml2ZS0yLWxpdGUuZHRzIg0KDQo+ID4gYXJj
+aC9yaXNjdi9kdHMvamg3MTEwcy1zdGFyZml2ZS12aXNpb25maXZlLTItbGl0ZS11LWJvb3QuZHRz
+aQ0KPiANCj4gVGhpcyAiLXUtYm9vdC5kdHNpIiBzdWZmaXggZmlsZSB3aWxsIGdldCBwaWNrZWQg
+dXAgYnkgdGhlIGJ1aWxkIHN5c3RlbQ0KPiBhdXRvbWF0aWNhbGx5IHdoZW4gdGhlcmUgaXMgYSBj
+b3JyZXNwb25kaW5nIGZpbGUgKGVtcHR5IGZpbGUgaXMgb2theSkgaW4gZHRzDQo+IHN1YnRyZWUu
+IFRoZSBlbXB0eSBmaWxlIGluIGR0cyBzdWJ0cmVlIGlzIGEgc2ltcGxlIGdpdCBmaWxlIG9wZXJh
+dGlvbiB3aXRoIG5vDQo+IGFjdHVhbCBjb250ZW50LiBJdCBpcyBub3QgcGVyZmVjdCBhcyBhbiBh
+bnN3ZXIgYnV0IGl0IGlzIGJldHRlciBmb3IgdGhlIHJldmlldw0KPiBub3csIGFuZCBmb3IgYW55
+b25lIGVsc2UgcmVhZGluZyB0aGlzIHRoYXQgbWF5IHdhbnQgdG8gZG8gdGhlIHNhbWUuDQo+IA0K
+PiBZb3UgY2FuIHNlZSB0aGlzIGluIHRoZSB3b3JraW5nIGV4YW1wbGUgb2YgUkZDIHYxIHNlcmll
+cyBmb3IgTWlsay1WIE1hcnMgQ00NCj4gcmUtaW50cm9kdWN0aW9uOg0KPiANCj4gaHR0cHM6Ly9s
+b3JlLmtlcm5lbC5vcmcvdS1ib290LzIwMjUwOTI1MDUzMjMzLjE4NzQwMjctMS1lQGZyZWVzaGVs
+bC5kZS8NCj4gDQo+IGFuZCB0aGUgZm9sbG93LXVwIGFzIHYyIHNlcmllcyBhcyB0aGlzIGxhbmRz
+IGluIGRldmljZXRyZWUtcmViYXNpbmc6DQo+IA0KPiBodHRwczovL2xvcmUua2VybmVsLm9yZy91
+LWJvb3QvMjAyNTEwMjEyMzEwMjEuMTk2MzM2LTEtZUBmcmVlc2hlbGwuZGUvDQo+IA0KPiBJIGhv
+cGUgdGhhdCBpcyBhIGdvb2QgZXhhbXBsZSB0byBmb2xsb3cgZm9yIHYzLCB2NCBvZiB5b3VyIHNl
+cmllcw0KPiANCj4gMykuIElmIHlvdSBmb2xsb3cgUkZDIC0+IFBBVENIIC0+IFJGQyB0aGUgdmVy
+c2lvbiBkb2VzIGluY3JlbWVudCAoUkZDIHYxLA0KPiBQQVRDSCB2MiwgUkZDIHYzLCAuLi4pDQoN
+ClRoYW5rcyBmb3IgeW91ciBzdWdnZXN0aW9ucy4NCg0KQmVzdCByZWdhcmRzLA0KSGFsDQo=
