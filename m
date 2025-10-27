@@ -4,40 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5047CCF9EA
-	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 14:45:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 607CECCF9EB
+	for <u-boot@archiver.kernel.org>; Mon, 27 Oct 2025 15:51:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28D9E832AD;
-	Mon, 27 Oct 2025 15:45:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 7FF7882E34;
+	Mon, 27 Oct 2025 16:51:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9DC78352B; Mon, 27 Oct 2025 15:45:20 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 193EB82E34
- for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 15:45:18 +0100 (CET)
+ id 19D22836F0; Mon, 27 Oct 2025 16:51:36 +0100 (CET)
+Received: from smtp-bc0e.mail.infomaniak.ch (smtp-bc0e.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::bc0e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9985782A9E
+ for <u-boot@lists.denx.de>; Mon, 27 Oct 2025 16:51:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6C29D169E;
- Mon, 27 Oct 2025 07:45:09 -0700 (PDT)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.33.8.67])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 28D4F3F63F;
- Mon, 27 Oct 2025 07:45:16 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Chen-Yu Tsai <wens@kernel.org>, James Hilliard <james.hilliard1@gmail.com>,
- Lukas Schmid <lukas.schmid@netcube.li>,
- Paul Kocialkowski <contact@paulk.fr>
-Subject: [GIT PULL] u-boot-sunxi/master for v2026.01
-Date: Mon, 27 Oct 2025 14:45:12 +0000
-Message-Id: <20251027144512.3199406-1-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown
+ [IPv6:2001:1600:4:17::246b])
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4cwJ0512sCz12YW;
+ Mon, 27 Oct 2025 16:51:33 +0100 (CET)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4cwJ035vxzzLZp; Mon, 27 Oct 2025 16:51:31 +0100 (CET)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH 0/3] rockchip: more templating for binman and switch SPI
+ image to rksd by default
+Date: Mon, 27 Oct 2025 16:51:21 +0100
+Message-Id: <20251027-rockchip-more-template-v1-0-430672840303@cherry.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPmU/2gC/x3MQQqDMBBG4avIrB3QFKP0KsVFiH90aDVhIlIQ7
+ 25w+S3eOylDBZne1UmKQ7LEraCtK/KL22awTMVkGtO1jelZo//6RRKvUcE71vRzO3iwLnQvG3o
+ MlkqcFEH+z/gzXtcNt4TARGgAAAA=
+X-Change-ID: 20251027-rockchip-more-template-86af536f7e86
+To: u-boot@lists.denx.de
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Johan Jonker <jbx6244@gmail.com>, Sumit Garg <sumit.garg@kernel.org>, 
+ Xuhui Lin <xuhui.lin@rock-chips.com>, Heiko Stuebner <heiko@sntech.de>, 
+ Michael Trimarchi <michael@amarulasolutions.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>
+X-Mailer: b4 0.14.3
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,127 +67,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The images to flash on SPI and MMC boot media are very similar and
+binman templating engine allows to override properties after inserting
+the template, so let's do that to template the whole boot image instead
+of simply the FIT.
 
-please pull these sunxi changes for v2026.01. No big features this time,
-mostly a collection of patches that have been lying around for a bit.
-There are some DT updates, for those SoCs that do not use OF_UPSTREAM yet,
-hopefully that's the last time we need to do this exercise. And that's
-offset by switching over two more SoCs to OF_UPSTREAM.
-Two new boards get a defconfig, and some improvements for the sun8i-emac
-Ethernet driver. Finally a patch that fixes occassional DRAM size
-misdetection for new A523 boards.
+While at it, swap the default format for the SPI image from rkspi to
+rksd. This patch should no change any behavior, just that the new SoCs
+are expected to use rksd if unspecified instead of rkspi which is
+assumed required only on some SoCs (like RK3399) due to some BootROM
+bug/quirk.
 
-There are a few outstanding patches that just wait for getting some
-details confirmed, which I might send then later.
+Finally, a small cleanup of rk3288-tinker-s including twice the same
+file.
 
-CI passed, and I tested this briefly on affected boards.
+Note that I'm planning on adding support for image signature to
+rockchip-u-boot.dtsi in the next few days/weeks, which is the reason why
+I'm doing this now as I've had to duplicate the work for the inclusion
+of the pubkey in the SPL for the SPI and MMC images for no real reason.
 
-Thanks,
-Andre
+Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+---
+Quentin Schulz (3):
+      rockchip: binman: template all of simple-bin
+      rockchip: make rksd the default format for SPI images
+      rockchip: rk3288-tinker-s: remove duplicate include
 
-================================
-The following changes since commit 9094482ca7576877b2bfaa57c8e73cfeb536f8b9:
+ arch/arm/dts/px30-u-boot.dtsi              |  12 ++
+ arch/arm/dts/rk3036-u-boot.dtsi            |  13 ++
+ arch/arm/dts/rk3066a-u-boot.dtsi           |  12 ++
+ arch/arm/dts/rk3128-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk3188-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk322x-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk3288-tinker-s-u-boot.dtsi   |   1 -
+ arch/arm/dts/rk3288-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk3308-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk3326-odroid-go2-u-boot.dtsi |  12 ++
+ arch/arm/dts/rk3328-u-boot.dtsi            |   1 -
+ arch/arm/dts/rk3368-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk3399-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk3528-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk356x-u-boot.dtsi            |   1 -
+ arch/arm/dts/rk3576-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rk3588s-u-boot.dtsi           |   1 -
+ arch/arm/dts/rockchip-u-boot.dtsi          | 283 ++++++++++++++---------------
+ arch/arm/dts/rv1108-u-boot.dtsi            |  12 ++
+ arch/arm/dts/rv1126-u-boot.dtsi            |  12 ++
+ 20 files changed, 320 insertions(+), 148 deletions(-)
+---
+base-commit: 9094482ca7576877b2bfaa57c8e73cfeb536f8b9
+change-id: 20251027-rockchip-more-template-86af536f7e86
 
-  Merge tag 'efi-2026-01-rc1-2' of https://source.denx.de/u-boot/custodians/u-boot-efi (2025-10-26 09:03:36 -0600)
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@cherry.de>
 
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-sunxi.git HEAD
-
-for you to fetch changes up to fa4dfe870c16a90ed14be92f5f3a3822a7ecfe9a:
-
-  sunxi: dts: arm: update devicetree files from Linux kernel tree (2025-10-27 11:12:57 +0000)
-
-----------------------------------------------------------------
-Andre Przywara (5):
-      sunxi: a523: Re-use H6/H616 DRAM size detection method
-      sunxi: switch the Allwinner T113 SoC to OF_UPSTREAM
-      sunxi: switch Allwinner A80 boards to OF_UPSTREAM
-      sunxi: dts: arm64: update devicetree files from Linux kernel tree
-      sunxi: dts: arm: update devicetree files from Linux kernel tree
-
-Chen-Yu Tsai (1):
-      sunxi: a523: Add OrangePi 4A defconfig
-
-James Hilliard (1):
-      Makefile: pass KEYDIR when set to sunxi-spl.bin mkimage
-
-Lukas Schmid (1):
-      sunxi: add support for NetCube Systems Kumquat
-
-Paul Kocialkowski (2):
-      net: sun8i-emac: Remove internal PHY config default value
-      net: sun8i-emac: Add support for active-low leds with internal PHY
-
- arch/arm/dts/Makefile                              |    4 -
- arch/arm/dts/sun50i-a64-pine64-lts.dts             |    2 +-
- arch/arm/dts/sun50i-a64-pine64-plus.dts            |    2 +-
- arch/arm/dts/sun50i-a64-pine64.dts                 |   14 +-
- arch/arm/dts/sun50i-a64-pinebook.dts               |    4 +-
- arch/arm/dts/sun50i-a64-pinephone.dtsi             |   21 +
- arch/arm/dts/sun50i-a64-pinetab-early-adopter.dts  |    2 +-
- arch/arm/dts/sun50i-a64-pinetab.dts                |    2 +-
- arch/arm/dts/sun50i-a64-sopine-baseboard.dts       |   21 +-
- arch/arm/dts/sun50i-a64-teres-i.dts                |    2 +
- arch/arm/dts/sun50i-a64.dtsi                       |   55 +-
- arch/arm/dts/sun50i-h5-nanopi-neo-plus2.dts        |   38 +
- arch/arm/dts/sun50i-h5-nanopi-neo2.dts             |    1 +
- arch/arm/dts/sun50i-h5-nanopi-r1s-h5.dts           |    1 +
- arch/arm/dts/sun50i-h5-orangepi-pc2.dts            |    1 +
- arch/arm/dts/sun50i-h5-orangepi-prime.dts          |    1 +
- arch/arm/dts/sun50i-h5-orangepi-zero-plus.dts      |    1 +
- arch/arm/dts/sun50i-h5-orangepi-zero-plus2.dts     |    1 +
- arch/arm/dts/sun50i-h5.dtsi                        |    6 +-
- arch/arm/dts/sun50i-h6-beelink-gs1.dts             |   39 +-
- arch/arm/dts/sun50i-h6-orangepi-3.dts              |   17 +-
- arch/arm/dts/sun50i-h6-orangepi-lite2.dts          |    2 +-
- arch/arm/dts/sun50i-h6-orangepi.dtsi               |   23 +-
- arch/arm/dts/sun50i-h6-pine-h64-model-b.dts        |    2 +-
- arch/arm/dts/sun50i-h6-pine-h64.dts                |    3 +-
- arch/arm/dts/sun50i-h6-tanix.dtsi                  |    1 +
- arch/arm/dts/sun50i-h6.dtsi                        |   41 +-
- arch/arm/dts/sun7i-a20-bananapi.dts                |   27 +
- arch/arm/dts/sun8i-a23-a33.dtsi                    |   20 +
- arch/arm/dts/sun8i-a33-vstar-core1.dtsi            |   96 ++
- arch/arm/dts/sun8i-a33-vstar.dts                   |  205 ++++
- arch/arm/dts/sun8i-a83t.dtsi                       |    4 +-
- arch/arm/dts/sun8i-h2-plus-orangepi-zero.dts       |   14 +
- arch/arm/dts/sun8i-h3-nanopi-neo-air.dts           |    2 +-
- arch/arm/dts/sun8i-h3-orangepi-zero-plus2.dts      |   14 +
- arch/arm/dts/sun8i-h3.dtsi                         |    2 +-
- .../dts/sun8i-orangepi-zero-interface-board.dtso   |   46 +
- arch/arm/dts/sun8i-q8-common.dtsi                  |    2 +-
- arch/arm/dts/sun8i-r40.dtsi                        |    4 +-
- arch/arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts     |   35 -
- arch/arm/dts/sun8i-t113s.dtsi                      |   59 -
- arch/arm/dts/sun9i-a80-cubieboard4.dts             |  508 --------
- arch/arm/dts/sun9i-a80-optimus.dts                 |  510 --------
- arch/arm/dts/sun9i-a80.dtsi                        | 1253 --------------------
- arch/arm/mach-sunxi/Kconfig                        |    2 +
- arch/arm/mach-sunxi/Makefile                       |    2 +-
- arch/arm/mach-sunxi/dram_sun55i_a523.c             |   82 +-
- arch/riscv/dts/sunxi-d1-t113.dtsi                  |   15 -
- arch/riscv/dts/sunxi-d1s-t113.dtsi                 |  927 ---------------
- board/sunxi/MAINTAINERS                            |   10 +
- configs/Cubieboard4_defconfig                      |    2 +-
- configs/Merrii_A80_Optimus_defconfig               |    2 +-
- configs/Sunchip_CX-A99_defconfig                   |    1 +
- configs/mangopi_mq_r_defconfig                     |    2 +-
- configs/netcube_kumquat_defconfig                  |   43 +
- configs/orangepi_4a_defconfig                      |   32 +
- drivers/net/sun8i_emac.c                           |   40 +-
- scripts/Makefile.xpl                               |    3 +-
- 58 files changed, 784 insertions(+), 3487 deletions(-)
- create mode 100644 arch/arm/dts/sun8i-a33-vstar-core1.dtsi
- create mode 100644 arch/arm/dts/sun8i-a33-vstar.dts
- create mode 100644 arch/arm/dts/sun8i-orangepi-zero-interface-board.dtso
- delete mode 100644 arch/arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts
- delete mode 100644 arch/arm/dts/sun8i-t113s.dtsi
- delete mode 100644 arch/arm/dts/sun9i-a80-cubieboard4.dts
- delete mode 100644 arch/arm/dts/sun9i-a80-optimus.dts
- delete mode 100644 arch/arm/dts/sun9i-a80.dtsi
- delete mode 100644 arch/riscv/dts/sunxi-d1-t113.dtsi
- delete mode 100644 arch/riscv/dts/sunxi-d1s-t113.dtsi
- create mode 100644 configs/netcube_kumquat_defconfig
- create mode 100644 configs/orangepi_4a_defconfig
