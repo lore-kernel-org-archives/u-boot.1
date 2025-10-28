@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5531CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 16:57:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E871CCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 16:57:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E22F83906;
-	Tue, 28 Oct 2025 17:57:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6F596836D1;
+	Tue, 28 Oct 2025 17:57:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JaVIJ+y4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rOmaZSif";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 740F5836D1; Tue, 28 Oct 2025 17:57:34 +0100 (CET)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 593B483937; Tue, 28 Oct 2025 17:57:36 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3301783700
+ by phobos.denx.de (Postfix) with ESMTPS id DF029838AB
  for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 17:57:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-475dae5d473so37076345e9.2
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-475db4ad7e4so16687405e9.3
  for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:57:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1761670652; x=1762275452; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mtP+duf8UUU9id5zFywHWCp3fXygWSbXcFade2wvet8=;
- b=JaVIJ+y4JR+w+5+ukqnrsXTT3r2/6Hp22h8H51ShlBV3WzSl2MlgwLCZWrBMXK3tO3
- x2BsMSusvVkqziB5b/FmWML8abDpNB12K6zk2jYXVUVkhMkNHRGPWAc1G2QGam9a3pFP
- yQ53/gK0mHgri6rm0QMIULaGlq/eiR48OnUpw7Lp3PFtXkqnJWJJPXqwr+u94HG0vP0d
- 8X6N0zBnOdlnU8AoAsSV6aCUlR0p4MR70LoBsuqUXRf6NhIUr3kETyIi/XVuURg3coka
- Fd6q4vGe1va0QLC206n5+T9DEdS0FFHZWf4UW4KN/sMV1JoEwRiKs+b6SyyfPof9A6Sp
- H3vw==
+ bh=Ffv0GwUrvWeCT6HEosGZQenk6kuONihWy4YX6ZA8LDM=;
+ b=rOmaZSifXcUcohO3Z/dfWG4saKT8s2TAkoe52uEOn0JfFXPcR812ZB60JRjnooizs4
+ +ztRaCUNqEnMJV6Udj2L88Q/q9AOrOEU4CRX6sA11NZEHFw9exDK1wErxqXZgTUShdJd
+ pPWMp1WYWkko3kSH17B4w9GhfrxZqNbVoXbdvqirazeL1C6R6Fj2H/irxL02IIU5VyVg
+ V0AzEcHhmCi4hSwn53GS+bqxK6pN1YRLAUShIv/E6aOZN+gsVtqtOIQCo0hb3C7dM0QI
+ 5rpE8zTbLxGn5OogiVhgHkyvk8Zv56OV57cAHzLvs8d8fKXl3NBvxbhl+0B87BRbyrLl
+ 9a7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1761670652; x=1762275452;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mtP+duf8UUU9id5zFywHWCp3fXygWSbXcFade2wvet8=;
- b=UIRMbhL3PXz9l+MKoCOg7NFWrkIqQLCBOkK+SGsIT8H2Rh8Y7PGLF+GOIPAKjEWna1
- gel5rG0HbmcCHAGVRrwSsZb8GJy9T3I/mfEQxdas2tsJMT2dFtqAct2U2jidF0kH1R3C
- uXmB5yJ8EjY6K0baeQ43rAcuRShcHvm6xiuLj/0DhbMC3YmqLkj7zgZM41zzD/Kmv7sq
- CmlLZgqyoKz48M3pPFJltAjaWhbhcFy542mT3iARPysiNIMwWk2PIqa99mOWPrwdN6F4
- FRwSBpdhxYhLg/0jrbzOe9mFHzrjc7txE3YzKKtWaOAbKSjbaCidHpl600hWbWkJ2tCG
- za0Q==
-X-Gm-Message-State: AOJu0YyFuHATELFJqC381OwmFffzopajT27TJ6/9vtj76yi/3TfSiVSn
- 4V5AJm5uCEl+zzrrVwc7Nn8yz2hyejEuoo+D8luUZ/iRH2iLQ/z+ixoHk/8TzVdkOfrGdEAyd59
- qbl28Xb0=
-X-Gm-Gg: ASbGnctnynUHFYB0RtdGU93T7qn0JYXNsdU1cLTxFVT762jPwqWQaIo7/ed3PIq48KB
- 0Vp+wSQNWrbx6HVKIukNuMH/lnH4BJCy1AaX2Bp/jZ2xfg5sn6AQE6ENvsZyhEZJrGAo0yrYXHQ
- rkWSFP/adsZ4zSnkwYNtrTAT8eaVZrcSWQyvwSPspGfJHlmLJudzrvVeo5tqQ1Mv62d1lB3Q1Qt
- 47gg6P/AqeJpaLxbZkYgfevnnpKjkk8ncPvuslP0n7jG9v9odMKMLaI6scry3zCE5/uc1if0KJM
- yUxNdHiGbFx1Z49EBG8jMvVPuTFjhTlmRHVLj7t4pOpF3tl7Nvn7QD/4ETECBdraL+4j6HjTou9
- +NWydCCYNrhCHGOVBzjo0nMBEgzpyDb6dv8jHR/eBbBhLfEBnPijkOuncIX9ut7y9MYpFZZMcMu
- o9iElF+FI2SfatY2Vi3rTm
-X-Google-Smtp-Source: AGHT+IGAkG5sgCq7wUB/gYHH6+4E4rmJXneNtx5iNBQnwfgZk6nnD064e5JDurGl7i/gb6fwnBlI9w==
-X-Received: by 2002:a05:600c:6286:b0:477:c1c:f645 with SMTP id
- 5b1f17b1804b1-4771e34aa7dmr832535e9.11.1761670651632; 
- Tue, 28 Oct 2025 09:57:31 -0700 (PDT)
+ bh=Ffv0GwUrvWeCT6HEosGZQenk6kuONihWy4YX6ZA8LDM=;
+ b=RbuI5BPL8CV8a5cFy996OY8VoML+xjwkRkuKJGhBEMehc1nUFjGKqi3Uk9tikje2P9
+ ldxpksbd8K4tm4vvqp/PZqBUFmO+k1zKZrIaF/Z4UCctZHILEFIPtV+wigtyc9zIHFJP
+ /szsvvYypUddxu+kBa16TENBqIZiOm48hn9buku3fMkFj9hm3MJFr5UEd8Ppj3tMhz1F
+ cKMtBtoQLLwFccjvmZofkCgGVxD7wUrLyJ1vV+A3/fIGUNATY1L9pHs61Om35JZaeZbP
+ pvlVtTCGxzrsLewGYOGU5fusE1ICpeUBliLUvUPXo+IMDqT7EKgoIwYpqjSBb+srIQBc
+ hPpw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWwU84wYB80St1yyMQn/mPPQ1mL2+sRKdrCJXoW8k4/5Z99e3ascSx1n2l65awhNVJJXElfRqw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzphx7ui+sLnCeYEeiYnPktooBR2DS2z+fP6mi02rYYPmvykl4w
+ IXteY/WC/g8OXOfGGMFsfkEtXMPHrJ/iCkGOAnynorn1obWQXYeHfrwmPBgUNnMSJYvq2eidGm7
+ wW/tAN/A=
+X-Gm-Gg: ASbGncvL9GbIBTgS723CdhTFGCjVfMXLhqdAPF/bCedSnPEzhalQ8yRXzrXtP5peWX/
+ +GICSpsg0V6sPPVgSx17hSGRo4gyNKiIVz90TiouqkgEHv/e+PHfYz0Um7AqvMLA1ecA4TxQwMo
+ 64XlfTJgmuXog2nbLwKjFw4yJZucwaL7PPE+EUQmb9bpO/QjLT4UENnhyAhrKNLrHK/FGUBrPpe
+ h5R4Lv9QBbXiUnii5PCk79CekJSgjm3CovfAiAwrsmasdum20tpqxmz6qysgZKDhe3gxWRkdkJq
+ FMqA6YQ4Tsja7vQMTvKieCWT07bZgNXUF22cR/JsOCepyoP/T0pkoh4y4vGPL96mCJU0GSXASJw
+ qhC59hGxNHOiW/6JB7iZHo9I5+EUP2CXMtgOBTbavigbENtRA5JXIo5iFpdOC66Dc9ql8Y4huTg
+ 1Z3Uo6lO0DkELrmOiGgeXV
+X-Google-Smtp-Source: AGHT+IE/4IBrPgfW4WgO6ahyVsa1jsKyOp4XJlLXyRVoHcPXauvUL8wAlp6HUykhjS8TB50fXSiCJQ==
+X-Received: by 2002:a05:600c:34c3:b0:46f:b42e:e39c with SMTP id
+ 5b1f17b1804b1-4771e1f3e2amr1137635e9.41.1761670652219; 
+ Tue, 28 Oct 2025 09:57:32 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
  5b1f17b1804b1-4771e222ca5sm1971495e9.15.2025.10.28.09.57.31
@@ -74,13 +76,14 @@ Received: from arrakeen.starnux.net ([2a01:e0a:3d9:2080:8261:5fff:fe11:bdda])
  Tue, 28 Oct 2025 09:57:31 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
 To: Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Neha Malcom Francis <n-francis@ti.com>, Tom Rini <trini@konsulko.com>, 
- Anshul Dalal <anshuld@ti.com>, Andrew Goodbody <andrew.goodbody@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20251007-ufs_ti-v2-1-501f575b6947@linaro.org>
-References: <20251007-ufs_ti-v2-1-501f575b6947@linaro.org>
-Subject: Re: [PATCH v2] ufs: ti-j721e: Correct error detection
-Message-Id: <176167065109.4104072.517909320047244448.b4-ty@linaro.org>
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+In-Reply-To: <20251010024557.673787-1-hayashi.kunihiko@socionext.com>
+References: <20251010024557.673787-1-hayashi.kunihiko@socionext.com>
+Subject: Re: [PATCH] ufs: Fix wrong bitfield usage for Data Direction in
+ Transfer Request
+Message-Id: <176167065171.4104072.270585011028939401.b4-ty@linaro.org>
 Date: Tue, 28 Oct 2025 17:57:31 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
@@ -104,21 +107,23 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Tue, 07 Oct 2025 12:42:12 +0100, Andrew Goodbody wrote:
-> In ti_j721e_ufs_probe there is a call to clk_get_rate but the code after
-> that attempts to detect an error from that call incorrectly uses
-> IS_ERR_VALUE.  Instead the test should just be for regular error codes.
-> The call returns an unsigned long so that needs to be cast to a signed type
-> first of all.
+On Fri, 10 Oct 2025 11:45:57 +0900, Kunihiko Hayashi wrote:
+> Commit d232d7fdbf6f ("ufs: core: sync ufshci.h with Linux v6.12") updated
+> the Data Direction values from bitmask values to simple enumerations.
 > 
-> This issue was found by Smatch.
+> Before:
+>     enum {
+>         UTP_NO_DATA_TRANSFER    = 0x00000000,
+>         UTP_HOST_TO_DEVICE      = 0x02000000,
+>         UTP_DEVICE_TO_HOST      = 0x04000000,
+>     };
 > 
 > [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-ufs (master)
 
-[1/1] ufs: ti-j721e: Correct error detection
-      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/6defecd943e92e4341cfa088ef4f4cc19ff2db8b
+[1/1] ufs: Fix wrong bitfield usage for Data Direction in Transfer Request
+      https://source.denx.de/u-boot/custodians/u-boot-ufs/-/commit/d0dfb8c635ab4ff60090878879c9f75f9a7193da
 
 -- 
 Neil
