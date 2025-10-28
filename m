@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542C2CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 18:00:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71883CCF9E0
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 18:00:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E24083968;
-	Tue, 28 Oct 2025 18:59:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6272683966;
+	Tue, 28 Oct 2025 18:59:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bcEBv9js";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fLIPjzIm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9028838BB; Tue, 28 Oct 2025 18:59:16 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 7F6608391C; Tue, 28 Oct 2025 18:59:18 +0100 (CET)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D17D883956
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 18:59:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A48680422
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 18:59:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-44588e94decso82876b6e.0
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:59:14 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-654ee10146aso1162211eaf.3
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 10:59:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1761674353; x=1762279153; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1761674355; x=1762279155; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pACPPyMcnfC3Da+xVHU24+CLXgezQjGz1du9zs0yBrw=;
- b=bcEBv9jsX7suedaOXiNJGaAT//YIt/CdpgS1BH6cd58s/C4oFPKchaR+FSHHYJFfvc
- BVjg/9vhzmRAwajxANiYtJqYX2/Hjz0uZHrtpkyRm61OyRLS+FVsCrjuzhOjJOR4t6FM
- 1O3Tqbbg9GVGZzuNuMPo4KUUzmQHYvirldmpU=
+ bh=ApCfxeZjXbLISNYRmSlaI3fL45CkBqSuOc3ZIXYRtak=;
+ b=fLIPjzImrNPNPK/ApabRqJifgafFNUAcqrd+k936kCIXK9Pt18SiOI9XJ0VHgWY3qb
+ 0t4pDZKoGLwDqCgeKz01x3xyB5PyHhO+OVAySln4lpUUWoeM630isrNO475fYLZWFywC
+ oosqRrI6Xo+7Ez4Rhp/RQkCjbpve35PjbgmWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1761674353; x=1762279153;
+ d=1e100.net; s=20230601; t=1761674355; x=1762279155;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pACPPyMcnfC3Da+xVHU24+CLXgezQjGz1du9zs0yBrw=;
- b=wJM28z2DSgXOIoMs3qtKC62xW7WNMeiQgY4KfuxUMqWE3wFTkzQ7qrhV2sYSBSWSc/
- TC4Wtvlm/4NwSI4P2z0FU68p9lATvkn0deyu/5mmMPDq93zxZAs8tf1v4MOvix5Kfo+b
- E0WEiQ/Y+dDNAOS0IBXSvuhkbNrXQVGpvrNk3UJ/ET51fElIJQac/F9S7IdSceYn0865
- rkQp1gs8VLDwp5heiNkLnNpmWwjeJZntSnTiI9L/QBWZT3XRkeJh946DHQnLnkgDYOid
- 9NFIdEYS3e15Nfjzt4X5liKFIx852mQxkjyW3iPKmUDtrc1IkHhI2cVU2jjzA2x5OEJk
- cI5w==
-X-Gm-Message-State: AOJu0YxQftSlP21TktpSzIKY27GkUWBL0FrJU27Wpm2xdQ3JP/5/tnoh
- 07dqnfWwo4pRwB9QkoNxlrR6FS8VJ6xBDWCfiAojkVBfp/mnS2rR6+2ocpr+jNK7J3Y=
-X-Gm-Gg: ASbGnct6xgTds1qSmaLtQH08vmFoACZlZRaJzF08BL9USGv//2aKDbnqNllBEqlhO4D
- h5oo+APhU7FDWoqgGHkBalgGZu8ObtqXzNFWNqau0LW+FyOGa2c4CK+PPxM7Vty5fZDE4CAKrMU
- B4KTUo2z1y8O05xwEv0q4eeXbtJ52uqRTRjEMXu4Zakc33BCEZgySQmP726v5yvtcbYKJpOWMW5
- 8wD0b1ykNeSxZw5dZCSJ7pBLfUMnuD8mj5q3k9lk+fnRmArQJp5371v7utKKN/1d+qHqulxe278
- miWAP9rYjiSosmtsEc15O4MFeaA4jfirmVttejBE/VO+7layqcogdoE3kEvxx9YVBtSXFuac4An
- L07uS+hRCXBMjYNJ1h/B95SWb1t6sSg3hV2hTE62HxLwCkgZgdeBxbJhiQQgLR5b/XoEHbDT+Av
- YFiKz2Xvpd1ryRUy2w87IPyNCGhqJPiTilnL4hdA==
-X-Google-Smtp-Source: AGHT+IHSO5GlRZHbQNTgIbs6WeY8JEml4g4uYlyIBx9RQQ2grFkhhjSBdg47TR5azQMG7bM+h2FyLQ==
-X-Received: by 2002:a05:6808:2122:b0:44d:b760:f1da with SMTP id
- 5614622812f47-44f6c6ee7c8mr1875290b6e.14.1761674353519; 
- Tue, 28 Oct 2025 10:59:13 -0700 (PDT)
+ bh=ApCfxeZjXbLISNYRmSlaI3fL45CkBqSuOc3ZIXYRtak=;
+ b=hpKWtE3zeFMIjbr+PSrsIBXZinCiQWbQ7w8gqzyywQGhCATfx9vpZ06OqWxRbqvAKG
+ BhR2l3vP5TsCclsPpwscb3vUIqIbfvj7L4RmMGGlDy2boiecrQt/FdcYuVTO5gVd3mHf
+ HyNzpSnNhQBRa4u+qIvsCL/1V94KdV/59jTZVrCLLNT4xpPCaP1lpDj24Dz1GqWT9qBy
+ gCAB5iWP1o0+iiisan6P1Qneovbc3RloxxJI7pfBNEiRWR1WLoWce72j7RsNs8e2PUVZ
+ EN/3D3u9a5I4Q2LkBRaYBUpPPFHsL50/y4A55i/hYevS/dBBzmgtARwoZVgfGXTzHhYa
+ gf5A==
+X-Gm-Message-State: AOJu0YxwT4hSyNFngXEyllVVWOqlmr5wC52CTxOyYS7NbdPdtU0MpD0Y
+ mDypVgrJU44Tmq//zN+2PWt0plwfV0bV6E9hpv5LngT6OPicC5riMIlUfkWr3ohxtEY6hYnE6lz
+ atlpo0vkKs2sS
+X-Gm-Gg: ASbGnct3QNFOwIBbyU3O023IREB5rOvDMBuiOCo1W956tHnff2bhnRJJ99SWL3P4hpT
+ qmhCDSHvQi8O7/AysBXeZS9z5abOWv023wrLZSifVDLJUpJNIEzpff+t+9vIFpDpYoHxZCLe4mH
+ ObkwIEYx0izcBJbAkl9Fq1hwQHdMKFD9GtrMRCyFbs5hWxfVesmiNM2KCl4RXjnIwdLIMhz4STA
+ 10hD2T59jMRuLY0SQd27OKHTaOqsiHH/Ju+56Grld2oAL3yL/OUQeFCHbKrfpOQA/xpcfzu6f0K
+ 7MZkP7cXASe75W25YwEfWtaLXjZleQNzpuGg5yDF3+WqlRNUuKk4tf9Bf6dD1MxfoClNmLWGFzf
+ fuGzH4cEyWIIcASQxQumjBNTYBRLbaHY4kfDs7C8BhzPQEq6ZwhK7LM/G4KrEurB1yqFLjWbu6a
+ zPBfGFOglc33VHU85HsXiJbQhUDxT8ztnbrL21Fg==
+X-Google-Smtp-Source: AGHT+IHgyMjHxKhAva0HcnonhWfN8rCeEfWDb8lMmylXpDFBdXQPKydBg+lyrn7BKaXkH2IDlpjw2g==
+X-Received: by 2002:a05:6808:2192:b0:441:8f74:e7c with SMTP id
+ 5614622812f47-44f7a8b605fmr103014b6e.54.1761674354849; 
+ Tue, 28 Oct 2025 10:59:14 -0700 (PDT)
 Received: from [127.0.1.1] (fixed-187-190-202-235.totalplay.net.
  [187.190.202.235]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-654ef2e0d33sm2843926eaf.16.2025.10.28.10.59.12
+ 006d021491bc7-654ef2e0d33sm2843926eaf.16.2025.10.28.10.59.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 28 Oct 2025 10:59:12 -0700 (PDT)
+ Tue, 28 Oct 2025 10:59:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: Jagan Teki <jagan@amarulasolutions.com>, 
  Andrew Goodbody <andrew.goodbody@linaro.org>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20250812-nxp_fspi-v1-1-4191caad372b@linaro.org>
-References: <20250812-nxp_fspi-v1-1-4191caad372b@linaro.org>
-Subject: Re: [PATCH] spi: fspi: Logical or used instead of logical and
-Message-Id: <176167435265.2025892.10710972467456758762.b4-ty@konsulko.com>
-Date: Tue, 28 Oct 2025 11:59:12 -0600
+In-Reply-To: <20251006-spi_uclass-v1-1-6dec8be15fbe@linaro.org>
+References: <20251006-spi_uclass-v1-1-6dec8be15fbe@linaro.org>
+Subject: Re: [PATCH RESEND] spi: spi-uclass: Use unwind goto
+Message-Id: <176167435363.2025892.7071567580831419954.b4-ty@konsulko.com>
+Date: Tue, 28 Oct 2025 11:59:13 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,22 +98,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Aug 2025 17:42:59 +0100, Andrew Goodbody wrote:
+On Mon, 06 Oct 2025 16:09:25 +0100, Andrew Goodbody wrote:
 
-> In erratum_err050568 the test for apllicability uses logical or to check
-> multiple chip IDs but this means the test will always evaluate to true
-> as at least 1 term will always be true. Logical and should have been
-> used so that the expression evaluates to true if all terms are true
-> which would mean that no chip ID of interest was in use.
+> In _spi_get_bus_and_cs the check for stacked parallel support needing
+> multiple chip select support does a direct return on error. Instead it
+> should set the error code in ret and then use the unwind goto.
 > 
 > This issue was found by Smatch.
+> 
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] spi: fspi: Logical or used instead of logical and
-      commit: 1e2de3ce615e5cd2bd89d6bd601ed3709059318b
+[1/1] spi: spi-uclass: Use unwind goto
+      commit: f12ca3e2b81beef901c182981bb70b0b2aec8f6c
 -- 
 Tom
 
