@@ -4,152 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38FC3CCF9E0
-	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:25:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCFFACCD1BF
+	for <u-boot@archiver.kernel.org>; Tue, 28 Oct 2025 08:38:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC4E9839B7;
-	Tue, 28 Oct 2025 09:25:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id F0E5783A07;
+	Tue, 28 Oct 2025 09:38:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="eHAK2JPm";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="PEJ4grhH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E0BF839DD; Tue, 28 Oct 2025 09:25:23 +0100 (CET)
-Received: from MRWPR03CU001.outbound.protection.outlook.com
- (mail-francesouthazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c207::3])
+ id 03E0D83A1E; Tue, 28 Oct 2025 09:38:00 +0100 (CET)
+Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0279C839B5
- for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:25:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F653839DD
+ for <u-boot@lists.denx.de>; Tue, 28 Oct 2025 09:37:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=u6sIFX1BlACN0ooVTPzf99rzCFIeU45NAYCHmfEybojKhBAAdGd41/kglewBhbBFNA76jjt9X5BvA2Uzp+bS8ZSi6vrKB8OpUeUFOQaUdmqO7WAmVAeS80v/D230U5Hw1n7jHCN/kzJ009L3hk3nNE7S8ioQE7j7VXJtEPl95MLQQChhfJExYaCzKmVFWFKhexp7EpR5e4UaxCU1shBiuty+CozGIxbywXH/akr8yU3OvN72UfrLqawUAn/dkjB3mI9XiPjJtFelJbtzI/W/9evXJxTyp8XyrHyN9nQzOJpt0pbYEcFynu71SRl/eve9EpXelwYo55NfC402MGWLRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eDN78cUApLpJ9dmsJBS92SrcWUQmpCQ+Zvk2aN9BmaM=;
- b=rf90WbgI9joSs13eIaPeMuBABHgY6BJ9B8H/G+z1ogOeWh/k7vSw3gfbtzQZ9GXK4fatJN+U+9cnqFivDNGpjj5pKpAscluFP15pZwHvRLFjfbNJdYeidiqwuiYYkbeteEfl62JKOYfWL+oR9Pqu8dNVk8eTzbfC3UxW45g9p/uFJdhpmekA4GFMiSYfLhhecBV8s1h3aX4TykKdOelnjY5IDdWxAnbfr0z8r9ZD0JVUf2srVhKLoBP9ncUGEK8FAS0AO13QmF5z1XBkE1wCR6SPUTo+NgnneA3AvZSoTEyIo++/BrkB+iKGmp7rzDYNtSbC86+hijLnTyDThC/h1Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eDN78cUApLpJ9dmsJBS92SrcWUQmpCQ+Zvk2aN9BmaM=;
- b=eHAK2JPmA8ZDa7yKzcxJ1GY6TDfQTCXYspQ4t9ExzcYMaKvx0laHhmI/idrhY4824h7nRyqFNQSJjiX2HiMBhnT9jgEO2Ybg2b5KhuDB85VdCGgaNg6p13DWQU838FGs4sVde8rE3m6lwE3TamZbv4MX0m/N+5tnohQiI5TQujRkIhJ+jGPalVVkZSqNKjcxPyFsUE8+5FnMtMJjsPNXu0x/AXDHjqOE70N/f0Qwf0wqaL2y4zZW5dZmqqFWgmkmhXS1B42amEhQQF/JJWyTxK3yD2MV63KE5mz3Sq5uTIChO0BTJF9m5rbRveHPL5cB/cRBMNUKD54G1cK1yMKSZQ==
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by AM8PR04MB7908.eurprd04.prod.outlook.com (2603:10a6:20b:24c::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9203.13; Tue, 28 Oct
- 2025 08:25:19 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.9253.018; Tue, 28 Oct 2025
- 08:25:19 +0000
-From: Peng Fan <peng.fan@nxp.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Alice Guo <alice.guo@nxp.com>, Etienne Carriere
- <etienne.carriere@linaro.org>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>, Vinh Nguyen
- <vinh.nguyen.xz@renesas.com>, Viorel Suman <viorel.suman@nxp.com>, Ye Li
- <ye.li@nxp.com>
-Subject: RE: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour()
- misuse
-Thread-Topic: [PATCH] firmware: scmi: Drop mmu_set_region_dcache_behaviour()
- misuse
-Thread-Index: AQHcRfdbWm99hZDObESOmKTyJOhNR7TXOyQQ
-Date: Tue, 28 Oct 2025 08:25:18 +0000
-Message-ID: <PAXPR04MB84593511CF2B43470CDD8ABD88FDA@PAXPR04MB8459.eurprd04.prod.outlook.com>
-References: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20251025213537.238103-1-marek.vasut+renesas@mailbox.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR04MB8459:EE_|AM8PR04MB7908:EE_
-x-ms-office365-filtering-correlation-id: bb962ffd-b555-411e-ffc8-08de15fb87a3
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|366016|19092799006|1800799024|38070700021; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?0gtMZfjxzmaTd0C7b4fnZR28sxfoK6BZxp94/ICdk7vdRl6wEPP1VozSCkpY?=
- =?us-ascii?Q?90zhsQHIe8Tu/fJ5IxKoVp8OMWMErncpvPAixpG+dKzb3PMOPTt3XapvLCrG?=
- =?us-ascii?Q?UFPM66ZWTIkw2rp+6z+bFSh8f00AJWDhw2tK9Br7DPdb7II5vSi0OMRXhfjs?=
- =?us-ascii?Q?00tdpvpFFYlVYGyBwegsHjBGD+CuoetAPfJUJqVwsKiZuaZGDquRm5U6KG1a?=
- =?us-ascii?Q?2y2RoY6R27FF/lEXTvsVm5lmfbUh+I2iSDtVdPRA782yTCs/jE/YIIm35ozl?=
- =?us-ascii?Q?zpNbEk5Ld8VAceCDesLhjodo3l7eU9rnwHL489jGG6/Y71swZAydnrF9rlCt?=
- =?us-ascii?Q?NSu9+xXaPPydQccBa67OsBFh8kTrXooyKIBGS8PNLOJ12K3W0jJmK+m7LTZ+?=
- =?us-ascii?Q?FOYfMWQC6edfJTPLxO16qSUqpZsmBO6Z/RacxWPT0PeIJH5K8nJHfRRzq0hY?=
- =?us-ascii?Q?iA/jjEZfs8WTJcG/xfiRtw2Bc1SOZixdpqrXtNq0ahDcTGM15vqJGSTXZk1W?=
- =?us-ascii?Q?u8t/5DjTz3s4YEqF2OvewH/izP60UvYAfzzM/bbJHR5YjBuLLU4Qq+vfk6zw?=
- =?us-ascii?Q?X0xVEfShLeFu5VPPAtvizWPXtdiJizT/JBQnyY5MJiHdyJdfNvrW1jaenyZT?=
- =?us-ascii?Q?frp/T/AHsA7ScKNozRqW24SzI5SCQjZhdfbCoHZXU3X8EggXFaQq76CiUQHn?=
- =?us-ascii?Q?DXqxxCByWx56U1GilWAtYfzQZ2UnsTJb30R/3JD1/OJTd3aYmcjR29uFNzjT?=
- =?us-ascii?Q?J+m20Za73soWLsHpP1E5lXtItarFLI68x86Q88E9YSEn7gKGf850/gwpuHQr?=
- =?us-ascii?Q?2yroPWQao6U2M0MT/WXjxbLxGS3kZ77h20jZewyF29Ph7NOEGfIXdCzl8h+e?=
- =?us-ascii?Q?7feghWD0PF6uea7Mm3E1CXBvaRdYMoiuu23GiaVgzcLlqfWd81cZpcnNaXFa?=
- =?us-ascii?Q?LDs/2Z3UiOmEbhINHwspD1p49iWGdVZkHmUdgF0eRspNSWdw6hx/hlvhu3Wm?=
- =?us-ascii?Q?J1jTbN9HSrg9P0SAF0yKtIsgDx+gfQ6u5hQFu6Iq8J9uTTqY2ypA5ytASFQG?=
- =?us-ascii?Q?X8WilHDPdhXoG7RUS3ieFhcmePgXBIqKxomArnUwfVecgMOAiWEtcq0VLV8N?=
- =?us-ascii?Q?G/qY4V6npSb84rWs3RlVwX+YzP1JRVVKTTcuREkzP26J39qHdqCNhblJZLN6?=
- =?us-ascii?Q?c32Ko/Zu0pKZqHB7jTNaIKqX4WOVOypQqeGJnnW5ENLma6vuo0fU9WLVa0Md?=
- =?us-ascii?Q?6D5ZnYfdKEdtPJYvlXZe+Vc0dtjue5b7lblh9hLjCuwyXleB9cTcyvS7hpOT?=
- =?us-ascii?Q?P8ntzxPb2FjGWgG4viQ18jeM3wjtOnCsMZRYtkOkT3jSIF3k7aI+sJ4mT2/B?=
- =?us-ascii?Q?iXTdUUWqHoAgknAud77nV6YdUIi/luH5HyZhaLkei5KrsIwk49EozXX69TlG?=
- =?us-ascii?Q?M7kbpkIRDR4aIm1/VCKFhKUQ6YBtq5+iGdiS+l9meMFrwh6tn0szbzHmynIA?=
- =?us-ascii?Q?FFctMpmLOtlEPABIy2/5bhvAaqNrQC+Umh5c?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(19092799006)(1800799024)(38070700021); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?E1/mbkAaeorJxfaSD3SS7dYb9b1Rc9I0s93iJbmil4R1RIF6jD23RIbd/Re+?=
- =?us-ascii?Q?L7QSXLcXvuBT1IRJm4sOTJArwb4s1bPvZ+a7fbV2MEDr0MxxKQlNjvTkex7d?=
- =?us-ascii?Q?vQzUyO1cDKVNnEwevf2255niN3ji5jCLVG5xRU6SbziqiawfGPVzUmDVpnTK?=
- =?us-ascii?Q?PPCKaFP0FGMBcMwXFPIyDPfkzuYCVYglo9bJvEvGjIe3BlGSg1y56wYvWQzx?=
- =?us-ascii?Q?qPDWiMlecp2tEO2HD4mDM2cAmMMzK1I5MDcVJxWQMHWuaAas1j4ccuZatEju?=
- =?us-ascii?Q?nvviqx3/iF5pG+ZbiZy/NZBRJCFkd9slDWx5nZNqQluxPWGPffH30aj8vptp?=
- =?us-ascii?Q?3r4ARIy8FZss1DybS/u7HZdk+l4k7+FtNFS7mQ8QioopP9RiguShRc3J2hq+?=
- =?us-ascii?Q?C6jKPbx/z1ZmEnU0SzKiW5f8fE4es0YC0Z8JvTiv+dKd225pJTHDNGsa6cTE?=
- =?us-ascii?Q?8svS7zaDZneeyVw/cs3qco2VQWwN1+oz8xZqxRoGP9EOmihA/LmN7TMLN0Mw?=
- =?us-ascii?Q?0Fiag7kyyptqhvHTUmb47SK+DIWHUo0q+QH6wWH+HzJGKIakb4758/1ysarz?=
- =?us-ascii?Q?IFJOIn0iff3W5jWjPlQGg71s/wM5iUuE1SiqSjrGQYbVVmfNTwzVUdS90bxO?=
- =?us-ascii?Q?EfHEajl/Zpj2TG0R4kPDJINO/VXE3qYg2gmn7Qwz2dJp27U7MbPTXkRGYIFh?=
- =?us-ascii?Q?7gPZzRpFia3CnL3ch4qwOPiw1TqxGe1s3nhN48eJskR72FLoPFCUDEvfjNwI?=
- =?us-ascii?Q?iF6bAoT5NTqqcIjY4v1VroQ0AZu2zvUgMcNFxsvRAlxEhXMdR5mcKChrfvl+?=
- =?us-ascii?Q?EDkMPp59go1At8F7FSNKLym6uEOaAZ1hzoMoCyRusZj61PRBG8j0rK4Y6EUg?=
- =?us-ascii?Q?CQjHcvBymiK9moJeogq2Lue296/FXZDXGqoDfBgzea4OMZMyK3EF/LqJkub/?=
- =?us-ascii?Q?lp+pL5zrN5rzbVDDcGvWH+8HkwwbmTmxmcyE0dVgcxSmfHzRYHfM5K6VXm7h?=
- =?us-ascii?Q?+KbynVpjnmLD8hOL1aicHfcbux3BDwr0x28nix9EHD12hFQMX3Ic5FmswVzz?=
- =?us-ascii?Q?ATgFYI/eP0rU+Aph1Q5rAjC+GBS6PM5VrBqKkgXZ9FC6EFjoqWkzhDGY9J2+?=
- =?us-ascii?Q?pOQ1rymV8eBX4yzBHDg6m4/8bXVWagprrH3+y7UYO62x+X9daqRnqg8GO6AY?=
- =?us-ascii?Q?M21I7TNHmKat30Wc5JTZ1OWjyi/Y4QpMm4BlVLzjAC11ZEaY3BI0kmE1sScA?=
- =?us-ascii?Q?k5/dxmFr8yeMEyQgr2j54gfbR69u/DRJbr/wXbmfU6AFJcARQTJBK5p7PaDm?=
- =?us-ascii?Q?rs9fau/dVffLuIv2oNKfsz6G+vGqqqyFd0WJ0LYk0pLwsHJagM+CuCMumbP/?=
- =?us-ascii?Q?NB+MIztcRefVs+XMqbM3bN4hHkFDWv5YyFIZOrUBaiGnlg7a/BOoeI1hhAD7?=
- =?us-ascii?Q?4pDFcIUuYFvVgiiJxobSgjJHv1Fl1d3WPDRl613pOQEZkfWRxZMzceX5IAY+?=
- =?us-ascii?Q?lP7DbKgbMJT7JzbejIF0IFOvBk3oWqMOHOxXqBeTLjF7wl6/LqIFbChqkSGA?=
- =?us-ascii?Q?cHXNiSOzjWp5UdRLuTg=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=richard.genoud@bootlin.com
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+ by smtpout-04.galae.net (Postfix) with ESMTPS id 4EA5EC0BE9E;
+ Tue, 28 Oct 2025 08:37:36 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+ by smtpout-01.galae.net (Postfix) with ESMTPS id 80D25606AB;
+ Tue, 28 Oct 2025 08:37:56 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 7806B102F0117; Tue, 28 Oct 2025 09:37:36 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+ t=1761640675; h=from:subject:date:message-id:to:cc:mime-version:
+ content-transfer-encoding; bh=u4wKjIp1ZAtaZWyd+y5ou68Y9x8QvRt8iE3Qu/Ivbfw=;
+ b=PEJ4grhH/BmnJhB6/GUZn3LjUrPSPS3s5Vc20FlhEikBre3kkWdILTmurTpRmdAS1ELnLG
+ HP8+acapO/JummdVXt3HVcXGSI0bOofvkVjALFUThptczYrrFAiohCDfVNL8ZhEY6J+ad/
+ xYg1wj0v6vpkbiDb2Va3giwkK0V1Ile+EcblDk37yfuMQEKcftc/VCKCMj79VjHSxmE7XH
+ Gg8J6SqBTZSa8OQM2tTXiF2c5sd6mvD6QAE2cu4RiXqCeNkwv9pJ/Xoe8D9kqaefBT8Nzf
+ TAvMnFxUBDBorb79ttCQ6iuxDGnF/bJBUrGwF/jmRf8wSd0aTgIJ22RDvwVUIw==
+From: Richard Genoud <richard.genoud@bootlin.com>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>
+Cc: Dinesh Maniyam <dinesh.maniyam@intel.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Anand Gore <anand.gore@broadcom.com>, david regan <dregan@broadcom.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Philip Molloy <philip.molloy@analog.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de,
+ Richard Genoud <richard.genoud@bootlin.com>,
+ James Hilliard <james.hilliard1@gmail.com>
+Subject: [PATCH v3] tools: sunxi-spl-image-builder: support H6/H616 NAND boot
+Date: Tue, 28 Oct 2025 09:37:33 +0100
+Message-ID: <20251028083733.574757-1-richard.genoud@bootlin.com>
+X-Mailer: git-send-email 2.47.3
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bb962ffd-b555-411e-ffc8-08de15fb87a3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2025 08:25:18.9373 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: z3MjhSpgbY3SdluAcwQ5L0XHzc/9isXfuzFDOHi/C2OscpPSr+DQ2DRlswC4Rjk1zevLfInKITyaxHy5NQZOVg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7908
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,27 +80,252 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+The H6/H616 boot ROM doesn't expect a SPL scrambled the same way as
+older SoCs.
+It doesn't use a specific seeds table, it expects a maximized ECC
+(BCH-80), a specific BBM (FF000301) and doesn't work if empty pages are
+skipped (it needs its specific BBM, even in the padding).
 
-> Subject: [PATCH] firmware: scmi: Drop
-> mmu_set_region_dcache_behaviour() misuse
->=20
-> MMU region cache behavior configuration for SCMI/SMT mailboxes is
-> platform specific. Even on ARM systems, the mailbox memory may not
-> even be located in any cacheable MMU region and may instead reside
-> in some SRAM. Remove this non-generic cache behavior configuration
-> code from generic code path.
->=20
-> It is unlikely that any platform is affected by this change if it did
-> configure its MMU regions correctly on start up. Platforms which might
-> be affected are i.MX94/95 and STM32MP.
->=20
+So, add a --soc=h6 option to support H6/616 with:
+- more ECC strengths
+- specific BBM
+- default_scrambler_seeds[] with all values
+- no empty pages skip
 
-If the memory is mapped before running SCMI stuff, it is ok.
-But if memory is dynamic mapped at run time, there might be issue.
+In Kconfig, select BCH-80 by default for SUNXI_SPL_ECC_STRENGTH to make
+BROM happy.
 
-I saw TI platforms has some changes to use dynamic mappings,
-I have not read the details, TBH.
+And in scripts/Makefile.xpl, use --soc=h6 option when building for a
+SUN50I_GEN_H6 SoC.
 
-Thanks,
-Peng.
+Tested on Whatsminer H616 board, booting from NAND.
+
+Co-developed-by: James Hilliard <james.hilliard1@gmail.com>
+Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+Signed-off-by: Richard Genoud <richard.genoud@bootlin.com>
+---
+ drivers/mtd/nand/raw/Kconfig    |  1 +
+ scripts/Makefile.xpl            |  1 +
+ tools/sunxi-spl-image-builder.c | 92 ++++++++++++++++++++++++++-------
+ 3 files changed, 75 insertions(+), 19 deletions(-)
+
+Changes from v2:
+- add a --soc=h6 option as suggested by Michael
+
+Changes from v1:
+- move up "default 80 if SUN50I_GEN_H6" (sorry for the noise)
+
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index 9c8a32bb0a89..b5fc4f5f8c34 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -475,6 +475,7 @@ if NAND_SUNXI
+ 
+ config NAND_SUNXI_SPL_ECC_STRENGTH
+ 	int "Allwinner NAND SPL ECC Strength"
++	default 80 if SUN50I_GEN_H6
+ 	default 64
+ 
+ config NAND_SUNXI_SPL_ECC_SIZE
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index 3e940bf562d5..98d139724c54 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -454,6 +454,7 @@ $(obj)/sunxi-spl.bin: $(obj)/$(SPL_BIN).bin FORCE
+ 
+ quiet_cmd_sunxi_spl_image_builder = SUNXI_SPL_IMAGE_BUILDER $@
+ cmd_sunxi_spl_image_builder = $(objtree)/tools/sunxi-spl-image-builder \
++				$(if $(CONFIG_SUN50I_GEN_H6),--soc=h6) \
+ 				-c $(CONFIG_NAND_SUNXI_SPL_ECC_STRENGTH)/$(CONFIG_NAND_SUNXI_SPL_ECC_SIZE) \
+ 				-p $(CONFIG_SYS_NAND_PAGE_SIZE) \
+ 				-o $(CONFIG_SYS_NAND_OOBSIZE) \
+diff --git a/tools/sunxi-spl-image-builder.c b/tools/sunxi-spl-image-builder.c
+index a367f1177403..8a8ab124a7e4 100644
+--- a/tools/sunxi-spl-image-builder.c
++++ b/tools/sunxi-spl-image-builder.c
+@@ -11,6 +11,7 @@
+ #include <linux/bch.h>
+ 
+ #include <getopt.h>
++#include <string.h>
+ #include <version.h>
+ 
+ #define BCH_PRIMITIVE_POLY	0x5803
+@@ -27,6 +28,7 @@ struct image_info {
+ 	int eraseblock_size;
+ 	int scramble;
+ 	int boot0;
++	int h6;
+ 	off_t offset;
+ 	const char *source;
+ 	const char *dest;
+@@ -84,18 +86,29 @@ static void scramble(const struct image_info *info,
+ 	uint16_t state;
+ 	int i;
+ 
+-	/* Boot0 is always scrambled no matter the command line option. */
+-	if (info->boot0) {
++	/*
++	 * Bail out earlier if the user didn't ask for scrambling.
++	 * But Boot0 is always scrambled no matter the command line option.
++	 */
++	if (!info->boot0 && !info->scramble)
++		return;
++
++	/*
++	 * On H6, the BROM scrambler seed is no different than the default one
++	 */
++	if (info->boot0 && !info->h6) {
+ 		state = brom_scrambler_seeds[0];
+ 	} else {
+-		unsigned seedmod = info->eraseblock_size / info->page_size;
++		unsigned int seedmod;
+ 
+-		/* Bail out earlier if the user didn't ask for scrambling. */
+-		if (!info->scramble)
+-			return;
+-
+-		if (seedmod > ARRAY_SIZE(default_scrambler_seeds))
++		if (info->h6) {
++			/* H6 boot0 uses all 128 seeds */
+ 			seedmod = ARRAY_SIZE(default_scrambler_seeds);
++		} else {
++			seedmod = info->eraseblock_size / info->page_size;
++			if (seedmod > ARRAY_SIZE(default_scrambler_seeds))
++				seedmod = ARRAY_SIZE(default_scrambler_seeds);
++		}
+ 
+ 		state = default_scrambler_seeds[page % seedmod];
+ 	}
+@@ -137,14 +150,19 @@ static int write_page(const struct image_info *info, uint8_t *buffer,
+ 
+ 	fwrite(buffer, info->page_size + info->oob_size, 1, dst);
+ 
+-	for (i = 0; i < info->usable_page_size; i++) {
+-		if (buffer[i] !=  0xff)
+-			break;
+-	}
++	/*
++	 * H6 BROM doesn't support empty pages
++	 */
++	if (!info->h6) {
++		for (i = 0; i < info->usable_page_size; i++) {
++			if (buffer[i] !=  0xff)
++				break;
++		}
+ 
+-	/* We leave empty pages at 0xff. */
+-	if (i == info->usable_page_size)
+-		return 0;
++		/* We leave empty pages at 0xff. */
++		if (i == info->usable_page_size)
++			return 0;
++	}
+ 
+ 	/* Restore the source pointer to read it again. */
+ 	fseek(src, -cnt, SEEK_CUR);
+@@ -212,6 +230,14 @@ static int write_page(const struct image_info *info, uint8_t *buffer,
+ 		}
+ 
+ 		memset(ecc, 0, eccbytes);
++
++		if (info->h6) {
++			/* BBM taken from vendor code: FF 00 03 01 */
++			buffer[info->ecc_step_size + 1] = 0;
++			buffer[info->ecc_step_size + 2] = 3; // NAND_VERSION_0
++			buffer[info->ecc_step_size + 3] = 1; // NAND_VERSION_1
++		}
++
+ 		swap_bits(buffer, info->ecc_step_size + 4);
+ 		encode_bch(bch, buffer, info->ecc_step_size + 4, ecc);
+ 		swap_bits(buffer, info->ecc_step_size + 4);
+@@ -303,6 +329,8 @@ static void display_help(int status)
+ 		"-e <size>        --eraseblock=<size>  Erase block size\n"
+ 		"-b               --boot0              Build a boot0 image.\n"
+ 		"-s               --scramble           Scramble data\n"
++		"-t               --soc=<soc>          Build an image compatible with SoC type <soc>\n"
++		"                                      (possible values: a10, h6. Default: a10)\n"
+ 		"-a <offset>      --address=<offset>   Where the image will be programmed.\n"
+ 		"\n"
+ 		"Notes:\n"
+@@ -313,6 +341,9 @@ static void display_help(int status)
+ 		"  Valid ECC strengths: 16, 24, 28, 32, 40, 48, 56, 60 and 64\n"
+ 		"  Valid ECC step size: 512 and 1024\n"
+ 		"\n"
++		"On H6/H616, the only ECC step size supported is 1024, but more ECC\n"
++		"strengths are supported: 44, 52, 68, 72, 76, 80\n"
++		"\n"
+ 		"If you are building a boot0 image, you'll have specify extra options.\n"
+ 		"These options should be chosen based on the layouts described here:\n"
+ 		"  http://linux-sunxi.org/NAND#More_information_on_BROM_NAND\n"
+@@ -342,7 +373,12 @@ static void display_help(int status)
+ 
+ static int check_image_info(struct image_info *info)
+ {
+-	static int valid_ecc_strengths[] = { 16, 24, 28, 32, 40, 48, 56, 60, 64 };
++	static int ecc_strengths_a10[] = { 16, 24, 28, 32, 40, 48, 56, 60, 64 };
++	static int ecc_strengths_h6[] = {
++		16, 24, 28, 32, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80
++	};
++	int *valid_ecc_strengths;
++	size_t nstrengths;
+ 	int eccbytes, eccsteps;
+ 	unsigned i;
+ 
+@@ -367,12 +403,25 @@ static int check_image_info(struct image_info *info)
+ 		return -EINVAL;
+ 	}
+ 
+-	for (i = 0; i < ARRAY_SIZE(valid_ecc_strengths); i++) {
++	if (info->h6) {
++		if (info->ecc_step_size != 1024) {
++			fprintf(stderr,
++				"H6 SoCs supports only 1024 bytes ECC step\n");
++			return -EINVAL;
++		}
++		valid_ecc_strengths = ecc_strengths_h6;
++		nstrengths = ARRAY_SIZE(ecc_strengths_h6);
++	} else {
++		valid_ecc_strengths = ecc_strengths_a10;
++		nstrengths = ARRAY_SIZE(ecc_strengths_a10);
++	}
++
++	for (i = 0; i < nstrengths; i++) {
+ 		if (valid_ecc_strengths[i] == info->ecc_strength)
+ 			break;
+ 	}
+ 
+-	if (i == ARRAY_SIZE(valid_ecc_strengths)) {
++	if (i == nstrengths) {
+ 		fprintf(stderr, "Invalid ECC strength argument: %d\n",
+ 			info->ecc_strength);
+ 		return -EINVAL;
+@@ -416,10 +465,11 @@ int main(int argc, char **argv)
+ 			{"boot0", no_argument, 0, 'b'},
+ 			{"scramble", no_argument, 0, 's'},
+ 			{"address", required_argument, 0, 'a'},
++			{"soc", required_argument, 0, 't'},
+ 			{0, 0, 0, 0},
+ 		};
+ 
+-		int c = getopt_long(argc, argv, "c:p:o:u:e:ba:sh",
++		int c = getopt_long(argc, argv, "c:p:o:u:e:ba:sht:",
+ 				long_options, &option_index);
+ 		if (c == EOF)
+ 			break;
+@@ -454,6 +504,10 @@ int main(int argc, char **argv)
+ 		case 'a':
+ 			info.offset = strtoull(optarg, NULL, 0);
+ 			break;
++		case 't':
++			if (strcmp("h6", optarg) == 0)
++				info.h6 = 1;
++			break;
+ 		case '?':
+ 			display_help(-1);
+ 			break;
+
+base-commit: e50b1e8715011def8aff1588081a2649a2c6cd47
+-- 
+2.47.3
+
